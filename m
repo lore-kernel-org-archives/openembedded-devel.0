@@ -1,44 +1,44 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OyIaN-0000Nj-6Y
+	(envelope-from <graham.gower@gmail.com>) id 1OyIbU-0000R2-Vt
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 08:13:45 +0200
-Received: by pxi11 with SMTP id 11so45664pxi.6
+	Wed, 22 Sep 2010 08:14:54 +0200
+Received: by iwn2 with SMTP id 2so241529iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Sep 2010 23:13:33 -0700 (PDT)
+	Tue, 21 Sep 2010 23:14:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=SrRTb6iWtsoPZOZW0EgZA29Hw4J1dzLPagYSmDxDY14=;
-	b=r6JrGAZMeGxJ7zhWYURrqF1aANfLSOQ12s0tT1lfWB9S+B9kQS0mMcChKjhj8ht6aZ
-	G0do10rPYVk/oQfQguJM7aPBei40A10qs1O9F8rdEAgR9V70m3m0BHDQXqwpyyUhOjMp
-	uPUF3vhqeqbvkco5FKCiheYp0tCMGCFFPlJys=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=eH/7HNiJpLe655zv35THQD3OAwErCshA2AvNv3jMloU=;
+	b=o/NxTwI1H9raUNBhAzPNetL7EFc8YK6bneUEjp4p5PSsWRb7u6NTq20bz3kgYjSkB3
+	35p6rr+HMnW7iQmOBxmGiUw7j6cOs7rMz7DUt80dZdgpSjeTRea8jCy/F5n9Jz3Nox2A
+	1NsDCwqvfF/vbhk19zruzU/o1e5U0Cv5rzmDA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Wm4XJ8eAoiwXMlk3k6Uj0E1NS9wTlHBZK2r+ajji/9t5TiROHaAH/Ro+IEXjLfw0YV
-	y/yNV2h9dEXUxDev/XtiBfMcjpWhzPAgSqsARMdHYATlruKiJOkIIbMl4wKHr7KyV+IE
-	o2iunc6rjHnJgNZ8V1eVIG/MlNmOWuSdiBOGQ=
-Received: by 10.114.130.5 with SMTP id c5mr13057072wad.125.1285136013263;
-	Tue, 21 Sep 2010 23:13:33 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id d39sm16939119wam.16.2010.09.21.23.13.31
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 21 Sep 2010 23:13:32 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=UsoEkNSyayzrnettrwjCK6kwxie8hXh4b7CvjcfIA56/4bO8Eo1VfYLIMg9Rzk4teM
+	27M2lKnfBN6q24+5wuxwpIvs3SNWshs2GRMQzi0IQY3gVV5Pxc1f7WfuNPpFHeK9Y1Kt
+	IA0zRNXvWXX21xpDDAMgTmrRyLKPb0J3hFgYI=
+MIME-Version: 1.0
+Received: by 10.231.118.28 with SMTP id t28mr10688159ibq.131.1285136084452;
+	Tue, 21 Sep 2010 23:14:44 -0700 (PDT)
+Received: by 10.231.161.1 with HTTP; Tue, 21 Sep 2010 23:14:44 -0700 (PDT)
+In-Reply-To: <4C995FE3.3060601@mentor.com>
+References: <4C995145.8090707@gmail.com>
+	<4C995FE3.3060601@mentor.com>
+Date: Wed, 22 Sep 2010 15:44:44 +0930
+Message-ID: <AANLkTikQg+iOc102pB2OLd51NLeteHWuzxcerBsqz1vn@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Sep 2010 23:13:29 -0700
-Message-Id: <1285136009-15979-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] binutils_2.20.1.bb: Add patch to fix ld sysroot
+Subject: Re: [PATCH] firefox_3.6.8.bb: Mark as COMPATIBLE_HOST="(powerpc|arm|i.86.*)".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,82 +52,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 06:13:45 -0000
+X-List-Received-Date: Wed, 22 Sep 2010 06:14:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Fixes the issue seen on builds where libc.so is not being found
+On 22 September 2010 11:16, Tom Rini <tom_rini@mentor.com> wrote:
+> To sum up what I said on IRC, I'd really rather just go ahead and fix mipsel
+> (and mips and ...) by pulling in the jsautocfg.h file from Debian or similar
+> rather than use the more heavy handed COMPATIBLE* stuff for things that
+> build in limited places by accident rather than by design. I don't know if
+> that's enough for a NAK or not, but I'd like to talk it over a bit more :)
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../binutils-2.19.1-ld-sysroot.patch               |   36 ++++++++++++++++++++
- recipes/binutils/binutils_2.20.1.bb                |    3 +-
- 2 files changed, 38 insertions(+), 1 deletions(-)
- create mode 100644 recipes/binutils/binutils-2.20.1/binutils-2.19.1-ld-sysroot.patch
+I'll submit patches to build python-numpy and firefox for mipsel when
+I get a chance, but the others really are machine specific.
 
-diff --git a/recipes/binutils/binutils-2.20.1/binutils-2.19.1-ld-sysroot.patch b/recipes/binutils/binutils-2.20.1/binutils-2.19.1-ld-sysroot.patch
-new file mode 100644
-index 0000000..b252196
---- /dev/null
-+++ b/recipes/binutils/binutils-2.20.1/binutils-2.19.1-ld-sysroot.patch
-@@ -0,0 +1,36 @@
-+http://sourceware.org/bugzilla/show_bug.cgi?id=10340
-+
-+Signed-off-by: Sven Rebhan <odinshorse@googlemail.com>
-+
-+Always try to prepend the sysroot prefix to absolute filenames first.
-+
-+--- a/ld/ldfile.c	2009-06-14 12:46:19.000000000 +0200
-++++ b/ld/ldfile.c.new	2009-06-14 12:46:04.000000000 +0200
-+@@ -308,18 +308,24 @@
-+      directory first.  */
-+   if (! entry->is_archive)
-+     {
-+-      if (entry->sysrooted && IS_ABSOLUTE_PATH (entry->filename))
-++      /* For absolute pathnames, try to always open the file in the
-++	 sysroot first. If this fails, try to open the file at the
-++	 given location. */
-++      entry->sysrooted = is_sysrooted_pathname(entry->filename, FALSE);
-++      if (IS_ABSOLUTE_PATH (entry->filename) && ld_sysroot && ! entry->sysrooted)
-+ 	{
-+ 	  char *name = concat (ld_sysroot, entry->filename,
-+ 			       (const char *) NULL);
-+ 	  if (ldfile_try_open_bfd (name, entry))
-+ 	    {
-+ 	      entry->filename = name;
-++	      entry->sysrooted = TRUE;
-+ 	      return TRUE;
-+ 	    }
-+ 	  free (name);
-+ 	}
-+-      else if (ldfile_try_open_bfd (entry->filename, entry))
-++
-++      if (ldfile_try_open_bfd (entry->filename, entry))
-+ 	{
-+ 	  entry->sysrooted = IS_ABSOLUTE_PATH (entry->filename)
-+ 	    && is_sysrooted_pathname (entry->filename, TRUE);
-+
-diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
-index d75dbb2..c2a5dab 100644
---- a/recipes/binutils/binutils_2.20.1.bb
-+++ b/recipes/binutils/binutils_2.20.1.bb
-@@ -1,7 +1,7 @@
- require binutils.inc
- LICENSE = "GPLv3"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- #COMPATIBLE_TARGET_SYS = "."
- 
-@@ -15,6 +15,7 @@ SRC_URI = "\
-      file://binutils-uclibc-gas-needs-libm.patch \
-      file://binutils-x86_64_i386_biarch.patch \
-      file://libtool-update.patch \
-+     file://binutils-2.19.1-ld-sysroot.patch \
-      "
- 
- SRC_URI_append_nios2 =" \
--- 
-1.7.1
-
+-Graham
 
 
