@@ -1,39 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OyXAf-0008Sb-7K
+	(envelope-from <raj.khem@gmail.com>) id 1OyXQq-0000gU-Hw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 23:48:11 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OyXAZ-0002n2-9M from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 14:48:03 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 22 Sep 2010 14:48:02 -0700
-Received: from [172.30.80.208] ([172.30.80.208]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 22 Sep 2010 15:48:01 -0600
-Message-ID: <4C9A798D.10904@mentor.com>
-Date: Wed, 22 Sep 2010 14:47:57 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Thu, 23 Sep 2010 00:04:54 +0200
+Received: by pzk37 with SMTP id 37so284912pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Sep 2010 15:04:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=YJCv0Cc+9YkM6inTfQnuHxFhvkp8FrygMuGGwJZpXvY=;
+	b=DCM1WGT0tWLEq2WFmPumgzooAvhg9fkqPPmnOVDDxg5XuTaz8Wlk74TjNN/CenujPS
+	5tN1o0xLaGH8q1AZLbq/6AoqylOnVa0A9zEzzjwZEjSmrUBsbCWVa0UvO1SnSwbifM/x
+	2J3To+Egpy+WvHfXABBITq4N9IJp+/lymHR6M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=eKQQ01PKd0O2W1lIWIwbJxh6G+vjxJr3UKj21dj99WhQ2zaQCTcaU7M5QrV3EJLmOy
+	mDWlrh3OJevLpnxF9QBB4Bd1OMCls1RSpnripeAjAR33r9XpwxWOuBSxsmbVGLeVLh0x
+	hskAYLeUuCrR7Q0IyqfYP+bmDF7d/f3svjEJU=
+Received: by 10.142.210.8 with SMTP id i8mr701349wfg.214.1285193083406;
+	Wed, 22 Sep 2010 15:04:43 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id o9sm37691wfd.16.2010.09.22.15.04.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 22 Sep 2010 15:04:42 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C9950D0.7000907@gmail.com> <i7dkar$2hg$1@dough.gmane.org>
-In-Reply-To: <i7dkar$2hg$1@dough.gmane.org>
-X-OriginalArrivalTime: 22 Sep 2010 21:48:02.0062 (UTC)
-	FILETIME=[D4704AE0:01CB5A9F]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Wed, 22 Sep 2010 15:04:39 -0700
+Message-Id: <1285193079-6696-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] at91bootstrap.inc: Mark COMPATIBLE_MACHINEs.
+Subject: [PATCH] libnl_1.1.bb: Fix the build when libnl2 is staged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,58 +52,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 21:48:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Sep 2010 22:04:54 -0000
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> As a general remark to your current patch series, I think there is some
-> confusion what COMPATIBLE_MACHINE is for. To me it's signals "this
-> recipe is specific to a *machine*", not "this recipe is missing files to
-> make it work without other archs/machines".
+Currently linker would search for libnl in sysroot
+first before linking in the one thats build with libnl
+this patch directs ld to link in with the one thats
+build and not look for the one in sysroot.
 
-Let me just add that I agree, and talked with Graham on IRC a good bit 
-after the patch series was posted (and before I noticed them on the ML).
+As a result we can compile libnl and libnl2 alongside
 
-I think what we need to do here is make a list of recipes that simply 
-don't patch for all arches due to missing some usually easy "porting" 
-work and putting that up on the janitors page as work that needs doing 
-by someone.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../libnl/files/dont-link-libnl-from-sysroot.patch |   26 ++++++++++++++++++++
+ recipes/libnl/libnl_1.1.bb                         |    6 +---
+ 2 files changed, 28 insertions(+), 4 deletions(-)
+ create mode 100644 recipes/libnl/files/dont-link-libnl-from-sysroot.patch
 
-> The cases:
-> 
-> spidermonkey/firefox/numpy: needs jsautocfg.h for each arch, no need for
-> COMPATIBLE_MACHINE or COMPATIBLE_ARCH, people need to add support for
-> their archs
-
-And to further add, Debian has gone and made these files in some cases 
-(mips/mipsel) and in others, it shouldn't be hard to craft it 
-(translating autoconf variables into what mozilla wants) or if 
-qemu-$arch works, dig out the program that generates the file and do so.
-
-> u-boot-env/pivotboot: needs a file for each machine to work properly,
-> but adding an (empty) fallback file is the way to go since it's only
-> used in deploy/.
-
-I gotta disagree here.  You're saying a valid and machine specific file 
-needs adding for this to do something on a machine and a dummy fallback 
-so it builds uselessly for all.  Isn't that a good reason to use the 
-COMPATIBLE_MACHINE mask?
-
-> Tacking on COMPATIBLE_{MACHINE,HOST} would just hide the problems and
-> make fixing it more more tedious than it needs to be. For kernel and
-> uboot C_M is used to make bitbake do the right thing since they all
-> share the same PN.
-
-Agreed.  These are heavy handed variables that need to be used with 
-care.  This patchset does expose problems, which is good, it's just a 
-matter of solving them well.
-
+diff --git a/recipes/libnl/files/dont-link-libnl-from-sysroot.patch b/recipes/libnl/files/dont-link-libnl-from-sysroot.patch
+new file mode 100644
+index 0000000..beb6361
+--- /dev/null
++++ b/recipes/libnl/files/dont-link-libnl-from-sysroot.patch
+@@ -0,0 +1,26 @@
++Index: libnl-1.1/src/Makefile
++===================================================================
++--- libnl-1.1.orig/src/Makefile	2008-01-14 07:48:45.000000000 -0800
+++++ libnl-1.1/src/Makefile	2010-09-22 14:58:46.820826001 -0700
++@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
++     include ../Makefile.opts
++ endif
++ 
++-LDFLAGS	+= -L../lib -lnl utils.o
+++LDFLAGS	+= ../lib/libnl.so utils.o
++ CIN 	:= $(wildcard nl-*.c) $(wildcard genl-*.c) $(wildcard nf-*.c)
++ TOOLS	:= $(CIN:%.c=%)
++ 
++Index: libnl-1.1/tests/Makefile
++===================================================================
++--- libnl-1.1.orig/tests/Makefile	2008-01-14 07:48:45.000000000 -0800
+++++ libnl-1.1/tests/Makefile	2010-09-22 14:58:46.820826001 -0700
++@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
++     include ../Makefile.opts
++ endif
++ 
++-LDFLAGS	+= -L../lib -lnl ../src/utils.o
+++LDFLAGS	+= ../lib/libnl.so ../src/utils.o
++ CIN 	:= $(wildcard test-*.c)
++ TOOLS	:= $(CIN:%.c=%)
++ 
+diff --git a/recipes/libnl/libnl_1.1.bb b/recipes/libnl/libnl_1.1.bb
+index 06059ca..f1b2a9d 100644
+--- a/recipes/libnl/libnl_1.1.bb
++++ b/recipes/libnl/libnl_1.1.bb
+@@ -3,10 +3,7 @@ SECTION = "libs/network"
+ LICENSE = "LGPL"
+ HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
+ 
+-# If you get errors like : undefined reference to `nl_handle_alloc
+-# do a bitbake -c clean libnl2
+-
+-PR = "r3"
++PR = "r4"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -18,6 +15,7 @@ SRC_URI = "\
+   file://fix-includes.patch \
+   file://respect-ldflags.patch \
+   file://netlink-local-fix.patch \
++  file://dont-link-libnl-from-sysroot.patch \
+ "
+ 
+ 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.1
+
 
 
