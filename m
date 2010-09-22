@@ -1,33 +1,32 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OyMcL-0006hI-OK
+	(envelope-from <graham.gower@gmail.com>) id 1OyMf1-0006nx-PP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 12:32:02 +0200
-Received: by iwn2 with SMTP id 2so414254iwn.6
+	Wed, 22 Sep 2010 12:34:48 +0200
+Received: by iwn2 with SMTP id 2so416289iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Sep 2010 03:31:56 -0700 (PDT)
+	Wed, 22 Sep 2010 03:34:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=XC2DrBb4XCzQptg1OGsyvTQKpgaHNYivv+KrBRwTzMU=;
-	b=q6YS08HmHTHuF1CfpnN2MN1+Ho20/K8BStfn0LUEZfl0qiv58z0EUNrDC7iaI3hqqN
-	tQXf4yhUnAXhXYC+TnYP1/ifrEMH8wsj6lHsAPG/lVVwlH7sQGmoouM7ol1VAoVTbGtJ
-	LTOp6qvHUMDvsE87E95dux02024gKHj15Fv38=
+	bh=BeoUjboTCEKV9UBntcM9Kf7kIHolYIxV5VEpEy0/7R0=;
+	b=wDMgbmwOqHh0sxaNQ9gC7d9U0vIEWyJN7szHtsIpYOrmnQOsSFI1kL11UuluGBfqDx
+	I1rxkIaZRt8Mcic5og6rEtUBbXC35G+vobCA7rF4Wgv4Ky0lzmhJwbAMvnIqW9PHUSYX
+	cdeoXwumL3n6RZkOuLJhZ6pb7i6a3v4LnReG4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=YmPQ1JiH1UbftDWZvEBFBKEmddo8owqqgbyoHtk/lNNGx3ELSJ2jqfakAoYGZyDhys
-	AjfEG75JHSVeKsmrjxgt33lk2fnIuOFxzZOF2oRjvW/I+mv/02+DmICFueqKKs7KRmqL
-	Hr6sWlM9R3juWGvo4daGaye0nGTqf1XOi7a1Q=
+	b=XUTeK7aJSK1SaJiwAtoJiBGgfZ+y527QfC76C+5R07UVgqkb/6brdZgw7XWXK2sqq8
+	8Z4i5mm1BsmeRu+N6p+cQbQIDpjNbgB3UXCW2/nstIOFYlHwb1VortTLwzcBUnUQ+RMu
+	QBcRBkZHo5ROenry9tVWw1ofzRDW/ZeRaZTls=
 MIME-Version: 1.0
-Received: by 10.231.146.141 with SMTP id h13mr13892113ibv.1.1285151516808;
-	Wed, 22 Sep 2010 03:31:56 -0700 (PDT)
-Received: by 10.231.161.1 with HTTP; Wed, 22 Sep 2010 03:31:55 -0700 (PDT)
-In-Reply-To: <i7ccna$640$1@dough.gmane.org>
-References: <4C995127.2020207@gmail.com>
-	<i7ccna$640$1@dough.gmane.org>
-Date: Wed, 22 Sep 2010 20:01:55 +0930
-Message-ID: <AANLkTikGQJGDFT+UNpkFVR-yuPYHMxqWutt0pbQVjMUU@mail.gmail.com>
+Received: by 10.231.146.136 with SMTP id h8mr13914691ibv.0.1285151683619; Wed,
+	22 Sep 2010 03:34:43 -0700 (PDT)
+Received: by 10.231.161.1 with HTTP; Wed, 22 Sep 2010 03:34:43 -0700 (PDT)
+In-Reply-To: <1285147099.4175.25.camel@mattotaupa>
+References: <4C99473D.9020308@gmail.com> <1285147099.4175.25.camel@mattotaupa>
+Date: Wed, 22 Sep 2010 20:04:43 +0930
+Message-ID: <AANLkTikm2_KzqZ+hYcQ6HC_V+J3FegTXgDRXpxVsPKH=@mail.gmail.com>
 From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -38,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] python-numpy: Mark as COMPATIBLE_HOST="arm.*".
+Subject: Re: [PATCH] u-boot-env.bb: Mark as COMPATIBLE_MACHINE=neuros-osd2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,21 +51,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 10:32:02 -0000
+X-List-Received-Date: Wed, 22 Sep 2010 10:34:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On 22 September 2010 17:24, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 22-09-10 02:43, Graham Gower wrote:
->
->> +COMPATIBLE_HOST = "arm.*"
->
-> Could you please explain what makes numpy only work on ARM?
-
-SRC_URI contains a reference to a file which lives in an "arm" subdir.
-
-I withdraw this patch, in favour of adding a subdir for my arch (mipsel).
+This recipe fails to build for all machines except neuros-osd2.
 
 
