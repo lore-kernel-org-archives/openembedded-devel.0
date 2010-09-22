@@ -1,44 +1,38 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OyXQq-0000gU-Hw
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OyXpM-00015m-Ba
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Sep 2010 00:04:54 +0200
-Received: by pzk37 with SMTP id 37so284912pzk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Sep 2010 15:04:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=YJCv0Cc+9YkM6inTfQnuHxFhvkp8FrygMuGGwJZpXvY=;
-	b=DCM1WGT0tWLEq2WFmPumgzooAvhg9fkqPPmnOVDDxg5XuTaz8Wlk74TjNN/CenujPS
-	5tN1o0xLaGH8q1AZLbq/6AoqylOnVa0A9zEzzjwZEjSmrUBsbCWVa0UvO1SnSwbifM/x
-	2J3To+Egpy+WvHfXABBITq4N9IJp+/lymHR6M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=eKQQ01PKd0O2W1lIWIwbJxh6G+vjxJr3UKj21dj99WhQ2zaQCTcaU7M5QrV3EJLmOy
-	mDWlrh3OJevLpnxF9QBB4Bd1OMCls1RSpnripeAjAR33r9XpwxWOuBSxsmbVGLeVLh0x
-	hskAYLeUuCrR7Q0IyqfYP+bmDF7d/f3svjEJU=
-Received: by 10.142.210.8 with SMTP id i8mr701349wfg.214.1285193083406;
-	Wed, 22 Sep 2010 15:04:43 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id o9sm37691wfd.16.2010.09.22.15.04.42
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 22 Sep 2010 15:04:42 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 23 Sep 2010 00:30:12 +0200
+Received: (qmail 17489 invoked by uid 503); 22 Sep 2010 22:54:32 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 22 Sep 2010 22:54:32 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 23 Sep 2010 00:30:08 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 23 Sep 2010 00:30:07 +0200
+Message-ID: <4C9A836D.6000706@eukrea.com>
+Date: Thu, 23 Sep 2010 00:30:05 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Sep 2010 15:04:39 -0700
-Message-Id: <1285193079-6696-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.210.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <1285189329-32344-1-git-send-email-raj.khem@gmail.com>
+	<AANLkTikRBF+0hY2ZLT7d1DZe4FF4UE+9aVopECrpROqr@mail.gmail.com>
+In-Reply-To: <AANLkTikRBF+0hY2ZLT7d1DZe4FF4UE+9aVopECrpROqr@mail.gmail.com>
+X-Ovh-Tracer-Id: 9470788543206567241
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libnl_1.1.bb: Fix the build when libnl2 is staged
+Subject: Re: [PATCH] oe/patch.py: Remove series file during Clean()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,80 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 22:04:54 -0000
+X-List-Received-Date: Wed, 22 Sep 2010 22:30:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Currently linker would search for libnl in sysroot
-first before linking in the one thats build with libnl
-this patch directs ld to link in with the one thats
-build and not look for the one in sysroot.
+Le 22/09/2010 23:36, Chris Larson a écrit :
+> On Wed, Sep 22, 2010 at 2:02 PM, Khem Raj<raj.khem@gmail.com>  wrote:
+>
+>> Currently if there is a failed do_patch the series files get appended
+>> so if there were two patches
+>>
+>> a.patch
+>> b.patch
+>> and b.patch failed during next run it would append a.patch again
+>> a.patch
+>> b.patch
+>> a.patch
+>>
+>> and this would keep growing.
+>>
+>> We can remove series file in Clean() because we populate it in Import()
+>> anyway
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>
+>
+>
+> Acked-by: Chris Larson <chris_larson@mentor.com>
 
-As a result we can compile libnl and libnl2 alongside
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../libnl/files/dont-link-libnl-from-sysroot.patch |   26 ++++++++++++++++++++
- recipes/libnl/libnl_1.1.bb                         |    6 +---
- 2 files changed, 28 insertions(+), 4 deletions(-)
- create mode 100644 recipes/libnl/files/dont-link-libnl-from-sysroot.patch
-
-diff --git a/recipes/libnl/files/dont-link-libnl-from-sysroot.patch b/recipes/libnl/files/dont-link-libnl-from-sysroot.patch
-new file mode 100644
-index 0000000..beb6361
---- /dev/null
-+++ b/recipes/libnl/files/dont-link-libnl-from-sysroot.patch
-@@ -0,0 +1,26 @@
-+Index: libnl-1.1/src/Makefile
-+===================================================================
-+--- libnl-1.1.orig/src/Makefile	2008-01-14 07:48:45.000000000 -0800
-++++ libnl-1.1/src/Makefile	2010-09-22 14:58:46.820826001 -0700
-+@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
-+     include ../Makefile.opts
-+ endif
-+ 
-+-LDFLAGS	+= -L../lib -lnl utils.o
-++LDFLAGS	+= ../lib/libnl.so utils.o
-+ CIN 	:= $(wildcard nl-*.c) $(wildcard genl-*.c) $(wildcard nf-*.c)
-+ TOOLS	:= $(CIN:%.c=%)
-+ 
-+Index: libnl-1.1/tests/Makefile
-+===================================================================
-+--- libnl-1.1.orig/tests/Makefile	2008-01-14 07:48:45.000000000 -0800
-++++ libnl-1.1/tests/Makefile	2010-09-22 14:58:46.820826001 -0700
-+@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
-+     include ../Makefile.opts
-+ endif
-+ 
-+-LDFLAGS	+= -L../lib -lnl ../src/utils.o
-++LDFLAGS	+= ../lib/libnl.so ../src/utils.o
-+ CIN 	:= $(wildcard test-*.c)
-+ TOOLS	:= $(CIN:%.c=%)
-+ 
-diff --git a/recipes/libnl/libnl_1.1.bb b/recipes/libnl/libnl_1.1.bb
-index 06059ca..f1b2a9d 100644
---- a/recipes/libnl/libnl_1.1.bb
-+++ b/recipes/libnl/libnl_1.1.bb
-@@ -3,10 +3,7 @@ SECTION = "libs/network"
- LICENSE = "LGPL"
- HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
- 
--# If you get errors like : undefined reference to `nl_handle_alloc
--# do a bitbake -c clean libnl2
--
--PR = "r3"
-+PR = "r4"
- 
- inherit autotools pkgconfig
- 
-@@ -18,6 +15,7 @@ SRC_URI = "\
-   file://fix-includes.patch \
-   file://respect-ldflags.patch \
-   file://netlink-local-fix.patch \
-+  file://dont-link-libnl-from-sysroot.patch \
- "
- 
- 
--- 
-1.7.1
-
+Acked-by: Eric Bénard <eric@eukrea.com>
 
 
