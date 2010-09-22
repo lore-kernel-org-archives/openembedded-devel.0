@@ -1,29 +1,40 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OyQnk-0007hq-NV
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Tom_Rini@mentor.com>) id 1OyUGg-0003Qs-8P
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 17:01:02 +0200
-Received: (qmail invoked by alias); 22 Sep 2010 14:59:59 -0000
-Received: from mail2.zera.de (EHLO localhost.localdomain) [62.225.102.139]
-	by mail.gmx.net (mp009) with SMTP; 22 Sep 2010 16:59:59 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+3oOd12gG3JBBHzArgDMa9Lqt0QDp6ZkaWo2ba5A
-	hNk+gWkt5O9b/b
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Wed, 22 Sep 2010 20:42:12 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OyU2c-0004nn-BO from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Sep 2010 11:27:38 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 22 Sep 2010 11:27:29 -0700
+Received: from [172.30.80.208] ([172.30.80.208]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 22 Sep 2010 12:26:26 -0600
+Message-ID: <4C9A4A4F.7060401@mentor.com>
+Date: Wed, 22 Sep 2010 11:26:23 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Sep 2010 16:58:12 +0200
-Message-Id: <1285167492-4786-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.0.2
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.23
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+References: <4C9950D0.7000907@gmail.com>	<201009220913.06632.marcin@juszkiewicz.com.pl>	<AANLkTi==90GdQHqJufKx6HEaOsM-y-Sgb7E8WsH0Zmvg@mail.gmail.com>	<4C99B7DB.8040602@gmail.com>
+	<AANLkTik62awMj=AX3ndn_QbEQDnSDVuqrKKmza7P0haC@mail.gmail.com>
+In-Reply-To: <AANLkTik62awMj=AX3ndn_QbEQDnSDVuqrKKmza7P0haC@mail.gmail.com>
+X-OriginalArrivalTime: 22 Sep 2010 18:26:26.0833 (UTC)
+	FILETIME=[AB1ED010:01CB5A83]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] clutter-gtk: Bump to 0.10.8
+Subject: Re: [PATCH] at91bootstrap.inc: Mark COMPATIBLE_MACHINEs.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,49 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 15:01:49 -0000
+X-List-Received-Date: Wed, 22 Sep 2010 18:42:14 -0000
+Content-Type: text/plain; charset=ISO-8859-2; format=flowed
+Content-Transfer-Encoding: 8bit
 
----
- recipes/clutter/clutter-gtk_0.10.6.bb |   10 ----------
- recipes/clutter/clutter-gtk_0.10.8.bb |   10 ++++++++++
- 2 files changed, 10 insertions(+), 10 deletions(-)
- delete mode 100644 recipes/clutter/clutter-gtk_0.10.6.bb
- create mode 100644 recipes/clutter/clutter-gtk_0.10.8.bb
+Graham Gower wrote:
+> On 22 September 2010 17:31, Marco Cavallini <koansoftware@gmail.com> wrote:
+>> Graham Gower ha scritto, Il 22/09/2010 09:36:
+>>> On 22 September 2010 16:43, Marcin Juszkiewicz
+>>> <marcin@juszkiewicz.com.pl> wrote:
+>>>> Dnia ¶roda, 22 wrze¶nia 2010 o 02:41:52 Graham Gower napisa³(a):
+>>>>
+>>>>> --- a/recipes/at91bootstrap/at91bootstrap.inc
+>>>>> +++ b/recipes/at91bootstrap/at91bootstrap.inc
+>>>>> +COMPATIBLE_MACHINE =
+>>>>> "(afeb9260|at91cap9adk|at91sam9g20ek|at91sam9rlek|at91sam9263ek|at91sam926
+>>>>> 0ek|at91sam9xeek|at91sam9261ek)"
+>>>> mk355 is also atmel at91sam9263 so at91bootstrap is used on it probably.
+>>>>
+>>> The compatible machines here are those that have a defconfig in the
+>>> the files/ directory.
+>>>
+>> Yes please
+>> mh55 is also atmel at91sam9263 so at91bootstrap is used on it too.
+>> It also have its defconfig in the recipes/linux/linux-2.6.28/mh355/
+>> directory.
+>>
+>>
+> 
+> Ok, well the defconfigs are duplicated into this recipe dir (probably
+> a bad thing). To support mh55, you would have to copy the defconfig in
+> and add it to COMPATIBLE_MACHINE.
 
-diff --git a/recipes/clutter/clutter-gtk_0.10.6.bb b/recipes/clutter/clutter-gtk_0.10.6.bb
-deleted file mode 100644
-index ab66c77..0000000
---- a/recipes/clutter/clutter-gtk_0.10.6.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require clutter-gtk.inc
--
--PR = "${INC_PR}.1"
--
--SRC_URI = "http://source.clutter-project.org/sources/clutter-gtk/0.10/clutter-gtk-${PV}.tar.bz2 \
--          "
--
--SRC_URI[md5sum] = "e7407392b14d6cddd9d4f86feaa9bd3f"
--SRC_URI[sha256sum] = "c65ec1e6b2932ed23b3db145357a96ae5ec7cb0666139468eba781d6c56a5371"
--
-diff --git a/recipes/clutter/clutter-gtk_0.10.8.bb b/recipes/clutter/clutter-gtk_0.10.8.bb
-new file mode 100644
-index 0000000..4f2cdae
---- /dev/null
-+++ b/recipes/clutter/clutter-gtk_0.10.8.bb
-@@ -0,0 +1,10 @@
-+require clutter-gtk.inc
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI = "http://source.clutter-project.org/sources/clutter-gtk/0.10/clutter-gtk-${PV}.tar.bz2 \
-+          "
-+
-+SRC_URI[md5sum] = "22b4ebddc795e40d83622d7d23669eff"
-+SRC_URI[sha256sum] = "7867f951568871d9f68cbe8a3644fd53d2138f725b7ba61ffc0053eb64e80814"
-+
+It sounds like, and trying not to open a different can of worms, but the 
+at91 stuff should perhaps be using one of those hooks for grouping a set 
+of machines together?
+
 -- 
-1.7.0.2
-
+Tom Rini
+Mentor Graphics Corporation
 
 
