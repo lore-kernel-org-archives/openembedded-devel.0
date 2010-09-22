@@ -1,23 +1,38 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OyJVh-0000Sp-AJ
+	(envelope-from <graham.gower@gmail.com>) id 1OyJt1-0000Fe-L5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 09:12:59 +0200
-Received: (qmail 30553 invoked by uid 813007); 22 Sep 2010 07:12:53 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Sep 2010 07:12:53 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Sep 2010 09:13:05 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-22-generic; KDE/4.5.1; x86_64; ; )
-References: <4C9950D0.7000907@gmail.com>
-In-Reply-To: <4C9950D0.7000907@gmail.com>
+	Wed, 22 Sep 2010 09:37:04 +0200
+Received: by gya6 with SMTP id 6so65968gya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Sep 2010 00:36:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=nBqQwodYIfWY4siUkpo3Y4HQBUZJTPB9Y3Z1ulwXUeQ=;
+	b=i5XzTyYqeDfamw5r103rh1/mpynI/Tgf5bFt0BZcGdAnmptL1j9NdqcUR+/Jd2lwvC
+	+5bWkQsu3LE7hU3HjZKr36N3MCxiK80mwGYZW1lvFcsej5gRgk8RUxx5iijEhXswZ+Id
+	1IvSlPrdANNYCdpszODeb42dJFaPcWKdO9Gpc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=m0Ex9hEW2SrK7CkFXlwzcp9h8OlqXWiy3xTJY5DDGwd11FLUAA06BFGLC6FuV1mwal
+	ysV+oYtYPeCWeZsVHuzLopGTXdrrlOalZv8rFmyDemOYLA9/5v1UTo62aooH1MMgiRqM
+	Kmfio6KHdgQbMngT7WaOJitaN/9Q8ti9Cwrnc=
 MIME-Version: 1.0
-Message-Id: <201009220913.06632.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Received: by 10.150.195.4 with SMTP id s4mr594049ybf.273.1285141018610; Wed,
+	22 Sep 2010 00:36:58 -0700 (PDT)
+Received: by 10.231.161.1 with HTTP; Wed, 22 Sep 2010 00:36:58 -0700 (PDT)
+In-Reply-To: <201009220913.06632.marcin@juszkiewicz.com.pl>
+References: <4C9950D0.7000907@gmail.com>
+	<201009220913.06632.marcin@juszkiewicz.com.pl>
+Date: Wed, 22 Sep 2010 17:06:58 +0930
+Message-ID: <AANLkTi==90GdQHqJufKx6HEaOsM-y-Sgb7E8WsH0Zmvg@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -38,29 +53,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 07:12:59 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Wed, 22 Sep 2010 07:37:04 -0000
+Content-Type: text/plain; charset=ISO-8859-2
 Content-Transfer-Encoding: quoted-printable
 
-Dnia =C5=9Broda, 22 wrze=C5=9Bnia 2010 o 02:41:52 Graham Gower napisa=C5=82=
-(a):
+On 22 September 2010 16:43, Marcin Juszkiewicz
+<marcin@juszkiewicz.com.pl> wrote:
+> Dnia =B6roda, 22 wrze=B6nia 2010 o 02:41:52 Graham Gower napisa=B3(a):
+>
+>> --- a/recipes/at91bootstrap/at91bootstrap.inc
+>> +++ b/recipes/at91bootstrap/at91bootstrap.inc
+>
+>> +COMPATIBLE_MACHINE =3D
+>> "(afeb9260|at91cap9adk|at91sam9g20ek|at91sam9rlek|at91sam9263ek|at91sam9=
+26
+>> 0ek|at91sam9xeek|at91sam9261ek)"
+>
+> mk355 is also atmel at91sam9263 so at91bootstrap is used on it probably.
+>
 
-> --- a/recipes/at91bootstrap/at91bootstrap.inc
-> +++ b/recipes/at91bootstrap/at91bootstrap.inc
-=20
-> +COMPATIBLE_MACHINE =3D
-> "(afeb9260|at91cap9adk|at91sam9g20ek|at91sam9rlek|at91sam9263ek|at91sam926
-> 0ek|at91sam9xeek|at91sam9261ek)"
+The compatible machines here are those that have a defconfig in the
+the files/ directory.
 
-mk355 is also atmel at91sam9263 so at91bootstrap is used on it probably.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+-Graham
 
 
