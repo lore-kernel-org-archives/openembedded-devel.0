@@ -1,38 +1,31 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OysOq-0003R7-HL
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gary@mlbassoc.com>) id 1Oyt8j-0007Ds-TJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Sep 2010 22:28:14 +0200
-Received: (qmail 10933 invoked by uid 503); 23 Sep 2010 20:52:37 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 23 Sep 2010 20:52:37 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 23 Sep 2010 22:28:07 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 23 Sep 2010 22:28:07 +0200
-Message-ID: <4C9BB856.7080200@eukrea.com>
-Date: Thu, 23 Sep 2010 22:28:06 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
+	Thu, 23 Sep 2010 23:15:42 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id C27EC5AE506; Thu, 23 Sep 2010 15:00:48 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 4C5E31660134;
+	Thu, 23 Sep 2010 15:00:47 -0600 (MDT)
+Message-ID: <4C9BBFFE.9040605@mlbassoc.com>
+Date: Thu, 23 Sep 2010 15:00:46 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1285081581-19915-1-git-send-email-kergoth@gmail.com>
-	<4C98ECCF.6010903@freyther.de>
-In-Reply-To: <4C98ECCF.6010903@freyther.de>
-X-Ovh-Tracer-Id: 13283085627644685641
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+References: <4C9BB058.4050407@cbnco.com> <4C9BB632.4050107@cbnco.com>
+In-Reply-To: <4C9BB632.4050107@cbnco.com>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] utility-tasks.bbclass: drop mrproper task
+Subject: Re: gst-plugins-base tries to use host orcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,23 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 20:28:14 -0000
+X-List-Received-Date: Thu, 23 Sep 2010 21:15:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Le 21/09/2010 19:35, Holger Freyther a écrit :
-> On 09/21/2010 11:06 PM, Chris Larson wrote:
->> From: Chris Larson<chris_larson@mentor.com>
->>
->> This task is misleading and potentially quite harmful, as it wipes the entire
->> DL_DIR, yet tasks are supposed to be recipe specific.  We have the proper
->> distclean task to wipe sources for a recipe + run do_clean, and the user can
->> always wipe all of DL_DIR manually if necessary.
->>
->> Signed-off-by: Chris Larson <chris_larson@mentor.com>
+On 09/23/2010 02:18 PM, Michael Smith wrote:
+> nm, I see the problem now.
 >
-> Acked-by: Holger Hans Peter Freyther <holger@moiji-mobile.com>
+> Michael Smith wrote:
+>> Hi,
+>>
+>> gst-plugins-base-0.10.30 fails to build because common/m4/orc.m4 uses
+>> "pkg-config --variable=orcc orc-0.4" to get the path to orcc, instead
+>> of just using "orcc" in the path.
+>>
+>> tmp/sysroots/i486-oe-linux/lib/pkgconfig/orc-0.4.pc has:
+>>
+>> exec_prefix=
+>> toolsdir=${exec_prefix}/bin
+>> orcc=${toolsdir}/orcc
+>>
+>> so Make ends up calling /bin/orcc, which doesn't exist.
+>>
+>> For orc-native, tmp/sysroots/x86_64-linux/lib/pkgconfig/orc-0.4.pc has:
+>>
+>> exec_prefix=/..../tmp/sysroots/x86_64-linux
+>>
+>> but I don't know how to make pkg-config use this pc file when looking
+>> for orcc, or if it even should. Has anybody else run into this?
 
-Acked-by: Eric Bénard <eric@eukrea.com>
+So what's the fix?  I'm seeing this trying to build gst-plugins-bad 0.10.20
+(I'm working on the recipe locally)
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
