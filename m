@@ -1,45 +1,44 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from out2.smtp.messagingengine.com ([66.111.4.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Oyb1k-0001Zt-Lu
+	(envelope-from <vjensen@gmx.de>) id 1Oye45-0001ax-Cf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Sep 2010 03:55:13 +0200
-Received: by wwb17 with SMTP id 17so524596wwb.24
+	Thu, 23 Sep 2010 07:09:50 +0200
+Received: from compute1.internal (compute1.nyi.mail.srv.osa [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 849736A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Sep 2010 18:55:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=fmL/Ttbe7Md5fJMvhVgwgUR121SFkp3QVg8M8LYEoXg=;
-	b=Wm7gVrIeIj/364u0bsvzYuy79Lxa8VMdKOazPv2Bia3Nid3KbpteTBCC44VTwiQMVQ
-	FK7j1IndNIZsizVf0irPyjXGLqDc6KHdh9AH+rvK/wp/dpsaTcvi9529B84Tt+I+rLDG
-	NPo5Opgkm9EjZwTWNCXP4bpdjFPOpy3pcV4Os=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=dWnLRahvFsSZ2H6ACh0v+XT/CamVQ42g0LIWU0YLwb4y1R2zBD5/j7YzLiGYsHvf7U
-	/A1oBq8O01mQi8rl8Jc3E4Exx3gh4MEXg3vQUOxrKDNHcEr4pyEls2+OXf/FC5VLyPSB
-	EYS9tXzGrYPvb9+Rf6NldG7UataSXhDHdsIhg=
-MIME-Version: 1.0
-Received: by 10.216.12.139 with SMTP id 11mr866307wez.63.1285206904219; Wed,
-	22 Sep 2010 18:55:04 -0700 (PDT)
-Received: by 10.216.72.212 with HTTP; Wed, 22 Sep 2010 18:55:04 -0700 (PDT)
-In-Reply-To: <1285194952-1831-2-git-send-email-eric@eukrea.com>
-References: <1285194952-1831-1-git-send-email-eric@eukrea.com>
-	<1285194952-1831-2-git-send-email-eric@eukrea.com>
-Date: Wed, 22 Sep 2010 21:55:04 -0400
-Message-ID: <AANLkTimVQEU7wgy5rGjj7bzuACSjRhU8DTp1b92OPVTN@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Thu, 23 Sep 2010 01:09:45 -0400 (EDT)
+Received: from frontend2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Thu, 23 Sep 2010 01:09:45 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=z3gMx9GTybZVyfo3TXPMN/x2RmY=;
+	b=IlkMkzmJu89/kUYxZAxhATk7Od7khz7knbRsCVrbE0Dc5ItKJDmpkPDsPS32BmT6P/CALoWkMoYCRESAnR2+q2jWdZ6rQ4EL+9LCssvjFScBmalsi3lmLHldqYSHx5nxnZbrxdV6X0hWx23bu3ZVLpt87Hig2X+4myxmIheTIx0=
+X-Sasl-enc: C51mO2r+TK2BfeiSFzM6Md+CMDNPaziUz3sbIsWCygYe 1285218585
+Received: from [192.168.1.34] (hnvr-4d07a3b7.pool.mediaWays.net [77.7.163.183])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id EA5A95E191E
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Sep 2010 01:09:44 -0400 (EDT)
+Date: Thu, 23 Sep 2010 07:11:26 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+In-Reply-To: <1283817243-7436-1-git-send-email-vjensen@gmx.de>
+Message-ID: <alpine.LNX.2.00.1009230711001.22766@asterix.crazy-teaparty.dyndns.org>
+References: <1283817243-7436-1-git-send-email-vjensen@gmx.de>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.26
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] qt4-tools-sdk: bring compatibility with QTCreator
+Subject: Re: htmldoc: remove -native recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,29 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 01:55:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 Sep 2010 05:09:50 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Wed, Sep 22, 2010 at 6:35 PM, Eric B=E9nard <eric@eukrea.com> wrote:
-> * this links "puts" mkspecs at the place where QTCreator search
-> for it in order to detect a toolchain
-> * thanks to this link QTCreator detects the toolchain generated using
-> meta-toolchain-qte and can cross compile applications without any
-> hack
+On Tue, 7 Sep 2010, Vitus Jensen wrote:
 
-This is somewhat off-topic, but could you outline the procedure you
-use to create a Qt SDK?  How does this recipe fit in with
-meta-toolchain-qte?
+> The following patches switch htmldoc to BBCLASSEXTEND = "native".
+>
+> 1.8.27 is the same revision as ever.  For 1.9.x I wanted to update to the latest
+> snapshot revision at the same time but failed because gcc 4.4.3 reported far
+> too many errors in the -native compile.  So the recipe of 1.9.x is ready for
+> updates (just select SVN revision) but it's still the same old rev 1571.
 
-Also, have you done remote debugging with QtCreator -- just curious
-how well that works.
+Something wrong with these recipes?
 
-Thanks,
-Cliff
+Vitus
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
