@@ -1,26 +1,25 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OytUf-0006OF-Ve
+	(envelope-from <denis@denix.org>) id 1OytXk-0006fn-7f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Sep 2010 23:38:21 +0200
+	Thu, 23 Sep 2010 23:41:30 +0200
 Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173003.mailsrvcs.net
+	by vms173011.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9700GQUYRG4LJ8@vms173003.mailsrvcs.net> for
+	2009)) with ESMTPA id <0L970001WYWDZLXO@vms173011.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Thu,
-	23 Sep 2010 16:38:05 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7659314AF64; Thu,
-	23 Sep 2010 17:38:04 -0400 (EDT)
-Date: Thu, 23 Sep 2010 17:38:04 -0400
+	23 Sep 2010 16:41:08 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 87AE314AF64; Thu,
+	23 Sep 2010 17:41:01 -0400 (EDT)
+Date: Thu, 23 Sep 2010 17:41:01 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100923213804.GC17898@denix.org>
-References: <1285247687-25731-1-git-send-email-chase.maupin@ti.com>
-	<1285247687-25731-3-git-send-email-chase.maupin@ti.com>
+Message-id: <20100923214101.GD17898@denix.org>
+References: <1285252829-31313-1-git-send-email-chase.maupin@ti.com>
 MIME-version: 1.0
-In-reply-to: <1285247687-25731-3-git-send-email-chase.maupin@ti.com>
+In-reply-to: <1285252829-31313-1-git-send-email-chase.maupin@ti.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Connect-IP: 206.46.173.11
 X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -28,7 +27,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/3] matrix-gui: updating to use latest source	revision
+Subject: Re: [PATCHv2 3/3] matrix-gui: updating to use latest source	revision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,11 +41,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 21:38:21 -0000
+X-List-Received-Date: Thu, 23 Sep 2010 21:41:30 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Sep 23, 2010 at 08:14:47AM -0500, Chase Maupin wrote:
+On Thu, Sep 23, 2010 at 09:40:29AM -0500, Chase Maupin wrote:
 > From: Jeff Lance <j-lance1@ti.com>
 > 
 > * Use latest source revision 131
@@ -182,7 +181,7 @@ Acked-by: Denys Dmytriyenko <denis@denix.org>
 > -Type=Application
 > -X-GNOME-Autostart-enabled=true
 > diff --git a/recipes/ti/matrix-gui_svn.bb b/recipes/ti/matrix-gui_svn.bb
-> index 4bfe7c2..533460e 100644
+> index 4bfe7c2..843e1c5 100644
 > --- a/recipes/ti/matrix-gui_svn.bb
 > +++ b/recipes/ti/matrix-gui_svn.bb
 > @@ -4,27 +4,35 @@ LICENSE = "BSD"
@@ -228,7 +227,7 @@ Acked-by: Denys Dmytriyenko <denis@denix.org>
 > -    install -m 0755 ${WORKDIR}/matrix-gui.desktop ${D}/${sysconfdir}/xdg/autostart
 > +	install -c -m 0755 ${S}/${PLATFORM}/etc/x11/init ${D}${sysconfdir}/init.d/matrix-gui
 > +	install -d ${D}/${sysconfdir}/xdg/autostart
-> +	install -m 0755 ${S}${PLATFORM}/etc/x11/matrix-gui.desktop ${D}/${sysconfdir}/xdg/autostart
+> +	install -m 0755 ${S}/${PLATFORM}/etc/x11/matrix-gui.desktop ${D}/${sysconfdir}/xdg/autostart
 >  }
 >  
 >  FILES_${PN}-autostart = "${sysconfdir}/xdg/autostart/matrix-gui.desktop"
