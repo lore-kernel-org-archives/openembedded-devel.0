@@ -1,34 +1,44 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OytpG-0004nF-Ep
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <graham.gower@gmail.com>) id 1Oyu9m-0001Vx-8Q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 00:00:45 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L970072TZL4ODH9@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	23 Sep 2010 16:55:53 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2413114AF64; Thu,
-	23 Sep 2010 17:55:52 -0400 (EDT)
-Date: Thu, 23 Sep 2010 17:55:52 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri, 24 Sep 2010 00:22:39 +0200
+Received: by iwn2 with SMTP id 2so1813045iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Sep 2010 15:17:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=E3FxhgNkDONEG6MW9xmZFDnNN0ouVYtEUfZ1Bws0VlI=;
+	b=grI+eJByeypCjnRlW1EFn3LT6fVE+dHXxKrNN3THlApNIB9jkmtjzytnphlOJBQA0w
+	IT14V9I1IrBa0l3ATETvTOLkxJ9LASIVkRHazhqtHlQrML9Ehv4LxMb3Dw0rj5FRo6lJ
+	McTY3pBgJ1p2fTJXxKs3DvCtUYQ06/L1ezasQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=OFKEBcM317Y54ZusK7ypxXe3jYFzpOVPA46W22tzPK7Z1YxRy4iQVdqjrWhZ4vdHhN
+	aB/Bp1ZQFbW3K/ZGXLCI4IvTC6msS+yxfASELbwXkGO9hcUs/M1xvG0rpQVO8FjV8KoW
+	75iKjv0C44gTb1xWjz3TOogLN0UfH5IYj783Q=
+MIME-Version: 1.0
+Received: by 10.231.11.4 with SMTP id r4mr2697912ibr.66.1285280262263; Thu, 23
+	Sep 2010 15:17:42 -0700 (PDT)
+Received: by 10.231.158.147 with HTTP; Thu, 23 Sep 2010 15:17:42 -0700 (PDT)
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
+References: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
+Date: Fri, 24 Sep 2010 07:47:42 +0930
+Message-ID: <AANLkTi=45dASvU5XiCia4o2bia-Zx38neVw8vK6Qvrx-@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100923215552.GF17898@denix.org>
-References: <1285270897-3618-1-git-send-email-chase.maupin@ti.com>
-	<1285270897-3618-2-git-send-email-chase.maupin@ti.com>
-MIME-version: 1.0
-In-reply-to: <1285270897-3618-2-git-send-email-chase.maupin@ti.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.3
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv2 2/3] matrix-gui-e: updating to latest source	revision
+Subject: Re: Question about automake licensing in recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,165 +52,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 22:00:53 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 23 Sep 2010 22:22:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 23, 2010 at 02:41:36PM -0500, Chase Maupin wrote:
-> From: Jeff Lance <j-lance1@ti.com>
-> 
-> * Updated recipe to use the latest source revision 131
-> * Included platform support
-> * Removed init files from OE repository since they are now part
->   of the matrix repository.
-> * Bumped SRCREV to 136 in version 2 of this patch
-> 
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> Signed-off-by: Jeff Lance <j-lance1@ti.com>
+On 24 September 2010 05:44, Maupin, Chase <chase.maupin@ti.com> wrote:
+> All,
+>
+> I was digging around in the automake sources and I noticed that there is =
+a top-level COPYING file that says automake is licensed under GPLv2. =A0How=
+ever, in the lib directory there is another COPYING file that says GPLv3. =
+=A0I was trying to figure out what LICENSE should be set to for automake wh=
+en the sources contain both GPLv2 and GPLv3 code. =A0Should it be set to so=
+mething like GPLv2/GPLv3? =A0I've read that GPLv2 and GPLv3 are incompatibl=
+e (http://gplv3.fsf.org/wiki/index.php/Compatible_licenses#GPLv3-incompatib=
+le_licenses) so can a recipe even be marked as being both GPLv2 and GPLv3?
+>
+> Any input would be appreciated here.
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+If the GPLv2 has the "or later version" clause and you are combining
+with GPLv3, then there is no incompatibility as the entire thing is
+then distributed under the GPLv3. If there is no "or later" clause,
+then its a problem that needs to be sorted out upstream.
 
-> ---
->  recipes/ti/matrix-gui-e/dm365-evm/init |   29 --------------------------
->  recipes/ti/matrix-gui-e/init           |   35 --------------------------------
->  recipes/ti/matrix-gui-e_svn.bb         |   25 ++++++++++++++++------
->  3 files changed, 18 insertions(+), 71 deletions(-)
->  delete mode 100755 recipes/ti/matrix-gui-e/dm365-evm/init
->  delete mode 100755 recipes/ti/matrix-gui-e/init
-> 
-> diff --git a/recipes/ti/matrix-gui-e/dm365-evm/init b/recipes/ti/matrix-gui-e/dm365-evm/init
-> deleted file mode 100755
-> index d860ad9..0000000
-> --- a/recipes/ti/matrix-gui-e/dm365-evm/init
-> +++ /dev/null
-> @@ -1,29 +0,0 @@
-> -#! /bin/sh
-> -matrixgui="/usr/bin/matrix_guiE"
-> -GUI_OPTS="-qws -geometry 720x480+0+10 -display transformed:Rot0 /usr/share/matrix/html/menu_main.html"
-> -
-> -test -x "$matrixgui" || exit 0
-> -
-> -case "$1" in
-> -  start)
-> -
-> -    chvt 4
-> -
-> -    # switch to component 480p mode
-> -    echo 480P-60 > /sys/class/davinci_display/ch0/mode
-> -    echo COMPONENT > /sys/class/davinci_display/ch0/output
-> -    echo -n "Starting Matrix GUI application"
-> -    start-stop-daemon --start --quiet --background --pidfile /var/run/matrix-gui-e.pid --exec $matrixgui -- $GUI_OPTS
-> -    echo "."
-> -    ;;
-> -  stop)
-> -    echo -n "Stopping Matrix GUI application"
-> -    start-stop-daemon --stop --quiet --pidfile /var/run/matrix-gui-e.pid
-> -    echo "."
-> -    ;;
-> -  *)
-> -    echo "Usage: /etc/init.d/matrix-gui-e {start|stop}"
-> -    exit 1
-> -esac
-> -
-> -exit 0
-> diff --git a/recipes/ti/matrix-gui-e/init b/recipes/ti/matrix-gui-e/init
-> deleted file mode 100755
-> index 266fdca..0000000
-> --- a/recipes/ti/matrix-gui-e/init
-> +++ /dev/null
-> @@ -1,35 +0,0 @@
-> -#! /bin/sh
-> -
-> -matrixgui="/usr/bin/matrix_guiE"
-> -GUI_OPTS="-qws -display transformed:Rot90 /usr/share/matrix/html/menu_main.html"
-> -
-> -test -x "$matrixgui" || exit 0
-> -
-> -export TSLIB_TSDEVICE=/dev/input/touchscreen0
-> -export QWS_MOUSE_PROTO=Tslib:/dev/input/touchscreen0
-> -
-> -case "$1" in
-> -  start)
-> -
-> -    chvt 4
-> -
-> -    if [ ! -f /etc/pointercal ] ; then
-> -        echo -n "Calibrating touchscreen (first time only)"
-> -        ts_calibrate
-> -        echo "."
-> -    fi
-> -    echo -n "Starting Matrix GUI application"
-> -    start-stop-daemon --start --quiet --background --pidfile /var/run/matrix-gui-e.pid --exec $matrixgui -- $GUI_OPTS
-> -    echo "."
-> -    ;;
-> -  stop)
-> -    echo -n "Stopping Matrix GUI application"
-> -    start-stop-daemon --stop --quiet --pidfile /var/run/matrix-gui-e.pid
-> -    echo "."
-> -    ;;
-> -  *)
-> -    echo "Usage: /etc/init.d/matrix-gui-e {start|stop}"
-> -    exit 1
-> -esac
-> -
-> -exit 0
-> diff --git a/recipes/ti/matrix-gui-e_svn.bb b/recipes/ti/matrix-gui-e_svn.bb
-> index 35abd25..5570d92 100644
-> --- a/recipes/ti/matrix-gui-e_svn.bb
-> +++ b/recipes/ti/matrix-gui-e_svn.bb
-> @@ -4,13 +4,19 @@ LICENSE = "BSD"
->  SECTION = "multimedia"
->  PRIORITY = "optional"
->  
-> -SRCREV = "58"
-> -PV = "1.0"
-> -PR = "r16+svnr${SRCPV}"
-> +SRCREV = "136"
-> +PV = "1.1"
-> +PR = "r18+svnr${SRCPV}"
->  
-> -SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
-> -	file://init \
-> -"
-> +PLATFORM_dm365 = "dm365"
-> +PLATFORM_da850-omapl138-evm = "omapl138"
-> +PLATFORM_omap3evm = "omap3530"
-> +PLATFORM_dm37x-evm = "dm3730"
-> +PLATFORM_am37x-evm = "am3715"
-> +PLATFORM_beagleboard = "am3715"
-> +PLATFORM ?= "<UNDEFINED>"
-> +
-> +SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' "
->  
->  S = "${WORKDIR}/trunk"
->  
-> @@ -18,13 +24,18 @@ INITSCRIPT_NAME = "matrix-gui-e"
->  INITSCRIPT_PARAMS = "defaults 99"
->  #INITSCRIPT_PARAMS = "start 99 3 . stop 99 3 ."
->  
-> +CXXFLAGS_da850-omapl138-evm_append = " -DPlatform_omapl138 "
-> +CXXFLAGS_dm365_append = " -DPlatform_dm365 "
-> +PACKAGE_ARCH = ${MACHINE_ARCH}
-> +
->  inherit qt4e update-rc.d
->  
->  do_install() {
->  	install -d ${D}/${bindir}
->  	install -m 0755 ${S}/matrix_gui ${D}/${bindir}/matrix_guiE
->  	install -d ${D}${sysconfdir}/init.d/
-> -	install -c -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-gui-e
-> +	install -c -m 0755 ${S}/${PLATFORM}/etc/init ${D}${sysconfdir}/init.d/matrix-gui-e
-> +
->  }
->  
->  RRECOMMENDS_${PN} = "qt4-embedded-plugin-mousedriver-tslib qt4-embedded-fonts"
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-Graham
 
 
