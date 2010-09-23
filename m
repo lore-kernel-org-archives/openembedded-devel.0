@@ -1,37 +1,31 @@
-Received: from mail-dotnet1.eads.net ([80.156.45.103])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1Oyhv1-0001Wh-1s for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Sep 2010 11:16:44 +0200
-Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
-	by mail-dotnet1.eads.net with ESMTP; 23 Sep 2010 11:02:26 +0200
-Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Thu, 23 Sep 2010 11:16:18 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 23 Sep 2010 11:16:19 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Thu, 23 Sep 2010 11:16:17 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501A74421@deimsg40.de.net.world>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: How to add special directories and files to a native package ? 
-thread-index: ActZdZqsswsNS51rQ+O9Q5LyEAczzABiXT0A
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 23 Sep 2010 09:16:19.0011 (UTC)
-	FILETIME=[FB56A130:01CB5AFF]
-X-SA-Exim-Connect-IP: 80.156.45.103
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@cassidian.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oyhyx-00028q-Dh for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Sep 2010 11:20:48 +0200
+Received: from f053045061.adsl.alicedsl.de ([78.53.45.61]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oyhyt-0001Ko-Mr for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Sep 2010 09:20:43 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1285167492-4786-1-git-send-email-schnitzeltony@gmx.de>
+References: <1285167492-4786-1-git-send-email-schnitzeltony@gmx.de>
+Date: Thu, 23 Sep 2010 11:20:42 +0200
+Message-ID: <1285233642.3691.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: How to add special directories and files to a native package ?
+Subject: Re: [PATCH v2] clutter-gtk: Bump to 0.10.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,59 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 09:16:45 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Thu, 23 Sep 2010 09:20:48 -0000
+X-Groupsio-MsgNum: 23872
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-JUKhObUCSclUwaIcAzgX"
+
+--=-JUKhObUCSclUwaIcAzgX
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Am Mittwoch, den 22.09.2010, 16:58 +0200 schrieb Andreas Mueller:
 
-I managed the providing of my none standard directories.
+Signed-off-by line is missing. Please add this when you commit.
 
-I use following statement to append the processing of the directories:
+[=E2=80=A6]
 
-sysroot_stage_dirs_append() {
-    sysroot_stage_dir $from/usr/local/xxx/yyy =
-$to${STAGING_DIR_HOST}/usr/local/xxx/yyy
-}
+I build tested this recipe with `MACHINE =3D "beagleboard"` and the
+following distributions and tool chains.
 
-I haven't see that in a recipe yet.
-Is that a proper way ? What are the possible impacts ?
+1. minimal (LIBC =3D "glibc")
+2. minimal (LIBC =3D "glibc"; PREFERRED_GCC_VERSION =3D "4.5"; PREFERRED_BI=
+NUTILS =3D "2.20.1")
+3. minimal (LIBC =3D "eglibc")
+4. minimal (LIBC =3D "eglibc"; PREFERRED_GCC_VERSION =3D "4.5"; PREFERRED_B=
+INUTILS =3D "2.20.1")
+5. =C8=A6ngstr=C3=B6m 2008.1
 
-Regards
-Wolfgang Hauser
+I could not test the following combinations because of build errors in
+the dependencies.
 
------Urspr=FCngliche Nachricht-----
-Von: Hauser, Wolfgang (external)=20
-Gesendet: Dienstag, 21. September 2010 12:13
-An: 'openembedded-devel@lists.openembedded.org'
-Betreff: How to add special directories and files to a native package ?=20
+1. minimal-uclibc
+/powervr-drivers/libgles-omap3_3.01.00.07.bb
+2. =C8=A6ngstr=C3=B6m 2008.1 with GCC* 4.5 and Binutils 2.20.1
+gettext 0.18.0
 
-Hello,
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>=20
 
-I have to place some files into a special path in a native package / =
-staging.
+--=-JUKhObUCSclUwaIcAzgX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
-I tried to add these directories by
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-FILES_${PN} =3D " \
-  /usr/local/xxx/bin \
-  /usr/local/xxx/lib \
-  /usr/local/xxx/scripts \
-"
+iEYEABECAAYFAkybG94ACgkQPX1aK2wOHVglJQCeLqxcYmm35EC22lSFgW3MX2h7
+9Q8AnR0RZ362xEFXRprXF7ACnwXson2v
+=mocj
+-----END PGP SIGNATURE-----
 
-in my xxx-native recipe, but this won't work for the native staging, the =
-directories do not appear in the syssroots/i386-linux path where I =
-expected they will go to. (same, if I use BBCLASSEXTEND)
-
-Where I have to add my special directories and files to get it into the =
-native staging path ?
-
-Background, I can't install the application into the standard linux =
-path, there are some conflicts,
-
-Regards
-Wolfgang Hauser
-
-
+--=-JUKhObUCSclUwaIcAzgX--
