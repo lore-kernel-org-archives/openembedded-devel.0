@@ -1,39 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oys8i-0003w5-Iz
-	for openembedded-devel@openembedded.org; Thu, 23 Sep 2010 22:11:33 +0200
-Received: by iwn2 with SMTP id 2so1725360iwn.6
-	for <openembedded-devel@openembedded.org>;
-	Thu, 23 Sep 2010 13:11:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=EtZt0zRPvoDb/XEt17VaoZAGxcO4k5URB7EJBCKjVh0=;
-	b=Dpo/ueVU8+FtLggJq7o196UoGL+oqzT3i+hDvW4TTstCcxz7IeDVnpHyLcszJbnDaG
-	qCj8814MQa1i2r+DVQParwfmw9UqLDLTu7l/hCmwAEb2YKcG5INaqHWlncJ0hiKhGFZV
-	T1kDpcf0gLrrSiDnctkjT5m5Zv5/zu9JWFZK8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=qYp6nOFgoGxLsNStWJg2wUHOPJptWq9rjjKl16nrKF/sxXQjlBWfXD0JBp/OyVibP6
-	zPpKUKeNXJHSiSk5MXu7X5SLHvxLGEO1QgN8d+hY5CnOl56eTFlqXvfRWMh9I/hnYDL2
-	0VeJm54jMwLfbb/sePFSgqFOmdJKYvfIhFRxM=
+	(envelope-from <chase.maupin@ti.com>) id 1OysBO-00043Q-C3
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Sep 2010 22:14:20 +0200
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o8NKEBEK029012
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Sep 2010 15:14:11 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8NKEAv9009358
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Sep 2010 15:14:11 -0500 (CDT)
+Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8NKEAY1025055
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Sep 2010 15:14:10 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
+	([157.170.170.8]) with mapi; Thu, 23 Sep 2010 15:14:11 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 23 Sep 2010 15:14:09 -0500
+Thread-Topic: Question about automake licensing in recipe
+Thread-Index: ActbW+GPIRlq1KGDQXO6/CJSWPqWdA==
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.231.11.8 with SMTP id r8mr2356349ibr.135.1285272687033; Thu,
-	23 Sep 2010 13:11:27 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Thu, 23 Sep 2010 13:11:26 -0700 (PDT)
-Date: Thu, 23 Sep 2010 22:11:26 +0200
-Message-ID: <AANLkTinzRQGe9CLG_n5g0sFG0NDdZBdU2RSL9KjgzokP@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: git error ?
+Subject: Question about automake licensing in recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 20:11:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 23 Sep 2010 20:14:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hm,
+All,
 
-On my latest git push I got:
+I was digging around in the automake sources and I noticed that there is a =
+top-level COPYING file that says automake is licensed under GPLv2.  However=
+, in the lib directory there is another COPYING file that says GPLv3.  I wa=
+s trying to figure out what LICENSE should be set to for automake when the =
+sources contain both GPLv2 and GPLv3 code.  Should it be set to something l=
+ike GPLv2/GPLv3?  I've read that GPLv2 and GPLv3 are incompatible (http://g=
+plv3.fsf.org/wiki/index.php/Compatible_licenses#GPLv3-incompatible_licenses=
+) so can a recipe even be marked as being both GPLv2 and GPLv3?
 
-frans@linux-suse:~/oe/openembedded> git push
-Counting objects: 13, done.
-Delta compression using up to 2 threads.
-Compressing objects: 100% (7/7), done.
-Writing objects: 100% (8/8), 649 bytes, done.
-Total 8 (delta 6), reused 0 (delta 0)
-error: unable to create temporary sha1 filename : Read-only file system
+Any input would be appreciated here.
 
-fatal: failed to write object
-error: unpack failed: unpack-objects abnormal exit
-To git@git.openembedded.org:openembedded
- ! [remote rejected] org.openembedded.dev -> org.openembedded.dev (n/a
-(unpacker error))
-error: failed to push some refs to 'git@git.openembedded.org:openembedded'
+Sincerely,
+Chase Maupin
+Software Applications
+Catalog DSP Products
+e-mail: chase.maupin@ti.com
+phone: (281) 274-3285
 
+For support:
+Forums - http://community.ti.com/forums/
+Wiki - http://wiki.davincidsp.com/
 
-No idea what is going on here, guess it is at the git side. My fs is not r/o
-
-Frans
 
 
