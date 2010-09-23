@@ -1,37 +1,37 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1Oylpa-0003Ie-3B
+	(envelope-from <chasemaupin03@gmail.com>) id 1OylvY-0003VY-2v
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Sep 2010 15:27:23 +0200
-Received: by ywe9 with SMTP id 9so345293ywe.6
+	Thu, 23 Sep 2010 15:33:33 +0200
+Received: by yxg6 with SMTP id 6so583976yxg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Sep 2010 06:27:15 -0700 (PDT)
+	Thu, 23 Sep 2010 06:33:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=BvelfmXo4CibwrGUZo9mPS3Npc/T3AnhMsFopGlT8O0=;
-	b=RBNAOiyrGKgfiukoyA9GShHiBuYzKQcaX7HUTNFl+3aGuMEbYOJZDMKwjiStxfd7Pp
-	sSnghyUA5HOaSt7XgYYmi0HYEFlXH2f25dmxapgiyhS4FuX6D5lyaPZ6GAk8vsjdbQ9K
-	3NU+QKxuzL3ze9yfTgVSe+D2vuwi08XCu4+FU=
+	bh=fsBKHMzzxYUPAYjwUztgMPnR0sPCw+qgwH6B+HvoDOw=;
+	b=RWTjyuyq2wU4Yi3/QqFA9oPD6SZmwQAuSaLSZWPQ/X0zNLlEZgJ+s6IzxNh1GJ0CQu
+	8/qiBlFqRXpIU9q21ha8MwYEDVsYv6ecomcaBd0jzwO3jep0YyK+ElmY9BcHVAx8LrQt
+	jszCbEQU5SaHISbh+Q9hHmvPA+HyvsHK0MjIQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=tyEYaqDrT2YC8tAJWw51mS7STLVtB+J6gr3+Q0JA2KQ5rWOLqhCqwVn7kWtufvI1Vm
-	BzfcCYtvABI6wAdW3O9ruo5YWAMNXjPdQtY4/GWaMvejIjjC5pA0Vy68UZeqDX6//qOm
-	RuwjZJJyhGUH77OBEWLSoxx8+0lf23sw9bwPA=
-Received: by 10.150.54.17 with SMTP id c17mr777808yba.338.1285248435697;
-	Thu, 23 Sep 2010 06:27:15 -0700 (PDT)
+	b=uhCICv6QaoGtm7GtDc/i9ve9qtvMHZFYxP01Y8MGke9NL2vQJ331Kvsou+Txy1A1Jm
+	aaig1wi9nJPu9N524d4xm9LYu+OI7bOqT+h3UlF4XiJfQCIQN9VQ3gHXnrnPz28KbKgw
+	MgFao1bke0THs2JIGrjfi9yqamArwEm2M408g=
+Received: by 10.150.136.3 with SMTP id j3mr1400548ybd.386.1285248432921;
+	Thu, 23 Sep 2010 06:27:12 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id u24sm999798yba.21.2010.09.23.06.27.14
+	by mx.google.com with ESMTPS id u24sm999798yba.21.2010.09.23.06.27.11
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 23 Sep 2010 06:27:14 -0700 (PDT)
+	Thu, 23 Sep 2010 06:27:12 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Sep 2010 08:14:47 -0500
-Message-Id: <1285247687-25731-3-git-send-email-chase.maupin@ti.com>
+Date: Thu, 23 Sep 2010 08:14:46 -0500
+Message-Id: <1285247687-25731-2-git-send-email-chase.maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1285247687-25731-1-git-send-email-chase.maupin@ti.com>
 References: <1285247687-25731-1-git-send-email-chase.maupin@ti.com>
-X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 3/3] matrix-gui: updating to use latest source revision
+Subject: [PATCH 2/3] matrix-gui-e: updating to latest source revision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,158 +54,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 13:27:23 -0000
+X-List-Received-Date: Thu, 23 Sep 2010 13:33:33 -0000
 
 From: Jeff Lance <j-lance1@ti.com>
 
-* Use latest source revision 131
-* Add platform support for multiple platforms
-* Remove un-used files from SRC_URI and repository.
-    * init files are now part of the matrix repository
-    * matrix-gui.desktop is now part of the matrix repository
-    * the cursor override patch is now in the matrix sources
+* Updated recipe to use the latest source revision 131
+* Included platform support
+* Removed init files from OE repository since they are now part
+  of the matrix repository.
 
 Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Jeff Lance <j-lance1@ti.com>
 ---
- .../0001-Disable-cursor-override-for-X11.patch     |   27 ------------------
- recipes/ti/matrix-gui/dm365-evm/init               |   26 -----------------
- recipes/ti/matrix-gui/init                         |   24 ----------------
- recipes/ti/matrix-gui/matrix-gui.desktop           |    7 ----
- recipes/ti/matrix-gui_svn.bb                       |   30 ++++++++++++-------
- 5 files changed, 19 insertions(+), 95 deletions(-)
- delete mode 100644 recipes/ti/matrix-gui/0001-Disable-cursor-override-for-X11.patch
- delete mode 100644 recipes/ti/matrix-gui/dm365-evm/init
- delete mode 100644 recipes/ti/matrix-gui/init
- delete mode 100644 recipes/ti/matrix-gui/matrix-gui.desktop
+ recipes/ti/matrix-gui-e/dm365-evm/init |   29 --------------------------
+ recipes/ti/matrix-gui-e/init           |   35 --------------------------------
+ recipes/ti/matrix-gui-e_svn.bb         |   25 ++++++++++++++++------
+ 3 files changed, 18 insertions(+), 71 deletions(-)
+ delete mode 100755 recipes/ti/matrix-gui-e/dm365-evm/init
+ delete mode 100755 recipes/ti/matrix-gui-e/init
 
-diff --git a/recipes/ti/matrix-gui/0001-Disable-cursor-override-for-X11.patch b/recipes/ti/matrix-gui/0001-Disable-cursor-override-for-X11.patch
-deleted file mode 100644
-index 61eba44..0000000
---- a/recipes/ti/matrix-gui/0001-Disable-cursor-override-for-X11.patch
+diff --git a/recipes/ti/matrix-gui-e/dm365-evm/init b/recipes/ti/matrix-gui-e/dm365-evm/init
+deleted file mode 100755
+index d860ad9..0000000
+--- a/recipes/ti/matrix-gui-e/dm365-evm/init
 +++ /dev/null
-@@ -1,27 +0,0 @@
--From b0e91f703ffdcc73f854a672ec16ebbf21293c9c Mon Sep 17 00:00:00 2001
--From: Chase Maupin <chase.maupin@ti.com>
--Date: Mon, 24 May 2010 12:51:49 -0500
--Subject: [PATCH] Disable cursor override for X11
--
--* Disable the cursor override option for using the matrix_gui
--  program with X11.
-----
-- main.cpp |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/main.cpp b/main.cpp
--index 978e327..1f55e94 100644
----- a/main.cpp
--+++ b/main.cpp
--@@ -43,7 +43,7 @@ int main(int argc, char * argv[])
-- {
--     QApplication matrix(argc, argv);
--     QApplication::setStyle(new CustomStyle);
---    QApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
--+//    QApplication::setOverrideCursor(QCursor(Qt::BlankCursor));
-- 
--     // Create a new window to display a web page.
--     MainWindow * pWindow = new MainWindow(0, QString(argv[1]), true);
---- 
--1.6.0.4
--
-diff --git a/recipes/ti/matrix-gui/dm365-evm/init b/recipes/ti/matrix-gui/dm365-evm/init
-deleted file mode 100644
-index 3aadc1e..0000000
---- a/recipes/ti/matrix-gui/dm365-evm/init
-+++ /dev/null
-@@ -1,26 +0,0 @@
+@@ -1,29 +0,0 @@
 -#! /bin/sh
--matrixgui="/usr/bin/matrix_gui"
--GUI_OPTS="-geometry 720x480+0+10 -display transformed:Rot0 /usr/share/matrix/html/menu_main.html"
+-matrixgui="/usr/bin/matrix_guiE"
+-GUI_OPTS="-qws -geometry 720x480+0+10 -display transformed:Rot0 /usr/share/matrix/html/menu_main.html"
 -
 -test -x "$matrixgui" || exit 0
 -
 -case "$1" in
 -  start)
+-
+-    chvt 4
+-
 -    # switch to component 480p mode
 -    echo 480P-60 > /sys/class/davinci_display/ch0/mode
 -    echo COMPONENT > /sys/class/davinci_display/ch0/output
 -    echo -n "Starting Matrix GUI application"
--    start-stop-daemon --start --quiet --background --pidfile /var/run/matrix-gui.pid --exec $matrixgui -- $GUI_OPTS
+-    start-stop-daemon --start --quiet --background --pidfile /var/run/matrix-gui-e.pid --exec $matrixgui -- $GUI_OPTS
 -    echo "."
 -    ;;
 -  stop)
 -    echo -n "Stopping Matrix GUI application"
--    start-stop-daemon --stop --quiet --pidfile /var/run/matrix-gui.pid
+-    start-stop-daemon --stop --quiet --pidfile /var/run/matrix-gui-e.pid
 -    echo "."
 -    ;;
 -  *)
--    echo "Usage: /etc/init.d/matrix-gui {start|stop}"
+-    echo "Usage: /etc/init.d/matrix-gui-e {start|stop}"
 -    exit 1
 -esac
 -
 -exit 0
-diff --git a/recipes/ti/matrix-gui/init b/recipes/ti/matrix-gui/init
-deleted file mode 100644
-index 40b6512..0000000
---- a/recipes/ti/matrix-gui/init
+diff --git a/recipes/ti/matrix-gui-e/init b/recipes/ti/matrix-gui-e/init
+deleted file mode 100755
+index 266fdca..0000000
+--- a/recipes/ti/matrix-gui-e/init
 +++ /dev/null
-@@ -1,24 +0,0 @@
+@@ -1,35 +0,0 @@
 -#! /bin/sh
 -
--matrixgui="/usr/bin/matrix_gui"
--GUI_OPTS="/usr/share/matrix/html/menu_main.html"
+-matrixgui="/usr/bin/matrix_guiE"
+-GUI_OPTS="-qws -display transformed:Rot90 /usr/share/matrix/html/menu_main.html"
 -
 -test -x "$matrixgui" || exit 0
 -
+-export TSLIB_TSDEVICE=/dev/input/touchscreen0
+-export QWS_MOUSE_PROTO=Tslib:/dev/input/touchscreen0
+-
 -case "$1" in
 -  start)
+-
+-    chvt 4
+-
+-    if [ ! -f /etc/pointercal ] ; then
+-        echo -n "Calibrating touchscreen (first time only)"
+-        ts_calibrate
+-        echo "."
+-    fi
 -    echo -n "Starting Matrix GUI application"
--    start-stop-daemon --start --quiet --background --pidfile /var/run/matrix-gui.pid --exec $matrixgui -- $GUI_OPTS
+-    start-stop-daemon --start --quiet --background --pidfile /var/run/matrix-gui-e.pid --exec $matrixgui -- $GUI_OPTS
 -    echo "."
 -    ;;
 -  stop)
 -    echo -n "Stopping Matrix GUI application"
--    start-stop-daemon --stop --quiet --pidfile /var/run/matrix-gui.pid
+-    start-stop-daemon --stop --quiet --pidfile /var/run/matrix-gui-e.pid
 -    echo "."
 -    ;;
 -  *)
--    echo "Usage: /etc/init.d/matrix-gui {start|stop}"
+-    echo "Usage: /etc/init.d/matrix-gui-e {start|stop}"
 -    exit 1
 -esac
 -
 -exit 0
-diff --git a/recipes/ti/matrix-gui/matrix-gui.desktop b/recipes/ti/matrix-gui/matrix-gui.desktop
-deleted file mode 100644
-index 52b5831..0000000
---- a/recipes/ti/matrix-gui/matrix-gui.desktop
-+++ /dev/null
-@@ -1,7 +0,0 @@
--[Desktop Entry]
--Name=Matrix GUI
--Comment=Start the Matrix GUI application
--Exec=/usr/bin/matrix_gui /usr/share/matrix/html/menu_main.html
--Terminal=false
--Type=Application
--X-GNOME-Autostart-enabled=true
-diff --git a/recipes/ti/matrix-gui_svn.bb b/recipes/ti/matrix-gui_svn.bb
-index 4bfe7c2..533460e 100644
---- a/recipes/ti/matrix-gui_svn.bb
-+++ b/recipes/ti/matrix-gui_svn.bb
-@@ -4,27 +4,35 @@ LICENSE = "BSD"
+diff --git a/recipes/ti/matrix-gui-e_svn.bb b/recipes/ti/matrix-gui-e_svn.bb
+index 35abd25..3e0a171 100644
+--- a/recipes/ti/matrix-gui-e_svn.bb
++++ b/recipes/ti/matrix-gui-e_svn.bb
+@@ -4,13 +4,19 @@ LICENSE = "BSD"
  SECTION = "multimedia"
  PRIORITY = "optional"
  
 -SRCREV = "58"
 -PV = "1.0"
--PR = "r14+svnr${SRCPV}"
+-PR = "r16+svnr${SRCPV}"
 +SRCREV = "131"
 +PV = "1.1"
-+PR = "r15+svnr${SRCPV}"
++PR = "r17+svnr${SRCPV}"
  
 -SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
--    file://0001-Disable-cursor-override-for-X11.patch \
 -	file://init \
--    file://matrix-gui.desktop \
 -"
 +PLATFORM_dm365 = "dm365"
 +PLATFORM_da850-omapl138-evm = "omapl138"
@@ -219,25 +179,26 @@ index 4bfe7c2..533460e 100644
  
  S = "${WORKDIR}/trunk"
  
+@@ -18,13 +24,18 @@ INITSCRIPT_NAME = "matrix-gui-e"
+ INITSCRIPT_PARAMS = "defaults 99"
+ #INITSCRIPT_PARAMS = "start 99 3 . stop 99 3 ."
+ 
 +CXXFLAGS_da850-omapl138-evm_append = " -DPlatform_omapl138 "
 +CXXFLAGS_dm365_append = " -DPlatform_dm365 "
 +PACKAGE_ARCH = ${MACHINE_ARCH}
 +
- inherit qt4x11
+ inherit qt4e update-rc.d
  
  do_install() {
  	install -d ${D}/${bindir}
- 	install -m 0755 ${S}/matrix_gui ${D}/${bindir}
+ 	install -m 0755 ${S}/matrix_gui ${D}/${bindir}/matrix_guiE
  	install -d ${D}${sysconfdir}/init.d/
--	install -c -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-gui
--    install -d ${D}/${sysconfdir}/xdg/autostart
--    install -m 0755 ${WORKDIR}/matrix-gui.desktop ${D}/${sysconfdir}/xdg/autostart
-+	install -c -m 0755 ${S}/${PLATFORM}/etc/x11/init ${D}${sysconfdir}/init.d/matrix-gui
-+	install -d ${D}/${sysconfdir}/xdg/autostart
-+	install -m 0755 ${S}${PLATFORM}/etc/x11/matrix-gui.desktop ${D}/${sysconfdir}/xdg/autostart
+-	install -c -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-gui-e
++	install -c -m 0755 ${S}/${PLATFORM}/etc/init ${D}${sysconfdir}/init.d/matrix-gui-e
++
  }
  
- FILES_${PN}-autostart = "${sysconfdir}/xdg/autostart/matrix-gui.desktop"
+ RRECOMMENDS_${PN} = "qt4-embedded-plugin-mousedriver-tslib qt4-embedded-fonts"
 -- 
 1.7.0.4
 
