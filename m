@@ -1,29 +1,37 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oypfz-0003oY-6i for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Sep 2010 19:33:47 +0200
-Received: from f053045061.adsl.alicedsl.de ([78.53.45.61]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oypft-0000xr-BO for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Sep 2010 17:33:37 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OyppU-0002eW-H2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Sep 2010 19:43:36 +0200
+Received: (qmail 26627 invoked by uid 503); 23 Sep 2010 17:57:06 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 23 Sep 2010 17:57:06 -0000
+Received: (qmail 29674 invoked by uid 503); 23 Sep 2010 17:25:59 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 23 Sep 2010 17:25:59 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 23 Sep 2010 19:43:23 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 23 Sep 2010 19:43:21 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Sep 2010 19:33:36 +0200
-Message-ID: <1285263216.3691.102.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Thu, 23 Sep 2010 19:42:37 +0200
+Message-Id: <1285263757-14049-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 10500424007288073545
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Difference between distributions in pkg-config files handling?
+Subject: [PATCH] busybox's mdev: add script to populate /dev/bus/usb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,46 +45,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 17:33:48 -0000
-X-Groupsio-MsgNum: 23886
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-jjfMcIfiM6d3nsAYNzRp"
+X-List-Received-Date: Thu, 23 Sep 2010 17:43:37 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
---=-jjfMcIfiM6d3nsAYNzRp
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* needed for libusb on kernel without CONFIG_USB_DEVICEFS
 
-Dear OE folks,
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/busybox/busybox_1.13.2.bb |    4 +++-
+ recipes/busybox/files/mdev.conf   |    2 +-
+ recipes/busybox/files/usb.sh      |   34 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 38 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/busybox/files/usb.sh
+
+diff --git a/recipes/busybox/busybox_1.13.2.bb b/recipes/busybox/busybox_1.13.2.bb
+index a3acceb..fce7504 100644
+--- a/recipes/busybox/busybox_1.13.2.bb
++++ b/recipes/busybox/busybox_1.13.2.bb
+@@ -1,5 +1,5 @@
+ require busybox.inc
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
+ 
+ SRC_URI = "\
+   http://www.busybox.net/downloads/busybox-${PV}.tar.bz2;name=tarball \
+@@ -39,6 +39,7 @@ SRC_URI = "\
+   file://defconfig \
+   file://mdev \
+   file://mdev.conf \
++  file://usb.sh \
+ "
+ SRC_URI[tarball.md5sum] = "9e2a604d18bef219a5a6bf3acf78b9e1"
+ SRC_URI[tarball.sha256sum] = "927774408bd982dd246fb716bb2e646ab0708ce321b42c5e271dc98c1f5d1dc8"
+@@ -56,5 +57,6 @@ do_install_append() {
+     install -d ${D}${sysconfdir}/init.d/
+     install -d ${D}${sysconfdir}/mdev
+     install -m 0755 ${WORKDIR}/find-touchscreen.sh ${D}${sysconfdir}/mdev/
++    install -m 0755 ${WORKDIR}/usb.sh ${D}${sysconfdir}/mdev/
+     install -m 0755 ${WORKDIR}/mdev ${D}${sysconfdir}/init.d/
+ }
+diff --git a/recipes/busybox/files/mdev.conf b/recipes/busybox/files/mdev.conf
+index 8f57b0a..2aa8f26 100644
+--- a/recipes/busybox/files/mdev.conf
++++ b/recipes/busybox/files/mdev.conf
+@@ -20,7 +20,7 @@ sda 0:6 0640
+ tty 0:5 0666 
+ tty.* 0:0 0620 
+ urandom 0:0 0666 
+-usbdev.* 0:0 0660 
++usbdev.* 0:0 0660  */etc/mdev/usb.sh
+ vcs.* 0:5 0660 
+ zero 0:0 0666 
+  
+diff --git a/recipes/busybox/files/usb.sh b/recipes/busybox/files/usb.sh
+new file mode 100644
+index 0000000..cf776e7
+--- /dev/null
++++ b/recipes/busybox/files/usb.sh
+@@ -0,0 +1,34 @@
++#!/bin/sh
++
++case "$ACTION" in
++  add|"")
++    for uevent in /sys/class/usb_device/usbdev?.*/*/uevent; do
++      . $uevent
++      if [ ! -e /dev/bus/usb/$BUSNUM/$DEVNUM ]; then
++        mkdir -p /dev/bus/usb/$BUSNUM
++        mknod /dev/bus/usb/$BUSNUM/$DEVNUM c 189 $MINOR
++      fi
++    done
++    ;;
++  remove)
++    for device in /dev/bus/usb/*/*; do
++      REMOVED=1
++      dev=`basename $device`
++      bus=`basename $(dirname $device)`
++      for uevent in /sys/class/usb_device/usbdev?.*/*/uevent; do
++        . $uevent
++        echo $dev $DEVNUM $bus $BUSNUM >> /tmp/rem.txt
++        if [ $dev -eq $DEVNUM ] && [ $bus -eq $BUSNUM ]; then
++          REMOVED=0
++          break;
++        fi
++      done
++      if [ $REMOVED -eq 1 ]; then
++        rm /dev/bus/usb/$bus/$dev
++        if [ -z $(ls /dev/bus/usb/$bus/) ]; then
++          rmdir /dev/bus/usb/$bus/
++        fi
++      fi
++    done
++    ;;
++esac
+-- 
+1.6.3.3
 
 
-I am wondering why `do_configure()` yields different results between
-distributions. I tested =C8=A6ngstrom and Minimal as seen for libatasmart
-[1].
 
-Do =C8=A6ngstr=C3=B6m and Minimal differ in the way they put pkg-config fil=
-es into
-`sysroots` (staging)?
-
-
-Thanks,
-
-Paul
-
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-September/=
-024538.html
-
---=-jjfMcIfiM6d3nsAYNzRp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkybj3AACgkQPX1aK2wOHVhYPQCdHHW2ghb6NVEi8ZaxPQK5CFl8
-iNsAnRtd/GCdrUrbwucRPaA9onCYy0t7
-=Xn8A
------END PGP SIGNATURE-----
-
---=-jjfMcIfiM6d3nsAYNzRp--
