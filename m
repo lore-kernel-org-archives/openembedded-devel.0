@@ -1,25 +1,29 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oz4zq-00074L-0c for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 11:55:22 +0200
-Received: from f053038003.adsl.alicedsl.de ([78.53.38.3] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oz4zl-0007CF-HV for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 09:55:09 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <sledz@dresearch.de>) id 1Oz55a-0000yQ-UA
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 12:01:11 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 5556B491282
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 12:01:06 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 24 Sep 2010 12:01:06 +0200
+Message-ID: <4C9C76E4.4010507@dresearch.de>
+Date: Fri, 24 Sep 2010 12:01:08 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <i7hr1l$kte$1@dough.gmane.org>
-References: <4C9C696B.4050800@dresearch.de>
-	<1285320191-22618-1-git-send-email-sledz@dresearch.de>
-	<i7hr1l$kte$1@dough.gmane.org>
-Date: Fri, 24 Sep 2010 11:55:07 +0200
-Message-ID: <1285322107.3715.55.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <4C9C696B.4050800@dresearch.de>	<1285320191-22618-1-git-send-email-sledz@dresearch.de>	<i7hr1l$kte$1@dough.gmane.org>
+	<1285322107.3715.55.camel@mattotaupa>
+In-Reply-To: <1285322107.3715.55.camel@mattotaupa>
+X-OriginalArrivalTime: 24 Sep 2010 10:01:06.0184 (UTC)
+	FILETIME=[676E7080:01CB5BCF]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
@@ -40,51 +44,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 09:55:22 -0000
-X-Groupsio-MsgNum: 23932
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-kG01WCXd+L4FtqNzecs+"
-
---=-kG01WCXd+L4FtqNzecs+
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 24 Sep 2010 10:01:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 24.09.2010, 11:29 +0200 schrieb Koen Kooi:
+Pushed.
 
-> On 24-09-10 11:23, Steffen Sledz wrote:
-> > * This patch solves a cross/native compile problem:
-> > | ./strpool atasmart.c atasmart.strpool.c
-> > | ./strpool: ./strpool: cannot execute binary file
-> >=20
-> > Signed-off-by: Steffen Sledz <sledz@dresearch.de>
->=20
-> Acked-by: Koen Kooi <koen@openembedded.org>
-
-Build-tested with `MACHINE =3D "beagleboard"` and =C8=A6ngstr=C3=B6m 2008.1=
-.
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-I will try to get this fixed upstream.
-
-[=E2=80=A6]
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
 
 
-Thanks,
 
-Paul
-
---=-kG01WCXd+L4FtqNzecs+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkycdXsACgkQPX1aK2wOHVhL4gCZATNPp9zHEUVfPYdiTIXJkKDj
-fIgAniZKd1Qxc27u9nzhJ/YygnxBguvR
-=EaS1
------END PGP SIGNATURE-----
-
---=-kG01WCXd+L4FtqNzecs+--
