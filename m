@@ -1,41 +1,43 @@
 Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.jrz.cbn>) id 1OzE7l-0000pt-Va
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1OzE7m-0000q7-BK
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 24 Sep 2010 21:40:02 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 3EC038ADD8F
+	by smtp.cbnco.com (Postfix) with ESMTP id AAFE98ADD8E
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 24 Sep 2010 15:39:56 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 15335-10 for <openembedded-devel@lists.openembedded.org>; 
+	with ESMTP id 15335-10-2 for
+	<openembedded-devel@lists.openembedded.org>; 
 	Fri, 24 Sep 2010 15:39:56 -0400 (EDT)
 Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 97FD28ADA12; Fri, 24 Sep 2010 15:39:53 -0400 (EDT)
+	id D2C018ADD87; Fri, 24 Sep 2010 15:39:53 -0400 (EDT)
 Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id D44348ADA12
+	by smtp.cbnco.com (Postfix) with ESMTP id D943C8ADA96
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 24 Sep 2010 15:39:49 -0400 (EDT)
 Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
-	id AB92314097E5; Fri, 24 Sep 2010 15:39:49 -0400 (EDT)
+	id C3E7314097E6; Fri, 24 Sep 2010 15:39:49 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Sep 2010 15:39:46 -0400
-Message-Id: <1285357189-26457-1-git-send-email-msmith@cbnco.com>
+Date: Fri, 24 Sep 2010 15:39:47 -0400
+Message-Id: <1285357189-26457-2-git-send-email-msmith@cbnco.com>
 X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <AANLkTimSLnwKB0XchkPk56QpGDa0ELDoo7X_6OqD5w02@mail.gmail.com>
+In-Reply-To: <1285357189-26457-1-git-send-email-msmith@cbnco.com>
 References: <AANLkTimSLnwKB0XchkPk56QpGDa0ELDoo7X_6OqD5w02@mail.gmail.com>
+	<1285357189-26457-1-git-send-email-msmith@cbnco.com>
 X-Virus-Scanned: amavisd-new at cbnco.com
 X-SA-Exim-Connect-IP: 207.164.182.72
 X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
 	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/4] make 3.82: set DEFAULT_PREFERENCE = "-1"
+Subject: [PATCH 2/4] base.bbclass: add make-native to default dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +53,28 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 24 Sep 2010 19:40:02 -0000
 
-This version has introduced several backwards incompatibilities and some
-packages are known not to build with 3.82. In particular:
-
-- glibc-initial fails in do_install when prefix="".
-- eglibc manual/Makefile has not yet been patched (see 3a06f50f)
+This should work around package incompatibilities with whatever version
+of make is installed on the build system.
 
 Signed-off-by: Michael Smith <msmith@cbnco.com>
 ---
- recipes/make/make_3.82.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ classes/base.bbclass |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/make/make_3.82.bb b/recipes/make/make_3.82.bb
-index 3cdc0a0..86c58d6 100644
---- a/recipes/make/make_3.82.bb
-+++ b/recipes/make/make_3.82.bb
-@@ -1,5 +1,8 @@
- require make.inc
- 
-+# Stock eglibc fails to build with make 3.82.
-+DEFAULT_PREFERENCE = "-1"
-+
- BBCLASSEXTEND = "native"
- SRC_URI[md5sum] = "1a11100f3c63fcf5753818e59d63088f"
- SRC_URI[sha256sum] = "e2c1a73f179c40c71e2fe8abf8a8a0688b8499538512984da4a76958d0402966"
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index b19eb32..60e6bc8 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -71,7 +71,8 @@ def base_deps(d):
+ 	if not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d):
+ 		if (bb.data.getVar('HOST_SYS', d, 1) !=
+ 	     	    bb.data.getVar('BUILD_SYS', d, 1)):
+-			deps += " virtual/${TARGET_PREFIX}gcc virtual/libc "
++			deps += (" virtual/${TARGET_PREFIX}gcc virtual/libc "
++				"make-native")
+ 		elif bb.data.inherits_class('native', d) and \
+ 				bb.data.getVar('PN', d, True) not in \
+ 				("linux-libc-headers-native", "quilt-native",
 -- 
 1.7.0.4
 
