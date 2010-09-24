@@ -1,36 +1,32 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1OzBOl-0005Hv-LT
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OzBlL-0007yV-LI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 18:45:24 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 08BA38ACF11
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 12:45:18 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 13011-07 for <openembedded-devel@lists.openembedded.org>; 
-	Fri, 24 Sep 2010 12:45:17 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 9DE9E5EE750
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 12:45:17 -0400 (EDT)
-Message-ID: <4C9CD59D.30301@cbnco.com>
-Date: Fri, 24 Sep 2010 12:45:17 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+	Fri, 24 Sep 2010 19:08:44 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OzBlD-0003ej-Jk from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 10:08:35 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 24 Sep 2010 19:05:08 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Sep 2010 22:05:50 +0500
+Message-Id: <1285347950-27040-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 24 Sep 2010 17:05:08.0806 (UTC)
+	FILETIME=[A46A7660:01CB5C0A]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Minimum python version - 2.4 or 2.5?
+Subject: [PATCH] qmake-native_1.07a.bb: Converted to new style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,17 +40,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 16:45:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Sep 2010 17:08:45 -0000
 
-Hi,
+* Converted do_stage to do_install.
+* Added NATIVE_INSTALL_WORKS = "1"
+* replaced QMAKE_MKSPEC_PATH (which is defined in bitbake.conf) with ${D}${datadir}/qmake as discussed on irc
+* Bumped PR
 
-What's the minimum Python version requirement for the dev branch? I'd 
-like to use shutil.copytree(), but the behaviour I want was only added 
-in Python 2.5.
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ recipes/qmake/qmake-native_1.07a.bb |   15 +++++++--------
+ 1 files changed, 7 insertions(+), 8 deletions(-)
 
-Thanks,
-Mike
+diff --git a/recipes/qmake/qmake-native_1.07a.bb b/recipes/qmake/qmake-native_1.07a.bb
+index 36efe89..ac87b45 100644
+--- a/recipes/qmake/qmake-native_1.07a.bb
++++ b/recipes/qmake/qmake-native_1.07a.bb
+@@ -3,7 +3,7 @@ PRIORITY = "optional"
+ HOMEPAGE = "http://www.trolltech.com"
+ SECTION = "devel"
+ LICENSE = "GPL QPL"
+-PR = "r5"
++PR = "r6"
+ 
+ QTEVER = "qt-embedded-free-3.3.5"
+ 
+@@ -35,15 +35,14 @@ do_compile() {
+ 	:
+ }
+ 
+-do_stage() {
+-	install -m 0755 bin/qmake ${STAGING_BINDIR}
+-	install -d ${QMAKE_MKSPEC_PATH}
+-	cp -fPR mkspecs/* ${QMAKE_MKSPEC_PATH}
+-}
+-
+ do_install() {
+-        :
++        install -d ${D}${bindir}
++        install -m 0755 bin/qmake ${D}${bindir}
++        install -d ${D}${datadir}/qmake
++        cp -fPR mkspecs/* ${D}${datadir}/qmake
+ }
+ 
+ SRC_URI[md5sum] = "022d7a3c572b554f3c47b12cae71a8a4"
+ SRC_URI[sha256sum] = "a97656796c0ef8e87dd83e6138bc406e31830d08f9b213e039d8be39ea65c8e4"
++
++NATIVE_INSTALL_WORKS = "1"
+-- 
+1.6.3.3
+
 
 
