@@ -1,39 +1,30 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OzEv8-0007F8-BA
-	for openembedded-devel@openembedded.org; Fri, 24 Sep 2010 22:31:03 +0200
-Received: by iwn2 with SMTP id 2so856341iwn.6
-	for <openembedded-devel@openembedded.org>;
-	Fri, 24 Sep 2010 13:30:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=dk49BXLSeyqR4ziaL9Kp6Ae8JgTqkaltTSfRKmZzC2g=;
-	b=mjamX/iF9JI5f2WsExHJETjLqqB+bx4q1DBw/gnWX1n2MkbznXStyYjdO3vnL4Ou+n
-	YE5mhCcNCHroxYhrLxtV/AqzxlyTUmIAwoCEu7rONeaG4IihBn4mdqEd8YuMMV01euLC
-	PshpBsAOWQyzRxMu1GQOb+JIRux/yU8JYt0G8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=X3X9VLbuqDhCrAUk8egxZoqgb8E86dgTXVBnNDNnP4Kz1PKhJ7pjVqe30wrbKhRl+T
-	Akq6K6lgBnXaYZnkwgCf1g7G4rbSAYQYW/xM7PODTTcyYFgyoT3pzeo3aI8O5nrfMC/I
-	MXrUsOHKpACc0+cgHtYbvxwK381h0B7y8c7tk=
+	(envelope-from <holger+oe@freyther.de>) id 1OzFMu-0003vj-2h
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 22:59:45 +0200
+Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
+	[91.64.127.39])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 079E71B10C05
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 21:02:28 +0000 (UTC)
+Message-ID: <4C9D1136.2070507@freyther.de>
+Date: Sat, 25 Sep 2010 04:59:34 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.9) Gecko/20100908 Fedora/3.1.3-1.fc14 Lightning/1.0b2
+	Thunderbird/3.1.3
 MIME-Version: 1.0
-Received: by 10.231.154.75 with SMTP id n11mr4454802ibw.40.1285360254622; Fri,
-	24 Sep 2010 13:30:54 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Fri, 24 Sep 2010 13:30:54 -0700 (PDT)
-Date: Fri, 24 Sep 2010 22:30:54 +0200
-Message-ID: <AANLkTik4OGdeazaQbURbzDS4FSDDLPrrCT43YEQ8YJn2@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: navit svn fetchg issue
+Subject: Qt and detecting iWMMXT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,41 +38,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 20:31:04 -0000
+X-List-Received-Date: Fri, 24 Sep 2010 20:59:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-bumped into this fetch issue with navit
+Hi all,
 
-first did a bitbake -c patch -b navit-icons_svn.bb
-then did a bitbaek -c patch -b navit_svn.bb
+when building for XScale one could pass -iwmmxt to the configure script. Now
+how can a recipe find out if XScale systems are targeted? The closest thing I
+can think of is to look at PACKAGE_ARCH and see if xscale is in it.
 
-That one failed with:
-
-NOTE: Running task 2 of 2 (ID: 0,
-/home/frans/oe/openembedded/recipes/navit/navit_svn.bb, do_fetch)
-NOTE: package navit-1_0.1.99+svnr3535-r8.10: task do_fetch: Started
-NOTE: Update svn://anonymous@navit.svn.sourceforge.net/svnroot/navit/trunk;module=navit;proto=https
-svn: Failed to add directory 'navit': an unversioned directory of the
-same name already exists
-ERROR: Task 0 (/home/frans/oe/openembedded/recipes/navit/navit_svn.bb,
-do_fetch) failed with exit code '1'
-WARNING: /home/frans/oe/bitbake/lib/bb/build.py:49:
-DeprecationWarning: BaseException.message has been deprecated as of
-Python 2.6
-  self.message = name
-
-NOTE: oestats: error sending task, disabling stats
-NOTE: package navit-1_0.1.99+svnr3535-r8.10: task None: Failed
-WARNING: /home/frans/oe/bitbake/lib/bb/build.py:59:
-DeprecationWarning: BaseException.message has been deprecated as of
-Python 2.6
-  msg = self.message
-
-ERROR: Unknown fetch Error: [Errno 2] No such file or directory:
-'/home/frans/oe/downloads/navit_navit.svn.sourceforge.net_.svnroot.navit.trunk_3535_.tar.gz'
-
-Guess there is an issue fetching navit after having fetched navit-icons.
-
-Frans
+Is there a better way?
 
 
