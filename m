@@ -1,42 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OzGUt-0005UW-S6 for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Sep 2010 00:12:04 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OzGUn-0005cQ-Pf for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Sep 2010 00:11:57 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Sep 2010 00:11:57 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1OzHRe-0007Om-4G
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Sep 2010 01:12:46 +0200
+Received: by iwn2 with SMTP id 2so974486iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Sep 2010 00:11:57 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 24 Sep 2010 16:12:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=Trjx/7O2cBZAI8FhIg9V+qevZ0Ymvac3BmFB6+5WxEw=;
+	b=k3dg9Y1hjdMerMC+OAXLcybvePsf/JqfwxBSzMmhyr2BEq6tOZrfL/KPsi4DmSwBW4
+	HZeSR52D2e0YBjKRN2SbTLU1ZFBB3xehQwcIuiDje5ZsoYdwGPqFJqJ9FnjgOyv4gnN0
+	o+bdN0hhylDaK6qQsFzlWtoE8I53OjrirzGII=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=wV1lhnJSqe/FXf7/I/KXudJ80JcX6t1wHpAEHh0PpAyTmJziHQTB/7Vk2d33oerGGW
+	QWzg7vzNaHATu5cvjMde1aHNvvnB5m5wetaCjH/B6CenqekqhRGE53K7YU7yxNTNGo3M
+	Mnj5aDg9hX1fSW9tOEMKchLSmsUjW2nPH44+I=
+Received: by 10.231.33.73 with SMTP id g9mr4270509ibd.117.1285369958536; Fri,
+	24 Sep 2010 16:12:38 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.199.1 with HTTP; Fri, 24 Sep 2010 16:12:18 -0700 (PDT)
+In-Reply-To: <1285365372-13498-1-git-send-email-iwamatsu@nigauri.org>
+References: <1285365372-13498-1-git-send-email-iwamatsu@nigauri.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 24 Sep 2010 16:12:18 -0700
+Message-ID: <AANLkTi=hAYRVMX9xNsPXXiuDC3536An1jX_tFmP1PLf3@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 25 Sep 2010 00:11:50 +0200
-Message-ID: <i7j7n6$u68$1@dough.gmane.org>
-References: <4C9D1136.2070507@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <4C9D1136.2070507@freyther.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Qt and detecting iWMMXT
+Subject: Re: [PATCH v2] machine/sh7785lcr: Add new machine for Renesas SH7785 reference board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,40 +52,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 22:12:04 -0000
+X-List-Received-Date: Fri, 24 Sep 2010 23:12:47 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, Sep 24, 2010 at 2:56 PM, Nobuhiro Iwamatsu <iwamatsu@nigauri.org> w=
+rote:
+> * Machine config for Renesas SH7785 reference board.
+> * Add kernel config for 2.6.32 and 35.
+>
+> Signed-off-by: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> ---
+> =C2=A0conf/machine/include/tune-sh4.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A02 +
+> =C2=A0conf/machine/sh7785lcr.conf =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 20 +
+> =C2=A0recipes/linux/linux-2.6.32/sh7785lcr/defconfig | 1833 +++++++++++++=
++++++++++
+> =C2=A0recipes/linux/linux-2.6.35/sh7785lcr/defconfig | 1927 +++++++++++++=
++++++++++++
+> =C2=A0recipes/linux/linux_2.6.32.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A01 +
+> =C2=A0recipes/linux/linux_2.6.35.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A01 +
+> =C2=A06 files changed, 3784 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 conf/machine/sh7785lcr.conf
+> =C2=A0create mode 100644 recipes/linux/linux-2.6.32/sh7785lcr/defconfig
+> =C2=A0create mode 100644 recipes/linux/linux-2.6.35/sh7785lcr/defconfig
+>
+> diff --git a/conf/machine/include/tune-sh4.inc b/conf/machine/include/tun=
+e-sh4.inc
+> index 5d43e41..56c75a8 100644
+> --- a/conf/machine/include/tune-sh4.inc
+> +++ b/conf/machine/include/tune-sh4.inc
+> @@ -1,3 +1,5 @@
+> +# If you want to optimize to sh4a, you need to change
+> +# from -m4 to m4a.
+> =C2=A0TARGET_CC_ARCH =3D "-ml -m4"
+> =C2=A0FEED_ARCH =3D "sh4"
+> =C2=A0BASE_PACKAGE_ARCH =3D "sh4"
 
-On 24-09-10 22:59, Holger Freyther wrote:
-> Hi all,
-> 
-> when building for XScale one could pass -iwmmxt to the configure script. Now
-> how can a recipe find out if XScale systems are targeted? The closest thing I
-> can think of is to look at PACKAGE_ARCH and see if xscale is in it.
+you could add another tune file for sh4a called
+tune-sh4a.inc and include that for appropriate
+machines. rest of patch looks good to me.
 
-Adapted from the mplayer magic Graeme and I came up with some years ago:
-
-#build with support for the iwmmxt instruction (pxa270 and up)
-MY_ARCH := "${PACKAGE_ARCH}"
-PACKAGE_ARCH = "${@base_contains('MACHINE_FEATURES', 'iwmmxt', 'iwmmxt',
-'${MY_ARCH}',d)}"
-
-QT_CONFIG_FLAGS_append = " ${@base_contains('MACHINE_FEATURES',
-'iwmmxt', ' -iwmmxt', '',d)} "
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMnSIlMkyGM64RGpERAumBAKCU8rfNBZ7GTmSgJwgKZ25iWom2xwCgt6hF
-T3hkQK3OSWktYh6IYsUghmE=
-=odW5
------END PGP SIGNATURE-----
-
+Thx
+-Khem
 
 
