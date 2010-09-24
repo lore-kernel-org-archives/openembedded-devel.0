@@ -1,27 +1,46 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oz35C-0007m0-7s for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 09:52:39 +0200
-Received: from f053038003.adsl.alicedsl.de ([78.53.38.3] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oz356-00044a-KB for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 07:52:32 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1Oz3CX-0008KC-VN
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 10:00:14 +0200
+Received: by bwz2 with SMTP id 2so1869000bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 01:00:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=oklLa7CHhtVDJ6mi1qGvKv6fR+XMM+e3sXHzHNPa5oU=;
+	b=vYmHpvyj4bO6DAm6sWjPE06miwP5DqmFsafyqMj4nGJ/fc2+zi+uqPAmiKrZVEc9V8
+	k6KxZ15lLxsKwQM8hWCmNDCpvC/xa4lPZeCQW8l3CgEt0rVN3hI98B7yuB03Qf46rRok
+	Loe3DSGR4gDT+X/xJCGhynXXI/FCE/C25JV3M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=nQ4n4ihz6Nin5F9Dh0SdC9TuhDpbVmvO/wuDHjQyU9v4cazeC8AhQ1CafHdoh0Z5kx
+	3VlxFRfj6SFgN3I5W3uNlmWsiliY3H/QkHkurhUYaph91C4PDd4EV8Peh0SCx4cv9XJK
+	zAPjvBQRS7GoDtNRbm6moFLsbGfACM8Q6di1Q=
+Received: by 10.204.84.92 with SMTP id i28mr1895233bkl.57.1285315208909;
+	Fri, 24 Sep 2010 01:00:08 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id d27sm1360273bku.22.2010.09.24.01.00.07
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 24 Sep 2010 01:00:07 -0700 (PDT)
+Date: Fri, 24 Sep 2010 10:00:06 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinzRQGe9CLG_n5g0sFG0NDdZBdU2RSL9KjgzokP@mail.gmail.com>
+Message-ID: <20100924080006.GB3312@jama>
 References: <AANLkTinzRQGe9CLG_n5g0sFG0NDdZBdU2RSL9KjgzokP@mail.gmail.com>
-Date: Fri, 24 Sep 2010 09:52:30 +0200
-Message-ID: <1285314751.3715.5.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	<1285314751.3715.5.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1285314751.3715.5.camel@mattotaupa>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: git error ?
@@ -38,70 +57,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 07:52:39 -0000
-X-Groupsio-MsgNum: 23922
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-0ClVzcNwQapRUzBugFJj"
+X-List-Received-Date: Fri, 24 Sep 2010 08:00:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-0ClVzcNwQapRUzBugFJj
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Fri, Sep 24, 2010 at 09:52:30AM +0200, Paul Menzel wrote:
+> Am Donnerstag, den 23.09.2010, 22:11 +0200 schrieb Frans Meulenbroeks:
+> > Hm,
+> > 
+> > On my latest git push I got:
+> > 
+> > frans@linux-suse:~/oe/openembedded> git push
+> > Counting objects: 13, done.
+> > Delta compression using up to 2 threads.
+> > Compressing objects: 100% (7/7), done.
+> > Writing objects: 100% (8/8), 649 bytes, done.
+> > Total 8 (delta 6), reused 0 (delta 0)
+> > error: unable to create temporary sha1 filename : Read-only file system
+> > 
+> > fatal: failed to write object
+> > error: unpack failed: unpack-objects abnormal exit
+> > To git@git.openembedded.org:openembedded
+> >  ! [remote rejected] org.openembedded.dev -> org.openembedded.dev (n/a
+> > (unpacker error))
+> > error: failed to push some refs to 'git@git.openembedded.org:openembedded'
+> > 
+> > 
+> > No idea what is going on here, guess it is at the git side. My fs is not r/o
+> 
+> I just wanted confirm, that you are not alone with this Git server
+> problem. I am getting the same error as some weeks ago [1].
+> 
+>         $ git remote update
+>         Fetching origin
+>         git.openembedded.org[0: 140.211.169.165]: errno=Connection refused
+>         fatal: unable to connect a socket (Connection refused)
+>         error: Could not fetch origin
 
-Am Donnerstag, den 23.09.2010, 22:11 +0200 schrieb Frans Meulenbroeks:
-> Hm,
->=20
-> On my latest git push I got:
->=20
-> frans@linux-suse:~/oe/openembedded> git push
-> Counting objects: 13, done.
-> Delta compression using up to 2 threads.
-> Compressing objects: 100% (7/7), done.
-> Writing objects: 100% (8/8), 649 bytes, done.
-> Total 8 (delta 6), reused 0 (delta 0)
-> error: unable to create temporary sha1 filename : Read-only file system
->=20
-> fatal: failed to write object
-> error: unpack failed: unpack-objects abnormal exit
-> To git@git.openembedded.org:openembedded
->  ! [remote rejected] org.openembedded.dev -> org.openembedded.dev (n/a
-> (unpacker error))
-> error: failed to push some refs to 'git@git.openembedded.org:openembedded=
-'
->=20
->=20
-> No idea what is going on here, guess it is at the git side. My fs is not =
-r/o
+I can confirm
+git+ssh:// works
+but other protocols doesn't seem to work this morning
 
-I just wanted confirm, that you are not alone with this Git server
-problem. I am getting the same error as some weeks ago [1].
-
-        $ git remote update
-        Fetching origin
-        git.openembedded.org[0: 140.211.169.165]: errno=3DConnection refuse=
-d
-        fatal: unable to connect a socket (Connection refused)
-        error: Could not fetch origin
-
-
-Thanks,
-
-Paul
+Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-September/=
-023730.html
-
---=-0ClVzcNwQapRUzBugFJj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkycWLMACgkQPX1aK2wOHVgC1wCfVARhQbrnsd6MbIFCbbWqQguL
-1MgAmwTISdmi+enaQgE1sXsSi0c+W6HZ
-=DJUR
------END PGP SIGNATURE-----
-
---=-0ClVzcNwQapRUzBugFJj--
