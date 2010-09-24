@@ -1,45 +1,33 @@
 Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.jrz.cbn>) id 1OzE7m-0000qE-LT
+	(envelope-from <msmith@cbnco.com>) id 1OzEme-0003wo-IY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 21:40:03 +0200
+	Fri, 24 Sep 2010 22:22:18 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 0F5068ADA96
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 15:39:57 -0400 (EDT)
+	by smtp.cbnco.com (Postfix) with ESMTP id D29E68AC630;
+	Fri, 24 Sep 2010 16:22:10 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 15335-10-3 for
-	<openembedded-devel@lists.openembedded.org>; 
-	Fri, 24 Sep 2010 15:39:56 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 6F6488ADD76; Fri, 24 Sep 2010 15:39:55 -0400 (EDT)
-Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id EAE8C8ADCE1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 15:39:49 -0400 (EDT)
-Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
-	id E49FC14097E8; Fri, 24 Sep 2010 15:39:49 -0400 (EDT)
+	with ESMTP id 23099-01; Fri, 24 Sep 2010 16:22:10 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 99654681317;
+	Fri, 24 Sep 2010 16:22:10 -0400 (EDT)
+Message-ID: <4C9D0872.5060404@cbnco.com>
+Date: Fri, 24 Sep 2010 16:22:10 -0400
 From: Michael Smith <msmith@cbnco.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Sep 2010 15:39:49 -0400
-Message-Id: <1285357189-26457-4-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1285357189-26457-3-git-send-email-msmith@cbnco.com>
-References: <AANLkTimSLnwKB0XchkPk56QpGDa0ELDoo7X_6OqD5w02@mail.gmail.com>
-	<1285357189-26457-1-git-send-email-msmith@cbnco.com>
-	<1285357189-26457-2-git-send-email-msmith@cbnco.com>
-	<1285357189-26457-3-git-send-email-msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Virus-Scanned: amavisd-new at cbnco.com
 X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
-	SPF_HELO_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 4/4] eglibc, eglibc-initial: depend on make-native
+Subject: nano RRECOMMENDS ncurses-terminfo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,45 +41,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 19:40:03 -0000
+X-List-Received-Date: Fri, 24 Sep 2010 20:22:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-In case the version of make installed on the build host is incompatible,
-we'll use make-native.
+Hi,
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/eglibc/eglibc-initial.inc |    2 +-
- recipes/eglibc/eglibc.inc         |    4 +++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+Since 37df6011, nano recommends ncurses-terminfo.
 
-diff --git a/recipes/eglibc/eglibc-initial.inc b/recipes/eglibc/eglibc-initial.inc
-index eb765df..4384ed4 100644
---- a/recipes/eglibc/eglibc-initial.inc
-+++ b/recipes/eglibc/eglibc-initial.inc
-@@ -1,5 +1,5 @@
- SECTION = "libs"
--DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial"
-+DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial make-native"
- PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
- 
- PACKAGES = ""
-diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
-index 66bb90e..78e03c4 100644
---- a/recipes/eglibc/eglibc.inc
-+++ b/recipes/eglibc/eglibc.inc
-@@ -5,7 +5,9 @@ PRIORITY = "required"
- LICENSE = "LGPL"
- INC_PR = "r11"
- # nptl needs unwind support in gcc, which can't be built without glibc.
--DEPENDS = "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-headers"
-+DEPENDS = "virtual/${TARGET_PREFIX}gcc-intermediate \
-+		linux-libc-headers \
-+		make-native"
- #this leads to circular deps, so lets not add it yet
- #RDEPENDS_ldd += " bash"
- # nptl needs libgcc but dlopens it, so our shlibs code doesn't detect this
--- 
-1.7.0.4
++# actually RDEPENDS, but ncurses-terminfo is only in ncurses-5.7, so 
+RRECOMMENDS for now
++RRECOMMENDS_${PN} = "ncurses-terminfo"
 
+ncurses-terminfo exists in 5.4: it contains 2.4 MB of terminfo data 
+files that is just bloat for most people. (Then again, you could say 
+nano is also just bloat. :) The base ncurses-5.4 package includes some 
+common terminfo files in /etc/terminfo.
+
+So for me, with ncurses 5.4, nano shouldn't depend on or recommend 
+ncurses-terminfo - it just bloats up the image.
+
+Is there something special in ncurses-terminfo 5.7 that nano needs?
+
+Thanks,
+Mike
 
 
