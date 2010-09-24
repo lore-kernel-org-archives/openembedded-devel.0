@@ -1,29 +1,39 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1Oz7cc-0002KO-Nm
+	(envelope-from <philb@gnu.org>) id 1Oz7ok-0007mT-5d
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 14:43:37 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id C07391660839; Fri, 24 Sep 2010 06:43:17 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 57AF31660833;
-	Fri, 24 Sep 2010 06:43:17 -0600 (MDT)
-Message-ID: <4C9C9CE5.80404@mlbassoc.com>
-Date: Fri, 24 Sep 2010 06:43:17 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
-MIME-Version: 1.0
-To: Poky <poky@o-hand.com>, openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+	Fri, 24 Sep 2010 14:55:58 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Oz7oe-0003J6-HD
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 13:55:52 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1Oz7oe-00042r-9b
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 13:55:52 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTi=41Y_wwKR1czvr5XW-7xZSpwg1J2-vQ5sKStRQ@mail.gmail.com>
+References: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
+	<AANLkTi=45dASvU5XiCia4o2bia-Zx38neVw8vK6Qvrx-@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310E1558D@dlee06.ent.ti.com>
+	<AANLkTi=41Y_wwKR1czvr5XW-7xZSpwg1J2-vQ5sKStRQ@mail.gmail.com>
+Date: Fri, 24 Sep 2010 13:55:52 +0100
+Message-ID: <1285332952.1649.199.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: pkg-config confusion
+Subject: Re: Question about automake licensing in recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,47 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 12:44:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 24 Sep 2010 12:55:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-I'm trying to update the gstreamer plugin recipes to use the
-latest released packages.  This is causing some problems though
-as with the newest code, the wrong version of ORCC is being used.
+On Fri, 2010-09-24 at 21:38 +0930, Graham Gower wrote:
+> Basically, automake have to contact all their contributors to allow
+> their GPLv2 code to be distributed under GPLv3. Or they have to pull
+> the GPLv3 code out.
 
-I've traced this down to the fact that previous releases just
-inferred ORCC=orcc which worked correctly and picked up the
-cross-tool compiler (in sysroots/i686-linux/... etc)
+If automake has followed the usual GNU conventions then all the
+contributors will have assigned copyright of their code to the FSF
+anyway.  In that case, the FSF can (being the copyright holder)
+unilaterally decide what licence it should be distributed under.
 
-However, the new releases have a fancy M4 macro plus some command
-line magic for using ORCC.  This falls apart because of these
-lines:
-       ORCC=`$PKG_CONFIG --variable=orcc orc-0.4`
+If they haven't done that then, yeah, they would probably need the
+permission of the original authors to change the licensing.
 
-Looking into this at configure time, I see that there is some confusion
+p.
 
-ORCC=/usr/bin/orcc, PKG_CONFIG=/home/local/p69_poky/tmp/sysroots/i686-linux/usr/bin/pkg-config => /home/local/p69_poky/tmp/sysroots/i686-linux/usr/bin/pkg-config
-PKG_CONFIG_DISABLE_UNINSTALLED=yes
-PKG_CONFIG_SYSROOT_DIR=/home/local/p69_poky/tmp/sysroots/armv7a-poky-linux-gnueabi
-PKG_CONFIG_DIR=/home/local/p69_poky/tmp/sysroots/armv7a-poky-linux-gnueabi/usr/lib/pkgconfig
-PKG_CONFIG_LIBDIR=/home/local/p69_poky/tmp/sysroots/armv7a-poky-linux-gnueabi/usr/lib/pkgconfig
-PKG_CONFIG_PATH=/home/local/p69_poky/tmp/sysroots/armv7a-poky-linux-gnueabi/usr/lib/pkgconfig:/home/local/p69_poky/tmp/sysroots/armv7a-poky-linux-gnueabi/usr/share/pkgconfig
 
-So, it looks like bitbake is trying to run pkg-config using the
-native version, but with the installed target databases.  This
-in turn has it pick up the target version of ORCC, not the cross
-version.
-
-How can I convince it otherwise?
-
-n.b. I think this same problem exists elsewhere as I've seen it
-try to use the wrong version of the pygobject compiler which is
-handled similarly.
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
 
 
