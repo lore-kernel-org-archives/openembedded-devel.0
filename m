@@ -1,39 +1,40 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Oz2Ce-0004aQ-8A
+	(envelope-from <graham.gower@gmail.com>) id 1Oz2D7-0004hw-94
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 08:56:19 +0200
-Received: by pxi11 with SMTP id 11so741812pxi.6
+	Fri, 24 Sep 2010 08:56:47 +0200
+Received: by pzk37 with SMTP id 37so559861pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Sep 2010 23:56:08 -0700 (PDT)
+	Thu, 23 Sep 2010 23:56:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:content-type
 	:content-transfer-encoding;
-	bh=NoM6VP89ZV2BEFTHUkok2f5SaFQoj7BjWj/3I+6l97s=;
-	b=NlD5J0sq1b0MpNgXhEzhDSrmut4wpw5PsFvPAJac7seOnMhp61ag+KG4XLaGxXKjja
-	RG4M0xH7XHokdeUx1XeMqYYDUSlBkLWLmizCfYRP4O5n21Fx02pxwAGKXZg0KQujactr
-	xgMklVTfk4oCPGYCqxgw3atjtRGNSR/mrCF9k=
+	bh=6/bZcBkrcGWaZ0MRClbGonKqcVdZLATTDHWMIiSSSdk=;
+	b=dxmDvSdXHNkseS9IUuh/HG5bcCJ+eRpxVwBniKItPaNlOkxwxnJ685qgr3w51qofwQ
+	VnB4FCSi2WutXFxASAXhGiUZDvTG0oy0taJTGf0lvp4ldDE+ZB83sdxiCchhkVOhE3Ph
+	lRunB3dyvXxN3fWHAU032T88FM2i6JhLX3PMw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject
 	:content-type:content-transfer-encoding;
-	b=G+lZe2LkNEF/bCtK7KgvuOaMKbgF/1abTX3ucIFUTquKr3frAl30hH+WigcNI6ALLJ
-	cgmeqbVN9JshZUzAZ6NqhzZOOSmoqPoJEbMR67nN3+IV6OfuSUwTMIhQTtbYJ4zZikrn
-	PZbJdi3BugRkdxVEzxpIdK6BF8VHpbjfpIP9g=
-Received: by 10.114.80.10 with SMTP id d10mr3046685wab.180.1285311368786;
-	Thu, 23 Sep 2010 23:56:08 -0700 (PDT)
+	b=SymTdKcBThuSOCFW72Za+fY2otqkuzFkJRp6Y4FZbOLq7djoRRJGwXaifXhj0lgUGm
+	gtxxoXEevmmlcSIutm9qoGKadf5Mnh+CDZPGcXG4SxeVTu1R1sBwJbnREKG2DwZL1s8L
+	s0NdQTC/dc0wlRXZhNYmz7QXHunAt1GcQG1Iw=
+Received: by 10.114.39.7 with SMTP id m7mr3045260wam.201.1285311397937;
+	Thu, 23 Sep 2010 23:56:37 -0700 (PDT)
 Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id x9sm2956802waj.3.2010.09.23.23.56.05
+	by mx.google.com with ESMTPS id
+	c24sm2950786wam.19.2010.09.23.23.56.35
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 23 Sep 2010 23:56:07 -0700 (PDT)
-Message-ID: <4C9C4B81.8010700@gmail.com>
-Date: Fri, 24 Sep 2010 16:26:01 +0930
+	Thu, 23 Sep 2010 23:56:37 -0700 (PDT)
+Message-ID: <4C9C4BA0.2090200@gmail.com>
+Date: Fri, 24 Sep 2010 16:26:32 +0930
 From: Graham Gower <graham.gower@gmail.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 209.85.210.47
 X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -41,7 +42,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] firefox_3.6.8.bb: Add mipsel support.
+Subject: [PATCH] gtk+_2.20.1.bb: Fix build with --disable-xkb.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,534 +56,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 06:56:19 -0000
+X-List-Received-Date: Fri, 24 Sep 2010 06:56:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Patches taken from Gentoo and Debian.
-
-Runs almost acceptably on my 350mhz/128mb mipsel, after a lengthy
-startup delay. Should work for big endian mips without much more
-work, but I can't test.
+See https://bugzilla.gnome.org/show_bug.cgi?id=619114
 
 Signed-off-by: Graham Gower <graham.gower@gmail.com>
 ---
- ...nvoke-and-xptstubs-on-mips-o32-big-endian.patch |   81 ++++++++
- ...ncrease-stability-and-performance-on-mips.patch |   50 +++++
- recipes/mozilla/files/mips-disable-TLS.patch       |   12 ++
- recipes/mozilla/files/mipsel/jsautocfg.h           |   54 +++++
- .../files/xulrunner-1.9.2.8-mips-bus-error.patch   |   26 +++
- .../mozilla/files/xulrunner-chromium-mips.patch    |  208 ++++++++++++++++++++
- recipes/mozilla/firefox_3.6.8.bb                   |    9 +-
- 7 files changed, 438 insertions(+), 2 deletions(-)
- create mode 100644 recipes/mozilla/files/Fix-xptinvoke-and-xptstubs-on-mips-o32-big-endian.patch
- create mode 100644 recipes/mozilla/files/Increase-stability-and-performance-on-mips.patch
- create mode 100644 recipes/mozilla/files/mips-disable-TLS.patch
- create mode 100644 recipes/mozilla/files/mipsel/jsautocfg.h
- create mode 100644 recipes/mozilla/files/xulrunner-1.9.2.8-mips-bus-error.patch
- create mode 100644 recipes/mozilla/files/xulrunner-chromium-mips.patch
+ recipes/gtk+/files/xkb-ifdef.patch |   24 ++++++++++++++++++++++++
+ recipes/gtk+/gtk+_2.20.1.bb        |    1 +
+ 2 files changed, 25 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/gtk+/files/xkb-ifdef.patch
 
-diff --git a/recipes/mozilla/files/Fix-xptinvoke-and-xptstubs-on-mips-o32-big-endian.patch b/recipes/mozilla/files/Fix-xptinvoke-and-xptstubs-on-mips-o32-big-endian.patch
+diff --git a/recipes/gtk+/files/xkb-ifdef.patch b/recipes/gtk+/files/xkb-ifdef.patch
 new file mode 100644
-index 0000000..d373bdd
+index 0000000..b74d9c9
 --- /dev/null
-+++ b/recipes/mozilla/files/Fix-xptinvoke-and-xptstubs-on-mips-o32-big-endian.patch
-@@ -0,0 +1,81 @@
-+From: Mike Hommey <mh@glandium.org>
-+Date: Sun, 14 Feb 2010 14:42:19 +0100
-+Subject: Fix xptinvoke and xptstubs on mips o32 big endian
++++ b/recipes/gtk+/files/xkb-ifdef.patch
+@@ -0,0 +1,24 @@
++commit eff1fe2500f07fa2b4683ff52fe92e39e6487b05
++Author: Matthias Clasen <mclasen@redhat.com>
++Date:   Fri May 21 12:13:05 2010 -0400
 +
-+---
-+ .../xptcall/src/md/unix/xptcinvoke_mips.cpp        |   10 +++++++++
-+ .../reflect/xptcall/src/md/unix/xptcstubs_mips.cpp |   21 ++++++++++++++++++-
-+ 2 files changed, 29 insertions(+), 2 deletions(-)
++    Make the !xkb build survive a little longer
++    
++    This fixes bug 619114.
 +
-+diff --git a/xpcom/reflect/xptcall/src/md/unix/xptcinvoke_mips.cpp b/xpcom/reflect/xptcall/src/md/unix/xptcinvoke_mips.cpp
-+index 2c27a26..b2f0da7 100644
-+--- a/xpcom/reflect/xptcall/src/md/unix/xptcinvoke_mips.cpp
-++++ b/xpcom/reflect/xptcall/src/md/unix/xptcinvoke_mips.cpp
-+@@ -92,18 +92,28 @@ invoke_copy_to_stack(PRUint32* d, PRUint32 paramCount,
++diff --git a/gdk/x11/gdkdisplay-x11.c b/gdk/x11/gdkdisplay-x11.c
++index c0cbc99..6cded79 100644
++--- a/gdk/x11/gdkdisplay-x11.c
+++++ b/gdk/x11/gdkdisplay-x11.c
++@@ -690,7 +690,11 @@ gdk_display_beep (GdkDisplay *display)
++ {
++   g_return_if_fail (GDK_IS_DISPLAY (display));
 + 
-+         switch(s->type)
-+         {
-++        case nsXPTType::T_I8     : *d = (PRUint32) s->val.i8;   break;
-++        case nsXPTType::T_I16    : *d = (PRUint32) s->val.i16;  break;
-++        case nsXPTType::T_I32    : *d = (PRUint32) s->val.i32;  break;
-+         case nsXPTType::T_I64    :
-+             if ((PRWord)d & 4) d++;
-+             *((PRInt64*) d)  = s->val.i64;    d++;
-+             break;
-++        case nsXPTType::T_U8     : *d = (PRUint32) s->val.u8;   break;
-++        case nsXPTType::T_U16    : *d = (PRUint32) s->val.u16;  break;
-++        case nsXPTType::T_U32    : *d = (PRUint32) s->val.u32;  break;
-+         case nsXPTType::T_U64    :
-+             if ((PRWord)d & 4) d++;
-+             *((PRUint64*) d) = s->val.u64;    d++;
-+             break;
-++        case nsXPTType::T_FLOAT  : *((float*)   d) = s->val.f;  break;
-+         case nsXPTType::T_DOUBLE :
-+             if ((PRWord)d & 4) d++;
-+             *((double*)   d) = s->val.d;      d++;
-+             break;
-++        case nsXPTType::T_BOOL   : *d = (PRBool)  s->val.b;     break;
-++        case nsXPTType::T_CHAR   : *d = (char)    s->val.c;     break;
-++        case nsXPTType::T_WCHAR  : *d = (wchar_t) s->val.wc;    break;
-+         default:
-+             *((void**)d) = s->val.p;
-+             break;
-+diff --git a/xpcom/reflect/xptcall/src/md/unix/xptcstubs_mips.cpp b/xpcom/reflect/xptcall/src/md/unix/xptcstubs_mips.cpp
-+index bdce59c..730ab5d 100644
-+--- a/xpcom/reflect/xptcall/src/md/unix/xptcstubs_mips.cpp
-++++ b/xpcom/reflect/xptcall/src/md/unix/xptcstubs_mips.cpp
-+@@ -87,8 +87,6 @@ PrepareAndDispatch(nsXPTCStubBase* self, PRUint32 methodIndex, PRUint32* args)
-+             continue;
-+         }
-+ 
-+-        dp->val.p = (void*) *ap;
-+-
-+         switch(type)
-+         {
-+         case nsXPTType::T_I64   :
-+@@ -103,6 +101,25 @@ PrepareAndDispatch(nsXPTCStubBase* self, PRUint32 methodIndex, PRUint32* args)
-+             if ((PRWord)ap & 4) ap++;
-+             dp->val.d   = *((double*) ap);  ap++;
-+             break;
-++#ifdef IS_LITTLE_ENDIAN
-++        default:
-++            dp->val.p = (void*) *ap;
-++            break;
+++#ifdef HAVE_XKB
++   XkbBell (GDK_DISPLAY_XDISPLAY (display), None, 0, None);
 ++#else
-++        case nsXPTType::T_I8    : dp->val.i8  = (PRInt8)   *ap; break;
-++        case nsXPTType::T_I16   : dp->val.i16 = (PRInt16)  *ap; break;
-++        case nsXPTType::T_I32   : dp->val.i32 = (PRInt32)  *ap; break;
-++        case nsXPTType::T_U8    : dp->val.u8  = (PRUint8)  *ap; break;
-++        case nsXPTType::T_U16   : dp->val.u16 = (PRUint16) *ap; break;
-++        case nsXPTType::T_U32   : dp->val.u32 = (PRUint32) *ap; break;
-++        case nsXPTType::T_BOOL  : dp->val.b   = (PRBool)   *ap; break;
-++        case nsXPTType::T_CHAR  : dp->val.c   = (char)     *ap; break;
-++        case nsXPTType::T_WCHAR : dp->val.wc  = (wchar_t)  *ap; break;
-++        case nsXPTType::T_FLOAT : dp->val.f   = *(float *)  ap; break;
-++        default:
-++            NS_ASSERTION(0, "bad type");
-++            break;
+++  XBell (GDK_DISPLAY_XDISPLAY (display), 0);
 ++#endif
-+         }
-+     }
-+ 
-diff --git a/recipes/mozilla/files/Increase-stability-and-performance-on-mips.patch b/recipes/mozilla/files/Increase-stability-and-performance-on-mips.patch
-new file mode 100644
-index 0000000..34bcbd9
---- /dev/null
-+++ b/recipes/mozilla/files/Increase-stability-and-performance-on-mips.patch
-@@ -0,0 +1,50 @@
-+From: Mike Hommey <glandium@debian.org>
-+Date: Sat, 8 Dec 2007 17:34:10 +0100
-+Subject: Increase stability and performance on mips
-+
-+http://bugs.debian.org/374389
-+---
-+ config/rules.mk        |    9 ---------
-+ js/src/config/rules.mk |    9 ---------
-+ 2 files changed, 0 insertions(+), 18 deletions(-)
-+
-+diff --git a/config/rules.mk b/config/rules.mk
-+index 6b8eda3..d5789dd 100644
-+--- a/config/rules.mk
-++++ b/config/rules.mk
-+@@ -606,15 +606,6 @@ endif
-+ endif
-+ endif
-+ 
-+-ifeq ($(OS_ARCH),Linux)
-+-ifneq (,$(filter mips mipsel,$(OS_TEST)))
-+-ifeq ($(MODULE),layout)
-+-OS_CFLAGS += -Wa,-xgot
-+-OS_CXXFLAGS += -Wa,-xgot
-+-endif
-+-endif
-+-endif
-+-
-+ #
-+ # HP-UXBeOS specific section: for COMPONENTS only, add -Bsymbolic flag
-+ # which uses internal symbols first
-+diff --git a/js/src/config/rules.mk b/js/src/config/rules.mk
-+index 6b8eda3..d5789dd 100644
-+--- a/js/src/config/rules.mk
-++++ b/js/src/config/rules.mk
-+@@ -606,15 +606,6 @@ endif
-+ endif
-+ endif
-+ 
-+-ifeq ($(OS_ARCH),Linux)
-+-ifneq (,$(filter mips mipsel,$(OS_TEST)))
-+-ifeq ($(MODULE),layout)
-+-OS_CFLAGS += -Wa,-xgot
-+-OS_CXXFLAGS += -Wa,-xgot
-+-endif
-+-endif
-+-endif
-+-
-+ #
-+ # HP-UXBeOS specific section: for COMPONENTS only, add -Bsymbolic flag
-+ # which uses internal symbols first
-diff --git a/recipes/mozilla/files/mips-disable-TLS.patch b/recipes/mozilla/files/mips-disable-TLS.patch
-new file mode 100644
-index 0000000..9ed50b2
---- /dev/null
-+++ b/recipes/mozilla/files/mips-disable-TLS.patch
-@@ -0,0 +1,12 @@
-+# See https://bugzilla.mozilla.org/show_bug.cgi?id=528687
-+# The bug report's configure.in patch not usable as we dont autoconf.
-+--- mozilla-1.9.2/configure.orig	2010-09-24 10:18:43.000000000 +0930
-++++ mozilla-1.9.2/configure	2010-09-24 10:19:47.000000000 +0930
-+@@ -12659,6 +12659,7 @@
-+ rm -f conftest*
-+ fi
-+ 
-++ac_cv_thread_keyword=no
-+ echo "$ac_t""$ac_cv_thread_keyword" 1>&6
-+ LDFLAGS=$_SAVE_LDFLAGS
-+ if test "$ac_cv_thread_keyword" = yes; then
-diff --git a/recipes/mozilla/files/mipsel/jsautocfg.h b/recipes/mozilla/files/mipsel/jsautocfg.h
-new file mode 100644
-index 0000000..e9d37de
---- /dev/null
-+++ b/recipes/mozilla/files/mipsel/jsautocfg.h
-@@ -0,0 +1,54 @@
-+#ifndef js_cpucfg___
-+#define js_cpucfg___
-+
-+/* AUTOMATICALLY GENERATED - DO NOT EDIT, unless you are an OE dev :) */
-+
-+#define IS_LITTLE_ENDIAN 1
-+#undef  IS_BIG_ENDIAN
-+
-+#define JS_BYTES_PER_BYTE   1L
-+#define JS_BYTES_PER_SHORT  2L
-+#define JS_BYTES_PER_INT    4L
-+#define JS_BYTES_PER_INT64  8L
-+#define JS_BYTES_PER_LONG   4L
-+#define JS_BYTES_PER_FLOAT  4L
-+#define JS_BYTES_PER_DOUBLE 8L
-+#define JS_BYTES_PER_WORD   4L
-+#define JS_BYTES_PER_DWORD  8L
-+
-+#define JS_BITS_PER_BYTE    8L
-+#define JS_BITS_PER_SHORT   16L
-+#define JS_BITS_PER_INT     32L
-+#define JS_BITS_PER_INT64   64L
-+#define JS_BITS_PER_LONG    32L
-+#define JS_BITS_PER_FLOAT   32L
-+#define JS_BITS_PER_DOUBLE  64L
-+#define JS_BITS_PER_WORD    32L
-+
-+#define JS_BITS_PER_BYTE_LOG2   3L
-+#define JS_BITS_PER_SHORT_LOG2  4L
-+#define JS_BITS_PER_INT_LOG2    5L
-+#define JS_BITS_PER_INT64_LOG2  6L
-+#define JS_BITS_PER_LONG_LOG2   5L
-+#define JS_BITS_PER_FLOAT_LOG2  5L
-+#define JS_BITS_PER_DOUBLE_LOG2 6L
-+#define JS_BITS_PER_WORD_LOG2   5L
-+
-+#define JS_ALIGN_OF_SHORT   2L
-+#define JS_ALIGN_OF_INT     4L
-+#define JS_ALIGN_OF_LONG    4L
-+#define JS_ALIGN_OF_INT64   8L
-+#define JS_ALIGN_OF_FLOAT   4L
-+#define JS_ALIGN_OF_DOUBLE  8L
-+#define JS_ALIGN_OF_POINTER 4L
-+#define JS_ALIGN_OF_WORD    4L
-+
-+#define JS_BYTES_PER_WORD_LOG2   2L
-+#define JS_BYTES_PER_DWORD_LOG2  3L
-+#define JS_WORDS_PER_DWORD_LOG2  1L
-+
-+#define JS_STACK_GROWTH_DIRECTION (-1)
-+
-+#define JS_HAVE_LONG_LONG
-+
-+#endif /* js_cpucfg___ */
-diff --git a/recipes/mozilla/files/xulrunner-1.9.2.8-mips-bus-error.patch b/recipes/mozilla/files/xulrunner-1.9.2.8-mips-bus-error.patch
-new file mode 100644
-index 0000000..05dcd5d
---- /dev/null
-+++ b/recipes/mozilla/files/xulrunner-1.9.2.8-mips-bus-error.patch
-@@ -0,0 +1,26 @@
-+From:
-+http://gentoo-overlays.zugaina.org/loongson/portage/net-libs/xulrunner/files/xulrunner-1.9.2.8-mips-bus-error.patch
-+--- ./xpcom/glue/nsTArray.h.orig	2009-04-26 01:21:58.000000000 +0800
-++++ ./xpcom/glue/nsTArray.h	2009-04-26 01:21:33.000000000 +0800
-+@@ -168,6 +168,7 @@
-+ 
-+     // The array's elements (prefixed with a Header).  This pointer is never
-+     // null.  If the array is empty, then this will point to sEmptyHdr.
-++    void   *padding;
-+     Header *mHdr;
-+ };
-+
-+diff --git a/layout/svg/base/src/nsSVGGlyphFrame.cpp b/layout/svg/base/src/nsSVGGlyphFrame.cpp
-+index 6d452d0..3ce4193 100644
-+--- a/layout/svg/base/src/nsSVGGlyphFrame.cpp
-++++ b/layout/svg/base/src/nsSVGGlyphFrame.cpp
-+@@ -169,8 +169,8 @@ private:
-+   PRBool SetupForDirectTextRun(gfxContext *aContext, float aScale);
-+   void SetupFor(gfxContext *aContext, float aScale);
-+ 
-+-  nsSVGGlyphFrame *mSource;
-+   nsAutoTArray<CharacterPosition,80> mPositions;
-++  nsSVGGlyphFrame *mSource;
-+   gfxMatrix mInitialMatrix;
-+   // Textrun advance width from start to mCurrentChar, in appunits
-+   gfxFloat mCurrentAdvance;
-diff --git a/recipes/mozilla/files/xulrunner-chromium-mips.patch b/recipes/mozilla/files/xulrunner-chromium-mips.patch
-new file mode 100644
-index 0000000..2db0801
---- /dev/null
-+++ b/recipes/mozilla/files/xulrunner-chromium-mips.patch
-@@ -0,0 +1,208 @@
-+Slightly tweaked version of a patch from:
-+http://gentoo-overlays.zugaina.org/loongson/portage/net-libs/xulrunner/files/xulrunner-chromium-mips.patch
-+
-+diff --git a/ipc/chromium/src/base/atomicops.h b/ipc/chromium/src/base/atomicops.h
-+index 87df918..363bf63 100644
-+--- a/ipc/chromium/src/base/atomicops.h
-++++ b/ipc/chromium/src/base/atomicops.h
-+@@ -132,6 +132,8 @@ Atomic64 Release_Load(volatile const Atomic64* ptr);
-+ #include "base/atomicops_internals_x86_gcc.h"
-+ #elif defined(COMPILER_GCC) && defined(ARCH_CPU_ARM_FAMILY)
-+ #include "base/atomicops_internals_arm_gcc.h"
-++#elif defined(COMPILER_GCC) && defined(ARCH_CPU_MIPS_FAMILY)
-++#include "base/atomicops_internals_mips_gcc.h"
-+ #else
-+ #error "Atomic operations are not supported on your platform"
-+ #endif
-+diff --git a/ipc/chromium/src/base/atomicops_internals_mips_gcc.h b/ipc/chromium/src/base/atomicops_internals_mips_gcc.h
-+new file mode 100644
-+index 0000000..d1b87ee
-+--- /dev/null
-++++ b/ipc/chromium/src/base/atomicops_internals_mips_gcc.h
-+@@ -0,0 +1,160 @@
-++// Copyright (c) 2010 Zhang, Le <r0bertz@gentoo.org>
-++// Use of this source code is governed by GPLv2.
-++
-++// This file is an internal atomic implementation, use base/atomicops.h instead.
-++
-++#ifndef BASE_ATOMICOPS_INTERNALS_MIPS_GCC_H_
-++#define BASE_ATOMICOPS_INTERNALS_MIPS_GCC_H_
-++
-++#define ATOMICOPS_COMPILER_BARRIER() __asm__ __volatile__("" : : : "memory")
-++
-++namespace base {
-++namespace subtle {
-++
-++// 32-bit low-level operations on any platform.
-++
-++inline Atomic32 NoBarrier_CompareAndSwap(volatile Atomic32* ptr,
-++                                         Atomic32 old_value,
-++                                         Atomic32 new_value) {
-++  Atomic32 prev;
-++   __asm__ __volatile__(
-++                       " .set  push        \n"
-++                       " .set  noat        \n"
-++                       " .set  mips3       \n"
-++                       "1: ll  %0, %2      \n"
-++                       " bne %0, %z3, 2f   \n"
-++                       " .set  mips0       \n"
-++                       " move  $1, %z4     \n"
-++                       " .set  mips3       \n"
-++                       " sc  $1, %1        \n"
-++                       " beqz  $1, 3f      \n"
-++                       "2:                 \n"
-++                       " .subsection 2     \n"
-++                       "3: b 1b            \n"
-++                       " .previous         \n"
-++                       " .set  pop         \n"
-++                       : "=&r" (prev), "=R" (*ptr)       
-++                       : "R" (*ptr), "Jr" (old_value), "Jr" (new_value)     
-++                       : "memory");
-++  return prev;
-++}
-++
-++inline Atomic32 NoBarrier_AtomicExchange(volatile Atomic32* ptr,
-++                                         Atomic32 new_value) {
-++  unsigned int ret_value;
-++  unsigned long dummy;
-++
-++  __asm__ __volatile__("       .set    mips3                                   \n"
-++                       "1:     ll      %0, %3                  # xchg_u32      \n"
-++                       "       .set    mips0                                   \n"
-++                       "       move    %2, %z4                                 \n"
-++                       "       .set    mips3                                   \n"
-++                       "       sc      %2, %1                                  \n"
-++                       "       beqz    %2, 2f                                  \n"
-++                       "       .subsection 2                                   \n"
-++                       "2:     b       1b                                      \n"
-++                       "       .previous                                       \n"
-++                       "       .set    mips0                                   \n"
-++                       : "=&r" (ret_value), "=m" (*ptr), "=&r" (dummy)
-++                       : "R" (*ptr), "Jr" (new_value)
-++                       : "memory");
-++
-++  return ret_value;  // Now it's the previous value.
-++}
-++
-++inline Atomic32 NoBarrier_AtomicIncrement(volatile Atomic32* ptr,
-++                                          Atomic32 increment) {
-++  Atomic32 temp, result;
-++    __asm__ __volatile__(
-++    " .set  mips3         \n"
-++    "1: ll  %1, %2    # atomic_add_return \n"
-++    " addu  %0, %1, %3        \n"
-++    " sc  %0, %2          \n"
-++    " beqz  %0, 2f          \n"
-++    " addu  %0, %1, %3        \n"
-++    " .subsection 2         \n"
-++    "2: b 1b          \n"
-++    " .previous         \n"
-++    " .set  mips0         \n"
-++    : "=&r" (result), "=&r" (temp), "=m" (*ptr)
-++    : "Ir" (increment), "m" (*ptr)
-++    : "memory");
-++  return result;
-++}
-++
-++inline Atomic32 Barrier_AtomicIncrement(volatile Atomic32* ptr,
-++                                        Atomic32 increment) {
-++  Atomic32 temp, result;
-++    __asm__ __volatile__(
-++    " .set  mips3         \n"
-++    "1: ll  %1, %2    # atomic_add_return \n"
-++    " addu  %0, %1, %3        \n"
-++    " sc  %0, %2          \n"
-++    " beqz  %0, 2f          \n"
-++    " addu  %0, %1, %3        \n"
-++    " .subsection 2         \n"
-++    "2: b 1b          \n"
-++    " .previous         \n"
-++    " .set  mips0         \n"
-++    : "=&r" (result), "=&r" (temp), "=m" (*ptr)
-++    : "Ir" (increment), "m" (*ptr)
-++    : "memory");
-++  __asm__ __volatile__("sync" : : : "memory");
-++  return result;
-++}
-++
-++inline Atomic32 Acquire_CompareAndSwap(volatile Atomic32* ptr,
-++                                       Atomic32 old_value,
-++                                       Atomic32 new_value) {
-++  Atomic32 x = NoBarrier_CompareAndSwap(ptr, old_value, new_value);
-++  __asm__ __volatile__("sync" : : : "memory");
-++  return x;
-++}
-++
-++inline Atomic32 Release_CompareAndSwap(volatile Atomic32* ptr,
-++                                       Atomic32 old_value,
-++                                       Atomic32 new_value) {
-++  return NoBarrier_CompareAndSwap(ptr, old_value, new_value);
-++}
-++
-++inline void NoBarrier_Store(volatile Atomic32* ptr, Atomic32 value) {
-++  *ptr = value;
-++}
-++
-++inline void MemoryBarrier() {
-++  __asm__ __volatile__("sync" : : : "memory");
-++}
-++
-++inline void Acquire_Store(volatile Atomic32* ptr, Atomic32 value) {
-++  *ptr = value;
-++  __asm__ __volatile__("sync" : : : "memory");
-++}
-++
-++inline void Release_Store(volatile Atomic32* ptr, Atomic32 value) {
-++  ATOMICOPS_COMPILER_BARRIER();
-++  *ptr = value; // An x86 store acts as a release barrier.
-++  // See comments in Atomic64 version of Release_Store(), below.
-++}
-++
-++inline Atomic32 NoBarrier_Load(volatile const Atomic32* ptr) {
-++  return *ptr;
-++}
-++
-++inline Atomic32 Acquire_Load(volatile const Atomic32* ptr) {
-++  Atomic32 value = *ptr; // An x86 load acts as a acquire barrier.
-++  // See comments in Atomic64 version of Release_Store(), below.
-++  ATOMICOPS_COMPILER_BARRIER();
-++  return value;
-++}
-++
-++inline Atomic32 Release_Load(volatile const Atomic32* ptr) {
-++  MemoryBarrier();
-++  return *ptr;
-++}
-++
-++} // namespace base::subtle
-++} // namespace base
-++
-++#undef ATOMICOPS_COMPILER_BARRIER
-++
-++#endif  // BASE_ATOMICOPS_INTERNALS_MIPS_GCC_H_
-+diff --git a/ipc/chromium/src/base/debug_util_posix.cc b/ipc/chromium/src/base/debug_util_posix.cc
-+index f7c58b4..50fb41d 100644
-+--- a/ipc/chromium/src/base/debug_util_posix.cc
-++++ b/ipc/chromium/src/base/debug_util_posix.cc
-+@@ -108,7 +108,7 @@ bool DebugUtil::BeingDebugged() {
-+ 
-+ // static
-+ void DebugUtil::BreakDebugger() {
-+-#if !defined(ARCH_CPU_ARM_FAMILY)
-++#if defined(ARCH_CPU_X86_FAMILY)
-+   asm ("int3");
-+ #endif
 + }
-+diff --git a/ipc/chromium/src/build/build_config.h b/ipc/chromium/src/build/build_config.h
-+index 36f83e7..128bbc7 100644
-+--- a/ipc/chromium/src/build/build_config.h
-++++ b/ipc/chromium/src/build/build_config.h
-+@@ -57,6 +57,8 @@
-+ #define ARCH_CPU_ARMEL 1
-+ #define ARCH_CPU_32_BITS 1
-+ #define WCHAR_T_IS_UNSIGNED 1
-++#elif defined(__mips__)
-++#define ARCH_CPU_MIPS_FAMILY 1
-+ #else
-+ #error Please add support for your architecture in build/build_config.h
-+ #endif
-diff --git a/recipes/mozilla/firefox_3.6.8.bb b/recipes/mozilla/firefox_3.6.8.bb
-index 825e692..18a7798 100644
---- a/recipes/mozilla/firefox_3.6.8.bb
-+++ b/recipes/mozilla/firefox_3.6.8.bb
-@@ -1,5 +1,5 @@
- DEPENDS += "cairo sqlite3 libnotify"
--PR = "r1"
-+PR = "r2"
- 
- # The .pc files below have "3.6" hardcoded, fix that before using them in a newer FF version!
- SRC_URI = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${PV}/source/firefox-${PV}.source.tar.bz2;name=archive \
-@@ -15,8 +15,14 @@ SRC_URI = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${PV}/source/f
- 	file://firefox-plugin.pc \
- 	file://firefox-xpcom.pc \
- 	file://nspr.pc \
-+	file://xulrunner-chromium-mips.patch \
-+	file://xulrunner-1.9.2.8-mips-bus-error.patch \
-+	file://Fix-xptinvoke-and-xptstubs-on-mips-o32-big-endian.patch \
-+	file://Increase-stability-and-performance-on-mips.patch \
++ 
++ /**
+diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
+index ca5e197..f9367b7 100644
+--- a/recipes/gtk+/gtk+_2.20.1.bb
++++ b/recipes/gtk+/gtk+_2.20.1.bb
+@@ -4,6 +4,7 @@ SRC_URI_append_virtclass-native = " file://no-demos.patch \
  "
+ SRC_URI_append = "file://gtk-dnd-grab-deadlock-fix.patch \
+ 		  file://cross-nm.patch \
++		  file://xkb-ifdef.patch \
+ 		 "
  
-+SRC_URI_append_mipsel = " file://mips-disable-TLS.patch "
-+
- SRC_URI[archive.md5sum] = "0ee5f14fd8be07513d16131027ebcb61"
- SRC_URI[archive.sha256sum] = "fc609cc6a0ddaa2a9ebd8511ec39ae4a404e1107a12e07b233e2afca51d9a10e"
- 
-@@ -27,7 +33,6 @@ require firefox.inc
- 
- EXTRA_OECONF += " --enable-official-branding --disable-crashreporter"
- 
--
- FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2"
- 
- do_compile_prepend() {
+ SRC_URI[gtk.md5sum] = "53e6f3a93bd22934878fc4a4a34c68aa"
 -- 
 1.7.1
 
