@@ -1,45 +1,50 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Oz81J-00006P-J6
+	(envelope-from <chase.maupin@ti.com>) id 1Oz89b-0004PD-Ev
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 15:08:58 +0200
-Received: by wwb34 with SMTP id 34so47063wwb.24
+	Fri, 24 Sep 2010 15:17:32 +0200
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id o8ODHN78013945
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 06:08:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=scoYXueriUKuamFC4kL88MdAtA/X0ExsZ5qYSRIopA0=;
-	b=rFWO9m4SD0o/VKdE959VawM9/Z8P42Vh7IplGSF9me+PTBXFXcMwhEJZqxZ59gl7Lu
-	UMX6kUoG79ZU7vJau3/Xx/F/bxXcJELH8iOzmPy/pnjKYT0wkAwpzk514gZUfbwY5qnn
-	7B9cLmIsiYy0EUvNCzL1ebHlFhY6ZRO2uSZKY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=HrR0CLBjWHVr+V9P1PgYW/j6JWMNp9KksCnbMb4v/duONalxEcab4tVHvcHqXuJ5Y9
-	5AhIok65XjF+YppZiqx+A5PtKi+ePSfPUlm+jnBgq8xtiW8lSi4gyA+EE6JJeI9hzgSl
-	ZKsbL02d7TxJHCbNYXeRyFPm0+X03fyj+HWDg=
+	Fri, 24 Sep 2010 08:17:23 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o8ODHMLv007308
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 08:17:22 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8ODHMjq019845
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 08:17:22 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Fri, 24 Sep 2010 08:17:22 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 24 Sep 2010 08:17:20 -0500
+Thread-Topic: [oe] Question about automake licensing in recipe
+Thread-Index: Actb5+mpgutFLAWXRU21k11296swQAAAtNAg
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310E155A0@dlee06.ent.ti.com>
+References: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
+	<AANLkTi=45dASvU5XiCia4o2bia-Zx38neVw8vK6Qvrx-@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310E1558D@dlee06.ent.ti.com>
+	<AANLkTi=41Y_wwKR1czvr5XW-7xZSpwg1J2-vQ5sKStRQ@mail.gmail.com>
+	<1285332952.1649.199.camel@mill.internal.reciva.com>
+In-Reply-To: <1285332952.1649.199.camel@mill.internal.reciva.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.227.151.148 with SMTP id c20mr2989422wbw.15.1285333730749;
-	Fri, 24 Sep 2010 06:08:50 -0700 (PDT)
-Received: by 10.216.72.212 with HTTP; Fri, 24 Sep 2010 06:08:50 -0700 (PDT)
-In-Reply-To: <1285314751.3715.5.camel@mattotaupa>
-References: <AANLkTinzRQGe9CLG_n5g0sFG0NDdZBdU2RSL9KjgzokP@mail.gmail.com>
-	<1285314751.3715.5.camel@mattotaupa>
-Date: Fri, 24 Sep 2010 09:08:50 -0400
-Message-ID: <AANLkTikb5hgNJT+qCwWye8WLZz2DTPj=JvLUXgMy+Z3J@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-SA-Exim-Connect-IP: 198.47.26.153
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: git error ?
+Subject: Re: Question about automake licensing in recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,55 +58,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 13:09:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 24 Sep 2010 13:17:32 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 24, 2010 at 3:52 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Am Donnerstag, den 23.09.2010, 22:11 +0200 schrieb Frans Meulenbroeks:
->> Hm,
->>
->> On my latest git push I got:
->>
->> frans@linux-suse:~/oe/openembedded> git push
->> Counting objects: 13, done.
->> Delta compression using up to 2 threads.
->> Compressing objects: 100% (7/7), done.
->> Writing objects: 100% (8/8), 649 bytes, done.
->> Total 8 (delta 6), reused 0 (delta 0)
->> error: unable to create temporary sha1 filename : Read-only file system
->>
->> fatal: failed to write object
->> error: unpack failed: unpack-objects abnormal exit
->> To git@git.openembedded.org:openembedded
->> =A0! [remote rejected] org.openembedded.dev -> org.openembedded.dev (n/a
->> (unpacker error))
->> error: failed to push some refs to 'git@git.openembedded.org:openembedde=
-d'
->>
->>
->> No idea what is going on here, guess it is at the git side. My fs is not=
- r/o
->
-> I just wanted confirm, that you are not alone with this Git server
-> problem. I am getting the same error as some weeks ago [1].
->
-> =A0 =A0 =A0 =A0$ git remote update
-> =A0 =A0 =A0 =A0Fetching origin
-> =A0 =A0 =A0 =A0git.openembedded.org[0: 140.211.169.165]: errno=3DConnecti=
-on refused
-> =A0 =A0 =A0 =A0fatal: unable to connect a socket (Connection refused)
-> =A0 =A0 =A0 =A0error: Could not fetch origin
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Phil Blundell
+> Sent: Friday, September 24, 2010 7:56 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Question about automake licensing in recipe
+>=20
+> On Fri, 2010-09-24 at 21:38 +0930, Graham Gower wrote:
+> > Basically, automake have to contact all their contributors to allow
+> > their GPLv2 code to be distributed under GPLv3. Or they have to pull
+> > the GPLv3 code out.
+>=20
+> If automake has followed the usual GNU conventions then all the
+> contributors will have assigned copyright of their code to the FSF
+> anyway.  In that case, the FSF can (being the copyright holder)
+> unilaterally decide what licence it should be distributed under.
 
-This has been fixed -- we had an issue after the recent upgrade where
-the git-daemon did not restart after system reboot.
+Copyright is to FSF.  I'm sending a mail to them asking for clarification o=
+n this issue.
 
-Thanks,
-Cliff
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
+>=20
+> If they haven't done that then, yeah, they would probably need the
+> permission of the original authors to change the licensing.
+>=20
+> p.
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
