@@ -1,39 +1,31 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1Oz7ok-0007mT-5d
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 14:55:58 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Oz7oe-0003J6-HD
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 13:55:52 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1Oz7oe-00042r-9b
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 13:55:52 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oz7xO-0008Oh-RD for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 15:04:56 +0200
+Received: from f053038003.adsl.alicedsl.de ([78.53.38.3] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oz7xJ-00055Y-Ov for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 13:04:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=41Y_wwKR1czvr5XW-7xZSpwg1J2-vQ5sKStRQ@mail.gmail.com>
-References: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
-	<AANLkTi=45dASvU5XiCia4o2bia-Zx38neVw8vK6Qvrx-@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310E1558D@dlee06.ent.ti.com>
-	<AANLkTi=41Y_wwKR1czvr5XW-7xZSpwg1J2-vQ5sKStRQ@mail.gmail.com>
-Date: Fri, 24 Sep 2010 13:55:52 +0100
-Message-ID: <1285332952.1649.199.camel@mill.internal.reciva.com>
+In-Reply-To: <20100924080006.GB3312@jama>
+References: <AANLkTinzRQGe9CLG_n5g0sFG0NDdZBdU2RSL9KjgzokP@mail.gmail.com>
+	<1285314751.3715.5.camel@mattotaupa>  <20100924080006.GB3312@jama>
+Date: Fri, 24 Sep 2010 15:04:47 +0200
+Message-ID: <1285333487.3715.68.camel@mattotaupa>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Question about automake licensing in recipe
+Subject: Re: [solved] git error ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,25 +39,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 12:55:59 -0000
+X-List-Received-Date: Fri, 24 Sep 2010 13:04:56 -0000
+X-Groupsio-MsgNum: 23939
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-7rU7SuY5esNz+KdZcqb0"
+
+--=-7rU7SuY5esNz+KdZcqb0
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2010-09-24 at 21:38 +0930, Graham Gower wrote:
-> Basically, automake have to contact all their contributors to allow
-> their GPLv2 code to be distributed under GPLv3. Or they have to pull
-> the GPLv3 code out.
+Am Freitag, den 24.09.2010, 10:00 +0200 schrieb Martin Jansa:
+> On Fri, Sep 24, 2010 at 09:52:30AM +0200, Paul Menzel wrote:
+> > Am Donnerstag, den 23.09.2010, 22:11 +0200 schrieb Frans Meulenbroeks:
+> > > Hm,
+> > >=20
+> > > On my latest git push I got:
+> > >=20
+> > > frans@linux-suse:~/oe/openembedded> git push
+> > > Counting objects: 13, done.
+> > > Delta compression using up to 2 threads.
+> > > Compressing objects: 100% (7/7), done.
+> > > Writing objects: 100% (8/8), 649 bytes, done.
+> > > Total 8 (delta 6), reused 0 (delta 0)
+> > > error: unable to create temporary sha1 filename : Read-only file syst=
+em
+> > >=20
+> > > fatal: failed to write object
+> > > error: unpack failed: unpack-objects abnormal exit
+> > > To git@git.openembedded.org:openembedded
+> > >  ! [remote rejected] org.openembedded.dev -> org.openembedded.dev (n/=
+a
+> > > (unpacker error))
+> > > error: failed to push some refs to 'git@git.openembedded.org:openembe=
+dded'
+> > >=20
+> > >=20
+> > > No idea what is going on here, guess it is at the git side. My fs is =
+not r/o
+> >=20
+> > I just wanted confirm, that you are not alone with this Git server
+> > problem. I am getting the same error as some weeks ago [1].
+> >=20
+> >         $ git remote update
+> >         Fetching origin
+> >         git.openembedded.org[0: 140.211.169.165]: errno=3DConnection re=
+fused
+> >         fatal: unable to connect a socket (Connection refused)
+> >         error: Could not fetch origin
+>=20
+> I can confirm
+> git+ssh:// works
+> but other protocols doesn't seem to work this morning
 
-If automake has followed the usual GNU conventions then all the
-contributors will have assigned copyright of their code to the FSF
-anyway.  In that case, the FSF can (being the copyright holder)
-unilaterally decide what licence it should be distributed under.
-
-If they haven't done that then, yeah, they would probably need the
-permission of the original authors to change the licensing.
-
-p.
+It is working for me again.
 
 
+Thanks,
 
+Paul
 
+--=-7rU7SuY5esNz+KdZcqb0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkycoe8ACgkQPX1aK2wOHVj9fACfYKp2QmOzmWP+tzMt1HsRUUgX
+yK4An3Rk/EinWfc03kcQ84vxTtiXzSpk
+=tSTX
+-----END PGP SIGNATURE-----
+
+--=-7rU7SuY5esNz+KdZcqb0--
