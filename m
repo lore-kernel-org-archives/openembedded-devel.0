@@ -1,44 +1,47 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Oz68A-0005eP-Vy
+	(envelope-from <chase.maupin@ti.com>) id 1Oz6rq-0007VI-6G
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 13:07:59 +0200
-Received: by ywe9 with SMTP id 9so721082ywe.6
+	Fri, 24 Sep 2010 13:55:13 +0200
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id o8OBsxJo011077
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 04:07:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Yjg5WPLqwSfOsuFr3E4vA6DuU1i+gusY3i23008m0cE=;
-	b=HJYQNm6U3f6EN6nsrZwlBQpui1K1RQtq9M7t/FG7nrtmr+i3iEWFhPuAdQESaEpvZ+
-	w63RytGpD5uAFyyYKmZJKehtOWolu171kQDiknBxPr3hoGsXJBiMnL3iYp1pyORR7/6b
-	MlqXvmtEEazvSycxXGJ8ZSnigx6otU5Lteg40=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Wp+nUcsm84pm+EVV8TcYeTTImN1xSqb3nkpYwbkeRCbJUI1loT0+SSonlcSoSwcZFM
-	HIWLLL4rBQzY5+f/IMYB3TfDCik7CFqwO7Vm4a3ykyYc56mmNKCr+KwR3ACZuuXtaShd
-	DftJH40Xwd733/bPfuPn4jkbaLVcpPqXqlixw=
+	Fri, 24 Sep 2010 06:54:59 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8OBswRT001775
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 06:54:58 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8OBswuE017872
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 06:54:58 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Fri, 24 Sep 2010 06:54:58 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 24 Sep 2010 06:54:56 -0500
+Thread-Topic: [oe] Question about automake licensing in recipe
+Thread-Index: Actbbg8z/9k2ZTCySWSYXyviVkisxQAcO5jQ
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310E1558D@dlee06.ent.ti.com>
+References: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
+	<AANLkTi=45dASvU5XiCia4o2bia-Zx38neVw8vK6Qvrx-@mail.gmail.com>
+In-Reply-To: <AANLkTi=45dASvU5XiCia4o2bia-Zx38neVw8vK6Qvrx-@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.90.118.4 with SMTP id q4mr2759217agc.16.1285326467227; Fri, 24
-	Sep 2010 04:07:47 -0700 (PDT)
-Received: by 10.231.158.147 with HTTP; Fri, 24 Sep 2010 04:07:47 -0700 (PDT)
-In-Reply-To: <i7hr2q$kte$2@dough.gmane.org>
-References: <4C9C4B81.8010700@gmail.com>
-	<i7hr2q$kte$2@dough.gmane.org>
-Date: Fri, 24 Sep 2010 20:37:47 +0930
-Message-ID: <AANLkTi=2SgHJxqBLqHLxnKEs4vW1UBpE__WibmavOhZG@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 192.94.94.41
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] firefox_3.6.8.bb: Add mipsel support.
+Subject: Re: Question about automake licensing in recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,42 +55,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 11:07:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 24 Sep 2010 11:55:31 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 24 September 2010 19:00, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 24-09-10 08:56, Graham Gower wrote:
->> Patches taken from Gentoo and Debian.
->>
->> Runs almost acceptably on my 350mhz/128mb mipsel, after a lengthy
->> startup delay. Should work for big endian mips without much more
->> work, but I can't test.
->>
->> Signed-off-by: Graham Gower <graham.gower@gmail.com>
->
-> Thanks for the patch! It doesn't apply, could you rework and resend it
-> please?
->
-> regards,
->
-> Koen
->
 
-I can't git pull in order to merge right now... But hand editing the
-below fragment, to change r2->r3 would probably fix it. Otherwise it
-will have to wait a couple of days.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Graham Gower
+> Sent: Thursday, September 23, 2010 5:18 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Question about automake licensing in recipe
+>=20
+> On 24 September 2010 05:44, Maupin, Chase <chase.maupin@ti.com> wrote:
+> > All,
+> >
+> > I was digging around in the automake sources and I noticed that there i=
+s
+> a top-level COPYING file that says automake is licensed under
+> GPLv2. =A0However, in the lib directory there is another COPYING file tha=
+t
+> says GPLv3. =A0I was trying to figure out what LICENSE should be set to f=
+or
+> automake when the sources contain both GPLv2 and GPLv3 code. =A0Should it=
+ be
+> set to something like GPLv2/GPLv3? =A0I've read that GPLv2 and GPLv3 are
+> incompatible
+> (http://gplv3.fsf.org/wiki/index.php/Compatible_licenses#GPLv3-
+> incompatible_licenses) so can a recipe even be marked as being both GPLv2
+> and GPLv3?
+> >
+> > Any input would be appreciated here.
+>=20
+> If the GPLv2 has the "or later version" clause and you are combining
+> with GPLv3, then there is no incompatibility as the entire thing is
+> then distributed under the GPLv3. If there is no "or later" clause,
+> then its a problem that needs to be sorted out upstream.
 
---- a/recipes/mozilla/firefox_3.6.8.bb
-+++ b/recipes/mozilla/firefox_3.6.8.bb
-@@ -1,5 +1,5 @@
- DEPENDS += "cairo sqlite3 libnotify"
--PR = "r1"
-+PR = "r2"
+Graham,
 
- # The .pc files below have "3.6" hardcoded, fix that before using
-them in a newer FF version!
+Thanks for the input.  I do not see the "or later" clause.  I see some disc=
+ussion on FSF about updating the exceptions for tools like automake.  I gue=
+ss this comes back to my question though of how we should mark the LICENSE =
+field for the automake recipe until all the licensing is done?
+
+also, has anyone thought about having a license type of GPLv3+exception or =
+some other format to indicate that there is an active exception for a packa=
+ge?
+
+>=20
+> -Graham
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
