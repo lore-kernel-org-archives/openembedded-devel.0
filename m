@@ -1,47 +1,39 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OzD4C-0007u4-SM
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1OzDf2-0002QM-C8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 20:32:17 +0200
-Received: by wyb35 with SMTP id 35so229244wyb.6
+	Fri, 24 Sep 2010 21:10:21 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 78F668AD8E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 11:32:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=e3C2UGYXCjPWHr29n8ZLpOEngBZXjtfpn9RLNxSHIfA=;
-	b=ipIRRSTzoCGhiu3chMlS9cy+OQ8VyCYwGV64Em/Zypeuhr9YdhUXTM3ww7ThnSUvwM
-	KOfYiVxUftvu9I3gJYeS1AESE805BG0ImfnYNMwSc3Tjf9dFu6LafpTvYmZkPQixO79p
-	tEs5xT49F74fHi+F9ozDh0m0TuyynOUKWA7fI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=etSa5Y5e6fVhcKKcAI+n1CqQhx1Gn+dngVzUh9+JoqV8WzjwQVyMNlrReO+9PM7QZ3
-	FNaCyuo39bwiIGwIG8tbjvwKerIdwovrFh4y36JZWHMPekiRNmXAtZodrMAmfc0cM4r4
-	YVGgPI0wvslQRex/26h4CP4IzTyi/rEMA6ULY=
-Received: by 10.216.165.77 with SMTP id d55mr3104869wel.23.1285353129661; Fri,
-	24 Sep 2010 11:32:09 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.169 with HTTP; Fri, 24 Sep 2010 11:31:48 -0700 (PDT)
-In-Reply-To: <1285352939-23376-1-git-send-email-raj.khem@gmail.com>
-References: <1285352939-23376-1-git-send-email-raj.khem@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 24 Sep 2010 11:31:48 -0700
-X-Google-Sender-Auth: ql0087htQGQPXTIanK63eyVWWiQ
-Message-ID: <AANLkTi=ke6+dPpxZ7zfo3QH+v6jKg68d78J4DBLofhtR@mail.gmail.com>
+	Fri, 24 Sep 2010 15:10:14 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 09688-07 for <openembedded-devel@lists.openembedded.org>; 
+	Fri, 24 Sep 2010 15:10:14 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 531C58ADA78; Fri, 24 Sep 2010 15:10:14 -0400 (EDT)
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 2DBCF8A4280
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 15:10:13 -0400 (EDT)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id 10FD614097E5; Fri, 24 Sep 2010 15:10:12 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Fri, 24 Sep 2010 15:10:12 -0400
+Message-Id: <1285355412-14559-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.7.0.4
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] staging.bbclass: Use sysroot_stage_dir instead of autotools_stage_dir
+Subject: [PATCH] openvpn: change kernel-module-tun to RRECOMMEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,22 +47,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 18:32:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 24 Sep 2010 19:10:21 -0000
 
-On Fri, Sep 24, 2010 at 11:28 AM, Khem Raj <raj.khem@gmail.com> wrote:
+RRECOMMEND, not RDEPEND, in case a particular platform doesn't have
+a separate kernel-module-tun package. Matches behaviour of other
+packages, like bridge-utils.
 
-> Some packages like package-stagemanager-native dont use autoools
-> and autotools_stage_dir can not be found for such recipes.
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Also switch to INC_PR.
 
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ recipes/openvpn/openvpn.inc      |    4 +++-
+ recipes/openvpn/openvpn_2.1.0.bb |    2 +-
+ recipes/openvpn/openvpn_2.1.3.bb |    2 +-
+ 3 files changed, 5 insertions(+), 3 deletions(-)
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
+diff --git a/recipes/openvpn/openvpn.inc b/recipes/openvpn/openvpn.inc
+index c4870b5..68bfc51 100644
+--- a/recipes/openvpn/openvpn.inc
++++ b/recipes/openvpn/openvpn.inc
+@@ -4,7 +4,9 @@ SECTION = "console/network"
+ LICENSE = "GPLv2"
+ PRIORITY = "optional"
+ DEPENDS = "lzo openssl"
+-RDEPENDS_${PN} = "kernel-module-tun"
++RRECOMMENDS_${PN} = "kernel-module-tun"
++
++INC_PR = "r2"
+ 
+ SRC_URI = "http://openvpn.net/release/openvpn-${PV}.tar.gz \
+ 	file://openvpn"
+diff --git a/recipes/openvpn/openvpn_2.1.0.bb b/recipes/openvpn/openvpn_2.1.0.bb
+index 16d551f..69d1da5 100644
+--- a/recipes/openvpn/openvpn_2.1.0.bb
++++ b/recipes/openvpn/openvpn_2.1.0.bb
+@@ -1,6 +1,6 @@
+ require openvpn.inc
+ 
+-PR = "r1"
++PR = "${INC_PR}.0"
+ SRC_URI = "http://openvpn.net/release/${P}.tar.gz \
+ 	   file://openvpn"
+ 
+diff --git a/recipes/openvpn/openvpn_2.1.3.bb b/recipes/openvpn/openvpn_2.1.3.bb
+index c448151..ceadf31 100644
+--- a/recipes/openvpn/openvpn_2.1.3.bb
++++ b/recipes/openvpn/openvpn_2.1.3.bb
+@@ -1,6 +1,6 @@
+ require openvpn.inc
+ 
+-PR = "r0"
++PR = "${INC_PR}.0"
+ SRC_URI = "http://openvpn.net/release/${P}.tar.gz \
+ 	   file://openvpn"
+ 
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.7.0.4
+
+
 
