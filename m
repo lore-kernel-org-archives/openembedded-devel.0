@@ -1,40 +1,43 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OzAN7-0000VT-CI
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <chasemaupin03@gmail.com>) id 1OzB1g-0005cL-5o
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 17:39:38 +0200
-Received: (qmail 31848 invoked by uid 503); 24 Sep 2010 15:53:21 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 24 Sep 2010 15:53:21 -0000
-Received: (qmail 9827 invoked by uid 503); 24 Sep 2010 15:22:00 -0000
-Received: from b6.ovh.net (HELO mail420.ha.ovh.net) (213.186.33.56)
-	by 30.mail-out.ovh.net with SMTP; 24 Sep 2010 15:21:59 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 24 Sep 2010 17:39:28 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 24 Sep 2010 17:39:28 +0200
-Message-ID: <4C9CC62F.5000804@eukrea.com>
-Date: Fri, 24 Sep 2010 17:39:27 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
-MIME-Version: 1.0
+	Fri, 24 Sep 2010 18:21:38 +0200
+Received: by gyg8 with SMTP id 8so873525gyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Sep 2010 09:21:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=wjUUGqEeeHznaX41AfbQjTlw7GsnQ0g6WRy5/sldU6A=;
+	b=p2wmnq16q6xctDWnNEaCKPyKvTk4yapy6JHjJ31c2ZIVDmVWbQz4mDDydaDcZNiMU3
+	OFIt0ZUjUP0VaIHZvE7I0fS4mL8qD0m3yUazAncJQrleBaH+TqHTHvk1DyqQghlTKbaf
+	8MuiMMbJBVC2uxk/YOO9nPnRM8N9H8e/Kbvc8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Ucop31iHG5D97EdWS7ebrJBnTnu21624S6sUzQT8kLnA1P1nau2btFus5bNfQdol4y
+	5BIuzR65Ja/bGdaGV1H8rNFKPXApdZFRtDPfkqL0uJcUqGznk78b1dHpKPFVbVgREe+z
+	5v6lRDvt7GywR0PfW8WZjAA8YjwIiVZkK3UUE=
+Received: by 10.151.6.3 with SMTP id j3mr4952822ybi.91.1285345283406;
+	Fri, 24 Sep 2010 09:21:23 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id q1sm2398299ybk.20.2010.09.24.09.21.21
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 24 Sep 2010 09:21:22 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1285339946-7340-1-git-send-email-iwamatsu@nigauri.org>
-In-Reply-To: <1285339946-7340-1-git-send-email-iwamatsu@nigauri.org>
-X-Ovh-Tracer-Id: 14280914419413331273
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Fri, 24 Sep 2010 11:08:52 -0500
+Message-Id: <1285344532-25131-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] machine/sh7785lcr: Add new machine for Renesas SH7785 reference board
+Subject: [PATCH] recipe licenses: update recipe LICENSE fields
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,35 +51,502 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 15:39:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 24 Sep 2010 16:21:39 -0000
 
-Hi,
+* While verifying the licensing for the packages I am building
+  into my file system I found that for some packages the
+  LICENSE value set in the recipe was either incorrect or
+  generic and not detailed enough.  This patch is my attempt
+  to update the LICENSE fields for these packages to match
+  the actual versions of the licenses in the sources.
 
-Le 24/09/2010 16:52, Nobuhiro Iwamatsu a écrit :
-> * Machine config for Renesas SH7785 reference board.
-> * Add kernel config for 2.6.32, 33, 34 and 35.
->
-> Signed-off-by: Nobuhiro Iwamatsu<iwamatsu@nigauri.org>
-> ---
->   conf/machine/include/tune-sh4.inc              |    2 +
->   conf/machine/sh7785lcr.conf                    |   20 +
->   recipes/linux/linux-2.6.32/sh7785lcr/defconfig | 1833 ++++++++++++++++++++++
->   recipes/linux/linux-2.6.33/sh7785lcr/defconfig | 1869 +++++++++++++++++++++++
->   recipes/linux/linux-2.6.34/sh7785lcr/defconfig | 1877 +++++++++++++++++++++++
->   recipes/linux/linux-2.6.35/sh7785lcr/defconfig | 1927 ++++++++++++++++++++++++
->   recipes/linux/linux_2.6.35.bb                  |    1 +
->   7 files changed, 7529 insertions(+), 0 deletions(-)
->   create mode 100644 conf/machine/sh7785lcr.conf
->   create mode 100644 recipes/linux/linux-2.6.32/sh7785lcr/defconfig
->   create mode 100644 recipes/linux/linux-2.6.33/sh7785lcr/defconfig
->   create mode 100644 recipes/linux/linux-2.6.34/sh7785lcr/defconfig
->   create mode 100644 recipes/linux/linux-2.6.35/sh7785lcr/defconfig
->
-you only neet to add the defconfig for the kernel you support (2.6.35) 
-as the other files won't be used.
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ recipes/autoconf/autoconf.inc                      |    2 +-
+ recipes/autoconf/autoconf213_2.13.bb               |    1 +
+ recipes/autoconf/autoconf_2.61.bb                  |    2 ++
+ recipes/bison/bison.inc                            |    2 +-
+ recipes/dbus/dbus-c++_git.bb                       |    2 +-
+ recipes/dbus/dbus-daemon-proxy_git.bb              |    2 +-
+ recipes/dbus/dbus-glib.inc                         |    2 +-
+ recipes/dbus/dbus.inc                              |    2 +-
+ .../desktop-file-utils-native_0.14.bb              |    2 +-
+ .../desktop-file-utils/desktop-file-utils_0.15.bb  |    2 +-
+ .../desktop-file-utils/desktop-file-utils_0.16.bb  |    2 +-
+ recipes/e2fsprogs/e2fsprogs.inc                    |    2 +-
+ recipes/genext2fs/genext2fs.inc                    |    2 +-
+ recipes/git/git.inc                                |    2 +-
+ recipes/glib-2.0/glib-2.0_2.22.4.bb                |    2 +-
+ recipes/glib-2.0/glib-2.0_2.23.6.bb                |    2 +-
+ recipes/glib-2.0/glib-2.0_2.24.0.bb                |    2 +-
+ recipes/glib-2.0/glib-2.0_2.24.1.bb                |    2 +-
+ recipes/glib-2.0/glib-2.0_2.6.4.bb                 |    2 +-
+ recipes/glib-2.0/glib-2.0_2.8.6.bb                 |    2 +-
+ recipes/glib-2.0/glib.inc                          |    2 +-
+ recipes/iperf/iperf.inc                            |    2 +-
+ recipes/ipkg-utils/ipkg-link_1.6+cvs20050404.bb    |    2 +-
+ recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb   |    2 +-
+ recipes/iptables/iptables.inc                      |    2 +-
+ recipes/libtool/libtool.inc                        |    2 +-
+ recipes/linux-libc-headers/linux-libc-headers.inc  |    2 +-
+ recipes/pkgconfig/pkgconfig.inc                    |    2 +-
+ recipes/psplash/psplash.inc                        |    2 +-
+ recipes/quilt/quilt.inc                            |    2 +-
+ recipes/thttpd/thttpd_2.25b.bb                     |    2 +-
+ recipes/tinylogin/tinylogin_1.4.bb                 |    2 +-
+ recipes/unifdef/unifdef-native_2.6.18+git.bb       |    2 +-
+ recipes/update-rc.d/update-rc.d_0.7.bb             |    2 +-
+ recipes/x-load/x-load.inc                          |    2 +-
+ recipes/xorg-lib/xorg-headers-native.bb            |    2 ++
+ 36 files changed, 38 insertions(+), 33 deletions(-)
 
-Eric
+diff --git a/recipes/autoconf/autoconf.inc b/recipes/autoconf/autoconf.inc
+index 35b0289..70e24a0 100644
+--- a/recipes/autoconf/autoconf.inc
++++ b/recipes/autoconf/autoconf.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "A package of M4 macros to produce scripts to \
+ automatically configure sourcecode."
+-LICENSE = "GPL"
++LICENSE = "GPLv3+exception"
+ HOMEPAGE = "http://www.gnu.org/software/autoconf/"
+ SECTION = "devel"
+ DEPENDS += "m4-native"
+diff --git a/recipes/autoconf/autoconf213_2.13.bb b/recipes/autoconf/autoconf213_2.13.bb
+index d060bbd..4c855e0 100644
+--- a/recipes/autoconf/autoconf213_2.13.bb
++++ b/recipes/autoconf/autoconf213_2.13.bb
+@@ -1,4 +1,5 @@
+ require autoconf.inc
++LICENSE = "GPLv2"
+ SRC_URI = "${GNU_MIRROR}/autoconf/autoconf-${PV}.tar.gz"
+ EXTRA_OECONF = "--program-transform-name=s/\$/2.13/"
+ EXTRA_OEMAKE = 'acdatadir="${datadir}/autoconf-${PV}" infodir="${datadir}/autoconf-${PV}/info"'
+diff --git a/recipes/autoconf/autoconf_2.61.bb b/recipes/autoconf/autoconf_2.61.bb
+index 9542e21..11a1b4c 100644
+--- a/recipes/autoconf/autoconf_2.61.bb
++++ b/recipes/autoconf/autoconf_2.61.bb
+@@ -1,5 +1,7 @@
+ require autoconf.inc
+ 
++LICENSE = "GPLv2"
++
+ PR = "${INC_PR}.1"
+ 
+ SRC_URI += "file://autoreconf-include.patch \
+diff --git a/recipes/bison/bison.inc b/recipes/bison/bison.inc
+index 3441bcf..85ac02b 100644
+--- a/recipes/bison/bison.inc
++++ b/recipes/bison/bison.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "GNU Project parser generator (yacc replacement)."
+ HOMEPAGE = "http://www.gnu.org/software/bison/"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ SECTION = "devel"
+ PRIORITY = "optional"
+ DEPENDS = "virtual/libintl flex-native"
+diff --git a/recipes/dbus/dbus-c++_git.bb b/recipes/dbus/dbus-c++_git.bb
+index 7d9db3e..fe6484a 100644
+--- a/recipes/dbus/dbus-c++_git.bb
++++ b/recipes/dbus/dbus-c++_git.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "C++ bindings for dbus"
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2.1"
+ SECTION = "libs"
+ DEPENDS = "dbus dbus-c++-native expat"
+ SRCREV = "530a887913d3b0dd7091eabb8eef8e3c279e3bb8"
+diff --git a/recipes/dbus/dbus-daemon-proxy_git.bb b/recipes/dbus/dbus-daemon-proxy_git.bb
+index 16cc34f..93b7f2f 100644
+--- a/recipes/dbus/dbus-daemon-proxy_git.bb
++++ b/recipes/dbus/dbus-daemon-proxy_git.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "dbus forwarding daemon"
+-LICENSE = "GPL"
++LICENSE = "LGPLv2.1"
+ DEPENDS = "dbus dbus-glib"
+ SRCREV = "1226a0a1374628ff191f6d8a56000be5e53e7608"
+ PV = "0.0.0+gitr${SRCPV}"
+diff --git a/recipes/dbus/dbus-glib.inc b/recipes/dbus/dbus-glib.inc
+index 4db734b..723c71d 100644
+--- a/recipes/dbus/dbus-glib.inc
++++ b/recipes/dbus/dbus-glib.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "GLib bindings for the dbus message bus system"
+ HOMEPAGE = "http://www.freedesktop.org/Software/dbus"
+ SECTION = "libs"
+-LICENSE = "GPL"
++LICENSE = "GPLv2 AFLv2.1"
+ 
+ DEPENDS = "expat glib-2.0 virtual/libintl dbus-glib-native dbus"
+ DEPENDS_virtclass-native = "expat-native glib-2.0-native dbus-native"
+diff --git a/recipes/dbus/dbus.inc b/recipes/dbus/dbus.inc
+index 55a156d..40307e2 100644
+--- a/recipes/dbus/dbus.inc
++++ b/recipes/dbus/dbus.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "A message bus system for inter-process communication"
+ HOMEPAGE = "http://dbus.freedesktop.org"
+ SECTION = "base"
+-LICENSE = "GPL"
++LICENSE = "GPLv2 AFLv2.1"
+ DEPENDS = "expat glib-2.0 virtual/libintl libsm libice virtual/libx11"
+ 
+ INC_PR = "r19"
+diff --git a/recipes/desktop-file-utils/desktop-file-utils-native_0.14.bb b/recipes/desktop-file-utils/desktop-file-utils-native_0.14.bb
+index fa7a633..5fdc6df 100644
+--- a/recipes/desktop-file-utils/desktop-file-utils-native_0.14.bb
++++ b/recipes/desktop-file-utils/desktop-file-utils-native_0.14.bb
+@@ -1,7 +1,7 @@
+ SECTION = "console/utils"
+ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/desktop-file-utils"
+ DESCRIPTION = "command line utilities to work with *.desktop files"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ 
+ DEPENDS = "glib-2.0-native"
+ 
+diff --git a/recipes/desktop-file-utils/desktop-file-utils_0.15.bb b/recipes/desktop-file-utils/desktop-file-utils_0.15.bb
+index 89919b8..a67c78b 100644
+--- a/recipes/desktop-file-utils/desktop-file-utils_0.15.bb
++++ b/recipes/desktop-file-utils/desktop-file-utils_0.15.bb
+@@ -1,7 +1,7 @@
+ SECTION = "console/utils"
+ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/desktop-file-utils"
+ DESCRIPTION = "command line utilities to work with *.desktop files"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ 
+ DEPENDS = "glib-2.0"
+ 
+diff --git a/recipes/desktop-file-utils/desktop-file-utils_0.16.bb b/recipes/desktop-file-utils/desktop-file-utils_0.16.bb
+index 0d2ab9a..6426488 100644
+--- a/recipes/desktop-file-utils/desktop-file-utils_0.16.bb
++++ b/recipes/desktop-file-utils/desktop-file-utils_0.16.bb
+@@ -1,7 +1,7 @@
+ SECTION = "console/utils"
+ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/desktop-file-utils"
+ DESCRIPTION = "command line utilities to work with *.desktop files"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ 
+ DEPENDS = "glib-2.0"
+ 
+diff --git a/recipes/e2fsprogs/e2fsprogs.inc b/recipes/e2fsprogs/e2fsprogs.inc
+index 37d3b6d..b0150cd 100644
+--- a/recipes/e2fsprogs/e2fsprogs.inc
++++ b/recipes/e2fsprogs/e2fsprogs.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "EXT2 Filesystem Utilities"
+ HOMEPAGE = "http://e2fsprogs.sf.net"
+-LICENSE = "GPL"
++LICENSE = "GPLv2/LGPLv2/NewBSD/MIT"
+ SECTION = "base"
+ DEPENDS = "gettext-native util-linux-ng"
+ DEPENDS_virtclass-native = "gettext-native util-linux-ng-native"
+diff --git a/recipes/genext2fs/genext2fs.inc b/recipes/genext2fs/genext2fs.inc
+index c2984bc..503c74f 100644
+--- a/recipes/genext2fs/genext2fs.inc
++++ b/recipes/genext2fs/genext2fs.inc
+@@ -1,4 +1,4 @@
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ DESCRIPTION = "A tool to generate an ext2 filesystem \
+ as a normal (non-root) user."
+ SECTION = "console/utils"
+diff --git a/recipes/git/git.inc b/recipes/git/git.inc
+index bbbd7e9..003d7fa 100644
+--- a/recipes/git/git.inc
++++ b/recipes/git/git.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "The git revision control system used by the Linux kernel developers"
+ SECTION = "console/utils"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ 
+ SRC_URI = "http://www.kernel.org/pub/software/scm/git/git-${PV}.tar.bz2;name=src"
+ 
+diff --git a/recipes/glib-2.0/glib-2.0_2.22.4.bb b/recipes/glib-2.0/glib-2.0_2.22.4.bb
+index 05a1342..cad616a 100644
+--- a/recipes/glib-2.0/glib-2.0_2.22.4.bb
++++ b/recipes/glib-2.0/glib-2.0_2.22.4.bb
+@@ -3,7 +3,7 @@ which provides many useful data types, macros, \
+ type conversions, string utilities, file utilities, a main \
+ loop abstraction, and so on. It works on many \
+ UNIX-like platforms, Windows, OS/2 and BeOS."
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS = "glib-2.0-native gtk-doc virtual/libiconv virtual/libintl"
+diff --git a/recipes/glib-2.0/glib-2.0_2.23.6.bb b/recipes/glib-2.0/glib-2.0_2.23.6.bb
+index 51a2153..55e8021 100644
+--- a/recipes/glib-2.0/glib-2.0_2.23.6.bb
++++ b/recipes/glib-2.0/glib-2.0_2.23.6.bb
+@@ -3,7 +3,7 @@ which provides many useful data types, macros, \
+ type conversions, string utilities, file utilities, a main \
+ loop abstraction, and so on. It works on many \
+ UNIX-like platforms, Windows, OS/2 and BeOS."
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS = "glib-2.0-native gtk-doc virtual/libiconv virtual/libintl zlib"
+diff --git a/recipes/glib-2.0/glib-2.0_2.24.0.bb b/recipes/glib-2.0/glib-2.0_2.24.0.bb
+index 3a90dc6..412486b 100644
+--- a/recipes/glib-2.0/glib-2.0_2.24.0.bb
++++ b/recipes/glib-2.0/glib-2.0_2.24.0.bb
+@@ -3,7 +3,7 @@ which provides many useful data types, macros, \
+ type conversions, string utilities, file utilities, a main \
+ loop abstraction, and so on. It works on many \
+ UNIX-like platforms, Windows, OS/2 and BeOS."
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS = "glib-2.0-native gtk-doc zlib"
+diff --git a/recipes/glib-2.0/glib-2.0_2.24.1.bb b/recipes/glib-2.0/glib-2.0_2.24.1.bb
+index 3bc11de..3fcc7c1 100644
+--- a/recipes/glib-2.0/glib-2.0_2.24.1.bb
++++ b/recipes/glib-2.0/glib-2.0_2.24.1.bb
+@@ -3,7 +3,7 @@ which provides many useful data types, macros, \
+ type conversions, string utilities, file utilities, a main \
+ loop abstraction, and so on. It works on many \
+ UNIX-like platforms, Windows, OS/2 and BeOS."
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS = "gtk-doc zlib"
+diff --git a/recipes/glib-2.0/glib-2.0_2.6.4.bb b/recipes/glib-2.0/glib-2.0_2.6.4.bb
+index 1a483f4..65131a5 100644
+--- a/recipes/glib-2.0/glib-2.0_2.6.4.bb
++++ b/recipes/glib-2.0/glib-2.0_2.6.4.bb
+@@ -3,7 +3,7 @@ which provides many useful data types, macros, \
+ type conversions, string utilities, file utilities, a main \
+ loop abstraction, and so on. It works on many \
+ UNIX-like platforms, Windows, OS/2 and BeOS."
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS += "glib-2.0-native gtk-doc"
+diff --git a/recipes/glib-2.0/glib-2.0_2.8.6.bb b/recipes/glib-2.0/glib-2.0_2.8.6.bb
+index f025046..31183a6 100644
+--- a/recipes/glib-2.0/glib-2.0_2.8.6.bb
++++ b/recipes/glib-2.0/glib-2.0_2.8.6.bb
+@@ -3,7 +3,7 @@ which provides many useful data types, macros, \
+ type conversions, string utilities, file utilities, a main \
+ loop abstraction, and so on. It works on many \
+ UNIX-like platforms, Windows, OS/2 and BeOS."
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS += "glib-2.0-native gtk-doc"
+diff --git a/recipes/glib-2.0/glib.inc b/recipes/glib-2.0/glib.inc
+index 5cc697f..52c2f89 100644
+--- a/recipes/glib-2.0/glib.inc
++++ b/recipes/glib-2.0/glib.inc
+@@ -3,7 +3,7 @@ which provides many useful data types, macros, \
+ type conversions, string utilities, file utilities, a main \
+ loop abstraction, and so on. It works on many \
+ UNIX-like platforms, Windows, OS/2 and BeOS."
+-LICENSE = "LGPL"
++LICENSE = "LGPLv2"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ DEPENDS += "glib-2.0-native gtk-doc"
+diff --git a/recipes/iperf/iperf.inc b/recipes/iperf/iperf.inc
+index 138ba29..c9aea29 100644
+--- a/recipes/iperf/iperf.inc
++++ b/recipes/iperf/iperf.inc
+@@ -1,7 +1,7 @@
+ SECTION = "console/network"
+ DESCRIPTION = "Iperf is a tool to measure maximum TCP bandwidth, allowing the tuning of various parameters and UDP characteristics"
+ HOMEPAGE = "http://dast.nlanr.net/Projects/Iperf/"
+-LICENSE = "BSD"
++LICENSE = "NewBSD"
+ INC_PR = "r1"
+ 
+ inherit autotools
+diff --git a/recipes/ipkg-utils/ipkg-link_1.6+cvs20050404.bb b/recipes/ipkg-utils/ipkg-link_1.6+cvs20050404.bb
+index 6687129..4b582b9 100644
+--- a/recipes/ipkg-utils/ipkg-link_1.6+cvs20050404.bb
++++ b/recipes/ipkg-utils/ipkg-link_1.6+cvs20050404.bb
+@@ -1,6 +1,6 @@
+ SECTION = "base"
+ DESCRIPTION = "Itsy Package Manager utilities link script"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ CONFLICTS = "ipkg-utils"
+ SRCDATE = "20050930"
+ PR = "r4"
+diff --git a/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb b/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
+index 42653fd..93b7244 100644
+--- a/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
++++ b/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Itsy Package Manager utilities"
+ SECTION = "base"
+ PRIORITY = "optional"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ CONFLICTS = "ipkg-link"
+ RDEPENDS_${PN} = "python"
+ SRCDATE = "20050930"
+diff --git a/recipes/iptables/iptables.inc b/recipes/iptables/iptables.inc
+index db2b6f0..758f82a 100644
+--- a/recipes/iptables/iptables.inc
++++ b/recipes/iptables/iptables.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "iptables network filtering tools"
+ HOMEPAGE = "http://www.netfilter.org/"
+ SECTION = "console/utils"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ 
+ SRC_URI = "http://netfilter.org/projects/iptables/files/iptables-${PV}.tar.bz2;name=iptables-${PV}"
+ S = "${WORKDIR}/iptables-${PV}"
+diff --git a/recipes/libtool/libtool.inc b/recipes/libtool/libtool.inc
+index 838f029..7752848 100644
+--- a/recipes/libtool/libtool.inc
++++ b/recipes/libtool/libtool.inc
+@@ -3,7 +3,7 @@ This is GNU libtool, a generic library support script.  Libtool hides \
+ the complexity of generating special library types (such as shared \
+ libraries) behind a consistent interface."
+ HOMEPAGE = "http://www.gnu.org/software/libtool/libtool.html"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ SECTION = "devel"
+ 
+ INC_PR = "r25"
+diff --git a/recipes/linux-libc-headers/linux-libc-headers.inc b/recipes/linux-libc-headers/linux-libc-headers.inc
+index 642e369..0b27e46 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers.inc
++++ b/recipes/linux-libc-headers/linux-libc-headers.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Sanitized set of 2.6 kernel headers for the C library's use."
+ SECTION = "devel"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ NATIVE_INSTALL_WORKS = "1"
+ BBCLASSEXTEND = "native"
+ 
+diff --git a/recipes/pkgconfig/pkgconfig.inc b/recipes/pkgconfig/pkgconfig.inc
+index acbda40..d542cdb 100644
+--- a/recipes/pkgconfig/pkgconfig.inc
++++ b/recipes/pkgconfig/pkgconfig.inc
+@@ -4,7 +4,7 @@ compile/link flags that works with automake and autoconf. \
+ It replaces the ubiquitous *-config scripts you may have \
+ seen with a single tool."
+ HOMEPAGE = "http://pkg-config.freedesktop.org/wiki/"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ INC_PR = "r8"
+ 
+ SRC_URI = "http://pkgconfig.freedesktop.org/releases/pkg-config-${PV}.tar.gz \
+diff --git a/recipes/psplash/psplash.inc b/recipes/psplash/psplash.inc
+index efd6a0c..de35309 100644
+--- a/recipes/psplash/psplash.inc
++++ b/recipes/psplash/psplash.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Userspace framebuffer boot logo based on usplash."
+ HOMEPAGE = "http://projects.o-hand.com/psplash"
+ SECTION = "base"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ RDEPENDS_${PN} = "initscripts"
+ PROVIDES = "virtual/psplash"
+ RPROVIDES_${PN} = "virtual-psplash"
+diff --git a/recipes/quilt/quilt.inc b/recipes/quilt/quilt.inc
+index ac657fb..99c52ae 100644
+--- a/recipes/quilt/quilt.inc
++++ b/recipes/quilt/quilt.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Tool to work with series of patches."
+ HOMEPAGE = "http://savannah.nongnu.org/projects/quilt/"
+ SECTION = "devel"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ INC_PR = "r5"
+ 
+ SRC_URI = "http://download.savannah.gnu.org/releases/quilt/quilt-${PV}.tar.gz \
+diff --git a/recipes/thttpd/thttpd_2.25b.bb b/recipes/thttpd/thttpd_2.25b.bb
+index 85c7f70..bf03525 100644
+--- a/recipes/thttpd/thttpd_2.25b.bb
++++ b/recipes/thttpd/thttpd_2.25b.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "A simple, small, portable, fast, and secure HTTP server."
+-LICENSE = "BSD"
++LICENSE = "FreeBSD"
+ HOMEPAGE = "http://www.acme.com/software/thttpd/"
+ PR ="r8"
+ 
+diff --git a/recipes/tinylogin/tinylogin_1.4.bb b/recipes/tinylogin/tinylogin_1.4.bb
+index 40171ff..730012b 100644
+--- a/recipes/tinylogin/tinylogin_1.4.bb
++++ b/recipes/tinylogin/tinylogin_1.4.bb
+@@ -4,7 +4,7 @@ changing passwords, and otherwise maintaining users \
+ and groups on an embedded system."
+ HOMEPAGE = "http://tinylogin.busybox.net/"
+ SECTION = "base"
+-LICENSE = "GPLv2"
++LICENSE = "GPLv2/NewBSD"
+ PR = "r7"
+ 
+ #SRC_URI = "http://tinylogin.busybox.net/downloads/tinylogin-${PV}.tar.bz2 \
+diff --git a/recipes/unifdef/unifdef-native_2.6.18+git.bb b/recipes/unifdef/unifdef-native_2.6.18+git.bb
+index ae3eb4f..56880a8 100644
+--- a/recipes/unifdef/unifdef-native_2.6.18+git.bb
++++ b/recipes/unifdef/unifdef-native_2.6.18+git.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Kernel header preprocessor"
+ SECTION = "devel"
+-LICENSE = "GPL"
++LICENSE = "FreeBSD"
+ 
+ SRC_URI = "file://unifdef.c"
+ 
+diff --git a/recipes/update-rc.d/update-rc.d_0.7.bb b/recipes/update-rc.d/update-rc.d_0.7.bb
+index d2d22ab..2c632a1 100644
+--- a/recipes/update-rc.d/update-rc.d_0.7.bb
++++ b/recipes/update-rc.d/update-rc.d_0.7.bb
+@@ -1,7 +1,7 @@
+ SECTION = "base"
+ PRIORITY = "standard"
+ DESCRIPTION = "Manage symlinks in /etc/rcN.d"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ S = "${WORKDIR}/update-rc.d"
+ INHIBIT_DEFAULT_DEPS = "1"
+ PR = "r1"
+diff --git a/recipes/x-load/x-load.inc b/recipes/x-load/x-load.inc
+index 0699c01..192b456 100644
+--- a/recipes/x-load/x-load.inc
++++ b/recipes/x-load/x-load.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "x-load bootloader loader"
+ SECTION = "bootloaders"
+ PRIORITY = "optional"
+-LICENSE = "GPL"
++LICENSE = "GPLv2"
+ 
+ DEPENDS = "signgp-native"
+ 
+diff --git a/recipes/xorg-lib/xorg-headers-native.bb b/recipes/xorg-lib/xorg-headers-native.bb
+index e303c18..ce90fc0 100644
+--- a/recipes/xorg-lib/xorg-headers-native.bb
++++ b/recipes/xorg-lib/xorg-headers-native.bb
+@@ -1,3 +1,5 @@
++LICENSE = "MIT"
++
+ PR = "r2"
+ 
+ SRC_URI = "file://X11"
+-- 
+1.7.0.4
+
 
 
