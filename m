@@ -1,33 +1,32 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oz4b6-0003Kr-4u for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 11:31:09 +0200
+	id 1Oz4gX-0001Mq-20 for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 11:35:21 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oz4az-0003QA-Im for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 11:29:33 +0200
+	id 1Oz4gK-0005dt-Jz for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 11:35:04 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 11:29:33 +0200
+	Fri, 24 Sep 2010 11:35:04 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 11:29:33 +0200
+	Fri, 24 Sep 2010 11:35:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 24 Sep 2010 11:29:25 +0200
-Message-ID: <i7hr1l$kte$1@dough.gmane.org>
-References: <4C9C696B.4050800@dresearch.de>
-	<1285320191-22618-1-git-send-email-sledz@dresearch.de>
+Date: Fri, 24 Sep 2010 11:30:15 +0200
+Message-ID: <i7hr38$kte$3@dough.gmane.org>
+References: <4C9C4B5D.9070802@gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <1285320191-22618-1-git-send-email-sledz@dresearch.de>
+In-Reply-To: <4C9C4B5D.9070802@gmail.com>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -37,7 +36,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libatasmart-0.13: resolve cross compile problem
+Subject: Re: [PATCH] python-numpy: add mipsel config.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,81 +50,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 09:32:02 -0000
+X-List-Received-Date: Fri, 24 Sep 2010 09:35:26 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 24-09-10 11:23, Steffen Sledz wrote:
-> * This patch solves a cross/native compile problem:
-> | ./strpool atasmart.c atasmart.strpool.c
-> | ./strpool: ./strpool: cannot execute binary file
+applied, thanks
+
+On 24-09-10 08:55, Graham Gower wrote:
 > 
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
-
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
 > ---
->  recipes/devicekit/libatasmart-0.13/strpool.patch |   11 +++++++++++
->  recipes/devicekit/libatasmart_0.13.bb            |   12 +++---------
->  2 files changed, 14 insertions(+), 9 deletions(-)
->  create mode 100644 recipes/devicekit/libatasmart-0.13/strpool.patch
+>  recipes/python/python-numpy/mipsel/config.h      |   21 +++++++++++++++++++++
+>  recipes/python/python-numpy/mipsel/numpyconfig.h |   17 +++++++++++++++++
+>  2 files changed, 38 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/python/python-numpy/mipsel/config.h
+>  create mode 100644 recipes/python/python-numpy/mipsel/numpyconfig.h
 > 
-> diff --git a/recipes/devicekit/libatasmart-0.13/strpool.patch b/recipes/devicekit/libatasmart-0.13/strpool.patch
+> diff --git a/recipes/python/python-numpy/mipsel/config.h b/recipes/python/python-numpy/mipsel/config.h
 > new file mode 100644
-> index 0000000..e9f6ab3
+> index 0000000..17ef186
 > --- /dev/null
-> +++ b/recipes/devicekit/libatasmart-0.13/strpool.patch
-> @@ -0,0 +1,11 @@
-> +--- git/Makefile.am.orig	2010-09-24 11:03:40.917602895 +0200
-> ++++ git/Makefile.am	2010-09-24 11:07:04.145852660 +0200
-> +@@ -81,5 +81,8 @@
-> + BUILT_SOURCES = \
-> + 	atasmart.strpool.c
-> + 
-> ++strpool: $(strpool_SOURCES)
-> ++	$(BUILD_CC) -o $@ $?
-> ++
-> + atasmart.strpool.c: atasmart.c strpool
-> + 	$(top_builddir)/strpool $< $@
-> diff --git a/recipes/devicekit/libatasmart_0.13.bb b/recipes/devicekit/libatasmart_0.13.bb
-> index 992ff3e..4a4986e 100644
-> --- a/recipes/devicekit/libatasmart_0.13.bb
-> +++ b/recipes/devicekit/libatasmart_0.13.bb
-> @@ -2,20 +2,14 @@ DEPENDS = "udev"
->  LICENSE = "LGPL"
->  
->  SRCREV = "a80d7d5c25e88adea7b8e843cdb57143e6cfb46b"
-> -SRC_URI = "git://git.0pointer.de/libatasmart.git;protocol=git"
-> +SRC_URI = "git://git.0pointer.de/libatasmart.git;protocol=git \
-> +	file://strpool.patch"
->  
->  S = "${WORKDIR}/git"
-> -PR = "r1"
-> +PR = "r2"
->  
->  inherit autotools lib_package
->  
-> -do_compile_prepend() {
-> -	rm strpool -f
-> -	${BUILD_CC} -o strpool strpool.c
-> -	chmod +x strpool
-> -}
-> -
->  do_install_append() {
->  	sed -i -e s://:/:g -e s:${base_libdir}/libudev.la:-ludev:g ${D}${libdir}/libatasmart.la
->  }
-> -
+> +++ b/recipes/python/python-numpy/mipsel/config.h
+> @@ -0,0 +1,21 @@
+> +/* ./src.linux-i686-2.5/numpy/core/include/numpy/config.h */
+> +/* #define SIZEOF_SHORT 2 */
+> +/* #define SIZEOF_INT 4 */
+> +/* #define SIZEOF_LONG 4 */
+> +/* #define SIZEOF_FLOAT 4 */
+> +/* #define SIZEOF_DOUBLE 8 */
+> +#define SIZEOF_LONG_DOUBLE 12
+> +#define SIZEOF_PY_INTPTR_T 4
+> +/* #define SIZEOF_LONG_LONG 8 */
+> +#define SIZEOF_PY_LONG_LONG 8
+> +/* #define CHAR_BIT 8 */
+> +#define MATHLIB m
+> +#define HAVE_FLOAT_FUNCS
+> +#define HAVE_LOG1P
+> +#define HAVE_EXPM1
+> +#define HAVE_INVERSE_HYPERBOLIC
+> +#define HAVE_INVERSE_HYPERBOLIC_FLOAT
+> +#define HAVE_ISNAN
+> +#define HAVE_ISINF
+> +#define HAVE_RINT
+> +
+> diff --git a/recipes/python/python-numpy/mipsel/numpyconfig.h b/recipes/python/python-numpy/mipsel/numpyconfig.h
+> new file mode 100644
+> index 0000000..c4bf654
+> --- /dev/null
+> +++ b/recipes/python/python-numpy/mipsel/numpyconfig.h
+> @@ -0,0 +1,17 @@
+> +/* cat ./src.linux-i686-2.5/numpy/core/include/numpy/numpyconfig.h */
+> +/*
+> + *  * This file is generated by numpy/core/setup.pyc. DO NOT EDIT 
+> + *   */
+> +#define NPY_SIZEOF_SHORT 2 
+> +#define NPY_SIZEOF_INT 4 
+> +#define NPY_SIZEOF_LONG 4 
+> +#define NPY_SIZEOF_FLOAT 4 
+> +#define NPY_SIZEOF_DOUBLE 8 
+> +#define NPY_SIZEOF_LONGDOUBLE 12 
+> +#define NPY_SIZEOF_PY_INTPTR_T 4 
+> +#define NPY_NO_SMP 0
+> +
+> +#define NPY_SIZEOF_LONGLONG 8 
+> +#define NPY_SIZEOF_PY_LONG_LONG 8 
+> +/* #define CHAR_BIT 8 */
+> +
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMnG91MkyGM64RGpERAlY2AJ9wplA9f6GVaujRIBGDCnAoxS55JgCfZ4Aq
-9hQELdWnRM7EXaeK4hxcdSI=
-=zbi2
+iD8DBQFMnG+nMkyGM64RGpERAsmVAJ0YcbRBlkaoWYQ4/TmKD82BsguVmQCfQ8Vn
+5zjAuqncdU30JWqyf7kCmxY=
+=yjWY
 -----END PGP SIGNATURE-----
 
 
