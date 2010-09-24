@@ -1,27 +1,47 @@
-Received: from smtprelay01.ispgateway.de ([80.67.31.28])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gerd_oe@gerwitec.de>) id 1Oz1a5-0003uQ-Gz
+	(envelope-from <graham.gower@gmail.com>) id 1Oz2C3-0004XX-I2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 08:16:29 +0200
-Received: from [84.174.244.91] (helo=localhost.localdomain)
-	by smtprelay01.ispgateway.de with esmtpa (Exim 4.68)
-	(envelope-from <gerd_oe@gerwitec.de>)
-	id 1Oz1YB-0007pU-MB; Fri, 24 Sep 2010 08:14:27 +0200
-From: Gerd Wiegand <gerd_oe@gerwitec.de>
+	Fri, 24 Sep 2010 08:55:42 +0200
+Received: by pwi10 with SMTP id 10so559117pwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Sep 2010 23:55:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=VP+dEAA8OzwUW4YGMspOyfF6gAA5GVZfsUVfPtZdEm0=;
+	b=ZFZ4bvWzqzBt7IpDr1QvullY50UGAzs+S/gdTdkPAHbkrsg52f0SnAs9Ofnjpk5i1P
+	GTmb6vUB+TmYZQpy8N6FQYSK1bAJzQsT4Syyw8E7eXnfw7QGGL+YZvlVAx15aAPSZj3U
+	fPz/DCiEBcYoaEBZIqE1zMlS7sBrmYLzxb//A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=ZMT7V/4bq27pQ1zGpXHcBhHY51CKKqCczBqjGCe9RbSgX+TucleCR04iKrpAceyorl
+	054aj462ksXufIMpmQVLs2bZXTBhcCK5pm3cmthOnazNNG8/gm/xRT8QcN09QBKETSbi
+	Sfknle2PeLUDUnRlOes/0xdmSi//Dyfp2XV+s=
+Received: by 10.114.92.16 with SMTP id p16mr3057552wab.210.1285311331921;
+	Thu, 23 Sep 2010 23:55:31 -0700 (PDT)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id s5sm2958425wak.0.2010.09.23.23.55.29
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 23 Sep 2010 23:55:30 -0700 (PDT)
+Message-ID: <4C9C4B5D.9070802@gmail.com>
+Date: Fri, 24 Sep 2010 16:25:25 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Sep 2010 08:14:24 +0200
-Message-Id: <1285308864-3037-1-git-send-email-gerd_oe@gerwitec.de>
-X-Mailer: git-send-email 1.7.0.4
-X-Df-Sender: 141887
-X-SA-Exim-Connect-IP: 80.67.31.28
-X-SA-Exim-Mail-From: gerd_oe@gerwitec.de
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] expat: altered recipe for v2.0.1
+Subject: [PATCH] python-numpy: add mipsel config.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,47 +55,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 06:16:29 -0000
+X-List-Received-Date: Fri, 24 Sep 2010 06:55:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-expat-2.0.1.tar.gz has no leading directory, so it unpacked directly in
-${WORKDIR} and the following task fails.
-* added do_unpack() which create the right directory structur
-* updated md5 and sha256 sums
 
-Signed-off-by: Gerd Wiegand <gerd_oe@gerwitec.de>
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
 ---
- recipes/expat/expat_2.0.1.bb |   11 ++++++++---
- 1 files changed, 8 insertions(+), 3 deletions(-)
+ recipes/python/python-numpy/mipsel/config.h      |   21 +++++++++++++++++++++
+ recipes/python/python-numpy/mipsel/numpyconfig.h |   17 +++++++++++++++++
+ 2 files changed, 38 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/python/python-numpy/mipsel/config.h
+ create mode 100644 recipes/python/python-numpy/mipsel/numpyconfig.h
 
-diff --git a/recipes/expat/expat_2.0.1.bb b/recipes/expat/expat_2.0.1.bb
-index 5ff9f1e..6752fd5 100644
---- a/recipes/expat/expat_2.0.1.bb
-+++ b/recipes/expat/expat_2.0.1.bb
-@@ -1,14 +1,19 @@
- require expat.inc
--PR = "r3"
-+PR = "r4"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
- SRC_URI += "file://autotools.patch"
--SRC_URI[src.md5sum] = "ee8b492592568805593f81f8cdf2a04c"
--SRC_URI[src.sha256sum] = "847660b4df86e707c9150e33cd8c25bc5cd828f708c7418e765e3e983a2e5e93"
-+SRC_URI[src.md5sum] = "f8785ec51167c2f90d1fdb8dff6bb969"
-+SRC_URI[src.sha256sum] = "e03a463b6892ada099a68ce2d38bc4d2495612e7acd076d7a453d1a2de226212"
- 
- inherit lib_package
- 
-+do_unpack() {
-+	mkdir -p ${WORKDIR}/expat-${PV}
-+	tar -xzf ${DL_DIR}/expat-${PV}.tar.gz -C expat-${PV}
-+}
+diff --git a/recipes/python/python-numpy/mipsel/config.h b/recipes/python/python-numpy/mipsel/config.h
+new file mode 100644
+index 0000000..17ef186
+--- /dev/null
++++ b/recipes/python/python-numpy/mipsel/config.h
+@@ -0,0 +1,21 @@
++/* ./src.linux-i686-2.5/numpy/core/include/numpy/config.h */
++/* #define SIZEOF_SHORT 2 */
++/* #define SIZEOF_INT 4 */
++/* #define SIZEOF_LONG 4 */
++/* #define SIZEOF_FLOAT 4 */
++/* #define SIZEOF_DOUBLE 8 */
++#define SIZEOF_LONG_DOUBLE 12
++#define SIZEOF_PY_INTPTR_T 4
++/* #define SIZEOF_LONG_LONG 8 */
++#define SIZEOF_PY_LONG_LONG 8
++/* #define CHAR_BIT 8 */
++#define MATHLIB m
++#define HAVE_FLOAT_FUNCS
++#define HAVE_LOG1P
++#define HAVE_EXPM1
++#define HAVE_INVERSE_HYPERBOLIC
++#define HAVE_INVERSE_HYPERBOLIC_FLOAT
++#define HAVE_ISNAN
++#define HAVE_ISINF
++#define HAVE_RINT
 +
- do_configure() {
- 	rm -f ${S}/conftools/libtool.m4
- 	touch ${S}/conftools/libtool.m4
+diff --git a/recipes/python/python-numpy/mipsel/numpyconfig.h b/recipes/python/python-numpy/mipsel/numpyconfig.h
+new file mode 100644
+index 0000000..c4bf654
+--- /dev/null
++++ b/recipes/python/python-numpy/mipsel/numpyconfig.h
+@@ -0,0 +1,17 @@
++/* cat ./src.linux-i686-2.5/numpy/core/include/numpy/numpyconfig.h */
++/*
++ *  * This file is generated by numpy/core/setup.pyc. DO NOT EDIT 
++ *   */
++#define NPY_SIZEOF_SHORT 2 
++#define NPY_SIZEOF_INT 4 
++#define NPY_SIZEOF_LONG 4 
++#define NPY_SIZEOF_FLOAT 4 
++#define NPY_SIZEOF_DOUBLE 8 
++#define NPY_SIZEOF_LONGDOUBLE 12 
++#define NPY_SIZEOF_PY_INTPTR_T 4 
++#define NPY_NO_SMP 0
++
++#define NPY_SIZEOF_LONGLONG 8 
++#define NPY_SIZEOF_PY_LONG_LONG 8 
++/* #define CHAR_BIT 8 */
++
 -- 
-1.7.0.4
+1.7.1
 
 
 
