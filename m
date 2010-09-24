@@ -1,49 +1,31 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Oz3CX-0008KC-VN
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 10:00:14 +0200
-Received: by bwz2 with SMTP id 2so1869000bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 01:00:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=oklLa7CHhtVDJ6mi1qGvKv6fR+XMM+e3sXHzHNPa5oU=;
-	b=vYmHpvyj4bO6DAm6sWjPE06miwP5DqmFsafyqMj4nGJ/fc2+zi+uqPAmiKrZVEc9V8
-	k6KxZ15lLxsKwQM8hWCmNDCpvC/xa4lPZeCQW8l3CgEt0rVN3hI98B7yuB03Qf46rRok
-	Loe3DSGR4gDT+X/xJCGhynXXI/FCE/C25JV3M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=nQ4n4ihz6Nin5F9Dh0SdC9TuhDpbVmvO/wuDHjQyU9v4cazeC8AhQ1CafHdoh0Z5kx
-	3VlxFRfj6SFgN3I5W3uNlmWsiliY3H/QkHkurhUYaph91C4PDd4EV8Peh0SCx4cv9XJK
-	zAPjvBQRS7GoDtNRbm6moFLsbGfACM8Q6di1Q=
-Received: by 10.204.84.92 with SMTP id i28mr1895233bkl.57.1285315208909;
-	Fri, 24 Sep 2010 01:00:08 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id d27sm1360273bku.22.2010.09.24.01.00.07
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 24 Sep 2010 01:00:07 -0700 (PDT)
-Date: Fri, 24 Sep 2010 10:00:06 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oz3Jj-000383-7e for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 10:07:49 +0200
+Received: from f053038003.adsl.alicedsl.de ([78.53.38.3] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oz3Je-0004Fe-QI for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Sep 2010 08:07:34 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100924080006.GB3312@jama>
-References: <AANLkTinzRQGe9CLG_n5g0sFG0NDdZBdU2RSL9KjgzokP@mail.gmail.com>
-	<1285314751.3715.5.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1285314751.3715.5.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <AANLkTim8cnSprD7+T_vZF-nrJ24V8u6PnZGjpUd0q+gd@mail.gmail.com>
+References: <4C9950EA.2070306@gmail.com>
+	<AANLkTim8cnSprD7+T_vZF-nrJ24V8u6PnZGjpUd0q+gd@mail.gmail.com>
+Date: Fri, 24 Sep 2010 10:07:33 +0200
+Message-ID: <1285315653.3715.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: git error ?
+Subject: Re: [PATCH] mythfront-config.bb: Fix do_unpack for machines other than epia.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,49 +39,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 08:00:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Sep 2010 08:07:54 -0000
+X-Groupsio-MsgNum: 23924
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-dm2xP7AV1D/2TeDWd2IO"
 
-On Fri, Sep 24, 2010 at 09:52:30AM +0200, Paul Menzel wrote:
-> Am Donnerstag, den 23.09.2010, 22:11 +0200 schrieb Frans Meulenbroeks:
-> > Hm,
-> > 
-> > On my latest git push I got:
-> > 
-> > frans@linux-suse:~/oe/openembedded> git push
-> > Counting objects: 13, done.
-> > Delta compression using up to 2 threads.
-> > Compressing objects: 100% (7/7), done.
-> > Writing objects: 100% (8/8), 649 bytes, done.
-> > Total 8 (delta 6), reused 0 (delta 0)
-> > error: unable to create temporary sha1 filename : Read-only file system
-> > 
-> > fatal: failed to write object
-> > error: unpack failed: unpack-objects abnormal exit
-> > To git@git.openembedded.org:openembedded
-> >  ! [remote rejected] org.openembedded.dev -> org.openembedded.dev (n/a
-> > (unpacker error))
-> > error: failed to push some refs to 'git@git.openembedded.org:openembedded'
-> > 
-> > 
-> > No idea what is going on here, guess it is at the git side. My fs is not r/o
-> 
-> I just wanted confirm, that you are not alone with this Git server
-> problem. I am getting the same error as some weeks ago [1].
-> 
->         $ git remote update
->         Fetching origin
->         git.openembedded.org[0: 140.211.169.165]: errno=Connection refused
->         fatal: unable to connect a socket (Connection refused)
->         error: Could not fetch origin
+--=-dm2xP7AV1D/2TeDWd2IO
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I can confirm
-git+ssh:// works
-but other protocols doesn't seem to work this morning
+Am Freitag, den 24.09.2010, 09:24 +0200 schrieb Frans Meulenbroeks:
+> 2010/9/22 Graham Gower <graham.gower@gmail.com>:
+> > Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> > ---
+> >  recipes/mythfront/mythfront-config.bb |   14 ++++++++------
+> >  1 files changed, 8 insertions(+), 6 deletions(-)
+> >
+> Thanks for unbreaking this.
+> I've never noticed this, but I must say I didn't really peek into this on=
+e.
+>=20
+> Some concerns wrt the rest of the recipe though
+>=20
+> > diff --git a/recipes/mythfront/mythfront-config.bb b/recipes/mythfront/=
+mythfront-config.bb
+> > index b87e0be..79ba428 100644
+> > --- a/recipes/mythfront/mythfront-config.bb
+> > +++ b/recipes/mythfront/mythfront-config.bb
+> > @@ -1,11 +1,12 @@
+> >  PV =3D "1.10"
+> > -PR =3D "r0"
+> > +PR =3D "r1"
+> >
+> >  RDEPENDS_${PN} =3D "font-misc-misc"
+>=20
+> This is not sufficient. There should also be a dependency on mythtv
+> itself and on lirc (but maybe mythtv will drag than one in)
+>=20
+> >  LICENSE =3D "MIT"
+> > -SRC_URI =3D "file://tftp.sh file://xorg.conf"
+> > +SRC_URI =3D "file://tftp.sh"
+> >
+> > -SRC_URI_append_epia =3D " file://serial.sh"
+> > +SRC_URI_append_epia =3D " file://serial.sh \
+> > +                       file://xorg.conf"
+> >
+> >  do_install() {
+> >        install -d ${D}${sysconfdir}/udhcpc.d/
+> > @@ -14,9 +15,6 @@ do_install() {
+> >        install -d ${D}${sysconfdir}/mythtv
+> >        ln -sf /var/lib/config/mysql.txt ${D}${sysconfdir}/mythtv
+>=20
+> This is already done if you install mythtv-database
+> >
+> > -       install -d ${D}${sysconfdir}/X11
+> > -       install -m 0644 ${WORKDIR}/xorg.conf ${D}${sysconfdir}/X11
+>=20
+> Not sure if this is good. for epia there is an xorg.conf, but it is
+> not in the SRC_URIL for non-epia, so it cannot be installed for these
+> (unless you get it from somewhere else)
 
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+As far as I can see, this problem is the actual purpose of Graham=E2=80=99s
+patch. It moves these commands to `do_install_append_epia()`.
+
+> > -
+> >        ln -sf /var/lib/config/lircd.conf ${D}${sysconfdir}/lircd.conf
+>=20
+> and i would say lirc should perhaps do this.
+> >
+> >        install -d ${D}/dev
+> > @@ -30,3 +28,7 @@ do_install() {
+> >        fi
+> >  }
+> >
+> > +do_install_append_epia() {
+> > +       install -d ${D}${sysconfdir}/X11
+> > +       install -m 0644 ${WORKDIR}/xorg.conf ${D}${sysconfdir}/X11
+> > +}
+> > --
+
+Adhering to the mantra of small changes, I would acknowledge this patch
+and get your concerns addressed in another patch. Frans, as one of the
+MythTV maintainers, your Acked-by would be appreciated too, I guess.
+
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
 
+Thanks,
+
+Paul
+
+--=-dm2xP7AV1D/2TeDWd2IO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkycXEUACgkQPX1aK2wOHViFxgCfWKK5/RJcaEJOCdp0rGC0tMUl
+GqEAn0Ix3dRXF6SPlcf8YpZfAlINeka8
+=95Fp
+-----END PGP SIGNATURE-----
+
+--=-dm2xP7AV1D/2TeDWd2IO--
