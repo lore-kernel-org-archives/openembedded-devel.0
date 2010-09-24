@@ -1,48 +1,44 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Oz2D7-0004hw-94
+	(envelope-from <raj.khem@gmail.com>) id 1Oz2Sn-0006Sv-3x
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 08:56:47 +0200
-Received: by pzk37 with SMTP id 37so559861pzk.6
+	Fri, 24 Sep 2010 09:12:58 +0200
+Received: by pwi10 with SMTP id 10so561375pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Sep 2010 23:56:38 -0700 (PDT)
+	Fri, 24 Sep 2010 00:12:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=6/bZcBkrcGWaZ0MRClbGonKqcVdZLATTDHWMIiSSSdk=;
-	b=dxmDvSdXHNkseS9IUuh/HG5bcCJ+eRpxVwBniKItPaNlOkxwxnJ685qgr3w51qofwQ
-	VnB4FCSi2WutXFxASAXhGiUZDvTG0oy0taJTGf0lvp4ldDE+ZB83sdxiCchhkVOhE3Ph
-	lRunB3dyvXxN3fWHAU032T88FM2i6JhLX3PMw=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=vcCAhfItFLj1LqGfKBb/Lcddy76r2pcPT/WL103jxS4=;
+	b=UCT7aeG1fuHbHNajHzQPsShsfPWwaj0rFtLkABMvOReEdRhvDyA1hc9mqFLtaiDuGt
+	qcn6xyIFhbr/ur57PpCFniz6/ttRwdolO3bmGsN6m2E3fj6cJYbtRpUeFV4FqStiwTwP
+	SVtyqOdOU0AL6n1G+F9iHGig8hL48GvkPq0tc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=SymTdKcBThuSOCFW72Za+fY2otqkuzFkJRp6Y4FZbOLq7djoRRJGwXaifXhj0lgUGm
-	gtxxoXEevmmlcSIutm9qoGKadf5Mnh+CDZPGcXG4SxeVTu1R1sBwJbnREKG2DwZL1s8L
-	s0NdQTC/dc0wlRXZhNYmz7QXHunAt1GcQG1Iw=
-Received: by 10.114.39.7 with SMTP id m7mr3045260wam.201.1285311397937;
-	Thu, 23 Sep 2010 23:56:37 -0700 (PDT)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	c24sm2950786wam.19.2010.09.23.23.56.35
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=GvbCEMDr1yb+5HNAzPecq2xi6BB3uNsPKiy8TTnp4NwUsGcqC9kzD8o2ivlKMGlcfx
+	2xFAM7zxNOtSOlCVYSu2K5FGKLywy3DsMMIbRIo4+hXd90OXA9KNx70fGTnTrcZa+FNE
+	qWcFNWUXIEa3GhiZA9CWv8GHYDqW4Wa5vtEz0=
+Received: by 10.142.191.12 with SMTP id o12mr2329064wff.301.1285312369763;
+	Fri, 24 Sep 2010 00:12:49 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id v3sm1903166wfv.11.2010.09.24.00.12.48
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 23 Sep 2010 23:56:37 -0700 (PDT)
-Message-ID: <4C9C4BA0.2090200@gmail.com>
-Date: Fri, 24 Sep 2010 16:26:32 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
-MIME-Version: 1.0
+	Fri, 24 Sep 2010 00:12:49 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.47
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Fri, 24 Sep 2010 00:12:44 -0700
+Message-Id: <1285312364-12627-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gtk+_2.20.1.bb: Fix build with --disable-xkb.
+Subject: [PATCH] eglibc.inc: Transfer PARALLEL_MAKE to PARALLELMFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,61 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 06:56:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Sep 2010 07:12:58 -0000
 
-See https://bugzilla.gnome.org/show_bug.cgi?id=619114
+* Currently we are passing -jN flags to eglibc makefiles
+  however eglibc uses a make variable called PARALLELMFLAGS
+  to pass information about parallel build to sub-makes
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
+* Currently make install ran without parallelism but now
+  it should have parallel building flags passed to do_install
+  correctly which inturn should improve build time of
+  eglibc on systems using parallel build -j with values > 1
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/gtk+/files/xkb-ifdef.patch |   24 ++++++++++++++++++++++++
- recipes/gtk+/gtk+_2.20.1.bb        |    1 +
- 2 files changed, 25 insertions(+), 0 deletions(-)
- create mode 100644 recipes/gtk+/files/xkb-ifdef.patch
+ recipes/eglibc/eglibc.inc |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/gtk+/files/xkb-ifdef.patch b/recipes/gtk+/files/xkb-ifdef.patch
-new file mode 100644
-index 0000000..b74d9c9
---- /dev/null
-+++ b/recipes/gtk+/files/xkb-ifdef.patch
-@@ -0,0 +1,24 @@
-+commit eff1fe2500f07fa2b4683ff52fe92e39e6487b05
-+Author: Matthias Clasen <mclasen@redhat.com>
-+Date:   Fri May 21 12:13:05 2010 -0400
-+
-+    Make the !xkb build survive a little longer
-+    
-+    This fixes bug 619114.
-+
-+diff --git a/gdk/x11/gdkdisplay-x11.c b/gdk/x11/gdkdisplay-x11.c
-+index c0cbc99..6cded79 100644
-+--- a/gdk/x11/gdkdisplay-x11.c
-++++ b/gdk/x11/gdkdisplay-x11.c
-+@@ -690,7 +690,11 @@ gdk_display_beep (GdkDisplay *display)
-+ {
-+   g_return_if_fail (GDK_IS_DISPLAY (display));
-+ 
-++#ifdef HAVE_XKB
-+   XkbBell (GDK_DISPLAY_XDISPLAY (display), None, 0, None);
-++#else
-++  XBell (GDK_DISPLAY_XDISPLAY (display), 0);
-++#endif
-+ }
-+ 
-+ /**
-diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
-index ca5e197..f9367b7 100644
---- a/recipes/gtk+/gtk+_2.20.1.bb
-+++ b/recipes/gtk+/gtk+_2.20.1.bb
-@@ -4,6 +4,7 @@ SRC_URI_append_virtclass-native = " file://no-demos.patch \
- "
- SRC_URI_append = "file://gtk-dnd-grab-deadlock-fix.patch \
- 		  file://cross-nm.patch \
-+		  file://xkb-ifdef.patch \
- 		 "
+diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
+index 66bb90e..c8ecff8 100644
+--- a/recipes/eglibc/eglibc.inc
++++ b/recipes/eglibc/eglibc.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.eglibc.org/home"
+ SECTION = "libs"
+ PRIORITY = "required"
+ LICENSE = "LGPL"
+-INC_PR = "r11"
++INC_PR = "r12"
+ # nptl needs unwind support in gcc, which can't be built without glibc.
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-headers"
+ #this leads to circular deps, so lets not add it yet
+@@ -20,5 +20,8 @@ GLIBC_EXTRA_OECONF ?= ""
+ INHIBIT_DEFAULT_DEPS = "1"
  
- SRC_URI[gtk.md5sum] = "53e6f3a93bd22934878fc4a4a34c68aa"
+ ARM_INSTRUCTION_SET = "arm"
+-
++# eglibc uses PARALLELMFLAGS variable to pass parallel build info so transfer
++# PARALLEL_MAKE into PARALLELMFLAGS and empty out PARALLEL_MAKE
++EXTRA_OEMAKE := "PARALLELMFLAGS=${PARALLEL_MAKE}"
++PARALLEL_MAKE = ""
+ PACKAGES = "glibc catchsegv sln nscd ldd localedef glibc-utils glibc-dev glibc-doc glibc-locale libsegfault glibc-extra-nss glibc-thread-db glibc-pcprofile"
 -- 
 1.7.1
 
