@@ -1,32 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1OzA7v-00023W-8V
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OzAN7-0000VT-CI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 17:23:57 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1OzA7m-0005W4-Rs from Fahad_Usman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 08:23:47 -0700
-Received: from localhost.localdomain ([137.202.157.210]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 24 Sep 2010 17:23:45 +0200
-From: Fahad Usman <fahad_usman@mentor.com>
+	Fri, 24 Sep 2010 17:39:38 +0200
+Received: (qmail 31848 invoked by uid 503); 24 Sep 2010 15:53:21 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 24 Sep 2010 15:53:21 -0000
+Received: (qmail 9827 invoked by uid 503); 24 Sep 2010 15:22:00 -0000
+Received: from b6.ovh.net (HELO mail420.ha.ovh.net) (213.186.33.56)
+	by 30.mail-out.ovh.net with SMTP; 24 Sep 2010 15:21:59 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 24 Sep 2010 17:39:28 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 24 Sep 2010 17:39:28 +0200
+Message-ID: <4C9CC62F.5000804@eukrea.com>
+Date: Fri, 24 Sep 2010 17:39:27 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Sep 2010 20:24:25 +0500
-Message-Id: <1285341865-29172-1-git-send-email-fahad_usman@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 24 Sep 2010 15:23:45.0525 (UTC)
-	FILETIME=[7A7F7250:01CB5BFC]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
+References: <1285339946-7340-1-git-send-email-iwamatsu@nigauri.org>
+In-Reply-To: <1285339946-7340-1-git-send-email-iwamatsu@nigauri.org>
+X-Ovh-Tracer-Id: 14280914419413331273
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] python-epydoc_3.0.1.bb: merged native and non-native recipes
+Subject: Re: [PATCH] machine/sh7785lcr: Add new machine for Renesas SH7785 reference board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,62 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 15:23:57 -0000
+X-List-Received-Date: Fri, 24 Sep 2010 15:39:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-* removed the python-epydoc-native_3.0.1.bb file
-* added DEPENDS_pn-python-epydoc-native = "python-native" and added DEPENDS_pn-python-epydoc = "python"
-* added BBCLASSEXTEND = "native"
-* added NATIVE_INSTALL_WORKS = "1"
-* bunped PR
+Hi,
 
-Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
----
- recipes/python/python-epydoc-native_3.0.1.bb |   11 -----------
- recipes/python/python-epydoc_3.0.1.bb        |    8 +++++++-
- 2 files changed, 7 insertions(+), 12 deletions(-)
+Le 24/09/2010 16:52, Nobuhiro Iwamatsu a écrit :
+> * Machine config for Renesas SH7785 reference board.
+> * Add kernel config for 2.6.32, 33, 34 and 35.
+>
+> Signed-off-by: Nobuhiro Iwamatsu<iwamatsu@nigauri.org>
+> ---
+>   conf/machine/include/tune-sh4.inc              |    2 +
+>   conf/machine/sh7785lcr.conf                    |   20 +
+>   recipes/linux/linux-2.6.32/sh7785lcr/defconfig | 1833 ++++++++++++++++++++++
+>   recipes/linux/linux-2.6.33/sh7785lcr/defconfig | 1869 +++++++++++++++++++++++
+>   recipes/linux/linux-2.6.34/sh7785lcr/defconfig | 1877 +++++++++++++++++++++++
+>   recipes/linux/linux-2.6.35/sh7785lcr/defconfig | 1927 ++++++++++++++++++++++++
+>   recipes/linux/linux_2.6.35.bb                  |    1 +
+>   7 files changed, 7529 insertions(+), 0 deletions(-)
+>   create mode 100644 conf/machine/sh7785lcr.conf
+>   create mode 100644 recipes/linux/linux-2.6.32/sh7785lcr/defconfig
+>   create mode 100644 recipes/linux/linux-2.6.33/sh7785lcr/defconfig
+>   create mode 100644 recipes/linux/linux-2.6.34/sh7785lcr/defconfig
+>   create mode 100644 recipes/linux/linux-2.6.35/sh7785lcr/defconfig
+>
+you only neet to add the defconfig for the kernel you support (2.6.35) 
+as the other files won't be used.
 
-diff --git a/recipes/python/python-epydoc-native_3.0.1.bb b/recipes/python/python-epydoc-native_3.0.1.bb
-deleted file mode 100644
-index c9d6813..0000000
---- a/recipes/python/python-epydoc-native_3.0.1.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require python-epydoc_${PV}.bb
--DEPENDS = "python-native"
--inherit native
--
--do_stage() {
--	distutils_stage_all
--}
--
--
--SRC_URI[md5sum] = "cdd6f6c76dd8bab5e653a343a0544294"
--SRC_URI[sha256sum] = "d4e5c8d90937d01b05170f592c1fa9b29e9ed0498dfe7f0eb2a3af61725b6ad1"
-diff --git a/recipes/python/python-epydoc_3.0.1.bb b/recipes/python/python-epydoc_3.0.1.bb
-index a2b66e3..6a2e591 100644
---- a/recipes/python/python-epydoc_3.0.1.bb
-+++ b/recipes/python/python-epydoc_3.0.1.bb
-@@ -4,7 +4,9 @@ PRIORITY = "optional"
- LICENSE = "MIT" 
- HOMEPAGE = "http://epydoc.sourceforge.net/" 
- SRCNAME = "epydoc" 
--DEPENDS = "python" 
-+DEPENDS_pn-python-epydoc = "python"
-+DEPENDS_pn-python-epydoc-native = "python-native"
-+PR = "r1"
-  
- SRC_URI = "http://downloads.sourceforge.net/project/${SRCNAME}/${SRCNAME}/${PV}/${SRCNAME}-${PV}.tar.gz" 
- S = "${WORKDIR}/${SRCNAME}-${PV}" 
-@@ -13,3 +15,7 @@ inherit distutils
- 
- SRC_URI[md5sum] = "cdd6f6c76dd8bab5e653a343a0544294"
- SRC_URI[sha256sum] = "d4e5c8d90937d01b05170f592c1fa9b29e9ed0498dfe7f0eb2a3af61725b6ad1"
-+
-+BBCLASSEXTEND = "native"
-+
-+NATIVE_INSTALL_WORKS = "1"
--- 
-1.6.3.3
-
+Eric
 
 
