@@ -1,36 +1,44 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1Oz55a-0000yQ-UA
+	(envelope-from <graham.gower@gmail.com>) id 1Oz68A-0005eP-Vy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 12:01:11 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 5556B491282
+	Fri, 24 Sep 2010 13:07:59 +0200
+Received: by ywe9 with SMTP id 9so721082ywe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 12:01:06 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 24 Sep 2010 12:01:06 +0200
-Message-ID: <4C9C76E4.4010507@dresearch.de>
-Date: Fri, 24 Sep 2010 12:01:08 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+	Fri, 24 Sep 2010 04:07:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=Yjg5WPLqwSfOsuFr3E4vA6DuU1i+gusY3i23008m0cE=;
+	b=HJYQNm6U3f6EN6nsrZwlBQpui1K1RQtq9M7t/FG7nrtmr+i3iEWFhPuAdQESaEpvZ+
+	w63RytGpD5uAFyyYKmZJKehtOWolu171kQDiknBxPr3hoGsXJBiMnL3iYp1pyORR7/6b
+	MlqXvmtEEazvSycxXGJ8ZSnigx6otU5Lteg40=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Wp+nUcsm84pm+EVV8TcYeTTImN1xSqb3nkpYwbkeRCbJUI1loT0+SSonlcSoSwcZFM
+	HIWLLL4rBQzY5+f/IMYB3TfDCik7CFqwO7Vm4a3ykyYc56mmNKCr+KwR3ACZuuXtaShd
+	DftJH40Xwd733/bPfuPn4jkbaLVcpPqXqlixw=
 MIME-Version: 1.0
+Received: by 10.90.118.4 with SMTP id q4mr2759217agc.16.1285326467227; Fri, 24
+	Sep 2010 04:07:47 -0700 (PDT)
+Received: by 10.231.158.147 with HTTP; Fri, 24 Sep 2010 04:07:47 -0700 (PDT)
+In-Reply-To: <i7hr2q$kte$2@dough.gmane.org>
+References: <4C9C4B81.8010700@gmail.com>
+	<i7hr2q$kte$2@dough.gmane.org>
+Date: Fri, 24 Sep 2010 20:37:47 +0930
+Message-ID: <AANLkTi=2SgHJxqBLqHLxnKEs4vW1UBpE__WibmavOhZG@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C9C696B.4050800@dresearch.de>	<1285320191-22618-1-git-send-email-sledz@dresearch.de>	<i7hr1l$kte$1@dough.gmane.org>
-	<1285322107.3715.55.camel@mattotaupa>
-In-Reply-To: <1285322107.3715.55.camel@mattotaupa>
-X-OriginalArrivalTime: 24 Sep 2010 10:01:06.0184 (UTC)
-	FILETIME=[676E7080:01CB5BCF]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libatasmart-0.13: resolve cross compile problem
+Subject: Re: [PATCH] firefox_3.6.8.bb: Add mipsel support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,21 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 10:01:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 24 Sep 2010 11:07:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Pushed.
+On 24 September 2010 19:00, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 24-09-10 08:56, Graham Gower wrote:
+>> Patches taken from Gentoo and Debian.
+>>
+>> Runs almost acceptably on my 350mhz/128mb mipsel, after a lengthy
+>> startup delay. Should work for big endian mips without much more
+>> work, but I can't test.
+>>
+>> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+>
+> Thanks for the patch! It doesn't apply, could you rework and resend it
+> please?
+>
+> regards,
+>
+> Koen
+>
 
---=20
-Steffen Sledz
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
-Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
-Fax: +49 (30) 515932299 http://www.DResearch.DE
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 54412;
-Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+I can't git pull in order to merge right now... But hand editing the
+below fragment, to change r2->r3 would probably fix it. Otherwise it
+will have to wait a couple of days.
 
+--- a/recipes/mozilla/firefox_3.6.8.bb
++++ b/recipes/mozilla/firefox_3.6.8.bb
+@@ -1,5 +1,5 @@
+ DEPENDS += "cairo sqlite3 libnotify"
+-PR = "r1"
++PR = "r2"
+
+ # The .pc files below have "3.6" hardcoded, fix that before using
+them in a newer FF version!
 
 
