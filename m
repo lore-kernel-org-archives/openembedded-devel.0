@@ -1,35 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OyujO-0002Dn-NU
+Received: from smtprelay01.ispgateway.de ([80.67.31.28])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gerd_oe@gerwitec.de>) id 1Oz1a5-0003uQ-Gz
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Sep 2010 00:57:38 +0200
-Received: (qmail invoked by alias); 23 Sep 2010 22:57:28 -0000
-Received: from p50882BA8.dip.t-dialin.net (EHLO [192.168.142.128])
-	[80.136.43.168]
-	by mail.gmx.net (mp009) with SMTP; 24 Sep 2010 00:57:28 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19CrB0UF91CYD0CC0oF9eDKf1gr4/45hHz6NJtWLZ
-	PvDEol2O0I7uAU
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Fri, 24 Sep 2010 08:16:29 +0200
+Received: from [84.174.244.91] (helo=localhost.localdomain)
+	by smtprelay01.ispgateway.de with esmtpa (Exim 4.68)
+	(envelope-from <gerd_oe@gerwitec.de>)
+	id 1Oz1YB-0007pU-MB; Fri, 24 Sep 2010 08:14:27 +0200
+From: Gerd Wiegand <gerd_oe@gerwitec.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Sep 2010 00:55:34 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
-References: <1285248897-5198-1-git-send-email-schnitzeltony@gmx.de>
-	<201009232126.35996.schnitzeltony@gmx.de>
-	<AANLkTikzbm2zfbDbXc2a6AJTHuvQC9FaZYmw65udiJq-@mail.gmail.com>
-In-Reply-To: <AANLkTikzbm2zfbDbXc2a6AJTHuvQC9FaZYmw65udiJq-@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201009240055.34347.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.23
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+Date: Fri, 24 Sep 2010 08:14:24 +0200
+Message-Id: <1285308864-3037-1-git-send-email-gerd_oe@gerwitec.de>
+X-Mailer: git-send-email 1.7.0.4
+X-Df-Sender: 141887
+X-SA-Exim-Connect-IP: 80.67.31.28
+X-SA-Exim-Mail-From: gerd_oe@gerwitec.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v3] clutter-gtk: Bump to 0.10.8
+Subject: [PATCH] expat: altered recipe for v2.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +35,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2010 22:57:38 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Sep 2010 06:16:29 -0000
 
-On Thursday 23 September 2010 09:44:30 pm Frans Meulenbroeks wrote:
-> Frans (btw still interested to learn how it is tested)
+expat-2.0.1.tar.gz has no leading directory, so it unpacked directly in
+${WORKDIR} and the following task fails.
+* added do_unpack() which create the right directory structur
+* updated md5 and sha256 sums
 
-My configuration (untouched since I started with OE)
+Signed-off-by: Gerd Wiegand <gerd_oe@gerwitec.de>
+---
+ recipes/expat/expat_2.0.1.bb |   11 ++++++++---
+ 1 files changed, 8 insertions(+), 3 deletions(-)
 
-MACHINE = "overo"
-DISTRO = "angstrom-2008.1"
-#ANGSTROM_MODE = "uclibc" -> glibc
+diff --git a/recipes/expat/expat_2.0.1.bb b/recipes/expat/expat_2.0.1.bb
+index 5ff9f1e..6752fd5 100644
+--- a/recipes/expat/expat_2.0.1.bb
++++ b/recipes/expat/expat_2.0.1.bb
+@@ -1,14 +1,19 @@
+ require expat.inc
+-PR = "r3"
++PR = "r4"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+ SRC_URI += "file://autotools.patch"
+-SRC_URI[src.md5sum] = "ee8b492592568805593f81f8cdf2a04c"
+-SRC_URI[src.sha256sum] = "847660b4df86e707c9150e33cd8c25bc5cd828f708c7418e765e3e983a2e5e93"
++SRC_URI[src.md5sum] = "f8785ec51167c2f90d1fdb8dff6bb969"
++SRC_URI[src.sha256sum] = "e03a463b6892ada099a68ce2d38bc4d2495612e7acd076d7a453d1a2de226212"
+ 
+ inherit lib_package
+ 
++do_unpack() {
++	mkdir -p ${WORKDIR}/expat-${PV}
++	tar -xzf ${DL_DIR}/expat-${PV}.tar.gz -C expat-${PV}
++}
++
+ do_configure() {
+ 	rm -f ${S}/conftools/libtool.m4
+ 	touch ${S}/conftools/libtool.m4
+-- 
+1.7.0.4
 
-I did 
-
-'bitbake clutter-gtk' with org.openembedded.dev / the *.ipk are installed on overo-machine.
-
-and 
-
-a full image on gumstix.overo branches containing all clutter recipes.
-
-Tested are the example applications shipped with *-examples package. All were working fine. The only application which was working 'weak' was 
-gtk-clutter-multistage mentioning that there was an icon missing in the current theme.
-
-meanwhile Paul did further build tests - also omap3 based.
-
-Andreas
 
 
