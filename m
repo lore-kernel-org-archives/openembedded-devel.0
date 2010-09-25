@@ -1,41 +1,41 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1OzVGb-0002wt-0O
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OzVdU-0007Xv-PK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Sep 2010 15:58:21 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 9B7AB8AE2BF
+	Sat, 25 Sep 2010 16:22:58 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o8PELaN4017725
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Sep 2010 09:58:09 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 31218-02 for <openembedded-devel@lists.openembedded.org>; 
-	Sat, 25 Sep 2010 09:58:09 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 56B38894253
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Sep 2010 09:58:09 -0400 (EDT)
-Date: Sat, 25 Sep 2010 09:58:09 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
+	Sat, 25 Sep 2010 16:21:37 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OzVdA-00077o-Eh
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Sep 2010 16:21:36 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1285404085.5151.3.camel@mattotaupa>
-Message-ID: <Pine.LNX.4.64.1009250957240.5082@juice.ott.cti.com>
-References: <AANLkTimSLnwKB0XchkPk56QpGDa0ELDoo7X_6OqD5w02@mail.gmail.com>
-	<1285357189-26457-1-git-send-email-msmith@cbnco.com>
-	<1285357189-26457-2-git-send-email-msmith@cbnco.com>
-	<1285404085.5151.3.camel@mattotaupa>
+References: <4C9D1136.2070507@freyther.de>
+Date: Sat, 25 Sep 2010 16:21:36 +0200
+In-Reply-To: <4C9D1136.2070507@freyther.de> (Holger Freyther's message of
+	"Sat, 25 Sep 2010 04:59:34 +0800")
+Message-ID: <lyzkv5ewen.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 1
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/4] base.bbclass: add make-native to default dependencies
+Subject: Re: Qt and detecting iWMMXT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,29 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Sep 2010 13:58:22 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="346837782-1390629860-1285423089=:5082"
+X-List-Received-Date: Sat, 25 Sep 2010 14:23:01 -0000
+Content-Type: text/plain; charset=us-ascii
 
---346837782-1390629860-1285423089=:5082
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+Holger Freyther <holger+oe@freyther.de> writes:
 
-On Sat, 25 Sep 2010, Paul Menzel wrote:
+> when building for XScale one could pass -iwmmxt to the configure
+> script. 
 
-> Am Freitag, den 24.09.2010, 15:39 -0400 schrieb Michael Smith:
-> > This should work around package incompatibilities with whatever version
-> > of make is installed on the build system.
-> >=20
-> > -=09=09=09deps +=3D " virtual/${TARGET_PREFIX}gcc virtual/libc "
-> > +=09=09=09deps +=3D (" virtual/${TARGET_PREFIX}gcc virtual/libc "
-> > +=09=09=09=09"make-native")
->=20
-> Are the parentheses =C2=BB()=C2=AB needed? Is it to prevent using =C2=BB\=
-=C2=AB for the line
-> break?
+I would avoid -march=iwmmxt because
 
-Yes, that's correct.
+a) there seems to be kernel bug which does not restore IWMMXT state on
+   ELF loading[1]
 
-Mike
+b) gcc 4.4.4 is bugged for this architecture (both ICE and generation of
+   inefficent code) and fails e.g. to bootstrap itself or glibc
 
---346837782-1390629860-1285423089=:5082--
+
+When you really need iwmmxt support, I recommend to add '.arch iwmmxt'
+to (inline) assembler instead of using -march=iwmmxt.
+
+
+Enrico
+
+Footnotes: 
+[1]  http://article.gmane.org/gmane.linux.ports.arm.general/11795
+
+
