@@ -1,44 +1,45 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OzHRe-0007Om-4G
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OzOov-0001w3-NB
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Sep 2010 01:12:46 +0200
-Received: by iwn2 with SMTP id 2so974486iwn.6
+	Sat, 25 Sep 2010 09:05:19 +0200
+Received: by iwn2 with SMTP id 2so1211302iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Sep 2010 16:12:40 -0700 (PDT)
+	Sat, 25 Sep 2010 00:05:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=Trjx/7O2cBZAI8FhIg9V+qevZ0Ymvac3BmFB6+5WxEw=;
-	b=k3dg9Y1hjdMerMC+OAXLcybvePsf/JqfwxBSzMmhyr2BEq6tOZrfL/KPsi4DmSwBW4
-	HZeSR52D2e0YBjKRN2SbTLU1ZFBB3xehQwcIuiDje5ZsoYdwGPqFJqJ9FnjgOyv4gnN0
-	o+bdN0hhylDaK6qQsFzlWtoE8I53OjrirzGII=
+	bh=pxb2btQu54QZLoPIRJwDxVtG/rTjvUAZuP8vYk2IDqo=;
+	b=UpdJ7AqHFatIusGwoBcsznF4kIN5FltA4yrKfm38uUY3rCZLX2eT/xmWBy+DrwzPsH
+	+ylNrA/0mg+YsZbH31oijlL2jgFWPjr+rLBUlMYDdr+C6pfkizNmNqY70/ZAZ3hbWC9Y
+	f6W8SSEtTkXTjczqx1NAGXw8JaYY1o/mRSPGc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=wV1lhnJSqe/FXf7/I/KXudJ80JcX6t1wHpAEHh0PpAyTmJziHQTB/7Vk2d33oerGGW
-	QWzg7vzNaHATu5cvjMde1aHNvvnB5m5wetaCjH/B6CenqekqhRGE53K7YU7yxNTNGo3M
-	Mnj5aDg9hX1fSW9tOEMKchLSmsUjW2nPH44+I=
-Received: by 10.231.33.73 with SMTP id g9mr4270509ibd.117.1285369958536; Fri,
-	24 Sep 2010 16:12:38 -0700 (PDT)
+	b=S6mMKDj5LEa2QU7uyGuFaexmYSLG/c6urVr6VIjBbMSZ/7nW2QaPfvSr0sbR2wosO/
+	TTk1YZ/xtrE9lGF+xHIGsRf/hQhOZH6lB7lwnUFClBMlJjTVlXPjAHBRyZw+8M/qLHZb
+	OdQWOkwEO0wGyZsm2hQbw+1KcY4sac4I9xFLs=
 MIME-Version: 1.0
-Received: by 10.231.199.1 with HTTP; Fri, 24 Sep 2010 16:12:18 -0700 (PDT)
-In-Reply-To: <1285365372-13498-1-git-send-email-iwamatsu@nigauri.org>
-References: <1285365372-13498-1-git-send-email-iwamatsu@nigauri.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 24 Sep 2010 16:12:18 -0700
-Message-ID: <AANLkTi=hAYRVMX9xNsPXXiuDC3536An1jX_tFmP1PLf3@mail.gmail.com>
+Received: by 10.231.35.77 with SMTP id o13mr5134136ibd.92.1285398311088; Sat,
+	25 Sep 2010 00:05:11 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sat, 25 Sep 2010 00:05:11 -0700 (PDT)
+In-Reply-To: <20100924220649.GB3423@jama>
+References: <AANLkTik4OGdeazaQbURbzDS4FSDDLPrrCT43YEQ8YJn2@mail.gmail.com>
+	<20100924220649.GB3423@jama>
+Date: Sat, 25 Sep 2010 09:05:11 +0200
+Message-ID: <AANLkTim4Ucv8upa14EGL8xq4LsKoP5f6WfQFR4KQDKQo@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
+	WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] machine/sh7785lcr: Add new machine for Renesas SH7785 reference board
+Subject: Re: navit svn fetchg issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,51 +53,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2010 23:12:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 25 Sep 2010 07:05:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 24, 2010 at 2:56 PM, Nobuhiro Iwamatsu <iwamatsu@nigauri.org> w=
-rote:
-> * Machine config for Renesas SH7785 reference board.
-> * Add kernel config for 2.6.32 and 35.
->
-> Signed-off-by: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> ---
-> =C2=A0conf/machine/include/tune-sh4.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A02 +
-> =C2=A0conf/machine/sh7785lcr.conf =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 20 +
-> =C2=A0recipes/linux/linux-2.6.32/sh7785lcr/defconfig | 1833 +++++++++++++=
-+++++++++
-> =C2=A0recipes/linux/linux-2.6.35/sh7785lcr/defconfig | 1927 +++++++++++++=
-+++++++++++
-> =C2=A0recipes/linux/linux_2.6.32.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A01 +
-> =C2=A0recipes/linux/linux_2.6.35.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A01 +
-> =C2=A06 files changed, 3784 insertions(+), 0 deletions(-)
-> =C2=A0create mode 100644 conf/machine/sh7785lcr.conf
-> =C2=A0create mode 100644 recipes/linux/linux-2.6.32/sh7785lcr/defconfig
-> =C2=A0create mode 100644 recipes/linux/linux-2.6.35/sh7785lcr/defconfig
->
-> diff --git a/conf/machine/include/tune-sh4.inc b/conf/machine/include/tun=
-e-sh4.inc
-> index 5d43e41..56c75a8 100644
-> --- a/conf/machine/include/tune-sh4.inc
-> +++ b/conf/machine/include/tune-sh4.inc
-> @@ -1,3 +1,5 @@
-> +# If you want to optimize to sh4a, you need to change
-> +# from -m4 to m4a.
-> =C2=A0TARGET_CC_ARCH =3D "-ml -m4"
-> =C2=A0FEED_ARCH =3D "sh4"
-> =C2=A0BASE_PACKAGE_ARCH =3D "sh4"
+2010/9/25 Martin Jansa <martin.jansa@gmail.com>:
+> On Fri, Sep 24, 2010 at 10:30:54PM +0200, Frans Meulenbroeks wrote:
+>> bumped into this fetch issue with navit
+>>
+>> first did a bitbake -c patch -b navit-icons_svn.bb
+>> then did a bitbaek -c patch -b navit_svn.bb
+>>
+>> That one failed with:
+>>
+>> NOTE: Running task 2 of 2 (ID: 0,
+>> /home/frans/oe/openembedded/recipes/navit/navit_svn.bb, do_fetch)
+>> NOTE: package navit-1_0.1.99+svnr3535-r8.10: task do_fetch: Started
+>> NOTE: Update svn://anonymous@navit.svn.sourceforge.net/svnroot/navit/tru=
+nk;module=3Dnavit;proto=3Dhttps
+>> svn: Failed to add directory 'navit': an unversioned directory of the
+>> same name already exists
+>> ERROR: Task 0 (/home/frans/oe/openembedded/recipes/navit/navit_svn.bb,
+>> do_fetch) failed with exit code '1'
+>> WARNING: /home/frans/oe/bitbake/lib/bb/build.py:49:
+>> DeprecationWarning: BaseException.message has been deprecated as of
+>> Python 2.6
+>> =A0 self.message =3D name
+>>
+>> NOTE: oestats: error sending task, disabling stats
+>> NOTE: package navit-1_0.1.99+svnr3535-r8.10: task None: Failed
+>> WARNING: /home/frans/oe/bitbake/lib/bb/build.py:59:
+>> DeprecationWarning: BaseException.message has been deprecated as of
+>> Python 2.6
+>> =A0 msg =3D self.message
+>>
+>> ERROR: Unknown fetch Error: [Errno 2] No such file or directory:
 
-you could add another tune file for sh4a called
-tune-sh4a.inc and include that for appropriate
-machines. rest of patch looks good to me.
+>> '/home/frans/oe/downloads/navit_navit.svn.sourceforge.net_.svnroot.navit=
+.trunk_3535_.tar.gz'
+>>
+>> Guess there is an issue fetching navit after having fetched navit-icons.
+>
+> Yes same downgrade/upgrade cycle as there was in matchbox-panel-2 and
+> matchbox-panel-2-icon-themes
+> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc6a72ee2b9=
+34017cfa31914886b32f1c58978c72
+> issue discussed here many times..
+>
+> but keeping same SRCREV between navit and navit-icons is not good fix,
+> because introducing separate navit-icons was mostly because it doesn't
+> need to be upgraded that often (and it's rather big package to
+> redownload even without any change inside everytime SRCREV of main navit
+> recipe changes).
+>
+> Regards,
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
+Ah ok, I understand what is going on.
+Also peeked in the files now, which was interesting:
 
-Thx
--Khem
+navit-icons_svn.bb says:
+#use different URL than navit_svn does, to prevent upgrade/downgrade
+cycle in downloads dir
+SRC_URI =3D "svn://anonymous@navit.svn.sourceforge.net/svnroot/navit/trunk/=
+navit/navit;module=3Dxpm;proto=3Dhttps
+
+navit_svn.bb says
+SRC_URI +=3D "svn://anonymous@navit.svn.sourceforge.net/svnroot/navit/trunk=
+;module=3Dnavit;proto=3Dhttps
+
+so apparently someone was aware of this issue (see the comment) but
+someow it ended up on being the same svn anyway
+
+Frans
 
 
