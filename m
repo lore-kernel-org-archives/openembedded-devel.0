@@ -1,33 +1,49 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1OzbP5-0001Nd-Pe
+	(envelope-from <otavio.salvador@gmail.com>) id 1OzdFB-0007wV-ID
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Sep 2010 22:31:28 +0200
-Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
-	[91.64.127.39])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 70D401B10C05
+	Sun, 26 Sep 2010 00:29:22 +0200
+Received: by bwz2 with SMTP id 2so2730822bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Sep 2010 20:34:16 +0000 (UTC)
-Message-ID: <4C9E5C16.60705@freyther.de>
-Date: Sun, 26 Sep 2010 04:31:18 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.9) Gecko/20100908 Fedora/3.1.3-1.fc14 Lightning/1.0b2
-	Thunderbird/3.1.3
+	Sat, 25 Sep 2010 15:29:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:cc:content-type:content-transfer-encoding;
+	bh=iLewZCRSLocgQyAunCo40yEp+mulrxV0NvA/pUAz8oM=;
+	b=xN8//dt0GqdhtyUrKcMXVUAGODtZCuo4P/V4vg7L4bfKL8Tdb9/WbI9sDCo+0Kv86A
+	k76a/jZ0dXJwkTqXv6+8AiVTQAr4g4k5Yt7wIUYFmOd7ZWzdhzKrNh/ftjhhHVzldmRj
+	Rx+x/7cHqYTkZwmVK98xPfXHhmyz/jZmMJhBU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=fPcxX1OmZ6X62stE8O6UrIgeAapUPVlXqFyGEo8iL936wNq7EOwGoSHtJbo6ovEIny
+	KQEubVfna1HLGgZCbJeXUJK26Qba8E9dUhuVdt9aA/Mv9WVFgI2vzEn84JQ2DQzuWdVE
+	cG/9w7Wl160RsnkyAgEKL7Sie8bL5yOPtecqQ=
 MIME-Version: 1.0
+Received: by 10.204.76.205 with SMTP id d13mr3540470bkk.93.1285453755068; Sat,
+	25 Sep 2010 15:29:15 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.118.1 with HTTP; Sat, 25 Sep 2010 15:29:15 -0700 (PDT)
+In-Reply-To: <1285434426-17736-2-git-send-email-kwong@wurldtech.com>
+References: <1285434426-17736-1-git-send-email-kwong@wurldtech.com>
+	<1285434426-17736-2-git-send-email-kwong@wurldtech.com>
+Date: Sat, 25 Sep 2010 19:29:15 -0300
+X-Google-Sender-Auth: 4ddoeKKxlvzDbJ7zXUgFjiTdfY4
+Message-ID: <AANLkTikE+Kqa4OqE50p+_2W1548a1ko40Gb9h8s-NASB@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTikDibG-qAf2b9U_OuOLbVXNP8QWouTEN7z_v25_@mail.gmail.com>	<20100921152505.GB3403@jama>	<AANLkTikTrRMX-5UAso2BgJ8-XqhwtXTnS_vT2Yt4FNnc@mail.gmail.com>	<20100921154038.GC3403@jama>	<AANLkTim9cs7=eKAV1T2ZWTd1HgAaXrxDUdcLUT8RahUF@mail.gmail.com>	<20100921203711.GF3403@jama>
-	<AANLkTin-D__XnhkP3ZDjtW0K5hN0QyY0Zkd6sXd-XGsd@mail.gmail.com>
-In-Reply-To: <AANLkTin-D__XnhkP3ZDjtW0K5hN0QyY0Zkd6sXd-XGsd@mail.gmail.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: anyone working on recipes for qt 4.7.0 released?
+Cc: Kelvie Wong <kwong@wurldtech.com>
+Subject: Re: [PATCH 2/3] initramfs-module-udev: New module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +57,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Sep 2010 20:31:28 -0000
+X-List-Received-Date: Sat, 25 Sep 2010 22:29:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 09/23/2010 05:02 AM, Cliff Brake wrote:
+Hello,
 
-> /scratch/pp/du-sw-web-builder/oe4/build/angstrom-2008.1/tmp/sysroots/x86_64-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-> warning: libphonon.so.4, needed by
+On Sat, Sep 25, 2010 at 2:07 PM, Kelvie Wong <kwong@wurldtech.com> wrote:
+> This launches (and kills) udev during the initramfs procedure to populate
+> the /dev tree as udev would.
 
-Hi,
-just to explain the root cause. The QMAKE_RPATH variable got renamed to
-QMAKE_LFLAGS_RPATH and our g++.conf didn't catch up (i have some commits
-pending that I will push tomorrow if things compiled).
+I didn't get /why/ do you kill it after starting.
 
-I have updated the g++.conf/linux.conf and will remove the patches that
-covered up this issue.
+Personally I think this could be supported by not enabled by default.
+This might be an option that could be set by image.
 
-z.
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 O.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 http://projetos.ossystems.com.br
 
 
