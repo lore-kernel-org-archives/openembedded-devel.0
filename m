@@ -1,49 +1,44 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1OzdFB-0007wV-ID
+	(envelope-from <raj.khem@gmail.com>) id 1OzdvM-0006vQ-QO
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Sep 2010 00:29:22 +0200
-Received: by bwz2 with SMTP id 2so2730822bwz.6
+	Sun, 26 Sep 2010 01:12:58 +0200
+Received: by pzk37 with SMTP id 37so936443pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Sep 2010 15:29:15 -0700 (PDT)
+	Sat, 25 Sep 2010 16:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received
-	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
-	:from:to:cc:content-type:content-transfer-encoding;
-	bh=iLewZCRSLocgQyAunCo40yEp+mulrxV0NvA/pUAz8oM=;
-	b=xN8//dt0GqdhtyUrKcMXVUAGODtZCuo4P/V4vg7L4bfKL8Tdb9/WbI9sDCo+0Kv86A
-	k76a/jZ0dXJwkTqXv6+8AiVTQAr4g4k5Yt7wIUYFmOd7ZWzdhzKrNh/ftjhhHVzldmRj
-	Rx+x/7cHqYTkZwmVK98xPfXHhmyz/jZmMJhBU=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=EkgDUGhNQ3xMLa2OBt5vYK5e4MUdjmkShXks4gO4xaw=;
+	b=jVF3rEycBcMzpKmdfoo8pA8kRS3dY+YRwPUKeoX10Alb5iLgomUQPdWWOdl9FN0Hj5
+	1MW0mRHCV8WgvMoIv61yP/LbN7pza4ksSX7CIE5BmIkgS67bKdx4SFlT02BaARzYHLnQ
+	i/HgMql6UZLwT+DpEYdRA7tdsHdtKR+7WdYV0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=fPcxX1OmZ6X62stE8O6UrIgeAapUPVlXqFyGEo8iL936wNq7EOwGoSHtJbo6ovEIny
-	KQEubVfna1HLGgZCbJeXUJK26Qba8E9dUhuVdt9aA/Mv9WVFgI2vzEn84JQ2DQzuWdVE
-	cG/9w7Wl160RsnkyAgEKL7Sie8bL5yOPtecqQ=
-MIME-Version: 1.0
-Received: by 10.204.76.205 with SMTP id d13mr3540470bkk.93.1285453755068; Sat,
-	25 Sep 2010 15:29:15 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.118.1 with HTTP; Sat, 25 Sep 2010 15:29:15 -0700 (PDT)
-In-Reply-To: <1285434426-17736-2-git-send-email-kwong@wurldtech.com>
-References: <1285434426-17736-1-git-send-email-kwong@wurldtech.com>
-	<1285434426-17736-2-git-send-email-kwong@wurldtech.com>
-Date: Sat, 25 Sep 2010 19:29:15 -0300
-X-Google-Sender-Auth: 4ddoeKKxlvzDbJ7zXUgFjiTdfY4
-Message-ID: <AANLkTikE+Kqa4OqE50p+_2W1548a1ko40Gb9h8s-NASB@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=f1R7nhQySQ4pYM7FTuPhrb5AwDTY+6poJmQZQFv2X2TTf4BINgdjqyX6GzEQf2Waiz
+	kDQPP0AI3Al0rbBCfFTdbxi6txP0QBSduPZ/R94w/wVktUpG+DyNuhMs7Yih+l5qVSja
+	LzXrqXzlpVS5bboSRtkVOjR6jEqcmKEc0/oGE=
+Received: by 10.114.108.14 with SMTP id g14mr5898322wac.185.1285456367424;
+	Sat, 25 Sep 2010 16:12:47 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id r37sm6791851wak.23.2010.09.25.16.12.46
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 25 Sep 2010 16:12:46 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+Date: Sat, 25 Sep 2010 16:12:21 -0700
+Message-Id: <1285456353-27457-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Kelvie Wong <kwong@wurldtech.com>
-Subject: Re: [PATCH 2/3] initramfs-module-udev: New module
+Subject: [PATCH 00/12] Add support for mips64 target architecture and qemumips64 machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,24 +52,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Sep 2010 22:29:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 25 Sep 2010 23:12:59 -0000
 
-Hello,
+Hi
 
-On Sat, Sep 25, 2010 at 2:07 PM, Kelvie Wong <kwong@wurldtech.com> wrote:
-> This launches (and kills) udev during the initramfs procedure to populate
-> the /dev tree as udev would.
+Following 12 patches add support for mips64 architecture into
+OpenEmbedded. 
 
-I didn't get /why/ do you kill it after starting.
+Machine qemumips64 is added to use the implementation.
 
-Personally I think this could be supported by not enabled by default.
-This might be an option that could be set by image.
+As we do not support multilib the default is N64 ABI fudged into
+default root file system structure.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 O.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 http://projetos.ossystems.com.br
+Please review and all feedback is welcome.
+
+Enjoy
+
+-Khem
+
 
 
