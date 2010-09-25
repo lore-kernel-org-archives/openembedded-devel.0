@@ -1,39 +1,40 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OzYol-00034e-AJ
-	for openembedded-devel@openembedded.org; Sat, 25 Sep 2010 19:45:48 +0200
-Received: by iwn2 with SMTP id 2so1560478iwn.6
-	for <openembedded-devel@openembedded.org>;
-	Sat, 25 Sep 2010 10:45:40 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1OzYsD-0003Ct-Np
+	for Openembedded-devel@lists.openembedded.org;
+	Sat, 25 Sep 2010 19:49:23 +0200
+Received: by iwn2 with SMTP id 2so1562431iwn.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Sep 2010 10:49:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=tOlULEwcAIC7M0wytR6AviN3CK0INzVgmsESEsWJ3Uw=;
-	b=xme0YbCp8yEyjKhWx7Tr23omOwOMFL7KUewRb9XsEQNYav0Ag9Gwez5MpudfclWHnj
-	9SVhSYQWl2xW9b7ojCgQ3kGO3RNbspi7NEoC4Qh9LmjZq8mmU97EjeyNRpQ/tFhtO42b
-	29pFs4YseDehATwDdEvyNj1uO3O8RTq5OaqVE=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=nQC54DZPubUYli10qv+fxvTZ6P+iszjR/34prHRdHt8=;
+	b=TIAtWUgFinQ5CILeVyFJ/UtAX3WyjuXOwQCTu5EmNYbvgo0qskjryQuOd5qcq+pkpc
+	TMgpyygR8Ml55msJ2pjsJUGpTSCLShOJYILi8ATHvPdgjU8rffLea3FnlTzUFOxaquc8
+	YN2uWBo972SNX6pLcexRBxwnabTHR0xlC/BWM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=dbQi8G25pOd0SYpXuLmH+izq0/1R8tn06GFjJARXRC6r+hk0AwDclJF2Vhg+QP9/0X
-	wx+jHgbsypgIqvga92eueSoNn9wQvVFMTKNO1EanbXAlsS09D5dfXYDUnfb6Dq1gnbbo
-	qLlV/NpF134DwBrw29yuo7WQ3/05J/k22xVFU=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=igRBbldlGEktebTuZgBXXRD76AjyFmX9DfKW7WfUeJjFjykmepUkNKFEj3d46xTF1Z
+	ANZ35RgA1WnYrAiwgrlK8IN75uO7hd3+9JwTmSzYrmi83wn2havYTt74LHtIIpDFEHKR
+	4EmPkiTvVlgAZBeRfgSS/ODbjrXuVVfUE0GSY=
+Received: by 10.231.149.207 with SMTP id u15mr6050692ibv.13.1285436954735;
+	Sat, 25 Sep 2010 10:49:14 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.167.67 with SMTP id p3mr6055240iby.20.1285436739243; Sat,
-	25 Sep 2010 10:45:39 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sat, 25 Sep 2010 10:45:39 -0700 (PDT)
-Date: Sat, 25 Sep 2010 19:45:39 +0200
-Message-ID: <AANLkTinXgsJvySDfFADwQvLJSGJ3Ti_X9tJxxGs_+q2Y@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.231.199.1 with HTTP; Sat, 25 Sep 2010 10:48:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 25 Sep 2010 10:48:54 -0700
+Message-ID: <AANLkTi=yzQKfFvBDGM2JtTGoz+Zq40M0VcaZVYOxcaWy@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
 X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] lremove linux-uml
+Subject: gcc 4.5 - linaro into OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,21 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Sep 2010 17:45:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 25 Sep 2010 17:49:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Dear all,
+Hi
 
-Proposal is to remove recipes/linux-uml.
-There are two recipes in this, and neither fetches properly.
-Also the recipes are for very old kernels:
+I have ported some patches from linaro into OE gcc 4.5, they work fine
+and the tests results look good
+it should improve the performance too. It would be nice if somebody
+could try this out and report any
+issues. Results of my gcc testsuite run are here
 
- linux-uml_2.4.26.bb  linux-uml_2.6.11-rc2-mm1.bb
+http://uclibc.org/~kraj/gcc-results/
 
-It seems pointless to keep these (btw uml is nowadays in the mainline)
+I will post any performance results if I do
 
-Your feedback and ack/nack is appreciated.
+The git branch is khem/import-linaro-gcc-4.5
 
-Frans
+Thanks
+
+-Khem
 
 
