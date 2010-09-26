@@ -1,39 +1,40 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Ozekd-0006lK-Q6
+	(envelope-from <raj.khem@gmail.com>) id 1OzfuQ-0001M1-Dt
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Sep 2010 02:05:56 +0200
-Received: by iwn2 with SMTP id 2so1743127iwn.6
+	Sun, 26 Sep 2010 03:20:07 +0200
+Received: by iwn2 with SMTP id 2so1774513iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Sep 2010 17:05:48 -0700 (PDT)
+	Sat, 25 Sep 2010 18:19:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=e10pCeymBy/6Ul7LMrBvte9ua5nsEaUNsaDHB5r9Mqw=;
-	b=Z4ttjaUf/U295EbOUaWMyyls47YnALO8uAUGgDUH1LlNkz554zblD6e6Rt8IF97pRN
-	PNH9prdi4LEZ4FolNl9QE826j1QBgWd8qI8G6DZtwMAjxReGwiUU7mfG0ecfpgQ5++tN
-	QsqUmnYPrftmwLRY1I/A40G+B/Pq5DVKywTL0=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=KIfcRTd8hwpwzS6yg2hVsGNOfi2TGRL3CgBQQvcEjew=;
+	b=Wv3qWb7vRMqLMNVUHbfz89UaBChDYNkN6A6fq3C+qTtVc4RaT7e2IbsCU7D42OxXMX
+	3CQTcm9eL1d4/wTAtnwraXGJtkkZPx/PgLLqJhocmdQJE6HemVBg+S7rVzDmcoTbuYKj
+	Xoxzg9qWHR9Db5W/J/fnRKXfFtYFU2plQcsOw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type;
-	b=V2StVf2xhWidBINMzXQX1hyxgO7VDNrBvMoUECalriy37DTzroYgOR0wkFl+iIpkiY
-	Rb19r9PLckGh8kO+NIKchsEi30IvuSmPaQPZhV9wL1qK5ZGkUya7Nqfq6x/kY2jhbxNs
-	9yyNJgRNWhm7BTrZuvirYfa22DTvbBtBWdgoc=
+	b=Swy3cDHjhbdgkR0QEvVbkiCrDTFerSVBKFh4HeLjs2KwGPmXeR8E7bAkqpzTJSlobL
+	Nlyodtec6x3mpOC36uP0oG9h1QnpiIQXQi9BTJz5Ex/3Da28WA3cFO8DfuI4qK1E0uBH
+	Sq8sI+AQPGceWhvI6gv1W74msMK3fDQYPM2mI=
+Received: by 10.231.10.139 with SMTP id p11mr6258001ibp.179.1285463995053;
+	Sat, 25 Sep 2010 18:19:55 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.39.201 with SMTP id h9mr6527366ibe.27.1285459548598; Sat,
-	25 Sep 2010 17:05:48 -0700 (PDT)
-Received: by 10.231.158.147 with HTTP; Sat, 25 Sep 2010 17:05:48 -0700 (PDT)
-In-Reply-To: <AANLkTi=yzQKfFvBDGM2JtTGoz+Zq40M0VcaZVYOxcaWy@mail.gmail.com>
+Received: by 10.231.199.1 with HTTP; Sat, 25 Sep 2010 18:19:33 -0700 (PDT)
+In-Reply-To: <AANLkTi=Ot8PQi0+0CgtiNDP85FkKcvxssPQOhSbbDgk+@mail.gmail.com>
 References: <AANLkTi=yzQKfFvBDGM2JtTGoz+Zq40M0VcaZVYOxcaWy@mail.gmail.com>
-Date: Sun, 26 Sep 2010 09:35:48 +0930
-Message-ID: <AANLkTi=Ot8PQi0+0CgtiNDP85FkKcvxssPQOhSbbDgk+@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	<AANLkTi=Ot8PQi0+0CgtiNDP85FkKcvxssPQOhSbbDgk+@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 25 Sep 2010 18:19:33 -0700
+Message-ID: <AANLkTim6Gf_1M58R0v9cS2pf3wQMFC7hdcj7NcYJshYj@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -51,36 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Sep 2010 00:05:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 26 Sep 2010 01:20:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 26 September 2010 03:18, Khem Raj <raj.khem@gmail.com> wrote:
-> Hi
+On Sat, Sep 25, 2010 at 5:05 PM, Graham Gower <graham.gower@gmail.com> wrote:
+> On 26 September 2010 03:18, Khem Raj <raj.khem@gmail.com> wrote:
+>> Hi
+>>
+>> I have ported some patches from linaro into OE gcc 4.5, they work fine
+>> and the tests results look good
+>> it should improve the performance too. It would be nice if somebody
+>> could try this out and report any
+>> issues. Results of my gcc testsuite run are here
+>>
+>> http://uclibc.org/~kraj/gcc-results/
+>>
+>> I will post any performance results if I do
+>>
+>> The git branch is khem/import-linaro-gcc-4.5
+>>
+>> Thanks
+>>
+>> -Khem
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
-> I have ported some patches from linaro into OE gcc 4.5, they work fine
-> and the tests results look good
-> it should improve the performance too. It would be nice if somebody
-> could try this out and report any
-> issues. Results of my gcc testsuite run are here
->
-> http://uclibc.org/~kraj/gcc-results/
->
-> I will post any performance results if I do
->
-> The git branch is khem/import-linaro-gcc-4.5
->
-> Thanks
->
-> -Khem
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Forgive my ignorance, what is the nature of the linaro patches?
 >
 
-Forgive my ignorance, what is the nature of the linaro patches?
+they are generally targetted for ARM code gen improvements specifically
+for armv7
 
--Graham
+Thx
+-Khem
 
 
