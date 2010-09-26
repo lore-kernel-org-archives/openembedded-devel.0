@@ -1,30 +1,31 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1Ozr8N-0002Lt-D9
+	(envelope-from <iwamatsu@nigauri.org>) id 1Ozy3n-0001Uv-Vl
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Sep 2010 15:19:16 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Ozr8B-0000pS-CO
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Sep 2010 17:19:04 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 26 Sep 2010 17:19:02 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <1285355412-14559-1-git-send-email-msmith@cbnco.com>
-In-Reply-To: <1285355412-14559-1-git-send-email-msmith@cbnco.com>
+	Sun, 26 Sep 2010 22:43:02 +0200
+Received: by pxi11 with SMTP id 11so1233179pxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 26 Sep 2010 13:42:47 -0700 (PDT)
+Received: by 10.142.110.6 with SMTP id i6mr5465042wfc.276.1285533767609; Sun,
+	26 Sep 2010 13:42:47 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <201009261719.02694.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.142.188.10 with HTTP; Sun, 26 Sep 2010 13:42:26 -0700 (PDT)
+In-Reply-To: <AANLkTi=hAYRVMX9xNsPXXiuDC3536An1jX_tFmP1PLf3@mail.gmail.com>
+References: <1285365372-13498-1-git-send-email-iwamatsu@nigauri.org>
+	<AANLkTi=hAYRVMX9xNsPXXiuDC3536An1jX_tFmP1PLf3@mail.gmail.com>
+From: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Date: Mon, 27 Sep 2010 05:42:26 +0900
+Message-ID: <AANLkTik=25UpZruyMGJ4LMm6Dd=d6p5yvt4sLcD=EO1k@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: iwamatsu@nigauri.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] openvpn: change kernel-module-tun to RRECOMMEND
+Subject: Re: [PATCH v2] machine/sh7785lcr: Add new machine for Renesas SH7785 reference board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,51 +39,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Sep 2010 13:19:16 -0000
-X-Groupsio-MsgNum: 24024
-Content-Type: multipart/signed; boundary="nextPart7110824.MqqQJfXk44";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart7110824.MqqQJfXk44
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Sun, 26 Sep 2010 20:43:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 24 =D1=81=D0=B5=D0=BD=D1=82=D1=
-=8F=D0=B1=D1=80=D1=8F 2010 23:10:12 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Michael =
-Smith =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> RRECOMMEND, not RDEPEND, in case a particular platform doesn't have
-> a separate kernel-module-tun package. Matches behaviour of other
-> packages, like bridge-utils.
->=20
-> Also switch to INC_PR.
->=20
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> ---
->  recipes/openvpn/openvpn.inc      |    4 +++-
->  recipes/openvpn/openvpn_2.1.0.bb |    2 +-
->  recipes/openvpn/openvpn_2.1.3.bb |    2 +-
->  3 files changed, 5 insertions(+), 3 deletions(-)
+Hi,
 
-Acked-by: Roman I Khimov <khimov@altell.ru>
+2010/9/25 Khem Raj <raj.khem@gmail.com>:
+> On Fri, Sep 24, 2010 at 2:56 PM, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>=
+ wrote:
+>> * Machine config for Renesas SH7785 reference board.
+>> * Add kernel config for 2.6.32 and 35.
+>>
+>> Signed-off-by: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>> ---
+>> =A0conf/machine/include/tune-sh4.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0 =
+=A02 +
+>> =A0conf/machine/sh7785lcr.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
+=A0 20 +
+>> =A0recipes/linux/linux-2.6.32/sh7785lcr/defconfig | 1833 +++++++++++++++=
++++++++
+>> =A0recipes/linux/linux-2.6.35/sh7785lcr/defconfig | 1927 +++++++++++++++=
++++++++++
+>> =A0recipes/linux/linux_2.6.32.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
+=A0 =A01 +
+>> =A0recipes/linux/linux_2.6.35.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
+=A0 =A01 +
+>> =A06 files changed, 3784 insertions(+), 0 deletions(-)
+>> =A0create mode 100644 conf/machine/sh7785lcr.conf
+>> =A0create mode 100644 recipes/linux/linux-2.6.32/sh7785lcr/defconfig
+>> =A0create mode 100644 recipes/linux/linux-2.6.35/sh7785lcr/defconfig
+>>
+>> diff --git a/conf/machine/include/tune-sh4.inc b/conf/machine/include/tu=
+ne-sh4.inc
+>> index 5d43e41..56c75a8 100644
+>> --- a/conf/machine/include/tune-sh4.inc
+>> +++ b/conf/machine/include/tune-sh4.inc
+>> @@ -1,3 +1,5 @@
+>> +# If you want to optimize to sh4a, you need to change
+>> +# from -m4 to m4a.
+>> =A0TARGET_CC_ARCH =3D "-ml -m4"
+>> =A0FEED_ARCH =3D "sh4"
+>> =A0BASE_PACKAGE_ARCH =3D "sh4"
+>
+> you could add another tune file for sh4a called
+> tune-sh4a.inc and include that for appropriate
+> machines. rest of patch looks good to me.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+I want to make optimization of m4 a default.
+The reason is because there is not compatibility in m4 and m4a.
+It is a memo for the person whom it wants to optimize in m4a that I
+wrote in tune-sh4.inc.
 
---nextPart7110824.MqqQJfXk44
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+I thought that I have had better take off a memo if confusion happened
+by this memo.
+How do you think?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+Best regards,
+  Nobuhiro
 
-iEYEABECAAYFAkyfSEYACgkQXJ70z+XgVcNERACgkuUKndn4yyo+LzFOoJCbhu1+
-vNgAnAwkBTIlQXZfbeZLw3p2fv3YEEXb
-=+pzG
------END PGP SIGNATURE-----
+--=20
+Nobuhiro Iwamatsu
+=A0=A0 iwamatsu at {nigauri.org / debian.org}
+=A0=A0 GPG ID: 40AD1FA6
 
---nextPart7110824.MqqQJfXk44--
+
