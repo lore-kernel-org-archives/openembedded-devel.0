@@ -1,33 +1,33 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ozpsl-0007xU-H9
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ozq7d-0007cy-Fm
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Sep 2010 13:59:05 +0200
-Received: by iwn2 with SMTP id 2so2025610iwn.6
+	Sun, 26 Sep 2010 14:14:26 +0200
+Received: by iwn2 with SMTP id 2so2032975iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Sep 2010 04:58:53 -0700 (PDT)
+	Sun, 26 Sep 2010 05:14:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=oZRWZfMgKhznBDsysQFodMZuL+0tQDRbzoE9hVsXOL8=;
-	b=S3SSPJsGMwvhvRe4Gphq9MYkhUF2ok74w/uI0hcOPmAt/Q2/TEJQxBxIYjQkok46HJ
-	briQMCaaE3G7JM0PfL0ShQEG1jJmgUPi2wqpVfQckud/Ylirg+OOVjLAJ4QuMhp5q8Qb
-	8c/VcXhlVuOnETtCAiVNu3jRBClxH2ysI413s=
+	bh=8xVYjIs/3tBP0PjCZoRlISPKC+HOYSKLgMAx9QMBN9w=;
+	b=gXU/BtKq6msG3u0nMiFwAynrUn3ptfc/hkzcfQNQWCLTvln+Y5cv/vy3vn4ulcOVgg
+	I6i3ZHzamwbR11dt/NKGBXVZB8hrHteAyC22U4sdzQDvKyCeUGJuOgwY+CWYFPBSblGK
+	NkrjrNAuBafWEf0li1D0jS9oDLd2gMf0vzDCA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=leczjpfiWrTn+unylL2rNBWjZDsLbMH+e+QQPtDbJN8Yam+0UY/KVMiiqi0GNYqFhB
-	GIgvXsEDpaYvEFYaS0Ug8r8nykuQMbitbYKV5D5oBbz+V/B563DkLxHqmSf5dJgHPHG3
-	Z1Yren1/0UzPqVq53f7uv8V6JgUrYnPDDqeY4=
+	b=wbRkZQr1bIrhds8U7cOcTHBAx5JLTz9uRnP/yTUNXz+zFVujABaOFCN/H+T2BmiI/Y
+	9LgPud87ErvE699l0OLXu+Yw1tu3TsVICuuycB5B65GMXvllWtsxkrpwzuJuRsknJqd9
+	S8Z8KsvmA7jMlFKEdNsBjKVhbbjQaZ5K+ZgDY=
 MIME-Version: 1.0
-Received: by 10.231.148.20 with SMTP id n20mr7118964ibv.196.1285502332003;
-	Sun, 26 Sep 2010 04:58:52 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sun, 26 Sep 2010 04:58:51 -0700 (PDT)
-In-Reply-To: <4C9F2ACC.9090308@freyther.de>
+Received: by 10.231.157.135 with SMTP id b7mr6909991ibx.164.1285503254591;
+	Sun, 26 Sep 2010 05:14:14 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 26 Sep 2010 05:14:14 -0700 (PDT)
+In-Reply-To: <20100926112659.GB6483@jama>
 References: <AANLkTi=Wt1eRcSoXzjwMJizLBgQ-+hV=Xj1UWW155MWQ@mail.gmail.com>
-	<4C9F2ACC.9090308@freyther.de>
-Date: Sun, 26 Sep 2010 13:58:51 +0200
-Message-ID: <AANLkTin6F1_L_Zx_qZt=ujY-tUFB+FSfT4hR+GsWGnYs@mail.gmail.com>
+	<20100926112659.GB6483@jama>
+Date: Sun, 26 Sep 2010 14:14:14 +0200
+Message-ID: <AANLkTi=oRDVmJ67UfUHNTtECM1gW_V96Lt3PwEG-OvUh@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -52,79 +52,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Sep 2010 11:59:06 -0000
+X-List-Received-Date: Sun, 26 Sep 2010 12:14:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/9/26 Holger Freyther <holger+oe@freyther.de>:
-> On 09/26/2010 06:21 PM, Frans Meulenbroeks wrote:
+2010/9/26 Martin Jansa <martin.jansa@gmail.com>:
+> On Sun, Sep 26, 2010 at 12:21:36PM +0200, Frans Meulenbroeks wrote:
+>> Apart from the opensync and uclibc recipes that did not fetch and were
+>> reported before, I did get fetch issues for the files below.
+>> Haven't had time to dig into these, so some of these might be false alarms.
+>> If anyone feels attached to a recipe or can say something about it,
+>> please take action.
 >
->> dpkg/dpkg-native_1.14.29.bb
->> dpkg/dpkg_1.14.29.bb
+> There was about ~1000 recipes failing to fetch few months ago, I don't
+> think this number is that much lower as I haven't seen any changes in
+> most of them.
 >
-> fetct the rev from archive, or better upgrade..
+> See my download status:
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-April/019206.html
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-April/019234.html
+>
+> but I was testing not only latest version, but all versions and for all
+> ARCHs.
 
-if it is available somewhre else I can fetch from elsewhere,
-upgrade is too much work for a recipe that I do not use and have no
-idea on how to test
->
->
->
->
->> openmoko-projects/paroli_git.bb
->> openmoko-projects/tichy_git.bb
->> openmoko2/openmoko-alsa-scenarios_svn.bb
->> openmoko2/openmoko-contacts2_svn.bb
->> openmoko2/openmoko-dates2_svn.bb
->> openmoko2/openmoko-tasks2_svn.bb
->
-> oh, the servers should still be running.
+I think we got rid of some of these as some of the recipes have been
+moved to non-working, but it could well be the there are still 900 or
+so non-fetchers.
+(note that I didn't do a full test, I only peeked at recipes that also
+contained unused patch files; since I wanted to verify those).
 
-What do you mean to say with that?
->
->
->
->> powervr-drivers/bc-cube_0.1.0.bb
->> powervr-drivers/bc-cube_0.2.0.bb
->> powervr-drivers/libgles-omap3_3.01.00.02.bb
->> powervr-drivers/libgles-omap3_3.01.00.06.bb
->> powervr-drivers/libgles-omap3_3.01.00.07.bb
->> powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
->> powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
->> qt4/qt4-embedded-gles_4.6.0.bb
->> qt4/qt4-embedded-gles_4.6.2.bb
->> qt4/qt4-embedded-gles_4.6.3.bb
->> qt4/qt4-x11-free-gles_4.5.2.bb
->> qt4/qt4-x11-free-gles_4.6.0.bb
->> qt4/qt4-x11-free-gles_4.6.2.bb
->> qt4/qt4-x11-free-gles_4.6.3.bb
->> qt4/qt4-x11-free-gles_4.7.0.bb
->
-> I assume these require the powervr manual download?
+But you've hit an intrinsic problem in OE:
+there is a lot of crud/non-working recipes around and if you report it
+there are three possible scenarios:
+- someone tells you "go fix it"
+- nothing happens ( the most likely scenario)
+- someone actually takes action (very rare)
 
-The first ones maybe, the qt ones seem to refer to files that are not
-on the trolltech site any more. Then again the non-gles version
-fetches.
-I've just give it a short try and I guess this is recipe or bitbake related:
+And if you go ahead and fix things people will axe you if you make a mistake.
+Caused by the latter I have decided for now (maybe to the relief of
+some) to only fix recipes that I am really interested in, and for the
+rest restrict myself to reporting the issue.
+The negative vibes that my attempt to do some generic cleanup caused,
+resulted in the conclusion that it is not worthwhile my time and
+energy. Sad but true.
 
-frans@linux-suse:~/oe/openembedded/recipes/qt4> bitbake -cclean -b
-qt4-x11-free-gles_4.6.3.bb
-ERROR: Command execution failed: Traceback (most recent call last):
-  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
-    commandmethod(self.cmds_async, self, options)
-  File "/home/frans/oe/bitbake/lib/bb/command.py", line 174, in buildFile
-    command.cooker.buildFile(bfile, task)
-  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 650, in buildFile
-    self.status.task_deps[fn]['depends'] = {}
-TypeError: 'NoneType' object does not support item assignment
+What OE really need is a sense of recipe/machine/distro ownership and
+a set of QA guidelines for recipes.
+My guesstimate is that currently almost half of the recipes are
+non-working/obsoleted by newer versions/outdated/non-maintained.
 
-Frans
+Frans.
 
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+PS: I will still work on removing the unused patches. I feel obliged
+to fix that as some of it may be relics from my recipe removal in aug.
+Anyway that work is fairly well automated by now and requires little
+handwork (assuming recipes fetch, so cleaning dirs with non-fetching
+recipes might be skipped).
 
 
