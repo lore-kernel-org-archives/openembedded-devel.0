@@ -1,48 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OzmLn-0004j6-1g
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Sep 2010 10:12:47 +0200
-Received: by bwz2 with SMTP id 2so2828125bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Sep 2010 01:12:29 -0700 (PDT)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OzoCd-0003UO-0z
+	for openembedded-devel@openembedded.org; Sun, 26 Sep 2010 12:11:27 +0200
+Received: by iwn2 with SMTP id 2so1980023iwn.6
+	for <openembedded-devel@openembedded.org>;
+	Sun, 26 Sep 2010 03:11:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=eI7MgdvVWSXNzC8SZHoECHvsOAUmOtsHZPFx31zXDm0=;
-	b=pUnhk8rmVXPFT9b1F/C4mFRcQA2RjByFQuX76kvdM6K9xvws3JwVNz8Nd91OifzHF4
-	U99GLsteRzQ9s9jDp7jK1RcE1nHwl8sL4vk/9lb6cK1KFEeYKCguLQwR4x2DKBGO7kgX
-	dXjZ6wXLwW+csR6QWTwkRJhenUmrGYOp2NeQM=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=cUNVwJWce3GlQ81zM3T4Pu4mid0CfWxIhrnj/YY52yk=;
+	b=lnAUyjUTNO6d+/grgbjwGu1mJ4yKWK8y0iycDWpGMh7rn3XwDUM2IOeRLDs3kTD3D8
+	gxnWZ32TWU6IC/9rhRJPxT3AadciSh/SMMaJ1c/onPR3O2vRS3h0ShAE9kYrly3crCsV
+	f7KdlUCWPWs0o6Tf65Ye+kpU7/rYUBF19SbK8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=KootLA2nHTXYKUk0rYBpgJ66qvsMjvqLTu6WhTKNIhfvjUnou7DY0gLwUogTeg47UR
-	KDLfAtMxOxArJMMsas28aVcNjf5zJ3QfkeFYOb43zRVoFlHlacfowufkoLoYkEmm0qoV
-	fpVoHindTF7fahhnrCF15cNwgMtz2Yas5uJZU=
-Received: by 10.204.57.130 with SMTP id c2mr3876238bkh.144.1285488748451;
-	Sun, 26 Sep 2010 01:12:28 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id y19sm3194435bkw.18.2010.09.26.01.12.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 26 Sep 2010 01:12:27 -0700 (PDT)
-Date: Sun, 26 Sep 2010 10:12:34 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100926081234.GA6483@jama>
-References: <1285456630-27680-1-git-send-email-raj.khem@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=d3URd5FBdLMlaERTOUZg2g1kiLX5hkMAchw+M3GRjFtsnL3bgPW5wr+Rn1WkSmpfQY
+	7ImBuLZXDQoPJ8UBkNNMAFMrqst8ckmeayjNUD4LQtCCqcH0IgRGyEnx7CgE1ZULKakM
+	jlfI78PYrpoH9GdUcOABZ9DQYw63rZZtrXZx0=
 MIME-Version: 1.0
-In-Reply-To: <1285456630-27680-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.59.212 with SMTP id m20mr6968942ibh.130.1285495877812;
+	Sun, 26 Sep 2010 03:11:17 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 26 Sep 2010 03:11:17 -0700 (PDT)
+Date: Sun, 26 Sep 2010 12:11:17 +0200
+Message-ID: <AANLkTik0YeVkfu9ZJn7QO6cZ-MvjUfcC-Tm_4WzEEjjP@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sane-toolchain.inc: Make gcc 4.5 & eglibc 2.12 as default sane versions
+Subject: uclibc: fetch errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,19 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Sep 2010 08:12:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 26 Sep 2010 10:11:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Sep 25, 2010 at 04:17:10PM -0700, Khem Raj wrote:
-> GCC 4.5 has been tested quite a bit and so is eglibc 2.12 in SHR
-> and developers.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Hi,
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+I want to report fetch errors for uclibc.
+This is with bitbake git head from sep 25 and oe head from sep 26.
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+None of the recipes seems to fetch
+partly this is due to SRC_URI referring to
+http://www.uclibc.org/downloads/uClibc-${PV}.tar.bz2;name=uClibc-${PV}
+\
+whereas for pre 0.30 versions the src is
+in:http://www.uclibc.org/downloads/old-releases/
+this is included in an .inc file which is used by both 0.30 and older versions.
+solution is probably to move the SRC_URI to the recipe, and adapt where needed
+
+Weird thing is that the .30 and .31 recipes do not fetch either:
+
+frans@linux-suse:~/oe/openembedded/recipes/uclibc> bitbake -cfetch -b
+uclibc_0.9.31.bb
+ERROR: Command execution failed: Traceback (most recent call last):
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+    commandmethod(self.cmds_async, self, options)
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 174, in buildFile
+    command.cooker.buildFile(bfile, task)
+  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 650, in buildFile
+    self.status.task_deps[fn]['depends'] = {}
+TypeError: 'NoneType' object does not support item assignment
+
+No idea what is going on and don't have time to peek into it right now.
+
+Frans.
 
 
