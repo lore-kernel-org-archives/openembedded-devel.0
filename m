@@ -1,40 +1,46 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0EUu-0002DD-D2
+	(envelope-from <raj.khem@gmail.com>) id 1P0EW4-0002Hi-9c
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 16:16:06 +0200
-Received: by iwn2 with SMTP id 2so2999490iwn.6
+	Mon, 27 Sep 2010 16:17:17 +0200
+Received: by pxi11 with SMTP id 11so1412561pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 07:15:55 -0700 (PDT)
+	Mon, 27 Sep 2010 07:17:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=8REWPQ1jUlz+EolwbppIMaoWQCi2AxR/p4AXEo3x8Lk=;
-	b=Ol28wHQb4BlBwL3Mhd9smF9HQNV0VjNBT/OyMMborNyHyPLE4d6FBJ+Up1Z86me034
-	lKJEz9x10rvBJhbV5w82R6sPWj7LyieaeiC83kWTvpaLf5YhWzllZUjkO1L3OOJm+gsL
-	fakUfE9IC1ty+zkS2/SuMvPScUII56avyIZNM=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=9FD4qkVcFhRFRMk5kqRWJ2RXOuMCgv2vC2mCifENGQg=;
+	b=WMRQ8zc1YZX/hSfRZfbX/GMmhXvydQEn2LJS/hbb8gmOBSWdCxuEKxviyds5euOxpd
+	fHoNdyLx3zwJVHSPHhQlEOTAVuS/5NnrdEpnCG4OUKXKmsYYtYTNL58mdku5ewWOQGcF
+	/aaynqnGsRFhvqjUksm0MyAjPf/w0OW8RArrQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=CrM5YUDdxvoZG7RXdvdFeYr+c24b6ePK1I3gNAyc8Ih9bGg51f5uAvK/rozvRj7jce
-	Fe/PheMo3JkCXbaDW3mwRLItijUhRTlsI+0VLcXws9aqYJrAsEpadti83s3Ps9/g79uy
-	/i32yFusrUUNdqIZSgiQD7IxAIGA0ztamlD0I=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=vunQq7hgTJdSBpSqdbCnXObkXtkZ7JNXDYsAt7bRiJ1H4JAZdKvzJAzyuJA2kTXNvM
+	bnF2695p0j/clLvXaPdNP3hNWEiqRDGpPmZt7Z7d/sdqsKpaVqInXM1Pg/IozEYSqLin
+	saOEil1goPBhqdMr72uve+Z1Rnh01rmOftD7w=
+Received: by 10.143.6.15 with SMTP id j15mr5809098wfi.243.1285597024201; Mon,
+	27 Sep 2010 07:17:04 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.179.24 with SMTP id bo24mr6302076ibb.193.1285596951343;
-	Mon, 27 Sep 2010 07:15:51 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 27 Sep 2010 07:15:51 -0700 (PDT)
-Date: Mon, 27 Sep 2010 16:15:51 +0200
-Message-ID: <AANLkTik0gS3dcnz++jr9pF-fh1ATt-f46hzGNHfbV+VU@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.199.1 with HTTP; Mon, 27 Sep 2010 07:16:39 -0700 (PDT)
+In-Reply-To: <1285578597.11101.12.camel@mattotaupa>
+References: <1285456353-27457-1-git-send-email-raj.khem@gmail.com>
+	<1285456353-27457-13-git-send-email-raj.khem@gmail.com>
+	<1285578597.11101.12.camel@mattotaupa>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 27 Sep 2010 07:16:39 -0700
+Message-ID: <AANLkTik0xGJH-ebYzEXyP-Xka37DGHS4fjWywGmAdpfm@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: multiple kernels and images
+Subject: Re: [PATCH 12/12] netbase: Add interface information for qemumips64 and qemumips64el
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,47 +54,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2010 14:16:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 27 Sep 2010 14:17:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi all,
+On Mon, Sep 27, 2010 at 2:09 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Dear Khem,
+>
+>
+> Am Samstag, den 25.09.2010, 16:12 -0700 schrieb Khem Raj:
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>> =C2=A0recipes/netbase/netbase/qemumips64/interfaces =C2=A0 | =C2=A0 13 +=
+++++++++++++
+>> =C2=A0recipes/netbase/netbase/qemumips64el/interfaces | =C2=A0 13 ++++++=
++++++++
+>> =C2=A02 files changed, 26 insertions(+), 0 deletions(-)
+>> =C2=A0create mode 100644 recipes/netbase/netbase/qemumips64/interfaces
+>> =C2=A0create mode 100644 recipes/netbase/netbase/qemumips64el/interfaces
+>>
+>> diff --git a/recipes/netbase/netbase/qemumips64/interfaces b/recipes/net=
+base/netbase/qemumips64/interfaces
+>> new file mode 100644
+>> index 0000000..1c6955e
+>> --- /dev/null
+>> +++ b/recipes/netbase/netbase/qemumips64/interfaces
+>> @@ -0,0 +1,13 @@
+>> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+>> +
+>> +# The loopback interface
+>> +auto lo
+>> +iface lo inet loopback
+>> +
+>> +# Wired or wireless interfaces
+>> +auto eth0
+>> +iface eth0 inet static
+>> + =C2=A0 =C2=A0 address 192.168.1.107
+>> + =C2=A0 =C2=A0 netmask 255.255.255.0
+>> + =C2=A0 =C2=A0 network 192.168.1.264
+>> + =C2=A0 =C2=A0 gateway 192.168.1.254
+>> diff --git a/recipes/netbase/netbase/qemumips64el/interfaces b/recipes/n=
+etbase/netbase/qemumips64el/interfaces
+>> new file mode 100644
+>> index 0000000..63a360b
+>> --- /dev/null
+>> +++ b/recipes/netbase/netbase/qemumips64el/interfaces
+>> @@ -0,0 +1,13 @@
+>> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+>> +
+>> +# The loopback interface
+>> +auto lo
+>> +iface lo inet loopback
+>> +
+>> +# Wired or wireless interfaces
+>> +auto eth0
+>> +iface eth0 inet static
+>> + =C2=A0 =C2=A0 address 192.168.1.108
+>> + =C2=A0 =C2=A0 netmask 255.255.255.0
+>> + =C2=A0 =C2=A0 network 192.168.1.264
+>> + =C2=A0 =C2=A0 gateway 192.168.1.254
+>
+> is there a way to share one interfaces file for all qemu configurations?
+>
 
-I'm faced with the following problem:
-I need two kernels for my machine. One kernel will be a lightweight
-kernel (to reduce loading time) which boots then flashes the real
-kernel to NAND.
+it could be made so but then I you wont be able to start more than one
+instance of networking enabled qemu with different machines easily
 
-To create two images I tricked a little bit and created two recipes
-(using require of course).
-As these have different names (linux-A_2.6.34.bb and
-linux-B_2.6.34.bb) I can give them different dirs and different
-defconfigs
-(linux-A/defconfig resp linux-B/defconfig).
-
-So far so good, but how do I now get the right kernel in my sd card image.
-Basically both recipes create a package kernel, so adding kernel to
-the image does not work.
-Anyone an idea on how to fix this?
-
-Additional remarks:
-
-I'm aware of multi-kernel.inc but that still seems to leave me with
-the problem how to add the kernel to my image
-
-I can also create a 2nd machine in which case maybe things can be made
-to work, but that seems a fairly ugly hack (and still might give me a
-selection problem).
-Hence looking for a better solution.
-
-BTW wouldn't it be better to have the linux recipes package things
-(also?) in linux-A_2.6.34-r1_${MACHINE}.ipk or something like that
-instead of kernel_2.6.34-r1_${MACHINE}.ipk.
-Then an image could explicitly state the kernel recipe it wants to use
-(and virtual/kernel could be used to specify the default kernel).
-
-Your ideas/feedback is appreciated.
-
-Thanks alot!
-Frans.
+> If not, then this patch is
+>
+> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+>
+>
+> Thanks,
+>
+> Paul
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
