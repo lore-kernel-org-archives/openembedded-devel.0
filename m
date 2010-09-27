@@ -1,35 +1,32 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1P09MC-0003X5-U4
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 10:46:45 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 230EE491278;
-	Mon, 27 Sep 2010 10:46:37 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 27 Sep 2010 10:46:36 +0200
-Message-ID: <4CA059F2.5090509@dresearch.de>
-Date: Mon, 27 Sep 2010 10:46:42 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P09ip-0002iQ-0t for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Sep 2010 11:10:07 +0200
+Received: from f053041104.adsl.alicedsl.de ([78.53.41.104]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P09ih-0002O4-0o for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Sep 2010 09:09:59 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1285230784-16893-1-git-send-email-sledz@dresearch.de>	<4CA04557.5070207@dresearch.de>
-	<AANLkTimNJWJz5cbMSWd+ChNxTtB9OZw_vAeoHVqNbeBq@mail.gmail.com>
-In-Reply-To: <AANLkTimNJWJz5cbMSWd+ChNxTtB9OZw_vAeoHVqNbeBq@mail.gmail.com>
-X-OriginalArrivalTime: 27 Sep 2010 08:46:36.0994 (UTC)
-	FILETIME=[7ED36A20:01CB5E20]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+In-Reply-To: <1285456353-27457-13-git-send-email-raj.khem@gmail.com>
+References: <1285456353-27457-1-git-send-email-raj.khem@gmail.com>
+	<1285456353-27457-13-git-send-email-raj.khem@gmail.com>
+Date: Mon, 27 Sep 2010 11:09:57 +0200
+Message-ID: <1285578597.11101.12.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-2.6.24: avoid kernel error if ubifs superblock read fails
+Subject: Re: [PATCH 12/12] netbase: Add interface information for qemumips64 and qemumips64el
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,54 +40,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2010 08:46:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 27 Sep 2010 09:10:08 -0000
+X-Groupsio-MsgNum: 24040
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-B+mwS56uPLo52PMVY2a1"
+
+--=-B+mwS56uPLo52PMVY2a1
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am 27.09.2010 09:40, schrieb Frans Meulenbroeks:
->>> * .get_sb is called on mounts with automatic fs detection too, so thi=
-s
->>>   function should not print an error if it cannot read the superblock
->>>   (new behaviour conforms the other fs types)
->>> ...
->
-> Hm, I have some concerns:
+Dear Khem,
+
+
+Am Samstag, den 25.09.2010, 16:12 -0700 schrieb Khem Raj:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes/netbase/netbase/qemumips64/interfaces   |   13 +++++++++++++
+>  recipes/netbase/netbase/qemumips64el/interfaces |   13 +++++++++++++
+>  2 files changed, 26 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/netbase/netbase/qemumips64/interfaces
+>  create mode 100644 recipes/netbase/netbase/qemumips64el/interfaces
 >=20
-> the first concern is that mainline 2.6.34 still has the code you have d=
-eleted.
-> I'd expect that others would have bumped into this too and that it
-> would have been fixed this upstream.
-> Since it isn't, chances are that upstream might have fixed the autofs
-> detection in a different way.  If they do this differently maybe we
-> should backport that solution.
+> diff --git a/recipes/netbase/netbase/qemumips64/interfaces b/recipes/netb=
+ase/netbase/qemumips64/interfaces
+> new file mode 100644
+> index 0000000..1c6955e
+> --- /dev/null
+> +++ b/recipes/netbase/netbase/qemumips64/interfaces
+> @@ -0,0 +1,13 @@
+> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+> +=20
+> +# The loopback interface
+> +auto lo
+> +iface lo inet loopback
+> +
+> +# Wired or wireless interfaces
+> +auto eth0
+> +iface eth0 inet static
+> +	address 192.168.1.107
+> +	netmask 255.255.255.0
+> +	network 192.168.1.264
+> +	gateway 192.168.1.254
+> diff --git a/recipes/netbase/netbase/qemumips64el/interfaces b/recipes/ne=
+tbase/netbase/qemumips64el/interfaces
+> new file mode 100644
+> index 0000000..63a360b
+> --- /dev/null
+> +++ b/recipes/netbase/netbase/qemumips64el/interfaces
+> @@ -0,0 +1,13 @@
+> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+> +=20
+> +# The loopback interface
+> +auto lo
+> +iface lo inet loopback
+> +
+> +# Wired or wireless interfaces
+> +auto eth0
+> +iface eth0 inet static
+> +	address 192.168.1.108
+> +	netmask 255.255.255.0
+> +	network 192.168.1.264
+> +	gateway 192.168.1.254
 
-I've suggested the same patch at the LKML and informed the UBIFS authors.=
- But i do believe because of it's "low prio" it will need some time to go=
- into the mainline.
+is there a way to share one interfaces file for all qemu configurations?
 
-> the second concern is that you fix it for a single version. If we feel
-> this patch is needed, I would suggest applying the patch to all linux
-> recipes.
+If not, then this patch is
 
-Yes, that's true. I'll try to create a new patch.
-
-> and the 3rd concern is that I am not too sure whether you do not
-> remove a message that in other cases would be useful.
-
-I did not found any other filesystem printing out such a message at this =
-level.
-
-Steffen
-
---=20
-Steffen Sledz
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
-Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
-Fax: +49 (30) 515932299 http://www.DResearch.DE
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 54412;
-Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
 
+Thanks,
 
+Paul
+
+--=-B+mwS56uPLo52PMVY2a1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkygX2UACgkQPX1aK2wOHVirLgCffDuY9/XNAKAHmBUgcB1J15b0
+5+8AnjlphpSCTVkQeKD2nLdCR0LqkfYL
+=Uoh5
+-----END PGP SIGNATURE-----
+
+--=-B+mwS56uPLo52PMVY2a1--
