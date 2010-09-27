@@ -1,43 +1,45 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0AGx-0006Ii-7a
+	(envelope-from <sylvain.pare@gmail.com>) id 1P0AlX-0002G3-Ho
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 11:45:23 +0200
-Received: by iwn2 with SMTP id 2so2819547iwn.6
+	Mon, 27 Sep 2010 12:17:00 +0200
+Received: by qwb7 with SMTP id 7so2725896qwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 02:45:09 -0700 (PDT)
+	Mon, 27 Sep 2010 03:16:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=H+9ImBhV2U8/fBC7KmdVI/WW9yhheMh1CvJIj7CVnh4=;
-	b=es1al5ryPUgfY+Bz7ZPQe3Wzg5tBNP+MriS8zBkQEXReDt3II/MD2IfyIlNzlew9ny
-	pDojpmrfGkRBl4CncBff5TaiWx0CIjz2XJo9e509xLwvt0BWjH6TBHOgY6o30+YdeF9w
-	irBJZBEWtbcCNzp5W80FIhB+fXN86KfOT5n1k=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=tKNktRxRsPVe8rDgYkDJrNCkGbPRfsdE7w0zifzCdKE=;
+	b=uXDk5xG2oWC+/+Hr6T4HLwkDetwaSQWU+ziiGaYIXLx8siAEwsBc/uZr+JHjJWmkxr
+	5jnu2unSd2ZSBBVw4Sor+n4+LGj0W9MTrNvP23SM8+vhVw0NvFFq+0yu3S3t2yt9XvC2
+	YddPL+KE7f3nQRbCQoFGKrNPjYUM13ER7e0+w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type;
-	b=V+ZEfWGZSztWUCviEKyKtLhQdb6Lvn+PJHR3pkmULiPkbwsmkHYiYlr3B7rFMFyiqm
-	1pRT8XDh1d9qtndgf0EoKGisZwlzelT6v/nxsvDEvMfQQkDKsj3JJy1UPfxW2XYwaSzt
-	2BXQoSPfr2i+69xmARBXT10NX0LN7vSdR0XYc=
+	b=EWrNAOiQEWXSZ37ZIVnuRwNM8aZaR2xEF8PTz49F/C9Kri65wqCz50/55ao9w9wv2P
+	M6TSOiGAj5K9zJbgUD0dH/347SA8A1HfQpy/8fpUElh0i3RHxoLwA/WyFj22VHVnHNY0
+	nqeufwfUE7Z6hOYypj5p4L1K2ZUe9RS6Vm4S8=
+Received: by 10.229.222.8 with SMTP id ie8mr5516454qcb.106.1285582608309; Mon,
+	27 Sep 2010 03:16:48 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.157.135 with SMTP id b7mr8588267ibx.164.1285580708733;
-	Mon, 27 Sep 2010 02:45:08 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 27 Sep 2010 02:45:08 -0700 (PDT)
-In-Reply-To: <4CA063A4.90608@freyther.de>
+Received: by 10.229.22.2 with HTTP; Mon, 27 Sep 2010 03:16:28 -0700 (PDT)
+In-Reply-To: <AANLkTinTEHQVFnYoC=h_WZ1or-wvnuC6W6k_5Nm=xmZt@mail.gmail.com>
 References: <1285347950-27040-1-git-send-email-fahad_usman@mentor.com>
 	<4CA063A4.90608@freyther.de>
-Date: Mon, 27 Sep 2010 11:45:08 +0200
-Message-ID: <AANLkTinTEHQVFnYoC=h_WZ1or-wvnuC6W6k_5Nm=xmZt@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	<AANLkTinTEHQVFnYoC=h_WZ1or-wvnuC6W6k_5Nm=xmZt@mail.gmail.com>
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Mon, 27 Sep 2010 12:16:28 +0200
+Message-ID: <AANLkTimcPMXmC6KgnJmxayJ+6_M3xsEwZZTf9DH2TOhb@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: sylvain.pare@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] qmake-native_1.07a.bb: Converted to new style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,37 +54,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2010 09:45:24 -0000
+X-List-Received-Date: Mon, 27 Sep 2010 10:17:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/9/27 Holger Freyther <holger+oe@freyther.de>:
-> On 09/25/2010 01:05 AM, Fahad Usman wrote:
->> * Converted do_stage to do_install.
->> * Added NATIVE_INSTALL_WORKS = "1"
->> * replaced QMAKE_MKSPEC_PATH (which is defined in bitbake.conf) with ${D}${datadir}/qmake as discussed on irc
->> * Bumped PR
->>
+Hi Holger ,
+
+I just wanted to ask if with your Qt4.7 commits you could look at
+automoc-nativ which did not build the last time I tried (i.e 3 weeks ago)
+and if it could not be provided directly by Qt packages . (I don't know if
+it is possible)
+Thanks!
+
+BR
+
+Sylvain ( aka GarthPS)
+
+
+2010/9/27 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+
+> 2010/9/27 Holger Freyther <holger+oe@freyther.de <holger%2Boe@freyther.de>
+> >:
+> > On 09/25/2010 01:05 AM, Fahad Usman wrote:
+> >> * Converted do_stage to do_install.
+> >> * Added NATIVE_INSTALL_WORKS = "1"
+> >> * replaced QMAKE_MKSPEC_PATH (which is defined in bitbake.conf) with
+> ${D}${datadir}/qmake as discussed on irc
+> >> * Bumped PR
+> >>
+> >
+> > Hi,
+> > is qmake-native still used by something?
 >
-> Hi,
-> is qmake-native still used by something?
-
-Apparently yes:
-
-qt/qt-x11-free-native_3.3.5.bb:DEPENDS = "qmake-native x11-native"
-uicmoc/uicmoc3-native_3.3.5.bb:DEPENDS = "qmake-native"
-
-grep also gave me these:
-
-dcop/dcopidl2cpp-native_3.5.8.bb:inherit native qmake qt3e
-dcop/dcopidl-native_3.5.8.bb:inherit native qmake qt3e
-opie-i18n/opie-lrelease-native.inc:inherit native qmake qt3e
-opie-i18n/opie-lupdate-native.inc:inherit native qmake qt3e
-sip/sip3-native_3.10.1:inherit qmake native
-sip/sip3-native_4.0.1.bb:inherit qmake native
-
-didn't peek into qmake.bbclass to see whether it drags in qmake-native
-one way or another.
-
-Frans
-
+> Apparently yes:
+>
+> qt/qt-x11-free-native_3.3.5.bb:DEPENDS = "qmake-native x11-native"
+> uicmoc/uicmoc3-native_3.3.5.bb:DEPENDS = "qmake-native"
+>
+> grep also gave me these:
+>
+> dcop/dcopidl2cpp-native_3.5.8.bb:inherit native qmake qt3e
+> dcop/dcopidl-native_3.5.8.bb:inherit native qmake qt3e
+> opie-i18n/opie-lrelease-native.inc:inherit native qmake qt3e
+> opie-i18n/opie-lupdate-native.inc:inherit native qmake qt3e
+> sip/sip3-native_3.10.1:inherit qmake native
+> sip/sip3-native_4.0.1.bb:inherit qmake native
+>
+> didn't peek into qmake.bbclass to see whether it drags in qmake-native
+> one way or another.
+>
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
