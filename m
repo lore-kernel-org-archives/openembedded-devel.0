@@ -1,46 +1,51 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P0EW4-0002Hi-9c
+	(envelope-from <chase.maupin@ti.com>) id 1P0Ei6-0003OX-9Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 16:17:17 +0200
-Received: by pxi11 with SMTP id 11so1412561pxi.6
+	Mon, 27 Sep 2010 16:29:53 +0200
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o8RETRDc014646
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 07:17:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=9FD4qkVcFhRFRMk5kqRWJ2RXOuMCgv2vC2mCifENGQg=;
-	b=WMRQ8zc1YZX/hSfRZfbX/GMmhXvydQEn2LJS/hbb8gmOBSWdCxuEKxviyds5euOxpd
-	fHoNdyLx3zwJVHSPHhQlEOTAVuS/5NnrdEpnCG4OUKXKmsYYtYTNL58mdku5ewWOQGcF
-	/aaynqnGsRFhvqjUksm0MyAjPf/w0OW8RArrQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=vunQq7hgTJdSBpSqdbCnXObkXtkZ7JNXDYsAt7bRiJ1H4JAZdKvzJAzyuJA2kTXNvM
-	bnF2695p0j/clLvXaPdNP3hNWEiqRDGpPmZt7Z7d/sdqsKpaVqInXM1Pg/IozEYSqLin
-	saOEil1goPBhqdMr72uve+Z1Rnh01rmOftD7w=
-Received: by 10.143.6.15 with SMTP id j15mr5809098wfi.243.1285597024201; Mon,
-	27 Sep 2010 07:17:04 -0700 (PDT)
+	Mon, 27 Sep 2010 09:29:27 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o8RETRAZ010971
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Sep 2010 09:29:27 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8RETRkS017571
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Sep 2010 09:29:27 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Mon, 27 Sep 2010 09:29:26 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 27 Sep 2010 09:29:24 -0500
+Thread-Topic: [oe] Question about automake licensing in recipe
+Thread-Index: Actb5+mpgutFLAWXRU21k11296swQAABC6tQAJkESfA=
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310E158BD@dlee06.ent.ti.com>
+References: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
+	<AANLkTi=45dASvU5XiCia4o2bia-Zx38neVw8vK6Qvrx-@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310E1558D@dlee06.ent.ti.com>
+	<AANLkTi=41Y_wwKR1czvr5XW-7xZSpwg1J2-vQ5sKStRQ@mail.gmail.com>
+	<1285332952.1649.199.camel@mill.internal.reciva.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310E155A4@dlee06.ent.ti.com>
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310E155A4@dlee06.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.231.199.1 with HTTP; Mon, 27 Sep 2010 07:16:39 -0700 (PDT)
-In-Reply-To: <1285578597.11101.12.camel@mattotaupa>
-References: <1285456353-27457-1-git-send-email-raj.khem@gmail.com>
-	<1285456353-27457-13-git-send-email-raj.khem@gmail.com>
-	<1285578597.11101.12.camel@mattotaupa>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 27 Sep 2010 07:16:39 -0700
-Message-ID: <AANLkTik0xGJH-ebYzEXyP-Xka37DGHS4fjWywGmAdpfm@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 198.47.26.152
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 12/12] netbase: Add interface information for qemumips64 and qemumips64el
+Subject: Re: Question about automake licensing in recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,87 +59,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2010 14:17:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 27 Sep 2010 14:29:53 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 27, 2010 at 2:09 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Dear Khem,
->
->
-> Am Samstag, den 25.09.2010, 16:12 -0700 schrieb Khem Raj:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> =C2=A0recipes/netbase/netbase/qemumips64/interfaces =C2=A0 | =C2=A0 13 +=
-++++++++++++
->> =C2=A0recipes/netbase/netbase/qemumips64el/interfaces | =C2=A0 13 ++++++=
-+++++++
->> =C2=A02 files changed, 26 insertions(+), 0 deletions(-)
->> =C2=A0create mode 100644 recipes/netbase/netbase/qemumips64/interfaces
->> =C2=A0create mode 100644 recipes/netbase/netbase/qemumips64el/interfaces
->>
->> diff --git a/recipes/netbase/netbase/qemumips64/interfaces b/recipes/net=
-base/netbase/qemumips64/interfaces
->> new file mode 100644
->> index 0000000..1c6955e
->> --- /dev/null
->> +++ b/recipes/netbase/netbase/qemumips64/interfaces
->> @@ -0,0 +1,13 @@
->> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
->> +
->> +# The loopback interface
->> +auto lo
->> +iface lo inet loopback
->> +
->> +# Wired or wireless interfaces
->> +auto eth0
->> +iface eth0 inet static
->> + =C2=A0 =C2=A0 address 192.168.1.107
->> + =C2=A0 =C2=A0 netmask 255.255.255.0
->> + =C2=A0 =C2=A0 network 192.168.1.264
->> + =C2=A0 =C2=A0 gateway 192.168.1.254
->> diff --git a/recipes/netbase/netbase/qemumips64el/interfaces b/recipes/n=
-etbase/netbase/qemumips64el/interfaces
->> new file mode 100644
->> index 0000000..63a360b
->> --- /dev/null
->> +++ b/recipes/netbase/netbase/qemumips64el/interfaces
->> @@ -0,0 +1,13 @@
->> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
->> +
->> +# The loopback interface
->> +auto lo
->> +iface lo inet loopback
->> +
->> +# Wired or wireless interfaces
->> +auto eth0
->> +iface eth0 inet static
->> + =C2=A0 =C2=A0 address 192.168.1.108
->> + =C2=A0 =C2=A0 netmask 255.255.255.0
->> + =C2=A0 =C2=A0 network 192.168.1.264
->> + =C2=A0 =C2=A0 gateway 192.168.1.254
->
-> is there a way to share one interfaces file for all qemu configurations?
->
+All,
 
-it could be made so but then I you wont be able to start more than one
-instance of networking enabled qemu with different machines easily
+Just to follow up, the automake team says the current license is GPLv2.  Th=
+e COPYING file that says GPLv3 is autogenerated.
 
-> If not, then this patch is
->
-> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
->
->
-> Thanks,
->
-> Paul
->
+In regards to future releases they had the following to say:
+
+With both the current license, and any future license, the idea is that
+packages using Automake are not bound by the Automake license: the macro
+files automake/m4/*.m4 which may be copied into your package's
+aclocal.m4 file, have very liberal license headers.  The Makefile.in
+files produced by automake receive very liberal license headers as well
+(basically all you need to do is retain the license statement).  The
+helper scripts automake/lib/* either have very liberal license
+statements themselves, or carry a GPL exception, or are considered
+independent programs on their own.
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Maupin, Chase
+> Sent: Friday, September 24, 2010 8:28 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Question about automake licensing in recipe
+>=20
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org
+> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> > Phil Blundell
+> > Sent: Friday, September 24, 2010 7:56 AM
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] Question about automake licensing in recipe
+> >
+> > On Fri, 2010-09-24 at 21:38 +0930, Graham Gower wrote:
+> > > Basically, automake have to contact all their contributors to allow
+> > > their GPLv2 code to be distributed under GPLv3. Or they have to pull
+> > > the GPLv3 code out.
+> >
+> > If automake has followed the usual GNU conventions then all the
+> > contributors will have assigned copyright of their code to the FSF
+> > anyway.  In that case, the FSF can (being the copyright holder)
+> > unilaterally decide what licence it should be distributed under.
+>=20
+> As a follow up I'm beginning to wonder if the COPYING file in the lib
+> directory wasn't auto-generated by automake itself.  Newer versions of
+> automake will apply the "gnu" strictness by default and will create a
+> COPYING file for GPLv3.  Either way, I have submitted an e-mail to the
+> automake list asking for them to clarify their licensing.
+>=20
+> >
+> > If they haven't done that then, yeah, they would probably need the
+> > permission of the original authors to change the licensing.
+> >
+> > p.
+> >
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
 
 
