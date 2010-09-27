@@ -1,43 +1,40 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1P0F6R-0006AS-0w
+	(envelope-from <Tom_Rini@mentor.com>) id 1P0FMB-0001ty-KP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 16:54:57 +0200
-Received: by qyk30 with SMTP id 30so951982qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 07:54:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=W39jBquj7hm3e8Rya16K2z1UU3umpknBmP87wPKqEIk=;
-	b=WOoU18JC+OwnLrv2iUM0/o5MhjKo4kkIy4dpJZIhOjQ8e7snPG6i/gFhrOxZrUWEpp
-	MBWrD+gP1cC1gqTmqr0MY56FG1/+HBf1Capewn/l27ZPVlRphcvE6WJc3/w8ri5+GZjE
-	wDA8ZOBiVR93RSrgCO8hUJxYkAgaIdJXCbLNw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=H8bCu2cbGLA89o/qDY6xdrzrAYrFqwwppxqgYXtyvfgmTLPYXALPdn2wxywzZ8rS3K
-	G8JOCtttTSrZq3YHG4DU8PxoPsKB4ez1+Ur4aaqB98Vu0EMg3GknAmggPcZ4ezGpycRI
-	LHwpECk+gkZGB5SbMW446JGeChxst4x9pZ6xo=
+	Mon, 27 Sep 2010 17:11:09 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1P0FLz-0006Mx-PL from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Sep 2010 08:10:55 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 27 Sep 2010 08:10:55 -0700
+Received: from [172.30.80.16] ([172.30.80.16]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 27 Sep 2010 09:10:54 -0600
+Message-ID: <4CA0B3FC.5020709@mentor.com>
+Date: Mon, 27 Sep 2010 08:10:52 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.224.73.134 with SMTP id q6mr5593650qaj.30.1285599269129; Mon,
-	27 Sep 2010 07:54:29 -0700 (PDT)
-Received: by 10.229.36.65 with HTTP; Mon, 27 Sep 2010 07:54:29 -0700 (PDT)
-In-Reply-To: <AANLkTik0gS3dcnz++jr9pF-fh1ATt-f46hzGNHfbV+VU@mail.gmail.com>
-References: <AANLkTik0gS3dcnz++jr9pF-fh1ATt-f46hzGNHfbV+VU@mail.gmail.com>
-Date: Mon, 27 Sep 2010 16:54:29 +0200
-Message-ID: <AANLkTikUGQuWVwNoDwEjM_CKG_dte5qQ-Zipu8DbGYxL@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+References: <4C9CD59D.30301@cbnco.com> <4CA05EBB.6080604@ge.com>
+	<Pine.LNX.4.64.1009270757000.5082@juice.ott.cti.com>
+In-Reply-To: <Pine.LNX.4.64.1009270757000.5082@juice.ott.cti.com>
+X-OriginalArrivalTime: 27 Sep 2010 15:10:54.0518 (UTC)
+	FILETIME=[2E2E5D60:01CB5E56]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: multiple kernels and images
+Subject: Re: Minimum python version - 2.4 or 2.5?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,70 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2010 14:55:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 27 Sep 2010 15:11:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 27, 2010 at 4:15 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Hi all,
->
-> I'm faced with the following problem:
-> I need two kernels for my machine. One kernel will be a lightweight
-> kernel (to reduce loading time) which boots then flashes the real
-> kernel to NAND.
+Michael Smith wrote:
+> On Mon, 27 Sep 2010, Martyn Welch wrote:
+> 
+>> Unless something has changed in he last few months, I think we wanted to
+>> support 2.4 for a little while longer:
+>>
+>> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg06143.html
+> 
+> Hmm, so RHEL5 is still using Python 2.4.
+> 
+> SLES10 is in the same situation, but installing Python from source worked 
+> seamlessly for me. Maybe we could require RHEL5 users to upgrade Python. 
+> Bitbake 1.10 also requires Python 2.5 and runs about 30% faster than 1.8, 
+> so there's good reason for RHEL5 users to want to switch.
 
-It sounds like a perfect initramfs task: 1st kernel + initramfs (flash
-tools and some scripts/binaries) will flash 2nd kernel
+Here's my once again whine for not adding deps for things that RHEL 
+users can't get via the official channels.  Yes, they can install things 
+from source and that's not nice.
 
-Give a look at the initramfs* images we have in OE.
+Now, if you want to talk about making bitbake 1.10.0 the minimum for OE, 
+that's another story.
 
->
-> To create two images I tricked a little bit and created two recipes
-> (using require of course).
-> As these have different names (linux-A_2.6.34.bb and
-> linux-B_2.6.34.bb) I can give them different dirs and different
-> defconfigs
-> (linux-A/defconfig resp linux-B/defconfig).
->
-> So far so good, but how do I now get the right kernel in my sd card image.
-> Basically both recipes create a package kernel, so adding kernel to
-> the image does not work.
-> Anyone an idea on how to fix this?
-
-To do this I would add a third recipe 'xy-installer' depending on the
-linux-bootflasher kernel and linux-flashme kernel. Booting from e.g.
-SD card would just need the two files (both packaged together).
-
-Regards
-
-Andrea
-
->
-> Additional remarks:
->
-> I'm aware of multi-kernel.inc but that still seems to leave me with
-> the problem how to add the kernel to my image
->
-> I can also create a 2nd machine in which case maybe things can be made
-> to work, but that seems a fairly ugly hack (and still might give me a
-> selection problem).
-> Hence looking for a better solution.
->
-> BTW wouldn't it be better to have the linux recipes package things
-> (also?) in linux-A_2.6.34-r1_${MACHINE}.ipk or something like that
-> instead of kernel_2.6.34-r1_${MACHINE}.ipk.
-> Then an image could explicitly state the kernel recipe it wants to use
-> (and virtual/kernel could be used to specify the default kernel).
->
-> Your ideas/feedback is appreciated.
->
-> Thanks alot!
-> Frans.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
