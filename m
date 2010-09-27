@@ -1,51 +1,33 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from relay.ihostexchange.net ([66.46.182.57])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P0Ei6-0003OX-9Z
+	(envelope-from <kwong@wurldtech.com>) id 1P0EuA-0005Kj-F0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 16:29:53 +0200
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o8RETRDc014646
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 09:29:27 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o8RETRAZ010971
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 09:29:27 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8RETRkS017571
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 09:29:27 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Mon, 27 Sep 2010 09:29:26 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Sep 2010 09:29:24 -0500
-Thread-Topic: [oe] Question about automake licensing in recipe
-Thread-Index: Actb5+mpgutFLAWXRU21k11296swQAABC6tQAJkESfA=
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310E158BD@dlee06.ent.ti.com>
-References: <131E5DFBE7373E4C8D813795A6AA7F080310E154E8@dlee06.ent.ti.com>
-	<AANLkTi=45dASvU5XiCia4o2bia-Zx38neVw8vK6Qvrx-@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310E1558D@dlee06.ent.ti.com>
-	<AANLkTi=41Y_wwKR1czvr5XW-7xZSpwg1J2-vQ5sKStRQ@mail.gmail.com>
-	<1285332952.1649.199.camel@mill.internal.reciva.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310E155A4@dlee06.ent.ti.com>
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310E155A4@dlee06.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Mon, 27 Sep 2010 16:43:07 +0200
+Received: from kwong-desktop.localnet (209.52.149.70) by
+	smtp.ihostexchange.net (66.46.182.50) with Microsoft SMTP Server (TLS)
+	id 8.3.106.1; Mon, 27 Sep 2010 10:40:41 -0400
+From: Kelvie Wong <kwong@wurldtech.com>
+Organization: Wurldtech Security Technologies Inc.
+To: Otavio Salvador <otavio@ossystems.com.br>
+Date: Mon, 27 Sep 2010 07:39:39 -0700
+User-Agent: KMail/1.13.5 (Linux/2.6.32-24-generic-pae; KDE/4.5.1; i686; ; )
+References: <1285434426-17736-1-git-send-email-kwong@wurldtech.com>
+	<1285434426-17736-2-git-send-email-kwong@wurldtech.com>
+	<AANLkTikE+Kqa4OqE50p+_2W1548a1ko40Gb9h8s-NASB@mail.gmail.com>
+In-Reply-To: <AANLkTikE+Kqa4OqE50p+_2W1548a1ko40Gb9h8s-NASB@mail.gmail.com>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.152
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Message-ID: <201009270739.40204.kwong@wurldtech.com>
+X-SA-Exim-Connect-IP: 66.46.182.57
+X-SA-Exim-Mail-From: kwong@wurldtech.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Question about automake licensing in recipe
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/3] initramfs-module-udev: New module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,76 +41,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2010 14:29:53 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Sep 2010 14:43:09 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-All,
+On September 25, 2010 03:29:15 pm Otavio Salvador wrote:
+> Hello,
+> 
+> On Sat, Sep 25, 2010 at 2:07 PM, Kelvie Wong <kwong@wurldtech.com> wrote:
+> > This launches (and kills) udev during the initramfs procedure to populate
+> > the /dev tree as udev would.
+> 
+> I didn't get /why/ do you kill it after starting.
+> 
+> Personally I think this could be supported by not enabled by default.
+> This might be an option that could be set by image.
 
-Just to follow up, the automake team says the current license is GPLv2.  Th=
-e COPYING file that says GPLv3 is autogenerated.
+This was to let the rest of the boot process start udev, if it wants to.
 
-In regards to future releases they had the following to say:
+All I need udev for is to populate /dev (specifically, the nodes in /dev/disk 
+to set the root partition by label, e.g. for USB disk partitions); I don't 
+want to leave processes running when doing the chroot, either.
 
-With both the current license, and any future license, the idea is that
-packages using Automake are not bound by the Automake license: the macro
-files automake/m4/*.m4 which may be copied into your package's
-aclocal.m4 file, have very liberal license headers.  The Makefile.in
-files produced by automake receive very liberal license headers as well
-(basically all you need to do is retain the license statement).  The
-helper scripts automake/lib/* either have very liberal license
-statements themselves, or carry a GPL exception, or are considered
-independent programs on their own.
+-- 
+Kelvie Wong
+Software Developer
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Maupin, Chase
-> Sent: Friday, September 24, 2010 8:28 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Question about automake licensing in recipe
->=20
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Phil Blundell
-> > Sent: Friday, September 24, 2010 7:56 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] Question about automake licensing in recipe
-> >
-> > On Fri, 2010-09-24 at 21:38 +0930, Graham Gower wrote:
-> > > Basically, automake have to contact all their contributors to allow
-> > > their GPLv2 code to be distributed under GPLv3. Or they have to pull
-> > > the GPLv3 code out.
-> >
-> > If automake has followed the usual GNU conventions then all the
-> > contributors will have assigned copyright of their code to the FSF
-> > anyway.  In that case, the FSF can (being the copyright holder)
-> > unilaterally decide what licence it should be distributed under.
->=20
-> As a follow up I'm beginning to wonder if the COPYING file in the lib
-> directory wasn't auto-generated by automake itself.  Newer versions of
-> automake will apply the "gnu" strictness by default and will create a
-> COPYING file for GPLv3.  Either way, I have submitted an e-mail to the
-> automake list asking for them to clarify their licensing.
->=20
-> >
-> > If they haven't done that then, yeah, they would probably need the
-> > permission of the original authors to change the licensing.
-> >
-> > p.
-> >
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Wurldtech Security Technologies Inc.
+Suite 1680 - 401 West Georgia St.
+Vancouver, B.C.  V6B 5A1
+Canada
+
+Phone:       + 1.604.669.6674
+Toll Free:   + 1.877.369.6674
+Fax:           + 1.604.669.2902
+Website:    http://www.wurldtech.com/
+
+"ARE YOU ACHILLES CERTIFIED?"
+
+This message is intended only for the named recipients. This message
+may contain information that is privileged, confidential or exempt
+from disclosure under applicable law. Any dissemination or copying
+of this message by anyone other than a named recipient is strictly
+prohibited. If you are not a named recipient or an employee or agent
+responsible for delivering this message to a named recipient, please
+notify us immediately by telephone at 604-669-6674, and permanently
+destroy this message and any copies you may have. Email may not be
+secure unless properly encrypted.
 
 
