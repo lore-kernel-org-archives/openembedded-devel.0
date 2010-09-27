@@ -1,38 +1,30 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1P0CNv-0004xP-Si
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1P0CT4-0000dU-1s
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 14:00:48 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 8928A8AEB5D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 08:00:30 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 16957-02 for <openembedded-devel@lists.openembedded.org>; 
-	Mon, 27 Sep 2010 08:00:30 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 03BD089B28A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Sep 2010 08:00:30 -0400 (EDT)
-Date: Mon, 27 Sep 2010 08:00:29 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
+	Mon, 27 Sep 2010 14:06:04 +0200
+Received: (qmail 8148 invoked by uid 813007); 27 Sep 2010 12:05:51 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 Sep 2010 12:05:51 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4CA05EBB.6080604@ge.com>
-Message-ID: <Pine.LNX.4.64.1009270757000.5082@juice.ott.cti.com>
-References: <4C9CD59D.30301@cbnco.com> <4CA05EBB.6080604@ge.com>
+Date: Mon, 27 Sep 2010 14:07:09 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-22-generic; KDE/4.5.1; x86_64; ; )
+References: <AANLkTi=1_wZYRsZz5LjnkOpBtHHs0SanzJAUaJkGQnAE@mail.gmail.com>
+In-Reply-To: <AANLkTi=1_wZYRsZz5LjnkOpBtHHs0SanzJAUaJkGQnAE@mail.gmail.com>
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+Message-Id: <201009271407.10852.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Minimum python version - 2.4 or 2.5?
+Subject: Re: opensync: fetch failures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2010 12:00:48 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 27 Sep 2010 12:06:04 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 27 Sep 2010, Martyn Welch wrote:
+Dnia sobota, 25 wrze=C5=9Bnia 2010 o 19:22:26 Frans Meulenbroeks napisa=C5=
+=82(a):
 
-> Unless something has changed in he last few months, I think we wanted to
-> support 2.4 for a little while longer:
-> 
-> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg06143.html
+> I bumped into opensync, but lots of recipes do not fetch any more:
 
-Hmm, so RHEL5 is still using Python 2.4.
+> sometimes the url is to a website that does not exist, sometimes it is
+> a wiki attachement that is gone.
 
-SLES10 is in the same situation, but installing Python from source worked 
-seamlessly for me. Maybe we could require RHEL5 users to upgrade Python. 
-Bitbake 1.10 also requires Python 2.5 and runs about 30% faster than 1.8, 
-so there's good reason for RHEL5 users to want to switch.
+http://opensync.org/download/releases/0.22/ has all tarballs now.
 
-Mike
+> opensync itself is at 0.39.
 
-> On 24/09/10 17:45, Michael Smith wrote:
-> > Hi,
-> > 
-> > What's the minimum Python version requirement for the dev branch? I'd
-> > like to use shutil.copytree(), but the behaviour I want was only added
-> > in Python 2.5.
+Stable opensync is 0.22 version. Developers suggest to use this version and=
+=20
+refuse to give any support to it at same time. 0.3x versions are listed as=
+=20
+experimental but are the only one which can get any kind of support from=20
+developers. Funny isn't it?
+
+> Guess these are orphaned. No idea who the maintainer is. I'd suggest
+> if there is no maintainer to move these to nonworking.
+> They seem too old to invest any time in.
+
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
