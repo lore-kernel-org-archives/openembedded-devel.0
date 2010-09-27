@@ -1,40 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1P0FMB-0001ty-KP
+	(envelope-from <t.fromm@DResearch.de>) id 1P0FZx-0007Au-7D
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 17:11:09 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1P0FLz-0006Mx-PL from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Sep 2010 08:10:55 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 27 Sep 2010 08:10:55 -0700
-Received: from [172.30.80.16] ([172.30.80.16]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 27 Sep 2010 09:10:54 -0600
-Message-ID: <4CA0B3FC.5020709@mentor.com>
-Date: Mon, 27 Sep 2010 08:10:52 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Mon, 27 Sep 2010 17:25:22 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 1B356491282
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Sep 2010 17:25:12 +0200 (CEST)
+Received: from localhost.localdomain ([10.32.10.1]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 27 Sep 2010 17:25:11 +0200
+From: Thilo Fromm <t.fromm@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4C9CD59D.30301@cbnco.com> <4CA05EBB.6080604@ge.com>
-	<Pine.LNX.4.64.1009270757000.5082@juice.ott.cti.com>
-In-Reply-To: <Pine.LNX.4.64.1009270757000.5082@juice.ott.cti.com>
-X-OriginalArrivalTime: 27 Sep 2010 15:10:54.0518 (UTC)
-	FILETIME=[2E2E5D60:01CB5E56]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Mon, 27 Sep 2010 17:23:20 +0200
+Message-Id: <1285601000-28294-1-git-send-email-t.fromm@dresearch.de>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <4CA0B4FF.3050601@dresearch.de>
+References: <4CA0B4FF.3050601@dresearch.de>
+X-OriginalArrivalTime: 27 Sep 2010 15:25:11.0748 (UTC)
+	FILETIME=[2D214840:01CB5E58]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: t.fromm@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Minimum python version - 2.4 or 2.5?
+Subject: [PATCH] Add falloc.h to the exported kernel header files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,34 +42,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2010 15:11:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Sep 2010 15:25:22 -0000
 
-Michael Smith wrote:
-> On Mon, 27 Sep 2010, Martyn Welch wrote:
-> 
->> Unless something has changed in he last few months, I think we wanted to
->> support 2.4 for a little while longer:
->>
->> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg06143.html
-> 
-> Hmm, so RHEL5 is still using Python 2.4.
-> 
-> SLES10 is in the same situation, but installing Python from source worked 
-> seamlessly for me. Maybe we could require RHEL5 users to upgrade Python. 
-> Bitbake 1.10 also requires Python 2.5 and runs about 30% faster than 1.8, 
-> so there's good reason for RHEL5 users to want to switch.
+This adds include/linux/falloc.h to the list of files
+exported by the kernel to the C library.
+The include file is required for building e.g. a recent util-linux-ng
+against 2.6.24.
 
-Here's my once again whine for not adding deps for things that RHEL 
-users can't get via the official channels.  Yes, they can install things 
-from source and that's not nice.
+Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
+---
+ .../linux-libc-headers/files/export_falloc_h.patch |   10 ++++++++++
+ .../linux-libc-headers_2.6.24.bb                   |    1 +
+ 2 files changed, 11 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/linux-libc-headers/files/export_falloc_h.patch
 
-Now, if you want to talk about making bitbake 1.10.0 the minimum for OE, 
-that's another story.
-
+diff --git a/recipes/linux-libc-headers/files/export_falloc_h.patch b/recipes/linux-libc-headers/files/export_falloc_h.patch
+new file mode 100644
+index 0000000..5860e88
+--- /dev/null
++++ b/recipes/linux-libc-headers/files/export_falloc_h.patch
+@@ -0,0 +1,10 @@
++--- a/include/linux/Kbuild	2010-09-27 16:04:29.000000000 +0200
+++++ b/include/linux/Kbuild	2010-09-27 15:59:06.000000000 +0200
++@@ -61,6 +61,7 @@
++ header-y += elf.h
++ header-y += elf-em.h
++ header-y += fadvise.h
+++header-y += falloc.h
++ header-y += fd.h
++ header-y += fdreg.h
++ header-y += fib_rules.h
+diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+index b90c478..6db6fd1 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
++++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+@@ -6,6 +6,7 @@ PR = "r5"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+            file://procinfo.h \
++           file://export_falloc_h.patch \
+            file://unifdef.patch"
+ 
+ S = "${WORKDIR}/linux-${PV}"
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.0.4
+
 
 
