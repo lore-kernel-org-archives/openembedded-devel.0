@@ -1,44 +1,33 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P0ck9-0008NM-R0
+	(envelope-from <denis@denix.org>) id 1P0ckr-0008RM-If
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 18:09:26 +0200
-Received: by wwb18 with SMTP id 18so3816525wwb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Sep 2010 09:09:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=2YqBe6X6vSYfycStne8YQeyytt1ZLepHbEsj4xnVJig=;
-	b=TkE/DaiGZFY7iWzcLedCeV88rU67vhYU8drJRut6qAbWBad/93thqc4nMy8AM1RGst
-	G9vf7YcxSiGMhwb+flEHHg/MpYfFacEtZim40Uz7RzpTyUaCQhocCV9fD+PTM6Q52F2c
-	AfuUQoxfbuXFE2ZYBEhnQQqXwqIfcmxwO/qi0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Om85bUZwz0isIwaAF+O67kSmI6XrHbSPVeC09wR8Zn0J52mVCSsDMvQkxx+2viEL5x
-	GN5jlIdJcCvlMohMPYJNvU9glAkNevi7UbBIxsmjZTULNBs0xrlPwXD7TCzC1HdRSjV0
-	dEbp/7+3hXYiU3HTXi71i8IS8U5UAPoJehcKk=
-MIME-Version: 1.0
-Received: by 10.227.155.82 with SMTP id r18mr165978wbw.70.1285690153599; Tue,
-	28 Sep 2010 09:09:13 -0700 (PDT)
-Received: by 10.227.144.69 with HTTP; Tue, 28 Sep 2010 09:09:13 -0700 (PDT)
-In-Reply-To: <1285161497-13594-1-git-send-email-eric@eukrea.com>
-References: <1285161497-13594-1-git-send-email-eric@eukrea.com>
-Date: Tue, 28 Sep 2010 18:09:13 +0200
-Message-ID: <AANLkTimojR-3LyNvVsYtt6njfbN3seEWMiziewW47GJR@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 28 Sep 2010 18:10:11 +0200
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L9G00306SVAAS81@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	28 Sep 2010 11:09:16 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 707B414AF64; Tue,
+	28 Sep 2010 12:09:10 -0400 (EDT)
+Date: Tue, 28 Sep 2010 12:09:10 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Message-id: <20100928160910.GC12985@denix.org>
+References: <20100928151021.271550@gmx.net>
+MIME-version: 1.0
+In-reply-to: <20100928151021.271550@gmx.net>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] classes/update-rc.d.bbclass: move update-rc after postinst
+Subject: Re: coreutils-native-7.2-r0 dependencies not checked
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,52 +41,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 16:09:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 28 Sep 2010 16:10:11 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Wed, Sep 22, 2010 at 3:18 PM, Eric B=E9nard <eric@eukrea.com> wrote:
-> without this, launching a daemon can fail if postinst is supposed, for
-> example, to fix permissions of directories used by the daemon.
->
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+On Tue, Sep 28, 2010 at 05:10:21PM +0200, Alexander Stohr wrote:
+> hello,
 
-FYI: this maybe somehow broke syslog-ng postinst:
+Hi,
 
-Configuring syslog-ng.
-update-rc.d: /etc/init.d/syslog exists during rc.d purge (continuing)
- Removing any system startup links for syslog ...
-update-rc.d: /etc/init.d/syslog-ng exists during rc.d purge (use -f to forc=
-e)
+Sorry for top-posting...
 
-from syslog-ng package:
-OE om-gta02@shr ~/test $ cat postinst
-#!/bin/sh
-        update-rc.d -f syslog remove
-if test "x$D" !=3D "x"; then
-        OPT=3D"-r $D"
-else
-        OPT=3D"-s"
-fi
-update-rc.d $OPT syslog-ng remove
-OE om-gta02@shr ~/test $ cat prerm
-#!/bin/sh
-if test "x$D" =3D "x"; then
-        if test "$1" =3D "upgrade" -o "$1" =3D "remove"; then
-                /etc/init.d/syslog-ng stop
-        fi
-fi
-OE om-gta02@shr ~/test $ cat postrm
-update-rc.d syslog add 5
-if test "x$D" !=3D "x"; then
-        OPT=3D"-r $D"
-else
-        OPT=3D""
-fi
-if test "$1" =3D "remove" -o "$1" =3D "purge"; then
-        if ! test -e "/etc/init.d/syslog-ng"; then
-                update-rc.d $OPT syslog-ng remove
-        fi
-fi
+> | make: GNUmakefile: Too many levels of symbolic links
+
+This is a known issue - please make sure you don't have simlinks in your 
+TMPDIR. If you need to offload portions of your TMPDIR to another partition 
+or other place, adjust the corresponding variables instead of symlinking...
+
+-- 
+Denys
+
+
+> to me the mentioned package seems to be very picky
+> on having the right build environment in place.
+> 
+> the downloaded zip file comes with a ./configure file
+> that was seemingly built with autoconf 2.63b. (where does
+> those "b" version originate from? is it some distribution?)
+> on the official download location (ftp://ftp.gnu.org/gnu/autoconf/)
+> there is only autoconf 2.63 - so i used that for the build.
+> 
+> the zip file further contains a "GNUmakefile" of unknown origin.
+> 
+> 
+> for informational purposes, i used bitbake 1.8.18 as the outermost tooling
+> and the openembedded platform used was based on files using this command:
+> 
+>   git checkout -b stable/2009 6be05ba2dd55508addf5a21408f6dbbf5a62c3aa
+> 
+> when doing a build from scratch on that file
+> there were only two recipes built in front of coreutils-native.
+> that were shasum-native and stagemanager-native
+> 
+> 
+> the build failed at beginning of coreutils-native "compile" for this reason:
+> 
+> | NOTE: make -j2
+> | make: GNUmakefile: Too many levels of symbolic links
+> | make: stat: GNUmakefile: Too many levels of symbolic links
+> | make: *** No rule to make target `GNUmakefile'.  Stop.
+> | FATAL: oe_runmake failed
+> 
+> Inspection of the work dir showed a cyclical symlink of that form:
+> 
+>   GNUmakefile -> GNUmakefile
+> 
+> Further there was a newly generated Makefile bearing that headline
+> (that seemingly resembles the freshly unpacked Makefile.in):
+> 
+>   # Makefile.in generated by automake 1.10c from Makefile.am.
+> 
+> the file ./configure was still unaltered. it contained a line:
+> 
+>   GNUmakefile=GNUmakefile
+> 
+> 
+> i later on tried to improve the situation with a
+> "make distclean" and further steps but without success.
+> i tried autoconf 2.68 but again no success for the build.
+> 
+> If it would have been simply related to the used version of autoconf
+> i would have said, add a version check for it into the build.
+> right now i am not sure at all whats wrong there.
+> 
+> 
+> seemingly that single line in configure is responsible
+> for the symlink that kills the build in the end.
+> but if several others can build that why should it fail for me?
+> whats running odd for me in the beginning? how is it resolved best?
+> 
+> regards, Alex.
+> -- 
+> GMX DSL SOMMER-SPECIAL: Surf & Phone Flat 16.000 f??r nur 19,99 Euro/mtl.!*
+> http://portal.gmx.net/de/go/dsl
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
