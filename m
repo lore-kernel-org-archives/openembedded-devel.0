@@ -1,39 +1,44 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1P0cMC-0002Hp-NP
+	(envelope-from <martin.jansa@gmail.com>) id 1P0ck9-0008NM-R0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 17:44:42 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1P0cM2-0006of-NF
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 16:44:30 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1P0cM2-0003at-HJ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 16:44:30 +0100
-From: Phil Blundell <philb@gnu.org>
+	Tue, 28 Sep 2010 18:09:26 +0200
+Received: by wwb18 with SMTP id 18so3816525wwb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Sep 2010 09:09:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=2YqBe6X6vSYfycStne8YQeyytt1ZLepHbEsj4xnVJig=;
+	b=TkE/DaiGZFY7iWzcLedCeV88rU67vhYU8drJRut6qAbWBad/93thqc4nMy8AM1RGst
+	G9vf7YcxSiGMhwb+flEHHg/MpYfFacEtZim40Uz7RzpTyUaCQhocCV9fD+PTM6Q52F2c
+	AfuUQoxfbuXFE2ZYBEhnQQqXwqIfcmxwO/qi0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Om85bUZwz0isIwaAF+O67kSmI6XrHbSPVeC09wR8Zn0J52mVCSsDMvQkxx+2viEL5x
+	GN5jlIdJcCvlMohMPYJNvU9glAkNevi7UbBIxsmjZTULNBs0xrlPwXD7TCzC1HdRSjV0
+	dEbp/7+3hXYiU3HTXi71i8IS8U5UAPoJehcKk=
+MIME-Version: 1.0
+Received: by 10.227.155.82 with SMTP id r18mr165978wbw.70.1285690153599; Tue,
+	28 Sep 2010 09:09:13 -0700 (PDT)
+Received: by 10.227.144.69 with HTTP; Tue, 28 Sep 2010 09:09:13 -0700 (PDT)
+In-Reply-To: <1285161497-13594-1-git-send-email-eric@eukrea.com>
+References: <1285161497-13594-1-git-send-email-eric@eukrea.com>
+Date: Tue, 28 Sep 2010 18:09:13 +0200
+Message-ID: <AANLkTimojR-3LyNvVsYtt6njfbN3seEWMiziewW47GJR@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <lyk4m5nbjy.fsf@ensc-virt.intern.sigma-chemnitz.de>
-References: <1285456630-27680-1-git-send-email-raj.khem@gmail.com>
-	<lyocbim147.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<1285684101.32349.3.camel@mill.internal.reciva.com>
-	<lyk4m5nbjy.fsf@ensc-virt.intern.sigma-chemnitz.de>
-Date: Tue, 28 Sep 2010 16:44:30 +0100
-Message-ID: <1285688670.32349.12.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sane-toolchain.inc: Make gcc 4.5 & eglibc 2.12 as default sane versions
+Subject: Re: [PATCH 1/2] classes/update-rc.d.bbclass: move update-rc after postinst
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,37 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 15:44:44 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Sep 2010 16:09:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2010-09-28 at 17:16 +0200, Enrico Scholz wrote:
-> Phil Blundell <philb@gnu.org> writes:
-> 
-> >> http://gcc.gnu.org/bugzilla/show_bug.cgi?id=45817
-> >
-> > That bug seems to be specific to --enable-target-optspace, which (afaik)
-> > isn't selected for armv5 by the current recipes.  Are you actually
-> > seeing that bug on a toolchain built with the settings in OE?
-> 
-> I have local customizations but I can not see in
-> 
-> $ git grep -i optspace
-> 
-> on vanilla OE where optspace is disabled for armv5.
+On Wed, Sep 22, 2010 at 3:18 PM, Eric B=E9nard <eric@eukrea.com> wrote:
+> without this, launching a daemon can fail if postinst is supposed, for
+> example, to fix permissions of directories used by the daemon.
+>
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
 
-Oh yes, right, it does seem to be enabled globally in
-gcc-configure-common.  I had somehow read that conditional backwards
-when I looked at it before.
+FYI: this maybe somehow broke syslog-ng postinst:
 
-If that's the case then yes, obviously this needs fixing before gcc 4.5
-is made the default.  The slightly odd thing is that the corresponding
-conditional in lib1funcs.asm seems to have been there basically forever
-(since r77171) and it isn't obvious to me why it has suddenly broken
-now.
+Configuring syslog-ng.
+update-rc.d: /etc/init.d/syslog exists during rc.d purge (continuing)
+ Removing any system startup links for syslog ...
+update-rc.d: /etc/init.d/syslog-ng exists during rc.d purge (use -f to forc=
+e)
 
-p.
-
-
+from syslog-ng package:
+OE om-gta02@shr ~/test $ cat postinst
+#!/bin/sh
+        update-rc.d -f syslog remove
+if test "x$D" !=3D "x"; then
+        OPT=3D"-r $D"
+else
+        OPT=3D"-s"
+fi
+update-rc.d $OPT syslog-ng remove
+OE om-gta02@shr ~/test $ cat prerm
+#!/bin/sh
+if test "x$D" =3D "x"; then
+        if test "$1" =3D "upgrade" -o "$1" =3D "remove"; then
+                /etc/init.d/syslog-ng stop
+        fi
+fi
+OE om-gta02@shr ~/test $ cat postrm
+update-rc.d syslog add 5
+if test "x$D" !=3D "x"; then
+        OPT=3D"-r $D"
+else
+        OPT=3D""
+fi
+if test "$1" =3D "remove" -o "$1" =3D "purge"; then
+        if ! test -e "/etc/init.d/syslog-ng"; then
+                update-rc.d $OPT syslog-ng remove
+        fi
+fi
 
 
