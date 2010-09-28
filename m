@@ -1,33 +1,43 @@
-Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <Alexander.Stohr@gmx.de>) id 1P0bpD-0001tq-1x
+Received: from mail.cvg.de ([62.153.82.30])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1P0bv1-0002jQ-AU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 17:11:30 +0200
-Received: (qmail 28545 invoked by uid 0); 28 Sep 2010 15:10:22 -0000
-Received: from 193.8.40.126 by www184.gmx.net with HTTP;
-	Tue, 28 Sep 2010 17:10:20 +0200 (CEST)
-Date: Tue, 28 Sep 2010 17:10:21 +0200
-From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
-Message-ID: <20100928151021.271550@gmx.net>
-MIME-Version: 1.0
+	Tue, 28 Sep 2010 17:16:37 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o8SFGIb6007129
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Sep 2010 17:16:19 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1P0buj-00082F-F6
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Sep 2010 17:16:17 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #15156664
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX19tB2d864Ftb+mUuFNc41sc+WHirXfO4Op261X44f
-	9vy/fryl20UU8jOnzO4xsNcSpE9IPduZyOwA== 
-X-GMX-UID: aTeQfyJdPTR+BI921jIwj1Y5c2tpZAvV
-X-FuHaFi: 0.59999999999999998
-X-SA-Exim-Connect-IP: 213.165.64.22
-X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
+References: <1285456630-27680-1-git-send-email-raj.khem@gmail.com>
+	<lyocbim147.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<1285684101.32349.3.camel@mill.internal.reciva.com>
+Date: Tue, 28 Sep 2010 17:16:17 +0200
+In-Reply-To: <1285684101.32349.3.camel@mill.internal.reciva.com> (Phil
+	Blundell's message of "Tue, 28 Sep 2010 15:28:21 +0100")
+Message-ID: <lyk4m5nbjy.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 1
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: coreutils-native-7.2-r0 dependencies not checked
+Subject: Re: [PATCH] sane-toolchain.inc: Make gcc 4.5 & eglibc 2.12 as default sane versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,73 +51,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 15:11:30 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 28 Sep 2010 15:16:38 -0000
+Content-Type: text/plain; charset=us-ascii
 
-hello,
+Phil Blundell <philb@gnu.org> writes:
 
-to me the mentioned package seems to be very picky
-on having the right build environment in place.
+>> http://gcc.gnu.org/bugzilla/show_bug.cgi?id=45817
+>
+> That bug seems to be specific to --enable-target-optspace, which (afaik)
+> isn't selected for armv5 by the current recipes.  Are you actually
+> seeing that bug on a toolchain built with the settings in OE?
 
-the downloaded zip file comes with a ./configure file
-that was seemingly built with autoconf 2.63b. (where does
-those "b" version originate from? is it some distribution?)
-on the official download location (ftp://ftp.gnu.org/gnu/autoconf/)
-there is only autoconf 2.63 - so i used that for the build.
+I have local customizations but I can not see in
 
-the zip file further contains a "GNUmakefile" of unknown origin.
+$ git grep -i optspace
 
-
-for informational purposes, i used bitbake 1.8.18 as the outermost tooling
-and the openembedded platform used was based on files using this command:
-
-  git checkout -b stable/2009 6be05ba2dd55508addf5a21408f6dbbf5a62c3aa
-
-when doing a build from scratch on that file
-there were only two recipes built in front of coreutils-native.
-that were shasum-native and stagemanager-native
+on vanilla OE where optspace is disabled for armv5.
 
 
-the build failed at beginning of coreutils-native "compile" for this reason:
-
-| NOTE: make -j2
-| make: GNUmakefile: Too many levels of symbolic links
-| make: stat: GNUmakefile: Too many levels of symbolic links
-| make: *** No rule to make target `GNUmakefile'.  Stop.
-| FATAL: oe_runmake failed
-
-Inspection of the work dir showed a cyclical symlink of that form:
-
-  GNUmakefile -> GNUmakefile
-
-Further there was a newly generated Makefile bearing that headline
-(that seemingly resembles the freshly unpacked Makefile.in):
-
-  # Makefile.in generated by automake 1.10c from Makefile.am.
-
-the file ./configure was still unaltered. it contained a line:
-
-  GNUmakefile=GNUmakefile
-
-
-i later on tried to improve the situation with a
-"make distclean" and further steps but without success.
-i tried autoconf 2.68 but again no success for the build.
-
-If it would have been simply related to the used version of autoconf
-i would have said, add a version check for it into the build.
-right now i am not sure at all whats wrong there.
-
-
-seemingly that single line in configure is responsible
-for the symlink that kills the build in the end.
-but if several others can build that why should it fail for me?
-whats running odd for me in the beginning? how is it resolved best?
-
-regards, Alex.
--- 
-GMX DSL SOMMER-SPECIAL: Surf & Phone Flat 16.000 für nur 19,99 Euro/mtl.!*
-http://portal.gmx.net/de/go/dsl
+Enrico
 
 
