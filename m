@@ -1,44 +1,39 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0eSe-0001V5-2T
+	(envelope-from <Tom_Rini@mentor.com>) id 1P0gRt-0003C9-PX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 19:59:28 +0200
-Received: by iwn2 with SMTP id 2so4448965iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Sep 2010 10:59:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=CZX7jpGsrhwJw9KVU9TJCzsH2Qlx/5poqJWxmxnz0l8=;
-	b=btXk9kJinwuvlRcBwylBr798q9QfSeE2t5l/DWsTHwVq1KZsS7HyKCOIUahz6iZ3sy
-	Nq6zmFQjdxRmQXIm982rhLHwckj4eyM80LMaV1xakhmI8Z4EzUE6WpeEyWF3MLwFQIxd
-	cyjyxcMAVwbm9HFT99o1Nfbwndoga1IVDn2og=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=CSCMaxZuDfKRh/pdsjdHKj+FyyxVxh4bN6vTWFRJewb1iFwMBV/JfGmYsqjZmQsTDk
-	TofMtNwgdBNkxHX7KnYB73W0KX7PifV9gmvR6C42EFYeLoSE6P+W6mttlwbDnRKkt1oh
-	rHhJ9YHmWz5aHEiBJNAS4WxIji48xfaif//E8=
+	Tue, 28 Sep 2010 22:07:06 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1P0gRg-0006xq-3E from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Sep 2010 13:06:36 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 28 Sep 2010 13:06:35 -0700
+Received: from [172.30.80.16] ([172.30.80.16]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 28 Sep 2010 14:06:34 -0600
+Message-ID: <4CA24AC6.9080502@mentor.com>
+Date: Tue, 28 Sep 2010 13:06:30 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.231.33.71 with SMTP id g7mr308147ibd.54.1285696757652; Tue, 28
-	Sep 2010 10:59:17 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 28 Sep 2010 10:59:17 -0700 (PDT)
-In-Reply-To: <20100928172037.GE12985@denix.org>
-References: <AANLkTikjs7DrdBxNpo0GpGy-FkbG3MEQe=+aT8if_a_C@mail.gmail.com>
-	<20100928172037.GE12985@denix.org>
-Date: Tue, 28 Sep 2010 19:59:17 +0200
-Message-ID: <AANLkTin45cu-zY--b_-csN5GR+L-Q7GWTbvz_k-a5Sze@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
+In-Reply-To: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
+X-OriginalArrivalTime: 28 Sep 2010 20:06:34.0479 (UTC)
+	FILETIME=[A66F57F0:01CB5F48]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: generate a named kernel in ${DEPLOY_DIR_IMAGE}
+Subject: Re: [RFC] kernel NOTE messages fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 17:59:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 28 Sep 2010 20:07:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/9/28 Denys Dmytriyenko <denis@denix.org>:
+Frans Meulenbroeks wrote:
 
->
-> Frans,
->
-> May I suggest you to look at the existing multi-kernel.inc implementation[1]
-> for building multiple versions of the same kernel with slightly different
-> defconfigs and slightly different resulting names in the deploy. I use it in
-> Arago[2][3] for linux-davinci machines, while Koen uses it in OE with
-> linux-omap-psp for beagleboard[4][5]...
->
-> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/multi-kernel.inc
-> [2] http://arago-project.org/git/?p=arago.git;a=blob;f=recipes/linux/linux-davinci-staging_git.bb;hb=HEAD
-> [3] http://arago-project.org/git/?p=arago.git;a=tree;f=recipes/linux/linux-davinci-staging/dm355-evm;hb=HEAD
-> [4] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-psp_2.6.32.bb
-> [5] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-psp-2.6.32/beagleboard
->
-> --
-> Denys
->
-Denys, thanks for the pointers.
-I did peek into multi-kernel (although I didn't test it).
-Apparently I missed the fact that it copies the generated images to
-the deploy dir, but your message triggered me to reread the file and I
-now found that it *does* copy to deploy.
-I'll give multikernel a try tomorrow or so.
+[snip]
+> 2) add them to kernel-dev. That way the NOTE disappears. However this
+> does increase the kernel-dev package size with 90 MB or so.
+> Technically it would allow building out-of-kernel modules on the
+> target. Then again currently this is not possible and I have never
+> heard complaints about it (actually for embedded systems it is often
+> not a good plan to build on the target, although with current high end
+> systems this becomes more feasible).
 
-Thanks again, Frans.
+Did you try implementing this?  Without a few other changes (that I 
+couldn't get 100% right) there's problems with the scripts/ and 
+arch/$ARCH/boot/ tools being the wrong binary format.  Which is a shame 
+as we could provide a kernel-src package with that stuff fixed.
 
-PS: what caused the misinterpretation at my side was the comment in
-the beginning that said:
-# Note that this include will NOT stage anything nor create packages
-Guess I interpreted this as does not put anything in deploy and did
-not search for evidence.
-Maybe the comment could be made slightly more explicit that the image
-*is* put in deploy.
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
