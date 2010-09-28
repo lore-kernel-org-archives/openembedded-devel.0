@@ -1,25 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P0VdG-00040W-FC for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 10:33:56 +0200
-Received: from f053043200.adsl.alicedsl.de ([78.53.43.200]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P0Vd7-0001C3-Jw for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 08:33:41 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <t.fromm@DResearch.de>) id 1P0WAa-0001j2-Sd
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Sep 2010 11:08:18 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 9B2E5491282
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Sep 2010 11:08:07 +0200 (CEST)
+Received: from bfg9000.intern.dresearch.de ([10.32.10.1]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 28 Sep 2010 11:08:07 +0200
+Message-ID: <4CA1B071.3000908@dresearch.de>
+Date: Tue, 28 Sep 2010 11:08:01 +0200
+From: Thilo Fromm <t.fromm@dresearch.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12) Gecko/20100915 Lightning/1.0b1 Thunderbird/3.0.8
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1285661564-1308-1-git-send-email-t.fromm@dresearch.de>
-References: <1285660172.4168.10.camel@mattotaupa>
-	<1285661564-1308-1-git-send-email-t.fromm@dresearch.de>
-Date: Tue, 28 Sep 2010 10:33:40 +0200
-Message-ID: <1285662820.4168.24.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <1285660172.4168.10.camel@mattotaupa>	<1285661564-1308-1-git-send-email-t.fromm@dresearch.de>
+	<1285662820.4168.24.camel@mattotaupa>
+In-Reply-To: <1285662820.4168.24.camel@mattotaupa>
+X-OriginalArrivalTime: 28 Sep 2010 09:08:07.0327 (UTC)
+	FILETIME=[AA565AF0:01CB5EEC]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: t.fromm@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
@@ -40,114 +45,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 08:34:14 -0000
-X-Groupsio-MsgNum: 24086
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-cW2UsjysVSsAiudP/Iv/"
-
---=-cW2UsjysVSsAiudP/Iv/
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 28 Sep 2010 09:08:19 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-Do you know, if and how =C2=BBPATCH=C2=AB got stripped in the subject? With=
-out it,
-Patchwork will not pick it up, I think.
+Helo Paul,
+
+> Do you know, if and how =C2=BBPATCH=C2=AB got stripped in the subject? =
+Without it,
+> Patchwork will not pick it up, I think.
+
+It got stripped because of your recommendation to use=20
+--subject-prefix=3D"v2". The "How to submit a patch to OpenEmbedded" wiki=
+=20
+page at=20
+<http://wiki.openembedded.net/index.php/How_to_submit_a_patch_to_OpenEmbe=
+dded#Create_and_Commit_your_patch>=20
+recommends the same.
+
+Anyway, the patch got picked up by patchwork.
+
+>> From: t.fromm<t.fromm@ba11ecae-741b-462f-8724-1218f99f5906>
+>
+> Where does that line come from. Did you send this patch from the same
+> system and did you configure git correctly?
+>
+> 	git config user.name Thilo Fromm
+> 	git config user.email t.fromm@dresearch.de
+>
+> It is just a cosmetic error, but this line will be shown in the commit
+> history and used for the weekly changelog generation.
+
+I have these two config fields set up exactly like this. Git, however,=20
+chooses to generate a mail with two From: header lines.
+
+>> If wvstreams is configured with DBus support enabled (by not providing
+>> --without-dbus) the the build fails at link time as libdbus cannot be
+>> found:
+>>
+>> | ./CXX -c dbus/wvdbusconn
+>> | ./CXX -c dbus/wvdbusmarshal
+>> | ./CXX -c dbus/wvdbusmsg
+
+[...]
+
+>>
+>> +PR =3D "r2"
+>> +
+>
+> I think `PR` starts at 0 by default.
+
+Well, I though this recipe was already *there* before I started, so it's=20
+not a "r0". But all right, I'll reset this ro "r0" in [v3].
+
+>
+>>   SRC_URI =3D "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.g=
+z \
+>>   	"
+>>
+>> @@ -10,7 +12,8 @@ inherit autotools pkgconfig
+>>
+>>   LDFLAGS_append =3D " -Wl,-rpath-link,${TOOLCHAIN_PATH}/${TARGET_SYS}=
+/lib"
+>>
+>> -EXTRA_OECONF =3D " --without-tcl --without-qt --without-pam"
+>> +# dbus detection currently broken in configure.ac; remember to add "d=
+bus (>=3D 1.2.14)" to DEPENDS  when fixed
+>> +EXTRA_OECONF =3D " --without-tcl --without-qt --without-pam --without=
+-dbus"
+>>
+>>   PACKAGES_prepend =3D "libuniconf libuniconf-dbg "
+>>   PACKAGES_prepend =3D "uniconfd uniconfd-dbg "
+>
+> Just a question. Do you know if the other version of wvstreams suffer
+> from the same problem?
+
+Nope, no idea. I am merely trying to get one single build from start to=20
+finish, but OpenEmbeddded keeps breaking all the time. I've been doing=20
+this for about a week now without success.
+
+Given the current (in)stability of the build framework I think I'm far,=20
+far away from a system state reliable enough to even think about the=20
+cross-versioning build tests you're suggesting.
+
+Regards, Thilo
+
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228   mailto:t.fromm@dresearch.de
+Fax: +49 (30) 515 932 77    http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB:54412
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
-Am Dienstag, den 28.09.2010, 10:12 +0200 schrieb Thilo Fromm:
-> From: t.fromm <t.fromm@ba11ecae-741b-462f-8724-1218f99f5906>
-
-Where does that line come from. Did you send this patch from the same
-system and did you configure git correctly?
-
-	git config user.name Thilo Fromm
-	git config user.email t.fromm@dresearch.de
-
-It is just a cosmetic error, but this line will be shown in the commit
-history and used for the weekly changelog generation.
-
-> If wvstreams is configured with DBus support enabled (by not providing
-> --without-dbus) the the build fails at link time as libdbus cannot be
-> found:
->=20
-> | ./CXX -c dbus/wvdbusconn
-> | ./CXX -c dbus/wvdbusmarshal
-> | ./CXX -c dbus/wvdbusmsg
-> | ./CXX -c dbus/wvdbusserver
-> | linking libwvdbus.so...
-> | arm-angstrom-linux-gnueabi-g++: /libdbus-1.a: No such file or directory
-> | make: *** [libwvdbus.so] Error 1
-> | FATAL: oe_runmake failed
-> NOTE: Task failed: /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-an=
-gstrom-linux-gnueabi/wvstreams-4.6-r0/temp/log.do_compile.6422
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of /home/maniac/work/HYP/oe/3way_merge/recipes/wvstreams/wvs=
-treams_4.6.bb do_compile failed
-> ERROR: Task 2024 (/home/maniac/work/HYP/oe/3way_merge/recipes/wvstreams/w=
-vstreams_4.6.bb, do_compile) failed
->=20
-> The root cause for this behaviour is in wvstreams' configure.ac; the
-> weird dbus detection and library path handling breaks successive builds.
->=20
-> This patch, however, does not fix the configure.ac file but disables
-> DBus support for wvstreams at configure time. This at least fixes the
-> broken build.
->=20
-> Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
-> ---
->  recipes/wvstreams/wvstreams_4.6.bb |    5 ++++-
->  1 files changed, 4 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/wvstreams/wvstreams_4.6.bb b/recipes/wvstreams/wvstr=
-eams_4.6.bb
-> index 91abc7d..688a80f 100644
-> --- a/recipes/wvstreams/wvstreams_4.6.bb
-> +++ b/recipes/wvstreams/wvstreams_4.6.bb
-> @@ -3,6 +3,8 @@ LICENSE =3D "LGPL"
->  DESCRIPTION =3D "WvStreams is a network programming library in C++"
->  DEPENDS =3D "zlib openssl (>=3D 0.9.8)"
-> =20
-> +PR =3D "r2"
-> +
-
-I think `PR` starts at 0 by default.
-
->  SRC_URI =3D "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
->  	"
-> =20
-> @@ -10,7 +12,8 @@ inherit autotools pkgconfig
-> =20
->  LDFLAGS_append =3D " -Wl,-rpath-link,${TOOLCHAIN_PATH}/${TARGET_SYS}/lib=
-"
-> =20
-> -EXTRA_OECONF =3D " --without-tcl --without-qt --without-pam"
-> +# dbus detection currently broken in configure.ac; remember to add "dbus=
- (>=3D 1.2.14)" to DEPENDS  when fixed
-> +EXTRA_OECONF =3D " --without-tcl --without-qt --without-pam --without-db=
-us"
-> =20
->  PACKAGES_prepend =3D "libuniconf libuniconf-dbg "
->  PACKAGES_prepend =3D "uniconfd uniconfd-dbg "
-
-Just a question. Do you know if the other version of wvstreams suffer
-from the same problem?
-
-
-Thanks,
-
-Paul
-
---=-cW2UsjysVSsAiudP/Iv/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyhqGQACgkQPX1aK2wOHVgGzgCfUSmL+jzuNU2YsHudjtLCcmeN
-wCQAnjmzDzaLnIMi272dDoGnxUwR5FSu
-=qrd8
------END PGP SIGNATURE-----
-
---=-cW2UsjysVSsAiudP/Iv/--
