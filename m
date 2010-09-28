@@ -1,31 +1,29 @@
 Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <t.fromm@DResearch.de>) id 1P0Wd9-0001hI-Ad
+	(envelope-from <sledz@dresearch.de>) id 1P0Y0R-0003bk-RT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 11:37:47 +0200
+	Tue, 28 Sep 2010 13:05:57 +0200
 Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
 	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 64507491278
+	by mail.dresearch.de (Postfix) with ESMTP id 5D478491282
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Sep 2010 11:37:38 +0200 (CEST)
-Received: from bfg9000.intern.dresearch.de ([10.32.10.1]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 28 Sep 2010 11:37:38 +0200
-Message-ID: <4CA1B75C.50700@dresearch.de>
-Date: Tue, 28 Sep 2010 11:37:32 +0200
-From: Thilo Fromm <t.fromm@dresearch.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12) Gecko/20100915 Lightning/1.0b1 Thunderbird/3.0.8
+	Tue, 28 Sep 2010 13:05:46 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 28 Sep 2010 13:05:45 +0200
+Message-ID: <4CA1CC11.3060509@dresearch.de>
+Date: Tue, 28 Sep 2010 13:05:53 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1285660172.4168.10.camel@mattotaupa>	<1285661564-1308-1-git-send-email-t.fromm@dresearch.de>	<1285662820.4168.24.camel@mattotaupa>
 	<4CA1B071.3000908@dresearch.de>
-	<1285666009.4168.28.camel@mattotaupa>
-In-Reply-To: <1285666009.4168.28.camel@mattotaupa>
-X-OriginalArrivalTime: 28 Sep 2010 09:37:38.0068 (UTC)
-	FILETIME=[C9C7FD40:01CB5EF0]
+In-Reply-To: <4CA1B071.3000908@dresearch.de>
+X-OriginalArrivalTime: 28 Sep 2010 11:05:45.0936 (UTC)
+	FILETIME=[19989D00:01CB5EFD]
 X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: t.fromm@DResearch.de
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
@@ -46,45 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 09:37:47 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 28 Sep 2010 11:05:58 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hello, Paul,
+Am 28.09.2010 11:08, schrieb Thilo Fromm:
+>> Do you know, if and how =C2=BBPATCH=C2=AB got stripped in the subject?
+>> Without it, Patchwork will not pick it up, I think.
+>=20
+> It got stripped because of your recommendation to use
+> --subject-prefix=3D"v2". The "How to submit a patch to OpenEmbedded"
+> wiki page at
+> <http://wiki.openembedded.net/index.php/How_to_submit_a_patch_to_OpenEm=
+bedded#Create_and_Commit_your_patch>
+> recommends the same.
 
->> [...]
->>
->>>>
->>>> +PR =3D "r2"
->>>> +
->>>
->>> I think `PR` starts at 0 by default.
->>
->> Well, I though this recipe was already *there* before I started, so it=
-'s
->> not a "r0". But all right, I'll reset this ro "r0" in [v3].
->
-> No I meant you can set it to =C2=BBr1=C2=AB.
+Wiki is updated.
 
-Awwww. OK, [v4] is out...
-
->
-> Good luck with your builds and thank you for your contribution.
- >
-
-Thanks for your support, Paul.
-
-Regards,
-Thilo
+Steffen
 
 --=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
+Steffen Sledz
 DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228   mailto:t.fromm@dresearch.de
-Fax: +49 (30) 515 932 77    http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB:54412
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
 Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
+
 
 
