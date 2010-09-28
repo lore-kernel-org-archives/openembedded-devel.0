@@ -1,36 +1,41 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1P0Y0R-0003bk-RT
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1P0aWg-00032B-54
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 13:05:57 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 5D478491282
+	Tue, 28 Sep 2010 15:47:24 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o8SDl4IE025892
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Sep 2010 13:05:46 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 28 Sep 2010 13:05:45 +0200
-Message-ID: <4CA1CC11.3060509@dresearch.de>
-Date: Tue, 28 Sep 2010 13:05:53 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
-MIME-Version: 1.0
+	Tue, 28 Sep 2010 15:47:05 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1P0aWO-0003sX-7j
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Sep 2010 15:47:04 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1285660172.4168.10.camel@mattotaupa>	<1285661564-1308-1-git-send-email-t.fromm@dresearch.de>	<1285662820.4168.24.camel@mattotaupa>
-	<4CA1B071.3000908@dresearch.de>
-In-Reply-To: <4CA1B071.3000908@dresearch.de>
-X-OriginalArrivalTime: 28 Sep 2010 11:05:45.0936 (UTC)
-	FILETIME=[19989D00:01CB5EFD]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+References: <1285456630-27680-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 28 Sep 2010 15:47:04 +0200
+In-Reply-To: <1285456630-27680-1-git-send-email-raj.khem@gmail.com> (Khem
+	Raj's message of "Sat, 25 Sep 2010 16:17:10 -0700")
+Message-ID: <lyocbim147.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 1
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [v2] wvstreams-4.6: Remove dbus support because it breaks the build
+Subject: Re: [PATCH] sane-toolchain.inc: Make gcc 4.5 & eglibc 2.12 as default sane versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +49,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 11:05:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 28 Sep 2010 13:47:24 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Am 28.09.2010 11:08, schrieb Thilo Fromm:
->> Do you know, if and how =C2=BBPATCH=C2=AB got stripped in the subject?
->> Without it, Patchwork will not pick it up, I think.
->=20
-> It got stripped because of your recommendation to use
-> --subject-prefix=3D"v2". The "How to submit a patch to OpenEmbedded"
-> wiki page at
-> <http://wiki.openembedded.net/index.php/How_to_submit_a_patch_to_OpenEm=
-bedded#Create_and_Commit_your_patch>
-> recommends the same.
+Khem Raj <raj.khem@gmail.com> writes:
 
-Wiki is updated.
+> GCC 4.5 has been tested quite a bit
 
-Steffen
+Probably not on ARMv5 ;) There 5/3 == 3 holds and ld.so crashes due to
+related errors.
 
---=20
-Steffen Sledz
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
-Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
-Fax: +49 (30) 515932299 http://www.DResearch.DE
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 54412;
-Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+http://gcc.gnu.org/bugzilla/show_bug.cgi?id=45817
 
+
+Enrico
 
 
