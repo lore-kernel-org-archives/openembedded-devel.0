@@ -1,28 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P0UwZ-0007Gi-8k for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 09:49:54 +0200
-Received: from f053043200.adsl.alicedsl.de ([78.53.43.200]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P0UwQ-0000PL-64 for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 07:49:34 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0VH1-0000eG-Of
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Sep 2010 10:10:52 +0200
+Received: by iwn2 with SMTP id 2so3846472iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Sep 2010 01:10:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=KApl6y7Za4rFuVZbmJXgmrWLEObDzt1ik/USkZueZwg=;
+	b=gVrjFFJIEHXCIcnwX2RjuNTFg2ORxwe2SsAN2AF0Vlw2nzQLwGoia2x8gbjKa+Rj/d
+	bQ+VBeMVS2albabjhu7HguNbW10yQn9hcQD2DSp6YdsuKUalvK7604Ls9zjjzvgcoCeH
+	CROBHyEDPaqIu3Ids8FPK3BRi3wOJ5AYdP3dw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=WXOY7vWHQP4Vfx5IXJwjGBdoupvM2a9YGpCXdCt8KO9F1DEusUmib/43/qko0EtjU/
+	HqkoBB7diTg9vpBwzFOePq1uUfWf6h2bmZllCeXWJzQD3GjjozTDX+bnRm45rFaiQ+GM
+	Xqz+QuoSfhYTlwAC14qBZQbfCQ/tpS8KBFIf0=
+MIME-Version: 1.0
+Received: by 10.231.59.212 with SMTP id m20mr10323872ibh.130.1285661436109;
+	Tue, 28 Sep 2010 01:10:36 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 28 Sep 2010 01:10:36 -0700 (PDT)
 In-Reply-To: <1285658920-15596-1-git-send-email-t.fromm@dresearch.de>
 References: <1285658920-15596-1-git-send-email-t.fromm@dresearch.de>
-Date: Tue, 28 Sep 2010 09:49:32 +0200
-Message-ID: <1285660172.4168.10.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Tue, 28 Sep 2010 10:10:36 +0200
+Message-ID: <AANLkTinAZPimHtcKhmcFZeaDmuArR9yDtezq_5RjfEus@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] Remove dbus support from wvstreams-4.6 because it breaks the build
@@ -39,119 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 07:49:55 -0000
-X-Groupsio-MsgNum: 24080
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-PsctCs3zCvGDkcFlEiIA"
+X-List-Received-Date: Tue, 28 Sep 2010 08:10:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-PsctCs3zCvGDkcFlEiIA
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+2010/9/28 Thilo Fromm <t.fromm@dresearch.de>:
 
-Dear Thilo,
+I'd say it is either this
 
+> -DEPENDS = "zlib openssl (>= 0.9.8)"
+> +DEPENDS = "zlib openssl (>= 0.9.8) dbus (> 1.2.14)"
 
-please adhere to the commit policy regarding the commit summary, i. e.,
-it has to start with the package name.
+which makes sure dbus is build and available.
 
-wvstreams-4.6: remove DBus support, because configure.ac is faulty.
+Or this:
 
-Am Dienstag, den 28.09.2010, 09:28 +0200 schrieb Thilo Fromm:
-> If wvstreams is configured with DBus support enabled (by not providing
-> --without-dbus) the the build fails at link time as libdbus cannot be
-> found:
->=20
-> | ./CXX -c dbus/wvdbusconn
-> | ./CXX -c dbus/wvdbusmarshal
-> | ./CXX -c dbus/wvdbusmsg
-> | ./CXX -c dbus/wvdbusserver
-> | linking libwvdbus.so...
-> | arm-angstrom-linux-gnueabi-g++: /libdbus-1.a: No such file or
-> directory
-
-Can your editor be configured to not add line breaks to quotes? I would
-prefer that.
-
-> | make: *** [libwvdbus.so] Error 1
-> | FATAL: oe_runmake failed
-> NOTE: Task failed:
-> /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueab=
-i/wvstreams-4.6-r0/temp/log.do_compile.6422
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /home/maniac/work/HYP/oe/3way_merge/recipes/wvstreams/wvstreams_4.6.bb
-> do_compile failed
-> ERROR: Task 2024
-> (/home/maniac/work/HYP/oe/3way_merge/recipes/wvstreams/wvstreams_4.6.bb,
->  do_compile) failed
->=20
-> The root cause for this behaviour is in wvstreams' configure.ac; the
-> weird dbus detection and library path handling breaks successive builds.
->=20
-> This patch, however, does not fix the configure.ac file but disables
-> DBus support for wvstreams at configure time. This at least fixes the
-> broken build.
->=20
-> Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
-> ---
->  recipes/wvstreams/wvstreams_4.6.bb |    5 +++--
->  1 files changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/wvstreams/wvstreams_4.6.bb b/recipes/wvstreams/wvstr=
-eams_4.6.bb
-> index 91abc7d..b298a97 100644
-> --- a/recipes/wvstreams/wvstreams_4.6.bb
-> +++ b/recipes/wvstreams/wvstreams_4.6.bb
-> @@ -1,7 +1,7 @@
->  HOMEPAGE =3D "http://alumnit.ca/wiki/index.php?page=3DWvStreams"
->  LICENSE =3D "LGPL"
->  DESCRIPTION =3D "WvStreams is a network programming library in C++"
-> -DEPENDS =3D "zlib openssl (>=3D 0.9.8)"
-> +DEPENDS =3D "zlib openssl (>=3D 0.9.8) dbus (> 1.2.14)"
-
-Since you remove DBus support, can this dependency be removed? Maybe add
-a note to the comment below to not forget to put `dbus` into `DEPENDS`.
-=20
->  SRC_URI =3D "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
->  	"
-> @@ -10,7 +10,8 @@ inherit autotools pkgconfig
-> =20
->  LDFLAGS_append =3D " -Wl,-rpath-link,${TOOLCHAIN_PATH}/${TARGET_SYS}/lib=
-"
-> =20
-> -EXTRA_OECONF =3D " --without-tcl --without-qt --without-pam"
+> -EXTRA_OECONF = " --without-tcl --without-qt --without-pam"
 > +# tfm: dbus build currently broken
-> +EXTRA_OECONF =3D " --without-tcl --without-qt --without-pam --without-db=
-us"
-> =20
->  PACKAGES_prepend =3D "libuniconf libuniconf-dbg "
->  PACKAGES_prepend =3D "uniconfd uniconfd-dbg "
+> +EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-dbus"
 
-I think you also need to increment `PR`.
+but not both.
+If wvstreams should be build with dbus support you should use the
+former, it is should be build without it, it should be the latter.
 
-Can you resend the patch as v2 (`--subject-prefix in `git help
-format-patch`) and update the status in the patch queue [2].
+Frans
 
 
-Thanks,
-
-Paul
-
-
-[1] http://wiki.openembedded.net/index.php/Commit_Policy
-[2] http://wiki.openembedded.net/index.php/Patchwork
-
---=-PsctCs3zCvGDkcFlEiIA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyhngcACgkQPX1aK2wOHVjFewCfY7S3KpMh0tyztHOk/vxuHdaD
-rrYAn0InOuP4+t0PhwuXgpw3cf5AecHc
-=Rs8w
------END PGP SIGNATURE-----
-
---=-PsctCs3zCvGDkcFlEiIA--
