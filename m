@@ -1,33 +1,39 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P0ckr-0008RM-If
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1P0d9w-00087B-CL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 18:10:11 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9G00306SVAAS81@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	28 Sep 2010 11:09:16 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 707B414AF64; Tue,
-	28 Sep 2010 12:09:10 -0400 (EDT)
-Date: Tue, 28 Sep 2010 12:09:10 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 28 Sep 2010 18:36:05 +0200
+Received: from [127.0.0.1] (li38-254.members.linode.com [207.192.74.254])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 536EE3041B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Sep 2010 12:35:46 -0400 (EDT)
+Message-ID: <4CA2195D.9000409@zenlinux.com>
+Date: Tue, 28 Sep 2010 09:35:41 -0700
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100928160910.GC12985@denix.org>
-References: <20100928151021.271550@gmx.net>
-MIME-version: 1.0
-In-reply-to: <20100928151021.271550@gmx.net>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.3
-X-SA-Exim-Mail-From: denis@denix.org
+References: <1285649277-7540-1-git-send-email-sgarman@zenlinux.com>
+	<4CA1A57B.4090706@freyther.de>
+In-Reply-To: <4CA1A57B.4090706@freyther.de>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: 536EE3041B.E20BA
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-SpamCheck: not spam
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: coreutils-native-7.2-r0 dependencies not checked
+Subject: Re: [PATCH] grep: update 2.6.3 to 2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,93 +47,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 16:10:11 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 28 Sep 2010 16:36:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Sep 28, 2010 at 05:10:21PM +0200, Alexander Stohr wrote:
-> hello,
+On 09/28/2010 01:21 AM, Holger Freyther wrote:
+> On 09/28/2010 12:47 PM, Scott Garman wrote:
+>> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
+>> ---
+>>   recipes/grep/grep-2.6.3/uclibc-fix.patch    |   50 ---------------------------
+>>   recipes/grep/grep-2.7/uclibc_libiconv.patch |   18 ++++++++++
+>>   recipes/grep/grep_2.6.3.bb                  |   45 ------------------------
+>>   recipes/grep/grep_2.7.bb                    |   42 ++++++++++++++++++++++
+>>   4 files changed, 60 insertions(+), 95 deletions(-)
+>>   delete mode 100644 recipes/grep/grep-2.6.3/uclibc-fix.patch
+>>   create mode 100644 recipes/grep/grep-2.7/uclibc_libiconv.patch
+>>   delete mode 100644 recipes/grep/grep_2.6.3.bb
+>>   create mode 100644 recipes/grep/grep_2.7.bb
+>
+> Could you please regenerate with rename detection (man git-format-patch, man
+> git-diff)?
 
-Hi,
+Sure thing - I didn't realize rename detection wasn't included by 
+default until you pointed it out.
 
-Sorry for top-posting...
+Thanks,
 
-> | make: GNUmakefile: Too many levels of symbolic links
-
-This is a known issue - please make sure you don't have simlinks in your 
-TMPDIR. If you need to offload portions of your TMPDIR to another partition 
-or other place, adjust the corresponding variables instead of symlinking...
-
--- 
-Denys
-
-
-> to me the mentioned package seems to be very picky
-> on having the right build environment in place.
-> 
-> the downloaded zip file comes with a ./configure file
-> that was seemingly built with autoconf 2.63b. (where does
-> those "b" version originate from? is it some distribution?)
-> on the official download location (ftp://ftp.gnu.org/gnu/autoconf/)
-> there is only autoconf 2.63 - so i used that for the build.
-> 
-> the zip file further contains a "GNUmakefile" of unknown origin.
-> 
-> 
-> for informational purposes, i used bitbake 1.8.18 as the outermost tooling
-> and the openembedded platform used was based on files using this command:
-> 
->   git checkout -b stable/2009 6be05ba2dd55508addf5a21408f6dbbf5a62c3aa
-> 
-> when doing a build from scratch on that file
-> there were only two recipes built in front of coreutils-native.
-> that were shasum-native and stagemanager-native
-> 
-> 
-> the build failed at beginning of coreutils-native "compile" for this reason:
-> 
-> | NOTE: make -j2
-> | make: GNUmakefile: Too many levels of symbolic links
-> | make: stat: GNUmakefile: Too many levels of symbolic links
-> | make: *** No rule to make target `GNUmakefile'.  Stop.
-> | FATAL: oe_runmake failed
-> 
-> Inspection of the work dir showed a cyclical symlink of that form:
-> 
->   GNUmakefile -> GNUmakefile
-> 
-> Further there was a newly generated Makefile bearing that headline
-> (that seemingly resembles the freshly unpacked Makefile.in):
-> 
->   # Makefile.in generated by automake 1.10c from Makefile.am.
-> 
-> the file ./configure was still unaltered. it contained a line:
-> 
->   GNUmakefile=GNUmakefile
-> 
-> 
-> i later on tried to improve the situation with a
-> "make distclean" and further steps but without success.
-> i tried autoconf 2.68 but again no success for the build.
-> 
-> If it would have been simply related to the used version of autoconf
-> i would have said, add a version check for it into the build.
-> right now i am not sure at all whats wrong there.
-> 
-> 
-> seemingly that single line in configure is responsible
-> for the symlink that kills the build in the end.
-> but if several others can build that why should it fail for me?
-> whats running odd for me in the beginning? how is it resolved best?
-> 
-> regards, Alex.
-> -- 
-> GMX DSL SOMMER-SPECIAL: Surf & Phone Flat 16.000 f??r nur 19,99 Euro/mtl.!*
-> http://portal.gmx.net/de/go/dsl
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Scott
 
 
