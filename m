@@ -1,37 +1,33 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1P0bAW-0002VT-9p
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Alexander.Stohr@gmx.de>) id 1P0bpD-0001tq-1x
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 16:28:33 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1P0bAM-0005FI-7j
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 15:28:22 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1P0bAL-0001k6-W9
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 15:28:22 +0100
-From: Phil Blundell <philb@gnu.org>
+	Tue, 28 Sep 2010 17:11:30 +0200
+Received: (qmail 28545 invoked by uid 0); 28 Sep 2010 15:10:22 -0000
+Received: from 193.8.40.126 by www184.gmx.net with HTTP;
+	Tue, 28 Sep 2010 17:10:20 +0200 (CEST)
+Date: Tue, 28 Sep 2010 17:10:21 +0200
+From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
+Message-ID: <20100928151021.271550@gmx.net>
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <lyocbim147.fsf@ensc-virt.intern.sigma-chemnitz.de>
-References: <1285456630-27680-1-git-send-email-raj.khem@gmail.com>
-	<lyocbim147.fsf@ensc-virt.intern.sigma-chemnitz.de>
-Date: Tue, 28 Sep 2010 15:28:21 +0100
-Message-ID: <1285684101.32349.3.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Authenticated: #15156664
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX19tB2d864Ftb+mUuFNc41sc+WHirXfO4Op261X44f
+	9vy/fryl20UU8jOnzO4xsNcSpE9IPduZyOwA== 
+X-GMX-UID: aTeQfyJdPTR+BI921jIwj1Y5c2tpZAvV
+X-FuHaFi: 0.59999999999999998
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sane-toolchain.inc: Make gcc 4.5 & eglibc 2.12 as default sane versions
+Subject: coreutils-native-7.2-r0 dependencies not checked
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,26 +41,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 14:28:39 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Sep 2010 15:11:30 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, 2010-09-28 at 15:47 +0200, Enrico Scholz wrote:
-> Khem Raj <raj.khem@gmail.com> writes:
-> 
-> > GCC 4.5 has been tested quite a bit
-> 
-> Probably not on ARMv5 ;) There 5/3 == 3 holds and ld.so crashes due to
-> related errors.
-> 
-> http://gcc.gnu.org/bugzilla/show_bug.cgi?id=45817
+hello,
 
-That bug seems to be specific to --enable-target-optspace, which (afaik)
-isn't selected for armv5 by the current recipes.  Are you actually
-seeing that bug on a toolchain built with the settings in OE?
+to me the mentioned package seems to be very picky
+on having the right build environment in place.
 
-p.
+the downloaded zip file comes with a ./configure file
+that was seemingly built with autoconf 2.63b. (where does
+those "b" version originate from? is it some distribution?)
+on the official download location (ftp://ftp.gnu.org/gnu/autoconf/)
+there is only autoconf 2.63 - so i used that for the build.
+
+the zip file further contains a "GNUmakefile" of unknown origin.
 
 
+for informational purposes, i used bitbake 1.8.18 as the outermost tooling
+and the openembedded platform used was based on files using this command:
+
+  git checkout -b stable/2009 6be05ba2dd55508addf5a21408f6dbbf5a62c3aa
+
+when doing a build from scratch on that file
+there were only two recipes built in front of coreutils-native.
+that were shasum-native and stagemanager-native
+
+
+the build failed at beginning of coreutils-native "compile" for this reason:
+
+| NOTE: make -j2
+| make: GNUmakefile: Too many levels of symbolic links
+| make: stat: GNUmakefile: Too many levels of symbolic links
+| make: *** No rule to make target `GNUmakefile'.  Stop.
+| FATAL: oe_runmake failed
+
+Inspection of the work dir showed a cyclical symlink of that form:
+
+  GNUmakefile -> GNUmakefile
+
+Further there was a newly generated Makefile bearing that headline
+(that seemingly resembles the freshly unpacked Makefile.in):
+
+  # Makefile.in generated by automake 1.10c from Makefile.am.
+
+the file ./configure was still unaltered. it contained a line:
+
+  GNUmakefile=GNUmakefile
+
+
+i later on tried to improve the situation with a
+"make distclean" and further steps but without success.
+i tried autoconf 2.68 but again no success for the build.
+
+If it would have been simply related to the used version of autoconf
+i would have said, add a version check for it into the build.
+right now i am not sure at all whats wrong there.
+
+
+seemingly that single line in configure is responsible
+for the symlink that kills the build in the end.
+but if several others can build that why should it fail for me?
+whats running odd for me in the beginning? how is it resolved best?
+
+regards, Alex.
+-- 
+GMX DSL SOMMER-SPECIAL: Surf & Phone Flat 16.000 für nur 19,99 Euro/mtl.!*
+http://portal.gmx.net/de/go/dsl
 
 
