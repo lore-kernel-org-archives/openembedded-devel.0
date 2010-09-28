@@ -1,43 +1,36 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0VH1-0000eG-Of
+	(envelope-from <t.fromm@DResearch.de>) id 1P0VJL-0000m2-Dr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 10:10:52 +0200
-Received: by iwn2 with SMTP id 2so3846472iwn.6
+	Tue, 28 Sep 2010 10:13:16 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 7DE47491282
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Sep 2010 01:10:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=KApl6y7Za4rFuVZbmJXgmrWLEObDzt1ik/USkZueZwg=;
-	b=gVrjFFJIEHXCIcnwX2RjuNTFg2ORxwe2SsAN2AF0Vlw2nzQLwGoia2x8gbjKa+Rj/d
-	bQ+VBeMVS2albabjhu7HguNbW10yQn9hcQD2DSp6YdsuKUalvK7604Ls9zjjzvgcoCeH
-	CROBHyEDPaqIu3Ids8FPK3BRi3wOJ5AYdP3dw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=WXOY7vWHQP4Vfx5IXJwjGBdoupvM2a9YGpCXdCt8KO9F1DEusUmib/43/qko0EtjU/
-	HqkoBB7diTg9vpBwzFOePq1uUfWf6h2bmZllCeXWJzQD3GjjozTDX+bnRm45rFaiQ+GM
-	Xqz+QuoSfhYTlwAC14qBZQbfCQ/tpS8KBFIf0=
-MIME-Version: 1.0
-Received: by 10.231.59.212 with SMTP id m20mr10323872ibh.130.1285661436109;
-	Tue, 28 Sep 2010 01:10:36 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 28 Sep 2010 01:10:36 -0700 (PDT)
-In-Reply-To: <1285658920-15596-1-git-send-email-t.fromm@dresearch.de>
-References: <1285658920-15596-1-git-send-email-t.fromm@dresearch.de>
-Date: Tue, 28 Sep 2010 10:10:36 +0200
-Message-ID: <AANLkTinAZPimHtcKhmcFZeaDmuArR9yDtezq_5RjfEus@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 28 Sep 2010 10:13:03 +0200 (CEST)
+Received: from localhost.localdomain ([10.32.10.1]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 28 Sep 2010 10:13:03 +0200
+From: Thilo Fromm <t.fromm@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue, 28 Sep 2010 10:12:44 +0200
+Message-Id: <1285661564-1308-1-git-send-email-t.fromm@dresearch.de>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1285660172.4168.10.camel@mattotaupa>
+References: <1285660172.4168.10.camel@mattotaupa>
+In-Reply-To: <1285660172.4168.10.camel@mattotaupa>
+References: <1285660172.4168.10.camel@mattotaupa>
+X-OriginalArrivalTime: 28 Sep 2010 08:13:03.0298 (UTC)
+	FILETIME=[F8FB8A20:01CB5EE4]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: t.fromm@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Remove dbus support from wvstreams-4.6 because it breaks the build
+Subject: [v2] wvstreams-4.6: Remove dbus support because it breaks the build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,28 +44,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 08:10:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 28 Sep 2010 08:13:16 -0000
 
-2010/9/28 Thilo Fromm <t.fromm@dresearch.de>:
+From: t.fromm <t.fromm@ba11ecae-741b-462f-8724-1218f99f5906>
 
-I'd say it is either this
+If wvstreams is configured with DBus support enabled (by not providing
+--without-dbus) the the build fails at link time as libdbus cannot be
+found:
 
-> -DEPENDS = "zlib openssl (>= 0.9.8)"
-> +DEPENDS = "zlib openssl (>= 0.9.8) dbus (> 1.2.14)"
+| ./CXX -c dbus/wvdbusconn
+| ./CXX -c dbus/wvdbusmarshal
+| ./CXX -c dbus/wvdbusmsg
+| ./CXX -c dbus/wvdbusserver
+| linking libwvdbus.so...
+| arm-angstrom-linux-gnueabi-g++: /libdbus-1.a: No such file or directory
+| make: *** [libwvdbus.so] Error 1
+| FATAL: oe_runmake failed
+NOTE: Task failed: /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/wvstreams-4.6-r0/temp/log.do_compile.6422
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/maniac/work/HYP/oe/3way_merge/recipes/wvstreams/wvstreams_4.6.bb do_compile failed
+ERROR: Task 2024 (/home/maniac/work/HYP/oe/3way_merge/recipes/wvstreams/wvstreams_4.6.bb, do_compile) failed
 
-which makes sure dbus is build and available.
+The root cause for this behaviour is in wvstreams' configure.ac; the
+weird dbus detection and library path handling breaks successive builds.
 
-Or this:
+This patch, however, does not fix the configure.ac file but disables
+DBus support for wvstreams at configure time. This at least fixes the
+broken build.
 
-> -EXTRA_OECONF = " --without-tcl --without-qt --without-pam"
-> +# tfm: dbus build currently broken
-> +EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-dbus"
+Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
+---
+ recipes/wvstreams/wvstreams_4.6.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-but not both.
-If wvstreams should be build with dbus support you should use the
-former, it is should be build without it, it should be the latter.
+diff --git a/recipes/wvstreams/wvstreams_4.6.bb b/recipes/wvstreams/wvstreams_4.6.bb
+index 91abc7d..688a80f 100644
+--- a/recipes/wvstreams/wvstreams_4.6.bb
++++ b/recipes/wvstreams/wvstreams_4.6.bb
+@@ -3,6 +3,8 @@ LICENSE = "LGPL"
+ DESCRIPTION = "WvStreams is a network programming library in C++"
+ DEPENDS = "zlib openssl (>= 0.9.8)"
+ 
++PR = "r2"
++
+ SRC_URI = "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
+ 	"
+ 
+@@ -10,7 +12,8 @@ inherit autotools pkgconfig
+ 
+ LDFLAGS_append = " -Wl,-rpath-link,${TOOLCHAIN_PATH}/${TARGET_SYS}/lib"
+ 
+-EXTRA_OECONF = " --without-tcl --without-qt --without-pam"
++# dbus detection currently broken in configure.ac; remember to add "dbus (>= 1.2.14)" to DEPENDS  when fixed
++EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-dbus"
+ 
+ PACKAGES_prepend = "libuniconf libuniconf-dbg "
+ PACKAGES_prepend = "uniconfd uniconfd-dbg "
+-- 
+1.7.0.4
 
-Frans
 
 
