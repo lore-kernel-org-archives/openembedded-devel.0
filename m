@@ -1,30 +1,27 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P0dbl-0007vD-Fw
+	(envelope-from <roman@khimov.ru>) id 1P0dmh-0006RY-0U
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 19:04:50 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9G00225VF4HGB0@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	28 Sep 2010 12:04:17 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 47DE414AF6A; Tue,
-	28 Sep 2010 13:04:16 -0400 (EDT)
-Date: Tue, 28 Sep 2010 13:04:16 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 28 Sep 2010 19:16:10 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1P0dmS-0005Wh-NV
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Sep 2010 21:15:56 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100928170416.GD12985@denix.org>
+Date: Tue, 28 Sep 2010 21:15:47 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.1-desktop; KDE/4.3.5; x86_64; ; )
 References: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.3
-X-SA-Exim-Mail-From: denis@denix.org
+In-Reply-To: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201009282115.51128.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] kernel NOTE messages fix
@@ -41,108 +38,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 17:04:50 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 28 Sep 2010 17:16:10 -0000
+X-Groupsio-MsgNum: 24111
+Content-Type: multipart/signed; boundary="nextPart1888044.vmuaroA3Mq";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Sep 28, 2010 at 06:39:42PM +0200, Frans Meulenbroeks wrote:
-> Dear all,
-> 
-> Earlier today Henning and I (tirggered by ynezz) had a discussion on
-> irc on the loooong list of kernel NOTE messages.
-> (things like: NOTE: /kernel/arch/arm/mach-at91/at91x40_time.c)
-> This was also discussed earlier with Eric Benard (also on irc).
-> I promised Henning that I should write a note (pun intended :-) ) to
-> the list, and here it is.
-> 
-> Basically the issue is that kernel.bbclass in kernel_do_install copies
-> a lot of files to ${D} so that eventually they end up in staging (this
-> copying is done in sysroot_stage_all_append ). These files are not
-> added to any package so insane.bbclass (or is it sane.bbclass
-> nowadays) barfs about these files.
-> The reason these files end up in staging is for building out-of-tree
-> kernel modules.
+--nextPart1888044.vmuaroA3Mq
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Frans,
-
-Thank you for taking care of this annoyance! I'm personally fine with 
-your solution #3, as the simplest and cleanest one.
-
--- 
-Denys
-
-
-> As it stands we see 3 solutions:
-> 
-> 1) rm -rf the files in sysroot_stage_all_append after staging them
-> issue is that packaging can run in parallel, so in order to do this
-> these these two tasks need to be serialized
-> 
-> 2) add them to kernel-dev. That way the NOTE disappears. However this
-> does increase the kernel-dev package size with 90 MB or so.
-> Technically it would allow building out-of-kernel modules on the
-> target. Then again currently this is not possible and I have never
-> heard complaints about it (actually for embedded systems it is often
-> not a good plan to build on the target, although with current high end
-> systems this becomes more feasible).
-> 
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 28 =D1=81=D0=B5=D0=BD=D1=82=D1=
+=8F=D0=B1=D1=80=D1=8F 2010 20:39:42 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Frans Me=
+ulenbroeks=20
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
 > 3) copy the files directly from the work area to staging. That way
 > there are no unpackaged files in image/ so no NOTE messages.
-> Additional advantage is that it is faster as we save the copy to the image dir.
-> 
+> Additional advantage is that it is faster as we save the copy to the image
+>  dir.
+>=20
 > The following patch makes (3) happen:
-> 
+>=20
 > diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
 > index 5f8bc8a..05ddcc1 100644
 > --- a/classes/kernel.bbclass
 > +++ b/classes/kernel.bbclass
-> @@ -121,7 +121,12 @@ kernel_do_install() {
->                  oe_runmake SUBDIRS="scripts/genksyms"
->          fi
-> 
-> -       kerneldir=${D}/kernel/
-> +
-> +}
-> +
-> +sysroot_stage_all_append() {
-> +
-> +        kerneldir=${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
-> 
->         if [ -e include/asm ] ; then
->                 # This link is generated only in kernel before
-> 2.6.33-rc1, don't stage it for newer kernels
-> @@ -197,12 +202,7 @@ kernel_do_install() {
->         install -m 0644 System.map $kerneldir/System.map-${KERNEL_VERSION}
->         [ -e Module.symvers ] && install -m 0644 Module.symvers $kerneldir/
-> 
-> -       cp -fR scripts $kerneldir/
-> -}
-> -
-> -sysroot_stage_all_append() {
-> -       sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
-> -       cp -fpPR ${D}/kernel/.config ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
-> +       cp -fR scripts $kerneldir/
->  }
-> 
->  kernel_do_configure() {
-> 
-> I have tested this patch and for me it works fine and building the
-> kernel is greatly improved (mostly due to the NOTE messages that are
-> not generated, but also partly due to the copying step that is
-> avoided, so personally I am quite happy with this one.
-> 
-> But before committing this patch I'd like to discuss this on the list.
-> Your response is appreciated.
-> 
-> Frans.
-> 
-> PS: anyone an idea why these NOTE messages take so long time? I must
-> say I never timed it, but I heard people say 2 messages/sec, which
-> seems quite slow.
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+I hate those NOTEs. The patch looks good. Thanks!
 
+Acked-by: Roman I Khimov <khimov@altell.ru>
+
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart1888044.vmuaroA3Mq
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkyiIscACgkQXJ70z+XgVcPcUACfUgHbvUp5qwkNAW6/YhknrTES
+JtAAn35JSfbIiY+hvwK+ZCHPsAA8SneS
+=4AlD
+-----END PGP SIGNATURE-----
+
+--nextPart1888044.vmuaroA3Mq--
