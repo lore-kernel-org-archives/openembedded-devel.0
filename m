@@ -1,34 +1,44 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <Alexander.Stohr@gmx.de>) id 1P0eMb-0007GF-EA
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0eSe-0001V5-2T
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 19:53:15 +0200
-Received: (qmail 17525 invoked by uid 0); 28 Sep 2010 17:45:41 -0000
-Received: from 193.8.40.126 by www158.gmx.net with HTTP;
-	Tue, 28 Sep 2010 19:45:40 +0200 (CEST)
-Date: Tue, 28 Sep 2010 19:45:41 +0200
-From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
-Message-ID: <20100928174541.200740@gmx.net>
+	Tue, 28 Sep 2010 19:59:28 +0200
+Received: by iwn2 with SMTP id 2so4448965iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Sep 2010 10:59:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=CZX7jpGsrhwJw9KVU9TJCzsH2Qlx/5poqJWxmxnz0l8=;
+	b=btXk9kJinwuvlRcBwylBr798q9QfSeE2t5l/DWsTHwVq1KZsS7HyKCOIUahz6iZ3sy
+	Nq6zmFQjdxRmQXIm982rhLHwckj4eyM80LMaV1xakhmI8Z4EzUE6WpeEyWF3MLwFQIxd
+	cyjyxcMAVwbm9HFT99o1Nfbwndoga1IVDn2og=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=CSCMaxZuDfKRh/pdsjdHKj+FyyxVxh4bN6vTWFRJewb1iFwMBV/JfGmYsqjZmQsTDk
+	TofMtNwgdBNkxHX7KnYB73W0KX7PifV9gmvR6C42EFYeLoSE6P+W6mttlwbDnRKkt1oh
+	rHhJ9YHmWz5aHEiBJNAS4WxIji48xfaif//E8=
 MIME-Version: 1.0
+Received: by 10.231.33.71 with SMTP id g7mr308147ibd.54.1285696757652; Tue, 28
+	Sep 2010 10:59:17 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 28 Sep 2010 10:59:17 -0700 (PDT)
+In-Reply-To: <20100928172037.GE12985@denix.org>
+References: <AANLkTikjs7DrdBxNpo0GpGy-FkbG3MEQe=+aT8if_a_C@mail.gmail.com>
+	<20100928172037.GE12985@denix.org>
+Date: Tue, 28 Sep 2010 19:59:17 +0200
+Message-ID: <AANLkTin45cu-zY--b_-csN5GR+L-Q7GWTbvz_k-a5Sze@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #15156664
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX18LHdY1c58LUa8xDl5dFZk3NU9bnpKsJIeKCuH0hs
-	q0JF/9Y3DJRg0+Gg4b3Kwgzd/Bwcz9Bb612Q== 
-X-GMX-UID: qlzLfycAeWUkUsojjm9nVrMjL0tsZo2R
-X-FuHaFi: 0.76000000000000001
-X-SA-Exim-Connect-IP: 213.165.64.23
-X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: automake-patches@gnu.org
-Subject: [patch] cross keyword for automake warnings
+Subject: Re: generate a named kernel in ${DEPLOY_DIR_IMAGE}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,144 +52,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 17:53:15 -0000
-X-Groupsio-MsgNum: 24115
-Content-Type: multipart/mixed; boundary="========GMX2007412856959413696"
+X-List-Received-Date: Tue, 28 Sep 2010 17:59:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---========GMX2007412856959413696
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+2010/9/28 Denys Dmytriyenko <denis@denix.org>:
 
-each of the following two patches adds the "cross" keyword to the command line option --warnings of the automake utility.
+>
+> Frans,
+>
+> May I suggest you to look at the existing multi-kernel.inc implementation[1]
+> for building multiple versions of the same kernel with slightly different
+> defconfigs and slightly different resulting names in the deploy. I use it in
+> Arago[2][3] for linux-davinci machines, while Koen uses it in OE with
+> linux-omap-psp for beagleboard[4][5]...
+>
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/multi-kernel.inc
+> [2] http://arago-project.org/git/?p=arago.git;a=blob;f=recipes/linux/linux-davinci-staging_git.bb;hb=HEAD
+> [3] http://arago-project.org/git/?p=arago.git;a=tree;f=recipes/linux/linux-davinci-staging/dm355-evm;hb=HEAD
+> [4] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-psp_2.6.32.bb
+> [5] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-psp-2.6.32/beagleboard
+>
+> --
+> Denys
+>
+Denys, thanks for the pointers.
+I did peek into multi-kernel (although I didn't test it).
+Apparently I missed the fact that it copies the generated images to
+the deploy dir, but your message triggered me to reread the file and I
+now found that it *does* copy to deploy.
+I'll give multikernel a try tomorrow or so.
 
-that feature is merely a dummy right now as it's not yet used by the tool.
-it improves consistency for the commandline parameters of the tools from that sector.
-it further helps the oe build to not fail when e.g. a tool from the
-autoconf collection blindly tries to pass along "--warnings=cross" to automake.
+Thanks again, Frans.
 
-consider this as a systematic change that paves the way for more whilst reducing need for complexity (like filtering that) in the callers area.
+PS: what caused the misinterpretation at my side was the comment in
+the beginning that said:
+# Note that this include will NOT stage anything nor create packages
+Guess I interpreted this as does not put anything in deploy and did
+not search for evidence.
+Maybe the comment could be made slightly more explicit that the image
+*is* put in deploy.
 
-two versions are appended.
-i only ran the one for 1.10.x on my build testbed.
 
-regards, Alex.
--- 
-GRATIS: Spider-Man 1-3 sowie 300 weitere Videos!
-Jetzt freischalten! http://portal.gmx.net/de/go/maxdome
-
---========GMX2007412856959413696
-Content-Type: text/x-patch;
- charset="iso-8859-15";
- name="automake-1.10.2.cross-warnings-001.patch"
-Content-Transfer-Encoding: 8bit
-Content-Disposition: attachment;
- filename="automake-1.10.2.cross-warnings-001.patch"
-
-diff -usbr automake-1.10.2.orig/aclocal.in automake-1.10.2/aclocal.in
---- automake-1.10.2.orig/aclocal.in	2008-11-23 09:28:59.000000000 +0100
-+++ automake-1.10.2/aclocal.in	2010-09-28 18:55:24.000000000 +0200
-@@ -887,6 +887,7 @@
-   -W, --warnings=CATEGORY   report the warnings falling in CATEGORY
- 
- Warning categories include:
-+  `cross'         cross compilation issues
-   `syntax'        dubious syntactic constructs (default)
-   `unsupported'   unknown macros (default)
-   `all'           all the warnings (default)
-diff -usbr automake-1.10.2.orig/lib/Automake/ChannelDefs.pm automake-1.10.2/lib/Automake/ChannelDefs.pm
---- automake-1.10.2.orig/lib/Automake/ChannelDefs.pm	2008-11-23 09:28:59.000000000 +0100
-+++ automake-1.10.2/lib/Automake/ChannelDefs.pm	2010-09-28 18:57:37.000000000 +0200
-@@ -90,6 +90,10 @@
- 
- Internal errors.  Use C<&prog_error> to send messages over this channel.
- 
-+=item C<cross>
-+
-+cross compilation issues
-+
- =item C<gnu>
- 
- Warnings related to GNU Coding Standards.
-@@ -142,6 +146,7 @@
- 	     "####################\n"),
-   footer => "\nPlease contact <bug-automake\@gnu.org>.";
- 
-+register_channel 'cross', type => 'warning';
- register_channel 'gnu', type => 'warning';
- register_channel 'obsolete', type => 'warning', silent => 1;
- register_channel 'override', type => 'warning', silent => 1;
-@@ -165,6 +170,7 @@
- sub usage ()
- {
-   print "Warning categories include:
-+  `cross'         cross compilation issues
-   `gnu'           GNU coding standards (default in gnu and gnits modes)
-   `obsolete'      obsolete features or constructions
-   `override'      user redefinitions of Automake rules or variables
-
---========GMX2007412856959413696
-Content-Type: text/x-patch;
- charset="iso-8859-15";
- name="automake-1.11.1.cross-warnings-001.patch"
-Content-Transfer-Encoding: 8bit
-Content-Disposition: attachment;
- filename="automake-1.11.1.cross-warnings-001.patch"
-
-diff -usbr automake-1.11.1.orig/aclocal.in automake-1.11.1/aclocal.in
---- automake-1.11.1.orig/aclocal.in	2009-12-08 19:02:32.000000000 +0100
-+++ automake-1.11.1/aclocal.in	2010-09-28 18:42:26.000000000 +0200
-@@ -890,6 +890,7 @@
-   -W, --warnings=CATEGORY   report the warnings falling in CATEGORY
- 
- Warning categories include:
-+  `cross'         cross compilation issues
-   `syntax'        dubious syntactic constructs (default)
-   `unsupported'   unknown macros (default)
-   `all'           all the warnings (default)
-diff -usbr automake-1.11.1.orig/doc/aclocal-1.11.1 automake-1.11.1/doc/aclocal-1.11.1
---- automake-1.11.1.orig/doc/aclocal-1.11.1	2009-12-08 19:15:56.000000000 +0100
-+++ automake-1.11.1/doc/aclocal-1.11.1	2010-09-28 18:42:59.000000000 +0200
-@@ -47,6 +47,9 @@
- report the warnings falling in CATEGORY
- .SS "Warning categories include:"
- .TP
-+`cross'
-+cross compilation issues
-+.TP
- `syntax'
- dubious syntactic constructs (default)
- .TP
-diff -usbr automake-1.11.1.orig/lib/Automake/ChannelDefs.pm automake-1.11.1/lib/Automake/ChannelDefs.pm
---- automake-1.11.1.orig/lib/Automake/ChannelDefs.pm	2009-12-08 19:06:45.000000000 +0100
-+++ automake-1.11.1/lib/Automake/ChannelDefs.pm	2010-09-28 18:46:22.000000000 +0200
-@@ -150,6 +150,7 @@
-   footer => "\nPlease contact <bug-automake\@gnu.org>.",
-   uniq_part => UP_NONE, ordered => 0;
- 
-+register_channel 'cross', type => 'warning';
- register_channel 'gnu', type => 'warning';
- register_channel 'obsolete', type => 'warning', silent => 1;
- register_channel 'override', type => 'warning', silent => 1;
-@@ -175,6 +176,7 @@
- sub usage ()
- {
-   print "Warning categories include:
-+  `cross'         cross compilation issues
-   `gnu'           GNU coding standards (default in gnu and gnits modes)
-   `obsolete'      obsolete features or constructions
-   `override'      user redefinitions of Automake rules or variables
-@@ -262,7 +264,11 @@
-       $has_no = 1;
-     }
- 
--  if ($cat eq 'all')
-+  if ($cat eq 'cross')
-+    {
-+      setup_channel_type 'warning', silent => $has_no;
-+    }
-+  elsif ($cat eq 'all')
-     {
-       setup_channel_type 'warning', silent => $has_no;
-     }
-
---========GMX2007412856959413696--
