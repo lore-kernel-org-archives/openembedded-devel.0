@@ -1,33 +1,33 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P0drp-0008S1-Or
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Alexander.Stohr@gmx.de>) id 1P0dzm-0000Cl-7n
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Sep 2010 19:21:27 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9G00L5YW6DNZ51@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	28 Sep 2010 12:20:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B7F1814AF60; Tue,
-	28 Sep 2010 13:20:37 -0400 (EDT)
-Date: Tue, 28 Sep 2010 13:20:37 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 28 Sep 2010 19:29:38 +0200
+Received: (qmail 28040 invoked by uid 0); 28 Sep 2010 17:29:26 -0000
+Received: from 193.8.40.126 by www139.gmx.net with HTTP;
+	Tue, 28 Sep 2010 19:29:26 +0200 (CEST)
+Date: Tue, 28 Sep 2010 19:29:26 +0200
+From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
+Message-ID: <20100928172926.22160@gmx.net>
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100928172037.GE12985@denix.org>
-References: <AANLkTikjs7DrdBxNpo0GpGy-FkbG3MEQe=+aT8if_a_C@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <AANLkTikjs7DrdBxNpo0GpGy-FkbG3MEQe=+aT8if_a_C@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.1
-X-SA-Exim-Mail-From: denis@denix.org
+X-Authenticated: #15156664
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX1+nfvstzaancgllJDFHfg/XNkmjuktq0+wsVPEMiq
+	pusW6RJlFnqWF7C/BilMcxmMZ6sFm2SncYnQ== 
+X-GMX-UID: mVDLf+VGeWUkUsojjm9nUaEjL0tsZg0l
+X-FuHaFi: 0.59999999999999998
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,FAKE_REPLY_C,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: generate a named kernel in ${DEPLOY_DIR_IMAGE}
+Subject: Re: coreutils-native-7.2-r0 dependencies not checked
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,72 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Sep 2010 17:21:27 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 28 Sep 2010 17:29:39 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 28, 2010 at 06:54:38PM +0200, Frans Meulenbroeks wrote:
-> Hi,
-> 
-> As I needed to generate two different kernels for the same machine I
-> had some kind of problem (as emailed yesterday).
-> For now I've solved it as follows:
-> 
-> I created a 2nd recipe (in an overlay):
-> linux-small_2.6.34.bb
-> this one essentially only requires linux_2.6.34.bb and sets S to the linux_${PN}
-> Then I can just add a dir linux-small and add the small defconfig in it.
-> 
-> That way bitbake linux-small should give me the 2nd kernel.
-> And actually it builds the kernel but this one is also packaged in a
-> kernel-*.ipk.
-> I could have made two different machines, but that seemed somewhat
-> overkill, so in the end I decided to modify do_install_append in
-> linux.inc.
-> 
-> This function currently reads:
-> 
-> do_install_append() {
-> 	oe_runmake headers_install
-> INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION}
-> ARCH=$ARCH
-> }
-> 
-> And I just added a line:
->     cp ${D}/boot/uImage ${DEPLOY_DIR_IMAGE}/uImage-${PN}
-> 
-> That way both kernels end up with different names in the deploy dir.
-> In the image recipe I can then just copy them in a post process
-> command to the proper location.
-> (btw that is also why I went for uImage-${PN} and not for
-> uImage-${PN}-${KERNEL_VERSION}, the kernel version is not known in the
-> image recipe so it is much harder to copy the right/latest uImage to
-> the kernel.
-> 
-> Rationale for typing this message is threefold:
-> - first of all I wanted to record and share what I have done, so
-> others can use it
-> - secondly I would appreciate feedback on my solutions (and maybe
-> someone sees a way to improve it)
-> - and lastly I would like to inquire if people feel the above line
-> would be a nice addition to the stock linux.inc. If so I'l happily
-> prepare a patch.
+>> | make: GNUmakefile: Too many levels of symbolic links
+>
+>This is a known issue - please make sure you don't have simlinks in your 
+>TMPDIR. If you need to offload portions of your TMPDIR to another partition 
+>or other place, adjust the corresponding variables instead of symlinking...
+>--
+>Denys
 
-Frans,
+Hello Denys,
+Thanks for that reply.
 
-May I suggest you to look at the existing multi-kernel.inc implementation[1] 
-for building multiple versions of the same kernel with slightly different 
-defconfigs and slightly different resulting names in the deploy. I use it in 
-Arago[2][3] for linux-davinci machines, while Koen uses it in OE with 
-linux-omap-psp for beagleboard[4][5]...
+My whole build dir got symlinked into the home dir due to disk space issues.
+But there are no symlinks in the temp dir area as far as i can say.
+A somewhat strange behavior. I never noticed tools stumbling across such.
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/multi-kernel.inc
-[2] http://arago-project.org/git/?p=arago.git;a=blob;f=recipes/linux/linux-davinci-staging_git.bb;hb=HEAD
-[3] http://arago-project.org/git/?p=arago.git;a=tree;f=recipes/linux/linux-davinci-staging/dm355-evm;hb=HEAD
-[4] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-psp_2.6.32.bb
-[5] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-omap-psp-2.6.32/beagleboard
+
+My not that deeply tested, first shot, cheap cheat is that:
+
+do_compile_prepend() {
+        cd ${S}
+        if [ -L GNUmakefile ]
+        then
+                rm -f GNUmakefile
+                ln -s Makefile GNUmakefile
+        fi
+}
+
+i've added that to the non-native recipes of the coreutils, m4 and autoconf.
+lets see how far that will work for me in my setup.
+the build has already flawlessly proceeded to task 181 containing the binutils-cross compilation...
+
+regards, Alex.
+
+PS:
+later on i found those discussion mentioning three recipe names from above:
+http://old.nabble.com/failing-to-make-u-boot-omap3,-Too-many-levels-of-symbolic-links-td27315933.html
 
 -- 
-Denys
+Neu: GMX De-Mail - Einfach wie E-Mail, sicher wie ein Brief!  
+Jetzt De-Mail-Adresse reservieren: http://portal.gmx.net/de/go/demail
 
 
