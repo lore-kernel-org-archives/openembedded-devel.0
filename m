@@ -1,26 +1,26 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P13Uz-0001jn-HP
+	(envelope-from <obi@opendreambox.org>) id 1P13V2-0001kL-4P
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 22:43:35 +0200
+	Wed, 29 Sep 2010 22:43:37 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 78FEA3148E2F
+	by mail.multimedia-labs.de (Postfix) with ESMTP id BE3DF3148E50
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 22:37:09 +0200 (CEST)
+	Wed, 29 Sep 2010 22:37:26 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with LMTP id sFNEuYoQg57q; Wed, 29 Sep 2010 22:37:03 +0200 (CEST)
+	with LMTP id s9GeBKxrlT99; Wed, 29 Sep 2010 22:37:20 +0200 (CEST)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id BC5713148E1D;
-	Wed, 29 Sep 2010 22:37:00 +0200 (CEST)
+	by mail.multimedia-labs.de (Postfix) with SMTP id 37D873148E37;
+	Wed, 29 Sep 2010 22:37:12 +0200 (CEST)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Wed, 29 Sep 2010 20:37:00 +0000
+	Wed, 29 Sep 2010 20:37:12 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Sep 2010 20:36:21 +0000
-Message-Id: <1285792594-10032-6-git-send-email-obi@opendreambox.org>
+Date: Wed, 29 Sep 2010 20:36:31 +0000
+Message-Id: <1285792594-10032-16-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
 References: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
@@ -32,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 05/18] mc-4.6.2: use cd instead of pushd and popd
+Subject: [PATCH 15/18] sispmctl-2.7: initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,79 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 20:43:36 -0000
-
-* pushd and popd aren't compatible with dash.
+X-List-Received-Date: Wed, 29 Sep 2010 20:43:37 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- recipes/mc/mc_4.6.2.bb |   27 +++++++++------------------
- 1 files changed, 9 insertions(+), 18 deletions(-)
+ recipes/sispmctl/sispmctl_2.7.bb |   15 +++++++++++++++
+ 1 files changed, 15 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/sispmctl/sispmctl_2.7.bb
 
-diff --git a/recipes/mc/mc_4.6.2.bb b/recipes/mc/mc_4.6.2.bb
-index 85a2cce..18aea70 100644
---- a/recipes/mc/mc_4.6.2.bb
-+++ b/recipes/mc/mc_4.6.2.bb
-@@ -1,5 +1,5 @@
- require mc.inc
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- HOMEPAGE = "http://www.midnight-commander.org/"
- 
- # most of these fixes were copied from openSUSE Factory.
-@@ -34,8 +34,7 @@ do_unpack_append() {
-         bb.build.exec_func('do_utf8_conversion', d)
- }
- do_utf8_conversion() {
--	pwd
--	pushd lib
-+	cd ${S}/lib
- 	iconv -f iso8859-1 -t utf-8 -o mc.hint.tmp mc.hint && mv mc.hint.tmp mc.hint
- 	iconv -f iso8859-1 -t utf-8 -o mc.hint.es.tmp mc.hint.es && mv mc.hint.es.tmp mc.hint.es
- 	iconv -f iso8859-1 -t utf-8 -o mc.hint.it.tmp mc.hint.it && mv mc.hint.it.tmp mc.hint.it
-@@ -48,35 +47,27 @@ do_utf8_conversion() {
- 	iconv -f koi8-u -t utf8 -o mc.hint.uk.tmp mc.hint.uk && mv mc.hint.uk.tmp mc.hint.uk
- 	iconv -f big5 -t utf8 -o mc.hint.zh.tmp mc.hint.zh && mv mc.hint.zh.tmp mc.hint.zh
- 	iconv -f iso8859-5 -t utf-8 -o mc.menu.sr.tmp mc.menu.sr && mv mc.menu.sr.tmp mc.menu.sr
--	popd
- 	# convert docs to utf-8
--	pushd doc
--	pushd es
-+	cd ${S}/doc/es
- 	iconv -f iso8859-1 -t utf-8 -o mc.1.in.tmp mc.1.in && mv mc.1.in.tmp mc.1.in
- 	iconv -f iso8859-1 -t utf-8 -o xnc.hlp.tmp xnc.hlp && mv xnc.hlp.tmp xnc.hlp
--	popd
--	pushd hu
-+	cd ${S}/doc/hu
- 	iconv -f iso8859-2 -t utf-8 -o mc.1.in.tmp mc.1.in && mv mc.1.in.tmp mc.1.in
- 	iconv -f iso8859-2 -t utf-8 -o xnc.hlp.tmp xnc.hlp && mv xnc.hlp.tmp xnc.hlp
--	popd
--	pushd it
-+	cd ${S}/doc/it
- 	iconv -f iso8859-1 -t utf-8 -o mc.1.in.tmp mc.1.in && mv mc.1.in.tmp mc.1.in
- 	iconv -f iso8859-1 -t utf-8 -o xnc.hlp.tmp xnc.hlp && mv xnc.hlp.tmp xnc.hlp
--	popd
--	pushd pl
-+	cd ${S}/doc/pl
- 	iconv -f iso8859-2 -t utf-8 -o mc.1.in.tmp mc.1.in && mv mc.1.in.tmp mc.1.in
- 	iconv -f iso8859-2 -t utf-8 -o xnc.hlp.tmp xnc.hlp && mv xnc.hlp.tmp xnc.hlp
--	popd
--	pushd ru
-+	cd ${S}/doc/ru
- 	iconv -f koi8-r -t utf-8 -o mc.1.in.tmp mc.1.in && mv mc.1.in.tmp mc.1.in
- 	iconv -f koi8-r -t utf-8 -o xnc.hlp.tmp xnc.hlp && mv xnc.hlp.tmp xnc.hlp
--	popd
--	pushd sr
-+	cd ${S}/doc/sr
- 	iconv -f iso8859-5 -t utf-8 -o mc.1.in.tmp mc.1.in && mv mc.1.in.tmp mc.1.in
- 	iconv -f iso8859-5 -t utf-8 -o xnc.hlp.tmp xnc.hlp && mv xnc.hlp.tmp xnc.hlp
- 	iconv -f iso8859-5 -t utf-8 -o mcserv.8.in.tmp mcserv.8.in && mv mcserv.8.in.tmp mcserv.8.in
--	popd
--	popd
-+	cd ${S}
- }
- 
- do_configure_prepend() {
+diff --git a/recipes/sispmctl/sispmctl_2.7.bb b/recipes/sispmctl/sispmctl_2.7.bb
+new file mode 100644
+index 0000000..43d6238
+--- /dev/null
++++ b/recipes/sispmctl/sispmctl_2.7.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "Control Gembird SIS-PM programmable power outlet strips"
++AUTHOR = "Mondrian Nuessle <nuessle@uni-mannheim.de>"
++HOMEPAGE = "http://sispmctl.sourceforge.net/"
++PRIORITY = "optional"
++LICENSE = "GPLv2"
++DEPENDS = "libusb"
++
++SRC_URI = "http://downloads.sourceforge.net/${PN}/${P}.tar.gz"
++
++SRC_URI[md5sum] = "2457f76cd129f880634f3381be0aeb76"
++SRC_URI[sha256sum] = "d24d34fc7e14992ac822cef3c5567b04a077cfc96252b0a6fb238c8a272c16f4"
++
++inherit autotools
++
++EXTRA_OECONF = "--enable-webless"
 -- 
 1.7.1
 
