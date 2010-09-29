@@ -1,35 +1,43 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P10lH-00055u-94
+	(envelope-from <chasemaupin03@gmail.com>) id 1P10oD-0005DS-7e
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 19:48:12 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9I00NFLS383RF2@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	29 Sep 2010 12:47:38 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 13B6214AF64; Wed,
-	29 Sep 2010 13:47:32 -0400 (EDT)
-Date: Wed, 29 Sep 2010 13:47:32 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 29 Sep 2010 19:51:13 +0200
+Received: by ywe9 with SMTP id 9so381815ywe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Sep 2010 10:50:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=dWWhYPBHoEYvIfV+1JSZVxortx5tsIIFH2qzCd/ptXE=;
+	b=AdvwBJ8Md3Jxp0Fs4FtDD4dy+jauF1sPFTMMAo5GN1eGciqjNxhAr6Kv48uzNMD6Sq
+	ldnCn43NEIyPyKFsEgouEF63ECYx8Z3Kq2cMyHobXbKRCZOPXm/OoWODibPcVkGsxnzQ
+	H4T9lTD4V2KxnhCAlypdQ+6ZXIFdtT2HRN1hs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=KORd+BsmONxlgs+vqRa67XolsRQqes4CmtoBxKojoPkXkc8ZLf1F/nxshmwZk+YUAF
+	EKCX7EnOGhj4TXFMuUfauNHfnwM03kvEiozpNfeLI5AuTdDY4eku2te+BseXgm8DYhKI
+	Ft8jbj2KEym4rV3Qe1p5Qmh0unleH6Rod3Vyk=
+Received: by 10.150.177.17 with SMTP id z17mr2563298ybe.122.1285782655775;
+	Wed, 29 Sep 2010 10:50:55 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id q21sm12111202ybk.11.2010.09.29.10.50.54
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 29 Sep 2010 10:50:54 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100929174732.GA27217@denix.org>
-References: <AANLkTikjs7DrdBxNpo0GpGy-FkbG3MEQe=+aT8if_a_C@mail.gmail.com>
-	<AANLkTimxud8X-EdsRC1FrJg8Xpya7S_BM5vKSs3K7Vi5@mail.gmail.com>
-	<AANLkTikFQaRG3S8tJDGCFvWpad51Ac9X8f4DgHS-Rrvv@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <AANLkTikFQaRG3S8tJDGCFvWpad51Ac9X8f4DgHS-Rrvv@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Wed, 29 Sep 2010 12:37:38 -0500
+Message-Id: <1285781858-5299-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: generate a named kernel in ${DEPLOY_DIR_IMAGE}
+Subject: [PATCHv2] am-benchmarks: update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 17:48:12 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 29 Sep 2010 17:51:14 -0000
 
-On Wed, Sep 29, 2010 at 08:28:37AM +0200, Frans Meulenbroeks wrote:
-> 2010/9/29 Andrea Adami <andrea.adami@gmail.com>:
-> > On Tue, Sep 28, 2010 at 6:54 PM, Frans Meulenbroeks
-> >> As I needed to generate two different kernels for the same machine I
-> >> had some kind of problem (as emailed yesterday).
-> >> For now I've solved it as follows:
-> >>
-> >> I created a 2nd recipe (in an overlay):
-> >> linux-small_2.6.34.bb
-> >> this one essentially only requires linux_2.6.34.bb and sets S to the linux_${PN}
-> >> Then I can just add a dir linux-small and add the small defconfig in it.
-> >>
-> >> That way bitbake linux-small should give me the 2nd kernel.
-> >> And actually it builds the kernel but this one is also packaged in a
-> >> kernel-*.ipk.
-> >> I could have made two different machines, but that seemed somewhat
-> >> overkill, so in the end I decided to modify do_install_append in
-> >> linux.inc.
-> 
-> PS: referring to Denys' message about multi-linux.inc: still haven't
-> tested it, but what isslightly nasty about it is that it does not
-> package, so I cannot easily include modules in an image
-> (as my kernels are from the same recipe the modules are compatible,
-> and it helps to be able to say in an image recipe that you want to add
-> kernel-module-xyz)
+* Updated the SRCREV to the latest version of this project
+  which includes support for multiple platforms.
+* Add COMPATIBLE_MACHINE setting for recipe.
 
-Frans,
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ recipes/ti/am-benchmarks_svn.bb |   13 ++++++++++---
+ 1 files changed, 10 insertions(+), 3 deletions(-)
 
-It packages only the main kernel and all the related modules, configured by 
-the usual defconfig file. But it doesn't do it for the additional kernels that 
-were built using configuration files from configs/ directory...
-
+diff --git a/recipes/ti/am-benchmarks_svn.bb b/recipes/ti/am-benchmarks_svn.bb
+index 51ac6af..6ab29f5 100644
+--- a/recipes/ti/am-benchmarks_svn.bb
++++ b/recipes/ti/am-benchmarks_svn.bb
+@@ -4,15 +4,22 @@ LICENSE = "BSD"
+ SECTION = "system"
+ PRIORITY = "optional"
+ 
+-SRCREV = "33"
+-PV = "1.0"
++SRCREV = "56"
++PV = "1.1"
+ PR = "r1+svnr${SRCPV}"
+ 
++COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
++
++ARCHITECTURE_dm365 = "arm9"
++ARCHITECTURE_omapl138 = "arm9"
++ARCHITECTURE_omap3 = "cortex-a8"
++ARCHITECTURE_ti816x = "cortex-a8"
++
+ INSANE_SKIP_${PN} = "True"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/am_benchmarks/;module=trunk;proto=https;user=anonymous;pswd=''"
+ 
+-S = "${WORKDIR}/trunk"
++S = "${WORKDIR}/trunk/${ARCHITECTURE}"
+ 
+ do_compile() {
+ 	# don't build debug version
 -- 
-Denys
+1.7.0.4
+
 
 
