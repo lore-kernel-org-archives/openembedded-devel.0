@@ -1,32 +1,46 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P0wOd-0000xa-H7 for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 15:08:38 +0200
-Received: from g225082119.adsl.alicedsl.de ([92.225.82.119]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P0wON-0004Df-P5 for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 13:08:15 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0wQI-0003uN-12
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Sep 2010 15:10:18 +0200
+Received: by iwn2 with SMTP id 2so1031230iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Sep 2010 06:10:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=If6scieJyj3QQvZYa312iEI1a13FrXppdfpXVN+O6A8=;
+	b=UwKi/bDeSFUk6jQiH9SDUpxbeDfzdl+kOCWXR9SzYJDD4wq46lf1WRaZVLqIHGVWna
+	Ms9BRNZelCUMv4VEHtkJptJUl8fIecV/csPhnkdjEyylBKCMYQivLWEI7LiBYUg2KAQv
+	RNP6+k9WiPqadHbVKpNZzFhSROUiSmp1gQCNY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=USqmHbNGfqC9B3JzwxsFkf0dQ6bbkO3lFLLnRTfrOkB8e/68k4S7d3zEDpT+XDpbBE
+	KyeU4Rz+yx6Etl1jdkPLenxVn5axumHzXcWe93z0/Uf2rIm031i3/sVrbt+uc4PUSdk8
+	tcV1JCzeXbXN2fkM1YN9+dM8aN5hqJmUYnuoo=
+MIME-Version: 1.0
+Received: by 10.231.183.10 with SMTP id ce10mr1772108ibb.96.1285765802802;
+	Wed, 29 Sep 2010 06:10:02 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Wed, 29 Sep 2010 06:10:02 -0700 (PDT)
+In-Reply-To: <AANLkTimeg=+6VEvgd8k1sJk0KQ6Y+po6qcCZSW8C3A3f@mail.gmail.com>
+References: <AANLkTikjs7DrdBxNpo0GpGy-FkbG3MEQe=+aT8if_a_C@mail.gmail.com>
+	<AANLkTimxud8X-EdsRC1FrJg8Xpya7S_BM5vKSs3K7Vi5@mail.gmail.com>
+	<AANLkTikDLYVEa=X5eHj7kB+9O3Hu=a_Our7iAimyW0-c@mail.gmail.com>
+	<AANLkTimeg=+6VEvgd8k1sJk0KQ6Y+po6qcCZSW8C3A3f@mail.gmail.com>
+Date: Wed, 29 Sep 2010 15:10:02 +0200
+Message-ID: <AANLkTi=v6tbd+iS3cf5xM+Cm0fjtsENLaXpmd8iUC0xz@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1285601000-28294-1-git-send-email-t.fromm@dresearch.de>
-References: <4CA0B4FF.3050601@dresearch.de>
-	<1285601000-28294-1-git-send-email-t.fromm@dresearch.de>
-Date: Wed, 29 Sep 2010 15:08:13 +0200
-Message-ID: <1285765693.4578.14.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add falloc.h to the exported kernel header files.
+Subject: Re: generate a named kernel in ${DEPLOY_DIR_IMAGE}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,105 +54,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 13:08:41 -0000
-X-Groupsio-MsgNum: 24134
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-SdFS08/9DnghW9TyWlHB"
+X-List-Received-Date: Wed, 29 Sep 2010 13:10:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-SdFS08/9DnghW9TyWlHB
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+2010/9/29 Andrea Adami <andrea.adami@gmail.com>:
+> On Wed, Sep 29, 2010 at 8:54 AM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> 2010/9/29 Andrea Adami <andrea.adami@gmail.com>:
 
-Dear Thilo,
+>> I would have expected you had to add something like:
+>> FILESPATHPKG_append = ":linux-${PV}"
+>> I had to add this to get access to the linux patches.
+>
+> No need to extend FILESPATHPKG being we keep the patches in the
+> kernel-specific dirs: e.g. /linux-2.6.34 and /linux-kexecboot-2.6.34
 
+Ah ok, I understand. As I am building different versions of the
+standard kernel, I am using those patches
+I assumed kexecboot also used the same patches as the kernel does.
+I expected these would apply to the kexecboot kernel with the same name.
 
-thank you for your patch. Could you please add the recipe name to the
-beginning of the commit summary as demanded by the commit policy
-[1]. ;-)
+>
+>>
+>> And this:
+>> S = "${WORKDIR}/linux-${PV}"
+>> might perhaps better end up in the base recipe (in my case linux_2.6.34.bb)
+>
+> I misunderstand perhaps: this is in each recipe (e.g.
+> linux-kexecboot_2.6.34.bb). Do you mean moving it in
+> linux-kexecboot.inc?
 
+No. My recipe is slightly different and does a require linux_${PV} but
+as the requiring recipe is named differently ${PN} and hence ${S} is
+differently from the required recipe.
+I had to define S in my recipe, and I was wondering whether it would
+be better to move that line to the base linux_${PN}} recipe
+>
+>
+>> (actually thinking of it the FILESPATHPKG might also be moved into there).
+>>
+>> Should I prepare a patch for that ?
+> Sorry, not sure about the question.
+>
+The question was whether it would be better to explicitly say
+ S = "${WORKDIR}/linux-${PV}"
+in linux_${PN}.bb
+then S is always automatically ok for everyone who includes it.
 
-Am Montag, den 27.09.2010, 17:23 +0200 schrieb Thilo Fromm:
-> This adds include/linux/falloc.h to the list of files
-> exported by the kernel to the C library.
-> The include file is required for building e.g. a recent util-linux-ng
-> against 2.6.24.
+not a big change and not very important either.
 
-it looks like the same fix was committed upstream [3] in March 2008 [4].
-Since the Linux kernel 2.6.24 was released in January 2008 this fixed
-should be present in all Linux kernels >=3D 2.6.24.
-
-If you sent a patch iteration, please add that information to the commit
-message.
-
-> Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
-> ---
->  .../linux-libc-headers/files/export_falloc_h.patch |   10 ++++++++++
->  .../linux-libc-headers_2.6.24.bb                   |    1 +
->  2 files changed, 11 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/linux-libc-headers/files/export_falloc_h.patc=
-h
->=20
-> diff --git a/recipes/linux-libc-headers/files/export_falloc_h.patch b/rec=
-ipes/linux-libc-headers/files/export_falloc_h.patch
-> new file mode 100644
-> index 0000000..5860e88
-> --- /dev/null
-> +++ b/recipes/linux-libc-headers/files/export_falloc_h.patch
-
-Could you please add a patch header as suggested in [2].
-
-> @@ -0,0 +1,10 @@
-> +--- a/include/linux/Kbuild	2010-09-27 16:04:29.000000000 +0200
-> ++++ b/include/linux/Kbuild	2010-09-27 15:59:06.000000000 +0200
-> +@@ -61,6 +61,7 @@
-> + header-y +=3D elf.h
-> + header-y +=3D elf-em.h
-> + header-y +=3D fadvise.h
-> ++header-y +=3D falloc.h
-> + header-y +=3D fd.h
-> + header-y +=3D fdreg.h
-> + header-y +=3D fib_rules.h
-> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/re=
-cipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-> index b90c478..6db6fd1 100644
-> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
-> @@ -6,6 +6,7 @@ PR =3D "r5"
-> =20
->  SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.b=
-z2 \
->             file://procinfo.h \
-> +           file://export_falloc_h.patch \
->             file://unifdef.patch"
-> =20
->  S =3D "${WORKDIR}/linux-${PV}"
+Frans
 
 
-Thanks,
-
-Paul
-
-
-[1] http://wiki.openembedded.net/index.php/Commit_Policy
-[2] http://wiki.openembedded.net/index.php/Push_patches_upstream
-[3] http://git.kernel.org/?p=3Dlinux/kernel/git/torvalds/linux-2.6.git;a=3D=
-blob;f=3Dinclude/linux/Kbuild;h=3D626b629429ff2fc3f30fcf63b25fb52211f184c0;=
-hb=3DHEAD#l120
-[4] http://git.kernel.org/?p=3Dlinux/kernel/git/torvalds/linux-2.6.git;a=3D=
-commit;h=3D040922c04cf2c8ac70be2e88a8a9614ecdb41d2e
-[5] http://kernelnewbies.org/Linux_2_6_24
-
---=-SdFS08/9DnghW9TyWlHB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyjOjcACgkQPX1aK2wOHVic3wCfeL5pgfsjxf1qkpgB+pBG2cwY
-NAUAni/oOhQB/IGL6jUexRnmW2ppIDnZ
-=X/aR
------END PGP SIGNATURE-----
-
---=-SdFS08/9DnghW9TyWlHB--
