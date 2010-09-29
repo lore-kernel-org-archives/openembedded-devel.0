@@ -1,33 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P14n5-0002bH-At for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 00:06:20 +0200
-Received: from g225082119.adsl.alicedsl.de ([92.225.82.119]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P14mu-0007qQ-Lw for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 22:06:08 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <graham.gower@gmail.com>) id 1P15AW-000328-RJ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Sep 2010 00:30:33 +0200
+Received: by iwn2 with SMTP id 2so1621457iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Sep 2010 15:30:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=V1xOQrPF9r1uXmc8ncdQ8T+w7xVVooTru08S4/ZS6Cs=;
+	b=Pp2ru/3s/gIQZJifYfaGpKpwetI/2/NWIhr7jk0dixmztpAPTQBc6eTQThwWxQeBHj
+	gh/QY9ixJ8f4Sf7NSeowrRpaJ1/bT4G2wRqOPDa6+tG1upDpK7ESm3vFebBb7MLqlTgm
+	5cWACfaoTG56SqC8+Yan/M4tr8hzrlbQyoQaw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=rbzhi8wsIE5aT5R4FeRY6ybpshXC5iFadQyqJ6exj8bQ8/7/sXjcleqiql4vv7gKmG
+	iV/fmbQi3yhQ0omaXJdLipcRM/yFcOf5ndtGFQJXwcDnqr6QeF8NSjMpnowFC1M8iBX2
+	XWBDCYhavk5WSBXKnOHtG5J87C+Zr5/Vfv9hg=
+MIME-Version: 1.0
+Received: by 10.231.13.140 with SMTP id c12mr2552413iba.25.1285799420867; Wed,
+	29 Sep 2010 15:30:20 -0700 (PDT)
+Received: by 10.231.158.147 with HTTP; Wed, 29 Sep 2010 15:30:20 -0700 (PDT)
+In-Reply-To: <4CA36166.1000003@cam.ac.uk>
+References: <4CA34E00.8080106@cam.ac.uk> <4CA35464.5030007@freyther.de>
+	<4CA36166.1000003@cam.ac.uk>
+Date: Thu, 30 Sep 2010 08:00:20 +0930
+Message-ID: <AANLkTinGN-95WnCdAfGZRTt0L+HvHB7H4L6OR-56neP+@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4CA35BB7.2000505@dresearch.de>
-References: <4CA0B4FF.3050601@dresearch.de>
-	<1285601000-28294-1-git-send-email-t.fromm@dresearch.de>
-	<1285765693.4578.14.camel@mattotaupa> <4CA35BB7.2000505@dresearch.de>
-Date: Thu, 30 Sep 2010 00:06:07 +0200
-Message-ID: <1285797967.27605.18.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add falloc.h to the exported kernel header files.
+Subject: Re: missing dependency on expat-native in gdb-cross-sdk-7.1-r7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,104 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 22:06:20 -0000
-X-Groupsio-MsgNum: 24192
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-WiOrsnTkazULZKY9E7FS"
+X-List-Received-Date: Wed, 29 Sep 2010 22:30:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-WiOrsnTkazULZKY9E7FS
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 30 September 2010 01:25, Jonathan Cameron <jic23@cam.ac.uk> wrote:
+> On 09/29/10 15:59, Holger Freyther wrote:
+>> On 09/29/2010 10:32 PM, Jonathan Cameron wrote:
+>>> Hi all,
+>>
+>>>
+>>> I'd suggest adding expat-native to gdb-cross-sdk.inc DEPENDS (which seems to fix the problem) No idea if it is needed
+>>> for all versions though.
+>>
+>> At least GDB 7.x needs expat to parse the register definitions for the CPU.
+>> E.g. this is important when using the gdb remote protocol.
+>>
+>> You should also pass --with-expat to it, right now I have a build issue with
+>> the target gdb and this argument.
+>>
+> Ah, thanks for the heads up. I'll try that and see how I get on.
+>
+> As an aside there is also an issue with both binutils-cross-sdk and gdb-cross-sdk
+> wanting to install libiberty.a
+>
 
-Dear Thilo,
+Yeah, I've run into this.
+http://patchwork.openembedded.org/patch/2874/
 
-
-Am Mittwoch, den 29.09.2010, 17:31 +0200 schrieb Thilo Fromm:
-
-[=E2=80=A6]
-
-> >> This adds include/linux/falloc.h to the list of files
-> >> exported by the kernel to the C library.
-> >> The include file is required for building e.g. a recent util-linux-ng
-> >> against 2.6.24.
-> >
-> > it looks like the same fix was committed upstream [3] in March 2008 [4]=
-.
-> > Since the Linux kernel 2.6.24 was released in January 2008 this fixed
-> > should be present in all Linux kernels>=3D 2.6.24.
->=20
-> It is present in all kernels > 2.6.24. It's actually in the changelog=20
-> for 2.6.25:=20
-> <http://ftp.halifax.rwth-aachen.de/kernel/linux/kernel/v2.6/ChangeLog-2.6=
-.25>=20
-> (search the page for "falloc.h").
->=20
-> But we're stuck with 2.6.24 :-/
->=20
-> > If you sent a patch iteration, please add that information to the commi=
-t
-> > message.
->=20
-> What's a patch iteration?
-
-I am no native speaker, but I mean a revised patch, i. e. PATCH v2.
-
-> >> Signed-off-by: Thilo Fromm<t.fromm@dresearch.de>
-> >> ---
-> >>   .../linux-libc-headers/files/export_falloc_h.patch |   10 ++++++++++
-> >>   .../linux-libc-headers_2.6.24.bb                   |    1 +
-> >>   2 files changed, 11 insertions(+), 0 deletions(-)
-> >>   create mode 100644 recipes/linux-libc-headers/files/export_falloc_h.=
-patch
-> >>
-> >> diff --git a/recipes/linux-libc-headers/files/export_falloc_h.patch b/=
-recipes/linux-libc-headers/files/export_falloc_h.patch
-> >> new file mode 100644
-> >> index 0000000..5860e88
-> >> --- /dev/null
-> >> +++ b/recipes/linux-libc-headers/files/export_falloc_h.patch
-> >
-> > Could you please add a patch header as suggested in [2].
->=20
-> I suppose you're referring to a line like
->=20
-> upstream: OE-only
->=20
-> ? As this patch is not supposed to go upstream (because it's already=20
-> there) - do you think this is still necessary?
-
-I looked at your revised patch (v2). This information is not for the
-commit message but should be placed at the beginning of the patch file
-`files/export_falloc_h.patch` [1]. My suggestion is the following.
-
-        upstream: http://git.kernel.org/?p=3Dlinux/kernel/git/torvalds/linu=
-x-2.6.git;a=3Dcommit;h=3D040922c04cf2c8ac70be2e88a8a9614ecdb41d2e
-        comment: Patch is present in Linux kernel >=3D 2.6.25.
-
-> Otherwise I'd just adjust the patch summary and then resubmit the patch=
-=20
-> as v2.
+But more is needed, as other gdb variants clobber other binutils libs too.
 
 
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/eglibc/=
-files/eglibc-dont-cache-slibdir.patch
-
---=-WiOrsnTkazULZKY9E7FS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyjuE8ACgkQPX1aK2wOHVgjsACaA/LzUoRwqsQV4JfZCJq//wlv
-99gAn1TxjI1Y6jM9LekiEyFRmVTfEmXI
-=GYsK
------END PGP SIGNATURE-----
-
---=-WiOrsnTkazULZKY9E7FS--
