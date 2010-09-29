@@ -1,43 +1,33 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P13nf-0004jT-6z
+	(envelope-from <denis@denix.org>) id 1P13oO-0004oD-5M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 23:02:51 +0200
-Received: by iwn2 with SMTP id 2so1529892iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 14:02:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=bFHza32R8YZcADX28u1ulTnUiJ1REYNfDrywzVGykJk=;
-	b=l4eHBJGZOz7weikw9fRMIE9t9k36roOaI9CdNmL3nUXQQUDk5304kSru0soHyqz0VG
-	XWSoJJRSH+rWog1+QkmuuJXXD4whsKJaPI4+xKlQBBVNryF6adUbKLFf7BBXMgBlNIAs
-	UO2KEzrWu3ESrRELekr1QXpfObKAIwrl16P1w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=x4SI3BXfI4mH80mOgOdWaxkU09EFuIt2nnF+AUe7ar6fCwNh1RXT5joXnvt2HecdwF
-	FGVT68MMbKOSTspgl4ipytG4FmsCYmLxrkTPDr3QYi9eSLeI5X2UlZqtdCZ+gibZarwc
-	OhC23fE8QcsiZTFul4ZK4A0BfVhqpV4cmtPkA=
-MIME-Version: 1.0
-Received: by 10.231.191.6 with SMTP id dk6mr2422635ibb.51.1285794155698; Wed,
-	29 Sep 2010 14:02:35 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Wed, 29 Sep 2010 14:02:35 -0700 (PDT)
-In-Reply-To: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
-References: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
-Date: Wed, 29 Sep 2010 23:02:35 +0200
-Message-ID: <AANLkTi=V7m+A0J37hu5DFZUKKBG9FzE9WYO13RPmrA9e@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 29 Sep 2010 23:03:37 +0200
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L9J007ZG156NU00@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	29 Sep 2010 16:03:12 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EE0F214AF64; Wed,
+	29 Sep 2010 17:03:05 -0400 (EDT)
+Date: Wed, 29 Sep 2010 17:03:05 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-id: <20100929210305.GA28782@denix.org>
+References: <1285792798-6529-1-git-send-email-fransmeulenbroeks@gmail.com>
+MIME-version: 1.0
+In-reply-to: <1285792798-6529-1-git-send-email-fransmeulenbroeks@gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 00/18] Patches from opendreambox.org
+Subject: Re: [PATCH] kernel.bbclass: avoid NOTE messages for files	that are staged but not packaged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +41,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 21:02:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 29 Sep 2010 21:03:37 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-2010/9/29 Andreas Oberritter <obi@opendreambox.org>:
-> Hello,
->
-> in order to synchronize our work with upstream, I've prepared some
-> patches. More patches will follow. You can cherry-pick or pull them
-> from git, if you like:
->
-> git://git.opendreambox.org/git/obi/openembedded.git for-upstream
->
-> I'm submitting patches to OE for the first time, so please be patient
-> if I've missed some guideline or the like.
->
-> Best regards,
-> Andreas
+On Wed, Sep 29, 2010 at 10:39:58PM +0200, Frans Meulenbroeks wrote:
+> copy the files directly from the work area to staging. That way
+> there are no unpackaged files in image/ so no NOTE messages.
+> Additional advantage is that it is faster as we save the copy to the image dir.
+> 
+> See also http://thread.gmane.org/gmane.comp.handhelds.openembedded/37487
+> 
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> Acked-by: Roman I Khimov <khimov@altell.ru>
+> Tested-by: Petr ?tetiar <ynezz@true.cz>
+> Acked-by: Eric B?nard <eric@eukrea.com>
 
-Thanks for your patches.
-I've peeked into a few of them (mainly the cd and python related
-ones). They look good. Will test them tomorrow (time permitting) and
-if they are ok I'll ack & push them.
-I hope someone else will pick up the patches I am not familiar with.
+Acked-by: Denys Dmytriyenko <denis@denix.org>
 
-Frans.
+> ---
+> 
+> This is the formal patch, following up the discussion mentioned above
+> It really works like a charm. Kernel build time is greatly reduced.
+> 
+> If there are no objections, and since there are already 2 acks,
+> I will push tomorrow my evening (20 hrs or so after posting)
+> Feel free to add additional acks.
+> 
+> Frans
+> 
+>  classes/kernel.bbclass |   12 ++++++------
+>  1 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+> index 5f8bc8a..cfb4ad8 100644
+> --- a/classes/kernel.bbclass
+> +++ b/classes/kernel.bbclass
+> @@ -121,7 +121,12 @@ kernel_do_install() {
+>                  oe_runmake SUBDIRS="scripts/genksyms"
+>          fi
+>  
+> -	kerneldir=${D}/kernel/
+> +
+> +}
+> +
+> +sysroot_stage_all_append() {
+> +
+> +	kerneldir=${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+>  
+>  	if [ -e include/asm ] ; then
+>  		# This link is generated only in kernel before 2.6.33-rc1, don't stage it for newer kernels
+> @@ -200,11 +205,6 @@ kernel_do_install() {
+>  	cp -fR scripts $kerneldir/
+>  }
+>  
+> -sysroot_stage_all_append() {
+> -	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+> -	cp -fpPR ${D}/kernel/.config ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+> -}
+> -
+>  kernel_do_configure() {
+>  	yes '' | oe_runmake oldconfig
+>  	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
+> -- 
+> 1.6.4.2
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
