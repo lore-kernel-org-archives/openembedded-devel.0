@@ -1,41 +1,45 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1P12ym-0000Qf-Ro
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P135J-0000qt-VA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 22:10:17 +0200
-Received: by eyb7 with SMTP id 7so467131eyb.6
+	Wed, 29 Sep 2010 22:17:02 +0200
+Received: by ywe9 with SMTP id 9so422002ywe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 13:10:06 -0700 (PDT)
+	Wed, 29 Sep 2010 13:16:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=73MhFbQyYcv6jD9WsJgP/I5dRZeMwowXUJG5L8rfxbQ=;
-	b=fPUPf+0W/GgXDflCkPcowcznseXYE5w17hMjPufZ2+n/pERTbIiqZOSkjxwrgDrH9S
-	E9/L6YW4DS1UAunOQUz5RVCABdIIO6TZuhEwbhjqXP2MtQYv4jvFi71JYzBDIv2xP5QK
-	QrDbsHesDO8a0BqAbkH0ZTe7r0sovE5B1+oU8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=ai9w8wavuPFdTIaXGhmfkXz/BgU7Ca/3qJekGPkB961swdg+RE2IWVwb7jwEPQuQNw
-	FMSZoGo/f1T9MZyNEI9nk7jTpw5m6QOIkdnnLURgW3wzrE8L1FcOZnZbxmmmVDA9PaIS
-	vDlOVUclg2IGxxwKzUOaaoqI3XEJryQ4KE0vc=
+	bh=Geftz0/dYuVbsId0pYosfLmfqiYdI5IVUkD8DIUyw28=;
+	b=nZC7oY60LmIuqpOEtQwPfMLMoHl98LWVCfH2gUtLSX4snBNsevgFuCTibRf2oSXEpS
+	bC81iI+8T6DN/SQEI04ToKgewEpx8JMaXdQkayEiz5F2v2fEPE9x3/XshTEk7fjd7hXU
+	Ixnf+YTiK15neebGzywTtmo9lM9XRtHK0ZXC0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=fT0NuemPQTdYwmn7CWjp6UaQ1o6vvy+v45dKBeYQciMmwS7FuUhbZaUCVcPoO1Ni0Z
+	045dkP8NHCo02dyluRJe/IDn55sILcc8Lwo2fZ76RZGKkp1cca7zhjLlQANnJoUcGa7V
+	BOD/EHFQHcgsqIKnitLZKiFhGGZg2zZPoec/Q=
 MIME-Version: 1.0
-Received: by 10.103.172.15 with SMTP id z15mr1255707muo.42.1285790999233; Wed,
-	29 Sep 2010 13:09:59 -0700 (PDT)
-Received: by 10.220.195.72 with HTTP; Wed, 29 Sep 2010 13:09:58 -0700 (PDT)
-Date: Wed, 29 Sep 2010 13:09:58 -0700
-Message-ID: <AANLkTikORoazgt01ok+x+1fmv_9U5Ui7okbbUOBb-6Ft@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+Received: by 10.231.167.67 with SMTP id p3mr2382530iby.20.1285791408306; Wed,
+	29 Sep 2010 13:16:48 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Wed, 29 Sep 2010 13:16:47 -0700 (PDT)
+In-Reply-To: <20100929183700.GB27217@denix.org>
+References: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
+	<20100929183700.GB27217@denix.org>
+Date: Wed, 29 Sep 2010 22:16:47 +0200
+Message-ID: <AANLkTimD51tO=QkF8Bx3Gkq1zjwCWTV5+qbaRW8r1OpJ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: libgcc-dev.ipk not created Fwd: [Gumstix-users] question about libgcc-dev
+Subject: Re: [RFC] kernel NOTE messages fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,68 +53,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 20:10:17 -0000
+X-List-Received-Date: Wed, 29 Sep 2010 20:17:02 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-I originally posted this on the gumstix mailing list and was told I
-should ask here. I was wondering how come there is no libgcc-dev.ipk
-that gets created though its in the work directory? I was trying to
-compile a program on my machine and was giving me complaints about
-libgcc-dev missing. Is this suppose to happen or? Thanks for any info
-or help on this.
+2010/9/29 Denys Dmytriyenko <denis@denix.org>:
+> On Tue, Sep 28, 2010 at 06:39:42PM +0200, Frans Meulenbroeks wrote:
 
-JL
-
-
----------- Forwarded message ----------
-From: Steve Sakoman <sakoman@gmail.com>
-Date: Wed, Sep 29, 2010 at 12:59 PM
-Subject: Re: [Gumstix-users] question about libgcc-dev
-To: "General mailing list for gumstix users."
-<gumstix-users@lists.sourceforge.net>
-
-
-On Wed, Sep 29, 2010 at 12:07 PM, J. L. <vwyodapink@gmail.com> wrote:
-> On Wed, Sep 29, 2010 at 6:54 AM, Steve Sakoman <sakoman@gmail.com> wrote:
->> On Wed, Sep 29, 2010 at 2:20 AM, J. L. <vwyodapink@gmail.com> wrote:
->>> I was trying to install libpcap-dev and libpcre-dev and when I did
->>> they both said that libgcc-dev was an unmet dependency. I have tried
->>> searching and can not seem to figure out what provides that? I am sure
->>> this is a really basic one that I am missing. Thanks if you can let me
->>> know what to build to get that.
->>
->> The gcc recipe provides libgcc-dev
+>> -sysroot_stage_all_append() {
+>> - =A0 =A0 =A0 sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_=
+KERNEL_DIR}
 >
-> I checked in the tmp and it only builds a libgcc1_4.3.3 which I
-> already had on the system when it gave that error. I also dont see
-> anything saying its a dev for anything in the gcc tmp build. Am I
-> still missing something obvious here?
+> BTW, won't this patch break packaged-staging? Has anyone tried rebuilding=
+ from
+> pstage after this fix?
 
-I found it by searching through the tmp directory:
+I don't think it will break packaged staging. This is the function
+sysroot_stage_dir:
 
-$ ls -l tmp/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/packages-spl=
-it/
-| grep libgcc-dev
+sysroot_stage_dir() {
+        src=3D"$1"
+        dest=3D"$2"
+        # This will remove empty directories so we can ignore them
+        rmdir "$src" 2> /dev/null || true
+        if [ -d "$src" ]; then
+                mkdir -p "$dest"
+                cp -fpPR "$src"/* "$dest"
+        fi
+}
 
-drwxrwxr-x 2 sakoman sakoman 4096 2010-09-17 20:22 libgcc-dev
+Nothing related to packaged staging here.
+And we still copy to ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR} (which is
+the place where I assume things are packaged from)
 
-But you are correct, the recipe doesn't seem to put an ipk in the
-deploy directory. =A0Not sure why!
-
-Might be better to ask this question to the experts on the OE mailing list.
-
-Steve
-
----------------------------------------------------------------------------=
----
-Start uncovering the many advantages of virtual appliances
-and start using them to simplify application deployment and
-accelerate your shift to cloud computing.
-http://p.sf.net/sfu/novell-sfdev2dev
-_______________________________________________
-gumstix-users mailing list
-gumstix-users@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/gumstix-users
+Frans
 
 
