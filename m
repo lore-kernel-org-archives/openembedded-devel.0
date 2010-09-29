@@ -1,31 +1,31 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P15Jt-0003F3-5g for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 00:40:14 +0200
+	id 1P16J7-0004aI-01 for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Sep 2010 01:43:29 +0200
 Received: from g225082119.adsl.alicedsl.de ([92.225.82.119]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P15Ji-0001Sl-Ai for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 22:40:02 +0000
+	id 1P16Iw-0003Pq-36 for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Sep 2010 23:43:18 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
-References: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
-Date: Thu, 30 Sep 2010 00:40:00 +0200
-Message-ID: <1285800000.27605.46.camel@mattotaupa>
+In-Reply-To: <1285781858-5299-1-git-send-email-chase.maupin@ti.com>
+References: <1285781858-5299-1-git-send-email-chase.maupin@ti.com>
+Date: Thu, 30 Sep 2010 01:43:17 +0200
+Message-ID: <1285803797.5168.3.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
 X-SA-Exim-Connect-IP: 188.40.100.199
 X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 00/18] Patches from opendreambox.org
+Subject: Re: [PATCHv2] am-benchmarks: update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,78 +39,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 22:40:14 -0000
-X-Groupsio-MsgNum: 24194
+X-List-Received-Date: Wed, 29 Sep 2010 23:43:29 -0000
+X-Groupsio-MsgNum: 24195
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-7uCUo+P78SIXDrdZ//+V"
+	boundary="=-x+4FTkHoJnBDyP2mc8qx"
 
---=-7uCUo+P78SIXDrdZ//+V
+--=-x+4FTkHoJnBDyP2mc8qx
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Andreas,
+Dear Chase,
 
 
-Am Mittwoch, den 29.09.2010, 20:36 +0000 schrieb Andreas Oberritter:
-
-> in order to synchronize our work with upstream, I've prepared some
-> patches. More patches will follow. You can cherry-pick or pull them
-> from git, if you like:
+Am Mittwoch, den 29.09.2010, 12:37 -0500 schrieb Chase Maupin:=20
+> * Updated the SRCREV to the latest version of this project
+>   which includes support for multiple platforms.
+> * Add COMPATIBLE_MACHINE setting for recipe.
 >=20
-> git://git.opendreambox.org/git/obi/openembedded.git for-upstream
+> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 
-thank you for your patches. I took a quick glance and as far as I can
-judge it they are of very high quality.
+it would be great if you could briefly note what changed between the
+patch iterations after a --- line, so that it will get removed when it
+is committed. v1 =E2=86=92 v2
 
-I will build test your changes on minimal-{libc,eglibc,uclibc} and
-=C8=A6ngstr=C3=B6m 2008.1 and report back.
+Please also remember to update the patch queue [1] as picked all patches
+from the queue and then had to remove the first version since it was
+still listed.
 
-> I'm submitting patches to OE for the first time, so please be patient
-> if I've missed some guideline or the like.
+> ---
+>  recipes/ti/am-benchmarks_svn.bb |   13 ++++++++++---
+>  1 files changed, 10 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/recipes/ti/am-benchmarks_svn.bb b/recipes/ti/am-benchmarks_s=
+vn.bb
+> index 51ac6af..6ab29f5 100644
+> --- a/recipes/ti/am-benchmarks_svn.bb
+> +++ b/recipes/ti/am-benchmarks_svn.bb
+> @@ -4,15 +4,22 @@ LICENSE =3D "BSD"
+>  SECTION =3D "system"
+>  PRIORITY =3D "optional"
+> =20
+> -SRCREV =3D "33"
+> -PV =3D "1.0"
+> +SRCREV =3D "56"
+> +PV =3D "1.1"
+>  PR =3D "r1+svnr${SRCPV}"
+> =20
+> +COMPATIBLE_MACHINE =3D "(dm365|omapl138|omap3|ti816x)"
+> +
+> +ARCHITECTURE_dm365 =3D "arm9"
+> +ARCHITECTURE_omapl138 =3D "arm9"
+> +ARCHITECTURE_omap3 =3D "cortex-a8"
+> +ARCHITECTURE_ti816x =3D "cortex-a8"
+> +
+>  INSANE_SKIP_${PN} =3D "True"
+> =20
+>  SRC_URI =3D "svn://gforge.ti.com/svn/am_benchmarks/;module=3Dtrunk;proto=
+=3Dhttps;user=3Danonymous;pswd=3D''"
+> =20
+> -S =3D "${WORKDIR}/trunk"
+> +S =3D "${WORKDIR}/trunk/${ARCHITECTURE}"
+> =20
+>  do_compile() {
+>  	# don't build debug version
 
-I have some minor nitpicks and comments.
+I get the following error with minimal-uclibc. The other distributions
+still build. The error looks generic though.
 
-1. When you add patches please add a short header to the patch files
-[1][2]. If you could spend the time to submit patches upstream that
-would be great.
-
-I think that applies to the following recipes.
-
-[PATCH 03/18] libmad-0.15.1b: fix compile with gcc-4.4 (mipsel)
-http://patchwork.openembedded.org/patch/3110/
-
-[PATCH 04/18] libsigc++-1.2: fix installation
-http://patchwork.openembedded.org/patch/3106/
-
-[PATCH 06/18] netkit-base-0.17: fix compile with gcc-4.x
-http://patchwork.openembedded.org/patch/3115/
-
-[PATCH 09/18] cdrkit: update from 1.1.9 to 1.1.10
-http://patchwork.openembedded.org/patch/3112/
-
-[PATCH 11/18] tremor-20041119: Add pkgconfig file, provide libvorbisidec
-http://patchwork.openembedded.org/patch/3103/
-
-[PATCH 17/18] libxmlccwrap-0.0.12: initial recipe
-http://patchwork.openembedded.org/patch/3109/
-
-[PATCH 18/18] mjpegtools-1.9.0: initial recipe
-http://patchwork.openembedded.org/patch/3108/
-
-2. I do not know if you did this, but for new recipes you can sanitize
-them using `oestylize.py` [3].
-
-3. It is not demanded by the commit policy, but if you fix compile or
-other errors, I would prefer to see the relevant log of the failed build
-in the commit message.
-
-4. You could note in your patches what machines and distributions you
-used for building and testing your changes.
-
-5. Please remember to update the patch queue if appropriate [4].
-
-Thanks a lot again for your patches. I am looking forward to more.
+        ERROR: 'oe/openembedded/recipes/ti/am-benchmarks_svn.bb' failed
+        ERROR: Function do_compile failed
+        [=E2=80=A6]
+        Log data follows:
+        | make: *** No rule to make target `release'.  Stop.
+        | ERROR: Function do_compile failed
+        NOTE: package am-benchmarks-1.1-r1+svnr56: task do_compile: Failed
 
 
 Thanks,
@@ -118,23 +121,18 @@ Thanks,
 Paul
 
 
-[1] http://wiki.openembedded.net/index.php/Push_patches_upstream
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/eglibc/=
-files/eglibc-dont-cache-slibdir.patch
-[3] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/contrib/oe-styl=
-ize.py
-[4] http://wiki.openembedded.net/index.php/Patchwork
+[1] http://wiki.openembedded.net/index.php/Patchwork
 
---=-7uCUo+P78SIXDrdZ//+V
+--=-x+4FTkHoJnBDyP2mc8qx
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkyjwEAACgkQPX1aK2wOHViR4ACfXqI6tjtwDqe0ZMrz4RKZjyuj
-wlEAmgKyO5LneCb1awYtrC3xA1FedlpO
-=8br8
+iEYEABECAAYFAkyjzw8ACgkQPX1aK2wOHVhEQwCeJeEE1lx4aMM55x1PxUFcvfAq
+6EAAnReHk8SrQhFm9jse/3wlhcjgr196
+=E8iN
 -----END PGP SIGNATURE-----
 
---=-7uCUo+P78SIXDrdZ//+V--
+--=-x+4FTkHoJnBDyP2mc8qx--
