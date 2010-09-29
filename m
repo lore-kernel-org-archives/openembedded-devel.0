@@ -1,26 +1,26 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P13V3-0001ka-TN
+	(envelope-from <obi@opendreambox.org>) id 1P13V3-0001kb-TT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 22:43:45 +0200
+	Wed, 29 Sep 2010 22:43:46 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 764373148E3F
+	by mail.multimedia-labs.de (Postfix) with ESMTP id C58D83148E28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 22:37:33 +0200 (CEST)
+	Wed, 29 Sep 2010 22:37:06 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with LMTP id 7-xM6F47-cGH; Wed, 29 Sep 2010 22:37:27 +0200 (CEST)
+	with LMTP id wOXtF0QUisma; Wed, 29 Sep 2010 22:37:00 +0200 (CEST)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 81A2E3148E3B;
-	Wed, 29 Sep 2010 22:37:15 +0200 (CEST)
+	by mail.multimedia-labs.de (Postfix) with SMTP id A4ED23148E1C;
+	Wed, 29 Sep 2010 22:36:59 +0200 (CEST)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Wed, 29 Sep 2010 20:37:15 +0000
+	Wed, 29 Sep 2010 20:36:59 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Sep 2010 20:36:34 +0000
-Message-Id: <1285792594-10032-19-git-send-email-obi@opendreambox.org>
+Date: Wed, 29 Sep 2010 20:36:20 +0000
+Message-Id: <1285792594-10032-5-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
 References: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
@@ -28,11 +28,11 @@ X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	TVD_SPACE_RATIO autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 18/18] mjpegtools-1.9.0: initial recipe
+Subject: [PATCH 04/18] libsigc++-1.2: fix installation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,152 +48,68 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 29 Sep 2010 20:43:47 -0000
 
+* install complains about method_slot.h, which is mentioned twice
+  inside Makefile.am.
+
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- .../mjpegtools/files/mjpegtools-fix-include.patch  |   65 ++++++++++++++++++++
- .../files/mjpegtools-remove-sdl-dependency.patch   |   15 +++++
- .../files/mjpegtools-v4l-doesnt-mean-x11.patch     |   12 ++++
- recipes/mjpegtools/mjpegtools_1.9.0.bb             |   18 ++++++
- 4 files changed, 110 insertions(+), 0 deletions(-)
- create mode 100644 recipes/mjpegtools/files/mjpegtools-fix-include.patch
- create mode 100644 recipes/mjpegtools/files/mjpegtools-remove-sdl-dependency.patch
- create mode 100644 recipes/mjpegtools/files/mjpegtools-v4l-doesnt-mean-x11.patch
- create mode 100644 recipes/mjpegtools/mjpegtools_1.9.0.bb
+ recipes/libsigc++-1.2/files/fix-install.patch |   11 +++++++++++
+ recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb  |    3 ++-
+ recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb  |    3 ++-
+ 3 files changed, 15 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/libsigc++-1.2/files/fix-install.patch
 
-diff --git a/recipes/mjpegtools/files/mjpegtools-fix-include.patch b/recipes/mjpegtools/files/mjpegtools-fix-include.patch
+diff --git a/recipes/libsigc++-1.2/files/fix-install.patch b/recipes/libsigc++-1.2/files/fix-install.patch
 new file mode 100644
-index 0000000..b5ff90a
+index 0000000..e795d3f
 --- /dev/null
-+++ b/recipes/mjpegtools/files/mjpegtools-fix-include.patch
-@@ -0,0 +1,65 @@
-+Index: mjpegtools-1.9.0rc3/lavtools/Makefile.am
-+===================================================================
-+--- mjpegtools-1.9.0rc3.orig/lavtools/Makefile.am	2008-04-09 00:44:57.000000000 +0200
-++++ mjpegtools-1.9.0rc3/lavtools/Makefile.am	2008-04-09 01:03:10.000000000 +0200
-+@@ -2,7 +2,7 @@
++++ b/recipes/libsigc++-1.2/files/fix-install.patch
+@@ -0,0 +1,11 @@
++--- libsigc++-1.2.7/sigc++/Makefile.am.orig	2010-09-24 12:03:24.000000000 +0000
+++++ libsigc++-1.2.7/sigc++/Makefile.am	2010-09-24 12:03:30.000000000 +0000
++@@ -12,7 +12,7 @@
++ sigc_built_h	= bind_return.h	\
++ 		  object_slot.h retype_return.h slot.h bind.h		\
++ 		  class_slot.h hide.h retype.h signal.h       \
++-                  method_slot.h method_slot.h
+++                  method_slot.h
 + 
-+ MAINTAINERCLEANFILES = Makefile.in
-+ 
-+-AM_CPPFLAGS = -I$(top_srcdir) -I$(includedir) -I$(top_srcdir)/utils $(LIBQUICKTIME_CFLAGS)
-++AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/utils $(LIBQUICKTIME_CFLAGS)
-+ 
-+ LIBMJPEGUTILS = $(top_builddir)/utils/libmjpegutils.la
-+ if HAVE_ALTIVEC
-+Index: mjpegtools-1.9.0rc3/yuvcorrect/Makefile.am
-+===================================================================
-+--- mjpegtools-1.9.0rc3.orig/yuvcorrect/Makefile.am	2008-04-09 01:01:15.000000000 +0200
-++++ mjpegtools-1.9.0rc3/yuvcorrect/Makefile.am	2008-04-09 01:01:21.000000000 +0200
-+@@ -2,7 +2,7 @@
-+ 
-+ MAINTAINERCLEANFILES = Makefile.in
-+ 
-+-AM_CPPFLAGS = -I$(top_srcdir) -I$(includedir) -I$(top_srcdir)/utils
-++AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/utils
-+ 
-+ LIBMJPEGUTILS = $(top_builddir)/utils/libmjpegutils.la
-+ if HAVE_ALTIVEC
-+Index: mjpegtools-1.9.0rc3/yuvscaler/Makefile.am
-+===================================================================
-+--- mjpegtools-1.9.0rc3.orig/yuvscaler/Makefile.am	2008-04-09 01:01:43.000000000 +0200
-++++ mjpegtools-1.9.0rc3/yuvscaler/Makefile.am	2008-04-09 01:01:50.000000000 +0200
-+@@ -2,7 +2,7 @@
-+ 
-+ MAINTAINERCLEANFILES = Makefile.in
-+ 
-+-AM_CPPFLAGS = -I$(top_srcdir) -I$(includedir) -I$(top_srcdir)/utils
-++AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/utils
-+ 
-+ 
-+ LIBMJPEGUTILS = $(top_builddir)/utils/libmjpegutils.la
-+Index: mjpegtools-1.9.0rc3/y4mdenoise/Makefile.am
-+===================================================================
-+--- mjpegtools-1.9.0rc3.orig/y4mdenoise/Makefile.am	2008-04-09 01:03:16.000000000 +0200
-++++ mjpegtools-1.9.0rc3/y4mdenoise/Makefile.am	2008-04-09 01:03:25.000000000 +0200
-+@@ -7,7 +7,7 @@
-+ AM_CFLAGS = -DNDEBUG -finline-functions @PROGRAM_NOPIC@
-+ AM_CXXFLAGS = -DNDEBUG -finline-functions @PROGRAM_NOPIC@
-+ 
-+-INCLUDES =  -I$(top_srcdir) -I$(includedir) -I$(top_srcdir)/utils
-++INCLUDES =  -I$(top_srcdir) -I$(top_srcdir)/utils
-+ 
-+ LIBMJPEGUTILS = $(top_builddir)/utils/libmjpegutils.la
-+ if HAVE_ALTIVEC
-+Index: mjpegtools-1.9.0rc3/y4mutils/Makefile.am
-+===================================================================
-+--- mjpegtools-1.9.0rc3.orig/y4mutils/Makefile.am	2008-04-09 01:03:43.000000000 +0200
-++++ mjpegtools-1.9.0rc3/y4mutils/Makefile.am	2008-04-09 01:03:48.000000000 +0200
-+@@ -3,7 +3,7 @@
-+ MAINTAINERCLEANFILES = Makefile.in
-+ 
-+ AM_CFLAGS   = @PROGRAM_NOPIC@
-+-AM_CPPFLAGS = -I$(top_srcdir) -I$(includedir) -I$(top_srcdir)/utils
-++AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/utils
-+ 
-+ LIBMJPEGUTILS = $(top_builddir)/utils/libmjpegutils.la
-+ if HAVE_ALTIVEC
-diff --git a/recipes/mjpegtools/files/mjpegtools-remove-sdl-dependency.patch b/recipes/mjpegtools/files/mjpegtools-remove-sdl-dependency.patch
-new file mode 100644
-index 0000000..fe855d3
---- /dev/null
-+++ b/recipes/mjpegtools/files/mjpegtools-remove-sdl-dependency.patch
-@@ -0,0 +1,15 @@
-+Index: mjpegtools-1.9.0rc3/configure.ac
-+===================================================================
-+--- mjpegtools-1.9.0rc3.orig/configure.ac	2008-04-09 00:35:08.000000000 +0200
-++++ mjpegtools-1.9.0rc3/configure.ac	2008-04-09 00:35:18.000000000 +0200
-+@@ -275,10 +275,6 @@
-+ dnl Check for the SDL library (for software playback)
-+ dnl   (defines SDL_CFLAGS and SDL_LIBS)
-+ dnl ********************************************************************
-+-AM_PATH_SDL(1.1.3,
-+-            [have_sdl=true
-+-             AC_DEFINE(HAVE_SDL, 1, [SDL library present]) ],
-+-            [have_sdl=false])
-+ AM_CONDITIONAL(HAVE_SDL, test x$have_sdl = xtrue)
-+ 
-+ dnl ***
-diff --git a/recipes/mjpegtools/files/mjpegtools-v4l-doesnt-mean-x11.patch b/recipes/mjpegtools/files/mjpegtools-v4l-doesnt-mean-x11.patch
-new file mode 100644
-index 0000000..a6a537c
---- /dev/null
-+++ b/recipes/mjpegtools/files/mjpegtools-v4l-doesnt-mean-x11.patch
-@@ -0,0 +1,12 @@
-+--- mjpegtools-1.9.0/lavtools/Makefile.am.orig	2010-09-29 19:36:46.000000000 +0000
-++++ mjpegtools-1.9.0/lavtools/Makefile.am	2010-09-29 19:37:55.000000000 +0000
-+@@ -58,9 +58,6 @@
-+ liblavplay_la_CPPFLAGS = $(AM_CPPFLAGS) $(LIBDV_CFLAGS) $(X_CFLAGS)
-+ liblavplay_la_LDFLAGS = $(LAV_ALL_LIB_OPTS)
-+ liblavplay_la_LIBADD = liblavfile.la $(SDL_LIBS) liblavjpeg.la $(LIBDV_LIBS) $(LIBMJPEGUTILS)
-+-if HAVE_V4L
-+-   liblavplay_la_LIBADD += ${X_LIBS} -lX11
-+-endif
-+ liblavplay_la_DEPENDENCIES = liblavfile.la liblavjpeg.la
-+ 
-+ # *********************************************************************
-diff --git a/recipes/mjpegtools/mjpegtools_1.9.0.bb b/recipes/mjpegtools/mjpegtools_1.9.0.bb
-new file mode 100644
-index 0000000..3552b6e
---- /dev/null
-+++ b/recipes/mjpegtools/mjpegtools_1.9.0.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "MJPEG video capture/editting/playback MPEG encoding"
-+HOMEPAGE = "http://sourceforge.net/projects/mjpeg/"
-+SECTION = "optional"
-+LICENSE = "GPLv2"
-+
-+SRC_URI = " \
-+	${SOURCEFORGE_MIRROR}/mjpeg/${P}.tar.gz \
-+	file://mjpegtools-fix-include.patch \
-+	file://mjpegtools-remove-sdl-dependency.patch \
-+	file://mjpegtools-v4l-doesnt-mean-x11.patch \
-+	"
-+
-+SRC_URI[md5sum] = "309a6fcf0900a010d6a9c1e91afc2f5c"
-+SRC_URI[sha256sum] = "a9322aaab1e0835fbaa00fc10e58e885833454fa0ad6f57c60c89a78f7ed1711"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--without-x"
++ built_sources	= $(sigc_built_cc) $(sigc_built_h)
++ dist_sources	= $(sigc_fixed_cc) $(sigc_fixed_h)
+diff --git a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
+index 2c32f14..6b347e5 100644
+--- a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
++++ b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
+@@ -1,10 +1,11 @@
+ DESCRIPTION = "A library for loose coupling of C++ method calls"
+ SECTION = "libs"
+ PRIORITY = "optional"
+-PR = "r1"
++PR = "r2"
+ LICENSE = "GPL LGPL"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/libsigc/libsigc++-${PV}.tar.gz \
+ 	   file://autofoo.patch \
++	   file://fix-install.patch \
+ 	   file://pkgconfig.patch"
+ S = "${WORKDIR}/libsigc++-${PV}"
+ 
+diff --git a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb
+index c68105b..179d5a6 100644
+--- a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb
++++ b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb
+@@ -2,10 +2,11 @@ DESCRIPTION = "A library for loose coupling of C++ method calls"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ LICENSE = "GPL LGPL"
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/1.2/libsigc++-${PV}.tar.bz2 \
+ 	   file://autofoo.patch \
++	   file://fix-install.patch \
+            file://disable-tests.patch"
+ S = "${WORKDIR}/libsigc++-${PV}"
+ 
 -- 
 1.7.1
 
