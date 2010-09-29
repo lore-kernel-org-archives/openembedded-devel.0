@@ -1,33 +1,44 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P13oO-0004oD-5M
+	(envelope-from <obi@opendreambox.org>) id 1P140B-00062G-ML
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 23:03:37 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9J007ZG156NU00@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	29 Sep 2010 16:03:12 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EE0F214AF64; Wed,
-	29 Sep 2010 17:03:05 -0400 (EDT)
-Date: Wed, 29 Sep 2010 17:03:05 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 29 Sep 2010 23:15:48 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 199B53148E16
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Sep 2010 23:15:35 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id Vig5Zs5IO8MF
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Sep 2010 23:15:28 +0200 (CEST)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id D0C743148D58
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Sep 2010 23:15:28 +0200 (CEST)
+Message-ID: <4CA3AC70.1020505@opendreambox.org>
+Date: Wed, 29 Sep 2010 23:15:28 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100929210305.GA28782@denix.org>
-References: <1285792798-6529-1-git-send-email-fransmeulenbroeks@gmail.com>
-MIME-version: 1.0
-In-reply-to: <1285792798-6529-1-git-send-email-fransmeulenbroeks@gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
-X-SA-Exim-Mail-From: denis@denix.org
+References: <1285792594-10032-1-git-send-email-obi@opendreambox.org>	<1285792594-10032-15-git-send-email-obi@opendreambox.org>
+	<AANLkTinYVSenDQqqN0kTBJq7R0_tpsXUD=iszxv0-3XF@mail.gmail.com>
+In-Reply-To: <AANLkTinYVSenDQqqN0kTBJq7R0_tpsXUD=iszxv0-3XF@mail.gmail.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] kernel.bbclass: avoid NOTE messages for files	that are staged but not packaged
+Subject: Re: [PATCH 14/18] cdparanoia: create libcdparanoia packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,75 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 21:03:37 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 29 Sep 2010 21:15:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 29, 2010 at 10:39:58PM +0200, Frans Meulenbroeks wrote:
-> copy the files directly from the work area to staging. That way
-> there are no unpackaged files in image/ so no NOTE messages.
-> Additional advantage is that it is faster as we save the copy to the image dir.
-> 
-> See also http://thread.gmane.org/gmane.comp.handhelds.openembedded/37487
-> 
-> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-> Acked-by: Roman I Khimov <khimov@altell.ru>
-> Tested-by: Petr ?tetiar <ynezz@true.cz>
-> Acked-by: Eric B?nard <eric@eukrea.com>
+On 29.09.2010 22:56, Frans Meulenbroeks wrote:
+> I feel there should be an
+> RDEPENDS_${PN} += "libcdparanioa"
+> to add the dependency that is now created (if i recall correctly
+> cdparanoia is statically build).
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+The dependency is generated automatically by shlibdeps. The executable
+gets linked dynamically.
 
-> ---
-> 
-> This is the formal patch, following up the discussion mentioned above
-> It really works like a charm. Kernel build time is greatly reduced.
-> 
-> If there are no objections, and since there are already 2 acks,
-> I will push tomorrow my evening (20 hrs or so after posting)
-> Feel free to add additional acks.
-> 
-> Frans
-> 
->  classes/kernel.bbclass |   12 ++++++------
->  1 files changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index 5f8bc8a..cfb4ad8 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -121,7 +121,12 @@ kernel_do_install() {
->                  oe_runmake SUBDIRS="scripts/genksyms"
->          fi
->  
-> -	kerneldir=${D}/kernel/
-> +
-> +}
-> +
-> +sysroot_stage_all_append() {
-> +
-> +	kerneldir=${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
->  
->  	if [ -e include/asm ] ; then
->  		# This link is generated only in kernel before 2.6.33-rc1, don't stage it for newer kernels
-> @@ -200,11 +205,6 @@ kernel_do_install() {
->  	cp -fR scripts $kerneldir/
->  }
->  
-> -sysroot_stage_all_append() {
-> -	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
-> -	cp -fpPR ${D}/kernel/.config ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
-> -}
-> -
->  kernel_do_configure() {
->  	yes '' | oe_runmake oldconfig
->  	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
-> -- 
-> 1.6.4.2
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> There is no -doc package?
+
+There is cdparanoia-doc, wich only contains a man page for the
+executable. I left it to the default.
+
+> Other wise this one looks fine to me. Will test tomorrow (time permitting).
+
+Thanks!
+
+Best regards,
+Andreas
+
 
 
