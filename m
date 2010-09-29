@@ -1,26 +1,26 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P13Uz-0001jj-H1
+	(envelope-from <obi@opendreambox.org>) id 1P13V1-0001jl-Mf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 22:43:43 +0200
+	Wed, 29 Sep 2010 22:43:45 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id F14A73148E38
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 85F723148E43
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 22:37:12 +0200 (CEST)
+	Wed, 29 Sep 2010 22:37:19 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with LMTP id qtJRVBkBXP4G; Wed, 29 Sep 2010 22:37:05 +0200 (CEST)
+	with LMTP id S9hmoEDZsne3; Wed, 29 Sep 2010 22:37:13 +0200 (CEST)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 157E13148E1F;
-	Wed, 29 Sep 2010 22:37:03 +0200 (CEST)
+	by mail.multimedia-labs.de (Postfix) with SMTP id B05053148E2B;
+	Wed, 29 Sep 2010 22:37:07 +0200 (CEST)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Wed, 29 Sep 2010 20:37:02 +0000
+	Wed, 29 Sep 2010 20:37:07 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Sep 2010 20:36:23 +0000
-Message-Id: <1285792594-10032-8-git-send-email-obi@opendreambox.org>
+Date: Wed, 29 Sep 2010 20:36:27 +0000
+Message-Id: <1285792594-10032-12-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
 References: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
@@ -32,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 07/18] python-twisted-8.2.0: reduce package size
+Subject: [PATCH 11/18] tremor-20041119: Add pkgconfig file, provide libvorbisidec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,47 +46,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 20:43:45 -0000
-
-* Don't install *.{bat,c,h}
-* Move more tests to FILES_${PN}-test
+X-List-Received-Date: Wed, 29 Sep 2010 20:43:47 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- recipes/python/python-twisted_8.2.0.bb |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
+ recipes/tremor/tremor/pkgconfig.patch |   22 ++++++++++++++++++++++
+ recipes/tremor/tremor_20041119.bb     |    9 ++++++---
+ 2 files changed, 28 insertions(+), 3 deletions(-)
+ create mode 100644 recipes/tremor/tremor/pkgconfig.patch
 
-diff --git a/recipes/python/python-twisted_8.2.0.bb b/recipes/python/python-twisted_8.2.0.bb
-index 7ecbf6c..3f8b657 100644
---- a/recipes/python/python-twisted_8.2.0.bb
-+++ b/recipes/python/python-twisted_8.2.0.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.twistedmatrix.com"
- SECTION = "console/network"
- PRIORITY = "optional"
- LICENSE = "LGPL"
--PR = "r2"
-+PR = "r3"
+diff --git a/recipes/tremor/tremor/pkgconfig.patch b/recipes/tremor/tremor/pkgconfig.patch
+new file mode 100644
+index 0000000..f864cb8
+--- /dev/null
++++ b/recipes/tremor/tremor/pkgconfig.patch
+@@ -0,0 +1,22 @@
++--- Tremor/configure.in	2006-09-03 01:19:30.000000000 +0200
+++++ Tremor-fixed/configure.in	2006-09-03 12:13:33.339593728 +0200
++@@ -106,4 +106,4 @@
++ AC_SUBST(DEBUG)
++ AC_SUBST(PROFILE)
++ 
++-AC_OUTPUT(Makefile)
+++AC_OUTPUT([Makefile vorbisidec.pc])
++--- Tremor/vorbisidec.pc.in	1970-01-01 01:00:00.000000000 +0100
+++++ Tremor-fixed/vorbisidec.pc.in	2006-09-03 12:16:38.313473424 +0200
++@@ -0,0 +1,11 @@
+++prefix=@prefix@
+++exec_prefix=@exec_prefix@
+++libdir=@libdir@
+++includedir=@includedir@
+++
+++Name: vorbisidec
+++Description: Vorbis audio decoder
+++Requires:
+++Version: 20041119
+++Libs: -L${libdir} -lvorbisidec
+++Cflags: -I${includedir}
+diff --git a/recipes/tremor/tremor_20041119.bb b/recipes/tremor/tremor_20041119.bb
+index 889b981..42155ab 100644
+--- a/recipes/tremor/tremor_20041119.bb
++++ b/recipes/tremor/tremor_20041119.bb
+@@ -4,16 +4,19 @@ DEPENDS = "libogg"
+ DESCRIPTION = "tremor is a fixed point implementation of the vorbis codec."
+ LICENSE = "BSD"
+ SRCDATE = "${PV}"
+-PR = "r1"
++PR = "r2"
  
- SRC_URI = "http://tmrc.mit.edu/mirror/twisted/Twisted/8.2/Twisted-${PV}.tar.bz2 "
- S = "${WORKDIR}/Twisted-${PV}"
-@@ -43,11 +43,17 @@ RDEPENDS_${PN} += "\
-   ${PN}-words \
- "
+ # tremor makes heavy use of non-thumb-compatible inline asm.
+ ARM_INSTRUCTION_SET = "arm"
  
-+do_install_append() {
-+	# remove some useless files before packaging
-+	find ${D} -name "*.bat" -o -name "*.c" -o -name "*.h" -exec rm {} \;
-+}
+-SRC_URI = "svn://svn.xiph.org/trunk;module=Tremor;rev=4573;proto=http"
++PROVIDES += "libvorbisidec"
 +
- ALLOW_EMPTY = "1"
- FILES_${PN} = ""
++SRC_URI = "svn://svn.xiph.org/trunk;module=Tremor;rev=4573;proto=http \
++	file://pkgconfig.patch"
  
- FILES_${PN}-test = " \
-   ${libdir}/${PYTHON_DIR}/site-packages/twisted/test \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/test \
- "
+ S = "${WORKDIR}/Tremor"
  
- FILES_${PN}-protocols = " \
+-inherit autotools
++inherit autotools pkgconfig
+ 
+ EXTRA_OECONF=" --enable-shared --disable-rpath  "
+ 
 -- 
 1.7.1
 
