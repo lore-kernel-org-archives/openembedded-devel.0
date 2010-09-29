@@ -1,34 +1,30 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <t.fromm@DResearch.de>) id 1P0sPA-0002VB-VM
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 10:52:58 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 02291491278
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 10:52:36 +0200 (CEST)
-Received: from bfg9000.intern.dresearch.de ([10.32.10.1]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 29 Sep 2010 10:52:35 +0200
-Message-ID: <4CA2FE48.8060703@dresearch.de>
-Date: Wed, 29 Sep 2010 10:52:24 +0200
-From: Thilo Fromm <t.fromm@dresearch.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12) Gecko/20100915 Lightning/1.0b1 Thunderbird/3.0.8
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P0sTH-0005Yl-Ok for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Sep 2010 10:57:07 +0200
+Received: from f053038023.adsl.alicedsl.de ([78.53.38.23]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P0sSw-0004Ab-PM for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Sep 2010 08:56:42 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1285666009.4168.28.camel@mattotaupa>	<1285666476-3020-1-git-send-email-t.fromm@dresearch.de>
-	<1285748455.3876.22.camel@mattotaupa>
-In-Reply-To: <1285748455.3876.22.camel@mattotaupa>
-X-OriginalArrivalTime: 29 Sep 2010 08:52:35.0618 (UTC)
-	FILETIME=[A9689820:01CB5FB3]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: t.fromm@DResearch.de
+In-Reply-To: <4CA2FE48.8060703@dresearch.de>
+References: <1285666009.4168.28.camel@mattotaupa>
+	<1285666476-3020-1-git-send-email-t.fromm@dresearch.de>
+	<1285748455.3876.22.camel@mattotaupa> <4CA2FE48.8060703@dresearch.de>
+Date: Wed, 29 Sep 2010 10:56:41 +0200
+Message-ID: <1285750601.3876.51.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,WEIRD_PORT
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [v4] wvstreams-4.6: Remove dbus support (breaks build)
@@ -45,94 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 08:52:58 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 29 Sep 2010 08:57:09 -0000
+X-Groupsio-MsgNum: 24129
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-+Gm1Nnfu740DkIWlMqdn"
+
+--=-+Gm1Nnfu740DkIWlMqdn
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello Paul,
+Am Mittwoch, den 29.09.2010, 10:52 +0200 schrieb Thilo Fromm:
 
->> If wvstreams is configured with DBus support enabled (by not providing
->> --without-dbus) the the build fails at link time as libdbus cannot be
->> found.
->>
->> This patch, however, does not fix the configure.ac file but disables
->> DBus support for wvstreams at configure time. This at least fixes the
->> broken build.
->>
->> Signed-off-by: Thilo Fromm<t.fromm@dresearch.de>
->
-> I build tested your patch with `MACHINE =3D "beagleboard"` and
-> distributions =C8=A6ngstr=C3=B6m 2008.1 and Minimal with `LIBC =3D "lib=
-c"`.
->
-> But it fails for me for Minimal with `LIBC =3D "eglibc"`
-[...]
-> 	| utils/wvtask.cc:477:5: error: 'getcontext' was not declared in this =
-scope
-> 	| utils/wvtask.cc:521:63: error: 'makecontext' was not declared in thi=
-s scope
-> 	| utils/wvtask.cc:526:52: error: 'setcontext' was not declared in this=
- scope
-> 	| make: *** [utils/wvtask.o] Error 1
-> 	| FATAL: oe_runmake failed
-> 	| ERROR: Function do_compile failed
-> 	NOTE: package wvstreams-4.6-r1: task do_compile: Failed
-> 	ERROR: TaskFailed event exception, aborting
-> 	ERROR: Build of /oe/openembedded/recipes/wvstreams/wvstreams_4.6.bb do=
-_compile failed
-> 	ERROR: Task 11 (/oe/openembedded/recipes/wvstreams/wvstreams_4.6.bb, d=
-o_compile) failed with 256
-> 	ERROR: '/oe/openembedded/recipes/wvstreams/wvstreams_4.6.bb' failed
-> 	ERROR: '/oe/openembedded/recipes/wvstreams/wvstreams_4.6.bb' failed
+[=E2=80=A6]
 
-I see. I've never seen these failures, but then, I always run glibc build=
-s.
+> > I am not sure, but your patch is an improvement for GNU Libc based
+> > distributions and so your patch could as well be commit.
+>=20
+> Weird, though. My patch didn't introduce anything obvious that would=20
+> make non-glibc builds fail. Did you try building wvstreams-4.6 / eglibc=
+=20
+> or wvstreams-4.6 / uClibc without my patch applied?
 
-> and minimal-uclibc.
-[...]
-> 	| ./CXX -c ipstreams/wvunixdgsocket
-> 	| In file included from ./include/wvunixdgsocket.h:13:0,
-> 	|                  from ipstreams/wvunixdgsocket.cc:1:
-> 	| ./include/wvaddr.h: In member function 'uint32_t WvIPAddr::addr() co=
-nst':
-> 	| ./include/wvaddr.h:284:31: warning: dereferencing type-punned pointe=
-r will break strict-aliasing rules
-> 	| ipstreams/wvunixdgsocket.cc: In constructor 'WvUnixDGSocket::WvUnixD=
-GSocket(const WvFastString&, bool, int)':
-> 	| ipstreams/wvunixdgsocket.cc:50:32: error: 'chmod' was not declared i=
-n this scope
-> 	| make: *** [ipstreams/wvunixdgsocket.o] Error 1
-> 	| FATAL: oe_runmake failed
-> 	| ERROR: Function do_compile failed
-> 	NOTE: package wvstreams-4.6-r1: task do_compile: Failed
-> 	ERROR: TaskFailed event exception, aborting
-> 	ERROR: Build of /oe/openembedded/recipes/wvstreams/wvstreams_4.6.bb do=
-_compile failed
-> 	ERROR: Task 12 (/oe/openembedded/recipes/wvstreams/wvstreams_4.6.bb, d=
-o_compile) failed with 256
-> 	ERROR: '/oe/openembedded/recipes/wvstreams/wvstreams_4.6.bb' failed
-> 	ERROR: '/oe/openembedded/recipes/wvstreams/wvstreams_4.6.bb' failed
->
-> [=E2=80=A6]
->
-> I am not sure, but your patch is an improvement for GNU Libc based
-> distributions and so your patch could as well be commit.
-
-Weird, though. My patch didn't introduce anything obvious that would=20
-make non-glibc builds fail. Did you try building wvstreams-4.6 / eglibc=20
-or wvstreams-4.6 / uClibc without my patch applied?
-
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228   mailto:t.fromm@dresearch.de
-Fax: +49 (30) 515 932 77    http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB:54412
-Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
+Yes and it failed with the same error your patch is fixing. I guess it
+has never worked with uClibc or eglibc.
 
 
+Thanks,
+
+Paul
+
+--=-+Gm1Nnfu740DkIWlMqdn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEUEABECAAYFAkyi/0kACgkQPX1aK2wOHViH5ACUDCbdG25EMibmpdBhy2TEJ1r+
+gACdH3oBZeHm72Et1HTbD7XKQQKqqfM=
+=D6z9
+-----END PGP SIGNATURE-----
+
+--=-+Gm1Nnfu740DkIWlMqdn--
