@@ -1,32 +1,34 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from ppsw-51.csi.cam.ac.uk ([131.111.8.151])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <t.fromm@DResearch.de>) id 1P0xyP-0005ng-Bz
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 16:50:04 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 49474491278
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 16:49:14 +0200 (CEST)
-Received: from localhost.localdomain ([10.32.10.1]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 29 Sep 2010 16:49:14 +0200
-From: Thilo Fromm <t.fromm@dresearch.de>
+	(envelope-from <jic23@cam.ac.uk>)
+	id 1P0xyR-0005nh-Ck; Wed, 29 Sep 2010 16:49:57 +0200
+X-Cam-AntiVirus: no malware found
+X-Cam-SpamDetails: not scanned
+X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
+Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:56656)
+	by ppsw-51.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.158]:25)
+	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-CAMELLIA256-SHA:256)
+	id 1P0xhu-0005bx-XQ (Exim 4.72)
+	(return-path <jic23@cam.ac.uk>); Wed, 29 Sep 2010 15:32:30 +0100
+Message-ID: <4CA34E00.8080106@cam.ac.uk>
+Date: Wed, 29 Sep 2010 15:32:32 +0100
+From: Jonathan Cameron <jic23@cam.ac.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.9) Gecko/20100909 Lightning/1.0b3pre Thunderbird/3.1.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Sep 2010 16:48:45 +0200
-Message-Id: <1285771725-32231-1-git-send-email-t.fromm@dresearch.de>
-X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 29 Sep 2010 14:49:14.0174 (UTC)
-	FILETIME=[7BF11DE0:01CB5FE5]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: t.fromm@DResearch.de
+X-Enigmail-Version: 1.1.2
+X-SA-Exim-Connect-IP: 131.111.8.151
+X-SA-Exim-Mail-From: jic23@cam.ac.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] qemu-0.12.5: add ncurses, gnutls dependencies
+Cc: Dmitry <dbaryshkov@gmail.com>, Koen Kooi <koen@openembedded.org>,
+	eric@eukrea.com
+Subject: missing dependency on expat-native in gdb-cross-sdk-7.1-r7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,50 +43,26 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 29 Sep 2010 14:50:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-QEmu build breaks occassionally because some of the libraries required
-have not been built at the time qemu is being built. I ran into problems
-with the "qemu-native" build which tried to link against host libraries
-and subsequently failed:
+Hi all,
 
-....
+Got the following error from log.do_compile when building meta-toolchain with angstrom-2010.x using latest testing-next.
 
-|   LINK  sh4eb-softmmu/qemu-system-sh4eb
-|   LINK  sh4-softmmu/qemu-system-sh4
-|   LINK  mips-softmmu/qemu-system-mips
-|   CC    mips64el-softmmu/fpu/softfloat.o
-|   CC    sparc-softmmu/i386-dis.o
-| /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/libgnutls.so: undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
-| /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/libgnutls.so: undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
-| collect2: ld returned 1 exit status
-| make[1]: *** [qemu-system-mips] Error 1
-| make: *** [subdir-mips-softmmu] Error 2
+gcc: /mnt/disk2/buildroot/oe/oe-stable/tmp/sysroots/x86_64-linux/usr/lib/libexpat.a: No such file or directory
+make[2]: *** [gdb] Error 1
+make[2]: Leaving directory `/mnt/disk2/buildroot/oe/oe-stable/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross-sdk-7.1-r7.0/build-arm-angstrom-linux-gnueabi/gdb'
+make[1]: *** [all-gdb] Error 2
+make[1]: Leaving directory `/mnt/disk2/buildroot/oe/oe-stable/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross-sdk-7.1-r7.0/build-arm-angstrom-linux-gnueabi'
+make: *** [all] Error 2
+FATAL: oe_runmake failed
 
-....
+I'd suggest adding expat-native to gdb-cross-sdk.inc DEPENDS (which seems to fix the problem) No idea if it is needed
+for all versions though.
 
-This patch adds gnutls and ncurses dependencies to the recipe.
+Thanks,
 
-Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
----
- recipes/qemu/qemu_0.12.5.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/qemu/qemu_0.12.5.bb b/recipes/qemu/qemu_0.12.5.bb
-index c823fbd..a8d67f1 100644
---- a/recipes/qemu/qemu_0.12.5.bb
-+++ b/recipes/qemu/qemu_0.12.5.bb
-@@ -1,7 +1,7 @@
- LICENSE = "GPL"
--DEPENDS = "zlib"
-+DEPENDS = "zlib ncurses gnutls"
- 
--PR = "r0"
-+PR = "r1"
- 
- SRC_URI = "\
-     http://download.savannah.gnu.org/releases/qemu/qemu-${PV}.tar.gz \
--- 
-1.7.0.4
-
+Jonathan
 
 
