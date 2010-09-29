@@ -1,32 +1,43 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <t.fromm@DResearch.de>) id 1P0zMA-0002nL-W0
+	(envelope-from <chasemaupin03@gmail.com>) id 1P0zMQ-0002pD-PA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 18:18:12 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 600F2491278
+	Wed, 29 Sep 2010 18:18:28 +0200
+Received: by gyg8 with SMTP id 8so352936gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 18:17:58 +0200 (CEST)
-Received: from localhost.localdomain ([10.32.10.1]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 29 Sep 2010 18:17:58 +0200
-From: Thilo Fromm <t.fromm@dresearch.de>
+	Wed, 29 Sep 2010 09:18:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=0Gqc1LOln8r/i85IbZTm82yQk3eVeobe0baO7SpzEqg=;
+	b=SAiK+74thuruc1vrIA18g15X2TPgPWolgrV8WCqLua2lXeoZHpVvdGCChECbFgscZr
+	rNyaG/9t+3ggIEAlJixpO8dLhCvrc3pVTWwcy3MCLPbMfAuIOkcobPZpdsE4enzuHtkx
+	W883dCuVJPXcpZvnXYrG+18SwE1T17WIxaPig=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=RECS2zFaON3htq0LKbqzNHuq2sGPi54gGk+jFupxNtTyPo5ZQbuSEKOUaup8+Qo1vx
+	AOT00ivJrUsn1VzCD6iNOAHW8O1KvkpN5sKrhn9J2VVkY/A6p9jimg1GsXY1O7h1z9m9
+	MBhenRxm3YCc5LzX+ooflwT/yaXgCdysCYAhg=
+Received: by 10.101.8.8 with SMTP id l8mr2191917ani.84.1285777090309;
+	Wed, 29 Sep 2010 09:18:10 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id w1sm10475100ana.16.2010.09.29.09.18.08
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 29 Sep 2010 09:18:09 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Sep 2010 18:17:13 +0200
-Message-Id: <1285777033-19478-1-git-send-email-t.fromm@dresearch.de>
+Date: Wed, 29 Sep 2010 11:04:54 -0500
+Message-Id: <1285776294-15073-1-git-send-email-chase.maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 29 Sep 2010 16:17:58.0134 (UTC)
-	FILETIME=[E144F160:01CB5FF1]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: t.fromm@DResearch.de
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libunwind: force gcc to be built first
+Subject: [PATCH] am-benchmarks: update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,66 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 16:18:12 -0000
+X-List-Received-Date: Wed, 29 Sep 2010 16:18:28 -0000
 
-libunwind causes cross gcc build to fail if libunwind is built first:
+* Updated the SRCREV to the latest version of this project
+  which includes support for multiple platforms.
 
-...
-| arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb -isystem/SCRATCH/maniac/oe-merge-test/OE/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/include -g -Os -O2 -g -Os -DIN_GCC -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -isystem ./include  -fPIC -g -DHAVE_GTHR_DEFAULT -DIN_LIBGCC2 -D__GCC_FLOAT_NOT_NEEDED   -I. -I. -I../.././gcc -I/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc -I/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/. -I/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc -I/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../include  -DHAVE_CC_TLS -o _ucmpdi2_s.o -MT _ucmpdi2_s.o
-  \
-  -MD -MP -MF _ucmpdi2_s.dep -DSHARED -DL_ucmpdi2 -c /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/libgcc2.c
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/unwind-arm.c:40: error: expected ')' before '*' token
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/unwind-arm.c:41: error: expected ')' before '*' token
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/unwind-arm.c:42: error: expected ')' before '*' token
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/unwind-arm.c:47: warning: data definition has no type or storage class
-...
-
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/pr-support.c:396: error: expected '=', ',', ';', 'asm' or '__attribute__' before '_Unwind_GetDataRelBase'
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/pr-support.c:402: error: expected '=', ',', ';', 'asm' or '__attribute__' before '_Unwind_GetTextRelBase'
-| make[2]: *** [unwind-arm.o] Error 1
-| make[2]: *** Waiting for unfinished jobs....
-| make[2]: *** [pr-support.o] Error 1
-...
-
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/unwind-c.c:212: error: 'lsda_header_info' has no member named 'LPStart'
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/unwind-c.c:214: error: 'lsda_header_info' has no member named 'action_table'
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/unwind-c.c:234: error: expected ')' before 'ue_header'
-| /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/unwind-c.c:123: warning: unused parameter 'ue_header'
-| make[2]: *** [unwind-c.o] Error 1
-| make[2]: Leaving directory `/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libgcc'
-| make[1]: *** [all-target-libgcc] Error 2
-| make[1]: Leaving directory `/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi'
-| make: *** [all] Error 2
-| FATAL: oe_runmake failed
-| ERROR: Function do_compile failed
-NOTE: package gcc-4.3.3-r17.1: task do_compile: Failed
-
-It looks like libunwind provides header files that are named
-identically to gcc header files. gcc then confuses these headers when it
-is built, causing a break of the build.
-
-This patch makes libunwind depend on gcc which resolves the build issue. Both
-build nicely when gcc is built first.
-
-Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 ---
- recipes/libunwind/libunwind.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes/ti/am-benchmarks_svn.bb |   12 +++++++++---
+ 1 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/libunwind/libunwind.inc b/recipes/libunwind/libunwind.inc
-index 6994095..4340192 100644
---- a/recipes/libunwind/libunwind.inc
-+++ b/recipes/libunwind/libunwind.inc
-@@ -1,7 +1,8 @@
- DESCRIPTION = "a portable and efficient C programming interface (API) to determine the call-chain of a program"
- HOMEPAGE = "http://www.nongnu.org/libunwind"
- LICENSE = "MIT"
--INC_PR = "r1"
-+INC_PR = "r2"
-+DEPENDS = "gcc"
+diff --git a/recipes/ti/am-benchmarks_svn.bb b/recipes/ti/am-benchmarks_svn.bb
+index 51ac6af..1160503 100644
+--- a/recipes/ti/am-benchmarks_svn.bb
++++ b/recipes/ti/am-benchmarks_svn.bb
+@@ -4,15 +4,21 @@ LICENSE = "BSD"
+ SECTION = "system"
+ PRIORITY = "optional"
  
- SRC_URI = "http://download.savannah.nongnu.org/releases/${BPN}/${BPN}-${PV}.tar.gz;name=archive"
+-SRCREV = "33"
+-PV = "1.0"
++SRCREV = "56"
++PV = "1.1"
+ PR = "r1+svnr${SRCPV}"
  
++ARCHITECTURE_dm365 = "arm9"
++ARCHITECTURE_da850-omapl138-evm = "arm9"
++ARCHITECTURE_omap3 = "cortex-a8"
++ARCHITECTURE_ti816x = "cortex-a8"
++ARCHITECTURE ?= "<UNDEFINED>"
++
+ INSANE_SKIP_${PN} = "True"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/am_benchmarks/;module=trunk;proto=https;user=anonymous;pswd=''"
+ 
+-S = "${WORKDIR}/trunk"
++S = "${WORKDIR}/trunk/${ARCHITECTURE}"
+ 
+ do_compile() {
+ 	# don't build debug version
 -- 
 1.7.0.4
 
