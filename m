@@ -1,37 +1,35 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P135J-0000qt-VA
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P13Ro-0001bq-EV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 22:17:02 +0200
-Received: by ywe9 with SMTP id 9so422002ywe.6
+	Wed, 29 Sep 2010 22:40:17 +0200
+Received: by eyb7 with SMTP id 7so487590eyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Sep 2010 13:16:48 -0700 (PDT)
+	Wed, 29 Sep 2010 13:40:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Geftz0/dYuVbsId0pYosfLmfqiYdI5IVUkD8DIUyw28=;
-	b=nZC7oY60LmIuqpOEtQwPfMLMoHl98LWVCfH2gUtLSX4snBNsevgFuCTibRf2oSXEpS
-	bC81iI+8T6DN/SQEI04ToKgewEpx8JMaXdQkayEiz5F2v2fEPE9x3/XshTEk7fjd7hXU
-	Ixnf+YTiK15neebGzywTtmo9lM9XRtHK0ZXC0=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=iKZWICLT7zLhFQIV3ExyDjsYnsQKlW7M8wYSd8l97fs=;
+	b=aaH4lbZAO1v5Z+5ySUAPMwzrw4b2/IJP9PPF9Df6OxmA2KBbC8VT7vtZj1upO49tKJ
+	+0ggbCL+byCSVnYmWheaYeHRIR4V1sQw3QVFmecQhAFjAyyqJR8v8WI97NNi38iGvpiu
+	qZY3x7cLEtDEvIJ3QGZUDGfJ+zJhPZeS3GJHE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=fT0NuemPQTdYwmn7CWjp6UaQ1o6vvy+v45dKBeYQciMmwS7FuUhbZaUCVcPoO1Ni0Z
-	045dkP8NHCo02dyluRJe/IDn55sILcc8Lwo2fZ76RZGKkp1cca7zhjLlQANnJoUcGa7V
-	BOD/EHFQHcgsqIKnitLZKiFhGGZg2zZPoec/Q=
-MIME-Version: 1.0
-Received: by 10.231.167.67 with SMTP id p3mr2382530iby.20.1285791408306; Wed,
-	29 Sep 2010 13:16:48 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Wed, 29 Sep 2010 13:16:47 -0700 (PDT)
-In-Reply-To: <20100929183700.GB27217@denix.org>
-References: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
-	<20100929183700.GB27217@denix.org>
-Date: Wed, 29 Sep 2010 22:16:47 +0200
-Message-ID: <AANLkTimD51tO=QkF8Bx3Gkq1zjwCWTV5+qbaRW8r1OpJ@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=e05XwdAPXTqamzu4ug4Nn9wXfPZMNGv0D4d45LfGExWNKAL7+Eh57JASEWvSu50f/h
+	1OYLDmmp1fQ5yqOcfjCnX4PD4Db4BBwg5bXCy+zShYPXh/FY7pJwiJXiMOCKDNX2RPWo
+	rgGOKIMq8Kw+zMTYh9KYpwdJI52vYNILo3xs0=
+Received: by 10.14.47.78 with SMTP id s54mr1304375eeb.2.1285792805205;
+	Wed, 29 Sep 2010 13:40:05 -0700 (PDT)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id a48sm13025341eei.19.2010.09.29.13.40.03
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 29 Sep 2010 13:40:04 -0700 (PDT)
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
+Date: Wed, 29 Sep 2010 22:39:58 +0200
+Message-Id: <1285792798-6529-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 209.85.215.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] kernel NOTE messages fix
+Subject: [PATCH] kernel.bbclass: avoid NOTE messages for files that are staged but not packaged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,39 +51,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 20:17:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 29 Sep 2010 20:40:17 -0000
 
-2010/9/29 Denys Dmytriyenko <denis@denix.org>:
-> On Tue, Sep 28, 2010 at 06:39:42PM +0200, Frans Meulenbroeks wrote:
+copy the files directly from the work area to staging. That way
+there are no unpackaged files in image/ so no NOTE messages.
+Additional advantage is that it is faster as we save the copy to the image dir.
 
->> -sysroot_stage_all_append() {
->> - =A0 =A0 =A0 sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_=
-KERNEL_DIR}
->
-> BTW, won't this patch break packaged-staging? Has anyone tried rebuilding=
- from
-> pstage after this fix?
+See also http://thread.gmane.org/gmane.comp.handhelds.openembedded/37487
 
-I don't think it will break packaged staging. This is the function
-sysroot_stage_dir:
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Acked-by: Roman I Khimov <khimov@altell.ru>
+Tested-by: Petr ?tetiar <ynezz@true.cz>
+Acked-by: Eric B?nard <eric@eukrea.com>
+---
 
-sysroot_stage_dir() {
-        src=3D"$1"
-        dest=3D"$2"
-        # This will remove empty directories so we can ignore them
-        rmdir "$src" 2> /dev/null || true
-        if [ -d "$src" ]; then
-                mkdir -p "$dest"
-                cp -fpPR "$src"/* "$dest"
-        fi
-}
+This is the formal patch, following up the discussion mentioned above
+It really works like a charm. Kernel build time is greatly reduced.
 
-Nothing related to packaged staging here.
-And we still copy to ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR} (which is
-the place where I assume things are packaged from)
+If there are no objections, and since there are already 2 acks,
+I will push tomorrow my evening (20 hrs or so after posting)
+Feel free to add additional acks.
 
 Frans
+
+ classes/kernel.bbclass |   12 ++++++------
+ 1 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 5f8bc8a..cfb4ad8 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -121,7 +121,12 @@ kernel_do_install() {
+                 oe_runmake SUBDIRS="scripts/genksyms"
+         fi
+ 
+-	kerneldir=${D}/kernel/
++
++}
++
++sysroot_stage_all_append() {
++
++	kerneldir=${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+ 
+ 	if [ -e include/asm ] ; then
+ 		# This link is generated only in kernel before 2.6.33-rc1, don't stage it for newer kernels
+@@ -200,11 +205,6 @@ kernel_do_install() {
+ 	cp -fR scripts $kerneldir/
+ }
+ 
+-sysroot_stage_all_append() {
+-	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+-	cp -fpPR ${D}/kernel/.config ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+-}
+-
+ kernel_do_configure() {
+ 	yes '' | oe_runmake oldconfig
+ 	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
+-- 
+1.6.4.2
+
 
 
