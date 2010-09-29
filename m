@@ -1,33 +1,33 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0qRT-00044E-KH
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P0qZ1-0003Gs-UI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 08:47:05 +0200
-Received: by iwn2 with SMTP id 2so657713iwn.6
+	Wed, 29 Sep 2010 08:55:15 +0200
+Received: by iwn2 with SMTP id 2so664575iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Sep 2010 23:46:50 -0700 (PDT)
+	Tue, 28 Sep 2010 23:54:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=guldkqUj7PuPetVHVCGgpnZ6kE7sIo6Z86GqPPDB4yg=;
-	b=D1QcPIAEWe6qujCZNm3G0YiFljp/G5Xy2u0fnoNGqxsYwi1PSgVDOOEZM5tSi++Vt0
-	o9cbjDi7lfK7ojAEETDpv3v/cK70uSJwAHnlClyJNDmg39lj1W1E87PAROhNWw0LKQJt
-	L/QrQoCLIigABu2py1leNgMANj8X1gRuNzJSg=
+	bh=LCruER/3eq4Dl6mQrXeBfQR5BdmAzj7PUVsN4xb6i5Y=;
+	b=PUOaCQjYVA5LNOBW6y98byjXFc07DPRYKP+LO748umtU2pt8y9CWOsNOacHI1em2Fo
+	m2IlrL9669Cwm/q9fl+lmShPFaFufz4F1UXR5w8j80KpTWGx8wZxKgvLcvKQAP7MX4tx
+	Gr4TlGaDnPbuV9AxgljerIl1wE+Jp4QitYiQc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=GgnjUytdz8uZAOO20Jpcv5o6ecmRFJBU7OOmXDAbucHV8UtJlVcf+wIm1PtvE+FlFs
-	/dGovC8R3z1iIaNDjD02hJQzxdMU8l4ELMgoOMm0vtV2fMht1G/dDo8BFjeZbjptALyh
-	9Dbztl601K81jSpKuMjukwogklik6uwfQyZ8E=
+	b=FQJN9cesIax6viAM+7dfMAwkd40z7zwesE9ulakmbY1zJz3TF7sOZaFCNMWbvg78Ek
+	jQmKTw7fU1UjSKc417eshGWAD08FsP2tMHQkEyRirxRIB6bxEH8HjQhJtFJDYRbl1wVp
+	vJXHfMmsLEHUlZc5bTrCTjbm8yQBpBN6Nc828=
 MIME-Version: 1.0
-Received: by 10.231.171.18 with SMTP id f18mr1316532ibz.9.1285742810125; Tue,
-	28 Sep 2010 23:46:50 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 28 Sep 2010 23:46:50 -0700 (PDT)
-In-Reply-To: <4CA2DDFF.2090201@eukrea.com>
-References: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
-	<4CA2DDFF.2090201@eukrea.com>
-Date: Wed, 29 Sep 2010 08:46:50 +0200
-Message-ID: <AANLkTikv8x4xoAD5zPnprHpo9wcWc1hi8FF=5m8mtCi4@mail.gmail.com>
+Received: by 10.231.33.205 with SMTP id i13mr1289898ibd.59.1285743280501; Tue,
+	28 Sep 2010 23:54:40 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 28 Sep 2010 23:54:40 -0700 (PDT)
+In-Reply-To: <AANLkTimxud8X-EdsRC1FrJg8Xpya7S_BM5vKSs3K7Vi5@mail.gmail.com>
+References: <AANLkTikjs7DrdBxNpo0GpGy-FkbG3MEQe=+aT8if_a_C@mail.gmail.com>
+	<AANLkTimxud8X-EdsRC1FrJg8Xpya7S_BM5vKSs3K7Vi5@mail.gmail.com>
+Date: Wed, 29 Sep 2010 08:54:40 +0200
+Message-ID: <AANLkTikDLYVEa=X5eHj7kB+9O3Hu=a_Our7iAimyW0-c@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] kernel NOTE messages fix
+Subject: Re: generate a named kernel in ${DEPLOY_DIR_IMAGE}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,86 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 06:47:05 -0000
+X-List-Received-Date: Wed, 29 Sep 2010 06:55:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Thanks for the feedback and the acks.
-I'll make a formal patch for this and push it with the acks added.
-Maybe this evening otherwise tomorrow (but if someone can't wait so
-long feel free to make the patch (but please let me know on irc, so we
-do not end up duplicating things))
+2010/9/29 Andrea Adami <andrea.adami@gmail.com>:
+> On Tue, Sep 28, 2010 at 6:54 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
 
-Wrt the kernel-dev route: I didn't try it, as Henning & Petr (and
-maybe also Eric) tried this before.
+> We solved same issues with linux-kexecboot.inc including linux.inc and
+> redefining vars/tasks.
+> In particular
+> ...
+> PACKAGES = ""
+> PROVIDES = ""
+> ...
+> KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-kexecboot-${PV}-${PR}-${MACHINE}"
+> KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-kexecboot-${MACHINE}"
+> ...
+>
+> do_populate_sysroot() {
+> }
+>
+> do_install() {
+> }
+>
+> python do_package() {
+> }
+>
 
-Tom, I do encounter issues with scripts and strip either. They are
-still on my to-investigate list and are not related to the issue at
-hand, but when building slugos-image for nslu2 I get the messages
-given below. Guess this is the same problem you are facing.
+Tried this. works nice.
+Two small remarks:
 
-I'm open for hints on how to fix this one.
+I would have expected you had to add something like:
+FILESPATHPKG_append = ":linux-${PV}"
+I had to add this to get access to the linux patches.
+
+And this:
+S = "${WORKDIR}/linux-${PV}"
+might perhaps better end up in the base recipe (in my case linux_2.6.34.bb)
+(actually thinking of it the FILESPATHPKG might also be moved into there).
+
+Should I prepare a patch for that ?
 
 Frans.
-
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/bin2c''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/kconfig/conf''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/basic/fixdep''
-strip commarmeb-linux-gnueabi-strip: Unable to recognise the format of
-the input file `/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/genksyms/genksyms'
-armeb-linux-gnueabi-objcopy: Unable to recognise the format of the
-input file `/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/genksyms/genksyms'
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/bin2c''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/kconfig/conf''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/basic/fixdep''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/basic/docproc''
-strip command failed
-ERROR:armeb-linux-gnueabi-objcopy: Unable to recognise the format of
-the input file `/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/mk_elfconfig'
-armeb-linux-gnueabi-strip: Unable to recognise the format of the input
-file `/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/mk_elfconfig'
-armeb-linux-gnueabi-objcopy: Unable to recognise the format of the
-input file `/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/mk_elfconfig'
-armeb-linux-gnueabi-objcopy: Unable to recognise the format of the
-input file `/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/modpost'
-armeb-linux-gnueabi-strip: Unable to recognise the format of the input
-file `/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/modpost'
-armeb-linux-gnueabi-objcopy: Unable to recognise the format of the
-input file `/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/modpost'
-and failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/basic/docproc''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/genksyms/genksyms''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/mk_elfconfig''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_TEST/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/modpost''
-strip command failed
 
 
