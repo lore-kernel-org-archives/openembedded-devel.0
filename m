@@ -1,36 +1,29 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1P11Et-0006R4-Im
+	(envelope-from <denis@denix.org>) id 1P11X0-00046G-Hs
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 20:18:48 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1P11Ec-0005A7-VK from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Sep 2010 11:18:30 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 29 Sep 2010 11:18:30 -0700
-Received: from [172.30.80.16] ([172.30.80.16]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 29 Sep 2010 12:18:29 -0600
-Message-ID: <4CA382F1.8040207@mentor.com>
-Date: Wed, 29 Sep 2010 11:18:25 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Wed, 29 Sep 2010 20:37:31 +0200
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L9I003KKUDOXQY2@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	29 Sep 2010 13:37:02 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B258D14AF64; Wed,
+	29 Sep 2010 14:37:00 -0400 (EDT)
+Date: Wed, 29 Sep 2010 14:37:00 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>	<4CA2DDFF.2090201@eukrea.com>
-	<AANLkTikv8x4xoAD5zPnprHpo9wcWc1hi8FF=5m8mtCi4@mail.gmail.com>
-In-Reply-To: <AANLkTikv8x4xoAD5zPnprHpo9wcWc1hi8FF=5m8mtCi4@mail.gmail.com>
-X-OriginalArrivalTime: 29 Sep 2010 18:18:29.0744 (UTC)
-	FILETIME=[B7A50F00:01CB6002]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-id: <20100929183700.GB27217@denix.org>
+References: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <AANLkTinMWT7K-h+hH0LvPD119Nxxpitro=f6igQvL7-K@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -48,40 +41,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2010 18:18:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Sep 2010 18:37:32 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Frans Meulenbroeks wrote:
-> Thanks for the feedback and the acks.
-> I'll make a formal patch for this and push it with the acks added.
-> Maybe this evening otherwise tomorrow (but if someone can't wait so
-> long feel free to make the patch (but please let me know on irc, so we
-> do not end up duplicating things))
+On Tue, Sep 28, 2010 at 06:39:42PM +0200, Frans Meulenbroeks wrote:
+> Dear all,
 > 
-> Wrt the kernel-dev route: I didn't try it, as Henning & Petr (and
-> maybe also Eric) tried this before.
+> 3) copy the files directly from the work area to staging. That way
+> there are no unpackaged files in image/ so no NOTE messages.
+> Additional advantage is that it is faster as we save the copy to the image dir.
 > 
-> Tom, I do encounter issues with scripts and strip either. They are
-> still on my to-investigate list and are not related to the issue at
-> hand, but when building slugos-image for nslu2 I get the messages
-> given below. Guess this is the same problem you are facing.
+> The following patch makes (3) happen:
 > 
-> I'm open for hints on how to fix this one.
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+> index 5f8bc8a..05ddcc1 100644
+> --- a/classes/kernel.bbclass
+> +++ b/classes/kernel.bbclass
+> @@ -121,7 +121,12 @@ kernel_do_install() {
+>                  oe_runmake SUBDIRS="scripts/genksyms"
+>          fi
+> 
+> -       kerneldir=${D}/kernel/
+> +
+> +}
+> +
+> +sysroot_stage_all_append() {
+> +
+> +        kerneldir=${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+> 
+>         if [ -e include/asm ] ; then
+>                 # This link is generated only in kernel before
+> 2.6.33-rc1, don't stage it for newer kernels
+> @@ -197,12 +202,7 @@ kernel_do_install() {
+>         install -m 0644 System.map $kerneldir/System.map-${KERNEL_VERSION}
+>         [ -e Module.symvers ] && install -m 0644 Module.symvers $kerneldir/
+> 
+> -       cp -fR scripts $kerneldir/
+> -}
+> -
+> -sysroot_stage_all_append() {
+> -       sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
 
-I think something like:
-- Copy sources, cd to dest
-- Backup .config
-- make mrproper
-- Restore .config to destdir
-- make ... modules_prep or so (don't have it off-hand, but make help 
-shows) which gets things valid again for external modules to build.
+BTW, won't this patch break packaged-staging? Has anyone tried rebuilding from 
+pstage after this fix?
 
-Problem is that (a) that won't work on 2.4 and (b) I don't know how far 
-back, off-hand, that make target exists in 2.6.
+> -       cp -fpPR ${D}/kernel/.config ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+> +       cp -fR scripts $kerneldir/
+>  }
+> 
+>  kernel_do_configure() {
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+Denys
 
 
