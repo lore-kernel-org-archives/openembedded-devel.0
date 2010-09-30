@@ -1,32 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P1Dx5-0004OD-0y for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 09:53:16 +0200
-Received: from f053042246.adsl.alicedsl.de ([78.53.42.246]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P1Dwu-0007cg-2B for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 07:53:04 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <sledz@dresearch.de>) id 1P1ECO-0000iQ-Kd
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Sep 2010 10:09:06 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 6B347491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Sep 2010 10:08:53 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 30 Sep 2010 10:08:53 +0200
+Message-ID: <4CA44597.5070300@dresearch.de>
+Date: Thu, 30 Sep 2010 10:08:55 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1285792594-10032-19-git-send-email-obi@opendreambox.org>
-References: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
-	<1285792594-10032-19-git-send-email-obi@opendreambox.org>
-Date: Thu, 30 Sep 2010 09:53:02 +0200
-Message-ID: <1285833182.3805.17.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <AANLkTimErDzoKvh=YVsmAptdjojPXFHS7Xd1Sfq88To0@mail.gmail.com>
+In-Reply-To: <AANLkTimErDzoKvh=YVsmAptdjojPXFHS7Xd1Sfq88To0@mail.gmail.com>
+X-OriginalArrivalTime: 30 Sep 2010 08:08:53.0020 (UTC)
+	FILETIME=[B8A1A5C0:01CB6076]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 18/18] mjpegtools-1.9.0: initial recipe
+Subject: Re: testing branch 2010-09-27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,104 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 07:53:16 -0000
-X-Groupsio-MsgNum: 24201
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-tiIHSmoxfaUCUsUsRjqt"
+X-List-Received-Date: Thu, 30 Sep 2010 08:09:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---=-tiIHSmoxfaUCUsUsRjqt
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Am 27.09.2010 21:37, schrieb Cliff Brake:
+> master has been merged to testing-next and is ready for clean builds.
+> 
+> http://wiki.openembedded.net/index.php/Testing
 
-Am Mittwoch, den 29.09.2010, 20:36 +0000 schrieb Andreas Oberritter:
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  .../mjpegtools/files/mjpegtools-fix-include.patch  |   65 ++++++++++++++=
-++++++
->  .../files/mjpegtools-remove-sdl-dependency.patch   |   15 +++++
->  .../files/mjpegtools-v4l-doesnt-mean-x11.patch     |   12 ++++
->  recipes/mjpegtools/mjpegtools_1.9.0.bb             |   18 ++++++
->  4 files changed, 110 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/mjpegtools/files/mjpegtools-fix-include.patch
->  create mode 100644 recipes/mjpegtools/files/mjpegtools-remove-sdl-depend=
-ency.patch
->  create mode 100644 recipes/mjpegtools/files/mjpegtools-v4l-doesnt-mean-x=
-11.patch
->  create mode 100644 recipes/mjpegtools/mjpegtools_1.9.0.bb
+Like in the weeks before, building epiphany failed for target angstrom-gnome-image and hipox machine (see <http://tinderbox.openembedded.net/packages/797336/>).
 
-[=E2=80=A6]
+A patch follows.
 
-> diff --git a/recipes/mjpegtools/mjpegtools_1.9.0.bb b/recipes/mjpegtools/=
-mjpegtools_1.9.0.bb
-> new file mode 100644
-> index 0000000..3552b6e
-> --- /dev/null
-> +++ b/recipes/mjpegtools/mjpegtools_1.9.0.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION =3D "MJPEG video capture/editting/playback MPEG encoding"
-> +HOMEPAGE =3D "http://sourceforge.net/projects/mjpeg/"
-> +SECTION =3D "optional"
-> +LICENSE =3D "GPLv2"
-> +
-> +SRC_URI =3D " \
-> +	${SOURCEFORGE_MIRROR}/mjpeg/${P}.tar.gz \
-> +	file://mjpegtools-fix-include.patch \
-> +	file://mjpegtools-remove-sdl-dependency.patch \
-> +	file://mjpegtools-v4l-doesnt-mean-x11.patch \
-> +	"
-> +
-> +SRC_URI[md5sum] =3D "309a6fcf0900a010d6a9c1e91afc2f5c"
-> +SRC_URI[sha256sum] =3D "a9322aaab1e0835fbaa00fc10e58e885833454fa0ad6f57c=
-60c89a78f7ed1711"
-> +
-> +inherit autotools
-> +
-> +EXTRA_OECONF =3D "--without-x"
-
-Using minimal (eglibc) and building mjpegtools from scratch I got
-
-        [=E2=80=A6]
-        | checking for jpeg_start_compress in -ljpeg... no
-        | configure: error: JPEG 6b library missing - Go to http://www.ijg.=
-org/
-        | ERROR: Function do_configure failed
-        NOTE: package mjpegtools-1.9.0-r0: task do_configure: Failed
-        [=E2=80=A6]
-
-Adding `DEPENDS =3D jpeg` fixed this for me.
-
-I build your recipe with this addition for minimal-{libc,eglibc,uclibc}
-and angstrom-2008.1 on `MACHINE =3D "beagleboard"` and it worked. I just
-saw the following warning.
-
-        NOTE: package mjpegtools-1.9.0-r0: task do_populate_sysroot: Succee=
-ded
-        NOTE: Multiple libraries (libmplex2-1.9.so.0, liblavfile-1.9.so.0, =
-libmpeg2encpp-1.9.so.0, liblavrec-1.9.so.0, liblavplay-1.9.so.0, liblavjpeg=
--1.9.so.0, libmjpegutils-1.9.so.0) found and LEAD_SONAME not defined
-
-I have not run tested this recipe though.
-
-With the DEPENDS change this patch is
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Steffen
 
 
-Thanks,
 
-Paul
-
---=-tiIHSmoxfaUCUsUsRjqt
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkykQd4ACgkQPX1aK2wOHVhWWACeNj7lBPvnqaDmDkF5Mqzg94Wg
-Ss8AnRwj1UK5dHIIyczepr0Lx47fPzvV
-=AQnt
------END PGP SIGNATURE-----
-
---=-tiIHSmoxfaUCUsUsRjqt--
