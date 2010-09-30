@@ -1,25 +1,29 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P1KYz-0007Kk-Os for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 16:56:51 +0200
-Received: from g225136165.adsl.alicedsl.de ([92.225.136.165]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P1KYo-0001gv-ED for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 14:56:38 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <sledz@dresearch.de>) id 1P1Kd0-0007n3-Px
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Sep 2010 17:01:04 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 7FC04491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Sep 2010 17:00:45 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 30 Sep 2010 17:00:45 +0200
+Message-ID: <4CA4A620.6080104@dresearch.de>
+Date: Thu, 30 Sep 2010 17:00:48 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1285834219-17132-1-git-send-email-sledz@dresearch.de>
-References: <4CA44597.5070300@dresearch.de>
-	<1285834219-17132-1-git-send-email-sledz@dresearch.de>
-Date: Thu, 30 Sep 2010 16:56:36 +0200
-Message-ID: <1285858596.3805.111.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <4CA44597.5070300@dresearch.de>	<1285834219-17132-1-git-send-email-sledz@dresearch.de>
+	<1285858596.3805.111.camel@mattotaupa>
+In-Reply-To: <1285858596.3805.111.camel@mattotaupa>
+X-OriginalArrivalTime: 30 Sep 2010 15:00:45.0189 (UTC)
+	FILETIME=[423B6350:01CB60B0]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
@@ -40,64 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 14:56:52 -0000
-X-Groupsio-MsgNum: 24224
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-cs/xzsemWnQiTwyjHg6W"
+X-List-Received-Date: Thu, 30 Sep 2010 15:01:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-cs/xzsemWnQiTwyjHg6W
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Am 30.09.2010 16:56, schrieb Paul Menzel:
+> Am Donnerstag, den 30.09.2010, 10:10 +0200 schrieb Steffen Sledz:
+>> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> 
+> What is your build error?
+> 
+> Building `epiphany-2.30.2-r2` with `MACHINE = "beagleboard"` for minimal
+> (eglibc) worked for me.
 
-Am Donnerstag, den 30.09.2010, 10:10 +0200 schrieb Steffen Sledz:
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+see <http://tinderbox.openembedded.net/packages/797336/>
 
-What is your build error?
+> Besides that would PR need to be increased?
 
-Building `epiphany-2.30.2-r2` with `MACHINE =3D "beagleboard"` for minimal
-(eglibc) worked for me.
+Not sure, but i can do that of course.
 
-> ---
->  recipes/gnome/epiphany_2.30.2.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/gnome/epiphany_2.30.2.bb b/recipes/gnome/epiphany_2.=
-30.2.bb
-> index 426d468..38798f7 100644
-> --- a/recipes/gnome/epiphany_2.30.2.bb
-> +++ b/recipes/gnome/epiphany_2.30.2.bb
-> @@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] =3D "29b084acfa016540d91d3601ec3d=
-ff5c"
->  SRC_URI[archive.sha256sum] =3D "cd0124e71e72142593cfeb442d58d97e99ba94ac=
-e6e31d94717fe977c0bfb98a"
-> =20
->=20
-> -EXTRA_OECONF =3D "--disable-nss --with-engine=3Dwebkit --with-distributo=
-r-name=3D${DISTRO}"
-> +EXTRA_OECONF =3D "--disable-nss --with-engine=3Dwebkit --with-distributo=
-r-name=3D${DISTRO} --without-ca-file"
-> =20
->  do_configure_prepend() {
->          touch ${S}/gnome-doc-utils.make
-
-Besides that would PR need to be increased?
+Steffen
 
 
-Thanks,
 
-Paul
-
---=-cs/xzsemWnQiTwyjHg6W
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkykpSQACgkQPX1aK2wOHVhhzgCdES28S0waYH885GhzS2Jn6/jP
-+tAAnRKffYvq7eE8OMdumfGrf8Jhau7/
-=qRG2
------END PGP SIGNATURE-----
-
---=-cs/xzsemWnQiTwyjHg6W--
