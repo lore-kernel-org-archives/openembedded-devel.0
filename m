@@ -1,40 +1,39 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1P1QTo-0004Zm-AT
+	(envelope-from <Tom_Rini@mentor.com>) id 1P1QjD-0007b5-Fi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 23:15:53 +0200
-Received: by wyb35 with SMTP id 35so2443609wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Sep 2010 14:15:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=v0Hjyb/JuLoXjk9iaM7vIHm9MFILhUpsiIlprR6NOlo=;
-	b=qQhX8NXLSMMvuz+qhQIfn1XLVh20kUTI9NNFm0IQ4PlzMCoWIc8wUjAWWwObm9jNwo
-	ryqh96jnqSYOOH5BaBrGvIz5Nx3PNipNNlTSqIRWDqcN/bybcb0+J1hjIGAb4wxD7LNo
-	+Y61TKRQNlF+k3IifLekptCtkjs1oIHHx2RZY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=SOmoYyIEhxqhCoNRdVp1LgguFexoYiqle9Qu8Abmb2S+jTkfsSIIY7vNTpMdwF7qUc
-	7oMQTqATu4+WXPUDPht4A6wDHUKJgNtMXVl3DlbgfJfvKgvFANBkcNSTWEFy7EWs59Ng
-	+A936Wt9xHEpF31iCrducsxshkvqLk/rr0pso=
+	Thu, 30 Sep 2010 23:31:52 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1P1Qiy-0002DT-ME from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Sep 2010 14:31:32 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 30 Sep 2010 14:31:32 -0700
+Received: from [172.30.80.12] ([172.30.80.12]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 30 Sep 2010 15:31:33 -0600
+Message-ID: <4CA501AC.2090804@mentor.com>
+Date: Thu, 30 Sep 2010 14:31:24 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.216.187.130 with SMTP id y2mr1285459wem.60.1285881338162; Thu,
-	30 Sep 2010 14:15:38 -0700 (PDT)
-Received: by 10.216.45.149 with HTTP; Thu, 30 Sep 2010 14:15:38 -0700 (PDT)
-Date: Thu, 30 Sep 2010 17:15:38 -0400
-Message-ID: <AANLkTimSecS8ZnjrMCHYG7fY9ztxY-FmRQBFZTHBHgx4@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+References: <AANLkTi=6KMYVWORbcf+BLZYGV6JrscxBEjq-KWXnhzU+@mail.gmail.com>
+In-Reply-To: <AANLkTi=6KMYVWORbcf+BLZYGV6JrscxBEjq-KWXnhzU+@mail.gmail.com>
+X-OriginalArrivalTime: 30 Sep 2010 21:31:33.0720 (UTC)
+	FILETIME=[DAA54580:01CB60E6]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: overriding files in a package
+Subject: Re: [RFC] delete old monotone recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,64 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 21:15:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 30 Sep 2010 21:31:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-One thing I find myself doing is overriding files in one package with
-another package.  As long as the package doing the overriding was last
-in the IMAGE_INSTALL variable, this used to work.  Then bitbake
-started complaining about overriding packages, but that could be
-worked around by doing the following:
+Frans Meulenbroeks wrote:
+> Dear all,
+> 
+> As it stands we have 6 monotone recipes:
+> 
+> monotone-5_0.25.2.bb
+> monotone-6_0.27.bb
+> monotone-6_0.31.bb
+> monotone-6_0.33.bb
+> monotone-6_0.34.bb
+> monotone-6_0.37.bb
+> 
+> There are all target-only recipes
+> 
+> I can imagine it made sense to have a monotone recipe for the target
+> when our sources were still in monotone, but I feel that nowadays it
+> is less useful
+> (apart from the question whether it is useful to have an SCM on an
+> embedded system).
+> 
+> Therefore I would like to bring up the following discussion topics:
+> 
+> Is there any use to keep the old monotone-6 recipes? (all but 0.37).
+> Or should we remove?
+> 
+> And what about the monotone-5 recipe. Is that still useful?
+> 
+> And what about the latest monotone-6 recipe? Is that still useful to keep?
+> 
+> Your opinion is appreciated.
 
-RREPLACES_${PN} += "udev"
-RREPLACES_${PN} += "tzdata"
-RREPLACES_${PN} += "initscripts"
-
-Now it seems that the packages no longer processed as listed in the
-IMAGE_INSTALL variable:
-
-| Configuring e2fsprogs-tune2fs.
-| Configuring svs-conf.
-| Configuring psplash.
-| Configuring tslib-tests.
-| Configuring tzdata-atlantic.
-| Configuring hplip-backend.
-| Configuring kernel-module-i2c-pxa.
-| Configuring tzdata-australia.
-| Configuring kernel-module-ftdi-sio.
-| Configuring test-gpio.
-| Configuring kernel-module-oprofile.
-| Configuring kernel-module-rtl8150.
-| Configuring xset.
-| Configuring tzdata-antarctica.
-| Configuring e2fsprogs-mke2fs.
-| Configuring tzdata-asia.
-| Configuring diag2020.
-| Collected errors:
-|  * resolve_conffiles: Existing conffile
-/scratch/pp/du-sw-web-builder/pp-du-oe/build/angstrom-2008/tmp/rootfs/svs-nand-test-image/etc/device_table
-is different from the conffile in the new package. The new conffile
-will be placed at
-/scratch/pp/du-sw-web-builder/pp-du-oe/build/angstrom-2008/tmp/rootfs/svs-nand-test-image/etc/device_table-opkg.
-|  * check_data_file_clashes: Package sysvinit wants to install file
-/scratch/pp/du-sw-web-builder/pp-du-oe/build/angstrom-2008/tmp/rootfs/svs-nand-test-image/etc/init.d/rc
-|       But that file is already provided by package  * svs-conf
-|  * opkg_install_cmd: Cannot install package sysvinit.
-| ERROR: Function do_rootfs failed
-NOTE: package svs-nand-test-image-1.0-r0: task do_rootfs: Failed
-
-In my IMAGE_INSTALL, svs-conf is last, but its not configured last.
-Does this make sense related to recent bitbake and OE changes?
-
-Is http://sakrah.homelinux.org/node/2 the recommended solution for
-this problem going forward?  This looks workable, but as I'm
-overriding files in 7 packages, this gets a little tedious.
-
-Thanks,
-Cliff
+As an aside, I can't find anything called monotone-5 or monotone-6, just 
+monotone.  But I'd otherwise suggest the normal rules apply, delete the 
+unpinned versions assuming they're all GPLv2.
 
 -- 
-=================
-http://bec-systems.com
+Tom Rini
+Mentor Graphics Corporation
+
 
 
