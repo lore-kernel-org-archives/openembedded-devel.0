@@ -1,32 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P1PmO-0000nW-GJ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 22:31:02 +0200
-Received: by iwn2 with SMTP id 2so2919098iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Sep 2010 13:30:48 -0700 (PDT)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P1Q7M-0005dM-Ai
+	for openembedded-devel@openembedded.org; Thu, 30 Sep 2010 22:52:42 +0200
+Received: by yxg6 with SMTP id 6so958433yxg.6
+	for <openembedded-devel@openembedded.org>;
+	Thu, 30 Sep 2010 13:52:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:date:message-id
 	:subject:from:to:content-type;
-	bh=vydhTGvxWY1aK1MhNvFLO3agY8Lr/7MOUxlD14zWwzQ=;
-	b=OR6QNiDj5caGznQ7xJbMbfaZaUm0wydWFF2fn4yhdIvRCfsT/Eznc0h+UQJOj/OaGr
-	EGg/8D90hZiYd9EoLw6rThrjHLdJqqs3K3AQqmjxnW7Pa2FK2ncHI9sLF9YxQXxlPfyL
-	vSI+gksEiB9CmKgEj93/DG0WFD9wvPqxFjqEA=
+	bh=lye8BD8/plckB/CEpCf8czLGbbJDVpggxCB4lGAMEjU=;
+	b=grrdMU1mNysHdkEnDcxF37qDx2/mNnvi2ecc70UrGaGugr3oK48N7dU+lDWrYc1sqN
+	Y+75/hEElcCZRZ3w4cPk+/FxYTaR2JufrNPpEUl93BerZaft5JVQbvQvp9Kg3AgRKeHI
+	SE10yxJlb5WRWS3MmvSsG6KIFQ4tdyUUBx5mw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=hjGscuNf8bllUYwBuq88H5WKcAiuAT9ewvG1w4QzWK3XSWGrO+80HXl4yhadV+HsOh
-	I2aHaL4nGgws85Rtn6iJcTIK1l4xXBGhxoNqKdNzhaSQQeypWKKHrg0zLp84d7aUX/0S
-	AlM+8aicdxZi9HSZgxCfCsj04fZqiMdGb9qq8=
+	b=cY1oSfVSTas4xxOfbftIqswQb4IztmTxEzbzLH38ka95Qqex1SEAOytSaNAh4ewCVH
+	8nci3JprtYvAeRITblMg07Ep2bFLhzsujPDxZpKl5YKiEvxGRdhqgbh++Db0w5Lmb41R
+	ZMqVlgTKfokk9FoQzdBO/ObYSBHHX1JLSBEmE=
 MIME-Version: 1.0
-Received: by 10.231.14.69 with SMTP id f5mr4372621iba.116.1285878647471; Thu,
-	30 Sep 2010 13:30:47 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Thu, 30 Sep 2010 13:30:47 -0700 (PDT)
-Date: Thu, 30 Sep 2010 22:30:47 +0200
-Message-ID: <AANLkTi=6KMYVWORbcf+BLZYGV6JrscxBEjq-KWXnhzU+@mail.gmail.com>
+Received: by 10.231.14.140 with SMTP id g12mr4269328iba.84.1285879944835; Thu,
+	30 Sep 2010 13:52:24 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Thu, 30 Sep 2010 13:52:24 -0700 (PDT)
+Date: Thu, 30 Sep 2010 22:52:24 +0200
+Message-ID: <AANLkTin7JTEHEx728sX9-qZwswamNEVW8WdbxgQ9rLOM@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -34,7 +33,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] delete old monotone recipes
+Subject: gcc 4.5: unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,38 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 20:31:02 -0000
+X-List-Received-Date: Thu, 30 Sep 2010 20:52:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Dear all,
+Just compiled gcc4.5. This gave some unpackaged files:
 
-As it stands we have 6 monotone recipes:
+NOTE: package gcc-cross-4.5-r1+svnr163322: task do_package: Started
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/lib/libobjc.so.2.0.0
+NOTE:   /usr/lib/libobjc.so
+NOTE:   /usr/lib/libssp.so
+NOTE:   /usr/lib/libssp_nonshared.a
+NOTE:   /usr/lib/libsupc++.la
+NOTE:   /usr/lib/libobjc.so.2
+NOTE:   /usr/lib/libobjc.a
+NOTE:   /usr/lib/libssp.a
+NOTE:   /usr/lib/libstdc++.so
+NOTE:   /usr/lib/libobjc.la
+NOTE:   /usr/lib/libstdc++.a
+NOTE:   /usr/lib/libstdc++.la
+NOTE:   /usr/lib/libssp_nonshared.la
+NOTE:   /usr/lib/libsupc++.a
+NOTE:   /usr/lib/libssp.la
+NOTE:   /lib/libgcc_s.so
 
-monotone-5_0.25.2.bb
-monotone-6_0.27.bb
-monotone-6_0.31.bb
-monotone-6_0.33.bb
-monotone-6_0.34.bb
-monotone-6_0.37.bb
-
-There are all target-only recipes
-
-I can imagine it made sense to have a monotone recipe for the target
-when our sources were still in monotone, but I feel that nowadays it
-is less useful
-(apart from the question whether it is useful to have an SCM on an
-embedded system).
-
-Therefore I would like to bring up the following discussion topics:
-
-Is there any use to keep the old monotone-6 recipes? (all but 0.37).
-Or should we remove?
-
-And what about the monotone-5 recipe. Is that still useful?
-
-And what about the latest monotone-6 recipe? Is that still useful to keep?
-
-Your opinion is appreciated.
+Is this ok?
 
 Frans
 
