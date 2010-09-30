@@ -1,33 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P1FiD-0006Ls-IM for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 11:46:02 +0200
-Received: from f053042246.adsl.alicedsl.de ([78.53.42.246]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P1Fi2-0002Wt-Ej for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 09:45:50 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P1GGh-0002Er-5S
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Sep 2010 12:21:40 +0200
+Received: by iwn2 with SMTP id 2so2293436iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Sep 2010 03:21:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=w2aNpfRGaXm3AnVeAOoZolLlqItM4+42GxJkCHKt7IU=;
+	b=gZe55Ol9SKRvupyS8zwdEEi3aoGDexuRYLER0AVAShN+2f5XMdJEVm6Dmtz1/8L/sM
+	yn02mSOJGlfbJFkBeK0QGTW/Gr7yDhOxdKE2U5Fbb1HP8KRYgyRZKSTTYMPeoMb5CFqz
+	MQy73IJ3By3XhoPum0rn6QD1zZbE/1x9O6XEY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=LNzjxIct3djPsy/XcFqEpZFmGfhLnmntSHRZ7J4PAJp1DQSSQ8/apRT/9umUTVf5CB
+	jERdw0YNHFVHGWLUUJCYrNxi9C1Z95XO9Kb8t1gH/QXIj5tnhchGEWHq0tJyDIUsHBt2
+	nqRkvLppgO4OUJ9VF88GjAwoS+tHR68x9wFDk=
+MIME-Version: 1.0
+Received: by 10.231.157.212 with SMTP id c20mr3412980ibx.186.1285842084727;
+	Thu, 30 Sep 2010 03:21:24 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Thu, 30 Sep 2010 03:21:24 -0700 (PDT)
+In-Reply-To: <1285777033-19478-1-git-send-email-t.fromm@dresearch.de>
+References: <1285777033-19478-1-git-send-email-t.fromm@dresearch.de>
+Date: Thu, 30 Sep 2010 12:21:24 +0200
+Message-ID: <AANLkTikWLrAZaejWvnBGf4hn0CdKV2FgYiMxLEkDn+Wi@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimvzxaKE3d=oEYAA7BnX3XZLb9btL36qJ2Bhxwn@mail.gmail.com>
-References: <1285792798-6529-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1285796123.27605.4.camel@mattotaupa>
-	<AANLkTimvzxaKE3d=oEYAA7BnX3XZLb9btL36qJ2Bhxwn@mail.gmail.com>
-Date: Thu, 30 Sep 2010 11:45:49 +0200
-Message-ID: <1285839949.3805.64.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] kernel.bbclass: avoid NOTE messages for files that are staged but not packaged
+Subject: Re: [PATCH] libunwind: force gcc to be built first
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,83 +52,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 09:46:02 -0000
-X-Groupsio-MsgNum: 24208
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Y1vpxwxv3dg0Kw/If2Hx"
-
---=-Y1vpxwxv3dg0Kw/If2Hx
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 30 Sep 2010 10:21:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag, den 30.09.2010, 08:30 +0200 schrieb Frans Meulenbroeks:
-> 2010/9/29 Paul Menzel <paulepanter@users.sourceforge.net>:
-
-> > Am Mittwoch, den 29.09.2010, 22:39 +0200 schrieb Frans Meulenbroeks:
-> >> copy the files directly from the work area to staging. That way
-> >> there are no unpackaged files in image/ so no NOTE messages.
-> >> Additional advantage is that it is faster as we save the copy to the i=
-mage dir.
-> >>
-> >> See also http://thread.gmane.org/gmane.comp.handhelds.openembedded/374=
-87
-> >>
-> >> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-> >> Acked-by: Roman I Khimov <khimov@altell.ru>
-> >> Tested-by: Petr ?tetiar <ynezz@true.cz>
-> >> Acked-by: Eric B?nard <eric@eukrea.com>
-> >
-> > please fix the special characters when you commit this.
->=20
-> Will do, I have just cut'n'pasted the lines. but I agree I was lazy
-> and it was better to fix this.
+2010/9/29 Thilo Fromm <t.fromm@dresearch.de>:
+> libunwind causes cross gcc build to fail if libunwind is built first:
 >
-> > I tried to apply your patch using `pwam.sh 3097` and saw that you
-> > already accidentally had commited this patch in
-> > 9a5382aad4e5a3e52fa52722cf5587fdba958e9f [1].
-> >
-> >        wpa-supplicant : moved unused files to obsolete dir
-> >
-> > Please revert that commit and commit appropriately.
->=20
-> Thanks for spotting this. I have already reverted the commit.
+> ...
+> | arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s -mt=
+humb-interwork -mno-thumb -march=3Darmv5te -mtune=3Darm926ej-s -mthumb-inte=
+rwork -mno-thumb -isystem/SCRATCH/maniac/oe-merge-test/OE/tmp.6/sysroots/ar=
+mv5te-angstrom-linux-gnueabi/usr/include -g -Os -O2 -g -Os -DIN_GCC -W -Wal=
+l -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-defi=
+nition -isystem ./include =A0-fPIC -g -DHAVE_GTHR_DEFAULT -DIN_LIBGCC2 -D__=
+GCC_FLOAT_NOT_NEEDED =A0 -I. -I. -I../.././gcc -I/SCRATCH/maniac/oe-merge-t=
+est/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/=
+libgcc -I/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux=
+-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/. -I/SCRATCH/maniac/oe-merge-test=
+/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/lib=
+gcc/../gcc -I/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-l=
+inux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../include =A0-DHAVE_CC_TLS -=
+o _ucmpdi2_s.o -MT _ucmpdi2_s.o
+> =A0\
+> =A0-MD -MP -MF _ucmpdi2_s.dep -DSHARED -DL_ucmpdi2 -c /SCRATCH/maniac/oe-=
+merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc=
+-4.3.3/libgcc/../gcc/libgcc2.c
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/unwind-arm.c:40: err=
+or: expected ')' before '*' token
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/unwind-arm.c:41: err=
+or: expected ')' before '*' token
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/unwind-arm.c:42: err=
+or: expected ')' before '*' token
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/unwind-arm.c:47: war=
+ning: data definition has no type or storage class
+> ...
+>
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/pr-support.c:396: er=
+ror: expected '=3D', ',', ';', 'asm' or '__attribute__' before '_Unwind_Get=
+DataRelBase'
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/config/arm/pr-support.c:402: er=
+ror: expected '=3D', ',', ';', 'asm' or '__attribute__' before '_Unwind_Get=
+TextRelBase'
+> | make[2]: *** [unwind-arm.o] Error 1
+> | make[2]: *** Waiting for unfinished jobs....
+> | make[2]: *** [pr-support.o] Error 1
+> ...
+>
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/unwind-c.c:212: error: 'lsda_he=
+ader_info' has no member named 'LPStart'
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/unwind-c.c:214: error: 'lsda_he=
+ader_info' has no member named 'action_table'
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/unwind-c.c:234: error: expected=
+ ')' before 'ue_header'
+> | /SCRATCH/maniac/oe-merge-test/OE/tmp.6/work/armv5te-angstrom-linux-gnue=
+abi/gcc-4.3.3-r17.1/gcc-4.3.3/libgcc/../gcc/unwind-c.c:123: warning: unused=
+ parameter 'ue_header'
+> | make[2]: *** [unwind-c.o] Error 1
+> | make[2]: Leaving directory `/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work=
+/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/build.arm-angstro=
+m-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libgc=
+c'
+> | make[1]: *** [all-target-libgcc] Error 2
+> | make[1]: Leaving directory `/SCRATCH/maniac/oe-merge-test/OE/tmp.6/work=
+/armv5te-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/gcc-4.3.3/build.arm-angstro=
+m-linux-gnueabi.arm-angstrom-linux-gnueabi'
+> | make: *** [all] Error 2
+> | FATAL: oe_runmake failed
+> | ERROR: Function do_compile failed
+> NOTE: package gcc-4.3.3-r17.1: task do_compile: Failed
+>
+> It looks like libunwind provides header files that are named
+> identically to gcc header files. gcc then confuses these headers when it
+> is built, causing a break of the build.
+>
+> This patch makes libunwind depend on gcc which resolves the build issue. =
+Both
+> build nicely when gcc is built first.
 
-Thank you! The commit ID 285f58b3a48df7c4891afd02c7d9ca041675b41d [2].
+Hm. Ideally this should be patched in gcc. Now I feel that if someone
+does a bitbake libunwind; bitbake -cclean gcc; bitbake gcc things
+still fail.
+Btw what include files are we talking about?
 
-> Will make a new patch for it.
-> Guess this accidently got picked up by the wpa-supplicant commit and
-> went unnoticed.
-> I'll try to take some more care next time.
-> apologies for any inconvenience.
+Frans.
+>
+> Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
+> ---
+> =A0recipes/libunwind/libunwind.inc | =A0 =A03 ++-
+> =A01 files changed, 2 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/libunwind/libunwind.inc b/recipes/libunwind/libunwin=
+d.inc
+> index 6994095..4340192 100644
+> --- a/recipes/libunwind/libunwind.inc
+> +++ b/recipes/libunwind/libunwind.inc
+> @@ -1,7 +1,8 @@
+> =A0DESCRIPTION =3D "a portable and efficient C programming interface (API=
+) to determine the call-chain of a program"
+> =A0HOMEPAGE =3D "http://www.nongnu.org/libunwind"
+> =A0LICENSE =3D "MIT"
+> -INC_PR =3D "r1"
+> +INC_PR =3D "r2"
+> +DEPENDS =3D "gcc"
+>
+> =A0SRC_URI =3D "http://download.savannah.nongnu.org/releases/${BPN}/${BPN=
+}-${PV}.tar.gz;name=3Darchive"
+>
+> --
+> 1.7.0.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-No apologies needed. It is good to see that you professionals are human
-nonetheless.
 
-On the positive side I could still build test the kernel.bbclass change
-and it worked for me.
-
-Tested-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D285f58b=
-3a48df7c4891afd02c7d9ca041675b41d
-
---=-Y1vpxwxv3dg0Kw/If2Hx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkykXE0ACgkQPX1aK2wOHVhgSACgh8WuLB/BHClD+TXYE/ttupQ7
-2+QAn1Use1ixqUNASaU98Ezxv0K6NODh
-=L4TS
------END PGP SIGNATURE-----
-
---=-Y1vpxwxv3dg0Kw/If2Hx--
