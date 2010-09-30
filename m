@@ -1,46 +1,34 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P1HLQ-0004iI-4h
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Alexander.Stohr@gmx.de>) id 1P1IHe-0002c4-3E
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 13:30:41 +0200
-Received: by iwn2 with SMTP id 2so2360456iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Sep 2010 04:30:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=1YZsbUm6pb9s7uELhJZ/j5HiaKc73HRWHHgLhj495zs=;
-	b=QVSJAbdGlJj1krtQ9eAPdm0pT8++OytwOMwKHxFwtctXa8NKpTHUmbBkXUnFzNrW8P
-	YoPkj/Ay6lklRPQXKpA/DTzQ1HnXWu+1/VmQ6DyFJoSaNN0EPFdp7k1r2nZiO+cR+UCi
-	8yOoMYpdcUOs0FBe8POXJuWoxhFlxtv+BPo64=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=NXKY3pTtCfKuAsofhFF47LV45WvErYtQT0gWNj0OD3s9sXlFDNxB+x1oOlRghf3+br
-	8NY4MbpUkA7Y8QRQ3vTeHajk5PGaiAqSXJ8dqJUXiA3oeDjPcWynqoNsVUxHoiWKgqwz
-	mfrVXG2e8MqOU5aMQUAKgV+QCtr2AZuIYR2W8=
+	Thu, 30 Sep 2010 14:30:48 +0200
+Received: (qmail 29518 invoked by uid 0); 30 Sep 2010 12:30:30 -0000
+Received: from 193.8.40.126 by www166.gmx.net with HTTP;
+	Thu, 30 Sep 2010 14:30:29 +0200 (CEST)
+Date: Thu, 30 Sep 2010 14:30:29 +0200
+From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
+Message-ID: <20100930123029.23600@gmx.net>
 MIME-Version: 1.0
-Received: by 10.231.19.136 with SMTP id a8mr3574289ibb.86.1285846224204; Thu,
-	30 Sep 2010 04:30:24 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Thu, 30 Sep 2010 04:30:24 -0700 (PDT)
-In-Reply-To: <4CA46AD8.2070205@dresearch.de>
-References: <1285777033-19478-1-git-send-email-t.fromm@dresearch.de>
-	<AANLkTikWLrAZaejWvnBGf4hn0CdKV2FgYiMxLEkDn+Wi@mail.gmail.com>
-	<4CA46AD8.2070205@dresearch.de>
-Date: Thu, 30 Sep 2010 13:30:24 +0200
-Message-ID: <AANLkTimOEDXH3=OrROehD+sVtNdihoO8Q3P6Vy0oJscQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-Authenticated: #15156664
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX19F9bNAyN9FEbKxzVq7TCRewu3pbfmfMHB8ISH3fw
+	sfjHgXrtuxbtDQNU59sLIb+XqIdFIw5fnm7Q== 
+X-GMX-UID: 0rqSfQo6YmYBa45ygnc3dYNCWkZTQZQU
+X-FuHaFi: 0.75
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libunwind: force gcc to be built first
+Cc: freetype-devel@nongnu.org
+Subject: [patch] fix for building freetype-native on a symlinked build environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,89 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 11:30:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 30 Sep 2010 12:30:53 -0000
+X-Groupsio-MsgNum: 24213
+Content-Type: multipart/mixed; boundary="========GMX23601285849829271999"
 
-2010/9/30 Thilo Fromm <t.fromm@dresearch.de>:
-> On 09/30/2010 12:21 PM, Frans Meulenbroeks wrote:
->
->>> It looks like libunwind provides header files that are named
->>> identically to gcc header files. gcc then confuses these headers when i=
-t
->>> is built, causing a break of the build.
->>>
->>> This patch makes libunwind depend on gcc which resolves the build issue=
-.
->>> Both
->>> build nicely when gcc is built first.
->>
->> Hm. Ideally this should be patched in gcc.
->
-> I don't think this is a gcc issue. It's a reasonable point of view, right=
-,
-> but pushing the header file issue back to libunwind is a valid POV, too. =
-I
-> think it's rather a problem between those two packages.
+--========GMX23601285849829271999
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-Well I don't know the exact cause:
-if libunwind publishes a header X.h and gcc has an internal header
-file X.h and picks the wrong one then clearly the way it searches the
-include dirs is wrong.
-if both publish X.h and they are incompatible then there is a
-conflict, and some other package could pick up the wrong X.h too.
+in an environment where the "/home" partition had not enough space
+for holding a complete open embedded project i created a symlink to
+an adequate partition on a second drive for hosting the build environment.
 
-(and it could also be the case that libunwind does publish a file
-which it should not publish as it is an internal file)
->
->> Now I feel that if someone
->>
->> does a bitbake libunwind; bitbake -cclean gcc; bitbake gcc things
->> still fail.
->
-> Did you give this a try? I'll check it as soon as I can.
+this turned out to badly impact on misc build steps.
+the most recent problem i found is the build step used for freetype.
 
-I haven't; I'm not behind my build system atm.
+in the seemingly hand written configure script there is
+a directory names comparison where some extra actions
+are needed in case the directory is not the base dir of freetype build.
+in my setup the names were different for some reasons in the embedding tools
+(not caring whats the exact origin). in fact both were the very same dir object.
+this lead to execution of parts of the script that were not intended
+so that this mis-detection finally stopped the build.
 
-The issue that I see is that the last gcc build still may pick up the
-libunwind header.
->
->> Btw what include files are we talking about?
->
-> I took word from Steffen (Sledz) about the cause of the problem, so I did=
-n't
-> investigate any further. Introducing the dependency seemed to fix the
-> problem, so why bother. However, I feel like this kind of problem is bett=
-er
-> fixed (the way you're proposing it) by the package maintainer, if there i=
-s
-> one.
+the attached patch fixes that problem by changing the comparisonn code so that it
+uses the inode numbers of the relevant paths for the comparison.
 
-I'd rather know the root cause.
-A fix without the root cause being known, often ends up to be
-something that just masks the problem.
-No idea if there is a libunwind maintainer.
-gcc maintainer is Khem Raj.
+the patch further applies a check for an already existing subdir.
+this suppresses a message on the console in a benign case.
 
-BTW thanks for your efforts on this & have fun! Frans
->
-> Regards,
-> Thilo
->
-> --
-> Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
-> DResearch Digital Media Systems GmbH
-> Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-> Tel: +49 (30) 515 932 228 =A0 mailto:t.fromm@dresearch.de
-> Fax: +49 (30) 515 932 77 =A0 =A0http://www.dresearch.de
-> Amtsgericht: Berlin Charlottenburg, HRB:54412
-> Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
-> Gesch=E4ftsf=FChrer: Dr. M. Weber, W. M=F6gle
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+the patch applies to freetype-2.3.6 but should be quite easily portable
+to any known later release including the relatively fresh 2.4.2 version.
 
+regards, Alex.
+-- 
+Neu: GMX De-Mail - Einfach wie E-Mail, sicher wie ein Brief!  
+Jetzt De-Mail-Adresse reservieren: http://portal.gmx.net/de/go/demail
 
+--========GMX23601285849829271999
+Content-Type: text/x-patch;
+ charset="iso-8859-15";
+ name="fix-configure-symlink.patch"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: attachment; filename="fix-configure-symlink.patch"
+
+--- freetype-2.3.6.orig/configure	2007-12-06 17:19:34.000000000 +0100
++++ freetype-2.3.6/configure	2010-09-30 13:43:30.000000000 +0200
+@@ -68,9 +68,11 @@
+ abs_ft2_dir=`cd "$ft2_dir" && pwd`
+ 
+ # build a dummy Makefile if we are not building in the source tree
++inode_src=`ls -id $abs_ft2_dir | cut -d " " -f 1 || echo -1`
++inode_dst=`ls -id $abs_curr_dir | cut -d " " -f 1 || echo -2`
+ 
+-if test "$abs_curr_dir" != "$abs_ft2_dir"; then
+-  mkdir reference
++if test $inode_src -ne $inode_dst; then
++  if [ ! -d reference ]; then mkdir reference; fi
+   echo "Copying \`modules.cfg'"
+   cp $abs_ft2_dir/modules.cfg $abs_curr_dir
+   echo "Generating \`Makefile'"
+
+--========GMX23601285849829271999--
