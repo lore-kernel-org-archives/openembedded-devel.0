@@ -1,53 +1,37 @@
-Received: from tx2ehsobe002.messaging.microsoft.com ([65.55.88.12]
-	helo=TX2EHSOBE004.bigfish.com)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1P1Jlt-0004le-OQ
+	(envelope-from <t.fromm@DResearch.de>) id 1P1JpL-0003BC-1L
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 16:06:08 +0200
-Received: from mail186-tx2-R.bigfish.com (10.9.14.248) by
-	TX2EHSOBE004.bigfish.com (10.9.40.24) with Microsoft SMTP Server id
-	14.1.225.8; Thu, 30 Sep 2010 14:05:42 +0000
-Received: from mail186-tx2 (localhost.localdomain [127.0.0.1])	by
-	mail186-tx2-R.bigfish.com (Postfix) with ESMTP id 14F155C8439	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Sep 2010 14:05:42 +0000 (UTC)
-X-SpamScore: -19
-X-BigFish: VPS-19(z971Jz14e3M14ffO1443Nzz1202hzzz32i2a8h43h64h)
-Received: from mail186-tx2 (localhost.localdomain [127.0.0.1]) by mail186-tx2
-	(MessageSwitch) id 1285855533142820_27617;
-	Thu, 30 Sep 2010 14:05:33 +0000 (UTC)
-Received: from TX2EHSMHS042.bigfish.com (unknown [10.9.14.238])	by
-	mail186-tx2.bigfish.com (Postfix) with ESMTP id 773899F00C6	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Sep 2010 14:04:50 +0000 (UTC)
-Received: from kcinpunhjhc02.kpit.com (220.225.38.51) by
-	TX2EHSMHS042.bigfish.com (10.9.99.142) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Thu, 30 Sep 2010 14:04:47 +0000
-Received: from Kcinpunhjcms01.kpit.com ([172.10.16.121]) by
-	kcinpunhjhc02.kpit.com ([172.10.16.124]) with mapi;
-	Thu, 30 Sep 2010 19:34:44 +0530
-From: Soumya R <Soumya.R@kpitcummins.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 30 Sep 2010 19:34:01 +0530
-Thread-Topic: QtOpengl es 2.0 does not work on mips processor
-Thread-Index: AQHLYKhusMxkasR55k6Qr6d7OC8/Hw==
-Message-ID: <76E258664B189C4CBEF125491CA11ECC945B7077A4@KCINPUNHJCMS01.kpit.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 30 Sep 2010 16:09:40 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id A6CB5491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Sep 2010 16:09:27 +0200 (CEST)
+Received: from bfg9000.intern.dresearch.de ([10.32.10.1]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 30 Sep 2010 16:09:27 +0200
+Message-ID: <4CA49A05.9030500@dresearch.de>
+Date: Thu, 30 Sep 2010 16:09:09 +0200
+From: Thilo Fromm <t.fromm@dresearch.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12) Gecko/20100915 Lightning/1.0b1 Thunderbird/3.0.8
 MIME-Version: 1.0
-X-Reverse-DNS: unknown
-X-SA-Exim-Connect-IP: 65.55.88.12
-X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
+To: openembedded-devel@lists.openembedded.org
+References: <1285838213.3805.52.camel@mattotaupa>	<1285850437-2620-1-git-send-email-t.fromm@dresearch.de>
+	<1285852480.3805.79.camel@mattotaupa>
+In-Reply-To: <1285852480.3805.79.camel@mattotaupa>
+X-OriginalArrivalTime: 30 Sep 2010 14:09:27.0476 (UTC)
+	FILETIME=[17C5A740:01CB60A9]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: t.fromm@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: QtOpengl es 2.0 does not work on mips processor
+Subject: Re: [PATCH v3] linux-libc-headers_2.6.24: Add falloc.h to kernel exported headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,82 +45,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 14:06:08 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 30 Sep 2010 14:09:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-Hi All,
+Hello Paul,
 
-I have build qt4-embedded-gles in openembedded , by adding new recipe for E=
-GL support which contains khronos headers and libraries and even the SDK is=
- build .
+>> This adds include/linux/falloc.h to the list of files exported by the =
+kernel to the C library.
+>> The include file is required for building e.g. a recent util-linux-ng =
+against 2.6.24.
+>>
+>> Starting from 2.6.25 a similar patch has been accepted upstream (the m=
+ainline
+>> kernel). For 2.6.24, however, falloc.h is not exported although it's p=
+resent.
+>>
+[...]
+>>   .../linux-libc-headers/files/export_falloc_h.patch |   11 ++++++++++=
++
+>> +++ b/recipes/linux-libc-headers/files/export_falloc_h.patch
+>> @@ -0,0 +1,11 @@
+>> +upstream: OE-only
+>
+> Hmm, do you think it is OE only. As written in my other message I
+> consider this an upstream patch, which has been committed already.
+>
+>          upstream: http://git.kernel.org/?p=3Dlinux/kernel/git/torvalds=
+/linux-2.6.git;a=3Dcommit;h=3D040922c04cf2c8ac70be2e88a8a9614ecdb41d2e
+>          comment: Patch is present in Linux kernel>=3D 2.6.25.
 
-I am woking on mips machine, which contains mali 200(GPU) driver.
+Technically, this upstreamed patch is not my patch. Upstream is way=20
+older, it's from a different author, etc. Plus it's included in=20
+successive kernel releases, but it's not in the version affected by my=20
+patch. From my point of view my patch is an OE-only hack because it=20
+back-ports to an older kernel version a different patch which originated=20
+from OE (?) a long time ago and then went mainline.
 
-Below is the configuration which i have done for opengl es2 support
-
--DQT_NO_QWS_CURSOR \
--DQT_QWS_CLIENTBLIT \
--opengl es2 -plugin-gfx-powervr -v -DQMAKE_LIBS_EGL=3DEGL\
-"
-
-Made some modifications in /src/plugins/gfxdrivers/powerr/QWSWSEGL/Makefile=
- i removed lpvr2d and included lMali and even in .pro file.
-
-I am using the rootfs which i build using openembedded where i check all th=
-e qt application which works fine but not qtopengl application.
-
-when i run ./hellogl_es2 -qws
-
-
-This the error i get =
-
-
-root@(none):/usr/bin/qtopia/examples/opengl/hellogl_es2# ./hellogl_es2 -qws=
- =
-
-Panel(Samsung 800x480), 800x480
-wm97xx-ts 1-0:WM9713,WM9714: No IRQ specified
-************************************************** *******************
-ERROR: In file: src/base/os/linux/mali_uku.c function: _mali_uku_open() lin=
-e: 60
-Failed to open device file /mnt/dev/mali
-Please verify that the file exists and that the driver has been loaded
-
-QEgl::display(): Cannot initialize EGL display: "Bad alloc (0x3003)" =
-
-QEglContext::chooseConfig(): Could not find a suitable EGL configuration =
-
-Requested: "type=3Des2 rgba=3D5,6,5,0 surface-type=3Dwindow" =
-
-Available: =
-
-=03
-
-Then I inserted the mali driver insmod /lib/modules/mali.ko . Even after in=
-serting mali driver , just a plain window will come up on the screen in whi=
-ch i can see only the slider and menu i can not even see the qt icon and i =
-dont even get any errors in the console please see the log below,
-
-./hellogl_es2 -qws disp
-lay -mali.ko
-Panel(Samsung 800x480), 800x480
-wm97xx-ts 1-0:WM9713,WM9714: No IRQ specified
-WARNING: Skipping PP version check
-=03Panel(Samsung 800x480), 800x480
-
-It just stops here..
-
-Am I doing anything wrong please help me out to resolve this. Any suggestio=
-ns is badly needed.
-
-Thanks in advance =
-
+I'll of course change this to your suggestion if this is a problem. I=20
+did not do this yet so my patch won't get confused with the original one=20
+that went mainline.
 
 Regards,
-Soumya
+Thilo
 
-
+--=20
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Tel: +49 (30) 515 932 228   mailto:t.fromm@dresearch.de
+Fax: +49 (30) 515 932 77    http://www.dresearch.de
+Amtsgericht: Berlin Charlottenburg, HRB:54412
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
 
