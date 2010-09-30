@@ -1,34 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <Alexander.Stohr@gmx.de>) id 1P1IHe-0002c4-3E
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <t.fromm@DResearch.de>) id 1P1IS0-00050G-HD
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Sep 2010 14:30:48 +0200
-Received: (qmail 29518 invoked by uid 0); 30 Sep 2010 12:30:30 -0000
-Received: from 193.8.40.126 by www166.gmx.net with HTTP;
-	Thu, 30 Sep 2010 14:30:29 +0200 (CEST)
-Date: Thu, 30 Sep 2010 14:30:29 +0200
-From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
-Message-ID: <20100930123029.23600@gmx.net>
-MIME-Version: 1.0
+	Thu, 30 Sep 2010 14:41:29 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 3D735491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Sep 2010 14:41:17 +0200 (CEST)
+Received: from localhost.localdomain ([10.32.10.1]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 30 Sep 2010 14:41:17 +0200
+From: Thilo Fromm <t.fromm@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #15156664
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX19F9bNAyN9FEbKxzVq7TCRewu3pbfmfMHB8ISH3fw
-	sfjHgXrtuxbtDQNU59sLIb+XqIdFIw5fnm7Q== 
-X-GMX-UID: 0rqSfQo6YmYBa45ygnc3dYNCWkZTQZQU
-X-FuHaFi: 0.75
-X-SA-Exim-Connect-IP: 213.165.64.22
-X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
+Date: Thu, 30 Sep 2010 14:40:37 +0200
+Message-Id: <1285850437-2620-1-git-send-email-t.fromm@dresearch.de>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1285838213.3805.52.camel@mattotaupa>
+References: <1285838213.3805.52.camel@mattotaupa>
+X-OriginalArrivalTime: 30 Sep 2010 12:41:17.0000 (UTC)
+	FILETIME=[C6671480:01CB609C]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: t.fromm@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: freetype-devel@nongnu.org
-Subject: [patch] fix for building freetype-native on a symlinked build environment
+Subject: [PATCH v3] linux-libc-headers_2.6.24: Add falloc.h to kernel exported headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,65 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 12:30:53 -0000
-X-Groupsio-MsgNum: 24213
-Content-Type: multipart/mixed; boundary="========GMX23601285849829271999"
+X-List-Received-Date: Thu, 30 Sep 2010 12:41:30 -0000
 
---========GMX23601285849829271999
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+This adds include/linux/falloc.h to the list of files exported by the kernel to the C library.
+The include file is required for building e.g. a recent util-linux-ng against 2.6.24.
 
-in an environment where the "/home" partition had not enough space
-for holding a complete open embedded project i created a symlink to
-an adequate partition on a second drive for hosting the build environment.
+Starting from 2.6.25 a similar patch has been accepted upstream (the mainline
+kernel). For 2.6.24, however, falloc.h is not exported although it's present.
 
-this turned out to badly impact on misc build steps.
-the most recent problem i found is the build step used for freetype.
+Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
+---
+ .../linux-libc-headers/files/export_falloc_h.patch |   11 +++++++++++
+ .../linux-libc-headers_2.6.24.bb                   |    3 ++-
+ 2 files changed, 13 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/linux-libc-headers/files/export_falloc_h.patch
 
-in the seemingly hand written configure script there is
-a directory names comparison where some extra actions
-are needed in case the directory is not the base dir of freetype build.
-in my setup the names were different for some reasons in the embedding tools
-(not caring whats the exact origin). in fact both were the very same dir object.
-this lead to execution of parts of the script that were not intended
-so that this mis-detection finally stopped the build.
-
-the attached patch fixes that problem by changing the comparisonn code so that it
-uses the inode numbers of the relevant paths for the comparison.
-
-the patch further applies a check for an already existing subdir.
-this suppresses a message on the console in a benign case.
-
-the patch applies to freetype-2.3.6 but should be quite easily portable
-to any known later release including the relatively fresh 2.4.2 version.
-
-regards, Alex.
+diff --git a/recipes/linux-libc-headers/files/export_falloc_h.patch b/recipes/linux-libc-headers/files/export_falloc_h.patch
+new file mode 100644
+index 0000000..2133a36
+--- /dev/null
++++ b/recipes/linux-libc-headers/files/export_falloc_h.patch
+@@ -0,0 +1,11 @@
++upstream: OE-only
++--- a/include/linux/Kbuild	2010-09-27 16:04:29.000000000 +0200
+++++ b/include/linux/Kbuild	2010-09-27 15:59:06.000000000 +0200
++@@ -61,6 +61,7 @@
++ header-y += elf.h
++ header-y += elf-em.h
++ header-y += fadvise.h
+++header-y += falloc.h
++ header-y += fd.h
++ header-y += fdreg.h
++ header-y += fib_rules.h
+diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+index b90c478..e95299b 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
++++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+@@ -2,10 +2,11 @@ require linux-libc-headers.inc
+ 
+ INHIBIT_DEFAULT_DEPS = "1"
+ DEPENDS += "unifdef-native"
+-PR = "r5"
++PR = "r6"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+            file://procinfo.h \
++           file://export_falloc_h.patch \
+            file://unifdef.patch"
+ 
+ S = "${WORKDIR}/linux-${PV}"
 -- 
-Neu: GMX De-Mail - Einfach wie E-Mail, sicher wie ein Brief!  
-Jetzt De-Mail-Adresse reservieren: http://portal.gmx.net/de/go/demail
+1.7.0.4
 
---========GMX23601285849829271999
-Content-Type: text/x-patch;
- charset="iso-8859-15";
- name="fix-configure-symlink.patch"
-Content-Transfer-Encoding: 8bit
-Content-Disposition: attachment; filename="fix-configure-symlink.patch"
 
---- freetype-2.3.6.orig/configure	2007-12-06 17:19:34.000000000 +0100
-+++ freetype-2.3.6/configure	2010-09-30 13:43:30.000000000 +0200
-@@ -68,9 +68,11 @@
- abs_ft2_dir=`cd "$ft2_dir" && pwd`
- 
- # build a dummy Makefile if we are not building in the source tree
-+inode_src=`ls -id $abs_ft2_dir | cut -d " " -f 1 || echo -1`
-+inode_dst=`ls -id $abs_curr_dir | cut -d " " -f 1 || echo -2`
- 
--if test "$abs_curr_dir" != "$abs_ft2_dir"; then
--  mkdir reference
-+if test $inode_src -ne $inode_dst; then
-+  if [ ! -d reference ]; then mkdir reference; fi
-   echo "Copying \`modules.cfg'"
-   cp $abs_ft2_dir/modules.cfg $abs_curr_dir
-   echo "Generating \`Makefile'"
 
---========GMX23601285849829271999--
