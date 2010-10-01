@@ -1,47 +1,34 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P1ndN-0006gS-Tk
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Oct 2010 23:59:24 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o91LwvLj023165
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Oct 2010 16:58:57 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o91LwvVv021183
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Oct 2010 16:58:57 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o91LwvM9026487
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Oct 2010 16:58:57 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Fri, 1 Oct 2010 16:58:57 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Oct 2010 16:58:56 -0500
-Thread-Topic: [oe] [PATCH] recipe licenses: update recipe LICENSE fields
-Thread-Index: Acthpew5UnVyHuZMTVWNueRHVeC+dAACwdIA
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310F21152@dlee06.ent.ti.com>
-References: <1285344532-25131-1-git-send-email-chase.maupin@ti.com>
-	<4CA64203.6070702@freyther.de>
-In-Reply-To: <4CA64203.6070702@freyther.de>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.152
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P1npj-0007Fj-Mm for openembedded-devel@lists.openembedded.org;
+	Sat, 02 Oct 2010 00:12:04 +0200
+Received: from f053035163.adsl.alicedsl.de ([78.53.35.163]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P1npW-0003gJ-Lm for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Oct 2010 22:11:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTi=QQ_79Huh9Pu-yJyRrfRfojgnN5+YF5niOHrTp@mail.gmail.com>
+References: <4CA44597.5070300@dresearch.de>
+	<1285834219-17132-1-git-send-email-sledz@dresearch.de>
+	<4CA606D5.4060608@dresearch.de>
+	<AANLkTi=QQ_79Huh9Pu-yJyRrfRfojgnN5+YF5niOHrTp@mail.gmail.com>
+Date: Sat, 02 Oct 2010 00:11:47 +0200
+Message-ID: <1285971107.4148.8.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] recipe licenses: update recipe LICENSE fields
+Subject: Re: [PATCH] epiphany-2.30.2: unbreak build by disabling CA files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,109 +42,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Oct 2010 21:59:24 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 01 Oct 2010 22:12:05 -0000
+X-Groupsio-MsgNum: 24281
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-gYxywA7Daiv2WXRuXUKI"
+
+--=-gYxywA7Daiv2WXRuXUKI
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Holger Freyther
-> Sent: Friday, October 01, 2010 3:18 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH] recipe licenses: update recipe LICENSE fields
->=20
-> On 09/25/2010 12:08 AM, Chase Maupin wrote:
->=20
+Am Freitag, den 01.10.2010, 09:26 -0700 schrieb Khem Raj:
+> On Fri, Oct 1, 2010 at 9:05 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> > Am 30.09.2010 10:10, schrieb Steffen Sledz:
+> >> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> >> ---
+> >>  recipes/gnome/epiphany_2.30.2.bb |    2 +-
+> >>  1 files changed, 1 insertions(+), 1 deletions(-)
+> >>
+> >> diff --git a/recipes/gnome/epiphany_2.30.2.bb b/recipes/gnome/epiphany=
+_2.30.2.bb
+> >> index 426d468..38798f7 100644
+> >> --- a/recipes/gnome/epiphany_2.30.2.bb
+> >> +++ b/recipes/gnome/epiphany_2.30.2.bb
+> >> @@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] =3D "29b084acfa016540d91d3601e=
+c3dff5c"
+> >>  SRC_URI[archive.sha256sum] =3D "cd0124e71e72142593cfeb442d58d97e99ba9=
+4ace6e31d94717fe977c0bfb98a"
+> >>
+> >>
+> >> -EXTRA_OECONF =3D "--disable-nss --with-engine=3Dwebkit --with-distrib=
+utor-name=3D${DISTRO}"
+> >> +EXTRA_OECONF =3D "--disable-nss --with-engine=3Dwebkit --with-distrib=
+utor-name=3D${DISTRO} --without-ca-file"
+> >>
+> >>  do_configure_prepend() {
+> >>          touch ${S}/gnome-doc-utils.make
 > >
-> > diff --git a/recipes/autoconf/autoconf.inc
-> b/recipes/autoconf/autoconf.inc
-> > index 35b0289..70e24a0 100644
-> > --- a/recipes/autoconf/autoconf.inc
-> > +++ b/recipes/autoconf/autoconf.inc
-> > @@ -1,6 +1,6 @@
-> >  DESCRIPTION =3D "A package of M4 macros to produce scripts to \
-> >  automatically configure sourcecode."
-> > -LICENSE =3D "GPL"
-> > +LICENSE =3D "GPLv3+exception"
+> > Ping!
+> >
+> > The next 'testing-next' branch is knocking at the door. ;-)
 >=20
-> hmm... but at your option the exception might be omitted.. and there are
-> many
-> possible exception clauses... so it doesn't really say what it is.
+> while the patch looks ok you need to bump the PR too as mentioned.
+> Paul could you send your build logs
+> somewhere to look at. We need to know if its something Stefan's build
+> system problem or yours.
 
-So how would you mark this as a package that contains an exception?  My int=
-ention here is to note that this is not standard GPLv3
+Sorry, for not finding this earlier. I have `ca-certificates` installed
+on my build system.
 
->=20
->=20
->=20
-> >  HOMEPAGE =3D "http://www.gnu.org/software/autoconf/"
-> >  SECTION =3D "devel"
-> >  DEPENDS +=3D "m4-native"
-> > diff --git a/recipes/autoconf/autoconf213_2.13.bb
-> b/recipes/autoconf/autoconf213_2.13.bb
-> > index d060bbd..4c855e0 100644
-> > --- a/recipes/autoconf/autoconf213_2.13.bb
-> > +++ b/recipes/autoconf/autoconf213_2.13.bb
-> > @@ -1,4 +1,5 @@
-> >  require autoconf.inc
-> > +LICENSE =3D "GPLv2"
->=20
-> hard to believe... sure it is not v2 and later? it should be the standard
-> FSF
-> text? isn't it?
+        checking location of system Certificate Authority list... /etc/ssl/=
+certs/ca-certificates.crt
+        [=E2=80=A6]
+        CA Certificates file       : /etc/ssl/certs/ca-certificates.crt
 
-It doesn't have the "or later" clause.
+The question is, if `ca-certificates` should be added to `DEPENDS` and
+if that would be picked up.
 
->=20
->=20
-> > +LICENSE =3D "GPLv2 AFLv2.1"
->=20
-> good..
->=20
->=20
->=20
-> > -LICENSE =3D "BSD"
-> > +LICENSE =3D "NewBSD"
->=20
-> could you point me to anyone using the term NewBSD? BSD license without
-> advertisement clause? common but also misleading terms are 2-clause, 3-
-> clause
-> BSD...
+If not, Steffen=E2=80=99s patch is
 
-I got this distinction from what may be a bad place, but it was Wikipedia (=
-http://en.wikipedia.org/wiki/BSD_licenses).  I have heard people refer to N=
-ewBSD, FreeBSD, and BSD around my work.  I was setting these to make it cle=
-ar which version of the BSD the license was.
-
->=20
->=20
->=20
-> > diff --git a/recipes/tinylogin/tinylogin_1.4.bb
-> b/recipes/tinylogin/tinylogin_1.4.bb
-> > index 40171ff..730012b 100644
-> > --- a/recipes/tinylogin/tinylogin_1.4.bb
-> > +++ b/recipes/tinylogin/tinylogin_1.4.bb
-> > @@ -4,7 +4,7 @@ changing passwords, and otherwise maintaining users \
-> >  and groups on an embedded system."
-> >  HOMEPAGE =3D "http://tinylogin.busybox.net/"
-> >  SECTION =3D "base"
-> > -LICENSE =3D "GPLv2"
-> > +LICENSE =3D "GPLv2/NewBSD"
->=20
-> please don't use a '/'. IIRC this source will be put into a folder with
-> that
-> name...
-
-I understand.  How should we denote recipes that have dual licenses?  I fig=
-ured "GPLv2 NewBSD" mean it was either license.  Perhaps this should be "GP=
-Lv2+NewBSD"?
-
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
 
+Thanks,
+
+Paul
+
+--=-gYxywA7Daiv2WXRuXUKI
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkymXJ0ACgkQPX1aK2wOHVjBYgCeLIE2k5qUWHYR6Ez96L9B7S4C
+eoQAni6lcVgbyDksILkLnD/Ng2D98LoZ
+=akMp
+-----END PGP SIGNATURE-----
+
+--=-gYxywA7Daiv2WXRuXUKI--
