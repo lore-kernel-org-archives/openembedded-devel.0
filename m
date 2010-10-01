@@ -1,44 +1,34 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P1YWG-0000gE-Fw
+	(envelope-from <t.fromm@DResearch.de>) id 1P1ZjU-0001yw-Vv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Oct 2010 07:50:58 +0200
-Received: by iwn2 with SMTP id 2so3430557iwn.6
+	Fri, 01 Oct 2010 09:08:43 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 8B585491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Sep 2010 22:50:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Adt2KGKYmW0DziOhb0iMsN1vjAxjZKiAYnIkR8of5bs=;
-	b=r3+0nw8O+MRt3d7s2OfZ9xIZvt0fVl9CiVJuaSnAm9rMURpoWfBJoe4zHwFE8AXLA1
-	U41FptLp+Re4KXpICNjDL3X40bSSQsDSsUco7ZAhhP9D9DMK5FENITSqttwG79hoCbfl
-	tsRbaisIbKaWiWFmnS0W8eEhvkioriryNONJ4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=RXrbM19osHOpohOcFNoHaBi9Y1s/5viYdCJYOF3E/4iyJHsjXhmtTLW/h9nSTS6vBr
-	3zx+ViCWKkRUeOFDVol0KN9UpGQY4tqBOIWesCWt6woLt371nHaYJf4VhtoJpvNk+hDG
-	JQ6jk6IZUQmLld4SPQgmx38S7fWyrBO3L5bFY=
-MIME-Version: 1.0
-Received: by 10.231.146.135 with SMTP id h7mr5033119ibv.149.1285912243338;
-	Thu, 30 Sep 2010 22:50:43 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Thu, 30 Sep 2010 22:50:43 -0700 (PDT)
-In-Reply-To: <AANLkTimSecS8ZnjrMCHYG7fY9ztxY-FmRQBFZTHBHgx4@mail.gmail.com>
-References: <AANLkTimSecS8ZnjrMCHYG7fY9ztxY-FmRQBFZTHBHgx4@mail.gmail.com>
-Date: Fri, 1 Oct 2010 07:50:43 +0200
-Message-ID: <AANLkTi=eGy2QLJLc-N+FU6wdTUmO12+WYdMJzvyKGe4z@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri,  1 Oct 2010 09:08:28 +0200 (CEST)
+Received: from localhost.localdomain ([10.32.10.1]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 1 Oct 2010 09:08:28 +0200
+From: Thilo Fromm <t.fromm@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Fri,  1 Oct 2010 09:07:55 +0200
+Message-Id: <1285916875-27923-1-git-send-email-t.fromm@dresearch.de>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1285857404.3805.106.camel@mattotaupa>
+References: <1285857404.3805.106.camel@mattotaupa>
+X-OriginalArrivalTime: 01 Oct 2010 07:08:28.0220 (UTC)
+	FILETIME=[727ECFC0:01CB6137]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: t.fromm@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: overriding files in a package
+Subject: [PATCH v4] linux-libc-headers_2.6.24: Add falloc.h to kernel exported headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,74 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Oct 2010 05:50:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 01 Oct 2010 07:08:43 -0000
 
-2010/9/30 Cliff Brake <cliff.brake@gmail.com>:
-> One thing I find myself doing is overriding files in one package with
-> another package. =A0As long as the package doing the overriding was last
-> in the IMAGE_INSTALL variable, this used to work. =A0Then bitbake
-> started complaining about overriding packages, but that could be
-> worked around by doing the following:
->
-> RREPLACES_${PN} +=3D "udev"
-> RREPLACES_${PN} +=3D "tzdata"
-> RREPLACES_${PN} +=3D "initscripts"
->
-> Now it seems that the packages no longer processed as listed in the
-> IMAGE_INSTALL variable:
->
-> | Configuring e2fsprogs-tune2fs.
-> | Configuring svs-conf.
-> | Configuring psplash.
-> | Configuring tslib-tests.
-> | Configuring tzdata-atlantic.
-> | Configuring hplip-backend.
-> | Configuring kernel-module-i2c-pxa.
-> | Configuring tzdata-australia.
-> | Configuring kernel-module-ftdi-sio.
-> | Configuring test-gpio.
-> | Configuring kernel-module-oprofile.
-> | Configuring kernel-module-rtl8150.
-> | Configuring xset.
-> | Configuring tzdata-antarctica.
-> | Configuring e2fsprogs-mke2fs.
-> | Configuring tzdata-asia.
-> | Configuring diag2020.
-> | Collected errors:
-> | =A0* resolve_conffiles: Existing conffile
-> /scratch/pp/du-sw-web-builder/pp-du-oe/build/angstrom-2008/tmp/rootfs/svs=
--nand-test-image/etc/device_table
-> is different from the conffile in the new package. The new conffile
-> will be placed at
-> /scratch/pp/du-sw-web-builder/pp-du-oe/build/angstrom-2008/tmp/rootfs/svs=
--nand-test-image/etc/device_table-opkg.
-> | =A0* check_data_file_clashes: Package sysvinit wants to install file
-> /scratch/pp/du-sw-web-builder/pp-du-oe/build/angstrom-2008/tmp/rootfs/svs=
--nand-test-image/etc/init.d/rc
-> | =A0 =A0 =A0 But that file is already provided by package =A0* svs-conf
-> | =A0* opkg_install_cmd: Cannot install package sysvinit.
-> | ERROR: Function do_rootfs failed
-> NOTE: package svs-nand-test-image-1.0-r0: task do_rootfs: Failed
->
-> In my IMAGE_INSTALL, svs-conf is last, but its not configured last.
-> Does this make sense related to recent bitbake and OE changes?
->
-> Is http://sakrah.homelinux.org/node/2 the recommended solution for
-> this problem going forward? =A0This looks workable, but as I'm
-> overriding files in 7 packages, this gets a little tedious.
->
-> Thanks,
-> Cliff
+This adds include/linux/falloc.h to the list of files exported by the kernel to the C library.
+The include file is required for building e.g. a recent util-linux-ng against 2.6.24.
 
-It was my impression that for things like /etc/init.d/rc using
-update-alternatives would be the preferred solution.
+Starting from 2.6.25 a similar patch has been accepted upstream (the mainline
+kernel). For 2.6.24, however, falloc.h is not exported although it's present.
 
-Wrt device_table: I also noticed that, no Idea why I get that or why I
-didn't get it before.
-Didn't have time to peek into it, bit I am interested to learn about this.
+Signed-off-by: Thilo Fromm <t.fromm@dresearch.de>
+---
+ .../linux-libc-headers/files/export_falloc_h.patch |   13 +++++++++++++
+ .../linux-libc-headers_2.6.24.bb                   |    3 ++-
+ 2 files changed, 15 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/linux-libc-headers/files/export_falloc_h.patch
 
-Frans
+diff --git a/recipes/linux-libc-headers/files/export_falloc_h.patch b/recipes/linux-libc-headers/files/export_falloc_h.patch
+new file mode 100644
+index 0000000..ba75e1f
+--- /dev/null
++++ b/recipes/linux-libc-headers/files/export_falloc_h.patch
+@@ -0,0 +1,13 @@
++upstream: OE-only
++comment: Same patch is present in Linux kernel ≥ 2.6.25 and was committed in <http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=commit;h=040922c04cf2c8ac70be2e88a8a9614ecdb41d2e>
++
++--- a/include/linux/Kbuild	2010-09-27 16:04:29.000000000 +0200
+++++ b/include/linux/Kbuild	2010-09-27 15:59:06.000000000 +0200
++@@ -61,6 +61,7 @@
++ header-y += elf.h
++ header-y += elf-em.h
++ header-y += fadvise.h
+++header-y += falloc.h
++ header-y += fd.h
++ header-y += fdreg.h
++ header-y += fib_rules.h
+diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+index b90c478..e95299b 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
++++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+@@ -2,10 +2,11 @@ require linux-libc-headers.inc
+ 
+ INHIBIT_DEFAULT_DEPS = "1"
+ DEPENDS += "unifdef-native"
+-PR = "r5"
++PR = "r6"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+            file://procinfo.h \
++           file://export_falloc_h.patch \
+            file://unifdef.patch"
+ 
+ S = "${WORKDIR}/linux-${PV}"
+-- 
+1.7.0.4
+
 
 
