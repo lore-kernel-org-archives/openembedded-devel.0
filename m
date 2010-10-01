@@ -1,34 +1,45 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P1TMF-0005MH-Vm for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Oct 2010 02:20:16 +0200
-Received: from g225136165.adsl.alicedsl.de ([92.225.136.165]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P1TM3-00086j-TN for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Oct 2010 00:20:04 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P1YSU-0000YL-C6
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Oct 2010 07:47:04 +0200
+Received: by iwn2 with SMTP id 2so3427738iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Sep 2010 22:46:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=H4Gxn2gBd8tfYeSYXRDchKPtb+ZJ+TZjBjGGP46xUq0=;
+	b=UEJIlhOzJHxgQMFf/fs0aCISUqivIkrIt8Dnod9D4qjF03zQmPP7KwbfNowCfZXVNP
+	xbMKbVnxDHEZjKVApvJyM0edKcHbMK57dqFNeewrC9S2XfmVFYmgAA2w/7DEsjSo8Dnm
+	9etRkf1qon6hGDtVkaoh57DhWDlbhGI5eEO6o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=E7H4XuUvt9t2slM/gEEYw2x+UuSzarY1sdxOcuJqvzz/rb1ihpyUZWjE2oGZonWV+a
+	AHSMH7RHezXQWe8QFncI/tqij/PUNFE8i83JQIppiuDpezJoMU2OqP1eXYTvU89xvlbf
+	9nK/4vY7OL0xF1YXImeXhRiGKu51nRmC7Ah/w=
+MIME-Version: 1.0
+Received: by 10.231.79.77 with SMTP id o13mr5098728ibk.36.1285912007502; Thu,
+	30 Sep 2010 22:46:47 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Thu, 30 Sep 2010 22:46:47 -0700 (PDT)
+In-Reply-To: <4CA501AC.2090804@mentor.com>
+References: <AANLkTi=6KMYVWORbcf+BLZYGV6JrscxBEjq-KWXnhzU+@mail.gmail.com>
+	<4CA501AC.2090804@mentor.com>
+Date: Fri, 1 Oct 2010 07:46:47 +0200
+Message-ID: <AANLkTinXuaZWbU9g75ab-HPNq7PTnt=OZ6tU7K_G=nuk@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201009302338.38026.schnitzeltony@gmx.de>
-References: <1285248897-5198-1-git-send-email-schnitzeltony@gmx.de>
-	<AANLkTikzbm2zfbDbXc2a6AJTHuvQC9FaZYmw65udiJq-@mail.gmail.com>
-	<201009240055.34347.schnitzeltony@gmx.de>
-	<201009302338.38026.schnitzeltony@gmx.de>
-Date: Fri, 01 Oct 2010 02:20:02 +0200
-Message-ID: <1285892402.3689.0.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v3] clutter-gtk: Bump to 0.10.8
+Subject: Re: [RFC] delete old monotone recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,62 +53,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Oct 2010 00:20:17 -0000
-X-Groupsio-MsgNum: 24244
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-U5qApgkHzQde36/U4B6g"
-
---=-U5qApgkHzQde36/U4B6g
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 01 Oct 2010 05:47:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag, den 30.09.2010, 23:38 +0200 schrieb Andreas Mueller:
-> On Friday 24 September 2010 00:55:34 you wrote:
-> > On Thursday 23 September 2010 09:44:30 pm Frans Meulenbroeks wrote:
-> > > Frans (btw still interested to learn how it is tested)
-> >=20
-> > My configuration (untouched since I started with OE)
-> >=20
-> > MACHINE =3D "overo"
-> > DISTRO =3D "angstrom-2008.1"
-> > #ANGSTROM_MODE =3D "uclibc" -> glibc
-> >=20
-> > I did=20
-> >=20
-> > 'bitbake clutter-gtk' with org.openembedded.dev / the *.ipk are install=
-ed on overo-machine.
-> >=20
-> > and=20
-> >=20
-> > a full image on gumstix.overo branches containing all clutter recipes.
-> >=20
-> > Tested are the example applications shipped with *-examples package. Al=
-l were working fine. The only application which was working 'weak' was=20
-> > gtk-clutter-multistage mentioning that there was an icon missing in the=
- current theme.
-> >=20
-> > meanwhile Paul did further build tests - also omap3 based.
-> >=20
-> > Andreas
-> >=20
-> The world is not running down without it but could someone take care of t=
-his?
+2010/9/30 Tom Rini <tom_rini@mentor.com>:
+> Frans Meulenbroeks wrote:
+>>
+>> Dear all,
+>>
+>> As it stands we have 6 monotone recipes:
+>>
+>> monotone-5_0.25.2.bb
+>> monotone-6_0.27.bb
+>> monotone-6_0.31.bb
+>> monotone-6_0.33.bb
+>> monotone-6_0.34.bb
+>> monotone-6_0.37.bb
+>>
+>> There are all target-only recipes
+>>
+>> I can imagine it made sense to have a monotone recipe for the target
+>> when our sources were still in monotone, but I feel that nowadays it
+>> is less useful
+>> (apart from the question whether it is useful to have an SCM on an
+>> embedded system).
+>>
+>> Therefore I would like to bring up the following discussion topics:
+>>
+>> Is there any use to keep the old monotone-6 recipes? (all but 0.37).
+>> Or should we remove?
+>>
+>> And what about the monotone-5 recipe. Is that still useful?
+>>
+>> And what about the latest monotone-6 recipe? Is that still useful to kee=
+p?
+>>
+>> Your opinion is appreciated.
+>
+> As an aside, I can't find anything called monotone-5 or monotone-6, just
+> monotone. =A0But I'd otherwise suggest the normal rules apply, delete the
+> unpinned versions assuming they're all GPLv2.
+>
+> --
+> Tom Rini
+> Mentor Graphics Corporation
 
-My build results from PATCH v2 remain the same.
+The dir is called monotone, both monotone-5 and monotone-6 are recipes
+within the monotone dir.
+(note the - between monotone and [56])
 
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Frans
 
---=-U5qApgkHzQde36/U4B6g
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkylKSwACgkQPX1aK2wOHVj2OACdHZuvnaSZAYrjwcpPHniHvQWR
-0twAn3k0BsYntnrOCCMXx5mf+xD1WRhr
-=JTqr
------END PGP SIGNATURE-----
-
---=-U5qApgkHzQde36/U4B6g--
