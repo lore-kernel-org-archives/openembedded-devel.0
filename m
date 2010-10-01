@@ -1,33 +1,34 @@
-Received: from vms173007pub.verizon.net ([206.46.173.7])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P1SWs-000674-W6
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Oct 2010 01:27:14 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9L0057Z2G6DLC0@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	30 Sep 2010 18:26:31 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6E15414AF64; Thu,
-	30 Sep 2010 19:26:30 -0400 (EDT)
-Date: Thu, 30 Sep 2010 19:26:30 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P1TMF-0005MH-Vm for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Oct 2010 02:20:16 +0200
+Received: from g225136165.adsl.alicedsl.de ([92.225.136.165]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P1TM3-00086j-TN for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Oct 2010 00:20:04 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100930232630.GB28782@denix.org>
-References: <1285870326-27944-1-git-send-email-chase.maupin@ti.com>
-MIME-version: 1.0
-In-reply-to: <1285870326-27944-1-git-send-email-chase.maupin@ti.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.7
-X-SA-Exim-Mail-From: denis@denix.org
+In-Reply-To: <201009302338.38026.schnitzeltony@gmx.de>
+References: <1285248897-5198-1-git-send-email-schnitzeltony@gmx.de>
+	<AANLkTikzbm2zfbDbXc2a6AJTHuvQC9FaZYmw65udiJq-@mail.gmail.com>
+	<201009240055.34347.schnitzeltony@gmx.de>
+	<201009302338.38026.schnitzeltony@gmx.de>
+Date: Fri, 01 Oct 2010 02:20:02 +0200
+Message-ID: <1285892402.3689.0.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] ti816x: add support for ti816x family of	devices
+Subject: Re: [PATCH v3] clutter-gtk: Bump to 0.10.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,97 +42,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Sep 2010 23:27:15 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 01 Oct 2010 00:20:17 -0000
+X-Groupsio-MsgNum: 24244
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-U5qApgkHzQde36/U4B6g"
 
-On Thu, Sep 30, 2010 at 01:12:02PM -0500, Chase Maupin wrote:
-> * Add support for the TI816x family of devices.  This includes
->   the c6a816x and am389x devices.
-> * Separate machine types are used because not all packages
->   are valid for each machine.
-> 
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> ---
->  conf/machine/am389x-evm.conf    |    5 +++++
->  conf/machine/c6a816x-evm.conf   |    5 +++++
->  conf/machine/include/ti816x.inc |   26 ++++++++++++++++++++++++++
->  3 files changed, 36 insertions(+), 0 deletions(-)
->  create mode 100644 conf/machine/am389x-evm.conf
->  create mode 100644 conf/machine/c6a816x-evm.conf
->  create mode 100644 conf/machine/include/ti816x.inc
-> 
-> diff --git a/conf/machine/am389x-evm.conf b/conf/machine/am389x-evm.conf
-> new file mode 100644
-> index 0000000..9bfe7a7
-> --- /dev/null
-> +++ b/conf/machine/am389x-evm.conf
-> @@ -0,0 +1,5 @@
-> +#@TYPE: Machine
-> +#@NAME: am389x evm
-> +#@DESCRIPTION: Machine configuration for the am389x evm
-> +
-> +require conf/machine/include/ti816x.inc
-> diff --git a/conf/machine/c6a816x-evm.conf b/conf/machine/c6a816x-evm.conf
-> new file mode 100644
-> index 0000000..a7ab9b0
-> --- /dev/null
-> +++ b/conf/machine/c6a816x-evm.conf
-> @@ -0,0 +1,5 @@
-> +#@TYPE: Machine
-> +#@NAME: c6a816x evm
-> +#@DESCRIPTION: Machine configuration for the c6a816x evm
-> +
-> +require conf/machine/include/ti816x.inc
-> diff --git a/conf/machine/include/ti816x.inc b/conf/machine/include/ti816x.inc
-> new file mode 100644
-> index 0000000..e5205f7
-> --- /dev/null
-> +++ b/conf/machine/include/ti816x.inc
-> @@ -0,0 +1,26 @@
-> +TARGET_ARCH = "arm"
-> +SOC_FAMILY = "ti816x"
-> +
-> +require conf/machine/include/tune-cortexa8.inc
-> +
-> +PREFERRED_PROVIDER_virtual/kernel = "linux-omap3"
+--=-U5qApgkHzQde36/U4B6g
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Chase,
+Am Donnerstag, den 30.09.2010, 23:38 +0200 schrieb Andreas Mueller:
+> On Friday 24 September 2010 00:55:34 you wrote:
+> > On Thursday 23 September 2010 09:44:30 pm Frans Meulenbroeks wrote:
+> > > Frans (btw still interested to learn how it is tested)
+> >=20
+> > My configuration (untouched since I started with OE)
+> >=20
+> > MACHINE =3D "overo"
+> > DISTRO =3D "angstrom-2008.1"
+> > #ANGSTROM_MODE =3D "uclibc" -> glibc
+> >=20
+> > I did=20
+> >=20
+> > 'bitbake clutter-gtk' with org.openembedded.dev / the *.ipk are install=
+ed on overo-machine.
+> >=20
+> > and=20
+> >=20
+> > a full image on gumstix.overo branches containing all clutter recipes.
+> >=20
+> > Tested are the example applications shipped with *-examples package. Al=
+l were working fine. The only application which was working 'weak' was=20
+> > gtk-clutter-multistage mentioning that there was an icon missing in the=
+ current theme.
+> >=20
+> > meanwhile Paul did further build tests - also omap3 based.
+> >=20
+> > Andreas
+> >=20
+> The world is not running down without it but could someone take care of t=
+his?
 
-There is no linux-omap3 recipe in OE, unlike Arago. Anyway, Koen said he'll 
-make necessary updates when he pushes all the ti816x-related changes...
+My build results from PATCH v2 remain the same.
 
--- 
-Denys
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
+--=-U5qApgkHzQde36/U4B6g
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
-> +PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> +
-> +# Increase this everytime you change something in the kernel
-> +MACHINE_KERNEL_PR = "r1"
-> +
-> +KERNEL_IMAGETYPE = "uImage"
-> +
-> +UBOOT_ARCH = "arm"
-> +UBOOT_MACHINE = "ti8168_evm_config"
-> +UBOOT_ENTRYPOINT = "0x80008000"
-> +UBOOT_LOADADDRESS = "0x80008000"
-> +
-> +# Only build u-boot
-> +EXTRA_IMAGEDEPENDS += "u-boot"
-> +
-> +# Ship all kernel modules
-> +IMAGE_FSTYPES ?= "jffs2 tar.bz2"
-> +EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
-> +SERIAL_CONSOLE = "115200 ttyS2"
-> +MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 ethernet"
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
+iEYEABECAAYFAkylKSwACgkQPX1aK2wOHVj2OACdHZuvnaSZAYrjwcpPHniHvQWR
+0twAn3k0BsYntnrOCCMXx5mf+xD1WRhr
+=JTqr
+-----END PGP SIGNATURE-----
 
+--=-U5qApgkHzQde36/U4B6g--
