@@ -1,29 +1,29 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P1dR6-0004bB-37
+	(envelope-from <obi@opendreambox.org>) id 1P1dTU-0004iD-OV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Oct 2010 13:05:58 +0200
+	Fri, 01 Oct 2010 13:08:26 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id E00CD3148EF3
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 8BAAC3148EF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Oct 2010 13:05:43 +0200 (CEST)
+	Fri,  1 Oct 2010 13:08:10 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with LMTP id nYQZBwMwgGmB; Fri,  1 Oct 2010 13:05:38 +0200 (CEST)
+	with LMTP id RiHlviPOTH7r; Fri,  1 Oct 2010 13:08:04 +0200 (CEST)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id DDC333148238;
-	Fri,  1 Oct 2010 13:05:36 +0200 (CEST)
+	by mail.multimedia-labs.de (Postfix) with SMTP id 0AD383148238;
+	Fri,  1 Oct 2010 13:08:03 +0200 (CEST)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Fri, 01 Oct 2010 11:05:36 +0000
+	Fri, 01 Oct 2010 11:08:02 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Oct 2010 11:05:31 +0000
-Message-Id: <1285931131-15759-1-git-send-email-obi@opendreambox.org>
+Date: Fri,  1 Oct 2010 11:07:58 +0000
+Message-Id: <1285931278-15999-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1285836574.3805.42.camel@mattotaupa>
-References: <1285836574.3805.42.camel@mattotaupa>
+In-Reply-To: <1285792594-10032-5-git-send-email-obi@opendreambox.org>
+References: <1285792594-10032-5-git-send-email-obi@opendreambox.org>
 X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -32,7 +32,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] netkit-base-0.17: fix compile with gcc-4.x
+Subject: [PATCH v2] libsigc++-1.2: fix installation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,62 +46,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Oct 2010 11:05:58 -0000
+X-List-Received-Date: Fri, 01 Oct 2010 11:08:26 -0000
 
+* install complains about method_slot.h, which is mentioned twice
+  inside Makefile.am.
 * v2: Added header to patch.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
 ---
-* Resent with correct subject line.
+ recipes/libsigc++-1.2/files/fix-install.patch |   15 +++++++++++++++
+ recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb  |    3 ++-
+ recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb  |    3 ++-
+ 3 files changed, 19 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/libsigc++-1.2/files/fix-install.patch
 
- .../netkit-base-0.17/gcc4_buildfix.patch           |   19 +++++++++++++++++++
- recipes/netkit-base/netkit-base_0.17.bb            |    3 ++-
- 2 files changed, 21 insertions(+), 1 deletions(-)
- create mode 100644 recipes/netkit-base/netkit-base-0.17/gcc4_buildfix.patch
-
-diff --git a/recipes/netkit-base/netkit-base-0.17/gcc4_buildfix.patch b/recipes/netkit-base/netkit-base-0.17/gcc4_buildfix.patch
+diff --git a/recipes/libsigc++-1.2/files/fix-install.patch b/recipes/libsigc++-1.2/files/fix-install.patch
 new file mode 100644
-index 0000000..b5b476c
+index 0000000..1cdfedb
 --- /dev/null
-+++ b/recipes/netkit-base/netkit-base-0.17/gcc4_buildfix.patch
-@@ -0,0 +1,19 @@
++++ b/recipes/libsigc++-1.2/files/fix-install.patch
+@@ -0,0 +1,15 @@
 +upstream: unmaintained
-+source: org.openembedded.dreambox fb4bee1268b9a0600fd6236ac0e9245f17b33f95
 +
-+| servtab.c: In function 'loadconfigent':
-+| servtab.c:785:4: error: lvalue required as left operand of assignment
-+[...]
-+| servtab.c:798:4: error: lvalue required as left operand of assignment
++| ...build/tmp/sysroots/i686-linux/usr/bin/install: will not overwrite just-created `...build/tmp/work/mipsel-oe-linux/libsigc++-1.2-1.2.5-r2/image/usr/include/sigc++-1.2/sigc++/method_slot.h' with `method_slot.h'
 +
-+--- bla/inetd/servtab.c	2000-07-22 22:20:50.000000000 +0200
-++++ bla/inetd/servtab.c	2006-03-01 15:26:46.000000000 +0100
-+@@ -771,7 +771,7 @@
-+ 			return;
-+ 		}
-+ 		
-+-#define SWAP(type, a, b) {type c=(type)a; (type)a=(type)b; (type)b=(type)c;}
-++#define SWAP(type, a, b) {type c=(type)a; a=(type)b; b=(type)c;}
++--- libsigc++-1.2.7/sigc++/Makefile.am.orig	2010-09-24 12:03:24.000000000 +0000
+++++ libsigc++-1.2.7/sigc++/Makefile.am	2010-09-24 12:03:30.000000000 +0000
++@@ -12,7 +12,7 @@
++ sigc_built_h	= bind_return.h	\
++ 		  object_slot.h retype_return.h slot.h bind.h		\
++ 		  class_slot.h hide.h retype.h signal.h       \
++-                  method_slot.h method_slot.h
+++                  method_slot.h
 + 
-+ 		/*
-+ 		 * sep->se_wait may be holding the pid of a daemon
-diff --git a/recipes/netkit-base/netkit-base_0.17.bb b/recipes/netkit-base/netkit-base_0.17.bb
-index c9864ae..4e70164 100644
---- a/recipes/netkit-base/netkit-base_0.17.bb
-+++ b/recipes/netkit-base/netkit-base_0.17.bb
-@@ -1,11 +1,12 @@
- SECTION = "base"
- DESCRIPTION = "netkit-base includes the inetd daemon."
- LICENSE = "BSD"
++ built_sources	= $(sigc_built_cc) $(sigc_built_h)
++ dist_sources	= $(sigc_fixed_cc) $(sigc_fixed_h)
+diff --git a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
+index 2c32f14..6b347e5 100644
+--- a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
++++ b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
+@@ -1,10 +1,11 @@
+ DESCRIPTION = "A library for loose coupling of C++ method calls"
+ SECTION = "libs"
+ PRIORITY = "optional"
 -PR = "r1"
 +PR = "r2"
+ LICENSE = "GPL LGPL"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/libsigc/libsigc++-${PV}.tar.gz \
+ 	   file://autofoo.patch \
++	   file://fix-install.patch \
+ 	   file://pkgconfig.patch"
+ S = "${WORKDIR}/libsigc++-${PV}"
  
- SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-base-${PV}.tar.gz \
-            file://configure.patch \
-            file://mconfig.patch \
-+           file://gcc4_buildfix.patch \
-            file://init \
-            file://inetd.conf"
+diff --git a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb
+index c68105b..179d5a6 100644
+--- a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb
++++ b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.7.bb
+@@ -2,10 +2,11 @@ DESCRIPTION = "A library for loose coupling of C++ method calls"
+ SECTION = "libs"
+ PRIORITY = "optional"
+ LICENSE = "GPL LGPL"
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/1.2/libsigc++-${PV}.tar.bz2 \
+ 	   file://autofoo.patch \
++	   file://fix-install.patch \
+            file://disable-tests.patch"
+ S = "${WORKDIR}/libsigc++-${PV}"
  
 -- 
 1.7.1
