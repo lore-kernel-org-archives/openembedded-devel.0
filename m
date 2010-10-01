@@ -1,47 +1,32 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P1ezP-0002YV-0w
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Oct 2010 14:46:50 +0200
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id o91CjBql020066
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Oct 2010 07:45:11 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id o91CjBK2013967
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Oct 2010 07:45:11 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o91CjBBB021893
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Oct 2010 07:45:11 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Fri, 1 Oct 2010 07:45:10 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Oct 2010 07:45:09 -0500
-Thread-Topic: [oe] [PATCH 1/5] ti816x: add support for ti816x family	of devices
-Thread-Index: Actg9ydDjthR2GPLTQGyqLvDrFiyJgAbyUzA
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310F20FA7@dlee06.ent.ti.com>
-References: <1285870326-27944-1-git-send-email-chase.maupin@ti.com>
-	<20100930232630.GB28782@denix.org>
-In-Reply-To: <20100930232630.GB28782@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.41
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P1f1s-0001IO-Si for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Oct 2010 14:48:37 +0200
+Received: from f053035163.adsl.alicedsl.de ([78.53.35.163]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P1f1f-0005Nl-Pv for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Oct 2010 12:47:48 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <alpine.LNX.2.00.1009091126390.11516@asterix.crazy-teaparty.dyndns.org>
+References: <1283946231-29039-1-git-send-email-fahad_usman@mentor.com>
+	<alpine.LNX.2.00.1009091126390.11516@asterix.crazy-teaparty.dyndns.org>
+Date: Fri, 01 Oct 2010 14:47:46 +0200
+Message-ID: <1285937266.4079.14.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] ti816x: add support for ti816x family	of	devices
+Subject: [REGRESSION] [PATCH] glib-1.2: merged native and non-native recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,124 +40,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Oct 2010 12:47:34 -0000
-X-List-Received-Date: Fri, 01 Oct 2010 12:47:34 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 01 Oct 2010 12:48:48 -0000
+X-Groupsio-MsgNum: 24263
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-1I3QWUo3hhl7ODzKL0hc"
+
+--=-1I3QWUo3hhl7ODzKL0hc
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+Dear Fahad, dear Tom,
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Denys Dmytriyenko
-> Sent: Thursday, September 30, 2010 6:27 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH 1/5] ti816x: add support for ti816x family of
-> devices
+
+Am Donnerstag, den 09.09.2010, 11:31 +0200 schrieb Vitus Jensen:
+
+> On Wed, 8 Sep 2010, Fahad Usman wrote:
 >=20
-> On Thu, Sep 30, 2010 at 01:12:02PM -0500, Chase Maupin wrote:
-> > * Add support for the TI816x family of devices.  This includes
-> >   the c6a816x and am389x devices.
-> > * Separate machine types are used because not all packages
-> >   are valid for each machine.
+> > * removed the glib-1.2-native_1.2.10.bb file
+> > * added NATIVE_INSTALL_WORKS =3D "1"
+> > * added BBCLASSEXTEND =3D "native"
+> > * converted do_stage of native recipe to do_install_virtclass-native in=
+ the combined recipe
+> > * added DEPENDS_virtclass-native =3D "" to avoid dependencies loops
+> > * added gettext in inherit because it was needed by the native recipes
+> > * bumped PR
 > >
-> > Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+> > Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
 > > ---
-> >  conf/machine/am389x-evm.conf    |    5 +++++
-> >  conf/machine/c6a816x-evm.conf   |    5 +++++
-> >  conf/machine/include/ti816x.inc |   26 ++++++++++++++++++++++++++
-> >  3 files changed, 36 insertions(+), 0 deletions(-)
-> >  create mode 100644 conf/machine/am389x-evm.conf
-> >  create mode 100644 conf/machine/c6a816x-evm.conf
-> >  create mode 100644 conf/machine/include/ti816x.inc
-> >
-> > diff --git a/conf/machine/am389x-evm.conf b/conf/machine/am389x-evm.con=
-f
-> > new file mode 100644
-> > index 0000000..9bfe7a7
-> > --- /dev/null
-> > +++ b/conf/machine/am389x-evm.conf
-> > @@ -0,0 +1,5 @@
-> > +#@TYPE: Machine
-> > +#@NAME: am389x evm
-> > +#@DESCRIPTION: Machine configuration for the am389x evm
-> > +
-> > +require conf/machine/include/ti816x.inc
-> > diff --git a/conf/machine/c6a816x-evm.conf b/conf/machine/c6a816x-
-> evm.conf
-> > new file mode 100644
-> > index 0000000..a7ab9b0
-> > --- /dev/null
-> > +++ b/conf/machine/c6a816x-evm.conf
-> > @@ -0,0 +1,5 @@
-> > +#@TYPE: Machine
-> > +#@NAME: c6a816x evm
-> > +#@DESCRIPTION: Machine configuration for the c6a816x evm
-> > +
-> > +require conf/machine/include/ti816x.inc
-> > diff --git a/conf/machine/include/ti816x.inc
-> b/conf/machine/include/ti816x.inc
-> > new file mode 100644
-> > index 0000000..e5205f7
-> > --- /dev/null
-> > +++ b/conf/machine/include/ti816x.inc
-> > @@ -0,0 +1,26 @@
-> > +TARGET_ARCH =3D "arm"
-> > +SOC_FAMILY =3D "ti816x"
-> > +
-> > +require conf/machine/include/tune-cortexa8.inc
-> > +
-> > +PREFERRED_PROVIDER_virtual/kernel =3D "linux-omap3"
+> > recipes/glib-1.2/glib-1.2-native_1.2.10.bb |   49 ---------------------=
+-------
+> > recipes/glib-1.2/glib-1.2_1.2.10.bb        |   20 ++++++++++-
+> > 2 files changed, 18 insertions(+), 51 deletions(-)
 >=20
-> Chase,
 >=20
-> There is no linux-omap3 recipe in OE, unlike Arago. Anyway, Koen said
-> he'll
-> make necessary updates when he pushes all the ti816x-related changes...
+> > diff --git a/recipes/glib-1.2/glib-1.2_1.2.10.bb b/recipes/glib-1.2/gli=
+b-1.2_1.2.10.bb
+> > index 72ee826..67266d4 100644
+> > --- a/recipes/glib-1.2/glib-1.2_1.2.10.bb
+> > +++ b/recipes/glib-1.2/glib-1.2_1.2.10.bb
+> > @@ -4,7 +4,8 @@ SECTION =3D "libs"
+> > PRIORITY =3D "optional"
+> > LICENSE =3D "LGPL"
+> > DEPENDS =3D "glib-1.2-native"
+> > -PR =3D "r4"
+> > +DEPENDS_virtclass-native =3D ""
+> > +PR =3D "r5"
+>=20
+> I don't know if everyone thinks so but I feel the following line is more=
+=20
+> elegant:
+>=20
+> DEPENDS_pn-glib-1.2 +=3D "glib-1.2-native"
+>=20
+> You skip the DEPENDS_virtclass-native line and may use the "+=3D" operato=
+r.
 
-Denys,
+[=E2=80=A6]
 
-Good point.  I see that the kernel changes went in today.=20
+Tom committed an updated patch in 44af05 [1]. Unfortunately building the
+recipe fails for me in `do_configure()`.
 
->=20
-> --
-> Denys
->=20
->=20
-> > +PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot"
-> > +
-> > +# Increase this everytime you change something in the kernel
-> > +MACHINE_KERNEL_PR =3D "r1"
-> > +
-> > +KERNEL_IMAGETYPE =3D "uImage"
-> > +
-> > +UBOOT_ARCH =3D "arm"
-> > +UBOOT_MACHINE =3D "ti8168_evm_config"
-> > +UBOOT_ENTRYPOINT =3D "0x80008000"
-> > +UBOOT_LOADADDRESS =3D "0x80008000"
-> > +
-> > +# Only build u-boot
-> > +EXTRA_IMAGEDEPENDS +=3D "u-boot"
-> > +
-> > +# Ship all kernel modules
-> > +IMAGE_FSTYPES ?=3D "jffs2 tar.bz2"
-> > +EXTRA_IMAGECMD_jffs2 =3D "-lnp -e 0x20000 -s 2048"
-> > +SERIAL_CONSOLE =3D "115200 ttyS2"
-> > +MACHINE_FEATURES =3D "kernel26 apm usbgadget usbhost vfat ext2 etherne=
-t"
-> > --
-> > 1.7.0.4
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+        [=E2=80=A6]
+        | checking for arm-oe-linux-gnueabi-gcc... arm-oe-linux-gnueabi-gcc=
+ -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mth=
+umb-interwork -mno-thumb
+        | checking whether the C compiler works... no
+        | configure: error: in `/oe/build-minimal-eglibc/minimal-dev/work/a=
+rmv7a-oe-linux-gnueabi/glib-1.2-1.2.10-r5/glib-1.2.10':
+        | configure: error: C compiler cannot create executables
+        | See `config.log' for more details.
+        | ERROR: Function do_configure failed
+        NOTE: package glib-1.2-1.2.10-r5: task do_configure: Failed
+        [=E2=80=A6]
+
+Do you know what might cause this? Reverting this commit the recipe can
+be build.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D44af050=
+77f455f5b76cf76eb41dcc62a51de7582
+
+--=-1I3QWUo3hhl7ODzKL0hc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyl2GsACgkQPX1aK2wOHViZYQCZAd8mah32J9PebjXrG94s43Ij
+PgMAn0sF1je2l5hq9dklG1FVBqyA+ztg
+=41zw
+-----END PGP SIGNATURE-----
+
+--=-1I3QWUo3hhl7ODzKL0hc--
