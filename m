@@ -1,38 +1,36 @@
-Received: from mailde1.eads.com ([80.156.44.82])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1P1hwk-0000i1-94 for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Oct 2010 17:55:04 +0200
-Received: from de-gate1.mailhub.intra.corp ([53.154.243.33]) by
-	mailde1.eads.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 1 Oct 2010 17:56:31 +0200
-Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Fri, 1 Oct 2010 17:54:40 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 1 Oct 2010 17:54:40 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <sledz@dresearch.de>) id 1P1i7T-0006LP-U5
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 Oct 2010 18:06:00 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 5371B491282
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  1 Oct 2010 18:05:37 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 1 Oct 2010 18:05:37 +0200
+Message-ID: <4CA606D5.4060608@dresearch.de>
+Date: Fri, 01 Oct 2010 18:05:41 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
 MIME-Version: 1.0
-Date: Fri, 1 Oct 2010 17:54:38 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501A74993@deimsg40.de.net.world>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: svn:// fetcher do not checkout repository at every build
-Thread-Index: ActF0WqNP0WhmhscQgyc1zcdtpEpIAbgJ4hwAAt8VeA=
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 01 Oct 2010 15:54:40.0318 (UTC)
-	FILETIME=[F4EEA5E0:01CB6180]
-X-SA-Exim-Connect-IP: 80.156.44.82
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@cassidian.com
+To: openembedded-devel@lists.openembedded.org
+References: <4CA44597.5070300@dresearch.de>
+	<1285834219-17132-1-git-send-email-sledz@dresearch.de>
+In-Reply-To: <1285834219-17132-1-git-send-email-sledz@dresearch.de>
+X-OriginalArrivalTime: 01 Oct 2010 16:05:37.0096 (UTC)
+	FILETIME=[7C670480:01CB6182]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: svn:// fetcher do not checkout repository at every build
+Subject: Re: [PATCH] epiphany-2.30.2: unbreak build by disabling CA files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,40 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Oct 2010 15:55:14 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Fri, 01 Oct 2010 16:06:01 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Am 30.09.2010 10:10, schrieb Steffen Sledz:
+> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> ---
+>  recipes/gnome/epiphany_2.30.2.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/gnome/epiphany_2.30.2.bb b/recipes/gnome/epiphany_=
+2.30.2.bb
+> index 426d468..38798f7 100644
+> --- a/recipes/gnome/epiphany_2.30.2.bb
+> +++ b/recipes/gnome/epiphany_2.30.2.bb
+> @@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] =3D "29b084acfa016540d91d3601ec=
+3dff5c"
+>  SRC_URI[archive.sha256sum] =3D "cd0124e71e72142593cfeb442d58d97e99ba94=
+ace6e31d94717fe977c0bfb98a"
+> =20
+> =20
+> -EXTRA_OECONF =3D "--disable-nss --with-engine=3Dwebkit --with-distribu=
+tor-name=3D${DISTRO}"
+> +EXTRA_OECONF =3D "--disable-nss --with-engine=3Dwebkit --with-distribu=
+tor-name=3D${DISTRO} --without-ca-file"
+> =20
+>  do_configure_prepend() {
+>          touch ${S}/gnome-doc-utils.make
 
-an additional question according to checking out from svn:
+Ping!
 
-Before the sources are checked out from internal svn following messages
-are received:
+The next 'testing-next' branch is knocking at the door. ;-)
 
---2010-10-01 17:14:57--
-http://www.angstrom-distribution.org/unstable/sources/xxx.tar.gz
-.. snip
-2010-10-01 17:15:10 ERROR 404: Not Found.
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
 
---2010-10-01 17:15:10--  http://mirrors.openembedded.org//xxx.tar.gz
-.. snip
-2010-10-01 17:15:10 ERROR 404: Not Found.
-
---2010-10-01 17:15:10--  http://sources.openembedded.org//xxx.tar.gz
-..snip
-2010-10-01 17:15:10 ERROR 404: Not Found.
-
-after this message the sources get checked out from our internal svn.
-
-It seems that some mirrors are checked first before trying the internal
-svn.
-
-How this behavior may turned off ?
-
-Regards
-Wolfgang
 
 
