@@ -1,33 +1,46 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1P1vJM-0008BA-Aw
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P1vNm-0008IZ-VA
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Oct 2010 08:11:09 +0200
-Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
-	[91.64.127.39])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 232881B10C05
+	Sat, 02 Oct 2010 08:15:44 +0200
+Received: by iwn2 with SMTP id 2so4698532iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Oct 2010 06:14:21 +0000 (UTC)
-Message-ID: <4CA6CCEC.9060805@freyther.de>
-Date: Sat, 02 Oct 2010 14:10:52 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc14 Lightning/1.0b2
-	Thunderbird/3.1.4
+	Fri, 01 Oct 2010 23:15:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=JL/RCY3RHMZR57Rq2Jvqn/on7523aTjq+bYGt+7v+4Y=;
+	b=SW+lNT/eXQTsI2GOFiTFt2X3gkxcpmUSqC/+trRSIoGbI5gC7qkBNOEK8wxhgrt9Bo
+	fPnPPPrtJ2ATmZhQb6aMeafmTgche571xS/utoQoTXU5PmtoX1iEbOyKVC0xbLzc18XX
+	TkOp4vSeik7FMB3nhqXiQn7Y/Fbf7/UavCjuE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=GIsfIJTvmHijSv9fk+VDBK1rn7U+k+r0UFf1gFbvHI3RwzTbPYnoxljfl7mjzEdUxh
+	kcoOkvHumU+4vmb0CMQcu3usrfLRKfIlDY7At+3FV0C9XQSImPt3I8J3dsmiS5en3Rej
+	KP3zr214TBzqTbPjHySYE+g6waCmvmP64ELW0=
 MIME-Version: 1.0
+Received: by 10.231.193.11 with SMTP id ds11mr5232754ibb.192.1286000123643;
+	Fri, 01 Oct 2010 23:15:23 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Fri, 1 Oct 2010 23:15:23 -0700 (PDT)
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310F21152@dlee06.ent.ti.com>
+References: <1285344532-25131-1-git-send-email-chase.maupin@ti.com>
+	<4CA64203.6070702@freyther.de>
+	<131E5DFBE7373E4C8D813795A6AA7F080310F21152@dlee06.ent.ti.com>
+Date: Sat, 2 Oct 2010 08:15:23 +0200
+Message-ID: <AANLkTi=jOASbOCEWLeTZwN-VP2ct82s=c_TzgdhDyZnR@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1285969779-7932-1-git-send-email-tom_rini@mentor.com>	<1285969779-7932-2-git-send-email-tom_rini@mentor.com>
-	<4CA65919.2030203@mentor.com>
-In-Reply-To: <4CA65919.2030203@mentor.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] insane.bbclass: Skip '.pc' in qa_configure
+Subject: Re: [PATCH] recipe licenses: update recipe LICENSE fields
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,22 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Oct 2010 06:11:09 -0000
+X-List-Received-Date: Sat, 02 Oct 2010 06:15:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 10/02/2010 05:56 AM, Tom Rini wrote:
-> Tom Rini wrote:
-> 
-> --compose didn't stick, grr.
-> 
-> These files won't have anything useful in them and are often unreadable so
-> lets just skip them.
+2010/10/1 Maupin, Chase <chase.maupin@ti.com>:
 
-s,files,files in the .pc directory,?
+>
+> I understand. =A0How should we denote recipes that have dual licenses? =
+=A0I figured "GPLv2 NewBSD" mean it was either license. =A0Perhaps this sho=
+uld be "GPLv2+NewBSD"?
 
-besides that looks like a sane change.
+The perl recipes use |
+e.g.
+libtest-pod-perl_1.42.bb:LICENSE =3D "Artistic|GPL"
 
+BTW, if you feel like cleaning up the LICENSE stuff: while looking for
+the above I noticed some perl modules didn't have LICENSE set (or to
+"") and others might have it wrong.
 
+Frans
 
 
