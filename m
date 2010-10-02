@@ -1,30 +1,45 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1P20R7-0002fK-1I
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P24vS-0002CM-Bw
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Oct 2010 13:39:30 +0200
-Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
-	[91.64.127.39])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id AAD251B10C05
+	Sat, 02 Oct 2010 18:27:11 +0200
+Received: by iwn2 with SMTP id 2so5082260iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Oct 2010 11:42:42 +0000 (UTC)
-Message-ID: <4CA719E0.7050409@freyther.de>
-Date: Sat, 02 Oct 2010 19:39:12 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc14 Lightning/1.0b2
-	Thunderbird/3.1.4
+	Sat, 02 Oct 2010 09:26:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=hiWIAWjuN7Q9ZaJyvaLOXIGDQ5C/pxsfJlB84fGruec=;
+	b=DL9Ss2U1uBbQOKoapcP0EAXmAdoUGcbMhaRMfxIutQ2aHXFH59vV4oa6pxGh5EQA/j
+	IVjDfaHG8vZv7jrDIPJagvMxG55ByqLbbt8/C2LzZZM5JvSEhtzI0rKnNBadsg/wYzgY
+	0lyCdjEsJ0TBojtGWvE8Io/Vq/8kMknE4lDBY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=mcxI2aegmrh9Wpj3gyhYouxektN7LmORQT+X3xQXDkXcYnzbeYdmz5fUwnmiLhOHas
+	W0kdBl+4XcgBK8PGMiXv7QnQM3CY2ZoOP9qTYf/k4v9ZUwrcHtMAaza5Lr0td7kmM0a6
+	GX6a4mlaInbU40H+KGJlNGwxP4wT2XS/HaPHQ=
 MIME-Version: 1.0
+Received: by 10.231.33.205 with SMTP id i13mr7431243ibd.59.1286036801312; Sat,
+	02 Oct 2010 09:26:41 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sat, 2 Oct 2010 09:26:41 -0700 (PDT)
+In-Reply-To: <4CA5C47F.4030702@opendreambox.org>
+References: <1285931854-17148-1-git-send-email-obi@opendreambox.org>
+	<1285931854-17148-4-git-send-email-obi@opendreambox.org>
+	<4CA5C47F.4030702@opendreambox.org>
+Date: Sat, 2 Oct 2010 18:26:41 +0200
+Message-ID: <AANLkTi=XnRb+CcuO8DZUBFgd5UeYx+UxaHuOBARyVjOY@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: RPATH in many modules
+Subject: Re: [PATCH 4/4] libcdio-0.82: reduce package size, add dependencies, move recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,67 +53,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Oct 2010 11:39:31 -0000
-X-Groupsio-MsgNum: 24288
-Content-Type: multipart/mixed; boundary="------------050305020605000102050502"
-
---------------050305020605000102050502
+X-List-Received-Date: Sat, 02 Oct 2010 16:27:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Hi all,
+2010/10/1 Andreas Oberritter <obi@opendreambox.org>:
+> On 01.10.2010 13:17, Andreas Oberritter wrote:
+>> * Depend on libcddb and ncurses.
+>
+> It should be mentioned that this change depends on the previously
+> submitted patch to add a recipe for libcddb [1].
+>
+> Best regards,
+> Andreas
+>
+> [1] http://patchwork.openembedded.org/patch/3104/
+>
 
-today I wanted to make the generated toolchain free of RPATH and I was a bit
-surprised to see that even the target libraries contain the rpath and that it
-is not caught by insane.bbclass.
+Applied.
+Next time please bump PR if you change e.g. dependencies.
 
-I have added a more strict check to insane.bbclass to uncover the issue and I
-am fighting neon and its manual libtool usage right now... it might be just
-easier to use chrpath to fix the resulting libraries.
-
-any opinion?
-
---------------050305020605000102050502
-Content-Type: text/x-patch;
- name="0001-insane.bbclass-Check-for-RPATH-to-the-sysroot-and-co.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-insane.bbclass-Check-for-RPATH-to-the-sysroot-and-co.pa";
- filename*1="tch"
-
-From 18a9dbf4d6925a789e5ecf2852e094c0b1d851fe Mon Sep 17 00:00:00 2001
-From: Holger Hans Peter Freyther <zecke@selfish.org>
-Date: Sat, 2 Oct 2010 17:14:33 +0800
-Subject: [PATCH] insane.bbclass: Check for RPATH to the sysroot and complain
-
-For non-native packages having an rpath to the sysroot is
-considered harmful and needs to be fixed. This uncovered
-issues in neon and other packages.
----
- classes/insane.bbclass |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
-
-diff --git a/classes/insane.bbclass b/classes/insane.bbclass
-index 5afa63c..0515158 100644
---- a/classes/insane.bbclass
-+++ b/classes/insane.bbclass
-@@ -168,10 +168,13 @@ def package_qa_check_rpath(file,name,d, elf):
-     if not bad_dir in bb.data.getVar('WORKDIR', d, True):
-         bb.fatal("This class assumed that WORKDIR is ${TMPDIR}/work... Not doing any check")
- 
-+    sysroot = bb.data.getVar('STAGING_DIR_HOST', d, True)
-+    native = bb.data.inherits_class('native', d)
-+
-     output = os.popen("%s -B -F%%r#F '%s'" % (scanelf,file))
-     txt    = output.readline().split()
-     for line in txt:
--        if bad_dir in line:
-+        if bad_dir in line or (not native and sysroot in line):
-             error_msg = "package %s contains bad RPATH %s in file %s" % (name, line, file)
-             sane = package_qa_handle_error(1, error_msg, name, file, d)
- 
--- 
-1.7.3.1
+Frans
 
 
---------------050305020605000102050502--
