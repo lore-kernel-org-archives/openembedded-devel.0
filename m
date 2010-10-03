@@ -1,47 +1,29 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P2QRf-0001UU-7s
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 17:25:48 +0200
-Received: by wwe15 with SMTP id 15so1323339wwe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 08:25:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=hHbixtwPOawosdGdza8IXPw1ZFqdPL9AS8T3/dZJYR8=;
-	b=ANHhrRViufP3j1mt+7a3Z6gbuKMWP2cBDKeemZhknYg+XV9ovCeB1Ic6lNTZN9Z2Q3
-	h6D5Al/W6jnYuuXin2Q1UH2n71Moj84X/3eF/uuhVHPBoSJYmwXFaVfq2M7cgseiWngq
-	RCJw3S6eZUEg60N+aVJqH93PDdUKgWx2iXQnI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=O1Evwr2jSaS8Rtl9smKNVN98qzscMYHo18iLHZbyUWVvtA4Dcjo9PTu7v+f9/2z2Vj
-	FK6KbDdXyHs/OVzgmwkWGJD8pNqmA1tQAeSVEYB1bVurn7lSluB0cJvYX5T7BS298cPp
-	8vgv6HEd6hY5h74oN0/ZvEQzupO82nV5Uy3cY=
-Received: by 10.227.135.141 with SMTP id n13mr7007286wbt.97.1286119529999;
-	Sun, 03 Oct 2010 08:25:29 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.169 with HTTP; Sun, 3 Oct 2010 08:25:09 -0700 (PDT)
-In-Reply-To: <i89i90$7hp$1@dough.gmane.org>
-References: <i89i90$7hp$1@dough.gmane.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sun, 3 Oct 2010 08:25:09 -0700
-X-Google-Sender-Auth: cyeGPkQcNAts5qSfXpsv1J2S__Y
-Message-ID: <AANLkTi=N_zeiKZXy4W5umM=K5sb5JYvHCY5C+bFsrhL9@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P2Qtw-0003hs-H3 for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 17:55:05 +0200
+Received: from f053041250.adsl.alicedsl.de ([78.53.41.250]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P2Qth-0005OM-Ez for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 15:54:45 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Sun, 03 Oct 2010 17:54:44 +0200
+Message-ID: <1286121284.4310.15.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: gtk+ build failure after create_wrapper commit
+Subject: [PATCH] python-{native}-2.6.5: Fix parallel build.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,57 +37,225 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 15:25:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 03 Oct 2010 15:55:05 -0000
+X-Groupsio-MsgNum: 24325
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-xvC2SODM5KpH220sAUHC"
 
-On Sun, Oct 3, 2010 at 2:26 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+--=-xvC2SODM5KpH220sAUHC
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Last nights build failed with:
->
-> | make[2]: Entering directory
->
-> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
-> | /OE/angstrom-dev/sysroots/x86_64-linux/usr/bin/gdk-pixbuf-csource
-> - --raw --build-list          \
-> |               apple_red  ./apple-red.png      \
-> |                 gnome_foot ./gnome-foot.png   \
-> |         > test-inline-pixbufs.h                               \
-> |       || (rm -f test-inline-pixbufs.h && false)
-> | Usage: gdk-pixbuf-csource [options] [image]
-> |        gdk-pixbuf-csource [options] --build-list [[name image]...]
-> |   --stream                   generate pixbuf data stream
-> |   --struct                   generate GdkPixdata structure
-> |   --macros                   generate image size/pixel macros
-> |   --rle                      use one byte run-length-encoding
-> |   --raw                      provide raw image data copy
-> |   --extern                   generate extern symbols
-> |   --static                   generate static symbols
-> |   --decoder                  provide rle decoder
-> |   --name=identifier          C macro/variable name
-> |   --build-list               parse (name, image) pairs
-> |   -h, --help                 show this help message
-> |   -v, --version              print version informations
-> |   --g-fatal-warnings         make warnings fatal (abort)
-> | make[2]: *** [test-inline-pixbufs.h] Error 1
-> | make[2]: Leaving directory
->
-> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
-> | make[1]: *** [all-recursive] Error 1
-> | make[1]: Leaving directory
->
-> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1'
-> | make: *** [all] Error 2
->
-> I'll have a better look at work tomorrow, but if anyone has a fix ready,
-> don't hesitate to speak up :)
->
+Date: Sat, 2 Oct 2010 12:51:03 +0200
 
-Reverted for now, working on a fix.  Sorry about that.  Must have missed
-something obvious.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Randomly the build failed for me with the following error message.
 
+    libpython2.6.so: undefined reference to `_PyParser_Grammar'
+
+The applied patch in [5] tried to fix this problem, but it turns out that t=
+his also was due to a possible race. This is already known in OpenOffice to=
+o [3].
+
+R. David Murray (dmalcolm) <dmalcolm@fedoraproject.org> fixed this in Fedor=
+a [1] and I applied his patch.
+
+I reported this issue upstream [4] and this will only be fixed in Python 2.=
+7, so we have to keep this patch for Python 2.6.
+
+I put 00 in front of the name of the patch file because I did not want to r=
+ename the other patches.
+
+I build tested this with `MACHINE =3D " beagleboard"` for `angstrom-2008.1`=
+ and `minimal-{eglibc,uclibc,libc}`.
+
+[1] http://pkgs.fedoraproject.org/gitweb/?p=3Dpython.git;a=3Dcommitdiff;h=
+=3Db95f6cc2ca6a009f97436c6aa16cfd70547353d9
+[2] http://www.openoffice.org/issues/show_bug.cgi?id=3D114866
+[3] http://doc.services.openoffice.org/wiki/RedTinderboxStatusInEIS
+[4] http://bugs.python.org/issue10013
+[5] http://patchwork.openembedded.org/patch/1899/
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+v1 =E2=86=92 v2: comments by Khem and Tom, add accidentely removed =C2=BB\=
+=C2=AB at the line ending.
+v2 =E2=86=92 v3: Reorder patches, so that they can be applied to python and=
+ python-native.
+---
+ .../python/python-2.6.5/00-fix-parallel-make.patch |   40 ++++++++++++++++=
+++++
+ .../01-use-proper-tools-for-cross-build.patch      |   14 +++---
+ recipes/python/python-native_2.6.5.bb              |    3 +-
+ recipes/python/python_2.6.5.bb                     |    3 +-
+ 4 files changed, 51 insertions(+), 9 deletions(-)
+ create mode 100644 recipes/python/python-2.6.5/00-fix-parallel-make.patch
+
+diff --git a/recipes/python/python-2.6.5/00-fix-parallel-make.patch b/recip=
+es/python/python-2.6.5/00-fix-parallel-make.patch
+new file mode 100644
+index 0000000..c80ca19
+--- /dev/null
++++ b/recipes/python/python-2.6.5/00-fix-parallel-make.patch
+@@ -0,0 +1,40 @@
++upstream: <http://bugs.python.org/issue10013>
++comment: As in the comment in the issue tracker this is fixed for py3k a l=
+ittle differently <http://svn.python.org/view?view=3Drev&revision=3D84068>.=
+ This patch is taken from Fedora.
++
++diff -up Python-2.7/Makefile.pre.in.fix-parallel-make Python-2.7/Makefile.=
+pre.in
++--- Python-2.7/Makefile.pre.in.fix-parallel-make	2010-07-22 15:01:39.56799=
+6932 -0400
+++++ Python-2.7/Makefile.pre.in	2010-07-22 15:47:02.437998509 -0400
++@@ -197,6 +197,7 @@ SIGNAL_OBJS=3D	@SIGNAL_OBJS@
++=20
++ #########################################################################=
+#
++ # Grammar
+++GRAMMAR_STAMP=3D	$(srcdir)/grammar-stamp
++ GRAMMAR_H=3D	$(srcdir)/Include/graminit.h
++ GRAMMAR_C=3D	$(srcdir)/Python/graminit.c
++ GRAMMAR_INPUT=3D	$(srcdir)/Grammar/Grammar
++@@ -514,10 +515,24 @@ Modules/getpath.o: $(srcdir)/Modules/get
++ Modules/python.o: $(srcdir)/Modules/python.c
++ 	$(MAINCC) -c $(PY_CFLAGS) -o $@ $(srcdir)/Modules/python.c
++=20
+++# GNU "make" interprets rules with two dependents as two copies of the ru=
+le.
+++#=20
+++# In a parallel build this can lead to pgen being run twice, once for eac=
+h of
+++# GRAMMAR_H and GRAMMAR_C, leading to race conditions in which the compil=
+er
+++# reads a partially-overwritten copy of one of these files, leading to sy=
+ntax
+++# errors (or linker errors if the fragment happens to be syntactically va=
+lid C)
+++#
+++# See http://www.gnu.org/software/hello/manual/automake/Multiple-Outputs.=
+html
+++# for more information.
+++#
+++# Introduce ".grammar-stamp" as a contrived single output from PGEN to av=
+oid
+++# this:
+++$(GRAMMAR_H) $(GRAMMAR_C): $(GRAMMAR_STAMP)
++=20
++-$(GRAMMAR_H) $(GRAMMAR_C): $(PGEN) $(GRAMMAR_INPUT)
+++$(GRAMMAR_STAMP): $(PGEN) $(GRAMMAR_INPUT)
++ 		-@$(INSTALL) -d Include
++ 		-$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
+++		touch $(GRAMMAR_STAMP)
++=20
++ $(PGEN):	$(PGENOBJS)
++ 		$(CC) $(OPT) $(LDFLAGS) $(PGENOBJS) $(LIBS) -o $(PGEN)
+diff --git a/recipes/python/python-2.6.5/01-use-proper-tools-for-cross-buil=
+d.patch b/recipes/python/python-2.6.5/01-use-proper-tools-for-cross-build.p=
+atch
+index e89faa4..4b485ec 100644
+--- a/recipes/python/python-2.6.5/01-use-proper-tools-for-cross-build.patch
++++ b/recipes/python/python-2.6.5/01-use-proper-tools-for-cross-build.patch
+@@ -14,7 +14,7 @@ Index: Python-2.6.1/Makefile.pre.in
+ =20
+  # The task to run while instrument when building the profile-opt target
+  PROFILE_TASK=3D	$(srcdir)/Tools/pybench/pybench.py -n 2 --with-gc --with-=
+syscheck
+-@@ -205,7 +206,7 @@ GRAMMAR_INPUT=3D	$(srcdir)/Grammar/Grammar
++@@ -206,7 +207,7 @@ GRAMMAR_INPUT=3D	$(srcdir)/Grammar/Grammar
+  #########################################################################=
+#
+  # Parser
+  PGEN=3D		Parser/pgen$(EXE)
+@@ -23,7 +23,7 @@ Index: Python-2.6.1/Makefile.pre.in
+  POBJS=3D		\
+  		Parser/acceler.o \
+  		Parser/grammar1.o \
+-@@ -394,8 +395,8 @@ platform: $(BUILDPYTHON)
++@@ -395,8 +396,8 @@ platform: $(BUILDPYTHON)
+  # Build the shared modules
+  sharedmods: $(BUILDPYTHON)
+  	@case $$MAKEFLAGS in \
+@@ -34,16 +34,16 @@ Index: Python-2.6.1/Makefile.pre.in
+  	esac
+ =20
+  # Build static library
+-@@ -513,7 +514,7 @@ Modules/python.o: $(srcdir)/Modules/pyth
++@@ -531,7 +532,7 @@ $(GRAMMAR_H) $(GRAMMAR_C): $(GRAMMAR_STAMP)
+ =20
+- $(GRAMMAR_H) $(GRAMMAR_C): $(PGEN) $(GRAMMAR_INPUT)
++ $(GRAMMAR_STAMP): $(PGEN) $(GRAMMAR_INPUT)
+  		-@$(INSTALL) -d Include
+ -		-$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
+ +		-$(HOSTPGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
++ 		touch $(GRAMMAR_STAMP)
+ =20
+  $(PGEN):	$(PGENOBJS)
+- 		$(CC) $(OPT) $(LDFLAGS) $(PGENOBJS) $(LIBS) -o $(PGEN)
+-@@ -879,23 +880,23 @@ libinstall:	build_all $(srcdir)/Lib/$(PL
++@@ -902,23 +903,23 @@ libinstall:	build_all $(srcdir)/Lib/$(PL
+  	done
+  	$(INSTALL_DATA) $(srcdir)/LICENSE $(DESTDIR)$(LIBDEST)/LICENSE.txt
+  	PYTHONPATH=3D$(DESTDIR)$(LIBDEST)  $(RUNSHARED) \
+@@ -72,7 +72,7 @@ Index: Python-2.6.1/Makefile.pre.in
+ =20
+  # Create the PLATDIR source directory, if one wasn't distributed..
+  $(srcdir)/Lib/$(PLATDIR):
+-@@ -993,7 +994,7 @@ libainstall:	all
++@@ -1016,7 +1017,7 @@ libainstall:	all
+  # Install the dynamically loadable modules
+  # This goes into $(exec_prefix)
+  sharedinstall:
+diff --git a/recipes/python/python-native_2.6.5.bb b/recipes/python/python-=
+native_2.6.5.bb
+index 76fbbb6..51a1fb1 100644
+--- a/recipes/python/python-native_2.6.5.bb
++++ b/recipes/python/python-native_2.6.5.bb
+@@ -1,9 +1,10 @@
+ require python.inc
+ DEPENDS =3D "openssl-native bzip2-full-native zlib-native readline-native =
+sqlite3-native"
+-PR =3D "${INC_PR}.0"
++PR =3D "${INC_PR}.1"
+=20
+ FILESPATHPKG .=3D ":python-${PV}:python"
+ SRC_URI =3D "http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.bz2 \
++           file://00-fix-parallel-make.patch \
+            file://00-fix-bindir-libdir-for-cross.patch \
+            file://04-default-is-optimized.patch \
+            file://05-enable-ctypes-cross-build.patch \
+diff --git a/recipes/python/python_2.6.5.bb b/recipes/python/python_2.6.5.b=
+b
+index ecd9f78..c8393c1 100644
+--- a/recipes/python/python_2.6.5.bb
++++ b/recipes/python/python_2.6.5.bb
+@@ -3,10 +3,11 @@ DEPENDS =3D "python-native db gdbm openssl readline sqlit=
+e3 tcl zlib\
+            ${@base_contains('DISTRO_FEATURES', 'tk', 'tk', '', d)}"
+ DEPENDS_sharprom =3D "python-native db readline zlib gdbm openssl"
+ # set to .0 on every increase of INC_PR
+-PR =3D "${INC_PR}.0"
++PR =3D "${INC_PR}.1"
+=20
+ SRC_URI =3D "\
+   http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.bz2 \
++  file://00-fix-parallel-make.patch \
+   file://00-fix-bindir-libdir-for-cross.patch \
+   file://01-use-proper-tools-for-cross-build.patch \
+   file://02-remove-test-for-cross.patch \
+--=20
+1.7.1
+
+--=-xvC2SODM5KpH220sAUHC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyop0QACgkQPX1aK2wOHVjatgCdHhzXXfD7lbLd8fAD22rivcTj
+3N8Anj3OTfiW8sLA/jggJgxRqCY8SrjQ
+=FD9U
+-----END PGP SIGNATURE-----
+
+--=-xvC2SODM5KpH220sAUHC--
