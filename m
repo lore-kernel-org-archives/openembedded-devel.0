@@ -1,47 +1,29 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P2MIe-00078l-Fp
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 13:00:18 +0200
-Received: by iwn2 with SMTP id 2so5672552iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 03:59:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=l2LTbWCrdQOPqRAWL9jEz6ADKmCPX4vGDw28AwT+MsI=;
-	b=NjdgtUAE14l3DMUUZl0Yae6jGvWkFXXJqgyINrX28AcPe154vgWQIYzXWk2KRZWVP8
-	xaXMsuGqC8bocHJxf6DBtIpy6qArOEtEXs43gHVMqQwnlQQc//8DHC2U/tSYJS3LljFQ
-	MjZcsVfNE0BgSilDM8AZGXFZJkn/6H6dRI04I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=jKo3Qd0FwndjUWdBcQXDE8DcCiAwNLF8Y7z291dC0IFMGBhTobgvCviepl0mxghJwq
-	E/XZQs74z6G++VsXgSKsteEGUP6P0bqa4YCfNpv18JKpGnxVYgBLsK0mww2zUS6DVn2V
-	5COAtAM7bjSqhAgYaH270aHm2/yFyeJlqnEx0=
-MIME-Version: 1.0
-Received: by 10.231.58.201 with SMTP id i9mr8432825ibh.98.1286103597216; Sun,
-	03 Oct 2010 03:59:57 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sun, 3 Oct 2010 03:59:57 -0700 (PDT)
-In-Reply-To: <AANLkTimEZJpJBXJMzqy9J0G3yA_zZqBBJx+ePPc6ozMo@mail.gmail.com>
-References: <1284124065.18010.3970.camel@rex>
-	<4C90FAC3.6000602@kernelconcepts.de>
-	<AANLkTikXozzcc0BU1rcZQ+fXrN_f+o4eee6EyNw+yBj1@mail.gmail.com>
-	<20100918115345.GC11041@excalibur.local>
-	<AANLkTimEZJpJBXJMzqy9J0G3yA_zZqBBJx+ePPc6ozMo@mail.gmail.com>
-Date: Sun, 3 Oct 2010 12:59:57 +0200
-Message-ID: <AANLkTikOvPJ05Yg6UBABQP81TC7FrexbfcnsgcfeLSHc@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P2MLQ-0007FN-04 for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 13:03:05 +0200
+Received: from f053041250.adsl.alicedsl.de ([78.53.41.250]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P2MLB-00064R-CR for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 11:02:49 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Sun, 03 Oct 2010 13:02:48 +0200
+Message-ID: <1286103768.4310.2.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OEDEM 2010 - Confirmed
+Subject: [PATCH 1/2] python-native_2.6.5: Correct indentation. Use spaces instead of a tabulator.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,22 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 11:00:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 03 Oct 2010 11:03:05 -0000
+X-Groupsio-MsgNum: 24306
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-jVW+Gs43GIDpiVTpo3kY"
 
-Dear all,
+--=-jVW+Gs43GIDpiVTpo3kY
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Is there any news on this (wrt location etc).
-Personally I suggest either the ELC hotel or a location nearby (as I
-guess most people will be staying in the ELC hotel.
+Date: Sat, 2 Oct 2010 18:31:55 +0200
 
-Also, if possible I would appreciate it to have some form of agenda
-upfront so people can prepare something if needed, think about it etc
-etc.
-To kick this off I added a section to the wiki page titled "Agenda
-suggestions" stating some items that I think could be discussed. Feel
-free to add.
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/python/python-native_2.6.5.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Frans
+diff --git a/recipes/python/python-native_2.6.5.bb b/recipes/python/python-=
+native_2.6.5.bb
+index 999335c..76fbbb6 100644
+--- a/recipes/python/python-native_2.6.5.bb
++++ b/recipes/python/python-native_2.6.5.bb
+@@ -7,7 +7,7 @@ SRC_URI =3D "http://www.python.org/ftp/python/${PV}/Python-=
+${PV}.tar.bz2 \
+            file://00-fix-bindir-libdir-for-cross.patch \
+            file://04-default-is-optimized.patch \
+            file://05-enable-ctypes-cross-build.patch \
+-	   file://06-ctypes-libffi-fix-configure.patch \
++           file://06-ctypes-libffi-fix-configure.patch \
+            file://10-distutils-fix-swig-parameter.patch \
+            file://11-distutils-never-modify-shebang-line.patch \
+            file://12-distutils-prefix-is-inside-staging-area.patch \
+--=20
+1.7.1
 
 
+--=-jVW+Gs43GIDpiVTpo3kY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyoYtIACgkQPX1aK2wOHVh4pQCdEj+IYfmxnn6ZAgppArbNuiAh
+bEsAoIMzKQAznliKWrYPiVhrtvmHKM25
+=+2Ti
+-----END PGP SIGNATURE-----
+
+--=-jVW+Gs43GIDpiVTpo3kY--
