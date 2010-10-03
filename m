@@ -1,33 +1,30 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2J8p-0007Mv-RW for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 09:37:52 +0200
+	id 1P2Kql-0007UE-TL for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 11:27:21 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2J8a-0006AZ-8A for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 09:37:36 +0200
+	id 1P2KqW-00085n-9Y for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 11:27:04 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 09:37:36 +0200
+	Sun, 03 Oct 2010 11:27:04 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 09:37:36 +0200
+	Sun, 03 Oct 2010 11:27:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 03 Oct 2010 09:37:28 +0200
-Message-ID: <i89bro$g4g$2@dough.gmane.org>
-References: <4CA719E0.7050409@freyther.de> <i89b3v$g4g$1@dough.gmane.org>
-	<4CA83188.7010203@freyther.de>
+Date: Sun, 03 Oct 2010 11:26:56 +0200
+Message-ID: <i89i90$7hp$1@dough.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <4CA83188.7010203@freyther.de>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -37,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: RPATH in many modules
+Subject: gtk+ build failure after create_wrapper commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +48,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 07:37:52 -0000
+X-List-Received-Date: Sun, 03 Oct 2010 09:27:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 03-10-10 09:32, Holger Freyther wrote:
-> On 10/03/2010 03:24 PM, Koen Kooi wrote:
-> 
->> Could you fix the patch to say to which (wrong) sysroot it points to?
->>
->> MACHINE=beagleboard bitbake libcdio
->>
->> rpath -> sysroots/x86 or rpath -> sysroots/armv7a or both?
-> 
-> ERROR: QA Issue with libgettextlib: package libgettextlib contains bad RPATH
-> /home/ich/build/arm/xscale/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib
-> in file
-> /home/ich/build/arm/xscale/tmp/work/armv5te-angstrom-linux-gnueabi/gettext-0.18-r3/packages-split/libgettextlib/usr/lib/libgettextlib-0.18.so
-> 
-> Can you propose a better wording? From the above I try to indicate that
-> /home/ich/build/arm/xscale/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib
-> is the bad RPATH and that it is inside the libgettextlib-0.18.so
+Hi,
 
-"Target libs and apps contain a bad RPATH to the target sysroot e.g.
-/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib" ?
+Last nights build failed with:
 
->> When we last tried chrpath didn't work in cross mode :(
-> 
-> hmm... maybe it is something simple... :}
+| make[2]: Entering directory
+`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
+| /OE/angstrom-dev/sysroots/x86_64-linux/usr/bin/gdk-pixbuf-csource
+- --raw --build-list          \
+|               apple_red  ./apple-red.png      \
+|                 gnome_foot ./gnome-foot.png   \
+|         > test-inline-pixbufs.h                               \
+|       || (rm -f test-inline-pixbufs.h && false)
+| Usage: gdk-pixbuf-csource [options] [image]
+|        gdk-pixbuf-csource [options] --build-list [[name image]...]
+|   --stream                   generate pixbuf data stream
+|   --struct                   generate GdkPixdata structure
+|   --macros                   generate image size/pixel macros
+|   --rle                      use one byte run-length-encoding
+|   --raw                      provide raw image data copy
+|   --extern                   generate extern symbols
+|   --static                   generate static symbols
+|   --decoder                  provide rle decoder
+|   --name=identifier          C macro/variable name
+|   --build-list               parse (name, image) pairs
+|   -h, --help                 show this help message
+|   -v, --version              print version informations
+|   --g-fatal-warnings         make warnings fatal (abort)
+| make[2]: *** [test-inline-pixbufs.h] Error 1
+| make[2]: Leaving directory
+`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory
+`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1'
+| make: *** [all] Error 2
 
-I certainly hope so!
+I'll have a better look at work tomorrow, but if anyone has a fix ready,
+don't hesitate to speak up :)
+
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMqDK4MkyGM64RGpERAntvAJ4ra8cYKuiT/QrkcB/5Jb2EHzPkZwCgq1/8
-q4Hur7dh657M+0YRlRxSnRo=
-=CytO
+iD8DBQFMqExgMkyGM64RGpERAkW4AJ918nh3ikZV5nXWNnISqAgs+b/GFgCgtDd2
+K8Ak3KUS6zmqi4V/VaeOBAI=
+=56ly
 -----END PGP SIGNATURE-----
 
 
