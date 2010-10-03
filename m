@@ -1,40 +1,47 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2Kql-0007UE-TL for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 11:27:21 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2KqW-00085n-9Y for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 11:27:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 11:27:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P2MIe-00078l-Fp
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 13:00:18 +0200
+Received: by iwn2 with SMTP id 2so5672552iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 11:27:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 03 Oct 2010 03:59:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=l2LTbWCrdQOPqRAWL9jEz6ADKmCPX4vGDw28AwT+MsI=;
+	b=NjdgtUAE14l3DMUUZl0Yae6jGvWkFXXJqgyINrX28AcPe154vgWQIYzXWk2KRZWVP8
+	xaXMsuGqC8bocHJxf6DBtIpy6qArOEtEXs43gHVMqQwnlQQc//8DHC2U/tSYJS3LljFQ
+	MjZcsVfNE0BgSilDM8AZGXFZJkn/6H6dRI04I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=jKo3Qd0FwndjUWdBcQXDE8DcCiAwNLF8Y7z291dC0IFMGBhTobgvCviepl0mxghJwq
+	E/XZQs74z6G++VsXgSKsteEGUP6P0bqa4YCfNpv18JKpGnxVYgBLsK0mww2zUS6DVn2V
+	5COAtAM7bjSqhAgYaH270aHm2/yFyeJlqnEx0=
+MIME-Version: 1.0
+Received: by 10.231.58.201 with SMTP id i9mr8432825ibh.98.1286103597216; Sun,
+	03 Oct 2010 03:59:57 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 3 Oct 2010 03:59:57 -0700 (PDT)
+In-Reply-To: <AANLkTimEZJpJBXJMzqy9J0G3yA_zZqBBJx+ePPc6ozMo@mail.gmail.com>
+References: <1284124065.18010.3970.camel@rex>
+	<4C90FAC3.6000602@kernelconcepts.de>
+	<AANLkTikXozzcc0BU1rcZQ+fXrN_f+o4eee6EyNw+yBj1@mail.gmail.com>
+	<20100918115345.GC11041@excalibur.local>
+	<AANLkTimEZJpJBXJMzqy9J0G3yA_zZqBBJx+ePPc6ozMo@mail.gmail.com>
+Date: Sun, 3 Oct 2010 12:59:57 +0200
+Message-ID: <AANLkTikOvPJ05Yg6UBABQP81TC7FrexbfcnsgcfeLSHc@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 03 Oct 2010 11:26:56 +0200
-Message-ID: <i89i90$7hp$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: gtk+ build failure after create_wrapper commit
+Subject: Re: OEDEM 2010 - Confirmed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,61 +55,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 09:27:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 03 Oct 2010 11:00:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dear all,
 
-Hi,
+Is there any news on this (wrt location etc).
+Personally I suggest either the ELC hotel or a location nearby (as I
+guess most people will be staying in the ELC hotel.
 
-Last nights build failed with:
+Also, if possible I would appreciate it to have some form of agenda
+upfront so people can prepare something if needed, think about it etc
+etc.
+To kick this off I added a section to the wiki page titled "Agenda
+suggestions" stating some items that I think could be discussed. Feel
+free to add.
 
-| make[2]: Entering directory
-`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
-| /OE/angstrom-dev/sysroots/x86_64-linux/usr/bin/gdk-pixbuf-csource
-- --raw --build-list          \
-|               apple_red  ./apple-red.png      \
-|                 gnome_foot ./gnome-foot.png   \
-|         > test-inline-pixbufs.h                               \
-|       || (rm -f test-inline-pixbufs.h && false)
-| Usage: gdk-pixbuf-csource [options] [image]
-|        gdk-pixbuf-csource [options] --build-list [[name image]...]
-|   --stream                   generate pixbuf data stream
-|   --struct                   generate GdkPixdata structure
-|   --macros                   generate image size/pixel macros
-|   --rle                      use one byte run-length-encoding
-|   --raw                      provide raw image data copy
-|   --extern                   generate extern symbols
-|   --static                   generate static symbols
-|   --decoder                  provide rle decoder
-|   --name=identifier          C macro/variable name
-|   --build-list               parse (name, image) pairs
-|   -h, --help                 show this help message
-|   -v, --version              print version informations
-|   --g-fatal-warnings         make warnings fatal (abort)
-| make[2]: *** [test-inline-pixbufs.h] Error 1
-| make[2]: Leaving directory
-`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory
-`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1'
-| make: *** [all] Error 2
-
-I'll have a better look at work tomorrow, but if anyone has a fix ready,
-don't hesitate to speak up :)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMqExgMkyGM64RGpERAkW4AJ918nh3ikZV5nXWNnISqAgs+b/GFgCgtDd2
-K8Ak3KUS6zmqi4V/VaeOBAI=
-=56ly
------END PGP SIGNATURE-----
-
+Frans
 
 
