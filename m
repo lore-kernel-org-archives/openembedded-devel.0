@@ -1,43 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2V5s-0007I2-Ec for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 22:23:36 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2V5b-0007W2-JP for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 22:23:19 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 22:23:19 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P2VJX-0002D5-Vy
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 22:37:44 +0200
+Received: by iwn2 with SMTP id 2so6054317iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 22:23:19 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 03 Oct 2010 13:37:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=KsMcBup+LjuYdGZiQMz5fEqVl2V5elP4HpVZUUzEJI0=;
+	b=f4ivqen77nkYEgpjQO9nTndmTvJNinusPCht3XxYEKACKCevO3LEhMRtRLKriu8G0U
+	aBL2AhZMrrqZlJ/4tErFrY0NSURbD9Pl2ZXdvvWkhoT5vQF6pbVI3RBHsN2qhsDPHeIu
+	tgOOcUzuLq5Zpd4KS4R/i0J/Hnj9mERwzocb0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=PmY5KSsrYVWshszAhfmYOf0aNmZHdtwX3mtKOPr7jI3mUHDo/+HkPxT6wYa9v3e0No
+	i6kHkafTU1F96yqElQPtXa0l6QX7wJSMRbbw6o4qi3i6dCjWxMbAKIxseBoHJzRJVcn9
+	29uK746CHQ86MSKxlAbU0EOdD5NJgS9uuHgTU=
+MIME-Version: 1.0
+Received: by 10.231.151.135 with SMTP id c7mr8987674ibw.184.1286138247305;
+	Sun, 03 Oct 2010 13:37:27 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 3 Oct 2010 13:37:27 -0700 (PDT)
+In-Reply-To: <1285792594-10032-14-git-send-email-obi@opendreambox.org>
+References: <1285792594-10032-1-git-send-email-obi@opendreambox.org>
+	<1285792594-10032-14-git-send-email-obi@opendreambox.org>
+Date: Sun, 3 Oct 2010 22:37:27 +0200
+Message-ID: <AANLkTi=tUws1U6fpoB-FZnBWUwdYTXEQst8H6VoHUyo_@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 03 Oct 2010 22:23:09 +0200
-Message-ID: <i8aond$mbl$1@dough.gmane.org>
-References: <i89i90$7hp$1@dough.gmane.org>	<AANLkTi=N_zeiKZXy4W5umM=K5sb5JYvHCY5C+bFsrhL9@mail.gmail.com>
-	<AANLkTimmq=tcfb_x_S5T4Jp3UXFR7hdofO7arBXvPeKL@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <AANLkTimmq=tcfb_x_S5T4Jp3UXFR7hdofO7arBXvPeKL@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gtk+ build failure after create_wrapper commit
+Subject: Re: [PATCH 13/18] libcddb-1.3.2: initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,93 +53,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 20:23:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 03 Oct 2010 20:37:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/9/29 Andreas Oberritter <obi@opendreambox.org>:
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+> =A0recipes/libcddb/libcddb_1.3.2.bb | =A0 14 ++++++++++++++
+> =A01 files changed, 14 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/libcddb/libcddb_1.3.2.bb
+>
+> diff --git a/recipes/libcddb/libcddb_1.3.2.bb b/recipes/libcddb/libcddb_1=
+.3.2.bb
+> new file mode 100644
+> index 0000000..8539569
+> --- /dev/null
+> +++ b/recipes/libcddb/libcddb_1.3.2.bb
+> @@ -0,0 +1,14 @@
+> +DESCRIPTION =3D "A library for accessing a CDDB server"
+> +HOMEPAGE =3D "http://libcddb.sourceforge.net"
+> +SECTION =3D "libs"
+> +PRIORITY =3D "optional"
+> +LICENSE =3D "LGPLv2"
+> +MAINTAINER =3D "Andreas Frisch <andreas.frisch@multimedia-labs.de>"
+> +
+> +SRC_URI =3D "http://downloads.sourceforge.net/${PN}/${P}.tar.bz2"
+> +
+> +SRC_URI[md5sum] =3D "8bb4a6f542197e8e9648ae597cd6bc8a"
+> +SRC_URI[sha256sum] =3D "35ce0ee1741ea38def304ddfe84a958901413aa829698357=
+f0bee5bb8f0a223b"
+> +
+> +inherit autotools pkgconfig
+> +
+> --
 
-On 03-10-10 20:39, Chris Larson wrote:
-> On Sun, Oct 3, 2010 at 8:25 AM, Chris Larson <clarson@kergoth.com> wrote:
-> 
->>
->>
->> On Sun, Oct 3, 2010 at 2:26 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
->>
->>> Last nights build failed with:
->>>
->>> | make[2]: Entering directory
->>>
->>> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
->>> | /OE/angstrom-dev/sysroots/x86_64-linux/usr/bin/gdk-pixbuf-csource
->>> - --raw --build-list          \
->>> |               apple_red  ./apple-red.png      \
->>> |                 gnome_foot ./gnome-foot.png   \
->>> |         > test-inline-pixbufs.h                               \
->>> |       || (rm -f test-inline-pixbufs.h && false)
->>> | Usage: gdk-pixbuf-csource [options] [image]
->>> |        gdk-pixbuf-csource [options] --build-list [[name image]...]
->>> |   --stream                   generate pixbuf data stream
->>> |   --struct                   generate GdkPixdata structure
->>> |   --macros                   generate image size/pixel macros
->>> |   --rle                      use one byte run-length-encoding
->>> |   --raw                      provide raw image data copy
->>> |   --extern                   generate extern symbols
->>> |   --static                   generate static symbols
->>> |   --decoder                  provide rle decoder
->>> |   --name=identifier          C macro/variable name
->>> |   --build-list               parse (name, image) pairs
->>> |   -h, --help                 show this help message
->>> |   -v, --version              print version informations
->>> |   --g-fatal-warnings         make warnings fatal (abort)
->>> | make[2]: *** [test-inline-pixbufs.h] Error 1
->>> | make[2]: Leaving directory
->>>
->>> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
->>> | make[1]: *** [all-recursive] Error 1
->>> | make[1]: Leaving directory
->>>
->>> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1'
->>> | make: *** [all] Error 2
->>>
->>> I'll have a better look at work tomorrow, but if anyone has a fix ready,
->>> don't hesitate to speak up :)
->>>
->>
->> Reverted for now, working on a fix.  Sorry about that.  Must have missed
->> something obvious.
->>
-> 
-> Fixed, confirmed gtk+ builds with it.  Sorry for the hassle.
+build and tested this (and the libcdio patch), then pushed it.
+saw a patch from koen, but actually that one is not really good either.
+both libcdio and libcddb do not depend on each other, the issue is
+that they come with example progs that depend on both.
+I suggest splitting the recipe in a real lib recipe (which does not
+depend on the other) and a recipe for the examples (which then could
+depend on both libcdio and libcddb).
 
-It doesn't build everytime for me, sometimes I get:
-
-| make[2]: Entering directory
-`/OE/angstrom-dev/work/armv4t-angstrom-linux-gnueabi/gtk+-2.20.1-r10.3/gtk+-2.20.1/demos'
-| /OE/angstrom-dev/sysroots/x86_64-linux/usr/bin/gdk-pixbuf-csource
-- --raw --build-list          \
-|               apple_red  ./apple-red.png      \
-|                 gnome_foot ./gnome-foot.png   \
-|         > test-inline-pixbufs.h                               \
-|       || (rm -f test-inline-pixbufs.h && false)
-| failed to load "./apple-red.png": Couldn't recognize the image file
-format for file './apple-red.png'
-
-Which seems to suggest that either the pixbug loader conf file isn't
-present or the png pixbug loader .so is missing. Going to look at that
-tomorrow, it's almost zzzzz time here.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMqOYtMkyGM64RGpERAgQ3AKC8+YcWVKeX8eTiHYbwOK8gbrEjuQCdE/GA
-tyNQcOp/p6nVwucMzBgs1/M=
-=WFlj
------END PGP SIGNATURE-----
-
+Frans
 
 
