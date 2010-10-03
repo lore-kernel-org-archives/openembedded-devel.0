@@ -1,26 +1,45 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@true.cz>) id 1P2NSz-0004gA-JG
-	for openembedded-devel@openembedded.org; Sun, 03 Oct 2010 14:15:09 +0200
-Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id 5A1C91D363F6;
-	Sun,  3 Oct 2010 14:14:33 +0200 (CEST)
-From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Oct 2010 14:14:34 +0200
-Message-Id: <1286108074-11096-1-git-send-email-ynezz@true.cz>
-X-Mailer: git-send-email 1.7.0.4
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P2NTx-0005DW-5S
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 14:16:00 +0200
+Received: by iwn2 with SMTP id 2so5710278iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 Oct 2010 05:15:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=TSTtCPkE8gmZl+fm1rYj4RsMuDlOH/5n1hmZ34T5dq8=;
+	b=LLRkHscMoJ14Da3PQ7j8UqVAiQhgnKm4zAR2w9O6YUxSkP93BqA711V7PCGi+ibEL5
+	/+aOi/RG5nhfo9GIgsBglN2Bg7rPdTRlPtspP7fwn88a5GW4nx1HHwPjPzj/RzVgmQRU
+	4HwNiubdnFWEFgKJdUGi6O5BWkfKp+Is1snUc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=BqHLLPWHB2DtBsurZpnMsyHxA2zrdUGX/8Mys2rwAAwRCDT0/aG7rY8t/o9SctbRcn
+	QwMCwSNWoFnXyE5J60V9IR7zpK3vG3s7DniUtGHqa14ZuKTUiX0sUKVG1E02ztfZReE9
+	vnz07XDYT2Ny4jjvAqlWicW8n4vrjAksxDjn0=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@true.cz
+Received: by 10.231.14.69 with SMTP id f5mr8496057iba.116.1286108141592; Sun,
+	03 Oct 2010 05:15:41 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 3 Oct 2010 05:15:41 -0700 (PDT)
+In-Reply-To: <AANLkTinS0BVcVmDv4LrJL9YwkP4sCydBwx=Ff9fVMzHW@mail.gmail.com>
+References: <AANLkTi=Wt1eRcSoXzjwMJizLBgQ-+hV=Xj1UWW155MWQ@mail.gmail.com>
+	<AANLkTinS0BVcVmDv4LrJL9YwkP4sCydBwx=Ff9fVMzHW@mail.gmail.com>
+Date: Sun, 3 Oct 2010 14:15:41 +0200
+Message-ID: <AANLkTi=SQUqwqcHs+SYS7Ebc7WQo-p=b15cwU4OTE0=S@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] ntpclient: fix adjtimex compile error on uclibc
+Subject: Re: some more non fetching recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,89 +53,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 12:15:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 03 Oct 2010 12:16:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-ntpclient.o: In function `set_freq':
-ntpclient-2007_365-r3/ntpclient-2007/ntpclient.c:166: undefined reference=
- to `__adj timex'
-ntpclient.o: In function `get_current_freq':
-ntpclient-2007_365-r3/ntpclient-2007/ntpclient.c:149: undefined reference=
- to `__adj timex'
+2010/10/3 Martin Jansa <martin.jansa@gmail.com>:
 
-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
----
- recipes/ntpclient/files/fix-adjtimex-uclibc.patch |   22 +++++++++++++++=
-++++++
- recipes/ntpclient/ntpclient_2007_365.bb           |   10 +++++++-
- 2 files changed, 30 insertions(+), 2 deletions(-)
- create mode 100644 recipes/ntpclient/files/fix-adjtimex-uclibc.patch
+>
+>> xorg-driver/xf86-input-vmmouse_12.6.10.bb
+>> xorg-driver/xf86-input-vmmouse_12.6.5.bb
+>> xorg-driver/xf86-video-geode_2.11.6.bb
+>> xorg-driver/xf86-video-geode_2.11.9.b
+>
+>
+> All 4 redownloaded OK, I guess you got
+>
+> NOTE: Out of date cache found, rebuilding...
+> Command execution failed: Traceback (most recent call last):
+> =A0File "/usr/lib64/python2.6/site-packages/bb/command.py", line 88, in
+> runAsyncCommand
+> =A0 =A0commandmethod(self.cmds_async, self, options)
+> =A0File "/usr/lib64/python2.6/site-packages/bb/command.py", line 164,
+> in buildFile
+> =A0 =A0command.cooker.buildFile(bfile, task)
+> =A0File "/usr/lib64/python2.6/site-packages/bb/cooker.py", line 691, in b=
+uildFile
+> =A0 =A0self.status.task_deps[fn]['depends'] =3D {}
+> TypeError: 'NoneType' object does not support item assignment
+>
+> because of: COMPATIBLE_HOST =3D "i.86.*-linux" in those 4 recipes..
 
-diff --git a/recipes/ntpclient/files/fix-adjtimex-uclibc.patch b/recipes/=
-ntpclient/files/fix-adjtimex-uclibc.patch
-new file mode 100644
-index 0000000..49472c9
---- /dev/null
-+++ b/recipes/ntpclient/files/fix-adjtimex-uclibc.patch
-@@ -0,0 +1,22 @@
-+Index: ntpclient-2007/ntpclient.c
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- ntpclient-2007.orig/ntpclient.c	2010-10-01 17:25:20.000000000 +0200
-++++ ntpclient-2007/ntpclient.c	2010-10-01 17:25:38.000000000 +0200
-+@@ -146,7 +146,7 @@
-+ #ifdef __linux__
-+ 	struct timex txc;
-+ 	txc.modes=3D0;
-+-	if (__adjtimex(&txc) < 0) {
-++	if (adjtimex(&txc) < 0) {
-+ 		perror("adjtimex"); exit(1);
-+ 	}
-+ 	return txc.freq;
-+@@ -163,7 +163,7 @@
-+ 	struct timex txc;
-+ 	txc.modes =3D ADJ_FREQUENCY;
-+ 	txc.freq =3D new_freq;
-+-	if (__adjtimex(&txc) < 0) {
-++	if (adjtimex(&txc) < 0) {
-+ 		perror("adjtimex"); exit(1);
-+ 	}
-+ 	return txc.freq;
-diff --git a/recipes/ntpclient/ntpclient_2007_365.bb b/recipes/ntpclient/=
-ntpclient_2007_365.bb
-index 40a4e1b..9d38245 100644
---- a/recipes/ntpclient/ntpclient_2007_365.bb
-+++ b/recipes/ntpclient/ntpclient_2007_365.bb
-@@ -4,14 +4,20 @@ AUTHOR =3D "Larry Doolittle <larry@doolittle.boa.org>"
- RDEPENDS_${PN} =3D "busybox"
- SECTION =3D "admin"
- LICENSE =3D "GPLv2"
--PR =3D "r3"
-+PR =3D "r4"
- # The ntpclient package uses version numbers that include an underscore =
-:(
- PV =3D "2007_365"
- # ntpclient unpacks into a directory that doesn't include version info :=
-(
- S =3D "${WORKDIR}/${PN}-2007"
-=20
- SRC_URI =3D "http://doolittle.icarus.com/ntpclient/ntpclient_${PV}.tar.g=
-z \
--           file://init"
-+           file://init \
-+          "
-+
-+UCLIBC_PATCHES =3D " file://fix-adjtimex-uclibc.patch \
-+                 "
-+SRC_URI_append_linux-uclibc =3D ${UCLIBC_PATCHES}
-+SRC_URI_append_linux-uclibceabi =3D ${UCLIBC_PATCHES}
-=20
- INITSCRIPT_NAME =3D "ntpclient"
- INITSCRIPT_PARAMS =3D "defaults 65"
---=20
-1.7.0.4
+Ah ok.
+I got
 
+ERROR: Command execution failed: Traceback (most recent call last):
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncComm=
+and
+    commandmethod(self.cmds_async, self, options)
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 174, in buildFile
+    command.cooker.buildFile(bfile, task)
+  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 650, in buildFile
+    self.status.task_deps[fn]['depends'] =3D {}
+TypeError: 'NoneType' object does not support item assignment
+
+and indeed I did not use an *86 target.
+Guess we need a better error message here
+Something like:
+NOTE: the recipe you are trying to build does not match your
+machine/architecture"
+
+Frans
 
 
