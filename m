@@ -1,45 +1,26 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P2NTx-0005DW-5S
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 14:16:00 +0200
-Received: by iwn2 with SMTP id 2so5710278iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Oct 2010 05:15:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=TSTtCPkE8gmZl+fm1rYj4RsMuDlOH/5n1hmZ34T5dq8=;
-	b=LLRkHscMoJ14Da3PQ7j8UqVAiQhgnKm4zAR2w9O6YUxSkP93BqA711V7PCGi+ibEL5
-	/+aOi/RG5nhfo9GIgsBglN2Bg7rPdTRlPtspP7fwn88a5GW4nx1HHwPjPzj/RzVgmQRU
-	4HwNiubdnFWEFgKJdUGi6O5BWkfKp+Is1snUc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=BqHLLPWHB2DtBsurZpnMsyHxA2zrdUGX/8Mys2rwAAwRCDT0/aG7rY8t/o9SctbRcn
-	QwMCwSNWoFnXyE5J60V9IR7zpK3vG3s7DniUtGHqa14ZuKTUiX0sUKVG1E02ztfZReE9
-	vnz07XDYT2Ny4jjvAqlWicW8n4vrjAksxDjn0=
-MIME-Version: 1.0
-Received: by 10.231.14.69 with SMTP id f5mr8496057iba.116.1286108141592; Sun,
-	03 Oct 2010 05:15:41 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sun, 3 Oct 2010 05:15:41 -0700 (PDT)
-In-Reply-To: <AANLkTinS0BVcVmDv4LrJL9YwkP4sCydBwx=Ff9fVMzHW@mail.gmail.com>
-References: <AANLkTi=Wt1eRcSoXzjwMJizLBgQ-+hV=Xj1UWW155MWQ@mail.gmail.com>
-	<AANLkTinS0BVcVmDv4LrJL9YwkP4sCydBwx=Ff9fVMzHW@mail.gmail.com>
-Date: Sun, 3 Oct 2010 14:15:41 +0200
-Message-ID: <AANLkTi=SQUqwqcHs+SYS7Ebc7WQo-p=b15cwU4OTE0=S@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <ynezz@true.cz>) id 1P2PxY-0005k2-Nz
+	for openembedded-devel@openembedded.org; Sun, 03 Oct 2010 16:54:41 +0200
+Received: from localhost.localdomain (localhost [127.0.0.1])
+	by mengele.ibawizard.net (Postfix) with ESMTP id C34781D363EB;
+	Sun,  3 Oct 2010 16:54:21 +0200 (CEST)
+From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Sun,  3 Oct 2010 16:54:19 +0200
+Message-Id: <1286117659-32674-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@true.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: some more non fetching recipes
+Subject: [PATCH] init-scripts: fix save-rtc error with date formatting on uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,55 +34,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 12:16:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 03 Oct 2010 14:54:41 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-2010/10/3 Martin Jansa <martin.jansa@gmail.com>:
+uClibc's date does support only SUSv3 strptime[1], so the date command in
+save-rtc.sh fails with 'date: invalid date '%2m%2d%2H%2M2010'.
 
->
->> xorg-driver/xf86-input-vmmouse_12.6.10.bb
->> xorg-driver/xf86-input-vmmouse_12.6.5.bb
->> xorg-driver/xf86-video-geode_2.11.6.bb
->> xorg-driver/xf86-video-geode_2.11.9.b
->
->
-> All 4 redownloaded OK, I guess you got
->
-> NOTE: Out of date cache found, rebuilding...
-> Command execution failed: Traceback (most recent call last):
-> =A0File "/usr/lib64/python2.6/site-packages/bb/command.py", line 88, in
-> runAsyncCommand
-> =A0 =A0commandmethod(self.cmds_async, self, options)
-> =A0File "/usr/lib64/python2.6/site-packages/bb/command.py", line 164,
-> in buildFile
-> =A0 =A0command.cooker.buildFile(bfile, task)
-> =A0File "/usr/lib64/python2.6/site-packages/bb/cooker.py", line 691, in b=
-uildFile
-> =A0 =A0self.status.task_deps[fn]['depends'] =3D {}
-> TypeError: 'NoneType' object does not support item assignment
->
-> because of: COMPATIBLE_HOST =3D "i.86.*-linux" in those 4 recipes..
+1. http://www.opengroup.org/onlinepubs/009695399/functions/strptime.html
 
-Ah ok.
-I got
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+---
+ recipes/initscripts/files/save-rtc-uclibc.sh |    5 +++++
+ recipes/initscripts/initscripts_1.0.bb       |   14 ++++++++++++--
+ 2 files changed, 17 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/initscripts/files/save-rtc-uclibc.sh
 
-ERROR: Command execution failed: Traceback (most recent call last):
-  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncComm=
-and
-    commandmethod(self.cmds_async, self, options)
-  File "/home/frans/oe/bitbake/lib/bb/command.py", line 174, in buildFile
-    command.cooker.buildFile(bfile, task)
-  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 650, in buildFile
-    self.status.task_deps[fn]['depends'] =3D {}
-TypeError: 'NoneType' object does not support item assignment
+diff --git a/recipes/initscripts/files/save-rtc-uclibc.sh b/recipes/inits=
+cripts/files/save-rtc-uclibc.sh
+new file mode 100644
+index 0000000..8f4e587
+--- /dev/null
++++ b/recipes/initscripts/files/save-rtc-uclibc.sh
+@@ -0,0 +1,5 @@
++#! /bin/sh
++/etc/init.d/hwclock.sh stop
++
++# Update the timestamp
++date +%m%d%H%M%Y > /etc/timestamp
+diff --git a/recipes/initscripts/initscripts_1.0.bb b/recipes/initscripts=
+/initscripts_1.0.bb
+index 8c38d7f..cc60624 100644
+--- a/recipes/initscripts/initscripts_1.0.bb
++++ b/recipes/initscripts/initscripts_1.0.bb
+@@ -4,7 +4,7 @@ PRIORITY =3D "required"
+ DEPENDS =3D "makedevs"
+ RDEPENDS_${PN} =3D "makedevs"
+ LICENSE =3D "GPL"
+-PR =3D "r123"
++PR =3D "r124"
+=20
+ SRC_URI =3D "file://functions \
+            file://halt \
+@@ -31,7 +31,8 @@ SRC_URI =3D "file://functions \
+            file://device_table.txt \
+            file://populate-volatile.sh \
+            file://volatiles \
+-           file://save-rtc.sh"
++           file://save-rtc.sh \
++           file://save-rtc-uclibc.sh"
+=20
+ SRC_URI_append_arm =3D " file://alignment.sh"
+=20
+@@ -137,3 +138,12 @@ do_install_append_angstrom () {
+ do_install_append_hipox () {
+ 	ln -sf		../init.d/sysfs.sh	${D}${sysconfdir}/rc6.d/S80sysfs
+ }
++
++# uclibc's date does support only SUSv3 strptime()
++do_install_append_linux-uclibc() {
++	install -m 0755    ${WORKDIR}/save-rtc-uclibc.sh ${D}${sysconfdir}/init=
+.d/save-rtc.sh
++}
++
++do_install_append_linux-uclibceabi() {
++	install -m 0755    ${WORKDIR}/save-rtc-uclibc.sh ${D}${sysconfdir}/init=
+.d/save-rtc.sh
++}
+--=20
+1.7.0.4
 
-and indeed I did not use an *86 target.
-Guess we need a better error message here
-Something like:
-NOTE: the recipe you are trying to build does not match your
-machine/architecture"
-
-Frans
 
 
