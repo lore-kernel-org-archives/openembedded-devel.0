@@ -1,31 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P2MgG-0007BW-8Q for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 13:24:39 +0200
-Received: from f053041250.adsl.alicedsl.de ([78.53.41.250]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P2Mg1-00006l-QC for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 11:24:21 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1P2N1W-0001qG-Ah
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 13:46:35 +0200
+Received: by wwe15 with SMTP id 15so1229347wwe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 Oct 2010 04:46:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=O3nHkqYei0JfttnG6hzu5gQGIVBo7n63OUxbwSkrTSM=;
+	b=i9yvHr3OwRC6XSVJjUrNP2eW1WcaztmnWJTGYtrRo78wbXk9Gbz2t589VJcvvHI8wS
+	0Vjv8f+GoNSncdsEBXqTmfKdoDWxKuK5JFmO4m18f92DInKDdRRQYVhZXSn5tumnJBbg
+	6xr3n2nkCDMh1DkTfmEP+lnDb2JGtyCiGSbCU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=EccksfoWUTTkjx35DtJwfHF9H8xfnzXIMq1PueMw899cIktwJuIC342xdicrv0+etP
+	42EV80OmGBLDZGOXU4O8chGOcXsZ9KbplPIricwc6AYdJ1aIMCiB+3hgQlnnETnPmviz
+	6mJw/ceMwU/e/+mbz9p70I69xN/jvNkVpQHo8=
+MIME-Version: 1.0
+Received: by 10.227.54.208 with SMTP id r16mr6298976wbg.192.1286106375938;
+	Sun, 03 Oct 2010 04:46:15 -0700 (PDT)
+Received: by 10.227.141.70 with HTTP; Sun, 3 Oct 2010 04:46:15 -0700 (PDT)
+In-Reply-To: <AANLkTi=Wt1eRcSoXzjwMJizLBgQ-+hV=Xj1UWW155MWQ@mail.gmail.com>
+References: <AANLkTi=Wt1eRcSoXzjwMJizLBgQ-+hV=Xj1UWW155MWQ@mail.gmail.com>
+Date: Sun, 3 Oct 2010 13:46:15 +0200
+Message-ID: <AANLkTinS0BVcVmDv4LrJL9YwkP4sCydBwx=Ff9fVMzHW@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1286103879.4310.4.camel@mattotaupa>
-References: <1286103879.4310.4.camel@mattotaupa>
-Date: Sun, 03 Oct 2010 13:24:19 +0200
-Message-ID: <1286105059.4310.8.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2 v2] python-{native}-2.6.5: Fix parallel build.
+Subject: Re: some more non fetching recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,67 +51,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 11:24:39 -0000
-X-Groupsio-MsgNum: 24308
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-nJB0g86JZXvCEaYpW4Bw"
+X-List-Received-Date: Sun, 03 Oct 2010 11:46:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-nJB0g86JZXvCEaYpW4Bw
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, Sep 26, 2010 at 12:21 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Apart from the opensync and uclibc recipes that did not fetch and were
+> reported before, I did get fetch issues for the files below.
+> Haven't had time to dig into these, so some of these might be false alarms.
+> If anyone feels attached to a recipe or can say something about it,
+> please take action.
+>
+> Frans.
+>
+> PS: I removed the ti folder in this test; that one has recipes for
+> which the SRC_URI seems to depend upon an external var (or vars) or
+> which needed to be downloaded manually
+>
+> binutils/mingw-binutils-canadian-cross_2.20.bb
+> binutils/mingw-binutils_2.20.bb
+> bluez/bluez-gnome_cvs.bb
+> cacao/cacao-native_hg.bb
+> cumulus/cumulus_cvs.bb
+> dpkg/dpkg-native_1.14.29.bb
+> dpkg/dpkg_1.14.29.bb
+> gpe-edit/gpe-edit_svn.bb
+> gpsdrive/gpsdrive-pda_2.10pre2.bb
+> gstreamer/gst-plugins-ugly-sid_0.10.7.bb
+> hal/hal_git.bb
+> kismet/kismet-newcore_svn.bb
+> kismet/kismet_svn.bb
+> konqueror/konqueror-embedded_20060404.bb
+> linux-uml/linux-uml_2.4.26.bb
+> linux-uml/linux-uml_2.6.11-rc2-mm1.bb
+> maemo/nokia770-init_1.0.bb
+> mamona/cx3110x-770he_0.8.1.bb
+> mamona/cx3110x-chinooke_2.0.15.bb
+> mamona/cx3110x-diablo_2.0.15.bb
+> mamona/uinput_2.6.21.bb
 
-Am Sonntag, den 03.10.2010, 13:04 +0200 schrieb Paul Menzel:
-> Date: Sat, 2 Oct 2010 12:51:03 +0200
->=20
-> Randomly the build failed for me with the following error message.
->=20
->     libpython2.6.so: undefined reference to `_PyParser_Grammar'
->=20
-> The applied patch in [5] tried to fix this problem, but it turns out that=
- this was due to a possible race and already known in OpenOffice too [3].
->=20
-> R. David Murray (dmalcolm) <dmalcolm@fedoraproject.org> fixed this in Fed=
-ora [1] and I applied his patch.
->=20
-> I reported this issue upstream [4] and this will only be fixed in Python =
-2.7, so we have to keep this patch for Python 2.6.
->=20
-> I put 20 in front of the name of the patch file without any reason.
->=20
-> [1] http://pkgs.fedoraproject.org/gitweb/?p=3Dpython.git;a=3Dcommitdiff;h=
-=3Db95f6cc2ca6a009f97436c6aa16cfd70547353d9
-> [2] http://www.openoffice.org/issues/show_bug.cgi?id=3D114866
-> [3] http://doc.services.openoffice.org/wiki/RedTinderboxStatusInEIS
-> [4] http://bugs.python.org/issue10013
-> [5] http://patchwork.openembedded.org/patch/1899/
->=20
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
-> v1 =E2=86=92 v2: Comments by Khem and Tom: add accidentally removed =C2=
-=BB\=C2=AB at the line ending.
-> ---
-
-Please disregard this patch also. The added patch seems to not be
-applicable to python-native that easily.
-
-[=E2=80=A6]
+> matchbox-panel/matchbox-panel_svn.bb
+svn error with applets dir? it should be "fixed" by my last commit
+forcing both recipes to use same SRCREV, but you have remove that svn
+checkout manually once more (hopefully for last time)
 
 
-Thanks,
+> mplayer/mplayer-maemo_svn.bb
+> musicpd/gmpc_svn.bb
+> networkmanager/networkmanager_svn.bb
 
-Paul
+> openmoko-projects/paroli_git.bb
+> openmoko-projects/tichy_git.bb
+> openmoko2/openmoko-alsa-scenarios_svn.bb
+> openmoko2/openmoko-contacts2_svn.bb
+> openmoko2/openmoko-dates2_svn.bb
+> openmoko2/openmoko-tasks2_svn.bb
 
---=-nJB0g86JZXvCEaYpW4Bw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+I'll move those to nonworking if nobody complains (and remove those
+from tasks depending on it)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+> pidgin/msn-pecan_git.bb
+> pimlico/contacts_svn.bb
+> pimlico/dates_svn.bb
+> pimlico/tasks_svn.bb
+> powervr-drivers/bc-cube_0.1.0.bb
+> powervr-drivers/bc-cube_0.2.0.bb
+> powervr-drivers/libgles-omap3_3.01.00.02.bb
+> powervr-drivers/libgles-omap3_3.01.00.06.bb
+> powervr-drivers/libgles-omap3_3.01.00.07.bb
+> powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
+> powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
+> python/python-psyco_1.6.bb
+> qt4/qt4-embedded-gles_4.6.0.bb
+> qt4/qt4-embedded-gles_4.6.2.bb
+> qt4/qt4-embedded-gles_4.6.3.bb
+> qt4/qt4-x11-free-gles_4.5.2.bb
+> qt4/qt4-x11-free-gles_4.6.0.bb
+> qt4/qt4-x11-free-gles_4.6.2.bb
+> qt4/qt4-x11-free-gles_4.6.3.bb
+> qt4/qt4-x11-free-gles_4.7.0.bb
 
-iEYEABECAAYFAkyoZ+MACgkQPX1aK2wOHVgGsgCcDmMu1elwbDOcq5uJsMZkPBV2
-APMAnRyJsX/VLFW2FqLW5D++uvpQcdCA
-=5ZZS
------END PGP SIGNATURE-----
+for qt4-x11-free-gles or whatever recipe including recipes/egl/egl.inc you need
+COMPATIBLE_MACHINE = "omap3"
+clearly we should add better error-handling for insuficient COMPATIBLE*
 
---=-nJB0g86JZXvCEaYpW4Bw--
+> rp-pppoe/rp-pppoe_3.5.bb
+> schroedinger/gst-plugin-schroedinger_1.0.9.bb
+> tinymail/libtinymail_svn.bb
+> tinymail/tmut_svn.bb
+> tinymail/libtinymail_svn.bb
+> tinymail/tmut_svn.bb
+> u-boot/u-boot-bug_svn.bb
+> u-boot/u-boot-omap3beagleboard_1.1.4.bb
+> u-boot/u-boot-omap3pandora_git.bb
+> u-boot/u-boot_git.bb
+> xffm/xffm_4.3.99.2.bb
+
+
+
+> xorg-driver/xf86-input-vmmouse_12.6.10.bb
+> xorg-driver/xf86-input-vmmouse_12.6.5.bb
+> xorg-driver/xf86-video-geode_2.11.6.bb
+> xorg-driver/xf86-video-geode_2.11.9.b
+
+
+All 4 redownloaded OK, I guess you got
+
+NOTE: Out of date cache found, rebuilding...
+Command execution failed: Traceback (most recent call last):
+  File "/usr/lib64/python2.6/site-packages/bb/command.py", line 88, in
+runAsyncCommand
+    commandmethod(self.cmds_async, self, options)
+  File "/usr/lib64/python2.6/site-packages/bb/command.py", line 164,
+in buildFile
+    command.cooker.buildFile(bfile, task)
+  File "/usr/lib64/python2.6/site-packages/bb/cooker.py", line 691, in buildFile
+    self.status.task_deps[fn]['depends'] = {}
+TypeError: 'NoneType' object does not support item assignment
+
+because of: COMPATIBLE_HOST = "i.86.*-linux" in those 4 recipes..
+
+
