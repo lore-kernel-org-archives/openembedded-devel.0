@@ -1,28 +1,48 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P2T4S-0008M0-8y for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Oct 2010 20:14:02 +0200
-Received: from f053041250.adsl.alicedsl.de ([78.53.41.250]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P2T4D-0005bo-DR; Sun, 03 Oct 2010 18:13:45 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <kergoth@gmail.com>) id 1P2TTf-0006U8-BW
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Oct 2010 20:40:05 +0200
+Received: by wwe15 with SMTP id 15so1416502wwe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 Oct 2010 11:39:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=gUhBhGs/di5a1Bb4Vf8h7D4ReNRNm2luuOlzr1qyCms=;
+	b=FcPoRziJ0G2H404Qia8Nqqumcr8+kAT1SA0tEf3YOZXxN0IlGWTxmOvRxis9O006WB
+	4WHKFS2tXdahfCT2kOj1ekLlIOYeFNtcodgvokwtnkBSCapjTmYmN0kv5WQFsajNZ+q0
+	ITlU3q6rgIp2qKEnOjer+KeJNDr3eYGpnSFnA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=TUlfYcOM/FRLCMWbYcKuMExIjbr8czeh48E4kPK5BYFE5Uf/l/tZtpf2l0uO7Ex3Io
+	SfzCpCCb0bvAqcEaY07ngF6Ncw+kxymiZK+R137N1vC0olEf0PofGLQsa8YMNbPCUg+B
+	MgT/AGHL3MxOa0cN5QM+++B3iPQIEYqGJVD1A=
+Received: by 10.216.0.206 with SMTP id 56mr6808068web.33.1286131183249; Sun,
+	03 Oct 2010 11:39:43 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.237.169 with HTTP; Sun, 3 Oct 2010 11:39:22 -0700 (PDT)
+In-Reply-To: <AANLkTi=N_zeiKZXy4W5umM=K5sb5JYvHCY5C+bFsrhL9@mail.gmail.com>
+References: <i89i90$7hp$1@dough.gmane.org>
+	<AANLkTi=N_zeiKZXy4W5umM=K5sb5JYvHCY5C+bFsrhL9@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sun, 3 Oct 2010 11:39:22 -0700
+X-Google-Sender-Auth: VxoBYQ2tKgfygT6eZj8FqCS5xOM
+Message-ID: <AANLkTimmq=tcfb_x_S5T4Jp3UXFR7hdofO7arBXvPeKL@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 03 Oct 2010 20:13:43 +0200
-Message-ID: <1286129623.4310.33.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] glib-2.0_2.24.1: fix `error: Could not find a glib-genmarshal in your PATH`
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: gtk+ build failure after create_wrapper commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,73 +56,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Oct 2010 18:14:02 -0000
-X-Groupsio-MsgNum: 24327
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-aoWXcwTf2MlnaYoH7cqW"
+X-List-Received-Date: Sun, 03 Oct 2010 18:40:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
---=-aoWXcwTf2MlnaYoH7cqW
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, Oct 3, 2010 at 8:25 AM, Chris Larson <clarson@kergoth.com> wrote:
 
-Date: Sun, 3 Oct 2010 20:01:46 +0200
+>
+>
+> On Sun, Oct 3, 2010 at 2:26 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
+>
+>> Last nights build failed with:
+>>
+>> | make[2]: Entering directory
+>>
+>> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
+>> | /OE/angstrom-dev/sysroots/x86_64-linux/usr/bin/gdk-pixbuf-csource
+>> - --raw --build-list          \
+>> |               apple_red  ./apple-red.png      \
+>> |                 gnome_foot ./gnome-foot.png   \
+>> |         > test-inline-pixbufs.h                               \
+>> |       || (rm -f test-inline-pixbufs.h && false)
+>> | Usage: gdk-pixbuf-csource [options] [image]
+>> |        gdk-pixbuf-csource [options] --build-list [[name image]...]
+>> |   --stream                   generate pixbuf data stream
+>> |   --struct                   generate GdkPixdata structure
+>> |   --macros                   generate image size/pixel macros
+>> |   --rle                      use one byte run-length-encoding
+>> |   --raw                      provide raw image data copy
+>> |   --extern                   generate extern symbols
+>> |   --static                   generate static symbols
+>> |   --decoder                  provide rle decoder
+>> |   --name=identifier          C macro/variable name
+>> |   --build-list               parse (name, image) pairs
+>> |   -h, --help                 show this help message
+>> |   -v, --version              print version informations
+>> |   --g-fatal-warnings         make warnings fatal (abort)
+>> | make[2]: *** [test-inline-pixbufs.h] Error 1
+>> | make[2]: Leaving directory
+>>
+>> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1/demos'
+>> | make[1]: *** [all-recursive] Error 1
+>> | make[1]: Leaving directory
+>>
+>> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gtk+-2.20.1-r9.3/gtk+-2.20.1'
+>> | make: *** [all] Error 2
+>>
+>> I'll have a better look at work tomorrow, but if anyone has a fix ready,
+>> don't hesitate to speak up :)
+>>
+>
+> Reverted for now, working on a fix.  Sorry about that.  Must have missed
+> something obvious.
+>
 
-This commit partially reverts 1e4c8a [1].
+Fixed, confirmed gtk+ builds with it.  Sorry for the hassle.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
-Commit 1e4c8a removed `glib-2.0-native` from `DEPENDS`. Unfortunately `conf=
-igure()` fails for me for minimal distributions with the following error. (=
-It works for `angstrom-2008.1` though.)
-
-    error: Could not find a glib-genmarshal in your PATH
-
-Adding `glib-2.0-native` back to `DEPENDS` fixes the build error for me.
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D1e4c8ab=
-77532c76ad041ab3b50d3e18bfc352080
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-CC: Florian Boor <florian.boor@kernelconcepts.de>
----
-Could someone please comment on this as the explanation in 1e4c8a to remove=
- the old style native dependency sounds quite sane.
----
- recipes/glib-2.0/glib-2.0_2.24.1.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/glib-2.0/glib-2.0_2.24.1.bb b/recipes/glib-2.0/glib-2.=
-0_2.24.1.bb
-index 3bc11de..15f0b1a 100644
---- a/recipes/glib-2.0/glib-2.0_2.24.1.bb
-+++ b/recipes/glib-2.0/glib-2.0_2.24.1.bb
-@@ -6,11 +6,11 @@ UNIX-like platforms, Windows, OS/2 and BeOS."
- LICENSE =3D "LGPL"
- SECTION =3D "libs"
- PRIORITY =3D "optional"
--DEPENDS =3D "gtk-doc zlib"
-+DEPENDS =3D "glib-2.0-native gtk-doc zlib"
- DEPENDS_virtclass-native =3D "gettext-native gtk-doc-native \
-                             pkgconfig-native"
-=20
--PR =3D "r0"
-+PR =3D "r1"
-=20
- SRC_URI =3D "\
-   http://ftp.gnome.org/pub/GNOME/sources/glib/2.24/glib-${PV}.tar.bz2;name=
-=3Darchive \
---=20
-1.7.1
-
---=-aoWXcwTf2MlnaYoH7cqW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyox9cACgkQPX1aK2wOHVjLAACdGADF7ytVvgqZUlRTR3ar2Br5
-UBoAniCBtxErHkuIcXIq5svqEyOSHX96
-=XWZE
------END PGP SIGNATURE-----
-
---=-aoWXcwTf2MlnaYoH7cqW--
