@@ -1,38 +1,43 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P2lTg-00024J-Ez
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 15:53:28 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id A72B43148FF5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P2lkL-0002y2-71 for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 16:10:30 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P2lk0-0000Tm-Ey for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 16:10:08 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Oct 2010 16:10:08 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Oct 2010 15:52:57 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id 7q237gSUSdRz; Mon,  4 Oct 2010 15:52:51 +0200 (CEST)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 8DAF03147E1F;
-	Mon,  4 Oct 2010 15:52:50 +0200 (CEST)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Mon, 04 Oct 2010 13:52:50 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Mon, 04 Oct 2010 16:10:08 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Oct 2010 13:52:41 +0000
-Message-Id: <1286200361-15982-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <AANLkTin6=N4BaKiYkRVmwT4gKjGkr2JoPpMON5maVZKm@mail.gmail.com>
-References: <AANLkTin6=N4BaKiYkRVmwT4gKjGkr2JoPpMON5maVZKm@mail.gmail.com>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 04 Oct 2010 16:10:00 +0200
+Message-ID: <i8cn7o$qa7$1@dough.gmane.org>
+References: <i8cf7aMAN_POSIXLY_CORRECT=1@dough.gmane.org>	<1286194192-22256-1-git-send-email-sledz@dresearch.de>	<i8cjiv$806$1@dough.gmane.org>
+	<4CA9D3A0.8080706@dresearch.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
+In-Reply-To: <4CA9D3A0.8080706@dresearch.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v3] netkit-base-0.17: fix compile with gcc-4.x
+Subject: Re: [PATCH v4] epiphany-2.30.2: unbreak build by adding ca-certificates dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,80 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 13:53:29 -0000
+X-List-Received-Date: Mon, 04 Oct 2010 14:10:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* v2: Added header to patch.
-* v3: Set CFLAGS and LDFLAGS correctly.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-I decided to patch the file MCONFIG instead. LD was unused and CFLAGS was set
-to a wrong value, too.
+On 04-10-10 15:16, Steffen Sledz wrote:
+> Am 04.10.2010 15:07, schrieb Koen Kooi:
+>> To double check: is it gplv2 or gplv2+ (aka "or later"?)
+> 
+> No really sure. The source tree contains a COPYING file containing "GNU GENERAL PUBLIC LICENSE Version 2, June 1991".
+> 
+> So it's "GPLv2" or "GPLv2+"?
+> 
 
- .../netkit-base-0.17/gcc4_buildfix.patch           |   19 +++++++++++++++++++
- recipes/netkit-base/netkit-base_0.17.bb            |    9 +++++++--
- 2 files changed, 26 insertions(+), 2 deletions(-)
- create mode 100644 recipes/netkit-base/netkit-base-0.17/gcc4_buildfix.patch
+GPLv2, the other would say something like:
 
-diff --git a/recipes/netkit-base/netkit-base-0.17/gcc4_buildfix.patch b/recipes/netkit-base/netkit-base-0.17/gcc4_buildfix.patch
-new file mode 100644
-index 0000000..b5b476c
---- /dev/null
-+++ b/recipes/netkit-base/netkit-base-0.17/gcc4_buildfix.patch
-@@ -0,0 +1,19 @@
-+upstream: unmaintained
-+source: org.openembedded.dreambox fb4bee1268b9a0600fd6236ac0e9245f17b33f95
-+
-+| servtab.c: In function 'loadconfigent':
-+| servtab.c:785:4: error: lvalue required as left operand of assignment
-+[...]
-+| servtab.c:798:4: error: lvalue required as left operand of assignment
-+
-+--- bla/inetd/servtab.c	2000-07-22 22:20:50.000000000 +0200
-++++ bla/inetd/servtab.c	2006-03-01 15:26:46.000000000 +0100
-+@@ -771,7 +771,7 @@
-+ 			return;
-+ 		}
-+ 		
-+-#define SWAP(type, a, b) {type c=(type)a; (type)a=(type)b; (type)b=(type)c;}
-++#define SWAP(type, a, b) {type c=(type)a; a=(type)b; b=(type)c;}
-+ 
-+ 		/*
-+ 		 * sep->se_wait may be holding the pid of a daemon
-diff --git a/recipes/netkit-base/netkit-base_0.17.bb b/recipes/netkit-base/netkit-base_0.17.bb
-index c9864ae..8ab8935 100644
---- a/recipes/netkit-base/netkit-base_0.17.bb
-+++ b/recipes/netkit-base/netkit-base_0.17.bb
-@@ -1,11 +1,12 @@
- SECTION = "base"
- DESCRIPTION = "netkit-base includes the inetd daemon."
- LICENSE = "BSD"
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-base-${PV}.tar.gz \
-            file://configure.patch \
-            file://mconfig.patch \
-+           file://gcc4_buildfix.patch \
-            file://init \
-            file://inetd.conf"
- 
-@@ -17,7 +18,11 @@ INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 20 0 1 6 ."
- EXTRA_OEMAKE = "-C inetd"
- 
- do_compile () {
--	oe_runmake 'CC=${CC}' 'LD=${LD}' all
-+        sed -e 's:^CC=.*:CC=${CC}:' \
-+            -e 's:^CFLAGS=.*:CFLAGS=${CFLAGS}:' \
-+            -e 's:^LDFLAGS=.*:LDFLAGS=${LDFLAGS}:' \
-+            -i ${S}/MCONFIG
-+        oe_runmake
- }
- 
- do_install () {
--- 
-1.7.1
+"GNU GENERAL PUBLIC LICENSE Version 2 or later"
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMqeA3MkyGM64RGpERApqhAJ0T5vRudnAvMzQzyomRt+0AoJNS/QCgns1i
+kryxJ06jsmpD01RsN5pQ+Tc=
+=O9Uc
+-----END PGP SIGNATURE-----
 
 
 
