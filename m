@@ -1,43 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2jbx-0006Ks-IA for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 13:53:42 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2jbf-0004dZ-DF for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 13:53:23 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 13:53:23 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <jan.paesmans@gmail.com>) id 1P2jk0-0000P4-H0
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 14:02:01 +0200
+Received: by eyb7 with SMTP id 7so1735466eyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 13:53:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 04 Oct 2010 05:01:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=r/J6RE3gZn6vMYQMTxk2ofHBO7CMvP/bl96T/1HJa14=;
+	b=FvQzdm9sDfEVGg4YZt+LYOYeeyEKZb4B8hcexXoP+Lq6duJu20EfcmtlrBr4VJ+rie
+	92/jWgVridzD2DvX8KMHLwjofUiOCnZNmX/oSc4HWP/WHYDR/fHiz3mn7QRn+M50mEI5
+	1PQsy1dnswgBn/H/qcICRY9pkeVXVJGU4OBL8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=q4uQ9gceoKqjBd/wuLUnelHkXVoykConfd6yWkNi4niiTjGxqTpKMwsM1mx/ZLUEuD
+	G/sOpoH900KD5qW69s0EU5KFzmvP9bs17c/RPEktLH8wydoBdkS21lUb8ECvlyE5nzwT
+	KvT9OGyai/hg+5D8tuyNaqDo1ptF6l6N3NtrA=
+MIME-Version: 1.0
+Received: by 10.213.14.131 with SMTP id g3mr8205121eba.47.1286193700674; Mon,
+	04 Oct 2010 05:01:40 -0700 (PDT)
+Received: by 10.213.17.74 with HTTP; Mon, 4 Oct 2010 05:01:40 -0700 (PDT)
+In-Reply-To: <AANLkTim7VY0uUKb_uu42n3gFw-37ozVC4KOM=6NzsGec@mail.gmail.com>
+References: <AANLkTinpLXC9tZ0viEHhYPzjBt=0+nG6eRdrw2Ur1ey7@mail.gmail.com>
+	<AANLkTi=OtUEUO=55HLreQSEH32FBYyiTnOOqY0HCVUsu@mail.gmail.com>
+	<AANLkTim7VY0uUKb_uu42n3gFw-37ozVC4KOM=6NzsGec@mail.gmail.com>
+Date: Mon, 4 Oct 2010 14:01:40 +0200
+Message-ID: <AANLkTimWof42k79P=Nz3uLK6uZDx8WQGXHTvjeTboF86@mail.gmail.com>
+From: Jan Paesmans <jan.paesmans@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 04 Oct 2010 13:53:14 +0200
-Message-ID: <i8cf7a$k9i$1@dough.gmane.org>
-References: <1286176217-20316-1-git-send-email-sledz@dresearch.de>
-	<1286189412-21563-1-git-send-email-sledz@dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <1286189412-21563-1-git-send-email-sledz@dresearch.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: jan.paesmans@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v3] epiphany-2.30.2: unbreak build by adding ca-certificates dependencies
+Subject: Re: trouble building gcc-cross-initial first time
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,48 +53,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 11:53:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Oct 2010 12:02:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+>>> I run massive parallel builds with 8 bitbake threads and make -j 8, so
+>>> I suspect that this has something to do with it. One of the tasks the
+>>> is started before is linux-libc-headers_2.6.31.bb, do_package_stage.
+>>> Could it be that this task hasn't finished yet while the
+>>> gcc-cross-initial needs it?
+>>>
+>>> Regards,
+>>>
+>>> Jan
+>>>
+>>
+>> It seems to pick up a header file from the host.
+>> It could also be dependent of glibc-initial or so.
+>> What happens if you build from scratch with 1 thread and -j 1 ?
+>
+> Then it works. I'll try checking the dependencies for glibc-initial.
 
-On 04-10-10 12:50, Steffen Sledz wrote:
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> ---
->  recipes/gnome/epiphany_2.30.2.bb |    5 +++--
->  1 files changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/gnome/epiphany_2.30.2.bb b/recipes/gnome/epiphany_2.30.2.bb
-> index 426d468..f0d4f5d 100644
-> --- a/recipes/gnome/epiphany_2.30.2.bb
-> +++ b/recipes/gnome/epiphany_2.30.2.bb
-> @@ -1,7 +1,8 @@
->  DESCRIPTION = "GNOME default webbrowser"
-> -DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification"
-> +DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification ca-certificates"
->  RDEPENDS_${PN} = "gnome-vfs-plugin-http iso-codes"
-> -PR = "r2"
-> +RRECOMMENDS = "ca-certificates"
+OK, i think there is something strange going on here.
+In gcc-cross-initial.inc: PROVIDES = "virtual/${TARGET_PREFIX}gcc-initial"
+In glibc.inc: PROVIDES = "virtual/${TARGET_PREFIX}libc-for-gcc"
+In glibc-initial.inc: DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial"
+In gcc-cross.inc: DEPENDS = "virtual/${TARGET_PREFIX}libc-for-gcc"
 
-NAK, that should be RRECOMMENDS_${PN}, you can catch such errors by doing:
+I'd say that there is a circular dependency here.
+Could this explain why the problem occurs in a multi-threaded build
+environment and not in a single threaded one?
+What's the way to solve this? Is there some way in bitbake to synchronize this?
 
-bitbake -b foo.bb -c recipe_sanity -D
-
-Provided you either use angstrom or inherit recipe_sanity. Kudos to
-Chris for creating that class.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMqcAqMkyGM64RGpERAjwgAJ0e3s+cAf85EfPL+jBupqrKEjmWsACfeYfC
-ZTXF7OZEGctDPRKqMARYj1E=
-=0QSX
------END PGP SIGNATURE-----
-
+Jan
+>
+> Jan
+>>
+>> Frans
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
 
 
