@@ -1,27 +1,27 @@
 Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1P2icm-0006Rm-QU
+	(envelope-from <sledz@dresearch.de>) id 1P2idn-0007ED-VG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 12:50:41 +0200
+	Mon, 04 Oct 2010 12:51:32 +0200
 Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
 	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 0D1A5491287
+	by mail.dresearch.de (Postfix) with ESMTP id 605FA491287
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Oct 2010 12:50:13 +0200 (CEST)
-Received: from mobil-400-586.intern.dresearch.de ([10.32.11.62]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 4 Oct 2010 12:50:12 +0200
-Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
-	id A54A02DA65; Mon,  4 Oct 2010 12:50:17 +0200 (CEST)
+	Mon,  4 Oct 2010 12:51:16 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 4 Oct 2010 12:51:16 +0200
+Message-ID: <4CA9B1A4.3090504@dresearch.de>
+Date: Mon, 04 Oct 2010 12:51:16 +0200
 From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Oct 2010 12:50:12 +0200
-Message-Id: <1286189412-21563-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1286176217-20316-1-git-send-email-sledz@dresearch.de>
 References: <1286176217-20316-1-git-send-email-sledz@dresearch.de>
-X-OriginalArrivalTime: 04 Oct 2010 10:50:12.0917 (UTC)
-	FILETIME=[EBF3B650:01CB63B1]
+	<1286189412-21563-1-git-send-email-sledz@dresearch.de>
+In-Reply-To: <1286189412-21563-1-git-send-email-sledz@dresearch.de>
+X-OriginalArrivalTime: 04 Oct 2010 10:51:16.0241 (UTC)
+	FILETIME=[11B23010:01CB63B2]
 X-SA-Exim-Connect-IP: 87.193.137.100
 X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -30,7 +30,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v3] epiphany-2.30.2: unbreak build by adding ca-certificates dependencies
+Subject: Re: [PATCH v3] epiphany-2.30.2: unbreak build by adding ca-certificates dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,30 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 10:50:41 -0000
+X-List-Received-Date: Mon, 04 Oct 2010 10:51:33 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
----
- recipes/gnome/epiphany_2.30.2.bb |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+Patch comment fixed in [PATCH v3].
 
-diff --git a/recipes/gnome/epiphany_2.30.2.bb b/recipes/gnome/epiphany_2.30.2.bb
-index 426d468..f0d4f5d 100644
---- a/recipes/gnome/epiphany_2.30.2.bb
-+++ b/recipes/gnome/epiphany_2.30.2.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "GNOME default webbrowser"
--DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification"
-+DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification ca-certificates"
- RDEPENDS_${PN} = "gnome-vfs-plugin-http iso-codes"
--PR = "r2"
-+RRECOMMENDS = "ca-certificates"
-+PR = "r3"
- 
- inherit gnome
- 
--- 
-1.7.1
+Some final ACKs?
+
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
 
 
 
