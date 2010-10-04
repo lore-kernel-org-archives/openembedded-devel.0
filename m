@@ -1,35 +1,28 @@
-Received: from vms173015pub.verizon.net ([206.46.173.15])
+Received: from mrqout3.tiscali.it ([195.130.225.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P2o0U-0002CM-Em
+	(envelope-from <l.bolognini@tiscali.it>) id 1P2oBe-0004U2-6l
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 18:35:37 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9R005GSY196W90@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	04 Oct 2010 11:34:35 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id CB82E14AF64; Mon,
-	04 Oct 2010 12:34:20 -0400 (EDT)
-Date: Mon, 04 Oct 2010 12:34:20 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "l.bolognini@tiscali.it" <l.bolognini@tiscali.it>,
-	arago-devel@gforge.ti.com
-Message-id: <20101004163420.GD28782@denix.org>
-References: <33321834.75021286206986565.JavaMail.defaultUser@defaultHost>
-MIME-version: 1.0
-In-reply-to: <33321834.75021286206986565.JavaMail.defaultUser@defaultHost>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.15
-X-SA-Exim-Mail-From: denis@denix.org
+	Mon, 04 Oct 2010 18:47:06 +0200
+Received: from [10.39.115.21] by mrq-3 with esmtp (Exim)
+	id 1P2nBy-0001Di-Tk; Mon, 04 Oct 2010 17:43:06 +0200
+Received: from ps-wm7 (10.39.75.207) by mail-1.mail.tiscali.sys (8.5.124)
+	id 4CA2ECAE0020CC9D; Mon, 4 Oct 2010 17:43:06 +0200
+Message-ID: <33321834.75021286206986565.JavaMail.defaultUser@defaultHost>
+Date: Mon, 4 Oct 2010 17:43:06 +0200 (CEST)
+From: "l.bolognini@tiscali.it" <l.bolognini@tiscali.it>
+To: Arago Mailing List <arago-devel@gforge.ti.com>, 
+	Open Embedded Mailing List <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+xOriginalSenderIP: 89.118.158.66
+X-SA-Exim-Connect-IP: 195.130.225.13
+X-SA-Exim-Mail-From: l.bolognini@tiscali.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Open Embedded Mailing List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [arago-devel] c6a816x-evm support
+Subject: c6a816x-evm support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +36,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 16:35:38 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 04 Oct 2010 16:47:06 -0000
+Content-Type: text/plain;charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 04, 2010 at 05:43:06PM +0200, l.bolognini@tiscali.it wrote:
-> Hallo,
-> I'm working with Arago but I thought to extend this mail to OE 
-> mailing list too.
-> I made 
-> git clone git://arago-project.org/git/arago.
-> git
-> git clone git://arago-project.org/git/arago-oe-dev.git
-> git clone 
-> git://arago-project.org/git/arago-bitbake.git 
-> last Friday (1st October 
-> 2010)
-> Now I'm trying to build my custom image for MACHINE=c6a816x-evm.
-> 
-> From git:
-> //arago-project.org/git/projects/linux-omap3
->  * branch            
-> master     -> FETCH_HEAD
-> NOTE: Creating tarball of git repository
-> 
-> fatal: failed to unpack tree object 
-> 661585a1407961c5e71f1d8203f1a32f08e9a772
-> NOTE: Task failed: Fetch 
-> failed: Fetch command export HOME=...; export PATH=...;
-> git read-tree 
-> 661585a1407961c5e71f1d8203f1a32f08e9a772 failed with signal 128, 
-> output:
-> fatal: failed to unpack tree object 
-> 661585a1407961c5e71f1d8203f1a32f08e9a772
+Hallo,
+I'm working with Arago but I thought to extend this mail to OE=20
+mailing list too.
+I made=20
+git clone git://arago-project.org/git/arago.
+git
+git clone git://arago-project.org/git/arago-oe-dev.git
+git clone=20
+git://arago-project.org/git/arago-bitbake.git=20
+last Friday (1st October=20
+2010)
+Now I'm trying to build my custom image for MACHINE=3Dc6a816x-evm.
 
-Luca,
+This is my image recipe:
 
-Yes, we have noticed this issue last Friday - the commit ID the recipe was 
-originally based on, is no longer available. I believe Roger fixed it when 
-pushing the ti816x support to OE, but I haven't had time to fix it in Arago 
-yet. It should be fixed in Arago shortly, sorry for the inconvenience.
+<arago-custom/recipes/images/ti816x-image.bb>
 
--- 
-Denys
+require recipes/images/arago-base-tisdk-image.bb
+IMAGE_INSTALL +=3D "\
+=09
+openssh \
+=09nano \
+        [...]
+=09openldap \
+=09lmsensors-sensors \
+=09"
+
+
+export IMAGE_BASENAME =3D "ti816x-image"
+
+When I launch:
+MACHINE=3Dc6a816x-
+evm bitbake -v ti816x-image
+I got the following error:
+
+From git:
+//arago-project.org/git/projects/linux-omap3
+ * branch           =20
+master     -> FETCH_HEAD
+NOTE: Creating tarball of git repository
+
+fatal: failed to unpack tree object=20
+661585a1407961c5e71f1d8203f1a32f08e9a772
+NOTE: Task failed: Fetch=20
+failed: Fetch command export HOME=3D...; export PATH=3D...;
+git read-tree=20
+661585a1407961c5e71f1d8203f1a32f08e9a772 failed with signal 128,=20
+output:
+fatal: failed to unpack tree object=20
+661585a1407961c5e71f1d8203f1a32f08e9a772
+
+ERROR: TaskFailed event=20
+exception, aborting
+ERROR: Build of=20
+/home/bolognini/oe/arago/recipes/linux/linux-omap3_2.6.34-psp04.
+00.00.06.bb do_fetch failed
+ERROR: Task 1485=20
+(/home/bolognini/oe/arago/recipes/linux/linux-omap3_2.6.34-psp04.
+00.00.06.bb, do_fetch) failed
+NOTE: Tasks Summary: Attempted 576 tasks=20
+of which 576 didn't need to be rerun and 1 failed.
+ERROR:=20
+'/home/bolognini/oe/arago/recipes/linux/linux-omap3_2.6.34-psp04.
+00.00.06.bb' failed
+
+Is there still something to adjust for this=20
+MACHINE?
+Or is the server out of work for some reasons?
+I notice some=20
+patches have been uploaded few days ago.
+Please let me know,
+thank you=20
+very much,
+bye
+Luca
+
+
+
+
+Supera i limiti: raddoppia la velocit=C3=A0 da 10 a 20 Mega!   Risparmia co=
+n Tutto Incluso: telefono + adsl 20 mega a soli 26,60 =E2=82=AC al mese per=
+ un anno!  SCONTO DI 160 EURO!  http://abbonati.tiscali.it/telefono-adsl/pr=
+odotti/tc/tuttoincluso/?WT.mc_id=3D01fw
 
 
