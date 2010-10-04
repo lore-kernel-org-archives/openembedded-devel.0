@@ -1,42 +1,36 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1P2gM4-0002Qi-6R
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1P2gXK-0002jo-EU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 10:25:07 +0200
-Received: by pwj1 with SMTP id 1so1013457pwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 01:24:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=TT1wcGHR/q0tJv2Vbjg+Q/Kf/SMcqQcGr/imjOyMwyA=;
-	b=f96XnhrPbcXVRGt33VpMz0ASVWc7NqtGPR/JR0MplMdoYCnAMScsCsxKyvDAiKHT4b
-	YlUuhJ/f2qNHVPv9TJgMnRsHXL2uu3oh9Dx7p88x+CsVeghdAOUXmXau0xVBFoL7hqd1
-	Pegk0nmqYpO4UDmQaLBJeukddjEBPou7jzouU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=dVdtOZai9A03mwee+0Jlt24i8quKSUJhw//yQjjd4AMgnHgVShchrClvA5mXT5DcaC
-	4dKh0p4tjyYU3KpWh9CUi9QeDtzmn0Noe3MHZ47csX5L7LHg2BtSd7JjdTIhRiKzsw26
-	mfTRuU7XkIGA+4WxDzcgyECLEIjxcpExw95Ow=
+	Mon, 04 Oct 2010 10:36:42 +0200
+Received: (qmail 15864 invoked by uid 503); 4 Oct 2010 08:41:30 -0000
+Received: from b9.ovh.net (HELO mail620.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 4 Oct 2010 08:41:29 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 4 Oct 2010 10:36:29 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 4 Oct 2010 10:36:27 +0200
+Message-ID: <4CA99206.5060001@eukrea.com>
+Date: Mon, 04 Oct 2010 10:36:22 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
 MIME-Version: 1.0
-Received: by 10.142.133.11 with SMTP id g11mr7462817wfd.124.1286180685574;
-	Mon, 04 Oct 2010 01:24:45 -0700 (PDT)
-Received: by 10.220.195.72 with HTTP; Mon, 4 Oct 2010 01:24:45 -0700 (PDT)
-In-Reply-To: <4CA98CEF.3090604@nedap.com>
-References: <4CA97897.4020001@nedap.com> <4CA97EBC.4040406@eukrea.com>
-	<4CA98CEF.3090604@nedap.com>
-Date: Mon, 4 Oct 2010 01:24:45 -0700
-Message-ID: <AANLkTik2_YEL-dhKLr9LuJQ78W4WXS4WvUbxDfXeJk8U@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+References: <4CA97897.4020001@nedap.com>
+	<4CA97EBC.4040406@eukrea.com>	<4CA98CEF.3090604@nedap.com>
+	<AANLkTik2_YEL-dhKLr9LuJQ78W4WXS4WvUbxDfXeJk8U@mail.gmail.com>
+In-Reply-To: <AANLkTik2_YEL-dhKLr9LuJQ78W4WXS4WvUbxDfXeJk8U@mail.gmail.com>
+X-Ovh-Tracer-Id: 10523504955470359881
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.27.225
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: trouble compiling udev
@@ -53,42 +47,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 08:25:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 04 Oct 2010 08:36:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Mon, Oct 4, 2010 at 1:14 AM, Jaap de Jong <jaap.dejong@nedap.com> wrote:
-> Thanks!
-> That seems to work!!
-> Something to be added to udev recipe...
+Le 04/10/2010 10:24, J. L. a écrit :
+> On Mon, Oct 4, 2010 at 1:14 AM, Jaap de Jong<jaap.dejong@nedap.com>  wrote:
+>> Thanks!
+>> That seems to work!!
+>> Something to be added to udev recipe...
+>
+> Any chance you can post your recipe I am not sure if I am getting
+> where you added that in the recipe. Thanks
+>
+CFLAGS_append = " -Os"
 
-Any chance you can post your recipe I am not sure if I am getting
-where you added that in the recipe. Thanks
-
->
-> On 10/04/2010 09:14 AM, Eric B=E9nard wrote:
->>
->> Hi,
->>
->> Le 04/10/2010 08:47, Jaap de Jong a =E9crit :
->>>
->>> a fresh rebuild failed in compiling udev.
->>> Any clues?
->>
->> if you are using gcc 4.5 =3D> add CFLAGS_append =3D " -Os"
->> =A0to udev recipe.
->>
->> Eric
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Eric
 
 
