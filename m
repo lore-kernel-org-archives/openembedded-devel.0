@@ -1,26 +1,42 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@true.cz>) id 1P2pt5-0001LK-Fo
-	for openembedded-devel@openembedded.org; Mon, 04 Oct 2010 20:35:48 +0200
-Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id B4C681D363E6;
-	Mon,  4 Oct 2010 20:35:26 +0200 (CEST)
-From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
+Received: from familie-heinold.de ([85.214.48.103]
+	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1P2qL8-0007Yy-Mk
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 21:04:47 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 34519110024C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Oct 2010 21:04:25 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 272C01100212
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Oct 2010 21:04:24 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225004095.adsl.alicedsl.de
+	[92.225.4.95]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Oct 2010 21:04:24 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id D2B633C0ED; Mon,  4 Oct 2010 21:04:02 +0200 (CEST)
+Date: Mon, 4 Oct 2010 21:04:02 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Oct 2010 22:35:32 +0200
-Message-Id: <1286224532-392-1-git-send-email-ynezz@true.cz>
-X-Mailer: git-send-email 1.7.0.4
+Message-ID: <20101004190402.GA22961@rhein.zuhause.netz>
+References: <AANLkTikO4fHqYzZJ5PDjmWV9Q3a9tBD_Y+rSs0iO6=5m@mail.gmail.com>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@true.cz
+In-Reply-To: <AANLkTikO4fHqYzZJ5PDjmWV9Q3a9tBD_Y+rSs0iO6=5m@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] busybox: add posibility to specify correct rtc device for hwclock init script
+Subject: Re: cups issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,94 +50,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 18:35:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 04 Oct 2010 19:04:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-With this patch it's now possible to specify rtc device using HWCLOCKDEVI=
-CE
-variable in /etc/default/hwclock and the system time is then set using co=
-rrect
-device and vice versa. It's wise to have such functionality, beacuse ther=
-e're
-SBCs with more then one rtc device, for example ts72xx.
+On Mon, Oct 04, 2010 at 07:17:05PM +0200, Frans Meulenbroeks wrote:
+> No idea who is the maintainer of cups, but I found the following issue:
+> 
+> /etc/init.d/cups refers to ps ax but if you have busybox installed
+> there are no ax options.
+> As busybox has configurable columns it does not seem too good to fix
+> cups to be able to handle both procps ps and busybox ps.
+> Guess the preferred solution is to add a dependency to procps and get
+> the real thing.
+> 
+> However when wanting to make that change I bumped into the following:
+> 
+> We have 6 cups recipes:
+> 
+> cups_1.1.23.bb  cups_1.2.12.bb  cups_1.2.7.bb  cups_1.3.8.bb
+> cups_1.4.3.bb  cups_1.4.4.bb
+> 
+> The last three (!) of them have DP = "-1"
+> Is there a point in add ing a recipe that has DP = "-1" for a
+> prolonged time, then create a new version with DP = -1?
+> (btw: and no version is pinned or so).
+> 
+> Guess this recipe needs some love.
+> 
+> (btw cups 1.4.4 solves a number of security issues; guess the best way
+> forward is to test 1.4.4, then rm the old insecure stuff).
+> 
+> Frans
 
-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
----
- recipes/busybox/busybox.inc      |    2 +-
- recipes/busybox/files/hwclock.sh |   28 ++++++++++++++++++++++++----
- 2 files changed, 25 insertions(+), 5 deletions(-)
+Yes, the old ones should go.
 
-diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
-index 1046b2f..401f6ad 100644
---- a/recipes/busybox/busybox.inc
-+++ b/recipes/busybox/busybox.inc
-@@ -11,7 +11,7 @@ LICENSE =3D "GPLv2"
- SECTION =3D "base"
- PRIORITY =3D "required"
-=20
--INC_PR =3D "r34"
-+INC_PR =3D "r35"
-=20
- SRC_URI =3D "\
-   file://busybox-cron \
-diff --git a/recipes/busybox/files/hwclock.sh b/recipes/busybox/files/hwc=
-lock.sh
-index 71538fb..1bc9de3 100644
---- a/recipes/busybox/files/hwclock.sh
-+++ b/recipes/busybox/files/hwclock.sh
-@@ -30,9 +30,19 @@ case "$1" in
- 		then
- 			if [ -z "$TZ" ]
- 			then
--	                   hwclock -s $UTC
-+				if [ -z "$HWCLOCKDEVICE" ]
-+				then
-+					hwclock -s $UTC
-+				else
-+					hwclock -s $UTC -f $HWCLOCKDEVICE
-+				fi
- 			else
--			   TZ=3D"$TZ" hwclock -s $UTC
-+				if [ -z "$HWCLOCKDEVICE" ]
-+				then
-+					TZ=3D"$TZ" hwclock -s $UTC
-+				else
-+					TZ=3D"$TZ" hwclock -s $UTC -f $HWCLOCKDEVICE
-+				fi
- 			fi
- 		fi
-=20
-@@ -55,7 +65,12 @@ case "$1" in
- 		fi
- 		if [ "$HWCLOCKACCESS" !=3D no ]
- 		then
--			hwclock -w $UTC
-+			if [ -z "$HWCLOCKDEVICE" ]
-+			then
-+				hwclock -w $UTC
-+			else
-+				hwclock -w $UTC -f $HWCLOCKDEVICE
-+			fi
- 		fi
- 		if [ "$VERBOSE" !=3D no ]
- 		then
-@@ -66,7 +81,12 @@ case "$1" in
- 	show)
- 		if [ "$HWCLOCKACCESS" !=3D no ]
- 		then
--			hwclock -r $UTC
-+			if [ -z "$HWCLOCKDEVICE" ]
-+			then
-+				hwclock -r $UTC
-+			else
-+				hwclock -r $UTC -f $HWCLOCKDEVICE
-+			fi
- 		fi
- 		;;
-         *)
---=20
-1.7.0.4
-
+Bye Henning
 
 
