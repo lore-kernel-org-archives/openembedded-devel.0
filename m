@@ -1,40 +1,40 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-dotnet1.eads.net ([80.156.45.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jan.paesmans@gmail.com>) id 1P2h7M-0004kU-DH
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 11:13:56 +0200
-Received: by qyk35 with SMTP id 35so933507qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 02:13:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=Tt+LM01jxy/Qo3YExBRJ8sas3wyVjROhk3t59yNpz6g=;
-	b=OBOhFUPh/v9W0h38BZCnIzQx1JhoO/deNhihNP8vVeKVXB3OGUz9RZKHnE/vgXteYn
-	HhykDJTC30CaLrOEMAwGO/vwN0RajaaWfO4iC2/StWUTMX1T9OdCwYfiAMyKjaKEbOUH
-	gUNtRjQuVnMnOktU6w62rnPlFXJLrrP8ug+Cw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=g0wBH3oFgsZUVE01FppD0pbea93qeM7nHwFrKPRLBcfZHJaM4v9ZKco93pfLlLMjWC
-	vGreDmdSgqvfl677lefpe9KPzrpFI8wITPPbEFuYqaOTqOguwFAuk6UzhwGXfkWaiZ0+
-	a+ksYZY8tRDewerhUEtUebdL5rcZHS7vedw5k=
+	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
+	id 1P2h9M-0007Eb-0b for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 11:16:06 +0200
+Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
+	by mail-dotnet1.eads.net with ESMTP; 04 Oct 2010 11:00:37 +0200
+Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
+	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Mon, 4 Oct 2010 11:15:18 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 4 Oct 2010 11:15:17 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.224.89.11 with SMTP id c11mr6722636qam.43.1286183618086; Mon,
-	04 Oct 2010 02:13:38 -0700 (PDT)
-Received: by 10.229.34.194 with HTTP; Mon, 4 Oct 2010 02:13:36 -0700 (PDT)
-Date: Mon, 4 Oct 2010 11:13:36 +0200
-Message-ID: <AANLkTinpLXC9tZ0viEHhYPzjBt=0+nG6eRdrw2Ur1ey7@mail.gmail.com>
-From: Jan Paesmans <jan.paesmans@gmail.com>
-To: OpenEmbedded Mailing List <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: jan.paesmans@gmail.com
+Date: Mon, 4 Oct 2010 11:15:14 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501A749E7@deimsg40.de.net.world>
+In-Reply-To: <AANLkTin7zH=nJJ63En6eU+km_nN7KZqVktSeHKYFwk=7@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] svn:// fetcher do not checkout repository at every build
+Thread-Index: ActhhUZINqW52sAfTuO1MSXBAnMgswCHwmxQ
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501A74993@deimsg40.de.net.world>
+	<AANLkTin7zH=nJJ63En6eU+km_nN7KZqVktSeHKYFwk=7@mail.gmail.com>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 04 Oct 2010 09:15:17.0924 (UTC)
+	FILETIME=[A978BE40:01CB63A4]
+X-SA-Exim-Connect-IP: 80.156.45.103
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@cassidian.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: trouble building gcc-cross-initial first time
+Subject: Re: svn:// fetcher do not checkout repository at every build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 09:13:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 04 Oct 2010 09:16:06 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hello all,
+Hello,
 
-When building an image for one of my devices for the first time,
-bitbake always seems to have a problem with building
-gcc-cross-initial. It has the following error:
+the solution of the problem was:
 
-| In file included from
-/home/jan/src/prodata_openembedded/build/tmp/armv5te/work/armv5te-angstrom-linux-gnueabi/gcc-cross-initial-4.3.3-r13.1/gcc-4.3.3/gcc/sparseset.c:22:
-| /home/jan/src/prodata_openembedded/build/tmp/armv5te/work/armv5te-angstrom-linux-gnueabi/gcc-cross-initial-4.3.3-r13.1/gcc-4.3.3/gcc/system.h:418:
-error: conflicting types for 'strsignal'
-| /usr/include/string.h:564: note: previous declaration of 'strsignal' was here
+CVS_TARBALL_STASH =3D ""
 
-However, when I restart the exact same bitbake command, the build
-continues without a problem.
+in local.conf.
 
-I run massive parallel builds with 8 bitbake threads and make -j 8, so
-I suspect that this has something to do with it. One of the tasks the
-is started before is linux-libc-headers_2.6.31.bb, do_package_stage.
-Could it be that this task hasn't finished yet while the
-gcc-cross-initial needs it?
+This turns off the searching for precreated tarballs.
 
-Regards,
+Regards
+Wolfgang Hauser
+=20
+-----Urspr=FCngliche Nachricht-----
+Von: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
+von Chris Larson
+Gesendet: Freitag, 1. Oktober 2010 18:25
+An: openembedded-devel@lists.openembedded.org
+Betreff: Re: [oe] svn:// fetcher do not checkout repository at every =
+build
 
-Jan
+On Fri, Oct 1, 2010 at 8:54 AM, Hauser, Wolfgang (external) <
+Wolfgang.Hauser.external@cassidian.com> wrote:
+
+> an additional question according to checking out from svn:
+>
+> Before the sources are checked out from internal svn following =
+messages
+> are received:
+
+
+See the PREMIRRORS variable.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
