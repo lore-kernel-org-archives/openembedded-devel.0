@@ -1,36 +1,47 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1P2qeZ-0007fE-26
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <vwyodapink@gmail.com>) id 1P2qjE-0008JA-AB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 21:24:51 +0200
-Received: (qmail 3189 invoked by uid 503); 4 Oct 2010 19:50:23 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 4 Oct 2010 19:50:23 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 4 Oct 2010 21:24:31 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 4 Oct 2010 21:24:30 +0200
-Message-ID: <4CAA29ED.9000501@eukrea.com>
-Date: Mon, 04 Oct 2010 21:24:29 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
+	Mon, 04 Oct 2010 21:29:40 +0200
+Received: by wyb35 with SMTP id 35so5375521wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Oct 2010 12:29:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=TMDT68cJPjpassV98fcHPBXX0OB/hkbX/QS17v9F2Ik=;
+	b=t6ReUi6jSpDYXVIBWzuRKcvWjq9cr4mPMdj6/vLF4qOHGrD7YORZZXxAYNWU7Y9nW3
+	hCJfPwu6xl8JwJjNhiz+sRV1bZAU0LRNr6QvHtOUBCMmeU2lmPPLaPkAEYDGbKhEPLQV
+	yefnWoTSNzztNnGUm2w8/Zv3CBfsEfW2rExsI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=vkc/rUV0KJAxEiuXG+ANufrNGfJkgP4yARhC3L5akMOYy1BkgOrbMfh/TPXihodW9+
+	hYzfKGXUVr5Wp0kWNhhYitx5hUfG+utuwWqeRiRKX450YRl4IRgRqCAT4HwIarp5b7de
+	sX24qcFSd13QT4Mh0gCr+gZNZ9b67DJgKp0Ig=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4CA97897.4020001@nedap.com>
-	<4CA97EBC.4040406@eukrea.com>	<4CA98CEF.3090604@nedap.com>	<AANLkTik2_YEL-dhKLr9LuJQ78W4WXS4WvUbxDfXeJk8U@mail.gmail.com>	<4CA99206.5060001@eukrea.com>	<AANLkTikEpu0yxUXYZvfiRbgiFjnjc+GEAJ=-_x_Mszkp@mail.gmail.com>
+Received: by 10.227.32.147 with SMTP id c19mr8391000wbd.43.1286220561911; Mon,
+	04 Oct 2010 12:29:21 -0700 (PDT)
+Received: by 10.220.195.72 with HTTP; Mon, 4 Oct 2010 12:29:21 -0700 (PDT)
+In-Reply-To: <4CAA29ED.9000501@eukrea.com>
+References: <4CA97897.4020001@nedap.com> <4CA97EBC.4040406@eukrea.com>
+	<4CA98CEF.3090604@nedap.com>
+	<AANLkTik2_YEL-dhKLr9LuJQ78W4WXS4WvUbxDfXeJk8U@mail.gmail.com>
+	<4CA99206.5060001@eukrea.com>
+	<AANLkTikEpu0yxUXYZvfiRbgiFjnjc+GEAJ=-_x_Mszkp@mail.gmail.com>
 	<AANLkTi=wjXOWSjoiY0FqUQKU3Y+1hxWFQcvtD7HimFiv@mail.gmail.com>
-In-Reply-To: <AANLkTi=wjXOWSjoiY0FqUQKU3Y+1hxWFQcvtD7HimFiv@mail.gmail.com>
-X-Ovh-Tracer-Id: 3021352402020445513
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+	<4CAA29ED.9000501@eukrea.com>
+Date: Mon, 4 Oct 2010 12:29:21 -0700
+Message-ID: <AANLkTi=mh5OKhwL8qE7ZNwqwh5abjP3=w==oDNHrRbai@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: trouble compiling udev
@@ -47,16 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 19:24:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 04 Oct 2010 19:29:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Le 04/10/2010 20:34, J. L. a écrit :
-> udev151 builds for me without this fix and I am building with gcc
-> 4.5.. Just thought I would let you know
+On Mon, Oct 4, 2010 at 12:24 PM, Eric B=E9nard <eric@eukrea.com> wrote:
+> Le 04/10/2010 20:34, J. L. a =E9crit :
+>>
+>> udev151 builds for me without this fix and I am building with gcc
+>> 4.5.. Just thought I would let you know
+>>
+> which machine / arch / distro are you building for ?
 >
-which machine / arch / distro are you building for ?
+> Eric
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Eric
+gumstix overo angstrom 2010.x gcc 4.5
+
+The only reason I was asking about clarification to the fix you
+mentioned was I was trying to see if it fixed a different package that
+broke for me.
 
 
