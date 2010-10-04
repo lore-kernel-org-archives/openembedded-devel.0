@@ -1,28 +1,39 @@
-Received: from mrqout3.tiscali.it ([195.130.225.13])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <l.bolognini@tiscali.it>) id 1P2oBe-0004U2-6l
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 18:47:06 +0200
-Received: from [10.39.115.21] by mrq-3 with esmtp (Exim)
-	id 1P2nBy-0001Di-Tk; Mon, 04 Oct 2010 17:43:06 +0200
-Received: from ps-wm7 (10.39.75.207) by mail-1.mail.tiscali.sys (8.5.124)
-	id 4CA2ECAE0020CC9D; Mon, 4 Oct 2010 17:43:06 +0200
-Message-ID: <33321834.75021286206986565.JavaMail.defaultUser@defaultHost>
-Date: Mon, 4 Oct 2010 17:43:06 +0200 (CEST)
-From: "l.bolognini@tiscali.it" <l.bolognini@tiscali.it>
-To: Arago Mailing List <arago-devel@gforge.ti.com>, 
-	Open Embedded Mailing List <openembedded-devel@lists.openembedded.org>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P2ofD-0001AH-C7
+	for openembedded-devel@openembedded.org; Mon, 04 Oct 2010 19:17:25 +0200
+Received: by iwn2 with SMTP id 2so7116287iwn.6
+	for <openembedded-devel@openembedded.org>;
+	Mon, 04 Oct 2010 10:17:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=ZuIBiY+PI158XstF+jIJPQhTy4JVXfhboRLXYireejA=;
+	b=kNtbRtF5figbGUaGy+JPcz3/E5JoMEjX1z4u4axwYngYysLzZsluqGd0N11QfPCjOE
+	BP7DkV7gPLmwM1CEiH3S7D2YfvobRnDg9AvYBAtbTBdClWkIWacSqY1FDN39L+CK90lM
+	8C+QQ3wcueB7lNngTuDb9xBoXrm2M//0bG9tw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=a+VBFkMWctP9NvXHYyQBtbSmUGQNgS9zJZu6FiPvuIhiaiNy0+U0HXoItcPNxozrzR
+	ejpTpbAAoWkI2dKS21K+DYrdu4pXVltqrCfuv8Nt4yiaM3jqx5N2VCCGE52FSafLtHFm
+	jjEzrexcCKKjlw9LxJb5vHeVfQFrCgCj2md3A=
 MIME-Version: 1.0
-xOriginalSenderIP: 89.118.158.66
-X-SA-Exim-Connect-IP: 195.130.225.13
-X-SA-Exim-Mail-From: l.bolognini@tiscali.it
+Received: by 10.231.190.149 with SMTP id di21mr10475171ibb.166.1286212625709; 
+	Mon, 04 Oct 2010 10:17:05 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 4 Oct 2010 10:17:05 -0700 (PDT)
+Date: Mon, 4 Oct 2010 19:17:05 +0200
+Message-ID: <AANLkTikO4fHqYzZJ5PDjmWV9Q3a9tBD_Y+rSs0iO6=5m@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: c6a816x-evm support
+Subject: cups issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,92 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 16:47:06 -0000
-Content-Type: text/plain;charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 04 Oct 2010 17:17:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hallo,
-I'm working with Arago but I thought to extend this mail to OE=20
-mailing list too.
-I made=20
-git clone git://arago-project.org/git/arago.
-git
-git clone git://arago-project.org/git/arago-oe-dev.git
-git clone=20
-git://arago-project.org/git/arago-bitbake.git=20
-last Friday (1st October=20
-2010)
-Now I'm trying to build my custom image for MACHINE=3Dc6a816x-evm.
+No idea who is the maintainer of cups, but I found the following issue:
 
-This is my image recipe:
+/etc/init.d/cups refers to ps ax but if you have busybox installed
+there are no ax options.
+As busybox has configurable columns it does not seem too good to fix
+cups to be able to handle both procps ps and busybox ps.
+Guess the preferred solution is to add a dependency to procps and get
+the real thing.
 
-<arago-custom/recipes/images/ti816x-image.bb>
+However when wanting to make that change I bumped into the following:
 
-require recipes/images/arago-base-tisdk-image.bb
-IMAGE_INSTALL +=3D "\
-=09
-openssh \
-=09nano \
-        [...]
-=09openldap \
-=09lmsensors-sensors \
-=09"
+We have 6 cups recipes:
 
+cups_1.1.23.bb  cups_1.2.12.bb  cups_1.2.7.bb  cups_1.3.8.bb
+cups_1.4.3.bb  cups_1.4.4.bb
 
-export IMAGE_BASENAME =3D "ti816x-image"
+The last three (!) of them have DP = "-1"
+Is there a point in add ing a recipe that has DP = "-1" for a
+prolonged time, then create a new version with DP = -1?
+(btw: and no version is pinned or so).
 
-When I launch:
-MACHINE=3Dc6a816x-
-evm bitbake -v ti816x-image
-I got the following error:
+Guess this recipe needs some love.
 
-From git:
-//arago-project.org/git/projects/linux-omap3
- * branch           =20
-master     -> FETCH_HEAD
-NOTE: Creating tarball of git repository
+(btw cups 1.4.4 solves a number of security issues; guess the best way
+forward is to test 1.4.4, then rm the old insecure stuff).
 
-fatal: failed to unpack tree object=20
-661585a1407961c5e71f1d8203f1a32f08e9a772
-NOTE: Task failed: Fetch=20
-failed: Fetch command export HOME=3D...; export PATH=3D...;
-git read-tree=20
-661585a1407961c5e71f1d8203f1a32f08e9a772 failed with signal 128,=20
-output:
-fatal: failed to unpack tree object=20
-661585a1407961c5e71f1d8203f1a32f08e9a772
-
-ERROR: TaskFailed event=20
-exception, aborting
-ERROR: Build of=20
-/home/bolognini/oe/arago/recipes/linux/linux-omap3_2.6.34-psp04.
-00.00.06.bb do_fetch failed
-ERROR: Task 1485=20
-(/home/bolognini/oe/arago/recipes/linux/linux-omap3_2.6.34-psp04.
-00.00.06.bb, do_fetch) failed
-NOTE: Tasks Summary: Attempted 576 tasks=20
-of which 576 didn't need to be rerun and 1 failed.
-ERROR:=20
-'/home/bolognini/oe/arago/recipes/linux/linux-omap3_2.6.34-psp04.
-00.00.06.bb' failed
-
-Is there still something to adjust for this=20
-MACHINE?
-Or is the server out of work for some reasons?
-I notice some=20
-patches have been uploaded few days ago.
-Please let me know,
-thank you=20
-very much,
-bye
-Luca
-
-
-
-
-Supera i limiti: raddoppia la velocit=C3=A0 da 10 a 20 Mega!   Risparmia co=
-n Tutto Incluso: telefono + adsl 20 mega a soli 26,60 =E2=82=AC al mese per=
- un anno!  SCONTO DI 160 EURO!  http://abbonati.tiscali.it/telefono-adsl/pr=
-odotti/tc/tuttoincluso/?WT.mc_id=3D01fw
+Frans
 
 
