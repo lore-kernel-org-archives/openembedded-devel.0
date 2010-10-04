@@ -1,40 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2kmU-0001Vz-Do for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 15:08:57 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P2kln-0007Af-Cs for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 15:07:55 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 15:07:55 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@dresearch.de>) id 1P2kuB-0003mD-D7
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 15:16:38 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id B4196491286
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 15:07:55 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon,  4 Oct 2010 15:16:16 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 4 Oct 2010 15:16:16 +0200
+Message-ID: <4CA9D3A0.8080706@dresearch.de>
+Date: Mon, 04 Oct 2010 15:16:16 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 04 Oct 2010 15:07:43 +0200
-Message-ID: <i8cjiv$806$1@dough.gmane.org>
-References: <i8cf7aMAN_POSIXLY_CORRECT=1@dough.gmane.org>
-	<1286194192-22256-1-git-send-email-sledz@dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <1286194192-22256-1-git-send-email-sledz@dresearch.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <i8cf7aMAN_POSIXLY_CORRECT=1@dough.gmane.org>	<1286194192-22256-1-git-send-email-sledz@dresearch.de>
+	<i8cjiv$806$1@dough.gmane.org>
+In-Reply-To: <i8cjiv$806$1@dough.gmane.org>
+X-OriginalArrivalTime: 04 Oct 2010 13:16:16.0365 (UTC)
+	FILETIME=[535FC1D0:01CB63C6]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH v4] epiphany-2.30.2: unbreak build by adding ca-certificates dependencies
@@ -51,44 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 13:09:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Oct 2010 13:16:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Am 04.10.2010 15:07, schrieb Koen Kooi:
+> To double check: is it gplv2 or gplv2+ (aka "or later"?)
 
-On 04-10-10 14:09, Steffen Sledz wrote:
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> ---
->  recipes/gnome/epiphany_2.30.2.bb |    6 ++++--
->  1 files changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/gnome/epiphany_2.30.2.bb b/recipes/gnome/epiphany_2.30.2.bb
-> index 426d468..6422c74 100644
-> --- a/recipes/gnome/epiphany_2.30.2.bb
-> +++ b/recipes/gnome/epiphany_2.30.2.bb
-> @@ -1,7 +1,9 @@
->  DESCRIPTION = "GNOME default webbrowser"
-> -DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification"
-> +LICENSE = "GPLv2"
+No really sure. The source tree contains a COPYING file containing "GNU G=
+ENERAL PUBLIC LICENSE Version 2, June 1991".
 
-To double check: is it gplv2 or gplv2+ (aka "or later"?)
+So it's "GPLv2" or "GPLv2+"?
 
-Looks good otherwise, provided the license is gplv2:
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMqdGfMkyGM64RGpERAp9FAJkBdHU2eBr4GUBevB0Bz8D3+eKPLQCffGko
-WDyMet3wGhh/sZ8NA2zlODw=
-=BNoS
------END PGP SIGNATURE-----
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
 
 
 
