@@ -1,36 +1,37 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1P2fC2-0002iK-71
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1P2fM6-0000Dz-Io
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 09:10:42 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 58AEF491282
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Oct 2010 09:10:18 +0200 (CEST)
-Received: from mobil-400-586.intern.dresearch.de ([10.32.11.62]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 4 Oct 2010 09:10:18 +0200
-Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
-	id E4F022DA65; Mon,  4 Oct 2010 09:10:22 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch.de>
+	Mon, 04 Oct 2010 09:21:03 +0200
+Received: (qmail 1921 invoked by uid 503); 4 Oct 2010 07:19:12 -0000
+Received: from b9.ovh.net (HELO mail620.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 4 Oct 2010 07:19:12 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 4 Oct 2010 09:14:12 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 4 Oct 2010 09:14:10 +0200
+Message-ID: <4CA97EBC.4040406@eukrea.com>
+Date: Mon, 04 Oct 2010 09:14:04 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Oct 2010 09:10:17 +0200
-Message-Id: <1286176217-20316-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <AANLkTin1useJ5YD3vZ8o22rCzHZvbFai22BEOb5dEHc5@mail.gmail.com>
-References: <AANLkTin1useJ5YD3vZ8o22rCzHZvbFai22BEOb5dEHc5@mail.gmail.com>
-X-OriginalArrivalTime: 04 Oct 2010 07:10:18.0146 (UTC)
-	FILETIME=[33417020:01CB6393]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+References: <4CA97897.4020001@nedap.com>
+In-Reply-To: <4CA97897.4020001@nedap.com>
+X-Ovh-Tracer-Id: 9133581520903974217
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.27.225
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] epiphany-2.30.2: unbreak build by disabling CA files
+Subject: Re: trouble compiling udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,30 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 07:10:44 -0000
+X-List-Received-Date: Mon, 04 Oct 2010 07:21:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
----
- recipes/gnome/epiphany_2.30.2.bb |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+Hi,
 
-diff --git a/recipes/gnome/epiphany_2.30.2.bb b/recipes/gnome/epiphany_2.30.2.bb
-index 426d468..f0d4f5d 100644
---- a/recipes/gnome/epiphany_2.30.2.bb
-+++ b/recipes/gnome/epiphany_2.30.2.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "GNOME default webbrowser"
--DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification"
-+DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification ca-certificates"
- RDEPENDS_${PN} = "gnome-vfs-plugin-http iso-codes"
--PR = "r2"
-+RRECOMMENDS = "ca-certificates"
-+PR = "r3"
- 
- inherit gnome
- 
--- 
-1.7.1
+Le 04/10/2010 08:47, Jaap de Jong a écrit :
+> a fresh rebuild failed in compiling udev.
+> Any clues?
 
+if you are using gcc 4.5 => add CFLAGS_append = " -Os"
+  to udev recipe.
+
+Eric
 
 
