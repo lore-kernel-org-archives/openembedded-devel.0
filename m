@@ -1,46 +1,43 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P2kCX-0001ox-ET
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 14:31:32 +0200
-Received: by gyg8 with SMTP id 8so1704754gyg.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P2kmU-0001Vz-Do for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 15:08:57 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P2kln-0007Af-Cs for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 15:07:55 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Oct 2010 15:07:55 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 05:31:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=tEUwUsXXUlYmRT50U5ew/0PBNq/t47pKa4MJq7+606M=;
-	b=M0WKRHBLBHo3/cOLqJ5Gg+rNKwzapMUAFMmYe7UiEYWey5cngLNvzOmrGFdGABdL7n
-	LSEvK61ohKvB+Wxe3JPkTDMIBFt0k5RxsEN7SCGlZEufVLThaGSMMp/5ePkB7Eg0t53h
-	AhcNt886p7WlXppRetB3Q+ifsBA+K8joZHmlI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=h9bS+488kMJrHwYUbJX21+4zOxM0aONWVyGxm7mcZAo4iZq3Is6fDgAEsq8lekl35Z
-	lQOhljAGn4uTls+pyQ24pOUlSK68ZzrTqHWA+40F2L4GOUkoxiZV7g48aZsju1D7PkAn
-	Wne5177glH5ilae/kATiXDgfBSuyZMCC5tL70=
-MIME-Version: 1.0
-Received: by 10.231.149.12 with SMTP id r12mr10082694ibv.185.1286195467957;
-	Mon, 04 Oct 2010 05:31:07 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 4 Oct 2010 05:31:07 -0700 (PDT)
-In-Reply-To: <4CA9C28B.3000304@opendreambox.org>
-References: <1285931854-17148-1-git-send-email-obi@opendreambox.org>
-	<1285931854-17148-3-git-send-email-obi@opendreambox.org>
-	<AANLkTimSu5dVZJDbjSswaKf523NM9FfpNto=ZSq61g+M@mail.gmail.com>
-	<4CA9C28B.3000304@opendreambox.org>
-Date: Mon, 4 Oct 2010 14:31:07 +0200
-Message-ID: <AANLkTi=FGS+ZJm6ePkrdGPaY+t6_uKbJX+Tqi8v-frVe@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 04 Oct 2010 15:07:55 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 04 Oct 2010 15:07:43 +0200
+Message-ID: <i8cjiv$806$1@dough.gmane.org>
+References: <i8cf7aMAN_POSIXLY_CORRECT=1@dough.gmane.org>
+	<1286194192-22256-1-git-send-email-sledz@dresearch.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
+In-Reply-To: <1286194192-22256-1-git-send-email-sledz@dresearch.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/4] cdfs-2.6.27: initial recipe
+Subject: Re: [PATCH v4] epiphany-2.30.2: unbreak build by adding ca-certificates dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,26 +51,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 12:31:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 04 Oct 2010 13:09:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/10/4 Andreas Oberritter <obi@opendreambox.org>:
-> On 02.10.2010 18:28, Frans Meulenbroeks wrote:
->> Looks interesting, but pity this is only for 2.6.27 (with no newer
->> version being available) so can't test/use this.
->
-> Actually, 2.6.27 is only the version of CDfs. You should be able to
-> use it with newer kernels. It was tested with 2.6.32 and therefore
-> contains a patch to fix a compile error with Linux 2.6.32.
->
-> Best regards,
-> Andreas
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'll give it a try (probably tonight) with 2.6.35 (which is what I am
-using atm).
-If it builds and works, I'll commit it.
-Otherwise I'll get back to you
+On 04-10-10 14:09, Steffen Sledz wrote:
+> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> ---
+>  recipes/gnome/epiphany_2.30.2.bb |    6 ++++--
+>  1 files changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/gnome/epiphany_2.30.2.bb b/recipes/gnome/epiphany_2.30.2.bb
+> index 426d468..6422c74 100644
+> --- a/recipes/gnome/epiphany_2.30.2.bb
+> +++ b/recipes/gnome/epiphany_2.30.2.bb
+> @@ -1,7 +1,9 @@
+>  DESCRIPTION = "GNOME default webbrowser"
+> -DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification"
+> +LICENSE = "GPLv2"
 
-Frans
+To double check: is it gplv2 or gplv2+ (aka "or later"?)
+
+Looks good otherwise, provided the license is gplv2:
+
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMqdGfMkyGM64RGpERAp9FAJkBdHU2eBr4GUBevB0Bz8D3+eKPLQCffGko
+WDyMet3wGhh/sZ8NA2zlODw=
+=BNoS
+-----END PGP SIGNATURE-----
+
 
 
