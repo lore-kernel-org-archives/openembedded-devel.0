@@ -1,40 +1,41 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P2phz-0005pu-UL
+	(envelope-from <vwyodapink@gmail.com>) id 1P2psD-0001GK-Dq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 20:24:20 +0200
-Received: by iwn2 with SMTP id 2so7184662iwn.6
+	Mon, 04 Oct 2010 20:34:53 +0200
+Received: by ewy7 with SMTP id 7so2065365ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 11:23:58 -0700 (PDT)
+	Mon, 04 Oct 2010 11:34:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=FFOMTbt4Ae4dRA5kpNKwxb34KBlBoQrkzu3t3y7kqIc=;
-	b=MlcGVZZQCPoQBtkr0zRvo9We1L7ERhBrXUEUTJqY6o6A1wlEdAPXLJeSmS64HOY4+w
-	6saz52qZGMlvVQoBx5TsMKoMHvTfTYeTuuKUW/v1poA0gtqutB624csJoP5nrfQzB2kZ
-	rtUs3csvENYS9+plOHFAZQWhYkFaXHOoLtlfk=
+	bh=zAeFGdQpoPB2XLwtH9y5vTqzpQ3bD/vZQ0e9S5oG5vY=;
+	b=hNPfLxPVXA0vp85O3e7dg2HzBo+mzqLaYNAhym1f6AmudWzmXI6diJSyjidvMSiBfY
+	V3gA8LGRRSutOsGhR6exjAaskbGmkoDRe5zXwWwY28E2R+31+HBOnrUob7agDCaTEYgy
+	HDj/9F39T3DZA1e1I6Yt++gNoF2BxlBPHTmi8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=hWykhOD7H3yncpJr7a92jQd12myYczEjjXKSju6URgpEtVUm9/D4OoXPol0qOM9IMA
-	eoUANQbh2LpxJoE/miaU/vWVdyLCsPODBlB41zQ+bAeDbnzJBoRGBb2tG2mCsIjtXlDf
-	ZqlWIRmn+YuEqOaQpG3J+9sdhaAIqQHLf3/wU=
-Received: by 10.231.149.207 with SMTP id u15mr10660289ibv.13.1286216637346;
-	Mon, 04 Oct 2010 11:23:57 -0700 (PDT)
+	b=syqa52o+7fO0a4O+su8gxyBkRs5K/+K1WZ98s1v39j49hElOaw9tZPZTx3sm7JWe/D
+	U/k67H5X+OBb4oIA6mtbj3+YVfKmTv0ynq4TtUZiM6+EEG14rsVg9+cQr0iL6FW6WA1a
+	92vRCkMC3vN7bm1kBy+Q45WmK4fHtnjYh45uc=
 MIME-Version: 1.0
-Received: by 10.231.199.1 with HTTP; Mon, 4 Oct 2010 11:23:36 -0700 (PDT)
-In-Reply-To: <4CA99206.5060001@eukrea.com>
+Received: by 10.103.176.14 with SMTP id d14mr3405259mup.93.1286217276827; Mon,
+	04 Oct 2010 11:34:36 -0700 (PDT)
+Received: by 10.220.195.72 with HTTP; Mon, 4 Oct 2010 11:34:36 -0700 (PDT)
+In-Reply-To: <AANLkTikEpu0yxUXYZvfiRbgiFjnjc+GEAJ=-_x_Mszkp@mail.gmail.com>
 References: <4CA97897.4020001@nedap.com> <4CA97EBC.4040406@eukrea.com>
 	<4CA98CEF.3090604@nedap.com>
 	<AANLkTik2_YEL-dhKLr9LuJQ78W4WXS4WvUbxDfXeJk8U@mail.gmail.com>
 	<4CA99206.5060001@eukrea.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 Oct 2010 11:23:36 -0700
-Message-ID: <AANLkTikEpu0yxUXYZvfiRbgiFjnjc+GEAJ=-_x_Mszkp@mail.gmail.com>
+	<AANLkTikEpu0yxUXYZvfiRbgiFjnjc+GEAJ=-_x_Mszkp@mail.gmail.com>
+Date: Mon, 4 Oct 2010 11:34:36 -0700
+Message-ID: <AANLkTi=wjXOWSjoiY0FqUQKU3Y+1hxWFQcvtD7HimFiv@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -55,43 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 18:24:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 04 Oct 2010 18:34:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 4, 2010 at 1:36 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> Le 04/10/2010 10:24, J. L. a =C3=A9crit :
->>
->> On Mon, Oct 4, 2010 at 1:14 AM, Jaap de Jong<jaap.dejong@nedap.com>
->> =C2=A0wrote:
+On Mon, Oct 4, 2010 at 11:23 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Mon, Oct 4, 2010 at 1:36 AM, Eric B=E9nard <eric@eukrea.com> wrote:
+>> Le 04/10/2010 10:24, J. L. a =E9crit :
 >>>
->>> Thanks!
->>> That seems to work!!
->>> Something to be added to udev recipe...
+>>> On Mon, Oct 4, 2010 at 1:14 AM, Jaap de Jong<jaap.dejong@nedap.com>
+>>> =A0wrote:
+>>>>
+>>>> Thanks!
+>>>> That seems to work!!
+>>>> Something to be added to udev recipe...
+>>>
+>>> Any chance you can post your recipe I am not sure if I am getting
+>>> where you added that in the recipe. Thanks
+>>>
+>> CFLAGS_append =3D " -Os"
 >>
->> Any chance you can post your recipe I am not sure if I am getting
->> where you added that in the recipe. Thanks
->>
-> CFLAGS_append =3D " -Os"
 >
-
-Hi Eric
-
-Now gcc 4.5 is default so people will hit it often. Can you commit
-this workaround
-for time being while gcc is being fixed to cure it with reference to
-upstream bug
-You have my ack for this :)
-
-Thanks
--Khem
-
-> Eric
+> Hi Eric
+>
+> Now gcc 4.5 is default so people will hit it often. Can you commit
+> this workaround
+> for time being while gcc is being fixed to cure it with reference to
+> upstream bug
+> You have my ack for this :)
+>
+> Thanks
+> -Khem
+>
+>> Eric
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
+
+udev151 builds for me without this fix and I am building with gcc
+4.5.. Just thought I would let you know
 
 
