@@ -1,46 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.reciva.com ([62.7.80.110] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P2m1V-0002RJ-2P
+	(envelope-from <philb@gnu.org>) id 1P2mLR-0002I1-JS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 16:28:20 +0200
-Received: by iwn2 with SMTP id 2so6939217iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Oct 2010 07:27:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=8jF4NSiOiZ95kW1PwvMWMa3LUy2jh4XQfCorHWEQpkE=;
-	b=UYj9t+b1t1i+eePA1XN8Hz7azwUER291j69TpgNjG5gfv+03zkknjNm0JB74yURVul
-	tpGuYoufUlVxgtcPa0v5mjW77lFOfxKhpT0FzfBZAwRqcI6f+dsxCmUsFra9i5srGyeB
-	PNP+x3t7p1Zu1PWLPcds4PL5FAcGA9db94ya0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=LqDIjfCfUb3g03fRCOoynIKIljNjkjNUkcR/G3ZAYUXQptEa+5mMNSo5fN8dnuUxx+
-	czGr+MbSdTFj+0muVvSpakCGM+Qo/jRM8iY9bgtKXzzPP1zLypsIC9ad0GOBvbzpGymn
-	MsyMf74z8qrdFqxQwC9UqR2gl3o1MurOL9cqc=
-MIME-Version: 1.0
-Received: by 10.231.30.76 with SMTP id t12mr10163377ibc.161.1286202472993;
-	Mon, 04 Oct 2010 07:27:52 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 4 Oct 2010 07:27:52 -0700 (PDT)
-In-Reply-To: <1285839949.3805.64.camel@mattotaupa>
-References: <1285792798-6529-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1285796123.27605.4.camel@mattotaupa>
-	<AANLkTimvzxaKE3d=oEYAA7BnX3XZLb9btL36qJ2Bhxwn@mail.gmail.com>
-	<1285839949.3805.64.camel@mattotaupa>
-Date: Mon, 4 Oct 2010 16:27:52 +0200
-Message-ID: <AANLkTint=qobW34DwK9eFaZKAtoJnh2NPt1h_GLVR0n6@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 04 Oct 2010 16:48:52 +0200
+Received: from [192.168.106.10] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1P2m5u-0000Np-Se
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 15:32:46 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1P2m5u-0003El-Mf
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Oct 2010 15:32:46 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <4CA9D3A0.8080706@dresearch.de>
+References: <i8cf7aMAN_POSIXLY_CORRECT=1@dough.gmane.org>
+	<1286194192-22256-1-git-send-email-sledz@dresearch.de>
+	<i8cjiv$806$1@dough.gmane.org>  <4CA9D3A0.8080706@dresearch.de>
+Date: Mon, 04 Oct 2010 15:32:46 +0100
+Message-ID: <1286202766.3770.17.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 192.168.106.10
+X-SA-Exim-Connect-IP: 62.7.80.110
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] kernel.bbclass: avoid NOTE messages for files that are staged but not packaged
+Subject: Re: [PATCH v4] epiphany-2.30.2: unbreak build by adding ca-certificates dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,22 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 14:28:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 04 Oct 2010 14:48:57 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I discovered an issue with this patch.
-kerneldir was moved (and modified) from kernel_do_install to
-sysroot_stage_all_append.
-as the assignment to kerneldir was not used in kernel_do_install it
-went unnoticed that some kernel recipes have a do_install_append which
-references kerneldir.
-I authored a small patch for this, setting kerneldir at the end of
-kernel_do_install (with the original value).
+On Mon, 2010-10-04 at 15:16 +0200, Steffen Sledz wrote:
+> Am 04.10.2010 15:07, schrieb Koen Kooi:
+> > To double check: is it gplv2 or gplv2+ (aka "or later"?)
+> 
+> No really sure. The source tree contains a COPYING file containing "GNU GENERAL PUBLIC LICENSE Version 2, June 1991".
+> 
+> So it's "GPLv2" or "GPLv2+"?
 
-I've already pushed it
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=98037f10625acdc68d35d94dfbce6cafff9fbe99
-without the patch at least one of my testing targets would have failed.
+The COPYING file isn't what you want to be looking at, really.  That
+will just be a copy of one particular version of the GPL and doesn't
+necessarily mean that the package can't be distributed under other
+licenses.
 
-Frans
+According to the copyright file from Debian's epiphany-browser package,
+it's GPLv2+.  Specifically:
+
+    This package is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+except that:
+
+        The contents of the help/ directory are licensed under the GNU
+        FDL
+        version 1.1 and above. 
+
+p.
+
+
 
 
