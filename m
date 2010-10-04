@@ -1,35 +1,40 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P2sHo-0000hX-It
+	(envelope-from <vwyodapink@gmail.com>) id 1P2saK-0008Id-SE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Oct 2010 23:09:30 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L9S00GYMAQTMI23@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	04 Oct 2010 16:08:59 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E2D3914AF64; Mon,
-	04 Oct 2010 17:08:52 -0400 (EDT)
-Date: Mon, 04 Oct 2010 17:08:52 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 04 Oct 2010 23:28:37 +0200
+Received: by pvg6 with SMTP id 6so1431480pvg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Oct 2010 14:28:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=fVrtGCE9whYROGTMG4JUarVK871SX38/09Dpik1Bh7k=;
+	b=NY1QMH+fp4V0/gmylnfjNmSRArp/f7Vgb8vEBqvuFqWk5P+JO1SvRd1yJleZLISKkQ
+	Ij1oxHPZDu0cknT6a8MLrcZnB5D0g1hbx279wH9OYwv4dU7/B0qVnGaUlGgqs3kEMgf7
+	UInU2qJGfTUAWadD/l1j+U/uxRsTNcuxTBUuc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=qUDRFbl9/fFcP6+BBEGbCmP/4t+stP2bnZoD4buFnWsADYqL/VJlOO4bvUaYhOKnIu
+	Fe1sBN8znJIP/Qqqrnf0pILCm+hImnM8UT+ognK8ke2NFqt1/ONA6vHSHTkB3SRodeox
+	9vhJr0WX1Uyi757QrC0A2pfiITSyahtwzbCMk=
+MIME-Version: 1.0
+Received: by 10.142.60.11 with SMTP id i11mr9308531wfa.97.1286227697572; Mon,
+	04 Oct 2010 14:28:17 -0700 (PDT)
+Received: by 10.220.195.72 with HTTP; Mon, 4 Oct 2010 14:28:17 -0700 (PDT)
+Date: Mon, 4 Oct 2010 14:28:17 -0700
+Message-ID: <AANLkTi=7CfOcg=8odi3k95kbMM5qxjNfunqLnLTBxKzs@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20101004210852.GA12282@denix.org>
-References: <4CA719E0.7050409@freyther.de> <i89b3v$g4g$1@dough.gmane.org>
-	<4CA83188.7010203@freyther.de> <i89bro$g4g$2@dough.gmane.org>
-	<AANLkTi=Bv3pZwMwJ20MNipgMtW7S4rb=r+zxPqc9NGDQ@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <AANLkTi=Bv3pZwMwJ20MNipgMtW7S4rb=r+zxPqc9NGDQ@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: RPATH in many modules
+Subject: Question about check data file clashes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,44 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Oct 2010 21:09:30 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 04 Oct 2010 21:28:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sun, Oct 03, 2010 at 01:46:41PM -0700, Khem Raj wrote:
-> On Sun, Oct 3, 2010 at 12:37 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > On 03-10-10 09:32, Holger Freyther wrote:
-> >> On 10/03/2010 03:24 PM, Koen Kooi wrote:
-> >>
-> >>> Could you fix the patch to say to which (wrong) sysroot it points to?
-> >>>
-> >>> MACHINE=beagleboard bitbake libcdio
-> >>>
-> >>> rpath -> sysroots/x86 or rpath -> sysroots/armv7a or both?
-> >>
-> >> ERROR: QA Issue with libgettextlib: package libgettextlib contains bad RPATH
-> >> /home/ich/build/arm/xscale/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib
-> >> in file
-> >> /home/ich/build/arm/xscale/tmp/work/armv5te-angstrom-linux-gnueabi/gettext-0.18-r3/packages-split/libgettextlib/usr/lib/libgettextlib-0.18.so
-> >>
-> >> Can you propose a better wording? From the above I try to indicate that
-> >> /home/ich/build/arm/xscale/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib
-> >> is the bad RPATH and that it is inside the libgettextlib-0.18.so
-> >
-> > "Target libs and apps contain a bad RPATH to the target sysroot e.g.
-> > /tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib" ?
-> 
-> I am working on libtool 2.4 upgrade which has sysroot support. I am
-> hoping it will help us in fixing this kind
-> of problems.
+I am trying to get my image to build and running into a check data
+file clash and not sure why or how to fix. It says two packages are
+trying to install the same file, so how do you make this get through
+and still have both packages installed? Here is the error I got:
 
-Whoa, libtool with sysroot support! Sweet. I'm very interested in -sdk version 
-of it... :)
+| Collected errors:
+|  * check_data_file_clashes: Package linux-libc-headers-dev wants to
+install file /home/vdubhack/overo-oe/tmp/rootfs/qEnlightDesktop/usr/include/scsi/scsi.h
+| 	But that file is already provided by package  * libc6-dev
 
--- 
-Denys
+Thanks for any help on this.
+
+JL
 
 
