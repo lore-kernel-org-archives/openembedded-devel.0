@@ -1,41 +1,36 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1P38RT-00088s-LD
+	(envelope-from <stefan@datenfreihafen.org>) id 1P38ex-0000J0-2X
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Oct 2010 16:24:36 +0200
-Received: by wyb35 with SMTP id 35so6213447wyb.6
+	Tue, 05 Oct 2010 16:38:27 +0200
+Received: from guest190.ibr.cs.tu-bs.de ([134.169.35.190] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1P38ee-0004TX-1T by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Oct 2010 07:24:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=oj8uCnDAqVE4jkyQZwkzbCX+zIzqHnEyrll2DbUjHr8=;
-	b=MjUL1AcirVruWYmYjJk+M0ufttexLkewcmCrQJYhp8ZK9NLA6n6zwbLyg8+Tgkg+dt
-	KPYFzndAd0MlM0425lvr+k7DilHGDusYkwekmyjdeOwfjMeF5x/c0qZKSb4mmnk2AnPE
-	kaQ0AEaN+VWraylM4Y/V0VD/hPDVbwVim6UmY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=yFgO6+fcC/xy7spd7Cy16wyNBuVQ1DzLdU5t7891L4Q+2QE5ebN+X+RfW7aKdZo7ho
-	zdpU8Z6MqhVwmM2KIZTr8s4kNVNSiVn4YCl+9PC56GH8eX0Pe5mXWNY5fRAJL8BFn9Fa
-	ULC000gz9zLKb7ygdqJD/NpqE/iojG3AC+TuY=
-MIME-Version: 1.0
-Received: by 10.227.151.70 with SMTP id b6mr3494795wbw.6.1286288652154; Tue,
-	05 Oct 2010 07:24:12 -0700 (PDT)
-Received: by 10.216.45.149 with HTTP; Tue, 5 Oct 2010 07:24:12 -0700 (PDT)
-In-Reply-To: <AANLkTikaunRh8wSWihAN3C9xh++YBH2qZT8Tr_xdxVF-@mail.gmail.com>
+	Tue, 05 Oct 2010 16:38:10 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1P383z-0005X9-2U
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Oct 2010 16:00:15 +0200
+Date: Tue, 5 Oct 2010 16:00:14 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101005140014.GF3517@excalibur.local>
 References: <AANLkTikzKs+3U0JfEbQxg5dLVuMF51To2qTn55YLOmjg@mail.gmail.com>
 	<20101005123257.GD3517@excalibur.local>
 	<AANLkTikaunRh8wSWihAN3C9xh++YBH2qZT8Tr_xdxVF-@mail.gmail.com>
-Date: Tue, 5 Oct 2010 10:24:12 -0400
-Message-ID: <AANLkTikHcHx5=mOZ7CmvkrnuBXk2dGuFKPWCcaJ=gAVm@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+MIME-Version: 1.0
+In-Reply-To: <AANLkTikaunRh8wSWihAN3C9xh++YBH2qZT8Tr_xdxVF-@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -53,29 +48,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Oct 2010 14:24:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 05 Oct 2010 14:38:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, Oct 5, 2010 at 9:23 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Oh, one other thing.
->
+Hello.
+
+On Tue, 2010-10-05 at 15:23, Frans Meulenbroeks wrote:
+> 
 > Personally I would prefer it if the testing branch could be made on friday.
 > That way I (and I guess others) can use unused CPU cycles @ work
 > during the weekend to do the test builds.
 > How do others feel about that?
 
-I think this is a good idea -- so the testing cycle would run from Fri
-to Fri instead of Mon to Mon.  As this weeks build is broken for many
-combinations, it would be good time to shift to Fri as we will not
-lose any testing time.  I'll plan for this Fri unless there are
-objections.
+I think it makes sense. I normally do the build directly after the new testing
+branch gets created and doing that at a weekend would be good from my view. Put
+monday is not that bad either.
 
-Thanks,
-Cliff
+Cliff, for now you have done all the branch creating and tagging, etc. Thanks
+for that. If you need help or some weeks relaxing from the monotone tasks let us
+know.
 
--- 
-=================
-http://bec-systems.com
+regards
+Stefan Schmidt
 
 
