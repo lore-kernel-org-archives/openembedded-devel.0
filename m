@@ -1,34 +1,34 @@
 Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1P38PE-00080t-2m
+	(envelope-from <cliff.brake@gmail.com>) id 1P38RT-00088s-LD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Oct 2010 16:22:14 +0200
-Received: by wyb35 with SMTP id 35so6210583wyb.6
+	Tue, 05 Oct 2010 16:24:36 +0200
+Received: by wyb35 with SMTP id 35so6213447wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Oct 2010 07:21:51 -0700 (PDT)
+	Tue, 05 Oct 2010 07:24:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=704tSxQkX7aiVr+DVbgef+ppih6yxe7OMI3UFzhWH34=;
-	b=QPHTUl7bG7eJZLYWzyl6VrYQUOHJh9pzZnQ69QfhRB8HF+qobqvgmQY7TIfKor3gBb
-	JvEDbckN//zNtjhH7TS5I4VEDGOwYh2DMq6Nm33DFkIxxHW4d/ufJbi8G2/kaAyogPQ9
-	shpEy0nWYkQz/xSfYIIBLOeUo79pUVvVzAqHg=
+	bh=oj8uCnDAqVE4jkyQZwkzbCX+zIzqHnEyrll2DbUjHr8=;
+	b=MjUL1AcirVruWYmYjJk+M0ufttexLkewcmCrQJYhp8ZK9NLA6n6zwbLyg8+Tgkg+dt
+	KPYFzndAd0MlM0425lvr+k7DilHGDusYkwekmyjdeOwfjMeF5x/c0qZKSb4mmnk2AnPE
+	kaQ0AEaN+VWraylM4Y/V0VD/hPDVbwVim6UmY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=DzA7e7I3SAaPC2XMdw+0yu/r6KIVBeuiebxY29qrXmCnsJ7hcBCx9J96EuwL6Qii2t
-	WpRLqOjV9y0Cobh5SoU0Ja94ZpVPMv1kvPDyvNOz6b1wfGA0+v6LoKcYmbJ2EMc2/1sH
-	mJiHgS0SJQE1RQYE9vAiSvEdiIrBJQSGFnlbA=
+	b=yFgO6+fcC/xy7spd7Cy16wyNBuVQ1DzLdU5t7891L4Q+2QE5ebN+X+RfW7aKdZo7ho
+	zdpU8Z6MqhVwmM2KIZTr8s4kNVNSiVn4YCl+9PC56GH8eX0Pe5mXWNY5fRAJL8BFn9Fa
+	ULC000gz9zLKb7ygdqJD/NpqE/iojG3AC+TuY=
 MIME-Version: 1.0
-Received: by 10.227.127.84 with SMTP id f20mr9999247wbs.3.1286288510944; Tue,
-	05 Oct 2010 07:21:50 -0700 (PDT)
-Received: by 10.216.45.149 with HTTP; Tue, 5 Oct 2010 07:21:50 -0700 (PDT)
-In-Reply-To: <AANLkTikGBtkXxirSKm=arDwFeTh1-fTXc6iLLEuAaCUy@mail.gmail.com>
+Received: by 10.227.151.70 with SMTP id b6mr3494795wbw.6.1286288652154; Tue,
+	05 Oct 2010 07:24:12 -0700 (PDT)
+Received: by 10.216.45.149 with HTTP; Tue, 5 Oct 2010 07:24:12 -0700 (PDT)
+In-Reply-To: <AANLkTikaunRh8wSWihAN3C9xh++YBH2qZT8Tr_xdxVF-@mail.gmail.com>
 References: <AANLkTikzKs+3U0JfEbQxg5dLVuMF51To2qTn55YLOmjg@mail.gmail.com>
-	<AANLkTinpEEdA7k87fa2nPXGtav6URN+R6itO6UE4gtGk@mail.gmail.com>
-	<AANLkTikGBtkXxirSKm=arDwFeTh1-fTXc6iLLEuAaCUy@mail.gmail.com>
-Date: Tue, 5 Oct 2010 10:21:50 -0400
-Message-ID: <AANLkTikx3QRQVWJMEfLrv1bsEuvgK-xCC0mB4ZCOyxXC@mail.gmail.com>
+	<20101005123257.GD3517@excalibur.local>
+	<AANLkTikaunRh8wSWihAN3C9xh++YBH2qZT8Tr_xdxVF-@mail.gmail.com>
+Date: Tue, 5 Oct 2010 10:24:12 -0400
+Message-ID: <AANLkTikHcHx5=mOZ7CmvkrnuBXk2dGuFKPWCcaJ=gAVm@mail.gmail.com>
 From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 74.125.82.175
@@ -53,45 +53,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Oct 2010 14:22:14 -0000
+X-List-Received-Date: Tue, 05 Oct 2010 14:24:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Oct 5, 2010 at 7:39 AM, Frans Meulenbroeks
+On Tue, Oct 5, 2010 at 9:23 AM, Frans Meulenbroeks
 <fransmeulenbroeks@gmail.com> wrote:
-> 2010/10/5 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
->> 2010/10/4 Cliff Brake <cliff.brake@gmail.com>:
->>> Testing run from last week:
->>> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=testing_2010-09-27
->>>
->>> testing-next is updated and ready for clean builds:
->>> http://wiki.openembedded.net/index.php/Testing
->>>
->>> Thanks,
->>> Cliff
->>>
->>> --
->>
->> For me this version fails on native sqlite3_3.6.23.1.bb, do_compile
->> see e.g. testing_2010-1004: fails on native sqlite3_3.6.23.1.bb, do_compile
->> See also http://tinderbox.openembedded.net/public/logs/task/8402014.txt
->>
->> this fails both minimal/console-image as well as slugos/slugos-image
->>
->> Frans
->>
-> Actually this is already fixed here:
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=9f503dbde0f2f6e9d4a94f6ab4be1b04dfc99950
+> Oh, one other thing.
 >
-> suggest to make a new testing-next label and restart this weeks' test.
+> Personally I would prefer it if the testing branch could be made on friday.
+> That way I (and I guess others) can use unused CPU cycles @ work
+> during the weekend to do the test builds.
+> How do others feel about that?
 
-Hi Frans,
-
-I would prefer to simply wait till next week.  The reason is some
-people may have already done builds, and I don't want to burden them
-with rebuilding, and sorting out the confusion who built on what
-version of testing-next.  I don't think its a big deal if we miss a
-weak as long as we identify the issues and fix them for next week.
-But, I'm open to other thoughts on this.
+I think this is a good idea -- so the testing cycle would run from Fri
+to Fri instead of Mon to Mon.  As this weeks build is broken for many
+combinations, it would be good time to shift to Fri as we will not
+lose any testing time.  I'll plan for this Fri unless there are
+objections.
 
 Thanks,
 Cliff
