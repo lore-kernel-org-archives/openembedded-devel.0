@@ -1,41 +1,29 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dbaryshkov@gmail.com>) id 1P39bs-0004cw-V2
+	(envelope-from <holger+oe@freyther.de>) id 1P39kM-0005bH-1y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Oct 2010 17:39:23 +0200
-Received: by qyk8 with SMTP id 8so5002631qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Oct 2010 08:39:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=EEL/EDg2Z5JUcHP0eIdNIpSpKPmvgUvMx2OSyynUzNQ=;
-	b=sAP+W1MEvKgZLukL4k0oamzBrlGFpN88UKhbYftR35aY4zJoyzzQQdS6mnQpSu568k
-	8gu1zPLXrQzjNmeTLcuO7Cs6a9qhITwN2p3gW2YM39dHuSpPFZWo48oQk2ddbhN/pgya
-	VzPyVafgNBd1xBHQ5jqGs9QcWa1BkKtP6rRAQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=sFRkKqt+2MnQwsOmp0RCoWZy5J05HXNB6tmOeTqeQOAua9xnmv8QZgHimK6RTGaNB1
-	jY68B5t+9Dl0FalLnIa/O7ilJQbYKLkMJF2+NZnwIdUngmgob+WWEjlM66ie98qeERQj
-	Uy7gjLj6Bxdlpjz8QfQkTni1seotX6lnD3fEU=
+	Tue, 05 Oct 2010 17:48:15 +0200
+Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
+	[91.64.127.39])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id E5E081B10C05;
+	Tue,  5 Oct 2010 15:51:30 +0000 (UTC)
+Message-ID: <4CAB48A1.6050807@freyther.de>
+Date: Tue, 05 Oct 2010 23:47:45 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc14 Lightning/1.0b2
+	Thunderbird/3.1.4
 MIME-Version: 1.0
-Received: by 10.224.80.203 with SMTP id u11mr8294691qak.355.1286293140476;
-	Tue, 05 Oct 2010 08:39:00 -0700 (PDT)
-Received: by 10.229.32.83 with HTTP; Tue, 5 Oct 2010 08:39:00 -0700 (PDT)
-In-Reply-To: <4CAB2FBD.6060401@freyther.de>
+To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 References: <4CAB2FBD.6060401@freyther.de>
-Date: Tue, 5 Oct 2010 19:39:00 +0400
-Message-ID: <AANLkTikFS-A1T_tiu5_4ajBk=BKJU3Q=O4wqP2XcTxwf@mail.gmail.com>
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-To: Holger Freyther <holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: dbaryshkov@gmail.com
+	<AANLkTikFS-A1T_tiu5_4ajBk=BKJU3Q=O4wqP2XcTxwf@mail.gmail.com>
+In-Reply-To: <AANLkTikFS-A1T_tiu5_4ajBk=BKJU3Q=O4wqP2XcTxwf@mail.gmail.com>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openembedded-devel@lists.openembedded.org
@@ -53,43 +41,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Oct 2010 15:39:23 -0000
+X-List-Received-Date: Tue, 05 Oct 2010 15:48:15 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 10/05/2010 11:39 PM, Dmitry Eremin-Solenikov wrote:
 
-On Tue, Oct 5, 2010 at 6:01 PM, Holger Freyther <holger+oe@freyther.de> wro=
-te:
-> Hi Dmitry,
->
-> your latest change is wrong. You apply a patch (that is not mentioned in =
-the
-> commit message) that does not exist in the tree. Your patch to
-> qt4-tools-sdk.inc is also wrong. qt4-tools-sdk.inc is only used by
-> qt4-tools-sdk_4.7.0.bb which is using -embedded and -no-freetype... so ad=
-ding
-> the patch and the extra includes is not correct (and you probably should =
-have
-> bumped INC_PR in that file).
+> 
+> Commited fixes for this.
 
-Commited fixes for this.
-
-> For Qt 4.6.3 I would propose building the tools with --no-freetype as we =
-have
-> no interest in GUI anyway.
-
-I'll look into that.
-
-> I hope you can fix that soon.
->
-> =A0 =A0 =A0 =A0thanks.
->
-
-
-
---=20
-With best wishes
-Dmitry
+thanks. Could you please describe the error you were seeing for your LFLAGS patch?
 
 
