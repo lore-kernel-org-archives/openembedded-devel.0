@@ -1,45 +1,46 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P3CTE-0004kr-4x
+	(envelope-from <dbaryshkov@gmail.com>) id 1P3Dtx-0001FK-RF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Oct 2010 20:42:38 +0200
-Received: by iwn2 with SMTP id 2so8613967iwn.6
+	Tue, 05 Oct 2010 22:14:18 +0200
+Received: by qyk8 with SMTP id 8so5327750qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Oct 2010 11:42:18 -0700 (PDT)
+	Tue, 05 Oct 2010 13:13:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=peBJ0QbKzhLZrnufjZkl32keLvUTaCTQQ6wyRW1nP+E=;
-	b=h8Z97TjgmKX63UyhkfscEt/uuB8y6gTe/06N1RsiBenmJCFziPzMKb7suIfNzhuh2/
-	qfDEAYo8/9q/udu5exCdG9M8eTCW8FHSEBIrYrPKFf52QgFuiFWaAYI+lENu1AsMTU03
-	0ecVi/A9LnkMmLyRfYd6aBoBCfSJRnoou0Ugo=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type;
+	bh=zoU4paDsf/m9wVNxoUFwJpuBiuNllzMF22hQBaY8ryk=;
+	b=B3h/ZoPuNRM44upx2Hi5xDzEZ1CCQHrW+GDa71c774gCumh9JlozJPynqIiem0HTkf
+	kUnzRDxwXBkS1Ck/BwOfgn+MoBL+0kPoTgr6+gW763BFVOERcMOaWfEU9Lee2yx2K3bo
+	VleIWERmXTb1E5DzTqwL40F/mfrELcb+76GWY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=SAlwx4yRq3xit1R7IEmNZIIjJSchbQnrvZObFZrvKUD1QadCbinhIJQDDZ8MH3PmsT
-	1k+2n+9Jl0QCGxUyMuhglBLOaajJ9H/i0eR6r2BXMEXGFr+TvnLS/zJ979uIKLOMqTAH
-	o4vhUvokiE9h5UmqXsSSfb3gLsetoIpmjG6N4=
-Received: by 10.231.59.13 with SMTP id j13mr12577361ibh.77.1286304138437; Tue,
-	05 Oct 2010 11:42:18 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=jbUGGN+5QL+qvWyAwisvq0dqD6GVo6ky7RxKmHrOhpZrs+apVZnHWAcKpMeupH1q0u
+	FzFCMmcP+Mb5fnGLt900Qw/dLdnfB/YhrHHWqVWOx4YUCtR+P0DNbUjVLVEekgLn6o2+
+	jqx2beaql20mS9yccClQbJwTaJD5Rf1W9l1B4=
 MIME-Version: 1.0
-Received: by 10.231.199.1 with HTTP; Tue, 5 Oct 2010 11:41:57 -0700 (PDT)
-In-Reply-To: <4CAB4112.3070505@mentor.com>
-References: <1286264643-6352-1-git-send-email-raj.khem@gmail.com>
-	<i8ev7s$ts9$1@dough.gmane.org> <4CAB4112.3070505@mentor.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 5 Oct 2010 11:41:57 -0700
-Message-ID: <AANLkTikseyM1539c+yp0w2_Vtg0wSWjJYeNhBN+iuX_1@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Received: by 10.224.201.8 with SMTP id ey8mr4562635qab.266.1286309625540; Tue,
+	05 Oct 2010 13:13:45 -0700 (PDT)
+Received: by 10.229.32.83 with HTTP; Tue, 5 Oct 2010 13:13:45 -0700 (PDT)
+In-Reply-To: <4CAB48A1.6050807@freyther.de>
+References: <4CAB2FBD.6060401@freyther.de>
+	<AANLkTikFS-A1T_tiu5_4ajBk=BKJU3Q=O4wqP2XcTxwf@mail.gmail.com>
+	<4CAB48A1.6050807@freyther.de>
+Date: Wed, 6 Oct 2010 00:13:45 +0400
+Message-ID: <AANLkTinnQ75Ytjz+dhQxfsqFVsGNw4CJbTViNEZz=eAP@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: Holger Freyther <holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: dbaryshkov@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/6] libtool 2.4 upgrade
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Latest qt4-sdk-tools* patch is wrong
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,54 +54,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Oct 2010 18:42:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 Oct 2010 20:14:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Oct 5, 2010 at 8:15 AM, Tom Rini <tom_rini@mentor.com> wrote:
-> Koen Kooi wrote:
->>
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 05-10-10 09:43, Khem Raj wrote:
->>>
->>> Hi
->>>
->>> Following set of patches is intial support for getting libtool 2.4 into
->>> openemebedded. I have so far built minimal-image for two machines
->>> successfully
->>>
->>> The big change that libtool 2.4 brings is sysroot support and I have
->>> added
->>> support to use this feature. It should make our life easier.
->>
->> I'm a bit concerned about the way this is implemented, it seems to for
->> libtool 2.4 onto everyone since it changes e.g. autotools.bbclass. Is
->> that intended? If so we need signoffs from each and every distro
->> maintainer *and* from the maemo-compat folks as well.
->> Unless there is a way to make the new features conditional on the
->> libtool version.
+On Tue, Oct 5, 2010 at 7:47 PM, Holger Freyther <holger+oe@freyther.de> wrote:
+> On 10/05/2010 11:39 PM, Dmitry Eremin-Solenikov wrote:
 >
-> It shouldn't be too bad, implementation wise, to set LIBTOOL_HAS_SYSROOT =
-or
-> similar and test for that.
+>>
+>> Commited fixes for this.
+>
+> thanks. Could you please describe the error you were seeing for your LFLAGS patch?
+>
 
-yes some sort of knob to differentiate 2.4 from rest
+Prehistory: I'm building OE on the Debian lenny box with nearly no
+development packages
+installed (no X11 headers, etc.). qt4 configure script was trying to
+build xlib test.
+Compilation went OK (as there are X11 headers in the chroot). However
+during linkage,
+came a problem: xlib.o required libX11 which in turn required
+libxcb.so (with some symbols
+that were not available in the version in /usr/lib on my lenny) and
+libpthread-stubs.so.
+As configuration test did not pass rpath-link to gcc, linker failed to
+resolve libxcb.so from
+OE sysroot and thus failed link stage with undefined symbols.
 
-=C2=A0But can we also set a phase out date for older
-> libtool, even if maemo-compat isn't possible (given chinhook pins to 1.5,=
- I
-> bet it's not) ?
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I ain't sure that this description is very clear, but I hope this
+helps. At least I know for sure
+how to reproduce the problem.
+
+
+-- 
+With best wishes
+Dmitry
 
 
