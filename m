@@ -1,40 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1P39FQ-0000we-3J
+	(envelope-from <dbaryshkov@gmail.com>) id 1P39bs-0004cw-V2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Oct 2010 17:16:09 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1P39F1-0006Pq-Uc from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Oct 2010 08:15:43 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 5 Oct 2010 08:15:43 -0700
-Received: from [172.30.80.69] ([172.30.80.69]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 5 Oct 2010 09:15:42 -0600
-Message-ID: <4CAB4112.3070505@mentor.com>
-Date: Tue, 05 Oct 2010 08:15:30 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Tue, 05 Oct 2010 17:39:23 +0200
+Received: by qyk8 with SMTP id 8so5002631qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Oct 2010 08:39:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=EEL/EDg2Z5JUcHP0eIdNIpSpKPmvgUvMx2OSyynUzNQ=;
+	b=sAP+W1MEvKgZLukL4k0oamzBrlGFpN88UKhbYftR35aY4zJoyzzQQdS6mnQpSu568k
+	8gu1zPLXrQzjNmeTLcuO7Cs6a9qhITwN2p3gW2YM39dHuSpPFZWo48oQk2ddbhN/pgya
+	VzPyVafgNBd1xBHQ5jqGs9QcWa1BkKtP6rRAQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=sFRkKqt+2MnQwsOmp0RCoWZy5J05HXNB6tmOeTqeQOAua9xnmv8QZgHimK6RTGaNB1
+	jY68B5t+9Dl0FalLnIa/O7ilJQbYKLkMJF2+NZnwIdUngmgob+WWEjlM66ie98qeERQj
+	Uy7gjLj6Bxdlpjz8QfQkTni1seotX6lnD3fEU=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1286264643-6352-1-git-send-email-raj.khem@gmail.com>
-	<i8ev7s$ts9$1@dough.gmane.org>
-In-Reply-To: <i8ev7s$ts9$1@dough.gmane.org>
-X-OriginalArrivalTime: 05 Oct 2010 15:15:42.0494 (UTC)
-	FILETIME=[2D2203E0:01CB64A0]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Received: by 10.224.80.203 with SMTP id u11mr8294691qak.355.1286293140476;
+	Tue, 05 Oct 2010 08:39:00 -0700 (PDT)
+Received: by 10.229.32.83 with HTTP; Tue, 5 Oct 2010 08:39:00 -0700 (PDT)
+In-Reply-To: <4CAB2FBD.6060401@freyther.de>
+References: <4CAB2FBD.6060401@freyther.de>
+Date: Tue, 5 Oct 2010 19:39:00 +0400
+Message-ID: <AANLkTikFS-A1T_tiu5_4ajBk=BKJU3Q=O4wqP2XcTxwf@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: Holger Freyther <holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: dbaryshkov@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/6] libtool 2.4 upgrade
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Latest qt4-sdk-tools* patch is wrong
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,37 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Oct 2010 15:16:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 Oct 2010 15:39:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 05-10-10 09:43, Khem Raj wrote:
->> Hi
->>
->> Following set of patches is intial support for getting libtool 2.4 into
->> openemebedded. I have so far built minimal-image for two machines successfully
->>
->> The big change that libtool 2.4 brings is sysroot support and I have added
->> support to use this feature. It should make our life easier.
-> 
-> I'm a bit concerned about the way this is implemented, it seems to for
-> libtool 2.4 onto everyone since it changes e.g. autotools.bbclass. Is
-> that intended? If so we need signoffs from each and every distro
-> maintainer *and* from the maemo-compat folks as well.
-> Unless there is a way to make the new features conditional on the
-> libtool version.
+Hi,
 
-It shouldn't be too bad, implementation wise, to set LIBTOOL_HAS_SYSROOT 
-or similar and test for that.  But can we also set a phase out date for 
-older libtool, even if maemo-compat isn't possible (given chinhook pins 
-to 1.5, I bet it's not) ?
+On Tue, Oct 5, 2010 at 6:01 PM, Holger Freyther <holger+oe@freyther.de> wro=
+te:
+> Hi Dmitry,
+>
+> your latest change is wrong. You apply a patch (that is not mentioned in =
+the
+> commit message) that does not exist in the tree. Your patch to
+> qt4-tools-sdk.inc is also wrong. qt4-tools-sdk.inc is only used by
+> qt4-tools-sdk_4.7.0.bb which is using -embedded and -no-freetype... so ad=
+ding
+> the patch and the extra includes is not correct (and you probably should =
+have
+> bumped INC_PR in that file).
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Commited fixes for this.
+
+> For Qt 4.6.3 I would propose building the tools with --no-freetype as we =
+have
+> no interest in GUI anyway.
+
+I'll look into that.
+
+> I hope you can fix that soon.
+>
+> =A0 =A0 =A0 =A0thanks.
+>
+
+
+
+--=20
+With best wishes
+Dmitry
 
 
