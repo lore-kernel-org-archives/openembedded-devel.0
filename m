@@ -1,30 +1,45 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1P385Z-00060e-OL
+	(envelope-from <cliff.brake@gmail.com>) id 1P38PE-00080t-2m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Oct 2010 16:01:54 +0200
-Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
-	[91.64.127.39])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 245311B10C05;
-	Tue,  5 Oct 2010 14:05:18 +0000 (UTC)
-Message-ID: <4CAB2FBD.6060401@freyther.de>
-Date: Tue, 05 Oct 2010 22:01:33 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc14 Lightning/1.0b2
-	Thunderbird/3.1.4
+	Tue, 05 Oct 2010 16:22:14 +0200
+Received: by wyb35 with SMTP id 35so6210583wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Oct 2010 07:21:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=704tSxQkX7aiVr+DVbgef+ppih6yxe7OMI3UFzhWH34=;
+	b=QPHTUl7bG7eJZLYWzyl6VrYQUOHJh9pzZnQ69QfhRB8HF+qobqvgmQY7TIfKor3gBb
+	JvEDbckN//zNtjhH7TS5I4VEDGOwYh2DMq6Nm33DFkIxxHW4d/ufJbi8G2/kaAyogPQ9
+	shpEy0nWYkQz/xSfYIIBLOeUo79pUVvVzAqHg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=DzA7e7I3SAaPC2XMdw+0yu/r6KIVBeuiebxY29qrXmCnsJ7hcBCx9J96EuwL6Qii2t
+	WpRLqOjV9y0Cobh5SoU0Ja94ZpVPMv1kvPDyvNOz6b1wfGA0+v6LoKcYmbJ2EMc2/1sH
+	mJiHgS0SJQE1RQYE9vAiSvEdiIrBJQSGFnlbA=
 MIME-Version: 1.0
-To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.227.127.84 with SMTP id f20mr9999247wbs.3.1286288510944; Tue,
+	05 Oct 2010 07:21:50 -0700 (PDT)
+Received: by 10.216.45.149 with HTTP; Tue, 5 Oct 2010 07:21:50 -0700 (PDT)
+In-Reply-To: <AANLkTikGBtkXxirSKm=arDwFeTh1-fTXc6iLLEuAaCUy@mail.gmail.com>
+References: <AANLkTikzKs+3U0JfEbQxg5dLVuMF51To2qTn55YLOmjg@mail.gmail.com>
+	<AANLkTinpEEdA7k87fa2nPXGtav6URN+R6itO6UE4gtGk@mail.gmail.com>
+	<AANLkTikGBtkXxirSKm=arDwFeTh1-fTXc6iLLEuAaCUy@mail.gmail.com>
+Date: Tue, 5 Oct 2010 10:21:50 -0400
+Message-ID: <AANLkTikx3QRQVWJMEfLrv1bsEuvgK-xCC0mB4ZCOyxXC@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Latest qt4-sdk-tools* patch is wrong
+Subject: Re: testing 2010-10-04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,24 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Oct 2010 14:01:55 -0000
+X-List-Received-Date: Tue, 05 Oct 2010 14:22:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Hi Dmitry,
+On Tue, Oct 5, 2010 at 7:39 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/10/5 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+>> 2010/10/4 Cliff Brake <cliff.brake@gmail.com>:
+>>> Testing run from last week:
+>>> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=testing_2010-09-27
+>>>
+>>> testing-next is updated and ready for clean builds:
+>>> http://wiki.openembedded.net/index.php/Testing
+>>>
+>>> Thanks,
+>>> Cliff
+>>>
+>>> --
+>>
+>> For me this version fails on native sqlite3_3.6.23.1.bb, do_compile
+>> see e.g. testing_2010-1004: fails on native sqlite3_3.6.23.1.bb, do_compile
+>> See also http://tinderbox.openembedded.net/public/logs/task/8402014.txt
+>>
+>> this fails both minimal/console-image as well as slugos/slugos-image
+>>
+>> Frans
+>>
+> Actually this is already fixed here:
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=9f503dbde0f2f6e9d4a94f6ab4be1b04dfc99950
+>
+> suggest to make a new testing-next label and restart this weeks' test.
 
-your latest change is wrong. You apply a patch (that is not mentioned in the
-commit message) that does not exist in the tree. Your patch to
-qt4-tools-sdk.inc is also wrong. qt4-tools-sdk.inc is only used by
-qt4-tools-sdk_4.7.0.bb which is using -embedded and -no-freetype... so adding
-the patch and the extra includes is not correct (and you probably should have
-bumped INC_PR in that file).
+Hi Frans,
 
-For Qt 4.6.3 I would propose building the tools with --no-freetype as we have
-no interest in GUI anyway.
+I would prefer to simply wait till next week.  The reason is some
+people may have already done builds, and I don't want to burden them
+with rebuilding, and sorting out the confusion who built on what
+version of testing-next.  I don't think its a big deal if we miss a
+weak as long as we identify the issues and fix them for next week.
+But, I'm open to other thoughts on this.
 
-I hope you can fix that soon.
+Thanks,
+Cliff
 
-	thanks.
+-- 
+=================
+http://bec-systems.com
 
 
