@@ -1,50 +1,29 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P3UlR-0005qk-P7
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 16:14:48 +0200
-Received: by bwz7 with SMTP id 7so8369bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Oct 2010 07:14:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=i5fd6fgmLK7oF9vctSOTdl7Br6isE3YHI5erZ2/MlWI=;
-	b=N21amAjC5Ncfw1CyQWVaQlB3JL9WuH6gXs7wEVo39FP/pbIEj9RC/8ATX0lDqtNHSl
-	pD/y6nZh3Q400p9J7QPPoCoNRCCLUc/1kWfanQcUiebCvcO7B9pS/wuLFjx1YKnfx2fd
-	9fswyHRKqd0+fmIr9xJUu2wrVrsfFYhZa/cMg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=EafHiUPSObKLKm+tR/vc9yjt2O5WNpE+GfX7hUFqH7IOYG76Bm6Ixd4g3Lzhn2qDbP
-	sUqGdhcZzgBSzh1aExZepNrvGSQ6psgKND3u61lAtDURJdJOWAvo1KYcp0w0WhC5AmcC
-	axxEJ1MDbm2byt+B2frh8vra4UAVB6lxGF5ko=
-Received: by 10.204.59.132 with SMTP id l4mr7461494bkh.132.1286374453683;
-	Wed, 06 Oct 2010 07:14:13 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id v7sm704844bkx.4.2010.10.06.07.14.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 06 Oct 2010 07:14:12 -0700 (PDT)
-Date: Wed, 6 Oct 2010 16:14:20 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-Message-ID: <20101006141420.GI3264@jama>
-References: <1286373970.3792.6.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1286373970.3792.6.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P3UqX-0006ui-KU for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Oct 2010 16:19:57 +0200
+Received: from f053037105.adsl.alicedsl.de ([78.53.37.105]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P3UqF-0006nw-PO for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Oct 2010 14:19:35 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 06 Oct 2010 16:19:34 +0200
+Message-ID: <1286374774.3792.12.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: libfsotransport_git: `do_compile()` fails with error: Pointer arithmetic not supported for `void*'
+Subject: [PATCH] mokosuite2: Add `libfakekey` and `vala-native` to DEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,52 +37,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 14:14:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Oct 2010 14:20:03 -0000
+X-Groupsio-MsgNum: 24433
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-vHFPEjdOAX7C2jlXRFwS"
 
-On Wed, Oct 06, 2010 at 04:06:10PM +0200, Paul Menzel wrote:
-> Dear OE folks,
-> 
-> 
-> `libfsotransport_git.bb` fails to compile with the following error [1]. The log from Tinderbox is is not from my build machine, but I do get the same error.
-> 
->         NOTE: make
->         make  all-recursive
->         make[1]: Entering directory `/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467896d2d4d0f69679-r2.2/git/libfsotransport'
->         Making all in fsotransport
->         make[2]: Entering directory `/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467896d2d4d0f69679-r2.2/git/libfsotransport/fsotransport'
->         /home/shr/shr-unstable/tmp/sysroots/x86_64-linux/usr/bin/valac -C --basedir .. --vapidir ../vapi --pkg posix --pkg linux --pkg glib-2.0 --pkg gio-2.0 --pkg gee-1.0 --pkg fsobasics-2.0 --header fsotransport.h --library fsotransport-2.0  -D FAST_BAUD --pkg hsuart basetransport.vala commandqueue.vala delegate.vala null.vala parser.vala pipe.vala pty.vala serial.vala socket.vala transport.vala hsuart.vala
->         basetransport.vala:463.13-463.31: error: Pointer arithmetic not supported for `void*'
->                     rdata += (int)bread;
->                     ^^^^^^^^^^^^^^^^^^^
->         basetransport.vala:463.13-463.31: error: Assignment: Invalid callback assignment attempt
->                     rdata += (int)bread;
->                     ^^^^^^^^^^^^^^^^^^^
->         Compilation failed: 2 error(s), 0 warning(s)
->         make[2]: *** [.vala.stamp] Error 1
->         make[2]: Leaving directory `/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467896d2d4d0f69679-r2.2/git/libfsotransport/fsotransport'
->         make[1]: *** [all-recursive] Error 1
->         make[1]: Leaving directory `/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467896d2d4d0f69679-r2.2/git/libfsotransport'
->         make: *** [all] Error 2
->         FATAL: oe_runmake failed
->         ERROR: Function do_compile failed
-> 
-> Might this be related to the switch to new Vala version 0.11.0 [3] which has such a check included [2]? Commit ecafbae [4] seems not to be enough.
+--=-vHFPEjdOAX7C2jlXRFwS
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Date: Mon, 4 Oct 2010 11:56:14 +0200
 
-actually this commit is not enough ([4] doesn't change
-FSO_CORNUCOPIA_SRCREV which is used in libfsotransport):
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=4f8ed5aa3bd3d5d5144efea2b16cfef4822fcbaa
+During the latest bumps of `SRCREV` I guess it was forgotten to add some de=
+pendencies.
 
-it fixes one kind of problems with new vala (detection), but
-I wasn't able to fix libfsotransport and for fsogsmd I have patch not
-yet pushed to cornucopia repo (both waiting for mickey).
+`libfakekey` is needed for a successful configure and without `vala-native`=
+ `valac` is not found on a clean and minimal build system.
 
-Regards,
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/openmoko-3rdparty/mokosuite2_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/recipes/openmoko-3rdparty/mokosuite2_git.bb b/recipes/openmoko=
+-3rdparty/mokosuite2_git.bb
+index cbdf89d..9812ca6 100644
+--- a/recipes/openmoko-3rdparty/mokosuite2_git.bb
++++ b/recipes/openmoko-3rdparty/mokosuite2_git.bb
+@@ -2,11 +2,11 @@ DESCRIPTION =3D "Desktop environment and phone stack GUI =
+for SHR"
+ HOMEPAGE =3D "http://gitorious.org/mokosuite2"
+ AUTHOR =3D "Daniele Ricci"
+ LICENSE =3D "GPLv3"
+-DEPENDS =3D "mokowm elementary libfreesmartphone-glib libphone-utils eggdb=
+us glib-2.0 dbus-glib alsa-lib db sqlite3"
++DEPENDS =3D "mokowm elementary libfakekey libfreesmartphone-glib libphone-=
+utils eggdbus glib-2.0 dbus-glib alsa-lib db sqlite3 vala-native"
+ SECTION =3D "misc/utils"
+=20
+ PV =3D "1.0.99+gitr${SRCPV}"
+-PR =3D "r1"
++PR =3D "r2"
+ SRCREV =3D "e70e928216eea9d07c28327634ea49c87bc0c92f"
+=20
+ SRC_URI =3D "git://gitorious.org/mokosuite2/appbunch.git;protocol=3Dgit"
+--=20
+1.7.1
 
+--=-vHFPEjdOAX7C2jlXRFwS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyshXYACgkQPX1aK2wOHVhhPACbBXKqttb2wXO6aZGYX+PJ4dow
+Dg0AmgInV34/TIhZ0vQHjEeQ2DtYDTbi
+=fl+S
+-----END PGP SIGNATURE-----
+
+--=-vHFPEjdOAX7C2jlXRFwS--
