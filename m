@@ -1,29 +1,50 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P3UiI-0005jM-54 for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 16:11:23 +0200
-Received: from f053037105.adsl.alicedsl.de ([78.53.37.105]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P3Ui0-00069s-Az for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 14:11:04 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 06 Oct 2010 16:11:02 +0200
-Message-ID: <1286374262.3792.8.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <martin.jansa@gmail.com>) id 1P3UlR-0005qk-P7
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Oct 2010 16:14:48 +0200
+Received: by bwz7 with SMTP id 7so8369bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Oct 2010 07:14:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=i5fd6fgmLK7oF9vctSOTdl7Br6isE3YHI5erZ2/MlWI=;
+	b=N21amAjC5Ncfw1CyQWVaQlB3JL9WuH6gXs7wEVo39FP/pbIEj9RC/8ATX0lDqtNHSl
+	pD/y6nZh3Q400p9J7QPPoCoNRCCLUc/1kWfanQcUiebCvcO7B9pS/wuLFjx1YKnfx2fd
+	9fswyHRKqd0+fmIr9xJUu2wrVrsfFYhZa/cMg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=EafHiUPSObKLKm+tR/vc9yjt2O5WNpE+GfX7hUFqH7IOYG76Bm6Ixd4g3Lzhn2qDbP
+	sUqGdhcZzgBSzh1aExZepNrvGSQ6psgKND3u61lAtDURJdJOWAvo1KYcp0w0WhC5AmcC
+	axxEJ1MDbm2byt+B2frh8vra4UAVB6lxGF5ko=
+Received: by 10.204.59.132 with SMTP id l4mr7461494bkh.132.1286374453683;
+	Wed, 06 Oct 2010 07:14:13 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id v7sm704844bkx.4.2010.10.06.07.14.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 06 Oct 2010 07:14:12 -0700 (PDT)
+Date: Wed, 6 Oct 2010 16:14:20 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+Message-ID: <20101006141420.GI3264@jama>
+References: <1286373970.3792.6.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1286373970.3792.6.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] msmcommd_git: Add `libfsotransport` to `DEPENDS`.
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: libfsotransport_git: `do_compile()` fails with error: Pointer arithmetic not supported for `void*'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,83 +58,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 14:11:23 -0000
-X-Groupsio-MsgNum: 24431
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-K5R6jiEOPUv6BkKI2/nJ"
+X-List-Received-Date: Wed, 06 Oct 2010 14:14:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-K5R6jiEOPUv6BkKI2/nJ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Oct 06, 2010 at 04:06:10PM +0200, Paul Menzel wrote:
+> Dear OE folks,
+> 
+> 
+> `libfsotransport_git.bb` fails to compile with the following error [1]. The log from Tinderbox is is not from my build machine, but I do get the same error.
+> 
+>         NOTE: make
+>         make  all-recursive
+>         make[1]: Entering directory `/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467896d2d4d0f69679-r2.2/git/libfsotransport'
+>         Making all in fsotransport
+>         make[2]: Entering directory `/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467896d2d4d0f69679-r2.2/git/libfsotransport/fsotransport'
+>         /home/shr/shr-unstable/tmp/sysroots/x86_64-linux/usr/bin/valac -C --basedir .. --vapidir ../vapi --pkg posix --pkg linux --pkg glib-2.0 --pkg gio-2.0 --pkg gee-1.0 --pkg fsobasics-2.0 --header fsotransport.h --library fsotransport-2.0  -D FAST_BAUD --pkg hsuart basetransport.vala commandqueue.vala delegate.vala null.vala parser.vala pipe.vala pty.vala serial.vala socket.vala transport.vala hsuart.vala
+>         basetransport.vala:463.13-463.31: error: Pointer arithmetic not supported for `void*'
+>                     rdata += (int)bread;
+>                     ^^^^^^^^^^^^^^^^^^^
+>         basetransport.vala:463.13-463.31: error: Assignment: Invalid callback assignment attempt
+>                     rdata += (int)bread;
+>                     ^^^^^^^^^^^^^^^^^^^
+>         Compilation failed: 2 error(s), 0 warning(s)
+>         make[2]: *** [.vala.stamp] Error 1
+>         make[2]: Leaving directory `/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467896d2d4d0f69679-r2.2/git/libfsotransport/fsotransport'
+>         make[1]: *** [all-recursive] Error 1
+>         make[1]: Leaving directory `/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467896d2d4d0f69679-r2.2/git/libfsotransport'
+>         make: *** [all] Error 2
+>         FATAL: oe_runmake failed
+>         ERROR: Function do_compile failed
+> 
+> Might this be related to the switch to new Vala version 0.11.0 [3] which has such a check included [2]? Commit ecafbae [4] seems not to be enough.
 
-Date: Wed, 6 Oct 2010 13:00:42 +0200
+Hi,
 
-[=E2=80=A6]
-| checking for DEPS... configure: error: Package requirements (glib-2.0 >=
-=3D 2.120
-|   gio-2.0 >=3D 2.12.0
-|   gobject-2.0 >=3D 2.12.0
-|   gthread-2.0 >=3D 2.12.0
-|   gee-1.0 >=3D 0.5
-|   dbus-1 >=3D 1.2.16
-|   dbus-glib-1 >=3D 0.84
-|   fsotransport-2.0 >=3D 0.9
-|   fso-glib-1.0 >=3D 2010.07.28.1
-|   msmcomm-1.0 >=3D 0.5.0
-|   msmcommd-specs-1.0 >=3D 0.1.0) were not met:
-|
-| No package 'fsotransport-2.0' found
-|
-| Consider adjusting the PKG_CONFIG_PATH environment variable if you
-| installed software in a non-standard prefix.
-|
-| Alternatively, you may set the environment variables DEPS_CFLAGS
-| and DEPS_LIBS to avoid the need to call pkg-config.
-| See the pkg-config man page for more details.
-|
-| ERROR: Function do_configure failed
-[=E2=80=A6]
+actually this commit is not enough ([4] doesn't change
+FSO_CORNUCOPIA_SRCREV which is used in libfsotransport):
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=4f8ed5aa3bd3d5d5144efea2b16cfef4822fcbaa
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/freesmartphone/msmcommd_git.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+it fixes one kind of problems with new vala (detection), but
+I wasn't able to fix libfsotransport and for fsogsmd I have patch not
+yet pushed to cornucopia repo (both waiting for mickey).
 
-diff --git a/recipes/freesmartphone/msmcommd_git.bb b/recipes/freesmartphon=
-e/msmcommd_git.bb
-index e8f3887..6d1afaa 100644
---- a/recipes/freesmartphone/msmcommd_git.bb
-+++ b/recipes/freesmartphone/msmcommd_git.bb
-@@ -1,6 +1,6 @@
- require msmcomm.inc
-=20
--PR =3D "${INC_PR}.0"
-+PR =3D "${INC_PR}.1"
- PV =3D "0.5.0+gitr${SRCPV}"
-=20
- DEPENDS =3D " \
-@@ -9,6 +9,7 @@ DEPENDS =3D " \
-  dbus \
-  dbus-glib \
-  libfso-glib \
-+ libfsotransport \
-  libgee \
-  libmsmcomm \
-  msmcommd-specs \
---=20
-1.7.1
+Regards,
 
---=-K5R6jiEOPUv6BkKI2/nJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkysg3YACgkQPX1aK2wOHVjloQCfTZRAm/5JQCmpO0VGHXsO/oYs
-wI0AnizbzXM1pOEHCXmrCmQ+Dn6iHHWL
-=mWOi
------END PGP SIGNATURE-----
-
---=-K5R6jiEOPUv6BkKI2/nJ--
