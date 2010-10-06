@@ -1,29 +1,46 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1P3YCp-0004UZ-Bx
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P3bF3-00026J-9L
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 19:55:07 +0200
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id DE7F31D3616D; Wed,  6 Oct 2010 19:54:44 +0200 (CEST)
-Date: Wed, 6 Oct 2010 19:54:44 +0200
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	Wed, 06 Oct 2010 23:09:38 +0200
+Received: by ewy7 with SMTP id 7so4192ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Oct 2010 14:09:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=i+AIBZ2D1XZ1EEDgyTXLoGMFruehDQ3lAKFYOkJf9rI=;
+	b=Zu/BJFQ4QKAlARDtRwv9yr+tN4mdQpVZUWHR+DEjjSnPdzAeUyZ2vWqfVP5Gx+RVY5
+	xVm6ykq1mtgkyAuIRDBPxjvIHcWKPYZ5MdtVrDZgddplJ+d9jG2T6lJiCk1LL+aetpAa
+	xkA148DzmN7mQl4jcySLGPwbVB1jy/aTJMVhI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=nx0TU8VzcTqUJX4rZxaUqLX3kF+UtcN/J+uCl4wGIGg69sHmRjaj1/WATNiJc/GWbY
+	uDPTw16h1+LVDbV2kT46djCPWQSS7gMtQOG9rePUoSpStvG/hqOKVV8RTCmAfRCaBQOY
+	wTBVZxsiyIr8fGdqyOkLvOJKZngCg1elnQVT8=
+Received: by 10.213.12.196 with SMTP id y4mr9743205eby.89.1286399357669;
+	Wed, 06 Oct 2010 14:09:17 -0700 (PDT)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id a48sm2171654eei.1.2010.10.06.14.09.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 06 Oct 2010 14:09:16 -0700 (PDT)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101006175444.GN28423@ibawizard.net>
-References: <1286388898-7029-1-git-send-email-ynezz@true.cz>
-	<i8ibof$3pq$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <i8ibof$3pq$1@dough.gmane.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+Date: Wed,  6 Oct 2010 23:08:58 +0200
+Message-Id: <1286399340-15927-3-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <1286399340-15927-2-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1286399340-15927-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<1286399340-15927-2-git-send-email-fransmeulenbroeks@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
+	SUBJ_ALL_CAPS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] init-scripts: introduce DONTUSETIMESTAMP variable	in bootmisc.sh
+Subject: [PATCH 2/4] RDEPENDS -> RDEPENDS_${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,45 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 17:55:08 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 06 Oct 2010 21:09:39 -0000
 
-Koen Kooi <k.kooi@student.utwente.nl> [2010-10-06 19:30:55]:
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
+ classes/distutils-base.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 06-10-10 20:14, Petr =A9tetiar wrote:
-> > This variable is useful on systems with battery backed RTC. Imagine, =
-that the
-> > board is shut down and then switched on after, for example three days=
-.
-> > Althought the value in RTC is correct, this scripts sets system time =
-with the
-> > wrong values.
->=20
-> So you shut it down at 20101003 and boot it at 20101006, that should
-> give you roughly:
->=20
-> SYSTEMDATE=3D`date "+%Y%m%d"` -> 20101006
-> TIMESTAMP=3D`cat /etc/timestamp | awk '{ print substr($0,9,4)
-> substr($0,1,4);}'` -> 20101003
->=20
-> NEEDUPDATE=3D`expr \( $TIMESTAMP \> $SYSTEMDATE \)` -> 0
->=20
-> So why is your rtc having a date older than the shutdown date?
+diff --git a/classes/distutils-base.bbclass b/classes/distutils-base.bbclass
+index 59864f7..4d5de24 100644
+--- a/classes/distutils-base.bbclass
++++ b/classes/distutils-base.bbclass
+@@ -1,4 +1,4 @@
+ DEPENDS  += "${@["python-native python", ""][(bb.data.getVar('PACKAGES', d, 1) == '')]}"
+-RDEPENDS += "${@['', 'python-core']['${PN}' == '${BPN}']}"
++RDEPENDS_${PN} += "${@['', 'python-core']['${PN}' == '${BPN}']}"
+ 
+ inherit distutils-common-base
+-- 
+1.6.4.2
 
-Well, who knows, now it works and I see now, that the patch is wrong
-completly. Maybe it was connected to bbappend and following patches[1,2],
-sometimes it happens, that the package isn't rebuild even if I -c clean i=
-t.
-Thanks for the review, anyway. Removed the patch from the patchwork.
-
-1. http://patchwork.openembedded.org/patch/3156
-2. http://patchwork.openembedded.org/patch/3152
-
--- ynezz
 
 
