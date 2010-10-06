@@ -1,33 +1,39 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1P3E0e-0001QD-Jr
+	(envelope-from <stefan@datenfreihafen.org>) id 1P3RNi-0007ux-DK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Oct 2010 22:21:13 +0200
-Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
-	[91.64.127.39])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id DEFAC1B10C05;
-	Tue,  5 Oct 2010 20:24:38 +0000 (UTC)
-Message-ID: <4CAB88A4.8000209@freyther.de>
-Date: Wed, 06 Oct 2010 04:20:52 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc14 Lightning/1.0b2
-	Thunderbird/3.1.4
+	Wed, 06 Oct 2010 12:38:00 +0200
+Received: from guest190.ibr.cs.tu-bs.de ([134.169.35.190] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1P3RNN-0001YW-BF by authid <stefan@sostec.de> with cram_md5;
+	Wed, 06 Oct 2010 12:37:35 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>)
+	id 1P3RNM-0000xl-2n; Wed, 06 Oct 2010 12:37:32 +0200
+Date: Wed, 6 Oct 2010 12:37:32 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: dfoley <dfoley@telus.net>
+Message-ID: <20101006103731.GG3517@excalibur.local>
+References: <AANLkTikzKs+3U0JfEbQxg5dLVuMF51To2qTn55YLOmjg@mail.gmail.com>
+	<20101005123257.GD3517@excalibur.local>
+	<4CAB3B4D.9000007@telus.net>
 MIME-Version: 1.0
-To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-References: <4CAB2FBD.6060401@freyther.de>	<AANLkTikFS-A1T_tiu5_4ajBk=BKJU3Q=O4wqP2XcTxwf@mail.gmail.com>	<4CAB48A1.6050807@freyther.de>
-	<AANLkTinnQ75Ytjz+dhQxfsqFVsGNw4CJbTViNEZz=eAP@mail.gmail.com>
-In-Reply-To: <AANLkTinnQ75Ytjz+dhQxfsqFVsGNw4CJbTViNEZz=eAP@mail.gmail.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+In-Reply-To: <4CAB3B4D.9000007@telus.net>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Latest qt4-sdk-tools* patch is wrong
+Subject: Re: testing 2010-10-04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,45 +47,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Oct 2010 20:21:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 Oct 2010 10:38:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 10/06/2010 04:13 AM, Dmitry Eremin-Solenikov wrote:
+Hello.
 
+On Tue, 2010-10-05 at 07:50, dfoley wrote:
 > 
-> Prehistory: I'm building OE on the Debian lenny box with nearly no
-> development packages
-> installed (no X11 headers, etc.). qt4 configure script was trying to
-> build xlib test.
-> Compilation went OK (as there are X11 headers in the chroot). However
-> during linkage,
-> came a problem: xlib.o required libX11 which in turn required
-> libxcb.so (with some symbols
-> that were not available in the version in /usr/lib on my lenny) and
-> libpthread-stubs.so.
-> As configuration test did not pass rpath-link to gcc, linker failed to
-> resolve libxcb.so from
-> OE sysroot and thus failed link stage with undefined symbols.
-
+> May not be correct, but I ran into the same problem and patched.
 > 
-> I ain't sure that this description is very clear, but I hope this
-> helps. At least I know for sure
-> how to reproduce the problem.
+> diff --git a/recipes/cacao/cacao.inc b/recipes/cacao/cacao.inc
+> index c366b74..70bda75 100644
+> --- a/recipes/cacao/cacao.inc
+> +++ b/recipes/cacao/cacao.inc
+> @@ -23,7 +23,7 @@ EXTRA_OECONF = "\
+>  	${@['','--enable-softfloat'][bb.data.getVar('TARGET_FPU',d,1) == 'soft']} \
+>  	--enable-debug \
+>  	--with-vm-zip=${datadir}/cacao/vm.zip \
+> -	--with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-${PV} \
+> +	--with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-${PV}/cacaoh \
+>      --with-build-java-runtime-library-classes=${STAGING_DATADIR}/classpath/glibj.zip \
+>      --with-java-runtime-library-classes=${datadir}/classpath/glibj.zip \
+>      --with-java-runtime-library-libdir=${libdir_jni}:${libdir} \
 
-Hi Dmitry,
+This does it fix for me as well. I wonder from which commit the  directory
+change was triggered in the last week.
 
-I think you have figured out the root cause of why we were adding other libs
-to the link line as well. In general this extra dependency is fixed when using
-the -embedded option (or as someone pointed out... might be -no-x11 for stuff
-< 4.7.). It would be good if your patch would contain this information itself.
+Care to send a git formatted patch with PR bump I could apply? As you did the
+work you should get the credits for it. :)
 
-thanks a lot
-
-	z
-
-
-PS: Your message does not seem to make it to the list, so I am not removing
-parts of your email.
+regards
+Stefan Schmidt 
 
 
