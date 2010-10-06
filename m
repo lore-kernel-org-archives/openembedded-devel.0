@@ -1,44 +1,29 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P3UJJ-0003mR-Km
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 15:45:38 +0200
-Received: by iwn38 with SMTP id 38so295334iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Oct 2010 06:45:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=9AiIn2IL3xZwa/6o1v/KnO6yMM2Tm4Agvqj8Y3vJfNg=;
-	b=JB+WMVGF3kZuKFlcthCiraeFThkb6emHqw3BErtS0PJoIXAQmBx8jBeMGTqbAheaGe
-	7QA6LpTyGNBzhZvsvMGBBoYexP8bMSxM2ajpf6+CY5VjdpTSfa0SmdJ8L2AmHSHD/ypa
-	OzW8pqBP4mPFbqdzn3i+S20b4UajzwEu2OV34=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Ng80RTy0KIN1mqTgzBf24r7JjC9tk7SwV+MNrez2q9yRTCZuxfEO0aGFdKZrTiU9i4
-	wmk29X2Zj3s0uylmQni2Je+JzOWtnuzFZv591EwR+R9GrKl8JZYlZkfgRBOkyJGGQIv6
-	fKnosNT9kxSctmaQ4FaVYGFsm/yBzmr6pzn2k=
-MIME-Version: 1.0
-Received: by 10.231.182.204 with SMTP id cd12mr13956219ibb.101.1286372713686; 
-	Wed, 06 Oct 2010 06:45:13 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Wed, 6 Oct 2010 06:45:13 -0700 (PDT)
-In-Reply-To: <1286360419-23692-1-git-send-email-jayen@cse.unsw.edu.au>
-References: <1286360419-23692-1-git-send-email-jayen@cse.unsw.edu.au>
-Date: Wed, 6 Oct 2010 15:45:13 +0200
-Message-ID: <AANLkTikS4goX8mvN7di19uN6dZccGN2csxKgYMwcutPj@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P3Udb-00059c-Ng for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Oct 2010 16:06:34 +0200
+Received: from f053037105.adsl.alicedsl.de ([78.53.37.105]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P3UdI-0005pY-NA; Wed, 06 Oct 2010 14:06:12 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed, 06 Oct 2010 16:06:10 +0200
+Message-ID: <1286373970.3792.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] SWI-Prolog: New program
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: libfsotransport_git: `do_compile()` fails with error: Pointer arithmetic not supported for `void*'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,163 +37,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 13:45:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 06 Oct 2010 14:06:53 -0000
+X-Groupsio-MsgNum: 24430
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Gdw1+m8hfeQc8VPXqA0W"
+
+--=-Gdw1+m8hfeQc8VPXqA0W
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Jayen, thanks for your contribution.
-Below some feedback.
-
-2010/10/6 Jayen Ashar <jayen@cse.unsw.edu.au>:
-> * Starting with SWI-Prolog 5.10.1
-> * SWI-Prolog is a fast and powerful ISO/Edinburgh-style Prolog compiler w=
-ith a
-> * =A0rich set of built-in predicates. It offers a fast, robust and small
-> * =A0environment which enables substantial applications to be developed w=
-ith it.
->
-> Signed-off-by: Jayen Ashar <jayen@cse.unsw.edu.au>
-> ---
-> =A0recipes/swi-prolog/swi-prolog.inc =A0 =A0 =A0 =A0 =A0 =A0 | =A0 76 +++=
-++++++++++++++++++++++
-> =A0recipes/swi-prolog/swi-prolog/configure.patch | =A0 11 ++++
-> =A0recipes/swi-prolog/swi-prolog_5.10.1.bb =A0 =A0 =A0 | =A0 =A03 +
-> =A03 files changed, 90 insertions(+), 0 deletions(-)
-> =A0create mode 100644 recipes/swi-prolog/swi-prolog.inc
-> =A0create mode 100644 recipes/swi-prolog/swi-prolog/configure.patch
-> =A0create mode 100644 recipes/swi-prolog/swi-prolog_5.10.1.bb
->
-> diff --git a/recipes/swi-prolog/swi-prolog.inc b/recipes/swi-prolog/swi-p=
-rolog.inc
-> new file mode 100644
-> index 0000000..772873e
-> --- /dev/null
-> +++ b/recipes/swi-prolog/swi-prolog.inc
-> @@ -0,0 +1,76 @@
-> +DESCRIPTION =3D "SWI-Prolog is a fast and powerful ISO/Edinburgh-style P=
-rolog compiler with a rich set of built-in predicates. It offers a fast, ro=
-bust and small environment which enables substantial applications to be dev=
-eloped with it."
-> +HOMEPAGE =3D "http://www.swi-prolog.org/"
-> +SECTION =3D "interpreters"
-> +PRIORITY =3D "optional"
-> +LICENSE =3D "LGPL"
-> +DEPENDS =3D "ncurses readline gmp chrpath"
-
-Do you need chrpath on the target
-> +
-> +INC_PR =3D "r1"
-
-New recipes start with r0
-
-> +
-> +SRC_URI =3D "http://mirror.cse.unsw.edu.au/pub/debian/pool/main/s/${PN}/=
-${PN}_${PV}.orig.tar.gz \
-> + =A0 =A0 =A0 =A0 =A0 file://configure.patch;patch=3D1"
-> +
-> +S =3D "${WORKDIR}/pl-${PV}"
-> +
-> +inherit autotools
-> +
-> +#overriden because we don't want to run autoconf on releases
-> +do_configure() {
-> + =A0if [ -e ${S}/configure ]; then
-> + =A0 =A0oe_runconf $@
-> + =A0else
-> + =A0 =A0oenote "nothing to configure ${S}"
-> + =A0fi
-> +}
-> +
-> +#appended so we can run configure and make on the packages directory aft=
-er
-> +#compiling the main enging
-
-Hm, not too keen on that. What about splitting the recipe in two; one
-for the main engine, and one for the packages?
-
-> +do_compile_append() {
-> + =A0if [ -e ${S}/packages/configure ]; then
-> + =A0if [ -x ${S}/packages/configure ] ; then
-> + =A0 =A0cd ${S}/packages
-> + =A0 =A0export DISABLE_PKGS=3D"xpce http pldoc jpl"
-> + =A0 =A0cfgcmd=3D"${S}/packages/configure \
-> + =A0 =A0 =A0 =A0--build=3D${BUILD_SYS} \
-> + =A0 =A0 =A0 =A0--host=3D${HOST_SYS} \
-> + =A0 =A0 =A0 =A0--target=3D${TARGET_SYS} \
-> + =A0 =A0 =A0 =A0--prefix=3D${prefix} \
-> + =A0 =A0 =A0 =A0--exec_prefix=3D${exec_prefix} \
-> + =A0 =A0 =A0 =A0--bindir=3D${bindir} \
-> + =A0 =A0 =A0 =A0--sbindir=3D${sbindir} \
-> + =A0 =A0 =A0 =A0--libexecdir=3D${libexecdir} \
-> + =A0 =A0 =A0 =A0--datadir=3D${datadir} \
-> + =A0 =A0 =A0 =A0--sysconfdir=3D${sysconfdir} \
-> + =A0 =A0 =A0 =A0--sharedstatedir=3D${sharedstatedir} \
-> + =A0 =A0 =A0 =A0--localstatedir=3D${localstatedir} \
-> + =A0 =A0 =A0 =A0--libdir=3D${libdir} \
-> + =A0 =A0 =A0 =A0--includedir=3D${includedir} \
-> + =A0 =A0 =A0 =A0--oldincludedir=3D${oldincludedir} \
-> + =A0 =A0 =A0 =A0--infodir=3D${infodir} \
-> + =A0 =A0 =A0 =A0--mandir=3D${mandir} \
-> + =A0 =A0 =A0${EXTRA_OECONF} \
-> + =A0 =A0 =A0 =A0$@"
-> + =A0 =A0oenote "Running $cfgcmd..."
-> + =A0 =A0$cfgcmd || oefatal "oe_runconf failed"
-> + =A0else
-> + =A0 =A0oefatal "no configure script found"
-> + =A0fi
-> + =A0else
-> + =A0 =A0oenote "nothing to configure ${S}/packages"
-> + =A0fi
-> + =A0if [ -e packages/Makefile -o -e packages/makefile ]; then
-> + =A0 =A0oe_runmake -C packages || die "make failed"
-> + =A0else
-> + =A0 =A0oenote "nothing to compile"
-> + =A0fi
-> +}
-> +
-> +#to install the packages
-> +do_install_append() {
-> + =A0oe_runmake -C packages 'DESTDIR=3D${D}' install
-> +}
-> +
-> +#so debug files aren't included in the main package
-> +FILES_${PN}-dbg +=3D " ${libdir}/swipl-${PV}/bin/*/.debug ${libdir}/swip=
-l-${PV}/lib/*/.debug"
-> +#so the main package includes dependent libraries and packages
-> +FILES_${PN} +=3D " ${libdir}/swipl-${PV}"
-> diff --git a/recipes/swi-prolog/swi-prolog/configure.patch b/recipes/swi-=
-prolog/swi-prolog/configure.patch
-> new file mode 100644
-> index 0000000..58ecd58
-> --- /dev/null
-> +++ b/recipes/swi-prolog/swi-prolog/configure.patch
-> @@ -0,0 +1,11 @@
-> +--- a/src/configure~ =A0 =A02010-07-21 23:04:23.000000000 +1000
-> ++++ b/src/configure =A0 =A0 2010-10-01 14:02:15.000000000 +1000
-> +@@ -7470,7 +7470,7 @@
-> +
-> + { $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread support f=
-or cpu clocks" >&5
-> + $as_echo_n "checking for pthread support for cpu clocks... " >&6; }
-> +-if test "$cross_compiling" =3D yes; then :
-> ++if test x"$cross_compiling" =3D yes; then :
-> + =A0 { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >=
-&5
-> + $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-> + as_fn_error "cannot run test program while cross compiling
-> diff --git a/recipes/swi-prolog/swi-prolog_5.10.1.bb b/recipes/swi-prolog=
-/swi-prolog_5.10.1.bb
-> new file mode 100644
-> index 0000000..bb7e95b
-> --- /dev/null
-> +++ b/recipes/swi-prolog/swi-prolog_5.10.1.bb
-> @@ -0,0 +1,3 @@
-> +require swi-prolog.inc
-> +
-> +PR =3D "${INC_PR}.1"
-
-Again here start with .0
-
-Best regards, Frans
+Dear OE folks,
 
 
+`libfsotransport_git.bb` fails to compile with the following error [1]. The=
+ log from Tinderbox is is not from my build machine, but I do get the same =
+error.
+
+        NOTE: make
+        make  all-recursive
+        make[1]: Entering directory `/home/shr/shr-unstable/tmp/work/armv4t=
+-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467=
+896d2d4d0f69679-r2.2/git/libfsotransport'
+        Making all in fsotransport
+        make[2]: Entering directory `/home/shr/shr-unstable/tmp/work/armv4t=
+-oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed467=
+896d2d4d0f69679-r2.2/git/libfsotransport/fsotransport'
+        /home/shr/shr-unstable/tmp/sysroots/x86_64-linux/usr/bin/valac -C -=
+-basedir .. --vapidir ../vapi --pkg posix --pkg linux --pkg glib-2.0 --pkg =
+gio-2.0 --pkg gee-1.0 --pkg fsobasics-2.0 --header fsotransport.h --library=
+ fsotransport-2.0  -D FAST_BAUD --pkg hsuart basetransport.vala commandqueu=
+e.vala delegate.vala null.vala parser.vala pipe.vala pty.vala serial.vala s=
+ocket.vala transport.vala hsuart.vala
+        basetransport.vala:463.13-463.31: error: Pointer arithmetic not sup=
+ported for `void*'
+                    rdata +=3D (int)bread;
+                    ^^^^^^^^^^^^^^^^^^^
+        basetransport.vala:463.13-463.31: error: Assignment: Invalid callba=
+ck assignment attempt
+                    rdata +=3D (int)bread;
+                    ^^^^^^^^^^^^^^^^^^^
+        Compilation failed: 2 error(s), 0 warning(s)
+        make[2]: *** [.vala.stamp] Error 1
+        make[2]: Leaving directory `/home/shr/shr-unstable/tmp/work/armv4t-=
+oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed4678=
+96d2d4d0f69679-r2.2/git/libfsotransport/fsotransport'
+        make[1]: *** [all-recursive] Error 1
+        make[1]: Leaving directory `/home/shr/shr-unstable/tmp/work/armv4t-=
+oe-linux-gnueabi/libfsotransport-1_0.9.6+gitr842+43fae6cf5e3aa57f5d7fed4678=
+96d2d4d0f69679-r2.2/git/libfsotransport'
+        make: *** [all] Error 2
+        FATAL: oe_runmake failed
+        ERROR: Function do_compile failed
+
+Might this be related to the switch to new Vala version 0.11.0 [3] which ha=
+s such a check included [2]? Commit ecafbae [4] seems not to be enough.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://tinderbox.openembedded.net/public/logs/task/8443672.txt
+[2] http://git.gnome.org/browse/vala/commit/?id=3D14235edbf8e66d5d1d130c3e0=
+2ef9067e64635c2
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D9b47372=
+447a631e0c7322908c1d08ec46061ed0c
+[4] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Decafbae=
+0c94d17af681106687ca3e4e317112c11
+
+--=-Gdw1+m8hfeQc8VPXqA0W
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkysgk0ACgkQPX1aK2wOHVi95wCfbrEje0Fxpx8Ctu6QjikvKMPx
+XSwAn2ZQa8ylQwJAenfdjAT0cJGsMSds
+=sDPe
+-----END PGP SIGNATURE-----
+
+--=-Gdw1+m8hfeQc8VPXqA0W--
