@@ -1,44 +1,49 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P3VUL-0000ps-IT
+	(envelope-from <martin.jansa@gmail.com>) id 1P3VeV-00012g-MA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 17:01:02 +0200
-Received: by wwb17 with SMTP id 17so200465wwb.24
+	Wed, 06 Oct 2010 17:11:32 +0200
+Received: by bwz7 with SMTP id 7so61478bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Oct 2010 08:00:40 -0700 (PDT)
+	Wed, 06 Oct 2010 08:11:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=7CobFnXQm4NgJlGbKTFB8dWxccyBwjPOe9z6w6goU/4=;
-	b=ru5z6W3HDbGlxUvPkweP3/cT1LWqHVl1nAdxeYPBAvUv5lVlmbpyewnayHIszU94ki
-	JHqzL7Jt3zxoFHgP5dcEMCV42u0EPbG4mBp5dLsNfmYDJo+OF8D14sterfGcGkNifMHy
-	w0J+abMq6CVLWNqup2ErNYutXz6T9DN9VS6rg=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=6Q3xmz+9OKB7KlJHg9yxYuptCaE1du2AFKYslDhOU9g=;
+	b=N6IfnfeUwuZ9SZ+lgGMc5m57Q/s1plKEgMZ7gCDYWjp13OysVtkm2dsUEO+pUDWGaL
+	lAm8Eryq3YNa3JFkaEV7TNKCiA2qfc6t9UlSlrkV24NUzkU2SVRwWncieHNgLq2Yab0L
+	Je0rsMk5qDB++d9dqRQ6QLw4hlh/PKEGZfQOI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=PXeh2zPS+722XhplxXukUZAxAS1rgxOodkYzY48ii4pYNUhek5ej3Rsv6CQagr3x0z
-	glW221CnkNayINjMi1hcWE86ckRTwr8QxlddZUJYqJ9HJTyiWyd7q5ij2rYxOy/n+4K8
-	R8UgJgn7tgKH/KHhxe7SGOnQ9enUVHQMiljwo=
-MIME-Version: 1.0
-Received: by 10.227.142.139 with SMTP id q11mr11155854wbu.103.1286377240293;
-	Wed, 06 Oct 2010 08:00:40 -0700 (PDT)
-Received: by 10.227.141.70 with HTTP; Wed, 6 Oct 2010 08:00:39 -0700 (PDT)
-In-Reply-To: <20101006145051.GK3264@jama>
-References: <4CAC8B19.9050502@gmail.com>
-	<20101006145051.GK3264@jama>
-Date: Wed, 6 Oct 2010 17:00:39 +0200
-Message-ID: <AANLkTimJ3fCOZopbAKG7UvszQGNMfnaq1HnAB6mKqmu_@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=c+AMryHcfGxMlg7/JP1+bzt+ydxT2lAtSOag6loEAnKasiGY173vQhSLZIIG00WlEP
+	8NXIxyuGVoJVEHBqRG6uSYQm/T8voRM2kDW54nrL4FnoK6iO0tPeVKtAIkwn8UODIwbW
+	9rJ7MdvL1PVJy62b2oqC8Aax6MUGJRLt2N2t0=
+Received: by 10.204.141.16 with SMTP id k16mr9888889bku.177.1286377872747;
+	Wed, 06 Oct 2010 08:11:12 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id x19sm755344bkv.21.2010.10.06.08.11.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 06 Oct 2010 08:11:11 -0700 (PDT)
+Date: Wed, 6 Oct 2010 17:11:19 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
+Message-ID: <20101006151119.GL3264@jama>
+References: <1286374774.3792.12.camel@mattotaupa> <20101006142538.GJ3264@jama>
+	<1286377015.3792.16.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1286377015.3792.16.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: /usr/bin/fop ???
+Subject: Re: [PATCH v2] mokosuite2: Add `libfakekey` and `vala-native` to `DEPENDS`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,31 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 15:01:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 06 Oct 2010 15:11:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Oct 6, 2010 at 4:50 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Wed, Oct 06, 2010 at 03:43:37PM +0100, Arigead wrote:
->> trying to "bitbake tangogps" and getting errors about /usr/bin/fop
->>
->> I'm searching for a solution but not getting too far with that. I'm not
->> sure why and embedded verison of tangogps would require Apache FOP but
->> I'm on the wrong end of a learning curve.
->>
->> Cheers for any pointers which would get me over this hurdle.
->
-> what about providing whole log.do_compile and log.do_configure to be
-> sure which recipe has this problem (I see libx11 in log, but you're
-> talking about tangogps).
->
-> Regards,
+On Wed, Oct 06, 2010 at 04:56:55PM +0200, Paul Menzel wrote:
+> Am Mittwoch, den 06.10.2010, 16:25 +0200 schrieb Martin Jansa:
+> > On Wed, Oct 06, 2010 at 04:19:34PM +0200, Paul Menzel wrote:
+> > > 
+> > > During the latest bumps of `SRCREV` I guess it was forgotten to add some dependencies.
+> > > 
+> > > `libfakekey` is needed for a successful configure and without `vala-native` `valac` is not found on a clean and minimal build system.
+> > > 
+> > > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> > 
+> > Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > 
+> > IMHO no need to bump PR as it won't change resulting packages, but won't
+> > harm as it builds quickly.
+> 
+> Ok, I updated the patch.
+> Could someone please commit this, since I do not have commit rights.
 
-In case it fails in libx11 then it's probably because of:
-http://cgit.freedesktop.org/xorg/lib/libX11/commit/?id=e14273f44c1501ab51db4adcb83b18a1073787d8
-you can force fop disabled with --with-fop=no in EXTRA_OECONF or try
-to fix XORG_WITH_FOP (to ignore fop on buildhost and look only in
-sysroots)
+Both pushed.
+ 
+> > Thanks for spotting it.
+> 
+> No problem. Do you have an idea on how to avoid that in the future?
+
+not really, from what I understand packaged staging makes it
+easier/faster to rebuild after prunning sysroots, but ie if I use
+shr-image as target, then it's quite likely that ie libfakekey gets
+staged (because of some other recipe) before building mokosuite2.
 
 Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
