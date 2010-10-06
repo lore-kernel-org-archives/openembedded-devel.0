@@ -1,49 +1,44 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P3VeV-00012g-MA
+	(envelope-from <raj.khem@gmail.com>) id 1P3WT3-0000wP-VR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 17:11:32 +0200
-Received: by bwz7 with SMTP id 7so61478bwz.6
+	Wed, 06 Oct 2010 18:03:47 +0200
+Received: by iwn38 with SMTP id 38so438996iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Oct 2010 08:11:13 -0700 (PDT)
+	Wed, 06 Oct 2010 09:03:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=6Q3xmz+9OKB7KlJHg9yxYuptCaE1du2AFKYslDhOU9g=;
-	b=N6IfnfeUwuZ9SZ+lgGMc5m57Q/s1plKEgMZ7gCDYWjp13OysVtkm2dsUEO+pUDWGaL
-	lAm8Eryq3YNa3JFkaEV7TNKCiA2qfc6t9UlSlrkV24NUzkU2SVRwWncieHNgLq2Yab0L
-	Je0rsMk5qDB++d9dqRQ6QLw4hlh/PKEGZfQOI=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=RJ8xGfcWfpBd7cRePyo/XF6MqB0NTgrmzi4lV8TsqZc=;
+	b=Wwi0+oiBtQcQ3ry+6qemCH15su2HHyLOuayQAld0zOotMV5mD+1lw/BUY0b2wkTIxP
+	zKgPFQvDtS+ncPfMuXal3Ersab8rW+ntsQOJSptSS3bk2z4l+ODaS+HK2JqIZY8wNFtK
+	ViqvIxiBGaQa5MYbLlzoxfYOlnu2zICZl6qK0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=c+AMryHcfGxMlg7/JP1+bzt+ydxT2lAtSOag6loEAnKasiGY173vQhSLZIIG00WlEP
-	8NXIxyuGVoJVEHBqRG6uSYQm/T8voRM2kDW54nrL4FnoK6iO0tPeVKtAIkwn8UODIwbW
-	9rJ7MdvL1PVJy62b2oqC8Aax6MUGJRLt2N2t0=
-Received: by 10.204.141.16 with SMTP id k16mr9888889bku.177.1286377872747;
-	Wed, 06 Oct 2010 08:11:12 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id x19sm755344bkv.21.2010.10.06.08.11.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 06 Oct 2010 08:11:11 -0700 (PDT)
-Date: Wed, 6 Oct 2010 17:11:19 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101006151119.GL3264@jama>
-References: <1286374774.3792.12.camel@mattotaupa> <20101006142538.GJ3264@jama>
-	<1286377015.3792.16.camel@mattotaupa>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=oZ/+AZjb9ymuobz7Zxl9GCwo4AEL/NIElxV6Us5/Dez7jdtX3bSwVisZv8xWC8Zm2M
+	9NAWxP0JKVmjl5AZOMIxZKVMGiTSX0+GyS2YhmDCfLoiWi8kYBNg1Dn174lYt38vvapV
+	I7+EjaISdj8zS4av6N3jo2OY2qELodIng3qIo=
+Received: by 10.231.174.206 with SMTP id u14mr14158630ibz.103.1286380997718;
+	Wed, 06 Oct 2010 09:03:17 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1286377015.3792.16.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.199.1 with HTTP; Wed, 6 Oct 2010 09:02:57 -0700 (PDT)
+In-Reply-To: <20101005182041.23910@gmx.net>
+References: <20101005182041.23910@gmx.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Oct 2010 09:02:57 -0700
+Message-ID: <AANLkTimm0KRKq12HvSRW=NEk6Rv1BCm7oqJQVSSw-bg2@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] mokosuite2: Add `libfakekey` and `vala-native` to `DEPENDS`.
+Subject: Re: patchutils 0.2.31 - not that compatible with state of the art automake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,41 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 15:11:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Oct 2010 16:03:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 06, 2010 at 04:56:55PM +0200, Paul Menzel wrote:
-> Am Mittwoch, den 06.10.2010, 16:25 +0200 schrieb Martin Jansa:
-> > On Wed, Oct 06, 2010 at 04:19:34PM +0200, Paul Menzel wrote:
-> > > 
-> > > During the latest bumps of `SRCREV` I guess it was forgotten to add some dependencies.
-> > > 
-> > > `libfakekey` is needed for a successful configure and without `vala-native` `valac` is not found on a clean and minimal build system.
-> > > 
-> > > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> > 
-> > Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > 
-> > IMHO no need to bump PR as it won't change resulting packages, but won't
-> > harm as it builds quickly.
-> 
-> Ok, I updated the patch.
-> Could someone please commit this, since I do not have commit rights.
+On Tue, Oct 5, 2010 at 11:20 AM, Alexander Stohr <Alexander.Stohr@gmx.de> w=
+rote:
+> oe uses version 0.2.31 of patchutils. i consider this a developers packag=
+es.
+>
+> thats what is at the download location right now:
+>
+> [ ] =C2=A0 =C2=A0 patchutils-0.2.31.tar.bz2 =C2=A0 =C2=A0 =C2=A0 13-Jun-2=
+005 17:46 =C2=A0 =C2=A0 =C2=A0 143K
+> [ ] =C2=A0 =C2=A0 patchutils-0.3.0.tar.bz2 =C2=A0 =C2=A0 =C2=A0 =C2=A002-=
+Jul-2008 12:07 =C2=A0 =C2=A0 =C2=A0 146K
+> [ ] =C2=A0 =C2=A0 patchutils-0.3.1.tar.bz2 =C2=A0 =C2=A0 =C2=A0 =C2=A023-=
+Jan-2009 18:06 =C2=A0 =C2=A0 =C2=A0 155K
+>
+> i was having noticeable trouble with those 5 years old version
+> since i am fiddling around with a relatively recent automake.
+> all the build behavior of patchutils was quite erratic.
+>
+> staring and dealing the source package internals i reasoned
+> that those old version is probably not that automake compliant.
+> so i once took the probably most simple choice to solve it:
+>
+> =C2=A0cp patchutils_0.2.31.bb patchutils_0.3.1.bb
 
-Both pushed.
- 
-> > Thanks for spotting it.
-> 
-> No problem. Do you have an idea on how to avoid that in the future?
+care to submit a patch. ?
 
-not really, from what I understand packaged staging makes it
-easier/faster to rebuild after prunning sysroots, but ie if I use
-shr-image as target, then it's quite likely that ie libfakekey gets
-staged (because of some other recipe) before building mokosuite2.
+Thx
 
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-Khem
 
 
