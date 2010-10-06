@@ -1,39 +1,36 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1P3RNi-0007ux-DK
+Received: from smtp-dist-01.services.comms.unsw.edu.au ([149.171.97.16]
+	helo=smtp-dist.unsw.edu.au) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <jayen@tigger.cse.unsw.EDU.AU>) id 1P3Tu1-0006na-Ck
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 12:38:00 +0200
-Received: from guest190.ibr.cs.tu-bs.de ([134.169.35.190] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1P3RNN-0001YW-BF by authid <stefan@sostec.de> with cram_md5;
-	Wed, 06 Oct 2010 12:37:35 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>)
-	id 1P3RNM-0000xl-2n; Wed, 06 Oct 2010 12:37:32 +0200
-Date: Wed, 6 Oct 2010 12:37:32 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: dfoley <dfoley@telus.net>
-Message-ID: <20101006103731.GG3517@excalibur.local>
-References: <AANLkTikzKs+3U0JfEbQxg5dLVuMF51To2qTn55YLOmjg@mail.gmail.com>
-	<20101005123257.GD3517@excalibur.local>
-	<4CAB3B4D.9000007@telus.net>
-MIME-Version: 1.0
-In-Reply-To: <4CAB3B4D.9000007@telus.net>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+	Wed, 06 Oct 2010 15:19:30 +0200
+Received: from INFPACM003.services.comms.unsw.edu.au
+	(INFPACM003.services.comms.unsw.edu.au [149.171.193.26])
+	by smtp-dist.unsw.edu.au (8.13.6/8.13.6) with ESMTP id o96AKuBp008919
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Oct 2010 21:21:12 +1100 (EST)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AvsEAGrqq0yBXqz5/2dsb2JhbACiQXGxJgGFaIhmhUcE
+X-IronPort-AV: E=Sophos;i="4.57,289,1283695200"; d="scan'208";a="85745075"
+Received: from tigger.cse.unsw.edu.au ([129.94.172.249])
+	by INFPACM003.services.comms.unsw.edu.au with ESMTP;
+	06 Oct 2010 21:04:55 +1100
+Received: by tigger.cse.unsw.EDU.AU (Postfix, from userid 1000)
+	id 4AA0A174D43; Wed,  6 Oct 2010 21:20:55 +1100 (EST)
+From: Jayen Ashar <jayen@cse.unsw.edu.au>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  6 Oct 2010 21:20:19 +1100
+Message-Id: <1286360419-23692-1-git-send-email-jayen@cse.unsw.edu.au>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 149.171.97.16
+X-SA-Exim-Mail-From: jayen@tigger.cse.unsw.EDU.AU
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-5.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_NEUTRAL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: testing 2010-10-04
+Cc: Jayen Ashar <jayen@cse.unsw.edu.au>
+Subject: [PATCH] SWI-Prolog: New program
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,37 +44,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 10:38:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Oct 2010 13:19:31 -0000
 
-Hello.
+* Starting with SWI-Prolog 5.10.1
+* SWI-Prolog is a fast and powerful ISO/Edinburgh-style Prolog compiler with a
+*  rich set of built-in predicates. It offers a fast, robust and small
+*  environment which enables substantial applications to be developed with it.
 
-On Tue, 2010-10-05 at 07:50, dfoley wrote:
-> 
-> May not be correct, but I ran into the same problem and patched.
-> 
-> diff --git a/recipes/cacao/cacao.inc b/recipes/cacao/cacao.inc
-> index c366b74..70bda75 100644
-> --- a/recipes/cacao/cacao.inc
-> +++ b/recipes/cacao/cacao.inc
-> @@ -23,7 +23,7 @@ EXTRA_OECONF = "\
->  	${@['','--enable-softfloat'][bb.data.getVar('TARGET_FPU',d,1) == 'soft']} \
->  	--enable-debug \
->  	--with-vm-zip=${datadir}/cacao/vm.zip \
-> -	--with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-${PV} \
-> +	--with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-${PV}/cacaoh \
->      --with-build-java-runtime-library-classes=${STAGING_DATADIR}/classpath/glibj.zip \
->      --with-java-runtime-library-classes=${datadir}/classpath/glibj.zip \
->      --with-java-runtime-library-libdir=${libdir_jni}:${libdir} \
+Signed-off-by: Jayen Ashar <jayen@cse.unsw.edu.au>
+---
+ recipes/swi-prolog/swi-prolog.inc             |   76 +++++++++++++++++++++++++
+ recipes/swi-prolog/swi-prolog/configure.patch |   11 ++++
+ recipes/swi-prolog/swi-prolog_5.10.1.bb       |    3 +
+ 3 files changed, 90 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/swi-prolog/swi-prolog.inc
+ create mode 100644 recipes/swi-prolog/swi-prolog/configure.patch
+ create mode 100644 recipes/swi-prolog/swi-prolog_5.10.1.bb
 
-This does it fix for me as well. I wonder from which commit the  directory
-change was triggered in the last week.
+diff --git a/recipes/swi-prolog/swi-prolog.inc b/recipes/swi-prolog/swi-prolog.inc
+new file mode 100644
+index 0000000..772873e
+--- /dev/null
++++ b/recipes/swi-prolog/swi-prolog.inc
+@@ -0,0 +1,76 @@
++DESCRIPTION = "SWI-Prolog is a fast and powerful ISO/Edinburgh-style Prolog compiler with a rich set of built-in predicates. It offers a fast, robust and small environment which enables substantial applications to be developed with it."
++HOMEPAGE = "http://www.swi-prolog.org/"
++SECTION = "interpreters"
++PRIORITY = "optional"
++LICENSE = "LGPL"
++DEPENDS = "ncurses readline gmp chrpath"
++
++INC_PR = "r1"
++
++SRC_URI = "http://mirror.cse.unsw.edu.au/pub/debian/pool/main/s/${PN}/${PN}_${PV}.orig.tar.gz \
++           file://configure.patch;patch=1"
++
++S = "${WORKDIR}/pl-${PV}"
++
++inherit autotools
++
++#overriden because we don't want to run autoconf on releases
++do_configure() {
++  if [ -e ${S}/configure ]; then
++    oe_runconf $@
++  else
++    oenote "nothing to configure ${S}"
++  fi
++}
++
++#appended so we can run configure and make on the packages directory after 
++#compiling the main enging
++do_compile_append() {
++  if [ -e ${S}/packages/configure ]; then
++  if [ -x ${S}/packages/configure ] ; then
++    cd ${S}/packages
++    export DISABLE_PKGS="xpce http pldoc jpl"
++    cfgcmd="${S}/packages/configure \
++        --build=${BUILD_SYS} \
++        --host=${HOST_SYS} \
++        --target=${TARGET_SYS} \
++        --prefix=${prefix} \
++        --exec_prefix=${exec_prefix} \
++        --bindir=${bindir} \
++        --sbindir=${sbindir} \
++        --libexecdir=${libexecdir} \
++        --datadir=${datadir} \
++        --sysconfdir=${sysconfdir} \
++        --sharedstatedir=${sharedstatedir} \
++        --localstatedir=${localstatedir} \
++        --libdir=${libdir} \
++        --includedir=${includedir} \
++        --oldincludedir=${oldincludedir} \
++        --infodir=${infodir} \
++        --mandir=${mandir} \
++      ${EXTRA_OECONF} \
++        $@"
++    oenote "Running $cfgcmd..."
++    $cfgcmd || oefatal "oe_runconf failed" 
++  else
++    oefatal "no configure script found"
++  fi
++  else
++    oenote "nothing to configure ${S}/packages"
++  fi
++  if [ -e packages/Makefile -o -e packages/makefile ]; then
++    oe_runmake -C packages || die "make failed"
++  else
++    oenote "nothing to compile"
++  fi
++}
++
++#to install the packages
++do_install_append() {
++  oe_runmake -C packages 'DESTDIR=${D}' install
++}
++
++#so debug files aren't included in the main package
++FILES_${PN}-dbg += " ${libdir}/swipl-${PV}/bin/*/.debug ${libdir}/swipl-${PV}/lib/*/.debug"
++#so the main package includes dependent libraries and packages
++FILES_${PN} += " ${libdir}/swipl-${PV}"
+diff --git a/recipes/swi-prolog/swi-prolog/configure.patch b/recipes/swi-prolog/swi-prolog/configure.patch
+new file mode 100644
+index 0000000..58ecd58
+--- /dev/null
++++ b/recipes/swi-prolog/swi-prolog/configure.patch
+@@ -0,0 +1,11 @@
++--- a/src/configure~    2010-07-21 23:04:23.000000000 +1000
+++++ b/src/configure     2010-10-01 14:02:15.000000000 +1000
++@@ -7470,7 +7470,7 @@
++ 
++ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread support for cpu clocks" >&5
++ $as_echo_n "checking for pthread support for cpu clocks... " >&6; }
++-if test "$cross_compiling" = yes; then :
+++if test x"$cross_compiling" = yes; then :
++   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++ $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++ as_fn_error "cannot run test program while cross compiling
+diff --git a/recipes/swi-prolog/swi-prolog_5.10.1.bb b/recipes/swi-prolog/swi-prolog_5.10.1.bb
+new file mode 100644
+index 0000000..bb7e95b
+--- /dev/null
++++ b/recipes/swi-prolog/swi-prolog_5.10.1.bb
+@@ -0,0 +1,3 @@
++require swi-prolog.inc
++
++PR = "${INC_PR}.1"
+-- 
+1.7.0.4
 
-Care to send a git formatted patch with PR bump I could apply? As you did the
-work you should get the credits for it. :)
-
-regards
-Stefan Schmidt 
 
 
