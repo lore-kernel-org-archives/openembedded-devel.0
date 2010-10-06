@@ -1,48 +1,47 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P3UwL-0005Nj-Gj
+	(envelope-from <captain.deadly@gmail.com>) id 1P3VDs-0002Pr-9x
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Oct 2010 16:25:54 +0200
-Received: by bwz7 with SMTP id 7so19052bwz.6
+	Wed, 06 Oct 2010 16:44:01 +0200
+Received: by wwb17 with SMTP id 17so177640wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Oct 2010 07:25:30 -0700 (PDT)
+	Wed, 06 Oct 2010 07:43:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=SaccN/qNcd2DIC5YeL3XnIf/Gj/KQo7P6OqAMUuAKXM=;
-	b=EUiADLLeVF27MofI5C2XK+BYpgFgB1aBtTvxCINfGQjQdm1vKR9NTrqBmXeU8+XuQY
-	wwVvtmyEAWU3gHtMDUMs32hUSugd2ghMjYU1U4QyzbOt0+mxz8u29UogOvucakfYTJbb
-	+JdIksscPX0QHg1rqLQXCgNT+W5pBhjkehIYg=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:x-enigmail-version:content-type
+	:content-transfer-encoding;
+	bh=SbxhQFK5csPLEkVzKnJ0F2ZkGd8Jt8/6Xy4A/cm+FAw=;
+	b=Klh22r6b19JTfVmeWJH/n35BH8i4AfbobdthP56dWDsk3f1cTlH4LhfjcljNK6ttlf
+	dR7VtLGYphsWLefIz/i1l/oPosLgr3TfLttGVaD8Yb7Er4g0KlcH1gPt105QO3Ooluh3
+	KAjlgGcnLt7dLH29mkp5eoG52QPBDeU2iiA6o=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=TNfDRWkxcwgvnVA47N4LHIcuvQQIhk6Dt3dOaOjB331hCNX2TNHPKq7hOxGPuVJJ4f
-	c2htLFHpJrw71cWijkfM8uqwTObbahx3nUfFmVcrNZr/6DU5wnEFLu+GU0dj+DdzBF4k
-	jmuWtcFOr/tJjDrCbwtgJbvGMKChNxIVtC3Zo=
-Received: by 10.204.112.7 with SMTP id u7mr9507743bkp.70.1286375130599;
-	Wed, 06 Oct 2010 07:25:30 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id x13sm714633bki.12.2010.10.06.07.25.29
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:x-enigmail-version:content-type:content-transfer-encoding;
+	b=iIXOyKVlcIhNBjwrZoCguDz3lJaqQBwKd+K7ZXNbqbpHIV6jCz6gfwOikJyIoiXd4h
+	1xoi4GCXSFWwHyOPZ/M9tqYH0o6WfYp6xjoRpd3qeyhzgP5qgb61BNB2GxScDFpxJilr
+	awbs+TDUNVr/42DXfsotaN5xi0vTBuqa1Vcjg=
+Received: by 10.216.35.78 with SMTP id t56mr10787301wea.34.1286376220069;
+	Wed, 06 Oct 2010 07:43:40 -0700 (PDT)
+Received: from [192.168.2.176] ([91.123.227.253])
+	by mx.google.com with ESMTPS id r18sm655530weo.24.2010.10.06.07.43.38
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 06 Oct 2010 07:25:30 -0700 (PDT)
-Date: Wed, 6 Oct 2010 16:25:38 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101006142538.GJ3264@jama>
-References: <1286374774.3792.12.camel@mattotaupa>
+	Wed, 06 Oct 2010 07:43:39 -0700 (PDT)
+Message-ID: <4CAC8B19.9050502@gmail.com>
+Date: Wed, 06 Oct 2010 15:43:37 +0100
+From: Arigead <captain.deadly@gmail.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-In-Reply-To: <1286374774.3792.12.camel@mattotaupa>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.96.0
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: captain.deadly@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] mokosuite2: Add `libfakekey` and `vala-native` to DEPENDS.
+Subject: /usr/bin/fop ???
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,26 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 14:25:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Oct 2010 14:44:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 06, 2010 at 04:19:34PM +0200, Paul Menzel wrote:
-> 
-> During the latest bumps of `SRCREV` I guess it was forgotten to add some dependencies.
-> 
-> `libfakekey` is needed for a successful configure and without `vala-native` `valac` is not found on a clean and minimal build system.
-> 
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+trying to "bitbake tangogps" and getting errors about /usr/bin/fop
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+I'm searching for a solution but not getting too far with that. I'm not
+sure why and embedded verison of tangogps would require Apache FOP but
+I'm on the wrong end of a learning curve.
 
-IMHO no need to bump PR as it won't change resulting packages, but won't
-harm as it builds quickly.
+Cheers for any pointers which would get me over this hurdle.
 
-Thanks for spotting it.
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+| [warning] /usr/bin/fop: Unable to locate fop in
+/home/john/programming/openmoko/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/libx11-1_1.3.99.902-r9.0/image/usr/share/java
+| Exception in thread "main" java.lang.NoClassDefFoundError:
+org/apache/fop/cli/Main
+| Caused by: java.lang.ClassNotFoundException: org.apache.fop.cli.Main
+| 	at java.net.URLClassLoader$1.run(URLClassLoader.java:217)
+| 	at java.security.AccessController.doPrivileged(Native Method)
+| 	at java.net.URLClassLoader.findClass(URLClassLoader.java:205)
+| 	at java.lang.ClassLoader.loadClass(ClassLoader.java:321)
+| 	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:294)
+| 	at java.lang.ClassLoader.loadClass(ClassLoader.java:266)
+| Could not find the main class: org.apache.fop.cli.Main. Program will exit.
+| make[1]: *** [Compose/index.ps] Error 1
 
 
