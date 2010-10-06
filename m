@@ -1,25 +1,45 @@
-Received: from ibawizard.net ([82.208.49.253] helo=mengele.ibawizard.net)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@true.cz>) id 1P3We9-0004Cd-9i
-	for openembedded-devel@openembedded.org; Wed, 06 Oct 2010 18:15:14 +0200
-Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id 82C561D360EE;
-	Wed,  6 Oct 2010 18:14:48 +0200 (CEST)
-From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Oct 2010 20:14:58 +0200
-Message-Id: <1286388898-7029-1-git-send-email-ynezz@true.cz>
-X-Mailer: git-send-email 1.7.0.4
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P3XBH-00059S-JK
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Oct 2010 18:49:30 +0200
+Received: by iwn38 with SMTP id 38so485598iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Oct 2010 09:49:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=I+ZO3/WWHFBtqWhhEPEQ6vSC2x0ZRvLziSlSGhCxde0=;
+	b=l5W6Yn3QDukocXRX6JMuU2vy/oDRHEx7/eCT/f0++dnxnRXnk3H3n0bhbs+tEnvC/3
+	OizM/pd0zLZihvNcNSkvv7AKJX7UoMdvjCog37VOhG4dRxEZKUA01Xa//N1ZC1Ma1zko
+	6SLVVg2JTPImzXx/n7cW1l1nOAejVsQUDbbgQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=NcXFWOarN1b0IImv9dWHY/PV4kkOf0W0TRuQQx7wc9kVb86Ejd2x01rLj7elR4Cd+0
+	wSYBP6wYGUiSoeUnF4iDDjceTBkqox7Sct7yiW7nqXvApZgeIBpkpfOk43NctAq61uEv
+	AL+hYUXlgJT9+yKNcv46KrthcDPLmDk7y9pP8=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@true.cz
+Received: by 10.231.191.147 with SMTP id dm19mr14280628ibb.6.1286383681212;
+	Wed, 06 Oct 2010 09:48:01 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Wed, 6 Oct 2010 09:48:00 -0700 (PDT)
+In-Reply-To: <1286377178.3792.18.camel@mattotaupa>
+References: <1286374262.3792.8.camel@mattotaupa>
+	<1286377178.3792.18.camel@mattotaupa>
+Date: Wed, 6 Oct 2010 18:48:00 +0200
+Message-ID: <AANLkTikw-iPUnyWwT0ymVHM4cfP7+mzUy-bF1zCG0CDx@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] init-scripts: introduce DONTUSETIMESTAMP variable in bootmisc.sh
+Subject: Re: [PATCH v2] msmcommd_git: Add `libfsotransport` to `DEPENDS`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,70 +53,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2010 16:15:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 06 Oct 2010 16:49:30 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-This variable is useful on systems with battery backed RTC. Imagine, that=
- the
-board is shut down and then switched on after, for example three days.
-Althought the value in RTC is correct, this scripts sets system time with=
- the
-wrong values.
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
----
- recipes/initscripts/initscripts-1.0/bootmisc.sh |   15 +++++++++------
- recipes/initscripts/initscripts_1.0.bb          |    2 +-
- 2 files changed, 10 insertions(+), 7 deletions(-)
-
-diff --git a/recipes/initscripts/initscripts-1.0/bootmisc.sh b/recipes/in=
-itscripts/initscripts-1.0/bootmisc.sh
-index d19477b..6abefcd 100755
---- a/recipes/initscripts/initscripts-1.0/bootmisc.sh
-+++ b/recipes/initscripts/initscripts-1.0/bootmisc.sh
-@@ -69,12 +69,15 @@ fi
- test -x /etc/init.d/hwclock.sh && /etc/init.d/hwclock.sh start
- if test -e /etc/timestamp
- then
--	SYSTEMDATE=3D`date "+%Y%m%d"`
--	TIMESTAMP=3D`cat /etc/timestamp | awk '{ print substr($0,9,4) substr($0=
-,1,4);}'`
--        NEEDUPDATE=3D`expr \( $TIMESTAMP \> $SYSTEMDATE \)`             =
-                                   =20
--        if [ $NEEDUPDATE -eq 1 ]; then=20
--		date `cat /etc/timestamp`
--		/etc/init.d/hwclock.sh stop
-+	if test "$DONTUSETIMESTAMP" !=3D no
-+	then
-+		SYSTEMDATE=3D`date "+%Y%m%d"`
-+		TIMESTAMP=3D`cat /etc/timestamp | awk '{ print substr($0,9,4) substr($=
-0,1,4);}'`
-+	        NEEDUPDATE=3D`expr \( $TIMESTAMP \> $SYSTEMDATE \)`            =
-                                    =20
-+        	if [ $NEEDUPDATE -eq 1 ]; then=20
-+			date `cat /etc/timestamp`
-+			/etc/init.d/hwclock.sh stop
-+		fi
- 	fi
- fi
- : exit 0
-diff --git a/recipes/initscripts/initscripts_1.0.bb b/recipes/initscripts=
-/initscripts_1.0.bb
-index cc60624..3987c60 100644
---- a/recipes/initscripts/initscripts_1.0.bb
-+++ b/recipes/initscripts/initscripts_1.0.bb
-@@ -4,7 +4,7 @@ PRIORITY =3D "required"
- DEPENDS =3D "makedevs"
- RDEPENDS_${PN} =3D "makedevs"
- LICENSE =3D "GPL"
--PR =3D "r124"
-+PR =3D "r125"
-=20
- SRC_URI =3D "file://functions \
-            file://halt \
---=20
-1.7.0.4
-
+2010/10/6 Paul Menzel <paulepanter@users.sourceforge.net>:
+> Date: Wed, 6 Oct 2010 13:00:42 +0200
+>
+> [=85]
+> | checking for DEPS... configure: error: Package requirements (glib-2.0 >=
+=3D 2.120
+> | =A0 gio-2.0 >=3D 2.12.0
+> | =A0 gobject-2.0 >=3D 2.12.0
+> | =A0 gthread-2.0 >=3D 2.12.0
+> | =A0 gee-1.0 >=3D 0.5
+> | =A0 dbus-1 >=3D 1.2.16
+> | =A0 dbus-glib-1 >=3D 0.84
+> | =A0 fsotransport-2.0 >=3D 0.9
+> | =A0 fso-glib-1.0 >=3D 2010.07.28.1
+> | =A0 msmcomm-1.0 >=3D 0.5.0
+> | =A0 msmcommd-specs-1.0 >=3D 0.1.0) were not met:
+> |
+> | No package 'fsotransport-2.0' found
+> |
+> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
+> | installed software in a non-standard prefix.
+> |
+> | Alternatively, you may set the environment variables DEPS_CFLAGS
+> | and DEPS_LIBS to avoid the need to call pkg-config.
+> | See the pkg-config man page for more details.
+> |
+> | ERROR: Function do_configure failed
+> [=85]
+>
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+> v2: Do not bump `PR` since adding dependencies does not alter the resulti=
+ng package.
+> ---
+> =A0recipes/freesmartphone/msmcommd_git.bb | =A0 =A01 +
+> =A01 files changed, 1 insertions(+), 0 deletions(-)
+>
+> diff --git a/recipes/freesmartphone/msmcommd_git.bb b/recipes/freesmartph=
+one/msmcommd_git.bb
+> index e8f3887..abe98f8 100644
+> --- a/recipes/freesmartphone/msmcommd_git.bb
+> +++ b/recipes/freesmartphone/msmcommd_git.bb
+> @@ -9,6 +9,7 @@ DEPENDS =3D " \
+> =A0dbus \
+> =A0dbus-glib \
+> =A0libfso-glib \
+> + libfsotransport \
+> =A0libgee \
+> =A0libmsmcomm \
+> =A0msmcommd-specs \
+> --
+> 1.7.1
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
