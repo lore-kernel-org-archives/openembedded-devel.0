@@ -1,31 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P3vKP-0007Kw-Ub
-	for openembedded-devel@openembedded.org; Thu, 07 Oct 2010 20:36:30 +0200
-Received: by iwn37 with SMTP id 37so164040iwn.6
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P3vKU-0007L7-Hp
+	for openembedded-devel@openembedded.org; Thu, 07 Oct 2010 20:36:35 +0200
+Received: by yxk8 with SMTP id 8so66734yxk.6
 	for <openembedded-devel@openembedded.org>;
-	Thu, 07 Oct 2010 11:36:08 -0700 (PDT)
+	Thu, 07 Oct 2010 11:36:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:date:message-id
 	:subject:from:to:content-type;
 	bh=c+U0A++RabWlMR4plW5J9oX4TFhp9SSecQeKtDgivU8=;
-	b=Iy5WWYBAbqHji/MFz/oNrmbyqINFIQxK5HZXt2zNny+hz4SDbUkaVWU92+yKKsQnEz
-	wrIvjri6Yl640SL6fJzNSkOS5mSptx0aExOLlFXRk1ajRRkVKMK/XxShJPr1bakhBqVU
-	H4Ykmp+vo9HsI/Jf+M+rB7+S9Yw3JVqpOqeYE=
+	b=qPG/rTKv+MzNCuRL46/+V7D9VtXpwUpy+bTS5kxFsUJJRnBN2W6fSwHQh6Kwz2Q9/9
+	s/d0UL48Qg+nNN75qORX3RmpLXlO7vOWzg1HjR+5wFjye5ajo3LiiCsbWlwAQth2GWi9
+	1pa1iJ3Y5muqNnlP7tmpKKFxKlRu0CpZS9G+w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=AbdK8XVPuIHggIR5Py1yDVuNXczVhzckE3DvhjUHgbkssxu272bHBVzYK+IV5/cGW5
-	uHNhOAVBeO5s43Ue+KVmiHgHMSwkQkahZNjrG/RmI6/HUxGkWAPL4aqoV95KMigF0EDb
-	I7h6/mCbN00teigas5Ax423WxTRpbw3mOt2MY=
+	b=QHNRlOa0svcICJlXZAf6GiXhl9n4KUNJh7MIPqOUqxwsq82hR/lL8Vg69CaMqjXiMW
+	+HA6rDQwX3lzAxhDd/2mDn3rDt1tOB4KXmVgzwlyjpe00eqDZ2//bvOvlYvGGN40+GjP
+	a3zcdEawz0Xv5U2EGAML3BMHZen6Vx6QVzYPA=
 MIME-Version: 1.0
-Received: by 10.231.190.149 with SMTP id di21mr1250151ibb.166.1286476567228;
-	Thu, 07 Oct 2010 11:36:07 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Thu, 7 Oct 2010 11:35:56 -0700 (PDT)
-Date: Thu, 7 Oct 2010 20:35:56 +0200
-Message-ID: <AANLkTinXWX5B+-8cK_CCJr+QsuXvCYumVs3reHuca=Fz@mail.gmail.com>
+Received: by 10.150.57.10 with SMTP id f10mr1599275yba.399.1286476572116; Thu,
+	07 Oct 2010 11:36:12 -0700 (PDT)
+Received: by 10.151.41.5 with HTTP; Thu, 7 Oct 2010 11:36:12 -0700 (PDT)
+Date: Thu, 7 Oct 2010 20:36:12 +0200
+Message-ID: <AANLkTimeMWsTvhkZjP+qjVJW7ynM69XcF_0WbS2VdenR@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -47,7 +47,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Oct 2010 18:36:30 -0000
+X-List-Received-Date: Thu, 07 Oct 2010 18:36:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 Hi,
