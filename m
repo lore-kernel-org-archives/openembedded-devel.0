@@ -1,47 +1,44 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P3vds-0000hV-12
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 20:56:38 +0200
-Received: by wyf23 with SMTP id 23so121872wyf.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P3vmC-0002mb-3s for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Oct 2010 21:05:29 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P3vlk-0003YP-H1 for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Oct 2010 21:04:44 +0200
+Received: from d75-157-18-211.bchsia.telus.net ([75.157.18.211])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Oct 2010 21:04:44 +0200
+Received: from dfoley by d75-157-18-211.bchsia.telus.net with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Oct 2010 11:56:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=WgGl017B+N2cjW/lVtGVN0YjsgGVUmW6/4b1rAr0iM8=;
-	b=mM4hJyTjCm2Zy/29IjPRiiNzhr+4+MXEkS9f9pFGFqxpH4zKybnxzYIjEGVdzIWzlk
-	DHEA/KUzx0VQ+Czm7f3WD4c/PJ8wk+NZwo4YueYtcH39LWDPsj57OY0/LFYafNIlkh5W
-	LA9F0Mteb75hUGZCGHlgVw8J/iFPYBEL8QlGE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=OQaMnFWWLRdpi29NHrjeM+GeaGZ6XCTKaIbXtxD01aPp4iWdS5iUlXe+mIjJczC7eB
-	gHq5C4o1/pP8RzdBlaHHr97/7hP9axvUTvx87w7zwEShNLK3hJc8zOwUYYcliisy7FIF
-	Wqp/WRSLwfxiV9YVbzObm7XTy6k2IIphJ+0l4=
-Received: by 10.216.65.204 with SMTP id f54mr2739591wed.3.1286477774292; Thu,
-	07 Oct 2010 11:56:14 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.142 with HTTP; Thu, 7 Oct 2010 11:55:54 -0700 (PDT)
-In-Reply-To: <AANLkTimeMWsTvhkZjP+qjVJW7ynM69XcF_0WbS2VdenR@mail.gmail.com>
-References: <AANLkTimeMWsTvhkZjP+qjVJW7ynM69XcF_0WbS2VdenR@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 7 Oct 2010 11:55:54 -0700
-X-Google-Sender-Auth: duWAsuajqsg_abWucKjRW7wcqzA
-Message-ID: <AANLkTimE8tt4k6nfRSbDJwZDEkecc1sfJQyB9LKtehKQ@mail.gmail.com>
+	Thu, 07 Oct 2010 21:04:44 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+From: Dallas Foley <dfoley@telus.net>
+Date: Thu, 07 Oct 2010 12:04:33 -0700
+Message-ID: <4CAE19C1.4060406@telus.net>
+References: <AANLkTikzKs+3U0JfEbQxg5dLVuMF51To2qTn55YLOmjg@mail.gmail.com>	<20101005123257.GD3517@excalibur.local>
+	<4CAB3B4D.9000007@telus.net>	<20101006103731.GG3517@excalibur.local>
+	<4CADE897.5070307@telus.net>
+	<AANLkTimOrM-DCsoP4yoo14g_wJ_h0ZVaY99R7UJ=TGmJ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: d75-157-18-211.bchsia.telus.net
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
+In-Reply-To: <AANLkTimOrM-DCsoP4yoo14g_wJ_h0ZVaY99R7UJ=TGmJ@mail.gmail.com>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: bitbake COMPATIBLE_MACHINE stack backtrace
+Subject: Re: testing 2010-10-04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,24 +52,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Oct 2010 18:56:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 07 Oct 2010 19:05:29 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 7, 2010 at 11:36 AM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
-
-> Hi,
+On 10-10-07 11:26 AM, Khem Raj wrote:
+> On Thu, Oct 7, 2010 at 8:34 AM, dfoley<dfoley@telus.net>  wrote:
+>> On 10-10-06 03:37 AM, Stefan Schmidt wrote:
+>>>
+>>> Hello.
+>>>
+>>> On Tue, 2010-10-05 at 07:50, dfoley wrote:
+>>>>
+>>>> May not be correct, but I ran into the same problem and patched.
+>>>>
+>>>> diff --git a/recipes/cacao/cacao.inc b/recipes/cacao/cacao.inc
+>>>> index c366b74..70bda75 100644
+>>>> --- a/recipes/cacao/cacao.inc
+>>>> +++ b/recipes/cacao/cacao.inc
+>>>> @@ -23,7 +23,7 @@ EXTRA_OECONF = "\
+>>>>         ${@['','--enable-softfloat'][bb.data.getVar('TARGET_FPU',d,1) ==
+>>>> 'soft']} \
+>>>>         --enable-debug \
+>>>>         --with-vm-zip=${datadir}/cacao/vm.zip \
+>>>> -       --with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-${PV} \
+>>>> +       --with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-${PV}/cacaoh \
+>>>>
+>>>>   --with-build-java-runtime-library-classes=${STAGING_DATADIR}/classpath/glibj.zip
+>>>> \
+>>>>       --with-java-runtime-library-classes=${datadir}/classpath/glibj.zip \
+>>>>       --with-java-runtime-library-libdir=${libdir_jni}:${libdir} \
+>>>
+>>> This does it fix for me as well. I wonder from which commit the  directory
+>>> change was triggered in the last week.
+>>>
+>>> Care to send a git formatted patch with PR bump I could apply? As you did
+>>> the
+>>> work you should get the credits for it. :)
+>>>
+>>> regards
+>>> Stefan Schmidt
+>>
+>> I don't mind if you commit it. You can put me in signed off by.
+>> Should the maintainer (MAINTAINERS file) verify it ?
 >
-> If I run bitbake (git head of about a week ago) with a recipe that has
-> COMPATIBLE_MACHINE set and that is not for my machine, I get a bitbake
-> tracedump;
->
+> what would be your sign off? your email does not reveal your full name :)
 
-Looking into it, thanks for the details.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+No need to include me in the sign off.
+I believe I've corrected my full name now.
+
+>
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+
 
