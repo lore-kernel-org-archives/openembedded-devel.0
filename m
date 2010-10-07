@@ -1,45 +1,39 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P3vGO-0007Dc-1G
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 20:32:21 +0200
-Received: by ywl5 with SMTP id 5so65657ywl.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Oct 2010 11:31:58 -0700 (PDT)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P3vKP-0007Kw-Ub
+	for openembedded-devel@openembedded.org; Thu, 07 Oct 2010 20:36:30 +0200
+Received: by iwn37 with SMTP id 37so164040iwn.6
+	for <openembedded-devel@openembedded.org>;
+	Thu, 07 Oct 2010 11:36:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=bYoR73flFHrJrA1Xyc4MmJVL6yv97AaXL9fxJ0jHfpU=;
-	b=LConMnmcVWwm1Hx3Bdzz657zhx2hAKj2eKnh9J2QkKqWJ159jaKfaxVKgf81R6nC7+
-	CywbMTtplkcH/8Pj9An2ojA11JlmjD5waziTugzMpK6NfupQjLYGMPIP21MONfy9q1Bx
-	gkFkNo3OOK2PgpVS9Zi/3lcZzLdS1LI6Y7yow=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=c+U0A++RabWlMR4plW5J9oX4TFhp9SSecQeKtDgivU8=;
+	b=Iy5WWYBAbqHji/MFz/oNrmbyqINFIQxK5HZXt2zNny+hz4SDbUkaVWU92+yKKsQnEz
+	wrIvjri6Yl640SL6fJzNSkOS5mSptx0aExOLlFXRk1ajRRkVKMK/XxShJPr1bakhBqVU
+	H4Ykmp+vo9HsI/Jf+M+rB7+S9Yw3JVqpOqeYE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=w4K0fQ/1z9bkbS3ogaR7w4R+9bcMJ5l/iqYklv/wdOR7z8dXSsfWnJnoFG7jHjRGhT
-	h256bJKypWvxyG59b1xtQuQxSgJm1mmX4DnlxVrLmaZDxWRyPW0L62df12KNuedIrYyY
-	uNshidh/4LEMAM6aam7ZcvkFsMWu0AOkg9/GA=
-Received: by 10.231.170.21 with SMTP id b21mr1257519ibz.122.1286476317206;
-	Thu, 07 Oct 2010 11:31:57 -0700 (PDT)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=AbdK8XVPuIHggIR5Py1yDVuNXczVhzckE3DvhjUHgbkssxu272bHBVzYK+IV5/cGW5
+	uHNhOAVBeO5s43Ue+KVmiHgHMSwkQkahZNjrG/RmI6/HUxGkWAPL4aqoV95KMigF0EDb
+	I7h6/mCbN00teigas5Ax423WxTRpbw3mOt2MY=
 MIME-Version: 1.0
-Received: by 10.231.199.1 with HTTP; Thu, 7 Oct 2010 11:31:34 -0700 (PDT)
-In-Reply-To: <i8jufe$299$1@dough.gmane.org>
-References: <1286415971-9960-1-git-send-email-raj.khem@gmail.com>
-	<i8jufe$299$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 7 Oct 2010 11:31:34 -0700
-Message-ID: <AANLkTinatBiNfBgMiKPzDGa+rac7FjQU02hBBammKGQE@mail.gmail.com>
+Received: by 10.231.190.149 with SMTP id di21mr1250151ibb.166.1286476567228;
+	Thu, 07 Oct 2010 11:36:07 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Thu, 7 Oct 2010 11:35:56 -0700 (PDT)
+Date: Thu, 7 Oct 2010 20:35:56 +0200
+Message-ID: <AANLkTinXWX5B+-8cK_CCJr+QsuXvCYumVs3reHuca=Fz@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH,V2 0/6] libtool 2.4 upgrade
+Subject: bitbake COMPATIBLE_MACHINE stack backtrace
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,102 +47,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Oct 2010 18:32:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Oct 2010 18:36:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Oct 7, 2010 at 12:56 AM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 07-10-10 03:46, Khem Raj wrote:
->> Hi
->>
->> Following set of patches is v2 of the patches adding support for getting=
- libtool 2.4 into
->> openemebedded. I have so far built minimal-image for two machines succes=
-sfully using old
->> and new libtool.
->>
->> The libtool sysroot feature knob is added through LIBTOOL_HAS_SYSROOT va=
-riable. If this is
->> set to "yes" then you ought to use libtool > 2.4 by default its set to "=
-no" which means
->> the current behavior remains.
->>
->> The big change that libtool 2.4 brings is sysroot support and I have add=
-ed
->> support to use this feature. It should make our life easier.
->>
->> This needs a lot of testing.
->>
->> Please cherry pick the patch bundle and give it a try in yout environmen=
-t
->
-> Can you apply these to a branch so we can add fixes there if needed?
+Hi,
 
-I can do that. However now that backward compatibility is left intact I thi=
-nk
-it would not be that bad to merge it into master and fix things on
-master. the libtool
-2.4 would have DEFAULT_PREFERENCE =3D "-1" by default it wont be picked by =
-anyone.
-with the number of developers we have it will get better testing before we
-accumulate too many changes on a branch. Secondly there might be changes li=
-ke
-gnutls one where the patch is only valid for new libtool and should be test=
-ed
-in old and new way. If there is any breakage introduced in existing build w=
-ill
-be caught quickly. Where as on branch resources might be divided and it may
-not progress so well. I am just weighing efforts Vs. risk here and
-risk seems low
+If I run bitbake (git head of about a week ago) with a recipe that has
+COMPATIBLE_MACHINE set and that is not for my machine, I get a bitbake
+tracedump;
 
-Thanks
--Khem
+Log;
+frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> grep COMPAT *
+encdec-updater.bb:COMPATIBLE_MACHINE = '(poodle|c7x0|spitz|akita|tosa)'
+nandlogical_1.0.0.bb:COMPATIBLE_MACHINE = "(poodle|c7x0|akita|spitz|tosa)"
+zaurus-installer.bb:COMPATIBLE_MACHINE = '(collie|poodle|c7x0|spitz|akita|tosa)'
+zaurus-legacy-tar.bb:COMPATIBLE_MACHINE = "spitz"
+zaurus-updater.bb:COMPATIBLE_MACHINE = '(poodle|c7x0|spitz|akita|tosa)'
 
->
->>
->> Some distros pin libtool version to 2.2.6b
->>
->> include/preferred-slugos-versions.inc
->> include/angstrom-2008-preferred-versions.inc
->> include/kaeilos-2009-preferred-versions.inc
->> include/angstrom-2010-preferred-versions.inc
->> include/preferred-shr-versions.inc
->>
->> So if you are using one of these distro's then you might have
->> to override the version in your local.conf
->>
->> LIBTOOL_HAS_SYSROOT =3D "yes"
->> LIBTOOL_VER =3D "2.4"
->> PREFERRED_VERSION_libtool =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D "${LIBT=
-OOL_VER}"
->> PREFERRED_VERSION_libtool-native =C2=A0 =C2=A0=3D "${LIBTOOL_VER}"
->> PREFERRED_VERSION_libtool-cross =C2=A0 =C2=A0 =3D "${LIBTOOL_VER}"
->> PREFERRED_VERSION_libtool-nativesdk =3D "${LIBTOOL_VER}"
->> PREFERRED_VERSION_libtool-sdk =C2=A0 =C2=A0 =C2=A0 =3D "${LIBTOOL_VER}"
->>
->> Please review, test, and provide feedback
->>
->> Thanks
->>
->> -Khem
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMrX0uMkyGM64RGpERAjNfAJ0eRV99dBkIAeDKsE/4GA9DTZcvXwCfZitH
-> pXRfV3B7U2f48NSxGcDq/wE=3D
-> =3DlbRD
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> bitbake -b
+zaurus-legacy-tar.bb
+ERROR: Command execution failed: Traceback (most recent call last):
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+    commandmethod(self.cmds_async, self, options)
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 174, in buildFile
+    command.cooker.buildFile(bfile, task)
+  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 650, in buildFile
+    self.status.task_deps[fn]['depends'] = {}
+TypeError: 'NoneType' object does not support item assignment
+
+frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> bitbake
+zaurus-legacy-tar
+NOTE: Handling BitBake files: - (7148/7148) [100 %]
+Parsing of 7148 .bb files complete (6693 cached, 455 parsed). 7333
+targets, 330 skipped, 0 masked, 0 errors.
+NOTE: oestats: build 93365
+ERROR: Nothing PROVIDES 'zaurus-legacy-tar'
+ERROR: Command execution failed: Traceback (most recent call last):
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+    commandmethod(self.cmds_async, self, options)
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 184, in buildTargets
+    command.cooker.buildTargets(pkgs_to_build, task)
+  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 737, in buildTargets
+    taskdata.add_provider(localdata, self.status, k)
+  File "/home/frans/oe/bitbake/lib/bb/taskdata.py", line 357, in add_provider
+    self.add_provider_internal(cfgData, dataCache, item)
+  File "/home/frans/oe/bitbake/lib/bb/taskdata.py", line 377, in
+add_provider_internal
+    raise bb.providers.NoProvider(item)
+NoProvider: zaurus-legacy-tar
+
+Especially in the first case there is no  real error message.
+I seem to recall (but have not verified) that 1.10 handled this
+without traceback.
+
+Any opinions/fixes?
+
+Frans
 
 
