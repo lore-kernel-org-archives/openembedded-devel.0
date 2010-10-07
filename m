@@ -1,44 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P3vmC-0002mb-3s for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 21:05:29 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P3vlk-0003YP-H1 for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 21:04:44 +0200
-Received: from d75-157-18-211.bchsia.telus.net ([75.157.18.211])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Oct 2010 21:04:44 +0200
-Received: from dfoley by d75-157-18-211.bchsia.telus.net with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sakoman@gmail.com>) id 1P3wMW-0004r8-93
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Oct 2010 21:42:48 +0200
+Received: by wwe15 with SMTP id 15so112833wwe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Oct 2010 21:04:44 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 07 Oct 2010 12:42:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=Ld19iXT18JD4eb3CEIBdn6M/b4/r8fQlseCnVeyduUE=;
+	b=d9pm7wAa8sHKWadYK6xxHvnz4/Gsyn8NKh40Zjn8OIHgqKQXQvwxfWcl9ArM6mXSmS
+	83YD0afu/51OZA3fJt7Rgb4i7gL8qZoCr1FWq14FJkmS4PzQuX4nuFDMvditClXGi0lk
+	iSy52mddpQsDNeKW+w9V2QendC/wn4Cu3vQ7o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=RqbGoUYoJFDd8Lg8KhaQ9AUpDVXz20N0rbD84KvkqogjURTM6f85WOTsutXsfoEW3E
+	ulhW+WlVjBfObBqMEgLX7W4Z6rSKHCG+12hpCjutww436fFV2ZCrqfbbkuUsAIWYgUHm
+	UdWKkRtRMIu13TV6acuwd+y+fRVp8QgcM3F0o=
+MIME-Version: 1.0
+Received: by 10.216.62.210 with SMTP id y60mr1214084wec.91.1286480102250; Thu,
+	07 Oct 2010 12:35:02 -0700 (PDT)
+Received: by 10.216.72.199 with HTTP; Thu, 7 Oct 2010 12:35:02 -0700 (PDT)
+In-Reply-To: <1286408038.3829.22.camel@mattotaupa>
+References: <1286408038.3829.22.camel@mattotaupa>
+Date: Thu, 7 Oct 2010 12:35:02 -0700
+Message-ID: <AANLkTi=nS_3emPJsndTjjAM=cPwwc=pW0Ktk7DJwEj++@mail.gmail.com>
+From: Steve Sakoman <sakoman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Dallas Foley <dfoley@telus.net>
-Date: Thu, 07 Oct 2010 12:04:33 -0700
-Message-ID: <4CAE19C1.4060406@telus.net>
-References: <AANLkTikzKs+3U0JfEbQxg5dLVuMF51To2qTn55YLOmjg@mail.gmail.com>	<20101005123257.GD3517@excalibur.local>
-	<4CAB3B4D.9000007@telus.net>	<20101006103731.GG3517@excalibur.local>
-	<4CADE897.5070307@telus.net>
-	<AANLkTimOrM-DCsoP4yoo14g_wJ_h0ZVaY99R7UJ=TGmJ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: d75-157-18-211.bchsia.telus.net
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
-In-Reply-To: <AANLkTimOrM-DCsoP4yoo14g_wJ_h0ZVaY99R7UJ=TGmJ@mail.gmail.com>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: sakoman@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
+	WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing 2010-10-04
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: Re: libgee_0.6.0: gee/Makefile.am:95: HAVE_INTROSPECTION does not appear in AM_CONDITIONAL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,69 +53,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Oct 2010 19:05:29 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Oct 2010 19:42:54 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-On 10-10-07 11:26 AM, Khem Raj wrote:
-> On Thu, Oct 7, 2010 at 8:34 AM, dfoley<dfoley@telus.net>  wrote:
->> On 10-10-06 03:37 AM, Stefan Schmidt wrote:
->>>
->>> Hello.
->>>
->>> On Tue, 2010-10-05 at 07:50, dfoley wrote:
->>>>
->>>> May not be correct, but I ran into the same problem and patched.
->>>>
->>>> diff --git a/recipes/cacao/cacao.inc b/recipes/cacao/cacao.inc
->>>> index c366b74..70bda75 100644
->>>> --- a/recipes/cacao/cacao.inc
->>>> +++ b/recipes/cacao/cacao.inc
->>>> @@ -23,7 +23,7 @@ EXTRA_OECONF = "\
->>>>         ${@['','--enable-softfloat'][bb.data.getVar('TARGET_FPU',d,1) ==
->>>> 'soft']} \
->>>>         --enable-debug \
->>>>         --with-vm-zip=${datadir}/cacao/vm.zip \
->>>> -       --with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-${PV} \
->>>> +       --with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-${PV}/cacaoh \
->>>>
->>>>   --with-build-java-runtime-library-classes=${STAGING_DATADIR}/classpath/glibj.zip
->>>> \
->>>>       --with-java-runtime-library-classes=${datadir}/classpath/glibj.zip \
->>>>       --with-java-runtime-library-libdir=${libdir_jni}:${libdir} \
->>>
->>> This does it fix for me as well. I wonder from which commit the  directory
->>> change was triggered in the last week.
->>>
->>> Care to send a git formatted patch with PR bump I could apply? As you did
->>> the
->>> work you should get the credits for it. :)
->>>
->>> regards
->>> Stefan Schmidt
->>
->> I don't mind if you commit it. You can put me in signed off by.
->> Should the maintainer (MAINTAINERS file) verify it ?
+On Wed, Oct 6, 2010 at 4:33 PM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Dear OE folks,
 >
-> what would be your sign off? your email does not reveal your full name :)
-
-No need to include me in the sign off.
-I believe I've corrected my full name now.
-
 >
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
+> `configure` fails for me for `libgee_0.6.0.bb` [1].
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> =A0 =A0 =A0 =A0| gee/Makefile.am:95: HAVE_INTROSPECTION does not appear i=
+n AM_CONDITIONAL
+>
+> `libgee_0.5.2.bb` builds correctly because it does not yet use gobject-in=
+trospection.
+>
+> This question was brought up before but was left unanswered [2].
+>
+> There was no file `introspection.m4`, where `HAVE_INTROSPECTION` is
+> defined in, in
+>
+> =A0 =A0 =A0 =A0=85/work/armv7a-oe-linux-gnueabi/libgee-1_0.6.0-r1/libgee-=
+0.6.0/m4
+>
+> as recommended in [3]. Should the m4 file be copied there as it is done
+> for the other m4 files?
+>
+> =A0 =A0 =A0 =A0[=85]
+> =A0 =A0 =A0 =A0| autoreconf: configure.ac: tracing
+> =A0 =A0 =A0 =A0| autoreconf: running: libtoolize --copy --force
+> =A0 =A0 =A0 =A0| libtoolize: putting auxiliary files in `.'.
+> =A0 =A0 =A0 =A0| libtoolize: copying file `./ltmain.sh'
+> =A0 =A0 =A0 =A0| libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
+> =A0 =A0 =A0 =A0| libtoolize: copying file `m4/libtool.m4'
+> =A0 =A0 =A0 =A0| libtoolize: copying file `m4/ltoptions.m4'
+> =A0 =A0 =A0 =A0| libtoolize: copying file `m4/ltsugar.m4'
+> =A0 =A0 =A0 =A0| libtoolize: copying file `m4/ltversion.m4'
+> =A0 =A0 =A0 =A0| libtoolize: copying file `m4/lt~obsolete.m4'
+> =A0 =A0 =A0 =A0[=85]
+>
+> I manually put the m4 file [4] into `libgee-0.6.0/m4/` and added
+> `m4/introspection.m4` to `EXTRA_DIST` in `Makefile.am` to `` but
+>
+> =A0 =A0 =A0 =A0bitbake -c configure libgee
+>
+> still failed.
+>
+> Do you have any ideas?
 
+I found that if I built gobject-introspection-native manually, then
+libgee would complete without error.
 
+The DEPENDS_virtclass-native =3D "gobject-introspection-native" in the
+libgee recipe isn't triggering the build automatically.
+
+Steve
 
 
