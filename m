@@ -1,32 +1,44 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1P3wxr-0002kk-Km
+	(envelope-from <raj.khem@gmail.com>) id 1P3yKU-0001jt-Rs
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 22:21:20 +0200
-Received: from [192.168.1.12] (e180141167.adsl.alicedsl.de [85.180.141.167])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 4753158414D;
-	Thu,  7 Oct 2010 22:28:44 +0200 (CEST)
-References: <1286408038.3829.22.camel@mattotaupa>
-	<AANLkTi=nS_3emPJsndTjjAM=cPwwc=pW0Ktk7DJwEj++@mail.gmail.com>
-Message-Id: <5EF44AB3-D6B4-4505-89BE-3CC543B7FECF@vanille-media.de>
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-To: Steve Sakoman <sakoman@gmail.com>
-In-Reply-To: <AANLkTi=nS_3emPJsndTjjAM=cPwwc=pW0Ktk7DJwEj++@mail.gmail.com>
-X-Mailer: iPad Mail (7B405)
-Mime-Version: 1.0 (iPad Mail 7B405)
-Date: Thu, 7 Oct 2010 22:28:27 +0200
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+	Thu, 07 Oct 2010 23:48:49 +0200
+Received: by iwn37 with SMTP id 37so358629iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Oct 2010 14:48:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=1bEuCqwGfXI/pDvsu0xh+n9dOM+WNFGaokfXRkvjguc=;
+	b=cKPxMzBa+IOzyLBHQwf/RS/8XEjh0AHsOPd5e5pcmJSVS2rUVbv4eVikl29a+kdZk1
+	NIOMx8h9eapCNEkEyyu5tAAriUmB/YHJEozOxAsLo/9NyfUjglDVePeALtJ4DERhrlfb
+	RopHF5W23azCLKUhY2yg4khxatG1z+m0SiIk4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=GOemAVQPCbd9o4Ob5u22+1JExBB3VaL2AAW5bQcfqj1s99yEmPB//6wXzBF8QwXx0x
+	10WmBsIXOhwhYz9ZXKLZRn+BEg4oAKu/0Hn2C17TH+6gORUh2J2YpJc86QYk9oPvxS1v
+	foRLvcIfjeF61BOmNkkvE3e6jlMiyHSCUoI3A=
+Received: by 10.231.35.138 with SMTP id p10mr1559542ibd.33.1286488105545; Thu,
+	07 Oct 2010 14:48:25 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.199.1 with HTTP; Thu, 7 Oct 2010 14:48:05 -0700 (PDT)
+In-Reply-To: <1286480697-28494-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1286480697-28494-1-git-send-email-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 7 Oct 2010 14:48:05 -0700
+Message-ID: <AANLkTimK3s37SU5Rp14niH2Tb=7oHXTtSvACTOcr0J_y@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,WEIRD_PORT
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: libgee_0.6.0: gee/Makefile.am:95: HAVE_INTROSPECTION does not appear in AM_CONDITIONAL
+Subject: Re: [PATCH] eglibc-package.bbclass: fix missing RPROVIDES for virtual-locale-*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,72 +52,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Oct 2010 20:21:22 -0000
-Content-Type: text/plain;
-	charset=utf-8
+X-List-Received-Date: Thu, 07 Oct 2010 21:48:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-That probably needs to be converted into a DEPENDS.
+On Thu, Oct 7, 2010 at 12:44 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-Cheers,
+seems fine
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
-:M:
-
-Am 07.10.2010 um 21:35 schrieb Steve Sakoman <sakoman@gmail.com>:
-
-> On Wed, Oct 6, 2010 at 4:33 PM, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
->> Dear OE folks,
->>=20
->>=20
->> `configure` fails for me for `libgee_0.6.0.bb` [1].
->>=20
->>        | gee/Makefile.am:95: HAVE_INTROSPECTION does not appear in =
-AM_CONDITIONAL
->>=20
->> `libgee_0.5.2.bb` builds correctly because it does not yet use =
-gobject-introspection.
->>=20
->> This question was brought up before but was left unanswered [2].
->>=20
->> There was no file `introspection.m4`, where `HAVE_INTROSPECTION` is
->> defined in, in
->>=20
->>        =
-=E2=80=A6/work/armv7a-oe-linux-gnueabi/libgee-1_0.6.0-r1/libgee-0.6.0/m4
->>=20
->> as recommended in [3]. Should the m4 file be copied there as it is =
-done
->> for the other m4 files?
->>=20
->>        [=E2=80=A6]
->>        | autoreconf: configure.ac: tracing
->>        | autoreconf: running: libtoolize --copy --force
->>        | libtoolize: putting auxiliary files in `.'.
->>        | libtoolize: copying file `./ltmain.sh'
->>        | libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
->>        | libtoolize: copying file `m4/libtool.m4'
->>        | libtoolize: copying file `m4/ltoptions.m4'
->>        | libtoolize: copying file `m4/ltsugar.m4'
->>        | libtoolize: copying file `m4/ltversion.m4'
->>        | libtoolize: copying file `m4/lt~obsolete.m4'
->>        [=E2=80=A6]
->>=20
->> I manually put the m4 file [4] into `libgee-0.6.0/m4/` and added
->> `m4/introspection.m4` to `EXTRA_DIST` in `Makefile.am` to `` but
->>=20
->>        bitbake -c configure libgee
->>=20
->> still failed.
->>=20
->> Do you have any ideas?
->=20
-> I found that if I built gobject-introspection-native manually, then
-> libgee would complete without error.
->=20
-> The DEPENDS_virtclass-native =3D "gobject-introspection-native" in the
-> libgee recipe isn't triggering the build automatically.
->=20
-> Steve
+> ---
+> =C2=A0recipes/eglibc/eglibc-package.bbclass | =C2=A0 =C2=A04 +++-
+> =C2=A0recipes/eglibc/eglibc.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ | =C2=A0 =C2=A02 +-
+> =C2=A02 files changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglib=
+c-package.bbclass
+> index 5871be0..dbca1ab 100644
+> --- a/recipes/eglibc/eglibc-package.bbclass
+> +++ b/recipes/eglibc/eglibc-package.bbclass
+> @@ -351,7 +351,9 @@ python package_do_split_gconvs () {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0else:
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0glib=
+c_name =3D name
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.data.setVar('RD=
+EPENDS_%s' % pkgname, legitimize_package_name('eglibc-binary-localedata-%s'=
+ % glibc_name), d)
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 bb.data.setVar('RPROVI=
+DES_%s' % pkgname, 'glibc-binary-localedata-%s' % glibc_name, d)
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rprovides =3D bb.data.=
+getVar("RPROVIDES_%s" % pkgname, d, 1)
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rprovides +=3D ' glibc=
+-binary-localedata-%s' % glibc_name
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 bb.data.setVar('RPROVI=
+DES_%s' % pkgname, rprovides, d)
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0def output_locale_binary(name, pkgname, locale=
+, encoding):
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0# This is a hack t=
+ill linux-libc-headers gets patched for the missing arm syscalls and all ar=
+m device kernels as well
+> diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
+> index a68f343..754a12b 100644
+> --- a/recipes/eglibc/eglibc.inc
+> +++ b/recipes/eglibc/eglibc.inc
+> @@ -3,7 +3,7 @@ HOMEPAGE =3D "http://www.eglibc.org/home"
+> =C2=A0SECTION =3D "libs"
+> =C2=A0PRIORITY =3D "required"
+> =C2=A0LICENSE =3D "LGPL"
+> -INC_PR =3D "r14"
+> +INC_PR =3D "r15"
+> =C2=A0# nptl needs unwind support in gcc, which can't be built without gl=
+ibc.
+> =C2=A0DEPENDS =3D "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-he=
+aders"
+> =C2=A0#this leads to circular deps, so lets not add it yet
+> --
+> 1.7.3.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
