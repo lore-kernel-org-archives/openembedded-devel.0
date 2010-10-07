@@ -1,37 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1P3qo0-0007Y6-O4
+	(envelope-from <holger+oe@freyther.de>) id 1P3qvx-0004E0-K0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 15:46:46 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1P3qne-0006cx-Fm from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 06:46:22 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 7 Oct 2010 06:46:22 -0700
-Received: from [172.30.80.69] ([172.30.80.69]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 7 Oct 2010 07:46:20 -0600
-Message-ID: <4CADCF1E.3090602@mentor.com>
-Date: Thu, 07 Oct 2010 06:46:06 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Thu, 07 Oct 2010 15:54:58 +0200
+Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
+	[91.64.127.39])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 8E3FE1B10C0B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Oct 2010 13:54:42 +0000 (UTC)
+Message-ID: <4CADD11C.6020800@freyther.de>
+Date: Thu, 07 Oct 2010 21:54:36 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc14 Lightning/1.0b2
+	Thunderbird/3.1.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 07 Oct 2010 13:46:20.0785 (UTC)
-	FILETIME=[0621A610:01CB6626]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <4CADCF1E.3090602@mentor.com>
+In-Reply-To: <4CADCF1E.3090602@mentor.com>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Updating libtiff
+Subject: Re: Updating libtiff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Oct 2010 13:46:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 07 Oct 2010 13:54:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hey all,
+On 10/07/2010 09:46 PM, Tom Rini wrote:
 
-I'm looking to update libtiff to cover some security issues in the 
-version we ship, and I noticed something funny about how we do it today. 
-  Currently tiff_3.9.2.bb sets PV to 3.9.2+4.0.0beta5 and grabs and 
-builds 4.0.0beta5.  While it's possible that in the past 3.9.2 was 
-intended to be the last 3.9.x, it wasn't.
+> I think we should go with:
+> - Add tiff_4.0.0beta6.bb which should be compatible with beta5 and will get
+> upgrades right.
 
-I think we should go with:
-- Add tiff_4.0.0beta6.bb which should be compatible with beta5 and will 
-get upgrades right.
-- Add tiff_3.9.4.bb as well, in case someone wants to stay on the 
-released line.
+but not with tiff_4.0.0.bb... then you would need to bump PE...
 
-Anyone see a problem with that?
-
--- 
-Tom Rini
-Mentor Graphics Corporation
 
 
