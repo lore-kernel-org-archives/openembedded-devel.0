@@ -1,45 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P3k08-0001NZ-4e
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 08:30:48 +0200
-Received: by iwn7 with SMTP id 7so13540iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P3kj4-0004B4-Pl for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Oct 2010 09:17:16 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P3kil-0002Za-RG for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Oct 2010 09:16:55 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Oct 2010 09:16:55 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Oct 2010 23:30:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=c4S/pcpf9afJvPNc+TyAY7gMIQmUUulaFCkFPnY3bTA=;
-	b=PoReuZRjzzHF9dowMNjhbX2kKiAWRhWdO6nfGwNEMf3VQUYZjTomSY438xUinjJWPw
-	Ks5xpsClQALJXE9OpLhkzizBzZXBx4zyEanZt2p016FlKOcXpMpy6pBHe+BtNZolfMkW
-	0A+MlWZzVW/WHUowKy5kNNSmt/aGwbKu34u7I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Np3L4uFPwWF4331RDeFMtku7Dph13/4s8M9QQxly/50D/lQ9/NP9JK2r7/5qrH4OSw
-	4ZbJoAtDOO2UqgqIg+CxHsWrprT59/k2IrUo4SyMS0PfNktDbh4O0si0My/1QIEdGKCO
-	8uZ+TonXvMPOltvhOqXVO+Ge1j0eB4A9Li+x8=
-MIME-Version: 1.0
-Received: by 10.231.15.9 with SMTP id i9mr376309iba.58.1286433003004; Wed, 06
-	Oct 2010 23:30:03 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Wed, 6 Oct 2010 23:30:02 -0700 (PDT)
-In-Reply-To: <4CACF810.6030402@balister.org>
-References: <1286399340-15927-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1286399340-15927-2-git-send-email-fransmeulenbroeks@gmail.com>
-	<4CACF810.6030402@balister.org>
-Date: Thu, 7 Oct 2010 08:30:02 +0200
-Message-ID: <AANLkTin7gk9uWugcHOBUXPCFc0-QyYcn2MvucKt0Qsrb@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 07 Oct 2010 09:16:55 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 07 Oct 2010 09:16:47 +0200
+Message-ID: <i8js4v$ocr$1@dough.gmane.org>
+References: <AANLkTik3=c=HKZ+EHkan8OSZDt8JfS+bbj5ZtBgJgBpM@mail.gmail.com>
+	<AANLkTiknm8zsMUOFVfRXcZOGxitgjZPy8WxnnaU6hvMQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
+In-Reply-To: <AANLkTiknm8zsMUOFVfRXcZOGxitgjZPy8WxnnaU6hvMQ@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/4] RDEPENDS -> RDEPENDS_${PN}
+Subject: Re: libvpx should not inherit autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,20 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Oct 2010 06:30:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 07 Oct 2010 07:17:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/10/7 Philip Balister <philip@balister.org>:
-> Next time, can you add the package name to the commit message?
->
->
-> Philip
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Actually there is no package name here as it is for .bbclass, but I
-will add the bbclass filename to the commit message before pushing
-this (need one more ack)
-That also explains why gmail decided this was all the same thread.
+On 07-10-10 08:26, Khem Raj wrote:
+> On Wed, Oct 6, 2010 at 10:59 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> Hi Koen
+>>
+>> libvpx recipes are inheriting autotools while it seems to me that they
+>> should not. Yes it does have a configure script but its not autoconf
+>> generated but a hand written one
+>> and there are no other traces of autoconf or automake and stuff that
+>> goes with normal automake autoconf build systems.
+>>
+>> Would you take a look at it ?
+> 
+> something like attached would work. What do you think ?
 
-Frans
+That works for me, I was just too lazy to create the do_compile and
+do_install :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMrXPfMkyGM64RGpERAu6qAJ9N6gQM1etGUzSsClL/TRYXYiTKsQCfZTRD
+D2oDrFbvVot3RDKPS7DdEko=
+=l+C2
+-----END PGP SIGNATURE-----
+
 
 
