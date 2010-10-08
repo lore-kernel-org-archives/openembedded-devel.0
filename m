@@ -1,39 +1,29 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1P403F-0002Oh-Vs
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 01:39:06 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1P402p-0005q6-T7 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 16:38:39 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 7 Oct 2010 16:38:39 -0700
-Received: from [172.30.80.69] ([172.30.80.69]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 7 Oct 2010 17:38:38 -0600
-Message-ID: <4CAE59F0.3010609@mentor.com>
-Date: Thu, 07 Oct 2010 16:38:24 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P41HB-0008P2-Cz for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Oct 2010 02:57:34 +0200
+Received: from f053035201.adsl.alicedsl.de ([78.53.35.201]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P41Gr-0001n0-Oq for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Oct 2010 00:57:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <4E064324-2FF0-4F2B-BCB7-04AFD285689B@mac.com>
-In-Reply-To: <4E064324-2FF0-4F2B-BCB7-04AFD285689B@mac.com>
-X-OriginalArrivalTime: 07 Oct 2010 23:38:38.0995 (UTC)
-	FILETIME=[C48E2630:01CB6678]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Fri, 08 Oct 2010 02:57:12 +0200
+Message-ID: <1286499432.3659.37.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: opkg install gdbserver
+Subject: [PATCH] cairo_1.10.0: add `glib-2.0-native` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,22 +37,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Oct 2010 23:39:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Oct 2010 00:57:34 -0000
+X-Groupsio-MsgNum: 24504
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-HSc4/nfk08P4TKoWqUWP"
 
-Elvis Dowson wrote:
-> Hi,
->         I have a target board that is not connected to the internet. 
-> 
-> What should I do to get gdbserver onto the target? 
-> 
-> I have built gdb-cross. Is there another recipe I can add to omap3-console-image, to make sure that gdbserver gets pulled in?
+--=-HSc4/nfk08P4TKoWqUWP
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-There is a gdbserver recipe for the target.
+Date: Thu, 7 Oct 2010 13:38:44 +0200
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+`do_compile()` of `cairo_1.10.0.bb` fails with the following error.
 
+[=E2=80=A6]
+        make[4]: Entering directory `/oe/build/angstrom-dev/work/armv7a-ang=
+strom-linux-gnueabi/cairo-1.10.0-r0/cairo-1.10.0/util/cairo-gobject'
+          CC     libcairo_gobject_la-cairo-gobject-enums.lo
+        In file included from cairo-gobject-enums.c:8:
+        cairo-gobject.h:44:25: error: glib-object.h: No such file or direct=
+ory
+        In file included from cairo-gobject-enums.c:8:
+        cairo-gobject.h:52: error: expected '=3D', ',', ';', 'asm' or '__at=
+tribute__' before 'cairo_gobject_context_get_type'
+        cairo-gobject.h:56: error: expected '=3D', ',', ';', 'asm' or '__at=
+tribute__' before 'cairo_gobject_device_get_type'
+        cairo-gobject.h:60: error: expected '=3D', ',', ';', 'asm' or '__at=
+tribute__' before 'cairo_gobject_pattern_get_type'
+        [=E2=80=A6]
 
+`glib-object.h` is only in sysroot of the build host.
+
+    $ find angstrom-dev/ -name glib-object.h
+    angstrom-dev/sysroots/i686-linux/usr/include/glib-2.0/glib-object.h
+
+`cairo_1.8.8.bb` builds fine.
+
+Adding `glib-2.0-native` to `DEPENDS` puts `glib-object.h` also into the sy=
+sroot of the target machine and fixes the build.
+
+    $ find angstrom-dev/ -name glib-object.h
+    angstrom-dev/sysroots/i686-linux/usr/include/glib-2.0/glib-object.h
+    angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.=
+0/glib-object.h
+
+Build tested with `angstrom-2008.1` for `MACHINE =3D "beagleboard"`.
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/cairo/cairo_1.10.0.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/cairo/cairo_1.10.0.bb b/recipes/cairo/cairo_1.10.0.bb
+index 7530cd1..9859b9c 100644
+--- a/recipes/cairo/cairo_1.10.0.bb
++++ b/recipes/cairo/cairo_1.10.0.bb
+@@ -1,5 +1,7 @@
+ require cairo.inc
+=20
++DEPENDS +=3D "glib-2.0-native"
++
+ SRC_URI =3D "http://cairographics.org/releases/cairo-${PV}.tar.gz;name=3Dc=
+airo \
+ "
+=20
+--=20
+1.7.1
+
+--=-HSc4/nfk08P4TKoWqUWP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyubGIACgkQPX1aK2wOHVgSPQCdFujZqjMjJqm6srUikNV5lush
+LVwAn2IgZgxil0jqmo8OKod+6bnYP4gu
+=0o5/
+-----END PGP SIGNATURE-----
+
+--=-HSc4/nfk08P4TKoWqUWP--
