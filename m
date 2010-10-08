@@ -1,38 +1,43 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P4AdY-0003W9-5d
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1P4AmP-0006DW-2G
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 12:57:17 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 5D3C43149131
+	Fri, 08 Oct 2010 13:06:26 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 9682F11000A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Oct 2010 12:56:54 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id Hw1P-mp0DzbU; Fri,  8 Oct 2010 12:56:48 +0200 (CEST)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 0F8733148462;
-	Fri,  8 Oct 2010 12:56:47 +0200 (CEST)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Fri, 08 Oct 2010 10:56:47 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Fri,  8 Oct 2010 13:06:01 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 5BFBB11000A4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Oct 2010 13:06:00 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225072005.adsl.alicedsl.de
+	[92.225.72.5]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Oct 2010 13:06:00 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 4519E3C0FD; Fri,  8 Oct 2010 13:05:37 +0200 (CEST)
+Date: Fri, 8 Oct 2010 13:05:37 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Oct 2010 10:56:32 +0000
-Message-Id: <1286535392-1111-2-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1286535392-1111-1-git-send-email-obi@opendreambox.org>
-References: <1286535392-1111-1-git-send-email-obi@opendreambox.org>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+Message-ID: <20101008110536.GA22660@rhein.zuhause.netz>
+References: <1286517101-24724-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1286517101-24724-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] libdvdnav: add recipe for version 4.1.3-7 from debian
+Subject: Re: [PATCH 7/7] binutils_2.20.1.bb: Updates to use libtool 2.4 macros
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,92 +51,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2010 10:57:17 -0000
+X-List-Received-Date: Fri, 08 Oct 2010 11:06:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- ...-dvdnavmini.pc-link-against-libdvdnavmini.patch |   25 ++++++++++++++++++++
- recipes/libdvdnav/libdvdnav_4.1.3-7.bb             |    5 ++++
- recipes/libdvdnav/libdvdnav_git.inc                |   24 +++++++++++++++++++
- 3 files changed, 54 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libdvdnav/files/0001-dvdnavmini.pc-link-against-libdvdnavmini.patch
- create mode 100644 recipes/libdvdnav/libdvdnav_4.1.3-7.bb
- create mode 100644 recipes/libdvdnav/libdvdnav_git.inc
+Hi,
 
-diff --git a/recipes/libdvdnav/files/0001-dvdnavmini.pc-link-against-libdvdnavmini.patch b/recipes/libdvdnav/files/0001-dvdnavmini.pc-link-against-libdvdnavmini.patch
-new file mode 100644
-index 0000000..84ce442
---- /dev/null
-+++ b/recipes/libdvdnav/files/0001-dvdnavmini.pc-link-against-libdvdnavmini.patch
-@@ -0,0 +1,25 @@
-+upstream: Daniel Baumann <daniel@debian.org>
-+status: pending
-+
-+From 2329cd28d7508f9809f849fa547362aa7df160ba Mon Sep 17 00:00:00 2001
-+From: Andreas Oberritter <obi@opendreambox.org>
-+Date: Fri, 8 Oct 2010 00:50:54 +0000
-+Subject: [PATCH] dvdnavmini.pc: link against libdvdnavmini
-+
-+---
-+ misc/dvdnavmini.pc.in |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/misc/dvdnavmini.pc.in b/misc/dvdnavmini.pc.in
-+index 52945b3..773be2f 100644
-+--- a/misc/dvdnavmini.pc.in
-++++ b/misc/dvdnavmini.pc.in
-+@@ -8,4 +8,4 @@ Description: DVD Navigation mini library
-+ Version: @VERSION@
-+ 
-+ Cflags: -I${includedir} @DVDREAD_CFLAGS@ @THREAD_CFLAGS@
-+-Libs: -L${libdir} -ldvdnav @THREAD_LIBS@
-++Libs: -L${libdir} -ldvdnavmini @THREAD_LIBS@
-+-- 
-+1.7.1
-+
-diff --git a/recipes/libdvdnav/libdvdnav_4.1.3-7.bb b/recipes/libdvdnav/libdvdnav_4.1.3-7.bb
-new file mode 100644
-index 0000000..b1d75ad
---- /dev/null
-+++ b/recipes/libdvdnav/libdvdnav_4.1.3-7.bb
-@@ -0,0 +1,5 @@
-+require libdvdnav_git.inc
-+
-+SRC_URI += "file://0001-dvdnavmini.pc-link-against-libdvdnavmini.patch"
-+
-+SRCREV = "850e513d4fea29b40879378b13003cd677e5214b"
-diff --git a/recipes/libdvdnav/libdvdnav_git.inc b/recipes/libdvdnav/libdvdnav_git.inc
-new file mode 100644
-index 0000000..7eba54f
---- /dev/null
-+++ b/recipes/libdvdnav/libdvdnav_git.inc
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "DVD navigation multimeda library"
-+SECTION = "libs/multimedia"
-+LICENSE = "GPL"
-+DEPENDS = "libdvdread"
-+
-+SRC_URI = "git://git.debian-maintainers.org/git/daniel/${PN}.git;protocol=git;branch=debian"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools binconfig lib_package pkgconfig
-+
-+do_unpackpost() {
-+        QUILT_PATCHES=debian/patches quilt push -a
-+}
-+
-+FILES_${PN} = "${libdir}/${PN}${SOLIB}"
-+
-+addtask unpackpost after do_unpack before do_patch
-+
-+python populate_packages_prepend () {
-+        description = bb.data.expand('${DESCRIPTION}', d)
-+        libdir = bb.data.expand('${libdir}', d)
-+        do_split_packages(d, libdir, '^lib(.*)\.so\..*', 'lib%s', description + ' (%s)', extra_depends='', allow_links=True)
-+}
--- 
-1.7.1
+hm why is binutils not copy over this file?
 
+Bye Henning
 
 
