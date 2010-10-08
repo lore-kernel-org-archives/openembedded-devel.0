@@ -1,46 +1,36 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P49g2-0004ZM-Pw
+	(envelope-from <obi@opendreambox.org>) id 1P4AdQ-0003Vh-K3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 11:55:47 +0200
-Received: by iwn5 with SMTP id 5so505395iwn.6
+	Fri, 08 Oct 2010 12:57:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id C36983149131
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Oct 2010 02:55:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ExG4PY9fhb2D9a26Z30Db+cwLC5VZ4p2SDhWjQizUZM=;
-	b=vyDjvexyA/iKvuwk6i4fh2zr30nfNhv78+nTYJ1J/AeHiLIZpgK0ewU/v4ajq+p/fc
-	4MA36obz8FYPmTAUQy/eDs/j3XC2xLQq0D6yemtdHXangXu03R71/lxt9hUk2R4J87Rj
-	1b601x3nvQk7D6MZ5xfqq3KsFgFGj2xmY6nFA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=kILoac3vPs1jssMKe+fHXLYdX8yrTfDxRlW22ysMgChXYZUE5UilJmye8p84WoxPo4
-	Zax/Q2/nrOLzYvHRTNywxSNKwIja37BvErKwc8+VS7eIe+UTqibK1S25fGJf23zZ3pdT
-	U0N6YZEgD+5hrQ3FSZD4Hr9TvAwDd2SLUNdh4=
-MIME-Version: 1.0
-Received: by 10.42.97.193 with SMTP id p1mr374007icn.180.1286531723195; Fri,
-	08 Oct 2010 02:55:23 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Fri, 8 Oct 2010 02:55:23 -0700 (PDT)
-In-Reply-To: <AANLkTimFfia8svvb8chNmiJ_TOo4ub7-fbaMTuvFL9rN@mail.gmail.com>
-References: <1286399340-15927-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1286399340-15927-2-git-send-email-fransmeulenbroeks@gmail.com>
-	<AANLkTimFfia8svvb8chNmiJ_TOo4ub7-fbaMTuvFL9rN@mail.gmail.com>
-Date: Fri, 8 Oct 2010 11:55:23 +0200
-Message-ID: <AANLkTikp3SMK2MD8hPCc6=uBNujgceSQVM+tgYKO1q5M@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri,  8 Oct 2010 12:56:48 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id N9+6fHYEkSlm; Fri,  8 Oct 2010 12:56:42 +0200 (CEST)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id E1626314912C;
+	Fri,  8 Oct 2010 12:56:41 +0200 (CEST)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Fri, 08 Oct 2010 10:56:41 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Fri,  8 Oct 2010 10:56:31 +0000
+Message-Id: <1286535392-1111-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/4] RDEPENDS -> RDEPENDS_${PN}
+Subject: [PATCH 1/2] libdvdread: add recipe for version 4.1.3-10 from debian
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,47 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2010 09:55:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 08 Oct 2010 10:57:09 -0000
 
-2010/10/8 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> 2010/10/6 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
->> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->> ---
->> =A0classes/cpan-base.bbclass | =A0 =A02 +-
->> =A01 files changed, 1 insertions(+), 1 deletions(-)
->>
->> diff --git a/classes/cpan-base.bbclass b/classes/cpan-base.bbclass
->> index 379defa..a04f61c 100644
->> --- a/classes/cpan-base.bbclass
->> +++ b/classes/cpan-base.bbclass
->> @@ -5,7 +5,7 @@
->> =A0FILES_${PN} +=3D "${libdir}/perl5 ${datadir}/perl5"
->>
->> =A0DEPENDS =A0+=3D "${@["perl", "perl-native"][(bb.data.inherits_class('=
-native', d))]}"
->> -RDEPENDS =A0+=3D "${@["perl", ""][(bb.data.inherits_class('native', d))=
-]}"
->> +RDEPENDS_${PN} =A0+=3D "${@["perl", ""][(bb.data.inherits_class('native=
-', d))]}"
->>
->> =A0# Determine the staged version of perl from the perl configuration fi=
-le
->> =A0def get_perl_version(d):
->
->
-> Aargh. Accidently pushed this patch yesterday with another one.
-> Thought I'd removed it from my git, but apparently it wasn't.
-> Propose to keep it like that (and no revert). Let me know if a PR bump
-> of recipes inheriting this is needed.
->
-> Frans.
->
-Patches applied after getting a 2nd ack from Martin on irc so this
-gets into the next testing branch.
-If PR bumps are needed they can still be applied (let me know)
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ recipes/libdvdread/libdvdread_4.1.3-10.bb |    3 +++
+ recipes/libdvdread/libdvdread_git.inc     |   15 +++++++++++++++
+ 2 files changed, 18 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libdvdread/libdvdread_4.1.3-10.bb
+ create mode 100644 recipes/libdvdread/libdvdread_git.inc
 
-Frans
+diff --git a/recipes/libdvdread/libdvdread_4.1.3-10.bb b/recipes/libdvdread/libdvdread_4.1.3-10.bb
+new file mode 100644
+index 0000000..6f650be
+--- /dev/null
++++ b/recipes/libdvdread/libdvdread_4.1.3-10.bb
+@@ -0,0 +1,3 @@
++require libdvdread_git.inc
++
++SRCREV = "e465b500c12be5b4c0b6918a9b98038611f66c57"
+diff --git a/recipes/libdvdread/libdvdread_git.inc b/recipes/libdvdread/libdvdread_git.inc
+new file mode 100644
+index 0000000..7ae5604
+--- /dev/null
++++ b/recipes/libdvdread/libdvdread_git.inc
+@@ -0,0 +1,15 @@
++DESCRIPTION = "DVD access multimeda library"
++SECTION = "libs/multimedia"
++LICENSE = "GPL"
++
++SRC_URI = "git://git.debian-maintainers.org/git/daniel/${PN}.git;protocol=git;branch=debian"
++
++S = "${WORKDIR}/git"
++
++inherit autotools binconfig lib_package pkgconfig
++
++do_unpackpost() {
++        QUILT_PATCHES=debian/patches quilt push -a
++}
++
++addtask unpackpost after do_unpack before do_patch
+-- 
+1.7.1
+
 
 
