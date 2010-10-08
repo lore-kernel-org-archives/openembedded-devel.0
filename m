@@ -1,40 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4BFY-0000Wg-16 for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 13:36:35 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4BFA-0004ws-6M for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 13:36:08 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Oct 2010 13:36:08 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Oct 2010 13:36:08 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <sledz@dresearch.de>) id 1P4Bjn-0006W0-FF
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Oct 2010 14:07:56 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 1016B491287;
+	Fri,  8 Oct 2010 14:07:27 +0200 (CEST)
+Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 8 Oct 2010 14:07:26 +0200
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
+	id 7BA317207E; Fri,  8 Oct 2010 14:07:26 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 08 Oct 2010 13:35:58 +0200
-Message-ID: <i8mvmu$510$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Fri,  8 Oct 2010 14:07:20 +0200
+Message-Id: <1286539640-9333-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.7.1
+X-OriginalArrivalTime: 08 Oct 2010 12:07:26.0736 (UTC)
+	FILETIME=[5F936100:01CB66E1]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] split kernel_do_compile into kernel_do_compile_image and kernel_compile_modules
+Subject: [PATCH] syslog-ng: increase u-a priority to 200
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,43 +41,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2010 11:36:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Oct 2010 12:07:58 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Priority for update-alternatives was 50 before which was the
+same like the one for busybox-syslog. Resulting order now is:
 
-Hi,
+* 300 rsyslogd
+* 200 syslog-ng
+* 100 sysklogd
+* 50 busybox-syslog
 
-For a long time now I have been thinking of this and today at work I
-found a case where I really need it:
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+ recipes/syslog-ng/syslog-ng.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-ti816x fbdev driver (internal to the kernel) depends on ti-syslink
-module (external), ti-syslink module requires a configured kernel tree.
-
-The reasons behind that are a bit complex, namely the framebuffer is
-done in "software" by a different processor which needs microcode to get
-loaded, etc, etc. We're working on getting that fixed, but it reminded
-my of my earlier plan.
-
-For people having simpler requirements, this allows you to (re)compile a
-*Image without waiting for a gazillion modules to build.
-
-Is anyone opposed to a change like this? The patch to kernel.bbclass is
-trivial, but a number or kernel recipes have do_compile_append that
-would need fixing.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMrwIeMkyGM64RGpERApJHAJ9Q2tbsROd0BetbqG2XIwLa2jMK7QCglp7r
-3vfKt+2otP7X3CTrMbv+GQc=
-=T4QP
------END PGP SIGNATURE-----
+diff --git a/recipes/syslog-ng/syslog-ng.inc b/recipes/syslog-ng/syslog-ng.inc
+index fbe9adf..e58f1ea 100644
+--- a/recipes/syslog-ng/syslog-ng.inc
++++ b/recipes/syslog-ng/syslog-ng.inc
+@@ -22,7 +22,7 @@ do_install_append() {
+ CONFFILES_${PN} = "${sysconfdir}/${PN}.conf"
+ 
+ pkg_postinst_${PN} () {
+-        update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 50
++        update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 200
+ 
+         if test "x$D" != "x"; then
+                 OPT="-r $D"
+-- 
+1.7.1
 
 
 
