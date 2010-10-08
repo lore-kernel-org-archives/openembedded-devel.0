@@ -1,40 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P4JU0-0005p1-4n
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P4Jht-0006vP-BM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 22:24:01 +0200
-Received: by iwn7 with SMTP id 7so118332iwn.6
+	Fri, 08 Oct 2010 22:38:23 +0200
+Received: by ewy7 with SMTP id 7so852435ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Oct 2010 13:23:31 -0700 (PDT)
+	Fri, 08 Oct 2010 13:37:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=5hcgl+nrMXS4pBzvPsDHe2/0L8RRaPFmKRLWf7iR0Ps=;
-	b=mawcTZ9t8BHKLnyTdWRLxAi5Bbgee9fhDb27Jhq76cqCNdNOx44c5LlSr7fmF4EOTO
-	VOxBQmQSe7uG7fwdZpFjq31cwmYJpKxedX8kWLUnHq7OZn6MqfyX8dYziHg/yRv58wjd
-	xjtLHAKOk9pU7oCJxb6Uzqmi8ECbzZncIE4sk=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=l1dOoEYnH0xQluVPiWo4pvGd5UkScuYH0vrBNSaYc8Y=;
+	b=jC/tbd/oYKr9XG8STNUimgB/oezFZd/V7r3asfo4ZWvxsSuIlCCk4fcxkIFbNJ/o+x
+	C+/etUsw1FrFLnF27w4vth0QkVJEhBGUPtfRB4kMS7HWrf46a0sch2SCAoBR7OEirG2D
+	PJyPnrRPgdja3SAsYNkiS29R404x8QkPQX1g4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=bT/zgYlrFjagdQPucWG/zFQCI17D83X0GNWXbFNPGx0JHHEi58dzCtTALmz1w7bxTc
-	Pk07ySA70bvhbYDme3pgmtRsaDWk5tdUIpabIqZrnpGPKTDHmfQPnwoRtWvYMEy/T4KE
-	8dO1rFfCOvGP/z8N/sMzoIvWCS6oYIj7X1YZI=
-MIME-Version: 1.0
-Received: by 10.231.157.207 with SMTP id c15mr2619718ibx.143.1286569411696;
-	Fri, 08 Oct 2010 13:23:31 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Fri, 8 Oct 2010 13:23:31 -0700 (PDT)
-Date: Fri, 8 Oct 2010 22:23:31 +0200
-Message-ID: <AANLkTin=ucR4=4zJQg=thwRbqehhCzRa-DE6NwCGb76R@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=sIcHDI9l1SkGzq73WLnfsIHbHl7ptaooNUYPf1bR3CBrWNRGVjIeW6hk8E7dIpedIY
+	JIUhiCsO/0xrl5VH06mGaexpP+U3ldn2xKEWEUL0LIHY88bAFe0orgH4DQB+1O4hrayV
+	JXT968P2Zl8BDaz9iDh7FvCsWHRAb/N3NWsEI=
+Received: by 10.213.21.140 with SMTP id j12mr1913593ebb.98.1286570261123;
+	Fri, 08 Oct 2010 13:37:41 -0700 (PDT)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id v8sm6045307eeh.20.2010.10.08.13.37.39
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 08 Oct 2010 13:37:40 -0700 (PDT)
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+Date: Fri,  8 Oct 2010 22:37:35 +0200
+Message-Id: <1286570255-7554-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 209.85.215.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: recipy_sanity experiment
+Subject: [PATCH] module.bbclass: RDEPENDS -> RDEPENDS_${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,38 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2010 20:24:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 08 Oct 2010 20:38:24 -0000
 
-Dear all,
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
 
-as a test I decided to run recipe_sanity on our tree, and here are the results
-There are 1801 warnings:
+one more place in classes where there is an RDEPENDS i.s.o. RDEPENDS_${PN}
+ classes/module.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-    954 candidate for removal of S
-    373 LICENSE should be defined to something other than default (unknown)
-    181 RDEPENDS should be RDEPENDS_${PN}
-     91 candidate for removal of FILESDIR
-     74 candidate for removal of PV
-     49 native or cross recipe with non-empty PACKAGES
-     11 RRECOMMENDS should be RRECOMMENDS_${PN}
-      6 candidate for removal of FILESPATH
-      4 LICENSE should be set
-      1 DESCRIPTION should be set
+diff --git a/classes/module.bbclass b/classes/module.bbclass
+index 83463ac..0e0018e 100644
+--- a/classes/module.bbclass
++++ b/classes/module.bbclass
+@@ -1,4 +1,4 @@
+-RDEPENDS += "kernel (${KERNEL_VERSION}) update-modules"
++RDEPENDS_${PN} += "kernel (${KERNEL_VERSION}) update-modules"
+ DEPENDS += "virtual/kernel"
+ 
+ inherit module-base
+-- 
+1.6.4.2
 
-Rest are for overwrites of a variable like:
-      4 rename of variable 'FILES_${PN}' to 'FILES_orinoco-modules'
-overwrote existing value '/lib/modules/' with '/etc /lib/modules'.
-There are about 25 different lines of this (total about 50 lines)
-
-Not sure exactly what should be done about it. I can fix some of them,
-but not too sure about the rename thing
-and the removal of S is often because there is an S = xyz_${PN} line
-in an inc file
-
-Anyway, wanted to know the results (and here they are).
-I  can provide more detailed info if needed
-
-Have fun! Frans
 
 
