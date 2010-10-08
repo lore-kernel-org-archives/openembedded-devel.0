@@ -1,39 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1P428C-0004Fz-QD
+	(envelope-from <raj.khem@gmail.com>) id 1P43cR-0000b1-Dq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 03:52:26 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1P427j-0001lm-Ds from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Oct 2010 18:51:51 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 7 Oct 2010 18:51:51 -0700
-Received: from [172.30.80.69] ([172.30.80.69]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 7 Oct 2010 19:51:50 -0600
-Message-ID: <4CAE7927.70308@mentor.com>
-Date: Thu, 07 Oct 2010 18:51:35 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Fri, 08 Oct 2010 05:27:42 +0200
+Received: by iwn5 with SMTP id 5so174175iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Oct 2010 20:27:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=YfqbmmEf9dKOX1WrkRCFIB3uxybN0C0UW5C0j+QbfnU=;
+	b=U04+QHKvnNFBTtnPFh1J/K+sSeQtRE+oaX/mL5rrmJqEeNIktiyHOPfriFI9at2ktP
+	TIxkQdHDxQi9nvolmhHFtt5UNNWI87j4+w261NrhaFWwluhOVKvxCBoQIKIZuuJbMrzf
+	Faq79XrNSyhMW5L940EU0ltWYUE0QDQwTSmCI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=Il8WpeoGDZGvoFQ/54VPEPu1TkLHr88DEATGXJYbN4qPGC3r3wwt9Xp5/27pt73AtQ
+	KzWZF66ByzLIR1sYqJGPxLYyynRJySxZbRTJbjAkrz/Mgsyv9lo1iZAwyTM1zw2rU9Xx
+	CeKSiizrrrN2LjYvKaS1OQOiyoDcraCvJj0YM=
+Received: by 10.42.148.3 with SMTP id p3mr92467icv.357.1286508438321; Thu, 07
+	Oct 2010 20:27:18 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.231.199.1 with HTTP; Thu, 7 Oct 2010 20:26:58 -0700 (PDT)
+In-Reply-To: <4CAE4F92.5080107@mlbassoc.com>
+References: <3ADCCD33-6EA5-43FA-84EE-31D6B7C5A005@mac.com>
+	<4CAE4F92.5080107@mlbassoc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 7 Oct 2010 20:26:58 -0700
+Message-ID: <AANLkTinDviTOfaSFktW0iKJPrjsT3QSHWiYLaw4WrX5K@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1286499432.3659.37.camel@mattotaupa>
-In-Reply-To: <1286499432.3659.37.camel@mattotaupa>
-X-OriginalArrivalTime: 08 Oct 2010 01:51:50.0144 (UTC)
-	FILETIME=[5FA6B800:01CB668B]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cairo_1.10.0: add `glib-2.0-native` to `DEPENDS`
+Subject: Re: How to modify /etc/network/interfaces file in a OE recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,62 +53,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2010 01:52:26 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 08 Oct 2010 03:27:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Paul Menzel wrote:
-> Date: Thu, 7 Oct 2010 13:38:44 +0200
-> 
-> `do_compile()` of `cairo_1.10.0.bb` fails with the following error.
-> 
-> […]
->         make[4]: Entering directory `/oe/build/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/cairo-1.10.0-r0/cairo-1.10.0/util/cairo-gobject'
->           CC     libcairo_gobject_la-cairo-gobject-enums.lo
->         In file included from cairo-gobject-enums.c:8:
->         cairo-gobject.h:44:25: error: glib-object.h: No such file or directory
->         In file included from cairo-gobject-enums.c:8:
->         cairo-gobject.h:52: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'cairo_gobject_context_get_type'
->         cairo-gobject.h:56: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'cairo_gobject_device_get_type'
->         cairo-gobject.h:60: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'cairo_gobject_pattern_get_type'
->         […]
-> 
-> `glib-object.h` is only in sysroot of the build host.
-> 
->     $ find angstrom-dev/ -name glib-object.h
->     angstrom-dev/sysroots/i686-linux/usr/include/glib-2.0/glib-object.h
-> 
-> `cairo_1.8.8.bb` builds fine.
-> 
-> Adding `glib-2.0-native` to `DEPENDS` puts `glib-object.h` also into the sysroot of the target machine and fixes the build.
-> 
->     $ find angstrom-dev/ -name glib-object.h
->     angstrom-dev/sysroots/i686-linux/usr/include/glib-2.0/glib-object.h
->     angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0/glib-object.h
-> 
-> Build tested with `angstrom-2008.1` for `MACHINE = "beagleboard"`.
-> 
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
->  recipes/cairo/cairo_1.10.0.bb |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes/cairo/cairo_1.10.0.bb b/recipes/cairo/cairo_1.10.0.bb
-> index 7530cd1..9859b9c 100644
-> --- a/recipes/cairo/cairo_1.10.0.bb
-> +++ b/recipes/cairo/cairo_1.10.0.bb
-> @@ -1,5 +1,7 @@
->  require cairo.inc
->  
-> +DEPENDS += "glib-2.0-native"
+On Thu, Oct 7, 2010 at 3:54 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 10/07/2010 03:11 PM, Elvis Dowson wrote:
+>>
+>> Hi,
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0Would someone be able to help me with modifyi=
+ng an
+>> omap3-console-image recipe, such that in the final image, the
+>> /etc/network/interfaces file gets edited as follows
+>>
+>> #auto eth0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<- remove # sign ( auto eth0 )
+>> #iface eth0 inet dhcp =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 <- remove # sig=
+n ( iface eth0 inet dhcp )
+>> #iface eth1 inet dhcp
+>>
+>> I am using a Gumstix Overo + Chestnut43 expansion board, which has an
+>> inbuilt wired ethernet interface. I have to make this modification manua=
+lly,
+>> to enable this interface each time. However, if I can modify the OE reci=
+pe
+>> somehow to do this it would be great. I know it can be done, but I don't
+>> know where to start and which file to modify.
+>
+> Add the file the way you like it to
+> .../openembedded/recipes/netbase/netbase/overo
+> and rebuild netbase. =C2=A0Use the beagleboard as an example.
 
-This should probably go into cairo.inc.  And would you please try and 
-experiment?  Diff the bitbake -g files before and after this change and 
-make sure we aren't otherwise leaking unwanted changes around into the 
-dep graph.  I suspect this will end up being fine...
+or use bblayers and bbappend.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+>
+> --
+> ------------------------------------------------------------
+> Gary Thomas =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=
+=A0Consulting for the
+> MLB Associates =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =
+=C2=A0Embedded world
+> ------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
