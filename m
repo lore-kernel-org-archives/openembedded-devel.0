@@ -1,42 +1,40 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjaquez@igalia.com>) id 1P4HN1-0002X3-5p
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P4JU0-0005p1-4n
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 20:08:42 +0200
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AhIFAOD6rkxbdWOb/2dsb2JhbACDH5Eohz+HLKtZklOBIoMxdASKQIR+
-X-IronPort-AV: E=Sophos;i="4.57,304,1283724000"; d="scan'208";a="688215876"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 08 Oct 2010 20:07:13 +0200
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
-	id 1P4HLd-000609-DB; Fri, 08 Oct 2010 20:07:13 +0200
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
-	id 1P4HLd-0006ZR-8b; Fri, 08 Oct 2010 20:07:13 +0200
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>)
-	id 1P4HLc-00085J-Nw; Fri, 08 Oct 2010 20:07:12 +0200
-From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
-	<vjaquez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Oct 2010 20:07:11 +0200
-Message-Id: <1286561232-31048-1-git-send-email-vjaquez@igalia.com>
-X-Mailer: git-send-email 1.7.1
+	Fri, 08 Oct 2010 22:24:01 +0200
+Received: by iwn7 with SMTP id 7so118332iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Oct 2010 13:23:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=5hcgl+nrMXS4pBzvPsDHe2/0L8RRaPFmKRLWf7iR0Ps=;
+	b=mawcTZ9t8BHKLnyTdWRLxAi5Bbgee9fhDb27Jhq76cqCNdNOx44c5LlSr7fmF4EOTO
+	VOxBQmQSe7uG7fwdZpFjq31cwmYJpKxedX8kWLUnHq7OZn6MqfyX8dYziHg/yRv58wjd
+	xjtLHAKOk9pU7oCJxb6Uzqmi8ECbzZncIE4sk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=bT/zgYlrFjagdQPucWG/zFQCI17D83X0GNWXbFNPGx0JHHEi58dzCtTALmz1w7bxTc
+	Pk07ySA70bvhbYDme3pgmtRsaDWk5tdUIpabIqZrnpGPKTDHmfQPnwoRtWvYMEy/T4KE
+	8dO1rFfCOvGP/z8N/sMzoIvWCS6oYIj7X1YZI=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.51.32.151
-X-SA-Exim-Mail-From: vjaquez@igalia.com
+Received: by 10.231.157.207 with SMTP id c15mr2619718ibx.143.1286569411696;
+	Fri, 08 Oct 2010 13:23:31 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Fri, 8 Oct 2010 13:23:31 -0700 (PDT)
+Date: Fri, 8 Oct 2010 22:23:31 +0200
+Message-ID: <AANLkTin=ucR4=4zJQg=thwRbqehhCzRa-DE6NwCGb76R@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_NEUTRAL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>, Koen Kooi <k-kooi@ti.com>
-Subject: [PATCH] angstrom.inc: set TARGET_VENDOR ?= "-angstrom"
+Subject: recipy_sanity experiment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,33 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2010 18:08:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 08 Oct 2010 20:24:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-By doing this we could use external toolchains for build angstrom
-based images.
+Dear all,
 
-Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
----
- conf/distro/include/angstrom.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+as a test I decided to run recipe_sanity on our tree, and here are the results
+There are 1801 warnings:
 
-diff --git a/conf/distro/include/angstrom.inc b/conf/distro/include/angstrom.inc
-index 8983c86..9e5c869 100644
---- a/conf/distro/include/angstrom.inc
-+++ b/conf/distro/include/angstrom.inc
-@@ -9,7 +9,7 @@ DISTRO_NAME = "Angstrom"
- 
- BUILDNAME = "Angstrom ${DISTRO_VERSION}"
- 
--TARGET_VENDOR = "-angstrom"
-+TARGET_VENDOR ?= "-angstrom"
- 
- SOC_FAMILY ?= "Unknown"
- 
--- 
-1.7.1
+    954 candidate for removal of S
+    373 LICENSE should be defined to something other than default (unknown)
+    181 RDEPENDS should be RDEPENDS_${PN}
+     91 candidate for removal of FILESDIR
+     74 candidate for removal of PV
+     49 native or cross recipe with non-empty PACKAGES
+     11 RRECOMMENDS should be RRECOMMENDS_${PN}
+      6 candidate for removal of FILESPATH
+      4 LICENSE should be set
+      1 DESCRIPTION should be set
 
+Rest are for overwrites of a variable like:
+      4 rename of variable 'FILES_${PN}' to 'FILES_orinoco-modules'
+overwrote existing value '/lib/modules/' with '/etc /lib/modules'.
+There are about 25 different lines of this (total about 50 lines)
+
+Not sure exactly what should be done about it. I can fix some of them,
+but not too sure about the rename thing
+and the removal of S is often because there is an S = xyz_${PN} line
+in an inc file
+
+Anyway, wanted to know the results (and here they are).
+I  can provide more detailed info if needed
+
+Have fun! Frans
 
 
