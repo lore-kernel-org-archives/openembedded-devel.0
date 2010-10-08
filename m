@@ -1,29 +1,31 @@
 Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.jrz.cbn>) id 1P4D5n-0004cV-4J
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1P4DBQ-0004nj-PG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 15:34:36 +0200
+	Fri, 08 Oct 2010 15:40:29 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 117D28C1A84
+	by smtp.cbnco.com (Postfix) with ESMTP id 323238BD807
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Oct 2010 09:34:14 -0400 (EDT)
+	Fri,  8 Oct 2010 09:40:04 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 31618-10 for <openembedded-devel@lists.openembedded.org>; 
-	Fri,  8 Oct 2010 09:34:14 -0400 (EDT)
+	with ESMTP id 00465-04 for <openembedded-devel@lists.openembedded.org>; 
+	Fri,  8 Oct 2010 09:40:04 -0400 (EDT)
 Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id AAE288C1C24; Fri,  8 Oct 2010 09:34:13 -0400 (EDT)
+	id 752758BD435; Fri,  8 Oct 2010 09:40:02 -0400 (EDT)
 Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 87924608878
+	by smtp.cbnco.com (Postfix) with ESMTP id 820A08BD056
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Oct 2010 09:34:12 -0400 (EDT)
+	Fri,  8 Oct 2010 09:40:00 -0400 (EDT)
 Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
-	id 768AB5000E5; Fri,  8 Oct 2010 09:34:12 -0400 (EDT)
+	id 7C7245000E8; Fri,  8 Oct 2010 09:40:00 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Oct 2010 09:34:12 -0400
-Message-Id: <1286544852-15635-1-git-send-email-msmith@cbnco.com>
+Date: Fri,  8 Oct 2010 09:40:00 -0400
+Message-Id: <1286545200-15699-4-git-send-email-msmith@cbnco.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
+References: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
 X-Virus-Scanned: amavisd-new at cbnco.com
 X-SA-Exim-Connect-IP: 207.164.182.72
 X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
@@ -33,7 +35,7 @@ X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
 	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] package.bbclass: copy dotfiles in root D to PKGD
+Subject: [PATCH resend 4/4] eglibc, eglibc-initial: depend on make-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,53 +49,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2010 13:34:37 -0000
+X-List-Received-Date: Fri, 08 Oct 2010 13:40:29 -0000
 
-Use shutil.copytree() to copy D ("image") to PKGD ("package"). The
-previous system("cp %s/* ...") missed dotfiles/dirs at the top-level.
+In case the version of make installed on the build host is incompatible,
+we'll use make-native.
 
 Signed-off-by: Michael Smith <msmith@cbnco.com>
 ---
+ recipes/eglibc/eglibc-initial.inc |    2 +-
+ recipes/eglibc/eglibc.inc         |    4 +++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-I sent an earlier version of this a couple of weeks back, but it relied
-on shutil.copytree() functionality only available in Python 2.5+. This
-version should work on 2.4 (i.e. RHEL 5).
-
- classes/package.bbclass |   19 ++++++++++++-------
- 1 files changed, 12 insertions(+), 7 deletions(-)
-
-diff --git a/classes/package.bbclass b/classes/package.bbclass
-index 35d9864..e7659ae 100644
---- a/classes/package.bbclass
-+++ b/classes/package.bbclass
-@@ -354,15 +354,20 @@ python package_do_split_locales() {
- }
+diff --git a/recipes/eglibc/eglibc-initial.inc b/recipes/eglibc/eglibc-initial.inc
+index 2a68fd6..935fa3a 100644
+--- a/recipes/eglibc/eglibc-initial.inc
++++ b/recipes/eglibc/eglibc-initial.inc
+@@ -1,5 +1,5 @@
+ SECTION = "libs"
+-DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial"
++DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial make-native"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
  
- python perform_packagecopy () {
--	dest = bb.data.getVar('D', d, True)
--	dvar = bb.data.getVar('PKGD', d, True)
-+	import shutil
-+
-+	installdest = bb.data.getVar('D', d, True)
-+	pkgcopy = bb.data.getVar('PKGD', d, True)
- 
--	bb.mkdirhier(dvar)
-+	# Start package population by taking a copy of the installed 
-+	# files to operate on. Create missing parent directories of
-+	# pkgcopy first (shutil.copytree() does this automatically but only
-+	# in Python 2.5+).
-+	bb.mkdirhier(pkgcopy)
-+	shutil.rmtree(pkgcopy, True)
- 
--	# Start by package population by taking a copy of the installed 
--	# files to operate on
--	os.system('rm -rf %s/*' % (dvar))
--	os.system('cp -pPR %s/* %s/' % (dest, dvar))
-+	# Preserve symlinks.
-+	shutil.copytree(installdest, pkgcopy, symlinks=True)
- }
- 
- python populate_packages () {
+ PACKAGES = ""
+diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
+index 754a12b..00202d7 100644
+--- a/recipes/eglibc/eglibc.inc
++++ b/recipes/eglibc/eglibc.inc
+@@ -5,7 +5,9 @@ PRIORITY = "required"
+ LICENSE = "LGPL"
+ INC_PR = "r15"
+ # nptl needs unwind support in gcc, which can't be built without glibc.
+-DEPENDS = "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-headers"
++DEPENDS = "virtual/${TARGET_PREFIX}gcc-intermediate \
++		linux-libc-headers \
++		make-native"
+ #this leads to circular deps, so lets not add it yet
+ #RDEPENDS_ldd += " bash"
+ # nptl needs libgcc but dlopens it, so our shlibs code doesn't detect this
 -- 
 1.7.0.4
 
