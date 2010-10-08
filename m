@@ -1,36 +1,39 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1P4CXX-0001no-02
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1P4D5n-0004cV-4J
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Oct 2010 14:59:12 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id EC100491284;
-	Fri,  8 Oct 2010 14:58:50 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 8 Oct 2010 14:58:50 +0200
-Message-ID: <4CAF1590.20500@dresearch.de>
-Date: Fri, 08 Oct 2010 14:58:56 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
-MIME-Version: 1.0
+	Fri, 08 Oct 2010 15:34:36 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 117D28C1A84
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Oct 2010 09:34:14 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 31618-10 for <openembedded-devel@lists.openembedded.org>; 
+	Fri,  8 Oct 2010 09:34:14 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id AAE288C1C24; Fri,  8 Oct 2010 09:34:13 -0400 (EDT)
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 87924608878
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Oct 2010 09:34:12 -0400 (EDT)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id 768AB5000E5; Fri,  8 Oct 2010 09:34:12 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1286539640-9333-1-git-send-email-sledz@dresearch.de>
-	<20101008122142.GI3163@jama>
-In-Reply-To: <20101008122142.GI3163@jama>
-X-OriginalArrivalTime: 08 Oct 2010 12:58:50.0574 (UTC)
-	FILETIME=[8DAFB6E0:01CB66E8]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+Date: Fri,  8 Oct 2010 09:34:12 -0400
+Message-Id: <1286544852-15635-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.7.0.4
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [PATCH] syslog-ng: increase u-a priority to 200
+Subject: [PATCH v2] package.bbclass: copy dotfiles in root D to PKGD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +47,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2010 12:59:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 08 Oct 2010 13:34:37 -0000
 
-Am 08.10.2010 14:21, schrieb Martin Jansa:
-> On Fri, Oct 08, 2010 at 02:07:20PM +0200, Steffen Sledz wrote:
->> Priority for update-alternatives was 50 before which was the
->> same like the one for busybox-syslog. Resulting order now is:
->>
->> * 300 rsyslogd
->> * 200 syslog-ng
->> * 100 sysklogd
->> * 50 busybox-syslog
->>
->> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
->=20
-> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> please bump INC_PR with it
+Use shutil.copytree() to copy D ("image") to PKGD ("package"). The
+previous system("cp %s/* ...") missed dotfiles/dirs at the top-level.
 
-Bumped and pushed. ;-)
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
 
---=20
-Steffen Sledz
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
-Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
-Fax: +49 (30) 515932299 http://www.DResearch.DE
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 54412;
-Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+I sent an earlier version of this a couple of weeks back, but it relied
+on shutil.copytree() functionality only available in Python 2.5+. This
+version should work on 2.4 (i.e. RHEL 5).
+
+ classes/package.bbclass |   19 ++++++++++++-------
+ 1 files changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 35d9864..e7659ae 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -354,15 +354,20 @@ python package_do_split_locales() {
+ }
+ 
+ python perform_packagecopy () {
+-	dest = bb.data.getVar('D', d, True)
+-	dvar = bb.data.getVar('PKGD', d, True)
++	import shutil
++
++	installdest = bb.data.getVar('D', d, True)
++	pkgcopy = bb.data.getVar('PKGD', d, True)
+ 
+-	bb.mkdirhier(dvar)
++	# Start package population by taking a copy of the installed 
++	# files to operate on. Create missing parent directories of
++	# pkgcopy first (shutil.copytree() does this automatically but only
++	# in Python 2.5+).
++	bb.mkdirhier(pkgcopy)
++	shutil.rmtree(pkgcopy, True)
+ 
+-	# Start by package population by taking a copy of the installed 
+-	# files to operate on
+-	os.system('rm -rf %s/*' % (dvar))
+-	os.system('cp -pPR %s/* %s/' % (dest, dvar))
++	# Preserve symlinks.
++	shutil.copytree(installdest, pkgcopy, symlinks=True)
+ }
+ 
+ python populate_packages () {
+-- 
+1.7.0.4
 
 
 
