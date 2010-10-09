@@ -1,42 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4YyI-0002Lr-W7 for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 14:56:24 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4Yxx-00083g-Di for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 14:55:57 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 14:55:57 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <koen.kooi@gmail.com>) id 1P4Z9b-0002yl-5d
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Oct 2010 15:08:00 +0200
+Received: by ewy7 with SMTP id 7so1020986ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 14:55:57 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 09 Oct 2010 06:07:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=xsYKIPipmjFeOjYJjYNJ+vwJ/MvN8nMKuXUMmOSNv3o=;
+	b=mZePryIwbnmyMvhGHaWRAOKruv1ReRV2dM6YnHPXriXMapXYQF+aZGQPMjVcMqi+gQ
+	UCMlQG4qdON2m3W0cdC9p6mQpK3tkgDvc1ddO4lR5D2bMenIF2ZfNlpibwiaCfY0xLR1
+	1B3SY9qBQI+5KSsb648YvJ4egXF2K4h0/irwc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=LPQyqN4oReillzdxgOtBRb2zliua6b/w2oIFTPDrMUiJVVfNv4sJFByYLm74kVH66Z
+	RjS3mokqcx9YwAbsTFTiJebpO9igNX0jYiFxqtDFwaiS+mqspVDEZ4IoVdjZfgNor+xl
+	7/c8EgQqI93uMXNqH1x0IxG0YzpVLZQSmb6cI=
+Received: by 10.14.53.4 with SMTP id f4mr2270504eec.17.1286629657387;
+	Sat, 09 Oct 2010 06:07:37 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id u9sm7237969eeh.5.2010.10.09.06.07.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 09 Oct 2010 06:07:35 -0700 (PDT)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 09 Oct 2010 14:55:47 +0200
-Message-ID: <i8pooj$56n$1@dough.gmane.org>
-References: <1286621826-9198-1-git-send-email-koen@openembedded.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <1286621826-9198-1-git-send-email-koen@openembedded.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sat,  9 Oct 2010 15:07:28 +0200
+Message-Id: <1286629648-9636-1-git-send-email-koen@openembedded.org>
+X-Mailer: git-send-email 1.7.0
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: koen.kooi@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] kernel bbclass: split do_compile into do_compile and do_compile_modules
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [PATCH 1/3] kernel bbclass: split do_compile into do_compile and do_compile_modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,52 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 12:56:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 09 Oct 2010 13:08:00 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+This allows recipes to insert a custom task in between building *Image and modules
 
-disregard this one, _modules is a local override, v2 will fix that
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ classes/kernel.bbclass |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
 
-On 09-10-10 12:57, Koen Kooi wrote:
-> This allows recipes to insert a custom task in between building *Image and modules
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
->  classes/kernel.bbclass |    4 ++++
->  1 files changed, 4 insertions(+), 0 deletions(-)
-> 
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index cf6b8cd..5d5e93b 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -89,12 +89,16 @@ kernel_do_compile() {
->  		oe_runmake dep CC="${KERNEL_CC}" LD="${KERNEL_LD}"
->  	fi
->  	oe_runmake ${KERNEL_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-> +}
-> +
-> +kernel_do_compile_modules() {
->  	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
->  		oe_runmake modules  CC="${KERNEL_CC}" LD="${KERNEL_LD}"
->  	else
->  		oenote "no modules to compile"
->  	fi
->  }
-> +addtask compile_modules after do_compile before do_install
->  
->  kernel_do_install() {
->  	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMsGZTMkyGM64RGpERAlpLAKCDoOp5yV1METuyM5r7XbA53MhZKACffYr2
-4zygv+VrY75MAdL4gHdTFx8=
-=jrRu
------END PGP SIGNATURE-----
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index cf6b8cd..83e3f44 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -89,12 +89,17 @@ kernel_do_compile() {
+ 		oe_runmake dep CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+ 	fi
+ 	oe_runmake ${KERNEL_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
++}
++
++do_compile_kernelmodules() {
++	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+ 	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
+ 		oe_runmake modules  CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+ 	else
+ 		oenote "no modules to compile"
+ 	fi
+ }
++addtask compile_kernelmodules after do_compile before do_install
+ 
+ kernel_do_install() {
+ 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+-- 
+1.6.6.1
 
 
 
