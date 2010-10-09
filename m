@@ -1,30 +1,31 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1P4ajS-0007aN-GU
+	(envelope-from <gary@mlbassoc.com>) id 1P4amx-0008IJ-Lr
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 16:49:07 +0200
-Received: from [192.168.1.135] (95-90-74-25-dynip.superkabel.de [95.90.74.25])
-	by dd20204.kasserver.com (Postfix) with ESMTP id C780018051DAB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Oct 2010 16:20:30 +0200 (CEST)
-Message-ID: <4CB07A28.4050200@opensimpad.org>
-Date: Sat, 09 Oct 2010 16:20:24 +0200
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+	Sat, 09 Oct 2010 16:52:45 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id C8254166074C; Sat,  9 Oct 2010 08:52:20 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 6FB7E16605CF;
+	Sat,  9 Oct 2010 08:52:20 -0600 (MDT)
+Message-ID: <4CB081A4.9010908@mlbassoc.com>
+Date: Sat, 09 Oct 2010 08:52:20 -0600
+From: Gary Thomas <gary@mlbassoc.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.11) Gecko/20100713 Thunderbird/3.0.6
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=iNaP53YAKHeTpv9Wsp1VL4GZPhrJTkYdMfdGp@mail.gmail.com>
-In-Reply-To: <AANLkTi=iNaP53YAKHeTpv9Wsp1VL4GZPhrJTkYdMfdGp@mail.gmail.com>
-X-SA-Exim-Connect-IP: 85.13.140.93
-X-SA-Exim-Mail-From: Bernhard.Guillon@opensimpad.org
+References: <4C78D1E1.9080101@mlbassoc.com>
+In-Reply-To: <4C78D1E1.9080101@mlbassoc.com>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: inc file discussion
+Subject: Re: [PATCH v2] TI tools - make EULA unpack work when /opt is writeable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,24 +39,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 14:49:07 -0000
+X-List-Received-Date: Sat, 09 Oct 2010 14:52:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 09.10.2010 11:37, Frans Meulenbroeks wrote:
-> Dear all,
+On 08/28/2010 03:07 AM, Gary Thomas wrote:
+> This patch addresses the problem where the TI tools that need
+> the EULA unpack into the wrong place if the user has write
+> permission in /opt. The current behaviour of expecting the
+> unpacker to fall back to the $HOME environment variable should
+> not be relied on. The patch changes the unpack step to use
+> the --prefix= option which will always work.
 >
-> I see a lot of diversity in .inc files, and I was wondering whether we
-> should not try to come up with some guidelines about their purpose,
-> what should go in it, what not etc etc.
->
->    
+> Version 2:
+> * Update patch to be against org.openembedded.dev branch
+> * Incorporate full description into patch
 
-Some guidelines would be great :) (as long as they are not mandatory of 
-course)
+What about this patch?  It's been nearly 6 weeks and no discussion
+or anything.
 
-Best regards
-Bernhard
+The problem persists in today's tree.
 
+n.b. there was a discussion about automatic application of a patch
+if it goes more than two weeks without objection.  What about that??
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
