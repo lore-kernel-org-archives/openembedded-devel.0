@@ -1,44 +1,49 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1P4Z9b-0002yl-5d
+	(envelope-from <raj.khem@gmail.com>) id 1P4aTY-0007M3-7H
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 15:08:00 +0200
-Received: by ewy7 with SMTP id 7so1020986ewy.6
+	Sat, 09 Oct 2010 16:32:41 +0200
+Received: by gxk25 with SMTP id 25so639658gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 06:07:37 -0700 (PDT)
+	Sat, 09 Oct 2010 07:32:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=xsYKIPipmjFeOjYJjYNJ+vwJ/MvN8nMKuXUMmOSNv3o=;
-	b=mZePryIwbnmyMvhGHaWRAOKruv1ReRV2dM6YnHPXriXMapXYQF+aZGQPMjVcMqi+gQ
-	UCMlQG4qdON2m3W0cdC9p6mQpK3tkgDvc1ddO4lR5D2bMenIF2ZfNlpibwiaCfY0xLR1
-	1B3SY9qBQI+5KSsb648YvJ4egXF2K4h0/irwc=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=0M0jrDpT8Yb7mqe1pvtaybE2+h9VjmQor1idVuF99Os=;
+	b=MQg2ObSLeugZTtztlJrICPesUSwqdItNieyfkEeOovJ/xqQaytQukjsm/s0SOF2fL+
+	JFg3G9fe8/xEB6OWkrMf7yNCdknIh/W9jrEOPiCc+etcorjN/CBkMYfMzKsKaU3xajPh
+	eqPjNb/+lz4nv8AmJQjYI4cHZmCwZIVCNUTA8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=LPQyqN4oReillzdxgOtBRb2zliua6b/w2oIFTPDrMUiJVVfNv4sJFByYLm74kVH66Z
-	RjS3mokqcx9YwAbsTFTiJebpO9igNX0jYiFxqtDFwaiS+mqspVDEZ4IoVdjZfgNor+xl
-	7/c8EgQqI93uMXNqH1x0IxG0YzpVLZQSmb6cI=
-Received: by 10.14.53.4 with SMTP id f4mr2270504eec.17.1286629657387;
-	Sat, 09 Oct 2010 06:07:37 -0700 (PDT)
-Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id u9sm7237969eeh.5.2010.10.09.06.07.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 09 Oct 2010 06:07:35 -0700 (PDT)
-From: Koen Kooi <koen.kooi@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=DkUBBm25QqYZ8gcKFOjgk3EAxVt7EFYe6x5ppwiPLd1VcBbRpPr8gbgIpqJLEWzMlP
+	naQ7+fLqGFDl8eDbuycF5lvdmwcZc0yTSuX1FMtmPxMMeRAYYpGQwon40cFLlhMxhZ/9
+	Ka65w5L8cMTYmUFcnmci+aLkSBZLiD5Um1nWM=
+Received: by 10.90.93.9 with SMTP id q9mr2192384agb.103.1286634732823; Sat, 09
+	Oct 2010 07:32:12 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.91.77.10 with HTTP; Sat, 9 Oct 2010 07:31:52 -0700 (PDT)
+In-Reply-To: <20101009113707.GP3163@jama>
+References: <1286415971-9960-1-git-send-email-raj.khem@gmail.com>
+	<i8jufe$299$1@dough.gmane.org>
+	<AANLkTinatBiNfBgMiKPzDGa+rac7FjQU02hBBammKGQE@mail.gmail.com>
+	<AANLkTi=_1X_2nbgdX26Et6jd0mRxNSAKbbjkcx-iJNjC@mail.gmail.com>
+	<AANLkTikLT9ZRLbnbGQ17AN5u0TiXdweP7HKH-QuLBH_E@mail.gmail.com>
+	<20101009113707.GP3163@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 9 Oct 2010 07:31:52 -0700
+Message-ID: <AANLkTim_=Bg0mP+QjTWfvkdQ-+Xrp86fjg8sq8=bZ4=v@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Oct 2010 15:07:28 +0200
-Message-Id: <1286629648-9636-1-git-send-email-koen@openembedded.org>
-X-Mailer: git-send-email 1.7.0
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: koen.kooi@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [PATCH 1/3] kernel bbclass: split do_compile into do_compile and do_compile_modules
+Subject: Re: [PATCH,V2 0/6] libtool 2.4 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,39 +57,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 13:08:00 -0000
+X-List-Received-Date: Sat, 09 Oct 2010 14:32:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-This allows recipes to insert a custom task in between building *Image and modules
+On Sat, Oct 9, 2010 at 4:37 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+> On Fri, Oct 08, 2010 at 03:21:03PM -0700, Chris Larson wrote:
+>> > Personally I'm in favour of merging into head. That way it gets
+>> > accepted easier and faster.
+>> >
+>>
+>> Agreed, I am as well. =C2=A0As the new libtool is opt-in, I don't see th=
+e harm,
+>> and it'll ensure that any issues which crop up with the compatibility ge=
+t
+>> fixed asap.
+>
+> Khem: feel free to add
+> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- classes/kernel.bbclass |    5 +++++
- 1 files changed, 5 insertions(+), 0 deletions(-)
+Thanks. Do I have other pseudo acks too in this thread. ?
+btw libtool folks are excited that OE is using the sysroot
+functionality my patch to libtool is being merged
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index cf6b8cd..83e3f44 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -89,12 +89,17 @@ kernel_do_compile() {
- 		oe_runmake dep CC="${KERNEL_CC}" LD="${KERNEL_LD}"
- 	fi
- 	oe_runmake ${KERNEL_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-+}
-+
-+do_compile_kernelmodules() {
-+	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
- 	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
- 		oe_runmake modules  CC="${KERNEL_CC}" LD="${KERNEL_LD}"
- 	else
- 		oenote "no modules to compile"
- 	fi
- }
-+addtask compile_kernelmodules after do_compile before do_install
- 
- kernel_do_install() {
- 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
--- 
-1.6.6.1
+http://lists.gnu.org/archive/html/libtool-patches/2010-10/msg00022.html
 
+I am confident that any roadblocks we run into the libtool community
+will help us
+so we are in good spot.
+
+Thanks
+-Khem
+> --
+> Martin 'JaMa' Jansa =C2=A0 =C2=A0 jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
