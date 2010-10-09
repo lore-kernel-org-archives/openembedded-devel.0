@@ -1,43 +1,52 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4Xdu-0003J0-GT for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 13:31:25 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4XdY-0002QK-3j for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 13:30:48 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 13:30:48 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1P4XjY-0004Kh-2y
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Oct 2010 13:37:06 +0200
+Received: by bwz7 with SMTP id 7so1177897bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 13:30:48 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 09 Oct 2010 04:36:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=GDHSsH08LXhIy2EeVXiP0LGQsBBQf/l0PDgj92iw9fw=;
+	b=tQgf3NTBseoWUZJr238JRVWZa4AmJ++YjCwZGKCRoRH/xExs8zOigGqB/LioM2XbWL
+	RzbI4ovGJRu1yp1kPFTRBTlq2NS57o8b1tAOm2fGheGxPHdlUAToUA+0OVJS0f/JO/2i
+	4gi9zP2uuAABG6b8sSuFOpiRudv/WUEE5Fy1I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Bdy6cLmT3vhv+oJtXoEg1F+trMJbGrixxLAsBYPn9zPARme4wgVdy+ixWmKLLkLGom
+	NSf4zvhDYJ5Zyefs4xC/Y+AaO0LKvt7FkzZuEcRknax/00JErvLn3wj9EtUPPnwTfvWk
+	k6ByyY0XQ04m1HKNB6AKoZ9Ps4qMq067LIcwY=
+Received: by 10.204.133.91 with SMTP id e27mr3059276bkt.197.1286624197057;
+	Sat, 09 Oct 2010 04:36:37 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id q19sm545789bkb.16.2010.10.09.04.36.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 09 Oct 2010 04:36:36 -0700 (PDT)
+Date: Sat, 9 Oct 2010 13:37:07 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 09 Oct 2010 13:30:39 +0200
-Message-ID: <i8pjov$j0q$1@dough.gmane.org>
-References: <AANLkTi=iNaP53YAKHeTpv9Wsp1VL4GZPhrJTkYdMfdGp@mail.gmail.com>
-	<20101009112300.GO3163@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <20101009112300.GO3163@jama>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20101009113707.GP3163@jama>
+References: <1286415971-9960-1-git-send-email-raj.khem@gmail.com>
+	<i8jufe$299$1@dough.gmane.org>
+	<AANLkTinatBiNfBgMiKPzDGa+rac7FjQU02hBBammKGQE@mail.gmail.com>
+	<AANLkTi=_1X_2nbgdX26Et6jd0mRxNSAKbbjkcx-iJNjC@mail.gmail.com>
+	<AANLkTikLT9ZRLbnbGQ17AN5u0TiXdweP7HKH-QuLBH_E@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTikLT9ZRLbnbGQ17AN5u0TiXdweP7HKH-QuLBH_E@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: inc file discussion
+Subject: Re: [PATCH,V2 0/6] libtool 2.4 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,44 +60,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 11:31:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 09 Oct 2010 11:37:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 09-10-10 13:23, Martin Jansa wrote:
-> On Sat, Oct 09, 2010 at 11:37:49AM +0200, Frans Meulenbroeks wrote:
-
->> And then there is DEPENDS in .inc files. I think there is some
->> potential cause of getting unneeded DEPENDS
->> Picture the following scenario: a new version needs an additional
->> package, it gets added to the DEPENDS of the .inc file and suddenly
->> older versions also get this DEPENDS (maybe unneeded).
+On Fri, Oct 08, 2010 at 03:21:03PM -0700, Chris Larson wrote:
+> > Personally I'm in favour of merging into head. That way it gets
+> > accepted easier and faster.
+> >
 > 
-> This case is just wrong and fault of whoever added it to .inc DEPENDS.
-> If only new version needs it then you should put DEPENDS += only to
-> recipe needing it.
-> 
-> But I don't see why not keep "common" DEPENDS in .inc.
+> Agreed, I am as well.  As the new libtool is opt-in, I don't see the harm,
+> and it'll ensure that any issues which crop up with the compatibility get
+> fixed asap.
 
-Consider the case of gst-plugins where plugins move freely between
-- -base, -good, -bad and -ugly between releases.
+Khem: feel free to add
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-The .inc for all plugins lists the deps to keep maintenance churn down
-and to allow upgrading the recipes one by one.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMsFJfMkyGM64RGpERAoIqAJ9s21LgutdwiozXTIzHVTRBZY3EUQCggt3F
-SzdoGMma8yyTCeLOywMFuKM=
-=Ui1m
------END PGP SIGNATURE-----
-
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
