@@ -1,42 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4XXm-0005cm-78 for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 13:25:16 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4XXN-0008HK-GM for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 13:24:25 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 13:24:25 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P4Xae-0008K2-8r
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Oct 2010 13:28:11 +0200
+Received: by iwn7 with SMTP id 7so674490iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 13:24:25 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 09 Oct 2010 04:27:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=oSAFvovEaeKXeO/vXaowhYgoFPWlqZVNoKWvjkhktDE=;
+	b=oNEgPNb1KCfgTpdbVVrkicz2hygof9YoJPX7w9dnAX28h3lAAPm9jQN1vEp1b7rVot
+	bFzVbbqvk7JobfUIWwYqYF3P/vJ9c7ytSHmZgFhOqqFu3oQSdCevpASC/EfoKuVsVqg4
+	OOt1XbQO/9jcI5xu5vULj7D3/nTCi3yYq1p0U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=jAw+KGBhYqaHxg5h3nNpTWGaoEY/7XQFMf2qXNibd1ABk7oENh3L1wIgp+di/6yidx
+	l2S0EYcikADB+bAjY3HS2ERQkAsAlqGHgTuCuoCcBBxST1O09pAbIuTfU/scXfjbqHOi
+	mpmtNuEWou3POp37A154WqtJMW3+5V5Mu//RM=
+MIME-Version: 1.0
+Received: by 10.231.172.205 with SMTP id m13mr3193326ibz.35.1286623627203;
+	Sat, 09 Oct 2010 04:27:07 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sat, 9 Oct 2010 04:27:07 -0700 (PDT)
+In-Reply-To: <018d01cb67a1$20dde640$6299b2c0$@net>
+References: <018d01cb67a1$20dde640$6299b2c0$@net>
+Date: Sat, 9 Oct 2010 13:27:07 +0200
+Message-ID: <AANLkTi=UDMu1GiHuTM25TVQ72+LzoZuKrBoJXjJRQcpa@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 09 Oct 2010 13:24:17 +0200
-Message-ID: <i8pjd1$i71$1@dough.gmane.org>
-References: <1286621826-9198-1-git-send-email-koen@openembedded.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <1286621826-9198-1-git-send-email-koen@openembedded.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] kernel bbclass: split do_compile into do_compile and do_compile_modules
+Subject: Re: Can someone provide any input as to why this is failing to build?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,56 +52,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 11:25:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 09 Oct 2010 11:28:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/10/9 N Twerdochlib <nik@nikom.net>:
+> nik@bobbob:~/development/embedded$ bitbake =A0-b
+> /home/nik/development/embedded/openembedded/recipes/webm/libvpx_0.9.1.bb
 
-A word of warning:
+bitbake -b will not build packages that are required for that package
+use
+bitbake libvpx
+instead.
 
-If you have rm_work enabled you need to clean the kernel since bitbake
-doesn't know that the source is gone when trying to run the new
-compile_modules task
-
-On 09-10-10 12:57, Koen Kooi wrote:
-> This allows recipes to insert a custom task in between building *Image and modules
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
->  classes/kernel.bbclass |    4 ++++
->  1 files changed, 4 insertions(+), 0 deletions(-)
-> 
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index cf6b8cd..5d5e93b 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -89,12 +89,16 @@ kernel_do_compile() {
->  		oe_runmake dep CC="${KERNEL_CC}" LD="${KERNEL_LD}"
->  	fi
->  	oe_runmake ${KERNEL_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-> +}
-> +
-> +kernel_do_compile_modules() {
->  	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
->  		oe_runmake modules  CC="${KERNEL_CC}" LD="${KERNEL_LD}"
->  	else
->  		oenote "no modules to compile"
->  	fi
->  }
-> +addtask compile_modules after do_compile before do_install
->  
->  kernel_do_install() {
->  	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMsFDhMkyGM64RGpERAgtDAJ9UAObRieVcn+AkuqyVaKma/+6UQACgtUtd
-EwXwC1DrKgNnjk5FKxzx++M=
-=qAhm
------END PGP SIGNATURE-----
-
+Have fun, Frans.
 
 
