@@ -1,39 +1,33 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P4cYP-0005hY-IS
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P4d2R-0007MF-HJ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 18:45:50 +0200
-Received: by iwn7 with SMTP id 7so909008iwn.6
+	Sat, 09 Oct 2010 19:16:53 +0200
+Received: by iwn7 with SMTP id 7so931502iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 09:45:27 -0700 (PDT)
+	Sat, 09 Oct 2010 10:16:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=eEJ3caL90iN5H/emRktGAhqmppZfHJpL4NbWxxFXw7M=;
-	b=Gr2BaUNO7B/zQWdJUpmXZwrnio/CrH3coNJ6NL5KugbABT4b5UJshewVUpU75tM4CE
-	rAy5vA6spmtPe3suff3Y90CuICq2a+Y9TFGnjtn9CDcMzco5SHCnVijNiQL7T9Rtp/wx
-	2nfrCg7AyPG9KRTJ6S/Shb5AGIWiFGjgqIxP4=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=QblFDLmuAUbuSN1SzpiIG53FH649ztLhpoebpCvGi4I=;
+	b=BhfiIQIh8WdjbTozZI4uQ2haiILXFlm+rEiuBZxuAxyms9arhI21vitDwsc8ULFsd8
+	lACAfPf815M3aPA5nUBjstW6L2Zfsl5p5DyWrm50scvC0GiNKj6NmFaYKg90zro/i2cW
+	nXLuT7oZQTIoAHHRzi7+9UWVxsI8cTYtJnms4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=RqhMA19QPvxp4O2yH6HNZ8VnbJ79fiL1V9eH4WWVIwr+kKV7ur/dGDua2jyUGyVnLT
-	Bv9mHycUKGyrZ2GMvW+VVfw8+NtNIwBv2SmKKadChJ8km8D8Sm88P6TA1zglasGjbx1V
-	84h4DHfXnJ8SZX5Aqo0XQSdx4v6mqnBKOwOk4=
+	:content-type;
+	b=RZmLiuVToahY4auB3pqmSfXkjeF8noodNO2024Skd0zpZCp7ERG18k1hN30QIb9aTC
+	XDQCaXa9EyMHV6ww1bXId5DS8WOWqynq825ZD56m/yR6kmv9/I8h/Ov6Qo7Z6ZTWkE2p
+	JYJVGJGG0LQu/mvdvZ3QkjwG0Rd1nWrdW+/T0=
 MIME-Version: 1.0
-Received: by 10.42.157.134 with SMTP id d6mr438315icx.76.1286642726571; Sat,
-	09 Oct 2010 09:45:26 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sat, 9 Oct 2010 09:45:26 -0700 (PDT)
-In-Reply-To: <AANLkTim_=Bg0mP+QjTWfvkdQ-+Xrp86fjg8sq8=bZ4=v@mail.gmail.com>
-References: <1286415971-9960-1-git-send-email-raj.khem@gmail.com>
-	<i8jufe$299$1@dough.gmane.org>
-	<AANLkTinatBiNfBgMiKPzDGa+rac7FjQU02hBBammKGQE@mail.gmail.com>
-	<AANLkTi=_1X_2nbgdX26Et6jd0mRxNSAKbbjkcx-iJNjC@mail.gmail.com>
-	<AANLkTikLT9ZRLbnbGQ17AN5u0TiXdweP7HKH-QuLBH_E@mail.gmail.com>
-	<20101009113707.GP3163@jama>
-	<AANLkTim_=Bg0mP+QjTWfvkdQ-+Xrp86fjg8sq8=bZ4=v@mail.gmail.com>
-Date: Sat, 9 Oct 2010 18:45:26 +0200
-Message-ID: <AANLkTi=X0=nu+ZJXSDgAdHOi0Ju6FeOhGW8yZ=28LxkQ@mail.gmail.com>
+Received: by 10.42.12.13 with SMTP id w13mr808543icw.475.1286644586111; Sat,
+	09 Oct 2010 10:16:26 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sat, 9 Oct 2010 10:16:26 -0700 (PDT)
+In-Reply-To: <4CB07A28.4050200@opensimpad.org>
+References: <AANLkTi=iNaP53YAKHeTpv9Wsp1VL4GZPhrJTkYdMfdGp@mail.gmail.com>
+	<4CB07A28.4050200@opensimpad.org>
+Date: Sat, 9 Oct 2010 19:16:26 +0200
+Message-ID: <AANLkTimwEzFVVdzC7vyBDmv2LvcBTVRb5ngN0g0x-Bdo@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -44,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH,V2 0/6] libtool 2.4 upgrade
+Subject: Re: inc file discussion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,36 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 16:45:50 -0000
+X-List-Received-Date: Sat, 09 Oct 2010 17:16:55 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/10/9 Khem Raj <raj.khem@gmail.com>:
-> On Sat, Oct 9, 2010 at 4:37 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
->> On Fri, Oct 08, 2010 at 03:21:03PM -0700, Chris Larson wrote:
->>> > Personally I'm in favour of merging into head. That way it gets
->>> > accepted easier and faster.
->>> >
->>>
->>> Agreed, I am as well. =A0As the new libtool is opt-in, I don't see the =
-harm,
->>> and it'll ensure that any issues which crop up with the compatibility g=
-et
->>> fixed asap.
->>
->> Khem: feel free to add
->> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
->>
->
-> Thanks. Do I have other pseudo acks too in this thread. ?
-> btw libtool folks are excited that OE is using the sysroot
-> functionality my patch to libtool is being merged
->
-As already stated on irc a few hrs ago
+Clarifying a few things.
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Actually I don't care too much whether DESCRIPTION and other fields
+are in the .inc file or in the bb file as long as it is done fairly
+consistently.
+Now it is not.
+And the reason why I prefer the bb file is because not every recipe
+has an .inc file, so it is a one stop shop.
 
-Thanks for your work!
+I'm not proposing rigid rules. I can see a case for DEPENDS in .inc files.
+Then again I actually bumped into this an hour or so after posting this.
+
+pulseaudio can work with and without tcpwrapper, but there was no
+choice forced. There was no depends, so if you happen to build
+tcpwrapper before it would pick it up (but would not end up in
+RDEPENDS or so).
+If you did not build pulseaudio before you would not get tcpwrapper.
+support/usage in pulseaudio.
+
+One solution is to add tcpwrapper to the DEPENDS of pulseaudio.
+However this was in an inc.
+
+This gave me the following dilemma:
+1 add in the recipe with _append  or +=
+2 add to the inc and test the other version(s)
+3 add to the inc and not test the other version(s) and assume things
+work properly.
+4 not do the patch.
+5. remove the old recipe
+
+I expect a lot of people would go for 3, but that *could* introduce a problem.
+
+BTW maybe it is indeed time for BBVERSIONS or whatever it was called.
+
+Frans
 
 
