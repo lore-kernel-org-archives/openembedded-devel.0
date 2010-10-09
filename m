@@ -1,40 +1,33 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P4hKe-0000om-00
+	(envelope-from <mickey@vanille-media.de>) id 1P4iJD-0003eg-KI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 23:51:56 +0200
-Received: by iwn7 with SMTP id 7so1108102iwn.6
+	Sun, 10 Oct 2010 00:54:32 +0200
+Received: from [192.168.1.2] (e180145048.adsl.alicedsl.de [85.180.145.48])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 50BDF5847F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 14:51:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=G0gBkJPAg9LjYoCZoX7HYiUrTDo7iyMVyA2DR9nppjA=;
-	b=VpOTewESAsf3ncTFDS670r3t2QiqFToXJUdTw1RG5/b+hybYDnKYw2ljkKVEmCbADs
-	Jnpp69b2HTPD+Zu4Ttd3EU70x8uGvzlJOUbJHIJHRMOZzYHrn8rMAhbVNr8W4EbXpjMY
-	56hc78tIlaj1ncbCNcYP7rR4PmMWU4NAzHgXo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=K8GqsGiAO7kE2OXRzrBpWLG7euXX9HyQV4M6D6tE12K21UvX71XVVBS9sFT5Xsg9sJ
-	6KYyw1g6ueRdGWk9owlaGjf15SOsNogvtAKuNR0VS+hh8mC/CKKZwUcDj0kyCmex9Tws
-	9Mb8N2RSBK8mXdo9bmRg//wdJON9DDZPvnKDo=
-MIME-Version: 1.0
-Received: by 10.231.193.81 with SMTP id dt17mr2777891ibb.177.1286661092247;
-	Sat, 09 Oct 2010 14:51:32 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sat, 9 Oct 2010 14:51:32 -0700 (PDT)
-Date: Sat, 9 Oct 2010 23:51:32 +0200
-Message-ID: <AANLkTikmzD_v4YbOAMq3GX42=Tw0p-f6pWc8JXJyj5=m@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 10 Oct 2010 01:02:08 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <AANLkTinQ4uW=o43O5Bv6FijfoicU2CL5j3Zn8zWf5Snm@mail.gmail.com>
+References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>
+	<AANLkTimS+bg0XpWvAav0JX4qaf0b=CydG6_HQ0XHMo-h@mail.gmail.com>
+	<AANLkTinQ4uW=o43O5Bv6FijfoicU2CL5j3Zn8zWf5Snm@mail.gmail.com>
+Organization: Vanille-Media
+Date: Sun, 10 Oct 2010 00:55:09 +0200
+Message-ID: <1286664909.15886.13.camel@saphir>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: kernel packaged staging issue
+Subject: Re: testing branch 2010-10-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,18 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 21:51:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 09 Oct 2010 22:54:32 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Dear all,
+Am Samstag, den 09.10.2010, 22:58 +0200 schrieb Frans Meulenbroeks:
+> libgee-native configure is failing:
+> http://tinderbox.openembedded.net/public/logs/task/8568667.txt
 
-Tried to rebuild an image from packaged staging and got the following
-error for my kernel:
-install: cannot stat `arch/arm/boot/uImage': No such file or directory
-This is from /home/frans/oe/tmp_minimal/work/sheevaplug-oe-linux-gnueabi/linux-kirkwood-2.6.32+2.6.33-rc5-r18/temp/log.do_deploy.4309
+Does it contain 72c2ac940065948cb688fde821e51efac6b71b4b, which was
+supposed to fix that?
 
-Anyone an idea how to fix this?
+Cheers,
+-- 
+:M:
 
-Thanks a-lot, Frans
 
 
