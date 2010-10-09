@@ -1,47 +1,40 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P4O48-00035K-GM
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Oct 2010 03:17:38 +0200
-Received: by pwj1 with SMTP id 1so469717pwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Oct 2010 18:17:12 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1P4S5Z-0001lh-Nl
+	for Openembedded-devel@lists.openembedded.org;
+	Sat, 09 Oct 2010 07:35:23 +0200
+Received: by gwb17 with SMTP id 17so300644gwb.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Oct 2010 22:34:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=ww4K0sBG39xODOSiDTa8qv5o8QuncsvjaeErFao4Jwo=;
-	b=ncHVZ0eNn/cHDeX5Ul5j7PyvdoYbRroinwt10lUHVmluCWUAIXn+qj8dlf1HHuFKKM
-	1TPmiA0/I8nWVLZ/rrqAW397wP926CTy2YmZwe5ycYRoJlrxitzDRvEWBIyjJ07edZBv
-	nHPxz7KGGsIngPTL6i8USB3YRzOCY0KCphZLU=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=a9mfSesG9a8UAw1vZk5x9WUzPjZPzAWTS8UYm4u0+zU=;
+	b=nVN2q0EpGl8QrNBVD09aFbagXnggo0BCkOjj+g8l+b++/BqZ2xf107KfNR0ny06cUH
+	4a4KYeDrVFv5lV91ORr+W1r+JprcxcRhSDu5s4bmwae0yLme0tfvBdpJrgOv69XiMImE
+	CP3qxAPPOfueaMGE3CugzypDudp7lwwNM+u3U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=WlHKGV0wu1WdnyCwKyxuzTT9U+kP7m7HTFYtKce7p3dgl6IhN3dCoT/gZRqMnSBkZv
-	AZQZkeM+U+7tW7e3UVYPvtRwh3d3HrqCpdMBdcHdjLTJN710n58L8jQCMHzmZxMV3m20
-	dZOqbMO0tXDS9s4Z1rzJRWSk+Cfa4piKtEdKo=
-Received: by 10.142.217.18 with SMTP id p18mr2667592wfg.341.1286587032021;
-	Fri, 08 Oct 2010 18:17:12 -0700 (PDT)
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=r3w5aKL2cUEXmfiEucz3QVGTGIwrYqWAqhYk/LoCfjf80Eh2zIXZ4ddfSwLv0bjPbH
+	HkmPcwymA16xYQO9y5/9KWycWH0BzRPmgoato6km5Pex4purHjXcSlBzlexZy2GgR5OE
+	U7ZW3OYLtW3f07nD53zaPAbPgis9xAt3m7WqY=
+Received: by 10.90.93.9 with SMTP id q9mr2009539agb.103.1286602492974; Fri, 08
+	Oct 2010 22:34:52 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.154.19 with HTTP; Fri, 8 Oct 2010 18:16:51 -0700 (PDT)
-In-Reply-To: <1286544852-15635-1-git-send-email-msmith@cbnco.com>
-References: <1286544852-15635-1-git-send-email-msmith@cbnco.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 8 Oct 2010 18:16:51 -0700
-X-Google-Sender-Auth: pRL7lCEuw3LaM2-i7A5InOvenkU
-Message-ID: <AANLkTi=9bQq6q8NBTPgHhGMfmLs6Ae+oiLugNd+RyK=2@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Received: by 10.91.77.10 with HTTP; Fri, 8 Oct 2010 22:34:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 8 Oct 2010 22:34:32 -0700
+Message-ID: <AANLkTikN6gTqrT76Bn2c_BWa=1MHE9cJd1v=5r2QGn8u@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v2] package.bbclass: copy dotfiles in root D to PKGD
+Subject: Prefer wget 1.12 by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,23 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 01:17:38 -0000
+X-List-Received-Date: Sat, 09 Oct 2010 05:35:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Oct 8, 2010 at 6:34 AM, Michael Smith <msmith@cbnco.com> wrote:
+Hi
 
-> Use shutil.copytree() to copy D ("image") to PKGD ("package"). The
-> previous system("cp %s/* ...") missed dotfiles/dirs at the top-level.
->
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
->
+Right now we use wget_1.9.1.bb if someone did not pin wget to other
+versions. We have recipes from later versions
+like 1.12 but they have DEFAULT_PREFERENCE="-1"
+1.9.1 has problems building with -j > 1 as many times build break with
+Text File busy errors.
 
+I would like to propose that we upgrade defaults to 1.12. If someone
+has objections here is your chance.
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Thanks
+-Khem
+
 
