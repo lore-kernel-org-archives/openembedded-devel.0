@@ -1,45 +1,45 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P4ocs-0004bA-Lq
+	(envelope-from <raj.khem@gmail.com>) id 1P4pZ9-00063l-8M
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 07:39:18 +0200
-Received: by qwd6 with SMTP id 6so1095168qwd.6
+	Sun, 10 Oct 2010 08:39:28 +0200
+Received: by ywl5 with SMTP id 5so753578ywl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Oct 2010 22:38:50 -0700 (PDT)
+	Sat, 09 Oct 2010 23:39:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=wi1xGY5ekZC+tYADOFqe+25cgqI17M8JLsSFtXXYHiw=;
-	b=g9XqeuV5btsUxXxUUy4j2YimNn8ls3i6ngiedk1XqHd3h06r61iSFNSLjtJOKHUak2
-	3aInlXOEQS66ibvlT7kT3zz0lFfhjmebEDD4m1Zk/kV9ySnI5qtjoL1Yva1eqNYizjPF
-	WEaLB8+cG4Z4uL2b7jskISARzJ+rjLsg31qBA=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=Zi5pI3N9R7q+OXlOFM56yH06Np+VfRLtXM3Zs98pelc=;
+	b=IxVYR9jw4w07iM27T0f5u9aN3RIU+Fo81cWMZmm4TRrg7a5KLynbwzgZOOtSdWZddj
+	OgeHt2rdIsX8+wkbwNXy3/BaapyWlHXAmO8lMTr1dOOgcjbOAkOq3LxFmz3INZ1ycJOw
+	v4GDsaLGv/h8LKU5ZmWYgNpfQd572grKzkmHg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=O5lNhS4sHFVZW7lBts4Gbwk0eN8hs2PvzqzqauApBh8UEEHVaLANTIxYVr2Hq0tyj1
-	oAaNHoGko8bCm6+EQvZwKk4lc4Tn5c/oLOJ/nETj5C7rkzd4N+c3oeLxCu0mimlXrl4K
-	fb5nUBboYWGU6LG1jWeKXJAby4jTTA49M9M4U=
-Received: by 10.229.231.3 with SMTP id jo3mr3791844qcb.21.1286689130148;
-	Sat, 09 Oct 2010 22:38:50 -0700 (PDT)
-Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
-	[24.251.170.95])
-	by mx.google.com with ESMTPS id e17sm4368555qcs.46.2010.10.09.22.38.48
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 09 Oct 2010 22:38:49 -0700 (PDT)
-From: Chris Larson <kergoth@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=h98S0G6hXqQGmLi7Pna4g8sT2RfWlpKK01OJKUPp2rJUQUyCkziE2ZFnnMgfv07dcx
+	zuAtYeunLNH5JgTHlI7o574sh6Nj23psKPVWShr6EljO4sZPz1NIyZfbC6cWQE674WIe
+	Dom6Ma1qg880FuvB6o4pLo5D/bN+Daa38VU9w=
+Received: by 10.90.106.9 with SMTP id e9mr2386377agc.147.1286692742325; Sat,
+	09 Oct 2010 23:39:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.91.77.10 with HTTP; Sat, 9 Oct 2010 23:38:42 -0700 (PDT)
+In-Reply-To: <1286689119-25553-1-git-send-email-kergoth@gmail.com>
+References: <1286689119-25553-1-git-send-email-kergoth@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 9 Oct 2010 23:38:42 -0700
+Message-ID: <AANLkTimRXH=4E4-qwBC2UTVuYo59VQXCT4cf50FWdE=5@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Oct 2010 22:38:39 -0700
-Message-Id: <1286689119-25553-1-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 1.7.2.3
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chris Larson <chris_larson@mentor.com>
-Subject: [PATCH] bitbake.conf: fix pkg-config relocation issue
+Subject: Re: [PATCH] bitbake.conf: fix pkg-config relocation issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,41 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Oct 2010 05:39:18 -0000
+X-List-Received-Date: Sun, 10 Oct 2010 06:39:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Chris Larson <chris_larson@mentor.com>
+On Sat, Oct 9, 2010 at 10:38 PM, Chris Larson <kergoth@gmail.com> wrote:
+> From: Chris Larson <chris_larson@mentor.com>
+>
+> By default, pkg-config falls back to checking the default search path for=
+ .pc
+> files, which is the native location. =C2=A0If you relocate it, it will be=
+ unable to
+> hit that location, which can cause problems in certain cases. =C2=A0In pa=
+rticular,
+> gnome-bluetooth requires gtk-doc-native to run its tools, and uses pkg-co=
+nfig
+> to determine its availability.
+>
+> Fix by adding the native pkg-config locations to the PKG_CONFIG_PATH.
+>
+> Signed-off-by: Chris Larson <chris_larson@mentor.com>
 
-By default, pkg-config falls back to checking the default search path for .pc
-files, which is the native location.  If you relocate it, it will be unable to
-hit that location, which can cause problems in certain cases.  In particular,
-gnome-bluetooth requires gtk-doc-native to run its tools, and uses pkg-config
-to determine its availability.
-
-Fix by adding the native pkg-config locations to the PKG_CONFIG_PATH.
-
-Signed-off-by: Chris Larson <chris_larson@mentor.com>
----
- conf/bitbake.conf |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 4e80d97..71f15a8 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -636,8 +636,9 @@ SLOT = "0"
- 
- # Other
- 
--export PKG_CONFIG_DIR = "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${TARGET_VENDOR}-${TARGET_OS}${libdir}/pkgconfig"
--export PKG_CONFIG_PATH = "${PKG_CONFIG_DIR}:${STAGING_DATADIR}/pkgconfig"
-+export PKG_CONFIG_PATH = "${STAGING_LIBDIR}/pkgconfig:${STAGING_DATADIR}/pkgconfig"
-+PKG_CONFIG_PATH .= ":${STAGING_LIBDIR_NATIVE}/pkgconfig:${STAGING_DATADIR_NATIVE}/pkgconfig"
-+
- export PKG_CONFIG_SYSROOT_DIR = "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
- export PKG_CONFIG_DISABLE_UNINSTALLED = "yes"
- 
--- 
-1.7.2.3
-
+Acked-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =C2=A0conf/bitbake.conf | =C2=A0 =C2=A05 +++--
+> =C2=A01 files changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 4e80d97..71f15a8 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -636,8 +636,9 @@ SLOT =3D "0"
+>
+> =C2=A0# Other
+>
+> -export PKG_CONFIG_DIR =3D "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${TARGET_V=
+ENDOR}-${TARGET_OS}${libdir}/pkgconfig"
+> -export PKG_CONFIG_PATH =3D "${PKG_CONFIG_DIR}:${STAGING_DATADIR}/pkgconf=
+ig"
+> +export PKG_CONFIG_PATH =3D "${STAGING_LIBDIR}/pkgconfig:${STAGING_DATADI=
+R}/pkgconfig"
+> +PKG_CONFIG_PATH .=3D ":${STAGING_LIBDIR_NATIVE}/pkgconfig:${STAGING_DATA=
+DIR_NATIVE}/pkgconfig"
+> +
+> =C2=A0export PKG_CONFIG_SYSROOT_DIR =3D "${STAGING_DIR}/${BASE_PACKAGE_AR=
+CH}${TARGET_VENDOR}-${TARGET_OS}"
+> =C2=A0export PKG_CONFIG_DISABLE_UNINSTALLED =3D "yes"
+>
+> --
+> 1.7.2.3
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
