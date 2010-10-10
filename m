@@ -1,30 +1,47 @@
-Received: from asmtpout028.mac.com ([17.148.16.103])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1P4iwb-0004rl-4I
+	(envelope-from <kergoth@gmail.com>) id 1P4jbQ-00031s-0n
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 01:35:14 +0200
-MIME-version: 1.0
-Received: from [192.168.1.100] ([87.201.169.78])
-	by asmtp028.mac.com (Oracle Communications Messaging Exchange Server
-	7u4-18.01 64bit (built Jul 15 2010)) with ESMTPSA id
-	<0LA10082AO17II40@asmtp028.mac.com>
-	for openembedded-devel@lists.openembedded.org; Sat,
-	09 Oct 2010 15:34:23 -0700 (PDT)
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Sun, 10 Oct 2010 02:34:12 +0400
-Message-id: <9A9E6124-07E1-473D-8EAE-3162046BF474@mac.com>
-To: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 17.148.16.103
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	Sun, 10 Oct 2010 02:17:42 +0200
+Received: by wwe15 with SMTP id 15so2000054wwe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 09 Oct 2010 17:17:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=mlS1Zuua55WKk78yE1s6MVohj2sVljaL9a0r8V2hLWM=;
+	b=p13bwsGcooegTZfHyY0HKgIHjlzITZdOFb/EV8witcvs5UiuuTDpfD9Xw5XRcSfZmN
+	2rFHI2Pnmm+yd7RWFquBZvONbx3j3kzFHGoR8IPTbtl/Lg6uUXlB/Q2Hyt2fMVMmJgnZ
+	KlA9J+KuePfb9j88RWHOdrVajyhpiD1B0Blz4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=CMx8K3LDVOXW35khOGZG6kILBQ3ViYaW5ZCNva/AoGWkw9coierY30yesdYVrYDwx6
+	5mupImdNFQdnr5hk+C8SyQRoN4SwXAM4GpnVxZmk0p4FUP0Q3KMhVKYQXpTNkhYUX7fc
+	wxn85UzvDqOermzI51z1czJF49TyHD2OsgLUs=
+Received: by 10.216.71.206 with SMTP id r56mr2232653wed.29.1286669820212; Sat,
+	09 Oct 2010 17:17:00 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.0.142 with HTTP; Sat, 9 Oct 2010 17:16:40 -0700 (PDT)
+In-Reply-To: <AANLkTikmzD_v4YbOAMq3GX42=Tw0p-f6pWc8JXJyj5=m@mail.gmail.com>
+References: <AANLkTikmzD_v4YbOAMq3GX42=Tw0p-f6pWc8JXJyj5=m@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sat, 9 Oct 2010 17:16:40 -0700
+X-Google-Sender-Auth: 1rti0LScXNe_9NF0M-7x4FvN4OY
+Message-ID: <AANLkTincZByMDAyZZoUEsfR+OFjznvZFj1Efk3mBSx7o@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: kernel packaged staging issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,29 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Oct 2010 23:35:15 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; CHARSET=US-ASCII
+X-List-Received-Date: Sun, 10 Oct 2010 00:17:43 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
-      I just updated my overo-oe repo today, and I'm getting some strange errors now. What could be causing this?
+On Sat, Oct 9, 2010 at 2:51 PM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
 
-NOTE: Running task 702 of 710 (ID: 18, /tool/overo-oe/user.collection/recipes/linux/linux-omap3_2.6.32.bb, do_package)
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/kallsyms: File format not recognized
-arm-angstrom-linux-gnueabi-strip:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/kallsyms: File format not recognized
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/kallsyms: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/kallsyms'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/bin2c: File format not recognized
-arm-angstrom-linux-gnueabi-strip:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/bin2c: File format not recognized
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/bin2c: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/bin2c'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/conmakehash: File format not recognized
-arm-angstrom-linux-gnueabi-strip:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/conmakehash: File format not recognized
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.32-r90/package/kernel/scripts/conmakehash: File format not recognized
+> Tried to rebuild an image from packaged staging and got the following
+> error for my kernel:
+> install: cannot stat `arch/arm/boot/uImage': No such file or directory
+> This is from
+> /home/frans/oe/tmp_minimal/work/sheevaplug-oe-linux-gnueabi/linux-kirkwood-2.6.32+2.6.33-rc5-r18/temp/log.do_deploy.4309
+>
 
-Best regards,
-
-Elvis Dowson
-
-
+Make certain that do_deploy runs before package_stage.  If a task might run
+before it, or after it, then whether those files are included in the pstage
+package will vary.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
