@@ -1,48 +1,31 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P4zQR-00035s-HT
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 19:11:08 +0200
-Received: by wyf23 with SMTP id 23so2166018wyf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Oct 2010 10:10:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=o7xAW97IGXhdgAeKXLJqjDObQfr+/uOPhpVxRPqDrb0=;
-	b=mh9wcTtVRlCEElZHRB0rltNXV7YWY2oiWByMvQijKsHpXnDT1cF5VzhdsA77BA4G5H
-	3jHjmlGPNHCbe+SrGy5O2MfxMKrTv0tW9K89YXanWZZLEmp/4dcxM8nheWQZ92jdr3W/
-	CpN1k+zy3j1JXafR86+RapneiZfsL25uMjaEo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=s7hlTGJunlUXCtYsx7WHMPQQkZNeCwvTPzINnCcvuI3hgnjrvWWbvNpaYFLkvdiMb+
-	wuMdTzVlT62zVsl/WQksfA80aC8C03Ee5ipuQ7Dov7kkESBgTEIiTXmvXXjfZmjdY/G2
-	UBqxn7gPE3RbO8bD2azEjaerynCUlJw5muzLY=
-Received: by 10.216.45.16 with SMTP id o16mr2868902web.45.1286730639458; Sun,
-	10 Oct 2010 10:10:39 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.142 with HTTP; Sun, 10 Oct 2010 10:10:19 -0700 (PDT)
-In-Reply-To: <4CB1EEFA.7080607@mlbassoc.com>
-References: <98B362E0-7357-4934-82C7-9BBA35FEF271@mac.com>
-	<4CB1EEFA.7080607@mlbassoc.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sun, 10 Oct 2010 10:10:19 -0700
-X-Google-Sender-Auth: nCofYhN4TNK1Qmr2-s-vW9g8TQw
-Message-ID: <AANLkTinGHx=rrAA-cv9W-MafZZp04-YfYmnQAuxrKcAe@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P4zRt-0003Bi-G4 for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 19:12:37 +0200
+Received: from f053041069.adsl.alicedsl.de ([78.53.41.69]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P4zRX-0002BO-5q for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 17:12:15 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <1286728355.3808.55.camel@mattotaupa>
+References: <1286728355.3808.55.camel@mattotaupa>
+Date: Sun, 10 Oct 2010 19:12:13 +0200
+Message-ID: <1286730733.3808.92.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: arm-angstrom-linux-gnueabi-gcc compiler
+Subject: Re: environment variable `PKG_CONFIG` not set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,33 +39,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Oct 2010 17:11:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 10 Oct 2010 17:12:37 -0000
+X-Groupsio-MsgNum: 24615
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ngzG/gaLx54ZNvEEB5TG"
 
-On Sun, Oct 10, 2010 at 9:51 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+--=-ngzG/gaLx54ZNvEEB5TG
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> On 10/10/2010 10:49 AM, Elvis Dowson wrote:
->
->> Hi,
->>       I just built the omap3-console-image using a recently synced version
->> of the overo-oe repository.
->>
->> It no longer generates the /tmp/cross folder with the
->> arm-angstrom-linux-gnueabi-gcc cross compiler.
->>
->> Has somethings changed? Which recipe should I use to generate the cross
->> compiler? Is it gcc-cross?
->>
->
-> The compiler is still there - look in tmp/sysroots
+Am Sonntag, den 10.10.2010, 18:32 +0200 schrieb Paul Menzel:
+> Dear OE folks,
+>=20
+>=20
+> looking at `run.do_compile.xxxxx` I noticed that `PKG_CONFIG` is not
+> set. Several other pkg-config related environment variable get set, so I
+> am quite surprised.
+>=20
+> Does this have to be added to `classes/{native,nativesdk,sdk}.bbclass`?
+
+This would also be the =E2=80=9Ccorrect=E2=80=9D fix for [1] and [2] if I a=
+m not wrong.
 
 
-And of course, if your intent is to use the toolchain from outside of OE, it
-may be better to look at meta-toolchain.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Thanks,
 
+Paul
+
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-August/023=
+029.html
+[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-September/=
+024217.html
+
+--=-ngzG/gaLx54ZNvEEB5TG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyx8+0ACgkQPX1aK2wOHVjAYgCeMIlPcpL6qMUt3E3rogjqOlI1
+aC4Ani/v7awbem1m2o1MComGp7KI1b/X
+=BqpP
+-----END PGP SIGNATURE-----
+
+--=-ngzG/gaLx54ZNvEEB5TG--
