@@ -1,29 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P4uaT-0007Mq-Fn for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 14:01:09 +0200
-Received: from f053041069.adsl.alicedsl.de ([78.53.41.69]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P4ua6-000542-So for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 12:00:47 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P4va7-0008FO-Da for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 15:04:53 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P4vZg-0005eZ-JV for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 15:04:24 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Oct 2010 15:04:24 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Oct 2010 15:04:24 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Oct 2010 14:00:45 +0200
-Message-ID: <1286712045.3808.47.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 10 Oct 2010 15:04:16 +0200
+Message-ID: <i8sdkg$l9$1@dough.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Why did the GObject Introspection build errors only surface on my build host?
+Subject: NOTE: <type 'exceptions.AttributeError'>:type object 'itertools.chain' has no attribute 'from_iterable' while evaluating:, ${@' '.join(oe.packagegroup.required_packages('image_base '.split(), d))} ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "opkg angstrom-version angstrom-feed-configs opkg-collateral", d)}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,48 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Oct 2010 12:01:09 -0000
-X-Groupsio-MsgNum: 24603
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-ds7weVhLkrTzJ6WhcBti"
+X-List-Received-Date: Sun, 10 Oct 2010 13:04:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-ds7weVhLkrTzJ6WhcBti
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear OE folks,
+Hi,
 
-
-can you tell me why I am the only one being hit by the GObject
-Introspection =E2=80=9Cbreakage=E2=80=9D?
-
-I do not have GNOME or other development packages installed locally on
-my build host. Might this be the problem?
-
-I guess most of you are using the development branch and test the latest
-changes.
+Since this weekend I can't build anything due to parsing errors:
 
 
-Thanks,
+NOTE: <type 'exceptions.AttributeError'>:type object 'itertools.chain'
+has no attribute 'from_iterable' while evaluating:
+${@' '.join(oe.packagegroup.required_packages('image_base '.split(),
+d))} ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "opkg
+angstrom-version angstrom-feed-configs opkg-collateral", d)}
 
-Paul
 
+regards,
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-October/02=
-5271.html
-    "Inclusion of `gobject-introspection` breaks several packages."
-
---=-ds7weVhLkrTzJ6WhcBti
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkyxqu0ACgkQPX1aK2wOHVg2jgCfWpZo0nsSewYvHfp/051dNwkq
-RTsAn2rSD2xMA8BRlcfVursv82XA8beM
-=s1Lq
+iD8DBQFMsbnPMkyGM64RGpERAhPFAKCB8RHqLegXmv9r3PB5ycGJoo1zLACfXAV1
+bIuagrXHpfQo/YcI/S4n67M=
+=Bm7A
 -----END PGP SIGNATURE-----
 
---=-ds7weVhLkrTzJ6WhcBti--
+
+
