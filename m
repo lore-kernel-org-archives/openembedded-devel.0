@@ -1,44 +1,32 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P4rz5-0004HC-G5
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 11:14:24 +0200
-Received: by gxk25 with SMTP id 25so763445gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Oct 2010 02:13:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=NNvQyAnKvccMiwXOnHd5oudGcRVB4CJFvQwwI4tCeDs=;
-	b=hFZsqbJ27YrgUzHyhquNLK9lefd44Hm0Fm5r2p3Xb+oG5XWPLlXT3zWRlvDeI4osGF
-	onUDXJjElDkHWuwcjZmbOqTQWD9G/VE4/bM5+jukpfnXVzUGJwiGso/AU5DZzKEtuvzc
-	wc4bFNtGkNYi6rfjGl+4vlPDALHevas9V4qPY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=Atfjg035+Cufm5BIlqjLy4TUpui7f3xW9FFPJhw5D+Xgiqm10MADzWxgNEG13H0iID
-	aSDY9XTlIL63Oonft+si6JsmgVDSCxUKY62b8H2Dcqy/4G5HHk2qq5NzqEVpX6it6+GS
-	JYRIJfrLiLJOT2qrf8biPCwYKiOdq1nvvSvdM=
-Received: by 10.90.116.12 with SMTP id o12mr2632108agc.195.1286702038333; Sun,
-	10 Oct 2010 02:13:58 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.91.77.10 with HTTP; Sun, 10 Oct 2010 02:13:37 -0700 (PDT)
-In-Reply-To: <1286698831.3808.2.camel@mattotaupa>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P4sMS-0004A3-2u for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 11:38:53 +0200
+Received: from f053041069.adsl.alicedsl.de ([78.53.41.69]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P4sM5-0006Jw-PP for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 09:38:10 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTimXU=NzmwqCpnho5ukCVoXnF5qR_4D6XWN4RaWr@mail.gmail.com>
 References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>
 	<AANLkTimS+bg0XpWvAav0JX4qaf0b=CydG6_HQ0XHMo-h@mail.gmail.com>
 	<AANLkTinQ4uW=o43O5Bv6FijfoicU2CL5j3Zn8zWf5Snm@mail.gmail.com>
 	<1286664909.15886.13.camel@saphir> <1286698831.3808.2.camel@mattotaupa>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 10 Oct 2010 02:13:37 -0700
-Message-ID: <AANLkTimXU=NzmwqCpnho5ukCVoXnF5qR_4D6XWN4RaWr@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	<AANLkTimXU=NzmwqCpnho5ukCVoXnF5qR_4D6XWN4RaWr@mail.gmail.com>
+Date: Sun, 10 Oct 2010 11:38:05 +0200
+Message-ID: <1286703485.3808.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: testing branch 2010-10-08
@@ -55,42 +43,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Oct 2010 09:14:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 10 Oct 2010 09:39:14 -0000
+X-Groupsio-MsgNum: 24597
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-PzTn5PxIUAFndRhOhsSy"
+
+--=-PzTn5PxIUAFndRhOhsSy
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 10, 2010 at 1:20 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Am Sonntag, den 10.10.2010, 00:55 +0200 schrieb Michael 'Mickey' Lauer:
->> Am Samstag, den 09.10.2010, 22:58 +0200 schrieb Frans Meulenbroeks:
->> > libgee-native configure is failing:
->> > http://tinderbox.openembedded.net/public/logs/task/8568667.txt
->>
->> Does it contain 72c2ac940065948cb688fde821e51efac6b71b4b, which was
->> supposed to fix that?
->
-> That is the exact same issues I reported 12 hours earlier [1].
->
->
+Am Sonntag, den 10.10.2010, 02:13 -0700 schrieb Khem Raj:
+> On Sun, Oct 10, 2010 at 1:20 AM, Paul Menzel wrote:
+> > Am Sonntag, den 10.10.2010, 00:55 +0200 schrieb Michael 'Mickey' Lauer:
+> >> Am Samstag, den 09.10.2010, 22:58 +0200 schrieb Frans Meulenbroeks:
+> >> > libgee-native configure is failing:
+> >> > http://tinderbox.openembedded.net/public/logs/task/8568667.txt
+> >>
+> >> Does it contain 72c2ac940065948cb688fde821e51efac6b71b4b, which was
+> >> supposed to fix that?
+> >
+> > That is the exact same issues I reported 12 hours earlier [1].
+>=20
+> I fixed it by not reautoconfing for now I think it should be
+> good enough.
 
-I fixed it by not reautoconfing for now I think it should be
-good enough.
+Thank you for doing that. This is commit 88cb82 [2].=20
 
-> Thanks,
->
-> Paul
->
->
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-October/=
-025222.html
-> =C2=A0 =C2=A0"DEPENDS not honored: `do_configure` runs before `do_populat=
-e_sysroot` of dependencies"
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+        libgee_0.5.2.bb/libgee_0.6.0.bb: Fix native recipe build
+
+Could you please at least add a link to the list thread describing the
+problem to the commit message next time, so people know what is being
+fixed. I know it takes more time and I should be glad that you are so
+responsive and that you fix things quickly. And I am thankful. But in
+the end it will save other people=E2=80=99s time if those things are docume=
+nted
+properly.
+
+And still, the other thread [1] should find a conclusion, since for me
+it looks like the current behavior is wrong.
 
 
+Thanks,
+
+Paul
+
+
+> > [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-Octobe=
+r/025222.html
+> >    "DEPENDS not honored: `do_configure` runs before `do_populate_sysroo=
+t` of dependencies"
+
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D88cb823=
+7bcad77fc2a64a1e84b6be63c94ce8b58
+
+--=-PzTn5PxIUAFndRhOhsSy
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyxiX0ACgkQPX1aK2wOHVi3WQCgiaVJkHqxxL79bMFcNCW7RnHg
+kzkAnidhjDoWL8SMRg/JDKLRVeLd1Qdd
+=fXrI
+-----END PGP SIGNATURE-----
+
+--=-PzTn5PxIUAFndRhOhsSy--
