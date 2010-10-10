@@ -1,42 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4yeJ-0006Kz-6Q for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 18:21:23 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P4ydw-0004kl-LC for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 18:21:00 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Oct 2010 18:21:00 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Oct 2010 18:21:00 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P4ypX-00006Y-2Y for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 18:32:59 +0200
+Received: from f053041069.adsl.alicedsl.de ([78.53.41.69]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P4ypA-0008WL-Gi for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 16:32:36 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 10 Oct 2010 18:20:51 +0200
-Message-ID: <i8sp53$e3u$1@dough.gmane.org>
-References: <AANLkTinXMTt3EOwSTnFaeXH7tSKBAjRTiH1DddrBSUVG@mail.gmail.com>
+Date: Sun, 10 Oct 2010 18:32:34 +0200
+Message-ID: <1286728355.3808.55.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <AANLkTinXMTt3EOwSTnFaeXH7tSKBAjRTiH1DddrBSUVG@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: NOTE: <type 'exceptions.AttributeError'>:type object 'itertools.chain' has no attribute 'from_iterable' while evaluating:, ${@' '.join(oe.packagegroup.required_packages('image_base '.split(), d))} ${@base_conditional("ONLINE_PACKAGE_MANAGEME
+Subject: environment variable `PKG_CONFIG` not set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,37 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Oct 2010 16:21:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 10 Oct 2010 16:32:59 -0000
+X-Groupsio-MsgNum: 24609
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-5gI6VkrOchjINFfyELW5"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-5gI6VkrOchjINFfyELW5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 10-10-10 17:40, Chris Larson wrote:
-> On Sun, Oct 10, 2010 at 6:04 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
-> 
->> Since this weekend I can't build anything due to parsing errors:
->>
->>
->> NOTE: <type 'exceptions.AttributeError'>:type object 'itertools.chain'
->> has no attribute 'from_iterable' while evaluating:
->> ${@' '.join(oe.packagegroup.required_packages('image_base '.split(),
->> d))} ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "opkg
->> angstrom-version angstrom-feed-configs opkg-collateral", d)}
->>
-> 
-> Oops, my mistake -- forgot that from_iterable is only available in some
-> python versions.  Should be fixed now.
+Dear OE folks,
 
-Indeed, thanks for the quick fix!
+
+looking at `run.do_compile.xxxxx` I noticed that `PKG_CONFIG` is not
+set. Several other pkg-config related environment variable get set, so I
+am quite surprised.
+
+Does this have to be added to `classes/{native,nativesdk,sdk}.bbclass`?
+
+
+Thanks,
+
+Paul
+
+--=-5gI6VkrOchjINFfyELW5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFMsefiMkyGM64RGpERApT2AKCPAwh3uiVixi62duEyVMnUDN4fGgCgqyUD
-YZfhM9QAWUyZphQB1i+kK+w=
-=Ach1
+iEYEABECAAYFAkyx6qIACgkQPX1aK2wOHVgabQCfcA79AIPdxfhsxljxmDe3813Y
+faIAn0wbu5cG9ETYjp9ZhT6vwIeA82UZ
+=aUnP
 -----END PGP SIGNATURE-----
 
-
-
+--=-5gI6VkrOchjINFfyELW5--
