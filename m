@@ -1,29 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from asmtpout025.mac.com ([17.148.16.100])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P4ypX-00006Y-2Y for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 18:32:59 +0200
-Received: from f053041069.adsl.alicedsl.de ([78.53.41.69]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P4ypA-0008WL-Gi for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 16:32:36 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Oct 2010 18:32:34 +0200
-Message-ID: <1286728355.3808.55.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <elvis.dowson@mac.com>) id 1P4z6B-0000NI-Pq
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 18:50:12 +0200
+MIME-version: 1.0
+Received: from [192.168.1.100] ([87.201.169.78])
+	by asmtp025.mac.com (Oracle Communications Messaging Exchange Server
+	7u4-18.01 64bit (built Jul 15 2010)) with ESMTPSA id
+	<0LA3001QM2QHEL40@asmtp025.mac.com>
+	for openembedded-devel@lists.openembedded.org; Sun,
+	10 Oct 2010 09:49:32 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@mac.com>
+Date: Sun, 10 Oct 2010 20:49:23 +0400
+Message-id: <98B362E0-7357-4934-82C7-9BBA35FEF271@mac.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 17.148.16.100
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: environment variable `PKG_CONFIG` not set
+Subject: arm-angstrom-linux-gnueabi-gcc compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,40 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Oct 2010 16:32:59 -0000
-X-Groupsio-MsgNum: 24609
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-5gI6VkrOchjINFfyELW5"
+X-List-Received-Date: Sun, 10 Oct 2010 16:50:12 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; CHARSET=US-ASCII
 
---=-5gI6VkrOchjINFfyELW5
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
+      I just built the omap3-console-image using a recently synced version of the overo-oe repository. 
 
-Dear OE folks,
+It no longer generates the /tmp/cross folder with the arm-angstrom-linux-gnueabi-gcc cross compiler. 
 
+Has somethings changed? Which recipe should I use to generate the cross compiler? Is it gcc-cross?
 
-looking at `run.do_compile.xxxxx` I noticed that `PKG_CONFIG` is not
-set. Several other pkg-config related environment variable get set, so I
-am quite surprised.
-
-Does this have to be added to `classes/{native,nativesdk,sdk}.bbclass`?
+Elvis Dowson
 
 
-Thanks,
-
-Paul
-
---=-5gI6VkrOchjINFfyELW5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyx6qIACgkQPX1aK2wOHVgabQCfcA79AIPdxfhsxljxmDe3813Y
-faIAn0wbu5cG9ETYjp9ZhT6vwIeA82UZ
-=aUnP
------END PGP SIGNATURE-----
-
---=-5gI6VkrOchjINFfyELW5--
