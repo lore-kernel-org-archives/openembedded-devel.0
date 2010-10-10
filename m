@@ -1,35 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P4sMS-0004A3-2u for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 11:38:53 +0200
-Received: from f053041069.adsl.alicedsl.de ([78.53.41.69]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P4sM5-0006Jw-PP for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Oct 2010 09:38:10 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1P4saE-0003qP-AJ
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Oct 2010 11:52:47 +0200
+Received: by pzk2 with SMTP id 2so98248pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Oct 2010 02:52:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=nlT1SP6rU2+R1SIih46icFp7ZA3WIQrvKuesQUk5mmE=;
+	b=fo3yxzvPUjTErPBxNuEgGd+AhHCgaaMx9w/VdfInnXmtN9NYUoT/uQVlMC4NoUabXQ
+	YqN3ootdzIgLyjRfWlbo9S8Fh38xNGf9RbQCnyaow5b2YbxJk2uufzSjHz6Opr1tXC3s
+	qZeAwVT6N8dBVIcTrW2lwv/gJw2ZqOIKSaNDg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=YxlYKTC23udMHLrZ3nrZOpT6xy+DmNDx7zjmp6FQmlJYb7WLArAV4lr7d2Ly7mfg5M
+	TlCS+L/rikzFqSplr40Z343OPMu7oQNvHwnG0l9q4cZ/K4slVqLb9qyCY6CpYyI2jKnG
+	eIcflG5G7/gdQHkBgkIaNVRl42AtjFHjOevwo=
+Received: by 10.114.79.10 with SMTP id c10mr5430768wab.220.1286704339192;
+	Sun, 10 Oct 2010 02:52:19 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id d31sm7721890wam.5.2010.10.10.02.52.18
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 10 Oct 2010 02:52:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimXU=NzmwqCpnho5ukCVoXnF5qR_4D6XWN4RaWr@mail.gmail.com>
-References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>
-	<AANLkTimS+bg0XpWvAav0JX4qaf0b=CydG6_HQ0XHMo-h@mail.gmail.com>
-	<AANLkTinQ4uW=o43O5Bv6FijfoicU2CL5j3Zn8zWf5Snm@mail.gmail.com>
-	<1286664909.15886.13.camel@saphir> <1286698831.3808.2.camel@mattotaupa>
-	<AANLkTimXU=NzmwqCpnho5ukCVoXnF5qR_4D6XWN4RaWr@mail.gmail.com>
-Date: Sun, 10 Oct 2010 11:38:05 +0200
-Message-ID: <1286703485.3808.10.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Sun, 10 Oct 2010 02:52:13 -0700
+Message-Id: <1286704333-27208-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-10-08
+Subject: [PATCH] bitbake.conf: Increase IMAGE_EXTRA_SPACE 4 times
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,70 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Oct 2010 09:39:14 -0000
-X-Groupsio-MsgNum: 24597
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-PzTn5PxIUAFndRhOhsSy"
+X-List-Received-Date: Sun, 10 Oct 2010 09:52:47 -0000
 
---=-PzTn5PxIUAFndRhOhsSy
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* Building native-sdk-image or x11-image genext2fs fails
+  as it runs out of space. This change helps it with extra
+  space needs.
 
-Am Sonntag, den 10.10.2010, 02:13 -0700 schrieb Khem Raj:
-> On Sun, Oct 10, 2010 at 1:20 AM, Paul Menzel wrote:
-> > Am Sonntag, den 10.10.2010, 00:55 +0200 schrieb Michael 'Mickey' Lauer:
-> >> Am Samstag, den 09.10.2010, 22:58 +0200 schrieb Frans Meulenbroeks:
-> >> > libgee-native configure is failing:
-> >> > http://tinderbox.openembedded.net/public/logs/task/8568667.txt
-> >>
-> >> Does it contain 72c2ac940065948cb688fde821e51efac6b71b4b, which was
-> >> supposed to fix that?
-> >
-> > That is the exact same issues I reported 12 hours earlier [1].
->=20
-> I fixed it by not reautoconfing for now I think it should be
-> good enough.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/bitbake.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Thank you for doing that. This is commit 88cb82 [2].=20
-
-        libgee_0.5.2.bb/libgee_0.6.0.bb: Fix native recipe build
-
-Could you please at least add a link to the list thread describing the
-problem to the commit message next time, so people know what is being
-fixed. I know it takes more time and I should be glad that you are so
-responsive and that you fix things quickly. And I am thankful. But in
-the end it will save other people=E2=80=99s time if those things are docume=
-nted
-properly.
-
-And still, the other thread [1] should find a conclusion, since for me
-it looks like the current behavior is wrong.
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 7f01f8f..5bbff4c 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -355,7 +355,7 @@ IMAGE_ROOTFS = "${TMPDIR}/rootfs/${PN}"
+ IMAGE_BASENAME = "${PN}"
+ IMAGE_NAME = "${IMAGE_BASENAME}-${MACHINE}-${DATETIME}"
+ IMAGE_LINK_NAME = "${IMAGE_BASENAME}-${MACHINE}"
+-IMAGE_EXTRA_SPACE = 10240
++IMAGE_EXTRA_SPACE = 40960
+ 
+ UBI_VOLNAME ?= "${MACHINE}-rootfs"
+ 
+-- 
+1.7.1
 
 
-Thanks,
 
-Paul
-
-
-> > [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-Octobe=
-r/025222.html
-> >    "DEPENDS not honored: `do_configure` runs before `do_populate_sysroo=
-t` of dependencies"
-
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D88cb823=
-7bcad77fc2a64a1e84b6be63c94ce8b58
-
---=-PzTn5PxIUAFndRhOhsSy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyxiX0ACgkQPX1aK2wOHVi3WQCgiaVJkHqxxL79bMFcNCW7RnHg
-kzkAnidhjDoWL8SMRg/JDKLRVeLd1Qdd
-=fXrI
------END PGP SIGNATURE-----
-
---=-PzTn5PxIUAFndRhOhsSy--
