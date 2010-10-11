@@ -1,32 +1,50 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1P5JHV-0002ny-1x
+	(envelope-from <sledz@dresearch.de>) id 1P5KOP-0006zF-Vi
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 16:23:19 +0200
-Received: (qmail 24495 invoked by uid 813007); 11 Oct 2010 14:22:40 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 11 Oct 2010 14:22:40 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Oct 2010 16:24:34 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-22-generic; KDE/4.5.2; x86_64; ; )
-References: <AANLkTi=qFpjK39fB7NzZ-aTBfasWBjq5LBxKSbG9dWec@mail.gmail.com>
-	<201010111109.38439.marcin@juszkiewicz.com.pl>
-	<AANLkTi=ZKTqZGhV-qK14+ckj_tNkAwDB-SAcVSvuo9Gg@mail.gmail.com>
-In-Reply-To: <AANLkTi=ZKTqZGhV-qK14+ckj_tNkAwDB-SAcVSvuo9Gg@mail.gmail.com>
+	Mon, 11 Oct 2010 17:34:29 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 270B2491282;
+	Mon, 11 Oct 2010 17:34:02 +0200 (CEST)
+Received: from 192.168.32.8 ([192.168.32.8]) by exchange.intern.dresearch.de
+	([192.168.32.16]) with Microsoft Exchange Server HTTP-DAV ;
+	Mon, 11 Oct 2010 15:34:01 +0000
 MIME-Version: 1.0
-Message-Id: <201010111624.34772.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Received: from 192.168.32.8 ([192.168.32.8]) by exchange.intern.dresearch.de
+	([192.168.32.16]) with Microsoft Exchange Server HTTP-DAV ;
+	Mon, 11 Oct 2010 11:18:14 +0000
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.11) Gecko/20100714 SUSE/3.0.6 Lightning/1.0b1
+	Thunderbird/3.0.6
+Resent-date: Mon, 11 Oct 2010 17:34:00 +0200
+Resent-User-Agent: Mozilla/5.0 (X11; U; Linux i686; de;
+	rv:1.9.1.11) Gecko/20100714 SUSE/3.0.6 Lightning/1.0b1
+	Thunderbird/3.0.6
+Date: Mon, 11 Oct 2010 17:34:01 +0200
+Message-ID: <DB561678F08F554EB0D9F21B70E268A505AF2A@exchange.intern.dresearch.de>
+In-Reply-To: <DB561678F08F554EB0D9F21B70E268A505AF27@exchange.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] testing branch 2010-10-08
+Thread-Index: ActpWbrhHvq466O5S0O8558+ZYjOpg==
+References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>
+	<DB561678F08F554EB0D9F21B70E268A505AF27@exchange.intern.dresearch.de>
+From: "Sledz, Steffen" <sledz@dresearch.de>
+To: "openembedded-devel" <openembedded-devel@lists.openembedded.org>
+Resent-Message-Id: <20101011153402.270B2491282@mail.dresearch.de>
+Resent-From: sledz@dresearch.de
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: zsafe
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: testing branch 2010-10-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 14:23:20 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Oct 2010 15:34:30 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Dnia poniedzia=B3ek, 11 pa=BCdziernika 2010 o 13:46:06 Frans Meulenbroeks=20
-napisa=B3(a):
-> 2010/10/11 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
-
-> > Dropping that FILES_zsafe =3D "zsafe" line may be safe - but I would
-> > suggest doing build to check it.
->=20
-> As someone who never played with opie, I'll leave it to an expert.
-
-"bitbake zsafe" should work for any device in OE. Do Angstrom arm build.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
-
+T24gMTAvMTEvMjAxMCAwOTozNCBBTSwgU2xlZHosIFN0ZWZmZW4gd3JvdGU6DQo+IGRvX2NvbmZp
+Z3VyZSBzdGlsbCBmYWlscyBmb3IgZXBpcGhhbnktMi4zMC4yLXIzIChzZWUNCj4gPGh0dHA6Ly90
+aW5kZXJib3gub3BlbmVtYmVkZGVkLm5ldC9wYWNrYWdlcy84MzUyNjUvPikgd2l0aDoNCj4NCj4g
+ImNoZWNraW5nIGxvY2F0aW9uIG9mIHN5c3RlbSBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkgbGlzdC4u
+Lg0KPiBjb25maWd1cmU6IGVycm9yOiBjb3VsZCBub3QgZmluZC4gVXNlIC0td2l0aC1jYS1maWxl
+PXBhdGgNCj4gdG8gc2V0LCBvciAtLXdpdGhvdXQtY2EtZmlsZSB0byBkaXNhYmxlIg0KPg0KPiBJ
+IHRob3VnaHQgdGhlIGFkZGl0aW9uYWwgY2EtY2VydGlmYWN0ZXMgZGVwZW5kZW5jeSAoc2VlIHRo
+cmVhZA0KPiA8aHR0cDovL3RocmVhZC5nbWFuZS5vcmcvZ21hbmUuY29tcC5oYW5kaGVsZHMub3Bl
+bmVtYmVkZGVkLzM3NDUzL2ZvY3VzPTM3NTg1PikNCj4gZml4ZXMgdGhpcywgYnV0IGl0IGRvZXMg
+bm90IHNlZW0gc28uIDooDQo+DQo+IEknZCBhIGxvb2sgaW50byBteSBvcGVuU1VTRS1zeXN0ZW0g
+YW5kIHRoZXJlIGVwaXBoYW55IHVzZXMNCj4gYSBmaWxlIC92YXIvbGliL2NhLWNlcnRpZmljYXRl
+cy9jYS1idW5kbGUucGVtIChsaW5rZWQgdG8NCj4gL2V0Yy9zc2wvY2EtYnVuZGxlLnBlbSkgaW5z
+dGFsbGVkIGJ5IHRoZSBjYS1jZXJ0aWZpY2F0ZXMgcGFja2FnZS4NCj4NCj4gVGhlIE9FIGNhLWNl
+cnRpZmljYXRlcyBwYWNrYWdlIGRvZXMgbm90IGluc3RhbGwgc3VjaCBhIGJ1bmRsZS4NCj4gU28g
+bWF5IGJlIHRoYXQncyB0aGUgcmVhbCBwcm9ibGVtLg0KDQpBIGxvb2sgaW50byB0aGUgY2EtY2Vy
+dGlmaWNhdGVzIHJlY2lwZSBzaG93cyB0aGlzOg0KDQogIHBrZ19wb3N0aW5zdF8ke1BOfSAoKSB7
+DQogICAgICAgICAgL3Vzci9zYmluL3VwZGF0ZS1jYS1jZXJ0aWZpY2F0ZXMNCiAgfQ0KDQpJIHRo
+aW5rIHRoaXMgaXMgdG8gbGF0ZSBpZiBhbm90aGVyIHBhY2thZ2UgbmVlZHMgdGhlIHJlc3VsdCBm
+cm9tIHRoaXMgY2FsbCBpbiBpdHMgY29uZmlndXJhdGlvbiBzdGFnZS4NCg0KU3RlZmZlbg0KDQoN
+Cg==
 
