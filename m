@@ -1,45 +1,29 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P5GLp-0005Ja-AS
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 13:15:33 +0200
-Received: by bwz9 with SMTP id 9so555729bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 04:15:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=hO3vK2ilwabnmJtln8/CZLJRxopLcdLSVwdQv3sxO18=;
-	b=KMd79gwlTTfBUtaNUAJGg2pSpF0DFhNcGU3uEBYJiLuyNLSbmNKOOXhH10OIaVN0Zf
-	Pmdwd5phonQfQ9UInPRf5D3fOpHCMi/uVck6pHsADq2UJ3WP+JRoEL/dtvqf3rWT/Thz
-	sMcndVj3/praDiJzSaSUIN49qH0sUehd2DiPA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=hS56dCd7fvBRFQVY3Bx4aMGuokGL4yyU5i555jLLEzoOG9LNgUOrxTzCbYqLpjuDLK
-	SqGQwtTSyyGOHiIpAfClkt/oPO6iTDfBykWHe7UpY4TLt6t7m6qUqmudqM5azon1GAU8
-	t11j0vrfCD9BGlcJgrr+mTfcJMUZ85DZ/gD8Q=
-Received: by 10.204.102.72 with SMTP id f8mr4357691bko.57.1286795704822;
-	Mon, 11 Oct 2010 04:15:04 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id a25sm3514305bks.8.2010.10.11.04.15.03
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 11 Oct 2010 04:15:04 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P5GRP-0006QX-TB for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 13:21:17 +0200
+Received: from f053041204.adsl.alicedsl.de ([78.53.41.204]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P5GR2-0007CO-DC for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 11:20:52 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Oct 2010 13:14:57 +0200
-Message-Id: <1286795697-9335-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.3.1
-In-Reply-To: <i8ufbd$27r$1@dough.gmane.org>
-References: <i8ufbd$27r$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Mon, 11 Oct 2010 13:20:51 +0200
+Message-ID: <1286796051.3835.78.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] openjade: return oj-native-libosp-fix.patch, lost in BBCLASSEXTEND change fdf02c61607acb5046afaa11c5c682ab99f4d508
+Subject: gtk+-native: depends somehow on cups-native: `ERROR: Required build target 'gtk+-native' has no buildable providers.`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,31 +37,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 11:15:33 -0000
+X-List-Received-Date: Mon, 11 Oct 2010 11:21:17 -0000
+X-Groupsio-MsgNum: 24666
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-zq+IahuACLefcapjcDli"
 
----
- recipes/openjade/openjade_1.3.2.bb |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+--=-zq+IahuACLefcapjcDli
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes/openjade/openjade_1.3.2.bb b/recipes/openjade/openjade_1.3.2.bb
-index 238586b..9462636 100644
---- a/recipes/openjade/openjade_1.3.2.bb
-+++ b/recipes/openjade/openjade_1.3.2.bb
-@@ -5,9 +5,10 @@ DESCRIPTION = "OpenJade is a suite of tools for validating, \
- processing, and applying DSSSL (Document Style Semantics and \
- Specification Language) stylesheets to SGML and XML documents."
- LICENSE = "BSD"
--PR = "r2"
-+PR = "r3"
- SRC_URI = "${SOURCEFORGE_MIRROR}/openjade/openjade-${PV}.tar.gz \
--	   file://configure.patch \
-+           file://oj-native-libosp-fix.patch \
-+           file://configure.patch \
-           "
- 
- inherit autotools
--- 
-1.7.3.1
+Dear OE folks,
 
 
+	$ bitbake evince
 
+fails with the following error for `angstrom-2010.x` for `MACHINE =3D
+"beagleboard"`.
+
+        ERROR: Required build target 'evince' has no buildable providers.
+        Missing or unbuildable dependency chain was: ['evince', 'gnome-keyr=
+ing', 'gtk+-native', 'cups-native']
+        Command execution failed: Traceback (most recent call last):
+          File "/home/paul/oe/bitbake/lib/bb/command.py", line 88, in runAs=
+yncCommand
+            commandmethod(self.cmds_async, self, options)
+          File "/oe/bitbake/lib/bb/command.py", line 174, in buildTargets
+            command.cooker.buildTargets(pkgs_to_build, task)
+          File "/oe/bitbake/lib/bb/cooker.py", line 784, in buildTargets
+            taskdata.add_unresolved(localdata, self.status)
+          File "/oe/bitbake/lib/bb/taskdata.py", line 556, in add_unresolve=
+d
+            self.remove_buildtarget(targetid)
+          File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buildt=
+arget
+            self.fail_fnid(fnid, missing_list)
+          File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+            self.remove_buildtarget(target, missing_list)
+          File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buildt=
+arget
+            self.fail_fnid(fnid, missing_list)
+          File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+            self.remove_buildtarget(target, missing_list)
+          File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buildt=
+arget
+            self.fail_fnid(fnid, missing_list)
+          File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+            self.remove_buildtarget(target, missing_list)
+          File "/oe/bitbake/lib/bb/taskdata.py", line 519, in remove_buildt=
+arget
+            raise bb.providers.NoProvider
+        NoProvider
+
+`gtk+.inc` `DEPENDS` on `cups` [1]. Is this converted to `cups-native` for =
+`gtk+-native`?
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gtk+/gt=
+k+.inc
+
+--=-zq+IahuACLefcapjcDli
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyy8xMACgkQPX1aK2wOHVhVzQCgh1L4xaZRF1MhERma4c4dn1yX
+pJAAn1363Ir2JI7tbUb5QDx9Hw2STUz0
+=e/DV
+-----END PGP SIGNATURE-----
+
+--=-zq+IahuACLefcapjcDli--
