@@ -1,47 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Gj4-0004K8-81
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 13:39:31 +0200
-Received: by iwn7 with SMTP id 7so2574096iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 04:39:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=u44C8wYDozMctbGOzSaF2Ztp4DZJuBuQ5sLiN1LRJNo=;
-	b=EAPP1f3ZQGf+kMltnMemMWRjNhYppPlcPvJkTVcdo6Z8/6NASOmIXV/cvYcelxfkyI
-	TWGuCeyNpm5VA3m98LW+1vMjJ79G5DbmhrV8FU5GID2CcbPh4Npt1T3vv4LPi5cHGdjl
-	LboFK49poZ/gIZ5xQN83cK1LKdubEGOzQzprw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=miITFLSCzjVqSNgkjwVeFyp6aE26R+xI9N66Irxf+QitHT3uYye+W3kx92WudnQEBv
-	mM5EpUlnx6dGL4BIVz/4viIZXdtHE/NuuwyjPrI77Eqs7TO906Aib3zXzi+BC16RjvA6
-	N2Ps9artx5MJfg6pvNM49dMq2/Mp6gvo0bbEI=
-MIME-Version: 1.0
-Received: by 10.42.1.14 with SMTP id 14mr1807495ice.49.1286797146371; Mon, 11
-	Oct 2010 04:39:06 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 04:39:06 -0700 (PDT)
-In-Reply-To: <20101011105848.GB4715@lit.local.igalia.com>
-References: <1286561232-31048-1-git-send-email-vjaquez@igalia.com>
-	<20101011093357.GA4715@lit.local.igalia.com>
-	<i8uotg$c41$1@dough.gmane.org>
-	<20101011105848.GB4715@lit.local.igalia.com>
-Date: Mon, 11 Oct 2010 13:39:06 +0200
-Message-ID: <AANLkTi=KdhAEwnLOMY7v6D8=UhVjkWV_tCGrcmJhyizx@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P5Gjq-0004PS-Nu for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 13:40:19 +0200
+Received: from f053041204.adsl.alicedsl.de ([78.53.41.204]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P5GjT-0007cT-Ef for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 11:39:55 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <1286796051.3835.78.camel@mattotaupa>
+References: <1286796051.3835.78.camel@mattotaupa>
+Date: Mon, 11 Oct 2010 13:39:54 +0200
+Message-ID: <1286797194.3835.90.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom.inc: set TARGET_VENDOR ?= "-angstrom"
+Subject: Re: [solved] gtk+-native: depends somehow on cups-native: `ERROR: Required build target 'gtk+-native' has no buildable providers.`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,43 +39,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 11:39:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Oct 2010 11:40:19 -0000
+X-Groupsio-MsgNum: 24670
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Z75KHG/ioSwJxK3Npm2U"
+
+--=-Z75KHG/ioSwJxK3Npm2U
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-2010/10/11 V=EDctor M. J=E1quez L. <vjaquez@igalia.com>:
-> On Mon, Oct 11, 2010 at 12:29:04PM +0200, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 11-10-10 11:33, V=EDctor M. J=E1quez L. wrote:
->> > On Fri, Oct 08, 2010 at 08:07:11PM +0200, V=EDctor Manuel J=E1quez Lea=
-l wrote:
->> >> By doing this we could use external toolchains for build angstrom
->> >> based images.
->> >>
->> >
->> > Ping. Any comment about this patch?
->>
->> Something like this should be done in external-toolchain.inc
->
-> There's no external-toolchain.inc in OE's org.openembedded.dev branch. So=
- I
-> assume that you refer to a user's local.conf require.
->
-> I done that and it doesn't work: the distro/include/angstrom.inc evaluati=
-on
-> happens later and overrides the TARGET_VENDOR variable, that why a ?=3D i=
-s
-> needed.
->
-> vmjl
+Am Montag, den 11.10.2010, 13:20 +0200 schrieb Paul Menzel:
 
-It is toolchain-external.inc, not external-toolchain.inc
+> 	$ bitbake evince
+>=20
+> fails with the following error for `angstrom-2010.x` for `MACHINE =3D
+> "beagleboard"`.
+>=20
+>         ERROR: Required build target 'evince' has no buildable providers.
+>         Missing or unbuildable dependency chain was: ['evince', 'gnome-ke=
+yring', 'gtk+-native', 'cups-native']
+>         Command execution failed: Traceback (most recent call last):
+>           File "/home/paul/oe/bitbake/lib/bb/command.py", line 88, in run=
+AsyncCommand
+>             commandmethod(self.cmds_async, self, options)
+>           File "/oe/bitbake/lib/bb/command.py", line 174, in buildTargets
+>             command.cooker.buildTargets(pkgs_to_build, task)
+>           File "/oe/bitbake/lib/bb/cooker.py", line 784, in buildTargets
+>             taskdata.add_unresolved(localdata, self.status)
+>           File "/oe/bitbake/lib/bb/taskdata.py", line 556, in add_unresol=
+ved
+>             self.remove_buildtarget(targetid)
+>           File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buil=
+dtarget
+>             self.fail_fnid(fnid, missing_list)
+>           File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+>             self.remove_buildtarget(target, missing_list)
+>           File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buil=
+dtarget
+>             self.fail_fnid(fnid, missing_list)
+>           File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+>             self.remove_buildtarget(target, missing_list)
+>           File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buil=
+dtarget
+>             self.fail_fnid(fnid, missing_list)
+>           File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+>             self.remove_buildtarget(target, missing_list)
+>           File "/oe/bitbake/lib/bb/taskdata.py", line 519, in remove_buil=
+dtarget
+>             raise bb.providers.NoProvider
+>         NoProvider
+>=20
+> `gtk+.inc` `DEPENDS` on `cups` [1]. Is this converted to `cups-native` fo=
+r `gtk+-native`?
 
-/home/frans/workspace/openembedded.git/conf/distro/include/toolchain-extern=
-al.inc
+Sorry, due to the recent discussions on the list I had the following
+local change in `gtk+_2.20.1.bb`.
 
-Enjoy! Frans
+	s/DEPENDS_virtclass-native/DEPENDS_append_virtclass-native/
+
+I guess that did not work so well and reverting it makes the error go
+away.
 
 
+Thanks,
+
+Paul
+
+
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gtk+/=
+gtk+.inc
+
+--=-Z75KHG/ioSwJxK3Npm2U
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyy94oACgkQPX1aK2wOHVhq/QCeJmYk9SEbLpiQhw1+NA/wFFNx
+alIAnjuKc9WkFStgU5Bu3rsHgq2ppc01
+=/CZ3
+-----END PGP SIGNATURE-----
+
+--=-Z75KHG/ioSwJxK3Npm2U--
