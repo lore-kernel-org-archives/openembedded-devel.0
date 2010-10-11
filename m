@@ -1,36 +1,35 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5GUA-0006WD-P5
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Gaq-0003Uu-1T
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 13:24:10 +0200
-Received: by iwn7 with SMTP id 7so2560117iwn.6
+	Mon, 11 Oct 2010 13:31:05 +0200
+Received: by iwn7 with SMTP id 7so2566306iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 04:23:43 -0700 (PDT)
+	Mon, 11 Oct 2010 04:30:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=6QI0uWjLdGaNWg3bKOUGIrUYUL9ea4wdebDb/4J0Ev4=;
-	b=ih+QEu6yk2yYT1jVp6gBp+Y+yac5nE6T73LBGqFhR8KRmGWLISd+2/bb3QNzqLjZ+x
-	1EtzYbbGBhGISHOyydqiKVXXASe5lGhpJ+TqqM+dsH9Q6/CCUWfMWUtsI2MJd4dID1wA
-	nRl3aogNhYp3KwJgBmfS5Ie34+aOESIr//JrQ=
+	bh=ks/M4GdpU4l9QEcrrOpHvIdTOG5ZSQJ3zCZoy+4hwlg=;
+	b=Bk2s8vQlEwhQ1MQOQZ/yYoNoC1S053giD3BLk3ddS0TEZ9CyTLFHbyF6Jfpk2RtXRq
+	X28Wf+HTipqqDIMmR3V9PQ5CfCZzkys/ZQ2Kul9ZfgpldY6/yaLE8IHbLxn+pk6LjRhG
+	PjOG0q/OK5eZAiii/EVD0ZIQE8WA0t4L+6fQM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=gM7ItLen0d8boeptQ5a/JDzRrb4N+hQYFiV6uvmzd/6M2p77Ifg9dQs1JJxWs4XBjJ
-	B99vmicmnsr8fKAIAYhC9C+QQ8YhEG7VDaJg9W2Ff+PKrSsjnmaEIViAbeII5yLMfN4k
-	wcEF6odxS1TR6+ChXeeo2zsKMr7IRriB1Vrcs=
+	b=pZnBUJXBmAkSwVjVpUDB4GOEb8l5OGrUKFa7SUB4ltqyYu4bsif4IZWWFFYOxRQ5Zj
+	iAnBztxeVV+b4RMWwUfdQfs8cPtLdwHEuwJhuRJ6Nq597WSNqspydtHMDdWLIiUuXoAJ
+	lY27cLIjac7CqY9wM32YVf9bfLO/iOIKyNxfw=
 MIME-Version: 1.0
-Received: by 10.231.30.76 with SMTP id t12mr4376102ibc.161.1286796221667; Mon,
-	11 Oct 2010 04:23:41 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 04:23:41 -0700 (PDT)
-In-Reply-To: <AA9C90F1-F206-461B-8CDB-383678BA363A@mac.com>
-References: <F34D057F-F640-4BB6-841B-2B66AFE37A99@mac.com>
-	<AANLkTin8xbEBR=mVr3PHN9cjwqtUoM9BxpYkgBE7p_UY@mail.gmail.com>
-	<i8ufek$27r$2@dough.gmane.org>
-	<AA9C90F1-F206-461B-8CDB-383678BA363A@mac.com>
-Date: Mon, 11 Oct 2010 13:23:41 +0200
-Message-ID: <AANLkTimFAn7+SrrqLBbnb7k3Jp4FRc6yaAh6i_BJ_Dnv@mail.gmail.com>
+Received: by 10.42.100.142 with SMTP id a14mr1889811ico.204.1286796634020;
+	Mon, 11 Oct 2010 04:30:34 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 04:30:33 -0700 (PDT)
+In-Reply-To: <AANLkTikxPN7Oocgh2Xy6dc6=VQ=mxLSYj_xUDKQ7V1Yd@mail.gmail.com>
+References: <4CB2AD64.90800@gmail.com>
+	<AANLkTimPP5f4MtwXSh+JmWAPOK4ufj+u6tB=iv4su0KP@mail.gmail.com>
+	<AANLkTikxPN7Oocgh2Xy6dc6=VQ=mxLSYj_xUDKQ7V1Yd@mail.gmail.com>
+Date: Mon, 11 Oct 2010 13:30:33 +0200
+Message-ID: <AANLkTi=4dsm_bJ6jR8e3vsARxYMcOb9x0WG3XrKGe0hg@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -41,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Building for multiple machines
+Subject: Re: [PATCH] prboom_2.5.0.bb: fix compilation failure due to undefined references.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,50 +54,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 11:24:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Oct 2010 11:31:05 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-2010/10/11 Elvis Dowson <elvis.dowson@mac.com>:
->
-> On Oct 11, 2010, at 11:47 AM, Koen Kooi wrote:
->>>
->>> I guess trying this would ahve been much faster than waiting for an ans=
-wer here.
->>>
->>> And OE does not have an auto.conf
+2010/10/11 Graham Gower <graham.gower@gmail.com>:
+> On 11 October 2010 17:04, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> Do you feel this is the preferred way?
+>> I would probably not have made the patch but add -D_GNU_SOURCE to
+>> CFLAGS. (I like to compile all the sources with the same flags to
+>> avoid inconsistencies)
 >>
->> OE *does* have an auto.conf, pretty much since the start:
+>> Frans
 >
-> There was a reason why I didn't try it right away. A while back, i had a =
-working overo-oe, and auto.conf was set to MACHINE=3D"overo"
+> To be honest, I didn't really think about it and don't care either
+> way. But the glibc manual says the following:
+> "You should define these macros by using =91#define=92 preprocessor
+> directives at the top of your source code files. These directives must
+> come before any #include of a system header file. It is best to make
+> them the very first thing in the file, preceded only by comments. You
+> could also use the =91-D=92 option to GCC, but it's better if you make th=
+e
+> source files indicate their own meaning in a self-contained way." [1]
 >
-> After that, I changed it to MACHINE=3D"beagleboard".
+> The last sentence is not found in the feature_test_macros(7) man page.
 >
-> It created two output folders in tmp/deply for both the targets, but the =
-images didn't work properly, I had some issues. Can't recall exactly what i=
-t was. So, I had to delete my tmp folder, and repeat the build process afre=
-sh, this time, with only MACHINE=3D'beagleboard".
+> -Graham
 >
-> I was wondering what the recommended process is for building for multiple=
- machine architectures?
->
-> Elvis Dowson
+> [1] http://www.gnu.org/s/libc/manual/html_node/Feature-Test-Macros.html
 
-I've build multiple machines in one tmp but often they are for
-different architectures (e.g. hawkboard and beagleboard (whcih is
-armv5 and armv7a resp)
-If you are going to mix distro's things might become more troublesome
-(and machine specific pinnings (with DEFAULT_PREFERENCE) might also
-cause mismatches).
 
-Of course you can also change your TMPDIR (and set it e.g. to
-tmp_${DISTRO}_${MACHINE})
-That way you'll get different tmp dirs (probably you want to inherit
-rm_work to keep the space usage manageable).
+Ah ok, didn't know that text.
+My personal perception is to keep changes as small and unintrusive as
+possible. That is why I generally prefer -D. With a new version the -D
+will keep working whereas a patch might not (due to a change in the
+src file).
 
-Have fun! Frans
+But looking at that text, I'm fine with this change.
 
-Frans
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
 
