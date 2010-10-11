@@ -1,45 +1,45 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1P5Ed0-0007XL-Pk
+	(envelope-from <vjaquez@igalia.com>) id 1P5Em1-0007cP-Vb
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 11:25:08 +0200
-Received: by iwn7 with SMTP id 7so2437839iwn.6
+	Mon, 11 Oct 2010 11:34:44 +0200
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ArUEAHl2skxbdWOb/2dsb2JhbACUD4c/hy6+RIVIBI9A
+X-IronPort-AV: E=Sophos;i="4.57,312,1283724000"; d="scan'208";a="686063522"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 11 Oct 2010 11:33:57 +0200
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1P5ElZ-0001uy-TT
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 02:24:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=a5tqF86YV5NQkQkLId5Y9gq6lCo/6KwxNYBrAXgebx8=;
-	b=laVG+2JemB+pmn7Ji4Abr4AxBp+wtgLQmKHBveb5ccvqZB4TXBlyzKEEkVcitY653N
-	esuwb7nNm91j8KZq5tIMGUvHkwA8gbn436fRc8Yxu/e587EoU6N1qSGxnKneCUjXwAC3
-	Biq/iYMvVZgQQftciaslRk3e6rqDscV1oVaVY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Zhu+ZweybNyERy36nDWceFeDXgNCN2QLF0q2kL5eYQJBgpGl/DUfu74UYZKMYj+iTd
-	cFTvVJQ81cTV7PR/JQboBtrILfu/F7tY32bisbBNLmGgNZdFOdukKKxzGzC8jknvABlA
-	obueRmvTu3tuwmliCjSq7d1tPzXa8vAIblFOE=
-MIME-Version: 1.0
-Received: by 10.42.75.2 with SMTP id y2mr773917icj.334.1286789081844; Mon, 11
-	Oct 2010 02:24:41 -0700 (PDT)
-Received: by 10.231.158.147 with HTTP; Mon, 11 Oct 2010 02:24:41 -0700 (PDT)
-In-Reply-To: <AANLkTimPP5f4MtwXSh+JmWAPOK4ufj+u6tB=iv4su0KP@mail.gmail.com>
-References: <4CB2AD64.90800@gmail.com>
-	<AANLkTimPP5f4MtwXSh+JmWAPOK4ufj+u6tB=iv4su0KP@mail.gmail.com>
-Date: Mon, 11 Oct 2010 19:54:41 +1030
-Message-ID: <AANLkTikxPN7Oocgh2Xy6dc6=VQ=mxLSYj_xUDKQ7V1Yd@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	Mon, 11 Oct 2010 11:33:57 +0200
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1P5ElZ-0007YJ-OO
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Oct 2010 11:33:57 +0200
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>) id 1P5ElZ-0001Fl-LC
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 11:33:57 +0200
+Date: Mon, 11 Oct 2010 11:33:57 +0200
+From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Message-ID: <20101011093357.GA4715@lit.local.igalia.com>
+References: <1286561232-31048-1-git-send-email-vjaquez@igalia.com>
+MIME-Version: 1.0
+In-Reply-To: <1286561232-31048-1-git-send-email-vjaquez@igalia.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 212.51.32.151
+X-SA-Exim-Mail-From: vjaquez@igalia.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] prboom_2.5.0.bb: fix compilation failure due to undefined references.
+Subject: Re: [PATCH] angstrom.inc: set TARGET_VENDOR ?= "-angstrom"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,32 +53,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 09:25:09 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Oct 2010 09:34:48 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On 11 October 2010 17:04, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Do you feel this is the preferred way?
-> I would probably not have made the patch but add -D_GNU_SOURCE to
-> CFLAGS. (I like to compile all the sources with the same flags to
-> avoid inconsistencies)
->
-> Frans
+On Fri, Oct 08, 2010 at 08:07:11PM +0200, Víctor Manuel Jáquez Leal wrote:
+> By doing this we could use external toolchains for build angstrom
+> based images.
+> 
 
-To be honest, I didn't really think about it and don't care either
-way. But the glibc manual says the following:
-"You should define these macros by using =91#define=92 preprocessor
-directives at the top of your source code files. These directives must
-come before any #include of a system header file. It is best to make
-them the very first thing in the file, preceded only by comments. You
-could also use the =91-D=92 option to GCC, but it's better if you make the
-source files indicate their own meaning in a self-contained way." [1]
+Ping. Any comment about this patch?
 
-The last sentence is not found in the feature_test_macros(7) man page.
-
--Graham
-
-[1] http://www.gnu.org/s/libc/manual/html_node/Feature-Test-Macros.html
+vmjl
 
 
