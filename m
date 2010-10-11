@@ -1,28 +1,24 @@
 Received: from li38-254.members.linode.com ([207.192.74.254]
 	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sgarman@zenlinux.com>) id 1P5MS0-0005jy-AK
+	(envelope-from <sgarman@zenlinux.com>) id 1P5MWM-0005vd-Rr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 19:46:18 +0200
-Received: from [192.168.1.12] (c-76-105-143-140.hsd1.or.comcast.net
+	Mon, 11 Oct 2010 19:50:48 +0200
+Received: from localhost.localdomain (c-76-105-143-140.hsd1.or.comcast.net
 	[76.105.143.140])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id C437E30461
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 13:45:44 -0400 (EDT)
-Message-ID: <4CB34D47.1020702@zenlinux.com>
-Date: Mon, 11 Oct 2010 10:45:43 -0700
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 4AAC830461;
+	Mon, 11 Oct 2010 13:50:18 -0400 (EDT)
 From: Scott Garman <sgarman@zenlinux.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Oct 2010 10:50:10 -0700
+Message-Id: <1286819410-3422-1-git-send-email-sgarman@zenlinux.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <1286775778-1446-1-git-send-email-sgarman@zenlinux.com>
 References: <1286775778-1446-1-git-send-email-sgarman@zenlinux.com>
-	<1286786195.3835.13.camel@mattotaupa>
-In-Reply-To: <1286786195.3835.13.camel@mattotaupa>
 X-MasterFoo-MailScanner-Information: Please contact the ISP for more
 	information
-X-MailScanner-ID: C437E30461.2F5A2
+X-MailScanner-ID: 4AAC830461.89C8C
 X-MasterFoo-MailScanner: Found to be clean
 X-MasterFoo-MailScanner-SpamCheck: not spam
 X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
@@ -34,7 +30,8 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cpio: update 2.5 to 2.11
+Cc: Scott Garman <sgarman@zenlinux.com>
+Subject: [PATCH v2] cpio: update 2.5 to 2.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,38 +45,207 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 17:46:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 Oct 2010 17:50:48 -0000
 
-On 10/11/2010 01:36 AM, Paul Menzel wrote:
-> Am Sonntag, den 10.10.2010, 22:42 -0700 schrieb Scott Garman:
->> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
->
-> I build tested your patch for minimal-eglibc for `MACHINE =
-> "beagleboard"`.
+Signed-off-by: Scott Garman <sgarman@zenlinux.com>
+---
+ recipes/cpio/cpio-2.11/statdef.patch |   16 +++++++++
+ recipes/cpio/cpio_2.11.bb            |   42 +++++++++++++++++++++++
+ recipes/cpio/cpio_2.5.bb             |   42 -----------------------
+ recipes/cpio/files/install.patch     |   61 ----------------------------------
+ 4 files changed, 58 insertions(+), 103 deletions(-)
+ create mode 100644 recipes/cpio/cpio-2.11/statdef.patch
+ create mode 100644 recipes/cpio/cpio_2.11.bb
+ delete mode 100644 recipes/cpio/cpio_2.5.bb
+ delete mode 100644 recipes/cpio/files/install.patch
 
-Thanks!
-
->> diff --git a/recipes/cpio/cpio-2.11/statdef.patch b/recipes/cpio/cpio-2.11/statdef.patch
->> new file mode 100644
->> index 0000000..059976c
->> --- /dev/null
->> +++ b/recipes/cpio/cpio-2.11/statdef.patch
->> @@ -0,0 +1,15 @@
->> +# Avoid multiple stat definitions
->> +# Patch taken from cpio mailing list posting 2010-03-19
->> +#
->> +# Signed-off-by: Scott Garman<sgarman@zenlinux.com>
->
-> Please include the link to that message in the archive.
-
-Will do, respin on its way shortly...
-
-Scott
-
+diff --git a/recipes/cpio/cpio-2.11/statdef.patch b/recipes/cpio/cpio-2.11/statdef.patch
+new file mode 100644
+index 0000000..c3117c9
+--- /dev/null
++++ b/recipes/cpio/cpio-2.11/statdef.patch
+@@ -0,0 +1,16 @@
++# Avoid multiple stat definitions
++# Patch written by Naohiro Aota, taken from cpio mailing list:
++# http://lists.gnu.org/archive/html/bug-cpio/2010-03/msg00005.html
++#
++# Signed-off-by: Scott Garman <sgarman@zenlinux.com>
++
++diff -urN cpio-2.11.orig/src/filetypes.h cpio-2.11/src/filetypes.h
++--- cpio-2.11.orig/src/filetypes.h	2010-02-12 02:19:23.000000000 -0800
+++++ cpio-2.11/src/filetypes.h	2010-07-23 13:17:25.000000000 -0700
++@@ -82,4 +82,6 @@
++ #define lstat stat
++ #endif
++ int lstat ();
+++#ifndef stat
++ int stat ();
+++#endif
+diff --git a/recipes/cpio/cpio_2.11.bb b/recipes/cpio/cpio_2.11.bb
+new file mode 100644
+index 0000000..42b3676
+--- /dev/null
++++ b/recipes/cpio/cpio_2.11.bb
+@@ -0,0 +1,42 @@
++DESCRIPTION = "GNU cpio is a program to manage archives of files."
++HOMEPAGE = "http://www.gnu.org/software/cpio/"
++SECTION = "console"
++LICENSE = "GPLv3"
++PR = "r0"
++
++DEPENDS = "texinfo-native"
++
++SRC_URI = "${GNU_MIRROR}/cpio/cpio-${PV}.tar.gz \
++           file://statdef.patch \
++          "
++
++SRC_URI[md5sum] = "1112bb6c45863468b5496ba128792f6c"
++SRC_URI[sha256sum] = "601b1d774cd6e4cd39416203c91ec59dbd65dd27d79d75e1a9b89497ea643978"
++
++inherit autotools gettext
++
++do_install () {
++    autotools_do_install
++    install -d ${D}${base_bindir}/
++    mv "${D}${bindir}/cpio" "${D}${base_bindir}/cpio.${PN}"
++    case ${TARGET_OS} in
++        *-uclibc*) ;;
++        *) mv "${D}${libexecdir}/rmt" "${D}${libexecdir}/rmt.${PN}" ;;
++    esac
++}
++
++pkg_postinst_${PN} () {
++    update-alternatives --install ${base_bindir}/cpio cpio cpio.${PN} 100
++    if [ -f ${libexecdir}/rmt.${PN} ]
++    then
++        update-alternatives --install ${libexecdir}/rmt rmt rmt.${PN} 50
++    fi
++}
++
++pkg_prerm_${PN} () {
++    update-alternatives --remove cpio cpio.${PN}
++    if [ -f ${libexecdir}/rmt.${PN} ]
++    then
++        update-alternatives --remove rmt rmt.${PN}
++    fi
++}
+diff --git a/recipes/cpio/cpio_2.5.bb b/recipes/cpio/cpio_2.5.bb
+deleted file mode 100644
+index b4504ba..0000000
+--- a/recipes/cpio/cpio_2.5.bb
++++ /dev/null
+@@ -1,42 +0,0 @@
+-DESCRIPTION = "GNU cpio is a program to manage archives of files."
+-HOMEPAGE = "http://www.gnu.org/software/cpio/"
+-SECTION = "console"
+-LICENSE = "GPL"
+-PR = "r5"
+-
+-DEPENDS += " texinfo-native "
+-
+-SRC_URI = "${GNU_MIRROR}/cpio/cpio-${PV}.tar.gz \
+-	   file://install.patch"
+-S = "${WORKDIR}/cpio-${PV}"
+-
+-inherit autotools
+-
+-do_install () {
+-	autotools_do_install
+-	install -d ${D}${base_bindir}/
+-	mv "${D}${bindir}/cpio" "${D}${base_bindir}/cpio.${PN}"
+-	case ${TARGET_OS} in
+-		*-uclibc*) ;;
+-		*) mv "${D}${libexecdir}/rmt" "${D}${libexecdir}/rmt.${PN}" ;;
+-	esac
+-}
+-
+-pkg_postinst_${PN} () {
+-	update-alternatives --install ${base_bindir}/cpio cpio cpio.${PN} 100
+-	if [ -f ${libexecdir}/rmt.${PN} ]
+-	then
+-		update-alternatives --install ${libexecdir}/rmt rmt rmt.${PN} 50
+-	fi
+-}
+-
+-pkg_prerm_${PN} () {
+-	update-alternatives --remove cpio cpio.${PN}
+-	if [ -f ${libexecdir}/rmt.${PN} ]
+-	then
+-		update-alternatives --remove rmt rmt.${PN}
+-	fi
+-}
+-
+-SRC_URI[md5sum] = "e02859af1bbbbd73fcbf757acb57e0a4"
+-SRC_URI[sha256sum] = "dbf79293d0cafa7d7a3a266c2b0b90c00d556e7b3185d4243c74153291da24c8"
+diff --git a/recipes/cpio/files/install.patch b/recipes/cpio/files/install.patch
+deleted file mode 100644
+index 3554156..0000000
+--- a/recipes/cpio/files/install.patch
++++ /dev/null
+@@ -1,61 +0,0 @@
+-
+-#
+-# Patch managed by http://www.holgerschurig.de/patcher.html
+-#
+-
+---- cpio-2.5/Makefile.in~install.patch
+-+++ cpio-2.5/Makefile.in
+-@@ -70,6 +70,7 @@
+- # Prefix for each installed man page, normally empty or `g'.
+- manprefix = 
+- 
+-+DESTDIR =
+- 
+- # Where to install the cpio and mt executables.
+- bindir = @bindir@
+-@@ -123,19 +124,19 @@
+- 	$(CC) -c $(CPPFLAGS) $(DEFS) -I$(srcdir) $(CFLAGS) $<
+- 
+- install:: installdirs all $(srcdir)/cpio.1 $(srcdir)/mt.1
+--	$(INSTALL_PROGRAM) cpio $(bindir)/$(binprefix)cpio
+--	test ! -f mt || $(INSTALL_PROGRAM) mt $(bindir)/$(binprefix)mt
+--	-test ! -f rmt || $(INSTALL_PROGRAM) rmt $(libexecdir)/rmt
+--	-$(INSTALL_DATA) $(srcdir)/cpio.1 $(mandir)/$(manprefix)cpio.$(manext)
+--	-test ! -f mt || $(INSTALL_DATA) $(srcdir)/mt.1 $(mandir)/$(manprefix)mt.$(manext)
+-+	$(INSTALL_PROGRAM) -D cpio $(DESTDIR)$(bindir)/$(binprefix)cpio
+-+	test ! -f mt || $(INSTALL_PROGRAM) -D mt $(DESTDIR)$(bindir)/$(binprefix)mt
+-+	-test ! -f rmt || $(INSTALL_PROGRAM) -D rmt $(DESTDIR)$(libexecdir)/rmt
+-+	-$(INSTALL_DATA) -D $(srcdir)/cpio.1 $(DESTDIR)$(mandir)/$(manprefix)cpio.$(manext)
+-+	-test ! -f mt || $(INSTALL_DATA) -D $(srcdir)/mt.1 $(DESTDIR)$(mandir)/$(manprefix)mt.$(manext)
+- 
+- installdirs:
+--	$(srcdir)/mkinstalldirs $(bindir) $(libexecdir) $(mandir) $(infodir)
+-+	$(srcdir)/mkinstalldirs $(DESTDIR)/$(bindir) $(DESTDIR)/$(libexecdir) $(DESTDIR)/$(mandir) $(DESTDIR)/$(infodir)
+- 
+- uninstall::
+--	cd $(bindir); rm -f $(binprefix)cpio $(binprefix)mt
+--	-rm -f $(libexecdir)/rmt
+--	cd $(mandir); rm -f $(manprefix)cpio.$(manext) $(manprefix)mt.$(manext)
+-+	cd $(DESTDIR)$(bindir); rm -f $(binprefix)cpio $(binprefix)mt
+-+	-rm -f $(DESTDIR)$(libexecdir)/rmt
+-+	cd $(DESTDIR)$(mandir); rm -f $(manprefix)cpio.$(manext) $(manprefix)mt.$(manext)
+- 
+- check:
+- 	@echo No tests are supplied.
+-@@ -186,14 +187,14 @@
+- 
+- install-info: $(INFO_DEPS)
+- 	for file in *.info*; do \
+--	  $(INSTALL_DATA) $$file $(infodir)/$$file; \
+-+	  $(INSTALL_DATA) -D $$file $(DESTDIR)$(infodir)/$$file; \
+- 	done
+- 
+- uninstall:: uninstall-info
+- 
+- uninstall-info:
+- 	for file in *.info*; do \
+--	  rm -f $(infodir)/$$file; \
+-+	  rm -f $(DESTDIR)$(infodir)/$$file; \
+- 	done
+- 
+- clean:
 -- 
-Scott Garman
-sgarman at zenlinux dot com
+1.6.3.3
+
 
 
