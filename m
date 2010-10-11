@@ -1,29 +1,47 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P5GRP-0006QX-TB for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 13:21:17 +0200
-Received: from f053041204.adsl.alicedsl.de ([78.53.41.204]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P5GR2-0007CO-DC for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 11:20:52 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5GUA-0006WD-P5
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 13:24:10 +0200
+Received: by iwn7 with SMTP id 7so2560117iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Oct 2010 04:23:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=6QI0uWjLdGaNWg3bKOUGIrUYUL9ea4wdebDb/4J0Ev4=;
+	b=ih+QEu6yk2yYT1jVp6gBp+Y+yac5nE6T73LBGqFhR8KRmGWLISd+2/bb3QNzqLjZ+x
+	1EtzYbbGBhGISHOyydqiKVXXASe5lGhpJ+TqqM+dsH9Q6/CCUWfMWUtsI2MJd4dID1wA
+	nRl3aogNhYp3KwJgBmfS5Ie34+aOESIr//JrQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=gM7ItLen0d8boeptQ5a/JDzRrb4N+hQYFiV6uvmzd/6M2p77Ifg9dQs1JJxWs4XBjJ
+	B99vmicmnsr8fKAIAYhC9C+QQ8YhEG7VDaJg9W2Ff+PKrSsjnmaEIViAbeII5yLMfN4k
+	wcEF6odxS1TR6+ChXeeo2zsKMr7IRriB1Vrcs=
+MIME-Version: 1.0
+Received: by 10.231.30.76 with SMTP id t12mr4376102ibc.161.1286796221667; Mon,
+	11 Oct 2010 04:23:41 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 04:23:41 -0700 (PDT)
+In-Reply-To: <AA9C90F1-F206-461B-8CDB-383678BA363A@mac.com>
+References: <F34D057F-F640-4BB6-841B-2B66AFE37A99@mac.com>
+	<AANLkTin8xbEBR=mVr3PHN9cjwqtUoM9BxpYkgBE7p_UY@mail.gmail.com>
+	<i8ufek$27r$2@dough.gmane.org>
+	<AA9C90F1-F206-461B-8CDB-383678BA363A@mac.com>
+Date: Mon, 11 Oct 2010 13:23:41 +0200
+Message-ID: <AANLkTimFAn7+SrrqLBbnb7k3Jp4FRc6yaAh6i_BJ_Dnv@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Oct 2010 13:20:51 +0200
-Message-ID: <1286796051.3835.78.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: gtk+-native: depends somehow on cups-native: `ERROR: Required build target 'gtk+-native' has no buildable providers.`
+Subject: Re: Building for multiple machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,80 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 11:21:17 -0000
-X-Groupsio-MsgNum: 24666
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-zq+IahuACLefcapjcDli"
-
---=-zq+IahuACLefcapjcDli
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 11 Oct 2010 11:24:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+2010/10/11 Elvis Dowson <elvis.dowson@mac.com>:
+>
+> On Oct 11, 2010, at 11:47 AM, Koen Kooi wrote:
+>>>
+>>> I guess trying this would ahve been much faster than waiting for an ans=
+wer here.
+>>>
+>>> And OE does not have an auto.conf
+>>
+>> OE *does* have an auto.conf, pretty much since the start:
+>
+> There was a reason why I didn't try it right away. A while back, i had a =
+working overo-oe, and auto.conf was set to MACHINE=3D"overo"
+>
+> After that, I changed it to MACHINE=3D"beagleboard".
+>
+> It created two output folders in tmp/deply for both the targets, but the =
+images didn't work properly, I had some issues. Can't recall exactly what i=
+t was. So, I had to delete my tmp folder, and repeat the build process afre=
+sh, this time, with only MACHINE=3D'beagleboard".
+>
+> I was wondering what the recommended process is for building for multiple=
+ machine architectures?
+>
+> Elvis Dowson
+
+I've build multiple machines in one tmp but often they are for
+different architectures (e.g. hawkboard and beagleboard (whcih is
+armv5 and armv7a resp)
+If you are going to mix distro's things might become more troublesome
+(and machine specific pinnings (with DEFAULT_PREFERENCE) might also
+cause mismatches).
+
+Of course you can also change your TMPDIR (and set it e.g. to
+tmp_${DISTRO}_${MACHINE})
+That way you'll get different tmp dirs (probably you want to inherit
+rm_work to keep the space usage manageable).
+
+Have fun! Frans
+
+Frans
 
 
-	$ bitbake evince
-
-fails with the following error for `angstrom-2010.x` for `MACHINE =3D
-"beagleboard"`.
-
-        ERROR: Required build target 'evince' has no buildable providers.
-        Missing or unbuildable dependency chain was: ['evince', 'gnome-keyr=
-ing', 'gtk+-native', 'cups-native']
-        Command execution failed: Traceback (most recent call last):
-          File "/home/paul/oe/bitbake/lib/bb/command.py", line 88, in runAs=
-yncCommand
-            commandmethod(self.cmds_async, self, options)
-          File "/oe/bitbake/lib/bb/command.py", line 174, in buildTargets
-            command.cooker.buildTargets(pkgs_to_build, task)
-          File "/oe/bitbake/lib/bb/cooker.py", line 784, in buildTargets
-            taskdata.add_unresolved(localdata, self.status)
-          File "/oe/bitbake/lib/bb/taskdata.py", line 556, in add_unresolve=
-d
-            self.remove_buildtarget(targetid)
-          File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buildt=
-arget
-            self.fail_fnid(fnid, missing_list)
-          File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
-            self.remove_buildtarget(target, missing_list)
-          File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buildt=
-arget
-            self.fail_fnid(fnid, missing_list)
-          File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
-            self.remove_buildtarget(target, missing_list)
-          File "/oe/bitbake/lib/bb/taskdata.py", line 510, in remove_buildt=
-arget
-            self.fail_fnid(fnid, missing_list)
-          File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
-            self.remove_buildtarget(target, missing_list)
-          File "/oe/bitbake/lib/bb/taskdata.py", line 519, in remove_buildt=
-arget
-            raise bb.providers.NoProvider
-        NoProvider
-
-`gtk+.inc` `DEPENDS` on `cups` [1]. Is this converted to `cups-native` for =
-`gtk+-native`?
-
-
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gtk+/gt=
-k+.inc
-
---=-zq+IahuACLefcapjcDli
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyy8xMACgkQPX1aK2wOHVhVzQCgh1L4xaZRF1MhERma4c4dn1yX
-pJAAn1363Ir2JI7tbUb5QDx9Hw2STUz0
-=e/DV
------END PGP SIGNATURE-----
-
---=-zq+IahuACLefcapjcDli--
