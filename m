@@ -1,29 +1,45 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1P5HWi-0005ao-EA
+	(envelope-from <vwyodapink@gmail.com>) id 1P5Hc5-0007G3-5O
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 14:30:49 +0200
-Received: (qmail 31346 invoked by uid 1003); 11 Oct 2010 12:30:18 -0000
-Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	11 Oct 2010 12:30:18 -0000
-Message-ID: <4CB30358.5050504@balister.org>
-Date: Mon, 11 Oct 2010 08:30:16 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc13 Thunderbird/3.1.4
+	Mon, 11 Oct 2010 14:36:34 +0200
+Received: by vws3 with SMTP id 3so710808vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Oct 2010 05:35:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=5o2H0yJ+7RPsL0h4KXSwD8jdS6xiyyORVt0z8bdHXlU=;
+	b=Ex0YKCk7N5TPpns9HfVjfgZUYmiehSOeWOQYmERmPVhe4M9MGMjjM7tPpxKR4y3IYc
+	KzCNt0S5X069tWJSJUQvrEtFdiFydbq2HDo+7bgYEUdadPqfNNDnMAiqlkEWWEecPing
+	BfAceNqjnHUrUt12zSwX884ntRHEZvjxYfzJo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=F7H5wL5E/N2235POugTJSapynjunYv5EjRbba7ZiM2cCOS6MX0Jz0aJBRzmZYeyRLb
+	1F+ZjOqjPaUIqu5dYGdiwbcSK+1eUs4W/k7XsVKozDqmNsQouE0kb3Ja/sFo1uJufSE3
+	3mJeHYvSFd86EsIy0tDeIgPcdWtO90uR72hzs=
 MIME-Version: 1.0
+Received: by 10.220.188.67 with SMTP id cz3mr1918121vcb.114.1286800552344;
+	Mon, 11 Oct 2010 05:35:52 -0700 (PDT)
+Received: by 10.220.195.72 with HTTP; Mon, 11 Oct 2010 05:35:52 -0700 (PDT)
+In-Reply-To: <201010111602.05916.khimov@altell.ru>
+References: <AANLkTineQJGDAdjuuHpkKEsYPU1TuvmgE+7k+EoYqtTp@mail.gmail.com>
+	<201010111602.05916.khimov@altell.ru>
+Date: Mon, 11 Oct 2010 05:35:52 -0700
+Message-ID: <AANLkTi=_aW1_xh4s=MTG60waODeY6VFKy6v_bXNgf=pu@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Membership in the OpenEmbedded eV
+Subject: Re: [RFC] unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,24 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 12:30:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 Oct 2010 12:36:35 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
-As most of you know, there is an OpenEmbedded eV to provide an umbrella 
-organization for handling various aspects of managing the project. There 
-is a description here: http://wiki.openembedded.net/index.php/Organization.
+On Mon, Oct 11, 2010 at 5:02 AM, Roman I Khimov <khimov@altell.ru> wrote:
+> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB =
+11 =CF=CB=D4=D1=C2=D2=D1 2010 15:51:05 =C1=D7=D4=CF=D2 Frans Meulenbroeks
+> =CE=C1=D0=C9=D3=C1=CC:
+>> =9A- a way to indicate that a file is installed but purposedly not
+>> packaged (e.g. I have such a thing in mythtv with a README file)
+>> This could be by creating a pseudo-package (like -unused or -ignore)
+>> which can be used to add files that are explicitly not packaged
+>
+> Shouldn't such files be removed with do_install_append()?
 
-We are holding the annual General Assembly on Friday October 30, 2010 
-after ELCE in Cambridge. The actual GA should be first thing in the 
-morning and shouldn't take more than a couple of hours.
+my uneducated suggestion would be dont remove them and do something
+like Frans suggests, reason being I am noticing packages that do not
+build with files that you would expect especially ones with -dev tags.
+or even some not being made like libgcc-dev. But like one off the top
+of my head would be if you install libpcap and libcap-dev you still do
+not get a pcap.h to use if you compile something on the machine your
+built those packages into the image of.
 
-One of the things we would like to do is vote in new members to the eV 
-(for the .us guys, think 501c3). If you are interested in becoming a 
-member, read the Organization web page and send me an email indicating 
-your desire to become a member. Please include a short paragraph 
-explaining who you are and how you are involved with OpenEmbedded.
 
-Philip
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
