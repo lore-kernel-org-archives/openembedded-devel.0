@@ -1,38 +1,47 @@
-Received: from asmtpout023.mac.com ([17.148.16.98])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1P5BRZ-0006TV-ED
+	(envelope-from <graham.gower@gmail.com>) id 1P5Bnv-0006nR-5o
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 08:01:08 +0200
-MIME-version: 1.0
-Received: from [192.168.1.100] ([87.201.169.234])
-	by asmtp023.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
-	(built Dec
-	16 2008; 32bit)) with ESMTPSA id <0LA400CYT3BPKI20@asmtp023.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	10 Oct 2010 22:59:52 -0700 (PDT)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 suspectscore=5 phishscore=0 bulkscore=0 adultscore=0
-	classifier=spam
-	adjust=0 reason=mlx engine=6.0.2-1004200000 definitions=main-1010100218
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.2.15,1.0.148,0.0.0000
-	definitions=2010-10-11_01:2010-10-10, 2010-10-10,
-	1970-01-01 signatures=0
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Mon, 11 Oct 2010 09:59:43 +0400
-Message-id: <F34D057F-F640-4BB6-841B-2B66AFE37A99@mac.com>
-To: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 17.148.16.98
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	Mon, 11 Oct 2010 08:24:13 +0200
+Received: by pwj9 with SMTP id 9so135834pwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Oct 2010 23:23:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=K9Vrv/9DSPY9VyitmIAj7DqJBiBvrjxtYHZ6vjX2ikE=;
+	b=aO4Ecf91iBDmNuWwxIwMp5pqEliJRhW8c0eUVAPUDo2fF2oTzdyybTANIrrA1+PQGH
+	kVRl94jzUABhfLPaaDqLpdJZremAlVIoHDJ40gC+M6QTs0ybQHQvvSsbZPjNkur9aFrP
+	mYDQ/QaG3JAHhO2rMNs7lSrBhd0drgnhtnVSM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=O+YLYDBLLq1diIZuZwT74kD9OKljeiZYNBNyOUXvAmitFGdyHtjyLIact9j93RJ5Ev
+	ZdKovIIGsHmoG0QyjhqxjQeydzitWc2XC++QildsVtwMFqWvOCY/PluSplUtvv8qbkwm
+	xdO70eG+Eb2xP+ndyasjU8ZyC2e26tokdvYF0=
+Received: by 10.114.39.16 with SMTP id m16mr6529677wam.221.1286778218605;
+	Sun, 10 Oct 2010 23:23:38 -0700 (PDT)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id i4sm2789331wal.22.2010.10.10.23.23.36
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 10 Oct 2010 23:23:37 -0700 (PDT)
+Message-ID: <4CB2AD64.90800@gmail.com>
+Date: Mon, 11 Oct 2010 16:53:32 +1030
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Building for multiple machines
+Subject: [PATCH] prboom_2.5.0.bb: fix compilation failure due to undefined references.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,24 +55,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 06:01:09 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 11 Oct 2010 06:24:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi,
-        What should I do build for multiple machines ? 
+Need to #define _GNU_SOURCE for sched.h to define CPU_ZERO/CPU_SET.
 
-I have an overo-oe repository, but I need to temporarily build u-boot for a different board. 
+ SDL/libsdldoom.a(i_system.o): In function `I_SetAffinityMask':
+| i_system.c:(.text+0x7d4): undefined reference to `CPU_ZERO'
+| i_system.c:(.text+0x7e8): undefined reference to `CPU_SET'
+| collect2: ld returned 1 exit status
 
-In my auto.conf, the entry is MACHINE="overo"
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ .../prboom-2.5.0/gnu_source_for_sched_h.patch      |   12 ++++++++++++
+ recipes/prboom/prboom_2.5.0.bb                     |    3 ++-
+ 2 files changed, 14 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/prboom/prboom-2.5.0/gnu_source_for_sched_h.patch
 
-u-boot board definitions for say beagleboard, have named the board "beagle" 
+diff --git a/recipes/prboom/prboom-2.5.0/gnu_source_for_sched_h.patch b/recipes/prboom/prboom-2.5.0/gnu_source_for_sched_h.patch
+new file mode 100644
+index 0000000..e77917a
+--- /dev/null
++++ b/recipes/prboom/prboom-2.5.0/gnu_source_for_sched_h.patch
+@@ -0,0 +1,12 @@
++Upstream: http://sourceforge.net/mailarchive/forum.php?thread_name=4CB2549C.2030100%40gmail.com&forum_name=prboom-devel
++
++--- prboom-2.5.0/src/SDL/i_system.c.orig	2010-10-11 09:58:02.000000000 +1030
+++++ prboom-2.5.0/src/SDL/i_system.c	2010-10-11 09:59:16.000000000 +1030
++@@ -33,6 +33,7 @@
++  *-----------------------------------------------------------------------------
++  */
++ 
+++#define _GNU_SOURCE
++ #include <stdio.h>
++ 
++ #include <stdarg.h>
+diff --git a/recipes/prboom/prboom_2.5.0.bb b/recipes/prboom/prboom_2.5.0.bb
+index 92a276d..13f3623 100644
+--- a/recipes/prboom/prboom_2.5.0.bb
++++ b/recipes/prboom/prboom_2.5.0.bb
+@@ -4,10 +4,11 @@ PRIORITY = "optional"
+ DEPENDS = "virtual/libsdl libsdl-mixer libsdl-net"
+ LICENSE = "GPL"
+ 
+-PR = "r2"
++PR = "r3"
+ RRECOMMENDS_${PN} = "freedoom"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/prboom/prboom-${PV}.tar.gz \
++	   file://gnu_source_for_sched_h.patch \
+ 	   "
+ 
+ inherit autotools
+-- 
+1.7.1
 
-So, would an appropriate command be 
-
-bitbake u-boot-omap3 MACHINE="beagle"
-
-
-Elvis Dowson
 
 
