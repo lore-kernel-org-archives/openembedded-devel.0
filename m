@@ -1,33 +1,32 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Br7-0007Sv-Vy
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Bux-0007dz-Ps
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 08:27:30 +0200
-Received: by iwn7 with SMTP id 7so2282958iwn.6
+	Mon, 11 Oct 2010 08:31:29 +0200
+Received: by iwn7 with SMTP id 7so2285412iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Oct 2010 23:27:02 -0700 (PDT)
+	Sun, 10 Oct 2010 23:30:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=dFq3s7o/hTgEz5G1RybI3iA4+dpnggfUgOkxTgcOhXs=;
-	b=la9rjaItCTwbIY+dAGjSKAJeZCZ0CWP838+100kqEkhn1BKshGJmDWoF4E5zW8K0qG
-	DvCdLcAwBLnYcJe82Vuwow4CklYomgsEJjgZa+xxfylnpF2+xypcdUPJWuqS0kqzuOtj
-	5Oz13ZP4fC/lBvDHx+4aeaPdrJiUT1spjSRoY=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=/Ivmz6Aa3/RrKtW9MLlhbDwu+Ydf3mKg2CQa5b7g4Ao=;
+	b=yA5ecsMuhnzDJ+pw8LsleAoYK5oZXMtJNSsrI91EgDAhL0kQFVAJHGWhxcsDtI4cDR
+	ieav30OhIOFvldy/PdBAwrPdvZe7xYi2Q7G3Es6STmQusYU9+PGCZTePUDwUYQNJlsZO
+	mKjgLWdmI+uX/3PBU7K2++2GseZQ9heQEt+8I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=gG7oVdyIXFZ6nTLT3Ys0grRn0xb9Lx7ZhgrP4GzQx7XY9Z2X+X52S/Bu0BYapZ7q9g
-	Hn7WU/Pbm2Ol/1k6vxXZDmv2KzQpZ1+LsJecEyYNjsMauwZQbdErTunV0OfETYGmwApT
-	AoRSNhCBnn5DpqGtMgtfczaO3Du8QZH3daUY4=
+	:content-type;
+	b=vhrxofI+t0QIkVu3w/N8KautW3nSzqgba9gL50q01d/ZymdwbEPYwjZow0+HRYyNib
+	Ar0JgQtB3bGQrZ7S5werhd7nfWWGZ8n4z53tx74SZdCdwhf8wBttHvVjyrDDxP3LHdbu
+	D0i7EHCW60KCnwb6lPXG/A7tzswCuQsFtOHE8=
 MIME-Version: 1.0
-Received: by 10.42.148.74 with SMTP id q10mr216023icv.431.1286778422742; Sun,
-	10 Oct 2010 23:27:02 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sun, 10 Oct 2010 23:27:02 -0700 (PDT)
-In-Reply-To: <F34D057F-F640-4BB6-841B-2B66AFE37A99@mac.com>
-References: <F34D057F-F640-4BB6-841B-2B66AFE37A99@mac.com>
-Date: Mon, 11 Oct 2010 08:27:02 +0200
-Message-ID: <AANLkTin8xbEBR=mVr3PHN9cjwqtUoM9BxpYkgBE7p_UY@mail.gmail.com>
+Received: by 10.42.136.73 with SMTP id s9mr1633520ict.222.1286778657160; Sun,
+	10 Oct 2010 23:30:57 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 10 Oct 2010 23:30:57 -0700 (PDT)
+In-Reply-To: <4CB2ADA2.7080600@gmail.com>
+References: <4CB2ADA2.7080600@gmail.com>
+Date: Mon, 11 Oct 2010 08:30:57 +0200
+Message-ID: <AANLkTinxAeh6=+Q3KF8ZvA_d3bvF4k4-8t+9Gj5FaC_n@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -38,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Building for multiple machines
+Subject: Re: [PATCH] lua, lua-gtk2: move to obsolete.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +51,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 06:27:30 -0000
+X-List-Received-Date: Mon, 11 Oct 2010 06:31:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/10/11 Elvis Dowson <elvis.dowson@mac.com>:
-> Hi,
-> =A0 =A0 =A0 =A0What should I do build for multiple machines ?
->
-> I have an overo-oe repository, but I need to temporarily build u-boot for=
- a different board.
->
-> In my auto.conf, the entry is MACHINE=3D"overo"
->
-> u-boot board definitions for say beagleboard, have named the board "beagl=
-e"
->
-> So, would an appropriate command be
->
-> bitbake u-boot-omap3 MACHINE=3D"beagle"
->
->
-> Elvis Dowson
+2010/10/11 Graham Gower <graham.gower@gmail.com>:
+> Lua fails to build. There are newer recipes (lua5.1) in tree, only
+> lua-gtk2 uses this old recipe and nothing uses lua-gtk2.
 
-I guess trying this would ahve been much faster than waiting for an answer =
-here.
-
-And OE does not have an auto.conf
-
-Frans
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
 
