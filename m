@@ -1,46 +1,50 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5NVf-000711-0a
+	(envelope-from <martin.jansa@gmail.com>) id 1P5NZ7-0007A5-Nq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 20:54:09 +0200
-Received: by iwn2 with SMTP id 2so25240iwn.6
+	Mon, 11 Oct 2010 20:57:45 +0200
+Received: by bwz9 with SMTP id 9so860717bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 11:53:42 -0700 (PDT)
+	Mon, 11 Oct 2010 11:57:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=/+GKOK113x8LlefnTa0CRuRkrX18fpB9dRtwtR58jR8=;
-	b=V2zPBAnoYb8jIruBO1WBSkJXSS5XWeQCC6Rpv7nzea9G44TIUONc4oFOBWN6kGr7H4
-	FjNBsDa8YvUOqEmzJF78p774guoeYPl2LY0Rqk/s+4TuON0M8WP12JzbsQ/JZd68xy5F
-	COOQkA5MVsGIdjw9dhYG+CH/n3oXEPnzaRQ00=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=IOb32at78gWv+EIW23HBC0DJ+Jq4blWFQ/6kZBd1c2o=;
+	b=vxqbzhLAeE35MoMRj2D8Vig07VWx/gEj08gp4GFCh4fv+/oFGgYdLHIwHeQTbXxjvD
+	hLL8WhG0Hep6HcUSjU6sZfycm9GP4sUqZ98Q2/qXT/g69/XgvrtXbcb3F0TEO6Je4Ntq
+	u+uXzVrZDZnCZiUxb/GcLn6dSD8GtEmE8VID4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=BR6MoSWOwASzTxtSqvBHLqzsBQxtLeIIVNJ66gxX5LC3qCvPNEXBNjIbIoiplYFVeU
-	BkGuu3Nu1nT+RpRdOS6g9Cmyfvy6pyk+qllFyD+fgI20NZWXo5+5MIO1UgfIi3XJtxID
-	ptkFygkdqWu6bwPprzCJUkmBL2Qszup8MkuL0=
-MIME-Version: 1.0
-Received: by 10.231.17.10 with SMTP id q10mr4880475iba.153.1286823222155; Mon,
-	11 Oct 2010 11:53:42 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 11:53:41 -0700 (PDT)
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310FFA2BC@dlee06.ent.ti.com>
-References: <1286812675-31626-1-git-send-email-chase.maupin@ti.com>
-	<AANLkTinR7QSaFb1FTzETX9=k9=JZh58iZgyD=7=So1uF@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA2BC@dlee06.ent.ti.com>
-Date: Mon, 11 Oct 2010 20:53:41 +0200
-Message-ID: <AANLkTi=uKwjKYq5W4VwKXcNHdSJkxZnu_w4M9kkvVWoX@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=jqoBeB+Dq7nIGdDGoL4WOZp3ytJbIUimnDQREISHctvoozgr31tbF2MGM1GmTq/60O
+	ZLegtwlzYNHe1XJUfyC3VJloPtwFU9QTUNXS+j/Mhq5xH0qGaXwpAGRjz9H3jiiE4xc4
+	+0MmwCe/4njz2iVZOD5yhg2UMRVUtXb7+ATb4=
+Received: by 10.204.102.75 with SMTP id f11mr5437801bko.10.1286823437226;
+	Mon, 11 Oct 2010 11:57:17 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id g12sm5794109bkb.14.2010.10.11.11.57.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 11 Oct 2010 11:57:10 -0700 (PDT)
+Date: Mon, 11 Oct 2010 20:57:10 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20101011185710.GD3465@jama>
+References: <i8ufbd$27r$1@dough.gmane.org>
+	<1286795697-9335-1-git-send-email-Martin.Jansa@gmail.com>
+	<20101011184934.GA3461@rhein.zuhause.netz>
+MIME-Version: 1.0
+In-Reply-To: <20101011184934.GA3461@rhein.zuhause.netz>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv2] recipe licenses: update recipe LICENSE fields
+Subject: Re: [PATCH] openjade: return oj-native-libosp-fix.patch, lost in BBCLASSEXTEND change fdf02c61607acb5046afaa11c5c682ab99f4d508
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,64 +58,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 18:54:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Oct 2010 18:57:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/10/11 Maupin, Chase <chase.maupin@ti.com>:
->
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Frans Meulenbroeks
->> Sent: Monday, October 11, 2010 12:41 PM
->> To: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] [PATCHv2] recipe licenses: update recipe LICENSE field=
-s
->>
->> 2010/10/11 Chase Maupin <chasemaupin03@gmail.com>:
->> > * While verifying the licensing for the packages I am building
->> > =A0into my file system I found that for some packages the
->> > =A0LICENSE value set in the recipe was either incorrect or
->> > =A0generic and not detailed enough. =A0This patch is my attempt
->> > =A0to update the LICENSE fields for these packages to match
->> > =A0the actual versions of the licenses in the sources.
->> >
->>
->> [...]
->>
->> > -LICENSE =3D "GPLv2"
->> > +LICENSE =3D "GPLv2+"
->>
->> Doe we want this?
->> I think most GPLv2 code carries the clause:
->>
->> "This program is free software; you can redistribute it and/or
->> modify it under the terms of the GNU General Public License
->> as published by the Free Software Foundation; either version 2
->> of the License, or (at your option) any later version."
->>
->> Yet currently virtually all of these have GPL or GPLv2 as LICENSE
->
-> Frans,
->
-> My original version of this patch was just changing GPL to GPLv2 for exam=
-ple. =A0But I was asked about whether it should be GPLv2+ which I guess is =
-more indicative of the "or later" clause. =A0Does anyone have good guidance=
- here on how to denote things that are GPLv2 only for now (like git which L=
-inux has a note in the COPYING file about it being GPLv2) and things that a=
-re GPLv2 or later version? =A0I'm trying for consistency here but I guess t=
-here doesn't seem to be a set policy for how the LICENSE field should be se=
-t.
->
+On Mon, Oct 11, 2010 at 08:49:35PM +0200, Henning Heinold wrote:
+> On Mon, Oct 11, 2010 at 01:14:57PM +0200, Martin Jansa wrote:
+> > ---
+> >  recipes/openjade/openjade_1.3.2.bb |    5 +++--
+> >  1 files changed, 3 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/recipes/openjade/openjade_1.3.2.bb b/recipes/openjade/openjade_1.3.2.bb
+> > index 238586b..9462636 100644
+> > --- a/recipes/openjade/openjade_1.3.2.bb
+> > +++ b/recipes/openjade/openjade_1.3.2.bb
+> > @@ -5,9 +5,10 @@ DESCRIPTION = "OpenJade is a suite of tools for validating, \
+> >  processing, and applying DSSSL (Document Style Semantics and \
+> >  Specification Language) stylesheets to SGML and XML documents."
+> >  LICENSE = "BSD"
+> > -PR = "r2"
+> > +PR = "r3"
+> >  SRC_URI = "${SOURCEFORGE_MIRROR}/openjade/openjade-${PV}.tar.gz \
+> > -	   file://configure.patch \
+> > +           file://oj-native-libosp-fix.patch \
+> > +           file://configure.patch \
+> >            "
+> >  
+> >  inherit autotools
+> 
+> Didnt you forgot the oj-native-libosp-fix.patch or came it from an earlier version?
 
-I have no personal preference, but was just noting the difference. How
-do others feel about thi?
+no, it was lost from SRC_URI  in previous patch (replacing openjade-native with
+BBCLASSEXTEND), but file is still there and doesn't seem to do any harm
+to non-native version as well (so applied to both now).
 
-BTW: please don't take this personal. I really appreciate you doing
-this, but I also am very aware that it is a boring and non-rewarrding
-job, so we should better aim at getting it right te first time.
-
-Frans
+Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
