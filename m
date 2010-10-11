@@ -1,39 +1,47 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Nd8-0008Iz-8F
-	for openembedded-devel@openembedded.org; Mon, 11 Oct 2010 21:01:51 +0200
-Received: by yxj4 with SMTP id 4so1062961yxj.6
-	for <openembedded-devel@openembedded.org>;
-	Mon, 11 Oct 2010 12:01:23 -0700 (PDT)
+	(envelope-from <vwyodapink@gmail.com>) id 1P5NuW-0007KS-D8
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 21:19:49 +0200
+Received: by vws3 with SMTP id 3so912529vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Oct 2010 12:19:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=6mhnHWK5LM5koY1Nj+mayGdRJJxs3B2XoobA/Oe3ivo=;
-	b=JlSAjPFE2d6vDUgFvy1Uo77Rd3byiCGEQhtAvrmbrc183Ft/JhEIX7uPYhcpQN022G
-	CqUysaRg8VOMK1R9eb+JJbOnElKODShn/dXyaZsB4TBGsNtRHDcWhcguEX9EnjZk2Ky3
-	IopUa/Ke7OatoeFgfJzD27BOHOlpbiAN/DGd8=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=GBMzOPRqPuuL9xjcFfLe1Nt8V2afDEeONk9UwD3YM4E=;
+	b=Ae3RcGr7w5yEiuOSI9e+h1wUdmosI1HD0NnaA32H1QCPAnmsmJiey1tXNti1OatrKh
+	/b9n3HuYbQJgFZs8M6g7S+zCjD7L2YAvFsa0W30woUZHSUWBf7EhKAqKcdhHg5IK7Tg0
+	56UHbb+o+4BgjQrqkr06e3WNvQ1ef+kmaVEMc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=iGBGf6bBi2GGeCFlEfZjqct7oGuntLYzMdtvQZB4ggUynbl7Ri488Fh3WjkJ+g+Uch
-	zN8uY1gJLRu4Al3GePGEPtAH2GUxVNyZCfiAh6eSLDJa/HRKG5DwhIR7v7yTj4oy2J/K
-	+t58z0nyxCluZ8d05gNBHnRjlq0tWIJUtfQNQ=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=G2RY+5LDP3sxE7331IH9k4tXukqdJNeaPXmkdn7a+twOWRD1UbiS3DJJxEVQUGxj7Y
+	rXbP+1ytHzNrhkyuK9y2CjExmydiInJQj/5DXXb2AyCdGcSpLeQIP6dmRQw1U6qRIxKC
+	McYwKABmkHT1Z8379/mY/rxLh73xzLBeN83mY=
 MIME-Version: 1.0
-Received: by 10.42.117.68 with SMTP id s4mr1797882icq.344.1286823682057; Mon,
-	11 Oct 2010 12:01:22 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 12:01:21 -0700 (PDT)
-Date: Mon, 11 Oct 2010 21:01:21 +0200
-Message-ID: <AANLkTikY65E7Y_LHngm7b6SdtNmWKjLFjd3sSU4PgTgN@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.220.200.3 with SMTP id eu3mr2050724vcb.13.1286824755964; Mon,
+	11 Oct 2010 12:19:15 -0700 (PDT)
+Received: by 10.220.195.72 with HTTP; Mon, 11 Oct 2010 12:19:15 -0700 (PDT)
+In-Reply-To: <AANLkTi=_CEduzJiR369hBifGv6=X=k4zDNQw=v7gAmmA@mail.gmail.com>
+References: <AANLkTineQJGDAdjuuHpkKEsYPU1TuvmgE+7k+EoYqtTp@mail.gmail.com>
+	<201010111602.05916.khimov@altell.ru>
+	<AANLkTi=_aW1_xh4s=MTG60waODeY6VFKy6v_bXNgf=pu@mail.gmail.com>
+	<AANLkTi=_CEduzJiR369hBifGv6=X=k4zDNQw=v7gAmmA@mail.gmail.com>
+Date: Mon, 11 Oct 2010 12:19:15 -0700
+Message-ID: <AANLkTino_dSNi67Dv-qHqBSRkOTUDTMv44uxLK9paS6D@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: bitbake COMPATIBLE_MACHINE stack backtrace
+Subject: Re: [RFC] unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,61 +55,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 19:01:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Oct 2010 19:19:50 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
-[this was still in my concepts folder, thought I'd sent it out  last week]
+2010/10/11 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> 2010/10/11 J. L. <vwyodapink@gmail.com>:
+>> On Mon, Oct 11, 2010 at 5:02 AM, Roman I Khimov <khimov@altell.ru> wrote=
+:
+>>> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=
+=CB 11 =CF=CB=D4=D1=C2=D2=D1 2010 15:51:05 =C1=D7=D4=CF=D2 Frans Meulenbroe=
+ks
+>>> =CE=C1=D0=C9=D3=C1=CC:
+>>>> =9A- a way to indicate that a file is installed but purposedly not
+>>>> packaged (e.g. I have such a thing in mythtv with a README file)
+>>>> This could be by creating a pseudo-package (like -unused or -ignore)
+>>>> which can be used to add files that are explicitly not packaged
+>>>
+>>> Shouldn't such files be removed with do_install_append()?
+>
+> rethinking this (after my previous mail) would we get an issue because
+> some files are staged but not packaged (which is generally not the
+> case, but I am thinking about gcc-cross and friends)
+>>
+>> my uneducated suggestion would be dont remove them and do something
+>> like Frans suggests, reason being I am noticing packages that do not
+>> build with files that you would expect especially ones with -dev tags.
+>> or even some not being made like libgcc-dev. But like one off the top
+>> of my head would be if you install libpcap and libcap-dev you still do
+>> not get a pcap.h to use if you compile something on the machine your
+>> built those packages into the image of.
+>>
+>
+> it is not my proposal to make this a real installable package. I just
+> want a mechanism that you can use to tell that a file while being
+> there is on purpose not packaged
+> Wrt your example: I'd say if pcap.h comes from libcpcap, it should
+> probably go into libpcap-dev (or maybe libcap-dev).
+>
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Hi,
+Ahh ok sorry miss understood what you wanted. I did run into another
+one where I installed the built mysql5 and mysql5-dev  and it does not
+provide a mysql.h on the machine, also lots of .dev packages rely on
+libgcc-dev but there is not an installable version of libgcc-dev. So
+if you install a -dev after you have the image running you get
+complaints about no libgcc-dev on the machine. So if I run into things
+like that I would need to go to that package and figure out why and
+how to get the .h's I need in the .dev and or figure out how to make
+the missing -dev ?
 
-If I run bitbake (git head of about a week ago) with a recipe that has
-COMPATIBLE_MACHINE set and that is not for my machine, I get a bitbake
-tracedump;
-
-Log;
-frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> grep COMPAT *
-encdec-updater.bb:COMPATIBLE_MACHINE = '(poodle|c7x0|spitz|akita|tosa)'
-nandlogical_1.0.0.bb:COMPATIBLE_MACHINE = "(poodle|c7x0|akita|spitz|tosa)"
-zaurus-installer.bb:COMPATIBLE_MACHINE = '(collie|poodle|c7x0|spitz|akita|tosa)'
-zaurus-legacy-tar.bb:COMPATIBLE_MACHINE = "spitz"
-zaurus-updater.bb:COMPATIBLE_MACHINE = '(poodle|c7x0|spitz|akita|tosa)'
-
-frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> bitbake -b
-zaurus-legacy-tar.bb
-ERROR: Command execution failed: Traceback (most recent call last):
-  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
-    commandmethod(self.cmds_async, self, options)
-  File "/home/frans/oe/bitbake/lib/bb/command.py", line 174, in buildFile
-    command.cooker.buildFile(bfile, task)
-  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 650, in buildFile
-    self.status.task_deps[fn]['depends'] = {}
-TypeError: 'NoneType' object does not support item assignment
-
-frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> bitbake
-zaurus-legacy-tar
-NOTE: Handling BitBake files: - (7148/7148) [100 %]
-Parsing of 7148 .bb files complete (6693 cached, 455 parsed). 7333
-targets, 330 skipped, 0 masked, 0 errors.
-NOTE: oestats: build 93365
-ERROR: Nothing PROVIDES 'zaurus-legacy-tar'
-ERROR: Command execution failed: Traceback (most recent call last):
-  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
-    commandmethod(self.cmds_async, self, options)
-  File "/home/frans/oe/bitbake/lib/bb/command.py", line 184, in buildTargets
-    command.cooker.buildTargets(pkgs_to_build, task)
-  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 737, in buildTargets
-    taskdata.add_provider(localdata, self.status, k)
-  File "/home/frans/oe/bitbake/lib/bb/taskdata.py", line 357, in add_provider
-    self.add_provider_internal(cfgData, dataCache, item)
-  File "/home/frans/oe/bitbake/lib/bb/taskdata.py", line 377, in
-add_provider_internal
-    raise bb.providers.NoProvider(item)
-NoProvider: zaurus-legacy-tar
-
-Especially in the first case there is no  real error message.
-I seem to recall (but have not verified) that 1.10 handled this
-without traceback.
-
-Any
+Thanks
 
 
