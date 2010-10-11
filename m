@@ -1,47 +1,44 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1P5BpT-00073s-21
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Br7-0007Sv-Vy
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 08:25:49 +0200
-Received: by pzk28 with SMTP id 28so153347pzk.6
+	Mon, 11 Oct 2010 08:27:30 +0200
+Received: by iwn7 with SMTP id 7so2282958iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Oct 2010 23:25:17 -0700 (PDT)
+	Sun, 10 Oct 2010 23:27:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=6sDdP4DF/f5VfD7k8QdU2FNWi68dsew0sF6wOabTVqs=;
-	b=eoOBU/jb4kGsmolgHRsw8iLDzCz0K83mYBV2Ev9613vqRZ1AIJAVy0a16QwKL9GIHL
-	yJjckHnyph8Bo1Xz0QAfyEU4wZblCAWUTwNCWFUzOImfYo5IYGOYvdXhgh/KJkb65xuR
-	cqjbdV8Foq/asIpT0c49YX8CUJa13sg3/SNNI=
+	bh=dFq3s7o/hTgEz5G1RybI3iA4+dpnggfUgOkxTgcOhXs=;
+	b=la9rjaItCTwbIY+dAGjSKAJeZCZ0CWP838+100kqEkhn1BKshGJmDWoF4E5zW8K0qG
+	DvCdLcAwBLnYcJe82Vuwow4CklYomgsEJjgZa+xxfylnpF2+xypcdUPJWuqS0kqzuOtj
+	5Oz13ZP4fC/lBvDHx+4aeaPdrJiUT1spjSRoY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=Gg3wpAouYlPUnWQ5qT6SVqtC0nPWhLwZ2sc+WfFNmOZwILBD3ccUW9JqmhdUO/5nFr
-	9c1tWCzoCOD2SCK3qjpF5KZR0SvLS2zP5pFImSLWUyyKJphUI8HPzvlj6K4eR803l1js
-	8ryOgwY9PsVLTkCfAgZHs6OnkUjwb0aEDlqss=
-Received: by 10.142.141.4 with SMTP id o4mr4859657wfd.314.1286778316502;
-	Sun, 10 Oct 2010 23:25:16 -0700 (PDT)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id t38sm7785975wfc.9.2010.10.10.23.25.13
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 10 Oct 2010 23:25:15 -0700 (PDT)
-Message-ID: <4CB2ADC6.3030804@gmail.com>
-Date: Mon, 11 Oct 2010 16:55:10 +1030
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
+	b=gG7oVdyIXFZ6nTLT3Ys0grRn0xb9Lx7ZhgrP4GzQx7XY9Z2X+X52S/Bu0BYapZ7q9g
+	Hn7WU/Pbm2Ol/1k6vxXZDmv2KzQpZ1+LsJecEyYNjsMauwZQbdErTunV0OfETYGmwApT
+	AoRSNhCBnn5DpqGtMgtfczaO3Du8QZH3daUY4=
 MIME-Version: 1.0
+Received: by 10.42.148.74 with SMTP id q10mr216023icv.431.1286778422742; Sun,
+	10 Oct 2010 23:27:02 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 10 Oct 2010 23:27:02 -0700 (PDT)
+In-Reply-To: <F34D057F-F640-4BB6-841B-2B66AFE37A99@mac.com>
+References: <F34D057F-F640-4BB6-841B-2B66AFE37A99@mac.com>
+Date: Mon, 11 Oct 2010 08:27:02 +0200
+Message-ID: <AANLkTin8xbEBR=mVr3PHN9cjwqtUoM9BxpYkgBE7p_UY@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.47
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] dsniff_2.3.bb: fix buildability.
+Subject: Re: Building for multiple machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,72 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 06:25:49 -0000
+X-List-Received-Date: Mon, 11 Oct 2010 06:27:30 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-This almost 10 year old software is beginning to suffer bitrot. Libnids now
-uses glib, and openssl structs have moved headers.
+2010/10/11 Elvis Dowson <elvis.dowson@mac.com>:
+> Hi,
+> =A0 =A0 =A0 =A0What should I do build for multiple machines ?
+>
+> I have an overo-oe repository, but I need to temporarily build u-boot for=
+ a different board.
+>
+> In my auto.conf, the entry is MACHINE=3D"overo"
+>
+> u-boot board definitions for say beagleboard, have named the board "beagl=
+e"
+>
+> So, would an appropriate command be
+>
+> bitbake u-boot-omap3 MACHINE=3D"beagle"
+>
+>
+> Elvis Dowson
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/dsniff/dsniff-2.3/openssl-includes.patch |   11 +++++++++++
- recipes/dsniff/dsniff_2.3.bb                     |    7 ++++---
- 2 files changed, 15 insertions(+), 3 deletions(-)
- create mode 100644 recipes/dsniff/dsniff-2.3/openssl-includes.patch
+I guess trying this would ahve been much faster than waiting for an answer =
+here.
 
-diff --git a/recipes/dsniff/dsniff-2.3/openssl-includes.patch b/recipes/dsniff/dsniff-2.3/openssl-includes.patch
-new file mode 100644
-index 0000000..033fc5c
---- /dev/null
-+++ b/recipes/dsniff/dsniff-2.3/openssl-includes.patch
-@@ -0,0 +1,11 @@
-+--- dsniff-2.3/sshcrypto.c.orig	2010-10-11 16:38:25.000000000 +1030
-++++ dsniff-2.3/sshcrypto.c	2010-10-11 16:38:30.000000000 +1030
-+@@ -14,6 +14,8 @@
-+ 
-+ #include <sys/types.h>
-+ #include <openssl/ssl.h>
-++#include <openssl/blowfish.h>
-++#include <openssl/des.h>
-+ 
-+ #include <err.h>
-+ #include <stdio.h>
-diff --git a/recipes/dsniff/dsniff_2.3.bb b/recipes/dsniff/dsniff_2.3.bb
-index 03ef527..51f2113 100644
---- a/recipes/dsniff/dsniff_2.3.bb
-+++ b/recipes/dsniff/dsniff_2.3.bb
-@@ -3,16 +3,17 @@ SECTION = "console/network"
- HOMEPAGE = "http://www.monkey.org/~dugsong/dsniff/"
- AUTHOR = "Dug Song <dugsong@monkey.org>"
- LICENSE = "BSD"
--PR = "r2"
-+PR = "r3"
- 
- # There is a significant API change beween 1.0.2a of libnet and
- # 1.1.x, dsniff will only work with the older and there is no
- # updated version of dnsniff.
--DEPENDS = "virtual/db libpcap libnet-1.0 libnids openssl"
-+DEPENDS = "virtual/db libpcap libnet-1.0 libnids openssl glib-2.0"
- 
- SRC_URI = "\
-   http://www.monkey.org/~dugsong/dsniff/dsniff-${PV}.tar.gz \
-   file://configure.patch \
-+  file://openssl-includes.patch \
- "
- 
- inherit autotools
-@@ -27,7 +28,7 @@ EXTRA_OECONF = "\
- EXTRA_OEMAKE = "'install_prefix=${D}'"
- 
- CFLAGS =+ "-I${S}/missing"
--LDFLAGS += "-lresolv"
-+LDFLAGS += "-lresolv -lglib-2.0 -lgthread-2.0 -lrt -pthread"
- 
- SRC_URI[md5sum] = "183e336a45e38013f3af840bddec44b4"
- SRC_URI[sha256sum] = "82e492455486e655c315f027d393dbeb49ad930804acccdc51b30d57e1294ff5"
--- 
-1.7.1
+And OE does not have an auto.conf
 
+Frans
 
 
