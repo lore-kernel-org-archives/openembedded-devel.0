@@ -1,39 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Nbp-0008DR-R7
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 21:00:31 +0200
-Received: by iwn2 with SMTP id 2so31729iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 12:00:05 -0700 (PDT)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Nd8-0008Iz-8F
+	for openembedded-devel@openembedded.org; Mon, 11 Oct 2010 21:01:51 +0200
+Received: by yxj4 with SMTP id 4so1062961yxj.6
+	for <openembedded-devel@openembedded.org>;
+	Mon, 11 Oct 2010 12:01:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=zXWhe0gOUTuKOnkXetDiM2OTInT6MU6TjDH41IGS4SY=;
-	b=Ap6DnPtTDjb8WCbp9N4riu5or5a38ZmSX8l/Q/zqnl89zxdXaAdZBrowVRl6ZufAM/
-	oxPCEbDsnl/tIt6ZBwE42Di3XXrlIqULFmNApy9/DILRKb5xPABhLwl260uzY/qmhjT7
-	EhcK3/caFPn/bnzBbv/0o5gpg8lQrRg+XK5OI=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=6mhnHWK5LM5koY1Nj+mayGdRJJxs3B2XoobA/Oe3ivo=;
+	b=JlSAjPFE2d6vDUgFvy1Uo77Rd3byiCGEQhtAvrmbrc183Ft/JhEIX7uPYhcpQN022G
+	CqUysaRg8VOMK1R9eb+JJbOnElKODShn/dXyaZsB4TBGsNtRHDcWhcguEX9EnjZk2Ky3
+	IopUa/Ke7OatoeFgfJzD27BOHOlpbiAN/DGd8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=vNw7H6lbRmu/ovPL68yWtMzFpqombi2WgET84x+SlKIvrvQhxBE26vqOfdCH9D9ZWr
-	mQ5zSR1EwFiMdMTRPxeTIcK1ZaDB8+tRay5e9NLFfKyMlJ6IMQThFY1JNr5WN8Kip6J8
-	XyMnryKsi5sygA4I2X4Rewfml2IUqaVZClIqM=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=iGBGf6bBi2GGeCFlEfZjqct7oGuntLYzMdtvQZB4ggUynbl7Ri488Fh3WjkJ+g+Uch
+	zN8uY1gJLRu4Al3GePGEPtAH2GUxVNyZCfiAh6eSLDJa/HRKG5DwhIR7v7yTj4oy2J/K
+	+t58z0nyxCluZ8d05gNBHnRjlq0tWIJUtfQNQ=
 MIME-Version: 1.0
-Received: by 10.231.148.83 with SMTP id o19mr4970201ibv.112.1286823605252;
-	Mon, 11 Oct 2010 12:00:05 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 12:00:04 -0700 (PDT)
-In-Reply-To: <i8vln6$njo$1@dough.gmane.org>
-References: <1286812675-31626-1-git-send-email-chase.maupin@ti.com>
-	<AANLkTinR7QSaFb1FTzETX9=k9=JZh58iZgyD=7=So1uF@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA2BC@dlee06.ent.ti.com>
-	<i8vln6$njo$1@dough.gmane.org>
-Date: Mon, 11 Oct 2010 21:00:04 +0200
-Message-ID: <AANLkTik+qU9YfpoHybY=v87sVGOE9M8RjdKgfgwfL-JF@mail.gmail.com>
+Received: by 10.42.117.68 with SMTP id s4mr1797882icq.344.1286823682057; Mon,
+	11 Oct 2010 12:01:22 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 12:01:21 -0700 (PDT)
+Date: Mon, 11 Oct 2010 21:01:21 +0200
+Message-ID: <AANLkTikY65E7Y_LHngm7b6SdtNmWKjLFjd3sSU4PgTgN@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -41,7 +33,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv2] recipe licenses: update recipe LICENSE fields
+Subject: bitbake COMPATIBLE_MACHINE stack backtrace
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,87 +47,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 19:00:31 -0000
+X-List-Received-Date: Mon, 11 Oct 2010 19:01:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/10/11 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 11-10-10 20:14, Maupin, Chase wrote:
->>
->>> -----Original Message-----
->>> From: openembedded-devel-bounces@lists.openembedded.org
->>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->>> Frans Meulenbroeks
->>> Sent: Monday, October 11, 2010 12:41 PM
->>> To: openembedded-devel@lists.openembedded.org
->>> Subject: Re: [oe] [PATCHv2] recipe licenses: update recipe LICENSE fiel=
-ds
->>>
->>> 2010/10/11 Chase Maupin <chasemaupin03@gmail.com>:
->>>> * While verifying the licensing for the packages I am building
->>>> =A0into my file system I found that for some packages the
->>>> =A0LICENSE value set in the recipe was either incorrect or
->>>> =A0generic and not detailed enough. =A0This patch is my attempt
->>>> =A0to update the LICENSE fields for these packages to match
->>>> =A0the actual versions of the licenses in the sources.
->>>>
->>>
->>> [...]
->>>
->>>> -LICENSE =3D "GPLv2"
->>>> +LICENSE =3D "GPLv2+"
->>>
->>> Doe we want this?
->>> I think most GPLv2 code carries the clause:
->>>
->>> "This program is free software; you can redistribute it and/or
->>> modify it under the terms of the GNU General Public License
->>> as published by the Free Software Foundation; either version 2
->>> of the License, or (at your option) any later version."
->>>
->>> Yet currently virtually all of these have GPL or GPLv2 as LICENSE
->>
->> Frans,
->>
->> My original version of this patch was just changing GPL to GPLv2 for exa=
-mple. =A0But I was asked about whether it should be GPLv2+ which I guess is=
- more indicative of the "or later" clause. =A0Does anyone have good guidanc=
-e here on how to denote things that are GPLv2 only for now (like git which =
-Linux has a note in the COPYING file about it being GPLv2) and things that =
-are GPLv2 or later version? =A0I'm trying for consistency here but I guess =
-there doesn't seem to be a set policy for how the LICENSE field should be s=
-et.
->
-> The current policy is:
->
-> GPLv1 -> GPL version 1
-> GPLv1+ -> GPL version 1 or later
-> GPLv2 -> GPL version 2
-> GPLv2+ -> GPL version 2 or later
-> GPLv3 -> GPL version 3
-> GPLv3+ -> GPL version 3 or later
->
-> This was done to make it immediately clear which GPL license it's using
-> so you can decide to drop GPLv2+ and GPLv3 from your manifest if you
-> want secure boot or enforce patents.
->
-> regards,
->
-> Koen
+[this was still in my concepts folder, thought I'd sent it out  last week]
 
-I'm not sure if it is a policy. Haven't seen it being pulished as such.
-Having said that, I have no problems with it (although there is no
-problem with enforcing patents or so for v2+ , as that still falls
-under the v2 umbrella).
+Hi,
 
-I guess most of our recipes that say GPLv2 are wrong and are v2+.
-It might be hard to distinguish between these though, it could well be
-that the license file says v2 and a comment in the code says v2+.
-Glad I do not have to deal with this any more....
+If I run bitbake (git head of about a week ago) with a recipe that has
+COMPATIBLE_MACHINE set and that is not for my machine, I get a bitbake
+tracedump;
 
-Frans
+Log;
+frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> grep COMPAT *
+encdec-updater.bb:COMPATIBLE_MACHINE = '(poodle|c7x0|spitz|akita|tosa)'
+nandlogical_1.0.0.bb:COMPATIBLE_MACHINE = "(poodle|c7x0|akita|spitz|tosa)"
+zaurus-installer.bb:COMPATIBLE_MACHINE = '(collie|poodle|c7x0|spitz|akita|tosa)'
+zaurus-legacy-tar.bb:COMPATIBLE_MACHINE = "spitz"
+zaurus-updater.bb:COMPATIBLE_MACHINE = '(poodle|c7x0|spitz|akita|tosa)'
+
+frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> bitbake -b
+zaurus-legacy-tar.bb
+ERROR: Command execution failed: Traceback (most recent call last):
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+    commandmethod(self.cmds_async, self, options)
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 174, in buildFile
+    command.cooker.buildFile(bfile, task)
+  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 650, in buildFile
+    self.status.task_deps[fn]['depends'] = {}
+TypeError: 'NoneType' object does not support item assignment
+
+frans@linux-suse:~/oe/openembedded/recipes/zaurus-utils> bitbake
+zaurus-legacy-tar
+NOTE: Handling BitBake files: - (7148/7148) [100 %]
+Parsing of 7148 .bb files complete (6693 cached, 455 parsed). 7333
+targets, 330 skipped, 0 masked, 0 errors.
+NOTE: oestats: build 93365
+ERROR: Nothing PROVIDES 'zaurus-legacy-tar'
+ERROR: Command execution failed: Traceback (most recent call last):
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+    commandmethod(self.cmds_async, self, options)
+  File "/home/frans/oe/bitbake/lib/bb/command.py", line 184, in buildTargets
+    command.cooker.buildTargets(pkgs_to_build, task)
+  File "/home/frans/oe/bitbake/lib/bb/cooker.py", line 737, in buildTargets
+    taskdata.add_provider(localdata, self.status, k)
+  File "/home/frans/oe/bitbake/lib/bb/taskdata.py", line 357, in add_provider
+    self.add_provider_internal(cfgData, dataCache, item)
+  File "/home/frans/oe/bitbake/lib/bb/taskdata.py", line 377, in
+add_provider_internal
+    raise bb.providers.NoProvider(item)
+NoProvider: zaurus-legacy-tar
+
+Especially in the first case there is no  real error message.
+I seem to recall (but have not verified) that 1.10 handled this
+without traceback.
+
+Any
 
 
