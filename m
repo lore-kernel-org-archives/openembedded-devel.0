@@ -1,40 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P5FdW-000623-Fl for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 12:29:44 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P5Fd6-0001jT-PS for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 12:29:16 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 12:29:16 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <vjaquez@igalia.com>) id 1P5G65-0002qK-A1
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 12:59:15 +0200
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ArUEAJeKskxbdWOb/2dsb2JhbACUD4c/hy6+OIVIBI9A
+X-IronPort-AV: E=Sophos;i="4.57,313,1283724000"; d="scan'208";a="688635643"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 11 Oct 2010 12:58:49 +0200
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1P5G5h-0002gT-Iu
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 12:29:16 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 11 Oct 2010 12:58:49 +0200
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1P5G5h-0001Tz-C6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Oct 2010 12:58:49 +0200
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>) id 1P5G5h-0001T7-4L
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 12:58:49 +0200
+Date: Mon, 11 Oct 2010 12:58:49 +0200
+From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 11 Oct 2010 12:29:04 +0200
-Message-ID: <i8uotg$c41$1@dough.gmane.org>
+Message-ID: <20101011105848.GB4715@lit.local.igalia.com>
 References: <1286561232-31048-1-git-send-email-vjaquez@igalia.com>
 	<20101011093357.GA4715@lit.local.igalia.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <20101011093357.GA4715@lit.local.igalia.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<i8uotg$c41$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i8uotg$c41$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 212.51.32.151
+X-SA-Exim-Mail-From: vjaquez@igalia.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] angstrom.inc: set TARGET_VENDOR ?= "-angstrom"
@@ -51,29 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 10:29:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 11 Oct 2010 10:59:15 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 11-10-10 11:33, VÃ­ctor M. JÃ¡quez L. wrote:
-> On Fri, Oct 08, 2010 at 08:07:11PM +0200, VÃ­ctor Manuel JÃ¡quez Leal wrote:
->> By doing this we could use external toolchains for build angstrom
->> based images.
->>
+On Mon, Oct 11, 2010 at 12:29:04PM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> Ping. Any comment about this patch?
+> On 11-10-10 11:33, Víctor M. Jáquez L. wrote:
+> > On Fri, Oct 08, 2010 at 08:07:11PM +0200, Víctor Manuel Jáquez Leal wrote:
+> >> By doing this we could use external toolchains for build angstrom
+> >> based images.
+> >>
+> > 
+> > Ping. Any comment about this patch?
+> 
+> Something like this should be done in external-toolchain.inc
 
-Something like this should be done in external-toolchain.inc
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+There's no external-toolchain.inc in OE's org.openembedded.dev branch. So I
+assume that you refer to a user's local.conf require.
 
-iD8DBQFMsubwMkyGM64RGpERAltkAKCzoLak6SGJ13n0N+wPuPo8dKAthQCfTzOM
-Jse5t4NNC6RdqDcyjOFfUbg=
-=bDqB
------END PGP SIGNATURE-----
+I done that and it doesn't work: the distro/include/angstrom.inc evaluation
+happens later and overrides the TARGET_VENDOR variable, that why a ?= is
+needed.
 
+vmjl
 
 
