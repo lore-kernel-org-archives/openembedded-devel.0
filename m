@@ -1,39 +1,38 @@
-Received: from li38-254.members.linode.com ([207.192.74.254]
-	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sgarman@zenlinux.com>) id 1P5BLX-0005vP-2K
+Received: from asmtpout023.mac.com ([17.148.16.98])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <elvis.dowson@mac.com>) id 1P5BRZ-0006TV-ED
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 07:54:51 +0200
-Received: from [192.168.1.12] (c-76-105-143-140.hsd1.or.comcast.net
-	[76.105.143.140])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id E454D3045A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 01:54:20 -0400 (EDT)
-Message-ID: <4CB2A68B.5070108@zenlinux.com>
-Date: Sun, 10 Oct 2010 22:54:19 -0700
-From: Scott Garman <sgarman@zenlinux.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1286775778-1446-1-git-send-email-sgarman@zenlinux.com>
-In-Reply-To: <1286775778-1446-1-git-send-email-sgarman@zenlinux.com>
-X-MasterFoo-MailScanner-Information: Please contact the ISP for more
-	information
-X-MailScanner-ID: E454D3045A.8F638
-X-MasterFoo-MailScanner: Found to be clean
-X-MasterFoo-MailScanner-SpamCheck: not spam
-X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
-X-SA-Exim-Connect-IP: 207.192.74.254
-X-SA-Exim-Mail-From: sgarman@zenlinux.com
+	Mon, 11 Oct 2010 08:01:08 +0200
+MIME-version: 1.0
+Received: from [192.168.1.100] ([87.201.169.234])
+	by asmtp023.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
+	(built Dec
+	16 2008; 32bit)) with ESMTPSA id <0LA400CYT3BPKI20@asmtp023.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	10 Oct 2010 22:59:52 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 suspectscore=5 phishscore=0 bulkscore=0 adultscore=0
+	classifier=spam
+	adjust=0 reason=mlx engine=6.0.2-1004200000 definitions=main-1010100218
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.2.15,1.0.148,0.0.0000
+	definitions=2010-10-11_01:2010-10-10, 2010-10-10,
+	1970-01-01 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+Date: Mon, 11 Oct 2010 09:59:43 +0400
+Message-id: <F34D057F-F640-4BB6-841B-2B66AFE37A99@mac.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 17.148.16.98
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cpio: update 2.5 to 2.11
+Subject: Building for multiple machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,32 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 05:54:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 Oct 2010 06:01:09 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
-On 10/10/2010 10:42 PM, Scott Garman wrote:
-> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
-> ---
->   recipes/cpio/cpio-2.11/statdef.patch |   15 ++++++++
->   recipes/cpio/cpio_2.11.bb            |   42 +++++++++++++++++++++++
->   recipes/cpio/cpio_2.5.bb             |   42 -----------------------
->   recipes/cpio/files/install.patch     |   61 ----------------------------------
->   4 files changed, 57 insertions(+), 103 deletions(-)
->   create mode 100644 recipes/cpio/cpio-2.11/statdef.patch
->   create mode 100644 recipes/cpio/cpio_2.11.bb
->   delete mode 100644 recipes/cpio/cpio_2.5.bb
->   delete mode 100644 recipes/cpio/files/install.patch
+Hi,
+        What should I do build for multiple machines ? 
 
-I'd like to point out that I used git mv to rename cpio_2.5.bb to 
-cpio_2.11.bb, but git format-patch refuses to show the rename. I tried 
-passing it the -M flag and also setting diff.renames to true in my 
-.gitconfig file. So I'm not sure what's causing the problem.
+I have an overo-oe repository, but I need to temporarily build u-boot for a different board. 
 
-Scott
+In my auto.conf, the entry is MACHINE="overo"
 
--- 
-Scott Garman
-sgarman at zenlinux dot com
+u-boot board definitions for say beagleboard, have named the board "beagle" 
+
+So, would an appropriate command be 
+
+bitbake u-boot-omap3 MACHINE="beagle"
+
+
+Elvis Dowson
 
 
