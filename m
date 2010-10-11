@@ -1,37 +1,45 @@
-Received: from li38-254.members.linode.com ([207.192.74.254]
-	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sgarman@zenlinux.com>) id 1P5MWM-0005vd-Rr
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Md9-0006Ix-4e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 19:50:48 +0200
-Received: from localhost.localdomain (c-76-105-143-140.hsd1.or.comcast.net
-	[76.105.143.140])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id 4AAC830461;
-	Mon, 11 Oct 2010 13:50:18 -0400 (EDT)
-From: Scott Garman <sgarman@zenlinux.com>
+	Mon, 11 Oct 2010 19:57:47 +0200
+Received: by iwn6 with SMTP id 6so31656iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Oct 2010 10:57:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=wJO4aO3gZCZ/M67MLAoIAHNoWCK1uoouekkWMTMS3bo=;
+	b=sUbNJROCqeczTaQBynoUHpWMHE8Ni4Ohdj3gSxGItqJWrMP6HeXnADlDY+T73G5Pp0
+	0jMFf8/z23mIm4lYjYj0+fKbZ2a5uJpUd6ATitrlEYqNZeDEvmKrmzZa/vnulscsmtvd
+	R1QnsEMLIRA0L0LKhHVx2rRmTzozolGVgRkr4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=FeJ1FGUDkSXhHFRYjles14xhjjr3RlTN70aE1wSeJ2O4Sy6+sYx0HyTWp49fexHFWn
+	4aTUWz62biqU/yJzgUPxHdvhqaijXkuYHxSySXDr0VasztLLpKrTtuEHP7QA6efiMKOj
+	VHGpXa8Jhi99tMdWVnbfthQUDKeM8Cq0PYZRY=
+MIME-Version: 1.0
+Received: by 10.42.138.7 with SMTP id a7mr2039314icu.452.1286819842453; Mon,
+	11 Oct 2010 10:57:22 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 10:57:22 -0700 (PDT)
+In-Reply-To: <201010111602.05916.khimov@altell.ru>
+References: <AANLkTineQJGDAdjuuHpkKEsYPU1TuvmgE+7k+EoYqtTp@mail.gmail.com>
+	<201010111602.05916.khimov@altell.ru>
+Date: Mon, 11 Oct 2010 19:57:22 +0200
+Message-ID: <AANLkTikoRgF_iRe0=8T97gPTXsa=HXRSxrWmEivtoa=e@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Oct 2010 10:50:10 -0700
-Message-Id: <1286819410-3422-1-git-send-email-sgarman@zenlinux.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1286775778-1446-1-git-send-email-sgarman@zenlinux.com>
-References: <1286775778-1446-1-git-send-email-sgarman@zenlinux.com>
-X-MasterFoo-MailScanner-Information: Please contact the ISP for more
-	information
-X-MailScanner-ID: 4AAC830461.89C8C
-X-MasterFoo-MailScanner: Found to be clean
-X-MasterFoo-MailScanner-SpamCheck: not spam
-X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
-X-SA-Exim-Connect-IP: 207.192.74.254
-X-SA-Exim-Mail-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Scott Garman <sgarman@zenlinux.com>
-Subject: [PATCH v2] cpio: update 2.5 to 2.11
+Subject: Re: [RFC] unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,207 +53,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 17:50:48 -0000
+X-List-Received-Date: Mon, 11 Oct 2010 17:57:47 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Scott Garman <sgarman@zenlinux.com>
----
- recipes/cpio/cpio-2.11/statdef.patch |   16 +++++++++
- recipes/cpio/cpio_2.11.bb            |   42 +++++++++++++++++++++++
- recipes/cpio/cpio_2.5.bb             |   42 -----------------------
- recipes/cpio/files/install.patch     |   61 ----------------------------------
- 4 files changed, 58 insertions(+), 103 deletions(-)
- create mode 100644 recipes/cpio/cpio-2.11/statdef.patch
- create mode 100644 recipes/cpio/cpio_2.11.bb
- delete mode 100644 recipes/cpio/cpio_2.5.bb
- delete mode 100644 recipes/cpio/files/install.patch
+2010/10/11 Roman I Khimov <khimov@altell.ru>:
+> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB =
+11 =CF=CB=D4=D1=C2=D2=D1 2010 15:51:05 =C1=D7=D4=CF=D2 Frans Meulenbroeks
+> =CE=C1=D0=C9=D3=C1=CC:
+>> =9A- a way to indicate that a file is installed but purposedly not
+>> packaged (e.g. I have such a thing in mythtv with a README file)
+>> This could be by creating a pseudo-package (like -unused or -ignore)
+>> which can be used to add files that are explicitly not packaged
+>
+> Shouldn't such files be removed with do_install_append()?
 
-diff --git a/recipes/cpio/cpio-2.11/statdef.patch b/recipes/cpio/cpio-2.11/statdef.patch
-new file mode 100644
-index 0000000..c3117c9
---- /dev/null
-+++ b/recipes/cpio/cpio-2.11/statdef.patch
-@@ -0,0 +1,16 @@
-+# Avoid multiple stat definitions
-+# Patch written by Naohiro Aota, taken from cpio mailing list:
-+# http://lists.gnu.org/archive/html/bug-cpio/2010-03/msg00005.html
-+#
-+# Signed-off-by: Scott Garman <sgarman@zenlinux.com>
-+
-+diff -urN cpio-2.11.orig/src/filetypes.h cpio-2.11/src/filetypes.h
-+--- cpio-2.11.orig/src/filetypes.h	2010-02-12 02:19:23.000000000 -0800
-++++ cpio-2.11/src/filetypes.h	2010-07-23 13:17:25.000000000 -0700
-+@@ -82,4 +82,6 @@
-+ #define lstat stat
-+ #endif
-+ int lstat ();
-++#ifndef stat
-+ int stat ();
-++#endif
-diff --git a/recipes/cpio/cpio_2.11.bb b/recipes/cpio/cpio_2.11.bb
-new file mode 100644
-index 0000000..42b3676
---- /dev/null
-+++ b/recipes/cpio/cpio_2.11.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "GNU cpio is a program to manage archives of files."
-+HOMEPAGE = "http://www.gnu.org/software/cpio/"
-+SECTION = "console"
-+LICENSE = "GPLv3"
-+PR = "r0"
-+
-+DEPENDS = "texinfo-native"
-+
-+SRC_URI = "${GNU_MIRROR}/cpio/cpio-${PV}.tar.gz \
-+           file://statdef.patch \
-+          "
-+
-+SRC_URI[md5sum] = "1112bb6c45863468b5496ba128792f6c"
-+SRC_URI[sha256sum] = "601b1d774cd6e4cd39416203c91ec59dbd65dd27d79d75e1a9b89497ea643978"
-+
-+inherit autotools gettext
-+
-+do_install () {
-+    autotools_do_install
-+    install -d ${D}${base_bindir}/
-+    mv "${D}${bindir}/cpio" "${D}${base_bindir}/cpio.${PN}"
-+    case ${TARGET_OS} in
-+        *-uclibc*) ;;
-+        *) mv "${D}${libexecdir}/rmt" "${D}${libexecdir}/rmt.${PN}" ;;
-+    esac
-+}
-+
-+pkg_postinst_${PN} () {
-+    update-alternatives --install ${base_bindir}/cpio cpio cpio.${PN} 100
-+    if [ -f ${libexecdir}/rmt.${PN} ]
-+    then
-+        update-alternatives --install ${libexecdir}/rmt rmt rmt.${PN} 50
-+    fi
-+}
-+
-+pkg_prerm_${PN} () {
-+    update-alternatives --remove cpio cpio.${PN}
-+    if [ -f ${libexecdir}/rmt.${PN} ]
-+    then
-+        update-alternatives --remove rmt rmt.${PN}
-+    fi
-+}
-diff --git a/recipes/cpio/cpio_2.5.bb b/recipes/cpio/cpio_2.5.bb
-deleted file mode 100644
-index b4504ba..0000000
---- a/recipes/cpio/cpio_2.5.bb
-+++ /dev/null
-@@ -1,42 +0,0 @@
--DESCRIPTION = "GNU cpio is a program to manage archives of files."
--HOMEPAGE = "http://www.gnu.org/software/cpio/"
--SECTION = "console"
--LICENSE = "GPL"
--PR = "r5"
--
--DEPENDS += " texinfo-native "
--
--SRC_URI = "${GNU_MIRROR}/cpio/cpio-${PV}.tar.gz \
--	   file://install.patch"
--S = "${WORKDIR}/cpio-${PV}"
--
--inherit autotools
--
--do_install () {
--	autotools_do_install
--	install -d ${D}${base_bindir}/
--	mv "${D}${bindir}/cpio" "${D}${base_bindir}/cpio.${PN}"
--	case ${TARGET_OS} in
--		*-uclibc*) ;;
--		*) mv "${D}${libexecdir}/rmt" "${D}${libexecdir}/rmt.${PN}" ;;
--	esac
--}
--
--pkg_postinst_${PN} () {
--	update-alternatives --install ${base_bindir}/cpio cpio cpio.${PN} 100
--	if [ -f ${libexecdir}/rmt.${PN} ]
--	then
--		update-alternatives --install ${libexecdir}/rmt rmt rmt.${PN} 50
--	fi
--}
--
--pkg_prerm_${PN} () {
--	update-alternatives --remove cpio cpio.${PN}
--	if [ -f ${libexecdir}/rmt.${PN} ]
--	then
--		update-alternatives --remove rmt rmt.${PN}
--	fi
--}
--
--SRC_URI[md5sum] = "e02859af1bbbbd73fcbf757acb57e0a4"
--SRC_URI[sha256sum] = "dbf79293d0cafa7d7a3a266c2b0b90c00d556e7b3185d4243c74153291da24c8"
-diff --git a/recipes/cpio/files/install.patch b/recipes/cpio/files/install.patch
-deleted file mode 100644
-index 3554156..0000000
---- a/recipes/cpio/files/install.patch
-+++ /dev/null
-@@ -1,61 +0,0 @@
--
--#
--# Patch managed by http://www.holgerschurig.de/patcher.html
--#
--
----- cpio-2.5/Makefile.in~install.patch
--+++ cpio-2.5/Makefile.in
--@@ -70,6 +70,7 @@
-- # Prefix for each installed man page, normally empty or `g'.
-- manprefix = 
-- 
--+DESTDIR =
-- 
-- # Where to install the cpio and mt executables.
-- bindir = @bindir@
--@@ -123,19 +124,19 @@
-- 	$(CC) -c $(CPPFLAGS) $(DEFS) -I$(srcdir) $(CFLAGS) $<
-- 
-- install:: installdirs all $(srcdir)/cpio.1 $(srcdir)/mt.1
---	$(INSTALL_PROGRAM) cpio $(bindir)/$(binprefix)cpio
---	test ! -f mt || $(INSTALL_PROGRAM) mt $(bindir)/$(binprefix)mt
---	-test ! -f rmt || $(INSTALL_PROGRAM) rmt $(libexecdir)/rmt
---	-$(INSTALL_DATA) $(srcdir)/cpio.1 $(mandir)/$(manprefix)cpio.$(manext)
---	-test ! -f mt || $(INSTALL_DATA) $(srcdir)/mt.1 $(mandir)/$(manprefix)mt.$(manext)
--+	$(INSTALL_PROGRAM) -D cpio $(DESTDIR)$(bindir)/$(binprefix)cpio
--+	test ! -f mt || $(INSTALL_PROGRAM) -D mt $(DESTDIR)$(bindir)/$(binprefix)mt
--+	-test ! -f rmt || $(INSTALL_PROGRAM) -D rmt $(DESTDIR)$(libexecdir)/rmt
--+	-$(INSTALL_DATA) -D $(srcdir)/cpio.1 $(DESTDIR)$(mandir)/$(manprefix)cpio.$(manext)
--+	-test ! -f mt || $(INSTALL_DATA) -D $(srcdir)/mt.1 $(DESTDIR)$(mandir)/$(manprefix)mt.$(manext)
-- 
-- installdirs:
---	$(srcdir)/mkinstalldirs $(bindir) $(libexecdir) $(mandir) $(infodir)
--+	$(srcdir)/mkinstalldirs $(DESTDIR)/$(bindir) $(DESTDIR)/$(libexecdir) $(DESTDIR)/$(mandir) $(DESTDIR)/$(infodir)
-- 
-- uninstall::
---	cd $(bindir); rm -f $(binprefix)cpio $(binprefix)mt
---	-rm -f $(libexecdir)/rmt
---	cd $(mandir); rm -f $(manprefix)cpio.$(manext) $(manprefix)mt.$(manext)
--+	cd $(DESTDIR)$(bindir); rm -f $(binprefix)cpio $(binprefix)mt
--+	-rm -f $(DESTDIR)$(libexecdir)/rmt
--+	cd $(DESTDIR)$(mandir); rm -f $(manprefix)cpio.$(manext) $(manprefix)mt.$(manext)
-- 
-- check:
-- 	@echo No tests are supplied.
--@@ -186,14 +187,14 @@
-- 
-- install-info: $(INFO_DEPS)
-- 	for file in *.info*; do \
---	  $(INSTALL_DATA) $$file $(infodir)/$$file; \
--+	  $(INSTALL_DATA) -D $$file $(DESTDIR)$(infodir)/$$file; \
-- 	done
-- 
-- uninstall:: uninstall-info
-- 
-- uninstall-info:
-- 	for file in *.info*; do \
---	  rm -f $(infodir)/$$file; \
--+	  rm -f $(DESTDIR)$(infodir)/$$file; \
-- 	done
-- 
-- clean:
--- 
-1.6.3.3
+This is also an option. Didn't think of that one. No preference for
+one or another.
+And in either case we might want to allow choosing this to be handled
+as error (and, in due time be forced to be an error)
 
+Frans
 
 
