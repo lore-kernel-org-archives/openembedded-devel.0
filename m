@@ -1,37 +1,29 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>)
-	id 1P5HSV-0003XF-1e; Mon, 11 Oct 2010 14:26:27 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 851A8A4800;
-	Mon, 11 Oct 2010 13:26:02 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id TcYsWITGwESZ; Mon, 11 Oct 2010 13:26:02 +0100 (BST)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id BAA14A47A9;
-	Mon, 11 Oct 2010 13:26:01 +0100 (BST)
-Message-ID: <4CB30259.6020004@xora.org.uk>
-Date: Mon, 11 Oct 2010 13:26:01 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+	(envelope-from <philip@balister.org>) id 1P5HWi-0005ao-EA
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Oct 2010 14:30:49 +0200
+Received: (qmail 31346 invoked by uid 1003); 11 Oct 2010 12:30:18 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	11 Oct 2010 12:30:18 -0000
+Message-ID: <4CB30358.5050504@balister.org>
+Date: Mon, 11 Oct 2010 08:30:16 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc13 Thunderbird/3.1.4
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-members@lists.openembedded.org
-X-Enigmail-Version: 1.1.1
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: General Assembly 2010 Agenda
+Subject: Membership in the OpenEmbedded eV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 12:26:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Oct 2010 12:30:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
- I have just created a page on OE wiki to hold the Agenda for 2010
-General Assembly.
+As most of you know, there is an OpenEmbedded eV to provide an umbrella 
+organization for handling various aspects of managing the project. There 
+is a description here: http://wiki.openembedded.net/index.php/Organization.
 
-http://wiki.openembedded.net/index.php/GA2010
+We are holding the annual General Assembly on Friday October 30, 2010 
+after ELCE in Cambridge. The actual GA should be first thing in the 
+morning and shouldn't take more than a couple of hours.
 
-I would love to hear from members of any addition discussions that
-should occur. Or better ordering suggestions.
+One of the things we would like to do is vote in new members to the eV 
+(for the .us guys, think 501c3). If you are interested in becoming a 
+member, read the Organization web page and send me an email indicating 
+your desire to become a member. Please include a short paragraph 
+explaining who you are and how you are involved with OpenEmbedded.
 
-Graeme
-
+Philip
 
 
