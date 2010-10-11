@@ -1,35 +1,31 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5GmC-0007P1-W1
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Gox-0008I5-Qd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Oct 2010 13:42:46 +0200
-Received: by iwn7 with SMTP id 7so2576998iwn.6
+	Mon, 11 Oct 2010 13:45:36 +0200
+Received: by iwn7 with SMTP id 7so2579666iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 04:42:17 -0700 (PDT)
+	Mon, 11 Oct 2010 04:45:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JwDA8OIC1NX32SYJwk10Q0pjrFGtMFUlHRXcNDc+H6Q=;
-	b=uszAUssuon9o+w3+DmCO6ogHzuNJN3J2FGE3fZS+uD9h1xbRvyPRv7xbmcJqO8YOkp
-	AzWYvkNNn/XBaQ8PRc/ixIMCkkZRHDajzg64qoZaYJtdGrN4aU4JyQUG17YQT8V8+KCd
-	GrHbQyzixSK3ZmCBYmtwwsReLPo8cnUzbLdc0=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=XqC65DOACkLTXMSMxQ/0j33yh7mPPEvcFbgQICzzH34=;
+	b=F+rghE3xI1XEyFFMELqQPMK8SxePCV2okRQkuTmVLT39JzBf0sXQFpBvta8dk5Q0Zk
+	e66Ak+KRWVIm9qyYfYByDmBDfPxDFy/LE1H6OimihKpZSet8CgUh8eX2oT0M4+eI5SYm
+	BJYQixJFNU3EkxXosDUY2roiXL5xcndf3Uz3U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=dAFGNu1TS5iNhJo5FFSVtmiKzN0JawzTStMAMnrZXpBWdRttGzrSWeL0BFymsM+JNs
-	5xAzpHoiuJmZKtyARi7zjl9PqKwAaYUE9scs9OSDMYOOIZ+BTk82kZzFnrKEFITJYpig
-	Zw1duxfmb45dD2kO4Unak+P2tDE2QZjB237hI=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=VfqTe11xt34YXu++w7DKdudAFQGLAdhtgLJ9qUgZa0wOTWNJbpvZGZuLHQSR60N/sq
+	zzdC7MOatF9Bw1txlgdUWxA1A/behlAkAZoCJRBQBVkr1kOkK8tynIBMwsFaQCAG9iCm
+	c/ZaQmyqS4yVbJcUqtWhNWIx7lOMdunH8YDPA=
 MIME-Version: 1.0
-Received: by 10.231.169.149 with SMTP id z21mr4611705iby.11.1286797337501;
-	Mon, 11 Oct 2010 04:42:17 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 04:42:17 -0700 (PDT)
-In-Reply-To: <1286796051.3835.78.camel@mattotaupa>
-References: <1286796051.3835.78.camel@mattotaupa>
-Date: Mon, 11 Oct 2010 13:42:17 +0200
-Message-ID: <AANLkTi=WmoGiADa+MSxgepq4PhtpjXS7qOaD76vK6A2q@mail.gmail.com>
+Received: by 10.42.141.201 with SMTP id p9mr816694icu.368.1286797511547; Mon,
+	11 Oct 2010 04:45:11 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 04:45:11 -0700 (PDT)
+Date: Mon, 11 Oct 2010 13:45:11 +0200
+Message-ID: <AANLkTimQBC0f8J-J_E+XADErZMAGzgNHRKwUemXThgPy@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org, bitbake-dev@lists.berlios.de
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -38,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gtk+-native: depends somehow on cups-native: `ERROR: Required build target 'gtk+-native' has no buildable providers.`
+Subject: git & SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,89 +48,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2010 11:42:46 -0000
+X-List-Received-Date: Mon, 11 Oct 2010 11:45:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/10/11 Paul Menzel <paulepanter@users.sourceforge.net>:
-> Dear OE folks,
->
->
-> =A0 =A0 =A0 =A0$ bitbake evince
->
-> fails with the following error for `angstrom-2010.x` for `MACHINE =3D
-> "beagleboard"`.
->
-> =A0 =A0 =A0 =A0ERROR: Required build target 'evince' has no buildable pro=
-viders.
-> =A0 =A0 =A0 =A0Missing or unbuildable dependency chain was: ['evince', 'g=
-nome-keyring', 'gtk+-native', 'cups-native']
-> =A0 =A0 =A0 =A0Command execution failed: Traceback (most recent call last=
-):
-> =A0 =A0 =A0 =A0 =A0File "/home/paul/oe/bitbake/lib/bb/command.py", line 8=
-8, in runAsyncCommand
-> =A0 =A0 =A0 =A0 =A0 =A0commandmethod(self.cmds_async, self, options)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/command.py", line 174, in bui=
-ldTargets
-> =A0 =A0 =A0 =A0 =A0 =A0command.cooker.buildTargets(pkgs_to_build, task)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/cooker.py", line 784, in buil=
-dTargets
-> =A0 =A0 =A0 =A0 =A0 =A0taskdata.add_unresolved(localdata, self.status)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/taskdata.py", line 556, in ad=
-d_unresolved
-> =A0 =A0 =A0 =A0 =A0 =A0self.remove_buildtarget(targetid)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/taskdata.py", line 510, in re=
-move_buildtarget
-> =A0 =A0 =A0 =A0 =A0 =A0self.fail_fnid(fnid, missing_list)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fa=
-il_fnid
-> =A0 =A0 =A0 =A0 =A0 =A0self.remove_buildtarget(target, missing_list)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/taskdata.py", line 510, in re=
-move_buildtarget
-> =A0 =A0 =A0 =A0 =A0 =A0self.fail_fnid(fnid, missing_list)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fa=
-il_fnid
-> =A0 =A0 =A0 =A0 =A0 =A0self.remove_buildtarget(target, missing_list)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/taskdata.py", line 510, in re=
-move_buildtarget
-> =A0 =A0 =A0 =A0 =A0 =A0self.fail_fnid(fnid, missing_list)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/taskdata.py", line 490, in fa=
-il_fnid
-> =A0 =A0 =A0 =A0 =A0 =A0self.remove_buildtarget(target, missing_list)
-> =A0 =A0 =A0 =A0 =A0File "/oe/bitbake/lib/bb/taskdata.py", line 519, in re=
-move_buildtarget
-> =A0 =A0 =A0 =A0 =A0 =A0raise bb.providers.NoProvider
-> =A0 =A0 =A0 =A0NoProvider
->
-> `gtk+.inc` `DEPENDS` on `cups` [1]. Is this converted to `cups-native` fo=
-r `gtk+-native`?
+Roughly once a week i see a question on irc about someone getting a
+git error: "fatal: not a valid object name 1"
+this is because SRCREV is not defined for e.g. that machine.
+What about extending bitbake (guess it is in there) with an error
+message that more clearly explains the problem?
 
-Yes.
-see native.bbclass, around line 118:
-
-        for dep in deps:
-            if dep.endswith("-cross"):
-                newdeps.append(dep.replace("-cross", "-native"))
-            elif not dep.endswith("-native"):
-
-                newdeps.append(dep + "-native")
-            else:
-                newdeps.append(dep)
->
->
-> Thanks,
->
-> Paul
->
->
-> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gtk+/=
-gtk+.inc
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Frans
 
 
