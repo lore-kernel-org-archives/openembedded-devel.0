@@ -1,39 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P5hvq-0000N1-VK for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 18:42:33 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P5hvK-0000mA-Vv for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 18:41:58 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 18:41:58 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 18:41:58 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philip@balister.org>) id 1P5hzp-0001Dv-27
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Oct 2010 18:46:40 +0200
+Received: (qmail 2975 invoked by uid 1003); 12 Oct 2010 16:46:06 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	12 Oct 2010 16:46:06 -0000
+Message-ID: <4CB490CD.50500@balister.org>
+Date: Tue, 12 Oct 2010 12:46:05 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc13 Thunderbird/3.1.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 12 Oct 2010 18:41:49 +0200
-Message-ID: <i9234d$dh4$1@dough.gmane.org>
-References: <4CB48C51.9000403@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <4CB48C51.9000403@mentor.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4CB48C51.9000403@mentor.com> <i9234d$dh4$1@dough.gmane.org>
+In-Reply-To: <i9234d$dh4$1@dough.gmane.org>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] Remove older freetype versions
@@ -50,37 +39,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 16:42:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 12 Oct 2010 16:46:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 10/12/2010 12:41 PM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 12-10-10 18:26, Tom Rini wrote:
+>> Hey all,
+>>
+>> I'd like to remove all versions of freetype before 2.4.3.  The only dist
+>> which is pinning freetype currently does so via
+>> conf/distro/include/preferred-opie-versions.inc and that pins to a
+>> non-existent version (it's using OPIE_VERSION which seems wrong).  All
+>> of the previous versions have various security issues, including
+>> remotely exploitable ones.  Only the very oldest version we have as a
+>> D_P -1 so everyone was using 2.3.12 and will be going up to 2.4.3
+>> (libraries are compat).
+>
+> Speaking of freetype, the bytecode patent expired, so we can turn that
+> on and get nicer text :)
+>
+> And removing older freetypes is a good idea
 
-On 12-10-10 18:26, Tom Rini wrote:
-> Hey all,
-> 
-> I'd like to remove all versions of freetype before 2.4.3.  The only dist
-> which is pinning freetype currently does so via
-> conf/distro/include/preferred-opie-versions.inc and that pins to a
-> non-existent version (it's using OPIE_VERSION which seems wrong).  All
-> of the previous versions have various security issues, including
-> remotely exploitable ones.  Only the very oldest version we have as a
-> D_P -1 so everyone was using 2.3.12 and will be going up to 2.4.3
-> (libraries are compat).
+I'd like to point people at openwmbedded/removal.txt. This would be a 
+good place to schedule things for deletion. As in I added a new version 
+and made it active, but do not want to delete the older version for a 
+couple of months just in case something crops up. So leave a note in 
+removal.txt to look are removing a recipe on a certain date.
 
-Speaking of freetype, the bytecode patent expired, so we can turn that
-on and get nicer text :)
-
-And removing older freetypes is a good idea
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMtI/NMkyGM64RGpERAqDrAKCWutxfdYArulFqTU2ws2hyCNVeEwCfbVjn
-vn8FRMOthyeFvYaGR1ZsLbs=
-=LHiZ
------END PGP SIGNATURE-----
-
+Philip
 
 
