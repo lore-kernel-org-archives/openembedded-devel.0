@@ -1,48 +1,41 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P5iUH-00039d-5v
+	(envelope-from <sledz@dresearch.de>) id 1P5jFO-0000Qv-96
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 19:18:05 +0200
-Received: by bwz9 with SMTP id 9so1535408bwz.6
+	Tue, 12 Oct 2010 20:06:50 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 17404491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 10:17:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=0YUzHTgTYby++ciBPrjSeKcVhoSFab8HKDZztDkAAUQ=;
-	b=lxP9uXSVNUauwEs5Pc7aVw/AKcTROC3KByXQNWnn5DyYlTW8d9ZPwsaPcbqcJ2lSsw
-	nvU53wp7UhRJLqUbsT8wUksAOI6YZTmM9D835FmVEUurl5M00M3RLiGaoJQRVxphgO/u
-	I4QiAIIQ1H2709zhyoIKd5R5uoTTZYoNK0lQw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=wwmaUqHd4EGCdC2BGeA1KPNlwusa0bO3KlPO9whZW+FTJerCVrvIKbJ0Td+dGx1y5k
-	+aIaifhSR3yXKR3o+raB/hzwbCF3FSCS7zhz3VmMOlCspb84qP/sdgbOybrL2kI/54Fy
-	U6+yn65PfXLbnaGNLBRxRzCHQjiy4IUv6tJJs=
-Received: by 10.204.70.67 with SMTP id c3mr6649192bkj.62.1286903860023;
-	Tue, 12 Oct 2010 10:17:40 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u4sm4530396bkz.17.2010.10.12.10.17.37
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 12 Oct 2010 10:17:37 -0700 (PDT)
-Date: Tue, 12 Oct 2010 19:17:36 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101012171736.GB3549@jama>
-References: <4CB48C51.9000403@mentor.com>
+	Tue, 12 Oct 2010 20:06:21 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Received: from 192.168.32.8 ([192.168.32.8]) by exchange.intern.dresearch.de
+	([192.168.32.16]) with Microsoft Exchange Server HTTP-DAV ;
+	Tue, 12 Oct 2010 18:06:20 +0000
 MIME-Version: 1.0
-In-Reply-To: <4CB48C51.9000403@mentor.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; de;
+	rv:1.9.1.12) Gecko/20100914 SUSE/3.0.8 Lightning/1.0b1
+	Thunderbird/3.0.8
+Date: Tue, 12 Oct 2010 20:06:19 +0200
+Message-ID: <DB561678F08F554EB0D9F21B70E268A505AF40@exchange.intern.dresearch.de>
+In-Reply-To: <i8vclt$9te$1@dough.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] testing branch 2010-10-08
+Thread-Index: ActqOCyNA3JyGIunSoSDc1qq1ECb9g==
+References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>	<DB561678F08F554EB0D9F21B70E268A505AF27@exchange.intern.dresearch.de>	<DB561678F08F554EB0D9F21B70E268A505AF2A@exchange.intern.dresearch.de>
+	<i8vclt$9te$1@dough.gmane.org>
+From: "Sledz, Steffen" <sledz@dresearch.de>
+To: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Remove older freetype versions
+Subject: Re: testing branch 2010-10-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,25 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 17:18:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Oct 2010 18:07:09 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-class: urn:content-classes:message
 
-On Tue, Oct 12, 2010 at 09:26:57AM -0700, Tom Rini wrote:
-> Hey all,
-> 
-> I'd like to remove all versions of freetype before 2.4.3.  The only dist 
-> which is pinning freetype currently does so via
-> conf/distro/include/preferred-opie-versions.inc and that pins to a 
-> non-existent version (it's using OPIE_VERSION which seems wrong).  All 
-> of the previous versions have various security issues, including 
-> remotely exploitable ones.  Only the very oldest version we have as a 
-> D_P -1 so everyone was using 2.3.12 and will be going up to 2.4.3 
-> (libraries are compat).
+Am 11.10.2010 18:06, schrieb Koen Kooi:
+> On 11-10-10 17:34, Sledz, Steffen wrote:
+>> On 10/11/2010 09:34 AM, Sledz, Steffen wrote:
+>>> do_configure still fails for epiphany-2.30.2-r3 (see
+>>> <http://tinderbox.openembedded.net/packages/835265/>) with:
+>>>
+>>> "checking location of system Certificate Authority list...
+>>> configure: error: could not find. Use --with-ca-file=3Dpath
+>>> to set, or --without-ca-file to disable"
+>>>
+>>> I thought the additional ca-certifactes dependency (see thread
+>>> =
+<http://thread.gmane.org/gmane.comp.handhelds.openembedded/37453/focus=3D=
+37585>)
+>>> fixes this, but it does not seem so. :(
+>>>
+>>> I'd a look into my openSUSE-system and there epiphany uses
+>>> a file /var/lib/ca-certificates/ca-bundle.pem (linked to
+>>> /etc/ssl/ca-bundle.pem) installed by the ca-certificates package.
+>>>
+>>> The OE ca-certificates package does not install such a bundle.
+>>> So may be that's the real problem.
+>=20
+>> A look into the ca-certificates recipe shows this:
+>=20
+>>   pkg_postinst_${PN} () {
+>>           /usr/sbin/update-ca-certificates
+>>   }
+>=20
+>> I think this is to late if another package needs the result from
+>> this call in its configuration stage.
+>=20
+> That's missing a $D check as well, since in that form it can't be run
+> off-line
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Can please someone else have a look at this? I'm not familiar with this =
+stuff (and BTW i'm not the maintainer of epiphany and/or gnome).
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Steffen
 
 
