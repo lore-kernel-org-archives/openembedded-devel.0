@@ -1,42 +1,38 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1P5kNG-0004xg-VE
+	(envelope-from <msmith@cbnco.com>) id 1P5ksm-0003cO-S6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 21:19:02 +0200
-Received: by vws3 with SMTP id 3so1464504vws.6
+	Tue, 12 Oct 2010 21:51:40 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 08A268C5C73
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 12:18:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=hRlmXRFCPFiTyThPNphi/yFDGCRLQbJLvpBEsY7duYg=;
-	b=m8a7UqNnX8dcemDI33CXFJ78w+d8bNDGrWukyXAQsHwaPz6r6HcGhWwhRGDAE9byIB
-	uM7iFFLMWIbjqGPfQtV/wq0iDdUXY5reP9q0cc2fs0GVDryqMZj3R+3UwVvS6kBMqOCJ
-	3HEqFKj1sXKQ5yekYQyT6k3F27m3MSJWM9ZeM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:cc:content-type;
-	b=QYcAiKRE5e0I4l+5c3LLphO1wsxCAXqDFYJI7Y7fLJrPM+U9OEn3TWRrOyNg1OCygu
-	7ENOknp58b4mehOUDbZAdtPpeDb1bj9mKbyyf1ow78ZfpUN/jAqm+8J9RNXEjID38VeS
-	F8VZBSbPqLd9GEwl/LGSY+TSdcuwB9rUtedb8=
+	Tue, 12 Oct 2010 15:50:44 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 07420-09 for <openembedded-devel@lists.openembedded.org>; 
+	Tue, 12 Oct 2010 15:50:43 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 014B48C5C61
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Oct 2010 15:50:39 -0400 (EDT)
+Message-ID: <4CB4BC0E.7040901@cbnco.com>
+Date: Tue, 12 Oct 2010 15:50:38 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
-Received: by 10.220.191.1 with SMTP id dk1mr1598375vcb.215.1286911093972; Tue,
-	12 Oct 2010 12:18:13 -0700 (PDT)
-Received: by 10.220.195.72 with HTTP; Tue, 12 Oct 2010 12:18:13 -0700 (PDT)
-Date: Tue, 12 Oct 2010 12:18:13 -0700
-Message-ID: <AANLkTi=C+v2LfaXUuwTARn6hTmriWcUdBqKfq6pHPTAr@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+References: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
+In-Reply-To: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "General mailing list for gumstix users."
-	<gumstix-users@lists.sourceforge.net>
-Subject: Libprelude fails on oe_runmake
+Subject: Re: [PATCH resend 1/4] make 3.82: set DEFAULT_PREFERENCE = "-1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,61 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 19:19:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 12 Oct 2010 19:51:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Anyone have any ideas as how to fix this or what may be causing this?
-I bumped my image to using barnyard2 and brought up this issue for me.
-Thanks for the help, I am only posting part of the error as its really
-long:
+ping
 
-| arm-angstrom-linux-gnueabi-libtool: compile:
-arm-angstrom-linux-gnueabi-g++ -march=armv7-a -mtune=cortex-a8
--mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb
--DHAVE_CONFIG_H -I. -I../..
--I/home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/lib/ruby/1.8/i686-linux
--isystem/home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/include
--O2 -g -I../.. -I../../src/include -I../../src/include
--I../../src/libprelude-error -I../../bindings/c++/include
--I../../libmissing -I../../libmissing
--isystem/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
--isystem/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
--fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
--ggdb2 -fpermissive -fvisibility-inlines-hidden -MT
-PreludeEasy_la-PreludeEasy.lo -MD -MP -MF
-.deps/PreludeEasy_la-PreludeEasy.Tpo -c PreludeEasy.cxx  -fPIC -DPIC
--o .libs/PreludeEasy_la-PreludeEasy.o
-| In file included from
-/home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/lib/ruby/1.8/i686-linux/missing.h:16:0,
-|                  from
-/home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/lib/ruby/1.8/i686-linux/ruby.h:755,
-|                  from PreludeEasy.cxx:856:
-| ../../libmissing/sys/time.h:85:58: error: conflicting declaration
-'void* restrict'
-| ../../libmissing/sys/time.h:85:42: error: 'restrict' has a previous
-declaration as 'timeval* restrict'
-| make[3]: *** [PreludeEasy_la-PreludeEasy.lo] Error 1
-| make[3]: Leaving directory
-`/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libprelude-1.0.0-r0/libprelude-1.0.0/bindings/ruby'
-| make[2]: *** [all-recursive] Error 1
-| make[2]: Leaving directory
-`/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libprelude-1.0.0-r0/libprelude-1.0.0/bindings'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory
-`/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libprelude-1.0.0-r0/libprelude-1.0.0'
-| make: *** [all] Error 2
-| FATAL: oe_runmake failed
-NOTE: Task failed:
-/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libprelude-1.0.0-r0/temp/log.do_compile.30120
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/vdubhack/overo-oe/org.openembedded.dev/recipes/libprelude/libprelude_1.0.0.bb
-do_compile failed
-ERROR: Task 15 (/home/vdubhack/overo-oe/org.openembedded.dev/recipes/libprelude/libprelude_1.0.0.bb,
-do_compile) failed
-NOTE: Tasks Summary: Attempted 1090 tasks of which 1084 didn't need to
-be rerun and 1 failed.
-ERROR: '/home/vdubhack/overo-oe/org.openembedded.dev/recipes/libprelude/libprelude_1.0.0.bb'
-failed
+Michael Smith wrote:
+> This version has introduced several backwards incompatibilities and some
+> packages are known not to build with 3.82. In particular:
+> 
+> - glibc-initial fails in do_install when prefix="".
+> - eglibc manual/Makefile has not yet been patched (see 3a06f50f)
+> 
+> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> ---
+>  recipes/make/make_3.82.bb |    3 +++
+>  1 files changed, 3 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes/make/make_3.82.bb b/recipes/make/make_3.82.bb
+> index 3cdc0a0..86c58d6 100644
+> --- a/recipes/make/make_3.82.bb
+> +++ b/recipes/make/make_3.82.bb
+> @@ -1,5 +1,8 @@
+>  require make.inc
+>  
+> +# Stock eglibc fails to build with make 3.82.
+> +DEFAULT_PREFERENCE = "-1"
+> +
+>  BBCLASSEXTEND = "native"
+>  SRC_URI[md5sum] = "1a11100f3c63fcf5753818e59d63088f"
+>  SRC_URI[sha256sum] = "e2c1a73f179c40c71e2fe8abf8a8a0688b8499538512984da4a76958d0402966"
+
 
 
