@@ -1,50 +1,44 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5elC-0007U9-IE
+	(envelope-from <chasemaupin03@gmail.com>) id 1P5erT-0007iD-6K
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 15:19:20 +0200
-Received: by ywl5 with SMTP id 5so1466077ywl.6
+	Tue, 12 Oct 2010 15:25:49 +0200
+Received: by yxj4 with SMTP id 4so1339169yxj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 06:18:51 -0700 (PDT)
+	Tue, 12 Oct 2010 06:25:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ExrIppgKKtBKetZTkflWYpxklUZLLf65OiRYwGpcXBc=;
-	b=ijP+eM1zCqOwK9UEWpT+uncfVeECzBpAqxKH/h7u/Kmn9JD76otugwsYZDEi7vL1mD
-	+hCvElcIkUFJWVRnyjf4OkZB0uW3Nma6nCYMjBQRHun2zKOEc9lfiAWx6PKCpVIX12yM
-	ONSepcbT0e3sBt+OA3aMX16C63TYJeXXVwSpE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=QtMou16OYILuESQgQdq8PBKB7yXj6Yk5k//+vSfPguU=;
+	b=o3aqhvyhz6qi64uZzwUnrSnypQV8DfkW9jE/s4ScmqbH1MOzAzCEJM/M57Mfs9A5ug
+	54BQ9k4ho60mkMG8louMbHGPUEkxoS0jw5OlW2nkBTUJMa///leoKb125EIIw/zgBSSw
+	SHBdG364cZ8hwIDNgsHmZqm9vy5qScEWQ8JwQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=FsFhZyyvYqyJ5seOQ6fr/gZtr2ob0kNAe1Wq4Owu2pXYTmFkY7sC7fVbk6MysG6K86
-	+Pd5zal5OO2ZNGXojZX7nIUcl4m+/tgnVPegP+7cEpXUMI8uFRNR+MTs9v2TqNKZKzgG
-	Xjq68NSXt9vfjTG6w4Ha0G9AKUgN7JwU7TG9Q=
-MIME-Version: 1.0
-Received: by 10.42.210.6 with SMTP id gi6mr2651968icb.501.1286889531028; Tue,
-	12 Oct 2010 06:18:51 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 12 Oct 2010 06:18:50 -0700 (PDT)
-In-Reply-To: <i91m8o$efr$1@dough.gmane.org>
-References: <1286783755-19145-1-git-send-email-koen@openembedded.org>
-	<i9154e$2rk$1@dough.gmane.org>
-	<AANLkTimnE3nuhgQQpCrZ0ymjzmLUkK0wxNX8bqJwa=AF@mail.gmail.com>
-	<i91dk0$7lv$1@dough.gmane.org>
-	<AANLkTimGkxUA_LLHhaeSXTAcmC6D+n7qsxBUZOU6hVbQ@mail.gmail.com>
-	<AANLkTi=cZr6FCfssVCyrYaTYH9DM3WEQn+ZT7DM+uvuJ@mail.gmail.com>
-	<i91m8o$efr$1@dough.gmane.org>
-Date: Tue, 12 Oct 2010 15:18:50 +0200
-Message-ID: <AANLkTi=ZDJcuoDzLcf+T2mJ62DAUNnRFbTMtnauOynJx@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=UrW8HiSnOD29amhZJHkOJ/5kgyrla4ssalwY7+nnao4dwu1YF8cjzmiFJO4JqEXhax
+	ADeHxbECimiu7kMDY8KbDELDKg0bT0+UgMOdVK4r0UaKJ1xl3WZRcFP/swd76EyS8Ekw
+	QLmvU22dTs9on8OOBnDtgay669U5uLHsl2STc=
+Received: by 10.236.105.148 with SMTP id k20mr14772071yhg.33.1286889917284;
+	Tue, 12 Oct 2010 06:25:17 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id h70sm5081565yha.46.2010.10.12.06.25.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 12 Oct 2010 06:25:15 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue, 12 Oct 2010 08:25:13 -0500
+Message-Id: <1286889913-20008-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv3 1/3] kernel bbclass: split do_compile into do_compile and do_compile_modules
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH] qt4: replace underscore with dash in library name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,97 +52,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 13:19:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Oct 2010 13:25:49 -0000
 
-2010/10/12 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 12-10-10 14:53, Frans Meulenbroeks wrote:
->> 2010/10/12 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
->>> 2010/10/12 Koen Kooi <k.kooi@student.utwente.nl>:
->> On 12-10-10 12:08, Frans Meulenbroeks wrote:
->>>>>> 2010/10/12 Koen Kooi <k.kooi@student.utwente.nl>:
->>
->>>>>>>> +}
->>>>>>>> +
->>>>>>>> +do_compile_kernelmodules() {
->>>>>>>> + =A0 =A0 unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
->>>>>>
->>>>>> Is it needed/required?
->>
->> It is, and it's in kernel.bbclass already:
->>
->> fe938bbe (Michael Lauer 2004-12-14) kernel_do_compile() {
->> 0448ec0d (Richard Purdie 2006-11-20) =A0 =A0 unset CFLAGS CPPFLAGS CXXFL=
-AGS
->> LDFLAGS MACHINE
->> fe938bbe (Michael Lauer 2004-12-14) =A0 =A0 oe_runmake
->> include/linux/version.h CC=3D"${KERNEL_CC}" LD=3D"${KERNEL_LD}"
->>
->>
->>>>>> I'm a little bit concerned by this.
->>>>>> (actually this was the only worry I had after reading the patch, don=
-'t
->>>>>> want to loose additional CFLAGS settings here
->>
->> You actually want to do that, since the kernel is bare-metal, not usersp=
-ace.
->>>>
->
->>>
->>> Thanks for the answer.
->>>
->>> Did a quick peek on CFLAGS in the recipes, saw there is a CFLAGS_KERNEL=
-.
->>> That one is only used on one place:
->>> linux-wrt_2.4.30.bb:export CFLAGS_KERNEL=3D"-fno-delayed-branch "
->>>
->>> Haven't tested this, but my understanding on how things work is good
->>> enough and the change simple enough for to give an ack
->>> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->>>
->
->> Actually on 2nd thought one tiny remark left:
->> after seeing patch 2:
->> what about renaming:
->> do_compile_kernelmodules
->> to something with a kernel prefix
->> e.g. kernel_do_compile_modules.
->> That makes the naming scheme somewhat more consistent.
->
-> Namespacing the class is only used for methods overridden from
-> base.bbclass. Again, look at the rest of kernel.bbclass methods like
-> uboot-mkimage, menuconfig and friends don't use that namespace.
+* For libraries that are added to the QT_LIB_NAMES or
+  QT_EXTRA_LIBS variables replace any "_" characters in the
+  library name with "-" for use in the package name.
+* The actual library file names are left alone.
+* Bump the PR for packages using qt4.inc
 
-Well I don't care too much about it, this just bubbled up because this:
->         kernel_do_compile
-> +        do_compile_kernelmodules
->         kernel_do_install
-looks a little bit better/more consistent; i did not evn consider
-overriding or so, just peeked at the aesthetics.
-as I wrote before it is a nit (and absolutely no deal-breaker afaic)
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ recipes/qt4/qt4-embedded.inc |    2 +-
+ recipes/qt4/qt4-x11-free.inc |    2 +-
+ recipes/qt4/qt4.inc          |    4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-Frans
->
-> And it doesn't actually work since _modules is a local override.
->
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMtFxYMkyGM64RGpERArFyAKCr5HipFKmy8xsYIoF/U0NIXFfDlwCfferR
-> yhTvF+MOCupbbMMstKVvkmk=3D
-> =3D6zMs
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
+index 111716d..9331302 100644
+--- a/recipes/qt4/qt4-embedded.inc
++++ b/recipes/qt4/qt4-embedded.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPL QPL"
+ PRIORITY = "optional"
+ HOMEPAGE = "http://www.trolltech.com"
+ DEPENDS += "directfb tslib"
+-INC_PR = "r23"
++INC_PR = "r24"
+ 
+ QT_BASE_NAME ?= "qt4-embedded"
+ QT_BASE_LIB  ?= "libqt-embedded"
+diff --git a/recipes/qt4/qt4-x11-free.inc b/recipes/qt4/qt4-x11-free.inc
+index 66e6d1c..ff4e454 100644
+--- a/recipes/qt4/qt4-x11-free.inc
++++ b/recipes/qt4/qt4-x11-free.inc
+@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.trolltech.com"
+ LICENSE = "GPL QPL"
+ DEPENDS += "virtual/libx11 fontconfig libxft libxext libxrender libxrandr libxcursor"
+ 
+-INC_PR = "r20"
++INC_PR = "r21"
+ 
+ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-x11-opensource-src-${PV}.tar.gz \
+            file://0001-cross-compile.patch \
+diff --git a/recipes/qt4/qt4.inc b/recipes/qt4/qt4.inc
+index ffd56dd..6721265 100644
+--- a/recipes/qt4/qt4.inc
++++ b/recipes/qt4/qt4.inc
+@@ -34,7 +34,7 @@ python __anonymous () {
+     dev_packages = []
+     dbg_packages = []
+     for name in bb.data.getVar("QT_LIB_NAMES", d, 1).split():
+-        pkg = "${QT_BASE_LIB}" + name.lower().replace("qt", "") + "4"
++        pkg = "${QT_BASE_LIB}" + name.lower().replace("qt", "").replace("_", "-") + "4"
+         # NOTE: the headers for QtAssistantClient are different
+         incname = name.replace("QtAssistantClient", "QtAssistant")
+         bb.data.setVar("FILES_%s" % pkg, "${libdir}/lib%(name)s${QT_LIBINFIX}.so.*" % locals(), d)
+@@ -52,7 +52,7 @@ python __anonymous () {
+         dbg_packages.append("%s-dbg" % name)
+ 
+     for name in bb.data.getVar("QT_EXTRA_LIBS", d, 1).split():
+-        pkg = "${QT_BASE_LIB}" + name.lower().replace("qt", "") + "4"
++        pkg = "${QT_BASE_LIB}" + name.lower().replace("qt", "").replace("_", "-") + "4"
+         bb.data.setVar("FILES_%s" % pkg, "${libdir}/lib%(name)s.so.*" % locals(), d)
+         bb.data.setVar("FILES_%s-dev" % pkg, """${libdir}/lib%(name)s.prl
+                   ${libdir}/lib%(name)s.a
+-- 
+1.7.0.4
+
 
 
