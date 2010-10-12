@@ -1,32 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P5fp4-0008Uz-MN for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 16:27:23 +0200
-Received: from f053038011.adsl.alicedsl.de ([78.53.38.11]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P5fog-0004qd-5P for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 14:26:58 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <lamiaposta71@gmail.com>) id 1P5gua-0001JI-Bd
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Oct 2010 17:37:09 +0200
+Received: by iwn2 with SMTP id 2so1199583iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Oct 2010 08:36:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=c10GZsaoaKp6QEKxBVnIrXcHP2YfNjTNCCH5TQR3RgE=;
+	b=C9RlqhUfDq067ZwhqE7kBNlGypyCtI/iw95B3tOmYcvPzyX3zvXWy4tT0JterrFxU4
+	FwviD0Fn4T/Ncsi2VijsvO1AUyyT1h7hP3B6Hwg1G7TsL7GtODYNjYAnmqKdNPYupTK/
+	I999HXSvTTZvr56PDu1j2gqbRUdm6dk4bw5Z0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=mXn8hizt35BriKLgDtI8RnRRRQz/oxwJcWL/Ep12btv4U8AiUcnMBhlOA8WVH53WXL
+	Z907LlO5wwVMI/H9z0vd4MP7GG+OlrIrkXeVROTo2wIfwD48Ek0zQePSOm6I9KMLB6lT
+	fx76dt9L/Qc8Gjl4Ezwm+6J8dTNyV/XBeYRmA=
+MIME-Version: 1.0
+Received: by 10.231.33.76 with SMTP id g12mr5864994ibd.174.1286897802903; Tue,
+	12 Oct 2010 08:36:42 -0700 (PDT)
+Received: by 10.231.36.13 with HTTP; Tue, 12 Oct 2010 08:36:42 -0700 (PDT)
+Date: Tue, 12 Oct 2010 17:36:42 +0200
+Message-ID: <AANLkTikTXVNJmQ=8Ct77Y9W1vLjLqSgFapS7vV+RFM8Q@mail.gmail.com>
+From: Raffaele Recalcati <lamiaposta71@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <i9154e$2rk$1@dough.gmane.org>
-References: <1286783755-19145-1-git-send-email-koen@openembedded.org>
-	<i9154e$2rk$1@dough.gmane.org>
-Date: Tue, 12 Oct 2010 16:26:56 +0200
-Message-ID: <1286893616.3731.40.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: lamiaposta71@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv3 1/3] kernel bbclass: split do_compile into do_compile and do_compile_modules
+Subject: OEDEM: info
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,88 +48,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 14:27:23 -0000
-X-Groupsio-MsgNum: 24735
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-iGjaTJ72tG0uwz2y4DNl"
+X-List-Received-Date: Tue, 12 Oct 2010 15:37:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
---=-iGjaTJ72tG0uwz2y4DNl
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I'm interested in attending to OEDEM for friday morning.
+I have added myself to  the list "Attending for sure", even if I'm not
+a skilled OE developer.
+I hope that I have done the right thing.
 
-Am Dienstag, den 12.10.2010, 10:09 +0200 schrieb Koen Kooi:
-> ping
->=20
-> On 11-10-10 09:55, Koen Kooi wrote:
-> > This allows recipes to insert a custom task in between building *Image =
-and modules
-> >=20
-> > Signed-off-by: Koen Kooi <koen@openembedded.org>
-> > ---
-> >  classes/kernel.bbclass |    5 +++++
-> >  1 files changed, 5 insertions(+), 0 deletions(-)
-> >=20
-> > diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> > index cf6b8cd..83e3f44 100644
-> > --- a/classes/kernel.bbclass
-> > +++ b/classes/kernel.bbclass
-> > @@ -89,12 +89,17 @@ kernel_do_compile() {
-> >  		oe_runmake dep CC=3D"${KERNEL_CC}" LD=3D"${KERNEL_LD}"
-> >  	fi
-> >  	oe_runmake ${KERNEL_IMAGETYPE} CC=3D"${KERNEL_CC}" LD=3D"${KERNEL_LD}=
-"
-> > +}
-> > +
-> > +do_compile_kernelmodules() {
-> > +	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-> >  	if (grep -q -i -e '^CONFIG_MODULES=3Dy$' .config); then
-> >  		oe_runmake modules  CC=3D"${KERNEL_CC}" LD=3D"${KERNEL_LD}"
-> >  	else
-> >  		oenote "no modules to compile"
-> >  	fi
-> >  }
-> > +addtask compile_kernelmodules after do_compile before do_install
-> > =20
-> >  kernel_do_install() {
-> >  	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+See you in Cambridge,
+Recalcati
 
-I am using `MACHINE =3D "beagleboard"`.
 
-I did
-
-	$ bitbake -c clean virtual/kernel
-	$ bitbake virtual/kernel
-
-with your patches applied for `minimal-{libc,eglibc}` and I did not see
-any regressions.
-
-The build for `angstrom-2010.x` is still running. `angstrom-2008.1`
-hangs right now, though. Could you test that again, please. I will take
-a look in a few more hours, if the build succeeded.
-
-	NOTE: Running task 892 of 911 (ID: 13, /home/paul/oe/openembedded/recipes/=
-linux)
-	NOTE: package linux-omap-psp-2.6.32-r90+gitra6bad4464f985fdd3bed72e1b82dcb=
-fc004d=E2=80=A6
-	NOTE: package linux-omap-psp-2.6.32-r90+gitra6bad4464f985fdd3bed72e1b82dcb=
-fc004d=E2=80=A6
-       =20
-
-Thanks,
-
-Paul
-
---=-iGjaTJ72tG0uwz2y4DNl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAky0cDAACgkQPX1aK2wOHVg2lQCfQeJcqX4WFH38nUfZ9og5mheK
-MVcAnj8HYl4oVYZZGZnxEMVyTY0nkGS5
-=8IT1
------END PGP SIGNATURE-----
-
---=-iGjaTJ72tG0uwz2y4DNl--
