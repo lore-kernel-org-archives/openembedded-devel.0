@@ -1,39 +1,42 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P5ZwJ-0001dP-Od for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 10:10:29 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P5Zvr-0007xb-Lq for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 10:09:59 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 10:09:59 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5bmf-00080u-UR
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Oct 2010 12:08:41 +0200
+Received: by iwn2 with SMTP id 2so870011iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 10:09:59 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 12 Oct 2010 10:09:50 +0200
-Message-ID: <i9154e$2rk$1@dough.gmane.org>
+	Tue, 12 Oct 2010 03:08:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=fuR1UP7TdGGbFe/ZjuGwzZia578TN/Xk7z1QIxpoL4A=;
+	b=JCwpr5BUbFEfvy02KziyMfjFMDP8Ci8GCLOKjcD4oAG2EeuYpTSHuHq6jVJnjIsqpk
+	KArHCxolIvo+G8z8gtkNUSkw7uQ6EdrkbNGGE22YIYGE54BZkZbJMZLJbBfyxm3is/aA
+	1HO0kBjrv+RWHCMIVZX6VfjfNrolzKAytJFs4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=bpmSHSNTnOBWTb7lAvWCCC0WQeJKS3S2Yhrv7P0vfhQkUjgJOJaGht+2ZHs0oGKe5l
+	5owM4Bt2k9b8+g+Qa7zyW6XlH0ZPiBkXrnkqB/YoW6+IuMf12pLjBelsPmHZi1ltyEGy
+	lRujP+TqAS75pBMdEIMDb0FXXs6i4NiDRdNnY=
+MIME-Version: 1.0
+Received: by 10.42.57.73 with SMTP id c9mr2655537ich.39.1286878091403; Tue, 12
+	Oct 2010 03:08:11 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 12 Oct 2010 03:08:11 -0700 (PDT)
+In-Reply-To: <i9154e$2rk$1@dough.gmane.org>
 References: <1286783755-19145-1-git-send-email-koen@openembedded.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <1286783755-19145-1-git-send-email-koen@openembedded.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<i9154e$2rk$1@dough.gmane.org>
+Date: Tue, 12 Oct 2010 12:08:11 +0200
+Message-ID: <AANLkTimnE3nuhgQQpCrZ0ymjzmLUkK0wxNX8bqJwa=AF@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCHv3 1/3] kernel bbclass: split do_compile into do_compile and do_compile_modules
@@ -50,53 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 08:10:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Oct 2010 10:08:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/10/12 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> ping
 
-ping
+Haven't had time to test this yet (and won't have tonight as I have to
+supervise a lab). It is on the to-do list.
 
-On 11-10-10 09:55, Koen Kooi wrote:
-> This allows recipes to insert a custom task in between building *Image and modules
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
->  classes/kernel.bbclass |    5 +++++
->  1 files changed, 5 insertions(+), 0 deletions(-)
-> 
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index cf6b8cd..83e3f44 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -89,12 +89,17 @@ kernel_do_compile() {
->  		oe_runmake dep CC="${KERNEL_CC}" LD="${KERNEL_LD}"
->  	fi
->  	oe_runmake ${KERNEL_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-> +}
-> +
-> +do_compile_kernelmodules() {
-> +	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
->  	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
->  		oe_runmake modules  CC="${KERNEL_CC}" LD="${KERNEL_LD}"
->  	else
->  		oenote "no modules to compile"
->  	fi
->  }
-> +addtask compile_kernelmodules after do_compile before do_install
->  
->  kernel_do_install() {
->  	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+[...]
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+>> +}
+>> +
+>> +do_compile_kernelmodules() {
+>> + =A0 =A0 unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
 
-iD8DBQFMtBfOMkyGM64RGpERAonPAKCPzmCFS67arfwLKKL8Eb7QENuKOgCgmx++
-7TUh52+7x1OV5xjF7Pp/oFk=
-=yf9t
------END PGP SIGNATURE-----
+Is it needed/required? I'm a little bit concerned by this.
+(actually this was the only worry I had after reading the patch, don't
+want to loose additional CFLAGS settings here (but must say I did not
+dive into it, so not sure if things are arranged differently; that is
+also why I wanted to do a test build).
 
+Frans
 
 
