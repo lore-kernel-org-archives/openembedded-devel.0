@@ -1,36 +1,29 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5Xzw-0001St-AB
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Schnitzeltony@gmx.de>) id 1P5YGk-0005RB-Rr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 08:06:04 +0200
-Received: by iwn2 with SMTP id 2so650180iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Oct 2010 23:05:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=TOahJZTNBBBsjTGLOvYKidn2r/VyTzTeT1ii6D+hobY=;
-	b=OGmNlMPY4QuLxt9/xZ9MPCMP07fdlLnDOaVnkuE2AOwse9hL4qoft3PnuGptg6dvFi
-	xoybbZvgMKXO6F7anu0vMbTPRASfScmVgCr9gBja8ItOFBh1ZM8EAIL5/SgsU4drmbnf
-	oh1KqTI3/sGq+DvbmHGgCvs6YLyCv+ub63e/U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=OuobjeVYljFwyrgf43s3ghqP0CXh4RO6WF4qxmbr54nbtUaNRqIPWEFVKx2sbEZX1I
-	2CEYQqNR+gGiM88cuZkBS2Fvzm2wf/1LSaAc851Ui8bTbiQ37a1RrsBekYfqZAYF1uZu
-	4GIiH3f4FGJPgO6qZhtpvg3achw/aUg6MyOKA=
+	Tue, 12 Oct 2010 08:23:27 +0200
+Received: (qmail 27414 invoked by uid 0); 12 Oct 2010 06:23:00 -0000
+Received: from 62.225.102.139 by www155.gmx.net with HTTP;
+	Tue, 12 Oct 2010 08:22:57 +0200 (CEST)
+Date: Tue, 12 Oct 2010 08:22:57 +0200
+From: =?iso-8859-1?Q?=22Andreas_M=FCller=22?= <Schnitzeltony@gmx.de>
+In-Reply-To: <AANLkTinW_tJ+FauxzQG149tDM+vKWfxwnWVNRHe=EETQ@mail.gmail.com>
+Message-ID: <20101012062257.104860@gmx.net>
 MIME-Version: 1.0
-Received: by 10.231.30.72 with SMTP id t8mr2508313ibc.46.1286863538578; Mon,
-	11 Oct 2010 23:05:38 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 11 Oct 2010 23:05:38 -0700 (PDT)
-In-Reply-To: <1286838628.3900.36.camel@mattotaupa>
 References: <1286838628.3900.36.camel@mattotaupa>
-Date: Tue, 12 Oct 2010 08:05:38 +0200
-Message-ID: <AANLkTinW_tJ+FauxzQG149tDM+vKWfxwnWVNRHe=EETQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	<AANLkTinW_tJ+FauxzQG149tDM+vKWfxwnWVNRHe=EETQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-Authenticated: #62780362
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX1+aRYQoVAKa9Tyzflacmz0N15ribT4FG4UuUejntC
+	OBBfZJX+Hlse5+6yNaddK5nH8xaq8ix7en1A== 
+X-GMX-UID: 84SGJJ1CZDIrB6TAx2U2WeZ5emhmY4Eh
+X-FuHaFi: 0.64000000000000001
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: Schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -51,13 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 06:06:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 12 Oct 2010 06:23:27 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-All 4 patches applied & pushed
+I saw the changes: Thanks :-)
 
-Thanks alot for your contribution.
+Am I right: no further action on this issue required from my side?
 
-Frans
+Andreas
+-------- Original-Nachricht --------
+> Datum: Tue, 12 Oct 2010 08:05:38 +0200
+> Von: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: Re: [oe] [PATCH 1/4] gedit: sort `DEPENDS` alphabetically
+
+> All 4 patches applied & pushed
+> 
+> Thanks alot for your contribution.
+> 
+> Frans
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-- 
+Neu: GMX De-Mail - Einfach wie E-Mail, sicher wie ein Brief!  
+Jetzt De-Mail-Adresse reservieren: http://portal.gmx.net/de/go/demail
 
 
