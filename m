@@ -1,34 +1,51 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1P5dWE-0008Bc-Q7
+	(envelope-from <cliff.brake@gmail.com>) id 1P5e0M-00030y-QF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 13:59:48 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Tue, 12 Oct 2010 13:59:31 +0200
-X-TM-IMSS-Message-ID: <0c1c8a6700003d4e@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0c1c8a6700003d4e for
-	<jaap.dejong@nedap.com>; Tue, 12 Oct 2010 13:59:20 +0100
-Message-ID: <4CB44DA2.5040003@nedap.com>
-Date: Tue, 12 Oct 2010 13:59:30 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100915 Lightning/1.0b1 Thunderbird/3.0.8
+	Tue, 12 Oct 2010 14:30:58 +0200
+Received: by wyb40 with SMTP id 40so159829wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Oct 2010 05:30:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=hAekpKQpeMC5mvTXvUAEpYkRLLpJItD/gV1AHtsiskA=;
+	b=lPzdlfoxDAtpgtCNpDaY8O1TkNopoqWiNrKnZm2rqSxk11befPqGc4PegmFQPOQkzJ
+	JkoTv4IWsjCPssIdSxHZbEgEgzo6LmpjSEJLeqcGEcQ5XcRUbDXE3jDoliET5h3C2x9e
+	g9UNSJEXFMnAFeCkh09BH9GRjN9AfpVn1jUxU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ilSo3aSvWO8wz1KCtdrmG4H+MK9ZquMeWZo/nm4ZzZiZmIiDG6hm+PL4K/d9Cd+BHm
+	kzkFLFL25QK3CuJ30NIzdugufWMu1QAgba2BOLv/eGoCGODd7icFXMpN6Tljzx0zcsmT
+	GR1/qA91eKCrDkpyC5uAQdb7X+V9KuTRc9US8=
 MIME-Version: 1.0
+Received: by 10.216.231.26 with SMTP id k26mr16697weq.3.1286886626170; Tue, 12
+	Oct 2010 05:30:26 -0700 (PDT)
+Received: by 10.216.45.149 with HTTP; Tue, 12 Oct 2010 05:30:26 -0700 (PDT)
+In-Reply-To: <1286740257.3808.127.camel@mattotaupa>
+References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>
+	<AANLkTimS+bg0XpWvAav0JX4qaf0b=CydG6_HQ0XHMo-h@mail.gmail.com>
+	<AANLkTinQ4uW=o43O5Bv6FijfoicU2CL5j3Zn8zWf5Snm@mail.gmail.com>
+	<1286664909.15886.13.camel@saphir>
+	<1286698831.3808.2.camel@mattotaupa>
+	<AANLkTimXU=NzmwqCpnho5ukCVoXnF5qR_4D6XWN4RaWr@mail.gmail.com>
+	<1286703485.3808.10.camel@mattotaupa>
+	<AANLkTimhsRw9ooC=zQqrfSgtRhCV0C=_O_gqsd=7N2kF@mail.gmail.com>
+	<1286740257.3808.127.camel@mattotaupa>
+Date: Tue, 12 Oct 2010 08:30:26 -0400
+Message-ID: <AANLkTimEau8aYpeyLQOR9LwG6xZA+Sji3RcD3FXpKwfj@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CB4391E.6030909@cam.ac.uk>
-In-Reply-To: <4CB4391E.6030909@cam.ac.uk>
-X-OriginalArrivalTime: 12 Oct 2010 11:59:31.0861 (UTC)
-	FILETIME=[EE2E3450:01CB6A04]
-X-SA-Exim-Connect-IP: 213.160.213.92
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-10-08: Udev 151 issues.
+Subject: Re: commit messages (was: testing branch 2010-10-08)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,67 +59,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 11:59:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Oct 2010 12:30:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Adding
+On Sun, Oct 10, 2010 at 3:50 PM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> I would even require that everyone has to build test a change at least
+> once in a clean environment and document what distribution and what
+> machine it was built for.
 
-     CFLAGS_append = " -Os"
+Concerning the suggestion that "changes must be built once in a clean
+environment," I'm hoping the testing effort will help catch things
+like this.  My thought is not to put too much burden on people making
+constructive changes, but yet have a way that problems get found in a
+reasonable time frame.
 
-helps (has been in the mailinglist some days ago)
+Cliff
 
-Jaap
-
-
-
-On 10/12/2010 12:31 PM, Jonathan Cameron wrote:
-> Hi All,
->
-> I'm getting,
->
-> NOTE: make
-> mkdir -p extras/keymap
->    GEN    extras/keymap/keys.txt
->    GEN    extras/keymap/keys-from-name.gperf
->    GEN    extras/keymap/keys-from-name.h
->    GEN    extras/keymap/keys-to-name.h
-> make --no-print-directory all-recursive
-> Making all in .
->    CC     libudev/libudev.lo
->    CC     libudev/libudev-list.lo
->    CC     libudev/libudev-util.lo
->    CC     libudev/libudev-device.lo
->    CC     libudev/libudev-enumerate.lo
->    CC     libudev/libudev-monitor.lo
->    CC     libudev/libudev-queue.lo
-> libudev/libudev-queue.c: In function 'udev_queue_skip_devpath':
-> libudev/libudev-queue.c:185:1: internal compiler error: in cond_exec_process_insns, at ifcvt.c:273
-> Please submit a full bug report,
-> with preprocessed source if appropriate.
-> See<http://gcc.gnu.org/bugs.html>  for instructions.
-> make[2]: *** [libudev/libudev-queue.lo] Error 1
-> make[1]: *** [all-recursive] Error 1
-> make: *** [all] Error 2
-> FATAL: oe_runmake failed
->
->
-> in udev 151 and have been since 2010-10-04 (worked previously though I guess udev may
-> have changed).
->
-> Building imote2-image
->
-> MACHINE = "imote2"
-> DISTRO = "angstrom-2010.x"
->
-> Anyone seeing anything similar?
->
-> Jonathan
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->    
+-- 
+=================
+http://bec-systems.com
 
 
