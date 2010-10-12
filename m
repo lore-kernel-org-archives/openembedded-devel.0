@@ -1,45 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5eOU-0007El-Ao
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 14:55:53 +0200
-Received: by iwn2 with SMTP id 2so1029449iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P5eVN-00006W-VT for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Oct 2010 15:02:59 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P5eUw-0001dr-7b for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Oct 2010 15:02:30 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Oct 2010 15:02:30 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 05:55:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=lMdnhNSN0styVHFisDkVOqyflrd26WTOHi/Gl8l4wiI=;
-	b=qFHtSawR5k1RVoALQFBIPiyuMnX2rAi3gBiLaBsSVumLQVauoDa0RGEhXN7FX62D+8
-	dGbIh3Xr4kR7do+plyoCBkUjeZk6qq7RQCKWsWX97S4RbFQpsGEW8RrQymzO7m3LHytD
-	TLOvZ82ZPhGFzqf6t1ZhtvvS1QkRh+aJuv+FU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=qAAXncTSGKwBb8BEU169boZOGr8RxxAaAIsGBR3sCbJUv98JXC/7QARQ40isJpectp
-	weR2GKfHrtV2JTR4XEnIUnpYzeLcr11VJsPm7Xb7XC2WMaE2xmnwI8JobyRbF8NRiZOZ
-	HlxAgk1YEXJi3cXUDZNs9sTZvhEI2gp/iJb2M=
-MIME-Version: 1.0
-Received: by 10.42.191.140 with SMTP id dm12mr2834177icb.513.1286888124649;
-	Tue, 12 Oct 2010 05:55:24 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 12 Oct 2010 05:55:24 -0700 (PDT)
-In-Reply-To: <1286783755-19145-2-git-send-email-koen@openembedded.org>
-References: <1286783755-19145-1-git-send-email-koen@openembedded.org>
-	<1286783755-19145-2-git-send-email-koen@openembedded.org>
-Date: Tue, 12 Oct 2010 14:55:24 +0200
-Message-ID: <AANLkTinTQX6jOi=wVcLt4MsN9-L7rjft2n2pW6qt52J6@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 12 Oct 2010 15:02:30 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 12 Oct 2010 15:02:16 +0200
+Message-ID: <i91m8o$efr$1@dough.gmane.org>
+References: <1286783755-19145-1-git-send-email-koen@openembedded.org>	<i9154e$2rk$1@dough.gmane.org>	<AANLkTimnE3nuhgQQpCrZ0ymjzmLUkK0wxNX8bqJwa=AF@mail.gmail.com>	<i91dk0$7lv$1@dough.gmane.org>	<AANLkTimGkxUA_LLHhaeSXTAcmC6D+n7qsxBUZOU6hVbQ@mail.gmail.com>
+	<AANLkTi=cZr6FCfssVCyrYaTYH9DM3WEQn+ZT7DM+uvuJ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
+In-Reply-To: <AANLkTi=cZr6FCfssVCyrYaTYH9DM3WEQn+ZT7DM+uvuJ@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv3 2/3] kernel bbclass: make 'kernel-modules' meta-package use RRECOMMENDS to please insane.bbclass
+Subject: Re: [PATCHv3 1/3] kernel bbclass: split do_compile into do_compile and do_compile_modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,49 +51,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 12:55:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Oct 2010 13:02:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/10/11 Koen Kooi <koen.kooi@gmail.com>:
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
-> =A0classes/kernel.bbclass | =A0 =A08 ++++----
-> =A01 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index 83e3f44..7039d27 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -489,12 +489,12 @@ python populate_packages_prepend () {
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0for i in l:
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0pkg =3D module_pattern % l=
-egitimize_package_name(re.match(module_regex, os.path.basename(i)).group(1)=
-)
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0blacklist.append(pkg)
-> - =A0 =A0 =A0 metapkg_rdepends =3D []
-> + =A0 =A0 =A0 metapkg_rrecommends =3D []
-> =A0 =A0 =A0 =A0packages =3D bb.data.getVar('PACKAGES', d, 1).split()
-> =A0 =A0 =A0 =A0for pkg in packages[1:]:
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 if not pkg in blacklist and not pkg in meta=
-pkg_rdepends and not any(pkg.endswith(post) for post in depchains):
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 metapkg_rdepends.append(pkg=
-)
-> - =A0 =A0 =A0 bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdep=
-ends), d)
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 if not pkg in blacklist and not pkg in meta=
-pkg_rrecommends and not any(pkg.endswith(post) for post in depchains):
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 metapkg_rrecommends.append(=
-pkg)
-> + =A0 =A0 =A0 bb.data.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_r=
-recommends), d)
-> =A0 =A0 =A0 =A0bb.data.setVar('DESCRIPTION_' + metapkg, 'Kernel modules m=
-eta package', d)
-> =A0 =A0 =A0 =A0packages.append(metapkg)
-> =A0 =A0 =A0 =A0bb.data.setVar('PACKAGES', ' '.join(packages), d)
-> --
-> 1.6.6.1
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
- Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+On 12-10-10 14:53, Frans Meulenbroeks wrote:
+> 2010/10/12 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+>> 2010/10/12 Koen Kooi <k.kooi@student.utwente.nl>:
+> On 12-10-10 12:08, Frans Meulenbroeks wrote:
+>>>>> 2010/10/12 Koen Kooi <k.kooi@student.utwente.nl>:
+> 
+>>>>>>> +}
+>>>>>>> +
+>>>>>>> +do_compile_kernelmodules() {
+>>>>>>> +     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+>>>>>
+>>>>> Is it needed/required?
+> 
+> It is, and it's in kernel.bbclass already:
+> 
+> fe938bbe (Michael Lauer 2004-12-14) kernel_do_compile() {
+> 0448ec0d (Richard Purdie 2006-11-20)     unset CFLAGS CPPFLAGS CXXFLAGS
+> LDFLAGS MACHINE
+> fe938bbe (Michael Lauer 2004-12-14)     oe_runmake
+> include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+> 
+> 
+>>>>> I'm a little bit concerned by this.
+>>>>> (actually this was the only worry I had after reading the patch, don't
+>>>>> want to loose additional CFLAGS settings here
+> 
+> You actually want to do that, since the kernel is bare-metal, not userspace.
+>>>
+
+>>
+>> Thanks for the answer.
+>>
+>> Did a quick peek on CFLAGS in the recipes, saw there is a CFLAGS_KERNEL.
+>> That one is only used on one place:
+>> linux-wrt_2.4.30.bb:export CFLAGS_KERNEL="-fno-delayed-branch "
+>>
+>> Haven't tested this, but my understanding on how things work is good
+>> enough and the change simple enough for to give an ack
+>> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>>
+
+> Actually on 2nd thought one tiny remark left:
+> after seeing patch 2:
+> what about renaming:
+> do_compile_kernelmodules
+> to something with a kernel prefix
+> e.g. kernel_do_compile_modules.
+> That makes the naming scheme somewhat more consistent.
+
+Namespacing the class is only used for methods overridden from
+base.bbclass. Again, look at the rest of kernel.bbclass methods like
+uboot-mkimage, menuconfig and friends don't use that namespace.
+
+And it doesn't actually work since _modules is a local override.
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMtFxYMkyGM64RGpERArFyAKCr5HipFKmy8xsYIoF/U0NIXFfDlwCfferR
+yhTvF+MOCupbbMMstKVvkmk=
+=6zMs
+-----END PGP SIGNATURE-----
+
 
 
