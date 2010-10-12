@@ -1,31 +1,49 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P5n07-0000vU-Fn for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 00:07:16 +0200
-Received: from f053038011.adsl.alicedsl.de ([78.53.38.11]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P5mzi-0001Ry-HL for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 22:06:50 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <kergoth@gmail.com>) id 1P5ncP-0005tn-HS
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 00:47:17 +0200
+Received: by wyb40 with SMTP id 40so773810wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Oct 2010 15:46:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=05M9GvUlbPGFPjsvc6sOHAWokQChenym68feJ2J0ryU=;
+	b=arStUOmW8yRExO/3MtWkyMW9ultZlUlAPZg31T0/sm6dWxfmOxfAbcUNaG1vx9HwAY
+	zu4WPhY0HKnHBxEJfnEQlk/ngkjFIkt3tQjzKT7dVWnEWKP9oQWLLAGPhX7aIZ7sMxGE
+	4dDXlnoWkLTsc4GSrVfoAVzfaCnYHT8LR+8ns=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=l5guztvRYImEAJ6EF3DOlT6sgB1Fd8K8E/3Of5rRZtQvPfsDsX0wrlL7H23YQl5eLE
+	vDXfyfO66iftuaPS979XXplzSqLeLxz+oUk1Daa83ECsQsxis+o9BqFAtuL7KI1g+wQJ
+	N+Ui2vZYcvetRzlgEEwm9lB5zMp8CimaT8ad4=
+Received: by 10.216.11.131 with SMTP id 3mr443301wex.92.1286923220248; Tue, 12
+	Oct 2010 15:40:20 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.0.142 with HTTP; Tue, 12 Oct 2010 15:40:00 -0700 (PDT)
+In-Reply-To: <AANLkTimwEzFVVdzC7vyBDmv2LvcBTVRb5ngN0g0x-Bdo@mail.gmail.com>
+References: <AANLkTi=iNaP53YAKHeTpv9Wsp1VL4GZPhrJTkYdMfdGp@mail.gmail.com>
+	<4CB07A28.4050200@opensimpad.org>
+	<AANLkTimwEzFVVdzC7vyBDmv2LvcBTVRb5ngN0g0x-Bdo@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 12 Oct 2010 15:40:00 -0700
+X-Google-Sender-Auth: GteS76N1u0e93JX9NwwnEJpcjgk
+Message-ID: <AANLkTin+Bf8E3u6JrVN+Y3JRe915A7o9KWFdpN1bowK5@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
-References: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
-Date: Wed, 13 Oct 2010 00:06:48 +0200
-Message-ID: <1286921208.13054.18.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH resend 1/4] make 3.82: set DEFAULT_PREFERENCE = "-1"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: inc file discussion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,64 +57,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 22:07:16 -0000
-X-Groupsio-MsgNum: 24753
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Fkdy7AgjjVLTQJb4VR4g"
+X-List-Received-Date: Tue, 12 Oct 2010 22:47:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
---=-Fkdy7AgjjVLTQJb4VR4g
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sat, Oct 9, 2010 at 10:16 AM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
 
-Am Freitag, den 08.10.2010, 09:39 -0400 schrieb Michael Smith:
-> This version has introduced several backwards incompatibilities and some
-> packages are known not to build with 3.82. In particular:
->=20
-> - glibc-initial fails in do_install when prefix=3D"".
-> - eglibc manual/Makefile has not yet been patched (see 3a06f50f)
+> This gave me the following dilemma:
+> 1 add in the recipe with _append  or +=
+>
 
-Are there patches for these problems available upstream?
-
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> ---
->  recipes/make/make_3.82.bb |    3 +++
->  1 files changed, 3 insertions(+), 0 deletions(-)
->=20
-> diff --git a/recipes/make/make_3.82.bb b/recipes/make/make_3.82.bb
-> index 3cdc0a0..86c58d6 100644
-> --- a/recipes/make/make_3.82.bb
-> +++ b/recipes/make/make_3.82.bb
-> @@ -1,5 +1,8 @@
->  require make.inc
-> =20
-> +# Stock eglibc fails to build with make 3.82.
-
-What do you mean by =C2=BBstock=C2=AB? The pristine upstream version or the
-version in OE?
-
-> +DEFAULT_PREFERENCE =3D "-1"
-> +
->  BBCLASSEXTEND =3D "native"
->  SRC_URI[md5sum] =3D "1a11100f3c63fcf5753818e59d63088f"
->  SRC_URI[sha256sum] =3D "e2c1a73f179c40c71e2fe8abf8a8a0688b8499538512984d=
-a4a76958d0402966"
+Side note to lurkers: _append and _prepend should be avoided in favor of the
+immediate operations (+=, .=, =., =+) unless you're doing a conditional
+operation with overrides.
 
 
-Thanks,
+> 2 add to the inc and test the other version(s)
+> 3 add to the inc and not test the other version(s) and assume things
+> work properly.
+> 4 not do the patch.
+> 5. remove the old recipe
+>
+> I expect a lot of people would go for 3, but that *could* introduce a
+> problem.
+>
+> BTW maybe it is indeed time for BBVERSIONS or whatever it was called.
+>
 
-Paul
+BBVERSIONS is supported by 1.10, so it can be used as soon as we bump OE's
+minimum bitbake version, if we choose to.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
---=-Fkdy7AgjjVLTQJb4VR4g
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAky02/gACgkQPX1aK2wOHVh7FACeIF513lxbCOznUR0rMKFBh+k6
-Q8gAn20poxPLBfVRlbONBeJNsnKqVbyO
-=ULhe
------END PGP SIGNATURE-----
-
---=-Fkdy7AgjjVLTQJb4VR4g--
