@@ -1,44 +1,48 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P6Avk-00064Q-Vn
+	(envelope-from <frederik.sdun@googlemail.com>) id 1P6DqY-00038F-PR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 01:40:25 +0200
-Received: by yxj4 with SMTP id 4so2107559yxj.6
+	Thu, 14 Oct 2010 04:47:12 +0200
+Received: by bwz9 with SMTP id 9so96160bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 16:39:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=ifV66xqxySng+e3NfHuIkrB7Jzhr+tMAnq34lbp4hAc=;
-	b=eN4rwjcUj1BKqlWUcsLAY3NP53rGnkdbdo4P5PWC03ZcZed5fNI0aP7cK09iqWBLmM
-	t+a7kMhQtC4atf8WN2SpNifCQ0EDePWMuSBNsSpjiGxgRzt7E4lEBOAfVuYnuve1Efp/
-	2/Z0UgsQdtcZN5OJjAlxT5tJITBQcY5x/SRJc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=SQZORkJKaqiGUN5CgQ413pA6k8yj9XA0cTbVp7kg0hVQyTnYJmBiF1w3jnVqJsEePo
-	xMH/4Kwvyv+JCsK75zkF1gthjAEPOWo0AB2o37NNLVRv2v7OrOUCV8oshvpqSUbHqNZL
-	R5+a++1djtCf7PCiv/rm8o3pxGHdW8H8isbbI=
-Received: by 10.90.51.1 with SMTP id y1mr4264805agy.7.1287013183659; Wed, 13
-	Oct 2010 16:39:43 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.90.86.6 with HTTP; Wed, 13 Oct 2010 16:39:23 -0700 (PDT)
-In-Reply-To: <6976AB00-560A-4D45-A6CA-33F03D38502C@chumby.com>
-References: <6976AB00-560A-4D45-A6CA-33F03D38502C@chumby.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 13 Oct 2010 16:39:23 -0700
-Message-ID: <AANLkTimNgCnmgcPq1vJupEa6fJZAaAOPhxRZ9B_CyQzf@mail.gmail.com>
+	Wed, 13 Oct 2010 19:46:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:received:received:subject:from:to:in-reply-to
+	:references:content-type:date:message-id:mime-version:x-mailer;
+	bh=DWmcK+BKujZwEb5LYx4HbyMgU53kEDoUmGK0kZOdPAI=;
+	b=hQ9mI4VMzpaVFLRb+csIrq2pWgPP3D3bN4iKDaArLclTmK18CgWMyDDwHSoB6cqgJg
+	IAKNKRGR+hYIXPmb0Iw4Xni2FTzbk90VmqbqD/Ium+sZUsRFfX9Gza5ronrHDm3204Ej
+	pzQVTIBGCmhcBSNk2uRmbvxFM18wXqBfZdea4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=subject:from:to:in-reply-to:references:content-type:date:message-id
+	:mime-version:x-mailer;
+	b=Fd2SuDoHcpvr3VXoU2Rr0Zt+lYS+1nBAjzTLrtw0fnCu1xf2BMJUBmbWbnSS+f1SWh
+	6ubtjXW6eN6s20jcgVA7GI/h2WCdc2xJcyr+g0s5wgrkTmgCzD/KNmFoOeWhp/WhLgdQ
+	tunSI/e+BmGg1CLtGYkj9F4QtfgQ0q+lz9Npo=
+Received: by 10.204.54.196 with SMTP id r4mr8048013bkg.5.1287024403002;
+	Wed, 13 Oct 2010 19:46:43 -0700 (PDT)
+Received: from [192.168.2.150] ([93.216.254.93])
+	by mx.google.com with ESMTPS id g12sm9724496bkb.2.2010.10.13.19.46.40
+	(version=SSLv3 cipher=RC4-MD5); Wed, 13 Oct 2010 19:46:41 -0700 (PDT)
+From: Frederik Sdun <frederik.sdun@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <1286730733.3808.92.camel@mattotaupa>
+References: <1286728355.3808.55.camel@mattotaupa>
+	<1286730733.3808.92.camel@mattotaupa>
+Date: Tue, 12 Oct 2010 19:43:15 +0200
+Message-ID: <1286905395.13585.14.camel@brain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: frederik.sdun@googlemail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,
+	DATE_IN_PAST_24_48,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] c-ares: Fix configure script
+Subject: Re: environment variable `PKG_CONFIG` not set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,96 +56,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 23:40:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Oct 2010 02:47:12 -0000
+X-Groupsio-MsgNum: 24823
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-O6XfJmODWiRCjMtjePo6"
+
+--=-O6XfJmODWiRCjMtjePo6
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 13, 2010 at 1:12 PM, Sean Cross <sean@chumby.com> wrote:
->
-> The syntax of one of the AC_CHECK_FUNCS is incorrect. =C2=A0Removing the
-> lines in question allows the package to configure and build.
-
-
-instead of removing the check completely it would be better if we fixed it.
-you can also cache the result and not run autoreconf on it but thats a fall
-back.
-
-> ---
-> =C2=A0.../0001-remove-broken-configure.ac-commands.patch | =C2=A0 32 ++++=
-++++++++++++++++
-> =C2=A0recipes/c-ares/c-ares_1.5.3.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A04 ++-
-> =C2=A02 files changed, 35 insertions(+), 1 deletions(-)
-> =C2=A0create mode 100644 recipes/c-ares/0001-remove-broken-configure.ac-c=
-ommands.patch
->
-> diff --git a/recipes/c-ares/0001-remove-broken-configure.ac-commands.patc=
-h b/recipes/c-ares/0001-remove-broken-configure.ac-commands.patch
-> new file mode 100644
-> index 0000000..799332a
-> --- /dev/null
-> +++ b/recipes/c-ares/0001-remove-broken-configure.ac-commands.patch
-> @@ -0,0 +1,32 @@
-> +diff -ur c-ares-1.5.3-stock/configure.ac c-ares-1.5.3/configure.ac
-> +--- c-ares-1.5.3-stock/configure.ac =C2=A0 =C2=A02010-10-13 19:12:51.792=
-124107 +0000
-> ++++ c-ares-1.5.3/configure.ac =C2=A02010-10-13 19:25:12.932123380 +0000
-> +@@ -796,28 +796,6 @@
-> + )
-> +
-> +
-> +-AC_CHECK_FUNCS([bitncmp \
-> +- =C2=A0gettimeofday \
-> +- =C2=A0if_indextoname
-> +-],[
-> +-],[
-> +- =C2=A0func=3D"$ac_func"
-> +- =C2=A0AC_MSG_CHECKING([deeper for $func])
-> +- =C2=A0AC_LINK_IFELSE([
-> +- =C2=A0 =C2=A0AC_LANG_PROGRAM([[
-> +- =C2=A0 =C2=A0]],[[
-> +- =C2=A0 =C2=A0 =C2=A0$func ();
-> +- =C2=A0 =C2=A0]])
-> +- =C2=A0],[
-> +- =C2=A0 =C2=A0AC_MSG_RESULT([yes])
-> +- =C2=A0 =C2=A0eval "ac_cv_func_$func=3Dyes"
-> +- =C2=A0 =C2=A0AC_DEFINE_UNQUOTED([AS_TR_CPP([HAVE_$func])], [1],
-> +- =C2=A0 =C2=A0 =C2=A0[Define to 1 if you have the $func function.])
-> +- =C2=A0],[
-> +- =C2=A0 =C2=A0AC_MSG_RESULT([but still no])
-> +- =C2=A0])
-> +-])
-> +-
-> +
-> + dnl check for inet_pton
-> + AC_CHECK_FUNCS(inet_pton)
-> diff --git a/recipes/c-ares/c-ares_1.5.3.bb b/recipes/c-ares/c-ares_1.5.3=
-.bb
-> index 0def152..fa75f3f 100644
-> --- a/recipes/c-ares/c-ares_1.5.3.bb
-> +++ b/recipes/c-ares/c-ares_1.5.3.bb
-> @@ -1,7 +1,9 @@
-> =C2=A0DESCRIPTION =3D "c-ares is a C library that resolves names asynchro=
-nously."
-> =C2=A0HOMEPAGE =3D "http://daniel.haxx.se/projects/c-ares/"
-> =C2=A0SECTION =3D "libs"
-> -SRC_URI =3D "http://daniel.haxx.se/projects/c-ares/c-ares-${PV}.tar.gz"
-> +SRC_URI =3D "http://daniel.haxx.se/projects/c-ares/c-ares-${PV}.tar.gz \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-remove-broken-configure.=
-ac-commands.patch \
-> +"
-> =C2=A0LICENSE =3D "MIT"
-> =C2=A0S =3D "${WORKDIR}/c-ares-${PV}"
-> =C2=A0PR =3D "r1"
-> --
-> 1.7.0.4
->
->
->
+Am Sonntag, den 10.10.2010, 19:12 +0200 schrieb Paul Menzel:
+> Am Sonntag, den 10.10.2010, 18:32 +0200 schrieb Paul Menzel:
+> > Dear OE folks,
+> >=20
+> >=20
+> > looking at `run.do_compile.xxxxx` I noticed that `PKG_CONFIG` is not
+> > set. Several other pkg-config related environment variable get set, so =
+I
+> > am quite surprised.
+> >=20
+> > Does this have to be added to `classes/{native,nativesdk,sdk}.bbclass`?
+>=20
+> This would also be the =E2=80=9Ccorrect=E2=80=9D fix for [1] and [2] if I=
+ am not wrong.
+>=20
+>=20
+> Thanks,
+>=20
+> Paul
+>=20
+>=20
+> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-August/0=
+23029.html
+> [2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-Septembe=
+r/024217.html
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
+It already uses the correct pkg-config because ${SYSROOT_NATIVE} is in
+$PATH. But pkg-config --variable doesn't prefix $PKG_CONFIG_SYSROOT_DIR
 
+--=-O6XfJmODWiRCjMtjePo6
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky0njMACgkQvbwBzXsbjyqZhgCdGgDNeeb5D4MN11Ly+p8o8JgA
+4sUAoJ1Ch0dvhXbJUZN21UF9RMzZxSJ8
+=G2Td
+-----END PGP SIGNATURE-----
+
+--=-O6XfJmODWiRCjMtjePo6--
