@@ -1,37 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1P5iGW-0004L6-AJ
+	(envelope-from <martin.jansa@gmail.com>) id 1P5iUH-00039d-5v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 19:03:55 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1P5iG2-0007Gv-8b from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 10:03:22 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 12 Oct 2010 10:03:22 -0700
-Received: from [172.30.80.109] ([172.30.80.109]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 12 Oct 2010 11:03:20 -0600
-Message-ID: <4CB494D5.3010900@mentor.com>
-Date: Tue, 12 Oct 2010 10:03:17 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Tue, 12 Oct 2010 19:18:05 +0200
+Received: by bwz9 with SMTP id 9so1535408bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Oct 2010 10:17:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=0YUzHTgTYby++ciBPrjSeKcVhoSFab8HKDZztDkAAUQ=;
+	b=lxP9uXSVNUauwEs5Pc7aVw/AKcTROC3KByXQNWnn5DyYlTW8d9ZPwsaPcbqcJ2lSsw
+	nvU53wp7UhRJLqUbsT8wUksAOI6YZTmM9D835FmVEUurl5M00M3RLiGaoJQRVxphgO/u
+	I4QiAIIQ1H2709zhyoIKd5R5uoTTZYoNK0lQw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=wwmaUqHd4EGCdC2BGeA1KPNlwusa0bO3KlPO9whZW+FTJerCVrvIKbJ0Td+dGx1y5k
+	+aIaifhSR3yXKR3o+raB/hzwbCF3FSCS7zhz3VmMOlCspb84qP/sdgbOybrL2kI/54Fy
+	U6+yn65PfXLbnaGNLBRxRzCHQjiy4IUv6tJJs=
+Received: by 10.204.70.67 with SMTP id c3mr6649192bkj.62.1286903860023;
+	Tue, 12 Oct 2010 10:17:40 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id u4sm4530396bkz.17.2010.10.12.10.17.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 12 Oct 2010 10:17:37 -0700 (PDT)
+Date: Tue, 12 Oct 2010 19:17:36 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CB48C51.9000403@mentor.com> <i9234d$dh4$1@dough.gmane.org>
-	<4CB490CD.50500@balister.org>
-In-Reply-To: <4CB490CD.50500@balister.org>
-X-OriginalArrivalTime: 12 Oct 2010 17:03:21.0128 (UTC)
-	FILETIME=[5FAB9A80:01CB6A2F]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-ID: <20101012171736.GB3549@jama>
+References: <4CB48C51.9000403@mentor.com>
+MIME-Version: 1.0
+In-Reply-To: <4CB48C51.9000403@mentor.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] Remove older freetype versions
@@ -48,44 +56,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 17:03:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Oct 2010 17:18:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Philip Balister wrote:
-> On 10/12/2010 12:41 PM, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 12-10-10 18:26, Tom Rini wrote:
->>> Hey all,
->>>
->>> I'd like to remove all versions of freetype before 2.4.3.  The only dist
->>> which is pinning freetype currently does so via
->>> conf/distro/include/preferred-opie-versions.inc and that pins to a
->>> non-existent version (it's using OPIE_VERSION which seems wrong).  All
->>> of the previous versions have various security issues, including
->>> remotely exploitable ones.  Only the very oldest version we have as a
->>> D_P -1 so everyone was using 2.3.12 and will be going up to 2.4.3
->>> (libraries are compat).
->>
->> Speaking of freetype, the bytecode patent expired, so we can turn that
->> on and get nicer text :)
->>
->> And removing older freetypes is a good idea
+On Tue, Oct 12, 2010 at 09:26:57AM -0700, Tom Rini wrote:
+> Hey all,
 > 
-> I'd like to point people at openwmbedded/removal.txt. This would be a 
-> good place to schedule things for deletion. As in I added a new version 
-> and made it active, but do not want to delete the older version for a 
-> couple of months just in case something crops up. So leave a note in 
-> removal.txt to look are removing a recipe on a certain date.
+> I'd like to remove all versions of freetype before 2.4.3.  The only dist 
+> which is pinning freetype currently does so via
+> conf/distro/include/preferred-opie-versions.inc and that pins to a 
+> non-existent version (it's using OPIE_VERSION which seems wrong).  All 
+> of the previous versions have various security issues, including 
+> remotely exploitable ones.  Only the very oldest version we have as a 
+> D_P -1 so everyone was using 2.3.12 and will be going up to 2.4.3 
+> (libraries are compat).
 
-In general, good idea.  But we've been doing things a lot quicker more 
-recently.  And I'd like to not wait for a long time for security related 
-items.
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
