@@ -1,46 +1,42 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5ZVg-0003IE-EI
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 09:43:09 +0200
-Received: by iwn2 with SMTP id 2so735189iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P5ZwJ-0001dP-Od for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Oct 2010 10:10:29 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P5Zvr-0007xb-Lq for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Oct 2010 10:09:59 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Oct 2010 10:09:59 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 00:42:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=7bh5qBm+iagEbiWW2j8LZMqn9Fw0atGqmxx/1fiCr64=;
-	b=K8xQsfDe2hLc5gv+T0Fbgc9fCAD2/c8rNceslaHpySuoLSpvlwZo3xAKzSWtMYdX6F
-	BJ7a5mx9eYJzrEx7Jlz7JYUEU9NkW99sM4F91JW4peL+6yFPdCsZVppom5OosU/6hDuQ
-	3Yu2/6xTUPnbbBIVBUSH6TBUW9DzRxfchbmDc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=TIHx/34OucS72UcH3NwkOsXSpRAzw3rYovmHos6riBb2PEaupIm8JLq1WsRYcHBDO4
-	P7wzmsr15i82Se7HvlhpUplxDieup2SjuthTWRpVNHgcPkmuNKhz5/qehKhMcFziLGYf
-	TIKe1IGb/7kblwm0KFdK0SHeecsTQVUsEHRsc=
-MIME-Version: 1.0
-Received: by 10.42.171.7 with SMTP id h7mr337836icz.166.1286869351557; Tue, 12
-	Oct 2010 00:42:31 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 12 Oct 2010 00:42:31 -0700 (PDT)
-In-Reply-To: <20101012062257.104860@gmx.net>
-References: <1286838628.3900.36.camel@mattotaupa>
-	<AANLkTinW_tJ+FauxzQG149tDM+vKWfxwnWVNRHe=EETQ@mail.gmail.com>
-	<20101012062257.104860@gmx.net>
-Date: Tue, 12 Oct 2010 09:42:31 +0200
-Message-ID: <AANLkTik_ocVOq_1Wrgpt-k7k=1SEqhR2r-QexE6sAvmh@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 12 Oct 2010 10:09:59 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 12 Oct 2010 10:09:50 +0200
+Message-ID: <i9154e$2rk$1@dough.gmane.org>
+References: <1286783755-19145-1-git-send-email-koen@openembedded.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
+In-Reply-To: <1286783755-19145-1-git-send-email-koen@openembedded.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/4] gedit: sort `DEPENDS` alphabetically
+Subject: Re: [PATCHv3 1/3] kernel bbclass: split do_compile into do_compile and do_compile_modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,19 +50,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 07:43:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Oct 2010 08:10:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/10/12 "Andreas M=FCller" <Schnitzeltony@gmx.de>:
-> I saw the changes: Thanks :-)
->
-> Am I right: no further action on this issue required from my side?
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Not as far as I'm concerned.
-I've updated the status of the patches in patchwork.
+ping
 
-Frans
+On 11-10-10 09:55, Koen Kooi wrote:
+> This allows recipes to insert a custom task in between building *Image and modules
+> 
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
+> ---
+>  classes/kernel.bbclass |    5 +++++
+>  1 files changed, 5 insertions(+), 0 deletions(-)
+> 
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+> index cf6b8cd..83e3f44 100644
+> --- a/classes/kernel.bbclass
+> +++ b/classes/kernel.bbclass
+> @@ -89,12 +89,17 @@ kernel_do_compile() {
+>  		oe_runmake dep CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+>  	fi
+>  	oe_runmake ${KERNEL_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+> +}
+> +
+> +do_compile_kernelmodules() {
+> +	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+>  	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
+>  		oe_runmake modules  CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+>  	else
+>  		oenote "no modules to compile"
+>  	fi
+>  }
+> +addtask compile_kernelmodules after do_compile before do_install
+>  
+>  kernel_do_install() {
+>  	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMtBfOMkyGM64RGpERAonPAKCPzmCFS67arfwLKKL8Eb7QENuKOgCgmx++
+7TUh52+7x1OV5xjF7Pp/oFk=
+=yf9t
+-----END PGP SIGNATURE-----
+
 
 
