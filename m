@@ -1,41 +1,38 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from out1.smtp.messagingengine.com ([66.111.4.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1P5jFO-0000Qv-96
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 20:06:50 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 17404491278
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 20:06:21 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Received: from 192.168.32.8 ([192.168.32.8]) by exchange.intern.dresearch.de
-	([192.168.32.16]) with Microsoft Exchange Server HTTP-DAV ;
-	Tue, 12 Oct 2010 18:06:20 +0000
+	(envelope-from <tim@timwise.co.uk>)
+	id 1P5kGK-0000qi-VO; Tue, 12 Oct 2010 21:11:59 +0200
+Received: from compute3.internal (compute3.nyi.mail.srv.osa [10.202.2.43])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id F333B2EA;
+	Tue, 12 Oct 2010 15:03:55 -0400 (EDT)
+Received: from frontend1.messagingengine.com ([10.202.2.160])
+	by compute3.internal (MEProxy); Tue, 12 Oct 2010 15:03:55 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=message-id:date:from:mime-version:to:cc:subject:references:in-reply-to:content-type:content-transfer-encoding;
+	s=smtpout; bh=iArxcYZeqbhj/h/3A4p5bydxcXI=;
+	b=MPOHJQjkNLTRriW4hFQH+T1IoH12SLv2bL3+VX0mwTvNrNyE5L+qTemzMKd5a2uCWaAgeIvemEtG0ZB+ib4McauGDg6mBFUcpm15XO9vCQPdVhYK0c6QnU4aWp0C0Xu/9ay3o6DxMHeDpF7Sd+vk48JEQqrjG0vSHppxAgD7lbA=
+X-Sasl-enc: RUOxEtvqpOx2dxwB2mBF/01QhYbRj4LZeRCBD2v7uNHx 1286910235
+Received: from [192.168.1.67] (78-86-198-4.zone2.bethere.co.uk [78.86.198.4])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 862C4401FA2;
+	Tue, 12 Oct 2010 15:03:55 -0400 (EDT)
+Message-ID: <4CB4B11A.1040302@timwise.co.uk>
+Date: Tue, 12 Oct 2010 20:03:54 +0100
+From: Tim Abell <tim@timwise.co.uk>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; de;
-	rv:1.9.1.12) Gecko/20100914 SUSE/3.0.8 Lightning/1.0b1
-	Thunderbird/3.0.8
-Date: Tue, 12 Oct 2010 20:06:19 +0200
-Message-ID: <DB561678F08F554EB0D9F21B70E268A505AF40@exchange.intern.dresearch.de>
-In-Reply-To: <i8vclt$9te$1@dough.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] testing branch 2010-10-08
-Thread-Index: ActqOCyNA3JyGIunSoSDc1qq1ECb9g==
-References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>	<DB561678F08F554EB0D9F21B70E268A505AF27@exchange.intern.dresearch.de>	<DB561678F08F554EB0D9F21B70E268A505AF2A@exchange.intern.dresearch.de>
-	<i8vclt$9te$1@dough.gmane.org>
-From: "Sledz, Steffen" <sledz@dresearch.de>
-To: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+To: openembedded-devel@lists.openembedded.org
+References: <4CB30259.6020004@xora.org.uk>
+In-Reply-To: <4CB30259.6020004@xora.org.uk>
+X-SA-Exim-Connect-IP: 66.111.4.25
+X-SA-Exim-Mail-From: tim@timwise.co.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-10-08
+Cc: openembedded-members@lists.openembedded.org
+Subject: Re: General Assembly 2010 Agenda
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,50 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 18:07:09 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-class: urn:content-classes:message
+X-List-Received-Date: Tue, 12 Oct 2010 19:11:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Am 11.10.2010 18:06, schrieb Koen Kooi:
-> On 11-10-10 17:34, Sledz, Steffen wrote:
->> On 10/11/2010 09:34 AM, Sledz, Steffen wrote:
->>> do_configure still fails for epiphany-2.30.2-r3 (see
->>> <http://tinderbox.openembedded.net/packages/835265/>) with:
->>>
->>> "checking location of system Certificate Authority list...
->>> configure: error: could not find. Use --with-ca-file=3Dpath
->>> to set, or --without-ca-file to disable"
->>>
->>> I thought the additional ca-certifactes dependency (see thread
->>> =
-<http://thread.gmane.org/gmane.comp.handhelds.openembedded/37453/focus=3D=
-37585>)
->>> fixes this, but it does not seem so. :(
->>>
->>> I'd a look into my openSUSE-system and there epiphany uses
->>> a file /var/lib/ca-certificates/ca-bundle.pem (linked to
->>> /etc/ssl/ca-bundle.pem) installed by the ca-certificates package.
->>>
->>> The OE ca-certificates package does not install such a bundle.
->>> So may be that's the real problem.
->=20
->> A look into the ca-certificates recipe shows this:
->=20
->>   pkg_postinst_${PN} () {
->>           /usr/sbin/update-ca-certificates
->>   }
->=20
->> I think this is to late if another package needs the result from
->> this call in its configuration stage.
->=20
-> That's missing a $D check as well, since in that form it can't be run
-> off-line
+Think that link should read http://wiki.openembedded.org/index.php/GA2010
+I got a 404 on the one you added.
 
-Can please someone else have a look at this? I'm not familiar with this =
-stuff (and BTW i'm not the maintainer of epiphany and/or gnome).
+Is the relationship with SHR relevant? I'm trying to get up and running 
+as a maintainer for SHR-T.
 
-Steffen
+Thanks
+
+Tim Abell
+
+Graeme Gregory wrote:
+>  I have just created a page on OE wiki to hold the Agenda for 2010
+> General Assembly.
+>
+> http://wiki.openembedded.net/index.php/GA2010
+>
+> I would love to hear from members of any addition discussions that
+> should occur. Or better ordering suggestions.
+>
+> Graeme
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
 
 
