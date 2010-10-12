@@ -1,38 +1,40 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1P5mA0-0000Wg-58
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5mCb-0004QS-7c
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 23:13:24 +0200
-Received: by wyb40 with SMTP id 40so701837wyb.6
+	Tue, 12 Oct 2010 23:16:06 +0200
+Received: by iwn2 with SMTP id 2so1558368iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 14:12:56 -0700 (PDT)
+	Tue, 12 Oct 2010 14:15:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=IWMaept3DjV/myc0gkIS6y7pS/dHKuBVbaQ0DrzYc4o=;
-	b=JJGILjAhSjxJNxNFmMy1OWoGf2VRByVyd0TzRyPv2ezVWVn7yLfdjZtvzOjMwEpEBN
-	s0xzo5TcdD8gB2Z24w0S6FInCViUDIpkM2NTLxtrJRvNjrVJcHitvfCOeIR4Gddc3EmS
-	gFGAvexAdMtq2tuJuxebIA95p1sK05C5trleI=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=hJ7qgTaHkLqC/OKxTWnCO+B+GoHKObSPxOraiR1zeYA=;
+	b=h8vFf/Xs9or7KkUf9zDHdomkIrD4plFtGTklPLrYPH03+2Cp4k63l8mUSIfLLJSSfp
+	Cjnsi4eKuQcFs1aTTagzpsLgM54D5ccEKIZ73O6UAnXeTVzzJzojvS3p7rGzhOJxcpGc
+	w5q7ax1Xr48jBjreGiu1jCumushlSvmSNsK3w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=avWAK6bg8yrtHkvXwgWfsZ0MDNZfOnJQMCMzR59YZjnDMyFAGyhhEyB3OQHHXczZ0a
-	Che7R7pPH7FPCdoOPmxht5sKsxfqI7L2JSN0pMAkfMFdoKKIubBUw2dWqe0wL7U+pw9z
-	y5VZq05O/ee3p3FzNj8pxrEBF/ae4yj8YG9/o=
+	:content-type:content-transfer-encoding;
+	b=qTiXMd854/jKEr44wqdkKMxRZUvN8O5nHM9AyZez6EC7fm05Evjtp85E/Bj9B6SfJN
+	0zea1lllZ9N4DJhi1ZsW1C2yZ4EJGZkSIRcgcXSGgzZCY155T4j3esYT5PX2R3RHdj6p
+	pWFp4lX3aTbFFjOS/O/c+sprLyzFgNMtEwR4Y=
 MIME-Version: 1.0
-Received: by 10.216.8.14 with SMTP id 14mr5818395weq.7.1286917976551; Tue, 12
-	Oct 2010 14:12:56 -0700 (PDT)
-Received: by 10.216.235.214 with HTTP; Tue, 12 Oct 2010 14:12:56 -0700 (PDT)
-In-Reply-To: <AANLkTi=78EZJtAyU+KmteXCnFdshT2K7SdfkKXJRPX47@mail.gmail.com>
+Received: by 10.42.162.70 with SMTP id w6mr681592icx.297.1286918136633; Tue,
+	12 Oct 2010 14:15:36 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 12 Oct 2010 14:15:36 -0700 (PDT)
+In-Reply-To: <AANLkTi=cW6tB_AMAyqUu45n0qHsndJZLq8S4URNgp_Ef@mail.gmail.com>
 References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>
 	<AANLkTimS+bg0XpWvAav0JX4qaf0b=CydG6_HQ0XHMo-h@mail.gmail.com>
 	<AANLkTi=78EZJtAyU+KmteXCnFdshT2K7SdfkKXJRPX47@mail.gmail.com>
-Date: Tue, 12 Oct 2010 17:12:56 -0400
-Message-ID: <AANLkTi=cW6tB_AMAyqUu45n0qHsndJZLq8S4URNgp_Ef@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	<AANLkTi=cW6tB_AMAyqUu45n0qHsndJZLq8S4URNgp_Ef@mail.gmail.com>
+Date: Tue, 12 Oct 2010 23:15:36 +0200
+Message-ID: <AANLkTi=d-kQeJLR3yLECEAQa_9P+RaDZLszmfvXJwJT6@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -53,37 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 21:13:24 -0000
+X-List-Received-Date: Tue, 12 Oct 2010 21:16:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 9, 2010 at 7:30 PM, Graham Gower <graham.gower@gmail.com> wrote:
-> On 9 October 2010 17:40, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
->> Thanks for doing this Cliff.
->> I've got my 6 builds already scheduled on our autobuilder.I will
->> report back on the wiki.
+2010/10/12 Cliff Brake <cliff.brake@gmail.com>:
+> On Sat, Oct 9, 2010 at 7:30 PM, Graham Gower <graham.gower@gmail.com> wro=
+te:
+>> On 9 October 2010 17:40, Frans Meulenbroeks <fransmeulenbroeks@gmail.com=
+> wrote:
+>>> Thanks for doing this Cliff.
+>>> I've got my 6 builds already scheduled on our autobuilder.I will
+>>> report back on the wiki.
+>>>
+>>> One small remark: timewise, I would prefer creation of the branch of
+>>> your friday morning. For us europeans the weekend is already started.
+>>> Doing it a little bit earlier allows people like Steffen and me to
+>>> kick it off before we go home.
 >>
->> One small remark: timewise, I would prefer creation of the branch of
->> your friday morning. For us europeans the weekend is already started.
->> Doing it a little bit earlier allows people like Steffen and me to
->> kick it off before we go home.
+>> How about Thursday, that way us UTC+9:30ians (+1hour daylight
+>> savings!) can kick it off before our weekend :)
+>>
+>>> Alternately it might help if we can define a time before which the
+>>> branch is made. That would allow a cron jub or so to kick things off.
+>>
+>> I like this idea too.
 >
-> How about Thursday, that way us UTC+9:30ians (+1hour daylight
-> savings!) can kick it off before our weekend :)
+> I'll plan on merging testing-next at end of business day Thursday
+> (EST), 9:00PM GMT. =A0That way people can start their builds any time on
+> Fri and we still have most of Thurs to report issues, etc.
 >
->> Alternately it might help if we can define a time before which the
->> branch is made. That would allow a cron jub or so to kick things off.
->
-> I like this idea too.
 
-I'll plan on merging testing-next at end of business day Thursday
-(EST), 9:00PM GMT.  That way people can start their builds any time on
-Fri and we still have most of Thurs to report issues, etc.
-
-Thanks,
-Cliff
-
--- 
-=================
-http://bec-systems.com
+Cool, Thanks!
 
 
