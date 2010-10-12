@@ -1,38 +1,37 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1P5hKn-0008LR-Q2
+	(envelope-from <Tom_Rini@mentor.com>) id 1P5hhN-0002bA-3I
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 18:04:21 +0200
-Received: from p5b035610.dip.t-dialin.net ([91.3.86.16] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1P5hKN-0000ri-0R by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 18:03:49 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1P5hKL-00044i-EL
+	Tue, 12 Oct 2010 18:27:54 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1P5hgv-0001vH-Dk from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Oct 2010 18:03:45 +0200
-Date: Tue, 12 Oct 2010 18:03:45 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101012160345.GA10844@excalibur.local>
-References: <AANLkTikTXVNJmQ=8Ct77Y9W1vLjLqSgFapS7vV+RFM8Q@mail.gmail.com>
+	Tue, 12 Oct 2010 09:27:05 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 12 Oct 2010 09:27:05 -0700
+Received: from [172.30.80.109] ([172.30.80.109]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 12 Oct 2010 10:27:04 -0600
+Message-ID: <4CB48C51.9000403@mentor.com>
+Date: Tue, 12 Oct 2010 09:26:57 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-In-Reply-To: <AANLkTikTXVNJmQ=8Ct77Y9W1vLjLqSgFapS7vV+RFM8Q@mail.gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+To: openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 12 Oct 2010 16:27:04.0410 (UTC)
+	FILETIME=[4E3ECBA0:01CB6A2A]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OEDEM: info
+Subject: [RFC] Remove older freetype versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,21 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2010 16:04:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Oct 2010 16:28:21 -0000
+X-List-Received-Date: Tue, 12 Oct 2010 16:28:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
+Hey all,
 
-On Tue, 2010-10-12 at 17:36, Raffaele Recalcati wrote:
-> I'm interested in attending to OEDEM for friday morning.
-> I have added myself to  the list "Attending for sure", even if I'm not
-> a skilled OE developer.
+I'd like to remove all versions of freetype before 2.4.3.  The only dist 
+which is pinning freetype currently does so via
+conf/distro/include/preferred-opie-versions.inc and that pins to a 
+non-existent version (it's using OPIE_VERSION which seems wrong).  All 
+of the previous versions have various security issues, including 
+remotely exploitable ones.  Only the very oldest version we have as a 
+D_P -1 so everyone was using 2.3.12 and will be going up to 2.4.3 
+(libraries are compat).
 
-Feel welcome. OEDEM is open for everyone. We will not have any introductions or
-similar though. Focus is on current and future development.
-
-regards
-Stefan Schmidt
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
