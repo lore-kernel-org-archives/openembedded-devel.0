@@ -1,46 +1,45 @@
 Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P65dp-0007o1-9b
+	(envelope-from <raj.khem@gmail.com>) id 1P65nN-00008h-6B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 20:01:32 +0200
-Received: by gya1 with SMTP id 1so1124149gya.6
+	Wed, 13 Oct 2010 20:11:21 +0200
+Received: by gya1 with SMTP id 1so1128698gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 11:01:00 -0700 (PDT)
+	Wed, 13 Oct 2010 11:10:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=G/j4jKf0AAQTpo0aPyy4jz1lou/+voAwQ62UH8rwohA=;
-	b=PK1+tkqJ9zcyTHagotW38AnZZs7ctOYUG3PM/xcLWG+oynJ2g0qw4pyedlNlfqMPB6
-	PWqdBm9srjuAkFTEfuAd3pv26wLsvH/L0nd7F4TAR8CVbla1/si2MtCPxTgSz0+2Arr9
-	CuXNiNXjPXH2JUozwLzLeuf7O2MeX7FRyW2wc=
+	bh=pT1tYTyawrhrhbuD7nQOLJI8NrNaLhI1HpHP3eLLZc4=;
+	b=LmjveB/kYt/Ar8N46zedQhBGXGbbj4LEZC9Fljfs9V/g9EID42kvVQsdSdYCc8vKnf
+	ii8d1lKghyaLYPSzHPJ38k/8SaGb4RCgwe53FdrBh8iTI/IA3C6e7Kjsuf973xWAm0n0
+	RKv1kN5oYuLgNPcWIRwCqGoU8r+lRafWYeTxk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=T3WEEiFrzfCSs/ZQPy3L/Sy69FesHCCi9deeUk8PnmUbaHkEyq46137th4PN69V49P
-	jQrLUNmLcoUI1NYhYe2mPGlXDS3sM7S79AtoY7JzIXVuR0qYnbwCuTY1zaGmuvMvaTBo
-	wXMxH7eNluel1/nq54ctGtE36gkb1Cu8D7TjY=
+	b=oxAoHoL+yIaBoZdj8z39O9jNisgCE4QPa87CvhHlAGZ9WXWQ9dhY3GoeQhfrMHUOz6
+	SGRbvFVaDeCofi9vw67imsU/t48mbhteUzjEbCYcN9/JSt0azx0uq3arZyyQtk3YOojP
+	SItsg481LF6UJztOAFp8mmZjfzq9HGYTNN89A=
+Received: by 10.90.55.18 with SMTP id d18mr4034008aga.11.1286993451337; Wed,
+	13 Oct 2010 11:10:51 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.42.131.1 with SMTP id x1mr936565ics.109.1286992860354; Wed, 13
-	Oct 2010 11:01:00 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Wed, 13 Oct 2010 11:00:56 -0700 (PDT)
-In-Reply-To: <20101013175113.GF11514@denix.org>
-References: <AANLkTikTXVNJmQ=8Ct77Y9W1vLjLqSgFapS7vV+RFM8Q@mail.gmail.com>
-	<AANLkTinBDkwPaJaCqKbcmGxxmOZivG7JG8RC7pV2wvvr@mail.gmail.com>
-	<20101013175113.GF11514@denix.org>
-Date: Wed, 13 Oct 2010 20:00:56 +0200
-Message-ID: <AANLkTikerdiZ978G2DVDTWO+iPB6gVeQ3nTYzRZLFR5N@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.90.86.6 with HTTP; Wed, 13 Oct 2010 11:10:30 -0700 (PDT)
+In-Reply-To: <20101013163603.GD28423@ibawizard.net>
+References: <AANLkTik90dJxAJ_+GLQy+3MqP3oRFV9bYO6+BjSwZNkN@mail.gmail.com>
+	<20101013163603.GD28423@ibawizard.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 13 Oct 2010 11:10:30 -0700
+Message-ID: <AANLkTi=pTAe+UmuLsMkra9ZvXAf=9btmd908uxW6tF95@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OEDEM: info
+Subject: Re: testing branch 2010-10-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,37 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 18:01:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 Oct 2010 18:11:22 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-2010/10/13 Denys Dmytriyenko <denis@denix.org>:
-> On Tue, Oct 12, 2010 at 10:53:14PM +0200, Frans Meulenbroeks wrote:
->> 2010/10/12 Raffaele Recalcati <lamiaposta71@gmail.com>:
->> > I'm interested in attending to OEDEM for friday morning.
->> > I have added myself to =A0the list "Attending for sure", even if I'm n=
-ot
->> > a skilled OE developer.
->> > I hope that I have done the right thing.
->> >
->> > See you in Cambridge,
->> > Recalcati
->>
->> Raffaele, glad to see you here.
->>
->> Technical question to the board:
->> I thought the eV meeting was planned for fri morning.
->> Is that open for non-members. Not that I have objections against it
->> being open, but better get this clear upfront.
+On Wed, Oct 13, 2010 at 9:36 AM, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
+> Cliff Brake <cliff.brake@gmail.com> [2010-10-08 17:35:54]:
 >
-> Since Raffaele and Fabio are only coming for Friday morning, should we tr=
-y to
-> discuss technical aspects first, and leave organizational ones (i.e. eV G=
-A)
-> for later?
+>> master branch has been merged to testing-next and is ready for clean bui=
+lds.
 >
+> Hi,
+>
+> I've build the testing-next 2010-10-08 for ts72xx machine, distro
+> angstrom-2010.x on Ubuntu 10.04.1 32-bit. I've updated the testing table =
+on
+> the wiki. Is it enough or am I missing some additional step? Thanks.
 
-FIne with me!
-Frans
+thank you. I think if you update the table and all its fields its good enou=
+gh.
+
+>
+> -- ynezz
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
