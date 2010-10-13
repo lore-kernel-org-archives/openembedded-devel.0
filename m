@@ -1,44 +1,39 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P67xd-0002mI-7J
+Received: from na3sys009aog107.obsmtp.com ([74.125.149.197])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <bengardiner@nanometrics.ca>) id 1P68XF-0008Vo-PZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 22:30:08 +0200
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9DKTZgH026436
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Wed, 13 Oct 2010 23:06:54 +0200
+Received: from source ([74.125.83.51]) by na3sys009aob107.postini.com
+	([74.125.148.12]) with SMTP
+	ID DSNKTLYfT/j2ka5cgsdvkFSMNDmXf5RV3nnz@postini.com;
+	Wed, 13 Oct 2010 14:06:25 PDT
+Received: by mail-gw0-f51.google.com with SMTP id a20so3644537gwa.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 15:29:36 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9DKTZYE026427
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 15:29:35 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9DKTZhQ007041
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 15:29:35 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Wed, 13 Oct 2010 15:29:35 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Oct 2010 15:29:34 -0500
-Thread-Topic: Question about OVERRIDES precedence
-Thread-Index: ActrFVkZ5nxNjrzxTo+3TgYZMLo0kA==
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.40
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+	Wed, 13 Oct 2010 14:06:23 -0700 (PDT)
+Received: by 10.101.3.34 with SMTP id f34mr5194858ani.149.1287003982364;
+	Wed, 13 Oct 2010 14:06:22 -0700 (PDT)
+Received: from localhost.localdomain ([206.191.47.130])
+	by mx.google.com with ESMTPS id u3sm12901703ani.19.2010.10.13.14.06.21
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 13 Oct 2010 14:06:21 -0700 (PDT)
+From: Ben Gardiner <bengardiner@nanometrics.ca>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Oct 2010 17:06:19 -0400
+Message-Id: <1287003979-3638-1-git-send-email-bengardiner@nanometrics.ca>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <AANLkTimV_Xf9geTryw8tvYknhe=5_BrSSr5YT2qHnxEJ@mail.gmail.com>
+References: <AANLkTimV_Xf9geTryw8tvYknhe=5_BrSSr5YT2qHnxEJ@mail.gmail.com>
+In-Reply-To: <AANLkTimV_Xf9geTryw8tvYknhe=5_BrSSr5YT2qHnxEJ@mail.gmail.com>
+X-SA-Exim-Connect-IP: 74.125.149.197
+X-SA-Exim-Mail-From: bengardiner@nanometrics.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-5.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Question about OVERRIDES precedence
+Cc: Christopher Larson <clarson@kergoth.com>
+Subject: [RFC, PATCH] gmp: assign --target to --host to avoid configure error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,56 +47,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 20:30:08 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Oct 2010 21:06:54 -0000
 
-All,
+When trying to build angstrom-2008.1 from
+f58a5d59b755bdb725497f574a8059529c134c27 of master or from
+b78fc95424b5f0fb28246e8c61bb8b4d6a9d733a of stable/2009 the builds failed on
+gmp-native (then later gmp). The error was that "--target is not appropriate
+for GMP".
 
-I have been looking into the OVERRIDES setting and it appears to me that th=
-e OVERRIDES are being handled in least specific to most specific order.  Me=
-aning that if I have an override for a particular machine set that it has a=
- lower priority than the override for a distro.
+To avoid the error printed by the following code snippet from configure.in:
 
-My OVERRIDES variable is actually set to evaluate:
-# OVERRIDES=3Dlocal:${MACHINE}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-=
-${BUILD_OS}:fail-fast:pn-${PN}:${FEED_ARCH}:${SOC_FAMILY}:libc-glibc${OVERR=
-IDE_THUMB}${OVERRIDE_INTERWORK}
+configure.in:
+=============
+if test -n "$target_alias" && test "$target_alias" != "$host_alias"; then
+  AC_MSG_ERROR([--target is not appropriate for GMP
+Use --build=CPU-VENDOR-OS if you need to specify your CPU and/or system
+explicitly.  Use --host if cross-compiling (see "Installing GMP" in the
+manual for more on this).])
+fi
+============
 
-Which translates in my build to:
-OVERRIDES=3D"local:am37x-evm:angstrom:linux-gnueabi:arm:build-linux:fail-fa=
-st:pn-task-arago-toolchain-tisdk-multimedia-host:armv7a:omap3:libc-glibc:th=
-umb-interwork"
+this patch assigns the value of the '--target' argument to the value of the
+'--host' argument.
 
-I would expect that if I set an override for am37x-evm that this MACHINE sp=
-ecific override should trump the DISTRO specific override or the SOC_FAMILY=
- override.
+Tested by 'bitbake gmp' and 'bitbake gmp-native'
 
-Likewise I would expect that the local override would have the highest prec=
-edence because I am trying to override something specifically for my local =
-copy and that the "thumb-interwork" override would have the lowest preceden=
-ce.
+Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+CC: Christopher Larson <clarson@kergoth.com>
 
-Is my expectation incorrect? =20
+---
 
-If so then can we just reverse the list of overrides in the update_data met=
-hod of <bitbake>/lib/bb/data.py, around line 500 in my version.  My bitbake=
- is on version 1.10.  In the master this would be in the finalize function =
-of the DataSmart class.
+This patch will change the argument passed in --target for all versions of
+gmp. Would it be better to restrict the change to newer versions only?
 
-Thanks in advance for you input. =20
+---
+ recipes/gmp/gmp.inc |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-Sincerely,
-Chase Maupin
-Software Applications
-Catalog DSP Products
-e-mail: chase.maupin@ti.com
-phone: (281) 274-3285
-
-For support:
-Forums - http://community.ti.com/forums/
-Wiki - http://wiki.davincidsp.com/
+diff --git a/recipes/gmp/gmp.inc b/recipes/gmp/gmp.inc
+index 522189d..8ffeb91 100644
+--- a/recipes/gmp/gmp.inc
++++ b/recipes/gmp/gmp.inc
+@@ -8,6 +8,8 @@ SRC_URI = "${GNU_MIRROR}/gmp/gmp-${PV}.tar.bz2;name=gmp \
+ 	   file://configure.patch \
+ 	   file://amd64.patch"
+ 
++TARGET_SYS = "${HOST_SYS}"
++
+ inherit autotools 
+ 
+ ARM_INSTRUCTION_SET = "arm"
+-- 
+1.7.0.4
 
 
 
