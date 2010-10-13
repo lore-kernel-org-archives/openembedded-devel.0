@@ -1,33 +1,46 @@
-Received: from smtprelay04.ispgateway.de ([80.67.31.31])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dimov@ronetix.at>) id 1P61hB-0001NC-JM
+	(envelope-from <chasemaupin03@gmail.com>) id 1P61uC-0005Ec-NC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 15:48:43 +0200
-Received: from [62.178.142.196] (helo=iserv.ronetix.at)
-	by smtprelay04.ispgateway.de with esmtps (TLSv1:AES256-SHA:256)
-	(Exim 4.68) (envelope-from <dimov@ronetix.at>) id 1P5xO2-0005WI-9v
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 11:12:38 +0200
-Received: from [192.168.10.40] (tserv_vpn [192.168.22.10])
-	by iserv.ronetix.at (8.13.8/8.13.8) with ESMTP id o9D9CQ3T016725
+	Wed, 13 Oct 2010 16:02:10 +0200
+Received: by gxk22 with SMTP id 22so227224gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 11:12:27 +0200
-Message-ID: <4CB57839.3030905@ronetix.at>
-Date: Wed, 13 Oct 2010 12:13:29 +0300
-From: RONETIX - Asen Dimov <dimov@ronetix.at>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090825)
-MIME-Version: 1.0
+	Wed, 13 Oct 2010 07:01:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=ww2aQxYkl+p2bQ8f47iWdGDEfwZJ0IE4qSKmWcnH4Zw=;
+	b=YGGberTX7ifhBW9g1l5qJnv9d0/qHOXkJdewvYz5VL/suocqna6x5ti/vAbmo8w8iA
+	TMQH06BL4md5KTp0fgmjGXe2k+A1X4/hqpUP6u5JzB8zYbOix8HMZeglgncygL+0Q2uf
+	/LhWKI6UwTySSPCf54rQRqJnZX2QHIvO+giBo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=oeUUP2Qcm/oQGmxIZvMs5toeS65rItt/Ry5MrFG+pCU6AwLhWN1QV5TSOkYE/a51Qt
+	bgeefwa6d8FP4eorTkVQEJp4mRKpyHLXaukgWXN3u/VplZopjwwQU7sQvgknf3fus7oG
+	iiDFUDz+MCvAbX79eL5OmjHwozSAMEN7RqLwo=
+Received: by 10.150.197.19 with SMTP id u19mr1151917ybf.131.1286978499515;
+	Wed, 13 Oct 2010 07:01:39 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id p38sm5073769ybk.4.2010.10.13.07.01.38
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 13 Oct 2010 07:01:38 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Df-Sender: [pbs]Z2Fnb3ZAcm9uZXRpeC5hdA==
-X-SA-Exim-Connect-IP: 80.67.31.31
-X-SA-Exim-Mail-From: dimov@ronetix.at
+Date: Wed, 13 Oct 2010 09:01:28 -0500
+Message-Id: <1286978491-13427-2-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1286978491-13427-1-git-send-email-Chase.Maupin@ti.com>
+References: <1286978491-13427-1-git-send-email-Chase.Maupin@ti.com>
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] Add machine pm9g45 based on at91sam9g45
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: [PATCH 2/5] matrix-gui-common: use INC_PR in versioned recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,132 +54,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 13:48:43 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 14:02:10 -0000
 
-Hello,
+* Added an INC_PR to the matrix-gui-common.inc file to be used
+  by the individual version recipes.
+* Modified the version recipes to use INC_PR in their PR setting.
 
-I want to add a new board and have a method solving some issues(listed 
-below).
-But I am not sure if this could be the appropriate solution, so this is 
-the idea
-to be commented on.
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ recipes/ti/matrix-gui-common.inc    |    2 ++
+ recipes/ti/matrix-gui-common_1.1.bb |    2 +-
+ recipes/ti/matrix-gui-common_1.2.bb |    2 +-
+ 3 files changed, 4 insertions(+), 2 deletions(-)
 
- The idea of patching linux kernel for pm9g45
-                                             
- As the 2.6.30-at91-exp.tar.gz has a patch(with number 66) which do not 
-apply
- cleanly( parts of it have been already applied to 2.6.30.10 kernel) and 
-also
- the bitbake do not handle patches in a tar.gz format, that leaded to 
-the need
- of writing code for extended patching. The PM9G45_patches_list 
-contains      
- patches, which have be applied after the 2.6.30-at91-exp.tar.gz, so the 
-option
- "apply=no" make this. That helps to apply patches in proper 
-order.            
-                                                                              
+diff --git a/recipes/ti/matrix-gui-common.inc b/recipes/ti/matrix-gui-common.inc
+index 46c0bd6..896da47 100644
+--- a/recipes/ti/matrix-gui-common.inc
++++ b/recipes/ti/matrix-gui-common.inc
+@@ -4,6 +4,8 @@ LICENSE = "BSD"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
  
- A patch method have to be appended to the python do_patch() 
-task.               
- And as I do not know python(I made a try with python but I couldn't 
-make it)  
- the appended code just call a shell script that implements the method 
--       
- do_patchronetix_sh().                                                        
++INC_PR = "r5"
++
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
  
-                                                                              
+ PLATFORM_dm365 = "dm365"
+diff --git a/recipes/ti/matrix-gui-common_1.1.bb b/recipes/ti/matrix-gui-common_1.1.bb
+index 2b921af..b0f84bc 100644
+--- a/recipes/ti/matrix-gui-common_1.1.bb
++++ b/recipes/ti/matrix-gui-common_1.1.bb
+@@ -4,4 +4,4 @@ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3)"
  
- So the do_patchronetix_sh() extract the 2.6.30-at91-exp.tar.gz and 
-apply      
- patches in it one by one, but when it reaches the problem patch the 
-hunks     
- already applied are removed and the patch( 66) is then 
-applied.               
- Then from the names in PM9G45_patches_list are removed "file://" 
-and          
- ";apply=no" in order to be valid names for the patch 
-utility.                 
- And finally the ARM machine list is 
-updated.                                 
+ SRCREV = "136"
+ PV = "1.1"
+-PR = "r4"
++PR = "${INC_PR}.0"
+diff --git a/recipes/ti/matrix-gui-common_1.2.bb b/recipes/ti/matrix-gui-common_1.2.bb
+index a3da400..6ea4d3d 100644
+--- a/recipes/ti/matrix-gui-common_1.2.bb
++++ b/recipes/ti/matrix-gui-common_1.2.bb
+@@ -2,4 +2,4 @@ require matrix-gui-common.inc
+ 
+ SRCREV = "146"
+ PV = "1.2"
+-PR = "r0"
++PR = "${INC_PR}.0"
+-- 
+1.7.0.4
 
-part of recipes/linux/linux_2.6.30.bb
---- 8< 
-------------------------------------------------------------------------------------------
-PM9G45_patches_list = " \
-        file://0001-ads7846-.c-and-.h-add-swap_xy.patch;apply=no \
-        file://0003-print-some-more-info-from-atmel_nand.c.patch;apply=no \
-        
-file://0004-add-newline-at-the-end-of-uncorrectable-error.patch;apply=no \
-        
-file://0005-Add-CompactFlash-to-at91sam9g45-architecture.patch;apply=no \
-        
-file://0006-pm9g45-system-ram-can-be-on-CS1-or-CS6.patch;apply=no \       
-        file://0007-add-pm9g45-board.patch;apply=no 
-\                             
-        file://0008-pm9g45-default-configuration-files.patch;apply=no 
-\           
-        file://0009-add-float-flags-in-Makefile.patch;apply=no \
-        file://0010-conditional-compile-if-DEDICATED_VRAM.patch;apply=no \
-        
-file://0011-add-pm9g45-board-version-1.2-and-adjust-memory-sele.patch;apply=no 
-\
-        
-file://0012-enable-USB-Device-with-On-the-go-ability.patch;apply=no "
-
-
-AT91_EXP_PROBLEM_PATCH = 
-"2.6.30-at91-exp-0066-sound-soc-update-soc-support-to-2.6.32-rc3-alsa.patch"
-SRC_URI_append_ronetix-pm9g45 = " 
-ftp://www.at91.com/pub/linux/2.6.30-at91/2.6.30-at91-exp.tar.gz;name=2630at91exptargz 
-\
-                                ${PM9G45_patches_list} "
-
-do_patchronetix_sh() {
-        cd ${S}
-        # add AT91 experimental patches
-        export PatchList=`ls ${WORKDIR}/2.6.30-at91-exp/`
-        for Patch in ${PatchList}; do \
-                if [ ${AT91_EXP_PROBLEM_PATCH} == $Patch ]; then \
-                        echo "This patch has problems ${Patch}" ;\
-                        #remove that hunks which have been already 
-applied. \
-                        sed -e '4342,4350 d' -e '6422,6435 d' -e 
-'7720,7742 d' \
-                                ${WORKDIR}/2.6.30-at91-exp/${Patch} | 
-patch -s -f -p1 ;\
-                        continue ;\
-                fi
-                echo "Applying patch ${WORKDIR}/2.6.30-at91-exp/${Patch}" ;\
-                patch -s -f -p1 < ${WORKDIR}/2.6.30-at91-exp/${Patch};\
-        done
-        # add pm9g45 patches
-        for Patch in "${PM9G45_patches_list}" ; do \
-                export NEW_FLIST="${NEW_FLIST} `echo ${Patch} | sed -e 
-"s/file\:\/\/*//g" -e "s/;apply=no//g" -e "s/ \\ //g"`";\
-        done
-        for Patch in ${NEW_FLIST} ;do \
-                echo "Applying patch ${WORKDIR}/${Patch}" ;\
-                patch -s -f -p1 < ${WORKDIR}/${Patch};\
-        done
-        #update arm mach-types
-        #instead of applying 
-file://0002-add-pm9g45-number-in-mach-types.patch
-        wget http://www.arm.linux.org.uk/developer/machines/download.php 
--O ${S}/arch/arm/tools/mach-types
-}
-addtask patchronetix_sh
-
-python do_patch_append_ronetix-pm9g45 () {
-        bb.build.exec_func('do_patchronetix_sh', d)
-}
-# End of idea for patching linux kernel for pm9g45
---- 8< 
-------------------------------------------------------------------------------------------
-
-Regards,
-Asen
 
 
