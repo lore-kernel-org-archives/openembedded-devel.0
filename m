@@ -1,31 +1,33 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1P62IT-0005Pr-0S
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 16:27:16 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 5597B16608A2; Wed, 13 Oct 2010 08:26:44 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id F387F1660899;
-	Wed, 13 Oct 2010 08:26:43 -0600 (MDT)
-Message-ID: <4CB5C1A3.6000506@mlbassoc.com>
-Date: Wed, 13 Oct 2010 08:26:43 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P62ln-0004Mc-DI for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 16:57:34 +0200
+Received: from f053040062.adsl.alicedsl.de ([78.53.40.62]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P62lN-0005IL-Pq for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 14:57:05 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimmoNWm5fDxSBvR7MSUDBH8w0FyiRMFoR5WXuuf@mail.gmail.com>
-In-Reply-To: <AANLkTimmoNWm5fDxSBvR7MSUDBH8w0FyiRMFoR5WXuuf@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+In-Reply-To: <4CB5A897.2000003@freyther.de>
+References: <mailman.1290.1286961912.3514.openembedded-devel@lists.openembedded.org>
+	<4CB58BAD.5090806@gmail.com> <4CB5A86D.6020304@gmail.com>
+	<4CB5A897.2000003@freyther.de>
+Date: Wed, 13 Oct 2010 16:57:04 +0200
+Message-ID: <1286981824.3904.59.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: do we need patch-native ?
+Subject: Re: apr-util_1.3.4.bb fails, looking at host includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,43 +41,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 14:27:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 14:57:34 -0000
+X-Groupsio-MsgNum: 24782
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ihsiAyddz+7c0wI1K6GF"
 
-On 10/13/2010 08:12 AM, Frans Meulenbroeks wrote:
-> Hi,
->
-> I had to do a build on OpenSuse 11.3 today, and it failed building
-> quilt-native (0.46-r2)
->
-> Root cause is that quilt configure tries to find whether patch is
-> installed and has a version>  2.4
-> It does so by calling patch --version and extract the version string from it.
->
-> The patch from 11.3 identifies itself as:
-> GNU patch 2.6.1.81-5b68
-> However the quilt configure script expected to find output like:
-> patch 2.6 (which is what I get on my ubuntu 10.4 version).
->
-> I see several possible options to fix this:
-> - make a package patch-native, so we can use our own patch
-> - patch quilt so its configure can deal with both patch version strings
->
-> Problem with the latter is that I have no idea how many other recipes
-> will have a similar test (and definitely they are not all triggered by
-> the images I regularly build.
-> Therefore I think I have a preference to introduce patch-native, but I
-> would like to hear how you guys&  gals think about this, and whether
-> you see other options.
+--=-ihsiAyddz+7c0wI1K6GF
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Sounds like quilt's configure script is broken.  Such behaviour
-should not be catered to - it should be fixed.
+Am Mittwoch, den 13.10.2010, 14:39 +0200 schrieb Holger Freyther:
+> On 10/13/2010 02:39 PM, Tasslehoff Kjappfot wrote:
+>=20
+> >=20
+> > Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+> > ---
+> >  recipes/apr/apr-util_1.3.4.bb |    1 +
+> >  1 files changed, 1 insertions(+), 0 deletions(-)
+> >=20
+> > diff --git a/recipes/apr/apr-util_1.3.4.bb b/recipes/apr/apr-util_1.3.4=
+.bb
+> > index cc6781b..5e31171 100644
+> > --- a/recipes/apr/apr-util_1.3.4.bb
+> > +++ b/recipes/apr/apr-util_1.3.4.bb
+> > @@ -14,6 +14,7 @@ EXTRA_OECONF =3D
+> > "--with-apr=3D${STAGING_BINDIR_CROSS}/apr-1-config \
+> >          --with-gdbm=3D${STAGING_DIR_HOST}${layout_prefix} \
+> >          --without-sqlite2 \
+> >          --without-sqlite3 \
+> > +                --without-pgsql \
+>=20
+> hmm... the existing file is using spaces, you use tabs... I will fix it w=
+hen
+> pushing the changes. Please try to follow the indention of the file.
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Holger committed your patch in eba2dd [1]. It would be nice if you could
+write a elaborate commit message next time with the actual error message
+and reason added.
+
+  /checking for pg_config... /usr/bin/pg_config
+     adding "-I/usr/include/postgresql" to CPPFLAGS
+     adding "-L/usr/lib" to LDFLAGS/
+
+I build tested `r7` with `minimal-uclibc` for `MACHINE =3D "beagleboard"`
+and it worked for me without any problems as it was with `r6`. But I did
+not have `pg_config` installed on my build system anyway.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Deba2dd0=
+9dfb380493e7f416bbbc437d47205b9de
+
+--=-ihsiAyddz+7c0wI1K6GF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky1yMAACgkQPX1aK2wOHVhRxACfSZD6hyRGJ8LfMEWlE0csFiP8
+HFYAmQHLu5WSy8VGO9rc09PArZjKSUzl
+=4kHz
+-----END PGP SIGNATURE-----
+
+--=-ihsiAyddz+7c0wI1K6GF--
