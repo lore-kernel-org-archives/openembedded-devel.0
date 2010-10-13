@@ -1,46 +1,29 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1P5z5d-0003og-Sj
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 13:01:48 +0200
-Received: by ewy1 with SMTP id 1so1531770ewy.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 04:01:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=B3GpuftebIzb5zLAfghndZHovYifbrAu1rlDBUNcZeQ=;
-	b=dIztuIGcj/EnTDwmDc5UG0AB/KH28rTkI7ivLtdJztfHoNs17AIgkeTmM1p4S+GfjN
-	XuFSzKxmcRVagbPCIE+BVHtOCm6l5D4eai+skAM79+IuYwj3k+Afe15FfcHoCEtJhiSS
-	QM6ETMaZbGdpYqKxxk/8wTlBSVsLrTpmnAZZU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=aZvhGjRYZb3DF73tNOZwCDBLQcSFO/IL3WIO5CzuESxXBjrzwHUW50dcqUloiJ8JzD
-	bQQL/K0m0NIF5kZK1PSyLUgaxi8A92JJLL6tJhcw1PXS4AkpRXsFXF5ExyKUqr7mJTiw
-	/cENaPUvzl3CKRHdMWpI0FaK9xvlu78OgjwnA=
-Received: by 10.14.22.3 with SMTP id s3mr4695721ees.28.1286967679900;
-	Wed, 13 Oct 2010 04:01:19 -0700 (PDT)
-Received: from [192.168.0.40] (147.84-49-231.nextgentel.com [84.49.231.147])
-	by mx.google.com with ESMTPS id z55sm14722477eeh.3.2010.10.13.04.01.18
-	(version=SSLv3 cipher=RC4-MD5); Wed, 13 Oct 2010 04:01:19 -0700 (PDT)
-Message-ID: <4CB591B3.6080805@gmail.com>
-Date: Wed, 13 Oct 2010 13:02:11 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P601u-00050Z-Jl for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 14:01:59 +0200
+Received: from f053040062.adsl.alicedsl.de ([78.53.40.62]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P601U-0003Yn-Md for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 12:01:32 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+Date: Wed, 13 Oct 2010 14:01:30 +0200
+Message-ID: <1286971290.3904.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: libusb-1.0-0, Required build target 'myrootfs' has no buildable providers.
+Subject: eglibc-initial-2.12-r15.6+svnr11762: commit d8ce8a: `do_install` fails with `cannot remove `/usr/include/limits.h': Permission denied`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,40 +37,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 11:01:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 12:02:00 -0000
+X-Groupsio-MsgNum: 24768
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-+sztvyhQDZYEMyQ4prL7"
 
-I'm compiling myrootfs for the beagleboard, and have IMAGE_INSTALL += 
-"libusb1" in my recipe. This has worked fine until a recent update, but 
-now it fails with the following:
+--=-+sztvyhQDZYEMyQ4prL7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-NOTE: Handling BitBake files: | (7156/7156) [100 %]
-Parsing of 7156 .bb files complete (6694 cached, 462 parsed). 7374 
-targets, 305 skipped, 0 masked, 0 errors.
-ERROR: 
-'['/home/tassloe/src/openembedded/pd-recipes/images/myrootfs.bb']' 
-RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 
-'libusb-1.0-0' but it wasn't found in any PACKAGE or RPROVIDES variables
-ERROR: Required build target 'myrootfs' has no buildable providers.
-Missing or unbuildable dependency chain was: ['myrootfs', 'libusb-1.0-0']
-NOTE: Resolving any missing task queue dependencies
-ERROR: '['/home/tassle/src/openembedded/pd-recipes/images/myrootfs.bb']' 
-RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 
-'libusb-1.0-0' but it wasn't found in any PACKAGE or RPROVIDES variables
-Unknown Event: <bb.event.NoProvider instance at 0xfaae5ec>
-NOTE: Runtime target 'libusb-1.0-0' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['libusb-1.0-0']
-ERROR: Required build target 'myrootfs' has no buildable providers.
-Missing or unbuildable dependency chain was: ['myrootfs', 'libusb-1.0-0']
-
-I deleted my TMPDIR and then it compiled ok, but when I tried to compile 
-again, I got the same message. Neither myrootfs.bb nor recipes/libusb 
-have been changed since the last time this worked for me, so I suspect 
-something else is causing this.
-
-Any ideas?
-
-- Tasslehoff
+Dear OE folks,
 
 
+        $ bitbake console-image
+        [=E2=80=A6]
+        | make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-dev/=
+work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc-2_1=
+2/libc'
+        | make[1]: Entering directory `/oe/build-minimal-eglibc/minimal-dev=
+/work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc-2_=
+12/libc'
+        | /oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/bin/=
+install -c -m 644 include/limits.h /usr/include/limits.h
+        | /oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/bin/=
+install: cannot remove `/usr/include/limits.h': Permission denied
+        | make[1]: *** [/usr/include/limits.h] Error 1
+        | make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-dev/=
+work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc-2_1=
+2/libc'
+        | make: *** [install-headers] Error 2
+        | FATAL: oe_runmake failed
+        | ERROR: Function do_install failed
+        NOTE: package eglibc-initial-2.12-r15.6+svnr11762: task do_install:=
+ Failed
+
+with `minimal-eglibc` for `MACHINE =3D "beagleboard"`.
+
+It tries to delete a file of the build system. I guess the Makefile was
+changed in the latest version bump in d8ce8a [1].
+
+Should I CC the eglibc folks when experiencing such problems?
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dd8ce8ac=
+ea72b7e7e5512accce434aa4b892cf0a8
+
+--=-+sztvyhQDZYEMyQ4prL7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky1n5UACgkQPX1aK2wOHVgIUACfZnatiSAaPRnBpQ89S2PJprJH
+uEQAn3JTvG2Wmya703wPt7uDll8g1e9Z
+=ZwMT
+-----END PGP SIGNATURE-----
+
+--=-+sztvyhQDZYEMyQ4prL7--
