@@ -1,42 +1,46 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1P5vst-00079y-FX
+	(envelope-from <tasskjapp@gmail.com>) id 1P5xGC-0001tb-8T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 09:36:26 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id C7318A4FB9
+	Wed, 13 Oct 2010 11:04:33 +0200
+Received: by ewy1 with SMTP id 1so1490508ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 08:35:52 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id msggE95aLYH4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 08:35:52 +0100 (BST)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 1CDFEA4F65
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 08:35:52 +0100 (BST)
-Message-ID: <4CB56158.3050308@xora.org.uk>
-Date: Wed, 13 Oct 2010 08:35:52 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+	Wed, 13 Oct 2010 02:04:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type;
+	bh=utOqUHSeSHvUJidEdh7F41GiZBWLu5DJ46ZBlSvFF2I=;
+	b=B5YhrOzmDSePx7oNQgMo4UfExZz4+HdoKLGbeioiXBK95FnS6Wk6J39O0BKrVBGHYf
+	N0VdOKHLDadHuvsoz9xUU5y091oMDkkZo+SfdCqeGy9ohKZjWVi4iHtdMm0rGDe6wJf1
+	1d/5NRShmxPsMk69RQvhVDGXkbKUbrWUZz+Zw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type;
+	b=tPaoumbmRr99Cf8Ed0NDUrRbihikVjofkFw3ewh1mZBt/vlx+mn1LaEJJLZjgy5KCZ
+	XZ0FXQl/hI04IaQC3z2r9gMBnalFMhhyN3IitIoXbKWyh8usmsRUaUZNgls1E3Kr9GXQ
+	O1txZ+guAtlBIoZINYuNSgwBRZEJW22eHomaQ=
+Received: by 10.213.26.14 with SMTP id b14mr3552208ebc.15.1286960646382;
+	Wed, 13 Oct 2010 02:04:06 -0700 (PDT)
+Received: from [192.168.0.40] (147.84-49-231.nextgentel.com [84.49.231.147])
+	by mx.google.com with ESMTPS id q54sm10714527eeh.12.2010.10.13.02.04.04
+	(version=SSLv3 cipher=RC4-MD5); Wed, 13 Oct 2010 02:04:05 -0700 (PDT)
+Message-ID: <4CB57639.1080908@gmail.com>
+Date: Wed, 13 Oct 2010 11:04:57 +0200
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CB30259.6020004@xora.org.uk> <4CB4B11A.1040302@timwise.co.uk>
-In-Reply-To: <4CB4B11A.1040302@timwise.co.uk>
-X-Enigmail-Version: 1.1.1
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: tasskjapp@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: General Assembly 2010 Agenda
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: apr-util_1.3.4.bb fails, looking at host includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,23 +54,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 07:36:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 Oct 2010 09:04:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
- On 12/10/2010 20:03, Tim Abell wrote:
-> Think that link should read http://wiki.openembedded.org/index.php/GA2010
-> I got a 404 on the one you added.
->
-> Is the relationship with SHR relevant? I'm trying to get up and
-> running as a maintainer for SHR-T.
->
-Looks like they broke the wiki when moving it :-)
+I'm trying to compile log4cxx, but it fails compiling apr-util, saying 
+that it is looking at host includes.
 
-Not sure what you mean, the meeting is the General Assembly of the
-Openembedded eV not a distro meeting.
+I suspect the following from log.do_configure is a problem:
 
-Graeme
+/checking for pg_config... /usr/bin/pg_config
+   adding "-I/usr/include/postgresql" to CPPFLAGS
+   adding "-L/usr/lib" to LDFLAGS/
 
+But I have no idea how to fix it...
 
+- Tasslehoff
 
