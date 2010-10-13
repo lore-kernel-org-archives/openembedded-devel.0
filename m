@@ -1,35 +1,35 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P64gz-0001I7-4a
+Received: from na3sys009aog105.obsmtp.com ([74.125.149.75])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <bengardiner@nanometrics.ca>) id 1P65GU-0006Ul-Tv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 19:00:42 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LA800BIIN762561@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	13 Oct 2010 11:59:36 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C07A514AF6A; Wed,
-	13 Oct 2010 12:59:30 -0400 (EDT)
-Date: Wed, 13 Oct 2010 12:59:30 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 13 Oct 2010 19:37:25 +0200
+Received: from source ([209.85.214.172]) by na3sys009aob105.postini.com
+	([74.125.148.12]) with SMTP
+	ID DSNKTLXuNO8nO7GfpN8bBKp/uup81LhWp6vM@postini.com;
+	Wed, 13 Oct 2010 10:36:57 PDT
+Received: by mail-iw0-f172.google.com with SMTP id 10so11261802iwn.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 10:36:52 -0700 (PDT)
+Received: by 10.42.133.133 with SMTP id h5mr1490405ict.455.1286988163374;
+	Wed, 13 Oct 2010 09:42:43 -0700 (PDT)
+Received: from localhost.localdomain ([206.191.47.130])
+	by mx.google.com with ESMTPS id i38sm7619449yhj.2.2010.10.13.09.42.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 13 Oct 2010 09:42:42 -0700 (PDT)
+From: Ben Gardiner <bengardiner@nanometrics.ca>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20101013165930.GC11514@denix.org>
-References: <1286978491-13427-1-git-send-email-Chase.Maupin@ti.com>
-	<1286978491-13427-3-git-send-email-Chase.Maupin@ti.com>
-MIME-version: 1.0
-In-reply-to: <1286978491-13427-3-git-send-email-Chase.Maupin@ti.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.1
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Wed, 13 Oct 2010 12:42:41 -0400
+Message-Id: <1286988161-20097-1-git-send-email-bengardiner@nanometrics.ca>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 74.125.149.75
+X-SA-Exim-Mail-From: bengardiner@nanometrics.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-4.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: Re: [PATCH 3/5] matrix-gui-e: use INC_PR in versioned recipes
+Subject: [PATCH] [PATCH] distro: make TARGET_VENDOR a weak assignment to enable external-csl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,67 +43,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 17:00:43 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 13 Oct 2010 17:37:25 -0000
 
-On Wed, Oct 13, 2010 at 09:01:29AM -0500, Chase Maupin wrote:
-> * Added an INC_PR to the matrix-gui-e.inc file to be used
->   by the individual version recipes.
-> * Modified the version recipes to use INC_PR in their PR setting.
-> 
-> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Trying to use an external toolchain like the 2009q1 toolchain from codesourcery
+has some strange results since the toolchain has vendor 'none' but
+distributions like angstrom set TARGET_VENDOR unconditionally.
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+This changeset makes all assignments of TARGET_VENDOR in distros weak as was
+suggested by Denys Dmytriyenko in a recent mailing list discussion [1].
 
-> ---
->  recipes/ti/matrix-gui-e.inc    |    2 ++
->  recipes/ti/matrix-gui-e_1.1.bb |    2 +-
->  recipes/ti/matrix-gui-e_1.2.bb |    2 +-
->  3 files changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/ti/matrix-gui-e.inc b/recipes/ti/matrix-gui-e.inc
-> index 0d0b4bf..86f08b1 100644
-> --- a/recipes/ti/matrix-gui-e.inc
-> +++ b/recipes/ti/matrix-gui-e.inc
-> @@ -4,6 +4,8 @@ LICENSE = "BSD"
->  SECTION = "multimedia"
->  PRIORITY = "optional"
->  
-> +INC_PR = "r20"
-> +
->  COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
->  
->  PLATFORM_dm365 = "dm365"
-> diff --git a/recipes/ti/matrix-gui-e_1.1.bb b/recipes/ti/matrix-gui-e_1.1.bb
-> index d6a674f..2b6bd76 100644
-> --- a/recipes/ti/matrix-gui-e_1.1.bb
-> +++ b/recipes/ti/matrix-gui-e_1.1.bb
-> @@ -4,5 +4,5 @@ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3)"
->  
->  SRCREV = "136"
->  PV = "1.1"
-> -PR = "r19"
-> +PR = "${INC_PR}.0"
->  
-> diff --git a/recipes/ti/matrix-gui-e_1.2.bb b/recipes/ti/matrix-gui-e_1.2.bb
-> index 461fc7e..5ac2a56 100644
-> --- a/recipes/ti/matrix-gui-e_1.2.bb
-> +++ b/recipes/ti/matrix-gui-e_1.2.bb
-> @@ -2,5 +2,5 @@ require matrix-gui-e.inc
->  
->  SRCREV = "146"
->  PV = "1.2"
-> -PR = "r0"
-> +PR = "${INC_PR}.0"
->  
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Tested with angstrom-2008.1 and the codesourcery 2009q1 toolchain by assigning
+TARGET_VENDOR = "-none"
+TOOLCHAIN_TYPE = "external"
+TOOLCHAIN_BRAND = "csl"
+, in addition to putting the CSL in the PATH.
+
+Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+CC: Denys Dmytriyenko <denis@denix.org>
+
+[1] http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg10699.html
+
+---
+
+A similar patch is applicable to the stable/2009 branch but this patch is not applicable as-is.
+---
+ conf/distro/include/angstrom.inc       |    2 +-
+ conf/distro/include/kaeilos-2010.inc   |    2 +-
+ conf/distro/include/kaeilos.inc        |    2 +-
+ conf/distro/include/oplinux.inc        |    2 +-
+ conf/distro/include/sane-toolchain.inc |    2 +-
+ conf/distro/iphone-compat.conf         |    2 +-
+ conf/distro/mamona.conf                |    2 +-
+ conf/distro/nylon.conf                 |    2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/conf/distro/include/angstrom.inc b/conf/distro/include/angstrom.inc
+index 8983c86..9e5c869 100644
+--- a/conf/distro/include/angstrom.inc
++++ b/conf/distro/include/angstrom.inc
+@@ -9,7 +9,7 @@ DISTRO_NAME = "Angstrom"
+ 
+ BUILDNAME = "Angstrom ${DISTRO_VERSION}"
+ 
+-TARGET_VENDOR = "-angstrom"
++TARGET_VENDOR ?= "-angstrom"
+ 
+ SOC_FAMILY ?= "Unknown"
+ 
+diff --git a/conf/distro/include/kaeilos-2010.inc b/conf/distro/include/kaeilos-2010.inc
+index 0896281..4edee26 100644
+--- a/conf/distro/include/kaeilos-2010.inc
++++ b/conf/distro/include/kaeilos-2010.inc
+@@ -12,7 +12,7 @@ USERDISTRO := "${DISTRO}"
+ DISTRO = "kaeilos"
+ DISTRO_NAME = "KaeilOS"
+ BUILDNAME = "KaeilOS ${DISTRO_VERSION}"
+-TARGET_VENDOR = "-kaeilos"
++TARGET_VENDOR ?= "-kaeilos"
+ 
+ # Add FEED_ARCH to overrides
+ OVERRIDES .= ":${FEED_ARCH}"
+diff --git a/conf/distro/include/kaeilos.inc b/conf/distro/include/kaeilos.inc
+index edbad69..5254854 100644
+--- a/conf/distro/include/kaeilos.inc
++++ b/conf/distro/include/kaeilos.inc
+@@ -12,7 +12,7 @@ DISTRO_NAME = "KaeilOS"
+ 
+ BUILDNAME = "KaeilOS ${DISTRO_VERSION}"
+ 
+-TARGET_VENDOR = "-kaeilos"
++TARGET_VENDOR ?= "-kaeilos"
+ 
+ # Add FEED_ARCH to overrides
+ OVERRIDES .= ":${FEED_ARCH}"
+diff --git a/conf/distro/include/oplinux.inc b/conf/distro/include/oplinux.inc
+index 36eca58..da1bd08 100644
+--- a/conf/distro/include/oplinux.inc
++++ b/conf/distro/include/oplinux.inc
+@@ -43,7 +43,7 @@ DISTRO_FEATURES = "nfs smbfs ext2 usbhost pci"
+ 
+ 
+ #We need to set this to avoid problems when building for if host=target
+-TARGET_VENDOR = "-oplinux"
++TARGET_VENDOR ?= "-oplinux"
+ 
+ #URI for base feeds
+ OPLINUX_URI = "http://www.digital-opsis.com/oplinux"
+diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include/sane-toolchain.inc
+index 6d460a2..1d51a5f 100644
+--- a/conf/distro/include/sane-toolchain.inc
++++ b/conf/distro/include/sane-toolchain.inc
+@@ -60,7 +60,7 @@ PREFERRED_PROVIDER_linux-libc-headers = "linux-libc-headers"
+ #############################################################################
+ 
+ # Branding
+-TARGET_VENDOR = "-oe"
++TARGET_VENDOR ?= "-oe"
+ 
+ # Add FEED_ARCH to the overrides list so that we can override the
+ # ARM_INSTRUCTION_SET like below
+diff --git a/conf/distro/iphone-compat.conf b/conf/distro/iphone-compat.conf
+index be2017b..a62e2e3 100644
+--- a/conf/distro/iphone-compat.conf
++++ b/conf/distro/iphone-compat.conf
+@@ -3,7 +3,7 @@ require conf/distro/angstrom-2008.1.conf
+ DISTRO_NAME = "iphone-compat"
+ 
+ TARGET_OS = "darwin9"
+-TARGET_VENDOR = "-apple"
++TARGET_VENDOR ?= "-apple"
+ 
+ export TARGET_LDFLAGS = "-L${STAGING_DIR_TARGET}${libdir} -Wl,-L${STAGING_DIR_TARGET}${libdir}"
+ 
+diff --git a/conf/distro/mamona.conf b/conf/distro/mamona.conf
+index 31d6c36..45fa1d8 100644
+--- a/conf/distro/mamona.conf
++++ b/conf/distro/mamona.conf
+@@ -9,7 +9,7 @@ DISTRO_TYPE = "debug"
+ 
+ MAINTAINER = "Mamona Team <mamona-devel@garage.maemo.org>"
+ 
+-TARGET_VENDOR = "-mamona"
++TARGET_VENDOR ?= "-mamona"
+ 
+ require conf/distro/include/sane-srcdates.inc
+ require conf/distro/include/sane-srcrevs.inc
+diff --git a/conf/distro/nylon.conf b/conf/distro/nylon.conf
+index ae8d064..0d0e43f 100644
+--- a/conf/distro/nylon.conf
++++ b/conf/distro/nylon.conf
+@@ -17,7 +17,7 @@ BUILDNAME := "${NYLON_VERSION}"
+ DISTRO_TYPE = "debug"
+ TARGET_FPU = "soft"
+ SRCDATE := "20050527"
+-TARGET_VENDOR = "-nylon"
++TARGET_VENDOR ?= "-nylon"
+ 
+ # Ensure some form of release config, so error out if someone thinks he knows better
+ DISTRO_CHECK := "${@bb.data.getVar("DISTRO_VERSION",d,1) or bb.fatal('Remove this line or set a dummy DISTRO_VERSION")
+-- 
+1.7.0.4
+
 
 
