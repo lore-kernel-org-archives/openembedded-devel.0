@@ -1,36 +1,41 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1P5xaA-0003om-5l
+	(envelope-from <tasskjapp@gmail.com>) id 1P5ygo-00049W-59
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 11:25:11 +0200
-Received: by vws3 with SMTP id 3so1815642vws.6
+	Wed, 13 Oct 2010 12:36:07 +0200
+Received: by ewy1 with SMTP id 1so1522500ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 02:24:42 -0700 (PDT)
+	Wed, 13 Oct 2010 03:35:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=sS+UqVet7KvgUpdQhmvMPSgf6q3rIbKBz2C3YXaWyi8=;
-	b=RwEVOKTfJb8a14OASf37vRWOW83C2pF8v8BJb1kdN1lx3KH9XrTIrYdDoJeeYoWsr0
-	5oXp1WJTUriSn+eo3PAtndUbd5W/dUM1VkFhMW2qfphXU7biLkUxI7T473rF84c7Ekmw
-	cZgweGcCE2DKWXE0383OBhNnJaaeqksITOPWI=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=BOjAM7loIUJRL7kF6Q9SBX/wdEbpSN9qDdvcTwwaQ0Q=;
+	b=NeIiCWPBbAJ+DTfsVCG0i3pIHnbCBH9JaGIXXSxhISs/tiEpmqBz0reheF0zVENDop
+	Cx1+MUnmjiV9a5Ev86e1WSUetW8XP0mpuz51f2iEnym7c67OmlyEm+kTUdPu/7FO3Kpp
+	b4Xtg8WrSpRy6TeIzi7RluF7Jp/FGeobyxR0c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=s/aXPO+B9kmqFCI9TKFKm8P0t3zcEx8X8cENEMx4qrjgtyTUwlDL4oWmmoMFmDSYvR
-	h863QL98vHUj+4pMQ9Oq+UvwEHK1ADCj8mFVgyX+U4T26xi/PL7wEoBDvhcTgyGpc6ns
-	PVjUYL6ol0Mi6O17PjZZ4kldLYCi1MQcRnXQw=
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=ZvA6UAhCWv9mlekfKdWD9/Tb/lFO8UlNwz6uEiYbe1z25mP2v3drRKrei9lD8kaieM
+	qSTHkDNkVJcBwGRDyGL/fmQVcmmj9xcaEhBAA1rlerFvthqWF9iPhEpFdhmNYMMrmvr1
+	DiJJoKduoxRDn/diaQAVV/HYE2jBKpzGX1azk=
+Received: by 10.213.19.19 with SMTP id y19mr2408158eba.65.1286966138580;
+	Wed, 13 Oct 2010 03:35:38 -0700 (PDT)
+Received: from [192.168.0.40] (147.84-49-231.nextgentel.com [84.49.231.147])
+	by mx.google.com with ESMTPS id p53sm7260226eeh.19.2010.10.13.03.35.36
+	(version=SSLv3 cipher=RC4-MD5); Wed, 13 Oct 2010 03:35:37 -0700 (PDT)
+Message-ID: <4CB58BAD.5090806@gmail.com>
+Date: Wed, 13 Oct 2010 12:36:29 +0200
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
 MIME-Version: 1.0
-Received: by 10.220.185.132 with SMTP id co4mr2725811vcb.42.1286961880994;
-	Wed, 13 Oct 2010 02:24:40 -0700 (PDT)
-Received: by 10.220.201.141 with HTTP; Wed, 13 Oct 2010 02:24:40 -0700 (PDT)
-In-Reply-To: <4CB57639.1080908@gmail.com>
-References: <4CB57639.1080908@gmail.com>
-Date: Wed, 13 Oct 2010 02:24:40 -0700
-Message-ID: <AANLkTikqgzOHLyMLWpKwh32-khrnGWR0L4Kfwzv6BXmx@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+References: <mailman.1290.1286961912.3514.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.1290.1286961912.3514.openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: tasskjapp@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -51,35 +56,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 09:25:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 Oct 2010 10:36:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 10/13/10, Tasslehoff Kjappfot <tasskjapp@gmail.com> wrote:
-> I'm trying to compile log4cxx, but it fails compiling apr-util, saying
-> that it is looking at host includes.
->
-> I suspect the following from log.do_configure is a problem:
->
-> /checking for pg_config... /usr/bin/pg_config
->    adding "-I/usr/include/postgresql" to CPPFLAGS
->    adding "-L/usr/lib" to LDFLAGS/
->
-> But I have no idea how to fix it...
->
-> - Tasslehoff
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+On 10/13/2010 11:25 AM, 
+openembedded-devel-request@lists.openembedded.org wrote:
+> >  I'm trying to compile log4cxx, but it fails compiling apr-util, saying
+> >  that it is looking at host includes.
+> >
+> >  I suspect the following from log.do_configure is a problem:
+> >
+> >  /checking for pg_config... /usr/bin/pg_config
+> >     adding "-I/usr/include/postgresql" to CPPFLAGS
+> >     adding "-L/usr/lib" to LDFLAGS/
+> >
+> >  But I have no idea how to fix it...
+> >
+> >  - Tasslehoff
+> >  _______________________________________________
+> >  Openembedded-devel mailing list
+> >  Openembedded-devel@lists.openembedded.org
+> >  http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> This may not be related but I ran into apr-util looking at the host
+> machine as well when I was trying to build subversion. I can not
+> remember now the exact package I installed on the build machine that
+> fixed it. So maybe trying searching for some packages that deal with
+> apr-util that you dont have on your build machine. I could be way off
+> for yours but seems very similar to what I had to do. Hope this helps
+> some
+>    
+Thanks. I read about your woes before my post :)
 
+I've installed pretty much every apr-util-package I can find on my 
+Ubuntu 10.04, and did an "apt-get build-dep subversion" in desperation, 
+but still the same error.
 
-This may not be related but I ran into apr-util looking at the host
-machine as well when I was trying to build subversion. I can not
-remember now the exact package I installed on the build machine that
-fixed it. So maybe trying searching for some packages that deal with
-apr-util that you dont have on your build machine. I could be way off
-for yours but seems very similar to what I had to do. Hope this helps
-some
+- Tasslehoff
 
 
