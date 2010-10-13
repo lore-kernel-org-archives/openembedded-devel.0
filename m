@@ -1,44 +1,44 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P6APu-0004rx-RX
+	(envelope-from <raj.khem@gmail.com>) id 1P6Avk-00064Q-Vn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 01:07:27 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id ED0C53149DCE
+	Thu, 14 Oct 2010 01:40:25 +0200
+Received: by yxj4 with SMTP id 4so2107559yxj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 01:07:00 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 7v7XS+2CeFYc
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 01:06:54 +0200 (CEST)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id DC0143149DCD
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 01:06:53 +0200 (CEST)
-Message-ID: <4CB63B6E.4010305@opendreambox.org>
-Date: Thu, 14 Oct 2010 01:06:22 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
+	Wed, 13 Oct 2010 16:39:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=ifV66xqxySng+e3NfHuIkrB7Jzhr+tMAnq34lbp4hAc=;
+	b=eN4rwjcUj1BKqlWUcsLAY3NP53rGnkdbdo4P5PWC03ZcZed5fNI0aP7cK09iqWBLmM
+	t+a7kMhQtC4atf8WN2SpNifCQ0EDePWMuSBNsSpjiGxgRzt7E4lEBOAfVuYnuve1Efp/
+	2/Z0UgsQdtcZN5OJjAlxT5tJITBQcY5x/SRJc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=SQZORkJKaqiGUN5CgQ413pA6k8yj9XA0cTbVp7kg0hVQyTnYJmBiF1w3jnVqJsEePo
+	xMH/4Kwvyv+JCsK75zkF1gthjAEPOWo0AB2o37NNLVRv2v7OrOUCV8oshvpqSUbHqNZL
+	R5+a++1djtCf7PCiv/rm8o3pxGHdW8H8isbbI=
+Received: by 10.90.51.1 with SMTP id y1mr4264805agy.7.1287013183659; Wed, 13
+	Oct 2010 16:39:43 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.90.86.6 with HTTP; Wed, 13 Oct 2010 16:39:23 -0700 (PDT)
+In-Reply-To: <6976AB00-560A-4D45-A6CA-33F03D38502C@chumby.com>
+References: <6976AB00-560A-4D45-A6CA-33F03D38502C@chumby.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 13 Oct 2010 16:39:23 -0700
+Message-ID: <AANLkTimNgCnmgcPq1vJupEa6fJZAaAOPhxRZ9B_CyQzf@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1287007782-1554-1-git-send-email-obi@opendreambox.org>	<1287007782-1554-2-git-send-email-obi@opendreambox.org>
-	<AANLkTim2hP8QOog74zab1gtBr3o=cXPEx4mLoKn6C8Oq@mail.gmail.com>
-In-Reply-To: <AANLkTim2hP8QOog74zab1gtBr3o=cXPEx4mLoKn6C8Oq@mail.gmail.com>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] module.bbclass: fix dependency on specific	kernel
+Subject: Re: [PATCH] c-ares: Fix configure script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,41 +52,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 23:07:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 23:40:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 10/14/2010 12:30 AM, Chris Larson wrote:
-> On Wed, Oct 13, 2010 at 3:09 PM, Andreas Oberritter <obi@opendreambox.org>wrote:
-> 
->> * Previously, the kernel version did not show up in the
->>  generated control file (debian ipk).
->> * Use the same format as in kernel.bbclass.
->>
->> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->> ---
->>  classes/module.bbclass |    2 +-
->>  1 files changed, 1 insertions(+), 1 deletions(-)
->>
->> diff --git a/classes/module.bbclass b/classes/module.bbclass
->> index 0e0018e..601a882 100644
->> --- a/classes/module.bbclass
->> +++ b/classes/module.bbclass
->> @@ -1,4 +1,4 @@
->> -RDEPENDS_${PN} += "kernel (${KERNEL_VERSION}) update-modules"
->> +RDEPENDS_${PN} += "kernel-${KERNEL_VERSION} update-modules"
->>  DEPENDS += "virtual/kernel"
->>
-> 
-> This looks just plain wrong to me.  kernel-<version> is bitbake build time
-> syntax, kernel (<version>) is runtime syntax for dpkg/opkg.
+On Wed, Oct 13, 2010 at 1:12 PM, Sean Cross <sean@chumby.com> wrote:
+>
+> The syntax of one of the AC_CHECK_FUNCS is incorrect. =C2=A0Removing the
+> lines in question allows the package to configure and build.
 
-Does this mean that kernel.bbclass is wrong, too? Because kernel.bbclass
-calls do_split_packages with extra_depends='update-modules
-kernel-${KERNEL_VERSION}', which translates to
-RDEPENDS_kernel-module-foo = "update-modules kernel-${KERNEL_VERSION}".
 
-Regards,
-Andreas
+instead of removing the check completely it would be better if we fixed it.
+you can also cache the result and not run autoreconf on it but thats a fall
+back.
+
+> ---
+> =C2=A0.../0001-remove-broken-configure.ac-commands.patch | =C2=A0 32 ++++=
+++++++++++++++++
+> =C2=A0recipes/c-ares/c-ares_1.5.3.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A04 ++-
+> =C2=A02 files changed, 35 insertions(+), 1 deletions(-)
+> =C2=A0create mode 100644 recipes/c-ares/0001-remove-broken-configure.ac-c=
+ommands.patch
+>
+> diff --git a/recipes/c-ares/0001-remove-broken-configure.ac-commands.patc=
+h b/recipes/c-ares/0001-remove-broken-configure.ac-commands.patch
+> new file mode 100644
+> index 0000000..799332a
+> --- /dev/null
+> +++ b/recipes/c-ares/0001-remove-broken-configure.ac-commands.patch
+> @@ -0,0 +1,32 @@
+> +diff -ur c-ares-1.5.3-stock/configure.ac c-ares-1.5.3/configure.ac
+> +--- c-ares-1.5.3-stock/configure.ac =C2=A0 =C2=A02010-10-13 19:12:51.792=
+124107 +0000
+> ++++ c-ares-1.5.3/configure.ac =C2=A02010-10-13 19:25:12.932123380 +0000
+> +@@ -796,28 +796,6 @@
+> + )
+> +
+> +
+> +-AC_CHECK_FUNCS([bitncmp \
+> +- =C2=A0gettimeofday \
+> +- =C2=A0if_indextoname
+> +-],[
+> +-],[
+> +- =C2=A0func=3D"$ac_func"
+> +- =C2=A0AC_MSG_CHECKING([deeper for $func])
+> +- =C2=A0AC_LINK_IFELSE([
+> +- =C2=A0 =C2=A0AC_LANG_PROGRAM([[
+> +- =C2=A0 =C2=A0]],[[
+> +- =C2=A0 =C2=A0 =C2=A0$func ();
+> +- =C2=A0 =C2=A0]])
+> +- =C2=A0],[
+> +- =C2=A0 =C2=A0AC_MSG_RESULT([yes])
+> +- =C2=A0 =C2=A0eval "ac_cv_func_$func=3Dyes"
+> +- =C2=A0 =C2=A0AC_DEFINE_UNQUOTED([AS_TR_CPP([HAVE_$func])], [1],
+> +- =C2=A0 =C2=A0 =C2=A0[Define to 1 if you have the $func function.])
+> +- =C2=A0],[
+> +- =C2=A0 =C2=A0AC_MSG_RESULT([but still no])
+> +- =C2=A0])
+> +-])
+> +-
+> +
+> + dnl check for inet_pton
+> + AC_CHECK_FUNCS(inet_pton)
+> diff --git a/recipes/c-ares/c-ares_1.5.3.bb b/recipes/c-ares/c-ares_1.5.3=
+.bb
+> index 0def152..fa75f3f 100644
+> --- a/recipes/c-ares/c-ares_1.5.3.bb
+> +++ b/recipes/c-ares/c-ares_1.5.3.bb
+> @@ -1,7 +1,9 @@
+> =C2=A0DESCRIPTION =3D "c-ares is a C library that resolves names asynchro=
+nously."
+> =C2=A0HOMEPAGE =3D "http://daniel.haxx.se/projects/c-ares/"
+> =C2=A0SECTION =3D "libs"
+> -SRC_URI =3D "http://daniel.haxx.se/projects/c-ares/c-ares-${PV}.tar.gz"
+> +SRC_URI =3D "http://daniel.haxx.se/projects/c-ares/c-ares-${PV}.tar.gz \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-remove-broken-configure.=
+ac-commands.patch \
+> +"
+> =C2=A0LICENSE =3D "MIT"
+> =C2=A0S =3D "${WORKDIR}/c-ares-${PV}"
+> =C2=A0PR =3D "r1"
+> --
+> 1.7.0.4
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
