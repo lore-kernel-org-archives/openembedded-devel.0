@@ -1,46 +1,37 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P66FY-0001tY-JY
+Received: from na3sys009aog112.obsmtp.com ([74.125.149.207])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <bengardiner@nanometrics.ca>) id 1P66Ji-0005Ug-Oo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 20:40:30 +0200
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9DIdtxn024198
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 13 Oct 2010 13:39:55 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9DIdscn012119;
-	Wed, 13 Oct 2010 13:39:54 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9DIdsiM012652;
-	Wed, 13 Oct 2010 13:39:54 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Wed, 13 Oct 2010 13:39:54 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Oct 2010 13:39:53 -0500
-Thread-Topic: [oe] [PATCH 1/5] matrix-gui-common: skip qa check on prebuilt
-	binaries
-Thread-Index: Actq9+fQN+1g662TS+2tbRnR4PokigADfmcw
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310FFA7DE@dlee06.ent.ti.com>
-References: <1286978491-13427-1-git-send-email-Chase.Maupin@ti.com>
-	<20101013165840.GA11514@denix.org>
-In-Reply-To: <20101013165840.GA11514@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Wed, 13 Oct 2010 20:44:51 +0200
+Received: from source ([74.125.83.180]) by na3sys009aob112.postini.com
+	([74.125.148.12]) with SMTP
+	ID DSNKTLX98a+o9vlYdDMBCKVr/n2upMNwILWT@postini.com;
+	Wed, 13 Oct 2010 11:44:21 PDT
+Received: by mail-pv0-f180.google.com with SMTP id 6so569714pvg.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 11:44:01 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.152
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Received: by 10.142.71.11 with SMTP id t11mr7920635wfa.121.1286995053131; Wed,
+	13 Oct 2010 11:37:33 -0700 (PDT)
+Received: by 10.220.199.2 with HTTP; Wed, 13 Oct 2010 11:37:33 -0700 (PDT)
+In-Reply-To: <i94r56$spo$1@dough.gmane.org>
+References: <1286988161-20097-1-git-send-email-bengardiner@nanometrics.ca>
+	<i94r56$spo$1@dough.gmane.org>
+Date: Wed, 13 Oct 2010 14:37:33 -0400
+Message-ID: <AANLkTinY4ObZCkhW_tND0R=p308v6R957YF=7-GTO1=1@mail.gmail.com>
+From: Ben Gardiner <bengardiner@nanometrics.ca>
+To: Koen Kooi <k.kooi@student.utwente.nl>,
+	=?ISO-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>,
+	openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.149.207
+X-SA-Exim-Mail-From: bengardiner@nanometrics.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	WEIRD_PORT autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] matrix-gui-common: skip qa check on prebuilt	binaries
+Subject: Re: [PATCH] [PATCH] distro: make TARGET_VENDOR a weak assignment to enable external-csl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,60 +45,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 18:40:30 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Oct 2010 18:44:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+My apologies, Victor, for duplicating your efforts. I was
+simultaneously preparing this patch on the 8th.
 
+On Wed, Oct 13, 2010 at 1:44 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 13-10-10 18:42, Ben Gardiner wrote:
+>> Trying to use an external toolchain like the 2009q1 toolchain from codesourcery
+>> has some strange results since the toolchain has vendor 'none' but
+>> distributions like angstrom set TARGET_VENDOR unconditionally.
+>>
+>> This changeset makes all assignments of TARGET_VENDOR in distros weak as was
+>> suggested by Denys Dmytriyenko in a recent mailing list discussion [1].
+>
+> Well, not 2 days ago this idea was shot down:
+> http://thread.gmane.org/gmane.comp.handhelds.openembedded/37918
 
+Thank you, Koen, for pointing me to the recent discussion. I tried to
+modify the toolchain-external.inc -- as you suggested in that thread
+-- so that TARGET_VENDOR could be set by a TOOLCHAIN_VENDOR variable:
 
+diff --git a/conf/distro/include/toolchain-external.inc
+b/conf/distro/include/toolchain-external.inc
+index ff83f5a..585d50e 100644
+--- a/conf/distro/include/toolchain-external.inc
++++ b/conf/distro/include/toolchain-external.inc
+@@ -6,3 +6,5 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc =
+"external-toolchain-${TOOLCHAIN
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ =
+"external-toolchain-${TOOLCHAIN_BRAND}"
+ #PREFERRED_PROVIDER_linux-libc-headers =
+"external-toolchain-${TOOLCHAIN_BRAND}"
 
-> -----Original Message-----
-> From: Denys Dmytriyenko [mailto:denis@denix.org]
-> Sent: Wednesday, October 13, 2010 11:59 AM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Maupin, Chase
-> Subject: Re: [oe] [PATCH 1/5] matrix-gui-common: skip qa check on prebuil=
-t
-> binaries
->=20
-> On Wed, Oct 13, 2010 at 09:01:27AM -0500, Chase Maupin wrote:
-> > * Skip the QA check on the prebuilt binaries used for dm365
-> >   devices.
->=20
-> And why do we have prebuilt binaries in OE?
++TOOLCHAIN_VENDOR ?= "${TARGET_VENDOR}"
++TARGET_VENDOR = "${TOOLCHAIN_VENDOR}"
 
-They are not so much in the OE repository as they are part of the matrix re=
-pository.  That being said I'm working to get these buildable in OE and I'l=
-l make this an RDEPENDS.  So go ahead and ignore this patch.
+and added TOOLCHAIN_VENDOR = "-none" in my local conf.
 
->=20
-> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> > ---
-> >  recipes/ti/matrix-gui-common.inc |    3 +++
-> >  1 files changed, 3 insertions(+), 0 deletions(-)
-> >
-> > diff --git a/recipes/ti/matrix-gui-common.inc b/recipes/ti/matrix-gui-
-> common.inc
-> > index 096c321..46c0bd6 100644
-> > --- a/recipes/ti/matrix-gui-common.inc
-> > +++ b/recipes/ti/matrix-gui-common.inc
-> > @@ -32,4 +32,7 @@ do_install() {
-> >
-> >  }
-> >
-> > +# Skip the QA for pre-built binaries
-> > +INSANE_SKIP_${PN}_dm365 =3D "True"
-> > +
-> >  FILES_${PN} +=3D "${datadir}/matrix/*"
-> > --
-> > 1.7.0.4
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+But it appears that the angstrom-2008.1 distro conf is still
+overriding the TARGET_VENDOR variable:
+$bitbake -i
+/usr/lib/pymodules/python2.6/bb/shell.py:59: DeprecationWarning: The
+popen2 module is deprecated.  Use the subprocess module.
+  import sys, os, readline, socket, httplib, urllib, commands, popen2,
+copy, shlex, Queue, fnmatch
+BitBake Shell Version 0.5.3.1 (C) 2005 Michael 'Mickey' Lauer
+<mickey@Vanille.de>
+Type 'help' for more information, press CTRL-D to exit.
+BB>> parse
+[snip]
+NOTE: Handling BitBake files: | (7131/7131) [100 %]
+NOTE: Parsing finished. 0 cached, 6796 parsed, 335 skipped, 2 masked.
+
+BB>> getvar TARGET_VENDOR
+-angstrom
+BB>> getvar TOOLCHAIN_VENDOR
+-none
+BB>> getvar TARGET_SYS
+arm-angstrom-linux-gnueabi
+
+So my initial attempt is not going to cut it. Could you elaborate on
+what you imagine the necessary modifications to toolchain-external.inc
+might be? I'm happy to implement and/or test.
+
+Best Regards,
+Ben Gardiner
+
+---
+Nanometrics Inc.
+http://www.nanometrics.ca
 
 
