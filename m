@@ -1,49 +1,36 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1P66fp-0001MP-A1
+	(envelope-from <denis@denix.org>) id 1P66iR-0001X7-Hk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 21:07:38 +0200
-Received: by ewy1 with SMTP id 1so1897974ewy.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 12:07:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:mime-version
-	:content-type:subject:date:in-reply-to:to:references:message-id
-	:x-mailer; bh=6UqzLblQKzmJ9IMMa7U1oAFL8XC/leGYBqlxYQELN/w=;
-	b=pXpjncRjKpMEzGKFX0kRjYJKot22mdjXxDS9YIp3h2riAZYEq+vMO/sbFWRmbNkyJG
-	f6pvqVgJvYe4VuyEDfnhozcxiAGrLzvF86B3rKZ6MdyiyaTfYoTeWcCMG4CJcq59Tv+Q
-	8ECoO5sqbUk9LxkLDjBoJWtRpBjQ7b33NKDq0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:mime-version:content-type:subject:date:in-reply-to:to
-	:references:message-id:x-mailer;
-	b=gyLF9VbHwcRE0KIL04C3njK9HXqBh8rWXwUGsSDua8SpfbAViIBXiX25Y/RRsV28eK
-	lSFb43YDqIrBJM/88wewUL52Qk873L8zMaSdbNnUdWROa8JlugC7yTdhkoVXt1Z7SwUa
-	PImMAINZCNEkvhuuKADXBJcoNlm/ryXrRaR6M=
-Received: by 10.213.37.8 with SMTP id v8mr358645ebd.1.1286996830468;
-	Wed, 13 Oct 2010 12:07:10 -0700 (PDT)
-Received: from [192.168.10.102] (145.79-161-31.customer.lyse.net
-	[79.161.31.145])
-	by mx.google.com with ESMTPS id q54sm11623372eeh.6.2010.10.13.12.07.08
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 13 Oct 2010 12:07:09 -0700 (PDT)
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-Mime-Version: 1.0 (Apple Message framework v1081)
-Date: Wed, 13 Oct 2010 21:07:06 +0200
-In-Reply-To: <mailman.1322.1286989169.3514.openembedded-devel@lists.openembedded.org>
+	Wed, 13 Oct 2010 21:10:20 +0200
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LA800811T7U3534@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	13 Oct 2010 14:09:36 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 186E114AF64; Wed,
+	13 Oct 2010 15:09:30 -0400 (EDT)
+Date: Wed, 13 Oct 2010 15:09:30 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.1322.1286989169.3514.openembedded-devel@lists.openembedded.org>
-Message-Id: <3874F9A5-E885-4281-8292-E4406339CE34@gmail.com>
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+Message-id: <20101013190930.GH11514@denix.org>
+References: <1286988161-20097-1-git-send-email-bengardiner@nanometrics.ca>
+	<i94r56$spo$1@dough.gmane.org>
+	<AANLkTinY4ObZCkhW_tND0R=p308v6R957YF=7-GTO1=1@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <AANLkTinY4ObZCkhW_tND0R=p308v6R957YF=7-GTO1=1@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_QP_LONG_LINE,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,WEIRD_PORT
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: apr-util_1.3.4.bb fails, looking at host includes
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: [PATCH] [PATCH] distro: make TARGET_VENDOR a weak	assignment to enable external-csl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,64 +44,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 19:07:38 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Oct 2010 19:10:20 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
->=20
-> Am Mittwoch, den 13.10.2010, 14:39 +0200 schrieb Holger Freyther:
->> On 10/13/2010 02:39 PM, Tasslehoff Kjappfot wrote:
->>=20
->>>=20
->>> Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
->>> ---
->>> recipes/apr/apr-util_1.3.4.bb |    1 +
->>> 1 files changed, 1 insertions(+), 0 deletions(-)
->>>=20
->>> diff --git a/recipes/apr/apr-util_1.3.4.bb =
-b/recipes/apr/apr-util_1.3.4.bb
->>> index cc6781b..5e31171 100644
->>> --- a/recipes/apr/apr-util_1.3.4.bb
->>> +++ b/recipes/apr/apr-util_1.3.4.bb
->>> @@ -14,6 +14,7 @@ EXTRA_OECONF =3D
->>> "--with-apr=3D${STAGING_BINDIR_CROSS}/apr-1-config \
->>>         --with-gdbm=3D${STAGING_DIR_HOST}${layout_prefix} \
->>>         --without-sqlite2 \
->>>         --without-sqlite3 \
->>> +                --without-pgsql \
->>=20
->> hmm... the existing file is using spaces, you use tabs... I will fix =
-it when
->> pushing the changes. Please try to follow the indention of the file.
->=20
-> Holger committed your patch in eba2dd [1]. It would be nice if you =
-could
-> write a elaborate commit message next time with the actual error =
-message
-> and reason added.
->=20
->  /checking for pg_config... /usr/bin/pg_config
->     adding "-I/usr/include/postgresql" to CPPFLAGS
->     adding "-L/usr/lib" to LDFLAGS/
->=20
-> I build tested `r7` with `minimal-uclibc` for `MACHINE =3D =
-"beagleboard"`
-> and it worked for me without any problems as it was with `r6`. But I =
-did
-> not have `pg_config` installed on my build system anyway.
->=20
->=20
-> Thanks,
->=20
-> Paul
+On Wed, Oct 13, 2010 at 02:37:33PM -0400, Ben Gardiner wrote:
+> My apologies, Victor, for duplicating your efforts. I was
+> simultaneously preparing this patch on the 8th.
+> 
+> On Wed, Oct 13, 2010 at 1:44 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> >
+> > On 13-10-10 18:42, Ben Gardiner wrote:
+> >> Trying to use an external toolchain like the 2009q1 toolchain from codesourcery
+> >> has some strange results since the toolchain has vendor 'none' but
+> >> distributions like angstrom set TARGET_VENDOR unconditionally.
+> >>
+> >> This changeset makes all assignments of TARGET_VENDOR in distros weak as was
+> >> suggested by Denys Dmytriyenko in a recent mailing list discussion [1].
+> >
+> > Well, not 2 days ago this idea was shot down:
+> > http://thread.gmane.org/gmane.comp.handhelds.openembedded/37918
+> 
+> Thank you, Koen, for pointing me to the recent discussion. I tried to
+> modify the toolchain-external.inc -- as you suggested in that thread
+> -- so that TARGET_VENDOR could be set by a TOOLCHAIN_VENDOR variable:
+> 
+> diff --git a/conf/distro/include/toolchain-external.inc
+> b/conf/distro/include/toolchain-external.inc
+> index ff83f5a..585d50e 100644
+> --- a/conf/distro/include/toolchain-external.inc
+> +++ b/conf/distro/include/toolchain-external.inc
+> @@ -6,3 +6,5 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc =
+> "external-toolchain-${TOOLCHAIN
+>  PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ =
+> "external-toolchain-${TOOLCHAIN_BRAND}"
+>  #PREFERRED_PROVIDER_linux-libc-headers =
+> "external-toolchain-${TOOLCHAIN_BRAND}"
+> 
+> +TOOLCHAIN_VENDOR ?= "${TARGET_VENDOR}"
+> +TARGET_VENDOR = "${TOOLCHAIN_VENDOR}"
+> 
+> and added TOOLCHAIN_VENDOR = "-none" in my local conf.
+> 
+> But it appears that the angstrom-2008.1 distro conf is still
+> overriding the TARGET_VENDOR variable:
+> $bitbake -i
+> /usr/lib/pymodules/python2.6/bb/shell.py:59: DeprecationWarning: The
+> popen2 module is deprecated.  Use the subprocess module.
+>   import sys, os, readline, socket, httplib, urllib, commands, popen2,
+> copy, shlex, Queue, fnmatch
+> BitBake Shell Version 0.5.3.1 (C) 2005 Michael 'Mickey' Lauer
+> <mickey@Vanille.de>
+> Type 'help' for more information, press CTRL-D to exit.
+> BB>> parse
+> [snip]
+> NOTE: Handling BitBake files: | (7131/7131) [100 %]
+> NOTE: Parsing finished. 0 cached, 6796 parsed, 335 skipped, 2 masked.
+> 
+> BB>> getvar TARGET_VENDOR
+> -angstrom
+> BB>> getvar TOOLCHAIN_VENDOR
+> -none
+> BB>> getvar TARGET_SYS
+> arm-angstrom-linux-gnueabi
+> 
+> So my initial attempt is not going to cut it. Could you elaborate on
+> what you imagine the necessary modifications to toolchain-external.inc
+> might be? I'm happy to implement and/or test.
 
-I did the patch with "git format-patch", but sent it with thunderbird. =
-That caused the line-breaks and the spaces, I suspect. I'll setup =
-git-send-email for future use and improve the commit messages. Thanks =
-for cleaning up :)
+As I mentioned in the previous discussion, since inclusion of 
+toolchain-external.inc happens before the inclusion of angstrom.inc, where 
+TARGET_VENDOR is set unconditionally, it's not possible to control this 
+variable from toolchain-external.inc...
 
-- Tasslehoff
+We either need to swap those two lines, so inclusion of toolchain-external.inc 
+happens after the angstrom.inc is included (untested):
 
+diff --git a/conf/distro/angstrom-2008.1.conf 
+b/conf/distro/angstrom-2008.1.conf
+index ec4f21e..1fd5ab6 100644
+--- a/conf/distro/angstrom-2008.1.conf
++++ b/conf/distro/angstrom-2008.1.conf
+@@ -124,10 +124,6 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
+
+-# Toolchain virtuals:
+-require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
+-require conf/distro/include/arm-thumb.inc
+-
+ PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
+ PREFERRED_PROVIDER_hotplug               = "udev"
+ PREFERRED_PROVIDER_opkg                 ?= "opkg"
+@@ -143,6 +139,10 @@ ANGSTROMLIBC ?= "glibc"
+
+ require conf/distro/include/angstrom.inc
+
++# Toolchain virtuals:
++require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
++require conf/distro/include/arm-thumb.inc
++
+ # Set DISTRO_FEED_CONFIGS to our config var, assigned in the above .inc
+ DISTRO_FEED_CONFIGS = "${ANGSTROM_FEED_CONFIGS}"
+
+
+
+Or another option is to set TARGET_VENDOR in the glibc-external.inc, which is 
+included after TARGET_VENDOR is set. But that is not the right place, because 
+there can be external-angstrom toolchain as well, so setting TARGET_VENDOR to 
+"-none" in glibc-external.inc is not correct... Or if you define a new 
+variable TOOLCHAIN_VENDOR, you can set TARGET_VENDOR = ${TOOLCHAIN_VENDOR} in 
+there...
+
+-- 
+Denys
 
 
