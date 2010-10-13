@@ -1,42 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from asmtpout028.mac.com ([17.148.16.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P64D5-0003ZC-EP for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 18:29:48 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P64CZ-0005Be-8P for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 18:29:15 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 18:29:15 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 18:29:15 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 13 Oct 2010 18:29:06 +0200
-Message-ID: <i94moi$6j0$1@dough.gmane.org>
-References: <1286978491-13427-1-git-send-email-Chase.Maupin@ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
-In-Reply-To: <1286978491-13427-1-git-send-email-Chase.Maupin@ti.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <elvis.dowson@mac.com>) id 1P64H9-0003j9-7R
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 18:33:59 +0200
+MIME-version: 1.0
+Received: from [192.168.1.100] ([87.201.169.163])
+	by asmtp028.mac.com (Sun Java(tm) System Messaging Server 6.3-7.04
+	(built Sep
+	26 2008; 64bit)) with ESMTPSA id <0LA8005WXLZEAMK0@asmtp028.mac.com> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	13 Oct 2010 09:33:18 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 suspectscore=5 phishscore=0 bulkscore=0 adultscore=0
+	classifier=spam
+	adjust=0 reason=mlx engine=6.0.2-1004200000 definitions=main-1010130083
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.2.15,1.0.148,0.0.0000
+	definitions=2010-10-13_08:2010-10-13, 2010-10-13,
+	1970-01-01 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+In-reply-to: <2918CB89-AB2D-4882-9C97-949B17EE3843@mac.com>
+Date: Wed, 13 Oct 2010 20:33:04 +0400
+Message-id: <F33AEE13-68E2-4628-AE9D-B624967C88B1@mac.com>
+References: <2918CB89-AB2D-4882-9C97-949B17EE3843@mac.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 17.148.16.103
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] matrix-gui-common: skip qa check on prebuilt binaries
+Subject: Re: Suppressing oma3-sgx-modules from omap3-console-image build for beagleboard
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,29 +48,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 16:29:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 16:33:59 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 13-10-10 16:01, Chase Maupin wrote:
-> * Skip the QA check on the prebuilt binaries used for dm365
->   devices.
+On Oct 13, 2010, at 4:32 PM, Elvis Dowson wrote:
 
-NAK, we should rebuild the binaries in OE, not add hacks.
+> Now the thing is there is no reference to omap3-sgx-modules in either task-base or omap3-console-image. 
+> 
+> Where is it picking this up from then. My auto.cong seeting is machine="beagleboard"
 
-regards,
+I found the solutions, in the beagleboard.conf, I have to comment out the following:
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+MACHINE_EXTRA_RRECOMMENDS += " omap3-sgx-modules"
 
-iD8DBQFMtd5SMkyGM64RGpERAgumAKCzdQo7QlSn/GEI6CjYEHwTbQp2AwCeLshO
-X3D/0kWCylovDSmyPwtsGCw=
-=RKq8
------END PGP SIGNATURE-----
-
+Elvis Dowson
 
 
