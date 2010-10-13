@@ -1,40 +1,46 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5vJr-0003WY-Qb
+	(envelope-from <martin.jansa@gmail.com>) id 1P5vWF-0004n7-QO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 09:00:14 +0200
-Received: by iwn2 with SMTP id 2so2100711iwn.6
+	Wed, 13 Oct 2010 09:13:01 +0200
+Received: by bwz9 with SMTP id 9so1968082bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 23:59:42 -0700 (PDT)
+	Wed, 13 Oct 2010 00:12:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=jRkkyXm1l7k/Al2ie/b2NPJlwL9Zp9D+JHQb45IlIWs=;
-	b=n/0ny4BHzCl8Cj216N7fI1QAOHY3ShDHfj5j7Vtx60IQ8nJUbjBhKPfhvNJ+NOcby2
-	g2/GIwL3X4gXcGkM9tkSfoLEE/p/v9/dSlyBvtJ+asia36niDPWU5bTkFO2CpwxcSVFf
-	wrU+NC7sST85Py3j2jB2/m4nnVsgBgTtGsttA=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=jUS6gFqjQvzyz1mNpF+Nrnmlte2Du8CSy/oRTdu6NCQ=;
+	b=V6w0lGSpdEZW2NimPMClDV4Cqm4xQfQMB1NI7uFnBc8u9uy15Hdgr5PAA6V/UqSm8b
+	MtKOoxrxhO05b2KUzreWPaJl7w/xBOUV1Bm5f+gwPhPv2HCs6HuOibN4cYR2OWR+G6Li
+	HOYfCnlICJ9nvji5WE8lC+m0GNAZIRyaTs3AY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=JeVsLzGFwQvw1uC1OjVq4sUcJKrv9EJgGQ8o9eNrmFDyeTg/kxPSJAJ9Tj46IUE4wW
-	NcSl0t0BA62NrnRGilRpyaQXEmUrr6B1blU1FVdaw4WeQ6Xk8miSF8FfoS75WKfEpy03
-	YJkMdS0YnofGKupy6T9Os1b6dO6nrB75F3ah8=
-MIME-Version: 1.0
-Received: by 10.231.148.83 with SMTP id o19mr6670191ibv.112.1286953180420;
-	Tue, 12 Oct 2010 23:59:40 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 12 Oct 2010 23:59:40 -0700 (PDT)
-In-Reply-To: <1286935114-4673-1-git-send-email-raj.khem@gmail.com>
-References: <1286935114-4673-1-git-send-email-raj.khem@gmail.com>
-Date: Wed, 13 Oct 2010 08:59:40 +0200
-Message-ID: <AANLkTinMcWBJG3WprZVTw038rMfO4pjNcyre-Bg3ZhMi@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=EmHyHhiAD4EC+VThtt8KhK7OteUaxtIiVkSHdNzyG+83oWjzXHl1kaQTr51+u5R5Tc
+	7ipw7Jds6CKPFdiMVzTWsk14+1uOFTnPhVbXp/1ekSYpyhxwPwHWdNfDRHMIIdm6OtNQ
+	WJ5xmsqSglRdTAGa9WNTZLTDXnZ0VkN+7EZr4=
+Received: by 10.204.69.18 with SMTP id x18mr7309463bki.34.1286953951134;
+	Wed, 13 Oct 2010 00:12:31 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id o12sm6904004bkb.9.2010.10.13.00.12.29
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 13 Oct 2010 00:12:30 -0700 (PDT)
+Date: Wed, 13 Oct 2010 09:12:28 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20101013071227.GD3549@jama>
+References: <1286935114-4673-1-git-send-email-raj.khem@gmail.com>
+	<AANLkTinMcWBJG3WprZVTw038rMfO4pjNcyre-Bg3ZhMi@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinMcWBJG3WprZVTw038rMfO4pjNcyre-Bg3ZhMi@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -52,48 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 07:00:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Oct 2010 07:13:01 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-2010/10/13 Khem Raj <raj.khem@gmail.com>:
-> * This was done generically in bitbake.conf this should be done on
-> =A0demand and distutils based recipes seem to need it. So we define it
-> =A0here.
+On Wed, Oct 13, 2010 at 08:59:40AM +0200, Frans Meulenbroeks wrote:
+> 2010/10/13 Khem Raj <raj.khem@gmail.com>:
+> > * This was done generically in bitbake.conf this should be done on
+> >  demand and distutils based recipes seem to need it. So we define it
+> >  here.
+> 
+> Based on your commit message I expected a change in bitbake.conf too.
+> Am I mssing something here?
 
-Based on your commit message I expected a change in bitbake.conf too.
-Am I mssing something here?
+That changes was already commited and it's used only for
+LIBTOOL_HAS_SYSROOT.
 
-Frans
+This is fixing build of all python recipes using distutils.
 
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> =A0classes/distutils-common-base.bbclass | =A0 =A02 ++
-> =A01 files changed, 2 insertions(+), 0 deletions(-)
->
-> diff --git a/classes/distutils-common-base.bbclass b/classes/distutils-co=
-mmon-base.bbclass
-> index f66a5cd..b6caf24 100644
-> --- a/classes/distutils-common-base.bbclass
-> +++ b/classes/distutils-common-base.bbclass
-> @@ -4,6 +4,8 @@ EXTRA_OEMAKE =3D ""
->
-> =A0export STAGING_INCDIR
-> =A0export STAGING_LIBDIR
-> +# libtool 2.4 does not export with LDFLAGS but distutils need it
-> +LDFLAGS_prepend =3D "-L${STAGING_LIBDIR} "
->
-> =A0PACKAGES =3D "${PN}-dev ${PN}-dbg ${PN}-doc ${PN}"
->
-> --
-> 1.7.1
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
