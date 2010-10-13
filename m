@@ -1,46 +1,43 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1P5xGC-0001tb-8T
+	(envelope-from <vwyodapink@gmail.com>) id 1P5xaA-0003om-5l
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 11:04:33 +0200
-Received: by ewy1 with SMTP id 1so1490508ewy.6
+	Wed, 13 Oct 2010 11:25:11 +0200
+Received: by vws3 with SMTP id 3so1815642vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 02:04:06 -0700 (PDT)
+	Wed, 13 Oct 2010 02:24:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type;
-	bh=utOqUHSeSHvUJidEdh7F41GiZBWLu5DJ46ZBlSvFF2I=;
-	b=B5YhrOzmDSePx7oNQgMo4UfExZz4+HdoKLGbeioiXBK95FnS6Wk6J39O0BKrVBGHYf
-	N0VdOKHLDadHuvsoz9xUU5y091oMDkkZo+SfdCqeGy9ohKZjWVi4iHtdMm0rGDe6wJf1
-	1d/5NRShmxPsMk69RQvhVDGXkbKUbrWUZz+Zw=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=sS+UqVet7KvgUpdQhmvMPSgf6q3rIbKBz2C3YXaWyi8=;
+	b=RwEVOKTfJb8a14OASf37vRWOW83C2pF8v8BJb1kdN1lx3KH9XrTIrYdDoJeeYoWsr0
+	5oXp1WJTUriSn+eo3PAtndUbd5W/dUM1VkFhMW2qfphXU7biLkUxI7T473rF84c7Ekmw
+	cZgweGcCE2DKWXE0383OBhNnJaaeqksITOPWI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=tPaoumbmRr99Cf8Ed0NDUrRbihikVjofkFw3ewh1mZBt/vlx+mn1LaEJJLZjgy5KCZ
-	XZ0FXQl/hI04IaQC3z2r9gMBnalFMhhyN3IitIoXbKWyh8usmsRUaUZNgls1E3Kr9GXQ
-	O1txZ+guAtlBIoZINYuNSgwBRZEJW22eHomaQ=
-Received: by 10.213.26.14 with SMTP id b14mr3552208ebc.15.1286960646382;
-	Wed, 13 Oct 2010 02:04:06 -0700 (PDT)
-Received: from [192.168.0.40] (147.84-49-231.nextgentel.com [84.49.231.147])
-	by mx.google.com with ESMTPS id q54sm10714527eeh.12.2010.10.13.02.04.04
-	(version=SSLv3 cipher=RC4-MD5); Wed, 13 Oct 2010 02:04:05 -0700 (PDT)
-Message-ID: <4CB57639.1080908@gmail.com>
-Date: Wed, 13 Oct 2010 11:04:57 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
+	b=s/aXPO+B9kmqFCI9TKFKm8P0t3zcEx8X8cENEMx4qrjgtyTUwlDL4oWmmoMFmDSYvR
+	h863QL98vHUj+4pMQ9Oq+UvwEHK1ADCj8mFVgyX+U4T26xi/PL7wEoBDvhcTgyGpc6ns
+	PVjUYL6ol0Mi6O17PjZZ4kldLYCi1MQcRnXQw=
 MIME-Version: 1.0
+Received: by 10.220.185.132 with SMTP id co4mr2725811vcb.42.1286961880994;
+	Wed, 13 Oct 2010 02:24:40 -0700 (PDT)
+Received: by 10.220.201.141 with HTTP; Wed, 13 Oct 2010 02:24:40 -0700 (PDT)
+In-Reply-To: <4CB57639.1080908@gmail.com>
+References: <4CB57639.1080908@gmail.com>
+Date: Wed, 13 Oct 2010 02:24:40 -0700
+Message-ID: <AANLkTikqgzOHLyMLWpKwh32-khrnGWR0L4Kfwzv6BXmx@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: apr-util_1.3.4.bb fails, looking at host includes
+Subject: Re: apr-util_1.3.4.bb fails, looking at host includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,20 +51,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 09:04:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 09:25:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I'm trying to compile log4cxx, but it fails compiling apr-util, saying 
-that it is looking at host includes.
+On 10/13/10, Tasslehoff Kjappfot <tasskjapp@gmail.com> wrote:
+> I'm trying to compile log4cxx, but it fails compiling apr-util, saying
+> that it is looking at host includes.
+>
+> I suspect the following from log.do_configure is a problem:
+>
+> /checking for pg_config... /usr/bin/pg_config
+>    adding "-I/usr/include/postgresql" to CPPFLAGS
+>    adding "-L/usr/lib" to LDFLAGS/
+>
+> But I have no idea how to fix it...
+>
+> - Tasslehoff
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-I suspect the following from log.do_configure is a problem:
 
-/checking for pg_config... /usr/bin/pg_config
-   adding "-I/usr/include/postgresql" to CPPFLAGS
-   adding "-L/usr/lib" to LDFLAGS/
+This may not be related but I ran into apr-util looking at the host
+machine as well when I was trying to build subversion. I can not
+remember now the exact package I installed on the build machine that
+fixed it. So maybe trying searching for some packages that deal with
+apr-util that you dont have on your build machine. I could be way off
+for yours but seems very similar to what I had to do. Hope this helps
+some
 
-But I have no idea how to fix it...
-
-- Tasslehoff
 
