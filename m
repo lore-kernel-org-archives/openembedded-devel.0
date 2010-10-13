@@ -1,33 +1,44 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sean@chumby.com>) id 1P67gl-0008FJ-Bj
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 22:12:42 +0200
-Received: by pxi18 with SMTP id 18so48805pxi.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 13:12:06 -0700 (PDT)
-Received: by 10.142.50.18 with SMTP id x18mr1044812wfx.419.1287000725639;
-	Wed, 13 Oct 2010 13:12:05 -0700 (PDT)
-Received: from [192.168.10.100] (cm198.psi191.maxonline.com.sg
-	[58.146.191.198])
-	by mx.google.com with ESMTPS id q13sm12042866wfc.17.2010.10.13.13.12.03
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 13 Oct 2010 13:12:04 -0700 (PDT)
-From: Sean Cross <sean@chumby.com>
-Date: Thu, 14 Oct 2010 04:12:01 +0800
-Message-Id: <6976AB00-560A-4D45-A6CA-33F03D38502C@chumby.com>
-To: Openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v1081)
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: sean@chumby.com
+	(envelope-from <chase.maupin@ti.com>) id 1P67xd-0002mI-7J
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 22:30:08 +0200
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9DKTZgH026436
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 15:29:36 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9DKTZYE026427
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 15:29:35 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9DKTZhQ007041
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 15:29:35 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Wed, 13 Oct 2010 15:29:35 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 13 Oct 2010 15:29:34 -0500
+Thread-Topic: Question about OVERRIDES precedence
+Thread-Index: ActrFVkZ5nxNjrzxTo+3TgYZMLo0kA==
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] c-ares: Fix configure script
+Subject: Question about OVERRIDES precedence
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,83 +52,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 20:12:42 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 13 Oct 2010 20:30:08 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
+All,
 
-The syntax of one of the AC_CHECK_FUNCS is incorrect.  Removing the
-lines in question allows the package to configure and build.
----
- .../0001-remove-broken-configure.ac-commands.patch |   32 =
-++++++++++++++++++++
- recipes/c-ares/c-ares_1.5.3.bb                     |    4 ++-
- 2 files changed, 35 insertions(+), 1 deletions(-)
- create mode 100644 =
-recipes/c-ares/0001-remove-broken-configure.ac-commands.patch
+I have been looking into the OVERRIDES setting and it appears to me that th=
+e OVERRIDES are being handled in least specific to most specific order.  Me=
+aning that if I have an override for a particular machine set that it has a=
+ lower priority than the override for a distro.
 
-diff --git =
-a/recipes/c-ares/0001-remove-broken-configure.ac-commands.patch =
-b/recipes/c-ares/0001-remove-broken-configure.ac-commands.patch
-new file mode 100644
-index 0000000..799332a
---- /dev/null
-+++ b/recipes/c-ares/0001-remove-broken-configure.ac-commands.patch
-@@ -0,0 +1,32 @@
-+diff -ur c-ares-1.5.3-stock/configure.ac c-ares-1.5.3/configure.ac
-+--- c-ares-1.5.3-stock/configure.ac    2010-10-13 19:12:51.792124107 =
-+0000
-++++ c-ares-1.5.3/configure.ac  2010-10-13 19:25:12.932123380 +0000
-+@@ -796,28 +796,6 @@
-+ )
-+=20
-+=20
-+-AC_CHECK_FUNCS([bitncmp \
-+-  gettimeofday \
-+-  if_indextoname
-+-],[
-+-],[
-+-  func=3D"$ac_func"
-+-  AC_MSG_CHECKING([deeper for $func])
-+-  AC_LINK_IFELSE([
-+-    AC_LANG_PROGRAM([[
-+-    ]],[[
-+-      $func ();
-+-    ]])
-+-  ],[
-+-    AC_MSG_RESULT([yes])
-+-    eval "ac_cv_func_$func=3Dyes"
-+-    AC_DEFINE_UNQUOTED([AS_TR_CPP([HAVE_$func])], [1],
-+-      [Define to 1 if you have the $func function.])
-+-  ],[
-+-    AC_MSG_RESULT([but still no])
-+-  ])
-+-])
-+-
-+=20
-+ dnl check for inet_pton
-+ AC_CHECK_FUNCS(inet_pton)
-diff --git a/recipes/c-ares/c-ares_1.5.3.bb =
-b/recipes/c-ares/c-ares_1.5.3.bb
-index 0def152..fa75f3f 100644
---- a/recipes/c-ares/c-ares_1.5.3.bb
-+++ b/recipes/c-ares/c-ares_1.5.3.bb
-@@ -1,7 +1,9 @@
- DESCRIPTION =3D "c-ares is a C library that resolves names =
-asynchronously."
- HOMEPAGE =3D "http://daniel.haxx.se/projects/c-ares/"
- SECTION =3D "libs"
--SRC_URI =3D "http://daniel.haxx.se/projects/c-ares/c-ares-${PV}.tar.gz"
-+SRC_URI =3D "http://daniel.haxx.se/projects/c-ares/c-ares-${PV}.tar.gz =
-\
-+           file://0001-remove-broken-configure.ac-commands.patch \
-+"
- LICENSE =3D "MIT"
- S =3D "${WORKDIR}/c-ares-${PV}"
- PR =3D "r1"
---=20
-1.7.0.4
+My OVERRIDES variable is actually set to evaluate:
+# OVERRIDES=3Dlocal:${MACHINE}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-=
+${BUILD_OS}:fail-fast:pn-${PN}:${FEED_ARCH}:${SOC_FAMILY}:libc-glibc${OVERR=
+IDE_THUMB}${OVERRIDE_INTERWORK}
 
+Which translates in my build to:
+OVERRIDES=3D"local:am37x-evm:angstrom:linux-gnueabi:arm:build-linux:fail-fa=
+st:pn-task-arago-toolchain-tisdk-multimedia-host:armv7a:omap3:libc-glibc:th=
+umb-interwork"
+
+I would expect that if I set an override for am37x-evm that this MACHINE sp=
+ecific override should trump the DISTRO specific override or the SOC_FAMILY=
+ override.
+
+Likewise I would expect that the local override would have the highest prec=
+edence because I am trying to override something specifically for my local =
+copy and that the "thumb-interwork" override would have the lowest preceden=
+ce.
+
+Is my expectation incorrect? =20
+
+If so then can we just reverse the list of overrides in the update_data met=
+hod of <bitbake>/lib/bb/data.py, around line 500 in my version.  My bitbake=
+ is on version 1.10.  In the master this would be in the finalize function =
+of the DataSmart class.
+
+Thanks in advance for you input. =20
+
+Sincerely,
+Chase Maupin
+Software Applications
+Catalog DSP Products
+e-mail: chase.maupin@ti.com
+phone: (281) 274-3285
+
+For support:
+Forums - http://community.ti.com/forums/
+Wiki - http://wiki.davincidsp.com/
 
 
 
