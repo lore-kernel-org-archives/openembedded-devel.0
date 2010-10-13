@@ -1,38 +1,49 @@
-Received: from asmtpout025.mac.com ([17.148.16.100])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1P60W8-00048g-Sd
+	(envelope-from <tasskjapp@gmail.com>) id 1P60bV-00010s-JB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 14:33:18 +0200
-MIME-version: 1.0
-Received: from [192.168.1.100] ([87.201.169.163])
-	by asmtp025.mac.com (Sun Java(tm) System Messaging Server 6.3-7.04
-	(built Sep
-	26 2008; 64bit)) with ESMTPSA id <0LA800G04AUDP6A0@asmtp025.mac.com> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	13 Oct 2010 05:32:41 -0700 (PDT)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 suspectscore=5 phishscore=0 bulkscore=0 adultscore=0
-	classifier=spam
-	adjust=0 reason=mlx engine=6.0.2-1004200000 definitions=main-1010130038
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.2.15,1.0.148,0.0.0000
-	definitions=2010-10-13_06:2010-10-13, 2010-10-13,
-	1970-01-01 signatures=0
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Wed, 13 Oct 2010 16:32:30 +0400
-Message-id: <2918CB89-AB2D-4882-9C97-949B17EE3843@mac.com>
-To: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 17.148.16.100
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	Wed, 13 Oct 2010 14:38:47 +0200
+Received: by ewy1 with SMTP id 1so1573981ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 05:38:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=pxHhS84yEJLnw0R7r7FIO/kariRxnmZjleTvVJc7X0A=;
+	b=q5tGsu0A5hIfHTnwcE6da+3UevNo9m2aVn5tKpPTc8R14KagrCuX+FOzN2ErtT5v21
+	WKpSyzy+WuhGJ1fOqsa2auY7Yj0VEOIqqgSHfm01VpcOKZnTCoeauthWgWjqUEZ87llE
+	ARPEDB/3AqeYf/VDlTO/mFIeFdEy77lP4jlXU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=jEz4eQEnCcUesAfdMuC+hJ1deSc8pHAgdBUcVX+SwUnBqKv4ILZWowODHqNuiRkav7
+	GlxkOopCqGPj4iZ4XIb4PM02uedQotL6+yOD8nyiseRBU+ZTPHagLVOkHuJqde9E/QBc
+	ymoaI6htRaDPOqhRYWmMPIqdXmTuAjoeUUDA0=
+Received: by 10.213.114.17 with SMTP id c17mr3663924ebq.62.1286973497350;
+	Wed, 13 Oct 2010 05:38:17 -0700 (PDT)
+Received: from [192.168.0.40] (147.84-49-231.nextgentel.com [84.49.231.147])
+	by mx.google.com with ESMTPS id x54sm4790376eeh.17.2010.10.13.05.38.15
+	(version=SSLv3 cipher=RC4-MD5); Wed, 13 Oct 2010 05:38:16 -0700 (PDT)
+Message-ID: <4CB5A86D.6020304@gmail.com>
+Date: Wed, 13 Oct 2010 14:39:09 +0200
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <mailman.1290.1286961912.3514.openembedded-devel@lists.openembedded.org>
+	<4CB58BAD.5090806@gmail.com>
+In-Reply-To: <4CB58BAD.5090806@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: tasskjapp@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Suppressing oma3-sgx-modules from omap3-console-image build for beagleboard
+Subject: Re: apr-util_1.3.4.bb fails, looking at host includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,53 +57,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 12:33:20 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 13 Oct 2010 12:38:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
-       I'm having difficultly suppressing omap3-sgx-modules from an omap3-console-image build. I have commented out libgles-sgx from the omap3-console-image.bb recipe
+On 10/13/2010 12:36 PM, Tasslehoff Kjappfot wrote:
+> On 10/13/2010 11:25 AM, 
+> openembedded-devel-request@lists.openembedded.org wrote:
+>> >  I'm trying to compile log4cxx, but it fails compiling apr-util, 
+>> saying
+>> >  that it is looking at host includes.
+>> >
+>> >  I suspect the following from log.do_configure is a problem:
+>> >
+>> >  /checking for pg_config... /usr/bin/pg_config
+>> >     adding "-I/usr/include/postgresql" to CPPFLAGS
+>> >     adding "-L/usr/lib" to LDFLAGS/
+>> >
+>> >  But I have no idea how to fix it...
+>> >
+>> >  - Tasslehoff
+>> >  _______________________________________________
+>> >  Openembedded-devel mailing list
+>> >  Openembedded-devel@lists.openembedded.org
+>> >  
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> >
+>> This may not be related but I ran into apr-util looking at the host
+>> machine as well when I was trying to build subversion. I can not
+>> remember now the exact package I installed on the build machine that
+>> fixed it. So maybe trying searching for some packages that deal with
+>> apr-util that you dont have on your build machine. I could be way off
+>> for yours but seems very similar to what I had to do. Hope this helps
+>> some
+> Thanks. I read about your woes before my post :)
+>
+> I've installed pretty much every apr-util-package I can find on my 
+> Ubuntu 10.04, and did an "apt-get build-dep subversion" in 
+> desperation, but still the same error.
+>
+> - Tasslehoff
 
-GLES_INSTALL = " \
-#  libgles-omap3 \
- "
+Solved by configuring apr-util without postgresql.
 
-Also, I put DEFAULT_PREFERENCE="-1" for all the omap3-sgx-modules*.bb recipes in the powervr folder. It still kept trying to pickup and successfully picked up the latest  omap3-sgx-modules_1.4.14.2616.bb recipe, despite the DEFAULT_PREFERENCE="-1" attribute.
-
-I then completely removed the powervr folder and tried again, but get this error. 
-
-Now the thing is there is no reference to omap3-sgx-modules in either task-base or omap3-console-image. 
-
-Where is it picking this up from then. My auto.cong seeting is machine="beagleboard"
+ From 97377e3b09a6b62dcd25e1fa403e4ec667497267 Mon Sep 17 00:00:00 2001
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+Date: Wed, 13 Oct 2010 14:35:01 +0200
+Subject: [PATCH] add --without-pgsql to configure
 
 
-ERROR: '['/tool/overo-oe/org.openembedded.dev/recipes/tasks/task-base.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'omap3-sgx-modules' but it wasn't found in any PACKAGE or RPROVIDES variables
-NOTE: Runtime target 'omap3-sgx-modules' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['omap3-sgx-modules']
-ERROR: Required build target 'omap3-console-image' has no buildable providers.
-Missing or unbuildable dependency chain was: ['omap3-console-image', 'task-base', 'omap3-sgx-modules']
-NOTE: Handling BitBake files: \ (7101/7101) [100 %]
-NOTE: Parsing finished. 6325 cached, 459 parsed, 317 skipped, 2 masked.
-NOTE: Resolving any missing task queue dependencies
-ERROR: '['/tool/overo-oe/org.openembedded.dev/recipes/tasks/task-base.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'omap3-sgx-modules' but it wasn't found in any PACKAGE or RPROVIDES variables
-NOTE: Runtime target 'omap3-sgx-modules' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['omap3-sgx-modules']
-ERROR: Required build target 'omap3-console-image' has no buildable providers.
-Missing or unbuildable dependency chain was: ['omap3-console-image', 'task-base', 'omap3-sgx-modules']
-elvis@hercules:/tool/overo-oe$ bitbake -c rebuild omap3-console-image
-NOTE: Handling BitBake files: \ (7101/7101) [100 %]
-NOTE: Parsing finished. 6324 cached, 460 parsed, 317 skipped, 2 masked.
-NOTE: Resolving any missing task queue dependencies
-ERROR: '['/tool/overo-oe/org.openembedded.dev/recipes/tasks/task-base.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'omap3-sgx-modules' but it wasn't found in any PACKAGE or RPROVIDES variables
-NOTE: Runtime target 'omap3-sgx-modules' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['omap3-sgx-modules']
-ERROR: Required build target 'omap3-console-image' has no buildable providers.
-Missing or unbuildable dependency chain was: ['omap3-console-image', 'task-base', 'omap3-sgx-modules']
-elvis@hercules:/tool/overo-oe$ 
+Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+---
+  recipes/apr/apr-util_1.3.4.bb |    1 +
+  1 files changed, 1 insertions(+), 0 deletions(-)
 
-Best regards,
+diff --git a/recipes/apr/apr-util_1.3.4.bb b/recipes/apr/apr-util_1.3.4.bb
+index cc6781b..5e31171 100644
+--- a/recipes/apr/apr-util_1.3.4.bb
++++ b/recipes/apr/apr-util_1.3.4.bb
+@@ -14,6 +14,7 @@ EXTRA_OECONF = 
+"--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
+          --with-gdbm=${STAGING_DIR_HOST}${layout_prefix} \
+          --without-sqlite2 \
+          --without-sqlite3 \
++                --without-pgsql \
+          --with-expat=${STAGING_DIR_HOST}${layout_prefix}"
 
-Elvis Dowson
+
+-- 
+1.7.0.4
+
 
 
 
