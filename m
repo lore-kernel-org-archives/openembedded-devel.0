@@ -1,33 +1,39 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1P60d1-00019V-G7
+	(envelope-from <msmith@cbnco.com>) id 1P61JH-00082k-0W
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 14:40:20 +0200
-Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
-	[91.64.127.39])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id BEC7B1B10C0B
+	Wed, 13 Oct 2010 15:24:00 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 47A958C6510
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 12:40:26 +0000 (UTC)
-Message-ID: <4CB5A897.2000003@freyther.de>
-Date: Wed, 13 Oct 2010 14:39:51 +0200
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc14 Lightning/1.0b2
-	Thunderbird/3.1.4
+	Wed, 13 Oct 2010 09:23:30 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 05184-06 for <openembedded-devel@lists.openembedded.org>; 
+	Wed, 13 Oct 2010 09:23:30 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id CF8048C5598
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 09:23:29 -0400 (EDT)
+Message-ID: <4CB5B2D1.40207@cbnco.com>
+Date: Wed, 13 Oct 2010 09:23:29 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.1290.1286961912.3514.openembedded-devel@lists.openembedded.org>	<4CB58BAD.5090806@gmail.com>
-	<4CB5A86D.6020304@gmail.com>
-In-Reply-To: <4CB5A86D.6020304@gmail.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+References: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
+	<1286921208.13054.18.camel@mattotaupa>
+In-Reply-To: <1286921208.13054.18.camel@mattotaupa>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: apr-util_1.3.4.bb fails, looking at host includes
+Subject: Re: [PATCH resend 1/4] make 3.82: set DEFAULT_PREFERENCE = "-1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +47,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 12:40:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 13:24:01 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 10/13/2010 02:39 PM, Tasslehoff Kjappfot wrote:
+Paul Menzel wrote:
+> Am Freitag, den 08.10.2010, 09:39 -0400 schrieb Michael Smith:
+>> This version has introduced several backwards incompatibilities and so=
+me
+>> packages are known not to build with 3.82. In particular:
+>>
+>> - glibc-initial fails in do_install when prefix=3D"".
+>> - eglibc manual/Makefile has not yet been patched (see 3a06f50f)
+>=20
+> Are there patches for these problems available upstream?
 
-> 
-> Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-> ---
->  recipes/apr/apr-util_1.3.4.bb |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes/apr/apr-util_1.3.4.bb b/recipes/apr/apr-util_1.3.4.bb
-> index cc6781b..5e31171 100644
-> --- a/recipes/apr/apr-util_1.3.4.bb
-> +++ b/recipes/apr/apr-util_1.3.4.bb
-> @@ -14,6 +14,7 @@ EXTRA_OECONF =
-> "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
->          --with-gdbm=${STAGING_DIR_HOST}${layout_prefix} \
->          --without-sqlite2 \
->          --without-sqlite3 \
-> +                --without-pgsql \
+For eglibc, yes. For glibc-initial, no - this one seems like a make bug=20
+and I don't have time to hunt it down.
 
-hmm... the existing file is using spaces, you use tabs... I will fix it when
-pushing the changes. Please try to follow the indention of the file.
+>> Signed-off-by: Michael Smith <msmith@cbnco.com>
+>> ---
+>>  recipes/make/make_3.82.bb |    3 +++
+>>  1 files changed, 3 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/recipes/make/make_3.82.bb b/recipes/make/make_3.82.bb
+>> index 3cdc0a0..86c58d6 100644
+>> --- a/recipes/make/make_3.82.bb
+>> +++ b/recipes/make/make_3.82.bb
+>> @@ -1,5 +1,8 @@
+>>  require make.inc
+>> =20
+>> +# Stock eglibc fails to build with make 3.82.
+>=20
+> What do you mean by =C2=BBstock=C2=AB? The pristine upstream version or=
+ the
+> version in OE?
 
+The older versions in OE. Later upstream versions might have the patch.
 
+>=20
+>> +DEFAULT_PREFERENCE =3D "-1"
+>> +
+>>  BBCLASSEXTEND =3D "native"
+>>  SRC_URI[md5sum] =3D "1a11100f3c63fcf5753818e59d63088f"
+>>  SRC_URI[sha256sum] =3D "e2c1a73f179c40c71e2fe8abf8a8a0688b84995385129=
+84da4a76958d0402966"
+>=20
+>=20
+> Thanks,
+>=20
+> Paul
 
 
