@@ -1,40 +1,26 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1P5stq-0001Zb-9w
+	(envelope-from <roman@khimov.ru>) id 1P5tC4-0001R0-Nv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 06:25:13 +0200
-Received: by vws3 with SMTP id 3so1724308vws.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Oct 2010 21:24:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=YWRxZ/uGgJ8kXwyyOV3fV4Iso7EtTqAPId8ITaAGotQ=;
-	b=lBBL7gyzb6O+N1i5CzzbtGUe80Hn66IB1LTxtFKxWX1OvXqVaBi6SJOY6vboXDY3na
-	yuyPxdZ+rdfF4vQcmYBsLyOSrUaha4tmRybH9CFeWyuuBjWAAJ8ih9PG/XW48t61Bu+U
-	zrJcRsq4BV0Mbm6HHsuTs6YLSk9dyQKUJmocQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=vX+OeX0z7yIr1LDCXfxKHzNWy+79QqouZtqSpOP+kFOiVyyDsBmpv0nWTEWbUHRCJT
-	hJj/nhRZd1q4V51zTQWPJ3zMVGMyc0p0DAuIZBqLcqfMfViZL5kbC8PU2ENWjSa5Y7mZ
-	wdnAO26UQr3gxa07Vfpm+630FTgGTe8mWcmBc=
-MIME-Version: 1.0
-Received: by 10.220.97.12 with SMTP id j12mr2625909vcn.36.1286943872674; Tue,
-	12 Oct 2010 21:24:32 -0700 (PDT)
-Received: by 10.220.201.141 with HTTP; Tue, 12 Oct 2010 21:24:32 -0700 (PDT)
-In-Reply-To: <AANLkTi=C+v2LfaXUuwTARn6hTmriWcUdBqKfq6pHPTAr@mail.gmail.com>
-References: <AANLkTi=C+v2LfaXUuwTARn6hTmriWcUdBqKfq6pHPTAr@mail.gmail.com>
-Date: Tue, 12 Oct 2010 21:24:32 -0700
-Message-ID: <AANLkTi=3=kmAAgBLDfo7JReyL-O3YugdEOdnMX51kAPW@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+	Wed, 13 Oct 2010 06:44:02 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1P5tBW-00055v-9W
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 08:43:30 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+Date: Wed, 13 Oct 2010 08:43:18 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <AANLkTi=C+v2LfaXUuwTARn6hTmriWcUdBqKfq6pHPTAr@mail.gmail.com>
+In-Reply-To: <AANLkTi=C+v2LfaXUuwTARn6hTmriWcUdBqKfq6pHPTAr@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201010130843.25124.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -52,81 +38,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 04:25:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 Oct 2010 04:44:02 -0000
+X-Groupsio-MsgNum: 24757
+Content-Type: multipart/signed; boundary="nextPart1428050.b1eOC0B2fQ";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart1428050.b1eOC0B2fQ
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 12, 2010 at 12:18 PM, J. L. <vwyodapink@gmail.com> wrote:
-> Anyone have any ideas as how to fix this or what may be causing this?
-> I bumped my image to using barnyard2 and brought up this issue for me.
-> Thanks for the help, I am only posting part of the error as its really
-> long:
->
-> | arm-angstrom-linux-gnueabi-libtool: compile:
-> arm-angstrom-linux-gnueabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8
-> -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb
-> -DHAVE_CONFIG_H -I. -I../..
-> -I/home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/lib/ruby/1.8/i686-l=
-inux
-> -isystem/home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/include
-> -O2 -g -I../.. -I../../src/include -I../../src/include
-> -I../../src/libprelude-error -I../../bindings/c++/include
-> -I../../libmissing -I../../libmissing
-> -isystem/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueab=
-i/usr/include
-> -isystem/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueab=
-i/usr/include
-> -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
-> -ggdb2 -fpermissive -fvisibility-inlines-hidden -MT
-> PreludeEasy_la-PreludeEasy.lo -MD -MP -MF
-> .deps/PreludeEasy_la-PreludeEasy.Tpo -c PreludeEasy.cxx =A0-fPIC -DPIC
-> -o .libs/PreludeEasy_la-PreludeEasy.o
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 12 =D0=BE=D0=BA=D1=82=D1=8F=D0=
+=B1=D1=80=D1=8F 2010 23:18:13 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 J. L. =D0=BD=
+=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
 > | In file included from
+>=20
 > /home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/lib/ruby/1.8/i686-lin=
-ux/missing.h:16:0,
-> | =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0from
+ux
+> /missing.h:16:0,
+>=20
+> |                  from
+>=20
 > /home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/lib/ruby/1.8/i686-lin=
-ux/ruby.h:755,
-> | =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0from PreludeEasy.cxx:856:
+ux
+> /ruby.h:755,
+>=20
+> |                  from PreludeEasy.cxx:856:
 > | ../../libmissing/sys/time.h:85:58: error: conflicting declaration
+>=20
 > 'void* restrict'
+>=20
 > | ../../libmissing/sys/time.h:85:42: error: 'restrict' has a previous
+>=20
 > declaration as 'timeval* restrict'
+>=20
 > | make[3]: *** [PreludeEasy_la-PreludeEasy.lo] Error 1
 > | make[3]: Leaving directory
-> `/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libprelud=
-e-1.0.0-r0/libprelude-1.0.0/bindings/ruby'
-> | make[2]: *** [all-recursive] Error 1
-> | make[2]: Leaving directory
-> `/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libprelud=
-e-1.0.0-r0/libprelude-1.0.0/bindings'
-> | make[1]: *** [all-recursive] Error 1
-> | make[1]: Leaving directory
-> `/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libprelud=
-e-1.0.0-r0/libprelude-1.0.0'
-> | make: *** [all] Error 2
-> | FATAL: oe_runmake failed
-> NOTE: Task failed:
-> /home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/libprelude=
--1.0.0-r0/temp/log.do_compile.30120
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /home/vdubhack/overo-oe/org.openembedded.dev/recipes/libprelude/libprelud=
-e_1.0.0.bb
-> do_compile failed
-> ERROR: Task 15 (/home/vdubhack/overo-oe/org.openembedded.dev/recipes/libp=
-relude/libprelude_1.0.0.bb,
-> do_compile) failed
-> NOTE: Tasks Summary: Attempted 1090 tasks of which 1084 didn't need to
-> be rerun and 1 failed.
-> ERROR: '/home/vdubhack/overo-oe/org.openembedded.dev/recipes/libprelude/l=
-ibprelude_1.0.0.bb'
-> failed
->
 
-As my debugging and figuring these things out is very minimal I gave
-the cflags_append =3D -Os a try as I saw it posted to try with a
-different package and still got a failure. Thanks for any tips or
-pointers
+=46rom what I see it's Ruby bindings that fail for some reason, you may try=
+ to=20
+disable them if you don't specifically care about that.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart1428050.b1eOC0B2fQ
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAky1OOwACgkQXJ70z+XgVcNRJgCfRU0KU8dLeUeAal38ZVp5rSfe
+5o8AoOB95KY7b/wsh9tTnmTvzOj/dzUC
+=SM9k
+-----END PGP SIGNATURE-----
+
+--nextPart1428050.b1eOC0B2fQ--
