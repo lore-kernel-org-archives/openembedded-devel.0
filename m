@@ -1,38 +1,40 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tim@timwise.co.uk>) id 1P699j-00066m-7n
+Received: from na3sys009aog101.obsmtp.com ([74.125.149.67])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <bengardiner@nanometrics.ca>) id 1P69Kf-0006Sj-5A
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 23:46:42 +0200
-Received: from compute1.internal (compute1.nyi.mail.srv.osa [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id E4ED7460;
-	Wed, 13 Oct 2010 17:46:11 -0400 (EDT)
-Received: from frontend2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Wed, 13 Oct 2010 17:46:11 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=message-id:date:from:mime-version:to:cc:subject:content-type:content-transfer-encoding;
-	s=smtpout; bh=SzpOrDGZSzttioKFyT1Xev1NOIY=;
-	b=hisM9pQDj0WZyLWI2k9U0CxYF1sa0MvmrKR2qmNuz+OmgrZgPODSwG2cbpC1Dq0+FPkfymv1EGMpC+fxBwgdmZ3fEF2SqboEJvU0/HSxPpwX+IW+qQQ/XBSI/Kw3yDg1oK6wez+2owOhnkuH0YYnfmm/3lAo22/04uQYf5NPfa8=
-X-Sasl-enc: KcypovmFK4rP4zs72DCIeeParMwVnKegEtg+gQjtxyK+ 1287006371
-Received: from [192.168.1.67] (78-86-198-4.zone2.bethere.co.uk [78.86.198.4])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id F3BF35E592B;
-	Wed, 13 Oct 2010 17:46:10 -0400 (EDT)
-Message-ID: <4CB628A0.4040904@timwise.co.uk>
-Date: Wed, 13 Oct 2010 22:46:08 +0100
-From: Tim Abell <tim@timwise.co.uk>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 13 Oct 2010 23:58:00 +0200
+Received: from source ([74.125.83.41]) by na3sys009aob101.postini.com
+	([74.125.148.12]) with SMTP
+	ID DSNKTLYrSBhioj1Lstw/JVayfkwIvjKI3AzO@postini.com;
+	Wed, 13 Oct 2010 14:57:31 PDT
+Received: by mail-gw0-f41.google.com with SMTP id 21so1495701gwj.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 14:57:28 -0700 (PDT)
+Received: by 10.100.124.4 with SMTP id w4mr1526426anc.76.1287005187993;
+	Wed, 13 Oct 2010 14:26:27 -0700 (PDT)
+Received: from localhost.localdomain ([206.191.47.130])
+	by mx.google.com with ESMTPS id c32sm12922273anc.21.2010.10.13.14.26.27
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 13 Oct 2010 14:26:27 -0700 (PDT)
+From: Ben Gardiner <bengardiner@nanometrics.ca>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Oct 2010 17:26:25 -0400
+Message-Id: <1287005185-27109-1-git-send-email-bengardiner@nanometrics.ca>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <i94r56$spo$1@dough.gmane.org>
+References: <i94r56$spo$1@dough.gmane.org>
 MIME-Version: 1.0
-To: Shr-devel <shr-devel@lists.shr-project.org>
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: tim@timwise.co.uk
+In-Reply-To: <i94r56$spo$1@dough.gmane.org>
+X-SA-Exim-Connect-IP: 74.125.149.67
+X-SA-Exim-Mail-From: bengardiner@nanometrics.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-5.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: SHR-user <shr-user@lists.shr-project.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: [SHR-T] let's make shr-t happen again!
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: [PATCH] distro, toolchain-external: override TARGET_VENDOR with TOOLCHAIN_VENDOR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,56 +48,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 21:46:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 21:58:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello to all potential and existing maintainers, shr-u devs, 
-administrators, package maintainers, application programmers etc,
+Trying to use an external toolchain like the 2009q1 toolchain from codesourcery
+has some strange results since the toolchain has vendor 'none' but
+distributions like angstrom set TARGET_VENDOR unconditionally.
 
-I really want to breath life back into shr-testing.
+This patch overrides the TARGET_VENDOR with the value of TOOLCHAIN_VENDOR,
+if set. TOOLCHAIN_VENDOR can be set in the local configuration alongside the
+other TOOLCHAIN_* variables. The override is performed in
+toolchain-external.inc, as suggested by Koen Kooi [1]. It also reorders the
+inclusion of the distro and toolchain-* so that toolchain-external can override
+the value of TARGET_VENDOR, as suggested by Denys Dmytriyenko [2].
 
-Firstly, does anyone else want to help me as a co-maintainer? Let me know!
+Tested with angstrom-2008.1 and the codesourcery 2009q1 toolchain by assigning
+TOOLCHAIN_VENDOR = "-none"
+TOOLCHAIN_TYPE = "external"
+TOOLCHAIN_BRAND = "csl"
+, in addition to putting the CSL in the PATH.
 
-I've written down most of my thoughts on what needs to be done and how 
-it can/should be done here: 
-http://www.shr-project.org/trac/wiki/ShrMaintainerHowTo Some of you have 
-seen already (though I keep adding to it).
+Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+CC: Koen Kooi <k.kooi@student.utwente.nl>
+CC: Víctor M. Jáquez L. <vjaquez@igalia.com>
+CC: CC: Denys Dmytriyenko <denis@denix.org>
 
-I'm finding it quite tough getting to a point of being productive, so I 
-thought this would be a good point to ask the whole community for a bit 
-of help.
-
-I would like to invite people to join in a brain storm on the mailing 
-list. What do you think needs to be done, how do you think we can 
-practically do it? What resources are available to us and how do we 
-access them? I really want to reach for the stars in terms of quality so 
-I want to know what you think is the *best* approach, and then what 
-compromises we might make till we outstrip android in user base and 
-development power ;^D
-
-Reply with your thoughts and ideas and I'll collate them for the wiki. 
-Anything you have that will help me get moving will be greatly 
-appreciated. I really want to encourage a community approach; I'm 
-willing to put the effort in to make it happen all by myself, but I also 
-want to make sure anyone else can take over or join in with as little 
-problems as possible.
-
-Finally and very importantly, are you a potential user of shr-testing? 
-If so what do *you* want out of it? (I just want less regressions.) What 
-hardware would you run it on? Would you be able to test beta versions of 
-shr-t?
-
-Thank you all reading,
-
-Tim Abell
-
+[1] http://article.gmane.org/gmane.comp.handhelds.openembedded/38053
+[2] http://article.gmane.org/gmane.comp.handhelds.openembedded/38188
 ---
+ conf/distro/angstrom-2008.1.conf           |    8 ++++----
+ conf/distro/angstrom-2010.x.conf           |    8 ++++----
+ conf/distro/include/toolchain-external.inc |    2 ++
+ conf/distro/kaeilos.conf                   |    8 ++++----
+ 4 files changed, 14 insertions(+), 12 deletions(-)
 
-Apologies for cross-posting - I want to gain as much feedback as 
-possible from all aspects of the shr community, including the upstream 
-openembedded project people.
-
+diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+index ec4f21e..1fd5ab6 100644
+--- a/conf/distro/angstrom-2008.1.conf
++++ b/conf/distro/angstrom-2008.1.conf
+@@ -124,10 +124,6 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
+ 
+-# Toolchain virtuals:
+-require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
+-require conf/distro/include/arm-thumb.inc
+-
+ PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
+ PREFERRED_PROVIDER_hotplug               = "udev"
+ PREFERRED_PROVIDER_opkg                 ?= "opkg"
+@@ -143,6 +139,10 @@ ANGSTROMLIBC ?= "glibc"
+ 
+ require conf/distro/include/angstrom.inc
+ 
++# Toolchain virtuals:
++require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
++require conf/distro/include/arm-thumb.inc
++
+ # Set DISTRO_FEED_CONFIGS to our config var, assigned in the above .inc
+ DISTRO_FEED_CONFIGS = "${ANGSTROM_FEED_CONFIGS}"
+ 
+diff --git a/conf/distro/angstrom-2010.x.conf b/conf/distro/angstrom-2010.x.conf
+index b872450..8693cda 100644
+--- a/conf/distro/angstrom-2010.x.conf
++++ b/conf/distro/angstrom-2010.x.conf
+@@ -114,10 +114,6 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
+ 
+-# Toolchain virtuals:
+-require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
+-require conf/distro/include/arm-thumb.inc
+-
+ PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
+ PREFERRED_PROVIDER_hotplug               = "udev"
+ PREFERRED_PROVIDER_opkg                 ?= "opkg"
+@@ -131,6 +127,10 @@ ANGSTROM_BLACKLIST_pn-ipkg			= "ipkg has been superseded by opkg"
+ 
+ require conf/distro/include/angstrom.inc
+ 
++# Toolchain virtuals:
++require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
++require conf/distro/include/arm-thumb.inc
++
+ # Set DISTRO_FEED_CONFIGS to our config var, assigned in the above .inc
+ DISTRO_FEED_CONFIGS = "${ANGSTROM_FEED_CONFIGS}"
+ 
+diff --git a/conf/distro/include/toolchain-external.inc b/conf/distro/include/toolchain-external.inc
+index ff83f5a..585d50e 100644
+--- a/conf/distro/include/toolchain-external.inc
++++ b/conf/distro/include/toolchain-external.inc
+@@ -6,3 +6,5 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-toolchain-${TOOLCHAIN
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-toolchain-${TOOLCHAIN_BRAND}"
+ #PREFERRED_PROVIDER_linux-libc-headers = "external-toolchain-${TOOLCHAIN_BRAND}"
+ 
++TOOLCHAIN_VENDOR ?= "${TARGET_VENDOR}"
++TARGET_VENDOR = "${TOOLCHAIN_VENDOR}"
+diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
+index 1287ea1..6625ba1 100644
+--- a/conf/distro/kaeilos.conf
++++ b/conf/distro/kaeilos.conf
+@@ -119,10 +119,6 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
+ PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
+ 
+-# Toolchain virtuals:
+-require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
+-require conf/distro/include/arm-thumb.inc
+-
+ PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
+ PREFERRED_PROVIDER_hotplug               = "udev"
+ PREFERRED_PROVIDER_opkg                 ?= "opkg"
+@@ -135,6 +131,10 @@ ANGSTROM_BLACKLIST_pn-fso-apm       = "regular apmd is good enough"
+ 
+ require conf/distro/include/kaeilos.inc
+ 
++# Toolchain virtuals:
++require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
++require conf/distro/include/arm-thumb.inc
++
+ # If we're using an .ipk based rootfs, we want to have opkg installed so postinst script can run
+ # We also take this opportunity to inject angstrom-version and the feed configs into the rootfs
+ IPKG_VARIANT = "opkg angstrom-version ${ANGSTROM_FEED_CONFIGS}"
+-- 
+1.7.0.4
 
 
 
