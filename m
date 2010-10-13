@@ -1,50 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P5vWF-0004n7-QO
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 09:13:01 +0200
-Received: by bwz9 with SMTP id 9so1968082bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 00:12:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=jUS6gFqjQvzyz1mNpF+Nrnmlte2Du8CSy/oRTdu6NCQ=;
-	b=V6w0lGSpdEZW2NimPMClDV4Cqm4xQfQMB1NI7uFnBc8u9uy15Hdgr5PAA6V/UqSm8b
-	MtKOoxrxhO05b2KUzreWPaJl7w/xBOUV1Bm5f+gwPhPv2HCs6HuOibN4cYR2OWR+G6Li
-	HOYfCnlICJ9nvji5WE8lC+m0GNAZIRyaTs3AY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=EmHyHhiAD4EC+VThtt8KhK7OteUaxtIiVkSHdNzyG+83oWjzXHl1kaQTr51+u5R5Tc
-	7ipw7Jds6CKPFdiMVzTWsk14+1uOFTnPhVbXp/1ekSYpyhxwPwHWdNfDRHMIIdm6OtNQ
-	WJ5xmsqSglRdTAGa9WNTZLTDXnZ0VkN+7EZr4=
-Received: by 10.204.69.18 with SMTP id x18mr7309463bki.34.1286953951134;
-	Wed, 13 Oct 2010 00:12:31 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id o12sm6904004bkb.9.2010.10.13.00.12.29
+	(envelope-from <sean@chumby.com>) id 1P5vWm-0004sk-Sm
+	for Openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 09:13:37 +0200
+Received: by gwb17 with SMTP id 17so1534906gwb.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Oct 2010 00:13:04 -0700 (PDT)
+Received: by 10.236.108.179 with SMTP id q39mr17381133yhg.35.1286953984147;
+	Wed, 13 Oct 2010 00:13:04 -0700 (PDT)
+Received: from [192.168.10.100] (cm198.psi191.maxonline.com.sg
+	[58.146.191.198])
+	by mx.google.com with ESMTPS id j27sm3983228yha.30.2010.10.13.00.13.02
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 13 Oct 2010 00:12:30 -0700 (PDT)
-Date: Wed, 13 Oct 2010 09:12:28 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101013071227.GD3549@jama>
-References: <1286935114-4673-1-git-send-email-raj.khem@gmail.com>
-	<AANLkTinMcWBJG3WprZVTw038rMfO4pjNcyre-Bg3ZhMi@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTinMcWBJG3WprZVTw038rMfO4pjNcyre-Bg3ZhMi@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+	Wed, 13 Oct 2010 00:13:03 -0700 (PDT)
+From: Sean Cross <sean@chumby.com>
+Date: Wed, 13 Oct 2010 15:13:00 +0800
+Message-Id: <2C68B7D9-DAA8-4214-B57B-BA908F184C8F@chumby.com>
+To: Openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0 (Apple Message framework v1081)
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: sean@chumby.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] distutils-common-base.bbclass: Prepend STAGING_LIBDIR to linker library search path.
+Subject: [PATCH] linux-imx-git: Fix compile error by making rotary coder a builtin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,28 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 07:13:01 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 13 Oct 2010 07:13:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 13, 2010 at 08:59:40AM +0200, Frans Meulenbroeks wrote:
-> 2010/10/13 Khem Raj <raj.khem@gmail.com>:
-> > * This was done generically in bitbake.conf this should be done on
-> >  demand and distutils based recipes seem to need it. So we define it
-> >  here.
-> 
-> Based on your commit message I expected a change in bitbake.conf too.
-> Am I mssing something here?
 
-That changes was already commited and it's used only for
-LIBTOOL_HAS_SYSROOT.
+There is a problem with certain functions not being exported in the =
+kernel.
+This causes a compile error.  As a workaround, make the rotary coder a =
+builtin.
+---
+ .../linux-imx-git/chumby-falconwing/defconfig      |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-This is fixing build of all python recipes using distutils.
+diff --git a/recipes/linux/linux-imx-git/chumby-falconwing/defconfig =
+b/recipes/linux/linux-imx-git/chumby-falconwing/defconfig
+index ac3be51..c93fe50 100644
+--- a/recipes/linux/linux-imx-git/chumby-falconwing/defconfig
++++ b/recipes/linux/linux-imx-git/chumby-falconwing/defconfig
+@@ -902,7 +902,7 @@ CONFIG_TOUCHSCREEN_USB_GENERAL_TOUCH=3Dy
+ CONFIG_TOUCHSCREEN_USB_GOTOP=3Dy
+ # CONFIG_TOUCHSCREEN_TOUCHIT213 is not set
+ CONFIG_INPUT_MISC=3Dy
+-CONFIG_INPUT_STMP3XXX_ROTDEC=3Dm
++CONFIG_INPUT_STMP3XXX_ROTDEC=3Dy
+ # CONFIG_INPUT_ATI_REMOTE is not set
+ CONFIG_INPUT_ATI_REMOTE2=3Dm
+ # CONFIG_INPUT_KEYSPAN_REMOTE is not set
+--=20
+1.7.0.4
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
