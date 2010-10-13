@@ -1,48 +1,38 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from asmtpout025.mac.com ([17.148.16.100])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1P60EL-0005ve-2Q
+	(envelope-from <elvis.dowson@mac.com>) id 1P60W8-00048g-Sd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 14:14:50 +0200
-Received: by ewy1 with SMTP id 1so1562859ewy.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 05:14:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=qB9ba8LVMAXAqNu/vNM17Oex1NE7Q5y+DpbXgSEDyk4=;
-	b=MP1/kcmjutStsRnKKNKtwQQ95/PeOcXS/s/rcd0hrZeNzwfguQof4i5pv0wC7vr+9d
-	kwszjlNpXpYA4GQsGVOKTYoHLfp+VxGHyTe4bbY/dN1TPAE5JJ7NDJSJkUQEzot1efcr
-	n9Sw+D1rOX6S5wB1VZez6coT/pfnT4RuSXbR8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=u83YRRNSU6ztD9V8djKILasMmv3eVvAOPcwHuTHZSGbYI15AMw3BZa9hizQvCqHtNp
-	pKN15LB8JiKT3TWmjjmJ62JJg+lTUR0vj+8m7O+UAxZ3IfPMCQAeU2/5Dr9MDnW6fxh1
-	TnE5By77HvRaDljQdd+EDoLc6Oa7k6J7VxCtE=
-Received: by 10.14.53.65 with SMTP id f41mr5209361eec.18.1286972062419;
-	Wed, 13 Oct 2010 05:14:22 -0700 (PDT)
-Received: from [192.168.0.40] (147.84-49-231.nextgentel.com [84.49.231.147])
-	by mx.google.com with ESMTPS id q51sm872378eeh.16.2010.10.13.05.14.20
-	(version=SSLv3 cipher=RC4-MD5); Wed, 13 Oct 2010 05:14:21 -0700 (PDT)
-Message-ID: <4CB5A2D2.4050702@gmail.com>
-Date: Wed, 13 Oct 2010 14:15:14 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4CB591B3.6080805@gmail.com>
-In-Reply-To: <4CB591B3.6080805@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+	Wed, 13 Oct 2010 14:33:18 +0200
+MIME-version: 1.0
+Received: from [192.168.1.100] ([87.201.169.163])
+	by asmtp025.mac.com (Sun Java(tm) System Messaging Server 6.3-7.04
+	(built Sep
+	26 2008; 64bit)) with ESMTPSA id <0LA800G04AUDP6A0@asmtp025.mac.com> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	13 Oct 2010 05:32:41 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 suspectscore=5 phishscore=0 bulkscore=0 adultscore=0
+	classifier=spam
+	adjust=0 reason=mlx engine=6.0.2-1004200000 definitions=main-1010130038
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.2.15,1.0.148,0.0.0000
+	definitions=2010-10-13_06:2010-10-13, 2010-10-13,
+	1970-01-01 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+Date: Wed, 13 Oct 2010 16:32:30 +0400
+Message-id: <2918CB89-AB2D-4882-9C97-949B17EE3843@mac.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 17.148.16.100
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libusb-1.0-0, Required build target 'myrootfs' has no buildable providers.
+Subject: Suppressing oma3-sgx-modules from omap3-console-image build for beagleboard
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,67 +46,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 12:14:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Oct 2010 12:33:20 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
-On 10/13/2010 01:02 PM, Tasslehoff Kjappfot wrote:
-> I'm compiling myrootfs for the beagleboard, and have IMAGE_INSTALL += 
-> "libusb1" in my recipe. This has worked fine until a recent update, 
-> but now it fails with the following:
->
-> NOTE: Handling BitBake files: | (7156/7156) [100 %]
-> Parsing of 7156 .bb files complete (6694 cached, 462 parsed). 7374 
-> targets, 305 skipped, 0 masked, 0 errors.
-> ERROR: 
-> '['/home/tassloe/src/openembedded/pd-recipes/images/myrootfs.bb']' 
-> RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 
-> 'libusb-1.0-0' but it wasn't found in any PACKAGE or RPROVIDES variables
-> ERROR: Required build target 'myrootfs' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['myrootfs', 'libusb-1.0-0']
-> NOTE: Resolving any missing task queue dependencies
-> ERROR: 
-> '['/home/tassle/src/openembedded/pd-recipes/images/myrootfs.bb']' 
-> RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 
-> 'libusb-1.0-0' but it wasn't found in any PACKAGE or RPROVIDES variables
-> Unknown Event: <bb.event.NoProvider instance at 0xfaae5ec>
-> NOTE: Runtime target 'libusb-1.0-0' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['libusb-1.0-0']
-> ERROR: Required build target 'myrootfs' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['myrootfs', 'libusb-1.0-0']
->
-> I deleted my TMPDIR and then it compiled ok, but when I tried to 
-> compile again, I got the same message. Neither myrootfs.bb nor 
-> recipes/libusb have been changed since the last time this worked for 
-> me, so I suspect something else is causing this.
->
-> Any ideas?
->
-> - Tasslehoff
+Hi,
+       I'm having difficultly suppressing omap3-sgx-modules from an omap3-console-image build. I have commented out libgles-sgx from the omap3-console-image.bb recipe
 
-To add some info / reply to myself.
+GLES_INSTALL = " \
+#  libgles-omap3 \
+ "
 
-koen told me this is because I try to force libs into my rootfs that I 
-don't use directly, and removing libusb1 and libqt* from myrootfs.bb 
-indeed makes it build. May have worked only be accident before, I'm not 
-sure.
+Also, I put DEFAULT_PREFERENCE="-1" for all the omap3-sgx-modules*.bb recipes in the powervr folder. It still kept trying to pickup and successfully picked up the latest  omap3-sgx-modules_1.4.14.2616.bb recipe, despite the DEFAULT_PREFERENCE="-1" attribute.
 
-But, it makes me wonder if I use SDK's right.
+I then completely removed the powervr folder and tried again, but get this error. 
 
-To avoid everyone having to compile our rootfs with OE, I have created 
-an SDK. Using this SDK I compile and link an application that needs 
-libusb1, and that's why I had to force my rootfs to include it. The same 
-for my Qt-application. I compile and link that one outside OE, and add 
-libs to IMAGE_INSTALL in myrootfs.bb to make sure it has what it needs.
+Now the thing is there is no reference to omap3-sgx-modules in either task-base or omap3-console-image. 
 
-Is this the wrong way to go about it? If so, how *should* I do it?
-
-Regards,
-Tasslehoff
+Where is it picking this up from then. My auto.cong seeting is machine="beagleboard"
 
 
+ERROR: '['/tool/overo-oe/org.openembedded.dev/recipes/tasks/task-base.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'omap3-sgx-modules' but it wasn't found in any PACKAGE or RPROVIDES variables
+NOTE: Runtime target 'omap3-sgx-modules' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['omap3-sgx-modules']
+ERROR: Required build target 'omap3-console-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['omap3-console-image', 'task-base', 'omap3-sgx-modules']
+NOTE: Handling BitBake files: \ (7101/7101) [100 %]
+NOTE: Parsing finished. 6325 cached, 459 parsed, 317 skipped, 2 masked.
+NOTE: Resolving any missing task queue dependencies
+ERROR: '['/tool/overo-oe/org.openembedded.dev/recipes/tasks/task-base.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'omap3-sgx-modules' but it wasn't found in any PACKAGE or RPROVIDES variables
+NOTE: Runtime target 'omap3-sgx-modules' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['omap3-sgx-modules']
+ERROR: Required build target 'omap3-console-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['omap3-console-image', 'task-base', 'omap3-sgx-modules']
+elvis@hercules:/tool/overo-oe$ bitbake -c rebuild omap3-console-image
+NOTE: Handling BitBake files: \ (7101/7101) [100 %]
+NOTE: Parsing finished. 6324 cached, 460 parsed, 317 skipped, 2 masked.
+NOTE: Resolving any missing task queue dependencies
+ERROR: '['/tool/overo-oe/org.openembedded.dev/recipes/tasks/task-base.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'omap3-sgx-modules' but it wasn't found in any PACKAGE or RPROVIDES variables
+NOTE: Runtime target 'omap3-sgx-modules' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['omap3-sgx-modules']
+ERROR: Required build target 'omap3-console-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['omap3-console-image', 'task-base', 'omap3-sgx-modules']
+elvis@hercules:/tool/overo-oe$ 
 
+Best regards,
 
+Elvis Dowson
 
 
 
