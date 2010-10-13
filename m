@@ -1,30 +1,44 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1P5tC4-0001R0-Nv
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P5vJr-0003WY-Qb
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 06:44:02 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1P5tBW-00055v-9W
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 08:43:30 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Oct 2010 08:43:18 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <AANLkTi=C+v2LfaXUuwTARn6hTmriWcUdBqKfq6pHPTAr@mail.gmail.com>
-In-Reply-To: <AANLkTi=C+v2LfaXUuwTARn6hTmriWcUdBqKfq6pHPTAr@mail.gmail.com>
+	Wed, 13 Oct 2010 09:00:14 +0200
+Received: by iwn2 with SMTP id 2so2100711iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Oct 2010 23:59:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=jRkkyXm1l7k/Al2ie/b2NPJlwL9Zp9D+JHQb45IlIWs=;
+	b=n/0ny4BHzCl8Cj216N7fI1QAOHY3ShDHfj5j7Vtx60IQ8nJUbjBhKPfhvNJ+NOcby2
+	g2/GIwL3X4gXcGkM9tkSfoLEE/p/v9/dSlyBvtJ+asia36niDPWU5bTkFO2CpwxcSVFf
+	wrU+NC7sST85Py3j2jB2/m4nnVsgBgTtGsttA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=JeVsLzGFwQvw1uC1OjVq4sUcJKrv9EJgGQ8o9eNrmFDyeTg/kxPSJAJ9Tj46IUE4wW
+	NcSl0t0BA62NrnRGilRpyaQXEmUrr6B1blU1FVdaw4WeQ6Xk8miSF8FfoS75WKfEpy03
+	YJkMdS0YnofGKupy6T9Os1b6dO6nrB75F3ah8=
 MIME-Version: 1.0
-Message-Id: <201010130843.25124.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.231.148.83 with SMTP id o19mr6670191ibv.112.1286953180420;
+	Tue, 12 Oct 2010 23:59:40 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 12 Oct 2010 23:59:40 -0700 (PDT)
+In-Reply-To: <1286935114-4673-1-git-send-email-raj.khem@gmail.com>
+References: <1286935114-4673-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 13 Oct 2010 08:59:40 +0200
+Message-ID: <AANLkTinMcWBJG3WprZVTw038rMfO4pjNcyre-Bg3ZhMi@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Libprelude fails on oe_runmake
+Subject: Re: [PATCH] distutils-common-base.bbclass: Prepend STAGING_LIBDIR to linker library search path.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,64 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 04:44:02 -0000
-X-Groupsio-MsgNum: 24757
-Content-Type: multipart/signed; boundary="nextPart1428050.b1eOC0B2fQ";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart1428050.b1eOC0B2fQ
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Wed, 13 Oct 2010 07:00:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 12 =D0=BE=D0=BA=D1=82=D1=8F=D0=
-=B1=D1=80=D1=8F 2010 23:18:13 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 J. L. =D0=BD=
-=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> | In file included from
->=20
-> /home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/lib/ruby/1.8/i686-lin=
-ux
-> /missing.h:16:0,
->=20
-> |                  from
->=20
-> /home/vdubhack/overo-oe/tmp/sysroots/i686-linux/usr/lib/ruby/1.8/i686-lin=
-ux
-> /ruby.h:755,
->=20
-> |                  from PreludeEasy.cxx:856:
-> | ../../libmissing/sys/time.h:85:58: error: conflicting declaration
->=20
-> 'void* restrict'
->=20
-> | ../../libmissing/sys/time.h:85:42: error: 'restrict' has a previous
->=20
-> declaration as 'timeval* restrict'
->=20
-> | make[3]: *** [PreludeEasy_la-PreludeEasy.lo] Error 1
-> | make[3]: Leaving directory
+2010/10/13 Khem Raj <raj.khem@gmail.com>:
+> * This was done generically in bitbake.conf this should be done on
+> =A0demand and distutils based recipes seem to need it. So we define it
+> =A0here.
 
-=46rom what I see it's Ruby bindings that fail for some reason, you may try=
- to=20
-disable them if you don't specifically care about that.
+Based on your commit message I expected a change in bitbake.conf too.
+Am I mssing something here?
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+Frans
 
---nextPart1428050.b1eOC0B2fQ
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =A0classes/distutils-common-base.bbclass | =A0 =A02 ++
+> =A01 files changed, 2 insertions(+), 0 deletions(-)
+>
+> diff --git a/classes/distutils-common-base.bbclass b/classes/distutils-co=
+mmon-base.bbclass
+> index f66a5cd..b6caf24 100644
+> --- a/classes/distutils-common-base.bbclass
+> +++ b/classes/distutils-common-base.bbclass
+> @@ -4,6 +4,8 @@ EXTRA_OEMAKE =3D ""
+>
+> =A0export STAGING_INCDIR
+> =A0export STAGING_LIBDIR
+> +# libtool 2.4 does not export with LDFLAGS but distutils need it
+> +LDFLAGS_prepend =3D "-L${STAGING_LIBDIR} "
+>
+> =A0PACKAGES =3D "${PN}-dev ${PN}-dbg ${PN}-doc ${PN}"
+>
+> --
+> 1.7.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAky1OOwACgkQXJ70z+XgVcNRJgCfRU0KU8dLeUeAal38ZVp5rSfe
-5o8AoOB95KY7b/wsh9tTnmTvzOj/dzUC
-=SM9k
------END PGP SIGNATURE-----
-
---nextPart1428050.b1eOC0B2fQ--
