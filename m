@@ -1,40 +1,36 @@
-Received: from na3sys009aog101.obsmtp.com ([74.125.149.67])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <bengardiner@nanometrics.ca>) id 1P69Kf-0006Sj-5A
+Received: from mail.multimedia-labs.de ([82.149.226.172])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <obi@opendreambox.org>) id 1P69Wj-0000kZ-0i
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 23:58:00 +0200
-Received: from source ([74.125.83.41]) by na3sys009aob101.postini.com
-	([74.125.148.12]) with SMTP
-	ID DSNKTLYrSBhioj1Lstw/JVayfkwIvjKI3AzO@postini.com;
-	Wed, 13 Oct 2010 14:57:31 PDT
-Received: by mail-gw0-f41.google.com with SMTP id 21so1495701gwj.14
+	Thu, 14 Oct 2010 00:10:25 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 004BC3149DCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 14:57:28 -0700 (PDT)
-Received: by 10.100.124.4 with SMTP id w4mr1526426anc.76.1287005187993;
-	Wed, 13 Oct 2010 14:26:27 -0700 (PDT)
-Received: from localhost.localdomain ([206.191.47.130])
-	by mx.google.com with ESMTPS id c32sm12922273anc.21.2010.10.13.14.26.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 13 Oct 2010 14:26:27 -0700 (PDT)
-From: Ben Gardiner <bengardiner@nanometrics.ca>
+	Thu, 14 Oct 2010 00:09:58 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id 7dxdj0pBfso4; Thu, 14 Oct 2010 00:09:52 +0200 (CEST)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id D36013149D3C;
+	Thu, 14 Oct 2010 00:09:51 +0200 (CEST)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Wed, 13 Oct 2010 22:09:51 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Oct 2010 17:26:25 -0400
-Message-Id: <1287005185-27109-1-git-send-email-bengardiner@nanometrics.ca>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <i94r56$spo$1@dough.gmane.org>
-References: <i94r56$spo$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <i94r56$spo$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 74.125.149.67
-X-SA-Exim-Mail-From: bengardiner@nanometrics.ca
+Date: Wed, 13 Oct 2010 22:09:41 +0000
+Message-Id: <1287007782-1554-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: [PATCH] distro, toolchain-external: override TARGET_VENDOR with TOOLCHAIN_VENDOR
+Subject: Patches from opendreambox.org #2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,131 +44,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 21:58:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 13 Oct 2010 22:10:26 -0000
 
-Trying to use an external toolchain like the 2009q1 toolchain from codesourcery
-has some strange results since the toolchain has vendor 'none' but
-distributions like angstrom set TARGET_VENDOR unconditionally.
+Hello developers,
 
-This patch overrides the TARGET_VENDOR with the value of TOOLCHAIN_VENDOR,
-if set. TOOLCHAIN_VENDOR can be set in the local configuration alongside the
-other TOOLCHAIN_* variables. The override is performed in
-toolchain-external.inc, as suggested by Koen Kooi [1]. It also reorders the
-inclusion of the distro and toolchain-* so that toolchain-external can override
-the value of TARGET_VENDOR, as suggested by Denys Dmytriyenko [2].
+I'm sending an updated patch to fix a conflict with today's
+master branch.
 
-Tested with angstrom-2008.1 and the codesourcery 2009q1 toolchain by assigning
-TOOLCHAIN_VENDOR = "-none"
-TOOLCHAIN_TYPE = "external"
-TOOLCHAIN_BRAND = "csl"
-, in addition to putting the CSL in the PATH.
+It would be nice to receive some more comments on this patch
+and on the patches I sent earlier. I've created a bundle in
+patchwork which includes all pending patches by the opendreambox
+project:
 
-Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
-CC: Koen Kooi <k.kooi@student.utwente.nl>
-CC: Víctor M. Jáquez L. <vjaquez@igalia.com>
-CC: CC: Denys Dmytriyenko <denis@denix.org>
+http://patchwork.openembedded.org/bundle/obi/opendreambox/
 
-[1] http://article.gmane.org/gmane.comp.handhelds.openembedded/38053
-[2] http://article.gmane.org/gmane.comp.handhelds.openembedded/38188
----
- conf/distro/angstrom-2008.1.conf           |    8 ++++----
- conf/distro/angstrom-2010.x.conf           |    8 ++++----
- conf/distro/include/toolchain-external.inc |    2 ++
- conf/distro/kaeilos.conf                   |    8 ++++----
- 4 files changed, 14 insertions(+), 12 deletions(-)
+Those patches are also available from a git repository which
+gets rebased from time to time:
 
-diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
-index ec4f21e..1fd5ab6 100644
---- a/conf/distro/angstrom-2008.1.conf
-+++ b/conf/distro/angstrom-2008.1.conf
-@@ -124,10 +124,6 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
- PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
- PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
- 
--# Toolchain virtuals:
--require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
--require conf/distro/include/arm-thumb.inc
--
- PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
- PREFERRED_PROVIDER_hotplug               = "udev"
- PREFERRED_PROVIDER_opkg                 ?= "opkg"
-@@ -143,6 +139,10 @@ ANGSTROMLIBC ?= "glibc"
- 
- require conf/distro/include/angstrom.inc
- 
-+# Toolchain virtuals:
-+require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
-+require conf/distro/include/arm-thumb.inc
-+
- # Set DISTRO_FEED_CONFIGS to our config var, assigned in the above .inc
- DISTRO_FEED_CONFIGS = "${ANGSTROM_FEED_CONFIGS}"
- 
-diff --git a/conf/distro/angstrom-2010.x.conf b/conf/distro/angstrom-2010.x.conf
-index b872450..8693cda 100644
---- a/conf/distro/angstrom-2010.x.conf
-+++ b/conf/distro/angstrom-2010.x.conf
-@@ -114,10 +114,6 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
- PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
- PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
- 
--# Toolchain virtuals:
--require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
--require conf/distro/include/arm-thumb.inc
--
- PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
- PREFERRED_PROVIDER_hotplug               = "udev"
- PREFERRED_PROVIDER_opkg                 ?= "opkg"
-@@ -131,6 +127,10 @@ ANGSTROM_BLACKLIST_pn-ipkg			= "ipkg has been superseded by opkg"
- 
- require conf/distro/include/angstrom.inc
- 
-+# Toolchain virtuals:
-+require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
-+require conf/distro/include/arm-thumb.inc
-+
- # Set DISTRO_FEED_CONFIGS to our config var, assigned in the above .inc
- DISTRO_FEED_CONFIGS = "${ANGSTROM_FEED_CONFIGS}"
- 
-diff --git a/conf/distro/include/toolchain-external.inc b/conf/distro/include/toolchain-external.inc
-index ff83f5a..585d50e 100644
---- a/conf/distro/include/toolchain-external.inc
-+++ b/conf/distro/include/toolchain-external.inc
-@@ -6,3 +6,5 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-toolchain-${TOOLCHAIN
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-toolchain-${TOOLCHAIN_BRAND}"
- #PREFERRED_PROVIDER_linux-libc-headers = "external-toolchain-${TOOLCHAIN_BRAND}"
- 
-+TOOLCHAIN_VENDOR ?= "${TARGET_VENDOR}"
-+TARGET_VENDOR = "${TOOLCHAIN_VENDOR}"
-diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
-index 1287ea1..6625ba1 100644
---- a/conf/distro/kaeilos.conf
-+++ b/conf/distro/kaeilos.conf
-@@ -119,10 +119,6 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
- PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
- PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
- 
--# Toolchain virtuals:
--require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
--require conf/distro/include/arm-thumb.inc
--
- PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
- PREFERRED_PROVIDER_hotplug               = "udev"
- PREFERRED_PROVIDER_opkg                 ?= "opkg"
-@@ -135,6 +131,10 @@ ANGSTROM_BLACKLIST_pn-fso-apm       = "regular apmd is good enough"
- 
- require conf/distro/include/kaeilos.inc
- 
-+# Toolchain virtuals:
-+require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
-+require conf/distro/include/arm-thumb.inc
-+
- # If we're using an .ipk based rootfs, we want to have opkg installed so postinst script can run
- # We also take this opportunity to inject angstrom-version and the feed configs into the rootfs
- IPKG_VARIANT = "opkg angstrom-version ${ANGSTROM_FEED_CONFIGS}"
--- 
-1.7.0.4
+http://git.opendreambox.org/?p=obi/openembedded.git;a=shortlog;h=refs/heads/for-upstream
+
+All patches were ported from the opendreambox distribution to
+OE's master. They were tested on 32-bit mipsel machines. However,
+runtime tests were only done with a slightly older version of OE.
+
+Ultimately, I'd like to merge our distribution into master. To
+accomplish that, I'm submitting those patches first, that don't
+depend on any distribution or machine.
+
+Speaking of that, our distribution currently contains quite some
+lines like this (from gst-plugins.inc)
+
+EXTRA_OECONF_append_opendreambox = "--disable-x"
+
+or patches like this (from dbus.inc):
+
+-DEPENDS = "expat glib-2.0 virtual/libintl libsm libice virtual/libx11"
++DEPENDS = "expat glib-2.0 virtual/libintl"
++DEPENDS += "${@base_contains('DISTRO_FEATURES', 'no-x11', '', 'libsm libice virtual/libx11', d)}"
+
+I believe that no-x11 doesn't sound like a nice feature, so it
+should better be inversed to read x11. This, however, would
+require to specify this feature in every distribution supporting
+x11. Will such a change possibly get accepted? Can a feature get
+enabled by default but disabled selectively by a distribution?
+
+Does the majority of distributions run with or without support
+for X11?
+
+Regards,
+Andreas
+
+Andreas Oberritter (1):
+  module.bbclass: fix dependency on specific kernel
+
+ classes/module.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
 
 
