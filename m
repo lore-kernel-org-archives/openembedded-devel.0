@@ -1,39 +1,33 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from smtprelay04.ispgateway.de ([80.67.31.31])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1P61JH-00082k-0W
+	(envelope-from <dimov@ronetix.at>) id 1P61hB-0001NC-JM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Oct 2010 15:24:00 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 47A958C6510
+	Wed, 13 Oct 2010 15:48:43 +0200
+Received: from [62.178.142.196] (helo=iserv.ronetix.at)
+	by smtprelay04.ispgateway.de with esmtps (TLSv1:AES256-SHA:256)
+	(Exim 4.68) (envelope-from <dimov@ronetix.at>) id 1P5xO2-0005WI-9v
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Oct 2010 11:12:38 +0200
+Received: from [192.168.10.40] (tserv_vpn [192.168.22.10])
+	by iserv.ronetix.at (8.13.8/8.13.8) with ESMTP id o9D9CQ3T016725
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 09:23:30 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 05184-06 for <openembedded-devel@lists.openembedded.org>; 
-	Wed, 13 Oct 2010 09:23:30 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id CF8048C5598
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 09:23:29 -0400 (EDT)
-Message-ID: <4CB5B2D1.40207@cbnco.com>
-Date: Wed, 13 Oct 2010 09:23:29 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+	Wed, 13 Oct 2010 11:12:27 +0200
+Message-ID: <4CB57839.3030905@ronetix.at>
+Date: Wed, 13 Oct 2010 12:13:29 +0300
+From: RONETIX - Asen Dimov <dimov@ronetix.at>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090825)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
-	<1286921208.13054.18.camel@mattotaupa>
-In-Reply-To: <1286921208.13054.18.camel@mattotaupa>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+X-Df-Sender: [pbs]Z2Fnb3ZAcm9uZXRpeC5hdA==
+X-SA-Exim-Connect-IP: 80.67.31.31
+X-SA-Exim-Mail-From: dimov@ronetix.at
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH resend 1/4] make 3.82: set DEFAULT_PREFERENCE = "-1"
+Subject: [RFC] Add machine pm9g45 based on at91sam9g45
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,55 +41,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2010 13:24:01 -0000
+X-List-Received-Date: Wed, 13 Oct 2010 13:48:43 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Paul Menzel wrote:
-> Am Freitag, den 08.10.2010, 09:39 -0400 schrieb Michael Smith:
->> This version has introduced several backwards incompatibilities and so=
-me
->> packages are known not to build with 3.82. In particular:
->>
->> - glibc-initial fails in do_install when prefix=3D"".
->> - eglibc manual/Makefile has not yet been patched (see 3a06f50f)
->=20
-> Are there patches for these problems available upstream?
+Hello,
 
-For eglibc, yes. For glibc-initial, no - this one seems like a make bug=20
-and I don't have time to hunt it down.
+I want to add a new board and have a method solving some issues(listed 
+below).
+But I am not sure if this could be the appropriate solution, so this is 
+the idea
+to be commented on.
 
->> Signed-off-by: Michael Smith <msmith@cbnco.com>
->> ---
->>  recipes/make/make_3.82.bb |    3 +++
->>  1 files changed, 3 insertions(+), 0 deletions(-)
->>
->> diff --git a/recipes/make/make_3.82.bb b/recipes/make/make_3.82.bb
->> index 3cdc0a0..86c58d6 100644
->> --- a/recipes/make/make_3.82.bb
->> +++ b/recipes/make/make_3.82.bb
->> @@ -1,5 +1,8 @@
->>  require make.inc
->> =20
->> +# Stock eglibc fails to build with make 3.82.
->=20
-> What do you mean by =C2=BBstock=C2=AB? The pristine upstream version or=
- the
-> version in OE?
+ The idea of patching linux kernel for pm9g45
+                                             
+ As the 2.6.30-at91-exp.tar.gz has a patch(with number 66) which do not 
+apply
+ cleanly( parts of it have been already applied to 2.6.30.10 kernel) and 
+also
+ the bitbake do not handle patches in a tar.gz format, that leaded to 
+the need
+ of writing code for extended patching. The PM9G45_patches_list 
+contains      
+ patches, which have be applied after the 2.6.30-at91-exp.tar.gz, so the 
+option
+ "apply=no" make this. That helps to apply patches in proper 
+order.            
+                                                                              
+ 
+ A patch method have to be appended to the python do_patch() 
+task.               
+ And as I do not know python(I made a try with python but I couldn't 
+make it)  
+ the appended code just call a shell script that implements the method 
+-       
+ do_patchronetix_sh().                                                        
+ 
+                                                                              
+ 
+ So the do_patchronetix_sh() extract the 2.6.30-at91-exp.tar.gz and 
+apply      
+ patches in it one by one, but when it reaches the problem patch the 
+hunks     
+ already applied are removed and the patch( 66) is then 
+applied.               
+ Then from the names in PM9G45_patches_list are removed "file://" 
+and          
+ ";apply=no" in order to be valid names for the patch 
+utility.                 
+ And finally the ARM machine list is 
+updated.                                 
 
-The older versions in OE. Later upstream versions might have the patch.
+part of recipes/linux/linux_2.6.30.bb
+--- 8< 
+------------------------------------------------------------------------------------------
+PM9G45_patches_list = " \
+        file://0001-ads7846-.c-and-.h-add-swap_xy.patch;apply=no \
+        file://0003-print-some-more-info-from-atmel_nand.c.patch;apply=no \
+        
+file://0004-add-newline-at-the-end-of-uncorrectable-error.patch;apply=no \
+        
+file://0005-Add-CompactFlash-to-at91sam9g45-architecture.patch;apply=no \
+        
+file://0006-pm9g45-system-ram-can-be-on-CS1-or-CS6.patch;apply=no \       
+        file://0007-add-pm9g45-board.patch;apply=no 
+\                             
+        file://0008-pm9g45-default-configuration-files.patch;apply=no 
+\           
+        file://0009-add-float-flags-in-Makefile.patch;apply=no \
+        file://0010-conditional-compile-if-DEDICATED_VRAM.patch;apply=no \
+        
+file://0011-add-pm9g45-board-version-1.2-and-adjust-memory-sele.patch;apply=no 
+\
+        
+file://0012-enable-USB-Device-with-On-the-go-ability.patch;apply=no "
 
->=20
->> +DEFAULT_PREFERENCE =3D "-1"
->> +
->>  BBCLASSEXTEND =3D "native"
->>  SRC_URI[md5sum] =3D "1a11100f3c63fcf5753818e59d63088f"
->>  SRC_URI[sha256sum] =3D "e2c1a73f179c40c71e2fe8abf8a8a0688b84995385129=
-84da4a76958d0402966"
->=20
->=20
-> Thanks,
->=20
-> Paul
+
+AT91_EXP_PROBLEM_PATCH = 
+"2.6.30-at91-exp-0066-sound-soc-update-soc-support-to-2.6.32-rc3-alsa.patch"
+SRC_URI_append_ronetix-pm9g45 = " 
+ftp://www.at91.com/pub/linux/2.6.30-at91/2.6.30-at91-exp.tar.gz;name=2630at91exptargz 
+\
+                                ${PM9G45_patches_list} "
+
+do_patchronetix_sh() {
+        cd ${S}
+        # add AT91 experimental patches
+        export PatchList=`ls ${WORKDIR}/2.6.30-at91-exp/`
+        for Patch in ${PatchList}; do \
+                if [ ${AT91_EXP_PROBLEM_PATCH} == $Patch ]; then \
+                        echo "This patch has problems ${Patch}" ;\
+                        #remove that hunks which have been already 
+applied. \
+                        sed -e '4342,4350 d' -e '6422,6435 d' -e 
+'7720,7742 d' \
+                                ${WORKDIR}/2.6.30-at91-exp/${Patch} | 
+patch -s -f -p1 ;\
+                        continue ;\
+                fi
+                echo "Applying patch ${WORKDIR}/2.6.30-at91-exp/${Patch}" ;\
+                patch -s -f -p1 < ${WORKDIR}/2.6.30-at91-exp/${Patch};\
+        done
+        # add pm9g45 patches
+        for Patch in "${PM9G45_patches_list}" ; do \
+                export NEW_FLIST="${NEW_FLIST} `echo ${Patch} | sed -e 
+"s/file\:\/\/*//g" -e "s/;apply=no//g" -e "s/ \\ //g"`";\
+        done
+        for Patch in ${NEW_FLIST} ;do \
+                echo "Applying patch ${WORKDIR}/${Patch}" ;\
+                patch -s -f -p1 < ${WORKDIR}/${Patch};\
+        done
+        #update arm mach-types
+        #instead of applying 
+file://0002-add-pm9g45-number-in-mach-types.patch
+        wget http://www.arm.linux.org.uk/developer/machines/download.php 
+-O ${S}/arch/arm/tools/mach-types
+}
+addtask patchronetix_sh
+
+python do_patch_append_ronetix-pm9g45 () {
+        bb.build.exec_func('do_patchronetix_sh', d)
+}
+# End of idea for patching linux kernel for pm9g45
+--- 8< 
+------------------------------------------------------------------------------------------
+
+Regards,
+Asen
 
 
