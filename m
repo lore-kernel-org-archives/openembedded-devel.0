@@ -1,51 +1,48 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P6QoH-0004Rw-Qr
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P6QoR-0001L2-HC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 18:37:46 +0200
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9EGb5Nh032314
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Thu, 14 Oct 2010 18:37:52 +0200
+Received: by mail-ew0-f47.google.com with SMTP id 1so2516009ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 11:37:05 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9EGb5Hl020636
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 11:37:05 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9EGb4Ut027773
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 11:37:05 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Thu, 14 Oct 2010 11:37:04 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Oct 2010 11:37:04 -0500
-Thread-Topic: [oe] Question about OVERRIDES precedence
-Thread-Index: ActrtVwPvUKB2/EjSaeDnwV1C5rTuQAB7x1A
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310FFA9BE@dlee06.ent.ti.com>
-References: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
-	<AANLkTik1nA1jC9f-Vvep2=8U9+VXAWBwPFaRaZC0f4Op@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA874@dlee06.ent.ti.com>
-	<AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA982@dlee06.ent.ti.com>
-	<AANLkTimRwRDxmvDrPktrK=xjfrmRada_iWRuXH6tqa4o@mail.gmail.com>
-In-Reply-To: <AANLkTimRwRDxmvDrPktrK=xjfrmRada_iWRuXH6tqa4o@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.152
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+	Thu, 14 Oct 2010 09:37:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=ZaNSoznnMRAolts0sdU5LK1yvKzdf/LwTIFZMMbaKLU=;
+	b=In5knWVfHE81TWKXfBAlgviBLxKZBdQtiqfSg8mava5+fTgIYClPkbpksgVdax6/rk
+	SuA2r5jK+7C4zhaCJpHv3ngOXyTKFXJUw6Cp3FlDxAiE4tIHsenh/xWGfYAmOT7/05wq
+	Dg5NDrtdX2CREns+5esRBe3hKwlxFiicuxM6k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=ELDIJy8OFmADSW2WtxtfUccroiSYNWpik4f919o1+CQaos1qCeOxa/pagOZ4RjDuHR
+	Bb6O2AWYFK1no9I6SalNJIo0eJyIQke/P27D/HmZ3Aijno+/Gwsf/qN+kuGYa6Xa3RlO
+	DHtM+bnI8Ie9XasGrl9RkVXeUfJnHnzJOgcwo=
+Received: by 10.213.28.4 with SMTP id k4mr2097859ebc.41.1287074244724;
+	Thu, 14 Oct 2010 09:37:24 -0700 (PDT)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id q51sm2981860eeh.10.2010.10.14.09.37.21
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 14 Oct 2010 09:37:22 -0700 (PDT)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 14 Oct 2010 18:35:44 +0200
+Message-Id: <1287074146-3705-5-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <1287074146-3705-4-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1287074146-3705-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-2-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-3-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-4-git-send-email-fransmeulenbroeks@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Question about OVERRIDES precedence
+Subject: [PATCH 5/7] mono-mcs-intermediate: remove useless SRC_URI += ""
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,55 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 16:37:46 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Oct 2010 16:37:52 -0000
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Chris Larson
-> Sent: Thursday, October 14, 2010 10:34 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Question about OVERRIDES precedence
->=20
-> On Thu, Oct 14, 2010 at 8:29 AM, Maupin, Chase <chase.maupin@ti.com>
-> wrote:
->=20
-> > So are you saying that we are just going to change the order of how
-> > OVERRIDES is appended to in OE like Denys was suggesting?  That would
-> still
-> > lead to issues like local not being the highest priority unless we woul=
-d
-> > also change bitbake.conf to define OVERRIDES as
-> > "${TARGET_ARCH}:${TARGET_OS}:${MACHINE}:local".  That way we could
-> prepend
-> > OVERRIDES in OE and still have local be the last one evaluated.
-> >
->=20
-> No.  What I'm saying is, the definition of OVERRIDES in bitbake.conf will
-> be
-> reversed.  Not that difficult to understand.  I don't know how I could
-> possibly be any clearer here.
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
+ recipes/mono/mono-mcs-intermediate_2.6.3.bb |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
-Great.  I assume this will be on the 1.10 branch as well as the master bran=
-ch?  Is there anything I can do to help here?
+diff --git a/recipes/mono/mono-mcs-intermediate_2.6.3.bb b/recipes/mono/mono-mcs-intermediate_2.6.3.bb
+index cd5bcae..8aa54d3 100644
+--- a/recipes/mono/mono-mcs-intermediate_2.6.3.bb
++++ b/recipes/mono/mono-mcs-intermediate_2.6.3.bb
+@@ -8,8 +8,6 @@
+ require mono.inc
+ require mono-mcs-intermediate.inc
+ 
+-SRC_URI += ""
+-
+ PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "b1dc21bac2c7c75814a9f32246eadadd"
+-- 
+1.6.4.2
 
-I guess with the reversal of the definition in bitbake.conf we can then cha=
-nge the appends to prepends in OE as well as reversing the definitions ther=
-e.  That way the OVERRIDES list should be built up in the proper order.
-
-
-> --
-> Christopher Larson
-> clarson at kergoth dot com
-> Founder - BitBake, OpenEmbedded, OpenZaurus
-> Maintainer - Tslib
-> Senior Software Engineer, Mentor Graphics
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
