@@ -1,26 +1,42 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1P6NCQ-0002ws-Fx
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 14:46:28 +0200
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 802C71D36170; Thu, 14 Oct 2010 14:45:48 +0200 (CEST)
-Date: Thu, 14 Oct 2010 14:45:48 +0200
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P6Nlb-0008I3-36 for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 15:22:45 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P6Nl8-0004Ed-Hn for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 15:22:14 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Oct 2010 15:22:14 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Oct 2010 15:22:14 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101014124548.GJ28423@ibawizard.net>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 14 Oct 2010 15:22:05 +0200
+Message-ID: <i9705t$i6g$1@dough.gmane.org>
+References: <20101014124548.GJ28423@ibawizard.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100822 Shredder/3.0.7pre
+In-Reply-To: <20101014124548.GJ28423@ibawizard.net>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] ts72xx, ts73xx, ts74xx? How to handle properly similar	machines
+Subject: Re: [RFC] ts72xx, ts73xx, ts74xx? How to handle properly similar machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,37 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 12:46:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Oct 2010 13:22:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I've been asked if I could add support for the ts7400 board/machine in the OE.
-It's not a big deal, it's just an addition of one patch to the kernel recipe.
+On 14-10-10 14:45, Petr Štetiar wrote:
+> Hi,
+> 
+> I've been asked if I could add support for the ts7400 board/machine in the OE.
+> It's not a big deal, it's just an addition of one patch to the kernel recipe.
+> 
+> While I'll be into it, I was thinking about adding the base for the possible
+> future addition of ts7300[2] boards also. Althought I own only ts7800 and
+> ts7250, the ts7200[4], ts7300 and ts7400 families looks like they have a lot
+> of common and it would be possible to have for example one kernel for all of
+> them.
+> 
+> The question is, how to handle this correctly in OE? On the IRC, I was pointed
+> to the SOC_FAMILY[3], but it says "The use of SOC_FAMILY as an override is
+> currently a distribution or local setting", what does it mean?
 
-While I'll be into it, I was thinking about adding the base for the possible
-future addition of ts7300[2] boards also. Althought I own only ts7800 and
-ts7250, the ts7200[4], ts7300 and ts7400 families looks like they have a lot
-of common and it would be possible to have for example one kernel for all of
-them.
+It means you need to use angstrom or set is as override in local.conf
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-The question is, how to handle this correctly in OE? On the IRC, I was pointed
-to the SOC_FAMILY[3], but it says "The use of SOC_FAMILY as an override is
-currently a distribution or local setting", what does it mean?
+iD8DBQFMtwP9MkyGM64RGpERAq2FAJ94Ml70y8lAxRB+PzKOtwyRPnEAnQCeKlY/
+LLaTsCmSsKZEP69CIvzkEzE=
+=FrGw
+-----END PGP SIGNATURE-----
 
-Would it be possible to create, say ts7234.inc file with shared stuff for all
-the boards, and separate ts7{2,3,4}xx.conf files with the features for each
-series, say ts73xx would contain FPGA/video related stuff etc, so the machine
-specific overrides would be needed. 
-
-Any thoughts? Thanks.
-
-1. http://www.embeddedarm.com/products/board-detail.php?product=TS-7400
-2. http://www.embeddedarm.com/products/arm-sbc.php#ts-7300-fpga-series
-3. http://docs.openembedded.org/usermanual/html/commonuse_new_machine.html
-4. http://www.embeddedarm.com/products/arm-sbc.php#ts-7200-200mhz-series
-
--- ynezz
 
 
