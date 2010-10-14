@@ -1,29 +1,51 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1P6OCe-0004uD-2R
+	(envelope-from <kergoth@gmail.com>) id 1P6OM3-0006Oo-PB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 15:50:41 +0200
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 0F4601D36170; Thu, 14 Oct 2010 15:50:06 +0200 (CEST)
-Date: Thu, 14 Oct 2010 15:50:06 +0200
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101014135006.GL28423@ibawizard.net>
-References: <20101014124548.GJ28423@ibawizard.net>
-	<i9705t$i6g$1@dough.gmane.org>
+	Thu, 14 Oct 2010 16:00:25 +0200
+Received: by wwe15 with SMTP id 15so6806937wwe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Oct 2010 06:59:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=vipz6Thse+J7Lt70ZUn3AMVa3Swz8opdO2IpQrqeNtg=;
+	b=GjHPnqh6WACK8t3yXYkKltk0Smx1OrsD/mWvzFhJzfsrcPLx+vV2/ZgLu/HsHMMjVs
+	nW1ddXecjuzDYZ8jmgXf+XOCX9I7Zmq95kolC21a6z45evnaXmoj573y1Y+rrjJ4tYYk
+	/X+9YVboRbLvlYNO0gjRvEPdjkYutHufTxdtI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=TP3WrK+jSkhY98U/nRf6svLhBVLdDTV2tSeO5/m9QFuJBtk12HxOxzJwYik+2nfB7m
+	qSaWO5J9oCTzLWND5Ee9bVQRmdIWCmieBFwYNoJzA+69c/fXnWZFm/Qq9Dy9whfxv4eq
+	C9zvJ657hIXSsdgu3LKhiGMQCXu0L8D4HCp0E=
+Received: by 10.227.132.199 with SMTP id c7mr9838810wbt.89.1287064794161; Thu,
+	14 Oct 2010 06:59:54 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <i9705t$i6g$1@dough.gmane.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+Sender: kergoth@gmail.com
+Received: by 10.216.0.142 with HTTP; Thu, 14 Oct 2010 06:59:33 -0700 (PDT)
+In-Reply-To: <i97082$i6g$2@dough.gmane.org>
+References: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
+	<AANLkTik1nA1jC9f-Vvep2=8U9+VXAWBwPFaRaZC0f4Op@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310FFA874@dlee06.ent.ti.com>
+	<AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
+	<i97082$i6g$2@dough.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 14 Oct 2010 06:59:33 -0700
+X-Google-Sender-Auth: 5zf6bsnI4XFaZRK8ExQWls8dxGQ
+Message-ID: <AANLkTikHdhZ4ouoyA5UdyxoZBeR+f-bhHfMBwiaA6bCo@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] ts72xx, ts73xx, ts74xx? How to handle properly	similar machines
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Question about OVERRIDES precedence
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,69 +59,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 13:50:41 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Oct 2010 14:00:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Koen Kooi <k.kooi@student.utwente.nl> [2010-10-14 15:22:05]:
+On Thu, Oct 14, 2010 at 6:23 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
 
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
->=20
-> On 14-10-10 14:45, Petr =A9tetiar wrote:
-> > Hi,
-> >=20
-> > I've been asked if I could add support for the ts7400 board/machine i=
-n the OE.
-> > It's not a big deal, it's just an addition of one patch to the kernel=
- recipe.
-> >=20
-> > While I'll be into it, I was thinking about adding the base for the p=
-ossible
-> > future addition of ts7300[2] boards also. Althought I own only ts7800=
- and
-> > ts7250, the ts7200[4], ts7300 and ts7400 families looks like they hav=
-e a lot
-> > of common and it would be possible to have for example one kernel for=
- all of
-> > them.
-> >=20
-> > The question is, how to handle this correctly in OE? On the IRC, I wa=
-s pointed
-> > to the SOC_FAMILY[3], but it says "The use of SOC_FAMILY as an overri=
-de is
-> > currently a distribution or local setting", what does it mean?
->=20
-> It means you need to use angstrom or set is as override in local.conf
+>
+> On 13-10-10 23:38, Chris Larson wrote:
+> > On Wed, Oct 13, 2010 at 2:30 PM, Maupin, Chase <chase.maupin@ti.com>
+> wrote:
+> >
+> >> That was my thought as well but I can consistently cause this issue.  I
+> >> have tested a quick change that seems to fix the issue by reversing the
+> list
+> >> before it is used in the for loop.  My change was:
+> >
+> >
+> > From discussion on IRC, we think we should just reverse the definition of
+> > OVERRIDES in OE, this avoids compatibility issues associated with
+> changing
+> > the implementation.
+>
+> Isn't the definition covered in the bitbake docs? I'm in favour of
+> fixing bitbake instead working around it in OE.
+>
 
-You mean setting it to something like a SOC_FAMILY =3D "ts7xxx"? And then=
- do
-something like this, from recipes/ti/ti-linuxutils.inc:
-
-do_compile() {
-    unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
-
-    case ${SOC_FAMILY} in
-    dm365)
-            modules=3D"cmem edma irq";;
-    omap3)
-            modules=3D"cmem sdma";;
-        dm355)
-            modules=3D"cmem edma irq";;
-    *)
-            modules=3D"cmem"
-    esac
-
-Well, I'm not OE/bitbake expert, but using something like
-do_compile_append_SOC_FAMILY() would fit more in OE style for me. I can't=
- find
-any other usage of it. Anyway I think, that it would be abuse of SOC_FAMI=
-LY,
-something like the SBC_FAMILY would be more apropriate, but again, I'm no=
-t OE
-expert and I don't know what is possible.
-
--- ynezz
-
+As far as I can tell:
+1. The bitbake docs don't cover the ordering.
+2. The behavior isn't a bug, it's a mismatch between OE's definition and
+bitbake's implementation, and bitbake has been this way since 2003.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
