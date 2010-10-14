@@ -1,48 +1,50 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P6Pkh-0001Ae-JR
+	(envelope-from <kergoth@gmail.com>) id 1P6PpN-0001HQ-Lz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 17:29:57 +0200
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9EFTM12015956
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Thu, 14 Oct 2010 17:34:46 +0200
+Received: by fxm6 with SMTP id 6so1494318fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 10:29:22 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9EFTMWS018988
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 10:29:22 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9EFTM1B017557
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 10:29:22 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Thu, 14 Oct 2010 10:29:21 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Oct 2010 10:29:20 -0500
-Thread-Topic: [oe] Question about OVERRIDES precedence
-Thread-Index: ActrHz2mNNRnnGCzQVyOzTDnBK9E2gAeEywQ
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310FFA982@dlee06.ent.ti.com>
+	Thu, 14 Oct 2010 08:34:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=C42vZk6XIZ5qlEhY0n/yMpUbyT5t0Ljq2d6Sa/NTSJs=;
+	b=Vby42i9PkxJ4tI6EG7JsT3KIIR4nFCoDdlaJ8tM0OcGQ4IwK6mWSl42qI9mXfbR5Zw
+	Y8BDCdQsjjATi76ZOCY4r7Jyb13sNMQdc0y/ClHPDmI57owcOj3wOi2a+dPjbIjV/FID
+	6adGiK/2zbPv3Gx6NJI7mcPWbPRoqO0sRi52o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=c3otPK0ZC/0w2tPDp8Ec5KQB4djd4MesqVfVNoKOjrbWrOO3mX3e47cXE/GYgDO5c+
+	meqeri6CB087wcMtwdEOJ0dWnLBDc+ksjEAIKrHS4EfsxuBtY4fxnsVeTPRfphMo49ZF
+	P60PdJya/a8XBcDSqRddg/0aVxq5fUuVIFQRA=
+Received: by 10.216.23.199 with SMTP id v49mr163029wev.43.1287070455859; Thu,
+	14 Oct 2010 08:34:15 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.0.142 with HTTP; Thu, 14 Oct 2010 08:33:54 -0700 (PDT)
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310FFA982@dlee06.ent.ti.com>
 References: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
 	<AANLkTik1nA1jC9f-Vvep2=8U9+VXAWBwPFaRaZC0f4Op@mail.gmail.com>
 	<131E5DFBE7373E4C8D813795A6AA7F080310FFA874@dlee06.ent.ti.com>
 	<AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
-In-Reply-To: <AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.40
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+	<131E5DFBE7373E4C8D813795A6AA7F080310FFA982@dlee06.ent.ti.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 14 Oct 2010 08:33:54 -0700
+X-Google-Sender-Auth: RK_QCJehciK8x4mJ7Qlec2zMDBg
+Message-ID: <AANLkTimRwRDxmvDrPktrK=xjfrmRada_iWRuXH6tqa4o@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Question about OVERRIDES precedence
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -57,74 +59,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 15:29:57 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Oct 2010 15:34:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Chris Larson
-> Sent: Wednesday, October 13, 2010 4:39 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Question about OVERRIDES precedence
->=20
-> On Wed, Oct 13, 2010 at 2:30 PM, Maupin, Chase <chase.maupin@ti.com>
-> wrote:
->=20
-> > That was my thought as well but I can consistently cause this issue.  I
-> > have tested a quick change that seems to fix the issue by reversing the
-> list
-> > before it is used in the for loop.  My change was:
->=20
->=20
-> From discussion on IRC, we think we should just reverse the definition of
-> OVERRIDES in OE, this avoids compatibility issues associated with changin=
-g
-> the implementation.
+On Thu, Oct 14, 2010 at 8:29 AM, Maupin, Chase <chase.maupin@ti.com> wrote:
 
-Chris,
+> So are you saying that we are just going to change the order of how
+> OVERRIDES is appended to in OE like Denys was suggesting?  That would still
+> lead to issues like local not being the highest priority unless we would
+> also change bitbake.conf to define OVERRIDES as
+> "${TARGET_ARCH}:${TARGET_OS}:${MACHINE}:local".  That way we could prepend
+> OVERRIDES in OE and still have local be the last one evaluated.
+>
 
-So are you saying that we are just going to change the order of how OVERRID=
-ES is appended to in OE like Denys was suggesting?  That would still lead t=
-o issues like local not being the highest priority unless we would also cha=
-nge bitbake.conf to define OVERRIDES as "${TARGET_ARCH}:${TARGET_OS}:${MACH=
-INE}:local".  That way we could prepend OVERRIDES in OE and still have loca=
-l be the last one evaluated.
-
-Or are you saying that we should build the whole OVERRIDES list and then re=
-verse it in the OE configuration files?
-
-If that is the case I tried adding a line like:
-
-REVERSE_OVERRIDES=3D${@d.setVar("OVERRIDES", ':'.join(bb.data.getVar('OVERR=
-IDES', d, 1).split(':')[::-1]))}
-
-to the end of my local.conf file.  When I do a bitbake -e to dump my enviro=
-nment I see that OVERRIDES is now defined to:
-
-OVERRIDES=3D"thumb-interwork:libc-glibc:omap3:armv7a:pn-task-arago-toolchai=
-n-tisdk-multimedia-host:fail-fast:build-linux:arm:linux-gnueabi:angstrom:am=
-37x-evm:local"
-
-But while that order looks right it seems like maybe that is being interpre=
-ted to late because my variables that use overrides are not picking up the =
-right values.  i.e. my MACHINE override is not taking precedence over my SO=
-C_FAMILY override.
-
-Any ideas why this does not work?
-
-
-> --
-> Christopher Larson
-> clarson at kergoth dot com
-> Founder - BitBake, OpenEmbedded, OpenZaurus
-> Maintainer - Tslib
-> Senior Software Engineer, Mentor Graphics
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+No.  What I'm saying is, the definition of OVERRIDES in bitbake.conf will be
+reversed.  Not that difficult to understand.  I don't know how I could
+possibly be any clearer here.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
