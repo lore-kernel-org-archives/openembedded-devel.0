@@ -1,53 +1,40 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P6Qsl-0007s8-Au
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P6R8q-0006IX-1k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 18:42:25 +0200
-Received: by wyb40 with SMTP id 40so2733523wyb.6
+	Thu, 14 Oct 2010 18:58:57 +0200
+Received: by iwn2 with SMTP id 2so4117432iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 09:41:50 -0700 (PDT)
+	Thu, 14 Oct 2010 09:58:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=v5md/urBjj+1Tetel/nAWby4E2BR5/Xk/1lrH3oVXKo=;
-	b=njadRoB+r38edEYyOQjA2EQW5+4H2LWHzNe49RxWmo5Va6FThX9uKUZiez4zJ4qD0Y
-	3SCvkazyBQBsKzl0wr1OE6d4eCrBNeodMlxNYAB+vB5VXIV1rl2GUyfvYLTvdBGJ45Nz
-	D3jW1q1rhdQWOjT7NFJCKt2QFA9kVZRyVFo3c=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=wU7dzKh4K0SGE7O/n/nnCutNldOxUU56forcasVnQW4=;
+	b=m0K/lZrywRdLGTI4/PK/3Lszp76onRsLo5MGCBCsOyaF6/uqFYGOMC+roP/zy0G3ME
+	DSgwaBr4Kj9Tm2i4CwXfFIPUSYLgrw5CWRCgXPsvnCQ6D3MnkaSvPlg4pdfkpSw/sfbT
+	MxnZIEKi9E0Zk7CDKiRPZxtlIB+MY+lb86MZc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=Ga3k+Ba6PVzcYlqc23OHh79amYW/6g5nJj4RXLLvYkvP3ZU6NiU2Z15B6/6YJJUDqU
-	NfZxxvsb1hCylHCAXU64e/9VOzlaU4G4sFsZhIpA7c68LbMFClpjmxTWixZoRurGzEYV
-	iY0/FjCBNmAeHHMUh59vZFxPogxHPLHJTAZ34=
-Received: by 10.227.154.68 with SMTP id n4mr10543937wbw.114.1287074510519;
-	Thu, 14 Oct 2010 09:41:50 -0700 (PDT)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=bAn+AK8VUQAKXqfvxPtcpl1ikUobO93kpAWsuYzEZoC3PY5/XuWtOeoCGb3LswOrGP
+	CFwmuI4wGOz8qlNgnuBxDT2VVTHzUAocnbJfWZuucNz/U9vp3tIgw/b2IMunfOU2nHw2
+	kSibYCT4QYKh/ltdNRQB9RptqCHOEV4SzPEz4=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.142 with HTTP; Thu, 14 Oct 2010 09:41:30 -0700 (PDT)
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310FFA9BE@dlee06.ent.ti.com>
-References: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
-	<AANLkTik1nA1jC9f-Vvep2=8U9+VXAWBwPFaRaZC0f4Op@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA874@dlee06.ent.ti.com>
-	<AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA982@dlee06.ent.ti.com>
-	<AANLkTimRwRDxmvDrPktrK=xjfrmRada_iWRuXH6tqa4o@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA9BE@dlee06.ent.ti.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 14 Oct 2010 09:41:30 -0700
-X-Google-Sender-Auth: Olp_ju9omPPyqWKmYHQevjj02fo
-Message-ID: <AANLkTikbJgDWRpKbwtxD3nXfxay1BUgc=JWRZKGMaMWL@mail.gmail.com>
+Received: by 10.231.155.212 with SMTP id t20mr8740635ibw.37.1287075506454;
+	Thu, 14 Oct 2010 09:58:26 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Thu, 14 Oct 2010 09:58:23 -0700 (PDT)
+Date: Thu, 14 Oct 2010 18:58:23 +0200
+Message-ID: <AANLkTikq1TNg1Y=f7tVjpkZR8Hre1FoGyK1gUGTKNDKB@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Question about OVERRIDES precedence
+Subject: empty strings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,57 +48,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 16:42:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Oct 2010 16:58:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Oct 14, 2010 at 9:37 AM, Maupin, Chase <chase.maupin@ti.com> wrote:
+triggered by a remark on irc, I decided to do a grep on "" in all our recipes.
+That gave some interesting observations. I've fixed a few things from
+the type X += "" or X_append = ""
+See the patch set I just send.
 
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Chris Larson
-> > Sent: Thursday, October 14, 2010 10:34 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] Question about OVERRIDES precedence
-> >
-> > On Thu, Oct 14, 2010 at 8:29 AM, Maupin, Chase <chase.maupin@ti.com>
-> > wrote:
-> >
-> > > So are you saying that we are just going to change the order of how
-> > > OVERRIDES is appended to in OE like Denys was suggesting?  That would
-> > still
-> > > lead to issues like local not being the highest priority unless we
-> would
-> > > also change bitbake.conf to define OVERRIDES as
-> > > "${TARGET_ARCH}:${TARGET_OS}:${MACHINE}:local".  That way we could
-> > prepend
-> > > OVERRIDES in OE and still have local be the last one evaluated.
-> > >
-> >
-> > No.  What I'm saying is, the definition of OVERRIDES in bitbake.conf will
-> > be
-> > reversed.  Not that difficult to understand.  I don't know how I could
-> > possibly be any clearer here.
->
-> Great.  I assume this will be on the 1.10 branch as well as the master
-> branch?  Is there anything I can do to help here?
->
+However there are also a few things that are not so obvious and for
+which I want to ask your opinion, Some seem useless, others are
+probably needed, but wanted to raise all issues that could be
+unneeded.
+Note that the recipes are just examples, ofthen there are more recipes
+that have the same pattern.
 
-There is no 1.10 branch in OE, so no.  Again, we're changing it in OE, not
-bitbake.
-
-I guess with the reversal of the definition in bitbake.conf we can then
-> change the appends to prepends in OE as well as reversing the definitions
-> there.  That way the OVERRIDES list should be built up in the proper order.
+libvorbis/libvorbis_1.2.3.bb:EXTRA_OECONF = ""
+aircrack/aircrack_2.1.bb:DEPENDS = ""
+apt/apt-native.inc:PACKAGES = ""  (this is a native recipe, isn't this
+always the case for native recipes ? )
+bind/bind_9.3.1.bb:RPEDENDS = "" (this one has a DEPENDS on openssl, I
+would expect it also to rdepend on openssl in this case)
+c3110x/cx3110x_1.1.bb:export LDFLAGS = ""
+classpath/classpath.inc:RPROVIDES_${PN} = ""
+fuse/fuse-module_2.7.4.bb:      LDFLAGS=""
+glibc/glibc_2.10.1.bb:  CPPFLAGS="" oe_runconf (I was wondering of the
+resetting CPPFLAGS is useful, didn't really dig into this one)
+gs/gs-fonts-std_8.11.bb:HOMEPAGE = ""
+gsoap/gsoap-native_2.7.13.bb:EXTRA_OEMAKE = ""
+ipkg/ipkg-native.inc:PROVIDES = ""  (hm, no provides)
+meta/staging-linkage_1.0.bb:SRC_URI = ""
+psmisc/psmisc.inc:FILES_${PN} = "" (guess all files are added to other
+packages, if that is so, should there be a line like this?)
+tmake/tmake_1.11.bb:FILES = ""
+ttf-fonts/ttf-hunkyfonts_0.3.0.bb:RRECOMMENDS_${PN}-dbg = "" (seems
+somewhat strange to me)
 
 
-Yes, indeed, though I suspect that the existing prepend/appends were done by
-people not thinking about the order, so they may not be  correct the way
-they are now anyway .. :)
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+this one also looked weird; guess it is ok but found it odd that these are reset
+hplip/hplip_2.8.10.bb:EXTRA_OEMAKE = 'BUILD_SYS="" HOST_SYS=""'
+
+I would like opinions on which of these constructs is useful and which
+not. (and yes, I know an assingment may be used to nullify an earlier
+assingment in an .inc file and I am also aware of cases where there is
+something like X_virtclass_native = "" which is used to nullify
+non-native assignments to X.
+
+Enjoy, Frans
+
 
