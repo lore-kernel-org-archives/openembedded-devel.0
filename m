@@ -1,51 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P6PpN-0001HQ-Lz
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P6Qn2-0001L2-M2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 17:34:46 +0200
-Received: by fxm6 with SMTP id 6so1494318fxm.6
+	Thu, 14 Oct 2010 18:36:28 +0200
+Received: by ewy1 with SMTP id 1so2516009ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 08:34:16 -0700 (PDT)
+	Thu, 14 Oct 2010 09:35:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=C42vZk6XIZ5qlEhY0n/yMpUbyT5t0Ljq2d6Sa/NTSJs=;
-	b=Vby42i9PkxJ4tI6EG7JsT3KIIR4nFCoDdlaJ8tM0OcGQ4IwK6mWSl42qI9mXfbR5Zw
-	Y8BDCdQsjjATi76ZOCY4r7Jyb13sNMQdc0y/ClHPDmI57owcOj3wOi2a+dPjbIjV/FID
-	6adGiK/2zbPv3Gx6NJI7mcPWbPRoqO0sRi52o=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=5lyGZBttocNdOfGgLslFZ3tdCORzgUczH4KES6mFNB4=;
+	b=ha5CvbnBZCeOraMlCdg0GZtQqF5DzSqUqgjCG0e3mjniXLM6YgpVEFNNJyr/ec9WxI
+	mpfjV6K+xUMmFuC717/WDg0FAZnSTx09uTcZdXEHQnIpuRTl5GXAwUYlwLHEb6i3vfdj
+	70YrFxFcfu4B6tAbv5n6BpLNitQsuG7QV96dc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=c3otPK0ZC/0w2tPDp8Ec5KQB4djd4MesqVfVNoKOjrbWrOO3mX3e47cXE/GYgDO5c+
-	meqeri6CB087wcMtwdEOJ0dWnLBDc+ksjEAIKrHS4EfsxuBtY4fxnsVeTPRfphMo49ZF
-	P60PdJya/a8XBcDSqRddg/0aVxq5fUuVIFQRA=
-Received: by 10.216.23.199 with SMTP id v49mr163029wev.43.1287070455859; Thu,
-	14 Oct 2010 08:34:15 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.142 with HTTP; Thu, 14 Oct 2010 08:33:54 -0700 (PDT)
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310FFA982@dlee06.ent.ti.com>
-References: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
-	<AANLkTik1nA1jC9f-Vvep2=8U9+VXAWBwPFaRaZC0f4Op@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA874@dlee06.ent.ti.com>
-	<AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA982@dlee06.ent.ti.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 14 Oct 2010 08:33:54 -0700
-X-Google-Sender-Auth: RK_QCJehciK8x4mJ7Qlec2zMDBg
-Message-ID: <AANLkTimRwRDxmvDrPktrK=xjfrmRada_iWRuXH6tqa4o@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Vg5c0DPEzBYplAUpJIHRM2A9ttiqCfpCLnO7D04ZRg9J/ah/qf/8+kDhkPlxC8rjjo
+	0tZQbS1SzcBf+NYywFPUSWSNlVdeRyrC9x5goMk8jPhJ/VhwH5u9PSiVuNkss0PMdK80
+	EAz1sx3FXNFTA1F/VPnRQaQtLYn6JklH0fAE0=
+Received: by 10.213.4.71 with SMTP id 7mr327842ebq.25.1287074156283;
+	Thu, 14 Oct 2010 09:35:56 -0700 (PDT)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id q51sm2981860eeh.10.2010.10.14.09.35.52
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 14 Oct 2010 09:35:53 -0700 (PDT)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Thu, 14 Oct 2010 18:35:40 +0200
+Message-Id: <1287074146-3705-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Question about OVERRIDES precedence
+Subject: [PATCH 1/7] gsmd.inc: remove useless RDEPENDS_append = ""
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,26 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 15:34:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Oct 2010 16:36:30 -0000
 
-On Thu, Oct 14, 2010 at 8:29 AM, Maupin, Chase <chase.maupin@ti.com> wrote:
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
+ recipes/gsm/gsmd.inc |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-> So are you saying that we are just going to change the order of how
-> OVERRIDES is appended to in OE like Denys was suggesting?  That would still
-> lead to issues like local not being the highest priority unless we would
-> also change bitbake.conf to define OVERRIDES as
-> "${TARGET_ARCH}:${TARGET_OS}:${MACHINE}:local".  That way we could prepend
-> OVERRIDES in OE and still have local be the last one evaluated.
->
-
-No.  What I'm saying is, the definition of OVERRIDES in bitbake.conf will be
-reversed.  Not that difficult to understand.  I don't know how I could
-possibly be any clearer here.
+diff --git a/recipes/gsm/gsmd.inc b/recipes/gsm/gsmd.inc
+index 1b8ad29..5210edd 100644
+--- a/recipes/gsm/gsmd.inc
++++ b/recipes/gsm/gsmd.inc
+@@ -16,7 +16,6 @@ S = "${WORKDIR}/gsm"
+ inherit autotools pkgconfig update-rc.d
+ # handle update-rc.d RDEPENDS_${PN} manually, we don't need it on
+ # anything but gsmd
+-RDEPENDS_append = ""
+ 
+ INITSCRIPT_NAME = "gsmd"
+ INITSCRIPT_PARAMS = "defaults 35"
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.6.4.2
+
+
 
