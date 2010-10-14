@@ -1,47 +1,34 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P6OO0-0006UO-VZ
+	(envelope-from <m.schuknecht@DResearch.de>) id 1P6Oo1-0008Do-L2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 16:02:34 +0200
-Received: by wyb40 with SMTP id 40so2546984wyb.6
+	Thu, 14 Oct 2010 16:29:20 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id D332C491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 07:01:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=DJTk5i8sDEpZVysknHO6HfbjluCuDK8hmb8gPD1J/5c=;
-	b=mr6rSR6RbeZ96/rzZ4P7CS4rR36dtN8w5Jx2xEKLkxYDc5h7y8HB9WOrmjVCAXanLE
-	4umj1ajTGRJg3weAD3LDa6CgPY51wV4i6KIWPI3oTnrtPhaLgYwslKx9gZecKE4ULkC9
-	g/vk6gJwV9860iHiD21pv2DS0nR7C5NMWyC5U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=OsEthqXsF1zl8zhqr9CW6WxYBghtaTGzC+tK2ZQd8x23jXe/KUxHdvHxQCHYEQMJV8
-	mdqVLyNnPqXsem8BVx0n2AeM0Os2wjVgfXC7KSHPDD50WsVZu91PY5E6xYipW81cj5tI
-	RWHkN6e3EVl/zT70m9MhG6hYbMNdsMnjimz6s=
-Received: by 10.216.187.143 with SMTP id y15mr10006938wem.74.1287064913049;
-	Thu, 14 Oct 2010 07:01:53 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.142 with HTTP; Thu, 14 Oct 2010 07:01:32 -0700 (PDT)
-In-Reply-To: <26434292.80091287048749327.JavaMail.defaultUser@defaultHost>
-References: <26434292.80091287048749327.JavaMail.defaultUser@defaultHost>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 14 Oct 2010 07:01:32 -0700
-X-Google-Sender-Auth: W_0haM-Urnu7rFGGkQfbQZDfgBw
-Message-ID: <AANLkTi=hDDtueQerTUy9FTcpoCbJ9AYozok=-XBkWe7R@mail.gmail.com>
+	Thu, 14 Oct 2010 16:28:47 +0200 (CEST)
+Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 14 Oct 2010 16:28:47 +0200
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10022)
+	id 2F1D07207E; Thu, 14 Oct 2010 16:28:47 +0200 (CEST)
+From: Mario Schuknecht <m.schuknecht@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Thu, 14 Oct 2010 16:28:32 +0200
+Message-Id: <1287066512-6337-1-git-send-email-m.schuknecht@dresearch.de>
+X-Mailer: git-send-email 1.7.1
+X-OriginalArrivalTime: 14 Oct 2010 14:28:47.0719 (UTC)
+	FILETIME=[1D1D2F70:01CB6BAC]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: m.schuknecht@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: S98configure role
+Subject: [PATCH] linux-2.6.24: tcp: ioctl type SIOCOUTQNSD returns amount of data not sent
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,27 +42,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 14:02:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Oct 2010 14:29:20 -0000
 
-On Thu, Oct 14, 2010 at 2:32 AM, l.bolognini@tiscali.it <
-l.bolognini@tiscali.it> wrote:
+In contrast to SIOCOUTQ which returns the amount of data sent
+but not yet acknowledged plus data not yet sent this patch only
+returns the data not sent.
 
-> I'm wondering what is the role of this script, placed in /etc/rcS.d.
->
-> What I guess is that, for some reasons, some packages get installed but
-> not configured (then unpacked) since their postinstall script returns
-> non zero value.
->
+For various methods of live streaming bitrate control it may
+be helpful to know how much data are in the tcp outqueue are
+not sent yet.
 
-Yes, this is correct.  Some postinsts do things which can be done at image
-creation time on the build machine, but not all.  Those which must *run* the
-binaries in the filesystem, for example, cannot be run at build time, so
-must be run at first boot time on the target.
+Signed-off-by: Mario Schuknecht <m.schuknecht@dresearch.de>
+---
+ .../hipox/siocoutqsnd.patch                        |   54 ++++++++++++++++++++
+ .../linux-libc-headers_2.6.24.bb                   |    4 ++
+ 2 files changed, 58 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/linux-libc-headers/linux-libc-headers-2.6.24/hipox/siocoutqsnd.patch
+
+diff --git a/recipes/linux-libc-headers/linux-libc-headers-2.6.24/hipox/siocoutqsnd.patch b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/hipox/siocoutqsnd.patch
+new file mode 100644
+index 0000000..616a860
+--- /dev/null
++++ b/recipes/linux-libc-headers/linux-libc-headers-2.6.24/hipox/siocoutqsnd.patch
+@@ -0,0 +1,54 @@
++tcp: ioctl type SIOCOUTQNSD returns amount of data not sent
++
++In contrast to SIOCOUTQ which returns the amount of data sent
++but not yet acknowledged plus data not yet sent this patch only
++returns the data not sent.
++
++For various methods of live streaming bitrate control it may
++be helpful to know how much data are in the tcp outqueue are
++not sent yet.
++
++Signed-off-by: Mario Schuknecht <m.schuknecht@dresearch.de>
++
++diff -Nurd linux-2.6.24.orig//include/asm-arm/ioctls.h linux-2.6.24/include/asm-arm/ioctls.h
++--- linux-2.6.24.orig//include/asm-arm/ioctls.h	2010-10-08 09:03:02.000000000 +0200
+++++ linux-2.6.24/include/asm-arm/ioctls.h	2010-10-08 09:09:55.000000000 +0200
++@@ -53,6 +53,8 @@
++ #define TIOCGPTN	_IOR('T',0x30, unsigned int) /* Get Pty Number (of pty-mux device) */
++ #define TIOCSPTLCK	_IOW('T',0x31, int)  /* Lock/unlock Pty */
++ 
+++#define TIOCOUTQNSD	0x5437
+++
++ #define FIONCLEX	0x5450  /* these numbers need to be adjusted. */
++ #define FIOCLEX		0x5451
++ #define FIOASYNC	0x5452
++diff -Nurd linux-2.6.24.orig//include/linux/sockios.h linux-2.6.24/include/linux/sockios.h
++--- linux-2.6.24.orig//include/linux/sockios.h	2010-10-08 09:03:02.000000000 +0200
+++++ linux-2.6.24/include/linux/sockios.h	2010-10-08 09:10:43.000000000 +0200
++@@ -23,6 +23,7 @@
++ /* Linux-specific socket ioctls */
++ #define SIOCINQ		FIONREAD
++ #define SIOCOUTQ	TIOCOUTQ
+++#define SIOCOUTQNSD	TIOCOUTQNSD
++ 
++ /* Routing table calls. */
++ #define SIOCADDRT	0x890B		/* add routing table entry	*/
++diff -Nurd linux-2.6.24.orig//net/ipv4/tcp.c linux-2.6.24/net/ipv4/tcp.c
++--- linux-2.6.24.orig//net/ipv4/tcp.c	2010-10-08 09:02:59.000000000 +0200
+++++ linux-2.6.24/net/ipv4/tcp.c	2010-10-08 09:10:43.000000000 +0200
++@@ -444,6 +444,15 @@
++ 		else
++ 			answ = tp->write_seq - tp->snd_una;
++ 		break;
+++	case SIOCOUTQNSD:
+++		if (sk->sk_state == TCP_LISTEN)
+++			return -EINVAL;
+++
+++		if ((1 << sk->sk_state) & (TCPF_SYN_SENT | TCPF_SYN_RECV))
+++			answ = 0;
+++		else
+++			answ = tp->write_seq - tp->snd_nxt;
+++		break;
++ 	default:
++ 		return -ENOIOCTLCMD;
++ 	}
+diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+index e95299b..421937b 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
++++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.24.bb
+@@ -9,6 +9,10 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+            file://export_falloc_h.patch \
+            file://unifdef.patch"
+ 
++SRC_URI_append_hipox = " \
++	file://siocoutqsnd.patch \
++	"
++
+ S = "${WORKDIR}/linux-${PV}"
+ 
+ do_configure() {
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.7.1
+
+
 
