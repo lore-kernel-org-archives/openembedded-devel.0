@@ -1,48 +1,27 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P6P1I-00005i-L4
+Received: from mrqout1-sorbs.tiscali.it ([195.130.225.22]
+	helo=mrqout1.tiscali.it) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <l.bolognini@tiscali.it>) id 1P6P44-0000Cc-Hf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 16:43:01 +0200
-Received: by wwe15 with SMTP id 15so6858397wwe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 07:42:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=8XIMWD6D0IhWHdsBQKk49lYUGIo9UFZeg5ghlQB5NpM=;
-	b=uIpTrR9GA42gMqAOoTVeogz20pvQtaQQGADDIN3RRrT10AsgWUL1Q+wBdbVs3lEl0B
-	4uccH8vqsUVrIzmuRSir87N9tR6lrmC3KoeeEjJmAL33lQxCcKf0aDCg3A7nqgNs54UG
-	nEGPFSRt1xPg/oLUk7xCFAUXeDSTFhxkmJwSM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=fN9p18C0V8P/Py0uqD1eHUobAfjq23Oyj5tlw+8KquXbf5DLshuQYAT2OL0VkTbU6i
-	pMU0KFLLhJdaWRlOFrhdnV5UjfMzQYQOBAP8rt6Ud+Ix6RfbXn2v8LjX+d+HHult84/q
-	8QL+Q6uOg3OOp6D7WVzxaFHwX9wSxJx9i88gU=
-Received: by 10.216.17.9 with SMTP id i9mr64803wei.80.1287067351584; Thu, 14
-	Oct 2010 07:42:31 -0700 (PDT)
+	Thu, 14 Oct 2010 16:45:53 +0200
+Received: from [10.39.115.25] by mrq-1 with esmtp (Exim)
+	id 1P6P3a-0003IN-KE; Thu, 14 Oct 2010 16:45:22 +0200
+Received: from ps-wm5 (10.39.75.205) by mail-5-it.mail.tiscali.sys (8.5.124)
+	id 4CA2F4DC00621C77 for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 16:45:22 +0200
+Message-ID: <10213762.146341287067522122.JavaMail.defaultUser@defaultHost>
+Date: Thu, 14 Oct 2010 16:45:22 +0200 (CEST)
+From: "l.bolognini@tiscali.it" <l.bolognini@tiscali.it>
+To: <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.142 with HTTP; Thu, 14 Oct 2010 07:36:46 -0700 (PDT)
-In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501B11B1A@deimsg40.de.net.world>
-References: <26434292.80091287048749327.JavaMail.defaultUser@defaultHost>
-	<AANLkTi=hDDtueQerTUy9FTcpoCbJ9AYozok=-XBkWe7R@mail.gmail.com>
-	<0B51A1E7C61D114DAE6FC10B0FD0ABA501B11B1A@deimsg40.de.net.world>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 14 Oct 2010 07:36:46 -0700
-X-Google-Sender-Auth: iS_ycziRbuAH1jhm76k1zu3ri78
-Message-ID: <AANLkTikEUi24rixCaNEEtwhAufNv_D7OPt-WoFCQaAXu@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+xOriginalSenderIP: 89.118.158.66
+X-SA-Exim-Connect-IP: 195.130.225.22
+X-SA-Exim-Mail-From: l.bolognini@tiscali.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: S98configure role
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -57,41 +36,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 14:43:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Oct 2010 14:45:53 -0000
+Content-Type: text/plain;charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 14, 2010 at 7:33 AM, Hauser, Wolfgang (external) <
-Wolfgang.Hauser.external@cassidian.com> wrote:
+Thank you Chris et al. for your reply.
+Even if I told you in my last=20
+mail I had no chanche to investigate further, I took some time to burn=20
+some SD and tried to understand the topic.
+Well, in my build machine, 4=20
+packages remain unpacked:
+openssh-sshd
+net-snmp-server
+udev
+update-
+modules
 
-> for me the S98configure is a NO GO !
-> I have to provide read only images that have to be used w/o any first boot
-> configurations.
+But, since openssh-sshd and update-modules are intentionally=20
+left unpacked (if test "x$D" !=3D "x"; then exit 1 - in the .postinst=20
+script), it seems that for udev and net-snmp-server something goes=20
+wrong.
+Looking in depth, I saw that in udev_141.bb, inside=20
+pkg_postinst_udev_append(), the usual test
+if test "x$D" !=3D "x"; then
+
+        OPT=3D"-r $D"
+else
+        OPT=3D"-s"
+fi
+isn't written before=20
+update-rc.d command:
+update-rc.d $OPT udev-cache start 12 S .
+Simply,=20
+this piece of code is not available.
+Result: update.rc.d fails in the=20
+build machine because OPT is empty.
+Then we have not S03udev and=20
+S12udev-cache init links and S98configure can repair the situation but=20
+only from 2nd boot on.
+To solve the problem I had to add that usual=20
+test inside pkg_postinst_udev_append() in udev_141.bb, then bitbake=20
+udev again.
+
+Similar thing happens for net-snmp-server, where the=20
+postinst script has the same piece of code written twice, resulting in=20
+an error and then in the flag unpacked for the package.
+Commenting out=20
+the first occurrance I got good results.
+
+Here net-snmp configuration=20
+by means of S98configure is less dramatical because net-snmp agent=20
+starts after S98configure and then everything is fine also in 1st boot.
+
+
+I hope this investigation could help someone involved in the same=20
+problems,
+bye,
+Luca
+
+----Messaggio originale----
+Da: clarson@kergoth.
+com
+Data: 14/10/2010 16.01
+A: <openembedded-devel@lists.openembedded.
+org>
+Ogg: Re: [oe] S98configure role
+
+On Thu, Oct 14, 2010 at 2:32 AM,=20
+l.bolognini@tiscali.it <
+l.bolognini@tiscali.it> wrote:
+
+> I'm=20
+wondering what is the role of this script, placed in /etc/rcS.d.
 >
-> For me there is no necessary to final install a image at first boot.
->
-> Normally all configurations are able to be done at image creation time by
-> some scripting.
-> For example, adding a user can be done by scripting, and not necessarily
-> have to be done by adduser/addgroup.
->
-> Its up to the recipes to create packages which are installable offline
-> totally and completely.
->
-> Handling of individual settings like serial numbers, keys ... for me should
-> not be a matter of first boot.
-> It may be a matter of flashing(environment partition) or special
-> configuration partitions.
->
-> There may be some cases, a first boot installation is necessary, but for me
-> it is better to have an unmodified/unmodifieable image on the target.
+>=20
+What I guess is that, for some reasons, some packages get installed but
+
+> not configured (then unpacked) since their postinstall script returns
+
+> non zero value.
 >
 
-Then go ahead and modify your tree to do so, but don't expect OE to come
-that way out of the box.
--- 
+Yes, this is correct.  Some postinsts do things=20
+which can be done at image
+creation time on the build machine, but not=20
+all.  Those which must *run* the
+binaries in the filesystem, for=20
+example, cannot be run at build time, so
+must be run at first boot time=20
+on the target.
+--=20
 Christopher Larson
 clarson at kergoth dot com
+
 Founder - BitBake, OpenEmbedded, OpenZaurus
 Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Senior=20
+Software Engineer, Mentor Graphics
+
+_______________________________________________
+Openembedded-devel=20
+mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.
+linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+
+
+
+Supera i limiti: raddoppia la velocit=C3=A0 da 10 a 20 Mega!   Risparmia co=
+n Tutto Incluso: telefono + adsl 20 mega a soli 26,60 =E2=82=AC al mese per=
+ un anno!  SCONTO DI 160 EURO!  http://abbonati.tiscali.it/telefono-adsl/pr=
+odotti/tc/tuttoincluso/?WT.mc_id=3D01fw
+
 
