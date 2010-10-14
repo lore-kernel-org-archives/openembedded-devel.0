@@ -1,33 +1,31 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sean@chumby.com>) id 1P6ILm-0003Z2-8w
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 09:35:43 +0200
-Received: by pzk28 with SMTP id 28so841397pzk.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 00:35:07 -0700 (PDT)
-Received: by 10.142.144.7 with SMTP id r7mr8478547wfd.192.1287041706041;
-	Thu, 14 Oct 2010 00:35:06 -0700 (PDT)
-Received: from [192.168.10.100] (cm198.psi191.maxonline.com.sg
-	[58.146.191.198])
-	by mx.google.com with ESMTPS id y42sm6859981wfd.10.2010.10.14.00.35.04
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 14 Oct 2010 00:35:05 -0700 (PDT)
-From: Sean Cross <sean@chumby.com>
-Date: Thu, 14 Oct 2010 15:35:05 +0800
-Message-Id: <0EDC1EA2-3238-4748-B2C4-C074DA741C10@chumby.com>
-To: Openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v1081)
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 209.85.210.47
-X-SA-Exim-Mail-From: sean@chumby.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P6Jaf-0007Co-1h for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 10:55:12 +0200
+Received: from f053038002.adsl.alicedsl.de ([78.53.38.2] helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P6JaE-0003Uz-H5 for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 08:54:42 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTimanta=-eaEnYmx1J9XSfwm2QzrfbdjB8-51tNr@mail.gmail.com>
+References: <1286971290.3904.6.camel@mattotaupa>
+	<AANLkTimanta=-eaEnYmx1J9XSfwm2QzrfbdjB8-51tNr@mail.gmail.com>
+Date: Thu, 14 Oct 2010 10:54:41 +0200
+Message-ID: <1287046481.4039.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] c-ares: Fix configure.ac
+Subject: Re: eglibc-initial-2.12-r15.6+svnr11762: commit d8ce8a: `do_install` fails with `cannot remove `/usr/include/limits.h': Permission denied`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,58 +39,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 07:35:43 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 14 Oct 2010 08:55:12 -0000
+X-Groupsio-MsgNum: 24832
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-fbuxfAdnEBm7WN1guFIC"
+
+--=-fbuxfAdnEBm7WN1guFIC
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Get configure to work with our version of autoconf by fixing
-the syntax of configure.ac
----
- recipes/c-ares/0001-fix-configure.ac.patch |   12 ++++++++++++
- recipes/c-ares/c-ares_1.5.3.bb             |    4 +++-
- 2 files changed, 15 insertions(+), 1 deletions(-)
- create mode 100644 recipes/c-ares/0001-fix-configure.ac.patch
+Am Mittwoch, den 13.10.2010, 09:23 -0700 schrieb Khem Raj:
+> On Wed, Oct 13, 2010 at 5:01 AM, Paul Menzel wrote:
 
-diff --git a/recipes/c-ares/0001-fix-configure.ac.patch =
-b/recipes/c-ares/0001-fix-configure.ac.patch
-new file mode 100644
-index 0000000..c8c3e66
---- /dev/null
-+++ b/recipes/c-ares/0001-fix-configure.ac.patch
-@@ -0,0 +1,12 @@
-+diff -ur c-ares-1.5.3-stock/configure.ac c-ares-1.5.3/configure.ac
-+--- c-ares-1.5.3-stock/configure.ac	2010-10-14 07:18:36.437023208 =
-+0000
-++++ c-ares-1.5.3/configure.ac	2010-10-14 07:18:39.527024687 +0000
-+@@ -811,7 +811,7 @@
-+   ],[
-+     AC_MSG_RESULT([yes])
-+     eval "ac_cv_func_$func=3Dyes"
-+-    AC_DEFINE_UNQUOTED([AS_TR_CPP([HAVE_$func])], [1],
-++    AC_DEFINE_UNQUOTED(AS_TR_CPP([HAVE_$func]), [1],
-+       [Define to 1 if you have the $func function.])
-+   ],[
-+     AC_MSG_RESULT([but still no])
-diff --git a/recipes/c-ares/c-ares_1.5.3.bb =
-b/recipes/c-ares/c-ares_1.5.3.bb
-index 0def152..2a7d0ff 100644
---- a/recipes/c-ares/c-ares_1.5.3.bb
-+++ b/recipes/c-ares/c-ares_1.5.3.bb
-@@ -1,7 +1,9 @@
- DESCRIPTION =3D "c-ares is a C library that resolves names =
-asynchronously."
- HOMEPAGE =3D "http://daniel.haxx.se/projects/c-ares/"
- SECTION =3D "libs"
--SRC_URI =3D "http://daniel.haxx.se/projects/c-ares/c-ares-${PV}.tar.gz"
-+SRC_URI =3D "http://daniel.haxx.se/projects/c-ares/c-ares-${PV}.tar.gz =
-\
-+           file://0001-fix-configure.ac.patch \
-+"
- LICENSE =3D "MIT"
- S =3D "${WORKDIR}/c-ares-${PV}"
- PR =3D "r1"
---=20
-1.7.0.4
+> >        $ bitbake console-image
+> >        [=E2=80=A6]
+> >        | make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-d=
+ev/work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc-=
+2_12/libc'
+> >        | make[1]: Entering directory `/oe/build-minimal-eglibc/minimal-=
+dev/work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc=
+-2_12/libc'
+> >        | /oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/b=
+in/install -c -m 644 include/limits.h /usr/include/limits.h
+> >        | /oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/b=
+in/install: cannot remove `/usr/include/limits.h': Permission denied
+> >        | make[1]: *** [/usr/include/limits.h] Error 1
+> >        | make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-d=
+ev/work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc-=
+2_12/libc'
+> >        | make: *** [install-headers] Error 2
+> >        | FATAL: oe_runmake failed
+> >        | ERROR: Function do_install failed
+> >        NOTE: package eglibc-initial-2.12-r15.6+svnr11762: task do_insta=
+ll: Failed
+> >
+> > with `minimal-eglibc` for `MACHINE =3D "beagleboard"`.
+> >
+> > It tries to delete a file of the build system. I guess the Makefile was
+> > changed in the latest version bump in d8ce8a [1].
+> >
+> > Should I CC the eglibc folks when experiencing such problems?
+>=20
+> hmm whats your host make version ?
+
+        $ make --version
+        make: getcwd: No such file or directory
+        GNU Make 3.81
+        Copyright (C) 2006  Free Software Foundation, Inc.
+        This is free software; see the source for copying conditions.
+        There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+        PARTICULAR PURPOSE.
+       =20
+        This program built for i486-pc-linux-gnu
+
+> I do not see this problem on ubuntu 10.10
+
+The build host is running Debian Squeeze.
+
+I am doing another test build now.
 
 
+Thanks,
 
+Paul
+
+
+> > [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dd8c=
+e8acea72b7e7e5512accce434aa4b892cf0a8
+
+--=-fbuxfAdnEBm7WN1guFIC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky2xT8ACgkQPX1aK2wOHVjjPwCghNkbCPxuF1CFYDufHdonGVRs
+tIYAni+oZWWaBc7FNKu5lFKe20UcBlA5
+=2zpj
+-----END PGP SIGNATURE-----
+
+--=-fbuxfAdnEBm7WN1guFIC--
