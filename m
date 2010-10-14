@@ -1,41 +1,49 @@
-Received: from mail.reciva.com ([62.7.80.110] helo=crown.reciva.com)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1P6OxF-0008R7-Vg
+	(envelope-from <kergoth@gmail.com>) id 1P6P1I-00005i-L4
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 16:38:50 +0200
-Received: from [192.168.106.10] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1P6Own-0004Sc-Mj
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 15:38:21 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1P6Own-0003dc-G7
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 15:38:21 +0100
-From: Phil Blundell <philb@gnu.org>
+	Thu, 14 Oct 2010 16:43:01 +0200
+Received: by wwe15 with SMTP id 15so6858397wwe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Oct 2010 07:42:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=8XIMWD6D0IhWHdsBQKk49lYUGIo9UFZeg5ghlQB5NpM=;
+	b=uIpTrR9GA42gMqAOoTVeogz20pvQtaQQGADDIN3RRrT10AsgWUL1Q+wBdbVs3lEl0B
+	4uccH8vqsUVrIzmuRSir87N9tR6lrmC3KoeeEjJmAL33lQxCcKf0aDCg3A7nqgNs54UG
+	nEGPFSRt1xPg/oLUk7xCFAUXeDSTFhxkmJwSM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=fN9p18C0V8P/Py0uqD1eHUobAfjq23Oyj5tlw+8KquXbf5DLshuQYAT2OL0VkTbU6i
+	pMU0KFLLhJdaWRlOFrhdnV5UjfMzQYQOBAP8rt6Ud+Ix6RfbXn2v8LjX+d+HHult84/q
+	8QL+Q6uOg3OOp6D7WVzxaFHwX9wSxJx9i88gU=
+Received: by 10.216.17.9 with SMTP id i9mr64803wei.80.1287067351584; Thu, 14
+	Oct 2010 07:42:31 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.0.142 with HTTP; Thu, 14 Oct 2010 07:36:46 -0700 (PDT)
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501B11B1A@deimsg40.de.net.world>
+References: <26434292.80091287048749327.JavaMail.defaultUser@defaultHost>
+	<AANLkTi=hDDtueQerTUy9FTcpoCbJ9AYozok=-XBkWe7R@mail.gmail.com>
+	<0B51A1E7C61D114DAE6FC10B0FD0ABA501B11B1A@deimsg40.de.net.world>
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 14 Oct 2010 07:36:46 -0700
+X-Google-Sender-Auth: iS_ycziRbuAH1jhm76k1zu3ri78
+Message-ID: <AANLkTikEUi24rixCaNEEtwhAufNv_D7OPt-WoFCQaAXu@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTikHdhZ4ouoyA5UdyxoZBeR+f-bhHfMBwiaA6bCo@mail.gmail.com>
-References: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
-	<AANLkTik1nA1jC9f-Vvep2=8U9+VXAWBwPFaRaZC0f4Op@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFA874@dlee06.ent.ti.com>
-	<AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
-	<i97082$i6g$2@dough.gmane.org>
-	<AANLkTikHdhZ4ouoyA5UdyxoZBeR+f-bhHfMBwiaA6bCo@mail.gmail.com>
-Date: Thu, 14 Oct 2010 15:38:21 +0100
-Message-ID: <1287067101.3770.490.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 192.168.106.10
-X-SA-Exim-Connect-IP: 62.7.80.110
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Question about OVERRIDES precedence
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: S98configure role
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,42 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 14:38:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Oct 2010 14:43:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, 2010-10-14 at 06:59 -0700, Chris Larson wrote:
-> On Thu, Oct 14, 2010 at 6:23 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
-> > Isn't the definition covered in the bitbake docs? I'm in favour of
-> > fixing bitbake instead working around it in OE.
-> >
-> 
-> As far as I can tell:
-> 1. The bitbake docs don't cover the ordering.
-> 2. The behavior isn't a bug, it's a mismatch between OE's definition and
-> bitbake's implementation, and bitbake has been this way since 2003.
+On Thu, Oct 14, 2010 at 7:33 AM, Hauser, Wolfgang (external) <
+Wolfgang.Hauser.external@cassidian.com> wrote:
 
-Agreed.  And there is plenty of existing code in OE which depends on the
-current ordering.  OE's bitbake.conf even has a big comment describing
-the behaviour that it expects:
+> for me the S98configure is a NO GO !
+> I have to provide read only images that have to be used w/o any first boot
+> configurations.
+>
+> For me there is no necessary to final install a image at first boot.
+>
+> Normally all configurations are able to be done at image creation time by
+> some scripting.
+> For example, adding a user can be done by scripting, and not necessarily
+> have to be done by adduser/addgroup.
+>
+> Its up to the recipes to create packages which are installable offline
+> totally and completely.
+>
+> Handling of individual settings like serial numbers, keys ... for me should
+> not be a matter of first boot.
+> It may be a matter of flashing(environment partition) or special
+> configuration partitions.
+>
+> There may be some cases, a first boot installation is necessary, but for me
+> it is better to have an unmodified/unmodifieable image on the target.
+>
 
-# Overrides are processed left to right, so the ones that are named later take precedence.
-# You generally want them to go from least to most specific.
-# 
-# This means that an envionment variable named '<foo>_arm' overrides an
-# environment variable '<foo>' (when ${TARGET_ARCH} is arm).
-# an environment variable '<foo>_ramses' overrides '<foo>' but doesn't override
-# '<foo>_arm' when ${MACHINE} is 'ramses'. 
-# If you use combination ie '<foo>_arm_ramses', then '<foo>_arm_ramses' will override 
-# '<foo>_arm' and then '<foo>' will be overriden with that value from '<foo>_arm'.
-# And finally '<foo>_local' overrides anything, but with lowest priority.
-
-So, changing the bitbake behaviour at this late stage seems like a very
-bad idea.  If the documentation calls for something else then I think
-the documentation should be fixed to match the reality, not vice versa.
-
-p.
-
-
-
+Then go ahead and modify your tree to do so, but don't expect OE to come
+that way out of the box.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
