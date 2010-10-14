@@ -1,48 +1,31 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <frederik.sdun@googlemail.com>) id 1P6DqY-00038F-PR
+Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1P6Gkc-0003w9-8j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 04:47:12 +0200
-Received: by bwz9 with SMTP id 9so96160bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Oct 2010 19:46:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:to:in-reply-to
-	:references:content-type:date:message-id:mime-version:x-mailer;
-	bh=DWmcK+BKujZwEb5LYx4HbyMgU53kEDoUmGK0kZOdPAI=;
-	b=hQ9mI4VMzpaVFLRb+csIrq2pWgPP3D3bN4iKDaArLclTmK18CgWMyDDwHSoB6cqgJg
-	IAKNKRGR+hYIXPmb0Iw4Xni2FTzbk90VmqbqD/Ium+sZUsRFfX9Gza5ronrHDm3204Ej
-	pzQVTIBGCmhcBSNk2uRmbvxFM18wXqBfZdea4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=subject:from:to:in-reply-to:references:content-type:date:message-id
-	:mime-version:x-mailer;
-	b=Fd2SuDoHcpvr3VXoU2Rr0Zt+lYS+1nBAjzTLrtw0fnCu1xf2BMJUBmbWbnSS+f1SWh
-	6ubtjXW6eN6s20jcgVA7GI/h2WCdc2xJcyr+g0s5wgrkTmgCzD/KNmFoOeWhp/WhLgdQ
-	tunSI/e+BmGg1CLtGYkj9F4QtfgQ0q+lz9Npo=
-Received: by 10.204.54.196 with SMTP id r4mr8048013bkg.5.1287024403002;
-	Wed, 13 Oct 2010 19:46:43 -0700 (PDT)
-Received: from [192.168.2.150] ([93.216.254.93])
-	by mx.google.com with ESMTPS id g12sm9724496bkb.2.2010.10.13.19.46.40
-	(version=SSLv3 cipher=RC4-MD5); Wed, 13 Oct 2010 19:46:41 -0700 (PDT)
-From: Frederik Sdun <frederik.sdun@googlemail.com>
+	Thu, 14 Oct 2010 07:53:17 +0200
+Received: (qmail invoked by alias); 14 Oct 2010 05:52:45 -0000
+Received: from p50882BC6.dip.t-dialin.net (EHLO localhost.localdomain)
+	[80.136.43.198]
+	by mail.gmx.net (mp039) with SMTP; 14 Oct 2010 07:52:45 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18vHO06MJAvBMeqJ8GWE3D8M+WH7xaX8hIiGnzsuy
+	1iW2tEbEXAvkUN
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1286730733.3808.92.camel@mattotaupa>
-References: <1286728355.3808.55.camel@mattotaupa>
-	<1286730733.3808.92.camel@mattotaupa>
-Date: Tue, 12 Oct 2010 19:43:15 +0200
-Message-ID: <1286905395.13585.14.camel@brain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: frederik.sdun@googlemail.com
+Date: Thu, 14 Oct 2010 07:51:22 +0200
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201010140751.22834.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.23
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,
-	DATE_IN_PAST_24_48,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: environment variable `PKG_CONFIG` not set
+Subject: omap3-sgx-modules fail on patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,59 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 02:47:12 -0000
-X-Groupsio-MsgNum: 24823
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-O6XfJmODWiRCjMtjePo6"
+X-List-Received-Date: Thu, 14 Oct 2010 05:53:18 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
---=-O6XfJmODWiRCjMtjePo6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Good morning,
 
-Am Sonntag, den 10.10.2010, 19:12 +0200 schrieb Paul Menzel:
-> Am Sonntag, den 10.10.2010, 18:32 +0200 schrieb Paul Menzel:
-> > Dear OE folks,
-> >=20
-> >=20
-> > looking at `run.do_compile.xxxxx` I noticed that `PKG_CONFIG` is not
-> > set. Several other pkg-config related environment variable get set, so =
-I
-> > am quite surprised.
-> >=20
-> > Does this have to be added to `classes/{native,nativesdk,sdk}.bbclass`?
->=20
-> This would also be the =E2=80=9Ccorrect=E2=80=9D fix for [1] and [2] if I=
- am not wrong.
->=20
->=20
-> Thanks,
->=20
-> Paul
->=20
->=20
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-August/0=
-23029.html
-> [2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-Septembe=
-r/024217.html
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+last night I had a fresh build on commit 9ac50f2494f029df76176117cb77a21491194855 / Wed Oct 13 21:36:53 2010 +0200. It failed patching omap3-sgx-modules:
 
-It already uses the correct pkg-config because ${SYSROOT_NATIVE} is in
-$PATH. But pkg-config --variable doesn't prefix $PKG_CONFIG_SYSROOT_DIR
+ERROR: Error in executing python function in: /home/Superandi/data/OpenEmbedded/gumstix-oe/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
+ERROR: Exception:<class 'oe.patch.CmdError'> Message:Command Error: exit status: 1  Output:
+Applying patch 0002-Compile-fixes-for-recent-kernels.patch
+patching file services4/system/omap3630/sysutils_linux.c
+Hunk #1 FAILED at 32.
+Hunk #2 FAILED at 49.
+2 out of 2 hunks FAILED -- rejects in file services4/system/omap3630/sysutils_linux.c
+Patch 0002-Compile-fixes-for-recent-kernels.patch does not apply (enforce with -f)
+ERROR: Printing the environment of the function
+ERROR: Function patch_do_patch failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/Superandi/data/OpenEmbedded/gumstix-oe/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb do_patch failed
 
---=-O6XfJmODWiRCjMtjePo6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+I know there was some change on this not long ago - but I haven't got the time to check further. Can someone take care?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Andreas
 
-iEYEABECAAYFAky0njMACgkQvbwBzXsbjyqZhgCdGgDNeeb5D4MN11Ly+p8o8JgA
-4sUAoJ1Ch0dvhXbJUZN21UF9RMzZxSJ8
-=G2Td
------END PGP SIGNATURE-----
 
---=-O6XfJmODWiRCjMtjePo6--
