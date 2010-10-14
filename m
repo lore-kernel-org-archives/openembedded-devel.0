@@ -1,40 +1,41 @@
-Received: from mail-dotnet2.eads.net ([80.156.45.105])
+Received: from mail.reciva.com ([62.7.80.110] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1P6Osf-0008Km-13 for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 16:34:05 +0200
-Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
-	by mail-dotnet2.eads.net with ESMTP; 14 Oct 2010 16:25:40 +0200
-Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
-	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.7381); 
-	Thu, 14 Oct 2010 16:33:25 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 14 Oct 2010 16:33:25 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Thu, 14 Oct 2010 16:33:24 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501B11B1A@deimsg40.de.net.world>
-In-Reply-To: <AANLkTi=hDDtueQerTUy9FTcpoCbJ9AYozok=-XBkWe7R@mail.gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] S98configure role
-Thread-Index: ActrqHQPw8oOP021TgK1VAbcPx/DYgAACs9A
-References: <26434292.80091287048749327.JavaMail.defaultUser@defaultHost>
-	<AANLkTi=hDDtueQerTUy9FTcpoCbJ9AYozok=-XBkWe7R@mail.gmail.com>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 14 Oct 2010 14:33:25.0381 (UTC)
-	FILETIME=[C29D0B50:01CB6BAC]
-X-SA-Exim-Connect-IP: 80.156.45.105
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@cassidian.com
+	(envelope-from <philb@gnu.org>) id 1P6OxF-0008R7-Vg
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 16:38:50 +0200
+Received: from [192.168.106.10] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1P6Own-0004Sc-Mj
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 15:38:21 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1P6Own-0003dc-G7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 15:38:21 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTikHdhZ4ouoyA5UdyxoZBeR+f-bhHfMBwiaA6bCo@mail.gmail.com>
+References: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
+	<AANLkTik1nA1jC9f-Vvep2=8U9+VXAWBwPFaRaZC0f4Op@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310FFA874@dlee06.ent.ti.com>
+	<AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
+	<i97082$i6g$2@dough.gmane.org>
+	<AANLkTikHdhZ4ouoyA5UdyxoZBeR+f-bhHfMBwiaA6bCo@mail.gmail.com>
+Date: Thu, 14 Oct 2010 15:38:21 +0100
+Message-ID: <1287067101.3770.490.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 192.168.106.10
+X-SA-Exim-Connect-IP: 62.7.80.110
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: S98configure role
+Subject: Re: Question about OVERRIDES precedence
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,73 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 14:34:05 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Oct 2010 14:38:50 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On Thu, 2010-10-14 at 06:59 -0700, Chris Larson wrote:
+> On Thu, Oct 14, 2010 at 6:23 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
+> > Isn't the definition covered in the bitbake docs? I'm in favour of
+> > fixing bitbake instead working around it in OE.
+> >
+> 
+> As far as I can tell:
+> 1. The bitbake docs don't cover the ordering.
+> 2. The behavior isn't a bug, it's a mismatch between OE's definition and
+> bitbake's implementation, and bitbake has been this way since 2003.
 
-for me the S98configure is a NO GO !
-I have to provide read only images that have to be used w/o any first =
-boot configurations.
+Agreed.  And there is plenty of existing code in OE which depends on the
+current ordering.  OE's bitbake.conf even has a big comment describing
+the behaviour that it expects:
 
-For me there is no necessary to final install a image at first boot.
+# Overrides are processed left to right, so the ones that are named later take precedence.
+# You generally want them to go from least to most specific.
+# 
+# This means that an envionment variable named '<foo>_arm' overrides an
+# environment variable '<foo>' (when ${TARGET_ARCH} is arm).
+# an environment variable '<foo>_ramses' overrides '<foo>' but doesn't override
+# '<foo>_arm' when ${MACHINE} is 'ramses'. 
+# If you use combination ie '<foo>_arm_ramses', then '<foo>_arm_ramses' will override 
+# '<foo>_arm' and then '<foo>' will be overriden with that value from '<foo>_arm'.
+# And finally '<foo>_local' overrides anything, but with lowest priority.
 
-Normally all configurations are able to be done at image creation time =
-by some scripting.=20
-For example, adding a user can be done by scripting, and not necessarily =
-have to be done by adduser/addgroup.
+So, changing the bitbake behaviour at this late stage seems like a very
+bad idea.  If the documentation calls for something else then I think
+the documentation should be fixed to match the reality, not vice versa.
 
-Its up to the recipes to create packages which are installable offline =
-totally and completely.
+p.
 
-Handling of individual settings like serial numbers, keys ... for me =
-should not be a matter of first boot.
-It may be a matter of flashing(environment partition) or special =
-configuration partitions.
 
-There may be some cases, a first boot installation is necessary, but for =
-me it is better to have an unmodified/unmodifieable image on the target.
-
-Regards
-Wolfgang
-
------Urspr=FCngliche Nachricht-----
-Von: openembedded-devel-bounces@lists.openembedded.org =
-[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
-von Chris Larson
-Gesendet: Donnerstag, 14. Oktober 2010 16:02
-An: openembedded-devel@lists.openembedded.org
-Betreff: Re: [oe] S98configure role
-
-On Thu, Oct 14, 2010 at 2:32 AM, l.bolognini@tiscali.it <
-l.bolognini@tiscali.it> wrote:
-
-> I'm wondering what is the role of this script, placed in /etc/rcS.d.
->
-> What I guess is that, for some reasons, some packages get installed =
-but
-> not configured (then unpacked) since their postinstall script returns
-> non zero value.
->
-
-Yes, this is correct.  Some postinsts do things which can be done at =
-image
-creation time on the build machine, but not all.  Those which must *run* =
-the
-binaries in the filesystem, for example, cannot be run at build time, so
-must be run at first boot time on the target.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
