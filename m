@@ -1,31 +1,28 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P6Jaf-0007Co-1h for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 10:55:12 +0200
-Received: from f053038002.adsl.alicedsl.de ([78.53.38.2] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P6JaE-0003Uz-H5 for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 08:54:42 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimanta=-eaEnYmx1J9XSfwm2QzrfbdjB8-51tNr@mail.gmail.com>
-References: <1286971290.3904.6.camel@mattotaupa>
-	<AANLkTimanta=-eaEnYmx1J9XSfwm2QzrfbdjB8-51tNr@mail.gmail.com>
-Date: Thu, 14 Oct 2010 10:54:41 +0200
-Message-ID: <1287046481.4039.3.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Received: from mrqout1-sorbs.tiscali.it ([195.130.225.22]
+	helo=mrqout1.tiscali.it) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <l.bolognini@tiscali.it>) id 1P6KBG-00053J-V3
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 11:33:00 +0200
+Received: from [10.39.115.27] by mrq-1 with esmtp (Exim)
+	id 1P6KAo-0003xm-1C; Thu, 14 Oct 2010 11:32:30 +0200
+Received: from ps-wm5 (10.39.75.205) by mail-7-it.mail.tiscali.sys (8.5.124)
+	id 4CA2F79600602CEB for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 11:32:29 +0200
+Message-ID: <26434292.80091287048749327.JavaMail.defaultUser@defaultHost>
+Date: Thu, 14 Oct 2010 11:32:29 +0200 (CEST)
+From: "l.bolognini@tiscali.it" <l.bolognini@tiscali.it>
+To: Open Embedded Mailing List <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+xOriginalSenderIP: 89.118.158.66
+X-SA-Exim-Connect-IP: 195.130.225.22
+X-SA-Exim-Mail-From: l.bolognini@tiscali.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: eglibc-initial-2.12-r15.6+svnr11762: commit d8ce8a: `do_install` fails with `cannot remove `/usr/include/limits.h': Permission denied`
+Subject: S98configure role
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,85 +36,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 08:55:12 -0000
-X-Groupsio-MsgNum: 24832
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-fbuxfAdnEBm7WN1guFIC"
-
---=-fbuxfAdnEBm7WN1guFIC
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 14 Oct 2010 09:33:00 -0000
+Content-Type: text/plain;charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Mittwoch, den 13.10.2010, 09:23 -0700 schrieb Khem Raj:
-> On Wed, Oct 13, 2010 at 5:01 AM, Paul Menzel wrote:
+I'm wondering what is the role of this script, placed in /etc/rcS.d.
 
-> >        $ bitbake console-image
-> >        [=E2=80=A6]
-> >        | make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-d=
-ev/work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc-=
-2_12/libc'
-> >        | make[1]: Entering directory `/oe/build-minimal-eglibc/minimal-=
-dev/work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc=
--2_12/libc'
-> >        | /oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/b=
-in/install -c -m 644 include/limits.h /usr/include/limits.h
-> >        | /oe/build-minimal-eglibc/minimal-dev/sysroots/i686-linux/usr/b=
-in/install: cannot remove `/usr/include/limits.h': Permission denied
-> >        | make[1]: *** [/usr/include/limits.h] Error 1
-> >        | make[1]: Leaving directory `/oe/build-minimal-eglibc/minimal-d=
-ev/work/armv7a-oe-linux-gnueabi/eglibc-initial-2.12-r15.6+svnr11762/eglibc-=
-2_12/libc'
-> >        | make: *** [install-headers] Error 2
-> >        | FATAL: oe_runmake failed
-> >        | ERROR: Function do_install failed
-> >        NOTE: package eglibc-initial-2.12-r15.6+svnr11762: task do_insta=
-ll: Failed
-> >
-> > with `minimal-eglibc` for `MACHINE =3D "beagleboard"`.
-> >
-> > It tries to delete a file of the build system. I guess the Makefile was
-> > changed in the latest version bump in d8ce8a [1].
-> >
-> > Should I CC the eglibc folks when experiencing such problems?
->=20
-> hmm whats your host make version ?
+What I guess is that, for some reasons, some packages get installed but=20
+not configured (then unpacked) since their postinstall script returns=20
+non zero value.
+Here it is a small extract of rootfs_ipk.bbclass:
 
-        $ make --version
-        make: getcwd: No such file or directory
-        GNU Make 3.81
-        Copyright (C) 2006  Free Software Foundation, Inc.
-        This is free software; see the source for copying conditions.
-        There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-        PARTICULAR PURPOSE.
-       =20
-        This program built for i486-pc-linux-gnu
+for=20
+i in ${IMAGE_ROOTFS}${libdir}/opkg/info/*.postinst; do
+               =20
+if [ -f $i ] && ! sh -e $i configure; then
+                        opkg-
+cl ${IPKG_ARGS} flag unpacked `basename $i .postinst`
+               =20
+fi
+done
 
-> I do not see this problem on ubuntu 10.10
+For example, in my beagleboard, I get udev unpacked because=20
+udev-cache can't be found in /etc/init.d (sounds strange, it's there!).
 
-The build host is running Debian Squeeze.
+Then udev remain unpacked but the magic S98configure heals udev,=20
+adjusting all stuff.
+But, here is my question, what about the very=20
+first boot? Do I have a first boot without udev-cache?
+Unfortunately at=20
+the moment I haven't the chance to investigate and burn a SD card and=20
+can't go further, however I'm very interested to listen to your=20
+opinions.
 
-I am doing another test build now.
+Thank you,
+bye,
+Luca
 
 
-Thanks,
 
-Paul
+Supera i limiti: raddoppia la velocit=C3=A0 da 10 a 20 Mega!   Risparmia co=
+n Tutto Incluso: telefono + adsl 20 mega a soli 26,60 =E2=82=AC al mese per=
+ un anno!  SCONTO DI 160 EURO!  http://abbonati.tiscali.it/telefono-adsl/pr=
+odotti/tc/tuttoincluso/?WT.mc_id=3D01fw
 
 
-> > [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dd8c=
-e8acea72b7e7e5512accce434aa4b892cf0a8
-
---=-fbuxfAdnEBm7WN1guFIC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAky2xT8ACgkQPX1aK2wOHVjjPwCghNkbCPxuF1CFYDufHdonGVRs
-tIYAni+oZWWaBc7FNKu5lFKe20UcBlA5
-=2zpj
------END PGP SIGNATURE-----
-
---=-fbuxfAdnEBm7WN1guFIC--
