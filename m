@@ -1,40 +1,37 @@
-Received: from mail-dotnet2.eads.net ([80.156.45.105])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1P6P6K-0000I4-K2 for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 16:48:13 +0200
-Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
-	by mail-dotnet2.eads.net with ESMTP; 14 Oct 2010 16:39:45 +0200
-Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
-	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.7381); 
-	Thu, 14 Oct 2010 16:47:41 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 14 Oct 2010 16:47:40 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Thu, 14 Oct 2010 16:47:38 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501B11B24@deimsg40.de.net.world>
-In-Reply-To: <AANLkTikEUi24rixCaNEEtwhAufNv_D7OPt-WoFCQaAXu@mail.gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] S98configure role
-Thread-Index: ActrrhlJn3eJxJDgTHq6Bf/pyD4DvgAADT5w
-References: <26434292.80091287048749327.JavaMail.defaultUser@defaultHost><AANLkTi=hDDtueQerTUy9FTcpoCbJ9AYozok=-XBkWe7R@mail.gmail.com><0B51A1E7C61D114DAE6FC10B0FD0ABA501B11B1A@deimsg40.de.net.world>
-	<AANLkTikEUi24rixCaNEEtwhAufNv_D7OPt-WoFCQaAXu@mail.gmail.com>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 14 Oct 2010 14:47:41.0064 (UTC)
-	FILETIME=[C0A3E880:01CB6BAE]
-X-SA-Exim-Connect-IP: 80.156.45.105
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@cassidian.com
+Received: from na3sys009aog112.obsmtp.com ([74.125.149.207])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <bengardiner@nanometrics.ca>) id 1P6Pig-00015C-Kw
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Oct 2010 17:27:52 +0200
+Received: from source ([209.85.216.41]) by na3sys009aob112.postini.com
+	([74.125.148.12]) with SMTP
+	ID DSNKTLchNCOR2utYAISpv9TfDUU1wTnjsmfs@postini.com;
+	Thu, 14 Oct 2010 08:27:24 PDT
+Received: by qwb8 with SMTP id 8so1549564qwb.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Oct 2010 08:26:42 -0700 (PDT)
+Received: by 10.224.68.7 with SMTP id t7mr8273040qai.227.1287066262733;
+	Thu, 14 Oct 2010 07:24:22 -0700 (PDT)
+Received: from localhost.localdomain ([206.191.47.130])
+	by mx.google.com with ESMTPS id t35sm6040568qco.18.2010.10.14.07.24.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 14 Oct 2010 07:24:20 -0700 (PDT)
+From: Ben Gardiner <bengardiner@nanometrics.ca>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 14 Oct 2010 10:24:14 -0400
+Message-Id: <1287066254-23579-1-git-send-email-bengardiner@nanometrics.ca>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <AANLkTimV_Xf9geTryw8tvYknhe=5_BrSSr5YT2qHnxEJ@mail.gmail.com>
+X-SA-Exim-Connect-IP: 74.125.149.207
+X-SA-Exim-Mail-From: bengardiner@nanometrics.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-5.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: S98configure role
+Cc: Christopher Larson <clarson@kergoth.com>
+Subject: [RFC, PATCH, resend] gmp: assign --target to --host to avoid configure error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,26 +45,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 14:48:13 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Oct 2010 15:27:52 -0000
 
-Hello,
+When trying to build angstrom-2008.1 from
+f58a5d59b755bdb725497f574a8059529c134c27 of master or from
+b78fc95424b5f0fb28246e8c61bb8b4d6a9d733a of stable/2009 the builds failed on
+gmp-native (then later gmp). The error was that "--target is not appropriate
+for GMP".
 
->>Then go ahead and modify your tree to do so, but don't expect OE to
-come
->>that way out of the box.
+To avoid the error printed by the following code snippet from configure.in:
 
-I've done so, but things may be much easier if the recipes are tuned to
-read only usage.
+configure.in:
+"
+if test -n "$target_alias" && test "$target_alias" != "$host_alias"; then
+  AC_MSG_ERROR([--target is not appropriate for GMP
+Use --build=CPU-VENDOR-OS if you need to specify your CPU and/or system
+explicitly.  Use --host if cross-compiling (see "Installing GMP" in the
+manual for more on this).])
+fi
+"
 
-It is possibe, but the use cases may be too wide to do it in general.
+this patch assigns the value of the '--target' argument to the value of the
+'--host' argument.
 
-Regards
-Wolfgang
-=20
+Tested by 'bitbake gmp' and 'bitbake gmp-native'
+
+Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
+CC: Christopher Larson <clarson@kergoth.com>
+
+---
+
+This patch will change the argument passed in --target for all versions of
+gmp. Would it be better to restrict the change to newer versions only?
+
+I resent this patch to the list since I did not see it show up in the
+patchwork system 17hrs later.
+
+---
+ recipes/gmp/gmp.inc |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/gmp/gmp.inc b/recipes/gmp/gmp.inc
+index 522189d..8ffeb91 100644
+--- a/recipes/gmp/gmp.inc
++++ b/recipes/gmp/gmp.inc
+@@ -8,6 +8,8 @@ SRC_URI = "${GNU_MIRROR}/gmp/gmp-${PV}.tar.bz2;name=gmp \
+ 	   file://configure.patch \
+ 	   file://amd64.patch"
+ 
++TARGET_SYS = "${HOST_SYS}"
++
+ inherit autotools 
+ 
+ ARM_INSTRUCTION_SET = "arm"
+-- 
+1.7.0.4
 
 
 
