@@ -1,37 +1,39 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P6QnW-0001mU-9I
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P6Qnx-0001L2-IE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 18:37:00 +0200
-Received: by gwb17 with SMTP id 17so2319899gwb.6
+	Thu, 14 Oct 2010 18:37:27 +0200
+Received: by mail-ew0-f47.google.com with SMTP id 1so2516009ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 09:36:23 -0700 (PDT)
+	Thu, 14 Oct 2010 09:36:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=+zvlCy1hgOINk6T3cuJJVEvX18SknPGzHn7NLPP7aN8=;
-	b=bitQDM8dymEFAVS0QngOAh3XqdlF3vJneTYadaGGcsF5tpxMbeBiorRwYbGvKFW2vH
-	fGwSBIw7v5kStq7XlF0ao8RdE+bs1/uxhpgfjyDVNL05HQEwuTwkQtYwUXLPNj5V0vjj
-	5z6WRLQT1jo/8CumjN4FyP+UqXjLGlxllz0sU=
+	bh=vhedhgpl8bC/stW19HcY8zZAnpbiouJFXUhf7isfNwA=;
+	b=ZGxQq15BYlq9R9sZ6batEUjwGH3rRc24crwD1LqSCwCSBju+3s/LG9HIyhWtm5hiq4
+	G5fowL8PtL7ZgR4mMrZ8hpiocvK0BP34DRqpzQbaQkGCJ/rtyaVjfG7R8XDu5CMUB9Tl
+	U1I6+vwvskTutw7QvkkEV/dhLY0dIPQw5yKgc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=qzVWaJz5zUIxtehLXDehZOkksEL4tVaBqxCnm7P05RCIa5oNWUGDkjPuw1KJgouQ8E
-	ul4UhpPHdyYfT30CrNpCaLGL42B9KbDrAoywd5swZHrqp6ZMUcOHog9UOmY+CCcmw2hF
-	/FtgrSt16bK17rWWFP4HysT7bXZ19jIQ4fxIY=
-Received: by 10.14.119.7 with SMTP id m7mr6763002eeh.42.1287074161974;
-	Thu, 14 Oct 2010 09:36:01 -0700 (PDT)
+	b=npbMOsr+T5i19ijVAIjYzAZuE0XstZpo6m5FtkhjwHbdDWZGJGVdjUPEN9wiWohCvT
+	oiORmyMJenhWS3JFIz10ITQ25ohmy23c42FvkYlv3zD7jVRxjfYkcQNuThldL9wvUiXo
+	uOJCcutoxXVAiIvv4OBHedmZVN4ThZ1be2xMU=
+Received: by 10.213.34.79 with SMTP id k15mr2125474ebd.26.1287074181112;
+	Thu, 14 Oct 2010 09:36:21 -0700 (PDT)
 Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id q51sm2981860eeh.10.2010.10.14.09.35.59
+	by mx.google.com with ESMTPS id q51sm2981860eeh.10.2010.10.14.09.36.17
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 14 Oct 2010 09:36:00 -0700 (PDT)
+	Thu, 14 Oct 2010 09:36:18 -0700 (PDT)
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Oct 2010 18:35:41 +0200
-Message-Id: <1287074146-3705-2-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Thu, 14 Oct 2010 18:35:43 +0200
+Message-Id: <1287074146-3705-4-git-send-email-fransmeulenbroeks@gmail.com>
 X-Mailer: git-send-email 1.6.4.2
-In-Reply-To: <1287074146-3705-1-git-send-email-fransmeulenbroeks@gmail.com>
+In-Reply-To: <1287074146-3705-3-git-send-email-fransmeulenbroeks@gmail.com>
 References: <1287074146-3705-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.47
+	<1287074146-3705-2-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-3-git-send-email-fransmeulenbroeks@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +41,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/7] directfb_2.18: remove useless LDFLAGS_append = ""
+Subject: [PATCH 4/7] mono-native: remove useless SRC_URI += ""
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,26 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 16:37:06 -0000
+X-List-Received-Date: Thu, 14 Oct 2010 16:37:28 -0000
 
 Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 ---
- recipes/directfb/directfb_1.2.8.bb |    2 --
+ recipes/mono/mono-native_2.6.3.bb |    2 --
  1 files changed, 0 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/directfb/directfb_1.2.8.bb b/recipes/directfb/directfb_1.2.8.bb
-index 35eb7c6..a6cf68f 100644
---- a/recipes/directfb/directfb_1.2.8.bb
-+++ b/recipes/directfb/directfb_1.2.8.bb
-@@ -22,8 +22,6 @@ EXTRA_OECONF = "\
-   --disable-x11 \
- "
+diff --git a/recipes/mono/mono-native_2.6.3.bb b/recipes/mono/mono-native_2.6.3.bb
+index 03820d3..e08edbb 100644
+--- a/recipes/mono/mono-native_2.6.3.bb
++++ b/recipes/mono/mono-native_2.6.3.bb
+@@ -3,8 +3,6 @@ DEPENDS = "glib-2.0-native perl-native"
  
--LDFLAGS_append = ""
+ PR = "${INC_PR}.0"
+ 
+-SRC_URI += ""
 -
- LEAD_SONAME = "libdirectfb-1.2.so.0"
+ inherit native
  
- SRC_URI[md5sum] = "ac13d21682aa368df4e177ae5b51ad2d"
+ do_fix_libtool_name() {
 -- 
 1.6.4.2
 
