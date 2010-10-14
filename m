@@ -1,37 +1,49 @@
-Received: from na3sys009aog112.obsmtp.com ([74.125.149.207])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <bengardiner@nanometrics.ca>) id 1P6Pig-00015C-Kw
+Received: from arroyo.ext.ti.com ([192.94.94.40])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <chase.maupin@ti.com>) id 1P6Pkh-0001Ae-JR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Oct 2010 17:27:52 +0200
-Received: from source ([209.85.216.41]) by na3sys009aob112.postini.com
-	([74.125.148.12]) with SMTP
-	ID DSNKTLchNCOR2utYAISpv9TfDUU1wTnjsmfs@postini.com;
-	Thu, 14 Oct 2010 08:27:24 PDT
-Received: by qwb8 with SMTP id 8so1549564qwb.14
+	Thu, 14 Oct 2010 17:29:57 +0200
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9EFTM12015956
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 08:26:42 -0700 (PDT)
-Received: by 10.224.68.7 with SMTP id t7mr8273040qai.227.1287066262733;
-	Thu, 14 Oct 2010 07:24:22 -0700 (PDT)
-Received: from localhost.localdomain ([206.191.47.130])
-	by mx.google.com with ESMTPS id t35sm6040568qco.18.2010.10.14.07.24.19
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 14 Oct 2010 07:24:20 -0700 (PDT)
-From: Ben Gardiner <bengardiner@nanometrics.ca>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Oct 2010 10:24:14 -0400
-Message-Id: <1287066254-23579-1-git-send-email-bengardiner@nanometrics.ca>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <AANLkTimV_Xf9geTryw8tvYknhe=5_BrSSr5YT2qHnxEJ@mail.gmail.com>
-X-SA-Exim-Connect-IP: 74.125.149.207
-X-SA-Exim-Mail-From: bengardiner@nanometrics.ca
+	Thu, 14 Oct 2010 10:29:22 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9EFTMWS018988
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Oct 2010 10:29:22 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9EFTM1B017557
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Oct 2010 10:29:22 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Thu, 14 Oct 2010 10:29:21 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 14 Oct 2010 10:29:20 -0500
+Thread-Topic: [oe] Question about OVERRIDES precedence
+Thread-Index: ActrHz2mNNRnnGCzQVyOzTDnBK9E2gAeEywQ
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310FFA982@dlee06.ent.ti.com>
+References: <131E5DFBE7373E4C8D813795A6AA7F080310FFA839@dlee06.ent.ti.com>
+	<AANLkTik1nA1jC9f-Vvep2=8U9+VXAWBwPFaRaZC0f4Op@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310FFA874@dlee06.ent.ti.com>
+	<AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
+In-Reply-To: <AANLkTinfQjRpwjYYL-6+He_z3tB6wm3kcW0CSEAqFVuh@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Christopher Larson <clarson@kergoth.com>
-Subject: [RFC, PATCH, resend] gmp: assign --target to --host to avoid configure error
+Subject: Re: Question about OVERRIDES precedence
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,61 +57,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2010 15:27:52 -0000
+X-List-Received-Date: Thu, 14 Oct 2010 15:29:57 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-When trying to build angstrom-2008.1 from
-f58a5d59b755bdb725497f574a8059529c134c27 of master or from
-b78fc95424b5f0fb28246e8c61bb8b4d6a9d733a of stable/2009 the builds failed on
-gmp-native (then later gmp). The error was that "--target is not appropriate
-for GMP".
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Chris Larson
+> Sent: Wednesday, October 13, 2010 4:39 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Question about OVERRIDES precedence
+>=20
+> On Wed, Oct 13, 2010 at 2:30 PM, Maupin, Chase <chase.maupin@ti.com>
+> wrote:
+>=20
+> > That was my thought as well but I can consistently cause this issue.  I
+> > have tested a quick change that seems to fix the issue by reversing the
+> list
+> > before it is used in the for loop.  My change was:
+>=20
+>=20
+> From discussion on IRC, we think we should just reverse the definition of
+> OVERRIDES in OE, this avoids compatibility issues associated with changin=
+g
+> the implementation.
 
-To avoid the error printed by the following code snippet from configure.in:
+Chris,
 
-configure.in:
-"
-if test -n "$target_alias" && test "$target_alias" != "$host_alias"; then
-  AC_MSG_ERROR([--target is not appropriate for GMP
-Use --build=CPU-VENDOR-OS if you need to specify your CPU and/or system
-explicitly.  Use --host if cross-compiling (see "Installing GMP" in the
-manual for more on this).])
-fi
-"
+So are you saying that we are just going to change the order of how OVERRID=
+ES is appended to in OE like Denys was suggesting?  That would still lead t=
+o issues like local not being the highest priority unless we would also cha=
+nge bitbake.conf to define OVERRIDES as "${TARGET_ARCH}:${TARGET_OS}:${MACH=
+INE}:local".  That way we could prepend OVERRIDES in OE and still have loca=
+l be the last one evaluated.
 
-this patch assigns the value of the '--target' argument to the value of the
-'--host' argument.
+Or are you saying that we should build the whole OVERRIDES list and then re=
+verse it in the OE configuration files?
 
-Tested by 'bitbake gmp' and 'bitbake gmp-native'
+If that is the case I tried adding a line like:
 
-Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
-CC: Christopher Larson <clarson@kergoth.com>
+REVERSE_OVERRIDES=3D${@d.setVar("OVERRIDES", ':'.join(bb.data.getVar('OVERR=
+IDES', d, 1).split(':')[::-1]))}
 
----
+to the end of my local.conf file.  When I do a bitbake -e to dump my enviro=
+nment I see that OVERRIDES is now defined to:
 
-This patch will change the argument passed in --target for all versions of
-gmp. Would it be better to restrict the change to newer versions only?
+OVERRIDES=3D"thumb-interwork:libc-glibc:omap3:armv7a:pn-task-arago-toolchai=
+n-tisdk-multimedia-host:fail-fast:build-linux:arm:linux-gnueabi:angstrom:am=
+37x-evm:local"
 
-I resent this patch to the list since I did not see it show up in the
-patchwork system 17hrs later.
+But while that order looks right it seems like maybe that is being interpre=
+ted to late because my variables that use overrides are not picking up the =
+right values.  i.e. my MACHINE override is not taking precedence over my SO=
+C_FAMILY override.
 
----
- recipes/gmp/gmp.inc |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+Any ideas why this does not work?
 
-diff --git a/recipes/gmp/gmp.inc b/recipes/gmp/gmp.inc
-index 522189d..8ffeb91 100644
---- a/recipes/gmp/gmp.inc
-+++ b/recipes/gmp/gmp.inc
-@@ -8,6 +8,8 @@ SRC_URI = "${GNU_MIRROR}/gmp/gmp-${PV}.tar.bz2;name=gmp \
- 	   file://configure.patch \
- 	   file://amd64.patch"
- 
-+TARGET_SYS = "${HOST_SYS}"
-+
- inherit autotools 
- 
- ARM_INSTRUCTION_SET = "arm"
--- 
-1.7.0.4
 
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
