@@ -1,39 +1,41 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1P6kWR-0005NU-LX
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1P6kX5-0005Ss-So
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 15:40:36 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id EBD57614C08
+	Fri, 15 Oct 2010 15:41:16 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o9FDeeAW004892
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 09:40:06 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 20836-04 for <openembedded-devel@lists.openembedded.org>; 
-	Fri, 15 Oct 2010 09:40:06 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id C8781603239
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 09:40:06 -0400 (EDT)
-Message-ID: <4CB859B6.6030603@cbnco.com>
-Date: Fri, 15 Oct 2010 09:40:06 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
-MIME-Version: 1.0
+	Fri, 15 Oct 2010 15:40:42 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1P6kWh-0001Bm-EP
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 15:40:51 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1286545200-15699-1-git-send-email-msmith@cbnco.com>
-	<1286545200-15699-2-git-send-email-msmith@cbnco.com>
-In-Reply-To: <1286545200-15699-2-git-send-email-msmith@cbnco.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+References: <1287145489.4233.7.camel@mattotaupa>
+Date: Fri, 15 Oct 2010 15:40:51 +0200
+In-Reply-To: <1287145489.4233.7.camel@mattotaupa> (Paul Menzel's message of
+	"Fri, 15 Oct 2010 14:24:49 +0200")
+Message-ID: <lyvd53r2u4.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 1
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH resend 2/4] base.bbclass: add make-native to default dependencies
+Subject: Re: [PATCH] cacao-native-0.99.3: fix `install: cannot stat `src/cacaoh/.libs/cacaoh': No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +49,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 13:40:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Oct 2010 13:41:16 -0000
+Content-Type: text/plain; charset=us-ascii
 
-ping
+Paul Menzel <paulepanter@users.sourceforge.net> writes:
 
-Michael Smith wrote:
-> This should work around package incompatibilities with whatever version
-> of make is installed on the build system.
-> 
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> ---
->  classes/base.bbclass |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
-> 
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index 964fe1c..2e49a3c 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -71,7 +71,8 @@ def base_deps(d):
->  	if not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d):
->  		if (bb.data.getVar('HOST_SYS', d, 1) !=
->  	     	    bb.data.getVar('BUILD_SYS', d, 1)):
-> -			deps += " virtual/${TARGET_PREFIX}gcc virtual/libc "
-> +			deps += (" virtual/${TARGET_PREFIX}gcc virtual/libc "
-> +				"make-native")
->  		elif bb.data.inherits_class('native', d) and \
->  				bb.data.getVar('PN', d, True) not in \
->  				("linux-libc-headers-native", "quilt-native",
+> -  install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
+> +  install -m 0755 src/cacaoh/cacaoh ${D}${bindir}/cacaoh-${PV}
 
+Location of the binary depends on libtool version and other factors so
+that both paths are possible.
+
+| libtool --mode=install install -m 0755 src/cacaoh/cacaoh ...
+
+is more portable.
+
+
+
+Enrico
 
 
