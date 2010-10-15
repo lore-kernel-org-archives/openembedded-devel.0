@@ -1,36 +1,29 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P6jDT-0002xO-85
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 14:17:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id B15333149EA0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 14:16:22 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id Q69xdMdGGps7; Fri, 15 Oct 2010 14:16:12 +0200 (CEST)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 72CA13149E83;
-	Fri, 15 Oct 2010 14:16:11 +0200 (CEST)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Fri, 15 Oct 2010 12:16:10 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P6jLa-00026p-8P for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 14:25:22 +0200
+Received: from f053038067.adsl.alicedsl.de ([78.53.38.67]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P6jL8-0001ca-BL for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 12:24:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Oct 2010 12:16:00 +0000
-Message-Id: <1287144965-6419-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+Date: Fri, 15 Oct 2010 14:24:49 +0200
+Message-ID: <1287145489.4233.7.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/4] automake-1.11.1: omit compilation of pyc files on install
+Subject: [PATCH] cacao-native-0.99.3: fix `install: cannot stat `src/cacaoh/.libs/cacaoh': No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,94 +37,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 12:17:05 -0000
+X-List-Received-Date: Fri, 15 Oct 2010 12:25:23 -0000
+X-Groupsio-MsgNum: 24893
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-5/RHdVWlGa8F4q0+3J6z"
 
-* On install, automake calls py-compile, which previously
-  compiled python source code to pyc and pyo, which both
-  got packaged.
-* The python interpreter in OE contains patches to enable
-  optimization (pyo) by default:
-    04-default-is-optimized.patch
-    99-ignore-optimization-flag.patch
-* automake created pyc files by calling py_compile.compile()
-  and adding the c suffix manually, resulting in identical
-  byte code for both pyc and pyo files.
-* 0001-py-compile-compile-only-optimized-byte-code.patch
-  applies to automake 1.11 and automake master, but older
-  versions require a slightly modified patch. However,
-  older versions are only pinned by chinook-compat and
-  nylon, so I left them untouched.
+--=-5/RHdVWlGa8F4q0+3J6z
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+Date: Fri, 15 Oct 2010 14:09:42 +0200
+
+Task of `do_install` of `cacao-native-0.99.3` fails with the following erro=
+r.
+
+        NOTE: Task failed: ('function do_install failed', '/oe/build-angstr=
+om-next/angstrom-dev/work/i686-linux/cacaoh-native-0.99.3-r2.1/temp/log.do_=
+install.26664')
+        ERROR: Logfile of failure stored in: /oe/build-angstrom-next/angstr=
+om-dev/work/i686-linux/cacaoh-native-0.99.3-r2.1/temp/log.do_install.26664
+        Log data follows:
+        | install: cannot stat `src/cacaoh/.libs/cacaoh': No such file or d=
+irectory
+        | ERROR: Function do_install failed
+        NOTE: package cacaoh-native-0.99.3-r2.1: task do_install: Failed
+        ERROR: TaskFailed event exception, aborting
+        ERROR: Build of /oe/openembedded/recipes/cacao/cacaoh-native_0.99.3=
+.bb do_install failed
+        ERROR: Task 2260 (/oe/openembedded/recipes/cacao/cacaoh-native_0.99=
+.3.bb, do_install) failed with 256
+
+In the work directory there are the following files.
+
+cacao-0.99.3-r11/cacao-0.99.3$ find . -name *cacaoh*
+./src/cacaoh
+./src/cacaoh/cacaoh.c
+./m4/cacaoh.m4
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 ---
- recipes/automake/automake_1.11.1.bb                |    4 +-
- ...-compile-compile-only-optimized-byte-code.patch |   42 ++++++++++++++++++++
- 2 files changed, 45 insertions(+), 1 deletions(-)
- create mode 100644 recipes/automake/files/0001-py-compile-compile-only-optimized-byte-code.patch
+ recipes/cacao/cacaoh-native.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/automake/automake_1.11.1.bb b/recipes/automake/automake_1.11.1.bb
-index 74477e7..0579875 100644
---- a/recipes/automake/automake_1.11.1.bb
-+++ b/recipes/automake/automake_1.11.1.bb
-@@ -1,5 +1,7 @@
- require automake.inc
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
-+
-+SRC_URI += "file://0001-py-compile-compile-only-optimized-byte-code.patch"
- 
- SRC_URI[automake.md5sum] = "c2972c4d9b3e29c03d5f2af86249876f"
- SRC_URI[automake.sha256sum] = "5b159d3c0e0a1f87de71b68bcb9f1a1c49e9e71749c9b723f17e2e1e0295c7ae"
-diff --git a/recipes/automake/files/0001-py-compile-compile-only-optimized-byte-code.patch b/recipes/automake/files/0001-py-compile-compile-only-optimized-byte-code.patch
-new file mode 100644
-index 0000000..1eca0a8
---- /dev/null
-+++ b/recipes/automake/files/0001-py-compile-compile-only-optimized-byte-code.patch
-@@ -0,0 +1,42 @@
-+upstream: OE-only
-+
-+From 4f84894b3df47ce797100f25d2d79f08bb27cd0d Mon Sep 17 00:00:00 2001
-+From: Andreas Oberritter <obi@opendreambox.org>
-+Date: Thu, 14 Oct 2010 12:25:50 +0200
-+Subject: [PATCH] py-compile: compile only optimized byte code
-+
-+---
-+ lib/py-compile |   17 -----------------
-+ 1 files changed, 0 insertions(+), 17 deletions(-)
-+
-+diff --git a/lib/py-compile b/lib/py-compile
-+index 3f9d05b..101c814 100755
-+--- a/lib/py-compile
-++++ b/lib/py-compile
-+@@ -101,23 +101,6 @@ else
-+     filetrans="filepath = os.path.normpath('$destdir' + os.sep + path)"
-+ fi
-+ 
-+-$PYTHON -c "
-+-import sys, os, py_compile
-+-
-+-files = '''$files'''
-+-
-+-sys.stdout.write('Byte-compiling python modules...\n')
-+-for file in files.split():
-+-    $pathtrans
-+-    $filetrans
-+-    if not os.path.exists(filepath) or not (len(filepath) >= 3
-+-                                            and filepath[-3:] == '.py'):
-+-	    continue
-+-    sys.stdout.write(file)
-+-    sys.stdout.flush()
-+-    py_compile.compile(filepath, filepath + 'c', path)
-+-sys.stdout.write('\n')" || exit $?
-+-
-+ # this will fail for python < 1.5, but that doesn't matter ...
-+ $PYTHON -O -c "
-+ import sys, os, py_compile
-+-- 
-+1.7.0.4
-+
--- 
+diff --git a/recipes/cacao/cacaoh-native.inc b/recipes/cacao/cacaoh-native.=
+inc
+index 2b3709f..d745107 100644
+--- a/recipes/cacao/cacaoh-native.inc
++++ b/recipes/cacao/cacaoh-native.inc
+@@ -24,7 +24,7 @@ do_compile() {
+=20
+ do_install() {
+   install -d ${D}${bindir}/cacaoh-${PV}
+-  install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
++  install -m 0755 src/cacaoh/cacaoh ${D}${bindir}/cacaoh-${PV}
+ }
+=20
+ NATIVE_INSTALL_WORKS =3D "1"
+--=20
 1.7.1
 
 
+--=-5/RHdVWlGa8F4q0+3J6z
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky4SBEACgkQPX1aK2wOHVibaACfQz7PupP9T3lhMmNAeOxnHA89
+lvsAn3Yg9dOkpurWPDoYnYWn3tFkkV+w
+=13hX
+-----END PGP SIGNATURE-----
+
+--=-5/RHdVWlGa8F4q0+3J6z--
