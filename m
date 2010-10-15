@@ -1,48 +1,45 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P6r0l-0005fu-B5
+	(envelope-from <chase.maupin@ti.com>) id 1P6r1K-0005jn-2k
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 22:36:20 +0200
-Received: by wyb40 with SMTP id 40so1152629wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 13:35:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=T5TzHDp58aCp+hQhUv4sJlwsH9RtJUaKrutif2qRIVs=;
-	b=Cxm3SSCnWxV6pdjyMlkVUFv5T0iYOJcc6ISpKAfEGf0jKaNCJAE4A2ZQpuAYBHkQRV
-	YDTJRlvNuP7ctIeY2vNux3BURwIOrHh+WJ7DfW43wRm05lERMmFUY8kz38OdUpVdQRxC
-	AqcJDiJ5Fmb0L8u5JrOUyfwbrcnRMLuaLieWU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=Hvmv+f3tMAnb/uwLbgwVVrb4GAYlKl8sf4ZTDhaGYt8ch/BRpw4J3kuU/LjMDF9fMs
-	bG8SfI+6aPrGk8H2/Vmddn699G+84rBpxJyr1OL367S6xLrJZZ0ov+yEkNNd32sNME0a
-	L0+uyGaQ9MTq8ADR3VPCmS49p9anCs0SU2+V8=
-Received: by 10.227.58.82 with SMTP id f18mr1605941wbh.12.1287174948821; Fri,
-	15 Oct 2010 13:35:48 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.142 with HTTP; Fri, 15 Oct 2010 13:35:27 -0700 (PDT)
-In-Reply-To: <1287174748-29216-1-git-send-email-Chase.Maupin@ti.com>
+	Fri, 15 Oct 2010 22:37:04 +0200
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9FKaIVV021903
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 15 Oct 2010 15:36:18 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9FKaHdm014209;
+	Fri, 15 Oct 2010 15:36:17 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9FKaHZi019790;
+	Fri, 15 Oct 2010 15:36:17 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Fri, 15 Oct 2010 15:36:17 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Chase Maupin <chasemaupin03@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 15 Oct 2010 15:36:16 -0500
+Thread-Topic: [PATCH 2/2] Fix class OVERRIDES order
+Thread-Index: ActsqBqWL5b5H8iKSi69thsBZnbNYwAAC2nQ
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310FFAD2F@dlee06.ent.ti.com>
 References: <1287174748-29216-1-git-send-email-Chase.Maupin@ti.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 15 Oct 2010 13:35:27 -0700
-X-Google-Sender-Auth: dmuymF6BjSIdFVCv2TPNWz9Nuzk
-Message-ID: <AANLkTi=hQkg3uEsjsPkH8WbVO0xciLVTNBXzSBfwOAGu@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+	<1287174748-29216-2-git-send-email-Chase.Maupin@ti.com>
+In-Reply-To: <1287174748-29216-2-git-send-email-Chase.Maupin@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 198.47.26.152
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: Re: [PATCH 1/2] Fix Angstrom OVERRIDES settings
+Subject: Re: [PATCH 2/2] Fix class OVERRIDES order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,31 +53,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 20:36:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 15 Oct 2010 20:37:04 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 15, 2010 at 1:32 PM, Chase Maupin <chasemaupin03@gmail.com>wrote:
 
-> * Use the new MACHINE_OVERRIDES variable in angstrom.inc to
->  set the FEED_ARCH and SOC_FAMILY OVERRIDES
->    * NOTE: These were left in their orignal order which will
->            result in the SOC_FAMILY being more specific than
->            the FEED_ARCH.  This was done on purpose as the
->            SOC_FAMILY should be more specific.  i.e. for omap3
->            the omap3 override is more specific than the armv7a
->            override.
-> * Modified the glibc include files to prepend libc-glibc, etc
->  to the OVERRIDES list.
->
+
+> -----Original Message-----
+> From: Chase Maupin [mailto:chasemaupin03@gmail.com]
+> Sent: Friday, October 15, 2010 3:32 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Maupin, Chase
+> Subject: [PATCH 2/2] Fix class OVERRIDES order
+>=20
+> * Changed the OVERRIDES settings in the classes to use the new
+>   ordering.
+>=20
 > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
->
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
+I was a little unsure of these which is why I put them in a separate patch.=
+  Should the virtclass overrides be high or low priority?  Please feel free=
+ to correct me, but I wanted to make sure that we didn't override "local"
 
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+> ---
+>  classes/native.bbclass    |    2 +-
+>  classes/nativesdk.bbclass |    2 +-
+>  classes/sdk.bbclass       |    2 +-
+>  3 files changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/classes/native.bbclass b/classes/native.bbclass
+> index dcedff2..2e52bfc 100644
+> --- a/classes/native.bbclass
+> +++ b/classes/native.bbclass
+> @@ -94,7 +94,7 @@ DEPENDS_virtclass-native ?=3D "${ORIG_DEPENDS}"
+>=20
+>  def native_virtclass_add_override(d):
+>      if "native" in (bb.data.getVar('BBCLASSEXTEND', d, True) or ""):
+> -        bb.data.setVar("OVERRIDES", bb.data.getVar("OVERRIDES", d, False=
+)
+> + ":virtclass-native", d)
+> +        bb.data.setVar("OVERRIDES", "virtclass-native:" +
+> bb.data.getVar("OVERRIDES", d, False), d)
+>=20
+>  OVERRIDES .=3D "${@native_virtclass_add_override(d)}"
+>=20
+> diff --git a/classes/nativesdk.bbclass b/classes/nativesdk.bbclass
+> index f3f9930..6f21534 100644
+> --- a/classes/nativesdk.bbclass
+> +++ b/classes/nativesdk.bbclass
+> @@ -52,7 +52,7 @@ export PKG_CONFIG_SYSROOT_DIR =3D "${STAGING_DIR_HOST}"
+>  ORIG_DEPENDS :=3D "${DEPENDS}"
+>  DEPENDS_virtclass-nativesdk ?=3D "${ORIG_DEPENDS}"
+>=20
+> -OVERRIDES .=3D ":virtclass-nativesdk"
+> +OVERRIDES =3D. "virtclass-nativesdk:"
+>=20
+>  python __anonymous () {
+>      pn =3D bb.data.getVar("PN", d, True)
+> diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
+> index c8fa076..1ad8951 100644
+> --- a/classes/sdk.bbclass
+> +++ b/classes/sdk.bbclass
+> @@ -67,4 +67,4 @@ FILES_${PN}-dbg +=3D "${prefix}/.debug \
+>=20
+>  export PKG_CONFIG_SYSROOT_DIR =3D "${STAGING_DIR_HOST}"
+>=20
+> -OVERRIDES .=3D ":virtclass-sdk"
+> +OVERRIDES =3D. "virtclass-sdk:"
+> --
+> 1.7.0.4
+
+
 
