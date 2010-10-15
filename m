@@ -1,44 +1,45 @@
-Received: from mail-iw0-f178.google.com ([209.85.214.178])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P6e4B-0001e6-Cm
+	(envelope-from <vwyodapink@gmail.com>) id 1P6eCG-00025G-UP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 08:47:01 +0200
-Received: by iwn41 with SMTP id 41so475897iwn.9
+	Fri, 15 Oct 2010 08:55:25 +0200
+Received: by vws3 with SMTP id 3so296204vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 23:46:13 -0700 (PDT)
+	Thu, 14 Oct 2010 23:54:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=dh6/nhG+gxNQG073IFCLswXpRxJDnSxsYs2XRbEIZeE=;
-	b=cow2vchmcGXXXLAN/fka+JQ5JPkMw/hpjc0DK/5pmnMLKZ9RhruyPvJEgxeluxtQjj
-	8bczDqfNzfncWR/uNUg+pmW9wqk2u5PVWfPPgEmG+UzdBsesw1tjJuWJY7TEn8PwHmFL
-	hO+2S/oFPcqrKVg4qVgLEVaSB49f5ZaxdqKJw=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=mnHmti4YQ8rcHzQh2wsShwERLrH6yKX3480G6j9ndpE=;
+	b=cGGQKZ5NtmIfDBU4tlzL5curdW+lqr4THqLRsi8ZJM4/DC9qCwLO1zkpPn+UEkbo3i
+	IA8ZPeMmEEl4+sG61DGmx6CUaC9G2kEx/fH8PPui+NW8OpaueKgFmMEprHEpYgFDgFHv
+	5MqWrZMZkv0FsG+LMBLgW/gXcF/I167Ce40P4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=JlX7DpMoN/ulPhx80aul1+n4eSNduKYYCJoNjpEZ3l+qL/kP62hGv1OigY97ak5CII
-	KYHJY3SPwW9WXyTYetMPHR4hWo4sAv2T/2dCY2TLmUTnzv+ESEXbXxwHzsNkk1I8Kh71
-	Eyjr8/31hDRatL0S2vJ1uHFOtCR7glrMxB2Y4=
-Received: by 10.231.145.1 with SMTP id b1mr212447ibv.69.1287125173121;
-	Thu, 14 Oct 2010 23:46:13 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id p1sm626316ybn.5.2010.10.14.23.46.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 14 Oct 2010 23:46:12 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=rIe0ks+yqaxNlIQEJCH24NUkwM2+27zY/9pUmYfyaGtzAvqkTa1e8gFDycHJhi5XqV
+	D6C5hmoTe182/E4+Mxe3HWrQ7sPb1Q4qj3vVs2jJ/2lKUCaMlTfFo+mbuFpo0ODXzBli
+	GeGcsi10EzMnhOUZ/y6MM5t353iPPevBaEAuk=
+MIME-Version: 1.0
+Received: by 10.220.179.203 with SMTP id br11mr148205vcb.23.1287125688380;
+	Thu, 14 Oct 2010 23:54:48 -0700 (PDT)
+Received: by 10.220.176.8 with HTTP; Thu, 14 Oct 2010 23:54:48 -0700 (PDT)
+In-Reply-To: <AANLkTi=xVYpiS1ehpE+YeLsu9AiWHNUC74WuKh=LD1Pv@mail.gmail.com>
+References: <AANLkTikORoazgt01ok+x+1fmv_9U5Ui7okbbUOBb-6Ft@mail.gmail.com>
+	<AANLkTi=xVYpiS1ehpE+YeLsu9AiWHNUC74WuKh=LD1Pv@mail.gmail.com>
+Date: Thu, 14 Oct 2010 23:54:48 -0700
+Message-ID: <AANLkTikb+KR3hFvPx_b_mop2xf17+3jT=gFeef3Heyj4@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Oct 2010 23:46:04 -0700
-Message-Id: <1287125165-25527-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.214.178
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2] gcc-cross-intermediate.inc: Move libgcc from cross dir to target sysroot
+Subject: Re: libgcc-dev.ipk not created Fwd: [Gumstix-users] question about libgcc-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,41 +53,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 06:47:01 -0000
+X-List-Received-Date: Fri, 15 Oct 2010 06:55:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-shared version of libgcc is also installed by gcc-cross-intermediate
-which we did not move to staging as a result cross gcc found this libgcc
-and used it compailing about missing libc.so stuff.
+On Thu, Sep 30, 2010 at 1:07 PM, J. L. <vwyodapink@gmail.com> wrote:
+> On Wed, Sep 29, 2010 at 1:09 PM, J. L. <vwyodapink@gmail.com> wrote:
+>> I originally posted this on the gumstix mailing list and was told I
+>> should ask here. I was wondering how come there is no libgcc-dev.ipk
+>> that gets created though its in the work directory? I was trying to
+>> compile a program on my machine and was giving me complaints about
+>> libgcc-dev missing. Is this suppose to happen or? Thanks for any info
+>> or help on this.
+>>
+>> JL
+>
+> Is there an easy way to gcc to build the libgcc-dev package? I am
+> honestly clueless as to how to even attempt to getting that to be
+> added into the builds.
+>
+>
+>>
+>>
+>> ---------- Forwarded message ----------
+>> From: Steve Sakoman <sakoman@gmail.com>
+>> Date: Wed, Sep 29, 2010 at 12:59 PM
+>> Subject: Re: [Gumstix-users] question about libgcc-dev
+>> To: "General mailing list for gumstix users."
+>> <gumstix-users@lists.sourceforge.net>
+>>
+>>
+>> On Wed, Sep 29, 2010 at 12:07 PM, J. L. <vwyodapink@gmail.com> wrote:
+>>> On Wed, Sep 29, 2010 at 6:54 AM, Steve Sakoman <sakoman@gmail.com> wrot=
+e:
+>>>> On Wed, Sep 29, 2010 at 2:20 AM, J. L. <vwyodapink@gmail.com> wrote:
+>>>>> I was trying to install libpcap-dev and libpcre-dev and when I did
+>>>>> they both said that libgcc-dev was an unmet dependency. I have tried
+>>>>> searching and can not seem to figure out what provides that? I am sur=
+e
+>>>>> this is a really basic one that I am missing. Thanks if you can let m=
+e
+>>>>> know what to build to get that.
+>>>>
+>>>> The gcc recipe provides libgcc-dev
+>>>
+>>> I checked in the tmp and it only builds a libgcc1_4.3.3 which I
+>>> already had on the system when it gave that error. I also dont see
+>>> anything saying its a dev for anything in the gcc tmp build. Am I
+>>> still missing something obvious here?
+>>
+>> I found it by searching through the tmp directory:
+>>
+>> $ ls -l tmp/work/armv7a-angstrom-linux-gnueabi/gcc-4.3.3-r17.1/packages-=
+split/
+>> | grep libgcc-dev
+>>
+>> drwxrwxr-x 2 sakoman sakoman 4096 2010-09-17 20:22 libgcc-dev
+>>
+>> But you are correct, the recipe doesn't seem to put an ipk in the
+>> deploy directory. =A0Not sure why!
+>>
+>> Might be better to ask this question to the experts on the OE mailing li=
+st.
+>>
+>> Steve
+>>
+>> ------------------------------------------------------------------------=
+------
+>> Start uncovering the many advantages of virtual appliances
+>> and start using them to simplify application deployment and
+>> accelerate your shift to cloud computing.
+>> http://p.sf.net/sfu/novell-sfdev2dev
+>> _______________________________________________
+>> gumstix-users mailing list
+>> gumstix-users@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/gumstix-users
+>>
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/gcc/gcc-cross-intermediate.inc |   10 +++++++++-
- 1 files changed, 9 insertions(+), 1 deletions(-)
+Well tried to figure out how to add it on my own and just kept
+breaking the build, so hopefully someone may have time to look and
+figure out why no libgcc-dev is created to install on the image. There
+are packages that complain when installing them after the image is
+built that this is missing from the image. I know of one other on the
+gumstix mailinglist that has run into the same thing.
 
-diff --git a/recipes/gcc/gcc-cross-intermediate.inc b/recipes/gcc/gcc-cross-intermediate.inc
-index 6dbdb94..2b6b24f 100644
---- a/recipes/gcc/gcc-cross-intermediate.inc
-+++ b/recipes/gcc/gcc-cross-intermediate.inc
-@@ -18,8 +18,16 @@ EXTRA_OECONF = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
- 		${@get_gcc_mips_plt_setting(bb, d)}"
- 
- do_install () {
--	oe_runmake 'DESTDIR=${D}' install
-+        oe_runmake 'DESTDIR=${D}' install
-+        install -d ${D}${target_base_libdir}
-+        install -d ${D}${target_libdir}
- 
-+        for d in ${TARGET_SYS}/lib/nof ${TARGET_SYS}/lib64 ${TARGET_SYS}/lib; do
-+                if [ -d ${D}${prefix}/$d/ ]; then
-+                        mv -f ${D}${prefix}/$d/libgcc* ${D}${target_base_libdir} || true
-+                        mv -f ${D}${prefix}/$d/* ${D}${target_libdir} || true
-+                fi
-+        done
-     # If this is important, we should remove the staging package here
- 	# get rid of dummy libc.so
- 	#if [ -z "`file ${STAGING_DIR_TARGET}${target_libdir}/libc.so | grep "ASCII C program text"`" ]; then
--- 
-1.7.1
-
+Thanks for your time.
 
 
