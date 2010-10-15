@@ -1,46 +1,43 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P6mEb-0002yL-Lf
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 17:30:19 +0200
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9FFTh4n010534
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Fri, 15 Oct 2010 10:29:43 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9FFThMq023224;
-	Fri, 15 Oct 2010 10:29:43 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9FFThlW020317;
-	Fri, 15 Oct 2010 10:29:43 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Fri, 15 Oct 2010 10:29:43 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 15 Oct 2010 10:29:42 -0500
-Thread-Topic: [oe] [PATCH] Reverse the order of OVERRIDES
-Thread-Index: ActsfEXdZiLGbdaITE+3z/fBi3KboQAAXUOg
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310FFABF1@dlee06.ent.ti.com>
-References: <1287113787-21268-1-git-send-email-kergoth@gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310FFAB98@dlee06.ent.ti.com>
-	<AANLkTi=dRxQmDwP9G8mgKHeHgrypb36Teowen5NV+Yi3@mail.gmail.com>
-In-Reply-To: <AANLkTi=dRxQmDwP9G8mgKHeHgrypb36Teowen5NV+Yi3@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.152
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P6mLF-0003Dy-56 for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 17:37:09 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P6mKm-0001AE-Ix for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 17:36:40 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 17:36:40 +0200
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 17:36:40 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 15 Oct 2010 17:36:31 +0200
+Message-ID: <i99sdv$q9s$1@dough.gmane.org>
+References: <1287145489.4233.7.camel@mattotaupa>
+	<lyvd53r2u4.fsf@ensc-virt.intern.sigma-chemnitz.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <lyvd53r2u4.fsf@ensc-virt.intern.sigma-chemnitz.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH] Reverse the order of OVERRIDES
+Subject: Re: [PATCH] cacao-native-0.99.3: fix `install: cannot stat `src/cacaoh/.libs/cacaoh': No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,57 +51,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 15:30:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Oct 2010 15:37:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Chris Larson
-> Sent: Friday, October 15, 2010 10:17 AM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Chris Larson
-> Subject: Re: [oe] [PATCH] Reverse the order of OVERRIDES
->=20
-> On Fri, Oct 15, 2010 at 7:12 AM, Maupin, Chase <chase.maupin@ti.com>
-> wrote:
->=20
-> > > diff --git a/conf/machine/kixrp435.conf b/conf/machine/kixrp435.conf
-> > > index 8259127..b4a2fa6 100644
-> > > --- a/conf/machine/kixrp435.conf
-> > > +++ b/conf/machine/kixrp435.conf
-> > > @@ -7,7 +7,7 @@ TARGET_ARCH =3D "arm"
-> > >  # Note: armv4 armv4t armv5te will be added by tune-xscale.inc
-> > > automatically.
-> > >  PACKAGE_EXTRA_ARCHS =3D "armv5e ixp4xxle"
-> > >
-> > > -OVERRIDES =3D
-> > >
-> >
-> "local:${MACHINE}:nslu2:ixp4xx:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:buil=
-d
-> > > -${BUILD_OS}:fail-fast:pn-${PN}"
-> > > +MACHINE_OVERRIDES +=3D "nslu2 ixp4xx"
-> >
-> > Should this be "ixp4xx nslu2"?  At least in order to keep the original
-> > behavior?
->=20
->=20
-> Yes, good catch, thanks, I'll fix it in the next version of the patch.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Everything else looked OK to me.  Thanks for this change Chris.
+On 15-10-10 15:40, Enrico Scholz wrote:
+> Paul Menzel <paulepanter@users.sourceforge.net> writes:
+> 
+>> -  install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
+>> +  install -m 0755 src/cacaoh/cacaoh ${D}${bindir}/cacaoh-${PV}
+> 
+> Location of the binary depends on libtool version and other factors so
+> that both paths are possible.
+> 
+> | libtool --mode=install install -m 0755 src/cacaoh/cacaoh ...
+> 
+> is more portable.
 
-> --
-> Christopher Larson
-> clarson at kergoth dot com
-> Founder - BitBake, OpenEmbedded, OpenZaurus
-> Maintainer - Tslib
-> Senior Software Engineer, Mentor Graphics
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+${TARGET_PREFIX}libtool, right?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMuHT/MkyGM64RGpERAhEtAJ9HceXIVevPB2hGRjXRUM9fXJLA1wCgnwRh
+zIMlzbA/s4JG+zMO3E7GQxw=
+=pF5G
+-----END PGP SIGNATURE-----
+
 
 
