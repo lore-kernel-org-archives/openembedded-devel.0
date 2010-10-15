@@ -1,42 +1,34 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1P6nGm-0002Fk-Ll
+	(envelope-from <morphis@gravedo.de>) id 1P6nQj-0003lU-5s
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 18:36:40 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id BB5861C088
+	Fri, 15 Oct 2010 18:46:53 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 4A3A5275CE2F; Fri, 15 Oct 2010 18:46:25 +0200 (CEST)
+Received: from [192.168.1.142] (p5489D441.dip.t-dialin.net [84.137.212.65])
+	by gravedo.de (Postfix) with ESMTPSA id 7CA65275CDC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 17:36:07 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id GaXaFtB50zrs
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 17:36:06 +0100 (BST)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id B554E1C068
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 17:36:05 +0100 (BST)
-Message-ID: <4CB882F6.2040100@xora.org.uk>
-Date: Fri, 15 Oct 2010 17:36:06 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+	Fri, 15 Oct 2010 18:46:24 +0200 (CEST)
+Message-ID: <4CB8855F.4090304@gravedo.de>
+Date: Fri, 15 Oct 2010 18:46:23 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12pre) Gecko/20101011 Shredder/3.1.6pre
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1287159817.3770.582.camel@mill.internal.reciva.com>
-In-Reply-To: <1287159817.3770.582.camel@mill.internal.reciva.com>
-X-Enigmail-Version: 1.1.1
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+References: <1287123859-31756-1-git-send-email-morphis@gravedo.de>
+	<AANLkTi=tvR6=LmMyEjwXQSuDBHJsbMH6dUZrnpBzOMc3@mail.gmail.com>
+In-Reply-To: <AANLkTi=tvR6=LmMyEjwXQSuDBHJsbMH6dUZrnpBzOMc3@mail.gmail.com>
+X-Enigmail-Version: 1.1.2
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: TSC minutes for 20101007
+Subject: Re: [PATCH] python-pycairo: convert to new style staging and bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,24 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 16:36:41 -0000
+X-List-Received-Date: Fri, 15 Oct 2010 16:46:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
- On 15/10/2010 17:23, Phil Blundell wrote:
-> The TSC is of the opinion that, although the interaction between the
-> policies could be more clearly spelled out, the intended effect is that
-> one should always be able to revert one's own changes without further
-> review.  Consequently, the TSC considers that the commit in question was
-> legitimate and did not breach the policies.  Holger will write to Frans
-> and inform him of this decision. 
->
-This was certainly my intention when I drafted the policy as part of the
-TSC. My reasoning was that even after review a major flaw may be found
-in your own patch. Reverting back to unpatched state may do less damage
-than waiting 2 weeks for a futher patch to be implemented and reveiwed.
+On 15.10.2010 09:07, Frans Meulenbroeks wrote:
+> Some concerns:
+> I don't think STAGING_INCDIR should be used; guess it should go to
+> ${D}/${includedir} (just like the 1.8.0 version does).
+> You might also peek at the do_install_append of the 1.8.0 recipe as it
+> does different/more things. I don't know too much about pycairo, but I
+> can imagine these make sense for 1.4.0 too.
 
-Graeme
+I even don't know much about pycairo in detail I just noted that it does
+not compile in its current state and changed it to new style staging.
+But I will check if it makes more sense to change the staging path to
+${D}/${includedir} as I just copied what was already there in do_stage().
 
+> Then again perhaps it is time to move to 1.8.0; this version has a
+> DEFAULT_PREFERENCE of -1, but angstrom 2008 and 2010 and kaeilos
+> already have 1.8.0 as preferred version (and the 1.8.0 version is
+> around for 1.5 year or so).
+
+For me it should be ok to drop 1.4.0 and use 1.8.0 if nobody else uses
+it. Btw. there is already a newer version of pycairo available. It's
+1.8.10 but they changed it's name to py2cairo. pycairo is now the name
+for the version with python 3.x support.
+
+> BTW the latest version of cairo is 1.8.10 so we might consider moving
+> to that version too.
+
+No, it's not. The latest version of cairo is 1.10.0 :) SHR is already
+using this version ...
+
+regards,
+morphis
 
 
