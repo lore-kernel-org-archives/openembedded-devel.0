@@ -1,37 +1,36 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P6eEK-00035h-8A
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P6eO8-0000NH-OU
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 08:57:31 +0200
-Received: by yxt3 with SMTP id 3so187774yxt.6
+	Fri, 15 Oct 2010 09:07:37 +0200
+Received: by iwn2 with SMTP id 2so559477iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Oct 2010 23:56:44 -0700 (PDT)
+	Fri, 15 Oct 2010 00:07:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=K3ke/LKc7bulIK1m8shFYCsGOXy+ovZhJmNpL/DbX8c=;
-	b=uXJr94cVc1tthprK+xmczBjzpMWpuxApi0Tq+LsPOqSLeAmibIz3yw67xxeT99MGwl
-	acrNXq+NtHWvJHlHKW6uIYTXncd1SUrGDfLEGSqqHH1wzu2o869NViMu62iFzJawq75V
-	cT+ssiem5UHsW5w8dPezs088V+CUfK9n8a+bw=
+	bh=zcGddnVNO/YDxP1QAu43vSGsDgIucH/xwUDKi4jSUX8=;
+	b=vlBUMzqkw76N1NHBw+fVVVpleI2vTN+zO3E/PcP9Zg0gIfpNb+M2Fx86H3Dau0vKyz
+	c40v0MdgK+5zcmhFGUiFDaOXxBowfhk6jQXyzub8WU4A5mPmghfdlOf5sfvFlD1tHDrY
+	Oul3KkcpyHkoYx3ZwxRDsO00wT2+kBjipMSmo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=kI73NQFSknMjxtrUX95cE/85CIw3mrA9B2Y3apJBgf/uGnkIOjoWgDfT3Y3p2IsGdk
-	/1EvUr5AmTdlEvaQMN9OZdKen2M5TcXgYtjmC/RHGEWHzqbpmTVc82vB1CfBMc4OJV8a
-	4bxqDGLNVZFamRjeUT2Th5fgTv6ZES/qmkoUQ=
+	b=akrOjMQP1B0uCcAyXHdkSO0txnQb0CyawDxWEjK2mNE+cuNsoNv8TrKLL0Z8KCvof0
+	qTshjUKt7pCr3OulK9caRD9xoqxD1AGQsbuZBBqyyL4+6ciqLuBds7kRrUtndNLRzZQ/
+	Tq8zybI4+6Th2qAj4Be9hEowK06TtCuwHDdEo=
 MIME-Version: 1.0
-Received: by 10.42.108.1 with SMTP id f1mr198232icp.132.1287125804422; Thu, 14
-	Oct 2010 23:56:44 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Thu, 14 Oct 2010 23:56:44 -0700 (PDT)
-In-Reply-To: <AANLkTimjtmWvRCypjwRfyFc7VnaJUL4R_0miq3aC3MRW@mail.gmail.com>
-References: <1287113787-21268-1-git-send-email-kergoth@gmail.com>
-	<AANLkTimjtmWvRCypjwRfyFc7VnaJUL4R_0miq3aC3MRW@mail.gmail.com>
-Date: Fri, 15 Oct 2010 08:56:44 +0200
-Message-ID: <AANLkTimgK9mmssx6HraJdzO2_toEOe5FvcDs5DDru8Pa@mail.gmail.com>
+Received: by 10.231.191.138 with SMTP id dm10mr209898ibb.126.1287126428747;
+	Fri, 15 Oct 2010 00:07:08 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Fri, 15 Oct 2010 00:07:08 -0700 (PDT)
+In-Reply-To: <1287123859-31756-1-git-send-email-morphis@gravedo.de>
+References: <1287123859-31756-1-git-send-email-morphis@gravedo.de>
+Date: Fri, 15 Oct 2010 09:07:08 +0200
+Message-ID: <AANLkTi=tvR6=LmMyEjwXQSuDBHJsbMH6dUZrnpBzOMc3@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Reverse the order of OVERRIDES
+Subject: Re: [PATCH] python-pycairo: convert to new style staging and bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,60 +52,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 06:57:35 -0000
+X-List-Received-Date: Fri, 15 Oct 2010 07:07:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/10/15 Khem Raj <raj.khem@gmail.com>:
-> On Thu, Oct 14, 2010 at 8:36 PM, Chris Larson <kergoth@gmail.com> wrote:
->> From: Chris Larson <chris_larson@mentor.com>
->>
->> Given the current implementation of OVERRIDES in bitbake, the variable i=
-s
->> expected to contain elements in the order least specific to most specifi=
-c,
->> however, our current usage of it does not match that. =A0As one example,=
- "local"
->> is supposed to always be the most specific override, yet currently it's =
-the
->> least specific. =A0As another example, currently the target architecture=
- is seen
->> as more specific than the machine, which is also clearly wrong.
->>
->> It becomes clear that a reversal of the current value will bring us to a=
- more
->> sane behavior, and avoids the need for the dual overrides hack mentioned=
- in
->> the comments, so clean those up as well.
->>
->> This also introduces a MACHINE_OVERRIDES variable as a generic mechanism=
- to
->> inject overrides elements which are more specific than the distro but le=
-ss
->> specific than the machine, which is where things like MACHINE_CLASS or
->> SOC_FAMILY or the like would go. =A0This variable is *space* separated, =
-to make
->> it easier and more convenient to assemble the variable incrementally, an=
-d it's
->> then translated to : separated when used in OVERRIDES.
->>
->> Signed-off-by: Chris Larson <chris_larson@mentor.com>
+2010/10/15 Simon Busch <morphis@gravedo.de>:
+> Signed-off-by: Simon Busch <morphis@gravedo.de>
+> ---
+> =A0recipes/python/python-pycairo_1.4.0.bb | =A0 =A04 ++--
+> =A01 files changed, 2 insertions(+), 2 deletions(-)
 >
-> both things look nice to me. We might need to document MACHINE_OVERRIDES =
-though.
+> diff --git a/recipes/python/python-pycairo_1.4.0.bb b/recipes/python/pyth=
+on-pycairo_1.4.0.bb
+> index 94bb338..b0cbf95 100644
+> --- a/recipes/python/python-pycairo_1.4.0.bb
+> +++ b/recipes/python/python-pycairo_1.4.0.bb
+> @@ -3,7 +3,7 @@ SECTION =3D "devel/python"
+> =A0HOMEPAGE =3D "http://cairographics.org/pycairo"
+> =A0LICENSE =3D "LGPL MPL"
+> =A0DEPENDS =3D "cairo"
+> -PR =3D "ml3"
+> +PR =3D "ml4"
 >
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+> =A0SRC_URI =3D "http://cairographics.org/releases/pycairo-${PV}.tar.gz \
+> =A0 =A0 =A0 =A0 =A0 =A0file://fix-setup-py.patch"
+> @@ -15,7 +15,7 @@ do_configure_append() {
+> =A0 =A0 =A0 =A0sed -e 's:@prefix@:${prefix}:' -e 's:@includedir@:\$\{pref=
+ix\}/include:' -e 's:@VERSION@:${PV}:' pycairo.pc.in > pycairo.pc
+> =A0}
 >
-Looks fine to me.
-Actually I've wondered several times why local did not have priority
-(but I had to do things like X_local).
-But before adding an ack, I would like to ask what has been done wrt
-testing (as this is potentially quite invasive).
+> -do_stage() {
+> +do_install_append() {
+> =A0 =A0 =A0 =A0install -d ${STAGING_INCDIR}
+> =A0 =A0 =A0 =A0install -m 0644 cairo/pycairo.h ${STAGING_INCDIR}
+> =A0}
 
-Also is there a way we can detect where the recipes can be simplified
-by adding unneeded appendices? (e.g by modifying/extending
-recipe_sanity).
 
-Thanks for the patch! Frans
+Some concerns:
+I don't think STAGING_INCDIR should be used; guess it should go to
+${D}/${includedir} (just like the 1.8.0 version does).
+You might also peek at the do_install_append of the 1.8.0 recipe as it
+does different/more things. I don't know too much about pycairo, but I
+can imagine these make sense for 1.4.0 too.
+
+Then again perhaps it is time to move to 1.8.0; this version has a
+DEFAULT_PREFERENCE of -1, but angstrom 2008 and 2010 and kaeilos
+already have 1.8.0 as preferred version (and the 1.8.0 version is
+around for 1.5 year or so).
+
+BTW the latest version of cairo is 1.8.10 so we might consider moving
+to that version too.
+
+Enjoy, Frans
 
 
