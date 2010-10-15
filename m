@@ -1,28 +1,39 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1P6fpM-0003aw-RX
+	(envelope-from <koansoftware@gmail.com>) id 1P6gEr-000768-JB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 10:39:52 +0200
-Received: (qmail 4519 invoked by uid 813007); 15 Oct 2010 08:39:18 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 15 Oct 2010 08:39:18 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Oct 2010 10:39:05 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-22-generic; KDE/4.5.2; x86_64; ; )
+	Fri, 15 Oct 2010 11:06:11 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 0F7342C7E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 09:05:11 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id clMmqdIgzhaR
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 09:05:06 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 40C1D2C7D5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 09:05:06 +0000 (UTC)
+Message-ID: <4CB81961.4050104@gmail.com>
+Date: Fri, 15 Oct 2010 11:05:37 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-Message-Id: <201010151039.08619.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+References: <201010151039.08619.marcin@juszkiewicz.com.pl>
+In-Reply-To: <201010151039.08619.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: RFC: remove old kernels
+Subject: Re: RFC: remove old kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,80 +47,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 08:39:52 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Oct 2010 09:06:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Marcin Juszkiewicz ha scritto, Il 15/10/2010 10:39:
+> Hi
+>=20
+> recipes/linux/ contains 235 recipes. I would like to propose cleaning:
+>=20
+> 1. drop 2.4 kernels - if someone still needs them then .oz354x and .sta=
+ble
+>    branches have them.
+>=20
+
+I agree.
 
 
-Hi
 
-recipes/linux/ contains 235 recipes. I would like to propose cleaning:
+> 2. Drop kernels older then 2.6.20 - it was over 3 years ago so if someo=
+ne uses=20
+>    older one then probably also uses 3 years old OE.=20
+>=20
+> This may affect (checked recipes):
+>=20
+> - ep93xx - machines with this cpu are mainline supported, patches from =
+ts72xx
+>   and sim.one works
+> - chumby
+> - compulab-pxa270
+> - devkitidp-pxa255
+> - fsg3
+> - gumstix
+> - amsdelta
+> - bd-neon
+> - colinux
+> - epia
+> - geodelx
+> - h1940
+> - h6300
+> - ks8695
+> - magicbox
+> - mtx-3
+> - neuros
+> - sun4cdm
+> - tornado-omap2
+> - wrap-geode
+> - x86
+> - acern30
+> - logicpd-pxa270
+> - mainstone
+> - mx21ads
+> - netbook-pro
+> - triton
+> - blueangel
+> - universal
+>=20
+> Some of those machines are not maintained anymore, many of them should =
+work=20
+> with current mainline kernels. If someone cares about anything on a lis=
+t -=20
+> raise your hand.
 
-1. drop 2.4 kernels - if someone still needs them then .oz354x and .stable
-   branches have them.
-
-This may affect:
-
-- zauruses (which have 2.6 kernel)
-- ipaq h36/38/39/54/55 - some have 2.6 kernel
-- ipod - but does someone really uses 2.4.24 on own ipod?
-- ramses - but this is maintained out of tree
-- wrt54 - OpenWRT distro works better there and lets keep that way
-- xxs1500, mtx, sun4cdm - if someone maintain it at all then please raise your
-  hand
-- colinux - no one will cry
-- geodegx - 2.6 mainline works on it
-
-
-2. Drop kernels older then 2.6.20 - it was over 3 years ago so if someone uses 
-   older one then probably also uses 3 years old OE. 
-
-This may affect (checked recipes):
-
-- ep93xx - machines with this cpu are mainline supported, patches from ts72xx
-  and sim.one works
-- chumby
-- compulab-pxa270
-- devkitidp-pxa255
-- fsg3
-- gumstix
-- amsdelta
-- bd-neon
-- colinux
-- epia
-- geodelx
-- h1940
-- h6300
-- ks8695
-- magicbox
-- mtx-3
-- neuros
-- sun4cdm
-- tornado-omap2
-- wrap-geode
-- x86
-- acern30
-- logicpd-pxa270
-- mainstone
-- mx21ads
-- netbook-pro
-- triton
-- blueangel
-- universal
-
-Some of those machines are not maintained anymore, many of them should work 
-with current mainline kernels. If someone cares about anything on a list - 
-raise your hand.
-
-Why 2.6.20? Because NHK-15 uses it and does not work with mainline kernel.
-
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+IMHO many of those machines are still a useful starting point for a lot
+of people.
+Moreover lots of PXA2x0 based board are unfortunately still using them.
 
 
+I vote to keep them a bit longer.
+
+
+
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+        http://www.KaeilOS.com
 
 
