@@ -1,44 +1,31 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1P6lJ7-0000Qd-HP
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 16:30:54 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 3C28511000B4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 16:30:25 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A007611000A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 16:30:23 +0200 (CEST)
-Received: from rhein.familie-heinold.de (g225075015.adsl.alicedsl.de
-	[92.225.75.15]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 16:30:23 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id AC96B3C0FD; Fri, 15 Oct 2010 16:30:14 +0200 (CEST)
-Date: Fri, 15 Oct 2010 16:30:14 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P6lmY-0002ok-Eg for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 17:01:19 +0200
+Received: from f053038067.adsl.alicedsl.de ([78.53.38.67]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P6lm6-0002u4-Di for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 15:00:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101015143014.GA9736@rhein.zuhause.netz>
-References: <1287144965-6419-1-git-send-email-obi@opendreambox.org>
-	<1287144965-6419-4-git-send-email-obi@opendreambox.org>
-MIME-Version: 1.0
-In-Reply-To: <1287144965-6419-4-git-send-email-obi@opendreambox.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+In-Reply-To: <1287066254-23579-1-git-send-email-bengardiner@nanometrics.ca>
+References: <1287066254-23579-1-git-send-email-bengardiner@nanometrics.ca>
+Date: Fri, 15 Oct 2010 17:00:49 +0200
+Message-ID: <1287154849.4233.19.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 4/4] libsdl-directfb: update to 1.2.14
+Subject: Re: [RFC, PATCH, resend] gmp: assign --target to --host to avoid configure error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,28 +39,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 14:30:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 15 Oct 2010 15:01:19 -0000
+X-Groupsio-MsgNum: 24900
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-PsdgdZNMmOnb4LJolAEx"
 
-Hi Obi,
+--=-PsdgdZNMmOnb4LJolAEx
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-please do not patch libtool m4 macros. The workaround for this is simple remove all macros
-and let them copying from autoconf.
+Am Donnerstag, den 14.10.2010, 10:24 -0400 schrieb Ben Gardiner:
+> When trying to build angstrom-2008.1 from
+> f58a5d59b755bdb725497f574a8059529c134c27 of master or from
+> b78fc95424b5f0fb28246e8c61bb8b4d6a9d733a of stable/2009 the builds failed=
+ on
+> gmp-native (then later gmp). The error was that "--target is not appropri=
+ate
+> for GMP".
+>=20
+> To avoid the error printed by the following code snippet from configure.i=
+n:
+>=20
+> configure.in:
+> "
+> if test -n "$target_alias" && test "$target_alias" !=3D "$host_alias"; th=
+en
+>   AC_MSG_ERROR([--target is not appropriate for GMP
+> Use --build=3DCPU-VENDOR-OS if you need to specify your CPU and/or system
+> explicitly.  Use --host if cross-compiling (see "Installing GMP" in the
+> manual for more on this).])
+> fi
+> "
+>=20
+> this patch assigns the value of the '--target' argument to the value of t=
+he
+> '--host' argument.
+>=20
+> Tested by 'bitbake gmp' and 'bitbake gmp-native'
 
-Here is what I did for sdl-tff.
+I tried to build `gmp-native` without your patch and it worked for me
+with `minimal` (eglibc) for `MACHINE =3D "beagleboard"`. Is there a
+difference how things are handled between distributions?
 
-do_configure_prepend() {
-  
-   MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
- 
-   for i in ${MACROS}; do
-     rm acinclude/$i
-   done
-
-}
+[=E2=80=A6]
 
 
-Bye Henning
+Thanks,
 
+Paul
 
+--=-PsdgdZNMmOnb4LJolAEx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky4bKEACgkQPX1aK2wOHVhCNQCeN55GbeWd45DizJZYj2pUZnlN
+aEcAn1QVHnahF6QA6yUtL5aFmynQK/Pj
+=IsXs
+-----END PGP SIGNATURE-----
+
+--=-PsdgdZNMmOnb4LJolAEx--
