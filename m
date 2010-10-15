@@ -1,41 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1P6l7x-0006jG-7i
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1P6lJ7-0000Qd-HP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 16:19:22 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1P6l7P-0005lh-3C from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 07:18:47 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 15 Oct 2010 07:18:46 -0700
-Received: from [172.30.80.89] ([172.30.80.89]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 15 Oct 2010 08:18:45 -0600
-Message-ID: <4CB862BE.9070908@mentor.com>
-Date: Fri, 15 Oct 2010 07:18:38 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Fri, 15 Oct 2010 16:30:54 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 3C28511000B4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 16:30:25 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A007611000A7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 16:30:23 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225075015.adsl.alicedsl.de
+	[92.225.75.15]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 16:30:23 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id AC96B3C0FD; Fri, 15 Oct 2010 16:30:14 +0200 (CEST)
+Date: Fri, 15 Oct 2010 16:30:14 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1287113787-21268-1-git-send-email-kergoth@gmail.com>
-	<AANLkTimjtmWvRCypjwRfyFc7VnaJUL4R_0miq3aC3MRW@mail.gmail.com>
-In-Reply-To: <AANLkTimjtmWvRCypjwRfyFc7VnaJUL4R_0miq3aC3MRW@mail.gmail.com>
-X-OriginalArrivalTime: 15 Oct 2010 14:18:46.0094 (UTC)
-	FILETIME=[E0EE3EE0:01CB6C73]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-ID: <20101015143014.GA9736@rhein.zuhause.netz>
+References: <1287144965-6419-1-git-send-email-obi@opendreambox.org>
+	<1287144965-6419-4-git-send-email-obi@opendreambox.org>
+MIME-Version: 1.0
+In-Reply-To: <1287144965-6419-4-git-send-email-obi@opendreambox.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH] Reverse the order of OVERRIDES
+Subject: Re: [PATCH 4/4] libsdl-directfb: update to 1.2.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,40 +52,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 14:19:22 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Oct 2010 14:30:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Khem Raj wrote:
-> On Thu, Oct 14, 2010 at 8:36 PM, Chris Larson <kergoth@gmail.com> wrote:
->> From: Chris Larson <chris_larson@mentor.com>
->>
->> Given the current implementation of OVERRIDES in bitbake, the variable is
->> expected to contain elements in the order least specific to most specific,
->> however, our current usage of it does not match that.  As one example, "local"
->> is supposed to always be the most specific override, yet currently it's the
->> least specific.  As another example, currently the target architecture is seen
->> as more specific than the machine, which is also clearly wrong.
->>
->> It becomes clear that a reversal of the current value will bring us to a more
->> sane behavior, and avoids the need for the dual overrides hack mentioned in
->> the comments, so clean those up as well.
->>
->> This also introduces a MACHINE_OVERRIDES variable as a generic mechanism to
->> inject overrides elements which are more specific than the distro but less
->> specific than the machine, which is where things like MACHINE_CLASS or
->> SOC_FAMILY or the like would go.  This variable is *space* separated, to make
->> it easier and more convenient to assemble the variable incrementally, and it's
->> then translated to : separated when used in OVERRIDES.
->>
->> Signed-off-by: Chris Larson <chris_larson@mentor.com>
-> 
-> both things look nice to me. We might need to document MACHINE_OVERRIDES though.
+Hi Obi,
 
-Yes, no new variables without updating the docs.
+please do not patch libtool m4 macros. The workaround for this is simple remove all macros
+and let them copying from autoconf.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Here is what I did for sdl-tff.
+
+do_configure_prepend() {
+  
+   MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
+ 
+   for i in ${MACROS}; do
+     rm acinclude/$i
+   done
+
+}
+
+
+Bye Henning
 
 
