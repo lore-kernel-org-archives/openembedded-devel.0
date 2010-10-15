@@ -1,36 +1,43 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P6odQ-0007J9-A4
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 20:04:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 3C68A3149E3F
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P6q6b-0001p5-UI for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 21:38:20 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P6q67-0000aU-T6 for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 21:37:47 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 21:37:47 +0200
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 20:03:33 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id 8xNM+S2ow2+Y; Fri, 15 Oct 2010 20:03:26 +0200 (CEST)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 810CD3149E3D;
-	Fri, 15 Oct 2010 20:03:25 +0200 (CEST)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Fri, 15 Oct 2010 18:03:25 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Fri, 15 Oct 2010 21:37:47 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Oct 2010 18:03:24 +0000
-Message-Id: <1287165804-5939-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 15 Oct 2010 21:37:39 +0200
+Message-ID: <i9aai3$tmj$1@dough.gmane.org>
+References: <1287113787-21268-1-git-send-email-kergoth@gmail.com>
+	<1287157281-31597-1-git-send-email-kergoth@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <1287157281-31597-1-git-send-email-kergoth@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] oestats-client.bbclass: Fix "AttributeError: 'NoneType' object has no attribute 'startswith'" if OESTATS_SERVER is not set
+Subject: Re: [PATCH (v2)] Reverse the order of OVERRIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +51,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 18:04:04 -0000
+X-List-Received-Date: Fri, 15 Oct 2010 19:38:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- classes/oestats-client.bbclass |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/classes/oestats-client.bbclass b/classes/oestats-client.bbclass
-index 4415461..f521571 100644
---- a/classes/oestats-client.bbclass
-+++ b/classes/oestats-client.bbclass
-@@ -181,12 +181,13 @@ python oestats_eventhandler () {
- 		return
- 
- 	server = bb.data.getVar('OESTATS_SERVER', e.data, True)
--	if not server.startswith('http://') and not server.startswith('https://'):
--		server = "http://%s" %(server)
- 	builder = bb.data.getVar('OESTATS_BUILDER', e.data, True)
- 	if not server or not builder:
- 		return
- 
-+	if not server.startswith('http://') and not server.startswith('https://'):
-+		server = "http://%s" %(server)
-+
- 	if getName(e) == 'BuildStarted':
- 		oestats_start(server, builder, e.data)
- 	elif getName(e) == 'BuildCompleted':
--- 
-1.7.1
+On 15-10-10 17:41, Chris Larson wrote:
+> From: Chris Larson <chris_larson@mentor.com>
+> 
+> Given the current implementation of OVERRIDES in bitbake, the variable is
+> expected to contain elements in the order least specific to most specific,
+> however, our current usage of it does not match that.  As one example, "local"
+> is supposed to always be the most specific override, yet currently it's the
+> least specific.  As another example, currently the target architecture is seen
+> as more specific than the machine, which is also clearly wrong.
+> 
+> Big thanks to Chase Maupin for investigating and identifying this long
+> standing issue.
+> 
+> It becomes clear that a reversal of the current value will bring us to a more
+> sane behavior, and avoids the need for the dual overrides hack mentioned in
+> the comments, so this implements this reversal, and drops the unnecessary and
+> confusing comments.
+> 
+> This also introduces a MACHINE_OVERRIDES variable as a generic mechanism to
+> inject overrides elements which are more specific than the distro but less
+> specific than the machine, which is where things like MACHINE_CLASS or
+> SOC_FAMILY or the like would go.  This variable is *space* separated, to make
+> it easier and more convenient to assemble the variable incrementally.
+> 
+> Reported-by: Chase Maupin <chase.maupin@ti.com>
+> Signed-off-by: Chris Larson <chris_larson@mentor.com>
+
+Acked-by: Koen Kooi <k-kooi@ti.com>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMuK2DMkyGM64RGpERAsrgAJ0QbM4VQaERuv72HzOGZJKGqGxljwCfUpHL
+wX5AXypHwuHP4cG9BKj7CjM=
+=Jpyx
+-----END PGP SIGNATURE-----
 
 
 
