@@ -1,27 +1,41 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1P6gTq-0007aN-UR
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P6ggf-0007ni-SA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 11:21:39 +0200
-Received: (qmail 31526 invoked by uid 813007); 15 Oct 2010 09:21:11 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 15 Oct 2010 09:21:11 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Oct 2010 11:20:59 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-22-generic; KDE/4.5.2; x86_64; ; )
-References: <201010151039.08619.marcin@juszkiewicz.com.pl>
-	<4CB81961.4050104@gmail.com>
-In-Reply-To: <4CB81961.4050104@gmail.com>
+	Fri, 15 Oct 2010 11:34:54 +0200
+Received: by ywl5 with SMTP id 5so230009ywl.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Oct 2010 02:34:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=6zeiYh2BEYnEJhuEvngKyLjMpBELLIl2SPafKXFc/uk=;
+	b=CHEbeFP4qxtrrhSUg/mqjpe1Y99UwACX3wKMze7d67VTqSmaMPxl7Gb/J9nDgRgoX+
+	8IdwyrkuW8W+24H8OP1a5ti74902jP5DV1/NGL1OS6kgzFc/QuC06WMgEsXuVShCYk2d
+	LamqD+hmcxnSqGspdVbmuHYeYfX8CfnEVmxT0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=l/d6D2wKXEL4utacDu4R20EHCgoHxjtZPIhRfqMeGBYbL4mbfHtqsaTcpABvfdGFpG
+	o6iQLts6gXEA89cCfkXJhwQaUnvtrxPJTKNYAtpejRuqJUvka8CqpT2JT/+h4rXtoumx
+	tlfik66dCyUUMsYzIgRx5LFtnvaia8AYpvjA8=
 MIME-Version: 1.0
-Message-Id: <201010151121.01210.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Received: by 10.42.5.144 with SMTP id 16mr347288icw.99.1287135259580; Fri, 15
+	Oct 2010 02:34:19 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Fri, 15 Oct 2010 02:34:19 -0700 (PDT)
+In-Reply-To: <4CB81CA3.9080601@xora.org.uk>
+References: <201010151039.08619.marcin@juszkiewicz.com.pl>
+	<4CB81CA3.9080601@xora.org.uk>
+Date: Fri, 15 Oct 2010 11:34:19 +0200
+Message-ID: <AANLkTim==BZdDSmcCssdG=Y25RyDLqe4WgLFMQHMDkQq@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -39,33 +53,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 09:21:39 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Fri, 15 Oct 2010 09:34:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dnia pi=C4=85tek, 15 pa=C5=BAdziernika 2010 o 11:05:37 Marco Cavallini napi=
-sa=C5=82(a):
-> > Some of those machines are not maintained anymore, many of them should
-> > work  with current mainline kernels. If someone cares about anything on
-> > a list - raise your hand.
->=20
-> IMHO many of those machines are still a useful starting point for a lot
-> of people.
-> Moreover lots of PXA2x0 based board are unfortunately still using them.
->=20
-> I vote to keep them a bit longer.
+2010/10/15 Graeme Gregory <dp@xora.org.uk>:
+> =A0On 15/10/2010 09:39, Marcin Juszkiewicz wrote:
+>> Hi
+>>
+>> recipes/linux/ contains 235 recipes. I would like to propose cleaning:
+>>
+> This may be again time to discuss something I have proposed before at OED=
+EM.
+>
+> Splitting machines out into seperate git trees, with Chris' awesome work
+> on collections this is no longer hard to maintain. But will mean the
+> main OE repo is free of unmaintained machines. Maintained ones will be
+> obvious by the activity on their git (which doesnt even neccessarilly
+> need to be hosted by OE)
+>
+> Graeme
+>
 
-If someone is using them then please raise a hand. We have lot of cruft in=
-=20
-metadata already.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+Excellent plan!
 
 
