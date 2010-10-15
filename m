@@ -1,42 +1,38 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P6hl9-0004SZ-4J for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 12:43:36 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P6hke-0007lB-Vq for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Oct 2010 12:43:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 12:43:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <obi@opendreambox.org>) id 1P6jDP-0002xK-Ml
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Oct 2010 14:16:53 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 2C6483149EA8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Oct 2010 12:43:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 15 Oct 2010 14:16:22 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id PAz3ugcriHnu; Fri, 15 Oct 2010 14:16:13 +0200 (CEST)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 92B643149EA0;
+	Fri, 15 Oct 2010 14:16:12 +0200 (CEST)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Fri, 15 Oct 2010 12:16:12 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 15 Oct 2010 12:42:55 +0200
-Message-ID: <i99b7g$5oa$1@dough.gmane.org>
-References: <1287113787-21268-1-git-send-email-kergoth@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <1287113787-21268-1-git-send-email-kergoth@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Fri, 15 Oct 2010 12:16:01 +0000
+Message-Id: <1287144965-6419-2-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1287144965-6419-1-git-send-email-obi@opendreambox.org>
+References: <1287144965-6419-1-git-send-email-obi@opendreambox.org>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS,URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Reverse the order of OVERRIDES
+Subject: [PATCH 2/4] cdtextinfo: initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,310 +46,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2010 10:43:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Oct 2010 12:16:53 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* cdtextinfo queries information about an Audio-CD from CD-Text
+  or CDDB. It outputs queried data as XML.
 
-On 15-10-10 05:36, Chris Larson wrote:
-> From: Chris Larson <chris_larson@mentor.com>
-> 
-> Given the current implementation of OVERRIDES in bitbake, the variable is
-> expected to contain elements in the order least specific to most specific,
-> however, our current usage of it does not match that.  As one example, "local"
-> is supposed to always be the most specific override, yet currently it's the
-> least specific.  As another example, currently the target architecture is seen
-> as more specific than the machine, which is also clearly wrong.
-> 
-> It becomes clear that a reversal of the current value will bring us to a more
-> sane behavior, and avoids the need for the dual overrides hack mentioned in
-> the comments, so clean those up as well.
-> 
-> This also introduces a MACHINE_OVERRIDES variable as a generic mechanism to
-> inject overrides elements which are more specific than the distro but less
-> specific than the machine, which is where things like MACHINE_CLASS or
-> SOC_FAMILY or the like would go.  This variable is *space* separated, to make
-> it easier and more convenient to assemble the variable incrementally, and it's
-> then translated to : separated when used in OVERRIDES.
-> 
-> Signed-off-by: Chris Larson <chris_larson@mentor.com>
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ recipes/cdtextinfo/cdtextinfo_0.1.bb |   13 +++++++++++++
+ 1 files changed, 13 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/cdtextinfo/cdtextinfo_0.1.bb
 
-Thanks for the patch! Chase or I will take care of moving SOC_FAMILY to
-MACHINE_OVERRIDES after this lands.
-
-Acked-by: Koen Kooi <k-kooi@ti.com>
-
-
-
-> ---
->  conf/bitbake.conf                             |   17 +++--------------
->  conf/distro/include/arm-thumb.inc             |    6 +++---
->  conf/distro/micro.conf                        |    6 +++---
->  conf/distro/minimal.conf                      |    5 +++--
->  conf/distro/shr.conf                          |    5 +++--
->  conf/machine/fsg3be.conf                      |    2 +-
->  conf/machine/kixrp435.conf                    |    2 +-
->  conf/machine/nslu2be.conf                     |    2 +-
->  conf/machine/nslu2le.conf                     |    2 +-
->  recipes/binutils/binutils_csl-arm-20050416.bb |    2 +-
->  recipes/binutils/binutils_csl-arm-20050603.bb |    2 +-
->  recipes/eglibc/eglibc-package.bbclass         |    2 +-
->  recipes/glibc/glibc-package.inc               |    2 +-
->  recipes/prelink/prelink_20061027.bb           |    2 +-
->  recipes/prelink/prelink_20071009.bb           |    2 +-
->  recipes/prelink/prelink_20090925.bb           |    2 +-
->  16 files changed, 26 insertions(+), 35 deletions(-)
-> 
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 494e14e..c2359dc 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -675,20 +675,9 @@ BUILDCFG_NEEDEDVARS ?= "TARGET_ARCH TARGET_OS"
->  
->  # Overrides are processed left to right, so the ones that are named later take precedence.
->  # You generally want them to go from least to most specific.
-> -# 
-> -# This means that an envionment variable named '<foo>_arm' overrides an
-> -# environment variable '<foo>' (when ${TARGET_ARCH} is arm).
-> -# an environment variable '<foo>_ramses' overrides '<foo>' but doesn't override
-> -# '<foo>_arm' when ${MACHINE} is 'ramses'. 
-> -# If you use combination ie '<foo>_arm_ramses', then '<foo>_arm_ramses' will override 
-> -# '<foo>_arm' and then '<foo>' will be overriden with that value from '<foo>_arm'.
-> -# And finally '<foo>_local' overrides anything, but with lowest priority.
-> -#
-> -# This works for  functions as well, they are really just environment variables.
-> -# Default OVERRIDES to make compilation fail fast in case of build system misconfiguration.
-> -OVERRIDES = "local:${MACHINE}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> -# Alternative OVERRIDES definition without "fail fast", usually only for native building and Scratchbox toolchains.
-> -#OVERRIDES = "local:${MACHINE}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:pn-${PN}"
-> +MACHINE_OVERRIDES ?= ""
-> +OVERRIDES = "pn-${PN}:fail-fast:build-${BUILD_OS}:${TARGET_ARCH}:${TARGET_OS}:\
-> +${DISTRO}:${@':'.join(d.getVar('MACHINE_OVERRIDES', True).split())}:${MACHINE}:local"
->  
->  ##################################################################
->  # Include the rest of the config files.
-> diff --git a/conf/distro/include/arm-thumb.inc b/conf/distro/include/arm-thumb.inc
-> index 36edd4f..75ed978 100644
-> --- a/conf/distro/include/arm-thumb.inc
-> +++ b/conf/distro/include/arm-thumb.inc
-> @@ -16,9 +16,9 @@ THUMB_INTERWORK ?= "no"
->  #    arm system and vice versa.  It is strongly recommended that DISTROs not
->  #    turn this off - the actual cost is very small.
->  
-> -OVERRIDE_THUMB = "${@['', ':thumb'][bb.data.getVar('ARM_INSTRUCTION_SET', d, 1) == 'thumb']}"
-> -OVERRIDE_INTERWORK = "${@['', ':thumb-interwork'][bb.data.getVar('THUMB_INTERWORK', d, 1) == 'yes']}"
-> -OVERRIDES_append_arm =. "${OVERRIDE_THUMB}${OVERRIDE_INTERWORK}"
-> +OVERRIDE_THUMB = "${@['', 'thumb:'][bb.data.getVar('ARM_INSTRUCTION_SET', d, 1) == 'thumb']}"
-> +OVERRIDE_INTERWORK = "${@['', 'thumb-interwork:'][bb.data.getVar('THUMB_INTERWORK', d, 1) == 'yes']}"
-> +OVERRIDES_prepend_arm =. "${OVERRIDE_THUMB}${OVERRIDE_INTERWORK}"
->  
->  #    Compiler and linker options for application code and kernel code.  These
->  #    options ensure that the compiler has the correct settings for the selected
-> diff --git a/conf/distro/micro.conf b/conf/distro/micro.conf
-> index 6d396b3..19b5e62 100644
-> --- a/conf/distro/micro.conf
-> +++ b/conf/distro/micro.conf
-> @@ -69,10 +69,10 @@ require conf/distro/include/sane-toolchain.inc
->  require conf/distro/include/arm-thumb.inc
->  
->  #############################################################################
-> -# OVERRIDES adjusted from bitbake.conf to feature the MACHINE_CLASS
-> +# Ensure MACHINE_CLASS is in OVERRIDES
->  #############################################################################
-> -OVERRIDES = "local:${MACHINE}:${MACHINE_CLASS}:${DISTRO}:${TARGET_OS}:\
-> -${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> +MACHINE_CLASS ?= ""
-> +MACHINE_OVERRIDES += "${MACHINE_CLASS}"
->  
->  #############################################################################
->  # PREFERRED VERSIONS
-> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
-> index 376ffde..0d32cfe 100644
-> --- a/conf/distro/minimal.conf
-> +++ b/conf/distro/minimal.conf
-> @@ -81,9 +81,10 @@ KERNEL = "kernel26"
->  MACHINE_KERNEL_VERSION = "2.6"
->  
->  #############################################################################
-> -# OVERWRITES adjusted from bitbake.conf to feature the MACHINE_CLASS
-> +# Ensure MACHINE_CLASS is in OVERRIDES
->  #############################################################################
-> -OVERRIDES = "local:${MACHINE}:${MACHINE_CLASS}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> +MACHINE_CLASS ?= ""
-> +MACHINE_OVERRIDES += "${MACHINE_CLASS}"
->  
->  #############################################################################
->  # TOOLCHAIN
-> diff --git a/conf/distro/shr.conf b/conf/distro/shr.conf
-> index ade8cba..74e3fe9 100644
-> --- a/conf/distro/shr.conf
-> +++ b/conf/distro/shr.conf
-> @@ -151,9 +151,10 @@ KERNEL = "kernel26"
->  MACHINE_KERNEL_VERSION = "2.6"
->  
->  #############################################################################
-> -# OVERWRITES adjusted from bitbake.conf to feature the MACHINE_CLASS
-> +# Ensure MACHINE_CLASS is in OVERRIDES
->  #############################################################################
-> -OVERRIDES = "local:${MACHINE}:${MACHINE_CLASS}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> +MACHINE_CLASS ?= ""
-> +MACHINE_OVERRIDES += "${MACHINE_CLASS}"
->  
->  #############################################################################
->  # TOOLCHAIN
-> diff --git a/conf/machine/fsg3be.conf b/conf/machine/fsg3be.conf
-> index a2ca95b..c5ddc25 100644
-> --- a/conf/machine/fsg3be.conf
-> +++ b/conf/machine/fsg3be.conf
-> @@ -8,7 +8,7 @@ PACKAGE_EXTRA_ARCHS = "ixp4xxbe"
->  
->  MACHINE_ARCH = "ixp4xxbe"
->  
-> -OVERRIDES = "local:${MACHINE}:ixp4xxbe:ixp4xx:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> +MACHINE_OVERRIDES += "ixp4xx ixp4xxbe"
->  
->  # Match the vendor's latest kernel
->  PREFERRED_PROVIDER_virtual/kernel ?= "fsg3-kernel"
-> diff --git a/conf/machine/kixrp435.conf b/conf/machine/kixrp435.conf
-> index 8259127..b4a2fa6 100644
-> --- a/conf/machine/kixrp435.conf
-> +++ b/conf/machine/kixrp435.conf
-> @@ -7,7 +7,7 @@ TARGET_ARCH = "arm"
->  # Note: armv4 armv4t armv5te will be added by tune-xscale.inc automatically.
->  PACKAGE_EXTRA_ARCHS = "armv5e ixp4xxle"
->  
-> -OVERRIDES = "local:${MACHINE}:nslu2:ixp4xx:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> +MACHINE_OVERRIDES += "nslu2 ixp4xx"
->  
->  PREFERRED_PROVIDER_virtual/kernel = "linux"
->  PREFERRED_VERSION_linux = "2.6.30"
-> diff --git a/conf/machine/nslu2be.conf b/conf/machine/nslu2be.conf
-> index 9bc92f1..88e6ed2 100644
-> --- a/conf/machine/nslu2be.conf
-> +++ b/conf/machine/nslu2be.conf
-> @@ -7,7 +7,7 @@ TARGET_ARCH = "armeb"
->  # Note: armv4b armv4tb armv5teb will be added by tune-xscale.inc automatically.
->  PACKAGE_EXTRA_ARCHS = "armv5eb ixp4xxbe"
->  
-> -OVERRIDES = "local:${MACHINE}:nslu2:ixp4xx:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> +MACHINE_OVERRIDES += "nslu2 ixp4xx"
->  
->  ROOT_FLASH_SIZE ?= "6"
->  
-> diff --git a/conf/machine/nslu2le.conf b/conf/machine/nslu2le.conf
-> index 62e47cb..edd0d94 100644
-> --- a/conf/machine/nslu2le.conf
-> +++ b/conf/machine/nslu2le.conf
-> @@ -7,7 +7,7 @@ TARGET_ARCH = "arm"
->  # Note: armv4 armv4t armv5te will be added by tune-xscale.inc automatically.
->  PACKAGE_EXTRA_ARCHS = "armv5e ixp4xxle"
->  
-> -OVERRIDES = "local:${MACHINE}:nslu2:ixp4xx:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> +MACHINE_OVERRIDES += "nslu2 ixp4xx"
->  
->  ROOT_FLASH_SIZE ?= "6"
->  
-> diff --git a/recipes/binutils/binutils_csl-arm-20050416.bb b/recipes/binutils/binutils_csl-arm-20050416.bb
-> index ad45438..71803d1 100644
-> --- a/recipes/binutils/binutils_csl-arm-20050416.bb
-> +++ b/recipes/binutils/binutils_csl-arm-20050416.bb
-> @@ -7,7 +7,7 @@ LICENSE = "GPL"
->  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/binutils-cvs"
->  PV = "2.15.99+csl-arm+cvs20050416"
->  PR = "r3"
-> -OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
-> +OVERRIDES_prepend = "${TARGET_ARCH}-${TARGET_OS}:"
->  DEFAULT_PREFERENCE = "-1"
->  DEFAULT_PREFERENCE_arm-linux = "-1"
->  DEFAULT_PREFERENCE_arm-linuxeabi = "-1"
-> diff --git a/recipes/binutils/binutils_csl-arm-20050603.bb b/recipes/binutils/binutils_csl-arm-20050603.bb
-> index 595cb98..50e8677 100644
-> --- a/recipes/binutils/binutils_csl-arm-20050603.bb
-> +++ b/recipes/binutils/binutils_csl-arm-20050603.bb
-> @@ -7,7 +7,7 @@ LICENSE = "GPL"
->  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/binutils-cvs"
->  PV = "2.15.99+csl-arm+cvs20050603"
->  PR = "r3"
-> -OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
-> +OVERRIDES_prepend = "${TARGET_ARCH}-${TARGET_OS}:"
->  DEFAULT_PREFERENCE = "-1"
->  #DEFAULT_PREFERENCE_arm-linux = "1"
->  #DEFAULT_PREFERENCE_arm-linuxeabi = "1"
-> diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
-> index dbca1ab..c802bd5 100644
-> --- a/recipes/eglibc/eglibc-package.bbclass
-> +++ b/recipes/eglibc/eglibc-package.bbclass
-> @@ -116,7 +116,7 @@ def get_eglibc_fpu_setting(bb, d):
->  EXTRA_OECONF += "${@get_eglibc_fpu_setting(bb, d)}"
->  EXTRA_OEMAKE += "rootsbindir=${base_sbindir}"
->  
-> -OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
-> +OVERRIDES_prepend = "${TARGET_ARCH}-${TARGET_OS}:"
->  
->  do_configure_prepend() {
->          sed -e "s#@BASH@#/bin/sh#" -i ${S}/elf/ldd.bash.in
-> diff --git a/recipes/glibc/glibc-package.inc b/recipes/glibc/glibc-package.inc
-> index 0b263bb..8cd8564 100644
-> --- a/recipes/glibc/glibc-package.inc
-> +++ b/recipes/glibc/glibc-package.inc
-> @@ -44,7 +44,7 @@ def get_glibc_fpu_setting(bb, d):
->  EXTRA_OECONF += "${@get_glibc_fpu_setting(bb, d)}"
->  EXTRA_OEMAKE += "rootsbindir=${base_sbindir}"
->  
-> -OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
-> +OVERRIDES_prepend = "${TARGET_ARCH}-${TARGET_OS}:"
->  
->  do_install() {
->  	oe_runmake install_root=${D} install
-> diff --git a/recipes/prelink/prelink_20061027.bb b/recipes/prelink/prelink_20061027.bb
-> index ad2faf5..552117b 100644
-> --- a/recipes/prelink/prelink_20061027.bb
-> +++ b/recipes/prelink/prelink_20061027.bb
-> @@ -12,7 +12,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/p/prelink/prelink_0.0.${PV}.orig.tar.gz \
->             file://prelink.default"
->  
->  TARGET_OS_ORIG := "${TARGET_OS}"
-> -OVERRIDES_append = ":${TARGET_OS_ORIG}"
-> +OVERRIDES_prepend = "${TARGET_OS_ORIG}:"
->  SRC_URI_append_linux-gnueabi = " file://arm_eabi.patch"
->  
->  S = "${WORKDIR}/prelink-0.0.${PV}"
-> diff --git a/recipes/prelink/prelink_20071009.bb b/recipes/prelink/prelink_20071009.bb
-> index faf930c..e2ab3fb 100644
-> --- a/recipes/prelink/prelink_20071009.bb
-> +++ b/recipes/prelink/prelink_20071009.bb
-> @@ -12,7 +12,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/p/prelink/prelink_0.0.${PV}.orig.tar.gz \
->             file://prelink.default"
->  
->  TARGET_OS_ORIG := "${TARGET_OS}"
-> -OVERRIDES_append = ":${TARGET_OS_ORIG}"
-> +OVERRIDES_prepend = "${TARGET_OS_ORIG}:"
->  SRC_URI_append_linux-gnueabi = " file://arm_eabi.patch"
->  
->  S = "${WORKDIR}/prelink-0.0.${PV}"
-> diff --git a/recipes/prelink/prelink_20090925.bb b/recipes/prelink/prelink_20090925.bb
-> index 4c83402..5b247b6 100644
-> --- a/recipes/prelink/prelink_20090925.bb
-> +++ b/recipes/prelink/prelink_20090925.bb
-> @@ -12,7 +12,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/p/prelink/prelink_0.0.${PV}.orig.tar.gz \
->             file://prelink.default"
->  
->  #TARGET_OS_ORIG := "${TARGET_OS}"
-> -#OVERRIDES_append = ":${TARGET_OS_ORIG}"
-> +#OVERRIDES_prepend = "${TARGET_OS_ORIG}:"
->  #SRC_URI_append_linux-gnueabi = " file://arm_eabi.patch"
->  
->  S = "${WORKDIR}/prelink-0.0.${PV}"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMuDAvMkyGM64RGpERAlxxAKCzjaugv4f3l8A/wL+evxo3QOjbyQCgiuLC
-GTiLjxOoQ/7pW0vhSZf1owM=
-=hkIm
------END PGP SIGNATURE-----
+diff --git a/recipes/cdtextinfo/cdtextinfo_0.1.bb b/recipes/cdtextinfo/cdtextinfo_0.1.bb
+new file mode 100644
+index 0000000..22da5b5
+--- /dev/null
++++ b/recipes/cdtextinfo/cdtextinfo_0.1.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "Query CD-Text or information from CDDB"
++AUTHOR = "Andreas Frisch <andreas.frisch@multimedia-labs.de>"
++SECTION = "console"
++PRIORITY = "optional"
++LICENSE = "GPLv3"
++DEPENDS = "libcddb libcdio"
++
++SRC_URI = "http://dreamboxupdate.com/download/sources/${P}.tar.bz2"
++
++SRC_URI[md5sum] = "8fa7eeae52093bb90c1453ca4b8a29c9"
++SRC_URI[sha256sum] = "62498d3db29c5de2e9e9119b315d2c8d7558c5a45264f26aabcf1f989437af33"
++
++inherit autotools
+-- 
+1.7.1
 
 
 
