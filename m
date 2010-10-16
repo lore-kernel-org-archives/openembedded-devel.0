@@ -1,45 +1,44 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P7CNd-0005Uy-5b
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7CNt-0005WV-3S
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 21:25:22 +0200
-Received: by bwz9 with SMTP id 9so2061635bwz.6
+	Sat, 16 Oct 2010 21:25:40 +0200
+Received: by gwb17 with SMTP id 17so878422gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Oct 2010 12:24:48 -0700 (PDT)
+	Sat, 16 Oct 2010 12:25:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=FrMGQQ01Z6aqVRElGUBknTXTdhNUsyzJFJFHY+MQwr4=;
-	b=d3gvRRyW7BrTiI5ccC0Q0xud/PwxFlLy0S8/89FAC+ZDweNrwWDdvf1aTMx2TDZwqU
-	4UeQxTqFTAt2eXXuShPNP3xxmVtbY6ioZjeZxtoZVoZUfuVMuQxp4snRRaGWU33z0D2W
-	vhGnkL0dIbMqUU/frj/Pw1dLZa0bHuYst9U+A=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=lv1a7Afs9Z30Lyqbrs7iBef0TsXyidb3AlKeA0XOZtQ=;
+	b=Q9v/i+2ISWP7AOYgcgcXznbAnXq9NxGkz+jdGiXRVz+CmbV2pUbE3h2THpNupkkHih
+	xOvj+lhZ+QCc+IPi+A3d+A2i5ZvfQ7LgfLvJ5XITIb+D6PzpgxwwHGYqpW5aS6Pmh65O
+	+aMArlRYoismgjELp+0jO0SdRKbGWkWkucNgE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=p6fODYA0onnOM4UqkMWplVGmw0Mb8e1aqz8SC5F5/lduUdnWgfuVPJvQs7l7wiy236
-	X8mfro+aG00tUAobhSdREuQPizCNlrKiXRgwhajvM/RrCme9MzUTgtXDpDuCC2abmMcL
-	XDpN7Ob80eu8IOccCKtjL0jlbc5Xl9upSI5Bg=
-Received: by 10.204.78.8 with SMTP id i8mr2288375bkk.176.1287257088768;
-	Sat, 16 Oct 2010 12:24:48 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 4sm11966335bki.13.2010.10.16.12.24.47
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 16 Oct 2010 12:24:48 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=tACuwiPVDcRQlNZv8wcNQbWvzwkxp8f00KJMBUigvG5xIyZpx+IuBYZojiUHVIWtEw
+	JmQf7iRWJCZSiSWp5GrJ/RCcdgPrJEkRcQ5f1y6ZuvbM2YzGm30IncimLCGyXLdaXQCt
+	zArd92/31Nye0nvqyEzw5IfTJdqhXEIaKppCU=
+MIME-Version: 1.0
+Received: by 10.42.76.65 with SMTP id d1mr1837675ick.205.1287257101564; Sat,
+	16 Oct 2010 12:25:01 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sat, 16 Oct 2010 12:25:01 -0700 (PDT)
+In-Reply-To: <20101016183152.GA15103@gmail.com>
+References: <1287230170-20745-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<20101016183152.GA15103@gmail.com>
+Date: Sat, 16 Oct 2010 21:25:01 +0200
+Message-ID: <AANLkTi=xV6_7_sYi4Wf11QsFOc41PaWLdtfhycu4zZGg@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Oct 2010 21:24:41 +0200
-Message-Id: <1287257081-25608-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.3.1
-In-Reply-To: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
-References: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to OVERRIDES when it's empty
+Subject: Re: [PATCH] gnutols_2.10.1: remove the libtool-m4-macros
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,38 +52,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 19:25:22 -0000
+X-List-Received-Date: Sat, 16 Oct 2010 19:25:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* empty MACHINE_OVERRIDES adds :: to OVERRIDES (then in FILESPATH skips
-  every directory after this)
-* strip() is needed to remove space in case some distribution has ie
-  MACHINE_OVERRIDES ?= ""
-  and then
-  MACHINE_OVERRIDES += ""
-  or
-  MACHINE_OVERRIDES ?= "${MACHINE_CLASS}", where MACHINE_CLASS is empty   again
----
- conf/bitbake.conf |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+2010/10/16 Khem Raj <raj.khem@gmail.com>:
+> On (16/10/10 13:56), Frans Meulenbroeks wrote:
+>> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>
+> Good job Frans. I knew this was better solution but chose the inferior one
+> as it was easy but this one is more elegant and libtool version
+> agnostic. Thanks for doing it. In fact this should be how we solve libtool
+> update issues w.r.t. libtool 2.4 as we go forward
+>
+> Acked-by: Khem Raj <raj.khem@gmail.com>
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 155c593..5c45e1e 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -676,8 +676,9 @@ BUILDCFG_NEEDEDVARS ?= "TARGET_ARCH TARGET_OS"
- # Overrides are processed left to right, so the ones that are named later take precedence.
- # You generally want them to go from least to most specific.
- MACHINE_OVERRIDES ?= ""
--OVERRIDES = "pn-${PN}:fail-fast:build-${BUILD_OS}:${TARGET_ARCH}:${TARGET_OS}:\
--${DISTRO}:${@':'.join(d.getVar('MACHINE_OVERRIDES', True).split())}:${MACHINE}:local"
-+OVERRIDES = "pn-${PN}:fail-fast:build-${BUILD_OS}:${TARGET_ARCH}:${TARGET_OS}:${DISTRO}:\
-+${@[':'.join(d.getVar('MACHINE_OVERRIDES', True).split())+':',''][d.getVar('MACHINE_OVERRIDES', True).strip() == '']}\
-+${MACHINE}:local"
- 
- ##################################################################
- # Include the rest of the config files.
--- 
-1.7.3.1
+Thanks for the ack, but the credits should go to Henning. He did put
+me on this track and I used his patch as example.
+Couldn't have done it alone, being the auto* and libtool n00b that I am.
+It was solely because I could stand on the shoulders of a giant, that
+I could produce this.
 
+BTW: the following recipes seem good candidates for doing the same
+sort of patch:
+./binutils/binutils-2.20.1/libtool-2.4-update.patch
+./gnuradio/gnuradio/libusb-libtool-2.4-update.patch
+./libsdl/libsdl-x11-1.2.14/libtool-update.patch
+
+I would prefer it if the recipe maintainer gives this a stab.
+
+BTW, maybe a better solution would be do do this in autotools (we also
+discussed this in irc) and allow for aon overridable directory
+variable (with default value m4)
+I feel not comfortable enough to author such a patch though.
+Note also that gnutls has three dirs with generated m4 files.
+
+Frans
 
 
