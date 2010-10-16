@@ -1,39 +1,37 @@
-Received: from smtprelay-h31.telenor.se ([213.150.131.4])
+Received: from smtprelay-h21.telenor.se ([195.54.99.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1P76jv-0002Q4-Fo
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1P76nJ-0002wk-AX
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 15:24:00 +0200
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-h31.telenor.se (Postfix) with ESMTP id A0EBCEAF33
+	Sat, 16 Oct 2010 15:27:29 +0200
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-h21.telenor.se (Postfix) with ESMTP id 93148EB065
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Oct 2010 14:50:26 +0200 (CEST)
+	Sat, 16 Oct 2010 15:26:49 +0200 (CEST)
 X-SENDER-IP: [83.227.56.243]
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ah9AAFY8uUxT4zjzPGdsb2JhbACHcYtIjXkMAQEBATUtvRuFSQSKSg
-X-IronPort-AV: E=Sophos;i="4.57,339,1283724000"; d="scan'208";a="141710377"
+X-IronPort-Anti-Spam-Result: AhUYAANFuUxT4zjzPGdsb2JhbAAHh2qLSI4FAQEBATW+F4VJBIpKhQJq
+X-IronPort-AV: E=Sophos;i="4.57,340,1283724000"; d="scan'208";a="140665484"
 Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	localhost) ([83.227.56.243])
-	by ipb1.telenor.se with ESMTP; 16 Oct 2010 14:50:26 +0200
-From: ulf.samuelsson@atmel.com
+	[10.175.196.242]) ([83.227.56.243])
+	by ipb2.telenor.se with ESMTP; 16 Oct 2010 15:26:49 +0200
+Message-ID: <4CB9A818.90909@atmel.com>
+Date: Sat, 16 Oct 2010 15:26:48 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Oct 2010 14:50:06 +0200
-Message-Id: <1287233406-8778-5-git-send-email-ulf.samuelsson@atmel.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1287233406-8778-4-git-send-email-ulf.samuelsson@atmel.com>
-References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>
-	<1287233406-8778-2-git-send-email-ulf.samuelsson@atmel.com>
-	<1287233406-8778-3-git-send-email-ulf.samuelsson@atmel.com>
-	<1287233406-8778-4-git-send-email-ulf.samuelsson@atmel.com>
-X-SA-Exim-Connect-IP: 213.150.131.4
+References: <4C9950D0.7000907@gmail.com>
+In-Reply-To: <4C9950D0.7000907@gmail.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 195.54.99.196
 X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [PATCH 5/5] Add X11 images with more multimedia support (mplayer etc.)
+Subject: Re: [PATCH] at91bootstrap.inc: Mark COMPATIBLE_MACHINEs.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,124 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 13:24:00 -0000
+X-List-Received-Date: Sat, 16 Oct 2010 13:27:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Graham Gower skrev:
+> From b90a9fef712cc934863ee786b2d2dedc37d6902d Mon Sep 17 00:00:00 2001
+> From: Graham Gower <graham.gower@gmail.com>
+> Date: Wed, 22 Sep 2010 09:39:00 +0930
+> Subject: [PATCH 1/5] at91bootstrap.inc: Mark COMPATIBLE_MACHINEs.
+> 
+> 
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> ---
+>  recipes/at91bootstrap/at91bootstrap.inc |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes/at91bootstrap/at91bootstrap.inc b/recipes/at91bootstrap/at91bootstrap.inc
+> index 2160f64..dfe143a 100644
+> --- a/recipes/at91bootstrap/at91bootstrap.inc
+> +++ b/recipes/at91bootstrap/at91bootstrap.inc
+> @@ -1,6 +1,7 @@
+>  DESCRIPTION = "at91bootstrap: loaded into internal SRAM by AT91 BootROM"
+>  SECTION = "bootloaders"
+>  
+> +COMPATIBLE_MACHINE = "(afeb9260|at91cap9adk|at91sam9g20ek|at91sam9rlek|at91sam9263ek|at91sam9260ek|at91sam9xeek|at91sam9261ek)"
+>  SRC_URI = "ftp://www.at91.com/pub/buildroot/${PN}-${PV}.tar.bz2 \
+>  	   file://defconfig \
+>             "
+
+Is it not better to move all machines to at91bootstrap-2.13 which does
+not use this include file at all.
 
 
-Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
----
- recipes/images/console-audio-image.bb |   33 ++++++++++++++++++
- recipes/images/x11-at91sam9-image.bb  |   58 +++++++++++++++++++++++++++++++++
- 2 files changed, 91 insertions(+), 0 deletions(-)
- create mode 100644 recipes/images/console-audio-image.bb
- create mode 100644 recipes/images/x11-at91sam9-image.bb
-
-diff --git a/recipes/images/console-audio-image.bb b/recipes/images/console-audio-image.bb
-new file mode 100644
-index 0000000..271ebfb
---- /dev/null
-+++ b/recipes/images/console-audio-image.bb
-@@ -0,0 +1,33 @@
-+# Angstrom bootstrap at91sam9 image
-+require console-base-image.bb
-+
-+export IMAGE_BASENAME = "console-at91sam9-image"
-+
-+IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-+
-+DEPENDS = "task-base-extended \
-+           ${@base_contains("MACHINE_FEATURES", "screen", "psplash-zap", "",d)} \
-+	   "
-+
-+IMAGE_INSTALL = "task-base-extended \
-+	usbview \
-+	mplayer \
-+	thttpd \
-+	madplay \
-+	alsa-utils-aplay \
-+	alsa-utils-amixer \
-+	iperf \
-+	dosfstools \
-+	mtd-utils \
-+	${@base_contains("MACHINE_FEATURES", "screen", "psplash-zap", "",d)} \
-+	${IMAGE_EXTRA_INSTALL} \
-+#	nbench-byte \
-+	"
-+
-+IMAGE_LINGUAS = ""
-+
-+#we dont need the kernel in the image
-+ROOTFS_POSTPROCESS_COMMAND += "rm -f ${IMAGE_ROOTFS}/boot/*Image*; "
-+
-+inherit image
-+
-diff --git a/recipes/images/x11-at91sam9-image.bb b/recipes/images/x11-at91sam9-image.bb
-new file mode 100644
-index 0000000..3917873
---- /dev/null
-+++ b/recipes/images/x11-at91sam9-image.bb
-@@ -0,0 +1,58 @@
-+# Angstrom x11-gpe-image with additional apps included
-+XSERVER = "xserver-xorg \
-+           xf86-input-evdev \
-+           xf86-input-tslib \
-+           xf86-video-fbdev "
-+
-+require x11-gpe-image.bb
-+
-+export IMAGE_BASENAME = "x11-at91sam9-image"
-+
-+DEPENDS = "task-base"
-+
-+IMAGE_INSTALL += "\
-+	gpe-calculator \
-+	gpe-calendar \
-+	gpe-clock \
-+	gpe-contacts \
-+	gpe-edit \
-+	gpe-filemanager \
-+	gpe-gallery \
-+	gpe-go \
-+	gpe-irc \
-+	gpe-mixer \
-+	gpe-scap \
-+	gpe-sketchbook \
-+	gpe-terminal \
-+	gpe-tetris \
-+	gpe-watch \
-+	gpe-windowlist \
-+	gnome-mplayer \
-+	matchbox-panel-hacks \
-+	usbview \
-+	mplayer \
-+	thttpd \
-+	madplay \
-+	alsa-utils-aplay \
-+	alsa-utils-amixer \
-+	iperf \
-+	fbv \
-+	dosfstools \
-+	mtd-utils \
-+	gpe-mini-browser \
-+	tslib-conf \
-+	tslib-calibrate \
-+	tslib-tests \
-+	libstdc++ \
-+	${IMAGE_EXTRA_INSTALL} \
-+#	nbench-byte \
-+#	pointercal \
-+	"
-+
-+# IMAGE_LINGUAS += " se no dk fi"
-+ROOTFS_POSTPROCESS_COMMAND += "set_image_autologin; "
-+ROOTFS_POSTPROCESS_COMMAND += "install_linguas; "
-+
-+#we dont need the kernel in the image
-+ROOTFS_POSTPROCESS_COMMAND += "rm -f ${IMAGE_ROOTFS}/boot/*Image*; "
-+
--- 
-1.6.3.3
-
+Best Regards
+Ulf Samuelsson
 
 
