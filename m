@@ -1,32 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P72tA-00035S-Kb for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 11:17:18 +0200
-Received: from f053038254.adsl.alicedsl.de ([78.53.38.254]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P72sh-0008MR-TT for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 09:16:48 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1P72yz-0003FX-Pu
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Oct 2010 11:23:19 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 7730C11000E8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Oct 2010 11:22:45 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 3B8B311000E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Oct 2010 11:22:44 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225007172.adsl.alicedsl.de
+	[92.225.7.172]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Oct 2010 11:22:44 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id A27783C0FD; Sat, 16 Oct 2010 11:22:16 +0200 (CEST)
+Date: Sat, 16 Oct 2010 11:22:16 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1287154849.4233.19.camel@mattotaupa>
-References: <1287066254-23579-1-git-send-email-bengardiner@nanometrics.ca>
-	<1287154849.4233.19.camel@mattotaupa>
-Date: Sat, 16 Oct 2010 11:16:46 +0200
-Message-ID: <1287220606.3980.3.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-ID: <20101016092214.GA3651@rhein.zuhause.netz>
+References: <1287157551.4233.20.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1287157551.4233.20.camel@mattotaupa>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC, PATCH, resend] gmp: assign --target to --host to avoid configure error
+Subject: Re: [PATCH] cacao-native-0.99.3: fix `install: cannot stat `src/cacaoh/.libs/cacaoh': No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,70 +51,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 09:17:18 -0000
-X-Groupsio-MsgNum: 24931
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-eSIfQazrGS32+v96H5dw"
+X-List-Received-Date: Sat, 16 Oct 2010 09:23:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-eSIfQazrGS32+v96H5dw
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Am Freitag, den 15.10.2010, 17:00 +0200 schrieb Paul Menzel:
-> Am Donnerstag, den 14.10.2010, 10:24 -0400 schrieb Ben Gardiner:
-> > When trying to build angstrom-2008.1 from
-> > f58a5d59b755bdb725497f574a8059529c134c27 of master or from
-> > b78fc95424b5f0fb28246e8c61bb8b4d6a9d733a of stable/2009 the builds fail=
-ed on
-> > gmp-native (then later gmp). The error was that "--target is not approp=
-riate
-> > for GMP".
-> >=20
-> > To avoid the error printed by the following code snippet from configure=
-.in:
-> >=20
-> > configure.in:
-> > "
-> > if test -n "$target_alias" && test "$target_alias" !=3D "$host_alias"; =
-then
-> >   AC_MSG_ERROR([--target is not appropriate for GMP
-> > Use --build=3DCPU-VENDOR-OS if you need to specify your CPU and/or syst=
-em
-> > explicitly.  Use --host if cross-compiling (see "Installing GMP" in the
-> > manual for more on this).])
-> > fi
-> > "
-> >=20
-> > this patch assigns the value of the '--target' argument to the value of=
- the
-> > '--host' argument.
-> >=20
-> > Tested by 'bitbake gmp' and 'bitbake gmp-native'
->=20
-> I tried to build `gmp-native` without your patch and it worked for me
-> with `minimal` (eglibc) for `MACHINE =3D "beagleboard"`. Is there a
-> difference how things are handled between distributions?
+I suspect libtool 2.2 vs. 2.4 here.
 
-It also built without problems with `angstrom-2010.x`.
-
-> [=E2=80=A6]
+Bye Henning
 
 
-Thanks,
-
-Paul
-
---=-eSIfQazrGS32+v96H5dw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAky5bXIACgkQPX1aK2wOHViRVwCeOF7eX6MPATCPi4QL97FSijMu
-5nkAn0UBgz1x3oynI9tdDkHLjaVKbY8x
-=E1yk
------END PGP SIGNATURE-----
-
---=-eSIfQazrGS32+v96H5dw--
