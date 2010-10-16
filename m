@@ -1,28 +1,42 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P75yK-00056l-9c for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 14:35:24 +0200
-Received: from f053038254.adsl.alicedsl.de ([78.53.38.254]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P75xr-0003M5-3B for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 12:34:19 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1287230170-20745-1-git-send-email-fransmeulenbroeks@gmail.com>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P762O-0002LW-V8
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Oct 2010 14:39:02 +0200
+Received: by iwn2 with SMTP id 2so1980027iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Oct 2010 05:38:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=OQhRT/lX07xusmRYC2O0mhCAs3sCWPU6PhnTvksKZMI=;
+	b=LLr9/phvFIVBvqtENJskPNtzDFa3oZIG+EbUIMzSTz8lzDM10CjagKUT3gHAj41LWi
+	I4UwakbJWvzKheV59Azw5YpbYPt/C30Ces6UC7wDtInl+yQ0vU/MU/yGdeaZTK1DgvjM
+	9NfQv1ntZb73+ZGo1MQAwErCHepyEKoTZU7Mo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=TZZI6zR1treY4CA3ezrS5AWLq3J1M3RS28VeIaDs7R7H1VSY4uMTo1G5L68VfRQoA3
+	Bo9CRDq8yTC1jjVlh/1JLiLoOgbuezUbaiYJih3WfVwby6nUF8X3diFdQkgYQ6kvOzvJ
+	sEhnzc68Sin5pbCEc5tOw9p/Cwu4hP1OB8Qmc=
+MIME-Version: 1.0
+Received: by 10.231.35.131 with SMTP id p3mr1619752ibd.177.1287232700584; Sat,
+	16 Oct 2010 05:38:20 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sat, 16 Oct 2010 05:38:20 -0700 (PDT)
+In-Reply-To: <4CB99A9C.2060507@freyther.de>
 References: <1287230170-20745-1-git-send-email-fransmeulenbroeks@gmail.com>
-Date: Sat, 16 Oct 2010 14:34:15 +0200
-Message-ID: <1287232455.3980.60.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	<4CB99A9C.2060507@freyther.de>
+Date: Sat, 16 Oct 2010 14:38:20 +0200
+Message-ID: <AANLkTimxoid3rc0WYxeBHQ-exksUYpuGH3Y9PLGfEnk+@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] gnutols_2.10.1: remove the libtool-m4-macros
@@ -39,93 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 12:36:34 -0000
-X-Groupsio-MsgNum: 24937
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-l0cXbtGat/rnS4qQP9+Q"
-
---=-l0cXbtGat/rnS4qQP9+Q
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 16 Oct 2010 12:39:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Samstag, den 16.10.2010, 13:56 +0200 schrieb Frans Meulenbroeks:
+2010/10/16 Holger Freyther <holger+oe@freyther.de>:
+> On 10/16/2010 01:56 PM, Frans Meulenbroeks wrote:
+>> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>> ---
+>> =A0recipes/gnutls/gnutls-2.10.1/libtool-update.patch |10965 ------------=
+---------
+>> =A0recipes/gnutls/gnutls_2.10.1.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 |=
+ =A0 15 +-
+>> =A02 files changed, 13 insertions(+), 10967 deletions(-)
+>> =A0delete mode 100644 recipes/gnutls/gnutls-2.10.1/libtool-update.patch
+>
+> No,
+>
+> I think that appraoch is wrong. autoreconf --install --force should call
+> libtoolize which will copy over new files. So we should delete the libtoo=
+l m4
+> files, run libtoolize and hope that it works. Did you try this?
+>
 
-Typo in commit summary. s/gnutols/gnutls/
+I didn't try this, I am an autconf n00b; basically I came to the
+solution above after discussing this on irc and peeking at the patch
+from Henning
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Deb059202723=
+cefaebe1242e4d1ec2a00c35d3d94
 
-I have not kept up with recent changes. But why is that patch not needed
-anymore and why can the `libtool-m4-macros` be removed?
-
-> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-> ---
->  recipes/gnutls/gnutls-2.10.1/libtool-update.patch |10965 ---------------=
-------
->  recipes/gnutls/gnutls_2.10.1.bb                   |   15 +-
->  2 files changed, 13 insertions(+), 10967 deletions(-)
->  delete mode 100644 recipes/gnutls/gnutls-2.10.1/libtool-update.patch
->=20
-> diff --git a/recipes/gnutls/gnutls-2.10.1/libtool-update.patch b/recipes/=
-gnutls/gnutls-2.10.1/libtool-update.patch
-> deleted file mode 100644
-> index 04cbe72..0000000
-> --- a/recipes/gnutls/gnutls-2.10.1/libtool-update.patch
-> +++ /dev/null
-
-[=E2=80=A6]
-
-> diff --git a/recipes/gnutls/gnutls_2.10.1.bb b/recipes/gnutls/gnutls_2.10=
-.1.bb
-> index 2828735..84efb1f 100644
-> --- a/recipes/gnutls/gnutls_2.10.1.bb
-> +++ b/recipes/gnutls/gnutls_2.10.1.bb
-> @@ -1,6 +1,6 @@
->  require gnutls.inc
-> =20
-> -PR =3D "${INC_PR}.1"
-> +PR =3D "${INC_PR}.2"
-> =20
->  LICENSE_${PN}-extra =3D "GPLv3"
-> =20
-> @@ -9,8 +9,19 @@ EXTRA_OECONF +=3D " --without-libgcrypt-prefix "
->  SRC_URI +=3D "file://gettextize-with-gettext-0.18.patch \
->              file://gnutls-openssl.patch \
->              file://gnutls-replace-siginterrupt.patch \
-> -            ${@['','file://libtool-update.patch'][bb.data.getVar('LIBTOO=
-L_HAS_SYSROOT', d, 1) =3D=3D 'yes']} \
->             "
-> =20
-> +do_configure_prepend() {
-> +
-> + MACROS=3D"libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m=
-4"
-> +
-> + for i in ${MACROS}; do
-> +   rm m4/$i
-> +   rm lib/m4/$i
-> +   rm libextra/m4/$i
-> + done
-> +
-> +}
-> +
->  SRC_URI[gnutls.md5sum] =3D "b614448d7fb43ea0d4f727e6302bbf0f"
->  SRC_URI[gnutls.sha256sum] =3D "731078bc11661411ba47b20a65024abeca40d43a1=
-b3c4526a6599b7905c302ee"
+Frans
 
 
-Thanks,
-
-Paul
-
---=-l0cXbtGat/rnS4qQP9+Q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAky5m8cACgkQPX1aK2wOHVjbwwCfZnoGtWXZa+uK8+NitpU/3suT
-hUwAniftwueTQPRQG4NhIs3Cz2GTfgks
-=4R7j
------END PGP SIGNATURE-----
-
---=-l0cXbtGat/rnS4qQP9+Q--
