@@ -1,44 +1,26 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P72bL-0001Ar-Vr
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 10:58:52 +0200
-Received: by iwn2 with SMTP id 2so1823824iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Oct 2010 01:58:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=mAezUEVZOxtNVf04h55pHKRrDeEv1UEaClrbkHyup/U=;
-	b=YSXp7YYMfZmW19L1LlmntscgxDoZgLlMJ/imoB/Ug18PiLkZQtlLlvHuY/3QBN/IjK
-	VD1hgMW5xHBzZP6cSXM3+Hm1p5ckCkeMRTcod4l+LJnUKdfeC7mTta32Afck13Pfv4VU
-	x/LZm2cf3+BF/AoOJca2KwpTnYPiCKWy21/oQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=xexRI6EigPMxrm7kflAYWGYpmldP1rBHRg5mkJTYX/HF+XI2YQSoN1WuspKyS51Hsf
-	QeIcM8ft/gRJXwCY+GJkztUaGqmx5PjCtNzVA738KTK/JH3Q9i4swY+8ZwIdDTVTpIsN
-	x0tU6XeHCkr14VvQAzwOwJH+jXYbaUNMpslbo=
-MIME-Version: 1.0
-Received: by 10.42.191.132 with SMTP id dm4mr1165595icb.329.1287219499571;
-	Sat, 16 Oct 2010 01:58:19 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sat, 16 Oct 2010 01:58:19 -0700 (PDT)
-In-Reply-To: <1287218988-3946-1-git-send-email-ynezz@true.cz>
-References: <1287218988-3946-1-git-send-email-ynezz@true.cz>
-Date: Sat, 16 Oct 2010 10:58:19 +0200
-Message-ID: <AANLkTi=_3DKvm3bbHuvdvQYOS9M3WDKaBjg2aON=kYWS@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <ynezz@true.cz>) id 1P72lx-0002zO-Dp
+	for openembedded-devel@openembedded.org; Sat, 16 Oct 2010 11:09:50 +0200
+Received: from localhost.localdomain (localhost [127.0.0.1])
+	by mengele.ibawizard.net (Postfix) with ESMTP id 2D59F1D3616D;
+	Sat, 16 Oct 2010 11:09:18 +0200 (CEST)
+From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Sat, 16 Oct 2010 11:09:20 +0200
+Message-Id: <1287220160-25176-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@true.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] oestats-client.bbclass: send USERDISTRO value
+Subject: [PATCH] lua5.1: link to libpthread when using uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +34,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 08:58:52 -0000
+X-List-Received-Date: Sat, 16 Oct 2010 09:09:51 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-2010/10/16 Petr =C5=A0tetiar <ynezz@true.cz>:
-> With this patch it's now possible to see the correct Angstrom distro vers=
-ion
-> in the Tinderbox. Now the distribution value is always 'angstrom', with t=
-his
-> patch it would be more detailed version 'angstrom-2008.1' for example.
->
-> Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
-> ---
-> =C2=A0classes/oestats-client.bbclass | =C2=A0 =C2=A02 +-
-> =C2=A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/oestats-client.bbclass b/classes/oestats-client.bbcl=
-ass
-> index 4415461..a98c9d1 100644
-> --- a/classes/oestats-client.bbclass
-> +++ b/classes/oestats-client.bbclass
-> @@ -77,7 +77,7 @@ def oestats_start(server, builder, d):
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0'metadata_branch': bb.data.getVar('METADATA_BRANCH', d, True),
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0'metadata_revision': bb.data.getVar('METADATA_REVISION', d, True)=
-,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0'machine': bb.data.getVar('MACHINE', d, True),
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 'distro': bb.data.getVar('DISTRO', d, True),
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 'distro': bb.data.getVar('USERDISTRO', d, True),
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0})
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if re.match("^\d+$=
-", data): id=3Ddata
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0except:
-> --
-> 1.7.0.4
->
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+When the Lua modules are linked with pthreads, loading them crashes Lua. =
+It's
+some bug in pthread_create() in uclibc. Anyway, linking Lua against pthre=
+ad
+fixes this issue.
+
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+---
+ recipes/lua/lua5.1/uclibc-pthread.patch |   13 +++++++++++++
+ recipes/lua/lua5.1_5.1.4.bb             |    9 +++++++--
+ 2 files changed, 20 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/lua/lua5.1/uclibc-pthread.patch
+
+diff --git a/recipes/lua/lua5.1/uclibc-pthread.patch b/recipes/lua/lua5.1=
+/uclibc-pthread.patch
+new file mode 100644
+index 0000000..0555e81
+--- /dev/null
++++ b/recipes/lua/lua5.1/uclibc-pthread.patch
+@@ -0,0 +1,13 @@
++Index: lua-5.1.4/src/Makefile
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- lua-5.1.4.orig/src/Makefile	2010-10-16 09:51:52.000000000 +0200
+++++ lua-5.1.4/src/Makefile	2010-10-16 09:52:15.000000000 +0200
++@@ -12,7 +12,7 @@
++ AR=3D ar rcu
++ RANLIB=3D ranlib
++ RM=3D rm -f
++-LIBS=3D -lm $(MYLIBS)
+++LIBS=3D -lm -lpthread $(MYLIBS)
++=20
++ MYCFLAGS=3D
++ MYLDFLAGS=3D
+diff --git a/recipes/lua/lua5.1_5.1.4.bb b/recipes/lua/lua5.1_5.1.4.bb
+index 75b48f4..ba2f8b9 100644
+--- a/recipes/lua/lua5.1_5.1.4.bb
++++ b/recipes/lua/lua5.1_5.1.4.bb
+@@ -4,14 +4,19 @@ LICENSE =3D "MIT"
+ HOMEPAGE =3D "http://www.lua.org/"
+=20
+ DEPENDS +=3D "readline"
+-PR =3D "r6"
++PR =3D "r7"
+ SRC_URI =3D "http://www.lua.org/ftp/lua-${PV}.tar.gz \
+            file://bitwise_operators.patch \
+-           file://lua5.1.pc"
++           file://lua5.1.pc \
++          "
+ S =3D "${WORKDIR}/lua-${PV}"
+=20
+ inherit pkgconfig binconfig
+=20
++UCLIBC_PATCHES +=3D "file://uclibc-pthread.patch"
++SRC_URI_append_linux-uclibc =3D "${UCLIBC_PATCHES}"
++SRC_URI_append_linux-uclibceabi =3D "${UCLIBC_PATCHES}"
++
+ TARGET_CC_ARCH +=3D " -fPIC ${LDFLAGS}"
+ EXTRA_OEMAKE =3D "'CC=3D${CC} -fPIC' 'MYCFLAGS=3D${CFLAGS} -DLUA_USE_LIN=
+UX -fPIC' MYLDFLAGS=3D'${LDFLAGS}'"
+=20
+--=20
+1.7.0.4
+
 
 
