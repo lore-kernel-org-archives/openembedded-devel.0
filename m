@@ -1,45 +1,47 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P7CUo-0006K1-Mb
+	(envelope-from <martin.jansa@gmail.com>) id 1P7CYN-00012e-VK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 21:32:47 +0200
-Received: by bwz9 with SMTP id 9so2064341bwz.6
+	Sat, 16 Oct 2010 21:36:34 +0200
+Received: by wyb40 with SMTP id 40so1951375wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Oct 2010 12:32:16 -0700 (PDT)
+	Sat, 16 Oct 2010 12:35:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=6YIHYs/aCij4YTWUWOwSfdswuS4mdX7NuS780z88Xpg=;
-	b=A1anXwrgCTLSICPGDD5QYxnskuea5+dexkVzeXlU5pqeWwuotKQooGWIk20gfK7q+H
-	GPg5JvaqXP8FoGuTUVRA8Lx68nvugvvwJl/wBfE6dblrAsAOegwS1BG3FkqhsnYC9g/6
-	ivWabhwslui1CbwMtaAevQiiICa/+UYNhsvWo=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=zu6G7YiP5tGhBoRFX+GIS7BcX3P4vi/C3JPaKAUzCu8=;
+	b=dQ2ShAmETSnpP7235Zhxxti+0750lEgrzOWoJS+TCpOtRZfdEfvViIddIN3bu/E+vu
+	MIs74MS4Ky760P41qWxHdFaurZL7TfGX0laqMllis2U904ypMcAqxvju4Aop5e292nR+
+	i8h80HwbHL6WjkQ5ugvVaysW1xf13gyXnSYSE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=mw63WK54+yeJROaRltOdKBIgxC5BRDbiEXW9c0NevX7QacPu1R9b3RqRUIX0Wc8j19
-	Athlk+v4r5z8vxtVeJ+AKkUz0tJ6iPe43vA+ziBG2tucahuTwB07duRZZERa4O+Sm7AX
-	v2eUUlTECjbsp0/lyooE+WWwDjMNmbu70H7og=
-Received: by 10.204.49.208 with SMTP id w16mr2410557bkf.35.1287257536278;
-	Sat, 16 Oct 2010 12:32:16 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id y19sm14840020bkw.18.2010.10.16.12.32.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 16 Oct 2010 12:32:15 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=N/E/WxKG87et+9pafiHlfAfhe7fxAFz8/HqIdf/Hrr+3UTJ416ptDJa2tWtrqRnVVd
+	fdA4n6zoYDFEWNg6XI9nIj7Ie3Ejq/8jE5YXtxAiIlncsUMmYeGe11D0I+V45MOxqFMc
+	D7SD4fKR+O8CB5W2BBCGd0PGlgsjpDyxRB1Vc=
+MIME-Version: 1.0
+Received: by 10.227.147.82 with SMTP id k18mr2696454wbv.64.1287257749256; Sat,
+	16 Oct 2010 12:35:49 -0700 (PDT)
+Received: by 10.227.141.70 with HTTP; Sat, 16 Oct 2010 12:35:49 -0700 (PDT)
+In-Reply-To: <AANLkTi=Y8kCYtSkh3Px8TAZbx1zTO_0QoM6wS_r7+hbV@mail.gmail.com>
+References: <1287113787-21268-1-git-send-email-kergoth@gmail.com>
+	<AANLkTinse8QO1RjTSFqQ10_SOR68C7wbhRq=qPGhDhzh@mail.gmail.com>
+	<AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
+	<AANLkTi=Y8kCYtSkh3Px8TAZbx1zTO_0QoM6wS_r7+hbV@mail.gmail.com>
+Date: Sat, 16 Oct 2010 21:35:49 +0200
+Message-ID: <AANLkTi=GsruLS6bwKpO5WtuMvv4evj8Ry0qZejmyVTQj@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Oct 2010 21:32:10 +0200
-Message-Id: <1287257530-25987-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.3.1
-In-Reply-To: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
-References: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
-X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Connect-IP: 74.125.82.175
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] bitbake.conf: reverse OVERRIDES order in FILESPATH definition
+Subject: Re: [PATCH] Reverse the order of OVERRIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,33 +55,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 19:32:47 -0000
+X-List-Received-Date: Sat, 16 Oct 2010 19:36:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* directories in FILESPATH are search for first fit and we would expect
-  ie ${PN}/local/a.patch to be used before ${PN}/ramses/a.patch
-* moving last ':' before OVERRIDES makes FILESPATHBASE/FILESPATHPKG/ as
-  last option instead of first
+On Sat, Oct 16, 2010 at 8:50 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Sat, Oct 16, 2010 at 8:24 PM, Chris Larson <clarson@kergoth.com> wrote=
+:
+>> On Sat, Oct 16, 2010 at 11:04 AM, Martin Jansa <martin.jansa@gmail.com>w=
+rote:
+>>
+>>> Probably needs reversed OVERRIDES order also in bitbake.conf FILESPATH
+>>>
+>>> FILESPATH =3D "${@':'.join([os.path.normpath(os.path.join(fp, p, o)) fo=
+r
+>>> fp in d.getVar('FILESPATHBASE', 1).split(':') for p in
+>>> d.getVar('FILESPATHPKG', 1).split(':') for o in (d.getVar('OVERRIDES',
+>>> 1) + ':').split(':')])}"
+>>>
+>>
+>> Yes, you're right. =A0OVERRIDES in bitbake is used such that the *last*
+>> defined overridden variable is used, but FILESPATH uses the *first* file=
+ it
+>> finds. =A0Reversing it there should indeed fix it. =A0Nicely spotted, th=
+anks. =A0I
+>> have some errands to run, so won't have a chance to apply a fix until th=
+is
+>> evening, so if someone else wants to get it in, feel free.
+>
+> It's a bit more complicated
+>
+> OE om-gta02@shr ~/dev/recipes/xorg-xserver $ bitbake -e -b
+> xserver-xorg-conf_0.1.bb | grep ^OVERRIDES
+> OVERRIDES=3D"thumb:thumb-interwork:libc-glibc:pn-xserver-xorg-conf:fail-f=
+ast:build-linux:arm:linux-gnueabi:shr::om-gta02:local:armv4t:armv4t"
+>
+> that empty :: between shr and om-gta02 (where MACHINE_OVERRIDES should
+> be) is breaking it for both orders (ie ignoring all after om-gta02 or
+> after shr from with reversed order)
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- conf/bitbake.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Even with those 2 patches I've just sent I still have wrong order of
+TARGET_ARCH OVERRIDES :/.
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index edb9530..1a08673 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -271,7 +271,7 @@ FILES_${PN}-locale = "${datadir}/locale"
- FILE_DIRNAME = "${@os.path.dirname(bb.data.getVar('FILE', d))}"
- FILESPATHBASE = "${FILE_DIRNAME}"
- FILESPATHPKG = "${PF}:${P}:${PN}:${BP}:${BPN}:files:."
--FILESPATH = "${@':'.join([os.path.normpath(os.path.join(fp, p, o)) for fp in d.getVar('FILESPATHBASE', 1).split(':') for p in d.getVar('FILESPATHPKG', 1).split(':') for o in (d.getVar('OVERRIDES', 1) + ':').split(':')])}"
-+FILESPATH = "${@':'.join([os.path.normpath(os.path.join(fp, p, o)) for fp in d.getVar('FILESPATHBASE', 1).split(':') for p in d.getVar('FILESPATHPKG', 1).split(':') for o in (':' + d.getVar('OVERRIDES', 1)).split(':')[::-1]])}"
- FILESDIR = "${@bb.which(d.getVar('FILESPATH', 1), '.')}"
- 
- ##################################################################
--- 
-1.7.3.1
 
+OE om-gta02@shr ~/dev/recipes/xorg-xserver $ bitbake -e -b
+xserver-xorg-conf_0.1.bb | grep ^FILESPATH=3D | sed "s/:/\n/g" | head -n
+20
+FILESPATH=3D"
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/armv4t
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/armv4t
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/local
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/om-gta02
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/shr
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/linux-gnueabi
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/arm
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/build-linux
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/fail-fast
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/pn-xserver-xorg-conf
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/libc-glibc
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/thumb-interwork
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36/thumb
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1-r36
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1/armv4t
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1/armv4t
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1/local
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1/om-gta02
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1/shr
+/OE/dev/recipes/xorg-xserver/xserver-xorg-conf-0.1/linux-gnueabi
+.....
+
+any hint?
+
+Regards,
 
 
