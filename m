@@ -1,41 +1,42 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7CNt-0005WV-3S
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1P7CTV-0006AY-MJ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 21:25:40 +0200
-Received: by gwb17 with SMTP id 17so878422gwb.6
+	Sat, 16 Oct 2010 21:31:26 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id DB1EB11001C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Oct 2010 12:25:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=lv1a7Afs9Z30Lyqbrs7iBef0TsXyidb3AlKeA0XOZtQ=;
-	b=Q9v/i+2ISWP7AOYgcgcXznbAnXq9NxGkz+jdGiXRVz+CmbV2pUbE3h2THpNupkkHih
-	xOvj+lhZ+QCc+IPi+A3d+A2i5ZvfQ7LgfLvJ5XITIb+D6PzpgxwwHGYqpW5aS6Pmh65O
-	+aMArlRYoismgjELp+0jO0SdRKbGWkWkucNgE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=tACuwiPVDcRQlNZv8wcNQbWvzwkxp8f00KJMBUigvG5xIyZpx+IuBYZojiUHVIWtEw
-	JmQf7iRWJCZSiSWp5GrJ/RCcdgPrJEkRcQ5f1y6ZuvbM2YzGm30IncimLCGyXLdaXQCt
-	zArd92/31Nye0nvqyEzw5IfTJdqhXEIaKppCU=
-MIME-Version: 1.0
-Received: by 10.42.76.65 with SMTP id d1mr1837675ick.205.1287257101564; Sat,
-	16 Oct 2010 12:25:01 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sat, 16 Oct 2010 12:25:01 -0700 (PDT)
-In-Reply-To: <20101016183152.GA15103@gmail.com>
-References: <1287230170-20745-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<20101016183152.GA15103@gmail.com>
-Date: Sat, 16 Oct 2010 21:25:01 +0200
-Message-ID: <AANLkTi=xV6_7_sYi4Wf11QsFOc41PaWLdtfhycu4zZGg@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 16 Oct 2010 21:30:55 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 5943E11000E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Oct 2010 21:30:55 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225007172.adsl.alicedsl.de
+	[92.225.7.172]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Oct 2010 21:30:55 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 77F1E3C105; Sat, 16 Oct 2010 21:30:48 +0200 (CEST)
+Date: Sat, 16 Oct 2010 21:30:48 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20101016193048.GA420@rhein.zuhause.netz>
+References: <1287230170-20745-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<4CB99A9C.2060507@freyther.de>
+	<20101016125032.GA32732@rhein.zuhause.netz>
+MIME-Version: 1.0
+In-Reply-To: <20101016125032.GA32732@rhein.zuhause.netz>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] gnutols_2.10.1: remove the libtool-m4-macros
@@ -52,40 +53,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 19:25:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 16 Oct 2010 19:31:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/10/16 Khem Raj <raj.khem@gmail.com>:
-> On (16/10/10 13:56), Frans Meulenbroeks wrote:
->> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->
-> Good job Frans. I knew this was better solution but chose the inferior one
-> as it was easy but this one is more elegant and libtool version
-> agnostic. Thanks for doing it. In fact this should be how we solve libtool
-> update issues w.r.t. libtool 2.4 as we go forward
->
-> Acked-by: Khem Raj <raj.khem@gmail.com>
-
-Thanks for the ack, but the credits should go to Henning. He did put
-me on this track and I used his patch as example.
-Couldn't have done it alone, being the auto* and libtool n00b that I am.
-It was solely because I could stand on the shoulders of a giant, that
-I could produce this.
-
-BTW: the following recipes seem good candidates for doing the same
-sort of patch:
-./binutils/binutils-2.20.1/libtool-2.4-update.patch
-./gnuradio/gnuradio/libusb-libtool-2.4-update.patch
-./libsdl/libsdl-x11-1.2.14/libtool-update.patch
-
-I would prefer it if the recipe maintainer gives this a stab.
-
-BTW, maybe a better solution would be do do this in autotools (we also
-discussed this in irc) and allow for aon overridable directory
-variable (with default value m4)
-I feel not comfortable enough to author such a patch though.
-Note also that gnutls has three dirs with generated m4 files.
-
-Frans
+Acked-by: Henning Heinold <heinold@inf.fu-berlin.de>
 
 
