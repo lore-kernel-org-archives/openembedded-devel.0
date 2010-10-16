@@ -1,30 +1,33 @@
-Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1P73QV-0001sY-NS
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 11:51:45 +0200
-Received: (qmail invoked by alias); 16 Oct 2010 09:51:08 -0000
-Received: from p50883302.dip.t-dialin.net (EHLO
-	localhost.localdomain.localdomain) [80.136.51.2]
-	by mail.gmx.net (mp006) with SMTP; 16 Oct 2010 11:51:08 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/T7fww2xPTfcQd9QpRJc4MAlbEXCd+7t4n9BhpFx
-	6DIbEb8kcW5l6K
-From: Andreas Mueller <schnitzeltony@gmx.de>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P74DF-0003Xz-Lw for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Oct 2010 12:42:24 +0200
+Received: from f053038254.adsl.alicedsl.de ([78.53.38.254]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P74Cm-0006nJ-VY for openembedded-devel@lists.openembedded.org;
+	Sat, 16 Oct 2010 10:41:37 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Oct 2010 11:50:23 +0200
-Message-Id: <1287222623-2287-1-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.2.3
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.22
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+In-Reply-To: <1287220606.3980.3.camel@mattotaupa>
+References: <1287066254-23579-1-git-send-email-bengardiner@nanometrics.ca>
+	<1287154849.4233.19.camel@mattotaupa>
+	<1287220606.3980.3.camel@mattotaupa>
+Date: Sat, 16 Oct 2010 12:41:35 +0200
+Message-ID: <1287225695.3980.56.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libchamplain: DEPENDS: add clutter-gtk & sort entries alphabetical
+Subject: Re: [RFC, PATCH, resend] gmp: assign --target to --host to avoid configure error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,36 +41,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 09:51:45 -0000
+X-List-Received-Date: Sat, 16 Oct 2010 10:42:25 -0000
+X-Groupsio-MsgNum: 24934
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-oim7dIlGzrv7wVcGnEWh"
 
-* configure on clean environment failed with
+--=-oim7dIlGzrv7wVcGnEWh
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-checking for GTK... configure: error: Package requirements (   gtk+-2.0 >= 2.12
-        clutter-gtk-0.10 >= 0.10
+Am Samstag, den 16.10.2010, 11:16 +0200 schrieb Paul Menzel:
+> Am Freitag, den 15.10.2010, 17:00 +0200 schrieb Paul Menzel:
+> > Am Donnerstag, den 14.10.2010, 10:24 -0400 schrieb Ben Gardiner:
+> > > When trying to build angstrom-2008.1 from
+> > > f58a5d59b755bdb725497f574a8059529c134c27 of master or from
+> > > b78fc95424b5f0fb28246e8c61bb8b4d6a9d733a of stable/2009 the builds fa=
+iled on
+> > > gmp-native (then later gmp). The error was that "--target is not appr=
+opriate
+> > > for GMP".
+> > >=20
+> > > To avoid the error printed by the following code snippet from configu=
+re.in:
+> > >=20
+> > > configure.in:
+> > > "
+> > > if test -n "$target_alias" && test "$target_alias" !=3D "$host_alias"=
+; then
+> > >   AC_MSG_ERROR([--target is not appropriate for GMP
+> > > Use --build=3DCPU-VENDOR-OS if you need to specify your CPU and/or sy=
+stem
+> > > explicitly.  Use --host if cross-compiling (see "Installing GMP" in t=
+he
+> > > manual for more on this).])
+> > > fi
+> > > "
+> > >=20
+> > > this patch assigns the value of the '--target' argument to the value =
+of the
+> > > '--host' argument.
+> > >=20
+> > > Tested by 'bitbake gmp' and 'bitbake gmp-native'
+> >=20
+> > I tried to build `gmp-native` without your patch and it worked for me
+> > with `minimal` (eglibc) for `MACHINE =3D "beagleboard"`. Is there a
+> > difference how things are handled between distributions?
+>=20
+> It also built without problems with `angstrom-2010.x`.
 
-  ) were not met:
+=E2=80=A6 and `angstrom-2008.1`, `minimal-{uclibc,libc}`.
 
-No package 'clutter-gtk-0.10' found
-
-Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
----
- recipes/gnome/libchamplain_0.7.1.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/gnome/libchamplain_0.7.1.bb b/recipes/gnome/libchamplain_0.7.1.bb
-index da67636..f0f0550 100644
---- a/recipes/gnome/libchamplain_0.7.1.bb
-+++ b/recipes/gnome/libchamplain_0.7.1.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Libchamplain is a C library aimed to provide a Gtk+ widget to display rasterized maps. "
- LICENSE = "LGPLv2.1"
--DEPENDS = "cairo libsoup-2.4 clutter gtk+"
-+DEPENDS = "cairo clutter clutter-gtk gtk+ libsoup-2.4"
- PR = "r1"
- 
- inherit gnome autotools
--- 
-1.7.2.3
+> > [=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+
+--=-oim7dIlGzrv7wVcGnEWh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky5gV8ACgkQPX1aK2wOHVjzcgCdHZaUjxHhdyAB3VfVTmssee4z
+W5IAn169ElAAcfA5QSTXXKFXY9PnBDTs
+=Ttx4
+-----END PGP SIGNATURE-----
+
+--=-oim7dIlGzrv7wVcGnEWh--
