@@ -1,44 +1,40 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7RKQ-00039D-WF
+	(envelope-from <sledz@dresearch.de>) id 1P7SLg-0008UC-TU
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 13:23:04 +0200
-Received: by iwn2 with SMTP id 2so2873297iwn.6
+	Sun, 17 Oct 2010 14:28:27 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id BB4B5491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 04:22:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=FXZvi63VBXLCMXSoYmtfdbfwDnG9yuV5N8gLjDtPUgA=;
-	b=cNWzjpvFAzzelqIgO4h6KF6u7UdObur0T9Iz4Oa4I6vCwmYltrunjJdWAxtmvSqlPa
-	BrwE06R0L6cno8U3eKpqFa/FAaGubLMOO7+CoYCPUjJ57yNM6I6E5sXabF4CjiHI6/WD
-	4UJ6Gs/d+qnixdupyl9GaMVTTRknqy7nzo/fY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=JElVlcJCfx+iIeIWkN+fNTfBfVI82/6ZmX+2CGTiS+mlpBUoYUZmDxdrdNejrQ9yME
-	P0K/96YIsRRrrKtrufxC8k/sbm7xqpd5cH2/cKtT+2aYHlwHZExLG8Y270HSgGP/sgvz
-	BOBvFVz8K4EXAYqSAPfVJd9f5NF2ppkNWgOTI=
+	Sun, 17 Oct 2010 14:27:51 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Received: from 192.168.32.8 ([192.168.32.8]) by exchange.intern.dresearch.de
+	([192.168.32.16]) with Microsoft Exchange Server HTTP-DAV ;
+	Sun, 17 Oct 2010 12:27:51 +0000
 MIME-Version: 1.0
-Received: by 10.231.12.11 with SMTP id v11mr2274402ibv.13.1287314551184; Sun,
-	17 Oct 2010 04:22:31 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sun, 17 Oct 2010 04:22:31 -0700 (PDT)
-In-Reply-To: <50C3C89D-F86C-423F-814A-88602DD959E1@chumby.com>
-References: <50C3C89D-F86C-423F-814A-88602DD959E1@chumby.com>
-Date: Sun, 17 Oct 2010 13:22:31 +0200
-Message-ID: <AANLkTikn1+_p_nwaqR4iV31co+qi_BaNShqx-eYgvgfS@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; de;
+	rv:1.9.1.12) Gecko/20100914 SUSE/3.0.8 Lightning/1.0b1
+	Thunderbird/3.0.8
+Date: Sun, 17 Oct 2010 14:27:49 +0200
+Message-ID: <DB561678F08F554EB0D9F21B70E268A505AF50@exchange.intern.dresearch.de>
+In-Reply-To: <AANLkTini++RBtxheY+RZ2+7X-=i4NAbY39e2wcRA8mDh@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] testing branch 2010-10-14 - configure epiphany still fails
+Thread-Index: Actt9rdnA27LrCUOQ4CTFwexX7gmOQ==
+References: <AANLkTini++RBtxheY+RZ2+7X-=i4NAbY39e2wcRA8mDh@mail.gmail.com>
+From: "Sledz, Steffen" <sledz@dresearch.de>
+To: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libsamplerate: Fix checksums to match downloaded file
+Subject: Re: testing branch 2010-10-14 - configure epiphany still fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,95 +48,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 11:23:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 17 Oct 2010 12:28:27 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+Content-class: urn:content-classes:message
 
-2010/10/17 Sean Cross <sean@chumby.com>:
-> libsamplerate-0.1.7.tar.gz has changed upstream. =A0The Angstrom mirror h=
-as an old version of the file. =A0Pulling it from the source, I see that th=
-e following two changes have been made without bumping the version:
->
-> diff -ur old-libsamplerate-0.1.7/ChangeLog libsamplerate-0.1.7/ChangeLog
-> --- old-libsamplerate-0.1.7/ChangeLog =A0 2009-02-14 11:37:27.000000000 +=
-0000
-> +++ libsamplerate-0.1.7/ChangeLog =A0 =A0 =A0 2009-02-15 00:17:35.0000000=
-00 +0000
-> @@ -11,7 +11,7 @@
-> =A0 =A0 This bug has zero security implications beyond the ability to cau=
-se a
-> =A0 =A0 program hitting this bug to exit immediately with a segfault.
-> =A0 =A0 See : http://www.mega-nerd.com/erikd/Blog/2009/Feb/14/index.html
-> - =A0 =A0Thanks to David Cournapeau for the bug report.
-> + =A0 =A0Thanks to David Cournapeau and Lev Givon for the bug report.
->
-> =A0 =A0 * doc/win32.html Makefile.am configure.ac
-> =A0 =A0 Reinstate Win32/MSVC compile instructions.
-> diff -ur old-libsamplerate-0.1.7/Win32/config.h libsamplerate-0.1.7/Win32=
-/config.h
-> --- old-libsamplerate-0.1.7/Win32/config.h =A0 =A0 =A02009-02-14 11:42:49=
-.000000000 +0000
-> +++ libsamplerate-0.1.7/Win32/config.h =A02009-02-14 11:46:40.000000000 +=
-0000
-> @@ -190,8 +190,7 @@
-> =A0#define STDC_HEADERS 1
->
-> =A0/* Version number of package */
-> -<<<<<<< diff from left file
-> -#define VERSION "0.1.4"
-> +#define VERSION "0.1.7"
->
->
->
-> @@ -203,6 +202,3 @@
-> =A0*/
->
-> =A0#define inline __inline
-> -=3D=3D=3D=3D=3D=3D=3D=3D
-> -#define VERSION "0.1.7"
-> ->>>>>>> diff from right file
->
->
-> The following patch corrects the checksums for the new version.
->
-> ---
-> =A0recipes/libsamplerate/libsamplerate0_0.1.7.bb | =A0 =A04 ++--
-> =A01 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/libsamplerate/libsamplerate0_0.1.7.bb b/recipes/libs=
-amplerate/libsamplerate0_0.1.7.bb
-> index 737e934..8b457ba 100644
-> --- a/recipes/libsamplerate/libsamplerate0_0.1.7.bb
-> +++ b/recipes/libsamplerate/libsamplerate0_0.1.7.bb
-> @@ -12,5 +12,5 @@ S =3D "${WORKDIR}/libsamplerate-${PV}"
-> =A0inherit autotools pkgconfig
->
->
-> -SRC_URI[md5sum] =3D "ad093e60ec44f0a60de8e29983ddbc0f"
-> -SRC_URI[sha256sum] =3D "e0a646224a0323ac63f56ef009b2d7fee11452a7b8af139b=
-19ae71d2890dbc9c"
-> +SRC_URI[md5sum] =3D "6731a81cb0c622c483b28c0d7f90867d"
-> +SRC_URI[sha256sum] =3D "78ed5d9ff1bf162c4a078f6a3e7432a537dd2f22dc58872b=
-081fb01156027fcc"
-> --
-> 1.7.0.4
->
+do_configure still fails with the ca-certificates problem [1]. :(
 
-Yuk; changing the contents of a release.
-While I feel this patch is better than nothing (or we need to
-maintain/store our own copy and always use that), I suggest at least a
-PR bump to trigger a rebuild.
+If nobody will find a solution for this problem (for my first diagnosis =
+see [2]) until the next testing branch creation, i'll push my original =
+patch which disables the ca-file use [3].
 
-Thinking of it:
-We might need a mechanism that the mirrors also get updated.
-And it would be nice if the system would attempt a reload from the
-source if the version in the downloads dir does not match the
-checksums.
-That way the problem of people having an older copy of the source in
-their downloads dir do get the latest version if upstream changes.
-(we might only do this if the recipe is newer than the copy in
-downloads, just to avoid fetching over and over again).
+Steffen
 
-Frans
+[1] <http://tinderbox.openembedded.org/packages/859111/>
+[2] =
+<http://thread.gmane.org/gmane.comp.handhelds.openembedded/37925/focus=3D=
+38034>
+[3] =
+<http://thread.gmane.org/gmane.comp.handhelds.openembedded/37453/focus=3D=
+37585>
 
 
