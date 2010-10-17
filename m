@@ -1,33 +1,31 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sean@chumby.com>) id 1P7WBw-0004YD-GD
-	for Openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 18:34:37 +0200
-Received: by ywl5 with SMTP id 5so27809ywl.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 09:34:03 -0700 (PDT)
-Received: by 10.151.24.8 with SMTP id b8mr5044048ybj.374.1287333243427;
-	Sun, 17 Oct 2010 09:34:03 -0700 (PDT)
-Received: from [192.168.10.100] (cm198.psi191.maxonline.com.sg
-	[58.146.191.198])
-	by mx.google.com with ESMTPS id q5sm3520291ybe.18.2010.10.17.09.34.00
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 17 Oct 2010 09:34:01 -0700 (PDT)
-From: Sean Cross <sean@chumby.com>
-Date: Mon, 18 Oct 2010 00:33:58 +0800
-Message-Id: <DCE1CD9C-F324-471B-B66D-81BE7D85F9F5@chumby.com>
-To: Openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v1081)
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: sean@chumby.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P7WKx-0004l0-MR for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Oct 2010 18:43:56 +0200
+Received: from f053038064.adsl.alicedsl.de ([78.53.38.64]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P7WKT-0005o0-Du for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Oct 2010 16:43:25 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <DCE1CD9C-F324-471B-B66D-81BE7D85F9F5@chumby.com>
+References: <DCE1CD9C-F324-471B-B66D-81BE7D85F9F5@chumby.com>
+Date: Sun, 17 Oct 2010 18:43:22 +0200
+Message-ID: <1287333802.3748.1.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] live555: Add latest version
+Subject: Re: [PATCH] live555: Add latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +39,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 16:34:37 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 17 Oct 2010 16:43:56 -0000
+X-Groupsio-MsgNum: 24982
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-mMtRzWsmopqnd/KRhNkh"
+
+--=-mMtRzWsmopqnd/KRhNkh
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Live555 gets downloaded from http://www.live555.com/liveMedia/public/ =
-but they only have the latest version available.  This recipe adds =
-support for the latest version.
+Am Montag, den 18.10.2010, 00:33 +0800 schrieb Sean Cross:
 
----
- recipes/live555/live555_20101015.bb |    7 +++++++
- 1 files changed, 7 insertions(+), 0 deletions(-)
- create mode 100644 recipes/live555/live555_20101015.bb
+I would prefer it, if you stated the version in the commit summary.
 
-diff --git a/recipes/live555/live555_20101015.bb =
-b/recipes/live555/live555_20101015.bb
-new file mode 100644
-index 0000000..eb6dfe3
---- /dev/null
-+++ b/recipes/live555/live555_20101015.bb
-@@ -0,0 +1,7 @@
-+require live555.inc
-+
-+PR =3D "${INC_PR}.0"
-+
-+SRC_URI[md5sum] =3D "29734ddc6fddbb1a3a8f51a6de7a21c5"
-+SRC_URI[sha256sum] =3D =
-"278d99c0880f324769164d6872fea88f8d82ec5b87bb66c92035f46ee2f10adc"
-+
---=20
-1.7.0.4
+> Live555 gets downloaded from http://www.live555.com/liveMedia/public/ but=
+ they only have the latest version available.  This recipe adds support for=
+ the latest version.
+
+Since you suggest that the older recipes do not work anymore, could you
+remove them with this patch too.
+
+[=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+--=-mMtRzWsmopqnd/KRhNkh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky7J6QACgkQPX1aK2wOHViclgCfYyStPRnr/14zRewRenkz2+nh
+ZUcAnjWCiFrsvqc2ILRfLyiydRu4vwlF
+=/wJp
+-----END PGP SIGNATURE-----
+
+--=-mMtRzWsmopqnd/KRhNkh--
