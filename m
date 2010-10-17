@@ -1,45 +1,38 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P7aaf-0002ll-Ok
+	(envelope-from <obi@opendreambox.org>) id 1P7bWK-0008Hm-SV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 23:17:00 +0200
-Received: by bwz9 with SMTP id 9so166448bwz.6
+	Mon, 18 Oct 2010 00:16:01 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 38E8F3149E29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 14:15:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=qY51dsSJWFy9/C3jRe+12FeoacWusUxZkRn2KUP8EZk=;
-	b=PTV+euyhH8+rZ+a/CGMXIW1Dw+6xyD/7PcHGWPye8b6GG+A+fSr5ufS4J03kd6+KQM
-	Nrvmcj/qNBsOMcwdZ/fEGJ4Pg7hbzsYX19UDoI5wfdh4pQVfgIzAM7w/YFUPPZ0mAeS4
-	/xYsCyCicp3uyOaXQbv/YPdxOVM9VOSjfbHSw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=i+mz3jM2HxosyYhLp+APl0h9gBL/w6MUPmtpvW1OuudXd3GkMYtkK4pSRi2+KG2GTl
-	tovtXGECWll+1hp9XioLDLATUXG3asXqblQG5DrG8iYn3/hzYYrLzCm7liRFixtE7ftH
-	OaoxYESQciuYRTWG3LadEK2NG9JcYcy9BdAXU=
-Received: by 10.204.27.20 with SMTP id g20mr3645949bkc.114.1287350145318;
-	Sun, 17 Oct 2010 14:15:45 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id t10sm10513201bkj.4.2010.10.17.14.15.44
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 17 Oct 2010 14:15:44 -0700 (PDT)
-Date: Sun, 17 Oct 2010 23:15:40 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 18 Oct 2010 00:15:26 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id hJxEzi8h83N2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 00:15:17 +0200 (CEST)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 9B7593149CF2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 00:15:16 +0200 (CEST)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Sun, 17 Oct 2010 22:15:16 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101017211540.GB3324@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Sun, 17 Oct 2010 22:15:16 +0000
+Message-Id: <1287353716-27717-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] do we really need all OVERRIDES in FILESPATH?
+Subject: [PATCH] libfribidi-0.10.4: update recipe, fix packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,49 +46,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 21:17:01 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 17 Oct 2010 22:16:02 -0000
 
-Currently
-bitbake -e -b xserver-xorg-conf_0.1.bb | grep ^FILESPATH= | sed "s/:/\n/g" | wc -l
-shows 65 directories where file:// from SRC_URI can be found.
+* added LICENSE
+* removed configure patch
+* use lib_package and binconfig to package all installed files
+* convert to new style staging
+* oe-stylize
 
-base_do_unpack is looking for first directory where requested file
-exists. Most files are IMHO found in FILESPATHPKG PN, files or P
-(without an override used)
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ recipes/libfribidi/files/libtool-update.patch |   11 --------
+ recipes/libfribidi/libfribidi_0.10.4.bb       |   32 +++++++-----------------
+ 2 files changed, 10 insertions(+), 33 deletions(-)
+ delete mode 100644 recipes/libfribidi/files/libtool-update.patch
 
-Number of directories tried before
-PN:    38
-files: 51
-P:     25
-
-I see many recipes really using that MACHINE or DISTRO is in FILESPATH,
-few users of TARGET_ARCH and quick find/grep doesn't show any users of 
-other OVERRIDES in FILESPATH.
-
-BTW: ie initscripts have initscripts/files/arm/alignment.sh but that's only
-alignment.sh and SRC_URI_append_arm = " file://alignment.sh" would work
-ok even without arm in FILESPATH.
-
-What about using only ${TARGET_ARCH}:${DISTRO}:${MACHINE} in FILESPATH
-instead all OVERRIDES?
-
-And if there is need to use some special OVERRIDE then recipe can use
-SRC_URI_append_override.
-
-Number of directories tried before
-PN:    11
-files: 15
-P:      7
-end:   20
-
-If I'm overlooking other usages of FILESPATH or if this I/O saving is
-not worth it, let me know.
-
-Regards,
-
+diff --git a/recipes/libfribidi/files/libtool-update.patch b/recipes/libfribidi/files/libtool-update.patch
+deleted file mode 100644
+index c703100..0000000
+--- a/recipes/libfribidi/files/libtool-update.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- fribidi-0.10.4/configure.in~	2002-05-19 11:06:48.000000000 +0100
+-+++ fribidi-0.10.4/configure.in	2004-08-03 17:42:28.000000000 +0100
+-@@ -50,7 +50,7 @@
+- AC_PROG_INSTALL
+- AC_PROG_LN_S
+- AC_PROG_MAKE_SET
+--AC_PROG_RANLIB
+-+#AC_PROG_RANLIB
+- AC_PATH_PROG(SED, sed, $PATH)
+- 
+- 
+diff --git a/recipes/libfribidi/libfribidi_0.10.4.bb b/recipes/libfribidi/libfribidi_0.10.4.bb
+index c46909b..b83c484 100644
+--- a/recipes/libfribidi/libfribidi_0.10.4.bb
++++ b/recipes/libfribidi/libfribidi_0.10.4.bb
+@@ -1,32 +1,20 @@
+ DESCRIPTION = "Fribidi library for bidirectional text"
+ SECTION = "libs"
+ PRIORITY = "optional"
++LICENSE = "LGPLv2.1"
++PR = "r1"
+ 
+-inherit autotools pkgconfig
+-
+-PR = "r0"
++SRC_URI = "${SOURCEFORGE_MIRROR}/fribidi/fribidi-${PV}.tar.bz2"
++SRC_URI[md5sum] = "0f6e7ecca08e6e108dc06337f5b5cabf"
++SRC_URI[sha256sum] = "f3ecdb9d108bd61ec9394df75f5fd68ba886a8da0863ba6258338893aec6c04f"
+ 
+ S = "${WORKDIR}/fribidi-${PV}"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/fribidi/fribidi-${PV}.tar.bz2 \
+-           file://libtool-update.patch"
+-
+-#PACKAGES += " ${PN}-bin"
+-FILES_${PN} = "${libdir}/lib*.so.*"
+-#FILES_${PN}-bin = "${libdir}/uu*"
++inherit autotools lib_package binconfig pkgconfig
+ 
+ do_configure_prepend () {
+-# this version of libtool is old - we have to nobble this file to get it to litoolize
+-	rm ltconfig
+-	rm aclocal.m4
+-	rm acinclude.m4
+-}
+-
+-do_stage () {
+-	oe_libinstall -a -so -C .libs libfribidi ${STAGING_LIBDIR}
+-	autotools_stage_includes
++        # this version of libtool is old - we have to nobble this file to get it to litoolize
++        rm ltconfig
++        rm aclocal.m4
++        rm acinclude.m4
+ }
+-
+-
+-SRC_URI[md5sum] = "0f6e7ecca08e6e108dc06337f5b5cabf"
+-SRC_URI[sha256sum] = "f3ecdb9d108bd61ec9394df75f5fd68ba886a8da0863ba6258338893aec6c04f"
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.7.1
+
 
 
