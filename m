@@ -1,38 +1,29 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1P7XgM-0001XK-0V
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 20:10:06 +0200
-Received: (qmail 25488 invoked by uid 503); 17 Oct 2010 18:36:59 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 17 Oct 2010 18:36:59 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 17 Oct 2010 20:09:30 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 17 Oct 2010 20:09:29 +0200
-Message-ID: <4CBB3BD7.7030909@eukrea.com>
-Date: Sun, 17 Oct 2010 20:09:27 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
-MIME-Version: 1.0
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P7Y9R-00044e-62 for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Oct 2010 20:40:12 +0200
+Received: from f053038064.adsl.alicedsl.de ([78.53.38.64]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1P7Y8v-0003m9-Vi for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Oct 2010 18:39:38 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <FD3ED125-4701-4F36-88EA-E70AAB057103@chumby.com>	<4CBB3187.6010100@eukrea.com>
-	<1287337043.3748.16.camel@mattotaupa>
-In-Reply-To: <1287337043.3748.16.camel@mattotaupa>
-X-Ovh-Tracer-Id: 4312478120141040969
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Sun, 17 Oct 2010 20:39:36 +0200
+Message-ID: <1287340776.3748.31.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,WEIRD_PORT
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] live555: Add version 20101015 and remove older versions
+Subject: libgee: `do_configure` fails: gee/Makefile.am:95: HAVE_INTROSPECTION does not appear in AM_CONDITIONAL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,24 +37,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 18:10:06 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 17 Oct 2010 18:40:12 -0000
+X-Groupsio-MsgNum: 24987
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-hfcu6Ep84lLuEIrjUitc"
 
-Hi,
+--=-hfcu6Ep84lLuEIrjUitc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Le 17/10/2010 19:37, Paul Menzel a écrit :
-> Am Sonntag, den 17.10.2010, 19:25 +0200 schrieb Eric Bénard:
->> 2010.05.29&  2010.04.09&  2009.06.02 are mirrored on angstrom's sources mirror :
->> http://www.angstrom-distribution.org/unstable/sources/
->
-> Do you need the recipes for the old versions?
->
-as it's difficult to follow live555's recipes because they always remove the 
-previous source archive, we put the one we are using in an overlay with its 
-source archive and are using this one and not those of OE so no I actually 
-don't need them.
-
-Eric
+Dear OE folks,
 
 
+commit a89e9c
+
+        libgee.inc: Use libtool macros from installed libtool
+
+breaks task `do_configure` with at least `minimal-{libc,uclibc,eglibc}`.
+
+        | gee/Makefile.am:95: HAVE_INTROSPECTION does not appear in AM_COND=
+ITIONAL
+        | autoreconf: automake failed with exit status: 1
+        | FATAL: autoreconf execution failed.
+        | ERROR: Function do_configure failed
+        NOTE: package libgee-1_0.6.0-r6.0: task do_configure: Failed
+
+This problem was seen before [2].
+
+Reverting commit a89e9c fixes the build.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Da89e9c4=
+1f6ea2df686bcfb7c01b39b23685b4261
+[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-October/02=
+5125.html
+
+--=-hfcu6Ep84lLuEIrjUitc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAky7QugACgkQPX1aK2wOHVjO9gCfdff2VlDU6gahIrTeMQm6AeZq
+a2YAnia+oTfxTkXy7x0uKVeEbEO47c++
+=NFoL
+-----END PGP SIGNATURE-----
+
+--=-hfcu6Ep84lLuEIrjUitc--
