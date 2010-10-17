@@ -1,45 +1,48 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P7Ehb-0004yC-LG
+	(envelope-from <kergoth@gmail.com>) id 1P7JMz-0002Qe-LH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Oct 2010 23:54:10 +0200
-Received: by yxt3 with SMTP id 3so896945yxt.6
+	Sun, 17 Oct 2010 04:53:10 +0200
+Received: by wyb40 with SMTP id 40so2141563wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Oct 2010 14:53:31 -0700 (PDT)
+	Sat, 16 Oct 2010 19:52:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=JBubwrH8nP3Za7cv+KNxuYK9PGo/8z4cYm+cKp/4nMM=;
-	b=vOUAmgJqpNyqu/BjVFO3LYiTplXDp27Xn//rfz1uLu3OTqnofP4g88DFDp3KDAiYSo
-	La8+wwaWdpAZZaVeCjvGclhmyXUvRzGNuCtgtrh/ccOOyq3k9W95YoHMRmPFAAxWAHe4
-	IBBz8GTqn7HUslNRm3zx2Iv6uwm0wpAzabz5E=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:cc:content-type;
+	bh=f+sPlX9g/4VfJM1+A3ZNSSGLJj9Sb+RP6+Oca8GGwfI=;
+	b=TzRnSbEXuID7WCEOe0iEDaJ59/TiUX1BnDv0MutL5f5ZVX0H9Ah7Bvdl2koo9c8YN4
+	ACWXt5iVdQtgchL/9DE4zwNBgD4xx3TxY6tURgUq0M4J+kSQjFXugM2hq8xjm29XakX+
+	L6Te30MhKaRh6AaB1s0d+HAzx7G14DyoXLaww=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=swq6psjsCd1JPMUn5U1wmoYP0mp4obBreLSfF3xgpbLyKxvcHfYk+xs4b3/OvQdkRF
-	XRTOGJETu/T5pdXCjjJyeGVpSyA+kua/JWGO3kOCiqEWTI0eAXOtn1k3plaJcPB2gOBP
-	gzYuoeuRaJv0mSbidiBDD2QNXFRJ1Ai7sbrXg=
-Received: by 10.90.51.1 with SMTP id y1mr894625agy.7.1287266009641; Sat, 16
-	Oct 2010 14:53:29 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	b=qpfstpCMqha1m5HK1RHsSE/H5NZZcmBWyTtIZ73HpFO40rzT7CddZEPN69BqChuZMg
+	zY72NHtj9Tfreard6nmwyIUQ0KMdn12L9LNvA0+spjK3vcKdbcjf/2F8qVvodD0KYiED
+	CjvfQZpJgCJgSPfEn2jd1IvwgPCxdOOULWZBI=
+Received: by 10.216.255.199 with SMTP id j49mr1476724wes.110.1287283956174;
+	Sat, 16 Oct 2010 19:52:36 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.90.86.6 with HTTP; Sat, 16 Oct 2010 14:53:09 -0700 (PDT)
-In-Reply-To: <AANLkTi=xV6_7_sYi4Wf11QsFOc41PaWLdtfhycu4zZGg@mail.gmail.com>
-References: <1287230170-20745-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<20101016183152.GA15103@gmail.com>
-	<AANLkTi=xV6_7_sYi4Wf11QsFOc41PaWLdtfhycu4zZGg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 16 Oct 2010 14:53:09 -0700
-Message-ID: <AANLkTikA9LTDdDgUkRJSm9ncNxBbcFyQ199YNDY0vjQL@mail.gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.216.0.142 with HTTP; Sat, 16 Oct 2010 19:52:15 -0700 (PDT)
+In-Reply-To: <AANLkTin7HZsmGcRS95BCBCGrZYB8Ut1qB9TuSC6K0uk_@mail.gmail.com>
+References: <AANLkTin7HZsmGcRS95BCBCGrZYB8Ut1qB9TuSC6K0uk_@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sat, 16 Oct 2010 19:52:15 -0700
+X-Google-Sender-Auth: 5wL2QHVTKaAXghpNHQjSpSdA_fY
+Message-ID: <AANLkTikPHQf_hZtE8Pp-d0Q_8ofCeVCC3G0ApGD1RzNo@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gnutols_2.10.1: remove the libtool-m4-macros
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: bitbake-dev@lists.berlios.de
+Subject: Re: added task nr to NOTE and error messages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,59 +56,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2010 21:54:10 -0000
+X-List-Received-Date: Sun, 17 Oct 2010 02:53:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, Oct 16, 2010 at 12:25 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/10/16 Khem Raj <raj.khem@gmail.com>:
->> On (16/10/10 13:56), Frans Meulenbroeks wrote:
->>> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->>
->> Good job Frans. I knew this was better solution but chose the inferior one
->> as it was easy but this one is more elegant and libtool version
->> agnostic. Thanks for doing it. In fact this should be how we solve libtool
->> update issues w.r.t. libtool 2.4 as we go forward
->>
->> Acked-by: Khem Raj <raj.khem@gmail.com>
+On Sat, Oct 16, 2010 at 12:55 AM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
+
+> NOTE: Running task 742 of 995 (ID: 170,
+> /home/hudson/jobs/FM_TEST/workspace/openembedded/recipes/gcc/
+> gcc-cross_4.4.4.bb,
+> do_compile)
+> NOTE: package gcc-cross-4.4.4-r6.0: task do_compile: Started
+> NOTE: the following files were installed but not shipped in any package:
+> NOTE:   /etc/localtime
+> NOTE:   /etc/ld.so.conf
+> NOTE: Multiple libraries (libnss_hesiod.so.2, libnss_nisplus.so.2,
+> libnss_nis.so.2) found, but LEAD_SONAME 'libc.so' doesn't match any of
+> them
+> NOTE: Couldn't find shared library provider for libgcc_s.so.1
 >
-> Thanks for the ack, but the credits should go to Henning. He did put
-> me on this track and I used his patch as example.
-> Couldn't have done it alone, being the auto* and libtool n00b that I am.
-> It was solely because I could stand on the shoulders of a giant, that
-> I could produce this.
 >
-> BTW: the following recipes seem good candidates for doing the same
-> sort of patch:
-> ./binutils/binutils-2.20.1/libtool-2.4-update.patch
-
-we do not reconfigure binutils as it needs specific versions of
-autotools so it may be needed
-
-> ./gnuradio/gnuradio/libusb-libtool-2.4-update.patch
-
-I am expecting Philip to commit his gnuradio rework soon and then this
-patch will not be needed anymore
-
-> ./libsdl/libsdl-x11-1.2.14/libtool-update.patch
-
-this could be looked at.
-
+> Obivously the notes are not from the gcc-cross do_compile just above it.
 >
-> I would prefer it if the recipe maintainer gives this a stab.
+> Suggestion is to add the task number to the NOTE.
 >
-> BTW, maybe a better solution would be do do this in autotools (we also
-> discussed this in irc) and allow for aon overridable directory
-> variable (with default value m4)
-> I feel not comfortable enough to author such a patch though.
-> Note also that gnutls has three dirs with generated m4 files.
+> e.g.
+> NOTE (task 730):
+>
+> or, if more compactness is desired:
+> NOTE (730)
+> or even
+> NOTE_730
+>
+> Guess the same would apply to error messages etc.
+>
+> I guess this is not too difficult, but my knowledge of the system and
+> python is not good enough to come up with a patch.
 >
 > Frans
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> PS: it might also be nice to have a mechanism to throttle the notes
+> (or supporess some or all of them).
+> When doing a build of the testing branch I am not really interested in
+> task started/succeeded messages, not creating empty archive, packaged
+> contents of ... etc etc)
+> It would be nice if there was a way to (selectively?) suppress these.
+> (btw:  i know some of these are from oe, and others are from bb)
 >
 
+Note that in bitbake master, we're using the python logging module, which
+makes it extremely easy to inject extra metadata into messages, etc.  Worth
+playing with.  Not sure what would be best to handle messages you are/aren't
+interested in.  Some of those could eventually be switched to their own
+loggers, e.g. domain BitBake.Task.Status or something -- alternatively, some
+sort of messages classes implementation, or a pattern based message
+identification, or add localization and go based on the pattern there, or...
+*ponders*
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
