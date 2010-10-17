@@ -1,40 +1,38 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1P7SLg-0008UC-TU
+	(envelope-from <obi@opendreambox.org>) id 1P7SS5-0003le-3H
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 14:28:27 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id BB4B5491278
+	Sun, 17 Oct 2010 14:35:01 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 4B0CD3149F78
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 14:27:51 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Received: from 192.168.32.8 ([192.168.32.8]) by exchange.intern.dresearch.de
-	([192.168.32.16]) with Microsoft Exchange Server HTTP-DAV ;
-	Sun, 17 Oct 2010 12:27:51 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; de;
-	rv:1.9.1.12) Gecko/20100914 SUSE/3.0.8 Lightning/1.0b1
-	Thunderbird/3.0.8
-Date: Sun, 17 Oct 2010 14:27:49 +0200
-Message-ID: <DB561678F08F554EB0D9F21B70E268A505AF50@exchange.intern.dresearch.de>
-In-Reply-To: <AANLkTini++RBtxheY+RZ2+7X-=i4NAbY39e2wcRA8mDh@mail.gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] testing branch 2010-10-14 - configure epiphany still fails
-Thread-Index: Actt9rdnA27LrCUOQ4CTFwexX7gmOQ==
-References: <AANLkTini++RBtxheY+RZ2+7X-=i4NAbY39e2wcRA8mDh@mail.gmail.com>
-From: "Sledz, Steffen" <sledz@dresearch.de>
-To: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+	Sun, 17 Oct 2010 14:34:29 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id bVzb2sJywYDf; Sun, 17 Oct 2010 14:34:22 +0200 (CEST)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 829753149F75;
+	Sun, 17 Oct 2010 14:34:21 +0200 (CEST)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Sun, 17 Oct 2010 12:34:21 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Oct 2010 12:34:20 +0000
+Message-Id: <1287318860-1312-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <20101015143014.GA9736@rhein.zuhause.netz>
+References: <20101015143014.GA9736@rhein.zuhause.netz>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-10-14 - configure epiphany still fails
+Subject: [PATCH] libsdl-directfb: update to 1.2.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,26 +46,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 12:28:27 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-class: urn:content-classes:message
+X-List-Received-Date: Sun, 17 Oct 2010 12:35:01 -0000
 
-do_configure still fails with the ca-certificates problem [1]. :(
+Changes since v1:
+* removed patches.
+* use autoreconf to update libtool etc.
+* inherit lib_package
+* dropped some unused configure options.
+* ran oe-stylize.py
 
-If nobody will find a solution for this problem (for my first diagnosis =
-see [2]) until the next testing branch creation, i'll push my original =
-patch which disables the ca-file use [3].
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ recipes/libsdl/libsdl-directfb_1.2.14.bb |   49 ++++++++++++++++++++++++++++++
+ 1 files changed, 49 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libsdl/libsdl-directfb_1.2.14.bb
 
-Steffen
+diff --git a/recipes/libsdl/libsdl-directfb_1.2.14.bb b/recipes/libsdl/libsdl-directfb_1.2.14.bb
+new file mode 100644
+index 0000000..045600d
+--- /dev/null
++++ b/recipes/libsdl/libsdl-directfb_1.2.14.bb
+@@ -0,0 +1,49 @@
++DESCRIPTION = "Simple DirectMedia Layer (DirectFB and Framebuffer support)"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "LGPL"
++DEPENDS = "alsa-lib directfb"
++PROVIDES = "virtual/libsdl"
++
++SRC_URI = "http://www.libsdl.org/release/SDL-${PV}.tar.gz"
++SRC_URI[md5sum] = "e52086d1b508fa0b76c52ee30b55bec4"
++SRC_URI[sha256sum] = "5d927e287034cb6bb0ebccfa382cb1d185cb113c8ab5115a0759798642eed9b6"
++
++S = "${WORKDIR}/SDL-${PV}"
++
++inherit autotools lib_package binconfig pkgconfig
++
++EXTRA_OECONF = " \
++        --disable-arts \
++        --disable-diskaudio \
++        --disable-esd \
++        --disable-esd-shared \
++        --disable-esdtest \
++        --enable-input-events \
++        --disable-input-tslib \
++        --disable-mintaudio \
++        --disable-nas \
++        --disable-nasm \
++        --disable-video-dga \
++        --disable-video-dummy \
++        --enable-video-directfb \
++        --enable-video-fbcon \
++        --disable-video-opengl \
++        --disable-video-picogui \
++        --disable-video-ps2gs \
++        --disable-video-ps3 \
++        --disable-video-qtopia \
++        --disable-video-x11 \
++"
++EXTRA_AUTORECONF += "--include=acinclude"
++
++# Skip autoheader, because it must not overwrite SDL_config.h.in.
++export AUTOHEADER = "true"
++
++do_configure_prepend () {
++        # Remove old libtool macros.
++        MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
++        for i in ${MACROS}; do
++               rm acinclude/$i
++        done
++}
+-- 
+1.7.1
 
-[1] <http://tinderbox.openembedded.org/packages/859111/>
-[2] =
-<http://thread.gmane.org/gmane.comp.handhelds.openembedded/37925/focus=3D=
-38034>
-[3] =
-<http://thread.gmane.org/gmane.comp.handhelds.openembedded/37453/focus=3D=
-37585>
 
 
