@@ -1,47 +1,33 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P7Jrz-0003Pj-VN
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 05:25:13 +0200
-Received: by wyb40 with SMTP id 40so2153046wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Oct 2010 20:24:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=rKOTti9jGDXaUzNVzJCaxS2c8Pwk1TG80AsKkeTAr7A=;
-	b=SHidrDGViSStsP/IkWNuSdFBtcecupIMrXFrOREWO5ERMxRjj5tBSitnwmtm1AnGlS
-	fgUByNXUAuOubV7+cLWqZdx1tEhZnQyuk7qqohWqcSSQDr/uqd7RhFa+x4DW31qZHcXR
-	DYDT3ubPX1pWdN9IfGp7jWaUo4okZTUsv6SnQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=kx5+0mlOZm7UEptcR8tOnDM3JbQCmtwSpMGNEk97jHeqW0rXliX+lxGCHOY2hIRYME
-	ZmPMZmJPT6OSmGmUbowFmIHLvtDhV62OLdCwQ2c8ODG4oPPB//t8Q2GjyTIfhZQ9ig6i
-	m5a310HQVlKbE5fwgt722VXEwfRN1fGwY3AoE=
-Received: by 10.216.178.83 with SMTP id e61mr765899wem.12.1287285880093; Sat,
-	16 Oct 2010 20:24:40 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.142 with HTTP; Sat, 16 Oct 2010 20:24:19 -0700 (PDT)
-In-Reply-To: <AANLkTinZzG8fne8o9S2enSPM0aETUzbDDHOJMV9PytgF@mail.gmail.com>
-References: <AANLkTinZzG8fne8o9S2enSPM0aETUzbDDHOJMV9PytgF@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sat, 16 Oct 2010 20:24:19 -0700
-X-Google-Sender-Auth: sXUOy_d-NeuLKXf6KO3n3Oo-D0Y
-Message-ID: <AANLkTinSx8kArN_pdwqW0zwhsBu1eOe512cVJuLuN4Wv@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+	(envelope-from <sean@chumby.com>) id 1P7MMq-0006Sw-3A
+	for Openembedded-devel@lists.openembedded.org;
+	Sun, 17 Oct 2010 08:05:13 +0200
+Received: by pxi18 with SMTP id 18so328732pxi.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Oct 2010 23:04:38 -0700 (PDT)
+Received: by 10.142.153.1 with SMTP id a1mr2224308wfe.369.1287295477723;
+	Sat, 16 Oct 2010 23:04:37 -0700 (PDT)
+Received: from [192.168.10.100] (cm198.psi191.maxonline.com.sg
+	[58.146.191.198])
+	by mx.google.com with ESMTPS id p8sm19792152wff.4.2010.10.16.23.04.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 16 Oct 2010 23:04:36 -0700 (PDT)
+From: Sean Cross <sean@chumby.com>
+Date: Sun, 17 Oct 2010 14:04:32 +0800
+Message-Id: <50C3C89D-F86C-423F-814A-88602DD959E1@chumby.com>
+To: Openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0 (Apple Message framework v1081)
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: sean@chumby.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [RFC] Packaged contents of $pkg_dir into $pkg_file
+Subject: [PATCH] libsamplerate: Fix checksums to match downloaded file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,52 +41,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 03:25:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 17 Oct 2010 06:05:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 16, 2010 at 1:37 AM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
+libsamplerate-0.1.7.tar.gz has changed upstream.  The Angstrom mirror =
+has an old version of the file.  Pulling it from the source, I see that =
+the following two changes have been made without bumping the version:
 
-> Not sure how others feel about it, but I feel our build logs tend to
-> become more and more verbose, making it harder (e.g. in a testing-next
-> build) to spot anomalies
->
-> One of the things contributing to the verbosity are lines like:
-> Packaged contents of module-init-tools-cross into
->
-> /home/hudson/jobs/FM_TEST/workspace/tmp/deploy/ipk/armv5te/module-init-tools-cross_3.2.2-r5_armv5te.ipk
->
-> These lines are generated by the last line of:
->
-> /recipes/stage-manager/files/stage-manager-ipkg-build
->
-> which reads:
->
-> Packaged contents of $pkg_dir into $pkg_file
->
-> Questions/discussion points:
-> - do you feel it is useful to be able to suppress these messages
->
-> If so how should this be done?
-> - by fully removing them (quite a drastic solution)
-> - by having it controlled by an environment variable
->
-> And in the latter case: what should be the default behaviour and how
-> should the variable be named?
->
+diff -ur old-libsamplerate-0.1.7/ChangeLog libsamplerate-0.1.7/ChangeLog
+--- old-libsamplerate-0.1.7/ChangeLog   2009-02-14 11:37:27.000000000 =
++0000
++++ libsamplerate-0.1.7/ChangeLog       2009-02-15 00:17:35.000000000 =
++0000
+@@ -11,7 +11,7 @@
+     This bug has zero security implications beyond the ability to cause =
+a
+     program hitting this bug to exit immediately with a segfault.
+     See : http://www.mega-nerd.com/erikd/Blog/2009/Feb/14/index.html
+-    Thanks to David Cournapeau for the bug report.
++    Thanks to David Cournapeau and Lev Givon for the bug report.
+=20
+     * doc/win32.html Makefile.am configure.ac
+     Reinstate Win32/MSVC compile instructions.
+diff -ur old-libsamplerate-0.1.7/Win32/config.h =
+libsamplerate-0.1.7/Win32/config.h
+--- old-libsamplerate-0.1.7/Win32/config.h      2009-02-14 =
+11:42:49.000000000 +0000
++++ libsamplerate-0.1.7/Win32/config.h  2009-02-14 11:46:40.000000000 =
++0000
+@@ -190,8 +190,7 @@
+ #define STDC_HEADERS 1
+=20
+ /* Version number of package */
+-<<<<<<< diff from left file
+-#define VERSION "0.1.4"
++#define VERSION "0.1.7"
+=20
+=20
+=20
+@@ -203,6 +202,3 @@
+ */
+=20
+ #define inline __inline
+-=3D=3D=3D=3D=3D=3D=3D=3D
+-#define VERSION "0.1.7"
+->>>>>>> diff from right file
 
-Aside: in this *particular* case, what's happening is the output is ..
-indirect.  The python task runs os.system() or something, which dumps to
-stdout directly.  We *must* fix bitbake to capture *all* standard stdout
-usage from python tasks and not display it directly, if it doesn't do that
-already in master (note: direct usage of bb.msg functions wouldn't be
-included in that).  This would make it more consistent with shell functions,
-and would also ensure that the ncurses UI for bitbake doesn't get completely
-hosed by the unexpected stdout output.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+
+The following patch corrects the checksums for the new version.
+
+---
+ recipes/libsamplerate/libsamplerate0_0.1.7.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/libsamplerate/libsamplerate0_0.1.7.bb =
+b/recipes/libsamplerate/libsamplerate0_0.1.7.bb
+index 737e934..8b457ba 100644
+--- a/recipes/libsamplerate/libsamplerate0_0.1.7.bb
++++ b/recipes/libsamplerate/libsamplerate0_0.1.7.bb
+@@ -12,5 +12,5 @@ S =3D "${WORKDIR}/libsamplerate-${PV}"
+ inherit autotools pkgconfig
+=20
+=20
+-SRC_URI[md5sum] =3D "ad093e60ec44f0a60de8e29983ddbc0f"
+-SRC_URI[sha256sum] =3D =
+"e0a646224a0323ac63f56ef009b2d7fee11452a7b8af139b19ae71d2890dbc9c"
++SRC_URI[md5sum] =3D "6731a81cb0c622c483b28c0d7f90867d"
++SRC_URI[sha256sum] =3D =
+"78ed5d9ff1bf162c4a078f6a3e7432a537dd2f22dc58872b081fb01156027fcc"
+--=20
+1.7.0.4
+
+
 
