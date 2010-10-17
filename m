@@ -1,26 +1,26 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P7SS5-0003le-3H
+	(envelope-from <obi@opendreambox.org>) id 1P7Sp0-000481-U4
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 14:35:01 +0200
+	Sun, 17 Oct 2010 14:58:43 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 4B0CD3149F78
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 87FCD3149F75
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 14:34:29 +0200 (CEST)
+	Sun, 17 Oct 2010 14:58:12 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with LMTP id bVzb2sJywYDf; Sun, 17 Oct 2010 14:34:22 +0200 (CEST)
+	with LMTP id jOc0VLzckpt9; Sun, 17 Oct 2010 14:58:05 +0200 (CEST)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 829753149F75;
-	Sun, 17 Oct 2010 14:34:21 +0200 (CEST)
+	by mail.multimedia-labs.de (Postfix) with SMTP id 086CB3149F78;
+	Sun, 17 Oct 2010 14:58:04 +0200 (CEST)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Sun, 17 Oct 2010 12:34:21 +0000
+	Sun, 17 Oct 2010 12:58:03 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Oct 2010 12:34:20 +0000
-Message-Id: <1287318860-1312-1-git-send-email-obi@opendreambox.org>
+Date: Sun, 17 Oct 2010 12:57:54 +0000
+Message-Id: <1287320274-17236-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <20101015143014.GA9736@rhein.zuhause.netz>
 References: <20101015143014.GA9736@rhein.zuhause.netz>
@@ -32,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libsdl-directfb: update to 1.2.14
+Subject: [PATCH v2] libsdl-directfb: update to 1.2.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 12:35:01 -0000
+X-List-Received-Date: Sun, 17 Oct 2010 12:58:43 -0000
 
 Changes since v1:
 * removed patches.
@@ -57,6 +57,8 @@ Changes since v1:
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
+Resent with updated subject...
+
  recipes/libsdl/libsdl-directfb_1.2.14.bb |   49 ++++++++++++++++++++++++++++++
  1 files changed, 49 insertions(+), 0 deletions(-)
  create mode 100644 recipes/libsdl/libsdl-directfb_1.2.14.bb
