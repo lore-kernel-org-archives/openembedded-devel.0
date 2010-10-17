@@ -1,42 +1,46 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1P7QIK-0006oI-R6
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7QvI-0002IV-AD
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 12:16:49 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id D4974A51D1
+	Sun, 17 Oct 2010 12:57:05 +0200
+Received: by iwn2 with SMTP id 2so2853526iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 11:16:17 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id p1fbtNYa1RAL
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 11:16:16 +0100 (BST)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 9059CA4828
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 11:16:16 +0100 (BST)
-Message-ID: <4CBACCF1.1020403@xora.org.uk>
-Date: Sun, 17 Oct 2010 11:16:17 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.9) Gecko/20100915 Lightning/1.0b2 Thunderbird/3.1.4
+	Sun, 17 Oct 2010 03:56:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=AwNKfaHYN0GiEghYVJ6VAW4jkRbBErIUEkNsWsZpT9Y=;
+	b=SzA6ODbe2t4ikMgsg0GDNBdJMODqmmIktobjD9VGKYM+/ZUDERi/rFeJUKK6UINc44
+	p+wVMtxLRpWxaFuXfQ0zXUDo89HKZPH0Q8dCFTVT+5Q4amgpP4tncK5EQQXk6Ct2Yzj1
+	IpNfPPAd05NqkUrz9Ve6h4RTSQWK4ncfamQ+k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=QQ2oGsUjaM8OUDh1AGrDrzQXS8/MWbLkKPnPB/QXl5UixIB5Eoi4TdJwn0f6FNH4/r
+	d8wP+dSlkpqX7Md52ElKBt8EyipCJqRlzcbcIp+y9o5AY2XM7jaQpalH5iszpttk0f/r
+	zIFOjoaDnsq6SXoJDTXnQG2+sdKlnIXmo9Jno=
 MIME-Version: 1.0
+Received: by 10.231.35.196 with SMTP id q4mr2169659ibd.170.1287312992297; Sun,
+	17 Oct 2010 03:56:32 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 17 Oct 2010 03:56:32 -0700 (PDT)
+In-Reply-To: <AANLkTimu=q2VNcR=2fwNiRB0bojQQ70h1BVAEKa0pQUA@mail.gmail.com>
+References: <1287218988-3946-1-git-send-email-ynezz@true.cz>
+	<AANLkTi=_3DKvm3bbHuvdvQYOS9M3WDKaBjg2aON=kYWS@mail.gmail.com>
+	<AANLkTimu=q2VNcR=2fwNiRB0bojQQ70h1BVAEKa0pQUA@mail.gmail.com>
+Date: Sun, 17 Oct 2010 12:56:32 +0200
+Message-ID: <AANLkTimiK0YnGdHjvpsKEcHvs+9zzi-UO_yHng5tgFzB@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTikvPnJupAjwCps+3Zc73jVNyd7Mm-X1PP307a-D@mail.gmail.com>
-In-Reply-To: <AANLkTikvPnJupAjwCps+3Zc73jVNyd7Mm-X1PP307a-D@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: LICENSE, LICENSE and LICENSE
+Subject: Re: [PATCH] oestats-client.bbclass: send USERDISTRO value
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,29 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 10:16:49 -0000
+X-List-Received-Date: Sun, 17 Oct 2010 10:57:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
- On 16/10/2010 20:15, Frans Meulenbroeks wrote:
-> Dear all,
+2010/10/17 Chris Larson <clarson@kergoth.com>:
+> On Sat, Oct 16, 2010 at 1:58 AM, Frans Meulenbroeks <
+> fransmeulenbroeks@gmail.com> wrote:
 >
-> Being bored while waiting for a build to finish, I decided to to a
-> grep for LICENSE on recipes/*/*
+>> > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 'distro': bb.data.getVar=
+('DISTRO', d, True),
+>> > + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 'distro': bb.data.getVar=
+('USERDISTRO', d, True),
+>> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0})
+>> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if re.match("^\d+$", data): id=3Ddata
+>> > =A0 =A0 =A0 =A0except:
+>> > --
+>> > 1.7.0.4
+>> >
+>> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 >
-> As already reported on an earlier email about 375 recipes have no
-> LICENSE (according to recipe_sanity).
 >
-> After a little bit of editing and sorting I came to the list at the
-> end of this email.
-> First digit is the number a license occurs, 2nd field is the license itself.
->
-First thoughts in this is we need to standardise on names of licenses.
-And for licenses that cannot be named like my personal favourite the
-aspell-en recipe some way to indicate a "special" license and furthur
-metadata about that license.
+> Is USERDISTRO always guaranteed to be set, or should it fall back to DIST=
+RO?
+> =A0(haven't checked, I feel lazy, sue me :)
+> --
 
-Graeme
+Yes, checked that, before I acked because I also had that concern.
+It is done in bitbake.conf
+see also the grep from Petr
 
+Frans
 
 
