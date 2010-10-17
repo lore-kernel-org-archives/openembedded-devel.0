@@ -1,36 +1,45 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P7aXI-0005nq-SB
+	(envelope-from <martin.jansa@gmail.com>) id 1P7aaf-0002ll-Ok
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 23:12:59 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 220293149CF2
+	Sun, 17 Oct 2010 23:17:00 +0200
+Received: by bwz9 with SMTP id 9so166448bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 23:12:23 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id zjvRZdd9QOAC; Sun, 17 Oct 2010 23:12:16 +0200 (CEST)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 83E7F3148DD0;
-	Sun, 17 Oct 2010 23:12:15 +0200 (CEST)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Sun, 17 Oct 2010 21:12:15 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Sun, 17 Oct 2010 14:15:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=qY51dsSJWFy9/C3jRe+12FeoacWusUxZkRn2KUP8EZk=;
+	b=PTV+euyhH8+rZ+a/CGMXIW1Dw+6xyD/7PcHGWPye8b6GG+A+fSr5ufS4J03kd6+KQM
+	Nrvmcj/qNBsOMcwdZ/fEGJ4Pg7hbzsYX19UDoI5wfdh4pQVfgIzAM7w/YFUPPZ0mAeS4
+	/xYsCyCicp3uyOaXQbv/YPdxOVM9VOSjfbHSw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=i+mz3jM2HxosyYhLp+APl0h9gBL/w6MUPmtpvW1OuudXd3GkMYtkK4pSRi2+KG2GTl
+	tovtXGECWll+1hp9XioLDLATUXG3asXqblQG5DrG8iYn3/hzYYrLzCm7liRFixtE7ftH
+	OaoxYESQciuYRTWG3LadEK2NG9JcYcy9BdAXU=
+Received: by 10.204.27.20 with SMTP id g20mr3645949bkc.114.1287350145318;
+	Sun, 17 Oct 2010 14:15:45 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id t10sm10513201bkj.4.2010.10.17.14.15.44
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 17 Oct 2010 14:15:44 -0700 (PDT)
+Date: Sun, 17 Oct 2010 23:15:40 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Oct 2010 21:12:05 +0000
-Message-Id: <1287349925-14997-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+Message-ID: <20101017211540.GB3324@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] directfb-1.4.6: fix packaging
+Subject: [RFC] do we really need all OVERRIDES in FILESPATH?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +53,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 21:12:59 -0000
+X-List-Received-Date: Sun, 17 Oct 2010 21:17:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* Files were searched in the wrong directory, because $RV was wrong.
+Currently
+bitbake -e -b xserver-xorg-conf_0.1.bb | grep ^FILESPATH= | sed "s/:/\n/g" | wc -l
+shows 65 directories where file:// from SRC_URI can be found.
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- recipes/directfb/directfb_1.4.6.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+base_do_unpack is looking for first directory where requested file
+exists. Most files are IMHO found in FILESPATHPKG PN, files or P
+(without an override used)
 
-diff --git a/recipes/directfb/directfb_1.4.6.bb b/recipes/directfb/directfb_1.4.6.bb
-index 1d4f34a..70c0225 100644
---- a/recipes/directfb/directfb_1.4.6.bb
-+++ b/recipes/directfb/directfb_1.4.6.bb
-@@ -1,7 +1,7 @@
- require directfb.inc
- 
--RV = "1.4-0"
--PR = "r1"
-+RV = "1.4-5"
-+PR = "r2"
- 
- DEPENDS += "sysfsutils"
- 
-@@ -21,7 +21,7 @@ EXTRA_OECONF = "\
-   --disable-x11 \
- "
- 
--LEAD_SONAME = "libdirectfb-1.4.so.0"
-+LEAD_SONAME = "libdirectfb-1.4.so.5"
- 
- SRC_URI[md5sum] = "dbe1957932f81790742b58b94c1c7b84"
- SRC_URI[sha256sum] = "b18121e60e9a084ee347037a53a46cfaea1c09505bd99d673c2e65eca285e69b"
+Number of directories tried before
+PN:    38
+files: 51
+P:     25
+
+I see many recipes really using that MACHINE or DISTRO is in FILESPATH,
+few users of TARGET_ARCH and quick find/grep doesn't show any users of 
+other OVERRIDES in FILESPATH.
+
+BTW: ie initscripts have initscripts/files/arm/alignment.sh but that's only
+alignment.sh and SRC_URI_append_arm = " file://alignment.sh" would work
+ok even without arm in FILESPATH.
+
+What about using only ${TARGET_ARCH}:${DISTRO}:${MACHINE} in FILESPATH
+instead all OVERRIDES?
+
+And if there is need to use some special OVERRIDE then recipe can use
+SRC_URI_append_override.
+
+Number of directories tried before
+PN:    11
+files: 15
+P:      7
+end:   20
+
+If I'm overlooking other usages of FILESPATH or if this I/O saving is
+not worth it, let me know.
+
+Regards,
+
 -- 
-1.7.1
-
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
