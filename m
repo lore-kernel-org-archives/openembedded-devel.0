@@ -1,39 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P7Zlp-0000lc-Tp for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 22:23:54 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P7ZlL-0004Vv-D2 for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Oct 2010 22:23:23 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 22:23:23 +0200
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Oct 2010 22:23:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1P7a2l-0005t0-39
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Oct 2010 22:41:23 +0200
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id C95A91D3616D; Sun, 17 Oct 2010 22:40:47 +0200 (CEST)
+Date: Sun, 17 Oct 2010 22:40:47 +0200
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 17 Oct 2010 22:23:15 +0200
-Message-ID: <i9flvj$gec$1@dough.gmane.org>
+Message-ID: <20101017204047.GO28423@ibawizard.net>
 References: <1287344571-13760-1-git-send-email-ynezz@true.cz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <1287344571-13760-1-git-send-email-ynezz@true.cz>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<i9flvj$gec$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i9flvj$gec$1@dough.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 0/3] lua: use standard prefix for Lua libraries
@@ -50,46 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 20:23:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 17 Oct 2010 20:41:23 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi <k.kooi@student.utwente.nl> [2010-10-17 22:23:15]:
 
-On 17-10-10 21:42, Petr Štetiar wrote:
-> Hi,
+[snip]
+
+> LUA_LIB_DIR = "${libdir}/lua/5.1"
 > 
-> this patch series should fix wrong path in default configuration of Lua, where
-> uses wrong /usr/local/{lib,share} in it's module/script search path. This
-> patch changes it to the usage of the standard /usr/{lib,share} directories.
-> Please apply. Thanks.
+> That would even make it work with that crazy micro distro that has no
+> /usr :)
 
-What about the following:
+Ah, nice. Thanks.
 
-Replace no-usr-local.patch with:
-
-do_configure_prepend() {
-	sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
-}
-
-And then do:
-
-LUA_LIB_DIR = "${libdir}/lua/5.1"
-
-That would even make it work with that crazy micro distro that has no
-/usr :)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMu1szMkyGM64RGpERAlufAKC9fU32pwlUpgftYegwgR9lKezGEQCfXcf1
-x+ACokVW12Pi4WaWaDJ+4/0=
-=nDaF
------END PGP SIGNATURE-----
-
+-- ynezz
 
 
