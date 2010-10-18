@@ -1,37 +1,46 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.jrz.cbn>) id 1P7spV-0003yl-7G
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7t5L-0003Tu-6t
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 18:44:58 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 0037A8CBC00;
-	Mon, 18 Oct 2010 12:44:24 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 23074-04; Mon, 18 Oct 2010 12:44:24 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id D14DE8CBDB5; Mon, 18 Oct 2010 12:44:24 -0400 (EDT)
-Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id CD6C08C68BD;
-	Mon, 18 Oct 2010 12:44:23 -0400 (EDT)
-Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
-	id AFD915000E7; Mon, 18 Oct 2010 12:44:23 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
+	Mon, 18 Oct 2010 19:01:22 +0200
+Received: by gxk19 with SMTP id 19so595275gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 10:00:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ruvMhREOp3NCpBSIGr0J4Hnc0Y6KpK4Q9zrzaOjNbXE=;
+	b=xObzo2Dr21DVBXfFV1+tl6nhou38zatj2wZIMSZn826/8yOJiOXphpKbOluzahdIt9
+	CMS1QGMnBWOwrXi5EFO23Lun12bkhnAbjoAwWc+xccXtx7uxgdewrfmjR23pziaoGJ+/
+	7wva6atav51mdN9OB3vXHlS+goDy7Hw8yK4gY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Inmv5x6ImwyithQggWSYOjyD1AwOw0kcpJ9zVlj19JGff0Li3CFiaeKYOb/PztaRkI
+	gRhB28kBTbqfEdN8Qtgoe2Rd9CqPcwlocP7orL/aFEC0KQGk+fsen+LImJpESR7h9AUf
+	TEOei/p9x8Nwe98OKFX0MZLMgnnKL7pIttbfE=
+MIME-Version: 1.0
+Received: by 10.42.213.3 with SMTP id gu3mr1110344icb.88.1287421240531; Mon,
+	18 Oct 2010 10:00:40 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 18 Oct 2010 10:00:36 -0700 (PDT)
+In-Reply-To: <i9hpii$gf2$1@dough.gmane.org>
+References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>
+	<201010181520.30454.marcin@juszkiewicz.com.pl>
+	<4CBC4DD4.3010908@atmel.com> <i9hpii$gf2$1@dough.gmane.org>
+Date: Mon, 18 Oct 2010 19:00:36 +0200
+Message-ID: <AANLkTim6ROYhLyn1e8=PT+Joby0hiJ7rCVgUD7ifJRYe@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Oct 2010 12:44:23 -0400
-Message-Id: <1287420263-28528-1-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.7.0.4
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
-	SPF_HELO_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH v3] package.bbclass: copy dotfiles in root D to PKGD
+Subject: Re: [PATCH 1/5] Use common files for AT91SAM9 configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,46 +54,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 16:44:59 -0000
+X-List-Received-Date: Mon, 18 Oct 2010 17:01:22 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-The previous system("cp %s/* ...") missed dotfiles/dirs at the
-top-level.
+2010/10/18 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 18-10-10 15:38, Ulf Samuelsson wrote:
+>> Marcin Juszkiewicz skrev:
+>>> Dnia sobota, 16 pa=BCdziernika 2010 o 14:50:02 ulf.samuelsson@atmel.com
+>>> napisa=B3(a):
+>>>
+>>>> +++ b/conf/machine/include/at91-2.6.30.inc
+>>>> +++ b/conf/machine/include/at91-2.6.32.inc
+>>>
+>>> Do you plan to duplicate that file with each kernel you will produce?
+>>> Create include/at91-sam9.inc and put it there.
+>>>
+>>> Regards,
+>>
+>> This is to allow different kernel versions for different AT91 chips.
+>> This allows both a "stable" version, and a development kernel
+>> to be easily handled.
+>>
+>> The file defines (amongst other things) the
+>> * kernel version,
+>> * u-boot version
+>> * at91bootstrap version
+>> so you need one file per version.
+>
+> NAK! Machines don't get to decide versions! Please revert that commit
+> and come up with a better way, e.g. default_preference in the recipes or
+> distro include files.
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Cc: Graham Gower <graham.gower@gmail.com>
-Cc: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- classes/package.bbclass |   10 +++++-----
- 1 files changed, 5 insertions(+), 5 deletions(-)
+Well machines are probably better capable to decide what u-boot and
+kernel version is best for them.
+One alternative (which is probably by more yukky) is to create an
+kernel-at91 recipe and define PREFERRED_PROVIDER_virtual/kernel
+I don't feel that is a better scenario
 
-diff --git a/classes/package.bbclass b/classes/package.bbclass
-index e2a61bf..2769595 100644
---- a/classes/package.bbclass
-+++ b/classes/package.bbclass
-@@ -356,15 +356,15 @@ python package_do_split_locales() {
- }
- 
- python perform_packagecopy () {
--	dest = bb.data.getVar('D', d, True)
--	dvar = bb.data.getVar('PKGD', d, True)
-+	installdest = bb.data.getVar('D', d, True)
-+	pkgcopy = bb.data.getVar('PKGD', d, True)
- 
--	bb.mkdirhier(dvar)
-+	bb.mkdirhier(pkgcopy)
- 
- 	# Start by package population by taking a copy of the installed 
- 	# files to operate on
--	os.system('rm -rf %s/*' % (dvar))
--	os.system('cp -pPR %s/* %s/' % (dest, dvar))
-+	os.system('rm -rf %s/*' % (pkgcopy))
-+	os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
- }
- 
- python populate_packages () {
--- 
-1.7.0.4
+Frans
 
+
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMvGmSMkyGM64RGpERAoEpAJwP7tGmHa9mq3bUhbc0WKfwRWJETgCgrd3l
+> 3rfyCWSdNXlK4lIbgpZLMBA=3D
+> =3D2WQm
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
