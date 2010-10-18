@@ -1,38 +1,40 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P7bju-00005n-Pk
+	(envelope-from <graham.gower@gmail.com>) id 1P7dgE-0000Sa-A9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 00:30:03 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 7F4A23148305
+	Mon, 18 Oct 2010 02:34:23 +0200
+Received: by iwn2 with SMTP id 2so493701iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 00:29:29 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id JvmmKm0w5Bhn
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 00:29:23 +0200 (CEST)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id ED5BF31476A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 00:29:21 +0200 (CEST)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Sun, 17 Oct 2010 22:29:21 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Sun, 17 Oct 2010 17:33:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=+7T/I1ntMVJ4Broqa5RUvzVhWv5jP5EcbH5/GwDrlnk=;
+	b=weAlvQtVhmDkfSCZKhvDD6W7RPaCAoH9+BokUqptkKHLVhDPSU8blk1f9IDhK0BGMz
+	VVp30D4TvT6FHJydjSeOYd35crVsTRicakOOlDGi8XQ2ORG+KmSy9KaBpEaLYNEan3K4
+	1OB4/hQBoCay84m+kgsk7W1yNqzDpsGkNrLsM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=EHHlA3hEGo4PxlYFkPHXS2nvQpM0z0wDIXn/suhs12kyrbg/ZeaaGS6BM0ASkWgdmP
+	996svOrkYesfcgAXggqnyTjt2OZ0ca1Im2auKJ/RVAcTOoqAk1eH035MqzMAUgAk+yEe
+	mKG4XKekt+kepSuPP0GGjSKQY16UAnk7VOzzw=
+MIME-Version: 1.0
+Received: by 10.231.149.80 with SMTP id s16mr2695786ibv.81.1287362030111; Sun,
+	17 Oct 2010 17:33:50 -0700 (PDT)
+Received: by 10.231.158.148 with HTTP; Sun, 17 Oct 2010 17:33:50 -0700 (PDT)
+Date: Mon, 18 Oct 2010 11:03:50 +1030
+Message-ID: <AANLkTim=u-zVopYCjUxyv_ogxxxA3MU_FkUfh5u-LfAP@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Oct 2010 22:29:21 +0000
-Message-Id: <1287354561-29374-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] linux-libc-headers-2.6.34: Delete include/scsi/scsi.h
+Subject: lirc_0.8.6+cvs20100613: do_package hangs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +48,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2010 22:30:03 -0000
+X-List-Received-Date: Mon, 18 Oct 2010 00:34:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Based on 91d3d92a626da89dfe13d63e68a90dbafdbaef1d for 2.6.31 and 2.6.32
+This is quite reproducible, but nothing has changed in the lirc recipe
+recently (certainly not since it last built successfully for me).
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- .../linux-libc-headers_2.6.34.bb                   |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+I'm out of my depth with this one.
 
-diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
-index 8e0df2e..340915c 100644
---- a/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
-+++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
-@@ -5,7 +5,7 @@ DEFAULT_PREFERENCE = "-1"
- DEFAULT_PREFERENCE_nios2 = "1"
- INHIBIT_DEFAULT_DEPS = "1"
- DEPENDS += "unifdef-native"
--PR = "r1"
-+PR = "r2"
- 
- COMPATIBLE_TARGET_SYS = "."
- 
-@@ -39,4 +39,5 @@ do_compile () {
- 
- do_install() {
- 	oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix} ARCH=$ARCH
-+	rm -f ${D}${exec_prefix}/include/scsi/scsi.h
- }
--- 
-1.7.1
-
+-Graham
 
 
