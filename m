@@ -1,17 +1,17 @@
 Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1P7uoX-0004Vm-Sl
+	(envelope-from <morphis@gravedo.de>) id 1P7uoa-0004W4-W3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 20:52:07 +0200
+	Mon, 18 Oct 2010 20:52:13 +0200
 Received: by gravedo.de (Postfix, from userid 5001)
-	id 79793275CE9E; Mon, 18 Oct 2010 20:51:31 +0200 (CEST)
+	id BF667275CE43; Mon, 18 Oct 2010 20:51:35 +0200 (CEST)
 Received: from localhost (p5489BE68.dip.t-dialin.net [84.137.190.104])
-	by gravedo.de (Postfix) with ESMTPSA id 84E66275CD26;
-	Mon, 18 Oct 2010 20:51:30 +0200 (CEST)
+	by gravedo.de (Postfix) with ESMTPSA id 0C8D3275CD26;
+	Mon, 18 Oct 2010 20:51:34 +0200 (CEST)
 From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Oct 2010 20:51:11 +0200
-Message-Id: <1287427884-1517-3-git-send-email-morphis@gravedo.de>
+Date: Mon, 18 Oct 2010 20:51:14 +0200
+Message-Id: <1287427884-1517-6-git-send-email-morphis@gravedo.de>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1287427884-1517-1-git-send-email-morphis@gravedo.de>
 References: <1287427884-1517-1-git-send-email-morphis@gravedo.de>
@@ -23,7 +23,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 02/15] read-tokens: add initial git version
+Subject: [PATCH 05/15] palmpre: prefer git version of tslib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,39 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 18:52:07 -0000
+X-List-Received-Date: Mon, 18 Oct 2010 18:52:14 -0000
 
-read-tokens is a little utility especially for the palmpre. It reads so alled 'tokens'
-from the internal flash and stores them in a key-value file so other system components can
-read them from there.
+The git version of tslib is currently the only one which has support for the cy8mrln
+touchscreen which is used on the palmpre device.
 
 Signed-off-by: Simon Busch <morphis@gravedo.de>
 ---
- recipes/palmpre/read-tokens_git.bb |   15 +++++++++++++++
- 1 files changed, 15 insertions(+), 0 deletions(-)
- create mode 100644 recipes/palmpre/read-tokens_git.bb
+ conf/machine/palmpre.conf |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/palmpre/read-tokens_git.bb b/recipes/palmpre/read-tokens_git.bb
-new file mode 100644
-index 0000000..d958438
---- /dev/null
-+++ b/recipes/palmpre/read-tokens_git.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "Little utility to read 'tokens' from internal flash and store them in a smartkeyfile; specific for palmpre machine"
-+HOMEPAGE = "http://www.freesmartphone.org"
-+AUTHOR = "Simon Busch <morphis@gravedo.de>
-+SECTION = "console/utils"
-+LICENSE = "GPL"
-+PR = "r0"
-+PV = "1.0.0+gitr${SRCPV}"
-+
-+SRCREV = "93a640dafa8ebebdb1a03f051cb1b566629b227c"
-+SRC_URI = "${FREESMARTPHONE_GIT}/utilities.git;protocol=git;branch=master"
-+S = "${WORKDIR}/git/palmpre/read_tokens"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+inherit autotools
+diff --git a/conf/machine/palmpre.conf b/conf/machine/palmpre.conf
+index 2a62c30..f5852c5 100644
+--- a/conf/machine/palmpre.conf
++++ b/conf/machine/palmpre.conf
+@@ -20,6 +20,9 @@ require conf/machine/include/omap3.inc
+ # Put it below omap3.inc as we override the kernel here
+ PREFERRED_PROVIDER_virtual/kernel = "linux-palmpre"
+ 
++# We need the git version of tslib as this is the only one providing support for our
++# attached touchscreen
++PREFERRED_VERSION_tslib = "1.0+git%"
+ 
+ IMAGE_FSTYPES += "tar.bz2"
+ 
 -- 
 1.7.1
 
