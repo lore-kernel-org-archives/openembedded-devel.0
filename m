@@ -1,32 +1,43 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1P7n0L-0005UU-Sc
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 12:31:54 +0200
-Received: (qmail 5109 invoked by uid 1003); 18 Oct 2010 10:24:30 -0000
-Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	18 Oct 2010 10:24:30 -0000
-Message-ID: <4CBC205D.1040101@balister.org>
-Date: Mon, 18 Oct 2010 06:24:29 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc13 Thunderbird/3.1.4
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P7nHa-0005lu-OO for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Oct 2010 12:49:35 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P7nH2-0001Nh-6o for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Oct 2010 12:49:00 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 12:49:00 +0200
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 12:49:00 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTikTXVNJmQ=8Ct77Y9W1vLjLqSgFapS7vV+RFM8Q@mail.gmail.com>	<AANLkTinBDkwPaJaCqKbcmGxxmOZivG7JG8RC7pV2wvvr@mail.gmail.com>
-	<1287396685.1720.12.camel@rex>
-In-Reply-To: <1287396685.1720.12.camel@rex>
-X-SA-Exim-Connect-IP: 216.168.135.167
-X-SA-Exim-Mail-From: philip@balister.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 18 Oct 2010 12:48:48 +0200
+Message-ID: <i9h8mg$sg1$1@dough.gmane.org>
+References: <1287353716-27717-1-git-send-email-obi@opendreambox.org>	<i9gsjn$8r0$3@dough.gmane.org>
+	<4CBC1FBE.9020808@opendreambox.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <4CBC1FBE.9020808@opendreambox.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OEDEM: info
+Subject: Re: [PATCH] libfribidi-0.10.4: update recipe, fix packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,37 +51,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 10:31:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 18 Oct 2010 10:49:35 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 10/18/2010 06:11 AM, Richard Purdie wrote:
-> On Tue, 2010-10-12 at 22:53 +0200, Frans Meulenbroeks wrote:
->> 2010/10/12 Raffaele Recalcati<lamiaposta71@gmail.com>:
->>> I'm interested in attending to OEDEM for friday morning.
->>> I have added myself to  the list "Attending for sure", even if I'm not
->>> a skilled OE developer.
->>> I hope that I have done the right thing.
->>>
->>> See you in Cambridge,
->>> Recalcati
->>
->> Raffaele, glad to see you here.
->>
->> Technical question to the board:
->> I thought the eV meeting was planned for fri morning.
->> Is that open for non-members. Not that I have objections against it
->> being open, but better get this clear upfront.
->
-> I don't think this was answered so let me add that I don't think there
-> is an issue with non-members being present but they don't have a vote.
-> Its likely one of the first votes might be to take on new members of
-> course :)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I doubt the General Assembly will take very long. At this point it looks 
-like the Agenda will be vote in new members and approve the financial 
-report. It is open to non-members.
+On 18-10-10 12:21, Andreas Oberritter wrote:
+> On 10/18/2010 09:22 AM, Koen Kooi wrote:
+>> On 18-10-10 00:15, Andreas Oberritter wrote:
+>>> * added LICENSE
+>>> * removed configure patch
+>>> * use lib_package and binconfig to package all installed files
+>>
+>> What's the upgrade path? I assume package names have changes due to this.
+> 
+> I guess my patch description wasn't clear enough.
+> 
+> The previously unpackaged files ${bindir}/fribidi and
+> ${bindir}/fribidi-config are now packaged into libfribidi-bin and
+> libfribidi-dev, respectively.
+> 
+> The only file which moved to a different package is libfribidi.a, from
+> libfribidi-static to libfribidi-dev.
 
-Philip
+Well, .a files are supposed to go into -static, not into -dev.
+
+> Does this change require special treatment for upgrades?
+
+Every time you change packaging you need to make sure upgrade paths are
+intact. Especially with libraries.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMvCYQMkyGM64RGpERAoo5AJ9+DLGIs6fcpMFzd0zu4rHZ1R6WnwCfW8MM
+Td+T9s7UaTtrWvUyrH/0wCc=
+=4fBZ
+-----END PGP SIGNATURE-----
+
 
 
