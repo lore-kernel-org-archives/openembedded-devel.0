@@ -1,45 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from sanddollar.geekisp.com ([216.168.135.167])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7myU-0005O5-Tj
+	(envelope-from <philip@balister.org>) id 1P7n0L-0005UU-Sc
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 12:29:52 +0200
-Received: by iwn2 with SMTP id 2so1042396iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 03:29:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ymSgWp0mIEPMVHLaAtTpD7ryNioyBtNqBhbeglqTCK8=;
-	b=PELDyUshvmMe5+gxNRwkvtFhzQMFVRSJa6k3OEavWmmuYQwI3z7Gd1eZUsULiDp4Ps
-	UEEAZ0SrMXbAwPuPqGvnEgCTWI1fQaiXkrrOFSIg8JGEGyOfQd1bh6XjIDdcstfPHq02
-	7YQqsZ/cE8GvFIMSikx19Y8sDZJ+vgv1oimKg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=A63NpahcqpNRch5yt3VDfXkh/dl+StEAjJNR265Y8pD0o4Jlk1i+sbxlVSJJbU36MY
-	jIyfWyvfnv/3QTG6Z9UQWPdtnHoom+AB6/WP+f9xBNQa2APFCHafCov8tZba5UMmEDke
-	o4zqiJLFHPHAY3fvD0Nhm6jKwSnSwqHwTdoDE=
+	Mon, 18 Oct 2010 12:31:54 +0200
+Received: (qmail 5109 invoked by uid 1003); 18 Oct 2010 10:24:30 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	18 Oct 2010 10:24:30 -0000
+Message-ID: <4CBC205D.1040101@balister.org>
+Date: Mon, 18 Oct 2010 06:24:29 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc13 Thunderbird/3.1.4
 MIME-Version: 1.0
-Received: by 10.231.33.129 with SMTP id h1mr2879057ibd.140.1287397755064; Mon,
-	18 Oct 2010 03:29:15 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 18 Oct 2010 03:29:15 -0700 (PDT)
-In-Reply-To: <1287397072.1720.17.camel@rex>
-References: <20101017211540.GB3324@jama> <i9gshu$8r0$2@dough.gmane.org>
-	<1287397072.1720.17.camel@rex>
-Date: Mon, 18 Oct 2010 12:29:15 +0200
-Message-ID: <AANLkTiniayCiU-D9qNFOsoROCfQrj5c0bguHA0rvCVxc@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <AANLkTikTXVNJmQ=8Ct77Y9W1vLjLqSgFapS7vV+RFM8Q@mail.gmail.com>	<AANLkTinBDkwPaJaCqKbcmGxxmOZivG7JG8RC7pV2wvvr@mail.gmail.com>
+	<1287396685.1720.12.camel@rex>
+In-Reply-To: <1287396685.1720.12.camel@rex>
+X-SA-Exim-Connect-IP: 216.168.135.167
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] do we really need all OVERRIDES in FILESPATH?
+Subject: Re: OEDEM: info
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,73 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 10:29:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 18 Oct 2010 10:31:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/10/18 Richard Purdie <rpurdie@rpsys.net>:
-> On Mon, 2010-10-18 at 09:21 +0200, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
+On 10/18/2010 06:11 AM, Richard Purdie wrote:
+> On Tue, 2010-10-12 at 22:53 +0200, Frans Meulenbroeks wrote:
+>> 2010/10/12 Raffaele Recalcati<lamiaposta71@gmail.com>:
+>>> I'm interested in attending to OEDEM for friday morning.
+>>> I have added myself to  the list "Attending for sure", even if I'm not
+>>> a skilled OE developer.
+>>> I hope that I have done the right thing.
+>>>
+>>> See you in Cambridge,
+>>> Recalcati
 >>
->> On 17-10-10 23:15, Martin Jansa wrote:
->> > Currently
->> > bitbake -e -b xserver-xorg-conf_0.1.bb | grep ^FILESPATH=3D | sed "s/:=
-/\n/g" | wc -l
->> > shows 65 directories where file:// from SRC_URI can be found.
->> >
->> > base_do_unpack is looking for first directory where requested file
->> > exists. Most files are IMHO found in FILESPATHPKG PN, files or P
->> > (without an override used)
->> >
->> > Number of directories tried before
->> > PN: =A0 =A038
->> > files: 51
->> > P: =A0 =A0 25
->> >
->> > I see many recipes really using that MACHINE or DISTRO is in FILESPATH=
-,
->> > few users of TARGET_ARCH and quick find/grep doesn't show any users of
->> > other OVERRIDES in FILESPATH.
->> >
->> > BTW: ie initscripts have initscripts/files/arm/alignment.sh but that's=
- only
->> > alignment.sh and SRC_URI_append_arm =3D " file://alignment.sh" would w=
-ork
->> > ok even without arm in FILESPATH.
->> >
->> > What about using only ${TARGET_ARCH}:${DISTRO}:${MACHINE} in FILESPATH
->> > instead all OVERRIDES?
+>> Raffaele, glad to see you here.
 >>
->> At least I additionally need BASE_PACKAGE_ARCH and SOC_FAMILY in it and
->> sometimes libc-$LIBC.
+>> Technical question to the board:
+>> I thought the eV meeting was planned for fri morning.
+>> Is that open for non-members. Not that I have objections against it
+>> being open, but better get this clear upfront.
 >
-> I have to admit, the structure of FILESPATH is a little unwieldy to me.
-> I'd propose that we should have a small set of defaults like ${BPN} and
-> ${BPN}-${PV} and if any recipe wants more than this, it should have a
-> variable it can append a list to.
->
-> I'd also suggest "files" should probably be deprecated in favour of BPN.
+> I don't think this was answered so let me add that I don't think there
+> is an issue with non-members being present but they don't have a vote.
+> Its likely one of the first votes might be to take on new members of
+> course :)
 
-I'm all in favour of that but....
-- we currently have 724 files directories (so this is some work)
-- I'm not fully sure this will work for packages that have recipes
-with different names (e.g. alsa), ofc we could rework these and add a
-FILESPATHPKG
-- not sure if removing files completely will not cause any problems
-for the top level files dir (which contains some static device tables
-(then again I didn't really found that to be an appropriate place
-either)
+I doubt the General Assembly will take very long. At this point it looks 
+like the Agenda will be vote in new members and approve the financial 
+report. It is open to non-members.
 
-BTW in my overlay in the top level files folders I also keep my own
-busybox config. Not sure how others deal with that, but I can image
-that also becomes broken
->
-> It becomes obvious how horrible the current structure is when you try
-> and use .bbappend and need to add some extra directory to the search
-> path.
->
-
-Agree. Frans.
+Philip
 
 
