@@ -1,27 +1,45 @@
-Received: from ibawizard.net ([82.208.49.253] helo=mengele.ibawizard.net)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@true.cz>) id 1P7tlm-0006OD-8z
-	for openembedded-devel@openembedded.org; Mon, 18 Oct 2010 19:45:17 +0200
-Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id 938551D360EE;
-	Mon, 18 Oct 2010 19:44:24 +0200 (CEST)
-From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Oct 2010 19:44:26 +0200
-Message-Id: <1287423866-25886-1-git-send-email-ynezz@true.cz>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1287348584-11948-2-git-send-email-ynezz@true.cz>
-References: <1287348584-11948-2-git-send-email-ynezz@true.cz>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7u1d-0003gq-3y
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Oct 2010 20:01:33 +0200
+Received: by iwn2 with SMTP id 2so1475656iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 11:00:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=r66RgEmq7z47pMkeqAlRbSzL6J8MolBrWZOGy7PsBbY=;
+	b=GHsC5uVQbqmUZXPscNZcyXVX7zCv0bnbU4k5aTOtg58JzdJTLQciHvc7t0Q93uy2hv
+	By8xJrc9IiYdx+USZGCkArnBHGUTYwFfNJIzVuBljqgo+DjJQVwK+B1JgS5YunwJ48eA
+	aKlt3x/kbmkqzH8Wr1wlR7EcB+fvayuqyIYJk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ASOgsHMTBDTgA0sH6T4OhQzh+snlITwSyzWib1KSkIFK9wl7uDo0/6k+3Ze/78hbbL
+	3X4Omc1WROnIepf7CJ7MHRDWW8xbOWEHMGK6RGYpynmYci1rnfOVwKgoWGw4rG8vptM4
+	95DxFXlv2WhuiAEzqavRxLR2Lk8aHwpOII/Jo=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@true.cz
+Received: by 10.231.35.73 with SMTP id o9mr3633482ibd.193.1287424838668; Mon,
+	18 Oct 2010 11:00:38 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 18 Oct 2010 11:00:38 -0700 (PDT)
+In-Reply-To: <AANLkTinU=v796xChiQWRvPEw-BfKwbsOuAVfiosDyazE@mail.gmail.com>
+References: <1287420263-28528-1-git-send-email-msmith@cbnco.com>
+	<AANLkTinU=v796xChiQWRvPEw-BfKwbsOuAVfiosDyazE@mail.gmail.com>
+Date: Mon, 18 Oct 2010 20:00:38 +0200
+Message-ID: <AANLkTikhRRwVnvu69frtXfOV-yp74zkT9U7+tSsS19rw@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v3] lua-filesystem: use standard prefix for Lua libraries
+Subject: Re: [PATCH v3] package.bbclass: copy dotfiles in root D to PKGD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,57 +53,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 17:45:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Oct 2010 18:01:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
+2010/10/18 Khem Raj <raj.khem@gmail.com>:
+> On Mon, Oct 18, 2010 at 9:44 AM, Michael Smith <msmith@cbnco.com> wrote:
+>> The previous system("cp %s/* ...") missed dotfiles/dirs at the
+>> top-level.
+>>
+>> Signed-off-by: Michael Smith <msmith@cbnco.com>
+>> Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+>> Cc: Graham Gower <graham.gower@gmail.com>
+>> Cc: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>> ---
+>> =A0classes/package.bbclass | =A0 10 +++++-----
+>> =A01 files changed, 5 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/classes/package.bbclass b/classes/package.bbclass
+>> index e2a61bf..2769595 100644
+>> --- a/classes/package.bbclass
+>> +++ b/classes/package.bbclass
+>> @@ -356,15 +356,15 @@ python package_do_split_locales() {
+>> =A0}
+>>
+>> =A0python perform_packagecopy () {
+>> - =A0 =A0 =A0 dest =3D bb.data.getVar('D', d, True)
+>> - =A0 =A0 =A0 dvar =3D bb.data.getVar('PKGD', d, True)
+>> + =A0 =A0 =A0 installdest =3D bb.data.getVar('D', d, True)
+>> + =A0 =A0 =A0 pkgcopy =3D bb.data.getVar('PKGD', d, True)
+>>
+>> - =A0 =A0 =A0 bb.mkdirhier(dvar)
+>> + =A0 =A0 =A0 bb.mkdirhier(pkgcopy)
+>>
+>> =A0 =A0 =A0 =A0# Start by package population by taking a copy of the ins=
+talled
+>> =A0 =A0 =A0 =A0# files to operate on
+>> - =A0 =A0 =A0 os.system('rm -rf %s/*' % (dvar))
+>> - =A0 =A0 =A0 os.system('cp -pPR %s/* %s/' % (dest, dvar))
+>> + =A0 =A0 =A0 os.system('rm -rf %s/*' % (pkgcopy))
+>> + =A0 =A0 =A0 os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
+>> =A0}
+>
+> will it also try to copy . and .. ?
 
-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
----
- recipes/lua/lua-filesystem_1.5.0.bb |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
+No (tested that).
 
-diff --git a/recipes/lua/lua-filesystem_1.5.0.bb b/recipes/lua/lua-filesy=
-stem_1.5.0.bb
-index 8305009..cb5767b 100644
---- a/recipes/lua/lua-filesystem_1.5.0.bb
-+++ b/recipes/lua/lua-filesystem_1.5.0.bb
-@@ -2,6 +2,8 @@ DESCRIPTION =3D "LuaFileSystem is a Lua library with set =
-of functions related to f
- LICENSE =3D "MIT"
- HOMEPAGE =3D "http://keplerproject.org/luafilesystem"
-=20
-+PR =3D "r1"
-+
- DEPENDS +=3D "lua5.1"
-=20
- SRC_URI =3D "git://github.com/keplerproject/luafilesystem.git;protocol=3D=
-git \
-@@ -10,16 +12,16 @@ SRC_URI =3D "git://github.com/keplerproject/luafilesy=
-stem.git;protocol=3Dgit \
- SRCREV =3D "ae5a05deec8a3737bd6972213b5495108b6566cc"
- S =3D "${WORKDIR}/git/"
-=20
--LUA_LIB_DIR =3D "/usr/local/lib/lua/5.1"
-+LUA_LIB_DIR =3D  "${libdir}/lua/5.1"
-=20
- PACKAGES =3D "${PN} ${PN}-dbg"
- FILES_${PN}-dbg =3D "${LUA_LIB_DIR}/.debug/lfs.so"
- FILES_${PN} =3D "${LUA_LIB_DIR}/lfs.so"
-=20
--EXTRA_OEMAKE =3D "PREFIX=3D'${D}/usr/local' MYFLAGS=3D'${CFLAGS} ${LDFLA=
-GS}'"
-+EXTRA_OEMAKE =3D "PREFIX=3D'${D}/${prefix}' MYFLAGS=3D'${CFLAGS} ${LDFLA=
-GS}'"
-=20
- do_install() {
--        oe_runmake install PREFIX=3D${D}/usr/local
-+        oe_runmake install PREFIX=3D${D}/${prefix}
-         install -d ${D}/${docdir}/${PN}-${PV}
-         install -m 0644 doc/us/* ${D}/${docdir}/${PN}-${PV}
- }
---=20
-1.7.0.4
-
+Frans.
+>
+>>
+>> =A0python populate_packages () {
+>> --
+>> 1.7.0.4
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
