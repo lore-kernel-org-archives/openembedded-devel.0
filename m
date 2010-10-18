@@ -1,38 +1,27 @@
-Received: from asmtpout027.mac.com ([17.148.16.102])
+Received: from ibawizard.net ([82.208.49.253] helo=mengele.ibawizard.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1P7tjl-0005rH-4z
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 19:43:07 +0200
-MIME-version: 1.0
-Received: from [192.168.1.65] ([59.93.35.154])
-	by asmtp027.mac.com (Oracle Communications Messaging Exchange Server
-	7u4-18.01 64bit (built Jul 15 2010)) with ESMTPSA id
-	<0LAH00DTIVQMGA70@asmtp027.mac.com>
-	for openembedded-devel@lists.openembedded.org; Mon,
-	18 Oct 2010 09:42:28 -0700 (PDT)
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.2.15,1.0.148,0.0.0000
-	definitions=2010-10-18_08:2010-10-18, 2010-10-18,
-	1970-01-01 signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 suspectscore=5 phishscore=0 bulkscore=0 adultscore=0
-	classifier=spam
-	adjust=0 reason=mlx engine=6.0.2-1004200000 definitions=main-1010180109
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Mon, 18 Oct 2010 22:12:21 +0530
-Message-id: <DF1865B2-C47F-4742-81CF-C57541F25728@mac.com>
-To: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 17.148.16.102
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	(envelope-from <ynezz@true.cz>) id 1P7tlm-0006OD-8z
+	for openembedded-devel@openembedded.org; Mon, 18 Oct 2010 19:45:17 +0200
+Received: from localhost.localdomain (localhost [127.0.0.1])
+	by mengele.ibawizard.net (Postfix) with ESMTP id 938551D360EE;
+	Mon, 18 Oct 2010 19:44:24 +0200 (CEST)
+From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Oct 2010 19:44:26 +0200
+Message-Id: <1287423866-25886-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1287348584-11948-2-git-send-email-ynezz@true.cz>
+References: <1287348584-11948-2-git-send-email-ynezz@true.cz>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@true.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=BAYES_00, RCVD_IN_NJABL_PROXY,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: runstrip command failures
+Subject: [PATCH v3] lua-filesystem: use standard prefix for Lua libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +35,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 17:43:07 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; CHARSET=US-ASCII
-
-Hi,
-       I just noticed a bunch of runstrip command failures, while building linux-2.6.36-rc7 kernel recipe that I created for wl12xx testing. Is this normal? How can I fix this error? The uImage gets built though.
-
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/kconfig/conf'' strip command failed
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/genksyms/genksyms'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/hash: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/kconfig/conf'' strip command failed
-arm-angstrom-linux-gnueabi-strip:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/hash: File format not recognized
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/hash: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/hash'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/fixdep: File format not recognized
-arm-angstrom-linux-gnueabi-strip:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/fixdep: File format not recognized
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/fixdep: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/fixdep'' strip command failed
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/hash'' strip command failed
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/fixdep'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/docproc: File format not recognized
-arm-angstrom-linux-gnueabi-strip:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/docproc: File format not recognized
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/docproc: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/docproc'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/modpost: File format not recognized
-arm-angstrom-linux-gnueabi-strip:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/modpost: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/basic/docproc'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/modpost: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/modpost'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/mk_elfconfig: File format not recognized
-arm-angstrom-linux-gnueabi-strip:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/mk_elfconfig: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/modpost'' strip command failed
-arm-angstrom-linux-gnueabi-objcopy:/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/mk_elfconfig: File format not recognized
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/mk_elfconfig'' strip command failed
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip' --remove-section=.comment --remove-section=.note '/tool/overo-oe/tmp/work/beagleboard-angstrom-linux-gnueabi/linux-omap3-2.6.36-r90/package/kernel/scripts/mod/mk_elfconfig'' strip command failed
+X-List-Received-Date: Mon, 18 Oct 2010 17:45:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
 
-Elvis Dowson
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+---
+ recipes/lua/lua-filesystem_1.5.0.bb |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/recipes/lua/lua-filesystem_1.5.0.bb b/recipes/lua/lua-filesy=
+stem_1.5.0.bb
+index 8305009..cb5767b 100644
+--- a/recipes/lua/lua-filesystem_1.5.0.bb
++++ b/recipes/lua/lua-filesystem_1.5.0.bb
+@@ -2,6 +2,8 @@ DESCRIPTION =3D "LuaFileSystem is a Lua library with set =
+of functions related to f
+ LICENSE =3D "MIT"
+ HOMEPAGE =3D "http://keplerproject.org/luafilesystem"
+=20
++PR =3D "r1"
++
+ DEPENDS +=3D "lua5.1"
+=20
+ SRC_URI =3D "git://github.com/keplerproject/luafilesystem.git;protocol=3D=
+git \
+@@ -10,16 +12,16 @@ SRC_URI =3D "git://github.com/keplerproject/luafilesy=
+stem.git;protocol=3Dgit \
+ SRCREV =3D "ae5a05deec8a3737bd6972213b5495108b6566cc"
+ S =3D "${WORKDIR}/git/"
+=20
+-LUA_LIB_DIR =3D "/usr/local/lib/lua/5.1"
++LUA_LIB_DIR =3D  "${libdir}/lua/5.1"
+=20
+ PACKAGES =3D "${PN} ${PN}-dbg"
+ FILES_${PN}-dbg =3D "${LUA_LIB_DIR}/.debug/lfs.so"
+ FILES_${PN} =3D "${LUA_LIB_DIR}/lfs.so"
+=20
+-EXTRA_OEMAKE =3D "PREFIX=3D'${D}/usr/local' MYFLAGS=3D'${CFLAGS} ${LDFLA=
+GS}'"
++EXTRA_OEMAKE =3D "PREFIX=3D'${D}/${prefix}' MYFLAGS=3D'${CFLAGS} ${LDFLA=
+GS}'"
+=20
+ do_install() {
+-        oe_runmake install PREFIX=3D${D}/usr/local
++        oe_runmake install PREFIX=3D${D}/${prefix}
+         install -d ${D}/${docdir}/${PN}-${PV}
+         install -m 0644 doc/us/* ${D}/${docdir}/${PN}-${PV}
+ }
+--=20
+1.7.0.4
+
 
 
