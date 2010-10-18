@@ -1,45 +1,34 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P7uRT-00040S-SW
+	(envelope-from <morphis@gravedo.de>) id 1P7ucR-0004E3-Dn
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 20:28:16 +0200
-Received: by yxt3 with SMTP id 3so676927yxt.6
+	Mon, 18 Oct 2010 20:39:35 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 41EB3275CE2F; Mon, 18 Oct 2010 20:39:02 +0200 (CEST)
+Received: from [192.168.1.142] (p5489BE68.dip.t-dialin.net [84.137.190.104])
+	by gravedo.de (Postfix) with ESMTPSA id 53805275CE43
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 11:27:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=jNbLCbQzRQfxPHSCjhLF0Hi/Ky53Ly4sVuZVmLVkE50=;
-	b=CkNiwYR+8HPgzjCO/+xHpEgNd/8kiYFBe/g4Bg4IYB50n4xhabuMBwIOh/Gr3Y9Jqw
-	Lk8/uJCnUuSheP8F0I1rQunl5IyUCWgN3aw9bQx0d+MOpYsf5vItKYD5Tnxv1p7JQLwc
-	wg1RIkhmQeFprro4CCwfPR+rpfHw9iTSZx77s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=mios4bJrprE/WiX2AyzZZzC91CwPEwnZgHpiTQO+405ta/nU0mpcEgH1MxDsQ5IGAY
-	hj+opst/Kc6ylTKR7cfGkc1AEBpx6DrFJE/bXwbm/DjfdFQ9lajjXaWGpyTwClp3Ezon
-	hYyfxyfwFER+KfanydXPb9uf/kr32N8IV3Nao=
-Received: by 10.90.73.19 with SMTP id v19mr1615286aga.198.1287426455393; Mon,
-	18 Oct 2010 11:27:35 -0700 (PDT)
+	Mon, 18 Oct 2010 20:39:01 +0200 (CEST)
+Message-ID: <4CBC9444.5090801@gravedo.de>
+Date: Mon, 18 Oct 2010 20:39:00 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12pre) Gecko/20101011 Shredder/3.1.6pre
 MIME-Version: 1.0
-Received: by 10.90.86.6 with HTTP; Mon, 18 Oct 2010 11:27:15 -0700 (PDT)
-In-Reply-To: <1287420263-28528-1-git-send-email-msmith@cbnco.com>
-References: <1287420263-28528-1-git-send-email-msmith@cbnco.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Oct 2010 11:27:15 -0700
-Message-ID: <AANLkTi=2LpJW0qisjkE1u5u0Py9VDTiS+a=HT-HVuAKm@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <1287123859-31756-1-git-send-email-morphis@gravedo.de>	<AANLkTi=tvR6=LmMyEjwXQSuDBHJsbMH6dUZrnpBzOMc3@mail.gmail.com>
+	<4CB8855F.4090304@gravedo.de>
+In-Reply-To: <4CB8855F.4090304@gravedo.de>
+X-Enigmail-Version: 1.1.2
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH v3] package.bbclass: copy dotfiles in root D to PKGD
+Subject: Re: [PATCH] python-pycairo: convert to new style staging and bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,60 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 18:28:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 18 Oct 2010 18:39:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, Oct 18, 2010 at 9:44 AM, Michael Smith <msmith@cbnco.com> wrote:
-> The previous system("cp %s/* ...") missed dotfiles/dirs at the
-> top-level.
->
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-> Cc: Graham Gower <graham.gower@gmail.com>
-> Cc: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+On 15.10.2010 18:46, Simon Busch wrote:
+> On 15.10.2010 09:07, Frans Meulenbroeks wrote:
+>> Some concerns:
+>> I don't think STAGING_INCDIR should be used; guess it should go to
+>> ${D}/${includedir} (just like the 1.8.0 version does).
+>> You might also peek at the do_install_append of the 1.8.0 recipe as it
+>> does different/more things. I don't know too much about pycairo, but I
+>> can imagine these make sense for 1.4.0 too.
+> 
+> I even don't know much about pycairo in detail I just noted that it does
+> not compile in its current state and changed it to new style staging.
+> But I will check if it makes more sense to change the staging path to
+> ${D}/${includedir} as I just copied what was already there in do_stage().
+> 
+>> Then again perhaps it is time to move to 1.8.0; this version has a
+>> DEFAULT_PREFERENCE of -1, but angstrom 2008 and 2010 and kaeilos
+>> already have 1.8.0 as preferred version (and the 1.8.0 version is
+>> around for 1.5 year or so).
+> 
+> For me it should be ok to drop 1.4.0 and use 1.8.0 if nobody else uses
+> it. Btw. there is already a newer version of pycairo available. It's
+> 1.8.10 but they changed it's name to py2cairo. pycairo is now the name
+> for the version with python 3.x support.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+As SHR is now using 1.8.0 as default python-pycairo version I am fine
+with dropping version 1.4.0.
 
-> ---
-> =C2=A0classes/package.bbclass | =C2=A0 10 +++++-----
-> =C2=A01 files changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/classes/package.bbclass b/classes/package.bbclass
-> index e2a61bf..2769595 100644
-> --- a/classes/package.bbclass
-> +++ b/classes/package.bbclass
-> @@ -356,15 +356,15 @@ python package_do_split_locales() {
-> =C2=A0}
->
-> =C2=A0python perform_packagecopy () {
-> - =C2=A0 =C2=A0 =C2=A0 dest =3D bb.data.getVar('D', d, True)
-> - =C2=A0 =C2=A0 =C2=A0 dvar =3D bb.data.getVar('PKGD', d, True)
-> + =C2=A0 =C2=A0 =C2=A0 installdest =3D bb.data.getVar('D', d, True)
-> + =C2=A0 =C2=A0 =C2=A0 pkgcopy =3D bb.data.getVar('PKGD', d, True)
->
-> - =C2=A0 =C2=A0 =C2=A0 bb.mkdirhier(dvar)
-> + =C2=A0 =C2=A0 =C2=A0 bb.mkdirhier(pkgcopy)
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0# Start by package population by taking a copy=
- of the installed
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0# files to operate on
-> - =C2=A0 =C2=A0 =C2=A0 os.system('rm -rf %s/*' % (dvar))
-> - =C2=A0 =C2=A0 =C2=A0 os.system('cp -pPR %s/* %s/' % (dest, dvar))
-> + =C2=A0 =C2=A0 =C2=A0 os.system('rm -rf %s/*' % (pkgcopy))
-> + =C2=A0 =C2=A0 =C2=A0 os.system('cp -pPR %s/. %s/' % (installdest, pkgco=
-py))
-> =C2=A0}
->
-> =C2=A0python populate_packages () {
-> --
-> 1.7.0.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+regards,
+morphis
+
+
 
 
