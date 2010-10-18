@@ -1,43 +1,29 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P7udE-0004HB-II
+	(envelope-from <morphis@gravedo.de>) id 1P7uoW-0004VW-Fd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 20:40:25 +0200
-Received: by ywl5 with SMTP id 5so677953ywl.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 11:39:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=X/GgKHq7qdhqDlwU8EXDCrFPv1zunGlrtbsmdwbZlaw=;
-	b=XOQjKmmB4NQvl7Xw0YDDnL4optfFbXyZmjJaOb8zlLalNnyaU02x8BUWzYPEAnyFYT
-	zwSmlOy4BaLpDp0kdrd9bI99iYHJ/kzCXm/+azriKUGAKGJhTJsu3nA5YqV8MPubb58K
-	3kxJw1BbxldOFX5z9yU5bDWGLONielsMf+5RA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=Z8OTeud2i19y6Kq8yZIV1w5pQlA8mUSaA+G8o4yvcw3Fg7HWHpW+R4xM7oa2CjxpiF
-	LfHERYYCoEc/DFFde4b4/4OgW/Vk36dq0HNedInBSfnSKEJwDG5Wr0x4Dnvj8bGiU6FU
-	HBzH3WGqWoqDcpmGY1z+avnk6dcPd4NLcAiDg=
-Received: by 10.90.68.16 with SMTP id q16mr2137681aga.17.1287427185798; Mon,
-	18 Oct 2010 11:39:45 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.90.86.6 with HTTP; Mon, 18 Oct 2010 11:39:25 -0700 (PDT)
-In-Reply-To: <1287405781.3928.22.camel@mattotaupa>
-References: <1287405781.3928.22.camel@mattotaupa>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Oct 2010 11:39:25 -0700
-Message-ID: <AANLkTinTuHWBgzbTcZdnrsSGuGmiqgs2fgPc3koE1fCJ@mail.gmail.com>
+	Mon, 18 Oct 2010 20:52:05 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 1A26D275CEAD; Mon, 18 Oct 2010 20:51:33 +0200 (CEST)
+Received: from localhost (p5489BE68.dip.t-dialin.net [84.137.190.104])
+	by gravedo.de (Postfix) with ESMTPSA id 01D62275CD26;
+	Mon, 18 Oct 2010 20:51:31 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Mon, 18 Oct 2010 20:51:12 +0200
+Message-Id: <1287427884-1517-4-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1287427884-1517-1-git-send-email-morphis@gravedo.de>
+References: <1287427884-1517-1-git-send-email-morphis@gravedo.de>
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: opensp_1.5: `do_compile` fails with for example `RastEventHandler.cxx:(.text+0x7f0): undefined reference to `OpenSP::Sd::execToInternal(char const*) const'`
+Subject: [PATCH 03/15] tsmd: add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,21 +37,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 18:40:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Oct 2010 18:52:05 -0000
 
-On Mon, Oct 18, 2010 at 5:43 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Dear OE folks,
->
->
-> trying to build openjade to test ab83ea [1], task `do_compile` of
-> `opensp_1.5.bb` [2] fails with the following error with `minimal`
-> (eglibc) for `MACHINE = "beagleboard"`.
->
+tsmd is a touchscreen management daemon for the palmpre machine. It has juast one simple
+task to do: It open's the touchscreen dev node on /dev/touchscreen, process it's data with
+tslib and forward all input events to uinput dev node.
 
-is it a regression ? did it built ok without this patch ?
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+---
+ recipes/palmpre/tsmd/tsmd   |   38 ++++++++++++++++++++++++++++++++++++++
+ recipes/palmpre/tsmd_git.bb |   30 ++++++++++++++++++++++++++++++
+ 2 files changed, 68 insertions(+), 0 deletions(-)
+ create mode 100755 recipes/palmpre/tsmd/tsmd
+ create mode 100644 recipes/palmpre/tsmd_git.bb
 
--khem
+diff --git a/recipes/palmpre/tsmd/tsmd b/recipes/palmpre/tsmd/tsmd
+new file mode 100755
+index 0000000..53d94c8
+--- /dev/null
++++ b/recipes/palmpre/tsmd/tsmd
+@@ -0,0 +1,38 @@
++#! /bin/sh
++#
++# tsmd -- This shell script starts and stops the tsmd daemon
++#
++# chkconfig: 345 10 10
++# description: a simple utility daemon which forwards all events from a independent device node to a more general uinput one
++# processname: tsmd
++
++PATH=/bin:/usr/bin:/sbin:/usr/sbin
++NAME=tsmd
++
++case "$1" in 
++    start)
++        echo -n "Starting tsmd: "
++        start-stop-daemon --start --pidfile /var/run/${NAME}.pid --make-pidfile --background -x /usr/bin/${NAME} -- -n /dev/touchscreen -f
++        if [ $? = 0 ]; then
++            echo "(ok)"
++        else
++            echo "(failed)"
++        fi
++        ;;
++    stop)
++        echo -n "Stopping tsmd: "
++        start-stop-daemon --stop --pidfile /var/run/${NAME}.pid --oknodo
++        rm -f /var/run/${NAME}.pid
++        echo "(done)"
++        ;;
++    restart|force-reload)
++        $0 stop
++        $0 start
++        ;;
++    *)
++        echo "Usage: /etc/init.d/tsmd {start|stop|restart|force-reload}"
++        exit 1
++        ;;
++esac
++
++exit 0
+diff --git a/recipes/palmpre/tsmd_git.bb b/recipes/palmpre/tsmd_git.bb
+new file mode 100644
+index 0000000..839e176
+--- /dev/null
++++ b/recipes/palmpre/tsmd_git.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "Touchscreen management daemon - manages the touchscreen of the palm pre machine"
++HOMEPAGE = "http://www.freesmartphone.org"
++AUTHOR = "Valéry Febvre <vfebvre@easter-eggs.com>
++SECTION = "base"
++LICENSE = "GPL"
++
++DEPENDS = "tslib"
++
++PR = "r0"
++PV = "1.0.0+gitr${SRCPV}"
++
++SRCREV = "798c26a7022decaebdaa829ec30852fdcf08f061"
++SRC_URI = " \
++ ${FREESMARTPHONE_GIT}/utilities.git;protocol=git;branch=master \
++ file://tsmd \
++"
++
++S = "${WORKDIR}/git/palmpre/tsmd"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++inherit autotools update-rc.d
++
++INITSCRIPT_NAME = "tsmd"
++INITSCRIPT_PARAMS = "defaults 00"
++
++do_install_append() {
++	install -d 0644 ${D}${sysconfdir}/init.d/
++	install -m 0755 ${WORKDIR}/${INITSCRIPT_NAME} ${D}${sysconfdir}/init.d/
++}
+-- 
+1.7.1
+
 
 
