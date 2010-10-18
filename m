@@ -1,42 +1,41 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1P7mNI-0006R9-O4
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1P7mhM-0004qJ-Gn
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 11:51:39 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o9I9oia4028886
+	Mon, 18 Oct 2010 12:12:11 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9IABZAg013259
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 11:11:35 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 13224-01 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 11:11:31 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9IABRLT013253
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 11:50:45 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1P7mN2-0001Qo-LG
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 11:51:08 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Mon, 18 Oct 2010 11:11:28 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1286544852-15635-1-git-send-email-msmith@cbnco.com>
-	<AANLkTi=9bQq6q8NBTPgHhGMfmLs6Ae+oiLugNd+RyK=2@mail.gmail.com>
-	<AANLkTikYuii4mEWxWh7HahgFVzYgaUz-DADyUyibqa4d@mail.gmail.com>
-	<AANLkTimJLCis3ZhSs0Bqj=aY6hX3pXhPLJAj55uX8tdQ@mail.gmail.com>
-	<AANLkTimBs3B9i4hWe4TR-YPVrz9tjWXNqoWDoVWEfuZy@mail.gmail.com>
-Date: Mon, 18 Oct 2010 11:51:08 +0200
-In-Reply-To: <AANLkTimBs3B9i4hWe4TR-YPVrz9tjWXNqoWDoVWEfuZy@mail.gmail.com>
-	(Frans Meulenbroeks's message of "Mon, 18 Oct 2010 09:43:58 +0200")
-Message-ID: <lybp6r96cz.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
-MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+In-Reply-To: <AANLkTinBDkwPaJaCqKbcmGxxmOZivG7JG8RC7pV2wvvr@mail.gmail.com>
+References: <AANLkTikTXVNJmQ=8Ct77Y9W1vLjLqSgFapS7vV+RFM8Q@mail.gmail.com>
+	<AANLkTinBDkwPaJaCqKbcmGxxmOZivG7JG8RC7pV2wvvr@mail.gmail.com>
+Date: Mon, 18 Oct 2010 11:11:25 +0100
+Message-ID: <1287396685.1720.12.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] package.bbclass: copy dotfiles in root D to PKGD
+Subject: Re: OEDEM: info
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,17 +49,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 09:51:39 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 18 Oct 2010 10:12:11 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Frans Meulenbroeks <fransmeulenbroeks@gmail.com> writes:
+On Tue, 2010-10-12 at 22:53 +0200, Frans Meulenbroeks wrote:
+> 2010/10/12 Raffaele Recalcati <lamiaposta71@gmail.com>:
+> > I'm interested in attending to OEDEM for friday morning.
+> > I have added myself to  the list "Attending for sure", even if I'm not
+> > a skilled OE developer.
+> > I hope that I have done the right thing.
+> >
+> > See you in Cambridge,
+> > Recalcati
+> 
+> Raffaele, glad to see you here.
+> 
+> Technical question to the board:
+> I thought the eV meeting was planned for fri morning.
+> Is that open for non-members. Not that I have objections against it
+> being open, but better get this clear upfront.
 
-> -	os.system('cp -pPR %s/* %s/' % (dest, dvar))
-> +	os.system('cp -pPR %s/* %s/.??* %s/' % (dest, dest, dvar))
+I don't think this was answered so let me add that I don't think there
+is an issue with non-members being present but they don't have a vote.
+Its likely one of the first votes might be to take on new members of
+course :)
 
-why not "os.system('cp -pPR %s/. %s/' % (dest, dvar))"?
+Cheers,
 
+Richard
 
-Enrico
 
 
