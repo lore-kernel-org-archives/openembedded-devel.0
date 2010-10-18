@@ -1,42 +1,48 @@
-Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
-	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1P7lIz-0002PG-KQ
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <graham.gower@gmail.com>) id 1P7ld3-0006jU-TD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 10:42:54 +0200
-Received: (qmail 16560 invoked from network); 18 Oct 2010 10:42:15 +0200
-Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
-	by leibniz.math.fu-berlin.de with SMTP; 18 Oct 2010 10:42:15 +0200
-X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
-Received: from math.fu-berlin.de ([160.45.40.10])
-	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
-	port 10024) with SMTP id 34qIWiR8LTvM
+	Mon, 18 Oct 2010 11:03:38 +0200
+Received: by iwn2 with SMTP id 2so962666iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 10:42:13 +0200 (CEST)
-Received: (Qmail 16534 invoked from network); 18 Oct 2010 10:42:13 +0200
-Received: From andorra.imp.fu-berlin.de (160.45.42.84)
-	by leibniz.math.fu-berlin.de with SMTP; 18 Oct 2010 08:42:13 -0000
-Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1P7lIK-0000rQ-T1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 10:42:12 +0200
-Date: Mon, 18 Oct 2010 10:42:12 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101018084212.GA2530@mi.fu-berlin.de>
-References: <1287349925-14997-1-git-send-email-obi@opendreambox.org>
+	Mon, 18 Oct 2010 02:03:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=XYL8meJTJYSXhKLWckh9d2pBl8u5jYcmx+6tKZgevY0=;
+	b=lol0CBd35FuOPLxseu9wwWe6Z9HLJP2GWWjmh7SDMVe66zJdGn3aUMi3lBN7gD/JjC
+	szn6NUSo7IfqUFxCEHUkw8Y7pOOYtrLdi6AcErpJMhfv0wHSvhEQVn1QVhOwTIb7rc6y
+	R/uYXiSo9KBQITS6L8knYENiZun3e5vas/b3c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=OyRZRp2QlsnlauiBao0rFlzDr4GrXEHmrVv4g5UETN7QlaqAyAWkFTUKNCA60vUvq0
+	FYVcH2sQrcYTEvQ1WRu1IBd+uN72gu9rcJR24eukTIhEgv/tgeOnMnMYPA4SuNmi46Hh
+	2BZbrB21wNEa5MCtMTdGuLPaK5dLn4hcdqH54=
 MIME-Version: 1.0
-In-Reply-To: <1287349925-14997-1-git-send-email-obi@opendreambox.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-SA-Exim-Connect-IP: 160.45.40.10
-X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
+Received: by 10.231.169.149 with SMTP id z21mr3016958iby.11.1287392583679;
+	Mon, 18 Oct 2010 02:03:03 -0700 (PDT)
+Received: by 10.231.162.68 with HTTP; Mon, 18 Oct 2010 02:03:03 -0700 (PDT)
+In-Reply-To: <AANLkTimBs3B9i4hWe4TR-YPVrz9tjWXNqoWDoVWEfuZy@mail.gmail.com>
+References: <1286544852-15635-1-git-send-email-msmith@cbnco.com>
+	<AANLkTi=9bQq6q8NBTPgHhGMfmLs6Ae+oiLugNd+RyK=2@mail.gmail.com>
+	<AANLkTikYuii4mEWxWh7HahgFVzYgaUz-DADyUyibqa4d@mail.gmail.com>
+	<AANLkTimJLCis3ZhSs0Bqj=aY6hX3pXhPLJAj55uX8tdQ@mail.gmail.com>
+	<AANLkTimBs3B9i4hWe4TR-YPVrz9tjWXNqoWDoVWEfuZy@mail.gmail.com>
+Date: Mon, 18 Oct 2010 19:33:03 +1030
+Message-ID: <AANLkTin6c2UaSjGf3yOcvDwVWjSi5nN+jv3ODSODVqYB@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,UNPARSEABLE_RELAY
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] directfb-1.4.6: fix packaging
+Subject: Re: [PATCH v2] package.bbclass: copy dotfiles in root D to PKGD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,44 +56,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 08:42:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Oct 2010 09:03:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 17, 2010 at 09:12:05PM +0000, Andreas Oberritter wrote:
-> * Files were searched in the wrong directory, because $RV was wrong.
-> 
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  recipes/directfb/directfb_1.4.6.bb |    6 +++---
->  1 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes/directfb/directfb_1.4.6.bb b/recipes/directfb/directfb_1.4.6.bb
-> index 1d4f34a..70c0225 100644
-> --- a/recipes/directfb/directfb_1.4.6.bb
-> +++ b/recipes/directfb/directfb_1.4.6.bb
-> @@ -1,7 +1,7 @@
->  require directfb.inc
->  
-> -RV = "1.4-0"
-> -PR = "r1"
-> +RV = "1.4-5"
-> +PR = "r2"
->  
->  DEPENDS += "sysfsutils"
->  
-> @@ -21,7 +21,7 @@ EXTRA_OECONF = "\
->    --disable-x11 \
->  "
->  
-> -LEAD_SONAME = "libdirectfb-1.4.so.0"
-> +LEAD_SONAME = "libdirectfb-1.4.so.5"
->  
->  SRC_URI[md5sum] = "dbe1957932f81790742b58b94c1c7b84"
->  SRC_URI[sha256sum] = "b18121e60e9a084ee347037a53a46cfaea1c09505bd99d673c2e65eca285e69b"
+On 18 October 2010 18:13, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/10/18 Graham Gower <graham.gower@gmail.com>:
+>>>> On Fri, Oct 8, 2010 at 6:34 AM, Michael Smith <msmith@cbnco.com> wrote=
+:
+>>>>
+>>>>> Use shutil.copytree() to copy D ("image") to PKGD ("package"). The
+>>>>> previous system("cp %s/* ...") missed dotfiles/dirs at the top-level.
+>>
+>> I expect this problem could be fixed by adding an extra line, e.g.
+>> os.system('cp -pPR %s/.??* %s/' % (dest, dvar))
+>>
+>> -Graham
+>
+> Do you mean as an addition to the copytree, or as an addition to the old =
+code?
 
-Thanks for spotting.
+I meant as an addition if/when the commit is reverted.
 
-Bye Henning
+
+> Seems adding an additional os.system kind-a beats using the
+> shutil.copytree as we then still have the os.system to do the cp
+> I guess the best way forward is to revert the patch and extend the
+> os.system call with your patter.
+> E.g. something like:
+> - =A0 =A0 =A0 os.system('cp -pPR %s/* %s/' % (dest, dvar))
+> + =A0 =A0 =A0 os.system('cp -pPR %s/* %s/.??* %s/' % (dest, dest, dvar))
+>
+> cp may have mutliple sources if the output is a dir.
+
+Beautiful. I would give such a thing my ack.
+
+-Graham
 
 
