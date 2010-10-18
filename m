@@ -1,32 +1,37 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P7wFM-0005Zm-3V for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 22:23:53 +0200
-Received: from f053035105.adsl.alicedsl.de ([78.53.35.105]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P7wEq-0007xc-Go for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 20:23:20 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinTuHWBgzbTcZdnrsSGuGmiqgs2fgPc3koE1fCJ@mail.gmail.com>
-References: <1287405781.3928.22.camel@mattotaupa>
-	<AANLkTinTuHWBgzbTcZdnrsSGuGmiqgs2fgPc3koE1fCJ@mail.gmail.com>
-Date: Mon, 18 Oct 2010 22:23:18 +0200
-Message-ID: <1287433398.3927.1.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <msmith@cbnco.com>) id 1P7wYT-0005rh-GA
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Oct 2010 22:43:38 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id C43098CCCEF;
+	Mon, 18 Oct 2010 16:43:04 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 05043-07; Mon, 18 Oct 2010 16:43:04 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 9D9C910836A;
+	Mon, 18 Oct 2010 16:43:04 -0400 (EDT)
+Message-ID: <4CBCB158.2050500@cbnco.com>
+Date: Mon, 18 Oct 2010 16:43:04 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+MIME-Version: 1.0
+To: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+References: <1287420263-28528-1-git-send-email-msmith@cbnco.com>
+	<AANLkTi=DtXf+VnB3LPzbzDD57LNSxgUaeeTM6=ohGstK@mail.gmail.com>
+In-Reply-To: <AANLkTi=DtXf+VnB3LPzbzDD57LNSxgUaeeTM6=ohGstK@mail.gmail.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: opensp_1.5: `do_compile` fails with for example `RastEventHandler.cxx:(.text+0x7f0): undefined reference to `OpenSP::Sd::execToInternal(char const*) const'`
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v3] package.bbclass: copy dotfiles in root D to PKGD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,43 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 20:23:53 -0000
-X-Groupsio-MsgNum: 25081
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-aDY0FbZfUUE9juyJYl4+"
+X-List-Received-Date: Mon, 18 Oct 2010 20:43:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-aDY0FbZfUUE9juyJYl4+
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Frans Meulenbroeks wrote:
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> 
+> but with a minor improvement suggestion.
+> What aboout elimiating one os.system call by combining the two into one:
+> 
+> os.system('rm -rf %s/*;cp -pPR %s/. %s/' % (pkgcopy, installdest, pkgcopy))
 
-Am Montag, den 18.10.2010, 11:39 -0700 schrieb Khem Raj:
-> On Mon, Oct 18, 2010 at 5:43 AM, Paul Menzel wrote:
+Hi Frans,
 
-> > trying to build openjade to test ab83ea [1], task `do_compile` of
-> > `opensp_1.5.bb` [2] fails with the following error with `minimal`
-> > (eglibc) for `MACHINE =3D "beagleboard"`.
->=20
-> is it a regression ? did it built ok without this patch ?
+Thanks for the SOB. I like it better as two separate lines. I would have 
+preferred shutil.rmtree() if shutil.copytree() worked, actually - but 
+since it doesn't, no point using shutil for one line and not the other.
 
-Well, `opensp_1.5.bb` was not changed as far as I can see. So I do not
-think it is a regression. I will try it anyway.
+Mike
 
 
-Thanks,
-
-Paul
-
---=-aDY0FbZfUUE9juyJYl4+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAky8rLEACgkQPX1aK2wOHVi4ogCfcJYWxfUFbs2e8wPTumvtZF4g
-1NgAnj6GqHdo4HnFBPhUMfqf4lSnQbpW
-=Gipf
------END PGP SIGNATURE-----
-
---=-aDY0FbZfUUE9juyJYl4+--
