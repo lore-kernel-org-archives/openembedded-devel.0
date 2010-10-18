@@ -1,43 +1,43 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7jwh-0006eB-AN
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 09:15:49 +0200
-Received: by gya1 with SMTP id 1so228537gya.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P7k0k-0002ni-9b for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Oct 2010 09:20:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P7k0D-0003o7-92 for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Oct 2010 09:19:25 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 09:19:25 +0200
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 00:15:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=iu0rwTnOn3kzt9J43UHXmfFXXG1lEJTtKhpohImEAHU=;
-	b=NGaHuTC5yiq7I8r/g+yi0V69qEHCpb8QaiLDpQmJe5QItDivtEVXOlYrXwFWYLrRZ+
-	ydm/beQZzOc0KWhi0U3Idse0P3aIDhbR4nOFCCkAQAaA76kGOlsug5fk+PzthUqWYelI
-	FS6e54Kc3Mhcf/aQIbxHcTK8s2lHCcbppP06Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=b1X4/B0Six3343p6Si0VKVQcxyvPvirPQf0mlvLyzd7UVpaw6KqSHQOiZ6nbAXtxpl
-	EBOyO8t36FU82tqlTZZxLUBEsAsJKC9nak3PlWTbTB+G/rgqLHeXLZrXEv77yBBUQqd3
-	6E/hHHALmnE3tjUL3NZ2uPpoxirc/PcZ98poQ=
-MIME-Version: 1.0
-Received: by 10.42.215.66 with SMTP id hd2mr2721194icb.323.1287386107815; Mon,
-	18 Oct 2010 00:15:07 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 18 Oct 2010 00:15:07 -0700 (PDT)
-In-Reply-To: <AANLkTim=u-zVopYCjUxyv_ogxxxA3MU_FkUfh5u-LfAP@mail.gmail.com>
-References: <AANLkTim=u-zVopYCjUxyv_ogxxxA3MU_FkUfh5u-LfAP@mail.gmail.com>
-Date: Mon, 18 Oct 2010 09:15:07 +0200
-Message-ID: <AANLkTinUi=O9604uzP_sNSxz3dG1TRn0F=5tTnTtVCz9@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 18 Oct 2010 09:19:25 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 18 Oct 2010 09:19:17 +0200
+Message-ID: <i9gsdl$8r0$1@dough.gmane.org>
+References: <1287348584-11948-1-git-send-email-ynezz@true.cz>
+	<1287348584-11948-2-git-send-email-ynezz@true.cz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <1287348584-11948-2-git-send-email-ynezz@true.cz>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: lirc_0.8.6+cvs20100613: do_package hangs
+Subject: Re: [PATCH v2 2/3] lua-filesystem: use standard prefix for Lua libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,36 +51,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 07:15:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 18 Oct 2010 07:20:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-2010/10/18 Graham Gower <graham.gower@gmail.com>:
-> This is quite reproducible, but nothing has changed in the lirc recipe
-> recently (certainly not since it last built successfully for me).
->
-> I'm out of my depth with this one.
->
-> -Graham
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I've been peeking at this last week (also bumped into it) and have
-discussed it with and send email to kergoth.
+On 17-10-10 22:49, Petr Štetiar wrote:
 
-Issue seems to be that there are some tasks (like package_do_package)
-have an empty run file.
-When this file is passed to bitbake eventually it tries to exec these
-files and it seems to hang forever (I'm not too familiar with python
-but my guesstimate is that when exec gets an empty file it will read
-from stdin or so (and so waits forever).
+> -EXTRA_OEMAKE = "PREFIX='${D}/usr/local' MYFLAGS='${CFLAGS} ${LDFLAGS}'"
+> +EXTRA_OEMAKE = "PREFIX='${D}/usr' MYFLAGS='${CFLAGS} ${LDFLAGS}'"
 
-I could not find whether the generated files really should be empty
-(and were empty before) or when the problem was introduced (I did a
-rebuild from scratch a week or two weeks ago and didn't get the
-problem then, but could not spot any suspicious commits during that
-time period, and didn't have the time to do a bisect on this.
+PREFIX='${D}${prefix}'
 
-Then again I noticed Khem pushed 0.8.7 a few hrs ago. Hope that that
-one will solve the problem. (although we should fix the root cause)
 
-Frans
+>  do_install() {
+> -        oe_runmake install PREFIX=${D}/usr/local
+> +        oe_runmake install PREFIX=${D}/usr
+
+oe_runmake install PREFIX=${D}${prefix}
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMu/T1MkyGM64RGpERAmnhAJ9dXwnUl/CPQwD8Z20E2YkUYryUMgCfYl5G
+F/7y9EUbGAPD8tX1Bofb6B0=
+=EB/K
+-----END PGP SIGNATURE-----
+
 
 
