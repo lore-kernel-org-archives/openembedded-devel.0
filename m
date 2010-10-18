@@ -1,29 +1,40 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1P7oEQ-0000Oe-8I
+	(envelope-from <msmith@cbnco.com>) id 1P7oYh-0001Fi-JU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 13:50:22 +0200
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id CA6E31D3616D; Mon, 18 Oct 2010 13:49:43 +0200 (CEST)
-Date: Mon, 18 Oct 2010 13:49:43 +0200
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	Mon, 18 Oct 2010 14:11:21 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id F32CF8B9739
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 08:10:46 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 28769-05 for <openembedded-devel@lists.openembedded.org>; 
+	Mon, 18 Oct 2010 08:10:46 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 92EE48B91D3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 08:10:46 -0400 (EDT)
+Date: Mon, 18 Oct 2010 08:10:46 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101018114943.GP28423@ibawizard.net>
-References: <20101014124548.GJ28423@ibawizard.net>
-	<i9705t$i6g$1@dough.gmane.org>
+In-Reply-To: <AANLkTikYuii4mEWxWh7HahgFVzYgaUz-DADyUyibqa4d@mail.gmail.com>
+Message-ID: <Pine.LNX.4.64.1010180809080.5082@juice.ott.cti.com>
+References: <1286544852-15635-1-git-send-email-msmith@cbnco.com>
+	<AANLkTi=9bQq6q8NBTPgHhGMfmLs6Ae+oiLugNd+RyK=2@mail.gmail.com>
+	<AANLkTikYuii4mEWxWh7HahgFVzYgaUz-DADyUyibqa4d@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <i9705t$i6g$1@dough.gmane.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] ts72xx, ts73xx, ts74xx? How to handle properly	similar machines
+Subject: Re: [PATCH v2] package.bbclass: copy dotfiles in root D to PKGD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,36 +48,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 11:50:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Oct 2010 12:11:21 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Koen Kooi <k.kooi@student.utwente.nl> [2010-10-14 15:22:05]:
+On Sun, 17 Oct 2010, Khem Raj wrote:
 
-> It means you need to use angstrom or set is as override in local.conf
+> which clarifies it more which means unfortunately we have to keep
+> using 'cp' in this case.
+> 
+> is revert ok ?
 
-Ok, but would this work for example (it's not real life example)?
+Nice catch. I've reverted it and I'll send a new patch later today based 
+on the discussion.
 
-local.conf - SOC_FAMILY="ts7400"
-machine/ts7xxx.inc - common stuff for all the boards
-machine/ts72xx.conf - include ts7xxx.inc and add board specific stuff
-machine/ts7250.conf - include ts72xx.conf and add board specific stuff
-machine/ts7260.conf - include ts72xx.conf and CF support
-machine/ts73xx.conf - include ts7xxx.inc and board specific stuff (FPGA + video)
-machine/ts74xx.conf - include ts7xxx.inc and add SD card support
-
-can I than use this as some kind of overrides? Say I'll need to have different
-options in some of the packages and I would need to use something like this:
-
-PACKAGE_ARCH += "${SOC_FAMILY}"
-SRC_URI_append_ts7xxx += "file://common.patch"
-SRC_URI_append_ts7260 += "file://compact-flash.patch"
-SRC_URI_append_ts74xx += "file://sd-card.patch"
-SRC_URI_append_ts73xx += "file://fpga.patch"
-
-Because as I've seen the usage of the SOC_FAMILY in the recipes I don't think
-it would be possible. Thanks for the answer, or more specific example.
-
--- ynezz
+Mike
 
 
