@@ -1,44 +1,29 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P7o68-0000Ch-B0
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1P7oEQ-0000Oe-8I
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 13:41:49 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 08FED3149FC8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 13:41:14 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id w6GyreqHELAi
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 13:41:09 +0200 (CEST)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id BB1EA3149DC9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 13:41:09 +0200 (CEST)
-Message-ID: <4CBC3255.3040007@opendreambox.org>
-Date: Mon, 18 Oct 2010 13:41:09 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100915 Thunderbird/3.0.8
-MIME-Version: 1.0
+	Mon, 18 Oct 2010 13:50:22 +0200
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id CA6E31D3616D; Mon, 18 Oct 2010 13:49:43 +0200 (CEST)
+Date: Mon, 18 Oct 2010 13:49:43 +0200
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <1287353716-27717-1-git-send-email-obi@opendreambox.org>	<i9gsjn$8r0$3@dough.gmane.org>	<4CBC1FBE.9020808@opendreambox.org>
-	<i9h8mg$sg1$1@dough.gmane.org>
-In-Reply-To: <i9h8mg$sg1$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+Message-ID: <20101018114943.GP28423@ibawizard.net>
+References: <20101014124548.GJ28423@ibawizard.net>
+	<i9705t$i6g$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i9705t$i6g$1@dough.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libfribidi-0.10.4: update recipe, fix packaging
+Subject: Re: [RFC] ts72xx, ts73xx, ts74xx? How to handle properly	similar machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,54 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 11:41:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Oct 2010 11:50:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 10/18/2010 12:48 PM, Koen Kooi wrote:
-> On 18-10-10 12:21, Andreas Oberritter wrote:
->> On 10/18/2010 09:22 AM, Koen Kooi wrote:
->>> On 18-10-10 00:15, Andreas Oberritter wrote:
->>>> * added LICENSE
->>>> * removed configure patch
->>>> * use lib_package and binconfig to package all installed files
->>>
->>> What's the upgrade path? I assume package names have changes due to this.
-> 
->> I guess my patch description wasn't clear enough.
-> 
->> The previously unpackaged files ${bindir}/fribidi and
->> ${bindir}/fribidi-config are now packaged into libfribidi-bin and
->> libfribidi-dev, respectively.
-> 
->> The only file which moved to a different package is libfribidi.a, from
->> libfribidi-static to libfribidi-dev.
-> 
-> Well, .a files are supposed to go into -static, not into -dev.
-> 
->> Does this change require special treatment for upgrades?
-> 
-> Every time you change packaging you need to make sure upgrade paths are
-> intact. Especially with libraries.
+Koen Kooi <k.kooi@student.utwente.nl> [2010-10-14 15:22:05]:
 
-OK, I understand.
+> It means you need to use angstrom or set is as override in local.conf
 
-The problem was that I trusted lib_package to do the right thing. So the
-real fix would be to add a -static package to lib_package.bbclass and to
-add RDEPENDS_${PN}-static += "${PN}-dev" somewhere, because static libs
-don't make much sense without develompent headers, right?
+Ok, but would this work for example (it's not real life example)?
 
-Of course, this would create a different problem with upgrades, but I
-would suspect that the number of users of static libraries on their
-target machines is relatively small and, because a disappearing static
-library doesn't create runtime problems, the installation of a new
--static package wouldn't impose a huge burden to the user.
+local.conf - SOC_FAMILY="ts7400"
+machine/ts7xxx.inc - common stuff for all the boards
+machine/ts72xx.conf - include ts7xxx.inc and add board specific stuff
+machine/ts7250.conf - include ts72xx.conf and add board specific stuff
+machine/ts7260.conf - include ts72xx.conf and CF support
+machine/ts73xx.conf - include ts7xxx.inc and board specific stuff (FPGA + video)
+machine/ts74xx.conf - include ts7xxx.inc and add SD card support
 
-In case this solution was accepted: What's the policy for changing files
-like lib_package.bbclass, in order to trigger an update of all relevant
-packages? To bump every single PR?
+can I than use this as some kind of overrides? Say I'll need to have different
+options in some of the packages and I would need to use something like this:
 
-Regards,
-Andreas
+PACKAGE_ARCH += "${SOC_FAMILY}"
+SRC_URI_append_ts7xxx += "file://common.patch"
+SRC_URI_append_ts7260 += "file://compact-flash.patch"
+SRC_URI_append_ts74xx += "file://sd-card.patch"
+SRC_URI_append_ts73xx += "file://fpga.patch"
+
+Because as I've seen the usage of the SOC_FAMILY in the recipes I don't think
+it would be possible. Thanks for the answer, or more specific example.
+
+-- ynezz
 
 
