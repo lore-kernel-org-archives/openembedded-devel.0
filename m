@@ -1,23 +1,21 @@
 Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1P7pcd-0003Iq-6a
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1P7peG-0003Px-6o
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 15:19:27 +0200
-Received: (qmail 2814 invoked by uid 813007); 18 Oct 2010 13:18:55 -0000
+	Mon, 18 Oct 2010 15:21:10 +0200
+Received: (qmail 14923 invoked by uid 813007); 18 Oct 2010 13:20:36 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO home.localnet)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 18 Oct 2010 13:18:55 -0000
+	by 195.149.226.213 with ESMTPA; 18 Oct 2010 13:20:36 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Oct 2010 15:18:47 +0200
+Date: Mon, 18 Oct 2010 15:20:29 +0200
 User-Agent: KMail/1.13.5 (Linux/2.6.35-22-generic; KDE/4.5.2; x86_64; ; )
 References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>
-	<1287233406-8778-4-git-send-email-ulf.samuelsson@atmel.com>
-	<1287233406-8778-5-git-send-email-ulf.samuelsson@atmel.com>
-In-Reply-To: <1287233406-8778-5-git-send-email-ulf.samuelsson@atmel.com>
+In-Reply-To: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>
 MIME-Version: 1.0
-Message-Id: <201010181518.49023.marcin@juszkiewicz.com.pl>
+Message-Id: <201010181520.30454.marcin@juszkiewicz.com.pl>
 X-SA-Exim-Connect-IP: 195.149.226.213
 X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -26,7 +24,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 5/5] Add X11 images with more multimedia support (mplayer etc.)
+Subject: Re: [PATCH 1/5] Use common files for AT91SAM9 configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 13:19:28 -0000
+X-List-Received-Date: Mon, 18 Oct 2010 13:21:10 -0000
 Content-Type: Text/Plain;
   charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dnia sobota, 16 pa=C5=BAdziernika 2010 o 14:50:06 ulf.samuelsson@atmel.com=
+Dnia sobota, 16 pa=C5=BAdziernika 2010 o 14:50:02 ulf.samuelsson@atmel.com=
 =20
 napisa=C5=82(a):
 
-> +++ b/recipes/images/console-audio-image.bb
-> @@ -0,0 +1,33 @@
-> +# Angstrom bootstrap at91sam9 image
-> +require console-base-image.bb
-> +
-> +export IMAGE_BASENAME =3D "console-at91sam9-image"
+> +++ b/conf/machine/include/at91-2.6.30.inc
+> +++ b/conf/machine/include/at91-2.6.32.inc
 
-Please decide - is it audio-image or at91sam9-image... Looks more like seco=
-nd=20
-one because I do not see iperf being related to audio.
-
-> +#we dont need the kernel in the image
-> +ROOTFS_POSTPROCESS_COMMAND +=3D "rm -f ${IMAGE_ROOTFS}/boot/*Image*; "
-
-Who is we? I have some boards which needs it...
+Do you plan to duplicate that file with each kernel you will produce? Creat=
+e=20
+include/at91-sam9.inc and put it there.
 
 Regards,=20
 =2D-=20
