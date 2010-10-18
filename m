@@ -1,49 +1,42 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P7kOg-00015A-Fu
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1P7lIz-0002PG-KQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 09:44:44 +0200
-Received: by bwz9 with SMTP id 9so380839bwz.6
+	Mon, 18 Oct 2010 10:42:54 +0200
+Received: (qmail 16560 invoked from network); 18 Oct 2010 10:42:15 +0200
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 18 Oct 2010 10:42:15 +0200
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id 34qIWiR8LTvM
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 00:44:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=A3nODOt7zCAGauwftotvt08hk5a66dWjc2If5l0UB4I=;
-	b=Xf/GxEa83BHRBoRHPMsLHi5POJO9TRLmOk9NkjaGNZS4i4rdaC6NlRdrki8bM9pXTK
-	ueq5qJNOpnfci3MzNBWy6/YXGkfoQFU3DqWMEJRFeP11jECag/ZrUxskXRvGfbNdXVTd
-	iBaco1XjpMCkc5MTFDa5ZuAw3wobhx1ZG8Pi0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=UxTwugv1jeQ67MiZNBLBQSfpSkjY/mKvZkAygsEuXF4F22G2Pq5SFgWkj2H4mduhYb
-	8k0qsQgwnchcIHWbAevo+MNd+g0Ml2vDq3suubLjh7oeO9uQ7w7FN35To9/cxIP8yzvw
-	H5sAKdZgm3jAFShBmzOxAw/7KJwMc8P0me6YI=
-Received: by 10.204.126.167 with SMTP id c39mr4120789bks.125.1287387834639;
-	Mon, 18 Oct 2010 00:43:54 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u4sm14125182bkz.17.2010.10.18.00.43.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 18 Oct 2010 00:43:53 -0700 (PDT)
-Date: Mon, 18 Oct 2010 09:43:47 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 18 Oct 2010 10:42:13 +0200 (CEST)
+Received: (Qmail 16534 invoked from network); 18 Oct 2010 10:42:13 +0200
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 18 Oct 2010 08:42:13 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1P7lIK-0000rQ-T1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Oct 2010 10:42:12 +0200
+Date: Mon, 18 Oct 2010 10:42:12 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101018074347.GE3324@jama>
-References: <20101017211540.GB3324@jama>
-	<AANLkTinn3BXBjocx=9D5Z_TxrPZnvtQTEwyRK+e3hPkP@mail.gmail.com>
+Message-ID: <20101018084212.GA2530@mi.fu-berlin.de>
+References: <1287349925-14997-1-git-send-email-obi@opendreambox.org>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTinn3BXBjocx=9D5Z_TxrPZnvtQTEwyRK+e3hPkP@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <1287349925-14997-1-git-send-email-obi@opendreambox.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-SA-Exim-Connect-IP: 160.45.40.10
+X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,UNPARSEABLE_RELAY
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] do we really need all OVERRIDES in FILESPATH?
+Subject: Re: [PATCH] directfb-1.4.6: fix packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,28 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 07:44:44 -0000
+X-List-Received-Date: Mon, 18 Oct 2010 08:42:54 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Mon, Oct 18, 2010 at 09:33:28AM +0200, Frans Meulenbroeks wrote:
-> 2010/10/17 Martin Jansa <martin.jansa@gmail.com>:
-> > Currently
-> > bitbake -e -b xserver-xorg-conf_0.1.bb | grep ^FILESPATH= | sed "s/:/\n/g" | wc -l
-> > shows 65 directories where file:// from SRC_URI can be found.
+On Sun, Oct 17, 2010 at 09:12:05PM +0000, Andreas Oberritter wrote:
+> * Files were searched in the wrong directory, because $RV was wrong.
 > 
-> Actually I got 84. This is git head from last friday or so. Seems a
-> good plan to reduce this somewhat.
-> BTW this was for:
-> DISTRO = "angstrom-2008.1"
-> MACHINE = "ixp4xxbe"
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  recipes/directfb/directfb_1.4.6.bb |    6 +++---
+>  1 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes/directfb/directfb_1.4.6.bb b/recipes/directfb/directfb_1.4.6.bb
+> index 1d4f34a..70c0225 100644
+> --- a/recipes/directfb/directfb_1.4.6.bb
+> +++ b/recipes/directfb/directfb_1.4.6.bb
+> @@ -1,7 +1,7 @@
+>  require directfb.inc
+>  
+> -RV = "1.4-0"
+> -PR = "r1"
+> +RV = "1.4-5"
+> +PR = "r2"
+>  
+>  DEPENDS += "sysfsutils"
+>  
+> @@ -21,7 +21,7 @@ EXTRA_OECONF = "\
+>    --disable-x11 \
+>  "
+>  
+> -LEAD_SONAME = "libdirectfb-1.4.so.0"
+> +LEAD_SONAME = "libdirectfb-1.4.so.5"
+>  
+>  SRC_URI[md5sum] = "dbe1957932f81790742b58b94c1c7b84"
+>  SRC_URI[sha256sum] = "b18121e60e9a084ee347037a53a46cfaea1c09505bd99d673c2e65eca285e69b"
 
-Why do you have P and PN twice in FILESPATHPKG? something in local.conf?
-I don't see any in-tree conf/class changing FILESPATHPKG that way
+Thanks for spotting.
 
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Bye Henning
 
 
