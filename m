@@ -1,44 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P7pFj-0002Ok-Cd
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1P7pcd-0003Iq-6a
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Oct 2010 14:55:50 +0200
-Received: by iwn2 with SMTP id 2so1196025iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Oct 2010 05:55:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=6E39dYnMai9EZjDbnn5fGXXJ3pzWYMMWRbUNlyOd6aM=;
-	b=gWn4aghrkGXVU7qNvGkGelReIFS/GOSsPgGNBe8BMptoIPh528f1jqgDxradUvqnuZ
-	KdsFAmAkab8kcJWk6X/75e0vk85NVSagRdXmtSJRSsk1VR7XzZ4FAm1Adt1IA5xzA/4q
-	4unKHrkMkCSjANYNMIJWiS8IZ5efX9b6M7UV4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=onOeFnsu+gVOcQmRSfxUGif9hm0MKtjZ3dpcpdgam98dzMpV5gCeKbES1Z8mzrLKrM
-	H0UQACCV6M67oCmOFVuf9S/d13Gq7Nvrf0KxV/25UVp1b3Yg8/Oj6ac2ktagFW4WaBmL
-	iITDO9kF8Vrj8uX/emmDxwXVS7R55q8WTKpKg=
-MIME-Version: 1.0
-Received: by 10.231.32.77 with SMTP id b13mr3143524ibd.0.1287406515181; Mon,
-	18 Oct 2010 05:55:15 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 18 Oct 2010 05:55:15 -0700 (PDT)
-In-Reply-To: <20101018123937.GR28423@ibawizard.net>
-References: <20101018123937.GR28423@ibawizard.net>
-Date: Mon, 18 Oct 2010 14:55:15 +0200
-Message-ID: <AANLkTik_0x_7+doR1NjH9EW=KHwUu3coQB9anmx0yx_T@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 18 Oct 2010 15:19:27 +0200
+Received: (qmail 2814 invoked by uid 813007); 18 Oct 2010 13:18:55 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 18 Oct 2010 13:18:55 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 18 Oct 2010 15:18:47 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-22-generic; KDE/4.5.2; x86_64; ; )
+References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>
+	<1287233406-8778-4-git-send-email-ulf.samuelsson@atmel.com>
+	<1287233406-8778-5-git-send-email-ulf.samuelsson@atmel.com>
+In-Reply-To: <1287233406-8778-5-git-send-email-ulf.samuelsson@atmel.com>
+MIME-Version: 1.0
+Message-Id: <201010181518.49023.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Write access
+Subject: Re: [PATCH 5/5] Add X11 images with more multimedia support (mplayer etc.)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,26 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2010 12:55:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Oct 2010 13:19:28 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-2010/10/18 Petr =C5=A0tetiar <ynezz@true.cz>:
-> Hi,
->
-> Henning told me today on #oe, that I should ask for git write access, so
-> thereby I'm asking for it :-) When my spare time permits, I'll mainly wor=
-k on
-> Lua and ts7xxx stuff, so I hope, that I won't break stuff that often. Tha=
-nk
-> you for considering my request.
->
-> -- ynezz
->
+Dnia sobota, 16 pa=C5=BAdziernika 2010 o 14:50:06 ulf.samuelsson@atmel.com=
+=20
+napisa=C5=82(a):
 
-I'd like to second Henning's suggestion. As far as I can judge the
-work of Petr is of good quality.
+> +++ b/recipes/images/console-audio-image.bb
+> @@ -0,0 +1,33 @@
+> +# Angstrom bootstrap at91sam9 image
+> +require console-base-image.bb
+> +
+> +export IMAGE_BASENAME =3D "console-at91sam9-image"
 
-Frans
+Please decide - is it audio-image or at91sam9-image... Looks more like seco=
+nd=20
+one because I do not see iperf being related to audio.
+
+> +#we dont need the kernel in the image
+> +ROOTFS_POSTPROCESS_COMMAND +=3D "rm -f ${IMAGE_ROOTFS}/boot/*Image*; "
+
+Who is we? I have some boards which needs it...
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
