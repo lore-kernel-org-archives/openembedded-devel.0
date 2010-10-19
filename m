@@ -1,49 +1,44 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P8HZX-0000GE-SB
+	(envelope-from <raj.khem@gmail.com>) id 1P8Hd9-0000OL-WA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Oct 2010 21:10:08 +0200
-Received: by wwi17 with SMTP id 17so21416wwi.24
+	Tue, 19 Oct 2010 21:13:53 +0200
+Received: by gwb17 with SMTP id 17so1562438gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Oct 2010 12:09:33 -0700 (PDT)
+	Tue, 19 Oct 2010 12:13:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=jatw5eSWFnrwm+Hh+jfDBCGJXWUm1AT8C+/eJ4/x9VE=;
-	b=n28i6v2EetTtdPfOOFmR2vnsKXyKbGOE+2TpsAdE9n/NgBVwm0LdbBho5adLIij/v9
-	lBkeXjwpDnmcs6iRHuJa+4yLRU7LppS1nQWlrbEbx7i2dNtrd3eTMTB39hYwtkYLpdSD
-	kAzckXIVGkN4XwsGm3qNc5KG8UCXKz7vvmfpE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=b0QJq8tdGp4lLJN/ezWc8kHJ0572XWy47wnSbv/hFmY=;
+	b=dFh7gbzeiu3OC9aOpzZ0neanEKBnGU/HPoEDu/vwJx4XrawhPy4tkdROL4ingfWJv4
+	grN6blJRriRrG7VnEAwtNIWXYVkH9AJJAgUm4BNM/DZUHnfwyLFsZ2qcMrniIe5W6VlV
+	U9F4Yz3Y7KCYGr3s0X0J2iAICivwjAp5EFTPk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=xx1ZbU9LoCEy7T2iOLG6CjURwZ2jLghyBqrHu5tuJCRsfxrFq0UcspedonHjDU6eCI
-	6+h546oUSov944SvxaJ68PSd8oqft4QIrdYg0LznIvmGh+KFFSjUMPexVbKdMVlw/o/S
-	rD+N/L6rtKCb6MbQ/cf5FwhL0IhdAff0m7BsQ=
-Received: by 10.227.156.67 with SMTP id v3mr6649799wbw.147.1287515373076; Tue,
-	19 Oct 2010 12:09:33 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.139 with HTTP; Tue, 19 Oct 2010 12:09:12 -0700 (PDT)
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F0803110B3131@dlee06.ent.ti.com>
-References: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
-	<1287257081-25608-1-git-send-email-Martin.Jansa@gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F0803110B3131@dlee06.ent.ti.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 19 Oct 2010 12:09:12 -0700
-X-Google-Sender-Auth: BTiPoOmf0miaiRNF-PWy0DsaQsc
-Message-ID: <AANLkTimWmTWAkCPAabOagq2S5gtfMztov8xiBcK7q_Vh@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=YeRIzifwsSjf0EDkeXnwBqSrkiPMzPGi7phje6ljLo+5c/uGVgqV+VVAHpcnM/rQgA
+	0B3RsgsMIqzErw1K+h0JxHDi2FaIqWKm0tbD1quD9Mcvvgz0o/y8KkfReaIOth7eMw7h
+	E7TPFMSGZmWYWDz4Dtygc9pLs86+quyjZQmU4=
+Received: by 10.150.204.18 with SMTP id b18mr9742539ybg.318.1287515595961;
+	Tue, 19 Oct 2010 12:13:15 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id p38sm6032035ybk.4.2010.10.19.12.13.14
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 19 Oct 2010 12:13:15 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Tue, 19 Oct 2010 12:13:08 -0700
+Message-Id: <1287515589-25224-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to OVERRIDES when it's empty
+Subject: [PATCH 1/2] autotools.bbclass: Move --with-sysroot to CONFIGUREOPTS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,42 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2010 19:10:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 19 Oct 2010 19:13:53 -0000
 
-On Tue, Oct 19, 2010 at 12:05 PM, Maupin, Chase <chase.maupin@ti.com> wrote:
+* This is added to CONFIGUREOPTS so it can be filtered out
+  when needed. Recipes like gcc need this to be filtered
 
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Martin Jansa
-> > Sent: Saturday, October 16, 2010 2:25 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to
-> > OVERRIDES when it's empty
-> >
-> > * empty MACHINE_OVERRIDES adds :: to OVERRIDES (then in FILESPATH skips
-> >   every directory after this)
-> > * strip() is needed to remove space in case some distribution has ie
-> >   MACHINE_OVERRIDES ?= ""
-> >   and then
-> >   MACHINE_OVERRIDES += ""
-> >   or
-> >   MACHINE_OVERRIDES ?= "${MACHINE_CLASS}", where MACHINE_CLASS is empty
-> > again
->
-> I saw this issue in my overlay of having a "::" in my OVERRIDES which
-> caused my parsing to fail in angstrom.inc.  Applying this fix from Martin
-> resolves the parsing issue.  My OVERRIDES appear to be in the correct order
-> with this change:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/autotools.bbclass |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-
-Can you explain this?  "caused my parsing to fail" is not very useful
-information.  What exactly failed?
+diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+index ce4f66a..a634201 100644
+--- a/classes/autotools.bbclass
++++ b/classes/autotools.bbclass
+@@ -75,12 +75,13 @@ CONFIGUREOPTS = " --build=${BUILD_SYS} \
+ 		  --includedir=${includedir} \
+ 		  --oldincludedir=${oldincludedir} \
+ 		  --infodir=${infodir} \
+-		  --mandir=${mandir}"
++		  --mandir=${mandir} \
++		  ${@["","--with-sysroot"][bb.data.getVar('LIBTOOL_HAS_SYSROOT', d, 1) == "yes"]} \
++		"
+ 
+ oe_runconf () {
+ 	if [ -x ${S}/configure ] ; then
+ 		${S}/configure \
+-		${@["","--with-sysroot"][bb.data.getVar('LIBTOOL_HAS_SYSROOT', d, 1) == "yes"]} \
+ 		${CONFIGUREOPTS} ${EXTRA_OECONF} "$@"
+ 	else
+ 		oefatal "no configure script found"
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.7.1
+
+
 
