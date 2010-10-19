@@ -1,48 +1,38 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P8F4N-0007Fp-ED
+	(envelope-from <obi@opendreambox.org>) id 1P8FBV-0004qo-7V
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Oct 2010 18:29:50 +0200
-Received: by wyb40 with SMTP id 40so2679565wyb.6
+	Tue, 19 Oct 2010 18:37:11 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id CD9E93149E3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Oct 2010 09:29:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=rscdxTTTMk+XIAJW/g1AUKxdPq1QMI3YqNdgtJvVhyU=;
-	b=bWM6z+Am1U0OaMH3m/A0w5z7bgBzjxad8wEnM5AG7gMN+IJqiYSwUp2ekLMl5DvJ/P
-	k7We72SQ8ye8sDYmDdUlI7pcQUHNuFJ6cZg9FTf/gKhy0jDVmZ/LrGK8TZGnuIpY10It
-	cFvGliQVJgkyKZFCprgDIfsdD3j/i6H3RmCVs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=SUaNXTuM8K58MIUidID/KR9lZxteEfeIi6Wekk3e9KbneqnPEseZvnhgD6oDlBFrEj
-	Fh7OFULlO5dWeyxKJ3Uw0LaT9xjiv++IJus3cL86AyjRw/zvRLRmb4F9Iv1heh9Nphbo
-	pBDWMdVYSF9Yxkllf9QHdUSbT6B2gr+iXGY8g=
-Received: by 10.227.129.69 with SMTP id n5mr6607964wbs.23.1287505751880; Tue,
-	19 Oct 2010 09:29:11 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.139 with HTTP; Tue, 19 Oct 2010 09:28:49 -0700 (PDT)
-In-Reply-To: <AANLkTi=_3DKvm3bbHuvdvQYOS9M3WDKaBjg2aON=kYWS@mail.gmail.com>
-References: <1287218988-3946-1-git-send-email-ynezz@true.cz>
-	<AANLkTi=_3DKvm3bbHuvdvQYOS9M3WDKaBjg2aON=kYWS@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 19 Oct 2010 09:28:49 -0700
-X-Google-Sender-Auth: Asw-7s1tn5nXIlmI85qGjSkNvUQ
-Message-ID: <AANLkTik89gs3KAkxrWJ56EyWSH9peBcgKMLbE65jE+xr@mail.gmail.com>
+	Tue, 19 Oct 2010 18:36:31 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 9MN-Mu-vrIUu
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Oct 2010 18:36:25 +0200 (CEST)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 7A6F73149E93
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Oct 2010 18:36:24 +0200 (CEST)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Tue, 19 Oct 2010 16:36:24 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Tue, 19 Oct 2010 16:36:24 +0000
+Message-Id: <1287506184-13086-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] oestats-client.bbclass: send USERDISTRO value
+Subject: [PATCH] dvdauthor-0.6.18: initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,54 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2010 16:29:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Oct 2010 16:37:11 -0000
 
-On Sat, Oct 16, 2010 at 1:58 AM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ recipes/dvdauthor/dvdauthor_0.6.18.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/dvdauthor/dvdauthor_0.6.18.bb
 
-> 2010/10/16 Petr =C5=A0tetiar <ynezz@true.cz>:
-> > With this patch it's now possible to see the correct Angstrom distro
-> version
-> > in the Tinderbox. Now the distribution value is always 'angstrom', with
-> this
-> > patch it would be more detailed version 'angstrom-2008.1' for example.
-> >
-> > Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
-> > ---
-> >  classes/oestats-client.bbclass |    2 +-
-> >  1 files changed, 1 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/classes/oestats-client.bbclass
-> b/classes/oestats-client.bbclass
-> > index 4415461..a98c9d1 100644
-> > --- a/classes/oestats-client.bbclass
-> > +++ b/classes/oestats-client.bbclass
-> > @@ -77,7 +77,7 @@ def oestats_start(server, builder, d):
-> >                        'metadata_branch':
-> bb.data.getVar('METADATA_BRANCH', d, True),
-> >                        'metadata_revision':
-> bb.data.getVar('METADATA_REVISION', d, True),
-> >                        'machine': bb.data.getVar('MACHINE', d, True),
-> > -                       'distro': bb.data.getVar('DISTRO', d, True),
-> > +                       'distro': bb.data.getVar('USERDISTRO', d, True)=
-,
-> >                })
-> >                if re.match("^\d+$", data): id=3Ddata
-> >        except:
-> > --
-> > 1.7.0.4
-> >
-> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->
+diff --git a/recipes/dvdauthor/dvdauthor_0.6.18.bb b/recipes/dvdauthor/dvdauthor_0.6.18.bb
+new file mode 100644
+index 0000000..91eb3b9
+--- /dev/null
++++ b/recipes/dvdauthor/dvdauthor_0.6.18.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "A set of tools to help you generate DVD files to be played back on a standalone DVD player."
++SECTION = "optional"
++LICENSE = "GPLv2"
++DEPENDS = "freetype libdvdread libfribidi libpng libxml2 zlib"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.gz"
++SRC_URI[md5sum] = "ded5373800ac6448ff044606f5047550"
++SRC_URI[sha256sum] = "0e21c2d9c09f7e347c4c9bd7b691455f524ec2e91bcafc18b84d7b7fb3a9cb26"
++
++S = "${WORKDIR}/${PN}"
++
++inherit autotools
+-- 
+1.7.1
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
 
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
