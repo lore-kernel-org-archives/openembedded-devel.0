@@ -1,32 +1,45 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P89CI-0005FG-Ji for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Oct 2010 12:13:35 +0200
-Received: from f053043130.adsl.alicedsl.de ([78.53.43.130]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P89Bm-0003fT-DK for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Oct 2010 10:13:02 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <cliff.brake@gmail.com>) id 1P8A1c-0006sU-V5
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Oct 2010 13:06:37 +0200
+Received: by wwd20 with SMTP id 20so869146wwd.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Oct 2010 04:06:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=W39XVr8un8U7j1lB+b3BvYh3w+YMRjbopUShqQy4Sr8=;
+	b=DKP57p6v3voktx8ItrdT9k65KUDSfnnTqnd3MPbxedcOJ3mzYR1KczwnK4v72f9b+3
+	hRG8MW2wUFmwYUK0rYyOdqslPeucoMx4i4l1HgC78bpC7IBUEti8j1HxjqE0lSfKLXRB
+	mtBH/pPypD4OJX0yoyZ+SXG0GmRLES+/q3S3o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=J8VwViYgGm8Yc+Tv2w5yos0A4A6AEjA5zP9uWPus7Fd2/7SV8IGXU3H5E29ppn/JYb
+	WVWn2yIQAshV6KZxbJcpc10G/w/9Rc3kMljxSTI0lrV4A3J0/SH8Ql5DKwvwsNkiaa8d
+	0s+I+tKAwOwfJmIB9i7E+kluMQTSpzElTm+Ak=
+MIME-Version: 1.0
+Received: by 10.216.191.215 with SMTP id g65mr6551844wen.16.1287486362376;
+	Tue, 19 Oct 2010 04:06:02 -0700 (PDT)
+Received: by 10.216.235.214 with HTTP; Tue, 19 Oct 2010 04:06:02 -0700 (PDT)
+In-Reply-To: <AANLkTikt5OzA0VogWq36Ss2ARpZvxjryjmioOivna-fU@mail.gmail.com>
+References: <AANLkTini++RBtxheY+RZ2+7X-=i4NAbY39e2wcRA8mDh@mail.gmail.com>
+	<20101016072423.GM28423@ibawizard.net>
+	<AANLkTikt5OzA0VogWq36Ss2ARpZvxjryjmioOivna-fU@mail.gmail.com>
+Date: Tue, 19 Oct 2010 07:06:02 -0400
+Message-ID: <AANLkTinzw6z_34+w4xiWw8Wd-1dA16aX7KT2-yexiLY=@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimti+Lv7xzDUrq8MppJdkru3pZgLi3CmMvEwop1@mail.gmail.com>
-References: <1287444108.3927.82.camel@mattotaupa>
-	<AANLkTimti+Lv7xzDUrq8MppJdkru3pZgLi3CmMvEwop1@mail.gmail.com>
-Date: Tue, 19 Oct 2010 12:13:00 +0200
-Message-ID: <1287483180.4030.30.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: openldap_2.4.23: `do_configure` fails with `cp: cannot stat `/oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/share/libtool/ltmain.sh': No such file or directory`
+Subject: Re: testing branch 2010-10-14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,73 +53,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2010 10:13:35 -0000
-X-Groupsio-MsgNum: 25122
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-EkrRd+LLg3MPoxXWCSF8"
+X-List-Received-Date: Tue, 19 Oct 2010 11:06:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-EkrRd+LLg3MPoxXWCSF8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, Oct 19, 2010 at 2:21 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> For me things in this branch work out quite well. 5 out of 6 targets
+> build; still peeking at #6.
 
-Am Montag, den 18.10.2010, 16:36 -0700 schrieb Khem Raj:
-> On Mon, Oct 18, 2010 at 4:21 PM, Paul Menzel wrote:
+I got a build failure with beagleboard/beagleboard-linuxtag2010-demo-image:
 
-> > trying to build OpenLDAP to test 980a1e [1], task `do_configure` of
-> > `opldap_2.4.23.bb` [2] fails with the following error with `minimal`
-> > (eglibc) and `angstrom-2008.1` for `MACHINE =3D "beagleboard"`.
-> >
-> >        [=E2=80=A6]
-> >        Log data follows:
-> >        | cp: cannot stat `/oe/build-minimal-eglibc/minimal-dev/sysroots=
-/armv7a-oe-linux-gnueabi/usr/share/libtool/ltmain.sh': No such file or dire=
-ctory
-> >        | ERROR: Function do_configure failed
-> >        NOTE: package openldap-2.4.23-r2: task do_configure: Failed
-> >        ERROR: TaskFailed event exception, aborting
-> >        ERROR: Build of /oe/openembedded/recipes/openldap/openldap_2.4.2=
-3.bb do_configure failed
-> >        ERROR: Task 11 (/oe/openembedded/recipes/openldap/openldap_2.4.2=
-3.bb, do_configure) failed with 256
->=20
-> can you search where ltmain.sh exist in your target staging ?
+http://tinderbox.openembedded.net/builds/96943/
 
-Ah right. I should have provided that information in the first place.
+Koen, if you happen to read this, do you know if the following change
+fixes this?
 
-> find /oe/build-minimal-eglibc/minimal-dev/sysroots/armv7a-oe-linux-gnueab=
-i -name "ltmain.sh"
+commit c9ac99f13f603d15e9a852916cc4daa4a4d210bc
+Author: Koen Kooi <koen@openembedded.org>
+Date:   Fri Oct 15 10:46:24 2010 +0200
 
-        /oe/build-minimal-libc$ find minimal-dev/sysroots/armv7a-oe-linux-g=
-nueabi/ -name "ltmain.sh"
-        minimal-dev/sysroots/armv7a-oe-linux-gnueabi/oe/build-minimal-libc/=
-minimal-dev/sysroots/i686-linux/usr/share/libtool/ltmain.sh
-        minimal-dev/sysroots/armv7a-oe-linux-gnueabi/usr/share/doc/gettext/=
-examples/hello-c++-kde/admin/ltmain.sh
 
-Did something go wrong during staging of `ltmain.sh`?
+                                                   python-pygobject:
+forcefully disable  introspection
 
+It will pick up the .pc from the native sysroot and then fail to build
+since we don't have target introspection libs to link against
+
+> But actually reason for mailing was to drop the suggestion from Crofton on irc.
+> He suggested testing_2010-xx-yy was confusing to some and that we
+> perhaps better could use tested_2010-xx-yy
+> I think he has a good point.
+
+Yes, I agree that makes sense.  We could even rename the "testing"
+branch to "tested", which is the semi-stable branch that comes out of
+this effort.
 
 Thanks,
+Cliff
 
-Paul
+-- 
+=================
+http://bec-systems.com
 
 
-> > [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D980=
-a1ea8d5bbe2c0c6e4b8f79883b0f294de979b
-> > [2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/ope=
-nldap/openldap_2.4.23.bb?id=3D980a1ea8d5bbe2c0c6e4b8f79883b0f294de979b
-
---=-EkrRd+LLg3MPoxXWCSF8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAky9bycACgkQPX1aK2wOHVjMgQCdFZsiErLnhb9uOn1n/Eyrnxlx
-rlUAnRGtxFiz7Nj36W37S7LE13aXh6dM
-=cA1z
------END PGP SIGNATURE-----
-
---=-EkrRd+LLg3MPoxXWCSF8--
