@@ -1,43 +1,40 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ashcharles@gmail.com>) id 1P8FZr-0008Fl-S7
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1P8FfD-0008P0-KV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Oct 2010 19:02:20 +0200
-Received: by eye27 with SMTP id 27so6281eye.6
+	Tue, 19 Oct 2010 19:07:52 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o9JH73Nd013649
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Oct 2010 10:01:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=Q+QCBD/Txz9hzmyWk7rE6K7/hfqaSopb/6duPbQofpI=;
-	b=aLfoPBGSsK8jwPmXHwQqeGL2fvnABBE4ekCbBSLCdFcBAtgP/qDYh5TvJ1d9EUl61b
-	TWpjHrGg4N40UTfpmmGNDvG//B0qNj1nkQ5OIigtshdhL8wtTqOJ8qGyrvTrXgw0c2xF
-	1cQErcse/t9vqRFMIMfnSGmHvbEyC/df34xfU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=wu31CuFQuNlwAMcR/vZYjNylfdUpn7FBrHWj+obFp58b89pPZCJwX/U+opDfasCarb
-	1qkgxFMybf3i29I5EsZYgRLvMjGG9tfhc0Nn+Lh5t6LgUT/5Zuf1g/zT3rizjvlJHDX9
-	efOD8UuSIBvUx0u1u3my0ReCl4OEJtbxnxrJ0=
-Received: by 10.213.10.136 with SMTP id p8mr910477ebp.40.1287507705174; Tue,
-	19 Oct 2010 10:01:45 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.127.137 with HTTP; Tue, 19 Oct 2010 10:01:24 -0700 (PDT)
-In-Reply-To: <AANLkTi=BRC8V5VRWuBKac750eoS79eeBtaiyDOYGwzgo@mail.gmail.com>
-References: <AANLkTi=BRC8V5VRWuBKac750eoS79eeBtaiyDOYGwzgo@mail.gmail.com>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Tue, 19 Oct 2010 10:01:24 -0700
-Message-ID: <AANLkTi=fiMQULYAZsB+CKDeFFf9esmDRruER72F6QsvY@mail.gmail.com>
+	Tue, 19 Oct 2010 19:07:05 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1P8Fev-00081N-DM
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Oct 2010 19:07:33 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: ashcharles@gmail.com
+References: <1287420263-28528-1-git-send-email-msmith@cbnco.com>
+	<lypqv6492b.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<AANLkTikkRYEJUGrR5VYDwS7Yb6fW-aqfF_Ta1gh5sA8c@mail.gmail.com>
+Date: Tue, 19 Oct 2010 19:07:33 +0200
+In-Reply-To: <AANLkTikkRYEJUGrR5VYDwS7Yb6fW-aqfF_Ta1gh5sA8c@mail.gmail.com>
+	(Frans Meulenbroeks's message of "Tue, 19 Oct 2010 15:25:40 +0200")
+Message-ID: <lylj5u3ycq.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-gumstix-2.6.15 & gumstix_2.6.5-gnalm1: removed outdated recipes
+Subject: Re: [PATCH v3] package.bbclass: copy dotfiles in root D to PKGD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,18 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2010 17:02:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 19 Oct 2010 17:07:52 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 19, 2010 at 12:11 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Ash, do you have commit access, or does someone needs to push this for you?
-If someone could push this, that would be appreciated.
+Frans Meulenbroeks <fransmeulenbroeks@gmail.com> writes:
 
-Actually, I'm a little new to this: what is the life-cycle of patch
-once it lands on patchwork?
-Thanks,
+>>> + =A0 =A0 os.system('rm -rf %s/*' % (pkgcopy))
+>>
+>> Can be written as
+>>
+>> =A0os.system('rm -rf %s' % (pkgcopy))
+>> ...
+>>> + =A0 =A0 os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
+>>
+>
+> No this is not good. The rm command you give will also remove the dir.
 
--Ash
+Why is this bad?  The dir is recreated by the 'cp'.
+
+
+> The cp command will copy %s/.
+
+Only the final permissions of <dstdir> may differ between
+
+  rm -rf <dstdir>
+  cp -pPR <srcdir>/. <dstdir>/
+
+and
+
+  rm -rf <dstdir>
+  mkdir <dstdir>
+  cp -pPR <srcdir>/. <dstdir>/
+
+
+In first case, <dstdir> gets permissions of <srcdir>. In the second it
+keeps the permissions from <dstdir>.
+
+Else, content (both the files and their attributes) of <dstdir> will be
+the same for both operations.
+
+
+Enrico
 
 
