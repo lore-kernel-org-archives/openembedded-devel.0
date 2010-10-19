@@ -1,26 +1,48 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@true.cz>) id 1P8KIW-0000qB-3W
-	for openembedded-devel@openembedded.org; Wed, 20 Oct 2010 00:05:26 +0200
-Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id A6B3A1D36173;
-	Wed, 20 Oct 2010 00:04:02 +0200 (CEST)
-From: =?UTF-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Oct 2010 00:04:07 +0200
-Message-Id: <1287525847-13430-1-git-send-email-ynezz@true.cz>
-X-Mailer: git-send-email 1.7.0.4
+	(envelope-from <graham.gower@gmail.com>) id 1P8Ljy-0003Gl-EA
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Oct 2010 01:37:11 +0200
+Received: by pvg13 with SMTP id 13so598770pvg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Oct 2010 16:36:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=B8O01KuYzZcfhJv2AtdcnMzH0N0xJ+iAIZwZTb+5FIQ=;
+	b=iG1sB/BoHrfLmvdWYHquaifcUoiulO2JGb6HOE34UE58t5+Vpn3qOXoMbEu5XpGDzD
+	v4fct6l8OvztLH5NOh/0gSa4UM6isdMi+Nb6p+cTsOeFVKwsOQqOUYjXY7agN1CQk1XO
+	Am5cW4LhI9Ub4m2ibbdZoq2AfwGISpjcjGXgc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=gtj8LpDCE2QbFQKc5dzpk4mPauDlNNuNDhAcqZs3T5dM0DN3Bnnjh1peTGa+aGSnO7
+	OP+2TB48B1Nz5PsuN25/Ummkz8XrkcW76YY5Tf0+xQ/NQQLZQuT52qp9mv3Luy0fxpWX
+	5plqF8gP9LbX+P+11gfPx1y6JXye67ObmCZs0=
+Received: by 10.142.135.17 with SMTP id i17mr5257418wfd.278.1287531392923;
+	Tue, 19 Oct 2010 16:36:32 -0700 (PDT)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	y42sm19923892wfd.10.2010.10.19.16.36.30
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 19 Oct 2010 16:36:31 -0700 (PDT)
+Message-ID: <4CBE2B7A.4040601@gmail.com>
+Date: Wed, 20 Oct 2010 10:06:26 +1030
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@true.cz
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] busybox: add ts72xx hwclock-default file and modify hwclock.sh
+Subject: nspr-4.7.1: race condition causing occasional build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,120 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2010 22:05:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Oct 2010 23:37:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-This patch simplifies the hwclock.sh init script and adds a possibility t=
-o
-fallback to default RTC device even if the device specified in HWCLOCKDEV=
-ICE
-doesn't exist.
+The failure looks like this:
 
-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
----
- recipes/busybox/busybox.inc                  |    2 +-
- recipes/busybox/files/hwclock.sh             |   34 +++++++-------------=
------
- recipes/busybox/files/ts72xx/hwclock-default |    2 +
- 3 files changed, 13 insertions(+), 25 deletions(-)
- mode change 100644 =3D> 100755 recipes/busybox/files/hwclock.sh
- create mode 100644 recipes/busybox/files/ts72xx/hwclock-default
+make[3]: Entering directory `/mnt/oe/tmp/work/mipsel-oe-linux/nspr-4.7.1-r1/nspr-4.7.1/mozilla/nsprpub/pr/include/md'
+../../../config/./nsinstall -R -m 444 ./_aix32.cfg ./_aix64.cfg ./_beos.cfg ./_bsdi.cfg ./_darwin.cfg ./_dgux.cfg ./_freebsd.cfg ./_hpux32.cfg ./_hpux64.cfg ./_irix32.cfg ./_irix64.cfg ./_linux.cfg ./_ncr.cfg ./_nec.cfg ./_netbsd.cfg ./_nextstep.cfg ./_nto.cfg ./_openbsd.cfg ./_openvms.cfg ./_os2.cfg ./_osf1.cfg ./_qnx.cfg ./_reliantunix.cfg ./_riscos.cfg ./_scoos.cfg ./_solaris.cfg ./_sony.cfg ./_sunos4.cfg ./_unixware.cfg ./_unixware7.cfg ./_win16.cfg ./_win95.cfg ./_winnt.cfg ../../../dist/include/nspr/md
+../../../config/./nsinstall: ../../../config/./nsinstall: cannot execute binary file
+make[3]: *** [export] Error 126
 
-diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
-index 401f6ad..362ab9c 100644
---- a/recipes/busybox/busybox.inc
-+++ b/recipes/busybox/busybox.inc
-@@ -11,7 +11,7 @@ LICENSE =3D "GPLv2"
- SECTION =3D "base"
- PRIORITY =3D "required"
-=20
--INC_PR =3D "r35"
-+INC_PR =3D "r36"
-=20
- SRC_URI =3D "\
-   file://busybox-cron \
-diff --git a/recipes/busybox/files/hwclock.sh b/recipes/busybox/files/hwc=
-lock.sh
-old mode 100644
-new mode 100755
-index 1bc9de3..b55da2e
---- a/recipes/busybox/files/hwclock.sh
-+++ b/recipes/busybox/files/hwclock.sh
-@@ -18,6 +18,12 @@
-=20
- [ "$UTC" =3D yes ] && UTC=3D-u || UTC=3D-l
-=20
-+if  [ ! -z "$HWCLOCKDEVICE" ]; then
-+	if [ -e $HWCLOCKDEVICE ]; then
-+		DEVICE=3D"-f $HWCLOCKDEVICE"
-+	fi
-+fi
-+
- case "$1" in
-         start)
-                 if [ "$VERBOSE" !=3D no ]
-@@ -30,19 +36,9 @@ case "$1" in
- 		then
- 			if [ -z "$TZ" ]
- 			then
--				if [ -z "$HWCLOCKDEVICE" ]
--				then
--					hwclock -s $UTC
--				else
--					hwclock -s $UTC -f $HWCLOCKDEVICE
--				fi
-+				hwclock -s $UTC $DEVICE
- 			else
--				if [ -z "$HWCLOCKDEVICE" ]
--				then
--					TZ=3D"$TZ" hwclock -s $UTC
--				else
--					TZ=3D"$TZ" hwclock -s $UTC -f $HWCLOCKDEVICE
--				fi
-+				TZ=3D"$TZ" hwclock -s $UTC $DEVICE
- 			fi
- 		fi
-=20
-@@ -65,12 +61,7 @@ case "$1" in
- 		fi
- 		if [ "$HWCLOCKACCESS" !=3D no ]
- 		then
--			if [ -z "$HWCLOCKDEVICE" ]
--			then
--				hwclock -w $UTC
--			else
--				hwclock -w $UTC -f $HWCLOCKDEVICE
--			fi
-+			hwclock -w $UTC $DEVICE
- 		fi
- 		if [ "$VERBOSE" !=3D no ]
- 		then
-@@ -81,12 +72,7 @@ case "$1" in
- 	show)
- 		if [ "$HWCLOCKACCESS" !=3D no ]
- 		then
--			if [ -z "$HWCLOCKDEVICE" ]
--			then
--				hwclock -r $UTC
--			else
--				hwclock -r $UTC -f $HWCLOCKDEVICE
--			fi
-+			hwclock -r $UTC $DEVICE
- 		fi
- 		;;
-         *)
-diff --git a/recipes/busybox/files/ts72xx/hwclock-default b/recipes/busyb=
-ox/files/ts72xx/hwclock-default
-new file mode 100644
-index 0000000..8ab3fd4
---- /dev/null
-+++ b/recipes/busybox/files/ts72xx/hwclock-default
-@@ -0,0 +1,2 @@
-+HWCLOCKACCESS=3Dyes
-+HWCLOCKDEVICE=3D/dev/rtc1
---=20
-1.7.0.4
 
+do_compile_prepend() contains the following line:
+cp ${STAGING_BINDIR_NATIVE}/${P}/nsinstall config/nsinstall
+Which copies the nsinstall program built by nspr-tools-native. However,
+in the case of the failure, nspr chooses to build a version of nsinstall
+for the target.
+
+I'm having trouble reproducing this, but I can see that I am not alone
+in experiencing this bug.
+http://tinderbox.openembedded.net/packages/764121/
+
+Any help with determining what causes this race would be appreciated. It has
+the follow on effect of causing various other packages to fail in difficult
+to diagnose ways.
+
+-Graham
 
 
