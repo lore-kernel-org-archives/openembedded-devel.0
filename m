@@ -1,46 +1,50 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P8HdE-0000OV-U9
+	(envelope-from <chase.maupin@ti.com>) id 1P8Hi9-0000bJ-3N
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Oct 2010 21:13:57 +0200
-Received: by gxk6 with SMTP id 6so124894gxk.6
+	Tue, 19 Oct 2010 21:19:02 +0200
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9JJIRDt029965
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Oct 2010 12:13:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=vjIH9Ub409vpDwJYN2m7qoI9uajwORRBXwJsb2t3C9o=;
-	b=mAJ3/sCru3Fjrxj1DBKuA2yKbL95RVOkxVnjMwhaZ+HIE7K3YqO/fi576APs7OcJBk
-	JhqL/UE/aRWon2EPdz6IY5JCdH3PHBR1ppxTKEbT80KWO33PDNa7G6n6QxjBYFwcmmtu
-	3w+Qutl3EhryD9iE+pmBwR2NlhsMXYNxBJFP4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=kTMqWRoaeiub+0ZCFnr/jVOxAnxmW/B3EAHt/WvKqzZk6t2xgV0O7RNrbsqP72JMN+
-	C4pb044XAeDqwru/1Hnv6I9fSu5shLuYaFiN6IFEMhgQgmDEEYsFNr1I0qQXO0qtJD5x
-	NYHDweULp0Jy7+7SAp28bC48bc6EtW/ycnPa4=
-Received: by 10.151.20.3 with SMTP id x3mr9430940ybi.322.1287515597297;
-	Tue, 19 Oct 2010 12:13:17 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id p38sm6032035ybk.4.2010.10.19.12.13.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 19 Oct 2010 12:13:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Oct 2010 12:13:09 -0700
-Message-Id: <1287515589-25224-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1287515589-25224-1-git-send-email-raj.khem@gmail.com>
-References: <1287515589-25224-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	Tue, 19 Oct 2010 14:18:27 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9JJIQR3005515
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Oct 2010 14:18:26 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9JJIQJR001607
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Oct 2010 14:18:26 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Tue, 19 Oct 2010 14:18:26 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 19 Oct 2010 14:18:25 -0500
+Thread-Topic: [oe] [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to
+	OVERRIDES when it's empty
+Thread-Index: ActvwVnC+BMSOzscS/C1O+/s9gAqhQAACEPg
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0803110B3140@dlee06.ent.ti.com>
+References: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
+	<1287257081-25608-1-git-send-email-Martin.Jansa@gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F0803110B3131@dlee06.ent.ti.com>
+	<AANLkTimWmTWAkCPAabOagq2S5gtfMztov8xiBcK7q_Vh@mail.gmail.com>
+In-Reply-To: <AANLkTimWmTWAkCPAabOagq2S5gtfMztov8xiBcK7q_Vh@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] gcc-configure-target.inc: Filter out --with-sysroot
+Subject: Re: [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to OVERRIDES when it's empty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,34 +58,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2010 19:13:57 -0000
+X-List-Received-Date: Tue, 19 Oct 2010 19:19:02 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* For target gcc we dont need to specify --with-sysroot
-  even with libtool 2.4
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Chris Larson
+> Sent: Tuesday, October 19, 2010 2:09 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to
+> OVERRIDES when it's empty
+>=20
+> On Tue, Oct 19, 2010 at 12:05 PM, Maupin, Chase <chase.maupin@ti.com>
+> wrote:
+>=20
+> > > -----Original Message-----
+> > > From: openembedded-devel-bounces@lists.openembedded.org
+> > > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
+> Of
+> > > Martin Jansa
+> > > Sent: Saturday, October 16, 2010 2:25 PM
+> > > To: openembedded-devel@lists.openembedded.org
+> > > Subject: [oe] [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to
+> > > OVERRIDES when it's empty
+> > >
+> > > * empty MACHINE_OVERRIDES adds :: to OVERRIDES (then in FILESPATH
+> skips
+> > >   every directory after this)
+> > > * strip() is needed to remove space in case some distribution has ie
+> > >   MACHINE_OVERRIDES ?=3D ""
+> > >   and then
+> > >   MACHINE_OVERRIDES +=3D ""
+> > >   or
+> > >   MACHINE_OVERRIDES ?=3D "${MACHINE_CLASS}", where MACHINE_CLASS is
+> empty
+> > > again
+> >
+> > I saw this issue in my overlay of having a "::" in my OVERRIDES which
+> > caused my parsing to fail in angstrom.inc.  Applying this fix from
+> Martin
+> > resolves the parsing issue.  My OVERRIDES appear to be in the correct
+> order
+> > with this change:
+>=20
+>=20
+> Can you explain this?  "caused my parsing to fail" is not very useful
+> information.  What exactly failed?
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/gcc/gcc-configure-target.inc |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
+Chris,
 
-diff --git a/recipes/gcc/gcc-configure-target.inc b/recipes/gcc/gcc-configure-target.inc
-index 03d7a6b..4c9ef8b 100644
---- a/recipes/gcc/gcc-configure-target.inc
-+++ b/recipes/gcc/gcc-configure-target.inc
-@@ -3,4 +3,10 @@ require gcc-configure-common.inc
- EXTRA_OECONF_PATHS = " \
-     --with-local-prefix=${prefix}/local \
-     --with-gxx-include-dir=${includedir}/c++/${BINV} \
--    --with-build-sysroot=${STAGING_DIR_HOST}"
-+    --with-build-sysroot=${STAGING_DIR_HOST} \
-+   "
-+
-+python __anonymous () {
-+	cfg = oe_filter_out('^--with-sysroot$', bb.data.getVar('CONFIGUREOPTS', d, 1) or "", d)
-+	bb.data.setVar('CONFIGUREOPTS', cfg, d)
-+}
--- 
-1.7.1
+Sorry, I thought this was an understood issue.  I have put the error output=
+ I got below.  Basically, when I got to line 509 of data.py the variables h=
+ad the following values:
 
+vars =3D set(['__functions_', '_', '__functions__'])
+
+var =3D '__functions__'
+
+overrides =3D ['pn-angstrom', 'fail-fast', 'build-linux', 'arm', 'INVALID',=
+ 'angstrom-2008.1', '', 'am37x-evm', 'local']
+=20
+o =3D ''
+
+OVERRIDES =3D 'pn-angstrom:fail-fast:build-linux:arm:INVALID:angstrom-2008.=
+1::am37x-evm:local'
+
+The current override being evaluated was the '' one.
+
+The line being evaluated in my overlay was USERDISTRO :=3D "${DISTRO}" in m=
+y copy of angstrom.inc
+
+The output from my build was:
+
+a0271661@sdit-build01:~/projects/arago-multi-build$ bitbake helloworldTrace=
+back (most recent call last):
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/bin/bitbake=
+", line 143, in <module>
+    main()
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/bin/bitbake=
+", line 123, in main
+    cooker.parseConfiguration()
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/cook=
+er.py", line 68, in parseConfiguration
+    self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/cook=
+er.py", line 390, in parseConfigurationFile
+    self.configuration.data =3D bb.parse.handle( afile, self.configuration.=
+data )
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/__init__.py", line 75, in handle
+    return h['handle'](fn, data, include)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/ConfHandler.py", line 167, in handle
+    feeder(lineno, s, fn, data)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/ConfHandler.py", line 215, in feeder
+    include(fn, s, data, False)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/ConfHandler.py", line 114, in include
+    ret =3D handle(fn, data, True)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/__init__.py", line 75, in handle
+    return h['handle'](fn, data, include)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/ConfHandler.py", line 167, in handle
+    feeder(lineno, s, fn, data)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/ConfHandler.py", line 221, in feeder
+    include(fn, s, data, "include required")
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/ConfHandler.py", line 114, in include
+    ret =3D handle(fn, data, True)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/__init__.py", line 75, in handle
+    return h['handle'](fn, data, include)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/BBHandler.py", line 175, in handle
+    feeder(lineno, s, fn, base_name, d)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/BBHandler.py", line 381, in feeder
+    return ConfHandler.feeder(lineno, s, fn, d)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
+e/parse_py/ConfHandler.py", line 192, in feeder
+    bb.data.update_data(e)
+  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/data=
+.py", line 509, in update_data
+    for var in vars:
+RuntimeError: Set changed size during iteration
+
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
