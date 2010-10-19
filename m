@@ -1,31 +1,31 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P8Hi9-0000bJ-3N
+	(envelope-from <chase.maupin@ti.com>) id 1P8HoG-0006P0-OB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Oct 2010 21:19:02 +0200
+	Tue, 19 Oct 2010 21:25:21 +0200
 Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9JJIRDt029965
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9JJOieI021435
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Oct 2010 14:18:27 -0500
+	Tue, 19 Oct 2010 14:24:44 -0500
 Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9JJIQR3005515
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9JJOikr010152
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Oct 2010 14:18:26 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9JJIQJR001607
+	Tue, 19 Oct 2010 14:24:44 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9JJOi2B005465
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Oct 2010 14:18:26 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Tue, 19 Oct 2010 14:18:26 -0500
+	Tue, 19 Oct 2010 14:24:44 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Tue, 19 Oct 2010 14:24:44 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 19 Oct 2010 14:18:25 -0500
+Date: Tue, 19 Oct 2010 14:24:43 -0500
 Thread-Topic: [oe] [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to
 	OVERRIDES when it's empty
-Thread-Index: ActvwVnC+BMSOzscS/C1O+/s9gAqhQAACEPg
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0803110B3140@dlee06.ent.ti.com>
+Thread-Index: ActvwVnC+BMSOzscS/C1O+/s9gAqhQAATgng
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0803110B3149@dlee06.ent.ti.com>
 References: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
 	<1287257081-25608-1-git-send-email-Martin.Jansa@gmail.com>
 	<131E5DFBE7373E4C8D813795A6AA7F0803110B3131@dlee06.ent.ti.com>
@@ -36,7 +36,7 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 acceptlanguage: en-US
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Connect-IP: 198.47.26.152
 X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -58,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2010 19:19:02 -0000
+X-List-Received-Date: Tue, 19 Oct 2010 19:25:22 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
@@ -108,86 +108,11 @@ Content-Transfer-Encoding: quoted-printable
 > Can you explain this?  "caused my parsing to fail" is not very useful
 > information.  What exactly failed?
 
-Chris,
-
-Sorry, I thought this was an understood issue.  I have put the error output=
- I got below.  Basically, when I got to line 509 of data.py the variables h=
-ad the following values:
-
-vars =3D set(['__functions_', '_', '__functions__'])
-
-var =3D '__functions__'
-
-overrides =3D ['pn-angstrom', 'fail-fast', 'build-linux', 'arm', 'INVALID',=
- 'angstrom-2008.1', '', 'am37x-evm', 'local']
-=20
-o =3D ''
-
-OVERRIDES =3D 'pn-angstrom:fail-fast:build-linux:arm:INVALID:angstrom-2008.=
-1::am37x-evm:local'
-
-The current override being evaluated was the '' one.
-
-The line being evaluated in my overlay was USERDISTRO :=3D "${DISTRO}" in m=
-y copy of angstrom.inc
-
-The output from my build was:
-
-a0271661@sdit-build01:~/projects/arago-multi-build$ bitbake helloworldTrace=
-back (most recent call last):
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/bin/bitbake=
-", line 143, in <module>
-    main()
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/bin/bitbake=
-", line 123, in main
-    cooker.parseConfiguration()
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/cook=
-er.py", line 68, in parseConfiguration
-    self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/cook=
-er.py", line 390, in parseConfigurationFile
-    self.configuration.data =3D bb.parse.handle( afile, self.configuration.=
-data )
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/__init__.py", line 75, in handle
-    return h['handle'](fn, data, include)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/ConfHandler.py", line 167, in handle
-    feeder(lineno, s, fn, data)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/ConfHandler.py", line 215, in feeder
-    include(fn, s, data, False)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/ConfHandler.py", line 114, in include
-    ret =3D handle(fn, data, True)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/__init__.py", line 75, in handle
-    return h['handle'](fn, data, include)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/ConfHandler.py", line 167, in handle
-    feeder(lineno, s, fn, data)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/ConfHandler.py", line 221, in feeder
-    include(fn, s, data, "include required")
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/ConfHandler.py", line 114, in include
-    ret =3D handle(fn, data, True)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/__init__.py", line 75, in handle
-    return h['handle'](fn, data, include)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/BBHandler.py", line 175, in handle
-    feeder(lineno, s, fn, base_name, d)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/BBHandler.py", line 381, in feeder
-    return ConfHandler.feeder(lineno, s, fn, d)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/pars=
-e/parse_py/ConfHandler.py", line 192, in feeder
-    bb.data.update_data(e)
-  File "/home/a0271661/projects/arago-multi-build/arago-bitbake/lib/bb/data=
-.py", line 509, in update_data
-    for var in vars:
-RuntimeError: Set changed size during iteration
+One other detail I forgot to mention is that I was actually using bitbake f=
+rom the Arago project which is based on 1.8.18.  I did not see this issue i=
+f I used bitbake 1.10 I did not see this issue.  I kept this same fix in my=
+ tree and tried with bitbake 1.10 and it too worked so it didn't seem like =
+the fix was negatively impacting the 1.10 version.
 
 > --
 > Christopher Larson
