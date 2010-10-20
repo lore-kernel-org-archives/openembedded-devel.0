@@ -1,50 +1,47 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1P8RSv-0001AC-TB
+	(envelope-from <ashcharles@gmail.com>) id 1P8Sjg-0002wn-50
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Oct 2010 07:43:59 +0200
-Received: by pwi8 with SMTP id 8so316989pwi.6
+	Wed, 20 Oct 2010 09:05:22 +0200
+Received: by eye27 with SMTP id 27so387609eye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Oct 2010 22:43:17 -0700 (PDT)
+	Wed, 20 Oct 2010 00:04:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=H24sxvdZlqX3pxpdnlLeVzQO05NyrjHvnd0klNizKv8=;
-	b=GoNv/aMKqj6cc7WwGiG3tvy7ISqf4tXP2JkyQvoCLaS8EiklB/3znI2mjb3LyGyB2V
-	6ccesv4Y3pqAXbYG2y7qQGFiMO8fYkFo+hDazqgtAvxjGV+d6M45cjeC5C5yMFA6ajyE
-	yJsoU9pTLsjX+6D2E8YrDSKdxD2KahdASXbRw=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=aCPe5eTgCBGcW/ha+OfzKK9ktwo4jMuZDdukq3MFRa0=;
+	b=vqunDzR0lHL02Q6vCju6Kg87b9nkCkqUXaiYmESHNYK03sdB3pddE60M/Q+3R+xqI6
+	3byzWfTRVglWF0edeFWyj2I8PrKpV3GvbNY/oeTvucbZYKBCU06FfQ1ZAJYfIsAuMnpi
+	Dz2LZhb7tIXqEb0D4xyPruSrcbjODIfgxkBfY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=p+rEW0Ya1aBYIXr0uhFSMy1N2pYJVYmHQJ864EoyC2R2zq3Ixrn1wNZtnizLf+XiJp
-	PgjGP4AEmQ1PQXl8pchh1wpZQr8LXVKtamX2W42OB0i6VmFx/MPAntCCmyB2oxclwu3T
-	8CE7Sol9K0KYCVKmFF9NGpEirN6e8Asc5juJE=
-Received: by 10.142.245.21 with SMTP id s21mr5479994wfh.329.1287553388228;
-	Tue, 19 Oct 2010 22:43:08 -0700 (PDT)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	x35sm18971169wfd.13.2010.10.19.22.43.06
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 19 Oct 2010 22:43:07 -0700 (PDT)
-Message-ID: <4CBE8166.5050104@gmail.com>
-Date: Wed, 20 Oct 2010 16:13:02 +1030
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=poPGBjCmP3Ev+3v8+xbTzzJr2GGthphCGhK4XFnEO47RFyhW+xKBZS390eGDhkPv9c
+	kvjUem+quz96DKRHlGEOmeQaZNmM4K1K7vSTCpZOftz/fZIiheqHJVETw9xWrrCb3C5q
+	iQ9PQVEYLnz8mzQ7RMkW7jGbs/crMBJ5BRr7w=
+Received: by 10.213.4.205 with SMTP id 13mr180947ebs.70.1287558285327; Wed, 20
+	Oct 2010 00:04:45 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.14.127.137 with HTTP; Wed, 20 Oct 2010 00:04:25 -0700 (PDT)
+In-Reply-To: <AANLkTikEpu0yxUXYZvfiRbgiFjnjc+GEAJ=-_x_Mszkp@mail.gmail.com>
+References: <4CA97897.4020001@nedap.com> <4CA97EBC.4040406@eukrea.com>
+	<4CA98CEF.3090604@nedap.com>
+	<AANLkTik2_YEL-dhKLr9LuJQ78W4WXS4WvUbxDfXeJk8U@mail.gmail.com>
+	<4CA99206.5060001@eukrea.com>
+	<AANLkTikEpu0yxUXYZvfiRbgiFjnjc+GEAJ=-_x_Mszkp@mail.gmail.com>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Wed, 20 Oct 2010 00:04:25 -0700
+Message-ID: <AANLkTimt6JE5kNxyJ5oFyC5MxZAyqZbGYR_FjcED3AOk@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CBE2B7A.4040601@gmail.com>
-In-Reply-To: <4CBE2B7A.4040601@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: ashcharles@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: nspr-4.7.1: race condition causing occasional build failure
+Subject: Re: trouble compiling udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,25 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2010 05:44:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Oct 2010 07:05:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 10/20/2010 10:06 AM, Graham Gower wrote:
-> The failure looks like this:
-> 
-> make[3]: Entering directory `/mnt/oe/tmp/work/mipsel-oe-linux/nspr-4.7.1-r1/nspr-4.7.1/mozilla/nsprpub/pr/include/md'
-> ../../../config/./nsinstall -R -m 444 ./_aix32.cfg ./_aix64.cfg ./_beos.cfg ./_bsdi.cfg ./_darwin.cfg ./_dgux.cfg ./_freebsd.cfg ./_hpux32.cfg ./_hpux64.cfg ./_irix32.cfg ./_irix64.cfg ./_linux.cfg ./_ncr.cfg ./_nec.cfg ./_netbsd.cfg ./_nextstep.cfg ./_nto.cfg ./_openbsd.cfg ./_openvms.cfg ./_os2.cfg ./_osf1.cfg ./_qnx.cfg ./_reliantunix.cfg ./_riscos.cfg ./_scoos.cfg ./_solaris.cfg ./_sony.cfg ./_sunos4.cfg ./_unixware.cfg ./_unixware7.cfg ./_win16.cfg ./_win95.cfg ./_winnt.cfg ../../../dist/include/nspr/md
-> ../../../config/./nsinstall: ../../../config/./nsinstall: cannot execute binary file
-> make[3]: *** [export] Error 126
-> 
+On Mon, Oct 4, 2010 at 11:23 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Now gcc 4.5 is default so people will hit it often. Can you commit
+> this workaround
+> for time being while gcc is being fixed to cure it with reference to
+> upstream bug
 
-Even with PARALLEL_MAKE and BB_NUMBER_THREADS commented out in my local.conf
-I can reproduce the failure within a few minutes using the following loop.
+Hi,
 
-while :; do
-	./bitbake.sh -b openembedded/recipes/mozilla/nspr_4.7.1.bb -c clean
-	./bitbake.sh -b openembedded/recipes/mozilla/nspr_4.7.1.bb -c compile || break
-done
+Just a FYI:
+I ran into this bug while compiling udev.  Regrettably the quick fix
+of CFLAGS_append caused my udev to choke on the configure step.
+Instead, I applied the bugfix from here
+https://code.launchpad.net/~cltang/gcc-linaro/fix-lp-653316 to
+gcc-cross-4.5.  This was for a armv5te target build.
+
+Udev appears to build nicely now :).
+
+-Ash
 
 
