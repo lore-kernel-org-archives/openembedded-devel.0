@@ -1,31 +1,25 @@
 Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1P8otO-0001aB-Gk
+	(envelope-from <sledz@dresearch.de>) id 1P8otK-0001Zx-81
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 08:44:51 +0200
+	Thu, 21 Oct 2010 08:44:56 +0200
 Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
 	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 5A613491282
+	by mail.dresearch.de (Postfix) with ESMTP id 382CC491278
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 21 Oct 2010 08:44:12 +0200 (CEST)
 Received: from mobil-400-586.intern.dresearch.de ([10.32.11.62]) by
 	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
 	Thu, 21 Oct 2010 08:44:12 +0200
-Received: from mobil-400-586.intern.dresearch.de (localhost [IPv6:::1])
-	by mobil-400-586.intern.dresearch.de (Postfix) with ESMTP id 0276A296DB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 13:08:06 +0200 (CEST)
-Message-ID: <4CBECD95.1050700@dresearch.de>
-Date: Wed, 20 Oct 2010 13:08:05 +0200
+Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
+	id 689FD29EAC; Wed, 20 Oct 2010 13:10:19 +0200 (CEST)
 From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100914 SUSE/3.0.8 Lightning/1.0b1
-	Thunderbird/3.0.8
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTini++RBtxheY+RZ2+7X-=i4NAbY39e2wcRA8mDh@mail.gmail.com>
-	<DB561678F08F554EB0D9F21B70E268A505AF50@exchange.intern.dresearch.de>
-In-Reply-To: <DB561678F08F554EB0D9F21B70E268A505AF50@exchange.intern.dresearch.de>
+Date: Wed, 20 Oct 2010 13:10:06 +0200
+Message-Id: <1287573007-24350-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <4CBECD95.1050700@dresearch.de>
+References: <4CBECD95.1050700@dresearch.de>
 X-OriginalArrivalTime: 21 Oct 2010 06:44:12.0193 (UTC)
 	FILETIME=[5EE5B910:01CB70EB]
 X-SA-Exim-Connect-IP: 87.193.137.100
@@ -36,7 +30,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-10-14 - configure epiphany still fails
+Subject: [PATCH 1/2] ca-certificates: unbreak do_configure of packages depending on ca-bundle.pem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,23 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 06:44:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Oct 2010 06:44:56 -0000
 
-On 10/17/2010 02:27 PM, Sledz, Steffen wrote:
-> do_configure still fails with the ca-certificates problem [1]. :(
-> 
-> If nobody will find a solution for this problem (for my first diagnosis see [2]) until the next testing branch creation, i'll push my original patch which disables the ca-file use [3].
-> 
-> Steffen
-> 
-> [1] <http://tinderbox.openembedded.org/packages/859111/>
-> [2] <http://thread.gmane.org/gmane.comp.handhelds.openembedded/37925/focus=38034>
-> [3] <http://thread.gmane.org/gmane.comp.handhelds.openembedded/37453/focus=37585>
+just create an empty ca-bundle file to satisfy build time
+dependencies in do_configure of other packages (e.g. epiphany),
+content is updated later in postinst
 
-OK, i tried to fix for myself. Patches follow.
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+ .../ca-certificates_20090814+nmu2.bb               |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
 
-Steffen
+diff --git a/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb b/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
+index c8e4dbd..a37b01a 100644
+--- a/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
++++ b/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
+@@ -3,6 +3,7 @@ HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
+ SECTION = "misc"
+ PRIORITY = "optional"
+ LICENSE = "GPL"
++PR = "r1"
+ 
+ SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
+            file://remove-c-rehash.patch"
+@@ -27,13 +28,21 @@ do_install_append() {
+                 crt=$(echo $crt | sed -e 's/\.\///')
+                 echo $crt >> ${D}/etc/ca-certificates.conf
+         done
++
++	# update-ca-certificates is not able to deal with pathes,
++	# so just create an empty ca-bundle file to satisfy build time
++	# dependencies in do_configure of other packages (e.g. epiphany),
++	# content is updated later (see pkg_postinst)
++	touch ${D}/etc/ssl/ca-bundle.pem
+ }
+ 
+ PACKAGE_ARCH = "all"
+ PACKAGES = "${PN}"
+ 
+ pkg_postinst_${PN} () {
++if test -z "$D"; then
+         /usr/sbin/update-ca-certificates
++fi
+ }
+ 
+ CONFFILES_${PN} = "/etc/ca-certificates.conf"
+-- 
+1.7.1
+
 
 
