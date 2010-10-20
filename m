@@ -1,35 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P8g2v-0007yp-Nb
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P8g6b-00087c-7j
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Oct 2010 23:18:06 +0200
-Received: by yxt3 with SMTP id 3so2065302yxt.6
+	Wed, 20 Oct 2010 23:21:54 +0200
+Received: by gyd5 with SMTP id 5so374658gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 14:17:29 -0700 (PDT)
+	Wed, 20 Oct 2010 14:21:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=M+NVPGkSn2TJO5bs8Tlllo5cgZ97hsqpr4JSjxZVuMg=;
-	b=hsiXMM9+z5C/mth9xEUDr0l3W6Pg/GjuKOZ/oYIEXFqv06P5SqAZRFkK9wJqmitVsW
-	bXLvWbd8ie7DB26FXBYYl15UBEPSVcZZILMbjMP4tD5we/mkf4y1tM8uA9AjDgAOwJKc
-	SwAlRNnLXY9Hw2N53HFPWl8iLMtE3gfa1yEeM=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=qeEBgDgJVCmMZXksXLeWCqM45+kffQtAQjlAinx+j5o=;
+	b=F1T0C2xO9dhBl0IVLX0sfr8KEeN4GnZ7JpQjP0oSxMXaoWPJzXZDyPLa8MAp0zh4DN
+	UgKcqMpV0OogNm8gd5cXkUlWvIE0rdGIDfgG74zbFHp4mFbQnVnFkysr/tbbXK5CoN4R
+	KahQiII1RCB3avyfwh/1uJdMh6Oa3icVcfHck=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=roaXaJi25KLoG9ozHDvqn3qcU3AqLeoSntom47iRuB7cpEbfkAufmja5ZOHHnka2Id
-	Tn7hIU1xv40YYCP4z4BqoCl//U1n2gxuZut1q6zqvlHz/xvxxxjmfuAnQaDZQzkXmK3P
-	7TxPwvtWG3wW5hP6r1OYCbG+shqUqANaWv64U=
+	:content-type:content-transfer-encoding;
+	b=ocuBNSfrFtlTDoJr9ngO6qGGlAnJY0HZVLlfIMrrJDYpE2ZWDrri5VVmrCIfxJgecf
+	8WL5tfCPckvTuOumXaZwuup+LMKruGYDBxI/+I8ldl382vlHJZQYdrGPWKyX/kcekVL/
+	lpFleGAVZD9AmH+L3Fg4ni2h4fgS7O27knSCc=
 MIME-Version: 1.0
-Received: by 10.150.202.21 with SMTP id z21mr2017250ybf.419.1287609449189;
-	Wed, 20 Oct 2010 14:17:29 -0700 (PDT)
-Received: by 10.151.47.14 with HTTP; Wed, 20 Oct 2010 14:17:29 -0700 (PDT)
-In-Reply-To: <20101020203828.GU11514@denix.org>
+Received: by 10.150.49.8 with SMTP id w8mr2030214ybw.171.1287609675318; Wed,
+	20 Oct 2010 14:21:15 -0700 (PDT)
+Received: by 10.151.47.14 with HTTP; Wed, 20 Oct 2010 14:21:15 -0700 (PDT)
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F0803110B3441@dlee06.ent.ti.com>
 References: <20101020203828.GU11514@denix.org>
-Date: Wed, 20 Oct 2010 23:17:29 +0200
-Message-ID: <AANLkTinqUsT2vubiPH-vM4oxSaDhcqvA=khN2q-tXHkA@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F0803110B3441@dlee06.ent.ti.com>
+Date: Wed, 20 Oct 2010 23:21:15 +0200
+Message-ID: <AANLkTim70imb4L22J7SOQFkrbQ=AyFvSJrq-O_KuPoG2@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Connect-IP: 209.85.160.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -51,46 +53,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2010 21:18:06 -0000
+X-List-Received-Date: Wed, 20 Oct 2010 21:21:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2010/10/20 Denys Dmytriyenko <denis@denix.org>:
-> All,
+2010/10/20 Maupin, Chase <chase.maupin@ti.com>:
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+>> Denys Dmytriyenko
+>> Sent: Wednesday, October 20, 2010 3:38 PM
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: [oe] LICENSE field format
+>>
+>> All,
+>>
+>> We've had a number of discussions on the license matter recently. Trying
+>> to
+>> unify those brings us to the question of the LICENSE field format in
+>> recipes.
+>> As some projects are dual/triple licensed or use multiple licenses at th=
+e
+>> same
+>> time, it becomes hard to specify it all in the LICENSE field, especially
+>> when
+>> there are no rules defined. We do have several different formats used to
+>> separate multiple licenses, which is quite confusing and doesn't make it
+>> clear
+>> whether licenses are AND-ed or OR-ed (I know those are not legal terms,
+>> but
+>> for the purpose of this discussion that's fine :)) Here are some example=
+s:
+>>
+>> LICENSE =3D "License1 License2"
+>> LICENSE =3D "License1|License2"
+>> LICENSE =3D "License1, License2"
+>> LICENSE =3D "License1+License2"
+>> LICENSE =3D "License1/License2"
+>>
+>> LICENSE =3D "Very Long License Name"
+>> LICENSE =3D "License with some exceptions"
 >
-> We've had a number of discussions on the license matter recently. Trying to
-> unify those brings us to the question of the LICENSE field format in recipes.
-> As some projects are dual/triple licensed or use multiple licenses at the same
-> time, it becomes hard to specify it all in the LICENSE field, especially when
-> there are no rules defined. We do have several different formats used to
-> separate multiple licenses, which is quite confusing and doesn't make it clear
-> whether licenses are AND-ed or OR-ed (I know those are not legal terms, but
-> for the purpose of this discussion that's fine :)) Here are some examples:
+> I would vote for something along the following lines:
 >
-> LICENSE = "License1 License2"
-> LICENSE = "License1|License2"
-> LICENSE = "License1, License2"
-> LICENSE = "License1+License2"
-> LICENSE = "License1/License2"
+> LICENSE =3D "License1|License2"
+> =A0 =A0 =A0 =A0- This means the code is licensed under the terms of both =
+licenses
 >
-> LICENSE = "Very Long License Name"
-> LICENSE = "License with some exceptions"
+> LICENSE =3D "License1,License2"
+> =A0 =A0 =A0 =A0- This means the code can use either license exclusively
 >
-> To make matters worse, src_distribute.bbclass splits the field at spaces and
-> creates directories for each token. So, for the last two examples above, we
-> end up with 4 directories for every license - each word is a separate
-> directory...
+> in the src_distribute class spaces should be replaced with "-"s. =A0Of co=
+urse, this could lead to licenses like "GPLv3+-with-GCC-RLE".
 >
-> I'd like to raise this issue and start a discussion on unifying the LICENSE
-> field format (and fixing src_distribute.bbclass accordingly). Would be nice to
-> collect some ideas here on the maillist and/or discuss it further during OEDEM
-> next week. Please feel free to comment.
+> We should avoid separating licenses with "/" because that will mess up th=
+e directory structure or "+" because that would be confusing when + is also=
+ used to mean "or later" for some licenses like the GPL.
 >
-> --
-> Denys
+>
+As a non-native speaker I'm lost wrt the | and , usage.
+e.g. perl says either artistic or gplv1+.
+I'd say either the difference between | and , needs to be more clearly
+explained or we need to have one form.
 
-What do others do?
-I know debian has a license file. (and actually that could probably be
-a good source of info to set our LICENSE field)
+If spaces are an issue we could use _
+I agree with Chase that using + should be restricted to mean "or later"
 
 Frans
 
