@@ -1,39 +1,36 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P8fs3-0007lT-TB
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P8g2v-0007yp-Nb
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Oct 2010 23:06:54 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9KL6BKN028310
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Wed, 20 Oct 2010 23:18:06 +0200
+Received: by yxt3 with SMTP id 3so2065302yxt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 16:06:11 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9KL6B8x016824
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 16:06:11 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9KL6BYR004834
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 16:06:11 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Wed, 20 Oct 2010 16:06:11 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Oct 2010 16:06:10 -0500
-Thread-Topic: [oe] LICENSE field format
-Thread-Index: ActwlvrsB88aLBCCR/uZLlJWOEzpKgAAvzQQ
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0803110B3441@dlee06.ent.ti.com>
-References: <20101020203828.GU11514@denix.org>
-In-Reply-To: <20101020203828.GU11514@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Wed, 20 Oct 2010 14:17:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=M+NVPGkSn2TJO5bs8Tlllo5cgZ97hsqpr4JSjxZVuMg=;
+	b=hsiXMM9+z5C/mth9xEUDr0l3W6Pg/GjuKOZ/oYIEXFqv06P5SqAZRFkK9wJqmitVsW
+	bXLvWbd8ie7DB26FXBYYl15UBEPSVcZZILMbjMP4tD5we/mkf4y1tM8uA9AjDgAOwJKc
+	SwAlRNnLXY9Hw2N53HFPWl8iLMtE3gfa1yEeM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=roaXaJi25KLoG9ozHDvqn3qcU3AqLeoSntom47iRuB7cpEbfkAufmja5ZOHHnka2Id
+	Tn7hIU1xv40YYCP4z4BqoCl//U1n2gxuZut1q6zqvlHz/xvxxxjmfuAnQaDZQzkXmK3P
+	7TxPwvtWG3wW5hP6r1OYCbG+shqUqANaWv64U=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.41
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Received: by 10.150.202.21 with SMTP id z21mr2017250ybf.419.1287609449189;
+	Wed, 20 Oct 2010 14:17:29 -0700 (PDT)
+Received: by 10.151.47.14 with HTTP; Wed, 20 Oct 2010 14:17:29 -0700 (PDT)
+In-Reply-To: <20101020203828.GU11514@denix.org>
+References: <20101020203828.GU11514@denix.org>
+Date: Wed, 20 Oct 2010 23:17:29 +0200
+Message-ID: <AANLkTinqUsT2vubiPH-vM4oxSaDhcqvA=khN2q-tXHkA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -54,83 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2010 21:06:54 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Oct 2010 21:18:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Denys Dmytriyenko
-> Sent: Wednesday, October 20, 2010 3:38 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] LICENSE field format
->=20
+2010/10/20 Denys Dmytriyenko <denis@denix.org>:
 > All,
->=20
-> We've had a number of discussions on the license matter recently. Trying
-> to
-> unify those brings us to the question of the LICENSE field format in
-> recipes.
-> As some projects are dual/triple licensed or use multiple licenses at the
-> same
-> time, it becomes hard to specify it all in the LICENSE field, especially
-> when
+>
+> We've had a number of discussions on the license matter recently. Trying to
+> unify those brings us to the question of the LICENSE field format in recipes.
+> As some projects are dual/triple licensed or use multiple licenses at the same
+> time, it becomes hard to specify it all in the LICENSE field, especially when
 > there are no rules defined. We do have several different formats used to
-> separate multiple licenses, which is quite confusing and doesn't make it
-> clear
-> whether licenses are AND-ed or OR-ed (I know those are not legal terms,
-> but
-> for the purpose of this discussion that's fine :)) Here are some examples=
-:
->=20
-> LICENSE =3D "License1 License2"
-> LICENSE =3D "License1|License2"
-> LICENSE =3D "License1, License2"
-> LICENSE =3D "License1+License2"
-> LICENSE =3D "License1/License2"
->=20
-> LICENSE =3D "Very Long License Name"
-> LICENSE =3D "License with some exceptions"
-
-I would vote for something along the following lines:
-
-LICENSE =3D "License1|License2"=20
-	- This means the code is licensed under the terms of both licenses
-
-LICENSE =3D "License1,License2"
-	- This means the code can use either license exclusively
-
-in the src_distribute class spaces should be replaced with "-"s.  Of course=
-, this could lead to licenses like "GPLv3+-with-GCC-RLE".
-
-We should avoid separating licenses with "/" because that will mess up the =
-directory structure or "+" because that would be confusing when + is also u=
-sed to mean "or later" for some licenses like the GPL.
-
->=20
-> To make matters worse, src_distribute.bbclass splits the field at spaces
-> and
-> creates directories for each token. So, for the last two examples above,
-> we
+> separate multiple licenses, which is quite confusing and doesn't make it clear
+> whether licenses are AND-ed or OR-ed (I know those are not legal terms, but
+> for the purpose of this discussion that's fine :)) Here are some examples:
+>
+> LICENSE = "License1 License2"
+> LICENSE = "License1|License2"
+> LICENSE = "License1, License2"
+> LICENSE = "License1+License2"
+> LICENSE = "License1/License2"
+>
+> LICENSE = "Very Long License Name"
+> LICENSE = "License with some exceptions"
+>
+> To make matters worse, src_distribute.bbclass splits the field at spaces and
+> creates directories for each token. So, for the last two examples above, we
 > end up with 4 directories for every license - each word is a separate
 > directory...
->=20
-> I'd like to raise this issue and start a discussion on unifying the
-> LICENSE
-> field format (and fixing src_distribute.bbclass accordingly). Would be
-> nice to
-> collect some ideas here on the maillist and/or discuss it further during
-> OEDEM
+>
+> I'd like to raise this issue and start a discussion on unifying the LICENSE
+> field format (and fixing src_distribute.bbclass accordingly). Would be nice to
+> collect some ideas here on the maillist and/or discuss it further during OEDEM
 > next week. Please feel free to comment.
->=20
+>
 > --
 > Denys
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+What do others do?
+I know debian has a license file. (and actually that could probably be
+a good source of info to set our LICENSE field)
+
+Frans
 
 
