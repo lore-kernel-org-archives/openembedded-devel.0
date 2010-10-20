@@ -1,43 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from helsinki.digox.de ([87.106.28.129] helo=digox.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P8TOz-0002Pr-Oc for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Oct 2010 09:48:04 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P8TOP-0007Bi-Qc for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Oct 2010 09:47:25 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 09:47:25 +0200
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 09:47:25 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <mok@mnet-online.de>) id 1P8Tjz-0004cv-Ts
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Oct 2010 10:09:45 +0200
+Received: from gonzales.localnet by digox.de with esmtp (emil_Fk.fnHvuqfpv9);
+	Wed, 20 Oct 2010 10:04:32 +0200
+From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 20 Oct 2010 09:47:17 +0200
-Message-ID: <i9m6q5$qme$1@dough.gmane.org>
-References: <1287353716-27717-1-git-send-email-obi@opendreambox.org>	<i9gsjn$8r0$3@dough.gmane.org>	<4CBC1FBE.9020808@opendreambox.org>	<i9h8mg$sg1$1@dough.gmane.org>	<4CBC3255.3040007@opendreambox.org>
-	<4CBDDD0D.1080303@opendreambox.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <4CBDDD0D.1080303@opendreambox.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Wed, 20 Oct 2010 10:04:32 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.34.7-56.fc13.x86_64; KDE/4.4.5; x86_64; ; )
+References: <1287427884-1517-1-git-send-email-morphis@gravedo.de>
+	<1287427884-1517-14-git-send-email-morphis@gravedo.de>
+In-Reply-To: <1287427884-1517-14-git-send-email-morphis@gravedo.de>
+MIME-Version: 1.0
+Message-Id: <201010201004.33331.mok@mnet-online.de>
+X-SA-Exim-Connect-IP: 87.106.28.129
+X-SA-Exim-Mail-From: mok@mnet-online.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] update lib_package.bbclass
+Subject: Re: [PATCH 13/15] initscripts-shr: add mountdevtmpfs init script for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,113 +36,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2010 07:48:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Oct 2010 08:09:45 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Acked-by: Klaus Kurzmann <mok@fluxnetz.de>
 
-On 19-10-10 20:01, Andreas Oberritter wrote:
-> On 10/18/2010 01:41 PM, Andreas Oberritter wrote:
->> On 10/18/2010 12:48 PM, Koen Kooi wrote:
->>>
->>> Well, .a files are supposed to go into -static, not into -dev.
->>>
+> On the palmpre machine we are currently come into the SHR rootfs through
+> mounting it from /boot and switch the rootfs via pivot_root. So we can't
+> automatically mount devtmpfs on /dev. Instead we do this right after SHR
+> begins to boot and before any other filesystem is mounted on the new
+> rootfs.
 > 
-> [...]
+> Signed-off-by: Simon Busch <morphis@gravedo.de>
+> ---
+>  .../shr/initscripts-shr/palmpre/mountdevtmpfs.sh   |    9 +++++++++
+>  recipes/shr/initscripts-shr_0.0.1.bb               |    9 ++++++++-
+>  2 files changed, 17 insertions(+), 1 deletions(-)
+>  create mode 100644 recipes/shr/initscripts-shr/palmpre/mountdevtmpfs.sh
 > 
->> The problem was that I trusted lib_package to do the right thing. So the
->> real fix would be to add a -static package to lib_package.bbclass and to
->> add RDEPENDS_${PN}-static += "${PN}-dev" somewhere, because static libs
->> don't make much sense without develompent headers, right?
->>
->> Of course, this would create a different problem with upgrades, but I
->> would suspect that the number of users of static libraries on their
->> target machines is relatively small and, because a disappearing static
->> library doesn't create runtime problems, the installation of a new
->> -static package wouldn't impose a huge burden to the user.
->>
->> In case this solution was accepted: What's the policy for changing files
->> like lib_package.bbclass, in order to trigger an update of all relevant
->> packages? To bump every single PR?
+> diff --git a/recipes/shr/initscripts-shr/palmpre/mountdevtmpfs.sh
+> b/recipes/shr/initscripts-shr/palmpre/mountdevtmpfs.sh new file mode
+> 100644
+> index 0000000..dbeb7c0
+> --- /dev/null
+> +++ b/recipes/shr/initscripts-shr/palmpre/mountdevtmpfs.sh
+> @@ -0,0 +1,9 @@
+> +#!/bin/sh
+> +
+> +mount -t devtmpfs -o mode=0755,nr_inodes=0 devtmpfs /dev
+> +
+> +# Create additional nodes which devtmpfs does not provide
+> +test -c /dev/fd || ln -s /proc/self/fd /dev/fd
+> +test -c /dev/stdin || ln -s fd/0 /dev/stdin
+> +test -c /dev/stdout || ln -s fd/1 /dev/stdout
+> +test -c /dev/stderr || ln -s fd/2 /dev/stderr
+> diff --git a/recipes/shr/initscripts-shr_0.0.1.bb
+> b/recipes/shr/initscripts-shr_0.0.1.bb index e4dc736..ce76fbd 100644
+> --- a/recipes/shr/initscripts-shr_0.0.1.bb
+> +++ b/recipes/shr/initscripts-shr_0.0.1.bb
+> @@ -5,7 +5,7 @@ DEPENDS = ""
+>  RDEPENDS_${PN} = "procps"
+>  LICENSE = "GPL"
+>  PV = "0.0.1"
+> -PR = "r20"
+> +PR = "r21"
 > 
-> I looked deeper into lib_package.bbclass and its history and I saw that
-> it wasn't updated very often during the last years. It still uses
-> hardcoded paths and doesn't include some files which would get packaged
-> without lib_package.bbclass.
+>  RCONFLICTS_${PN} = "initscripts"
 > 
-> What lib_package.bbclass does now, compared to the defaults from
-> bitbake.conf:
+> @@ -32,6 +32,8 @@ SRC_URI = "file://alignment.sh \
+>  	   file://umountnfs.sh \
+>  	   "
 > 
-> 1.) It adds ${libdir}/*.a and /lib/*.a to FILES_${PN}-dev.
+> +SRC_URI_append_palmpre = " file://mountdevtmpfs.sh"
+> +
+>  inherit base
 > 
-> 2.) It adds ${bindir}/*-config to FILES_${PN}-dev.
+>  do_install () {
+> @@ -74,6 +76,11 @@ do_install () {
+>  	install -m 0755	${WORKDIR}/umountfs		${D}${sysconfdir}/init.d
+>  	install -m 0755	${WORKDIR}/umountnfs.sh		${D}${sysconfdir}/init.d
 > 
-> 3.) It creates an additional package ${PN}-bin, which contains all other
-> executables: ${bindir}/* ${sbindir}/* /bin/* /sbin/*
-> 
-> 4.) It doesn't package any of the following:
->             ${datadir}/pixmaps ${datadir}/applications \
->             ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
->             ${libdir}/bonobo/servers
-> 
-> In f624db1d3c7de3fcb3a9e76d388a8f9f8fedcf5c, Koen introduced
-> ${PN}-static packages, but lib_package.bbclass has not been updated
-> since then, which was one year ago.
-> 
-> Although it packages ${bindir}/*-config into FILES_${PN}-dev, it does
-> not include the required mangling applied by binconfig.bbclass. I think
-> that's wrong and just causes unnecessary confusion. IMO, lib_package
-> should either inherit binconfig or not, but leave FILES_${PN}-dev
-> untouched in any case.
-> 
-> Leaving FILES_${PN}-dev untouched would also allow lib_package to
-> automatically inherit some updates from bitbake.conf and to create
-> non-empty ${PN}-static packages.
-> 
-> I don't know whether #4 should be changed or whether those directories
-> were left out on purpose.
-> 
-> So, my current proposal looks like this:
-> 
-> -
-> inherit binconfig	# ... or not
-> 
-> PACKAGES += "${PN}-bin"
-> 
-> FILES_${PN} = "${libexecdir}/* ${libdir}/lib*${SOLIBS} \
->             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
->             ${base_libdir}/*${SOLIBS} \
->             ${datadir}/${PN} ${libdir}/${PN}/*"
-> 
-> FILES_${PN}-bin = "${bindir}/* ${sbindir}/* \
->                 ${base_bindir}/* ${base_sbindir}/*"
-> -
-> 
-
-How about this one:
-
-inherit binconfig
-
-PACKAGES =+ "${PN}-bin"
-FILES_${PN}-bin = "${bindir}/* ${sbindir}/* \
-                   ${base_bindir}* ${base_sbindir}/*"
-
-
-Does that work for you?
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMvp6FMkyGM64RGpERAmsTAJ0YDhVIcbXL59cei5Jrturv3zn6HwCfXydS
-APscbmlBpvYasE+7O+99ksE=
-=G5lN
------END PGP SIGNATURE-----
-
+> +	if [ "${MACHINE}" == "palmpre" ]; then
+> +		install -m 0755 ${WORKDIR}/mountdevtmpfs.sh ${D}${sysconfdir}/init.d
+> +		ln -sf ../init.d/mountdevtmpfs.sh
+> ${D}${sysconfdir}/rcS.d/S03mountdevtmpfs.sh +	fi
+> +
+>  #
+>  # Create runlevel links
+>  #
+-- 
+Klaus 'mrmoku' Kurzmann
 
 
