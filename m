@@ -1,38 +1,34 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1P8ZzB-00005e-H7
+	(envelope-from <morphis@gravedo.de>) id 1P8a0g-0003U4-2I
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Oct 2010 16:50:26 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id BD18F3149E32
+	Wed, 20 Oct 2010 16:52:54 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 9DB09275CE43; Wed, 20 Oct 2010 16:50:48 +0200 (CEST)
+Received: from [192.168.1.142] (p5489E00E.dip.t-dialin.net [84.137.224.14])
+	by gravedo.de (Postfix) with ESMTPSA id 9B833275CE2E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 16:49:06 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id KzaLG+S1Sid8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 16:49:00 +0200 (CEST)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 9C1933149C9A
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 16:48:59 +0200 (CEST)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Wed, 20 Oct 2010 14:48:59 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Wed, 20 Oct 2010 16:50:47 +0200 (CEST)
+Message-ID: <4CBF01C6.7030409@gravedo.de>
+Date: Wed, 20 Oct 2010 16:50:46 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12pre) Gecko/20101011 Shredder/3.1.6pre
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Oct 2010 14:48:59 +0000
-Message-Id: <1287586139-12885-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+References: <4CBEB7E8.5020109@nedap.com>	<AANLkTikBiKGuQYXCdi_QMirA7_AjQn9b0A0CWtmkMu90@mail.gmail.com>	<29F88E4E-18CC-4CD2-8A76-5C78ED4EDAC7@nikom.net>
+	<20101020140543.GN3324@jama>
+In-Reply-To: <20101020140543.GN3324@jama>
+X-Enigmail-Version: 1.1.2
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libsigc++-1.2.5: convert to new style staging
+Subject: Re: failure building gcc-cross-initial for armv5te
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,49 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2010 14:51:10 -0000
+X-List-Received-Date: Wed, 20 Oct 2010 14:53:33 -0000
+X-List-Received-Date: Wed, 20 Oct 2010 14:53:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb |   17 +----------------
- 1 files changed, 1 insertions(+), 16 deletions(-)
+On 20.10.2010 16:05, Martin Jansa wrote:
+> On Wed, Oct 20, 2010 at 09:26:32AM -0400, Nik wrote:
+>> What os are you compiling on?  Can you run the cross compile gcc from the command line and get the no input files message?
+> 
+> Related log from #oe - as I'm lazy to type it again :)
+> 
 
-diff --git a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
-index 6b347e5..7b7ecff 100644
---- a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
-+++ b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "A library for loose coupling of C++ method calls"
- SECTION = "libs"
- PRIORITY = "optional"
--PR = "r2"
-+PR = "r3"
- LICENSE = "GPL LGPL"
- SRC_URI = "${SOURCEFORGE_MIRROR}/libsigc/libsigc++-${PV}.tar.gz \
- 	   file://autofoo.patch \
-@@ -13,20 +13,5 @@ inherit autotools pkgconfig
- 
- FILES_${PN}-dev += "${libdir}/sigc++-*/"
- 
--acpaths = ""
--
--do_stage() {
--	install -d ${STAGING_LIBDIR}/sigc++-1.2/include
--	install -m 0644 sigc++/config/sigcconfig.h ${STAGING_LIBDIR}/sigc++-1.2/include/
--	oe_libinstall -so -C sigc++ libsigc-1.2 ${STAGING_LIBDIR}
--
--	install -d ${STAGING_INCDIR}/sigc++-1.2/sigc++
--	for f in sigc++/*.h
--	do
--		install -m 0644 $f ${STAGING_INCDIR}/sigc++-1.2/sigc++/
--	done
--}
--
--
- SRC_URI[md5sum] = "d0d1ffcae0eced97ef4f17ce0ba81352"
- SRC_URI[sha256sum] = "dcd6d3ea9a2c185b5286f80eefe9ac1402036b8fa21cfc742442d99579bd2b3e"
--- 
-1.7.1
+As I tried a little bit more I tracked it down to the commit
+f1148d26740e57cba4fe29fd78c234359868a50e ("binutils.inc: Filter out
+--with-sysroot for target binutils"). If you revert this one and do a
+fresh build (rm -rf tmp) everything compiles fine.
+
+regards,
+morphis
 
 
 
