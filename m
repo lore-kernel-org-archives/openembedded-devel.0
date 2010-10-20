@@ -1,33 +1,49 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P8dMW-0000FD-O1
+	(envelope-from <chase.maupin@ti.com>) id 1P8dOs-0000MR-0o
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Oct 2010 20:26:09 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LAL0042SPTXX932@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	20 Oct 2010 13:25:22 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 642D014AF64; Wed,
-	20 Oct 2010 14:25:09 -0400 (EDT)
-Date: Wed, 20 Oct 2010 14:25:09 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <AANLkTi=uKwjKYq5W4VwKXcNHdSJkxZnu_w4M9kkvVWoX@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20101020182509.GO11514@denix.org>
-MIME-version: 1.0
+	Wed, 20 Oct 2010 20:28:35 +0200
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9KIRuql024945
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Oct 2010 13:27:56 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9KIRtci029531
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Oct 2010 13:27:55 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9KIRtK6014702
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Oct 2010 13:27:55 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Wed, 20 Oct 2010 13:27:55 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 20 Oct 2010 13:27:54 -0500
+Thread-Topic: [oe] [PATCHv2] recipe licenses: update recipe LICENSE fields
+Thread-Index: ActwgxZA9tNIjvjVTmy+wO1mLlee2wAARMYg
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0803110B3388@dlee06.ent.ti.com>
 References: <1286812675-31626-1-git-send-email-chase.maupin@ti.com>
 	<AANLkTinR7QSaFb1FTzETX9=k9=JZh58iZgyD=7=So1uF@mail.gmail.com>
 	<131E5DFBE7373E4C8D813795A6AA7F080310FFA2BC@dlee06.ent.ti.com>
-	<AANLkTi=uKwjKYq5W4VwKXcNHdSJkxZnu_w4M9kkvVWoX@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.13
-X-SA-Exim-Mail-From: denis@denix.org
+	<i8vln6$njo$1@dough.gmane.org>
+	<AANLkTik+qU9YfpoHybY=v87sVGOE9M8RjdKgfgwfL-JF@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310FFA314@dlee06.ent.ti.com>
+	<20101020181558.GN11514@denix.org>
+In-Reply-To: <20101020181558.GN11514@denix.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCHv2] recipe licenses: update recipe LICENSE fields
@@ -44,81 +60,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2010 18:26:09 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
-Content-disposition: inline
+X-List-Received-Date: Wed, 20 Oct 2010 18:28:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 11, 2010 at 08:53:41PM +0200, Frans Meulenbroeks wrote:
-> 2010/10/11 Maupin, Chase <chase.maupin@ti.com>:
-> >
-> >> [...]
-> >>
-> >> > -LICENSE =3D "GPLv2"
-> >> > +LICENSE =3D "GPLv2+"
-> >>
-> >> Doe we want this?
-> >> I think most GPLv2 code carries the clause:
-> >>
-> >> "This program is free software; you can redistribute it and/or
-> >> modify it under the terms of the GNU General Public License
-> >> as published by the Free Software Foundation; either version 2
-> >> of the License, or (at your option) any later version."
-> >>
-> >> Yet currently virtually all of these have GPL or GPLv2 as LICENS=
-E
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Denys Dmytriyenko
+> Sent: Wednesday, October 20, 2010 1:16 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCHv2] recipe licenses: update recipe LICENSE fields
+>=20
+> On Mon, Oct 11, 2010 at 02:53:59PM -0500, Maupin, Chase wrote:
+> > >
+> > > I'm not sure if it is a policy. Haven't seen it being pulished as suc=
+h.
+> > > Having said that, I have no problems with it (although there is no
+> > > problem with enforcing patents or so for v2+ , as that still falls
+> > > under the v2 umbrella).
+> > >
+> > > I guess most of our recipes that say GPLv2 are wrong and are v2+.
+> > > It might be hard to distinguish between these though, it could well b=
+e
+> > > that the license file says v2 and a comment in the code says v2+.
+> > > Glad I do not have to deal with this any more....
 > >
 > > Frans,
 > >
-> > My original version of this patch was just changing GPL to GPLv2 =
-for=20
-> > example. =A0But I was asked about whether it should be GPLv2+ whi=
-ch I guess=20
-> > is more indicative of the "or later" clause. =A0Does anyone have =
-good=20
-> > guidance here on how to denote things that are GPLv2 only for now=
- (like=20
-> > git which Linux has a note in the COPYING file about it being GPL=
-v2) and=20
-> > things that are GPLv2 or later version? =A0I'm trying for consist=
-ency here=20
-> > but I guess there doesn't seem to be a set policy for how the LIC=
-ENSE=20
-> > field should be set.
+> > That is exactly the issue that is so annoying.  The COPYING file usuall=
+y
+> > says the standard GPLv2, but if you go and read the license text in the
+> code
+> > that is where it says GPLv2 (or later) so GPLv2+.  This patch was
+> modified
+> > to go off the license in the code since that is more likely what the
+> > developer actually intended and not an auto-generated file.
+> >
+> > Koen,
+> >
+> > What about GPLv3 licensed files with an exception?  Right now I have
+> that as
+> > GPLv3+exception.  Was there ever any discussion about how to handle
+> these?
+> > I am trying to indicate that it is not a standard GPLv3 license.
 >=20
-> I have no personal preference, but was just noting the difference. =
-How
-> do others feel about thi?
+> Chase,
 >=20
-> BTW: please don't take this personal. I really appreciate you doing
-> this, but I also am very aware that it is a boring and non-rewarrdi=
-ng
-> job, so we should better aim at getting it right te first time.
+> Does it say what kind of exception it is? If it has a name, it's better t=
+o
+> specify it. For libgcc/libstdc++ I ended up specifying "GPLv3 with GCC
+> RLE",
+> which stands for GCC Runtime Library Exception:
 
-Actually, it became a de facto standard in the community to different=
-iate=20
-between strict GPLv2 and "GPLv2 or later" (I guess we should thank GP=
-Lv3 for=20
-this...)
+Denys,
 
-Googling for the "GPLv2+" term will show many OSS projects clarifying=
- it this=20
-way. As well as many project catalogs and listings grouping by "GPLv2=
-+" vs=20
-"GPLv2"...
+The COPYING.EXCEPTION file has the title "AUTOCONF CONFIGURE SCRIPT EXCEPTI=
+ON".  Would you like this changed to "GPLv3 with Autoconf CSE"?
 
-In OE we've been using this term for some time now. Although, still t=
-oo many=20
-old recipes use old notations, sometimes even as generic as just plai=
-n "GPL"=20
-w/o specifying the exact version. It wasn't as critical before, but t=
-hese days=20
-OE is being adopted in corporate environments and proper licensing be=
-came=20
-quite important.
-
---=20
-Denys
-
+>=20
+> http://www.gnu.org/licenses/gcc-exception.html
+>=20
+> --
+> Denys
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
