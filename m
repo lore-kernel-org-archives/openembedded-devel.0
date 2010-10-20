@@ -1,53 +1,37 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from smtprelay-b12.telenor.se ([62.127.194.21])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1P8iBs-0002nM-Oq
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1P8iKq-0002z1-OU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 01:35:29 +0200
-Received: by wwi17 with SMTP id 17so1591070wwi.24
+	Thu, 21 Oct 2010 01:44:45 +0200
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 0A2B4EB27F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 16:34:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=zXbF4XBS7tPV4pNOY+deBuN45O3RX1bMul+DwJNmZVo=;
-	b=NCA8shyl07WgpwWeDrgAc//pqsnfyfX+HTQGRUAJH8N9BcbUu7OqZdeW4RnVQWUe/1
-	0d5A8dgIXRcjJEp2FmsZXlc+aOcM8YT1fcxTe6Oo3fLUdSr2fwUsR7vBITUxBEiQs4/Q
-	A5MrvK7bmwpEsXP+N6r4XYkzU2HWp8zi9e4nM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=CKq43TGU/OWE/zvfixG2uu0vK8YilXVmxVUTi4/fwe3kcM3u7Flx+zb79ubmoq/XPN
-	CovbaUkbyUAb3DXmkt9fjETKKwtLBrpJLKCv9i4EkAFnvlRAHFXfX0NOQxdaLwAQl0dP
-	GqZVp8BU8DY49CfZa2+xyS7bZAoUiBvBd9qJg=
-Received: by 10.216.54.147 with SMTP id i19mr6615848wec.59.1287617692574; Wed,
-	20 Oct 2010 16:34:52 -0700 (PDT)
+	Thu, 21 Oct 2010 01:44:08 +0200 (CEST)
+X-SENDER-IP: [83.227.56.243]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AhcaACcbv0xT4zjzPGdsb2JhbAAHh2mLdY12AQEBATXAJoVKBIpL
+X-IronPort-AV: E=Sophos;i="4.57,357,1283724000"; d="scan'208";a="143150242"
+Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.250]) ([83.227.56.243])
+	by ipb1.telenor.se with ESMTP; 21 Oct 2010 01:44:08 +0200
+Message-ID: <4CBF7EC6.3050905@atmel.com>
+Date: Thu, 21 Oct 2010 01:44:06 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Thunderbird 2.0.0.24 (Windows/20100228)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.139 with HTTP; Wed, 20 Oct 2010 16:34:32 -0700 (PDT)
-In-Reply-To: <20101020232906.GY11514@denix.org>
-References: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
-	<1287257081-25608-1-git-send-email-Martin.Jansa@gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F0803110B3131@dlee06.ent.ti.com>
-	<AANLkTimWmTWAkCPAabOagq2S5gtfMztov8xiBcK7q_Vh@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F0803110B3140@dlee06.ent.ti.com>
-	<20101019192458.GB6202@denix.org> <20101020232906.GY11514@denix.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 20 Oct 2010 16:34:32 -0700
-X-Google-Sender-Auth: SVpvCrpXwxljGGwM7wyVJFCV5Bo
-Message-ID: <AANLkTikb49yz4h3O==qzv8S+WhP6uqT79zqpqEtRMpwK@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>	<201010181520.30454.marcin@juszkiewicz.com.pl>	<4CBC4DD4.3010908@atmel.com>	<i9hpii$gf2$1@dough.gmane.org>	<4CBC7F6A.9040000@atmel.com>	<AANLkTi=xBMvDEKjiaNKy7zijs4DCZwhrSDr=gHVkMh_T@mail.gmail.com>	<4CBCD3FC.5090305@atmel.com>
+	<4CBD02B8.7020805@balister.org>
+In-Reply-To: <4CBD02B8.7020805@balister.org>
+X-SA-Exim-Connect-IP: 62.127.194.21
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org, martin.jansa@gmail.com
-Subject: Re: [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to OVERRIDES when it's empty
+Subject: Re: [PATCH 1/5] Use common files for AT91SAM9 configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,26 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2010 23:35:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Oct 2010 23:44:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 20, 2010 at 4:29 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+Philip Balister skrev:
+> On 10/18/2010 07:10 PM, Ulf Samuelsson wrote:
+>> Khem Raj skrev:
+>>> On Mon, Oct 18, 2010 at 10:10 AM, Ulf Samuelsson
+>>> <ulf.samuelsson@atmel.com>  wrote:
+>>>> Koen Kooi skrev:
+>>>>> On 18-10-10 15:38, Ulf Samuelsson wrote:
+>>>>>> Marcin Juszkiewicz skrev:
+>>>>>>> Dnia sobota, 16 pazdziernika 2010 o 14:50:02 
+>>>>>>> ulf.samuelsson@atmel.com
+>>>>>>> napisaB(a):
+>>>>>>>
+>>>>>>>> +++ b/conf/machine/include/at91-2.6.30.inc
+>>>>>>>> +++ b/conf/machine/include/at91-2.6.32.inc
+>>>>>>> Do you plan to duplicate that file with each kernel you will 
+>>>>>>> produce?
+>>>>>>> Create include/at91-sam9.inc and put it there.
+>>>>>>>
+>>>>>>> Regards,
+>>>>>> This is to allow different kernel versions for different AT91 chips.
+>>>>>> This allows both a "stable" version, and a development kernel
+>>>>>> to be easily handled.
+>>>>>> The file defines (amongst other things) the
+>>>>>> * kernel version,
+>>>>>> * u-boot version
+>>>>>> * at91bootstrap version
+>>>>>> so you need one file per version.he
+>>>>> NAK! Machines don't get to decide versions! Please revert that commit
+>>>>> and come up with a better way, e.g. default_preference in the 
+>>>>> recipes or
+>>>>> distro include files.
+>>>> If I look at the machine files, almost all of them provide
+>>>> a preferred kernel / u-boot. Some also provide version.
+>>>
+>>> we should avoid pinning versions there. Choosing a type is fine.
+>>>
+>>
+>> Why ?
+>> Is it because it affect rebuild time?
+>> It would be good to understand what problems people see with this.
+>>
+>> We are pinning the version to a specific machine, in the kernel recipe.
+>> If we add a new recipe, then we can, by increasing the priority
+>> force a different kernel to be built.
+>> This will not affect anything else.
+>>
+>> If the version is in the machine configuration, then a change of
+>> kernel version could force a total rebuild, or?
+>>
+>> Any other problem?
+> 
+> In general, if you pin a version in a machine file, consider what 
+> happens in the case of a distro that supports many machines. Your 
+> machine build one version of something and the other machines build 
+> another.
+> 
+> now do an update, upgrade on a package the version you chose may change, 
+> or it may change on the other machines. There are likely some packages 
+> you can pin version in machine files, but in general, it will cause 
+> problems for distros that support more than just one machine at a time.
+> 
+> Philip
 
-> I see that Martin's patch was marked as "Superseded" and archived - is
-> there a
-> new patch coming? Or are there any side-effects of this patch? I would
-> definitely like to push this patch ASAP to address our immediate problem.
->
 
-The original problem with empty overrides was the FILESPATH issue, which was
-fixed by the commit that sanitized FILESPATH, hence the superseded.  Clearly
-there's another issue with them, so this patch is necessary.  Feel free to
-apply it with modification and push it, we can always drop it when we bump
-the minimum bitbake version to 1.10.x.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+We are only talking about the kernel/u-boot/at91bootstrap.
+Not any arbitrary applications.
+I do agree that the distro should handle versioning for the normal file 
+system.
+
+
+BR
+Ulf Samuelsson
+
 
