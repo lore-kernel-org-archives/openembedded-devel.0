@@ -1,40 +1,42 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P8rdb-0003Yk-Pr for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 11:40:48 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P8rcy-0002H1-I8 for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 11:40:04 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:40:04 +0200
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dp@xora.org.uk>) id 1P8rpV-00018i-23
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Oct 2010 11:53:01 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id BB4C9A5128
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:40:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 21 Oct 2010 10:52:23 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id gp+BzF2-mDco
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Oct 2010 10:52:23 +0100 (BST)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 9604EA510E
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Oct 2010 10:52:22 +0100 (BST)
+Message-ID: <4CC00D57.4070601@xora.org.uk>
+Date: Thu, 21 Oct 2010 10:52:23 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.11) Gecko/20101013 Lightning/1.0b2 Thunderbird/3.1.5
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 21 Oct 2010 11:35:21 +0200
-Message-ID: <i9p1gp$7q4$2@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <i9p1d0$7q4$1@dough.gmane.org>
+In-Reply-To: <i9p1d0$7q4$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] splitting the metadata into multiple bblayers
+Subject: Re: [RFC] turning conf/machine into a set of bblayers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +50,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 09:41:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 Oct 2010 09:53:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 21/10/2010 10:33, Koen Kooi wrote:
+> Hi,
+>
+> Recipes/linux is a mess and recipes/u-boot is as well. It would be a
+> nice topic for OEDEM to see if we discuss switching to a poky BSP model.
+> It would boil down to:
+>
+> 1 base bblayer with shared files:
+> * conf/machine/include
+> * recipes/linux/*.inc
+>
+> 1 bblayer per machine or SOC_FAMILY containing:
+> * machine.conf
+> * first and second stage bootloaders
+> * kernel
+>
+> So, what are peoples thoughts on this? I haven't thought this through
+> myself, so feel free to point out any show stoppers.
+> I do not want this to turn into a "splitting the metadata" discussion,
+> while I'm all for that, it really is a seperate effort and discussion.
+> But any bblayer style split would benefit from OE being a collection of
+> git submodules instead of a monolithic tree[1].
+>
+> Regards,
+>
+> Koen
+>
+> [1] Provided git submodules stop sucking so hard in future git versions
+This is something I have advocated before but never formally presented a
+RFC to OEDEM.
 
-Hi,
+With this model it quickly becomes clear which machines have support.
 
-Please discuss splitting the metadata here and not in the conf/machine
-thread :)
+The only problem comes with BLAH_machine type overides. Are they done as
+amend.inc (or whatever the current method is) in overlay or are they
+allowed into main repo. I think amend.inc in this case is probably the
+way to go.
 
-Have a look at http://git.pokylinux.org/cgit/cgit.cgi/poky/tree/meta/ to
-see how RP has done it.
+Probably some form of dummy machine (maybe x86) needs to be defined in
+main repo just so main repo can be parsed.
 
-regards,
+Graeme
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMwAlZMkyGM64RGpERAjzTAKCpsBkdNMowbxWX75nNxZqXWXq4JACbBekF
-DvCpb8WWbvL1tImA8eu4m+M=
-=Oduw
------END PGP SIGNATURE-----
 
 
 
