@@ -1,44 +1,44 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1P8nHo-00009n-B9
+	(envelope-from <raj.khem@gmail.com>) id 1P8nvR-0005OD-MR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 07:01:57 +0200
-Received: from compute3.internal (compute3.nyi.mail.srv.osa [10.202.2.43])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id E7CCA23D
+	Thu, 21 Oct 2010 07:42:54 +0200
+Received: by ywl5 with SMTP id 5so2654598ywl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 01:01:21 -0400 (EDT)
-Received: from frontend1.messagingengine.com ([10.202.2.160])
-	by compute3.internal (MEProxy); Thu, 21 Oct 2010 01:01:21 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=RVY66tl0dZIXClyDeVYeE2q4MgU=;
-	b=htsd15nLBQ6YexzOR/oM5YYiGE3KRQ3AqYB7ks8K7mpfhwoqEF3OSQSkUrWCDfZtYFv4jQnSg9tYe1Nm9DQOoVGOJUYXG+oivI4MazVy9U2Hvry1xyFbJm2GPuGT96AiEE83q8oo8Kn9z8YTFv4rI1Ba6Rrr8qW0bxQy75SgKL8=
-X-Sasl-enc: EuTMPiUuuxwKd2OceU2W+aLYtUhXA4zYM1StTNZKFvqi 1287637281
-Received: from [192.168.1.37] (hnvr-4d079674.pool.mediaWays.net [77.7.150.116])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 64C28408728
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 01:01:21 -0400 (EDT)
-Date: Thu, 21 Oct 2010 07:03:07 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201010151039.08619.marcin@juszkiewicz.com.pl>
-Message-ID: <alpine.LNX.2.00.1010210654480.9653@asterix.crazy-teaparty.dyndns.org>
-References: <201010151039.08619.marcin@juszkiewicz.com.pl>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Wed, 20 Oct 2010 22:42:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=X7oyD8S3u6JnGkWS/uiU067cgmVn0yp+DW02DN6bGx4=;
+	b=ViIVr8N6lJ5NAwOp0LRK+jJzJw6FS1D5+05I6GsRxpc/Uww0FlGX7GPKzw2L+Nveun
+	lZOCGqA92D9pzZTFpkZA7x8Te1P8knca9Hg5mFiXCRcCFn0X8ddyIXcCTPlxncgUYI9j
+	q5rkgjEQoZcyIWc7lumUlTDP/TqxdAj5/4VX4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=jFY5cVoU5KAE5h4QzojoGRfn+9oZWxXZYw0VQQFlF2Ym7GfjME7bWCI4z18YWEhNWl
+	3J+G6mKqYQcc1GlxSczCqm4IDAAS1PNRqEEAEUHU3qxBRxwr6qLjmOApeqJX7gCyY9FQ
+	aRc92pz5ZSfwgOpaNLBVyNqzqbMB6ORqFjfes=
+Received: by 10.90.113.13 with SMTP id l13mr1055366agc.54.1287639733760; Wed,
+	20 Oct 2010 22:42:13 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Received: by 10.90.86.6 with HTTP; Wed, 20 Oct 2010 22:41:53 -0700 (PDT)
+In-Reply-To: <AANLkTinjTE+9Ppy--CKhgZtfTrvZR65WuExevm1KhNQf@mail.gmail.com>
+References: <AANLkTi=BRC8V5VRWuBKac750eoS79eeBtaiyDOYGwzgo@mail.gmail.com>
+	<AANLkTinjTE+9Ppy--CKhgZtfTrvZR65WuExevm1KhNQf@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 20 Oct 2010 22:41:53 -0700
+Message-ID: <AANLkTinJJ52aEz4JNj21rJ6S6XyB7JQPkd2BQ1XU2A-F@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: RFC: remove old kernels
+Subject: Re: [PATCH] linux-gumstix-2.6.15 & gumstix_2.6.5-gnalm1: removed outdated recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,30 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 05:01:57 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Thu, 21 Oct 2010 05:42:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello Marcin,
-
-On Fri, 15 Oct 2010, Marcin Juszkiewicz wrote:
-
-> Hi
+On Wed, Oct 20, 2010 at 8:08 PM, Steve Sakoman <sakoman@gmail.com> wrote:
+> On Tue, Oct 19, 2010 at 12:11 AM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> Could not easily reply to the message because it was so long (gmail
+>> took ages) but:
+>>
+>> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 >
-> recipes/linux/ contains 235 recipes. I would like to propose cleaning:
+> Acked-by: Steve Sakoman <steve@sakoman.com>
 >
-> 1. drop 2.4 kernels - if someone still needs them then .oz354x and .stable
->   branches have them.
 
-I wouldn't mention the .stable branch in anything related to removals. 
-Receipes from that era are so different that mixing things from both 
-branches is impossible.
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
-So "... testing_2010-09-27 has them" ;-)
-
-Vitus
-
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+> Steve
+>
+>
+>> Ash, do you have commit access, or does someone needs to push this for you?
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
