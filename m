@@ -1,41 +1,52 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1P8siE-0004X2-QU
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <kristoffer.ericson@gmail.com>) id 1P8slg-0004et-Uf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 12:49:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9LAn0dL001572
+	Thu, 21 Oct 2010 12:53:09 +0200
+Received: by ewy1 with SMTP id 1so3020043ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:49:00 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 01187-09 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:48:56 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9LAmr8L001566
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:48:53 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 21 Oct 2010 03:52:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:reply-to:references:mime-version:content-type
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=YNP4HsEStiMBKJryQAwj7lGbg/XzsRuMRzsSIOp6yrA=;
+	b=kfKoPIHVwLzLtiUrjCHmH2EXA91ClTqnchZliFlXpDk+GSCZEDrORY4Ixc4a0Htc56
+	3NPWfX71VXTTthwlvaeBQUlNwPKi8Aq+8c8iS3qHzwZrwTOrhcRtT+9EMyVJZtAoIGoo
+	tD4GWy42krvqtskdP0xzoFwiBUTbLXCrVYMVk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:reply-to:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=IPKvjHze06nCs/xYhzbtNEVjDPETxgLpa9rto92RuX5GNbHWDj4D26Oa4rfag/htpk
+	UuNcG4hGR4v17lMh7kBjHgOxeXAuK2JRE9xT7gR91qPMF69+AaO84zWW/PyLcgTGwxPI
+	Ex4Qieh1UPSlHt652Hv44GZWmOsr2opD2LxKc=
+Received: by 10.14.37.10 with SMTP id x10mr447360eea.33.1287658353785;
+	Thu, 21 Oct 2010 03:52:33 -0700 (PDT)
+Received: from localhost (c-fedae555.010-30-6c6b7012.cust.bredbandsbolaget.se
+	[85.229.218.254])
+	by mx.google.com with ESMTPS id w20sm1626324eeh.0.2010.10.21.03.52.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 21 Oct 2010 03:52:32 -0700 (PDT)
+Date: Thu, 21 Oct 2010 12:56:05 +0200
+From: Kristoffer Ericson <kristoffer.ericson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <i9p2uf$f40$1@dough.gmane.org>
-References: <i9p1d0$7q4$1@dough.gmane.org> <4CC00D57.4070601@xora.org.uk>
-	<i9p2uf$f40$1@dough.gmane.org>
-Date: Thu, 21 Oct 2010 11:48:42 +0100
-Message-ID: <1287658122.16386.444.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20101021105605.GB861@boggieman.bredbandsbolaget.se>
+References: <201010151039.08619.marcin@juszkiewicz.com.pl>
+	<20101018201429.GA818@boggieman>
+	<201010190927.27217.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+In-Reply-To: <201010190927.27217.marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: kristoffer.ericson@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: Re: RFC: remove old kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,54 +60,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 10:49:35 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Oct 2010 10:53:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2010-10-21 at 11:59 +0200, Koen Kooi wrote:
-> The downside of amend.inc is the de-sync when the recipe gets updated,
-> but not the overlay. You run the risk of using a version without the
-> overrides that way.
-> Maybe some fancy scripts, (pre-)commit hooks or just old fanishioned
-> review on the ml could solve those type of issues.
+On Tue, Oct 19, 2010 at 09:27:26AM +0200, Marcin Juszkiewicz wrote:
+> Dnia poniedziałek, 18 października 2010 o 22:14:29 Kristoffer Ericson 
+> napisał(a):
+> > > 2. Drop kernels older then 2.6.20 - it was over 3 years ago so if someone
+> > > uses older one then probably also uses 3 years old OE. 
+> > 
+> > Not sure that this is a good idea really. As an example, the best kernel
+> > for the hp6xx is the 2.6.17 (yes its old I know, but everything works).
+> > For the hp7xx its currently 2.6.19 (although its changing shortly to
+> > 2.6.34).
 > 
-> How do file overrides like
-> recipes/netbase/netbase/beagleboard/interfaces get handled in a
-> bblayer/amend.inc world?
+> Thats why I wrote "if you care about something raise your hand". As you are 
+> maintainer of hp[67]xx machines and you know that 2.6.17/19 are best for them 
+> then they stay.
+>  
+> > So how about putting the limit somewhat lower :) ? Like 2.6.15?
+> 
+> How about 2.2.2 one?
 
-Taking a poky example of formfactor which is a very similar situation,
-create a .bbappend file:
+Sarcasm noted and throwned out the window :P As long as those two kernels
+stay Im satisfied :)
 
-http://git.pokylinux.org/cgit/cgit.cgi/poky/tree/meta-emenlow/packages/formfactor/formfactor_0.0.bbappend
-
-with the contents of:
-
-FILESEXTRAPATHS := "${THISDIR}/${PN}"
-PRINC = "1"
-
-and place the appropriate files underneath as usual:
-
-http://git.pokylinux.org/cgit/cgit.cgi/poky/tree/meta-emenlow/packages/formfactor/formfactor/emenlow/machconfig
-
-We should make it a hard fail if a .bbappend is found with no
-corresponding .bb file, I'm not sure if that happens or not at the
-moment.
-
-I've also been thinking a lot about FILESPATH and have been thinking
-that making the list of defaults small and having recipes specify if
-they use overrides would be a good idea.
-
-E.g. so above you'd have to specify:
-
-"${THISDIR}/${PN}/${MACHINE}" explicitly.
-
-Cheers,
-
-Richard
-
-
-
-
-
+> 
+> Regards, 
+> -- 
+> JID:      hrw@jabber.org
+> Website:  http://marcin.juszkiewicz.com.pl/
+> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
