@@ -1,17 +1,17 @@
-Received: from smtplq-out5.aruba.it ([62.149.158.25] helo=smtplq04.aruba.it)
+Received: from smtplq-out5.aruba.it ([62.149.158.25] helo=smtplq01.aruba.it)
 	by linuxtogo.org with smtp (Exim 4.69)
 	(envelope-from <pierluigi.passaro@phoenixsoftware.it>)
-	id 1P94GQ-0005kS-1Y for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 01:09:39 +0200
-Received: (qmail 8529 invoked by uid 89); 21 Oct 2010 23:02:20 -0000
-Received: from unknown (HELO smtp2.aruba.it) (62.149.128.201)
-	by smtplq04.aruba.it with SMTP; 21 Oct 2010 23:02:20 -0000
-Received: (qmail 3003 invoked by uid 89); 21 Oct 2010 23:02:19 -0000
+	id 1P94fE-0002SF-HJ for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Oct 2010 01:35:17 +0200
+Received: (qmail 706 invoked by uid 89); 21 Oct 2010 22:34:35 -0000
+Received: from unknown (HELO smtp4.aruba.it) (62.149.128.201)
+	by smtplq01.aruba.it with SMTP; 21 Oct 2010 22:34:35 -0000
+Received: (qmail 24346 invoked by uid 89); 21 Oct 2010 22:34:35 -0000
 Received: from unknown (HELO ?192.168.8.32?)
 	(pierluigi.passaro@phoenixsoftware.it@78.12.139.28)
-	by smtp2.ad.aruba.it with SMTP; 21 Oct 2010 23:02:19 -0000
-Message-ID: <4CC0C67C.6060806@phoenixsoftware.it>
-Date: Fri, 22 Oct 2010 01:02:20 +0200
+	by smtp4.ad.aruba.it with SMTP; 21 Oct 2010 22:34:35 -0000
+Message-ID: <4CC0BFFC.7090600@phoenixsoftware.it>
+Date: Fri, 22 Oct 2010 00:34:36 +0200
 From: Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>
 User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
@@ -24,7 +24,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: external-toolchain-csl and libtool 2.4
+Subject: LINGUAS_INSTALL and external-toolchain-csl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,30 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 23:09:39 -0000
-Content-Type: multipart/mixed; boundary="------------030504010502080709090604"
-
---------------030504010502080709090604
+X-List-Received-Date: Thu, 21 Oct 2010 23:35:17 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Hi all,
-LIBTOOL_HAS_SYSROOT feature has been recently enabled on Angstom 2010.x 
-distro.
+commit 4271024e26551da70e710cef6d2dcbfa8740b007 
+<http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?h=master&id=4271024e26551da70e710cef6d2dcbfa8740b007> 
+dated 2010-10-10 01:28:01 (GMT) introduced locale-base-* packages in the 
+build list.
+However CodeSourcery toolchain does not provide them, and using CSL 
+cause bitbake choosing eglibc.
+This is causing messages like
 
-However, using CodeSourcery toolchain, this feature lead to use CSL 
-sysroot as search path, that is generally different from 
-${STAGING_DIR_TARGET}${libdir} folder used for packages.
+ERROR: Multiple .bb files are due to be built which each provide 
+virtual/arm-none-linux-gnueabi-libc-for-gcc 
+(/home/gigi/code/import/openembedded/recipes/meta/external-toolchain-csl.bb 
+/home/gigi/code/import/openembedded/recipes/eglibc/eglibc_2.9.bb).
 
-At present I worked around the problem with the attached patch, but I 
-was wondering if this could be a misconfiguration or a bug.
+In classes/image.bbclass, 
+<http://cgit.openembedded.org/cgit.cgi/openembedded/tree/classes/image.bbclass?h=master> 
+commenting out line
 
-Any suggestion will be appreciated.
+|LINGUAS_INSTALL_linux += "${@' '.join(map(lambda s: 'locale-base-%s' % s, '${IMAGE_LINGUAS}'.split()))}"
+|
+
+the ERRORs disappears.
+
+Is this a misconfiguration in my conf ?
 
 Regards
 Gigi
-
 -- 
+
 Ing. Pierluigi Passaro
 Viale Don Luigi Sturzo 34
 30174 Venezia Mestre
@@ -72,57 +81,4 @@ Web: www.phoenixsoftware.it
 P.IVA 03884060272
 
 
---------------030504010502080709090604
-Content-Type: text/x-patch;
- name="csl-do-not-use-sysroot.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="csl-do-not-use-sysroot.patch"
 
-diff --git a/conf/distro/include/toolchain-external.inc b/conf/distro/include/toolchain-external.inc
-index 59b6470..cf8b79a 100644
---- a/conf/distro/include/toolchain-external.inc
-+++ b/conf/distro/include/toolchain-external.inc
-@@ -8,3 +8,5 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-toolchain-${TOOLCHAIN
- 
- TOOLCHAIN_VENDOR ?= "${TARGET_VENDOR}"
- TARGET_VENDOR := "${TOOLCHAIN_VENDOR}"
-+
-+LIBTOOL_HAS_SYSROOT = "no"
-diff --git a/recipes/libtool/libtool.inc b/recipes/libtool/libtool.inc
-index 97fdb30..71bd243 100644
---- a/recipes/libtool/libtool.inc
-+++ b/recipes/libtool/libtool.inc
-@@ -18,7 +18,7 @@ SRC_URI = "${GNU_MIRROR}/libtool/libtool-${PV}.tar.gz \
-            file://trailingslash.patch \
-           file://prefix-manpage-fix.patch \
-           file://resolve-sysroot.patch \
--          file://use-sysroot-in-libpath.patch \
-+          ${@['file://do-not-use-sysroot-in-libpath.patch','file://use-sysroot-in-libpath.patch'][bb.data.getVar('LIBTOOL_HAS_SYSROOT', d, 1) == 'yes']} \
-           "
- do_configure_prepend () {
-        if ${@['true', 'false'][bb.data.inherits_class('native', d) or bb.data.inherits_class('sdk', d) or (bb.data.getVar('PN', d, 1) == 'libtool-cross')]}
---- /dev/null
-+++ b/recipes/libtool/libtool-2.4/do-not-use-sysroot-in-libpath.patch
-@@ -0,0 +1,18 @@
-+When using sysroot we should append it to libdir which is helpful in cross builds
-+as the system is staged in the sysroot. For normal build i.e. when lt_sysroot is not
-+set it will still behave same and add -L/usr/lib to relink command
-+
-+-Khem
-+
-+Index: libtool-2.4/libltdl/config/ltmain.m4sh
-+===================================================================
-+--- libtool-2.4.orig/libltdl/config/ltmain.m4sh
-++++ libtool-2.4/libltdl/config/ltmain.m4sh
-+@@ -6122,7 +6122,6 @@ func_mode_link ()
-+ 	      fi
-+ 	    else
-+ 	      # We cannot seem to hardcode it, guess we'll fake it.
-+-	      add_dir="-L$libdir"
-+ 	      # Try looking first in the location we're being installed to.
-+ 	      if test -n "$inst_prefix_dir"; then
-+ 		case $libdir in
-
-
---------------030504010502080709090604--
