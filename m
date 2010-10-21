@@ -1,33 +1,33 @@
 Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1P8vI2-0007Zh-HE
+	(envelope-from <chasemaupin03@gmail.com>) id 1P8vHt-0007X8-Os
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 15:35:04 +0200
-Received: by mail-gy0-f175.google.com with SMTP id 5so802562gyd.6
+	Thu, 21 Oct 2010 15:35:07 +0200
+Received: by mail-gy0-f175.google.com with SMTP id 5so802555gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 06:34:06 -0700 (PDT)
+	Thu, 21 Oct 2010 06:33:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=yxTgOrdMRER43ZIFXBrCdWjKGp7yMYqoWphTmKKm4z8=;
-	b=ouLPoLYPnFOUCF9LFNRkEpTE66LJ6QW6vhK9kghHDfPi8ItIkafSdIVArMLi/FdZ4b
-	6In4WkYjC2HYWA5DL8dnf4wxIedscOBfw67USWOTPJ5NxJRVHFin8llXNHXAa1U68/T2
-	zPrEm0z3G1P5ln40cjGIlapY0u7YrTb1W+gf0=
+	bh=87e0bJs/MPP+dZptqzDapgIBtH9RN3D+HCYURWXnC98=;
+	b=HRmeS6RNaLKTQWCClvFce+Y4PwGoJ7MEtEbRMwl5zAyIznSNReEbqDldnwSUdk6TLw
+	ukg35LpEKgTpDHVvZtWtZ3weNc8gMRkLFH7q/+c53L6riGuAVJo32Vg0NWXhW3vNf4MP
+	rbKPlx3f9HHy7R5ZyCzWaE20R/nrT40s5uGo0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=avfW/AwgTX+QvvrJ+sqCDKBCC9K8Y2cCMuk/piubFX22vlXiLnx7BUI3v80LRVaU+2
-	c1qxZnnqLqGL+bdagQwHrKrIqdf1rabe4lRvzjwxXd97UCdFgs2/4uozSMBwDehnguzi
-	Ptp9aEJy1lAHMfMSMYmKJr1EB2tEzOF2as5Zk=
-Received: by 10.150.131.3 with SMTP id e3mr3624292ybd.343.1287668046532;
-	Thu, 21 Oct 2010 06:34:06 -0700 (PDT)
+	b=edf064EZpfkmGfqNjrlE1HRf3rhiovLN3c2/uUI3pef1uSyW4uXqXPZ+2+fQ/ngef5
+	deWhJbm3e6/NnVc4QOEZI7PlPihvmjKHy88b7bmkzRJgI4WDV1gYjCCkn3JzvnBItElx
+	SKOC19oLrgRc6CBM4n0OVvKx3aW9a0VcMO8OY=
+Received: by 10.150.192.21 with SMTP id p21mr3759505ybf.271.1287668038341;
+	Thu, 21 Oct 2010 06:33:58 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.34.05
+	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.33.57
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Oct 2010 06:34:05 -0700 (PDT)
+	Thu, 21 Oct 2010 06:33:57 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Oct 2010 08:33:30 -0500
-Message-Id: <1287668010-11310-23-git-send-email-Chase.Maupin@ti.com>
+Date: Thu, 21 Oct 2010 08:33:24 -0500
+Message-Id: <1287668010-11310-17-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
 References: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
@@ -36,11 +36,11 @@ X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 22/22] xorg-headers-native: update package LICENSE
+Subject: [PATCH 16/22] quilt: update package LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,19 +61,22 @@ X-List-Received-Date: Thu, 21 Oct 2010 13:35:10 -0000
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/xorg-lib/xorg-headers-native.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes/quilt/quilt.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/xorg-lib/xorg-headers-native.bb b/recipes/xorg-lib/xorg-headers-native.bb
-index e303c18..ce90fc0 100644
---- a/recipes/xorg-lib/xorg-headers-native.bb
-+++ b/recipes/xorg-lib/xorg-headers-native.bb
-@@ -1,3 +1,5 @@
-+LICENSE = "MIT"
-+
- PR = "r2"
+diff --git a/recipes/quilt/quilt.inc b/recipes/quilt/quilt.inc
+index 7fd9eac..329c3b5 100644
+--- a/recipes/quilt/quilt.inc
++++ b/recipes/quilt/quilt.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Tool to work with series of patches."
+ HOMEPAGE = "http://savannah.nongnu.org/projects/quilt/"
+ SECTION = "devel"
+-LICENSE = "GPL"
++LICENSE = "GPLv2+"
+ INC_PR = "r7"
  
- SRC_URI = "file://X11"
+ SRC_URI = "http://download.savannah.gnu.org/releases/quilt/quilt-${PV}.tar.gz \
 -- 
 1.7.0.4
 
