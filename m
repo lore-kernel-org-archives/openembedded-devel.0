@@ -1,43 +1,44 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from out1.smtp.messagingengine.com ([66.111.4.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sakoman@gmail.com>) id 1P8lXA-00049n-Ls
+	(envelope-from <vjensen@gmx.de>) id 1P8nHo-00009n-B9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 05:09:41 +0200
-Received: by wwi17 with SMTP id 17so1734315wwi.24
+	Thu, 21 Oct 2010 07:01:57 +0200
+Received: from compute3.internal (compute3.nyi.mail.srv.osa [10.202.2.43])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id E7CCA23D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 20:08:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=nvpv9UcxejJv/ggIWgOLqG0yJL8HC99PH/YDYUWimbU=;
-	b=ZRnmGdmsN4l3HtVdmHSYvf9W6PEiKU3HBTF9qcOHrpQet4P+PsstzgfxrIKNUEwAds
-	U8vBDHjkIUDoXy8UAHAZKSY5NvJSs08079AiduQq4f2bNhHeJUEvqp/lpcdDdNruvQuH
-	RYeYpsxjQqYW1xgkTfx08CCY/3L9gcNkj/RiA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=AMJmcUQGsOYMT4R5FXX+PZTlCr2Bmc7yQV1V/vHL3IoBWA1pYWKCelR3IKIDq1sYll
-	amLXI1hc8ZAQuJ0ORbQuHTi33UUKKTy3IlZnfZaCrfW6F0+ZDnnwj10im986G+ur/voQ
-	V2HHyYFy513gzqJ+3vfyywjTsReMnVtN/0GmA=
-MIME-Version: 1.0
-Received: by 10.216.181.84 with SMTP id k62mr308991wem.76.1287630534410; Wed,
-	20 Oct 2010 20:08:54 -0700 (PDT)
-Received: by 10.216.23.13 with HTTP; Wed, 20 Oct 2010 20:08:54 -0700 (PDT)
-In-Reply-To: <AANLkTi=BRC8V5VRWuBKac750eoS79eeBtaiyDOYGwzgo@mail.gmail.com>
-References: <AANLkTi=BRC8V5VRWuBKac750eoS79eeBtaiyDOYGwzgo@mail.gmail.com>
-Date: Wed, 20 Oct 2010 20:08:54 -0700
-Message-ID: <AANLkTinjTE+9Ppy--CKhgZtfTrvZR65WuExevm1KhNQf@mail.gmail.com>
-From: Steve Sakoman <sakoman@gmail.com>
+	Thu, 21 Oct 2010 01:01:21 -0400 (EDT)
+Received: from frontend1.messagingengine.com ([10.202.2.160])
+	by compute3.internal (MEProxy); Thu, 21 Oct 2010 01:01:21 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=RVY66tl0dZIXClyDeVYeE2q4MgU=;
+	b=htsd15nLBQ6YexzOR/oM5YYiGE3KRQ3AqYB7ks8K7mpfhwoqEF3OSQSkUrWCDfZtYFv4jQnSg9tYe1Nm9DQOoVGOJUYXG+oivI4MazVy9U2Hvry1xyFbJm2GPuGT96AiEE83q8oo8Kn9z8YTFv4rI1Ba6Rrr8qW0bxQy75SgKL8=
+X-Sasl-enc: EuTMPiUuuxwKd2OceU2W+aLYtUhXA4zYM1StTNZKFvqi 1287637281
+Received: from [192.168.1.37] (hnvr-4d079674.pool.mediaWays.net [77.7.150.116])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 64C28408728
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Oct 2010 01:01:21 -0400 (EDT)
+Date: Thu, 21 Oct 2010 07:03:07 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: sakoman@gmail.com
+In-Reply-To: <201010151039.08619.marcin@juszkiewicz.com.pl>
+Message-ID: <alpine.LNX.2.00.1010210654480.9653@asterix.crazy-teaparty.dyndns.org>
+References: <201010151039.08619.marcin@juszkiewicz.com.pl>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.25
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-gumstix-2.6.15 & gumstix_2.6.5-gnalm1: removed outdated recipes
+Subject: Re: RFC: remove old kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,27 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 03:09:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Oct 2010 05:01:57 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Tue, Oct 19, 2010 at 12:11 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Could not easily reply to the message because it was so long (gmail
-> took ages) but:
+Hello Marcin,
+
+On Fri, 15 Oct 2010, Marcin Juszkiewicz wrote:
+
+> Hi
 >
-> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-
-Acked-by: Steve Sakoman <steve@sakoman.com>
-
-Steve
-
-
-> Ash, do you have commit access, or does someone needs to push this for you?
+> recipes/linux/ contains 235 recipes. I would like to propose cleaning:
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> 1. drop 2.4 kernels - if someone still needs them then .oz354x and .stable
+>   branches have them.
+
+I wouldn't mention the .stable branch in anything related to removals. 
+Receipes from that era are so different that mixing things from both 
+branches is impossible.
+
+So "... testing_2010-09-27 has them" ;-)
+
+Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
