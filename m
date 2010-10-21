@@ -1,43 +1,42 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from hsp-52.hspserver.com ([85.197.80.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1P8s1h-00020d-S2
+	(envelope-from <ml@vdm-design.de>) id 1P8s3a-00026o-EL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 12:05:38 +0200
+	Thu, 21 Oct 2010 12:07:35 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 5C5E0A5145
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 03D3F309C044
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:05:00 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id EkYo86eIwN2C
+	Thu, 21 Oct 2010 11:59:58 +0200 (CEST)
+Received: from hsp-52.hspserver.com ([127.0.0.1])
+	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id p9VhM3n9c+4v
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:04:59 +0100 (BST)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id C3715A5142
+	Thu, 21 Oct 2010 11:59:42 +0200 (CEST)
+Received: from tomboy.localnet (pD9E14808.dip.t-dialin.net [217.225.72.8])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by hsp-52.hspserver.com (Postfix) with ESMTPSA id D0084309C03F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:04:58 +0100 (BST)
-Message-ID: <4CC0104B.4070108@xora.org.uk>
-Date: Thu, 21 Oct 2010 11:04:59 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.11) Gecko/20101013 Lightning/1.0b2 Thunderbird/3.1.5
-MIME-Version: 1.0
+	Thu, 21 Oct 2010 11:59:42 +0200 (CEST)
+From: Thomas Zimmermann <ml@vdm-design.de>
 To: openembedded-devel@lists.openembedded.org
-References: <i9p1d0$7q4$1@dough.gmane.org> <4CC00D57.4070601@xora.org.uk>
-	<i9p2uf$f40$1@dough.gmane.org>
-In-Reply-To: <i9p2uf$f40$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+Date: Thu, 21 Oct 2010 11:59:41 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.36-0.slh.1-aptosid-amd64; KDE/4.5.2; x86_64;
+	; )
+References: <4CBECD95.1050700@dresearch.de>
+	<1287573007-24350-1-git-send-email-sledz@dresearch.de>
+In-Reply-To: <1287573007-24350-1-git-send-email-sledz@dresearch.de>
+MIME-Version: 1.0
+Message-Id: <201010211159.41352.ml@vdm-design.de>
+X-SA-Exim-Connect-IP: 85.197.80.179
+X-SA-Exim-Mail-From: ml@vdm-design.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: Re: [PATCH 1/2] ca-certificates: unbreak do_configure of packages depending on ca-bundle.pem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,68 +50,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 10:05:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Oct 2010 10:07:35 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 21/10/2010 10:59, Koen Kooi wrote:
-> On 21-10-10 11:52, Graeme Gregory wrote:
-> > On 21/10/2010 10:33, Koen Kooi wrote:
-> >> Hi,
-> >>
-> >> Recipes/linux is a mess and recipes/u-boot is as well. It would be a
-> >> nice topic for OEDEM to see if we discuss switching to a poky BSP
-> model.
-> >> It would boil down to:
-> >>
-> >> 1 base bblayer with shared files:
-> >> * conf/machine/include
-> >> * recipes/linux/*.inc
-> >>
-> >> 1 bblayer per machine or SOC_FAMILY containing:
-> >> * machine.conf
-> >> * first and second stage bootloaders
-> >> * kernel
-> >>
-> >> So, what are peoples thoughts on this? I haven't thought this through
-> >> myself, so feel free to point out any show stoppers.
-> >> I do not want this to turn into a "splitting the metadata" discussion,
-> >> while I'm all for that, it really is a seperate effort and discussion.
-> >> But any bblayer style split would benefit from OE being a collection of
-> >> git submodules instead of a monolithic tree[1].
-> >>
-> >> Regards,
-> >>
-> >> Koen
-> >>
-> >> [1] Provided git submodules stop sucking so hard in future git versions
-> > This is something I have advocated before but never formally presented a
-> > RFC to OEDEM.
->
-> > With this model it quickly becomes clear which machines have support.
->
-> > The only problem comes with BLAH_machine type overides. Are they done as
-> > amend.inc (or whatever the current method is) in overlay or are they
-> > allowed into main repo. I think amend.inc in this case is probably the
-> > way to go.
->
-> The downside of amend.inc is the de-sync when the recipe gets updated,
-> but not the overlay. You run the risk of using a version without the
-> overrides that way.
-> Maybe some fancy scripts, (pre-)commit hooks or just old fanishioned
-> review on the ml could solve those type of issues.
->
-> How do file overrides like
-> recipes/netbase/netbase/beagleboard/interfaces get handled in a
-> bblayer/amend.inc world?
->
-Such a pity git doesnt have increasing rev numbers, a cool adition would
-be a flag in layer that showed the last rev of core it was tested with.
+Am Mittwoch 20 Oktober 2010, 13:10:06 schrieb Steffen Sledz:
+> just create an empty ca-bundle file to satisfy build time
+> dependencies in do_configure of other packages (e.g. epiphany),
+> content is updated later in postinst
+> 
+> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
 
-Layer was tested with core 1 but core is now 999 would give an
-indication on drift between layers and core.
+Acked-by: Thomas Zimmermann <ml@vdm-design.de>
 
-Graeme
+> ---
+>  .../ca-certificates_20090814+nmu2.bb               |    9 +++++++++
+>  1 files changed, 9 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
+> b/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb index
+> c8e4dbd..a37b01a 100644
+> --- a/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
+> +++ b/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
+> @@ -3,6 +3,7 @@ HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
+>  SECTION = "misc"
+>  PRIORITY = "optional"
+>  LICENSE = "GPL"
+> +PR = "r1"
+> 
+>  SRC_URI =
+> "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
+> file://remove-c-rehash.patch"
+> @@ -27,13 +28,21 @@ do_install_append() {
+>                  crt=$(echo $crt | sed -e 's/\.\///')
+>                  echo $crt >> ${D}/etc/ca-certificates.conf
+>          done
+> +
+> +	# update-ca-certificates is not able to deal with pathes,
+> +	# so just create an empty ca-bundle file to satisfy build time
+> +	# dependencies in do_configure of other packages (e.g. epiphany),
+> +	# content is updated later (see pkg_postinst)
+> +	touch ${D}/etc/ssl/ca-bundle.pem
+>  }
+> 
+>  PACKAGE_ARCH = "all"
+>  PACKAGES = "${PN}"
+> 
+>  pkg_postinst_${PN} () {
+> +if test -z "$D"; then
+>          /usr/sbin/update-ca-certificates
+> +fi
+>  }
+> 
+>  CONFFILES_${PN} = "/etc/ca-certificates.conf"
 
 
 
