@@ -1,50 +1,33 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1P8vTs-0003Br-UD
+	(envelope-from <jaap.dejong@nedap.com>) id 1P8vh7-0006wb-26
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 15:46:58 +0200
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9LDk8VP027899
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 08:46:08 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9LDk8eO014915
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 08:46:08 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9LDk8UL013613
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 08:46:08 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Thu, 21 Oct 2010 08:46:07 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Oct 2010 08:46:06 -0500
-Thread-Topic: [oe] [RFC] turning conf/machine into a set of bblayers
-Thread-Index: ActxF91U0ZeoHfXDQ0CWLfwFdvfkcAADk3tA
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0803110B3520@dlee06.ent.ti.com>
-References: <i9p1d0$7q4$1@dough.gmane.org> <4CC00D57.4070601@xora.org.uk>
-	<i9p2uf$f40$1@dough.gmane.org> <4CC0104B.4070108@xora.org.uk>
-	<AANLkTi=74mwvxLLwCjEhV3OMCyOdpfRZeU0Z-bf6TM+P@mail.gmail.com>
-	<1287657524.16386.437.camel@rex>
-	<AANLkTimn0RDABjQbJcO3dWHpWPWD6giY1taSVixn0MHp@mail.gmail.com>
-In-Reply-To: <AANLkTimn0RDABjQbJcO3dWHpWPWD6giY1taSVixn0MHp@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 21 Oct 2010 16:00:37 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Thu, 21 Oct 2010 15:59:51 +0200
+X-TM-IMSS-Message-ID: <16d7993a00007992@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 16d7993a00007992 for
+	<jaap.dejong@nedap.com>; Thu, 21 Oct 2010 15:59:52 +0100
+Message-ID: <4CC04756.2020004@nedap.com>
+Date: Thu, 21 Oct 2010 15:59:50 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.11) Gecko/20101006 Lightning/1.0b2 Thunderbird/3.1.5
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.153
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+To: openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 21 Oct 2010 13:59:51.0577 (UTC)
+	FILETIME=[3B2F3090:01CB7128]
+X-SA-Exim-Connect-IP: 87.249.123.12
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: failure building cacaoh-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,69 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 13:46:59 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 Oct 2010 14:00:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Frans Meulenbroeks
-> Sent: Thursday, October 21, 2010 7:01 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [RFC] turning conf/machine into a set of bblayers
->=20
-> 2010/10/21 Richard Purdie <rpurdie@rpsys.net>:
-> > On Thu, 2010-10-21 at 12:20 +0200, Frans Meulenbroeks wrote:
-> >> 2010/10/21 Graeme Gregory <dp@xora.org.uk>:
-> >>
-> >> >>
-> >> > Such a pity git doesnt have increasing rev numbers, a cool adition
-> would
-> >> > be a flag in layer that showed the last rev of core it was tested
-> with.
-> >> >
-> >> > Layer was tested with core 1 but core is now 999 would give an
-> >> > indication on drift between layers and core.
-> >> >
-> >> > Graeme
-> >>
-> >> Triggered by this (and apologies if I am drifting off-topic).
-> >> It would be nice if with amend.inc you could specify the PR of the
-> >> underlying recipe that this amend is for (and get a warning or error
-> >> if there is a mismatch)
-> >
-> > For reference poky now has the PRINC =3D "x" variable which increases t=
-he
-> > base PR by x, assuming a standard format PR value. This is intended for
-> > use in .bbappend files.
-> >
-> > Cheers,
-> >
-> > Richard
-> >
->=20
-> Maybe I was not clear enough on this, but my proposal would be that
-> you could say in your amend file something like
-> BASEPR_CHECK("r12")
-> or something like that (I did not really think about what the best
-> syntax would be).
->=20
-> If you were building and the base recipe did not have the PR you
-> specified you'd get a warning (or maybe even an error) so you would
-> know that something changed under water.
+Thought this was fixed some time ago, but it fails nevertheless...
 
-I haven't tried this myself yet, but if you wanted to tie to a particular P=
-R of the base recipe wouldn't you just put the amend.inc in your overlay at=
- recipes/blah/blah-version-pr directory?
+    NOTE: Running task 1854 of 2596 (ID: 2,
+    /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/cacao/cacaoh-native_0.99.3.bb,
+    do_install)
+    Packaged contents of libusb-compat into
+    /media/OpenEmbedded/unstable/tmp/deploy/eglibc/ipk/armv5te/libusb-0.1-4_0.1.3-r0.9_armv5te.ipk
+    NOTE: Not creating empty archive for libusb-compat-doc-0.1.3-r0.9
+    ERROR: function do_install failed
+    ERROR: log data follows
+    (/media/OpenEmbedded/unstable/tmp/work/i686-linux/cacaoh-native-0.99.3-r2.1/temp/log.do_install.19694)
+    | install: cannot stat `src/cacaoh/.libs/cacaoh': No such file or
+    directory
+    NOTE: Task failed:
+    /media/OpenEmbedded/unstable/tmp/work/i686-linux/cacaoh-native-0.99.3-r2.1/temp/log.do_install.19694
+    ERROR: TaskFailed event exception, aborting
+    ERROR: Build of
+    /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/cacao/cacaoh-native_0.99.3.bb
+    do_install failed
 
->=20
-> Best regards, Frans
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Fixed with:
 
+    diff -urN a/cacaoh-native.inc b/cacaoh-native.inc
+    --- a/cacaoh-native.inc    2010-10-21 15:55:49.604353109 +0200
+    +++ b/cacaoh-native.inc    2010-10-21 15:55:26.295644251 +0200
+    @@ -24,7 +24,7 @@
+
+      do_install() {
+        install -d ${D}${bindir}/cacaoh-${PV}
+    -  install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
+    +  install -m 0755 src/cacaoh/cacaoh ${D}${bindir}/cacaoh-${PV}
+      }
+
+      NATIVE_INSTALL_WORKS = "1"
+
+
+Not sure if this is the final fix...
 
