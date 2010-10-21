@@ -1,42 +1,33 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1P8sYd-0005Gr-I5
+Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Alexander.Stohr@gmx.de>) id 1P8sbA-0003SJ-UK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 12:40:18 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9LAd45i001468
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:39:04 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 01187-07 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:39:00 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9LActgH001462
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:38:56 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=74mwvxLLwCjEhV3OMCyOdpfRZeU0Z-bf6TM+P@mail.gmail.com>
-References: <i9p1d0$7q4$1@dough.gmane.org> <4CC00D57.4070601@xora.org.uk>
-	<i9p2uf$f40$1@dough.gmane.org> <4CC0104B.4070108@xora.org.uk>
-	<AANLkTi=74mwvxLLwCjEhV3OMCyOdpfRZeU0Z-bf6TM+P@mail.gmail.com>
-Date: Thu, 21 Oct 2010 11:38:44 +0100
-Message-ID: <1287657524.16386.437.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Thu, 21 Oct 2010 12:42:17 +0200
+Received: (qmail 2015 invoked by uid 0); 21 Oct 2010 10:41:40 -0000
+Received: from 193.8.40.126 by www061.gmx.net with HTTP;
+	Thu, 21 Oct 2010 12:41:38 +0200 (CEST)
+Date: Thu, 21 Oct 2010 12:41:38 +0200
+From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
+Message-ID: <20101021104138.140020@gmx.net>
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org, bitbake-dev@lists.berlios.de
+X-Authenticated: #15156664
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX191i7Jiqbd1I/mdhfz8Zhr93slhKk+rYiF38ISfxB
+	PBaszwL7cpEz5Y0GZC4WgiWgvhc3CUJF5RrQ== 
+X-GMX-UID: 2i/zePBEf2IsNe8si2xoUH94dWxlc1bn
+X-FuHaFi: 0.81999999999999995
+X-SA-Exim-Connect-IP: 213.165.64.23
+X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: for the FAQ: traceback on populate_staging_postamble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,36 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 10:40:20 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Oct 2010 10:42:17 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2010-10-21 at 12:20 +0200, Frans Meulenbroeks wrote:
-> 2010/10/21 Graeme Gregory <dp@xora.org.uk>:
-> 
-> >>
-> > Such a pity git doesnt have increasing rev numbers, a cool adition would
-> > be a flag in layer that showed the last rev of core it was tested with.
-> >
-> > Layer was tested with core 1 but core is now 999 would give an
-> > indication on drift between layers and core.
-> >
-> > Graeme
-> 
-> Triggered by this (and apologies if I am drifting off-topic).
-> It would be nice if with amend.inc you could specify the PR of the
-> underlying recipe that this amend is for (and get a warning or error
-> if there is a mismatch)
+when you get a traceback in the area of populate_staging_postamble
+then this might originate from a broken cache. a state of that sort
+seems to be relatively persistent. it might occur after a disk full 
+condition. that traceback might be of help only for educated users.
 
-For reference poky now has the PRINC = "x" variable which increases the
-base PR by x, assuming a standard format PR value. This is intended for
-use in .bbappend files.
+solution:
+go to this subdir "<distribution-build-dir>/deploy/glibc/pstage"
+and delete the file "stamp-cache-staging"
 
-Cheers,
-
-Richard
-
-
-
+regards, Alex.
+-- 
+GMX DSL Doppel-Flat ab 19,99 &euro;/mtl.! Jetzt auch mit 
+gratis Notebook-Flat! http://portal.gmx.net/de/go/dsl
 
 
