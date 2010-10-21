@@ -1,43 +1,40 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P8sRo-00008Z-5Q
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1P8sWR-0004Pn-Vh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 12:32:36 +0200
-Received: by iwn35 with SMTP id 35so2079617iwn.6
+	Thu, 21 Oct 2010 12:37:25 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9LAan5B001459
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 03:31:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Z8O3Gt1ze8umohoEdrJOi+w8zcDneftq2yFHHkq0nNw=;
-	b=UiligQmXEeflvc9Z4rRztx8lQ/KlLGsX/5Zb40MbKzmMx7MqEh3AQ9jGu5UV38H4+K
-	buVXKVnY1WOApXnuTWR81yy15Kyhb/R1TcokkWbVxHIFmsa8r1aCHGYLHYc/DZWDH7Tg
-	e9ZGAPeFscJEoqTvAr93WIo3lpSgpeBWsqiOc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=UXq9xARnO1I5D3o5E2+CBeW1Px/uA7aEbV6uSqvqouJam2LTO+uPvs8nyPeY8txWgM
-	zKPotQacwexBFfSDG9fG9OE3whxKfcNU+NyjVyJSCbt0PfEs9FrP7QeoXdS4xsGHTSzy
-	zCJjPbVy7r9w3XaqGEHwWhsBwpCd4yZ0xeVVg=
-MIME-Version: 1.0
-Received: by 10.231.37.197 with SMTP id y5mr667353ibd.151.1287657118133; Thu,
-	21 Oct 2010 03:31:58 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Thu, 21 Oct 2010 03:31:58 -0700 (PDT)
-In-Reply-To: <i9p1gp$7q4$2@dough.gmane.org>
-References: <i9p1gp$7q4$2@dough.gmane.org>
-Date: Thu, 21 Oct 2010 12:31:58 +0200
-Message-ID: <AANLkTikjqoyX4kJ+RMARq+mv8TrV37C4fMqbCuev8r38@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 21 Oct 2010 11:36:49 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 01096-08 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Oct 2010 11:36:45 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9LAaipG001453
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Oct 2010 11:36:44 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <i9p1d0$7q4$1@dough.gmane.org>
+References: <i9p1d0$7q4$1@dough.gmane.org>
+Date: Thu, 21 Oct 2010 11:36:32 +0100
+Message-ID: <1287657392.16386.435.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] splitting the metadata into multiple bblayers
+Subject: Re: [RFC] turning conf/machine into a set of bblayers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,35 +48,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 10:32:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Oct 2010 10:37:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2010/10/21 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi,
->
-> Please discuss splitting the metadata here and not in the conf/machine
-> thread :)
->
-> Have a look at http://git.pokylinux.org/cgit/cgit.cgi/poky/tree/meta/ to
-> see how RP has done it.
->
-> regards,
->
-> Koen
+On Thu, 2010-10-21 at 11:33 +0200, Koen Kooi wrote:
+> Recipes/linux is a mess and recipes/u-boot is as well. It would be a
+> nice topic for OEDEM to see if we discuss switching to a poky BSP model.
+> It would boil down to:
+> 
+> 1 base bblayer with shared files:
+> * conf/machine/include
+> * recipes/linux/*.inc
+> 
+> 1 bblayer per machine or SOC_FAMILY containing:
+> * machine.conf
+> * first and second stage bootloaders
+> * kernel
 
-Looks good to me.
-We might need some other and additional categories (e.g. recipes-opie).
-I can also imagine images and tasks becoming a separate group.
+In addition you'll most likely need some machine config in the form
+of .bbappend files for things like base-files, netbase, xorg-config,
+formfactor (in Poky's case).
 
-What would be nice is if there is a mechanism or description what
-subtrees require what, so it becomes easier to set up a BBPATH that
-e.g. leaves out the qt recipes if you are not interested in those.
-Guess ideally the relations between the subtrees should be a directed
-graph (without cycles). Not fully sure if this is feasible though.
+> So, what are peoples thoughts on this? I haven't thought this through
+> myself, so feel free to point out any show stoppers.
 
-Frans
+Poky is certainly heading in this direction and I've worked to ensure we
+have all the needed support in the form of .bbappend, the layer.conf
+files and so forth. If for whatever reason there are any other
+limitations, we should look at fixing that.
+
+> But any bblayer style split would benefit from OE being a collection of
+> git submodules instead of a monolithic tree[1].
+>
+> [1] Provided git submodules stop sucking so hard in future git versions
+
+If they stopped sucking, maybe...
+
+Cheers,
+
+Richard
+
 
 
