@@ -1,33 +1,33 @@
 Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1P8vI4-0007of-5p
+	(envelope-from <chasemaupin03@gmail.com>) id 1P8vI1-0007o8-J5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 15:35:08 +0200
-Received: by yxt3 with SMTP id 3so2496173yxt.6
+	Thu, 21 Oct 2010 15:35:09 +0200
+Received: by yxt3 with SMTP id 3so2496161yxt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 06:34:05 -0700 (PDT)
+	Thu, 21 Oct 2010 06:34:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=Wj7v0hfHf4CZtrXYPXZVE24SEqYZNWMTzyLecFViRB4=;
-	b=hxnGt1V7oSn9hP6nmZ9iJC80jUddUIuy3pzpTi3ORxWwRU7oY7A62Oh4revTqdE7ZF
-	fRvKCOObSXxB9QgPGh1k9qD3UYaIUJ2t4afs6GfUKHuht74cW2sY7mh3HywSQyLhb276
-	+KWWCvyRY9Q7nmhfqPhwKJKGcDFe1wlvqF5eM=
+	bh=WUp+Z8KzPrU9P5ow3HtEDd0BREIbTZ8FO2AjzxxicbE=;
+	b=thb6eptOSD5/ifgzrEnYF9eOfO5g8h1JEzqguukSbkEZcVbwD6/bGbFXBdmiCwGzgk
+	OuAFUO/uU3khjyhWKtM2Itstfireu9+YGQ4WMODizZ3vysoYEEnaPepkBws+NyYx0MtF
+	cCuTl5kz9Yd3p3pQwyBA73f+Z4YkqgU0qzQqU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=v5NRtjhA091t6M6Nlk3ni7SGkRu630r/BMZ0dztIF1WwplIqE366Uq1REsuF7izgyE
-	mWwhw20u0I3/YRS5e3mZpPJUg30ALm5IQhRsgkrL2d4YbGlwm6Jlpbk7cxlfP0n0P/Xb
-	P5hOpygs7s3+RNLxq1ivqG76yo9mMTIYhSDU4=
-Received: by 10.151.21.21 with SMTP id y21mr3709976ybi.325.1287668044993;
-	Thu, 21 Oct 2010 06:34:04 -0700 (PDT)
+	b=T4nln4cZ97EePxhATJK3YECZdfJKPUb5SbiDYoWrQ0LmrCyIrhuGVtVCO3vymdr2rO
+	meMCsmxFjavEdMi+shWILJ0i9jwGar7JZnA4nH1qIVrFNbhF8tEF6tAsG/VRWd8rB8c7
+	cEwRjC9nXf/PixrWlWUZUASg1RNVy7aW9aDc0=
+Received: by 10.151.92.9 with SMTP id u9mr3643761ybl.319.1287668043479;
+	Thu, 21 Oct 2010 06:34:03 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.34.03
+	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.34.02
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Oct 2010 06:34:04 -0700 (PDT)
+	Thu, 21 Oct 2010 06:34:02 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Oct 2010 08:33:29 -0500
-Message-Id: <1287668010-11310-22-git-send-email-Chase.Maupin@ti.com>
+Date: Thu, 21 Oct 2010 08:33:28 -0500
+Message-Id: <1287668010-11310-21-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
 References: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 21/22] x-load: update package LICENSE
+Subject: [PATCH 20/22] update-rc.d: update package LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,33 +61,22 @@ X-List-Received-Date: Thu, 21 Oct 2010 13:35:10 -0000
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/x-load/signgp.bb  |    2 +-
- recipes/x-load/x-load.inc |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/update-rc.d/update-rc.d_0.7.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/x-load/signgp.bb b/recipes/x-load/signgp.bb
-index 8ee36b5..8eea85c 100644
---- a/recipes/x-load/signgp.bb
-+++ b/recipes/x-load/signgp.bb
-@@ -1,4 +1,4 @@
--LICENSE = "BSD"
-+LICENSE = "NewBSD"
- DESCRIPTION = "Tool to sign omap3 x-loader images"
- 
- PR = "r4"
-diff --git a/recipes/x-load/x-load.inc b/recipes/x-load/x-load.inc
-index 553ef58..4e981b7 100644
---- a/recipes/x-load/x-load.inc
-+++ b/recipes/x-load/x-load.inc
+diff --git a/recipes/update-rc.d/update-rc.d_0.7.bb b/recipes/update-rc.d/update-rc.d_0.7.bb
+index d2d22ab..b36b8ca 100644
+--- a/recipes/update-rc.d/update-rc.d_0.7.bb
++++ b/recipes/update-rc.d/update-rc.d_0.7.bb
 @@ -1,7 +1,7 @@
- DESCRIPTION = "x-load bootloader loader"
- SECTION = "bootloaders"
- PRIORITY = "optional"
+ SECTION = "base"
+ PRIORITY = "standard"
+ DESCRIPTION = "Manage symlinks in /etc/rcN.d"
 -LICENSE = "GPL"
 +LICENSE = "GPLv2+"
- 
- DEPENDS = "signgp-native"
- 
+ S = "${WORKDIR}/update-rc.d"
+ INHIBIT_DEFAULT_DEPS = "1"
+ PR = "r1"
 -- 
 1.7.0.4
 
