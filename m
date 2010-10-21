@@ -1,37 +1,37 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1P8vHe-0007X8-E9
+	(envelope-from <chasemaupin03@gmail.com>) id 1P8vHf-0007Ju-3d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 15:34:20 +0200
-Received: by gyd5 with SMTP id 5so802555gyd.6
+	Thu, 21 Oct 2010 15:34:22 +0200
+Received: by mail-yx0-f175.google.com with SMTP id 3so2495804yxt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 06:33:38 -0700 (PDT)
+	Thu, 21 Oct 2010 06:33:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=E5jmO0n/R1S2hqbjj1c772r8TralEQIZVFkC6DUPJLk=;
-	b=f191i2+YhvwvlRcLMjHCA0rA7q8jIoBH+qbYjUOWlRoiTYAHlK1KU48/FMyTnz5kEO
-	XvrS2silNjixDV6Jfs8ty0aalrGBmX5fZlOk7ToWq41oMFadifRmAzstITSDK6xbveyf
-	LtEhAFvfx/4e8+Vk4r2TwUgF1oGWaWAD3GMCA=
+	bh=l0glZ3XKso0lQKkLPoTrfQaLEuFY/2WjUd69J7v1/zA=;
+	b=aNXtsblTOky2XU/e+wzvn5KzMtbbvE0C6IVeNUYDfnFy6QDpSh6vBaZFZnhBLoxfJm
+	OpFC56NfbzsPZPYC3WJAXHhZm5ffW1i3Hx7unD70D25/zI0p9SZuahwrhavF1vYzQaV+
+	fLhz+53LSPFYjbI93xL+w9KThadliFyEK6wNg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=w8fEzBF6i0KzlclX5ImcftH/nKn3EfSDawoPf6sTOpNf42XYbTFEQo9GnyKmqgypqv
-	yI7LyO4vvOQUqoV3EOaBWcQ6ptPZvn6sMJIZV6eTsiHJMaa4b5VIBYI4Dsa5HQlZ6EmS
-	Tg/UDsxxUB5grVwYK/g6LDttzQ7pfhcINEfNI=
-Received: by 10.151.112.3 with SMTP id p3mr3698708ybm.147.1287668017634;
-	Thu, 21 Oct 2010 06:33:37 -0700 (PDT)
+	b=YVzAuiXu65sZV8zuiR+WB0Brdrzpkq0b1fpbP98EugFTwwkcfWOOG78Shpjbc4C6Dj
+	I7Na5dWW9tpzct/jySxaCuxdAFosiYwRsdsyQoaImu0GvGuibw36y7OvICO0ykjeyfl8
+	jn44jkQZXTYt+G5A+6x3oN7/CuS2kvRK8HBzQ=
+Received: by 10.150.147.20 with SMTP id u20mr3719653ybd.179.1287668023755;
+	Thu, 21 Oct 2010 06:33:43 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.33.36
+	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.33.42
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Oct 2010 06:33:36 -0700 (PDT)
+	Thu, 21 Oct 2010 06:33:42 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Oct 2010 08:33:10 -0500
-Message-Id: <1287668010-11310-3-git-send-email-Chase.Maupin@ti.com>
+Date: Thu, 21 Oct 2010 08:33:14 -0500
+Message-Id: <1287668010-11310-7-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
 References: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 02/22] bison: update package LICENSE
+Subject: [PATCH 06/22] genext2fs: update package LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,21 +61,19 @@ X-List-Received-Date: Thu, 21 Oct 2010 13:34:23 -0000
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/bison/bison.inc |    2 +-
+ recipes/genext2fs/genext2fs.inc |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/bison/bison.inc b/recipes/bison/bison.inc
-index 3441bcf..023895e 100644
---- a/recipes/bison/bison.inc
-+++ b/recipes/bison/bison.inc
-@@ -1,6 +1,6 @@
- DESCRIPTION = "GNU Project parser generator (yacc replacement)."
- HOMEPAGE = "http://www.gnu.org/software/bison/"
+diff --git a/recipes/genext2fs/genext2fs.inc b/recipes/genext2fs/genext2fs.inc
+index c2984bc..503c74f 100644
+--- a/recipes/genext2fs/genext2fs.inc
++++ b/recipes/genext2fs/genext2fs.inc
+@@ -1,4 +1,4 @@
 -LICENSE = "GPL"
-+LICENSE = "GPLv2+"
- SECTION = "devel"
- PRIORITY = "optional"
- DEPENDS = "virtual/libintl flex-native"
++LICENSE = "GPLv2"
+ DESCRIPTION = "A tool to generate an ext2 filesystem \
+ as a normal (non-root) user."
+ SECTION = "console/utils"
 -- 
 1.7.0.4
 
