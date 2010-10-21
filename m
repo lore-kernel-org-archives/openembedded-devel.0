@@ -1,55 +1,49 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P8odz-0007IQ-SN
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P8oop-0001RZ-QM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 08:28:58 +0200
-Received: by bwz15 with SMTP id 15so15937bwz.6
+	Thu, 21 Oct 2010 08:40:09 +0200
+Received: by ywl5 with SMTP id 5so2672268ywl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Oct 2010 23:28:17 -0700 (PDT)
+	Wed, 20 Oct 2010 23:39:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=gWv3DZ289fCFYIUzcbNT2eljXFOlVWC36OeA8fSHbKQ=;
-	b=wD9z3qjTrs/rrRSzbjGVnjOglwyHmufurwQrHn6kAXdPekjFn+Kl5sVj0H0HCcTWCe
-	VKgtIIUy8/D2aWCcNAXMyRWpNGOVG93P7Z2S5tN/JJYfTE2/oQy9PNX2kSv/uJmHvStb
-	krH9zZZnjkVUUHZGBhshY5aHGKElg9l3S80dY=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=86gkbHpaE5q7qnb+EPd1tQLGOHKstV2GFC611qGgP2o=;
+	b=oHrV0OPqGOyWGZQ0Aw9YIECizh3Fo2uE/MD4nCcrm9aU+QWHp5mW7rYSbfmS8HGBYT
+	pMoPY1g4IGq+9rNz7MxJBJ06wMh8x/NttoWj50iOlhmD+PkthFaVJpM/TtrQSwh7kjSz
+	5XFSUx1qITFJkVUUyJYS2p7VYaTMg4ZRP6nfo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=D9wk4F21TltFxCxfgh3wgaW+o5MDyNALsgXBzGOTg7cPYF4BMnDQaov875CUgSwKuq
-	qZNyDESPIlOIgbTW69wtDnGcrqjALnZChi5ypGG0JII7XJXM7ty3rSWRKwaJaXC/AXpv
-	9/IDfJ3wDUcfhjq9nOfEgGqy/63urxa3LZHYA=
-Received: by 10.204.73.13 with SMTP id o13mr263378bkj.173.1287642497774;
-	Wed, 20 Oct 2010 23:28:17 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id d27sm867291bkw.2.2010.10.20.23.28.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 20 Oct 2010 23:28:16 -0700 (PDT)
-Date: Thu, 21 Oct 2010 08:27:55 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Message-ID: <20101021062755.GB13082@jama>
-References: <AANLkTikrgw76+iAr8n3a3Kv+1joHN0ZAKTMcmOvNXrbU@mail.gmail.com>
-	<1287257081-25608-1-git-send-email-Martin.Jansa@gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F0803110B3131@dlee06.ent.ti.com>
-	<AANLkTimWmTWAkCPAabOagq2S5gtfMztov8xiBcK7q_Vh@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F0803110B3140@dlee06.ent.ti.com>
-	<20101019192458.GB6202@denix.org>
-	<20101020232906.GY11514@denix.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=eVfbs6ZPRHzBYmwbiQJa9W8FePXPsXJRB16iY4eNNXIAx+xaen7s0a96tYq3h1XX/l
+	7LNn5OMiRUVdYkJJo8GEUeHprIP9yIoj+JiScNZHIK/RdcCuWhErtcvDypMs/sXZ4TQh
+	Wjlnmz3OcBUeXeCYY0FSsud7aMXsFTFEEvwlo=
 MIME-Version: 1.0
-In-Reply-To: <20101020232906.GY11514@denix.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.42.22.132 with SMTP id o4mr178352icb.479.1287643170299; Wed,
+	20 Oct 2010 23:39:30 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Wed, 20 Oct 2010 23:39:30 -0700 (PDT)
+In-Reply-To: <20101020185840.GQ11514@denix.org>
+References: <1286812675-31626-1-git-send-email-chase.maupin@ti.com>
+	<AANLkTinR7QSaFb1FTzETX9=k9=JZh58iZgyD=7=So1uF@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310FFA2BC@dlee06.ent.ti.com>
+	<AANLkTi=uKwjKYq5W4VwKXcNHdSJkxZnu_w4M9kkvVWoX@mail.gmail.com>
+	<20101020182509.GO11514@denix.org>
+	<4CBF39BF.9000809@opendreambox.org>
+	<20101020185840.GQ11514@denix.org>
+Date: Thu, 21 Oct 2010 08:39:30 +0200
+Message-ID: <AANLkTim5Uak1Q6unMDWYg=utkv_cUVeQDod=D2jg7MOR@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: clarson@kergoth.com, openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] bitbake.conf: don't append MACHINE_OVERRIDES to OVERRIDES when it's empty
+Subject: Re: [PATCHv2] recipe licenses: update recipe LICENSE fields
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,74 +57,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 06:28:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 21 Oct 2010 06:40:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Oct 20, 2010 at 07:29:06PM -0400, Denys Dmytriyenko wrote:
-> On Tue, Oct 19, 2010 at 03:24:58PM -0400, Denys Dmytriyenko wrote:
-> > On Tue, Oct 19, 2010 at 02:18:25PM -0500, Maupin, Chase wrote:
-> > > > > I saw this issue in my overlay of having a "::" in my OVERRIDES which
-> > > > > caused my parsing to fail in angstrom.inc.  Applying this fix from
-> > > > Martin
-> > > > > resolves the parsing issue.  My OVERRIDES appear to be in the correct
-> > > > order
-> > > > > with this change:
-> > > > 
-> > > > Can you explain this?  "caused my parsing to fail" is not very useful
-> > > > information.  What exactly failed?
-> > > 
-> > > Chris,
-> > > 
-> > > Sorry, I thought this was an understood issue.  I have put the error output 
-> > > I got below.  Basically, when I got to line 509 of data.py the variables had 
-> > > the following values:
-> > > 
-> > > vars = set(['__functions_', '_', '__functions__'])
-> > > 
-> > > var = '__functions__'
-> > > 
-> > > overrides = ['pn-angstrom', 'fail-fast', 'build-linux', 'arm', 'INVALID', 'angstrom-2008.1', '', 'am37x-evm', 'local']
-> > >  
-> > > o = ''
-> > > 
-> > > OVERRIDES = 'pn-angstrom:fail-fast:build-linux:arm:INVALID:angstrom-2008.1::am37x-evm:local'
-> > > 
-> > > The current override being evaluated was the '' one.
-> > > 
-> > > The line being evaluated in my overlay was USERDISTRO := "${DISTRO}" in my 
-> > > copy of angstrom.inc
-> > 
-> > Chris,
-> > 
-> > FYI, the below "RuntimeError: Set changed size during iteration" exception 
-> > happens in bitbake 1.8.18 but not the 1.10/mainline.
-> 
-> Chris, Martin,
-> 
-> After more debugging, it seems the problem is caused by using bitbake 1.8.18 
-> and conf/collections.inc at the same time, as that version of bitbake chokes 
-> on empty override "::", when it gets re-spawned from collections.inc. If I 
-> replace the use of COLLECTIONS with direct BBFILES/BBFILE_* assignments, bitbake 
-> parses everything just fine. It is reproducible right now on the latest OE 
-> mainline with bitbake 1.8.18 by just adding "require conf/collections.inc" in 
-> local.conf or bitbake.conf.
-> 
-> I see that Martin's patch was marked as "Superseded" and archived - is there a 
-> new patch coming? Or are there any side-effects of this patch? I would 
-> definitely like to push this patch ASAP to address our immediate problem. 
+2010/10/20 Denys Dmytriyenko <denis@denix.org>:
+.
+>
+> GPLv2 and GPLv3 are not compatible. Thus, there cannot be a derivative work
+> that combines those two. But if one piece of code is GPLv2+ and another is
+> GPLv3, the resulting combination is licensed under GPLv3.
+>
+> So, it's always good to know which libraries you have as strict GPLv2 and
+> which are "GPLv2 or later", even in case when you are Ok with GPLv3, you
+> should know to not use strict GPLv2 code in any GPLv3 projects...
 
-I've marked it as "Superseded" when Chris pushed that filtering and I've checked 
-that it fixes my case.
+Note that this applies to programs. A derivative work that just
+combines things is quite possible afaik (e.g. a linux kernel (v2 only)
+and a recent samba (v3))
+Whether using a v2 only and v3only shared lib in an app is possible is
+unsure to me; static linking with v2 and v3 is afaik a no-no.
 
-Maybe we can resolve it by using limited OVERRIDES in FILESPATH as
-suggested in "[RFC] do we really need all OVERRIDES in FILESPATH?".
-Instead of creating more complicated constructs to be able to push more
-stuff to FILESPATH (without '::') and then never use it.
-
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Frans.
 
 
