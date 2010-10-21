@@ -1,33 +1,33 @@
 Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1P8vHu-0007Zc-31
+	(envelope-from <chasemaupin03@gmail.com>) id 1P8vHz-0007nF-Nx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 15:35:07 +0200
-Received: by mail-yx0-f175.google.com with SMTP id 3so2495892yxt.6
+	Thu, 21 Oct 2010 15:35:06 +0200
+Received: by yxt3 with SMTP id 3so2496126yxt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 06:33:59 -0700 (PDT)
+	Thu, 21 Oct 2010 06:34:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=Eej3nmolSwTghlydWCOgjoifx/bp/UCT+v8qOnfi8rI=;
-	b=AZQjmkMgiAr0LfY5k8uIIhDGq8dMZk1hZZ6dXp1Dkad6GayQZuBcyOBtnW/kuJQ/8K
-	xjFo3MOLPKUZ//XkIAyM3Ryy20qo2jqL+nrjYHcVgZjJLn/d27d0pOrJLK+KlisCs8c+
-	ojimwbThMH3pcCCUDKVAp1s3bdKXirIhSUxc0=
+	bh=tOS9BoM+RLhyAC7Fzo4O7nlOuU6Ne7Q3KdPRS41b0iw=;
+	b=bBlBUmU08Yj67+zeoQR+xcSOIZfHcOmXjr4b4TvwdoiREqUbkiINEFd1N7EZ2/1l+r
+	0gOTMOWhWk3QlvlvtXOFRh/F5RPncSWJIg6nOorDaN8IBM1ds+HIRvSc04ZjxXN1wT3i
+	vmNQ+tTao/+q7GOom3j4DVZvsLRLOGB810M6Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=GttYnFxSwOq12YuQlZ12eqUoihHn02BqS3KdsOvBOkCHjtlF0P5jOpUdYH2Ta2Oqv7
-	QKzFd7eSG4AjJBzmo4iqDbB5ZzZndWXYWMFgiQmPvLsDmQdcXDJFpbgfxwhxFo1SBYhl
-	JA5CYV6LuF4+YNg4jGRpPU4duORd/Gllid2/4=
-Received: by 10.150.186.17 with SMTP id j17mr3724520ybf.272.1287668039648;
-	Thu, 21 Oct 2010 06:33:59 -0700 (PDT)
+	b=enUPSynL42kmUoCJMMRlw/+XaS0ybREaqSaLoeeJbblPzqRXiqGBGagsDo2yrhZPth
+	9bJuhZ2j5VWEcINMgD6zplPs+nYFmQT6LjfcMrT8KsGPv/OykUEj0a7Aj5eMoetyWUQF
+	8ROiS47lUq69O/sOaj/xUcAEIfkCHFqOG6rZQ=
+Received: by 10.150.137.10 with SMTP id k10mr3618313ybd.301.1287668042233;
+	Thu, 21 Oct 2010 06:34:02 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.33.58
+	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.34.01
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Oct 2010 06:33:59 -0700 (PDT)
+	Thu, 21 Oct 2010 06:34:01 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Oct 2010 08:33:25 -0500
-Message-Id: <1287668010-11310-18-git-send-email-Chase.Maupin@ti.com>
+Date: Thu, 21 Oct 2010 08:33:27 -0500
+Message-Id: <1287668010-11310-20-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
 References: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
@@ -36,11 +36,11 @@ X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 17/22] thttpd: update package LICENSE
+Subject: [PATCH 19/22] unifdef: update package LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,19 +61,20 @@ X-List-Received-Date: Thu, 21 Oct 2010 13:35:10 -0000
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/thttpd/thttpd_2.25b.bb |    2 +-
+ recipes/unifdef/unifdef-native_2.6.18+git.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/thttpd/thttpd_2.25b.bb b/recipes/thttpd/thttpd_2.25b.bb
-index 85c7f70..bf03525 100644
---- a/recipes/thttpd/thttpd_2.25b.bb
-+++ b/recipes/thttpd/thttpd_2.25b.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "A simple, small, portable, fast, and secure HTTP server."
--LICENSE = "BSD"
+diff --git a/recipes/unifdef/unifdef-native_2.6.18+git.bb b/recipes/unifdef/unifdef-native_2.6.18+git.bb
+index ae3eb4f..56880a8 100644
+--- a/recipes/unifdef/unifdef-native_2.6.18+git.bb
++++ b/recipes/unifdef/unifdef-native_2.6.18+git.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Kernel header preprocessor"
+ SECTION = "devel"
+-LICENSE = "GPL"
 +LICENSE = "FreeBSD"
- HOMEPAGE = "http://www.acme.com/software/thttpd/"
- PR ="r8"
+ 
+ SRC_URI = "file://unifdef.c"
  
 -- 
 1.7.0.4
