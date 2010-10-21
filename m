@@ -1,37 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1P8vHp-0007Ju-1c
+	(envelope-from <chasemaupin03@gmail.com>) id 1P8vHt-0007if-ST
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 15:34:43 +0200
-Received: by mail-yx0-f175.google.com with SMTP id 3so2495804yxt.6
+	Thu, 21 Oct 2010 15:35:04 +0200
+Received: by gwb17 with SMTP id 17so75337gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 06:33:54 -0700 (PDT)
+	Thu, 21 Oct 2010 06:33:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=kKJEBA0iVV12xZ9Jtw38p3tdwzsE3SzOudgZDYGPDqA=;
-	b=oXZaKd10a7fUsln51gaf8Trn8VrWHvmBWLKPBpVUJ6EnElT4y7UzAuodwJWbBeGmsj
-	7GVT9Fo8DVZqF7a0+BIFdDOp0sxIfrOhDQc4IFtEqtuvzaEQAYARO78sreEOeg8eWM2M
-	ARheWTPkoBO+cfzfqz0TxRjeZUOpK1Ywjth5E=
+	bh=uQtSEF567uDtu3q1JW7aeHZ3d54SLC87z9IkaLKuaD0=;
+	b=cjcks9zg+hsSYd206yCj+RcabZLtFUFZCMFsxWZKO9kLxWbC9c0643PfopbugaKhyN
+	26FKUzJhjnepqJsZKIxqXClgU8RH5F6FcMMSdJC1l+Mk4VCtSXZGDbRO9VIFTXGDKO5M
+	HYjP6R2VCaFiXN0nhzwsRGH9fl+mx2F1t+H7E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=nQWuG2+oe5fTTJW9mirUUEwnfm+5l9bklPTDVAb1zXfQLW4FZhzfpQXQbXtfU8HLo6
-	Dz9332MSWs1xlWKFifb0Pqd3PGxRGjRSLxN6oN2RMrmWlqju/HqKdDGqaDJLeOaxiUjC
-	yujjZPK4X+vMlIzdOr6qoFYXvr0LZqUNyI2S4=
-Received: by 10.150.49.18 with SMTP id w18mr3818523ybw.246.1287668034090;
-	Thu, 21 Oct 2010 06:33:54 -0700 (PDT)
+	b=Qt0Xhc9UAgw4NJxZVEHbeOoYJd7tbKWGyYO4dgrSIMzqZkqLyY5p7mAtswXpzEDIme
+	ugZ2sQUwbhapfZudMaBSCghFnAgbLwzjVC2B/SqoRp++bCv03dV1unQirz1lDXtwhi/w
+	cD2y/5le+I3PeEZnZT2pYdWSWaycKUmRBBSg8=
+Received: by 10.150.51.20 with SMTP id y20mr3713708yby.244.1287668032695;
+	Thu, 21 Oct 2010 06:33:52 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.33.52
+	by mx.google.com with ESMTPS id p38sm7984809ybk.16.2010.10.21.06.33.51
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Oct 2010 06:33:53 -0700 (PDT)
+	Thu, 21 Oct 2010 06:33:52 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Oct 2010 08:33:21 -0500
-Message-Id: <1287668010-11310-14-git-send-email-Chase.Maupin@ti.com>
+Date: Thu, 21 Oct 2010 08:33:20 -0500
+Message-Id: <1287668010-11310-13-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
 References: <1287668010-11310-1-git-send-email-Chase.Maupin@ti.com>
-X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 13/22] linux-libc-headers: update package LICENSE
+Subject: [PATCH 12/22] libtool: update package LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,21 +61,22 @@ X-List-Received-Date: Thu, 21 Oct 2010 13:35:09 -0000
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes/linux-libc-headers/linux-libc-headers.inc |    2 +-
+ recipes/libtool/libtool.inc |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/linux-libc-headers/linux-libc-headers.inc b/recipes/linux-libc-headers/linux-libc-headers.inc
-index 642e369..0b27e46 100644
---- a/recipes/linux-libc-headers/linux-libc-headers.inc
-+++ b/recipes/linux-libc-headers/linux-libc-headers.inc
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Sanitized set of 2.6 kernel headers for the C library's use."
- SECTION = "devel"
+diff --git a/recipes/libtool/libtool.inc b/recipes/libtool/libtool.inc
+index 97fdb30..1ddde91 100644
+--- a/recipes/libtool/libtool.inc
++++ b/recipes/libtool/libtool.inc
+@@ -3,7 +3,7 @@ This is GNU libtool, a generic library support script.  Libtool hides \
+ the complexity of generating special library types (such as shared \
+ libraries) behind a consistent interface."
+ HOMEPAGE = "http://www.gnu.org/software/libtool/libtool.html"
 -LICENSE = "GPL"
-+LICENSE = "GPLv2"
- NATIVE_INSTALL_WORKS = "1"
- BBCLASSEXTEND = "native"
++LICENSE = "GPLv2+"
+ SECTION = "devel"
  
+ INC_PR = "r26"
 -- 
 1.7.0.4
 
