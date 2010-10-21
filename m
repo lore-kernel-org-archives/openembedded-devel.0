@@ -1,40 +1,38 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P92Eq-0006wt-5b
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 23:00:00 +0200
-Received: by gwaa11 with SMTP id a11so418942gwa.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 13:59:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=bwlxw5AQKXau2bYXb1+yiRN+PNd5u2weLro8PltCTU0=;
-	b=PhYamYSWd5FiMdmKeeBlWrMiRQ5BYAUzYmRam0Rkg7zGuryvbWcNM76TLYVBebUK1F
-	VYct8b05SSCq4PDaGpcRTPA9np+RFX8bJOjwvE4IFnqXDXy/wgCuDkBq157dcQGkafvx
-	shbJPw/EVXtUxtSrZuyYZpIHBQOUp7qDO6FbQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=rZLtdyNCjRh1csuLzJKLgU1bxrANq/j55C0RIk/+o7QKTz4dg89qWWJ2qmFgkeNRBN
-	Lwt022/AWfBlGGGECo5ldkh5ZCa/bQ++XvPwAEtlWXFOqUJDGiSGqYvKtxlEbeW7PVPY
-	puTdXxL9cZQthnr+SRgco1fbu54Lb8/WhinV8=
-Received: by 10.90.98.9 with SMTP id v9mr1651346agb.53.1287694744684; Thu, 21
-	Oct 2010 13:59:04 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.90.86.6 with HTTP; Thu, 21 Oct 2010 13:58:44 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 21 Oct 2010 13:58:44 -0700
-Message-ID: <AANLkTin7MbMksEO7F4r3b-EAbCrx1ZG58OBu3ybHkNmG@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1P92au-00082Y-MM
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Oct 2010 23:22:41 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id C8AEB8C762D;
+	Thu, 21 Oct 2010 17:22:04 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 23832-08; Thu, 21 Oct 2010 17:22:04 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id F3A028D07E7; Thu, 21 Oct 2010 17:22:03 -0400 (EDT)
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 71F818C762D;
+	Thu, 21 Oct 2010 17:22:02 -0400 (EDT)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id 53C8B5000E5; Thu, 21 Oct 2010 17:22:02 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 21 Oct 2010 17:22:01 -0400
+Message-Id: <1287696121-28307-2-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1287696121-28307-1-git-send-email-msmith@cbnco.com>
+References: <1287696121-28307-1-git-send-email-msmith@cbnco.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: patchwork cleanup call
+Subject: [PATCH 2/2] gcc 4.3.4: backport -print-sysroot for libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,27 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 21:00:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 Oct 2010 21:22:41 -0000
 
-Hello OE'ers
+libtoolized configure scripts need this in order to autodetect sysroot
+path when --with-sysroot is passed.
 
-We have accumulated quite a bit of mails in patchwork. Patches that
-are send to OE ml are nicely captured by
-patchwork and shown when one visits http://patchwork.openembedded.org
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/gcc/gcc-4.3.4.inc                          |    3 ++-
+ .../gcc-4.3-backport-print-sysroot.patch           |    0
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+ copy recipes/gcc/{gcc-4.3.3 => gcc-4.3.4}/gcc-4.3-backport-print-sysroot.patch (100%)
 
-It would be nice if committers,reviewers and authors update the patch
-status when they deal with the patch
+diff --git a/recipes/gcc/gcc-4.3.4.inc b/recipes/gcc/gcc-4.3.4.inc
+index 5aef5e5..3f3809c 100644
+--- a/recipes/gcc/gcc-4.3.4.inc
++++ b/recipes/gcc/gcc-4.3.4.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r12"
++INC_PR = "r13"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -62,6 +62,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://gcc-4.3.x-fix-EXTRA_BUILD.patch \
+ 	file://gcc-flags-for-build.patch \
+ 	file://Makefile.in.patch \
++	file://gcc-4.3-backport-print-sysroot.patch \
+ "
+ 
+ SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch "
+diff --git a/recipes/gcc/gcc-4.3.3/gcc-4.3-backport-print-sysroot.patch b/recipes/gcc/gcc-4.3.4/gcc-4.3-backport-print-sysroot.patch
+similarity index 100%
+copy from recipes/gcc/gcc-4.3.3/gcc-4.3-backport-print-sysroot.patch
+copy to recipes/gcc/gcc-4.3.4/gcc-4.3-backport-print-sysroot.patch
+-- 
+1.7.0.4
 
-So please spare few minutes and have a look at the patchlist and see
-if there is a patch authored or committed by you and update the status
-accordingly.
-
-I regularly use this tool to pick up patches and this exercise will
-help to remove the stale patch states
-
-Thanks for your time
-
--Khem
 
 
