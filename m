@@ -1,30 +1,46 @@
-Received: from smtp-out11.han.skanova.net ([195.67.226.200])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1P93IS-0003SK-OF
+	(envelope-from <raj.khem@gmail.com>) id 1P93LD-0005FE-12
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 00:07:42 +0200
-Received: from [10.28.3.142] (83.91.92.154) by smtp-out11.han.skanova.net
-	(8.5.124.10) (authenticated as u82406562)
-	id 4C7E127001452BB8 for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 00:01:04 +0200
-Message-ID: <4CC0B81F.6030706@atmel.com>
-Date: Fri, 22 Oct 2010 00:01:03 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Thunderbird 2.0.0.24 (Windows/20100228)
+	Fri, 22 Oct 2010 00:10:32 +0200
+Received: by yxe42 with SMTP id 42so93737yxe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Oct 2010 15:09:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=J2egHpcK67E7ztmCq5bvyFt2IN1/4xmxNp2/plOuaCo=;
+	b=N2FczilAOVS4SATL0N4w4C+scRrhxYULJL7ot/325/E1i2YvD1YSXhg38M+kErTjAd
+	LjuZjnYtGh0hsi2e0Xkdo2A2NFMl5fGpCjBUMgKD72uMlum7UBD5xIC3hle7LHHXeGZX
+	XkKeY3Mdw5ikir98SsNYE5gFjHXfOTr/MXYKM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=AIVDRcQze7upezHnnylfI+dG63XppizHT06TMtPohHkzAxHtkevcRuwXuShoha4Qy/
+	npyBDD/I9uKXOBJQ25EgNla3Fqcm7qhKyhZ8rOiVUyJxyYHcWkfxdtx1eAfS4Jhvl8GR
+	AUwWVuo1e30RJ7KdhhAlyiE80RcJPcwY5Yqqc=
+Received: by 10.90.116.9 with SMTP id o9mr1741246agc.6.1287698992522; Thu, 21
+	Oct 2010 15:09:52 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>	<201010181520.30454.marcin@juszkiewicz.com.pl>	<4CBC4DD4.3010908@atmel.com>	<i9hpii$gf2$1@dough.gmane.org>	<4CBC7F6A.9040000@atmel.com>	<AANLkTi=xBMvDEKjiaNKy7zijs4DCZwhrSDr=gHVkMh_T@mail.gmail.com>	<4CBCD3FC.5090305@atmel.com>	<AANLkTin6jOdo56fCEaMLNgiKDThBV0yg7x_OvOntwQEM@mail.gmail.com>	<4CBF81FC.3040803@atmel.com>	<i9osim$dcl$1@dough.gmane.org>	<AANLkTi=ABVTThHSKLbf-QAJcdbOZmQr3B5vw6WVj2hGg@mail.gmail.com>
-	<i9p0tr$5iq$1@dough.gmane.org>
-In-Reply-To: <i9p0tr$5iq$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 195.67.226.200
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+Received: by 10.90.86.6 with HTTP; Thu, 21 Oct 2010 15:09:31 -0700 (PDT)
+In-Reply-To: <1287696121-28307-2-git-send-email-msmith@cbnco.com>
+References: <1287696121-28307-1-git-send-email-msmith@cbnco.com>
+	<1287696121-28307-2-git-send-email-msmith@cbnco.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 21 Oct 2010 15:09:31 -0700
+Message-ID: <AANLkTinOB1TNQ4p384Yaov7bixr3-zNa_r6Q4hOS=ryY@mail.gmail.com>
+To: Michael Smith <msmith@cbnco.com>
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.0 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_SOFTFAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] Use common files for AT91SAM9 configuration
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2] gcc 4.3.4: backport -print-sysroot for libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,76 +54,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 22:07:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Oct 2010 22:10:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Koen Kooi skrev:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 21-10-10 10:43, Frans Meulenbroeks wrote:
-> 
->> PS: my opinion is that machine maintainers generally know better what
->> kernel works best for their machines than distro owners;
-> 
-> And what's stopping them to put DEFAULT_PREFERENCE_machine and
-> COMPATIBLE_MACHINE in the kernel recipes?
-> There is no technical reason for setting it in machine.conf, so why
-> should we break the orthogonality for that?
-> 
->> PPS: what's next? removing the PREFERRED_PROVIDER_virtual/kernel from
->> the machine configs because you feel you know better ?
-> 
-> That is actually an option these days since most kernel recipes set
-> COMPATIBLE_MACHINE correctly :)
-> But seriously, there are use cases for one distro to use a different
-> kernel for a given machine for whatever reasons.
-> 
-> This whole situation is a mess because recipes/linux is a mess. It would
-> be a nice topic for OEDEM to see if we should switch to a poky BSP
-> model. It would boils down to:
-> 
-> 1 bblayer per machine or SOC_FAMILY containing:
-> * machine.conf
-> * first and second stage bootloaders
-> * kernel
+On Thu, Oct 21, 2010 at 2:22 PM, Michael Smith <msmith@cbnco.com> wrote:
+> libtoolized configure scripts need this in order to autodetect sysroot
+> path when --with-sysroot is passed.
+>
+> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> Cc: Khem Raj <raj.khem@gmail.com>
 
-I have already come to the conclusion that we could have a single 
-linux.bb recipe.
+looks ok thanks for doing it.
 
-This assumes that you define things like KERNEL_VERSION, SOC_FAMILY
-etc. outside the recipe and then include files with include filenames
-containing approproate ENVIRONMENT variables.
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
-I.E:
-include $(KERNEL_VERSION)/kernel_source
-include	$(SOC_FAMILY)/$(KERNEL_VERSION)/kernel_patch
 
-etc.
-
-> 
-> I can see some serious issues with that, but that's for another thread
-> to discuss.
-> 
-> regards,
-> 
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFMwAb7MkyGM64RGpERAuYSAKCaGnOasoXFk0Cb9xvcASP211PU0gCfaacw
-> 850xksIBon0+M5P9rbt4mOo=
-> =5mO/
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-BR
-Ulf Samuelsson
-
+> ---
+> =C2=A0recipes/gcc/gcc-4.3.4.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A03 ++-
+> =C2=A0.../gcc-4.3-backport-print-sysroot.patch =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | =C2=A0 =C2=A00
+> =C2=A02 files changed, 2 insertions(+), 1 deletions(-)
+> =C2=A0copy recipes/gcc/{gcc-4.3.3 =3D> gcc-4.3.4}/gcc-4.3-backport-print-=
+sysroot.patch (100%)
+>
+> diff --git a/recipes/gcc/gcc-4.3.4.inc b/recipes/gcc/gcc-4.3.4.inc
+> index 5aef5e5..3f3809c 100644
+> --- a/recipes/gcc/gcc-4.3.4.inc
+> +++ b/recipes/gcc/gcc-4.3.4.inc
+> @@ -8,7 +8,7 @@ LICENSE =3D "GPLv3"
+> =C2=A0DEPENDS =3D "mpfr gmp"
+> =C2=A0NATIVEDEPS =3D "mpfr-native gmp-native"
+>
+> -INC_PR =3D "r12"
+> +INC_PR =3D "r13"
+>
+> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=3Da=
+rchive \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://fedora/gcc43-c++-builtin-redecl.patch;s=
+triplevel=3D0 \
+> @@ -62,6 +62,7 @@ SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.=
+bz2;name=3Darchive \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://gcc-4.3.x-fix-EXTRA_BUILD.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://gcc-flags-for-build.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://Makefile.in.patch \
+> + =C2=A0 =C2=A0 =C2=A0 file://gcc-4.3-backport-print-sysroot.patch \
+> =C2=A0"
+>
+> =C2=A0SRC_URI_append_sh3 =C2=A0=3D " file://sh3-installfix-fixheaders.pat=
+ch "
+> diff --git a/recipes/gcc/gcc-4.3.3/gcc-4.3-backport-print-sysroot.patch b=
+/recipes/gcc/gcc-4.3.4/gcc-4.3-backport-print-sysroot.patch
+> similarity index 100%
+> copy from recipes/gcc/gcc-4.3.3/gcc-4.3-backport-print-sysroot.patch
+> copy to recipes/gcc/gcc-4.3.4/gcc-4.3-backport-print-sysroot.patch
+> --
+> 1.7.0.4
+>
+>
 
 
