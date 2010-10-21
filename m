@@ -1,39 +1,41 @@
-Received: from vms173007pub.verizon.net ([206.46.173.7])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1P8xkV-0001zl-Dt
+	(envelope-from <coolaj86@gmail.com>) id 1P8xy7-00082y-Tu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 18:12:17 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LAN00IYSEAYBR53@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	21 Oct 2010 11:11:27 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C8CD714AF64; Thu,
-	21 Oct 2010 12:11:21 -0400 (EDT)
-Date: Thu, 21 Oct 2010 12:11:21 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20101021161121.GA12131@denix.org>
-References: <i9p1d0$7q4$1@dough.gmane.org> <4CC00D57.4070601@xora.org.uk>
-	<i9p2uf$f40$1@dough.gmane.org> <4CC0104B.4070108@xora.org.uk>
-	<AANLkTi=74mwvxLLwCjEhV3OMCyOdpfRZeU0Z-bf6TM+P@mail.gmail.com>
-	<1287657524.16386.437.camel@rex>
-	<AANLkTimn0RDABjQbJcO3dWHpWPWD6giY1taSVixn0MHp@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F0803110B3520@dlee06.ent.ti.com>
-	<AANLkTi=ut_LSHfYcy-SsC2VLCW0Mxvwao6xEeMwgM+2+@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <AANLkTi=ut_LSHfYcy-SsC2VLCW0Mxvwao6xEeMwgM+2+@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.7
-X-SA-Exim-Mail-From: denis@denix.org
+	Thu, 21 Oct 2010 18:26:21 +0200
+Received: by qyk10 with SMTP id 10so2255769qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Oct 2010 09:25:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=nG4xwCAgWCinELsAPZzXXNiH/ib6Yonx9coUfmJE0LM=;
+	b=SsCSHKYk2ubu66/JgopCEQpHs//qL4lC0n7GWzFwnA1GZUkGcZhiPgbOSypLsW0/gq
+	AU+Wir9lOuTdX8UxazJe9fo4PUca/V7geQf7X7m086UKKImBoZb7tG94kUp7rHdJy+7F
+	72c0BzAiGBuCO+8PHzHqyJ2gxn+V9cK57VWVY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=aNlprc61klAHpMpHC0zSTfQfF+e3fOOFCICc8LukJ3qB+cDYv81ApwKQrY9ypm9Q9j
+	bzVZHn7yCt4XDwnfV/2S650QTHLzmkYXyCwpaAtzseB8S6XrdO6HDOqkyzr6ixDu5ugI
+	vwnmgtVXPZAHTDoQVoV8JL/NaaStzIQ8fzDCg=
+Received: by 10.102.215.17 with SMTP id n17mr1823264mug.99.1287678216803; Thu,
+	21 Oct 2010 09:23:36 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.112.201 with HTTP; Thu, 21 Oct 2010 09:19:32 -0700 (PDT)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Thu, 21 Oct 2010 10:19:32 -0600
+Message-ID: <AANLkTinopf3q+cmP5hi7sg0R0j5xyEE4pOLNzkw-yrz=@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: bitbake monit fails "missing argument to --host-alias"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,23 +49,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 16:12:18 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 21 Oct 2010 16:26:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Oct 21, 2010 at 07:21:49AM -0700, Chris Larson wrote:
-> On Thu, Oct 21, 2010 at 6:46 AM, Maupin, Chase <chase.maupin@ti.com> wrote:
-> 
-> > I haven't tried this myself yet, but if you wanted to tie to a particular
-> > PR of the base recipe wouldn't you just put the amend.inc in your overlay at
-> > recipes/blah/blah-version-pr directory?
-> 
-> Yes, but bbappend can't do that, its bound to the recipe filename,
-> unfortunately.
+NOTE: Executing runqueue
+NOTE: Running task 388 of 607 (ID: 11,
+/home/coolaj86/overo-oe/user.collection/recipes/monit/monit_5.1.1.bb,
+do_configure)
+ERROR: function do_configure failed
+ERROR: log data follows
+(/home/coolaj86/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/monit-5.1.1-r0/temp/log.do_configure.18244)
+| configure: error: missing argument to --host-alias
+NOTE: Task failed:
+/home/coolaj86/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/monit-5.1.1-r0/temp/log.do_configure.18244
+ERROR: TaskFailed event exception, aborting
 
-Right, that's why bbappend is inferior to amend... :)
 
--- 
-Denys
-
+AJ ONeal
 
