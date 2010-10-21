@@ -1,42 +1,44 @@
-Received: from hsp-52.hspserver.com ([85.197.80.179])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ml@vdm-design.de>) id 1P8s3a-00026o-EL
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P8sE9-0002Mc-4N
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Oct 2010 12:07:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 03D3F309C044
+	Thu, 21 Oct 2010 12:18:29 +0200
+Received: by iwn35 with SMTP id 35so2067036iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:59:58 +0200 (CEST)
-Received: from hsp-52.hspserver.com ([127.0.0.1])
-	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id p9VhM3n9c+4v
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:59:42 +0200 (CEST)
-Received: from tomboy.localnet (pD9E14808.dip.t-dialin.net [217.225.72.8])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by hsp-52.hspserver.com (Postfix) with ESMTPSA id D0084309C03F
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 11:59:42 +0200 (CEST)
-From: Thomas Zimmermann <ml@vdm-design.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Oct 2010 11:59:41 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.36-0.slh.1-aptosid-amd64; KDE/4.5.2; x86_64;
-	; )
-References: <4CBECD95.1050700@dresearch.de>
-	<1287573007-24350-1-git-send-email-sledz@dresearch.de>
-In-Reply-To: <1287573007-24350-1-git-send-email-sledz@dresearch.de>
+	Thu, 21 Oct 2010 03:17:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=bTnHTzu7KL82WoKh0reQU0ETXJRZVLOFxQTKSbl7Aqg=;
+	b=jwhyAZaefuFTjD9tUDEqI47S2klX5+UazUDNiYc2aMv24ugzrcVSo74YVbJ99oqzAM
+	GVxUeq3CuYjdWPStf7Sv0HZPWlTXzzjmGsplMpKms0hmNHb+zhzXF/7uAaetpBbnR2MK
+	FpH9pbI5m2QJp4wG8mupYSfmaj9lhLcHL+cHE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=MOo1VBBJINhHpkOberEX6poQ3gUfbz9oEqXUZARPDLToACm+XsYDrTOu5rKllLqI8m
+	4bjv3sVgA0eGPxuGHBACNEcAH9FQgikcAQqVGU/KUre88mJlOTxn3rn55VcTghfiAWK4
+	MUgdywiNxvHf9COlximfaZHMNyDhzX7jX574U=
 MIME-Version: 1.0
-Message-Id: <201010211159.41352.ml@vdm-design.de>
-X-SA-Exim-Connect-IP: 85.197.80.179
-X-SA-Exim-Mail-From: ml@vdm-design.de
+Received: by 10.231.11.9 with SMTP id r9mr706138ibr.47.1287656272530; Thu, 21
+	Oct 2010 03:17:52 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Thu, 21 Oct 2010 03:17:52 -0700 (PDT)
+In-Reply-To: <4CC0104B.4070108@xora.org.uk>
+References: <i9p1d0$7q4$1@dough.gmane.org> <4CC00D57.4070601@xora.org.uk>
+	<i9p2uf$f40$1@dough.gmane.org> <4CC0104B.4070108@xora.org.uk>
+Date: Thu, 21 Oct 2010 12:17:52 +0200
+Message-ID: <AANLkTimyBY9nSiSeH0xCYRJ20ah0ULp77HCqC-5tg_ya@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] ca-certificates: unbreak do_configure of packages depending on ca-bundle.pem
+Subject: Re: [RFC] turning conf/machine into a set of bblayers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,60 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2010 10:07:35 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Oct 2010 10:18:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Am Mittwoch 20 Oktober 2010, 13:10:06 schrieb Steffen Sledz:
-> just create an empty ca-bundle file to satisfy build time
-> dependencies in do_configure of other packages (e.g. epiphany),
-> content is updated later in postinst
-> 
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+Some initial thoughts:
 
-Acked-by: Thomas Zimmermann <ml@vdm-design.de>
+What about out-of-tree kernel modules?
+No idea right away whether we have many.
+I can imagine we want to keep these in one place (I doubt if they are
+very machine specific).
 
-> ---
->  .../ca-certificates_20090814+nmu2.bb               |    9 +++++++++
->  1 files changed, 9 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
-> b/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb index
-> c8e4dbd..a37b01a 100644
-> --- a/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
-> +++ b/recipes/ca-certificates/ca-certificates_20090814+nmu2.bb
-> @@ -3,6 +3,7 @@ HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
->  SECTION = "misc"
->  PRIORITY = "optional"
->  LICENSE = "GPL"
-> +PR = "r1"
-> 
->  SRC_URI =
-> "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
-> file://remove-c-rehash.patch"
-> @@ -27,13 +28,21 @@ do_install_append() {
->                  crt=$(echo $crt | sed -e 's/\.\///')
->                  echo $crt >> ${D}/etc/ca-certificates.conf
->          done
-> +
-> +	# update-ca-certificates is not able to deal with pathes,
-> +	# so just create an empty ca-bundle file to satisfy build time
-> +	# dependencies in do_configure of other packages (e.g. epiphany),
-> +	# content is updated later (see pkg_postinst)
-> +	touch ${D}/etc/ssl/ca-bundle.pem
->  }
-> 
->  PACKAGE_ARCH = "all"
->  PACKAGES = "${PN}"
-> 
->  pkg_postinst_${PN} () {
-> +if test -z "$D"; then
->          /usr/sbin/update-ca-certificates
-> +fi
->  }
-> 
->  CONFFILES_${PN} = "/etc/ca-certificates.conf"
+putting the recipes in the overlay creates some duplication (and hence
+potentially double maintenance).
+Probably for kernel this is less of an issue as most machines seem to
+have their own kernel.
 
+There is however the case that machines like to share the same kernel.
+E.g. sheevaplug/openrd client/openrd base/openrd ultimate (and perhaps
+pogoplug and dockstar). These are all based upon the same soc.
+
+The thing I do like less about the amend.inc proposal is that unless
+we are very careful and strict with the contents of the linux dir we
+still end up with quite some recipes in there.
+(you probably end up with a base recipe for every git tree; and maybe
+even for different tags in it). this is probably less desirable.
+
+And wrt u-boot there seems to be some more commonality (although the
+u-boot_git recipe is quite big).
+
+Maybe someone could craft a usage table (don't have time to do that
+right now myself).
+
+More later....
+
+Have fun! Frans
 
 
