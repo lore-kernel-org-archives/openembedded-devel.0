@@ -1,52 +1,35 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9B8H-0001Lo-Pz
+	(envelope-from <jaap.dejong@nedap.com>) id 1P9BCw-0001Sv-3A
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 08:29:42 +0200
-Received: by gxk22 with SMTP id 22so347927gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 23:28:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=fZH8YUUYOFxcA9r5yVnJySdKsp3xZHijUyvLJZQdbRY=;
-	b=q+421Chw1uM7kXWdHUFnhN6ZixdnAZmL8dR5f0wv9HI5EawRmlRKGEMt7o5xGmkf/d
-	n4aPnbK+ABE3aN7vrNXHREF6hL4P1LdlSLTupd/bKcXHd9AoizjC5Vy/qfXovT7rntAu
-	W8RECabyVX0u3iL2zFH0T4YtObWoneUHNj+hc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=l/sF0xiXwdkKDe+B2kZ2Ez1fTlDVY1p1tcqJAk9Im80hhpRTy5HMli3LYxQVCL1lHm
-	xJ3SOg8n3mEC0Yy6n7mN6K6VDQnVM3mJcbXj0fx8lOgisdl2ikVLgTMuBUGd34tvs5L5
-	nAkgENI0czpTAmxDZt9KqU1YitOpu/LQTSvBE=
+	Fri, 22 Oct 2010 08:34:32 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Fri, 22 Oct 2010 08:33:30 +0200
+X-TM-IMSS-Message-ID: <1a6551690000885e@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 1a6551690000885e for
+	<jaap.dejong@nedap.com>; Fri, 22 Oct 2010 08:33:31 +0100
+Message-ID: <4CC13039.4020002@nedap.com>
+Date: Fri, 22 Oct 2010 08:33:29 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.11) Gecko/20101006 Lightning/1.0b2 Thunderbird/3.1.5
 MIME-Version: 1.0
-Received: by 10.42.41.16 with SMTP id n16mr1649401ice.270.1287728936930; Thu,
-	21 Oct 2010 23:28:56 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Thu, 21 Oct 2010 23:28:56 -0700 (PDT)
-In-Reply-To: <4CC0B81F.6030706@atmel.com>
-References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>
-	<201010181520.30454.marcin@juszkiewicz.com.pl>
-	<4CBC4DD4.3010908@atmel.com> <i9hpii$gf2$1@dough.gmane.org>
-	<4CBC7F6A.9040000@atmel.com>
-	<AANLkTi=xBMvDEKjiaNKy7zijs4DCZwhrSDr=gHVkMh_T@mail.gmail.com>
-	<4CBCD3FC.5090305@atmel.com>
-	<AANLkTin6jOdo56fCEaMLNgiKDThBV0yg7x_OvOntwQEM@mail.gmail.com>
-	<4CBF81FC.3040803@atmel.com> <i9osim$dcl$1@dough.gmane.org>
-	<AANLkTi=ABVTThHSKLbf-QAJcdbOZmQr3B5vw6WVj2hGg@mail.gmail.com>
-	<i9p0tr$5iq$1@dough.gmane.org> <4CC0B81F.6030706@atmel.com>
-Date: Fri, 22 Oct 2010 08:28:56 +0200
-Message-ID: <AANLkTi=hLsCrMjw4_mvyniVX8GUsqkVZ2nUnrcm4-UD6@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4CC04756.2020004@nedap.com>
+In-Reply-To: <4CC04756.2020004@nedap.com>
+X-OriginalArrivalTime: 22 Oct 2010 06:33:30.0028 (UTC)
+	FILETIME=[0A8CDEC0:01CB71B3]
+X-SA-Exim-Connect-IP: 213.160.213.92
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
+	HTML_FONT_FACE_BAD,HTML_MESSAGE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] Use common files for AT91SAM9 configuration
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: failure building cacaoh-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,67 +43,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 06:29:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 22 Oct 2010 06:34:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/10/22 Ulf Samuelsson <ulf.samuelsson@atmel.com>:
-> Koen Kooi skrev:
->>
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 21-10-10 10:43, Frans Meulenbroeks wrote:
->>
->>> PS: my opinion is that machine maintainers generally know better what
->>> kernel works best for their machines than distro owners;
->>
->> And what's stopping them to put DEFAULT_PREFERENCE_machine and
->> COMPATIBLE_MACHINE in the kernel recipes?
->> There is no technical reason for setting it in machine.conf, so why
->> should we break the orthogonality for that?
->>
->>> PPS: what's next? removing the PREFERRED_PROVIDER_virtual/kernel from
->>> the machine configs because you feel you know better ?
->>
->> That is actually an option these days since most kernel recipes set
->> COMPATIBLE_MACHINE correctly :)
->> But seriously, there are use cases for one distro to use a different
->> kernel for a given machine for whatever reasons.
->>
->> This whole situation is a mess because recipes/linux is a mess. It would
->> be a nice topic for OEDEM to see if we should switch to a poky BSP
->> model. It would boils down to:
->>
->> 1 bblayer per machine or SOC_FAMILY containing:
->> * machine.conf
->> * first and second stage bootloaders
->> * kernel
+The same applies for cacaoh-openjdk-native.inc and probably also for 
+cacaoh-cldc-native_0.98.bb
+Patch will be:
+
+    diff -urN a/cacaoh-cldc-native_0.98.bb b/cacaoh-cldc-native_0.98.bb
+    --- a/cacaoh-cldc-native_0.98.bb    2010-10-22 08:30:39.266606463 +0200
+    +++ b/cacaoh-cldc-native_0.98.bb    2010-10-22 08:30:58.271132923 +0200
+    @@ -5,7 +5,7 @@
+        "
+
+      do_stage() {
+    -    install -m 0755 src/cacaoh/.libs/cacaoh
+    ${STAGING_BINDIR}/cacaoh-cldc-${PV}
+    +    install -m 0755 src/cacaoh/cacaoh
+    ${STAGING_BINDIR}/cacaoh-cldc-${PV}
+      }
+
+      SRC_URI[md5sum] = "8b8907c8b925761c9410bcadb9705346"
+    diff -urN a/cacaoh-native.inc b/cacaoh-native.inc
+    --- a/cacaoh-native.inc    2010-10-22 08:31:15.203602101 +0200
+    +++ b/cacaoh-native.inc    2010-10-22 08:31:08.995430068 +0200
+    @@ -24,7 +24,7 @@
+
+      do_install() {
+        install -d ${D}${bindir}/cacaoh-${PV}
+    -  install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
+    +  install -m 0755 src/cacaoh/cacaoh ${D}${bindir}/cacaoh-${PV}
+      }
+
+      NATIVE_INSTALL_WORKS = "1"
+    diff -urN a/cacaoh-openjdk-native.inc b/cacaoh-openjdk-native.inc
+    --- a/cacaoh-openjdk-native.inc    2010-10-22 08:27:37.209570163 +0200
+    +++ b/cacaoh-openjdk-native.inc    2010-10-22 08:27:45.889809994 +0200
+    @@ -27,5 +27,5 @@
+      }
+
+      do_install() {
+    -    install -m 0755 src/cacaoh/.libs/cacaoh
+    ${STAGING_BINDIR}/cacaoh-openjdk-${PV}
+    +    install -m 0755 src/cacaoh/cacaoh
+    ${STAGING_BINDIR}/cacaoh-openjdk-${PV}
+      }
+
+
+
+On 10/21/2010 03:59 PM, Jaap de Jong wrote:
+> Thought this was fixed some time ago, but it fails nevertheless...
 >
-> I have already come to the conclusion that we could have a single linux.bb
-> recipe.
+>     NOTE: Running task 1854 of 2596 (ID: 2,
+>     /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/cacao/cacaoh-native_0.99.3.bb,
+>     do_install)
+>     Packaged contents of libusb-compat into
+>     /media/OpenEmbedded/unstable/tmp/deploy/eglibc/ipk/armv5te/libusb-0.1-4_0.1.3-r0.9_armv5te.ipk
+>     NOTE: Not creating empty archive for libusb-compat-doc-0.1.3-r0.9
+>     ERROR: function do_install failed
+>     ERROR: log data follows
+>     (/media/OpenEmbedded/unstable/tmp/work/i686-linux/cacaoh-native-0.99.3-r2.1/temp/log.do_install.19694)
+>     | install: cannot stat `src/cacaoh/.libs/cacaoh': No such file or
+>     directory
+>     NOTE: Task failed:
+>     /media/OpenEmbedded/unstable/tmp/work/i686-linux/cacaoh-native-0.99.3-r2.1/temp/log.do_install.19694
+>     ERROR: TaskFailed event exception, aborting
+>     ERROR: Build of
+>     /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/cacao/cacaoh-native_0.99.3.bb
+>     do_install failed
 >
-> This assumes that you define things like KERNEL_VERSION, SOC_FAMILY
-> etc. outside the recipe and then include files with include filenames
-> containing approproate ENVIRONMENT variables.
+> Fixed with:
 >
-> I.E:
-> include $(KERNEL_VERSION)/kernel_source
-> include $(SOC_FAMILY)/$(KERNEL_VERSION)/kernel_patch
+>     diff -urN a/cacaoh-native.inc b/cacaoh-native.inc
+>     --- a/cacaoh-native.inc    2010-10-21 15:55:49.604353109 +0200
+>     +++ b/cacaoh-native.inc    2010-10-21 15:55:26.295644251 +0200
+>     @@ -24,7 +24,7 @@
 >
-> etc.
+>      do_install() {
+>        install -d ${D}${bindir}/cacaoh-${PV}
+>     -  install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
+>     +  install -m 0755 src/cacaoh/cacaoh ${D}${bindir}/cacaoh-${PV}
+>      }
 >
-
-Isn't that what kernel.bbclass is about ?
-
-Wrt your example:
-instead of
-include $(KERNEL_VERSION)/kernel_source
-you could say:
-at the place where you define kernel_source:
-SRC_URI = "..."
-
-Basically what you propose is kind of a template.
-
-Frans
-
+>      NATIVE_INSTALL_WORKS = "1"
+>
+>
+> Not sure if this is the final fix...
 
