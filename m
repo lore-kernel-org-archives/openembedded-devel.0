@@ -1,40 +1,41 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9DQO-0001i2-TV
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9DQn-0003H2-0N
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 10:56:33 +0200
-Received: by mail-iw0-f175.google.com with SMTP id 6so7095iwn.6
+	Fri, 22 Oct 2010 10:57:07 +0200
+Received: by gxk22 with SMTP id 22so434314gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 01:55:57 -0700 (PDT)
+	Fri, 22 Oct 2010 01:56:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=a5FweA5kvnOzaqToEaVpyJ5Sgh6rBVCvyJzwrK2H4LY=;
-	b=VIVQRndNuwBij3ewGUlbUuXSTRhB3dcmhi4xSJi5FZOIg1LDPIbh/sQTCFCHfE8X98
-	CCBXZNwi0W2OG6OCwlmgBsgyjnZnUDxMyCH097EWkTPbwFUFGEc4RgflwnJaDnKmR5ZH
-	qHg92se8WPCyTRQ3CJR5IzMXLfJNPC6f5WuZY=
+	bh=C2795dKG2VnFg1YJ1BCo3q90o0CpbHHHyb+M5UpGjo4=;
+	b=VyQWEd2WSGhtjizrFnkNiHBQcrjsGQbaVxkooWrK+mbNP7HVNhGROC8mcxcXGHOFYO
+	b7zLSv3naxdBrZKc5D5cxxpmXocDGhAXeegXDvyxA/zgA22GfHrgKOxxut4Qp/JooTTt
+	4Zhyt/0rQOGrpCHR2uRvmxlI4oL6D6zdtP/iU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=dAhXyhO5VQzeUzhQfS+C5Ohx5yT9Wnw0RpuSM5R6TO/zV9s7f08Cft4yyh+qidb66J
-	2xTlDnkN9sXtQSx2y8JaVM75Qso660+1jz4I+fM1P1H7a8parNjQasxDVaFzZAZRunr6
-	Vc2382el3S3yiuNXNyIGj/DXypKEHG/TmbHvo=
+	b=RroC338dRGPZiRZ3Sjg5bbKYVTOGdxYRXaFDoWayUbQOxKlC+ZMWC5jdiclLet14fU
+	RbMpNl+powyqwSsG+C/hhDE1nK4QOCtMQJ4jBFkDJUpnEg1ryPOKNQtmcBh81ZGyyPlG
+	BUNocEu7V5e20aF9oFJQemk26z17mWmb4XCaM=
 MIME-Version: 1.0
-Received: by 10.231.15.4 with SMTP id i4mr2139907iba.73.1287737755998; Fri, 22
-	Oct 2010 01:55:55 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Fri, 22 Oct 2010 01:55:55 -0700 (PDT)
-In-Reply-To: <1287074146-3705-5-git-send-email-fransmeulenbroeks@gmail.com>
+Received: by 10.42.228.10 with SMTP id jc10mr1624323icb.421.1287737778837;
+	Fri, 22 Oct 2010 01:56:18 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Fri, 22 Oct 2010 01:56:18 -0700 (PDT)
+In-Reply-To: <1287074146-3705-6-git-send-email-fransmeulenbroeks@gmail.com>
 References: <1287074146-3705-1-git-send-email-fransmeulenbroeks@gmail.com>
 	<1287074146-3705-2-git-send-email-fransmeulenbroeks@gmail.com>
 	<1287074146-3705-3-git-send-email-fransmeulenbroeks@gmail.com>
 	<1287074146-3705-4-git-send-email-fransmeulenbroeks@gmail.com>
 	<1287074146-3705-5-git-send-email-fransmeulenbroeks@gmail.com>
-Date: Fri, 22 Oct 2010 10:55:55 +0200
-Message-ID: <AANLkTi=YoycM4HD3un_pU3N09d-Tvam6Kf_syN4M5Jnc@mail.gmail.com>
+	<1287074146-3705-6-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Fri, 22 Oct 2010 10:56:18 +0200
+Message-ID: <AANLkTi=u3fQWjo=BwpSXhZr_0JTf=0Le46J+6a2rxaft@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Connect-IP: 209.85.161.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -42,7 +43,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 5/7] mono-mcs-intermediate: remove useless SRC_URI += ""
+Subject: Re: [PATCH 6/7] kaffe-gtk_1.1.5.bb: remove useless EXTRA_OECONF += ""
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,7 +57,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 08:56:33 -0000
+X-List-Received-Date: Fri, 22 Oct 2010 08:57:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -67,23 +68,23 @@ would send an ack
 2010/10/14 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
 > Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 > ---
-> =A0recipes/mono/mono-mcs-intermediate_2.6.3.bb | =A0 =A02 --
+> =A0recipes/kaffe/kaffe-gtk_1.1.5.bb | =A0 =A02 --
 > =A01 files changed, 0 insertions(+), 2 deletions(-)
 >
-> diff --git a/recipes/mono/mono-mcs-intermediate_2.6.3.bb b/recipes/mono/m=
-ono-mcs-intermediate_2.6.3.bb
-> index cd5bcae..8aa54d3 100644
-> --- a/recipes/mono/mono-mcs-intermediate_2.6.3.bb
-> +++ b/recipes/mono/mono-mcs-intermediate_2.6.3.bb
-> @@ -8,8 +8,6 @@
-> =A0require mono.inc
-> =A0require mono-mcs-intermediate.inc
+> diff --git a/recipes/kaffe/kaffe-gtk_1.1.5.bb b/recipes/kaffe/kaffe-gtk_1=
+.1.5.bb
+> index f4e9b93..c58aa41 100644
+> --- a/recipes/kaffe/kaffe-gtk_1.1.5.bb
+> +++ b/recipes/kaffe/kaffe-gtk_1.1.5.bb
+> @@ -6,7 +6,5 @@ require kaffe.inc
 >
-> -SRC_URI +=3D ""
+> =A0DEPENDS +=3D "glib-2.0 gmp gtk+ pango zlib libxtst kaffeh-native"
+>
+> -EXTRA_OECONF +=3D ""
 > -
-> =A0PR =3D "${INC_PR}.0"
->
-> =A0SRC_URI[md5sum] =3D "b1dc21bac2c7c75814a9f32246eadadd"
+> =A0SRC_URI[md5sum] =3D "928c578d4808012fe5ba5587071d2aa2"
+> =A0SRC_URI[sha256sum] =3D "f4ed45720d76f5182f2dede135c1856ad01bdf9875f544=
+59b6baa1071af67280"
 > --
 > 1.6.4.2
 >
