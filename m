@@ -1,37 +1,35 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P9OVb-0008Eu-1T
+	(envelope-from <raj.khem@gmail.com>) id 1P9OYz-0000T8-4q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 22:46:40 +0200
-Received: by ywa8 with SMTP id 8so1094456ywa.6
+	Fri, 22 Oct 2010 22:50:17 +0200
+Received: by gxk22 with SMTP id 22so1033457gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 13:46:00 -0700 (PDT)
+	Fri, 22 Oct 2010 13:49:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=2fEzud/vfq4ZVA+d0EgwqXcJWwvRfaFyqQ9Ol2BggwQ=;
-	b=IAI5ey17EU2ZigruoXRh/ZUosRhszs8KIgN+Eo4q0gNOp1CL+vLLwvbWD0MaL0UJn+
-	Z31AdEZzkpOWgRKK9kaH022TFD6QVpynNXo7rM8EPYHRFaMYUpct8PHgxOd1k4P6K+IG
-	OoLDoc4403P5XnHMSQi23rpKTWxEt4QTVRX9w=
+	:references:from:date:message-id:subject:to:content-type;
+	bh=uuC0QxRd+LUZtDjaFYNFrOIqJF0S3O0I7dzXBAJmMnk=;
+	b=CkLdrwrVJxqDB7EAATCosZYZ1e7JfBnyCjkvIWu81NLwMydz0NBYhjLTHrAl/PvH7W
+	rj9JR/Mp/R1hoRvV1rJanqOrvjdiWVENgDNE+GiEwTgxHuYyVZxyHdcC6Sb+c7HPmAGd
+	evbBP8gLB6RbpzVpAsUWmr3bwbVt4PgHQjm8s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=AphOBPy7fiV43IRvPWJzsv73TW9FuTUWeFurzVq3/yULFymwHMSNOEIKJyVKcehARV
-	BOHN0XEUB4S42SOXU8l3Dqv9bDhA/TYoG8+NlvXnV8lmc8otMv/dKi+qw0xCSP/tnXPe
-	QfnnLrozQlIb/w1kdjtpMCLeXCKnptQAXwc2Q=
-Received: by 10.42.171.10 with SMTP id h10mr2451415icz.458.1287780360196; Fri,
-	22 Oct 2010 13:46:00 -0700 (PDT)
+	:content-type;
+	b=b/RCJXaRIvGyMnxmfXnxh4pGu9Ld2aiYMh3qCWoZzuSjGZd5qMwQM7YoeSXE6lWfqM
+	vcD3UXgMj9ysBznU+jh8v73t6N7I9Tbtu5WGZNoipYsrrmtLsmnzBrvsCwyHTGCHzQDk
+	hZnFXfa06V65iqSgyWcLhC8YZTuL84tDjJ1iY=
+Received: by 10.42.176.194 with SMTP id bf2mr2312500icb.435.1287780567158;
+	Fri, 22 Oct 2010 13:49:27 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.42.164.194 with HTTP; Fri, 22 Oct 2010 13:45:40 -0700 (PDT)
-In-Reply-To: <20101022064239.GB3527@jama>
-References: <4CC04756.2020004@nedap.com> <4CC13039.4020002@nedap.com>
-	<20101022064239.GB3527@jama>
+Received: by 10.42.164.194 with HTTP; Fri, 22 Oct 2010 13:49:07 -0700 (PDT)
+In-Reply-To: <4CC0C67C.6060806@phoenixsoftware.it>
+References: <4CC0C67C.6060806@phoenixsoftware.it>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 22 Oct 2010 13:45:40 -0700
-Message-ID: <AANLkTikh_HJ9JMvn_AQ2vseERS2jTgiAhpd=EE+57Xys@mail.gmail.com>
+Date: Fri, 22 Oct 2010 13:49:07 -0700
+Message-ID: <AANLkTi=ir567dGvzgOTgwvba3M0k1wyWmAJiwG4HNeJG@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Connect-IP: 209.85.161.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: failure building cacaoh-native
+Subject: Re: external-toolchain-csl and libtool 2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,43 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 20:46:40 -0000
+X-List-Received-Date: Fri, 22 Oct 2010 20:50:21 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 21, 2010 at 11:42 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> On Fri, Oct 22, 2010 at 08:33:29AM +0200, Jaap de Jong wrote:
->> The same applies for cacaoh-openjdk-native.inc and probably also for
->> cacaoh-cldc-native_0.98.bb
->> Patch will be:
+On Thu, Oct 21, 2010 at 4:02 PM, Pierluigi Passaro
+<pierluigi.passaro@phoenixsoftware.it> wrote:
+> Hi all,
+> LIBTOOL_HAS_SYSROOT feature has been recently enabled on Angstom 2010.x
+> distro.
 >
-> Can you send it as proper patch?
+> However, using CodeSourcery toolchain, this feature lead to use CSL sysroot
+> as search path, that is generally different from
+> ${STAGING_DIR_TARGET}${libdir} folder used for packages.
 
-this time I did a manual import as we needed this patch next time
-I will ignore patches which can not be applied straight away.
+hmmm yes I see the problem. Right now its left upto the compile to provide
+the sysroot which works well with internal toolchain but will not work with
+external toolchains or the compilers which dont support --print-sysroot option
 
- Also please for previous cacaoh-native
-> patch.
+I will come up with a patch so specify the sysroot for libtool so that it
+does not rely upon the compiler to compute it.
+
 >
-> http://wiki.openembedded.net/index.php/How_to_submit_a_patch_for_dummies
+> At present I worked around the problem with the attached patch, but I was
+> wondering if this could be a misconfiguration or a bug.
 >
-> BTW: are you using libtool-2.4 or old libtool-2.2.6b? Because I
-> see this only since using libtool-2.4 and someone should check that this
-> patch wont break build for people using 2.2.6b.
+> Any suggestion will be appreciated.
 >
 
-Works ok with both libtools.
+With libtool 2.4 I dont see a reason to disable sysroot. The variable is only
+provided to keep libtool 2.2.6 functional as same time. So when using 2.4 please
+do not disable the sysroot feature.
 
-> Regards,
+> Regards
+> Gigi
 >
 > --
-> Martin 'JaMa' Jansa =C2=A0 =C2=A0 jabber: Martin.Jansa@gmail.com
+> Ing. Pierluigi Passaro
+> Viale Don Luigi Sturzo 34
+> 30174 Venezia Mestre
+> Cel: +39 348 355 4119
+> Tel: +39 041 862 3373
+> Fax: +39 041 862 3173
+> Web: www.phoenixsoftware.it
+> P.IVA 03884060272
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 >
 
 
