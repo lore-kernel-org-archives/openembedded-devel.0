@@ -1,46 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P9Bak-0002A5-B6
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9C7Z-0003FS-Ki
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 08:59:07 +0200
-Received: by iwn35 with SMTP id 35so593428iwn.6
+	Fri, 22 Oct 2010 09:33:02 +0200
+Received: by gyg13 with SMTP id 13so379195gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 23:58:21 -0700 (PDT)
+	Fri, 22 Oct 2010 00:32:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=jyj3YXwN3/rKz966mJ6o005PMj94tCCQDzZKACEalz0=;
-	b=K1CXMlnjme7VjpFHfCg3DpIshdUdsd3FvtN/YsQOA4x4NRBx/hhw9034mSUBggmIn7
-	hzJR/AhzJnMgwGhaTbU5KyEmzJp1Gxcw6o3Lk3kYqe3V1FG5FN735m52NVf7GrXfaWmd
-	e4Fc5L133UU7mj2H+64fNutFqIPBqyJkY5jKg=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=tBwXjNVnJSw305NA5Wwn7ciEQBsn5rBwxxLMhw7JcV0=;
+	b=eOQyySmshMEz4EjWCR1K3rliqYpoWk9mDzG2K/r+aNTKbhYnDG7QzssqznGG4YvDZb
+	VubsUVl/auD8Ade7EVVWCOpPk+cx2R6x6djcK/kVP0PuxbkLVnhbLbS97o10VFp1taTx
+	Dtu6TMI3xhD/OVJ5y3t68XJEjL2lRHtKE6coM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=gYzEUyBHYg8ch9nYOS9HXGBAX3TNPsP8fqo8bP/MwYwOTywZmyNfS5ld3rMQC5D6ZB
-	IkSR6qHzE4LcLpcxxbryYKrX2/DQbxGDYzKEeTPK5dpfyXYlJCZWbkL9+Kg/Tw1+HGmj
-	hPG2KfLBvAPyossW/pnTKFgX365im8Zgkwp5I=
-Received: by 10.231.10.66 with SMTP id o2mr1955473ibo.158.1287730700776;
-	Thu, 21 Oct 2010 23:58:20 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id w9sm2787396ibc.7.2010.10.21.23.58.19
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Oct 2010 23:58:20 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=LSYa+gTrh1I6+lSnyvnPY8p2IR/w2EjvXIhXYMQIH7zqdVLv483TfHmpvTefUzMgDG
+	5CthE6P/Am7GvnriDPlTozyfN6ITxmmxVwx1MqBmW9Ae+52kQzhdO0D+YerEzSUu5vp/
+	7IyYkFcVJ90scZP/jGlVmjw9wI4FVYBbcNC/U=
+MIME-Version: 1.0
+Received: by 10.42.178.65 with SMTP id bl1mr266768icb.184.1287732739561; Fri,
+	22 Oct 2010 00:32:19 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Fri, 22 Oct 2010 00:32:19 -0700 (PDT)
+In-Reply-To: <20101022065559.GC3527@jama>
+References: <AANLkTin7MbMksEO7F4r3b-EAbCrx1ZG58OBu3ybHkNmG@mail.gmail.com>
+	<i9rbsq$tad$1@dough.gmane.org> <20101022065559.GC3527@jama>
+Date: Fri, 22 Oct 2010 09:32:19 +0200
+Message-ID: <AANLkTi=-w36_=-iZz7QB6kjgQ8_nUfpyg9Jv3a+iHQVP@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Oct 2010 23:58:03 -0700
-Message-Id: <1287730684-14143-4-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1287730684-14143-1-git-send-email-raj.khem@gmail.com>
-References: <1287730684-14143-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 4/5] binutils: Update libtool macros to reflect --with-sysroot -> --with-libtool-sysroot rename
+Subject: Re: patchwork cleanup call
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,405 +52,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 06:59:07 -0000
+X-List-Received-Date: Fri, 22 Oct 2010 07:33:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* We dont need to filter out with-sysroot anymore
+2010/10/22 Martin Jansa <martin.jansa@gmail.com>:
+> On Fri, Oct 22, 2010 at 08:44:42AM +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 21-10-10 22:58, Khem Raj wrote:
+>> > Hello OE'ers
+>> >
+>> > We have accumulated quite a bit of mails in patchwork. Patches that
+>> > are send to OE ml are nicely captured by
+>> > patchwork and shown when one visits http://patchwork.openembedded.org
+>> >
+>> > It would be nice if committers,reviewers and authors update the patch
+>> > status when they deal with the patch
+>> >
+>> > So please spare few minutes and have a look at the patchlist and see
+>> > if there is a patch authored or committed by you and update the status
+>> > accordingly.
+>> >
+>> > I regularly use this tool to pick up patches and this exercise will
+>> > help to remove the stale patch states
+>>
+>> We can do as we did in the past and say "On the first of november we're
+>> archiving all patches older than october 2010" to give people a bit more
+>> incentive.
+>
+> Would be nice to have spam feature in patchwork.
+>
+> Just sending state query to every Submitter email for patches in some
+> state (in this case not archived, "Action Required"), with link to it's
+> patchwork entry.
+>
+> Maybe someone with better patchwork knowledge or pwclient can get the
+> list of Submitters easier than parsing html?
+>
+> Regards,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../binutils-2.20.1/libtool-2.4-update.patch       |  128 ++++++++++----------
- recipes/binutils/binutils.inc                      |    6 +-
- 2 files changed, 65 insertions(+), 69 deletions(-)
+Nice ideas, but....
 
-diff --git a/recipes/binutils/binutils-2.20.1/libtool-2.4-update.patch b/recipes/binutils/binutils-2.20.1/libtool-2.4-update.patch
-index dcb20e9..f3a9203 100644
---- a/recipes/binutils/binutils-2.20.1/libtool-2.4-update.patch
-+++ b/recipes/binutils/binutils-2.20.1/libtool-2.4-update.patch
-@@ -7262,26 +7262,26 @@ Index: binutils-2.20.1/libtool.m4
- +AC_DEFUN([_LT_WITH_SYSROOT],
- +[AC_MSG_CHECKING([for sysroot])
- +AC_ARG_WITH([sysroot],
--+[  --with-sysroot[=DIR] Search for dependent libraries within DIR
-++[  --with-libtool-sysroot[=DIR] Search for dependent libraries within DIR
- +                        (or the compiler's sysroot if not specified).],
--+[], [with_sysroot=no])
-++[], [with_libtool_sysroot=no])
- +
- +dnl lt_sysroot will always be passed unquoted.  We quote it here
- +dnl in case the user passed a directory name.
- +lt_sysroot=
--+case ${with_sysroot} in #(
-++case ${with_libtool_sysroot} in #(
- + yes)
- +   if test "$GCC" = yes; then
- +     lt_sysroot=`$CC --print-sysroot 2>/dev/null`
- +   fi
- +   ;; #(
- + /*)
--+   lt_sysroot=`echo "$with_sysroot" | sed -e "$sed_quote_subst"`
-++   lt_sysroot=`echo "$with_libtool_sysroot" | sed -e "$sed_quote_subst"`
- +   ;; #(
- + no|'')
- +   ;; #(
- + *)
--+   AC_MSG_RESULT([${with_sysroot}])
-++   AC_MSG_RESULT([${with_libtool_sysroot}])
- +   AC_MSG_ERROR([The sysroot must be an absolute path.])
- +   ;;
- +esac
-@@ -10159,7 +10159,7 @@ Index: binutils-2.20.1/bfd/configure
-  with_pic
-  enable_fast_install
-  with_gnu_ld
--+with_sysroot
-++with_libtool_sysroot
-  enable_libtool_lock
-  enable_plugins
-  enable_largefile
-@@ -10167,7 +10167,7 @@ Index: binutils-2.20.1/bfd/configure
-    --with-pic              try to use only PIC/non-PIC objects [default=use
-                            both]
-    --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
--+  --with-sysroot=DIR Search for dependent libraries within DIR
-++  --with-libtool-sysroot=DIR Search for dependent libraries within DIR
- +                        (or the compiler's sysroot if not specified).
-    --with-mmap             try using mmap for BFD input files if available
-    --with-separate-debug-dir=DIR
-@@ -11076,29 +11076,29 @@ Index: binutils-2.20.1/bfd/configure
- +{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for sysroot" >&5
- +$as_echo_n "checking for sysroot... " >&6; }
- +
--+# Check whether --with-sysroot was given.
--+if test "${with_sysroot+set}" = set; then :
--+  withval=$with_sysroot;
-++# Check whether --with-libtool-sysroot was given.
-++if test "${with_libtool_sysroot+set}" = set; then :
-++  withval=$with_libtool_sysroot;
- +else
--+  with_sysroot=no
-++  with_libtool_sysroot=no
- +fi
- +
- +
- +lt_sysroot=
--+case ${with_sysroot} in #(
-++case ${with_libtool_sysroot} in #(
- + yes)
- +   if test "$GCC" = yes; then
- +     lt_sysroot=`$CC --print-sysroot 2>/dev/null`
- +   fi
- +   ;; #(
- + /*)
--+   lt_sysroot=`echo "$with_sysroot" | sed -e "$sed_quote_subst"`
-++   lt_sysroot=`echo "$with_libtool_sysroot" | sed -e "$sed_quote_subst"`
- +   ;; #(
- + no|'')
- +   ;; #(
- + *)
--+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_sysroot}" >&5
--+$as_echo "${with_sysroot}" >&6; }
-++   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_libtool_sysroot}" >&5
-++$as_echo "${with_libtool_sysroot}" >&6; }
- +   as_fn_error "The sysroot must be an absolute path." "$LINENO" 5
- +   ;;
- +esac
-@@ -13709,7 +13709,7 @@ Index: binutils-2.20.1/binutils/configure
-  with_pic
-  enable_fast_install
-  with_gnu_ld
--+with_sysroot
-++with_libtool_sysroot
-  enable_libtool_lock
-  enable_targets
-  enable_werror
-@@ -13717,7 +13717,7 @@ Index: binutils-2.20.1/binutils/configure
-    --with-pic              try to use only PIC/non-PIC objects [default=use
-                            both]
-    --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
--+  --with-sysroot=DIR Search for dependent libraries within DIR
-++  --with-libtool-sysroot=DIR Search for dependent libraries within DIR
- +                        (or the compiler's sysroot if not specified).
-    --with-gnu-ld           assume the C compiler uses GNU ld default=no
-    --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
-@@ -14639,29 +14639,29 @@ Index: binutils-2.20.1/binutils/configure
- +{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for sysroot" >&5
- +$as_echo_n "checking for sysroot... " >&6; }
- +
--+# Check whether --with-sysroot was given.
--+if test "${with_sysroot+set}" = set; then :
--+  withval=$with_sysroot;
-++# Check whether --with-libtool-sysroot was given.
-++if test "${with_libtool_sysroot+set}" = set; then :
-++  withval=$with_libtool_sysroot;
- +else
--+  with_sysroot=no
-++  with_libtool_sysroot=no
- +fi
- +
- +
- +lt_sysroot=
--+case ${with_sysroot} in #(
-++case ${with_libtool_sysroot} in #(
- + yes)
- +   if test "$GCC" = yes; then
- +     lt_sysroot=`$CC --print-sysroot 2>/dev/null`
- +   fi
- +   ;; #(
- + /*)
--+   lt_sysroot=`echo "$with_sysroot" | sed -e "$sed_quote_subst"`
-++   lt_sysroot=`echo "$with_libtool_sysroot" | sed -e "$sed_quote_subst"`
- +   ;; #(
- + no|'')
- +   ;; #(
- + *)
--+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_sysroot}" >&5
--+$as_echo "${with_sysroot}" >&6; }
-++   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_libtool_sysroot}" >&5
-++$as_echo "${with_libtool_sysroot}" >&6; }
- +   as_fn_error "The sysroot must be an absolute path." "$LINENO" 5
- +   ;;
- +esac
-@@ -17293,7 +17293,7 @@ Index: binutils-2.20.1/gas/configure
-  with_pic
-  enable_fast_install
-  with_gnu_ld
--+with_sysroot
-++with_libtool_sysroot
-  enable_libtool_lock
-  enable_targets
-  enable_checking
-@@ -17301,7 +17301,7 @@ Index: binutils-2.20.1/gas/configure
-    --with-pic              try to use only PIC/non-PIC objects [default=use
-                            both]
-    --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
--+  --with-sysroot=DIR Search for dependent libraries within DIR
-++  --with-libtool-sysroot=DIR Search for dependent libraries within DIR
- +                        (or the compiler's sysroot if not specified).
-  
-  Some influential environment variables:
-@@ -18224,29 +18224,29 @@ Index: binutils-2.20.1/gas/configure
- +{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for sysroot" >&5
- +$as_echo_n "checking for sysroot... " >&6; }
- +
--+# Check whether --with-sysroot was given.
--+if test "${with_sysroot+set}" = set; then :
--+  withval=$with_sysroot;
-++# Check whether --with-libtool-sysroot was given.
-++if test "${with_libtool_sysroot+set}" = set; then :
-++  withval=$with_libtool_sysroot;
- +else
--+  with_sysroot=no
-++  with_libtool_sysroot=no
- +fi
- +
- +
- +lt_sysroot=
--+case ${with_sysroot} in #(
-++case ${with_libtool_sysroot} in #(
- + yes)
- +   if test "$GCC" = yes; then
- +     lt_sysroot=`$CC --print-sysroot 2>/dev/null`
- +   fi
- +   ;; #(
- + /*)
--+   lt_sysroot=`echo "$with_sysroot" | sed -e "$sed_quote_subst"`
-++   lt_sysroot=`echo "$with_libtool_sysroot" | sed -e "$sed_quote_subst"`
- +   ;; #(
- + no|'')
- +   ;; #(
- + *)
--+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_sysroot}" >&5
--+$as_echo "${with_sysroot}" >&6; }
-++   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_libtool_sysroot}" >&5
-++$as_echo "${with_libtool_sysroot}" >&6; }
- +   as_fn_error "The sysroot must be an absolute path." "$LINENO" 5
- +   ;;
- +esac
-@@ -20847,7 +20847,7 @@ Index: binutils-2.20.1/gprof/configure
-  with_pic
-  enable_fast_install
-  with_gnu_ld
--+with_sysroot
-++with_libtool_sysroot
-  enable_libtool_lock
-  enable_nls
-  enable_maintainer_mode
-@@ -20855,7 +20855,7 @@ Index: binutils-2.20.1/gprof/configure
-    --with-pic              try to use only PIC/non-PIC objects [default=use
-                            both]
-    --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
--+  --with-sysroot=DIR Search for dependent libraries within DIR
-++  --with-libtool-sysroot=DIR Search for dependent libraries within DIR
- +                        (or the compiler's sysroot if not specified).
-  
-  Some influential environment variables:
-@@ -21786,29 +21786,29 @@ Index: binutils-2.20.1/gprof/configure
- +{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for sysroot" >&5
- +$as_echo_n "checking for sysroot... " >&6; }
- +
--+# Check whether --with-sysroot was given.
--+if test "${with_sysroot+set}" = set; then :
--+  withval=$with_sysroot;
-++# Check whether --with-libtool-sysroot was given.
-++if test "${with_libtool_sysroot+set}" = set; then :
-++  withval=$with_libtool_sysroot;
- +else
--+  with_sysroot=no
-++  with_libtool_sysroot=no
- +fi
- +
- +
- +lt_sysroot=
--+case ${with_sysroot} in #(
-++case ${with_libtool_sysroot} in #(
- + yes)
- +   if test "$GCC" = yes; then
- +     lt_sysroot=`$CC --print-sysroot 2>/dev/null`
- +   fi
- +   ;; #(
- + /*)
--+   lt_sysroot=`echo "$with_sysroot" | sed -e "$sed_quote_subst"`
-++   lt_sysroot=`echo "$with_libtool_sysroot" | sed -e "$sed_quote_subst"`
- +   ;; #(
- + no|'')
- +   ;; #(
- + *)
--+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_sysroot}" >&5
--+$as_echo "${with_sysroot}" >&6; }
-++   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_libtool_sysroot}" >&5
-++$as_echo "${with_libtool_sysroot}" >&6; }
- +   as_fn_error "The sysroot must be an absolute path." "$LINENO" 5
- +   ;;
- +esac
-@@ -24363,7 +24363,7 @@ Index: binutils-2.20.1/ld/configure
-    --with-pic              try to use only PIC/non-PIC objects [default=use
-                            both]
-    --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
--+  --with-sysroot=DIR Search for dependent libraries within DIR
-++  --with-libtool-sysroot=DIR Search for dependent libraries within DIR
- +                        (or the compiler's sysroot if not specified).
-  
-  Some influential environment variables:
-@@ -25288,29 +25288,29 @@ Index: binutils-2.20.1/ld/configure
- +{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for sysroot" >&5
- +$as_echo_n "checking for sysroot... " >&6; }
- +
--+# Check whether --with-sysroot was given.
--+if test "${with_sysroot+set}" = set; then :
--+  withval=$with_sysroot;
-++# Check whether --with-libtool-sysroot was given.
-++if test "${with_libtool_sysroot+set}" = set; then :
-++  withval=$with_libtool_sysroot;
- +else
--+  with_sysroot=no
-++  with_libtool_sysroot=no
- +fi
- +
- +
- +lt_sysroot=
--+case ${with_sysroot} in #(
-++case ${with_libtool_sysroot} in #(
- + yes)
- +   if test "$GCC" = yes; then
- +     lt_sysroot=`$CC --print-sysroot 2>/dev/null`
- +   fi
- +   ;; #(
- + /*)
--+   lt_sysroot=`echo "$with_sysroot" | sed -e "$sed_quote_subst"`
-++   lt_sysroot=`echo "$with_libtool_sysroot" | sed -e "$sed_quote_subst"`
- +   ;; #(
- + no|'')
- +   ;; #(
- + *)
--+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_sysroot}" >&5
--+$as_echo "${with_sysroot}" >&6; }
-++   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_libtool_sysroot}" >&5
-++$as_echo "${with_libtool_sysroot}" >&6; }
- +   as_fn_error "The sysroot must be an absolute path." "$LINENO" 5
- +   ;;
- +esac
-@@ -27826,7 +27826,7 @@ Index: binutils-2.20.1/opcodes/configure
-  with_pic
-  enable_fast_install
-  with_gnu_ld
--+with_sysroot
-++with_libtool_sysroot
-  enable_libtool_lock
-  enable_targets
-  enable_werror
-@@ -27834,7 +27834,7 @@ Index: binutils-2.20.1/opcodes/configure
-    --with-pic              try to use only PIC/non-PIC objects [default=use
-                            both]
-    --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
--+  --with-sysroot=DIR Search for dependent libraries within DIR
-++  --with-libtool-sysroot=DIR Search for dependent libraries within DIR
- +                        (or the compiler's sysroot if not specified).
-  
-  Some influential environment variables:
-@@ -28744,29 +28744,29 @@ Index: binutils-2.20.1/opcodes/configure
- +{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for sysroot" >&5
- +$as_echo_n "checking for sysroot... " >&6; }
- +
--+# Check whether --with-sysroot was given.
--+if test "${with_sysroot+set}" = set; then :
--+  withval=$with_sysroot;
-++# Check whether --with-libtool-sysroot was given.
-++if test "${with_libtool_sysroot+set}" = set; then :
-++  withval=$with_libtool_sysroot;
- +else
--+  with_sysroot=no
-++  with_libtool_sysroot=no
- +fi
- +
- +
- +lt_sysroot=
--+case ${with_sysroot} in #(
-++case ${with_libtool_sysroot} in #(
- + yes)
- +   if test "$GCC" = yes; then
- +     lt_sysroot=`$CC --print-sysroot 2>/dev/null`
- +   fi
- +   ;; #(
- + /*)
--+   lt_sysroot=`echo "$with_sysroot" | sed -e "$sed_quote_subst"`
-++   lt_sysroot=`echo "$with_libtool_sysroot" | sed -e "$sed_quote_subst"`
- +   ;; #(
- + no|'')
- +   ;; #(
- + *)
--+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_sysroot}" >&5
--+$as_echo "${with_sysroot}" >&6; }
-++   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${with_libtool_sysroot}" >&5
-++$as_echo "${with_libtool_sysroot}" >&6; }
- +   as_fn_error "The sysroot must be an absolute path." "$LINENO" 5
- +   ;;
- +esac
-diff --git a/recipes/binutils/binutils.inc b/recipes/binutils/binutils.inc
-index 0f086f3..ab9e457 100644
---- a/recipes/binutils/binutils.inc
-+++ b/recipes/binutils/binutils.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/binutils/"
- SECTION = "devel"
- LICENSE = "GPL"
- 
--INC_PR = "r12"
-+INC_PR = "r13"
- 
- COMPATIBLE_TARGET_SYS ?= "(?!nios2)"
- 
-@@ -42,10 +42,6 @@ B = "${S}/build.${HOST_SYS}.${TARGET_SYS}"
- 
- EXTRA_OECONF = "--program-prefix=${TARGET_PREFIX} \
- 		--enable-shared"
--python __anonymous () {
--       cfg = oe_filter_out('--with-sysroot$' , bb.data.getVar('CONFIGUREOPTS', d, 1) or "", d)
--       bb.data.setVar('CONFIGUREOPTS', cfg, d)
--}
- 
- # This is necessary due to a bug in the binutils Makefiles
- EXTRA_OEMAKE = "configure-build-libiberty all"
--- 
-1.7.1
+As far as I see it there are two often occurring situations:
 
+- a patch is submitted for review and gets zero feedback. I have quite
+a few of these in patchwork. I once proposed that if a patch does not
+get neg feedback in two weeks or so it could be pushed anyway. While
+this got some positive response it was never really made a policy. But
+I must say I'm becoming more and more inclined to push them anyway.
+
+- a patch is submitted by someone without commit access but no one
+picks up the patch.
+
+In either case if patches just get archived without being looked at,
+it'll probably have an adverse effects.
+The person without commit access will probably stop submitting
+patches, since they do not get accepted.
+And a dev with commit access will stop to send in patches for review
+as they will not get reviewed anyway, and only causes delay, and
+instead push the patches directly.
+
+Wrt the suggested solutions:
+
+archiving the patches is just a way to discard them. No one is ever
+going to pick them up from the archive. It'll probably lead to less
+patches and disappointed submitters.
+
+spamming might help in the case where the submitter has commit access
+and we decide that no feedback during some time is an implicit
+permission to push.
+However in the case the submitter has no commit access it will only
+cause additional grief as the submitter becomes more aware that no one
+bothered to do anything with his patch.
+
+
+What would help a little bit is if there is an email on a status
+change. E.g. I just noticed someone assigned two patches to me.
+However, if I hadn't looked into patchwork while typing this message
+it could have easily taken a week before I had noticed (actually it is
+quite possible that they are already a week on my name).
+
+What also would help is identified recipe maintainers. That way it
+becomes clearer who should handle a patch.
+(and I probably would not have gotten those 2 patches, as they are on
+python related stuff and I am a python n00b, guess they should have
+gone to Mickey or so)
+
+And lastly it would help a little bit if it is stated somewhere if the
+person who pushed it has commit access.
+E.g. if someone without commit access posts a recipe or patch that
+looks good and is not dangerous I sometimes pick it up and push them
+after verifying that they build (e.g. the cd/dvd recipes from Andreas
+Oberritter (sp?) ). If the person posting has commit access, I leave
+it to them to push.
+
+But we of course still have the problems that
+- people nak recipes but do not update patchwork
+- patches receive improvement suggestions and are not updated in patchwork
+- new versions are posted but patchwork is not updated.
+
+Guess we could discuss this at OEDEM.
+Also I would not mind to have a session at OEDEM (fri evening?) where
+we go through the list and decide per patch what to do with it, or
+whom to assign it to.
+
+Best regards, Frans
 
 
