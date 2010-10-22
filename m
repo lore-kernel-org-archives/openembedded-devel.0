@@ -1,49 +1,46 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P9BYJ-000225-KO
+	(envelope-from <raj.khem@gmail.com>) id 1P9BaY-00028J-Rk
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 08:56:36 +0200
-Received: by bwz15 with SMTP id 15so967224bwz.6
+	Fri, 22 Oct 2010 08:58:56 +0200
+Received: by iwn35 with SMTP id 35so593381iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 23:55:55 -0700 (PDT)
+	Thu, 21 Oct 2010 23:58:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=IezdmTb46K3ea/m5aB6T6F4Te6Lo8VpE894XeJ440Q4=;
-	b=gWHAoUdB0dH62p6/b3P220wbmiNpGq8TX9xTNhKHzMFBgxqRb+2dK7NmLoQ1a5SQuN
-	LziuI21qphObrVg15wdp1EyH1E7wNtwocxtu3T1HVYGY9M2bH1yg/y0K97fHrq0tdo3b
-	P9JS/hjKDab5IGcg9VzvF7lVYWCwm8L0aENfk=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=nLqgVMVjxOHiVxdfYFwImReiSsHYRJWCASC3KAAxOsE=;
+	b=W49ceCHlu2isWVmtUOxeV0eaVpyLbYNeKrhY9p8PUlsqhtiNyR2oXoyXg3tSLEV3pK
+	UMDqFQI4ZHbLEopUVIjOTdd7cSy6dSOcgV5uzZACf8EnLr7RpK3g3EqHFRJFDSlzytSC
+	1DOM1yVA6EaHXIP2yLprPepgUOGIE/ZCHT8Ag=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=PGbQmoTVgP2TUf/ZYWosgiZdUZK/iRVVunQXGVMwCQ+k6F/ysAjH86v8S1R/pmsDw+
-	nOr30YESoRaNF5QPLko/S8S/SlfInzpOEQPP5NalzIXdsJsqv4G7wyciLSOxc8f5H4pQ
-	wyVAe3XnZx82r74t7zgh2APrwaLoqIKxljW2s=
-Received: by 10.204.63.193 with SMTP id c1mr1613075bki.110.1287730554771;
-	Thu, 21 Oct 2010 23:55:54 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id y19sm1870500bkw.6.2010.10.21.23.55.53
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=OnETlsDmT8u4RiWJO1Xr75/hmO2Lchgv1tHIJ9nVSMGEFv71pF55+uHZaqIbOSg0hE
+	nTRpQ5gm9V9aOr4NHUanJy9g77AJlxNTGESqF9d1Lz/aBM7H/6dSzt5lrWy6Khs5NoH/
+	+7OmIPHmkng459QChVgzhVr++h9quh64blQag=
+Received: by 10.42.30.14 with SMTP id t14mr1645016icc.311.1287730697648;
+	Thu, 21 Oct 2010 23:58:17 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id w9sm2787396ibc.7.2010.10.21.23.58.14
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Oct 2010 23:55:54 -0700 (PDT)
-Date: Fri, 22 Oct 2010 08:55:59 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 21 Oct 2010 23:58:15 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101022065559.GC3527@jama>
-References: <AANLkTin7MbMksEO7F4r3b-EAbCrx1ZG58OBu3ybHkNmG@mail.gmail.com>
-	<i9rbsq$tad$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <i9rbsq$tad$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Thu, 21 Oct 2010 23:58:01 -0700
+Message-Id: <1287730684-14143-2-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1287730684-14143-1-git-send-email-raj.khem@gmail.com>
+References: <1287730684-14143-1-git-send-email-raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: patchwork cleanup call
+Subject: [PATCH 2/5] openldap_2.4.23.bb: Fetch ltmain.sh from the new location in staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,47 +54,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 06:56:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Oct 2010 06:58:56 -0000
 
-On Fri, Oct 22, 2010 at 08:44:42AM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 21-10-10 22:58, Khem Raj wrote:
-> > Hello OE'ers
-> > 
-> > We have accumulated quite a bit of mails in patchwork. Patches that
-> > are send to OE ml are nicely captured by
-> > patchwork and shown when one visits http://patchwork.openembedded.org
-> > 
-> > It would be nice if committers,reviewers and authors update the patch
-> > status when they deal with the patch
-> > 
-> > So please spare few minutes and have a look at the patchlist and see
-> > if there is a patch authored or committed by you and update the status
-> > accordingly.
-> > 
-> > I regularly use this tool to pick up patches and this exercise will
-> > help to remove the stale patch states
-> 
-> We can do as we did in the past and say "On the first of november we're
-> archiving all patches older than october 2010" to give people a bit more
-> incentive.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/openldap/openldap_2.4.23.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Would be nice to have spam feature in patchwork.
-
-Just sending state query to every Submitter email for patches in some
-state (in this case not archived, "Action Required"), with link to it's
-patchwork entry.
-
-Maybe someone with better patchwork knowledge or pwclient can get the
-list of Submitters easier than parsing html?
-
-Regards,
-
+diff --git a/recipes/openldap/openldap_2.4.23.bb b/recipes/openldap/openldap_2.4.23.bb
+index 94ed5eb..3ac15f6 100644
+--- a/recipes/openldap/openldap_2.4.23.bb
++++ b/recipes/openldap/openldap_2.4.23.bb
+@@ -188,7 +188,7 @@ DEPENDS      += "${OPENLDAP_DEPENDS}"
+ CPPFLAGS_append = " -D_GNU_SOURCE"
+ 
+ do_configure() {
+-	cp ${STAGING_DATADIR}/libtool/ltmain.sh ${S}/build
++	cp ${STAGING_DATADIR}/libtool/config/ltmain.sh ${S}/build
+ 	rm -f ${S}/libtool
+ 	aclocal
+ 	libtoolize --force --copy
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.7.1
+
 
 
