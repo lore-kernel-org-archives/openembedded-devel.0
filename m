@@ -1,44 +1,55 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9DUX-0000cg-N0
+	(envelope-from <martin.jansa@gmail.com>) id 1P9DWv-00020u-OP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 11:00:51 +0200
-Received: by iwn6 with SMTP id 6so11112iwn.6
+	Fri, 22 Oct 2010 11:03:18 +0200
+Received: by bwz15 with SMTP id 15so1033732bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 02:00:06 -0700 (PDT)
+	Fri, 22 Oct 2010 02:02:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=NlFy9aZmOPD4TeIxIkOaf3v/lzx7D6fbT5EBuN70rB8=;
-	b=gJSGzTe+jo03RDSbxY0yq1hCrwTbfjsVjqx/7C0JmyZta2l52R2VEFuzgiAhF2Uyr2
-	o4bEUg1jDmKlG2xvejpw7RczsDsI6JBaxkb27ApmTIATh7eDbPoX/5SY4YAWWcAFIQeo
-	6h/duaVlA8G1kJRtj0JoD4VQzrPm6IcaMaozs=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Jd5ExDLvNt1xClUfc4npYbiK2Il6jvkkHKQ5K7yZEn0=;
+	b=MV5o/LS4l4wAcPppv395NZdeFVJT2APSo6vocax+cpWMkBfoOeEvt1VyorrqZQt3ME
+	T0PMuetRxnKYNKZWR2osrJA/17Dx2iqU7gZ3Uq2L+TyUIIo3jEFm1Hg52jl2HlQCzoDb
+	xVHRLa4+oNy/XpGlHQZ+bSWQerEQ1hr5umlUs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Gh5PlCM5SNlyGSROQFQ2YIhBjcccxHsmm0EpbU7RIW0xYEKLZBAGw8rqE+JCx3F2vi
-	kKBunoDTBjV6HWCM30nbr7Rx29zMb8KvapQ73iOZdSxbxNzSmaNWBMInqmDxT7a7i/yQ
-	ZYNmWM0zKH5hc1K3BB1D7VMSnkkhIJC0UQDnQ=
-MIME-Version: 1.0
-Received: by 10.231.30.76 with SMTP id t12mr2089310ibc.161.1287738005779; Fri,
-	22 Oct 2010 02:00:05 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Fri, 22 Oct 2010 02:00:05 -0700 (PDT)
-In-Reply-To: <AANLkTikq1TNg1Y=f7tVjpkZR8Hre1FoGyK1gUGTKNDKB@mail.gmail.com>
-References: <AANLkTikq1TNg1Y=f7tVjpkZR8Hre1FoGyK1gUGTKNDKB@mail.gmail.com>
-Date: Fri, 22 Oct 2010 11:00:05 +0200
-Message-ID: <AANLkTimPLjpHi7Xt=NsnQRxHOR+9ZWEPoTE7PjssdzN1@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=mc0I/Qfv81Ej2E9O2+hl8hG7NtE6XXy+xeVlEi5PlKKErjRyQLCAGn76oK96/EuBdS
+	VXc54s2UNwzsJkkjhD+BhghOC8T/oYrfTcYVeJqS062pZRfbNQzJedtQUIJk0X9dhjme
+	rrJ0NF3Kr4dUzR33SXNb3YegkOpm95ocj1uec=
+Received: by 10.204.52.208 with SMTP id j16mr1705766bkg.133.1287738158444;
+	Fri, 22 Oct 2010 02:02:38 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id d27sm1955619bkw.14.2010.10.22.02.02.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 22 Oct 2010 02:02:37 -0700 (PDT)
+Date: Fri, 22 Oct 2010 11:02:43 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20101022090243.GE3527@jama>
+References: <1287074146-3705-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-2-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-3-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-4-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-5-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-6-git-send-email-fransmeulenbroeks@gmail.com>
+	<1287074146-3705-7-git-send-email-fransmeulenbroeks@gmail.com>
+	<AANLkTinWx9kdBbjfDXvFTNcWqg-dN8Rhyynttow57cTk@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinWx9kdBbjfDXvFTNcWqg-dN8Rhyynttow57cTk@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: empty strings
+Subject: Re: [PATCH 7/7] kaffe-gtk_cvs.bb: remove useless EXTRA_OECONF += ""
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,67 +63,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 09:00:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 22 Oct 2010 09:03:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-ping.
+On Fri, Oct 22, 2010 at 10:56:29AM +0200, Frans Meulenbroeks wrote:
+> ping; i know this is a fairly trivial patch but as it is a recipe I am
+> not familiar with, I would appreciate it if e.g. the recipe maintainer
+> would send an ack
 
-people don't care?
-I feel there are some issues in the examples below (and some easy
-cleanup actions).
+I'm not recipe maintainer but fwiw
 
-Frans
+all 7 patches
 
-2010/10/14 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> triggered by a remark on irc, I decided to do a grep on "" in all our rec=
-ipes.
-> That gave some interesting observations. I've fixed a few things from
-> the type X +=3D "" or X_append =3D ""
-> See the patch set I just send.
->
-> However there are also a few things that are not so obvious and for
-> which I want to ask your opinion, Some seem useless, others are
-> probably needed, but wanted to raise all issues that could be
-> unneeded.
-> Note that the recipes are just examples, ofthen there are more recipes
-> that have the same pattern.
->
-> libvorbis/libvorbis_1.2.3.bb:EXTRA_OECONF =3D ""
-> aircrack/aircrack_2.1.bb:DEPENDS =3D ""
-> apt/apt-native.inc:PACKAGES =3D "" =A0(this is a native recipe, isn't thi=
-s
-> always the case for native recipes ? )
-> bind/bind_9.3.1.bb:RPEDENDS =3D "" (this one has a DEPENDS on openssl, I
-> would expect it also to rdepend on openssl in this case)
-> c3110x/cx3110x_1.1.bb:export LDFLAGS =3D ""
-> classpath/classpath.inc:RPROVIDES_${PN} =3D ""
-> fuse/fuse-module_2.7.4.bb: =A0 =A0 =A0LDFLAGS=3D""
-> glibc/glibc_2.10.1.bb: =A0CPPFLAGS=3D"" oe_runconf (I was wondering of th=
-e
-> resetting CPPFLAGS is useful, didn't really dig into this one)
-> gs/gs-fonts-std_8.11.bb:HOMEPAGE =3D ""
-> gsoap/gsoap-native_2.7.13.bb:EXTRA_OEMAKE =3D ""
-> ipkg/ipkg-native.inc:PROVIDES =3D "" =A0(hm, no provides)
-> meta/staging-linkage_1.0.bb:SRC_URI =3D ""
-> psmisc/psmisc.inc:FILES_${PN} =3D "" (guess all files are added to other
-> packages, if that is so, should there be a line like this?)
-> tmake/tmake_1.11.bb:FILES =3D ""
-> ttf-fonts/ttf-hunkyfonts_0.3.0.bb:RRECOMMENDS_${PN}-dbg =3D "" (seems
-> somewhat strange to me)
->
->
-> this one also looked weird; guess it is ok but found it odd that these ar=
-e reset
-> hplip/hplip_2.8.10.bb:EXTRA_OEMAKE =3D 'BUILD_SYS=3D"" HOST_SYS=3D""'
->
-> I would like opinions on which of these constructs is useful and which
-> not. (and yes, I know an assingment may be used to nullify an earlier
-> assingment in an .inc file and I am also aware of cases where there is
-> something like X_virtclass_native =3D "" which is used to nullify
-> non-native assignments to X.
->
-> Enjoy, Frans
->
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
