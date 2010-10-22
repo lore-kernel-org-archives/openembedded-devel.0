@@ -1,44 +1,45 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9FaZ-00012X-7L
+	(envelope-from <obi@opendreambox.org>) id 1P9Gy7-00046I-UI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 13:15:13 +0200
-Received: by gxk22 with SMTP id 22so522883gxk.6
+	Fri, 22 Oct 2010 14:43:37 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 176C3314A075
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 04:14:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=oE6jtUTfTmJVKoBTBEzIWk6HgLXvkCyztgWEJJiG8jk=;
-	b=HUlRBEqReA7xV+BhptPA1aLn/IqT7YgyToHh92BnrNdZ6qIUKmwenLsw8CCi88Zvve
-	7FwyOzrqWe5eiDJBFKq1bAOoOXtaozRa1DBpPvAuLANRTy3JhdtVPkyGzz0enUJGMxr0
-	iAm8Db/oQ6VDRR/QKzZCbrWZwmfwzyHKhV/iU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Xa+8kRFYwXqX8ISDYMmez0WvjpTQ9ZEUgpHcSnM/2gFtFNe8+EAAEpNaa98D5080lm
-	GTn43TeUQJ98hZF0DTKQZytM0ifh7WXzTytSqoih1B1KYO26tZJko3cBrOrQl2GKl1xf
-	SoaLlkV/8cGmXw4zJMQN0kWE9AKHjh9n3WhQs=
+	Fri, 22 Oct 2010 14:43:00 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id a0ivDri6tI45
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Oct 2010 14:42:53 +0200 (CEST)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 09BEB314A080
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Oct 2010 14:42:53 +0200 (CEST)
+Message-ID: <4CC186CC.9070902@opendreambox.org>
+Date: Fri, 22 Oct 2010 14:42:52 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.14) Gecko/20101006 Thunderbird/3.0.9
 MIME-Version: 1.0
-Received: by 10.42.103.3 with SMTP id k3mr2108971ico.213.1287746069008; Fri,
-	22 Oct 2010 04:14:29 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Fri, 22 Oct 2010 04:14:28 -0700 (PDT)
-In-Reply-To: <AANLkTi=H5ho=K4mvN6yVcwDxp+dsK8pg6RyMsi8BJ_Wv@mail.gmail.com>
-References: <AANLkTi=H5ho=K4mvN6yVcwDxp+dsK8pg6RyMsi8BJ_Wv@mail.gmail.com>
-Date: Fri, 22 Oct 2010 13:14:28 +0200
-Message-ID: <AANLkTimygMiDNe00Mqtx2uYrUsjD=AZ25KU5V03HZ_v3@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org, bitbake-dev@lists.berlios.de
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTin7MbMksEO7F4r3b-EAbCrx1ZG58OBu3ybHkNmG@mail.gmail.com>	<i9rbsq$tad$1@dough.gmane.org>
+	<20101022065559.GC3527@jama>
+	<AANLkTi=-w36_=-iZz7QB6kjgQ8_nUfpyg9Jv3a+iHQVP@mail.gmail.com>
+In-Reply-To: <AANLkTi=-w36_=-iZz7QB6kjgQ8_nUfpyg9Jv3a+iHQVP@mail.gmail.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: SRCREV error
+Subject: Re: patchwork cleanup call
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,235 +53,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 11:15:13 -0000
+X-List-Received-Date: Fri, 22 Oct 2010 12:43:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-2010/10/22 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> Not sure if this is an OE or bitbake error, so sending to both.
->
-> Triggered by the empty string discussion, I played a little bit with -e.
+Hello Frans, hello all,
 
-As asked by Martin on irc: this was with -e and -b
+you're describing the situation very well. I'd like to add some comments
+from the perspective of a new contributor.
 
-Also he told me SRCREV =3D "1" comes from conf/bitbake.conf
-We might add a check for this value and not generate the ERROR.
+On 10/22/2010 09:32 AM, Frans Meulenbroeks wrote:
+> As far as I see it there are two often occurring situations:
+> 
+> - a patch is submitted for review and gets zero feedback. I have quite
+> a few of these in patchwork. I once proposed that if a patch does not
+> get neg feedback in two weeks or so it could be pushed anyway. While
+> this got some positive response it was never really made a policy. But
+> I must say I'm becoming more and more inclined to push them anyway.
+> 
+> - a patch is submitted by someone without commit access but no one
+> picks up the patch.
 
-Frans
->
-> Target recipe was aircrack/aircrack_2.1.bb which reads:
->
-> SECTION =3D "console/network"
-> DESCRIPTION =3D "Aircrack is a set of tools for wep key statistical crack=
-ing"
-> HOMEPAGE =3D "http://www.cr0.net:8040/code/network/aircrack/"
-> LICENSE =3D "GPLv2"
-> DEPENDS =3D ""
-> PV=3D"2.1"
-> PR =3D"r0"
->
-> SRC_URI =3D "http://archive.aircrack-ng.org/aircrack-old/${P}.tgz \
-> file://silent_patch.diff;striplevel=3D0"
->
-> SRC_URI[md5sum] =3D "694c6180f620b0534e5925a71b960bd1"
-> SRC_URI[sha256sum] =3D
-> "9b749d98278450b80153c1f82b7e253548a3f03603062dc98cc1320803d791da"
->
-> inherit autotools
->
-> do_install() {
-> =A0 =A0 =A0 =A0install -d ${D}/${sbindir}
-> =A0 =A0 =A0 =A0install -d ${D}/${libdir}/${PN}
-> =A0 =A0 =A0 =A0install -m 0755 802ether =A0 =A0 =A0 =A0 =A0${D}/${sbindir=
-}
-> =A0 =A0 =A0 =A0install -m 0755 airodump =A0 =A0 =A0 =A0 =A0${D}/${sbindir=
-}
-> =A0 =A0 =A0 =A0install -m 0755 aircrack =A0 =A0 =A0 =A0 =A0${D}/${sbindir=
-}
-> =A0 =A0 =A0 =A0install -m 0755 aireplay =A0 =A0 =A0 =A0 =A0${D}/${sbindir=
-}
-> =A0 =A0 =A0 =A0install -m 0755 hopper.sh =A0 =A0 =A0 =A0 =A0${D}/${sbindi=
-r}
-> }
->
-> if I run bitbake -e on this recipe I get:
->
-> ERROR: SRCREV was used yet no valid SCM was found in SRC_URI
-> ERROR: SRCREV was used yet no valid SCM was found in SRC_URI
-> ERROR: SRCREV was used yet no valid SCM was found in SRC_URI
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> ${@bb.fetch.get_srcrev(d)}
-> ERROR: SRCREV was used yet no valid SCM was found in SRC_URI
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> ${@bb.fetch.get_srcrev(d)}
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> ${SRCPV}
-> # =3D/home/frans/workspace/bitbake-1.10.0/bin/bitbake
-> =3D"/home/frans/workspace/bitbake-1.10.0/bin/bitbake"
-> ...
-> # SRCREV=3D1
-> SRCREV=3D"1"
-> ...
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if "minrev" in parm:
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0srcrev =3D bb.data.getVar(=
-'SRCREV', d, 1)
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if srcrev and srcrev < par=
-m["minrev"]:
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0bb.note("P=
-atch '%s' applies to later
-> revisions" % pname)
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0continue
->
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if "maxrev" in parm:
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0srcrev =3D bb.data.getVar(=
-'SRCREV', d, 1)
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if srcrev and srcrev > par=
-m["maxrev"]:
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0bb.note("P=
-atch '%s' applies to earlier
-> revisions" % pname)
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0continue
-> ...
->
-> I feel the ERROR message is not too appropriate, and I am not sure
-> where it comes from.
->
-> No one is defining it:
->
-> frans@frans-desktop:~/workspace/openembedded/recipes$ grep aircrack ../co=
-nf -r
-> ../conf/distro/include/insane-srcrevs.inc:SRCREV_pn-aircrack-ng ?=3D "${A=
-UTOREV}"
->
-> (note that that definition is for aircrack-ng, not aircrack_2.1 which
-> I am building)
->
-> And classes do not generate the code either as far as I can see:
->
-> frans@frans-desktop:~/workspace/openembedded/recipes$ grep aircrack
-> ../classes -r
-> frans@frans-desktop:~/workspace/openembedded/recipes$ grep SRCREV ../clas=
-ses -r
-> ../classes/patch.bbclass: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 src=
-rev =3D bb.data.getVar('SRCREV', d, 1)
-> ../classes/patch.bbclass: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 src=
-rev =3D bb.data.getVar('SRCREV', d, 1)
-> ../classes/gitpkgv.bbclass:# NN equals the total number of revs up to SRC=
-REV
-> ../classes/gitpkgv.bbclass:# GITHASH is SRCREV's (full) hash
-> ../classes/gitpkgv.bbclass:# SRCREV. So ${GITPKGV} should never be
-> used in PV, only in PKGV.
-> ../classes/gitpkgv.bbclass:# It can handle SRCREV =3D ${AUTOREV}, as
-> well as SRCREV =3D "<some fixed git hash>"
-> ../classes/opie.bbclass:OPIE_SRCREV ?=3D
-> "8c3beef263bc9c34443eacfc821e99813e17554f"
-> ../classes/opie.bbclass:OPIE_GIT_PV ?=3D "1.2.4+gitr${OPIE_SRCREV}"
-> ../classes/lockdown.bbclass: =A0 =A0if "SRCREV" in bb.data.getVar("PV", d=
-, False):
-> ../classes/lockdown.bbclass: =A0 =A0 =A0 =A0 =A0 =A0print >> src_revs, 'S=
-RCREV_pn-%(pn)s ?=3D
-> "%(rev)s"' % { 'pn' : pn, 'rev' : bb.data.getVar("SRCREV", d, True) }
->
-> The assingment is not from lib but I cannot find it in the bitbake dir
-> either (but maybe I am overlooking things there, I'm by no means a
-> python wiz).
->
-> frans@frans-desktop:~/workspace/openembedded/recipes$ grep SRCREV ../lib =
--r
-> frans@frans-desktop:~/workspace/openembedded/recipes$ grep SRCREV
-> ../../bitbake -r
-> Binary file ../../bitbake/.git/objects/pack/pack-5ce6751d5a9a9ce8cd2fa963=
-c5316fccd15eab89.pack
-> matches
-> ../../bitbake/ChangeLog: =A0 =A0 =A0 =A0- Add SRCREV support for svn fetc=
-her
-> ../../bitbake/ChangeLog: =A0 =A0 =A0 =A0- Add BB_SRCREV_POLICY variable (=
-clear or
-> cache) to control SRCREV cache
-> ../../bitbake/ChangeLog: =A0 =A0 =A0 =A0- Add SRCREV_FORMAT support
-> ../../bitbake/ChangeLog: =A0 =A0 =A0 =A0- SRCREV handling updates, improv=
-ements and
-> fixes from Poky
-> ../../bitbake/ChangeLog: =A0 =A0 =A0 =A0- Raise an exception if SRCREV =
-=3D=3D 'INVALID'
-> ../../bitbake/ChangeLog: =A0 =A0 =A0 =A0- When SRCREV autorevisioning for=
- a recipe is
-> in use, don't cache the recipe
-> Binary file ../../bitbake/lib/bb/fetch/__init__.pyc matches
-> ../../bitbake/lib/bb/fetch/svn.py: =A0 =A0 =A0 =A0 =A0 =A0# Should warn p=
-eople to
-> switch to SRCREV here
-> ../../bitbake/lib/bb/fetch/git.py: =A0 =A0 =A0 =A0if
-> bb.data.getVar("BB_GIT_CLONE_FOR_SRCREV", d, True):
-> Binary file ../../bitbake/lib/bb/fetch/git.pyc matches
-> ../../bitbake/lib/bb/fetch/__init__.py:class InvalidSRCREV(Exception):
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0"""Exception raised when a=
-n
-> invalid SRCREV is encountered"""
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0srcrev_policy =3D
-> bb.data.getVar('BB_SRCREV_POLICY', d, 1) or "clear"
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0logger.debug(1,
-> "Keeping SRCREV cache due to cache policy of: %s", srcrev_policy)
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0logger.debug(1,
-> "Clearing SRCREV cache due to cache policy of: %s", srcrev_policy)
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0raise
-> FetchError("Invalid SRCREV cache policy of: %s" % srcrev_policy)
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0In the multi SCM case, we
-> build a value based on SRCREV_FORMAT which must
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0# Ugly code alert.
-> localpath in the fetchers will try to evaluate SRCREV which
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0# "SRCREVINACTION" return =
-value.
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0return "SRCREVINAC=
-TION"
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0logger.error("SRCR=
-EV
-> was used yet no valid SCM was found in SRC_URI")
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0if
-> bb.data.getVar('BB_SRCREV_POLICY', d, True) !=3D "cache":
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0# Mutiple SCMs are in
-> SRC_URI so we resort to SRCREV_FORMAT
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0format =3D
-> bb.data.getVar('SRCREV_FORMAT', d, 1)
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0logger.error("The
-> SRCREV_FORMAT variable must be set when multiple SCMs are used.")
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0# =
-We have to
-> clear data's internal caches since the cached value of SRCREV is now
-> wrong.
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0The fetcher suppor=
-ts
-> auto source revisions (SRCREV)
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0 =A0 =A0rev =3D
-> data.getVar("SRCREV_pn-" + pn + "_" + ud.parm['name'], d, 1)
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0 =A0 =A0rev =3D
-> data.getVar("SRCREV", d, 1)
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0 =A0 =A0raise
-> InvalidSRCREV("Please set SRCREV to a valid value")
-> ../../bitbake/lib/bb/fetch/__init__.py: =A0 =A0 =A0 =A0if rev is "SRCREVI=
-NACTION":
-> Binary file ../../bitbake/lib/bb/cache.pyc matches
-> ../../bitbake/lib/bb/cache.py: =A0 =A0 =A0 =A0 =A0 =A0elif 'PV' in
-> self.depends_cache[fn] and 'SRCREVINACTION' in
-> self.depends_cache[fn]['PV']:
-> ../../bitbake/lib/bb/cache.py: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0logger.erro=
-r("Not
-> caching %s as it had SRCREVINACTION in PV. Please report this bug",
-> fn)
-> ../../bitbake/lib/bb/cache.py: =A0 =A0 =A0 =A0if 'SRCREVINACTION' in pv:
-> ../../bitbake/lib/bb/cache.py: =A0 =A0 =A0 =A0 =A0 =A0logger.info("Found
-> SRCREVINACTION in PV (%s) or %s. Please report this bug.", pv,
-> file_name)
->
->
-> Kinda lost here, but I would expect bitbake not to generate the SRCREV
-> =3D "1" if there is no SCM in the url (or not barf on it when it has
-> generated the SRCREV assignment).
->
-> Hope someone with better knowledge than me can solve or explain things
-> (or, even better, both! )
->
-> Frans
->
+Most of my patches got zero feedback. During the last 3-4 weeks, 20 of
+my patches were committed, 10 patches are still waiting in patchwork for
+a definitive ack or nack or for requests for changes. Of these 10
+patches, only 3 got (negative?) feedback:
+
+http://patchwork.openembedded.org/patch/3241/
+-> Nack, but no further reply received to my question. IMO, either my
+patch is OK or kernel.bbclass is wrong. One must be fixed, but which one
+and why?
+
+http://patchwork.openembedded.org/patch/3297/
+-> Changes requested. Could be resolved by a patch to
+lib_package.bbclass, but there were no further comments about how likely
+such a change would be accepted.
+
+http://patchwork.openembedded.org/patch/3338/
+-> Question about license raised, unknown state. If someone would like
+to look at the source, at least the header files and compat.c don't
+include license statements and compat.c looks like code which may be
+copied from a library. I guess this one could be committed with GPLv2
+and still be updated later if anyone cares enough and is sure about it.
+
+Of the 20 committed patches, only few received feedback either.
+
+I am happy whenever I see a new patch committed, but for me, as a new
+contributor, it seems impossible to predict a patch's fate until it
+finally gets merged.
+
+Btw., unfortunately, I fear that zero feedback is not limited to
+patches, but also happens to apply to questions regarding the
+preparation of patches, e.g.:
+
+http://article.gmane.org/gmane.comp.handhelds.openembedded/38203
+
+(2nd part, which I am working around now by (ab?)using ASSUME_PROVIDED)
+
+http://article.gmane.org/gmane.comp.handhelds.openembedded/38591
+
+I can understand that this happens, because the list has so much
+traffic. If I don't receive a reply to a mail within 24 hours, then I
+don't expect to get a reply at all, be it a patch or a question. Still,
+I don't know in which frequency I should ping my patches (or questions,
+if still important to me), without spamming or annoying the list.
+
+> In either case if patches just get archived without being looked at,
+> it'll probably have an adverse effects.
+> The person without commit access will probably stop submitting
+> patches, since they do not get accepted.
+> And a dev with commit access will stop to send in patches for review
+> as they will not get reviewed anyway, and only causes delay, and
+> instead push the patches directly.
+> 
+> Wrt the suggested solutions:
+> 
+> archiving the patches is just a way to discard them. No one is ever
+> going to pick them up from the archive. It'll probably lead to less
+> patches and disappointed submitters.
+> 
+> spamming might help in the case where the submitter has commit access
+> and we decide that no feedback during some time is an implicit
+> permission to push.
+> However in the case the submitter has no commit access it will only
+> cause additional grief as the submitter becomes more aware that no one
+> bothered to do anything with his patch.
+> 
+> 
+> What would help a little bit is if there is an email on a status
+> change. E.g. I just noticed someone assigned two patches to me.
+> However, if I hadn't looked into patchwork while typing this message
+> it could have easily taken a week before I had noticed (actually it is
+> quite possible that they are already a week on my name).
+
+Yes, it would indeed be very helpful, if both the author and the
+assignee received emails about status updates by other developers.
+
+> What also would help is identified recipe maintainers. That way it
+> becomes clearer who should handle a patch.
+> (and I probably would not have gotten those 2 patches, as they are on
+> python related stuff and I am a python n00b, guess they should have
+> gone to Mickey or so)
+
+Actually, these two patches were delegated to Mickey for about a week
+before I delegated them to you. The reason for delegating them to you
+was that you stated that you had looked into them, showing some
+interest, hoping that you would either commit or redelegate them. ;-)
+
+The most difficult problem for delegation was, however, to find out
+nicknames used in patchwork, after searching for maintainers. One needs
+to become quite creative to solve this. :-)
+
+> And lastly it would help a little bit if it is stated somewhere if the
+> person who pushed it has commit access.
+> E.g. if someone without commit access posts a recipe or patch that
+> looks good and is not dangerous I sometimes pick it up and push them
+> after verifying that they build (e.g. the cd/dvd recipes from Andreas
+> Oberritter (sp?) ). If the person posting has commit access, I leave
+> it to them to push.
+> 
+> But we of course still have the problems that
+> - people nak recipes but do not update patchwork
+> - patches receive improvement suggestions and are not updated in patchwork
+> - new versions are posted but patchwork is not updated.
+
+I try to keep patchwork updated, which means that I change states to one
+of accepted, rejected, changes requested, superseded or applied, if it's
+clear to me which one to choose. Otherwise the state stays at new.
+
+What's a good work flow for using patchwork as a patch submitter?
+
+Regards,
+Andreas
 
 
