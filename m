@@ -1,44 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from ibawizard.net ([82.208.49.253] helo=mengele.ibawizard.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P9CtL-00059N-OE for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 10:22:25 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1P9Csj-0001fL-GP for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 10:21:45 +0200
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 10:21:45 +0200
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 10:21:45 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 22 Oct 2010 10:21:37 +0200
-Message-ID: <i9rhih$lbh$1@dough.gmane.org>
-References: <AANLkTin7MbMksEO7F4r3b-EAbCrx1ZG58OBu3ybHkNmG@mail.gmail.com>	<i9rbsq$tad$1@dough.gmane.org>
-	<20101022065559.GC3527@jama>
-	<AANLkTi=-w36_=-iZz7QB6kjgQ8_nUfpyg9Jv3a+iHQVP@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <AANLkTi=-w36_=-iZz7QB6kjgQ8_nUfpyg9Jv3a+iHQVP@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1P9D3C-0001df-VM
+	for openembedded-devel@openembedded.org; Fri, 22 Oct 2010 10:32:35 +0200
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 3853E1D36173; Fri, 22 Oct 2010 10:31:55 +0200 (CEST)
+Date: Fri, 22 Oct 2010 10:31:55 +0200
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+To: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+Message-ID: <20101022083155.GG15069@ibawizard.net>
+References: <1287525802-13312-1-git-send-email-ynezz@true.cz>
+MIME-Version: 1.0
+In-Reply-To: <1287525802-13312-1-git-send-email-ynezz@true.cz>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: patchwork cleanup call
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [PATCH 0/2] ts72xx update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,47 +35,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 08:22:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Oct 2010 08:32:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 22-10-10 09:32, Frans Meulenbroeks wrote:
-
-> As far as I see it there are two often occurring situations:
-> 
-> - a patch is submitted for review and gets zero feedback. I have quite
-> a few of these in patchwork. I once proposed that if a patch does not
-> get neg feedback in two weeks or so it could be pushed anyway. While
-> this got some positive response it was never really made a policy. But
-> I must say I'm becoming more and more inclined to push them anyway.
-> 
-> - a patch is submitted by someone without commit access but no one
-> picks up the patch.
-
-What I do is ping patches that get zero feedback, people sending patches
-should do the same.
-
-And when I'm travelling I can't post to the ml, so every month there's a
-working week were I can't give feedback and with my goldfish memory I
-forget it the week after.
-
-And if you're going to push an 'old' unreviewed patch, it's easy enough
-to ack it on the ml and wait a bit to see if someone suddenly spots a
-huge bug in the patch.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMwUmRMkyGM64RGpERAh7mAJ9ZyDnQo45N01fLgaC87u8umFaxfgCdEmr0
-UciwwVyzo9CnkokxRpuehxk=
-=mbDk
------END PGP SIGNATURE-----
-
+Ping, pong? :-)
 
 
