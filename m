@@ -1,49 +1,42 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P9BLS-0001ee-At
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 08:43:18 +0200
-Received: by fxm3 with SMTP id 3so445316fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P9BNe-0001lA-RW for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Oct 2010 08:45:36 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P9BMw-0002q1-Fv for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Oct 2010 08:44:50 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Oct 2010 08:44:50 +0200
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Oct 2010 23:42:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=+GEItmj68QTRGuy5yqXZ4bQ/wzLCQ2ubziaBrbl//I0=;
-	b=Qk8ki0UhTNAXTFxVstAPvY2ZrZrDAduEeTSss7CItAQMkgRzWHeleCJ8/osSww9ycE
-	6XcrCDIuPnkBc5dF+AYQyVmvLWUKKvgIl0xXyO093OqSTVGorwiICZckovHzb+dMy5U8
-	yOjEzw72y0oxNcTmAg38cQzNUXgf599/rndjw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=gWme3hBX9TnIE6MojGCJu4gC8lSATcEIBAcoPKNZns6nQc3lTE6jMrBTTDoopuCLy5
-	bWYLf0aOxJjgT50dxIH4io7X9Wktqp7xZexiXzhVSuwSd0yERyMd+r4q5ySSqsyWxWJX
-	LPL5nkFH7TmGiVEhOeWqHlFM64QvqVJxyEhx8=
-Received: by 10.103.52.8 with SMTP id e8mr2629633muk.114.1287729755639;
-	Thu, 21 Oct 2010 23:42:35 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u8sm1265230fah.12.2010.10.21.23.42.34
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Oct 2010 23:42:34 -0700 (PDT)
-Date: Fri, 22 Oct 2010 08:42:39 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 22 Oct 2010 08:44:50 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101022064239.GB3527@jama>
-References: <4CC04756.2020004@nedap.com>
- <4CC13039.4020002@nedap.com>
-MIME-Version: 1.0
-In-Reply-To: <4CC13039.4020002@nedap.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 22 Oct 2010 08:44:42 +0200
+Message-ID: <i9rbsq$tad$1@dough.gmane.org>
+References: <AANLkTin7MbMksEO7F4r3b-EAbCrx1ZG58OBu3ybHkNmG@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <AANLkTin7MbMksEO7F4r3b-EAbCrx1ZG58OBu3ybHkNmG@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: failure building cacaoh-native
+Subject: Re: patchwork cleanup call
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,27 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 06:43:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Oct 2010 06:45:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 22, 2010 at 08:33:29AM +0200, Jaap de Jong wrote:
-> The same applies for cacaoh-openjdk-native.inc and probably also for 
-> cacaoh-cldc-native_0.98.bb
-> Patch will be:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Can you send it as proper patch? Also please for previous cacaoh-native
-patch. 
+On 21-10-10 22:58, Khem Raj wrote:
+> Hello OE'ers
+> 
+> We have accumulated quite a bit of mails in patchwork. Patches that
+> are send to OE ml are nicely captured by
+> patchwork and shown when one visits http://patchwork.openembedded.org
+> 
+> It would be nice if committers,reviewers and authors update the patch
+> status when they deal with the patch
+> 
+> So please spare few minutes and have a look at the patchlist and see
+> if there is a patch authored or committed by you and update the status
+> accordingly.
+> 
+> I regularly use this tool to pick up patches and this exercise will
+> help to remove the stale patch states
 
-http://wiki.openembedded.net/index.php/How_to_submit_a_patch_for_dummies
+We can do as we did in the past and say "On the first of november we're
+archiving all patches older than october 2010" to give people a bit more
+incentive.
 
-BTW: are you using libtool-2.4 or old libtool-2.2.6b? Because I
-see this only since using libtool-2.4 and someone should check that this
-patch wont break build for people using 2.2.6b.
+regards,
 
-Regards,
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+iD8DBQFMwTLaMkyGM64RGpERAkkjAKCRvMcv5esVP1e7hHyT06eQUbqMugCgo9SG
+MMYE0QshOMpsXRsv99oQnAI=
+=5c50
+-----END PGP SIGNATURE-----
+
 
 
