@@ -1,37 +1,38 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9DPj-0001sG-5X
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9DPw-0001i2-DN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 10:55:51 +0200
-Received: by gxk22 with SMTP id 22so433581gxk.6
+	Fri, 22 Oct 2010 10:56:07 +0200
+Received: by mail-iw0-f175.google.com with SMTP id 6so7095iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 01:55:13 -0700 (PDT)
+	Fri, 22 Oct 2010 01:55:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=OHNAGM9W1DiMRwaN8SQO9Hntvh/80vsURW0LFz60NWI=;
-	b=uVu8Y5BDMiJsAeXKWILZ2gVBAtIEe2/+vBj2Hg8EqTFt2bW5qRVTzs3nyvAUK0SOFm
-	KQgzokuOnjQXcwzs3EZSefDBuhRUqn89Sfb4rAoQGXI75nlRkSSw0CijViT+0SECptfV
-	HRzONVaYLbm1fZi8kSOiYz7sPtlfNc75m7NM0=
+	bh=3f9TEw32vemXZnvYUNIqF3+J4JaGa3iiNt8sI5QGrSQ=;
+	b=IGNlv1KL4Qx4+k+zwBRnyUJHOql15zQUJmwgQG64+SQPPoRXCf1rcCEZrKSx/zo5hU
+	qt1GHlkYJIP8I/2PghWnaR4e9PJKvZ/kJMdwOWMwKIXgpIlw/TX55r300rnZWNPQB9Fo
+	bDpmqkeKPy9iflQnjQQrruFYnE3sUfuXKyY8E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=M8E0iZJ7m4X2rkXo05x4juVfyWyYCzC3wYLiHILmTaEVzFJUXbs5j/+P8vMDBANDtU
-	x9S5KmwwzDgt0wbytEoZw5KS4M5AWsJ0QfaDbSZOT/dTthZUOaNt2e3nwnKqN4zT6Jk+
-	HNwXwblRATRvtnsl0PktTI5PXgQlDuqOkrvYk=
+	b=tv7XebyMSG0pYRHaEWWMDTcPym/BgM5hTKQXEvk2BNPso+GEMug+EmFLhvGo4zKc7H
+	lBI0UYUrDPCsZCucb8Wptwq6Kp5A+TCIYaw9FShiScXAZU0C22BMDBjAv88GZv7fkSXh
+	lLc4J3YtA6Y3bQgLiVfy9B4jJFkLKQ71J/Uew=
 MIME-Version: 1.0
-Received: by 10.42.208.75 with SMTP id gb11mr1768328icb.290.1287737713296;
-	Fri, 22 Oct 2010 01:55:13 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Fri, 22 Oct 2010 01:55:13 -0700 (PDT)
-In-Reply-To: <1287074146-3705-2-git-send-email-fransmeulenbroeks@gmail.com>
+Received: by 10.231.33.129 with SMTP id h1mr94359ibd.158.1287737726183; Fri,
+	22 Oct 2010 01:55:26 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Fri, 22 Oct 2010 01:55:26 -0700 (PDT)
+In-Reply-To: <1287074146-3705-3-git-send-email-fransmeulenbroeks@gmail.com>
 References: <1287074146-3705-1-git-send-email-fransmeulenbroeks@gmail.com>
 	<1287074146-3705-2-git-send-email-fransmeulenbroeks@gmail.com>
-Date: Fri, 22 Oct 2010 10:55:13 +0200
-Message-ID: <AANLkTi=yjmGoLPhPsSZMc_sa+ZXurgPvJpzK1z-EDvpj@mail.gmail.com>
+	<1287074146-3705-3-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Fri, 22 Oct 2010 10:55:26 +0200
+Message-ID: <AANLkTinhp-j=DPqoH=szLxL1ZsJLCkioeOtz9NwBApvZ@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/7] directfb_2.18: remove useless LDFLAGS_append = ""
+Subject: Re: [PATCH 3/7] RDEPENDS_append = ""
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,7 +54,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 08:55:52 -0000
+X-List-Received-Date: Fri, 22 Oct 2010 08:56:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -64,23 +65,24 @@ would send an ack
 2010/10/14 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
 > Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 > ---
-> =A0recipes/directfb/directfb_1.2.8.bb | =A0 =A02 --
-> =A01 files changed, 0 insertions(+), 2 deletions(-)
+> =A0recipes/avahi/avahi.inc | =A0 =A01 -
+> =A01 files changed, 0 insertions(+), 1 deletions(-)
 >
-> diff --git a/recipes/directfb/directfb_1.2.8.bb b/recipes/directfb/direct=
-fb_1.2.8.bb
-> index 35eb7c6..a6cf68f 100644
-> --- a/recipes/directfb/directfb_1.2.8.bb
-> +++ b/recipes/directfb/directfb_1.2.8.bb
-> @@ -22,8 +22,6 @@ EXTRA_OECONF =3D "\
-> =A0 --disable-x11 \
-> =A0"
+> diff --git a/recipes/avahi/avahi.inc b/recipes/avahi/avahi.inc
+> index 4ffb6d5..385450d 100644
+> --- a/recipes/avahi/avahi.inc
+> +++ b/recipes/avahi/avahi.inc
+> @@ -17,7 +17,6 @@ SRC_URI =3D "http://avahi.org/download/avahi-${PV}.tar.=
+gz \
+> =A0inherit autotools pkgconfig update-rc.d python-dir
+> =A0# handle update-rc.d RDEPENDS_${PN} manually, we don't need it on
+> =A0# anything but avahi-daemon and avahi-autoipd
+> -RDEPENDS_append =3D ""
 >
-> -LDFLAGS_append =3D ""
-> -
-> =A0LEAD_SONAME =3D "libdirectfb-1.2.so.0"
->
-> =A0SRC_URI[md5sum] =3D "ac13d21682aa368df4e177ae5b51ad2d"
+> =A0# TODO: build and enable all the extra stuff avahi offers
+> =A0EXTRA_OECONF =3D "--with-distro=3Ddebian =A0--disable-stack-protector =
+--disable-nls --disable-gdbm ${AVAHI_GTK} --disable-mono --disable-monodoc =
+--disable-qt3 --disable-qt4 ${AVAHI_PYTHON}"
 > --
 > 1.6.4.2
 >
