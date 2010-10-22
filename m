@@ -1,34 +1,48 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1P9BCw-0001Sv-3A
+	(envelope-from <martin.jansa@gmail.com>) id 1P9BLS-0001ee-At
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Oct 2010 08:34:32 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Fri, 22 Oct 2010 08:33:30 +0200
-X-TM-IMSS-Message-ID: <1a6551690000885e@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 1a6551690000885e for
-	<jaap.dejong@nedap.com>; Fri, 22 Oct 2010 08:33:31 +0100
-Message-ID: <4CC13039.4020002@nedap.com>
-Date: Fri, 22 Oct 2010 08:33:29 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.11) Gecko/20101006 Lightning/1.0b2 Thunderbird/3.1.5
-MIME-Version: 1.0
+	Fri, 22 Oct 2010 08:43:18 +0200
+Received: by fxm3 with SMTP id 3so445316fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Oct 2010 23:42:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=+GEItmj68QTRGuy5yqXZ4bQ/wzLCQ2ubziaBrbl//I0=;
+	b=Qk8ki0UhTNAXTFxVstAPvY2ZrZrDAduEeTSss7CItAQMkgRzWHeleCJ8/osSww9ycE
+	6XcrCDIuPnkBc5dF+AYQyVmvLWUKKvgIl0xXyO093OqSTVGorwiICZckovHzb+dMy5U8
+	yOjEzw72y0oxNcTmAg38cQzNUXgf599/rndjw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=gWme3hBX9TnIE6MojGCJu4gC8lSATcEIBAcoPKNZns6nQc3lTE6jMrBTTDoopuCLy5
+	bWYLf0aOxJjgT50dxIH4io7X9Wktqp7xZexiXzhVSuwSd0yERyMd+r4q5ySSqsyWxWJX
+	LPL5nkFH7TmGiVEhOeWqHlFM64QvqVJxyEhx8=
+Received: by 10.103.52.8 with SMTP id e8mr2629633muk.114.1287729755639;
+	Thu, 21 Oct 2010 23:42:35 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id u8sm1265230fah.12.2010.10.21.23.42.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 21 Oct 2010 23:42:34 -0700 (PDT)
+Date: Fri, 22 Oct 2010 08:42:39 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101022064239.GB3527@jama>
 References: <4CC04756.2020004@nedap.com>
-In-Reply-To: <4CC04756.2020004@nedap.com>
-X-OriginalArrivalTime: 22 Oct 2010 06:33:30.0028 (UTC)
-	FILETIME=[0A8CDEC0:01CB71B3]
-X-SA-Exim-Connect-IP: 213.160.213.92
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+ <4CC13039.4020002@nedap.com>
+MIME-Version: 1.0
+In-Reply-To: <4CC13039.4020002@nedap.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
-	HTML_FONT_FACE_BAD,HTML_MESSAGE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: failure building cacaoh-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,91 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2010 06:34:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Oct 2010 06:43:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The same applies for cacaoh-openjdk-native.inc and probably also for 
-cacaoh-cldc-native_0.98.bb
-Patch will be:
+On Fri, Oct 22, 2010 at 08:33:29AM +0200, Jaap de Jong wrote:
+> The same applies for cacaoh-openjdk-native.inc and probably also for 
+> cacaoh-cldc-native_0.98.bb
+> Patch will be:
 
-    diff -urN a/cacaoh-cldc-native_0.98.bb b/cacaoh-cldc-native_0.98.bb
-    --- a/cacaoh-cldc-native_0.98.bb    2010-10-22 08:30:39.266606463 +0200
-    +++ b/cacaoh-cldc-native_0.98.bb    2010-10-22 08:30:58.271132923 +0200
-    @@ -5,7 +5,7 @@
-        "
+Can you send it as proper patch? Also please for previous cacaoh-native
+patch. 
 
-      do_stage() {
-    -    install -m 0755 src/cacaoh/.libs/cacaoh
-    ${STAGING_BINDIR}/cacaoh-cldc-${PV}
-    +    install -m 0755 src/cacaoh/cacaoh
-    ${STAGING_BINDIR}/cacaoh-cldc-${PV}
-      }
+http://wiki.openembedded.net/index.php/How_to_submit_a_patch_for_dummies
 
-      SRC_URI[md5sum] = "8b8907c8b925761c9410bcadb9705346"
-    diff -urN a/cacaoh-native.inc b/cacaoh-native.inc
-    --- a/cacaoh-native.inc    2010-10-22 08:31:15.203602101 +0200
-    +++ b/cacaoh-native.inc    2010-10-22 08:31:08.995430068 +0200
-    @@ -24,7 +24,7 @@
+BTW: are you using libtool-2.4 or old libtool-2.2.6b? Because I
+see this only since using libtool-2.4 and someone should check that this
+patch wont break build for people using 2.2.6b.
 
-      do_install() {
-        install -d ${D}${bindir}/cacaoh-${PV}
-    -  install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
-    +  install -m 0755 src/cacaoh/cacaoh ${D}${bindir}/cacaoh-${PV}
-      }
+Regards,
 
-      NATIVE_INSTALL_WORKS = "1"
-    diff -urN a/cacaoh-openjdk-native.inc b/cacaoh-openjdk-native.inc
-    --- a/cacaoh-openjdk-native.inc    2010-10-22 08:27:37.209570163 +0200
-    +++ b/cacaoh-openjdk-native.inc    2010-10-22 08:27:45.889809994 +0200
-    @@ -27,5 +27,5 @@
-      }
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-      do_install() {
-    -    install -m 0755 src/cacaoh/.libs/cacaoh
-    ${STAGING_BINDIR}/cacaoh-openjdk-${PV}
-    +    install -m 0755 src/cacaoh/cacaoh
-    ${STAGING_BINDIR}/cacaoh-openjdk-${PV}
-      }
-
-
-
-On 10/21/2010 03:59 PM, Jaap de Jong wrote:
-> Thought this was fixed some time ago, but it fails nevertheless...
->
->     NOTE: Running task 1854 of 2596 (ID: 2,
->     /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/cacao/cacaoh-native_0.99.3.bb,
->     do_install)
->     Packaged contents of libusb-compat into
->     /media/OpenEmbedded/unstable/tmp/deploy/eglibc/ipk/armv5te/libusb-0.1-4_0.1.3-r0.9_armv5te.ipk
->     NOTE: Not creating empty archive for libusb-compat-doc-0.1.3-r0.9
->     ERROR: function do_install failed
->     ERROR: log data follows
->     (/media/OpenEmbedded/unstable/tmp/work/i686-linux/cacaoh-native-0.99.3-r2.1/temp/log.do_install.19694)
->     | install: cannot stat `src/cacaoh/.libs/cacaoh': No such file or
->     directory
->     NOTE: Task failed:
->     /media/OpenEmbedded/unstable/tmp/work/i686-linux/cacaoh-native-0.99.3-r2.1/temp/log.do_install.19694
->     ERROR: TaskFailed event exception, aborting
->     ERROR: Build of
->     /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/cacao/cacaoh-native_0.99.3.bb
->     do_install failed
->
-> Fixed with:
->
->     diff -urN a/cacaoh-native.inc b/cacaoh-native.inc
->     --- a/cacaoh-native.inc    2010-10-21 15:55:49.604353109 +0200
->     +++ b/cacaoh-native.inc    2010-10-21 15:55:26.295644251 +0200
->     @@ -24,7 +24,7 @@
->
->      do_install() {
->        install -d ${D}${bindir}/cacaoh-${PV}
->     -  install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
->     +  install -m 0755 src/cacaoh/cacaoh ${D}${bindir}/cacaoh-${PV}
->      }
->
->      NATIVE_INSTALL_WORKS = "1"
->
->
-> Not sure if this is the final fix...
 
