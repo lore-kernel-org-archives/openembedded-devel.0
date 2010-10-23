@@ -1,49 +1,44 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P9YDY-00050h-7E
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9YO3-0005Ao-9S
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Oct 2010 09:08:41 +0200
-Received: by bwz15 with SMTP id 15so1832893bwz.6
+	Sat, 23 Oct 2010 09:19:32 +0200
+Received: by iwn5 with SMTP id 5so457181iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Oct 2010 00:08:03 -0700 (PDT)
+	Sat, 23 Oct 2010 00:18:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=kvSm4HVdVB9FOHgXUqe5iT88mlxsnhupCv3eV2Dp5ZU=;
-	b=dOydxMBbSERuh15/XTBcbVsrKbM5OnIXAjrmVWJhtJzTRS8J44Ya34bdH2kfYgCnSf
-	s7ay/lVA14wJMRd1d7SIuNosqMzNeRwhw9nUwNh/ex9AbUt0VD9/hypydDy6KHlDeWLQ
-	zIrES9/UinNpG7GdBWqwFFj6DAuqmPsdWPaqE=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=iRhIWyke2L0PC7O0aG5ruSz1XdWZDca9f6M+9Kk8slc=;
+	b=eV0goT48OR4q4pQgm72qsJHKaUYpKhbn9M1JN+SsOcsFoGCxy+Doi9rhYraasbA0ok
+	pHDw+/50xriy+6UXrlQIfo9TWhWqhAzfawEhAwqXr8hhROOUa4U7/EDivOc+j6XQMgte
+	EeFUnmrYX8E8UWX1QhKlfX4i718/In8iW6tEY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=S4Hdzwo50fShT3rXLwhkaF0Ce6lZnCemnSN345S/hf7E9LUmF8jpCQZhSyW4cgCRhR
-	LhwdbEcsdMBP3q8RUbnUGxeBIBqDlCj6lls6duKQrEL/SiOZUSPTAcNjKeiIiz6Y1gnm
-	nSI987fJPezr6aqUXw2DJUqjsTaiZ/ugRQd7o=
-Received: by 10.204.67.5 with SMTP id p5mr2944437bki.143.1287817683107;
-	Sat, 23 Oct 2010 00:08:03 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id d27sm2776304bkw.2.2010.10.23.00.08.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 23 Oct 2010 00:08:02 -0700 (PDT)
-Date: Sat, 23 Oct 2010 09:08:20 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101023070820.GI3527@jama>
-References: <y>
- <4cc22971.0311650a.0c4d.ffffaf68@mx.google.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=am65cSbUEC5Yg4es32mpImk55joWR6/g+iq0BVLXLjdK2hFEOEm/VfjrmCsKVaGjzc
+	7ZTD0qQjqIMfwge8z+jY03u7EYmucyFqNl/+0Y28Pp0iYSSa6Y2EPqLakX9SgSQNuErL
+	WOiMsScsbFQgAIHJlmAbeB9XYP2gCa8xMuIcQ=
 MIME-Version: 1.0
-In-Reply-To: <4cc22971.0311650a.0c4d.ffffaf68@mx.google.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.17.11 with SMTP id q11mr298733iba.102.1287818331870; Sat,
+	23 Oct 2010 00:18:51 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sat, 23 Oct 2010 00:18:51 -0700 (PDT)
+In-Reply-To: <1287783567-32647-1-git-send-email-raj.khem@gmail.com>
+References: <1287783567-32647-1-git-send-email-raj.khem@gmail.com>
+Date: Sat, 23 Oct 2010 09:18:51 +0200
+Message-ID: <AANLkTiko+XSPabHbGwR8QjVd5oCTqAFA4fM2qk13ranr@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 13/17] Ecore: update exit_uclibc.patch
+Subject: Re: [PATCH] bitbake.conf: Add one recipe identifying OVERRIDE based on recipe type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,67 +52,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Oct 2010 07:08:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 23 Oct 2010 07:19:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 22, 2010 at 10:15:53PM -0200, fidencio@profusion.mobi wrote:
-> From: Eduardo Lima (Etrunko) <eblima@gmail.com>
-
-Why? exit_uclibc.patch is not used in revisions newer then 50815 and
-exit_uclibc_newer.patch does apply OK.
-
-from e-wm recipe:
-   file://exit_uclibc.patch;maxrev=50815 \                                                                                                                    
-   file://exit_uclibc_newer.patch;minrev=50816 \                                                                                                              
-
-> 
-> Signed-off-by: Eduardo Lima (Etrunko) <eblima@gmail.com>
+2010/10/22 Khem Raj <raj.khem@gmail.com>:
+> It adds an override based on type of recipe
+> e.g. recipes ending with usual suffixes like -native -cross, -sdk
+> add the same to overrides with out leading '-'
+> It also add the same override for BBCLASSEXTEND
+> For normal recipes we add 'target' to overrides
+>
+> This will give up better control over defining and combining
+> recipes into using BBCLASSEXTEND and still have finer control
+> if needed. We wont require to have virtclass-xxx overrides
+> anymore
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  recipes/efl1/ecore/exit_uclibc.patch |   26 +++++++++++++-------------
->  1 files changed, 13 insertions(+), 13 deletions(-)
-> 
-> diff --git a/recipes/efl1/ecore/exit_uclibc.patch b/recipes/efl1/ecore/exit_uclibc.patch
-> index 105aeed..00782f6 100644
-> --- a/recipes/efl1/ecore/exit_uclibc.patch
-> +++ b/recipes/efl1/ecore/exit_uclibc.patch
-> @@ -1,13 +1,13 @@
-> -Index: ecore/src/lib/ecore_con/ecore_con_info.c
-> -===================================================================
-> ---- ecore.orig/src/lib/ecore_con/ecore_con_info.c	2009-11-14 00:14:56.056955719 +0100
-> -+++ ecore/src/lib/ecore_con/ecore_con_info.c	2009-11-14 00:16:40.035696191 +0100
-> -@@ -243,7 +243,7 @@
-> - 	  freeaddrinfo(result);
-> - 	err = write(fd[1], "", 1);
-> - 	close(fd[1]);
-> --# ifdef __USE_ISOC99
-> -+# if defined(__USE_ISOC99) && !defined(__UCLIBC__)
-> - 	_Exit(0);
-> - # else
-> - 	_exit(0);
-> +diff -upN ecore/src/lib/ecore_con/ecore_con_info.c ecore.new/src/lib/ecore_con/ecore_con_info.c
-> +--- ecore/src/lib/ecore_con/ecore_con_info.c	2010-08-12 11:07:48.000000000 -0300
-> ++++ ecore.new/src/lib/ecore_con/ecore_con_info.c	2010-08-12 17:16:15.508079579 -0300
-> +@@ -283,7 +283,7 @@ on_error:
-> +         
-> +         err = write(fd[1], "", 1);
-> +         close(fd[1]);
-> +-#ifdef __USE_ISOC99
-> ++#if defined(__USE_ISOC99) && !defined(__UCLIBC__)
-> +         _Exit(0);
-> + #else
-> +         _exit(0);
-> +Common subdirectories: ecore/src/lib/ecore_con/.svn and ecore.new/src/lib/ecore_con/.svn
-> -- 
-> 1.7.3.1
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> =A0classes/utils.bbclass | =A0 =A03 +++
+> =A0conf/bitbake.conf =A0 =A0 | =A0 =A02 ++
+> =A0lib/oe/utils.py =A0 =A0 =A0 | =A0 =A08 ++++++++
+> =A03 files changed, 13 insertions(+), 0 deletions(-)
+>
+> diff --git a/classes/utils.bbclass b/classes/utils.bbclass
+> index 10d49ce..7c96509 100644
+> --- a/classes/utils.bbclass
+> +++ b/classes/utils.bbclass
+> @@ -36,6 +36,9 @@ def base_both_contain(variable1, variable2, checkvalue,=
+ d):
+> =A0def base_prune_suffix(var, suffixes, d):
+> =A0 =A0 return oe.utils.prune_suffix(var, suffixes, d)
+>
+> +def base_get_suffix(var, suffixes, d):
+> + =A0 =A0return oe.utils.get_suffix(var, suffixes, d)
+> +
+> =A0def oe_filter(f, str, d):
+> =A0 =A0 return oe.utils.str_filter(f, str, d)
+>
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 539ab3d..2f3dd6b 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -195,6 +195,8 @@ MACHINE_KERNEL_PR =3D ""
+> =A0# otherwise it is the same as PN and P
+> =A0SPECIAL_PKGSUFFIX =3D "-native -cross -initial -intermediate -nativesd=
+k -crosssdk -cross-canadian -sdk"
+> =A0BPN =3D "${@base_prune_suffix('${PN}', '${SPECIAL_PKGSUFFIX}'.split(),=
+ d)}"
+> +# Add a _target override so we can do target specific overrides when usi=
+ng BBCLASSEXTEND
+> +OVERRIDES_prepend =3D "${@base_get_suffix('${PN}', '${SPECIAL_PKGSUFFIX}=
+'.split(), d)}:"
+> =A0BP =3D "${BPN}-${PV}"
+>
+> =A0# Package info.
+> diff --git a/lib/oe/utils.py b/lib/oe/utils.py
+> index 2169ed2..4822864 100644
+> --- a/lib/oe/utils.py
+> +++ b/lib/oe/utils.py
+> @@ -67,6 +67,14 @@ def prune_suffix(var, suffixes, d):
+> =A0 =A0 =A0 =A0 =A0 =A0 return var.replace(suffix, "")
+> =A0 =A0 return var
+>
+> +def get_suffix(var, suffixes, d):
+> + =A0 =A0# See if var ends with any of the suffixes listed and
+> + =A0 =A0# if found return it otherwise return "target'
+> + =A0 =A0for suffix in suffixes:
+> + =A0 =A0 =A0 =A0if var.endswith(suffix):
+> + =A0 =A0 =A0 =A0 =A0 return suffix[1:]
+> + =A0 =A0return "target"
+> +
+> =A0def str_filter(f, str, d):
+> =A0 =A0 from re import match
+> =A0 =A0 return " ".join(filter(lambda x: match(f, x, 0), str.split()))
+> --
+> 1.7.1
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Cool. I felt we need -target for quite a while, but could not add it myself=
+.
+
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+
+Next question/proposal:
+A big patch to replace things like virtclass-natve to -native ?
+And then a patch to remove that functionality ?
+
+Seems liek the way forward.
+
+Frans
 
 
