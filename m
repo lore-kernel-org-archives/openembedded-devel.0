@@ -1,25 +1,25 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fidencio@profusion.mobi>) id 1P9RnG-0007Yq-4o
+	(envelope-from <fidencio@profusion.mobi>) id 1P9RnG-0007au-LA
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Oct 2010 02:17:10 +0200
-Received: by mail-gw0-f47.google.com with SMTP id a11so1560489gwa.6
+	Sat, 23 Oct 2010 02:17:12 +0200
+Received: by gxk22 with SMTP id 22so1148347gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 17:16:30 -0700 (PDT)
-Received: by 10.100.112.18 with SMTP id k18mr2699930anc.75.1287792990082;
-	Fri, 22 Oct 2010 17:16:30 -0700 (PDT)
+	Fri, 22 Oct 2010 17:16:28 -0700 (PDT)
+Received: by 10.150.131.8 with SMTP id e8mr2360298ybd.91.1287792987922;
+	Fri, 22 Oct 2010 17:16:27 -0700 (PDT)
 Received: from localhost.localdomain ([201.82.29.28])
-	by mx.google.com with ESMTPS id u3sm4239972ani.19.2010.10.22.17.16.28
+	by mx.google.com with ESMTPS id u3sm4239972ani.19.2010.10.22.17.16.25
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 22 Oct 2010 17:16:29 -0700 (PDT)
+	Fri, 22 Oct 2010 17:16:26 -0700 (PDT)
 From: fidencio@profusion.mobi
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Oct 2010 22:15:43 -0200
-Message-Id: <4cc2295d.0311650a.0c4d.ffffaf5c@mx.google.com>
+Date: Fri, 22 Oct 2010 22:15:42 -0200
+Message-Id: <4cc2295a.0311650a.0c4d.ffffaf5a@mx.google.com>
 X-Mailer: git-send-email 1.7.3.1
 In-Reply-To: <y>
 References: <y>
-X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Connect-IP: 209.85.161.175
 X-SA-Exim-Mail-From: fidencio@profusion.mobi
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -27,7 +27,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 03/17] EFL: Add ethumb as dependency for elementary
+Subject: [PATCH 02/17] EFL: Add recipe for ethumb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,21 +47,40 @@ From: Eduardo Lima (Etrunko) <eblima@gmail.com>
 
 Signed-off-by: Eduardo Lima (Etrunko) <eblima@gmail.com>
 ---
- recipes/efl1/elementary_svn.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/efl1/ethumb_svn.bb |   24 ++++++++++++++++++++++++
+ 1 files changed, 24 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/efl1/ethumb_svn.bb
 
-diff --git a/recipes/efl1/elementary_svn.bb b/recipes/efl1/elementary_svn.bb
-index 29e8919..664433b 100644
---- a/recipes/efl1/elementary_svn.bb
-+++ b/recipes/efl1/elementary_svn.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "EFL based widget set for mobile devices"
- LICENSE = "LGPL"
--DEPENDS = "eet-native efreet evas ecore edje eet edbus"
-+DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb"
- PV = "0.7.0+svnr${SRCPV}"
- PR = "r11"
- SRCREV = "${EFL_SRCREV}"
+diff --git a/recipes/efl1/ethumb_svn.bb b/recipes/efl1/ethumb_svn.bb
+new file mode 100644
+index 0000000..7f826cf
+--- /dev/null
++++ b/recipes/efl1/ethumb_svn.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "EFL based thumbnail generation library"
++LICENSE = "LGPL"
++DEPENDS = "eet-native evas ecore edje eet edbus emotion epdf"
++PV = "0.1.0+svnr${SRCPV}"
++SRCREV = "${EFL_SRCREV}"
++
++inherit efl
++
++EXTRA_OECONF = "\
++  --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
++  --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
++"
++
++SRC_URI = "svn://svn.enlightenment.org/svn/e/trunk;module=ethumb;proto=http"
++
++# Some upgrade path tweaking, as in evas
++AUTO_LIBNAME_PKGS = ""
++
++FILES_${PN} += "\
++    ${bindir}/ethumbd \
++    ${libexecdir}/ethumbd_slave \
++    ${libdir}/plugins/*.so \
++    ${libdir}/plugins/data/*.edj \
++"
 -- 
 1.7.3.1
 
