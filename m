@@ -1,44 +1,43 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9i1r-00070n-1I
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Oct 2010 19:37:15 +0200
-Received: by gxk22 with SMTP id 22so1400410gxk.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P9idQ-0003wL-Vh for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Oct 2010 20:16:05 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1P9icp-0007lI-7L for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Oct 2010 20:15:27 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Oct 2010 20:15:27 +0200
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Oct 2010 10:36:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=FM+pfS2z1lYNKRni9ogCtnxHLslkX+X1MJe5Jo4HUzY=;
-	b=ASP6BXc4JJ+NcI4HlwJZih9bYyTyPXI23w0xPJNgiTvVaZU3MJSyFs1lWQeKRRIg/K
-	KT2NzAaOx9K7vlmB5xb0lxbvq8sA3eL7FJHP8TprYxTe7QT75Nxr4VRGoi8X7a5zVNSB
-	xfXsAfc00eu6YOthi3B4sBaIyyn7uVxAHvoBM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=xukxWKOX9Ng4T1tCqoAQj8wHKTzaHRes/Na031JnN9obq0zQTfsIFFs93ullVamY8D
-	Mw//eruJgxWUMCfQfFBjY11JoiMhBPBY1lJJDUkU1TNQxbCzDdWDn/weZbnkpWcQtoqQ
-	ri59yd/wltJeAJGUpK1F6qE0t9LINon92uxKU=
-MIME-Version: 1.0
-Received: by 10.42.41.5 with SMTP id n5mr3522857ice.248.1287855393148; Sat, 23
-	Oct 2010 10:36:33 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sat, 23 Oct 2010 10:36:33 -0700 (PDT)
-In-Reply-To: <i9v396$cn4$1@dough.gmane.org>
-References: <1287848486-14980-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<i9v396$cn4$1@dough.gmane.org>
-Date: Sat, 23 Oct 2010 19:36:33 +0200
-Message-ID: <AANLkTinENJ300R25P65JHJR5wX0jLvd0+TfvSOYKC7+K@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 23 Oct 2010 20:15:27 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 23 Oct 2010 20:15:19 +0200
+Message-ID: <i9v8nn$303$1@dough.gmane.org>
+References: <1287841515-19825-1-git-send-email-koen@openembedded.org>
+	<AANLkTinLeN9pCrmwtZYxv7HhLgzfhq+HKhkBm0hLpm9x@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <AANLkTinLeN9pCrmwtZYxv7HhLgzfhq+HKhkBm0hLpm9x@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] u-boot-sakoman_git.bb: updated SRCREV to head to make it building again
+Subject: Re: [RFC][PATCH] module bbclass: split each module into a kernel-module-<foo> subpackage and use PN as metapackage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,37 +51,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Oct 2010 17:37:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 23 Oct 2010 18:16:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/10/23 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 23-10-10 17:41, Frans Meulenbroeks wrote:
->> SRCREV was "ccd0c67858c6e2807c695e2c8f545284cb871866", but that is not in the
->> omap4s-exp branch any more. Guess it was gone after a merge. To make things
->> building I moved the the head of the branch
->> SRCREV = "8b931e51f46acffd61096553ae89dfb3ee30d398"
->
-> That branch is rebased frequently, so this won't help much. The tarball
-> snapshot for the current revision is available on the angstrom source
-> mirror, so if you are using angstrom and a recent bitbake you won't get
-> bothered by the rebasing.
-> Having said all that, we should find a working repo for panda uboot and
-> use that. AIUI denx git should work soon.
->
-> regards,
->
-> Koen
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Guess that is why it was autorev, but on oct 12 you pinned it to the
-SRCREV that I could not fetch.
-A solution could be to pin on a rev that is a merge with the denx git.
-Not sure what the status is of the panda code in the u-boot git.
-I see quite some patches from Steve (but no idea how much of them are
-accepted/integrated by Wolfgang.
+On 23-10-10 19:03, Chris Larson wrote:
+> On Sat, Oct 23, 2010 at 6:45 AM, Koen Kooi <koen.kooi@gmail.com> wrote:
+> 
+>> From: Koen Kooi <k-kooi@ti.com>
+>>
+>> Signed-off-by: Koen Kooi <k-kooi@ti.com>
+>>
+>> ---
+>>  classes/module.bbclass |  191
+>> ++++++++++++++++++++++++++++++++++++++++++++++-
+>>  1 files changed, 186 insertions(+), 5 deletions(-)
+>>
+> 
+> 
+> How about moving the common functions into oe.module or oe.package and using
+> them from module.bbclass and kernel.bbclass?
 
-Frans.
+I thought about that, but that needs more work :( We need to pass in a
+different path to System.map, use PN as metapackage name, use a
+different blacklist, etc.
+That requires a lot more python skill than I currently have.
+
+Apart from the horrendous code duplication, how does this look? It seems
+to do the right thing for the recipes I tested with :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMwyY2MkyGM64RGpERAvl7AJ9vvDrrfJoJv2uWbBYFNMtmUSQBlQCgqyU/
+g7/rxYKqcNnGn5ar1d+mFSY=
+=9tBi
+-----END PGP SIGNATURE-----
+
 
 
