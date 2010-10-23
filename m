@@ -1,33 +1,33 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fidencio@profusion.mobi>) id 1P9RnZ-0007ps-Qp
+	(envelope-from <fidencio@profusion.mobi>) id 1P9Rna-0007au-LB
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 23 Oct 2010 02:17:27 +0200
-Received: by gwaa11 with SMTP id a11so1560580gwa.6
+Received: by mail-gx0-f175.google.com with SMTP id 22so1148347gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 17:16:46 -0700 (PDT)
-Received: by 10.100.42.1 with SMTP id p1mr2721487anp.79.1287793006115;
-	Fri, 22 Oct 2010 17:16:46 -0700 (PDT)
+	Fri, 22 Oct 2010 17:16:50 -0700 (PDT)
+Received: by 10.100.250.14 with SMTP id x14mr2684070anh.232.1287793009958;
+	Fri, 22 Oct 2010 17:16:49 -0700 (PDT)
 Received: from localhost.localdomain ([201.82.29.28])
-	by mx.google.com with ESMTPS id u3sm4239972ani.19.2010.10.22.17.16.44
+	by mx.google.com with ESMTPS id u3sm4239972ani.19.2010.10.22.17.16.48
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 22 Oct 2010 17:16:45 -0700 (PDT)
+	Fri, 22 Oct 2010 17:16:49 -0700 (PDT)
 From: fidencio@profusion.mobi
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Oct 2010 22:15:51 -0200
-Message-Id: <4cc2296d.0311650a.0c4d.ffffaf65@mx.google.com>
+Date: Fri, 22 Oct 2010 22:15:53 -0200
+Message-Id: <4cc22971.0311650a.0c4d.ffffaf68@mx.google.com>
 X-Mailer: git-send-email 1.7.3.1
 In-Reply-To: <y>
 References: <y>
-X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Connect-IP: 209.85.161.175
 X-SA-Exim-Mail-From: fidencio@profusion.mobi
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL, BAYES_00, TVD_SPACE_RATIO
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 11/17] Eeze: New recipe
+Subject: [PATCH 13/17] Ecore: update exit_uclibc.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +45,42 @@ X-List-Received-Date: Sat, 23 Oct 2010 00:17:28 -0000
 
 From: Eduardo Lima (Etrunko) <eblima@gmail.com>
 
-Part of the EFL, eeze is a library to simplify the use of devices. It is now
-a dependency for E17.
-
 Signed-off-by: Eduardo Lima (Etrunko) <eblima@gmail.com>
 ---
- recipes/efl1/eeze_svn.bb |   11 +++++++++++
- 1 files changed, 11 insertions(+), 0 deletions(-)
- create mode 100644 recipes/efl1/eeze_svn.bb
+ recipes/efl1/ecore/exit_uclibc.patch |   26 +++++++++++++-------------
+ 1 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/recipes/efl1/eeze_svn.bb b/recipes/efl1/eeze_svn.bb
-new file mode 100644
-index 0000000..5388ec1
---- /dev/null
-+++ b/recipes/efl1/eeze_svn.bb
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "Eeze is a library to simplify the use of devices"
-+LICENSE = "MIT BSD"
-+DEPENDS = "ecore udev"
-+PV = "0.2.0.+svnr${SRCPV}"
-+PR = "r0"
-+SRCREV = "${EFL_SRCREV}"
-+
-+inherit efl
-+
-+# Some upgrade path tweaking
-+AUTO_LIBNAME_PKGS = ""
+diff --git a/recipes/efl1/ecore/exit_uclibc.patch b/recipes/efl1/ecore/exit_uclibc.patch
+index 105aeed..00782f6 100644
+--- a/recipes/efl1/ecore/exit_uclibc.patch
++++ b/recipes/efl1/ecore/exit_uclibc.patch
+@@ -1,13 +1,13 @@
+-Index: ecore/src/lib/ecore_con/ecore_con_info.c
+-===================================================================
+---- ecore.orig/src/lib/ecore_con/ecore_con_info.c	2009-11-14 00:14:56.056955719 +0100
+-+++ ecore/src/lib/ecore_con/ecore_con_info.c	2009-11-14 00:16:40.035696191 +0100
+-@@ -243,7 +243,7 @@
+- 	  freeaddrinfo(result);
+- 	err = write(fd[1], "", 1);
+- 	close(fd[1]);
+--# ifdef __USE_ISOC99
+-+# if defined(__USE_ISOC99) && !defined(__UCLIBC__)
+- 	_Exit(0);
+- # else
+- 	_exit(0);
++diff -upN ecore/src/lib/ecore_con/ecore_con_info.c ecore.new/src/lib/ecore_con/ecore_con_info.c
++--- ecore/src/lib/ecore_con/ecore_con_info.c	2010-08-12 11:07:48.000000000 -0300
+++++ ecore.new/src/lib/ecore_con/ecore_con_info.c	2010-08-12 17:16:15.508079579 -0300
++@@ -283,7 +283,7 @@ on_error:
++         
++         err = write(fd[1], "", 1);
++         close(fd[1]);
++-#ifdef __USE_ISOC99
+++#if defined(__USE_ISOC99) && !defined(__UCLIBC__)
++         _Exit(0);
++ #else
++         _exit(0);
++Common subdirectories: ecore/src/lib/ecore_con/.svn and ecore.new/src/lib/ecore_con/.svn
 -- 
 1.7.3.1
 
