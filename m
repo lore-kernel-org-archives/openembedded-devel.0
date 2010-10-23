@@ -1,21 +1,21 @@
 Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fidencio@profusion.mobi>) id 1P9RnS-0007Yq-62
+	(envelope-from <fidencio@profusion.mobi>) id 1P9RnU-0007j7-7R
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Oct 2010 02:17:19 +0200
-Received: by mail-gw0-f47.google.com with SMTP id a11so1560489gwa.6
+	Sat, 23 Oct 2010 02:17:21 +0200
+Received: by gwaa11 with SMTP id a11so1560540gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Oct 2010 17:16:42 -0700 (PDT)
-Received: by 10.151.13.20 with SMTP id q20mr1993336ybi.434.1287793002110;
-	Fri, 22 Oct 2010 17:16:42 -0700 (PDT)
+	Fri, 22 Oct 2010 17:16:36 -0700 (PDT)
+Received: by 10.100.135.14 with SMTP id i14mr2693230and.202.1287792996341;
+	Fri, 22 Oct 2010 17:16:36 -0700 (PDT)
 Received: from localhost.localdomain ([201.82.29.28])
-	by mx.google.com with ESMTPS id u3sm4239972ani.19.2010.10.22.17.16.40
+	by mx.google.com with ESMTPS id u3sm4239972ani.19.2010.10.22.17.16.34
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 22 Oct 2010 17:16:41 -0700 (PDT)
+	Fri, 22 Oct 2010 17:16:35 -0700 (PDT)
 From: fidencio@profusion.mobi
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Oct 2010 22:15:49 -0200
-Message-Id: <4cc22969.0311650a.0c4d.ffffaf63@mx.google.com>
+Date: Fri, 22 Oct 2010 22:15:46 -0200
+Message-Id: <4cc22963.0311650a.0c4d.ffffaf60@mx.google.com>
 X-Mailer: git-send-email 1.7.3.1
 In-Reply-To: <y>
 References: <y>
@@ -27,7 +27,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 09/17] Added Expedite and Elementary tests to E17-related tasks
+Subject: [PATCH 06/17] evas.inc: Require virtual/gles2 and enable gl engine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,56 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Oct 2010 00:17:19 -0000
+X-List-Received-Date: Sat, 23 Oct 2010 00:17:23 -0000
 
 From: Eduardo Lima (Etrunko) <eblima@gmail.com>
 
 Signed-off-by: Eduardo Lima (Etrunko) <eblima@gmail.com>
 ---
- recipes/angstrom/task-angstrom-e.bb |    4 ++--
- recipes/tasks/task-e-x11.bb         |    4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes/efl1/evas.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/angstrom/task-angstrom-e.bb b/recipes/angstrom/task-angstrom-e.bb
-index eb063df..28273c1 100644
---- a/recipes/angstrom/task-angstrom-e.bb
-+++ b/recipes/angstrom/task-angstrom-e.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Task packages for the Angstrom distribution"
--PR = "r0"
-+PR = "r1"
- ALLOW_EMPTY = "1"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -12,7 +12,7 @@ RDEPENDS_angstrom-e-base-depends := "\
-     angstrom-x11-base-depends \
-     rxvt-unicode xstroke xtscal xrandr xmodmap xdpyinfo \
-     ttf-bitstream-vera \
--    e-wm \
-+    elementary-tests expedite e-wm \
-     glibc-charmap-utf-8 glibc-localedata-i18n"
- #xserver-kdrive-fbdev 
- 
-diff --git a/recipes/tasks/task-e-x11.bb b/recipes/tasks/task-e-x11.bb
-index d691de6..64da9ba 100644
---- a/recipes/tasks/task-e-x11.bb
-+++ b/recipes/tasks/task-e-x11.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Tasks for Enlightenment/X11"
--PR = "r10"
-+PR = "r11"
- 
- inherit task
- 
-@@ -17,7 +17,7 @@ RDEPENDS_task-e-x11-core = "rxvt-unicode xstroke xtscal xrandr xmodmap xdpyinfo
- #
- # E-core
- #
--RDEPENDS_task-e-x11-core += "e-wm"
-+RDEPENDS_task-e-x11-core += "elementary-tests expedite e-wm"
- 
- 
- RDEPENDS_task-e-x11  = "task-e-x11-core"
+diff --git a/recipes/efl1/evas.inc b/recipes/efl1/evas.inc
+index e7ba309..964f5c9 100644
+--- a/recipes/efl1/evas.inc
++++ b/recipes/efl1/evas.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Evas is the Enlightenment canvas API"
+ LICENSE = "MIT BSD"
+ # can also depend on valgrind, libsdl-x11, directfb
+-DEPENDS = "librsvg eina eet freetype jpeg libpng virtual/libx11 libxext libxrender fontconfig libfribidi"
++DEPENDS = "librsvg eina eet freetype jpeg libpng virtual/gles2 virtual/libx11 libxext libxrender fontconfig libfribidi"
+ SRCREV = "${EFL_SRCREV}"
+ PV = "0.9.9.060+svnr${SRCPV}"
+ PR = "r1"
+@@ -43,7 +43,7 @@ RRECOMMENDS_${PN} = "\
+   evas-engine-software-16 \
+   evas-engine-software-16-x11 \
+   evas-engine-xrender-x11 \
+-  \
++  evas-engine-gl-x11 \
+   evas-loader-png \
+   evas-loader-jpeg \
+   evas-loader-eet \
 -- 
 1.7.3.1
 
