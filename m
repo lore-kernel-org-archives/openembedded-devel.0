@@ -1,40 +1,45 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1P9wRX-0004zb-GQ
+	(envelope-from <martin.jansa@gmail.com>) id 1P9z1B-0000Qe-D7
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 11:00:47 +0200
-Received: by qyk33 with SMTP id 33so642342qyk.6
+	Sun, 24 Oct 2010 13:45:42 +0200
+Received: by wya21 with SMTP id 21so2379701wya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Oct 2010 02:00:00 -0700 (PDT)
+	Sun, 24 Oct 2010 04:45:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=e09vVIed/v2QbOfcW8VX05/wveT7WZhPwlc+115rGtU=;
-	b=YtJBSyxl98vfndWxUqKyI+orveDbgeeD81Av49voi72CbTpwziixBgJ/xNXxBMr0f4
-	W86i5EbCHwDHwMh9Cu7bPQdZxhZAbFew0tN/7iYq2FHoN9N5IsizYFZ4qui9A0iXNwst
-	tXIKHyiynMBgjRtBHvwzZUPzy/WbnP9njhlGg=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=y5At/Qc9/PzO9I2xOBCy0rMv/CbQwM5xDL+5y3GhwMw=;
+	b=UFYKH7e2eDCG1gowCGG3sZVuno/ahs6YPp1Z6+muH6WS0fwcWDUADOh3nxNO+T4OnR
+	8/zT0Y2LiElAA9JKMRrNnmMKyZzpEjHF2bCk4gSCSf1AdQBRnwERGmNLxj6OORpseUoQ
+	cT3WR92tEO5q/p3HsGWHRXOwTGOOZe6er3mmc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=gRMRdPH5x203OaZzmF10KF30YqFYePY4JsyOtkcs3GqeIwPygVKVDaHE3q1fE50xzw
-	8jyFu1Dv0j1k9ttCdbD+LR+CgIWOwE8psHGsj1AYseoQwg1gGQJnJXSl+oZYRkGphusO
-	Dnq3f1awdQdVcoZ+rec9oxFHIIIKeIk0fAKn4=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=MfTGSzVUxGnLoRgTe2SDytApvkdwKZiMD8R/7FaMDrjAkkVwnclatATYFxgzjFcoGY
+	/mb6ct6zriPe8kjU6ffeByUmAsFTBuZ4ERtNBj75QCWaDGD2jFOlw0zri8NrDu4nHG3p
+	qJSon+Fw/lbQRJ1cmPbnPMc92I5kOVgMDVfQg=
 MIME-Version: 1.0
-Received: by 10.229.65.25 with SMTP id g25mr4855648qci.196.1287910797638; Sun,
-	24 Oct 2010 01:59:57 -0700 (PDT)
-Received: by 10.229.247.140 with HTTP; Sun, 24 Oct 2010 01:59:57 -0700 (PDT)
-Date: Sun, 24 Oct 2010 10:59:57 +0200
-Message-ID: <AANLkTinXYcNN=iozP-aXPDuFzQqM13KDf5my1W6DTap6@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+Received: by 10.227.134.129 with SMTP id j1mr5175408wbt.67.1287920700318; Sun,
+	24 Oct 2010 04:45:00 -0700 (PDT)
+Received: by 10.227.154.13 with HTTP; Sun, 24 Oct 2010 04:45:00 -0700 (PDT)
+In-Reply-To: <E1P986g-0002sB-Ki@melo.openembedded.org>
+References: <E1P986g-0002sB-Ki@melo.openembedded.org>
+Date: Sun, 24 Oct 2010 13:45:00 +0200
+Message-ID: <AANLkTi=3CMJ9=t_cWDu9jYkE17NUZJUtQ3rgV4c4seoR@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Race issues (lzma-native)
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Chris Larson : oe.patch: use oe.process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,43 +53,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Oct 2010 09:00:47 -0000
+X-List-Received-Date: Sun, 24 Oct 2010 11:45:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On Fri, Oct 22, 2010 at 5:15 AM, git version control
+<git@git.openembedded.org> wrote:
+> Module: openembedded.git
+> Branch: master
+> Commit: c7a68fe6ff738b86d6da5e55ce4927f8fb06b38c
+> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
+it;h=3Dc7a68fe6ff738b86d6da5e55ce4927f8fb06b38c
+>
+> Author: Chris Larson <chris_larson@mentor.com>
+> Date: =A0 Thu Oct 21 17:23:40 2010 -0700
+>
+> oe.patch: use oe.process
+>
+> Signed-off-by: Chris Larson <chris_larson@mentor.com>
 
-during first build of console image I notice a strange fault:
-subsequent builds are ok.
-My scripts builds console-image and opie-image.
+Not sure if it's intended behavior or even result of this commit, but
+now failing do_patch results in FATAL error and building with -k
+doesn't continue now
 
-ERROR: Task 2411
-(virtual:native:/oe/openembedded/recipes/lzma/lzma_4.65.bb,
-do_distribute_sources) failed with exit code '1'
-NOTE: Unpacking ../sources/lzma465.tar.bz2 to
-tmp/work/i686-linux/lzma-native-4.65-r4.1/
-NOTE: package lzma-native-4.65-r4.1: task do_distribute_sources: Started
-NOTE: package lzma-native-4.65-r4.1: task SRC_DISTRIBUTECOMMAND: Failed
-ERROR: Function 'SRC_DISTRIBUTECOMMAND' failed
+noticed today in libvpx:
 
+NOTE: Running task 4205 of 12912 (ID: 5817,
+/OE/dev/recipes/webm/libvpx_0.9.2.bb, do_patch)
+NOTE: package libvpx-0.9.2-r5.0: task do_patch: Started
+NOTE: Applying patch 'libvpx-configure-support-blank-prefix.patch'
+(dev/recipes/webm/libvpx/libvpx-configure-support-blank-prefix.patch)
+FATAL: Execution of 'quilt
+--quiltrc=3D/OE/tmpdir-shr/sysroots/x86_64-linux/usr/bin/quiltrc push'
+failed with exit code 1:
+Applying patch libvpx-configure-support-blank-prefix.patch
+can't find file to patch at input line 7
+Perhaps you used the wrong -p or --strip option?
 
-Looking at the
-run.SRC_DISTRIBUTECOMMAND.18268   16384 (failing)
-run.SRC_DISTRIBUTECOMMAND.9570     34334
+and build stops here
 
-it looks like the file is not complete / malformed:
+BTW: also checksums error are FATAL and maybe with -k we should
+continue to build all remaining runqueue if possible
 
-package_generate_ipkg_conf() {
-<------>mkdir -p /oe/build/tmp/sysroots/i686-linux/etc/
-<------>echo "src oe file:/oe/build/tmp/deploy/glibc/ipk" >
-/oe/build/tmp/sysroots/i686-linux/etc/opkg.conf
-<------>echo "src oe file:/
-EOF
-
-run.do_distribute_sources.18268  is empty, while second time
-run.do_distribute_sources.9570   1051 contains  def do_distribute_sources(d):
-
-This seems indeed a race issue...
-
-Andrea
+Regards,
 
 
