@@ -1,32 +1,33 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PA0Hm-0007Pw-BZ for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 15:06:55 +0200
+	id 1PA0QH-0007c0-B8 for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Oct 2010 15:15:41 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PA0H5-00055s-SX for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 15:06:11 +0200
+	id 1PA0Pf-0006fX-FD for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Oct 2010 15:15:03 +0200
 Received: from ip5451781a.direct-adsl.nl ([84.81.120.26])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Oct 2010 15:06:11 +0200
+	Sun, 24 Oct 2010 15:15:03 +0200
 Received: from k.kooi by ip5451781a.direct-adsl.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Oct 2010 15:06:11 +0200
+	Sun, 24 Oct 2010 15:15:03 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 24 Oct 2010 15:06:03 +0200
-Message-ID: <ia1avs$p2e$1@dough.gmane.org>
-References: <1287905629-20148-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 24 Oct 2010 15:10:22 +0200
+Message-ID: <ia1b7v$p2e$2@dough.gmane.org>
+References: <AANLkTi=fqKeS6eu1H5mS-C7rQeJPndf8Xchpghaxjh_d@mail.gmail.com>	<AANLkTikLYDaYCXeg+T0Vn8inWv9v72BTN6hHNKcPZ77V@mail.gmail.com>
+	<20101024062941.GE3494@jama>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip5451781a.direct-adsl.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <1287905629-20148-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <20101024062941.GE3494@jama>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -36,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] psplash: don't put initscripts to RDEPENDS
+Subject: Re: Explaining the patches that will be send ...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,50 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Oct 2010 13:06:55 -0000
+X-List-Received-Date: Sun, 24 Oct 2010 13:15:41 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 24-10-10 09:33, Martin Jansa wrote:
-> * different distros or images are using different initscripts
-> * sane image usually has some initscripts installed
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
-> ---
->  recipes/psplash/psplash.inc |    3 +--
->  1 files changed, 1 insertions(+), 2 deletions(-)
+On 24-10-10 08:29, Martin Jansa wrote:
+> On Fri, Oct 22, 2010 at 10:13:40PM -0200, Fabiano Fidêncio wrote:
+>> Howdy!
+>>
+>> Guys, I'll send a lot of patches made by Eduardo Lima (Etrunko) and I
+>> via git send-mail.
+>>
+>> This patches are creating/fixing svn build from some
+>> {EFL,LMS,WebKit-EFL} packages and are keeping in three differents
+>> branchs of my git tree. All of this are rebased with the latest HEAD.
+>>
+>> Please, apply if correct :-)
 > 
-> diff --git a/recipes/psplash/psplash.inc b/recipes/psplash/psplash.inc
-> index efd6a0c..baddd62 100644
-> --- a/recipes/psplash/psplash.inc
-> +++ b/recipes/psplash/psplash.inc
-> @@ -2,14 +2,13 @@ DESCRIPTION = "Userspace framebuffer boot logo based on usplash."
->  HOMEPAGE = "http://projects.o-hand.com/psplash"
->  SECTION = "base"
->  LICENSE = "GPL"
-> -RDEPENDS_${PN} = "initscripts"
->  PROVIDES = "virtual/psplash"
->  RPROVIDES_${PN} = "virtual-psplash"
->  RCONFLICTS_${PN} = "exquisite"
->  
->  SRCREV = "422"
->  PV = "0.0+svnr${SRCPV}"
-> -PR = "r33"
-> +PR = "r34"
->  
->  # You can create your own pslash-poky-img.h by doing
->  # ./make-image-header.sh <file>.png POKY
+> Today I'll apply those where was no reply from me or koen, for the rest
+> please send updated patches with v2 prefix.
 
+I think I have a way to make the gles situation less worse for TI
+targets[1], I need to work on that patch a bit. I'll be too busy next
+week to get it done, though.
+
+regards,
+
+Koen
+
+[1] Those are the only armv7a targets with recipes for gles drivers in
+the tree.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMxC87MkyGM64RGpERAuA3AJ0esj4n2KeJfNcCAlx8fZhBkW0gUwCdEwWD
-R1sZ/1qsjhGZQw3OlbpQ3fc=
-=2ZL6
+iD8DBQFMxDA+MkyGM64RGpERAqOkAJ44aV8nmSr3/GrFBkRctYX7EkEpowCfW97i
+aJiScZbUlCx+QuOhJNTvrFE=
+=jIKn
 -----END PGP SIGNATURE-----
 
 
