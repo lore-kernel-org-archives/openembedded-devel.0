@@ -1,40 +1,42 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9zFr-0006OK-Pf
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 14:01:20 +0200
-Received: by iwn5 with SMTP id 5so1736458iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PA0Hm-0007Pw-BZ for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Oct 2010 15:06:55 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PA0H5-00055s-SX for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Oct 2010 15:06:11 +0200
+Received: from ip5451781a.direct-adsl.nl ([84.81.120.26])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Oct 2010 15:06:11 +0200
+Received: from k.kooi by ip5451781a.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Oct 2010 05:00:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=EF3Q2MnHzU5fKs1s9NC34Htlzu85VbdtU1eSTUrbY6s=;
-	b=kkTvtA/oFh/vruHTZ3HsYit0iOXnRWAcFVpaZMEiUMPICTD+1y8iocvDJNMGQDhdDv
-	y3BA3ByCItpb2zt1MV+r0LjutVKx9I+ShTvY/KFS3XhZLuJ3sZXO9xzHXgGFccjcOpZo
-	qdyGgPmXGz8Vt9csFvH44t/HLOOBhoOjj/oCU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Nl80WD7B0X1IGYtWhE8cdio1Iafj1yAoZmYhp/wF8X4OfvoIUDkOMJzF0hv9QH/cMy
-	cwqn1RPDkjcIGbtOzJ5eJMJ90JNNDtxhN7URPnmwKat8fRQIh/DdL4ZOn2mTvyJpNkrY
-	IY7BZUCqExde/OBL12OHnaZ00rb1lkJF227/U=
-MIME-Version: 1.0
-Received: by 10.42.228.202 with SMTP id jf10mr3631568icb.455.1287921608723;
-	Sun, 24 Oct 2010 05:00:08 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sun, 24 Oct 2010 05:00:08 -0700 (PDT)
-Date: Sun, 24 Oct 2010 14:00:08 +0200
-Message-ID: <AANLkTimyqP-aP=+poQSHFE=ePogb66en0BwNCYWwCkXk@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 24 Oct 2010 15:06:11 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 24 Oct 2010 15:06:03 +0200
+Message-ID: <ia1avs$p2e$1@dough.gmane.org>
+References: <1287905629-20148-1-git-send-email-Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip5451781a.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <1287905629-20148-1-git-send-email-Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: sed dependency
+Subject: Re: [PATCH] psplash: don't put initscripts to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,30 +50,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Oct 2010 12:01:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 24 Oct 2010 13:06:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Triggered by this: http://patchwork.openembedded.org/patch/3099/
-I was wondering whether we should have sed-native as always-required ?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-If not lots of recipes might require an update like the one above:
+On 24-10-10 09:33, Martin Jansa wrote:
+> * different distros or images are using different initscripts
+> * sane image usually has some initscripts installed
 
-frans@linux-suse:~/oe/openembedded/recipes> grep sed -l */* -w | wc
-    776     776   20661
-frans@linux-suse:~/oe/openembedded/recipes> grep sed-native */* | wc
-      9      61     737
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-Guess despite the -w there will be some false hits in the first grep
-(because it is in postinst or in a comment), but I expect some 700+
-recipes remaining.
+> ---
+>  recipes/psplash/psplash.inc |    3 +--
+>  1 files changed, 1 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/psplash/psplash.inc b/recipes/psplash/psplash.inc
+> index efd6a0c..baddd62 100644
+> --- a/recipes/psplash/psplash.inc
+> +++ b/recipes/psplash/psplash.inc
+> @@ -2,14 +2,13 @@ DESCRIPTION = "Userspace framebuffer boot logo based on usplash."
+>  HOMEPAGE = "http://projects.o-hand.com/psplash"
+>  SECTION = "base"
+>  LICENSE = "GPL"
+> -RDEPENDS_${PN} = "initscripts"
+>  PROVIDES = "virtual/psplash"
+>  RPROVIDES_${PN} = "virtual-psplash"
+>  RCONFLICTS_${PN} = "exquisite"
+>  
+>  SRCREV = "422"
+>  PV = "0.0+svnr${SRCPV}"
+> -PR = "r33"
+> +PR = "r34"
+>  
+>  # You can create your own pslash-poky-img.h by doing
+>  # ./make-image-header.sh <file>.png POKY
 
-(actually thinking about it we could also do a scan on all added code
-to see if there is a dep on e.g. sed or grep, but guess due to the
-overhead then it is better to generically depend on sed-native).
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Guess something similar holds for grep (gave 128 matches) and probably
-some other tools).
+iD8DBQFMxC87MkyGM64RGpERAuA3AJ0esj4n2KeJfNcCAlx8fZhBkW0gUwCdEwWD
+R1sZ/1qsjhGZQw3OlbpQ3fc=
+=2ZL6
+-----END PGP SIGNATURE-----
 
-Frans
 
 
