@@ -1,33 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PA6XR-0007Mc-6E for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 21:47:29 +0200
-Received: from f053032104.adsl.alicedsl.de ([78.53.32.104]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PA6Wp-0005x3-7D for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 19:46:51 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4CC48B1B.6010405@eukrea.com>
-References: <1287927378-11971-1-git-send-email-eric@eukrea.com>
-	<AANLkTinU5a-o28y1CsAG2Yw_EpU3_SP-Pfe1ixcL7msC@mail.gmail.com>
-	<4CC48B1B.6010405@eukrea.com>
-Date: Sun, 24 Oct 2010 21:46:49 +0200
-Message-ID: <1287949609.3866.4.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <holger+oe@freyther.de>) id 1PA6h4-00033z-Km
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Oct 2010 21:57:30 +0200
+Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
+	[91.64.127.39])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 0638D1B10C0B;
+	Sun, 24 Oct 2010 19:58:14 +0000 (UTC)
+Message-ID: <4CC48F7C.2000403@freyther.de>
+Date: Sun, 24 Oct 2010 21:56:44 +0200
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc14 Lightning/1.0b2
+	Thunderbird/3.1.4
+MIME-Version: 1.0
+To: bitbake-dev@lists.berlios.de, 
+ openembedded-devel@lists.openembedded.org
+References: <1285368419-12062-1-git-send-email-raj.khem@gmail.com>	<AANLkTimhhvUqQZSicuDE7qEHFdxUJjJJSv=ZioFwwdR8@mail.gmail.com>	<AANLkTikvA4DOf7uwKUq2myNZMdOPZiOf_B73Kr=USOjZ@mail.gmail.com>	<AANLkTi=8ZBZmU68NYZO3HkkLVJ09y+jhr0pWrd=bt=32@mail.gmail.com>
+	<AANLkTimjYwr6vn5Makva7yciDA2_4KoiM=K7EtQQkYCf@mail.gmail.com>
+In-Reply-To: <AANLkTimjYwr6vn5Makva7yciDA2_4KoiM=K7EtQQkYCf@mail.gmail.com>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] shadow: Switch to getting libtool from PATH
+Subject: Re: [Bitbake-dev] [PATCH] fetchers: Use tar --exclude pattern to remove SCM files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,61 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Oct 2010 19:47:30 -0000
-X-Groupsio-MsgNum: 25415
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-z373rBcxz/fOvXgbIlpl"
+X-List-Received-Date: Sun, 24 Oct 2010 19:57:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---=-z373rBcxz/fOvXgbIlpl
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 10/24/2010 08:35 PM, Khem Raj wrote:
 
-Dear Eric, dear Khem,
-
-
-Am Sonntag, den 24.10.2010, 21:38 +0200 schrieb Eric B=C3=A9nard:
-
-> Le 24/10/2010 20:28, Khem Raj a =C3=A9crit :
-> > 2010/10/24 Eric B=C3=A9nard<eric@eukrea.com>:
-> >> * with PAM enabled, shadow's libtool sets lt_sysroot to the machine's
-> >> sysroot and not the arch's sysroot, thus it can't find libpam.
-> >> * by using libtool from PATH, this patch fix the problem.
-> >> * tested using angstrom-2010.x for an arvm5te target
-> >>
-> >> Signed-off-by: Eric B=C3=A9nard<eric@eukrea.com>
-> >
-> > I have fixed it in autotools class. Basically it should have takes
-> > care of setting
-> > the sysroot correctly for arch and machine recipes equally. Should be f=
-ixed now
-> > please pull and retest.
-
-That is commit 669ac1 [1].
->
-> you patch fixe the problem. Thanks
-
-For me too with `angstrom-2008.1` for `MACHINE=3D"beagleboard"`!
+>>
+>> this is used in all efl recipes and I've noticed it in elementary only
+>> because python-elementary depends on such new version.
+> 
+> Do you have a list of recipes which use this ? I am sure with git it
+> will be hard to use such a thing
+> as the git revs are random and simlarily many other SCMs
 
 
-Thanks,
+Speaking as upstream co-author of OpenBSC. We are using something like this to
+get the revision from the last tag of the repository. If someone is doing a
+make dist(check) we will copy a special version file into the tar.gz and use
+that instead.
 
-Paul
+From an upstream point of view I think it is acceptable to say that the ones
+that build stuff from a SCM (in contrast to a tarball) should have the files
+of the SCM around...
+
+PS: I liked the --exclude patch a lot too...
 
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D669ac12=
-1adeacd1850f67ab4aa758036f4599135
-
---=-z373rBcxz/fOvXgbIlpl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzEjSkACgkQPX1aK2wOHVjzZwCfXQFgugN1fnNjAsELqnAyg0bK
-hPgAn2kthrFelCIz68rJc7ihs13+tdX/
-=Sqlq
------END PGP SIGNATURE-----
-
---=-z373rBcxz/fOvXgbIlpl--
