@@ -1,46 +1,46 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1P9vDJ-0003gt-OI
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9vDy-0003lY-6x
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 09:41:59 +0200
-Received: by iwn5 with SMTP id 5so1551810iwn.6
+	Sun, 24 Oct 2010 09:42:39 +0200
+Received: by iwn5 with SMTP id 5so1552240iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Oct 2010 00:41:16 -0700 (PDT)
+	Sun, 24 Oct 2010 00:41:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=lut17N63s+I9g7uP+26B4fcV/hroKIaPEDcrpHBPcT8=;
-	b=nFsUiM9iULvBQF8Yml8XjK4XL6AqZxhkJWWCGtbHI/OjRk+aELUH1fupaPkdis2SZq
-	Ltxxgv1cMKEXwn3ByYVPxzUWxWsSPqEgVZ5y/bymeHgFxC1W44oDCgLnSoXYExO2qfWX
-	8ykgkezVCZAfyOg+EnC4YkKNIVMm/d9u9GAuU=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=v7NJXF+m4CjzYv62wsHkxQkHBoB3HpTYC2oB44smf14=;
+	b=hloEzolRNAd0M4nKDWDuOzQUGCQ2lGev+P63PX7kpPrsFq9O64H4rjMNRvihKHXE8/
+	pwCKRnGGL7NBB79JN+NLNMw5L1qgis94SuKdvUY1XLQcWUUt7PbOwuuSz2iVLEwuYJRw
+	SJjdNUx+ZsFw5a3yPSqsqcO9B0QXR9Gg/OkSo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=mJ3+AUVrKKu9k0IbMJ9brAIgKZvDIq4ZdmjFF/krBZoMZjifw9Zsn0VOe+N6MOZj65
-	d9w051qaCUhARt3t0xE6yqqxy5tV9/BXbZcKTEdSC8g3jmrYT6cAKLlSV1HQasQ3xNt5
-	6E8sDtTHT3x1Row3dp0ZdkzMB2AnABnF3Y66c=
-Received: by 10.42.172.131 with SMTP id n3mr3780840icz.342.1287906076093; Sun,
-	24 Oct 2010 00:41:16 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=kOCCnRYpehlTQ3y4iLmwKtn/tus8F5L+oD1oNbjDIB4RsDrMkJbefQ59H6Tfdd0qP9
+	zkidhWCAxh+s4+HzGtsQO/3MqaZsk4Fi27523v5fvD2Bdi/gjm6zY7Ghd67SdCUfkD2D
+	WH6Du1KeDn92P2l9uVnJO7wAoZE2Z28G4b9bk=
 MIME-Version: 1.0
-Received: by 10.42.164.194 with HTTP; Sun, 24 Oct 2010 00:40:56 -0700 (PDT)
-In-Reply-To: <AANLkTimhhvUqQZSicuDE7qEHFdxUJjJJSv=ZioFwwdR8@mail.gmail.com>
-References: <1285368419-12062-1-git-send-email-raj.khem@gmail.com>
-	<AANLkTimhhvUqQZSicuDE7qEHFdxUJjJJSv=ZioFwwdR8@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 24 Oct 2010 00:40:56 -0700
-Message-ID: <AANLkTikvA4DOf7uwKUq2myNZMdOPZiOf_B73Kr=USOjZ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
+Received: by 10.42.172.194 with SMTP id o2mr3579030icz.432.1287906117326; Sun,
+	24 Oct 2010 00:41:57 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Sun, 24 Oct 2010 00:41:57 -0700 (PDT)
+In-Reply-To: <AANLkTinR7OQFF7fzSmFnkuN+0y6b3jEV6s3N_OrNqckt@mail.gmail.com>
+References: <1287848486-14980-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<i9v396$cn4$1@dough.gmane.org>
+	<AANLkTinENJ300R25P65JHJR5wX0jLvd0+TfvSOYKC7+K@mail.gmail.com>
+	<AANLkTinR7OQFF7fzSmFnkuN+0y6b3jEV6s3N_OrNqckt@mail.gmail.com>
+Date: Sun, 24 Oct 2010 09:41:57 +0200
+Message-ID: <AANLkTin4LJ8+iRa6V+qnzGDsgDRW-duUezN4+eyCvjxK@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
-Subject: Re: [Bitbake-dev] [PATCH] fetchers: Use tar --exclude pattern to remove SCM files
+Subject: Re: [PATCH] u-boot-sakoman_git.bb: updated SRCREV to head to make it building again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,145 +54,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Oct 2010 07:41:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 24 Oct 2010 07:42:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Oct 23, 2010 at 11:58 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> This commit is usefull for sure, but breaks ie some EFL recipes.
+2010/10/23 Steve Sakoman <sakoman@gmail.com>:
+> On Sat, Oct 23, 2010 at 10:36 AM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> 2010/10/23 Koen Kooi <k.kooi@student.utwente.nl>:
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> On 23-10-10 17:41, Frans Meulenbroeks wrote:
+>>>> SRCREV was "ccd0c67858c6e2807c695e2c8f545284cb871866", but that is not in the
+>>>> omap4s-exp branch any more. Guess it was gone after a merge. To make things
+>>>> building I moved the the head of the branch
+>>>> SRCREV = "8b931e51f46acffd61096553ae89dfb3ee30d398"
+>>>
+>>> That branch is rebased frequently, so this won't help much. The tarball
+>>> snapshot for the current revision is available on the angstrom source
+>>> mirror, so if you are using angstrom and a recent bitbake you won't get
+>>> bothered by the rebasing.
+>>> Having said all that, we should find a working repo for panda uboot and
+>>> use that. AIUI denx git should work soon.
+>>>
+>>> regards,
+>>>
+>>> Koen
+>>
+>> Guess that is why it was autorev, but on oct 12 you pinned it to the
+>> SRCREV that I could not fetch.
+>> A solution could be to pin on a rev that is a merge with the denx git.
+>> Not sure what the status is of the panda code in the u-boot git.
+>> I see quite some patches from Steve (but no idea how much of them are
+>> accepted/integrated by Wolfgang.
 >
-> ie python-elementary depends on elementary >=3D 0.7.0.52890
-> but elementary.pc says Version: 0.7.0.0
+> Using the upstream v2010.09 tag should give you a reasonable u-boot.
 >
-> elementary.pc.in says Version: @VERSION@
+> The exp in my my omap4-exp branch stands for "experimental", so it
+> probably is not a good place to pull from unless you are willing to
+> deal with frequent rebases and occasional breakage.
 >
-> and finally VERSION is defined in configure.ac:
-> m4_define([v_maj], [0])
-> m4_define([v_min], [7])
-> m4_define([v_mic], [0])
-> m4_define([v_rev], m4_esyscmd([(svnversion "${SVN_REPO_PATH:-.}" |
-> grep -v export || echo 0) | awk -F : '{printf("%s\n", $1);}' | tr -d '
-> :MSP\n']))
-> m4_if(v_rev, [0], [m4_define([v_rev], m4_esyscmd([git log 2> /dev/null
-> | (grep -m1 git-svn-id || echo 0) | sed -e 's/.*@\([0-9]*\).*/\1/' |
-> tr -d '\n']))])
->
+> Steve
 
-hmm strange that a configure scripts depends on SCM files. To me it
-seems wrong. Anyway I think you can patch configure.ac
-to replace v_rev definition to be based on SRCREV may be some sort of
-sed operation as do_configure_prepend might be a good way
+I figured it would, but as that might have a more severe impact and I
+have not pandaboard to test on, it was too much risk to make that
+move.
+Either someone else need to do this, or as an alternative we could
+move to e.g. SRCREV 	b18815752f3d6db27877606e4e069e3f6cfe3a19 which is
+a merge from Wolfgang from 4 days ago, which I expect not to
+disappear.
 
+Basically my concern was to create a buildable recipe (which I needed
+in order to be able to verify whether my james-image build for panda)
+(I'll push the james recipes soon, still maturing them)
 
-
-> and this works OK on checkout with .svn dirs included, but results to
-> 0 after this patch.
->
-> Any hints how to resolve it?
->
-> Regards,
->
-> On Sat, Sep 25, 2010 at 12:46 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> This option will exclude the SCM metadata from tar files.
->>
->> Tested with gcc where svn tar which used to be 156M for gcc 4.5
->> is now 77M
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> =C2=A0lib/bb/fetch/bzr.py | =C2=A0 =C2=A02 +-
->> =C2=A0lib/bb/fetch/cvs.py | =C2=A0 =C2=A02 +-
->> =C2=A0lib/bb/fetch/git.py | =C2=A0 =C2=A02 +-
->> =C2=A0lib/bb/fetch/hg.py =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0lib/bb/fetch/svn.py | =C2=A0 =C2=A02 +-
->> =C2=A05 files changed, 5 insertions(+), 5 deletions(-)
->>
->> diff --git a/lib/bb/fetch/bzr.py b/lib/bb/fetch/bzr.py
->> index 8b0bd9f..3ca125f 100644
->> --- a/lib/bb/fetch/bzr.py
->> +++ b/lib/bb/fetch/bzr.py
->> @@ -107,7 +107,7 @@ class Bzr(Fetch):
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir(ud.pkgdir)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 # tar them up to a defined filename
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 try:
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0runfetchcmd("tar -czf %s %s" =
-% (ud.localpath, os.path.basename(ud.pkgdir)), d)
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0runfetchcmd("tar --exclude '.=
-bzr' --exclude '.bzrtags' -czf %s %s" % (ud.localpath, os.path.basename(ud.=
-pkgdir)), d)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 except:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 t, v, tb =3D sys.exc_info()
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 try:
->> diff --git a/lib/bb/fetch/cvs.py b/lib/bb/fetch/cvs.py
->> index 1064b09..42d71ba 100644
->> --- a/lib/bb/fetch/cvs.py
->> +++ b/lib/bb/fetch/cvs.py
->> @@ -162,7 +162,7 @@ class Cvs(Fetch):
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 # tar them up to a defined filename
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 if 'fullpath' in ud.parm:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir(pkgdir)
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0myret =3D os.system("tar -czf=
- %s %s" % (ud.localpath, localdir))
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0myret =3D os.system("tar --ex=
-clude 'CVS' -czf %s %s" % (ud.localpath, localdir))
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 else:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir(moddir)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir('..')
->> diff --git a/lib/bb/fetch/git.py b/lib/bb/fetch/git.py
->> index 1b1bc95..4acaa87 100644
->> --- a/lib/bb/fetch/git.py
->> +++ b/lib/bb/fetch/git.py
->> @@ -149,7 +149,7 @@ class Git(Fetch):
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir(codir)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 logger.info("Creating tarball of git checkou=
-t")
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0runfetchcmd("tar -czf %s %s" % (ud.localpat=
-h, os.path.join(".", "*") ), d)
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0runfetchcmd("tar --exclude '.git' -czf %s %=
-s" % (ud.localpath, os.path.join(".", "*") ), d)
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir(ud.clonedir)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 bb.utils.prunedir(codir)
->> diff --git a/lib/bb/fetch/hg.py b/lib/bb/fetch/hg.py
->> index ab00d43..9c11deb 100644
->> --- a/lib/bb/fetch/hg.py
->> +++ b/lib/bb/fetch/hg.py
->> @@ -145,7 +145,7 @@ class Hg(Fetch):
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir(ud.pkgdir)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 try:
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0runfetchcmd("tar -czf %s %s" =
-% (ud.localpath, ud.module), d)
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0runfetchcmd("tar --exclude '.=
-hg' --exclude '.hgrags' -czf %s %s" % (ud.localpath, ud.module), d)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 except:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 t, v, tb =3D sys.exc_info()
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 try:
->> diff --git a/lib/bb/fetch/svn.py b/lib/bb/fetch/svn.py
->> index 34f8132..c236e41 100644
->> --- a/lib/bb/fetch/svn.py
->> +++ b/lib/bb/fetch/svn.py
->> @@ -159,7 +159,7 @@ class Svn(Fetch):
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir(ud.pkgdir)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 # tar them up to a defined filename
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 try:
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0runfetchcmd("tar -czf %s %s" =
-% (ud.localpath, ud.module), d)
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0runfetchcmd("tar --exclude '.=
-svn' -czf %s %s" % (ud.localpath, ud.module), d)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 except:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 t, v, tb =3D sys.exc_info()
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 try:
->> --
->> 1.7.1
->>
->> _______________________________________________
->> Bitbake-dev mailing list
->> Bitbake-dev@lists.berlios.de
->> https://lists.berlios.de/mailman/listinfo/bitbake-dev
->>
->
+Have fun! Frans
 
 
