@@ -1,47 +1,45 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1PA52j-00006a-72
+	(envelope-from <raj.khem@gmail.com>) id 1PA5JX-0000Pe-Na
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 20:11:43 +0200
-Received: by wya21 with SMTP id 21so2577668wya.6
+	Sun, 24 Oct 2010 20:29:04 +0200
+Received: by iwn5 with SMTP id 5so2079936iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Oct 2010 11:11:01 -0700 (PDT)
+	Sun, 24 Oct 2010 11:28:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=eRnflbVQ1W8Cp9q+KBfHHBdS1vS8LXmbRS0R9IL2oak=;
-	b=syI8KWAASYEZPz3nK0LRHcMG+VaC3zsRkYUMwCwnQ4V0+GZ3fACHlELKG6PVd3y362
-	f33i45oD9cInIs5WPa9nwn8L814dakwZ3mAh3EilfGi3iMpmnFtIR7L6f+jhMkBq2lFN
-	O8I8Auz3MIUncpeyQcKa5e2kgJLraS0goIHSk=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=XDZWvspZIn11h63H8s9kEVPQBVtjisJ6kh1q01HQb7w=;
+	b=npSSqTuRyrDhMNF3breWvm2/c9V3XZuB5yGjCyIO5caHdGROTkFE6M5EG9hgxInyA9
+	8zg5QGn3X6KLnN33Dvdmd/9ZH0vRp28cM7pzKw4R8TpGOAd+A+WxMAZr1cvUFABk1svr
+	uImZptifW4MufQ+MZpA6odbSFbGFBAVOBEC6I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=aiQqe9OmqxzGgta2e6dRRIh3dMnqv8YUGaYNqFcLuNzG5SFlZZ3yVipn4ZHZeJHAUZ
-	OwGsVgob071F0zbTfBl5BPQ3gohT+kpLpvd1Kg2bSmTDuqg1JOSlfsWZ1BvcGCbPeG1s
-	IcjJSWs4OKrxvWMQxofvnZJoU3IK3DvNTuiFA=
-Received: by 10.216.65.70 with SMTP id e48mr1985491wed.44.1287943861022; Sun,
-	24 Oct 2010 11:11:01 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=wU1jLKY1qSWbYP/JW2R4U3mehqUivqgpiUaAVyb2x28LzsBvzDILkYZJmElolNFPRJ
+	GMTXnk4OhZpoXYrgP2sVDhAwYT2UK/ARcRQg3YPPrPfFYX3rfYqShH2bc0GmuIi75xqP
+	YAawp3hMhrf2svWtE/K1Qn9zsLEn84OlWH1ww=
+Received: by 10.42.176.194 with SMTP id bf2mr3676325icb.435.1287944901912;
+	Sun, 24 Oct 2010 11:28:21 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.139 with HTTP; Sun, 24 Oct 2010 11:10:40 -0700 (PDT)
-In-Reply-To: <AANLkTimyqP-aP=+poQSHFE=ePogb66en0BwNCYWwCkXk@mail.gmail.com>
-References: <AANLkTimyqP-aP=+poQSHFE=ePogb66en0BwNCYWwCkXk@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sun, 24 Oct 2010 11:10:40 -0700
-X-Google-Sender-Auth: c_Ik0jFt1xirPRwtpJqZOsJlH6A
-Message-ID: <AANLkTimUZ9KiEdhbu2R=VV0mCVh_gWqoxHxpwrnTSJeX@mail.gmail.com>
+Received: by 10.42.164.194 with HTTP; Sun, 24 Oct 2010 11:28:01 -0700 (PDT)
+In-Reply-To: <1287927378-11971-1-git-send-email-eric@eukrea.com>
+References: <1287927378-11971-1-git-send-email-eric@eukrea.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 24 Oct 2010 11:28:01 -0700
+Message-ID: <AANLkTinU5a-o28y1CsAG2Yw_EpU3_SP-Pfe1ixcL7msC@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: sed dependency
+Cc: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+Subject: Re: [PATCH] shadow: Switch to getting libtool from PATH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,43 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Oct 2010 18:11:43 -0000
+X-List-Received-Date: Sun, 24 Oct 2010 18:29:04 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 24, 2010 at 5:00 AM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
+2010/10/24 Eric B=C3=A9nard <eric@eukrea.com>:
+> * with PAM enabled, shadow's libtool sets lt_sysroot to the machine's
+> sysroot and not the arch's sysroot, thus it can't find libpam.
+> * by using libtool from PATH, this patch fix the problem.
+> * tested using angstrom-2010.x for an arvm5te target
+>
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 
-> Triggered by this: http://patchwork.openembedded.org/patch/3099/
-> I was wondering whether we should have sed-native as always-required ?
+I have fixed it in autotools class. Basically it should have takes
+care of setting
+the sysroot correctly for arch and machine recipes equally. Should be fixed=
+ now
+please pull and retest.
+
+> ---
+> =C2=A0recipes/shadow/shadow.inc | =C2=A0 =C2=A03 +++
+> =C2=A01 files changed, 3 insertions(+), 0 deletions(-)
 >
-> If not lots of recipes might require an update like the one above:
+> diff --git a/recipes/shadow/shadow.inc b/recipes/shadow/shadow.inc
+> index f1476b7..b8f1d2b 100644
+> --- a/recipes/shadow/shadow.inc
+> +++ b/recipes/shadow/shadow.inc
+> @@ -52,6 +52,9 @@ EXTRA_OECONF_libc-uclibc +=3D "\
+> =C2=A0 =C2=A0 ${@base_contains('DISTRO_FEATURES', 'pam', '--with-libpam',=
+ '--without-libpam', d)} \
+> =C2=A0"
 >
-> frans@linux-suse:~/oe/openembedded/recipes> grep sed -l */* -w | wc
->    776     776   20661
-> frans@linux-suse:~/oe/openembedded/recipes> grep sed-native */* | wc
->      9      61     737
+> +LIBTOOL =3D "${HOST_SYS}-libtool"
+> +EXTRA_OEMAKE =3D "'LIBTOOL=3D${LIBTOOL}'"
+> +
+> =C2=A0CFLAGS +=3D "-I../include"
 >
-> Guess despite the -w there will be some false hits in the first grep
-> (because it is in postinst or in a comment), but I expect some 700+
-> recipes remaining.
+> =C2=A0PACKAGES =3D+ "${PN}-group"
+> --
+> 1.6.3.3
 >
-> (actually thinking about it we could also do a scan on all added code
-> to see if there is a dep on e.g. sed or grep, but guess due to the
-> overhead then it is better to generically depend on sed-native).
 >
-> Guess something similar holds for grep (gave 128 matches) and probably
-> some other tools).
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-If something is covered by posix / SuSv3, I see no need to use a -native.
- We have to expect a certain amount of sanity in our build environment.  For
-specific non-portable usages, those should certainly be fixed to not use
-that functionality, to use some form of sanitizing wrapper, or to depend on
-the gnu tool specifically via -native, imo.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
