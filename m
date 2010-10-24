@@ -1,29 +1,49 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P9krY-0006vN-81 for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Oct 2010 22:38:48 +0200
-Received: from f053039124.adsl.alicedsl.de ([78.53.39.124]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1P9kqx-00077Q-18 for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Oct 2010 20:38:11 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1P9syp-0006c0-I7
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Oct 2010 07:18:52 +0200
+Received: by fxm3 with SMTP id 3so1981977fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Oct 2010 22:18:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=U9N9KXHaqNuGe3t33oaj1rcrQTd8EK9alrzzcWaL2A0=;
+	b=L+riHPzGdVrzLZdyIDrNckNYxU91K41Gt2faFGzCaIC3GZRdYroIVnduYlpZaJaVg0
+	g2gDwLk6cYddtCB1oMw9KI7RBvcvxvKOmdSiVTekCfD5BsNQEOMgXIc8grsZRhH9dB/J
+	Xqj/ui0NmaeO52JsnKNFC5WxAsZZzvKDvp/t4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=AE5e0jX6aomOwfwjegkaFuwjZXquO/mBch1W0hJSLBD7waRpfKrK4ceFWjxmm4S7UN
+	4vwdneK47VdFP8x6j+FCJhzLVP7SkQOzjlGLr1RBH8HgAzh4u9DKr/q0mFxV0VmjMVHv
+	4a7ZfR2JHtHTXDD39XAJbkN8x/+fJtBYWffqU=
+Received: by 10.102.215.17 with SMTP id n17mr6263781mug.99.1287897491010;
+	Sat, 23 Oct 2010 22:18:11 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 16sm991922fal.0.2010.10.23.22.18.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 23 Oct 2010 22:18:09 -0700 (PDT)
+Date: Sun, 24 Oct 2010 07:18:15 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Oct 2010 22:38:09 +0200
-Message-ID: <1287866289.1800.15.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-ID: <20101024051815.GB3494@jama>
+References: <y>
+ <4cc22973.0311650a.0c4d.ffffaf69@mx.google.com>
+MIME-Version: 1.0
+In-Reply-To: <4cc22973.0311650a.0c4d.ffffaf69@mx.google.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: x11-image: `opkg_install_cmd: Cannot install package locale-base-fr-fr`
+Subject: Re: [PATCH 14/17] Ecore: Patch to fix attribution in Ecore_Getopt.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,68 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Oct 2010 20:38:48 -0000
-X-Groupsio-MsgNum: 25390
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-fJCtifd8AA8NiBcMQe8c"
+X-List-Received-Date: Sun, 24 Oct 2010 05:18:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-fJCtifd8AA8NiBcMQe8c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Fri, Oct 22, 2010 at 10:15:54PM -0200, fidencio@profusion.mobi wrote:
+> From: Eduardo Lima (Etrunko) <eblima@gmail.com>
+> 
+> Signed-off-by: Eduardo Lima (Etrunko) <eblima@gmail.com>
 
-Dear OE folks,
+Where is ecore_getopt_attribution.patch file? and is it worth adding
+now with maxrev=51081?
+
+> ---
+>  recipes/efl1/ecore_svn.bb |    3 ++-
+>  1 files changed, 2 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/efl1/ecore_svn.bb b/recipes/efl1/ecore_svn.bb
+> index 934a52f..fcbd244 100644
+> --- a/recipes/efl1/ecore_svn.bb
+> +++ b/recipes/efl1/ecore_svn.bb
+> @@ -1,12 +1,13 @@
+>  require ecore.inc
+>  SRCREV = "${EFL_SRCREV}"
+> -PR = "r12"
+> +PR = "r13"
+>  
+>  SRC_URI += "\
+>    file://iconv.patch;maxrev=43996 \
+>    file://exit_uclibc_dns.patch;maxrev=47076 \
+>    file://exit_uclibc.patch;maxrev=50815 \
+>    file://exit_uclibc_newer.patch;minrev=50816 \
+> +  file://ecore_getopt_attribution.patch;maxrev=51081 \
+>  "
+>  
+>  ECORE_OECONF = "\
+> -- 
+> 1.7.3.1
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
-doing `bitbake x11-image` the distributions `minimal` and `minimal-libc`
-(`LIBC =3D "libc"`) fail with the following error in task `do_rootfs`.
-
-        [=E2=80=A6]
-        | Collected errors:
-        |  * resolve_conffiles: Existing conffile /oe/build-minimal-eglibc/=
-minimal-dev/rootfs/x11-image/etc/device_table is different from the conffil=
-e in the new package. The new conffile will be placed at /oe/build-minimal-=
-eglibc/minimal-dev/rootfs/x11-image/etc/device_table-opkg.
-        |  * opkg_install_cmd: Cannot install package locale-base-fr-fr.
-        | ERROR: Function do_rootfs failed
-        NOTE: package x11-image-1.0-r0: task do_rootfs: Failed
-        ERROR: TaskFailed event exception, aborting
-        ERROR: Build of /oe/openembedded/recipes/images/x11-image.bb do_roo=
-tfs failed
-        ERROR: Task 13 (/oe/openembedded/recipes/images/x11-image.bb, do_ro=
-otfs) failed with 256
-        ERROR: '/oe/openembedded/recipes/images/x11-image.bb' failed
-        ERROR: '/oe/openembedded/recipes/images/x11-image.bb' failed
-        ERROR: '/oe/openembedded/recipes/images/x11-image.bb' failed
-
-I have the following in my `local.conf`.
-
-        DISTRO =3D "minimal"
-       =20
-        ENABLE_BINARY_LOCALE_GENERATION =3D "0"
-        GLIBC_GENERATE_LOCALES =3D "en_US.UTF-8 en_GB.UTF-8 de_DE.UTF-8"
-
-Could that be the reason for the failure. But if I remember correctly,
-some months ago, `x11-image` build fine.
-
-I will try with `angstrom-2008.1` and `angstrom-2010.x` next.
-
-
-Thanks,
-
-Paul
-       =20
-
---=-fJCtifd8AA8NiBcMQe8c
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzDR7EACgkQPX1aK2wOHVikCwCfS1E3EtxKQOQujCAM0PYo7kzU
-dMAAn3+bdfJkj8lfnUjIdLXiFdnAScKq
-=mj/C
------END PGP SIGNATURE-----
-
---=-fJCtifd8AA8NiBcMQe8c--
