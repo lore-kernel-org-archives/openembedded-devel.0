@@ -1,45 +1,43 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1P9uXV-00020A-HL
+	(envelope-from <martin.jansa@gmail.com>) id 1P9v60-00005e-AE
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 08:58:46 +0200
-Received: by wwb39 with SMTP id 39so1647347wwb.24
+	Sun, 24 Oct 2010 09:34:39 +0200
+Received: by fxm3 with SMTP id 3so2022030fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Oct 2010 23:58:02 -0700 (PDT)
+	Sun, 24 Oct 2010 00:33:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=hdB4LFv3D6oOo0PDT/i/B1BZMIfy+VuMhHwK1sX3jLE=;
-	b=IzGcosSV7WdL/O1ql3JdFw1CNlubnP8NuuDDApE+4OFYEtTmbLUi4kj+DWp7Doe9rl
-	3EhAItosurGv85X119JT/n8BN8VCKMPFZ+KxLhca7XHq/F03AoWvxe3ZxWkZg2utbdoK
-	dwxm4zyH9KXC5oFOHwmHgQBhReSg+jv2qNQKE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=ViQnGFBcRppHOID42a7tzCwpM+aQn6H4BgyvibJWL64=;
+	b=p4yLIIGfIxZ5piA6lzEgJC1kteBPmHohV5ntJwEMf+qNTGLrtbnzKhWRUNwOZav963
+	i8it1ZSQ229IcTNADou1RyhOfguXGEDFzgJfjptPcgLxDkNbb2wZRGU421pqPU57IFth
+	G3Kd1o18eODkYn1PmE5B9KNAxQwpsDRCJQdnk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=CCqi2Xi+psaEaVRsieVZwBW+6jko6sEhplEH07dM8zCSFJTvWcGd1ElKF0oQWzw4Vt
-	o6qwR/6VkTnffwAl7NtB/NyGGpYFjsmB4VhnuAk5jqhpOUrpHUbnF7YR9SE4WFG+JwLW
-	x8BjjX0xSTjcabak60yGQZDJLhzV0t8uhtppM=
-MIME-Version: 1.0
-Received: by 10.227.137.17 with SMTP id u17mr5021807wbt.129.1287903482493;
-	Sat, 23 Oct 2010 23:58:02 -0700 (PDT)
-Received: by 10.227.154.13 with HTTP; Sat, 23 Oct 2010 23:58:02 -0700 (PDT)
-In-Reply-To: <1285368419-12062-1-git-send-email-raj.khem@gmail.com>
-References: <1285368419-12062-1-git-send-email-raj.khem@gmail.com>
-Date: Sun, 24 Oct 2010 08:58:02 +0200
-Message-ID: <AANLkTimhhvUqQZSicuDE7qEHFdxUJjJJSv=ZioFwwdR8@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=t4eJ/gtTj4g3o/HRKjNCJ3uP1EZGaYwytdLSBYnom2umt4Q/+A++4jwzyrLyikxR4u
+	4ifzITKGF3e02ej+63AaEjjDJoWUqutD2/lZKhjSm22oPk23Q5EJDmuHWv5Mnic+1nYH
+	fXZ6epfoPAEo/bagdq1NIOog4f3QhJ1m9cjsc=
+Received: by 10.103.217.14 with SMTP id u14mr1718815muq.108.1287905623483;
+	Sun, 24 Oct 2010 00:33:43 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id j8sm2265591fah.6.2010.10.24.00.33.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 24 Oct 2010 00:33:43 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.82.43
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 24 Oct 2010 09:33:49 +0200
+Message-Id: <1287905629-20148-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.3.1
+X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
-Subject: Re: [Bitbake-dev] [PATCH] fetchers: Use tar --exclude pattern to remove SCM files
+Subject: [PATCH] psplash: don't put initscripts to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,132 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Oct 2010 06:58:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 24 Oct 2010 07:34:43 -0000
 
-This commit is usefull for sure, but breaks ie some EFL recipes.
+* different distros or images are using different initscripts
+* sane image usually has some initscripts installed
+---
+ recipes/psplash/psplash.inc |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
 
-ie python-elementary depends on elementary >=3D 0.7.0.52890
-but elementary.pc says Version: 0.7.0.0
+diff --git a/recipes/psplash/psplash.inc b/recipes/psplash/psplash.inc
+index efd6a0c..baddd62 100644
+--- a/recipes/psplash/psplash.inc
++++ b/recipes/psplash/psplash.inc
+@@ -2,14 +2,13 @@ DESCRIPTION = "Userspace framebuffer boot logo based on usplash."
+ HOMEPAGE = "http://projects.o-hand.com/psplash"
+ SECTION = "base"
+ LICENSE = "GPL"
+-RDEPENDS_${PN} = "initscripts"
+ PROVIDES = "virtual/psplash"
+ RPROVIDES_${PN} = "virtual-psplash"
+ RCONFLICTS_${PN} = "exquisite"
+ 
+ SRCREV = "422"
+ PV = "0.0+svnr${SRCPV}"
+-PR = "r33"
++PR = "r34"
+ 
+ # You can create your own pslash-poky-img.h by doing
+ # ./make-image-header.sh <file>.png POKY
+-- 
+1.7.3.1
 
-elementary.pc.in says Version: @VERSION@
-
-and finally VERSION is defined in configure.ac:
-m4_define([v_maj], [0])
-m4_define([v_min], [7])
-m4_define([v_mic], [0])
-m4_define([v_rev], m4_esyscmd([(svnversion "${SVN_REPO_PATH:-.}" |
-grep -v export || echo 0) | awk -F : '{printf("%s\n", $1);}' | tr -d '
-:MSP\n']))
-m4_if(v_rev, [0], [m4_define([v_rev], m4_esyscmd([git log 2> /dev/null
-| (grep -m1 git-svn-id || echo 0) | sed -e 's/.*@\([0-9]*\).*/\1/' |
-tr -d '\n']))])
-
-and this works OK on checkout with .svn dirs included, but results to
-0 after this patch.
-
-Any hints how to resolve it?
-
-Regards,
-
-On Sat, Sep 25, 2010 at 12:46 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> This option will exclude the SCM metadata from tar files.
->
-> Tested with gcc where svn tar which used to be 156M for gcc 4.5
-> is now 77M
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> =A0lib/bb/fetch/bzr.py | =A0 =A02 +-
-> =A0lib/bb/fetch/cvs.py | =A0 =A02 +-
-> =A0lib/bb/fetch/git.py | =A0 =A02 +-
-> =A0lib/bb/fetch/hg.py =A0| =A0 =A02 +-
-> =A0lib/bb/fetch/svn.py | =A0 =A02 +-
-> =A05 files changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/lib/bb/fetch/bzr.py b/lib/bb/fetch/bzr.py
-> index 8b0bd9f..3ca125f 100644
-> --- a/lib/bb/fetch/bzr.py
-> +++ b/lib/bb/fetch/bzr.py
-> @@ -107,7 +107,7 @@ class Bzr(Fetch):
-> =A0 =A0 =A0 =A0 os.chdir(ud.pkgdir)
-> =A0 =A0 =A0 =A0 # tar them up to a defined filename
-> =A0 =A0 =A0 =A0 try:
-> - =A0 =A0 =A0 =A0 =A0 =A0runfetchcmd("tar -czf %s %s" % (ud.localpath, os=
-.path.basename(ud.pkgdir)), d)
-> + =A0 =A0 =A0 =A0 =A0 =A0runfetchcmd("tar --exclude '.bzr' --exclude '.bz=
-rtags' -czf %s %s" % (ud.localpath, os.path.basename(ud.pkgdir)), d)
-> =A0 =A0 =A0 =A0 except:
-> =A0 =A0 =A0 =A0 =A0 =A0 t, v, tb =3D sys.exc_info()
-> =A0 =A0 =A0 =A0 =A0 =A0 try:
-> diff --git a/lib/bb/fetch/cvs.py b/lib/bb/fetch/cvs.py
-> index 1064b09..42d71ba 100644
-> --- a/lib/bb/fetch/cvs.py
-> +++ b/lib/bb/fetch/cvs.py
-> @@ -162,7 +162,7 @@ class Cvs(Fetch):
-> =A0 =A0 =A0 =A0 # tar them up to a defined filename
-> =A0 =A0 =A0 =A0 if 'fullpath' in ud.parm:
-> =A0 =A0 =A0 =A0 =A0 =A0 os.chdir(pkgdir)
-> - =A0 =A0 =A0 =A0 =A0 =A0myret =3D os.system("tar -czf %s %s" % (ud.local=
-path, localdir))
-> + =A0 =A0 =A0 =A0 =A0 =A0myret =3D os.system("tar --exclude 'CVS' -czf %s=
- %s" % (ud.localpath, localdir))
-> =A0 =A0 =A0 =A0 else:
-> =A0 =A0 =A0 =A0 =A0 =A0 os.chdir(moddir)
-> =A0 =A0 =A0 =A0 =A0 =A0 os.chdir('..')
-> diff --git a/lib/bb/fetch/git.py b/lib/bb/fetch/git.py
-> index 1b1bc95..4acaa87 100644
-> --- a/lib/bb/fetch/git.py
-> +++ b/lib/bb/fetch/git.py
-> @@ -149,7 +149,7 @@ class Git(Fetch):
->
-> =A0 =A0 =A0 =A0 os.chdir(codir)
-> =A0 =A0 =A0 =A0 logger.info("Creating tarball of git checkout")
-> - =A0 =A0 =A0 =A0runfetchcmd("tar -czf %s %s" % (ud.localpath, os.path.jo=
-in(".", "*") ), d)
-> + =A0 =A0 =A0 =A0runfetchcmd("tar --exclude '.git' -czf %s %s" % (ud.loca=
-lpath, os.path.join(".", "*") ), d)
->
-> =A0 =A0 =A0 =A0 os.chdir(ud.clonedir)
-> =A0 =A0 =A0 =A0 bb.utils.prunedir(codir)
-> diff --git a/lib/bb/fetch/hg.py b/lib/bb/fetch/hg.py
-> index ab00d43..9c11deb 100644
-> --- a/lib/bb/fetch/hg.py
-> +++ b/lib/bb/fetch/hg.py
-> @@ -145,7 +145,7 @@ class Hg(Fetch):
->
-> =A0 =A0 =A0 =A0 os.chdir(ud.pkgdir)
-> =A0 =A0 =A0 =A0 try:
-> - =A0 =A0 =A0 =A0 =A0 =A0runfetchcmd("tar -czf %s %s" % (ud.localpath, ud=
-.module), d)
-> + =A0 =A0 =A0 =A0 =A0 =A0runfetchcmd("tar --exclude '.hg' --exclude '.hgr=
-ags' -czf %s %s" % (ud.localpath, ud.module), d)
-> =A0 =A0 =A0 =A0 except:
-> =A0 =A0 =A0 =A0 =A0 =A0 t, v, tb =3D sys.exc_info()
-> =A0 =A0 =A0 =A0 =A0 =A0 try:
-> diff --git a/lib/bb/fetch/svn.py b/lib/bb/fetch/svn.py
-> index 34f8132..c236e41 100644
-> --- a/lib/bb/fetch/svn.py
-> +++ b/lib/bb/fetch/svn.py
-> @@ -159,7 +159,7 @@ class Svn(Fetch):
-> =A0 =A0 =A0 =A0 os.chdir(ud.pkgdir)
-> =A0 =A0 =A0 =A0 # tar them up to a defined filename
-> =A0 =A0 =A0 =A0 try:
-> - =A0 =A0 =A0 =A0 =A0 =A0runfetchcmd("tar -czf %s %s" % (ud.localpath, ud=
-.module), d)
-> + =A0 =A0 =A0 =A0 =A0 =A0runfetchcmd("tar --exclude '.svn' -czf %s %s" % =
-(ud.localpath, ud.module), d)
-> =A0 =A0 =A0 =A0 except:
-> =A0 =A0 =A0 =A0 =A0 =A0 t, v, tb =3D sys.exc_info()
-> =A0 =A0 =A0 =A0 =A0 =A0 try:
-> --
-> 1.7.1
->
-> _______________________________________________
-> Bitbake-dev mailing list
-> Bitbake-dev@lists.berlios.de
-> https://lists.berlios.de/mailman/listinfo/bitbake-dev
->
 
 
