@@ -1,46 +1,46 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1P9vDy-0003lY-6x
+	(envelope-from <martin.jansa@gmail.com>) id 1P9vdH-0004X5-VV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Oct 2010 09:42:39 +0200
-Received: by iwn5 with SMTP id 5so1552240iwn.6
+	Sun, 24 Oct 2010 10:08:49 +0200
+Received: by wwi14 with SMTP id 14so1229675wwi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Oct 2010 00:41:57 -0700 (PDT)
+	Sun, 24 Oct 2010 01:08:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=v7NJXF+m4CjzYv62wsHkxQkHBoB3HpTYC2oB44smf14=;
-	b=hloEzolRNAd0M4nKDWDuOzQUGCQ2lGev+P63PX7kpPrsFq9O64H4rjMNRvihKHXE8/
-	pwCKRnGGL7NBB79JN+NLNMw5L1qgis94SuKdvUY1XLQcWUUt7PbOwuuSz2iVLEwuYJRw
-	SJjdNUx+ZsFw5a3yPSqsqcO9B0QXR9Gg/OkSo=
+	:references:date:message-id:subject:from:to:cc:content-type;
+	bh=8/KS0QeF+m2kBczUJgQqVZAikYLngMrX9Esd869Ca2Y=;
+	b=JEKdM4L7tP5ACRxyn00lW5Cf4vQFDxPK6XOPGd5jQslEbV8Qw3NKXLdFBulAXjW77a
+	v+84Cu+nyaQ1tB8DrF5MrNWfMQvzhRaciTJOnPA5dke7Z+w3sKpOFdWvGhTXKQUAwjKT
+	BzLzXhGWqZW1EAMEN0pvteDiEqs21NFjVTVOY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=kOCCnRYpehlTQ3y4iLmwKtn/tus8F5L+oD1oNbjDIB4RsDrMkJbefQ59H6Tfdd0qP9
-	zkidhWCAxh+s4+HzGtsQO/3MqaZsk4Fi27523v5fvD2Bdi/gjm6zY7Ghd67SdCUfkD2D
-	WH6Du1KeDn92P2l9uVnJO7wAoZE2Z28G4b9bk=
+	:cc:content-type;
+	b=WOA9S/dlcpqpk1rhPPBwQx+GpjFI6DE/z/SHirNgp/S1LK5kSH7i/mE4/9dtgt3ETN
+	wKT/rLUeXhVzj0jIgSp1exm0qWqv/cKj7DR8ahuq1ezhMzKIl6Tdbzweq50//yYbEJM8
+	Ekw8sLvQFM1vCMLYbkzLPyV3IuE8uW9LMqQ6g=
 MIME-Version: 1.0
-Received: by 10.42.172.194 with SMTP id o2mr3579030icz.432.1287906117326; Sun,
-	24 Oct 2010 00:41:57 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sun, 24 Oct 2010 00:41:57 -0700 (PDT)
-In-Reply-To: <AANLkTinR7OQFF7fzSmFnkuN+0y6b3jEV6s3N_OrNqckt@mail.gmail.com>
-References: <1287848486-14980-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<i9v396$cn4$1@dough.gmane.org>
-	<AANLkTinENJ300R25P65JHJR5wX0jLvd0+TfvSOYKC7+K@mail.gmail.com>
-	<AANLkTinR7OQFF7fzSmFnkuN+0y6b3jEV6s3N_OrNqckt@mail.gmail.com>
-Date: Sun, 24 Oct 2010 09:41:57 +0200
-Message-ID: <AANLkTin4LJ8+iRa6V+qnzGDsgDRW-duUezN4+eyCvjxK@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Received: by 10.227.142.75 with SMTP id p11mr521594wbu.27.1287907684567; Sun,
+	24 Oct 2010 01:08:04 -0700 (PDT)
+Received: by 10.227.154.13 with HTTP; Sun, 24 Oct 2010 01:08:04 -0700 (PDT)
+In-Reply-To: <AANLkTikvA4DOf7uwKUq2myNZMdOPZiOf_B73Kr=USOjZ@mail.gmail.com>
+References: <1285368419-12062-1-git-send-email-raj.khem@gmail.com>
+	<AANLkTimhhvUqQZSicuDE7qEHFdxUJjJJSv=ZioFwwdR8@mail.gmail.com>
+	<AANLkTikvA4DOf7uwKUq2myNZMdOPZiOf_B73Kr=USOjZ@mail.gmail.com>
+Date: Sun, 24 Oct 2010 10:08:04 +0200
+Message-ID: <AANLkTi=8ZBZmU68NYZO3HkkLVJ09y+jhr0pWrd=bt=32@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 74.125.82.41
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] u-boot-sakoman_git.bb: updated SRCREV to head to make it building again
+Cc: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
+Subject: Re: [Bitbake-dev] [PATCH] fetchers: Use tar --exclude pattern to remove SCM files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,60 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Oct 2010 07:42:39 -0000
+X-List-Received-Date: Sun, 24 Oct 2010 08:08:49 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/10/23 Steve Sakoman <sakoman@gmail.com>:
-> On Sat, Oct 23, 2010 at 10:36 AM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> 2010/10/23 Koen Kooi <k.kooi@student.utwente.nl>:
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
->>>
->>> On 23-10-10 17:41, Frans Meulenbroeks wrote:
->>>> SRCREV was "ccd0c67858c6e2807c695e2c8f545284cb871866", but that is not in the
->>>> omap4s-exp branch any more. Guess it was gone after a merge. To make things
->>>> building I moved the the head of the branch
->>>> SRCREV = "8b931e51f46acffd61096553ae89dfb3ee30d398"
->>>
->>> That branch is rebased frequently, so this won't help much. The tarball
->>> snapshot for the current revision is available on the angstrom source
->>> mirror, so if you are using angstrom and a recent bitbake you won't get
->>> bothered by the rebasing.
->>> Having said all that, we should find a working repo for panda uboot and
->>> use that. AIUI denx git should work soon.
->>>
->>> regards,
->>>
->>> Koen
+On Sun, Oct 24, 2010 at 9:40 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Sat, Oct 23, 2010 at 11:58 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> This commit is usefull for sure, but breaks ie some EFL recipes.
 >>
->> Guess that is why it was autorev, but on oct 12 you pinned it to the
->> SRCREV that I could not fetch.
->> A solution could be to pin on a rev that is a merge with the denx git.
->> Not sure what the status is of the panda code in the u-boot git.
->> I see quite some patches from Steve (but no idea how much of them are
->> accepted/integrated by Wolfgang.
+>> ie python-elementary depends on elementary >= 0.7.0.52890
+>> but elementary.pc says Version: 0.7.0.0
+>>
+>> elementary.pc.in says Version: @VERSION@
+>>
+>> and finally VERSION is defined in configure.ac:
+>> m4_define([v_maj], [0])
+>> m4_define([v_min], [7])
+>> m4_define([v_mic], [0])
+>> m4_define([v_rev], m4_esyscmd([(svnversion "${SVN_REPO_PATH:-.}" |
+>> grep -v export || echo 0) | awk -F : '{printf("%s\n", $1);}' | tr -d '
+>> :MSP\n']))
+>> m4_if(v_rev, [0], [m4_define([v_rev], m4_esyscmd([git log 2> /dev/null
+>> | (grep -m1 git-svn-id || echo 0) | sed -e 's/.*@\([0-9]*\).*/\1/' |
+>> tr -d '\n']))])
+>>
 >
-> Using the upstream v2010.09 tag should give you a reasonable u-boot.
->
-> The exp in my my omap4-exp branch stands for "experimental", so it
-> probably is not a good place to pull from unless you are willing to
-> deal with frequent rebases and occasional breakage.
->
-> Steve
+> hmm strange that a configure scripts depends on SCM files. To me it
+> seems wrong. Anyway I think you can patch configure.ac
+> to replace v_rev definition to be based on SRCREV may be some sort of
+> sed operation as do_configure_prepend might be a good way
 
-I figured it would, but as that might have a more severe impact and I
-have not pandaboard to test on, it was too much risk to make that
-move.
-Either someone else need to do this, or as an alternative we could
-move to e.g. SRCREV 	b18815752f3d6db27877606e4e069e3f6cfe3a19 which is
-a merge from Wolfgang from 4 days ago, which I expect not to
-disappear.
+this is used in all efl recipes and I've noticed it in elementary only
+because python-elementary depends on such new version.
 
-Basically my concern was to create a buildable recipe (which I needed
-in order to be able to verify whether my james-image build for panda)
-(I'll push the james recipes soon, still maturing them)
+I've also found similar construct in other projects.. so maybe it's
+not so efl related (and then harder to found&fix in all recipes).
 
-Have fun! Frans
+Regards,
 
 
