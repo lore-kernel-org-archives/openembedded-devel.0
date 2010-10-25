@@ -1,37 +1,36 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
+Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PAHtF-0005aO-At
+	(envelope-from <thebohemian@gmx.net>) id 1PAHtR-0005gB-Uk
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 09:54:52 +0200
-Received: (qmail 8973 invoked by uid 503); 25 Oct 2010 07:33:36 -0000
-Received: from b9.ovh.net (HELO mail632.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 25 Oct 2010 07:33:36 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 25 Oct 2010 09:54:06 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 25 Oct 2010 09:54:06 +0200
-Message-ID: <4CC5379D.3050006@eukrea.com>
-Date: Mon, 25 Oct 2010 09:54:05 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.11) Gecko/20101013 Thunderbird/3.1.5
+	Mon, 25 Oct 2010 09:54:59 +0200
+Received: (qmail invoked by alias); 25 Oct 2010 07:54:16 -0000
+Received: from 251.118.101-84.rev.gaoland.net (EHLO [192.168.1.71])
+	[84.101.118.251]
+	by mail.gmx.net (mp025) with SMTP; 25 Oct 2010 09:54:16 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19bKOItp+Fb8JJYcC8TsNzBbEhye5uZiBBYZC+qgJ
+	cLYE8lu0viBtbF
+Message-ID: <4CC537A4.5080909@gmx.net>
+Date: Mon, 25 Oct 2010 09:54:12 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.14) Gecko/20101006 Thunderbird/3.0.9
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CC49A20.5080001@eukrea.com> <4CC52C90.4080707@freyther.de>
-In-Reply-To: <4CC52C90.4080707@freyther.de>
-X-Ovh-Tracer-Id: 4007640718521707849
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 213.186.62.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+References: <AANLkTikq1TNg1Y=f7tVjpkZR8Hre1FoGyK1gUGTKNDKB@mail.gmail.com>
+	<AANLkTimPLjpHi7Xt=NsnQRxHOR+9ZWEPoTE7PjssdzN1@mail.gmail.com>
+In-Reply-To: <AANLkTimPLjpHi7Xt=NsnQRxHOR+9ZWEPoTE7PjssdzN1@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.23
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: qt4.7.0 : QA problem : Architecture did not match
+Subject: Re: empty strings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 07:54:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 25 Oct 2010 07:55:00 -0000
+X-Groupsio-MsgNum: 25434
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigE791A7C93AB63D055D3B7CBE"
 
-Hi Holger,
+--------------enigE791A7C93AB63D055D3B7CBE
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Le 25/10/2010 09:06, Holger Freyther a écrit :
-> On 10/24/2010 10:42 PM, Eric Bénard wrote:
->> Hi,
->>
->> building qt4.7.0 using angstrom 2010.x for and armv5te leads to :
->> ERROR: QA Issue with qt4-embedded-tools: Architecture did not match (40 to 3)
->
->>
->> The patch below (not cleaned if OK, I'll clean and push it) fix this problem,
->> but why these installs were added to the 4.7.0.inc file (they are not present
->> in 4.6.* and the recipe builds fine without)?
->
-> I can only speculate right now. Maybe Qt insisted to builds its own version or
-> didn't find the tools. You will need to rebuild qt4-embedded to see if it
-> builds properly.
->
-I've rebuilt it and it builds fine this way.
+Am 22.10.2010 11:00, schrieb Frans Meulenbroeks:
+>> classpath/classpath.inc:RPROVIDES_${PN} =3D ""
+It would not be a good idea to blindly remove this. The effect of this
+can only be seen at runtime. I don't have the time to look into this
+deeply now but we definitely did this because we don't like the default
+RPROVIDES that OE sets for classpath and classpath-minimal.
 
-> I can also take a look at this step later today.
->
-that would be greate, I won't be able to spend time on this today.
-
-Thanks,
-Eric
+Regards
+Robert
 
 
+
+
+--------------enigE791A7C93AB63D055D3B7CBE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAkzFN6cACgkQG9cfwmwwEtrSfwCgiuNZ9M88ooX1dEiodiRIL0UB
+e8MAnjkcmoLkcO9KhzqpSdVEUEIyoebA
+=NOcu
+-----END PGP SIGNATURE-----
+
+--------------enigE791A7C93AB63D055D3B7CBE--
