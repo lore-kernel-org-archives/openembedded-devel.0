@@ -1,38 +1,34 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PAAcz-0002bA-O9
+	(envelope-from <raj.khem@gmail.com>) id 1PAAej-0002iF-KW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 02:09:30 +0200
-Received: by iwn41 with SMTP id 41so11416iwn.6
+	Mon, 25 Oct 2010 02:11:18 +0200
+Received: by iwn41 with SMTP id 41so12944iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Oct 2010 17:08:48 -0700 (PDT)
+	Sun, 24 Oct 2010 17:10:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type;
-	bh=dLBWHGJ2IxM7DypeV61YnKi84tS41KJobh/KNjYaJRY=;
-	b=xio/IIw+QWmP0CoqCMBcmRk5kA+IzTvkysQWKP5Ngd4kF4kyMLLEqqqmHN8nzggkwj
-	KkMALCtMm08qNziWFlqG+mo/8rdWhINOsQAsWm1MbSS351TsNg89HhhGifn3kNieAKmY
-	eoUoumt81opgBf24stu09hyzQesLvo+VKUK/Q=
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=Dvxc/K8+Xs5JrjmkPJu50/rbw8NGpl9x6jNmzr6Ynps=;
+	b=XU0jvrQEZDtsxJEVxsi+JsL1wi8iXdTGGAs02T6fOkyAqoKKM6Ruw6ohdPPRftuIJ9
+	k9LSWXe1KbSMN7K29bQmS/JFoFG7m3OogM0fSLTE8O1dus0+vg27juaJats2thK6zDmQ
+	YRSixDDPXD8qtmbCNtG3bdjmnpT/DNDA4Emi4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=gtWpHQJ8hk43T4ZhpIYWCO/4F5U98xoM4qBwmyCs/0KIIluS5ytziWSaMfXtdf6YtW
-	hByEpstBRZAwbKkRQCQnFB+EQBOH7wXNVu5sR8lnVr1bwn2NHwEuAwn20HFFDnZTFyyK
-	bv6h3oZa4wDb20RCNeLpN6WbBlT2UzS4MfWQY=
-Received: by 10.42.208.75 with SMTP id gb11mr1221196icb.290.1287965327914;
-	Sun, 24 Oct 2010 17:08:47 -0700 (PDT)
+	:content-type:content-transfer-encoding;
+	b=Z0MmM/PvER6B9EQTGckOziOvEtZ3MYFaocNUbhXts2p+QScEm2PN56Ox5gMABHLtfo
+	d6OQM1sfg4e1mvHREoUmKxEA+soRxKW7KjwKcbYg2NEehnnn/p8H/O1wj+TXOv3VOIlT
+	c7X7e7JF6J85YeW4qlUNENh04UV4MWN0NhXR0=
+Received: by 10.42.22.133 with SMTP id o5mr4157746icb.268.1287965438027; Sun,
+	24 Oct 2010 17:10:38 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.42.164.194 with HTTP; Sun, 24 Oct 2010 17:08:27 -0700 (PDT)
-In-Reply-To: <4CC48F7C.2000403@freyther.de>
-References: <1285368419-12062-1-git-send-email-raj.khem@gmail.com>
-	<AANLkTimhhvUqQZSicuDE7qEHFdxUJjJJSv=ZioFwwdR8@mail.gmail.com>
-	<AANLkTikvA4DOf7uwKUq2myNZMdOPZiOf_B73Kr=USOjZ@mail.gmail.com>
-	<AANLkTi=8ZBZmU68NYZO3HkkLVJ09y+jhr0pWrd=bt=32@mail.gmail.com>
-	<AANLkTimjYwr6vn5Makva7yciDA2_4KoiM=K7EtQQkYCf@mail.gmail.com>
-	<4CC48F7C.2000403@freyther.de>
+Received: by 10.42.164.194 with HTTP; Sun, 24 Oct 2010 17:10:17 -0700 (PDT)
+In-Reply-To: <4CC49A20.5080001@eukrea.com>
+References: <4CC49A20.5080001@eukrea.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 24 Oct 2010 17:08:27 -0700
-Message-ID: <AANLkTi=AG42rQ+HwEZdKSmx3GALEikSuJetHiL4TMxW0@mail.gmail.com>
+Date: Sun, 24 Oct 2010 17:10:17 -0700
+Message-ID: <AANLkTinjV--XGvwUmPJrH_8_A1ckn80V4S-oAowBYPwC@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -42,8 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: bitbake-dev@lists.berlios.de
-Subject: Re: [Bitbake-dev] [PATCH] fetchers: Use tar --exclude pattern to remove SCM files
+Subject: Re: qt4.7.0 : QA problem : Architecture did not match
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,40 +52,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 00:09:30 -0000
+X-List-Received-Date: Mon, 25 Oct 2010 00:11:18 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 24, 2010 at 12:56 PM, Holger Freyther <holger+oe@freyther.de> wrote:
-> On 10/24/2010 08:35 PM, Khem Raj wrote:
+On Sun, Oct 24, 2010 at 1:42 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> Hi,
 >
->>>
->>> this is used in all efl recipes and I've noticed it in elementary only
->>> because python-elementary depends on such new version.
->>
->> Do you have a list of recipes which use this ? I am sure with git it
->> will be hard to use such a thing
->> as the git revs are random and simlarily many other SCMs
+> building qt4.7.0 using angstrom 2010.x for and armv5te leads to :
+> ERROR: QA Issue with qt4-embedded-tools: Architecture did not match (40 t=
+o
+> 3) on
+> /work/armv5te-angstrom-linux-gnueabi/qt4-embedded-4.7.0-r25.0/packages-sp=
+lit/qt4-embedded-tools/usr/bin/rcc
+> ERROR: QA Issue with qt4-embedded-tools: Architecture did not match (40 t=
+o
+> 3) on
+> /work/armv5te-angstrom-linux-gnueabi/qt4-embedded-4.7.0-r25.0/packages-sp=
+lit/qt4-embedded-tools/usr/bin/moc
+> ERROR: QA Issue with qt4-embedded-tools: Architecture did not match (40 t=
+o
+> 3) on
+> /work/armv5te-angstrom-linux-gnueabi/qt4-embedded-4.7.0-r25.0/packages-sp=
+lit/qt4-embedded-tools/usr/bin/uic
+> ERROR: Task 498
+> (/home/ebenard/OEUKREA/openembedded/recipes/qt4/qt4-embedded_4.7.0.bb,
+> do_package) failed with exit code '1'
+> ERROR:
+> '/home/ebenard/OEUKREA/openembedded/recipes/qt4/qt4-embedded_4.7.0.bb'
+> failed
 >
+> The patch below (not cleaned if OK, I'll clean and push it) fix this
+> problem, but why these installs were added to the 4.7.0.inc file (they ar=
+e
+> not present in 4.6.* and the recipe builds fine without) ?
 >
-> Speaking as upstream co-author of OpenBSC. We are using something like this to
-> get the revision from the last tag of the repository. If someone is doing a
-> make dist(check) we will copy a special version file into the tar.gz and use
-> that instead.
+> thanks,
+> Eric
 >
-> From an upstream point of view I think it is acceptable to say that the ones
-> that build stuff from a SCM (in contrast to a tarball) should have the files
-> of the SCM around...
+> diff --git a/recipes/qt4/qt-4.7.0.inc b/recipes/qt4/qt-4.7.0.inc
+> index cf4b0d8..3004b92 100644
+> --- a/recipes/qt4/qt-4.7.0.inc
+> +++ b/recipes/qt4/qt-4.7.0.inc
+> @@ -47,10 +47,10 @@ do_compile() {
+> =C2=A0 =C2=A0 fi
+>
+> =C2=A0 =C2=A0 unset CFLAGS CXXFLAGS
+> - =C2=A0 =C2=A0install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${S}/bin/rcc
+> - =C2=A0 =C2=A0install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${S}/bin/moc
+> - =C2=A0 =C2=A0install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${S}/bin/uic
+> - =C2=A0 =C2=A0install -m 0755 ${STAGING_BINDIR_NATIVE}/lrelease4 ${S}/bi=
+n/lrelease
+> +# =C2=A0 =C2=A0install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${S}/bin/rc=
+c
+> +# =C2=A0 =C2=A0install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${S}/bin/mo=
+c
+> +# =C2=A0 =C2=A0install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${S}/bin/ui=
+c
+> +# =C2=A0 =C2=A0install -m 0755 ${STAGING_BINDIR_NATIVE}/lrelease4 ${S}/b=
+in/lrelease
+>
+> =C2=A0 =C2=A0 oe_runmake ${EXTRA_ENV}
+> =C2=A0}
 
-
-well what if some used svn export <rev> to generate a tarball so it
-will break for him too.
-so distributors should package the SCM metadata and the user needs to
-have SCM tools to
-get the configure through. I would have added a script to update a
-constant var in src
-which would denote this incremental version like what gcc does with dates.
->
-> PS: I liked the --exclude patch a lot too...
+well may be a -native recipe should be written to package those bits.
 >
 > _______________________________________________
 > Openembedded-devel mailing list
