@@ -1,25 +1,23 @@
-Received: from smtp-out21.han.skanova.net ([195.67.226.208])
+Received: from smtp-out12.han.skanova.net ([195.67.226.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1PAP8E-00019Y-7Q
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1PAPAc-0001tg-NV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 17:38:44 +0200
-Received: from [10.3.3.206] (62.237.32.34) by smtp-out21.han.skanova.net
+	Mon, 25 Oct 2010 17:41:46 +0200
+Received: from [10.3.3.206] (62.237.32.34) by smtp-out12.han.skanova.net
 	(8.5.124.10) (authenticated as u82406562)
-	id 4C7E106501581CE0 for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 17:35:07 +0200
-Message-ID: <4CC5A3AE.1040509@atmel.com>
-Date: Mon, 25 Oct 2010 17:35:10 +0200
+	id 4C7E0D4901066614 for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Oct 2010 17:38:48 +0200
+Message-ID: <4CC5A48B.40404@atmel.com>
+Date: Mon, 25 Oct 2010 17:38:51 +0200
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 User-Agent: Thunderbird 2.0.0.24 (Windows/20100228)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>	<201010181520.30454.marcin@juszkiewicz.com.pl>	<4CBC4DD4.3010908@atmel.com>
-	<i9hpii$gf2$1@dough.gmane.org>	<4CBC7F6A.9040000@atmel.com>	<AANLkTi=xBMvDEKjiaNKy7zijs4DCZwhrSDr=gHVkMh_T@mail.gmail.com>	<4CBCD3FC.5090305@atmel.com>	<AANLkTin6jOdo56fCEaMLNgiKDThBV0yg7x_OvOntwQEM@mail.gmail.com>	<4CBF81FC.3040803@atmel.com>
-	<i9osim$dcl$1@dough.gmane.org>	<AANLkTi=ABVTThHSKLbf-QAJcdbOZmQr3B5vw6WVj2hGg@mail.gmail.com>	<i9p0tr$5iq$1@dough.gmane.org>
-	<4CC0B81F.6030706@atmel.com>
-	<AANLkTi=hLsCrMjw4_mvyniVX8GUsqkVZ2nUnrcm4-UD6@mail.gmail.com>
-In-Reply-To: <AANLkTi=hLsCrMjw4_mvyniVX8GUsqkVZ2nUnrcm4-UD6@mail.gmail.com>
-X-SA-Exim-Connect-IP: 195.67.226.208
+References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>	<201010181520.30454.marcin@juszkiewicz.com.pl>	<4CBC4DD4.3010908@atmel.com>	<i9hpii$gf2$1@dough.gmane.org>
+	<4CBC7F6A.9040000@atmel.com>	<AANLkTi=xBMvDEKjiaNKy7zijs4DCZwhrSDr=gHVkMh_T@mail.gmail.com>	<4CBCD3FC.5090305@atmel.com>	<AANLkTin6jOdo56fCEaMLNgiKDThBV0yg7x_OvOntwQEM@mail.gmail.com>	<4CBF81FC.3040803@atmel.com>
+	<AANLkTim3ucg9ue8OoLDvZP=J-jdt2Dd1g_+Wnf_CZ6jO@mail.gmail.com>
+In-Reply-To: <AANLkTim3ucg9ue8OoLDvZP=J-jdt2Dd1g_+Wnf_CZ6jO@mail.gmail.com>
+X-SA-Exim-Connect-IP: 195.67.226.212
 X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -41,103 +39,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 15:38:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 25 Oct 2010 15:41:59 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Frans Meulenbroeks skrev:
-> 2010/10/22 Ulf Samuelsson <ulf.samuelsson@atmel.com>:
->> Koen Kooi skrev:
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
+Khem Raj skrev:
+> On Wed, Oct 20, 2010 at 4:57 PM, Ulf Samuelsson
+> <ulf.samuelsson@atmel.com> wrote:
+>> Khem Raj skrev:
+>>> On Mon, Oct 18, 2010 at 4:10 PM, Ulf Samuelsson
+>>> <ulf.samuelsson@atmel.com> wrote:
+>>>> Khem Raj skrev:
+>>>>> On Mon, Oct 18, 2010 at 10:10 AM, Ulf Samuelsson
+>>>>> <ulf.samuelsson@atmel.com> wrote:
+>>>>>> Koen Kooi skrev:
+>>>>>>> On 18-10-10 15:38, Ulf Samuelsson wrote:
+>>>>>>>> Marcin Juszkiewicz skrev:
+>>>>>>>>> Dnia sobota, 16 pazdziernika 2010 o 14:50:02
+>>>>>>>>> ulf.samuelsson@atmel.com
+>>>>>>>>> napisaB(a):
+>>>>>>>>>
+>>>>>>>>>> +++ b/conf/machine/include/at91-2.6.30.inc
+>>>>>>>>>> +++ b/conf/machine/include/at91-2.6.32.inc
+>>>>>>>>> Do you plan to duplicate that file with each kernel you will
+>>>>>>>>> produce?
+>>>>>>>>> Create include/at91-sam9.inc and put it there.
+>>>>>>>>>
+>>>>>>>>> Regards,
+>>>>>>>> This is to allow different kernel versions for different AT91 chips.
+>>>>>>>> This allows both a "stable" version, and a development kernel
+>>>>>>>> to be easily handled.
+>>>>>>>> The file defines (amongst other things) the
+>>>>>>>> * kernel version,
+>>>>>>>> * u-boot version
+>>>>>>>> * at91bootstrap version
+>>>>>>>> so you need one file per version.he
+>>>>>>> NAK! Machines don't get to decide versions! Please revert that commit
+>>>>>>> and come up with a better way, e.g. default_preference in the recipes
+>>>>>>> or
+>>>>>>> distro include files.
+>>>>>> If I look at the machine files, almost all of them provide
+>>>>>> a preferred kernel / u-boot. Some also provide version.
+>>>>> we should avoid pinning versions there. Choosing a type is fine.
+>>>>>
+>>>> Why ?
+>>>> Is it because it affect rebuild time?
+>>>> It would be good to understand what problems people see with this.
+>>> Well we have distro which sets policies including which recipe
+>>> versions to be pinned
+>>> machine configuration decides on various machine features. There are
+>>> different ways to do it
+>>> but if we remain consistent in what we do, we can make it more
+>>> understandable for others
 >>>
->>> On 21-10-10 10:43, Frans Meulenbroeks wrote:
+>>> If you feel strongly that your approach is good I think it should be
+>>> decided if this is suitable
+>>> for majority of OE distro and machines, If it has technical merits
+>>> over existing approaches
+>>> people will be interested in it.
 >>>
->>>> PS: my opinion is that machine maintainers generally know better what
->>>> kernel works best for their machines than distro owners;
->>> And what's stopping them to put DEFAULT_PREFERENCE_machine and
->>> COMPATIBLE_MACHINE in the kernel recipes?
->>> There is no technical reason for setting it in machine.conf, so why
->>> should we break the orthogonality for that?
+>>>> We are pinning the version to a specific machine, in the kernel recipe.
+>>>> If we add a new recipe, then we can, by increasing the priority
+>>>> force a different kernel to be built.
+>>>> This will not affect anything else.
+>>>>
+>>>> If the version is in the machine configuration, then a change of
+>>>> kernel version could force a total rebuild, or?
+>>>>
+>>> I dont think it will force any rebuild or anything. It will just not
+>>> be the way other machines
+>>> do things. The machine configuration tend to be version agnostic as
+>>> per current approach.
 >>>
->>>> PPS: what's next? removing the PREFERRED_PROVIDER_virtual/kernel from
->>>> the machine configs because you feel you know better ?
->>> That is actually an option these days since most kernel recipes set
->>> COMPATIBLE_MACHINE correctly :)
->>> But seriously, there are use cases for one distro to use a different
->>> kernel for a given machine for whatever reasons.
->>>
->>> This whole situation is a mess because recipes/linux is a mess. It would
->>> be a nice topic for OEDEM to see if we should switch to a poky BSP
->>> model. It would boils down to:
->>>
->>> 1 bblayer per machine or SOC_FAMILY containing:
->>> * machine.conf
->>> * first and second stage bootloaders
->>> * kernel
->> I have already come to the conclusion that we could have a single linux.bb
->> recipe.
+>>>> Any other problem?
+>>>>
+>>> what are the issues that you see in following approaches suggested in
+>>> this thread so far ?
+>> 1) Many boards do put kernel version in the machine conf file.
+>>   The patch was created to collect common stuff in an include file
+>>   to make maintenance easier.
 >>
->> This assumes that you define things like KERNEL_VERSION, SOC_FAMILY
->> etc. outside the recipe and then include files with include filenames
->> containing approproate ENVIRONMENT variables.
+>> 2) I cannot assume that all Atmel chips should use the same kernel,
+>>   so a single include file will not make it.
 >>
->> I.E:
->> include $(KERNEL_VERSION)/kernel_source
->> include $(SOC_FAMILY)/$(KERNEL_VERSION)/kernel_patch
+>> 3) I want to be able to work with two kernel versions for the same chip.
+>>   This is to have one stable kernel, and one development kernel.
+>>   The use of the develoment kernel, should not make the stable version
+>>   unbuildable.
+> 
+> you want to ship with two kernel or you want to work with two kernel versions?
+> if you just want to develop then you can have the stable kernel
+> version as preferred version
+> and override that in local.conf with yout dev kernel for development
+> purposes. Once you are
+> done with it and it is your next stable just add
+> DEFAULT_PREFERENCE_<machine> = "1" in that recipe
+> and it should become new default for this machine.
+> 
+
+I would like to ship with two kernels.
+one "stable" kernel, and another "development" kernel
+which is accessible to others to allow shared responsibility
+for testing purposes.
+
+Preferably, it should be possible to build both,
+without having to rebuild the complete root fs.
+
+
+
+> 
+> for release you can create your own pinned config file and call it
+> inside distro config you have
+> and have two distros one for dev and one for stable
+>>   If I put the preferred version in the recipe, then I can only work
+>>   with one kernel.
 >>
->> etc.
+>>   If I try to use the preferred version in the recipe, then I
+>>   have to have two machine files.
+>>   I.E:
+>>   at91sam9g45ek
+>>   at91sam9g45ek-devel
 >>
+>>   and I have to support both machines in the recipe.
+>>
+>>   Once I have come to a point, where the development kernel is
+>>   to become the stable version, then I have to edit the recipe
+>>   again to make this the official.
+>>   I have to remove all references to "sam9g45ek",
+>>   then I have to modify the "sam9g45ek-devel" settings to refer to
+>>   "sam9g45ek", remove the sam9g45ek.conf and rename the
+>>   sam9g45ek-devel.conf to sam9g45ek.conf.
+>>
+>>   I then have to retest everything!
+>>
+>>   As I see it, the kernel/u-boot/at91bootstrap hangs together,
+>>   and it is easier to maintain a single include file with versions
+>>   for this, than to maintain the three recipes.
+>>
+>>   If I maintain in the recipes, I have to create a lot
+>>   of preferred_version_<machine>) in multiple kernel recipes,
+>>   and with my method, I include a single file in the machine
+>>   configuration.
+>>   If I want to change kernel version, I edit a few characters.
+>>
+>> 4. This points to another weakness.
+>>   You can only build a certain machine in one way.
+>>
+>>   Today, when we specify a MACHINE, we use "$MACHINE.conf"
+>>
+>>   It would be better, if you could have several machine configuration
+>>   files referring to the same MACHINE, and specifying the MACHINE
+>>   in the configuration file.
+>>
+>>   local.conf would then contain
+>>
+>>   MACHINE_CONFIG = at91sam9g45ek-2.6.30.conf
+>>
+>>   "at91sam9g45ek-2.6.30.conf" would contain
+>>
+>>   MACHINE = at91sam9g45ek
+>>
+>>   This would allow several configuration files referring to the same
+>>   machine.
+>>   The machine configuration must support selecting separate
+>>   * linux ".config"
+>>   * uboot configuration
+>>   * boot monitor configuration.
 > 
-> Isn't that what kernel.bbclass is about ?
+> why not use existing MACHINE_FEATURES to steer the features you would
+> like to change in .config files.
 > 
-> Wrt your example:
-> instead of
-> include $(KERNEL_VERSION)/kernel_source
-> you could say:
-> at the place where you define kernel_source:
-> SRC_URI = "..."
 > 
-> Basically what you propose is kind of a template.
-> 
+>>   Possibly, then machine configuration should support downloading such
+>>   stuff from internet.
+>>
+>>   (I don't expect the mainline OE to contain more than one "stable"
+>>    version)
+>>
+>>
 
-Didn't study kernel.bbclass.
-
-A problem with this approach, is that different kernel version
-are located in different directories.
-
-http://www.kernel.org/pub/linux/kernel/v2.6/testing/linux-2.6.36-rc8.tar.gz
-http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.36.tar.bz2
-
-If we want to have a single linux.bb file, then it
-seems to be cleaner to have an include file per kernel version which 
-specifies both the directory and the file name.
-
-$(KERNEL_VERSION)/kernel_source would then contain
-
-SRC_URI = 
-"http://www.kernel.org/pub/linux/kernel/v2.6/linux-$(KERNEL_VERSION).tar.bz2"
-
-for a stable kernel, and
-
-
-SRC_URI = 
-"http://www.kernel.org/pub/linux/kernel/v2.6/testing/linux-$(KERNEL_VERSION).tar.bz2"
-for a release candidate.
-
-One this file is created for a kernel version, it would require little 
-or no maintenance.
-
-Similar files in the SOC_FAMILY directory structure would control which 
-minor patch as well as other architecture specific patches to be added.
-
-
-> Frans
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+BR
+Ulf
 
 
