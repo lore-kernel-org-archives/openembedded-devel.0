@@ -1,29 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PAJJ9-0001De-OI for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 11:25:42 +0200
-Received: from f053043161.adsl.alicedsl.de ([78.53.43.161]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PAJIU-0000st-Es; Mon, 25 Oct 2010 09:24:54 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: Michael Smith <msmith@cbnco.com>
-Date: Mon, 25 Oct 2010 11:24:53 +0200
-Message-ID: <1287998693.3793.30.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <sledz@dresearch.de>) id 1PAJuG-0003Ju-Ok
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Oct 2010 12:03:58 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 7913E491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Oct 2010 12:03:13 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 25 Oct 2010 12:03:13 +0200
+Message-ID: <4CC555E7.2010000@dresearch.de>
+Date: Mon, 25 Oct 2010 12:03:19 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.11) Gecko/20101013 Lightning/1.0b2 Thunderbird/3.1.5
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <DB561678F08F554EB0D9F21B70E268A505AF5C@exchange.intern.dresearch.de>
+	<1288000524-18800-1-git-send-email-sledz@dresearch.de>
+In-Reply-To: <1288000524-18800-1-git-send-email-sledz@dresearch.de>
+X-OriginalArrivalTime: 25 Oct 2010 10:03:13.0607 (UTC)
+	FILETIME=[D62FE570:01CB742B]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: xdelta_3.0z.bb: `QA Issue with xdelta: No GNU_HASH in the elf binary`
+Subject: Re: [PATCH v2] epiphany-2.30.2: unbreak do_configure by setting ca-file path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,70 +44,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 09:25:53 -0000
-X-Groupsio-MsgNum: 25443
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-tpYMpGvMG4ahohLtJ1Sl"
+X-List-Received-Date: Mon, 25 Oct 2010 10:03:59 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
---=-tpYMpGvMG4ahohLtJ1Sl
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Am 25.10.2010 11:55, schrieb Steffen Sledz:
+> * Disable existence check for ca-bundle file in configure.ac because
+>   it does not work in OE cross compile environment (location at build
+>   host may differ from location at target).
+> * Explicitely set ca-bundle file path according to the one used by
+>   ca-certificates package.
+> 
+> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
 
-Dear Michael,
+This is a patch implementing the first option i mentioned (Use the --with-ca-file option but disable the existance check in configure.ac).
 
+If there are no better solutions in the next time i'll push this one.
 
-`xdelta_3.0z.bb` you committed in 117024 [1] fails with the following
-error when building it wtih `angstrom-2008.1` for `MACHINE =3D
-"beagleboard"`.
-
-        $ more angstrom-dev/work/armv7a-angstrom-linux-gnueabi/xdelta-3.0z-=
-r0/temp/log.do_package*
-        ::::::::::::::
-        angstrom-dev/work/armv7a-angstrom-linux-gnueabi/xdelta-3.0z-r0/temp=
-/log.do_package.1558
-        ::::::::::::::
-        ERROR: QA Issue with xdelta: No GNU_HASH in the elf binary: '/oe/bu=
-ild/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/xdelta-3.0z-r0/packages=
--split/xdelta/usr/bin/xdelta
-        3'
-        FATAL: QA run found fatal errors. Please consider fixing them.
-        ERROR: Error in executing python function in: /oe/openembedded/reci=
-pes/xdelta/xdelta_3.0z.bb
-        ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-        ERROR: Printing the environment of the function
-        ERROR: Function do_package_qa failed
-
-There is no mention in the commit message, what distribution and machine
-you tested this recipe with.
-
-=C8=A6ngstr=C3=B6m includes `insane.bbclass` [2][3] and therefore breaks.
-
-Could you please look into this.
+Steffen
 
 
-Thanks,
-
-Paul
 
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D117024c=
-efa6d38753e3094b964b077aa7c0ce17f
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/conf/distro/inc=
-lude/angstrom.inc?id=3D117024cefa6d38753e3094b964b077aa7c0ce17f#n88
-[3] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/classes/insane.=
-bbclass?h=3D117024cefa6d38753e3094b964b077aa7c0ce17f#n273
-
---=-tpYMpGvMG4ahohLtJ1Sl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzFTN8ACgkQPX1aK2wOHVgCPwCfSo+Op7+J5W55XSroxCDhTkI+
-0A8AmwXS+Z1UWeDhbDJ/Mn+uQLw6lPHE
-=do+x
------END PGP SIGNATURE-----
-
---=-tpYMpGvMG4ahohLtJ1Sl--
