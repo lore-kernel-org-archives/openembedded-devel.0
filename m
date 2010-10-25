@@ -1,36 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PAIBk-0007NN-UU
+	(envelope-from <raj.khem@gmail.com>) id 1PAIEW-0007iS-FA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 10:13:56 +0200
-Received: by yxe42 with SMTP id 42so1956698yxe.6
+	Mon, 25 Oct 2010 10:16:47 +0200
+Received: by gxk22 with SMTP id 22so1950919gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 01:12:52 -0700 (PDT)
+	Mon, 25 Oct 2010 01:15:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=28KBjEsMqg8kCnyn7jUp8l1lzkm/xOnDvfdufDWin3Y=;
-	b=v+WoaRSb8LNpc6ESmfNTc6q8qMNR2XIKm4+CdxrKFkkCCvvnk5XOF5PFSHx9Pbgqti
-	PvOJ4M/lC3nElUFvXJriFiMLYTUEF1s9JBqY6TWKXTODyQtWNjHDHLVN9qNELWgsLyQS
-	tsPyYBjzYk1IOTk94E4vzDP7PFHqjhCsrGXo8=
+	bh=7Ifl9NssmLv4gytseewrKktiPm5FV2mxIa6XrqSUYR0=;
+	b=P75zwqB9YLvbySWn6ybBBgNFdk7jCyhTzMRZwxN85uopwM22zEHAjNZC488gRnBwH1
+	Grys9Alj2IDyD2G2et3Mz91rlAN/29vjXC+aji3H//Qp4CW3AaPnSvLQTSpyqXHKgLC0
+	56UU1KJJ3AFaCiIk03d1tjHPn5qXe62brVzbg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=sFlAEleh5EXx9ypJ3Y7Lrq0CR7VWQLktPbspQSc3eViXFOdBNZ8sR6IJ66PIGtBxku
-	QLxobFXyXXEF9ulpPmJk9J9rqBlA3ggU9QrFF6K8qmsgNpygeAtxNtSTfgZUKRNiytWP
-	b+8AzvUbP8gZZT8TMrAy8wSqNLKvSE0CAvvhQ=
-Received: by 10.42.23.84 with SMTP id r20mr962015icb.487.1287994372225; Mon,
-	25 Oct 2010 01:12:52 -0700 (PDT)
+	b=XxIEN/HUpR08rWRLGqTEoNShygthysYvzESFh0GcijvWhBydkne7rCd/daPM5pn2Qu
+	ZR8RKJwLJSXDCHE+ejOubyB1R6hQM/zX9k4/QvkxNPb5NFj1U41ruyIyiFq7pTMU2ihP
+	xpcGpiin2YQe8pm77ucJ3YPuWblH/ehEGAsb8=
+Received: by 10.42.71.70 with SMTP id i6mr380617icj.200.1287994550664; Mon, 25
+	Oct 2010 01:15:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.42.164.194 with HTTP; Mon, 25 Oct 2010 01:12:31 -0700 (PDT)
-In-Reply-To: <1287991236-22304-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1287991236-22304-1-git-send-email-Martin.Jansa@gmail.com>
+Received: by 10.42.164.194 with HTTP; Mon, 25 Oct 2010 01:15:30 -0700 (PDT)
+In-Reply-To: <AANLkTimPLjpHi7Xt=NsnQRxHOR+9ZWEPoTE7PjssdzN1@mail.gmail.com>
+References: <AANLkTikq1TNg1Y=f7tVjpkZR8Hre1FoGyK1gUGTKNDKB@mail.gmail.com>
+	<AANLkTimPLjpHi7Xt=NsnQRxHOR+9ZWEPoTE7PjssdzN1@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 25 Oct 2010 01:12:31 -0700
-Message-ID: <AANLkTimZYpUS20619dpEAr=No2eoLniQMGonifTohE3R@mail.gmail.com>
+Date: Mon, 25 Oct 2010 01:15:30 -0700
+Message-ID: <AANLkTi=8nX02nqndcpp3uMgx2D6sb83qMK20Nuy1jovN@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Connect-IP: 209.85.161.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -38,7 +39,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] udev_15*: fix FILES_libudev
+Subject: Re: empty strings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,77 +53,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 08:13:56 -0000
+X-List-Received-Date: Mon, 25 Oct 2010 08:16:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 25, 2010 at 12:20 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> * udev is built with --with-libdir-name=3D and there is /lib/libudev.*, b=
-ut
-> =C2=A0FILES point aonly to {libdir} add
-> * all recipes which now RDEPENDS on whole udev package should be PR bumpe=
-d to pick libudev only
+On Fri, Oct 22, 2010 at 2:00 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> ping.
 >
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> people don't care?
+> I feel there are some issues in the examples below (and some easy
+> cleanup actions).
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> =C2=A0recipes/udev/udev_151.bb | =C2=A0 =C2=A04 ++--
-> =C2=A0recipes/udev/udev_154.bb | =C2=A0 =C2=A04 ++--
-> =C2=A02 files changed, 4 insertions(+), 4 deletions(-)
+If you dont generalize and pick and test a recipe at a time that would
+be much sane way to go with such changes.
+Sometimes they might look obvious but they may not be. So my humble
+request is to go recipe by recipe instead of
+some seding and grepping.
+
 >
-> diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
-> index fc33592..554f86b 100644
-> --- a/recipes/udev/udev_151.bb
-> +++ b/recipes/udev/udev_151.bb
-> @@ -3,7 +3,7 @@ DESCRIPTION =3D "udev is a daemon which dynamically creat=
-es and removes device nod
-> =C2=A0the hotplug package and requires a kernel not older than 2.6.12."
-> =C2=A0LICENSE =3D "GPLv2+"
+> Frans
 >
-> -PR =3D "r18"
-> +PR =3D "r19"
->
-> =C2=A0# Untested
-> =C2=A0DEFAULT_PREFERENCE =3D "-1"
-> @@ -61,7 +61,7 @@ INITSCRIPT_PARAMS =3D "start 03 S ."
->
-> =C2=A0PACKAGES =3D+ "libudev libgudev udev-utils"
->
-> -FILES_libudev =3D "${libdir}/libudev.so.*"
-> +FILES_libudev =3D "${libdir}/libudev.so.* ${base_libdir}/libudev.so.*"
-> =C2=A0FILES_libgudev =3D "${libdir}/libgudev*.so.*"
->
-> =C2=A0FILES_udev-utils =3D "${bindir}/udevinfo ${bindir}/udevtest ${base_=
-sbindir}/udevadm"
-> diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
-> index 9c76184..d7740a6 100644
-> --- a/recipes/udev/udev_154.bb
-> +++ b/recipes/udev/udev_154.bb
-> @@ -3,7 +3,7 @@ DESCRIPTION =3D "udev is a daemon which dynamically creat=
-es and removes device nod
-> =C2=A0the hotplug package and requires a kernel not older than 2.6.12."
-> =C2=A0LICENSE =3D "GPLv2+"
->
-> -PR =3D "r5"
-> +PR =3D "r6"
->
-> =C2=A0# Untested
-> =C2=A0DEFAULT_PREFERENCE =3D "-1"
-> @@ -62,7 +62,7 @@ INITSCRIPT_PARAMS =3D "start 03 S ."
->
-> =C2=A0PACKAGES =3D+ "libudev libgudev udev-utils"
->
-> -FILES_libudev =3D "${libdir}/libudev.so.*"
-> +FILES_libudev =3D "${libdir}/libudev.so.* ${base_libdir}/libudev.so.*"
-> =C2=A0FILES_libgudev =3D "${libdir}/libgudev*.so.*"
->
-> =C2=A0FILES_udev-utils =3D "${bindir}/udevinfo ${bindir}/udevtest ${base_=
-sbindir}/udevadm"
-> --
-> 1.7.3.1
->
+> 2010/10/14 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+>> triggered by a remark on irc, I decided to do a grep on "" in all our re=
+cipes.
+>> That gave some interesting observations. I've fixed a few things from
+>> the type X +=3D "" or X_append =3D ""
+>> See the patch set I just send.
+>>
+>> However there are also a few things that are not so obvious and for
+>> which I want to ask your opinion, Some seem useless, others are
+>> probably needed, but wanted to raise all issues that could be
+>> unneeded.
+>> Note that the recipes are just examples, ofthen there are more recipes
+>> that have the same pattern.
+>>
+>> libvorbis/libvorbis_1.2.3.bb:EXTRA_OECONF =3D ""
+>> aircrack/aircrack_2.1.bb:DEPENDS =3D ""
+>> apt/apt-native.inc:PACKAGES =3D "" =C2=A0(this is a native recipe, isn't=
+ this
+>> always the case for native recipes ? )
+>> bind/bind_9.3.1.bb:RPEDENDS =3D "" (this one has a DEPENDS on openssl, I
+>> would expect it also to rdepend on openssl in this case)
+>> c3110x/cx3110x_1.1.bb:export LDFLAGS =3D ""
+>> classpath/classpath.inc:RPROVIDES_${PN} =3D ""
+>> fuse/fuse-module_2.7.4.bb: =C2=A0 =C2=A0 =C2=A0LDFLAGS=3D""
+>> glibc/glibc_2.10.1.bb: =C2=A0CPPFLAGS=3D"" oe_runconf (I was wondering o=
+f the
+>> resetting CPPFLAGS is useful, didn't really dig into this one)
+>> gs/gs-fonts-std_8.11.bb:HOMEPAGE =3D ""
+>> gsoap/gsoap-native_2.7.13.bb:EXTRA_OEMAKE =3D ""
+>> ipkg/ipkg-native.inc:PROVIDES =3D "" =C2=A0(hm, no provides)
+>> meta/staging-linkage_1.0.bb:SRC_URI =3D ""
+>> psmisc/psmisc.inc:FILES_${PN} =3D "" (guess all files are added to other
+>> packages, if that is so, should there be a line like this?)
+>> tmake/tmake_1.11.bb:FILES =3D ""
+>> ttf-fonts/ttf-hunkyfonts_0.3.0.bb:RRECOMMENDS_${PN}-dbg =3D "" (seems
+>> somewhat strange to me)
+>>
+>>
+>> this one also looked weird; guess it is ok but found it odd that these a=
+re reset
+>> hplip/hplip_2.8.10.bb:EXTRA_OEMAKE =3D 'BUILD_SYS=3D"" HOST_SYS=3D""'
+>>
+>> I would like opinions on which of these constructs is useful and which
+>> not. (and yes, I know an assingment may be used to nullify an earlier
+>> assingment in an .inc file and I am also aware of cases where there is
+>> something like X_virtclass_native =3D "" which is used to nullify
+>> non-native assignments to X.
+>>
+>> Enjoy, Frans
+>>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
