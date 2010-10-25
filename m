@@ -1,36 +1,43 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1PAHtR-0005gB-Uk
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <andrea.adami@gmail.com>) id 1PAI49-0001XB-Ni
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 09:54:59 +0200
-Received: (qmail invoked by alias); 25 Oct 2010 07:54:16 -0000
-Received: from 251.118.101-84.rev.gaoland.net (EHLO [192.168.1.71])
-	[84.101.118.251]
-	by mail.gmx.net (mp025) with SMTP; 25 Oct 2010 09:54:16 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19bKOItp+Fb8JJYcC8TsNzBbEhye5uZiBBYZC+qgJ
-	cLYE8lu0viBtbF
-Message-ID: <4CC537A4.5080909@gmx.net>
-Date: Mon, 25 Oct 2010 09:54:12 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.14) Gecko/20101006 Thunderbird/3.0.9
+	Mon, 25 Oct 2010 10:06:17 +0200
+Received: by qwd6 with SMTP id 6so1142408qwd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Oct 2010 01:05:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=9hMvpHj7zR1YtcAwNfIZcXysOppDcvrR0sZLQdmucU8=;
+	b=V3vdTre5sjmxP6ThOVS8OLS/JNHUQv3JlDuLMDxQHkfQ4pJRWd7nwwNobknkXM/pWz
+	C/f1AAAFC8pSBvMyR46GLgK/TcVJBttwY2RTGpvVPN1as6EmQFya2VUF2aCwsyZmS+DD
+	TmqHXrEqnk7DX/4pPiq6tBTAQIprQacc7/kw8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=RkGHcTqrhOgdKktVzAUUw3IrHS6Fvk8d5JNM/fsRvIpmpd7nYJBkdG/4K1j7PyWUK2
+	2eE4TOjmLH8W31I8/YKk/ddp+qKJkvvNqRTfENCry6LlWqIFPiJjdiwrfP6q1py0C/76
+	BG+s9A8Q0LjppFaRv6GfC8Buo9z3VNE1GKpKU=
 MIME-Version: 1.0
+Received: by 10.229.183.20 with SMTP id ce20mr5895299qcb.203.1287993919480;
+	Mon, 25 Oct 2010 01:05:19 -0700 (PDT)
+Received: by 10.229.18.197 with HTTP; Mon, 25 Oct 2010 01:05:19 -0700 (PDT)
+In-Reply-To: <AANLkTim1GALcyTjqpHAmy1L=8SqomVLqrKr7dYOwFhc4@mail.gmail.com>
+References: <AANLkTim1GALcyTjqpHAmy1L=8SqomVLqrKr7dYOwFhc4@mail.gmail.com>
+Date: Mon, 25 Oct 2010 10:05:19 +0200
+Message-ID: <AANLkTikDAdLBYfZpkfKpBCU7JOEx+i9g=yJjzwoeeM+v@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTikq1TNg1Y=f7tVjpkZR8Hre1FoGyK1gUGTKNDKB@mail.gmail.com>
-	<AANLkTimPLjpHi7Xt=NsnQRxHOR+9ZWEPoTE7PjssdzN1@mail.gmail.com>
-In-Reply-To: <AANLkTimPLjpHi7Xt=NsnQRxHOR+9ZWEPoTE7PjssdzN1@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.23
-X-SA-Exim-Mail-From: thebohemian@gmx.net
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: empty strings
+Subject: Re: Revert + apologies (was: Re: [oe-commits] Frans Meulenbroeks : lsof/lsof_4.83.bb: removed unneeded EXTRA_OEMAKE)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,41 +51,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 07:55:00 -0000
-X-Groupsio-MsgNum: 25434
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigE791A7C93AB63D055D3B7CBE"
-
---------------enigE791A7C93AB63D055D3B7CBE
+X-List-Received-Date: Mon, 25 Oct 2010 08:06:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Am 22.10.2010 11:00, schrieb Frans Meulenbroeks:
->> classpath/classpath.inc:RPROVIDES_${PN} =3D ""
-It would not be a good idea to blindly remove this. The effect of this
-can only be seen at runtime. I don't have the time to look into this
-deeply now but we definitely did this because we don't like the default
-RPROVIDES that OE sets for classpath and classpath-minimal.
+Frans,
 
-Regards
-Robert
+nerverthless some recipes of the group *did* build flawlessy after
+removing the EXTRA_OEMAKE.
+
+ifupdown/ifupdown_0.6.10.bb
+ifupdown/ifupdown-ubuntu_0.6.8.bb
+man-pages/man-pages_3.21.bb
+
+I tested only a few...probably others too.
+
+It looks to me this was a quick hack to make broken recipes build...
+
+Anyway, thank again for your work. Keep on!
+
+Andrea
+
+On Mon, Oct 25, 2010 at 8:45 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/10/25 Andrea Adami <andrea.adami@gmail.com>:
+>> build breaks on do_compile after that commit
+>>
+>> Needs investigation
+>>
+>> Andrea
+>
+> Oops.
+> Apparently this was not well enough tested. My sincere apologies!
+> I've reverted all the patches that removed EXTRA_OEMAKE = "".
+>
+> What happened was that I was being told on irc that comparing the
+> output from bitbake -e before and after making the change was
+> sufficient.
+> I've tested one recipe more in-depth and that worked fine, then
+> further relied upon comparing the bitbake -e results.
+> This proved to be a sound method when dealing with EXTRA_OECONF.
+> Apparently however it was not good enough for EXTRA_OEMAKE and some if
+> not most recipes are not in my regular build (definitely the older
+> versions are not).
+>
+> I'll try to peek into this later. Anyway, again my apologies for any
+> inconvenience caused and thanks to Andrea for reporting this!
+>
+> Best regards, Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
-
-
---------------enigE791A7C93AB63D055D3B7CBE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAkzFN6cACgkQG9cfwmwwEtrSfwCgiuNZ9M88ooX1dEiodiRIL0UB
-e8MAnjkcmoLkcO9KhzqpSdVEUEIyoebA
-=NOcu
------END PGP SIGNATURE-----
-
---------------enigE791A7C93AB63D055D3B7CBE--
