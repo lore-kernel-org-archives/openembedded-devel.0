@@ -1,31 +1,31 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PAMdd-0004dl-Hw
+	(envelope-from <obi@opendreambox.org>) id 1PAMg4-00056u-E9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 14:58:57 +0200
+	Mon, 25 Oct 2010 15:01:29 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 04766314A1B4
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 74F51314A20D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 14:58:19 +0200 (CEST)
+	Mon, 25 Oct 2010 15:00:45 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id Y8omGXLHfwCB
+	port 10024) with LMTP id QLTfbyjjTURE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 14:58:11 +0200 (CEST)
+	Mon, 25 Oct 2010 15:00:38 +0200 (CEST)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id AD04E314A20D
+	by mail.multimedia-labs.de (Postfix) with SMTP id EA461314A1B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 14:58:10 +0200 (CEST)
+	Mon, 25 Oct 2010 15:00:36 +0200 (CEST)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Mon, 25 Oct 2010 12:58:10 +0000
+	Mon, 25 Oct 2010 13:00:36 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Oct 2010 12:58:10 +0000
-Message-Id: <1288011490-23406-1-git-send-email-obi@opendreambox.org>
+Date: Mon, 25 Oct 2010 13:00:36 +0000
+Message-Id: <1288011636-23800-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.1
-In-Reply-To: <4CBC5851.4090204@mentor.com>
-References: <4CBC5851.4090204@mentor.com>
+In-Reply-To: <4CBDE483.3030002@opendreambox.org>
+References: <4CBDE483.3030002@opendreambox.org>
 X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -34,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH resend] linux-libc-headers-2.6.34: Delete include/scsi/scsi.h
+Subject: [PATCH v2 resend] dvdauthor-0.6.18: initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,35 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 12:58:57 -0000
+X-List-Received-Date: Mon, 25 Oct 2010 13:01:29 -0000
 
-* Based on 91d3d92a626da89dfe13d63e68a90dbafdbaef1d for 2.6.31 and 2.6.32
+* v2: updated DESCRIPTION, SECTION and PRIORITY
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-Acked-by: Tom Rini <tom_rini@mentor.com>
 ---
- .../linux-libc-headers_2.6.34.bb                   |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes/dvdauthor/dvdauthor_0.6.18.bb |   13 +++++++++++++
+ 1 files changed, 13 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/dvdauthor/dvdauthor_0.6.18.bb
 
-diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
-index 8e0df2e..340915c 100644
---- a/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
-+++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
-@@ -5,7 +5,7 @@ DEFAULT_PREFERENCE = "-1"
- DEFAULT_PREFERENCE_nios2 = "1"
- INHIBIT_DEFAULT_DEPS = "1"
- DEPENDS += "unifdef-native"
--PR = "r1"
-+PR = "r2"
- 
- COMPATIBLE_TARGET_SYS = "."
- 
-@@ -39,4 +39,5 @@ do_compile () {
- 
- do_install() {
- 	oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix} ARCH=$ARCH
-+	rm -f ${D}${exec_prefix}/include/scsi/scsi.h
- }
+diff --git a/recipes/dvdauthor/dvdauthor_0.6.18.bb b/recipes/dvdauthor/dvdauthor_0.6.18.bb
+new file mode 100644
+index 0000000..24f3a74
+--- /dev/null
++++ b/recipes/dvdauthor/dvdauthor_0.6.18.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "A set of tools to help you generate DVD files to be played back on a standalone DVD player"
++SECTION = "console/multimedia"
++PRIORITY = "optional"
++LICENSE = "GPLv2"
++DEPENDS = "freetype libdvdread libfribidi libpng libxml2 zlib"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.gz"
++SRC_URI[md5sum] = "ded5373800ac6448ff044606f5047550"
++SRC_URI[sha256sum] = "0e21c2d9c09f7e347c4c9bd7b691455f524ec2e91bcafc18b84d7b7fb3a9cb26"
++
++S = "${WORKDIR}/${PN}"
++
++inherit autotools
 -- 
 1.7.1
 
