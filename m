@@ -1,54 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PASuO-0007nx-V4
+	(envelope-from <raj.khem@gmail.com>) id 1PAT2e-0001U4-4n
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 21:40:41 +0200
-Received: by iwn41 with SMTP id 41so1172917iwn.6
+	Mon, 25 Oct 2010 21:49:13 +0200
+Received: by yxe42 with SMTP id 42so2469852yxe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 12:39:59 -0700 (PDT)
+	Mon, 25 Oct 2010 12:48:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=4QF2hv6SnuaiePeJevrPebAdlCrbc87p6758iYA4AUs=;
-	b=qoTujjulN4NcCuIc6FcSNx+kQkKCdi6O6QofqxWu6QAq+lEgGqufBBfrDLaumy82mM
-	vwDSSL+PnbyAClqGzM71sjXl9wfl3rrAScSsYSr0PWSdlnHIV1R6ZVUy2oF/CpoQUDrm
-	eYNRwl7H5CRATV1iHcnLbUKJQzTAujRI2g93M=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=pR46vQTZu30hB186vAAwu6lWODDZxIJiTsJA49xxITg=;
+	b=vmgIMjrwfjLjrbbk5v+QpKsQ/0X+yikJxn1T78K3PpYjo6o89Ka/r3QR653WUvcWS9
+	q9Z0efvGhRFm4Ouu+Cf0qg/sX8XR37+bi1dFGExzeWR10y4u2kkU6JHvLSfh2mGlnz+4
+	yKNHzyfhxMRk4EpMOhx4Rrt9mJn4MPQ6rRLu0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Yl69lkWX4ipRwNb7DFVtFj/b5jaqZZi4UR4ZA6AumifUnSKIGReyJUkXkDCBeCz+hD
-	fI+EUELGxoLvUHuEUj50oCM9iPAaPcEJ34wBEb5IX4r09Ak5oXWGz44SVsQMDwF1qrFZ
-	M+RIuOKGamKwYk4T6dHD2mhNLQaQlAqBg9VXI=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=TvIkhweDnYriMhDniyYoOeTuvo58u8M6QxebfSl9CAeGNdyQfIUDnsamYxCtZ5f6j2
+	pufocDESJ4/PmckfG92tuHmE4w2noO7g5azly+9sYIkwyVX+TmUdv1Ejct8oZceJJlwB
+	w66lG9XBpEfH0Zk4HxeTeoKhH18jzMn5cbGPM=
+Received: by 10.42.71.70 with SMTP id i6mr1126535icj.200.1288036106191; Mon,
+	25 Oct 2010 12:48:26 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.35.11 with SMTP id n11mr6267631ibd.168.1288035598949; Mon,
-	25 Oct 2010 12:39:58 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 25 Oct 2010 12:39:58 -0700 (PDT)
-In-Reply-To: <4CC5DB5F.6060002@atmel.com>
-References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>
-	<201010181520.30454.marcin@juszkiewicz.com.pl>
-	<4CBC4DD4.3010908@atmel.com> <i9hpii$gf2$1@dough.gmane.org>
-	<4CBC7F6A.9040000@atmel.com>
-	<AANLkTi=xBMvDEKjiaNKy7zijs4DCZwhrSDr=gHVkMh_T@mail.gmail.com>
-	<4CBCD3FC.5090305@atmel.com>
-	<AANLkTin6jOdo56fCEaMLNgiKDThBV0yg7x_OvOntwQEM@mail.gmail.com>
-	<4CBF81FC.3040803@atmel.com>
-	<AANLkTim3ucg9ue8OoLDvZP=J-jdt2Dd1g_+Wnf_CZ6jO@mail.gmail.com>
-	<4CC5A48B.40404@atmel.com>
-	<AANLkTi=WLnbdQiOC4B_v5hk+ehR_hUE8hgiGoCgDkEAx@mail.gmail.com>
-	<4CC5DB5F.6060002@atmel.com>
-Date: Mon, 25 Oct 2010 21:39:58 +0200
-Message-ID: <AANLkTikWWtc3p_OAF3n0CT=p4Nebna6H4iw759GnX04=@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.42.164.194 with HTTP; Mon, 25 Oct 2010 12:48:05 -0700 (PDT)
+In-Reply-To: <AANLkTinhVFqdS1XQ1OmhSHVwr0MS9pZgMMR9cqBoFxYM@mail.gmail.com>
+References: <AANLkTinhVFqdS1XQ1OmhSHVwr0MS9pZgMMR9cqBoFxYM@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 25 Oct 2010 12:48:05 -0700
+Message-ID: <AANLkTimnpM-4_d7LV8bv5AnYPN02ZkUNS7h+BaEJyd1H@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] Use common files for AT91SAM9 configuration
+Subject: Re: Python.h LONG_BIT definition error on 64 bit build machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,25 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 19:40:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 25 Oct 2010 19:49:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-2010/10/25 Ulf Samuelsson <ulf.samuelsson@atmel.com>:
-
+On Mon, Oct 25, 2010 at 8:57 AM, Steve Sakoman <sakoman@gmail.com> wrote:
+> I'm working on a recipe for a new version of hplip (it depends on
+> python). =C2=A0It builds just fine on my 32 bit Ubuntu development machin=
+e,
+> but when I attempt the build on my 64 bit Ubuntu machines the build
+> fails with the following error:
 >
-> Except it is not obvious.
-> How does anyone know which kernel version is the stable
-> and which is the experimental.
-> Indeed, how does anyone know that there is an experimental kernel version at
-> all.
+> In file included from
+> /home/steve/source/sakoman-oe/tmp/sysroots/x86_64-linux/usr/include/pytho=
+n2.6/Python.h:58,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 from io/mudext/hp=
+mudext.c:27:
+> /home/steve/source/sakoman-oe/tmp/sysroots/x86_64-linux/usr/include/pytho=
+n2.6/pyport.h:685:2:
+> error: #error "LONG_BIT definition appears wrong for platform (bad
+> gcc/glibc config?)."
 >
-Make two recipes (e.g. in an overlay)
-linux-stable and linux-experimental
-they can have their own defconfigs etc
-and you can just include the base bb file.
-if you want to you can even get both kernels in a single rfs so you
-can boot from either.
+> I seem to recall seeing this error in the distant past.
+>
+> Is this a known issue with python on 64 bit machines?
+>
+> Any advice?
+>
 
-Have fun! Frans
+see this https://bugzilla.redhat.com/show_bug.cgi?id=3D139911
+
+> Steve
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
