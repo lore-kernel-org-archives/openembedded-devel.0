@@ -1,31 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PALND-0004iJ-TD for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 13:37:57 +0200
-Received: from f053043161.adsl.alicedsl.de ([78.53.43.161]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PALMb-0006VQ-0D for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 11:37:17 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <sledz@dresearch.de>) id 1PALqt-0006wu-Cd
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Oct 2010 14:08:36 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 234EE491278;
+	Mon, 25 Oct 2010 14:07:53 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 25 Oct 2010 14:07:53 +0200
+Message-ID: <4CC5731F.2030009@dresearch.de>
+Date: Mon, 25 Oct 2010 14:07:59 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.11) Gecko/20101013 Lightning/1.0b2 Thunderbird/3.1.5
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1288000524-18800-1-git-send-email-sledz@dresearch.de>
-References: <DB561678F08F554EB0D9F21B70E268A505AF5C@exchange.intern.dresearch.de>
-	<1288000524-18800-1-git-send-email-sledz@dresearch.de>
-Date: Mon, 25 Oct 2010 13:37:15 +0200
-Message-ID: <1288006635.3793.38.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <DB561678F08F554EB0D9F21B70E268A505AF5C@exchange.intern.dresearch.de>	<1288000524-18800-1-git-send-email-sledz@dresearch.de>
+	<1288006635.3793.38.camel@mattotaupa>
+In-Reply-To: <1288006635.3793.38.camel@mattotaupa>
+X-OriginalArrivalTime: 25 Oct 2010 12:07:53.0194 (UTC)
+	FILETIME=[405E4CA0:01CB743D]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
 Subject: Re: [PATCH v2] epiphany-2.30.2: unbreak do_configure by setting ca-file path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,85 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 11:37:57 -0000
-X-Groupsio-MsgNum: 25447
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-DqHax9F8JosZSqyrJTrB"
-
---=-DqHax9F8JosZSqyrJTrB
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 25 Oct 2010 12:08:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Am Montag, den 25.10.2010, 11:55 +0200 schrieb Steffen Sledz:
-> * Disable existence check for ca-bundle file in configure.ac because
->   it does not work in OE cross compile environment (location at build
->   host may differ from location at target).
-> * Explicitely set ca-bundle file path according to the one used by
->   ca-certificates package.
+Am 25.10.2010 13:37, schrieb Paul Menzel:
+> Am Montag, den 25.10.2010, 11:55 +0200 schrieb Steffen Sledz:
+>> * Disable existence check for ca-bundle file in configure.ac because
+>>   it does not work in OE cross compile environment (location at build
+>>   host may differ from location at target).
+>> * Explicitely set ca-bundle file path according to the one used by
+>>   ca-certificates package.
+>> ...
+>> ++# disable this check because it does not work in all environments
+>> ++# (location at build host may differ from target)
+>> ++#    if ! test -f "$with_ca_file"; then
+>> ++#        AC_MSG_ERROR([No such file '$with_ca_file'. Use --with-ca-f=
+ile=3Dpath to set, or --without-ca-file to disable])
+>> ++#    fi
 >=20
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> ---
->  recipes/gnome/epiphany/ca-file-configure.patch |   17 +++++++++++++++++
->  recipes/gnome/epiphany_2.30.2.bb               |    6 ++++--
->  2 files changed, 21 insertions(+), 2 deletions(-)
->  create mode 100644 recipes/gnome/epiphany/ca-file-configure.patch
+> Would adding the following check also work?
 >=20
-> diff --git a/recipes/gnome/epiphany/ca-file-configure.patch b/recipes/gno=
-me/epiphany/ca-file-configure.patch
-> new file mode 100644
-> index 0000000..b77d441
-> --- /dev/null
-> +++ b/recipes/gnome/epiphany/ca-file-configure.patch
-> @@ -0,0 +1,17 @@
-> +--- epiphany-2.30.2.orig/configure.ac	2010-10-25 11:10:31.316864572 +020=
-0
-> ++++ epiphany-2.30.2/configure.ac	2010-10-25 11:12:29.562614607 +0200
-> +@@ -272,9 +272,11 @@
-> +     fi
-> +=20
-> +     AC_MSG_RESULT($with_ca_file)
-> +-    if ! test -f "$with_ca_file"; then
-> +-        AC_MSG_ERROR([No such file '$with_ca_file'. Use --with-ca-file=
-=3Dpath to set, or --without-ca-file to disable])
-> +-    fi
-> ++# disable this check because it does not work in all environments
-> ++# (location at build host may differ from target)
-> ++#    if ! test -f "$with_ca_file"; then
-> ++#        AC_MSG_ERROR([No such file '$with_ca_file'. Use --with-ca-file=
-=3Dpath to set, or --without-ca-file to disable])
-> ++#    fi
-> +     GTLS_SYSTEM_CA_FILE=3D"$with_ca_file"
-> +=20
-> +     AC_DEFINE_UNQUOTED([GTLS_SYSTEM_CA_FILE], ["$GTLS_SYSTEM_CA_FILE"],=
- [path to system Certificate Authority list])
+>         if test "$cross_compiling" !=3D "yes"; then
+>          =E2=80=A6
+>         fi
 
-Would adding the following check also work?
+I don't think this is a good idea. It is not a problem of cross compiling=
+. Cross compiling is just one case where it occurs.
 
-        if test "$cross_compiling" !=3D "yes"; then
-         =E2=80=A6
-        fi
+Also if i build for the same architecture it is not a good idea to check =
+for the existence of a file *at buildtime* and compile this path into the=
+ binary.
 
-I think this would be more portable. Could you report that issue
-upstream too please.
+The existence of such a file should be checked and handled at runtime onl=
+y.
 
-[=E2=80=A6]
+> I think this would be more portable. Could you report that issue
+> upstream too please.
+
+I'll try.
+
+Steffen
 
 
-Thanks,
 
-Paul
-
---=-DqHax9F8JosZSqyrJTrB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzFa+sACgkQPX1aK2wOHVjNHwCdF9iNghkYA/DMdMupDwmcaROp
-d2MAn24C53gGWHhZdYVQQWn/x12kZBgx
-=yxD2
------END PGP SIGNATURE-----
-
---=-DqHax9F8JosZSqyrJTrB--
