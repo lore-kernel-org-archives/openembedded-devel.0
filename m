@@ -1,33 +1,40 @@
-Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <Alexander.Stohr@gmx.de>) id 1PAMwK-0005db-Kd
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PANkt-0002DG-2b
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 15:18:17 +0200
-Received: (qmail 9072 invoked by uid 0); 25 Oct 2010 13:17:35 -0000
-Received: from 193.8.40.126 by www148.gmx.net with HTTP;
-	Mon, 25 Oct 2010 15:17:34 +0200 (CEST)
-Date: Mon, 25 Oct 2010 15:17:34 +0200
-From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
-Message-ID: <20101025131734.221440@gmx.net>
+	Mon, 25 Oct 2010 16:10:44 +0200
+Received: by ywg8 with SMTP id 8so4903ywg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Oct 2010 07:09:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=4DfF4rxCB9nI/Ak+XLNlme8gADesrK+pYOHdQbUEZOg=;
+	b=r/gqKu+WzKiBydRcwpLXgJSKYq+elehpKI7Q7BndIo9KbjxlzzQxEUwRBkl0S8HFge
+	zCk4gQ6HZ2b6VVk7y8jKu+Qie5IHxLxZ/Ie/AqL+wN90W/0cz4piGY97EQzdW21CGYdY
+	hA0L9TYXbmzmaLTR1TiCkI7fVfEdOTeSVVUq0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=FFuiy5X+yooAiPqQkk2zIacFOxj5q6VUdFKePzFxfDPR/2PTDJLTKC/zn2i85F8Jd7
+	erPDKaI+hOCa1OFdMX5aeXC2+W5RChMLZkSYpg2FEnHKWph8eaEmq+/Cw/gW1pbTGy7E
+	u8Oq/OKoWHKjBcfJN3/M13bTe40KyhoBVMo1E=
 MIME-Version: 1.0
+Received: by 10.42.170.133 with SMTP id f5mr2069806icz.147.1288015780481; Mon,
+	25 Oct 2010 07:09:40 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 25 Oct 2010 07:09:40 -0700 (PDT)
+Date: Mon, 25 Oct 2010 16:09:40 +0200
+Message-ID: <AANLkTimuTax_r2-eNzs3VnjQgDz+-SUxee9RUtSGPKm1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #15156664
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX1/kL4YzpdzkJzvhaNoJcwuevP+pONGfwQSa19jz7S
-	kKDwiKt3xF75hqMf3mkbr46PzdxJHJ5E6j+Q== 
-X-GMX-UID: VrT2eMIkf2IsPu8si2xopsJ4dWxlcxaf
-X-FuHaFi: 0.78000000000000003
-X-SA-Exim-Connect-IP: 213.165.64.22
-X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: do we need patch-native ?
+Subject: force build from mirror only ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,17 +48,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 13:18:17 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 25 Oct 2010 14:10:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-there are cases where the machine readability
-of such version information lines
-migrates towards a mess of parsing efforts:
+I was wondering if it is possible (and what needs to be done) to fore
+a build from a mirror only (or without a mirror and only using
+downloads) without disconnecting from the network.
+Rationale: I want to make all sources for an image available on the
+mirror (including git tarballs etc) so it can be used as a reference
+on where to find the opensource components for this image.
 
-GNU ld (GNU Binutils; openSUSE 11.3) 2.20.0.20100122-6
--- 
-Neu: GMX De-Mail - Einfach wie E-Mail, sicher wie ein Brief!  
-Jetzt De-Mail-Adresse reservieren: http://portal.gmx.net/de/go/demail
+Anyone a suggestion?
+
+Thanks! Frans
 
 
