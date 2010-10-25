@@ -1,29 +1,31 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PANwA-00084y-Oy
+	(envelope-from <obi@opendreambox.org>) id 1PANvd-00080c-SW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 16:22:18 +0200
+	Mon, 25 Oct 2010 16:22:11 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id BC8BA3149FCF
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 3EF89314A274
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 16:21:29 +0200 (CEST)
+	Mon, 25 Oct 2010 16:20:54 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id hGOeaBkEiIqR
+	port 10024) with LMTP id kD2w0bnXLOXr
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 16:21:22 +0200 (CEST)
+	Mon, 25 Oct 2010 16:20:46 +0200 (CEST)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id BE2F9314A290
+	by mail.multimedia-labs.de (Postfix) with SMTP id CAC013149FCF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 16:21:16 +0200 (CEST)
+	Mon, 25 Oct 2010 16:20:45 +0200 (CEST)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Mon, 25 Oct 2010 14:21:16 +0000
+	Mon, 25 Oct 2010 14:20:45 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Oct 2010 14:21:16 +0000
-Message-Id: <1288016476-30704-1-git-send-email-obi@opendreambox.org>
+Date: Mon, 25 Oct 2010 14:20:45 +0000
+Message-Id: <1288016445-30478-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.1
+In-Reply-To: <4CBEC95F.1000807@opendreambox.org>
+References: <4CBEC95F.1000807@opendreambox.org>
 X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -32,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libsigc++-1.2.5: exclude autoheader
+Subject: [PATCH] lib_package.bbclass: fix packaging of static libs, inherit binconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,36 +50,39 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 25 Oct 2010 14:22:25 -0000
 
-* Running autoheader regenerates sigcconfig.h and adds #define PACKAGE_*,
-  which conflicts with programs using libsigc++.
+* Package ${libdir}/*.a and /lib/*.a into ${PN}-static instead of ${PN}-dev
+* Although it packaged ${bindir}/*-config into FILES_${PN}-dev, it did
+  not include the required mangling applied by binconfig.bbclass.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ classes/lib_package.bbclass |   17 +++++++++--------
+ 1 files changed, 9 insertions(+), 8 deletions(-)
 
-diff --git a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
-index 7b7ecff..93c231d 100644
---- a/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
-+++ b/recipes/libsigc++-1.2/libsigc++-1.2_1.2.5.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "A library for loose coupling of C++ method calls"
- SECTION = "libs"
- PRIORITY = "optional"
--PR = "r3"
-+PR = "r4"
- LICENSE = "GPL LGPL"
- SRC_URI = "${SOURCEFORGE_MIRROR}/libsigc/libsigc++-${PV}.tar.gz \
- 	   file://autofoo.patch \
-@@ -11,6 +11,8 @@ S = "${WORKDIR}/libsigc++-${PV}"
- 
- inherit autotools pkgconfig
- 
-+EXTRA_AUTORECONF = "--exclude=autoheader"
+diff --git a/classes/lib_package.bbclass b/classes/lib_package.bbclass
+index 82c9370..7e72dc8 100644
+--- a/classes/lib_package.bbclass
++++ b/classes/lib_package.bbclass
+@@ -1,10 +1,11 @@
++inherit binconfig
 +
- FILES_${PN}-dev += "${libdir}/sigc++-*/"
+ PACKAGES += "${PN}-bin"
  
- SRC_URI[md5sum] = "d0d1ffcae0eced97ef4f17ce0ba81352"
+-FILES_${PN} = "${libexecdir} ${libdir}/lib*${SOLIBS} \
+-	    ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+-	    ${base_libdir}/*${SOLIBS} \
+-	    ${datadir}/${PN} ${libdir}/${PN}"
+-FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/*.la \
+-		${libdir}/*.a ${libdir}/pkgconfig /lib/*.a /lib/*.o \
+-		${datadir}/aclocal ${bindir}/*-config"
+-FILES_${PN}-bin = "${bindir}/* ${sbindir}/* /bin/* /sbin/*"
++FILES_${PN} = "${libexecdir}/* ${libdir}/lib*${SOLIBS} \
++            ${sysconfdir} ${sharedstatedir} ${localstatedir} \
++            ${base_libdir}/*${SOLIBS} \
++            ${datadir}/${PN} ${libdir}/${PN}/*"
++
++FILES_${PN}-bin = "${bindir}/* ${sbindir}/* \
++                ${base_bindir}/* ${base_sbindir}/*"
 -- 
 1.7.1
 
