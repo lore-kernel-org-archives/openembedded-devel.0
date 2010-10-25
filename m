@@ -1,31 +1,29 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PAMg4-00056u-E9
+	(envelope-from <obi@opendreambox.org>) id 1PAMga-0005AH-RP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Oct 2010 15:01:29 +0200
+	Mon, 25 Oct 2010 15:02:02 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 74F51314A20D
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 46B1A314A211
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 15:00:45 +0200 (CEST)
+	Mon, 25 Oct 2010 15:01:22 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id QLTfbyjjTURE
+	port 10024) with LMTP id pYgrLfsz8OXS
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 15:00:38 +0200 (CEST)
+	Mon, 25 Oct 2010 15:01:14 +0200 (CEST)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id EA461314A1B4
+	by mail.multimedia-labs.de (Postfix) with SMTP id A6E60314A20D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 15:00:36 +0200 (CEST)
+	Mon, 25 Oct 2010 15:01:13 +0200 (CEST)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Mon, 25 Oct 2010 13:00:36 +0000
+	Mon, 25 Oct 2010 13:01:13 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Oct 2010 13:00:36 +0000
-Message-Id: <1288011636-23800-1-git-send-email-obi@opendreambox.org>
+Date: Mon, 25 Oct 2010 13:01:13 +0000
+Message-Id: <1288011673-23904-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.1
-In-Reply-To: <4CBDE483.3030002@opendreambox.org>
-References: <4CBDE483.3030002@opendreambox.org>
 X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -34,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2 resend] dvdauthor-0.6.18: initial recipe
+Subject: [PATCH] lua5.1: install lua5.1.pc properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,35 +46,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 13:01:29 -0000
-
-* v2: updated DESCRIPTION, SECTION and PRIORITY
+X-List-Received-Date: Mon, 25 Oct 2010 13:02:03 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- recipes/dvdauthor/dvdauthor_0.6.18.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
- create mode 100644 recipes/dvdauthor/dvdauthor_0.6.18.bb
+ recipes/lua/lua5.1_5.1.4.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/dvdauthor/dvdauthor_0.6.18.bb b/recipes/dvdauthor/dvdauthor_0.6.18.bb
-new file mode 100644
-index 0000000..24f3a74
---- /dev/null
-+++ b/recipes/dvdauthor/dvdauthor_0.6.18.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "A set of tools to help you generate DVD files to be played back on a standalone DVD player"
-+SECTION = "console/multimedia"
-+PRIORITY = "optional"
-+LICENSE = "GPLv2"
-+DEPENDS = "freetype libdvdread libfribidi libpng libxml2 zlib"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.gz"
-+SRC_URI[md5sum] = "ded5373800ac6448ff044606f5047550"
-+SRC_URI[sha256sum] = "0e21c2d9c09f7e347c4c9bd7b691455f524ec2e91bcafc18b84d7b7fb3a9cb26"
-+
-+S = "${WORKDIR}/${PN}"
-+
-+inherit autotools
+diff --git a/recipes/lua/lua5.1_5.1.4.bb b/recipes/lua/lua5.1_5.1.4.bb
+index e3d56fd..814f83e 100644
+--- a/recipes/lua/lua5.1_5.1.4.bb
++++ b/recipes/lua/lua5.1_5.1.4.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ HOMEPAGE = "http://www.lua.org/"
+ 
+ DEPENDS += "readline"
+-PR = "r8"
++PR = "r9"
+ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
+            file://bitwise_operators.patch \
+            file://lua5.1.pc \
+@@ -25,7 +25,6 @@ do_configure_prepend() {
+ }
+ 
+ do_compile () {
+-	cp ${WORKDIR}/lua5.1.pc ${S}/
+ 	oe_runmake linux
+ }
+ 
+@@ -37,6 +36,8 @@ do_install () {
+ 		'INSTALL_MAN=${D}${mandir}/man1' \
+ 		'INSTALL_SHARE=${D}${datadir}/lua' \
+ 		install
++	install -d ${D}${libdir}/pkgconfig
++	install -m 0644 ${WORKDIR}/lua5.1.pc ${D}${libdir}/pkgconfig/lua5.1.pc
+ }
+ NATIVE_INSTALL_WORKS = 1
+ BBCLASSEXTEND = "native"
 -- 
 1.7.1
 
