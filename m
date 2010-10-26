@@ -1,44 +1,40 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PAob1-0006Ts-B3
+Received: from usps1.crhc.illinois.edu ([130.126.143.230]
+	helo=usps.crhc.uiuc.edu) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <johnso87@crhc.illinois.edu>) id 1PApMI-0005Pm-FG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 20:50:10 +0200
-Received: by gxk28 with SMTP id 28so120651gxk.6
+	Tue, 26 Oct 2010 21:39:00 +0200
+Received: from usps.crhc.uiuc.edu (localhost [127.0.0.1])
+	by usps.crhc.uiuc.edu (Postfix) with ESMTP id E5CCA3400463
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 11:49:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=NYYLYJxZdmZHnzGEzlOyfLBZK4X+CPwCQuOFP+TfLZk=;
-	b=Y2Wyt6jw83morbHlNEDsZkLDveVDHrPmaZvhoX1qHO7JgpMLR27Fo+LQOXb7JPYnBa
-	IDw6Nw/6ivMkxwg/evq+bWUUXkZNTmHtzgqdPAAbfcLKjY6Uy9McMlEzgMeZZEK28sE7
-	urZEft79rkMygycJ/dnWVU1z+5NPf/DR2Syjw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=K8+rV2KUiWF0WEEVPJi9WUh5ask/47c0vq4Ii4Yhteg8FW4WaUtnncI/p6713x9who
-	hI987I6YGF9LHfno2ZvdB64kxf7JRhkLmW8oOpvu9WfoxNjPs9ekrIwj1AZLpye3MFfN
-	tMSX33lYCawYvQjtVoLm1uNomURmkMPZAx2ng=
-Received: by 10.150.203.4 with SMTP id a4mr7588776ybg.144.1288118964394; Tue,
-	26 Oct 2010 11:49:24 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.90.105.8 with HTTP; Tue, 26 Oct 2010 11:49:04 -0700 (PDT)
-In-Reply-To: <201010261133.07987.kwong@wurldtech.com>
-References: <201010261133.07987.kwong@wurldtech.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 26 Oct 2010 11:49:04 -0700
-Message-ID: <AANLkTin1iUTYWyO+_kon374+7H4ePrPQGAExMPwH+qmu@mail.gmail.com>
+	Tue, 26 Oct 2010 14:29:07 -0500 (CDT)
+Received: from webmail.crhc.illinois.edu (newman.crhc.illinois.edu
+	[130.126.143.232])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: johnso87)
+	by usps.crhc.uiuc.edu (Postfix) with ESMTPSA id CF3BA340009F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Oct 2010 14:29:07 -0500 (CDT)
+Received: from 130.126.139.136 (SquirrelMail authenticated user johnso87)
+	by webmail.crhc.illinois.edu with HTTP;
+	Tue, 26 Oct 2010 14:29:07 -0500 (CDT)
+Message-ID: <a6650683ce91ecdc66f223e051f1fbd8.squirrel@webmail.crhc.illinois.edu>
+Date: Tue, 26 Oct 2010 14:29:07 -0500 (CDT)
+From: johnso87@crhc.illinois.edu
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+User-Agent: SquirrelMail/1.4.15
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+Importance: Normal
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 130.126.143.230
+X-SA-Exim-Mail-From: johnso87@crhc.illinois.edu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Our changes to the main OE tree (mostly network/snort related recipes)
+Subject: Linker problem with libfreetype.so when cross-compiling for armv7a from x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,78 +48,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 18:50:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 26 Oct 2010 19:39:00 -0000
+Content-Type: text/plain;charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 26, 2010 at 11:33 AM, Kelvie Wong <kwong@wurldtech.com> wrote:
-> If any of you are interested, we have published our additions to the
-> OpenEmbedded repository --
->
-> http://gitorious.org/~kelvie/oe/kelvies-oe/commits/upstream-base
->
-> There are a couple of bug fixes in there (with the kernel bbclass), and s=
-everal
-> new recipes:
->
-> - snort-2.9 and its dependencies, libdnet and daq
-> - A fix for the ARCH detection for the kernel bbclasses
-> - The latest kernel driver for the Intel e1000e PCI express ethernet giga=
-bit
-> driver
-> - The initramfs-udev module that I had posted earlier to the list and had=
-n't
-> been integrated yet.
->
-> These are based off of our branch which is 1.5 years old, so if anyone wa=
-nts to
-> integrate these, some porting is likely required (e.g. with the new check=
-sum
-> mechanism).
->
-> If anyone wants to try the latest and greatest Snort on their system, the=
-se
-> changes will be of interest :)
+Hi,
+    I tried to build the beagleboard-demo-image recipe from scratch on a
+64-bit machine running Ubuntu 10.04.  I already had 32- and 64-bit
+libfreetype.so installed (in /usr/lib and /usr/lib32) on the host.  I
+get an error when trying to compile clxclient, a child project of
+JAAA:
 
-Thanks for the work. However if you want to publish it for upstream
-integration, its
-better to be rebased on master. You being the most knowledgeable
-person on your patches is best
-fit to do that than one of the maintainers. That will make it more
-probable that someone
-will integrate them
+NOTE: Running task 5211 of 9419 (ID: 4930,
+/scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclien=
+t_3.6.1.bb,
+do_compile)
+NOTE: package clxclient-3.6.1-r1: task do_compile: Started
+ERROR: Function do_compile failed
+NOTE: Task failed: ('function do_compile failed',
+'/scr/johnso87/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-ang=
+strom-linux-gnueabi/clxclient-3.6.1-r1/temp/log.do_compile.5368')
+NOTE: oestats: task failed, see
+http://tinderbox.openembedded.net/public/logs/task/9211313.txt
+ERROR: Logfile of failure stored in:
+/scr/johnso87/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angs=
+trom-linux-gnueabi/clxclient-3.6.1-r1/temp/log.do_compile.5368
+Log data follows:
+| NOTE: make -j16
+| arm-angstrom-linux-gnueabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8
+-mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -shared -W=
+l,-O1
+-Wl,--hash-style=3Dgnu -L/usr/lib -L/usr/X11R6/lib `freetype-config --lib=
+s`
+-Wl,-soname,libclxclient.so.3 -o libclxclient.so.3.6.1 xdisplay.o
+xresman.o xhandler.o xwindow.o xdraw.o button.o textip.o enumip.o
+menuwin.o scale.o slider.o scroll.o mclist.o meter.o -lpthread -lXft -lX1=
+1
+| /usr/lib/libfreetype.so: file not recognized: File format not recognize=
+d
+| collect2: ld returned 1 exit status
+| make: *** [libclxclient.so.3.6.1] Error 1
+| FATAL: oe_runmake failed
+| ERROR: Function do_compile failed
+NOTE: package clxclient-3.6.1-r1: task do_compile: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclien=
+t_3.6.1.bb
+do_compile failed
+ERROR: Task 4930
+(/scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclie=
+nt_3.6.1.bb,
+do_compile) failed with 256
+ERROR:
+'/scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclie=
+nt_3.6.1.bb'
+failed
+NOTE: oestats: build failed, see
+http://tinderbox.openembedded.net/builds/99197/
+ERROR:
+'/scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclie=
+nt_3.6.1.bb'
+failed
 
->
-> --
-> Kelvie Wong
-> Software Developer
->
-> Wurldtech Security Technologies Inc.
-> Suite 1680 - 401 West Georgia St.
-> Vancouver, B.C. =C2=A0V6B 5A1
-> Canada
->
-> Phone: =C2=A0 =C2=A0 =C2=A0 + 1.604.669.6674
-> Toll Free: =C2=A0 + 1.877.369.6674
-> Fax: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 + 1.604.669.2902
-> Website: =C2=A0 =C2=A0http://www.wurldtech.com/
->
-> "ARE YOU ACHILLES CERTIFIED?"
->
-> This message is intended only for the named recipients. This message
-> may contain information that is privileged, confidential or exempt
-> from disclosure under applicable law. Any dissemination or copying
-> of this message by anyone other than a named recipient is strictly
-> prohibited. If you are not a named recipient or an employee or agent
-> responsible for delivering this message to a named recipient, please
-> notify us immediately by telephone at 604-669-6674, and permanently
-> destroy this message and any copies you may have. Email may not be
-> secure unless properly encrypted.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+I tried adding /usr/lib32 to the front of my LD_LIBRARY_PATH, and tried
+adding -L/usr/lib32 to the compile arguments by hacking my
+/usr/bin/freetype-config , but neither seemed to do anything.  It keeps
+finding the 64-bit version of libfreetype.so and puking.
+
+Any thoughts?
+
+I'm working from the HEAD of the master OE Git branch.
+
+Thanks,
+-Matt
+
+
+
+
 
 
