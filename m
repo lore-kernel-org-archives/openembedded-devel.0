@@ -1,48 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PAg11-00070v-UM
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PAgeX-00052y-Pi
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 11:40:24 +0200
-Received: by fxm3 with SMTP id 3so4128945fxm.6
+	Tue, 26 Oct 2010 12:21:15 +0200
+Received: by iwn42 with SMTP id 42so794017iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 02:39:41 -0700 (PDT)
+	Tue, 26 Oct 2010 03:20:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=gNikHKMs1A4DCLBG/uv+odzoCXVl7R/uEv94EB4heks=;
-	b=F0xc0CLpQKPg271wgkKEUzKZ9q+AmnvgHJLBVnhna7nlWL0sNkYJhMAHtniVUtsNXb
-	JNZHBAbUbAOUebdvMSpDyZj54w6biGw41zr1lF/Ae8EFTRQUFDu6xe68QNtjB13hVqAL
-	9EVbGVFXQPM+Zwzjm5dayyXBj8URQCD9hG09A=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=0o/fyGJLlXLXXTGLld5LEHvSU09xj4fV3PB02OuubVY=;
+	b=AD/wlfaA4z9o1ZoZ2RV4NeULq7hqg5xbUM3iuWWbsb2FlnZ6YOwaiFmDi/EROAkqtC
+	4MzifTnx10v2ieTLeAZyoxChgfkGa+oXmZ0+cz9ZH9DAdYwpRZMv4aRUV4byd33np+3E
+	JrrFBrBm+x20KUMTpr3W5VdO7jGtsBJ1H8njc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ZN4u/j/pftEmpBp38T1Mp/0Hdf6I3mGK0Qh9OiH6CxejYww43asqrGj/wfTSSFcCrC
-	+SwOOigquil6yD75qYBJD8CG5yB3GpKdbb3EHWGaFl0IQgv1atRCxCnQE8sDjwN9YGfC
-	6OfWt64vnX5ug/LwNvt7TPBzM+6AWOrq4NNqU=
-Received: by 10.103.251.20 with SMTP id d20mr9113592mus.105.1288085981507;
-	Tue, 26 Oct 2010 02:39:41 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id k4sm3418621faa.32.2010.10.26.02.39.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 26 Oct 2010 02:39:40 -0700 (PDT)
-Date: Tue, 26 Oct 2010 11:39:26 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101026093926.GC3514@jama>
-References: <AANLkTim-_z6a6jX3X9Zh_s-ihE-19SFFmus3U7MXVPfY@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=aKrOWea03qKzNWRNel+9Gtzkd6Q18Zw/XUomn/br5pYjMhgWycMNkyDGvQEVkPGrzJ
+	PUvcJ3NZsVV/Hz7sqkR7J1kTfhejhHgbuB8+lAU5LYI8IvUB2HqUYvXLJIlsUtV+tI6N
+	vcZnrJDz8dpN/fP2hH9xyle3CvyLHADAPn6Fs=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTim-_z6a6jX3X9Zh_s-ihE-19SFFmus3U7MXVPfY@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.145.16 with SMTP id b16mr7006192ibv.198.1288088428806;
+	Tue, 26 Oct 2010 03:20:28 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 26 Oct 2010 03:20:28 -0700 (PDT)
+In-Reply-To: <AANLkTimztx6DMH76DrzVaY6oXEb1GF2HA5Us5r+1aDVb@mail.gmail.com>
+References: <AANLkTimztx6DMH76DrzVaY6oXEb1GF2HA5Us5r+1aDVb@mail.gmail.com>
+Date: Tue, 26 Oct 2010 12:20:28 +0200
+Message-ID: <AANLkTik3PX27t5u7mhS=KRTCW4N44An5mJp+-gMZVVOw@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libgee introspection problem
+Subject: Re: testing branch 2010-10-25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,32 +51,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 09:40:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 26 Oct 2010 10:21:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Oct 26, 2010 at 11:16:46AM +0200, Frans Meulenbroeks wrote:
-> Hi,
-> 
-> With the testing branch I get a problem with libgee native in
-> combination with introspection.
-> I'm building distro minimal, target neek (but I doubt that the latter matters)
-> 
-> Anyone an idea?
+2010/10/25 Cliff Brake <cliff.brake@gmail.com>:
+> I apologize the testing-next branch did not get created last Thurs.
+> I'll try to create a cron job so this happens automatically in the
+> future.
+>
+> The master branch has been merged to testing-next branch, and
+> testing-next is ready for clean builds.
+>
+> Last testing cycle:
+> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-10-14
+>
+> For more information on the OE testing effort:
+> http://wiki.openembedded.org/index.php/Testing
+>
+> Thanks,
+> Cliff
+>
+> --
+> =================
+> http://bec-systems.com
 
-that should be fixed with
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=df932a2769c2f6f7195363e8eb83994846805398
+Not a very succesful branch yet:
 
-but that didn't make it to DEPENDS_virtclass-native (as well as
-glib-2.0), I'm checking why (reading native.bbclass looks like it 
-should be there automatically).
+minimal fails on libgee native (see my email titled libgee
+introspection problem).
+And slugos-image runs into an endless loop:
 
-if I don't find bug in native.bbclass I'll append it to
-DEPENDS_virtclass-native too
+ 5429 ?        S      0:00 python
+/home/hudson/jobs/FM_TEST/workspace/bitbake-1.10.0/bin/bitbake
+slugos-image
+ 5435 ?        S      0:00 sh -e
+/home/hudson/jobs/FM_TEST/workspace/tmp/work/armv5te-linux-gnueabi/e2fsprogs-1.41.9-r24/temp/run.do_install.5429
+ 5436 ?        S      0:00 make
+DESTDIR=/home/hudson/jobs/FM_TEST/workspace/tmp/work/armv5te-linux-gnueabi/e2fsprogs-1.41.9-r24/image
+install
+ 5901 ?        S      0:00 /bin/sh -c test -d doc && cd doc && make
+install-doc-libs
+ 5902 ?        S      0:00 make install-doc-libs
+ 5904 ?        S      0:00 /bin/sh /usr/bin/texi2dvi ./libext2fs.texinfo
+ 6021 ?        S      0:00 /bin/sh /usr/bin/texi2dvi ./libext2fs.texinfo
+ 6022 ?        D    301:18 etex txiversion.tex
 
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Frans.
 
 
