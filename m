@@ -1,44 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PAdBk-00044K-Ia
+	(envelope-from <andrea.adami@gmail.com>) id 1PAeId-0001vj-VE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 08:39:17 +0200
-Received: by iwn42 with SMTP id 42so578499iwn.6
+	Tue, 26 Oct 2010 09:50:29 +0200
+Received: by qwd6 with SMTP id 6so2276380qwd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 23:38:32 -0700 (PDT)
+	Tue, 26 Oct 2010 00:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=CmGsIRMPGsN0PrqrTu5mfT+5/a9eszYPCayP7XmWUBs=;
-	b=gsmVhGUB/2bqFKDr1Hvx0oUTZne3HGkRSS/ayk3WG5Gm4OQSNkxfCI7Waa/Bz+xnL/
-	S/cEO80grdBIryVqPCmATjG/eWzTHyRybDS7mpTtiDg2amTpTacwwRsnPv1itxO4c4Tq
-	ypokCLyxjlaLDSyBqueRof2UQOkVnAXoQfzig=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=z7B35uSQqvZmam/MzXSPEvXM8nTlAXBqcSq78RDgKdc=;
+	b=RJ8BAHO6Jk9NMQ7yuJN9vEYUna9O8teOvA3jaaJOzd49L2su2FLXkY3PJxBYO5jPJg
+	ejvXkL/FD1s67v3p29cbZXnFcndSTtb0v29lmWCp4UJWQP14wziL6nf6POHIMR3gxHWa
+	YacaNm2DC0S8UEjZr6ia+lkBo7KIVZm/1JzYg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=DCCKWKtcGEqhHgTRXdTsu+XHKVYDU4y8MggqThBboaaukBcKVWiNuon1gTDs+sau5g
-	HvW+VxSUwU17PVB9846p7EFaKKOJjivePxwM5FDVJ1FTebjYP88Xq2mps7g988CU7ZZL
-	kYH/L5daLlqsJE5HojqHcMmkhwzBIlNZGz4p0=
+	:content-type;
+	b=FPUOlXkqRdo0I+FBYoFY2cHsQ3QHJxkj3Gu2Pz2y7mZtuSBNzOTAlZENiylirdiMvR
+	+9duJv2NRLlRahlB1KpdFYgDaZeX8phrKeiIjD600X4VihCOlLjEyJUSeN3Vp1/LjH56
+	DYog0v30sdag98LkvXiSg/W2xYnLW1AEkvgK0=
 MIME-Version: 1.0
-Received: by 10.42.204.66 with SMTP id fl2mr1765642icb.280.1288075112303; Mon,
-	25 Oct 2010 23:38:32 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 25 Oct 2010 23:38:32 -0700 (PDT)
-In-Reply-To: <1288063685-10500-1-git-send-email-dbatzle@dcbcyber.com>
-References: <1288063685-10500-1-git-send-email-dbatzle@dcbcyber.com>
-Date: Tue, 26 Oct 2010 08:38:32 +0200
-Message-ID: <AANLkTimnXA+8fC0s213A1KdS9k-CLjwOd_bkz_Ba9ajw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.224.196.138 with SMTP id eg10mr1131489qab.80.1288079385921;
+	Tue, 26 Oct 2010 00:49:45 -0700 (PDT)
+Received: by 10.229.18.197 with HTTP; Tue, 26 Oct 2010 00:49:45 -0700 (PDT)
+In-Reply-To: <20100528052720.GA15949@gmail.com>
+References: <20100528052720.GA15949@gmail.com>
+Date: Tue, 26 Oct 2010 09:49:45 +0200
+Message-ID: <AANLkTi=wO9jS-U8GZtnpHwbmb9Kmw-TvJY975wq2hnu-@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL, BAYES_00, SPF_PASS,
+	URI_HEX autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] New recipe for Bullet Physics library
+Subject: Re: <package>-static name conflict with some recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,55 +51,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 06:39:18 -0000
+X-List-Received-Date: Tue, 26 Oct 2010 07:50:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/10/26 dbatzle <dbatzle@dcbcyber.com>:
-> Signed-off-by: dbatzle <dbatzle@dcbcyber.com>
-> ---
-> =A0recipes/bullet/bullet.bb | =A0 18 ++++++++++++++++++
-> =A01 files changed, 18 insertions(+), 0 deletions(-)
-> =A0create mode 100644 recipes/bullet/bullet.bb
+BUMP
+
+only a few recipes remaining.
+First question is, are those -static really needed? If so, then please
+propose a renaming.
+
+Regards
+
+Andrea
+
+On Fri, May 28, 2010 at 7:27 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi
 >
-> diff --git a/recipes/bullet/bullet.bb b/recipes/bullet/bullet.bb
-> new file mode 100644
-> index 0000000..d28734f
-> --- /dev/null
-> +++ b/recipes/bullet/bullet.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION =3D "Bullet Physics Library"
-> +LICENSE =3D "Zlib"
-> +
-> +PR =3D "r1"
-
-A recipe should start at r0.
-Can you also add HOMEPAGE (and maybe some more of the header fields)
-
-> +SRCREV=3D"2218"
-> +PV=3D"2.77+svnr${SRCPV}"
-> +
-> +#SRC_URI =3D "file:///home/David/gamestuff/bullet-2.75"
-
-suggest to remove the line above
-
-> +SRC_URI =3D "svn://bullet.googlecode.com/svn;module=3Dtrunk;proto=3Dhttp=
-"
-> +
-> +#If you want to build the demos you will have to have xlib and glut inst=
-alled.
-> +#Then set BUILD_DEMOS, BUILD_EXTRAS, and USE_GLUT to ON
-> +
-> +EXTRA_OECMAKE=3D"-DBUILD_DEMOS:BOOL=3DOFF -DBUILD_EXTRAS:BOOL=3DOFF -DUS=
-E_GLUT:BOOL=3DOFF -DBUILD_SHARED_LIBS:BOOL=3DON"
-> +
-> +inherit cmake
-> +
-> +S =3D "${WORKDIR}/trunk"
-> --
-> 1.6.0.6
+> I have seen that we have parallel recipes for some applications for static
+> build
+> called package-static.bb like below
 >
-
-Best regards, Frans
+> ./dialog/dialog-static_1.1-20080819.bb
+> ./busybox/busybox-static_1.2.1.bb
+> ./busybox/busybox-static_1.11.3.bb
+DONE > ./kexec-tools/kexec-tools-klibc-static_1.101.bb
+DONE> ./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
+DONE> ./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
+DONE> ./klibc/klibc-utils-static_1.5.15+1.5.16.bb
+DONE> ./klibc/klibc-utils-static_1.5.18.bb
+DONE> ./klibc/klibc-utils-static_1.5.15.bb
+DONE> ./klibc/klibc-utils-static_1.5.bb
+DONE> ./klibc/klibc-utils-static_1.5.17.bb
+> ./skype/skype-static_2.0.0.72.bb
+> ./udev/udev-static-devices.bb
+> ./udev/udev-static_124.bb
+>
+> Now they conflict with the automatic package that we generate to bundle
+> static libraries. Since the the packages which bundle static libraries
+> are essentially development packages may be they should be called
+>
+> <package>-dev-static instead of <package>-static
+>
+> IMO that will avoid the conflict and also clarify the package content
+> a bit
+>
+> Thoughts?
+>
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
