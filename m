@@ -1,29 +1,29 @@
 Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PAmI4-0002r5-Hg
+	(envelope-from <msmith@cbnco.com>) id 1PAmPE-0004RX-31
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 18:22:25 +0200
+	Tue, 26 Oct 2010 18:29:49 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 7D5148D88DA
+	by smtp.cbnco.com (Postfix) with ESMTP id 95F7D66C2F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 12:21:40 -0400 (EDT)
+	Tue, 26 Oct 2010 12:29:05 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 10445-09 for <openembedded-devel@lists.openembedded.org>; 
-	Tue, 26 Oct 2010 12:21:40 -0400 (EDT)
+	with ESMTP id 12157-04 for <openembedded-devel@lists.openembedded.org>; 
+	Tue, 26 Oct 2010 12:29:05 -0400 (EDT)
 Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 4B87A8D85E7
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 64AAC579CD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 12:21:40 -0400 (EDT)
-Message-ID: <4CC70013.2090004@cbnco.com>
-Date: Tue, 26 Oct 2010 12:21:39 -0400
+	Tue, 26 Oct 2010 12:29:05 -0400 (EDT)
+Message-ID: <4CC701D0.5070702@cbnco.com>
+Date: Tue, 26 Oct 2010 12:29:04 -0400
 From: Michael Smith <msmith@cbnco.com>
 User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CC6F440.10509@opendreambox.org>	<131E5DFBE7373E4C8D813795A6AA7F0803110B3CFC@dlee06.ent.ti.com>
-	<4CC6FDB2.6050401@opendreambox.org>
-In-Reply-To: <4CC6FDB2.6050401@opendreambox.org>
+References: <4CC6F440.10509@opendreambox.org>
+	<4CC6F818.5010105@opendreambox.org>
+In-Reply-To: <4CC6F818.5010105@opendreambox.org>
 X-Virus-Scanned: amavisd-new at cbnco.com
 X-SA-Exim-Connect-IP: 207.164.182.72
 X-SA-Exim-Mail-From: msmith@cbnco.com
@@ -47,29 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 16:22:25 -0000
+X-List-Received-Date: Tue, 26 Oct 2010 16:29:49 -0000
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Andreas Oberritter wrote:
-> On 10/26/2010 05:51 PM, Maupin, Chase wrote:
-
-> I understand that bash is a requirement for now, but if possible, that
-> should be changed. I don't think that root access to a machine should be
-> necessary to build OE on Ubuntu (or maybe even on BSD flavors).
-
-Well, maybe Ubuntu should be changed to use bash :)
-
->> If I remember correctly in bash "==" will also work with numbers whereas "=" is only for strings.
+> On 10/26/2010 05:31 PM, Andreas Oberritter wrote:
+>> How about splitting it into 5 patches?
+>>
+>> - classes (7 files)
+>> - contrib (4 files)
+>> - recipes/*/*.bb (24 files)
+>> - recipes/*/*.inc (14 files)
+>> - other files in recipes except recipes/obsolete (11 files)
 > 
-> Both bash and dash on my system handle "[ "0" = 0 ]" or [ "0" = 1 ]
-> correctly. Another operator "-eq" exists, which is only for numbers.
+> Or how about those 37 patches?
+> 
+> http://git.opendreambox.org/?p=obi/openembedded.git;a=shortlog;h=refs/heads/equality-operator
+> 
+> Rationale:
+> - bbclasses: 1 patch per file
+> - contrib and recipes: 1 patch per directory
 
- From what I can see, it looks like = and == are equivalent in bash, so 
-we should use = so we're not tied to bash.
+For the series:
 
--eq is for numeric comparison. For example, [ 01 -eq 1 ] but not
-[ "01" = "1" ].
+Acked-By: Michael Smith <msmith@cbnco.com>
+
+Except this one:
+
+http://git.opendreambox.org/?p=obi/openembedded.git;a=commitdiff;h=ad7b2c9ab0c305034c39d2efc5a52789965bb5c2
+
+where some lines had == twice, looks like your sed may not have caught it.
+
+
+
+BTW, some of the files have constructs like this:
+
+if [ "x$HAS_MADWIFI" = "x1" ]
+
+I think this "x" business is for old broken shells that can't handle an 
+empty quoted string as the first argument. Does anyone know the standard 
+well enough to say? I figure [ "" = "1" ] should be legal everywhere. 
+This is just a pet peeve/bike shed on my part.
 
 Mike
 
