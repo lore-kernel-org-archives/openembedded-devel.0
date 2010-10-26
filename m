@@ -1,33 +1,33 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PAd9t-0003Wl-By
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PAdBk-00044K-Ia
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 08:37:23 +0200
-Received: by iwn42 with SMTP id 42so577026iwn.6
+	Tue, 26 Oct 2010 08:39:17 +0200
+Received: by iwn42 with SMTP id 42so578499iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Oct 2010 23:36:39 -0700 (PDT)
+	Mon, 25 Oct 2010 23:38:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=XyB8EwsyE29isBAoGY1IJoyNHB2Emc1+VpwZqqhgDd4=;
-	b=eQvSSF9vTzZyzfRKxLrateYk2OkitCp8ygD19TtomLrjT1UjOzTeWt/8vpkCCUfWO+
-	Phv4S+k1lINGbX0JzpOw1wYbaEM6XCenva/zpEHrlO9SGLV2XJRhPdVqQHbS2HIcZkLu
-	KbTQdvCIVNOD362ttuiKiQcZfUEFf5OxEbrfU=
+	bh=CmGsIRMPGsN0PrqrTu5mfT+5/a9eszYPCayP7XmWUBs=;
+	b=gsmVhGUB/2bqFKDr1Hvx0oUTZne3HGkRSS/ayk3WG5Gm4OQSNkxfCI7Waa/Bz+xnL/
+	S/cEO80grdBIryVqPCmATjG/eWzTHyRybDS7mpTtiDg2amTpTacwwRsnPv1itxO4c4Tq
+	ypokCLyxjlaLDSyBqueRof2UQOkVnAXoQfzig=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=laU0NuRqTTTRw4dgjubv+7NcyWn59LrNpZA//COWHwfxAZL4zk9OgTqPsjwfn88x70
-	JA/t9apVFAsoxs2jP7XsVDYJJe9r0lvWriSsdJEexqhqGD8ZGqgN4/TXZ/VQItYsMW1Y
-	9CYyspkuv3uJSR6IjQ37CCk+CHXV8ybklHYME=
+	b=DCCKWKtcGEqhHgTRXdTsu+XHKVYDU4y8MggqThBboaaukBcKVWiNuon1gTDs+sau5g
+	HvW+VxSUwU17PVB9846p7EFaKKOJjivePxwM5FDVJ1FTebjYP88Xq2mps7g988CU7ZZL
+	kYH/L5daLlqsJE5HojqHcMmkhwzBIlNZGz4p0=
 MIME-Version: 1.0
-Received: by 10.231.33.132 with SMTP id h4mr6759363ibd.150.1288074999371; Mon,
-	25 Oct 2010 23:36:39 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 25 Oct 2010 23:36:39 -0700 (PDT)
-In-Reply-To: <4CC61633.3080808@gmail.com>
-References: <4CC61633.3080808@gmail.com>
-Date: Tue, 26 Oct 2010 08:36:39 +0200
-Message-ID: <AANLkTikkXFLFr0iTWTmxzF6iUM9RMmfvQppxvptuNyLG@mail.gmail.com>
+Received: by 10.42.204.66 with SMTP id fl2mr1765642icb.280.1288075112303; Mon,
+	25 Oct 2010 23:38:32 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 25 Oct 2010 23:38:32 -0700 (PDT)
+In-Reply-To: <1288063685-10500-1-git-send-email-dbatzle@dcbcyber.com>
+References: <1288063685-10500-1-git-send-email-dbatzle@dcbcyber.com>
+Date: Tue, 26 Oct 2010 08:38:32 +0200
+Message-ID: <AANLkTimnXA+8fC0s213A1KdS9k-CLjwOd_bkz_Ba9ajw@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] espgs_8.15.3.bb: Depend on cups as EXTRA_OECONF has --enable-cups.
+Subject: Re: [PATCH] New recipe for Bullet Physics library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,45 +52,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 06:37:26 -0000
+X-List-Received-Date: Tue, 26 Oct 2010 06:39:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/10/26 Graham Gower <graham.gower@gmail.com>:
->
-> pstoraster/gdevcups.c:74:25: fatal error: cups/raster.h: No such file or =
-directory
->
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+2010/10/26 dbatzle <dbatzle@dcbcyber.com>:
+> Signed-off-by: dbatzle <dbatzle@dcbcyber.com>
 > ---
-> =A0recipes/espgs/espgs_8.15.3.bb | =A0 =A02 +-
-> =A01 files changed, 1 insertions(+), 1 deletions(-)
+> =A0recipes/bullet/bullet.bb | =A0 18 ++++++++++++++++++
+> =A01 files changed, 18 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/bullet/bullet.bb
 >
-> diff --git a/recipes/espgs/espgs_8.15.3.bb b/recipes/espgs/espgs_8.15.3.b=
-b
-> index ba03f00..c2349e0 100644
-> --- a/recipes/espgs/espgs_8.15.3.bb
-> +++ b/recipes/espgs/espgs_8.15.3.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "ESP Ghostscript is an up-to-date GNU Gho=
-stscript distribution \
-> =A0including bug fixes, new drivers, and additional support for CUPS."
-> =A0HOMEPAGE =3D "http://www.cups.org/espgs/"
-> =A0SECTION =3D "libs"
-> -DEPENDS =3D "jpeg zlib libpng tiff fontconfig"
-> +DEPENDS =3D "jpeg zlib libpng tiff fontconfig cups"
-> =A0LICENSE =3D "GPL"
-> =A0PR =3D "r1"
->
+> diff --git a/recipes/bullet/bullet.bb b/recipes/bullet/bullet.bb
+> new file mode 100644
+> index 0000000..d28734f
+> --- /dev/null
+> +++ b/recipes/bullet/bullet.bb
+> @@ -0,0 +1,18 @@
+> +DESCRIPTION =3D "Bullet Physics Library"
+> +LICENSE =3D "Zlib"
+> +
+> +PR =3D "r1"
+
+A recipe should start at r0.
+Can you also add HOMEPAGE (and maybe some more of the header fields)
+
+> +SRCREV=3D"2218"
+> +PV=3D"2.77+svnr${SRCPV}"
+> +
+> +#SRC_URI =3D "file:///home/David/gamestuff/bullet-2.75"
+
+suggest to remove the line above
+
+> +SRC_URI =3D "svn://bullet.googlecode.com/svn;module=3Dtrunk;proto=3Dhttp=
+"
+> +
+> +#If you want to build the demos you will have to have xlib and glut inst=
+alled.
+> +#Then set BUILD_DEMOS, BUILD_EXTRAS, and USE_GLUT to ON
+> +
+> +EXTRA_OECMAKE=3D"-DBUILD_DEMOS:BOOL=3DOFF -DBUILD_EXTRAS:BOOL=3DOFF -DUS=
+E_GLUT:BOOL=3DOFF -DBUILD_SHARED_LIBS:BOOL=3DON"
+> +
+> +inherit cmake
+> +
+> +S =3D "${WORKDIR}/trunk"
+> --
+> 1.6.0.6
 >
 
-Three small remarks:
-- not sure if changes like this require a PR bump. I always choose the
-the safe way and bump when in doubt.
-- it would be nice if, when you are fixing a recipe you would also
-improve the LICENSE =3D "GPL" thing
-- and there is also a 7.07.1 recipe. Should this apply to this version
-as well (or alternately should we remove that recipe?)
-
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Best regards, Frans
 
 
