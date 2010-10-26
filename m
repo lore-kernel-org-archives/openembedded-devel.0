@@ -1,45 +1,47 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1PAloT-0004iM-K3
+	(envelope-from <kergoth@gmail.com>) id 1PAm1D-0005Mh-AV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 17:51:51 +0200
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id o9QFp6oA026021
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Tue, 26 Oct 2010 18:05:01 +0200
+Received: by gyg13 with SMTP id 13so3058627gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 10:51:06 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o9QFp6wJ020244
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 10:51:06 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o9QFp65g005716
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 10:51:06 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Tue, 26 Oct 2010 10:51:05 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Oct 2010 10:51:04 -0500
-Thread-Topic: [oe] Use of == in shell scripts
-Thread-Index: Act1Iwjj4Saa47wmS/qpkOFDYvw2DQAAgZkw
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0803110B3CFC@dlee06.ent.ti.com>
-References: <4CC6F440.10509@opendreambox.org>
-In-Reply-To: <4CC6F440.10509@opendreambox.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Tue, 26 Oct 2010 09:04:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=hBHEBLwH2+D7LRNv62ECgHFxfxEyOrHysPo74xpl7uI=;
+	b=dfW+kt4oDE8Ms9q7Zwjyf6MlwbaEHK3h4puOdEpl7wSjmbQugPZg1ta4XyPPvacvSZ
+	K6pMFGkDGratCgwNmMfOiSM7tjQ7qNZNxl0uxrldHRmfOyLhl0cnr40+jxxyLls99gCL
+	7N2SRwuv2a53I+k2uQswGOzmHyS8RkKeBp5+w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=Kwql7U4DTs3dD0/axh2L7Dw2ZdCpHigryb+sgSyvHAckq7BPcoc0eqxjpHYYvULyxT
+	07xjzu5t0M9vjeCHyA8IMA5lBWRw5pao8zT9ss+FhNrJKWwGYaFUUNh2LaYWtyCaSAnx
+	mshyInnFoMQJCXzTwD7emER56v4fTv/VIytwA=
+Received: by 10.216.55.208 with SMTP id k58mr7776248wec.90.1288109056025; Tue,
+	26 Oct 2010 09:04:16 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.41
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Sender: kergoth@gmail.com
+Received: by 10.216.0.139 with HTTP; Tue, 26 Oct 2010 09:03:55 -0700 (PDT)
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F0803110B3CFC@dlee06.ent.ti.com>
+References: <4CC6F440.10509@opendreambox.org>
+	<131E5DFBE7373E4C8D813795A6AA7F0803110B3CFC@dlee06.ent.ti.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 26 Oct 2010 09:03:55 -0700
+X-Google-Sender-Auth: mW6Y2ijhDKZDLsEywS4bEEv3TcM
+Message-ID: <AANLkTi=Nq0nGQ7gS_5b0fTUEP344Xk-4UnZn-qTPN4BT@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Use of == in shell scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -54,65 +56,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 15:51:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 26 Oct 2010 16:05:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Andreas Oberritter
-> Sent: Tuesday, October 26, 2010 10:31 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] Use of =3D=3D in shell scripts
->=20
-> Dear all,
->=20
-> I noticed a common mistake in various OE recipes, classes and contrib
-> scripts: Instead of =3D, =3D=3D is used as equality operator, in at least=
- 91
-> places in 64 files (without recipes/obsolete: 83 in 60 files). This
-> isn't a problem with bash, but it isn't the standard syntax and at least
-> dash does not support it.
+On Tue, Oct 26, 2010 at 8:51 AM, Maupin, Chase <chase.maupin@ti.com> wrote:
 
-Isn't bash the supported shell?  If I remember correctly in bash "=3D=3D" w=
-ill also work with numbers whereas "=3D" is only for strings.
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org
+> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> > Andreas Oberritter
+> > Sent: Tuesday, October 26, 2010 10:31 AM
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] Use of == in shell scripts
+> >
+> > Dear all,
+> >
+> > I noticed a common mistake in various OE recipes, classes and contrib
+> > scripts: Instead of =, == is used as equality operator, in at least 91
+> > places in 64 files (without recipes/obsolete: 83 in 60 files). This
+> > isn't a problem with bash, but it isn't the standard syntax and at least
+> > dash does not support it.
+>
+> Isn't bash the supported shell?  If I remember correctly in bash "==" will
+> also work with numbers whereas "=" is only for strings.
 
->=20
-> I used the following command line to find the occurences:
->=20
-> git grep 'if\s*\[.*=3D=3D.*\]'
->=20
-> This command fixes all occurences:
->=20
-> for i in `git grep -l 'if\s*\[.*=3D=3D.*\]'`; do
-> 	sed -i $i -e 's,\(if\s*\[.*\)=3D=3D\(.*\]\),\1=3D\2,';
-> done
->=20
-> One of the matches is a false positive:
-> recipes/uclibc/uclibc-0.9.29/uClibc-0.9.29-nonposix_bashisms.patch
->=20
-> How do I submit such a patch? 60 patches may be too much for such a
-> relatively simple change, but, on the other hand, everything in a single
-> patch may be unhandy as well.
->=20
-> How about splitting it into 5 patches?
->=20
-> - classes (7 files)
-> - contrib (4 files)
-> - recipes/*/*.bb (24 files)
-> - recipes/*/*.inc (14 files)
-> - other files in recipes except recipes/obsolete (11 files)
->=20
-> Any opinions?
->=20
-> Regards,
-> Andreas
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+For now, it's required, but not by our choice.  We were forced to it due to
+portability issues with scripts in the buildsystems of things we build.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
