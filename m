@@ -1,45 +1,44 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PAfOy-0002zf-BH
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PAfZz-0003CV-3H
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 11:01:06 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o9Q90JTW018253
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Tue, 26 Oct 2010 11:12:27 +0200
+Received: by iwn42 with SMTP id 42so728001iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 11:00:20 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1PAfPE-0001IF-U8
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 11:01:20 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <4CC14738.9070309@nedap.com>
-	<lyfwvvaftm.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<AANLkTinMHO=XRv=EDuVVmLcfjJoLETgW8rv96jEus_YE@mail.gmail.com>
-	<lyd3qy5ysk.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<AANLkTi=aXZP1fhpW4Cj9yQLgbzhzKt9wwiac2_hJdvyO@mail.gmail.com>
-Date: Tue, 26 Oct 2010 11:01:20 +0200
-In-Reply-To: <AANLkTi=aXZP1fhpW4Cj9yQLgbzhzKt9wwiac2_hJdvyO@mail.gmail.com>
-	(Khem Raj's message of "Mon, 25 Oct 2010 10:49:48 -0700")
-Message-ID: <lyy69l5nvj.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Tue, 26 Oct 2010 02:11:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=l7Bu4cd70/yn7rM7V1a9vrX9uwHjvuiPMNjDzx1kL84=;
+	b=wBEScz0siM2ujMlqL0y1nZ4nA4wYlHF1bynAIlX8Omee+kxmAC6QcK0g70RhPYjRTT
+	yXwLzdf7TyoAC6lmAWAzE/HkFNPvkZS/s5cbxIQaXiGa26yYnt5RWu8/KNZzkWAMLVuZ
+	2G/vb4DS50v7qP31BctJncf1Zd1x3/NH0VMMM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=kV4gOihSbgD+Kwv0nxMghLE4viRc5YnzH2whUrLt1CXmNgfRoduEW1iFOd6xPkJOpc
+	bjGTFvGzoDbf7gHShHAydscapP+VUKthXYEZr2D6DyFj7h0SeM3SV+EfmCilBnYrksTJ
+	zZryNzUOpRy1fCkK7Q5akiJLE57C5L8n9LGu4=
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 1
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+Received: by 10.231.35.194 with SMTP id q2mr6745185ibd.26.1288084277331; Tue,
+	26 Oct 2010 02:11:17 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 26 Oct 2010 02:11:17 -0700 (PDT)
+In-Reply-To: <AANLkTi=wO9jS-U8GZtnpHwbmb9Kmw-TvJY975wq2hnu-@mail.gmail.com>
+References: <20100528052720.GA15949@gmail.com>
+	<AANLkTi=wO9jS-U8GZtnpHwbmb9Kmw-TvJY975wq2hnu-@mail.gmail.com>
+Date: Tue, 26 Oct 2010 11:11:17 +0200
+Message-ID: <AANLkTinpze=4g7akMHofNEYX7wk9qfofyHJooNQ0cfHU@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL, BAYES_00, SPF_PASS,
+	URI_HEX autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cacaoh: patches to get do_install do its work
+Subject: Re: <package>-static name conflict with some recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,45 +52,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 09:01:06 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 26 Oct 2010 09:12:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Khem Raj <raj.khem@gmail.com> writes:
-
->>>>> -    install -m 0755 src/cacaoh/.libs/cacaoh ${STAGING_BINDIR}/cacaoh-cldc-${PV}
->>>>> +    install -m 0755 src/cacaoh/cacaoh ${STAGING_BINDIR}/cacaoh-cldc-${PV}
->>
->> * libtool creates sometimes a wrapper script for executables (e.g. when
->>   they are linked against local libraries) and places the real executable
->>   in .libs/.  Manually installing one of them is error prone and it might
->>   break with other linker flags or libtool versions.
+2010/10/26 Andrea Adami <andrea.adami@gmail.com>:
+> BUMP
 >
-> the binary in .libs do not exist so the link is final in this case.
+> only a few recipes remaining.
+> First question is, are those -static really needed? If so, then please
+> propose a renaming.
+>
+> Regards
+>
+> Andrea
+>
+> On Fri, May 28, 2010 at 7:27 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> Hi
+>>
+>> I have seen that we have parallel recipes for some applications for static
+>> build
+>> called package-static.bb like below
+>>
+>> ./dialog/dialog-static_1.1-20080819.bb
+>> ./busybox/busybox-static_1.2.1.bb
+>> ./busybox/busybox-static_1.11.3.bb
+> DONE > ./kexec-tools/kexec-tools-klibc-static_1.101.bb
+> DONE> ./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
+> DONE> ./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
+> DONE> ./klibc/klibc-utils-static_1.5.15+1.5.16.bb
+> DONE> ./klibc/klibc-utils-static_1.5.18.bb
+> DONE> ./klibc/klibc-utils-static_1.5.15.bb
+> DONE> ./klibc/klibc-utils-static_1.5.bb
+> DONE> ./klibc/klibc-utils-static_1.5.17.bb
+>> ./skype/skype-static_2.0.0.72.bb
+>> ./udev/udev-static-devices.bb
+>> ./udev/udev-static_124.bb
+>>
+>> Now they conflict with the automatic package that we generate to bundle
+>> static libraries. Since the the packages which bundle static libraries
+>> are essentially development packages may be they should be called
+>>
+>> <package>-dev-static instead of <package>-static
+>>
+>> IMO that will avoid the conflict and also clarify the package content
+>> a bit
+>>
+>> Thoughts?
+>>
+>> -Khem
+>>
 
-Really?  The author of the original recipe had an environment where the
-executable was in .libs/.  Are you really sure that such an environment
-does not exist anymore? Or will the recipe now silently fail by installing
-the shell wrapper sometimes?
+I'm inclined to go to -dev-static for generated packages, so we can
+have -static recipes.
+One of the things still on my to do list is creating a static image
+(to see if it saves space).
 
-
-> but in any case If you can come up with a patch to install it using
-> libtool that would be nice.
-
-Sorry; providing a patch means testing it (regardless whether it is
-trivial).  Here, I am not sure whether 'libtool' or the platform
-prefixed '<arch>-libtool' is required and how to express
-'<arch>-libtool' in oe.
-
-I gave my comment to a patch which fixed a broken recipe by replacing it
-with another broken recipe.  So I expect that the author of this patch
-fixes and tests his work.
-
-For completeness; install command should be
-
-| libtool --mode=install install -m 0755 src/cacaoh/cacaoh ${STAGING_BINDIR}/cacaoh-cldc-${PV}
-
-
-
-Enrico
+Frans
 
 
