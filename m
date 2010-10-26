@@ -1,43 +1,45 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PAeId-0001vj-VE
+	(envelope-from <andrea.adami@gmail.com>) id 1PAeQv-0006OP-Rd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 09:50:29 +0200
-Received: by qwd6 with SMTP id 6so2276380qwd.6
+	Tue, 26 Oct 2010 09:59:04 +0200
+Received: by qyk33 with SMTP id 33so2208005qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 00:49:45 -0700 (PDT)
+	Tue, 26 Oct 2010 00:58:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=z7B35uSQqvZmam/MzXSPEvXM8nTlAXBqcSq78RDgKdc=;
-	b=RJ8BAHO6Jk9NMQ7yuJN9vEYUna9O8teOvA3jaaJOzd49L2su2FLXkY3PJxBYO5jPJg
-	ejvXkL/FD1s67v3p29cbZXnFcndSTtb0v29lmWCp4UJWQP14wziL6nf6POHIMR3gxHWa
-	YacaNm2DC0S8UEjZr6ia+lkBo7KIVZm/1JzYg=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=6v42P5rXbGhRbvwYBbHtDIRJTemjNdYS9qYa+AHdse4=;
+	b=HOKoHHrRPzoM9eQGt8i3wsD84WConKGYeOvUJa3V6FD9YmKdz+Ow58LF0YMIBjlUT4
+	R+tJUW27LLfEGQ7GRj/zFRGDT2l3DpjvYdG2e/QiJDOUyTN6QrKh1U1VT1UiptCEXxBL
+	COeQb6tzYsBd9PERn4hAqICfq1nz28UQk+qE0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=FPUOlXkqRdo0I+FBYoFY2cHsQ3QHJxkj3Gu2Pz2y7mZtuSBNzOTAlZENiylirdiMvR
-	+9duJv2NRLlRahlB1KpdFYgDaZeX8phrKeiIjD600X4VihCOlLjEyJUSeN3Vp1/LjH56
-	DYog0v30sdag98LkvXiSg/W2xYnLW1AEkvgK0=
+	:content-type:content-transfer-encoding;
+	b=pYCZT6izXMi8E5wiU53VA6JdlaVqX5bqIeCAFxIIM6ae2rOryXbb/VvVj1sGsJmT0Q
+	CyzuDxUk1UXZGjXVm4fez8/smuEZVtJ2Sd5f9pUJIONp992DXrTCfvAm5W5xBwgzt/nQ
+	CFTdg31WNW5Lm2H1B2I3WVkAmUSM0j3ex3k6U=
 MIME-Version: 1.0
-Received: by 10.224.196.138 with SMTP id eg10mr1131489qab.80.1288079385921;
-	Tue, 26 Oct 2010 00:49:45 -0700 (PDT)
-Received: by 10.229.18.197 with HTTP; Tue, 26 Oct 2010 00:49:45 -0700 (PDT)
-In-Reply-To: <20100528052720.GA15949@gmail.com>
-References: <20100528052720.GA15949@gmail.com>
-Date: Tue, 26 Oct 2010 09:49:45 +0200
-Message-ID: <AANLkTi=wO9jS-U8GZtnpHwbmb9Kmw-TvJY975wq2hnu-@mail.gmail.com>
+Received: by 10.224.188.203 with SMTP id db11mr1186799qab.292.1288079899278;
+	Tue, 26 Oct 2010 00:58:19 -0700 (PDT)
+Received: by 10.229.18.197 with HTTP; Tue, 26 Oct 2010 00:58:19 -0700 (PDT)
+In-Reply-To: <4CC500A2.7020702@gmail.com>
+References: <AANLkTinXYcNN=iozP-aXPDuFzQqM13KDf5my1W6DTap6@mail.gmail.com>
+	<4CC500A2.7020702@gmail.com>
+Date: Tue, 26 Oct 2010 09:58:19 +0200
+Message-ID: <AANLkTikzjkHxbXd3iCBny0yoNPBVTH4_LyhuYfSpg-SV@mail.gmail.com>
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Connect-IP: 209.85.216.182
 X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL, BAYES_00, SPF_PASS,
-	URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: <package>-static name conflict with some recipes
+Subject: Re: Race issues (lzma-native)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,53 +53,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 07:50:29 -0000
+X-List-Received-Date: Tue, 26 Oct 2010 07:59:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-BUMP
+Just to add this time the race appears building on Ubuntu 10.4 32bit.
+Last race-case (gtk+-native) was only on Gentoo and not on Ubuntu...
 
-only a few recipes remaining.
-First question is, are those -static really needed? If so, then please
-propose a renaming.
+Both distros are on the same Quad host and share  an EXT3 OpenEmbedded
+partition, though.
 
-Regards
+PARALLEL_MAKE =3D "-j5"
+BB_NUMBER_THREADS =3D "4"
+
+
+Perplexed...
 
 Andrea
 
-On Fri, May 28, 2010 at 7:27 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Hi
+On Mon, Oct 25, 2010 at 5:59 AM, Graham Gower <graham.gower@gmail.com> wrot=
+e:
+> On 10/24/2010 07:29 PM, Andrea Adami wrote:
+>> Hello,
+>>
+>> during first build of console image I notice a strange fault:
+>> subsequent builds are ok.
+>> My scripts builds console-image and opie-image.
+>>
+>> ERROR: Task 2411
+>> (virtual:native:/oe/openembedded/recipes/lzma/lzma_4.65.bb,
+>> do_distribute_sources) failed with exit code '1'
+>> NOTE: Unpacking ../sources/lzma465.tar.bz2 to
+>> tmp/work/i686-linux/lzma-native-4.65-r4.1/
+>> NOTE: package lzma-native-4.65-r4.1: task do_distribute_sources: Started
+>> NOTE: package lzma-native-4.65-r4.1: task SRC_DISTRIBUTECOMMAND: Failed
+>> ERROR: Function 'SRC_DISTRIBUTECOMMAND' failed
+>>
+>>
+>> Looking at the
+>> run.SRC_DISTRIBUTECOMMAND.18268 =A0 16384 (failing)
+>> run.SRC_DISTRIBUTECOMMAND.9570 =A0 =A0 34334
+>>
+>> it looks like the file is not complete / malformed:
+>>
+>> package_generate_ipkg_conf() {
+>> <------>mkdir -p /oe/build/tmp/sysroots/i686-linux/etc/
+>> <------>echo "src oe file:/oe/build/tmp/deploy/glibc/ipk" >
+>> /oe/build/tmp/sysroots/i686-linux/etc/opkg.conf
+>> <------>echo "src oe file:/
+>> EOF
+>>
+>> run.do_distribute_sources.18268 =A0is empty, while second time
+>> run.do_distribute_sources.9570 =A0 1051 contains =A0def do_distribute_so=
+urces(d):
+>>
+>> This seems indeed a race issue...
+>>
+>> Andrea
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> I have seen that we have parallel recipes for some applications for static
-> build
-> called package-static.bb like below
+> I can reproduce this one quite easily. Reverting a6a23f73 seems to make i=
+t
+> disappear. Alternately the change below works, but I'm not convinced this=
+ is
+> the right fix.
 >
-> ./dialog/dialog-static_1.1-20080819.bb
-> ./busybox/busybox-static_1.2.1.bb
-> ./busybox/busybox-static_1.11.3.bb
-DONE > ./kexec-tools/kexec-tools-klibc-static_1.101.bb
-DONE> ./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
-DONE> ./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
-DONE> ./klibc/klibc-utils-static_1.5.15+1.5.16.bb
-DONE> ./klibc/klibc-utils-static_1.5.18.bb
-DONE> ./klibc/klibc-utils-static_1.5.15.bb
-DONE> ./klibc/klibc-utils-static_1.5.bb
-DONE> ./klibc/klibc-utils-static_1.5.17.bb
-> ./skype/skype-static_2.0.0.72.bb
-> ./udev/udev-static-devices.bb
-> ./udev/udev-static_124.bb
+> Can someone with greater insight explain what causes this race?
 >
-> Now they conflict with the automatic package that we generate to bundle
-> static libraries. Since the the packages which bundle static libraries
-> are essentially development packages may be they should be called
+> -Graham
 >
-> <package>-dev-static instead of <package>-static
 >
-> IMO that will avoid the conflict and also clarify the package content
-> a bit
+> diff --git a/classes/src_distribute.bbclass b/classes/src_distribute.bbcl=
+ass
+> index 795a5cf..98d8d88 100644
+> --- a/classes/src_distribute.bbclass
+> +++ b/classes/src_distribute.bbclass
+> @@ -1,7 +1,7 @@
+> =A0SRC_DISTRIBUTE_DLONLY ?=3D "0"
+> =A0SRC_DISTRIBUTECOMMAND[func] =3D "1"
 >
-> Thoughts?
+> -addtask distribute_sources before do_build after do_fetch
+> +addtask distribute_sources before do_build after do_unpack
+> =A0python do_distribute_sources () {
+> =A0 =A0 =A0 =A0bb.build.exec_func("do_fetch", d)
 >
-> -Khem
 >
 > _______________________________________________
 > Openembedded-devel mailing list
