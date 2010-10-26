@@ -1,30 +1,44 @@
-Received: from smtpauth04.prod.mesa1.secureserver.net ([64.202.165.95])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <dbatzle@dcbcyber.com>) id 1PArTh-0004PR-9Q
+Received: from mail.multimedia-labs.de ([82.149.226.172])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <obi@opendreambox.org>) id 1PAt4v-0006Xo-WA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 23:54:46 +0200
-Received: (qmail 31535 invoked from network); 26 Oct 2010 21:47:20 -0000
-Received: from unknown (75.182.70.212)
-	by smtpauth04.prod.mesa1.secureserver.net (64.202.165.95) with ESMTP;
-	26 Oct 2010 21:47:20 -0000
-From: David <dbatzle@dcbcyber.com>
+	Wed, 27 Oct 2010 01:37:18 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 64E99314A2E2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Oct 2010 01:36:32 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id w1Xut8TGQMFo
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Oct 2010 01:36:26 +0200 (CEST)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id E0B41314A272
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Oct 2010 01:36:25 +0200 (CEST)
+Message-ID: <4CC765F9.4090005@opendreambox.org>
+Date: Wed, 27 Oct 2010 01:36:25 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.14) Gecko/20101006 Thunderbird/3.0.9
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=W1g++5vP22Zeu+XGEsMqhk5Sr38sA88YZDcjw@mail.gmail.com>
-References: <1288124872-18813-1-git-send-email-dbatzle@dcbcyber.com>
-	<AANLkTi=W1g++5vP22Zeu+XGEsMqhk5Sr38sA88YZDcjw@mail.gmail.com>
-Date: Tue, 26 Oct 2010 17:48:08 -0400
-Message-Id: <1288129688.19076.2.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.5 (2.24.5-2.fc10) 
-X-SA-Exim-Connect-IP: 64.202.165.95
-X-SA-Exim-Mail-From: dbatzle@dcbcyber.com
+References: <4CC6F440.10509@opendreambox.org>	<4CC6F818.5010105@opendreambox.org>
+	<4CC701D0.5070702@cbnco.com>
+In-Reply-To: <4CC701D0.5070702@cbnco.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] bullet.bb New recipe
+Subject: Re: Use of == in shell scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,73 +52,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 21:54:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 26 Oct 2010 23:37:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-10-26 at 14:30 -0700, Khem Raj wrote:
-> On Tue, Oct 26, 2010 at 1:27 PM, David Batzle <dbatzle@dcbcyber.com> wrote:
-> > ---
-> >  recipes/bullet/bullet.bb |   14 ++++++++++++++
-> >  1 files changed, 14 insertions(+), 0 deletions(-)
-> >  create mode 100644 recipes/bullet/bullet.bb
-> >
-> > diff --git a/recipes/bullet/bullet.bb b/recipes/bullet/bullet.bb
-> > new file mode 100644
-> > index 0000000..c466e7a
-> > --- /dev/null
-> > +++ b/recipes/bullet/bullet.bb
-> > @@ -0,0 +1,14 @@
-> > +DESCRIPTION = "Bullet Physics Library"
-> > +HOMEPAGE = "www.bulletphysics.org"
-> > +LICENSE = "Zlib"
+On 10/26/2010 06:29 PM, Michael Smith wrote:
+> Andreas Oberritter wrote:
+>> On 10/26/2010 05:31 PM, Andreas Oberritter wrote:
+>>> How about splitting it into 5 patches?
+>>>
+>>> - classes (7 files)
+>>> - contrib (4 files)
+>>> - recipes/*/*.bb (24 files)
+>>> - recipes/*/*.inc (14 files)
+>>> - other files in recipes except recipes/obsolete (11 files)
+>>
+>> Or how about those 37 patches?
+>>
+>> http://git.opendreambox.org/?p=obi/openembedded.git;a=shortlog;h=refs/heads/equality-operator
+>>
+>>
+>> Rationale:
+>> - bbclasses: 1 patch per file
+>> - contrib and recipes: 1 patch per directory
 > 
-> if you look closely under the sources different parts are licensed
-> under different licenses
-> while you are at it could you mention all the licenses that the
-> package is using.
+> For the series:
 > 
-> Otherwise it look ok.
+> Acked-By: Michael Smith <msmith@cbnco.com>
+> 
+> Except this one:
+> 
+> http://git.opendreambox.org/?p=obi/openembedded.git;a=commitdiff;h=ad7b2c9ab0c305034c39d2efc5a52789965bb5c2
+> 
+> 
+> where some lines had == twice, looks like your sed may not have caught it.
 
-Some of these parts have license text instead of a license type. What
-is the correct way to handle these?
+Thanks for spotting! I've updated the patch series and added your ack.
 
-Is it appropriate to have more than one LICENSE= line if I want to try
-organize the listing?
+> BTW, some of the files have constructs like this:
 > 
-> > +PV = "2.77+svnr${SRCPV}"
-> > +PR = "r0"
+> if [ "x$HAS_MADWIFI" = "x1" ]
 > 
-> you could omit PR setting when its r0 i.e. initial first rev because
-> bitbake will set it to r0
-> if it does not find a PR definition but then if some fix it done later
-> then it has to be bumped
-> to r1 then one has to add that in recipe but its ok to set it to r0 as
-> well its just FYI
-> 
-> > +
-> > +SRC_URI = "svn://bullet.googlecode.com/svn;module=trunk;proto=http"
-> > +
-> > +SRCREV = "2218"
-> > +S = "${WORKDIR}/trunk"
-> > +
-> > +inherit cmake
-> > +
-> > +EXTRA_OECMAKE = "-DBUILD_DEMOS:BOOL=OFF -DBUILD_EXTRAS:BOOL=OFF -DUSE_GLUT:BOOL=OFF -DBUILD_SHARED_LIBS:BOOL=ON"
-> > --
-> > 1.6.0.6
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> I think this "x" business is for old broken shells that can't handle an
+> empty quoted string as the first argument. Does anyone know the standard
+> well enough to say? I figure [ "" = "1" ] should be legal everywhere.
+> This is just a pet peeve/bike shed on my part.
 
+Autotools use constructs like that everywhere, so it's likely increasing
+portability while decreasing readability.
+
+A random forum post suggests that some versions of '[' have problems, if
+the first operand equals '!' or '(' [1].
+
+It's not easy to search for [ or test or x on google. ;-)
+
+Regards,
+Andreas
+
+[1]
+http://www.techtalkz.com/unix/78138-testing-equality-bash-scripts.html#post329122
 
 
