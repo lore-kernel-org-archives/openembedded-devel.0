@@ -1,26 +1,44 @@
-Received: from smtpauth17.prod.mesa1.secureserver.net ([64.202.165.29])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <dbatzle@dcbcyber.com>) id 1PAacG-0003Sq-Ah
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PAd9t-0003Wl-By
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 05:54:31 +0200
-Received: (qmail 31898 invoked from network); 26 Oct 2010 03:15:55 -0000
-Received: from unknown (75.182.70.212)
-	by smtpauth17.prod.mesa1.secureserver.net (64.202.165.29) with ESMTP;
-	26 Oct 2010 03:15:54 -0000
-From: dbatzle <dbatzle@dcbcyber.com>
+	Tue, 26 Oct 2010 08:37:23 +0200
+Received: by iwn42 with SMTP id 42so577026iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Oct 2010 23:36:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=XyB8EwsyE29isBAoGY1IJoyNHB2Emc1+VpwZqqhgDd4=;
+	b=eQvSSF9vTzZyzfRKxLrateYk2OkitCp8ygD19TtomLrjT1UjOzTeWt/8vpkCCUfWO+
+	Phv4S+k1lINGbX0JzpOw1wYbaEM6XCenva/zpEHrlO9SGLV2XJRhPdVqQHbS2HIcZkLu
+	KbTQdvCIVNOD362ttuiKiQcZfUEFf5OxEbrfU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=laU0NuRqTTTRw4dgjubv+7NcyWn59LrNpZA//COWHwfxAZL4zk9OgTqPsjwfn88x70
+	JA/t9apVFAsoxs2jP7XsVDYJJe9r0lvWriSsdJEexqhqGD8ZGqgN4/TXZ/VQItYsMW1Y
+	9CYyspkuv3uJSR6IjQ37CCk+CHXV8ybklHYME=
+MIME-Version: 1.0
+Received: by 10.231.33.132 with SMTP id h4mr6759363ibd.150.1288074999371; Mon,
+	25 Oct 2010 23:36:39 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Mon, 25 Oct 2010 23:36:39 -0700 (PDT)
+In-Reply-To: <4CC61633.3080808@gmail.com>
+References: <4CC61633.3080808@gmail.com>
+Date: Tue, 26 Oct 2010 08:36:39 +0200
+Message-ID: <AANLkTikkXFLFr0iTWTmxzF6iUM9RMmfvQppxvptuNyLG@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Oct 2010 23:28:05 -0400
-Message-Id: <1288063685-10500-1-git-send-email-dbatzle@dcbcyber.com>
-X-Mailer: git-send-email 1.6.0.6
-X-SA-Exim-Connect-IP: 64.202.165.29
-X-SA-Exim-Mail-From: dbatzle@dcbcyber.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] New recipe for Bullet Physics library
+Subject: Re: [PATCH] espgs_8.15.3.bb: Depend on cups as EXTRA_OECONF has --enable-cups.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,40 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2010 03:54:31 -0000
+X-List-Received-Date: Tue, 26 Oct 2010 06:37:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: dbatzle <dbatzle@dcbcyber.com>
----
- recipes/bullet/bullet.bb |   18 ++++++++++++++++++
- 1 files changed, 18 insertions(+), 0 deletions(-)
- create mode 100644 recipes/bullet/bullet.bb
+2010/10/26 Graham Gower <graham.gower@gmail.com>:
+>
+> pstoraster/gdevcups.c:74:25: fatal error: cups/raster.h: No such file or =
+directory
+>
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> ---
+> =A0recipes/espgs/espgs_8.15.3.bb | =A0 =A02 +-
+> =A01 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/espgs/espgs_8.15.3.bb b/recipes/espgs/espgs_8.15.3.b=
+b
+> index ba03f00..c2349e0 100644
+> --- a/recipes/espgs/espgs_8.15.3.bb
+> +++ b/recipes/espgs/espgs_8.15.3.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "ESP Ghostscript is an up-to-date GNU Gho=
+stscript distribution \
+> =A0including bug fixes, new drivers, and additional support for CUPS."
+> =A0HOMEPAGE =3D "http://www.cups.org/espgs/"
+> =A0SECTION =3D "libs"
+> -DEPENDS =3D "jpeg zlib libpng tiff fontconfig"
+> +DEPENDS =3D "jpeg zlib libpng tiff fontconfig cups"
+> =A0LICENSE =3D "GPL"
+> =A0PR =3D "r1"
+>
+>
 
-diff --git a/recipes/bullet/bullet.bb b/recipes/bullet/bullet.bb
-new file mode 100644
-index 0000000..d28734f
---- /dev/null
-+++ b/recipes/bullet/bullet.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Bullet Physics Library"
-+LICENSE = "Zlib"
-+
-+PR = "r1"
-+SRCREV="2218"
-+PV="2.77+svnr${SRCPV}"
-+
-+#SRC_URI = "file:///home/David/gamestuff/bullet-2.75"
-+SRC_URI = "svn://bullet.googlecode.com/svn;module=trunk;proto=http"
-+
-+#If you want to build the demos you will have to have xlib and glut installed.
-+#Then set BUILD_DEMOS, BUILD_EXTRAS, and USE_GLUT to ON
-+
-+EXTRA_OECMAKE="-DBUILD_DEMOS:BOOL=OFF -DBUILD_EXTRAS:BOOL=OFF -DUSE_GLUT:BOOL=OFF -DBUILD_SHARED_LIBS:BOOL=ON"
-+
-+inherit cmake
-+
-+S = "${WORKDIR}/trunk"
--- 
-1.6.0.6
+Three small remarks:
+- not sure if changes like this require a PR bump. I always choose the
+the safe way and bump when in doubt.
+- it would be nice if, when you are fixing a recipe you would also
+improve the LICENSE =3D "GPL" thing
+- and there is also a 7.07.1 recipe. Should this apply to this version
+as well (or alternately should we remove that recipe?)
 
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
 
