@@ -1,32 +1,26 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1PAWnG-0004WT-R4
+Received: from smtpauth17.prod.mesa1.secureserver.net ([64.202.165.29])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <dbatzle@dcbcyber.com>) id 1PAacG-0003Sq-Ah
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Oct 2010 01:49:35 +0200
-Received: from [192.168.1.2] (e180142100.adsl.alicedsl.de [85.180.142.100])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 7C89958410F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 01:58:14 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Tue, 26 Oct 2010 05:54:31 +0200
+Received: (qmail 31898 invoked from network); 26 Oct 2010 03:15:55 -0000
+Received: from unknown (75.182.70.212)
+	by smtpauth17.prod.mesa1.secureserver.net (64.202.165.29) with ESMTP;
+	26 Oct 2010 03:15:54 -0000
+From: dbatzle <dbatzle@dcbcyber.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinguuX3AbHpRGUnH97qZcpB_z70NaQjcw9ZsjmD@mail.gmail.com>
-References: <1288039756.11526.42.camel@mattotaupa>
-	<AANLkTinguuX3AbHpRGUnH97qZcpB_z70NaQjcw9ZsjmD@mail.gmail.com>
-Organization: Vanille-Media
-Date: Tue, 26 Oct 2010 01:49:44 +0200
-Message-ID: <1288050584.1987.3.camel@saphir>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Date: Mon, 25 Oct 2010 23:28:05 -0400
+Message-Id: <1288063685-10500-1-git-send-email-dbatzle@dcbcyber.com>
+X-Mailer: git-send-email 1.6.0.6
+X-SA-Exim-Connect-IP: 64.202.165.29
+X-SA-Exim-Mail-From: dbatzle@dcbcyber.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: commit access for Andreas Oberritter
+Subject: [PATCH] New recipe for Bullet Physics library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,18 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2010 23:49:35 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 26 Oct 2010 03:54:31 -0000
 
-I agree.
+Signed-off-by: dbatzle <dbatzle@dcbcyber.com>
+---
+ recipes/bullet/bullet.bb |   18 ++++++++++++++++++
+ 1 files changed, 18 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/bullet/bullet.bb
 
-Andreas, please send Cliff and me your SSH key.
-
-Cheers,
-
+diff --git a/recipes/bullet/bullet.bb b/recipes/bullet/bullet.bb
+new file mode 100644
+index 0000000..d28734f
+--- /dev/null
++++ b/recipes/bullet/bullet.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "Bullet Physics Library"
++LICENSE = "Zlib"
++
++PR = "r1"
++SRCREV="2218"
++PV="2.77+svnr${SRCPV}"
++
++#SRC_URI = "file:///home/David/gamestuff/bullet-2.75"
++SRC_URI = "svn://bullet.googlecode.com/svn;module=trunk;proto=http"
++
++#If you want to build the demos you will have to have xlib and glut installed.
++#Then set BUILD_DEMOS, BUILD_EXTRAS, and USE_GLUT to ON
++
++EXTRA_OECMAKE="-DBUILD_DEMOS:BOOL=OFF -DBUILD_EXTRAS:BOOL=OFF -DUSE_GLUT:BOOL=OFF -DBUILD_SHARED_LIBS:BOOL=ON"
++
++inherit cmake
++
++S = "${WORKDIR}/trunk"
 -- 
-:M:
+1.6.0.6
 
 
 
