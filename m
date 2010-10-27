@@ -1,45 +1,47 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1PB52N-0007TL-7U
+	(envelope-from <kergoth@gmail.com>) id 1PB8Ud-0005Lj-RA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Oct 2010 14:23:28 +0200
-Received: by ewy2 with SMTP id 2so199843ewy.6
+	Wed, 27 Oct 2010 18:04:52 +0200
+Received: by fxm3 with SMTP id 3so907711fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Oct 2010 05:22:41 -0700 (PDT)
+	Wed, 27 Oct 2010 09:04:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=xR7/m1bcIaKg3kDPZLeZLU6PcIz8nY+906VBjoftI8M=;
-	b=il1NsZUZWZ798PNtz9ImTnMxoTjauOHOmQ850rDWAknsv2uF/sOH/YIxEoBZY7iv8Q
-	+c7/+PTa+P08wNlWG0YtB1dYamRGHVOd+Tpd7RG4LwwY9lDHss5Hrh0strG18Y8D2kZQ
-	k8xU9j7pOgIQgzrxm9985ZgnoMV/04mJvehXo=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=8K4e2JnVqFp17+pWY9mmWR4prUEcf5CVPykKD1YZWao=;
+	b=c2JrMGZm2Q4vDfoEccVKMKCIIDE6fYtqKKJMbIUq7RBgdZr1BQEWXPVDud5jVqHj4U
+	MFyTGduln2PBxP3aoregFackGm6gUa8fHr2hQDVPBdM5OsLPxVljFiiatswpPwQB1/f6
+	BmurF8TV6UQQ+PQqvRXuCH0H2z7eFdzsmGdM8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=iF80M9gSEwzJVM5HXoi8JkxzU9OV+vXyKR00SB3sFwRsoiZPR1GG1tKQGIeW4wTzyK
-	qoj0XEe2/WSR50uxLKGqO3qAlgybH5Q7R+7U9k3WajuiAitFSkeDdah0Hyve4ZwN4G3v
-	AVpY/M42Ec2eHbgsuaAxTIOg378ils62/4OJI=
-Received: by 10.213.14.19 with SMTP id e19mr8181240eba.14.1288182160708;
-	Wed, 27 Oct 2010 05:22:40 -0700 (PDT)
-Received: from localhost.localdomain (147.84-49-231.nextgentel.com
-	[84.49.231.147])
-	by mx.google.com with ESMTPS id x54sm9633593eeh.5.2010.10.27.05.22.39
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 27 Oct 2010 05:22:40 -0700 (PDT)
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=TsM1igHVAXKzjXmwCmFJERh9+jFZrE38hyl4o3lzl8gOOq5yURyG5kueGSYNr/7WLE
+	jfIuDx+v55K818T8bA3I04Q7vDHqVj8EEj+tlb1Dd8e1l4S2pc9RUSLd0x9TlDmtW2ze
+	SFm+N08RukkKTbPEeKiD54ibx48LRjofgE5LI=
+Received: by 10.216.154.131 with SMTP id h3mr1051577wek.74.1288195444553; Wed,
+	27 Oct 2010 09:04:04 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.0.139 with HTTP; Wed, 27 Oct 2010 09:03:43 -0700 (PDT)
+In-Reply-To: <1288179182.1285.2607.camel@rex>
+References: <1288179182.1285.2607.camel@rex>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 27 Oct 2010 09:03:43 -0700
+X-Google-Sender-Auth: gAc_wDG7HpR8fMiwGl_3istXFWw
+Message-ID: <AANLkTik=onoxNySPh13xTMRtNNuKoxTSuggKkueiKhnQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Oct 2010 14:22:59 +0200
-Message-Id: <1288182179-22284-1-git-send-email-tasskjapp@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-Subject: [PATCH] New recipe: Python bindings for libconfig.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Poky 4.0 and Yocto 0.9 released
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,74 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Oct 2010 12:23:28 -0000
+X-List-Received-Date: Wed, 27 Oct 2010 16:04:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Wed, Oct 27, 2010 at 4:33 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
 
-Signed-off-by: Tasslehoff Kjappfot <tasskjapp@gmail.com>
----
- .../files/0001-rename-boost-python-library.patch   |   25 ++++++++++++++++++++
- recipes/python/python-libconfig_git.bb             |   18 ++++++++++++++
- 2 files changed, 43 insertions(+), 0 deletions(-)
- create mode 100644 recipes/python/files/0001-rename-boost-python-library.patch
- create mode 100644 recipes/python/python-libconfig_git.bb
+> It gives me pleasure to announce a new Poky release, Poky 'Laverne' 4.0
+> and also Yocto 0.9, the first release of the Yocto Project. For more
+> information about these, please see the new website:
+>
+> http://www.yoctoproject.org/
+>
 
-diff --git a/recipes/python/files/0001-rename-boost-python-library.patch b/recipes/python/files/0001-rename-boost-python-library.patch
-new file mode 100644
-index 0000000..2817370
---- /dev/null
-+++ b/recipes/python/files/0001-rename-boost-python-library.patch
-@@ -0,0 +1,25 @@
-+From 263ea3af06761d00acfeec52cb582a0b0381d361 Mon Sep 17 00:00:00 2001
-+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-+Date: Wed, 27 Oct 2010 11:05:18 +0200
-+Subject: [PATCH] use boost_python_mt instead of boost_python
-+
-+---
-+ setup.py |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 5066fc2..ec8c1b7 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -19,7 +19,7 @@ setup(
-+         Extension(
-+             "pylibconfig",
-+             ["src/pylibconfig.cc"],
-+-            libraries=["boost_python", "config++"]
-++            libraries=["boost_python-mt", "config++"]
-+             #include_dirs=includes,
-+             #extra_link_args=lflags
-+                  )
-+-- 
-+1.7.1
-+
-diff --git a/recipes/python/python-libconfig_git.bb b/recipes/python/python-libconfig_git.bb
-new file mode 100644
-index 0000000..b2a2a0e
---- /dev/null
-+++ b/recipes/python/python-libconfig_git.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Python bindings for libconfig"
-+SECTION = "devel/python"
-+LICENSE = "BSD"
-+DEPENDS = "boost libconfig"
-+SRCNAME = "pylibconfig"
-+
-+SRC_URI = "git://github.com/cnangel/python-libconfig.git;protocol=git \
-+           file://0001-rename-boost-python-library.patch "
-+
-+inherit setuptools
-+
-+S = "${WORKDIR}/git"
-+
-+SRCREV = "b29f9e99e163a1a9adce"
-+PR ="r01"
-+PV = "${PR}+gitr${SRCREV}"
-+
-+
+Congratulations to all who were involved with this, it's great to see, and I
+hope it pans out well.
 -- 
-1.7.1
-
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
