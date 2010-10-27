@@ -1,44 +1,43 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PAzQL-0001bo-HT
+	(envelope-from <martin.jansa@gmail.com>) id 1PB1lu-0000Z0-KW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Oct 2010 08:23:51 +0200
-Received: by ywo32 with SMTP id 32so146368ywo.6
+	Wed, 27 Oct 2010 10:54:15 +0200
+Received: by bwz10 with SMTP id 10so325807bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Oct 2010 23:23:05 -0700 (PDT)
+	Wed, 27 Oct 2010 01:53:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=UA4r7iKppsanoQ9/bTdGnu813Ji3MUD6JVWcAJX1Hdw=;
-	b=VVNz6/1cmC4rtCIG0l90JLZLxCh4AM2t22gXx+G33DyqqygQxM+9aCrRW0P5H3deaE
-	MCjchMyijovfgdNQmAPcOJyj7lFCiOaowvIOL6bs5uOAC3GraA8Pe1ru69FjHNMFjif+
-	gMyn96Fz3pWykv3kb2KpBSRStNoRi5f+W1oLs=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=Y4qVu1gs2ENbM4uKIcAWwRhK89FzSzyYxE7XN3k99jU=;
+	b=S0gOdwovCdXHWO1IPluyq8pa62w0VDeoFF/JOdMyfTy1nsVxelF4xdiM2NlM/lIaQr
+	iy27CugpGRZfTaRKdPbHv5EMuzM3ihadU9YmXh6lDX+ASrDnMnOqq3FrZbn5GXIyXSQa
+	d+wS0dC6oQT/qNFisFT34E9Lsv3VCh9xUGQMY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=DNZLXRo+mNZZGQUopwcVVv4DVPtgD2lk7LNqZ0dAztKjZNVYn25u3Dq5lRBzE36cDZ
-	3fBYUl3Xbh5OmX81UPomHlWqH6RJvHop7494mx1NkuGLpfY7TQUi5yVWQOUOj8ezPh0F
-	rTlTyWpW/iy24DiCO6WO6RfHd1gXJCgTeZBhE=
-Received: by 10.91.27.32 with SMTP id e32mr418017agj.37.1288160582511; Tue, 26
-	Oct 2010 23:23:02 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.90.105.8 with HTTP; Tue, 26 Oct 2010 23:22:42 -0700 (PDT)
-In-Reply-To: <a6650683ce91ecdc66f223e051f1fbd8.squirrel@webmail.crhc.illinois.edu>
-References: <a6650683ce91ecdc66f223e051f1fbd8.squirrel@webmail.crhc.illinois.edu>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 26 Oct 2010 23:22:42 -0700
-Message-ID: <AANLkTikdQRJxn2ESExgUrDeiPY0rbVmoW905Xzo77E1t@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=GYJy2EnZ0KLnYdr0iXMNqBETwGCin7WE8SnE/HL0Mg2ASnTooLPGaeDh8+P0RJSdiq
+	b84DCcKs26N95sJmdxrvKsIO2qu6wdDD+IcZUL/WYNuMHOUYLrwaBlWFjDbTa2TeOYzt
+	sCZY5FnKz4bk7lVoTl/LYvdgQxIf6tgAfqLF0=
+Received: by 10.204.102.78 with SMTP id f14mr457218bko.30.1288169607147;
+	Wed, 27 Oct 2010 01:53:27 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id a25sm6754177bks.20.2010.10.27.01.53.25
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 27 Oct 2010 01:53:25 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Wed, 27 Oct 2010 10:53:25 +0200
+Message-Id: <1288169605-11133-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.3.1
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Linker problem with libfreetype.so when cross-compiling for armv7a from x86_64
+Subject: [RFC][PATCH] base-files: add empty /etc/profile.d which can be filled by distro/machine profile scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,98 +51,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Oct 2010 06:23:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 Oct 2010 08:54:15 -0000
 
-On Tue, Oct 26, 2010 at 12:29 PM,  <johnso87@crhc.illinois.edu> wrote:
-> Hi,
-> =C2=A0 =C2=A0I tried to build the beagleboard-demo-image recipe from scra=
-tch on a
-> 64-bit machine running Ubuntu 10.04. =C2=A0I already had 32- and 64-bit
-> libfreetype.so installed (in /usr/lib and /usr/lib32) on the host. =C2=A0=
-I
-> get an error when trying to compile clxclient, a child project of
-> JAAA:
->
-> NOTE: Running task 5211 of 9419 (ID: 4930,
-> /scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclien=
-t_3.6.1.bb,
-> do_compile)
-> NOTE: package clxclient-3.6.1-r1: task do_compile: Started
-> ERROR: Function do_compile failed
-> NOTE: Task failed: ('function do_compile failed',
-> '/scr/johnso87/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-ang=
-strom-linux-gnueabi/clxclient-3.6.1-r1/temp/log.do_compile.5368')
-> NOTE: oestats: task failed, see
-> http://tinderbox.openembedded.net/public/logs/task/9211313.txt
-> ERROR: Logfile of failure stored in:
-> /scr/johnso87/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angs=
-trom-linux-gnueabi/clxclient-3.6.1-r1/temp/log.do_compile.5368
-> Log data follows:
-> | NOTE: make -j16
-> | arm-angstrom-linux-gnueabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8
-> -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -shared -W=
-l,-O1
-> -Wl,--hash-style=3Dgnu -L/usr/lib -L/usr/X11R6/lib `freetype-config --lib=
-s`
-> -Wl,-soname,libclxclient.so.3 -o libclxclient.so.3.6.1 xdisplay.o
-> xresman.o xhandler.o xwindow.o xdraw.o button.o textip.o enumip.o
-> menuwin.o scale.o slider.o scroll.o mclist.o meter.o -lpthread -lXft -lX1=
-1
-> | /usr/lib/libfreetype.so: file not recognized: File format not recognize=
-d
-> | collect2: ld returned 1 exit status
-> | make: *** [libclxclient.so.3.6.1] Error 1
-> | FATAL: oe_runmake failed
-> | ERROR: Function do_compile failed
-> NOTE: package clxclient-3.6.1-r1: task do_compile: Failed
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclien=
-t_3.6.1.bb
-> do_compile failed
-> ERROR: Task 4930
-> (/scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclie=
-nt_3.6.1.bb,
-> do_compile) failed with 256
-> ERROR:
-> '/scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclie=
-nt_3.6.1.bb'
-> failed
-> NOTE: oestats: build failed, see
-> http://tinderbox.openembedded.net/builds/99197/
-> ERROR:
-> '/scr/johnso87/beagleboard/oebb/sources/openembedded/recipes/jaaa/clxclie=
-nt_3.6.1.bb'
-> failed
->
->
-> I tried adding /usr/lib32 to the front of my LD_LIBRARY_PATH, and tried
-> adding -L/usr/lib32 to the compile arguments by hacking my
-> /usr/bin/freetype-config , but neither seemed to do anything. =C2=A0It ke=
-eps
-> finding the 64-bit version of libfreetype.so and puking.
->
-> Any thoughts?
+* used for gtk_im_module.sh in SHR
+* would be better to be able to fill it from more sources (maybe put profile.d.machine, profile.d.distro, profile.d directories
+  and install all files to target profile.d), is it worth it?
+* /etc/profile.d/empty is used to prevent install call not failing because /profile.d/* not found
 
-you probably need a libtool macro update for clxclient recipe.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../base-files/shr/profile.d/gtk_im_module.sh      |    1 +
+ recipes/base-files/base-files_3.0.14.bb            |    3 +++
+ 2 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/base-files/base-files/profile.d/empty
+ create mode 100755 recipes/base-files/base-files/shr/profile.d/gtk_im_module.sh
 
+diff --git a/recipes/base-files/base-files/profile.d/empty b/recipes/base-files/base-files/profile.d/empty
+new file mode 100644
+index 0000000..e69de29
+diff --git a/recipes/base-files/base-files/shr/profile.d/gtk_im_module.sh b/recipes/base-files/base-files/shr/profile.d/gtk_im_module.sh
+new file mode 100755
+index 0000000..29cf0db
+--- /dev/null
++++ b/recipes/base-files/base-files/shr/profile.d/gtk_im_module.sh
+@@ -0,0 +1 @@
++export GTK_IM_MODULE=xim
+diff --git a/recipes/base-files/base-files_3.0.14.bb b/recipes/base-files/base-files_3.0.14.bb
+index f8d0778..3ebed70 100644
+--- a/recipes/base-files/base-files_3.0.14.bb
++++ b/recipes/base-files/base-files_3.0.14.bb
+@@ -10,6 +10,7 @@ SRC_URI = " \
+            file://inputrc \
+            file://host.conf \
+            file://profile \
++           file://profile.d \
+            file://fstab \
+            file://filesystems \
+            file://issue.net \
+@@ -116,6 +117,8 @@ do_install () {
+         	install -m 0644 ${WORKDIR}/filesystems ${D}${sysconfdir}/filesystems
+         	install -m 0644 ${WORKDIR}/usbd ${D}${sysconfdir}/default/usbd
+         	install -m 0644 ${WORKDIR}/profile ${D}${sysconfdir}/profile
++        	install -d 0755 ${D}${sysconfdir}/profile.d
++        	install -m 0755 ${WORKDIR}/profile.d/* ${D}${sysconfdir}/profile.d/
+         	install -m 0755 ${WORKDIR}/share/dot.profile ${D}${sysconfdir}/skel/.profile
+         	install -m 0755 ${WORKDIR}/share/dot.bashrc ${D}${sysconfdir}/skel/.bashrc
+         	install -m 0644 ${WORKDIR}/inputrc ${D}${sysconfdir}/inputrc
+-- 
+1.7.3.1
 
->
-> I'm working from the HEAD of the master OE Git branch.
->
-> Thanks,
-> -Matt
->
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
