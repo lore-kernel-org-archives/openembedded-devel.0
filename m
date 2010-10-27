@@ -1,43 +1,46 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PB297-00008W-Ks
+	(envelope-from <graham.gower@gmail.com>) id 1PB2Vo-0001yP-Qo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Oct 2010 11:18:14 +0200
-Received: by bwz10 with SMTP id 10so338699bwz.6
+	Wed, 27 Oct 2010 11:41:45 +0200
+Received: by wya21 with SMTP id 21so468073wya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Oct 2010 02:17:33 -0700 (PDT)
+	Wed, 27 Oct 2010 02:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=qxeyoArEhgdsPptg+Et8ItJZfAfA25iAyvn9P1sb4WI=;
-	b=ImNHyHOEip+aAXKsKiXnVIZo1TMnLi3OYh1ohlUnm0YucyZ4Qm8yhWJ5HMxHmzFwqJ
-	cKSJ+80GEZS7QMDXj+76645mmXRLt++02K0PeLkAUlvEuXKYuBf1Aj2ukDK4fSvL+32x
-	ROoAdUopfPDwh0ODpgg9SdG71MXGQ9JDD4fCA=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=w1f90SbgAUJVkUjFKxi8SPUZlbPEOPhBQphdek4FVAk=;
+	b=VvDVWELGREjzR6iNqaKkS9ZpJ3HsKEGjGA2OzpDj61WDZwdKgW7R7OJ8JDDAsefLOG
+	mo+2/Klwa3yfeD0avqWMgTNeQixtP3sPS+bbDQQNkA5Ot0uqPMGeRT9RI8I+Ed7UqDb1
+	G2+MZVWJvAgOH7O/4jD9Z7TUyUu5EEgnrk1yA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=LNMj3ZMSHnZOQZ92Wa/+roizszIiZLUVvL6sNDTq2r75ad6niqDsA2iODHFAzs8yFO
-	kGtYJvmOl8sW1eT2Vk8MWBQKDqaPVz1JoAAv0qv1KOZ6mNN63yheiSsGyAtceTDerheW
-	f18xIy2Dnq4eYKFBs8KeLHpCoPiFblzuc6fOM=
-Received: by 10.204.84.144 with SMTP id j16mr7179614bkl.92.1288171052369;
-	Wed, 27 Oct 2010 02:17:32 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id p22sm5997742bkp.9.2010.10.27.02.17.31
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 27 Oct 2010 02:17:31 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ZH9do+UYIXLT1/P//g4+BfV4tHt5uPFLnJ3Sc96TohCOmXcsPhYWDXIg4ixOYls56n
+	40+E20UFTo+7ZvAXMbRYIES470cby9z2LXRAZ+4nnqX8dR29Rf4hcDzcFG2Mr9+sxOFR
+	PXhwo1ArqGYvL5xLgDz3Rm9cnS635aHe91gEo=
+MIME-Version: 1.0
+Received: by 10.227.58.82 with SMTP id f18mr9174660wbh.12.1288172454446; Wed,
+	27 Oct 2010 02:40:54 -0700 (PDT)
+Received: by 10.227.37.205 with HTTP; Wed, 27 Oct 2010 02:40:54 -0700 (PDT)
+In-Reply-To: <AANLkTimsFmMeU2TG+uQ2Z_zLsS3KATGJ2KzB22_AoUPD@mail.gmail.com>
+References: <4CC61633.3080808@gmail.com>
+	<AANLkTikkXFLFr0iTWTmxzF6iUM9RMmfvQppxvptuNyLG@mail.gmail.com>
+	<AANLkTimsFmMeU2TG+uQ2Z_zLsS3KATGJ2KzB22_AoUPD@mail.gmail.com>
+Date: Wed, 27 Oct 2010 20:10:54 +1030
+Message-ID: <AANLkTinVJOyat7dpZwrxz-QaBANbqkktf2vt-3MsYoqL@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Oct 2010 11:17:29 +0200
-Message-Id: <1288171049-2692-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.3.1
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] efl.bbclass: improve packaging a bit
+Subject: Re: [PATCH] espgs_8.15.3.bb: Depend on cups as EXTRA_OECONF has --enable-cups.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,74 +54,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Oct 2010 09:18:14 -0000
+X-List-Received-Date: Wed, 27 Oct 2010 09:41:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* include dbus service config if available
-* include plugins from //plugins/ (ie from ethumb)
-* include edje modules (ie from emotion)
+On 27 October 2010 16:50, Khem Raj <raj.khem@gmail.com> wrote:
+> On Mon, Oct 25, 2010 at 11:36 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> 2010/10/26 Graham Gower <graham.gower@gmail.com>:
+>>>
+>>> pstoraster/gdevcups.c:74:25: fatal error: cups/raster.h: No such file o=
+r directory
+>>>
+>>> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+>>> ---
+>>> =A0recipes/espgs/espgs_8.15.3.bb | =A0 =A02 +-
+>>> =A01 files changed, 1 insertions(+), 1 deletions(-)
+>>>
+>>> diff --git a/recipes/espgs/espgs_8.15.3.bb b/recipes/espgs/espgs_8.15.3=
+.bb
+>>> index ba03f00..c2349e0 100644
+>>> --- a/recipes/espgs/espgs_8.15.3.bb
+>>> +++ b/recipes/espgs/espgs_8.15.3.bb
+>>> @@ -2,7 +2,7 @@ DESCRIPTION =3D "ESP Ghostscript is an up-to-date GNU G=
+hostscript distribution \
+>>> =A0including bug fixes, new drivers, and additional support for CUPS."
+>>> =A0HOMEPAGE =3D "http://www.cups.org/espgs/"
+>>> =A0SECTION =3D "libs"
+>>> -DEPENDS =3D "jpeg zlib libpng tiff fontconfig"
+>>> +DEPENDS =3D "jpeg zlib libpng tiff fontconfig cups"
+>>> =A0LICENSE =3D "GPL"
+>>> =A0PR =3D "r1"
+>>>
+>>>
+>>
+>> Three small remarks:
+>> - not sure if changes like this require a PR bump. I always choose the
+>> the safe way and bump when in doubt.
+>
+> Well if in doubt always read
+> http://wiki.openembedded.org/index.php/When_To_Bump_PR
+> and in this case a PR bump is not needed.
+>
+>> - it would be nice if, when you are fixing a recipe you would also
+>> improve the LICENSE =3D "GPL" thing
+>
+> yes.
+>
+>> - and there is also a 7.07.1 recipe. Should this apply to this version
+>> as well (or alternately should we remove that recipe?)
+>>
+>
+> probably remove the old recipe.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- classes/efl.bbclass        |   14 +++++++++++---
- recipes/efl1/ethumb_svn.bb |    2 --
- 2 files changed, 11 insertions(+), 5 deletions(-)
+Both espgs recipes can be moved to obsolete, as the project has been
+merged into ghostscript 3 years ago. There are a couple of dependent
+recipes to be moved to depend on gs instead. But I need to fix the gs
+recipe to build for me before i can test them.
 
-diff --git a/classes/efl.bbclass b/classes/efl.bbclass
-index 1433457..f148e9c 100644
---- a/classes/efl.bbclass
-+++ b/classes/efl.bbclass
-@@ -29,10 +29,16 @@ do_install_prepend () {
- # This construction is stupid, someone with more E knowledge should change it to =+ or something
- PACKAGES = "${PN}-dbg ${PN} ${PN}-themes ${PN}-dev ${PN}-doc ${PN}-tests ${PN}-static"
- 
--FILES_${PN} = "${libdir}/*.so.*"
-+FILES_${PN} = "${libdir}/*.so.* \
-+               ${libdir}/edje/modules/${PN}/*/module.so \
-+               ${libdir}/${PN}/plugins/*.so \
-+               ${datadir}/dbus-1/services/* \
-+"
-+
- 
- FILES_${PN}-themes = "${datadir}/${PN}/themes \
-                       ${datadir}/${PN}/data \
-+                      ${libdir}/${PN}/plugins/data/*.edj \
-                       ${datadir}/${PN}/fonts \
-                       ${datadir}/${PN}/pointers \
-                       ${datadir}/${PN}/images \
-@@ -47,6 +53,7 @@ FILES_${PN}-dev   += "${bindir}/${PN}-config \
-                       ${libdir}/${PN}/*.la \
-                       ${libdir}/${PN}/*/*.la \
-                       ${datadir}/${PN}/edje_externals \
-+                      ${libdir}/edje/modules/${PN}/*/module.la \
- "
- 
- FILES_${PN}-static += "${libdir}/${PN}/*.a \
-@@ -54,9 +61,10 @@ FILES_${PN}-static += "${libdir}/${PN}/*.a \
- "
- 
- FILES_${PN}-dbg +=   "${libdir}/${PN}/.debug \
--                      ${libdir}/${PN}/*/.debug"
-+                      ${libdir}/${PN}/*/.debug \
-+                      ${libdir}/edje/modules/${PN}/*/.debug/module.so \
-+"
- 
- FILES_${PN}-tests  = "${bindir}/${PN} \
-                       ${bindir}/*_* \
-                       ${datadir}"
--
-diff --git a/recipes/efl1/ethumb_svn.bb b/recipes/efl1/ethumb_svn.bb
-index f958bd4..9d3e65b 100644
---- a/recipes/efl1/ethumb_svn.bb
-+++ b/recipes/efl1/ethumb_svn.bb
-@@ -20,6 +20,4 @@ AUTO_LIBNAME_PKGS = ""
- FILES_${PN} += "\
-     ${bindir}/ethumbd \
-     ${libexecdir}/ethumbd_slave \
--    ${libdir}/plugins/*.so \
--    ${libdir}/plugins/data/*.edj \
- "
--- 
-1.7.3.1
-
+-Graham
 
 
