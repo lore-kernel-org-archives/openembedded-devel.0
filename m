@@ -1,44 +1,26 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1PBDWc-0002uX-Oo
+Received: from oh-69-34-21-229.sta.embarqhsd.net ([69.34.21.229]
+	helo=happy.bec-systems.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <cbrake@hq.bec-systems.com>) id 1PBDsu-0006Wb-1i
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Oct 2010 23:27:15 +0200
-Received: by fxm3 with SMTP id 3so1255869fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Oct 2010 14:26:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=pBBMmLuadFMPjIMg952BAn7lgwUhXgN5TL94dHPEOmA=;
-	b=I0zN+tQy7QyV6Mh4fbw70bNaRmX4YOiEjGwsR8AOhubL0f/WNIbTCjMCVwHfVuRUU2
-	iuTGr+BK9uzbzVR7oNnsmg5NlmGb7UU0hC6ARbD1qyU32bxTGCC0Vmyt9pkWc8FRdUbj
-	CKloQo8K4MYjhSOxHO4R5SNh4I2VnksUHgS/E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=xSKK1k+cTyBAfPWqrIYTeEStYR7oRoctrEoke0sl7pmu18pMhX6HRSKlYVe8L0rduk
-	1ugJQbgzC1/ayXz+DKkFCrzVcZD8m7SHh+5N9VWzRh1iEANLHCKMJZ2zC7rNP98vfWeB
-	Tpct2tGb1EaEfLj94p7wxRc3LvpTzz4ziEk8Y=
-Received: by 10.223.86.136 with SMTP id s8mr2952876fal.112.1288214773701; Wed,
-	27 Oct 2010 14:26:13 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.112.201 with HTTP; Wed, 27 Oct 2010 14:25:53 -0700 (PDT)
-In-Reply-To: <1288179182.1285.2607.camel@rex>
-References: <1288179182.1285.2607.camel@rex>
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Wed, 27 Oct 2010 15:25:53 -0600
-Message-ID: <AANLkTi=e7EBjHv21UOD2Hi2Ou_9ZS1YGXB6eOXUGgdt6@mail.gmail.com>
+	Wed, 27 Oct 2010 23:50:38 +0200
+Received: from cbrake by happy.bec-systems.com with local (Exim 4.71)
+	(envelope-from <cbrake@hq.bec-systems.com>)
+	id 1PBDVs-0008Fh-5f; Wed, 27 Oct 2010 17:26:28 -0400
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: coolaj86@gmail.com
+Date: Wed, 27 Oct 2010 17:26:18 -0400
+Message-Id: <1288214778-31692-1-git-send-email-cliff.brake@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 69.34.21.229
+X-SA-Exim-Mail-From: cbrake@hq.bec-systems.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Poky 4.0 and Yocto 0.9 released
+Cc: Cliff Brake <cbrake@bec-systems.com>
+Subject: [PATCH] libfontenc: add font-util depend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Oct 2010 21:27:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 27 Oct 2010 21:50:49 -0000
 
-From the website it sounds like Yocto is a cross between OpenEmbedded and
-Ubuntu?
+From: Cliff Brake <cbrake@bec-systems.com>
 
-It's used to build distributions in the same way that OpenEmbedded is.
-Has 6-month release cycle, including binaries, like Ubuntu.
+when building, I got the following error:
+configure.ac:44: error: must install X.Org font-util 1.1 or later before running autoconf/autogen
+---
+ recipes/xorg-lib/libfontenc_1.1.0.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Is that correct?
+diff --git a/recipes/xorg-lib/libfontenc_1.1.0.bb b/recipes/xorg-lib/libfontenc_1.1.0.bb
+index bce1aa5..757431f 100644
+--- a/recipes/xorg-lib/libfontenc_1.1.0.bb
++++ b/recipes/xorg-lib/libfontenc_1.1.0.bb
+@@ -1,7 +1,7 @@
+ require xorg-lib-common.inc
+ DESCRIPTION = "X11 font encoding library"
+ LICENSE = "BSD-X"
+-DEPENDS += "zlib xproto"
++DEPENDS += "zlib xproto font-util"
+ PE = "1"
+ PR = "${INC_PR}.0"
+ 
+-- 
+1.7.0.4
 
 
-What's the difference between Poky and Yocto then?
-
-AJ ONeal
-
-
-On Wed, Oct 27, 2010 at 5:33 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-
-> It gives me pleasure to announce a new Poky release, Poky 'Laverne' 4.0
-> and also Yocto 0.9, the first release of the Yocto Project. For more
-> information about these, please see the new website:
->
-> http://www.yoctoproject.org/
->
-> Cheers,
->
-> Richard
->
->
->
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
