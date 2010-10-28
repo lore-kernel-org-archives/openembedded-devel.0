@@ -1,45 +1,32 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1PBQHv-0006S9-ND
+	(envelope-from <jaap.dejong@nedap.com>) id 1PBSNq-0007iu-1u
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Oct 2010 13:05:17 +0200
-Received: by wya21 with SMTP id 21so1777327wya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Oct 2010 04:04:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=WQCjiwsY2iBJzVfat6ObjNd27RIpulpWOPqHu1LoDUM=;
-	b=JARSOM/3hEpIPrY3ccBsFb6xH54zc7sggCyUQANvfswp2GEqhEvhVdW2H1wiJVYg//
-	A7QR2ubpNwwT3U477aT6JPw94vs/ACTOPm3pdy2B7Ftv1jXiPDJGVjtGMjEBZtBdUypy
-	mCbCPkSMdYgNJFusSVqEfWxAtvK9XcxYF3TZI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=OWnLhsLnaIgaUMEbbyD7ILq9HOKWECZShUKlKVlY8FhukwYHSJzbaQvLxIPpY1ZAil
-	294Nqz55GzUSjEJpAHlFerP1mr3nmhQMgBmhjFlcX/FAB7l3JpsFHryFAv++T32838+8
-	gaJx/xLOV4R5PuuuNMurO3tqOeb38T7AOCGuo=
+	Thu, 28 Oct 2010 15:19:11 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Thu, 28 Oct 2010 15:18:25 +0200
+X-TM-IMSS-Message-ID: <16b18fec000070f5@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 16b18fec000070f5 for
+	<jaap.dejong@nedap.com>; Thu, 28 Oct 2010 15:18:26 +0100
+Message-ID: <4CC97820.5090808@nedap.com>
+Date: Thu, 28 Oct 2010 15:18:24 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.11) Gecko/20101006 Lightning/1.0b2 Thunderbird/3.1.5
 MIME-Version: 1.0
-Received: by 10.216.20.18 with SMTP id o18mr10442351weo.31.1288263851181; Thu,
-	28 Oct 2010 04:04:11 -0700 (PDT)
-Received: by 10.216.235.214 with HTTP; Thu, 28 Oct 2010 04:04:11 -0700 (PDT)
-In-Reply-To: <AANLkTik_0x_7+doR1NjH9EW=KHwUu3coQB9anmx0yx_T@mail.gmail.com>
-References: <20101018123937.GR28423@ibawizard.net>
-	<AANLkTik_0x_7+doR1NjH9EW=KHwUu3coQB9anmx0yx_T@mail.gmail.com>
-Date: Thu, 28 Oct 2010 07:04:11 -0400
-Message-ID: <AANLkTikYuH9sTZwoaEsDsC2U3Hv0=oU0VMdG_Vu7mO87@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-OriginalArrivalTime: 28 Oct 2010 13:18:25.0784 (UTC)
+	FILETIME=[9A6D8780:01CB76A2]
+X-SA-Exim-Connect-IP: 213.160.213.92
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Write access
+Subject: bitbake error?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,37 +40,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Oct 2010 11:05:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Oct 2010 13:19:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Oct 18, 2010 at 8:55 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/10/18 Petr =C5=A0tetiar <ynezz@true.cz>:
->> Hi,
->>
->> Henning told me today on #oe, that I should ask for git write access, so
->> thereby I'm asking for it :-) When my spare time permits, I'll mainly wo=
-rk on
->> Lua and ts7xxx stuff, so I hope, that I won't break stuff that often. Th=
-ank
->> you for considering my request.
->>
->> -- ynezz
->>
->
-> I'd like to second Henning's suggestion. As far as I can judge the
-> work of Petr is of good quality.
->
-> Frans
+I'm probably totally stupid...
+What am doing wrong?
+(I'm working on a fresh unstable branch)
+When I bitbake I get:
 
-I support this.  Petr, can you send Mickey and me your ssh key.
+MACHINE=at91sam9263ek  bitbake u-boot
+Traceback (most recent call last):
+   File "/media/OpenEmbedded/unstable/bitbake/bin/bitbake", line 143, in 
+<module>
+     main()
+   File "/media/OpenEmbedded/unstable/bitbake/bin/bitbake", line 123, in 
+main
+     cooker.parseConfiguration()
+   File "/media/OpenEmbedded/unstable/bitbake/lib/bb/cooker.py", line 
+68, in parseConfiguration
+     self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
+   File "/media/OpenEmbedded/unstable/bitbake/lib/bb/cooker.py", line 
+402, in parseConfigurationFile
+     bb.fetch.fetcher_init(self.configuration.data)
+   File "/media/OpenEmbedded/unstable/bitbake/lib/bb/fetch/__init__.py", 
+line 93, in fetcher_init
+     pd = persist_data.PersistData(d)
+   File "/media/OpenEmbedded/unstable/bitbake/lib/bb/persist_data.py", 
+line 52, in __init__
+     bb.mkdirhier(self.cachedir)
+   File "/media/OpenEmbedded/unstable/bitbake/lib/bb/__init__.py", line 
+133, in mkdirhier
+     debug(3, "mkdirhier(%s)" % dir)
+   File "/media/OpenEmbedded/unstable/bitbake/lib/bb/__init__.py", line 
+103, in debug
+     bb.msg.debug(lvl, None, ''.join(args))
+   File "/media/OpenEmbedded/unstable/bitbake/lib/bb/msg.py", line 100, 
+in debug
+     bb.event.fire(MsgDebug(msg, None))
+   File "/media/OpenEmbedded/unstable/bitbake/lib/bb/event.py", line 67, 
+in fire
+     if tmpHandler(event) == Handled:
+   File "tmpHandler(e)", line 8, in tmpHandler
+NameError: global name 'msg' is not defined
 
-Thanks,
-Cliff
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
 
 
