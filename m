@@ -1,45 +1,39 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PBW1q-0001x9-B5
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PBWC5-0005yP-Po
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Oct 2010 19:12:48 +0200
-Received: by wya21 with SMTP id 21so2128712wya.6
+	Thu, 28 Oct 2010 19:23:19 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id B67138CF1A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Oct 2010 10:11:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=RMkDCYixkhUo3vG7hs/adkrri+nj+E9AzKqEqY1afl0=;
-	b=GKC+Uyrymd30RzDsP7LjAURdEigQFUkulq5z1DN0rCGfMXpJOBdf4JDxsMZRDJveal
-	YVtaQAQBKXqmUA2gAYcDcXMxDVgm11fnMLUdesK02Qjxm1iyIWPRoNUweKL8y8PTpERI
-	cEhTV6ui0eFPZ4HgtIktjUN8NrGGT/XsV4OWo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=LEeM9O8mRyW7TtdyO4A/CAVGNYRJDLmPFE7mzKeCVhN23XygZAJX6fipbg7UN8tGlX
-	Zo0deGXJn05IvAMCMPe+v1PYxwv+hn6lIjbI+ggRc9aDA/prjLojXMDWBiA0FR9/CP8w
-	zoaqxnUPfQdYVfsxh+yTtTilZRW4LtmM6Y7V0=
-MIME-Version: 1.0
-Received: by 10.227.145.208 with SMTP id e16mr6822847wbv.164.1288285916344;
-	Thu, 28 Oct 2010 10:11:56 -0700 (PDT)
-Received: by 10.227.154.13 with HTTP; Thu, 28 Oct 2010 10:11:34 -0700 (PDT)
-In-Reply-To: <E1PBVKs-0003ja-Sw@melo.openembedded.org>
-References: <E1PBVKs-0003ja-Sw@melo.openembedded.org>
-Date: Thu, 28 Oct 2010 19:11:34 +0200
-Message-ID: <AANLkTi=R5zdtjWXbmZLwCtsa7Yu15Mr67H4SNtPz+EB4@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 28 Oct 2010 13:22:34 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 31332-02 for <openembedded-devel@lists.openembedded.org>; 
+	Thu, 28 Oct 2010 13:22:34 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 8510375FAE7; Thu, 28 Oct 2010 13:22:34 -0400 (EDT)
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id B8E698CA1BA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Oct 2010 13:22:31 -0400 (EDT)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id 98BED5000E6; Thu, 28 Oct 2010 13:22:31 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Thu, 28 Oct 2010 13:22:31 -0400
+Message-Id: <1288286551-4700-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.7.0.4
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] Stefan Schmidt : cacaoh-*native: Try to be libtool version agnostic.
+Subject: [PATCH] curl: make CURL_FEATURES configurable again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,68 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Oct 2010 17:12:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Oct 2010 17:23:20 -0000
 
-On Thu, Oct 28, 2010 at 6:28 PM, git version control
-<git@git.openembedded.org> wrote:
-> Module: openembedded.git
-> Branch: master
-> Commit: 44bc5a638065a7ac705c2d7f21c256c7ebda516c
-> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
-it;h=3D44bc5a638065a7ac705c2d7f21c256c7ebda516c
->
-> Author: Stefan Schmidt <stefan@datenfreihafen.org>
-> Date: =A0 Thu Oct 28 15:50:55 2010 +0200
->
-> cacaoh-*native: Try to be libtool version agnostic.
->
-> Based on a suggestion from Enrico Scholz we should use libtool --mode=3Di=
-nstall
-> for install libtool stuff. This fixes a regresion for me that came in wit=
-h
-> commit 93c4d9d84096c817e74abf3f4c02f82af4c95178
->
-> It is working fine again now with libtool 2.2.6b (angstrom-2008), testing=
- with
-> libtool 2.4 would be appreciated.
+Lock down CURL_FEATURES for virtclass-native, but make CURL_FEATURES
+for target a weak assignment.
 
-Tested with SHR (libtool-2.4) on host without libtool installed:
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ recipes/curl/curl-common.inc |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-NOTE: package cacaoh-openjdk-native-0.99.4-r1: task do_install: Started
-ERROR: Function do_install failed
-NOTE: Task failed: ('function do_install failed',
-'/home/shr/shr-unstable/tmp/work/x86_64-linux/cacaoh-openjdk-native-0.99.4-=
-r1/temp/log.do_install.31027')
-ERROR: Task 8799
-(/home/shr/shr-unstable/openembedded/recipes/cacao/cacaoh-openjdk-native_0.=
-99.4.bb,
-do_install) failed with 256
-NOTE: oestats: task failed, see
-http://tinderbox.openembedded.net/public/logs/task/9277293.txt
-ERROR: Logfile of failure stored in:
-/home/shr/shr-unstable/tmp/work/x86_64-linux/cacaoh-openjdk-native-0.99.4-r=
-1/temp/log.do_install.31027
-Log data follows:
-| /home/shr/shr-unstable/tmp/work/x86_64-linux/cacaoh-openjdk-native-0.99.4=
--r1/temp/run.do_install.31027:
-line 777: libtool: command not found
-NOTE: package cacaoh-openjdk-native-0.99.4-r1: task do_install: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/shr/shr-unstable/openembedded/recipes/cacao/cacaoh-openjdk-native_0.9=
-9.4.bb
-do_install failed
-ERROR: Task 8799
-(/home/shr/shr-unstable/openembedded/recipes/cacao/cacaoh-openjdk-native_0.=
-99.4.bb,
-do_install) failed with 256
-NOTE: Running task 9972 of 17485 (ID: 8811,
-/home/shr/shr-unstable/openembedded/recipes/cacao/cacaoh-openjdk-native_0.9=
-9.4.bb,
-do_distribute_sources)
+diff --git a/recipes/curl/curl-common.inc b/recipes/curl/curl-common.inc
+index ddaebb8..8ffefeb 100644
+--- a/recipes/curl/curl-common.inc
++++ b/recipes/curl/curl-common.inc
+@@ -6,9 +6,10 @@ SRC_URI = "http://curl.haxx.se/download/curl-${PV}.tar.bz2;name=tarball \
+            file://pkgconfig_fix.patch"
+ S = "${WORKDIR}/curl-${PV}"
+ 
+-INC_PR = "r4"
++INC_PR = "r5"
+ 
+-CURL_FEATURES = ${@['zlib,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp','zlib,gnutls,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp']["${BPN}" == "${PN}"]}
++CURL_FEATURES ?= "zlib,gnutls,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp"
++CURL_FEATURES_virtclass-native = "zlib,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp"
+ # other allowed features: ipv6, ares, openssl
+ 
+ inherit autotools pkgconfig binconfig
+-- 
+1.7.0.4
 
-Regards,
 
 
