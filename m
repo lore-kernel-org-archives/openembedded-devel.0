@@ -1,39 +1,31 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from smtp-out21.han.skanova.net ([195.67.226.208])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PBXY5-00078l-C3
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1PBXmt-0000xh-Pj
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Oct 2010 20:50:06 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 517858DC240
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Oct 2010 14:49:22 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 17943-04 for <openembedded-devel@lists.openembedded.org>; 
-	Thu, 28 Oct 2010 14:49:22 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id C3BA88DC170
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Oct 2010 14:49:21 -0400 (EDT)
-Date: Thu, 28 Oct 2010 14:49:21 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinWpXoGqD5iNN+h-YEN9suQd3zac5E3FTvM7m39@mail.gmail.com>
-Message-ID: <Pine.LNX.4.64.1010281443540.5082@juice.ott.cti.com>
-References: <1288286551-4700-1-git-send-email-msmith@cbnco.com>
-	<AANLkTinWpXoGqD5iNN+h-YEN9suQd3zac5E3FTvM7m39@mail.gmail.com>
+	Thu, 28 Oct 2010 21:05:24 +0200
+Received: from [10.3.3.12] (62.237.32.34) by smtp-out21.han.skanova.net
+	(8.5.124.10) (authenticated as u82406562)
+	id 4C7E106501714CB9 for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Oct 2010 21:04:36 +0200
+Message-ID: <4CC9C943.4040704@atmel.com>
+Date: Thu, 28 Oct 2010 21:04:35 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Thunderbird 2.0.0.24 (Windows/20100228)
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+To: openembedded-devel@lists.openembedded.org
+References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>	<201010181520.30454.marcin@juszkiewicz.com.pl>	<4CBC4DD4.3010908@atmel.com>
+	<i9hpii$gf2$1@dough.gmane.org>	<4CBC7F6A.9040000@atmel.com>	<AANLkTi=xBMvDEKjiaNKy7zijs4DCZwhrSDr=gHVkMh_T@mail.gmail.com>	<4CBCD3FC.5090305@atmel.com>	<AANLkTin6jOdo56fCEaMLNgiKDThBV0yg7x_OvOntwQEM@mail.gmail.com>	<4CBF81FC.3040803@atmel.com>	<AANLkTim3ucg9ue8OoLDvZP=J-jdt2Dd1g_+Wnf_CZ6jO@mail.gmail.com>	<4CC5A48B.40404@atmel.com>	<AANLkTi=WLnbdQiOC4B_v5hk+ehR_hUE8hgiGoCgDkEAx@mail.gmail.com>	<4CC5DB5F.6060002@atmel.com>
+	<AANLkTikWWtc3p_OAF3n0CT=p4Nebna6H4iw759GnX04=@mail.gmail.com>
+In-Reply-To: <AANLkTikWWtc3p_OAF3n0CT=p4Nebna6H4iw759GnX04=@mail.gmail.com>
+X-SA-Exim-Connect-IP: 195.67.226.208
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.0 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_SOFTFAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] curl: make CURL_FEATURES configurable again
+Subject: Re: [PATCH 1/5] Use common files for AT91SAM9 configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,26 +39,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Oct 2010 18:50:06 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 28 Oct 2010 19:05:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, 28 Oct 2010, Khem Raj wrote:
+Frans Meulenbroeks skrev:
+> 2010/10/25 Ulf Samuelsson <ulf.samuelsson@atmel.com>:
+> 
+>> Except it is not obvious.
+>> How does anyone know which kernel version is the stable
+>> and which is the experimental.
+>> Indeed, how does anyone know that there is an experimental kernel version at
+>> all.
+>>
+> Make two recipes (e.g. in an overlay)
+> linux-stable and linux-experimental
+> they can have their own defconfigs etc
+> and you can just include the base bb file.
+> if you want to you can even get both kernels in a single rfs so you
+> can boot from either.
 
-> -CURL_FEATURES = ${@['zlib,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp','zlib,gnutls,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp']["${BPN}" == "${PN}"]}
-> +CURL_FEATURES ?= "zlib,gnutls,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp"
-> +CURL_FEATURES_virtclass-native = "zlib,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp"
 
-> this change was done for a reason. this will not set correct override 
-> for native recipes and we dont want gnutls on native recipe but if you 
-> look closely the output then it will enable gnutls because 
-> CURL_FEATURES_virtclass-native is ineffective in this case as you 
-> already have a weak assignment.
+Well the plan *is* to use two recipes,
+"linux-2.6.30.bb" and "linux-2.6.32.bb" as an example.
 
-It seems to do the right thing here - CURL_FEATURES_virtclass-native is 
-not weak, so in my curl-native config.log, I see --disable-gnutls.
+I am not sure what you mean by overlay.
+Also not sure what you mean by includeing the base bb file.
+Which file would be the base?
+Which file would include the base?
 
-(btw: why do we not want gnutls in curl-native?)
 
-Mike
+
+> 
+> Have fun! Frans
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
