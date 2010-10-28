@@ -1,31 +1,45 @@
-Received: from smtp-out21.han.skanova.net ([195.67.226.208])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1PBXmt-0000xh-Pj
+	(envelope-from <raj.khem@gmail.com>) id 1PBZUZ-0002ry-4Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Oct 2010 21:05:24 +0200
-Received: from [10.3.3.12] (62.237.32.34) by smtp-out21.han.skanova.net
-	(8.5.124.10) (authenticated as u82406562)
-	id 4C7E106501714CB9 for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Oct 2010 21:04:36 +0200
-Message-ID: <4CC9C943.4040704@atmel.com>
-Date: Thu, 28 Oct 2010 21:04:35 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Thunderbird 2.0.0.24 (Windows/20100228)
+	Thu, 28 Oct 2010 22:54:36 +0200
+Received: by gyf3 with SMTP id 3so1660785gyf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Oct 2010 13:53:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=G9DVUZPclndh99UVeh0vIipaH+rijmOIqeQyzusBIZY=;
+	b=HxJ7wbvBc8RrdP6v2BXGR0asE4/fh9HFc3Wb+odfcGM+A/6nKU9QBoX/jDRF9nCWTq
+	xjG2apzAJ9FmoyJoT4AsH+o2J+zqsD2S15s/FZgBnixLQuznre86/0UKZcT8O+IgrMIT
+	PjzRyTrnjDslSC1DT+yDcZWVxaR7U6hxF/a0w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=odboM8WTN+fF6rHZT0IX65/HQ76tJgb97zWvSgxQrzT8+1k0YtIwSqDLeE0Nu+WQG6
+	2sjrWvWTaPJgDnr02J2Kf4LuWnh2mbgvBrBC6PSUOe+QU35qD/GpQfTTnzEpZpz7+ldp
+	XR3KR2AaE8hfSyC6ulPf0eq/jEACU4SBl2yvI=
+Received: by 10.90.19.18 with SMTP id 18mr3266308ags.106.1288299229624; Thu,
+	28 Oct 2010 13:53:49 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.90.105.8 with HTTP; Thu, 28 Oct 2010 13:53:29 -0700 (PDT)
+In-Reply-To: <Pine.LNX.4.64.1010281443540.5082@juice.ott.cti.com>
+References: <1288286551-4700-1-git-send-email-msmith@cbnco.com>
+	<AANLkTinWpXoGqD5iNN+h-YEN9suQd3zac5E3FTvM7m39@mail.gmail.com>
+	<Pine.LNX.4.64.1010281443540.5082@juice.ott.cti.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 28 Oct 2010 13:53:29 -0700
+Message-ID: <AANLkTikbv9bF9fBvFU2_C6sK13A23wBXgRzwbX++VLhq@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1287233406-8778-1-git-send-email-ulf.samuelsson@atmel.com>	<201010181520.30454.marcin@juszkiewicz.com.pl>	<4CBC4DD4.3010908@atmel.com>
-	<i9hpii$gf2$1@dough.gmane.org>	<4CBC7F6A.9040000@atmel.com>	<AANLkTi=xBMvDEKjiaNKy7zijs4DCZwhrSDr=gHVkMh_T@mail.gmail.com>	<4CBCD3FC.5090305@atmel.com>	<AANLkTin6jOdo56fCEaMLNgiKDThBV0yg7x_OvOntwQEM@mail.gmail.com>	<4CBF81FC.3040803@atmel.com>	<AANLkTim3ucg9ue8OoLDvZP=J-jdt2Dd1g_+Wnf_CZ6jO@mail.gmail.com>	<4CC5A48B.40404@atmel.com>	<AANLkTi=WLnbdQiOC4B_v5hk+ehR_hUE8hgiGoCgDkEAx@mail.gmail.com>	<4CC5DB5F.6060002@atmel.com>
-	<AANLkTikWWtc3p_OAF3n0CT=p4Nebna6H4iw759GnX04=@mail.gmail.com>
-In-Reply-To: <AANLkTikWWtc3p_OAF3n0CT=p4Nebna6H4iw759GnX04=@mail.gmail.com>
-X-SA-Exim-Connect-IP: 195.67.226.208
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.0 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_SOFTFAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] Use common files for AT91SAM9 configuration
+Subject: Re: [PATCH] curl: make CURL_FEATURES configurable again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,44 +53,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Oct 2010 19:05:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Oct 2010 20:54:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Frans Meulenbroeks skrev:
-> 2010/10/25 Ulf Samuelsson <ulf.samuelsson@atmel.com>:
-> 
->> Except it is not obvious.
->> How does anyone know which kernel version is the stable
->> and which is the experimental.
->> Indeed, how does anyone know that there is an experimental kernel version at
->> all.
->>
-> Make two recipes (e.g. in an overlay)
-> linux-stable and linux-experimental
-> they can have their own defconfigs etc
-> and you can just include the base bb file.
-> if you want to you can even get both kernels in a single rfs so you
-> can boot from either.
+On Thu, Oct 28, 2010 at 11:49 AM, Michael Smith <msmith@cbnco.com> wrote:
+> On Thu, 28 Oct 2010, Khem Raj wrote:
+>
+>> -CURL_FEATURES = ${@['zlib,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp','zlib,gnutls,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp']["${BPN}" == "${PN}"]}
+>> +CURL_FEATURES ?= "zlib,gnutls,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp"
+>> +CURL_FEATURES_virtclass-native = "zlib,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp"
+>
+>> this change was done for a reason. this will not set correct override
+>> for native recipes and we dont want gnutls on native recipe but if you
+>> look closely the output then it will enable gnutls because
+>> CURL_FEATURES_virtclass-native is ineffective in this case as you
+>> already have a weak assignment.
+>
+> It seems to do the right thing here - CURL_FEATURES_virtclass-native is
+> not weak, so in my curl-native config.log, I see --disable-gnutls.
 
-
-Well the plan *is* to use two recipes,
-"linux-2.6.30.bb" and "linux-2.6.32.bb" as an example.
-
-I am not sure what you mean by overlay.
-Also not sure what you mean by includeing the base bb file.
-Which file would be the base?
-Which file would include the base?
+certainly nor for me. here is what I get
 
 
+oe_runconf() {
+        if [ -x
+/scratch/oe/work/x86_64-linux/curl-native-7.21.1-r4.1/curl-7.21.1/configure
+] ; then
 
-> 
-> Have fun! Frans
-> 
+/scratch/oe/work/x86_64-linux/curl-native-7.21.1-r4.1/curl-7.21.1/configure
+\
+                 --build=x86_64-linux             --host=x86_64-linux
+           --target=x86_64-linux
+--prefix=/scratch/oe/sysroots/x86_64-linux/usr
+--exec_prefix=/scratch/oe/sysroots/x86_64-linux/usr
+--bindir=/scratch/oe/sysroots/x86_64-linux/usr/bin
+--sbindir=/scratch/oe/sysroots/x86_64-linux/usr/sbin
+--libexecdir=/scratch/oe/sysroots/x86_64-linux/usr/libexec
+ --datadir=/scratch/oe/sysroots/x86_64-linux/usr/share
+  --sysconfdir=/scratch/oe/sysroots/x86_64-linux/etc
+--sharedstatedir=/scratch/oe/sysroots/x86_64-linux/com
+ --localstatedir=/scratch/oe/sysroots/x86_64-linux/var
+  --libdir=/scratch/oe/sysroots/x86_64-linux/usr/lib
+--includedir=/scratch/oe/sysroots/x86_64-linux/usr/include
+ --oldincludedir=/scratch/oe/sysroots/x86_64-linux/usr/include
+          --infodir=/scratch/oe/sysroots/x86_64-linux/usr/share/info
+           --mandir=/scratch/oe/sysroots/x86_64-linux/usr/share/man
+            --with-libtool-sysroot
+--without-libssh2             --with-random=/dev/urandom
+--without-libidn                 --enable-cookies --enable-crypto-auth
+--enable-dict --enable-file --enable-ftp --enable-http --enable-telnet
+--enable-tftp --disable-ipv6
+--with-zlib=/scratch/oe/sysroots/x86_64-linux/usr/lib/../
+--with-gnutls=/scratch/oe/sysroots/x86_64-linux/usr/bin --without-ssl
+--disable-ares "$@"
+        else
+                oefatal "no configure script found"
+        fi
+
+}
+>
+> (btw: why do we not want gnutls in curl-native?)
+>
+
+thats a different question does not solve the problem at hand.
+
+> Mike
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+>
 
 
