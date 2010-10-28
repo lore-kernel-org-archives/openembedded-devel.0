@@ -1,30 +1,29 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PBV6A-00059v-Ii
+	(envelope-from <stefan@datenfreihafen.org>) id 1PBVHx-0005OI-FA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Oct 2010 18:13:07 +0200
+	Thu, 28 Oct 2010 18:25:17 +0200
 Received: from [82.113.106.5] (helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PBV5O-0001xw-VB by authid <stefan@sostec.de> with cram_md5
+	id 1PBVGJ-0002Lb-3K by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Oct 2010 18:12:24 +0200
+	Thu, 28 Oct 2010 18:24:35 +0200
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PBT17-00019M-2V
+	(envelope-from <stefan@excalibur.local>) id 1PBVGG-0006Vj-Lg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Oct 2010 15:59:45 +0200
-Date: Thu, 28 Oct 2010 15:59:44 +0200
+	Thu, 28 Oct 2010 18:23:32 +0200
+Date: Thu, 28 Oct 2010 18:23:30 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101028135944.GL3311@excalibur.local>
+Message-ID: <20101028162330.GM3311@excalibur.local>
 References: <4CC14738.9070309@nedap.com>
-	<lyfwvvaftm.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<AANLkTinMHO=XRv=EDuVVmLcfjJoLETgW8rv96jEus_YE@mail.gmail.com>
-	<lyd3qy5ysk.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<AANLkTi=aXZP1fhpW4Cj9yQLgbzhzKt9wwiac2_hJdvyO@mail.gmail.com>
-	<lyy69l5nvj.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<20101028062422.GJ3311@excalibur.local>
+	<AANLkTim8XTQBvv0vsZ6w4RwFWHDC3cnxa-NAa7BZcZUK@mail.gmail.com>
+	<20101028074407.GK3311@excalibur.local>
+	<4CC98280.2010706@nedap.com>
 MIME-Version: 1.0
-In-Reply-To: <lyy69l5nvj.fsf@ensc-virt.intern.sigma-chemnitz.de>
+In-Reply-To: <4CC98280.2010706@nedap.com>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -51,53 +50,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Oct 2010 16:13:07 -0000
+X-List-Received-Date: Thu, 28 Oct 2010 16:25:17 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Tue, 2010-10-26 at 11:01, Enrico Scholz wrote:
-> Khem Raj <raj.khem@gmail.com> writes:
-> 
-> >>>>> -    install -m 0755 src/cacaoh/.libs/cacaoh ${STAGING_BINDIR}/cacaoh-cldc-${PV}
-> >>>>> +    install -m 0755 src/cacaoh/cacaoh ${STAGING_BINDIR}/cacaoh-cldc-${PV}
-> >>
-> >> * libtool creates sometimes a wrapper script for executables (e.g. when
-> >>   they are linked against local libraries) and places the real executable
-> >>   in .libs/.  Manually installing one of them is error prone and it might
-> >>   break with other linker flags or libtool versions.
-> >
-> > the binary in .libs do not exist so the link is final in this case.
-> 
-> Really?  The author of the original recipe had an environment where the
-> executable was in .libs/.  Are you really sure that such an environment
-> does not exist anymore? Or will the recipe now silently fail by installing
-> the shell wrapper sometimes?
+On Thu, 2010-10-28 at 16:02, Jaap de Jong wrote:
+>
+> my initial patch was only intended to show the error I got while
+> building openjdk-6 and I hoped to trigger the maintainers to get it
+> fixed.
+> If this patch has caused any inconvenience to anyone, I apologize for that.
 
-For me it did silently fail. :)
-
-The openjdk-6 build failed due to missing header files like
- exceptions.c:44:45: error: native/include/java_lang_String.h: No such file or directory
-
-> > but in any case If you can come up with a patch to install it using
-> > libtool that would be nice.
-> 
-> Sorry; providing a patch means testing it (regardless whether it is
-> trivial).  Here, I am not sure whether 'libtool' or the platform
-> prefixed '<arch>-libtool' is required and how to express
-> '<arch>-libtool' in oe.
-> 
-> I gave my comment to a patch which fixed a broken recipe by replacing it
-> with another broken recipe.  So I expect that the author of this patch
-> fixes and tests his work.
-> 
-> For completeness; install command should be
-> 
-> | libtool --mode=install install -m 0755 src/cacaoh/cacaoh ${STAGING_BINDIR}/cacaoh-cldc-${PV}
-
-Thanks. I implemented this and the build works fine again. Thanks for letting us
-know. Will push it in when I have network connectivity again.
+Not a big deal. It broke for me, but thanks to Enricos and Khems hints I was
+able to fix it for me. I'm pushing my fix right now. Testing on your setup would
+be appreciated.
 
 regards
 Stefan Schmidt
