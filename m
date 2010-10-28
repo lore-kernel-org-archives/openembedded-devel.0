@@ -1,48 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PBOLw-00025c-0v
+	(envelope-from <captain.deadly@gmail.com>) id 1PBOWb-0007sS-9v
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Oct 2010 11:01:24 +0200
-Received: by iwn42 with SMTP id 42so1292679iwn.6
+	Thu, 28 Oct 2010 11:11:58 +0200
+Received: by wwe15 with SMTP id 15so951395wwe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Oct 2010 02:00:13 -0700 (PDT)
+	Thu, 28 Oct 2010 02:11:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:received
-	:in-reply-to:references:date:message-id:subject:from:to:content-type;
-	bh=SM9PmhMZjN6/xU1l9GUqm7MzbziflrnGNihcsgTDlKc=;
-	b=vyj71EyE1K2xAQDpJI7UxwgFP/PXyHKLA96ljaS4rk13GaIP4bvbldxJSd3yH1VBfK
-	qOmWHZpmRd/lah9eeHtZNUgamRY370Gp3AKyl+NFES+eqA6w8+/HHM0r0MrQ6SbU2hGu
-	gkLt0QbZcekZhFrUAjrHnJ+9aqItHbA6eCrXM=
+	h=domainkey-signature:received:received:from:reply-to:to:subject:date
+	:user-agent:mime-version:content-type:content-transfer-encoding
+	:message-id; bh=wkfNJcLlCPNxJOLxomJ6dbohJ0+r02/txfKjrkAuQls=;
+	b=BlchjBz6NZNxkN5L3BjOxG+9CsDMYjO0nEIjZnhh480U3ZaNLw4w8AbqrcH7QOJp9/
+	QRrrEFQDICVuaND/x+ylhxhl0lygg7R3D2S06hpdqhfB0T7HstWOtbRtAGKb0BdJMzEi
+	cmLg5snqvrtb7MjOSiuHovijRGFneTipPBxDQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Cnh74fZyeL5+Q/e6+G1Z4zHG86Bq2L0vedfizuqOUKMVyeSDJxoOps4J5OvBGo+8R5
-	8RRCq9Yj7cVK/ZWmc/+E3WDQipL5REFT7tRuMoDoevZ0hwKkNRUCEilr3Yvjzi+faao4
-	1YYNRzkQEGuYLbL8cDX9w9rGyMcYG2Yrah2Z4=
-MIME-Version: 1.0
-Received: by 10.42.189.5 with SMTP id dc5mr248851icb.126.1288256413613; Thu,
-	28 Oct 2010 02:00:13 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Thu, 28 Oct 2010 02:00:13 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Thu, 28 Oct 2010 02:00:13 -0700 (PDT)
-In-Reply-To: <AANLkTim_quTVrDP-tXTwT1KuZOa1sTqDLpQXPobEcxL1@mail.gmail.com>
-References: <1288179182.1285.2607.camel@rex>
-	<AANLkTi=CMGJSF1_4ZdRNrR85TGMj+DK-o=LMbfbh2m5r@mail.gmail.com>
-	<AANLkTikymtvq42aVYpRDSken6=90cg8SjUS0ZShMb9Un@mail.gmail.com>
-	<AANLkTim_quTVrDP-tXTwT1KuZOa1sTqDLpQXPobEcxL1@mail.gmail.com>
-Date: Thu, 28 Oct 2010 11:00:13 +0200
-Message-ID: <AANLkTi=n10XoCBbjZCEQowMrVSWsCKt-Dvo85WsWYTA6@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:reply-to:to:subject:date:user-agent:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	b=FYDAqun8qobE8cNCweJt4AI+TOK8lnoutDDkYaNx44DsKWUkmdjx27Hjnxt85aIC8n
+	wigZ4Z8TBANvN0iYCqXCJRgK94sgnpI165A03/7K8Ro0VzEuQ9+9JSMn41aEYcOKHLMd
+	6X98iJiEigtaCdgx9Qdw53AGaf94sL6R6Y9wk=
+Received: by 10.216.66.146 with SMTP id h18mr144686wed.106.1288257073247;
+	Thu, 28 Oct 2010 02:11:13 -0700 (PDT)
+Received: from bamboo.localnet (dsl-51-41.dsl.netsource.ie [213.79.51.41])
+	by mx.google.com with ESMTPS id x12sm524952weq.18.2010.10.28.02.11.11
+	(version=SSLv3 cipher=RC4-MD5); Thu, 28 Oct 2010 02:11:12 -0700 (PDT)
+From: captain.deadly@gmail.com
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Thu, 28 Oct 2010 10:11:09 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.36-jfw+; KDE/4.5.1; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <201010281011.10206.captain.deadly@gmail.com>
+X-SA-Exim-Connect-IP: 74.125.82.41
+X-SA-Exim-Mail-From: captain.deadly@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Poky 4.0 and Yocto 0.9 released
+Subject: bitbake emacs failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,33 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Oct 2010 09:01:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 28 Oct 2010 09:11:59 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Richard, congratulations on the new release and the inclusion in yocto!!!
+Hello all,
+    have a strange problem on my system whereby when I try to build emacs the 
+Makefiles generated by the configure script have random carriage return 
+characters injected into them which makes a mess of the build. This was the 
+case for both emacs_22.3.bb and emacs_23.1.bb.
 
-FM
+I then decided that I'd stick in a recipe for version 23.2 and edited the 
+generated makefiles to remove the new lines to get the package built. I 
+eventually hit another problem:
 
-On 27 Oct 2010 12:34, "Richard Purdie" <rpurdie@rpsys.net> wrote:
+| make[1]: *** No rule to make target 
+`/home/john/programming/openmoko/shr2/shr-unstable/tmp/sysroots/armv4t-
+oe-linux-gnueabi/usr/lib64/crt1.o', needed by `temacs'.  Stop.
 
-It gives me pleasure to announce a new Poky release, Poky 'Laverne' 4.0
-and also Yocto 0.9, the first release of the Yocto Project. For more
-information about these, please see the new website:
+The above error comes from a line in the Makefile generated for the src 
+directory:
 
-http://www.yoctoproject.org/
+STARTFILES = pre-crt0.o /home/john/programming/openmoko/shr2/shr-
+unstable/tmp/sysroots/armv4t-oe-linux-gnueabi/usr/lib64/crt1.o 
+/home/john/programming/openmoko/shr2/shr-unstable/tmp/sysroots/armv4t-
+oe-linux-gnueabi/usr/lib64/crti.o
 
-Cheers,
+This line is directing the build to a lib64 directory which does not exist. 
+The required files do exist in the lib directory so I edited the Makefile again 
+to remove the 64.
 
-Richard
-
-
-
-
-
+I guess I've two questions: why would configure make a mess of generating 
+Makefiles and is there a problem using a 64 bit machine for openembedded?
 
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
