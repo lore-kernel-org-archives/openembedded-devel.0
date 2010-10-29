@@ -1,49 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PBqNj-0000UB-Q3
+	(envelope-from <msmith@cbnco.com>) id 1PBqTR-00011h-II
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Oct 2010 16:56:40 +0200
-Received: by bwz10 with SMTP id 10so2597154bwz.6
+	Fri, 29 Oct 2010 17:02:35 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id ECB658DD1AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Oct 2010 07:55:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=VPSahHN7ee3vs/TeRmWtKQZjyw7CcNW+0zaAnlA0Aqc=;
-	b=T4Ic7OY4c5yp0wgmy9YxbCsZiz3ybJMuBcOY9OVqFE9XFFa0uIq59bxbFeIqjvRQq5
-	8gG3Hjxbfu3YEoWi4g7vNMWoPF+CRuCD4FToluXyMfgpInkSbSSXUIZiba7lqBPd7B69
-	MvjaYLde0wycbzcFXEN+v+Td5TVON+lXnkQBQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=iIkDCnF+hqs+QPhxgalEC5olyDRp8zVCOFbevnPzYSuGqh70hwd64KvRw3Ms1S9lGV
-	o3oXxhQ+fIsFEjpkS7PspjZ9mqEKR2iz8TdGJhR9vOa1zt52cs1s4uzPr/oaClRSBI3L
-	3g9LBTVp/jEcA5ddZqu5Tsuz9ddII74BpKDH8=
-Received: by 10.204.51.142 with SMTP id d14mr6560166bkg.48.1288364156364;
-	Fri, 29 Oct 2010 07:55:56 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id d27sm914967bkw.2.2010.10.29.07.55.38
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 29 Oct 2010 07:55:38 -0700 (PDT)
-Date: Fri, 29 Oct 2010 16:55:36 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101029145536.GA3206@jama>
-References: <1288361334-17427-1-git-send-email-thoughtmonster@gmail.com>
+	Fri, 29 Oct 2010 11:01:48 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 13674-05 for <openembedded-devel@lists.openembedded.org>; 
+	Fri, 29 Oct 2010 11:01:48 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 5A5CD8D9656
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Oct 2010 11:01:47 -0400 (EDT)
+Message-ID: <4CCAE1DB.1030504@cbnco.com>
+Date: Fri, 29 Oct 2010 11:01:47 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
-In-Reply-To: <1288361334-17427-1-git-send-email-thoughtmonster@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1288286551-4700-1-git-send-email-msmith@cbnco.com>	<AANLkTinWpXoGqD5iNN+h-YEN9suQd3zac5E3FTvM7m39@mail.gmail.com>	<Pine.LNX.4.64.1010281443540.5082@juice.ott.cti.com>	<AANLkTikbv9bF9fBvFU2_C6sK13A23wBXgRzwbX++VLhq@mail.gmail.com>	<4CC9E691.9000809@cbnco.com>
+	<AANLkTimEEdaQub15asdbRzHPfatmtqXNqpTvfp2DM55o@mail.gmail.com>
+In-Reply-To: <AANLkTimEEdaQub15asdbRzHPfatmtqXNqpTvfp2DM55o@mail.gmail.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Alex Ferguson <thoughtmonster@gmail.com>
-Subject: Re: [PATCH] classes: Modify rootfs_ipk.bbclass for -force-overwrite.
+Subject: Re: [PATCH] curl: make CURL_FEATURES configurable again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,35 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2010 14:56:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 29 Oct 2010 15:02:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 29, 2010 at 05:08:54PM +0300, Alex Ferguson wrote:
-> Rationale: In Jlime we ship a package called jlime-extras which
-> contains several files (configuration files, scripts, etc.), some
-> of which conflict with files provided by other packages. This is
-> intentional, and is for distro customization purposes. For example
-> we ship a modified version of the /usr/bin/startx script, some
-> alternative icons for applications, some modified .desktop files
-> and so on. Building an image with this jlime-extras package fails,
-> of course, due to conflicting files.
+Khem Raj wrote:
+> On Thu, Oct 28, 2010 at 2:09 PM, Michael Smith <msmith@cbnco.com> wrote:
+>> Do you have any thoughts on how to solve it? There is not much point to
+>> having CURL_FEATURES as a variable if it's not configurable. I can just hack
+>> over it in an amend.inc, but the recipe as it stands is broken.
+> 
+> yes if we had the recipe type overrides for native sdk and target
+> separate then this could
+> be done probably by appending to concerning override
 
-Why not modify the original files in corresponding recipes with distro
-override?
+OK, what if we get rid of CURL_FEATURES entirely, and the anon python 
+that handles it. No one in-tree is using CURL_FEATURES, and it's been 
+broken for a couple weeks now.
 
-Problem with this kind of package overwritting other packages is when
-original package is upgraded (PR bump or even just DISTRO_PR) it forces
-user to also use -force-overwrite and then he will loose those
-customizations.
+It'll be easy enough to override the depends and configure opts in a 
+recipe amend for anyone who needs that control (i.e. me).
 
-I don't have problem with it as long as it's conditional, but I would be
-very carefull with using it. IMHO this is good only if you're building
-images which are not supposed to be upgraded by user with ie opkg on target.
-
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Mike
 
 
