@@ -1,9 +1,9 @@
 Received: from 30.mail-out.ovh.net ([213.186.62.213])
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PBwS7-0007FB-QN
+	(envelope-from <eric@eukrea.com>) id 1PBwS4-0007Ed-3e
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Oct 2010 23:25:37 +0200
-Received: (qmail 2177 invoked by uid 503); 29 Oct 2010 21:03:50 -0000
+	Fri, 29 Oct 2010 23:25:38 +0200
+Received: (qmail 2185 invoked by uid 503); 29 Oct 2010 21:03:50 -0000
 Received: from b9.ovh.net (HELO mail632.ha.ovh.net) (213.186.33.59)
 	by 30.mail-out.ovh.net with SMTP; 29 Oct 2010 21:03:49 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
@@ -13,15 +13,17 @@ Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	by ns0.ovh.net with SMTP; 29 Oct 2010 23:24:46 +0200
 From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Oct 2010 23:25:40 +0200
-Message-Id: <1288387543-1277-4-git-send-email-eric@eukrea.com>
+Date: Fri, 29 Oct 2010 23:25:42 +0200
+Message-Id: <1288387543-1277-6-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1288387543-1277-3-git-send-email-eric@eukrea.com>
+In-Reply-To: <1288387543-1277-5-git-send-email-eric@eukrea.com>
 References: <1288387543-1277-1-git-send-email-eric@eukrea.com>
 	<1288387543-1277-2-git-send-email-eric@eukrea.com>
 	<1288387543-1277-3-git-send-email-eric@eukrea.com>
+	<1288387543-1277-4-git-send-email-eric@eukrea.com>
+	<1288387543-1277-5-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 4295871096254606668
+X-Ovh-Tracer-Id: 4295871096254606670
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-SA-Exim-Connect-IP: 213.186.62.213
@@ -32,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 4/7] busybox's mdev: add script to populate /dev/bus/usb
+Subject: [PATCH 6/7] qt-4.7: rename qtdemo to qtdemoE for qt4-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2010 21:25:37 -0000
+X-List-Received-Date: Fri, 29 Oct 2010 21:25:38 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-this patch allows libusb to work on kernel configured without
-CONFIG_USB_DEVICEFS
+in order to stay consistant with 4.6.x releases.
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/busybox/busybox_1.1x.inc |    2 ++
- recipes/busybox/files/mdev.conf  |    2 +-
- 2 files changed, 3 insertions(+), 1 deletions(-)
+ recipes/qt4/qt-4.7.0.inc          |    5 +++++
+ recipes/qt4/qt4-embedded_4.7.0.bb |    2 +-
+ 2 files changed, 6 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/busybox/busybox_1.1x.inc b/recipes/busybox/busybox_1.1x.inc
-index df536f6..079c784 100644
---- a/recipes/busybox/busybox_1.1x.inc
-+++ b/recipes/busybox/busybox_1.1x.inc
-@@ -23,6 +23,7 @@ SRC_URI = "\
-   file://defconfig \
-   file://mdev \
-   file://mdev.conf \
-+  file://usb.sh \
- "
+diff --git a/recipes/qt4/qt-4.7.0.inc b/recipes/qt4/qt-4.7.0.inc
+index cf4b0d8..ba2b25a 100644
+--- a/recipes/qt4/qt-4.7.0.inc
++++ b/recipes/qt4/qt-4.7.0.inc
+@@ -60,6 +60,11 @@ do_install_append() {
+ 	for i in rcc uic moc ; do
+ 		install -m 0755 ${S}/bin/$i ${D}${bindir}/
+ 	done
++
++        #Append an E to the qtdemo file
++        if [ -n "${QT_LIBINFIX}" ] ; then
++                mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
++        fi
+ }
  
- EXTRA_OEMAKE += "V=1 ARCH=${TARGET_ARCH} CROSS_COMPILE=${TARGET_PREFIX}"
-@@ -38,6 +39,7 @@ do_install_append() {
-     install -d ${D}${sysconfdir}/init.d/
-     install -d ${D}${sysconfdir}/mdev
-     install -m 0755 ${WORKDIR}/find-touchscreen.sh ${D}${sysconfdir}/mdev/
-+    install -m 0755 ${WORKDIR}/usb.sh ${D}${sysconfdir}/mdev/
-     install -m 0755 ${WORKDIR}/mdev ${D}${sysconfdir}/init.d/
+ SRC_URI[md5sum] = "3a2f25b9b115037277f4fb759194a7a5"
+diff --git a/recipes/qt4/qt4-embedded_4.7.0.bb b/recipes/qt4/qt4-embedded_4.7.0.bb
+index 1cd43a6..7e3d4b8 100644
+--- a/recipes/qt4/qt4-embedded_4.7.0.bb
++++ b/recipes/qt4/qt4-embedded_4.7.0.bb
+@@ -2,7 +2,7 @@ DEFAULT_PREFERENCE = "-1"
  
-     if grep "CONFIG_UDHCPD=y" ${WORKDIR}/defconfig; then
-diff --git a/recipes/busybox/files/mdev.conf b/recipes/busybox/files/mdev.conf
-index 8f57b0a..0e1d6bc 100644
---- a/recipes/busybox/files/mdev.conf
-+++ b/recipes/busybox/files/mdev.conf
-@@ -20,7 +20,7 @@ sda 0:6 0640
- tty 0:5 0666 
- tty.* 0:0 0620 
- urandom 0:0 0666 
--usbdev.* 0:0 0660 
-+usbdev.* 0:0 0660 */etc/mdev/usb.sh
- vcs.* 0:5 0660 
- zero 0:0 0666 
-  
+ require qt4-embedded.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
+ 
 -- 
 1.6.3.3
 
