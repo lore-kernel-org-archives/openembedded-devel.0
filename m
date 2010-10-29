@@ -1,44 +1,33 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PBmT3-0007K4-7Z
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Oct 2010 12:45:57 +0200
-Received: by iwn42 with SMTP id 42so2898620iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Oct 2010 03:45:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=NZeMuv8Y9aC4+6b56y69CekNmB+ufPEYWnzFWaJN0jM=;
-	b=xRCpPEYwBnWT3UZnannkqbgQ37FNdnHuOUaaQiw0NHHu0Q0T+5hu8aJUcooLV2yTVY
-	NvID19x8lS1zTfvqT10DQ/d2F7T3SbFJsN49t4S0yZkS02Zkg4faR6Eu9nvJaetfoE9k
-	L/4xNKEZ6l2bkLuHQ8CFc8xdanNdfUkSNOST8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=LNCPv+Im9xFo0YxWe7DnEjZibl7ayB+rWF62uvq/y0HmV5laaB/y6JhFpDMcLoepIu
-	hG7VNgQlOIiL3FD/FNAo2LP9deqgDkJWnQ3D0r21beVX2KZ+KP7V0fZi3+GzXtkpN4lr
-	tbmXBBZaGBFeUZMne7BQTC4z/mN1D2V4gw/xg=
+Received: from smtplq-out19.aruba.it ([62.149.158.39] helo=smtplq02.aruba.it)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <pierluigi.passaro@phoenixsoftware.it>)
+	id 1PBn0X-0006UH-RP for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Oct 2010 13:20:31 +0200
+Received: (qmail 28875 invoked by uid 89); 29 Oct 2010 09:33:04 -0000
+Received: from unknown (HELO smtp3.aruba.it) (62.149.158.223)
+	by smtplq02.aruba.it with SMTP; 29 Oct 2010 09:33:04 -0000
+Received: (qmail 4340 invoked by uid 89); 29 Oct 2010 09:33:00 -0000
+Received: from unknown (HELO ?192.168.8.32?)
+	(pierluigi.passaro@phoenixsoftware.it@78.12.130.33)
+	by smtp3.ad.aruba.it with SMTP; 29 Oct 2010 09:33:00 -0000
+Message-ID: <4CCA94CC.3080302@phoenixsoftware.it>
+Date: Fri, 29 Oct 2010 11:33:00 +0200
+From: Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
-Received: by 10.231.31.196 with SMTP id z4mr212469ibc.81.1288349108712; Fri,
-	29 Oct 2010 03:45:08 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Fri, 29 Oct 2010 03:45:08 -0700 (PDT)
-In-Reply-To: <1288342969.18134.5.camel@mattotaupa>
-References: <1288342969.18134.5.camel@mattotaupa>
-Date: Fri, 29 Oct 2010 12:45:08 +0200
-Message-ID: <AANLkTi=-YbdMyKZkH47b67=6bRZaXPZ63E9ChxkSbphx@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4CC97820.5090808@nedap.com>
+	<loom.20101029T033738-284@post.gmane.org>
+In-Reply-To: <loom.20101029T033738-284@post.gmane.org>
+X-SA-Exim-Connect-IP: 62.149.158.39
+X-SA-Exim-Mail-From: pierluigi.passaro@phoenixsoftware.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OEDEM 2010: [RFC] useful commit message
+Subject: Re: bitbake error?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,43 +41,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2010 10:46:08 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 29 Oct 2010 11:20:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/10/29 Paul Menzel <paulepanter@users.sourceforge.net>:
-> Dear OE folks,
->
->
-> could you please discuss the following proposal.
->
-> I would very much like more elaborate commit messages. This is in my
-> opinion already demanded by the commit policy [1], but often patch
-> submitters, especially those not sending changes to review to the list,
-> since they have direct access to the repository, fail to adhere to the
-> policy.
->
-> The reason is, quite often I do not understand why a change was
-> necessary. It would very much help me, if at least the error message was
-> pasted to be able to compare with one=92s own error messages and what
-> distribution and machine was used to test the recipe.
->
-> I added an item to the OEDEM wiki page too [2].
->
->
-> Thanks,
->
-> Paul
->
->
-> [1] http://wiki.openembedded.org/index.php/Commit_Policy
-> [2] http://wiki.openembedded.org/index.php?title=3DOedem%2F2010&diff=3D29=
-61&oldid=3D2954
->
+Not sure this is the best solution, but I solved same issue using latest 
+bitbake 1.10.1 downloaded from
 
-It has been added to the agenda!
-Thanks for bringing up this topic.
+http://download.berlios.de/bitbake/bitbake-1.10.1.tar.gz
 
-Frans
+
+James Ronald wrote:
+> Jaap de Jong <jaap.dejong <at> nedap.com> writes:
+>
+>   
+>> I'm probably totally stupid...
+>> What am doing wrong?
+>> (I'm working on a fresh unstable branch)
+>> When I bitbake I get:
+>>
+>> MACHINE=at91sam9263ek  bitbake u-boot
+>> Traceback (most recent call last):
+>>    File "/media/OpenEmbedded/unstable/bitbake/bin/bitbake", line 143, in 
+>> <module>
+>>      main()
+>>    File "/media/OpenEmbedded/unstable/bitbake/bin/bitbake", line 123, in 
+>> main
+>>      cooker.parseConfiguration()
+>>    File "/media/OpenEmbedded/unstable/bitbake/lib/bb/cooker.py", line 
+>> 68, in parseConfiguration
+>>      self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
+>>    File "/media/OpenEmbedded/unstable/bitbake/lib/bb/cooker.py", line 
+>> 402, in parseConfigurationFile
+>>      bb.fetch.fetcher_init(self.configuration.data)
+>>    File "/media/OpenEmbedded/unstable/bitbake/lib/bb/fetch/__init__.py", 
+>> line 93, in fetcher_init
+>>      pd = persist_data.PersistData(d)
+>>    File "/media/OpenEmbedded/unstable/bitbake/lib/bb/persist_data.py", 
+>> line 52, in __init__
+>>      bb.mkdirhier(self.cachedir)
+>>    File "/media/OpenEmbedded/unstable/bitbake/lib/bb/__init__.py", line 
+>> 133, in mkdirhier
+>>      debug(3, "mkdirhier(%s)" % dir)
+>>    File "/media/OpenEmbedded/unstable/bitbake/lib/bb/__init__.py", line 
+>> 103, in debug
+>>      bb.msg.debug(lvl, None, ''.join(args))
+>>    File "/media/OpenEmbedded/unstable/bitbake/lib/bb/msg.py", line 100, 
+>> in debug
+>>      bb.event.fire(MsgDebug(msg, None))
+>>    File "/media/OpenEmbedded/unstable/bitbake/lib/bb/event.py", line 67, 
+>> in fire
+>>      if tmpHandler(event) == Handled:
+>>    File "tmpHandler(e)", line 8, in tmpHandler
+>> NameError: global name 'msg' is not defined
+>>
+>>     
+>
+> I'm getting the exact same error. I'm new to OE and just going through the 
+> Getting started wiki entry. Ubuntu 10.04 installing bitbake via apt-get install 
+> bitbake.
+>
+> bitbake --version 
+> BitBake Build Tool Core version 1.8.18, bitbake version 1.8.18
+>   
+> OE is current as of a few minutes ago.
+>
+> jr@ubuntu-xpc:~/oe/build$ bitbake nano
+> Traceback (most recent call last):
+>   File "/usr/bin/bitbake", line 143, in <module>
+>     main()
+>   File "/usr/bin/bitbake", line 123, in main
+>     cooker.parseConfiguration()
+>   File "/usr/lib/pymodules/python2.6/bb/cooker.py", line 67, in 
+> parseConfiguration
+>     self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
+>   File "/usr/lib/pymodules/python2.6/bb/cooker.py", line 401, in 
+> parseConfigurationFile
+>     bb.fetch.fetcher_init(self.configuration.data)
+>   File "/usr/lib/pymodules/python2.6/bb/fetch/__init__.py", line 93, in 
+> fetcher_init
+>     pd = persist_data.PersistData(d)
+>   File "/usr/lib/pymodules/python2.6/bb/persist_data.py", line 52, in __init__
+>     bb.mkdirhier(self.cachedir)
+>   File "/usr/lib/pymodules/python2.6/bb/__init__.py", line 133, in mkdirhier
+>     debug(3, "mkdirhier(%s)" % dir)
+>   File "/usr/lib/pymodules/python2.6/bb/__init__.py", line 103, in debug
+>     bb.msg.debug(lvl, None, ''.join(args))
+>   File "/usr/lib/pymodules/python2.6/bb/msg.py", line 100, in debug
+>     bb.event.fire(MsgDebug(msg, None))
+>   File "/usr/lib/pymodules/python2.6/bb/event.py", line 67, in fire
+>     if tmpHandler(event) == Handled:
+>   File "tmpHandler(e)", line 8, in tmpHandler
+> NameError: global name 'msg' is not defined
+>
+> - Jim 
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
 
 
