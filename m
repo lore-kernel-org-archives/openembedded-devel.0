@@ -1,37 +1,43 @@
-Received: from usps1.crhc.illinois.edu ([130.126.143.230]
-	helo=usps.crhc.uiuc.edu) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <johnso87@crhc.illinois.edu>) id 1PBwVE-0007sr-Jw
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <graham.gower@gmail.com>) id 1PBwtS-0008KG-2l
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Oct 2010 23:28:51 +0200
-Received: from usps.crhc.uiuc.edu (localhost [127.0.0.1])
-	by usps.crhc.uiuc.edu (Postfix) with ESMTP id EEBED340009B
+	Fri, 29 Oct 2010 23:53:50 +0200
+Received: by wwb39 with SMTP id 39so3516016wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Oct 2010 16:28:03 -0500 (CDT)
-Received: from [128.252.3.32] (mjlap-128252003032.psychology.wustl.edu
-	[128.252.3.32])
-	(using SSLv3 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: johnso87)
-	by usps.crhc.uiuc.edu (Postfix) with ESMTPSA id CD6D23400094
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Oct 2010 16:28:03 -0500 (CDT)
-Message-ID: <4CCB3C63.4000503@crhc.illinois.edu>
-Date: Fri, 29 Oct 2010 16:28:03 -0500
-From: Matt Johnson <johnso87@crhc.illinois.edu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
+	Fri, 29 Oct 2010 14:53:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=9cvoadXcufp8kul2VG4silDn1jnIgJ5CLNaPnz8UJWI=;
+	b=e2XFogVP1I2e6YiTxz3OkZpscfuOYNix/LsMfzg4Rr63hlUqaxT4l/DSOqMcVQ5HvR
+	CiLHwKksNTpTP6bjFOnbjznmVcJ2Rin0cP86gJ9zo1KCOGbujRvugxC0pMdqrEte2Kf8
+	jAufG8xrspmfELdVwPLGzL66F6xk+vJ9Cem2I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=m7Ed40XpmIBdku7OkRQG2R792kMfZDmyBDn2LyK6IOKhZhP7yVynhB6JXlOJko1CWr
+	Hx1WKPwjcwhAuf5iYTvGnnPv0+lmdv6dh+UdlIwxCG4VmanJ3dvPiEQh38I+S2RlbJ96
+	KfHpB6+Iyv5FGvcoIjmvGrO6xjjWBp8Eavdb0=
 MIME-Version: 1.0
+Received: by 10.227.138.142 with SMTP id a14mr1015605wbu.78.1288389182931;
+	Fri, 29 Oct 2010 14:53:02 -0700 (PDT)
+Received: by 10.227.37.205 with HTTP; Fri, 29 Oct 2010 14:53:02 -0700 (PDT)
+In-Reply-To: <20101029191718.GA27520@gmail.com>
+References: <20101029191718.GA27520@gmail.com>
+Date: Sat, 30 Oct 2010 08:23:02 +1030
+Message-ID: <AANLkTinhwS6oiM4iF_eoEbugqdaWBLN8Pgd0bCaupzwc@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 130.126.143.230
-X-SA-Exim-Mail-From: johnso87@crhc.illinois.edu
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [PATCH]: Fix GraphViz .dot output for rdepends and rrecs (BitBake 1.10)
+Subject: Re: [RFC] Toolchain recipes, versions, removal and consolidation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,44 +51,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2010 21:28:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Oct 2010 21:53:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-The below patch fixes rdepends and rrecs GraphViz output.  These two are 
-put into the rdepends data structure differently than the rest, and 
-without this patch, each character gets its own vertex, which is wrong 
-and creates massive .dot files.  The fix is similar to a previous one 
-documented here: 
-http://bugs.openembedded.org/attachment.cgi?id=13797&action=diff 
-<http://bugs.openembedded.org/attachment.cgi?id=13797&action=diff> .  I 
-have submitted the patch to the BitBake developer list too.
+On 30 October 2010 05:47, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi
+>
+> There are so many versions of toolchain components gcc/binutils/glibc that
+> we have in metadata. I would like to reduce the number and keep supporting
+> the ones we really use. Right now we have recipes for
+>
+> binutils = 2.14.90.0.6,2.14.90.0.7, 2.15.94.0.1, 2.16, 2.16.1, 2.16.91.0.6,
+> 2.16.91.0.7, 2.17, 2.17.50.1, 2.17.50.0.5, 2.17.50.0.8, 2.17.50.0.12, 2.18,
+> 2.18.50.0.7, 2.18.atmel.1.0.1, 2.19, 2.19.1, 2.19.51, 2.19.51.0.3, 2.20,
+> 2.20.1, cvs
+>
+> gcc = 3.3.3, 3.3.4, 3.4.3, 3.4.4, 3.4.6, 4.0.0, 4.0.2, 4.1.0, 4.1.1, 4.1.2,
+> 4.2.1, 4.2.2, 4.2.3, 4.2.4, 4.3.1, 4.3.2, 4.3.3, 4.3.4, 4.4.1, 4.4.2,
+> 4.4.4, 4.5, csl-arm-2007q3, csl-arm-2008q1, csl-arm-2008q3
+>
+> glibc = 2.2.5, 2.3.2, 2.3.3, 2.3.5+cvs20050627, 2.5, 2.6.1, 2.9, 2.10.1,
+> cvs
+>
+> uclibc = 0.9.28, 0.9.29, 0.9.30, 0.9.30.1, 0.9.30.2, 0.9.30.3, 0.9.31, git
+>
+>
+> eglibc = 2.9, 2.10, 2.11, 2.12, svn
+>
+> They all use common files. So whenever there is a bugfix needed its a very
+> hard job to first create a common fix that works across all versions
+> secondly verify if it works and I am sure 80% of recipe versions mentioned
+> here dont even build
+>
+> So I am going to propose to remove most of them which dont build and
+> request the distro and machine maintainers to please update the list of
+> toolchain components to keep.
+>
+> Please voice which versions should we really really keep. This should be a
+> set which is buildable and functional.
+>
+> If I dont hear on this in coming weeks then I have a plan in my mind on
+> which versions to keep
+>
+> Thanks
+>
+> -Khem
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-diff -uNr lib/bb/cooker.py.busted lib/bb/cooker.py
---- lib/bb/cooker.py.busted     2010-10-29 16:15:01.157515847 -0500
-+++ lib/bb/cooker.py    2010-10-29 16:17:12.367546106 -0500
-@@ -435,11 +435,11 @@
-              for depend in depgraph["depends"][pn]:
-                  print >> depends_file, '"%s" -> "%s"' % (package, depend)
-          for package in depgraph["rdepends-pkg"]:
--            for rdepend in depgraph["rdepends-pkg"][package]:
--                print >> depends_file, '"%s" -> "%s" [style=dashed]' % 
-(package, rdepend)
-+            for rdepend in re.findall("([\w.-]+)(\ \(.+\))?", 
-''.join(depgraph["rdepends-pkg"][package])):
-+                print >> depends_file, '"%s" -> "%s%s" [style=dashed]' 
-% (package, rdepend[0], rdepend[1])
-          for package in depgraph["rrecs-pkg"]:
--            for rdepend in depgraph["rrecs-pkg"][package]:
--                print >> depends_file, '"%s" -> "%s" [style=dashed]' % 
-(package, rdepend)
-+            for rdepend in re.findall("([\w.-]+)(\ \(.+\))?", 
-''.join(depgraph["rrecs-pkg"][package])):
-+                print >> depends_file, '"%s" -> "%s%s" [style=dashed]' 
-% (package, rdepend[0], rdepend[1])
-          print >> depends_file,  "}"
-          bb.msg.plain("Package dependencies saved to 
-'package-depends.dot'")
 
+I welcome removal of obsolete recipes here. The barrier for others to
+create patches will be reduced dramatically.
+
+One further thing: glibc is obsolete for embedded systems, long live eglibc.
+
+-Graham
 
 
