@@ -1,35 +1,45 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>)
-	id 1PBoM9-0004hm-WB; Fri, 29 Oct 2010 14:46:54 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9TCk8PL009803;
-	Fri, 29 Oct 2010 13:46:08 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09220-09; Fri, 29 Oct 2010 13:46:04 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9TCjx4c009796
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Fri, 29 Oct 2010 13:46:00 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-members <openembedded-members@lists.openembedded.org>
-Date: Fri, 29 Oct 2010 13:45:59 +0100
-Message-ID: <1288356359.1285.2641.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <thoughtmonster@gmail.com>) id 1PBpfZ-0004zO-1v
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Oct 2010 16:11:02 +0200
+Received: by wya21 with SMTP id 21so3196088wya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Oct 2010 07:10:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=jqSvEgz5IgiShAcEPrtLb2T7M4D8ooG7Xz4uHKXdOuo=;
+	b=SznQLpWDZ71FxzjxDYuFT9qs0fr28QSeVNl+eWfXJcMEAfwrjIcXT6t3sX0lliD17z
+	rThPXoeEVRlDBwjSp4Fd2vGJT2WB+tBhEM42qlv2GFfOvs7I0MZP0VHSJ2hQWVWIZZtI
+	uN6TM1w5ElmhNurEBRj+Yn/BYXte4vpksB1sE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=cNA5UhSw0Pmso/AdM/SNDyy5bk8Zurv8fG+5h/kawiqHoeEF43fifXd079kdpAulY5
+	D85e/F/XG1OcKjo8MvTRWngZ2eZjARlWz/5cLptW55dy1UNvHUChiWsPgz798a8YcwUB
+	RiKiDUaPYMyfe0S9ZmBadZ97GHJY8AYtQTOtA=
+Received: by 10.227.174.206 with SMTP id u14mr12432034wbz.40.1288361412466;
+	Fri, 29 Oct 2010 07:10:12 -0700 (PDT)
+Received: from localhost.localdomain (athedsl-424585.home.otenet.gr
+	[79.131.210.135])
+	by mx.google.com with ESMTPS id ga16sm2095685wbb.13.2010.10.29.07.10.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 29 Oct 2010 07:10:11 -0700 (PDT)
+From: Alex Ferguson <thoughtmonster@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 29 Oct 2010 17:08:54 +0300
+Message-Id: <1288361334-17427-1-git-send-email-thoughtmonster@gmail.com>
+X-Mailer: git-send-email 1.7.3.2
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: thoughtmonster@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: OEDEM - Saturday
+Cc: Alex Ferguson <thoughtmonster@gmail.com>
+Subject: [PATCH] classes: Modify rootfs_ipk.bbclass for -force-overwrite.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,19 +53,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2010 12:46:55 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Oct 2010 14:11:02 -0000
 
-Hi,
+Rationale: In Jlime we ship a package called jlime-extras which
+contains several files (configuration files, scripts, etc.), some
+of which conflict with files provided by other packages. This is
+intentional, and is for distro customization purposes. For example
+we ship a modified version of the /usr/bin/startx script, some
+alternative icons for applications, some modified .desktop files
+and so on. Building an image with this jlime-extras package fails,
+of course, due to conflicting files.
 
-If you're planning to attend OEDEM on Saturday but aren't here on
-Friday, please let me know so we can ensure we're catering for the right
-number of people.
+To overcome this issue, I have added a base-conditional to
+rootfs_ipk.bbclass, adding the PACKAGE_FORCE_OVERWRITE variable
+to IPKG_ARGS which enables -force-overwrite for opkg, and which
+can be used in image recipes individually without affecting others.
 
-Cheers,
+I believe this functionality might be useful for everyone and comes
+at almost no additional cost, which is why I'm sending this patch
+for consideration by the OE developers.
 
-Richard
+I'd be more than happy to help in any way in order to get this in.
+
+Thank you.
+
+Signed-off-by: Alex Ferguson <thoughtmonster@gmail.com>
+---
+ classes/rootfs_ipk.bbclass |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+index a4a8563..dd8586a 100644
+--- a/classes/rootfs_ipk.bbclass
++++ b/classes/rootfs_ipk.bbclass
+@@ -9,9 +9,10 @@ do_rootfs[depends] += "opkg-native:do_populate_sysroot"
+ do_rootfs[lockfiles] = "${DEPLOY_DIR_IPK}.lock"
+ 
+ IPKG_TMP_DIR = "${IMAGE_ROOTFS}-tmp"
+-IPKG_ARGS = "-f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} -t ${IPKG_TMP_DIR} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", "-nodeps", "", d)}"
++IPKG_ARGS = "-f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} -t ${IPKG_TMP_DIR} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", "-nodeps", "", d)} ${@base_conditional("PACKAGE_FORCE_OVERWRITE", "1", "-force-overwrite", "", d)}"
+ 
+ PACKAGE_INSTALL_NO_DEPS ?= "0"
++PACKAGE_FORCE_OVERWRITE ?= "0"
+ 
+ # What support to provide for online management of packages at run time?
+ #  full -> traditional system, opkg is installed with all metadata
+-- 
+1.7.3.2
 
 
 
