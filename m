@@ -1,46 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <james.ronald@gmail.com>) id 1PBqlA-0001V7-Oe
+	(envelope-from <thoughtmonster@gmail.com>) id 1PBr5N-0001VT-Dy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Oct 2010 17:20:56 +0200
-Received: by bwz10 with SMTP id 10so2619190bwz.6
+	Fri, 29 Oct 2010 17:41:46 +0200
+Received: by wwb39 with SMTP id 39so3205380wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Oct 2010 08:20:07 -0700 (PDT)
+	Fri, 29 Oct 2010 08:40:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=5MAAP3Bi3c/rKuSjjwyBg350rlPwOYv8nTa4T1NpCEE=;
-	b=fu2ppo9Z1dywmUkr3Yv+guhnVAh258hEeQ6+2HGYTGPJ8y7kul+P+uLsAecpBpOIO+
-	fbu5gO0EAX/gOop4WuZ6GNcwUpUXbU9Pe9SMo9ziWolUUj7l7Uo4J8vt4Ml7iK1k+Nme
-	0qviDBX0BzZDSSs8nVmDkagO9f80ybGpjJI/s=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=r+44svZPXLFa2iwdZQxfg/88L5w6nWL03oYUJGzKIxU=;
+	b=b3pU/b4ZLzcE0mejVKA9LO7DS7VfNRdDYH6J50sx1knaNz+kqIL0jA4N2N/VwmLhYS
+	sqn0nHQD0dPI3e5s6I6Hy3+sSBPi+lB2BELplbPoSwRLFbnFhPIw+eC4qEUo4cXYi3Z9
+	EOnv/Ir6F/KfB5nel4IuOyfECT5MY7hFKxK4I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=HDyrQnCftf51ykZVHv7pyJCIW0t1Nh0G85l3jRjmZRPUFqe5gglLYMwMjpOjUSl0BL
-	0sfhNKKZpG465Lf2QSD0No0jNe9pIamCG+nBjSIC3gHJz4p+Npjlii7RdEx1OHXEckC5
-	aE2LGvoEXD/ITUaFvZ+E+vSV7tG3DPsYxITvY=
+	:content-type;
+	b=n7JbhK4sdPq7ezZ8VfXKunkEe2oyJxiHiIHgOBnMyaeNXqhiejGLSrC1ho533AXW7B
+	LLSik+LVzPPPaH9+aLwbBt0MeEzUjCvO0e4u6xBlSk3YQgkQarvE1WzWpui85JsJvmJC
+	uxdJ31kcOXZsx72CIOMn47X8vl/wwTdA9qpAc=
 MIME-Version: 1.0
-Received: by 10.204.117.199 with SMTP id s7mr10079503bkq.15.1288365606832;
-	Fri, 29 Oct 2010 08:20:06 -0700 (PDT)
-Received: by 10.204.25.7 with HTTP; Fri, 29 Oct 2010 08:20:06 -0700 (PDT)
-In-Reply-To: <4CCA94CC.3080302@phoenixsoftware.it>
-References: <4CC97820.5090808@nedap.com>
-	<loom.20101029T033738-284@post.gmane.org>
-	<4CCA94CC.3080302@phoenixsoftware.it>
-Date: Fri, 29 Oct 2010 11:20:06 -0400
-Message-ID: <AANLkTimpAJJUoDkY=JvH6o39kssgWdGkgWs_fHa4q-Gd@mail.gmail.com>
-From: James Ronald <james.ronald@gmail.com>
+Received: by 10.216.87.84 with SMTP id x62mr1786286wee.48.1288366856796; Fri,
+	29 Oct 2010 08:40:56 -0700 (PDT)
+Received: by 10.216.155.141 with HTTP; Fri, 29 Oct 2010 08:40:56 -0700 (PDT)
+In-Reply-To: <20101029145536.GA3206@jama>
+References: <1288361334-17427-1-git-send-email-thoughtmonster@gmail.com>
+	<20101029145536.GA3206@jama>
+Date: Fri, 29 Oct 2010 18:40:56 +0300
+Message-ID: <AANLkTi=HBBHMH9BZctTboQkagbD_zsLYE7N0Vkg4t5nP@mail.gmail.com>
+From: Alex Ferguson <thoughtmonster@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: james.ronald@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: thoughtmonster@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake error?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] classes: Modify rootfs_ipk.bbclass for -force-overwrite.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,125 +53,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2010 15:20:56 -0000
+X-List-Received-Date: Fri, 29 Oct 2010 15:41:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Pierluigi,
+First of all, thank you for your quick reply.
 
-Thanks! Installing bitbake-1.10.1 fixed my problem.
+So,
 
-- Jim
+On Fri, Oct 29, 2010 at 5:55 PM, Martin Jansa <martin.jansa@gmail.com>wrote:
 
-On Fri, Oct 29, 2010 at 5:33 AM, Pierluigi Passaro
-<pierluigi.passaro@phoenixsoftware.it> wrote:
+> Why not modify the original files in corresponding recipes with distro
+> override?
 >
-> Not sure this is the best solution, but I solved same issue using latest =
-bitbake 1.10.1 downloaded from
->
-> http://download.berlios.de/bitbake/bitbake-1.10.1.tar.gz
->
->
-> James Ronald wrote:
->>
->> Jaap de Jong <jaap.dejong <at> nedap.com> writes:
->>
->>
->>>
->>> I'm probably totally stupid...
->>> What am doing wrong?
->>> (I'm working on a fresh unstable branch)
->>> When I bitbake I get:
->>>
->>> MACHINE=3Dat91sam9263ek =A0bitbake u-boot
->>> Traceback (most recent call last):
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/bin/bitbake", line 143, =
-in <module>
->>> =A0 =A0 main()
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/bin/bitbake", line 123, =
-in main
->>> =A0 =A0 cooker.parseConfiguration()
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/cooker.py", line =
-68, in parseConfiguration
->>> =A0 =A0 self.parseConfigurationFile( os.path.join( "conf", "bitbake.con=
-f" ) )
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/cooker.py", line =
-402, in parseConfigurationFile
->>> =A0 =A0 bb.fetch.fetcher_init(self.configuration.data)
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/fetch/__init__.py=
-", line 93, in fetcher_init
->>> =A0 =A0 pd =3D persist_data.PersistData(d)
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/persist_data.py",=
- line 52, in __init__
->>> =A0 =A0 bb.mkdirhier(self.cachedir)
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/__init__.py", lin=
-e 133, in mkdirhier
->>> =A0 =A0 debug(3, "mkdirhier(%s)" % dir)
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/__init__.py", lin=
-e 103, in debug
->>> =A0 =A0 bb.msg.debug(lvl, None, ''.join(args))
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/msg.py", line 100=
-, in debug
->>> =A0 =A0 bb.event.fire(MsgDebug(msg, None))
->>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/event.py", line 6=
-7, in fire
->>> =A0 =A0 if tmpHandler(event) =3D=3D Handled:
->>> =A0 File "tmpHandler(e)", line 8, in tmpHandler
->>> NameError: global name 'msg' is not defined
->>>
->>>
->>
->> I'm getting the exact same error. I'm new to OE and just going through t=
-he Getting started wiki entry. Ubuntu 10.04 installing bitbake via apt-get =
-install bitbake.
->>
->> bitbake --version BitBake Build Tool Core version 1.8.18, bitbake versio=
-n 1.8.18
->> =A0OE is current as of a few minutes ago.
->>
->> jr@ubuntu-xpc:~/oe/build$ bitbake nano
->> Traceback (most recent call last):
->> =A0File "/usr/bin/bitbake", line 143, in <module>
->> =A0 =A0main()
->> =A0File "/usr/bin/bitbake", line 123, in main
->> =A0 =A0cooker.parseConfiguration()
->> =A0File "/usr/lib/pymodules/python2.6/bb/cooker.py", line 67, in parseCo=
-nfiguration
->> =A0 =A0self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf"=
- ) )
->> =A0File "/usr/lib/pymodules/python2.6/bb/cooker.py", line 401, in parseC=
-onfigurationFile
->> =A0 =A0bb.fetch.fetcher_init(self.configuration.data)
->> =A0File "/usr/lib/pymodules/python2.6/bb/fetch/__init__.py", line 93, in=
- fetcher_init
->> =A0 =A0pd =3D persist_data.PersistData(d)
->> =A0File "/usr/lib/pymodules/python2.6/bb/persist_data.py", line 52, in _=
-_init__
->> =A0 =A0bb.mkdirhier(self.cachedir)
->> =A0File "/usr/lib/pymodules/python2.6/bb/__init__.py", line 133, in mkdi=
-rhier
->> =A0 =A0debug(3, "mkdirhier(%s)" % dir)
->> =A0File "/usr/lib/pymodules/python2.6/bb/__init__.py", line 103, in debu=
-g
->> =A0 =A0bb.msg.debug(lvl, None, ''.join(args))
->> =A0File "/usr/lib/pymodules/python2.6/bb/msg.py", line 100, in debug
->> =A0 =A0bb.event.fire(MsgDebug(msg, None))
->> =A0File "/usr/lib/pymodules/python2.6/bb/event.py", line 67, in fire
->> =A0 =A0if tmpHandler(event) =3D=3D Handled:
->> =A0File "tmpHandler(e)", line 8, in tmpHandler
->> NameError: global name 'msg' is not defined
->>
->> - Jim
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+I understand this would be the best solution all around, but in most cases
+this is impractical, as it is the case with icon themes. These
+customizations change from
+time to time and having to modify several packages (which will have to go
+upstream),
+is something I'd like to avoid.
+
+
+> Problem with this kind of package overwritting other packages is when
+> original package is upgraded (PR bump or even just DISTRO_PR) it forces
+> user to also use -force-overwrite and then he will loose those
+> customizations.
+>
+> I don't have problem with it as long as it's conditional, but I would be
+> very carefull with using it. IMHO this is good only if you're building
+> images which are not supposed to be upgraded by user with ie opkg on target<Martin.Jansa@gmail.com>
+>
+
+Our images are generally not upgraded but a simple workaround would be
+pushing
+the PR for jlime-extras along with other packages which might conflict,
+although you
+are correct as far as the user having to do -force-overwrite himself.
+
+Thinking about it, it seems like a workaround, one which might cause some
+issues down the road. I have nothing else for now and it certainly doesn't
+hurt having the option there. I might just have to think of something better
+for the future.
+
+Thank you,
+
+Alex Ferguson.
 
