@@ -1,40 +1,35 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1PBo2j-0004HY-7b
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Oct 2010 14:26:49 +0200
-Received: by wwb39 with SMTP id 39so3017907wwb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Oct 2010 05:26:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=yJKith1gdgwdui3I7CWAJM8jp+xR4qubnezgcnCh3Xc=;
-	b=pHCnG9MH/ZiYAk4WPiMLMxlu/N5a20cdA8Lf83zZkQZSEJRxVU9AzlukN9Lu2kFbbu
-	r7puM7ODYoLCAR9e0ObaEO6Ow9qn1ar8+nlfSJHG9vQ7TicXcUOyLOxlz60Aze2mzDW4
-	w5t5kL5schX44aPKaOBb+/rJP7/XtTup6zbik=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=s2tJodSkvemrkWw5w1c5BMntVShBbPRag27ZRS2CEXrzFbOEk+7YD4haYfmAe7RGaz
-	DBWlGckhMiD63MSK+L7Xt+7GFIYDSwPo4s9PUagH9V6JKe3FJQzsSMnLnqOl+pI5J/EZ
-	A1lyutuIZxOIoqOg9g2ESn4oxHwax3lwxU9lQ=
-MIME-Version: 1.0
-Received: by 10.227.156.202 with SMTP id y10mr4885015wbw.48.1288355163383;
-	Fri, 29 Oct 2010 05:26:03 -0700 (PDT)
-Received: by 10.216.235.214 with HTTP; Fri, 29 Oct 2010 05:26:03 -0700 (PDT)
-Date: Fri, 29 Oct 2010 08:26:03 -0400
-Message-ID: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>)
+	id 1PBoM9-0004hm-WB; Fri, 29 Oct 2010 14:46:54 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9TCk8PL009803;
+	Fri, 29 Oct 2010 13:46:08 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 09220-09; Fri, 29 Oct 2010 13:46:04 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o9TCjx4c009796
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 29 Oct 2010 13:46:00 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-members <openembedded-members@lists.openembedded.org>
+Date: Fri, 29 Oct 2010 13:45:59 +0100
+Message-ID: <1288356359.1285.2641.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: testing branch 2010-10-29
+Subject: OEDEM - Saturday
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2010 12:26:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 29 Oct 2010 12:46:55 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-testing-next is ready for clean builds.  I'm still working on my
-process to get this branch created automatically--thanks for your
-patience.
+Hi,
 
-Last weeks testing failed in a number of areas.  The combinations that
-worked at listed in the tag:
-http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-10-25
+If you're planning to attend OEDEM on Saturday but aren't here on
+Friday, please let me know so we can ensure we're catering for the right
+number of people.
 
-For more information on the testing effort:
-http://wiki.openembedded.org/index.php/Testing
+Cheers,
 
-Thanks,
-Cliff
+Richard
 
--- 
-=================
-http://bec-systems.com
 
 
