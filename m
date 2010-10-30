@@ -1,38 +1,48 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PCFQp-0002ba-8S
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martin.jansa@gmail.com>) id 1PCKlx-0000Hh-52
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Oct 2010 19:41:31 +0200
-Received: (qmail 29081 invoked by uid 503); 30 Oct 2010 18:09:48 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 30 Oct 2010 18:09:47 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 30 Oct 2010 19:40:41 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 30 Oct 2010 19:40:39 +0200
-Message-ID: <4CCC5896.50904@eukrea.com>
-Date: Sat, 30 Oct 2010 19:40:38 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
-MIME-Version: 1.0
+	Sun, 31 Oct 2010 01:23:45 +0200
+Received: by bwz10 with SMTP id 10so3507729bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Oct 2010 16:22:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=qxwS9wfSB+5KDzsYGc6VquFbn1Vo8FDOUccuW1bNhzo=;
+	b=WGoCrVb9x5yK5n3VbTKIyP6vNsVfT8NJRfEU2U5WCw3dFF+1+jWg0wvjck6ya/1EPx
+	o5EJoAiI84yFiKcTiM282A30zlB2ZHJ5PKIW0JdidPu8bIHcmfzTyKu8NgOKJE3WPjA4
+	V6w1uOjFSX1D7c9xlrM/xk2e1MNk8W/X5f0/s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=fO/zpe0I2TqOeqodReUYmoz15H7Md8AILGqUO4tOaeymE4YEUbcLS+kUju8XDx3P0j
+	BdJkYfc2gkkFJmK2jMXESIm4VZYn/nsEcZTlKp3gQ3F/psX5PYZKvbZl2dUX7hPmTPXj
+	R62UkAQ0Kc6P8903s2vt+z3G+w7/HqjZ00LqU=
+Received: by 10.204.53.9 with SMTP id k9mr8088478bkg.102.1288480953891;
+	Sat, 30 Oct 2010 16:22:33 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id p34sm2109103bkf.3.2010.10.30.16.22.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 30 Oct 2010 16:22:33 -0700 (PDT)
+Date: Sun, 31 Oct 2010 01:22:27 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1288395329-10474-1-git-send-email-eric@eukrea.com>	<4CCB5DC0.3030607@eukrea.com>
-	<20101030131745.GA6312@jama>
-In-Reply-To: <20101030131745.GA6312@jama>
-X-Ovh-Tracer-Id: 6383570997798153545
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+Message-ID: <20101030232227.GC6312@jama>
+References: <1288395329-10474-1-git-send-email-eric@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <1288395329-10474-1-git-send-email-eric@eukrea.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] busybox: remove unused versions
+Subject: curl-nativesdk as default libcurl provider?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +56,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Oct 2010 17:41:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 30 Oct 2010 23:23:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Le 30/10/2010 15:17, Martin Jansa a écrit :
-> On Sat, Oct 30, 2010 at 01:50:24AM +0200, Eric Bénard wrote:
->> Le 30/10/2010 01:35, Eric Bénard a écrit :
->>> keep the following versions :
->>> 1.2.1 (used by oplinux)
->>> 1.7.2 (used by nylon)
->>> 1.13.2 (used by angstrom, kaeilos and slugos)
->>> 1.17.1 (used by angstrom)
->>> 1.17.3 (latest one)
->
-> not sure if it's because busybox config or added by latest version but
-> with 1.17.3 I got 4 colisions:
->
-> ln: creating symbolic link `/usr/bin/flock': File exists
-> ln: creating symbolic link `/usr/bin/sha256sum': File exists
-> ln: creating symbolic link `/usr/bin/sha512sum': File exists
-> ln: creating symbolic link `/usr/bin/timeout': File exists
->
-> I've patches for util-linux-ng (flock) and coreutils to use u-a on those, so
-> I'll push it today.
->
+Hi, 
 
-thanks
+nativesdk support was added to curl with 7.21.1 version in 
+http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=893ec9283c23b2aa7bbfd615cc5012ef68c9d1b0
 
-Eric
+since then
+recipes/accelges/accelges_svn.bb
+was pulling
+virtual:nativesdk:curl_7.21.1.bb
+to task-shr-feed build
+
+it is because libcurl is in accelges's RDEPENDS (which is not really
+correct and I'll remove it)
+RDEPENDS_${PN} = "dbus dbus-glib libxrandr libnotify notification-daemon libcurl gtk+"
+
+and libcurl in PACKAGES in curl-target.inc
+PACKAGES += "${PN}-certs libcurl libcurl-dev libcurl-doc"
+
+but isn't it supposed to work better by default?
+
+If I remove it from RDEPENDS it works OK, because libcurl4 (I'm
+using debian naming) is picked right
+
+Version: 1:0.2+svnr206-r3.6
+Depends: update-rc.d, libdbus-glib-1-2, libdbus-1-3, libgobject-2.0-0,
+libgthread-2.0-0, libc6, libglib-2.0-0, bluez4, libglade-2.0-0, gtk+,
+libatk-1.0-0, libgio-2.0-0, pango, libstdc++6, libcairo2, libpixman-1-0,
+libpng12-0, libxrender1, libx11-6, libxcb1, libpthread-stubs0, libxau6,
+libxdmcp6, libfontconfig1, libfreetype6, libexpat1, libgmodule-2.0-0,
+libcurl4, libgnutls26, libz1, libgcrypt11, libgpg-error0
+
+for accelges fixed in:
+http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=ef297b9febd05766242d0b6cb5dae14024456d41
+but maybe other recipes have same problem..
+
+Whole curl package seems strage..
+ie sdk builddir doesn't start with curl-sdk- as normal for other sdk
+tmp/work/x86_64-armv7a-sdk-oe-linux-gnueabi/curl-7.21.1-r4.1/
+
+Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
