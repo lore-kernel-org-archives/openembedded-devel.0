@@ -1,49 +1,38 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PCD3Q-0002J0-79
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PCFQp-0002ba-8S
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Oct 2010 17:09:16 +0200
-Received: by gxk26 with SMTP id 26so1126396gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Oct 2010 08:08:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=b5+sCFSRdnG0XZ1vICzg4akhbZ+brzsunBdFE3dNtxk=;
-	b=rM1s303Yvgpj8BJS0pDGFgH9U/8q2nl3KkqRkyeoIo2vUfI3rTsbxjiFkkatbUYyZq
-	INpq8dVNO4Dp6bs7aofgqYfbCnbIbdmDbu8JhZF3XEFGUQAsJMbrIHAAJo/V3778oa4s
-	t0QD9z+VqGFppNVSBG3cXxznWEOLzaR9BpdNo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=I65wL9WY5XB0MjQjfLGg6yfpL0dpt6/Wv3cPBBcp3cPJSeZApSKS/uRtJR04KC/HkB
-	zqTQEge2ep7V8tyTiH9enGrNxZRVB7COs4X95dtzPf/pNr/EpiOWqYOVejlIA6O2faqs
-	AceE+6f21VUmLiNmzd7AJB6ZcGss+fNYS+bQw=
-Received: by 10.150.57.9 with SMTP id f9mr8466512yba.231.1288451296776;
-	Sat, 30 Oct 2010 08:08:16 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id t4sm680103ybe.1.2010.10.30.08.08.14
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 30 Oct 2010 08:08:15 -0700 (PDT)
-Date: Sat, 30 Oct 2010 08:08:11 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101030150811.GA4076@gmail.com>
-References: <1288422869-3296-1-git-send-email-khimov@altell.ru>
+	Sat, 30 Oct 2010 19:41:31 +0200
+Received: (qmail 29081 invoked by uid 503); 30 Oct 2010 18:09:48 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 30 Oct 2010 18:09:47 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 30 Oct 2010 19:40:41 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 30 Oct 2010 19:40:39 +0200
+Message-ID: <4CCC5896.50904@eukrea.com>
+Date: Sat, 30 Oct 2010 19:40:38 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
-In-Reply-To: <1288422869-3296-1-git-send-email-khimov@altell.ru>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1288395329-10474-1-git-send-email-eric@eukrea.com>	<4CCB5DC0.3030607@eukrea.com>
+	<20101030131745.GA6312@jama>
+In-Reply-To: <20101030131745.GA6312@jama>
+X-Ovh-Tracer-Id: 6383570997798153545
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] valgrind: remove versions prior to 3.6.0
+Subject: Re: [PATCH] busybox: remove unused versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,107 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Oct 2010 15:09:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 30 Oct 2010 17:41:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On (30/10/10 11:14), Roman I Khimov wrote:
-> If you're using valgrind, you probably want latest and versions removed with
-> this patch are 2+ years old.
-> 
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
+Le 30/10/2010 15:17, Martin Jansa a écrit :
+> On Sat, Oct 30, 2010 at 01:50:24AM +0200, Eric Bénard wrote:
+>> Le 30/10/2010 01:35, Eric Bénard a écrit :
+>>> keep the following versions :
+>>> 1.2.1 (used by oplinux)
+>>> 1.7.2 (used by nylon)
+>>> 1.13.2 (used by angstrom, kaeilos and slugos)
+>>> 1.17.1 (used by angstrom)
+>>> 1.17.3 (latest one)
+>
+> not sure if it's because busybox config or added by latest version but
+> with 1.17.3 I got 4 colisions:
+>
+> ln: creating symbolic link `/usr/bin/flock': File exists
+> ln: creating symbolic link `/usr/bin/sha256sum': File exists
+> ln: creating symbolic link `/usr/bin/sha512sum': File exists
+> ln: creating symbolic link `/usr/bin/timeout': File exists
+>
+> I've patches for util-linux-ng (flock) and coreutils to use u-a on those, so
+> I'll push it today.
+>
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+thanks
 
-> ---
->  recipes/valgrind/valgrind_3.2.1.bb |   17 -----------------
->  recipes/valgrind/valgrind_3.2.3.bb |   19 -------------------
->  recipes/valgrind/valgrind_3.3.1.bb |   19 -------------------
->  3 files changed, 0 insertions(+), 55 deletions(-)
->  delete mode 100644 recipes/valgrind/valgrind_3.2.1.bb
->  delete mode 100644 recipes/valgrind/valgrind_3.2.3.bb
->  delete mode 100644 recipes/valgrind/valgrind_3.3.1.bb
-> 
-> diff --git a/recipes/valgrind/valgrind_3.2.1.bb b/recipes/valgrind/valgrind_3.2.1.bb
-> deleted file mode 100644
-> index e125493..0000000
-> --- a/recipes/valgrind/valgrind_3.2.1.bb
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -DESCRIPTION = "Valgrind memory debugger"
-> -HOMEPAGE = "http://www.valgrind.org/"
-> -SECTION = "devel"
-> -LICENSE = "GPL"
-> -DEPENDS = "virtual/libx11"
-> -PR = "r0"
-> -
-> -SRC_URI = "http://www.valgrind.org/downloads/archive/valgrind-${PV}.tar.bz2"
-> -
-> -SRC_URI[md5sum] = "9407d33961186814cef0e6ecedfd6318"
-> -SRC_URI[sha256sum] = "7f9a15d7be16ca03a0912191e8d55a486bf69690e11bb76ccece3eaff3730a33"
-> -
-> -inherit autotools
-> -
-> -EXTRA_OECONF = "--enable-tls"
-> -
-> -COMPATIBLE_HOST = "^i.86.*-linux"
-> diff --git a/recipes/valgrind/valgrind_3.2.3.bb b/recipes/valgrind/valgrind_3.2.3.bb
-> deleted file mode 100644
-> index 5032204..0000000
-> --- a/recipes/valgrind/valgrind_3.2.3.bb
-> +++ /dev/null
-> @@ -1,19 +0,0 @@
-> -DESCRIPTION = "Valgrind memory debugger"
-> -HOMEPAGE = "http://www.valgrind.org/"
-> -SECTION = "devel"
-> -LICENSE = "GPL"
-> -DEPENDS = "virtual/libx11"
-> -PR = "r0"
-> -
-> -SRC_URI = "http://www.valgrind.org/downloads/valgrind-${PV}.tar.bz2"
-> -
-> -inherit autotools
-> -
-> -EXTRA_OECONF = "--enable-tls"
-> -
-> -COMPATIBLE_HOST = "^i.86.*-linux"
-> -
-> -FILES_${PN}-dbg += "/usr/lib/valgrind/x86-linux/.debug"
-> -
-> -SRC_URI[md5sum] = "978847992b136c8d8cb5c6559a91df1c"
-> -SRC_URI[sha256sum] = "1bca920527f43fd0c68e8f8eb16a7996b34f415e73af54de0f2cd43a8247c441"
-> diff --git a/recipes/valgrind/valgrind_3.3.1.bb b/recipes/valgrind/valgrind_3.3.1.bb
-> deleted file mode 100644
-> index b2cdd7f..0000000
-> --- a/recipes/valgrind/valgrind_3.3.1.bb
-> +++ /dev/null
-> @@ -1,19 +0,0 @@
-> -DESCRIPTION = "Valgrind memory debugger"
-> -HOMEPAGE = "http://www.valgrind.org/"
-> -SECTION = "devel"
-> -LICENSE = "GPL"
-> -DEPENDS = "virtual/libx11"
-> -PR = "r0"
-> -
-> -SRC_URI = "http://www.valgrind.org/downloads/valgrind-${PV}.tar.bz2"
-> -
-> -inherit autotools
-> -
-> -EXTRA_OECONF = "--enable-tls"
-> -
-> -COMPATIBLE_HOST = "^i.86.*-linux"
-> -
-> -FILES_${PN}-dbg += "/usr/lib/valgrind/x86-linux/.debug"
-> -
-> -SRC_URI[md5sum] = "0539e2fa4aadb2cd4ca4bba65b1fe8b5"
-> -SRC_URI[sha256sum] = "95b7b4d815bd479332637c93e69ec24167cd28d4f9d9f9b718e1b091bb88aafa"
-> -- 
-> 1.6.4.2
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Eric
 
 
