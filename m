@@ -1,50 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PC6SI-0005QX-DU
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PC6aI-00069Q-Mx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Oct 2010 10:06:26 +0200
-Received: by bwz10 with SMTP id 10so3170354bwz.6
+	Sat, 30 Oct 2010 10:15:01 +0200
+Received: by iwn42 with SMTP id 42so4097392iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Oct 2010 01:05:42 -0700 (PDT)
+	Sat, 30 Oct 2010 01:13:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=0xAQhf/rimmgxOTLzuXoukg5NhnwLh12OLqEEA2y2I4=;
-	b=qsp9d0EqLdKMYNk8eRtjR5UmkwiOWPrHKvzf1ZdxZYjr+8wAsws8VlaDrfikJCoUBf
-	4BrkZG5ha4/lGL95UnRi2B06g6Ds8706HZfT3+zWZX08MoWP6TYAp8Sv9ze2fySZ27e4
-	M22yJk7f9YiVYXkeRx61loYVODs4+ss83dIT4=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=nY21iEzvnm4vkThoZzGh/EqSlPqC5lPtEPWjIfGMJPw=;
+	b=tEcJro/1J5xrrkbu3pYxsZeMk+9quAx7UrP0cje2b7H5Hq9Hb1ErbY0meH+PIV+0zt
+	ZYdsa7PjmlaVbt7vQQ0qncCV5CELcPfV+jyEBUpxFSakD0QCmvw+lAyvZo27UDiIdhM6
+	bQ9BxtKfKuykdjbYgtoOamYnowIVsggKTkzeY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=xpF8f30C+hZD4jryxotdH4pPbYTxvQ7mDU+J7D0eFBBz8rf0jRhH4E2rnl5ZESiAAo
-	a/ZN2rUn3GFZzagaXOQgtjoiNzs4P1zkl6gASN6JgltXdemLr3s4PLehrIqFxBQC9Z4E
-	PkgtM9CUbqFGa0r27Muk4vJDE/muOdNfid/ik=
-Received: by 10.204.119.145 with SMTP id z17mr10709389bkq.128.1288425941219;
-	Sat, 30 Oct 2010 01:05:41 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id m8sm18434faj.1.2010.10.30.01.05.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 30 Oct 2010 01:05:40 -0700 (PDT)
-Date: Sat, 30 Oct 2010 10:05:36 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101030080536.GC3206@jama>
-References: <1288395329-10474-1-git-send-email-eric@eukrea.com>
-	<4CCB5DC0.3030607@eukrea.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=CDr1maUWrB1QnW7QYIZCMQIbfbLLCPCTJhzek5DCTGFz2nnuAJ20md90AcCh0IMgEf
+	CAAqhSAtIxNL1os46OQakSb3e+8rC3+gEP6kd4vY1hVYe/Isw0vyRJBWA4W15yPPAPgh
+	kNXf0uGMuIR3HOaimOmelD4mfVjlee+T8k24Y=
 MIME-Version: 1.0
-In-Reply-To: <4CCB5DC0.3030607@eukrea.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.42.155.67 with SMTP id t3mr2950649icw.438.1288426436434; Sat,
+	30 Oct 2010 01:13:56 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Sat, 30 Oct 2010 01:13:56 -0700 (PDT)
+In-Reply-To: <20101030080138.GB3206@jama>
+References: <20101029191718.GA27520@gmail.com>
+	<20101030080138.GB3206@jama>
+Date: Sat, 30 Oct 2010 10:13:56 +0200
+Message-ID: <AANLkTinzwh5XOaNn+t057Z1248M6+tZwr_XsBR5EvyQb@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] busybox: remove unused versions
+Subject: Re: [RFC] Toolchain recipes, versions, removal and consolidation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,28 +53,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Oct 2010 08:06:26 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 30 Oct 2010 08:15:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 30, 2010 at 01:50:24AM +0200, Eric Bénard wrote:
-> Le 30/10/2010 01:35, Eric Bénard a écrit :
-> > keep the following versions :
-> > 1.2.1 (used by oplinux)
-> > 1.7.2 (used by nylon)
-> > 1.13.2 (used by angstrom, kaeilos and slugos)
-> > 1.17.1 (used by angstrom)
-> > 1.17.3 (latest one)
-> >
-> forget this one, 1.16.2 should not be removed as it's used by shr.
+2010/10/30 Martin Jansa <martin.jansa@gmail.com>:
+> On Fri, Oct 29, 2010 at 12:17:18PM -0700, Khem Raj wrote:
+>> Hi
+>>
+>> There are so many versions of toolchain components gcc/binutils/glibc th=
+at
+>> we have in metadata. I would like to reduce the number and keep supporti=
+ng
+>> the ones we really use. Right now we have recipes for
+>>
+>> binutils =3D 2.14.90.0.6,2.14.90.0.7, 2.15.94.0.1, 2.16, 2.16.1, 2.16.91=
+.0.6,
+>> 2.16.91.0.7, 2.17, 2.17.50.1, 2.17.50.0.5, 2.17.50.0.8, 2.17.50.0.12, 2.=
+18,
+>> 2.18.50.0.7, 2.18.atmel.1.0.1, 2.19, 2.19.1, 2.19.51, 2.19.51.0.3, 2.20,
+>> 2.20.1, cvs
+>>
+>> gcc =3D 3.3.3, 3.3.4, 3.4.3, 3.4.4, 3.4.6, 4.0.0, 4.0.2, 4.1.0, 4.1.1, 4=
+.1.2,
+>> 4.2.1, 4.2.2, 4.2.3, 4.2.4, 4.3.1, 4.3.2, 4.3.3, 4.3.4, 4.4.1, 4.4.2,
+>> 4.4.4, 4.5, csl-arm-2007q3, csl-arm-2008q1, csl-arm-2008q3
+>>
+>> glibc =3D 2.2.5, 2.3.2, 2.3.3, 2.3.5+cvs20050627, 2.5, 2.6.1, 2.9, 2.10.=
+1,
+>> cvs
+>>
+>> uclibc =3D 0.9.28, 0.9.29, 0.9.30, 0.9.30.1, 0.9.30.2, 0.9.30.3, 0.9.31,=
+ git
+>>
+>>
+>> eglibc =3D 2.9, 2.10, 2.11, 2.12, svn
+>>
+>> They all use common files. So whenever there is a bugfix needed its a ve=
+ry
+>> hard job to first create a common fix that works across all versions
+>> secondly verify if it works and I am sure 80% of recipe versions mention=
+ed
+>> here dont even build
+>>
+>> So I am going to propose to remove most of them which dont build and
+>> request the distro and machine maintainers to please update the list of
+>> toolchain components to keep.
+>>
+>> Please voice which versions should we really really keep. This should be=
+ a
+>> set which is buildable and functional.
+>
+> For me sane-toolchain versions + newer are enough. More users of same
+> versions will provide better testing and in the end better toolchain for
+> all.
+>
+> Regards,
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
+>
 
-I'll try and then switch to latest.
+Seems a good plan to me to prune some. Wrt the list:
 
-Thanks
+A nios2 backend *only* exists for gcc 4.1.2. It also needs
+binutils_2.17.50.0.12.bb (there is also binutils 2.20.1, but that one
+is not fully working yet (and has DP =3D -1)
 
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+For glibc and nios2 I see
+glibc/glibc_2.10.1.bb
+glibc/glibc_2.5.bb
+Not 100% which one is being used. Will peek at it next week.
+
+Frans
 
 
