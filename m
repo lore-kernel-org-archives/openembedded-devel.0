@@ -1,34 +1,50 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1PC8aU-0000nV-3q
+	(envelope-from <martin.jansa@gmail.com>) id 1PCBKQ-0005Ys-KY
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Oct 2010 12:23:04 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LB3002P8M47Y3A0@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	30 Oct 2010 05:21:49 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 83C5514AF6A; Sat,
-	30 Oct 2010 06:21:43 -0400 (EDT)
-Date: Sat, 30 Oct 2010 06:21:43 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <3F7F8AC4C7A0A042A2FE40720B75E208F0321F@nvs0086.nedap.local>
+	Sat, 30 Oct 2010 15:18:39 +0200
+Received: by bwz10 with SMTP id 10so3272044bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Oct 2010 06:17:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=TkxJANLQlwTi2bT7N5Ugio8ZqfG1HCukw/P7Ee6zO2Q=;
+	b=WZNZ1rk/QXlddZcCHySFui9Vop7sbq6K06bY4g6DehdRFrW+LMkm8+I0lLQc3e3mAQ
+	NRbcEJv5L+p2uoLfTKOzZlGWarlLHfCQ+PrXsBGHcBEL3zFrVkSFxQHkDf4Ii3Ksvc/w
+	6m2eHFfBiUd9OsJ9KYZK5L/ixBz9itB+5JeVI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=HWGzqbS0auRiow7zzh3MxskSkw3tahqZCadvifZnt1eEx8pwNv8gl4pKb9MWybnVcu
+	pcC/gYSR5p04/LlgHe2ewiyjRRp6mjKniEMoBMyBzyhzFWBTEJFZD0qC4Lo9qIzMyw1v
+	Uh8a+CZOgbH/xPv+aI/byHXZucZNXvFkQrXGU=
+Received: by 10.204.100.82 with SMTP id x18mr10886864bkn.75.1288444670909;
+	Sat, 30 Oct 2010 06:17:50 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id y19sm1742065bkw.6.2010.10.30.06.17.49
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 30 Oct 2010 06:17:49 -0700 (PDT)
+Date: Sat, 30 Oct 2010 15:17:45 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20101030102143.GC21651@denix.org>
-MIME-version: 1.0
-References: <AANLkTimpAJJUoDkY=JvH6o39kssgWdGkgWs_fHa4q-Gd@mail.gmail.com>
-	<3F7F8AC4C7A0A042A2FE40720B75E208F0321F@nvs0086.nedap.local>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+Message-ID: <20101030131745.GA6312@jama>
+References: <1288395329-10474-1-git-send-email-eric@eukrea.com>
+	<4CCB5DC0.3030607@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <4CCB5DC0.3030607@eukrea.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake error?
+Subject: Re: [PATCH] busybox: remove unused versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,174 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Oct 2010 10:23:05 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
-Content-disposition: inline
+X-List-Received-Date: Sat, 30 Oct 2010 13:18:39 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Sat, Oct 30, 2010 at 12:16:23PM +0200, Jaap de Jong wrote:
-> That fixes it...
->=20
-> If relevant:=20
-> org.openembedded/conf/sanity.conf needs to be patched?
->=20
->     -BB_MIN_VERSION =3D "1.8.18"
->     +BB_MIN_VERSION =3D "1.10.1"
+On Sat, Oct 30, 2010 at 01:50:24AM +0200, Eric Bénard wrote:
+> Le 30/10/2010 01:35, Eric Bénard a écrit :
+> > keep the following versions :
+> > 1.2.1 (used by oplinux)
+> > 1.7.2 (used by nylon)
+> > 1.13.2 (used by angstrom, kaeilos and slugos)
+> > 1.17.1 (used by angstrom)
+> > 1.17.3 (latest one)
 
-NAK! It is not officially decided or announced to require 1.10 as a m=
-inimal=20
-version of Bitbake for OpenEmbedded. The minimal version is still 1.8=
-.18 and=20
-if it is broken now, it needs to be fixed, not worked around. Too man=
-y people=20
-(especially, out of tree) use 1.8.x bitbake.
+not sure if it's because busybox config or added by latest version but
+with 1.17.3 I got 4 colisions:
 
-Denys
+ln: creating symbolic link `/usr/bin/flock': File exists
+ln: creating symbolic link `/usr/bin/sha256sum': File exists
+ln: creating symbolic link `/usr/bin/sha512sum': File exists
+ln: creating symbolic link `/usr/bin/timeout': File exists
 
-> Thanks!
->=20
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org on behalf o=
-f James Ronald
-> Sent: Fri 10/10/29 17:20
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] bitbake error?
-> =20
-> Pierluigi,
->=20
-> Thanks! Installing bitbake-1.10.1 fixed my problem.
->=20
-> - Jim
->=20
-> On Fri, Oct 29, 2010 at 5:33 AM, Pierluigi Passaro
-> <pierluigi.passaro@phoenixsoftware.it> wrote:
-> >
-> > Not sure this is the best solution, but I solved same issue using=
- latest bitbake 1.10.1 downloaded from
-> >
-> > http://download.berlios.de/bitbake/bitbake-1.10.1.tar.gz
-> >
-> >
-> > James Ronald wrote:
-> >>
-> >> Jaap de Jong <jaap.dejong <at> nedap.com> writes:
-> >>
-> >>
-> >>>
-> >>> I'm probably totally stupid...
-> >>> What am doing wrong?
-> >>> (I'm working on a fresh unstable branch)
-> >>> When I bitbake I get:
-> >>>
-> >>> MACHINE=3Dat91sam9263ek =A0bitbake u-boot
-> >>> Traceback (most recent call last):
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/bin/bitbake", li=
-ne 143, in <module>
-> >>> =A0 =A0 main()
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/bin/bitbake", li=
-ne 123, in main
-> >>> =A0 =A0 cooker.parseConfiguration()
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/cooker.py=
-", line 68, in parseConfiguration
-> >>> =A0 =A0 self.parseConfigurationFile( os.path.join( "conf", "bit=
-bake.conf" ) )
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/cooker.py=
-", line 402, in parseConfigurationFile
-> >>> =A0 =A0 bb.fetch.fetcher_init(self.configuration.data)
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/fetch/__i=
-nit__.py", line 93, in fetcher_init
-> >>> =A0 =A0 pd =3D persist_data.PersistData(d)
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/persist_d=
-ata.py", line 52, in __init__
-> >>> =A0 =A0 bb.mkdirhier(self.cachedir)
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/__init__.=
-py", line 133, in mkdirhier
-> >>> =A0 =A0 debug(3, "mkdirhier(%s)" % dir)
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/__init__.=
-py", line 103, in debug
-> >>> =A0 =A0 bb.msg.debug(lvl, None, ''.join(args))
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/msg.py", =
-line 100, in debug
-> >>> =A0 =A0 bb.event.fire(MsgDebug(msg, None))
-> >>> =A0 File "/media/OpenEmbedded/unstable/bitbake/lib/bb/event.py"=
-, line 67, in fire
-> >>> =A0 =A0 if tmpHandler(event) =3D=3D Handled:
-> >>> =A0 File "tmpHandler(e)", line 8, in tmpHandler
-> >>> NameError: global name 'msg' is not defined
-> >>>
-> >>>
-> >>
-> >> I'm getting the exact same error. I'm new to OE and just going t=
-hrough the Getting started wiki entry. Ubuntu 10.04 installing bitbak=
-e via apt-get install bitbake.
-> >>
-> >> bitbake --version BitBake Build Tool Core version 1.8.18, bitbak=
-e version 1.8.18
-> >> =A0OE is current as of a few minutes ago.
-> >>
-> >> jr@ubuntu-xpc:~/oe/build$ bitbake nano
-> >> Traceback (most recent call last):
-> >> =A0File "/usr/bin/bitbake", line 143, in <module>
-> >> =A0 =A0main()
-> >> =A0File "/usr/bin/bitbake", line 123, in main
-> >> =A0 =A0cooker.parseConfiguration()
-> >> =A0File "/usr/lib/pymodules/python2.6/bb/cooker.py", line 67, in=
- parseConfiguration
-> >> =A0 =A0self.parseConfigurationFile( os.path.join( "conf", "bitba=
-ke.conf" ) )
-> >> =A0File "/usr/lib/pymodules/python2.6/bb/cooker.py", line 401, i=
-n parseConfigurationFile
-> >> =A0 =A0bb.fetch.fetcher_init(self.configuration.data)
-> >> =A0File "/usr/lib/pymodules/python2.6/bb/fetch/__init__.py", lin=
-e 93, in fetcher_init
-> >> =A0 =A0pd =3D persist_data.PersistData(d)
-> >> =A0File "/usr/lib/pymodules/python2.6/bb/persist_data.py", line =
-52, in __init__
-> >> =A0 =A0bb.mkdirhier(self.cachedir)
-> >> =A0File "/usr/lib/pymodules/python2.6/bb/__init__.py", line 133,=
- in mkdirhier
-> >> =A0 =A0debug(3, "mkdirhier(%s)" % dir)
-> >> =A0File "/usr/lib/pymodules/python2.6/bb/__init__.py", line 103,=
- in debug
-> >> =A0 =A0bb.msg.debug(lvl, None, ''.join(args))
-> >> =A0File "/usr/lib/pymodules/python2.6/bb/msg.py", line 100, in d=
-ebug
-> >> =A0 =A0bb.event.fire(MsgDebug(msg, None))
-> >> =A0File "/usr/lib/pymodules/python2.6/bb/event.py", line 67, in =
-fire
-> >> =A0 =A0if tmpHandler(event) =3D=3D Handled:
-> >> =A0File "tmpHandler(e)", line 8, in tmpHandler
-> >> NameError: global name 'msg' is not defined
-> >>
-> >> - Jim
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded=
--devel
-> >>
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-=
-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
-vel
->=20
+I've patches for util-linux-ng (flock) and coreutils to use u-a on those, so
+I'll push it today.
 
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
-vel
-
-
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
