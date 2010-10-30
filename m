@@ -1,24 +1,48 @@
-Received: from [93.100.16.104] (helo=mate.hex)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rik@mate.hex>) id 1PC5eu-0003wW-V1
+	(envelope-from <martin.jansa@gmail.com>) id 1PC6OT-0005Iz-R8
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Oct 2010 09:15:26 +0200
-Received: by mate.hex (Postfix, from userid 1000)
-	id 4DF663D4C5; Sat, 30 Oct 2010 11:14:36 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
+	Sat, 30 Oct 2010 10:02:30 +0200
+Received: by fxm3 with SMTP id 3so3845967fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Oct 2010 01:01:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=GB3R6Q5vVDIdCwIUoqgoIOkT5BB0f1IiRtn7LfpEKpc=;
+	b=OzU3/OHSjuo1BsV0iOBjCqVpO+5wam9BT/sStlmBUWWHvqwqhkpkZe28QJreRiBT7+
+	Sxs6vr4VuQUtkO49hjzNiJkr+phNiC1NwRDwRpGJ+GpDZicArXfHt+8wScOnH8HcH4Mn
+	IP64XUhHWPN84nbrf8euD8qH+dkNTyg7fZ1QI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=ddn0PNFZrtW2l1b4RFO0zsp3HGjFBE1dW7VuwjxVEFRkC6/VImMg31LnkdvkYhWLrY
+	FjpollpWlsu0/o8lrNr6zy8ZcyrxkFn/TzJ+XSYXrOEOLYyW5aGzE+CAfR82VxqPStj/
+	1q36d2BD5gQ+hsmfQIRheMOBIEW086GkiW3bA=
+Received: by 10.223.101.206 with SMTP id d14mr4884707fao.128.1288425703657;
+	Sat, 30 Oct 2010 01:01:43 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 16sm1452723fal.0.2010.10.30.01.01.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 30 Oct 2010 01:01:42 -0700 (PDT)
+Date: Sat, 30 Oct 2010 10:01:38 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 30 Oct 2010 11:14:29 +0400
-Message-Id: <1288422869-3296-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 93.100.16.104
-X-SA-Exim-Mail-From: rik@mate.hex
+Message-ID: <20101030080138.GB3206@jama>
+References: <20101029191718.GA27520@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20101029191718.GA27520@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
-	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] valgrind: remove versions prior to 3.6.0
+Subject: Re: [RFC] Toolchain recipes, versions, removal and consolidation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,96 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Oct 2010 07:15:26 -0000
+X-List-Received-Date: Sat, 30 Oct 2010 08:02:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-If you're using valgrind, you probably want latest and versions removed with
-this patch are 2+ years old.
+On Fri, Oct 29, 2010 at 12:17:18PM -0700, Khem Raj wrote:
+> Hi
+> 
+> There are so many versions of toolchain components gcc/binutils/glibc that
+> we have in metadata. I would like to reduce the number and keep supporting
+> the ones we really use. Right now we have recipes for
+> 
+> binutils = 2.14.90.0.6,2.14.90.0.7, 2.15.94.0.1, 2.16, 2.16.1, 2.16.91.0.6,
+> 2.16.91.0.7, 2.17, 2.17.50.1, 2.17.50.0.5, 2.17.50.0.8, 2.17.50.0.12, 2.18,
+> 2.18.50.0.7, 2.18.atmel.1.0.1, 2.19, 2.19.1, 2.19.51, 2.19.51.0.3, 2.20,
+> 2.20.1, cvs
+> 
+> gcc = 3.3.3, 3.3.4, 3.4.3, 3.4.4, 3.4.6, 4.0.0, 4.0.2, 4.1.0, 4.1.1, 4.1.2,
+> 4.2.1, 4.2.2, 4.2.3, 4.2.4, 4.3.1, 4.3.2, 4.3.3, 4.3.4, 4.4.1, 4.4.2,
+> 4.4.4, 4.5, csl-arm-2007q3, csl-arm-2008q1, csl-arm-2008q3
+> 
+> glibc = 2.2.5, 2.3.2, 2.3.3, 2.3.5+cvs20050627, 2.5, 2.6.1, 2.9, 2.10.1,
+> cvs
+> 
+> uclibc = 0.9.28, 0.9.29, 0.9.30, 0.9.30.1, 0.9.30.2, 0.9.30.3, 0.9.31, git
+> 
+> 
+> eglibc = 2.9, 2.10, 2.11, 2.12, svn
+> 
+> They all use common files. So whenever there is a bugfix needed its a very
+> hard job to first create a common fix that works across all versions
+> secondly verify if it works and I am sure 80% of recipe versions mentioned
+> here dont even build
+> 
+> So I am going to propose to remove most of them which dont build and
+> request the distro and machine maintainers to please update the list of
+> toolchain components to keep.
+> 
+> Please voice which versions should we really really keep. This should be a
+> set which is buildable and functional.
 
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- recipes/valgrind/valgrind_3.2.1.bb |   17 -----------------
- recipes/valgrind/valgrind_3.2.3.bb |   19 -------------------
- recipes/valgrind/valgrind_3.3.1.bb |   19 -------------------
- 3 files changed, 0 insertions(+), 55 deletions(-)
- delete mode 100644 recipes/valgrind/valgrind_3.2.1.bb
- delete mode 100644 recipes/valgrind/valgrind_3.2.3.bb
- delete mode 100644 recipes/valgrind/valgrind_3.3.1.bb
+For me sane-toolchain versions + newer are enough. More users of same
+versions will provide better testing and in the end better toolchain for
+all.
 
-diff --git a/recipes/valgrind/valgrind_3.2.1.bb b/recipes/valgrind/valgrind_3.2.1.bb
-deleted file mode 100644
-index e125493..0000000
---- a/recipes/valgrind/valgrind_3.2.1.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--DESCRIPTION = "Valgrind memory debugger"
--HOMEPAGE = "http://www.valgrind.org/"
--SECTION = "devel"
--LICENSE = "GPL"
--DEPENDS = "virtual/libx11"
--PR = "r0"
--
--SRC_URI = "http://www.valgrind.org/downloads/archive/valgrind-${PV}.tar.bz2"
--
--SRC_URI[md5sum] = "9407d33961186814cef0e6ecedfd6318"
--SRC_URI[sha256sum] = "7f9a15d7be16ca03a0912191e8d55a486bf69690e11bb76ccece3eaff3730a33"
--
--inherit autotools
--
--EXTRA_OECONF = "--enable-tls"
--
--COMPATIBLE_HOST = "^i.86.*-linux"
-diff --git a/recipes/valgrind/valgrind_3.2.3.bb b/recipes/valgrind/valgrind_3.2.3.bb
-deleted file mode 100644
-index 5032204..0000000
---- a/recipes/valgrind/valgrind_3.2.3.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--DESCRIPTION = "Valgrind memory debugger"
--HOMEPAGE = "http://www.valgrind.org/"
--SECTION = "devel"
--LICENSE = "GPL"
--DEPENDS = "virtual/libx11"
--PR = "r0"
--
--SRC_URI = "http://www.valgrind.org/downloads/valgrind-${PV}.tar.bz2"
--
--inherit autotools
--
--EXTRA_OECONF = "--enable-tls"
--
--COMPATIBLE_HOST = "^i.86.*-linux"
--
--FILES_${PN}-dbg += "/usr/lib/valgrind/x86-linux/.debug"
--
--SRC_URI[md5sum] = "978847992b136c8d8cb5c6559a91df1c"
--SRC_URI[sha256sum] = "1bca920527f43fd0c68e8f8eb16a7996b34f415e73af54de0f2cd43a8247c441"
-diff --git a/recipes/valgrind/valgrind_3.3.1.bb b/recipes/valgrind/valgrind_3.3.1.bb
-deleted file mode 100644
-index b2cdd7f..0000000
---- a/recipes/valgrind/valgrind_3.3.1.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--DESCRIPTION = "Valgrind memory debugger"
--HOMEPAGE = "http://www.valgrind.org/"
--SECTION = "devel"
--LICENSE = "GPL"
--DEPENDS = "virtual/libx11"
--PR = "r0"
--
--SRC_URI = "http://www.valgrind.org/downloads/valgrind-${PV}.tar.bz2"
--
--inherit autotools
--
--EXTRA_OECONF = "--enable-tls"
--
--COMPATIBLE_HOST = "^i.86.*-linux"
--
--FILES_${PN}-dbg += "/usr/lib/valgrind/x86-linux/.debug"
--
--SRC_URI[md5sum] = "0539e2fa4aadb2cd4ca4bba65b1fe8b5"
--SRC_URI[sha256sum] = "95b7b4d815bd479332637c93e69ec24167cd28d4f9d9f9b718e1b091bb88aafa"
+Regards,
+
 -- 
-1.6.4.2
-
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
