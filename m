@@ -1,31 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PCeRZ-00038i-L3 for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Oct 2010 21:23:58 +0100
-Received: from f053032235.adsl.alicedsl.de ([78.53.32.235]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PCeQp-0006W6-RN for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Oct 2010 20:23:12 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <jay@jay-tech.ru>) id 1PCf4h-0004KU-7H
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 31 Oct 2010 22:04:24 +0100
+Received: by vws17 with SMTP id 17so2867116vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 31 Oct 2010 14:03:35 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.224.204.72 with SMTP id fl8mr7077449qab.173.1288559014774;
+	Sun, 31 Oct 2010 14:03:34 -0700 (PDT)
+Sender: jay@jay-tech.ru
+Received: by 10.220.96.67 with HTTP; Sun, 31 Oct 2010 14:03:34 -0700 (PDT)
+X-Originating-IP: [93.81.139.215]
+In-Reply-To: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
+References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
+Date: Mon, 1 Nov 2010 00:03:34 +0300
+X-Google-Sender-Auth: CWOaN4UAhSR4o9XFTzL83QgljBU
+Message-ID: <AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
+From: Yuri Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20101031174800.GD6312@jama>
-References: <1288543618.13060.5.camel@mattotaupa> <20101031174800.GD6312@jama>
-Date: Sun, 31 Oct 2010 21:23:09 +0100
-Message-ID: <1288556589.13060.8.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: jay@jay-tech.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] accelges_svn: sort `DEPENDS` alphabetically
+Subject: Re: testing branch 2010-10-29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,70 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Oct 2010 20:23:58 -0000
-X-Groupsio-MsgNum: 25650
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-bnyr/dABBMEi6i22BHwi"
-
---=-bnyr/dABBMEi6i22BHwi
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 31 Oct 2010 21:04:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Sonntag, den 31.10.2010, 18:48 +0100 schrieb Martin Jansa:
-> On Sun, Oct 31, 2010 at 05:46:58PM +0100, Paul Menzel wrote:
-> > Date: Sun, 31 Oct 2010 13:49:32 +0100
-> >=20
-> > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> > ---
-> >  recipes/accelges/accelges_svn.bb |    2 +-
-> >  1 files changed, 1 insertions(+), 1 deletions(-)
-> >=20
-> > diff --git a/recipes/accelges/accelges_svn.bb b/recipes/accelges/accelg=
-es_svn.bb
-> > index db6a6ee..805dc11 100644
-> > --- a/recipes/accelges/accelges_svn.bb
-> > +++ b/recipes/accelges/accelges_svn.bb
-> > @@ -9,7 +9,7 @@ PR =3D "r4"
-> >  PE =3D "1"
-> >  SRCREV =3D "206"
-> > =20
-> > -DEPENDS =3D "dbus dbus-glib libxrandr libnotify notification-daemon cu=
-rl gtk+"
-> > +DEPENDS =3D "curl dbus dbus-glib gtk+ libnotify libxrandr notification=
--daemon"
-> >  RDEPENDS_${PN} =3D "notification-daemon"
-> > =20
-> >  SRC_URI =3D "svn://accelges.googlecode.com/svn/;module=3Dtrunk;proto=
-=3Dhttp"
-> > --=20
-> > 1.7.2.3
->=20
-> Both pushed and patchwork updated, thanks.
+2010/10/29 Cliff Brake <cliff.brake@gmail.com>:
+> testing-next is ready for clean builds. =A0I'm still working on my
+> process to get this branch created automatically--thanks for your
+> patience.
 
-Thanks!
+I have joined to testing initiative with:
 
-> BTW: any particular reason to have DEPENDS sorted alphabetically?
+DISTROS=3D"angstrom-2008.1 minimal"
+MACHINES=3D"tosa collie akita efikamx ben-nanonote qemux86 qemuarm"
+IMAGES=3D"x11-image opie-image"
 
-In my opinion it makes it easier to look up a certain entry. You do not
-have to look through the whole list and it is clear where to add new
-entries.
+Test-builder will build every image for every machine for every distro
+from list.
+Every build will be started with clean $TMPDIR for now at least (may
+be changed - depends on time required for full build).
+
+OE-stats will be published with 'Jay7-tb' builder name.
+Test-builder is running inside LXC-container with Debian Lenny x64.
+
+Feel free to request to add other machines and images.
+
+--=20
+Yuri Bushmelev
 
 
-Thanks,
-
-Paul
-
---=-bnyr/dABBMEi6i22BHwi
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzN0C0ACgkQPX1aK2wOHVg0TACeOAcKCQU0JixBV4LGtz9hPIr3
-UdcAnRg4kduTavxpzYZQiJKKqw8wzGBi
-=Mcmg
------END PGP SIGNATURE-----
-
---=-bnyr/dABBMEi6i22BHwi--
