@@ -1,34 +1,29 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1PCVRl-0006rx-SP
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Oct 2010 11:47:34 +0100
-Received: by gravedo.de (Postfix, from userid 5001)
-	id BE80E275CE2F; Sun, 31 Oct 2010 11:46:48 +0100 (CET)
-Received: from [10.1.1.50] (unknown [89.204.153.69])
-	by gravedo.de (Postfix) with ESMTPSA id E913B275CE22
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Oct 2010 11:46:46 +0100 (CET)
-Message-ID: <4CCD4913.4050003@gravedo.de>
-Date: Sun, 31 Oct 2010 11:46:43 +0100
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12pre) Gecko/20101026 Lightning/1.0b2 Shredder/3.1.6pre
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PCb4L-0005Wp-Jy for openembedded-devel@lists.openembedded.org;
+	Sun, 31 Oct 2010 17:47:46 +0100
+Received: from f053032235.adsl.alicedsl.de ([78.53.32.235]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PCb3c-0001tW-1N for openembedded-devel@lists.openembedded.org;
+	Sun, 31 Oct 2010 16:47:00 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1287427884-1517-1-git-send-email-morphis@gravedo.de>	<1287427884-1517-5-git-send-email-morphis@gravedo.de>
-	<1288515288.2232.0.camel@gnutoo-laptop>
-In-Reply-To: <1288515288.2232.0.camel@gnutoo-laptop>
-X-Enigmail-Version: 1.1.2
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+Date: Sun, 31 Oct 2010 17:46:58 +0100
+Message-ID: <1288543618.13060.5.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_BL_SPAMCOP_NET autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 04/15] netbase: powerup usb0 interface automatically on palmpre machine
+Subject: [PATCH 1/2] accelges_svn: sort `DEPENDS` alphabetically
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Oct 2010 10:47:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 31 Oct 2010 16:47:46 -0000
+X-Groupsio-MsgNum: 25647
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-0u+tuPi8/O2tgK0OEE8R"
 
-On 31.10.2010 09:54, Denis 'GNUtoo' Carikli wrote:
-> On Mon, 2010-10-18 at 20:51 +0200, Simon Busch wrote:
->> Signed-off-by: Simon Busch <morphis@gravedo.de>
->> ---
->>  recipes/netbase/netbase/palmpre/interfaces |    1 +
->>  1 files changed, 1 insertions(+), 0 deletions(-)
->>
->> diff --git a/recipes/netbase/netbase/palmpre/interfaces b/recipes/netbase/netbase/palmpre/interfaces
->> index ca2e007..17416c1 100644
->> --- a/recipes/netbase/netbase/palmpre/interfaces
->> +++ b/recipes/netbase/netbase/palmpre/interfaces
->> @@ -6,6 +6,7 @@ iface lo inet loopback
->>  
->>  # Ethernet/RNDIS gadget (g_ether)
->>  # ... or on host side, usbnet and random hwaddr
->> +auto usb0
->>  iface usb0 inet static
->>  	address 192.168.0.202
->>  	netmask 255.255.255.0
-> what about PR bump?
+--=-0u+tuPi8/O2tgK0OEE8R
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Damn it! I forgot about it .... sorry for this. I tried to be very
-careful with all of these patches but in the end I made this one little
-mistake ... forgive me :)
+Date: Sun, 31 Oct 2010 13:49:32 +0100
 
-regards,
-morphis
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/accelges/accelges_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/recipes/accelges/accelges_svn.bb b/recipes/accelges/accelges_s=
+vn.bb
+index db6a6ee..805dc11 100644
+--- a/recipes/accelges/accelges_svn.bb
++++ b/recipes/accelges/accelges_svn.bb
+@@ -9,7 +9,7 @@ PR =3D "r4"
+ PE =3D "1"
+ SRCREV =3D "206"
+=20
+-DEPENDS =3D "dbus dbus-glib libxrandr libnotify notification-daemon curl g=
+tk+"
++DEPENDS =3D "curl dbus dbus-glib gtk+ libnotify libxrandr notification-dae=
+mon"
+ RDEPENDS_${PN} =3D "notification-daemon"
+=20
+ SRC_URI =3D "svn://accelges.googlecode.com/svn/;module=3Dtrunk;proto=3Dhtt=
+p"
+--=20
+1.7.2.3
 
+--=-0u+tuPi8/O2tgK0OEE8R
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzNnXwACgkQPX1aK2wOHVihOwCfaFzw8ekiSFvz+Bb2dunQe+L7
+MyMAoICiySbNHZucZJ5EvssIOzKrE5SV
+=fBhQ
+-----END PGP SIGNATURE-----
+
+--=-0u+tuPi8/O2tgK0OEE8R--
