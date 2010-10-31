@@ -1,42 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PCV2e-0002Tp-Jb for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Oct 2010 11:22:36 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PCV1s-0007mf-Hq for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Oct 2010 11:20:48 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Oct 2010 11:20:48 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <morphis@gravedo.de>) id 1PCVRl-0006rx-SP
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 31 Oct 2010 11:47:34 +0100
+Received: by gravedo.de (Postfix, from userid 5001)
+	id BE80E275CE2F; Sun, 31 Oct 2010 11:46:48 +0100 (CET)
+Received: from [10.1.1.50] (unknown [89.204.153.69])
+	by gravedo.de (Postfix) with ESMTPSA id E913B275CE22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Oct 2010 11:20:48 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 31 Oct 2010 11:46:46 +0100 (CET)
+Message-ID: <4CCD4913.4050003@gravedo.de>
+Date: Sun, 31 Oct 2010 11:46:43 +0100
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12pre) Gecko/20101026 Lightning/1.0b2 Shredder/3.1.6pre
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 31 Oct 2010 11:20:36 +0100
-Message-ID: <iajftl$ek9$1@dough.gmane.org>
-References: <1288342969.18134.5.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <1288342969.18134.5.camel@mattotaupa>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1287427884-1517-1-git-send-email-morphis@gravedo.de>	<1287427884-1517-5-git-send-email-morphis@gravedo.de>
+	<1288515288.2232.0.camel@gnutoo-laptop>
+In-Reply-To: <1288515288.2232.0.camel@gnutoo-laptop>
+X-Enigmail-Version: 1.1.2
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_BL_SPAMCOP_NET autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OEDEM 2010: [RFC] useful commit message
+Subject: Re: [PATCH 04/15] netbase: powerup usb0 interface automatically on palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,88 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Oct 2010 10:23:02 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 31 Oct 2010 10:47:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 31.10.2010 09:54, Denis 'GNUtoo' Carikli wrote:
+> On Mon, 2010-10-18 at 20:51 +0200, Simon Busch wrote:
+>> Signed-off-by: Simon Busch <morphis@gravedo.de>
+>> ---
+>>  recipes/netbase/netbase/palmpre/interfaces |    1 +
+>>  1 files changed, 1 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/recipes/netbase/netbase/palmpre/interfaces b/recipes/netbase/netbase/palmpre/interfaces
+>> index ca2e007..17416c1 100644
+>> --- a/recipes/netbase/netbase/palmpre/interfaces
+>> +++ b/recipes/netbase/netbase/palmpre/interfaces
+>> @@ -6,6 +6,7 @@ iface lo inet loopback
+>>  
+>>  # Ethernet/RNDIS gadget (g_ether)
+>>  # ... or on host side, usbnet and random hwaddr
+>> +auto usb0
+>>  iface usb0 inet static
+>>  	address 192.168.0.202
+>>  	netmask 255.255.255.0
+> what about PR bump?
 
-On 29-10-10 11:02, Paul Menzel wrote:
-> Dear OE folks,
-> 
-> 
-> could you please discuss the following proposal.
-> 
-> I would very much like more elaborate commit messages. This is in my
-> opinion already demanded by the commit policy [1], but often patch
-> submitters, especially those not sending changes to review to the list,
-> since they have direct access to the repository, fail to adhere to the
-> policy.
-> 
-> The reason is, quite often I do not understand why a change was
-> necessary. It would very much help me, if at least the error message was
-> pasted to be able to compare with one’s own error messages and what
-> distribution and machine was used to test the recipe.
-
-We discussed this at OEDEM and AIUI the TSC will make a recommendation
-about it later, but in the meantime you can expand existing commit
-messages with git notes:
-
-- -----------------
-GIT-NOTES(1)
-
-NAME
-       git-notes - Add/inspect commit notes
-
-SYNOPSIS
-       git notes (edit [-F <file> | -m <msg>] | show) [commit]
-
-DESCRIPTION
-       This command allows you to add notes to commit messages, without
-changing the commit. To discern these notes from the message stored in
-the commit object, the notes
-       are indented like the message, after an unindented line saying
-"Notes:".
-
-       To disable commit notes, you have to set the config variable
-core.notesRef to the empty string. Alternatively, you can set it to a
-different ref, something like
-       "refs/notes/bugzilla". This setting can be overridden by the
-environment variable "GIT_NOTES_REF".
-
-SUBCOMMANDS
-       edit
-           Edit the notes for a given commit (defaults to HEAD).
-
-       show
-           Show the notes for a given commit (defaults to HEAD).
-
-OPTIONS
-       -m <msg>
-           Use the given note message (instead of prompting). If
-multiple -m (or -F) options are given, their values are concatenated as
-separate paragraphs.
-
-       -F <file>
-           Take the note message from the given file. Use - to read the
-note message from the standard input. If multiple -F (or -m) options are
-given, their values are
-           concatenated as separate paragraphs.
-- -----------------
-
-It would of course be better to get it right the first time :)
+Damn it! I forgot about it .... sorry for this. I tried to be very
+careful with all of these patches but in the end I made this one little
+mistake ... forgive me :)
 
 regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMzUL0MkyGM64RGpERAlfMAJsGBzO3oZ68BEvCK0QehPsvbnB4hQCgpp4d
-sj+pB/5JTY1O7NJtuyMvsyU=
-=DiG8
------END PGP SIGNATURE-----
-
+morphis
 
 
