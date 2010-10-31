@@ -1,30 +1,40 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1PCf4h-0004KU-7H
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Oct 2010 22:04:24 +0100
-Received: by vws17 with SMTP id 17so2867116vws.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PCg5p-0005h2-CT for openembedded-devel@lists.openembedded.org;
+	Sun, 31 Oct 2010 23:09:38 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PCg54-0005AP-4i for openembedded-devel@lists.openembedded.org;
+	Sun, 31 Oct 2010 23:08:50 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 31 Oct 2010 23:08:50 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Oct 2010 14:03:35 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.224.204.72 with SMTP id fl8mr7077449qab.173.1288559014774;
-	Sun, 31 Oct 2010 14:03:34 -0700 (PDT)
-Sender: jay@jay-tech.ru
-Received: by 10.220.96.67 with HTTP; Sun, 31 Oct 2010 14:03:34 -0700 (PDT)
-X-Originating-IP: [93.81.139.215]
-In-Reply-To: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
-References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
-Date: Mon, 1 Nov 2010 00:03:34 +0300
-X-Google-Sender-Auth: CWOaN4UAhSR4o9XFTzL83QgljBU
-Message-ID: <AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
-From: Yuri Bushmelev <jay4mail@gmail.com>
+	Sun, 31 Oct 2010 23:08:50 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 31 Oct 2010 23:08:39 +0100
+Message-ID: <iakpd7$ja7$1@dough.gmane.org>
+References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
+	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: testing branch 2010-10-29
@@ -41,32 +51,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Oct 2010 21:04:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 31 Oct 2010 22:09:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/10/29 Cliff Brake <cliff.brake@gmail.com>:
-> testing-next is ready for clean builds. =A0I'm still working on my
-> process to get this branch created automatically--thanks for your
-> patience.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I have joined to testing initiative with:
+On 31-10-10 22:03, Yuri Bushmelev wrote:
+> 2010/10/29 Cliff Brake <cliff.brake@gmail.com>:
+>> testing-next is ready for clean builds.  I'm still working on my
+>> process to get this branch created automatically--thanks for your
+>> patience.
+> 
+> I have joined to testing initiative with:
+> 
+> DISTROS="angstrom-2008.1 minimal"
+> MACHINES="tosa collie akita efikamx ben-nanonote qemux86 qemuarm"
+> IMAGES="x11-image opie-image"
+> 
+> Test-builder will build every image for every machine for every distro
+> from list.
+> Every build will be started with clean $TMPDIR for now at least
 
-DISTROS=3D"angstrom-2008.1 minimal"
-MACHINES=3D"tosa collie akita efikamx ben-nanonote qemux86 qemuarm"
-IMAGES=3D"x11-image opie-image"
+I mentioned this at OEDEM as well, only doing clean builds hides upgrade
+path type of bugs (e.g. libcdio5 -> libcdio). It would be nice if an
+incremental build going from testing-prev to testing-next would be done
+as well before tagging.
 
-Test-builder will build every image for every machine for every distro
-from list.
-Every build will be started with clean $TMPDIR for now at least (may
-be changed - depends on time required for full build).
+regards,
 
-OE-stats will be published with 'Jay7-tb' builder name.
-Test-builder is running inside LXC-container with Debian Lenny x64.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Feel free to request to add other machines and images.
+iD8DBQFMzejnMkyGM64RGpERAh7bAJ4iEjXYNtQluY4igLuu1vnS6Syi2gCeK6g9
+kQIbcn4jeMGUJ3IIhgzKbNY=
+=XB9m
+-----END PGP SIGNATURE-----
 
---=20
-Yuri Bushmelev
 
 
