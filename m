@@ -1,44 +1,44 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zach.frey@gmail.com>) id 1PCxnx-00005s-Vh
+	(envelope-from <raj.khem@gmail.com>) id 1PCyCJ-0007KR-1n
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 18:04:23 +0100
-Received: by wwb39 with SMTP id 39so63146wwb.0
+	Mon, 01 Nov 2010 18:29:31 +0100
+Received: by gxk26 with SMTP id 26so2022839gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 10:03:33 -0700 (PDT)
+	Mon, 01 Nov 2010 10:28:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=vQpnbmAxiIa3ZdFERdNPLlEWUhrymdSPgFXF2cWq2B4=;
-	b=BSpjW4fvdZuriRWyZO/N99FPkiqVeVJAcra2lUykl1/uyW67yydYfJ87SqlRn6TVoi
-	0Mu6AmtybwX88tueVoro8DmMYaVJqtaDvksClWfLyI9dxBefIwBWzgmA3DzYLBWW+rtb
-	F4a+3wCcE0cu2HLXXKLv3waN7O3JMVHOKyZBI=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=roQI9ED4yshA5+2PSCCFY8Pg38tF1Ai7zt1T0iGW5IU=;
+	b=VFrvxU89oizcBefmH203L/F/W9lGRZ6yZ68Z1To/YPakW59F6EnjZJGemVeNbSuJpx
+	RGubaUwRpG6GvmhTtE4ECS0uusER1WXGBiOUyCPb16lVCTGNbVySu/UKcAX7YvULQZiP
+	9fVuC3I107Ya1rkiFomJW/Es+aFAa6epBrZlU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=vQF9ZORVpzuuSPE53RuO1HpL34tzSI+v7OO4SP/WUigTn8Z/GPDkzGV4LQ68p8HJKx
-	UxQBu1Yz1/RSiFaIcUm5QUtYZFDPyexF5OjMaXeF2E2lZinGj99sSCwBbJVW1I1+zzy5
-	td4q9lJ8BFRZ75IbJ44ehQnuu6p+nGKI8dSLs=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=BborMghmULgWTZUbLd6uF+6qE/Q132C1s/VrMZtjDWIbQKYAFvMgkVmVpK4yb+z+6l
+	R3URJaJnhm7TMJ2rZ7HRwVncMgFT1WnO9yLFzLyR1LoZC9og5azHR6UjKYsP3LyI6wX1
+	47FAJtkxmbtluLxx3CH0qcO0lgOUYTk7bhHTI=
+Received: by 10.90.118.14 with SMTP id q14mr28455agc.146.1288632519176; Mon,
+	01 Nov 2010 10:28:39 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.216.56.18 with SMTP id l18mr3020834wec.36.1288631012599; Mon,
-	01 Nov 2010 10:03:32 -0700 (PDT)
-Sender: zach.frey@gmail.com
-Received: by 10.216.37.5 with HTTP; Mon, 1 Nov 2010 10:03:32 -0700 (PDT)
-Date: Mon, 1 Nov 2010 13:03:32 -0400
-X-Google-Sender-Auth: LFHZtn-sGT4zjzdLhQif0r17dEQ
-Message-ID: <AANLkTi=gi8pk_McpA58rvcOHdq-0Xpz+NyF2doWPO00B@mail.gmail.com>
-From: Zach Frey <zach@znfrey.com>
+Received: by 10.91.135.18 with HTTP; Mon, 1 Nov 2010 10:28:18 -0700 (PDT)
+In-Reply-To: <1288619281-4363-1-git-send-email-anders@chargestorm.se>
+References: <1288619281-4363-1-git-send-email-anders@chargestorm.se>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 1 Nov 2010 10:28:18 -0700
+Message-ID: <AANLkTi=ojjY5TzgFKLtrZug9Yk9=fMNZyDkLC_sYK8pz@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.41
-X-SA-Exim-Mail-From: zach.frey@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS,WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Trouble compiling system-tools-backends
+Subject: Re: [PATCH] Updated resolvconf to 1.46.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,48 +52,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 17:04:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Nov 2010 17:29:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi everyone,
+On Mon, Nov 1, 2010 at 6:48 AM, Anders Darander <anders@chargestorm.se> wro=
+te:
+> 1.45 is no longer downloadable from Debian.
+>
 
-I'm trying to build angstrom-gnome-image with latest for omapzoom2 (on
-Ubuntu 8.04) and I'm getting the following error:
+remove 1.45 and add 1.46. Resend the patch with this change please.
 
-| Making all in services
-| make[2]: Entering directory
-`/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/system-tools-backends-2.10.1-r0/system-tools-backends-2.10.1/services'
-| cd .. && \
-|       /bin/sh
-/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/system-tools-backends-2.10.1-r0/system-tools-backends-2.10.1/missing
---run automake-1.7 --gnu  services/Makefile
-| configure.in:8: version mismatch.  This is Automake 1.7.9,
-| configure.in:8: but the definition used by this AM_INIT_AUTOMAKE
-| configure.in:8: comes from Automake 1.11.1.  You should recreate
-| configure.in:8: aclocal.m4 with aclocal and run automake again.
-| make[2]: *** [Makefile.in] Error 1
-| make[2]: Leaving directory
-`/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/system-tools-backends-2.10.1-r0/system-tools-backends-2.10.1/services'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory
-`/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/system-tools-backends-2.10.1-r0/system-tools-backends-2.10.1'
-| make: *** [all] Error 2
-| FATAL: oe_runmake failed
-| ERROR: Function do_compile failed
-NOTE: package system-tools-backends-2.10.1-r0: task do_compile: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/PHOENIX/frey/OE/openembedded/recipes/gnome/
-system-tools-backends_2.10.1.bb do_compile failed
-ERROR: Task 2237 (/home/PHOENIX/frey/OE/openembedded/recipes/gnome/
-system-tools-backends_2.10.1.bb, do_compile) failed with 256
-ERROR: '/home/PHOENIX/frey/OE/openembedded/recipes/gnome/
-system-tools-backends_2.10.1.bb' failed
-ERROR: '/home/PHOENIX/frey/OE/openembedded/recipes/gnome/
-system-tools-backends_2.10.1.bb' failed
+> Signed-off-by: Anders Darander <anders@chargestorm.se>
+> ---
+> =C2=A0recipes/resolvconf/resolvconf_1.46.bb | =C2=A0 33 +++++++++++++++++=
+++++++++++++++++
+> =C2=A01 files changed, 33 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/resolvconf/resolvconf_1.46.bb
+>
+> diff --git a/recipes/resolvconf/resolvconf_1.46.bb b/recipes/resolvconf/r=
+esolvconf_1.46.bb
+> new file mode 100644
+> index 0000000..8991f7f
+> --- /dev/null
+> +++ b/recipes/resolvconf/resolvconf_1.46.bb
+> @@ -0,0 +1,33 @@
+> +DESCRIPTION =3D "Resolvconf is a framework for keeping track of the syst=
+em's \
+> +information about currently available nameservers. It sets \
+> +itself up as the intermediary between programs that supply \
+> +nameserver information and programs that need nameserver \
+> +information."
+> +SECTION =3D "console/network"
+> +LICENSE =3D "GPL"
+> +AUTHOR =3D "Thomas Hood"
+> +HOMEPAGE =3D "http://packages.debian.org/resolvconf"
+> +DEPENDS =3D "bash"
+> +RDEPENDS_${PN} =3D "bash"
+> +PR =3D "r1"
+> +
+> +SRC_URI =3D "${DEBIAN_MIRROR}/main/r/resolvconf/resolvconf_${PV}.tar.gz"
+> +
+> +do_compile () {
+> + =C2=A0 =C2=A0 =C2=A0 :
+> +}
+> +
+> +do_install () {
+> + =C2=A0 =C2=A0 =C2=A0 install -d ${D}${sysconfdir} ${D}${sbindir} ${D}${=
+base_sbindir} ${D}${localstatedir}/run/resolvconf/interface
+> + =C2=A0 =C2=A0 =C2=A0 install -d ${D}${mandir}/man8 ${D}${docdir}/${P}
+> + =C2=A0 =C2=A0 =C2=A0 cp -pPR etc/* ${D}${sysconfdir}/
+> + =C2=A0 =C2=A0 =C2=A0 install -m 0755 bin/resolvconf ${D}${base_sbindir}=
+/
+> + =C2=A0 =C2=A0 =C2=A0 install -m 0644 README ${D}${docdir}/${P}/
+> + =C2=A0 =C2=A0 =C2=A0 install -m 0644 man/resolvconf.8 ${D}${mandir}/man=
+8/
+> +}
+> +
+> +PACKAGE_ARCH =3D "all"
+> +
+> +
+> +SRC_URI[md5sum] =3D "b276fc8834793f5c969ed7b57cb51660"
+> +SRC_URI[sha256sum] =3D "2996caa40fbe2e2c5b2558e2333bd520558aa21250a6ecc7=
+310ca3e6f231292b"
+> --
+> 1.7.2.3
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-
-Ideas?
-
-Thanks,
-Zach Frey
 
