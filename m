@@ -1,49 +1,45 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PCsjq-0005N0-Ut
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PCtIZ-0003r0-Ba
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 12:40:05 +0100
-Received: by fxm3 with SMTP id 3so4875088fxm.6
+	Mon, 01 Nov 2010 13:15:41 +0100
+Received: by iwn42 with SMTP id 42so6443849iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 04:38:58 -0700 (PDT)
+	Mon, 01 Nov 2010 05:14:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=p6OJUa/ABxVTQl1wiqxh/qcu+Pl9aET7azEPAwGaQMU=;
-	b=nUUsKiGoVg08YahOVQlmPs03obHO8b66zKLTHC5ljhz6nQAKWCSYNCQNHkbzh60D4v
-	Qw7lmtKiIS3yGmQZtEoAIL5chlcbdEPG3eTT1dW92YG21uaUalNRJ4ub/KAeA3Ca0hPg
-	FxcXqeuM1+kndHg4PmDuByuaGsFlK4hFI4EqU=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=HlzDkPTFTRPcgmxheWmwB6nZm5eKwe25WD8cZuhvwPY=;
+	b=cpr1skIuhtR3nEjHddOz9b0eua38MoO8k1jPG7W25BwCNqCgWFFQNw3znOkTA2lTri
+	QyOvj9RpuTzE3uI3sIqlnZlE6+wvAvvH+7b9lMz0LMrwLVBpMMVPhIzbVmu74/LtFYMh
+	kpgYp0aoQmRZAHYwVAyYNMGq3H/Yanz9HGdmQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Mz6RBsAOEc83exbe6G7d3J9qIclJBo935kFC4vLFsOQ2hlHAFVtqBGjaPkpk3r/EvN
-	UpTCL1FaQbZvU0QRrrt0VA20nX+9L89yxW5bPBnGP3AJJWcDP4p1tnxB155HMmtnvQyu
-	ohMUC9UgtWC7B/JBnf8mUfu5/c0L6C61J+FF4=
-Received: by 10.223.78.199 with SMTP id m7mr9072686fak.11.1288611538440;
-	Mon, 01 Nov 2010 04:38:58 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id k4sm2360669faa.32.2010.11.01.04.38.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 01 Nov 2010 04:38:57 -0700 (PDT)
-Date: Mon, 1 Nov 2010 12:38:54 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101101113853.GB3440@jama>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=f3OmwuTpusZvLzqijOMUyU5M9Ly2R8r7fD2UZzsXyeGC7a2dooJVuadJ7IMphM0rqc
+	JyRdX3fSBtaBFgJPJ9W2Z1pkLz38adSRZ37ey26RxxXlw/i0H/fc3kNGv/Ux6jVvQ8JE
+	zyNdIgKPleVJYmDUw5axmIxkf9TENsS+2dQYk=
+MIME-Version: 1.0
+Received: by 10.231.11.72 with SMTP id s8mr11150382ibs.172.1288613692064; Mon,
+	01 Nov 2010 05:14:52 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Mon, 1 Nov 2010 05:14:51 -0700 (PDT)
+In-Reply-To: <20101101113853.GB3440@jama>
 References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
 	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
 	<iakpd7$ja7$1@dough.gmane.org>
 	<AANLkTikmqiDqWpHS=K73N8z6a0VPU8k7zMCP7yrb=G-Y@mail.gmail.com>
 	<20101101081956.GA3440@jama>
 	<AANLkTikwumwg4Pmw49AzaT0j-QhjCbPF+kcAWcSJZbJQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTikwumwg4Pmw49AzaT0j-QhjCbPF+kcAWcSJZbJQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+	<20101101113853.GB3440@jama>
+Date: Mon, 1 Nov 2010 13:14:51 +0100
+Message-ID: <AANLkTinrDLCrgDc2PV26u1qetL-zMqeVV6_DC0PJTViF@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -61,41 +57,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 11:40:33 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Nov 2010 12:15:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Nov 01, 2010 at 11:37:25AM +0100, Frans Meulenbroeks wrote:
-> 2010/11/1 Martin Jansa <martin.jansa@gmail.com>:
-> You might want to extend your grep to DEPENDS lines.
-> Then again this is not trivial if DEPENDS is split over multiple lines
-> and the package same is something that occurs lots of times outside
-> the depends var.
+2010/11/1 Martin Jansa <martin.jansa@gmail.com>:
 
-Yes this was really just stupid test to find those, before using it in
-docs it should be improved or someone has much better way to detect
-those..
+>
+> In the end every feature which is autodetected in configure should be
+> forced enabled or disabled in recipe to correspond with DEPENDS.
 
-> In the case where you encounter a depends issue, I hope you also fix
-> DEPENDS (but actually I'm pretty sure you will :-) )
+I agree! This should be part of a sane recipe.
+Janitors job?
 
-Well this DEPENDS depends :) on what is expected from distribution, IE
-python DEPENDS have
-${@base_contains('DISTRO_FEATURES', 'tk', 'tk', '', d)}
-because not all distributions should be forced to build python with tk
-support, but there isn't IIRC
-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'tk', '--enable-tk', '--disable-tk', d)}"
-
-so even if your distro doesn't have tk in DISTRO_FEATURES then it gets
-autodetected as available if you build tk laterbecause of some other 
-recipe depending on it unconditionaly.
-
-In the end every feature which is autodetected in configure should be
-forced enabled or disabled in recipe to correspond with DEPENDS.
-
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Frans
 
 
