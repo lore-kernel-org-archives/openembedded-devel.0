@@ -1,44 +1,49 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PCrmI-0005Sx-Hd
+	(envelope-from <martin.jansa@gmail.com>) id 1PCsjq-0005N0-Ut
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 11:38:15 +0100
-Received: by iwn42 with SMTP id 42so6351270iwn.6
+	Mon, 01 Nov 2010 12:40:05 +0100
+Received: by fxm3 with SMTP id 3so4875088fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 03:37:27 -0700 (PDT)
+	Mon, 01 Nov 2010 04:38:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=wPpRbTNnHQ9qQsZqLqtegKMI+DodCF/Q71eiW1oR4b8=;
-	b=u7YT7aoRf6B3XfKnlyEV1b+3tFag926HYoND67ydmWosBqnFfebLd4bwKVSIBNBbDe
-	fWVZe5JHHfymv+7FTS5q66bXBLS7LKE67OWkOR7vo9/xxaoM4/5yMlWXU73k3sNLctoa
-	rFMJKYAdCQ4+c9dehbwgCvLh518pUs8mqpC9w=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=p6OJUa/ABxVTQl1wiqxh/qcu+Pl9aET7azEPAwGaQMU=;
+	b=nUUsKiGoVg08YahOVQlmPs03obHO8b66zKLTHC5ljhz6nQAKWCSYNCQNHkbzh60D4v
+	Qw7lmtKiIS3yGmQZtEoAIL5chlcbdEPG3eTT1dW92YG21uaUalNRJ4ub/KAeA3Ca0hPg
+	FxcXqeuM1+kndHg4PmDuByuaGsFlK4hFI4EqU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=nFIKshXOp9zgGDM0J3gnS9wYun8/EIA2hhqPRzp2jHjgIdiNnOpfyE/Z0De+/Jhvdt
-	7CMgQmvX4EIK9de4mJCL/Bb/yD/BEvz1ecgv0jh8AtZeAqL9KO0PHNDNH7+8kbWhSyle
-	eS6W1isPEtN7TvOohlPkJz9N+/s2+JKFgOT1U=
-MIME-Version: 1.0
-Received: by 10.231.35.131 with SMTP id p3mr13285336ibd.177.1288607845967;
-	Mon, 01 Nov 2010 03:37:25 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Mon, 1 Nov 2010 03:37:25 -0700 (PDT)
-In-Reply-To: <20101101081956.GA3440@jama>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Mz6RBsAOEc83exbe6G7d3J9qIclJBo935kFC4vLFsOQ2hlHAFVtqBGjaPkpk3r/EvN
+	UpTCL1FaQbZvU0QRrrt0VA20nX+9L89yxW5bPBnGP3AJJWcDP4p1tnxB155HMmtnvQyu
+	ohMUC9UgtWC7B/JBnf8mUfu5/c0L6C61J+FF4=
+Received: by 10.223.78.199 with SMTP id m7mr9072686fak.11.1288611538440;
+	Mon, 01 Nov 2010 04:38:58 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id k4sm2360669faa.32.2010.11.01.04.38.57
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 01 Nov 2010 04:38:57 -0700 (PDT)
+Date: Mon, 1 Nov 2010 12:38:54 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101101113853.GB3440@jama>
 References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
 	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
 	<iakpd7$ja7$1@dough.gmane.org>
 	<AANLkTikmqiDqWpHS=K73N8z6a0VPU8k7zMCP7yrb=G-Y@mail.gmail.com>
 	<20101101081956.GA3440@jama>
-Date: Mon, 1 Nov 2010 11:37:25 +0100
-Message-ID: <AANLkTikwumwg4Pmw49AzaT0j-QhjCbPF+kcAWcSJZbJQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	<AANLkTikwumwg4Pmw49AzaT0j-QhjCbPF+kcAWcSJZbJQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTikwumwg4Pmw49AzaT0j-QhjCbPF+kcAWcSJZbJQ@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -56,89 +61,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 10:38:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Nov 2010 11:40:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/11/1 Martin Jansa <martin.jansa@gmail.com>:
-> On Mon, Nov 01, 2010 at 08:49:32AM +0100, Frans Meulenbroeks wrote:
+On Mon, Nov 01, 2010 at 11:37:25AM +0100, Frans Meulenbroeks wrote:
+> 2010/11/1 Martin Jansa <martin.jansa@gmail.com>:
+> You might want to extend your grep to DEPENDS lines.
+> Then again this is not trivial if DEPENDS is split over multiple lines
+> and the package same is something that occurs lots of times outside
+> the depends var.
 
->>
->> (btw: a good place would probably be [3] and yeah, I am aware of the
->> debian renaming [4], but I am also aware of [5] which as an example
->> says:
->> FILES_${PN} =3D "\
->> =A0 =A0 ${bindir}/* \
->> =A0 =A0 ${sbindir}/* \
->> =A0 =A0 ${libexecdir}/* \
->> =A0 =A0 ${libdir}/lib*.so.* \
->> =A0 =A0 .....
->> which was exactly what was in the original commit [6]:
->> +FILES_${PN} =3D "${libdir}/lib${PN}${SOLIB}"
->
-> It's OK, but much better if you also PR bump packages depending on it.
-> Because as long as "${bindir}/*" was included in FILES_${PN}, debian
-> naming didin't happen (because of multiple binaries in 1 package), the
-> same happens when you have multiple libraries in 1 package without
-> LEAD_SONAME defined.
+Yes this was really just stupid test to find those, before using it in
+docs it should be improved or someone has much better way to detect
+those..
 
-Which (at least to me) is highly confusing. I did not expect that
-adding/removing things from FILES_${PN} would change the lib renaming.
-This seems highly counter-intuitive to me.
+> In the case where you encounter a depends issue, I hope you also fix
+> DEPENDS (but actually I'm pretty sure you will :-) )
 
-Actually I'mkinda  flabbergasted when renaming does and when it does not ha=
-ppen.
-That is why I feel some doc is a good plan.
+Well this DEPENDS depends :) on what is expected from distribution, IE
+python DEPENDS have
+${@base_contains('DISTRO_FEATURES', 'tk', 'tk', '', d)}
+because not all distributions should be forced to build python with tk
+support, but there isn't IIRC
+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'tk', '--enable-tk', '--disable-tk', d)}"
 
-The same holds with the LEAD_SONAME and e.g. the GNU_HASH errors/warnings.
-There are all quite common. It would be a good plan to have a page
-somewhere describing the meaning of these messages and what to do with
-them.
->
-> So moving binaries to new FILES_${PN}-utils is probably good move, but
-> as side effects it renames libcdio to libcdio5. And because already
-> built packages have libcdio instead of libcdio5 in it's runtime depends,
-> those needs to be rebuilt (to pick libcdio5 as libcdio.so provider)
->
-> Not sure how to check all recipes depending on it (I don't trust DEPENDS
-> as some packages are voluntary linked to libcdio just because autotools
-> found it). So usually I notice it only when image build fails (opkg
-> complaining about missing packages), but that works only for packages
-> included in built image :/. And when I notice it, I usually do something
-> like:
-> find deploy/ipk/ -name Packages -exec grep -B 3 libcdio {} \;
-> to see where wrong Depends is and then PR bump those (which still fixes
-> only those recipes I'm building as part of some image or ie
-> task-shr-feed)
+so even if your distro doesn't have tk in DISTRO_FEATURES then it gets
+autodetected as available if you build tk laterbecause of some other 
+recipe depending on it unconditionaly.
 
-You might want to extend your grep to DEPENDS lines.
-Then again this is not trivial if DEPENDS is split over multiple lines
-and the package same is something that occurs lots of times outside
-the depends var.
+In the end every feature which is autodetected in configure should be
+forced enabled or disabled in recipe to correspond with DEPENDS.
 
-In the case where you encounter a depends issue, I hope you also fix
-DEPENDS (but actually I'm pretty sure you will :-) )
->
-> sometimes it gets even worse, like in this case:
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D5fa427d069=
-22297496fcf5ebd6c0a6a5c2adac46
-> when edbus.ipk gets empty after moving all libs to separate packages, so
-> it won't get upgrade on target and creates conflicts between old package
-> containing ie libehal.so.* and new edbus-ehal.ipk providing the same lib
-> in newer version.
+Regards,
 
-Upgrading is sometimes a pita.
-
->
-> Feel free to update wiki if you found this explanation (or at least some
-> part of it :)) understandable.
->
-
-See above.
-The fact is that I am fairly time-constrained next few days. Came back
-from elc/oedem last sun, have to leave for another trip upcoming sat
-morning.
-
-Have fun! Frans
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
