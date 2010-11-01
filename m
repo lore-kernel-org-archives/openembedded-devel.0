@@ -1,51 +1,40 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PD3aD-0001ff-VC
+	(envelope-from <matt.czech@gmail.com>) id 1PD3ah-0007nB-Jo
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 00:15:19 +0100
-Received: by iwn42 with SMTP id 42so7222418iwn.6
+	Tue, 02 Nov 2010 00:15:50 +0100
+Received: by fxm3 with SMTP id 3so5483224fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 16:13:46 -0700 (PDT)
+	Mon, 01 Nov 2010 16:14:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=0PBSpCk6iWRb5UGm45sITn3XyycXVso4Z+7yBkKst3U=;
-	b=NAW2T6Z55zABwAl8MurOZrgTjoS5yFYNf45Xb6Ui/9eDU5nOeye/sF40oCvpJdGmpo
-	m/nXr/EeBlXtnx7Oa8cYbFeAUnBBYg4Y2Sr3b6uyp8vAteAc1HbpkKXGY+eReyXvsIxs
-	1QbOYq+p6wci6LrYILfdFTbitoFVCqbi3ocBY=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=peRPpKdm3lrGP/7g5cYpONgds4O8p7O+zpjrumRaicM=;
+	b=gIT7DkPy1a6xhNVZ9mxgNQKArXUjdcg6jiTg95lytLab5Y2Y7Rb3kKtb5Rb2sB8BIl
+	FcKkkLbOYqQ2x5QcHKrKkYwrGVI3yW8Ch2cVGggE0dgoaYTIHeXBjlmIJ3aNL0Mw+8os
+	mbulZF+NZCquoqwKtazpCBzDO9qWNv4WN8ymA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=OyES0WPYwxoc+VaQXiwf0fIAUoWUR0TE6kF9m1O4/rxNHAxsph8T69u+fsV1hlfLwa
-	NCIUM35hPQSePM1OcH6HeCW/iGoCzx4kJL49jkrMkKkf149ShH6nz8NSI//8nsJvbZsJ
-	UCjnUAfpLe3je/hU2bxsSaboCEr5sVVunxJxE=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=DGFcFhoV9oy6rfYZj66/FSG/bZdumjuhjOl/7g6f7IcBbjaSbfPHim5joqpvhrYyVL
+	88nvODD6m9Op4QCEe28LansMoxHRo4SUl4LGFTIBWCNckKYUSCPBlkC0QdnbkNmfMAs5
+	+l/oyBH0NKf1qiQt8ZK5+cUlR2jafKz5IsRZA=
 MIME-Version: 1.0
-Received: by 10.231.33.71 with SMTP id g7mr257643ibd.54.1288643020408; Mon, 01
-	Nov 2010 13:23:40 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Mon, 1 Nov 2010 13:23:40 -0700 (PDT)
-In-Reply-To: <20101101192422.GA11482@gmail.com>
-References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
-	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
-	<iakpd7$ja7$1@dough.gmane.org>
-	<AANLkTikQvYRyaMspRo9Skt_jmfNjz2MuOT+ff4wv=a82@mail.gmail.com>
-	<AANLkTi=zxQ1AxJ9chbFjLJzps1LB8RCyaNkJk5HApTZ=@mail.gmail.com>
-	<20101101183327.GD15069@ibawizard.net>
-	<AANLkTimN4Rq2bWZXjs84FUtxNgD_BAQy=5=4gXJqfPGe@mail.gmail.com>
-	<20101101192422.GA11482@gmail.com>
-Date: Mon, 1 Nov 2010 21:23:40 +0100
-Message-ID: <AANLkTin2uOUbo6mU4EJD-xyhJ8GU0e4Kch5=FGp5CEc1@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.223.70.133 with SMTP id d5mr9113765faj.64.1288653254708; Mon,
+	01 Nov 2010 16:14:14 -0700 (PDT)
+Received: by 10.223.109.73 with HTTP; Mon, 1 Nov 2010 16:14:14 -0700 (PDT)
+Date: Mon, 1 Nov 2010 18:14:14 -0500
+Message-ID: <AANLkTinqQ3ZE5JLg_G9tG-O-ztGp0=V=SV97pvfZOOp+@mail.gmail.com>
+From: Matt Czech <matt.czech@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: matt.czech@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-10-29
+Subject: problems building libxcb-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,50 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 23:16:02 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Nov 2010 23:17:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-2010/11/1 Khem Raj <raj.khem@gmail.com>:
-> On (01/11/10 19:49), Frans Meulenbroeks wrote:
->> 2010/11/1 Petr =C5=A0tetiar <ynezz@true.cz>:
->> > Khem Raj <raj.khem@gmail.com> [2010-11-01 10:32:53]:
->> >
->> >> We should add another column identifying the build is from clean tmp
->> >> or an incremental one
->> >
->> > No more columns please. I think, that I should receive a PhD just beca=
-use I
->> > can update that table :-) It's pure rocket science...
->> >
->> > -- ynezz
->> >
->>
->> Put the table in a spreadsheet?
->> I think google docs can be used to share access to a common sheet (but
->> not fully sure).
->
-> Wiki has good support for tables.
+Hi,
 
-Better than what we have now? The layout somewhat sucks. I'd rather
-see it as a table while editing, due to the different width of the
-fields used, it is at the moment fairly difficult to match your cells
-with the column caption (especially if you are near the end of the
-table).
+I'm trying to build meta-toolchain-qte and am running into problems
+trying to compile libxcb-native.
 
->>
->> Disadvantage of an incremental build is that you need to keep all the
->> tmp dirs around, which, at least for me, is probably prohibitive (I'll
->> verify this later)
->
-> Disadvantage for you agreed but may not be for others who have space to k=
-eep the tmpdir
-> and care about saving time on complete rebuilds or upgrade paths etc.
+From the do_compile log:
 
-Oh yes, I fully agree, and I definitely do not want to stop anyone
-from doing incremental builds.
-The more diverse tests we do the more chance we have to find bugs.
+NOTE: make
+Making all in src
+make[1]: Entering directory
+`/armoebuild/oeroot/build-czech/angstrom-dev/work/x86_64-linux/libxcb-native-1.6-r3.1/libxcb-1.6/src'
+/armoebuild/oeroot/build-czech/angstrom-dev/sysroots/x86_64-linux/usr/bin/python
+./c_client.py -p
+/armoebuild/oeroot/build-czech/angstrom-dev/sysroots/x86_64-linux/usr/lib64/python2.6/site-packages
+/armoebuild/oeroot/build-czech/angstrom-dev/sysroots/x86_64-linux/usr/share/xcb/xproto.xml
 
-FM
+Failed to load the xcbgen Python package!
+Make sure that xcb/proto installed it on your Python path.
+If not, you will need to create a .pth file or define $PYTHONPATH
+to extend the path.
+Refer to the README file in xcb/proto for more info.
+
+Traceback (most recent call last):
+  File "./c_client.py", line 1022, in <module>
+    from xcbgen.state import Module
+ImportError: No module named xcbgen.state
+make[1]: *** [xproto.c] Error 1
+make[1]: Leaving directory
+`/armoebuild/oeroot/build-czech/angstrom-dev/work/x86_64-linux/libxcb-native-1.6-r3.1/libxcb-1.6/src'
+make: *** [all-recursive] Error 1
+FATAL: oe_runmake failed
+ERROR: Function do_compile failed
+
+What package provides the xcbgen python package? xproto-native?
+
+I'm not sure if I'm missing a package or if it's just looking in the
+wrong place.
+
+Any help would be appreciated.
+
+Thanks!
+
+Matt
 
 
