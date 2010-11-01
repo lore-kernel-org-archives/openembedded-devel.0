@@ -1,31 +1,40 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PCzkU-0002aK-SV
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 20:08:55 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 0B7191D36171; Mon,  1 Nov 2010 20:08:03 +0100 (CET)
-Date: Mon, 1 Nov 2010 20:08:03 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PCzou-0003nD-Gt for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Nov 2010 20:13:29 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PCzo6-000206-8w for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Nov 2010 20:12:38 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Nov 2010 20:12:38 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Nov 2010 20:12:38 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101101190803.GE15069@ibawizard.net>
-References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
-	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
-	<iakpd7$ja7$1@dough.gmane.org>
-	<AANLkTikQvYRyaMspRo9Skt_jmfNjz2MuOT+ff4wv=a82@mail.gmail.com>
-	<AANLkTi=zxQ1AxJ9chbFjLJzps1LB8RCyaNkJk5HApTZ=@mail.gmail.com>
-	<20101101183327.GD15069@ibawizard.net>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 01 Nov 2010 20:12:27 +0100
+Message-ID: <ian3er$i8i$1@dough.gmane.org>
+References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>	<iakpd7$ja7$1@dough.gmane.org>	<AANLkTikQvYRyaMspRo9Skt_jmfNjz2MuOT+ff4wv=a82@mail.gmail.com>	<AANLkTi=zxQ1AxJ9chbFjLJzps1LB8RCyaNkJk5HApTZ=@mail.gmail.com>	<20101101183327.GD15069@ibawizard.net>
 	<AANLkTimN4Rq2bWZXjs84FUtxNgD_BAQy=5=4gXJqfPGe@mail.gmail.com>
-MIME-Version: 1.0
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
 In-Reply-To: <AANLkTimN4Rq2bWZXjs84FUtxNgD_BAQy=5=4gXJqfPGe@mail.gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: testing branch 2010-10-29
@@ -42,28 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 19:08:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Nov 2010 19:13:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Frans Meulenbroeks <fransmeulenbroeks@gmail.com> [2010-11-01 19:49:19]:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> > No more columns please. I think, that I should receive a PhD just because I
-> > can update that table :-) It's pure rocket science...
-> 
-> Put the table in a spreadsheet?
-> I think google docs can be used to share access to a common sheet (but
-> not fully sure).
+On 01-11-10 19:49, Frans Meulenbroeks wrote:
 
-That's the question :-) Maybe some mod to the tinderbox client and if the
-builder is building testing-next and the build succeeded, then update
-something, somehwere automatically? Or does it need to be done manually at
-all?
+> Disadvantage of an incremental build is that you need to keep all the
+> tmp dirs around, which, at least for me, is probably prohibitive (I'll
+> verify this later)
 
-INHERIT += "oestats-client-testing-next"
-OESTATS_HOST_DISTRO = "Ubuntu 10.04" (auto using lsb_release?)
-OESTATS_WHATEVER = "..."
+rm tmp -rf
+git checkout tag-for-testing-prev
+bitbake foo
+git checkout tag-for-testing-next
+bitbake foo
 
--- ynezz
+That will only use slightly more diskspace than a build from scratch
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMzxEaMkyGM64RGpERAlQSAJ0bGeZ6m/V9ZpBe7bgLmqdpUZIJMQCeINEV
+nNvFg26kSX5BqwvVQaVM4CE=
+=DyxS
+-----END PGP SIGNATURE-----
+
 
 
