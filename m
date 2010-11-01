@@ -1,43 +1,47 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PCyJU-0001ZB-Un
+	(envelope-from <zach.frey@gmail.com>) id 1PCyzW-00045B-LG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 18:37:29 +0100
-Received: by gxk26 with SMTP id 26so2029831gxk.6
+	Mon, 01 Nov 2010 19:20:23 +0100
+Received: by wwb39 with SMTP id 39so142360wwb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 10:36:07 -0700 (PDT)
+	Mon, 01 Nov 2010 11:19:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=XPXG6LsMmblFpTHMvLNFIolhqfXPOuMX+4ypviF02Yo=;
-	b=U2ZPSj+nblsdv2GEP0XxsVOXGGxKV1rWgwQflJVtW7a54eDyYIDtnvvhDJRnP4sPjJ
-	pDVWyT/GchkoQ+w12PaUSeD6cI7FBq6wYvG+Vo+T0gUFLl4i9e0WIC67H9upxy1fGyZH
-	oizZxySMdk31dc0OahRK58cYb7x259rpa5PJg=
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=kVgJzfBKSLCDgIy+6hnEooVtYEOThe6Bw/kj3LK8onQ=;
+	b=BvPFLEDrSGlnlMtvz2/3oZsoni20MCmrrgfO25kcnhKWFgsYx3fDkisUawjEn3ooaV
+	7QJoMCmDCCR7NH4AmlLf13n1SucJ4lyE2kh2/3s13J8IjUEWG9Lyo2QLAzSu7Tz0KVF+
+	fKJzve/VtW2fgJT2EnPB0cdYwhfvT6L9tI8h4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=tiPZkrN+iTQzdgLYVxx1ivEfx4GpA06tAEjbdnT6zOiXM5Otdexn5o6m/kjKNNKcnb
-	PwObV6vg1Q5AMZxx0WoL6YTh0DqVQDdhuU8Q5dQ3CQslE0TeGvLIhvmVcLcRVa8KBjss
-	0tMVfdNdYxZQkjCDWslCg2+acUo28pJfTejtQ=
-Received: by 10.90.5.4 with SMTP id 4mr25217age.155.1288632967367; Mon, 01 Nov
-	2010 10:36:07 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=M9DaUwaXHqGt5unomie+Agr+don6476Al9KsJwZdbqbEZNd8p/Z/JONF9fEX8RkLBa
+	8+lHtN5UAsyVmGpCitWt74V7LbX1FCDVpCWndCUS6RXoMgwsqJIl5SGB0NJk0shDTBhi
+	Az3SXlEvNdxKvJifdijkEwxX1U0fxy3UZt1z0=
 MIME-Version: 1.0
-Received: by 10.91.135.18 with HTTP; Mon, 1 Nov 2010 10:35:44 -0700 (PDT)
-In-Reply-To: <AANLkTi=gi8pk_McpA58rvcOHdq-0Xpz+NyF2doWPO00B@mail.gmail.com>
+Received: by 10.216.60.203 with SMTP id u53mr15928996wec.36.1288635573405;
+	Mon, 01 Nov 2010 11:19:33 -0700 (PDT)
+Sender: zach.frey@gmail.com
+Received: by 10.216.37.5 with HTTP; Mon, 1 Nov 2010 11:19:33 -0700 (PDT)
+In-Reply-To: <AANLkTinCa9E0F3FOm6TXg6NLc48pSgmijeUfqgmhtRuw@mail.gmail.com>
 References: <AANLkTi=gi8pk_McpA58rvcOHdq-0Xpz+NyF2doWPO00B@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 1 Nov 2010 10:35:44 -0700
-Message-ID: <AANLkTinCa9E0F3FOm6TXg6NLc48pSgmijeUfqgmhtRuw@mail.gmail.com>
+	<AANLkTinCa9E0F3FOm6TXg6NLc48pSgmijeUfqgmhtRuw@mail.gmail.com>
+Date: Mon, 1 Nov 2010 14:19:33 -0400
+X-Google-Sender-Auth: -hTJZNYC1JZdit1uDyrqdsLvcz0
+Message-ID: <AANLkTimE05gQ2pSmkYouZMW1=rAg=-5S_sGu0nTgjpzh@mail.gmail.com>
+From: Zach Frey <zach@znfrey.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.41
+X-SA-Exim-Mail-From: zach.frey@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Trouble compiling system-tools-backends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,66 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 17:37:31 -0000
-X-List-Received-Date: Mon, 01 Nov 2010 17:37:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Nov 2010 18:20:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Nov 1, 2010 at 10:03 AM, Zach Frey <zach@znfrey.com> wrote:
-> Hi everyone,
->
-> I'm trying to build angstrom-gnome-image with latest for omapzoom2 (on
-> Ubuntu 8.04) and I'm getting the following error:
+On Mon, Nov 1, 2010 at 1:35 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-Are you using angstrom-2010 ? in that case you might want to
-regenerate configure
-as well as libtool scripts.
+> On Mon, Nov 1, 2010 at 10:03 AM, Zach Frey <zach@znfrey.com> wrote:
+> > Hi everyone,
+> >
+> > I'm trying to build angstrom-gnome-image with latest for omapzoom2 (on
+> > Ubuntu 8.04) and I'm getting the following error:
+>
+> Are you using angstrom-2010 ? in that case you might want to
+> regenerate configure
+> as well as libtool scripts.
+>
+>
+Actually, I'm using
 
->
-> | Making all in services
-> | make[2]: Entering directory
-> `/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/syste=
-m-tools-backends-2.10.1-r0/system-tools-backends-2.10.1/services'
-> | cd .. && \
-> | =C2=A0 =C2=A0 =C2=A0 /bin/sh
-> /home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/system=
--tools-backends-2.10.1-r0/system-tools-backends-2.10.1/missing
-> --run automake-1.7 --gnu =C2=A0services/Makefile
-> | configure.in:8: version mismatch. =C2=A0This is Automake 1.7.9,
-> | configure.in:8: but the definition used by this AM_INIT_AUTOMAKE
-> | configure.in:8: comes from Automake 1.11.1. =C2=A0You should recreate
-> | configure.in:8: aclocal.m4 with aclocal and run automake again.
-> | make[2]: *** [Makefile.in] Error 1
-> | make[2]: Leaving directory
-> `/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/syste=
-m-tools-backends-2.10.1-r0/system-tools-backends-2.10.1/services'
-> | make[1]: *** [all-recursive] Error 1
-> | make[1]: Leaving directory
-> `/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/syste=
-m-tools-backends-2.10.1-r0/system-tools-backends-2.10.1'
-> | make: *** [all] Error 2
-> | FATAL: oe_runmake failed
-> | ERROR: Function do_compile failed
-> NOTE: package system-tools-backends-2.10.1-r0: task do_compile: Failed
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of /home/PHOENIX/frey/OE/openembedded/recipes/gnome/
-> system-tools-backends_2.10.1.bb do_compile failed
-> ERROR: Task 2237 (/home/PHOENIX/frey/OE/openembedded/recipes/gnome/
-> system-tools-backends_2.10.1.bb, do_compile) failed with 256
-> ERROR: '/home/PHOENIX/frey/OE/openembedded/recipes/gnome/
-> system-tools-backends_2.10.1.bb' failed
-> ERROR: '/home/PHOENIX/frey/OE/openembedded/recipes/gnome/
-> system-tools-backends_2.10.1.bb' failed
->
->
-> Ideas?
->
-> Thanks,
-> Zach Frey
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+DISTRO = "angstrom-2008.1"
 
+Should I try "angstrom-2010.x" ?
+
+
+Thanks,
+Zach
 
