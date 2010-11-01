@@ -1,37 +1,37 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PCrcH-00022q-9n
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PCrmI-0005Sx-Hd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 11:27:54 +0100
-Received: by iwn42 with SMTP id 42so6342625iwn.6
+	Mon, 01 Nov 2010 11:38:15 +0100
+Received: by iwn42 with SMTP id 42so6351270iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 03:27:03 -0700 (PDT)
+	Mon, 01 Nov 2010 03:37:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=dWLO7iEkecEzIu2oTZYbj/FDvQ3Bu47ibGMIhKYQzSw=;
-	b=SSOvU79JkAceyD3SDbkk5p4WWxV/MfrnzRzzzjkTmdjnMMzPhG9ndN8pqvHU/j2lE6
-	vkYCHujjOq+ZBPxjxTqH7RLinLo2/3xZYBf2p8Crg9lM69K4SLODa/fC/yen6ZFggNt0
-	Tky7amKe6LPQuSpdFSgAWHpO68hy8Qys7UMRU=
+	bh=wPpRbTNnHQ9qQsZqLqtegKMI+DodCF/Q71eiW1oR4b8=;
+	b=u7YT7aoRf6B3XfKnlyEV1b+3tFag926HYoND67ydmWosBqnFfebLd4bwKVSIBNBbDe
+	fWVZe5JHHfymv+7FTS5q66bXBLS7LKE67OWkOR7vo9/xxaoM4/5yMlWXU73k3sNLctoa
+	rFMJKYAdCQ4+c9dehbwgCvLh518pUs8mqpC9w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=X7XIonN+GytohaOqOQPgxqiIf70rLQ2ox9oge+/uYocHsgt6uSF1xfum8JDXe0RKIQ
-	UcDw6hyhq7PWqmF6rLdlPRM6XLI1tIj4zS7D/7MZZasJpK1yAB12CqT5956DJ9pvisxT
-	IlXl5fLOjD8D3lQjVNjK+jdAVO+CYWhbHIlOg=
+	b=nFIKshXOp9zgGDM0J3gnS9wYun8/EIA2hhqPRzp2jHjgIdiNnOpfyE/Z0De+/Jhvdt
+	7CMgQmvX4EIK9de4mJCL/Bb/yD/BEvz1ecgv0jh8AtZeAqL9KO0PHNDNH7+8kbWhSyle
+	eS6W1isPEtN7TvOohlPkJz9N+/s2+JKFgOT1U=
 MIME-Version: 1.0
-Received: by 10.42.225.131 with SMTP id is3mr2116530icb.2.1288607223052; Mon,
-	01 Nov 2010 03:27:03 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Mon, 1 Nov 2010 03:27:03 -0700 (PDT)
-In-Reply-To: <ialv3j$7nq$1@dough.gmane.org>
+Received: by 10.231.35.131 with SMTP id p3mr13285336ibd.177.1288607845967;
+	Mon, 01 Nov 2010 03:37:25 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Mon, 1 Nov 2010 03:37:25 -0700 (PDT)
+In-Reply-To: <20101101081956.GA3440@jama>
 References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
 	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
 	<iakpd7$ja7$1@dough.gmane.org>
 	<AANLkTikmqiDqWpHS=K73N8z6a0VPU8k7zMCP7yrb=G-Y@mail.gmail.com>
-	<ialv3j$7nq$1@dough.gmane.org>
-Date: Mon, 1 Nov 2010 11:27:03 +0100
-Message-ID: <AANLkTimpD7qUE5DPJuoWVaAfZ9cChZpNn+fYp=XmfPDN@mail.gmail.com>
+	<20101101081956.GA3440@jama>
+Date: Mon, 1 Nov 2010 11:37:25 +0100
+Message-ID: <AANLkTikwumwg4Pmw49AzaT0j-QhjCbPF+kcAWcSJZbJQ@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -56,69 +56,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 10:27:54 -0000
+X-List-Received-Date: Mon, 01 Nov 2010 10:38:15 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/11/1 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 01-11-10 08:49, Frans Meulenbroeks wrote:
->
->> PS: a few comments wrt the libcdio issue:
+2010/11/1 Martin Jansa <martin.jansa@gmail.com>:
+> On Mon, Nov 01, 2010 at 08:49:32AM +0100, Frans Meulenbroeks wrote:
+
 >>
->> - it would have been nice if this was discussed with the recipe
->> maintainer. This is in accordance with our commit policy [2, 4th
->> block]. I strongly doubt that this has happened (and apologies if this
->> is a faulty assumption).
->
-> Since I'm not sure if you're getting at the fix or breakage, I will talk
-> about the breakage commit:
->
-> I don't tend to discuss things with myself since it creeps people out :)
-
-:-)
-
-The confusion was caused by the fact that this one:
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D92e23e98bdb=
-d1bdacb23f5d2c848159cbab6d057
-touches both libcdio.inc and libcddb_1.3.2.bb
-In the latter one you removed among others:
--MAINTAINER =3D "Andreas Frisch <andreas.frisch@multimedia-labs.de>"
-
-Have the changes in that file been discussed with Andreas ?
-
-Also the libcdio 0.82 recipe was added by Khem on sep 30:
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc5a25043727=
-3e98fd66a13cfa6f5088b9ae68a97
-because 0.81 was not cross-compile safe, after which Andreas made some
-improvements to it.
-The MAINTAINERS file also does not list you as maintainer for this
-recipe. Guess this is a good case why it is useful to list the
-maintainer in the recipe.
-
-Anyway that (and the fact that we are poor on ACK-ing recipes) caused
-me to push Andreas' patch (after verifying that it builds).
-
-> I created the cdio recipe myself in 2009 and pushed in januari 2010.
-> The funny thing is that all the breakage occured by this:
->
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Db672b28ba=
-6a29e2715c91fcbbda8b2776b6f1105
->
-> That commit has no ACKs so SOBs from me, so I wonder why it went in.
-
-As explained above because you were not identified as the maintainer
-as you did not write or push the 0.82 recipe and are not listed as
-such in the MAINTAINERS file.
-
-And (unrelated to this issue) I do not see the same prudence you
-expect from others when you modify recipes that are maintained by
-others.
-"Do unto others as you would have them do unto you"
-
->
 >> (btw: a good place would probably be [3] and yeah, I am aware of the
 >> debian renaming [4], but I am also aware of [5] which as an example
 >> says:
@@ -131,54 +76,69 @@ others.
 >> which was exactly what was in the original commit [6]:
 >> +FILES_${PN} =3D "${libdir}/lib${PN}${SOLIB}"
 >
-> But there's no file called liblibcdio.so.x.y, only libcdio.so.x.y. The
-> original recipe already had a way to split all the libs automatically.
+> It's OK, but much better if you also PR bump packages depending on it.
+> Because as long as "${bindir}/*" was included in FILES_${PN}, debian
+> naming didin't happen (because of multiple binaries in 1 package), the
+> same happens when you have multiple libraries in 1 package without
+> LEAD_SONAME defined.
 
-That code was still there.
+Which (at least to me) is highly confusing. I did not expect that
+adding/removing things from FILES_${PN} would change the lib renaming.
+This seems highly counter-intuitive to me.
 
-+python populate_packages_prepend () {
-+ glibdir =3D bb.data.expand('${libdir}', d)
-+ do_split_packages(d, glibdir, '^lib(.*)\.so\..*', 'lib%s',
-'gstreamer %s library', extra_depends=3D'', allow_links=3DTrue)
-+}
+Actually I'mkinda  flabbergasted when renaming does and when it does not ha=
+ppen.
+That is why I feel some doc is a good plan.
 
-Not sure how well it applies with the FILES_${PN} breakage.
+The same holds with the LEAD_SONAME and e.g. the GNU_HASH errors/warnings.
+There are all quite common. It would be a good plan to have a page
+somewhere describing the meaning of these messages and what to do with
+them.
+>
+> So moving binaries to new FILES_${PN}-utils is probably good move, but
+> as side effects it renames libcdio to libcdio5. And because already
+> built packages have libcdio instead of libcdio5 in it's runtime depends,
+> those needs to be rebuilt (to pick libcdio5 as libcdio.so provider)
+>
+> Not sure how to check all recipes depending on it (I don't trust DEPENDS
+> as some packages are voluntary linked to libcdio just because autotools
+> found it). So usually I notice it only when image build fails (opkg
+> complaining about missing packages), but that works only for packages
+> included in built image :/. And when I notice it, I usually do something
+> like:
+> find deploy/ipk/ -name Packages -exec grep -B 3 libcdio {} \;
+> to see where wrong Depends is and then PR bump those (which still fixes
+> only those recipes I'm building as part of some image or ie
+> task-shr-feed)
 
-On a personal note:
-I feel that python functions like this,  clever as they are, do
-severely reduce the understandability and maintainability of the
-recipe.
-Not everybody is a python wiz. I feel recipes should be easy to
-understand for the average developer.
-Personally I would prefer just iterating the files in a FILES* assignment.
-That makes things so much better understandable (and yes if a new file
-is added in a newer version of the recipe it will not be added
-automagically. However there will be a note to warn that the new file
-is not packaged)
+You might want to extend your grep to DEPENDS lines.
+Then again this is not trivial if DEPENDS is split over multiple lines
+and the package same is something that occurs lots of times outside
+the depends var.
+
+In the case where you encounter a depends issue, I hope you also fix
+DEPENDS (but actually I'm pretty sure you will :-) )
+>
+> sometimes it gets even worse, like in this case:
+> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D5fa427d069=
+22297496fcf5ebd6c0a6a5c2adac46
+> when edbus.ipk gets empty after moving all libs to separate packages, so
+> it won't get upgrade on target and creates conflicts between old package
+> containing ie libehal.so.* and new edbus-ehal.ipk providing the same lib
+> in newer version.
+
+Upgrading is sometimes a pita.
 
 >
-> Thankfully the incremental angstrom autobuilder caught that issue and
-> was fixed shortly after.
+> Feel free to update wiki if you found this explanation (or at least some
+> part of it :)) understandable.
+>
 
-Which is good :-)
+See above.
+The fact is that I am fairly time-constrained next few days. Came back
+from elc/oedem last sun, have to leave for another trip upcoming sat
+morning.
 
-Frans.
-
-PS: since you are so concerned about libcdio, would you please fix the
-dependencies or the configure.
-configure --help says
-...
-  --enable-cddb           include CDDB lookups in cd_info (default enabled)
-  --enable-vcd-info      include Video CD Info from libvcd
-...
-
-Seems like whatever is build depends on whether libcddb is build before or =
-not.
-Andreas fixed that by adding a dependency on libcddb, but you undid
-that in http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D92e=
-23e98bdbd1bdacb23f5d2c848159cbab6d057
-
-And while you're at it perhaps add in the MAINTAINERS file that you
-are the maintainer of this recipe.
+Have fun! Frans
 
 
