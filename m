@@ -1,56 +1,39 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PD008-0003XJ-KR
+	(envelope-from <Tom_Rini@mentor.com>) id 1PD0Bj-0007ub-ES
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 20:25:05 +0100
-Received: by pva4 with SMTP id 4so640106pva.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 12:24:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=LOjLz3j37qoteje+3Keq2jk7YQCRcwIJlz8CaHKdnqE=;
-	b=iNSdbasBUTaiNOWt+PevW4N+MWIa+0rYA0HOTv8D/CLNCHTWfrLOaNCR7uW3XXjCDc
-	QkNSsvJkteAUVZSCET2/RCFyX1pwiO6VNO8EBiJ1Lz2vyR8WNnd+uuCmwSSxP6mZF0k1
-	2lq0qT0BQivriQIP71EBAfagb5KiuVshxLdoE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=UciUzuNEbbvwbNOGiTJjxDohgQoJ7Ajr7T7RJYI6g4+PNVnbGLktv0CJIk8DWASfnf
-	zvLVul1GzO4FirtDaqOrYddxP1LVXjojjmhL3w27Zy6+eGQaA1eP5nRIHnSVZLCcxnoF
-	krkx/2xo1NEYlq9BTlZOGvgNFpOSrorm+i28Q=
-Received: by 10.142.128.1 with SMTP id a1mr4424468wfd.294.1288639453330;
-	Mon, 01 Nov 2010 12:24:13 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id p8sm9366930wff.16.2010.11.01.12.24.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 01 Nov 2010 12:24:12 -0700 (PDT)
-Date: Mon, 1 Nov 2010 12:24:22 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101101192422.GA11482@gmail.com>
-References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>
-	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>
-	<iakpd7$ja7$1@dough.gmane.org>
-	<AANLkTikQvYRyaMspRo9Skt_jmfNjz2MuOT+ff4wv=a82@mail.gmail.com>
-	<AANLkTi=zxQ1AxJ9chbFjLJzps1LB8RCyaNkJk5HApTZ=@mail.gmail.com>
-	<20101101183327.GD15069@ibawizard.net>
-	<AANLkTimN4Rq2bWZXjs84FUtxNgD_BAQy=5=4gXJqfPGe@mail.gmail.com>
+	Mon, 01 Nov 2010 20:37:07 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1PD0At-0002tl-2N from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Nov 2010 12:36:11 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 1 Nov 2010 12:36:10 -0700
+Received: from [172.30.80.166] ([172.30.80.166]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 1 Nov 2010 13:36:10 -0600
+Message-ID: <4CCF16A7.3020600@mentor.com>
+Date: Mon, 01 Nov 2010 12:36:07 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimN4Rq2bWZXjs84FUtxNgD_BAQy=5=4gXJqfPGe@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <20101029191718.GA27520@gmail.com>
+In-Reply-To: <20101029191718.GA27520@gmail.com>
+X-OriginalArrivalTime: 01 Nov 2010 19:36:10.0493 (UTC)
+	FILETIME=[094CAAD0:01CB79FC]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-10-29
+Subject: Re: [RFC] Toolchain recipes, versions, removal and consolidation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -64,43 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 19:25:05 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 01 Nov 2010 19:37:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On (01/11/10 19:49), Frans Meulenbroeks wrote:
-> 2010/11/1 Petr Štetiar <ynezz@true.cz>:
-> > Khem Raj <raj.khem@gmail.com> [2010-11-01 10:32:53]:
-> >
-> >> We should add another column identifying the build is from clean tmp
-> >> or an incremental one
-> >
-> > No more columns please. I think, that I should receive a PhD just because I
-> > can update that table :-) It's pure rocket science...
-> >
-> > -- ynezz
-> >
+Khem Raj wrote:
+> Hi
 > 
-> Put the table in a spreadsheet?
-> I think google docs can be used to share access to a common sheet (but
-> not fully sure).
+> There are so many versions of toolchain components gcc/binutils/glibc that
+> we have in metadata. I would like to reduce the number and keep supporting
+> the ones we really use. Right now we have recipes for
+> 
+> binutils = 2.14.90.0.6,2.14.90.0.7, 2.15.94.0.1, 2.16, 2.16.1, 2.16.91.0.6,
+> 2.16.91.0.7, 2.17, 2.17.50.1, 2.17.50.0.5, 2.17.50.0.8, 2.17.50.0.12, 2.18,
+> 2.18.50.0.7, 2.18.atmel.1.0.1, 2.19, 2.19.1, 2.19.51, 2.19.51.0.3, 2.20,
+> 2.20.1, cvs
+> 
+> gcc = 3.3.3, 3.3.4, 3.4.3, 3.4.4, 3.4.6, 4.0.0, 4.0.2, 4.1.0, 4.1.1, 4.1.2,
+> 4.2.1, 4.2.2, 4.2.3, 4.2.4, 4.3.1, 4.3.2, 4.3.3, 4.3.4, 4.4.1, 4.4.2,
+> 4.4.4, 4.5, csl-arm-2007q3, csl-arm-2008q1, csl-arm-2008q3
+> 
+> glibc = 2.2.5, 2.3.2, 2.3.3, 2.3.5+cvs20050627, 2.5, 2.6.1, 2.9, 2.10.1,
+> cvs
+> 
+> uclibc = 0.9.28, 0.9.29, 0.9.30, 0.9.30.1, 0.9.30.2, 0.9.30.3, 0.9.31, git
+> 
+> 
+> eglibc = 2.9, 2.10, 2.11, 2.12, svn
 
-Wiki has good support for tables.
-> 
-> Disadvantage of an incremental build is that you need to keep all the
-> tmp dirs around, which, at least for me, is probably prohibitive (I'll
-> verify this later)
+For flexibility in out of tree projects, I'd like to see us keep at 
+least for binutils 2.18 and newer (official releases) and one each of 
+the H.J. Lu releases (.5x.y.z) for folks that need that.  Similarly for 
+gcc, 4.2.4, 4.3.4, 4.4.4 and one of the csl's.  For glibc, 2.9 and 
+newer?  For uclibc maybe we can drop 0.9.30.[12] if they aren't pinned.
 
-Disadvantage for you agreed but may not be for others who have space to keep the tmpdir
-and care about saving time on complete rebuilds or upgrade paths etc.
+But I fear this won't help your concern as much since often fixing up 
+for say gcc 4.2.4 fixes it up for 4.2.1 and 4.2.2 and 4.2.3, and so forth.
 
-> 
-> Frans
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
