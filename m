@@ -1,39 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PD0Bj-0007ub-ES
+	(envelope-from <denis@denix.org>) id 1PD0Cf-0007zs-3l
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 20:37:07 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1PD0At-0002tl-2N from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Nov 2010 12:36:11 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 1 Nov 2010 12:36:10 -0700
-Received: from [172.30.80.166] ([172.30.80.166]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 1 Nov 2010 13:36:10 -0600
-Message-ID: <4CCF16A7.3020600@mentor.com>
-Date: Mon, 01 Nov 2010 12:36:07 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Mon, 01 Nov 2010 20:38:01 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LB8006A2154GKG1@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	01 Nov 2010 14:36:46 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 74F0914AF6A; Mon,
+	01 Nov 2010 15:36:40 -0400 (EDT)
+Date: Mon, 01 Nov 2010 15:36:40 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <20101029191718.GA27520@gmail.com>
-In-Reply-To: <20101029191718.GA27520@gmail.com>
-X-OriginalArrivalTime: 01 Nov 2010 19:36:10.0493 (UTC)
-	FILETIME=[094CAAD0:01CB79FC]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-id: <20101101193640.GE11514@denix.org>
+References: <1288342969.18134.5.camel@mattotaupa>
+	<iajftl$ek9$1@dough.gmane.org>
+MIME-version: 1.0
+In-reply-to: <iajftl$ek9$1@dough.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.11
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Toolchain recipes, versions, removal and consolidation
+Subject: Re: OEDEM 2010: [RFC] useful commit message
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,45 +42,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2010 19:37:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Nov 2010 19:38:02 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Khem Raj wrote:
-> Hi
+On Sun, Oct 31, 2010 at 11:20:36AM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> There are so many versions of toolchain components gcc/binutils/glibc that
-> we have in metadata. I would like to reduce the number and keep supporting
-> the ones we really use. Right now we have recipes for
+> On 29-10-10 11:02, Paul Menzel wrote:
+> > Dear OE folks,
+> > 
+> > 
+> > could you please discuss the following proposal.
+> > 
+> > I would very much like more elaborate commit messages. This is in my
+> > opinion already demanded by the commit policy [1], but often patch
+> > submitters, especially those not sending changes to review to the list,
+> > since they have direct access to the repository, fail to adhere to the
+> > policy.
+> > 
+> > The reason is, quite often I do not understand why a change was
+> > necessary. It would very much help me, if at least the error message was
+> > pasted to be able to compare with one???s own error messages and what
+> > distribution and machine was used to test the recipe.
 > 
-> binutils = 2.14.90.0.6,2.14.90.0.7, 2.15.94.0.1, 2.16, 2.16.1, 2.16.91.0.6,
-> 2.16.91.0.7, 2.17, 2.17.50.1, 2.17.50.0.5, 2.17.50.0.8, 2.17.50.0.12, 2.18,
-> 2.18.50.0.7, 2.18.atmel.1.0.1, 2.19, 2.19.1, 2.19.51, 2.19.51.0.3, 2.20,
-> 2.20.1, cvs
-> 
-> gcc = 3.3.3, 3.3.4, 3.4.3, 3.4.4, 3.4.6, 4.0.0, 4.0.2, 4.1.0, 4.1.1, 4.1.2,
-> 4.2.1, 4.2.2, 4.2.3, 4.2.4, 4.3.1, 4.3.2, 4.3.3, 4.3.4, 4.4.1, 4.4.2,
-> 4.4.4, 4.5, csl-arm-2007q3, csl-arm-2008q1, csl-arm-2008q3
-> 
-> glibc = 2.2.5, 2.3.2, 2.3.3, 2.3.5+cvs20050627, 2.5, 2.6.1, 2.9, 2.10.1,
-> cvs
-> 
-> uclibc = 0.9.28, 0.9.29, 0.9.30, 0.9.30.1, 0.9.30.2, 0.9.30.3, 0.9.31, git
-> 
-> 
-> eglibc = 2.9, 2.10, 2.11, 2.12, svn
+> We discussed this at OEDEM and AIUI the TSC will make a recommendation
+> about it later, but in the meantime you can expand existing commit
+> messages with git notes:
 
-For flexibility in out of tree projects, I'd like to see us keep at 
-least for binutils 2.18 and newer (official releases) and one each of 
-the H.J. Lu releases (.5x.y.z) for folks that need that.  Similarly for 
-gcc, 4.2.4, 4.3.4, 4.4.4 and one of the csl's.  For glibc, 2.9 and 
-newer?  For uclibc maybe we can drop 0.9.30.[12] if they aren't pinned.
+While git-notes is relatively new (1.6.6+), it's a very useful feature. Some 
+more details here:
 
-But I fear this won't help your concern as much since often fixing up 
-for say gcc 4.2.4 fixes it up for 4.2.1 and 4.2.2 and 4.2.3, and so forth.
+http://progit.org/2010/08/25/notes.html
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+Denys
+
+> 
+> - -----------------
+> GIT-NOTES(1)
+> 
+> NAME
+>        git-notes - Add/inspect commit notes
+> 
+> SYNOPSIS
+>        git notes (edit [-F <file> | -m <msg>] | show) [commit]
+> 
+> DESCRIPTION
+>        This command allows you to add notes to commit messages, without
+> changing the commit. To discern these notes from the message stored in
+> the commit object, the notes
+>        are indented like the message, after an unindented line saying
+> "Notes:".
+> 
+>        To disable commit notes, you have to set the config variable
+> core.notesRef to the empty string. Alternatively, you can set it to a
+> different ref, something like
+>        "refs/notes/bugzilla". This setting can be overridden by the
+> environment variable "GIT_NOTES_REF".
+> 
+> SUBCOMMANDS
+>        edit
+>            Edit the notes for a given commit (defaults to HEAD).
+> 
+>        show
+>            Show the notes for a given commit (defaults to HEAD).
+> 
+> OPTIONS
+>        -m <msg>
+>            Use the given note message (instead of prompting). If
+> multiple -m (or -F) options are given, their values are concatenated as
+> separate paragraphs.
+> 
+>        -F <file>
+>            Take the note message from the given file. Use - to read the
+> note message from the standard input. If multiple -F (or -m) options are
+> given, their values are
+>            concatenated as separate paragraphs.
+> - -----------------
+> 
+> It would of course be better to get it right the first time :)
+> 
+> regards,
+> 
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> 
+> iD8DBQFMzUL0MkyGM64RGpERAlfMAJsGBzO3oZ68BEvCK0QehPsvbnB4hQCgpp4d
+> sj+pB/5JTY1O7NJtuyMvsyU=
+> =DiG8
+> -----END PGP SIGNATURE-----
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
