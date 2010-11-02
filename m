@@ -1,40 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PDOGz-0008Nv-Ga for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 22:20:07 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PDOG9-0000vU-D1 for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 22:19:13 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 22:19:12 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 22:19:12 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1PDOJO-0004Pa-Fc
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 22:22:36 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1PDOIa-0007GB-51 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 14:21:44 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 2 Nov 2010 14:21:44 -0700
+Received: from [172.30.80.166] ([172.30.80.166]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 2 Nov 2010 15:21:43 -0600
+Message-ID: <4CD080E2.2000706@mentor.com>
+Date: Tue, 02 Nov 2010 14:21:38 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 02 Nov 2010 22:19:01 +0100
-Message-ID: <iapv85$kch$1@dough.gmane.org>
 References: <i9p1d0$7q4$1@dough.gmane.org>	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>	<iaptb1$bpb$1@dough.gmane.org>
 	<4CD07F3E.7040703@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
 In-Reply-To: <4CD07F3E.7040703@eukrea.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-OriginalArrivalTime: 02 Nov 2010 21:21:43.0458 (UTC)
+	FILETIME=[F2743020:01CB7AD3]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] turning conf/machine into a set of bblayers
@@ -51,54 +48,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 21:20:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 02 Nov 2010 21:22:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 02-11-10 22:14, Eric BÃ©nard wrote:
+Eric Bénard wrote:
 > Hi,
 > 
-> Le 02/11/2010 21:46, Koen Kooi a Ã©crit :
+> Le 02/11/2010 21:46, Koen Kooi a écrit :
 >> I do fear that pulling things into seperate layers too much will make it
 >> harder to propagate fixes...
 >>
-> yes, in your example, the fines in conf/machine/include are common to
-> all omap boards (and even all cortexa8 for tune-cortexa8.inc) and thus
-> when fixing one BSP you have to think to fix the others (and to
+> yes, in your example, the fines in conf/machine/include are common to 
+> all omap boards (and even all cortexa8 for tune-cortexa8.inc) and thus 
+> when fixing one BSP you have to think to fix the others (and to 
 > communicate the fix to other BSP maintainers).
 > The same apply for most of the .inc in recipes-bsp/*/.
 > 
 > Do you think the following setup is possible ?
 > 
-> - ARM overlay (containing all generic files for ARM achitecture :
+> - ARM overlay (containing all generic files for ARM achitecture : 
 > conf/machines/include for example)
 > 
-> - OMAP3 overlay (containing all generic files for OMAP3 SOC :
-> conf/machines/include/omap* + recipes/linux u-boot x-load base files for
+> - OMAP3 overlay (containing all generic files for OMAP3 SOC : 
+> conf/machines/include/omap* + recipes/linux u-boot x-load base files for 
 > omap3 architecture,
 > 
-> - specific board overlay (conf/machine/themachine.conf + board specific
-> additions in recipes/linux u-boot & x-load (with patches based on top of
+> - specific board overlay (conf/machine/themachine.conf + board specific 
+> additions in recipes/linux u-boot & x-load (with patches based on top of 
 > the OMAP3 overlay).
 
-That was pretty much what I was thinking, the angstrom-layers stuff is
-something I need to get working before thursday, so it is a bit hacky.
-It will get cleaned up after I get back from my holiday :) Hopefully
-more people have tried different setups and we can bang out a decent RFC.
+How about:
 
-regards,
+- allow some form of conf/machine/include to continue to exist in the 
+main layer
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+? There would have to be some judgment calls, but I don't think that 
+should be too hard, over when it's SOC_FAMILY or when it's very generic. 
+  Basically the ARM overlay wouldn't be created in this case (nor the 
+PPC nor MIPS nor ...).  But we must avoid duplicating tune-coretexa8.inc 
+and similar.
 
-iD8DBQFM0IBFMkyGM64RGpERAhVvAJ98xHlzrMSjH/d6a5//GQimg89j0wCgnVIs
-ASfxeRULybqKbDAjBMlwkXg=
-=tE/N
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
