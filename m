@@ -1,45 +1,49 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PDOvn-0007pA-0L
+	(envelope-from <anarsoul@gmail.com>) id 1PDOx1-0007vW-KD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 23:02:16 +0100
-Received: by gwaa11 with SMTP id a11so4677213gwa.6
+	Tue, 02 Nov 2010 23:03:31 +0100
+Received: by eya28 with SMTP id 28so3763772eya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 15:01:21 -0700 (PDT)
+	Tue, 02 Nov 2010 15:02:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=LYnC2GCCGfeiFrI42tLgGxUjT2nr99qiYpJMGF1JZ3c=;
-	b=fnNrHfKqgEdybQFh/nj4EK+vMaRGEysI+I4WRzzTMVu9/2LJ00IX2LeHuwGGItdHxS
-	0cv1eRL/OCoLWgzacrprZ7ko0v9W6eq4fXeobLb9fjHC9ExQCpkymumvuCP2pk/rRKo/
-	SNDRxjRBZ3x7mRKOtQS9y7PmZkK6idT4GAABU=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:cc:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=GlPw1ZLRr7HSTpG2jTp6vkOQPShBN9FcbzE4JADoxxg=;
+	b=n939pCuUIML+r5nrvbs5KiZyNhF/AJdxvhCxnqYn2yVR8zpUZZZOa6ymFYG+tbhj6i
+	ASF/8+JKBiqdO9nah0We5VpCrb4LK8mM8K3dJiW5NPBw8TJe/UcFvGkjoyHNWTDu/uZ1
+	JEjNYn/c0sqZ5y73DZionyVOBPAAPE1wzUmbE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=JcA7mwol+qEzS96pjlJ9FRscTqvEQFZXd1AdfiWQZvPNge+e0sXZxJJ1YR++79a8ny
-	H883b0THh+UHzb1jIf5jXxKLRRDo2oq0EgULTNkqgzQykD03v3r/AzIG1FF3Srjfy+9D
-	NavPwndoVdzAN4jN7tYrMrPk/w7sB4LEoBACg=
-Received: by 10.91.27.32 with SMTP id e32mr2070793agj.37.1288735279556; Tue,
-	02 Nov 2010 15:01:19 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.91.135.18 with HTTP; Tue, 2 Nov 2010 15:00:55 -0700 (PDT)
-In-Reply-To: <AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
-References: <4CCF64DD.9080709@gmail.com>
-	<AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 2 Nov 2010 15:00:55 -0700
-Message-ID: <AANLkTiktvcs1HsktTWaFATVDR492tPCHb_d7JU1xm_uW@mail.gmail.com>
+	h=from:to:subject:date:user-agent:cc:references:in-reply-to
+	:mime-version:content-type:content-transfer-encoding:message-id;
+	b=UbCuWY3p164vcakDM9uVKNxgWK2pVkbdthQ1HGS01GNWiDLz1WpxHrqlQn9qJnHkhE
+	h8khpY9XAuar1TK+WJj6851nPBGJA40zrAUM0jRjvXx0o+9wT6E8D4HyUOBD7nOWJ3o3
+	4zbFwsD0UBWYSSUohyd+ZYvsuPdXX26Z5qWZQ=
+Received: by 10.14.119.135 with SMTP id n7mr79939eeh.29.1288735363604;
+	Tue, 02 Nov 2010 15:02:43 -0700 (PDT)
+Received: from anarsoul-laptop.localnet ([80.249.90.154])
+	by mx.google.com with ESMTPS id v51sm5878479eeh.4.2010.11.02.15.02.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 02 Nov 2010 15:02:42 -0700 (PDT)
+From: Vasily Khoruzhick <anarsoul@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Wed, 3 Nov 2010 00:02:18 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.36-gentoo-anarsoul; KDE/4.5.2; i686; ; )
+References: <1288732510-30545-1-git-send-email-anarsoul@gmail.com>
+	<AANLkTin2CR7+C8zz1NtBmV0d2H=gEgNZrXCh5oATzqvz@mail.gmail.com>
+In-Reply-To: <AANLkTin2CR7+C8zz1NtBmV0d2H=gEgNZrXCh5oATzqvz@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201011030002.19429.anarsoul@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: anarsoul@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gphoto2_2.4.8.bb: Stop configure from looking in /usr/local/include
+Subject: Re: [PATCH] eglibc: fix build with make-3.82
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,69 +57,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 22:02:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 02 Nov 2010 22:03:32 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 1, 2010 at 11:38 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/11/2 Graham Gower <graham.gower@gmail.com>:
->> =C2=A0* Point configure at where it can find jpeg.
->> =C2=A0* Explicitly disable cdk and aalib.
->> =C2=A0* Fix license while here.
->>
->> Signed-off-by: Graham Gower <graham.gower@gmail.com>
->> ---
->> =C2=A0recipes/gphoto2/gphoto2_2.4.8.bb | =C2=A0 =C2=A09 +++++++--
->> =C2=A01 files changed, 7 insertions(+), 2 deletions(-)
->>
->> diff --git a/recipes/gphoto2/gphoto2_2.4.8.bb b/recipes/gphoto2/gphoto2_=
-2.4.8.bb
->> index ea54713..836ea85 100644
->> --- a/recipes/gphoto2/gphoto2_2.4.8.bb
->> +++ b/recipes/gphoto2/gphoto2_2.4.8.bb
->> @@ -1,7 +1,8 @@
->> =C2=A0DESCRIPTION =3D "gphoto2 is a command-line utility to fetch pictur=
-es from digital cameras"
->> =C2=A0SECTION =3D "console/utils"
->> -LICENSE =3D "GPL"
->> -DEPENDS =3D "libtool libgphoto2 popt"
->> +LICENSE =3D "GPLv2+"
->> +DEPENDS =3D "libtool libgphoto2 popt jpeg"
->
-> The original recipe would build without the depends on jpeg
-> adding it to depends should be mentioned in the commit message
->
->> +PR =3D "r1"
->>
->> =C2=A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/gphoto/gphoto2-${PV}.tar.bz2;na=
-me=3Dgphoto2 \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://gphoto-popt-fixup.patch"
->> @@ -11,6 +12,10 @@ SRC_URI[gphoto2.sha256sum] =3D "a2e2f70fd6051234cbc3d=
-76dc82df6991e8a07ead56aa8d5c4
->>
->> =C2=A0inherit autotools
->>
->> +EXTRA_OECONF=3D"--without-cdk \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --without-aalib \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --with-jpeg-prefix=3D=
-${STAGING_EXECPREFIXDIR}"
->> +
->
-> I have some concerns here.
-> For configure it seems best to explicitly set and reset the flags in
-> it, otherwise you may just pick up whatever happened to be build
-> before.
->
+On Tuesday 02 November 2010 23:49:33 Khem Raj wrote:
+> On Tue, Nov 2, 2010 at 2:15 PM, Vasily Khoruzhick <anarsoul@gmail.com> 
+wrote:
+> > Add patch to fix this error when building eglibc-2.12
+> 
+> > with make-3.82:
+> thanks for the patch. while you are at it can you also patch other
+> versions of eglibc
+> that would be nice.
 
+Would be 2.11 and 2.12 enough? Not sure that I can test other versions (even 
+compile-test)
 
-this is the case with any package that uses configure tools. But assumption=
- here
-is that when you are building you are not building stuff thats not
-meant to be in
-the given image.
-
-Thx
--Khem
+Regards
+Vasily
 
 
