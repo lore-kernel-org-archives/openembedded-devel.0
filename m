@@ -1,43 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PDNlQ-0004lN-CD for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 21:47:29 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PDNkb-0004ai-9X for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 21:46:37 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 21:46:37 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 21:46:37 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1PDNmM-0004s4-U0
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 21:48:27 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1PDNlT-0004A3-Br from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 13:47:31 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 2 Nov 2010 13:47:31 -0700
+Received: from [172.30.80.166] ([172.30.80.166]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 2 Nov 2010 14:47:30 -0600
+Message-ID: <4CD078DD.8020504@mentor.com>
+Date: Tue, 02 Nov 2010 13:47:25 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 02 Nov 2010 21:46:25 +0100
-Message-ID: <iaptb1$bpb$1@dough.gmane.org>
-References: <i9p1d0$7q4$1@dough.gmane.org>
-	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1288646991-15775-1-git-send-email-eric@eukrea.com>	<AANLkTi=0EsyQ38D1dyBRffGBWEoVo==6=H9+wrtcENyR@mail.gmail.com>	<4CD02461.3020106@eukrea.com>	<4CD026D8.2030101@mentor.com>
+	<4CD03FCC.6030002@eukrea.com>
+In-Reply-To: <4CD03FCC.6030002@eukrea.com>
+X-OriginalArrivalTime: 02 Nov 2010 20:47:30.0698 (UTC)
+	FILETIME=[2AE9DEA0:01CB7ACF]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: Re: [PATCH] gdb-cross-sdk: don't reconfigure after making changes in gdb/Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,83 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 20:47:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 Nov 2010 20:48:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 02-11-10 08:02, Frans Meulenbroeks wrote:
-> 2010/10/21 Koen Kooi <k.kooi@student.utwente.nl>:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
+Eric Bénard wrote:
+> Le 02/11/2010 15:57, Tom Rini a écrit :
+>> Can we look at NOT doing the dance we're doing here and instead try 
+>> the normal
+>> autotools stuff? The "we need to not do ..." stuff looks to be an ancient
+>> artifact.
 >>
->> Hi,
->>
->> Recipes/linux is a mess and recipes/u-boot is as well. It would be a
->> nice topic for OEDEM to see if we discuss switching to a poky BSP model.
->> It would boil down to:
->>
->> 1 base bblayer with shared files:
->> * conf/machine/include
->> * recipes/linux/*.inc
->>
->> 1 bblayer per machine or SOC_FAMILY containing:
->> * machine.conf
->> * first and second stage bootloaders
->> * kernel
->>
->> So, what are peoples thoughts on this? I haven't thought this through
->> myself, so feel free to point out any show stoppers.
->> I do not want this to turn into a "splitting the metadata" discussion,
->> while I'm all for that, it really is a seperate effort and discussion.
->> But any bblayer style split would benefit from OE being a collection of
->> git submodules instead of a monolithic tree[1].
->>
->> Regards,
->>
->> Koen
->>
->> [1] Provided git submodules stop sucking so hard in future git versions
-> 
-> Replying on the original message on purpose.
-> 
-> Is the discussion concluded?
-> How do we proceed with this? Should we have a vote? escalate to TSC?
-> postpone until after the dec 1 release? already do something in a
-> branch?
+> following the recent changes in this file we have a regression : some 
+> libs are no more statically linked in gdb and this patch fix this 
+> regression.
+> Can we apply it and then we can think on a better way to rewrite these 
+> recipes. After a few tries, switching to autotools doesn't work out of 
+> the box because gdb is waiting for autoconf 2.64 when we have 2.65.
 
-I have an experimental beagleboard layer, but I want to spend a bit more
-time using it before I come up with an RFC for it.
+OK, yes, since you've found it to be non-trivial, it can be done a 
+little bit later.  Thanks!
 
-You have have a look at it at
-http://gitorious.org/angstrom/angstrom-layers/trees/master/BSP/beagleboard
-but I want to stress that it currently is a quick hack that doesn't
-exploit bblayers fully yet.
-
-RP did show me a neat trick to overlay files without copying the
-complete metadata:
-
-http://gitorious.org/angstrom/angstrom-layers/commit/9890faee0eb861bdfd995910090126a8fe83be90.patch
-
-So I would encourage people to try creating their own machine layers to
-get a feel for it so the discussion will be based on actual experience
-instead of handwaving :)
-
-I do fear that pulling things into seperate layers too much will make it
-harder to propagate fixes...
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM0HihMkyGM64RGpERAtlXAKCFK7WmZFTQACKJiegOSKx+panfcQCeJpq0
-Iotf629VoDn0Tb48DkbyHkw=
-=ot/l
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
