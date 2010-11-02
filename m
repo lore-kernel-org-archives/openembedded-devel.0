@@ -1,43 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PDG8t-0001Pk-Ep for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 13:39:12 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PDG87-0006Oe-Rg for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 13:38:23 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 13:38:23 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <msmith@cbnco.com>) id 1PDHG5-0001cF-29
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 14:50:43 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 97C6C8E37DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 13:38:23 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue,  2 Nov 2010 09:49:52 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 17139-02 for <openembedded-devel@lists.openembedded.org>; 
+	Tue,  2 Nov 2010 09:49:52 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 51C2F8E37D5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  2 Nov 2010 09:49:52 -0400 (EDT)
+Message-ID: <4CD016FF.6020103@cbnco.com>
+Date: Tue, 02 Nov 2010 09:49:51 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 02 Nov 2010 13:38:13 +0100
-Message-ID: <iap0nl$prn$1@dough.gmane.org>
-References: <1287841515-19825-1-git-send-email-koen@openembedded.org>
-	<AANLkTinLeN9pCrmwtZYxv7HhLgzfhq+HKhkBm0hLpm9x@mail.gmail.com> 
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <AANLkTinLeN9pCrmwtZYxv7HhLgzfhq+HKhkBm0hLpm9x@mail.gmail.com> 
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1288286551-4700-1-git-send-email-msmith@cbnco.com>	<AANLkTinWpXoGqD5iNN+h-YEN9suQd3zac5E3FTvM7m39@mail.gmail.com>	<Pine.LNX.4.64.1010281443540.5082@juice.ott.cti.com>	<AANLkTikbv9bF9fBvFU2_C6sK13A23wBXgRzwbX++VLhq@mail.gmail.com>	<4CC9E691.9000809@cbnco.com>	<AANLkTimEEdaQub15asdbRzHPfatmtqXNqpTvfp2DM55o@mail.gmail.com>	<4CCAE1DB.1030504@cbnco.com>
+	<20101030101545.GB21651@denix.org>
+In-Reply-To: <20101030101545.GB21651@denix.org>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH] module bbclass: split each module into a kernel-module-<foo> subpackage and use PN as metapackage
+Subject: Re: [PATCH] curl: make CURL_FEATURES configurable again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,51 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 12:39:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 02 Nov 2010 13:50:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Denys Dmytriyenko wrote:
+> It has been discussed before (check irc logs 7-10 days ago) and Khem made a 
+> change to introduce new override called "target", which can be used in this 
+> case. Anyway, I ended up fixing it by amend in my overlay:
+> 
+> http://arago-project.org/git/?p=arago.git;a=commitdiff;h=37979c41a04f7712dbf9c325871fea7c01cc737a
 
-Ping on the patch?
+Yes - the target override patch didn't go in, but I agree it would make 
+this easier.
 
-On 23-10-10 20:15, Koen Kooi wrote:
-> On 23-10-10 19:03, Chris Larson wrote:
->> On Sat, Oct 23, 2010 at 6:45 AM, Koen Kooi <koen.kooi@gmail.com> wrote:
-> 
->>> From: Koen Kooi <k-kooi@ti.com>
->>>
->>> Signed-off-by: Koen Kooi <k-kooi@ti.com>
->>>
->>> ---
->>>  classes/module.bbclass |  191
->>> ++++++++++++++++++++++++++++++++++++++++++++++-
->>>  1 files changed, 186 insertions(+), 5 deletions(-)
->>>
-> 
-> 
->> How about moving the common functions into oe.module or oe.package and using
->> them from module.bbclass and kernel.bbclass?
-> 
-> I thought about that, but that needs more work :( We need to pass in a
-> different path to System.map, use PN as metapackage name, use a
-> different blacklist, etc.
-> That requires a lot more python skill than I currently have.
-> 
-> Apart from the horrendous code duplication, how does this look? It seems
-> to do the right thing for the recipes I tested with :)
-> 
-> regards,
-> 
-> Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Anon python seems to be going out of style so the v2 curl patch uses 
+variable settings with a native override to ensure gnutls isn't in the 
+feature list.
 
-iD8DBQFM0AY1MkyGM64RGpERAiiyAJ943e16oJx5KQDr6qpidHbsLPEONwCfYKx1
-pgEjHF82FwDETI6pPt94BcA=
-=lO75
------END PGP SIGNATURE-----
-
+Mike
 
 
