@@ -1,36 +1,37 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PD8jQ-0002Df-K9
+	(envelope-from <raj.khem@gmail.com>) id 1PD8lf-0004MU-Si
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 05:44:36 +0100
-Received: by gyf3 with SMTP id 3so3928213gyf.6
+	Tue, 02 Nov 2010 05:47:15 +0100
+Received: by gwaa11 with SMTP id a11so3931883gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 21:43:31 -0700 (PDT)
+	Mon, 01 Nov 2010 21:45:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=MJ8N2MgusXvUih6PX/mLCCNtb0NKTwDjYhQnwL1p2Lc=;
-	b=SA0B239sYLLMSa13/cwYY5UIMQQUQFAUOG1O9j6dz97soXbVsT95v6iECLx886Tioj
-	3sOngygJZ+DDcBN/EZccd3fYHzrJG8CDXoxIW/xvhHXE6XDf8pegywbZ/lrjiqpVJHnf
-	7r00R+TR0FU4QzUxrUUfr7b47SM8byjLwNt0s=
+	bh=5myRbw6Hcp24/HV0XEDdtlZUUDwE4Xnz3tP2fzf5ob4=;
+	b=C/1OyrNNiiil3p1hjRmd7C+LIwsS9b3Q0JQ20CYGzDnp7ct1+R1HjhpmaYakiC1U9w
+	/DcmyW6NT6vokoiMsWpXGrt2ThNiJmmne9WTuAC+feCclisNydp62xUMq4H2qCjTsq5J
+	cdcaeGxb2GS6aQRTAwB9fnuNi492DNhAKpiQE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=t0WLP6LKkdwJuv5AcvanzKcih8zx0lUhXBYUeWmLhvuYJLp1Q5vAYeXWVWSavFlkcw
-	lyN0hMCQ8oY0DCZO0oelebJicYOXFmGdkuul52WsyBpVewtKDohA0/PLNLmUs0yvpVcr
-	THkRjtNfz/8L1jF0pjtrNS5pPQTaZHf+z2BwU=
-Received: by 10.91.27.32 with SMTP id e32mr823472agj.37.1288673010889; Mon, 01
-	Nov 2010 21:43:30 -0700 (PDT)
+	b=iOOBsej/hEqu+ixMUR2AcfgKAJ5NqQJfh3kFosTfe1E2toQ4MKTOVEiXt7jJ77PD5J
+	5GHYgFp4FKynI0eTNPoY8uKAYDajilVIK1OLe/xbBai6bfol5swl/gWAGDgzyHQT0ETB
+	RQ0PNd4z66yqbtHA+lezgAZTIjuF0iIIbPepc=
+Received: by 10.91.27.32 with SMTP id e32mr826108agj.37.1288673153572; Mon, 01
+	Nov 2010 21:45:53 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.91.135.18 with HTTP; Mon, 1 Nov 2010 21:43:10 -0700 (PDT)
-In-Reply-To: <4CCF64BD.4090500@gmail.com>
-References: <4CCF64BD.4090500@gmail.com>
+Received: by 10.91.135.18 with HTTP; Mon, 1 Nov 2010 21:45:32 -0700 (PDT)
+In-Reply-To: <1288647332-20685-2-git-send-email-eric@eukrea.com>
+References: <1288647332-20685-1-git-send-email-eric@eukrea.com>
+	<1288647332-20685-2-git-send-email-eric@eukrea.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 1 Nov 2010 21:43:10 -0700
-Message-ID: <AANLkTi=s_Y6MVx9cVtqHyp5hfgJz9i=UdpoVb-4OhtyN@mail.gmail.com>
+Date: Mon, 1 Nov 2010 21:45:32 -0700
+Message-ID: <AANLkTi=uGgpTQsmJeAYXTQoRv8z6fDzFcHSLKvWN21+y@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -38,7 +39,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] python-cython_0.13.bb: Add python-native to DEPENDS.
+Subject: Re: [PATCH 2/3] busybox: 1.17.3 is stable and can be the default fallback version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,42 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 04:44:37 -0000
+X-List-Received-Date: Tue, 02 Nov 2010 04:47:24 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 1, 2010 at 6:09 PM, Graham Gower <graham.gower@gmail.com> wrote=
-:
->
-> /mnt/oe/tmp/work/x86_64-linux/python-cython-native-0.13-r0/temp/run.do_co=
-mpile.28826: line 927: /mnt/oe/tmp/sysroots/x86_64-linux/usr/bin/python: No=
- such file or directory
-> FATAL: python setup.py build_ext execution failed.
+On Mon, Nov 1, 2010 at 2:35 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 
-hmmm what happens if you just add python to DEPENDS instead of python-nativ=
-e ?
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
->
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
 > ---
-> =C2=A0recipes/python/python-cython_0.13.bb | =C2=A0 =C2=A01 +
-> =C2=A01 files changed, 1 insertions(+), 0 deletions(-)
+> =C2=A0recipes/busybox/busybox_1.17.3.bb | =C2=A0 =C2=A04 +---
+> =C2=A01 files changed, 1 insertions(+), 3 deletions(-)
 >
-> diff --git a/recipes/python/python-cython_0.13.bb b/recipes/python/python=
--cython_0.13.bb
-> index 61ad718..4e0411d 100644
-> --- a/recipes/python/python-cython_0.13.bb
-> +++ b/recipes/python/python-cython_0.13.bb
-> @@ -7,6 +7,7 @@ LICENSE =3D "GPL"
-> =C2=A0SRCNAME =3D "Cython"
-> =C2=A0BBCLASSEXTEND =3D "native"
-> =C2=A0NATIVE_INSTALL_WORKS =3D "1"
-> +DEPENDS =3D "python-native"
+> diff --git a/recipes/busybox/busybox_1.17.3.bb b/recipes/busybox/busybox_=
+1.17.3.bb
+> index 6f23662..6956bde 100644
+> --- a/recipes/busybox/busybox_1.17.3.bb
+> +++ b/recipes/busybox/busybox_1.17.3.bb
+> @@ -1,7 +1,5 @@
+> =C2=A0require busybox_1.1x.inc
+> -PR =3D "${INC_PR}.0"
+> -
+> -DEFAULT_PREFERENCE =3D "-1"
+> +PR =3D "${INC_PR}.1"
 >
-> =C2=A0SRC_URI =3D "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
-> =C2=A0S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+> =C2=A0SRC_URI +=3D "\
+> =C2=A0 file://busybox-1.17.3-sort.patch =C2=A0\
 > --
-> 1.7.1
+> 1.6.3.3
 >
 >
 > _______________________________________________
