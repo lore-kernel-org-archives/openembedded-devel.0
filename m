@@ -1,38 +1,38 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PDI9L-0005EY-Gw
+Received: from smtp.cbnco.com ([207.164.182.72])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <msmith@cbnco.com>) id 1PDI9c-0005VN-Jf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 15:47:52 +0100
-Received: (qmail 28307 invoked by uid 503); 2 Nov 2010 14:25:40 -0000
-Received: from b9.ovh.net (HELO mail632.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 2 Nov 2010 14:25:39 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 2 Nov 2010 16:46:59 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 2 Nov 2010 16:46:57 +0200
-Message-ID: <4CD02461.3020106@eukrea.com>
-Date: Tue, 02 Nov 2010 15:46:57 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	Tue, 02 Nov 2010 15:48:05 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 6A4FF8D2498
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  2 Nov 2010 10:47:16 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 29575-08 for <openembedded-devel@lists.openembedded.org>; 
+	Tue,  2 Nov 2010 10:47:16 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 4598C6EEB60
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  2 Nov 2010 10:47:16 -0400 (EDT)
+Message-ID: <4CD02473.80003@cbnco.com>
+Date: Tue, 02 Nov 2010 10:47:15 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1288646991-15775-1-git-send-email-eric@eukrea.com>
-	<AANLkTi=0EsyQ38D1dyBRffGBWEoVo==6=H9+wrtcENyR@mail.gmail.com>
-In-Reply-To: <AANLkTi=0EsyQ38D1dyBRffGBWEoVo==6=H9+wrtcENyR@mail.gmail.com>
-X-Ovh-Tracer-Id: 2621376458632179017
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 213.186.62.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+References: <20101102084104.GI30894@excalibur.local>
+In-Reply-To: <20101102084104.GI30894@excalibur.local>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gdb-cross-sdk: don't reconfigure after making changes in gdb/Makefile
+Subject: Re: New e.V. members
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,59 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 14:47:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 02 Nov 2010 14:48:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Le 02/11/2010 05:41, Khem Raj a écrit :
-> On Mon, Nov 1, 2010 at 2:29 PM, Eric Bénard<eric@eukrea.com>  wrote:
->> else we don't statically link libncurses, libtinfo and libz which leads
->> to :
->> /usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-gdb:
->> error while loading shared libraries: libtinfo.so.5:
->> cannot open shared object file: No such file or directory
->>
->> when trying to use the toolchain.
->
-> could you run oe_runconf and then do the Makefile editing ? that way
-> it will work as expected.
-> we sort of need oe_runconf
->
-the makefile we hack with sed is not created after oe_runconf, it's generated 
-by oe_runmake configure-host
-So what should work is :
-oe_runconf
-oe_runmake
-then sed
+Hi Stefan,
 
-Eric
+I'd like to become a member.
 
->>
->> Signed-off-by: Eric Bénard<eric@eukrea.com>
->> ---
->>   recipes/gdb/gdb-cross-sdk.inc |    1 -
->>   1 files changed, 0 insertions(+), 1 deletions(-)
->>
->> diff --git a/recipes/gdb/gdb-cross-sdk.inc b/recipes/gdb/gdb-cross-sdk.inc
->> index 6a708ca..d32111f 100644
->> --- a/recipes/gdb/gdb-cross-sdk.inc
->> +++ b/recipes/gdb/gdb-cross-sdk.inc
->> @@ -16,5 +16,4 @@ do_configure_append () {
->>         for SIM in ${B}/sim/*/Makefile; do
->>                 [ -f $SIM ]&&  sed -e 's,-lz, ${STAGING_LIBDIR_NATIVE}/libz.a ,g' -i $SIM
->>         done
->> -       oe_runconf
->>   }
->> --
->> 1.6.3.3
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
+I'm a developer in Ottawa, Canada, at Canadian Bank Note Company, 
+Limited. Since 2009 we've been using OpenEmbedded as the base of a 
+customized distribution for our VPN devices and point-of-sale terminals. 
+My interests in OE include x86_64 support, footprint reduction, and 
+overlay control over recipe features and packaging.
+
+Mike
+
+Stefan Schmidt wrote:
+> Hello.
+> 
+> If anyone of you is interest to get an e.V. member please let me know. I'm going
+> to prepare a proposal to vote for new members next week.
+> 
+> The e.V. is the official body behind the OE project and members of it can vote
+> for the board and the TSC. No fee is attached to this memebership but you are
+> free to pay a fee though.
+> 
+> http://wiki.openembedded.org/index.php/Organization
+> 
+> regards
+> Stefan Schmidt
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
