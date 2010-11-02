@@ -1,40 +1,38 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PDNmb-0004uu-8j
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PDOCX-0006wH-Ir
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 21:48:41 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1PDNlm-0004CI-V3 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 13:47:50 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 2 Nov 2010 13:47:50 -0700
-Received: from [172.30.80.166] ([172.30.80.166]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 2 Nov 2010 14:47:49 -0600
-Message-ID: <4CD078F0.6010800@mentor.com>
-Date: Tue, 02 Nov 2010 13:47:44 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Tue, 02 Nov 2010 22:15:35 +0100
+Received: (qmail 17922 invoked by uid 503); 2 Nov 2010 21:44:10 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 2 Nov 2010 21:44:10 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 2 Nov 2010 23:14:40 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 2 Nov 2010 23:14:39 +0200
+Message-ID: <4CD07F3E.7040703@eukrea.com>
+Date: Tue, 02 Nov 2010 22:14:38 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CD02461.3020106@eukrea.com>	<1288709799-9891-1-git-send-email-eric@eukrea.com>
-	<AANLkTim8oPBrRRMFVBknR+c3+gxMgSZAJkB84qa_ByYO@mail.gmail.com>
-In-Reply-To: <AANLkTim8oPBrRRMFVBknR+c3+gxMgSZAJkB84qa_ByYO@mail.gmail.com>
-X-OriginalArrivalTime: 02 Nov 2010 20:47:50.0167 (UTC)
-	FILETIME=[36849A70:01CB7ACF]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <i9p1d0$7q4$1@dough.gmane.org>	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>
+	<iaptb1$bpb$1@dough.gmane.org>
+In-Reply-To: <iaptb1$bpb$1@dough.gmane.org>
+X-Ovh-Tracer-Id: 9169047367188589897
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gdb-cross-sdk: reconfigure before running	oe_runmake configure-host
+Subject: Re: [RFC] turning conf/machine into a set of bblayers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,70 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 20:48:42 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 02 Nov 2010 21:15:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Khem Raj wrote:
-> On Tue, Nov 2, 2010 at 7:56 AM, Eric Bénard <eric@eukrea.com> wrote:
->> so we have : configure then make configure-host which generates the
->> Makefile that we modify using sed to statically link the libs
->>
->> Without this patch, we don't statically link libncurses, libtinfo
->> and libz which leads to :
->> /usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-gdb:
->> error while loading shared libraries: libtinfo.so.5:
->> cannot open shared object file: No such file or directory
->>
->> when trying to use the toolchain.
->>
->> Signed-off-by: Eric Bénard <eric@eukrea.com>
-> 
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+Hi,
 
-Acked-by: Tom Rini <tom_rini@mentor.com>
+Le 02/11/2010 21:46, Koen Kooi a �crit :
+> I do fear that pulling things into seperate layers too much will make it
+> harder to propagate fixes...
+>
+yes, in your example, the fines in conf/machine/include are common to all omap 
+boards (and even all cortexa8 for tune-cortexa8.inc) and thus when fixing one 
+BSP you have to think to fix the others (and to communicate the fix to other 
+BSP maintainers).
+The same apply for most of the .inc in recipes-bsp/*/.
 
-> 
->> ---
->>  recipes/gdb/gdb-cross-sdk.inc |    2 +-
->>  1 files changed, 1 insertions(+), 1 deletions(-)
->>
->> diff --git a/recipes/gdb/gdb-cross-sdk.inc b/recipes/gdb/gdb-cross-sdk.inc
->> index 6a708ca..e1d4895 100644
->> --- a/recipes/gdb/gdb-cross-sdk.inc
->> +++ b/recipes/gdb/gdb-cross-sdk.inc
->> @@ -8,6 +8,7 @@ EXTRA_OEMAKE = "'SUBDIRS=intl mmalloc libiberty opcodes bfd sim gdb etc utils' L
->>  # add a depenency on the -sdk versions of them.
->>  do_configure_append () {
->>        cd ${B}
->> +       oe_runconf
->>        oe_runmake configure-host
->>        sed -e 's,-lncurses,${STAGING_LIBDIR_NATIVE}/libncurses.a ${STAGING_LIBDIR_NATIVE}/libtinfo.a ,g' -i ${B}/gdb/Makefile
->>        sed -e 's,-lz, ${STAGING_LIBDIR_NATIVE}/libz.a ,g' -i ${B}/gdb/Makefile
->> @@ -16,5 +17,4 @@ do_configure_append () {
->>        for SIM in ${B}/sim/*/Makefile; do
->>                [ -f $SIM ] && sed -e 's,-lz, ${STAGING_LIBDIR_NATIVE}/libz.a ,g' -i $SIM
->>        done
->> -       oe_runconf
->>  }
->> --
->> 1.6.3.3
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Do you think the following setup is possible ?
 
+- ARM overlay (containing all generic files for ARM achitecture : 
+conf/machines/include for example)
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+- OMAP3 overlay (containing all generic files for OMAP3 SOC : 
+conf/machines/include/omap* + recipes/linux u-boot x-load base files for omap3 
+architecture,
+
+- specific board overlay (conf/machine/themachine.conf + board specific 
+additions in recipes/linux u-boot & x-load (with patches based on top of the 
+OMAP3 overlay).
+
+Eric
 
 
