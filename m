@@ -1,33 +1,33 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PDAFF-0005dI-J6
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PDAJg-0005oD-Px
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 07:21:22 +0100
-Received: by iwn42 with SMTP id 42so7631411iwn.6
+	Tue, 02 Nov 2010 07:25:57 +0100
+Received: by iwn42 with SMTP id 42so7635956iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Nov 2010 23:20:33 -0700 (PDT)
+	Mon, 01 Nov 2010 23:25:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=uF5GoKryTvvwgkCY/EA9xbvAjd7KSjQJE0WApw8/uMk=;
-	b=Fkj/n0OdKyVa6xVKMV9dNU5psIOU2jyzkmUatDQq6CFtNusDeE8vjkuYo2s9edjnBf
-	4pUzHJaSHHTWZsh6ga0IVYR/90LpYa9bNhxaiMG2aF1nym9tmkHcFqW9Q/YkLqUODRPx
-	WkvxUeDMxhKb+wHP4WlTbTQ2TCsMAZdNedGEc=
+	bh=S+fnK1PxtzfqbAAz9X/a88KeI4qAcf08Ij4JZUoP/PU=;
+	b=lnOnscsloBhUEc5OjGMSwUfhfprPMm7SDbbFaUXZmjd6OU0LZ/eTItGaNOKMO/VsLf
+	8B3x0FYezNCmtO6/41QOyDZUTXkflewn205TgPBhO4sFiqDWSk8bv1rfnxfD8wmTgFcW
+	v3lGLudBGiSB9E1Ir8LS/oP1CbtbxNO6x5VOg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=rQ5wbOm5Q2bqhX6MIA11kWSbP08dwCAMtdNxPbB4Khk7vhBzN26gHSS8ZB+mbgzQQt
-	1mCuDAeOo+lIgbZX1ta7LGGOuc6sE2Q065kaP6d2AqSqJOO4VpI64UACGIVWYmWsRbmD
-	jRV00TJa3bAQTfIOIAo1HHVDSZ0vvQaZybeho=
+	b=G69fK4JKW/kFJgW7DqG6GC/Hi3yuDqL5ZPGPzi+IRihnL3tvRMpXdRmjv2AuQQzl9h
+	XJqT+2INMcu8nCjEqC6xMUwlLrcLNzVsH2Sh7/Kh2rtlMLjE2KHxjmunxdMssTJS/yFx
+	YZdr+ZyReHfMTsPqhXC3JnuHxOacyjq3GUOi0=
 MIME-Version: 1.0
-Received: by 10.42.230.65 with SMTP id jl1mr1824956icb.134.1288678832825; Mon,
-	01 Nov 2010 23:20:32 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Mon, 1 Nov 2010 23:20:32 -0700 (PDT)
-In-Reply-To: <AANLkTinSGLG=xGCdEvebwRERu7SKgbvAz=K7VP--d1YZ@mail.gmail.com>
-References: <AANLkTinSGLG=xGCdEvebwRERu7SKgbvAz=K7VP--d1YZ@mail.gmail.com>
-Date: Tue, 2 Nov 2010 07:20:32 +0100
-Message-ID: <AANLkTinUfimZaMA_3O_t5g98bV0jho7GrKT2o=Uo-jBP@mail.gmail.com>
+Received: by 10.231.191.6 with SMTP id dk6mr14499807ibb.51.1288679108608; Mon,
+	01 Nov 2010 23:25:08 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Mon, 1 Nov 2010 23:25:08 -0700 (PDT)
+In-Reply-To: <4CCF64A1.80506@gmail.com>
+References: <4CCF64A1.80506@gmail.com>
+Date: Tue, 2 Nov 2010 07:25:08 +0100
+Message-ID: <AANLkTinoHWmP=NmDT_FvcUJoqzvo4pdUu92qnscj=_8x@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gphoto2: move old recipes to obsolete.
+Subject: Re: [PATCH] telepathy-gabble_0.7.27.bb: Add libsoup-2.4 to DEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,79 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 06:21:22 -0000
+X-List-Received-Date: Tue, 02 Nov 2010 06:25:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
 2010/11/2 Graham Gower <graham.gower@gmail.com>:
+> checking for SOUP... configure: error: Package requirements (libsoup-2.4)=
+ were not met:
+> No package 'libsoup-2.4' found
+>
 > Signed-off-by: Graham Gower <graham.gower@gmail.com>
 
+Good find!
+
 Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+
+
 > ---
-> =A0.../gphoto2/files/10-camera-libgphoto2-device.fdi =A0| 4883 ----------
-> =A0recipes/gphoto2/files/10-camera-libgphoto2.fdi =A0 =A0 | 9308 --------=
-------------
-> =A0recipes/gphoto2/files/90-libgphoto2.rules =A0 =A0 =A0 =A0 =A0| 1000 --=
--
-> =A0recipes/gphoto2/gphoto2_2.4.0.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 |=
- =A0 17 -
-> =A0recipes/gphoto2/gphoto2_2.4.2.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 |=
- =A0 18 -
-> =A0recipes/gphoto2/gphoto2_2.4.4.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 |=
- =A0 18 -
-> =A0recipes/gphoto2/gphoto2_2.4.7.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 |=
- =A0 18 -
-> =A0recipes/gphoto2/libgphoto2_2.4.2.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 28 -
-> =A0recipes/gphoto2/libgphoto2_2.4.4.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 27 -
-> =A0recipes/gphoto2/libgphoto2_2.4.7.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 55 -
-> =A0.../gphoto2/files/10-camera-libgphoto2-device.fdi =A0| 4883 ++++++++++
-> =A0.../gphoto2/files/10-camera-libgphoto2.fdi =A0 =A0 =A0 =A0 | 9308 ++++=
-++++++++++++++++
-> =A0recipes/obsolete/gphoto2/files/90-libgphoto2.rules | 1000 +++
-> =A0recipes/obsolete/gphoto2/gphoto2_2.4.0.bb =A0 =A0 =A0 =A0 =A0| =A0 17 =
-+
-> =A0recipes/obsolete/gphoto2/gphoto2_2.4.2.bb =A0 =A0 =A0 =A0 =A0| =A0 18 =
-+
-> =A0recipes/obsolete/gphoto2/gphoto2_2.4.4.bb =A0 =A0 =A0 =A0 =A0| =A0 18 =
-+
-> =A0recipes/obsolete/gphoto2/gphoto2_2.4.7.bb =A0 =A0 =A0 =A0 =A0| =A0 18 =
-+
-> =A0recipes/obsolete/gphoto2/libgphoto2_2.4.2.bb =A0 =A0 =A0 | =A0 28 +
-> =A0recipes/obsolete/gphoto2/libgphoto2_2.4.4.bb =A0 =A0 =A0 | =A0 27 +
-> =A0recipes/obsolete/gphoto2/libgphoto2_2.4.7.bb =A0 =A0 =A0 | =A0 55 +
-> =A020 files changed, 15372 insertions(+), 15372 deletions(-)
-> =A0delete mode 100644 recipes/gphoto2/files/10-camera-libgphoto2-device.f=
-di
-> =A0delete mode 100644 recipes/gphoto2/files/10-camera-libgphoto2.fdi
-> =A0delete mode 100644 recipes/gphoto2/files/90-libgphoto2.rules
-> =A0delete mode 100644 recipes/gphoto2/gphoto2_2.4.0.bb
-> =A0delete mode 100644 recipes/gphoto2/gphoto2_2.4.2.bb
-> =A0delete mode 100644 recipes/gphoto2/gphoto2_2.4.4.bb
-> =A0delete mode 100644 recipes/gphoto2/gphoto2_2.4.7.bb
-> =A0delete mode 100644 recipes/gphoto2/libgphoto2_2.4.2.bb
-> =A0delete mode 100644 recipes/gphoto2/libgphoto2_2.4.4.bb
-> =A0delete mode 100644 recipes/gphoto2/libgphoto2_2.4.7.bb
-> =A0create mode 100644
-> recipes/obsolete/gphoto2/files/10-camera-libgphoto2-device.fdi
-> =A0create mode 100644 recipes/obsolete/gphoto2/files/10-camera-libgphoto2=
-.fdi
-> =A0create mode 100644 recipes/obsolete/gphoto2/files/90-libgphoto2.rules
-> =A0create mode 100644 recipes/obsolete/gphoto2/gphoto2_2.4.0.bb
-> =A0create mode 100644 recipes/obsolete/gphoto2/gphoto2_2.4.2.bb
-> =A0create mode 100644 recipes/obsolete/gphoto2/gphoto2_2.4.4.bb
-> =A0create mode 100644 recipes/obsolete/gphoto2/gphoto2_2.4.7.bb
-> =A0create mode 100644 recipes/obsolete/gphoto2/libgphoto2_2.4.2.bb
-> =A0create mode 100644 recipes/obsolete/gphoto2/libgphoto2_2.4.4.bb
-> =A0create mode 100644 recipes/obsolete/gphoto2/libgphoto2_2.4.7.bb
+> =A0recipes/telepathy/telepathy-gabble_0.7.27.bb | =A0 =A02 +-
+> =A01 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/telepathy/telepathy-gabble_0.7.27.bb b/recipes/telep=
+athy/telepathy-gabble_0.7.27.bb
+> index 3f250a3..896b467 100644
+> --- a/recipes/telepathy/telepathy-gabble_0.7.27.bb
+> +++ b/recipes/telepathy/telepathy-gabble_0.7.27.bb
+> @@ -1,6 +1,6 @@
+> =A0DESCRIPTION =3D "Gabble: a Jabber/XMPP connection manager"
+> =A0HOMEPAGE =3D "http://telepathy.freedesktop.org/wiki/"
+> -DEPENDS =3D "glib-2.0 dbus loudmouth telepathy-glib"
+> +DEPENDS =3D "glib-2.0 dbus loudmouth telepathy-glib libsoup-2.4"
+> =A0LICENSE =3D "LGPL"
+>
+> =A0# gabble.manager needs to get regenerated every release, so please don=
+'t copy it over blindly
+> --
+> 1.7.1
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 >
 
 
