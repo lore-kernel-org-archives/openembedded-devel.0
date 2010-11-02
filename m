@@ -1,40 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PDOJO-0004Pa-Fc
+	(envelope-from <raj.khem@gmail.com>) id 1PDOke-000713-Gx
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 22:22:36 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1PDOIa-0007GB-51 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 14:21:44 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 2 Nov 2010 14:21:44 -0700
-Received: from [172.30.80.166] ([172.30.80.166]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 2 Nov 2010 15:21:43 -0600
-Message-ID: <4CD080E2.2000706@mentor.com>
-Date: Tue, 02 Nov 2010 14:21:38 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Tue, 02 Nov 2010 22:50:45 +0100
+Received: by gxk26 with SMTP id 26so3177626gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Nov 2010 14:49:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=UayjeAOdgdn646pXZB1Er+2stSwbrFtMlVUZIQG6U0Q=;
+	b=TzvxCdOWqetvulvVJIYju8j90V5v12lrcIOmmAonG0fEfAqJemM6XoU/RGRw3niD2A
+	CSdYmfaLtWmgRC/I09YqP5bJTyXypt054dNhHjEIuN82Eh0CvC/A4zOSFtJQ8obzMbU0
+	J9q/mG8Lg5L6HjUMAUlN0QR7jOxQQkA6GSdqU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=imcSzN7cBcGg5/0GyPyujOAHOr32SeNp50dsCnnGPAiDAyvBfL0oSuQabssYYxL7CI
+	ebGzXh8vI8DwhUHK7DNCDsnnMlbjKyXarhsZpSgxpRBSCWE3qf72+xj9Yl/lQDTRXear
+	Y917qwbXHU95sfXaZ9Ft+/78j7HUDHbeHNF08=
+Received: by 10.90.15.31 with SMTP id 31mr2056276ago.10.1288734593271; Tue, 02
+	Nov 2010 14:49:53 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.91.135.18 with HTTP; Tue, 2 Nov 2010 14:49:33 -0700 (PDT)
+In-Reply-To: <1288732510-30545-1-git-send-email-anarsoul@gmail.com>
+References: <1288732510-30545-1-git-send-email-anarsoul@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 2 Nov 2010 14:49:33 -0700
+Message-ID: <AANLkTin2CR7+C8zz1NtBmV0d2H=gEgNZrXCh5oATzqvz@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <i9p1d0$7q4$1@dough.gmane.org>	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>	<iaptb1$bpb$1@dough.gmane.org>
-	<4CD07F3E.7040703@eukrea.com>
-In-Reply-To: <4CD07F3E.7040703@eukrea.com>
-X-OriginalArrivalTime: 02 Nov 2010 21:21:43.0458 (UTC)
-	FILETIME=[F2743020:01CB7AD3]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: Re: [PATCH] eglibc: fix build with make-3.82
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,49 +52,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 21:22:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 02 Nov 2010 21:50:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Eric Bénard wrote:
-> Hi,
-> 
-> Le 02/11/2010 21:46, Koen Kooi a écrit :
->> I do fear that pulling things into seperate layers too much will make it
->> harder to propagate fixes...
->>
-> yes, in your example, the fines in conf/machine/include are common to 
-> all omap boards (and even all cortexa8 for tune-cortexa8.inc) and thus 
-> when fixing one BSP you have to think to fix the others (and to 
-> communicate the fix to other BSP maintainers).
-> The same apply for most of the .inc in recipes-bsp/*/.
-> 
-> Do you think the following setup is possible ?
-> 
-> - ARM overlay (containing all generic files for ARM achitecture : 
-> conf/machines/include for example)
-> 
-> - OMAP3 overlay (containing all generic files for OMAP3 SOC : 
-> conf/machines/include/omap* + recipes/linux u-boot x-load base files for 
-> omap3 architecture,
-> 
-> - specific board overlay (conf/machine/themachine.conf + board specific 
-> additions in recipes/linux u-boot & x-load (with patches based on top of 
-> the OMAP3 overlay).
+On Tue, Nov 2, 2010 at 2:15 PM, Vasily Khoruzhick <anarsoul@gmail.com> wrot=
+e:
+> Add patch to fix this error when building eglibc-2.12
+> with make-3.82:
+>
 
-How about:
+thanks for the patch. while you are at it can you also patch other
+versions of eglibc
+that would be nice.
 
-- allow some form of conf/machine/include to continue to exist in the 
-main layer
-
-? There would have to be some judgment calls, but I don't think that 
-should be too hard, over when it's SOC_FAMILY or when it's very generic. 
-  Basically the ARM overlay wouldn't be created in this case (nor the 
-PPC nor MIPS nor ...).  But we must avoid duplicating tune-coretexa8.inc 
-and similar.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+> make[2]: Entering directory `eglibc-2_12/libc/manual'
+> Makefile:246: *** mixed implicit and normal rules. =C2=A0Stop.
+>
+> Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+> ---
+> =C2=A0recipes/eglibc/eglibc_2.12.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0| =C2=A0 =C2=A03 ++-
+> =C2=A0recipes/eglibc/files/eglibc-make-382.patch | =C2=A0 15 ++++++++++++=
++++
+> =C2=A02 files changed, 17 insertions(+), 1 deletions(-)
+> =C2=A0create mode 100644 recipes/eglibc/files/eglibc-make-382.patch
+>
+> diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.b=
+b
+> index 40ab65c..956f64b 100644
+> --- a/recipes/eglibc/eglibc_2.12.bb
+> +++ b/recipes/eglibc/eglibc_2.12.bb
+> @@ -4,7 +4,7 @@ DEFAULT_PREFERENCE =3D "-1"
+> =C2=A0DEPENDS +=3D "gperf-native"
+> =C2=A0FILESPATHPKG =3D. "eglibc-svn:"
+> =C2=A0PV =3D "2.12"
+> -PR =3D "${INC_PR}.6"
+> +PR =3D "${INC_PR}.7"
+> =C2=A0PR_append =3D "+svnr${SRCPV}"
+> =C2=A0SRCREV=3D"11762"
+> =C2=A0EGLIBC_BRANCH=3D"eglibc-2_12"
+> @@ -16,6 +16,7 @@ SRC_URI =3D "svn://svn.eglibc.org/branches;module=3D${E=
+GLIBC_BRANCH};proto=3Dsvn \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://sh4_local-fpscr_values.pa=
+tch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://eglibc-dont-cache-slibdir=
+.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://armv4-eabi-compile-fix.pa=
+tch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://eglibc-make-382.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://etc/ld.so.conf \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://generate-supported.mk"
+> =C2=A0S =3D "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+> diff --git a/recipes/eglibc/files/eglibc-make-382.patch b/recipes/eglibc/=
+files/eglibc-make-382.patch
+> new file mode 100644
+> index 0000000..5ecad90
+> --- /dev/null
+> +++ b/recipes/eglibc/files/eglibc-make-382.patch
+> @@ -0,0 +1,15 @@
+> +http://git.frugalware.org/gitweb/gitweb.cgi?p=3Dfrugalware-current.git;a=
+=3Dblob_plain;f=3Dsource/base/glibc/make-3.82-fix.patch;hb=3D8217c32ecc2e14=
+962847ba3d8a272eb64a3dba4f
+> +
+> +--- libc/manual/Makefile
+> ++++ libc/manual/Makefile
+> +@@ -232,7 +232,9 @@
+> + .PHONY: stubs
+> + stubs: $(objpfx)stubs
+> + endif
+> +-$(objpfx)stubs ../po/manual.pot $(objpfx)stamp%:
+> ++$(objpfx)stubs ../po/manual.pot:
+> ++ =C2=A0 =C2=A0 =C2=A0touch $@
+> ++$(objpfx)stamp%:
+> + =C2=A0 =C2=A0 =C2=A0 $(make-target-directory)
+> + =C2=A0 =C2=A0 =C2=A0 touch $@
+> +
+> --
+> 1.7.3.2
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
