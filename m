@@ -1,39 +1,30 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PDHG5-0001cF-29
+	(envelope-from <philip@balister.org>) id 1PDHgE-0003k6-IB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 14:50:43 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 97C6C8E37DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Nov 2010 09:49:52 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 17139-02 for <openembedded-devel@lists.openembedded.org>; 
-	Tue,  2 Nov 2010 09:49:52 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 51C2F8E37D5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Nov 2010 09:49:52 -0400 (EDT)
-Message-ID: <4CD016FF.6020103@cbnco.com>
-Date: Tue, 02 Nov 2010 09:49:51 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+	Tue, 02 Nov 2010 15:17:46 +0100
+Received: (qmail 10683 invoked by uid 1003); 2 Nov 2010 14:16:52 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	2 Nov 2010 14:16:51 -0000
+Message-ID: <4CD01D52.5020607@balister.org>
+Date: Tue, 02 Nov 2010 10:16:50 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.9) Gecko/20100921 Fedora/3.1.4-1.fc13 Thunderbird/3.1.4
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1288286551-4700-1-git-send-email-msmith@cbnco.com>	<AANLkTinWpXoGqD5iNN+h-YEN9suQd3zac5E3FTvM7m39@mail.gmail.com>	<Pine.LNX.4.64.1010281443540.5082@juice.ott.cti.com>	<AANLkTikbv9bF9fBvFU2_C6sK13A23wBXgRzwbX++VLhq@mail.gmail.com>	<4CC9E691.9000809@cbnco.com>	<AANLkTimEEdaQub15asdbRzHPfatmtqXNqpTvfp2DM55o@mail.gmail.com>	<4CCAE1DB.1030504@cbnco.com>
-	<20101030101545.GB21651@denix.org>
-In-Reply-To: <20101030101545.GB21651@denix.org>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-members@lists.openembedded.org
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] curl: make CURL_FEATURES configurable again
+Subject: OpenEmbedded and the Yocto Project
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 13:50:43 -0000
+X-List-Received-Date: Tue, 02 Nov 2010 14:17:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Denys Dmytriyenko wrote:
-> It has been discussed before (check irc logs 7-10 days ago) and Khem made a 
-> change to introduce new override called "target", which can be used in this 
-> case. Anyway, I ended up fixing it by amend in my overlay:
-> 
-> http://arago-project.org/git/?p=arago.git;a=commitdiff;h=37979c41a04f7712dbf9c325871fea7c01cc737a
+The Linux Foundation has announced the Yocto Project (based partly on 
+OpenEmbedded), http://yoctoproject.org/.
 
-Yes - the target override patch didn't go in, but I agree it would make 
-this easier.
+The OpenEmbedded eV board is pleased to see more people using 
+OpenEmbedded and would like to develop a long term partnership with the 
+Yocto Project.
 
-Anon python seems to be going out of style so the v2 curl patch uses 
-variable settings with a native override to ensure gnutls isn't in the 
-feature list.
+The eV board would like the OpenEmbedded Community to start discussing 
+the Yocto Project and help develop a long term plan to advance the goals 
+of both projects. This process should result in a Voting Proposal that 
+the OpenEmbedded eV can vote on.
 
-Mike
+The eV is the only formal decision making body for OpenEmbedded. If you 
+are a community member that would like a voice in the voting proposal, 
+respond to Stefan Schmidt's call for eV members.
+
+Thanks for your help,
+
+Philip
 
 
