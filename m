@@ -1,32 +1,43 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1PDFf7-0001ze-Px
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 13:08:27 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 9C67D16609A2; Tue,  2 Nov 2010 06:07:36 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 055F81660995;
-	Tue,  2 Nov 2010 06:07:36 -0600 (MDT)
-Message-ID: <4CCFFF07.1010303@mlbassoc.com>
-Date: Tue, 02 Nov 2010 06:07:35 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PDG8t-0001Pk-Ep for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 13:39:12 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PDG87-0006Oe-Rg for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 13:38:23 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Nov 2010 13:38:23 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Nov 2010 13:38:23 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTin70=KBJDjW8K6ViS5X03ZaE92680oR88hhy9eK@mail.gmail.com>	<AANLkTimEKL_6r_DZmq_W2i9eqHPgbRFc-oFMftKNFBJv@mail.gmail.com>	<iakpd7$ja7$1@dough.gmane.org>	<AANLkTikQvYRyaMspRo9Skt_jmfNjz2MuOT+ff4wv=a82@mail.gmail.com>	<AANLkTi=zxQ1AxJ9chbFjLJzps1LB8RCyaNkJk5HApTZ=@mail.gmail.com>	<20101101183327.GD15069@ibawizard.net>	<AANLkTimN4Rq2bWZXjs84FUtxNgD_BAQy=5=4gXJqfPGe@mail.gmail.com>
-	<AANLkTinZsM-WRnKhPnAtkKbY-t2TPBP_cvyu8c2bG3zC@mail.gmail.com>
-In-Reply-To: <AANLkTinZsM-WRnKhPnAtkKbY-t2TPBP_cvyu8c2bG3zC@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 02 Nov 2010 13:38:13 +0100
+Message-ID: <iap0nl$prn$1@dough.gmane.org>
+References: <1287841515-19825-1-git-send-email-koen@openembedded.org>
+	<AANLkTinLeN9pCrmwtZYxv7HhLgzfhq+HKhkBm0hLpm9x@mail.gmail.com> 
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <AANLkTinLeN9pCrmwtZYxv7HhLgzfhq+HKhkBm0hLpm9x@mail.gmail.com> 
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-10-29
+Subject: Re: [RFC][PATCH] module bbclass: split each module into a kernel-module-<foo> subpackage and use PN as metapackage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,44 +51,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 12:08:27 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 02 Nov 2010 12:39:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 11/02/2010 06:00 AM, Cliff Brake wrote:
-> On Mon, Nov 1, 2010 at 2:49 PM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com>  wrote:
->> 2010/11/1 Petr =C5=A0tetiar<ynezz@true.cz>:
->>> Khem Raj<raj.khem@gmail.com>  [2010-11-01 10:32:53]:
->>>
->>>> We should add another column identifying the build is from clean tmp
->>>> or an incremental one
->>>
->>> No more columns please. I think, that I should receive a PhD just bec=
-ause I
->>> can update that table :-) It's pure rocket science...
->>>
->>> -- ynezz
->>>
->>
->> Put the table in a spreadsheet?
->> I think google docs can be used to share access to a common sheet (but
->> not fully sure).
->
-> Yes, with Google spreadsheets, multiple people can edit a google doc.
-> The following might be a good solution:
->
-> http://www.mediawikiwidgets.org/Google_Spreadsheet
->
-> Do all testers currently have google accounts?  I'm all for making it
-> less painful.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Even if they don't have one already, getting one today is trivial.
+Ping on the patch?
 
---=20
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+On 23-10-10 20:15, Koen Kooi wrote:
+> On 23-10-10 19:03, Chris Larson wrote:
+>> On Sat, Oct 23, 2010 at 6:45 AM, Koen Kooi <koen.kooi@gmail.com> wrote:
+> 
+>>> From: Koen Kooi <k-kooi@ti.com>
+>>>
+>>> Signed-off-by: Koen Kooi <k-kooi@ti.com>
+>>>
+>>> ---
+>>>  classes/module.bbclass |  191
+>>> ++++++++++++++++++++++++++++++++++++++++++++++-
+>>>  1 files changed, 186 insertions(+), 5 deletions(-)
+>>>
+> 
+> 
+>> How about moving the common functions into oe.module or oe.package and using
+>> them from module.bbclass and kernel.bbclass?
+> 
+> I thought about that, but that needs more work :( We need to pass in a
+> different path to System.map, use PN as metapackage name, use a
+> different blacklist, etc.
+> That requires a lot more python skill than I currently have.
+> 
+> Apart from the horrendous code duplication, how does this look? It seems
+> to do the right thing for the recipes I tested with :)
+> 
+> regards,
+> 
+> Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFM0AY1MkyGM64RGpERAiiyAJ943e16oJx5KQDr6qpidHbsLPEONwCfYKx1
+pgEjHF82FwDETI6pPt94BcA=
+=lO75
+-----END PGP SIGNATURE-----
+
 
 
