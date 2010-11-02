@@ -1,33 +1,38 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@dominion.thruhere.net>)
-	id 1PDI53-0007os-4p; Tue, 02 Nov 2010 15:43:21 +0100
-Received: by ewy2 with SMTP id 2so3293121ewy.6
-	for <multiple recipients>; Tue, 02 Nov 2010 07:42:33 -0700 (PDT)
-Received: by 10.216.53.20 with SMTP id f20mr4324783wec.78.1288708952629;
-	Tue, 02 Nov 2010 07:42:32 -0700 (PDT)
-Received: from [172.20.1.5] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id x3sm2302080wes.22.2010.11.02.07.42.32
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 02 Nov 2010 07:42:32 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1081)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4CD01D52.5020607@balister.org>
-Date: Tue, 2 Nov 2010 15:42:31 +0100
-Message-Id: <1A82C1C5-1657-4642-B4F5-5EFCA799D1DC@dominion.thruhere.net>
-References: <4CD01D52.5020607@balister.org>
-To: openembedded-members@lists.openembedded.org
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: koen@dominion.thruhere.net
+Received: from 30.mail-out.ovh.net ([213.186.62.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PDI9L-0005EY-Gw
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 15:47:52 +0100
+Received: (qmail 28307 invoked by uid 503); 2 Nov 2010 14:25:40 -0000
+Received: from b9.ovh.net (HELO mail632.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 2 Nov 2010 14:25:39 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 2 Nov 2010 16:46:59 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 2 Nov 2010 16:46:57 +0200
+Message-ID: <4CD02461.3020106@eukrea.com>
+Date: Tue, 02 Nov 2010 15:46:57 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1288646991-15775-1-git-send-email-eric@eukrea.com>
+	<AANLkTi=0EsyQ38D1dyBRffGBWEoVo==6=H9+wrtcENyR@mail.gmail.com>
+In-Reply-To: <AANLkTi=0EsyQ38D1dyBRffGBWEoVo==6=H9+wrtcENyR@mail.gmail.com>
+X-Ovh-Tracer-Id: 2621376458632179017
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 213.186.62.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: OpenEmbedded and the Yocto Project
+Subject: Re: [PATCH] gdb-cross-sdk: don't reconfigure after making changes in gdb/Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +46,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 14:43:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 02 Nov 2010 14:47:52 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
+Le 02/11/2010 05:41, Khem Raj a écrit :
+> On Mon, Nov 1, 2010 at 2:29 PM, Eric Bénard<eric@eukrea.com>  wrote:
+>> else we don't statically link libncurses, libtinfo and libz which leads
+>> to :
+>> /usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-gdb:
+>> error while loading shared libraries: libtinfo.so.5:
+>> cannot open shared object file: No such file or directory
+>>
+>> when trying to use the toolchain.
+>
+> could you run oe_runconf and then do the Makefile editing ? that way
+> it will work as expected.
+> we sort of need oe_runconf
+>
+the makefile we hack with sed is not created after oe_runconf, it's generated 
+by oe_runmake configure-host
+So what should work is :
+oe_runconf
+oe_runmake
+then sed
 
-Op 2 nov 2010, om 15:16 heeft Philip Balister het volgende geschreven:
+Eric
 
-> The Linux Foundation has announced the Yocto Project (based partly on =
-OpenEmbedded), http://yoctoproject.org/.
->=20
-> The OpenEmbedded eV board is pleased to see more people using =
-OpenEmbedded and would like to develop a long term partnership with the =
-Yocto Project.
->=20
-> The eV board would like the OpenEmbedded Community to start discussing =
-the Yocto Project and help develop a long term plan to advance the goals =
-of both projects. This process should result in a Voting Proposal that =
-the OpenEmbedded eV can vote on.
+>>
+>> Signed-off-by: Eric Bénard<eric@eukrea.com>
+>> ---
+>>   recipes/gdb/gdb-cross-sdk.inc |    1 -
+>>   1 files changed, 0 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/gdb/gdb-cross-sdk.inc b/recipes/gdb/gdb-cross-sdk.inc
+>> index 6a708ca..d32111f 100644
+>> --- a/recipes/gdb/gdb-cross-sdk.inc
+>> +++ b/recipes/gdb/gdb-cross-sdk.inc
+>> @@ -16,5 +16,4 @@ do_configure_append () {
+>>         for SIM in ${B}/sim/*/Makefile; do
+>>                 [ -f $SIM ]&&  sed -e 's,-lz, ${STAGING_LIBDIR_NATIVE}/libz.a ,g' -i $SIM
+>>         done
+>> -       oe_runconf
+>>   }
+>> --
+>> 1.6.3.3
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Before we go vote on stuff, I propose to try to work on relatively small =
-focussed projects together to see how our goal and way of working match =
-the yoctoproject ones. Things like tinderbox upgrades, buildbot =
-integration and BSP splitting come to mind. The minutes Leon sent today =
-reflect that a well.
-
-And we seriously need to consider renaming the TSC to Tentacle Steering =
-Committee if we get caught in the yoctopus!
-
-regards,
-
-Koen=
 
 
