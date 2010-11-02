@@ -1,39 +1,38 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PDISW-0000PD-8k
+Received: from 30.mail-out.ovh.net ([213.186.62.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PDJyZ-00049A-0K
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 16:07:36 +0100
-Received: from [134.169.35.205] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PDIRi-0005pT-Nt by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 16:06:49 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PDIRh-0007W1-BC
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 16:06:45 +0100
-Date: Tue, 2 Nov 2010 16:06:45 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101102150645.GL30894@excalibur.local>
-References: <20101102084104.GI30894@excalibur.local> <4CD02473.80003@cbnco.com>
-	<4CD024FF.8020705@cbnco.com>
+	Tue, 02 Nov 2010 17:44:47 +0100
+Received: (qmail 11411 invoked by uid 503); 2 Nov 2010 16:22:39 -0000
+Received: from b9.ovh.net (HELO mail632.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 2 Nov 2010 16:22:39 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 2 Nov 2010 18:43:59 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 2 Nov 2010 18:43:57 +0200
+Message-ID: <4CD03FCC.6030002@eukrea.com>
+Date: Tue, 02 Nov 2010 17:43:56 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
-In-Reply-To: <4CD024FF.8020705@cbnco.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+To: openembedded-devel@lists.openembedded.org
+References: <1288646991-15775-1-git-send-email-eric@eukrea.com>	<AANLkTi=0EsyQ38D1dyBRffGBWEoVo==6=H9+wrtcENyR@mail.gmail.com>	<4CD02461.3020106@eukrea.com>
+	<4CD026D8.2030101@mentor.com>
+In-Reply-To: <4CD026D8.2030101@mentor.com>
+X-Ovh-Tracer-Id: 4597330795632962889
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 213.186.62.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: New e.V. members
+Subject: Re: [PATCH] gdb-cross-sdk: don't reconfigure after making changes in gdb/Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,19 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 15:07:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 02 Nov 2010 16:44:47 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hello.
+Le 02/11/2010 15:57, Tom Rini a écrit :
+> Can we look at NOT doing the dance we're doing here and instead try the normal
+> autotools stuff? The "we need to not do ..." stuff looks to be an ancient
+> artifact.
+>
+following the recent changes in this file we have a regression : some libs are 
+no more statically linked in gdb and this patch fix this regression.
+Can we apply it and then we can think on a better way to rewrite these 
+recipes. After a few tries, switching to autotools doesn't work out of the box 
+because gdb is waiting for autoconf 2.64 when we have 2.65.
 
-On Tue, 2010-11-02 at 10:49, Michael Smith wrote:
-> gah. reply all fail. apologies.
-
-No problem. A short introduction for people who like to become a member is
-appreciated. You are on my list for the proposal next week.
-
-regards
-Stefan Schmidt
+Eric
 
 
