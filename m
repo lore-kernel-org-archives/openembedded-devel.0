@@ -1,43 +1,43 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <anarsoul@gmail.com>) id 1PDODf-00051G-H9
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 22:16:48 +0100
-Received: by ewy2 with SMTP id 2so3641915ewy.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PDOGz-0008Nv-Ga for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 22:20:07 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PDOG9-0000vU-D1 for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Nov 2010 22:19:13 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Nov 2010 22:19:12 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 14:15:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=j6pJiCIvobOWFZx9dkOmbg5ZRGv0VuCOBlLJeZmlR50=;
-	b=uAilLZ/Opsy9H6Vm73gTCp5xMovqa7UGzB5uj7Gg128SnkdB6UNeRAof1l0GMoBXkB
-	+H5DtD4ZgyhQyvYH1yGamP8Kuf3tc7Y9Fzz2Vf9Zqsu7ok0lexqg8rHTmXecQ4QCifqG
-	J01KLZNVP3EurEHyogq4zfRmLV1g+TOf/QoGY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=VcVief5SeOtYHuLynk4d8/I77ITJl/5JRRWcPqRMjAbqE99D5VBU2FODKTPlBB6wSz
-	FXKDQP+yTPZh3Tq9kQKPEwP72itT0yyWFZnnNcJR9E13MjHnJHr67tUxbvJHhtwWwIez
-	7mwMf/HdxM9Vv+Cpbxx2TnMs4QkV/AQeFgfjA=
-Received: by 10.213.5.11 with SMTP id 11mr684170ebt.9.1288732549326;
-	Tue, 02 Nov 2010 14:15:49 -0700 (PDT)
-Received: from localhost.localdomain ([80.249.81.244])
-	by mx.google.com with ESMTPS id w20sm5831711eeh.12.2010.11.02.14.15.46
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 02 Nov 2010 14:15:48 -0700 (PDT)
-From: Vasily Khoruzhick <anarsoul@gmail.com>
+	Tue, 02 Nov 2010 22:19:12 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Nov 2010 23:15:10 +0200
-Message-Id: <1288732510-30545-1-git-send-email-anarsoul@gmail.com>
-X-Mailer: git-send-email 1.7.3.2
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: anarsoul@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 02 Nov 2010 22:19:01 +0100
+Message-ID: <iapv85$kch$1@dough.gmane.org>
+References: <i9p1d0$7q4$1@dough.gmane.org>	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>	<iaptb1$bpb$1@dough.gmane.org>
+	<4CD07F3E.7040703@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
+In-Reply-To: <4CD07F3E.7040703@eukrea.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] eglibc: fix build with make-3.82
+Subject: Re: [RFC] turning conf/machine into a set of bblayers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,65 +51,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 21:16:54 -0000
+X-List-Received-Date: Tue, 02 Nov 2010 21:20:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Add patch to fix this error when building eglibc-2.12
-with make-3.82:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-make[2]: Entering directory `eglibc-2_12/libc/manual'
-Makefile:246: *** mixed implicit and normal rules.  Stop.
+On 02-11-10 22:14, Eric Bénard wrote:
+> Hi,
+> 
+> Le 02/11/2010 21:46, Koen Kooi a écrit :
+>> I do fear that pulling things into seperate layers too much will make it
+>> harder to propagate fixes...
+>>
+> yes, in your example, the fines in conf/machine/include are common to
+> all omap boards (and even all cortexa8 for tune-cortexa8.inc) and thus
+> when fixing one BSP you have to think to fix the others (and to
+> communicate the fix to other BSP maintainers).
+> The same apply for most of the .inc in recipes-bsp/*/.
+> 
+> Do you think the following setup is possible ?
+> 
+> - ARM overlay (containing all generic files for ARM achitecture :
+> conf/machines/include for example)
+> 
+> - OMAP3 overlay (containing all generic files for OMAP3 SOC :
+> conf/machines/include/omap* + recipes/linux u-boot x-load base files for
+> omap3 architecture,
+> 
+> - specific board overlay (conf/machine/themachine.conf + board specific
+> additions in recipes/linux u-boot & x-load (with patches based on top of
+> the OMAP3 overlay).
 
-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
----
- recipes/eglibc/eglibc_2.12.bb              |    3 ++-
- recipes/eglibc/files/eglibc-make-382.patch |   15 +++++++++++++++
- 2 files changed, 17 insertions(+), 1 deletions(-)
- create mode 100644 recipes/eglibc/files/eglibc-make-382.patch
+That was pretty much what I was thinking, the angstrom-layers stuff is
+something I need to get working before thursday, so it is a bit hacky.
+It will get cleaned up after I get back from my holiday :) Hopefully
+more people have tried different setups and we can bang out a decent RFC.
 
-diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.bb
-index 40ab65c..956f64b 100644
---- a/recipes/eglibc/eglibc_2.12.bb
-+++ b/recipes/eglibc/eglibc_2.12.bb
-@@ -4,7 +4,7 @@ DEFAULT_PREFERENCE = "-1"
- DEPENDS += "gperf-native"
- FILESPATHPKG =. "eglibc-svn:"
- PV = "2.12"
--PR = "${INC_PR}.6"
-+PR = "${INC_PR}.7"
- PR_append = "+svnr${SRCPV}"
- SRCREV="11762"
- EGLIBC_BRANCH="eglibc-2_12"
-@@ -16,6 +16,7 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-            file://sh4_local-fpscr_values.patch \
-            file://eglibc-dont-cache-slibdir.patch \
-            file://armv4-eabi-compile-fix.patch \
-+           file://eglibc-make-382.patch \
-            file://etc/ld.so.conf \
-            file://generate-supported.mk"
- S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
-diff --git a/recipes/eglibc/files/eglibc-make-382.patch b/recipes/eglibc/files/eglibc-make-382.patch
-new file mode 100644
-index 0000000..5ecad90
---- /dev/null
-+++ b/recipes/eglibc/files/eglibc-make-382.patch
-@@ -0,0 +1,15 @@
-+http://git.frugalware.org/gitweb/gitweb.cgi?p=frugalware-current.git;a=blob_plain;f=source/base/glibc/make-3.82-fix.patch;hb=8217c32ecc2e14962847ba3d8a272eb64a3dba4f
-+
-+--- libc/manual/Makefile
-++++ libc/manual/Makefile
-+@@ -232,7 +232,9 @@
-+ .PHONY: stubs
-+ stubs: $(objpfx)stubs
-+ endif
-+-$(objpfx)stubs ../po/manual.pot $(objpfx)stamp%:
-++$(objpfx)stubs ../po/manual.pot:
-++	touch $@
-++$(objpfx)stamp%:
-+ 	$(make-target-directory)
-+ 	touch $@
-+ 
--- 
-1.7.3.2
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFM0IBFMkyGM64RGpERAhVvAJ98xHlzrMSjH/d6a5//GQimg89j0wCgnVIs
+ASfxeRULybqKbDAjBMlwkXg=
+=tE/N
+-----END PGP SIGNATURE-----
 
 
 
