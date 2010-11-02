@@ -1,28 +1,28 @@
 Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PDI9c-0005VN-Jf
+	(envelope-from <msmith@cbnco.com>) id 1PDIBv-0003bj-6d
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Nov 2010 15:48:05 +0100
+	Tue, 02 Nov 2010 15:50:27 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 6A4FF8D2498
+	by smtp.cbnco.com (Postfix) with ESMTP id AB5358CB54B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Nov 2010 10:47:16 -0400 (EDT)
+	Tue,  2 Nov 2010 10:49:35 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 29575-08 for <openembedded-devel@lists.openembedded.org>; 
-	Tue,  2 Nov 2010 10:47:16 -0400 (EDT)
+	with ESMTP id 30157-07 for <openembedded-devel@lists.openembedded.org>; 
+	Tue,  2 Nov 2010 10:49:35 -0400 (EDT)
 Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 4598C6EEB60
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 838837666BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Nov 2010 10:47:16 -0400 (EDT)
-Message-ID: <4CD02473.80003@cbnco.com>
-Date: Tue, 02 Nov 2010 10:47:15 -0400
+	Tue,  2 Nov 2010 10:49:35 -0400 (EDT)
+Message-ID: <4CD024FF.8020705@cbnco.com>
+Date: Tue, 02 Nov 2010 10:49:35 -0400
 From: Michael Smith <msmith@cbnco.com>
 User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20101102084104.GI30894@excalibur.local>
-In-Reply-To: <20101102084104.GI30894@excalibur.local>
+References: <20101102084104.GI30894@excalibur.local> <4CD02473.80003@cbnco.com>
+In-Reply-To: <4CD02473.80003@cbnco.com>
 X-Virus-Scanned: amavisd-new at cbnco.com
 X-SA-Exim-Connect-IP: 207.164.182.72
 X-SA-Exim-Mail-From: msmith@cbnco.com
@@ -46,36 +46,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2010 14:48:05 -0000
+X-List-Received-Date: Tue, 02 Nov 2010 14:50:27 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Stefan,
+gah. reply all fail. apologies.
 
-I'd like to become a member.
-
-I'm a developer in Ottawa, Canada, at Canadian Bank Note Company, 
-Limited. Since 2009 we've been using OpenEmbedded as the base of a 
-customized distribution for our VPN devices and point-of-sale terminals. 
-My interests in OE include x86_64 support, footprint reduction, and 
-overlay control over recipe features and packaging.
-
-Mike
-
-Stefan Schmidt wrote:
-> Hello.
+Michael Smith wrote:
+> Hi Stefan,
 > 
-> If anyone of you is interest to get an e.V. member please let me know. I'm going
-> to prepare a proposal to vote for new members next week.
+> I'd like to become a member.
 > 
-> The e.V. is the official body behind the OE project and members of it can vote
-> for the board and the TSC. No fee is attached to this memebership but you are
-> free to pay a fee though.
+> I'm a developer in Ottawa, Canada, at Canadian Bank Note Company, 
+> Limited. Since 2009 we've been using OpenEmbedded as the base of a 
+> customized distribution for our VPN devices and point-of-sale terminals. 
+> My interests in OE include x86_64 support, footprint reduction, and 
+> overlay control over recipe features and packaging.
 > 
-> http://wiki.openembedded.org/index.php/Organization
+> Mike
 > 
-> regards
-> Stefan Schmidt
+> Stefan Schmidt wrote:
+>> Hello.
+>>
+>> If anyone of you is interest to get an e.V. member please let me know. 
+>> I'm going
+>> to prepare a proposal to vote for new members next week.
+>>
+>> The e.V. is the official body behind the OE project and members of it 
+>> can vote
+>> for the board and the TSC. No fee is attached to this memebership but 
+>> you are
+>> free to pay a fee though.
+>>
+>> http://wiki.openembedded.org/index.php/Organization
+>>
+>> regards
+>> Stefan Schmidt
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
