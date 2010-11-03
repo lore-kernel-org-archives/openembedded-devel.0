@@ -1,33 +1,35 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from tone.orchestra.cse.unsw.edu.au ([129.94.242.59])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1PDa8I-0007XK-OD
+	(envelope-from <jayen@cse.unsw.edu.au>) id 1PDaYt-0005U8-Iq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 10:59:57 +0100
-Received: from keemun.altell.local (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id 289B6543F;
-	Wed,  3 Nov 2010 12:58:49 +0300 (MSK)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-Date: Wed, 3 Nov 2010 12:58:48 +0300
-User-Agent: KMail/1.13.5 (Linux/2.6.34.7-0.3-desktop; KDE/4.4.4; x86_64; ; )
-References: <1288773858.3980.10.camel@mattotaupa>
-In-Reply-To: <1288773858.3980.10.camel@mattotaupa>
+	Wed, 03 Nov 2010 11:27:28 +0100
+Received: From webmail.cse.unsw.edu.au ([129.94.242.51] ==
+	albeniz.orchestra.cse.unsw.EDU.AU) (auth-user jayen)
+	(cse-authentic-sender jayen)
+	(for <openembedded-devel@lists.openembedded.org>) By tone With Smtp ;
+	Wed, 3 Nov 2010 21:26:29 +1100 
+Received: from 129.94.175.2 (SquirrelMail authenticated user jayen)
+	by webmail.cse.unsw.edu.au with HTTP;
+	Wed, 3 Nov 2010 21:26:29 +1100 (EST)
+From: "Jayen Ashar" <jayen@cse.unsw.edu.au>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 3 Nov 2010 21:26:29 +1100 (EST)
+Message-ID: <1724.129.94.175.2.1288779989.squirrel@webmail.cse.unsw.edu.au>
+In-Reply-To: <mailman.2422.1288039798.3514.openembedded-devel@lists.openembedded.or
+	g>
+References: <mailman.2422.1288039798.3514.openembedded-devel@lists.openembedded.org>
+User-Agent: SquirrelMail/1.5.1
 MIME-Version: 1.0
-Message-Id: <201011031258.48681.khimov@altell.ru>
-X-Altell-MailScanner-ID: 289B6543F.074D7
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 129.94.242.59
+X-SA-Exim-Mail-From: jayen@cse.unsw.edu.au
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-5.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS, SPF_NEUTRAL,
+	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: libprelude: angstrom-2010.x: task `compile` fails with `./include/prelude-plugin.h:66:20: error: conflicting types for 'lt__PROGRAM__LTX_preloaded_symbols'`
+Subject: Re: Python.h LONG_BIT definition error on 64 bit build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,42 +43,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 09:59:57 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Nov 2010 10:27:29 -0000
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 03 =D0=BD=D0=BE=D1=8F=D0=B1=D1=80=D1=8F 2010=
- 11:44:18 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Paul Menzel =D0=BD=D0=B0=D0=BF=D0=
-=B8=D1=81=D0=B0=D0=BB:
-> Build Configuration:
-> BB_VERSION        =3D "1.10.0"
-> METADATA_BRANCH   =3D "org.openembedded.dev"
-> METADATA_REVISION =3D "54d1ab587326543390e8ae55e9f7945a3a4ebdd1"
-> TARGET_ARCH       =3D "arm"
-> TARGET_OS         =3D "linux-gnueabi"
-> MACHINE           =3D "beagleboard"
-> DISTRO            =3D "angstrom"
-> DISTRO_VERSION    =3D "next"
-> TARGET_FPU        =3D "hard"
->=20
-> testing to build `suricata_1.0.2` (commit f85795) [1] the build fails in
-> the task `compile` of the dependency `libprelude_1.0.0` (commit 577889)
-> [2].
->=20
->         | In file included from prelude-plugin.c:56:0:
->         | ./include/prelude-plugin.h:66:20: error: conflicting types for
->         | 'lt__PROGRAM__LTX_preloaded_symbols'
->         | /oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-li
->         | nux-gnueabi/usr/include/ltdl.h:106:36: note: previous declarati=
-on
->         | of 'lt__PROGRAM__LTX_preloaded_symbols' was here make[4]: ***
->         | [prelude-plugin.lo] Error 1
->=20
-> Could you take a look and/or report that upstream.
+I'm trying to cross-compile boost and hitting the same error, so I'd also
+like to see this fixed.  I'm not sure that I understand why compiling
+boost is using headers from python-native, though.
 
-I can and I will but please don't expect it sooner than this weekend, I'm=20
-overloaded at work currently.
+Thanks,
+Jayen
+
+> Date: Mon, 25 Oct 2010 13:02:42 -0700
+> From: Steve Sakoman <sakoman@gmail.com>
+> Subject: Re: [oe] Python.h LONG_BIT definition error on 64 bit build
+> machine To: openembedded-devel@lists.openembedded.org
+> Message-ID:
+> <AANLkTi=u8D0f9rWHz+YT3B+UaoaOO_iFjfizJUW6-3sC@mail.gmail.com>
+> Content-Type: text/plain; charset=ISO-8859-1
+>
+>
+> On Mon, Oct 25, 2010 at 12:48 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>
+>> On Mon, Oct 25, 2010 at 8:57 AM, Steve Sakoman <sakoman@gmail.com>
+>> wrote:
+>>
+>>> I'm working on a recipe for a new version of hplip (it depends on
+>>> python). ?It builds just fine on my 32 bit Ubuntu development machine,
+>>>  but when I attempt the build on my 64 bit Ubuntu machines the build
+>>> fails with the following error:
+>>>
+>>> In file included from
+>>> /home/steve/source/sakoman-oe/tmp/sysroots/x86_64-linux/usr/include/py
+>>> thon2.6/Python.h:58,
+>>> ? ? ? ? ? ? ? ? from io/mudext/hpmudext.c:27:
+>>> /home/steve/source/sakoman-oe/tmp/sysroots/x86_64-linux/usr/include/py
+>>> thon2.6/pyport.h:685:2:
+>>> error: #error "LONG_BIT definition appears wrong for platform (bad
+>>> gcc/glibc config?)."
+>>>
+>>> I seem to recall seeing this error in the distant past.
+>>>
+>>>
+>>> Is this a known issue with python on 64 bit machines?
+>>>
+>>>
+>>> Any advice?
+>>>
+>>>
+>>
+>> see this https://bugzilla.redhat.com/show_bug.cgi?id=139911
+>
+> Is this something that we should try to fix in the OE python build?
+>
+>
+> Steve
+
+-- 
+jayen                                  http://jayen.web.cse.unsw.edu.au/
+phd student                               unsw-k17-301-08 (02 9385 5514)
+comp1927 tutor                  http://www.cse.unsw.edu.au/~cs1927/10s2/
+rUNSWift 2010                        http://robocup.web.cse.unsw.edu.au/
+j-club web admin                       http://jclub.web.cse.unsw.edu.au/
+cricos provider code: 00098G
+
 
 
