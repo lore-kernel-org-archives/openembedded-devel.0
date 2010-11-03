@@ -1,36 +1,30 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PDZJX-00033L-Gn
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 10:07:28 +0100
-Received: from [134.169.35.205] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PDZIi-0000Mq-4F by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 10:06:39 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PDZIh-0004vI-JD
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 10:06:35 +0100
-Date: Wed, 3 Nov 2010 10:06:35 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	(envelope-from <ynezz@mengele.ibawizard.net>)
+	id 1PDZMD-0003AH-N7; Wed, 03 Nov 2010 10:10:14 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id B7EB01D36171; Wed,  3 Nov 2010 10:09:22 +0100 (CET)
+Date: Wed, 3 Nov 2010 10:09:22 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101103090635.GD32553@excalibur.local>
+Message-ID: <20101103090922.GH15069@ibawizard.net>
+References: <4CD01D52.5020607@balister.org>
+	<1A82C1C5-1657-4642-B4F5-5EFCA799D1DC@dominion.thruhere.net>
+	<1288736649.28481.2564.camel@rex>
 MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+In-Reply-To: <1288736649.28481.2564.camel@rex>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Listing of received donations
+Cc: openembedded-members@lists.openembedded.org
+Subject: Re: OpenEmbedded and the Yocto Project
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,28 +38,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 09:07:28 -0000
+X-List-Received-Date: Wed, 03 Nov 2010 09:10:14 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello.
+Richard Purdie <rpurdie@rpsys.net> [2010-11-02 22:24:09]:
 
-The OpenEmbedded project received different donations over the time. From
-hosting over hardware to money.
+> I'm not sure what the best forum is to have those discussions. I can
+> answer emails or we could do something more interactive on IRC or
+> similar, I'm open to ideas really...
 
-We, as a project, are really appreciate this but failed so far to have a clear
-listing of received donations to give credit. During OEDEM I volunteered to set
-up such a list as a protected wiki page. I just finished the first version/draft
-for it and would like to get some feedback on it. Not really on design but on
-missing items or corrections. I'm sure I got some things wrong or missed some.
-:)
+I would prefer this mailing list. It has threads, searchable archive etc.
 
-Companies that want to have a small Logo next to their name and link please send
-me an image. This will be added later on.
-
-http://wiki.openembedded.org/index.php/Donations
-
-regards
-Stefan Schmidt
+-- ynezz
 
 
