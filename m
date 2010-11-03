@@ -1,19 +1,22 @@
 Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1PDarV-0007Li-I3
+	(envelope-from <khimov@altell.ru>) id 1PDauh-0007Ud-Fk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 11:46:38 +0100
-Received: from localhost.localdomain (unknown [192.168.1.27])
-	by mail.altell.local (Postfix) with ESMTP id 31E385435;
-	Wed,  3 Nov 2010 13:45:37 +0300 (MSK)
+	Wed, 03 Nov 2010 11:49:55 +0100
+Received: from keemun.altell.local (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id 5C5DE46E1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Nov 2010 13:48:55 +0300 (MSK)
 From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Nov 2010 13:47:01 +0300
-Message-Id: <1288781221-14752-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <1288775679.3980.31.camel@mattotaupa>
+Date: Wed, 3 Nov 2010 13:48:54 +0300
+User-Agent: KMail/1.13.5 (Linux/2.6.34.7-0.3-desktop; KDE/4.4.4; x86_64; ; )
 References: <1288775679.3980.31.camel@mattotaupa>
-X-Altell-MailScanner-ID: 31E385435.728BF
+In-Reply-To: <1288775679.3980.31.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201011031348.54553.khimov@altell.ru>
+X-Altell-MailScanner-ID: 5C5DE46E1.64F41
 X-Altell-MailScanner: Found to be clean
 X-Altell-MailScanner-From: khimov@altell.ru
 X-SA-Exim-Connect-IP: 80.246.246.162
@@ -24,7 +27,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libpfring: update SVN revision to 4384
+Subject: Re: [PATCH] pf-ring: update to r4384 to fix `pf_ring.c:329:3: error: implicit declaration of function 'vmalloc_32'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,70 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 10:46:38 -0000
+X-List-Received-Date: Wed, 03 Nov 2010 10:49:56 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-I guess it should be in sync with pf-ring kernel module as using module revision
-4384 with lib revision 4326 results in "mmap() failed" message on tcpdump (using
-patched libpcap to support pf_ring) exit.
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 03 =D0=BD=D0=BE=D1=8F=D0=B1=D1=80=D1=8F 2010=
+ 12:14:39 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Paul Menzel =D0=BD=D0=B0=D0=BF=D0=
+=B8=D1=81=D0=B0=D0=BB:
+> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi=
+/p
+> 	| f-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c: In function 'rvmalloc':
+> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi/
+> 	| pf-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c:329:3: error: implicit
+> 	| declaration of function 'vmalloc_32'
+> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi/
+> 	| pf-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c:329:7: warning: assignment
+> 	| makes pointer from integer without a cast
+> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi/
+> 	| pf-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c: In function 'rvfree':
+> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi/
+> 	| pf-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c:377:3: error: implicit
+> 	| declaration of function 'vfree'
+>=20
+> 	[=E2=80=A6]
+>=20
+> 	Build Configuration:
+> 	BB_VERSION        =3D "1.10.0"
+> 	METADATA_BRANCH   =3D "org.openembedded.dev"
+> 	METADATA_REVISION =3D "8fc09c071a6fba0766c3b002209c758572298d26"
+> 	TARGET_ARCH       =3D "arm"
+> 	TARGET_OS         =3D "linux-gnueabi"
+> 	MACHINE           =3D "beagleboard"
+> 	DISTRO            =3D "minimal"
+> 	DISTRO_VERSION    =3D "dev-snapshot-20101103"
+> 	TARGET_FPU        =3D "hard"
+>=20
+> Updating to revision 4384 fixes the problem. It was build tested with
+> `minimal`, `minimal-uclibc`, `angstrom-2008.1` and `angstrom-2010.x` for
+> `MACHINE =3D "beagleboard"`.
 
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- .../libpfring/libpfring-makefile-fixes.patch       |   16 ++++++++--------
- recipes/pf_ring/libpfring_svn.bb                   |    2 +-
- 2 files changed, 9 insertions(+), 9 deletions(-)
+Run-tested on x86_64 with custom distro, please also try my follow-up patch.
 
-diff --git a/recipes/pf_ring/libpfring/libpfring-makefile-fixes.patch b/recipes/pf_ring/libpfring/libpfring-makefile-fixes.patch
-index 721f904..0344a7d 100644
---- a/recipes/pf_ring/libpfring/libpfring-makefile-fixes.patch
-+++ b/recipes/pf_ring/libpfring/libpfring-makefile-fixes.patch
-@@ -1,7 +1,7 @@
- Index: Makefile
- ===================================================================
----- Makefile.orig	2010-08-02 17:31:55.000000000 +0400
--+++ Makefile	2010-08-03 12:56:31.000000000 +0400
-+--- Makefile.orig	2010-11-03 13:37:30.000000000 +0300
-++++ Makefile	2010-11-03 13:39:18.000000000 +0300
- @@ -8,7 +8,7 @@
-  #
-  # Installation directory
-@@ -11,16 +11,16 @@ Index: Makefile
-  
-  #
-  # Search directories
--@@ -29,6 +29,8 @@
-+@@ -32,6 +32,8 @@
-  #
-- # C compiler and flags
-+ # CROSS_COMPILE=arm-mv5sft-linux-gnueabi-
-  #
- +AR        = ar
- +RANLIB    = ranlib
-- CC        = gcc
-- CFLAGS    = -g -O2 -Wall -fPIC ${INCLUDE} ${DNA_DEFINE}
-- LDFLAGS   = -shared
--@@ -44,26 +46,29 @@
-+ CC        = ${CROSS_COMPILE}gcc
-+ CFLAGS    = -g  -Wall -fPIC ${INCLUDE} ${DNA_DEFINE}
-+ LDFLAGS   = -g -shared
-+@@ -47,26 +49,29 @@
-  # Main targets
-  #
-  STATICLIB  = libpfring.a
-diff --git a/recipes/pf_ring/libpfring_svn.bb b/recipes/pf_ring/libpfring_svn.bb
-index 06aa311..a903e3a 100644
---- a/recipes/pf_ring/libpfring_svn.bb
-+++ b/recipes/pf_ring/libpfring_svn.bb
-@@ -7,7 +7,7 @@ PV = "4.4.0+svnr${SRCREV}"
- 
- S = "${WORKDIR}/lib"
- 
--SRCREV = "4326"
-+SRCREV = "4384"
- SRC_URI = " \
- 	svn://svn.ntop.org/svn/ntop/trunk/PF_RING/userland;module=lib;proto=https \
- 	file://libpfring-makefile-fixes.patch;striplevel=0 \
--- 
-1.5.6.5
-
+Acked-by: Roman I Khimov <khimov@altell.ru>
 
 
