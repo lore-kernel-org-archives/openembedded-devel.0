@@ -1,47 +1,29 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PDYVa-00013Q-C0
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 09:15:51 +0100
-Received: by iwn42 with SMTP id 42so443361iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 01:15:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=tkHl5KyEcEuCEcd45sfc0Ch0UxfTtpCSzG3iX6PNjEM=;
-	b=CqU0BckKL797iYg3Deo/wx2aw7yQWW9rydxKQNCWzbNt/ixmTC00NeJZRp+H3jX67/
-	N81hrsXDFWKsXG+hnsO1Jtlwdi/HH32Xf8oIcATmszxsrTpwGJ0IbHpjw8t1cCROZaou
-	RqT3qY5+ACThbQZ/EU+ujCQmzep1FxAga9b98=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=BtcNskb8Qi+tfiHeOWRoNuuKa2mltmTvN84t/SR4LY8tc/nUSJFFo+9OxpqgnbhNDX
-	8hKX+HXW6ydo9CnRISZ55+idTDsPh6LqOgAr8TZj6FnsmZOhFHA5XOf6+skWzbzxWyCk
-	TK76aUKGzmsxOfMX+5dw07szP+e+Pmv341i3U=
-MIME-Version: 1.0
-Received: by 10.231.35.194 with SMTP id q2mr2958360ibd.26.1288772101253; Wed,
-	03 Nov 2010 01:15:01 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Wed, 3 Nov 2010 01:15:01 -0700 (PDT)
-In-Reply-To: <4CD080E2.2000706@mentor.com>
-References: <i9p1d0$7q4$1@dough.gmane.org>
-	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>
-	<iaptb1$bpb$1@dough.gmane.org> <4CD07F3E.7040703@eukrea.com>
-	<4CD080E2.2000706@mentor.com>
-Date: Wed, 3 Nov 2010 09:15:01 +0100
-Message-ID: <AANLkTi=3GwhFb27DDyHnOcQEk1oskP1NSEUw_qaZdNyr@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PDYxw-0000gX-5F for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Nov 2010 09:45:08 +0100
+Received: from f053043217.adsl.alicedsl.de ([78.53.43.217]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PDYx9-00082a-FO; Wed, 03 Nov 2010 08:44:19 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org, Roman I Khimov
+	<khimov@altell.ru>
+Date: Wed, 03 Nov 2010 09:44:18 +0100
+Message-ID: <1288773858.3980.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: libprelude: angstrom-2010.x: task `compile` fails with `./include/prelude-plugin.h:66:20: error: conflicting types for 'lt__PROGRAM__LTX_preloaded_symbols'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,99 +37,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 08:15:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 03 Nov 2010 08:45:08 -0000
+X-Groupsio-MsgNum: 25767
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-s/pes1vcja4NypOs91A9"
+
+--=-s/pes1vcja4NypOs91A9
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-2010/11/2 Tom Rini <tom_rini@mentor.com>:
-> Eric B=E9nard wrote:
->>
->> Hi,
->>
->> Le 02/11/2010 21:46, Koen Kooi a =E9crit :
->>>
->>> I do fear that pulling things into seperate layers too much will make i=
-t
->>> harder to propagate fixes...
->>>
->> yes, in your example, the fines in conf/machine/include are common to al=
-l
->> omap boards (and even all cortexa8 for tune-cortexa8.inc) and thus when
->> fixing one BSP you have to think to fix the others (and to communicate t=
-he
->> fix to other BSP maintainers).
->> The same apply for most of the .inc in recipes-bsp/*/.
->>
->> Do you think the following setup is possible ?
->>
->> - ARM overlay (containing all generic files for ARM achitecture :
->> conf/machines/include for example)
->>
->> - OMAP3 overlay (containing all generic files for OMAP3 SOC :
->> conf/machines/include/omap* + recipes/linux u-boot x-load base files for
->> omap3 architecture,
->>
->> - specific board overlay (conf/machine/themachine.conf + board specific
->> additions in recipes/linux u-boot & x-load (with patches based on top of=
- the
->> OMAP3 overlay).
->
-> How about:
->
-> - allow some form of conf/machine/include to continue to exist in the mai=
-n
-> layer
->
-> ? There would have to be some judgment calls, but I don't think that shou=
-ld
-> be too hard, over when it's SOC_FAMILY or when it's very generic. =A0Basi=
-cally
-> the ARM overlay wouldn't be created in this case (nor the PPC nor MIPS no=
-r
-> ...). =A0But we must avoid duplicating tune-coretexa8.inc and similar.
->
-
-I'd say it is definitely nice to have a arch specific overlay (e.g.
-ARM, MIPS, PPC, Nios2) which contains the specific recipes for that
-architecture.
-To give an example:
-For nios2 the only backend is for gcc 4.1.2 and binutils
-17.50.something. I can imagine that at some point in time it is
-decided not to support these in the mainline/standard/common/base
-system. In such a case I think the arch specific overlay would be a
-good place.
-
-Whether there should be an omap3 specific overlay (or wheter it should
-be cortexA8, or maybe cortexA8 and omap3) remains probably to be seen.
-I would suggest initially storing these in the arm machine overlay. If
-that one becomes too crowded we alwasy can create an additional layer.
-
-Khem wrote:
-> in general we should try to move minimal stuff into machine layers for ob=
-vious maintenance
-> burdening reasons. I am afraid that this has potential of leading usinto =
-maintenance problems
-> if we hold this loosely.
-
-I fully agree with this.
-In my opinion the rule should be:
-machine specific stuff should go into the machine overlay. A machine
-overlay could cover several closely related machines (e.g.
-beagleboard, beagleboard-XM (should these be considered as different)
-arch specific stuff (including stuff that is appropriate for multiple
-machines in the arch.
-non hw specific stuff should go into the common base.
-
-We should definitely avoid that multiple recipes and multiple recipe
-variants are created as that creates a maintenance nightmare.
-
-Coming back on the gcc/nios2 example.
-I'd expect this to be in the common base, but if at some point in time
-it is decided to eliminate it from there, it should move to the nios2
-overlay.
-Maintenance responsibility then shifts from the maintainers of the
-common base to the maintainer of the nios2 layer.
-
-Frans.
+Dear OE folks, dear Roman,
 
 
+Build Configuration:
+BB_VERSION        =3D "1.10.0"
+METADATA_BRANCH   =3D "org.openembedded.dev"
+METADATA_REVISION =3D "54d1ab587326543390e8ae55e9f7945a3a4ebdd1"
+TARGET_ARCH       =3D "arm"
+TARGET_OS         =3D "linux-gnueabi"
+MACHINE           =3D "beagleboard"
+DISTRO            =3D "angstrom"
+DISTRO_VERSION    =3D "next"
+TARGET_FPU        =3D "hard"
+
+testing to build `suricata_1.0.2` (commit f85795) [1] the build fails in
+the task `compile` of the dependency `libprelude_1.0.0` (commit 577889)
+[2].
+
+        | In file included from prelude-plugin.c:56:0:
+        | ./include/prelude-plugin.h:66:20: error: conflicting types for 'l=
+t__PROGRAM__LTX_preloaded_symbols'
+        | /oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-lin=
+ux-gnueabi/usr/include/ltdl.h:106:36: note: previous declaration of 'lt__PR=
+OGRAM__LTX_preloaded_symbols' was here
+        | make[4]: *** [prelude-plugin.lo] Error 1
+
+Could you take a look and/or report that upstream.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Df857958=
+0b47ea2e9022e7d9a375827fa750b71f1
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D5778891=
+6d7a3675260267ac1e043efd367806253
+
+
+--=-s/pes1vcja4NypOs91A9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzRIOIACgkQPX1aK2wOHVhATwCfb4Z03CwcBFzDqJWeBzqM4GvF
+vyUAn3NCc7H8W03Ur/n+72pPB/Aexuj9
+=Cfi4
+-----END PGP SIGNATURE-----
+
+--=-s/pes1vcja4NypOs91A9--
