@@ -1,41 +1,51 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PDjmP-0002C2-Qa
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PDjqP-0002Ka-6t
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 21:17:59 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1PDjla-0007Ll-2a from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 13:17:06 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 3 Nov 2010 13:17:05 -0700
-Received: from [172.30.80.221] ([172.30.80.221]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 3 Nov 2010 14:17:05 -0600
-Message-ID: <4CD1C33D.3040207@mentor.com>
-Date: Wed, 03 Nov 2010 13:17:01 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 03 Nov 2010 21:22:06 +0100
+Received: by iwn42 with SMTP id 42so1206602iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Nov 2010 13:21:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=BitdMKbCBRVS/BD/lovXoRFVf+8EAywALsmq+p/I2Pw=;
+	b=syNe6D5dBmYdMueqeamNj1U7Y1UGZ0nR13d/IYBtmDR39a5S1l/Vca7pF0FNUZYh6C
+	ypfaJ4XOQPRU5F9D3b4665xqM5tGQAHY4LgGjeZ/Svq5KjD6qq1pXjtU3DZfPY7LpKoC
+	MYLuCwHWndwoQRMX2SGlHL+DUnimiSjyhmuLY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=lRxt91advCUrKT8tgbkx8ySixoZLVX+r+KuVcpeESVP6EjpW9o7g2BpfmUhPW2hVlL
+	pp/zSJ7jehnICaWVO1XTFWGCmGsni/4gUeKJKI4Max45Y/JkOVeVlztQzgv6BApSsLt/
+	JBwbfWJaoYKzAyJDFpL3q2cBwZVVBeIs1Q/h8=
 MIME-Version: 1.0
+Received: by 10.231.17.203 with SMTP id t11mr8240899iba.1.1288815675503; Wed,
+	03 Nov 2010 13:21:15 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Wed, 3 Nov 2010 13:21:15 -0700 (PDT)
+In-Reply-To: <AANLkTimcum78VPKqr9YiFYUdYf84Hnifs9Phs9uUAQt4@mail.gmail.com>
+References: <4CCF64DD.9080709@gmail.com>
+	<AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
+	<AANLkTiktvcs1HsktTWaFATVDR492tPCHb_d7JU1xm_uW@mail.gmail.com>
+	<AANLkTinjMC_Eou5Bt9FE07Vn-4xXD_2ugrgCGKgcPxvP@mail.gmail.com>
+	<AANLkTinN5pGVW6-aos16m7gZo2ytaF1cgh+9uO3k+G+9@mail.gmail.com>
+	<20101103154735.GE3440@jama>
+	<AANLkTi=d_G9A0Mf2zMzG-9zmec06vYNaB1pLrkDQnyvE@mail.gmail.com>
+	<AANLkTikcC1DKQ8ADas78qPZRMeGF09MXY8ph7qoZT=1Y@mail.gmail.com>
+	<AANLkTimcum78VPKqr9YiFYUdYf84Hnifs9Phs9uUAQt4@mail.gmail.com>
+Date: Wed, 3 Nov 2010 21:21:15 +0100
+Message-ID: <AANLkTinbqMqinR7jaaV_rMqA8nU6D2EZ_G_Ppe6XW41f@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <i9p1d0$7q4$1@dough.gmane.org>	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>	<iaptb1$bpb$1@dough.gmane.org>
-	<4CD07F3E.7040703@eukrea.com>	<4CD080E2.2000706@mentor.com>	<AANLkTi=3GwhFb27DDyHnOcQEk1oskP1NSEUw_qaZdNyr@mail.gmail.com>	<4CD178C2.9010303@mentor.com>
-	<AANLkTi=D76QqygmJRdOPEeZJNL9N2X0vyYV8UPVNDPDH@mail.gmail.com>
-In-Reply-To: <AANLkTi=D76QqygmJRdOPEeZJNL9N2X0vyYV8UPVNDPDH@mail.gmail.com>
-X-OriginalArrivalTime: 03 Nov 2010 20:17:05.0345 (UTC)
-	FILETIME=[1554DB10:01CB7B94]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: Re: [PATCH] gphoto2_2.4.8.bb: Stop configure from looking in /usr/local/include
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,106 +59,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 20:17:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Nov 2010 20:22:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Frans Meulenbroeks wrote:
-> 2010/11/3 Tom Rini <tom_rini@mentor.com>:
->> Frans Meulenbroeks wrote:
->>> 2010/11/2 Tom Rini <tom_rini@mentor.com>:
->>>> Eric Bénard wrote:
->>>>> Hi,
->>>>>
->>>>> Le 02/11/2010 21:46, Koen Kooi a écrit :
->>>>>> I do fear that pulling things into seperate layers too much will make
->>>>>> it
->>>>>> harder to propagate fixes...
->>>>>>
->>>>> yes, in your example, the fines in conf/machine/include are common to
->>>>> all
->>>>> omap boards (and even all cortexa8 for tune-cortexa8.inc) and thus when
->>>>> fixing one BSP you have to think to fix the others (and to communicate
->>>>> the
->>>>> fix to other BSP maintainers).
->>>>> The same apply for most of the .inc in recipes-bsp/*/.
->>>>>
->>>>> Do you think the following setup is possible ?
->>>>>
->>>>> - ARM overlay (containing all generic files for ARM achitecture :
->>>>> conf/machines/include for example)
->>>>>
->>>>> - OMAP3 overlay (containing all generic files for OMAP3 SOC :
->>>>> conf/machines/include/omap* + recipes/linux u-boot x-load base files for
->>>>> omap3 architecture,
->>>>>
->>>>> - specific board overlay (conf/machine/themachine.conf + board specific
->>>>> additions in recipes/linux u-boot & x-load (with patches based on top of
->>>>> the
->>>>> OMAP3 overlay).
->>>> How about:
->>>>
->>>> - allow some form of conf/machine/include to continue to exist in the
->>>> main
->>>> layer
->>>>
->>>> ? There would have to be some judgment calls, but I don't think that
->>>> should
->>>> be too hard, over when it's SOC_FAMILY or when it's very generic.
->>>>  Basically
->>>> the ARM overlay wouldn't be created in this case (nor the PPC nor MIPS
->>>> nor
->>>> ...).  But we must avoid duplicating tune-coretexa8.inc and similar.
->>>>
->>> I'd say it is definitely nice to have a arch specific overlay (e.g.
->>> ARM, MIPS, PPC, Nios2) which contains the specific recipes for that
->>> architecture.
->>> To give an example:
->>> For nios2 the only backend is for gcc 4.1.2 and binutils
->>> 17.50.something. I can imagine that at some point in time it is
->>> decided not to support these in the mainline/standard/common/base
->>> system. In such a case I think the arch specific overlay would be a
->>> good place.
->> I would argue that so long as someone is maintaining nios2 that means we
->> can't drop gcc 4.1.2 until there's another stable version for it.  And
->> having that in the nios2 overlay means that it might well start to miss
->> generic fixes, if we aren't careful.
+2010/11/3 Khem Raj <raj.khem@gmail.com>:
+> On Wed, Nov 3, 2010 at 12:04 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
 >>
->> Don't get me wrong, I'm quite in favor of breaking things up, and putting on
->> my Mentor hat, we have machine specific overlays and like it.
-> 
-> I understand you. Problem is that I have been peeking into moving
-> nios2 forward, but the changes in the back end structure between 4.1
-> and 4.5 are not really minimal, and while I have a basic understanding
-> on compiler internals, I'm by no means a gcc wiz. So guess 4.1.2 for
-> nios will be around for quite a while.
-> And yes, I prefer to keep it on the mainline. as long as possible.
-> Actually I was mostly using this as an example (because I know this one best).
-> 
->>> Whether there should be an omap3 specific overlay (or wheter it should
->>> be cortexA8, or maybe cortexA8 and omap3) remains probably to be seen.
->>> I would suggest initially storing these in the arm machine overlay. If
->>> that one becomes too crowded we alwasy can create an additional layer.
->> I'm wary of getting too many overlays involved to describe rather simple
->> cases.  An SOC_FAMILY makes sense as an overlay as multiple boards will use
->> it but not all boards of that overall cpu architecture will.
+>>>
+>>> yes a more detailed solution is better. you have to go through the
+>>> configure of every
+>>> package and understand the behavior then act upon. As I said before
+>>> its a tedious task
+>>>
+>> I'm well aware of this. That is also why in the infrastructure thread
+>> I suggested using automated testing to find misbehaving packages.
 >>
-> 
-> True. I have no strong feelings in favour or against a soc family layer.
-> The thing that worries me is that we get too many very small layers.
-> If there is little content in the soc layer, I would not mind getting
-> that in the ARM layer (in this case).
-> If needed we can always split it up.
+>> Btw there are 355 .inc files that contain the word autotools and 1899 .bb files.
+>> Of course there are lots of dups in there.
+>> And maybe for the base recipes we can convince the yocto people that
+>> this is a serious QA issue (and they have some people employed to work
+>> on this if I understood properly).
+>>
+>
+> numbers means not so much when it comes down to this. I don't know if
+> any distribution that even does that
+> so I take comfort in everyone being wrong.
+>
 
-So we're in agreement, good :)
+I agree that numbers don't mean that much. Just wanted to give an
+indication of the possible effort needed.
+Also no idea how debian does this.
+One way to get a minimal package is to have everything in packaged
+staging then bake the recipe.
+that'll only drag in stuff from depends.
 
-> We might also want to peek at how the kernel arch dir and/or the
-> u-boot arch dir are organized.
-
-Some arches are done better than others, of course...
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+Frans
 
 
