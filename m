@@ -1,49 +1,39 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PDftc-0001py-4E
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PDgNX-0005BA-KU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 17:09:09 +0100
-Received: by yxe42 with SMTP id 42so596982yxe.6
+	Wed, 03 Nov 2010 17:40:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 71FB08E41DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 09:08:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=6ByZuKcw1wWVmgUUbR54W1yVf0TxSMk5j2GXdALXURA=;
-	b=VbwQwhG6tAZI/+4o56V65SePeIABYOsD++VzGxCHHQYCARzSqDiTIvjesIUD/Oi3o0
-	0ngt04camHIxKGo6+Lt81l7WwKz6ugfZuxGhHyDjcqJp/llNVYlPDnSEbZ0W12UWMnVy
-	PRhbV6+ICGDsvkmqrbxVJSaKlLrQCKXsSrKk8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=T3mLWs6SVG0NQZI4BWpRqqDy/ETv4Jz/vn5YNrRXq/lHU7X386pMdbTqGELinqf8yA
-	mSQCNyCZMxwNxrXrvD74aKcewSWD0uDeMg5oIU7UtA782Xi2RDhcoVQ9+C8hGxLSeyoV
-	3MBTLPM+6uLOFCpXEFg0lHsOEIQBWj7VM3a0o=
-Received: by 10.90.15.31 with SMTP id 31mr1200716ago.10.1288800495954; Wed, 03
-	Nov 2010 09:08:15 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.91.135.18 with HTTP; Wed, 3 Nov 2010 09:07:55 -0700 (PDT)
-In-Reply-To: <20101103154735.GE3440@jama>
-References: <4CCF64DD.9080709@gmail.com>
-	<AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
-	<AANLkTiktvcs1HsktTWaFATVDR492tPCHb_d7JU1xm_uW@mail.gmail.com>
-	<AANLkTinjMC_Eou5Bt9FE07Vn-4xXD_2ugrgCGKgcPxvP@mail.gmail.com>
-	<AANLkTinN5pGVW6-aos16m7gZo2ytaF1cgh+9uO3k+G+9@mail.gmail.com>
-	<20101103154735.GE3440@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Nov 2010 09:07:55 -0700
-Message-ID: <AANLkTi=d_G9A0Mf2zMzG-9zmec06vYNaB1pLrkDQnyvE@mail.gmail.com>
+	Wed,  3 Nov 2010 12:39:14 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 06445-04 for <openembedded-devel@lists.openembedded.org>; 
+	Wed,  3 Nov 2010 12:39:14 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 75C3C8E3E29; Wed,  3 Nov 2010 12:39:12 -0400 (EDT)
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 2795A75E77D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Nov 2010 12:39:11 -0400 (EDT)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id EEAB75000E8; Wed,  3 Nov 2010 12:39:10 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Wed,  3 Nov 2010 12:39:10 -0400
+Message-Id: <1288802350-21123-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.7.0.4
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gphoto2_2.4.8.bb: Stop configure from looking in /usr/local/include
+Subject: [PATCH] liboil 0.3.17: fix cross-compile on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,116 +47,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 16:09:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Nov 2010 16:40:04 -0000
 
-On Wed, Nov 3, 2010 at 8:47 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> On Wed, Nov 03, 2010 at 08:17:29AM -0700, Khem Raj wrote:
->> On Wed, Nov 3, 2010 at 2:42 AM, Frans Meulenbroeks
->> <fransmeulenbroeks@gmail.com> wrote:
->> > 2010/11/2 Khem Raj <raj.khem@gmail.com>:
->> >> On Mon, Nov 1, 2010 at 11:38 PM, Frans Meulenbroeks
->> >
->> >>> I have some concerns here.
->> >>> For configure it seems best to explicitly set and reset the flags in
->> >>> it, otherwise you may just pick up whatever happened to be build
->> >>> before.
->> >>>
->> >>
->> >>
->> >> this is the case with any package that uses configure tools. But assu=
-mption here
->> >> is that when you are building you are not building stuff thats not
->> >> meant to be in
->> >> the given image.
->> >
->> > True. However we should enforce that. If e.g. gphoto has no depends on
->> > exif it autotools will still pick up exif if it happens to be there
->> > because some other package build it.
->> > Funtionally this is not necessarily bad (as your image has exif
->> > anyway), but from a point of reproducability it is undesirable.
->> > E.g. if you build the recipe the first time, you might not get exif
->> > and if you rebuild you do get exif. (because the build system does not
->> > know the dependency is there so it might not have build exif yet).
->> >
->> > Actually the results might even differ for between builds of the same
->> > image (especially if you build machines with different speeds etc
->> > and/or use different flags for parallellism.
->> > Therefore I feel it is highly desirable to have all optionals that you
->> > have in configure either explicitly disabled or explicitly added to
->> > depends.
->> >
->>
->> this is everlasting problem with autoconf and autotools. There is a
->> set of options
->> which are enabled based on what autoconf guesses on the sysroots. Unfort=
-unately
->> it will be very tedious if you want to explicitly enable and disable
->> every option as well.
->> and there are quite a lot of packages using autotools. However I think
->> that the sysroot is minimal
->> when we build from scratch so most of options should be disabled which
->> are decided by autoconf
->> so we may not get unneeded features which is better than having them
->> enabled at build time
->> and needed support being missing at run time.
->
-> well but then you rebuild that package ie after just PR bump and feature
-> gets enabled, users gets used to it and with next rebuild from scratch
-> you will be surprised why they are complaining about missing feature
-> (happened to me with python + tk).
->
+Fix typo in whitelist of hosts allowing unaligned memory access.
 
-yes there are many other packages including eglibc/glibc which will
-not configured same on rebuild.
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ .../liboil-0.3.17/fix-unaligned-whitelist.patch    |   17 +++++++++++++++++
+ recipes/liboil/liboil_0.3.17.bb                    |    7 +++++--
+ 2 files changed, 22 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/liboil/liboil-0.3.17/fix-unaligned-whitelist.patch
 
-> So to keep them disabled even for next rebuild after PR bump we should
-> put --disable-feature to EXTRA_OECONF to be sure.
->
-> But that would make it conflicting for maintainers who are used to have i=
-t
-> "usually enabled" and "usually disabled".
->
-> Which can be solved by DISTRO_FEATURES but some shortcuts like gentoo
-> has would be usefull
->
-> DEPENDS +=3D tk? ( >=3Ddev-lang/tk-8.0 )
-> instead of
-> DEPENDS +=3D ${@base_contains('DISTRO_FEATURES', 'tk', 'tk', '', d)}
->
-> $(use_with threads)
-> instead of
-> ${@base_contains('DISTRO_FEATURES', 'threads', '--with-threads', --withou=
-t-threads)}
->
-> $(use_enable ipv6)
-> instead of
-> ${@base_contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6', --disable-ip=
-v6)}
->
-> or even
-> DEPEND=3D"dev-libs/ecore[evas]"
-> instead of
-> hoping that ecore was built with evas support
->
+diff --git a/recipes/liboil/liboil-0.3.17/fix-unaligned-whitelist.patch b/recipes/liboil/liboil-0.3.17/fix-unaligned-whitelist.patch
+new file mode 100644
+index 0000000..79d53b6
+--- /dev/null
++++ b/recipes/liboil/liboil-0.3.17/fix-unaligned-whitelist.patch
+@@ -0,0 +1,17 @@
++Upstream: https://bugs.freedesktop.org/show_bug.cgi?id=31358
++
++configure: fix whitelisting of x86_64 unaligned memory access
++
++Fix typo in whitelist so cross-compile works for x86_64.
++
++--- liboil-0.3.17/m4/as-unaligned-access.m4.orig	2009-02-26 14:40:08.000000000 -0500
+++++ liboil-0.3.17/m4/as-unaligned-access.m4	2010-11-03 12:19:55.000000000 -0400
++@@ -9,7 +9,7 @@
++         _AS_ECHO_N([(blacklisted) ])
++         as_cv_unaligned_access=no
++ 	;;
++-      i?86*|x86_64|amd64|powerpc*|m68k*|cris*)
+++      i?86*|x86_64*|amd64*|powerpc*|m68k*|cris*)
++         _AS_ECHO_N([(whitelisted) ])
++         as_cv_unaligned_access=yes
++ 	;;
+diff --git a/recipes/liboil/liboil_0.3.17.bb b/recipes/liboil/liboil_0.3.17.bb
+index 83cf4c1..2267821 100644
+--- a/recipes/liboil/liboil_0.3.17.bb
++++ b/recipes/liboil/liboil_0.3.17.bb
+@@ -1,11 +1,14 @@
+ DESCRIPTION = "Liboil is a library of simple functions that are optimized for various CPUs."
+ HOMEPAGE = "http://liboil.freedesktop.org/"
+ LICENSE = "liboil"
+-PR = "r0"
++PR = "r1"
+ 
+ DEPENDS = "glib-2.0"
+ 
+-SRC_URI = "http://liboil.freedesktop.org/download/${P}.tar.gz"
++SRC_URI = " \
++	http://liboil.freedesktop.org/download/${P}.tar.gz \
++	file://fix-unaligned-whitelist.patch;apply=yes \
++"
+ 
+ inherit autotools pkgconfig
+ 
+-- 
+1.7.0.4
 
-yes a more detailed solution is better. you have to go through the
-configure of every
-package and understand the behavior then act upon. As I said before
-its a tedious task
-
-
-> Regards,
->
-> --
-> Martin 'JaMa' Jansa =C2=A0 =C2=A0 jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
