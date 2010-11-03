@@ -1,33 +1,32 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1PDauh-0007Ud-Fk
+	(envelope-from <morphis@gravedo.de>) id 1PDb1w-0007gT-C5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 11:49:55 +0100
-Received: from keemun.altell.local (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id 5C5DE46E1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Nov 2010 13:48:55 +0300 (MSK)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 3 Nov 2010 13:48:54 +0300
-User-Agent: KMail/1.13.5 (Linux/2.6.34.7-0.3-desktop; KDE/4.4.4; x86_64; ; )
-References: <1288775679.3980.31.camel@mattotaupa>
-In-Reply-To: <1288775679.3980.31.camel@mattotaupa>
+	Wed, 03 Nov 2010 11:57:26 +0100
+Received: by gravedo.de (Postfix, from userid 5001)
+	id A5E12275CD61; Wed,  3 Nov 2010 11:56:33 +0100 (CET)
+Received: from [127.0.0.1] (gravedo.de [85.214.79.159])
+	by gravedo.de (Postfix) with ESMTPSA id 06E31275CD26;
+	Wed,  3 Nov 2010 11:56:29 +0100 (CET)
+Message-ID: <4CD13FDC.2030405@gravedo.de>
+Date: Wed, 03 Nov 2010 11:56:28 +0100
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13pre) Gecko/20101103 Lightning/1.0b2 Shredder/3.1.7pre
 MIME-Version: 1.0
-Message-Id: <201011031348.54553.khimov@altell.ru>
-X-Altell-MailScanner-ID: 5C5DE46E1.64F41
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+To: openembedded-devel@lists.openembedded.org
+References: <20101102084104.GI30894@excalibur.local>
+In-Reply-To: <20101102084104.GI30894@excalibur.local>
+X-Enigmail-Version: 1.1.2
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] pf-ring: update to r4384 to fix `pf_ring.c:329:3: error: implicit declaration of function 'vmalloc_32'`
+Subject: Re: New e.V. members
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,49 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 10:49:56 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Nov 2010 10:57:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 03 =D0=BD=D0=BE=D1=8F=D0=B1=D1=80=D1=8F 2010=
- 12:14:39 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Paul Menzel =D0=BD=D0=B0=D0=BF=D0=
-=B8=D1=81=D0=B0=D0=BB:
-> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi=
-/p
-> 	| f-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c: In function 'rvmalloc':
-> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi/
-> 	| pf-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c:329:3: error: implicit
-> 	| declaration of function 'vmalloc_32'
-> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi/
-> 	| pf-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c:329:7: warning: assignment
-> 	| makes pointer from integer without a cast
-> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi/
-> 	| pf-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c: In function 'rvfree':
-> 	| /oe/build-minimal-eglibc/minimal-dev/work/beagleboard-oe-linux-gnueabi/
-> 	| pf-ring-4.4.0+svnr4326-r90/kernel/pf_ring.c:377:3: error: implicit
-> 	| declaration of function 'vfree'
->=20
-> 	[=E2=80=A6]
->=20
-> 	Build Configuration:
-> 	BB_VERSION        =3D "1.10.0"
-> 	METADATA_BRANCH   =3D "org.openembedded.dev"
-> 	METADATA_REVISION =3D "8fc09c071a6fba0766c3b002209c758572298d26"
-> 	TARGET_ARCH       =3D "arm"
-> 	TARGET_OS         =3D "linux-gnueabi"
-> 	MACHINE           =3D "beagleboard"
-> 	DISTRO            =3D "minimal"
-> 	DISTRO_VERSION    =3D "dev-snapshot-20101103"
-> 	TARGET_FPU        =3D "hard"
->=20
-> Updating to revision 4384 fixes the problem. It was build tested with
-> `minimal`, `minimal-uclibc`, `angstrom-2008.1` and `angstrom-2010.x` for
-> `MACHINE =3D "beagleboard"`.
+On 02.11.2010 09:41, Stefan Schmidt wrote:
+> Hello.
+> 
+> If anyone of you is interest to get an e.V. member please let me know. I'm going
+> to prepare a proposal to vote for new members next week.
+> 
+> The e.V. is the official body behind the OE project and members of it can vote
+> for the board and the TSC. No fee is attached to this memebership but you are
+> free to pay a fee though.
+> 
+> http://wiki.openembedded.org/index.php/Organization
+> 
 
-Run-tested on x86_64 with custom distro, please also try my follow-up patch.
+Heyho,
 
-Acked-by: Roman I Khimov <khimov@altell.ru>
+I would like to become a member of the OpenEmbedded e.V.
+
+I'm a developer from Germany who does all his work for OE in his spare
+free time. Currently my work is targeted to the SHR distribution and
+especially it's port for the palmpre machine.
+
+regards,
+Simon
 
 
