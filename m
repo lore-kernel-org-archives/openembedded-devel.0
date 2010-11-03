@@ -1,35 +1,44 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PDmkv-0003jv-5H
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <vwyodapink@gmail.com>) id 1PDmts-0004DX-1n
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 00:28:37 +0100
-Received: (qmail 16129 invoked by uid 503); 3 Nov 2010 23:06:20 -0000
-Received: from b9.ovh.net (HELO mail632.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 3 Nov 2010 23:06:20 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 4 Nov 2010 01:27:48 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 4 Nov 2010 01:27:47 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Nov 2010 00:28:54 +0100
-Message-Id: <1288826934-8339-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
+	Thu, 04 Nov 2010 00:37:52 +0100
+Received: by qyk7 with SMTP id 7so554318qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Nov 2010 16:37:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=eNscMkGf4uLYY55EnZbGqvraRuZzqbvZro6g2K9cwmM=;
+	b=fI/lcEwzBL8F6WahcerwvYG63aqXJqqC+s8V80ql1XO0wCv57SnTtjEpVkOTAaJAw0
+	ZU1FwbNS58YNBy6cs3t6HqeLRv3kKiv1RCK31dG2XmYVL6A4SN4K1V8/4pfZw+wZOCHR
+	3jV7t2NopocNCPInDCdXO8HCidWYSQQCe9KLc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=oDMptK775hRvD8R/9H0t9F3+TUwj8E/P45SDYBcbI1R0sCM0U4m5x2XJ0K2RYKmzwc
+	yxv8DAkUgPj+Z6/tC/RgHbpKTxWPPbV8+YiLYuCr14FThqhUJV7I8q+3hw7dhazTPpSD
+	On8QezkQzK1Ox93jBFHXo5Fppmu9BECoYVSGs=
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 17290163394802724169
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 213.186.62.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+Received: by 10.229.233.20 with SMTP id jw20mr2195763qcb.62.1288827419713;
+	Wed, 03 Nov 2010 16:36:59 -0700 (PDT)
+Received: by 10.229.8.210 with HTTP; Wed, 3 Nov 2010 16:36:59 -0700 (PDT)
+In-Reply-To: <AANLkTim-aV6bGmFZN3sg-w83ji1DGBvKJAh=DabPL-ij@mail.gmail.com>
+References: <AANLkTik9vuL4RR0x1mn_dSGXP2r2dn1RrgbOyxqYw+TD@mail.gmail.com>
+	<AANLkTim-aV6bGmFZN3sg-w83ji1DGBvKJAh=DabPL-ij@mail.gmail.com>
+Date: Wed, 3 Nov 2010 16:36:59 -0700
+Message-ID: <AANLkTikOZCR47_Yd6Z7WoPSZZGW_65wTtzpxTPu89D1w@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [PATCH] own-mirrors.bbclass: allow mirroring of scm fetched packages
+Subject: Re: problems building openldap and libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +52,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 23:28:37 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Nov 2010 23:37:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-this way, it's possible to setup a local webserver (for example
-using busybox httpd -p "8081" -h backuped_download_dir) serving
-a presiously fetched download directory and to build wihout the
-need for an internet access
+On Wed, Nov 3, 2010 at 4:24 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Nov 3, 2010 at 3:55 PM, J. L. <vwyodapink@gmail.com> wrote:
+>> I am having an issue of how libtool is building on my machine. I am
+>> running Ubuntu 10.10 64bit Kernel 2.6.35-23-generic bitbake 1.10.1
+>> overo branch. Here is what happens when building:
+>>
+>> Error for openldap
+>> NOTE: package openldap-2.4.23-r2: task do_configure: Started
+>> ERROR: Function do_configure failed
+>> NOTE: Task failed: ('function do_configure failed',
+>> '/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/openldap-2.4.23-r2/temp/log.do_configure.12815')
+>> ERROR: Logfile of failure stored in:
+>> /home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/openldap-2.4.23-r2/temp/log.do_configure.12815
+>> Log data follows:
+>> | cp: cannot stat
+>> `/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/libtool/ltmain.sh':
+>> No such file or directory
+>
+> can you add DEPENDS += "libtool" to openldap_2.4.23.bb and retry ?
 
-this can also be used when connected to know to know which packages
-are missing from the local mirror's directory (and thus are fetched
-from internet as a fallback), it's possible to run the server this way :
-busybox httpd -p "8081" -h backuped_download_dir -vv -f | grep -B 1  response:404
-to get the name of the missing packages.
+Still getting this error and I cleaned and rebuilt both recipes
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- classes/own-mirrors.bbclass |    7 ++++++-
- 1 files changed, 6 insertions(+), 1 deletions(-)
+ERROR: Logfile of failure stored in:
+/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/openldap-2.4.23-r2/temp/log.do_configure.2783
+Log data follows:
+| cp: cannot stat
+`/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/libtool/ltmain.sh':
+No such file or directory
+| ERROR: Function do_configure failed
+NOTE: package openldap-2.4.23-r2: task do_configure: Failed
 
-diff --git a/classes/own-mirrors.bbclass b/classes/own-mirrors.bbclass
-index e8a0f48..720ce42 100644
---- a/classes/own-mirrors.bbclass
-+++ b/classes/own-mirrors.bbclass
-@@ -1,4 +1,9 @@
- PREMIRRORS() {
--https?://.*/.* ${SOURCE_MIRROR_URL}
-+cvs://.*/.* ${SOURCE_MIRROR_URL}
-+svn://.*/.* ${SOURCE_MIRROR_URL}
-+git://.*/.* ${SOURCE_MIRROR_URL}
-+hg://.*/.* ${SOURCE_MIRROR_URL}
-+bzr://.*/.* ${SOURCE_MIRROR_URL}
-+https?$://.*/.* ${SOURCE_MIRROR_URL}
- ftp://.*/.*  ${SOURCE_MIRROR_URL}
- }
--- 
-1.6.3.3
 
+libtool does not build to this location
+/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/libtool/
+it builds to here
+tmp/sysroots/armv7a-angstrom-linux-gnueabi/home/vdubhack/overo-oe/tmp/sysroots/x86_64-linux/usr/share/libtool/
+
+It seems to put home/vdubhack/overo-oe/tmp the incorrect way. instead
+of being in front of the tmp/sysroot like most things
+
+same with aclocal and aclocal-1.11
+
+Thanks
+
+JL
+>
+>
+> -khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
