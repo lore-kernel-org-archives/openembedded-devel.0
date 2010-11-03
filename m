@@ -1,47 +1,35 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1PDnCS-0000PD-Cy
+	(envelope-from <denis@denix.org>) id 1PDnEm-0002wt-CC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 00:57:06 +0100
-Received: by wya21 with SMTP id 21so1223741wya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 16:56:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=gPEwfKTJY8cSYxmBEMs7sj0z4bt+p1+3pKZK52BBmuI=;
-	b=FWSCwkTorJk3F/gEAY2oeud2+5jwpnwGLYCuc8mK/6oR4HK3u5afuTXpPOaF4Si16o
-	PIKqaD8YQfoDCNGfuhRF33pnlf9YEVUxJEgXrrNVrFhopAiKpAUPEEmCcvgI7iAn50ES
-	BqDUb8hZk5UmqrOq6+2m6TwNT26on73dLaRTQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=Litdp44qhOMyt6yI57zJMgfvz+3/LjA9oW/OZCKWtyA06acerorn3+b9FewdgUG3QL
-	b6ygSvVyh0Q42EJ3TZx2q1YV70C69il7B7tZ+mkX5gsMFDUrEAWXAZtFI030pIkdX+8M
-	GY4wQ7bmAnc2gsyWT0eVi3ee/jl+0dW3FmyX0=
-Received: by 10.216.26.138 with SMTP id c10mr1182316wea.23.1288828572986; Wed,
-	03 Nov 2010 16:56:12 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.0.139 with HTTP; Wed, 3 Nov 2010 16:55:52 -0700 (PDT)
-In-Reply-To: <1288824035-27654-1-git-send-email-raj.khem@gmail.com>
-References: <1288824035-27654-1-git-send-email-raj.khem@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 3 Nov 2010 16:55:52 -0700
-X-Google-Sender-Auth: -yCAUlffX0ipe3feEFUuvukhCEc
-Message-ID: <AANLkTi=OOneV24BDurQ+ECpQJ+-U4AH=MpFZ-YM0jOJq@mail.gmail.com>
+	Thu, 04 Nov 2010 00:59:33 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LBC008LQ2LDM9C2@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	03 Nov 2010 18:58:26 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 49DAC14AF6A; Wed,
+	03 Nov 2010 19:58:25 -0400 (EDT)
+Date: Wed, 03 Nov 2010 19:58:25 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Message-id: <20101103235825.GD28852@denix.org>
+References: <1288826934-8339-1-git-send-email-eric@eukrea.com>
+	<4CD1F324.9090704@mentor.com>
+MIME-version: 1.0
+In-reply-to: <4CD1F324.9090704@mentor.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] metadata_scm.bbclass: get the metadata revision for current HEAD
+Cc: Eric B??nard <eric@eukrea.com>
+Subject: Re: [PATCH] own-mirrors.bbclass: allow mirroring of scm	fetched packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,23 +43,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 23:57:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Nov 2010 23:59:34 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Wed, Nov 3, 2010 at 3:40 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> Currently we report wrong revision when we build from branches not based
-> on master because we only fetch the HEAD value which is remote master
-> This patch makes it to report the HEAD of whatever branch one has
-> checked out.
+On Wed, Nov 03, 2010 at 04:41:24PM -0700, Tom Rini wrote:
+> Eric B??nard wrote:
+>> this way, it's possible to setup a local webserver (for example
+>> using busybox httpd -p "8081" -h backuped_download_dir) serving
+>> a presiously fetched download directory and to build wihout the
+>> need for an internet access
+>> this can also be used when connected to know to know which packages
+>> are missing from the local mirror's directory (and thus are fetched
+>> from internet as a fallback), it's possible to run the server this way :
+>> busybox httpd -p "8081" -h backuped_download_dir -vv -f | grep -B 1  
+>> response:404
+>> to get the name of the missing packages.
+>> Signed-off-by: Eric B??nard <eric@eukrea.com>
 >
+> Acked-by: Tom Rini <tom_rini@mentor.com>
 
-This doesn't make sense.  The HEAD ref always points to the current checked
-out commit or branch, it is *not* specific to master.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Looks like a nice way to have local mirrored downloads. May I suggest to put 
+the above examples of running busybox httpd as a comment inside the class.
+
+Acked-by: Denys Dmytriyenko <denis@denix.org>
+
+>
+>> ---
+>>  classes/own-mirrors.bbclass |    7 ++++++-
+>>  1 files changed, 6 insertions(+), 1 deletions(-)
+>> diff --git a/classes/own-mirrors.bbclass b/classes/own-mirrors.bbclass
+>> index e8a0f48..720ce42 100644
+>> --- a/classes/own-mirrors.bbclass
+>> +++ b/classes/own-mirrors.bbclass
+>> @@ -1,4 +1,9 @@
+>>  PREMIRRORS() {
+>> -https?://.*/.* ${SOURCE_MIRROR_URL}
+>> +cvs://.*/.* ${SOURCE_MIRROR_URL}
+>> +svn://.*/.* ${SOURCE_MIRROR_URL}
+>> +git://.*/.* ${SOURCE_MIRROR_URL}
+>> +hg://.*/.* ${SOURCE_MIRROR_URL}
+>> +bzr://.*/.* ${SOURCE_MIRROR_URL}
+>> +https?$://.*/.* ${SOURCE_MIRROR_URL}
+>>  ftp://.*/.*  ${SOURCE_MIRROR_URL}
+>>  }
+>
+>
+> -- 
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
