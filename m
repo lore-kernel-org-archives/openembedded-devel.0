@@ -1,39 +1,33 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PDgNX-0005BA-KU
+	(envelope-from <denis@denix.org>) id 1PDgOK-0005GX-O6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 17:40:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 71FB08E41DA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Nov 2010 12:39:14 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 06445-04 for <openembedded-devel@lists.openembedded.org>; 
-	Wed,  3 Nov 2010 12:39:14 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 75C3C8E3E29; Wed,  3 Nov 2010 12:39:12 -0400 (EDT)
-Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 2795A75E77D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Nov 2010 12:39:11 -0400 (EDT)
-Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
-	id EEAB75000E8; Wed,  3 Nov 2010 12:39:10 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
+	Wed, 03 Nov 2010 17:40:54 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LBB0095AIA9Y815@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	03 Nov 2010 11:39:51 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id DA58314AF64; Wed,
+	03 Nov 2010 12:39:44 -0400 (EDT)
+Date: Wed, 03 Nov 2010 12:39:44 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Nov 2010 12:39:10 -0400
-Message-Id: <1288802350-21123-1-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.7.0.4
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
+Message-id: <20101103163944.GF11514@denix.org>
+References: <20101103090635.GD32553@excalibur.local>
+MIME-version: 1.0
+In-reply-to: <20101103090635.GD32553@excalibur.local>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.17
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
-	SPF_HELO_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] liboil 0.3.17: fix cross-compile on x86_64
+Subject: Re: Listing of received donations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,63 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 16:40:04 -0000
+X-List-Received-Date: Wed, 03 Nov 2010 16:40:54 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Fix typo in whitelist of hosts allowing unaligned memory access.
+On Wed, Nov 03, 2010 at 10:06:35AM +0100, Stefan Schmidt wrote:
+> Hello.
+> 
+> The OpenEmbedded project received different donations over the time. From
+> hosting over hardware to money.
+> 
+> We, as a project, are really appreciate this but failed so far to have a clear
+> listing of received donations to give credit. During OEDEM I volunteered to set
+> up such a list as a protected wiki page. I just finished the first version/draft
+> for it and would like to get some feedback on it. Not really on design but on
+> missing items or corrections. I'm sure I got some things wrong or missed some.
+> :)
+> 
+> Companies that want to have a small Logo next to their name and link please send
+> me an image. This will be added later on.
+> 
+> http://wiki.openembedded.org/index.php/Donations
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- .../liboil-0.3.17/fix-unaligned-whitelist.patch    |   17 +++++++++++++++++
- recipes/liboil/liboil_0.3.17.bb                    |    7 +++++--
- 2 files changed, 22 insertions(+), 2 deletions(-)
- create mode 100644 recipes/liboil/liboil-0.3.17/fix-unaligned-whitelist.patch
+Stefan,
 
-diff --git a/recipes/liboil/liboil-0.3.17/fix-unaligned-whitelist.patch b/recipes/liboil/liboil-0.3.17/fix-unaligned-whitelist.patch
-new file mode 100644
-index 0000000..79d53b6
---- /dev/null
-+++ b/recipes/liboil/liboil-0.3.17/fix-unaligned-whitelist.patch
-@@ -0,0 +1,17 @@
-+Upstream: https://bugs.freedesktop.org/show_bug.cgi?id=31358
-+
-+configure: fix whitelisting of x86_64 unaligned memory access
-+
-+Fix typo in whitelist so cross-compile works for x86_64.
-+
-+--- liboil-0.3.17/m4/as-unaligned-access.m4.orig	2009-02-26 14:40:08.000000000 -0500
-++++ liboil-0.3.17/m4/as-unaligned-access.m4	2010-11-03 12:19:55.000000000 -0400
-+@@ -9,7 +9,7 @@
-+         _AS_ECHO_N([(blacklisted) ])
-+         as_cv_unaligned_access=no
-+ 	;;
-+-      i?86*|x86_64|amd64|powerpc*|m68k*|cris*)
-++      i?86*|x86_64*|amd64*|powerpc*|m68k*|cris*)
-+         _AS_ECHO_N([(whitelisted) ])
-+         as_cv_unaligned_access=yes
-+ 	;;
-diff --git a/recipes/liboil/liboil_0.3.17.bb b/recipes/liboil/liboil_0.3.17.bb
-index 83cf4c1..2267821 100644
---- a/recipes/liboil/liboil_0.3.17.bb
-+++ b/recipes/liboil/liboil_0.3.17.bb
-@@ -1,11 +1,14 @@
- DESCRIPTION = "Liboil is a library of simple functions that are optimized for various CPUs."
- HOMEPAGE = "http://liboil.freedesktop.org/"
- LICENSE = "liboil"
--PR = "r0"
-+PR = "r1"
- 
- DEPENDS = "glib-2.0"
- 
--SRC_URI = "http://liboil.freedesktop.org/download/${P}.tar.gz"
-+SRC_URI = " \
-+	http://liboil.freedesktop.org/download/${P}.tar.gz \
-+	file://fix-unaligned-whitelist.patch;apply=yes \
-+"
- 
- inherit autotools pkgconfig
- 
+Thank you for your effort!
+
 -- 
-1.7.0.4
-
+Denys
 
 
