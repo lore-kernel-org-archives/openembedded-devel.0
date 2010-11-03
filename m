@@ -1,45 +1,53 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PDQqr-0005z0-U8
+	(envelope-from <zach.frey@gmail.com>) id 1PDSVr-000133-Du
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 01:05:19 +0100
-Received: by wwi18 with SMTP id 18so40481wwi.24
+	Wed, 03 Nov 2010 02:52:22 +0100
+Received: by wya21 with SMTP id 21so120092wya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Nov 2010 17:04:24 -0700 (PDT)
+	Tue, 02 Nov 2010 18:50:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=lWmuhGYRPhFf2Lg5EtNabUUwDOTAmHW7h9t36IiTEW0=;
-	b=QN0FSLWwF9LP4T2cJe4XGGaHYP1yaNioWCflEyVEN15OPQB+3w6dY81+va7x6CX4//
-	ba7zQx6vUvsiXVK/AGn/3etgFh06OAEOmMvykB1sXaHBsjp/gkmFehUOAGxDOTcmEfet
-	LgRLnzs9xiRANqIWp+m3eN1mB3mCEctuAF0n4=
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=E/XjWHMZp2+d2aVnnV9JQNmcz2pwVJV8MoyU1GLcs8M=;
+	b=fLiE3uEnVqBmFptafN9xRjQIZPmRav7oBVJOGreqo7yewpuuzQe1voSTBdLgaTyVqk
+	X8BtQiMCHqF2PZERk89yJRIjqn87i8RJMF0tqd2kzML6w1h6QPqKIePIME7O9qZB0Xwa
+	D96woPbjxDzhZ5vAbDRyW0ygEFvVlj/2bxCfI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Vza+8krCMNet89byLyoJh8lkisZ3vVeAkMiDTCbxypn13mxRr7FfD/Pn5HTI1aT1D2
-	maV4BhPycnGVFJdNLuCaL0Hc/PRp61I7Nah0MucQMYsFG/F6sbIDztFQAeGngv3eTPqh
-	HFMxrZFnJtAOGnchQJwAS0XXnCqK4MqCpLIPk=
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=EirC7ON4Yxh+JRSrJ1HXZCBbLYJdjFnw7H4EjCWFVvaUUUsbHmLgnc4++LBoAXtDaA
+	y0P1taToEXhuZweyNymB88ZXtsKDj5/VxahqqNM4gQdUhFgEFBWKSk8icW0RftkO7x8M
+	OdVdiaumvvShoiSxEre+le2IBm5R5nfdQJbdk=
 MIME-Version: 1.0
-Received: by 10.227.135.9 with SMTP id l9mr10575250wbt.49.1288742659298; Tue,
-	02 Nov 2010 17:04:19 -0700 (PDT)
-Received: by 10.227.37.205 with HTTP; Tue, 2 Nov 2010 17:04:19 -0700 (PDT)
-In-Reply-To: <AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
-References: <4CCF64DD.9080709@gmail.com>
-	<AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
-Date: Wed, 3 Nov 2010 10:34:19 +1030
-Message-ID: <AANLkTimvfGUSNhMnvcru3D46EoqNcSW87sON6OMV0GD5@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+Received: by 10.227.142.84 with SMTP id p20mr17766299wbu.182.1288749051700;
+	Tue, 02 Nov 2010 18:50:51 -0700 (PDT)
+Sender: zach.frey@gmail.com
+Received: by 10.216.37.5 with HTTP; Tue, 2 Nov 2010 18:50:51 -0700 (PDT)
+In-Reply-To: <AANLkTikr3k3+5fJhX9MfKF2DhSbEXn8Pa9SF0QZ6nCZ7@mail.gmail.com>
+References: <AANLkTi=gi8pk_McpA58rvcOHdq-0Xpz+NyF2doWPO00B@mail.gmail.com>
+	<AANLkTinCa9E0F3FOm6TXg6NLc48pSgmijeUfqgmhtRuw@mail.gmail.com>
+	<AANLkTimE05gQ2pSmkYouZMW1=rAg=-5S_sGu0nTgjpzh@mail.gmail.com>
+	<20101101194703.GA12018@gmail.com>
+	<AANLkTi=TyPX5L5oUHYehsuvqr9FGSCaD_nj1Z8+P=8F_@mail.gmail.com>
+	<20101101195748.GB12018@gmail.com>
+	<AANLkTikr3k3+5fJhX9MfKF2DhSbEXn8Pa9SF0QZ6nCZ7@mail.gmail.com>
+Date: Tue, 2 Nov 2010 21:50:51 -0400
+X-Google-Sender-Auth: avQIjpYBroNfrAOMd8myc-W6hAg
+Message-ID: <AANLkTimOLodSjV8+saSi1td==O7TgX1iqzJeQ=NT5mgB@mail.gmail.com>
+From: Zach Frey <zach@znfrey.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: zach.frey@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gphoto2_2.4.8.bb: Stop configure from looking in /usr/local/include
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Trouble compiling system-tools-backends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,143 +61,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 00:05:19 -0000
+X-List-Received-Date: Wed, 03 Nov 2010 01:52:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On 2 November 2010 17:08, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/11/2 Graham Gower <graham.gower@gmail.com>:
->> =A0* Point configure at where it can find jpeg.
->> =A0* Explicitly disable cdk and aalib.
->> =A0* Fix license while here.
+On Tue, Nov 2, 2010 at 10:21 AM, Zach Frey <zach@znfrey.com> wrote:
+
+>
+>
+> On Mon, Nov 1, 2010 at 3:57 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>
+>> On (01/11/10 15:54), Zach Frey wrote:
+>> > On Mon, Nov 1, 2010 at 3:47 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> >
+>> > >
+>> > > Well it built fine for me on minimal distro with libtool 2.4 and
+>> > > machine=efikamx
+>> > > you could try using angstrom-2010 and see if that helps as it also
+>> uses
+>> > > libtool 2.4
+>> > >
+>> >
+>> > OK, thanks -- I'll report if angstrom-2010 works for me or not.
+>> >
+>> >
+>> > > other guess ...there could be build host difference as I am using
+>> ubuntu
+>> > > 10.10
+>> > >
+>> >
+>> > Is Ubuntu 8.04 "supported", or is it old enough that I ought to expect
+>> > problems?
 >>
->> Signed-off-by: Graham Gower <graham.gower@gmail.com>
->> ---
->> =A0recipes/gphoto2/gphoto2_2.4.8.bb | =A0 =A09 +++++++--
->> =A01 files changed, 7 insertions(+), 2 deletions(-)
+>> I think till the new LTS 10.04 release it was used by quite a few people
+>> but now few of them might have switched to 10.04 LTS but it should
+>> certainly be usable as build host IMO
 >>
->> diff --git a/recipes/gphoto2/gphoto2_2.4.8.bb b/recipes/gphoto2/gphoto2_=
-2.4.8.bb
->> index ea54713..836ea85 100644
->> --- a/recipes/gphoto2/gphoto2_2.4.8.bb
->> +++ b/recipes/gphoto2/gphoto2_2.4.8.bb
->> @@ -1,7 +1,8 @@
->> =A0DESCRIPTION =3D "gphoto2 is a command-line utility to fetch pictures =
-from digital cameras"
->> =A0SECTION =3D "console/utils"
->> -LICENSE =3D "GPL"
->> -DEPENDS =3D "libtool libgphoto2 popt"
->> +LICENSE =3D "GPLv2+"
->> +DEPENDS =3D "libtool libgphoto2 popt jpeg"
->
-> The original recipe would build without the depends on jpeg
-> adding it to depends should be mentioned in the commit message
->
->> +PR =3D "r1"
 >>
->> =A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/gphoto/gphoto2-${PV}.tar.bz2;name=
-=3Dgphoto2 \
->> =A0 =A0 =A0 =A0 =A0 =A0file://gphoto-popt-fixup.patch"
->> @@ -11,6 +12,10 @@ SRC_URI[gphoto2.sha256sum] =3D "a2e2f70fd6051234cbc3d=
-76dc82df6991e8a07ead56aa8d5c4
->>
->> =A0inherit autotools
->>
->> +EXTRA_OECONF=3D"--without-cdk \
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 --without-aalib \
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 --with-jpeg-prefix=3D${STAGING_EXECPREFIXD=
-IR}"
->> +
+> Thanks.  I do get the same results using angstrom-2010.
 >
-> I have some concerns here.
-> For configure it seems best to explicitly set and reset the flags in
-> it, otherwise you may just pick up whatever happened to be build
-> before.
 >
-> from --help:
->
-> Optional Features:
-> =A0--disable-option-checking =A0ignore unrecognized --enable/--with optio=
-ns
-> =A0--disable-FEATURE =A0 =A0 =A0 do not include FEATURE (same as --enable=
--FEATURE=3Dno)
-> =A0--enable-FEATURE[=3DARG] =A0include FEATURE [ARG=3Dyes]
-> =A0--disable-dependency-tracking =A0speeds up one-time build
-> =A0--enable-dependency-tracking =A0 do not reject slow dependency extract=
-ors
-> =A0--enable-shared[=3DPKGS] =A0build shared libraries [default=3Dyes]
-> =A0--enable-static[=3DPKGS] =A0build static libraries [default=3Dyes]
-> =A0--enable-fast-install[=3DPKGS]
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0optimize for fast inst=
-allation [default=3Dyes]
-> =A0--disable-libtool-lock =A0avoid locking (might break parallel builds)
-> =A0--disable-largefile =A0 =A0 omit support for large files
-> =A0--disable-nls =A0 =A0 =A0 =A0 =A0 do not use Native Language Support
-> =A0--disable-rpath =A0 =A0 =A0 =A0 do not hardcode runtime library paths
->
-> Optional Packages:
-> =A0--with-PACKAGE[=3DARG] =A0 =A0use PACKAGE [ARG=3Dyes]
-> =A0--without-PACKAGE =A0 =A0 =A0 do not use PACKAGE (same as --with-PACKA=
-GE=3Dno)
-> =A0--with-pic =A0 =A0 =A0 =A0 =A0 =A0 =A0try to use only PIC/non-PIC obje=
-cts [default=3Duse
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0both]
-> =A0--with-gnu-ld =A0 =A0 =A0 =A0 =A0 assume the C compiler uses GNU ld [d=
-efault=3Dno]
-> =A0--with-gnu-ld =A0 =A0 =A0 =A0 =A0 assume the C compiler uses GNU ld de=
-fault=3Dno
-> =A0--with-libiconv-prefix[=3DDIR] =A0search for libiconv in DIR/include a=
-nd DIR/lib
-> =A0--without-libiconv-prefix =A0 =A0 don't search for libiconv in
-> includedir and libdir
-> =A0--with-libintl-prefix[=3DDIR] =A0search for libintl in DIR/include and=
- DIR/lib
-> =A0--without-libintl-prefix =A0 =A0 don't search for libintl in includedi=
-r and libdir
-> =A0--with-libgphoto2=3DPREFIX
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0where to find libgphot=
-o2, "no" or "auto"
-> =A0--without-pthread =A0 =A0 =A0 =A0 Don't use pthread
-> =A0--without-cdk =A0 =A0 =A0 =A0 =A0 Do not use cdk
-> =A0--with-cdk-prefix=3DPREFIX
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0Location of cdk
-> =A0--without-jpeg =A0 =A0 =A0 =A0 =A0Do not use jpeg
-> =A0--with-jpeg-prefix=3DPREFIX
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0Location of jpeg
-> =A0--with-libexif=3DPREFIX =A0 where to find libexif, "no" or "auto"
-> =A0--without-aalib =A0 =A0 =A0 =A0 Do not use aalib
-> =A0--without-readline =A0 =A0 =A0Do not use readline
->
-> All things that are not mentioned in DEPENDS should (IMHO) be
-> explicitly be turned off.
-> And for the things in DEPENDS I would encourage to still add them.
-> E.g. --with-jpeg. Yes I know these will always be picked up when a
-> DEPENDS =3D "jpeg" is present, but making it explict does not hurt and
-> it trips an error if jpeg is not there and someone does a bitbake -b
-> of the recipe (instead of silently building a package without jpeg).
->
-> Thanks for your contribution & apologies for using your commit for a
-> rant on configure flags.
->
-> Frans.
->
+A question -- is the build supposed to be using the build host's automake,
+or is it supposed to be using one from its downloaded toolchain?
 
-I agree with you here. Often a recipe breaks when a particular
-subsystem is enabled, which is usually not enabled during regular
-image builds. And it can be difficult to determine if something should
-be added to DEPENDS or disabled at configure time.
 
-What I found with gphoto2 (which probably wasn't clear) was the
-configure script was testing for jpeg and cdk with
--I/usr/local/include. So I guessed on what was useful and what wasn't
-and added jpeg to depends to make it clear that jpeg support was
-intended (even though it will likely be pulled in by other
-dependencies).
-
-I assume you just want exif and readline disabled too? (and possibly
-an essay in the commit message :))
-
--Graham
-
+Thanks,
+Zach
 
