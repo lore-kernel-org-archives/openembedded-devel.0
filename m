@@ -1,33 +1,42 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1PDgOK-0005GX-O6
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 17:40:54 +0100
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LBB0095AIA9Y815@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	03 Nov 2010 11:39:51 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id DA58314AF64; Wed,
-	03 Nov 2010 12:39:44 -0400 (EDT)
-Date: Wed, 03 Nov 2010 12:39:44 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PDhZY-0000kB-9W for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Nov 2010 18:56:33 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PDhYi-0007xt-IY for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Nov 2010 18:55:40 +0100
+Received: from d75-157-36-238.bchsia.telus.net ([75.157.36.238])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Nov 2010 18:55:40 +0100
+Received: from dfoley by d75-157-36-238.bchsia.telus.net with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Nov 2010 18:55:40 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20101103163944.GF11514@denix.org>
-References: <20101103090635.GD32553@excalibur.local>
-MIME-version: 1.0
-In-reply-to: <20101103090635.GD32553@excalibur.local>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.17
-X-SA-Exim-Mail-From: denis@denix.org
+From: Dallas Foley <dfoley@telus.net>
+Date: Wed, 03 Nov 2010 10:55:28 -0700
+Message-ID: <4CD1A210.5000007@telus.net>
+References: <1288776534.3980.33.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: d75-157-36-238.bchsia.telus.net
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+In-Reply-To: <1288776534.3980.33.camel@mattotaupa>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Listing of received donations
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH] vlc_1.1.4.1: add `lua5.1` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +50,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 16:40:54 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 03 Nov 2010 17:56:33 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Nov 03, 2010 at 10:06:35AM +0100, Stefan Schmidt wrote:
-> Hello.
-> 
-> The OpenEmbedded project received different donations over the time. From
-> hosting over hardware to money.
-> 
-> We, as a project, are really appreciate this but failed so far to have a clear
-> listing of received donations to give credit. During OEDEM I volunteered to set
-> up such a list as a protected wiki page. I just finished the first version/draft
-> for it and would like to get some feedback on it. Not really on design but on
-> missing items or corrections. I'm sure I got some things wrong or missed some.
-> :)
-> 
-> Companies that want to have a small Logo next to their name and link please send
-> me an image. This will be added later on.
-> 
-> http://wiki.openembedded.org/index.php/Donations
+On 10-11-03 02:28 AM, Paul Menzel wrote:
+> Date: Wed, 3 Nov 2010 09:52:36 +0100
+>
+> After VLC 1.0.6, being the latest version in OE until addition of 1.1.4.1 in commit 30e362 [2], some interfaces were implemented in Lua in VLC 1.1.0 [1].
+>
+> 	Interfaces:
+> 	 * Renamed the legacy rc, telnet and http interfaces to oldrc, oldtelnet and oldhttp.
+> 	 * rc, telnet and http are now implemented using the lua interface system.
+>
+> Task `configure` fails with the following error message.
+>
+> 	[…]
+> 	| checking for LUA... no
+> 	| configure: WARNING: lua5.1 not found, trying lua>= 5.1 instead
+> 	| checking for LUA... no
+> 	| checking lua.h usability... no
+> 	| checking lua.h presence... no
+> 	| checking for lua.h... no
+> 	| checking lauxlib.h usability... no
+> 	| checking lauxlib.h presence... no
+> 	| checking for lauxlib.h... no
+> 	| checking lualib.h usability... no
+> 	| checking lualib.h presence... no
+> 	| checking for lualib.h... no
+> 	| checking for luaL_newstate in -llua5.1 ... no
+> 	| checking for luaL_newstate in -llua51 ... no
+> 	| checking for luaL_newstate in -llua ... no
+> 	| configure: error: Could not find lua. Lua is needed for some interfaces (rc, telnet, http) as well as many other custom scripts. Use --disable-lua to ignore this error.
+> 	| ERROR: Function do_configure failed
+> 	NOTE: package vlc-1.1.4.1-r0: task do_configure: Failed
+> 	[…]
+>
+> Adding `lua5.1` to `DEPENDS` is chosen in favor of disabling it.
+>
+> [1] http://git.videolan.org/?p=vlc.git;a=commitdiff;h=3c1df96cda8086f605f2eacaa5653c9e43ec45ac
+> [2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=30e362c22a49521ebeef9bed1f0c58902b7dc50b
+>
+> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
+> ---
+>   recipes/vlc/vlc_1.1.4.1.bb |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
+> index d4535a5..ef764c1 100644
+> --- a/recipes/vlc/vlc_1.1.4.1.bb
+> +++ b/recipes/vlc/vlc_1.1.4.1.bb
+> @@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "61c9ea30a17ea40c6ccbfd507026e5c83ad9e0691f221d3667c8e49696
+>
+>   # ffmpeg from git (library version =>  52) is required
+>   # libtool-native must be>= 2.2.4
+> -DEPENDS += "libdvdcss libdvdread"
+> +DEPENDS += "libdvdcss libdvdread lua"
+>
+>   EXTRA_OECONF += "\
+>   	--enable-dvdread \
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Stefan,
+I seem to need lua5.1 and lua5.1-native in DEPENDS for this vlc as opposed to just lua.
+ie. DEPENDS += "libdvdcss libdvdread lua5.1 lua5.1-native"
 
-Thank you for your effort!
+I doubt this has anything to do with it, but I am using DISTRO="angstrom-2010.x"
+and setting
+ANGSTROM_LIBTOOL_VERSION = "2.2.6b"
+LIBTOOL_HAS_SYSROOT = "no"
+only because apache2 does not configure with the newer libtool
 
--- 
-Denys
+
+
+
+
 
 
