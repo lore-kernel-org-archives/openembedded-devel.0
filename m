@@ -1,45 +1,41 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PDjeb-0008MJ-Ft
+	(envelope-from <Tom_Rini@mentor.com>) id 1PDjmP-0002C2-Qa
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 21:09:55 +0100
-Received: by ywo7 with SMTP id 7so268740ywo.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 13:09:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=YGomZzJmQKNvCJVF7ZR5H9A5nvx72nxkAC9BQYiD120=;
-	b=JzeDO6A2rAqzbcO/GScfLrbaVWMKd2hbMKheTtAt47qo8g23iatuW6nMtGnidKCHKA
-	br4xme1IKbytyM3VPokl04QWP+ClonhyBo0OKA6h5G7d+qHQc074szGNgpqNP0EaMGrq
-	N03+6Uy1oa1DxE8itZ8oL6JJYi4lvnYHAl8m4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=OOaVCCuLbV3jKqeA+T93FcxMiJD7gPE9ScBB8/OkG1adEuF8R8lvYSpa/hYxn5AlvO
-	zpmOAjCcSOs8SmMEZVwOgh4eY03Wrln1j1AI+MjdFIKl2MS17Hl5e4827tWJP/ORgnWE
-	zviVrJQGqcbHr23X+njKz8BP3PuSdvKMirc+w=
-Received: by 10.91.11.6 with SMTP id o6mr1473061agi.91.1288814941475; Wed, 03
-	Nov 2010 13:09:01 -0700 (PDT)
+	Wed, 03 Nov 2010 21:17:59 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1PDjla-0007Ll-2a from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Nov 2010 13:17:06 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 3 Nov 2010 13:17:05 -0700
+Received: from [172.30.80.221] ([172.30.80.221]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 3 Nov 2010 14:17:05 -0600
+Message-ID: <4CD1C33D.3040207@mentor.com>
+Date: Wed, 03 Nov 2010 13:17:01 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.91.135.18 with HTTP; Wed, 3 Nov 2010 13:08:40 -0700 (PDT)
-In-Reply-To: <4CD1A210.5000007@telus.net>
-References: <1288776534.3980.33.camel@mattotaupa> <4CD1A210.5000007@telus.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Nov 2010 13:08:40 -0700
-Message-ID: <AANLkTikPj2HeqhVfMpnk+6ToBh2o2p6MYod=K9y1w-4s@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <i9p1d0$7q4$1@dough.gmane.org>	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>	<iaptb1$bpb$1@dough.gmane.org>
+	<4CD07F3E.7040703@eukrea.com>	<4CD080E2.2000706@mentor.com>	<AANLkTi=3GwhFb27DDyHnOcQEk1oskP1NSEUw_qaZdNyr@mail.gmail.com>	<4CD178C2.9010303@mentor.com>
+	<AANLkTi=D76QqygmJRdOPEeZJNL9N2X0vyYV8UPVNDPDH@mail.gmail.com>
+In-Reply-To: <AANLkTi=D76QqygmJRdOPEeZJNL9N2X0vyYV8UPVNDPDH@mail.gmail.com>
+X-OriginalArrivalTime: 03 Nov 2010 20:17:05.0345 (UTC)
+	FILETIME=[1554DB10:01CB7B94]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
-Subject: Re: [PATCH] vlc_1.1.4.1: add `lua5.1` to `DEPENDS`
+Subject: Re: [RFC] turning conf/machine into a set of bblayers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,122 +49,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 20:09:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Nov 2010 20:17:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Nov 3, 2010 at 10:55 AM, Dallas Foley <dfoley@telus.net> wrote:
-> On 10-11-03 02:28 AM, Paul Menzel wrote:
+Frans Meulenbroeks wrote:
+> 2010/11/3 Tom Rini <tom_rini@mentor.com>:
+>> Frans Meulenbroeks wrote:
+>>> 2010/11/2 Tom Rini <tom_rini@mentor.com>:
+>>>> Eric Bénard wrote:
+>>>>> Hi,
+>>>>>
+>>>>> Le 02/11/2010 21:46, Koen Kooi a écrit :
+>>>>>> I do fear that pulling things into seperate layers too much will make
+>>>>>> it
+>>>>>> harder to propagate fixes...
+>>>>>>
+>>>>> yes, in your example, the fines in conf/machine/include are common to
+>>>>> all
+>>>>> omap boards (and even all cortexa8 for tune-cortexa8.inc) and thus when
+>>>>> fixing one BSP you have to think to fix the others (and to communicate
+>>>>> the
+>>>>> fix to other BSP maintainers).
+>>>>> The same apply for most of the .inc in recipes-bsp/*/.
+>>>>>
+>>>>> Do you think the following setup is possible ?
+>>>>>
+>>>>> - ARM overlay (containing all generic files for ARM achitecture :
+>>>>> conf/machines/include for example)
+>>>>>
+>>>>> - OMAP3 overlay (containing all generic files for OMAP3 SOC :
+>>>>> conf/machines/include/omap* + recipes/linux u-boot x-load base files for
+>>>>> omap3 architecture,
+>>>>>
+>>>>> - specific board overlay (conf/machine/themachine.conf + board specific
+>>>>> additions in recipes/linux u-boot & x-load (with patches based on top of
+>>>>> the
+>>>>> OMAP3 overlay).
+>>>> How about:
+>>>>
+>>>> - allow some form of conf/machine/include to continue to exist in the
+>>>> main
+>>>> layer
+>>>>
+>>>> ? There would have to be some judgment calls, but I don't think that
+>>>> should
+>>>> be too hard, over when it's SOC_FAMILY or when it's very generic.
+>>>>  Basically
+>>>> the ARM overlay wouldn't be created in this case (nor the PPC nor MIPS
+>>>> nor
+>>>> ...).  But we must avoid duplicating tune-coretexa8.inc and similar.
+>>>>
+>>> I'd say it is definitely nice to have a arch specific overlay (e.g.
+>>> ARM, MIPS, PPC, Nios2) which contains the specific recipes for that
+>>> architecture.
+>>> To give an example:
+>>> For nios2 the only backend is for gcc 4.1.2 and binutils
+>>> 17.50.something. I can imagine that at some point in time it is
+>>> decided not to support these in the mainline/standard/common/base
+>>> system. In such a case I think the arch specific overlay would be a
+>>> good place.
+>> I would argue that so long as someone is maintaining nios2 that means we
+>> can't drop gcc 4.1.2 until there's another stable version for it.  And
+>> having that in the nios2 overlay means that it might well start to miss
+>> generic fixes, if we aren't careful.
 >>
->> Date: Wed, 3 Nov 2010 09:52:36 +0100
+>> Don't get me wrong, I'm quite in favor of breaking things up, and putting on
+>> my Mentor hat, we have machine specific overlays and like it.
+> 
+> I understand you. Problem is that I have been peeking into moving
+> nios2 forward, but the changes in the back end structure between 4.1
+> and 4.5 are not really minimal, and while I have a basic understanding
+> on compiler internals, I'm by no means a gcc wiz. So guess 4.1.2 for
+> nios will be around for quite a while.
+> And yes, I prefer to keep it on the mainline. as long as possible.
+> Actually I was mostly using this as an example (because I know this one best).
+> 
+>>> Whether there should be an omap3 specific overlay (or wheter it should
+>>> be cortexA8, or maybe cortexA8 and omap3) remains probably to be seen.
+>>> I would suggest initially storing these in the arm machine overlay. If
+>>> that one becomes too crowded we alwasy can create an additional layer.
+>> I'm wary of getting too many overlays involved to describe rather simple
+>> cases.  An SOC_FAMILY makes sense as an overlay as multiple boards will use
+>> it but not all boards of that overall cpu architecture will.
 >>
->> After VLC 1.0.6, being the latest version in OE until addition of 1.1.4.=
-1
->> in commit 30e362 [2], some interfaces were implemented in Lua in VLC 1.1=
-.0
->> [1].
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0Interfaces:
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 * Renamed the legacy rc, telnet and http int=
-erfaces to oldrc,
->> oldtelnet and oldhttp.
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 * rc, telnet and http are now implemented us=
-ing the lua interface
->> system.
->>
->> Task `configure` fails with the following error message.
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for LUA... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| configure: WARNING: lua5.1 not found, tryin=
-g lua>=3D 5.1 instead
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for LUA... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lua.h usability... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lua.h presence... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for lua.h... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lauxlib.h usability... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lauxlib.h presence... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for lauxlib.h... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lualib.h usability... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lualib.h presence... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for lualib.h... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for luaL_newstate in -llua5.1 ... =
-no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for luaL_newstate in -llua51 ... n=
-o
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for luaL_newstate in -llua ... no
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| configure: error: Could not find lua. Lua i=
-s needed for some
->> interfaces (rc, telnet, http) as well as many other custom scripts. Use
->> --disable-lua to ignore this error.
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0| ERROR: Function do_configure failed
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0NOTE: package vlc-1.1.4.1-r0: task do_configu=
-re: Failed
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
->>
->> Adding `lua5.1` to `DEPENDS` is chosen in favor of disabling it.
->>
->> [1]
->> http://git.videolan.org/?p=3Dvlc.git;a=3Dcommitdiff;h=3D3c1df96cda8086f6=
-05f2eacaa5653c9e43ec45ac
->> [2]
->> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D30e362c2=
-2a49521ebeef9bed1f0c58902b7dc50b
->>
->> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
->> ---
->> =C2=A0recipes/vlc/vlc_1.1.4.1.bb | =C2=A0 =C2=A02 +-
->> =C2=A01 files changed, 1 insertions(+), 1 deletions(-)
->>
->> diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
->> index d4535a5..ef764c1 100644
->> --- a/recipes/vlc/vlc_1.1.4.1.bb
->> +++ b/recipes/vlc/vlc_1.1.4.1.bb
->> @@ -10,7 +10,7 @@ SRC_URI[sha256sum] =3D
->> "61c9ea30a17ea40c6ccbfd507026e5c83ad9e0691f221d3667c8e49696
->>
->> =C2=A0# ffmpeg from git (library version =3D> =C2=A052) is required
->> =C2=A0# libtool-native must be>=3D 2.2.4
->> -DEPENDS +=3D "libdvdcss libdvdread"
->> +DEPENDS +=3D "libdvdcss libdvdread lua"
->>
->> =C2=A0EXTRA_OECONF +=3D "\
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0--enable-dvdread \
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> I seem to need lua5.1 and lua5.1-native in DEPENDS for this vlc as oppose=
-d
-> to just lua.
-> ie. DEPENDS +=3D "libdvdcss libdvdread lua5.1 lua5.1-native"
->
-> I doubt this has anything to do with it, but I am using
-> DISTRO=3D"angstrom-2010.x"
-> and setting
-> ANGSTROM_LIBTOOL_VERSION =3D "2.2.6b"
-> LIBTOOL_HAS_SYSROOT =3D "no"
-> only because apache2 does not configure with the newer libtool
->
+> 
+> True. I have no strong feelings in favour or against a soc family layer.
+> The thing that worries me is that we get too many very small layers.
+> If there is little content in the soc layer, I would not mind getting
+> that in the ARM layer (in this case).
+> If needed we can always split it up.
 
-did you report the apache problem and details about it before ?
-if not the please do. I would say we should find the reasoning when we
-add something to DEPENDS
-the addition is simple but impact may be too far reaching.
+So we're in agreement, good :)
 
->
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> We might also want to peek at how the kernel arch dir and/or the
+> u-boot arch dir are organized.
+
+Some arches are done better than others, of course...
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
