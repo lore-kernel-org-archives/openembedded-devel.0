@@ -1,42 +1,36 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PDjcR-0008FC-S2
+	(envelope-from <raj.khem@gmail.com>) id 1PDjeb-0008MJ-Ft
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 21:07:40 +0100
-Received: by gyf3 with SMTP id 3so867119gyf.6
+	Wed, 03 Nov 2010 21:09:55 +0100
+Received: by ywo7 with SMTP id 7so268740ywo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 13:06:48 -0700 (PDT)
+	Wed, 03 Nov 2010 13:09:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=kcX7cOEFNX8kNTzKuhpStWZwiar5EwvCwLbcaGSs5W0=;
-	b=aG3u6eqdkecpY29rknOVwDlT7TbdYzV+ZnnaE9vxOYM+3vUEadORpq236TCDKleoE5
-	B3G8x5KCq8YrWJ/I42E90EJhAwFf7v1fbm2GQxvLLIJrQpKagnnYH7RkqIPWdrdIk4Q2
-	jlfJGdsbiqkEu+Sj3zA4ORK94j1maDo/2X32I=
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=YGomZzJmQKNvCJVF7ZR5H9A5nvx72nxkAC9BQYiD120=;
+	b=JzeDO6A2rAqzbcO/GScfLrbaVWMKd2hbMKheTtAt47qo8g23iatuW6nMtGnidKCHKA
+	br4xme1IKbytyM3VPokl04QWP+ClonhyBo0OKA6h5G7d+qHQc074szGNgpqNP0EaMGrq
+	N03+6Uy1oa1DxE8itZ8oL6JJYi4lvnYHAl8m4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=B9l1rhKm1fy9v7e7v/9OPy7Tt922xs+Cmk1/Ya1LGB056IdpywyfjXRazg375QzNT1
-	YIe2jGCUF4uNTWq90txoSZ/VbJo+FE5hMFUOpjPELujMVuA1/jIplZKB9t5J1hy2qhr2
-	DkCgQ4SqYzJVhktXAyMcsU4QFqE36/WCXrzzY=
-Received: by 10.91.153.10 with SMTP id f10mr1448003ago.172.1288814807758; Wed,
-	03 Nov 2010 13:06:47 -0700 (PDT)
+	:cc:content-type:content-transfer-encoding;
+	b=OOaVCCuLbV3jKqeA+T93FcxMiJD7gPE9ScBB8/OkG1adEuF8R8lvYSpa/hYxn5AlvO
+	zpmOAjCcSOs8SmMEZVwOgh4eY03Wrln1j1AI+MjdFIKl2MS17Hl5e4827tWJP/ORgnWE
+	zviVrJQGqcbHr23X+njKz8BP3PuSdvKMirc+w=
+Received: by 10.91.11.6 with SMTP id o6mr1473061agi.91.1288814941475; Wed, 03
+	Nov 2010 13:09:01 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.91.135.18 with HTTP; Wed, 3 Nov 2010 13:06:27 -0700 (PDT)
-In-Reply-To: <AANLkTikcC1DKQ8ADas78qPZRMeGF09MXY8ph7qoZT=1Y@mail.gmail.com>
-References: <4CCF64DD.9080709@gmail.com>
-	<AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
-	<AANLkTiktvcs1HsktTWaFATVDR492tPCHb_d7JU1xm_uW@mail.gmail.com>
-	<AANLkTinjMC_Eou5Bt9FE07Vn-4xXD_2ugrgCGKgcPxvP@mail.gmail.com>
-	<AANLkTinN5pGVW6-aos16m7gZo2ytaF1cgh+9uO3k+G+9@mail.gmail.com>
-	<20101103154735.GE3440@jama>
-	<AANLkTi=d_G9A0Mf2zMzG-9zmec06vYNaB1pLrkDQnyvE@mail.gmail.com>
-	<AANLkTikcC1DKQ8ADas78qPZRMeGF09MXY8ph7qoZT=1Y@mail.gmail.com>
+Received: by 10.91.135.18 with HTTP; Wed, 3 Nov 2010 13:08:40 -0700 (PDT)
+In-Reply-To: <4CD1A210.5000007@telus.net>
+References: <1288776534.3980.33.camel@mattotaupa> <4CD1A210.5000007@telus.net>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Nov 2010 13:06:27 -0700
-Message-ID: <AANLkTimcum78VPKqr9YiFYUdYf84Hnifs9Phs9uUAQt4@mail.gmail.com>
+Date: Wed, 3 Nov 2010 13:08:40 -0700
+Message-ID: <AANLkTikPj2HeqhVfMpnk+6ToBh2o2p6MYod=K9y1w-4s@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 209.85.213.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -44,7 +38,8 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gphoto2_2.4.8.bb: Stop configure from looking in /usr/local/include
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: [PATCH] vlc_1.1.4.1: add `lua5.1` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,34 +53,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 20:07:40 -0000
+X-List-Received-Date: Wed, 03 Nov 2010 20:09:55 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 3, 2010 at 12:04 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
->
+On Wed, Nov 3, 2010 at 10:55 AM, Dallas Foley <dfoley@telus.net> wrote:
+> On 10-11-03 02:28 AM, Paul Menzel wrote:
 >>
->> yes a more detailed solution is better. you have to go through the
->> configure of every
->> package and understand the behavior then act upon. As I said before
->> its a tedious task
+>> Date: Wed, 3 Nov 2010 09:52:36 +0100
 >>
-> I'm well aware of this. That is also why in the infrastructure thread
-> I suggested using automated testing to find misbehaving packages.
+>> After VLC 1.0.6, being the latest version in OE until addition of 1.1.4.=
+1
+>> in commit 30e362 [2], some interfaces were implemented in Lua in VLC 1.1=
+.0
+>> [1].
+>>
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0Interfaces:
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 * Renamed the legacy rc, telnet and http int=
+erfaces to oldrc,
+>> oldtelnet and oldhttp.
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 * rc, telnet and http are now implemented us=
+ing the lua interface
+>> system.
+>>
+>> Task `configure` fails with the following error message.
+>>
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for LUA... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| configure: WARNING: lua5.1 not found, tryin=
+g lua>=3D 5.1 instead
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for LUA... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lua.h usability... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lua.h presence... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for lua.h... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lauxlib.h usability... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lauxlib.h presence... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for lauxlib.h... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lualib.h usability... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking lualib.h presence... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for lualib.h... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for luaL_newstate in -llua5.1 ... =
+no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for luaL_newstate in -llua51 ... n=
+o
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| checking for luaL_newstate in -llua ... no
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| configure: error: Could not find lua. Lua i=
+s needed for some
+>> interfaces (rc, telnet, http) as well as many other custom scripts. Use
+>> --disable-lua to ignore this error.
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0| ERROR: Function do_configure failed
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0NOTE: package vlc-1.1.4.1-r0: task do_configu=
+re: Failed
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
+>>
+>> Adding `lua5.1` to `DEPENDS` is chosen in favor of disabling it.
+>>
+>> [1]
+>> http://git.videolan.org/?p=3Dvlc.git;a=3Dcommitdiff;h=3D3c1df96cda8086f6=
+05f2eacaa5653c9e43ec45ac
+>> [2]
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D30e362c2=
+2a49521ebeef9bed1f0c58902b7dc50b
+>>
+>> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
+>> ---
+>> =C2=A0recipes/vlc/vlc_1.1.4.1.bb | =C2=A0 =C2=A02 +-
+>> =C2=A01 files changed, 1 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
+>> index d4535a5..ef764c1 100644
+>> --- a/recipes/vlc/vlc_1.1.4.1.bb
+>> +++ b/recipes/vlc/vlc_1.1.4.1.bb
+>> @@ -10,7 +10,7 @@ SRC_URI[sha256sum] =3D
+>> "61c9ea30a17ea40c6ccbfd507026e5c83ad9e0691f221d3667c8e49696
+>>
+>> =C2=A0# ffmpeg from git (library version =3D> =C2=A052) is required
+>> =C2=A0# libtool-native must be>=3D 2.2.4
+>> -DEPENDS +=3D "libdvdcss libdvdread"
+>> +DEPENDS +=3D "libdvdcss libdvdread lua"
+>>
+>> =C2=A0EXTRA_OECONF +=3D "\
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0--enable-dvdread \
+>>
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> Btw there are 355 .inc files that contain the word autotools and 1899 .bb files.
-> Of course there are lots of dups in there.
-> And maybe for the base recipes we can convince the yocto people that
-> this is a serious QA issue (and they have some people employed to work
-> on this if I understood properly).
+> I seem to need lua5.1 and lua5.1-native in DEPENDS for this vlc as oppose=
+d
+> to just lua.
+> ie. DEPENDS +=3D "libdvdcss libdvdread lua5.1 lua5.1-native"
+>
+> I doubt this has anything to do with it, but I am using
+> DISTRO=3D"angstrom-2010.x"
+> and setting
+> ANGSTROM_LIBTOOL_VERSION =3D "2.2.6b"
+> LIBTOOL_HAS_SYSROOT =3D "no"
+> only because apache2 does not configure with the newer libtool
 >
 
-numbers means not so much when it comes down to this. I don't know if
-any distribution that even does that
-so I take comfort in everyone being wrong.
+did you report the apache problem and details about it before ?
+if not the please do. I would say we should find the reasoning when we
+add something to DEPENDS
+the addition is simple but impact may be too far reaching.
 
-> Frans
+>
+>
+>
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
