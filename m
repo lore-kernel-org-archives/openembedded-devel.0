@@ -1,44 +1,36 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PDlav-0006Cz-T5
+	(envelope-from <raj.khem@gmail.com>) id 1PDm1Z-0001zF-MG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 23:14:15 +0100
-Received: by gyf3 with SMTP id 3so955541gyf.6
+	Wed, 03 Nov 2010 23:41:46 +0100
+Received: by pxi2 with SMTP id 2so58414pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 15:13:22 -0700 (PDT)
+	Wed, 03 Nov 2010 15:40:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=V5K64J5NiU3zWmJzvIHMhSRT/KOiGin5bKXCbvC4oEE=;
-	b=oPq6pJxmLkpHDuAMMAI4IPYF5bpRY+Hh8wfj5XLEB3eOHEG2o8oBu1yFA5iVketA8u
-	P4fkaLzOcDqh5uuJKb+cCkBvH943zGuyRV7JpsiSyyCjLKuqgf43uKYCAWfb5YJ6rkMA
-	mEnFnWji22/uGNS57g+Uf5bEEhRLY3MJVD02Y=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=3WrjeNRXw/QQrc2JJ2G2Igi16TlUrayqBtUrkJdyjEg=;
+	b=h98PTj1DbymUhQDEHyJ4IT67N10EtllAoh9cJpGarYhkdrtpp6jO4cM4eRwiGRVOcI
+	dHIlq6/ibXU/efUGOW+6UjXAw1dVALVg5DGeX8QP0dzh8UJ9qiMn2nVUhtksNhckb0P7
+	7gwn1kQy0ArC8hG15xHqaaR9vO/DtvUjZrHhU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=nKLaoJ5/ib5u95al1+UGQw6Qj2TudnZ5qS4epZCwxBnkOkoeJn0VGZzTVRir7By82E
-	7DIyDR8uJBkxqVrrP6UiSP825ols+2wTxzvJT8QvkskthJ2QGj65lf4zBe7WhHyx5IrW
-	hIxFvHE0uJxlm24jaJQIpwgzFPiH8kGDD+/J0=
-Received: by 10.90.20.1 with SMTP id 1mr124538agt.145.1288822401013; Wed, 03
-	Nov 2010 15:13:21 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.91.135.18 with HTTP; Wed, 3 Nov 2010 15:13:00 -0700 (PDT)
-In-Reply-To: <AANLkTikNnKRhrVWf0J92eazn=C4p4anByx3F+mJBj3kK@mail.gmail.com>
-References: <i9p1d0$7q4$1@dough.gmane.org>
-	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>
-	<iaptb1$bpb$1@dough.gmane.org> <4CD07F3E.7040703@eukrea.com>
-	<4CD080E2.2000706@mentor.com>
-	<AANLkTi=3GwhFb27DDyHnOcQEk1oskP1NSEUw_qaZdNyr@mail.gmail.com>
-	<4CD178C2.9010303@mentor.com>
-	<AANLkTi=D76QqygmJRdOPEeZJNL9N2X0vyYV8UPVNDPDH@mail.gmail.com>
-	<4CD1C33D.3040207@mentor.com>
-	<AANLkTiknWyRh2L9u9jbgYgvK5dXx7x2VFeKGhh89TAxJ@mail.gmail.com>
-	<AANLkTikNnKRhrVWf0J92eazn=C4p4anByx3F+mJBj3kK@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=D1uVdFDXH4+RztxVuqFuDjeJZOtB+i+ty3U6R1uAHlMhIiSLIiwX+8Vfno5xBWkUiv
+	65wvcGF7RKjUGNgFKtVx1P1v8lRiiyb+W+u26BVTokEz2Tw9ExjO3XQjPPn+qazASa/b
+	ZfIuBGSCyHWP2JJRsBUZtI60KSD9eMk8o2mPs=
+Received: by 10.142.194.4 with SMTP id r4mr8009547wff.264.1288824053029;
+	Wed, 03 Nov 2010 15:40:53 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id e36sm14342545wfj.2.2010.11.03.15.40.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 03 Nov 2010 15:40:51 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Nov 2010 15:13:00 -0700
-Message-ID: <AANLkTikK6_rzCr3wGONnLwBjGtbfp8ycwfhfu77eXTQZ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+Date: Wed,  3 Nov 2010 15:40:35 -0700
+Message-Id: <1288824035-27654-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -46,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: [PATCH] metadata_scm.bbclass: get the metadata revision for current HEAD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,26 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 22:14:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Nov 2010 22:41:46 -0000
 
->>
-> I'm not planning to.
-> This would be the solution if for one reason or another gcc 4.1.2 was
-> kicked from the base layers (or the associated binutils).
-> I have a very strong preference ot keep them in the base layer.
-> This was only intended as an example.
-> Apologies for the misunderstanding and confusion.
->
+Currently we report wrong revision when we build from branches not based
+on master because we only fetch the HEAD value which is remote master
+This patch makes it to report the HEAD of whatever branch one has
+checked out.
 
-No recipes that are actively used should ever be deleted.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/metadata_scm.bbclass |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-> FM
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/classes/metadata_scm.bbclass b/classes/metadata_scm.bbclass
+index ffc6a8a..37024b7 100644
+--- a/classes/metadata_scm.bbclass
++++ b/classes/metadata_scm.bbclass
+@@ -70,7 +70,8 @@ def base_get_metadata_git_branch(path, d):
+ 	return "<unknown>"
+ 
+ def base_get_metadata_git_revision(path, d):
+-	rev = os.popen("cd %s; PATH=%s git show-ref HEAD 2>/dev/null" % (path, d.getVar("PATH", 1))).read().split(" ")[0].rstrip()
++	branch = os.path.basename(base_get_metadata_git_branch(path, d))
++	rev = os.popen("cd %s; PATH=%s git show-ref HEAD %s 2>/dev/null" % (path, d.getVar("PATH", 1), branch)).read().split(" ")[0].rstrip()
+ 	if len(rev) != 0:
+ 		return rev
+ 	return "<unknown>"
+-- 
+1.7.1
+
 
 
