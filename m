@@ -1,44 +1,40 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PDm1Z-0001zF-MG
+	(envelope-from <vwyodapink@gmail.com>) id 1PDmFN-0002Zw-0s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Nov 2010 23:41:46 +0100
-Received: by pxi2 with SMTP id 2so58414pxi.6
+	Wed, 03 Nov 2010 23:56:01 +0100
+Received: by qyk9 with SMTP id 9so168800qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 15:40:53 -0700 (PDT)
+	Wed, 03 Nov 2010 15:55:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=3WrjeNRXw/QQrc2JJ2G2Igi16TlUrayqBtUrkJdyjEg=;
-	b=h98PTj1DbymUhQDEHyJ4IT67N10EtllAoh9cJpGarYhkdrtpp6jO4cM4eRwiGRVOcI
-	dHIlq6/ibXU/efUGOW+6UjXAw1dVALVg5DGeX8QP0dzh8UJ9qiMn2nVUhtksNhckb0P7
-	7gwn1kQy0ArC8hG15xHqaaR9vO/DtvUjZrHhU=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=r+tGhI3ZRJd6vcpbreABj09yJ7nUDS+u2EUnMam9XNM=;
+	b=rykrsLxx1perS5uFjFydYTWczVCzuluV2SnpnkEOlVza0kmv/mWKXLkRgOmeL8QKJ6
+	Q2rj1djwbbANDB5xKtqWPb9d2RtKhc93vhzIVAsVZ2qw4ZJEEXDZPhUmhDC8jjETlCCp
+	N3XZBZRzuSxJZngSOZ1wsrCpAS2abosXm0ooU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=D1uVdFDXH4+RztxVuqFuDjeJZOtB+i+ty3U6R1uAHlMhIiSLIiwX+8Vfno5xBWkUiv
-	65wvcGF7RKjUGNgFKtVx1P1v8lRiiyb+W+u26BVTokEz2Tw9ExjO3XQjPPn+qazASa/b
-	ZfIuBGSCyHWP2JJRsBUZtI60KSD9eMk8o2mPs=
-Received: by 10.142.194.4 with SMTP id r4mr8009547wff.264.1288824053029;
-	Wed, 03 Nov 2010 15:40:53 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id e36sm14342545wfj.2.2010.11.03.15.40.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 03 Nov 2010 15:40:51 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=jg8t3UfmEVgNoa9mLWoA8qMzFTJe1FgmfBDn+a4tJdT8LEbWrTZutfrQGz7lcS55Ku
+	0qK2XpIjQloBOgUamNTj+UIby7l65GK0MxqnoTxpzDpwSumN2Os6J/cpQYv9wFJUeotg
+	M82oeP+QWR3RSb5nduNe7k9iiBdNbbYhWzcL8=
+MIME-Version: 1.0
+Received: by 10.229.91.75 with SMTP id l11mr18099194qcm.24.1288824908241; Wed,
+	03 Nov 2010 15:55:08 -0700 (PDT)
+Received: by 10.229.8.210 with HTTP; Wed, 3 Nov 2010 15:55:08 -0700 (PDT)
+Date: Wed, 3 Nov 2010 15:55:08 -0700
+Message-ID: <AANLkTik9vuL4RR0x1mn_dSGXP2r2dn1RrgbOyxqYw+TD@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Nov 2010 15:40:35 -0700
-Message-Id: <1288824035-27654-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] metadata_scm.bbclass: get the metadata revision for current HEAD
+Subject: problems building openldap and libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +48,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 22:41:46 -0000
+X-List-Received-Date: Wed, 03 Nov 2010 22:56:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Currently we report wrong revision when we build from branches not based
-on master because we only fetch the HEAD value which is remote master
-This patch makes it to report the HEAD of whatever branch one has
-checked out.
+I am having an issue of how libtool is building on my machine. I am
+running Ubuntu 10.10 64bit Kernel 2.6.35-23-generic bitbake 1.10.1
+overo branch. Here is what happens when building:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- classes/metadata_scm.bbclass |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Error for openldap
+NOTE: package openldap-2.4.23-r2: task do_configure: Started
+ERROR: Function do_configure failed
+NOTE: Task failed: ('function do_configure failed',
+'/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/openldap-2.4.23-r2/temp/log.do_configure.12815')
+ERROR: Logfile of failure stored in:
+/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/openldap-2.4.23-r2/temp/log.do_configure.12815
+Log data follows:
+| cp: cannot stat
+`/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/libtool/ltmain.sh':
+No such file or directory
+| ERROR: Function do_configure failed
+NOTE: package openldap-2.4.23-r2: task do_configure: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/vdubhack/overo-oe/org.openembedded.dev/recipes/openldap/openldap_2.4.23.bb
+do_configure failed
+ERROR: Task 6423
+(/home/vdubhack/overo-oe/org.openembedded.dev/recipes/openldap/openldap_2.4.23.bb,
+do_configure) failed with 256
 
-diff --git a/classes/metadata_scm.bbclass b/classes/metadata_scm.bbclass
-index ffc6a8a..37024b7 100644
---- a/classes/metadata_scm.bbclass
-+++ b/classes/metadata_scm.bbclass
-@@ -70,7 +70,8 @@ def base_get_metadata_git_branch(path, d):
- 	return "<unknown>"
- 
- def base_get_metadata_git_revision(path, d):
--	rev = os.popen("cd %s; PATH=%s git show-ref HEAD 2>/dev/null" % (path, d.getVar("PATH", 1))).read().split(" ")[0].rstrip()
-+	branch = os.path.basename(base_get_metadata_git_branch(path, d))
-+	rev = os.popen("cd %s; PATH=%s git show-ref HEAD %s 2>/dev/null" % (path, d.getVar("PATH", 1), branch)).read().split(" ")[0].rstrip()
- 	if len(rev) != 0:
- 		return rev
- 	return "<unknown>"
--- 
-1.7.1
+location libtool actually is being installed to
+vdubhack@FEDUAV:~/overo-oe$ find tmp/sysroots -name "ltmain.sh"
+tmp/sysroots/armv7a-angstrom-linux-gnueabi/home/vdubhack/overo-oe/tmp/sysroots/x86_64-linux/usr/share/libtool/ltmain.sh
+tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/doc/gettext/examples/hello-c++-kde/admin/ltmain.sh
+tmp/sysroots/x86_64-linux/usr/share/doc/gettext/examples/hello-c++-kde/admin/ltmain.sh
+tmp/sysroots/x86_64-linux/usr/share/libtool/config/ltmain.sh
 
+Problem location:
+vdubhack@FEDUAV:~/overo-oe$ find tmp/sysroots -name "ltmain.sh"
+tmp/sysroots/armv7a-angstrom-linux-gnueabi/home/vdubhack/overo-oe/tmp/sysroots/x86_64-linux/usr/share/libtool/ltmain.sh
+
+aclocal and aclocal-1.11 also get installed this way
+
+
+I can manually work around this by copying the file its not finding to
+the location its asking but I am not sure thats really fixing any of
+the problem. Also do not understand why aclocal and aclocal-1.11 are
+being built in the same manner of libtool. Does anyone have any
+suggestions on how to properly fix this ? Thanks for any help on this
+one.
 
 
