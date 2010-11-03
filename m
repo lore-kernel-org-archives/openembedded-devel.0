@@ -1,43 +1,35 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PDmiN-0003Za-13
+Received: from 30.mail-out.ovh.net ([213.186.62.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PDmkv-0003jv-5H
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 00:25:59 +0100
-Received: by gyf3 with SMTP id 3so988159gyf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Nov 2010 16:25:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=5Sy673ji5HbGvnpFLqbzJhQKRzqoEYQ8SMtk9ywD9qQ=;
-	b=a1f15kvX7WFtqdTiejBZB+9XRxtZx08r3v+qzqTH9NvLHiXTgPWV7fyoTKYIILbNxK
-	/Ms0VsCFxTwrjMwJXIFHUH91V39H360QN11jiuSSmgi7pcI/zQ9qE2tNl29Q8yzkYBtk
-	HlUHjSmY1Oekrgh1g7h6xgsPjLOu+9nw20928=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=rNQ71M5OJIjBCJRXE7R+7apqeieoZm3CTQEfnp9LV4wkORTW0JJPPhl2djH2YR2ExP
-	942bJOBNX5UkCPJsM0ZIqbUCUx5yjy3HjEM+o6FYkbs7ilFes87SURQ022uyVhhYdN5f
-	Cjf1dsUOxSfpl5kuLqiaYTYjYgQJFlZ18H0TI=
-Received: by 10.90.57.2 with SMTP id f2mr205100aga.118.1288826706438; Wed, 03
-	Nov 2010 16:25:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.91.135.18 with HTTP; Wed, 3 Nov 2010 16:24:46 -0700 (PDT)
-In-Reply-To: <AANLkTik9vuL4RR0x1mn_dSGXP2r2dn1RrgbOyxqYw+TD@mail.gmail.com>
-References: <AANLkTik9vuL4RR0x1mn_dSGXP2r2dn1RrgbOyxqYw+TD@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Nov 2010 16:24:46 -0700
-Message-ID: <AANLkTim-aV6bGmFZN3sg-w83ji1DGBvKJAh=DabPL-ij@mail.gmail.com>
+	Thu, 04 Nov 2010 00:28:37 +0100
+Received: (qmail 16129 invoked by uid 503); 3 Nov 2010 23:06:20 -0000
+Received: from b9.ovh.net (HELO mail632.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 3 Nov 2010 23:06:20 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 4 Nov 2010 01:27:48 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 4 Nov 2010 01:27:47 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Thu,  4 Nov 2010 00:28:54 +0100
+Message-Id: <1288826934-8339-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 17290163394802724169
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 213.186.62.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: problems building openldap and libtool
+Cc: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [PATCH] own-mirrors.bbclass: allow mirroring of scm fetched packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 23:25:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Nov 2010 23:28:37 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Nov 3, 2010 at 3:55 PM, J. L. <vwyodapink@gmail.com> wrote:
-> I am having an issue of how libtool is building on my machine. I am
-> running Ubuntu 10.10 64bit Kernel 2.6.35-23-generic bitbake 1.10.1
-> overo branch. Here is what happens when building:
->
-> Error for openldap
-> NOTE: package openldap-2.4.23-r2: task do_configure: Started
-> ERROR: Function do_configure failed
-> NOTE: Task failed: ('function do_configure failed',
-> '/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/openldap-2.4.23-r2/temp/log.do_configure.12815')
-> ERROR: Logfile of failure stored in:
-> /home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/openldap-2.4.23-r2/temp/log.do_configure.12815
-> Log data follows:
-> | cp: cannot stat
-> `/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/libtool/ltmain.sh':
-> No such file or directory
+this way, it's possible to setup a local webserver (for example
+using busybox httpd -p "8081" -h backuped_download_dir) serving
+a presiously fetched download directory and to build wihout the
+need for an internet access
 
-can you add DEPENDS += "libtool" to openldap_2.4.23.bb and retry ?
+this can also be used when connected to know to know which packages
+are missing from the local mirror's directory (and thus are fetched
+from internet as a fallback), it's possible to run the server this way :
+busybox httpd -p "8081" -h backuped_download_dir -vv -f | grep -B 1  response:404
+to get the name of the missing packages.
 
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ classes/own-mirrors.bbclass |    7 ++++++-
+ 1 files changed, 6 insertions(+), 1 deletions(-)
 
--khem
+diff --git a/classes/own-mirrors.bbclass b/classes/own-mirrors.bbclass
+index e8a0f48..720ce42 100644
+--- a/classes/own-mirrors.bbclass
++++ b/classes/own-mirrors.bbclass
+@@ -1,4 +1,9 @@
+ PREMIRRORS() {
+-https?://.*/.* ${SOURCE_MIRROR_URL}
++cvs://.*/.* ${SOURCE_MIRROR_URL}
++svn://.*/.* ${SOURCE_MIRROR_URL}
++git://.*/.* ${SOURCE_MIRROR_URL}
++hg://.*/.* ${SOURCE_MIRROR_URL}
++bzr://.*/.* ${SOURCE_MIRROR_URL}
++https?$://.*/.* ${SOURCE_MIRROR_URL}
+ ftp://.*/.*  ${SOURCE_MIRROR_URL}
+ }
+-- 
+1.6.3.3
+
 
 
