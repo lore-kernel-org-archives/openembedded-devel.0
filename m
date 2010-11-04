@@ -1,44 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PDua1-0003yw-HM for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 08:49:54 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PDuZD-0007ph-Di for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 08:49:03 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Nov 2010 08:49:03 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PDudG-00070S-8M
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Nov 2010 08:53:14 +0100
+Received: by gyf3 with SMTP id 3so1221726gyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Nov 2010 08:49:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 04 Nov 2010 00:52:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=BIldo9IqAmgrg7NQY4ho/07xOEIWlTNT1+3DnhyhWe8=;
+	b=oM3L/AI3Jf+xykYupjIGf1RYE5pzD5iAtGhg8Og951Wp7Y0F2DcJW9giFNCvLOMxwp
+	2RUnyKHeHVq34XR/wAc6M+YbWNNR4whhX4iQDzBvw2K7deq8Zdp9xqbhiYHG9xB62mFY
+	8I4iOJrCkHH9CeJkkEHPrRXnXoPE1LwZ36x4Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=sFbUIbmmH5yEXbsi9i4Mk7RvI9xci8wsdU7iRaXwaMzR3rwkpYLgci6+aqDLa+cg5B
+	UfyTvhTB6qju9CizRR3cinV3Qt/swSRt4xRhEDHMMc3nbtBr3jaZ2N1OoOoREP+PYoqL
+	tXqE3CxYPi37LzBGgoEee4XQnte96WDn8bWB0=
+MIME-Version: 1.0
+Received: by 10.42.74.137 with SMTP id w9mr117234icj.201.1288857140918; Thu,
+	04 Nov 2010 00:52:20 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Thu, 4 Nov 2010 00:52:20 -0700 (PDT)
+Date: Thu, 4 Nov 2010 08:52:20 +0100
+Message-ID: <AANLkTinM20gDzarHTf1DpNEXxtF+9b1itgDyrkXQHw=X@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 04 Nov 2010 08:48:51 +0100
-Message-ID: <iatoh3$1mq$1@dough.gmane.org>
-References: <i9p1d0$7q4$1@dough.gmane.org>	<AANLkTimRY+gDbK9jZvUEuxMAu3PvQ8pnfb3oXjAXeU0B@mail.gmail.com>	<iaptb1$bpb$1@dough.gmane.org>
-	<4CD07F3E.7040703@eukrea.com>	<4CD080E2.2000706@mentor.com>	<AANLkTi=3GwhFb27DDyHnOcQEk1oskP1NSEUw_qaZdNyr@mail.gmail.com>	<4CD178C2.9010303@mentor.com>	<AANLkTi=D76QqygmJRdOPEeZJNL9N2X0vyYV8UPVNDPDH@mail.gmail.com>	<4CD1C33D.3040207@mentor.com>
-	<AANLkTiknWyRh2L9u9jbgYgvK5dXx7x2VFeKGhh89TAxJ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.14) Gecko/20101002 Shredder/3.0.9pre
-In-Reply-To: <AANLkTiknWyRh2L9u9jbgYgvK5dXx7x2VFeKGhh89TAxJ@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] turning conf/machine into a set of bblayers
+Subject: dangling symlinks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,31 +48,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 07:49:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Nov 2010 07:53:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dear all,
 
-On 03-11-10 21:44, Khem Raj wrote:
+Wrt messages like this in do_package:
+NOTE: sysvinit-utils contains dangling symlink to /usr/bin/last
+NOTE: sysvinit contains dangling symlink to /sbin/halt
+NOTE: sysvinit contains dangling symlink to /sbin/init
+NOTE: sysvinit contains dangling symlink to /sbin/halt
 
-> I dont think it would make sense to put things like gcc and binutils
-> and core components
-> into overlays.
+I know that the link will (most likely) be resolved when installing the package.
 
-I would put those into a 'devtools' layer, like poky has done.
+I would expect do_package to detect if the symlink src actually exists
+and if so it could be silent.
+But if the link is not there, I guess I would raise this to at least a
+WARN and maybe even to an ERROR.
 
-regards,
+No idea how to fix this though.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM0mVjMkyGM64RGpERAspiAKCCVvbm5EWD3OejRvjSCxAxbBEsoQCfVjND
-kvkJ8A0aRkuCV5lP28eXLas=
-=rw7D
------END PGP SIGNATURE-----
-
+Frans
 
 
