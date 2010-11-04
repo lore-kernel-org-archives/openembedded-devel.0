@@ -1,44 +1,46 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PDy4y-0005P9-Pc
+	(envelope-from <andrea.adami@gmail.com>) id 1PDyv3-0005aW-Ct
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 12:34:19 +0100
-Received: by gxk26 with SMTP id 26so1338577gxk.6
+	Thu, 04 Nov 2010 13:27:54 +0100
+Received: by qyk7 with SMTP id 7so1124366qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Nov 2010 04:33:12 -0700 (PDT)
+	Thu, 04 Nov 2010 05:27:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=0ECg4wdxxzDo/QbB9UWrw37qbCPkn2KwtJumSgs6Ajo=;
-	b=EhCgAgo0WKdEYcaWy1y2pHF7nm6yQDQwVrQ3vEpDkQmqTVuhK63GhvzP9X9ivN50lf
-	gOWrdbGPRW4y5vqq5PX+CV2k41pwVU7gGYt5w2VvdLyqBaxSf6OKl+R16XGBcssYfitK
-	Eth5lGge85WvxJrANCplo+Y3CnpZY4SpCHNtI=
+	bh=oYcl0acg8a8I+QwLOREDLwdJZl0vSXHjKImyLwiB6b8=;
+	b=NU5Xy06dw4yRvmC3hK710Z+PyLAmtd4JzfWb8cW/sxJoygW4vRuXwlmi+yofVLCFMJ
+	xJblLftH20F4yltgddLskluNSn1Uu6uYtbUB1wxNyEqwLNoHql0u37nhYzWcgwDJwojQ
+	EBnaCaysAlFDqn9O0oc20d3bTBg/Yws3w9Hxs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=nKQrtM47OC5A1cEu8SgRW3UEbzIFqTnSyIvqM4jwJE952qXakhdH4T7nPMEOE8O8Za
-	EncJ8237Zowzvk5R3jISOSFHJB5XOL3gGBbyhpO+H4imK3b3eRnEhm/kGIHQXvAgWnYv
-	lWOvBhAhIPaodEodwH/+9nK/cYYblNpklEISQ=
+	b=iOd2L3DcBPa2VY5qaTSK5v8zRRDt9tY9+EC3gQVkwgw0Skwu3bNY23T7ClibINMO1s
+	hEs7NY3QAwoS6CKNHT591bQcHFc9Rcc1roKPFW4DCf7jmxTdSyMX2ME7vVhbjI5CYTf9
+	j2r8d9kay2HiJiN7hi4as4VP4nMt7u0WDhSVQ=
 MIME-Version: 1.0
-Received: by 10.231.17.203 with SMTP id t11mr352863iba.1.1288870392277; Thu,
-	04 Nov 2010 04:33:12 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Thu, 4 Nov 2010 04:33:12 -0700 (PDT)
-In-Reply-To: <20101104082759.GG19934@excalibur.local>
-References: <20101104082759.GG19934@excalibur.local>
-Date: Thu, 4 Nov 2010 12:33:12 +0100
-Message-ID: <AANLkTinLp2jLhp1QCs8YdUXtSg7rXgq-TMK_8_vc8dSO@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.224.212.133 with SMTP id gs5mr624795qab.172.1288873620530;
+	Thu, 04 Nov 2010 05:27:00 -0700 (PDT)
+Received: by 10.229.212.85 with HTTP; Thu, 4 Nov 2010 05:27:00 -0700 (PDT)
+In-Reply-To: <AANLkTikzjkHxbXd3iCBny0yoNPBVTH4_LyhuYfSpg-SV@mail.gmail.com>
+References: <AANLkTinXYcNN=iozP-aXPDuFzQqM13KDf5my1W6DTap6@mail.gmail.com>
+	<4CC500A2.7020702@gmail.com>
+	<AANLkTikzjkHxbXd3iCBny0yoNPBVTH4_LyhuYfSpg-SV@mail.gmail.com>
+Date: Thu, 4 Nov 2010 13:27:00 +0100
+Message-ID: <AANLkTimXqxS4rCPXuxx=_MhdKfG1yTA8gbnowUEYB0vn@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Patchwork cleanup weekend in two days
+Subject: Re: Race issues (lzma-native)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,47 +54,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 11:34:53 -0000
+X-List-Received-Date: Thu, 04 Nov 2010 12:27:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/11/4 Stefan Schmidt <stefan@datenfreihafen.org>:
-> Hello.
->
-> Its time for some house-keeping again. I know many people are working on
-> patchwork on-going, thanks for that.
->
-> Looking throught it during OEDEM did still show up way to many entries. S=
-ome are
-> still from 2009. Next Saturday and Sunday I would like to reduce our =A0c=
-urrent
-> count from 273 patches. 100 or less would be a nice goal imho.
->
-> Steps to help out:
-> 1) make sure you have a patchwork account and are added to the admin grou=
-p to
-> =A0 change patches
-> 2) Hang out on IRC on saturday and sunday
-> 3) Go through the patchwork and find all patches from yourself and up dat=
-e them
-> =A0 with a current status. e.g. mark them as superseeded if you send a ne=
-w version
-> =A0 or applied if they hit the tree.
-> 4) After your own patches pick other ones and try to find out about their
-> =A0 current staus. Usually git log, the ml or asking people on IRC helps =
-here to
-> =A0 find out stuff about the patch.
->
-> If you cleaned up more then 10 patches a day you are allowed to drink a b=
-eer in
-> the evening. ;)
+FWIW Issue is still present.
 
-I would love to help out, but as it stands I'll be travelling on
-saturday and won't have internet access on sat and sun (and probably
-the rest of the week neither)
-(but I'll drink the beer anyway :-) ).
-Wish you all the best cleaning up!
+I'll try the workaround you posted.
 
-Frans
+Andrea
+
+
+
+On Tue, Oct 26, 2010 at 9:58 AM, Andrea Adami <andrea.adami@gmail.com> wrot=
+e:
+> Just to add this time the race appears building on Ubuntu 10.4 32bit.
+> Last race-case (gtk+-native) was only on Gentoo and not on Ubuntu...
+>
+> Both distros are on the same Quad host and share =A0an EXT3 OpenEmbedded
+> partition, though.
+>
+> PARALLEL_MAKE =3D "-j5"
+> BB_NUMBER_THREADS =3D "4"
+>
+>
+> Perplexed...
+>
+> Andrea
+>
+> On Mon, Oct 25, 2010 at 5:59 AM, Graham Gower <graham.gower@gmail.com> wr=
+ote:
+>> On 10/24/2010 07:29 PM, Andrea Adami wrote:
+>>> Hello,
+>>>
+>>> during first build of console image I notice a strange fault:
+>>> subsequent builds are ok.
+>>> My scripts builds console-image and opie-image.
+>>>
+>>> ERROR: Task 2411
+>>> (virtual:native:/oe/openembedded/recipes/lzma/lzma_4.65.bb,
+>>> do_distribute_sources) failed with exit code '1'
+>>> NOTE: Unpacking ../sources/lzma465.tar.bz2 to
+>>> tmp/work/i686-linux/lzma-native-4.65-r4.1/
+>>> NOTE: package lzma-native-4.65-r4.1: task do_distribute_sources: Starte=
+d
+>>> NOTE: package lzma-native-4.65-r4.1: task SRC_DISTRIBUTECOMMAND: Failed
+>>> ERROR: Function 'SRC_DISTRIBUTECOMMAND' failed
+>>>
+>>>
+>>> Looking at the
+>>> run.SRC_DISTRIBUTECOMMAND.18268 =A0 16384 (failing)
+>>> run.SRC_DISTRIBUTECOMMAND.9570 =A0 =A0 34334
+>>>
+>>> it looks like the file is not complete / malformed:
+>>>
+>>> package_generate_ipkg_conf() {
+>>> <------>mkdir -p /oe/build/tmp/sysroots/i686-linux/etc/
+>>> <------>echo "src oe file:/oe/build/tmp/deploy/glibc/ipk" >
+>>> /oe/build/tmp/sysroots/i686-linux/etc/opkg.conf
+>>> <------>echo "src oe file:/
+>>> EOF
+>>>
+>>> run.do_distribute_sources.18268 =A0is empty, while second time
+>>> run.do_distribute_sources.9570 =A0 1051 contains =A0def do_distribute_s=
+ources(d):
+>>>
+>>> This seems indeed a race issue...
+>>>
+>>> Andrea
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>> I can reproduce this one quite easily. Reverting a6a23f73 seems to make =
+it
+>> disappear. Alternately the change below works, but I'm not convinced thi=
+s is
+>> the right fix.
+>>
+>> Can someone with greater insight explain what causes this race?
+>>
+>> -Graham
+>>
+>>
+>> diff --git a/classes/src_distribute.bbclass b/classes/src_distribute.bbc=
+lass
+>> index 795a5cf..98d8d88 100644
+>> --- a/classes/src_distribute.bbclass
+>> +++ b/classes/src_distribute.bbclass
+>> @@ -1,7 +1,7 @@
+>> =A0SRC_DISTRIBUTE_DLONLY ?=3D "0"
+>> =A0SRC_DISTRIBUTECOMMAND[func] =3D "1"
+>>
+>> -addtask distribute_sources before do_build after do_fetch
+>> +addtask distribute_sources before do_build after do_unpack
+>> =A0python do_distribute_sources () {
+>> =A0 =A0 =A0 =A0bb.build.exec_func("do_fetch", d)
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
 
 
