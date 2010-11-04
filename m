@@ -1,34 +1,40 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1PE8c9-0000kD-79
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 23:49:02 +0100
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LBD002TRTZSAHJ2@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	04 Nov 2010 17:47:58 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1E60714AF6A; Thu,
-	04 Nov 2010 18:47:52 -0400 (EDT)
-Date: Thu, 04 Nov 2010 18:47:52 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20101104224752.GH28852@denix.org>
-References: <AANLkTikEvXr_vz+_uy871SM1B5SS=e6kb62sPyt-4GaD@mail.gmail.com>
-	<20101104220649.GE28852@denix.org> <4CD3349D.6060904@eukrea.com>
-MIME-version: 1.0
-In-reply-to: <4CD3349D.6060904@eukrea.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.17
-X-SA-Exim-Mail-From: denis@denix.org
+	(envelope-from <raj.khem@gmail.com>) id 1PE9LY-0001SI-Jh
+	for Openembedded-devel@lists.openembedded.org;
+	Fri, 05 Nov 2010 00:35:58 +0100
+Received: by gwaa11 with SMTP id a11so1940323gwa.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Nov 2010 16:35:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=wXjjnAXwtHENXcZkQ3DB2iPQC/+pYRiB9nBlHhdsET8=;
+	b=S8hWvUj9g6wUNs2akH4u/pcxVKrSkGfqReCoHcQ1hIHxGFbFIt+dsoU6nNLt3kas57
+	Y6m1hSXZ6gxnJ9bG6vh1tuY9PkzyVfQmw/DG17DyAaZTHmClhu3Ig2LLL6WJNOJC+8Cs
+	0lBNm1sA6KU9KIpUzNfH0yhFPWTbErtOgvgVg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=LE1AtiFl6qO+wGBvzgDvAXkxbGcsU+s21+fpenvHmAzhGM5BRopD3eVBVIZN7MZS9r
+	Oq5fFOGhtvWHdKqtnC1qPrOZVpbhH6X77t9nJjGXoA9PBPU4aW1YCex1KlAZdLyu0GrS
+	ip9tIDGlynUpiGkW53hM+oJRluvc6uDPihxqc=
+Received: by 10.90.15.31 with SMTP id 31mr421579ago.10.1288913702769; Thu, 04
+	Nov 2010 16:35:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Thu, 4 Nov 2010 16:34:42 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 4 Nov 2010 16:34:42 -0700
+Message-ID: <AANLkTin8J-vi624U2Z4Emr=Zajq0+CsSnFR=a8+kjuOv@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded Release 2010.12 --- needs your help!
+Subject: Moving to layered structure of openembedded metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,48 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 22:49:02 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 04 Nov 2010 23:35:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, Nov 04, 2010 at 11:33:01PM +0100, Eric B?nard wrote:
-> Hi,
->
-> Le 04/11/2010 23:06, Denys Dmytriyenko a ?crit :
->> On Thu, Nov 04, 2010 at 09:04:43PM +0100, Leon Woestenberg wrote:
->>> Hello all,
->>>
->>> at OEDEM we discussed the need for OpenEmbedded releases.
->>>
->>> - OpenEmbedded releases are planned in certain months, so that we can
->>> plan stabilization efforts in the future.
->>> - Each release is a point release in time.
->>> - A release is a candidate branch point for a stable branch (which can
->>> be maintained by those who use it).
->>> - The next release is planned 2010.12, more specifically December 1st.
->>> That's only four weeks from now.
->>> - The 2010.12 release is hand-picked from a recent testing branch.
->>
->> - OpenEmbedded releases are planned to be time based and happen every 3 
->> month
->> (quarterly), starting with the first one on December 1st.
->>
-> - what about a "no major change" freeze period for 2-3 weeks before each 
-> release to have a enough time to stabilize a little bit the beast ?
+Hi
 
-I thought Leon kind of mentioned it in the first bullet point above, but 
-probably not very clear. And yes, we definitely need a 2-3 weeks "feature 
-freeze" period for stabilization. Thanks for pointing it out.
+In recent discussions there seems to be a lot of interest in moving
+towards more layered structure in OE where we discussed machine
+layers and arch based layers. There certainly are advantages to this
+approach as discussed in other threads on mailing list
+I think poky has already achieved that to a certain extent and has
+made metadata changes
+needed for such a structure. There are other polishing to metadata
+which is beneficial in general like recipe licenses, gcc runtime
+demystification etc. I would like to suggest that we adopt this
+structure and use Poky as core layer which we
+should always maintain in coherence and add the extra
+machines,architectures and recipes as additional layers around
+the base layer.
 
->>> Now that our testing team has the process in place to gather test
->>> results, please consider to build your
->>> favorite set of distro/machine targets using tinderbox, and report your 
->>> results.
->>>
->>> One requirement is to use bitbake 1.10, as the minimal requirement
->>> will soon be 1.10 for the OpenEmbedded metadata.
+This will also help us to scale the project and
+reduce the to and fro in merges as well as communities at large will
+benefit by seamless flow
+of patches and other contributions.
 
--- 
-Denys
+This will of course need a lot of work and I wanted to bring to
+everyone to know if this would be a good approach moving
+forward.
+
+Thanks
+
+-Khem
 
 
