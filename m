@@ -1,40 +1,33 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1PE7eJ-0002fC-AP
+	(envelope-from <denis@denix.org>) id 1PE7yU-0002af-I4
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 22:47:11 +0100
-Received: by wya21 with SMTP id 21so2417559wya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Nov 2010 14:46:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=T3hthAw1y9pa4XBIWBkhcsJTqYnIVhg5AGZ5DRTpZ24=;
-	b=V5FoVm4GXSkA/Hb0eITPMAJchHurYXjJOKg8nfHZciIXEo3rgGwe0To18njvZcQBVw
-	bXlq32bF2TNaNPqX45iRU9zXQnHG+6+eB5YX4nLl6G51bT7poZo7OEWDt+y6jzwYbPoH
-	lshA/KVSGWZdkdh3brRvDAszVM9bfdZmVgbBI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=CICQx+BEb593VkMTo7lDztDzHRbu+/ksqfsoBrxImJZtOU/lDzTQlEX9Sfi7pXkPJD
-	WveFse8Mz9k8Vi4gbo+7MTNG/8YL5j3iLaGLL8aM+c0Dudez6NmnCsMG4jkEm/wRIS8H
-	xygcYlmShSTp/CblwnFybmJB69gbVH3vyRDHY=
-MIME-Version: 1.0
-Received: by 10.216.162.70 with SMTP id x48mr386130wek.4.1288907178789; Thu,
-	04 Nov 2010 14:46:18 -0700 (PDT)
-Received: by 10.216.235.214 with HTTP; Thu, 4 Nov 2010 14:46:18 -0700 (PDT)
-Date: Thu, 4 Nov 2010 17:46:18 -0400
-Message-ID: <AANLkTimLpymROEFYv6+TsvtRP-nf8xzNKFp+-d6Q9K8r@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Thu, 04 Nov 2010 23:08:03 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LBD008HSS3EM9DB@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	04 Nov 2010 17:06:51 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D493B14AF6A; Thu,
+	04 Nov 2010 18:06:49 -0400 (EDT)
+Date: Thu, 04 Nov 2010 18:06:49 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Message-id: <20101104220649.GE28852@denix.org>
+References: <AANLkTikEvXr_vz+_uy871SM1B5SS=e6kb62sPyt-4GaD@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <AANLkTikEvXr_vz+_uy871SM1B5SS=e6kb62sPyt-4GaD@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: testing branch 2010-11-04
+Subject: Re: OpenEmbedded Release 2010.12 --- needs your help!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 21:47:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 04 Nov 2010 22:08:03 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Had a decent run with testing last week as a number of combinations built:
+On Thu, Nov 04, 2010 at 09:04:43PM +0100, Leon Woestenberg wrote:
+> Hello all,
+> 
+> at OEDEM we discussed the need for OpenEmbedded releases.
+> 
+> - OpenEmbedded releases are planned in certain months, so that we can
+> plan stabilization efforts in the future.
+> - Each release is a point release in time.
+> - A release is a candidate branch point for a stable branch (which can
+> be maintained by those who use it).
+> - The next release is planned 2010.12, more specifically December 1st.
+> That's only four weeks from now.
+> - The 2010.12 release is hand-picked from a recent testing branch.
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-10-29
+- OpenEmbedded releases are planned to be time based and happen every 3 month 
+(quarterly), starting with the first one on December 1st.
 
-testing-next is ready for clean builds.  testing branch has been moved
-forward to last weeks testing-next.
-
-For more information on testing, please see:
-http://wiki.openembedded.org/index.php/Testing#Testing_Log
-
-Thanks,
-Cliff
+> Now that our testing team has the process in place to gather test
+> results, please consider to build your
+> favorite set of distro/machine targets using tinderbox, and report your results.
+> 
+> One requirement is to use bitbake 1.10, as the minimal requirement
+> will soon be 1.10 for the OpenEmbedded metadata.
 
 -- 
-=================
-http://bec-systems.com
+Denys
 
 
