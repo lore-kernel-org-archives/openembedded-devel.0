@@ -1,40 +1,51 @@
-Received: from smtp1.irobot.com ([206.83.81.187])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <harvey.tim@gmail.com>) id 1PE3EZ-0006kR-Je
+	(envelope-from <raj.khem@gmail.com>) id 1PE4CV-0005vA-Oi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 18:04:20 +0100
-X-AuditID: 0a460614-b7b54ae0000032d7-30-4cd2e75e595a
-Received: from webmail.irobot.com (Unknown_Domain [10.70.6.12])
-	by smtp1.irobot.com (Symantec Brightmail Gateway) with SMTP id
-	A8.50.13015.E57E2DC4; Thu,  4 Nov 2010 13:03:26 -0400 (EDT)
-Received: from fever2.wardrobe.irobot.com ([192.168.163.187]) by
-	webmail.irobot.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 4 Nov 2010 13:03:27 -0400
-Received: from [192.168.69.108] ([192.168.69.108]) by
-	fever2.wardrobe.irobot.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 4 Nov 2010 13:03:26 -0400
-Message-ID: <4CD2E750.4020909@gmail.com>
-Date: Thu, 04 Nov 2010 10:03:12 -0700
-From: Tim Harvey <harvey.tim@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Thu, 04 Nov 2010 19:06:17 +0100
+Received: by pzk34 with SMTP id 34so317545pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Nov 2010 11:05:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=FL7jGPP4d+gX3w774QRCA6jxyU6E8Nv4yXaeqXuyruU=;
+	b=gXOLQltvjL8ZFf31mbIjy775Op6C3YlTSgW1c4TwhiOrzaxyieJ/Wc2NOPAXc71To4
+	vllAASFu7tfRrlESeNEkjsRHJgeMkN9kfO2L7894H5eRXLzlrtsgdMs+r7Qw/6lkaN7N
+	jF/snqui7WTPXesGwwSO35IrZYfbg0rrArGjQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=H5VbstvodUmoxF9FKf8z/xVkPoBC7r7fANqcguCg6S/PAWPCUZE1f3VUebMliX/Se7
+	pm/av1HOjH4j84X6QlY0NWMzrhoeguGo/VHkjXZB0Mm92tnLiKx4sf2eVBhqKsh9r8/4
+	fOUgEzG+VcKrLI8o9fIkymqMAtvsgUN58akUA=
+Received: by 10.142.229.8 with SMTP id b8mr1036730wfh.20.1288893921322;
+	Thu, 04 Nov 2010 11:05:21 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id e14sm257986wfg.20.2010.11.04.11.05.18
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 04 Nov 2010 11:05:20 -0700 (PDT)
+Date: Thu, 4 Nov 2010 11:05:45 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1288880282-13579-1-git-send-email-kergoth@gmail.com>
-In-Reply-To: <1288880282-13579-1-git-send-email-kergoth@gmail.com>
-X-OriginalArrivalTime: 04 Nov 2010 17:03:26.0579 (UTC)
-	FILETIME=[326B9C30:01CB7C42]
-X-Brightmail-Tracker: AAAAAA==
-X-SA-Exim-Connect-IP: 206.83.81.187
-X-SA-Exim-Mail-From: harvey.tim@gmail.com
+Message-ID: <20101104180545.GA21548@gmail.com>
+References: <1288864342-20973-1-git-send-email-eric@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <1288864342-20973-1-git-send-email-eric@eukrea.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH] metadata_scm: use rev-parse rather than show-ref
+Cc: Eric =?utf-8?Q?B=C3=A9nard?= <eric@eukrea.com>
+Subject: Re: [PATCH/RFC] qt4-embedded: tune QT_ARCH for armv6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,58 +59,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 17:04:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Nov 2010 18:06:17 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On 11/04/2010 07:18 AM, Chris Larson wrote:
-> From: Chris Larson<chris_larson@mentor.com>
->
-> show-ref will show all matching refs, so a "show-ref HEAD" will show not just
-> the local HEAD, but the fetched remote ones as well.  This isn't what we want
-> for this function, so change it to use rev-parse with --verify, and also
-> change it to use --short, to shorten the hash to a more palatable length.
->
-> Signed-off-by: Chris Larson<chris_larson@mentor.com>
+On (04/11/10 10:52), Eric Bénard wrote:
+> this is a RFC, I think it can also be used on qt 4.6.x and on armv7.
+> Setting QT_ARCH to armv6 enable some asm optimized functions in QT.
+> 
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
 > ---
->   classes/metadata_scm.bbclass |   22 +++++++++++++---------
->   1 files changed, 13 insertions(+), 9 deletions(-)
->
-> diff --git a/classes/metadata_scm.bbclass b/classes/metadata_scm.bbclass
-> index ffc6a8a..f79ea19 100644
-> --- a/classes/metadata_scm.bbclass
-> +++ b/classes/metadata_scm.bbclass
-> @@ -63,14 +63,18 @@ def base_get_metadata_svn_revision(path, d):
->   	return revision
->
->   def base_get_metadata_git_branch(path, d):
-> -	branch = os.popen('cd %s; PATH=%s git symbolic-ref HEAD 2>/dev/null' % (path, d.getVar("PATH", 1))).read().rstrip()
-> -
-> -	if len(branch) != 0:
-> -		return branch.replace("refs/heads/", "")
-> -	return "<unknown>"
-> +    try:
-> +        rev = oe_run(d, ["git", "symbolic-ref", "HEAD"], cwd=path).rstrip()
-> +    except oe.process.CmdError:
-> +        rev = "<unknown>"
-> +    else:
-> +        rev = rev.replace("refs/heads/", "")
-> +    return rev
->
->   def base_get_metadata_git_revision(path, d):
-> -	rev = os.popen("cd %s; PATH=%s git show-ref HEAD 2>/dev/null" % (path, d.getVar("PATH", 1))).read().split(" ")[0].rstrip()
-> -	if len(rev) != 0:
-> -		return rev
-> -	return "<unknown>"
-> +    try:
-> +        rev = oe_run(d, ["git", "rev-parse", "--verify", "--short", "HEAD"],
-> +                     cwd=path).rstrip()
-> +    except oe.process.CmdError:
-> +        rev = "<unknown>"
-> +    return rev
-
-This resolves prior issues I had with revision mismatch
-
-Acked-by: Tim Harvey <harvey.tim@gmail.com>
+>  recipes/qt4/qt4-embedded_4.7.0.bb |    3 ++-
+>  1 files changed, 2 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/qt4/qt4-embedded_4.7.0.bb b/recipes/qt4/qt4-embedded_4.7.0.bb
+> index 7e3d4b8..fbfaf85 100644
+> --- a/recipes/qt4/qt4-embedded_4.7.0.bb
+> +++ b/recipes/qt4/qt4-embedded_4.7.0.bb
+> @@ -2,9 +2,10 @@ DEFAULT_PREFERENCE = "-1"
+>  
+>  require qt4-embedded.inc
+>  
+> -PR = "${INC_PR}.1"
+> +PR = "${INC_PR}.2"
+>  
+>  QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
+> +QT_ARCH_armv6 = "armv6"
+>  
+>  require qt-${PV}.inc
+>  
+> -- 
+> 1.6.3.3
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
