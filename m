@@ -1,44 +1,40 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PDziC-0007Cd-Pz
+	(envelope-from <Tom_Rini@mentor.com>) id 1PDzyu-0002yg-Mr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 14:18:41 +0100
-Received: by ywo7 with SMTP id 7so841017ywo.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Nov 2010 06:17:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=enu0N8wfQYpq4vyrKrseL0+vqz+7D3RHMNYCTiOEKAg=;
-	b=EUU4qrJ52hU2e4dJ1/95HntIJ9eOA49cp0X3idSRGuVvQ8DM7H70VQvGmSrzNOnJub
-	OcDr/UZGnpJ0MtPyCjWLR54PB1qKvEKmk4UBApB+uDVwrlH56GZh/VZsfAO2P1Sf9w2h
-	X/cuvvpDhUCqeFSLzQ40NIC76iS11O5IqCWvg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=LkPLD4OGSD7L477RABUERKJl60vP6RCFyk2RXsxYfriF5srf8sXXkwxSBggpvGndI7
-	kViL2P2R5amCmi3csB5QwWpLnoJPfdTvCg9tjEMEiGvXPZum2h3WWj5szH87pe5ibXQ1
-	9opxmF5UNMX+9WetweWf8ZuJxzO8BBhVopFAg=
+	Thu, 04 Nov 2010 14:35:57 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1PDzy4-0003tA-Hd from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Nov 2010 06:35:04 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 4 Nov 2010 06:35:04 -0700
+Received: from [172.30.80.135] ([172.30.80.135]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 4 Nov 2010 07:35:03 -0600
+Message-ID: <4CD2B685.4040409@mentor.com>
+Date: Thu, 04 Nov 2010 06:35:01 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.42.74.137 with SMTP id w9mr344453icj.201.1288876668481; Thu,
-	04 Nov 2010 06:17:48 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Thu, 4 Nov 2010 06:17:48 -0700 (PDT)
-In-Reply-To: <AANLkTinLp2jLhp1QCs8YdUXtSg7rXgq-TMK_8_vc8dSO@mail.gmail.com>
-References: <20101104082759.GG19934@excalibur.local>
-	<AANLkTinLp2jLhp1QCs8YdUXtSg7rXgq-TMK_8_vc8dSO@mail.gmail.com>
-Date: Thu, 4 Nov 2010 14:17:48 +0100
-Message-ID: <AANLkTinQPXEC9=nNu6=Ea0qd8Ly-Qpaa6Aboo8jF1HL3@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <09D9BE2AC4AA764DABAA8C91E48D819ED3A429F2@DEMCHP99E35MSX.ww902.siemens.net>
+	<09D9BE2AC4AA764DABAA8C91E48D819ED3A42A56@DEMCHP99E35MSX.ww902.siemens.net>
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819ED3A42A56@DEMCHP99E35MSX.ww902.siemens.net>
+X-OriginalArrivalTime: 04 Nov 2010 13:35:03.0888 (UTC)
+	FILETIME=[163C5D00:01CB7C25]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Patchwork cleanup weekend in two days
+Subject: Re: packaged-staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,18 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 13:18:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 04 Nov 2010 13:35:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Oh, one more thing,
+Aeschbacher, Fabrice wrote:
+> I forgot to say we are using bitbake 1.8.12 and branch stable/2009 
 
-Of course it is not up to me how you guys spent your time, but if
-there is time and interest left after going through patchwork it would
-be nice if people could also have a peek at bugzilla and/or peek at
-the recipes that do not even fetch any more (see email from Martin
-from april or so).
+packaged-staging isn't complete there, sorry.
 
-Have fun (& thanks for the effort!)
-Frans
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
