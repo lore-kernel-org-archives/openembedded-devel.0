@@ -1,44 +1,44 @@
-Received: from david.siemens.de ([192.35.17.14])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PDzHV-0003V9-32
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PDziC-0007Cd-Pz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 13:51:10 +0100
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by david.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
-	oA4CoF92018358 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Nov 2010 13:50:15 +0100
-Received: from DEMCHP99ET1MSX.ww902.siemens.net
-	(demchp99et1msx.ww902.siemens.net [139.25.131.180])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id oA4CoEGo007888
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
+	Thu, 04 Nov 2010 14:18:41 +0100
+Received: by ywo7 with SMTP id 7so841017ywo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Nov 2010 13:50:15 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
-	DEMCHP99ET1MSX.ww902.siemens.net ([139.25.131.180]) with mapi;
-	Thu, 4 Nov 2010 13:50:14 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 Nov 2010 13:50:13 +0100
-Thread-Topic: packaged-staging
-Thread-Index: Act8E/TAdZAxru5ZQKWKTsVWKRHmjwACpZkQ
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3A42A56@DEMCHP99E35MSX.ww902.siemens.net>
-References: <09D9BE2AC4AA764DABAA8C91E48D819ED3A429F2@DEMCHP99E35MSX.ww902.siemens.net>
-In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819ED3A429F2@DEMCHP99E35MSX.ww902.siemens.net>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Thu, 04 Nov 2010 06:17:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=enu0N8wfQYpq4vyrKrseL0+vqz+7D3RHMNYCTiOEKAg=;
+	b=EUU4qrJ52hU2e4dJ1/95HntIJ9eOA49cp0X3idSRGuVvQ8DM7H70VQvGmSrzNOnJub
+	OcDr/UZGnpJ0MtPyCjWLR54PB1qKvEKmk4UBApB+uDVwrlH56GZh/VZsfAO2P1Sf9w2h
+	X/cuvvpDhUCqeFSLzQ40NIC76iS11O5IqCWvg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=LkPLD4OGSD7L477RABUERKJl60vP6RCFyk2RXsxYfriF5srf8sXXkwxSBggpvGndI7
+	kViL2P2R5amCmi3csB5QwWpLnoJPfdTvCg9tjEMEiGvXPZum2h3WWj5szH87pe5ibXQ1
+	9opxmF5UNMX+9WetweWf8ZuJxzO8BBhVopFAg=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.35.17.14
-X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
+Received: by 10.42.74.137 with SMTP id w9mr344453icj.201.1288876668481; Thu,
+	04 Nov 2010 06:17:48 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Thu, 4 Nov 2010 06:17:48 -0700 (PDT)
+In-Reply-To: <AANLkTinLp2jLhp1QCs8YdUXtSg7rXgq-TMK_8_vc8dSO@mail.gmail.com>
+References: <20101104082759.GG19934@excalibur.local>
+	<AANLkTinLp2jLhp1QCs8YdUXtSg7rXgq-TMK_8_vc8dSO@mail.gmail.com>
+Date: Thu, 4 Nov 2010 14:17:48 +0100
+Message-ID: <AANLkTinQPXEC9=nNu6=Ea0qd8Ly-Qpaa6Aboo8jF1HL3@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.9 required=5.0 tests=AWL, BAYES_00,
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: packaged-staging
+Subject: Re: Patchwork cleanup weekend in two days
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,102 +52,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 12:51:12 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 04 Nov 2010 13:18:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I forgot to say we are using bitbake 1.8.12 and branch stable/2009=20
+Oh, one more thing,
 
-Fabrice Aeschbacher
+Of course it is not up to me how you guys spent your time, but if
+there is time and interest left after going through patchwork it would
+be nice if people could also have a peek at bugzilla and/or peek at
+the recipes that do not even fetch any more (see email from Martin
+from april or so).
 
-> -----Urspr=FCngliche Nachricht-----
-> Von: openembedded-devel-bounces@lists.openembedded.org=20
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
-> Auftrag von Aeschbacher, Fabrice
-> Gesendet: Donnerstag, 4. November 2010 12:32
-> An: openembedded-devel@lists.openembedded.org
-> Betreff: [oe] packaged-staging
->=20
-> Hi,
->=20
-> I am trying to use packaged staging, following the=20
-> description found here:
-> http://marcin.juszkiewicz.com.pl/2008/07/01/packaged-staging-a
-> nd-what-it-gives/
-> http://blog.denix.org/2008/09/getting-dangerous-with-packaged-
-> staging.html
->=20
-> I set:
->=20
-> DEPLOY_DIR_PSTAGE =3D "${OEBASE}/pstage"
->=20
-> , and then:
->=20
-> $ bitbake base-image
-> $ rm -rf ${TMPDIR}
-> $ bitbake base-image
->=20
-> During build I noticed a lot of messages like:
-> NOTE: Staging package found, using it for=20
-> <...>/org.openembedded/recipes/gettext/gettext-native_0.17.bb
->=20
-> But finally the last step fails:
->=20
-> ERROR: function do_rootfs failed
->=20
-> |  * ERROR: Cannot satisfy the following dependencies for task-boot:
-> | 	 *  kernel *  base-files *  base-passwd *  busybox * =20
-> modutils-initscripts *  netbase *  update-alternatives *
-> |  * Cannot find package task-boot.
-> |  * Cannot find package util-linux-mount.
-> |  * Cannot find package util-linux-umount.
-> |  * Cannot find package dropbear.
-> |  * Cannot find package angstrom-version.
-> |  * Cannot find package hotplug-ng.
-> |  * Cannot find package libgcc1.
-> |  * Cannot find package libstdc++6.
-> |  * Cannot find package initscripts.
-> |  * Cannot find package sysvinit.
-> |  * Cannot find package sysvinit-pidof.
-> |  * Cannot find package tinylogin.
-> |  * Cannot find package opkg-nogpg.
-> |  * Cannot find package angstrom-version.
-> |  * Cannot find package angstrom-feed-configs.
-> |  * Cannot find package opkg-collateral.
-> NOTE: Task failed:=20
-> /home/projects/oe-stable-2009/build/taurus/work/taurus-angstro
-> m-linux-gnueabi/base-image-1.0-r0/temp/log.do_rootfs.10147
->=20
-> Some remarks:
-> - It does not help trying to bitbake the indicated missing packages
->   but for each package, I need to:
->      bitbake <package> -f -c package_write
-> - After a first build, cross-compiler is installer in=20
-> ${TEMPDIR}/cross/armv5te/bin
->   (which is added to the $PATH for oe_runmake)
->   But after a packaged-staging build, this directory does not exist;
->   the cross-compiler is actually installed in ${TEMPDIR}/cross/bin
->   =3D> every do_compile fails
->   to circumvent this, I had to :
->      cd ${TEMPDIR}/cross
->      mkdir armv5te
->      ln -s ../bin armv5te
->=20
-> I saw Frans Meulenbroeks already had the same issue:
-> http://www.mail-archive.com/openembedded-devel@lists.openembed
-> ded.org/msg03314.html
->=20
-> Did someone find a solution?
->=20
-> With kind regards,
->    Fabrice Aeschbacher
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> =
+Have fun (& thanks for the effort!)
+Frans
 
 
