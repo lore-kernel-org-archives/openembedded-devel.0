@@ -1,44 +1,40 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PE5Hq-0003Pj-IQ
+	(envelope-from <leon.woestenberg@gmail.com>) id 1PE640-0005Vd-HZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 20:15:51 +0100
-Received: by pwi7 with SMTP id 7so146487pwi.6
+	Thu, 04 Nov 2010 21:05:37 +0100
+Received: by qwd6 with SMTP id 6so1579036qwd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Nov 2010 12:14:57 -0700 (PDT)
+	Thu, 04 Nov 2010 13:04:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=OrqMvI6srksR7nS5IIaNR4aGCSItmwu4AUyNijby9ss=;
-	b=NkBsLMrl+5nqqxTmAHHaJSsTA74yJG7HbYNnY0WTM4Gcx8vmWVSORHf19Ch9NCt69e
-	AEkfVE5a27RepMANYQPk+IHZNDhDVEjaU6YXqSfb6z6fVxEq7Dx1Co0V3AUTzWkBAOf8
-	8X8RjjF9iNbPtbaoy9zHCOEs2ditxnKF6fm+A=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=fSOK5qTSEkq3CfeH3Sj5NjZxBg3UHM/kM/URFXzx/sk=;
+	b=pxWpOpiuyzYWR++YnPXAxRQF8/DK8Pbod5lFYXCASWRc9RjhHjUawGPU9BjeH+kG7S
+	Dt8roTzJAkP9K0CYTtApiP17dN85Ntnal6nFzlkQNeV+nzS+uZSN597qQB/ZBcl7JXtq
+	2h2lXFeHXHyt7WK/dE0RkeeH+PGGsa0qAuRcE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=oEWDSo9MllfQM1PJVMrcWOWoPadsaYJ9h4U2ISJR05vk6eZ7s3hvoXmG4Lm58H0Wde
-	9yKD4/2hJoCU0folOKC5048m3+T0Gr0k6dvZHcNARESPHE+6+Hf9hFt/uuoz80lWkTB9
-	TGgeGg4ucAr4wnpcFjtngBzNZib8rfsNejzl4=
-Received: by 10.142.177.10 with SMTP id z10mr976066wfe.141.1288898097567;
-	Thu, 04 Nov 2010 12:14:57 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id v19sm346225wfh.12.2010.11.04.12.14.56
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 04 Nov 2010 12:14:56 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Nov 2010 12:14:40 -0700
-Message-Id: <1288898080-19417-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=CK334mRQorWr+m+IMHU0KXH1clKfw/ultO2oROrtdbjwnCGS0O+uqQ1PV9m8CDK3Fy
+	pnM5jCCIKJBafrNJRxPTJgkdLCh1g6Qo2OT2JkRH2hrsGjm3YLJAKo6We/uxng35WlhI
+	GXsQcmXMUrT0yX3OKaLbPDQG4e658HHMIVKF0=
+MIME-Version: 1.0
+Received: by 10.229.213.135 with SMTP id gw7mr1094333qcb.41.1288901083826;
+	Thu, 04 Nov 2010 13:04:43 -0700 (PDT)
+Received: by 10.229.228.147 with HTTP; Thu, 4 Nov 2010 13:04:43 -0700 (PDT)
+Date: Thu, 4 Nov 2010 21:04:43 +0100
+Message-ID: <AANLkTikEvXr_vz+_uy871SM1B5SS=e6kb62sPyt-4GaD@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] meta.bbclass: Exclude meta recipes from world builds
+Subject: OpenEmbedded Release 2010.12 --- needs your help!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,27 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 19:15:51 -0000
+X-List-Received-Date: Thu, 04 Nov 2010 20:05:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- classes/meta.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Hello all,
 
-diff --git a/classes/meta.bbclass b/classes/meta.bbclass
-index d35c40b..d0626e3 100644
---- a/classes/meta.bbclass
-+++ b/classes/meta.bbclass
-@@ -1,4 +1,4 @@
--
-+EXCLUDE_FROM_WORLD = "1"
- PACKAGES = ""
- 
--do_build[recrdeptask] = "do_build"
-\ No newline at end of file
-+do_build[recrdeptask] = "do_build"
+at OEDEM we discussed the need for OpenEmbedded releases.
+
+- OpenEmbedded releases are planned in certain months, so that we can
+plan stabilization efforts in the future.
+- Each release is a point release in time.
+- A release is a candidate branch point for a stable branch (which can
+be maintained by those who use it).
+- The next release is planned 2010.12, more specifically December 1st.
+That's only four weeks from now.
+- The 2010.12 release is hand-picked from a recent testing branch.
+
+Now that our testing team has the process in place to gather test
+results, please consider to build your
+favorite set of distro/machine targets using tinderbox, and report your results.
+
+One requirement is to use bitbake 1.10, as the minimal requirement
+will soon be 1.10 for the OpenEmbedded metadata.
+
+
+Regards,
 -- 
-1.7.1
-
+Leon
 
 
