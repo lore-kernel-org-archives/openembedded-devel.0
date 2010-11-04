@@ -1,46 +1,44 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from david.siemens.de ([192.35.17.14])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PDyv3-0005aW-Ct
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PDzHV-0003V9-32
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 13:27:54 +0100
-Received: by qyk7 with SMTP id 7so1124366qyk.6
+	Thu, 04 Nov 2010 13:51:10 +0100
+Received: from mail3.siemens.de (localhost [127.0.0.1])
+	by david.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
+	oA4CoF92018358 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 4 Nov 2010 13:50:15 +0100
+Received: from DEMCHP99ET1MSX.ww902.siemens.net
+	(demchp99et1msx.ww902.siemens.net [139.25.131.180])
+	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id oA4CoEGo007888
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Nov 2010 05:27:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=oYcl0acg8a8I+QwLOREDLwdJZl0vSXHjKImyLwiB6b8=;
-	b=NU5Xy06dw4yRvmC3hK710Z+PyLAmtd4JzfWb8cW/sxJoygW4vRuXwlmi+yofVLCFMJ
-	xJblLftH20F4yltgddLskluNSn1Uu6uYtbUB1wxNyEqwLNoHql0u37nhYzWcgwDJwojQ
-	EBnaCaysAlFDqn9O0oc20d3bTBg/Yws3w9Hxs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=iOd2L3DcBPa2VY5qaTSK5v8zRRDt9tY9+EC3gQVkwgw0Skwu3bNY23T7ClibINMO1s
-	hEs7NY3QAwoS6CKNHT591bQcHFc9Rcc1roKPFW4DCf7jmxTdSyMX2ME7vVhbjI5CYTf9
-	j2r8d9kay2HiJiN7hi4as4VP4nMt7u0WDhSVQ=
+	Thu, 4 Nov 2010 13:50:15 +0100
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
+	DEMCHP99ET1MSX.ww902.siemens.net ([139.25.131.180]) with mapi;
+	Thu, 4 Nov 2010 13:50:14 +0100
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 4 Nov 2010 13:50:13 +0100
+Thread-Topic: packaged-staging
+Thread-Index: Act8E/TAdZAxru5ZQKWKTsVWKRHmjwACpZkQ
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3A42A56@DEMCHP99E35MSX.ww902.siemens.net>
+References: <09D9BE2AC4AA764DABAA8C91E48D819ED3A429F2@DEMCHP99E35MSX.ww902.siemens.net>
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819ED3A429F2@DEMCHP99E35MSX.ww902.siemens.net>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
 MIME-Version: 1.0
-Received: by 10.224.212.133 with SMTP id gs5mr624795qab.172.1288873620530;
-	Thu, 04 Nov 2010 05:27:00 -0700 (PDT)
-Received: by 10.229.212.85 with HTTP; Thu, 4 Nov 2010 05:27:00 -0700 (PDT)
-In-Reply-To: <AANLkTikzjkHxbXd3iCBny0yoNPBVTH4_LyhuYfSpg-SV@mail.gmail.com>
-References: <AANLkTinXYcNN=iozP-aXPDuFzQqM13KDf5my1W6DTap6@mail.gmail.com>
-	<4CC500A2.7020702@gmail.com>
-	<AANLkTikzjkHxbXd3iCBny0yoNPBVTH4_LyhuYfSpg-SV@mail.gmail.com>
-Date: Thu, 4 Nov 2010 13:27:00 +0100
-Message-ID: <AANLkTimXqxS4rCPXuxx=_MhdKfG1yTA8gbnowUEYB0vn@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+X-SA-Exim-Connect-IP: 192.35.17.14
+X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-8.9 required=5.0 tests=AWL, BAYES_00,
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Race issues (lzma-native)
+Subject: Re: packaged-staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,111 +52,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 12:27:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 04 Nov 2010 12:51:12 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-FWIW Issue is still present.
+I forgot to say we are using bitbake 1.8.12 and branch stable/2009=20
 
-I'll try the workaround you posted.
+Fabrice Aeschbacher
 
-Andrea
-
-
-
-On Tue, Oct 26, 2010 at 9:58 AM, Andrea Adami <andrea.adami@gmail.com> wrot=
-e:
-> Just to add this time the race appears building on Ubuntu 10.4 32bit.
-> Last race-case (gtk+-native) was only on Gentoo and not on Ubuntu...
->
-> Both distros are on the same Quad host and share =A0an EXT3 OpenEmbedded
-> partition, though.
->
-> PARALLEL_MAKE =3D "-j5"
-> BB_NUMBER_THREADS =3D "4"
->
->
-> Perplexed...
->
-> Andrea
->
-> On Mon, Oct 25, 2010 at 5:59 AM, Graham Gower <graham.gower@gmail.com> wr=
-ote:
->> On 10/24/2010 07:29 PM, Andrea Adami wrote:
->>> Hello,
->>>
->>> during first build of console image I notice a strange fault:
->>> subsequent builds are ok.
->>> My scripts builds console-image and opie-image.
->>>
->>> ERROR: Task 2411
->>> (virtual:native:/oe/openembedded/recipes/lzma/lzma_4.65.bb,
->>> do_distribute_sources) failed with exit code '1'
->>> NOTE: Unpacking ../sources/lzma465.tar.bz2 to
->>> tmp/work/i686-linux/lzma-native-4.65-r4.1/
->>> NOTE: package lzma-native-4.65-r4.1: task do_distribute_sources: Starte=
-d
->>> NOTE: package lzma-native-4.65-r4.1: task SRC_DISTRIBUTECOMMAND: Failed
->>> ERROR: Function 'SRC_DISTRIBUTECOMMAND' failed
->>>
->>>
->>> Looking at the
->>> run.SRC_DISTRIBUTECOMMAND.18268 =A0 16384 (failing)
->>> run.SRC_DISTRIBUTECOMMAND.9570 =A0 =A0 34334
->>>
->>> it looks like the file is not complete / malformed:
->>>
->>> package_generate_ipkg_conf() {
->>> <------>mkdir -p /oe/build/tmp/sysroots/i686-linux/etc/
->>> <------>echo "src oe file:/oe/build/tmp/deploy/glibc/ipk" >
->>> /oe/build/tmp/sysroots/i686-linux/etc/opkg.conf
->>> <------>echo "src oe file:/
->>> EOF
->>>
->>> run.do_distribute_sources.18268 =A0is empty, while second time
->>> run.do_distribute_sources.9570 =A0 1051 contains =A0def do_distribute_s=
-ources(d):
->>>
->>> This seems indeed a race issue...
->>>
->>> Andrea
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->> I can reproduce this one quite easily. Reverting a6a23f73 seems to make =
-it
->> disappear. Alternately the change below works, but I'm not convinced thi=
-s is
->> the right fix.
->>
->> Can someone with greater insight explain what causes this race?
->>
->> -Graham
->>
->>
->> diff --git a/classes/src_distribute.bbclass b/classes/src_distribute.bbc=
-lass
->> index 795a5cf..98d8d88 100644
->> --- a/classes/src_distribute.bbclass
->> +++ b/classes/src_distribute.bbclass
->> @@ -1,7 +1,7 @@
->> =A0SRC_DISTRIBUTE_DLONLY ?=3D "0"
->> =A0SRC_DISTRIBUTECOMMAND[func] =3D "1"
->>
->> -addtask distribute_sources before do_build after do_fetch
->> +addtask distribute_sources before do_build after do_unpack
->> =A0python do_distribute_sources () {
->> =A0 =A0 =A0 =A0bb.build.exec_func("do_fetch", d)
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
+> -----Urspr=FCngliche Nachricht-----
+> Von: openembedded-devel-bounces@lists.openembedded.org=20
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
+> Auftrag von Aeschbacher, Fabrice
+> Gesendet: Donnerstag, 4. November 2010 12:32
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: [oe] packaged-staging
+>=20
+> Hi,
+>=20
+> I am trying to use packaged staging, following the=20
+> description found here:
+> http://marcin.juszkiewicz.com.pl/2008/07/01/packaged-staging-a
+> nd-what-it-gives/
+> http://blog.denix.org/2008/09/getting-dangerous-with-packaged-
+> staging.html
+>=20
+> I set:
+>=20
+> DEPLOY_DIR_PSTAGE =3D "${OEBASE}/pstage"
+>=20
+> , and then:
+>=20
+> $ bitbake base-image
+> $ rm -rf ${TMPDIR}
+> $ bitbake base-image
+>=20
+> During build I noticed a lot of messages like:
+> NOTE: Staging package found, using it for=20
+> <...>/org.openembedded/recipes/gettext/gettext-native_0.17.bb
+>=20
+> But finally the last step fails:
+>=20
+> ERROR: function do_rootfs failed
+>=20
+> |  * ERROR: Cannot satisfy the following dependencies for task-boot:
+> | 	 *  kernel *  base-files *  base-passwd *  busybox * =20
+> modutils-initscripts *  netbase *  update-alternatives *
+> |  * Cannot find package task-boot.
+> |  * Cannot find package util-linux-mount.
+> |  * Cannot find package util-linux-umount.
+> |  * Cannot find package dropbear.
+> |  * Cannot find package angstrom-version.
+> |  * Cannot find package hotplug-ng.
+> |  * Cannot find package libgcc1.
+> |  * Cannot find package libstdc++6.
+> |  * Cannot find package initscripts.
+> |  * Cannot find package sysvinit.
+> |  * Cannot find package sysvinit-pidof.
+> |  * Cannot find package tinylogin.
+> |  * Cannot find package opkg-nogpg.
+> |  * Cannot find package angstrom-version.
+> |  * Cannot find package angstrom-feed-configs.
+> |  * Cannot find package opkg-collateral.
+> NOTE: Task failed:=20
+> /home/projects/oe-stable-2009/build/taurus/work/taurus-angstro
+> m-linux-gnueabi/base-image-1.0-r0/temp/log.do_rootfs.10147
+>=20
+> Some remarks:
+> - It does not help trying to bitbake the indicated missing packages
+>   but for each package, I need to:
+>      bitbake <package> -f -c package_write
+> - After a first build, cross-compiler is installer in=20
+> ${TEMPDIR}/cross/armv5te/bin
+>   (which is added to the $PATH for oe_runmake)
+>   But after a packaged-staging build, this directory does not exist;
+>   the cross-compiler is actually installed in ${TEMPDIR}/cross/bin
+>   =3D> every do_compile fails
+>   to circumvent this, I had to :
+>      cd ${TEMPDIR}/cross
+>      mkdir armv5te
+>      ln -s ../bin armv5te
+>=20
+> I saw Frans Meulenbroeks already had the same issue:
+> http://www.mail-archive.com/openembedded-devel@lists.openembed
+> ded.org/msg03314.html
+>=20
+> Did someone find a solution?
+>=20
+> With kind regards,
+>    Fabrice Aeschbacher
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> =
 
 
