@@ -1,35 +1,49 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1PDnEm-0002wt-CC
+	(envelope-from <martin.jansa@gmail.com>) id 1PDnTa-0003fG-L7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 00:59:33 +0100
-Received: from gandalf.denix.org ([unknown] [71.255.228.135])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LBC008LQ2LDM9C2@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	03 Nov 2010 18:58:26 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 49DAC14AF6A; Wed,
-	03 Nov 2010 19:58:25 -0400 (EDT)
-Date: Wed, 03 Nov 2010 19:58:25 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 04 Nov 2010 01:14:47 +0100
+Received: by bwz10 with SMTP id 10so1271185bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Nov 2010 17:13:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=+lPyIlLTgWpGdKU44GwsNCxCd6qDyVeROEpQrjAncE8=;
+	b=OohHoN82NkbBFZkA83XatYbXXLDbAPs7f7X+fEZOJNY59QegcE4c5HRSPAr8y4/nu2
+	KLav5eX6utZwBIwsiEpzxQxcBJLvxpzHCG/NpSm5cq3P6t+sJil1Fqm/XT/fjx0PVIPp
+	Ppxahz1IuUOEprksuaqXABWT84MvPPjAC+ros=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=jqzJxMtloTStP2LcUGvNicvAdWG5NAfdbohU5r3BZcsGU/H9xcQYUwl1uNuoDlanRs
+	8yp/UOSSUeH+Kz9RqtOzRIhI9bBL4lDg68cbILSvwKVqwA+KseRimtofhk+E73RkDdlO
+	3ZfDaz9RxoAsz5Jobzod6bwO4pqb+JLST6e6U=
+Received: by 10.204.116.141 with SMTP id m13mr6875152bkq.187.1288829637386;
+	Wed, 03 Nov 2010 17:13:57 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id r21sm6135019bkj.10.2010.11.03.17.13.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 03 Nov 2010 17:13:56 -0700 (PDT)
+Date: Thu, 4 Nov 2010 01:13:42 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20101103235825.GD28852@denix.org>
-References: <1288826934-8339-1-git-send-email-eric@eukrea.com>
-	<4CD1F324.9090704@mentor.com>
-MIME-version: 1.0
-In-reply-to: <4CD1F324.9090704@mentor.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
-X-SA-Exim-Mail-From: denis@denix.org
+Message-ID: <20101104001342.GG3440@jama>
+References: <1288824035-27654-1-git-send-email-raj.khem@gmail.com>
+	<AANLkTi=OOneV24BDurQ+ECpQJ+-U4AH=MpFZ-YM0jOJq@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTi=OOneV24BDurQ+ECpQJ+-U4AH=MpFZ-YM0jOJq@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Eric B??nard <eric@eukrea.com>
-Subject: Re: [PATCH] own-mirrors.bbclass: allow mirroring of scm	fetched packages
+Subject: Re: [PATCH] metadata_scm.bbclass: get the metadata revision for current HEAD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,59 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2010 23:59:34 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 04 Nov 2010 00:14:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Nov 03, 2010 at 04:41:24PM -0700, Tom Rini wrote:
-> Eric B??nard wrote:
->> this way, it's possible to setup a local webserver (for example
->> using busybox httpd -p "8081" -h backuped_download_dir) serving
->> a presiously fetched download directory and to build wihout the
->> need for an internet access
->> this can also be used when connected to know to know which packages
->> are missing from the local mirror's directory (and thus are fetched
->> from internet as a fallback), it's possible to run the server this way :
->> busybox httpd -p "8081" -h backuped_download_dir -vv -f | grep -B 1  
->> response:404
->> to get the name of the missing packages.
->> Signed-off-by: Eric B??nard <eric@eukrea.com>
->
-> Acked-by: Tom Rini <tom_rini@mentor.com>
+On Wed, Nov 03, 2010 at 04:55:52PM -0700, Chris Larson wrote:
+> On Wed, Nov 3, 2010 at 3:40 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> 
+> > Currently we report wrong revision when we build from branches not based
+> > on master because we only fetch the HEAD value which is remote master
+> > This patch makes it to report the HEAD of whatever branch one has
+> > checked out.
+> >
+> 
+> This doesn't make sense.  The HEAD ref always points to the current checked
+> out commit or branch, it is *not* specific to master.
 
-Looks like a nice way to have local mirrored downloads. May I suggest to put 
-the above examples of running busybox httpd as a comment inside the class.
+No it does make sense, because it fixes my <unknown> METADATA_REVISION :).
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
->
->> ---
->>  classes/own-mirrors.bbclass |    7 ++++++-
->>  1 files changed, 6 insertions(+), 1 deletions(-)
->> diff --git a/classes/own-mirrors.bbclass b/classes/own-mirrors.bbclass
->> index e8a0f48..720ce42 100644
->> --- a/classes/own-mirrors.bbclass
->> +++ b/classes/own-mirrors.bbclass
->> @@ -1,4 +1,9 @@
->>  PREMIRRORS() {
->> -https?://.*/.* ${SOURCE_MIRROR_URL}
->> +cvs://.*/.* ${SOURCE_MIRROR_URL}
->> +svn://.*/.* ${SOURCE_MIRROR_URL}
->> +git://.*/.* ${SOURCE_MIRROR_URL}
->> +hg://.*/.* ${SOURCE_MIRROR_URL}
->> +bzr://.*/.* ${SOURCE_MIRROR_URL}
->> +https?$://.*/.* ${SOURCE_MIRROR_URL}
->>  ftp://.*/.*  ${SOURCE_MIRROR_URL}
->>  }
->
->
-> -- 
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+in my R/W checkout I have it right even before patch
+
+bitbake@jama ~/oe $ git show-ref HEAD
+b3246d96069fd11caee42ec6ebcbf6dca2d62449 refs/remotes/origin/HEAD
+
+OE om-gta02@shr ~/oe $ git remote -v
+jama    /OE/dev/ (fetch)
+jama    /OE/dev/ (push)
+....
+origin  git@git.openembedded.org:openembedded (fetch)
+origin  git@git.openembedded.org:openembedded (push)
+
+
+but in my "work" checkout, where I have this R/W used as origin
+bitbake@jama ~/dev $ git show-ref HEAD -> nothing
+
+OE om-gta02@shr ~/dev $ git remote -v
+gitorious git@gitorious.org:~jama/angstrom/jama-shr-experimental.git (fetch)
+gitorious git@gitorious.org:~jama/angstrom/jama-shr-experimental.git (push)
+....
+origin  /OE/oe/ (fetch)
+origin  /OE/oe/ (push)
+
+Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
