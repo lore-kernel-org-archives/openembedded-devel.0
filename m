@@ -1,37 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from goliath.siemens.de ([192.35.17.28])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PDzyu-0002yg-Mr
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PE02I-0007WQ-2k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 14:35:57 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1PDzy4-0003tA-Hd from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Nov 2010 06:35:04 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 4 Nov 2010 06:35:04 -0700
-Received: from [172.30.80.135] ([172.30.80.135]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 4 Nov 2010 07:35:03 -0600
-Message-ID: <4CD2B685.4040409@mentor.com>
-Date: Thu, 04 Nov 2010 06:35:01 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Thu, 04 Nov 2010 14:39:26 +0100
+Received: from mail3.siemens.de (localhost [127.0.0.1])
+	by goliath.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
+	oA4DcZHr004631 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 4 Nov 2010 14:38:36 +0100
+Received: from DEMCHP99ET1MSX.ww902.siemens.net
+	(demchp99et1msx.ww902.siemens.net [139.25.131.180])
+	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id oA4DcZQo007907
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 4 Nov 2010 14:38:35 +0100
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
+	DEMCHP99ET1MSX.ww902.siemens.net ([139.25.131.180]) with mapi;
+	Thu, 4 Nov 2010 14:38:34 +0100
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 4 Nov 2010 14:38:33 +0100
+Thread-Topic: [oe] packaged-staging
+Thread-Index: Act8JS8LBpKaU4U6St+kbZ+rtim/4QAADjig
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3A42AA6@DEMCHP99E35MSX.ww902.siemens.net>
 References: <09D9BE2AC4AA764DABAA8C91E48D819ED3A429F2@DEMCHP99E35MSX.ww902.siemens.net>
 	<09D9BE2AC4AA764DABAA8C91E48D819ED3A42A56@DEMCHP99E35MSX.ww902.siemens.net>
-In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819ED3A42A56@DEMCHP99E35MSX.ww902.siemens.net>
-X-OriginalArrivalTime: 04 Nov 2010 13:35:03.0888 (UTC)
-	FILETIME=[163C5D00:01CB7C25]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	<4CD2B685.4040409@mentor.com>
+In-Reply-To: <4CD2B685.4040409@mentor.com>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 192.35.17.28
+X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-9.2 required=5.0 tests=AWL, BAYES_00,
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: packaged-staging
@@ -48,17 +54,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2010 13:35:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Nov 2010 13:39:26 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Aeschbacher, Fabrice wrote:
-> I forgot to say we are using bitbake 1.8.12 and branch stable/2009 
+> Aeschbacher, Fabrice wrote:
+> > I forgot to say we are using bitbake 1.8.12 and branch stable/2009=20
+>=20
+> packaged-staging isn't complete there, sorry.
+>=20
+> Tom Rini
 
-packaged-staging isn't complete there, sorry.
+Is it with bitbake-1.8.18 and stable/2009 ?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Fabrice Aeschbacher=
 
 
