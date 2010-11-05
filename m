@@ -1,32 +1,47 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PEV0L-0006Ue-Ql for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 23:43:31 +0100
-Received: from f053040076.adsl.alicedsl.de ([78.53.40.76]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PEUzW-00027c-8e for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 22:42:38 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <angelox.123@gmail.com>) id 1PEV32-00086e-7S
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Nov 2010 23:46:16 +0100
+Received: by yxe42 with SMTP id 42so2602765yxe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Nov 2010 15:45:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=qDmnUFrjoqILPWpHuFynCZDIN+Pj5kuK7Zyl1d3kLug=;
+	b=RNia4Dnjju1GnL+4cQKEzc+2+reAIMBTGjqzJI8Q0uSdRKq18WBRZq9XQ2SyGb+kq7
+	/ymE7LQHKXeQQbsc9qjja57/PpPQGnQ2JJlSiiOuCzr0lSKJZpH4Gr0IaVUA8OE6B0eG
+	/g6EqP0McWWrR6exd3CuAJXiGfO2DWxgsBuE4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=KDYSK9Ej+0klapDZb8+38DCIvzDds6LXO6LMHHR8VVsC6/hoOWm67bvEHY473KJwSb
+	BsM4D+kfCts7fk+sdDc0CKkx0KmDWuJKrMFfzzJMINrfQnsXxTBVNIabZGGVHO7Ue2Co
+	FT1nCiIdkmShyJzVz1K2bKDlSyfNCh61RL0l0=
+Received: by 10.150.144.10 with SMTP id r10mr4308524ybd.120.1288997122224;
+	Fri, 05 Nov 2010 15:45:22 -0700 (PDT)
+Received: from localhost.localdomain (201-95-46-2.dsl.telesp.net.br
+	[201.95.46.2])
+	by mx.google.com with ESMTPS id m45sm1315757yha.11.2010.11.05.15.45.20
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 05 Nov 2010 15:45:21 -0700 (PDT)
+From: "Angelo S. Mavridis Bartolome" <angelox.123@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1288995940-1827-1-git-send-email-angelo@pynell.com>
+Date: Fri,  5 Nov 2010 20:45:01 -0200
+Message-Id: <1288997101-2154-1-git-send-email-angelo@pynell.com>
+X-Mailer: git-send-email 1.7.3.2
+In-Reply-To: <angelo@pynell.com>
 References: <angelo@pynell.com>
-	<1288995940-1827-1-git-send-email-angelo@pynell.com>
-Date: Fri, 05 Nov 2010 23:42:37 +0100
-Message-ID: <1288996957.4113.10.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: angelox.123@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] recipes/fluxbox/fluxbox_1.1.1.bb - Fixed depends for libxpm recipes/initscripts/file/halt - Fixed poweroff when booted from NFS
+Cc: "Angelo S. Mavridis Bartolome" <angelo@pynell.com>
+Subject: [PATCH] metano.conf: Removed inutil package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,61 +55,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 22:43:31 -0000
-X-Groupsio-MsgNum: 25936
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-kbg+FJ82bLksY8YwvPsA"
+X-List-Received-Date: Fri, 05 Nov 2010 22:46:16 -0000
 
---=-kbg+FJ82bLksY8YwvPsA
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* Removed nano package from default,it isn't need at this time
 
-Am Freitag, den 05.11.2010, 20:25 -0200 schrieb Angelo S. Mavridis Bartolom=
-e:
-> * Fix to halt courtesy by penghb,patch by angelox_123
-> * Fix to fluxbox compile with libxpm by angelox_123
+Signed-off-by: Angelo S. Mavridis Bartolome <angelo@pynell.com>
+---
+ conf/distro/metano.conf |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-Where are the nicknames from? IRC?
-
-> Signed-off-by: Angelo S. Mavridis Bartolome <angelo@pynell.com>
-> ---
->  recipes/fluxbox/fluxbox_1.1.1.bb |    2 +-
->  recipes/initscripts/files/halt   |    2 +-
-
-[=E2=80=A6]
-
-Please send a patch for each change. You could
-
-	git commit patch/to/changed/file
-
-to create separate commits. Please only put the recipe name to the
-beginning of the commit summary as demanded by OE=E2=80=99s commit policy [=
-1].
-
-I would love to see your build configuration and your build error in the
-commit log too and, if you know it, a small comment why this fix is
-needed. These files seem to have been around for quite some time so I
-find it strange that these issues have not been surfaced earlier.
+diff --git a/conf/distro/metano.conf b/conf/distro/metano.conf
+index 9bab8d9..6262aa0 100644
+--- a/conf/distro/metano.conf
++++ b/conf/distro/metano.conf
+@@ -122,7 +122,6 @@ DISTRO_EXTRA_RRECOMMENDS += " \
+     mplayer \
+     alsa-lib \
+     alsa-utils \
+-    nano \
+     gpe-filemanager \
+     gpe-mini-browser \
+     ${XSERVER} \
+-- 
+1.7.3.2
 
 
-Thanks,
 
-Paul
-
-
-[1] http://wiki.openembedded.org/index.php/Commit_Policy
-
---=-kbg+FJ82bLksY8YwvPsA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzUiFYACgkQPX1aK2wOHVi37ACeO9IMxl7E4kKEnoJUPHIBes6l
-qgcAn1YtJmU5JwOtWgufyuJwalsRhCma
-=IQQL
------END PGP SIGNATURE-----
-
---=-kbg+FJ82bLksY8YwvPsA--
