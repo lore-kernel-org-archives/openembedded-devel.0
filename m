@@ -1,43 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PEMWR-0007Ce-Oo
+	(envelope-from <martin.jansa@gmail.com>) id 1PEMjO-00016O-Ic
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 14:40:04 +0100
-Received: by bwz10 with SMTP id 10so2816161bwz.6
+	Fri, 05 Nov 2010 14:53:27 +0100
+Received: by fxm3 with SMTP id 3so2310094fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 06:39:09 -0700 (PDT)
+	Fri, 05 Nov 2010 06:52:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=OvvVNqT6xxCj/CwubPPkrUPVjRAgGDpMA8fxF+e5U60=;
-	b=fCbzWhHYDBSc9AdJ4l/T2CdVddrsvwEnRa+kVrHHOy/lb8fYEefrIxHv0bnoaaixyf
-	TfzVgpJ0zGojab4ww2k7VVQ+NsrxcNf7Qse4RJKDEb2GBRZgfUCsZSsbX7II91al1uQ8
-	SM00tP85PxcisfKLawwueCB5Tq8xqyDxgtvtw=
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=gqxwHtrFK2JWQVURWSPXPWs9P188IYCjw83Xaz1gFN4=;
+	b=JL4a8Dr85yfLUPISnx42J5QEGYiLdvqpQpA2k9VJwyBCjMg/znPrGOL/Jm0v58aFdG
+	9WxBsrFk86Pjr8Qf4cDvM5J8vPsC9IcZ8WYSmhqwQCL/Pb01Ms278uqEvUiNir5sHrnB
+	G3KkfgEo8nBJDcDl6ADHo0jKR2ys4Va+ltGBw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=HAq5SVdq+NHdOGEqwRxFWOVe3EsPn3L4ETOXokujVdI5UmvRClDdLVySpBvWix2MmG
-	VxIEpYCQe59mcyEyBoQyh/SlD9a4SeYggcmiUZfMaXZn3GA+yprtxRKzMxEXGHC2UEbd
-	Z7J4eOwC+4WT06VxuLo52Sjo030TqFSCqTu2o=
-Received: by 10.204.62.203 with SMTP id y11mr1844633bkh.11.1288964349357;
-	Fri, 05 Nov 2010 06:39:09 -0700 (PDT)
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=I12ht2J8CMo1sJultVj1iFV92zr37TE8z+UQ7Evx76KvFsaMc6zDtBx5DWTH6ubg9v
+	DbAUqxe0bHKpaPfL931xNs79p81B5k3cm3UTo39ABrYugkSXIb8d6Wr7iLVVHZ6uFP1t
+	1sSYHQApscfEsEygGGGjWDiwH3ihoL9mcpRjY=
+Received: by 10.223.100.4 with SMTP id w4mr990677fan.26.1288965153821;
+	Fri, 05 Nov 2010 06:52:33 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id d12sm1001568bkw.7.2010.11.05.06.39.07
+	by mx.google.com with ESMTPS id l23sm602297fam.43.2010.11.05.06.52.32
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 05 Nov 2010 06:39:08 -0700 (PDT)
-Date: Fri, 5 Nov 2010 14:38:47 +0100
+	Fri, 05 Nov 2010 06:52:32 -0700 (PDT)
+Date: Fri, 5 Nov 2010 14:52:12 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101105133847.GP3440@jama>
-References: <1288958934-18209-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1288961484.3826.7.camel@mattotaupa>
-	<AANLkTimzdQuJQ1Y5VpNJvF0Y1=1aFDzXL5g1u6LArpS3@mail.gmail.com>
-	<1288963608.3826.15.camel@mattotaupa>
+Message-ID: <20101105135212.GQ3440@jama>
+References: <AANLkTikEvXr_vz+_uy871SM1B5SS=e6kb62sPyt-4GaD@mail.gmail.com>
+	<20101104220649.GE28852@denix.org> <4CD3349D.6060904@eukrea.com>
+	<20101104224752.GH28852@denix.org> <20101105065240.GI3440@jama>
+	<4CD3CCDE.3080306@eukrea.com> <20101105094915.GM3440@jama>
+	<4CD3D68A.9040704@eukrea.com> <1288963938.3826.20.camel@mattotaupa>
 MIME-Version: 1.0
-In-Reply-To: <1288963608.3826.15.camel@mattotaupa>
+In-Reply-To: <1288963938.3826.20.camel@mattotaupa>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -45,7 +47,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libX11: patch configure.ac so a nios2 system is not seen as an os2 system.
+Subject: Re: OpenEmbedded Release 2010.12 --- needs your help!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,41 +61,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 13:40:04 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 05 Nov 2010 13:53:27 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Fri, Nov 05, 2010 at 02:26:48PM +0100, Paul Menzel wrote:
-> I agree.
+On Fri, Nov 05, 2010 at 02:32:18PM +0100, Paul Menzel wrote:
+> Dear OE folks,
 > 
-> > Then if it is in the inc file, it needs to be taken out again when the
-> > next version comes.
+> Am Freitag, den 05.11.2010, 11:03 +0100 schrieb Eric Bénard:
 > 
-> Sorry, I did not make myself clear. My point was if you could put
-> `configure.ac-nios2.patch` into `libX11/` or `files`.
-
-better not to use files at all
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-October/025673.html
-
-diet-x11_1.1.5.bb libx11-trim_1.1.5.bb will find it ok in libx11* dir,
-because of FILESPATHPKG .= ":libx11-${PV}:libx11" in libx11.inc
-
-but even when it's the same file I would keep it in separate dirs,
-because newer versions won't need it (hopefully) and then it will be
-removed with older versions.
-
-> > Hence it was put in the individual files.
-> > 
-> > BTW it looks like upstream might go for a slightly different patch.
-> > I'll leave it to Martin to decide whether to go for that one or for
-> > this one (he is on cc of the upstream correspondence).
+> > Le 05/11/2010 10:49, Martin Jansa a écrit :
+> > >>> I know it could lower number of people using this future release branch
+> > >>> during testing period before release, but still seems better then pushing 3
+> > >>> weeks of commits from my local branch as soon as release is branched and
+> > >>> master open for new recipes again.
+> > >
+> > >> That's the way linux, u-boot&  co are running and when the new merge window
+> > >> opens several thousand of patches can be merged in a few days.
+> > >
+> > > And also why there is linux-next, but I agree that in our scale we can keep new
+> > > recipes and features in local checkouts/out-of-tree branches without too
+> > > much pain in merging them after 3 weeks.
+> >
+> > a temporary next branch could be open to host new big patches and then merged 
+> > to master once stable is out.
 > 
-> Again, could you provide a link to that discussion.
+> I certainly would encourage to push your changes to the OE repository as
+> soon as possible to share your work so other can use it or improve it.
+> Be it `master` or some different branch.
 
-http://lists.freedesktop.org/archives/xorg/2010-November/051731.html
+I have gitorious repo for my patch queue (but that's always rebased on
+top of master - to keep the diff small and changes ready for easy
+cherry-pick from it).
+ 
+> > This way most peoples getting oe during the stabilization period will get 
+> > master and will test it and developers will be able to follow their 
+> > development in the next branch.
+> > I think that during this stabilization weeks, developers have to do the effort 
+> > to checkout the next branch if they want to work on it and user must get the 
+> > master branch being stabilized as a default, but not the reverse.
+> 
+> I guess both sides have good arguments. I would decide on what the
+> documentation suggests to beginners and new contributors. If it suggests
+> that `master` is the development branch new contributions should be
+> based on, I suggest to create a new branch for the next stable release.
+> If the documentation suggests something different, then the next stable
+> release can be based on the master branch.
+> 
+> In either case the documentation has to be correct or needs to be
+> updated to reflect the changes.
+
+Well if it goes to master-next, then will we rebase it on top of current
+master (and solve ie that PR bump because of new feature in master-next
+needs another PR bump, because there was PR bump in current master due
+to some small fix). Or will we just merge current master to it and
+resolve conflicts there and then when "stabilizing" ends, merge
+master-next back to master with all those ugly "merge+resolve" commits?
+
+On the otherside if there is "release" branch created asap it's quite
+easy that cherry-picked fix from master has newer PR changed (and edit
+it to change it only by 1). But it will also force "release" maintainers
+to push patch first to master and then cherry-pick.
+
+Also whoever will be using master just to test next released version
+should be really carefull not to call "git pull" after it is taged as
+release and branched (or he will get stuff from maybe already merged
+master-next).
+
+So both ways have pros and cons, depends if you look at it as
+"master-next" developer or "release" maintainer :).
 
 Regards,
-
 -- 
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
