@@ -1,43 +1,47 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PEMSi-00074N-Bn
+	(envelope-from <martin.jansa@gmail.com>) id 1PEMWR-0007Ce-Oo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 14:36:13 +0100
-Received: by iwn42 with SMTP id 42so2874065iwn.6
+	Fri, 05 Nov 2010 14:40:04 +0100
+Received: by bwz10 with SMTP id 10so2816161bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 06:35:20 -0700 (PDT)
+	Fri, 05 Nov 2010 06:39:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ox05aJo3MjZrPaqSVwoF2oW6HmeyfSi+6vqbMDFX4wM=;
-	b=I8fRrYWna74bpYIWyo1JM6G+ALwNviSAcuGyA+0u+oYMfeafXBbQnKRQKJQkjlQKpS
-	ALby9+IKmVxTBSIEGg6E8xhuHM0ecUOEYD1xCoB0NF8s3A5UoDSkMArLvrVlqatioDGJ
-	8h3kqnOGKWxGvP0sisdaEtXXkugeSlPqVALxs=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=OvvVNqT6xxCj/CwubPPkrUPVjRAgGDpMA8fxF+e5U60=;
+	b=fCbzWhHYDBSc9AdJ4l/T2CdVddrsvwEnRa+kVrHHOy/lb8fYEefrIxHv0bnoaaixyf
+	TfzVgpJ0zGojab4ww2k7VVQ+NsrxcNf7Qse4RJKDEb2GBRZgfUCsZSsbX7II91al1uQ8
+	SM00tP85PxcisfKLawwueCB5Tq8xqyDxgtvtw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ahjkA7JNh+Hlz6ZgVxFnmIiuNYmLx/0i3S0Gk2WBeRsEJ0xiclcRey3NJtAtCc6wNt
-	Lvd3oLqBbd1JG+1JIj4XL4cXNd2T4pbnmy/A8grXZuToGa+UocoojpweuKZ76U8+8Mms
-	e/wYaYxF4syNnT/KYS3TdC0d1Vy2eJ1A4vzQ8=
-MIME-Version: 1.0
-Received: by 10.231.191.6 with SMTP id dk6mr1634488ibb.51.1288964120495; Fri,
-	05 Nov 2010 06:35:20 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Fri, 5 Nov 2010 06:35:20 -0700 (PDT)
-In-Reply-To: <1288963608.3826.15.camel@mattotaupa>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=HAq5SVdq+NHdOGEqwRxFWOVe3EsPn3L4ETOXokujVdI5UmvRClDdLVySpBvWix2MmG
+	VxIEpYCQe59mcyEyBoQyh/SlD9a4SeYggcmiUZfMaXZn3GA+yprtxRKzMxEXGHC2UEbd
+	Z7J4eOwC+4WT06VxuLo52Sjo030TqFSCqTu2o=
+Received: by 10.204.62.203 with SMTP id y11mr1844633bkh.11.1288964349357;
+	Fri, 05 Nov 2010 06:39:09 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id d12sm1001568bkw.7.2010.11.05.06.39.07
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 05 Nov 2010 06:39:08 -0700 (PDT)
+Date: Fri, 5 Nov 2010 14:38:47 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101105133847.GP3440@jama>
 References: <1288958934-18209-1-git-send-email-fransmeulenbroeks@gmail.com>
 	<1288961484.3826.7.camel@mattotaupa>
 	<AANLkTimzdQuJQ1Y5VpNJvF0Y1=1aFDzXL5g1u6LArpS3@mail.gmail.com>
 	<1288963608.3826.15.camel@mattotaupa>
-Date: Fri, 5 Nov 2010 14:35:20 +0100
-Message-ID: <AANLkTimz7SusU5f0DVm1bmN7BiVuAd=DTY2YWBDy78YV@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+MIME-Version: 1.0
+In-Reply-To: <1288963608.3826.15.camel@mattotaupa>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -55,130 +59,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 13:36:13 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Nov 2010 13:40:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/11/5 Paul Menzel <paulepanter@users.sourceforge.net>:
-> Am Freitag, den 05.11.2010, 14:19 +0100 schrieb Frans Meulenbroeks:
->> 2010/11/5 Paul Menzel <paulepanter@users.sourceforge.net>:
->> > Am Freitag, den 05.11.2010, 13:08 +0100 schrieb Frans Meulenbroeks:
->> >> configure.ac matches target_system against *os2* to detect if we're
->> >> configuring for an os2 system. Unfortunately this also matches if the
->> >> target_system is nios-linux (which is not an os2 system :-) )
->> >> This patch adds an additional case. The patch is added to the individ=
-ual
->> >> recipes and also made upstream.
->> >
->> > Please add a link to this commit message and the patch headers pointin=
-g
->> > to the upstream commit, list message or ticket.
->> >
->> >> Patch is tested by fully building 1.3.2 and by running
->> >> bitbake -c patch for the other recipes.
->> >>
->> >> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->> >>
->> >> a---
->> >> =A0.../xorg-lib/libx11-1.1.5/configure.ac-nios2.patch | =A0 12 ++++++=
-++++++
->> >> =A0.../xorg-lib/libx11-1.3.2/configure.ac-nios2.patch | =A0 12 ++++++=
-++++++
->> >> =A0.../xorg-lib/libx11-1.3.6/configure.ac-nios2.patch | =A0 12 ++++++=
-++++++
->> >> =A0.../libx11-1.3.99.903/configure.ac-nios2.patch =A0 =A0 | =A0 12 ++=
-++++++++++
->> >> =A0recipes/xorg-lib/libx11_1.1.5.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 | =A0 =A03 ++-
->> >> =A0recipes/xorg-lib/libx11_1.3.2.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 | =A0 =A03 ++-
->> >> =A0recipes/xorg-lib/libx11_1.3.6.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 | =A0 =A03 ++-
->> >> =A0recipes/xorg-lib/libx11_1.3.99.903.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0|=
- =A0 =A03 ++-
->> >> =A08 files changed, 56 insertions(+), 4 deletions(-)
->> >> =A0create mode 100644 recipes/xorg-lib/libx11-1.1.5/configure.ac-nios=
-2.patch
->> >> =A0create mode 100644 recipes/xorg-lib/libx11-1.3.2/configure.ac-nios=
-2.patch
->> >> =A0create mode 100644 recipes/xorg-lib/libx11-1.3.6/configure.ac-nios=
-2.patch
->> >> =A0create mode 100644 recipes/xorg-lib/libx11-1.3.99.903/configure.ac=
--nios2.patch
->> >>
->> >> diff --git a/recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch b=
-/recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch
->> >> new file mode 100644
->> >> index 0000000..5605a59
->> >> --- /dev/null
->> >> +++ b/recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch
->> >> @@ -0,0 +1,12 @@
->> >> +Index: libX11-1.3.2/configure.ac
->> >> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> +--- libX11-1.3.2.orig/configure.ac =A0 2010-11-05 10:30:33.825536983=
- +0100
->> >> ++++ libX11-1.3.2/configure.ac =A0 =A0 =A0 =A02010-11-05 10:31:25.913=
-899269 +0100
->> >> +@@ -202,6 +202,7 @@
->> >> + # arch specific things
->> >> + WCHAR32=3D"1"
->> >> + case $target_alias in
->> >> ++ =A0nios2*) os2=3D"false" ;;
->> >> + =A0 *os2*) os2=3D"true" ; WCHAR32=3D"0" ;;
->> >> + =A0 *) ;;
->> >> + esac
->> >
->> > It looks like these three patches are exactly the same. Would one file
->> > in the version independent directory be enough?
->> >
->> > [=85]
->>
->> They are exactly the same.
->> I discussed this with Martin Jansa on irc, and we felt it would be
->> best to submit the patch upstream.
->
+On Fri, Nov 05, 2010 at 02:26:48PM +0100, Paul Menzel wrote:
 > I agree.
->
->> Then if it is in the inc file, it needs to be taken out again when the
->> next version comes.
->
+> 
+> > Then if it is in the inc file, it needs to be taken out again when the
+> > next version comes.
+> 
 > Sorry, I did not make myself clear. My point was if you could put
 > `configure.ac-nios2.patch` into `libX11/` or `files`.
 
-Yes.
-files is not too nice, libX11 is probably better
->
->> Hence it was put in the individual files.
->>
->> BTW it looks like upstream might go for a slightly different patch.
->> I'll leave it to Martin to decide whether to go for that one or for
->> this one (he is on cc of the upstream correspondence).
->
+better not to use files at all
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-October/025673.html
+
+diet-x11_1.1.5.bb libx11-trim_1.1.5.bb will find it ok in libx11* dir,
+because of FILESPATHPKG .= ":libx11-${PV}:libx11" in libx11.inc
+
+but even when it's the same file I would keep it in separate dirs,
+because newer versions won't need it (hopefully) and then it will be
+removed with older versions.
+
+> > Hence it was put in the individual files.
+> > 
+> > BTW it looks like upstream might go for a slightly different patch.
+> > I'll leave it to Martin to decide whether to go for that one or for
+> > this one (he is on cc of the upstream correspondence).
+> 
 > Again, could you provide a link to that discussion.
 
 http://lists.freedesktop.org/archives/xorg/2010-November/051731.html
 
->
->> I'll be afk next week so can't give followup on this.
->
-> Understood. Thank you for your fast reply.
->
-You thanks for your review work!
-It is not often said, but it is definitely appreciated.
+Regards,
 
-Frans
->
-> Thanks,
->
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
