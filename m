@@ -1,52 +1,49 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from thoth.sbs.de ([192.35.17.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PEIwL-0001SZ-0y
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PEJ4e-0001hz-JY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 10:50:33 +0100
-Received: by fxm3 with SMTP id 3so2167441fxm.6
+	Fri, 05 Nov 2010 10:59:08 +0100
+Received: from mail2.siemens.de (localhost [127.0.0.1])
+	by thoth.sbs.de (8.12.11.20060308/8.12.11) with ESMTP id oA59wHdc010743
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 02:49:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=ar4x7HKcZ7DtJBdM+gpZEYsvDM0CPTCe0XCKpaLnFrs=;
-	b=Aocsnc+GLg8/t9rHFghx8miqK+dgaRsPCu0tTEdB+fKHxLGiRvYeIu55l0UczD1cEh
-	23BeYyure+6xbNarIti5jDIAoGKGQikV70IVQARxmezLWYD26N/s74li1c9yTvk8J6K8
-	iP+TfZkV23/jxaT7bk2W10+fXx9qzbYJXyILo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=B2qyG+iHbZaovSxTwWJXI917wdsKGEYqZ8w58PXtRDup7ivgWDg5niyKnftn5DolFm
-	OOfYEO5wfNUVJQLIlKg9MRPk27/gDfD7h6nO5eKWbXl88R0OFBZzV7fUHWWUOtQUavpd
-	JghOrWujPdbG2tou6xZuneNgavvd0LixtVAUE=
-Received: by 10.223.114.135 with SMTP id e7mr723948faq.78.1288950580283;
-	Fri, 05 Nov 2010 02:49:40 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u8sm507048fah.12.2010.11.05.02.49.39
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 05 Nov 2010 02:49:39 -0700 (PDT)
-Date: Fri, 5 Nov 2010 10:49:20 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101105094915.GM3440@jama>
-References: <AANLkTikEvXr_vz+_uy871SM1B5SS=e6kb62sPyt-4GaD@mail.gmail.com>
-	<20101104220649.GE28852@denix.org> <4CD3349D.6060904@eukrea.com>
-	<20101104224752.GH28852@denix.org> <20101105065240.GI3440@jama>
-	<4CD3CCDE.3080306@eukrea.com>
+	Fri, 5 Nov 2010 10:58:17 +0100
+Received: from DEMCHP99ET2MSX.ww902.siemens.net
+	(demchp99et2msx.ww902.siemens.net [139.25.131.241])
+	by mail2.siemens.de (8.13.6/8.13.6) with ESMTP id oA59wHcI010219
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 5 Nov 2010 10:58:17 +0100
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
+	DEMCHP99ET2MSX.ww902.siemens.net ([139.25.131.241]) with mapi;
+	Fri, 5 Nov 2010 10:58:17 +0100
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 5 Nov 2010 10:58:14 +0100
+Thread-Topic: [oe] packaged-staging
+Thread-Index: Act8Ki4Q+E+l3h/qRVSgR18G7ra/BgApUiKw
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3A9D081@DEMCHP99E35MSX.ww902.siemens.net>
+References: <09D9BE2AC4AA764DABAA8C91E48D819ED3A429F2@DEMCHP99E35MSX.ww902.siemens.net>
+	<09D9BE2AC4AA764DABAA8C91E48D819ED3A42A56@DEMCHP99E35MSX.ww902.siemens.net>
+	<4CD2B685.4040409@mentor.com>
+	<09D9BE2AC4AA764DABAA8C91E48D819ED3A42AA6@DEMCHP99E35MSX.ww902.siemens.net>
+	<4CD2BBEE.9060706@mentor.com>
+	<AANLkTinjCcgZyw2VUsHfFus2=BhY2v6m4TLfFwpr1kZr@mail.gmail.com>
+In-Reply-To: <AANLkTinjCcgZyw2VUsHfFus2=BhY2v6m4TLfFwpr1kZr@mail.gmail.com>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
 MIME-Version: 1.0
-In-Reply-To: <4CD3CCDE.3080306@eukrea.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 192.35.17.2
+X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-9.3 required=5.0 tests=AWL, BAYES_00,
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded Release 2010.12 --- needs your help!
+Subject: Re: packaged-staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,54 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 09:50:33 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 05 Nov 2010 09:59:08 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 05, 2010 at 10:22:38AM +0100, Eric Bénard wrote:
-> Le 05/11/2010 07:52, Martin Jansa a écrit :
-> > what about branching future release those 2-3 weeks ago and keep master for
-> > active development?
+Tom and Chris,
 
-no new recipes during at least last week of stablizing was also proposed
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November/026552.html
+Thanks for your replies, things are more clear now.
 
-> Stabilizing the master branch is active development as this allows to have
-> stronger fundation for the next features you can introduce 2 or 3 weeks after 
-> the stabilization weeks starts.
+With kind regards,
+   Fabrice
 
-I agree but pushing new recipes to master and cherry-picking of fixes
-from master to "next release" would also work and even allow testing of
-fix.patch in master before cherry-picking it.
-
-> > I know it could lower number of people using this future release branch
-> > during testing period before release, but still seems better then pushing 3
-> > weeks of commits from my local branch as soon as release is branched and
-> > master open for new recipes again.
-
-> That's the way linux, u-boot & co are running and when the new merge window
-> opens several thousand of patches can be merged in a few days.
-
-And also why there is linux-next, but I agree that in our scale we can keep new
-recipes and features in local checkouts/out-of-tree branches without too
-much pain in merging them after 3 weeks.
-
-> If we don't do that, the idea of stable release which implies detecting and 
-> fixing potential failures introduced by previous big changes will fail.
-
-IMHO forcing main branch to be closed for new stuff (gcc branches after
-stage1, before opening stage1 for new version) is used mostly to force
-developers to use branch which is supposed to become stable without
-tracking only the latest.
-
-But as I said before I don't mind (much) keeping new recipes locally for
-those few weeks or even pay more attention to my not-embedded-related daywork
-instead of playing with OE :).
-
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> I *think* bitbake 1.8 should be fine with packaged staging,=20
+> its the more
+> recent OE that's critical :)  Fabrice, you may want to look=20
+> at the Testing
+> page on the OE wiki and the testing branch as a starting=20
+> point, as its a bit
+> more tested version of master.
+> --=20
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> =
 
 
