@@ -1,22 +1,24 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PEMKT-0006cy-O0 for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 14:27:48 +0100
+	id 1PEMPm-0006ub-I4 for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Nov 2010 14:33:10 +0100
 Received: from f053040076.adsl.alicedsl.de ([78.53.40.76]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PEMJe-0004M2-TH for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 13:26:51 +0000
+	id 1PEMOx-0004Yq-LQ for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Nov 2010 13:32:19 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimzdQuJQ1Y5VpNJvF0Y1=1aFDzXL5g1u6LArpS3@mail.gmail.com>
-References: <1288958934-18209-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1288961484.3826.7.camel@mattotaupa>
-	<AANLkTimzdQuJQ1Y5VpNJvF0Y1=1aFDzXL5g1u6LArpS3@mail.gmail.com>
-Date: Fri, 05 Nov 2010 14:26:48 +0100
-Message-ID: <1288963608.3826.15.camel@mattotaupa>
+In-Reply-To: <4CD3D68A.9040704@eukrea.com>
+References: <AANLkTikEvXr_vz+_uy871SM1B5SS=e6kb62sPyt-4GaD@mail.gmail.com>
+	<20101104220649.GE28852@denix.org> <4CD3349D.6060904@eukrea.com>
+	<20101104224752.GH28852@denix.org> <20101105065240.GI3440@jama>
+	<4CD3CCDE.3080306@eukrea.com> <20101105094915.GM3440@jama>
+	<4CD3D68A.9040704@eukrea.com>
+Date: Fri, 05 Nov 2010 14:32:18 +0100
+Message-ID: <1288963938.3826.20.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
 X-SA-Exim-Connect-IP: 188.40.100.199
@@ -27,7 +29,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libX11: patch configure.ac so a nios2 system is not seen as an os2 system.
+Subject: Re: OpenEmbedded Release 2010.12 --- needs your help!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,125 +43,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 13:28:08 -0000
-X-Groupsio-MsgNum: 25904
+X-List-Received-Date: Fri, 05 Nov 2010 13:33:11 -0000
+X-Groupsio-MsgNum: 25905
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-am5B5BkxG5bxlrtg29Jc"
+	boundary="=-76EXjTXoBr9jz58VEtwp"
 
---=-am5B5BkxG5bxlrtg29Jc
+--=-76EXjTXoBr9jz58VEtwp
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 05.11.2010, 14:19 +0100 schrieb Frans Meulenbroeks:
-> 2010/11/5 Paul Menzel <paulepanter@users.sourceforge.net>:
-> > Am Freitag, den 05.11.2010, 13:08 +0100 schrieb Frans Meulenbroeks:
-> >> configure.ac matches target_system against *os2* to detect if we're
-> >> configuring for an os2 system. Unfortunately this also matches if the
-> >> target_system is nios-linux (which is not an os2 system :-) )
-> >> This patch adds an additional case. The patch is added to the individu=
-al
-> >> recipes and also made upstream.
+Dear OE folks,
+
+
+Am Freitag, den 05.11.2010, 11:03 +0100 schrieb Eric B=C3=A9nard:
+
+> Le 05/11/2010 10:49, Martin Jansa a =C3=A9crit :
+> >>> I know it could lower number of people using this future release bran=
+ch
+> >>> during testing period before release, but still seems better then pus=
+hing 3
+> >>> weeks of commits from my local branch as soon as release is branched =
+and
+> >>> master open for new recipes again.
 > >
-> > Please add a link to this commit message and the patch headers pointing
-> > to the upstream commit, list message or ticket.
+> >> That's the way linux, u-boot&  co are running and when the new merge w=
+indow
+> >> opens several thousand of patches can be merged in a few days.
 > >
-> >> Patch is tested by fully building 1.3.2 and by running
-> >> bitbake -c patch for the other recipes.
-> >>
-> >> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-> >>
-> >> a---
-> >>  .../xorg-lib/libx11-1.1.5/configure.ac-nios2.patch |   12 +++++++++++=
-+
-> >>  .../xorg-lib/libx11-1.3.2/configure.ac-nios2.patch |   12 +++++++++++=
-+
-> >>  .../xorg-lib/libx11-1.3.6/configure.ac-nios2.patch |   12 +++++++++++=
-+
-> >>  .../libx11-1.3.99.903/configure.ac-nios2.patch     |   12 +++++++++++=
-+
-> >>  recipes/xorg-lib/libx11_1.1.5.bb                   |    3 ++-
-> >>  recipes/xorg-lib/libx11_1.3.2.bb                   |    3 ++-
-> >>  recipes/xorg-lib/libx11_1.3.6.bb                   |    3 ++-
-> >>  recipes/xorg-lib/libx11_1.3.99.903.bb              |    3 ++-
-> >>  8 files changed, 56 insertions(+), 4 deletions(-)
-> >>  create mode 100644 recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.p=
-atch
-> >>  create mode 100644 recipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.p=
-atch
-> >>  create mode 100644 recipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.p=
-atch
-> >>  create mode 100644 recipes/xorg-lib/libx11-1.3.99.903/configure.ac-ni=
-os2.patch
-> >>
-> >> diff --git a/recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch b/=
-recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch
-> >> new file mode 100644
-> >> index 0000000..5605a59
-> >> --- /dev/null
-> >> +++ b/recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch
-> >> @@ -0,0 +1,12 @@
-> >> +Index: libX11-1.3.2/configure.ac
-> >> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >> +--- libX11-1.3.2.orig/configure.ac   2010-11-05 10:30:33.825536983 +0=
-100
-> >> ++++ libX11-1.3.2/configure.ac        2010-11-05 10:31:25.913899269 +0=
-100
-> >> +@@ -202,6 +202,7 @@
-> >> + # arch specific things
-> >> + WCHAR32=3D"1"
-> >> + case $target_alias in
-> >> ++  nios2*) os2=3D"false" ;;
-> >> +   *os2*) os2=3D"true" ; WCHAR32=3D"0" ;;
-> >> +   *) ;;
-> >> + esac
-> >
-> > It looks like these three patches are exactly the same. Would one file
-> > in the version independent directory be enough?
-> >
-> > [=E2=80=A6]
->=20
-> They are exactly the same.
-> I discussed this with Martin Jansa on irc, and we felt it would be
-> best to submit the patch upstream.
+> > And also why there is linux-next, but I agree that in our scale we can =
+keep new
+> > recipes and features in local checkouts/out-of-tree branches without to=
+o
+> > much pain in merging them after 3 weeks.
+>
+> a temporary next branch could be open to host new big patches and then me=
+rged=20
+> to master once stable is out.
 
-I agree.
+I certainly would encourage to push your changes to the OE repository as
+soon as possible to share your work so other can use it or improve it.
+Be it `master` or some different branch.
 
-> Then if it is in the inc file, it needs to be taken out again when the
-> next version comes.
+> This way most peoples getting oe during the stabilization period will get=
+=20
+> master and will test it and developers will be able to follow their=20
+> development in the next branch.
+> I think that during this stabilization weeks, developers have to do the e=
+ffort=20
+> to checkout the next branch if they want to work on it and user must get =
+the=20
+> master branch being stabilized as a default, but not the reverse.
 
-Sorry, I did not make myself clear. My point was if you could put
-`configure.ac-nios2.patch` into `libX11/` or `files`.
+I guess both sides have good arguments. I would decide on what the
+documentation suggests to beginners and new contributors. If it suggests
+that `master` is the development branch new contributions should be
+based on, I suggest to create a new branch for the next stable release.
+If the documentation suggests something different, then the next stable
+release can be based on the master branch.
 
-> Hence it was put in the individual files.
->=20
-> BTW it looks like upstream might go for a slightly different patch.
-> I'll leave it to Martin to decide whether to go for that one or for
-> this one (he is on cc of the upstream correspondence).
-
-Again, could you provide a link to that discussion.
-
-> I'll be afk next week so can't give followup on this.
-
-Understood. Thank you for your fast reply.
+In either case the documentation has to be correct or needs to be
+updated to reflect the changes.
 
 
 Thanks,
 
 Paul
 
---=-am5B5BkxG5bxlrtg29Jc
+--=-76EXjTXoBr9jz58VEtwp
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkzUBhgACgkQPX1aK2wOHVhVlACfY0//VyVJg04bW3Z7qKcyXuoJ
-hX0AnRC7+zkaLTa49joIoDmGJdAd3uMx
-=rVZg
+iEYEABECAAYFAkzUB2IACgkQPX1aK2wOHVjvuACgjTTpRYrGqaPcEdVDT58bSEeW
+TTgAnRRpLD06oluv45nCxAO60FBzKnmI
+=VdKT
 -----END PGP SIGNATURE-----
 
---=-am5B5BkxG5bxlrtg29Jc--
+--=-76EXjTXoBr9jz58VEtwp--
