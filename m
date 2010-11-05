@@ -1,31 +1,26 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1PESME-0002Jg-9i
+	(envelope-from <rik@mate.hex>) id 1PESWS-000471-6u
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 20:53:54 +0100
-Received: from [192.168.1.128] (95-90-74-25-dynip.superkabel.de [95.90.74.25])
-	by dd20204.kasserver.com (Postfix) with ESMTP id EDC951805CB58
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Nov 2010 20:53:02 +0100 (CET)
-Message-ID: <4CD4608F.1060207@opensimpad.org>
-Date: Fri, 05 Nov 2010 20:52:47 +0100
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Fri, 05 Nov 2010 21:04:28 +0100
+Received: by mate.hex (Postfix, from userid 1000)
+	id 1FB923D4F2; Fri,  5 Nov 2010 23:03:33 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-References: <4CD43116.5020304@lambsys.com>	<AANLkTincNJZVqfZKkHfHRTu9R9bN+_DL_5bfHvfQXRiR@mail.gmail.com>
-	<4CD45A64.7090306@lambsys.com>
-In-Reply-To: <4CD45A64.7090306@lambsys.com>
-X-SA-Exim-Connect-IP: 85.13.140.93
-X-SA-Exim-Mail-From: Bernhard.Guillon@opensimpad.org
+Date: Fri,  5 Nov 2010 23:03:31 +0300
+Message-Id: <1288987411-14231-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <AANLkTi==Pf6K0p48n8cJhMnws6=43qGrX5HAPRgYyJaj@mail.gmail.com>
+References: <AANLkTi==Pf6K0p48n8cJhMnws6=43qGrX5HAPRgYyJaj@mail.gmail.com>
+X-SA-Exim-Connect-IP: 93.100.16.104
+X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Random problems with building locales
+Subject: [PATCH] openldap: fix ltmain.sh location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,21 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 19:53:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Nov 2010 20:04:28 -0000
 
-On 05.11.2010 20:26, David Lambert wrote:
-> Is there a quick workaround?
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ recipes/openldap/openldap_2.4.23.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-You can add
-
-ENABLE_BINARY_LOCALE_GENERATION =3D "0"
-
-to your local.conf. It will disable locale generation.
-
-Best regards
-Bernhard
+diff --git a/recipes/openldap/openldap_2.4.23.bb b/recipes/openldap/openldap_2.4.23.bb
+index 3ac15f6..f8f3fb5 100644
+--- a/recipes/openldap/openldap_2.4.23.bb
++++ b/recipes/openldap/openldap_2.4.23.bb
+@@ -188,7 +188,7 @@ DEPENDS      += "${OPENLDAP_DEPENDS}"
+ CPPFLAGS_append = " -D_GNU_SOURCE"
+ 
+ do_configure() {
+-	cp ${STAGING_DATADIR}/libtool/config/ltmain.sh ${S}/build
++	cp ${STAGING_DATADIR_NATIVE}/libtool/config/ltmain.sh ${S}/build
+ 	rm -f ${S}/libtool
+ 	aclocal
+ 	libtoolize --force --copy
+-- 
+1.6.4.2
 
 
 
