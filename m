@@ -1,42 +1,35 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PEH6H-0000XG-6O
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PEHKB-0002bz-8k
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 08:52:41 +0100
-Received: by iwn42 with SMTP id 42so2563685iwn.6
+	Fri, 05 Nov 2010 09:07:17 +0100
+Received: by iwn42 with SMTP id 42so2575728iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 00:51:49 -0700 (PDT)
+	Fri, 05 Nov 2010 01:06:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=9RSOeE+dIo9Uboy379G2SV7wEau7W97utK3vXV4tctI=;
-	b=WxIzJhAaizMnUFbBDDJaILe/3H0+lKkcP4oR8KE9qo32Ts8pa7X0QSf6esZqLlnGCj
-	lPWGRyLJOZsyJ4RscUgUU7u5wja0dap1pK2A56SjqCLrd/OHocJuqmbvKe1hUzfpDhPW
-	FJ0kX3AOkTAcQg45qeiVnPdDg7/rwYz1OyY6I=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=qeidqz/diuSJ/tDXbNHP1MD3IzViHoYfnpwLVIzmYLY=;
+	b=Ao4E/KMRQxMRGAHsoO+d7q56tfvBAH2A96t290h1Z1WDfxYK8x867FUk8lA39m1m1S
+	BMvFoYrPilxA+PhCz/H/Lra5xf+z4LTg0GbIG6UX5Mtqri7UgBaK2nuNtJ4c1ZsiAYhw
+	XqnN1s7LuUeaXlN3KnIiLIrAqU828TaBFwR80=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=EtgkDOaJWsUrsZ9uiKI02MzfuEJW89hx7EHpMWHA/J6C4n0NF5Ia+DWzO1GLMpMfET
-	OybEDnJFhJJjmXhdli35evtNGnOzqCTlkBDJFcC8ZCDwoYRYRPhohi0ipue5ALkSC6Ae
-	L9XjP/Fb1/AYO+BAxPBcBfFL0VTruNi2usScM=
+	:content-type:content-transfer-encoding;
+	b=VZ0mQWhI4eAdkKTD5wyy2h9RingJsMHd2bHDrhdVoGG5GZbCjH8+MIgq0v5W9zw0bL
+	GTtEuBppNmr9V7usAM6ZpDEFjiaKLJ16BxYQGuk/0sXTB3Qg++zW1EZ8kMG6ySaVQ6LH
+	rq0cpPDVMDQDwce0chgJIxwcnrt/etwbGdY4Q=
 MIME-Version: 1.0
-Received: by 10.42.230.65 with SMTP id jl1mr1511792icb.134.1288943509754; Fri,
-	05 Nov 2010 00:51:49 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Fri, 5 Nov 2010 00:51:49 -0700 (PDT)
-In-Reply-To: <AANLkTin7K8vW2E0_MhMp+B_9YKCKpG+fCff4WmGmLnwf@mail.gmail.com>
-References: <4CCF64DD.9080709@gmail.com>
-	<AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
-	<AANLkTiktvcs1HsktTWaFATVDR492tPCHb_d7JU1xm_uW@mail.gmail.com>
-	<AANLkTinjMC_Eou5Bt9FE07Vn-4xXD_2ugrgCGKgcPxvP@mail.gmail.com>
-	<AANLkTinN5pGVW6-aos16m7gZo2ytaF1cgh+9uO3k+G+9@mail.gmail.com>
-	<20101103154735.GE3440@jama>
-	<AANLkTi=d_G9A0Mf2zMzG-9zmec06vYNaB1pLrkDQnyvE@mail.gmail.com>
-	<AANLkTikcC1DKQ8ADas78qPZRMeGF09MXY8ph7qoZT=1Y@mail.gmail.com>
-	<AANLkTimcum78VPKqr9YiFYUdYf84Hnifs9Phs9uUAQt4@mail.gmail.com>
-	<AANLkTinbqMqinR7jaaV_rMqA8nU6D2EZ_G_Ppe6XW41f@mail.gmail.com>
-	<AANLkTin7K8vW2E0_MhMp+B_9YKCKpG+fCff4WmGmLnwf@mail.gmail.com>
-Date: Fri, 5 Nov 2010 08:51:49 +0100
-Message-ID: <AANLkTimKNoeH7LWFgC0zaj7Rp045mMw_CKtJn5D+pVkz@mail.gmail.com>
+Received: by 10.42.74.137 with SMTP id w9mr1261347icj.201.1288944372018; Fri,
+	05 Nov 2010 01:06:12 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Fri, 5 Nov 2010 01:06:11 -0700 (PDT)
+In-Reply-To: <20101105073448.GD3702@excalibur.local>
+References: <AANLkTin8J-vi624U2Z4Emr=Zajq0+CsSnFR=a8+kjuOv@mail.gmail.com>
+	<20101105010014.GA6115@denix.org>
+	<20101105073448.GD3702@excalibur.local>
+Date: Fri, 5 Nov 2010 09:06:11 +0100
+Message-ID: <AANLkTin2SRV5M5GEfgVkj4hDeqdi5p7O1e7jS90DHcC=@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -47,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gphoto2_2.4.8.bb: Stop configure from looking in /usr/local/include
+Subject: Re: Moving to layered structure of openembedded metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,55 +54,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 07:52:42 -0000
+X-List-Received-Date: Fri, 05 Nov 2010 08:07:17 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2010/11/3 Khem Raj <raj.khem@gmail.com>:
-> On Wed, Nov 3, 2010 at 1:21 PM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
->>> On Wed, Nov 3, 2010 at 12:04 PM, Frans Meulenbroeks
->>> <fransmeulenbroeks@gmail.com> wrote:
->>>> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
->>>>
->>>>>
->>>>> yes a more detailed solution is better. you have to go through the
->>>>> configure of every
->>>>> package and understand the behavior then act upon. As I said before
->>>>> its a tedious task
->>>>>
->>>> I'm well aware of this. That is also why in the infrastructure thread
->>>> I suggested using automated testing to find misbehaving packages.
->>>>
->>>> Btw there are 355 .inc files that contain the word autotools and 1899 .bb files.
->>>> Of course there are lots of dups in there.
->>>> And maybe for the base recipes we can convince the yocto people that
->>>> this is a serious QA issue (and they have some people employed to work
->>>> on this if I understood properly).
->>>>
->>>
->>> numbers means not so much when it comes down to this. I don't know if
->>> any distribution that even does that
->>> so I take comfort in everyone being wrong.
->>>
->>
->> I agree that numbers don't mean that much. Just wanted to give an
->> indication of the possible effort needed.
->> Also no idea how debian does this.
+2010/11/5 Stefan Schmidt <stefan@datenfreihafen.org>:
+> Hello.
 >
-> Does it do it in first place ?
+> On Thu, 2010-11-04 at 21:00, Denys Dmytriyenko wrote:
+>>
+>> That is already being discussed and decided. See the following previous =
+topics
+>> on the mailing list...
+>
+> To clear this up a bit. There can't be a real decision for now. Not all
+> developers have been present at the OEDEM and we haven't discussed =A0eve=
+ry detail
+> their either. :)
+>
+> Most, if not all, people liked the idea during the OEDEM discussions, but=
+ we
+> would need more input on problem that this may rise. As it stands I'm hap=
+py to
+> see Khem coming up to put this on the ml. :)
+>
+> One I currently see is how we can keep it all working when the layers are
+> maintained in different places and what kid of combinational explosion we=
+ will
+> have with layers in different places.
+>
 
-I peeked briefly at the sources.
-Debian seems to resolve the problem by going for the max dependencies
-so autotools can pick up everything.
-E.g. for gphoto2, lenny has a depends on both libexif and libreadline
-(see http://packages.debian.org/lenny/gphoto2)
-So basically they go for the max config.
+Good points!
 
-We could do the same. Then again for deeply embedded systems it might
-be desirable to allow more finegrained tuning.
-(did I hear someone say USE flags ? )
+To keep things working I feel it is important to minimize the inter
+layer dependencies (and make the ones that exist explicit).
+My suggestion is that every layer has a maintainer/custodian/owner or
+whatever name you want to give it who is responsible to keep the layer
+in good shape.
+Presumably this means we get a structure where there are two versions
+of a layer: the last validated/integrated/accepted one and the working
+one.
 
-Enjoy! Frans
+Frans
 
 
