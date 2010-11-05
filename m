@@ -1,47 +1,45 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <angelox.123@gmail.com>) id 1PEUkK-0005LP-7c
+	(envelope-from <anarsoul@gmail.com>) id 1PEUkw-0005PT-1p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 23:26:57 +0100
-Received: by ywo7 with SMTP id 7so2034863ywo.6
+	Fri, 05 Nov 2010 23:27:34 +0100
+Received: by eya28 with SMTP id 28so2128250eya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 15:26:02 -0700 (PDT)
+	Fri, 05 Nov 2010 15:26:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=HtSNj9FHvOvzw/55L4dSYaWfe1gr/ofvdEfW8btpjMQ=;
-	b=M6ztpewIW9JADMvNbma7Shn394Ta9FvmgNe37LnEzuxKhLtykuJi6TCh1KZmyibbV2
-	sLjyKb8VMMQ7MmpKU7XBN2tmNSas05hEO3MzYf+E9FbGG39zsgqVJ0TOg1+i/sSF5YKG
-	oCW7mE1goXYF6Hn4HdGiZhfa/nT81psv53cs0=
+	bh=lvDOCM3XdxmJMVvG+I/l+YYUMuNsI97N+xH0JctKKSk=;
+	b=xqBppvGOyqQjnTUTfUBqRtf+Pl/9faLy6UCMeOdxFTX20gJs5NxAfANfXCDISwmcIz
+	S/F/R4oBOCNpsEa509mQR+tPyaOLK7GDRQLH9fKId9hQM3ZnGMHPWnczjf0csKdRGZ9P
+	4GYjLthxiPOhPlRBiF1uIQEs6syq5PAqY3JS4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=tpXIkQN3JPfeqQIhhQk7bAJr5ZU9rqFwCJuXDRVfJM3DPn2nlyE/nT6cwb4NxXyB80
-	3DXLzlIynDqINJQ7WLkfuAmyZBd1HpknQ4mfERGmleuZ613UDH0o+gM/XJDwXcyYPeat
-	kKPfzZP6auDFWxsi2aH94bjTdG5XJjcH2TEBw=
-Received: by 10.151.26.7 with SMTP id d7mr4369760ybj.202.1288995962248;
-	Fri, 05 Nov 2010 15:26:02 -0700 (PDT)
-Received: from localhost.localdomain (201-95-46-2.dsl.telesp.net.br
-	[201.95.46.2])
-	by mx.google.com with ESMTPS id z16sm1311775ybm.4.2010.11.05.15.26.00
+	b=XTa8SuEmOeB5eUkiQMZTHglwL8jkC5LexIXWhFrduFGSr999Hkw/yVPzXheYbXjZ6J
+	YlDbjEUvjWSr0+uXXHIFx5HMS1leIS7g4bUQU6ig2cove0gPLT+3Paui26dS6jPo9TsQ
+	YwXDTfin4EpzfnAdtpNujtEB9U9rU0C7EnV7w=
+Received: by 10.213.32.204 with SMTP id e12mr533457ebd.43.1288996002145;
+	Fri, 05 Nov 2010 15:26:42 -0700 (PDT)
+Received: from localhost.localdomain ([80.249.90.154])
+	by mx.google.com with ESMTPS id v51sm1518814eeh.22.2010.11.05.15.26.39
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 05 Nov 2010 15:26:01 -0700 (PDT)
-From: "Angelo S. Mavridis Bartolome" <angelox.123@gmail.com>
+	Fri, 05 Nov 2010 15:26:40 -0700 (PDT)
+From: Vasily Khoruzhick <anarsoul@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Nov 2010 20:25:40 -0200
-Message-Id: <1288995940-1827-1-git-send-email-angelo@pynell.com>
+Date: Sat,  6 Nov 2010 00:25:32 +0200
+Message-Id: <1288995932-16009-1-git-send-email-anarsoul@gmail.com>
 X-Mailer: git-send-email 1.7.3.2
-In-Reply-To: <angelo@pynell.com>
-References: <angelo@pynell.com>
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: angelox.123@gmail.com
+In-Reply-To: <1288864227-8685-1-git-send-email-anarsoul@gmail.com>
+References: <1288864227-8685-1-git-send-email-anarsoul@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: anarsoul@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "Angelo S. Mavridis Bartolome" <angelo@pynell.com>
-Subject: [PATCH] recipes/fluxbox/fluxbox_1.1.1.bb - Fixed depends for libxpm recipes/initscripts/file/halt - Fixed poweroff when booted from NFS
+Subject: [PATCH v2 1/2] eglibc: fix build issue with make-3.82
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,42 +53,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 22:26:58 -0000
+X-List-Received-Date: Fri, 05 Nov 2010 22:27:35 -0000
 
-* Fix to halt courtesy by penghb,patch by angelox_123
-* Fix to fluxbox compile with libxpm by angelox_123
+Add patch to fix this error when building eglibc-2.11, eglibc-2.12
+with make-3.82:
 
-Signed-off-by: Angelo S. Mavridis Bartolome <angelo@pynell.com>
+make[2]: Entering directory `eglibc-2_12/libc/manual'
+Makefile:246: *** mixed implicit and normal rules.  Stop.
+
+Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
 ---
- recipes/fluxbox/fluxbox_1.1.1.bb |    2 +-
- recipes/initscripts/files/halt   |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Add fixed eglibc versions to patch comment
 
-diff --git a/recipes/fluxbox/fluxbox_1.1.1.bb b/recipes/fluxbox/fluxbox_1.1.1.bb
-index 55a747c..85f4c8b 100644
---- a/recipes/fluxbox/fluxbox_1.1.1.bb
-+++ b/recipes/fluxbox/fluxbox_1.1.1.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "The Fluxbox Windowmanager"
- HOMEPAGE = "http://www.fluxbox.org"
- LICENSE = "MIT"
- DEPENDS = "fontconfig virtual/libx11"
--
-+DEPENDS += "libxpm"
- PR = "r1"
- PE = "1"
- 
-diff --git a/recipes/initscripts/files/halt b/recipes/initscripts/files/halt
-index d8cab22..b869966 100644
---- a/recipes/initscripts/files/halt
-+++ b/recipes/initscripts/files/halt
-@@ -20,6 +20,6 @@ then
- 	hddown=""
- fi
- 
--halt -d -f -i -p $hddown
-+/bin/busybox poweroff -f
- 
- : exit 0
+ recipes/eglibc/eglibc_2.11.bb              |    3 ++-
+ recipes/eglibc/eglibc_2.12.bb              |    3 ++-
+ recipes/eglibc/files/eglibc-make-382.patch |   15 +++++++++++++++
+ 3 files changed, 19 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/eglibc/files/eglibc-make-382.patch
+
+diff --git a/recipes/eglibc/eglibc_2.11.bb b/recipes/eglibc/eglibc_2.11.bb
+index 3763124..89742b6 100644
+--- a/recipes/eglibc/eglibc_2.11.bb
++++ b/recipes/eglibc/eglibc_2.11.bb
+@@ -4,7 +4,7 @@ DEFAULT_PREFERENCE = "-1"
+ DEPENDS += "gperf-native"
+ FILESPATHPKG =. "eglibc-svn:"
+ PV = "2.11"
+-PR = "${INC_PR}.7"
++PR = "${INC_PR}.8"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="10690"
+ EGLIBC_BRANCH="eglibc-2_11"
+@@ -14,6 +14,7 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://shorten-build-commands.patch \
+            file://sh4_set_fpscr.patch \
+            file://sh4_local-fpscr_values.patch \
++           file://eglibc-make-382.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.bb
+index 40ab65c..956f64b 100644
+--- a/recipes/eglibc/eglibc_2.12.bb
++++ b/recipes/eglibc/eglibc_2.12.bb
+@@ -4,7 +4,7 @@ DEFAULT_PREFERENCE = "-1"
+ DEPENDS += "gperf-native"
+ FILESPATHPKG =. "eglibc-svn:"
+ PV = "2.12"
+-PR = "${INC_PR}.6"
++PR = "${INC_PR}.7"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="11762"
+ EGLIBC_BRANCH="eglibc-2_12"
+@@ -16,6 +16,7 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://sh4_local-fpscr_values.patch \
+            file://eglibc-dont-cache-slibdir.patch \
+            file://armv4-eabi-compile-fix.patch \
++           file://eglibc-make-382.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+diff --git a/recipes/eglibc/files/eglibc-make-382.patch b/recipes/eglibc/files/eglibc-make-382.patch
+new file mode 100644
+index 0000000..5ecad90
+--- /dev/null
++++ b/recipes/eglibc/files/eglibc-make-382.patch
+@@ -0,0 +1,15 @@
++http://git.frugalware.org/gitweb/gitweb.cgi?p=frugalware-current.git;a=blob_plain;f=source/base/glibc/make-3.82-fix.patch;hb=8217c32ecc2e14962847ba3d8a272eb64a3dba4f
++
++--- libc/manual/Makefile
+++++ libc/manual/Makefile
++@@ -232,7 +232,9 @@
++ .PHONY: stubs
++ stubs: $(objpfx)stubs
++ endif
++-$(objpfx)stubs ../po/manual.pot $(objpfx)stamp%:
+++$(objpfx)stubs ../po/manual.pot:
+++	touch $@
+++$(objpfx)stamp%:
++ 	$(make-target-directory)
++ 	touch $@
++ 
 -- 
 1.7.3.2
 
