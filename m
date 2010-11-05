@@ -1,48 +1,53 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PEGzE-0000HW-IA
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PEH6H-0000XG-6O
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 08:45:26 +0100
-Received: by bwz10 with SMTP id 10so2584160bwz.6
+	Fri, 05 Nov 2010 08:52:41 +0100
+Received: by iwn42 with SMTP id 42so2563685iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 00:44:33 -0700 (PDT)
+	Fri, 05 Nov 2010 00:51:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=5IC0WYJg76WL1R50M3U+fiYnCJL2cfR6wg0iCRkmtrY=;
-	b=LiXGJwJVu9vv+42RwrVSQ5I+rDBa0cExORee3aCgSnPpogd201CL3GqWQzl9l8IWeQ
-	/EX1uvGvXHQVIjeLfAEWtCF3gIj4UyMgpRa8wrFIQrKGd00qCfcrNTxCcZoiRU54EPoG
-	aYVN7q8jVlFmafFHe5bnnir7SjsUzagM9Li3k=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=9RSOeE+dIo9Uboy379G2SV7wEau7W97utK3vXV4tctI=;
+	b=WxIzJhAaizMnUFbBDDJaILe/3H0+lKkcP4oR8KE9qo32Ts8pa7X0QSf6esZqLlnGCj
+	lPWGRyLJOZsyJ4RscUgUU7u5wja0dap1pK2A56SjqCLrd/OHocJuqmbvKe1hUzfpDhPW
+	FJ0kX3AOkTAcQg45qeiVnPdDg7/rwYz1OyY6I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=PfNnjsrgXW56gJzDWNwugktih/UG5L9zwL+KLqIodHHvCws6YcfjsfLi+jYnll/kyx
-	IjwmVG3B3rbyeuiaswg5d3bjX45q7Zou+7ewTnmL3b2WOvzptElcpMlwTvjSgZi4Osos
-	4N+ED80hDHPwGnCESdhHUnOyZhxZh4+IR9wzc=
-Received: by 10.204.112.13 with SMTP id u13mr1554672bkp.82.1288943068956;
-	Fri, 05 Nov 2010 00:44:28 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id t10sm742186bkj.16.2010.11.05.00.44.28
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 05 Nov 2010 00:44:28 -0700 (PDT)
-Date: Fri, 5 Nov 2010 08:44:09 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101105074341.GK3440@jama>
-References: <201011050735.26140.captain.deadly@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=EtgkDOaJWsUrsZ9uiKI02MzfuEJW89hx7EHpMWHA/J6C4n0NF5Ia+DWzO1GLMpMfET
+	OybEDnJFhJJjmXhdli35evtNGnOzqCTlkBDJFcC8ZCDwoYRYRPhohi0ipue5ALkSC6Ae
+	L9XjP/Fb1/AYO+BAxPBcBfFL0VTruNi2usScM=
 MIME-Version: 1.0
-In-Reply-To: <201011050735.26140.captain.deadly@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.42.230.65 with SMTP id jl1mr1511792icb.134.1288943509754; Fri,
+	05 Nov 2010 00:51:49 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Fri, 5 Nov 2010 00:51:49 -0700 (PDT)
+In-Reply-To: <AANLkTin7K8vW2E0_MhMp+B_9YKCKpG+fCff4WmGmLnwf@mail.gmail.com>
+References: <4CCF64DD.9080709@gmail.com>
+	<AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
+	<AANLkTiktvcs1HsktTWaFATVDR492tPCHb_d7JU1xm_uW@mail.gmail.com>
+	<AANLkTinjMC_Eou5Bt9FE07Vn-4xXD_2ugrgCGKgcPxvP@mail.gmail.com>
+	<AANLkTinN5pGVW6-aos16m7gZo2ytaF1cgh+9uO3k+G+9@mail.gmail.com>
+	<20101103154735.GE3440@jama>
+	<AANLkTi=d_G9A0Mf2zMzG-9zmec06vYNaB1pLrkDQnyvE@mail.gmail.com>
+	<AANLkTikcC1DKQ8ADas78qPZRMeGF09MXY8ph7qoZT=1Y@mail.gmail.com>
+	<AANLkTimcum78VPKqr9YiFYUdYf84Hnifs9Phs9uUAQt4@mail.gmail.com>
+	<AANLkTinbqMqinR7jaaV_rMqA8nU6D2EZ_G_Ppe6XW41f@mail.gmail.com>
+	<AANLkTin7K8vW2E0_MhMp+B_9YKCKpG+fCff4WmGmLnwf@mail.gmail.com>
+Date: Fri, 5 Nov 2010 08:51:49 +0100
+Message-ID: <AANLkTimKNoeH7LWFgC0zaj7Rp045mMw_CKtJn5D+pVkz@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: emacs alternative?
+Subject: Re: [PATCH] gphoto2_2.4.8.bb: Stop configure from looking in /usr/local/include
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,26 +61,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 07:45:26 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 05 Nov 2010 07:52:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Nov 05, 2010 at 07:35:25AM +0000, captain.deadly@gmail.com wrote:
-> I posted here before to say that emacs in OE doesn't build on my machine as 
-> the Makefile's being generated by autotools are being corrupted somehow. I've 
-> not been able to get to the bottom of it at all.
+2010/11/3 Khem Raj <raj.khem@gmail.com>:
+> On Wed, Nov 3, 2010 at 1:21 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
+>>> On Wed, Nov 3, 2010 at 12:04 PM, Frans Meulenbroeks
+>>> <fransmeulenbroeks@gmail.com> wrote:
+>>>> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
+>>>>
+>>>>>
+>>>>> yes a more detailed solution is better. you have to go through the
+>>>>> configure of every
+>>>>> package and understand the behavior then act upon. As I said before
+>>>>> its a tedious task
+>>>>>
+>>>> I'm well aware of this. That is also why in the infrastructure thread
+>>>> I suggested using automated testing to find misbehaving packages.
+>>>>
+>>>> Btw there are 355 .inc files that contain the word autotools and 1899 .bb files.
+>>>> Of course there are lots of dups in there.
+>>>> And maybe for the base recipes we can convince the yocto people that
+>>>> this is a serious QA issue (and they have some people employed to work
+>>>> on this if I understood properly).
+>>>>
+>>>
+>>> numbers means not so much when it comes down to this. I don't know if
+>>> any distribution that even does that
+>>> so I take comfort in everyone being wrong.
+>>>
+>>
+>> I agree that numbers don't mean that much. Just wanted to give an
+>> indication of the possible effort needed.
+>> Also no idea how debian does this.
+>
+> Does it do it in first place ?
 
-http://article.gmane.org/gmane.comp.handhelds.shr.devel/3131/match=mg
+I peeked briefly at the sources.
+Debian seems to resolve the problem by going for the max dependencies
+so autotools can pick up everything.
+E.g. for gphoto2, lenny has a depends on both libexif and libreadline
+(see http://packages.debian.org/lenny/gphoto2)
+So basically they go for the max config.
 
-and 
+We could do the same. Then again for deeply embedded systems it might
+be desirable to allow more finegrained tuning.
+(did I hear someone say USE flags ? )
 
-emacs-x11_23.1.bb builds in SHR feeds just fine (so you can look there
-for patches needed by emacs_22.3 - probably
-emacs-x11-23.1/configure.in.lost.backslashes.patch).
-
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Enjoy! Frans
 
 
