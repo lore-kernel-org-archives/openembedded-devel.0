@@ -1,44 +1,34 @@
 Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PEPzA-0000IE-9I
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PEQ1p-0000RA-1z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 18:21:58 +0100
-Received: by yxe42 with SMTP id 42so2398563yxe.6
+	Fri, 05 Nov 2010 18:24:42 +0100
+Received: by yxe42 with SMTP id 42so2400793yxe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 10:21:02 -0700 (PDT)
+	Fri, 05 Nov 2010 10:23:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=zjZNRCvErZAb7rQLcozFnCD6Vl3dz8XrvF13iEykREk=;
-	b=m2WZs2fuc/LpVF6YSZDPXPMlqGs8bpssT3yIg0e6TYRIZ6u9gYdQfbnHmnxuzAXj+v
-	g8QaZghN9dW0+XZkQ3SODaPzNwU+sxoCdv3CrS6XJqQjXXIkaopOPBGNqcu0/hUamWq0
-	tUZ1hfM/09vmyAzRAHwcAki2QuI71Cujkin1c=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=QpPFYsZPA4loTjgYXJR6cSmbjaMNdgmjyoHGB6vo8jc=;
+	b=vSJPtYrt/hS3dhciiJLvYAuZDIs1Ch7ZG4f1gHeQG6uirLdl2HiJAdPYmWJ8y02+2W
+	9fBFC0HCU4YrBf+Oa6aYG3g+AZ0WfJxfCGquwzgmtx1ID/8D66Y/SDSkPj8MOhADAr2m
+	yzk4sveBcOMeYCNjT+2ZkgdvDQpBykrOpQx/I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=YQKr8uHKDo8aFWc1qDiDl5ed70cSfzyS7BuP7T4u/bGYUYOSxTojtmOnxpXnPKu7qI
-	kKA5eKLC1eZc2HLpKIuhKEnp6W8SuY2pXj11Piefi+6eweazyV3sJeMDTcACLVmtLjOw
-	6n5qRDQOrFr5W3NFfCaAsx8J7jW0ERrtkn+fQ=
+	:content-type:content-transfer-encoding;
+	b=Q0NnhrJmPTKKD/lnxSA1WlJvk3xvzfBsuo0vH6qfYDuvcHCm8g6BDrDgf18uhBDZY/
+	gtypWk9QrjRfOcQL+suGs09XsMn/5Ajxk3Z4PlqYDbL01kyVwaMS1LKqTSHXnuKD2uS5
+	dUvHrWtSHax4lP9XesJvGIpEsqOBxYdGXdoac=
 MIME-Version: 1.0
-Received: by 10.42.230.65 with SMTP id jl1mr2134131icb.134.1288977662163; Fri,
-	05 Nov 2010 10:21:02 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Fri, 5 Nov 2010 10:21:01 -0700 (PDT)
-In-Reply-To: <AANLkTinianh_SAT_yuiw_2N6S7qhK-kS9f_SRjrq4Tfp@mail.gmail.com>
-References: <4CCF64DD.9080709@gmail.com>
-	<AANLkTin5-JTEH=Zk__6MWxY53t_WYufSX4x+w6sonE7t@mail.gmail.com>
-	<AANLkTiktvcs1HsktTWaFATVDR492tPCHb_d7JU1xm_uW@mail.gmail.com>
-	<AANLkTinjMC_Eou5Bt9FE07Vn-4xXD_2ugrgCGKgcPxvP@mail.gmail.com>
-	<AANLkTinN5pGVW6-aos16m7gZo2ytaF1cgh+9uO3k+G+9@mail.gmail.com>
-	<20101103154735.GE3440@jama>
-	<AANLkTi=d_G9A0Mf2zMzG-9zmec06vYNaB1pLrkDQnyvE@mail.gmail.com>
-	<AANLkTikcC1DKQ8ADas78qPZRMeGF09MXY8ph7qoZT=1Y@mail.gmail.com>
-	<AANLkTimcum78VPKqr9YiFYUdYf84Hnifs9Phs9uUAQt4@mail.gmail.com>
-	<AANLkTinbqMqinR7jaaV_rMqA8nU6D2EZ_G_Ppe6XW41f@mail.gmail.com>
-	<AANLkTin7K8vW2E0_MhMp+B_9YKCKpG+fCff4WmGmLnwf@mail.gmail.com>
-	<AANLkTimKNoeH7LWFgC0zaj7Rp045mMw_CKtJn5D+pVkz@mail.gmail.com>
-	<AANLkTinianh_SAT_yuiw_2N6S7qhK-kS9f_SRjrq4Tfp@mail.gmail.com>
-Date: Fri, 5 Nov 2010 18:21:01 +0100
-Message-ID: <AANLkTimdf2XqdVdROH2+L6CJSFstbNEAKYk5PswO4++7@mail.gmail.com>
+Received: by 10.42.157.199 with SMTP id e7mr994783icx.67.1288977827347; Fri,
+	05 Nov 2010 10:23:47 -0700 (PDT)
+Received: by 10.231.40.13 with HTTP; Fri, 5 Nov 2010 10:23:47 -0700 (PDT)
+In-Reply-To: <AANLkTi=sxWjPYHhwVf+RX-n6caCp6Sh-ikYGieYs0Y_b@mail.gmail.com>
+References: <1288958934-18209-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<AANLkTi=sxWjPYHhwVf+RX-n6caCp6Sh-ikYGieYs0Y_b@mail.gmail.com>
+Date: Fri, 5 Nov 2010 18:23:47 +0100
+Message-ID: <AANLkTinNp5XTHUBSKhvOtAjTE=3C8Wiiwnrj9RUaUqyN@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.213.175
@@ -49,7 +39,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gphoto2_2.4.8.bb: Stop configure from looking in /usr/local/include
+Subject: Re: [PATCH] libX11: patch configure.ac so a nios2 system is not seen as an os2 system.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,73 +53,234 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 17:21:58 -0000
+X-List-Received-Date: Fri, 05 Nov 2010 17:24:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
 2010/11/5 Khem Raj <raj.khem@gmail.com>:
-> On Fri, Nov 5, 2010 at 12:51 AM, Frans Meulenbroeks
+> On Fri, Nov 5, 2010 at 5:08 AM, Frans Meulenbroeks
 > <fransmeulenbroeks@gmail.com> wrote:
->> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
->>> On Wed, Nov 3, 2010 at 1:21 PM, Frans Meulenbroeks
->>> <fransmeulenbroeks@gmail.com> wrote:
->>>> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
->>>>> On Wed, Nov 3, 2010 at 12:04 PM, Frans Meulenbroeks
->>>>> <fransmeulenbroeks@gmail.com> wrote:
->>>>>> 2010/11/3 Khem Raj <raj.khem@gmail.com>:
->>>>>>
->>>>>>>
->>>>>>> yes a more detailed solution is better. you have to go through the
->>>>>>> configure of every
->>>>>>> package and understand the behavior then act upon. As I said before
->>>>>>> its a tedious task
->>>>>>>
->>>>>> I'm well aware of this. That is also why in the infrastructure thread
->>>>>> I suggested using automated testing to find misbehaving packages.
->>>>>>
->>>>>> Btw there are 355 .inc files that contain the word autotools and 1899 .bb files.
->>>>>> Of course there are lots of dups in there.
->>>>>> And maybe for the base recipes we can convince the yocto people that
->>>>>> this is a serious QA issue (and they have some people employed to work
->>>>>> on this if I understood properly).
->>>>>>
->>>>>
->>>>> numbers means not so much when it comes down to this. I don't know if
->>>>> any distribution that even does that
->>>>> so I take comfort in everyone being wrong.
->>>>>
->>>>
->>>> I agree that numbers don't mean that much. Just wanted to give an
->>>> indication of the possible effort needed.
->>>> Also no idea how debian does this.
->>>
->>> Does it do it in first place ?
+>> configure.ac matches target_system against *os2* to detect if we're
+>> configuring for an os2 system. Unfortunately this also matches if the
+>> target_system is nios-linux (which is not an os2 system :-) )
+>> This patch adds an additional case. The patch is added to the individual
+>> recipes and also made upstream.
 >>
->> I peeked briefly at the sources.
->> Debian seems to resolve the problem by going for the max dependencies
->> so autotools can pick up everything.
->> E.g. for gphoto2, lenny has a depends on both libexif and libreadline
->> (see http://packages.debian.org/lenny/gphoto2)
->> So basically they go for the max config.
+>> Patch is tested by fully building 1.3.2 and by running
+>> bitbake -c patch for the other recipes.
 >>
->> We could do the same. Then again for deeply embedded systems it might
->> be desirable to allow more finegrained tuning.
->> (did I hear someone say USE flags ? )
->>
+>> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 >
-> which is good for things that dont care about size. Not so good for
-> embedded systems I think.
-> and there are some packages I know which have catch-22 situation so
-> adding max depends is
-> also not a wholesome solution.
+> Hmmm good find. I am ok with general fix. but please consider other
+> review comments before you commit
 >
+> Acked-by: Khem Raj <raj.khem@gmail.com>
 
-Catch22 situations seem mostly to appear because one packag exports
-both a lib and a (sample) program.
-One example that I saw recently was libcdio and libcddb.
-
-Probably the only other way of catch 22 situations are triple or
-quadruple staged builds.(build A, build B rebuild A maybe rebuild B)
+I won't have time to commit next 10 days or so. I'll be mostly afk.
+If desired Martin (being the X maintainer iirc, can commit).
+And feel free to change the patch or the commit message (or maybe move
+to the alternative suggested upstream).
 
 Frans
+>
+>> ---
+>> =A0.../xorg-lib/libx11-1.1.5/configure.ac-nios2.patch | =A0 12 +++++++++=
++++
+>> =A0.../xorg-lib/libx11-1.3.2/configure.ac-nios2.patch | =A0 12 +++++++++=
++++
+>> =A0.../xorg-lib/libx11-1.3.6/configure.ac-nios2.patch | =A0 12 +++++++++=
++++
+>> =A0.../libx11-1.3.99.903/configure.ac-nios2.patch =A0 =A0 | =A0 12 +++++=
++++++++
+>> =A0recipes/xorg-lib/libx11_1.1.5.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+| =A0 =A03 ++-
+>> =A0recipes/xorg-lib/libx11_1.3.2.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+| =A0 =A03 ++-
+>> =A0recipes/xorg-lib/libx11_1.3.6.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+| =A0 =A03 ++-
+>> =A0recipes/xorg-lib/libx11_1.3.99.903.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
+=A0 =A03 ++-
+>> =A08 files changed, 56 insertions(+), 4 deletions(-)
+>> =A0create mode 100644 recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.p=
+atch
+>> =A0create mode 100644 recipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.p=
+atch
+>> =A0create mode 100644 recipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.p=
+atch
+>> =A0create mode 100644 recipes/xorg-lib/libx11-1.3.99.903/configure.ac-ni=
+os2.patch
+>>
+>> diff --git a/recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch b/re=
+cipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch
+>> new file mode 100644
+>> index 0000000..5605a59
+>> --- /dev/null
+>> +++ b/recipes/xorg-lib/libx11-1.1.5/configure.ac-nios2.patch
+>> @@ -0,0 +1,12 @@
+>> +Index: libX11-1.3.2/configure.ac
+>> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> +--- libX11-1.3.2.orig/configure.ac =A0 =A0 2010-11-05 10:30:33.82553698=
+3 +0100
+>> ++++ libX11-1.3.2/configure.ac =A02010-11-05 10:31:25.913899269 +0100
+>> +@@ -202,6 +202,7 @@
+>> + # arch specific things
+>> + WCHAR32=3D"1"
+>> + case $target_alias in
+>> ++ =A0nios2*) os2=3D"false" ;;
+>> + =A0 *os2*) os2=3D"true" ; WCHAR32=3D"0" ;;
+>> + =A0 *) ;;
+>> + esac
+>> diff --git a/recipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch b/re=
+cipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch
+>> new file mode 100644
+>> index 0000000..5605a59
+>> --- /dev/null
+>> +++ b/recipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch
+>> @@ -0,0 +1,12 @@
+>> +Index: libX11-1.3.2/configure.ac
+>> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> +--- libX11-1.3.2.orig/configure.ac =A0 =A0 2010-11-05 10:30:33.82553698=
+3 +0100
+>> ++++ libX11-1.3.2/configure.ac =A02010-11-05 10:31:25.913899269 +0100
+>> +@@ -202,6 +202,7 @@
+>> + # arch specific things
+>> + WCHAR32=3D"1"
+>> + case $target_alias in
+>> ++ =A0nios2*) os2=3D"false" ;;
+>> + =A0 *os2*) os2=3D"true" ; WCHAR32=3D"0" ;;
+>> + =A0 *) ;;
+>> + esac
+>> diff --git a/recipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch b/re=
+cipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch
+>> new file mode 100644
+>> index 0000000..5605a59
+>> --- /dev/null
+>> +++ b/recipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch
+>> @@ -0,0 +1,12 @@
+>> +Index: libX11-1.3.2/configure.ac
+>> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> +--- libX11-1.3.2.orig/configure.ac =A0 =A0 2010-11-05 10:30:33.82553698=
+3 +0100
+>> ++++ libX11-1.3.2/configure.ac =A02010-11-05 10:31:25.913899269 +0100
+>> +@@ -202,6 +202,7 @@
+>> + # arch specific things
+>> + WCHAR32=3D"1"
+>> + case $target_alias in
+>> ++ =A0nios2*) os2=3D"false" ;;
+>> + =A0 *os2*) os2=3D"true" ; WCHAR32=3D"0" ;;
+>> + =A0 *) ;;
+>> + esac
+>> diff --git a/recipes/xorg-lib/libx11-1.3.99.903/configure.ac-nios2.patch=
+ b/recipes/xorg-lib/libx11-1.3.99.903/configure.ac-nios2.patch
+>> new file mode 100644
+>> index 0000000..5605a59
+>> --- /dev/null
+>> +++ b/recipes/xorg-lib/libx11-1.3.99.903/configure.ac-nios2.patch
+>> @@ -0,0 +1,12 @@
+>> +Index: libX11-1.3.2/configure.ac
+>> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> +--- libX11-1.3.2.orig/configure.ac =A0 =A0 2010-11-05 10:30:33.82553698=
+3 +0100
+>> ++++ libX11-1.3.2/configure.ac =A02010-11-05 10:31:25.913899269 +0100
+>> +@@ -202,6 +202,7 @@
+>> + # arch specific things
+>> + WCHAR32=3D"1"
+>> + case $target_alias in
+>> ++ =A0nios2*) os2=3D"false" ;;
+>> + =A0 *os2*) os2=3D"true" ; WCHAR32=3D"0" ;;
+>> + =A0 *) ;;
+>> + esac
+>> diff --git a/recipes/xorg-lib/libx11_1.1.5.bb b/recipes/xorg-lib/libx11_=
+1.1.5.bb
+>> index e775585..b44dcc8 100644
+>> --- a/recipes/xorg-lib/libx11_1.1.5.bb
+>> +++ b/recipes/xorg-lib/libx11_1.1.5.bb
+>> @@ -1,7 +1,8 @@
+>> =A0require libx11.inc
+>> =A0DEPENDS =3D "${COMMON_DEPENDS}"
+>> -PR =3D "${INC_PR}.1"
+>> +PR =3D "${INC_PR}.2"
+>>
+>> +SRC_URI +=3D " file://configure.ac-nios2.patch"
+>> =A0SRC_URI[archive.md5sum] =3D "d1512d65dadd4f48c779d4749e7753a8"
+>> =A0SRC_URI[archive.sha256sum] =3D "da9272900e41615e9c5dc25d84730b8966da6=
+f5c8f4c40418dca2ad040fc8b82"
+>>
+>> diff --git a/recipes/xorg-lib/libx11_1.3.2.bb b/recipes/xorg-lib/libx11_=
+1.3.2.bb
+>> index b3d48ab..189d1ff 100644
+>> --- a/recipes/xorg-lib/libx11_1.3.2.bb
+>> +++ b/recipes/xorg-lib/libx11_1.3.2.bb
+>> @@ -1,10 +1,11 @@
+>> =A0require libx11.inc
+>> -PR =3D "${INC_PR}.2"
+>> +PR =3D "${INC_PR}.3"
+>> =A0# gcc 4.5 ends up ICEing with thumb and -O1 with -fno-omit-framepoint=
+er
+>> =A0# therefore if we are in thumb mode then we use -Os instead of -O1 fo=
+r
+>> =A0# DEBUG_OPTIMIZATION
+>>
+>> =A0DEBUG_OPTIMIZATION_thumb_append =3D " -Os"
+>> =A0SRC_URI +=3D " file://dolt-fix.patch"
+>> +SRC_URI +=3D " file://configure.ac-nios2.patch"
+>> =A0SRC_URI[archive.md5sum] =3D "001d780829f936e34851ef7cd37b4dfd"
+>> =A0SRC_URI[archive.sha256sum] =3D "4def4d5c9fce85d690f1f29d675154594acde=
+a3d3fe792d0cb513732c7b4bcb2"
+>> diff --git a/recipes/xorg-lib/libx11_1.3.6.bb b/recipes/xorg-lib/libx11_=
+1.3.6.bb
+>> index 625f906..8d9f343 100644
+>> --- a/recipes/xorg-lib/libx11_1.3.6.bb
+>> +++ b/recipes/xorg-lib/libx11_1.3.6.bb
+>> @@ -1,6 +1,7 @@
+>> =A0require libx11.inc
+>> -PR =3D "${INC_PR}.0"
+>> +PR =3D "${INC_PR}.1"
+>>
+>> =A0SRC_URI +=3D " file://dolt-fix.patch"
+>> +SRC_URI +=3D " file://configure.ac-nios2.patch"
+>> =A0SRC_URI[archive.md5sum] =3D "8e0a8a466aa78f66e09fe06cb395319f"
+>> =A0SRC_URI[archive.sha256sum] =3D "599826765c59a98b1e58b4f6c4ad50dca69ee=
+b0e7bd78aea736ca815f45bea40"
+>> diff --git a/recipes/xorg-lib/libx11_1.3.99.903.bb b/recipes/xorg-lib/li=
+bx11_1.3.99.903.bb
+>> index 65ff63c..5ea3291 100644
+>> --- a/recipes/xorg-lib/libx11_1.3.99.903.bb
+>> +++ b/recipes/xorg-lib/libx11_1.3.99.903.bb
+>> @@ -2,7 +2,8 @@ require libx11.inc
+>> =A0#--without-xcb is not an option anymore
+>> =A0#http://cgit.freedesktop.org/xorg/lib/libX11/commit/?id=3D15e5eaf6289=
+7b3179d1fbe457cb19f886f0449f8
+>> =A0DEPENDS_virtclass-native =3D "libxcb-native ${COMMON_DEPENDS}"
+>> -PR =3D "${INC_PR}.0"
+>> +PR =3D "${INC_PR}.1"
+>>
+>> +SRC_URI +=3D " file://configure.ac-nios2.patch"
+>> =A0SRC_URI[archive.md5sum] =3D "3e8ed7a91f70bb819b5dab9c124a7062"
+>> =A0SRC_URI[archive.sha256sum] =3D "50205aad0646c0ab13aff8e8eaec7c5cddff4=
+16d3a012f83c5661ad98e49736f"
+>> --
+>> 1.7.0.4
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
