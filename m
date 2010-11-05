@@ -1,44 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PEIfo-0006Rb-3w
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PEIoy-0006ez-Ns
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 10:33:32 +0100
-Received: by iwn42 with SMTP id 42so2651643iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 02:32:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=YyvSASzGfDLgB8aZV6RJvk37Iis2AbflKAtrJ33WP9k=;
-	b=A2Eh2hoPWQK6R/JclF4ruOwNuCGU0R8hmDZfhhj8pokcYEAZ0FP4X/lDhU4Yfy/ym/
-	l/QuD5WgbGlYjescyYjmDSbwPqlKZtEoGgO34A6+eZgB4fL5kiJU4jsBV0ejRgfIhPN4
-	Dl4jAF44j/Szk2AJmuUeDtewOFKHPknXmMvD8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=IstBOXQ19royiv2nwJI2rc739HTyqeWL+MSKumPq4Sbal8eGpTr5ml8C+wmKT8RFaH
-	n614/sAwvNrOqA5M+sG8QKdxWGY9siU6XbmwuVKAEWx1JidX7aMEiFxBFmSGcwywfb3X
-	+6vWaP6ioxQuZK5mRmK+BbtRsq72VD4UGMDnE=
+	Fri, 05 Nov 2010 10:42:57 +0100
+Received: (qmail 30654 invoked by uid 503); 5 Nov 2010 09:46:45 -0000
+Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 5 Nov 2010 09:46:45 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 5 Nov 2010 11:42:05 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 5 Nov 2010 11:42:04 +0200
+Message-ID: <4CD3D16C.70901@eukrea.com>
+Date: Fri, 05 Nov 2010 10:42:04 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.42.74.137 with SMTP id w9mr1301122icj.201.1288949555395; Fri,
-	05 Nov 2010 02:32:35 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Fri, 5 Nov 2010 02:32:35 -0700 (PDT)
-In-Reply-To: <AANLkTimLpymROEFYv6+TsvtRP-nf8xzNKFp+-d6Q9K8r@mail.gmail.com>
-References: <AANLkTimLpymROEFYv6+TsvtRP-nf8xzNKFp+-d6Q9K8r@mail.gmail.com>
-Date: Fri, 5 Nov 2010 10:32:35 +0100
-Message-ID: <AANLkTi=a75pp0kW+0Ps=R2taDvRAgtXiiT6Ot8VfjykD@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <1288864342-20973-1-git-send-email-eric@eukrea.com>	<4CD2FAF0.4080905@freyther.de>	<4CD305FC.7070305@eukrea.com>
+	<4CD3CF1E.4040804@freyther.de>
+In-Reply-To: <4CD3CF1E.4040804@freyther.de>
+X-Ovh-Tracer-Id: 15090436452347653449
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.27.225
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-11-04
+Subject: Re: [PATCH/RFC] qt4-embedded: tune QT_ARCH for armv6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 09:33:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Nov 2010 09:42:57 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-2010/11/4 Cliff Brake <cliff.brake@gmail.com>:
-> Had a decent run with testing last week as a number of combinations built=
-:
->
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=3Dtested_2010-=
-10-29
->
-> testing-next is ready for clean builds. =A0testing branch has been moved
-> forward to last weeks testing-next.
->
-> For more information on testing, please see:
-> http://wiki.openembedded.org/index.php/Testing#Testing_Log
->
-> Thanks,
-> Cliff
->
+Hi,
 
-Thanks Cliff.
+Le 05/11/2010 10:32, Holger Freyther a écrit :
+> On 11/04/2010 08:14 PM, Eric Bénard wrote:
+>> in the painting engine, from what I saw in the .h, the asm optimisations are
+>> only enabled when using ARM RCVT compiler and not when using gcc but I have
+>> not checked everywhere in the code so I'm not sure of this.
+>
+> that is something else, I also have a partially applied C implementation that
+> appears to be faster than the brute force armv6 code.
+>
+OK where is the code you are talking about in qt ?
 
-As requested I have added my testing script to the tree.
-(contrib/testing/testscript.sh )
-It is just pushed so it does not appear in this weeks testing-next branch.
-http://wiki.openembedded.net/index.php/TestingScript
+> One benefit of using armv6 is that the atomic code will use a different
+> implementation (ldrex,strex IIRC instead of swp). In any case please use
+> something like qttracereply to see if passing armv6 is giving any benefit at all.
+>
+I can, do you have a quick howto run this ?
 
-Feel free to improve! Frans
+One thing : what I see here is that qtdemo was crashing after a random time 
+and now (with armv6) it runs stable for hours.
+
+Eric
 
 
