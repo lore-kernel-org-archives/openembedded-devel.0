@@ -1,46 +1,48 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PEHKB-0002bz-8k
+	(envelope-from <captain.deadly@gmail.com>) id 1PEIFi-0005M2-53
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 09:07:17 +0100
-Received: by iwn42 with SMTP id 42so2575728iwn.6
+	Fri, 05 Nov 2010 10:06:31 +0100
+Received: by ewy2 with SMTP id 2so1529139ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 01:06:12 -0700 (PDT)
+	Fri, 05 Nov 2010 02:05:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=qeidqz/diuSJ/tDXbNHP1MD3IzViHoYfnpwLVIzmYLY=;
-	b=Ao4E/KMRQxMRGAHsoO+d7q56tfvBAH2A96t290h1Z1WDfxYK8x867FUk8lA39m1m1S
-	BMvFoYrPilxA+PhCz/H/Lra5xf+z4LTg0GbIG6UX5Mtqri7UgBaK2nuNtJ4c1ZsiAYhw
-	XqnN1s7LuUeaXlN3KnIiLIrAqU828TaBFwR80=
+	h=domainkey-signature:received:received:from:reply-to:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=Ol98y8+N+vgUEcmI2whqZdzz4Ob+EDyzKrLr7JwWD+I=;
+	b=isUWyPiUvv8mtz2yUM0wqXf4RVRzLaHVNswgbit6w/LrFZFbquOF1a9wIOTePNcL4A
+	V0dIkIUCO61BnwNhp3bV8UusYYZOnkPTkRJbAhHDqTAeG/WyCwdEgaju/Gi9tvFZkKIm
+	xisuXHYi9R9ZhIAgW0zAFGF9/5LC8DioPv9Zs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=VZ0mQWhI4eAdkKTD5wyy2h9RingJsMHd2bHDrhdVoGG5GZbCjH8+MIgq0v5W9zw0bL
-	GTtEuBppNmr9V7usAM6ZpDEFjiaKLJ16BxYQGuk/0sXTB3Qg++zW1EZ8kMG6ySaVQ6LH
-	rq0cpPDVMDQDwce0chgJIxwcnrt/etwbGdY4Q=
-MIME-Version: 1.0
-Received: by 10.42.74.137 with SMTP id w9mr1261347icj.201.1288944372018; Fri,
-	05 Nov 2010 01:06:12 -0700 (PDT)
-Received: by 10.231.40.13 with HTTP; Fri, 5 Nov 2010 01:06:11 -0700 (PDT)
-In-Reply-To: <20101105073448.GD3702@excalibur.local>
-References: <AANLkTin8J-vi624U2Z4Emr=Zajq0+CsSnFR=a8+kjuOv@mail.gmail.com>
-	<20101105010014.GA6115@denix.org>
-	<20101105073448.GD3702@excalibur.local>
-Date: Fri, 5 Nov 2010 09:06:11 +0100
-Message-ID: <AANLkTin2SRV5M5GEfgVkj4hDeqdi5p7O1e7jS90DHcC=@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:reply-to:to:subject:date:user-agent:references:in-reply-to
+	:mime-version:content-type:content-transfer-encoding:message-id;
+	b=Hl67kuIKfOZnSdHRdeKdGTix5P73AAokMiNr4oJI6QbWkUwl4iHOewatMMfuHDfb67
+	MkL5a69jB34ATtOQPdPW/9/e1KLH697Vft3VcSslFG7LcbjvUk6ptLJcGPj0dFKAF1za
+	hDn08iepez43W973GjZvrlzs8xUU6dmJGKEFk=
+Received: by 10.213.14.70 with SMTP id f6mr1525605eba.7.1288947938890;
+	Fri, 05 Nov 2010 02:05:38 -0700 (PDT)
+Received: from bamboo.localnet (dsl-51-41.dsl.netsource.ie [213.79.51.41])
+	by mx.google.com with ESMTPS id b52sm827459eei.1.2010.11.05.02.05.37
+	(version=SSLv3 cipher=RC4-MD5); Fri, 05 Nov 2010 02:05:38 -0700 (PDT)
+From: captain.deadly@gmail.com
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Fri, 5 Nov 2010 09:05:35 +0000
+User-Agent: KMail/1.13.5 (Linux/2.6.36-jfw+; KDE/4.5.1; x86_64; ; )
+References: <201011050735.26140.captain.deadly@gmail.com>
+	<20101105074341.GK3440@jama>
+In-Reply-To: <20101105074341.GK3440@jama>
+MIME-Version: 1.0
+Message-Id: <201011050905.35358.captain.deadly@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: captain.deadly@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Moving to layered structure of openembedded metadata
+Subject: Re: emacs alternative?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,47 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 08:07:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Nov 2010 09:06:32 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-2010/11/5 Stefan Schmidt <stefan@datenfreihafen.org>:
-> Hello.
->
-> On Thu, 2010-11-04 at 21:00, Denys Dmytriyenko wrote:
->>
->> That is already being discussed and decided. See the following previous =
-topics
->> on the mailing list...
->
-> To clear this up a bit. There can't be a real decision for now. Not all
-> developers have been present at the OEDEM and we haven't discussed =A0eve=
-ry detail
-> their either. :)
->
-> Most, if not all, people liked the idea during the OEDEM discussions, but=
- we
-> would need more input on problem that this may rise. As it stands I'm hap=
-py to
-> see Khem coming up to put this on the ml. :)
->
-> One I currently see is how we can keep it all working when the layers are
-> maintained in different places and what kid of combinational explosion we=
- will
-> have with layers in different places.
->
+On Friday 05 November 2010 07:44:09 Martin Jansa wrote:
+> On Fri, Nov 05, 2010 at 07:35:25AM +0000, captain.deadly@gmail.com wrote:
+> > I posted here before to say that emacs in OE doesn't build on my machine
+> > as the Makefile's being generated by autotools are being corrupted
+> > somehow. I've not been able to get to the bottom of it at all.
+> 
+> http://article.gmane.org/gmane.comp.handhelds.shr.devel/3131/match=mg
+> 
+> and
+> 
+> emacs-x11_23.1.bb builds in SHR feeds just fine (so you can look there
+> for patches needed by emacs_22.3 - probably
+> emacs-x11-23.1/configure.in.lost.backslashes.patch).
+> 
+> Regards,
 
-Good points!
-
-To keep things working I feel it is important to minimize the inter
-layer dependencies (and make the ones that exist explicit).
-My suggestion is that every layer has a maintainer/custodian/owner or
-whatever name you want to give it who is responsible to keep the layer
-in good shape.
-Presumably this means we get a structure where there are two versions
-of a layer: the last validated/integrated/accepted one and the working
-one.
-
-Frans
+Thanks for that I was trying to build the plain emacs without x and having 
+those problems. x11 version does work so thanks for the pointer.
 
 
