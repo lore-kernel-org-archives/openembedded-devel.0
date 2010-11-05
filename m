@@ -1,49 +1,35 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from 173-11-172-146-houston.txt.hfc.comcastbusiness.net
+	([173.11.172.146] helo=mail.breakawaysystems.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1PEOv1-0007xL-3g
+	(envelope-from <dave@lambsys.com>) id 1PEPC1-0007Se-Br
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 17:13:35 +0100
-Received: by gwaa11 with SMTP id a11so2354513gwa.6
+	Fri, 05 Nov 2010 17:31:10 +0100
+Received: by mail.breakawaysystems.com (Postfix, from userid 1007)
+	id 430048BA001; Fri,  5 Nov 2010 11:30:17 -0500 (CDT)
+Received: from [192.168.1.100]
+	(173-11.172.145-houston.txt.hfc.comcastbusiness.net [173.11.172.145])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: dlambert)
+	by mail.breakawaysystems.com (Postfix) with ESMTPSA id F231D1487CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Nov 2010 09:12:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:message-id
-	:in-reply-to:references:subject:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=dJ6pwza+1KyNgmvsIAVY/CBHw3hED1u4viTEPzXT+b8=;
-	b=Pg9G0wCs1xeEX93D1loA6+f6PthSuSeAUwijBCtNMUkUKYDE2UbR9zE5m7FzJajYiC
-	yBLz297lGxn68ol3LMie85Jc6zu+i2PsucWtknytXWMkw2IevH4Z14yp09bZ2xl8EzLA
-	iQedxE23odKmDDdal663c+hwalGDui+VB1TNw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:message-id:in-reply-to:references:subject:x-mailer
-	:mime-version:content-type:content-transfer-encoding;
-	b=eYvRJaidDB1u5IfZQDKP3g+oemiGte2N0WLzO1YKMvoyJHy2O6owy7Yxhgk6kXjlS/
-	k+IXdyOxP061hf1PGFYMfBJaHSebDC3OzkwNP744O2LqG+3+RxBTTdM/AZQnWY+aiWjR
-	as1jqmeatNm4gtOXXntxr24jYPN/LZTLoPSsw=
-Received: by 10.100.13.19 with SMTP id 19mr1089595anm.129.1288973560277;
-	Fri, 05 Nov 2010 09:12:40 -0700 (PDT)
-Received: from seeker (ip24-251-170-95.ph.ph.cox.net [24.251.170.95])
-	by mx.google.com with ESMTPS id 6sm1608244anx.32.2010.11.05.09.12.38
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 05 Nov 2010 09:12:39 -0700 (PDT)
-Date: Fri, 5 Nov 2010 09:12:33 -0700
-From: Christopher Larson <kergoth@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <3352A94BCEB54F4D98AFFA01352951E0@gmail.com>
-In-Reply-To: <1288973181-2946-1-git-send-email-robert@erafx.com>
-References: <1288973181-2946-1-git-send-email-robert@erafx.com>
-X-Mailer: sparrow 1.0beta4 (build 333)
+	Fri,  5 Nov 2010 11:30:14 -0500 (CDT)
+Message-ID: <4CD43116.5020304@lambsys.com>
+Date: Fri, 05 Nov 2010 11:30:14 -0500
+From: David Lambert <dave@lambsys.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 173.11.172.146
+X-SA-Exim-Mail-From: dave@lambsys.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	RDNS_DYNAMIC autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: postgresql-8.1.8 : fix configure on x86
+Subject: Random problems with building locales
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,188 +43,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 16:13:35 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Content-Disposition: inline
-
-
-        
-        On Friday, November 5, 2010 at 9:06 AM, Bob Foerster wrote:
-        
-            Without this patch, postgres fails on configure:| checking alignment of int... configure: error: cannot compute alignment of int, 77NOTE: package postgresql-8.1.8-r4: task do_configure: FailedSimilar fix for arm was in 5fa3d153.Signed-off-by: Bob Foerster <robert@erafx.com>Acked-by: Christopher Larson <chris_larson@mentor.com>
-From johnso87@crhc.illinois.edu Fri Nov 05 17:17:09 2010
-Received: from usps1.crhc.illinois.edu ([130.126.143.230]
-	helo=usps.crhc.uiuc.edu) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <johnso87@crhc.illinois.edu>) id 1PEOyM-0002IQ-AN
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Nov 2010 17:17:05 +0100
-Received: from usps.crhc.uiuc.edu (localhost [127.0.0.1])
-	by usps.crhc.uiuc.edu (Postfix) with ESMTP id EF9393400463
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Nov 2010 11:16:07 -0500 (CDT)
-Received: from [192.168.1.198] (unknown [63.252.64.254])
-	(using SSLv3 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: johnso87)
-	by usps.crhc.uiuc.edu (Postfix) with ESMTPSA id D0B29340009B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Nov 2010 11:16:07 -0500 (CDT)
-Message-ID: <4CD42DC7.7010008@crhc.illinois.edu>
-Date: Fri, 05 Nov 2010 11:16:07 -0500
-From: Matt Johnson <johnso87@crhc.illinois.edu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4CD42BE7.8090109@sensortherm.de>
-In-Reply-To: <4CD42BE7.8090109@sensortherm.de>
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 130.126.143.230
-X-SA-Exim-Mail-From: johnso87@crhc.illinois.edu
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
-X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
-X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+X-List-Received-Date: Fri, 05 Nov 2010 16:31:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [oe] dm355_codecs_03_10_00_00.tar.gz
-X-BeenThere: openembedded-devel@lists.openembedded.org
-X-Mailman-Version: 2.1.11
-Precedence: list
-Reply-To: openembedded-devel@lists.openembedded.org
-List-Id: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel.lists.openembedded.org>
-List-Unsubscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/options/openembedded-devel>,
-	<mailto:openembedded-devel-request@lists.openembedded.org?subject=unsubscribe>
-List-Archive: <http://lists.linuxtogo.org/pipermail/openembedded-devel>
-List-Post: <mailto:openembedded-devel@lists.openembedded.org>
-List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
-List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
-	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Nov 2010 16:17:09 -0000
 
-On 11/05/2010 11:08 AM, Klaus Schwarzkopf wrote:
-> Hi,
->
-> i try to install the recipe ti-codecs-dm355_3.10.00.00.bb:
->
-> MACHINE=dm355-leopard bitbake -b  ti-codecs-dm355_3.10.00.00.bb
->
-> I get the following error:
->
-> klaus@ubuntu:~/development/oe$ MACHINE=dm355-leopard bitbake -b
-> ti-codecs-dm355_3.10.00.00.bb
-> NOTE: preferred version 1_13_000 of ti-codecs-dm355 not available (for
-> item ti-codecs-dm355)
->
-> Build Configuration:
-> BB_VERSION        = "1.8.18"
-> METADATA_BRANCH   = "master"
-> METADATA_REVISION = "a33cf7368366d425c71369339e88a50d5660b7c0"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "dm355-leopard"
-> DISTRO            = "angstrom"
-> DISTRO_VERSION    = "2010.7-test-20101104"
-> TARGET_FPU        = "soft"
->
-> NOTE: Preparing runqueue
-> NOTE: Executing runqueue
-> NOTE: Running task 2 of 17 (ID: 8,
-> /home/klaus/development/oe/openembedded/recipes/ti/ti-codecs-dm355_3.10.00.00.bb, 
->
->
-> do_fetch)
-> NOTE: fetch
-> ftp://gtftp01.gt.design.ti.com/arago/dm355_codecs_03_10_00_00.tar.gz
-> --2010-11-04 20:28:42--
-> ftp://gtftp01.gt.design.ti.com/arago/dm355_codecs_03_10_00_00.tar.gz
->            =>
-> `/home/klaus/development/oe/downloads/dm355_codecs_03_10_00_00.tar.gz'
-> Resolving gtftp01.gt.design.ti.com... failed: Name or service not known.
-> wget: unable to resolve host address `gtftp01.gt.design.ti.com'
-> NOTE: fetch 
-> http://mirrors.openembedded.org//dm355_codecs_03_10_00_00.tar.gz
-> --2010-11-04 20:28:42--
-> http://mirrors.openembedded.org//dm355_codecs_03_10_00_00.tar.gz
-> Resolving mirrors.openembedded.org... 82.197.159.157
-> Connecting to mirrors.openembedded.org|82.197.159.157|:80... connected.
-> HTTP request sent, awaiting response... 404 Not Found
-> 2010-11-04 20:28:42 ERROR 404: Not Found.
->
-> NOTE: fetch 
-> http://sources.openembedded.org//dm355_codecs_03_10_00_00.tar.gz
-> --2010-11-04 20:28:43--
-> http://sources.openembedded.org//dm355_codecs_03_10_00_00.tar.gz
-> Resolving sources.openembedded.org... 140.211.169.165
-> Connecting to sources.openembedded.org|140.211.169.165|:80... connected.
-> HTTP request sent, awaiting response... 404 Not Found
-> 2010-11-04 20:28:43 ERROR 404: Not Found.
->
-> NOTE: fetch
-> http://www.angstrom-distribution.org/unstable/sources/dm355_codecs_03_10_00_00.tar.gz 
->
-> --2010-11-04 20:28:43--
-> http://www.angstrom-distribution.org/unstable/sources/dm355_codecs_03_10_00_00.tar.gz 
->
-> Resolving www.angstrom-distribution.org... 188.40.83.200
-> Connecting to www.angstrom-distribution.org|188.40.83.200|:80... 
-> connected.
-> HTTP request sent, awaiting response... 404 Not Found
-> 2010-11-04 20:28:43 ERROR 404: Not Found.
->
-> NOTE: Task failed: Fetch failed:
-> ftp://gtftp01.gt.design.ti.com/arago/dm355_codecs_03_10_00_00.tar.gz;name=dm355codecsbin 
->
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /home/klaus/development/oe/openembedded/recipes/ti/ti-codecs-dm355_3.10.00.00.bb 
->
->
-> do_fetch failed
-> ERROR: Task 8
-> (/home/klaus/development/oe/openembedded/recipes/ti/ti-codecs-dm355_3.10.00.00.bb, 
->
->
-> do_fetch) failed
-> NOTE: Tasks Summary: Attempted 1 tasks of which 1 didn't need to be
-> rerun and 1 failed.
-> ERROR:
-> '/home/klaus/development/oe/openembedded/recipes/ti/ti-codecs-dm355_3.10.00.00.bb' 
->
->
-> failed
-> klaus@ubuntu:~/development/oe$
->
->
->
-> Where is the file? Is the recipe to old?
->
-> Thanks!
->
-> Regards,
-> Klaus
->
->
->
->
-Klaus,
-     ti-codecs is now at 3.10.00.02, but I think the larger issue is 
-just one of server-side directory reorganization since the recipe was 
-updated.  That tarball is part of the DVSDK, which can be downloaded 
-here 
-http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/dvsdk/DVSDK_3_10/latest/index_FDS.html
-     We should probably update the recipe at some point not to attempt 
-to fetch the tarball directly, unless someone else has it hosted separately.
--Matt
+I am getting apparent random failures when attempting to build 
+OpenEmbedded with bitbake 1.10.0.  It seems that localedef is randomly 
+failing as shown below. The first time it failed compiling UTF-8 es_NI, 
+the second UTF-8 gv_GB, third UTF-8 es_NI again, and finally UTF-8 xh_ZA.
+Initially I suspected a problem with my machine, but I ran diagnostics 
+overnight with no failures. Has anyone else experienced this type of 
+failure? Could you help guide me where else to look?
 
--- 
-Matt Johnson
-Graduate Student
-University of Illinois at Urbana-Champaign, Dept. of ECE
-Coordinated Science Lab, Rm. 213
+
+Thanks in advance for any help.
+
+Best regards,
+
+Dave.
+
+
+NOTE: Task failed: localedef returned an error (command was 
+PATH="/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/armv5te/bin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/sbin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/bin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/sbin:/home/dlambert/oe/build/tmp/sysroots/i686-linux//bin:/home/dlambert/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/armelf/bin" 
+I18NPATH="/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/usr/share/i18n" 
+qemu-arm -s 1048576 -r 2.6.24 -L 
+/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree 
+-E 
+LD_LIBRARY_PATH=/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/lib  
+/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/bin/localedef 
+--force --old-style --no-archive 
+--prefix=/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree 
+--inputfile=/usr/share/i18n/locales/es_NI --charmap=UTF-8 es_NI).
+NOTE: package glibc-2.9-r37.3: task do_package: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb do_package failed
+ERROR: Task 159 
+(/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package) 
+failed with 256
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+dlambert@development:~/oe/build$ bitbake base-image
+NOTE: Handling BitBake files: \ (7090/7090) [100 %]
+Parsing of 7090 .bb files complete (6676 cached, 414 parsed). 7279 
+targets, 339 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 516 of 1345 (ID: 159, 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package)
+NOTE: package glibc-2.9-r37.3: task do_package: Started
+NOTE: preparing tree for binary locale generation
+NOTE: generating locale es_NI (UTF-8)
+NOTE: generating locale bo_IN (UTF-8)
+NOTE: generating locale gv_GB (UTF-8)
+qemu-arm: relocation error: qemu-arm: symbol unlink, version GLIBC_2.0 
+not defined in file libc.so.6 with link time reference
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb do_package failed
+ERROR: Task 159 
+(/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package) 
+failed with 256
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+NOTE: Task failed: localedef returned an error (command was 
+PATH="/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/armv5te/bin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/sbin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/bin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/sbin:/home/dlambert/oe/build/tmp/sysroots/i686-linux//bin:/home/dlambert/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/armelf/bin" 
+I18NPATH="/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/usr/share/i18n" 
+qemu-arm -s 1048576 -r 2.6.24 -L 
+/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree 
+-E 
+LD_LIBRARY_PATH=/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/lib  
+/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/bin/localedef 
+--force --old-style --no-archive 
+--prefix=/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree 
+--inputfile=/usr/share/i18n/locales/gv_GB --charmap=UTF-8 gv_GB).
+NOTE: package glibc-2.9-r37.3: task do_package: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb do_package failed
+ERROR: Task 159 
+(/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package) 
+failed with 256
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+dlambert@development:~/oe/build$ bitbake base-image
+NOTE: Handling BitBake files: \ (7090/7090) [100 %]
+Parsing of 7090 .bb files complete (6676 cached, 414 parsed). 7279 
+targets, 339 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 516 of 1345 (ID: 159, 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package)
+NOTE: package glibc-2.9-r37.3: task do_package: Started
+NOTE: preparing tree for binary locale generation
+NOTE: generating locale es_NI (UTF-8)
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb do_package failed
+ERROR: Task 159 
+(/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package) 
+failed with 256
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+NOTE: Task failed: localedef returned an error (command was 
+PATH="/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/armv5te/bin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/sbin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/bin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/sbin:/home/dlambert/oe/build/tmp/sysroots/i686-linux//bin:/home/dlambert/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/armelf/bin" 
+I18NPATH="/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/usr/share/i18n" 
+qemu-arm -s 1048576 -r 2.6.24 -L 
+/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree 
+-E 
+LD_LIBRARY_PATH=/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/lib  
+/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/bin/localedef 
+--force --old-style --no-archive 
+--prefix=/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree 
+--inputfile=/usr/share/i18n/locales/es_NI --charmap=UTF-8 es_NI).
+NOTE: package glibc-2.9-r37.3: task do_package: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb do_package failed
+ERROR: Task 159 
+(/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package) 
+failed with 256
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+dlambert@development:~/oe/build$ bitbake base-image
+NOTE: Handling BitBake files: \ (7090/7090) [100 %]
+Parsing of 7090 .bb files complete (6676 cached, 414 parsed). 7279 
+targets, 339 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 516 of 1345 (ID: 159, 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package)
+NOTE: package glibc-2.9-r37.3: task do_package: Started
+NOTE: preparing tree for binary locale generation
+NOTE: generating locale es_NI (UTF-8)
+NOTE: generating locale bo_IN (UTF-8)
+NOTE: generating locale gv_GB (UTF-8)
+NOTE: generating locale kw_GB (UTF-8)
+NOTE: generating locale en_BW (UTF-8)
+NOTE: generating locale xh_ZA (UTF-8)
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb do_package failed
+ERROR: Task 159 
+(/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package) 
+failed with 256
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+NOTE: Task failed: localedef returned an error (command was 
+PATH="/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/armv5te/bin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/sbin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/usr/bin:/home/dlambert/oe/build/tmp/sysroots/i686-linux/sbin:/home/dlambert/oe/build/tmp/sysroots/i686-linux//bin:/home/dlambert/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/armelf/bin" 
+I18NPATH="/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/usr/share/i18n" 
+qemu-arm -s 1048576 -r 2.6.24 -L 
+/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree 
+-E 
+LD_LIBRARY_PATH=/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/lib  
+/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree/bin/localedef 
+--force --old-style --no-archive 
+--prefix=/home/dlambert/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r37.3/locale-tree 
+--inputfile=/usr/share/i18n/locales/xh_ZA --charmap=UTF-8 xh_ZA).
+NOTE: package glibc-2.9-r37.3: task do_package: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb do_package failed
+ERROR: Task 159 
+(/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb, do_package) 
+failed with 256
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
+ERROR: '/home/dlambert/oe/openembedded/recipes/glibc/glibc_2.9.bb' failed
 
 
