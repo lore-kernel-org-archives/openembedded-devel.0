@@ -1,49 +1,41 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from hm1481-27.locaweb.com.br ([201.76.49.239])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pixdamix@gmail.com>) id 1PErOO-0004Kd-RI
+	(envelope-from <angelo@pynell.com>) id 1PErYs-0001V8-FB
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 23:37:51 +0100
-Received: by wya21 with SMTP id 21so4536654wya.6
+	Sat, 06 Nov 2010 23:48:39 +0100
+Received: from hm2076.locaweb.com.br (189.126.112.72) by
+	hm1481-10.locaweb.com.br (PowerMTA(TM) v3.5r13) id hqncl00nvasr
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Nov 2010 15:36:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=T6HcQXuUGI//Trve3JUImTP2H4berD6RNclvAhHDf8M=;
-	b=VgxGnqvrdSMvjNUc5ZPcIlodf8VKSuAH4TfVc5LbBefB8QN+VUuAb6FLGv7+8NuQff
-	dAWGMJZGWwClw78LS+5DDnIvFysmM/jrEkgrJwXMeMBA0Qub3+jKLy0eEygS7V1MBmWN
-	R3KYRu3ycLKe4Ol+y/mmU7EBnKRLuW/xFYGlE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=ppkygHH77VX2SEgGYSeZ7O7nomkRenoi20J72/UuHONki0xV99saizb7rewF0jM5/6
-	61ayds9zoh31jvoWOO8xXvBM9ZaSUk3rsQLa8V/owSvwrgCoQtDCZcNNpaBT6RuBm7RZ
-	3c03UXsuTMcDhs6G3/9A1vAXjUp0+GTimO6+4=
-Received: by 10.216.70.200 with SMTP id p50mr3674633wed.54.1289083012754; Sat,
-	06 Nov 2010 15:36:52 -0700 (PDT)
+	Sat, 6 Nov 2010 20:40:10 -0200 (envelope-from <angelo@pynell.com>)
+Received: from [189.126.112.72] (localhost [127.0.0.1])
+	by hm2076.locaweb.com.br (Postfix) with ESMTP id 68D833400B8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Nov 2010 20:47:40 -0200 (BRST)
+Received: from cl07.mobimail.com (unknown [186.202.1.228])
+	by hm2076.locaweb.com.br (Postfix) with ESMTP id 608B9340090
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Nov 2010 20:47:40 -0200 (BRST)
+Received: from [201.95.28.5] (account angelo@pynell.com HELO
+	pynell-desktop.localnet)
+	by hm4007.cl07.mobimail.com (CommuniGate Pro SMTP 5.3.8)
+	with ESMTPSA id 15659213 for openembedded-devel@lists.openembedded.org; 
+	Sat, 06 Nov 2010 20:47:40 -0200
+From: "Angelo S. Mavridis Bartolome" <angelo@pynell.com>
+Organization: Pynell - Desenvolvimento & Software
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 6 Nov 2010 20:47:05 -0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-ARCH; KDE/4.5.2; i686; ; )
 MIME-Version: 1.0
-Sender: pixdamix@gmail.com
-Received: by 10.216.65.65 with HTTP; Sat, 6 Nov 2010 15:36:22 -0700 (PDT)
-In-Reply-To: <AANLkTi=L6r1i9yayoo9=j_JNx5Yd+bGhgQYotEp=SJ-s@mail.gmail.com>
-References: <1289061084-19901-1-git-send-email-moncelier@devlife.org>
-	<AANLkTi=L6r1i9yayoo9=j_JNx5Yd+bGhgQYotEp=SJ-s@mail.gmail.com>
-From: Camille Moncelier <moncelier@devlife.org>
-Date: Sat, 6 Nov 2010 23:36:22 +0100
-X-Google-Sender-Auth: BpDx7f14bYkhq25RQk47KUXhU50
-Message-ID: <AANLkTi=i3bg7VdTKhEX4oAkXzX4m3y58F+8+qSfq1qsb@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: pixdamix@gmail.com
+Message-Id: <201011062047.06420.angelo@pynell.com>
+X-SA-Exim-Connect-IP: 201.76.49.239
+X-SA-Exim-Mail-From: angelo@pynell.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 01/11] parted: Added parted-native
+Subject: sorry by my patches....
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,34 +49,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 22:37:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 06 Nov 2010 22:48:39 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Sat, Nov 6, 2010 at 10:48 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
->  > diff --git a/recipes/parted/parted_2.3.bb b/recipes/parted/
-> parted_2.3.bb
-> > index d2ac303..6efb398 100644
-> > --- a/recipes/parted/parted_2.3.bb
-> > +++ b/recipes/parted/parted_2.3.bb
-> > @@ -3,14 +3,18 @@ HOMEPAGE = "
-> http://www.gnu.org/software/parted/parted.html"
-> >  LICENSE = "GPLv3"
-> >  SECTION = "console/tools"
-> >  DEPENDS = "readline util-linux-ng lvm2"
-> > +DEPENDS_virtclass-native = "readline-native util-linux-ng-native"
->
-> this should not be needed.
->
+I want to say sorry by my wrong patches,i'm newbie and i'll try to change them
+Thanks
+Angelox_123
 
-Are you saying this for DEPENDS_virtclass-native are for the whole recipe ?
-
-
-
--- 
-Camille Moncelier
-http://devlife.org/
-
-If Java had true garbage collection, most programs would
-delete themselves upon execution.
 
