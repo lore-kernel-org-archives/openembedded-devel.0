@@ -1,39 +1,43 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PEmpp-0001eo-TR
+	(envelope-from <lazy.gopher@gmail.com>) id 1PEokA-0004Zr-0p
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 18:45:50 +0100
-Received: from p5b036781.dip.t-dialin.net ([91.3.103.129] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PEmox-0007ok-Fv by authid <stefan@sostec.de> with cram_md5
+	Sat, 06 Nov 2010 20:48:06 +0100
+Received: by fxm3 with SMTP id 3so3103415fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Nov 2010 18:44:58 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PEmov-0008G4-Id
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 18:44:53 +0100
-Date: Sat, 6 Nov 2010 18:44:53 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sat, 06 Nov 2010 12:47:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=mNXCaVng3txxcoIWD+eMmgQKLhKgnhZifUOv25XJrp4=;
+	b=kaMXEkHltlqicm3NkcvlbirvJ1steOyswR3FwZ6UDsKLEiY3LtonFmjLxVoNyPEYTe
+	D90gKLFfU9tHetQr2XspoaxB9sKZhXt7efG4EtT831+g5/PI4dC1DdwbP2xeom3WINk2
+	zhb26vtV0rFTX1B7xgak/UTvj7o0iqcw+iqu0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=sNcK4h79ZQ68IJplnHp3vke2sunsJqcNWKmuL1A5b/+obRAanjWPAoQK825voSrtqP
+	LczrUVaCUiPz9cCdp2KcxShTMnB2TP/HdsDSjgXCo6uMUdYDlVJvf+VmoiI+Kj2tYQmf
+	Mqh/RinV0NWOJ0fXP3ri7hWhIVMo+/F4YPobY=
+Received: by 10.223.93.198 with SMTP id w6mr2192914fam.135.1289072831128;
+	Sat, 06 Nov 2010 12:47:11 -0700 (PDT)
+Received: from localhost.localdomain ([46.128.240.207])
+	by mx.google.com with ESMTPS id b15sm1290820fah.28.2010.11.06.12.47.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 06 Nov 2010 12:47:10 -0700 (PDT)
+From: Maksym Parkachov <lazy.gopher@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101106174453.GN6691@excalibur.local>
-References: <1288973274.28481.15978.camel@rex>
-	<AANLkTi=9baSJYxwULah-FNS50gaK9bhF=aBG-4-ChrrP@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTi=9baSJYxwULah-FNS50gaK9bhF=aBG-4-ChrrP@mail.gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Date: Sat,  6 Nov 2010 20:46:57 +0100
+Message-Id: <1289072817-13412-1-git-send-email-lazy.gopher@gmail.com>
+X-Mailer: git-send-email 1.7.2.3
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: lazy.gopher@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded and the Yocto Project
+Subject: [PATCH] mcpp: added new recipe for version 2.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,41 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 17:45:50 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 06 Nov 2010 19:48:06 -0000
 
-Hello.
+* created .inc file for both target and native version
+* added version 2.7.2
 
-On Sat, 2010-11-06 at 13:26, Cliff Brake wrote:
-> On Fri, Nov 5, 2010 at 12:07 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> 
-> > So what do I mean by hard? First there are the conversations with your
-> > legal department where some questions arise:
-> >
-> > * How do you ensure license compliance?
-> > * When someone makes a change, how do you know the license is still
-> >  correct?
-> > * You've mixing GPLv2 and v3? How are you ensuring no contamination?
-> > <cue a long discussion which I'd bet most companies have>
-> 
-> Is GPLv3 the issue here with patent, DMC, and Tivoization issues?  Is
-> the solution to simply not have GPLv3 software in a device?
+Signed-off-by: Maksym Parkachov <lazy.gopher@gmail.com>
+---
+ recipes/mcpp/mcpp.inc      |   11 +++++++++++
+ recipes/mcpp/mcpp_2.7.2.bb |    5 +++++
+ 2 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/mcpp/mcpp.inc
+ create mode 100644 recipes/mcpp/mcpp_2.7.2.bb
 
-At least that is what I hear most of the times. Yocto should be able to build a
-GPLv3-free image. Obviously this kinda results in keeping old versions of core
-elements of software maintained by the FSF.
+diff --git a/recipes/mcpp/mcpp.inc b/recipes/mcpp/mcpp.inc
+new file mode 100644
+index 0000000..9c56a7c
+--- /dev/null
++++ b/recipes/mcpp/mcpp.inc
+@@ -0,0 +1,11 @@
++DESCRIPTION = "MCPP is a portable C/C++ preprocessor"
++HOMEPAGE = "http://mcpp.sourceforge.net/"
++LICENSE = "BSD"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
++
++inherit autotools lib_package
++
++EXTRA_OECONF = " --enable-mcpplib "
++
++BBCLASSEXTEND = "native"
+diff --git a/recipes/mcpp/mcpp_2.7.2.bb b/recipes/mcpp/mcpp_2.7.2.bb
+new file mode 100644
+index 0000000..55418bf
+--- /dev/null
++++ b/recipes/mcpp/mcpp_2.7.2.bb
+@@ -0,0 +1,5 @@
++require ${BPN}.inc
++
++SRC_URI[md5sum] = "512de48c87ab023a69250edc7a0c7b05"
++SRC_URI[sha256sum] = "3b9b4421888519876c4fc68ade324a3bbd81ceeb7092ecdbbc2055099fcb8864"
++
+-- 
+1.7.2.3
 
-> Are there other license issues that companies are worried about?
-
-Well, we have Google who demostrated that they would rather write everything
-from scratch, including a libc, instead of using the GPL. :)
-
-But that is not a problem for OE. All other players have realized how to deal
-with the GPL.
-
-regards
-Stefan Schmidt
 
 
