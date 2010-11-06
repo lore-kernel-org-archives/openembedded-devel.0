@@ -1,29 +1,23 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sylvain.pare@gmail.com>) id 1PEgvt-0003Hm-BK
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PEh1F-0005tp-43
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 12:27:43 +0100
-Received: by qyk7 with SMTP id 7so277805qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Nov 2010 04:26:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=QJW4sJfP1DXqEYmTPFDAVYky1qDQXF6rvJxgSGCkTlk=;
-	b=vQomncOLanbvEDHWh74r0PcUSofNlxu3P6+PrG+MhQIDRDI/O/WLgptDRvxf7VmgZA
-	mFnQWV/UbfnlUJmGI0xZ20GqNISnBPg0SL3REynJXxqjNxsp0Zu26a8UHsenU7sA8GQA
-	JUXQ+JY0D/LaXV2SC66KHAmG9svR0b9A0okCo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=QDG3KZ3oTlL3adzJ6lCaTNsWPbVxiHUcTAOBlvjSuMLE+DyelS9Re9bsGvvCca5jO2
-	nTyQBFgYGIeW3R/9sqI4kwp9HzcGW2dxyM93gqOjxXUeH85+QuYomniQKud3HTiGf2bS
-	/n5RW+8YfJpwa06Xx7M6Qci+a3c8nBc0E0WxA=
-Received: by 10.229.251.204 with SMTP id mt12mr2975395qcb.182.1289042804710;
-	Sat, 06 Nov 2010 04:26:44 -0700 (PDT)
+	Sat, 06 Nov 2010 12:33:15 +0100
+Received: (qmail 20674 invoked by uid 503); 6 Nov 2010 12:02:17 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 6 Nov 2010 12:02:17 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 6 Nov 2010 13:32:20 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 6 Nov 2010 13:32:18 +0200
+Message-ID: <4CD53CC1.10208@eukrea.com>
+Date: Sat, 06 Nov 2010 12:32:17 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.229.185.81 with HTTP; Sat, 6 Nov 2010 04:26:24 -0700 (PDT)
-In-Reply-To: <1288387543-1277-7-git-send-email-eric@eukrea.com>
+To: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
 References: <1288387543-1277-1-git-send-email-eric@eukrea.com>
 	<1288387543-1277-2-git-send-email-eric@eukrea.com>
 	<1288387543-1277-3-git-send-email-eric@eukrea.com>
@@ -31,20 +25,20 @@ References: <1288387543-1277-1-git-send-email-eric@eukrea.com>
 	<1288387543-1277-5-git-send-email-eric@eukrea.com>
 	<1288387543-1277-6-git-send-email-eric@eukrea.com>
 	<1288387543-1277-7-git-send-email-eric@eukrea.com>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Sat, 6 Nov 2010 12:26:24 +0100
-Message-ID: <AANLkTik=_ONqFN=OnALnzoUK6kmdFNfoybCBqQ728JwM@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: sylvain.pare@gmail.com
+	<AANLkTik=_ONqFN=OnALnzoUK6kmdFNfoybCBqQ728JwM@mail.gmail.com>
+In-Reply-To: <AANLkTik=_ONqFN=OnALnzoUK6kmdFNfoybCBqQ728JwM@mail.gmail.com>
+X-Ovh-Tracer-Id: 4378061788828446196
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 7/7] qwt: add qwt 5.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -59,86 +53,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 11:27:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 06 Nov 2010 11:33:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hello,
+Hi,
 
-Thanks for the update.
-But am I the only having issue building it?
-
-http://tinderbox.openembedded.org/public/logs/task/9693587.txt
-
-thanks.
-
-BR
-
-Sylvain(aka GarthPS)
-
-
-2010/10/29 Eric B=E9nard <eric@eukrea.com>
-
-> this recipe compiles the latest stable version of the
-> QT Widgets for Technical Applications against qt4-embedded.
-> A specific package was created for the example applications.
+Le 06/11/2010 12:26, Sylvain Paré a écrit :
+> Thanks for the update.
+> But am I the only having issue building it?
 >
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-> ---
->  recipes/qwt/qwt_5.2.1.bb |   33 +++++++++++++++++++++++++++++++++
->  1 files changed, 33 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/qwt/qwt_5.2.1.bb
+> http://tinderbox.openembedded.org/public/logs/task/9693587.txt
 >
-> diff --git a/recipes/qwt/qwt_5.2.1.bb b/recipes/qwt/qwt_5.2.1.bb
-> new file mode 100644
-> index 0000000..aecee9e
-> --- /dev/null
-> +++ b/recipes/qwt/qwt_5.2.1.bb
-> @@ -0,0 +1,33 @@
-> +DESCRIPTION =3D "Qt Widget Extension for Technical Applications"
-> +SECTION =3D "libs"
-> +PRIORITY =3D "optional"
-> +LICENSE =3D "QWT+LGPL"
-> +PR =3D "r0"
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${PN}/${PN}/${PV}/${PN}-${PV}.tar.bz2=
- \
-> +          "
-> +
-> +inherit qt4e
-> +
-> +do_configure_prepend() {
-> +        sed -e 's#/usr/local/qwt-5.2.1#/usr#g' -i qwtconfig.pri
-> +        sed -e 's/#CONFIG     +=3D QwtExamples/CONFIG     +=3D QwtExampl=
-es/g'
-> -i qwtconfig.pri
-> +}
-> +do_install() {
-> +        make install INSTALL_ROOT=3D${D}
-> +        cd examples
-> +        install -d ${D}/${bindir}
-> +        cp -pPR bin/* ${D}/${bindir}
-> +        install -d ${D}/${docdir}/${PN}-${PV}
-> +        mv ${D}/usr/doc/html/* ${D}/${docdir}/${PN}-${PV}
-> +        install -d ${D}${mandir}/
-> +        mv ${D}/usr/doc/man/* ${D}${mandir}/
-> +}
-> +
-> +PACKAGES +=3D "${PN}-examples"
-> +
-> +FILES_${PN}-examples =3D "${bindir}/*"
-> +FILES_${PN} =3D "${libdir}/*.so.*"
-> +
-> +SRC_URI[md5sum] =3D "4a595b8db0ec3856b117836c1d60cb27"
-> +SRC_URI[sha256sum] =3D
-> "e2b8bb755404cb3dc99e61f3e2d7262152193488f5fbe88524eb698e11ac569f"
-> --
-> 1.6.3.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+are you using the patch which was pushed ?
+If yes, it's tested using qt-embedded 4.7 on armv5 & armv6 with angstrom 
+2010-x distro.
+
+Eric
+
 
