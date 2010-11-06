@@ -1,41 +1,40 @@
-Received: from hm1481-27.locaweb.com.br ([201.76.49.239])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <angelo@pynell.com>) id 1PErYs-0001V8-FB
+	(envelope-from <andrea.adami@gmail.com>) id 1PErzI-0008Sh-QR
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 23:48:39 +0100
-Received: from hm2076.locaweb.com.br (189.126.112.72) by
-	hm1481-10.locaweb.com.br (PowerMTA(TM) v3.5r13) id hqncl00nvasr
+	Sun, 07 Nov 2010 00:15:59 +0100
+Received: by qyk4 with SMTP id 4so102348qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 6 Nov 2010 20:40:10 -0200 (envelope-from <angelo@pynell.com>)
-Received: from [189.126.112.72] (localhost [127.0.0.1])
-	by hm2076.locaweb.com.br (Postfix) with ESMTP id 68D833400B8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Nov 2010 20:47:40 -0200 (BRST)
-Received: from cl07.mobimail.com (unknown [186.202.1.228])
-	by hm2076.locaweb.com.br (Postfix) with ESMTP id 608B9340090
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Nov 2010 20:47:40 -0200 (BRST)
-Received: from [201.95.28.5] (account angelo@pynell.com HELO
-	pynell-desktop.localnet)
-	by hm4007.cl07.mobimail.com (CommuniGate Pro SMTP 5.3.8)
-	with ESMTPSA id 15659213 for openembedded-devel@lists.openembedded.org; 
-	Sat, 06 Nov 2010 20:47:40 -0200
-From: "Angelo S. Mavridis Bartolome" <angelo@pynell.com>
-Organization: Pynell - Desenvolvimento & Software
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 6 Nov 2010 20:47:05 -0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-ARCH; KDE/4.5.2; i686; ; )
+	Sat, 06 Nov 2010 16:14:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=9cI9UY+yKrlT5XtRkG1U3J6l/6D+doZqgzeceX5edUo=;
+	b=Y6ChUvfrxTHR7PjCrNqHDThOikEmkd/OfT9AFj2KXaMFwubeOM1qHUSU13hP1FR27d
+	/G5cWIfgVgVkGZtpujKrH6broDR4Cy4/+S4sKcHwjY4xHoS2cq0aWr3Pba60IGbX4r42
+	ZbfS8SN3xz5pzNsg8FS520LSpFZDtPmZXNLkw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=gpQqNlskR6ltsVm5UAh2TjhYNOrD+rIs35EpkbLiKWmsB4yOHjgkoDStPwGnaU4v6i
+	iGUC/fnI10VVbbfpNhiTNYFyUn6gvp70Eq2D832Fl4GfX4FS6nz9s0tlR2X2O7ozaNjj
+	aoppfodEd1xzI/zwt8dp3SIcgw+aGUY2mS1bs=
 MIME-Version: 1.0
-Message-Id: <201011062047.06420.angelo@pynell.com>
-X-SA-Exim-Connect-IP: 201.76.49.239
-X-SA-Exim-Mail-From: angelo@pynell.com
+Received: by 10.229.99.84 with SMTP id t20mr3544900qcn.120.1289085291280; Sat,
+	06 Nov 2010 16:14:51 -0700 (PDT)
+Received: by 10.229.212.85 with HTTP; Sat, 6 Nov 2010 16:14:51 -0700 (PDT)
+Date: Sun, 7 Nov 2010 00:14:51 +0100
+Message-ID: <AANLkTi=hBHFcAJNWr2=Z=51J=rOZ8Cf_+KGyvQiFFdKN@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: sorry by my patches....
+Subject: image.bbclass adding unconditionally glibc-localedata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,13 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 22:48:39 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 06 Nov 2010 23:16:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I want to say sorry by my wrong patches,i'm newbie and i'll try to change them
-Thanks
-Angelox_123
+Since commit 4271024e26551da70e710cef6d2dcbfa8740b007 my initramfs
+image inflates.
+No need for /usr/share/i18n/locales/*
+
+I don't see an easy way to avoid that after inheriting image.bbclass
+thus a quick hack:
+
+...
+inherit image
+
+# brute force override to avoid i18n stuff from image.bbclass
+PACKAGE_INSTALL = "${IMAGE_INSTALL}
+LINGUAS_INSTALL = ""
+LINGUAS_INSTALL_linux = ""
+LINGUAS_INSTALL_linux-gnueabi = ""
+
+EOF
+
+IMHO image.bbclass should allow empty locales.
+Besides, why fixing it to glibc-localedata?
+
+Regards
+
+Andrea
 
 
