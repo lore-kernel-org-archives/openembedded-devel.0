@@ -1,33 +1,43 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric.colleu@gmail.com>) id 1PEgfE-00030x-K9
+	(envelope-from <sylvain.pare@gmail.com>) id 1PEgvt-0003Hm-BK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 12:10:30 +0100
-Received: by vws17 with SMTP id 17so1478100vws.6
+	Sat, 06 Nov 2010 12:27:43 +0100
+Received: by qyk7 with SMTP id 7so277805qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Nov 2010 04:09:31 -0700 (PDT)
+	Sat, 06 Nov 2010 04:26:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=U8whdazVCgjkoQoyM6ZLpCJe4T7S1gCi7M3jIsUiYiU=;
-	b=hwCNXRuaFCVSuU8mYPqS3PXYiVW7ARsJar3KbTIjcFMoGvsDes498udEXgqRkg6oor
-	i2eByiOFC0nj67ONG5Z71MtHSFjsmIqr9bsmCpw7tLZTiRLA89hWJBG6PwUOUswBhIiz
-	PW3b5MI448rFCvXyyQOynseNcAxbUHizQx0R8=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=QJW4sJfP1DXqEYmTPFDAVYky1qDQXF6rvJxgSGCkTlk=;
+	b=vQomncOLanbvEDHWh74r0PcUSofNlxu3P6+PrG+MhQIDRDI/O/WLgptDRvxf7VmgZA
+	mFnQWV/UbfnlUJmGI0xZ20GqNISnBPg0SL3REynJXxqjNxsp0Zu26a8UHsenU7sA8GQA
+	JUXQ+JY0D/LaXV2SC66KHAmG9svR0b9A0okCo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=eXVb4UptKhopjcZo/vWeRqAhDZQq3YBOqq8FgHsKzeZnMgSOv9fPm/H8w8b9eX3H6M
-	lQCZUQ9AZaX/QmugSr3aUpjbwMD69YCHpCrC2RWb1f+2frdMrZNQTQvXde28GMZ+Kpvt
-	IHPoF95cag8hIXCGNY2XZSxo0JXKm3lZmj+Tk=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=QDG3KZ3oTlL3adzJ6lCaTNsWPbVxiHUcTAOBlvjSuMLE+DyelS9Re9bsGvvCca5jO2
+	nTyQBFgYGIeW3R/9sqI4kwp9HzcGW2dxyM93gqOjxXUeH85+QuYomniQKud3HTiGf2bS
+	/n5RW+8YfJpwa06Xx7M6Qci+a3c8nBc0E0WxA=
+Received: by 10.229.251.204 with SMTP id mt12mr2975395qcb.182.1289042804710;
+	Sat, 06 Nov 2010 04:26:44 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.220.194.131 with SMTP id dy3mr314929vcb.224.1289041770251;
-	Sat, 06 Nov 2010 04:09:30 -0700 (PDT)
-Received: by 10.220.203.1 with HTTP; Sat, 6 Nov 2010 04:09:30 -0700 (PDT)
-Date: Sat, 6 Nov 2010 12:09:30 +0100
-Message-ID: <AANLkTi=S8j1zwebV0fz=yUxbo0p_QzRUUpi37mwTO69A@mail.gmail.com>
-From: Eric Colleu <eric.colleu@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: eric.colleu@gmail.com
+Received: by 10.229.185.81 with HTTP; Sat, 6 Nov 2010 04:26:24 -0700 (PDT)
+In-Reply-To: <1288387543-1277-7-git-send-email-eric@eukrea.com>
+References: <1288387543-1277-1-git-send-email-eric@eukrea.com>
+	<1288387543-1277-2-git-send-email-eric@eukrea.com>
+	<1288387543-1277-3-git-send-email-eric@eukrea.com>
+	<1288387543-1277-4-git-send-email-eric@eukrea.com>
+	<1288387543-1277-5-git-send-email-eric@eukrea.com>
+	<1288387543-1277-6-git-send-email-eric@eukrea.com>
+	<1288387543-1277-7-git-send-email-eric@eukrea.com>
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Sat, 6 Nov 2010 12:26:24 +0100
+Message-ID: <AANLkTik=_ONqFN=OnALnzoUK6kmdFNfoybCBqQ728JwM@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: sylvain.pare@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
@@ -35,7 +45,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: problem building omap3-sgx-module
+Subject: Re: [PATCH 7/7] qwt: add qwt 5.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,120 +59,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 11:10:30 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Sat, 06 Nov 2010 11:27:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear all,
+Hello,
 
-I am trying to build an image including virtual/libgl package (i.e
-libgles-omap3) for my igep0020 platform. libgles-omap3 depends on
-omap3-sgx-modules and this one doesn't build.
-I tried several kernel recipes (linux_2.6.36, linux_2.6.34, linux_2.6.32,
-linux-igep2_2.6.33.7-0.bb).
-I am on tag tested_2010-10-29.
+Thanks for the update.
+But am I the only having issue building it?
 
-I am stuck on this one for a while.
-Thank you for your help.
+http://tinderbox.openembedded.org/public/logs/task/9693587.txt
 
-Eric Colleu.
+thanks.
 
-the build log is :
-NOTE: package omap3-sgx-modules-1.4.14.2616-r90f: task do_compile: Started
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/ecolleu/dev/jkbx/oe/recipes/powervr-drivers/
-omap3-sgx-modules_1.4.14.2616.bb do_compile failed
-ERROR: Task 1680 (/home/ecolleu/dev/jkbx/oe/recipes/powervr-drivers/
-omap3-sgx-modules_1.4.14.2616.bb, do_compile) failed with 256
-ERROR: '/home/ecolleu/dev/jkbx/oe/recipes/powervr-drivers/
-omap3-sgx-modules_1.4.14.2616.bb' failed
-ERROR: Function do_compile failed
-NOTE: Task failed: ('function do_compile failed',
-'/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-module=
-s-1.4.14.2616-r90f/temp/log.do_compile.25013')
-ERROR: Logfile of failure stored in:
-/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-modules=
--1.4.14.2616-r90f/temp/log.do_compile.25013
-Log data follows:
-| NOTE: make -e MAKEFLAGS=3D
-KERNEL_PATH=3D/home/ecolleu/dev/jkbx/tmp/sysroots/igep0020-oe-linux-gnueabi=
-/kernel
-KERNEL_SRC=3D/home/ecolleu/dev/jkbx/tmp/sysroots/igep0020-oe-linux-gnueabi/=
-kernel
-KDIR=3D/home/ecolleu/dev/jkbx/tmp/sysroots/igep0020-oe-linux-gnueabi/kernel
-KERNELDIR=3D/home/ecolleu/dev/jkbx/tmp/sysroots/igep0020-oe-linux-gnueabi/k=
-ernel
-KERNEL_DIR=3D/home/ecolleu/dev/jkbx/tmp/sysroots/igep0020-oe-linux-gnueabi/=
-kernel
-KERNEL_VERSION=3D2.6.36 CC=3Darm-oe-linux-gnueabi-gcc
- LD=3Darm-oe-linux-gnueabi-ld  AR=3Darm-oe-linux-gnueabi-ar  BUILD=3Dreleas=
-e
-TI_PLATFORM=3Domap3630
-| make -C
-/home/ecolleu/dev/jkbx/tmp/sysroots/igep0020-oe-linux-gnueabi/kernel M=3D`p=
-wd`
-| make[1]: Entering directory
-`/home/ecolleu/dev/jkbx/tmp/sysroots/igep0020-oe-linux-gnueabi/kernel'
-|   LD
- /home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-module=
-s-1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/=
-bufferclass_ti/built-in.o
-|   CC [M]
- /home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-module=
-s-1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/=
-bufferclass_ti/bc_cat.o
-|
-/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-modules=
--1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/b=
-ufferclass_ti/bc_cat.c:124:
-erreur: unknown field =91ioctl=92 specified in initializer
-|
-/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-modules=
--1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/b=
-ufferclass_ti/bc_cat.c:124:
-attention : initialization from incompatible pointer type
-|
-/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-modules=
--1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/b=
-ufferclass_ti/bc_cat.c:
-In function =91bc_cat_init=92:
-|
-/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-modules=
--1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/b=
-ufferclass_ti/bc_cat.c:495:
-erreur: implicit declaration of function =91cpu_is_omap3530=92
-|
-/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-modules=
--1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/b=
-ufferclass_ti/bc_cat.c:495:
-erreur: implicit declaration of function =91omap_rev_lt_3_0=92
-| make[3]: ***
-[/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-module=
-s-1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/=
-bufferclass_ti/bc_cat.o]
-Erreur 1
-| make[2]: ***
-[/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sgx-module=
-s-1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM/services4/3rdparty/=
-bufferclass_ti]
-Erreur 2
-| make[1]: ***
-[_module_/home/ecolleu/dev/jkbx/tmp/work/igep0020-oe-linux-gnueabi/omap3-sg=
-x-modules-1.4.14.2616-r90f/Graphics_SDK_4_00_00_01/GFX_Linux_KM]
-Error 2
-| make[1]: Leaving directory
-`/home/ecolleu/dev/jkbx/tmp/sysroots/igep0020-oe-linux-gnueabi/kernel'
-| make: *** [all] Error 2
-| FATAL: oe_runmake failed
-| ERROR: Function do_compile failed
-NOTE: package omap3-sgx-modules-1.4.14.2616-r90f: task do_compile: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/ecolleu/dev/jkbx/oe/recipes/powervr-drivers/
-omap3-sgx-modules_1.4.14.2616.bb do_compile failed
-ERROR: Task 1680 (/home/ecolleu/dev/jkbx/oe/recipes/powervr-drivers/
-omap3-sgx-modules_1.4.14.2616.bb, do_compile) failed with 256
-ERROR: '/home/ecolleu/dev/jkbx/oe/recipes/powervr-drivers/
-omap3-sgx-modules_1.4.14.2616.bb' failed
-ERROR: '/home/ecolleu/dev/jkbx/oe/recipes/powervr-drivers/
-omap3-sgx-modules_1.4.14.2616.bb' failed
+BR
+
+Sylvain(aka GarthPS)
+
+
+2010/10/29 Eric B=E9nard <eric@eukrea.com>
+
+> this recipe compiles the latest stable version of the
+> QT Widgets for Technical Applications against qt4-embedded.
+> A specific package was created for the example applications.
+>
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> ---
+>  recipes/qwt/qwt_5.2.1.bb |   33 +++++++++++++++++++++++++++++++++
+>  1 files changed, 33 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/qwt/qwt_5.2.1.bb
+>
+> diff --git a/recipes/qwt/qwt_5.2.1.bb b/recipes/qwt/qwt_5.2.1.bb
+> new file mode 100644
+> index 0000000..aecee9e
+> --- /dev/null
+> +++ b/recipes/qwt/qwt_5.2.1.bb
+> @@ -0,0 +1,33 @@
+> +DESCRIPTION =3D "Qt Widget Extension for Technical Applications"
+> +SECTION =3D "libs"
+> +PRIORITY =3D "optional"
+> +LICENSE =3D "QWT+LGPL"
+> +PR =3D "r0"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${PN}/${PN}/${PV}/${PN}-${PV}.tar.bz2=
+ \
+> +          "
+> +
+> +inherit qt4e
+> +
+> +do_configure_prepend() {
+> +        sed -e 's#/usr/local/qwt-5.2.1#/usr#g' -i qwtconfig.pri
+> +        sed -e 's/#CONFIG     +=3D QwtExamples/CONFIG     +=3D QwtExampl=
+es/g'
+> -i qwtconfig.pri
+> +}
+> +do_install() {
+> +        make install INSTALL_ROOT=3D${D}
+> +        cd examples
+> +        install -d ${D}/${bindir}
+> +        cp -pPR bin/* ${D}/${bindir}
+> +        install -d ${D}/${docdir}/${PN}-${PV}
+> +        mv ${D}/usr/doc/html/* ${D}/${docdir}/${PN}-${PV}
+> +        install -d ${D}${mandir}/
+> +        mv ${D}/usr/doc/man/* ${D}${mandir}/
+> +}
+> +
+> +PACKAGES +=3D "${PN}-examples"
+> +
+> +FILES_${PN}-examples =3D "${bindir}/*"
+> +FILES_${PN} =3D "${libdir}/*.so.*"
+> +
+> +SRC_URI[md5sum] =3D "4a595b8db0ec3856b117836c1d60cb27"
+> +SRC_URI[sha256sum] =3D
+> "e2b8bb755404cb3dc99e61f3e2d7262152193488f5fbe88524eb698e11ac569f"
+> --
+> 1.6.3.3
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
