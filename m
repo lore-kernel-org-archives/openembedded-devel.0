@@ -1,27 +1,26 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PEjL4-0005uT-Qf
+	(envelope-from <stefan@datenfreihafen.org>) id 1PEjSp-0007E4-O0
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 15:02:03 +0100
+	Sat, 06 Nov 2010 15:09:52 +0100
 Received: from p5b036781.dip.t-dialin.net ([91.3.103.129] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PEjKC-0004il-M3 by authid <stefan@sostec.de> with cram_md5
+	id 1PEjRx-0004oA-FH by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Nov 2010 15:00:59 +0100
+	Sat, 06 Nov 2010 15:09:00 +0100
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PEjKB-0000Dg-KI
+	(envelope-from <stefan@excalibur.local>) id 1PEjRw-0000GV-D5
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 15:00:55 +0100
-Date: Sat, 6 Nov 2010 15:00:55 +0100
+	Sat, 06 Nov 2010 15:08:56 +0100
+Date: Sat, 6 Nov 2010 15:08:56 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101106140055.GE6691@excalibur.local>
-References: <20100322160729.4972.62697.stgit@ES-J7S4D2J.amer.consind.ge.com>
-	<201003221733.58036.marcin@juszkiewicz.com.pl>
-	<4BA898A8.4040701@ge.com>
+Message-ID: <20101106140856.GF6691@excalibur.local>
+References: <1270558697-19222-1-git-send-email-mchazaux@adeneo-embedded.com>
+	<n2kbc36f8ed1004160804j3610d311k55c328811e1657e2@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <4BA898A8.4040701@ge.com>
+In-Reply-To: <n2kbc36f8ed1004160804j3610d311k55c328811e1657e2@mail.gmail.com>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -34,7 +33,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH v2] Alternative to busybox, using "proper tools"
+Subject: Re: [PATCH] Add Freescale i.MX25 3stack support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,38 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 14:02:05 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Sat, 06 Nov 2010 14:09:52 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
 Hello.
 
-On Tue, 2010-03-23 at 10:32, Martyn Welch wrote:
-> Marcin Juszkiewicz wrote:
-> > Dnia poniedziaÅ‚ek, 22 marca 2010 o 17:08:20 Martyn Welch napisaÅ‚(a):
+On Fri, 2010-04-16 at 17:04, Mickael Chazaux wrote:
+> 2010/4/6 Mickaël Chazaux <mchazaux@adeneo-embedded.com>:
+> > From: Mickaël CHAZAUX <mchazaux@adeneo-embedded.com>
 > >
-> >   
-> >> This patch provides a mechanism to replace busybox by defining a busybox
-> >> package which actually just requires a set of other packages.
-> >>
-> >>     To get it to be used rather than the standard busybox, define:
-> >>
-> >>     PREFERRED_PROVIDER_busybox = "busybox-alt"
-> >> ---
-> >>
-> >>  Marcin: Something like this you mean?
-> >>     
-> >
-> > Yes, few notes:
-> >  
-> >   
+> > This patch adds support for the i.MX25 3Stack platform.
+> >        It is based on the patches released by Freescale as
+> >        part of LTIB.
 > 
-> No prob.
+> Any comments on this patch?
 
-Martyn, did you sent out a newer version of this patch with the changes
-integrated you acknowledged here? I can't find it in the repo only this outdated
-version in patchwork.
+Sorry for the late reply. I'm just going throught our patchwork backlog and
+found this patch. It does not apply anymore. Care to update and resend it? Will
+apply it then.
 
 regards
 Stefan Schmidt
