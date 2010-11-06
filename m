@@ -1,26 +1,25 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PEjV9-0007KC-Pz
+	(envelope-from <stefan@datenfreihafen.org>) id 1PEjl6-00044n-Hm
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 15:12:16 +0100
+	Sat, 06 Nov 2010 15:28:44 +0100
 Received: from p5b036781.dip.t-dialin.net ([91.3.103.129] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PEjUG-0004rO-Fx by authid <stefan@sostec.de> with cram_md5
+	id 1PEjjk-00054I-IJ by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Nov 2010 15:11:23 +0100
+	Sat, 06 Nov 2010 15:27:28 +0100
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PEjUF-0000Gd-8D
+	(envelope-from <stefan@excalibur.local>) id 1PEjjL-0000Kt-Ar
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 15:11:19 +0100
-Date: Sat, 6 Nov 2010 15:11:18 +0100
+	Sat, 06 Nov 2010 15:26:55 +0100
+Date: Sat, 6 Nov 2010 15:26:55 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101106141118.GG6691@excalibur.local>
-References: <4C78D1E1.9080101@mlbassoc.com>
- <4CB081A4.9010908@mlbassoc.com>
+Message-ID: <20101106142655.GH6691@excalibur.local>
+References: <1280488945-6196-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
 MIME-Version: 1.0
-In-Reply-To: <4CB081A4.9010908@mlbassoc.com>
+In-Reply-To: <1280488945-6196-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -33,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] TI tools - make EULA unpack work when /opt is writeable
+Subject: Re: [PATCH] liboil: removed old cruft before 0.3.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 14:12:16 -0000
+X-List-Received-Date: Sat, 06 Nov 2010 14:28:45 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Sat, 2010-10-09 at 08:52, Gary Thomas wrote:
-> On 08/28/2010 03:07 AM, Gary Thomas wrote:
-> >This patch addresses the problem where the TI tools that need
-> >the EULA unpack into the wrong place if the user has write
-> >permission in /opt. The current behaviour of expecting the
-> >unpacker to fall back to the $HOME environment variable should
-> >not be relied on. The patch changes the unpack step to use
-> >the --prefix= option which will always work.
-> >
-> >Version 2:
-> >* Update patch to be against org.openembedded.dev branch
-> >* Incorporate full description into patch
-> 
-> What about this patch?  It's been nearly 6 weeks and no discussion
-> or anything.
-> 
-> The problem persists in today's tree.
+On Fri, 2010-07-30 at 13:22, Enrico Scholz wrote:
+> Versions before 0.3.15 are more than 2 years old and not referenced
+> anywhere.
 
-Can we have a comment form the TI devs here?
+Sorry for the late reply. I just found this patch during patchwork cleanup. I
+was going to apply the patch but is does no longer apply. Care to update and
+resend it? Will apply the updated version.
 
 regards
 Stefan Schmidt
