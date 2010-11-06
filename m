@@ -1,53 +1,39 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sylvain.pare@gmail.com>) id 1PEi9Y-0001gL-0F
+	(envelope-from <stefan@datenfreihafen.org>) id 1PEjF2-0005Lr-HG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 13:45:52 +0100
-Received: by qwd6 with SMTP id 6so3219238qwd.6
+	Sat, 06 Nov 2010 14:55:37 +0100
+Received: from p5b036781.dip.t-dialin.net ([91.3.103.129] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1PEjEA-0004c7-6p by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Nov 2010 05:44:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type;
-	bh=XQfqtl9cw3kwCWMOH0pLxsrBJM0uSNY/Ti3tV18cNRw=;
-	b=Dq9fL1HJl76zvxHx28Krv6wrCA0wEwjtSN1ic4vOb2XpX5+UvZXRXLw8i8xwESnsJF
-	iQuysSbeZaM7QlcaD+mPweDEmSyvPzgJBz1iCZb9V7NwXvC++N++bgVr9TTEMi58p0Un
-	xamJeOY7HJ9urOQxTXHDKhxg6AuUU9XK6c65o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=sSAFWhKkwKNRBkzgj/ZLxo4/DiAEicDRJOYOjNAD3Wc6Ve4goBrysdswLuXGiWqkRJ
-	VmaqrYGuXjbvldUqNFZHt4+mgPEqGosLiIYMEEdfaTKSooNLEW7e0naxK4ID/zw/0R+8
-	Gc6DFoVTpgtm20s18YCW98JpqLDuj+c4yt1gw=
-Received: by 10.229.75.3 with SMTP id w3mr2981535qcj.296.1289047497096; Sat,
-	06 Nov 2010 05:44:57 -0700 (PDT)
+	Sat, 06 Nov 2010 14:54:44 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PEjE8-0000Aw-WF
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Nov 2010 14:54:41 +0100
+Date: Sat, 6 Nov 2010 14:54:40 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101106135440.GD6691@excalibur.local>
+References: <1258996635-20162-1-git-send-email-ricardo.salveti@openbossa.org>
+	<1258996635-20162-2-git-send-email-ricardo.salveti@openbossa.org>
 MIME-Version: 1.0
-Received: by 10.229.185.81 with HTTP; Sat, 6 Nov 2010 05:44:36 -0700 (PDT)
-In-Reply-To: <4CD53CC1.10208@eukrea.com>
-References: <1288387543-1277-1-git-send-email-eric@eukrea.com>
-	<1288387543-1277-2-git-send-email-eric@eukrea.com>
-	<1288387543-1277-3-git-send-email-eric@eukrea.com>
-	<1288387543-1277-4-git-send-email-eric@eukrea.com>
-	<1288387543-1277-5-git-send-email-eric@eukrea.com>
-	<1288387543-1277-6-git-send-email-eric@eukrea.com>
-	<1288387543-1277-7-git-send-email-eric@eukrea.com>
-	<AANLkTik=_ONqFN=OnALnzoUK6kmdFNfoybCBqQ728JwM@mail.gmail.com>
-	<4CD53CC1.10208@eukrea.com>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Sat, 6 Nov 2010 13:44:36 +0100
-Message-ID: <AANLkTi=T25mm3TNo32VU4=+ijMX98_dM=AAD78UfHdc4@mail.gmail.com>
-To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: sylvain.pare@gmail.com
+In-Reply-To: <1258996635-20162-2-git-send-email-ricardo.salveti@openbossa.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 7/7] qwt: add qwt 5.2.1
+Subject: Re: [PATCH 2/2] libxml, rpm, zope: avoid generating native packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,29 +47,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 12:45:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 06 Nov 2010 13:55:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Nope, no patch
-using it for SHR so with qt-X11
+Hello.
 
+On Mon, 2009-11-23 at 14:17, Ricardo Salveti de Araujo wrote:
+> Signed-off-by: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+> ---
+>  recipes/libxml/libxml2-native.inc |    2 +-
+>  recipes/rpm/rpm-native_4.4.2.3.bb |    5 ++---
+>  recipes/zope/zope-native_3.3.1.bb |    2 +-
+>  3 files changed, 4 insertions(+), 5 deletions(-)
+> 
+> diff --git a/recipes/libxml/libxml2-native.inc b/recipes/libxml/libxml2-native.inc
+> index 3f67152..395a3a9 100644
+> --- a/recipes/libxml/libxml2-native.inc
+> +++ b/recipes/libxml/libxml2-native.inc
+> @@ -5,7 +5,7 @@ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/libxml2-${PV}"
+>  SRC_URI = "ftp://xmlsoft.org/libxml2/libxml2-${PV}.tar.gz"
+>  S = "${WORKDIR}/libxml2-${PV}"
+>  
+> -inherit autotools native pkgconfig distutils-native-base
+> +inherit autotools pkgconfig distutils-native-base native
+>  
+>  do_configure_prepend () {
+>  	EXTRA_LIBXML2_OECONF="\
+> diff --git a/recipes/rpm/rpm-native_4.4.2.3.bb b/recipes/rpm/rpm-native_4.4.2.3.bb
+> index 3cfb43e..d27a392 100644
+> --- a/recipes/rpm/rpm-native_4.4.2.3.bb
+> +++ b/recipes/rpm/rpm-native_4.4.2.3.bb
+> @@ -1,8 +1,7 @@
+> -inherit native distutils-native-base
+> -
+>  require rpm-${PV}.inc
+>  
+> +inherit distutils-native-base native
+> +
+>  DEPENDS = "beecrypt-native gettext-native zlib-native file-native popt-native python-native"
+> -PACKAGES = ""
+>  
+>  export varprefix = "${localstatedir}"
+> diff --git a/recipes/zope/zope-native_3.3.1.bb b/recipes/zope/zope-native_3.3.1.bb
+> index cb0d690..a1c5eac 100644
+> --- a/recipes/zope/zope-native_3.3.1.bb
+> +++ b/recipes/zope/zope-native_3.3.1.bb
+> @@ -1,4 +1,4 @@
+> -inherit native distutils-native-base
+> +inherit distutils-native-base native
 
-2010/11/6 Eric B=E9nard <eric@eukrea.com>
+So, you are sorting the inherit differently. How does this avoid generating
+native packages? Is there some magic I don't understand?
 
-> Hi,
->
-> Le 06/11/2010 12:26, Sylvain Par=E9 a =E9crit :
->
->> Thanks for the update.
->> But am I the only having issue building it?
->>
->> http://tinderbox.openembedded.org/public/logs/task/9693587.txt
->>
->>  are you using the patch which was pushed ?
-> If yes, it's tested using qt-embedded 4.7 on armv5 & armv6 with angstrom
-> 2010-x distro.
->
-> Eric
->
+regards
+Stefan Schmidt
+
 
