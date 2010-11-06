@@ -1,19 +1,18 @@
 Received: from ibawizard.net
 	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PEdZN-0007OC-IV
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PEdrh-0006hd-Fu
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 08:52:13 +0100
+	Sat, 06 Nov 2010 09:11:09 +0100
 Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 0160F1D36171; Sat,  6 Nov 2010 08:51:18 +0100 (CET)
-Date: Sat, 6 Nov 2010 08:51:18 +0100
+	id 287581D36171; Sat,  6 Nov 2010 09:10:15 +0100 (CET)
+Date: Sat, 6 Nov 2010 09:10:15 +0100
 From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101106075118.GM15069@ibawizard.net>
-References: <1288776534.3980.33.camel@mattotaupa> <4CD1A210.5000007@telus.net>
-	<1288999268.4113.51.camel@mattotaupa>
+Message-ID: <20101106081015.GN15069@ibawizard.net>
+References: <20101105235600.GA3671@boggieman.bredbandsbolaget.se>
 MIME-Version: 1.0
-In-Reply-To: <1288999268.4113.51.camel@mattotaupa>
+In-Reply-To: <20101105235600.GA3671@boggieman.bredbandsbolaget.se>
 User-Agent: Mutt/1.5.18 (2008-05-17)
 X-SA-Exim-Connect-IP: 82.208.49.253
 X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
@@ -23,7 +22,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: vlc_1.1.4.1: Why is `lua5.1-native` not added to	`DEPENDS` automatically? (was: [PATCH] vlc_1.1.4.1: add `lua5.1` to	`DEPENDS`)
+Subject: Re: ARMv4 not working with latest gcc,eglibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,24 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 07:52:13 -0000
+X-List-Received-Date: Sat, 06 Nov 2010 08:11:09 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Paul Menzel <paulepanter@users.sourceforge.net> [2010-11-06 00:21:08]:
+Kristoffer Ericson <kristoffer.ericson@gmail.com> [2010-11-06 00:56:00]:
 
-> Indeed in all my tests there is no `luac` staged.
-> This should be done by adding `lua5.1-native` to `DEPENDS` as you
-> suggested. But I am wondering why `lua5.1` is not providing `luac`. Is
-> there a problem with the `lua5.1` recipe [4][5]?
+> Khems addition of gcc 4.5 patch effectivly removed the thumb 'bx'
+> instruction from the binaries, but Im getting the exact same issue as before
+> (kernel panic at init time).
 
-The question is, why there's no luac for you :-) It's working for me (tm), see bellow. 
+Same issue as before? What does it mean? What machine and distro combination
+is that? I can build something and test it on my ts72xx, which is armv4t also.
 
-ynezz@ntbk:/media/data/devel/oe/ts72xx.git/tmp/work$ ls armv4t-angstrom-linux-*/lua5.1-5.1.4-r9/packages-split/lua5.1/usr/bin/*
-armv4t-angstrom-linux-gnueabi/lua5.1-5.1.4-r9/packages-split/lua5.1/usr/bin/lua
-armv4t-angstrom-linux-gnueabi/lua5.1-5.1.4-r9/packages-split/lua5.1/usr/bin/luac
-armv4t-angstrom-linux-uclibceabi/lua5.1-5.1.4-r9/packages-split/lua5.1/usr/bin/lua
-armv4t-angstrom-linux-uclibceabi/lua5.1-5.1.4-r9/packages-split/lua5.1/usr/bin/luac
+> Filip zyzniewski had the combination of gcc 4.4.2 + eglibc 2.12 working well
+> on his machine, I also know another person with an ARMv4t which used gcc 4.5
+> + eglibc 2.12 without any issues (with same distro file).  Therefore I still
+> believe its an compiler/thumb issue.  Im currently trying to reproduce
+> filips environment to make sure, once I do it should be confirmed.
+
+Sorry, I don't know Filip, nor his machine, can you be please more specific?
+:-) Thanks.
 
 -- ynezz
 
