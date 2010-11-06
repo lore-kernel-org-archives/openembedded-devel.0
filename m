@@ -1,35 +1,45 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PElWI-0003LS-7Y for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 17:21:44 +0100
-Received: from f053041208.adsl.alicedsl.de ([78.53.41.208]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PElVS-0004oP-3T for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Nov 2010 16:20:42 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <pixdamix@gmail.com>) id 1PElgy-0005uT-AG
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Nov 2010 17:32:38 +0100
+Received: by ewy2 with SMTP id 2so2172499ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Nov 2010 09:31:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=sTTaEJmYMS1GF/RpXDdctpol/eTU7/Uz8uBQI82k3kE=;
+	b=fd+eKdo3IB+vbkVkVd2Wr1WCVGtxPxJX1BEZhfdbzVrrzeVhzx3H1sRMONayS4prc+
+	vFc5RrWPmK7Y2muW4f737ePlgoijYVJWae7gr6NQGKX27L3FZjTywxgwSPSrdmrnKd2b
+	E83xVQoBB3KXtYQHbPIlxwmR6p68t9AF4+vck=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=r3/4J8PEVuZgoMap6XnoxGfH8alblYLHUjWSXOkkvt+bXO+3149fya3/7EoSEVnxf6
+	1g1Od8echV3l7wi5Gdn3s1WWp2kKbFMqIgjrTP/LsUsHEZbGxSKdwKgI7Qx+bqfslFM3
+	c7xZDQGu+pqC4uF1oe9RJNS8F/wqkYaWWMkNQ=
+Received: by 10.14.53.69 with SMTP id f45mr1838114eec.17.1289061100264;
+	Sat, 06 Nov 2010 09:31:40 -0700 (PDT)
+Received: from localhost.localdomain ([93.182.199.230])
+	by mx.google.com with ESMTPS id b52sm2275628eei.13.2010.11.06.09.31.36
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 06 Nov 2010 09:31:37 -0700 (PDT)
+Sender: Camille Moncelier <pixdamix@gmail.com>
+From: Camille Moncelier <moncelier@devlife.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20101106103653.GO15069@ibawizard.net>
-References: <1288776534.3980.33.camel@mattotaupa>
-	<4CD1A210.5000007@telus.net> <1288999268.4113.51.camel@mattotaupa>
-	<20101106075118.GM15069@ibawizard.net>
-	<1289035885.4901.2.camel@mattotaupa>
-	<20101106103653.GO15069@ibawizard.net>
-Date: Sat, 06 Nov 2010 17:20:40 +0100
-Message-ID: <1289060440.4901.134.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Sat,  6 Nov 2010 16:31:24 +0000
+Message-Id: <1289061084-19901-1-git-send-email-moncelier@devlife.org>
+X-Mailer: git-send-email 1.7.3.1
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: pixdamix@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] vlc_1.1.4.1: add `lua5.1-native` to `DEPENDS` and `lua5.1` to `RDEPENDS`
+Cc: Camille Moncelier <moncelier@devlife.org>
+Subject: [PATCH 01/11] parted: Added parted-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,84 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Nov 2010 16:21:44 -0000
-X-Groupsio-MsgNum: 25964
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-ttqRz+P958C/Qimv0/gv"
+X-List-Received-Date: Sat, 06 Nov 2010 16:32:38 -0000
 
---=-ttqRz+P958C/Qimv0/gv
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Date: Sat, 6 Nov 2010 12:00:31 +0100
-
-Task `configure` failed with the following error.
-
-        [=E2=80=A6]
-        checking for LUA... yes
-        checking for luac... no
-        configure: error: Could not find the LUA byte compiler.
-        ERROR: Function do_configure failed
-
-It turns out that `luac` is needed on the build system and therefore `lua5.=
-1-native` needs to be added to `DEPENDS`. Thanks to Petr =C5=A0tetiar for h=
-is advise on this issue [1].
-
-With this patch applied I built this recipe successfully with the following=
- build configuration.
-
-        Build Configuration:
-        BB_VERSION        =3D "1.10.0"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "28492a5"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-gnueabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "angstrom"
-        DISTRO_VERSION    =3D "2010.7-test-20101106"
-        TARGET_FPU        =3D "hard"
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November/0=
-26631.html
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Signed-off-by: Camille Moncelier <moncelier@devlife.org>
 ---
-Please apply after the first fixup patch [2].
+ recipes/parted/parted_2.3.bb |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
-[2] http://patchwork.openembedded.org/patch/3504/
----
- recipes/vlc/vlc_1.1.4.1.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+diff --git a/recipes/parted/parted_2.3.bb b/recipes/parted/parted_2.3.bb
+index d2ac303..6efb398 100644
+--- a/recipes/parted/parted_2.3.bb
++++ b/recipes/parted/parted_2.3.bb
+@@ -3,14 +3,18 @@ HOMEPAGE = "http://www.gnu.org/software/parted/parted.html"
+ LICENSE = "GPLv3"
+ SECTION = "console/tools"
+ DEPENDS = "readline util-linux-ng lvm2"
++DEPENDS_virtclass-native = "readline-native util-linux-ng-native"
+ 
+ SRC_URI = "${GNU_MIRROR}/parted/parted-${PV}.tar.gz \
+            file://use_llseek_syscall.patch \
+           "
+            
+ EXTRA_OECONF = "--disable-Werror ac_cv_func_calloc_0_nonnull=yes"
++EXTRA_OECONF_virtclass-native = "--disable-device-mapper"
+ 
+ inherit autotools pkgconfig
+ 
+ SRC_URI[md5sum] = "30ceb6df7e8681891e865e2fe5a7903d"
+ SRC_URI[sha256sum] = "e81fa140805b5cd029ff6dda5cfa94d223e83ac182ebcae94f841d62ce468829"
++
++BBCLASSEXTEND = "native"
+-- 
+1.7.3.1
 
-diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
-index af01d98..df8f17c 100644
---- a/recipes/vlc/vlc_1.1.4.1.bb
-+++ b/recipes/vlc/vlc_1.1.4.1.bb
-@@ -10,7 +10,8 @@ SRC_URI[sha256sum] =3D "61c9ea30a17ea40c6ccbfd507026e5c83=
-ad9e0691f221d3667c8e49696
-=20
- # ffmpeg from git (library version =3D> 52) is required
- # libtool-native must be >=3D 2.2.4
--DEPENDS +=3D "libdvdcss libdvdread lua5.1"
-+DEPENDS +=3D "libdvdcss libdvdread lua5.1-native"
-+RDEPENDS_${PN} +=3D "lua5.1"
-=20
- EXTRA_OECONF +=3D "\
- 	--enable-dvdread \
---=20
-1.7.2.3
 
---=-ttqRz+P958C/Qimv0/gv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzVgFgACgkQPX1aK2wOHViYeACfTT2JApoxo0Zp7A576cJhkVNP
-ZPQAn1QjRYqdwvfdRDUZ93pJyEN8Jx+e
-=7GJA
------END PGP SIGNATURE-----
-
---=-ttqRz+P958C/Qimv0/gv--
