@@ -1,46 +1,31 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <angelox.123@gmail.com>) id 1PF88K-0003wX-Bp
+	(envelope-from <khimov@altell.ru>) id 1PF8Av-0002XT-P5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Nov 2010 17:30:22 +0100
-Received: by gwaa11 with SMTP id a11so3100459gwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Nov 2010 08:29:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=sCG7AM3710njJK9axffMqOkgKXDp9JQdzCKKd6gDafY=;
-	b=muqDk0hj7O9GPZbT9UF7dodhywM2JueZDYnXQ/AJpW56Abb/o7Be9F1wpgtUPDhCFa
-	v4+kTs5+gzZJYxUAZSZYr1Vg47sd8J5kDqHFVVykLFDSAjVlqh4jE/AaMaXUCn1i+UK4
-	zWFBpJ7Vxk3F2TmFdhmLiNzfdKyM/LZrmUXD8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=VZp+KPaFK5ncGDBYaoE80ftrQyUlhx1Gqkj1wVDWqeD/bYeAPWtxP4wp4u2mAiLQgL
-	6vck7e/3vsm5jkZG4xH9UtmhNc+Aqkva+TnI3x74BUMrjd505MK1ndUcrkM3ikeGCuHM
-	2sgS+3DauLmM3iJCVYM2h4CvwsKsHWmEqTcFE=
-Received: by 10.100.143.8 with SMTP id q8mr1691081and.124.1289147364379;
-	Sun, 07 Nov 2010 08:29:24 -0800 (PST)
-Received: from localhost.localdomain (189-46-9-193.dsl.telesp.net.br
-	[189.46.9.193])
-	by mx.google.com with ESMTPS id w3sm4766942anw.25.2010.11.07.08.29.21
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 07 Nov 2010 08:29:23 -0800 (PST)
-From: angelox_123 <angelox.123@gmail.com>
+	Sun, 07 Nov 2010 17:33:12 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <khimov@altell.ru>)
+	id 1PF89z-0005mt-IJ; Sun, 07 Nov 2010 19:32:04 +0300
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  7 Nov 2010 14:29:12 -0200
-Message-Id: <1289147352-1204-1-git-send-email-angelox.123@gmail.com>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <angelox.123@gmail.com>
-References: <angelox.123@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: angelox.123@gmail.com
+Date: Sun, 7 Nov 2010 19:32:02 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <1288774920.3980.29.camel@mattotaupa>
+In-Reply-To: <1288774920.3980.29.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201011071932.02392.khimov@altell.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.1 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_SOFTFAIL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] metano.conf: Fixed unbuildable errors with gpe packages on xorg-image
+Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+Subject: Re: libprelude: minimal-uclibc: task `install` fails with `sed: can't read /oe/build-minimal-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibceabi/libprelude-1.0.0-r0/image/usr/lib/perl/5.8.8/auto/Prelude/.packlist: No such file or directory`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,32 +39,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Nov 2010 16:30:23 -0000
+X-List-Received-Date: Sun, 07 Nov 2010 16:33:20 -0000
+Content-Type: Text/Plain;
+  charset="windows-1251"
+Content-Transfer-Encoding: quoted-printable
 
-* Removed gpe-filemananger from DISTRO_EXTRA_RRECOMMENDS
-* Removed gpe-mini-brownser from DISTRO_EXTRA_RRECOMMENDS
-* That fix the "missing unbuildable errors..." from build xorg-image
+=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =D1=F0=E5=E4=E0 03 =ED=EE=FF=E1=F0=
+=FF 2010 12:02:00 =E0=E2=F2=EE=F0 Paul Menzel =ED=E0=EF=E8=F1=E0=EB:
+> Build Configuration:
+> BB_VERSION        =3D "1.10.0"
+> METADATA_BRANCH   =3D "org.openembedded.dev"
+> METADATA_REVISION =3D "8fc09c071a6fba0766c3b002209c758572298d26"
+> TARGET_ARCH       =3D "arm"
+> TARGET_OS         =3D "linux-uclibceabi"
+> MACHINE           =3D "beagleboard"
+> DISTRO            =3D "minimal-uclibc"
+> DISTRO_VERSION    =3D "dev-snapshot-20101103"
+> TARGET_FPU        =3D "hard"
+>=20
+> testing to build `suricata_1.0.2` (commit f85795) [1] the build fails in
+> the task `install` of the dependency `libprelude_1.0.0` (commit 577889)
+> [2].
+>=20
+>         make[1]: Leaving directory
+>  `/oe/build-minimal-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibc=
+ea
+> bi/libprelude-1.0.0-r0/libprelude-1.0.0' sed: can't read
+>  /oe/build-minimal-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibce=
+ab
+> i/libprelude-1.0.0-r0/image/usr/lib/perl/5.8.8/auto/Prelude/.packlist: No
+>  such file or directory ERROR: Function do_install failed
 
-Signed-off-by: angelox_123 <angelox.123@gmail.com>
----
- conf/distro/metano.conf |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
+Hmm. Tried to build with your configuration and it doesn't even get to this=
+=20
+stage failing on perl:
 
-diff --git a/conf/distro/metano.conf b/conf/distro/metano.conf
-index 9bab8d9..4d7ef31 100644
---- a/conf/distro/metano.conf
-+++ b/conf/distro/metano.conf
-@@ -123,8 +123,6 @@ DISTRO_EXTRA_RRECOMMENDS += " \
-     alsa-lib \
-     alsa-utils \
-     nano \
--    gpe-filemanager \
--    gpe-mini-browser \
-     ${XSERVER} \
-     avahi-daemon \
-     avahi-autoipd \
--- 
-1.7.2.3
-
+arm-oe-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneo=
+n -
+mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -o libperl.so -L/home/rik/=
+oe-
+angstrom-beagleboard/tmp/sysroots/armv7a-oe-linux-uclibceabi/usr/lib -Wl,-
+rpath-link,/home/rik/oe-angstrom-beagleboard/tmp/sysroots/armv7a-oe-linux-
+uclibceabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu -shared perl.o  gv.o toke=
+=2Eo=20
+perly.o op.o pad.o regcomp.o dump.o util.o mg.o reentr.o hv.o av.o run.o=20
+pp_hot.o sv.o pp.o scope.o pp_ctl.o pp_sys.o doop.o doio.o regexec.o utf8.o=
+=20
+taint.o deb.o universal.o xsutils.o globals.o perlio.o perlapi.o numeric.o=
+=20
+locale.o pp_pack.o pp_sort.o  -lnsl -ldl -lm -lcrypt -lutil -lpthread -lc  -
+Wl,-soname,libperl.so.5
+/home/rik/oe-angstrom-beagleboard/tmp/sysroots/x86_64-
+linux/usr/armv7a/lib/gcc/arm-oe-linux-uclibceabi/4.5.2/../../../../arm-oe-
+linux-uclibceabi/bin/ld: cannot find -lnsl
 
 
