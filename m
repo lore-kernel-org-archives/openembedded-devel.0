@@ -1,32 +1,47 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1PFCN1-0000R2-Bq
+	(envelope-from <graham.gower@gmail.com>) id 1PFENo-00039p-IJ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Nov 2010 22:01:48 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PFCM8-000672-QP
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 00:00:53 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 8 Nov 2010 00:00:48 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <1288774920.3980.29.camel@mattotaupa>
-	<201011071932.02392.khimov@altell.ru>
-	<1289158359.3878.22.camel@mattotaupa>
-In-Reply-To: <1289158359.3878.22.camel@mattotaupa>
+	Mon, 08 Nov 2010 00:10:59 +0100
+Received: by pxi2 with SMTP id 2so791068pxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 07 Nov 2010 15:09:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=U928ZIigBCLjoy19HCNxeJSzWAkCj0ykkrKirlpliRg=;
+	b=BHoV1sHYcjBNAwQtDN4yRsLvuSIcudG5RzlThFPwNQ/vE9OynyGogti1f46P3UopbS
+	UXQmJO/duWpcOw/qwnvRGvdFCK6WADU+9CWjw8O8oDHb1CWOyMa+BSXZzNLMpKrYmyft
+	McJlGs0tlf7bjRzmh7ycBqOBfWjQMVfh/gV9Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=T9d/7/I1OFQ7IIQJx2WtsiHlV84D5elN20XBBQc/ZSFTJT9y6jMBEdVoguXMHQgMSi
+	0Vibc4+UjwWU+rOaxL1qM67YnTSJi4INkVXtm+3ze6C/I37VI07CThNoAjx1R3ow2QxF
+	oZpn6Flj4m4lbiTZF+F0UIRf8nYgVzGbj1OT4=
+Received: by 10.142.114.5 with SMTP id m5mr4172376wfc.237.1289171376680;
+	Sun, 07 Nov 2010 15:09:36 -0800 (PST)
+Received: from [10.0.0.71] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id w42sm7038688wfh.3.2010.11.07.15.09.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 07 Nov 2010 15:09:35 -0800 (PST)
+Message-ID: <4CD731A8.3020809@gmail.com>
+Date: Mon, 08 Nov 2010 09:39:28 +1030
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.14) Gecko/20101020 Thunderbird/3.0.9
 MIME-Version: 1.0
-Message-Id: <201011080000.52045.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: minimal-uclibc: perl_5.8.8: fails with `ld: cannot find -lnsl` (was: libprelude: minimal-uclibc: task `install` fails with `sed: can't read /oe/build-minimal-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibceabi/libprelude-1.0.0-r0/image/usr/lib/perl/5.8.8/auto/Prelude/.packlist: No such file or directory`)
+Subject: bitbake weirdness during -k world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,44 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Nov 2010 21:01:48 -0000
-X-Groupsio-MsgNum: 26005
-Content-Type: multipart/signed; boundary="nextPart1640499.GIL2BW7AGL";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Sun, 07 Nov 2010 23:11:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
---nextPart1640499.GIL2BW7AGL
-Content-Type: Text/Plain;
-  charset="windows-1251"
-Content-Transfer-Encoding: quoted-printable
+I have a 1gb world.log file after running:
+bitbake -k world | tee world.log
 
-=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =C2=EE=F1=EA=F0=E5=F1=E5=ED=FC=E5 07=
- =ED=EE=FF=E1=F0=FF 2010 22:32:39 =E0=E2=F2=EE=F0 Paul Menzel =ED=E0=EF=E8=
-=F1=E0=EB:
-> What is `-lnsl`?
->=20
-> `perl` builds just fine for me. I tried it again with a clean temporary
-> directory. My build host runs Debian Squeeze.
+The build appears to have gotten about half way through (compared with
+previous builds) and then begun infinitely repeating the following message.
 
-Lenny here, and although in theory it shouldn't matter, it's 100% reproduci=
-ble=20
-for me. I'd recommend you at least to try newer perl.
+Traceback (most recent call last):
+  File "/home/grg/oe2/bitbake/lib/bb/server/none.py", line 128, in idle_commands
+    retval = function(self, data, False)
+  File "/home/grg/oe2/bitbake/lib/bb/cooker.py", line 716, in buildTargetsIdle
+    retval = rq.execute_runqueue()
+  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 877, in execute_runqueue
+    self.execute_runqueue_internal()
+  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 992, in execute_runqueue_internal
+    self.build_pipes[pipe].read()
+  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 1227, in read
+    bb.event.fire_from_worker(self.queue[:index+8], self.d)
+  File "/home/grg/oe2/bitbake/lib/bb/event.py", line 137, in fire_from_worker
+    event = pickle.loads(event[7:-8])
+  File "/usr/lib64/python2.6/pickle.py", line 1374, in loads
+    return Unpickler(file).load()
+  File "/usr/lib64/python2.6/pickle.py", line 858, in load
+    dispatch[key](self)
+  File "/usr/lib64/python2.6/pickle.py", line 966, in load_string
+    raise ValueError, "insecure string pickle"
+ValueError: insecure string pickle
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart1640499.GIL2BW7AGL
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+I identified the location where the message begins and it is not possible
+to link it to any other errors nor to a particular recipe. Context looks like this:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+NOTE: Unpacking ../oe/sources/libAppleWM-1.4.0.tar.bz2 to /mnt/oe/tmp/work/mipsel-oe-linux/libapplewm-1_1.4.0-r9.0/
+NOTE: package dhcpcd-1.3.22-pl4-r1: task do_install: Succeeded
+NOTE:   /usr/share/ti/ti-biosutils-tree/packages/xdoc/external.png
+NOTE:   /usr/share/ti/ti-biosutils-tree/packages/xdoc/Bullet.png
+Traceback (most recent call last):
+  File "/home/grg/oe2/bitbake/lib/bb/server/none.py", line 128, in idle_commands
+    retval = function(self, data, False)
+  File "/home/grg/oe2/bitbake/lib/bb/cooker.py", line 716, in buildTargetsIdle
+    retval = rq.execute_runqueue()
 
-iEYEABECAAYFAkzXE4QACgkQXJ70z+XgVcNRtQCeK6MJ9bawlsuq1oKHwxR99tKp
-O+AAoJ+UFIzHhPinzr+rPEtyU1fE4A94
-=/q1n
------END PGP SIGNATURE-----
 
---nextPart1640499.GIL2BW7AGL--
+
+FYI, i do have this stupidity in my local.conf:
+PARALLEL_MAKE = "-j 12"
+BB_NUMBER_THREADS = "12"
+
+
+-Graham
+
+
