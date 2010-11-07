@@ -1,43 +1,47 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PF1Cl-0000M2-1l for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Nov 2010 10:06:27 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PF1Bq-0002dX-R4 for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Nov 2010 10:05:30 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Nov 2010 10:05:30 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1PF21k-0005Pw-8R
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 07 Nov 2010 10:59:10 +0100
+Received: by gwaa11 with SMTP id a11so3016682gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Nov 2010 10:05:30 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 07 Nov 2010 10:05:20 +0100
-Message-ID: <ib5q4g$847$1@dough.gmane.org>
-References: <4C78D1E1.9080101@mlbassoc.com> <4CB081A4.9010908@mlbassoc.com>
-	<20101106141118.GG6691@excalibur.local>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <20101106141118.GG6691@excalibur.local>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Sun, 07 Nov 2010 01:58:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=OqriqcXJ+nILWuMjz6oJNa0o+PIuMzcUrcjQN8AGRqY=;
+	b=q6P6cQQemxb6li+3TVFguFSIK+6PM4f4OjJ9yf6m/ALRXx7dIzppky44B3COHwV47B
+	yb+8iocwVzSPfIU8CneiviSbc4BB5RNZxfXVAQQJbiqFWdH9HxeJJif+HN6JfdEyqyq/
+	jRrz0f9CSQXFHEyvKIV+EaUwAZ3XNb72fDdyU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=tW5B1Rfh7nGqg2ivQ6LEUkDt5d7oWS6b3zuMT1M/q/2JkifXLyeFlpGE+J26y070Aw
+	eeBRJ7u5yB9qHBsDfAWEaahdpPSsat4ypMLys68xSbvvnlHbVeAYKwqK0s1vbJc3F8nx
+	BeyG2etLVtSQV+WyJizvbs8BtnaJT1eIPsF8U=
+Received: by 10.91.11.6 with SMTP id o6mr3660594agi.91.1289123890867; Sun, 07
+	Nov 2010 01:58:10 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Sun, 7 Nov 2010 01:57:50 -0800 (PST)
+In-Reply-To: <AANLkTi=i3bg7VdTKhEX4oAkXzX4m3y58F+8+qSfq1qsb@mail.gmail.com>
+References: <1289061084-19901-1-git-send-email-moncelier@devlife.org>
+	<AANLkTi=L6r1i9yayoo9=j_JNx5Yd+bGhgQYotEp=SJ-s@mail.gmail.com>
+	<AANLkTi=i3bg7VdTKhEX4oAkXzX4m3y58F+8+qSfq1qsb@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 7 Nov 2010 01:57:50 -0800
+Message-ID: <AANLkTi=c6EsH_dYsZnyNPijJNT5wDqbTCTBjFt-ztVt=@mail.gmail.com>
+To: Camille Moncelier <moncelier@devlife.org>
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] TI tools - make EULA unpack work when /opt is writeable
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 01/11] parted: Added parted-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,44 +55,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Nov 2010 09:06:27 -0000
+X-List-Received-Date: Sun, 07 Nov 2010 09:59:10 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 06-11-10 15:11, Stefan Schmidt wrote:
-> Hello.
-> 
-> On Sat, 2010-10-09 at 08:52, Gary Thomas wrote:
->> On 08/28/2010 03:07 AM, Gary Thomas wrote:
->>> This patch addresses the problem where the TI tools that need
->>> the EULA unpack into the wrong place if the user has write
->>> permission in /opt. The current behaviour of expecting the
->>> unpacker to fall back to the $HOME environment variable should
->>> not be relied on. The patch changes the unpack step to use
->>> the --prefix= option which will always work.
->>>
->>> Version 2:
->>> * Update patch to be against org.openembedded.dev branch
->>> * Incorporate full description into patch
+On Sat, Nov 6, 2010 at 3:36 PM, Camille Moncelier <moncelier@devlife.org> w=
+rote:
+> On Sat, Nov 6, 2010 at 10:48 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >>
->> What about this patch?  It's been nearly 6 weeks and no discussion
->> or anything.
+>> > diff --git a/recipes/parted/parted_2.3.bb b/recipes/parted/parted_2.3.=
+bb
+>> > index d2ac303..6efb398 100644
+>> > --- a/recipes/parted/parted_2.3.bb
+>> > +++ b/recipes/parted/parted_2.3.bb
+>> > @@ -3,14 +3,18 @@ HOMEPAGE =3D
+>> > "http://www.gnu.org/software/parted/parted.html"
+>> > =C2=A0LICENSE =3D "GPLv3"
+>> > =C2=A0SECTION =3D "console/tools"
+>> > =C2=A0DEPENDS =3D "readline util-linux-ng lvm2"
+>> > +DEPENDS_virtclass-native =3D "readline-native util-linux-ng-native"
 >>
->> The problem persists in today's tree.
-> 
-> Can we have a comment form the TI devs here?
+>> this should not be needed.
+>
+> Are you saying this for DEPENDS_virtclass-native are for the whole recipe=
+ ?
+>
 
-I'm against automatic application of patches.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM1mvQMkyGM64RGpERAjceAJ9CKgqOlknrKWrHs0uX45LbdWFlwwCeMvXy
-UCksWN+a/+jo4uNLQOu+rI0=
-=SDiM
------END PGP SIGNATURE-----
-
+Just  DEPENDS_virtclass-native
+other parts look ok
+>
+> --
+> Camille Moncelier
+> http://devlife.org/
+>
+> If Java had true garbage collection, most programs would
+> delete themselves upon execution.
+>
 
 
