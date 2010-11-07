@@ -1,38 +1,31 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PFBMZ-0004QU-J8
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <jay@jay-tech.ru>) id 1PFBpj-0005OL-Nd
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Nov 2010 20:57:16 +0100
-Received: (qmail 11686 invoked by uid 503); 7 Nov 2010 20:26:29 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 7 Nov 2010 20:26:29 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 7 Nov 2010 21:56:22 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 7 Nov 2010 21:56:20 +0200
-Message-ID: <4CD70464.2080709@eukrea.com>
-Date: Sun, 07 Nov 2010 20:56:20 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	Sun, 07 Nov 2010 21:27:24 +0100
+Received: by qyk4 with SMTP id 4so609523qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 07 Nov 2010 12:26:27 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.229.217.83 with SMTP id hl19mr4440158qcb.15.1289161587406;
+	Sun, 07 Nov 2010 12:26:27 -0800 (PST)
+Sender: jay@jay-tech.ru
+Received: by 10.220.95.74 with HTTP; Sun, 7 Nov 2010 12:26:27 -0800 (PST)
+X-Originating-IP: [93.81.138.62]
+Date: Sun, 7 Nov 2010 23:26:27 +0300
+X-Google-Sender-Auth: w47p8jiaKCMaM5DBF1Fzw75K8sI
+Message-ID: <AANLkTi=Kp6Ydc_HR0apO3abN7Zokd6SHazYQYY4vNkdo@mail.gmail.com>
+From: Yury Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1270558697-19222-1-git-send-email-mchazaux@adeneo-embedded.com>	<n2kbc36f8ed1004160804j3610d311k55c328811e1657e2@mail.gmail.com>	<20101106140856.GF6691@excalibur.local>
-	<AANLkTikGVk0nVTgzb+JnOnw0vubRj+coAui6h48ao8bg@mail.gmail.com>
-In-Reply-To: <AANLkTikGVk0nVTgzb+JnOnw0vubRj+coAui6h48ao8bg@mail.gmail.com>
-X-Ovh-Tracer-Id: 316377875634695497
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: jay@jay-tech.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add Freescale i.MX25 3stack support
+Subject: bitbake goes crazy when ...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Nov 2010 19:57:16 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 07 Nov 2010 20:27:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+Hello!
 
-Le 07/11/2010 20:34, Mickael Chazaux a écrit :
-> 2010/11/6 Stefan Schmidt<stefan@datenfreihafen.org>:
->> Sorry for the late reply. I'm just going throught our patchwork backlog and
->> found this patch. It does not apply anymore. Care to update and resend it? Will
->> apply it then.
->>
->
-> Wow, I forgot about this one. I no longer work for Adeneo and thus I
-> have no more access to the hardware, so I won't be able to test it.
-> I'll do the update when I have time.
+Bitbake fails without any end-user readable diagnosting (just a lot of
+strange errors and tracebacks) when:
+1) specifying non-existent DISTRO (I've mistyped and specified
+'angsrom-2008.1' instead of 'angstrom')
+2) specifying non-absolute path to TMPDIR (i.e. you can't use './tmp' as TMPDIR)
 
-I've updated and pushed the patch.
+I've found this when playing with my testbuilder script.
 
-Eric
+Can/should we catch that errors and produce user-readable messages about this?
+
+-- 
+Yury Bushmelev
 
 
