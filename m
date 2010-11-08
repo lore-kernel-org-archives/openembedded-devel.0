@@ -1,44 +1,39 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PFa76-0008RP-Iw
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PFa9b-0001Ko-Qw
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 23:22:56 +0100
-Received: by wye20 with SMTP id 20so307665wye.6
+	Mon, 08 Nov 2010 23:25:36 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 17DD0597266
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Nov 2010 14:22:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=tn3Zn0fJwLg/JNHUvCDDMVqh+m3CvPZCZQBvlu8v9VQ=;
-	b=aNkXV8kHPs2pGpbVPUrhqWahwtqn7foQW50bp+ve13Gk4TSgAm43z0/k4wsXOQGVUx
-	NNukrzOPRcrsMswk/+iuBRLb6DvITz6L2VwZI9QSHsvmPxmBFBeNaPdtuZoSrDvPYTKG
-	/tPw9cvwDCJAnSbQ20ZdL3Ri66RdE9nLJSqro=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=sIXs2/gIhIUa5viy856FYCuJ+2GuKkz3Ccb6w5yUWvzZAk7MxlYgGQSVgb4kJE6nfk
-	zh/lts+6oLatHCMaoH94Vd+JkYJDmiq3GIjrTfN7nbnhDQNHz2qHJhx0IQmVNvywFO9V
-	nZpGl7Js/UkpTgnfEk0gkqD0wDB8SooQ3YTxE=
-MIME-Version: 1.0
-Received: by 10.227.135.9 with SMTP id l9mr5949481wbt.49.1289254919499; Mon,
-	08 Nov 2010 14:21:59 -0800 (PST)
-Received: by 10.227.32.147 with HTTP; Mon, 8 Nov 2010 14:21:59 -0800 (PST)
-In-Reply-To: <AANLkTi=Rk8Fm_Xq08J89J-s4bx=QQeTHfMan4HZknYWs@mail.gmail.com>
-References: <4CD731A8.3020809@gmail.com>
-	<AANLkTi=Rk8Fm_Xq08J89J-s4bx=QQeTHfMan4HZknYWs@mail.gmail.com>
-Date: Tue, 9 Nov 2010 08:51:59 +1030
-Message-ID: <AANLkTi=JbmuXAXPD=8jNS2kTsuC9SS=UL4vepkHw1Wqt@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	Mon,  8 Nov 2010 17:24:34 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 07458-05 for <openembedded-devel@lists.openembedded.org>; 
+	Mon,  8 Nov 2010 17:24:34 -0500 (EST)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id E7F6E8DFA89; Mon,  8 Nov 2010 17:24:33 -0500 (EST)
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id A3035103B3B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Nov 2010 17:24:32 -0500 (EST)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id 834725001A1; Mon,  8 Nov 2010 17:24:32 -0500 (EST)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Mon,  8 Nov 2010 17:24:32 -0500
+Message-Id: <1289255072-27731-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.7.0.4
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake weirdness during -k world
+Subject: [PATCH] webkit-gtk: fix packaging of error.html for svn release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,20 +47,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Nov 2010 22:22:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 08 Nov 2010 22:25:36 -0000
 
-On 9 November 2010 05:52, Khem Raj <raj.khem@gmail.com> wrote:
-> On Sun, Nov 7, 2010 at 3:09 PM, Graham Gower <graham.gower@gmail.com> wrote:
->> I have a 1gb world.log file after running:
->> bitbake -k world | tee world.log
->>
->
-> I have this very same problem too and its recent enough. We should be
-> able to find which commit is causing it (bisect bitbake)
-> I am using bitbake master are you using same too ?
->
+The resources under ${datadir} have moved around between versions.
+Use a wildcard in case they move again.
 
-Yep, bitbake master.
+No PR bump for v1.2.3. It already packages the correct file.
+
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ recipes/webkit/webkit-gtk_1.2.3.bb |    4 ++--
+ recipes/webkit/webkit-gtk_svn.bb   |    6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/recipes/webkit/webkit-gtk_1.2.3.bb b/recipes/webkit/webkit-gtk_1.2.3.bb
+index 0ee6241..e223a64 100644
+--- a/recipes/webkit/webkit-gtk_1.2.3.bb
++++ b/recipes/webkit/webkit-gtk_1.2.3.bb
+@@ -47,6 +47,6 @@ PACKAGES =+ "${PN}-webinspector ${PN}launcher-dbg ${PN}launcher libjavascriptcor
+ FILES_${PN}launcher = "${bindir}/GtkLauncher"
+ FILES_${PN}launcher-dbg = "${bindir}/.debug/GtkLauncher"
+ FILES_libjavascriptcore = "${libdir}/libJavaScriptCore.so.*"
+-FILES_${PN}-webinspector = "${datadir}/webkit-1.0/webinspector/"
+-FILES_${PN} += "${datadir}/webkit-1.0/resources/error.html ${datadir}/webkit-1.0/images"
++FILES_${PN}-webinspector = "${datadir}/webkit*/webinspector/"
++FILES_${PN} += "${datadir}/webkit*/resources/error.html ${datadir}/webkit*/images"
+ 
+diff --git a/recipes/webkit/webkit-gtk_svn.bb b/recipes/webkit/webkit-gtk_svn.bb
+index f6bb708..74fb33b 100644
+--- a/recipes/webkit/webkit-gtk_svn.bb
++++ b/recipes/webkit/webkit-gtk_svn.bb
+@@ -3,7 +3,7 @@ DEPENDS = "geoclue enchant gtk-doc-native gtk-doc gnome-keyring libsoup-2.4 curl
+ 
+ SRCREV_FORMAT = "webcore-rwebkit"
+ 
+-PR = "r0"
++PR = "r1"
+ SRCREV = "68244"
+ PV = "1.3.4+svnr${SRCPV}"
+ 
+@@ -68,6 +68,6 @@ PACKAGES =+ "${PN}-webinspector ${PN}launcher-dbg ${PN}launcher libjavascriptcor
+ FILES_${PN}launcher = "${bindir}/GtkLauncher"
+ FILES_${PN}launcher-dbg = "${bindir}/.debug/GtkLauncher"
+ FILES_libjavascriptcore = "${libdir}/libJavaScriptCore.so.*"
+-FILES_${PN}-webinspector = "${datadir}/webkitgtk-1.0/webinspector/"
+-FILES_${PN} += "${datadir}/webkitgtk-1.0/resources/error.html ${datadir}/webkitgtk-1.0/images"
++FILES_${PN}-webinspector = "${datadir}/webkit*/webinspector/"
++FILES_${PN} += "${datadir}/webkit*/resources/error.html ${datadir}/webkit*/images"
+ 
+-- 
+1.7.0.4
+
 
 
