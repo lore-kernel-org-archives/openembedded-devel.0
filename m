@@ -1,34 +1,34 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from 173-11-172-146-houston.txt.hfc.comcastbusiness.net
+	([173.11.172.146] helo=mail.breakawaysystems.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1PFS39-0007Au-TY
+	(envelope-from <dave@lambsys.com>) id 1PFSNj-0000A0-QD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 14:49:06 +0100
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Mon, 8 Nov 2010 14:45:23 +0100
-X-TM-IMSS-Message-ID: <0720b84b0000213a@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0720b84b0000213a for
-	<jaap.dejong@nedap.com>; Mon, 8 Nov 2010 14:45:29 +0100
-Message-ID: <4CD7FEF2.2070509@nedap.com>
-Date: Mon, 08 Nov 2010 14:45:22 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
+	Mon, 08 Nov 2010 15:07:49 +0100
+Received: by mail.breakawaysystems.com (Postfix, from userid 1007)
+	id 037A51484C6; Mon,  8 Nov 2010 08:06:35 -0600 (CST)
+Received: from [192.168.1.100]
+	(173-11.172.145-houston.txt.hfc.comcastbusiness.net [173.11.172.145])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: dlambert)
+	by mail.breakawaysystems.com (Postfix) with ESMTPSA id 6891E1480C4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Nov 2010 08:06:33 -0600 (CST)
+Message-ID: <4CD803E8.8080805@lambsys.com>
+Date: Mon, 08 Nov 2010 08:06:32 -0600
+From: David Lambert <dave@lambsys.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CD27E26.1070706@nedap.com>
-In-Reply-To: <4CD27E26.1070706@nedap.com>
-X-OriginalArrivalTime: 08 Nov 2010 13:45:23.0461 (UTC)
-	FILETIME=[312EB350:01CB7F4B]
-X-SA-Exim-Connect-IP: 87.249.123.12
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+X-SA-Exim-Connect-IP: 173.11.172.146
+X-SA-Exim-Mail-From: dave@lambsys.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: openjdk-6 fails to translate
+Subject: Stable branch/tag?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,105 +42,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Nov 2010 13:49:36 -0000
+X-List-Received-Date: Mon, 08 Nov 2010 14:07:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-As I've noticed now, it has to do with distro angstrom-2010.x (or eglibc 
-vs glibc?)
-With angstrom-2008.1 openjdk-6 translates without problems.
+I am new to git and openembedded so please excuse another couple of 
+naive questions.
 
-On 11/04/2010 10:34 AM, Jaap de Jong wrote:
-> Hi All,
-> I've been trying to tackle this myself, but no luck so far...
-> What I can make of it is that -lz is translated into a reference to 
-> /usr/lib/libz.so
-> Any help is appreciated!
-> Jaap
->
->
-> $ bitbake openjdk-6
-> ////
-> ////
-> ////
-> mv -f .deps/cacaoh.Tpo .deps/cacaoh.Po
-> /bin/sh ../../libtool --tag=CC   --mode=link 
-> arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s 
-> -mthumb-interwork -mno-thumb -D__ARM__ -D__LINUX__ -std=c99 -pedantic 
-> -Wall -Wno-long-long -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=600 
-> -D_XOPEN_SOURCE_EXTENDED -D_BSD_SOURCE -D_REENTRANT 
-> -isystem/media/OpenEmbedded/unstable/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include 
-> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 
-> -ggdb2 -fno-strict-aliasing  -Wl,-O1 -Wl,--hash-style=gnu -o cacaoh 
-> cacaoh.o libcacaoh.la -lz -lpthread -ldl
-> arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s 
-> -mthumb-interwork -mno-thumb -D__ARM__ -D__LINUX__ -std=c99 -pedantic 
-> -Wall -Wno-long-long -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=600 
-> -D_XOPEN_SOURCE_EXTENDED -D_BSD_SOURCE -D_REENTRANT 
-> -isystem/media/OpenEmbedded/unstable/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include 
-> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 
-> -ggdb2 -fno-strict-aliasing -Wl,-O1 -Wl,--hash-style=gnu -o cacaoh 
-> cacaoh.o  ./.libs/libcacaoh.a /usr/lib/libz.so -lpthread -ldl
-> /usr/lib/libz.so: could not read symbols: File in wrong format
-> collect2: ld returned 1 exit status
-> make[4]: *** [cacaoh] Error 1
-> make[4]: Leaving directory 
-> `/media/OpenEmbedded/unstable/tmp/work/armv5te-angstrom-linux-gnueabi/openjdk-6-jre-6b18-1.8-r10.7/icedtea6-1.8.2/build/cacao/cacao-0.99.4/src/cacaoh'
-> ////
-> ////
-> ////
-> | Making install in cacao
-> | make[4]: Entering directory 
-> `/media/OpenEmbedded/unstable/tmp/work/armv5te-angstrom-linux-gnueabi/openjdk-6-jre-6b18-1.8-r10.7/icedtea6-1.8.2/build/cacao/cacao-0.99.4/src/cacao'
-> | /bin/sh ../../libtool --tag=CC   --mode=link 
-> arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s 
-> -mthumb-interwork -mno-thumb -D__ARM__ -D__LINUX__ -std=c99 -pedantic 
-> -Wall -Wno-long-long -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=600 
-> -D_XOPEN_SOURCE_EXTENDED -D_BSD_SOURCE -D_REENTRANT 
-> -isystem/media/OpenEmbedded/unstable/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include 
-> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 
-> -ggdb2 -fno-strict-aliasing -avoid-version -Xlinker 
-> --version-script=../../contrib/mapfile-vers-product -Wl,-O1 
-> -Wl,--hash-style=gnu -o libjvm.la -rpath 
-> /media/OpenEmbedded/unstable/tmp/work/armv5te-angstrom-linux-gnueabi/openjdk-6-jre-6b18-1.8-r10.7/icedtea6-1.8.2/build/cacao/install/lib  
-> ../../src/fdlibm/libfdlibm.la ../../src/mm/libmm.la 
-> ../../src/native/libnative.la ../../src/threads/libthreads.la 
-> ../../src/toolbox/libtoolbox.la ../../src/vm/libvm.la 
-> ../../src/vmcore/libvmcore.la  -lz -lpthread -ldl
-> | mkdir .libs
-> | arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s 
-> -mthumb-interwork -mno-thumb -shared  -Wl,--whole-archive 
-> ../../src/fdlibm/.libs/libfdlibm.a ../../src/mm/.libs/libmm.a 
-> ../../src/native/.libs/libnative.a 
-> ../../src/threads/.libs/libthreads.a 
-> ../../src/toolbox/.libs/libtoolbox.a ../../src/vm/.libs/libvm.a 
-> ../../src/vmcore/.libs/libvmcore.a -Wl,--no-whole-archive  
-> /usr/lib/libz.so -lpthread -ldl  -march=armv5te -mtune=arm926ej-s 
-> -mthumb-interwork -mno-thumb 
-> -Wl,--version-script=../../contrib/mapfile-vers-product -Wl,-O1 
-> -Wl,--hash-style=gnu -Wl,-soname -Wl,libjvm.so -o .libs/libjvm.so
-> | /usr/lib/libz.so: could not read symbols: File in wrong format
-> | collect2: ld returned 1 exit status
-> | make[4]: *** [libjvm.la] Error 1
-> | make[4]: Leaving directory 
-> `/media/OpenEmbedded/unstable/tmp/work/armv5te-angstrom-linux-gnueabi/openjdk-6-jre-6b18-1.8-r10.7/icedtea6-1.8.2/build/cacao/cacao-0.99.4/src/cacao'
-> ////
-> ////
-> ////
-> NOTE: Task failed: 
-> /media/OpenEmbedded/unstable/tmp/work/armv5te-angstrom-linux-gnueabi/openjdk-6-jre-6b18-1.8-r10.7/temp/log.do_compilestepone.14829
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of 
-> /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/openjdk/openjdk-6_6b18-1.8.bb 
-> do_compilestepone failed
-> ERROR: Task 18 
-> (/media/OpenEmbedded/unstable/org.openembedded.dev/recipes/openjdk/openjdk-6_6b18-1.8.bb, 
-> do_compilestepone) failed
-> NOTE: Tasks Summary: Attempted 3501 tasks of which 0 didn't need to be 
-> rerun and 1 failed.
-> ERROR: 
-> '/media/OpenEmbedded/unstable/org.openembedded.dev/recipes/openjdk/openjdk-6_6b18-1.8.bb' 
-> failed
->
+
+1) What is a recommended stable branch/tag, and what command(s) are 
+needed to obtain this?
+2) Is there a document somwhere that explains the relevance of the use 
+of branches and tags in this project?
+
+Thanks in advance for help,
+
+Dave.
+
+Listing git tags shows:
+
+git tag -l
+
+SlugOS5.3-beta
+mv-packages-to-recipes-post
+mv-packages-to-recipes-pre
+pre-nov2009-core-updates
+shr/testing2009-1rc1
+tested_2010-10-14
+tested_2010-10-25
+tested_2010-10-29
+testing_2010-08-23
+testing_2010-08-30
+testing_2010-09-07
+testing_2010-09-13
+testing_2010-09-20
+testing_2010-09-27
+testing_2010-10-08
+
+
+and git branch -a
+* master
+   remotes/origin/HEAD -> origin/master
+   remotes/origin/bluelightning/opie-git
+   remotes/origin/cbrake/qt-4.7.0
+   remotes/origin/darwin
+   remotes/origin/fso/milestone5
+   remotes/origin/fso/milestone5.5
+   remotes/origin/holger/hash-style
+   remotes/origin/holger/openmoko-merges
+   remotes/origin/holger/qt4-4.7
+   remotes/origin/holger/qt4-sdk
+   remotes/origin/holger/random-fixes
+   remotes/origin/holger/staging-branch
+   remotes/origin/ieee80215
+   remotes/origin/jan/master
+   remotes/origin/john_lee/fastboot-devel
+   remotes/origin/john_lee/openmoko-toolchain
+   remotes/origin/kergoth/alternatives
+   remotes/origin/kergoth/autotools
+   remotes/origin/kergoth/bluez
+   remotes/origin/kergoth/hostap-madwifi
+   remotes/origin/kergoth/master
+   remotes/origin/khem/import-linaro-gcc-4.5
+   remotes/origin/koen/darwin-host-fixes
+   remotes/origin/koen/static-libs-rework
+   remotes/origin/laibsch/scim
+   remotes/origin/laibsch/wip
+   remotes/origin/likewise/nios2
+   remotes/origin/master
+   remotes/origin/morphis/for-upstream
+   remotes/origin/nios2
+   remotes/origin/org.openembedded.angstrom-2007.12-stable
+   remotes/origin/org.openembedded.dev
+   remotes/origin/org.openembedded.documentation
+   remotes/origin/org.openembedded.dreambox
+   remotes/origin/org.openembedded.dreambox.release_25
+   remotes/origin/org.openembedded.oetest
+   remotes/origin/org.openembedded.oz354fam083
+   remotes/origin/org.openembedded.oz354x
+   remotes/origin/org.openembedded.packaged-staging
+   remotes/origin/org.openembedded.slugos.5.3-beta
+   remotes/origin/org.openembedded.stable
+   remotes/origin/pb/toolchain-desuck
+   remotes/origin/push/oe
+   remotes/origin/raster
+   remotes/origin/rik/amd64
+   remotes/origin/rik/qemu-0.12
+   remotes/origin/robertschuster/amd64-target
+   remotes/origin/rpurdie/for-testing
+   remotes/origin/rpurdie/work-in-progress
+   remotes/origin/shared/blackfin
+   remotes/origin/shared/xorg-7.4-update
+   remotes/origin/shr/import
+   remotes/origin/shr/merge
+   remotes/origin/shr/stable2009
+   remotes/origin/shr/testing2009
+   remotes/origin/shr/testing2010
+   remotes/origin/shr/unstable
+   remotes/origin/stable/2009
+   remotes/origin/stefan/eten-support
+   remotes/origin/testing
+   remotes/origin/testing-next
+   remotes/origin/thesing/arm4-eabi-angstrom
+   remotes/origin/ulf/linux-2.6.30
+   remotes/origin/ulf/linux-2.6.30-2010-10-16
+   remotes/origin/ulf/linux-2.6.30-20100317
+   remotes/origin/ulf/linux-2.6.30-20100930
+   remotes/origin/ulf/linux-2.6.30-at91sam9g45_m10
+   remotes/origin/ulf/linux-2.6.30.2
+   remotes/origin/woglinde/gettext
+   remotes/origin/xora/angstrom-sqeeezy
+   remotes/origin/xora/angstrom-srcpv
+
 
 
