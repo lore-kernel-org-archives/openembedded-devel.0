@@ -1,44 +1,44 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PFXJK-0004Ea-R8
+	(envelope-from <zach.frey@gmail.com>) id 1PFXlz-0005QO-Ve
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 20:23:40 +0100
-Received: by gyf3 with SMTP id 3so3889349gyf.6
+	Mon, 08 Nov 2010 20:53:01 +0100
+Received: by wwb31 with SMTP id 31so47940wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Nov 2010 11:22:25 -0800 (PST)
+	Mon, 08 Nov 2010 11:52:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=X626F2KhWTTksrvVk+vzqypGBMURoFU1G7xP0vjZDJg=;
-	b=v47Jj5PA31Ku5K2dN9xjLBni4Uu9qDdUo7gAi9qSGnDQrsDYrJLM2NxaG/dhM0p4hY
-	9wRrqsGz1Kc709E6RPjVZztfmas10V/NmPtEmpJbbyWBzAhaytBNZL8d48+P7tDeHAQG
-	rA8eDRI1IKqEtN1ESiHfrHexVXs+zsdcqcWxA=
+	h=domainkey-signature:mime-version:received:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=SNmJAvqO+a9HAZnGLHb+yNPQwbww9R3PqVR/wYW+aK4=;
+	b=m7RyqWOFl5ulAArsZqcj4rUGrxvP9BF8TM+yiXx8p7UqotXIwBEJCbmtJIjNXSQMxu
+	N5GRFD0i/EHa4uXFx5jXNoorS7wAYpGQI4EXpiASX2nNDrKomUYti0dEWRpO2lUnDRdq
+	xBDQtp0DZE6PXD003ywHMnSnbWmpNcDocHA2Q=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=j9FFfbY2f1jQkXqRcKAU7Tz8GsarZ6zl2rKAgJHXw/i+xQ8ptAnsPjBeH+4jetE+u2
-	3EVdBvAIgrylvGwM8PVkrRXg11UIeK3KXZ6Zi3Gkq/K5MWY6F7w+AZ2ltnNR8yxBPPcq
-	8ESKIH7C5WGgUpjmjkDjizvWEDG8kzRLjUQLM=
-Received: by 10.91.153.10 with SMTP id f10mr5714893ago.172.1289244145313; Mon,
-	08 Nov 2010 11:22:25 -0800 (PST)
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	b=FDyEWYVwNsyJ66DwNSAViONdI//E/MwJZmYbv2DpH+oZrO+Hdg+C/Q6MtN26uQX8C2
+	hBPSy0uHKKo4AloxsiltFzEDmMzRbvCuHptky+5+6+YNbYU0Kdlav2d1Ae9662e9Yhp9
+	GiMJJdxlvr+5cOFHcR6s4Xb70krabTPQhgyn4=
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Mon, 8 Nov 2010 11:22:05 -0800 (PST)
-In-Reply-To: <4CD731A8.3020809@gmail.com>
-References: <4CD731A8.3020809@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Nov 2010 11:22:05 -0800
-Message-ID: <AANLkTi=Rk8Fm_Xq08J89J-s4bx=QQeTHfMan4HZknYWs@mail.gmail.com>
+Received: by 10.227.154.7 with SMTP id m7mr5733755wbw.211.1289245923289; Mon,
+	08 Nov 2010 11:52:03 -0800 (PST)
+Sender: zach.frey@gmail.com
+Received: by 10.216.37.5 with HTTP; Mon, 8 Nov 2010 11:52:03 -0800 (PST)
+Date: Mon, 8 Nov 2010 14:52:03 -0500
+X-Google-Sender-Auth: AnRsRPyxD4lU8XOTdFh2TKXMz6U
+Message-ID: <AANLkTinnGqbxaJrF=-6OSJ1N=FsDaAcbvDNuYV5SiA2q@mail.gmail.com>
+From: Zach Frey <zach@znfrey.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: zach.frey@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake weirdness during -k world
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: gcc-cross-intermediate-4.5-r18.0+svnr166342 build failure after today's pull
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,81 +52,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Nov 2010 19:23:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 08 Nov 2010 19:53:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sun, Nov 7, 2010 at 3:09 PM, Graham Gower <graham.gower@gmail.com> wrote=
-:
-> I have a 1gb world.log file after running:
-> bitbake -k world | tee world.log
->
+Hi,
 
-I have this very same problem too and its recent enough. We should be
-able to find which commit is causing it (bisect bitbake)
-I am using bitbake master are you using same too ?
+I'm seeing the following failure after updating to latest:
 
-> The build appears to have gotten about half way through (compared with
-> previous builds) and then begun infinitely repeating the following messag=
-e.
->
-> Traceback (most recent call last):
-> =C2=A0File "/home/grg/oe2/bitbake/lib/bb/server/none.py", line 128, in id=
-le_commands
-> =C2=A0 =C2=A0retval =3D function(self, data, False)
-> =C2=A0File "/home/grg/oe2/bitbake/lib/bb/cooker.py", line 716, in buildTa=
-rgetsIdle
-> =C2=A0 =C2=A0retval =3D rq.execute_runqueue()
-> =C2=A0File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 877, in execu=
-te_runqueue
-> =C2=A0 =C2=A0self.execute_runqueue_internal()
-> =C2=A0File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 992, in execu=
-te_runqueue_internal
-> =C2=A0 =C2=A0self.build_pipes[pipe].read()
-> =C2=A0File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 1227, in read
-> =C2=A0 =C2=A0bb.event.fire_from_worker(self.queue[:index+8], self.d)
-> =C2=A0File "/home/grg/oe2/bitbake/lib/bb/event.py", line 137, in fire_fro=
-m_worker
-> =C2=A0 =C2=A0event =3D pickle.loads(event[7:-8])
-> =C2=A0File "/usr/lib64/python2.6/pickle.py", line 1374, in loads
-> =C2=A0 =C2=A0return Unpickler(file).load()
-> =C2=A0File "/usr/lib64/python2.6/pickle.py", line 858, in load
-> =C2=A0 =C2=A0dispatch[key](self)
-> =C2=A0File "/usr/lib64/python2.6/pickle.py", line 966, in load_string
-> =C2=A0 =C2=A0raise ValueError, "insecure string pickle"
-> ValueError: insecure string pickle
->
->
-> I identified the location where the message begins and it is not possible
-> to link it to any other errors nor to a particular recipe. Context looks =
-like this:
->
-> NOTE: Unpacking ../oe/sources/libAppleWM-1.4.0.tar.bz2 to /mnt/oe/tmp/wor=
-k/mipsel-oe-linux/libapplewm-1_1.4.0-r9.0/
-> NOTE: package dhcpcd-1.3.22-pl4-r1: task do_install: Succeeded
-> NOTE: =C2=A0 /usr/share/ti/ti-biosutils-tree/packages/xdoc/external.png
-> NOTE: =C2=A0 /usr/share/ti/ti-biosutils-tree/packages/xdoc/Bullet.png
-> Traceback (most recent call last):
-> =C2=A0File "/home/grg/oe2/bitbake/lib/bb/server/none.py", line 128, in id=
-le_commands
-> =C2=A0 =C2=A0retval =3D function(self, data, False)
-> =C2=A0File "/home/grg/oe2/bitbake/lib/bb/cooker.py", line 716, in buildTa=
-rgetsIdle
-> =C2=A0 =C2=A0retval =3D rq.execute_runqueue()
->
->
->
-> FYI, i do have this stupidity in my local.conf:
-> PARALLEL_MAKE =3D "-j 12"
-> BB_NUMBER_THREADS =3D "12"
->
->
-> -Graham
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
+| make[2]: Entering directory
+`/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libgcc'
+| # If this is the top-level multilib, build all the other
+| # multilibs.
+|
+/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/build.x86_64-linux.arm-angstrom-linux-gnueabi/./gcc/xgcc
+-B/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/build.x86_64-linux.arm-angstrom-linux-gnueabi/./gcc/
+-march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+-mthumb-interwork -mno-thumb
+-isystem/home/PHOENIX/frey/OE/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
+-B/home/PHOENIX/frey/OE/build/tmp/sysroots/x86_64-linux/usr/armv7a/arm-angstrom-linux-gnueabi/bin/
+-B/home/PHOENIX/frey/OE/build/tmp/sysroots/x86_64-linux/usr/armv7a/arm-angstrom-linux-gnueabi/lib/
+-isystem
+/home/PHOENIX/frey/OE/build/tmp/sysroots/x86_64-linux/usr/armv7a/arm-angstrom-linux-gnueabi/include
+-isystem
+/home/PHOENIX/frey/OE/build/tmp/sysroots/x86_64-linux/usr/armv7a/arm-angstrom-linux-gnueabi/sys-include
+--sysroot=/home/PHOENIX/frey/OE/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi
+-g -Os -O2  -g -Os -DIN_GCC -DCROSS_DIRECTORY_STRUCTURE  -W -Wall
+-Wwrite-strings -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
+-Wold-style-definition  -isystem ./include  -fPIC -Wno-missing-prototypes
+-g  -DIN_LIBGCC2 -D__GCC_FLOAT_NOT_NEEDED   -I. -I. -I../.././gcc
+-I/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/libgcc
+-I/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/libgcc/.
+-I/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/libgcc/../gcc
+-I/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/libgcc/../include
+-DHAVE_CC_TLS  -o _muldi3.o -MT _muldi3.o -MD -MP -MF _muldi3.dep -DL_muldi3
+-c
+/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/libgcc/../gcc/libgcc2.c
+\
+|       -fvisibility=hidden -DHIDE_EXPORTS
+| In file included from
+/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/libgcc/../gcc/libgcc2.c:29:0:
+|
+/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/libgcc/../gcc/tsystem.h:87:19:
+fatal error: stdio.h: No such file or directory
+| compilation terminated.
+| make[2]: *** [_muldi3.o] Error 1
+| make[2]: Leaving directory
+`/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/build.x86_64-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libgcc'
+| make[1]: *** [all-target-libgcc] Error 2
+| make[1]: Leaving directory
+`/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-intermediate-4.5-r18.0+svnr166342/gcc-4.5/build.x86_64-linux.arm-angstrom-linux-gnueabi'
+| make: *** [all] Error 2
+| FATAL: oe_runmake failed
+| ERROR: Function do_compile failed
+NOTE: package gcc-cross-intermediate-4.5-r18.0+svnr166342: task do_compile:
+Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/PHOENIX/frey/OE/openembedded/recipes/gcc/
+gcc-cross-intermediate_4.5.bb do_compile failed
+ERROR: Task 659 (/home/PHOENIX/frey/OE/openembedded/recipes/gcc/
+gcc-cross-intermediate_4.5.bb, do_compile) failed with 256
+ERROR: '/home/PHOENIX/frey/OE/openembedded/recipes/gcc/
+gcc-cross-intermediate_4.5.bb' failed
+ERROR: '/home/PHOENIX/frey/OE/openembedded/recipes/gcc/
+gcc-cross-intermediate_4.5.bb' failed
+
+
+Build host: Ubuntu 8.04
+DISTRO = "angstrom-2010.x"
+MACHINE = "omapzoom2"
+
+Any ideas?  Any more information that would be helpful to collect?
+
+
+Thanks,
+Zach Frey
 
