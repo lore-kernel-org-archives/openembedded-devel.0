@@ -1,32 +1,43 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1PFYL5-00046u-EX
+	(envelope-from <raj.khem@gmail.com>) id 1PFZ6m-0000Cr-4t
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 21:29:16 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PFYKB-0007pY-MM
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 23:28:20 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 8 Nov 2010 23:28:13 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <1288774920.3980.29.camel@mattotaupa>
-	<201011080000.52045.roman@khimov.ru>
-	<1289229466.5165.56.camel@mattotaupa>
-In-Reply-To: <1289229466.5165.56.camel@mattotaupa>
+	Mon, 08 Nov 2010 22:18:36 +0100
+Received: by ywh1 with SMTP id 1so227055ywh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Nov 2010 13:17:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=txmkIogSaHpIjtLEYO6ivv/rSdGc+QibsLAZWFiK1W8=;
+	b=UYlpnigS297xT8pmY8IhiTyha0BbuBHR3KQA3RFXGPKe16f3OL4kdbcMj8SCQcmge6
+	pibCpQT+cXJzxPyIp9YjwIGU4jvUzkO6481r8miLJME7CnQpQ6PNdiW5ZlnPXZhj8WOR
+	ZEykHHBrPinulkuB0zViI8zbJ981npj+oeLnM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=IeyTMiqitBg2OUmzlQwV4+vvU4i85IrdM/MOitgHCpJE5yr5Zox/BnlIrUvUMqWL5E
+	XiDeRQG5qLWsvMd11Zb7cAc4A3pbzDvhZXlqbQpnlNbalEQbG8giOidG4m4iQXb+WdTJ
+	0e8Qxq9m79bsclnUUf28ItMonh4FlVA8VWqUQ=
+Received: by 10.90.57.2 with SMTP id f2mr5820926aga.118.1289251051754; Mon, 08
+	Nov 2010 13:17:31 -0800 (PST)
 MIME-Version: 1.0
-Message-Id: <201011082328.17989.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.90.86.4 with HTTP; Mon, 8 Nov 2010 13:17:11 -0800 (PST)
+In-Reply-To: <AANLkTinnGqbxaJrF=-6OSJ1N=FsDaAcbvDNuYV5SiA2q@mail.gmail.com>
+References: <AANLkTinnGqbxaJrF=-6OSJ1N=FsDaAcbvDNuYV5SiA2q@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 8 Nov 2010 13:17:11 -0800
+Message-ID: <AANLkTi=eOF8txqPTf1cFU3ffb2CWg_TkeZD0JaRZkSqC@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: minimal-uclibc: perl_5.8.8: fails with `ld: cannot find -lnsl`
+Subject: Re: gcc-cross-intermediate-4.5-r18.0+svnr166342 build failure after today's pull
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +51,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Nov 2010 20:29:16 -0000
-X-Groupsio-MsgNum: 26020
-Content-Type: multipart/signed; boundary="nextPart1696001.nNARL94uuZ";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Nov 2010 21:18:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
---nextPart1696001.nNARL94uuZ
-Content-Type: Text/Plain;
-  charset="windows-1251"
-Content-Transfer-Encoding: quoted-printable
+On Mon, Nov 8, 2010 at 11:52 AM, Zach Frey <zach@znfrey.com> wrote:
+> Hi,
+>
+> I'm seeing the following failure after updating to latest:
+>
 
-=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =CF=EE=ED=E5=E4=E5=EB=FC=ED=E8=EA 08=
- =ED=EE=FF=E1=F0=FF 2010 18:17:46 =E0=E2=F2=EE=F0 Paul Menzel =ED=E0=EF=E8=
-=F1=E0=EB:
-> I forgot to mention that I have the following in my `local.conf`.
->=20
->         PREFERRED_UCLIBC_VERSION        =3D "git"
+this can happen as gcc is build a bit peculiar way just rebuilding gcc
+is a bit tricky. You could do something like
+bitbake -c clean gcc-cross gcc-cross-initial gcc-cross-intermediate
+glibc glibc-initial; bitbake gcc-cross
+that should work
 
-Yeah, thanks. So it really all boils down to perl.h test failing in libprel=
-ude=20
-with "field '_crypt_struct' has incomplete type".
+Thanks
+-Khem
 
-And guess what, it builds just fine with perl 5.10.1, so no, I'm not diggin=
-g=20
-into 5.8.8 problems.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
-
---nextPart1696001.nNARL94uuZ
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkzYXWEACgkQXJ70z+XgVcNpvQCfUCqLueNLlUwuDTbE29m6jzvH
-fhsAn0LaKMU6rRNJRfCxnSwyHD1aoe/U
-=CR3a
------END PGP SIGNATURE-----
-
---nextPart1696001.nNARL94uuZ--
