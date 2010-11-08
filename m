@@ -1,34 +1,40 @@
-Received: from 173-11-172-146-houston.txt.hfc.comcastbusiness.net
-	([173.11.172.146] helo=mail.breakawaysystems.com)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dave@lambsys.com>) id 1PFSNj-0000A0-QD
+	(envelope-from <Tom_Rini@mentor.com>) id 1PFSfn-0000s6-6i
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 15:07:49 +0100
-Received: by mail.breakawaysystems.com (Postfix, from userid 1007)
-	id 037A51484C6; Mon,  8 Nov 2010 08:06:35 -0600 (CST)
-Received: from [192.168.1.100]
-	(173-11.172.145-houston.txt.hfc.comcastbusiness.net [173.11.172.145])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: dlambert)
-	by mail.breakawaysystems.com (Postfix) with ESMTPSA id 6891E1480C4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Nov 2010 08:06:33 -0600 (CST)
-Message-ID: <4CD803E8.8080805@lambsys.com>
-Date: Mon, 08 Nov 2010 08:06:32 -0600
-From: David Lambert <dave@lambsys.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	Mon, 08 Nov 2010 15:26:16 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1PFSes-0007be-04 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Nov 2010 06:25:18 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 8 Nov 2010 06:25:17 -0800
+Received: from [172.30.80.200] ([172.30.80.200]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 8 Nov 2010 07:25:04 -0700
+Message-ID: <4CD8083D.5080806@mentor.com>
+Date: Mon, 08 Nov 2010 07:25:01 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 173.11.172.146
-X-SA-Exim-Mail-From: dave@lambsys.com
+References: <20101104082759.GG19934@excalibur.local>
+	<20101107182029.GP6691@excalibur.local>
+In-Reply-To: <20101107182029.GP6691@excalibur.local>
+X-OriginalArrivalTime: 08 Nov 2010 14:25:04.0421 (UTC)
+	FILETIME=[BC585D50:01CB7F50]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Stable branch/tag?
+Subject: Re: Patchwork cleanup weekend in two days
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,117 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Nov 2010 14:07:53 -0000
+X-List-Received-Date: Mon, 08 Nov 2010 14:26:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I am new to git and openembedded so please excuse another couple of 
-naive questions.
+Stefan Schmidt wrote:
+> Hello.
+> 
+> On Thu, 2010-11-04 at 09:27, Stefan Schmidt wrote:
+>> Its time for some house-keeping again. I know many people are working on
+>> patchwork on-going, thanks for that.
+>>
+>> Looking throught it during OEDEM did still show up way to many entries. Some are
+>> still from 2009. Next Saturday and Sunday I would like to reduce our  current
+>> count from 273 patches. 100 or less would be a nice goal imho.
+> 
+> We are no down to a patch count of 186. With the new patches that came in the
+> last two days that makes 100 patches that are gone. Most of them had already
+> been applied or superseded by other patches and often were just missing a status
+> update.
+> 
+> For the outstanding patches I see three big groups which need our attention:
+> 
+> 1) Core/class patches: It would be great if some people more familiar with the
+>    core internals of OE could have a look at them and discuss outstanding issues
+>    or apply them.
+> 
+> 2) Stable/2009 patches: We still have patches sitting in patchwork for the
+>    stable branch. It would be great if they also could get some attention, not
+>    only patches for master.
 
+Would it be possible to get a list of patches that the folks (thanks a 
+lot for doing it, everyone!) who did the cleanup felt fit into these areas?
 
-1) What is a recommended stable branch/tag, and what command(s) are 
-needed to obtain this?
-2) Is there a document somwhere that explains the relevance of the use 
-of branches and tags in this project?
-
-Thanks in advance for help,
-
-Dave.
-
-Listing git tags shows:
-
-git tag -l
-
-SlugOS5.3-beta
-mv-packages-to-recipes-post
-mv-packages-to-recipes-pre
-pre-nov2009-core-updates
-shr/testing2009-1rc1
-tested_2010-10-14
-tested_2010-10-25
-tested_2010-10-29
-testing_2010-08-23
-testing_2010-08-30
-testing_2010-09-07
-testing_2010-09-13
-testing_2010-09-20
-testing_2010-09-27
-testing_2010-10-08
-
-
-and git branch -a
-* master
-   remotes/origin/HEAD -> origin/master
-   remotes/origin/bluelightning/opie-git
-   remotes/origin/cbrake/qt-4.7.0
-   remotes/origin/darwin
-   remotes/origin/fso/milestone5
-   remotes/origin/fso/milestone5.5
-   remotes/origin/holger/hash-style
-   remotes/origin/holger/openmoko-merges
-   remotes/origin/holger/qt4-4.7
-   remotes/origin/holger/qt4-sdk
-   remotes/origin/holger/random-fixes
-   remotes/origin/holger/staging-branch
-   remotes/origin/ieee80215
-   remotes/origin/jan/master
-   remotes/origin/john_lee/fastboot-devel
-   remotes/origin/john_lee/openmoko-toolchain
-   remotes/origin/kergoth/alternatives
-   remotes/origin/kergoth/autotools
-   remotes/origin/kergoth/bluez
-   remotes/origin/kergoth/hostap-madwifi
-   remotes/origin/kergoth/master
-   remotes/origin/khem/import-linaro-gcc-4.5
-   remotes/origin/koen/darwin-host-fixes
-   remotes/origin/koen/static-libs-rework
-   remotes/origin/laibsch/scim
-   remotes/origin/laibsch/wip
-   remotes/origin/likewise/nios2
-   remotes/origin/master
-   remotes/origin/morphis/for-upstream
-   remotes/origin/nios2
-   remotes/origin/org.openembedded.angstrom-2007.12-stable
-   remotes/origin/org.openembedded.dev
-   remotes/origin/org.openembedded.documentation
-   remotes/origin/org.openembedded.dreambox
-   remotes/origin/org.openembedded.dreambox.release_25
-   remotes/origin/org.openembedded.oetest
-   remotes/origin/org.openembedded.oz354fam083
-   remotes/origin/org.openembedded.oz354x
-   remotes/origin/org.openembedded.packaged-staging
-   remotes/origin/org.openembedded.slugos.5.3-beta
-   remotes/origin/org.openembedded.stable
-   remotes/origin/pb/toolchain-desuck
-   remotes/origin/push/oe
-   remotes/origin/raster
-   remotes/origin/rik/amd64
-   remotes/origin/rik/qemu-0.12
-   remotes/origin/robertschuster/amd64-target
-   remotes/origin/rpurdie/for-testing
-   remotes/origin/rpurdie/work-in-progress
-   remotes/origin/shared/blackfin
-   remotes/origin/shared/xorg-7.4-update
-   remotes/origin/shr/import
-   remotes/origin/shr/merge
-   remotes/origin/shr/stable2009
-   remotes/origin/shr/testing2009
-   remotes/origin/shr/testing2010
-   remotes/origin/shr/unstable
-   remotes/origin/stable/2009
-   remotes/origin/stefan/eten-support
-   remotes/origin/testing
-   remotes/origin/testing-next
-   remotes/origin/thesing/arm4-eabi-angstrom
-   remotes/origin/ulf/linux-2.6.30
-   remotes/origin/ulf/linux-2.6.30-2010-10-16
-   remotes/origin/ulf/linux-2.6.30-20100317
-   remotes/origin/ulf/linux-2.6.30-20100930
-   remotes/origin/ulf/linux-2.6.30-at91sam9g45_m10
-   remotes/origin/ulf/linux-2.6.30.2
-   remotes/origin/woglinde/gettext
-   remotes/origin/xora/angstrom-sqeeezy
-   remotes/origin/xora/angstrom-srcpv
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
