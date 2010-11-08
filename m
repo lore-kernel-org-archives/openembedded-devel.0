@@ -1,39 +1,43 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PFaKt-0005rD-MP
+	(envelope-from <andrea.adami@gmail.com>) id 1PFaxe-0000WV-W0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 23:37:12 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id BDCB08EAB36
+	Tue, 09 Nov 2010 00:17:15 +0100
+Received: by ewy2 with SMTP id 2so3143316ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Nov 2010 17:36:16 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 09084-01 for <openembedded-devel@lists.openembedded.org>; 
-	Mon,  8 Nov 2010 17:36:16 -0500 (EST)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 8D7C58A1788
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Nov 2010 17:36:16 -0500 (EST)
-Message-ID: <4CD87B60.2010802@cbnco.com>
-Date: Mon, 08 Nov 2010 17:36:16 -0500
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+	Mon, 08 Nov 2010 15:16:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=OtDrVPqGw6MtjZgA6AZhOn8gSTzUhWf2gbKewj4J8JA=;
+	b=Uc4VvwdSoBXeBHpqlMXFZTpoBePCQfG42sQZStc0I98ZxnyksQ3tsbcJIZ9jL3mFwD
+	1oVnG1xRtXfLFmANf9ZJ+OG18Qub5eRm3znsWp5t5KL7JikOHuqOh3sdXEXJ8l2iHvlS
+	JSvksxmKt1ewdlRzTtaYwHxeO9HXK127ZOZ54=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=YKU/ji68dFkpfgxe5gJM+0m1fmbViOxTm5PxddhdFgTR4TE3BPjBnw2X9tjEqH9Xge
+	fFFBZ2yPq6i6yVfnVYxmGTvWx9n0XvzHzlOF5Nd6ZOCmDg9nFYRbJ/7B2Bfmwc+693Xc
+	OetGahSeR40JqQVZ/RrMvu2Y9sKEs2HVOsENo=
 MIME-Version: 1.0
+Received: by 10.216.62.140 with SMTP id y12mr5528997wec.100.1289258179295;
+	Mon, 08 Nov 2010 15:16:19 -0800 (PST)
+Received: by 10.216.49.130 with HTTP; Mon, 8 Nov 2010 15:16:19 -0800 (PST)
+In-Reply-To: <AANLkTi=hBHFcAJNWr2=Z=51J=rOZ8Cf_+KGyvQiFFdKN@mail.gmail.com>
+References: <AANLkTi=hBHFcAJNWr2=Z=51J=rOZ8Cf_+KGyvQiFFdKN@mail.gmail.com>
+Date: Tue, 9 Nov 2010 00:16:19 +0100
+Message-ID: <AANLkTikkc1uD+dKSH8ZoAujqepiWv1knzXFQjAvU23cN@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1289255152-27798-1-git-send-email-msmith@cbnco.com>
-	<ib9trr$gtq$1@dough.gmane.org>
-In-Reply-To: <ib9trr$gtq$1@dough.gmane.org>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] metacity: upgrade to 2.30.3 from 2.30.0
+Subject: Re: image.bbclass adding unconditionally glibc-localedata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,23 +51,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Nov 2010 22:37:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Nov 2010 23:17:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 08-11-10 23:25, Michael Smith wrote:
-> 
->>  EXTRA_OECONF += "--disable-verbose \
->>                   --disable-xinerama \
->> -                 --without-introspectiom \
->> +                 --without-introspection \
-> 
-> introspection should get disabled by gnome.bbclass nowadays.
+Fixed by Commit: 0ad93ec8b5042894408078be53c39c4be768a49c
 
-OK, I'll fix before I push.
+thanks Chris
+
+Andrea
 
 
