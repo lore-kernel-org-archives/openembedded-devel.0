@@ -1,47 +1,35 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PFENo-00039p-IJ
+	(envelope-from <denis@denix.org>) id 1PFIba-0005RG-IH
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 00:10:59 +0100
-Received: by pxi2 with SMTP id 2so791068pxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Nov 2010 15:09:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=U928ZIigBCLjoy19HCNxeJSzWAkCj0ykkrKirlpliRg=;
-	b=BHoV1sHYcjBNAwQtDN4yRsLvuSIcudG5RzlThFPwNQ/vE9OynyGogti1f46P3UopbS
-	UXQmJO/duWpcOw/qwnvRGvdFCK6WADU+9CWjw8O8oDHb1CWOyMa+BSXZzNLMpKrYmyft
-	McJlGs0tlf7bjRzmh7ycBqOBfWjQMVfh/gV9Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=T9d/7/I1OFQ7IIQJx2WtsiHlV84D5elN20XBBQc/ZSFTJT9y6jMBEdVoguXMHQgMSi
-	0Vibc4+UjwWU+rOaxL1qM67YnTSJi4INkVXtm+3ze6C/I37VI07CThNoAjx1R3ow2QxF
-	oZpn6Flj4m4lbiTZF+F0UIRf8nYgVzGbj1OT4=
-Received: by 10.142.114.5 with SMTP id m5mr4172376wfc.237.1289171376680;
-	Sun, 07 Nov 2010 15:09:36 -0800 (PST)
-Received: from [10.0.0.71] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id w42sm7038688wfh.3.2010.11.07.15.09.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 07 Nov 2010 15:09:35 -0800 (PST)
-Message-ID: <4CD731A8.3020809@gmail.com>
-Date: Mon, 08 Nov 2010 09:39:28 +1030
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.14) Gecko/20101020 Thunderbird/3.0.9
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+	Mon, 08 Nov 2010 04:41:16 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.228.135])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LBJ000BNRILHBK0@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	07 Nov 2010 21:40:02 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id DF24614AF6A; Sun,
+	07 Nov 2010 22:39:56 -0500 (EST)
+Date: Sun, 07 Nov 2010 22:39:56 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: "l.bolognini@tiscali.it" <l.bolognini@tiscali.it>
+Message-id: <20101108033956.GD27133@denix.org>
+References: <14172071.346581288106319217.JavaMail.defaultUser@defaultHost>
+MIME-version: 1.0
+In-reply-to: <14172071.346581288106319217.JavaMail.defaultUser@defaultHost>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.11
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: bitbake weirdness during -k world
+Cc: arago-devel@gforge.ti.com,
+	Open Embedded Mailing List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [arago-devel] c6a816x-evm support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,58 +43,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Nov 2010 23:11:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Nov 2010 03:41:16 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-I have a 1gb world.log file after running:
-bitbake -k world | tee world.log
+On Tue, Oct 26, 2010 at 05:18:39PM +0200, l.bolognini@tiscali.it wrote:
+> Hallo, any news about ti816x support?
+> Do I have to setup again Arago 
+> environment by the three "git clone" commands or is there a way to 
+> update the tree with the new supports?
 
-The build appears to have gotten about half way through (compared with
-previous builds) and then begun infinitely repeating the following message.
+Luca,
 
-Traceback (most recent call last):
-  File "/home/grg/oe2/bitbake/lib/bb/server/none.py", line 128, in idle_commands
-    retval = function(self, data, False)
-  File "/home/grg/oe2/bitbake/lib/bb/cooker.py", line 716, in buildTargetsIdle
-    retval = rq.execute_runqueue()
-  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 877, in execute_runqueue
-    self.execute_runqueue_internal()
-  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 992, in execute_runqueue_internal
-    self.build_pipes[pipe].read()
-  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 1227, in read
-    bb.event.fire_from_worker(self.queue[:index+8], self.d)
-  File "/home/grg/oe2/bitbake/lib/bb/event.py", line 137, in fire_from_worker
-    event = pickle.loads(event[7:-8])
-  File "/usr/lib64/python2.6/pickle.py", line 1374, in loads
-    return Unpickler(file).load()
-  File "/usr/lib64/python2.6/pickle.py", line 858, in load
-    dispatch[key](self)
-  File "/usr/lib64/python2.6/pickle.py", line 966, in load_string
-    raise ValueError, "insecure string pickle"
-ValueError: insecure string pickle
+Sorry for the delay - your email came when I was at ELC/OEDEM and got buried 
+under other emails in my inbox...
 
+You can always update your existing repositories by running "git pull" to get 
+the latest changes.
 
-I identified the location where the message begins and it is not possible
-to link it to any other errors nor to a particular recipe. Context looks like this:
+Specifically, the problem you reported below was resolved recently and ti816x 
+kernel now fetches and builds properly.
 
-NOTE: Unpacking ../oe/sources/libAppleWM-1.4.0.tar.bz2 to /mnt/oe/tmp/work/mipsel-oe-linux/libapplewm-1_1.4.0-r9.0/
-NOTE: package dhcpcd-1.3.22-pl4-r1: task do_install: Succeeded
-NOTE:   /usr/share/ti/ti-biosutils-tree/packages/xdoc/external.png
-NOTE:   /usr/share/ti/ti-biosutils-tree/packages/xdoc/Bullet.png
-Traceback (most recent call last):
-  File "/home/grg/oe2/bitbake/lib/bb/server/none.py", line 128, in idle_commands
-    retval = function(self, data, False)
-  File "/home/grg/oe2/bitbake/lib/bb/cooker.py", line 716, in buildTargetsIdle
-    retval = rq.execute_runqueue()
+Please let me know if you have any problems. Thanks.
 
+Denys
 
-
-FYI, i do have this stupidity in my local.conf:
-PARALLEL_MAKE = "-j 12"
-BB_NUMBER_THREADS = "12"
-
-
--Graham
+> With the same tree "cloned" in 
+> the beginning of October now I get:
+> [luca@fedora13 oe]$ MACHINE=c6a816x-
+> evm bitbake -v ti816x-image
+> [...]
+> NOTE: fetch http://www.angstrom-
+> distribution.org/unstable/sources/git_arago-project.org.git.projects.
+> linux-omap3.git_661585a1407961c5e71f1d8203f1a32f08e9a772.tar.gz
+> --2010-
+> 10-26 17:11:43--  http://www.angstrom-distribution.
+> org/unstable/sources/git_arago-project.org.git.projects.linux-omap3.
+> git_661585a1407961c5e71f1d8203f1a32f08e9a772.tar.gz
+> Resolving www.
+> angstrom-distribution.org... 188.40.83.200
+> Connecting to www.angstrom-
+> distribution.org|188.40.83.200|:80... connected.
+> HTTP request sent, 
+> awaiting response... 404 Not Found
+> 2010-10-26 17:11:50 ERROR 404: Not 
+> Found.
+> 
+> fatal: read error: Connection reset by peer
+> 
+> NOTE: Task failed: 
+> Fetch failed: Fetch command export HOME=...; export PATH=...; git fetch 
+> git://arago-project.org/git/projects/linux-omap3.git master failed with 
+> signal 128, output:
+> fatal: read error: Connection reset by peer
+> 
+> What 
+> about the development for MACHINE=c6a816x-evm ?
+> Thank you,
+> bye 
+> Luca
+> 
+> 
+> 
+> 
+> 
+> ----Messaggio originale----
+> Da: denis@denix.org
+> Data: 04/10/2010 18.34
+> 
+> A: "l.bolognini@tiscali.it"<l.bolognini@tiscali.it>, <arago-
+> devel@gforge.ti.com>
+> Cc: "Open Embedded Mailing List"<openembedded-
+> devel@lists.openembedded.org>
+> Ogg: Re: [arago-devel] c6a816x-evm 
+> support
+> 
+> On Mon, Oct 04, 2010 at 05:43:06PM +0200, l.bolognini@tiscali.
+> it wrote:
+> > Hallo,
+> > I'm working with Arago but I thought to extend 
+> this mail to OE 
+> > mailing list too.
+> > I made 
+> > git clone git://arago-
+> project.org/git/arago.
+> > git
+> > git clone git://arago-project.
+> org/git/arago-oe-dev.git
+> > git clone 
+> > git://arago-project.
+> org/git/arago-bitbake.git 
+> > last Friday (1st October 
+> > 2010)
+> > Now 
+> I'm trying to build my custom image for MACHINE=c6a816x-evm.
+> > 
+> > From 
+> git:
+> > //arago-project.org/git/projects/linux-omap3
+> >  * 
+> branch            
+> > master     -> FETCH_HEAD
+> > NOTE: Creating tarball 
+> of git repository
+> > 
+> > fatal: failed to unpack tree object 
+> > 
+> 661585a1407961c5e71f1d8203f1a32f08e9a772
+> > NOTE: Task failed: Fetch 
+> > 
+> failed: Fetch command export HOME=...; export PATH=...;
+> > git read-
+> tree 
+> > 661585a1407961c5e71f1d8203f1a32f08e9a772 failed with signal 
+> 128, 
+> > output:
+> > fatal: failed to unpack tree object 
+> > 
+> 661585a1407961c5e71f1d8203f1a32f08e9a772
+> 
+> Luca,
+> 
+> Yes, we have noticed 
+> this issue last Friday - the commit ID the recipe was 
+> originally based 
+> on, is no longer available. I believe Roger fixed it when 
+> pushing the 
+> ti816x support to OE, but I haven't had time to fix it in Arago 
+> yet. 
+> It should be fixed in Arago shortly, sorry for the inconvenience.
+> 
+> -- 
+> 
+> Denys
 
 
