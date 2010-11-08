@@ -1,38 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PFaIQ-0003R3-DI for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 23:34:38 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PFaHX-0007gX-UN for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Nov 2010 23:33:43 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Nov 2010 23:33:43 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <msmith@cbnco.com>) id 1PFaKt-0005rD-MP
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Nov 2010 23:37:12 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id BDCB08EAB36
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Nov 2010 23:33:43 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon,  8 Nov 2010 17:36:16 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 09084-01 for <openembedded-devel@lists.openembedded.org>; 
+	Mon,  8 Nov 2010 17:36:16 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 8D7C58A1788
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Nov 2010 17:36:16 -0500 (EST)
+Message-ID: <4CD87B60.2010802@cbnco.com>
+Date: Mon, 08 Nov 2010 17:36:16 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 08 Nov 2010 23:33:31 +0100
-Message-ID: <ib9trr$gtq$1@dough.gmane.org>
 References: <1289255152-27798-1-git-send-email-msmith@cbnco.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <1289255152-27798-1-git-send-email-msmith@cbnco.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<ib9trr$gtq$1@dough.gmane.org>
+In-Reply-To: <ib9trr$gtq$1@dough.gmane.org>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -50,32 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Nov 2010 22:34:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 08 Nov 2010 22:37:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 08-11-10 23:25, Michael Smith wrote:
+> 
+>>  EXTRA_OECONF += "--disable-verbose \
+>>                   --disable-xinerama \
+>> -                 --without-introspectiom \
+>> +                 --without-introspection \
+> 
+> introspection should get disabled by gnome.bbclass nowadays.
 
-On 08-11-10 23:25, Michael Smith wrote:
-
->  EXTRA_OECONF += "--disable-verbose \
->                   --disable-xinerama \
-> -                 --without-introspectiom \
-> +                 --without-introspection \
-
-introspection should get disabled by gnome.bbclass nowadays.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM2Hq7MkyGM64RGpERAiC6AJ9MinEjtmyvcn3C5p7nkfOItXZLlwCdGrZD
-aAtEOTGxsFvs2s7wGq/7R5w=
-=6mhk
------END PGP SIGNATURE-----
-
+OK, I'll fix before I push.
 
 
