@@ -1,43 +1,45 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1PFxQ6-0006wZ-FJ
+	(envelope-from <graham.gower@gmail.com>) id 1PFxRs-00072M-Ur
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Nov 2010 00:16:07 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id C9FA611001CE;
-	Tue,  9 Nov 2010 22:56:06 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 5E3A311000E7;
-	Tue,  9 Nov 2010 22:56:06 +0100 (CET)
-Received: from rhein.familie-heinold.de (f052065124.adsl.alicedsl.de
-	[78.52.65.124]) by mail.familie-heinold.de (Postfix) with ESMTPA;
-	Tue,  9 Nov 2010 22:56:06 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 3446C3C11F; Tue,  9 Nov 2010 22:55:55 +0100 (CET)
-Date: Tue, 9 Nov 2010 22:55:55 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101109215554.GB913@rhein.zuhause.netz>
-References: <mailman.0.1289314919.16967.angstrom-distro-devel@linuxtogo.org>
-	<4CD96384.70100@crhc.illinois.edu> <4CD98F98.90503@mlbassoc.com>
-	<4CD992C6.8030105@crhc.illinois.edu>
+	Wed, 10 Nov 2010 00:17:57 +0100
+Received: by wyb34 with SMTP id 34so22666wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Nov 2010 15:16:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=b71i/73vG+0Okq2zBcK3NKF0eheBLkbAr9u7Abo1L+4=;
+	b=rEJVA0BNeUPZ90HhUhjSqSWjEvLPPNqcd4fmPLL7dyNFVs5nxfZgE77gxNI5Uyc2/Q
+	Ffhy02hH7X24ZZUWJvqUD6j2hdTvTrgJ6crICyu7NcNPWqp9rXEMy43SmCYDWQ9eP4C/
+	unkLtRMXgvx/wjfy6BMRKMT5fAnCx6rBbCB6E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Q0+g4y1bCVfdFn1I/tr+LmjQaM2SW6y8nzbhO0XudNddsZCnufmXs/3EACOwmqZT3x
+	hJ5wbxupfXUR6SWOKJf3iNQFV7JW/vW3U4nlaHVhUbiG07kIewW/BMUSa4O9YMGFCADI
+	FSvzuPY1+5LbwNBX0tgDVskS97Ir8z8FCGTpM=
 MIME-Version: 1.0
-In-Reply-To: <4CD992C6.8030105@crhc.illinois.edu>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Received: by 10.227.132.206 with SMTP id c14mr6809963wbt.78.1289344618185;
+	Tue, 09 Nov 2010 15:16:58 -0800 (PST)
+Received: by 10.227.32.147 with HTTP; Tue, 9 Nov 2010 15:16:58 -0800 (PST)
+In-Reply-To: <AANLkTi=JbmuXAXPD=8jNS2kTsuC9SS=UL4vepkHw1Wqt@mail.gmail.com>
+References: <4CD731A8.3020809@gmail.com>
+	<AANLkTi=Rk8Fm_Xq08J89J-s4bx=QQeTHfMan4HZknYWs@mail.gmail.com>
+	<AANLkTi=JbmuXAXPD=8jNS2kTsuC9SS=UL4vepkHw1Wqt@mail.gmail.com>
+Date: Wed, 10 Nov 2010 09:46:58 +1030
+Message-ID: <AANLkTiniF0VTUKNW9frOLmuwL=UHn6r3xo=aNt9d2F4W@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Re: Can't build gstreamer-ti
+Subject: Re: bitbake weirdness during -k world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,14 +53,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Nov 2010 23:16:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Nov 2010 23:17:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+Problem(s) fixed by these commits.
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=b6d7a41d8ae0c916b217264b135998ac2d8bce4c
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=fe0b4102c33f7300aaf8b139ee2d73820e12d635
 
-hm I tought Koen already fixed.
+Thanks to Chris for pointing it out once I'd narrowed it down to a
+particular recipe.
 
-Bye Henning
+-Graham
 
 
