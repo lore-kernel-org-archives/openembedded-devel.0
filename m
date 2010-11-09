@@ -1,38 +1,36 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PFgFY-0005i4-AD
+	(envelope-from <raj.khem@gmail.com>) id 1PFh5n-0004aT-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Nov 2010 05:56:06 +0100
-Received: by yxe42 with SMTP id 42so4177449yxe.6
+	Tue, 09 Nov 2010 06:51:02 +0100
+Received: by gwaa11 with SMTP id a11so4224573gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Nov 2010 20:54:23 -0800 (PST)
+	Mon, 08 Nov 2010 21:48:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=ZZ5XfzJuWqhWUwpgp7Grqt+Au6FvJrRnvPAkGCy6S4E=;
-	b=RuJsnrf6pZYmttyHtynFsUC2zqCJb4JgEQR2/0bclBVUX8K+rLK3/ZYeFBlbqZ6cEq
-	s2+9fHdA/lkLsOX5h1zjfPw6Gqgcp6wEBJtIrcHyrVRwwOQNc4IQVxgS0ojh9rumykyk
-	+5EC86cnQjxPsoxP2EfM7HgagJZJzCwJ34ooA=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=mv1TLvUZ1r7155YgSgHV0W7X+Z0FPkKqDQnWmdrGryQ=;
+	b=mdZud4J+/nf1EvS5jtI71uXa80m0dt7IS8cQOESsgacwdTFO2f6lD8JW+bGzogOjYj
+	/DvJjzqKzm7YZkxCxfeyNVquJFHdOlTA9NvgRALddU/oZIZOfkmzCavnIx+4ejE2lOqV
+	bQ+f2cS+G4RnnDX+nbRvpTcB6NNK8oVAb2R5A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=fEQGA32kg/UBzPpXjsLvrarql51WzVYZpf+sBA2M6nncEhRo64NclhyJDTYvvDrPOy
-	Z37k3qlVzZxVAH7YtH8z075jIFD/1jXB46YaXyxaEwarbHDu7vhs+CJi2OICeMRIGxPi
-	ozzel9KtJJ08lV+GTVK+7hotvMpgJ5P3+2Pxo=
-Received: by 10.91.11.6 with SMTP id o6mr6415274agi.91.1289278462764; Mon, 08
-	Nov 2010 20:54:22 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Mon, 8 Nov 2010 20:54:01 -0800 (PST)
-In-Reply-To: <1865303E0DED764181A9D882DEF65FB67A65C6F4D5@shsmsx502.ccr.corp.intel.com>
-References: <AANLkTikVxU787_ktH03HKBdCCFiGZOvxXk6pJ94+RK6Q@mail.gmail.com>
-	<AANLkTikKbo9JQGzRMFjU+ud7QYkEZTMxc2PynO23SZV6@mail.gmail.com>
-	<1865303E0DED764181A9D882DEF65FB67A65C6F4D5@shsmsx502.ccr.corp.intel.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=vuptgZCdb4CqVjTYkUbnY92oGto75UticitiuBegH0D0xZAv7tbml3C2wlr2anO9Re
+	Mi7M+/ly9pHK1/Q+dm7G+L6xfKJN+fa/s8J1Hz9rJpEw2IQK0eLm5tiIvZO7yofZ/qXk
+	YO8Bf8gQjDddT5YsvxYGjmXyYWziNR3+1Kxyo=
+Received: by 10.151.110.2 with SMTP id n2mr2263946ybm.164.1289281352998;
+	Mon, 08 Nov 2010 21:42:32 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id v39sm303434yba.7.2010.11.08.21.42.31
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 08 Nov 2010 21:42:32 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Nov 2010 20:54:01 -0800
-Message-ID: <AANLkTinBZ84RJGik3f2mH3u6wmwwR3LLdHGQykzcHn5-@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
+Date: Mon,  8 Nov 2010 21:42:10 -0800
+Message-Id: <1289281330-6928-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Fail to build eglibc on testing
+Subject: [PATCH] gcc-configure-common.inc: sed <sysroot>/usr/include hardcodes paths to use target_includedir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,49 +52,248 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Nov 2010 04:56:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 09 Nov 2010 05:51:02 -0000
 
-On Mon, Nov 8, 2010 at 7:00 PM, Cui, Dexuan <dexuan.cui@intel.com> wrote:
-> Chris Larson wrote:
->> On Mon, Nov 8, 2010 at 7:31 PM, Otavio Salvador
->> <otavio@ossystems.com.br>wrote:
->>
->>> I got this build fail. Anyone knows anything about it?
->>>
->>>> nscd.c:(.text+0x573): undefined reference to `__stack_chk_guard'
->>>> nscd.c:(.text+0x5cd): undefined reference to `__stack_chk_guard'
->>>>
->>> /home/otavio/hacking/ossystems/oe/oetmp-current/work/i586-oe-linux/egli=
-bc-2.12-r15.6+svnr11762/build-i586-oe-linux/nscd/nscd.o:
->>> In function `parse_opt':
->>>> nscd.c:(.text+0x5fc): undefined reference to `__stack_chk_guard'
->>>> nscd.c:(.text+0x8cf): undefined reference to `__stack_chk_guard'
->>>
->>
->>
->> I've run into this before in the past. =C2=A0Never had time to
->> investigate, but throwing out a "me too" :)
->
-> In Sep, when working on Poky side, I happened to meet with the same issue=
- (I think here it's the same issue.:-)
-> In my Poky side, it turned out to be a gcc's with_build_sysroot configura=
-tion issue:
-> http://bugzilla.pokylinux.org/show_bug.cgi?id=3D366
-> http://git.pokylinux.org/cgit/cgit.cgi/poky/commit/?id=3D2a066e7ca90a28d5=
-681c5fa895a29e999ed7c88b
->
-> Thought I worked on Poky for several months, I'm new to OE. I hope the ab=
-ove links can help to fix your issue.
->
+This fixes the problem where gcc fails to detect presence of libssp
+and does not detect powerpc long double 128 bit support correctly on systems which do
+not use common <sysroot>/usr/include paths like we have in micro distro
 
-The fix is good. GCC assumes usr/include here which is wrong assumption whe=
-n
-dir structure is flattened out. However I would have preferred this
-to be a patch instead  of a sed script. Let me fix it using a patch
-instead for OE.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/gcc/gcc-4.1.0.inc            |    2 +-
+ recipes/gcc/gcc-4.1.1.inc            |    2 +-
+ recipes/gcc/gcc-4.1.2.inc            |    2 +-
+ recipes/gcc/gcc-4.2.1.inc            |    2 +-
+ recipes/gcc/gcc-4.2.2.inc            |    2 +-
+ recipes/gcc/gcc-4.2.3.inc            |    2 +-
+ recipes/gcc/gcc-4.2.4.inc            |    2 +-
+ recipes/gcc/gcc-4.3.1.inc            |    2 +-
+ recipes/gcc/gcc-4.3.2.inc            |    2 +-
+ recipes/gcc/gcc-4.3.3.inc            |    2 +-
+ recipes/gcc/gcc-4.3.4.inc            |    2 +-
+ recipes/gcc/gcc-4.4.1.inc            |    2 +-
+ recipes/gcc/gcc-4.4.2.inc            |    2 +-
+ recipes/gcc/gcc-4.4.4.inc            |    2 +-
+ recipes/gcc/gcc-4.5.inc              |    2 +-
+ recipes/gcc/gcc-configure-common.inc |    9 ++++++++-
+ 16 files changed, 23 insertions(+), 16 deletions(-)
 
--Khem
+diff --git a/recipes/gcc/gcc-4.1.0.inc b/recipes/gcc/gcc-4.1.0.inc
+index 8da06aa..3df9976 100644
+--- a/recipes/gcc/gcc-4.1.0.inc
++++ b/recipes/gcc/gcc-4.1.0.inc
+@@ -1,6 +1,6 @@
+ require gcc-common.inc
+ 
+-INC_PR = "r13"
++INC_PR = "r14"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+diff --git a/recipes/gcc/gcc-4.1.1.inc b/recipes/gcc/gcc-4.1.1.inc
+index c261138..ed6fc47 100644
+--- a/recipes/gcc/gcc-4.1.1.inc
++++ b/recipes/gcc/gcc-4.1.1.inc
+@@ -3,7 +3,7 @@ require gcc-common.inc
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r4"
++INC_PR = "r5"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://100-uclibc-conf.patch \
+diff --git a/recipes/gcc/gcc-4.1.2.inc b/recipes/gcc/gcc-4.1.2.inc
+index 114f053..7c699e1 100644
+--- a/recipes/gcc/gcc-4.1.2.inc
++++ b/recipes/gcc/gcc-4.1.2.inc
+@@ -5,7 +5,7 @@ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+ COMPATIBLE_TARGET_SYS = "."
+ 
+-INC_PR = "r25"
++INC_PR = "r26"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://100-uclibc-conf.patch \
+diff --git a/recipes/gcc/gcc-4.2.1.inc b/recipes/gcc/gcc-4.2.1.inc
+index e5506c7..99644bd 100644
+--- a/recipes/gcc/gcc-4.2.1.inc
++++ b/recipes/gcc/gcc-4.2.1.inc
+@@ -3,7 +3,7 @@ require gcc-common.inc
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r23"
++INC_PR = "r24"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://100-uclibc-conf.patch \
+diff --git a/recipes/gcc/gcc-4.2.2.inc b/recipes/gcc/gcc-4.2.2.inc
+index a1f9cd3..bf31f78 100644
+--- a/recipes/gcc/gcc-4.2.2.inc
++++ b/recipes/gcc/gcc-4.2.2.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r19"
++INC_PR = "r20"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://100-uclibc-conf.patch \
+diff --git a/recipes/gcc/gcc-4.2.3.inc b/recipes/gcc/gcc-4.2.3.inc
+index 988740e..267bc5d 100644
+--- a/recipes/gcc/gcc-4.2.3.inc
++++ b/recipes/gcc/gcc-4.2.3.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r20"
++INC_PR = "r21"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://100-uclibc-conf.patch \
+diff --git a/recipes/gcc/gcc-4.2.4.inc b/recipes/gcc/gcc-4.2.4.inc
+index 974471e..97e1ddb 100644
+--- a/recipes/gcc/gcc-4.2.4.inc
++++ b/recipes/gcc/gcc-4.2.4.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r14"
++INC_PR = "r15"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://100-uclibc-conf.patch \
+diff --git a/recipes/gcc/gcc-4.3.1.inc b/recipes/gcc/gcc-4.3.1.inc
+index 7829f23..19c0431 100644
+--- a/recipes/gcc/gcc-4.3.1.inc
++++ b/recipes/gcc/gcc-4.3.1.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r24"
++INC_PR = "r25"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+diff --git a/recipes/gcc/gcc-4.3.2.inc b/recipes/gcc/gcc-4.3.2.inc
+index aa9cd48..1091511 100644
+--- a/recipes/gcc/gcc-4.3.2.inc
++++ b/recipes/gcc/gcc-4.3.2.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r14"
++INC_PR = "r15"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+diff --git a/recipes/gcc/gcc-4.3.3.inc b/recipes/gcc/gcc-4.3.3.inc
+index 7239f82..58dd501 100644
+--- a/recipes/gcc/gcc-4.3.3.inc
++++ b/recipes/gcc/gcc-4.3.3.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r19"
++INC_PR = "r20"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+diff --git a/recipes/gcc/gcc-4.3.4.inc b/recipes/gcc/gcc-4.3.4.inc
+index 3f3809c..b582f72 100644
+--- a/recipes/gcc/gcc-4.3.4.inc
++++ b/recipes/gcc/gcc-4.3.4.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r13"
++INC_PR = "r14"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+diff --git a/recipes/gcc/gcc-4.4.1.inc b/recipes/gcc/gcc-4.4.1.inc
+index acb5371..b2204ba 100644
+--- a/recipes/gcc/gcc-4.4.1.inc
++++ b/recipes/gcc/gcc-4.4.1.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r11"
++INC_PR = "r12"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+         file://gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
+diff --git a/recipes/gcc/gcc-4.4.2.inc b/recipes/gcc/gcc-4.4.2.inc
+index 42e8d54..469d407 100644
+--- a/recipes/gcc/gcc-4.4.2.inc
++++ b/recipes/gcc/gcc-4.4.2.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r5"
++INC_PR = "r6"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+         file://gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
+diff --git a/recipes/gcc/gcc-4.4.4.inc b/recipes/gcc/gcc-4.4.4.inc
+index 1bc7c12..acee192 100644
+--- a/recipes/gcc/gcc-4.4.4.inc
++++ b/recipes/gcc/gcc-4.4.4.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r6"
++INC_PR = "r7"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=gcc444tarbz2 \
+         file://gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
+diff --git a/recipes/gcc/gcc-4.5.inc b/recipes/gcc/gcc-4.5.inc
+index 910be9c..c6a78ce 100644
+--- a/recipes/gcc/gcc-4.5.inc
++++ b/recipes/gcc/gcc-4.5.inc
+@@ -8,7 +8,7 @@ DEPENDS = "mpfr gmp libmpc libelf"
+ NATIVEDEPS = "mpfr-native gmp-native libmpc-native"
+ 
+ 
+-INC_PR = "r18"
++INC_PR = "r19"
+ 
+ SRCREV = "166342"
+ PV = "4.5"
+diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configure-common.inc
+index fe0d32d..4d8edbc 100644
+--- a/recipes/gcc/gcc-configure-common.inc
++++ b/recipes/gcc/gcc-configure-common.inc
+@@ -93,7 +93,14 @@ do_configure () {
+ 	sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.tpl
+ 
+ 	(cd ${S} && gnu-configize) || die "failure running gnu-configize"
+-
++	# gcc assumes ${sysroot}/usr to be prefix on linux targets
++	# but we have distro option to flatten out the tree and micro
++	# uses root file system without leading /usr so we need to
++	# teach gcc configure to look in correct include paths
++	# unfortunately there is no configure knob to indicate this
++	# to configury hence the sed :(
++	sed -i 's:/usr/include:${target_includedir}:g' ${S}/gcc/configure.ac
++	sed -i 's:/usr/include:${target_includedir}:g' ${S}/gcc/configure
+ 	if [ "${HOST_SYS}" != "${TARGET_SYS}" ]; then
+ 		# splice our idea of where the headers live into gcc's world
+ 		echo "NATIVE_SYSTEM_HEADER_DIR = ${target_includedir}" > ${T}/t-oe
+-- 
+1.7.1
+
 
 
