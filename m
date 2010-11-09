@@ -1,40 +1,48 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PFjQr-0008KK-4S
+	(envelope-from <zach.frey@gmail.com>) id 1PFp4w-00005w-2b
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Nov 2010 09:19:57 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PFjPv-0000qV-NN by authid <stefan@sostec.de> with cram_md5
+	Tue, 09 Nov 2010 15:21:42 +0100
+Received: by wyb34 with SMTP id 34so87720wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Nov 2010 09:19:02 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PFjPv-0004Ow-7V
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Nov 2010 09:18:59 +0100
-Date: Tue, 9 Nov 2010 09:18:59 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101109081859.GE19935@excalibur.local>
-References: <20101104082759.GG19934@excalibur.local>
-	<20101107182029.GP6691@excalibur.local>
-	<4CD8083D.5080806@mentor.com>
+	Tue, 09 Nov 2010 06:20:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=+ouq23+ap6Cjl0eh+KiBABGwGb3YKaEO6T87eXHSqDw=;
+	b=G1RZyboV8IlzCJUaGPvbpc9we4fog2Eds9Nl3AGQYBm/+N1EJMKql1FsMphktmHcgC
+	yIV4hB/R+X8rHSmPl1f1VeOrHgcNDDf1J4atT+OvPQYt+UjPnJHpOX0W5yVh1rdgGEZ7
+	xTNsbWCOas2EAacZjoKLThs+WE7Wa+HhIoF9A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=smRe/RQ5jfTFFxCIjOAYWtM/k4kiKg3DZOywir91uJLk/T+F86CYCdKgdQ5Cnx9B4E
+	dBrpEzWmfeZduCCxcIhZOB66Y+9XgzzH1QDd5XApp3ndY3oe3CHbTW5RTbLD/qnOm6f7
+	OFFPbjlmnk6BnJVF76QQVXyvfOwzZNv6Zv8I4=
 MIME-Version: 1.0
-In-Reply-To: <4CD8083D.5080806@mentor.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Received: by 10.216.235.41 with SMTP id t41mr857752weq.55.1289312443085; Tue,
+	09 Nov 2010 06:20:43 -0800 (PST)
+Sender: zach.frey@gmail.com
+Received: by 10.216.63.17 with HTTP; Tue, 9 Nov 2010 06:20:43 -0800 (PST)
+In-Reply-To: <AANLkTi=eOF8txqPTf1cFU3ffb2CWg_TkeZD0JaRZkSqC@mail.gmail.com>
+References: <AANLkTinnGqbxaJrF=-6OSJ1N=FsDaAcbvDNuYV5SiA2q@mail.gmail.com>
+	<AANLkTi=eOF8txqPTf1cFU3ffb2CWg_TkeZD0JaRZkSqC@mail.gmail.com>
+Date: Tue, 9 Nov 2010 09:20:43 -0500
+X-Google-Sender-Auth: A_4TzbUBW5NX2g04Bkkz1eKXnY0
+Message-ID: <AANLkTi=767mf4SZ6ET8NpDPo6+3FGVMC-7KiyiMTXAV5@mail.gmail.com>
+From: Zach Frey <zach@znfrey.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: zach.frey@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Patchwork cleanup weekend in two days
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: gcc-cross-intermediate-4.5-r18.0+svnr166342 build failure after today's pull
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,90 +56,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Nov 2010 08:19:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Nov 2010 14:21:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello.
+On Mon, Nov 8, 2010 at 4:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-On Mon, 2010-11-08 at 07:25, Tom Rini wrote:
-> Stefan Schmidt wrote:
+> On Mon, Nov 8, 2010 at 11:52 AM, Zach Frey <zach@znfrey.com> wrote:
+> > Hi,
 > >
-> >On Thu, 2010-11-04 at 09:27, Stefan Schmidt wrote:
-> >>Its time for some house-keeping again. I know many people are working on
-> >>patchwork on-going, thanks for that.
-> >>
-> >>Looking throught it during OEDEM did still show up way to many entries. Some are
-> >>still from 2009. Next Saturday and Sunday I would like to reduce our  current
-> >>count from 273 patches. 100 or less would be a nice goal imho.
+> > I'm seeing the following failure after updating to latest:
 > >
-> >We are no down to a patch count of 186. With the new patches that came in the
-> >last two days that makes 100 patches that are gone. Most of them had already
-> >been applied or superseded by other patches and often were just missing a status
-> >update.
-> >
-> >For the outstanding patches I see three big groups which need our attention:
-> >
-> >1) Core/class patches: It would be great if some people more familiar with the
-> >   core internals of OE could have a look at them and discuss outstanding issues
-> >   or apply them.
-> >
-> >2) Stable/2009 patches: We still have patches sitting in patchwork for the
-> >   stable branch. It would be great if they also could get some attention, not
-> >   only patches for master.
-> 
-> Would it be possible to get a list of patches that the folks (thanks
-> a lot for doing it, everyone!) who did the cleanup felt fit into
-> these areas?
+>
+> this can happen as gcc is build a bit peculiar way just rebuilding gcc
+> is a bit tricky. You could do something like
+> bitbake -c clean gcc-cross gcc-cross-initial gcc-cross-intermediate
+> glibc glibc-initial; bitbake gcc-cross
+> that should work
+>
+>
+Thanks, Khem.  I ended up using the more drastic approach of starting again
+with a clean tmp, which also did the trick.
 
-Let me try. Stable is easy to identify as it has a stable prefix in the patch.
-:)
 
-Stable:
-http://patchwork.openembedded.org/patch/2251/
-http://patchwork.openembedded.org/patch/2250/
-http://patchwork.openembedded.org/patch/2193/
-http://patchwork.openembedded.org/patch/1924/
-http://patchwork.openembedded.org/patch/1842/
-http://patchwork.openembedded.org/patch/1839/
-
-Core:
-http://patchwork.openembedded.org/patch/691/
-http://patchwork.openembedded.org/patch/972/
-http://patchwork.openembedded.org/patch/1067/
-http://patchwork.openembedded.org/patch/3446/
-http://patchwork.openembedded.org/patch/3427/
-http://patchwork.openembedded.org/patch/3428/
-http://patchwork.openembedded.org/patch/3406/
-http://patchwork.openembedded.org/patch/3382/
-http://patchwork.openembedded.org/patch/3235/
-http://patchwork.openembedded.org/patch/3201/
-http://patchwork.openembedded.org/patch/3196/
-http://patchwork.openembedded.org/patch/3139/
-http://patchwork.openembedded.org/patch/2933/
-http://patchwork.openembedded.org/patch/2592/
-http://patchwork.openembedded.org/patch/2563/
-http://patchwork.openembedded.org/patch/2558/
-http://patchwork.openembedded.org/patch/2555/
-http://patchwork.openembedded.org/patch/2526/
-http://patchwork.openembedded.org/patch/2248/
-http://patchwork.openembedded.org/patch/2200/
-http://patchwork.openembedded.org/patch/2171/
-http://patchwork.openembedded.org/patch/2491/
-http://patchwork.openembedded.org/patch/2487/
-http://patchwork.openembedded.org/patch/2094/
-http://patchwork.openembedded.org/patch/1978/
-http://patchwork.openembedded.org/patch/1926/
-http://patchwork.openembedded.org/patch/1907/
-http://patchwork.openembedded.org/patch/1858/
-http://patchwork.openembedded.org/patch/1828/
-http://patchwork.openembedded.org/patch/1741/
-http://patchwork.openembedded.org/patch/1631/
-
-I'm pretty sure that I have forgotten some. Many of them have already been
-discussed and often the outcome is unclear.
-
-regards
-Stefan Schmidt
-
+-Zach
 
