@@ -1,48 +1,47 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PFxqp-0000gN-MS
+	(envelope-from <kergoth@gmail.com>) id 1PFy4F-00011m-95
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Nov 2010 00:43:44 +0100
-Received: by pxi17 with SMTP id 17so7206pxi.6
+	Wed, 10 Nov 2010 00:57:35 +0100
+Received: by wwb34 with SMTP id 34so53170wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Nov 2010 15:42:45 -0800 (PST)
+	Tue, 09 Nov 2010 15:56:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=oEVQiuj1QvVAsmSraMLSDi8B7imRynlmUOu7HrKLX1w=;
-	b=EJqcGqwRvVhUhWn+impp+wkZ1k+v1kFa261Z8kxoco6d/aNjLvxnCQv2y89Dc3LrXo
-	tKbjsXAlEfXVvJaCSJzDzElk9J7LkyFPcvtCNPob0bFzOiPhCcdkm4UqkIhrgFQwqlM0
-	DPeRx9BkVSkPUb0P2e+JuJU0xn3DbId/vzL5g=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=1yNV3mCeaSfSX/s/JAzhFmtR4y4sCLKdUSONNMd3y78=;
+	b=pXOA5J2xXmsilMJ9QQO1x0oVwIgrXZ4LN+8d8+rJK25mtZj/vSgeM5C0mKxe0geYmZ
+	OHh3NZuhNBo+8ermet9ERgr/rS518VXS7GeziyQWk0fEGbshb174Tep4GfB6RiAHaAu4
+	erpQtDsn+uUMPpjaavcxhyoP1YWZJZDAzSChg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=WZy6h2E+Bw+gImXeRXv9WQ6HNwON24AEt46BJLUw79+C4Daq0E94ubAGTkStMUn3NH
-	wC1dRN3DAU46H0kIFOa+9Rz3qIEtG5i8p7MfEQSD9qBPLZMR1YrmA+95xnxt72rrq4gl
-	T+YluYohS0SB4OixAAk6Z7qbqwoQ7m5dujPsU=
-Received: by 10.142.44.18 with SMTP id r18mr6857452wfr.170.1289346163954;
-	Tue, 09 Nov 2010 15:42:43 -0800 (PST)
-Received: from [10.0.0.71] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	v19sm2330123wfh.12.2010.11.09.15.42.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 09 Nov 2010 15:42:43 -0800 (PST)
-Message-ID: <4CD9DC6D.5090007@gmail.com>
-Date: Wed, 10 Nov 2010 10:12:37 +1030
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.14) Gecko/20101020 Thunderbird/3.0.9
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=MDxxPYBHtWWLOhvO1tiD5BpgEBgGkW1rzH19GoTwO5bJ5JiiUD4fElifA+NfbYzNXX
+	/KhKeWxlTci8Rt7iUqv1pFjUwT1ewSnhoQ/92yGDJXbfcbEB4VhnSDeUOk9OyymKyY/V
+	MBi4g6/8qs5UpttFY7VsqvUI7qM4BKQEVEtxM=
+Received: by 10.216.178.83 with SMTP id e61mr368185wem.12.1289346997403; Tue,
+	09 Nov 2010 15:56:37 -0800 (PST)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.67.67 with HTTP; Tue, 9 Nov 2010 15:56:17 -0800 (PST)
+In-Reply-To: <4CD9DC6D.5090007@gmail.com>
+References: <4CD9DC6D.5090007@gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 9 Nov 2010 16:56:17 -0700
+X-Google-Sender-Auth: 89BOLHR6Kunyy7H9wSSFPibPHKc
+Message-ID: <AANLkTimoLb0sKc+RGJJsF=tvhzhRnOgOfby1SQoKh-C9@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] distro-version, kaeilos-version: don't export METADATA_BRANCH and METADATA_REVISION
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] distro-version, kaeilos-version: don't export METADATA_BRANCH and METADATA_REVISION
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,74 +55,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Nov 2010 23:43:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Nov 2010 23:57:35 -0000
+Content-Type: text/plain; charset=UTF-8
+
+On Tue, Nov 9, 2010 at 4:42 PM, Graham Gower <graham.gower@gmail.com> wrote:
+
+> Causes infinite recursion, which may look like this:
+>
+> NOTE: <type 'exceptions.RuntimeError'>:maximum recursion depth exceeded
+> while calling a Python object while evaluating: ${@base_get_scm_branch(d)}
+>
+> Or this:
+>
+> Traceback (most recent call last):
+>  File "/home/grg/oe2/bitbake/lib/bb/server/none.py", line 128, in
+> idle_commands
+>   retval = function(self, data, False)
+>  File "/home/grg/oe2/bitbake/lib/bb/cooker.py", line 716, in
+> buildTargetsIdle
+>   retval = rq.execute_runqueue()
+>  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 877, in
+> execute_runqueue
+>   self.execute_runqueue_internal()
+>  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 992, in
+> execute_runqueue_internal
+>   self.build_pipes[pipe].read()
+>  File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 1227, in read
+>   bb.event.fire_from_worker(self.queue[:index+8], self.d)
+>  File "/home/grg/oe2/bitbake/lib/bb/event.py", line 137, in
+> fire_from_worker
+>   event = pickle.loads(event[7:-8])
+>  File "/usr/lib64/python2.6/pickle.py", line 1374, in loads
+>   return Unpickler(file).load()
+>  File "/usr/lib64/python2.6/pickle.py", line 858, in load
+>   dispatch[key](self)
+>  File "/usr/lib64/python2.6/pickle.py", line 966, in load_string
+>   raise ValueError, "insecure string pickle"
+> ValueError: insecure string pickle
+>
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+>
 
 
-Causes infinite recursion, which may look like this:
-
-NOTE: <type 'exceptions.RuntimeError'>:maximum recursion depth exceeded while calling a Python object while evaluating: ${@base_get_scm_branch(d)}
-
-Or this:
-
-Traceback (most recent call last):
- File "/home/grg/oe2/bitbake/lib/bb/server/none.py", line 128, in idle_commands
-   retval = function(self, data, False)
- File "/home/grg/oe2/bitbake/lib/bb/cooker.py", line 716, in buildTargetsIdle
-   retval = rq.execute_runqueue()
- File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 877, in execute_runqueue
-   self.execute_runqueue_internal()
- File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 992, in execute_runqueue_internal
-   self.build_pipes[pipe].read()
- File "/home/grg/oe2/bitbake/lib/bb/runqueue.py", line 1227, in read
-   bb.event.fire_from_worker(self.queue[:index+8], self.d)
- File "/home/grg/oe2/bitbake/lib/bb/event.py", line 137, in fire_from_worker
-   event = pickle.loads(event[7:-8])
- File "/usr/lib64/python2.6/pickle.py", line 1374, in loads
-   return Unpickler(file).load()
- File "/usr/lib64/python2.6/pickle.py", line 858, in load
-   dispatch[key](self)
- File "/usr/lib64/python2.6/pickle.py", line 966, in load_string
-   raise ValueError, "insecure string pickle"
-ValueError: insecure string pickle
-
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/distro-version/distro-version.bb |    3 ---
- recipes/kaeilos/kaeilos-version.bb       |    3 ---
- 2 files changed, 0 insertions(+), 6 deletions(-)
-
-diff --git a/recipes/distro-version/distro-version.bb b/recipes/distro-version/distro-version.bb
-index 269186f..a189ec7 100644
---- a/recipes/distro-version/distro-version.bb
-+++ b/recipes/distro-version/distro-version.bb
-@@ -6,9 +6,6 @@ INHIBIT_DEFAULT_DEPS = "1"
- PACKAGES = "${PN}"
- PACKAGE_ARCH = "all"
- 
--export METADATA_REVISION
--export METADATA_BRANCH
--
- do_install() {
- 	mkdir -p ${D}${sysconfdir}
- 	echo "${DISTRO_NAME} ${DISTRO_VERSION}" > ${D}${sysconfdir}/${DISTRO}-version
-diff --git a/recipes/kaeilos/kaeilos-version.bb b/recipes/kaeilos/kaeilos-version.bb
-index 4600c41..7d226e6 100644
---- a/recipes/kaeilos/kaeilos-version.bb
-+++ b/recipes/kaeilos/kaeilos-version.bb
-@@ -7,9 +7,6 @@ PE = "1"
- PACKAGES = "${PN}"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--export METADATA_REVISION
--export METADATA_BRANCH
--
- do_install() {
- 	mkdir -p ${D}${sysconfdir}
- 	echo "KaeilOS ${DISTRO_VERSION}" > ${D}${sysconfdir}/kaeilos-version
+Acked-by: Chris Larson <chris_larson@mentor.com>
 -- 
-1.7.1
-
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
