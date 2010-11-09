@@ -1,38 +1,32 @@
-Received: from usps1.crhc.illinois.edu ([130.126.143.230]
-	helo=usps.crhc.uiuc.edu) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <johnso87@crhc.illinois.edu>) id 1PFswa-0007Tc-4J
+Received: from starfish.geekisp.com ([216.168.135.166])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <philip@balister.org>) id 1PFtFI-00085y-VQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Nov 2010 19:29:24 +0100
-Received: from usps.crhc.uiuc.edu (localhost [127.0.0.1])
-	by usps.crhc.uiuc.edu (Postfix) with ESMTP id 9AB0D3400472;
-	Tue,  9 Nov 2010 12:28:23 -0600 (CST)
-Received: from [192.168.1.198] (unknown [63.252.64.254])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: johnso87)
-	by usps.crhc.uiuc.edu (Postfix) with ESMTPSA id 6FEC43400471;
-	Tue,  9 Nov 2010 12:28:23 -0600 (CST)
-Message-ID: <4CD992C6.8030105@crhc.illinois.edu>
-Date: Tue, 09 Nov 2010 12:28:22 -0600
-From: Matt Johnson <johnso87@crhc.illinois.edu>
+	Tue, 09 Nov 2010 19:48:41 +0100
+Received: (qmail 22953 invoked by uid 1003); 9 Nov 2010 18:47:43 -0000
+Received: from adsl-75-37-22-143.dsl.pltn13.sbcglobal.net (HELO
+	?192.168.1.148?) (philip@opensdr.com@75.37.22.143)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	9 Nov 2010 18:47:41 -0000
+Message-ID: <4CD9973D.4040201@balister.org>
+Date: Tue, 09 Nov 2010 10:47:25 -0800
+From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
+	rv:1.9.2.12) Gecko/20101027 Fedora/3.1.6-1.fc13 Thunderbird/3.1.6
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	angstrom-distro-devel@linuxtogo.org
-References: <mailman.0.1289314919.16967.angstrom-distro-devel@linuxtogo.org>
-	<4CD96384.70100@crhc.illinois.edu> <4CD98F98.90503@mlbassoc.com>
-In-Reply-To: <4CD98F98.90503@mlbassoc.com>
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 130.126.143.230
-X-SA-Exim-Mail-From: johnso87@crhc.illinois.edu
+To: openembedded-devel@lists.openembedded.org
+References: <30166055.post@talk.nabble.com>
+	<AANLkTi=5W1Sat-egZmbeQv6B+PX+Vatabq=2+YZw_wGx@mail.gmail.com>
+In-Reply-To: <AANLkTi=5W1Sat-egZmbeQv6B+PX+Vatabq=2+YZw_wGx@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_BL_SPAMCOP_NET autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Can't build gstreamer-ti
+Subject: Re: [SOLVED]Network init script error??
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,161 +40,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Nov 2010 18:29:25 -0000
+X-List-Received-Date: Tue, 09 Nov 2010 18:48:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-
-
-On 11/09/2010 12:14 PM, Gary Thomas wrote:
-> On 11/09/2010 08:06 AM, Matt Johnson wrote:
->>
->>
->> On 08/10/2010 04:58 AM, Gary Thomas wrote:
->>
->> On 08/09/2010 04:37 PM, Chethan Pandarinath wrote:
->>
->> This seems to be the same error:
->> http://e2e.ti.com/support/dsp/omap_applications_processors/f/42/t/42905.aspx 
->>
->>
->>
->>
->> With the problem being that the cl6x compiler isn't bundled with the
->> rest of
->> the toolchain, and has to be downloaded separately.
->>
->>
->> But I've downloaded those tools and was able to build this recipe just
->> a few weeks ago. I think something in the staged packaging has broken 
->> it.
->>
->> I worked past this problem by installing a symlink by hand to my DVSDK
->> installed tools.
->>
->> Next problem :-(
->>
->>
->> |
->> /local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: 
->>
->>
->> warning: package/cfg/bin/ti_platforms_evm3530/app_remote_xv5T.xdl
->> contains output sections; did you forget -T? |
->> /local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-codec-engine-2_25_01_06-r5/codec_engine_2_25_01_06/packages/ti/sdo/ce/lib/release/ce.av5T(Engine.ov5T): 
->>
->>
->> In function `Engine_deleteNode':
->>
->> | Engine.c:(.text+0x19d4): undefined reference to `__aeabi_uidiv'
->>
->> |
->> /local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-codec-engine-2_25_01_06-r5/codec_engine_2_25_01_06/packages/ti/sdo/ce/osal/linux/lib/release/osal_linux_470.av5T(Global_noOS.ov5T): 
->>
->>
->> In function `Global_atexit':
->>
->> | Global_noOS.c:(.text+0x238): undefined reference to `atexit'
->>
->> |
->> /local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dsplink-tree/packages/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplink.lib: 
->>
->>
->> In function `_RingIO_writerAcquire':
->>
->> | ringio.c:(.text+0x24e4): undefined reference to `__aeabi_uidivmod'
->> | ringio.c:(.text+0x261c): undefined reference to `__aeabi_uidivmod'
->> | ringio.c:(.text+0x2654): undefined reference to `__aeabi_uidivmod'
->>
->> |
->> /local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dsplink-tree/packages/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplink.lib: 
->>
->>
->> In function `_RingIO_readerAcquire':
->>
->> | ringio.c:(.text+0x28ac): undefined reference to `__aeabi_uidivmod'
->> | ringio.c:(.text+0x2bd4): undefined reference to `__aeabi_uidivmod'
->>
->> |
->> /local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dsplink-tree/packages/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplink.lib:ringio.c:(.text+0x2eb4): 
->>
->>
->> more undefined references to `__aeabi_uidivmod' follow |
->> /local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dsplink-tree/packages/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplink.lib: 
->>
->>
->> In function `DRV_installCleanupRoutines':
->>
->> | ringio.c:(.text+0x9354): undefined reference to `atexit'
->> | collect2: ld returned 1 exit status
->> | make[1]: *** [bin/ti_platforms_evm3530/app_remote.xv5T] Error 1
->>
->> | gmake: ***
->> [/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-codec-engine-2_25_01_06-r5/codec_engine_2_25_01_06/examples/ti/sdo/ce/examples/apps/speech,.executables] 
->>
->>
->> Error 2
->>
->> | make[1]: *** [all] Error 2
->>
->> | make[1]: Leaving directory
->> `/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-codec-engine-2_25_01_06-r5/codec_engine_2_25_01_06/examples/ti/sdo/ce/examples/apps/speech'| 
->>
->>
->> make: *** [all] Error 2 NOTE: package ti-codec-engine-2_25_01_06-r5:
->> task do_compile: Failed ERROR: TaskFailed event exception, aborting
->> ERROR: Build of
->> /local/Angstrom_BeagleBoard/openembedded/recipes/ti/ti-codec-engine_2.25.01.06.bb 
->>
->>
->> do_compile failed
->>
->> I wasn't subscribed to the Angstrom-devel list when this was posted, so
->> please excuse the improper quoting.
->> I ran into this problem as well attempting to build ti-codec-engine with
->> binutils 2.20 (Angstrom 2010).
->> It turns out that the problem is a linker script generated by TI
->> XDCTools. The issue, and a workaround, is documented
->> here:http://www.eclipse.org/forums/index.php?t=tree&th=197704&S=bf2c36fb547f9973f300fdf573c34d81#page_top 
->>
->> <http://www.eclipse.org/forums/index.php?t=tree&th=197704&S=bf2c36fb547f9973f300fdf573c34d81#page_top> 
->>
->>
->> I tested the workaround in my OE tree and it worked fine. Thought I'd
->> post that in case others were still having trouble.
->> We can either make a patch in ti-xdctools to remove the offending lines
->> from the linker script generators, wait for XDCTools 3.21 to be released
->> and quickly get a recipe going for that, or both.
->> XDCTools 3.21 should be available here
->> (http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/index.html 
->>
->> ) when it's released.
+On 11/08/2010 08:39 PM, Steve Sakoman wrote:
+> Looping in the OE developers list on the issue described below.
 >
-> Thanks for pointing this out - I'm anxious to move to more recent tools.
+> It does indeed seem that the ifupdown package init is referencing
+> /etc/network/ifstate (which doesn't exist) instead of
+> /etc/network/run/ifstate.
 >
-> How did you test this work around?  Do you have a patch to share?
+> Mike's point about having the /etc/network/run directory linked to
+> /var/run also seems like a good idea (so that ifstate would not
+> persist after an unclean shutdown).
+
+Fixing the script removes the state file before it is checked on boot, 
+so I do not think it is necessary to move the state file to a volatile 
+file system. I'm going to push the fix to the ifupdown package. There is 
+also ifupdown-ubuntu, but I am not sure who is using that. It references 
+/var/run/....
+
+Philip
+
+
 >
-I was a bit frustrated with this package and was a bit heavy-handed.  I 
-looked for all files of the flavor packages/.../arm/.../linkcmd.xdt, and 
-removed everything from the line:
-var _utils = xdc.loadCapsule("gnu/targets/linkUtils.xs");
-down to the end of the file (all the linkcmd.xdt's contained this line, 
-thankfully).  I then re-ran "bitbake ti-xdctools -c populate_sysroot *" 
-to copy those into sysroots/ .
-I then re-ran "bitbake ti-codec-engine -c compile -f" then "bitbake 
-ti-codec-engine", then rebuilt my rootfs, deployed it to my board, and 
-tested a couple codecs.
-I haven't worked that into a patch, but that should be enough to get you 
-going if you're anxious.  If anyone else is interested in making the 
-patch (which should only be applied if you're using xdctools < 3.21 and 
-binutils >= 2.19), feel free; it may be a while before i get to it.
-
--Matt
-
--- 
-Matt Johnson
-Graduate Student
-University of Illinois at Urbana-Champaign, Dept. of ECE
-Coordinated Science Lab, Rm. 213
+> Thoughts?
+>
+> Steve
+>
+>
+> ---------- Forwarded message ----------
+> From: roystonvasey<mikestocks@madasafish.com>
+> Date: Mon, Nov 8, 2010 at 7:14 PM
+> Subject: [Gumstix-users]  [SOLVED]Network init script error??
+> To: gumstix-users@lists.sourceforge.net
+>
+>
+>
+> Dear List,
+> I as many others are having problems getting the networking to start
+> reliably on headless systems, wlan0 in particular.
+> If the network is restarted '/etc/init.d/networking restart' wireless and my
+> CAN networks come up OK, on system halt and reboot they also come up OK.
+> If power is interrupted the networks are not starting after a reboot and
+> require a manual restart.
+>
+> After some investigations I noticed that there is an initialisation script
+> '/etc/rcS.d/S39ifup' that is run just before the network is started with
+> '/etc/rcS.d/S40networking'. The script looks like it clears up any hanging
+> ifstate files.
+> #!/bin/sh -e
+>
+> case "$1" in
+>         start|restart)
+>                 if [ -e /etc/network/ifstate ]; then
+>                         echo -n "Cleaning: /etc/network/ifstate"
+>                         echo -n>/etc/network/ifstate
+>                         echo "."
+>                 fi
+>                 ;;
+>         stop|reload|force-reload)
+>                 ;;
+> esac
+>
+> However the actual ifstate file is created in '/etc/network/run/ifstate'.
+> Adjusting the script allows the network to come up properly even after a
+> power outage.
+> I suspect that ifup checks ifstate to see if the interface is already up and
+> doesn't do anything if there is an entry in the ifstate file and ifdown
+> takes out etries as it brings down the interface. Hence a clean shut down
+> will clear entries and allow the the networks to start normally on start up.
+> The other observation is that the '/etc/network/run' directory should
+> probably be linked to the '/var/run' directory.
+>
+> Can anyone verify that my findings are correct an see about amending the
+> init scripts?
+>
+> Cheers Mike.
+> --
+> View this message in context:
+> http://old.nabble.com/-SOLVED-Network-init-script-error---tp30166055p30166055.html
+> Sent from the Gumstix mailing list archive at Nabble.com.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
