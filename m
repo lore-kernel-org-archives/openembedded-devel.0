@@ -1,46 +1,46 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PFe3X-0002kE-5Q
+	(envelope-from <kergoth@gmail.com>) id 1PFe4O-0002qc-Qh
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Nov 2010 03:35:31 +0100
-Received: by bwz10 with SMTP id 10so6133715bwz.6
+	Tue, 09 Nov 2010 03:36:25 +0100
+Received: by wwb39 with SMTP id 39so738546wwb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Nov 2010 18:34:36 -0800 (PST)
+	Mon, 08 Nov 2010 18:35:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received
-	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=klPGDVmbgXJ9SWZZfPEH4g8z63B8Zxh//chvg3OUJ10=;
-	b=chKVHvjOZv+6ITf9hjanyEG5E7xSlKlwo5cIQlo1cr4W03c2H2jjmC/uMvpwGS8Vzu
-	vs5cpzudLi4iMqrEdNV2wcqaICcZQZ9yDuEW43S3/ZARxGnuTFPE8wFqc8hZAXV1zRwm
-	JNbxTVCuSz0Ww18nl+zcDcAEoMIIiDcKM+DXg=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=YkNZ9P5xGh7v5LfgQ/t+IT14/Y7NrmPiWfD0m1L7bkQ=;
+	b=hGjKEnyS8B+Magr6yZNeHhZRLX6vUAF1Sd2EnDmU1ebe5AxoWtpkjwmv6UCYMO3CVO
+	Z/kl0fjnmOFxmKfGFhSb7kv6Y2zgd+Bo6E0xaRwRzmTvSVHlDVsZzy/+7m7davo2rVKM
+	cR2YTM43BHQp5M9pRBGlSdK/hvxuNKRZy2rg8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=vues6FgfsrHxxjmZZ70mQgBFON3Ch5JBT+8xRiHSLY63KFsaJvjOtywYA7eU4XOnva
-	xmbVJizCnwTFq+DR1IAs7dyCZpdPmHgCD28m5Np1rA2h5m4XvUV5v0fz5hoRsz9oCLSK
-	ziYf46xCfQ9wUY+YxtjNeLqPjPpAPvdrS3TMA=
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=h4kfOl4fbi+qF1AepneCaMrftIliU8f70aNcYUsQHrp4mg2c66keZjrn/6+3TiuGKO
+	R7W6NwgEAcGq93rcTSa7OVEyczQP/+dpjUDPj22oM9XCpgbE7zjj4xDBIPuopNPokv+m
+	aYbsmO0/4fCVhjbDncU4XBuvOh+oGOymtpA38=
+Received: by 10.216.178.83 with SMTP id e61mr204192wem.12.1289270127894; Mon,
+	08 Nov 2010 18:35:27 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.204.115.131 with SMTP id i3mr5035856bkq.208.1289270075881;
-	Mon, 08 Nov 2010 18:34:35 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.2.75 with HTTP; Mon, 8 Nov 2010 18:34:35 -0800 (PST)
+Sender: kergoth@gmail.com
+Received: by 10.216.67.67 with HTTP; Mon, 8 Nov 2010 18:35:07 -0800 (PST)
 In-Reply-To: <AANLkTikVxU787_ktH03HKBdCCFiGZOvxXk6pJ94+RK6Q@mail.gmail.com>
 References: <AANLkTikVxU787_ktH03HKBdCCFiGZOvxXk6pJ94+RK6Q@mail.gmail.com>
-Date: Tue, 9 Nov 2010 00:34:35 -0200
-X-Google-Sender-Auth: GZwLbHkmiAwdr67LqSBksuQv6vY
-Message-ID: <AANLkTikpa=Q7Sfje-hGsPJ21TN8q_OdPsSBboBhwfA2B@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 8 Nov 2010 19:35:07 -0700
+X-Google-Sender-Auth: UUUbenQj7DWGDdOHCPoabuf_W8g
+Message-ID: <AANLkTikKbo9JQGzRMFjU+ud7QYkEZTMxc2PynO23SZV6@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.41
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Fail to build eglibc on testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -55,21 +55,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Nov 2010 02:35:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 09 Nov 2010 02:36:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, Nov 9, 2010 at 12:31 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> Hello,
->
+On Mon, Nov 8, 2010 at 7:31 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
+
 > I got this build fail. Anyone knows anything about it?
+>
+> | nscd.c:(.text+0x573): undefined reference to `__stack_chk_guard'
+> | nscd.c:(.text+0x5cd): undefined reference to `__stack_chk_guard'
+> |
+> /home/otavio/hacking/ossystems/oe/oetmp-current/work/i586-oe-linux/eglibc-2.12-r15.6+svnr11762/build-i586-oe-linux/nscd/nscd.o:
+> In function `parse_opt':
+> | nscd.c:(.text+0x5fc): undefined reference to `__stack_chk_guard'
+> | nscd.c:(.text+0x8cf): undefined reference to `__stack_chk_guard'
+>
 
-It used 'micro' distro and i586-generic.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 O.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 http://projetos.ossystems.com.br
-
+I've run into this before in the past.  Never had time to investigate, but
+throwing out a "me too" :)
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
