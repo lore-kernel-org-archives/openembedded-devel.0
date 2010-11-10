@@ -1,40 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PGDZ7-0008OC-Tc
+	(envelope-from <raj.khem@gmail.com>) id 1PGDZy-0008Tj-Nt
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Nov 2010 17:30:30 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1PGDYB-0001ED-18 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Nov 2010 08:29:31 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 10 Nov 2010 08:29:30 -0800
-Received: from [172.30.80.211] ([172.30.80.211]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 10 Nov 2010 09:29:30 -0700
-Message-ID: <4CDAC864.7050803@mentor.com>
-Date: Wed, 10 Nov 2010 09:29:24 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+	Wed, 10 Nov 2010 17:31:23 +0100
+Received: by gxk26 with SMTP id 26so107867gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Nov 2010 08:30:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=RzkTzLAeaFjU7F49DQabY5KqtDG0XV7wVDm1WR1Clug=;
+	b=Nx3SEA3GmLC0jAq5aUGJY3hXmdrACqcabHirct2Y5x4ZTCLyBwfRQT/HXxEKVJ4K1f
+	yb6sF86L//5kktjuSxmI5JQUBIkgC1v2Sl3Urtp2IXaa2vCcv7oKQRnzirZGElK35Ae2
+	oHeRGPvunaRpZXtqZXvvrBwq1Gp+oOEILbltI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=S8HUbwRiYh0BGSro56Z8NJ5OsPhUnujJeUaRGoXHw4V0yBhbpvVXKkWKaLK+fSizZz
+	5fTMqvzeghQbFYoxJdW8Bzs0DcY7Wo/hr/Qfog69Guga5aNWnXTNNcTK2Ae9goeweJSh
+	grFN3kS0EJ70Aw4mMfOeq2q6CsedoWAFOx6xc=
+Received: by 10.91.11.6 with SMTP id o6mr8962251agi.91.1289406620228; Wed, 10
+	Nov 2010 08:30:20 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Wed, 10 Nov 2010 08:30:00 -0800 (PST)
+In-Reply-To: <20101110155011.GA29405@excalibur.local>
+References: <20101110155011.GA29405@excalibur.local>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 10 Nov 2010 08:30:00 -0800
+Message-ID: <AANLkTimJ42rjLHm0P=idDYS7FjB_3Z6z-YekN=8VRueK@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1287113787-21268-1-git-send-email-kergoth@gmail.com>	<1287157281-31597-1-git-send-email-kergoth@gmail.com>	<i9aai3$tmj$1@dough.gmane.org>	<AANLkTimuTVEWPsZT=hx+fuLLHKtVVrVzud0xq5R_TSEO@mail.gmail.com>
-	<1289399216.1272.415.camel@rex>
-In-Reply-To: <1289399216.1272.415.camel@rex>
-X-OriginalArrivalTime: 10 Nov 2010 16:29:30.0335 (UTC)
-	FILETIME=[7333EEF0:01CB80F4]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH (v2)] Reverse the order of OVERRIDES
+Subject: Re: First release three weeks ahead. Tasks you can help with.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,79 +52,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Nov 2010 16:30:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Nov 2010 16:31:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Richard Purdie wrote:
-> On Fri, 2010-10-15 at 12:44 -0700, Chris Larson wrote:
->> On Fri, Oct 15, 2010 at 12:37 PM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
->>
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
->>>
->>> On 15-10-10 17:41, Chris Larson wrote:
->>>> From: Chris Larson <chris_larson@mentor.com>
->>>>
->>>> Given the current implementation of OVERRIDES in bitbake, the variable is
->>>> expected to contain elements in the order least specific to most
->>> specific,
->>>> however, our current usage of it does not match that.  As one example,
->>> "local"
->>>> is supposed to always be the most specific override, yet currently it's
->>> the
->>>> least specific.  As another example, currently the target architecture is
->>> seen
->>>> as more specific than the machine, which is also clearly wrong.
->>>>
->>>> Big thanks to Chase Maupin for investigating and identifying this long
->>>> standing issue.
->>>>
->>>> It becomes clear that a reversal of the current value will bring us to a
->>> more
->>>> sane behavior, and avoids the need for the dual overrides hack mentioned
->>> in
->>>> the comments, so this implements this reversal, and drops the unnecessary
->>> and
->>>> confusing comments.
->>>>
->>>> This also introduces a MACHINE_OVERRIDES variable as a generic mechanism
->>> to
->>>> inject overrides elements which are more specific than the distro but
->>> less
->>>> specific than the machine, which is where things like MACHINE_CLASS or
->>>> SOC_FAMILY or the like would go.  This variable is *space* separated, to
->>> make
->>>> it easier and more convenient to assemble the variable incrementally.
->>>>
->>>> Reported-by: Chase Maupin <chase.maupin@ti.com>
->>>> Signed-off-by: Chris Larson <chris_larson@mentor.com>
->>> Acked-by: Koen Kooi <k-kooi@ti.com>
->>>
->> This is now in master -- thanks to all for the acks, review, comments -- let
->> me know if any problems result from this.
-> 
-> You do realise the damage this potentially causes for compatibility of
-> metadata between OE and Poky?
-> 
-> This change is pretty serious and potentially alters the handling of any
-> double override. Poky uses them a bit more extensively than OE does. Its
-> effectively an architecture change to OE yet no discussion was had at
-> any TSC meeting :(.
-> 
-> I even asked about this a while back and was *told* that "local" was
-> meant to be weak, I therefore added a strong version to Poky, in the
-> spirit of maintaining compatibility.
-> 
+On Wed, Nov 10, 2010 at 7:50 AM, Stefan Schmidt
+<stefan@datenfreihafen.org> wrote:
+> Hello.
+>
+> December the 1th is our first release due. It will be the first in a, hop=
+efully
+> long, row.
+>
+> As it is the first release it will not be perfect, but we should try to m=
+ake it
+> a stable base anyway. Some steps that I think should help are listed belo=
+w:
+>
+> - Stop pushing maybe problematic changes in the last 2 weeks. That gives =
+you one
+> =C2=A0week from now to get this in and fixed. So what is problematic? Cha=
+nges to
+> =C2=A0bbclass files, the toolchain, core system services and changes that=
+ may
+> =C2=A0introduce runtime breakage should be avoided. There might be more.
+> =C2=A0If in doubt sent the patch to the ml and ask others what they think=
+.
+>
+> - If you care about a specific machine, set of recipes or images start te=
+sting
+> =C2=A0them now in our testing-next branch. The plan was to base the relea=
+se tag on
+> =C2=A0the testing-next branch. Or at least have it as fallback if master =
+is broken.
+>
+> =C2=A0The testing matrix in the wiki will be used in the release tag in t=
+he same way
+> =C2=A0it is used right now with the tested tag. Make sure the stuff you c=
+are is
+> =C2=A0listed there as working to show other they could use it in this rel=
+ease.
+>
+> - Try to take some hours in the last two weeks to get into bug fixing mod=
+e for
+> =C2=A0some moments and help OE forward to the release. check the ML for p=
+roblem
+> =C2=A0reports and patches. Test, apply and mark them in patchwork as appl=
+ied.
+>
+> I think that are the minimal steps we need to get a release out of the do=
+or.
+> More will come when learning from the first releases.
+>
+> Anyone willing to take the release mainatainer hat for this release? My t=
+ime is
+> rather occupied with other things the next weeks. :/
+> It would be only for this release. Afterwards we can discuss if this shou=
+ld be a
+> fixed position or newly assigned for any release. Such a person should ke=
+ep the
+> people motivated to fix some bugs, monitor the commit log for potential p=
+roblems
+> and discuss them and finally make the release tag in the meta data.
+>
+> Any takers?
 
-(a) Eeep! and (b) That's pretty much the opposite of what the rest of 
-the thread / discussion was, which is to say "local is supposed to be 
-the final winner, why isn't it?"
+I would be able to help here with the release
 
-Now... what do we do here?
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+>
+> regards
+> Stefan Schmidt
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
