@@ -1,29 +1,31 @@
 Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PGFXI-0002an-RH
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PGFf0-0004lW-Il
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Nov 2010 19:36:45 +0100
+	Wed, 10 Nov 2010 19:44:43 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 136848ED526
+	by smtp.cbnco.com (Postfix) with ESMTP id D92908EE2D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Nov 2010 13:35:47 -0500 (EST)
+	Wed, 10 Nov 2010 13:35:46 -0500 (EST)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 03499-07 for <openembedded-devel@lists.openembedded.org>; 
-	Wed, 10 Nov 2010 13:35:47 -0500 (EST)
+	with ESMTP id 03465-08 for <openembedded-devel@lists.openembedded.org>; 
+	Wed, 10 Nov 2010 13:35:46 -0500 (EST)
 Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id D36888DB48D; Wed, 10 Nov 2010 13:35:46 -0500 (EST)
+	id 9FC1A8ED526; Wed, 10 Nov 2010 13:35:46 -0500 (EST)
 Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 95BEB8EE2ED
+	by smtp.cbnco.com (Postfix) with ESMTP id 8B20C8CA466
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 10 Nov 2010 13:35:44 -0500 (EST)
 Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
-	id 6EDFE5001F7; Wed, 10 Nov 2010 13:35:44 -0500 (EST)
+	id 831B25001F5; Wed, 10 Nov 2010 13:35:44 -0500 (EST)
 From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Nov 2010 13:35:43 -0500
-Message-Id: <1289414144-18181-1-git-send-email-msmith@cbnco.com>
+Date: Wed, 10 Nov 2010 13:35:44 -0500
+Message-Id: <1289414144-18181-2-git-send-email-msmith@cbnco.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1289414144-18181-1-git-send-email-msmith@cbnco.com>
+References: <1289414144-18181-1-git-send-email-msmith@cbnco.com>
 X-Virus-Scanned: amavisd-new at cbnco.com
 X-SA-Exim-Connect-IP: 207.164.182.72
 X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
@@ -33,7 +35,7 @@ X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
 	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2] libsdl-x11: configure with --disable-rpath
+Subject: [PATCH 2/2] smpeg: configure with --disable-rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,38 +49,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Nov 2010 18:36:46 -0000
+X-List-Received-Date: Wed, 10 Nov 2010 18:44:43 -0000
 
 Otherwise libtool and ld try to link against ${libdir}/libdl.so.2 on the
 host system.
 
 Signed-off-by: Michael Smith <msmith@cbnco.com>
 ---
- recipes/libsdl/libsdl-x11_1.2.14.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../smpeg-0.4.5+svnr387/add-disable-rpath.patch    |   47 ++++++++++++++++++++
+ recipes/smpeg/smpeg_svn.bb                         |    6 ++-
+ 2 files changed, 51 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/smpeg/smpeg-0.4.5+svnr387/add-disable-rpath.patch
 
-diff --git a/recipes/libsdl/libsdl-x11_1.2.14.bb b/recipes/libsdl/libsdl-x11_1.2.14.bb
-index 4c84d99..37799c3 100644
---- a/recipes/libsdl/libsdl-x11_1.2.14.bb
-+++ b/recipes/libsdl/libsdl-x11_1.2.14.bb
-@@ -8,7 +8,7 @@ LICENSE = "LGPL"
- DEPENDS = "alsa-lib virtual/libgl virtual/libx11 libxext tslib"
- DEPENDS_avr32 = "alsa-lib virtual/libx11 libxext tslib"
- PROVIDES = "virtual/libsdl"
--PR = "r5"
-+PR = "r6"
+diff --git a/recipes/smpeg/smpeg-0.4.5+svnr387/add-disable-rpath.patch b/recipes/smpeg/smpeg-0.4.5+svnr387/add-disable-rpath.patch
+new file mode 100644
+index 0000000..e1de0ea
+--- /dev/null
++++ b/recipes/smpeg/smpeg-0.4.5+svnr387/add-disable-rpath.patch
+@@ -0,0 +1,47 @@
++Upstream: http://icculus.org/pipermail/smpeg/2010-November/000183.html
++
++Add --disable-rpath to fix build in OE.
++
++--- trunk/configure.in.orig	2010-11-07 09:00:19.000000000 -0500
+++++ trunk/configure.in	2010-11-10 13:02:06.000000000 -0500
++@@ -84,19 +84,27 @@
++         ;;
++ esac
++ 
++-# Set runtime shared library paths as needed 
++-
++-case "$target" in
++-    *-*-linux*)
++-	SMPEG_RLD_FLAGS="-Wl,-rpath,\${exec_prefix}/lib"
++-	;;
++-    *-*-freebsd*)
++-	SMPEG_RLD_FLAGS="-Wl,-rpath,\${exec_prefix}/lib"
++-	;;
++-    *-*-solaris*)
++-	SMPEG_RLD_FLAGS="-R\${exec_prefix}/lib"
++-	;;
++-esac
+++dnl Set runtime shared library paths as needed 
+++AC_ARG_ENABLE(rpath,
+++	AC_HELP_STRING([--enable-rpath],
+++		[use an rpath when linking SDL [[default=yes]]]),,
+++	enable_rpath=yes)
+++
+++if test "x$enable_rpath" = "xyes"; then
+++  case "$target" in
+++      *-*-linux*)
+++	  SMPEG_RLD_FLAGS="-Wl,-rpath,\${exec_prefix}/lib"
+++	  ;;
+++      *-*-freebsd*)
+++	  SMPEG_RLD_FLAGS="-Wl,-rpath,\${exec_prefix}/lib"
+++	  ;;
+++      *-*-solaris*)
+++	  SMPEG_RLD_FLAGS="-R\${exec_prefix}/lib"
+++	  ;;
+++  esac
+++else
+++  SMPEG_RLD_FLAGS=""
+++fi
++ 
++ AC_SUBST(SMPEG_RLD_FLAGS)
++ 
+diff --git a/recipes/smpeg/smpeg_svn.bb b/recipes/smpeg/smpeg_svn.bb
+index 394270d..6fea95d 100644
+--- a/recipes/smpeg/smpeg_svn.bb
++++ b/recipes/smpeg/smpeg_svn.bb
+@@ -7,15 +7,17 @@ PROVIDES = "smpeg"
+ PV = "0.4.5+svnr${SRCPV}"
+ PE = "2"
+ SRCREV = "387"
++PR = "r1"
  
- SRC_URI = " \
-   http://www.libsdl.org/release/SDL-${PV}.tar.gz \
-@@ -30,7 +30,7 @@ EXTRA_OECONF = " \
-   --disable-video-xbios --disable-video-gem --disable-video-dummy \
-   --enable-video-opengl --enable-input-events --enable-pthreads \
-   --disable-video-picogui --disable-video-qtopia --enable-dlopen \
--  --enable-input-tslib --disable-video-ps3 \
-+  --enable-input-tslib --disable-video-ps3 --disable-rpath \
- "
+-SRC_URI = "svn://svn.icculus.org/smpeg/;module=trunk"
++SRC_URI = "svn://svn.icculus.org/smpeg/;module=trunk \
++	file://add-disable-rpath.patch;apply=yes"
  
- do_configure() { 
+ S = "${WORKDIR}/trunk"
+ 
+ inherit autotools binconfig
+ 
+ EXTRA_OECONF = "--disable-gtktest --disable-opengl-player --without-x \
+-		--without-gtk --disable-gtk-player"
++		--without-gtk --disable-gtk-player --disable-rpath"
+ 
+ do_configure_prepend () {
+ 	touch NEWS AUTHORS ChangeLog
 -- 
 1.7.0.4
 
