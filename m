@@ -1,44 +1,39 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PGDZy-0008Tj-Nt
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PGFXI-0002an-RH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Nov 2010 17:31:23 +0100
-Received: by gxk26 with SMTP id 26so107867gxk.6
+	Wed, 10 Nov 2010 19:36:45 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 136848ED526
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Nov 2010 08:30:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=RzkTzLAeaFjU7F49DQabY5KqtDG0XV7wVDm1WR1Clug=;
-	b=Nx3SEA3GmLC0jAq5aUGJY3hXmdrACqcabHirct2Y5x4ZTCLyBwfRQT/HXxEKVJ4K1f
-	yb6sF86L//5kktjuSxmI5JQUBIkgC1v2Sl3Urtp2IXaa2vCcv7oKQRnzirZGElK35Ae2
-	oHeRGPvunaRpZXtqZXvvrBwq1Gp+oOEILbltI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=S8HUbwRiYh0BGSro56Z8NJ5OsPhUnujJeUaRGoXHw4V0yBhbpvVXKkWKaLK+fSizZz
-	5fTMqvzeghQbFYoxJdW8Bzs0DcY7Wo/hr/Qfog69Guga5aNWnXTNNcTK2Ae9goeweJSh
-	grFN3kS0EJ70Aw4mMfOeq2q6CsedoWAFOx6xc=
-Received: by 10.91.11.6 with SMTP id o6mr8962251agi.91.1289406620228; Wed, 10
-	Nov 2010 08:30:20 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Wed, 10 Nov 2010 08:30:00 -0800 (PST)
-In-Reply-To: <20101110155011.GA29405@excalibur.local>
-References: <20101110155011.GA29405@excalibur.local>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 10 Nov 2010 08:30:00 -0800
-Message-ID: <AANLkTimJ42rjLHm0P=idDYS7FjB_3Z6z-YekN=8VRueK@mail.gmail.com>
+	Wed, 10 Nov 2010 13:35:47 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 03499-07 for <openembedded-devel@lists.openembedded.org>; 
+	Wed, 10 Nov 2010 13:35:47 -0500 (EST)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id D36888DB48D; Wed, 10 Nov 2010 13:35:46 -0500 (EST)
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 95BEB8EE2ED
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Nov 2010 13:35:44 -0500 (EST)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id 6EDFE5001F7; Wed, 10 Nov 2010 13:35:44 -0500 (EST)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Wed, 10 Nov 2010 13:35:43 -0500
+Message-Id: <1289414144-18181-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.7.0.4
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: First release three weeks ahead. Tasks you can help with.
+Subject: [PATCH 1/2] libsdl-x11: configure with --disable-rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,81 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Nov 2010 16:31:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Nov 2010 18:36:46 -0000
 
-On Wed, Nov 10, 2010 at 7:50 AM, Stefan Schmidt
-<stefan@datenfreihafen.org> wrote:
-> Hello.
->
-> December the 1th is our first release due. It will be the first in a, hop=
-efully
-> long, row.
->
-> As it is the first release it will not be perfect, but we should try to m=
-ake it
-> a stable base anyway. Some steps that I think should help are listed belo=
-w:
->
-> - Stop pushing maybe problematic changes in the last 2 weeks. That gives =
-you one
-> =C2=A0week from now to get this in and fixed. So what is problematic? Cha=
-nges to
-> =C2=A0bbclass files, the toolchain, core system services and changes that=
- may
-> =C2=A0introduce runtime breakage should be avoided. There might be more.
-> =C2=A0If in doubt sent the patch to the ml and ask others what they think=
-.
->
-> - If you care about a specific machine, set of recipes or images start te=
-sting
-> =C2=A0them now in our testing-next branch. The plan was to base the relea=
-se tag on
-> =C2=A0the testing-next branch. Or at least have it as fallback if master =
-is broken.
->
-> =C2=A0The testing matrix in the wiki will be used in the release tag in t=
-he same way
-> =C2=A0it is used right now with the tested tag. Make sure the stuff you c=
-are is
-> =C2=A0listed there as working to show other they could use it in this rel=
-ease.
->
-> - Try to take some hours in the last two weeks to get into bug fixing mod=
-e for
-> =C2=A0some moments and help OE forward to the release. check the ML for p=
-roblem
-> =C2=A0reports and patches. Test, apply and mark them in patchwork as appl=
-ied.
->
-> I think that are the minimal steps we need to get a release out of the do=
-or.
-> More will come when learning from the first releases.
->
-> Anyone willing to take the release mainatainer hat for this release? My t=
-ime is
-> rather occupied with other things the next weeks. :/
-> It would be only for this release. Afterwards we can discuss if this shou=
-ld be a
-> fixed position or newly assigned for any release. Such a person should ke=
-ep the
-> people motivated to fix some bugs, monitor the commit log for potential p=
-roblems
-> and discuss them and finally make the release tag in the meta data.
->
-> Any takers?
+Otherwise libtool and ld try to link against ${libdir}/libdl.so.2 on the
+host system.
 
-I would be able to help here with the release
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ recipes/libsdl/libsdl-x11_1.2.14.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
->
-> regards
-> Stefan Schmidt
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/libsdl/libsdl-x11_1.2.14.bb b/recipes/libsdl/libsdl-x11_1.2.14.bb
+index 4c84d99..37799c3 100644
+--- a/recipes/libsdl/libsdl-x11_1.2.14.bb
++++ b/recipes/libsdl/libsdl-x11_1.2.14.bb
+@@ -8,7 +8,7 @@ LICENSE = "LGPL"
+ DEPENDS = "alsa-lib virtual/libgl virtual/libx11 libxext tslib"
+ DEPENDS_avr32 = "alsa-lib virtual/libx11 libxext tslib"
+ PROVIDES = "virtual/libsdl"
+-PR = "r5"
++PR = "r6"
+ 
+ SRC_URI = " \
+   http://www.libsdl.org/release/SDL-${PV}.tar.gz \
+@@ -30,7 +30,7 @@ EXTRA_OECONF = " \
+   --disable-video-xbios --disable-video-gem --disable-video-dummy \
+   --enable-video-opengl --enable-input-events --enable-pthreads \
+   --disable-video-picogui --disable-video-qtopia --enable-dlopen \
+-  --enable-input-tslib --disable-video-ps3 \
++  --enable-input-tslib --disable-video-ps3 --disable-rpath \
+ "
+ 
+ do_configure() { 
+-- 
+1.7.0.4
+
 
 
