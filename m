@@ -1,40 +1,43 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PGXMf-0001he-Go
+	(envelope-from <luke.leighton@gmail.com>) id 1PGYRr-0000LL-DI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 14:38:59 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 3AD1C8F07D9
+	Thu, 11 Nov 2010 15:48:38 +0100
+Received: by qyk36 with SMTP id 36so1103062qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Nov 2010 08:37:59 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 22265-09 for <openembedded-devel@lists.openembedded.org>; 
-	Thu, 11 Nov 2010 08:37:59 -0500 (EST)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 1593037F101
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Nov 2010 08:37:59 -0500 (EST)
-Date: Thu, 11 Nov 2010 08:37:58 -0500 (EST)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1289459533.10621.4.camel@mattotaupa>
-Message-ID: <Pine.LNX.4.64.1011110837450.5082@juice.ott.cti.com>
-References: <1289414144-18181-1-git-send-email-msmith@cbnco.com>
-	<1289414144-18181-2-git-send-email-msmith@cbnco.com>
-	<1289459533.10621.4.camel@mattotaupa>
+	Thu, 11 Nov 2010 06:47:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=nWm1CSoVaLCulFkkjao5FDo28pGqAi96K92WSyNWhSY=;
+	b=gzvjItpbDFg/eXHw1EtxcIQmE/EDjG2Co4Gujy/Smd+ddtL9ohFga/GVBL8iap8ofD
+	wm96oTiFlZbWBFgytSBOnTFDo2estnZquq+CxeUfwsYrL8UGjpPGB3XXuHFLjZOf0Yg9
+	P0AdOgrn5lfSQDHblYE4DEzYq6Sj0pSkRPIJ4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	b=MaZd+gTZaja0y9grgrbhioa0d1Sa06AVzbUxC+PRAP1ThRfzQ5+3UlAU0mKsJdjHUE
+	cn6pP6/pbrI3mbh0wK4mMoFXDo96dofJL0x7ZJ+NdMVhu3DGBC+mrRn/Rbs5jumHCdjS
+	aXfNRa0hKN3uS04on0I6CnnmVoh9r6rxU1B98=
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+Received: by 10.224.174.12 with SMTP id r12mr979321qaz.109.1289486843278; Thu,
+	11 Nov 2010 06:47:23 -0800 (PST)
+Sender: luke.leighton@gmail.com
+Received: by 10.220.112.210 with HTTP; Thu, 11 Nov 2010 06:47:23 -0800 (PST)
+Date: Thu, 11 Nov 2010 14:47:23 +0000
+X-Google-Sender-Auth: H4Sp1JjA7Cfy9tdSkbWw3AaBgcg
+Message-ID: <AANLkTi=WuW6DmG2CyXqerMWcrDv5xyC-aKXfpaXqZhfZ@mail.gmail.com>
+From: Luke Kenneth Casson Leighton <lkcl@lkcl.net>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: luke.leighton@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] smpeg: configure with --disable-rpath
+Subject: [patch] removing bitbake install dependency on ezhhhhh_setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,20 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2010 13:38:59 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 11 Nov 2010 14:48:38 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, 11 Nov 2010, Paul Menzel wrote:
+it's pronounced "ezzzh" not "eee zee" and i have absolutely no respect
+for or time for ezhhh_setup.  please accept my apologies for wading in
+with a massive Big Stick here, and accept that rather than just
+complain i actually created a patch which removes the utterly
+pointless dependency:
 
-> > -SRC_URI = "svn://svn.icculus.org/smpeg/;module=trunk"
-> > +SRC_URI = "svn://svn.icculus.org/smpeg/;module=trunk \
-> > +	file://add-disable-rpath.patch;apply=yes"
-> 
-> Please remove the `apply=yes` since that is assumed implicitly if a file
-> has the extension `patch` [1].
+http://bugs.openembedded.org/show_bug.cgi?id=5482
 
-Thanks, fixed.
+there's no excuse and certainly no good reason for bitbake to use
+ezhh_setup.  to clarify what i put in the bugreport: i _literally_
+have bitbake installed from git under python2.6-minimal: that means
+there is not one single other package installed or utilised.  bitbake
+is quite rare in that it has absolutely no other dependencies other
+than python2.6 itself... so the question that really needs answering
+is: what the hell is bitbake using an absolutely pointless
+time-wasting download system that almost always interferes with
+distribution packaging?
 
-Mike
+l.
 
 
