@@ -1,33 +1,36 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1PGfAP-0002o9-U1
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 22:58:50 +0100
-Received: by qyk5 with SMTP id 5so1280730qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Nov 2010 13:57:49 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.224.202.3 with SMTP id fc3mr1510439qab.64.1289512669494; Thu,
-	11 Nov 2010 13:57:49 -0800 (PST)
-Sender: jay@jay-tech.ru
-Received: by 10.220.95.74 with HTTP; Thu, 11 Nov 2010 13:57:49 -0800 (PST)
-X-Originating-IP: [93.81.68.250]
-In-Reply-To: <AANLkTimzOfyN6wHgP5pZ7rbfWawN4ri7UHFSUH4cEoZ7@mail.gmail.com>
-References: <AANLkTimzOfyN6wHgP5pZ7rbfWawN4ri7UHFSUH4cEoZ7@mail.gmail.com>
-Date: Fri, 12 Nov 2010 00:57:49 +0300
-X-Google-Sender-Auth: 3LGPnbur7acYUgpnZ9im6LG5Y0M
-Message-ID: <AANLkTimgg7ryFQsid-uVmT=wA2UvJWTn2HkCkfFv-grU@mail.gmail.com>
-From: Yury Bushmelev <jay4mail@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PGfcd-0001ZY-AU for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Nov 2010 23:28:19 +0100
+Received: from f053038093.adsl.alicedsl.de ([78.53.38.93]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PGfbg-0002XI-OL for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Nov 2010 22:27:00 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+In-Reply-To: <1289060440.4901.134.camel@mattotaupa>
+References: <1288776534.3980.33.camel@mattotaupa>
+	<4CD1A210.5000007@telus.net> <1288999268.4113.51.camel@mattotaupa>
+	<20101106075118.GM15069@ibawizard.net>
+	<1289035885.4901.2.camel@mattotaupa>
+	<20101106103653.GO15069@ibawizard.net>
+	<1289060440.4901.134.camel@mattotaupa>
+Date: Thu, 11 Nov 2010 23:26:59 +0100
+Message-ID: <1289514419.16615.19.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: JFYI: OE build time disk usage chart
+Subject: [PATCH][RESENT] vlc_1.1.4.1: add `lua5.1-native` to `DEPENDS` and `lua5.1` to `RDEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,41 +44,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2010 21:58:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 11 Nov 2010 22:28:22 -0000
+X-Groupsio-MsgNum: 26076
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-a1yaTYm6XjduWu3ZuFTn"
 
-2010/11/11 Yury Bushmelev <jay4mail@gmail.com>:
-> I've collected some data about disk usage while doing last testing build.
-> Here you can see it: http://bit.ly/dnzIrq
-> Or long direct url:
-> https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=0
+--=-a1yaTYm6XjduWu3ZuFTn
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I've added 'Chart 2' sheet to this document.
-Direct link is
-https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=1
+Date: Sat, 6 Nov 2010 12:00:31 +0100
 
-> Data was collected from following build:
-> BB version: master
+Task `configure` failed with the following error.
 
-BB was changed to 1.10 to compare.
+        [=E2=80=A6]
+        checking for LUA... yes
+        checking for luac... no
+        configure: error: Could not find the LUA byte compiler.
+        ERROR: Function do_configure failed
 
-> OE version: testing_2010-10-29
-> rm_work: enabled
-> Parallelism: 3 BB threads + 3 make threads
+It turns out that `luac` is needed on the build system and therefore `lua5.=
+1-native` needs to be added to `DEPENDS`. Thanks to Petr =C5=A0tetiar for h=
+is advise on this issue [1].
 
-1 BB thread + 6 make threads
+With this patch applied I built this recipe successfully with the following=
+ build configuration.
 
-> Distro: angstrom-2008.1
-> Machines: efikamx (first peak), ben-nanonote (second peak)
+        Build Configuration:
+        BB_VERSION        =3D "1.10.0"
+        METADATA_BRANCH   =3D "org.openembedded.dev"
+        METADATA_REVISION =3D "28492a5"
+        TARGET_ARCH       =3D "arm"
+        TARGET_OS         =3D "linux-gnueabi"
+        MACHINE           =3D "beagleboard"
+        DISTRO            =3D "angstrom"
+        DISTRO_VERSION    =3D "2010.7-test-20101106"
+        TARGET_FPU        =3D "hard"
 
-Machines: collie, tosa+akita, efikamx, ben-nanonote
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November/0=
+26631.html
 
-> Images: console-image x11-image opie-image
-> Build type: clean, but with different TMPDIR's for every machine w/o
-> removing of TMPDIR after build.
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+This patch has the number 3506 in the patch queue [1].
 
+[1] http://patchwork.openembedded.org/patch/3506/
+---
+ recipes/vlc/vlc_1.1.4.1.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
--- 
-Yury Bushmelev
+diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
+index af01d98..df8f17c 100644
+--- a/recipes/vlc/vlc_1.1.4.1.bb
++++ b/recipes/vlc/vlc_1.1.4.1.bb
+@@ -10,7 +10,8 @@ SRC_URI[sha256sum] =3D "61c9ea30a17ea40c6ccbfd507026e5c83=
+ad9e0691f221d3667c8e49696
+=20
+ # ffmpeg from git (library version =3D> 52) is required
+ # libtool-native must be >=3D 2.2.4
+-DEPENDS +=3D "libdvdcss libdvdread lua5.1"
++DEPENDS +=3D "libdvdcss libdvdread lua5.1-native"
++RDEPENDS_${PN} +=3D "lua5.1"
+=20
+ EXTRA_OECONF +=3D "\
+        --enable-dvdread \
+--=20
+1.7.2.3
 
+--=-a1yaTYm6XjduWu3ZuFTn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzcbbMACgkQPX1aK2wOHVivwQCfaVY2obqhEf030Nh2hyLCAvOY
+5iQAn351wRtTaFIYQZXA+YHCdt9Kg1Ye
+=hmhF
+-----END PGP SIGNATURE-----
+
+--=-a1yaTYm6XjduWu3ZuFTn--
