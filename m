@@ -1,43 +1,33 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <luke.leighton@gmail.com>) id 1PGYRr-0000LL-DI
+	(envelope-from <jay@jay-tech.ru>) id 1PGfAP-0002o9-U1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 15:48:38 +0100
-Received: by qyk36 with SMTP id 36so1103062qyk.6
+	Thu, 11 Nov 2010 22:58:50 +0100
+Received: by qyk5 with SMTP id 5so1280730qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Nov 2010 06:47:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=nWm1CSoVaLCulFkkjao5FDo28pGqAi96K92WSyNWhSY=;
-	b=gzvjItpbDFg/eXHw1EtxcIQmE/EDjG2Co4Gujy/Smd+ddtL9ohFga/GVBL8iap8ofD
-	wm96oTiFlZbWBFgytSBOnTFDo2estnZquq+CxeUfwsYrL8UGjpPGB3XXuHFLjZOf0Yg9
-	P0AdOgrn5lfSQDHblYE4DEzYq6Sj0pSkRPIJ4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=MaZd+gTZaja0y9grgrbhioa0d1Sa06AVzbUxC+PRAP1ThRfzQ5+3UlAU0mKsJdjHUE
-	cn6pP6/pbrI3mbh0wK4mMoFXDo96dofJL0x7ZJ+NdMVhu3DGBC+mrRn/Rbs5jumHCdjS
-	aXfNRa0hKN3uS04on0I6CnnmVoh9r6rxU1B98=
+	Thu, 11 Nov 2010 13:57:49 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.224.174.12 with SMTP id r12mr979321qaz.109.1289486843278; Thu,
-	11 Nov 2010 06:47:23 -0800 (PST)
-Sender: luke.leighton@gmail.com
-Received: by 10.220.112.210 with HTTP; Thu, 11 Nov 2010 06:47:23 -0800 (PST)
-Date: Thu, 11 Nov 2010 14:47:23 +0000
-X-Google-Sender-Auth: H4Sp1JjA7Cfy9tdSkbWw3AaBgcg
-Message-ID: <AANLkTi=WuW6DmG2CyXqerMWcrDv5xyC-aKXfpaXqZhfZ@mail.gmail.com>
-From: Luke Kenneth Casson Leighton <lkcl@lkcl.net>
+Received: by 10.224.202.3 with SMTP id fc3mr1510439qab.64.1289512669494; Thu,
+	11 Nov 2010 13:57:49 -0800 (PST)
+Sender: jay@jay-tech.ru
+Received: by 10.220.95.74 with HTTP; Thu, 11 Nov 2010 13:57:49 -0800 (PST)
+X-Originating-IP: [93.81.68.250]
+In-Reply-To: <AANLkTimzOfyN6wHgP5pZ7rbfWawN4ri7UHFSUH4cEoZ7@mail.gmail.com>
+References: <AANLkTimzOfyN6wHgP5pZ7rbfWawN4ri7UHFSUH4cEoZ7@mail.gmail.com>
+Date: Fri, 12 Nov 2010 00:57:49 +0300
+X-Google-Sender-Auth: 3LGPnbur7acYUgpnZ9im6LG5Y0M
+Message-ID: <AANLkTimgg7ryFQsid-uVmT=wA2UvJWTn2HkCkfFv-grU@mail.gmail.com>
+From: Yury Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: luke.leighton@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: jay@jay-tech.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [patch] removing bitbake install dependency on ezhhhhh_setup
+Subject: Re: JFYI: OE build time disk usage chart
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,27 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2010 14:48:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Nov 2010 21:58:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-it's pronounced "ezzzh" not "eee zee" and i have absolutely no respect
-for or time for ezhhh_setup.  please accept my apologies for wading in
-with a massive Big Stick here, and accept that rather than just
-complain i actually created a patch which removes the utterly
-pointless dependency:
+2010/11/11 Yury Bushmelev <jay4mail@gmail.com>:
+> I've collected some data about disk usage while doing last testing build.
+> Here you can see it: http://bit.ly/dnzIrq
+> Or long direct url:
+> https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=0
 
-http://bugs.openembedded.org/show_bug.cgi?id=5482
+I've added 'Chart 2' sheet to this document.
+Direct link is
+https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=1
 
-there's no excuse and certainly no good reason for bitbake to use
-ezhh_setup.  to clarify what i put in the bugreport: i _literally_
-have bitbake installed from git under python2.6-minimal: that means
-there is not one single other package installed or utilised.  bitbake
-is quite rare in that it has absolutely no other dependencies other
-than python2.6 itself... so the question that really needs answering
-is: what the hell is bitbake using an absolutely pointless
-time-wasting download system that almost always interferes with
-distribution packaging?
+> Data was collected from following build:
+> BB version: master
 
-l.
+BB was changed to 1.10 to compare.
+
+> OE version: testing_2010-10-29
+> rm_work: enabled
+> Parallelism: 3 BB threads + 3 make threads
+
+1 BB thread + 6 make threads
+
+> Distro: angstrom-2008.1
+> Machines: efikamx (first peak), ben-nanonote (second peak)
+
+Machines: collie, tosa+akita, efikamx, ben-nanonote
+
+> Images: console-image x11-image opie-image
+> Build type: clean, but with different TMPDIR's for every machine w/o
+> removing of TMPDIR after build.
+
+
+-- 
+Yury Bushmelev
 
 
