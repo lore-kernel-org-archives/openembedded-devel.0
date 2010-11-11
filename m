@@ -1,32 +1,39 @@
-Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PGVIH-0002rp-Ng
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PGXMN-0001gz-RE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 12:26:18 +0100
-Received: from [192.168.178.20] (77-22-235-200-dynip.superkabel.de
-	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id E068B1B40D
+	Thu, 11 Nov 2010 14:38:40 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id DC1D08EF404
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Nov 2010 12:26:29 +0100 (CET)
-Message-ID: <4CDBD29F.9030907@sensortherm.de>
-Date: Thu, 11 Nov 2010 12:25:19 +0100
-From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Thu, 11 Nov 2010 08:37:40 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 22265-07 for <openembedded-devel@lists.openembedded.org>; 
+	Thu, 11 Nov 2010 08:37:40 -0500 (EST)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 76F4A8F092F; Thu, 11 Nov 2010 08:37:39 -0500 (EST)
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 06B56307928
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Nov 2010 08:37:38 -0500 (EST)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id C2B771411D91; Thu, 11 Nov 2010 08:37:36 -0500 (EST)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CD42BE7.8090109@sensortherm.de>
-	<4CD42DC7.7010008@crhc.illinois.edu>
-In-Reply-To: <4CD42DC7.7010008@crhc.illinois.edu>
-X-SA-Exim-Connect-IP: 188.40.84.136
-X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
+Date: Thu, 11 Nov 2010 08:37:34 -0500
+Message-Id: <1289482655-20086-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.7.0.4
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: dm355_codecs_03_10_00_00.tar.gz
+Subject: [PATCH 1/2] usbutils 0.70 & 0.73: don't set DEFAULT_PREFERENCE = "1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,132 +47,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2010 11:26:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Nov 2010 13:38:40 -0000
 
-Am 05.11.2010 17:16, schrieb Matt Johnson:
-> On 11/05/2010 11:08 AM, Klaus Schwarzkopf wrote:
->> Hi,
->>
->> i try to install the recipe ti-codecs-dm355_3.10.00.00.bb:
->>
->> MACHINE=dm355-leopard bitbake -b ti-codecs-dm355_3.10.00.00.bb
->>
->> I get the following error:
->>
->> klaus@ubuntu:~/development/oe$ MACHINE=dm355-leopard bitbake -b
->> ti-codecs-dm355_3.10.00.00.bb
->> NOTE: preferred version 1_13_000 of ti-codecs-dm355 not available (for
->> item ti-codecs-dm355)
->>
->> Build Configuration:
->> BB_VERSION = "1.8.18"
->> METADATA_BRANCH = "master"
->> METADATA_REVISION = "a33cf7368366d425c71369339e88a50d5660b7c0"
->> TARGET_ARCH = "arm"
->> TARGET_OS = "linux-gnueabi"
->> MACHINE = "dm355-leopard"
->> DISTRO = "angstrom"
->> DISTRO_VERSION = "2010.7-test-20101104"
->> TARGET_FPU = "soft"
->>
->> NOTE: Preparing runqueue
->> NOTE: Executing runqueue
->> NOTE: Running task 2 of 17 (ID: 8,
->> /home/klaus/development/oe/openembedded/recipes/ti/ti-codecs-dm355_3.10.00.00.bb,
->>
->>
->> do_fetch)
->> NOTE: fetch
->> ftp://gtftp01.gt.design.ti.com/arago/dm355_codecs_03_10_00_00.tar.gz
->> --2010-11-04 20:28:42--
->> ftp://gtftp01.gt.design.ti.com/arago/dm355_codecs_03_10_00_00.tar.gz
->> =>
->> `/home/klaus/development/oe/downloads/dm355_codecs_03_10_00_00.tar.gz'
->> Resolving gtftp01.gt.design.ti.com... failed: Name or service not known.
->> wget: unable to resolve host address `gtftp01.gt.design.ti.com'
->> NOTE: fetch
->> http://mirrors.openembedded.org//dm355_codecs_03_10_00_00.tar.gz
->> --2010-11-04 20:28:42--
->> http://mirrors.openembedded.org//dm355_codecs_03_10_00_00.tar.gz
->> Resolving mirrors.openembedded.org... 82.197.159.157
->> Connecting to mirrors.openembedded.org|82.197.159.157|:80... connected.
->> HTTP request sent, awaiting response... 404 Not Found
->> 2010-11-04 20:28:42 ERROR 404: Not Found.
->>
->> NOTE: fetch
->> http://sources.openembedded.org//dm355_codecs_03_10_00_00.tar.gz
->> --2010-11-04 20:28:43--
->> http://sources.openembedded.org//dm355_codecs_03_10_00_00.tar.gz
->> Resolving sources.openembedded.org... 140.211.169.165
->> Connecting to sources.openembedded.org|140.211.169.165|:80... connected.
->> HTTP request sent, awaiting response... 404 Not Found
->> 2010-11-04 20:28:43 ERROR 404: Not Found.
->>
->> NOTE: fetch
->> http://www.angstrom-distribution.org/unstable/sources/dm355_codecs_03_10_00_00.tar.gz
->>
->> --2010-11-04 20:28:43--
->> http://www.angstrom-distribution.org/unstable/sources/dm355_codecs_03_10_00_00.tar.gz
->>
->> Resolving www.angstrom-distribution.org... 188.40.83.200
->> Connecting to www.angstrom-distribution.org|188.40.83.200|:80...
->> connected.
->> HTTP request sent, awaiting response... 404 Not Found
->> 2010-11-04 20:28:43 ERROR 404: Not Found.
->>
->> NOTE: Task failed: Fetch failed:
->> ftp://gtftp01.gt.design.ti.com/arago/dm355_codecs_03_10_00_00.tar.gz;name=dm355codecsbin
->>
->> ERROR: TaskFailed event exception, aborting
->> ERROR: Build of
->> /home/klaus/development/oe/openembedded/recipes/ti/ti-codecs-dm355_3.10.00.00.bb
->>
->>
->> do_fetch failed
->> ERROR: Task 8
->> (/home/klaus/development/oe/openembedded/recipes/ti/ti-codecs-dm355_3.10.00.00.bb,
->>
->>
->> do_fetch) failed
->> NOTE: Tasks Summary: Attempted 1 tasks of which 1 didn't need to be
->> rerun and 1 failed.
->> ERROR:
->> '/home/klaus/development/oe/openembedded/recipes/ti/ti-codecs-dm355_3.10.00.00.bb'
->>
->>
->> failed
->> klaus@ubuntu:~/development/oe$
->>
->>
->>
->> Where is the file? Is the recipe to old?
->>
->> Thanks!
->>
->> Regards,
->> Klaus
->>
->>
->>
->>
-> Klaus,
-> ti-codecs is now at 3.10.00.02, but I think the larger issue is just one
-> of server-side directory reorganization since the recipe was updated.
-> That tarball is part of the DVSDK, which can be downloaded here
-> http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/dvsdk/DVSDK_3_10/latest/index_FDS.html
->
-> We should probably update the recipe at some point not to attempt to
-> fetch the tarball directly, unless someone else has it hosted separately.
-> -Matt
->
+I think it may be leftover from earlier.  Let 0.86 build by default.
+Most distros already prefer it.
 
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ recipes/usbutils/usbutils_0.70.bb |    1 -
+ recipes/usbutils/usbutils_0.73.bb |    1 -
+ 2 files changed, 0 insertions(+), 2 deletions(-)
 
-Have somebody the file dm355_codecs_03_10_00_00.tar.gz? I can host it.
-
-Klaus
-
+diff --git a/recipes/usbutils/usbutils_0.70.bb b/recipes/usbutils/usbutils_0.70.bb
+index 5ce15bd..d5b1933 100644
+--- a/recipes/usbutils/usbutils_0.70.bb
++++ b/recipes/usbutils/usbutils_0.70.bb
+@@ -3,7 +3,6 @@ SECTION = "base"
+ DEPENDS += "virtual/libusb0"
+ LICENSE = "GPLv2"
+ PRIORITY = "optional"
+-DEFAULT_PREFERENCE = "1"
+ 
+ PR = "r1"
+ 
+diff --git a/recipes/usbutils/usbutils_0.73.bb b/recipes/usbutils/usbutils_0.73.bb
+index 271e89f..e90263c 100644
+--- a/recipes/usbutils/usbutils_0.73.bb
++++ b/recipes/usbutils/usbutils_0.73.bb
+@@ -3,7 +3,6 @@ SECTION = "base"
+ DEPENDS += "virtual/libusb0"
+ LICENSE = "GPLv2"
+ PRIORITY = "optional"
+-DEFAULT_PREFERENCE = "1"
+ 
+ PR = "r0"
+ 
+-- 
+1.7.0.4
 
 
 
