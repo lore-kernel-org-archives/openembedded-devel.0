@@ -1,32 +1,39 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PGRLL-0007Su-VP for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 08:13:12 +0100
-Received: from f053038093.adsl.alicedsl.de ([78.53.38.93]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PGRKQ-0006RE-OZ for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 07:12:14 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <stefan@datenfreihafen.org>) id 1PGSEA-0001nj-Ez
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Nov 2010 09:09:50 +0100
+Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1PGSDD-0004iT-10 by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Nov 2010 09:08:53 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PGSDB-00069z-Nm
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Nov 2010 09:08:49 +0100
+Date: Thu, 11 Nov 2010 09:08:49 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1289414144-18181-2-git-send-email-msmith@cbnco.com>
-References: <1289414144-18181-1-git-send-email-msmith@cbnco.com>
-	<1289414144-18181-2-git-send-email-msmith@cbnco.com>
-Date: Thu, 11 Nov 2010 08:12:12 +0100
-Message-ID: <1289459533.10621.4.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-ID: <20101111080849.GB29405@excalibur.local>
+References: <20101110155011.GA29405@excalibur.local>
+	<AANLkTimJ42rjLHm0P=idDYS7FjB_3Z6z-YekN=8VRueK@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTimJ42rjLHm0P=idDYS7FjB_3Z6z-YekN=8VRueK@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] smpeg: configure with --disable-rpath
+Subject: Re: First release three weeks ahead. Tasks you can help with.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,83 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2010 07:13:12 -0000
-X-Groupsio-MsgNum: 26068
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-N9Wk5U+sIlHXq1Jo3hSP"
+X-List-Received-Date: Thu, 11 Nov 2010 08:09:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-N9Wk5U+sIlHXq1Jo3hSP
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hello.
 
-Am Mittwoch, den 10.11.2010, 13:35 -0500 schrieb Michael Smith:
-> Otherwise libtool and ld try to link against ${libdir}/libdl.so.2 on the
-> host system.
->=20
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> ---
->  .../smpeg-0.4.5+svnr387/add-disable-rpath.patch    |   47 ++++++++++++++=
-++++++
->  recipes/smpeg/smpeg_svn.bb                         |    6 ++-
->  2 files changed, 51 insertions(+), 2 deletions(-)
->  create mode 100644 recipes/smpeg/smpeg-0.4.5+svnr387/add-disable-rpath.p=
-atch
+On Wed, 2010-11-10 at 08:30, Khem Raj wrote:
+> On Wed, Nov 10, 2010 at 7:50 AM, Stefan Schmidt <stefan@datenfreihafen.org> wrote:
+> >
+> > Anyone willing to take the release mainatainer hat for this release? My time is
+> > rather occupied with other things the next weeks. :/
+> > It would be only for this release. Afterwards we can discuss if this should be a
+> > fixed position or newly assigned for any release. Such a person should keep the
+> > people motivated to fix some bugs, monitor the commit log for potential problems
+> > and discuss them and finally make the release tag in the meta data.
+> >
+> > Any takers?
+> 
+> I would be able to help here with the release
 
-[=E2=80=A6]
+Great! Thanks for taking this.
 
-> -SRC_URI =3D "svn://svn.icculus.org/smpeg/;module=3Dtrunk"
-> +SRC_URI =3D "svn://svn.icculus.org/smpeg/;module=3Dtrunk \
-> +	file://add-disable-rpath.patch;apply=3Dyes"
-
-Please remove the `apply=3Dyes` since that is assumed implicitly if a file
-has the extension `patch` [1].
-
-        commit 6fe7cef27069415f2eba36bc640cf59013d4979b
-        Author: Chris Larson <chris_larson@mentor.com>
-        Date:   Mon May 24 13:01:00 2010 -0700
-       =20
-            Make the do_patch apply=3Dyes param implicit if extension is .d=
-iff/.patch
-           =20
-            For .diff/.patch you need to apply manually, you can specify ap=
-ply=3Dno.
-           =20
-            Signed-off-by: Chris Larson <chris_larson@mentor.com>
-            Acked-by: Denys Dmytriyenko <denis@denix.org>
-            Acked-by: Khem Raj <raj.khem@gmail.com>
-=20
->  S =3D "${WORKDIR}/trunk"
-> =20
->  inherit autotools binconfig
-> =20
->  EXTRA_OECONF =3D "--disable-gtktest --disable-opengl-player --without-x =
-\
-> -		--without-gtk --disable-gtk-player"
-> +		--without-gtk --disable-gtk-player --disable-rpath"
-> =20
->  do_configure_prepend () {
->  	touch NEWS AUTHORS ChangeLog
+regards
+Stefan Schmidt
 
 
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D6fe7cef=
-27069415f2eba36bc640cf59013d4979b
-
---=-N9Wk5U+sIlHXq1Jo3hSP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzbl0YACgkQPX1aK2wOHVhmpgCfY1jzMNUccQLGGKKzOgaZ0jnL
-gykAmwXP30mRO9cImk9LbOgxIowtmfFU
-=xZdl
------END PGP SIGNATURE-----
-
---=-N9Wk5U+sIlHXq1Jo3hSP--
