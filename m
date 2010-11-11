@@ -1,31 +1,32 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1PGKwr-0001Rk-Qq
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 01:24:11 +0100
-Received: by qyk5 with SMTP id 5so152928qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Nov 2010 16:21:53 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.229.85.140 with SMTP id o12mr155015qcl.129.1289434912772; Wed,
-	10 Nov 2010 16:21:52 -0800 (PST)
-Sender: jay@jay-tech.ru
-Received: by 10.220.95.74 with HTTP; Wed, 10 Nov 2010 16:21:52 -0800 (PST)
-X-Originating-IP: [93.81.68.23]
-Date: Thu, 11 Nov 2010 03:21:52 +0300
-X-Google-Sender-Auth: kMD-oc00eRSR-Y55Okwb8BrZHwM
-Message-ID: <AANLkTimzOfyN6wHgP5pZ7rbfWawN4ri7UHFSUH4cEoZ7@mail.gmail.com>
-From: Yury Bushmelev <jay4mail@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PGRLL-0007Su-VP for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Nov 2010 08:13:12 +0100
+Received: from f053038093.adsl.alicedsl.de ([78.53.38.93]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PGRKQ-0006RE-OZ for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Nov 2010 07:12:14 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+In-Reply-To: <1289414144-18181-2-git-send-email-msmith@cbnco.com>
+References: <1289414144-18181-1-git-send-email-msmith@cbnco.com>
+	<1289414144-18181-2-git-send-email-msmith@cbnco.com>
+Date: Thu, 11 Nov 2010 08:12:12 +0100
+Message-ID: <1289459533.10621.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: JFYI: OE build time disk usage chart
+Subject: Re: [PATCH 2/2] smpeg: configure with --disable-rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,47 +40,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2010 00:24:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 11 Nov 2010 07:13:12 -0000
+X-Groupsio-MsgNum: 26068
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-N9Wk5U+sIlHXq1Jo3hSP"
 
-I've collected some data about disk usage while doing last testing build.
-Here you can see it: http://bit.ly/dnzIrq
-Or long direct url:
-https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=0
+--=-N9Wk5U+sIlHXq1Jo3hSP
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Google Spreadsheet chart loading will take some time so be patient :)
+Am Mittwoch, den 10.11.2010, 13:35 -0500 schrieb Michael Smith:
+> Otherwise libtool and ld try to link against ${libdir}/libdl.so.2 on the
+> host system.
+>=20
+> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> ---
+>  .../smpeg-0.4.5+svnr387/add-disable-rpath.patch    |   47 ++++++++++++++=
+++++++
+>  recipes/smpeg/smpeg_svn.bb                         |    6 ++-
+>  2 files changed, 51 insertions(+), 2 deletions(-)
+>  create mode 100644 recipes/smpeg/smpeg-0.4.5+svnr387/add-disable-rpath.p=
+atch
 
-Columns A,B contains full measured data. Columns C,D are selection
-from A,B (every 10th record) to reduce chart drawing time. Resulting
-view is almost the same as with full data. Disk usage values are
-'real' Mb (/1024).
+[=E2=80=A6]
 
-Data was collected from following build:
-BB version: master
-OE version: testing_2010-10-29
-rm_work: enabled
-Parallelism: 3 BB threads + 3 make threads
-Distro: angstrom-2008.1
-Machines: efikamx (first peak), ben-nanonote (second peak)
-Images: console-image x11-image opie-image
-Build type: clean, but with different TMPDIR's for every machine w/o
-removing of TMPDIR after build.
+> -SRC_URI =3D "svn://svn.icculus.org/smpeg/;module=3Dtrunk"
+> +SRC_URI =3D "svn://svn.icculus.org/smpeg/;module=3Dtrunk \
+> +	file://add-disable-rpath.patch;apply=3Dyes"
 
-All sources was downloaded before and will not affect disk usage data.
-Disk usage was measured by storing value of 'Available' column of 'df
--Pk $TMPDIR' every 10 seconds. Both TMPDIRs are on same partition.
-There is no other processes who can write to this partition.
-After collecting data I've found minimal disk usage value and
-substract if from all values. Note that ben-nanonote values include
-size of efikamx TMPDIR after build.
+Please remove the `apply=3Dyes` since that is assumed implicitly if a file
+has the extension `patch` [1].
 
-You can see here following things:
-1) peak disk usage is about 23Gb
-2) rm_work is working (right after peak), but, imho, is starting a bit late :)
+        commit 6fe7cef27069415f2eba36bc640cf59013d4979b
+        Author: Chris Larson <chris_larson@mentor.com>
+        Date:   Mon May 24 13:01:00 2010 -0700
+       =20
+            Make the do_patch apply=3Dyes param implicit if extension is .d=
+iff/.patch
+           =20
+            For .diff/.patch you need to apply manually, you can specify ap=
+ply=3Dno.
+           =20
+            Signed-off-by: Chris Larson <chris_larson@mentor.com>
+            Acked-by: Denys Dmytriyenko <denis@denix.org>
+            Acked-by: Khem Raj <raj.khem@gmail.com>
+=20
+>  S =3D "${WORKDIR}/trunk"
+> =20
+>  inherit autotools binconfig
+> =20
+>  EXTRA_OECONF =3D "--disable-gtktest --disable-opengl-player --without-x =
+\
+> -		--without-gtk --disable-gtk-player"
+> +		--without-gtk --disable-gtk-player --disable-rpath"
+> =20
+>  do_configure_prepend () {
+>  	touch NEWS AUTHORS ChangeLog
 
-Any comments/suggestions/requests here? :)
 
--- 
-Yury Bushmelev
+Thanks,
+
+Paul
 
 
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D6fe7cef=
+27069415f2eba36bc640cf59013d4979b
+
+--=-N9Wk5U+sIlHXq1Jo3hSP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzbl0YACgkQPX1aK2wOHVhmpgCfY1jzMNUccQLGGKKzOgaZ0jnL
+gykAmwXP30mRO9cImk9LbOgxIowtmfFU
+=xZdl
+-----END PGP SIGNATURE-----
+
+--=-N9Wk5U+sIlHXq1Jo3hSP--
