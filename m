@@ -1,39 +1,31 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.jrz.cbn>) id 1PGKMa-0000FR-F9
+	(envelope-from <jay@jay-tech.ru>) id 1PGKwr-0001Rk-Qq
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 00:46:01 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 1476B8EFC36
+	Thu, 11 Nov 2010 01:24:11 +0100
+Received: by qyk5 with SMTP id 5so152928qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Nov 2010 15:06:36 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 22916-01 for <openembedded-devel@lists.openembedded.org>; 
-	Wed, 10 Nov 2010 15:06:36 -0500 (EST)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id DEB238EFB84; Wed, 10 Nov 2010 15:06:35 -0500 (EST)
-Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 375B96B9030
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Nov 2010 15:06:33 -0500 (EST)
-Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
-	id 1FC4314119D9; Wed, 10 Nov 2010 15:06:33 -0500 (EST)
-From: Michael Smith <msmith@cbnco.com>
+	Wed, 10 Nov 2010 16:21:53 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.229.85.140 with SMTP id o12mr155015qcl.129.1289434912772; Wed,
+	10 Nov 2010 16:21:52 -0800 (PST)
+Sender: jay@jay-tech.ru
+Received: by 10.220.95.74 with HTTP; Wed, 10 Nov 2010 16:21:52 -0800 (PST)
+X-Originating-IP: [93.81.68.23]
+Date: Thu, 11 Nov 2010 03:21:52 +0300
+X-Google-Sender-Auth: kMD-oc00eRSR-Y55Okwb8BrZHwM
+Message-ID: <AANLkTimzOfyN6wHgP5pZ7rbfWawN4ri7UHFSUH4cEoZ7@mail.gmail.com>
+From: Yury Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Nov 2010 15:06:31 -0500
-Message-Id: <1289419592-23604-1-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.7.0.4
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: michael@sles10-64.jrz.cbn
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: jay@jay-tech.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
-	SPF_HELO_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2] xf86-input-mutouch: add latest git release
+Subject: JFYI: OE build time disk usage chart
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,34 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Nov 2010 23:46:01 -0000
+X-List-Received-Date: Thu, 11 Nov 2010 00:24:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Fixes build with XINPUT ABI 7.
+I've collected some data about disk usage while doing last testing build.
+Here you can see it: http://bit.ly/dnzIrq
+Or long direct url:
+https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=0
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/xorg-driver/xf86-input-mutouch_git.bb |   10 ++++++++++
- 1 files changed, 10 insertions(+), 0 deletions(-)
- create mode 100644 recipes/xorg-driver/xf86-input-mutouch_git.bb
+Google Spreadsheet chart loading will take some time so be patient :)
 
-diff --git a/recipes/xorg-driver/xf86-input-mutouch_git.bb b/recipes/xorg-driver/xf86-input-mutouch_git.bb
-new file mode 100644
-index 0000000..f72b03c
---- /dev/null
-+++ b/recipes/xorg-driver/xf86-input-mutouch_git.bb
-@@ -0,0 +1,10 @@
-+require xorg-driver-input.inc
-+DESCRIPTION = "X.Org X server -- muTouch input driver"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+SRCREV = "db04a5333b545a0442b995bae47d2c5527a7459e"
-+PV = "1.2.1+gitr${SRCREV}"
-+
-+SRC_URI = "git://anongit.freedesktop.org/xorg/driver/xf86-input-mutouch;protocol=git"
-+
-+S = "${WORKDIR}/git"
+Columns A,B contains full measured data. Columns C,D are selection
+from A,B (every 10th record) to reduce chart drawing time. Resulting
+view is almost the same as with full data. Disk usage values are
+'real' Mb (/1024).
+
+Data was collected from following build:
+BB version: master
+OE version: testing_2010-10-29
+rm_work: enabled
+Parallelism: 3 BB threads + 3 make threads
+Distro: angstrom-2008.1
+Machines: efikamx (first peak), ben-nanonote (second peak)
+Images: console-image x11-image opie-image
+Build type: clean, but with different TMPDIR's for every machine w/o
+removing of TMPDIR after build.
+
+All sources was downloaded before and will not affect disk usage data.
+Disk usage was measured by storing value of 'Available' column of 'df
+-Pk $TMPDIR' every 10 seconds. Both TMPDIRs are on same partition.
+There is no other processes who can write to this partition.
+After collecting data I've found minimal disk usage value and
+substract if from all values. Note that ben-nanonote values include
+size of efikamx TMPDIR after build.
+
+You can see here following things:
+1) peak disk usage is about 23Gb
+2) rm_work is working (right after peak), but, imho, is starting a bit late :)
+
+Any comments/suggestions/requests here? :)
+
 -- 
-1.7.0.4
-
+Yury Bushmelev
 
 
