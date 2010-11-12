@@ -1,46 +1,44 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <angelox.123@gmail.com>) id 1PGhSO-0003zW-37
+	(envelope-from <cliff.brake@gmail.com>) id 1PGm0C-000619-62
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 01:25:32 +0100
-Received: by ywo32 with SMTP id 32so225299ywo.6
+	Fri, 12 Nov 2010 06:16:51 +0100
+Received: by wyi11 with SMTP id 11so2020505wyi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Nov 2010 16:24:31 -0800 (PST)
+	Thu, 11 Nov 2010 21:15:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=tbwUi2QHFZtP/tuDVZGIAyeWHTynJp/3r3r+5DIwGSY=;
-	b=wsQD2ijUZdXHtmRt2adb0r2YX6APAc+9493Y15tKtGFohsc1mbjPvnSFd3BzgSOxBc
-	jEeV2k5F8SF6cIBpIGOJ1JQytLazkBxBtyKWTRNKaJwNqSVqCXgi1rv6tOAIpdRUDHd3
-	knJwTbmcXGmhspZzuM/w1vxSlnbDPlwCiF4A8=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=qTIMn+w+fDWszBfDO5/yQjffRMMMJcMGetSIc9UJYFE=;
+	b=Wk3cedXoqtOe455+9abIBId0DiYF6QaIvz4RBkfF2N5KJu6+yEerGc9A1GgZmnWDUk
+	+DOlWDdNJUuN9LBe+M+eiqNPx7vrGTl2BankgUlcEAi89kA4rupc2Qf+SE6xNmB38G0x
+	edQysvDpnlccXTavZ1uUEaS7UVDxYJ1fJAR6c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=LEBIiAzD/Z6i9mIH4mwOxcpJ4kX8kIs9E3iscW4QTDsvsEtkAVYyItYTBoyQVP83hV
-	UzczRRGLyPO9AYEB1zncrj4EnhevWOp/Lpl8wmcB5cxhO3R0XpBm+foUGdmrUOaQmhXM
-	9UsFHKLDVxwkJApG/WaTvpVnVY/zMSM5oznJc=
-Received: by 10.150.49.10 with SMTP id w10mr2703233ybw.173.1289521471521;
-	Thu, 11 Nov 2010 16:24:31 -0800 (PST)
-Received: from localhost.localdomain (201-43-68-82.dsl.telesp.net.br
-	[201.43.68.82])
-	by mx.google.com with ESMTPS id q8sm291545ybk.12.2010.11.11.16.24.29
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 11 Nov 2010 16:24:31 -0800 (PST)
-From: angelox_123 <angelox.123@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Ua4huoo9Oy41oszXdufpkpAfx+K49Be3ZOLKyClMxOE1cn9iLIQMECTFI19Xdi6J3v
+	oVIKD9OZW1tzs+A9IR3m8vyBEna0PonFnjg+gDRT+UTVIx7so8T/m2iiG8USepjU0k+X
+	Az3EjRiWpAQukZLuVtXhflAjZgd+FIpLow6Tc=
+MIME-Version: 1.0
+Received: by 10.216.162.70 with SMTP id x48mr3218345wek.4.1289538943044; Thu,
+	11 Nov 2010 21:15:43 -0800 (PST)
+Received: by 10.216.235.214 with HTTP; Thu, 11 Nov 2010 21:15:43 -0800 (PST)
+In-Reply-To: <4CD803E8.8080805@lambsys.com>
+References: <4CD803E8.8080805@lambsys.com>
+Date: Fri, 12 Nov 2010 00:15:43 -0500
+Message-ID: <AANLkTik_7o3inJSsA279HkdkJj+y9Wk7dq3p72ffTVak@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Nov 2010 22:24:20 -0200
-Message-Id: <1289521460-13782-1-git-send-email-angelox.123@gmail.com>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <angelox.123@gmail.com>
-References: <angelox.123@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: angelox.123@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] metano.conf - Added on image file name the IMAGE_BASENAME
+Subject: Re: Stable branch/tag?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,45 +52,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2010 00:25:32 -0000
+X-List-Received-Date: Fri, 12 Nov 2010 05:16:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
- * Added IMAGE_BASENAME on Metano Distro configuration file on IMAGE_NAME
- * This will help we to identify the names of our images :)
- * By: angelox_123 (from IRC #metano_linux),developer and mainteiner of Metano Distro
+Hi Dave,
 
-Signed-off-by: angelox_123 <angelox.123@gmail.com>
----
- conf/distro/metano.conf |    5 +----
- 1 files changed, 1 insertions(+), 4 deletions(-)
+Probably the easiest thing to do is browse the tags at:
+http://cgit.openembedded.org/cgit.cgi/openembedded/
 
-diff --git a/conf/distro/metano.conf b/conf/distro/metano.conf
-index 9bab8d9..ae29e7d 100644
---- a/conf/distro/metano.conf
-+++ b/conf/distro/metano.conf
-@@ -56,7 +56,7 @@ IPKG_VARIANT = "opkg"
- #############################################################################
- # IMAGES CONFIGURATION
- #############################################################################
--IMAGE_NAME = "Metano_Linux-PD.Edition-${DISTRO_VERSION}-${MACHINE}"
-+IMAGE_NAME = "Metano_Linux-PD.Edition-${IMAGE_BASENAME}-${DISTRO_VERSION}-${MACHINE}"
- 
- CACHE = "${TMPDIR}/cache/${LIBC}/${MACHINE}"
- DEPLOY_DIR ?= "${TMPDIR}/deploy/${LIBC}"
-@@ -119,12 +119,9 @@ DISTRO_EXTRA_RRECOMMENDS += " \
-     kernel-module-ext2 \
-     kernel-module-ext3 \
-     kernel-module-af-packet \
--    mplayer \
-     alsa-lib \
-     alsa-utils \
-     nano \
--    gpe-filemanager \
--    gpe-mini-browser \
-     ${XSERVER} \
-     avahi-daemon \
-     avahi-autoipd \
--- 
-1.7.2.3
+and find a tag that has a tested combination closest to what you want
+to do.  Our testing process is described here:
 
+http://wiki.openembedded.net/index.php/Testing
+
+I'll try to get the Getting Started documentation updated at some point.
+
+Thanks,
+Cliff
+
+On Mon, Nov 8, 2010 at 9:06 AM, David Lambert <dave@lambsys.com> wrote:
+> I am new to git and openembedded so please excuse another couple of naive
+> questions.
+>
+>
+> 1) What is a recommended stable branch/tag, and what command(s) are neede=
+d
+> to obtain this?
+> 2) Is there a document somwhere that explains the relevance of the use of
+> branches and tags in this project?
+>
+> Thanks in advance for help,
+>
+> Dave.
+>
+> Listing git tags shows:
+>
+> git tag -l
+>
+> SlugOS5.3-beta
+> mv-packages-to-recipes-post
+> mv-packages-to-recipes-pre
+> pre-nov2009-core-updates
+> shr/testing2009-1rc1
+> tested_2010-10-14
+> tested_2010-10-25
+> tested_2010-10-29
+> testing_2010-08-23
+> testing_2010-08-30
+> testing_2010-09-07
+> testing_2010-09-13
+> testing_2010-09-20
+> testing_2010-09-27
+> testing_2010-10-08
+>
+>
+> and git branch -a
+> * master
+> =A0remotes/origin/HEAD -> origin/master
+> =A0remotes/origin/bluelightning/opie-git
+> =A0remotes/origin/cbrake/qt-4.7.0
+> =A0remotes/origin/darwin
+> =A0remotes/origin/fso/milestone5
+> =A0remotes/origin/fso/milestone5.5
+> =A0remotes/origin/holger/hash-style
+> =A0remotes/origin/holger/openmoko-merges
+> =A0remotes/origin/holger/qt4-4.7
+> =A0remotes/origin/holger/qt4-sdk
+> =A0remotes/origin/holger/random-fixes
+> =A0remotes/origin/holger/staging-branch
+> =A0remotes/origin/ieee80215
+> =A0remotes/origin/jan/master
+> =A0remotes/origin/john_lee/fastboot-devel
+> =A0remotes/origin/john_lee/openmoko-toolchain
+> =A0remotes/origin/kergoth/alternatives
+> =A0remotes/origin/kergoth/autotools
+> =A0remotes/origin/kergoth/bluez
+> =A0remotes/origin/kergoth/hostap-madwifi
+> =A0remotes/origin/kergoth/master
+> =A0remotes/origin/khem/import-linaro-gcc-4.5
+> =A0remotes/origin/koen/darwin-host-fixes
+> =A0remotes/origin/koen/static-libs-rework
+> =A0remotes/origin/laibsch/scim
+> =A0remotes/origin/laibsch/wip
+> =A0remotes/origin/likewise/nios2
+> =A0remotes/origin/master
+> =A0remotes/origin/morphis/for-upstream
+> =A0remotes/origin/nios2
+> =A0remotes/origin/org.openembedded.angstrom-2007.12-stable
+> =A0remotes/origin/org.openembedded.dev
+> =A0remotes/origin/org.openembedded.documentation
+> =A0remotes/origin/org.openembedded.dreambox
+> =A0remotes/origin/org.openembedded.dreambox.release_25
+> =A0remotes/origin/org.openembedded.oetest
+> =A0remotes/origin/org.openembedded.oz354fam083
+> =A0remotes/origin/org.openembedded.oz354x
+> =A0remotes/origin/org.openembedded.packaged-staging
+> =A0remotes/origin/org.openembedded.slugos.5.3-beta
+> =A0remotes/origin/org.openembedded.stable
+> =A0remotes/origin/pb/toolchain-desuck
+> =A0remotes/origin/push/oe
+> =A0remotes/origin/raster
+> =A0remotes/origin/rik/amd64
+> =A0remotes/origin/rik/qemu-0.12
+> =A0remotes/origin/robertschuster/amd64-target
+> =A0remotes/origin/rpurdie/for-testing
+> =A0remotes/origin/rpurdie/work-in-progress
+> =A0remotes/origin/shared/blackfin
+> =A0remotes/origin/shared/xorg-7.4-update
+> =A0remotes/origin/shr/import
+> =A0remotes/origin/shr/merge
+> =A0remotes/origin/shr/stable2009
+> =A0remotes/origin/shr/testing2009
+> =A0remotes/origin/shr/testing2010
+> =A0remotes/origin/shr/unstable
+> =A0remotes/origin/stable/2009
+> =A0remotes/origin/stefan/eten-support
+> =A0remotes/origin/testing
+> =A0remotes/origin/testing-next
+> =A0remotes/origin/thesing/arm4-eabi-angstrom
+> =A0remotes/origin/ulf/linux-2.6.30
+> =A0remotes/origin/ulf/linux-2.6.30-2010-10-16
+> =A0remotes/origin/ulf/linux-2.6.30-20100317
+> =A0remotes/origin/ulf/linux-2.6.30-20100930
+> =A0remotes/origin/ulf/linux-2.6.30-at91sam9g45_m10
+> =A0remotes/origin/ulf/linux-2.6.30.2
+> =A0remotes/origin/woglinde/gettext
+> =A0remotes/origin/xora/angstrom-sqeeezy
+> =A0remotes/origin/xora/angstrom-srcpv
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
 
 
