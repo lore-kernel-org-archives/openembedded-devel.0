@@ -1,32 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PGq7H-0001Sg-P2 for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 10:40:49 +0100
-Received: from f053037250.adsl.alicedsl.de ([78.53.37.250]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PGq6L-00061j-46 for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 09:39:21 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <jaap.dejong@nedap.com>) id 1PGrmX-0002Pp-Mc
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Nov 2010 12:27:33 +0100
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Fri, 12 Nov 2010 12:25:57 +0100
+X-TM-IMSS-Message-ID: <1b3a8f5100009520@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 1b3a8f5100009520 for
+	<jaap.dejong@nedap.com>; Fri, 12 Nov 2010 12:26:00 +0100
+Message-ID: <4CDD2445.5050506@nedap.com>
+Date: Fri, 12 Nov 2010 12:25:57 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1289521460-13782-1-git-send-email-angelox.123@gmail.com>
-References: <angelox.123@gmail.com>
-	<1289521460-13782-1-git-send-email-angelox.123@gmail.com>
-Date: Fri, 12 Nov 2010 10:39:19 +0100
-Message-ID: <1289554759.4282.19.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-OriginalArrivalTime: 12 Nov 2010 11:25:57.0547 (UTC)
+	FILETIME=[605C87B0:01CB825C]
+X-SA-Exim-Connect-IP: 213.160.213.92
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] metano.conf - Added on image file name the IMAGE_BASENAME
+Subject: alignment errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,107 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2010 09:40:49 -0000
-X-Groupsio-MsgNum: 26083
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-mNIBQJp7fx+Tap9ML1CJ"
+X-List-Received-Date: Fri, 12 Nov 2010 11:27:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-mNIBQJp7fx+Tap9ML1CJ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-According to the commit policy [1] a colon goes after the changed file.
+I'm working on a recipe for ptpd2.
+When I run it on my armv5te I get traps:
 
-        [PATCH] metano.conf: add IMAGE_BASENAME to IMAGE_NAME
+[ 5034.410000] Alignment trap: ptpd2 (523) PC=0x0000e7cc 
+Instr=0xe5870004 Address=0x0001d459 FSR 0x801
 
-Am Donnerstag, den 11.11.2010, 22:24 -0200 schrieb angelox_123:
+What is the best way to tackle this?
+Do I have to add "__attribute__ ((packed))" on critical places?
 
-Sorry for nitpicking the commit message. Since you are going to send
-further patches, I think it is beneficial since you can consider these
-rules in the future. The commit messages of Git are normally very well
-written and can serve as an example [2]. Also beware that I am no native
-speaker either so my remarks could be wrong.
-
->  * Added IMAGE_BASENAME on Metano Distro configuration file on IMAGE_NAME
-
-Add IMAGE_BASENAME to IMAGE_NAME in Metano=E2=80=99s configuration file.
-
-(Use present tense in the commit message.)
-
->  * This will help we to identify the names of our images :)
-
-s/we/me/
-
->  * By: angelox_123 (from IRC #metano_linux),developer and mainteiner of M=
-etano Distro
-
-maint*a*iner
-
-> Signed-off-by: angelox_123 <angelox.123@gmail.com>
-
-Since non of your patches have been pushed yet (?), is it on purpose you
-are using your IRC nick name in the SOB line? I would prefer your real
-name but it is no requirement as far as I know. For the statistics you
-should decide what you are going to use and stick to it.
-
-> ---
->  conf/distro/metano.conf |    5 +----
->  1 files changed, 1 insertions(+), 4 deletions(-)
->=20
-> diff --git a/conf/distro/metano.conf b/conf/distro/metano.conf
-> index 9bab8d9..ae29e7d 100644
-> --- a/conf/distro/metano.conf
-> +++ b/conf/distro/metano.conf
-> @@ -56,7 +56,7 @@ IPKG_VARIANT =3D "opkg"
->  ########################################################################=
-#####
->  # IMAGES CONFIGURATION
->  ########################################################################=
-#####
-> -IMAGE_NAME =3D "Metano_Linux-PD.Edition-${DISTRO_VERSION}-${MACHINE}"
-> +IMAGE_NAME =3D "Metano_Linux-PD.Edition-${IMAGE_BASENAME}-${DISTRO_VERSI=
-ON}-${MACHINE}"
-> =20
->  CACHE =3D "${TMPDIR}/cache/${LIBC}/${MACHINE}"
->  DEPLOY_DIR ?=3D "${TMPDIR}/deploy/${LIBC}"
-> @@ -119,12 +119,9 @@ DISTRO_EXTRA_RRECOMMENDS +=3D " \
->      kernel-module-ext2 \
->      kernel-module-ext3 \
->      kernel-module-af-packet \
-> -    mplayer \
->      alsa-lib \
->      alsa-utils \
->      nano \
-> -    gpe-filemanager \
-> -    gpe-mini-browser \
->      ${XSERVER} \
->      avahi-daemon \
->      avahi-autoipd \
-
-The removal of these programs are not mentioned in the commit message
-and should be in a separate patch. You can use `git rebase -i HEAD~4`
-and `git add --patch` to split this up.
+Thanks!
 
 
-Thanks,
 
-Paul
-
-
-[1] http://wiki.openembedded.org/index.php/Commit_Policy
-[2] http://git.kernel.org/?p=3Dgit/git.git;a=3Dlog
-
---=-mNIBQJp7fx+Tap9ML1CJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEUEABECAAYFAkzdC0cACgkQPX1aK2wOHVivfgCYj6GFZiGpcHOwedlJPMoJCZzk
-fwCfeAlBPDXyV8ey8j+aj5L96A0u+gA=
-=wPBS
------END PGP SIGNATURE-----
-
---=-mNIBQJp7fx+Tap9ML1CJ--
