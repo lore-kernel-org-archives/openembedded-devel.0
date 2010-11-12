@@ -1,39 +1,43 @@
-Received: from usps2.crhc.illinois.edu ([130.126.143.231]
-	helo=usps.crhc.uiuc.edu) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <johnso87@crhc.illinois.edu>) id 1PH2KH-0003Qb-Om
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1PH2Lk-0006gT-9c
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 23:42:42 +0100
-Received: from usps.crhc.uiuc.edu (localhost [127.0.0.1])
-	by usps.crhc.uiuc.edu (Postfix) with ESMTP id 73231340009F
+	Fri, 12 Nov 2010 23:44:09 +0100
+Received: by ywo32 with SMTP id 32so828119ywo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 16:41:34 -0600 (CST)
-Received: from [192.168.1.198] (unknown [63.252.64.254])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: johnso87)
-	by usps.crhc.uiuc.edu (Postfix) with ESMTPSA id 39635340008F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 16:41:33 -0600 (CST)
-Message-ID: <4CDDC29D.3050106@crhc.illinois.edu>
-Date: Fri, 12 Nov 2010 16:41:33 -0600
-From: Matt Johnson <johnso87@crhc.illinois.edu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
+	Fri, 12 Nov 2010 14:43:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=lW0vFSrNyi+w/gB4U9IdSTEzorhhLtBfJhFxQdDDxSs=;
+	b=DWaBzytfW+JJQuds1AwVKnM49KjsDOpWAU9csnXs0el4UQkvVMmPTUF22YT3NDv84M
+	tG+/gNfhCiU+QIParANPTvUF2J5DsLRwU2KOQiIxumtG1VGQY5XUqYdoO3SXRzR+6AUC
+	MaFCTqyYL+CntdC+ipaeoR42dc2QkwcNrFX3Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=XAMxKaNAkljlQT0d/JHAgRklgh6Jsba2ISA70o1hz6hfijt6dXLMdw6KvEJb67Eeo9
+	DHzH4oUh2bBjOdPcI5gHkJKr+0uXotQBdZsIFPzYxkeLBIz6hs2wM6a/rCd3VmCb+UJ/
+	MTRJxlc0Y4xUEQl3S1SIVr2pLhir50jqZEjd8=
+Received: by 10.91.51.19 with SMTP id d19mr3906947agk.183.1289601782591; Fri,
+	12 Nov 2010 14:43:02 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.120.8 with HTTP; Fri, 12 Nov 2010 14:42:42 -0800 (PST)
+In-Reply-To: <1289596030-8386-1-git-send-email-harvey.tim@gmail.com>
+References: <1289596030-8386-1-git-send-email-harvey.tim@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 12 Nov 2010 14:42:42 -0800
+Message-ID: <AANLkTik=qbfXy9XPtTEW8mK_08-DFsiKRQ8b1-wry0mD@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CDDB992.7000603@crhc.illinois.edu>
-	<AANLkTikdSDT0+JSSgSEeHrWFC3n6Km0GMuX2umS3OgNu@mail.gmail.com>
-In-Reply-To: <AANLkTikdSDT0+JSSgSEeHrWFC3n6Km0GMuX2umS3OgNu@mail.gmail.com>
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 130.126.143.231
-X-SA-Exim-Mail-From: johnso87@crhc.illinois.edu
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_BL_SPAMCOP_NET,WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: gcc-4.5 r166342 PCHFLAGS problem
+Subject: Re: [PATCH] nuttcp: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,79 +51,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2010 22:42:42 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Nov 2010 22:44:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
+> --- /dev/null
+> +++ b/recipes/nuttcp/nuttcp_7.1.3.bb
+> @@ -0,0 +1,26 @@
+> +DESCRIPTION = "TCP/UDP network testing tool, much like iperf"
+> +HOMEPAGE = "http://www.wcisd.hpc.mil/nuttcp/Nuttcp-HOWTO.html"
+> +SECTION = "console/network"
+> +LICENSE = "GPL"
+> +
 
+same thing as last patch regarding license.
 
-On 11/12/2010 04:31 PM, Khem Raj wrote:
-> On Fri, Nov 12, 2010 at 2:02 PM, Matt Johnson
-> <johnso87@crhc.illinois.edu>  wrote:
->    
->> Hi All,
->>     I built gcc-cross from x86_64 host to armv7a target using gcc 4.5
->> r166342.  I then tried to bitbake gcc (an armv7a-host, armv7a-target native
->> compiler) with the same revision and got build errors on libstdc++:
->>
->>      
-> hmmm I dont see these issues here. I am using latest gcc in OE and
-> minimal distro with libtool 2.4 which is same like angstrom-2010
-> I wonder if there are some header files extra somewhere on your host
-> system that are interfering libstdc++ configure.
-> what OS do u run on the build machine.
->
-> -Khem
->
->    
-Kubuntu 10.04, with gcc 4.4.3:
-
-gcc -v
-Using built-in specs.
-Target: x86_64-linux-gnu
-Configured with: ../src/configure -v --with-pkgversion='Ubuntu 
-4.4.3-4ubuntu5' --with-bugurl=file:///usr/share/doc/gcc-4.4/README.Bugs 
---enable-languages=c,c++,fortran,objc,obj-c++ --prefix=/usr 
---enable-shared --enable-multiarch --enable-linker-build-id 
---with-system-zlib --libexecdir=/usr/lib --without-included-gettext 
---enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.4 
---program-suffix=-4.4 --enable-nls --enable-clocale=gnu 
---enable-libstdcxx-debug --enable-plugin --enable-objc-gc 
---disable-werror --with-arch-32=i486 --with-tune=generic 
---enable-checking=release --build=x86_64-linux-gnu 
---host=x86_64-linux-gnu --target=x86_64-linux-gnu
-Thread model: posix
-gcc version 4.4.3 (Ubuntu 4.4.3-4ubuntu5)
-
-My log.do_configure is here: http://pastebin.com/9ZPUB4KJ .  The error 
-at the top is slightly concerning:
-
-   1.
-      configure.ac:32: error: Please use exactly Autoconf 2.64 instead
-      of 2.65.
-   2.
-      config/override.m4:34: _GCC_AUTOCONF_VERSION_CHECK is expanded from...
-   3.
-      configure.ac:32: the top level
-   4.
-      autom4te:
-      /media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/sysroots/x86_64-linux/usr/bin/m4
-      failed with exit status: 1
-
-But I'm not sure if that's the issue.
--Matt
-
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->    
-
--- 
-Matt Johnson
-Graduate Student
-University of Illinois at Urbana-Champaign, Dept. of ECE
-Coordinated Science Lab, Rm. 213
+-Khem
 
 
