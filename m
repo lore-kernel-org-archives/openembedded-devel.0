@@ -1,49 +1,44 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <anarsoul@gmail.com>) id 1PGyHl-0003dm-Ne
+	(envelope-from <harvey.tim@gmail.com>) id 1PH0nq-0007nu-Cd
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 19:23:42 +0100
-Received: by ewy24 with SMTP id 24so1750860ewy.6
+	Fri, 12 Nov 2010 22:05:03 +0100
+Received: by pxi17 with SMTP id 17so690070pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 10:22:39 -0800 (PST)
+	Fri, 12 Nov 2010 13:03:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:cc:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=8sYYuVTPNfcHr1Z8LH5/5lG5SQBKh1ZuYiQfWJmRnic=;
-	b=kkHurwDqpmjq26D8WZuqagEnxipsTVECpjGX3jUWr/bHJ/i3J7kLCWWVpOeha2kUxJ
-	6dN8cLyRcFRkuTMkjTgkcCvW9T4zMohTrEoYujpfateqIiBpsiQVopVNU6EbB5sMf3PQ
-	84dwW0jSH3hpNnIsRIpFOxa70Li2nYe390nfg=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=ae6GT3NwEqUWTx92Tkige+f+/Oh1/rVjLu6cLXIEmFw=;
+	b=rXwfwKcD4/RmtRdsrRDB0G5n+3foWEwR/3ZwQqyA+4qQudIHPJisJFSzANuZ32I0MN
+	BK2LRumQfl64NO+woP55ZayRZlv1XorGWhGS9XtTztKPObAayRhT4BBUZ7emQo1ELv1G
+	ZMlJBMbgBuOISeWAvd12gQFpJy7jQi1sfKo0Q=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:cc:references:in-reply-to
-	:mime-version:content-type:content-transfer-encoding:message-id;
-	b=Aeg6XHTZYBTA+8d2zXMJLXBxROEvh5EnlDM82vo868BaZLi5XylGv+eeglc5hnnpan
-	B9Jh93Mi/+AlK4F2Z52jynuElsiMlv3ligquviwBVPeY+6AFs6kyf0vS+SL1fjSQt40k
-	xSGEH9qNCxn8bpaz8Px/TGT33pAfnLUBHTsQw=
-Received: by 10.14.47.66 with SMTP id s42mr1725725eeb.45.1289586159564;
-	Fri, 12 Nov 2010 10:22:39 -0800 (PST)
-Received: from anarsoul-laptop.localnet ([80.249.83.145])
-	by mx.google.com with ESMTPS id x54sm3464884eeh.5.2010.11.12.10.22.37
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Ymhc+OhPAf/S7akW0uRJMR43+NMF//HYwAqn3ztv2P8Yp8vV1YXvCZYY5Ks7Qcf8MP
+	nhBUGSOcqPkJuBBTUvLdjXEPNRxZpG3Ggffxr6qdnB90SqGnnXGOAnv/FTsnZTTUOz7M
+	J7kXhF9GK+LSWz0nFd4dBBn2q2MVURWIQgn9U=
+Received: by 10.142.187.20 with SMTP id k20mr1950470wff.409.1289595835942;
+	Fri, 12 Nov 2010 13:03:55 -0800 (PST)
+Received: from localhost.localdomain
+	(adsl-76-205-222-173.dsl.snlo01.sbcglobal.net [76.205.222.173])
+	by mx.google.com with ESMTPS id x35sm4364266wfd.1.2010.11.12.13.03.54
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 12 Nov 2010 10:22:38 -0800 (PST)
-From: Vasily Khoruzhick <anarsoul@gmail.com>
+	Fri, 12 Nov 2010 13:03:55 -0800 (PST)
+From: Tim Harvey <harvey.tim@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Nov 2010 20:21:55 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.36-gentoo-anarsoul; KDE/4.5.3; i686; ; )
-References: <AANLkTikm572dcjPRTvF7nGnuVY3uuPryRRGbyyDBS+eg@mail.gmail.com>
-In-Reply-To: <AANLkTikm572dcjPRTvF7nGnuVY3uuPryRRGbyyDBS+eg@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201011122021.56362.anarsoul@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: anarsoul@gmail.com
+Date: Fri, 12 Nov 2010 13:03:29 -0800
+Message-Id: <1289595809-8087-1-git-send-email-harvey.tim@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: harvey.tim@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Luke Kenneth Casson Leighton <lkcl@lkcl.net>
-Subject: Re: multiple virtual/gail on reviving gtk+-directfb
+Subject: [PATCH] iftop: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,24 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2010 18:23:42 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Nov 2010 21:05:03 -0000
 
-On Friday 12 November 2010 20:05:19 Luke Kenneth Casson Leighton wrote:
-> [hi please cc me direct because i am subscribed with nomail, thx]
-> 
-> folks, hi,
-> 
-> i have a requirement to bring gtk+-directfb up-to-date [and also do
-> python-pygtk-directfb, which is gonna be interesting on a 400mhz
-> ARM9... :) have to see how that goes...]
+Signed-off-by: Tim Harvey <harvey.tim@gmail.com>
+---
+ recipes/iftop/iftop_0.17.bb |   11 +++++++++++
+ 1 files changed, 11 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/iftop/iftop_0.17.bb
 
-Are you aware that gtk directfb backend is broken since 2.18.0? And that gtk 
-developers will drop it in gtk3?
+diff --git a/recipes/iftop/iftop_0.17.bb b/recipes/iftop/iftop_0.17.bb
+new file mode 100644
+index 0000000..2cfa441
+--- /dev/null
++++ b/recipes/iftop/iftop_0.17.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "Network usage monitor"
++HOMEPAGE = "http://www.ex-parrot.com/pdw/iftop/"
++SECTION = "console/network"
++LICENSE = "GPLV2"
++DEPENDS = "libpcap ncurses"
++
++SRC_URI = "http://www.ex-parrot.com/pdw/iftop/download/iftop-${PV}.tar.gz"
++SRC_URI[md5sum] = "062bc8fb3856580319857326e0b8752d"
++SRC_URI[sha256sum] = "d032547c708307159ff5fd0df23ebd3cfa7799c31536fa0aea1820318a8e0eac"
++
++inherit autotools
+-- 
+1.7.0.4
 
-Regards
-Vasily
 
 
