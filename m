@@ -1,36 +1,48 @@
-Received: from usps2.crhc.illinois.edu ([130.126.143.231]
-	helo=usps.crhc.uiuc.edu) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <johnso87@crhc.illinois.edu>) id 1PH1ix-0001WS-5Z
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <luke.leighton@gmail.com>) id 1PH1w3-0001ok-G6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 23:04:04 +0100
-Received: from usps.crhc.uiuc.edu (localhost [127.0.0.1])
-	by usps.crhc.uiuc.edu (Postfix) with ESMTP id 23037340009F
+	Fri, 12 Nov 2010 23:17:36 +0100
+Received: by qyk2 with SMTP id 2so54621qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 16:02:59 -0600 (CST)
-Received: from [192.168.1.198] (unknown [63.252.64.254])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: johnso87)
-	by usps.crhc.uiuc.edu (Postfix) with ESMTPSA id E8926340008F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 16:02:58 -0600 (CST)
-Message-ID: <4CDDB992.7000603@crhc.illinois.edu>
-Date: Fri, 12 Nov 2010 16:02:58 -0600
-From: Matt Johnson <johnso87@crhc.illinois.edu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
+	Fri, 12 Nov 2010 14:16:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:cc:content-type;
+	bh=69J/hmjukJO90gL2/sKpWSqbNGrBAA9v1LY6RdWr50c=;
+	b=KO0W8pEmyMFGlz11n72ZUTVh0o0n0hJiqrzbyUN3xnOnz/Blx9pR8W7lUO3Nvj8hDK
+	pzN2iVNSV1/HzFU6egFLi852OzUtjBrAgJDqdqJ96+MvH7K07AstLurVLQRUkTeChCpH
+	/hyd9HJqexsiZRP42bYrAFp3+rVscAbq4Hz54=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	b=E385WxABkMcrcSk6R+zRbmADhXqky+qMWGfnTVMES+xFNS3U2yY/WKh9mBrFfcfs4k
+	uKSE7CJFVC4f2uUKgjT3EA/ETIE8X63sewdEzU8/OmY7gezcXVxTFghj0usoqi4QwgXC
+	L5LWhx2nA6LzeLfnuTcgik/An57MpNeXDahOE=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 130.126.143.231
-X-SA-Exim-Mail-From: johnso87@crhc.illinois.edu
+Received: by 10.229.224.212 with SMTP id ip20mr2321347qcb.278.1289600184489;
+	Fri, 12 Nov 2010 14:16:24 -0800 (PST)
+Sender: luke.leighton@gmail.com
+Received: by 10.220.112.210 with HTTP; Fri, 12 Nov 2010 14:16:24 -0800 (PST)
+In-Reply-To: <201011122021.56362.anarsoul@gmail.com>
+References: <AANLkTikm572dcjPRTvF7nGnuVY3uuPryRRGbyyDBS+eg@mail.gmail.com>
+	<201011122021.56362.anarsoul@gmail.com>
+Date: Fri, 12 Nov 2010 22:16:24 +0000
+X-Google-Sender-Auth: mbjjvLymw1e8vJaEmW6pvsH2xT0
+Message-ID: <AANLkTinOvOx+pB50Oy0vpo4vO8bpKqNmNROBTGOx6uhP@mail.gmail.com>
+From: Luke Kenneth Casson Leighton <lkcl@lkcl.net>
+To: Vasily Khoruzhick <anarsoul@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: luke.leighton@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_BL_SPAMCOP_NET autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: gcc-4.5 r166342 PCHFLAGS problem
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: multiple virtual/gail on reviving gtk+-directfb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,114 +56,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2010 22:04:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Nov 2010 22:17:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi All,
-     I built gcc-cross from x86_64 host to armv7a target using gcc 4.5 
-r166342.  I then tried to bitbake gcc (an armv7a-host, armv7a-target 
-native compiler) with the same revision and got build errors on libstdc++:
+On Fri, Nov 12, 2010 at 6:21 PM, Vasily Khoruzhick <anarsoul@gmail.com> wrote:
+> On Friday 12 November 2010 20:05:19 Luke Kenneth Casson Leighton wrote:
+>> [hi please cc me direct because i am subscribed with nomail, thx]
+>>
+>> folks, hi,
+>>
+>> i have a requirement to bring gtk+-directfb up-to-date [and also do
+>> python-pygtk-directfb, which is gonna be interesting on a 400mhz
+>> ARM9... :) have to see how that goes...]
+>
+> Are you aware that gtk directfb backend is broken since 2.18.0?
 
-make[3]: Entering directory 
-`/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3'
-Making all in include
-make[4]: Entering directory 
-`/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include'
-mkdir -p ./arm-angstrom-linux-gnueabi/bits/stdc++.h.gch
-libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=armv7-a 
--mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork 
--mno-thumb 
---sysroot=/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/sysroots/armv7a-angstrom-linux-gnueabi 
--c -I. 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc 
--g -Os -W -Wall -Wwrite-strings -Wstrict-prototypes -DIN_GCC 
--DIN_TARGET_LIBS -fno-strict-aliasing -fexceptions 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/objc 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/../gcc 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/../gcc/config 
--I../.././gcc 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/../include 
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/archive.c  
--fPIC -DPIC -o .libs/archive.o
-arm-angstrom-linux-gnueabi-g++ -march=armv7-a -mtune=cortex-a8 
--mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb  
---sysroot=/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/sysroots/armv7a-angstrom-linux-gnueabi   
--x c++-header -g -Os 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/arm-angstrom-linux-gnueabi 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libstdc++-v3/libsupc++ 
--O2 -g -std=gnu++0x 
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libstdc++-v3/include/precompiled/stdc++.h 
-\
-         -o arm-angstrom-linux-gnueabi/bits/stdc++.h.gch/O2ggnu++0x.gch
-libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=armv7-a 
--mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork 
--mno-thumb 
---sysroot=/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/sysroots/armv7a-angstrom-linux-gnueabi 
--c -I. 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc 
--g -Os -W -Wall -Wwrite-strings -Wstrict-prototypes -DIN_GCC 
--DIN_TARGET_LIBS -fno-strict-aliasing -fexceptions 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/objc 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/../gcc 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/../gcc/config 
--I../.././gcc 
--I/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/../include 
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libobjc/archive.c 
--o archive.o >/dev/null 2>&1
-In file included from 
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/fenv.h:50:0,
-                  from 
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/cfenv:44,
-                  from 
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/libstdc++-v3/include/precompiled/stdc++.h:54:
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:49:11: 
-error: '::fenv_t' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:50:11: 
-error: '::fexcept_t' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:53:11: 
-error: '::feclearexcept' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:54:11: 
-error: '::fegetexceptflag' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:55:11: 
-error: '::feraiseexcept' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:56:11: 
-error: '::fesetexceptflag' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:57:11: 
-error: '::fetestexcept' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:59:11: 
-error: '::fegetround' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:60:11: 
-error: '::fesetround' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:62:11: 
-error: '::fegetenv' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:63:11: 
-error: '::feholdexcept' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:64:11: 
-error: '::fesetenv' has not been declared
-/media/d2/beagleboard/oebb/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gcc-4.5-r19.1+svnr166342/gcc-4.5/build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/tr1_impl/cfenv:65:11: 
-error: '::feupdateenv' has not been declared
+ ah?  no.  bugger.  i'll drop back to 2.16 or so, then ( it doesn't
+make any odds one way or the other which version is used ).
 
-The issue has been discussed here: 
-http://gcc.gnu.org/bugzilla/show_bug.cgi?id=40974
+> And that gtk
+> developers will drop it in gtk3?
 
-I tried the suggested fix by adding -nostdinc++ to PCHFLAGS in 
-libstdc++-v3/include/Makefile.am, but this appears not to propagate to 
-build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/Makefile, 
-for OE reasons I don't understand.  I tried "bitbake gcc -c compile" 
-once, got it to fail, changed 
-build.arm-angstrom-linux-gnueabi.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libstdc++-v3/include/Makefile 
-directly, then reran "bitbake gcc -c compile", and it worked.
+yes.  this is an "emergency" interim solution, to get product
+"out-the-door".  i've already recommended that they move to
+qt4-embedded, but that can't happen immediately: i _have_ to get gtk +
+directfb up-and-running, for the demo.  and webkit.  and python-cairo.
+ and pywebkit-gtk with patches from
+http://www.gnu.org/software/pythonwebkit.  and pyjamas desktop.  lots
+of packaging to do, lots of new OE bitbake files :)
 
-Perhaps someone wiser than I can turn this into a patch that works.
-Best,
-Matt
+apparently, i've learned almost all of the embedded products in the
+space that i'm doing the work for use directfb, so many of them use
+gtk and directfb.  what they _don't_ ****** well do is actually pay
+any free software developers any ****** money for making use of gtk
+and directfb.  so, it didn't come as any particularly great surprise
+to me to learn that directfb is being dropped for gtk3.
 
--- 
-Matt Johnson
-Graduate Student
-University of Illinois at Urbana-Champaign, Dept. of ECE
-Coordinated Science Lab, Rm. 213
+ which means, simply, that use of gtk will be entirely dropped from
+the embedded market...  eventually :)
+
+ ... so, yeah, right now, i need to get that conflict to disappear!
+
+ l.
 
 
