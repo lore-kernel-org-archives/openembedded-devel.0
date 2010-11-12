@@ -1,40 +1,32 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1PGm2G-0006uE-Nu
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 06:18:58 +0100
-Received: by wwd20 with SMTP id 20so974239wwd.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Nov 2010 21:17:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=jTQPrvieHxpaETEcN574xd2amXcyqqU0VZ515G7qv80=;
-	b=S2coRLJzV/C3Q8Qhyle6htBWrZdRwXifR+ZK6p3e9yBuvLJDz7X7cVjdRmEi6kSDnd
-	SqyitfXTF6WTrmlSE/c/zgeAkARl9GkZSb5ZSRLWxl9ck+EFhYzp5tXV3x8pRjO4hQOC
-	4Ws4H6s5llcSESLWj1WTUDnqfSCsRDi8qXzOY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Dm3BLYzbljYUIpCK/4w3a56lX2zgZlYZKM6UzBdDLLWoh1zLvlDPo9F5mjPNOzEKpJ
-	rwljpSAtxF6RNKLASPR1ukDb/BH0kZt17pOvVzrfrsfsBWY5tKaMmkxDD25sgthOZ2Q9
-	YKV/AeD95zso4DWyfGwsamy5bPe7o+qP7rpTA=
-MIME-Version: 1.0
-Received: by 10.216.78.204 with SMTP id g54mr3211320wee.34.1289539071715; Thu,
-	11 Nov 2010 21:17:51 -0800 (PST)
-Received: by 10.216.235.214 with HTTP; Thu, 11 Nov 2010 21:17:51 -0800 (PST)
-Date: Fri, 12 Nov 2010 00:17:51 -0500
-Message-ID: <AANLkTin8E_sSKJcCW7_gtx85_Uo6SvwHFTdiUA8XZ2tv@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PGpsS-000433-5L for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Nov 2010 10:25:04 +0100
+Received: from f053037250.adsl.alicedsl.de ([78.53.37.250]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PGprS-0005e6-0H for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Nov 2010 09:23:58 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1289521207.13598.0.camel@pynell.ftp>
+References: <mailman.365.1289521145.23290.openembedded-devel@lists.openembedded.org>
+	<1289521207.13598.0.camel@pynell.ftp>
+Date: Fri, 12 Nov 2010 10:23:56 +0100
+Message-ID: <1289553836.4282.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: testing branch 2010-11-12
+Subject: OT: replying to list digests (was: Openembedded-devel Digest, Vol 52, Issue 69)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,22 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2010 05:18:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 12 Nov 2010 09:25:04 -0000
+X-Groupsio-MsgNum: 26082
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-OG2ecuPMymW7UMf2DAcP"
 
-testing-next is ready for clean builds.  Not many builds succeeded
-last week--I suspect people have been busy:
+--=-OG2ecuPMymW7UMf2DAcP
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-11-04
+Am Donnerstag, den 11.11.2010, 22:20 -0200 schrieb Angelo S. Mavridis Barto=
+lome:
+[=E2=80=A6]
 
-An overview of the testing process:
-http://wiki.openembedded.net/index.php/Testing
+If you are reading the digest, please change the subject line when
+responding to the one of the thread you are responding to as noted in
+the digest message too. This way it is easier to overview the inbox or
+the archive. It is bad enough that threading gets broken by replies to
+digests.
+
 
 Thanks,
-Cliff
 
--- 
-=================
-http://bec-systems.com
+Paul
 
+--=-OG2ecuPMymW7UMf2DAcP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzdB6YACgkQPX1aK2wOHVi0xQCghFwM+ZPN3fR6NtXQs2A5cUl8
+1sgAmwbqcyPn3B2lH61wXPXMA3LPu3HJ
+=5A3j
+-----END PGP SIGNATURE-----
+
+--=-OG2ecuPMymW7UMf2DAcP--
