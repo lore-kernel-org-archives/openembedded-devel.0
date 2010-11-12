@@ -1,36 +1,46 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PGfcd-0001ZY-AU for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 23:28:19 +0100
-Received: from f053038093.adsl.alicedsl.de ([78.53.38.93]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PGfbg-0002XI-OL for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Nov 2010 22:27:00 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <angelox.123@gmail.com>) id 1PGhM8-0003ik-DM
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Nov 2010 01:19:05 +0100
+Received: by gyf3 with SMTP id 3so1644278gyf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Nov 2010 16:18:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=+OhKdTGlFTF5hNuFfgEoA6ideC+KheKsa/9yoAf0B8A=;
+	b=xDyHZ9ewTpNP24qEABSbE31CY0oVXTgqwAaDUmbmwCBKXTPYxX3SEV6ul++b+8ku53
+	79sOXukvjJ5Xti/jfP100mBmsTnITM53ZhO9z/J0uXl/7si4VVlgOOtLaGiU0Vv43Sb5
+	SaQ/FEMLoQ1iUgQBbc+QQm2sXge1chKdZ4Gp8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=jbggLwuPb6UWrwRc1ePIRFUtmf6muF11a/mobfX5WiEHa0kvR3AuQu6RKDSUMAgLg1
+	Wld7/tfxz0duYRDmncpr4ydTnPUYI50IgDp5RC2EnrDzf5sy47jfNvyksdFQkvzKva/n
+	feTot0zDeK+1kO/n0ciW/21Uv4jnNfGBiEEwY=
+Received: by 10.151.147.17 with SMTP id z17mr2933683ybn.79.1289521083547;
+	Thu, 11 Nov 2010 16:18:03 -0800 (PST)
+Received: from localhost.localdomain (201-43-68-82.dsl.telesp.net.br
+	[201.43.68.82])
+	by mx.google.com with ESMTPS id v39sm286622yba.19.2010.11.11.16.18.01
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 11 Nov 2010 16:18:02 -0800 (PST)
+From: angelox_123 <angelox.123@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1289060440.4901.134.camel@mattotaupa>
-References: <1288776534.3980.33.camel@mattotaupa>
-	<4CD1A210.5000007@telus.net> <1288999268.4113.51.camel@mattotaupa>
-	<20101106075118.GM15069@ibawizard.net>
-	<1289035885.4901.2.camel@mattotaupa>
-	<20101106103653.GO15069@ibawizard.net>
-	<1289060440.4901.134.camel@mattotaupa>
-Date: Thu, 11 Nov 2010 23:26:59 +0100
-Message-ID: <1289514419.16615.19.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Thu, 11 Nov 2010 22:17:54 -0200
+Message-Id: <1289521075-13563-1-git-send-email-angelox.123@gmail.com>
+X-Mailer: git-send-email 1.7.2.3
+In-Reply-To: <angelox.123@gmail.com>
+References: <angelox.123@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: angelox.123@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=0.7 required=5.0 tests=BAYES_00, FS_WILL_HELP,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH][RESENT] vlc_1.1.4.1: add `lua5.1-native` to `DEPENDS` and `lua5.1` to `RDEPENDS`
+Subject: [PATCH] metano.conf - Added on image file name the IMAGE_BASENAME * Added IMAGE_BASENAME on Metano Distro configuration file on IMAGE_NAME * This will help we to identify the names of our images :) * By: angelox_123 (from IRC #metano_linux), developer and mainteiner of Metano Distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,84 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2010 22:28:22 -0000
-X-Groupsio-MsgNum: 26076
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-a1yaTYm6XjduWu3ZuFTn"
+X-List-Received-Date: Fri, 12 Nov 2010 00:19:05 -0000
 
---=-a1yaTYm6XjduWu3ZuFTn
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Date: Sat, 6 Nov 2010 12:00:31 +0100
-
-Task `configure` failed with the following error.
-
-        [=E2=80=A6]
-        checking for LUA... yes
-        checking for luac... no
-        configure: error: Could not find the LUA byte compiler.
-        ERROR: Function do_configure failed
-
-It turns out that `luac` is needed on the build system and therefore `lua5.=
-1-native` needs to be added to `DEPENDS`. Thanks to Petr =C5=A0tetiar for h=
-is advise on this issue [1].
-
-With this patch applied I built this recipe successfully with the following=
- build configuration.
-
-        Build Configuration:
-        BB_VERSION        =3D "1.10.0"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "28492a5"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-gnueabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "angstrom"
-        DISTRO_VERSION    =3D "2010.7-test-20101106"
-        TARGET_FPU        =3D "hard"
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November/0=
-26631.html
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Signed-off-by: angelox_123 <angelox.123@gmail.com>
 ---
-This patch has the number 3506 in the patch queue [1].
+ conf/distro/metano.conf |    5 +----
+ 1 files changed, 1 insertions(+), 4 deletions(-)
 
-[1] http://patchwork.openembedded.org/patch/3506/
----
- recipes/vlc/vlc_1.1.4.1.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/vlc/vlc_1.1.4.1.bb b/recipes/vlc/vlc_1.1.4.1.bb
-index af01d98..df8f17c 100644
---- a/recipes/vlc/vlc_1.1.4.1.bb
-+++ b/recipes/vlc/vlc_1.1.4.1.bb
-@@ -10,7 +10,8 @@ SRC_URI[sha256sum] =3D "61c9ea30a17ea40c6ccbfd507026e5c83=
-ad9e0691f221d3667c8e49696
-=20
- # ffmpeg from git (library version =3D> 52) is required
- # libtool-native must be >=3D 2.2.4
--DEPENDS +=3D "libdvdcss libdvdread lua5.1"
-+DEPENDS +=3D "libdvdcss libdvdread lua5.1-native"
-+RDEPENDS_${PN} +=3D "lua5.1"
-=20
- EXTRA_OECONF +=3D "\
-        --enable-dvdread \
---=20
+diff --git a/conf/distro/metano.conf b/conf/distro/metano.conf
+index 9bab8d9..ae29e7d 100644
+--- a/conf/distro/metano.conf
++++ b/conf/distro/metano.conf
+@@ -56,7 +56,7 @@ IPKG_VARIANT = "opkg"
+ #############################################################################
+ # IMAGES CONFIGURATION
+ #############################################################################
+-IMAGE_NAME = "Metano_Linux-PD.Edition-${DISTRO_VERSION}-${MACHINE}"
++IMAGE_NAME = "Metano_Linux-PD.Edition-${IMAGE_BASENAME}-${DISTRO_VERSION}-${MACHINE}"
+ 
+ CACHE = "${TMPDIR}/cache/${LIBC}/${MACHINE}"
+ DEPLOY_DIR ?= "${TMPDIR}/deploy/${LIBC}"
+@@ -119,12 +119,9 @@ DISTRO_EXTRA_RRECOMMENDS += " \
+     kernel-module-ext2 \
+     kernel-module-ext3 \
+     kernel-module-af-packet \
+-    mplayer \
+     alsa-lib \
+     alsa-utils \
+     nano \
+-    gpe-filemanager \
+-    gpe-mini-browser \
+     ${XSERVER} \
+     avahi-daemon \
+     avahi-autoipd \
+-- 
 1.7.2.3
 
---=-a1yaTYm6XjduWu3ZuFTn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkzcbbMACgkQPX1aK2wOHVivwQCfaVY2obqhEf030Nh2hyLCAvOY
-5iQAn351wRtTaFIYQZXA+YHCdt9Kg1Ye
-=hmhF
------END PGP SIGNATURE-----
-
---=-a1yaTYm6XjduWu3ZuFTn--
