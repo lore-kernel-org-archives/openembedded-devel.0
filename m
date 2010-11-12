@@ -1,44 +1,44 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <harvey.tim@gmail.com>) id 1PGxE7-0002lp-Kl
+	(envelope-from <raj.khem@gmail.com>) id 1PGxM7-0002vM-34
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 18:15:56 +0100
-Received: by gxk2 with SMTP id 2so880700gxk.6
+	Fri, 12 Nov 2010 18:24:12 +0100
+Received: by yxd5 with SMTP id 5so11904yxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 09:14:50 -0800 (PST)
+	Fri, 12 Nov 2010 09:23:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=jF02lYvQdoD7qM3v6Qrw9NXuW+1+KcrJNBT8akLlDtw=;
-	b=sUkInkEvfSk/pLEuvqxgsc1xL4lsmPjkkFWCEFpRzDHhGOjQtNmbzApxxTuTmGhOtB
-	MF+I16IGqiKMrq5HeVhz/lxxyAUQoqyPNDgGxWxLGHEc/M8X8Bg9aSQik9mndG+nD3TW
-	fM+mEVmjFoP/PzY2pt7fDwmdC+HSEZQGjdUj8=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=3UVEmcfgvGZAqLmJ8IEvszylaMkRWOjnOPpq+NURnms=;
+	b=Iar0Sl8H7GUMgvJd9iq6jUFHjaJy647zofHEKQyOodNa7u2xpmfGxgzl12hLE2Rj0A
+	fr6MxzqMzKP+zoItxUSfLm/KR1uyu+uVMxDt6M+mirBvTFT1PoCNvVTfCai5GcYRTO2g
+	ed+z2JfLaW+7tiKxRSzOegb1yDkQqmPBs2VYs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=iJB6yWnY71P5dp8tB34Jt7v4AHwj7mwv8e/X69jvsaW5JYH8MZ06gKL72zwcrufLiL
-	ujHnIAMQRaQD5jFJIp/9nTxijdmznZ1oNcZSO8egnYxD3h/amD82nSmaVbj08EmphS2z
-	mDscLeuM9BpECTOp+pFvjQ5ccxfNLJ9kABc+o=
-Received: by 10.42.217.129 with SMTP id hm1mr2787642icb.43.1289582084065;
-	Fri, 12 Nov 2010 09:14:44 -0800 (PST)
-Received: from localhost.localdomain
-	(adsl-76-205-222-173.dsl.snlo01.sbcglobal.net [76.205.222.173])
-	by mx.google.com with ESMTPS id i16sm3848928ibl.12.2010.11.12.09.14.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 12 Nov 2010 09:14:42 -0800 (PST)
-From: Tim Harvey <harvey.tim@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=mFdkhgysJIla+Zs20FNbIY6rPhGpzAQSDYffTBrY0TaY5PL2rGdJEqtfCELguGy6Hj
+	ipsLKzF7q16jiIgis9RBq+oJFSt6PLyWMKeW0Q7J8lc+QIg+5Kr8BLMs4cxl9oU24YA2
+	PSKKtbwe26Bf5KcoWvuURl4BM5mQ9An7fx1GQ=
+Received: by 10.90.99.8 with SMTP id w8mr3525626agb.0.1289582585426; Fri, 12
+	Nov 2010 09:23:05 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.120.8 with HTTP; Fri, 12 Nov 2010 09:22:45 -0800 (PST)
+In-Reply-To: <1289582020-29544-1-git-send-email-harvey.tim@gmail.com>
+References: <1289582020-29544-1-git-send-email-harvey.tim@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 12 Nov 2010 09:22:45 -0800
+Message-ID: <AANLkTin+TzTHxwHcV2xOvMyafy4U2yrnRe=109nomY_p@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Nov 2010 09:13:40 -0800
-Message-Id: <1289582020-29544-1-git-send-email-harvey.tim@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: harvey.tim@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] vim: fix do_install for those using FILESPATH* overrides
+Subject: Re: [PATCH] vim: fix do_install for those using FILESPATH* overrides
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,40 +52,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2010 17:15:56 -0000
+X-List-Received-Date: Fri, 12 Nov 2010 17:24:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-WORKDIR should be used for the source directory of vimrc.  This fixes breakage
-for those using FILESPATHBASE/FILESPATHPKG/FILESPATH overrides
+On Fri, Nov 12, 2010 at 9:13 AM, Tim Harvey <harvey.tim@gmail.com> wrote:
+> WORKDIR should be used for the source directory of vimrc. =C2=A0This fixe=
+s breakage
+> for those using FILESPATHBASE/FILESPATHPKG/FILESPATH overrides
+>
 
-Signed-off-by: Tim Harvey <harvey.tim@gmail.com>
----
- recipes/vim/vim_7.2.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+indeed. Thanks for patch I will take care of it.
 
-diff --git a/recipes/vim/vim_7.2.bb b/recipes/vim/vim_7.2.bb
-index b887ce4..99a8e31 100644
---- a/recipes/vim/vim_7.2.bb
-+++ b/recipes/vim/vim_7.2.bb
-@@ -11,7 +11,7 @@ VIMX ?= "--without-x"
- 
- require vim.inc
- 
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
- 
- # 001-411.diff contains 411 patches fetched from upstream
- SRC_URI += "file://001-411.diff;apply=no"
-@@ -28,7 +28,7 @@ do_applypatch() {
- addtask applypatch after do_unpack before do_patch
- 
- do_install_append() {
--    install -m 0644 ${FILESDIR}/vimrc ${D}/${datadir}/vim
-+    install -m 0644 ${WORKDIR}/vimrc ${D}/${datadir}/vim
- }
- 
- RCONFLICTS_${PN} = "gvim vim-tiny"
--- 
-1.7.0.4
-
+> Signed-off-by: Tim Harvey <harvey.tim@gmail.com>
+> ---
+> =C2=A0recipes/vim/vim_7.2.bb | =C2=A0 =C2=A04 ++--
+> =C2=A01 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/vim/vim_7.2.bb b/recipes/vim/vim_7.2.bb
+> index b887ce4..99a8e31 100644
+> --- a/recipes/vim/vim_7.2.bb
+> +++ b/recipes/vim/vim_7.2.bb
+> @@ -11,7 +11,7 @@ VIMX ?=3D "--without-x"
+>
+> =C2=A0require vim.inc
+>
+> -PR =3D "${INC_PR}.2"
+> +PR =3D "${INC_PR}.3"
+>
+> =C2=A0# 001-411.diff contains 411 patches fetched from upstream
+> =C2=A0SRC_URI +=3D "file://001-411.diff;apply=3Dno"
+> @@ -28,7 +28,7 @@ do_applypatch() {
+> =C2=A0addtask applypatch after do_unpack before do_patch
+>
+> =C2=A0do_install_append() {
+> - =C2=A0 =C2=A0install -m 0644 ${FILESDIR}/vimrc ${D}/${datadir}/vim
+> + =C2=A0 =C2=A0install -m 0644 ${WORKDIR}/vimrc ${D}/${datadir}/vim
+> =C2=A0}
+>
+> =C2=A0RCONFLICTS_${PN} =3D "gvim vim-tiny"
+> --
+> 1.7.0.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
