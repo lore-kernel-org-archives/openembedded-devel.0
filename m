@@ -1,43 +1,32 @@
-Received: from hm1479-15.locaweb.com.br ([201.76.49.85])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <angelo@pynell.com>) id 1PGsHJ-0008Fy-LW
+	(envelope-from <holger+oe@freyther.de>) id 1PGtXB-0003Qk-SE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Nov 2010 12:58:53 +0100
-Received: from hm2076.locaweb.com.br (189.126.112.72) by
-	hm1479-21.locaweb.com.br (PowerMTA(TM) v3.5r15) id hrklru0nvdc7
+	Fri, 12 Nov 2010 14:19:19 +0100
+Received: from [192.168.0.101] (91-64-127-39-dynip.superkabel.de
+	[91.64.127.39])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 0B0801B10C0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 09:57:44 -0200 (envelope-from <angelo@pynell.com>)
-Received: from [189.126.112.72] (localhost [127.0.0.1])
-	by hm2076.locaweb.com.br (Postfix) with ESMTP id 4BAD334002E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 09:57:44 -0200 (BRST)
-Received: from cl07.mobimail.com (unknown [186.202.1.228])
-	by hm2076.locaweb.com.br (Postfix) with ESMTP id 2FE473401E3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Nov 2010 09:57:43 -0200 (BRST)
-Received: from [201.13.206.182] (account angelo@pynell.com HELO
-	[192.168.0.166])
-	by hm4007.cl07.mobimail.com (CommuniGate Pro SMTP 5.3.8)
-	with ESMTPSA id 17144349 for openembedded-devel@lists.openembedded.org; 
-	Fri, 12 Nov 2010 09:57:16 -0200
-From: "Angelo S. Mavridis Bartolome" <angelo@pynell.com>
+	Fri, 12 Nov 2010 13:21:17 +0000 (UTC)
+Message-ID: <4CDD3E99.9090400@freyther.de>
+Date: Fri, 12 Nov 2010 14:18:17 +0100
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Lightning/1.0b2 Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <mailman.1.1289559602.31843.openembedded-devel@lists.openembedded.org>
-References: <mailman.1.1289559602.31843.openembedded-devel@lists.openembedded.org>
-Organization: Pynell - Development & Software
-Date: Fri, 12 Nov 2010 09:57:14 -0200
-Message-ID: <1289563034.2119.2.camel@pynell.ftp>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 (2.30.1.2-2.fc13) 
-X-SA-Exim-Connect-IP: 201.76.49.85
-X-SA-Exim-Mail-From: angelo@pynell.com
+References: <4CDD2445.5050506@nedap.com>
+In-Reply-To: <4CDD2445.5050506@nedap.com>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] metano.conf - Added on image file name the	IMAGE_BASENAME
+Subject: Re: alignment errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,97 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2010 11:58:53 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 12 Nov 2010 13:19:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-> Date: Fri, 12 Nov 2010 10:39:19 +0100
-> From: Paul Menzel <paulepanter@users.sourceforge.net>
-> Subject: Re: [oe] [PATCH] metano.conf - Added on image file name the
-> 	IMAGE_BASENAME
-> To: openembedded-devel@lists.openembedded.org
-> Message-ID: <1289554759.4282.19.camel@mattotaupa>
-> Content-Type: text/plain; charset="utf-8"
+On 11/12/2010 12:25 PM, Jaap de Jong wrote:
+> Hi,
 > 
-> According to the commit policy [1] a colon goes after the changed file.
+> I'm working on a recipe for ptpd2.
+> When I run it on my armv5te I get traps:
 > 
->         [PATCH] metano.conf: add IMAGE_BASENAME to IMAGE_NAME
+> [ 5034.410000] Alignment trap: ptpd2 (523) PC=0x0000e7cc Instr=0xe5870004
+> Address=0x0001d459 FSR 0x801
 > 
-> Am Donnerstag, den 11.11.2010, 22:24 -0200 schrieb angelox_123:
-> 
-> Sorry for nitpicking the commit message. Since you are going to send
-> further patches, I think it is beneficial since you can consider these
-> rules in the future. The commit messages of Git are normally very well
-> written and can serve as an example [2]. Also beware that I am no native
-> speaker either so my remarks could be wrong.
-> 
-> >  * Added IMAGE_BASENAME on Metano Distro configuration file on IMAGE_NAME
-> 
-> Add IMAGE_BASENAME to IMAGE_NAME in Metano?s configuration file.
-> 
-> (Use present tense in the commit message.)
-> 
-> >  * This will help we to identify the names of our images :)
-> 
-> s/we/me/
-> 
-> >  * By: angelox_123 (from IRC #metano_linux),developer and mainteiner of Metano Distro
-> 
-> maint*a*iner
-> 
-> > Signed-off-by: angelox_123 <angelox.123@gmail.com>
-> 
-> Since non of your patches have been pushed yet (?), is it on purpose you
-> are using your IRC nick name in the SOB line? I would prefer your real
-> name but it is no requirement as far as I know. For the statistics you
-> should decide what you are going to use and stick to it.
-> 
-> > ---
-> >  conf/distro/metano.conf |    5 +----
-> >  1 files changed, 1 insertions(+), 4 deletions(-)
-> > 
-> > diff --git a/conf/distro/metano.conf b/conf/distro/metano.conf
-> > index 9bab8d9..ae29e7d 100644
-> > --- a/conf/distro/metano.conf
-> > +++ b/conf/distro/metano.conf
-> > @@ -56,7 +56,7 @@ IPKG_VARIANT = "opkg"
-> >  #############################################################################
-> >  # IMAGES CONFIGURATION
-> >  #############################################################################
-> > -IMAGE_NAME = "Metano_Linux-PD.Edition-${DISTRO_VERSION}-${MACHINE}"
-> > +IMAGE_NAME = "Metano_Linux-PD.Edition-${IMAGE_BASENAME}-${DISTRO_VERSION}-${MACHINE}"
-> >  
-> >  CACHE = "${TMPDIR}/cache/${LIBC}/${MACHINE}"
-> >  DEPLOY_DIR ?= "${TMPDIR}/deploy/${LIBC}"
-> > @@ -119,12 +119,9 @@ DISTRO_EXTRA_RRECOMMENDS += " \
-> >      kernel-module-ext2 \
-> >      kernel-module-ext3 \
-> >      kernel-module-af-packet \
-> > -    mplayer \
-> >      alsa-lib \
-> >      alsa-utils \
-> >      nano \
-> > -    gpe-filemanager \
-> > -    gpe-mini-browser \
-> >      ${XSERVER} \
-> >      avahi-daemon \
-> >      avahi-autoipd \
-> 
-> The removal of these programs are not mentioned in the commit message
-> and should be in a separate patch. You can use `git rebase -i HEAD~4`
-> and `git add --patch` to split this up.
-> 
-> 
-> Thanks,
-> 
-> Paul
-Thanks paul by changes,i'm very very newbie on that :) and sorry by my
-wrong message :(
-git created a patch with another patch into it (added IMAGE_BASENAME)
-with the patch of packages (removed gpe-*** mplayer) sorry by this...
-I'll try again later :(
+> What is the best way to tackle this?
+> Do I have to add "__attribute__ ((packed))" on critical places?
+>
 
-Thanks.
-Angelo
+use addr2line or gdb (if this is inside a library) to get the method/code that
+is triggering that and then see what it looks like. In most cases the easiest
+way to get around this is to use memcpy or such.
 
 
