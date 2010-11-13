@@ -1,40 +1,49 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PHK8o-0005h0-Ui
+	(envelope-from <martin.jansa@gmail.com>) id 1PHKHm-0005wp-GP
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Nov 2010 18:43:59 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1PHK7n-0001uc-Uw from Tom_Rini@mentor.com ;
-	Sat, 13 Nov 2010 09:42:51 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Sat, 13 Nov 2010 09:42:51 -0800
-Received: from [172.30.80.225] ([172.30.80.225]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 13 Nov 2010 10:42:50 -0700
-Message-ID: <4CDECE19.5050904@mentor.com>
-Date: Sat, 13 Nov 2010 10:42:49 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
+	Sat, 13 Nov 2010 18:53:11 +0100
+Received: by fxm11 with SMTP id 11so2683758fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Nov 2010 09:52:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=iijXgpQGL/EDSv0ZpffnKra4RyHAF7ducXUUqvBYROQ=;
+	b=aNR6cv/yAWY7690EcFe796yOt9lMSEbHEzSbFS9KGwv/j6qqx36iuHJNClrq5bJmDb
+	/B5/7Gbx3TVHjM0OlndEMiIgFYvpO7sfGJtWQMZjWWey4lKOCRj49d3lpLatVWhUsqTS
+	m1NJCO8IUcXDXiyNuMLycLggPFzpuvHuS15dY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=SjpGjr2S76QgNi78UJz7myKtw2dtphYrGOg56teXgXZhIQRBB8pAbjSpsV+93/8qUJ
+	sc2PG+Vj7+7Yc6InrfnsY/7DZSuYD6pK38ps8laQbuJPthVApsrtfSDpZDjgKXXNyKqD
+	QJ87cdtP8xGMiW2i41GhAn20xw7Xr1Ze+i7wU=
+Received: by 10.223.72.198 with SMTP id n6mr2860060faj.125.1289670728805;
+	Sat, 13 Nov 2010 09:52:08 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id y13sm384512fah.2.2010.11.13.09.52.07
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 13 Nov 2010 09:52:07 -0800 (PST)
+Date: Sat, 13 Nov 2010 18:51:48 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101113175148.GN3843@jama>
+References: <E1PHKJt-0002MF-FQ@melo.openembedded.org>
 MIME-Version: 1.0
-To: Paul Menzel <paulepanter@users.sourceforge.net>
-References: <1289657589.3693.113.camel@mattotaupa>
-In-Reply-To: <1289657589.3693.113.camel@mattotaupa>
-X-OriginalArrivalTime: 13 Nov 2010 17:42:50.0967 (UTC)
-	FILETIME=[316C5670:01CB835A]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+In-Reply-To: <E1PHKJt-0002MF-FQ@melo.openembedded.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Revert "unzip: Add update-alternatives to unzip"
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Tom Rini : unzip-native: Fix name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +57,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Nov 2010 17:43:59 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 13 Nov 2010 17:53:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 11/13/2010 07:13 AM, Paul Menzel wrote:
-> Date: Sat, 13 Nov 2010 14:49:28 +0100
->
-> This reverts commit 902b98f32ffd35661e43382f47226f65528ff1b1.
->
-> With this patch, decompressing zip files does not work anymore in `angstrom-2008.1, angstrom-2010.x`, `minimal` and `minimal-uclibc`.
->
->          /oe/build-angstrom-next$ bitbake -k jasper
->          […]
->          NOTE: package jasper-1.900.1-r1: task do_unpack: Started
->          NOTE: Unpacking ../downloads/jasper-1.900.1.zip to angstrom-dev/work/armv7a-angstrom-linux-gnueabi/jasper-1.900.1-r1/
->          FATAL: Unable to unpack '/oe/downloads/jasper-1.900.1.zip' to '/oe/build-angstrom-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/jasper-1.900.1-r1' (cmd: unzip -q -o '/home/paul/oe/downloads/jasper-1.900.1.zip'):
->          Execution of 'unzip -q -o '/oe/downloads/jasper-1.900.1.zip'' failed with exit code 127:
->          /bin/sh: unzip: command not found
->
->          ERROR: TaskFailed event exception, aborting
->          ERROR: Build of /oe/openembedded/recipes/perl/perl-native_5.10.1.bb do_compile failed
->          ERROR: TaskFailed event exception, aborting
->          ERROR: Build of /oe/openembedded/recipes/jpeg/jasper_1.900.1.bb do_distribute_sources failed
->          /oe/build-angstrom-next$ find . -name unzip
->          ./angstrom-dev/work/i686-linux/unzip-native-552-r2/unzip-5.52/unzip
->
-> I do not know what in Tom’s patch might cause this behavior but reverting this patch fixes the problem for me.
->
-> Please note, that `unzip` is not installed on my build host.
->
-> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
+On Sat, Nov 13, 2010 at 05:55:21PM +0000, git version control wrote:
+>  	install -d ${D}${mandir}
+>  	mv ${D}${prefix}/man/* ${D}${mandir}
+> +
+> +do_install_append_pn-unzip() {
+>  	mv ${D}${bindir}/unzip ${D}${bindir}/unzip.${PN}
+>  }
 
-OK, my fault, I forgot about the -native case here.  The right way that 
-I should have done here is to make the final mv be 
-do_install_append_pn-unzip or so (will grep check).  I'll fix this 
-momentarily, sorry!
+Looks like missing }
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
