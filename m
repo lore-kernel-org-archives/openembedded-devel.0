@@ -1,42 +1,35 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1PHLtq-0003I3-BS
+	(envelope-from <jay@jay-tech.ru>) id 1PHM2x-0007ex-Jd
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Nov 2010 20:36:34 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 171A211000BD;
-	Sat, 13 Nov 2010 20:35:34 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 5BAD311000A9;
-	Sat, 13 Nov 2010 20:35:33 +0100 (CET)
-Received: from rhein.familie-heinold.de (g225004161.adsl.alicedsl.de
-	[92.225.4.161]) by mail.familie-heinold.de (Postfix) with ESMTPA;
-	Sat, 13 Nov 2010 20:35:33 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 4AA033C121; Sat, 13 Nov 2010 20:35:29 +0100 (CET)
-Date: Sat, 13 Nov 2010 20:35:29 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101113193528.GA26952@rhein.zuhause.netz>
-References: <1289596368-4717-1-git-send-email-GNUtoo@no-log.org>
-	<201011122319.43035.anarsoul@gmail.com>
-	<1289656078.3521.0.camel@gnutoo-laptop>
+	Sat, 13 Nov 2010 20:46:00 +0100
+Received: by qwf6 with SMTP id 6so6204qwf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Nov 2010 11:44:57 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1289656078.3521.0.camel@gnutoo-laptop>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Received: by 10.229.70.130 with SMTP id d2mr3395419qcj.53.1289677496979; Sat,
+	13 Nov 2010 11:44:56 -0800 (PST)
+Sender: jay@jay-tech.ru
+Received: by 10.220.95.74 with HTTP; Sat, 13 Nov 2010 11:44:56 -0800 (PST)
+X-Originating-IP: [93.81.68.211]
+In-Reply-To: <AANLkTintUOaC5DKMDroQXL5FEMgbjjks0Og1bHZShw3k@mail.gmail.com>
+References: <AANLkTimzOfyN6wHgP5pZ7rbfWawN4ri7UHFSUH4cEoZ7@mail.gmail.com>
+	<AANLkTimgg7ryFQsid-uVmT=wA2UvJWTn2HkCkfFv-grU@mail.gmail.com>
+	<AANLkTintUOaC5DKMDroQXL5FEMgbjjks0Og1bHZShw3k@mail.gmail.com>
+Date: Sat, 13 Nov 2010 22:44:56 +0300
+X-Google-Sender-Auth: 0MmhMoeXnBO50_XoRawrm-XQnIA
+Message-ID: <AANLkTi=+E1mYL72zLSFQ5i=+NvuOCEf-5Xd_e5ewMjug@mail.gmail.com>
+From: Yury Bushmelev <jay4mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: jay@jay-tech.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libsdl-x11 1.2.14 : fix alsa detection
+Subject: Re: JFYI: OE build time disk usage chart
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,12 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Nov 2010 19:36:34 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 13 Nov 2010 19:46:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-How the hell the patch is 1,4 mb?
+2010/11/13 Yury Bushmelev <jay4mail@gmail.com>:
+> 2010/11/12 Yury Bushmelev <jay4mail@gmail.com>:
+>
+>>> I've collected some data about disk usage while doing last testing build.
+>>> Here you can see it: http://bit.ly/dnzIrq
+>>> Or long direct url:
+>>> https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=0
+>>
+>> I've added 'Chart 2' sheet to this document.
+>> Direct link is
+>> https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=1
+>
+> New data again:
+> https://spreadsheets.google.com/a/jay-tech.ru/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=2
+> https://spreadsheets.google.com/a/jay-tech.ru/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=3
+>
+> First (Chart 3) is build with BB_SCHEDULER="completion" (default when
+> using rm_work).
+> Second (Chart 4) is build with BB_SCHEDULER="speed" (default when
+> rm_work is not used).
+> As you can see, "speed" scheduler slightly improved build time (about
+> 40 min for me) but about 40Gb of disk peak space was used.
+> "Completion" is a bit slower but uses about 34Gb in peak.
 
-Bye Henning
+And finally last chart from this series:
+https://spreadsheets.google.com/a/jay-tech.ru/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=4
+
+Every image was built by separate bitbake run. BB_SCHEDULER="completion".
+This build type have minimal peak disk usage - 20G for collie and 33G
+overall maximum.
+You can compare it with Chart 3 but Chart 3 build was used bitbake
+1.10 (Chart 5 was used bb master).
+
+I have vmstat data from last build as well but have no time to parse
+and analyze it right now.
+
+-- 
+Yuri Bushmelev
 
 
