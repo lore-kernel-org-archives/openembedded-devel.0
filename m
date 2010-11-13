@@ -1,35 +1,51 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1PHM2x-0007ex-Jd
+	(envelope-from <anarsoul@gmail.com>) id 1PHMUc-0003tc-7V
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Nov 2010 20:46:00 +0100
-Received: by qwf6 with SMTP id 6so6204qwf.6
+	Sat, 13 Nov 2010 21:14:35 +0100
+Received: by ewy24 with SMTP id 24so2130068ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Nov 2010 11:44:57 -0800 (PST)
+	Sat, 13 Nov 2010 12:13:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:cc:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=4yZb0C0/Gl3z/4rlYm+v4FZVwhQMnzSysiUCKgH9Wrw=;
+	b=xCAw/DIJtqpEfagAVgFZyvEF1K4SfhBnz0OV4/KHd3++tlyDh6OBPPlf699cj1w9Ze
+	iB78xDFG+pgscT/89AucnyZY1+iTvGTpjePbt+Z61LeGb9NR534gra9zoLnag36ZOGDY
+	o034bqNj4ScmuTQ8wsMDHdkNeMeH+JisITX0E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:cc:references:in-reply-to
+	:mime-version:content-type:content-transfer-encoding:message-id;
+	b=ar6uxML7x/SMeQ5JLqXBjBIODEebYWwZb6vEhd9GagvO4lJDF1Ayd1Hjwe8WijVXNJ
+	nyCUxvYuXCMM9dnJJsv4uyHKHbBFiiuRaBaKuoWZ9QuZPjIBcSR0L4p4I0d7s4kncFDz
+	we7QqYGk1SiP3lVjZMVTJBfbqihyFjgeJE62E=
+Received: by 10.213.4.142 with SMTP id 14mr1184707ebr.30.1289679214079;
+	Sat, 13 Nov 2010 12:13:34 -0800 (PST)
+Received: from anarsoul-laptop.localnet ([80.249.83.145])
+	by mx.google.com with ESMTPS id b52sm4708501eei.1.2010.11.13.12.13.30
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 13 Nov 2010 12:13:32 -0800 (PST)
+From: Vasily Khoruzhick <anarsoul@gmail.com>
+To: Henning Heinold <heinold@inf.fu-berlin.de>
+Date: Sat, 13 Nov 2010 22:12:47 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.36-gentoo-anarsoul; KDE/4.5.3; i686; ; )
+References: <1289596368-4717-1-git-send-email-GNUtoo@no-log.org>
+	<1289656078.3521.0.camel@gnutoo-laptop>
+	<20101113193528.GA26952@rhein.zuhause.netz>
+In-Reply-To: <20101113193528.GA26952@rhein.zuhause.netz>
 MIME-Version: 1.0
-Received: by 10.229.70.130 with SMTP id d2mr3395419qcj.53.1289677496979; Sat,
-	13 Nov 2010 11:44:56 -0800 (PST)
-Sender: jay@jay-tech.ru
-Received: by 10.220.95.74 with HTTP; Sat, 13 Nov 2010 11:44:56 -0800 (PST)
-X-Originating-IP: [93.81.68.211]
-In-Reply-To: <AANLkTintUOaC5DKMDroQXL5FEMgbjjks0Og1bHZShw3k@mail.gmail.com>
-References: <AANLkTimzOfyN6wHgP5pZ7rbfWawN4ri7UHFSUH4cEoZ7@mail.gmail.com>
-	<AANLkTimgg7ryFQsid-uVmT=wA2UvJWTn2HkCkfFv-grU@mail.gmail.com>
-	<AANLkTintUOaC5DKMDroQXL5FEMgbjjks0Og1bHZShw3k@mail.gmail.com>
-Date: Sat, 13 Nov 2010 22:44:56 +0300
-X-Google-Sender-Auth: 0MmhMoeXnBO50_XoRawrm-XQnIA
-Message-ID: <AANLkTi=+E1mYL72zLSFQ5i=+NvuOCEf-5Xd_e5ewMjug@mail.gmail.com>
-From: Yury Bushmelev <jay4mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+Message-Id: <201011132212.47612.anarsoul@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: anarsoul@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: JFYI: OE build time disk usage chart
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] libsdl-x11 1.2.14 : fix alsa detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +59,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Nov 2010 19:46:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 13 Nov 2010 20:14:35 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-2010/11/13 Yury Bushmelev <jay4mail@gmail.com>:
-> 2010/11/12 Yury Bushmelev <jay4mail@gmail.com>:
->
->>> I've collected some data about disk usage while doing last testing build.
->>> Here you can see it: http://bit.ly/dnzIrq
->>> Or long direct url:
->>> https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=0
->>
->> I've added 'Chart 2' sheet to this document.
->> Direct link is
->> https://spreadsheets.google.com/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=1
->
-> New data again:
-> https://spreadsheets.google.com/a/jay-tech.ru/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=2
-> https://spreadsheets.google.com/a/jay-tech.ru/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=3
->
-> First (Chart 3) is build with BB_SCHEDULER="completion" (default when
-> using rm_work).
-> Second (Chart 4) is build with BB_SCHEDULER="speed" (default when
-> rm_work is not used).
-> As you can see, "speed" scheduler slightly improved build time (about
-> 40 min for me) but about 40Gb of disk peak space was used.
-> "Completion" is a bit slower but uses about 34Gb in peak.
+On Saturday 13 November 2010 21:35:29 Henning Heinold wrote:
+> How the hell the patch is 1,4 mb?
 
-And finally last chart from this series:
-https://spreadsheets.google.com/a/jay-tech.ru/ccc?key=0AhY8lmfkCabTdGZRSGZ0eXg5cWhkV2k1c0Jvd0lvVnc&authkey=CLeK150N#gid=4
+By deleting 1.3mb patch? look at recipes/libsdl/libsdl-x11-1.2.14/libtool-
+update.patch
 
-Every image was built by separate bitbake run. BB_SCHEDULER="completion".
-This build type have minimal peak disk usage - 20G for collie and 33G
-overall maximum.
-You can compare it with Chart 3 but Chart 3 build was used bitbake
-1.10 (Chart 5 was used bb master).
-
-I have vmstat data from last build as well but have no time to parse
-and analyze it right now.
-
--- 
-Yuri Bushmelev
+Regards
+Vasily
 
 
