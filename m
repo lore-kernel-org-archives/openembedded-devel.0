@@ -1,50 +1,44 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <anarsoul@gmail.com>) id 1PHMUc-0003tc-7V
+	(envelope-from <raj.khem@gmail.com>) id 1PHPkP-0001ks-Ve
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Nov 2010 21:14:35 +0100
-Received: by ewy24 with SMTP id 24so2130068ewy.6
+	Sun, 14 Nov 2010 00:43:11 +0100
+Received: by ywo32 with SMTP id 32so1174192ywo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Nov 2010 12:13:34 -0800 (PST)
+	Sat, 13 Nov 2010 15:42:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:cc:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=4yZb0C0/Gl3z/4rlYm+v4FZVwhQMnzSysiUCKgH9Wrw=;
-	b=xCAw/DIJtqpEfagAVgFZyvEF1K4SfhBnz0OV4/KHd3++tlyDh6OBPPlf699cj1w9Ze
-	iB78xDFG+pgscT/89AucnyZY1+iTvGTpjePbt+Z61LeGb9NR534gra9zoLnag36ZOGDY
-	o034bqNj4ScmuTQ8wsMDHdkNeMeH+JisITX0E=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type;
+	bh=n6iDmkSuX6XgRtFgNu8FtMwCMs/VwVuedtXdOvdvksg=;
+	b=RU40uuKGDB10uLsPtcEvY6zoryNfCQvku7FUr4eCAFX7MBP43Nh38+hpQDSG+FbJzY
+	BHIdrsQiWzUW4Pd0K/+C86KjVgCba5L1Nd58rqPbuGbCCu82NmeAAfF6hLBxTQRQm+3l
+	cBi4ezfGJEUuTaI1GzU9XqrstrKfjXAnhowT8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:cc:references:in-reply-to
-	:mime-version:content-type:content-transfer-encoding:message-id;
-	b=ar6uxML7x/SMeQ5JLqXBjBIODEebYWwZb6vEhd9GagvO4lJDF1Ayd1Hjwe8WijVXNJ
-	nyCUxvYuXCMM9dnJJsv4uyHKHbBFiiuRaBaKuoWZ9QuZPjIBcSR0L4p4I0d7s4kncFDz
-	we7QqYGk1SiP3lVjZMVTJBfbqihyFjgeJE62E=
-Received: by 10.213.4.142 with SMTP id 14mr1184707ebr.30.1289679214079;
-	Sat, 13 Nov 2010 12:13:34 -0800 (PST)
-Received: from anarsoul-laptop.localnet ([80.249.83.145])
-	by mx.google.com with ESMTPS id b52sm4708501eei.1.2010.11.13.12.13.30
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 13 Nov 2010 12:13:32 -0800 (PST)
-From: Vasily Khoruzhick <anarsoul@gmail.com>
-To: Henning Heinold <heinold@inf.fu-berlin.de>
-Date: Sat, 13 Nov 2010 22:12:47 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.36-gentoo-anarsoul; KDE/4.5.3; i686; ; )
-References: <1289596368-4717-1-git-send-email-GNUtoo@no-log.org>
-	<1289656078.3521.0.camel@gnutoo-laptop>
-	<20101113193528.GA26952@rhein.zuhause.netz>
-In-Reply-To: <20101113193528.GA26952@rhein.zuhause.netz>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	b=TeCCf7jX6xWj0Yf5hVQlEv68EgB5qbbD7ZcrmI7t+Je0UQ9jzb1qYhswi8E81YvpU+
+	HkYktING6RJkB0SGDwmH9ideDq0dSxXHEX2GH604j5HukBsox2RX9HHRxeW6J6X46txF
+	6rC/GzxhPvtKla9rr2SXwk/GRH5GRvXG5H+zo=
+Received: by 10.91.51.19 with SMTP id d19mr5518946agk.183.1289691722684; Sat,
+	13 Nov 2010 15:42:02 -0800 (PST)
 MIME-Version: 1.0
-Message-Id: <201011132212.47612.anarsoul@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: anarsoul@gmail.com
+Received: by 10.90.120.8 with HTTP; Sat, 13 Nov 2010 15:41:42 -0800 (PST)
+In-Reply-To: <1289656078.3521.0.camel@gnutoo-laptop>
+References: <1289596368-4717-1-git-send-email-GNUtoo@no-log.org>
+	<201011122319.43035.anarsoul@gmail.com>
+	<1289656078.3521.0.camel@gnutoo-laptop>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 13 Nov 2010 15:41:42 -0800
+Message-ID: <AANLkTinOiXBGERuUJPYLLEr7r=VAExTx-iwTFzo_Mth1@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] libsdl-x11 1.2.14 : fix alsa detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -59,18 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Nov 2010 20:14:35 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 13 Nov 2010 23:43:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Saturday 13 November 2010 21:35:29 Henning Heinold wrote:
-> How the hell the patch is 1,4 mb?
+Denis,
 
-By deleting 1.3mb patch? look at recipes/libsdl/libsdl-x11-1.2.14/libtool-
-update.patch
+If the deletion works for you. You have my ack. No need to send the patch to ml.
 
-Regards
-Vasily
+-Khem
+
+On Sat, Nov 13, 2010 at 5:47 AM, Denis 'GNUtoo' Carikli
+<GNUtoo@no-log.org> wrote:
+> On Fri, 2010-11-12 at 23:19 +0200, Vasily Khoruzhick wrote:
+>> On Friday 12 November 2010 23:12:47 Denis 'GNUtoo' Carikli wrote:
+>> > hi,
+>> >
+>> > Here's a patch that fixes alsa detection with libsdl-x11 1.2.14
+>> >
+>> > on irc(#oe on Freenode) khem asked me to send a patch for that so he could
+>> > review it.
+>> >
+>> > Here it is.
+>> >
+>> > Denis.
+>>
+>> And you forgot to attach patch :)
+> I think I know why the patch never made it.
+> The patch was 1.4M big...
+> what should I do?
+>
+> Denis.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
