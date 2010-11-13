@@ -1,44 +1,40 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PHIzH-0000KT-9N
+	(envelope-from <Tom_Rini@mentor.com>) id 1PHK8o-0005h0-Ui
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Nov 2010 17:30:00 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id B73C5314AB2F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Nov 2010 17:28:59 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id rL2u594RkBy2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Nov 2010 17:28:54 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id F32E9314AB2C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Nov 2010 17:28:53 +0100 (CET)
-Message-ID: <4CDEBCC5.7050401@opendreambox.org>
-Date: Sat, 13 Nov 2010 17:28:53 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
+	Sat, 13 Nov 2010 18:43:59 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1PHK7n-0001uc-Uw from Tom_Rini@mentor.com ;
+	Sat, 13 Nov 2010 09:42:51 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Sat, 13 Nov 2010 09:42:51 -0800
+Received: from [172.30.80.225] ([172.30.80.225]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 13 Nov 2010 10:42:50 -0700
+Message-ID: <4CDECE19.5050904@mentor.com>
+Date: Sat, 13 Nov 2010 10:42:49 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4CBEC95F.1000807@opendreambox.org>
-	<1288016445-30478-1-git-send-email-obi@opendreambox.org>
-In-Reply-To: <1288016445-30478-1-git-send-email-obi@opendreambox.org>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+References: <1289657589.3693.113.camel@mattotaupa>
+In-Reply-To: <1289657589.3693.113.camel@mattotaupa>
+X-OriginalArrivalTime: 13 Nov 2010 17:42:50.0967 (UTC)
+	FILETIME=[316C5670:01CB835A]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] lib_package.bbclass: fix packaging of static libs, inherit binconfig
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Revert "unzip: Add update-alternatives to unzip"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Nov 2010 16:30:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 13 Nov 2010 17:43:59 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Ping
+On 11/13/2010 07:13 AM, Paul Menzel wrote:
+> Date: Sat, 13 Nov 2010 14:49:28 +0100
+>
+> This reverts commit 902b98f32ffd35661e43382f47226f65528ff1b1.
+>
+> With this patch, decompressing zip files does not work anymore in `angstrom-2008.1, angstrom-2010.x`, `minimal` and `minimal-uclibc`.
+>
+>          /oe/build-angstrom-next$ bitbake -k jasper
+>          […]
+>          NOTE: package jasper-1.900.1-r1: task do_unpack: Started
+>          NOTE: Unpacking ../downloads/jasper-1.900.1.zip to angstrom-dev/work/armv7a-angstrom-linux-gnueabi/jasper-1.900.1-r1/
+>          FATAL: Unable to unpack '/oe/downloads/jasper-1.900.1.zip' to '/oe/build-angstrom-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/jasper-1.900.1-r1' (cmd: unzip -q -o '/home/paul/oe/downloads/jasper-1.900.1.zip'):
+>          Execution of 'unzip -q -o '/oe/downloads/jasper-1.900.1.zip'' failed with exit code 127:
+>          /bin/sh: unzip: command not found
+>
+>          ERROR: TaskFailed event exception, aborting
+>          ERROR: Build of /oe/openembedded/recipes/perl/perl-native_5.10.1.bb do_compile failed
+>          ERROR: TaskFailed event exception, aborting
+>          ERROR: Build of /oe/openembedded/recipes/jpeg/jasper_1.900.1.bb do_distribute_sources failed
+>          /oe/build-angstrom-next$ find . -name unzip
+>          ./angstrom-dev/work/i686-linux/unzip-native-552-r2/unzip-5.52/unzip
+>
+> I do not know what in Tom’s patch might cause this behavior but reverting this patch fixes the problem for me.
+>
+> Please note, that `unzip` is not installed on my build host.
+>
+> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
 
-On 10/25/2010 04:20 PM, Andreas Oberritter wrote:
-> * Package ${libdir}/*.a and /lib/*.a into ${PN}-static instead of ${PN}-dev
-> * Although it packaged ${bindir}/*-config into FILES_${PN}-dev, it did
->   not include the required mangling applied by binconfig.bbclass.
-> 
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  classes/lib_package.bbclass |   17 +++++++++--------
->  1 files changed, 9 insertions(+), 8 deletions(-)
-> 
-> diff --git a/classes/lib_package.bbclass b/classes/lib_package.bbclass
-> index 82c9370..7e72dc8 100644
-> --- a/classes/lib_package.bbclass
-> +++ b/classes/lib_package.bbclass
-> @@ -1,10 +1,11 @@
-> +inherit binconfig
-> +
->  PACKAGES += "${PN}-bin"
->  
-> -FILES_${PN} = "${libexecdir} ${libdir}/lib*${SOLIBS} \
-> -	    ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-> -	    ${base_libdir}/*${SOLIBS} \
-> -	    ${datadir}/${PN} ${libdir}/${PN}"
-> -FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/*.la \
-> -		${libdir}/*.a ${libdir}/pkgconfig /lib/*.a /lib/*.o \
-> -		${datadir}/aclocal ${bindir}/*-config"
-> -FILES_${PN}-bin = "${bindir}/* ${sbindir}/* /bin/* /sbin/*"
-> +FILES_${PN} = "${libexecdir}/* ${libdir}/lib*${SOLIBS} \
-> +            ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-> +            ${base_libdir}/*${SOLIBS} \
-> +            ${datadir}/${PN} ${libdir}/${PN}/*"
-> +
-> +FILES_${PN}-bin = "${bindir}/* ${sbindir}/* \
-> +                ${base_bindir}/* ${base_sbindir}/*"
+OK, my fault, I forgot about the -native case here.  The right way that 
+I should have done here is to make the final mv be 
+do_install_append_pn-unzip or so (will grep check).  I'll fix this 
+momentarily, sorry!
 
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
