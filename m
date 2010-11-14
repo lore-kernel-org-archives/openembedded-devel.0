@@ -1,41 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PHh45-00012B-OZ
+	(envelope-from <Tom_Rini@mentor.com>) id 1PHhTt-0005DB-EV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Nov 2010 19:12:34 +0100
-Received: by iwn42 with SMTP id 42so5894179iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Nov 2010 10:11:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=B9uxjEVrJmlUClDU9jagDmYsFzGVtVOtQJBw+qjAkcc=;
-	b=cS4lFwcqLeSMVFQmHt1bZjZ18MK2FDXNeEbMuf3OoBIMRegLxvowjMiqz6TX8uZOTi
-	vJyxfSVTnxXf79O5hDWUpFXRyEgh6/g5IF0oykfH6DxMoFoA2HqsOjKAOXlIqezSqFBT
-	XgFOcGe0j588I/ZlRH+0pH5poUF/fTnfmegJg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Mf5oLfvSHEmZRPacYzSGpJh2F7P42fqR6HLQvzTlWztQ/AXgsQomHjGYz/CcmiJicd
-	/4Tu1hNqz7WWNDZUqK+am7dVddFIDeC5MTmSnP9BnIwA9JGliRptIwhFR3oX8B5eD9dI
-	3ml9WUgLOLHpD9CVnN8WfLdJ+zAqXC6QRbvmM=
+	Sun, 14 Nov 2010 19:39:48 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PHhSr-0004F9-1B from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Nov 2010 10:38:09 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Sun, 14 Nov 2010 10:38:08 -0800
+Received: from [172.30.80.225] ([172.30.80.225]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 14 Nov 2010 11:38:07 -0700
+Message-ID: <4CE02C8A.2040002@mentor.com>
+Date: Sun, 14 Nov 2010 11:38:02 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
-Received: by 10.231.17.203 with SMTP id t11mr3692865iba.1.1289758291697; Sun,
-	14 Nov 2010 10:11:31 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Sun, 14 Nov 2010 10:11:31 -0800 (PST)
-In-Reply-To: <AANLkTin8E_sSKJcCW7_gtx85_Uo6SvwHFTdiUA8XZ2tv@mail.gmail.com>
-References: <AANLkTin8E_sSKJcCW7_gtx85_Uo6SvwHFTdiUA8XZ2tv@mail.gmail.com>
-Date: Sun, 14 Nov 2010 19:11:31 +0100
-Message-ID: <AANLkTinuoktvgvT9V7OX1=FkMfeAgztmDaOCFMdH5x7d@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <AANLkTin8E_sSKJcCW7_gtx85_Uo6SvwHFTdiUA8XZ2tv@mail.gmail.com>
+	<AANLkTinuoktvgvT9V7OX1=FkMfeAgztmDaOCFMdH5x7d@mail.gmail.com>
+In-Reply-To: <AANLkTinuoktvgvT9V7OX1=FkMfeAgztmDaOCFMdH5x7d@mail.gmail.com>
+X-OriginalArrivalTime: 14 Nov 2010 18:38:08.0021 (UTC)
+	FILETIME=[14F45C50:01CB842B]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: testing branch 2010-11-12
@@ -52,21 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Nov 2010 18:12:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 14 Nov 2010 18:39:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/11/12 Cliff Brake <cliff.brake@gmail.com>:
-> testing-next is ready for clean builds. =A0Not many builds succeeded
-> last week--I suspect people have been busy:
+On 11/14/2010 11:11 AM, Frans Meulenbroeks wrote:
+> 2010/11/12 Cliff Brake<cliff.brake@gmail.com>:
+>> testing-next is ready for clean builds.  Not many builds succeeded
+>> last week--I suspect people have been busy:
+>
+> Actually my builds also succeeded (apart from the neek one which seem
+> to require some more love). The autobuilder did it's job quite nicely,
+> but I was just not around to verify the results and update the page.
+> The neek requires at least the os2 patch.
+>
+> Testing 2010-11-12 gives the same results. updated the testing page.
 
-Actually my builds also succeeded (apart from the neek one which seem
-to require some more love). The autobuilder did it's job quite nicely,
-but I was just not around to verify the results and update the page.
-The neek requires at least the os2 patch.
+After my first week of doing some testing branch test builds I was 
+thinking, would some form of either automated result submitting or 
+form-based result submitting be a good idea?  We could try and use a 
+google doc spreadsheet / form, for example.  Thoughts?
 
-Testing 2010-11-12 gives the same results. updated the testing page.
-
-Frans
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
