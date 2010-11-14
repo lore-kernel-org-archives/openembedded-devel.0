@@ -1,39 +1,44 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PHmCQ-0004LB-TE
+	(envelope-from <obi@opendreambox.org>) id 1PHmLb-0004aA-EW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Nov 2010 00:41:35 +0100
+	Mon, 15 Nov 2010 00:51:03 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id AF49E8F072A;
-	Sun, 14 Nov 2010 18:40:28 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 22569-07; Sun, 14 Nov 2010 18:40:28 -0500 (EST)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 48F1F8EF706;
-	Sun, 14 Nov 2010 18:40:28 -0500 (EST)
-Date: Sun, 14 Nov 2010 18:40:28 -0500 (EST)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: Andreas Oberritter <obi@opendreambox.org>
-In-Reply-To: <4CDEB86F.6000309@opendreambox.org>
-Message-ID: <Pine.LNX.4.64.1011141837220.5082@juice.ott.cti.com>
-References: <4CC6F440.10509@opendreambox.org>
-	<4CC6F818.5010105@opendreambox.org>
-	<4CC701D0.5070702@cbnco.com> <4CC765F9.4090005@opendreambox.org>
-	<4CDEB86F.6000309@opendreambox.org>
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 4E089314AB91
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Nov 2010 00:49:58 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 9F0VcTUsCTDa
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Nov 2010 00:49:52 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 33D66314AB8B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Nov 2010 00:49:52 +0100 (CET)
+Message-ID: <4CE0759F.70000@opendreambox.org>
+Date: Mon, 15 Nov 2010 00:49:51 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+To: openembedded-devel@lists.openembedded.org
+References: <4CBEC95F.1000807@opendreambox.org>	<1288016445-30478-1-git-send-email-obi@opendreambox.org>	<4CDEBCC5.7050401@opendreambox.org>
+	<4CDEE328.6060307@mentor.com>
+In-Reply-To: <4CDEE328.6060307@mentor.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Use of == in shell scripts
+Subject: Re: [PATCH] lib_package.bbclass: fix packaging of static libs, inherit binconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,20 +52,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Nov 2010 23:41:35 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 14 Nov 2010 23:51:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Sat, 13 Nov 2010, Andreas Oberritter wrote:
-
-> On 10/27/2010 01:36 AM, Andreas Oberritter wrote:
-> >>> http://git.opendreambox.org/?p=obi/openembedded.git;a=shortlog;h=refs/heads/equality-operator
+On 11/13/2010 08:12 PM, Tom Rini wrote:
+> On 11/13/2010 09:28 AM, Andreas Oberritter wrote:
+>> Ping
+>>
+>> On 10/25/2010 04:20 PM, Andreas Oberritter wrote:
+>>> * Package ${libdir}/*.a and /lib/*.a into ${PN}-static instead of
+>>> ${PN}-dev
 > 
-> can you please pull and push these patches? I've rebased the tree on
-> today's master. My write access still isn't working.
+> Where is the FILES_${PN}-static line below?
 
-Pushed, thanks. I bumped PRs for a couple of recipes where the fix was in 
-a file that gets packaged.
+The default value from bitbake.conf is used.
 
-Mike
+>>> * Although it packaged ${bindir}/*-config into FILES_${PN}-dev, it did
+>>>    not include the required mangling applied by binconfig.bbclass.
+> 
+> Not sure here.  Not all lib packages need binconfig mangling so it's up
+> to the recipe to say "I need this", usually at least.
+
+OK, Koen's proposal included "inherit binconfig", too, so I left it in.
+I'll send an updated patch without it.
+
+>>> Signed-off-by: Andreas Oberritter<obi@opendreambox.org>
+>>> ---
+>>>   classes/lib_package.bbclass |   17 +++++++++--------
+>>>   1 files changed, 9 insertions(+), 8 deletions(-)
+>>>
+>>> diff --git a/classes/lib_package.bbclass b/classes/lib_package.bbclass
+>>> index 82c9370..7e72dc8 100644
+>>> --- a/classes/lib_package.bbclass
+>>> +++ b/classes/lib_package.bbclass
+>>> @@ -1,10 +1,11 @@
+>>> +inherit binconfig
+>>> +
+>>>   PACKAGES += "${PN}-bin"
+>>>
+>>> -FILES_${PN} = "${libexecdir} ${libdir}/lib*${SOLIBS} \
+>>> -        ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+>>> -        ${base_libdir}/*${SOLIBS} \
+>>> -        ${datadir}/${PN} ${libdir}/${PN}"
+>>> -FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV}
+>>> ${libdir}/*.la \
+>>> -        ${libdir}/*.a ${libdir}/pkgconfig /lib/*.a /lib/*.o \
+>>> -        ${datadir}/aclocal ${bindir}/*-config"
+>>> -FILES_${PN}-bin = "${bindir}/* ${sbindir}/* /bin/* /sbin/*"
+>>> +FILES_${PN} = "${libexecdir}/* ${libdir}/lib*${SOLIBS} \
+>>> +            ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+>>> +            ${base_libdir}/*${SOLIBS} \
+>>> +            ${datadir}/${PN} ${libdir}/${PN}/*"
+>>> +
+>>> +FILES_${PN}-bin = "${bindir}/* ${sbindir}/* \
+>>> +                ${base_bindir}/* ${base_sbindir}/*"
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+> 
+> 
+
 
 
