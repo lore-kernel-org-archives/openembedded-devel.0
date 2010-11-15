@@ -1,38 +1,46 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PHtBf-00049F-I3
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PHujH-0002NQ-Pj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Nov 2010 08:09:15 +0100
-Received: (qmail 8822 invoked by uid 503); 15 Nov 2010 07:39:13 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 15 Nov 2010 07:39:13 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 15 Nov 2010 09:08:09 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 15 Nov 2010 09:08:08 +0200
-Message-ID: <4CE0DC54.1060906@eukrea.com>
-Date: Mon, 15 Nov 2010 08:08:04 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.6
+	Mon, 15 Nov 2010 09:48:01 +0100
+Received: by iwn42 with SMTP id 42so6599715iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Nov 2010 00:46:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=dbk5CtThmgRL4eavJ1obxxwqUKjbERYFOvS9BKRj1AA=;
+	b=Lae+p05ZiuHeZO9hBk4nSJFZMlgLEZBgtPgNr15ME5VGZVK2bfUIzcVhLWh8grm3fw
+	q6TtlRlh5KR7e/2LeUPp6d1L0/P6n0pxYmUutR2uXuECMfiJCwa8mwP+Pw+XvbeBA3WC
+	NXvde6KUzNYKZI8L9TUXqRuUkuIHr9OT2bzUw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=f6Pjm/ZLY1065iGsMq3CxMApFmtGdHy8D1+2/sMGhbmoIptdGXnrOZsI6iLfOv2IXF
+	kertngwPKR0yYvsusR4XKI+zE8t3xLG5fP0tVvJ19eR8Ae5cZoGEf5q93kJr6qigIn2O
+	/+BmGcRweEVXMJx/gEdhWJFeSfJBx4ZjsRrzE=
 MIME-Version: 1.0
+Received: by 10.231.17.203 with SMTP id t11mr4051962iba.1.1289810817401; Mon,
+	15 Nov 2010 00:46:57 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Mon, 15 Nov 2010 00:46:57 -0800 (PST)
+In-Reply-To: <ib5q4g$847$1@dough.gmane.org>
+References: <4C78D1E1.9080101@mlbassoc.com> <4CB081A4.9010908@mlbassoc.com>
+	<20101106141118.GG6691@excalibur.local>
+	<ib5q4g$847$1@dough.gmane.org>
+Date: Mon, 15 Nov 2010 09:46:57 +0100
+Message-ID: <AANLkTine055VfFfvyFhbqbqTVHY97zHxVzT+2QMwQic1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinbpJJnbj38dV1P7tN1aHobq4XOmQe16kR7-bkW@mail.gmail.com>
-In-Reply-To: <AANLkTinbpJJnbj38dV1P7tN1aHobq4XOmQe16kR7-bkW@mail.gmail.com>
-X-Ovh-Tracer-Id: 15877440487262104905
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: qt4-embedded and plugins - bitbaking qt4-embedded in a useful way
+Subject: Re: [PATCH v2] TI tools - make EULA unpack work when /opt is writeable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,45 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Nov 2010 07:09:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Nov 2010 08:48:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+2010/11/7 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 06-11-10 15:11, Stefan Schmidt wrote:
+>> Hello.
+>>
+>> On Sat, 2010-10-09 at 08:52, Gary Thomas wrote:
+>>> On 08/28/2010 03:07 AM, Gary Thomas wrote:
+>>>> This patch addresses the problem where the TI tools that need
+>>>> the EULA unpack into the wrong place if the user has write
+>>>> permission in /opt. The current behaviour of expecting the
+>>>> unpacker to fall back to the $HOME environment variable should
+>>>> not be relied on. The patch changes the unpack step to use
+>>>> the --prefix=3D option which will always work.
+>>>>
+>>>> Version 2:
+>>>> * Update patch to be against org.openembedded.dev branch
+>>>> * Incorporate full description into patch
+>>>
+>>> What about this patch? =A0It's been nearly 6 weeks and no discussion
+>>> or anything.
+>>>
+>>> The problem persists in today's tree.
+>>
+>> Can we have a comment form the TI devs here?
+>
+> I'm against automatic application of patches.
 
-On 15/11/2010 02:36, Alessandro Sappia wrote:
-> hi all, I wrote a small qt application and I want to run it on top of a
-> mini2440 board (7"). I was able to build a working image with qt4-embedded
-> and my app but then I'm stuck to the point that my app needs sqlite and
-> qt4-embedded don't provide it (almost from what I've read).
->
-> the git repository I've used is git://repo.or.cz/openembedded/mini2440.git
->
-> the image boots and on prompt I write
->
-> qMyApp -qws
->
-> this stats qt-embedded right, and after I read that there is no sql driver
-> plugin available.
->
-> from what I've found (1) classes/qt4e.bbclass says just "network" plugin
-> and no "sql" plugin; (2) qt4-embedded.bb include qt4.inc that has
-> --no-sql-sqlite in it.
->
-> now I'm stuck: change that to what I need ? I've tried to overlay the
-> qt4-embedded.bb recipe, but I didn't get anything useful from it (maybe I'm
-> doing overlaying wrong)
->
-> Does anyone knows how to solve this ?
->
-By using the openembedded master branch, you will get the sqlite plugins :
-qt4-embedded-plugin-sqldriver-sqlite2_4.7.0-r25.1.9_armv5te.ipk
-qt4-embedded-plugin-sqldriver-sqlite_4.7.0-r25.1.9_armv5te.ipk
+To me this clearly indicates the current problem with openembedded.
 
-So maybe the right thing to do is to rebase this mini2440 tree onto master 
-(and then to send patches to integrate the differences).
+Apparenlty some people do not care on properly maintaining their
+recipes, addressing issues and patches raised by the community,
+reviewing and commenting on them.
+But of course there is always time to grunt and whine and bash if
+others with less knowledge try to give attention to those patches.
 
-Eric
-Eric
+Especially from a company like TI I had expected a somewhat more
+professional attitude wrt patches and improving their recipes.
+
+I guess is that this is one of the areas where we as OE community
+loose when compared to yocto.
+
+Frans
 
 
