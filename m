@@ -1,44 +1,47 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PI1Hk-0007dO-Iq
+	(envelope-from <cliff.brake@gmail.com>) id 1PI1In-00018x-VZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Nov 2010 16:48:10 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 1FCFE314ABE3
+	Mon, 15 Nov 2010 16:49:10 +0100
+Received: by wwe15 with SMTP id 15so284640wwe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Nov 2010 16:46:52 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id bdKz7eqnAszt
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Nov 2010 16:46:42 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id CF348314A514
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Nov 2010 16:46:42 +0100 (CET)
-Message-ID: <4CE155E2.5030502@opendreambox.org>
-Date: Mon, 15 Nov 2010 16:46:42 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	Mon, 15 Nov 2010 07:47:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=gIiw41WymeOo8Z00LDpoHBelhRevAcsScoQn43CAcR0=;
+	b=B53yTJXIuH0bFi0a6UuNBQ5Mr5IPAVhRFfQcuQYyJdNiVCh1mtn94MgEl3CXKiNMfv
+	Oy7WyqzuYvXBzF4adKctAJ4ZqvLulcXnVgmMV+qImMry5YLDg8Z/77JSZJWXiC3mkaUA
+	Cv1t+tK8mIiJRIPvpE887upeStCQ0eChWaSUs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=FAOMLLnJF3lVHSfHXzVbaAKdMphihrN+NyZALn57Ps0I7Hg1hvb17h5mQwfmUgEcrY
+	ApWEXWTuZS6b+ZUPFDaEAXeUGde0ZAE0eMd+TmZRA40XFi/H/x5sc7Mhl2xCOTBfPKFt
+	09zCpEJNXj/7StmYacDSSqbMLJDvRQoP+nN/k=
 MIME-Version: 1.0
+Received: by 10.216.164.137 with SMTP id c9mr6879799wel.19.1289836077894; Mon,
+	15 Nov 2010 07:47:57 -0800 (PST)
+Received: by 10.216.235.214 with HTTP; Mon, 15 Nov 2010 07:47:57 -0800 (PST)
+In-Reply-To: <AANLkTinh8PHmpMrPBQUUb26MAQmWzU==vKzSY9Y_StTx@mail.gmail.com>
+References: <AANLkTin8E_sSKJcCW7_gtx85_Uo6SvwHFTdiUA8XZ2tv@mail.gmail.com>
+	<AANLkTinuoktvgvT9V7OX1=FkMfeAgztmDaOCFMdH5x7d@mail.gmail.com>
+	<4CE02C8A.2040002@mentor.com>
+	<AANLkTinh8PHmpMrPBQUUb26MAQmWzU==vKzSY9Y_StTx@mail.gmail.com>
+Date: Mon, 15 Nov 2010 10:47:57 -0500
+Message-ID: <AANLkTimg9YUNRoh+Qs8-jahK8mAJzpcEk9WiUOBFVNAz@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CBEC95F.1000807@opendreambox.org>	<1288016445-30478-1-git-send-email-obi@opendreambox.org>	<4CDEBCC5.7050401@opendreambox.org>	<4CDEE328.6060307@mentor.com>	<4CE0759F.70000@opendreambox.org>
-	<4CE14CAD.403@mentor.com>
-In-Reply-To: <4CE14CAD.403@mentor.com>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 74.125.82.41
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] lib_package.bbclass: fix packaging of static libs, inherit binconfig
+Subject: Re: testing branch 2010-11-12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,25 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Nov 2010 15:48:13 -0000
+X-List-Received-Date: Mon, 15 Nov 2010 15:49:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 11/15/2010 04:07 PM, Tom Rini wrote:
-> On 11/14/2010 04:49 PM, Andreas Oberritter wrote:
->> On 11/13/2010 08:12 PM, Tom Rini wrote:
->>> On 11/13/2010 09:28 AM, Andreas Oberritter wrote:
->>>>> * Although it packaged ${bindir}/*-config into FILES_${PN}-dev, it did
->>>>>     not include the required mangling applied by binconfig.bbclass.
+On Sun, Nov 14, 2010 at 2:23 PM, Yury Bushmelev <jay4mail@gmail.com> wrote:
+> 2010/11/14 Tom Rini <tom_rini@mentor.com>:
+>> On 11/14/2010 11:11 AM, Frans Meulenbroeks wrote:
 >>>
->>> Not sure here.  Not all lib packages need binconfig mangling so it's up
->>> to the recipe to say "I need this", usually at least.
+>>> 2010/11/12 Cliff Brake<cliff.brake@gmail.com>:
+>>>>
+>>>> testing-next is ready for clean builds. =A0Not many builds succeeded
+>>>> last week--I suspect people have been busy:
+>>>
+>>> Actually my builds also succeeded (apart from the neek one which seem
+>>> to require some more love). The autobuilder did it's job quite nicely,
+>>> but I was just not around to verify the results and update the page.
+>>> The neek requires at least the os2 patch.
+>>>
+>>> Testing 2010-11-12 gives the same results. updated the testing page.
 >>
->> OK, Koen's proposal included "inherit binconfig", too, so I left it in.
->> I'll send an updated patch without it.
-> 
-> Just missed the proposal.  Can you link it easily?  Thanks!
+>> After my first week of doing some testing branch test builds I was think=
+ing,
+>> would some form of either automated result submitting or form-based resu=
+lt
+>> submitting be a good idea? =A0We could try and use a google doc spreadsh=
+eet /
+>> form, for example. =A0Thoughts?
+>
+> I'll prefer to use our oestats-server to auto-publish builds data.
+> Oestats have complete information about builds.
 
-http://article.gmane.org/gmane.comp.handhelds.openembedded/38554
+If someone has the time to update the oestats-server to provide
+summary data in a tabular form, that would be great.
+
+Alternatively, using forms on a google spreadsheet is an interesting
+idea.  I had not thought of forms as a way that we could get anonymous
+build data with requiring a google account.  Then again, I'm not sure
+how we would keep the form from being spammed, other than perhaps
+hiding it.
+
+Cliff
+
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
 
 
