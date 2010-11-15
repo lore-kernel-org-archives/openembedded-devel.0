@@ -1,49 +1,41 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-qw0-f65.google.com ([209.85.216.65])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <angelox.123@gmail.com>) id 1PHmv8-0005z1-Nx
+	(envelope-from <a.sappia@gmail.com>) id 1PHo1F-0004Vj-2R
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Nov 2010 01:27:44 +0100
-Received: by ywo32 with SMTP id 32so1450898ywo.6
+	Mon, 15 Nov 2010 02:38:10 +0100
+Received: by qwi4 with SMTP id 4so137358qwi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Nov 2010 16:26:39 -0800 (PST)
+	Sun, 14 Nov 2010 17:37:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=EBuR2DhP456oupCn8bapIVOAYpa1JngB3/RGTDHKmQQ=;
-	b=IgGKahCznMQAYUHaMm8y0nBRQ5oXx5XUVYBoKfNV3aA/e1+1mQ5l4bjAHPDoDNWrU4
-	YDOmbHTiTM4BAaJ9Xjc1JH0a8nRpSLwwx8E45zuaOYpirOpTnfSB4n9KrHxTO/XOrXOa
-	NZBRy5TlMYpwYo4gohooQlCALLeCYZ4HDlbdI=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=0ofAkSiJFrYMPvz4or2lUtdx8Vu1qN+aOR2VqpFE7is=;
+	b=K/nYtsPJevxJbS0RBDU44GJwIPimhMoQCi4wsZESmBdVtKqur9UzhyjCxwuoVg3kus
+	e6ndFKCWXz1ffNGzEZRl827mYRac7kRnTBlYhrMckSmRZsGiEn3cDNGHuIVPZhVyi1id
+	A6LdpIL1fZfkOS0PDPWnkU8rHPIdSu6SKAzZM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	b=i2bvnNgEJq7u4z4KBmsooUQm0WX9HynRCRHxzMK/GKnEK61rATkDfFLaqi/bnT2jCd
-	/WH/HsP1EE8wdcbxXrrKX2rBQBXLJ4milixmn2j6f+3phVat7WJb2eOuJ7ze01UTbwCu
-	PeQyhCtHb9zODQ6yPin6at3RSQ9p9bSho4mfc=
-Received: by 10.100.255.20 with SMTP id c20mr3822122ani.195.1289780799035;
-	Sun, 14 Nov 2010 16:26:39 -0800 (PST)
-Received: from localhost.localdomain (201-95-47-20.dsl.telesp.net.br
-	[201.95.47.20])
-	by mx.google.com with ESMTPS id i37sm3087505anh.34.2010.11.14.16.26.37
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 14 Nov 2010 16:26:38 -0800 (PST)
-From: angelox_123 <angelox.123@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Nov 2010 22:26:30 -0200
-Message-Id: <1289780790-10045-1-git-send-email-angelox.123@gmail.com>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <angelox.123@gmail.com>
-References: <angelox.123@gmail.com>
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=tUK+5j49ZHH6cbielkIskXfZFTyp/DMilt2LiW59kpa5hc9DtoOHfcmiinPGwiwRfH
+	AlCtBuO55krqJ6lh1wSjLGKdejfb6ej7xo66MxLbclr8Fmmo9bvLWsDmRIP2u4KDp7ng
+	z1XmSw8/HkANwE692LlEpyHRsp6ye8WwNr8sw=
+Received: by 10.229.241.5 with SMTP id lc5mr3571642qcb.165.1289785020332; Sun,
+	14 Nov 2010 17:37:00 -0800 (PST)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: angelox.123@gmail.com
+Received: by 10.229.215.129 with HTTP; Sun, 14 Nov 2010 17:36:38 -0800 (PST)
+From: Alessandro Sappia <a.sappia@gmail.com>
+Date: Mon, 15 Nov 2010 02:36:38 +0100
+Message-ID: <AANLkTinbpJJnbj38dV1P7tN1aHobq4XOmQe16kR7-bkW@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.216.65
+X-SA-Exim-Mail-From: a.sappia@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: =?UTF-8?B?W1BBVENIIHYzXSBtZXRhbm8uY29uZjogQWRkIElNQUdFX0JBU0VOQU1FIHRvIElNQUdFX05BTUUgaW4gTWV0YW5v4oCZcyBjb25maWd1cmF0aW9uIGZpbGUu?=
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: qt4-embedded and plugins - bitbaking qt4-embedded in a useful way
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,34 +49,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Nov 2010 00:27:46 -0000
+X-List-Received-Date: Mon, 15 Nov 2010 01:38:10 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-* This will help me to identify the names of our images :)
-* By: Angelo S. Mavridis Bartolome (angelox_123) (from IRC #metano_linux),developer and maintainer of Metano Distro
+hi all,
+I wrote a small qt application and I want to run it on top of a mini2440
+board (7").
+I was able to build a working image with qt4-embedded and my app but then
+I'm
+stuck to the point that my app needs sqlite and qt4-embedded don't provide
+it
+(almost from what I've read).
 
-Signed-off-by: Angelo S. Mavridis Bartolome <angelox.123@gmail.com>
-Signed-off-by: angelox_123 <angelox.123@gmail.com>
----
- conf/distro/metano.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+the git repository I've used is
+git://repo.or.cz/openembedded/mini2440.git
 
-diff --git a/conf/distro/metano.conf b/conf/distro/metano.conf
-index 934c598..ba0e3d7 100644
---- a/conf/distro/metano.conf
-+++ b/conf/distro/metano.conf
-@@ -56,7 +56,7 @@ IPKG_VARIANT = "opkg"
- #############################################################################
- # IMAGES CONFIGURATION
- #############################################################################
--IMAGE_NAME = "Metano_Linux-PD.Edition-${DISTRO_VERSION}-${MACHINE}"
-+IMAGE_NAME = "Metano_Linux-PD.Edition-${IMAGE_BASENAME}-${DISTRO_VERSION}-${MACHINE}"
- 
- CACHE = "${TMPDIR}/cache/${LIBC}/${MACHINE}"
- DEPLOY_DIR ?= "${TMPDIR}/deploy/${LIBC}"
+the image boots and on prompt I write
+
+qMyApp -qws
+
+this stats qt-embedded right, and after I read that there is no sql driver
+plugin
+available.
+
+from what I've found (1) classes/qt4e.bbclass says just "network" plugin and
+no "sql"
+plugin; (2) qt4-embedded.bb include qt4.inc that has --no-sql-sqlite in it.
+
+now I'm stuck: change that to what I need ? I've tried to overlay the
+qt4-embedded.bb
+recipe, but I didn't get anything useful from it (maybe I'm doing overlaying
+wrong)
+
+Does anyone knows how to solve this ?
+
+regards
+
+Alessandro
+
 -- 
-1.7.2.3
-
-
+Alessandro Sappia
+a.sappia@gmail.com
 
