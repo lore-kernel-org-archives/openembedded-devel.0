@@ -1,41 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtp.tibbo.com ([81.171.42.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PI3YL-0000GU-3Q
+	(envelope-from <dvorkin@tibbo.com>) id 1PI3br-0002D9-BG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Nov 2010 19:13:40 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PI3XI-0007X4-Lc from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Nov 2010 10:12:12 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 15 Nov 2010 10:11:52 -0800
-Received: from [172.30.80.225] ([172.30.80.225]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 15 Nov 2010 11:11:52 -0700
-Message-ID: <4CE177E4.7090108@mentor.com>
-Date: Mon, 15 Nov 2010 11:11:48 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
+	Mon, 15 Nov 2010 19:16:59 +0100
+Received: (qmail 15543 invoked by uid 508); 15 Nov 2010 21:17:52 +0300
+Received: from dvhome.kansstel.ru (HELO ?10.1.1.20?) (79.171.10.83)
+	by smtp.tibbo.com with SMTP; 15 Nov 2010 21:17:52 +0300
+Message-ID: <4CE178D8.8080901@tibbo.com>
+Date: Mon, 15 Nov 2010 21:15:52 +0300
+From: Dvorkin Dmitry <dvorkin@tibbo.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
+	rv:1.9.1.15) Gecko/20101031 Mandriva/3.0.10-0.1mdv2010.0 (2010.0)
+	Thunderbird/3.0.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CBEC95F.1000807@opendreambox.org>	<1288016445-30478-1-git-send-email-obi@opendreambox.org>	<4CDEBCC5.7050401@opendreambox.org>	<4CDEE328.6060307@mentor.com>	<4CE0759F.70000@opendreambox.org>	<4CE14CAD.403@mentor.com>
-	<4CE155E2.5030502@opendreambox.org>
-In-Reply-To: <4CE155E2.5030502@opendreambox.org>
-X-OriginalArrivalTime: 15 Nov 2010 18:11:53.0125 (UTC)
-	FILETIME=[94A80D50:01CB84F0]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <1289841457-20807-1-git-send-email-dvorkin@tibbo.com>
+	<ibrt5n$fuj$1@dough.gmane.org>
+In-Reply-To: <ibrt5n$fuj$1@dough.gmane.org>
+X-SA-Exim-Connect-IP: 81.171.42.199
+X-SA-Exim-Mail-From: dvorkin@tibbo.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] lib_package.bbclass: fix packaging of static libs, inherit binconfig
+Subject: Re: [PATCH] pstree: added reciept
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,35 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Nov 2010 18:13:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Nov 2010 18:17:00 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 11/15/2010 08:46 AM, Andreas Oberritter wrote:
-> On 11/15/2010 04:07 PM, Tom Rini wrote:
->> On 11/14/2010 04:49 PM, Andreas Oberritter wrote:
->>> On 11/13/2010 08:12 PM, Tom Rini wrote:
->>>> On 11/13/2010 09:28 AM, Andreas Oberritter wrote:
->>>>>> * Although it packaged ${bindir}/*-config into FILES_${PN}-dev, it did
->>>>>>      not include the required mangling applied by binconfig.bbclass.
->>>>
->>>> Not sure here.  Not all lib packages need binconfig mangling so it's up
->>>> to the recipe to say "I need this", usually at least.
->>>
->>> OK, Koen's proposal included "inherit binconfig", too, so I left it in.
->>> I'll send an updated patch without it.
->>
->> Just missed the proposal.  Can you link it easily?  Thanks!
+I thought, I have to write an author of receipt... sorry!
+
+15.11.2010 21:12, Koen Kooi пишет:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> http://article.gmane.org/gmane.comp.handhelds.openembedded/38554
-
-OK, with that I'm happy with the v1 (that I assume you archived in 
-patchwork).
-
-Acked-by: Tom Rini <tom_rini@mentor.com>
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+> On 15-11-10 18:17, Dvorkin Dmitry wrote:
+>
+>    
+>> +AUTHOR = "Dvorkin Dmitry dvorkin@tibbo.com"
+>>      
+> Unless your name is Fred Hucht you're not the author of pstree.
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFM4Xf2MkyGM64RGpERAt3/AJ9WUVV5qm/KjKmvvUiLIU0RRqPU2QCfYfqv
+> 7ZgMBgQnFbyAs/KqBM+z99o=
+> =sEUu
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>    
 
 
