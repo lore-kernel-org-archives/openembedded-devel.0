@@ -1,22 +1,16 @@
 Received: from smtp.tibbo.com ([81.171.42.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dvorkin@tibbo.com>) id 1PI3br-0002D9-BG
+	(envelope-from <dvorkin@tibbo.com>) id 1PI3gN-0007D2-Oj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Nov 2010 19:16:59 +0100
-Received: (qmail 15543 invoked by uid 508); 15 Nov 2010 21:17:52 +0300
-Received: from dvhome.kansstel.ru (HELO ?10.1.1.20?) (79.171.10.83)
-	by smtp.tibbo.com with SMTP; 15 Nov 2010 21:17:52 +0300
-Message-ID: <4CE178D8.8080901@tibbo.com>
-Date: Mon, 15 Nov 2010 21:15:52 +0300
+	Mon, 15 Nov 2010 19:21:56 +0100
+Received: (qmail 16026 invoked by uid 508); 15 Nov 2010 21:22:32 +0300
+Received: from dvhome.kansstel.ru (HELO localhost.localdomain) (79.171.10.83)
+	by smtp.tibbo.com with SMTP; 15 Nov 2010 21:22:32 +0300
 From: Dvorkin Dmitry <dvorkin@tibbo.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101031 Mandriva/3.0.10-0.1mdv2010.0 (2010.0)
-	Thunderbird/3.0.10
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1289841457-20807-1-git-send-email-dvorkin@tibbo.com>
-	<ibrt5n$fuj$1@dough.gmane.org>
-In-Reply-To: <ibrt5n$fuj$1@dough.gmane.org>
+Date: Mon, 15 Nov 2010 21:20:31 +0300
+Message-Id: <1289845231-29982-1-git-send-email-dvorkin@tibbo.com>
+X-Mailer: git-send-email 1.6.4.4
 X-SA-Exim-Connect-IP: 81.171.42.199
 X-SA-Exim-Mail-From: dvorkin@tibbo.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -25,7 +19,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] pstree: added reciept
+Subject: [PATCH] pstree: added reciept
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,35 +33,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Nov 2010 18:17:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 15 Nov 2010 18:21:58 -0000
 
-I thought, I have to write an author of receipt... sorry!
 
-15.11.2010 21:12, Koen Kooi пишет:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 15-11-10 18:17, Dvorkin Dmitry wrote:
->
->    
->> +AUTHOR = "Dvorkin Dmitry dvorkin@tibbo.com"
->>      
-> Unless your name is Fred Hucht you're not the author of pstree.
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFM4Xf2MkyGM64RGpERAt3/AJ9WUVV5qm/KjKmvvUiLIU0RRqPU2QCfYfqv
-> 7ZgMBgQnFbyAs/KqBM+z99o=
-> =sEUu
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->    
+Signed-off-by: Dvorkin Dmitry <dvorkin@tibbo.com>
+---
+ recipes/pstree/pstree_2.33.bb |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/pstree/pstree_2.33.bb
+
+diff --git a/recipes/pstree/pstree_2.33.bb b/recipes/pstree/pstree_2.33.bb
+new file mode 100644
+index 0000000..f875f46
+--- /dev/null
++++ b/recipes/pstree/pstree_2.33.bb
+@@ -0,0 +1,23 @@
++SECTION = "base"
++DESCRIPTION = "pstree cli tool to nicely show processes tree"
++LICENSE = "GPL"
++DEPENDS = "libnl"
++PR = "r0"
++
++S = "${WORKDIR}"
++
++do_compile() {
++  ${CC} -O ${CFLAGS} ${LDFLAGS} -o pstree pstree.c
++}
++
++do_install() {
++  install -d ${D}/bin/
++  install -m 0755 pstree ${D}/bin/
++}
++
++SRC_URI = "\
++  ftp://ftp.thp.uni-duisburg.de/pub/source/${PN}-${PV}.tar.gz \
++"
++
++SRC_URI[md5sum] = "b0a85caacd85f78bd83700afa86ec2e9"
++SRC_URI[sha256sum] = "0f06116208cf15932cf99785d001c053e523e0aed474b936858f1b7f61a6c990"
+-- 
+1.6.4.4
+
 
 
