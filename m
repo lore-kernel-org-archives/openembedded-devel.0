@@ -1,39 +1,37 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PIT4D-0003qg-LD
+	(envelope-from <msmith@cbnco.com>) id 1PITKm-0004CE-An
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Nov 2010 22:27:54 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PIT39-0005Sa-Pw from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Nov 2010 13:26:47 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 16 Nov 2010 13:26:47 -0800
-Received: from [172.30.7.13] ([172.30.7.13]) by na2-mail.mgc.mentorg.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 16 Nov 2010 14:26:42 -0700
-Message-ID: <4CE2F70E.90807@mentor.com>
-Date: Tue, 16 Nov 2010 14:26:38 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+	Tue, 16 Nov 2010 22:45:01 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 35B9B6FD28B;
+	Tue, 16 Nov 2010 16:43:56 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 18427-02; Tue, 16 Nov 2010 16:43:56 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id B48656ED6C6;
+	Tue, 16 Nov 2010 16:43:55 -0500 (EST)
+Message-ID: <4CE2FAF8.5010808@cbnco.com>
+Date: Tue, 16 Nov 2010 16:43:20 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1289935265-26637-1-git-send-email-msmith@cbnco.com>
-In-Reply-To: <1289935265-26637-1-git-send-email-msmith@cbnco.com>
-X-OriginalArrivalTime: 16 Nov 2010 21:26:42.0998 (UTC)
-	FILETIME=[F6C6DD60:01CB85D4]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+To: openembedded-devel@lists.openembedded.org, =?ISO-8859-1?Q?Matthias_?=
+	=?ISO-8859-1?Q?G=FCnther?= <matgnt@gmail.com>
+References: <1289935585-26798-1-git-send-email-msmith@cbnco.com>
+	<4CE2F4B4.5000105@mentor.com>
+In-Reply-To: <4CE2F4B4.5000105@mentor.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] udev 141: fix postinst check for /lib/udev/rules.d symlink
+Subject: Re: [PATCH] linux 2.6.32: update from 2.6.32.9 to 2.6.32.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,47 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 21:27:54 -0000
+X-List-Received-Date: Tue, 16 Nov 2010 21:45:01 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 11/16/2010 12:21 PM, Michael Smith wrote:
-> [ -d foo ] succeeds even if foo is a symlink to a directory.
->
-> Signed-off-by: Michael Smith<msmith@cbnco.com>
+Tom Rini wrote:
+> 
+> While I like this conceptually, did you confirm that all of the machines 
+> that have additional patches still patch cleanly?
 
-Acked-by: Tom Rini <tom_rini@mentor.com>
+I did not, but should have.
 
-> ---
->   recipes/udev/udev_141.bb |    4 ++--
->   1 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
-> index 816637f..7a34ada 100644
-> --- a/recipes/udev/udev_141.bb
-> +++ b/recipes/udev/udev_141.bb
-> @@ -7,7 +7,7 @@ DEFAULT_PREFERENCE = "-1"
->
->   require udev.inc
->
-> -PR = "${INC_PR}.2"
-> +PR = "${INC_PR}.3"
->
->   SRC_URI += "file://mount.blacklist \
->   	    file://run.rules \
-> @@ -107,7 +107,7 @@ else
->   fi
->   update-rc.d $OPT udev-cache start 12 S .
->
-> -if [ -d $D/lib/udev/rules.d ] ; then
-> +if [ -e $D/lib/udev/rules.d ]&&  [ ! -L $D/lib/udev/rules.d ] ; then
->   	echo "$D/lib/udev/rules.d is not a symlink, fixing that"
->   	mv $D/lib/udev/rules.d/* $D${sysconfdir}/udev/rules.d/
->   	rm -rf $D/lib/udev/rules.d
+All patches still apply except for eee701 (applied upstream) and 
+topas910 (some hunks rejected, some applied upstream).
 
+Matthias, would you be able to rebase your topas910 patch against 2.6.32.25?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Thanks,
+Mike
 
 
