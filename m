@@ -1,33 +1,44 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1PIQcY-0006F1-M9
+	(envelope-from <harvey.tim@gmail.com>) id 1PIQch-0006Ff-IC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Nov 2010 19:51:12 +0100
-Received: by pwi8 with SMTP id 8so316815pwi.6
+	Tue, 16 Nov 2010 19:51:20 +0100
+Received: by pxi17 with SMTP id 17so310577pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Nov 2010 10:50:00 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.229.70.130 with SMTP id d2mr6617771qcj.53.1289933398385; Tue,
-	16 Nov 2010 10:49:58 -0800 (PST)
-Sender: jay@jay-tech.ru
-Received: by 10.220.95.74 with HTTP; Tue, 16 Nov 2010 10:49:58 -0800 (PST)
-X-Originating-IP: [93.81.137.132]
-In-Reply-To: <201011151345.58456.jay4mail@gmail.com>
-References: <201011151345.58456.jay4mail@gmail.com>
-Date: Tue, 16 Nov 2010 21:49:58 +0300
-X-Google-Sender-Auth: OqmoCME5_kGT1-VAV109e1Ges1E
-Message-ID: <AANLkTimJvHgdber=0vgBp_LQdydy0YoSkCXrDQmaM+qp@mail.gmail.com>
-From: Yury Bushmelev <jay4mail@gmail.com>
+	Tue, 16 Nov 2010 10:50:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=ACIAj2Em4IDKRfMcZb92m9vcbHEHoqBWMh2uoiF/oB4=;
+	b=ncwhGrZP8VZEutkoXllSYs7EGaL0+UZZUg6hvEqk8paDcFfdxaCulcMUEpgSa1vJup
+	AaKh6Igs/CTuQdqd65Qqy2ZCgnK0kFCPz2GxlM8wS7pOrmKP2noSdNbbdniqYBuBuC2f
+	03DS0pQMkneD5FpRskBy8FXHjGn53sdsvQRrI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=lG++AX0iaSWvkxI4EgtZO03BRj/50mA6eS9nW1qWZT0q4ThhDqcnlYbtdFQ3Ok79fU
+	3LGOz71vLq7bJD09yYXXcTdlAuuKfjObMnvIQMTakFNUfSUchvmlktorRrae0j3rA5UJ
+	0obIdoTJ/hBr/YiYI1QHN8+JQDoHBwUtzX85E=
+Received: by 10.142.240.15 with SMTP id n15mr6015924wfh.380.1289933413025;
+	Tue, 16 Nov 2010 10:50:13 -0800 (PST)
+Received: from localhost.localdomain
+	(adsl-76-205-222-173.dsl.snlo01.sbcglobal.net [76.205.222.173])
+	by mx.google.com with ESMTPS id x18sm1714011wfa.11.2010.11.16.10.50.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 16 Nov 2010 10:50:12 -0800 (PST)
+From: Tim Harvey <harvey.tim@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+Date: Tue, 16 Nov 2010 10:50:06 -0800
+Message-Id: <1289933406-8948-1-git-send-email-harvey.tim@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: harvey.tim@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [testing-next] race condition on incremental build of tosa opie-image
+Subject: [PATCH v3] iftop: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 18:51:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 16 Nov 2010 18:51:21 -0000
 
-2010/11/15 Yuri Bushmelev <jay4mail@gmail.com>:
-> Hello!
->
-> There are results from tonight's testbuilder run on current testing-next.
->
-> I have following fail when doing _incremental_ test build of
-> angstrom-2008.1/tosa/opie-image. Clean build was fine.
-> Bitbake version: git master, OE version: testing-next.
-> bb threads: 5, make threads: 2
->
-> Bad thing is that error log on tinderbox is totally unuseful.
-> Build stats:
-> http://tinderbox.openembedded.net/builds/103097/
-> Log:
-> http://tinderbox.openembedded.net/public/logs/task/10153584.txt
->
-> Note tasks order in following log. It looks like race condition.
->
-> NOTE: package libqtaux2-1.2.4-r2.0: task do_setscene: Succeeded
-> [...]
-> | OSError: [Errno 2] No such file or directory: '/storage/oe/testbuilder/build/angstrom_2008/armv5/deploy/glibc/ipk/armv5te/libqtaux2-1_1.2.4-
-> r0.6_armv5te.ipk'
-> [...]
-> NOTE: Running task 6770 of 6932 (ID: 3421, /storage/oe/testbuilder/openembedded/recipes/libqtaux/libqtaux2_1.2.4.bb, do_fetch)
->
-> I have untouched build directory as well as lvm snapshot of this
-> volume before build, so I can even try to reproduce error.
+Signed-off-by: Tim Harvey <harvey.tim@gmail.com>
+---
+ recipes/iftop/iftop_0.17.bb |   11 +++++++++++
+ 1 files changed, 11 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/iftop/iftop_0.17.bb
 
-If no one is interested I'll rebuild tosa image and remove snapshot tonight.
-
+diff --git a/recipes/iftop/iftop_0.17.bb b/recipes/iftop/iftop_0.17.bb
+new file mode 100644
+index 0000000..2cfa441
+--- /dev/null
++++ b/recipes/iftop/iftop_0.17.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "Network usage monitor"
++HOMEPAGE = "http://www.ex-parrot.com/pdw/iftop/"
++SECTION = "console/network"
++LICENSE = "GPLv2+"
++DEPENDS = "libpcap ncurses"
++
++SRC_URI = "http://www.ex-parrot.com/pdw/iftop/download/iftop-${PV}.tar.gz"
++SRC_URI[md5sum] = "062bc8fb3856580319857326e0b8752d"
++SRC_URI[sha256sum] = "d032547c708307159ff5fd0df23ebd3cfa7799c31536fa0aea1820318a8e0eac"
++
++inherit autotools
 -- 
-Yury Bushmelev
+1.7.0.4
+
 
 
