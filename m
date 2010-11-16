@@ -1,37 +1,36 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PIVGj-0004Q9-5D
+	(envelope-from <raj.khem@gmail.com>) id 1PIVIi-0004Wy-ST
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 00:48:58 +0100
-Received: by yxd5 with SMTP id 5so860446yxd.6
+	Wed, 17 Nov 2010 00:51:03 +0100
+Received: by ywg8 with SMTP id 8so377256ywg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Nov 2010 15:47:51 -0800 (PST)
+	Tue, 16 Nov 2010 15:49:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:cc:content-type
 	:content-transfer-encoding;
-	bh=AGSssA5OHetUEmx1VcdXI9mnUV4I2uZnyztJ6q9Zvvg=;
-	b=aK4EOeO0AkAelEjI6QeCyH0ijsgWCbBv16+ApZLrn0oF86EO2J9kpSlHM5MlgIyJsK
-	6LQookqUbQZCM/FGXhRQzn0b8pLN7mvLUzpEt4LGBCSHgSFL1lav7LyqRE1i7V3Jz/wN
-	I8ckqOIXUu/osqbPn2X7PYiNEkNwuz7txv1Yk=
+	bh=cVA+bYdzND47PUrzTdDojGx9W9h6eF8E33ED1wgAsLQ=;
+	b=Eecuw1S2twtPVNquds6UksGGeRto5GRb1rmA3g70qGKe8WILbmVBBm6pmYwjNQE0IP
+	lZPjZhwRCOSDiJH69bhimJW4/Pj0N2ZHSo0EecluD9ZEP6SMVEO77mEs6z0koomRDCBW
+	z6QoaApt7+FFjH8PK53G+IBs3RBp6QcfnBEsY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type:content-transfer-encoding;
-	b=hTmRUcTXbBjA9DFCU1Qo78zmL5XDD9Q/kRxH30kftmgMIUYWYLFw54kP+yzz5Ys3pF
-	vxcMtuUgiCEg9lMkZFPFnOsVex4xSAZAkr5WabzOXVsaedxdE5H0zTXtqNiJycDZ+nhE
-	Ih14NknL47QyGcN4ual3vybGxVcCsjDVG7KE0=
-Received: by 10.91.51.19 with SMTP id d19mr10462315agk.183.1289951271007; Tue,
-	16 Nov 2010 15:47:51 -0800 (PST)
+	b=N3UQi79VC+BCll4D6n/phcaidv6WoHU142Q698Ful4OQA4mYJQXXuHqBJ1JkbmXdp2
+	8coYSlY4G4uWHriSBHATlgCuNOdo8LJ6Se1M9nbOZobMf98yG5cFPamutgPBj3BFbMTH
+	w7lH+YwaHsicSKxMv0P4vVkBKFuJTjr3gZXjQ=
+Received: by 10.91.12.18 with SMTP id p18mr10523283agi.48.1289951393909; Tue,
+	16 Nov 2010 15:49:53 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Tue, 16 Nov 2010 15:47:28 -0800 (PST)
-In-Reply-To: <1289064813-20133-2-git-send-email-moncelier@devlife.org>
-References: <1289064813-20133-1-git-send-email-moncelier@devlife.org>
-	<1289064813-20133-2-git-send-email-moncelier@devlife.org>
+Received: by 10.90.120.8 with HTTP; Tue, 16 Nov 2010 15:49:33 -0800 (PST)
+In-Reply-To: <1289064751-20094-1-git-send-email-moncelier@devlife.org>
+References: <1289064751-20094-1-git-send-email-moncelier@devlife.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 Nov 2010 15:47:28 -0800
-Message-ID: <AANLkTimSDzH7C9po2dpps3xpLw59cjpue24w8O7eDe18@mail.gmail.com>
+Date: Tue, 16 Nov 2010 15:49:33 -0800
+Message-ID: <AANLkTimUMMhoKSgxWBO31Qr=C5n+agJf6xBehAOwvef8@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Connect-IP: 209.85.213.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +39,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Camille Moncelier <moncelier@devlife.org>
-Subject: Re: [PATCH 11/11] ccid: Bump version to 1.4.0 (Needs pcsc-lite > 1.6.2)
+Subject: Re: [PATCH 09/11] pathfinder: Added pathfinder (X.509 path verification)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,86 +53,189 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 23:48:58 -0000
+X-List-Received-Date: Tue, 16 Nov 2010 23:51:03 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 6, 2010 at 10:33 AM, Camille Moncelier
+On Sat, Nov 6, 2010 at 10:32 AM, Camille Moncelier
 <moncelier@devlife.org> wrote:
-> Signed-off-by: Camille Moncelier <moncelier@devlife.org>
-> ---
-> =C2=A0recipes/ccid/ccid_1.4.0.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 28 ++++++++++++++++++++++++++++
-> =C2=A0recipes/ccid/files/no-cardman-5321.diff | =C2=A0 10 ++++++++++
-> =C2=A02 files changed, 38 insertions(+), 0 deletions(-)
-> =C2=A0create mode 100644 recipes/ccid/ccid_1.4.0.bb
-> =C2=A0create mode 100644 recipes/ccid/files/no-cardman-5321.diff
+> =C2=A0* PathFinder is designed to provide a mechanism for any program to
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0perform RFC3280-compliant path validation of X=
+509 certificates, even
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0when some of the intermediate certificates are=
+ not present on the
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0local machine.
 >
-> diff --git a/recipes/ccid/ccid_1.4.0.bb b/recipes/ccid/ccid_1.4.0.bb
+> =C2=A0* pathfinder can be used with opkg to provide verification of remot=
+e
+> =C2=A0 =C2=A0ssl certificates
+> ---
+> =C2=A0recipes/pathfinder/files/pathfinderd.conf | =C2=A0 21 +++++++++++++=
+++++++
+> =C2=A0recipes/pathfinder/files/pathfinderd.init | =C2=A0 32 +++++++++++++=
+++++++++++++++++
+> =C2=A0recipes/pathfinder/pathfinder.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=
+=A0 22 +++++++++++++++++++
+> =C2=A0recipes/pathfinder/pathfinder_1.1.3.bb =C2=A0 =C2=A0| =C2=A0 11 +++=
++++++++
+> =C2=A0recipes/pathfinder/pathfinder_svn.bb =C2=A0 =C2=A0 =C2=A0| =C2=A0 1=
+1 ++++++++++
+> =C2=A05 files changed, 97 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/pathfinder/files/pathfinderd.conf
+> =C2=A0create mode 100644 recipes/pathfinder/files/pathfinderd.init
+> =C2=A0create mode 100644 recipes/pathfinder/pathfinder.inc
+> =C2=A0create mode 100644 recipes/pathfinder/pathfinder_1.1.3.bb
+> =C2=A0create mode 100644 recipes/pathfinder/pathfinder_svn.bb
+>
+> diff --git a/recipes/pathfinder/files/pathfinderd.conf b/recipes/pathfind=
+er/files/pathfinderd.conf
 > new file mode 100644
-> index 0000000..b104374
+> index 0000000..9c285a8
 > --- /dev/null
-> +++ b/recipes/ccid/ccid_1.4.0.bb
-> @@ -0,0 +1,28 @@
-> +DESCRIPTION =3D "Generic USB CCID smart card reader driver"
-> +HOMEPAGE =3D "http://pcsclite.alioth.debian.org/ccid.html"
-> +LICENSE =3D "GPL"
+> +++ b/recipes/pathfinder/files/pathfinderd.conf
+> @@ -0,0 +1,21 @@
+> +<!DOCTYPE busconfig PUBLIC
+> + "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+> + "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+> +<busconfig>
+> + =C2=A0 =C2=A0<policy user=3D"root">
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0<allow own=3D"ca.carillon.pathfinder"/>
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0<allow send_destination=3D"ca.carillon.pathf=
+inder"/>
+> + =C2=A0 =C2=A0</policy>
+> +
+> + =C2=A0 =C2=A0<!--
+> + =C2=A0 =C2=A0<policy user=3D"pathfinderd">
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0<allow own=3D"ca.carillon.pathfinder"/>
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0<allow send_destination=3D"ca.carillon.pathf=
+inder"/>
+> + =C2=A0 =C2=A0</policy>
+> + =C2=A0 =C2=A0-->
+> +
+> + =C2=A0 =C2=A0<policy context=3D"default">
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0<deny own=3D"ca.carillon.pathfinder"/>
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0<allow send_destination=3D"ca.carillon.pathf=
+inder"/>
+> + =C2=A0 =C2=A0</policy>
+> +</busconfig>
+> diff --git a/recipes/pathfinder/files/pathfinderd.init b/recipes/pathfind=
+er/files/pathfinderd.init
+> new file mode 100644
+> index 0000000..a20b4c1
+> --- /dev/null
+> +++ b/recipes/pathfinder/files/pathfinderd.init
+> @@ -0,0 +1,32 @@
+> +#!/bin/sh
+> +DAEMON=3D/usr/sbin/pathfinderd
+> +NAME=3Dpathfinderd
+> +DESC=3D"pathfinderd: X509 Path Verification Daemon"
+> +PIDFILE=3D/var/run/pathfinderd/pathfinderd.pid
+> +ARGS=3D"-d"
+> +
+> +test -f $DAEMON || exit 0
+> +
+> +case "$1" in
+> + =C2=A0 =C2=A0start)
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0echo -n "Starting $DESC: $NAME"
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0start-stop-daemon --start --quiet --pidfile =
+$PIDFILE --exec $DAEMON -- $ARGS
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0echo "."
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0;;
+> + =C2=A0 =C2=A0stop)
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0echo -n "Stopping $DESC: $NAME"
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0start-stop-daemon --stop --quiet --pidfile $=
+PIDFILE --exec $DAEMON
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0echo "."
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0;;
+> + =C2=A0 =C2=A0restart)
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0$0 stop
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0sleep 1
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0$0 start
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0;;
+> + =C2=A0 =C2=A0*)
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0echo "Usage: $0 {start|stop|restart}"
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0exit 1
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0;;
+> +esac
+> +
+> +exit 0
+> diff --git a/recipes/pathfinder/pathfinder.inc b/recipes/pathfinder/pathf=
+inder.inc
+> new file mode 100644
+> index 0000000..ce1d832
+> --- /dev/null
+> +++ b/recipes/pathfinder/pathfinder.inc
+> @@ -0,0 +1,22 @@
+> +DESCRIPTION =3D "A tool to perform RFC3280-compliant path validation of =
+X509 certificates"
+> +
+> +LICENSE =3D "LGPL"
 
-be specific on GPL version
+version please
 
-> +PR =3D "r1"
+> +DEPENDS =3D "wvstreams openldap boost"
+> +RDEPENDS =3D "dbus"
+> +HOMEPAGE =3D "http://code.google.com/p/pathfinder-pki/"
+> +
+> +INC_PR =3D "0"
 
 should be r0
 
 > +
-> +DEPENDS =3D "virtual/libusb0 pcsc-lite"
-> +RDEPENDS_${PN} =3D "pcsc-lite"
+> +inherit cmake pkgconfig update-rc.d
 > +
-> +SRC_URI =3D "http://alioth.debian.org/download.php/3333/ccid-${PV}.tar.b=
-z2 \
-> + =C2=A0file://no-cardman-5321.diff;apply=3Dyes \
+> +INITSCRIPT_NAME =3D "pathfinderd"
+> +INITSCRIPT_PARAMS =3D "defaults"
+> +
+> +do_install_append() {
+> + =C2=A0install -d ${D}/${sysconfdir}/init.d/
+> + =C2=A0install -m 755 "${WORKDIR}/pathfinderd.init" "${D}/etc/init.d/pat=
+hfinderd"
+> +
+> + =C2=A0install -d ${D}/${sysconfdir}/dbus-1/system.d/
+> + =C2=A0install ${WORKDIR}/pathfinderd.conf ${D}/${sysconfdir}/dbus-1/sys=
+tem.d/
+> +
+> +}
+> diff --git a/recipes/pathfinder/pathfinder_1.1.3.bb b/recipes/pathfinder/=
+pathfinder_1.1.3.bb
+> new file mode 100644
+> index 0000000..ab8aa65
+> --- /dev/null
+> +++ b/recipes/pathfinder/pathfinder_1.1.3.bb
+> @@ -0,0 +1,11 @@
+> +require pathfinder.inc
+> +
+> +SRC_URI =3D "http://pathfinder-pki.googlecode.com/files/${PN}-${PV}-Sour=
+ce.tar.gz \
+> + =C2=A0file://pathfinderd.init \
+> + =C2=A0file://pathfinderd.conf \
 > +"
 > +
-> +inherit autotools
+> +PR =3D "${INC_PR}.1"
 > +
-> +EXTRA_OECONF =3D "--enable-udev"
-> +
-> +do_install_append () {
-> + =C2=A0 =C2=A0 =C2=A0 install -d "${D}/etc/udev/rules.d"
-> + =C2=A0 =C2=A0 =C2=A0 install -m 644 "${S}/src/pcscd_ccid.rules" "${D}/e=
-tc/udev/rules.d/85-pcscd_ccid.rules"
-> +}
-> +
-> +FILES_${PN} +=3D "${libdir}/pcsc/"
-> +FILES_${PN}-dbg +=3D "${libdir}/pcsc/drivers/*/*/*/.debug"
-> +
-> +SRC_URI[md5sum] =3D "745d681bed2e17579fa6144e19bcb01d"
-> +SRC_URI[sha256sum] =3D "a0b6e56c54f311c4cb39eef0f362e4e6d388bf815a15532e=
-4524d2be1723b4ff"
-> +
-> +DEFAULT_PREFERENCE =3D "-1"
-
-try to make it usable for all.
-
-> diff --git a/recipes/ccid/files/no-cardman-5321.diff b/recipes/ccid/files=
-/no-cardman-5321.diff
+> +SRC_URI[md5sum] =3D "6985ea14da6dff30c3c4e5cfc8b3d0f7"
+> +SRC_URI[sha256sum] =3D "a81b09a306aa997980d76f2b6e9215e7b3a91ed4c5fb413b=
+3c4d30513a5e1031"
+> diff --git a/recipes/pathfinder/pathfinder_svn.bb b/recipes/pathfinder/pa=
+thfinder_svn.bb
 > new file mode 100644
-> index 0000000..504c061
+> index 0000000..f17943e
 > --- /dev/null
-> +++ b/recipes/ccid/files/no-cardman-5321.diff
-> @@ -0,0 +1,10 @@
-> +--- ccid-1.3.11/readers/supported_readers.txt.old =C2=A0 =C2=A0 =C2=A020=
-09-09-28 18:12:42.000000000 +0200
-> ++++ ccid-1.3.11/readers/supported_readers.txt =C2=A02009-09-28 18:12:53.=
-000000000 +0200
-> +@@ -43,7 +43,6 @@
-> + 0x076B:0x4321:OmniKey CardMan 4321
-> + 0x076B:0x5121:OmniKey CardMan 5121
-> + 0x076B:0x5125:OmniKey CardMan 5125
-> +-0x076B:0x5321:OmniKey CardMan 5321
-> + 0x076B:0x6622:OmniKey CardMan 6121
-> + 0x076B:0xA021:Smart Card Reader
-> + 0x076B:0xA022:Teo by Xiring
+> +++ b/recipes/pathfinder/pathfinder_svn.bb
+> @@ -0,0 +1,11 @@
+> +require pathfinder.inc
+> +
+> +SRC_URI =3D "svn://pathfinder-pki.googlecode.com/svn/trunk;module=3Dpath=
+finder;proto=3Dhttp \
+> + =C2=A0file://pathfinderd.init \
+> + =C2=A0file://pathfinderd.conf \
+> +"
+> +
+> +SRCREV =3D "224"
+> +PV =3D "1.1.3+svnr${SRCPV}"
+> +PR =3D "${INC_PR}.0"
+> +S =3D "${WORKDIR}/${PN}"
 > --
 > 1.7.3.1
 >
