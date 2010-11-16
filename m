@@ -1,37 +1,36 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PIV7D-0003qh-9q
+	(envelope-from <raj.khem@gmail.com>) id 1PIV8a-0003wW-Qx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 00:39:07 +0100
-Received: by ywg8 with SMTP id 8so372497ywg.6
+	Wed, 17 Nov 2010 00:40:33 +0100
+Received: by gyf3 with SMTP id 3so836818gyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Nov 2010 15:38:01 -0800 (PST)
+	Tue, 16 Nov 2010 15:39:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=SDJXr6oaXm/0bwR6kPmoQlqpYvVyXT9OjceMv7qBNSo=;
-	b=sjjOxoGTzhGPmTjZHY12xQ43xf8lXRihCpvwEjTPukZJ7QzZdqNy3ljIpAQYQ3yJik
-	RkfTMnal+I24JhRzfrb1VS3ci1EZZqPtPfLyNJz2BBJ/kgIbX8aby287wMVUFqz6McoL
-	ClCV+rJTWzcWboRI7cJpUry1YgwT2Pu15Sq30=
+	bh=vbtlk+eNwiahwrYNjLR9YNnh04r144H9Pzp9ngcQAkg=;
+	b=J6/d1BtEyuSIIuhKdoZlJw/U1DFMe/NqQcF9+OIv/vAlPUOthqV/nc0+orBLXKLEcI
+	34/2Il5FhgOGEr3pkeyFdQ2L8HWB3uVRJLHCsoHsrMOtB73cheowI1jUYHFcE2xTKgyS
+	rlAw3FiawN5Zz+HZXKScllgb1YaBvgCkCho3Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=ktlojw1SgKILJK+0VS0ZtAAAzR3Q4wcFzuuvddVXx15ePQdWs4rfg4MOKSP0j+dNa3
-	ZkmD6slQkVAKF4qaBiDyU3bSBnEm7i64MtgIjCnvKM8XViFxDlp3QAje5izXcYr7Gs+3
-	2NNKrikmunlzMW1Lx98n5QF0hHMrKx11q+AKw=
-Received: by 10.91.12.18 with SMTP id p18mr10507841agi.48.1289950681528; Tue,
-	16 Nov 2010 15:38:01 -0800 (PST)
+	b=CryihmPWFGpMnNc5B0X9d/K1o+sYPbQVhSKjzjSozbSc0+mu208drpdP+kXaVN/Xbo
+	Kl6xEkN5B4kdXsX7P2aXjC4EwDyEery+U6wGlad7cRoCjjiU1xApMmT2B1FSaZam42Th
+	NrvZ85fZNHIVS3QMtW7aEL2YZRj2Gy/CCrpCg=
+Received: by 10.91.121.3 with SMTP id y3mr4362646agm.156.1289950765802; Tue,
+	16 Nov 2010 15:39:25 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Tue, 16 Nov 2010 15:37:41 -0800 (PST)
-In-Reply-To: <1289419592-23604-2-git-send-email-msmith@cbnco.com>
+Received: by 10.90.120.8 with HTTP; Tue, 16 Nov 2010 15:39:05 -0800 (PST)
+In-Reply-To: <1289419592-23604-1-git-send-email-msmith@cbnco.com>
 References: <1289419592-23604-1-git-send-email-msmith@cbnco.com>
-	<1289419592-23604-2-git-send-email-msmith@cbnco.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 Nov 2010 15:37:41 -0800
-Message-ID: <AANLkTimz4pgYZa4HXfMcPZnPqNLrrSH3xQVMu0tjdam=@mail.gmail.com>
+Date: Tue, 16 Nov 2010 15:39:05 -0800
+Message-ID: <AANLkTi=fO2ZE1CWusMz=ko7C5Bxq_6US4A5rcrerPFN8@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Connect-IP: 209.85.160.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] preferred-xorg-versions: use git release of xf86-input-mutouch
+Subject: Re: [PATCH 1/2] xf86-input-mutouch: add latest git release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,51 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 23:39:08 -0000
+X-List-Received-Date: Tue, 16 Nov 2010 23:40:33 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On Wed, Nov 10, 2010 at 12:06 PM, Michael Smith <msmith@cbnco.com> wrote:
-> The latest source release, 1.2.1, fails to build with X11R7.5.
+> Fixes build with XINPUT ABI 7.
 >
 > Signed-off-by: Michael Smith <msmith@cbnco.com>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
+
 > ---
-> =C2=A0.../preferred-xorg-versions-X11R7.5-latest.inc =C2=A0 =C2=A0 | =C2=
-=A0 =C2=A02 +-
-> =C2=A0.../include/preferred-xorg-versions-live.inc =C2=A0 =C2=A0 =C2=A0 |=
- =C2=A0 =C2=A02 +-
-> =C2=A02 files changed, 2 insertions(+), 2 deletions(-)
+> =C2=A0recipes/xorg-driver/xf86-input-mutouch_git.bb | =C2=A0 10 +++++++++=
++
+> =C2=A01 files changed, 10 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/xorg-driver/xf86-input-mutouch_git.bb
 >
-> diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.i=
-nc b/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-> index 634265e..39cd4e6 100644
-> --- a/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-> +++ b/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-> @@ -78,7 +78,7 @@ PREFERRED_VERSION_xf86-input-jamstudio ?=3D "1.2.0"
-> =C2=A0PREFERRED_VERSION_xf86-input-magellan ?=3D "1.2.0"
-> =C2=A0PREFERRED_VERSION_xf86-input-magictouch ?=3D "1.0.0.5"
-> =C2=A0PREFERRED_VERSION_xf86-input-microtouch ?=3D "1.2.0"
-> -PREFERRED_VERSION_xf86-input-mutouch ?=3D "1.2.1"
-> +PREFERRED_VERSION_xf86-input-mutouch ?=3D "1.2.1+gitr%"
-> =C2=A0PREFERRED_VERSION_xf86-input-palmax ?=3D "1.2.0"
-> =C2=A0PREFERRED_VERSION_xf86-input-penmount ?=3D "1.4.0"
-> =C2=A0PREFERRED_VERSION_xf86-input-spaceorb ?=3D "1.1.1"
-> diff --git a/conf/distro/include/preferred-xorg-versions-live.inc b/conf/=
-distro/include/preferred-xorg-versions-live.inc
-> index c38580e..d4ad824 100644
-> --- a/conf/distro/include/preferred-xorg-versions-live.inc
-> +++ b/conf/distro/include/preferred-xorg-versions-live.inc
-> @@ -130,7 +130,7 @@ PREFERRED_VERSION_xf86-input-magellan ?=3D "1.2.0"
-> =C2=A0PREFERRED_VERSION_xf86-input-magictouch ?=3D "1.0.0.5"
-> =C2=A0PREFERRED_VERSION_xf86-input-microtouch ?=3D "1.2.0"
-> =C2=A0PREFERRED_VERSION_xf86-input-mouse ?=3D "1.6.0"
-> -PREFERRED_VERSION_xf86-input-mutouch ?=3D "1.2.1"
-> +PREFERRED_VERSION_xf86-input-mutouch ?=3D "1.2.1+gitr%"
-> =C2=A0PREFERRED_VERSION_xf86-input-palmax ?=3D "1.2.0"
-> =C2=A0PREFERRED_VERSION_xf86-input-penmount ?=3D "1.4.1"
-> =C2=A0PREFERRED_VERSION_xf86-input-spaceorb ?=3D "1.1.1"
+> diff --git a/recipes/xorg-driver/xf86-input-mutouch_git.bb b/recipes/xorg=
+-driver/xf86-input-mutouch_git.bb
+> new file mode 100644
+> index 0000000..f72b03c
+> --- /dev/null
+> +++ b/recipes/xorg-driver/xf86-input-mutouch_git.bb
+> @@ -0,0 +1,10 @@
+> +require xorg-driver-input.inc
+> +DESCRIPTION =3D "X.Org X server -- muTouch input driver"
+> +PE =3D "1"
+> +PR =3D "${INC_PR}.0"
+> +SRCREV =3D "db04a5333b545a0442b995bae47d2c5527a7459e"
+> +PV =3D "1.2.1+gitr${SRCREV}"
+> +
+> +SRC_URI =3D "git://anongit.freedesktop.org/xorg/driver/xf86-input-mutouc=
+h;protocol=3Dgit"
+> +
+> +S =3D "${WORKDIR}/git"
 > --
 > 1.7.0.4
 >
