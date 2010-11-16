@@ -1,41 +1,37 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PIEor-0004ju-5X
+	(envelope-from <graham.gower@gmail.com>) id 1PIG8N-000656-LV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Nov 2010 07:15:06 +0100
-Received: by bwz10 with SMTP id 10so320292bwz.6
+	Tue, 16 Nov 2010 08:39:21 +0100
+Received: by wwf26 with SMTP id 26so386983wwf.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Nov 2010 22:14:02 -0800 (PST)
+	Mon, 15 Nov 2010 23:38:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=BQwIiGDxkUvXoFxUceh5SdyVPebuQohoQVgHwFm8pYs=;
-	b=Hs+BBJKCeAxhEcb1+m9UPTogTE9KRXZYpBL++oQoFDEd8GvVfGDNgGsKGhJdy2UiuW
-	qsoJBuEQjpIM6BlrS8AS8pUM5XJ5Vbupai6RMC7UCNXIhIpb3FlAtXuV4FZ6KFpJOE4d
-	tyrn0qBvwIjDX8Gz/fPL6AcPsX4sDcCu5xE8k=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=GnE7H8+V2mImPT4CGofRaKJwNbCf2UtymuvegIxn/Hc=;
+	b=YG3jMDoPOqu37SygCR/GvIvAI48i4VoyPgfGscyStzZhV4HDjV7nRNWHf9qxqbTHPG
+	dWqtF/lqxL4lV+KrIwzDwBWvUJoLfXmxT2Fp6ksvYfa4bUrVWQeTK5ZmA/azEXGDAFWf
+	q72axRXjhV3MY6fmPCrIriuGL4pIkm1MFDE1U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=kHJ2/4DqplkWJqyhcdvEj5ug2udpsoOAw+rldI/8EQOsCWAyD+Tr2qDNDQcRWrD5gk
-	mGLBA7YT0GUktU6d2FQLYAgB47cCDWMmmQVBeqll3CEQOfV+QGe6OWW3Zw3OryKiafBj
-	p96m6AZ9lPl4NZcugVKS63t4dkSHRV1aY90CY=
-Received: by 10.204.116.201 with SMTP id n9mr7133126bkq.138.1289888035260;
-	Mon, 15 Nov 2010 22:13:55 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id p34sm387158bkf.15.2010.11.15.22.13.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 15 Nov 2010 22:13:52 -0800 (PST)
-Date: Tue, 16 Nov 2010 07:13:52 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101116061352.GG20958@jama>
-References: <4CE1D1D1.1000009@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ir5vPAKVAA+a3BahS1KDizU/v9pRUTtYxvhHDxNzzp2gxxX8+yMGx1/yT97TL0RIyS
+	HW495HEWYd6ROHwqznTCFXC3iDkZChtTqdOqiztFbKDPU9fIc/6/w65dwxJO608xkt1t
+	XCZS4/DlACimW1e/Co6+s93N3tI45O7xxfoyQ=
 MIME-Version: 1.0
-In-Reply-To: <4CE1D1D1.1000009@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.227.128.7 with SMTP id i7mr7190089wbs.165.1289893087170; Mon,
+	15 Nov 2010 23:38:07 -0800 (PST)
+Received: by 10.227.32.147 with HTTP; Mon, 15 Nov 2010 23:38:07 -0800 (PST)
+In-Reply-To: <20101116061352.GG20958@jama>
+References: <4CE1D1D1.1000009@gmail.com>
+	<20101116061352.GG20958@jama>
+Date: Tue, 16 Nov 2010 18:08:07 +1030
+Message-ID: <AANLkTikC0c057fz7BFAWEjw4BGqmJfQ5OkvR+AZBOA_9@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -56,32 +52,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 06:15:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Nov 2010 07:39:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Nov 16, 2010 at 11:05:29AM +1030, Graham Gower wrote:
-> emacs.inc has this nugget in do_compile_prepend():
-> cp -pPR ${STAGING_DIR_TARGET}/* $treedir
+On 16 November 2010 16:43, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Tue, Nov 16, 2010 at 11:05:29AM +1030, Graham Gower wrote:
+>> PS: emacs and emacs-x11 fail for me in do_compile.
+>
+> Do you have make-3.82 on your host? emacs-x11_23.1.bb compiles fine with
+> SHR.
 
-ah, ugly indeed :/
-> 
-> During a world build, both emacs and emacs-x11 copy some 5GB into
-> their work dirs. This really seems like overkill.
-> 
-> Could someone familiar with building emacs take a look to see if
-> there is a reasonable alternative?
-> 
-> thanks,
-> -Graham
-> 
-> PS: emacs and emacs-x11 fail for me in do_compile.
-
-Do you have make-3.82 on your host? emacs-x11_23.1.bb compiles fine with
-SHR.
-
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Nope. make --version says 3.81.
 
 
