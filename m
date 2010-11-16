@@ -1,44 +1,44 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PIG8N-000656-LV
+	(envelope-from <obi@opendreambox.org>) id 1PIK6b-0000Fr-RQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Nov 2010 08:39:21 +0100
-Received: by wwf26 with SMTP id 26so386983wwf.24
+	Tue, 16 Nov 2010 12:53:46 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 9786E314AC42
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Nov 2010 23:38:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=GnE7H8+V2mImPT4CGofRaKJwNbCf2UtymuvegIxn/Hc=;
-	b=YG3jMDoPOqu37SygCR/GvIvAI48i4VoyPgfGscyStzZhV4HDjV7nRNWHf9qxqbTHPG
-	dWqtF/lqxL4lV+KrIwzDwBWvUJoLfXmxT2Fp6ksvYfa4bUrVWQeTK5ZmA/azEXGDAFWf
-	q72axRXjhV3MY6fmPCrIriuGL4pIkm1MFDE1U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ir5vPAKVAA+a3BahS1KDizU/v9pRUTtYxvhHDxNzzp2gxxX8+yMGx1/yT97TL0RIyS
-	HW495HEWYd6ROHwqznTCFXC3iDkZChtTqdOqiztFbKDPU9fIc/6/w65dwxJO608xkt1t
-	XCZS4/DlACimW1e/Co6+s93N3tI45O7xxfoyQ=
+	Tue, 16 Nov 2010 12:52:42 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id XHWmWpftui1v
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Nov 2010 12:52:36 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 8AB3F314AC0F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Nov 2010 12:52:36 +0100 (CET)
+Message-ID: <4CE27084.8080409@opendreambox.org>
+Date: Tue, 16 Nov 2010 12:52:36 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.227.128.7 with SMTP id i7mr7190089wbs.165.1289893087170; Mon,
-	15 Nov 2010 23:38:07 -0800 (PST)
-Received: by 10.227.32.147 with HTTP; Mon, 15 Nov 2010 23:38:07 -0800 (PST)
-In-Reply-To: <20101116061352.GG20958@jama>
-References: <4CE1D1D1.1000009@gmail.com>
-	<20101116061352.GG20958@jama>
-Date: Tue, 16 Nov 2010 18:08:07 +1030
-Message-ID: <AANLkTikC0c057fz7BFAWEjw4BGqmJfQ5OkvR+AZBOA_9@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+References: <4CBEC95F.1000807@opendreambox.org>	<1288016445-30478-1-git-send-email-obi@opendreambox.org>	<4CDEBCC5.7050401@opendreambox.org>	<4CDEE328.6060307@mentor.com>	<4CE0759F.70000@opendreambox.org>	<4CE14CAD.403@mentor.com>	<4CE155E2.5030502@opendreambox.org>
+	<4CE177E4.7090108@mentor.com>
+In-Reply-To: <4CE177E4.7090108@mentor.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: emacs copying ${STAGING_DIR_TARGET} - wtf?
+Subject: Re: [PATCH] lib_package.bbclass: fix packaging of static libs, inherit binconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,16 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 07:39:21 -0000
+X-List-Received-Date: Tue, 16 Nov 2010 11:53:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On 16 November 2010 16:43, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Tue, Nov 16, 2010 at 11:05:29AM +1030, Graham Gower wrote:
->> PS: emacs and emacs-x11 fail for me in do_compile.
->
-> Do you have make-3.82 on your host? emacs-x11_23.1.bb compiles fine with
-> SHR.
+On 11/15/2010 07:11 PM, Tom Rini wrote:
+> On 11/15/2010 08:46 AM, Andreas Oberritter wrote:
+>> On 11/15/2010 04:07 PM, Tom Rini wrote:
+>>> On 11/14/2010 04:49 PM, Andreas Oberritter wrote:
+>>>> On 11/13/2010 08:12 PM, Tom Rini wrote:
+>>>>> On 11/13/2010 09:28 AM, Andreas Oberritter wrote:
+>>>>>>> * Although it packaged ${bindir}/*-config into FILES_${PN}-dev,
+>>>>>>> it did
+>>>>>>>      not include the required mangling applied by binconfig.bbclass.
+>>>>>
+>>>>> Not sure here.  Not all lib packages need binconfig mangling so
+>>>>> it's up
+>>>>> to the recipe to say "I need this", usually at least.
+>>>>
+>>>> OK, Koen's proposal included "inherit binconfig", too, so I left it in.
+>>>> I'll send an updated patch without it.
+>>>
+>>> Just missed the proposal.  Can you link it easily?  Thanks!
+>>
+>> http://article.gmane.org/gmane.comp.handhelds.openembedded/38554
+> 
+> OK, with that I'm happy with the v1 (that I assume you archived in
+> patchwork).
+> 
+> Acked-by: Tom Rini <tom_rini@mentor.com>
+> 
 
-Nope. make --version says 3.81.
+Thanks! Yes, it was archived. Can you please push it?
+
+http://patchwork.openembedded.org/patch/3428/
+
+Regards,
+Andreas
 
 
