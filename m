@@ -1,37 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PILcs-00011F-Io
+	(envelope-from <martin.jansa@gmail.com>) id 1PIMIk-0002fg-F4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Nov 2010 14:31:11 +0100
-Received: by bwz10 with SMTP id 10so618233bwz.6
+	Tue, 16 Nov 2010 15:14:27 +0100
+Received: by fxm11 with SMTP id 11so488609fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Nov 2010 05:30:07 -0800 (PST)
+	Tue, 16 Nov 2010 06:13:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=M/w7z4Pe+bkTb0DNPvuxFTgGjOSM3Lh93qh9HQDsdXU=;
-	b=wLca9gbx9e4T9jtsEM8lV+TzLa0u5XfqhW3B1DDRJUJ3yfIkmsdS+JKqOkipFUX146
-	onkzUAgF5stTKnwT0900uTkyf4V7xVGLMdjZQz2IP5IXxurwUudcT2wFykOQWs1OfzZi
-	udJaFkAcLwjTC7Yt/8+Zf8wx7MNBwej1JmOJM=
+	:message-id:x-mailer;
+	bh=hmMuhNp+HOdzacQ00OoZj+TC7/gNqVXdonvK3Ccc0g0=;
+	b=ssiOy5HXiN+nzGJ42aYbYv0HvqI1dy0myTB7PlgQmJmwAMe1SHxSJI3naS/F6tpkjo
+	P6LRBDpDXz6F3eJOUx1mf+JEuSoBceGEtHn1mBYHYzY10u2gbhP10h9z8g9zpz3kOz5m
+	yxU3WQ7e4zd3b/RGr4wATZmXYGmVXToN4zj14=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=DLTgeb1uxtopqp5GceCJf5WuytDBMEmHepAMVZvHVmhgnLVW79WK2y8RvD7tV4GMeB
-	euDqQsLFSn1G59n78QZZvVAGTh14amKp7sObyc6L/l7mel3esa4gBUsOq1a50rKp21cD
-	LkWcCpre8TRGBZLzGOrt1CvgF8ml5xChLo8LQ=
-Received: by 10.204.114.9 with SMTP id c9mr7439556bkq.64.1289914207239;
-	Tue, 16 Nov 2010 05:30:07 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=kyAmvXTMwVKiHb0w75T2I2qRLKpzR1r2liPTl9cZj8rYCTmIoSwoDN46zUw3HW4MJB
+	skryWr94CoHMQNSIngQBFfM+2bWkzXZTRX+Ss9M4Xkka7ep1I9mt57UaADzcim5fNceV
+	lnJdfOB7mmDeTE1sBwgmJOHbuzf4v3abpXAWA=
+Received: by 10.223.71.201 with SMTP id i9mr1647858faj.89.1289916801460;
+	Tue, 16 Nov 2010 06:13:21 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id f21sm585713bkf.12.2010.11.16.05.30.05
+	by mx.google.com with ESMTPS id f5sm262969fai.22.2010.11.16.06.13.19
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 16 Nov 2010 05:30:06 -0800 (PST)
+	Tue, 16 Nov 2010 06:13:20 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Nov 2010 14:30:06 +0100
-Message-Id: <1289914206-29909-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 16 Nov 2010 15:13:18 +0100
+Message-Id: <1289916799-21803-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.3.2
-In-Reply-To: <1289658624.3521.26.camel@gnutoo-laptop>
-References: <1289658624.3521.26.camel@gnutoo-laptop>
-X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] binconfig: use / instead empty prefix/exec_prefix in get_binconfig_mangle
+Subject: [PATCH 1/2] udh.inc: use RDEPENDS_${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,44 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 13:31:11 -0000
+X-List-Received-Date: Tue, 16 Nov 2010 14:14:27 -0000
 
-* 952e5e2b7a5c1deefc939594d40b81a71fb16a54 appends / in sed call,
-  but it breaks ie =/usr replacement ie in libmikmod
-* using at least / in SLASH_PREFIX/SLASH_EXEC_PREFIX is needed ie for micro
-  distribution where prefix/exec_prefix are empty (/usr collapsed to /)
-* thanks to GNUtoo!
 ---
- classes/binconfig.bbclass |   10 ++++++++--
- 1 files changed, 8 insertions(+), 2 deletions(-)
+ recipes/uhd/uhd.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/classes/binconfig.bbclass b/classes/binconfig.bbclass
-index b3b2236..df2c283 100644
---- a/classes/binconfig.bbclass
-+++ b/classes/binconfig.bbclass
-@@ -2,14 +2,20 @@ FILES_${PN}-dev += "${bindir}/*-config"
+diff --git a/recipes/uhd/uhd.inc b/recipes/uhd/uhd.inc
+index 3b5be58..d2e7903 100644
+--- a/recipes/uhd/uhd.inc
++++ b/recipes/uhd/uhd.inc
+@@ -3,9 +3,9 @@ HOMEPAGE = "http://www.ettus.com"
+ LICENSE = "GPLV3+"
  
- # The namespaces can clash here hence the two step replace
- def get_binconfig_mangle(d):
-+	SLASH_PREFIX = "${prefix}"
-+	if SLASH_PREFIX is "":
-+		SLASH_PREFIX = "/"
-+	SLASH_EXEC_PREFIX = "${exec_prefix}"
-+	if SLASH_EXEC_PREFIX is "":
-+		SLASH_EXEC_PREFIX = "/"
- 	s = "-e ''"
- 	if not bb.data.inherits_class('native', d):
- 		optional_quote = r"\(\"\?\)"
- 		s += " -e 's:=%s${libdir}:=\\1OELIBDIR:;'" % optional_quote
- 		s += " -e 's:=%s${includedir}:=\\1OEINCDIR:;'" % optional_quote
- 		s += " -e 's:=%s${datadir}:=\\1OEDATADIR:'" % optional_quote
--		s += " -e 's:=%s${prefix}/:=\\1OEPREFIX/:'" % optional_quote
--		s += " -e 's:=%s${exec_prefix}/:=\\1OEEXECPREFIX/:'" % optional_quote
-+		s += " -e 's:=%s%s:=\\1OEPREFIX:'" % (optional_quote, SLASH_PREFIX)
-+		s += " -e 's:=%s%s:=\\1OEEXECPREFIX:'" % (optional_quote, SLASH_EXEC_PREFIX)
- 		s += " -e 's:-L${libdir}:-LOELIBDIR:;'"
- 		s += " -e 's:-I${includedir}:-IOEINCDIR:;'"
- 		s += " -e 's:OELIBDIR:${STAGING_LIBDIR}:;'"
+ DEPENDS = "git-native python-cheetah-native boost libusb1 uhd-firmware"
+-RDEPENDS += "uhd-firmware"
++RDEPENDS_${PN} += "uhd-firmware"
+ 
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+ inherit cmake
+ 
 -- 
 1.7.3.2
 
