@@ -1,45 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PIMIl-0002fg-EG
+	(envelope-from <obi@opendreambox.org>) id 1PIOmD-0002eS-KI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Nov 2010 15:14:29 +0100
-Received: by mail-fx0-f47.google.com with SMTP id 11so488609fxm.6
+	Tue, 16 Nov 2010 17:53:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 76891314AC64
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Nov 2010 06:13:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=WaDVSEZUsIgkSje/vyXxjNLROEFPVtDmZN4GuJUBBSc=;
-	b=t9B4dc57h8jGEJuzuy2D961NzsFhsgrCQ9JOfuDee3InZdQNu6zxVeITzx+U9vaQPH
-	LEOJRtNZmRjU6LbKoPGrNBbsl1Da/sYlt0jOcc1O/CZ6xp10OJxHMAn7QudlNATVmFH0
-	ElTNn3e1sBC+SLh9xhmQzaAhQuOEq+xm4MoQQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=frLeAvGmWi327FQ61701qY6gCm/pmllHnOGo+1F6yIxf4nUI47D/85jktqLXmRxWf1
-	9ptI8FJ/iQ08s96nC97xqdxiYsdtgPwyNl19gczZAdbUhq6cGLJHUHkpy2lx+iH4+Af/
-	jvbsR60lLKox4EqExutAGUeXBBg+c5P7VEyF8=
-Received: by 10.223.102.141 with SMTP id g13mr889015fao.133.1289916804576;
-	Tue, 16 Nov 2010 06:13:24 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n3sm458123faa.5.2010.11.16.06.13.23
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 16 Nov 2010 06:13:24 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 16 Nov 2010 17:51:58 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id TQG7nvczqTFS
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Nov 2010 17:51:52 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 70AD4314AB9C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Nov 2010 17:51:52 +0100 (CET)
+Message-ID: <4CE2B6A8.5040703@opendreambox.org>
+Date: Tue, 16 Nov 2010 17:51:52 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Nov 2010 15:13:19 +0100
-Message-Id: <1289916799-21803-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.3.2
-In-Reply-To: <1289916799-21803-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1289916799-21803-1-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+References: <1287353716-27717-1-git-send-email-obi@opendreambox.org>
+In-Reply-To: <1287353716-27717-1-git-send-email-obi@opendreambox.org>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] jlime,dzen2,puzzles: use RDEPENDS_${PN}
+Subject: Re: [PATCH] libfribidi-0.10.4: update recipe, fix packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,107 +51,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 14:14:29 -0000
+X-List-Received-Date: Tue, 16 Nov 2010 16:53:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-* it was fixed in whole tree about half year ago
-  http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-June/020384.html
-  http://comments.gmane.org/gmane.comp.handhelds.openembedded/33440
-* then again about month ago
-  http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg11356.html
-* please follow OE packaging guidelines in new recipes
+Ping (now that the required changes to lib_package.bbclass have been pushed)
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes/dzen2/dzen2_svn.bb          |    4 ++--
- recipes/jlime/fileselector_1.1.bb   |    4 ++--
- recipes/jlime/fnkey_1.0.bb          |    4 ++--
- recipes/jlime/jlime-extras_1.0.1.bb |    4 ++--
- recipes/puzzles/stppc2x_svn.bb      |    4 ++--
- 5 files changed, 10 insertions(+), 10 deletions(-)
+Patchwork URL:
+http://patchwork.openembedded.org/patch/3297/
 
-diff --git a/recipes/dzen2/dzen2_svn.bb b/recipes/dzen2/dzen2_svn.bb
-index fa10724..1ad6e82 100644
---- a/recipes/dzen2/dzen2_svn.bb
-+++ b/recipes/dzen2/dzen2_svn.bb
-@@ -1,11 +1,11 @@
- DESCRIPTION = "dzen is a general purpose messaging, notification and menu program."
- LICENSE = "MIT"
- DEPENDS = "virtual/libx11 libxft"
--RDEPENDS = "ttf-dejavu-sans xrandr"
-+RDEPENDS_${PN} = "ttf-dejavu-sans xrandr"
- 
- SRCREV = "271"
- PV = "0.8.5+svnr${SRCPV}"
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI = "svn://dzen.googlecode.com/svn/;module=trunk;proto=http \
- 	   file://dzen-extras.tar.gz \
-diff --git a/recipes/jlime/fileselector_1.1.bb b/recipes/jlime/fileselector_1.1.bb
-index 6a4929d..e5e01cc 100644
---- a/recipes/jlime/fileselector_1.1.bb
-+++ b/recipes/jlime/fileselector_1.1.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Fileselector is an SDL-based file chooser dialog"
- LICENSE = "GPLv2"
--PR = "r0"
-+PR = "r1"
- 
- DEPENDS = "virtual/libsdl libsdl-ttf"
--RDEPENDS = "ttf-dejavu-sans-condensed"
-+RDEPENDS_${PN} = "ttf-dejavu-sans-condensed"
- 
- SRC_URI = "http://jlime.com/downloads/development/software/fileselector-${PV}.tar.gz"
- 
-diff --git a/recipes/jlime/fnkey_1.0.bb b/recipes/jlime/fnkey_1.0.bb
-index fc09eeb..6f24da4 100644
---- a/recipes/jlime/fnkey_1.0.bb
-+++ b/recipes/jlime/fnkey_1.0.bb
-@@ -1,8 +1,8 @@
- DESCRIPTION = "Emulates Fn key by simulating multiple keypresses."
- LICENSE = "GPLv2"
--PR = "r0"
-+PR = "r1"
- 
--RDEPENDS = "xdotool"
-+RDEPENDS_${PN} = "xdotool"
- 
- SRC_URI = "file://fnkey.c"
- 
-diff --git a/recipes/jlime/jlime-extras_1.0.1.bb b/recipes/jlime/jlime-extras_1.0.1.bb
-index 9b7b907..c3dd483 100644
---- a/recipes/jlime/jlime-extras_1.0.1.bb
-+++ b/recipes/jlime/jlime-extras_1.0.1.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Various extras for the Jlime userlands"
--PR = "r0"
-+PR = "r1"
- 
--RRECOMMENDS = "jlime-extras-${MACHINE}"
-+RRECOMMENDS_${PN} = "jlime-extras-${MACHINE}"
- 
- PACKAGE_ARCH = "all"
- SRC_URI = "http://jlime.com/downloads/development/software/${PN}-${PV}.tar.gz"
-diff --git a/recipes/puzzles/stppc2x_svn.bb b/recipes/puzzles/stppc2x_svn.bb
-index 380a753..8e6d4f2 100644
---- a/recipes/puzzles/stppc2x_svn.bb
-+++ b/recipes/puzzles/stppc2x_svn.bb
-@@ -2,11 +2,11 @@ DESCRIPTION = "stppc2x is an SDL port of Simon Tatham's Portable Puzzle Collecti
- LICENSE = "GPLv2"
- 
- DEPENDS = "virtual/libsdl libsdl-image libsdl-ttf"
--RDEPENDS = "ttf-dejavu-sans-condensed"
-+RDEPENDS_${PN} = "ttf-dejavu-sans-condensed"
- 
- SRCREV = "185"
- PV = "1.0+svnr${SRCPV}"
--PR = "r0"
-+PR = "r1"
- 
- FILES_${PN} = "/usr/bin /usr/share"
- 
--- 
-1.7.3.2
+On 10/18/2010 12:15 AM, Andreas Oberritter wrote:
+> * added LICENSE
+> * removed configure patch
+> * use lib_package and binconfig to package all installed files
+> * convert to new style staging
+> * oe-stylize
+> 
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  recipes/libfribidi/files/libtool-update.patch |   11 --------
+>  recipes/libfribidi/libfribidi_0.10.4.bb       |   32 +++++++-----------------
+>  2 files changed, 10 insertions(+), 33 deletions(-)
+>  delete mode 100644 recipes/libfribidi/files/libtool-update.patch
+> 
+> diff --git a/recipes/libfribidi/files/libtool-update.patch b/recipes/libfribidi/files/libtool-update.patch
+> deleted file mode 100644
+> index c703100..0000000
+> --- a/recipes/libfribidi/files/libtool-update.patch
+> +++ /dev/null
+> @@ -1,11 +0,0 @@
+> ---- fribidi-0.10.4/configure.in~	2002-05-19 11:06:48.000000000 +0100
+> -+++ fribidi-0.10.4/configure.in	2004-08-03 17:42:28.000000000 +0100
+> -@@ -50,7 +50,7 @@
+> - AC_PROG_INSTALL
+> - AC_PROG_LN_S
+> - AC_PROG_MAKE_SET
+> --AC_PROG_RANLIB
+> -+#AC_PROG_RANLIB
+> - AC_PATH_PROG(SED, sed, $PATH)
+> - 
+> - 
+> diff --git a/recipes/libfribidi/libfribidi_0.10.4.bb b/recipes/libfribidi/libfribidi_0.10.4.bb
+> index c46909b..b83c484 100644
+> --- a/recipes/libfribidi/libfribidi_0.10.4.bb
+> +++ b/recipes/libfribidi/libfribidi_0.10.4.bb
+> @@ -1,32 +1,20 @@
+>  DESCRIPTION = "Fribidi library for bidirectional text"
+>  SECTION = "libs"
+>  PRIORITY = "optional"
+> +LICENSE = "LGPLv2.1"
+> +PR = "r1"
+>  
+> -inherit autotools pkgconfig
+> -
+> -PR = "r0"
+> +SRC_URI = "${SOURCEFORGE_MIRROR}/fribidi/fribidi-${PV}.tar.bz2"
+> +SRC_URI[md5sum] = "0f6e7ecca08e6e108dc06337f5b5cabf"
+> +SRC_URI[sha256sum] = "f3ecdb9d108bd61ec9394df75f5fd68ba886a8da0863ba6258338893aec6c04f"
+>  
+>  S = "${WORKDIR}/fribidi-${PV}"
+>  
+> -SRC_URI = "${SOURCEFORGE_MIRROR}/fribidi/fribidi-${PV}.tar.bz2 \
+> -           file://libtool-update.patch"
+> -
+> -#PACKAGES += " ${PN}-bin"
+> -FILES_${PN} = "${libdir}/lib*.so.*"
+> -#FILES_${PN}-bin = "${libdir}/uu*"
+> +inherit autotools lib_package binconfig pkgconfig
+>  
+>  do_configure_prepend () {
+> -# this version of libtool is old - we have to nobble this file to get it to litoolize
+> -	rm ltconfig
+> -	rm aclocal.m4
+> -	rm acinclude.m4
+> -}
+> -
+> -do_stage () {
+> -	oe_libinstall -a -so -C .libs libfribidi ${STAGING_LIBDIR}
+> -	autotools_stage_includes
+> +        # this version of libtool is old - we have to nobble this file to get it to litoolize
+> +        rm ltconfig
+> +        rm aclocal.m4
+> +        rm acinclude.m4
+>  }
+> -
+> -
+> -SRC_URI[md5sum] = "0f6e7ecca08e6e108dc06337f5b5cabf"
+> -SRC_URI[sha256sum] = "f3ecdb9d108bd61ec9394df75f5fd68ba886a8da0863ba6258338893aec6c04f"
 
 
 
