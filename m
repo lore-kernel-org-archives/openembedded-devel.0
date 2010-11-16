@@ -1,36 +1,36 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <harvey.tim@gmail.com>) id 1PIPrS-0003bF-MI
+	(envelope-from <harvey.tim@gmail.com>) id 1PIPrg-0003bZ-7H
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Nov 2010 19:02:32 +0100
-Received: by pwi8 with SMTP id 8so272588pwi.6
+	Tue, 16 Nov 2010 19:02:46 +0100
+Received: by pzk34 with SMTP id 34so263904pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Nov 2010 10:01:24 -0800 (PST)
+	Tue, 16 Nov 2010 10:01:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer;
-	bh=u7WZo3uCIKpjJnh1PIo930Kt1RsIs6Qe6hOkrgSuWGk=;
-	b=R9N+itGL4RZcXoEBBpLmBY6npOkl05Zl/ojEIc1fg6ufmrv41oKebOzlJiQiNnr4Tm
-	4TbdWxiO7jSagL5BIqvefY+EEyxZvphdgOl8cAOy/Nmry7EkpnVE0L4h8W9nbP4GmJwt
-	p/KlLmszICh3jhmiXEAE04CUaj+JjDxbQq6AI=
+	bh=jLXa5Vc67idKlcBju9+4fTiefGelsok7X6FDt9Rdwkw=;
+	b=SqiruvWi20hhXob4/jnZsNFRqBLiodQpBS8djBXoAb+yK4FPwTMDHCRybGSKGiB1W2
+	GhAKpfc+HUeL7esS8La8EDaY09RAzDfrqbb97mKr28HM0DFa4MvMpJfK0uzbMC7yyOO/
+	UCtHsNSp7JDlITFZyTOAIOeW1azXFnNhM5GcQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=ewoOULe8/nUp11tebEIsNMbbKTyWAIrap08Ry1qXp0M6cflcHwaFERtMWukEnFjIln
-	bI9txd5ldeLBUdSkj+n08/hoib7HFXx0ggLz8oaa3e1Pn/oKu7b1KpFH5kpdVjhaWpzj
-	R7VBApRpwCRPqVR0q8F6JgbHixCUX+wBF/4AI=
-Received: by 10.142.81.13 with SMTP id e13mr5564497wfb.214.1289930483530;
-	Tue, 16 Nov 2010 10:01:23 -0800 (PST)
+	b=fXzWCvSW3+Pukf+2OMEfeeniKuGy0zBAKdQoRQmrl7DCZ8ByNCwfOMTbsr27jkH2v4
+	ETw5An2xpWtoGgnD/rIOLSypvGwh8ejOfeQj8Qsm6iN0ZHhP/cQkvCwAbBaeaSatCcI/
+	Uqj+rbxkEoT/LS6SyNPX1U9faB0MoReBkJUWk=
+Received: by 10.143.155.8 with SMTP id h8mr439739wfo.210.1289930496934;
+	Tue, 16 Nov 2010 10:01:36 -0800 (PST)
 Received: from localhost.localdomain
 	(adsl-76-205-222-173.dsl.snlo01.sbcglobal.net [76.205.222.173])
-	by mx.google.com with ESMTPS id w22sm1662999wfd.19.2010.11.16.10.01.21
+	by mx.google.com with ESMTPS id w14sm1665137wfd.18.2010.11.16.10.01.35
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 16 Nov 2010 10:01:22 -0800 (PST)
+	Tue, 16 Nov 2010 10:01:36 -0800 (PST)
 From: Tim Harvey <harvey.tim@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Nov 2010 10:01:08 -0800
-Message-Id: <1289930468-7867-1-git-send-email-harvey.tim@gmail.com>
+Date: Tue, 16 Nov 2010 10:01:25 -0800
+Message-Id: <1289930485-7905-1-git-send-email-harvey.tim@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Connect-IP: 209.85.210.47
 X-SA-Exim-Mail-From: harvey.tim@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] iftop: new recipe
+Subject: [PATCH v2] nuttcp: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,31 +52,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2010 18:02:32 -0000
+X-List-Received-Date: Tue, 16 Nov 2010 18:02:46 -0000
 
 Signed-off-by: Tim Harvey <harvey.tim@gmail.com>
 ---
- recipes/iftop/iftop_0.17.bb |   11 +++++++++++
- 1 files changed, 11 insertions(+), 0 deletions(-)
- create mode 100644 recipes/iftop/iftop_0.17.bb
+ recipes/nuttcp/nuttcp/nuttcpd.init |   33 +++++++++++++++++++++++++++++++++
+ recipes/nuttcp/nuttcp_7.1.3.bb     |   26 ++++++++++++++++++++++++++
+ 2 files changed, 59 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/nuttcp/nuttcp/nuttcpd.init
+ create mode 100644 recipes/nuttcp/nuttcp_7.1.3.bb
 
-diff --git a/recipes/iftop/iftop_0.17.bb b/recipes/iftop/iftop_0.17.bb
+diff --git a/recipes/nuttcp/nuttcp/nuttcpd.init b/recipes/nuttcp/nuttcp/nuttcpd.init
 new file mode 100644
-index 0000000..2cfa441
+index 0000000..7a46622
 --- /dev/null
-+++ b/recipes/iftop/iftop_0.17.bb
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "Network usage monitor"
-+HOMEPAGE = "http://www.ex-parrot.com/pdw/iftop/"
++++ b/recipes/nuttcp/nuttcp/nuttcpd.init
+@@ -0,0 +1,33 @@
++#! /bin/sh
++#
++# This is an init script for openembedded
++# Copy it to /etc/init.d/nuttcpd and type
++# > update-rc.d nuttcpd defaults 60
++#
++
++
++test -f /usr/sbin/nuttcp || exit 0
++
++case "$1" in
++  start)
++    echo -n "Starting nuttcp background daemon"
++    nuttcp -S
++    echo "."
++    ;;
++  stop)
++    echo -n "Stopping nuttcp background daemon"
++    killall nuttcp
++    echo "."
++    ;;
++  restart)
++    stop
++    sleep 1
++    start
++    echo "."
++    ;;
++  *)
++    echo "Usage: /etc/init.d/nuttcpd {start|stop|restart}"
++    exit 1
++esac
++
++exit 0
+diff --git a/recipes/nuttcp/nuttcp_7.1.3.bb b/recipes/nuttcp/nuttcp_7.1.3.bb
+new file mode 100644
+index 0000000..a3bcd31
+--- /dev/null
++++ b/recipes/nuttcp/nuttcp_7.1.3.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "TCP/UDP network testing tool, much like iperf"
++HOMEPAGE = "http://www.wcisd.hpc.mil/nuttcp/Nuttcp-HOWTO.html"
 +SECTION = "console/network"
 +LICENSE = "GPLv2"
-+DEPENDS = "libpcap ncurses"
 +
-+SRC_URI = "http://www.ex-parrot.com/pdw/iftop/download/iftop-${PV}.tar.gz"
-+SRC_URI[md5sum] = "062bc8fb3856580319857326e0b8752d"
-+SRC_URI[sha256sum] = "d032547c708307159ff5fd0df23ebd3cfa7799c31536fa0aea1820318a8e0eac"
++SRC_URI = "http://www.wcisd.hpc.mil/nuttcp/nuttcp-${PV}.c \
++        file://nuttcpd.init"
++SRC_URI[md5sum] = "e5f360f8a4cb8f85754ca8708612c4a3"
++SRC_URI[sha256sum] = "b8915040e576abe8678713fba01125dd246821f4b426e095e5c9bb2c559a2384"
 +
-+inherit autotools
++S = "${WORKDIR}"
++
++inherit update-rc.d
++
++do_compile() {
++        ${CC} ${LDFLAGS} nuttcp-${PV}.c -o nuttcp
++}
++do_install() {
++        install -d ${D}${sysconfdir}/init.d
++        install -m 0755 ${WORKDIR}/nuttcpd.init ${D}${sysconfdir}/init.d/nuttcp
++        install -d ${D}${sbindir}
++        install -m 0755 nuttcp ${D}${sbindir}
++}
++
++INITSCRIPT_NAME = "nuttcp"
++INITSCRIPT_PARAMS = "defaults 60"
 -- 
 1.7.0.4
 
