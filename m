@@ -1,43 +1,48 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PIiae-0000gb-6v
+	(envelope-from <martin.jansa@gmail.com>) id 1PIidf-0000oW-Du
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 15:02:24 +0100
-Received: by iwn9 with SMTP id 9so34352iwn.6
+	Wed, 17 Nov 2010 15:05:32 +0100
+Received: by bwz10 with SMTP id 10so1623607bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 06:01:18 -0800 (PST)
+	Wed, 17 Nov 2010 06:04:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=XDjzkYtKHzt/Rc/B0vI7iQ/jLHNqpbw1tlRpiS35ahE=;
-	b=bZeQgBfhlfJNvna7HLwOBo5JuhhtKUYiSwkyG3Lr7w7B/k6vorhhL8NQqg0tAD4R2o
-	+42apyJwZkZoTSORaaGGIllV1CL6akmy0Rgw9zK6nKS5gbtH0rEMnKmOl3FbCUGtrf1N
-	sP3nCQ8nZRkMDpg2L3fakgYzzquF50xa3fc/8=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Hev81IWAYNKY2Q0u9ASdF9WeVLtUA3GP/YIDcbf0lVM=;
+	b=qpDwki0C6C/pZQy7FVbleYZIRorqXs8Geh1ihnfDPhNnD9DlO4PxEVQsgUbOtkDIWG
+	audMFv1/27NSzsQTsGS4oUAs5+vfAthweQxfqLr0t2lSDaM/cy+dTMlotZm2Nhf5dWyo
+	+on4Acuo+eDvJe5VLjsnawqqaeYOUnBDRcwaY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=B3mEOCO0LkepH88wOj1vFc62KsInSVx2CKyl7A6/8kKSwJLLFvu5SenkLG1vtpVgRc
-	VQ7vKQD76dIf66ud2gEdH+VZvWPXx5EkDKGqdEuFwsa62P6RhsgvQ8V4wHmHLDjvtReX
-	ghaHhfhpzKdF0NDiEVuNj5YKX46hgQ6Sh7ejY=
-MIME-Version: 1.0
-Received: by 10.231.37.201 with SMTP id y9mr7044028ibd.76.1290002476833; Wed,
-	17 Nov 2010 06:01:16 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Wed, 17 Nov 2010 06:01:16 -0800 (PST)
-In-Reply-To: <4CE3D70F.2000101@gmail.com>
-References: <4CE3D70F.2000101@gmail.com>
-Date: Wed, 17 Nov 2010 15:01:16 +0100
-Message-ID: <AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=VvTeGxOT0be2HuKvLZGhFfr69UJgrK5pHsZG8vJEVAAE+4yCEoqR0QswaJxUwebLEb
+	IalxiHg8dDMTKJucyLO42q9gGtd9X0p735C4BvWm2eraIb/WTtbL2vow9AQdCQaPSyh0
+	QLmDVvfKv9jU+TDVSKWD/2xzueZKrUiPMVUQU=
+Received: by 10.204.62.17 with SMTP id v17mr9200688bkh.67.1290002665151;
+	Wed, 17 Nov 2010 06:04:25 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 4sm1341160bki.13.2010.11.17.06.04.22
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 17 Nov 2010 06:04:23 -0800 (PST)
+Date: Wed, 17 Nov 2010 15:04:21 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20101117140421.GB3604@jama>
+References: <1290002290-9233-1-git-send-email-fransmeulenbroeks@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1290002290-9233-1-git-send-email-fransmeulenbroeks@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Error: git was compiled without libcurl support
+Subject: Re: [PATCH v2] libX11: patch configure.ac so a nios2 system is not seen as an os2 system.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +56,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 14:02:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 17 Nov 2010 14:05:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/11/17 Marco Cavallini <koansoftware@gmail.com>:
-> Hi, I just tried installing OE retrieving it from git
-> git clone git://git.openembedded.org/openembedded
->
-> bitbake version 1.10.0
-> branch master
-> MACHINE=akita time bitbake minimal-image
-> DISTRO = "angstrom-2008.1"
-> host machine : Debian lenny x86_64-linux
->
-> I face to an unexpected error
-> "Error: git was compiled without libcurl support"
->
-> I successfully built it until November 2nd but since last Saturday I
-> wonder if it should build or if is normal this behavoiur.
-> log: http://paste.ubuntu.com/533450/
->
+On Wed, Nov 17, 2010 at 02:58:10PM +0100, Frans Meulenbroeks wrote:
+> The OS/2 platform requires some utility functions as well as having a non-32 bit wchar_t. Fix the configure check so that it doesn't also affect the nios2 cpu, which wouldn't influence these operating system issues.
 
-you're using git from the host, guess that got changed one way or another.
+Looks good
 
-Frans
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Thanks
 
 
