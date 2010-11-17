@@ -1,44 +1,48 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PIcM2-0001Xr-Uq
+	(envelope-from <captain.deadly@gmail.com>) id 1PIdGX-00031f-K0
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 08:25:07 +0100
-Received: by iwn38 with SMTP id 38so524767iwn.6
+	Wed, 17 Nov 2010 09:21:19 +0100
+Received: by eya28 with SMTP id 28so928637eya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Nov 2010 23:21:50 -0800 (PST)
+	Wed, 17 Nov 2010 00:20:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=ArSSJVx49mb/5K3iadTZ7yjpxzxaI9Rn6iFdPWQzaHs=;
-	b=wyMnyhnpHRY9MgBbbpccNMavLBEgXTNJ2tQ2D6qBGMY2+G+DH3iuAALy4GqUyl4qGE
-	Pn8wpQyfq0MB/zr3vzwkSxIRlW8ErFhklM1b/zpRHSUe7gkuwaCzoDpcLxjYJdJKDJdI
-	RHrfle29+N8M4N4kL6DIg7T3kQft6S0nOkcWI=
+	h=domainkey-signature:received:received:from:reply-to:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=gMhFeZ6nou3fXeubHlyh70RJeIwJnU0FuvY4+60Xzvg=;
+	b=uxaX2l2a24D6BifcSiQjvpQH+suu6OIxX5MlFNf4XRERjX3RG27Ggpo4Axdj5egqcw
+	cDuba3OoBLhVegV3Sc+EY8wnA1esvMnWYqAY39cN3Lxfylz9OQZ6eS02J31km3LjGFF/
+	HXIf3zA2k+17Tzei5YC1ls7seN0YFVF1q+5Tw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=TbbhZiRyY2+/Z6awrP/GnnuumChx7zz2v80j/KmuAafgxwxarXO5pP+QOq4KMaP8QM
-	1PmBp/p2ppDUS9R/JVw/cqAoGXbWSmCczkJOU8Gv38fEflF12wJfE43iiO42CkbvFiw6
-	VRlcbr4H0ukaoRrWDu4ybpeG9qW6wyzJvPJH8=
-MIME-Version: 1.0
-Received: by 10.231.17.203 with SMTP id t11mr6813537iba.1.1289977811101; Tue,
-	16 Nov 2010 23:10:11 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Tue, 16 Nov 2010 23:10:11 -0800 (PST)
-In-Reply-To: <AANLkTikNpCh_ngjsgGwUYhjX4uAZziV=5ZbkdJLk=O+5@mail.gmail.com>
-References: <AANLkTimAqPZaYRHA9xy0pOVhpdwyFKq=LWuuMZRBq0N=@mail.gmail.com>
-	<AANLkTikNpCh_ngjsgGwUYhjX4uAZziV=5ZbkdJLk=O+5@mail.gmail.com>
-Date: Wed, 17 Nov 2010 08:10:11 +0100
-Message-ID: <AANLkTinbPOX3sx+xJdZFTq1Qijn1mz6bZTYUf2VHHW31@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:reply-to:to:subject:date:user-agent:references:in-reply-to
+	:mime-version:content-type:content-transfer-encoding:message-id;
+	b=GgBM1tyEZCK/Zw25lEJrDC8NJqGF5cIBdZvh9D+XJGs513TeMSYxz4hdzrWZk4b/S6
+	wkMowppALWp1di1L8sADCJu9RB8zoznm5TDBAxUxO7RylzTA5QiNpsiwUa8yW9stJfVe
+	Mc9uhsoAt4rcpsrTozYBwCOyrm6p4yQLHNuKw=
+Received: by 10.213.4.135 with SMTP id 7mr4840541ebr.89.1289982005976;
+	Wed, 17 Nov 2010 00:20:05 -0800 (PST)
+Received: from bamboo.localnet (dsl-51-41.dsl.netsource.ie [213.79.51.41])
+	by mx.google.com with ESMTPS id q58sm2041823eeh.21.2010.11.17.00.20.03
+	(version=SSLv3 cipher=RC4-MD5); Wed, 17 Nov 2010 00:20:04 -0800 (PST)
+From: captain.deadly@gmail.com
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed, 17 Nov 2010 08:20:02 +0000
+User-Agent: KMail/1.13.5 (Linux/2.6.36-jfw+; KDE/4.5.1; x86_64; ; )
+References: <4CE1D1D1.1000009@gmail.com> <20101116061352.GG20958@jama>
+	<AANLkTikC0c057fz7BFAWEjw4BGqmJfQ5OkvR+AZBOA_9@mail.gmail.com>
+In-Reply-To: <AANLkTikC0c057fz7BFAWEjw4BGqmJfQ5OkvR+AZBOA_9@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201011170820.03008.captain.deadly@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: captain.deadly@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: PREFERRED_PROVIDER issue/question
+Subject: Re: emacs copying ${STAGING_DIR_TARGET} - wtf?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,58 +56,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 07:25:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 17 Nov 2010 08:21:19 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-2010/11/17 Khem Raj <raj.khem@gmail.com>:
-> On Tue, Nov 16, 2010 at 1:44 PM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->>
->> So it seems to check PREFERRED_PROVIDER_mysql5 not (what I had
->> expected PREFERRED_PROVIDER_libmysqlclient)
->>
->> Questions:
->> Is this a bug somewhere?
->
-> Usually sometimes one package provided something the other does not so
-> they dont behave as drop in replacement. So make sure you find the
-> differences between say mysql and mysql5 recipes
->
->> What should I do to pin my libmysqlclient?
->
-> what you did is ok.
+On Tuesday 16 November 2010 07:38:07 Graham Gower wrote:
+> On 16 November 2010 16:43, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > On Tue, Nov 16, 2010 at 11:05:29AM +1030, Graham Gower wrote:
+> >> PS: emacs and emacs-x11 fail for me in do_compile.
+> > 
+> > Do you have make-3.82 on your host? emacs-x11_23.1.bb compiles fine with
+> > SHR.
+> 
+> Nope. make --version says 3.81.
+> 
 
-Yes but it does *not* work!
-After doing so I *still* get:
+I'd had problems with emacs before and the error you got was the same as mine. 
+I got the x11 verson to build as Martin Jansa advised. My version of Make is 
+the same as yours (3.81) so maybe I'll try to do an updgade and see if that 
+solves the issue.
 
-NOTE: multiple providers are available for runtime libmysqlclient
-(mysql5, mysql)
-NOTE: consider defining a PREFERRED_PROVIDER entry to match libmysqlclient
-
-That's why I was asking whether this was a bug somewhere.
-
->
->> Should we perhaps nuke the myql package ?
->
-> if its not pinned thats an option.
-
-frans@frans-desktop:~/workspace/openembedded/recipes/uclibc++$ grep -r
-mysql ../../conf
-frans@frans-desktop:~/workspace/openembedded/recipes/uclibc++$ grep -r
-sql ../../conf
-../../conf/distro/include/preferred-shr-versions.inc:PREFERRED_VERSION_postgresql
-= "8.4.4"
-frans@frans-desktop:~/workspace/openembedded/recipes/uclibc++$
-
-There is no DEFAULT_PREFERENCE for it either:
-
-frans@frans-desktop:~/workspace/openembedded/recipes/mysql$ ls
-files		 mysql5		   mysql5_5.1.40.inc	    mysql-native_4.1.22.bb
-mysql_4.1.22.bb  mysql5_5.1.40.bb  mysql5-native_5.1.40.bb
-frans@frans-desktop:~/workspace/openembedded/recipes/mysql$ grep PREF *
-frans@frans-desktop:~/workspace/openembedded/recipes/mysql$
-
-
-Best regards, Frans
 
 
