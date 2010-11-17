@@ -1,45 +1,44 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip.balister@gmail.com>) id 1PIVuE-00026p-NM
-	for openembedded-devel@openembedded.org; Wed, 17 Nov 2010 01:29:47 +0100
-Received: by gxk2 with SMTP id 2so858023gxk.6
-	for <openembedded-devel@openembedded.org>;
-	Tue, 16 Nov 2010 16:28:40 -0800 (PST)
+	(envelope-from <jay4mail@gmail.com>) id 1PIWK5-0001Zb-Jg
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Nov 2010 01:56:34 +0100
+Received: by eya28 with SMTP id 28so830439eya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Nov 2010 16:55:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=0/N+dmiTmpWD/yOC1cykMVU5L6BSNXY2yl9LRvFe+ao=;
-	b=eeOSpdkE72RtIQhraGbiZ7bZP756iIzETf1MiKYFeJEDMbt7xLERwN/r6vujBcd/jB
-	2rLm7NkfC+Yczr9cNc4W+hjGnlNp6ouMhg77GgKPsS/g/Bs1zjJoPbxjJ5alNlMcWOe1
-	r0/UXqSqVnSxpXZ8cmNxrlj6od1ueVg8bIVRI=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=/zblRi8TDVN3Dx7l9q8PCuoG4V35gzLPkBq52p3ACNo=;
+	b=t9aFKEd4tuQyVSMMmfInRLdouSiBB9qO437t5t1/jqRf4DyHfqZkOK2LCSd9PGWutJ
+	VUS2xPu5lX3MilAomNNE7/PJBnM9hbxkBefvC43ePC3J5U9wreTrRJNqOTW0Q6et0bnd
+	u0tcnAtI5/XNHG7Vwv4ZRa7SDBRxVkbzicYKI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	b=fH7AIYyuD1BCp9H7F5/aKy82oNZgJVfNRSts444BkwCBv8gXt6eNxlwxoNKhjdvPs5
-	N6qPCUMnMWLiBYJL2EKN99Rar5QTaHMQQaTxgfsX2zO+xVmFvlOPU+UqK2GQaGOL2qXC
-	/nYvch6mXhNfAuTKjCLbdjmAsSGorbJJlCLdU=
-Received: by 10.90.27.4 with SMTP id a4mr10520315aga.135.1289953720574;
-	Tue, 16 Nov 2010 16:28:40 -0800 (PST)
-Received: from localhost.localdomain
-	(adsl-75-37-22-143.dsl.pltn13.sbcglobal.net [75.37.22.143])
-	by mx.google.com with ESMTPS id w3sm1997406anw.25.2010.11.16.16.28.39
+	h=from:to:subject:date:message-id:x-mailer;
+	b=IBoYcI2YVp+IJxgwrxXJNGotl3HcFZrLHtHzNYIQUlR7r1vw6bTlQH+Hx1qY8c/ER4
+	72KDyOW7SDCurN18JVvv4NFwbhsqU+FdJE5plWDkCafYveoGwvkJ7Prf369/BxAM6W5z
+	ky+CUIBm6DKmWrsKV4DiXleirKVW6Mbnlqpp0=
+Received: by 10.213.108.193 with SMTP id g1mr1375595ebp.45.1289955325855;
+	Tue, 16 Nov 2010 16:55:25 -0800 (PST)
+Received: from localhost.localdomain (93-81-137-132.broadband.corbina.ru
+	[93.81.137.132])
+	by mx.google.com with ESMTPS id b52sm1742829eei.19.2010.11.16.16.55.24
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 16 Nov 2010 16:28:39 -0800 (PST)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: philip@balister.org
+	Tue, 16 Nov 2010 16:55:25 -0800 (PST)
+From: Yuri Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Nov 2010 16:28:14 -0800
-Message-Id: <1289953694-32685-1-git-send-email-philip@balister.org>
+Date: Wed, 17 Nov 2010 03:55:23 +0300
+Message-Id: <1289955323-10243-1-git-send-email-jay4mail@gmail.com>
 X-Mailer: git-send-email 1.7.2.3
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: philip.balister@gmail.com
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: jay4mail@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Philip Balister <philip@opensdr.com>
-Subject: [PATCH] dhcp : Create directory for state storage. Convert to INC_PR.
+Subject: [PATCH] ltrace: exclude from build for SH3/SH4 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,57 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 00:29:47 -0000
-
-From: Philip Balister <philip@opensdr.com>
+X-List-Received-Date: Wed, 17 Nov 2010 00:56:35 -0000
 
 ---
- recipes/dhcp/dhcp4.inc        |    5 ++++-
- recipes/dhcp/dhcp_4.1.1-P1.bb |    2 +-
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ recipes/ltrace/ltrace_0.5.3.bb  |    3 +++
+ recipes/tasks/task-cli-tools.bb |    7 ++++++-
+ 2 files changed, 9 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/dhcp/dhcp4.inc b/recipes/dhcp/dhcp4.inc
-index e2b2658..c7bf067 100644
---- a/recipes/dhcp/dhcp4.inc
-+++ b/recipes/dhcp/dhcp4.inc
-@@ -4,6 +4,8 @@ HOMEPAGE = "http://www.isc.org/"
+diff --git a/recipes/ltrace/ltrace_0.5.3.bb b/recipes/ltrace/ltrace_0.5.3.bb
+index c856788..6c13c08 100644
+--- a/recipes/ltrace/ltrace_0.5.3.bb
++++ b/recipes/ltrace/ltrace_0.5.3.bb
+@@ -6,6 +6,9 @@ LICENSE = "GPLv2"
  
- LICENSE = "ISC"
+ PR = "r2"
  
-+INC_PR = "r1"
++# ltrace is not ported to sh3/sh4 targets at this time
++COMPATIBLE_TARGET_SYS = (?!sh[34])
 +
- SRC_URI = "ftp://ftp.isc.org/isc/dhcp/dhcp-${PV}.tar.gz \
-            file://site.h \
- 	   file://init-relay file://default-relay \
-@@ -26,6 +28,7 @@ do_install_append () {
- 	install -d ${D}${sysconfdir}/init.d
- 	install -d ${D}${sysconfdir}/default
- 	install -d ${D}${sysconfdir}/dhcp
-+	install -d ${D}${localstatedir}/lib/dhcp
- 	install -m 0755 ${WORKDIR}/init-relay ${D}${sysconfdir}/init.d/dhcp-relay
- 	install -m 0644 ${WORKDIR}/default-relay ${D}${sysconfdir}/default/dhcp-relay
- 	install -m 0755 ${WORKDIR}/init-server ${D}${sysconfdir}/init.d/dhcp-server
-@@ -46,7 +49,7 @@ FILES_${PN} = ""
- FILES_dhcp-server = "${sbindir}/dhcpd ${sysconfdir}/init.d/dhcp-server ${sysconfdir}/default/dhcp-server ${sysconfdir}/dhcp/dhcpd.conf"
- FILES_dhcp-relay = "${sbindir}/dhcrelay ${sysconfdir}/init.d/dhcp-relay ${sysconfdir}/default/dhcp-relay"
+ SRC_URI = "\
+   ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}.orig.tar.gz;name=archive \
+   ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}-2.diff.gz;name=patch \
+diff --git a/recipes/tasks/task-cli-tools.bb b/recipes/tasks/task-cli-tools.bb
+index 0d2aa00..7d71e9a 100644
+--- a/recipes/tasks/task-cli-tools.bb
++++ b/recipes/tasks/task-cli-tools.bb
+@@ -9,6 +9,11 @@ inherit task
  
--FILES_dhcp-client = "${base_sbindir}/dhclient ${base_sbindir}/dhclient-script ${sysconfdir}/dhcp/dhclient.conf"
-+FILES_dhcp-client = "${base_sbindir}/dhclient ${base_sbindir}/dhclient-script ${sysconfdir}/dhcp/dhclient.conf ${localstatedir}/lib/dhcp"
- RDEPENDS_dhcp-client = "bash"
+ PACKAGES += "${PN}-debug"
  
- FILES_dhcp-omshell = "${bindir}/omshell"
-diff --git a/recipes/dhcp/dhcp_4.1.1-P1.bb b/recipes/dhcp/dhcp_4.1.1-P1.bb
-index ed5a31b..0bbf50c 100644
---- a/recipes/dhcp/dhcp_4.1.1-P1.bb
-+++ b/recipes/dhcp/dhcp_4.1.1-P1.bb
-@@ -1,6 +1,6 @@
- require dhcp4.inc
- 
--PR = "r1"
-+PR = "${INC_PR}.1"
- 
- SRC_URI += "file://fixincludes.patch \
-             file://dhcp-3.0.3-dhclient-dbus.patch;striplevel=0 \
++def get_ltrace(bb, d):
++    if bb.data.getVar('TARGET_ARCH', d, 1) in [ 'sh4', 'sh3' ] :
++        return ""
++    return "ltrace"
++
+ RDEPENDS_${PN} = "\
+   dbus-daemon-proxy \
+   dosfstools \
+@@ -33,7 +38,7 @@ RDEPENDS_${PN}-debug = "\
+   devmem2 \
+   i2c-tools \
+   gdb \
+-  ltrace \
++  ${@get_ltrace(bb, d)} \
+   mkdump \
+   mioctl \
+   procps \
 -- 
 1.7.2.3
 
