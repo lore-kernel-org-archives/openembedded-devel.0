@@ -1,43 +1,43 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PIe8I-0004X5-BT
+	(envelope-from <dp@xora.org.uk>) id 1PIely-0001pg-8D
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 10:16:51 +0100
-Received: by wyb34 with SMTP id 34so1728084wyb.6
+	Wed, 17 Nov 2010 10:57:51 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 35F52A4C10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 01:15:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Js/eiSWNNsszoq6Pg6VMFlF22YMBY4bOurgJBg/bSo4=;
-	b=xv56TCNYj27OU5V+IFB7CM952X5R6Y9A4nfK9LzcJon5m6jNRXpfdBPV5II9Tl/iz2
-	ywclOnepudnSijYD+jEQyE9Ozpb/UfsiKLxk3hp4kduI/rh9mCivJ7pEzeolQgsyk+TD
-	VHEeFY2aV+Q9atI13sh7IH6uFAfC5J9IJ26R8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=yEy1aVxzbMEmBKn+UBv0eKIudFLIKo4siXq0cxsE0UNqPRfWAXVfWvxxTvbpv/3OvW
-	+P42JkX2e/89U4eg8iUbVa729OJIqqZtCTseU429UqA9uE5z9eH//eeoopO9K2m9BPzB
-	EZoSI6gIJDmB79ctyc8oquq/4EFCETkyvStfQ=
+	Wed, 17 Nov 2010 09:56:45 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 8BscK4456tSD
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Nov 2010 09:56:44 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 9777DA4BC9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Nov 2010 09:56:44 +0000 (GMT)
+Message-ID: <4CE3A6DE.2070203@xora.org.uk>
+Date: Wed, 17 Nov 2010 09:56:46 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.216.52.133 with SMTP id e5mr897832wec.0.1289985342510; Wed, 17
-	Nov 2010 01:15:42 -0800 (PST)
-Received: by 10.216.49.130 with HTTP; Wed, 17 Nov 2010 01:15:42 -0800 (PST)
-In-Reply-To: <AANLkTimAqPZaYRHA9xy0pOVhpdwyFKq=LWuuMZRBq0N=@mail.gmail.com>
-References: <AANLkTimAqPZaYRHA9xy0pOVhpdwyFKq=LWuuMZRBq0N=@mail.gmail.com>
-Date: Wed, 17 Nov 2010 10:15:42 +0100
-Message-ID: <AANLkTimgbSkwmvo4jH_-=gpswQopuSjvYDZF7kaR=HbN@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+References: <AANLkTi=4sU4238+b8zyJJ35VCyJB2ysestx9N=_my697@mail.gmail.com>
+	<ic06a8$uft$1@dough.gmane.org>
+In-Reply-To: <ic06a8$uft$1@dough.gmane.org>
+X-Enigmail-Version: 1.1.1
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: PREFERRED_PROVIDER issue/question
+Subject: Re: Preparing for release - Freeze on master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,34 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 09:16:51 -0000
+X-List-Received-Date: Wed, 17 Nov 2010 09:57:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 16, 2010 at 10:44 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> When I am building mythtv-plugins for distro minimal I get:
-...
-> NOTE: multiple providers are available for runtime
-> module-init-tools-depmod (module-init-tools, module-init-tools-cross)
-..
+On 17/11/2010 09:12, Koen Kooi wrote:
+> On 16-11-10 19:20, Khem Raj wrote:
+> > Hello All,
+>
+> > In order to get to the 2010.12 release, I would like to request to
+> > stop pushing any changes to master until release. Please keep your
+> > changes in you local tree ready for when the window
+> > opens again after the release.
+>
+> At OEDEM we agreed that the release would pick a tested branch tag to
+> avoid such a draconic freeze.
+>
+I must say I am puzzled why the freeze when git supports branches. In
+the past we have just picked a point branched then cherry picked
+anything interesting that went into org.openemedded.dev until release date.
 
-I see the same note building Angstrom since some months.
+Graeme
 
-Did not track yet the commit which originated that but seems a
-conflict wrt module-init-tools-cross_3.2.2.bb
-PROVIDES += "virtual/${TARGET_PREFIX}depmod virtual/${TARGET_PREFIX}depmod-2.6"
-
-
-Besides that, I'm not sure I understand following RDEPENDS in
-module-init-tools.inc: runtime depending on a package created by
-itself?
-
-PACKAGES =+ "module-init-tools-insmod-static module-init-tools-depmod"
-RDEPENDS_${PN} += "module-init-tools-depmod"
-
-
-Regards
-
-Andrea
 
 
