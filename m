@@ -1,33 +1,36 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PIbxF-0006Za-9K
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PIcGQ-0002yF-C8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 07:57:18 +0100
-Received: by iwn38 with SMTP id 38so504669iwn.6
+	Wed, 17 Nov 2010 08:18:00 +0100
+Received: by iwn38 with SMTP id 38so519729iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Nov 2010 22:56:12 -0800 (PST)
+	Tue, 16 Nov 2010 23:16:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=+nnWYr1SBT3trTxrmPZU1LwwstYHlDRjUXAOOGy5/6M=;
-	b=fzbdiC4/i93RVbeNoa58hBitszVasOGCppx2kZJpUJ0MF27q3pape8NpKtZKvkbHK6
-	tCM53Tr9fEVQCqGKKJ0XtJB/mugwTE7HngYAu6BCETkCiwanUHN3cCUHYLRL0lA+8GHT
-	qhQ2/HIWbytngwXsTvd0v7ELE9x5Jg3SyFMgk=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=q/RqIgYKLXupJrBaN9gtS799dxsC5BVK8U9hs7bZJM0=;
+	b=cbhXqf5DYc5T7wOttxWzHWLd/ng1FCToo5VIF1a10EG4ULVLxTosUwk3HHCCvXoyVp
+	Si2UhICBJ0DIqaOd09QovLqDLpBnFyKSbB4x/KkeUIx1L5QTXj4Imf1FI35TPD6xINXa
+	9Ek/x5yrUBEpO9JpMeJxh/o+fEYxTQcJNOfbo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=s/poIuVw+WylIRaQ4gqodruhz1deSL9J0OXCo3C9Iba+bODglF3y+0EbuBShm8s+2q
-	hk239TT5+dcszlLPZTDyB34XROvNHw0VH1E+skiaaOQRiyyjOREZOKSsjnGBiDCWPU5I
-	RS8mZiAHrBUDIVQL5ATR9F6BcTZ3hdI7isWSk=
+	:content-type;
+	b=g15ntw5F5OMK14N+gKd8sueckemszO/uuk6BAbEb72uk1CI+x9MGcU0EytbiMtj4d5
+	su5uMxLhzm7wyiw17FFQmt9nL5rO2Y95PpnPMelC9SlNNuRqcBpvFp9v6/97L0NRWMAm
+	PqeeXYqNhgdxhjSIBIg4jtrFyACHeaRa7vbiM=
 MIME-Version: 1.0
-Received: by 10.231.39.137 with SMTP id g9mr6607145ibe.101.1289976971335; Tue,
-	16 Nov 2010 22:56:11 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Tue, 16 Nov 2010 22:56:11 -0800 (PST)
-In-Reply-To: <4CE359C8.5030808@gmail.com>
-References: <4CE359C8.5030808@gmail.com>
-Date: Wed, 17 Nov 2010 07:56:11 +0100
-Message-ID: <AANLkTi=aGx_TTG_sR_YDsO1PLdawYXxwJKWrG_cKH074@mail.gmail.com>
+Received: by 10.231.37.201 with SMTP id y9mr6759528ibd.76.1289978161208; Tue,
+	16 Nov 2010 23:16:01 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Tue, 16 Nov 2010 23:16:01 -0800 (PST)
+In-Reply-To: <AANLkTin7+WQY-gmfye=U5pFJ4QfOYRY-Da93oBTgxvV2@mail.gmail.com>
+References: <AANLkTi=4sU4238+b8zyJJ35VCyJB2ysestx9N=_my697@mail.gmail.com>
+	<1289947184.11873.3.camel@mattotaupa>
+	<AANLkTinuJ6bx+iHNq-4VLKNkaHbwaPitm7f6hZ=VM9az@mail.gmail.com>
+	<AANLkTim2Q8BfAx=z3=RLSCQkFo-Wk6HFnbBnF562NGDM@mail.gmail.com>
+	<AANLkTin7+WQY-gmfye=U5pFJ4QfOYRY-Da93oBTgxvV2@mail.gmail.com>
+Date: Wed, 17 Nov 2010 08:16:01 +0100
+Message-ID: <AANLkTikVaAmMc0rVSmeiuwm646Dvh8iVVLkYsGF_w5zL@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -38,7 +41,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sane-toolchain.inc: remove duplicate line.
+Subject: Re: Preparing for release - Freeze on master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,38 +55,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 06:57:18 -0000
+X-List-Received-Date: Wed, 17 Nov 2010 07:18:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/11/17 Graham Gower <graham.gower@gmail.com>:
->
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
-> ---
-> =A0conf/distro/include/sane-toolchain.inc | =A0 =A01 -
-> =A01 files changed, 0 insertions(+), 1 deletions(-)
->
-> diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include=
-/sane-toolchain.inc
-> index 6d460a2..100009e 100644
-> --- a/conf/distro/include/sane-toolchain.inc
-> +++ b/conf/distro/include/sane-toolchain.inc
-> @@ -20,7 +20,6 @@ PREFERRED_GCC_VERSION_486sx =A0 =A0 =A0 =A0 =A0?=3D "4.=
-3.2"
-> =A0PREFERRED_GCC_VERSION_avr32 =A0 =A0 =A0 =A0 =A0?=3D "4.2.2"
-> =A0PREFERRED_GCC_VERSION_bfin =A0 =A0 =A0 =A0 =A0 ?=3D "4.1.2"
-> =A0PREFERRED_GCC_VERSION_xilinx-ml403 =A0 ?=3D "4.1.1"
-> -PREFERRED_GCC_VERSION_xilinx-ml403 =A0 ?=3D "4.1.1"
->
-> =A0# This is unrelated to the kernel version, but glibc and some userspac=
-eapps require a recent version to build against
-> =A0PREFERRED_VERSION_linux-libc-headers ?=3D "2.6.31"
-> --
-> 1.7.1
+2010/11/17 Khem Raj <raj.khem@gmail.com>:
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-(actually personally I feel that trivial patches like this one do not
-need review)
+>> What about new recipes?
+>
+> Depending upon how they pan out. Suppose if you add a new recipe for a
+> working recipe
+> that has implications if it gets picked up by default so need to make
+> sure it works on tested sets.
+> some entirely new recipes should be ok recipes for version upgrade
+> need to be watched out
+
+I agree on that. Actually I was referring to really new recipes, not
+new versions of an existing recipe.
+>
+>> I have a few new tasks and a new image that I was planning to add
+>> tonight, but didn't get to it.
+>
+> post them if you think they make sense in release and do not involve
+> other meta recipes.
+
+Whether they make sense depends probably on your perception.
+I think they do, that's why I've been working on them, but it is
+highly likely someone feels it does not make sense.
+
+Rationale to get them in the archive is twofold:
+- others can build and use the image too (it is an image for my james project)
+- it can be incorporated in the regression testing. (and frankly I
+would like to get them into this thursday's testing-next)
+
+The new image does depend on the new tasks. No one depends on the new
+tasks (that's why the are new)
+
+>
+>> Also I will have a working uclibc++ recipe by tomorrow or so. (the
+>> current one does not build for me).
+>
+> Post them to ml.
+
+Will do.
+>
+>> I feel changes like those are pretty harmless.
+>>
+>> Frans
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
