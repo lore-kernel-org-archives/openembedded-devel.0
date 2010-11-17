@@ -1,43 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PIfEA-0005tq-TD for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 11:27:03 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PIfD3-0003py-OD for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 11:25:49 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 11:25:49 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 11:25:49 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 17 Nov 2010 11:25:38 +0100
-Message-ID: <ic0aj2$hqc$1@dough.gmane.org>
-References: <AANLkTi=4sU4238+b8zyJJ35VCyJB2ysestx9N=_my697@mail.gmail.com>	<ic06a8$uft$1@dough.gmane.org>
-	<4CE3A6DE.2070203@xora.org.uk>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <4CE3A6DE.2070203@xora.org.uk>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <koansoftware@gmail.com>) id 1PIhz4-0001AG-4X
+	for Openembedded-devel@lists.openembedded.org;
+	Wed, 17 Nov 2010 14:23:34 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 95E7C2C7EB
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Nov 2010 13:22:05 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id JhdOVJ-8f-5x
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Nov 2010 13:22:01 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 356A82C7DD
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Nov 2010 13:22:01 +0000 (UTC)
+Message-ID: <4CE3D70F.2000101@gmail.com>
+Date: Wed, 17 Nov 2010 14:22:23 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+MIME-Version: 1.0
+To: Openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Preparing for release - Freeze on master
+Subject: Error: git was compiled without libcurl support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,49 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 10:27:03 -0000
+X-List-Received-Date: Wed, 17 Nov 2010 13:23:34 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi, I just tried installing OE retrieving it from git
+git clone git://git.openembedded.org/openembedded
 
-On 17-11-10 10:56, Graeme Gregory wrote:
-> On 17/11/2010 09:12, Koen Kooi wrote:
->> On 16-11-10 19:20, Khem Raj wrote:
->>> Hello All,
->>
->>> In order to get to the 2010.12 release, I would like to request to
->>> stop pushing any changes to master until release. Please keep your
->>> changes in you local tree ready for when the window
->>> opens again after the release.
->>
->> At OEDEM we agreed that the release would pick a tested branch tag to
->> avoid such a draconic freeze.
->>
-> I must say I am puzzled why the freeze when git supports branches. In
-> the past we have just picked a point branched then cherry picked
-> anything interesting that went into org.openemedded.dev until release date.
+bitbake version 1.10.0
+branch master
+MACHINE=akita time bitbake minimal-image
+DISTRO = "angstrom-2008.1"
+host machine : Debian lenny x86_64-linux
 
-At OEDEM we decided that the release would be a tag, not branch of .dev.
-To make this release easy and unobtrusive the release team would pick a
-tag of the tested stuff that they thought is best. So the december
-release might actually use a tag from september if that proves to be the
-most "stable".
+I face to an unexpected error
+"Error: git was compiled without libcurl support"
 
-I would think our normal commit policy would cover "dangerous" commits
-already, so I object to this draconion freeze proposal.
+I successfully built it until November 2nd but since last Saturday I
+wonder if it should build or if is normal this behavoiur.
+log: http://paste.ubuntu.com/533450/
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+TIA
 
-iD8DBQFM462iMkyGM64RGpERAvkmAJ4glGYefhsTMST+UGbZFHI6pjS2qACgrS9g
-AvU3Xy0Y1105HoW1/vLGU2I=
-=EVng
------END PGP SIGNATURE-----
-
+/marco
 
 
