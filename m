@@ -1,37 +1,34 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1PIhz4-0001AG-4X
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 14:23:34 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 95E7C2C7EB
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 13:22:05 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JhdOVJ-8f-5x
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 13:22:01 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 356A82C7DD
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 13:22:01 +0000 (UTC)
-Message-ID: <4CE3D70F.2000101@gmail.com>
-Date: Wed, 17 Nov 2010 14:22:23 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PIiWO-00067U-DY
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Nov 2010 14:58:05 +0100
+Received: (qmail 3716 invoked by uid 503); 17 Nov 2010 14:01:25 -0000
+Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 17 Nov 2010 14:01:25 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 17 Nov 2010 15:56:50 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 17 Nov 2010 15:56:48 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Nov 2010 14:55:40 +0100
+Message-Id: <1290002140-17255-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
 MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+X-Ovh-Tracer-Id: 16077850671439523145
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.27.225
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Error: git was compiled without libcurl support
+Subject: [PATCH] amend.bbclass: handle PACKAGE_ARCH change in an amend.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 13:23:34 -0000
+X-List-Received-Date: Wed, 17 Nov 2010 13:58:05 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi, I just tried installing OE retrieving it from git
-git clone git://git.openembedded.org/openembedded
+* setting PACKAGE_ARCH = "${MACHINE_ARCH}" in and amend.inc actually
+leads to a packaga with the correct machine arch but the
+work/stage/stamp dirs are not correct because MULTIMACH_ARCH is not
+updated after amend.inc is parsed.
 
-bitbake version 1.10.0
-branch master
-MACHINE=akita time bitbake minimal-image
-DISTRO = "angstrom-2008.1"
-host machine : Debian lenny x86_64-linux
+* this patch updates MULTIMACH_ARCH if PACKAGE_ARCH is changed in
+amend.inc
 
-I face to an unexpected error
-"Error: git was compiled without libcurl support"
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ classes/amend.bbclass |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
 
-I successfully built it until November 2nd but since last Saturday I
-wonder if it should build or if is normal this behavoiur.
-log: http://paste.ubuntu.com/533450/
+diff --git a/classes/amend.bbclass b/classes/amend.bbclass
+index a03de64..da60611 100644
+--- a/classes/amend.bbclass
++++ b/classes/amend.bbclass
+@@ -42,5 +42,11 @@ python () {
+             depends = set()
+         depends |= set(newdata)
+     d.setVar("__depends", depends)
++
++    mach_arch = bb.data.getVar('MACHINE_ARCH', d, 1)
++    pkg_arch = bb.data.getVar('PACKAGE_ARCH', d, 1)
++    multi_arch = bb.data.getVar('MULTIMACH_ARCH', d, 1)
++    if pkg_arch and pkg_arch == mach_arch and pkg_arch != multi_arch:
++        multi_arch = pkg_arch
++        bb.data.setVar('MULTIMACH_ARCH', multi_arch, d)
+ }
+-- 
+1.7.2.3
 
-
-TIA
-
-/marco
 
 
