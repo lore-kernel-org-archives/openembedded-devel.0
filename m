@@ -1,39 +1,48 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PIlt3-0006ce-Iw
+	(envelope-from <raj.khem@gmail.com>) id 1PInBL-0006Xl-5P
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 18:33:38 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 5F6538F8575
+	Wed, 17 Nov 2010 19:56:37 +0100
+Received: by gyf3 with SMTP id 3so1379577gyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 12:32:32 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 15911-02 for <openembedded-devel@lists.openembedded.org>; 
-	Wed, 17 Nov 2010 12:32:32 -0500 (EST)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 1F235898DF8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 12:32:32 -0500 (EST)
-Message-ID: <4CE411AF.1060804@cbnco.com>
-Date: Wed, 17 Nov 2010 12:32:31 -0500
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+	Wed, 17 Nov 2010 10:55:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=PQU/gVfzrUYpcEaaDUjwqK9XrWJWP8OMuBmI3/aUC1o=;
+	b=wUZIaDXhHHiXzsaGE7+T3EyUCycG8BDDVVM7eSTaA9iL/cPCCteVmMn0ZuQ10vn7Lh
+	85GvMKqSX9hz3HRq43UDVrchoyBOr6z7g1YkU7tTLqDMjf/5bRTY81IdeaSiYyXsnRax
+	KsoHZXtg2O/JUiutzSFYQuAOKRjK22b8ojZns=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=lmDAvAV64nlBynP3iCS23YFnS+DAiP2bBZ2K7bzCySP+P/CsQ6XIQA/+DMrm8hdiBM
+	PcWn7RRq5LolENAp6mnVBMMJQL000dIyYTEpCVxnj2gpUQlJ5ncZDArT2p7QEe1dGdV2
+	VxaCUuLJ0VLTU1fET8N0IJitRJDVZ/KucFK4k=
+Received: by 10.91.121.3 with SMTP id y3mr5869437agm.156.1290020120517; Wed,
+	17 Nov 2010 10:55:20 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1289482655-20086-1-git-send-email-msmith@cbnco.com>
-	<AANLkTimdHUNPec=AKNXJCbwbM9UeJ0yP+d5ZNDMwVmRC@mail.gmail.com>
-In-Reply-To: <AANLkTimdHUNPec=AKNXJCbwbM9UeJ0yP+d5ZNDMwVmRC@mail.gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+Received: by 10.90.120.8 with HTTP; Wed, 17 Nov 2010 10:54:58 -0800 (PST)
+In-Reply-To: <AANLkTi=B4o0F6LAcfhG7gz8EKBCT14-V7rjUDY8-Yp_o@mail.gmail.com>
+References: <1289064270-20041-1-git-send-email-moncelier@devlife.org>
+	<1289064270-20041-2-git-send-email-moncelier@devlife.org>
+	<AANLkTiksrxSauzYBx+EupT+vkLyt_C0VgUDeXb8PxtF8@mail.gmail.com>
+	<AANLkTi=B4o0F6LAcfhG7gz8EKBCT14-V7rjUDY8-Yp_o@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 17 Nov 2010 10:54:58 -0800
+Message-ID: <AANLkTinGrMTiKUjwZ3aBr5z5nera5RGFxR2jMhpgW47P@mail.gmail.com>
+To: Camille Moncelier <moncelier@devlife.org>
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] usbutils 0.70 & 0.73: don't set DEFAULT_PREFERENCE = "1"
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 02/11] dropbear: Removed openmoko references. Added /etc/default/dropbear
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,21 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 17:33:38 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 17 Nov 2010 18:56:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Khem Raj wrote:
-> On Thu, Nov 11, 2010 at 5:37 AM, Michael Smith <msmith@cbnco.com> wrote:
->> I think it may be leftover from earlier.  Let 0.86 build by default.
->> Most distros already prefer it.
+On Wed, Nov 17, 2010 at 12:38 AM, Camille Moncelier
+<moncelier@devlife.org> wrote:
+> On Wed, Nov 17, 2010 at 12:40 AM, Khem Raj <raj.khem@gmail.com> wrote:
 >>
-> 
-> does it work well with udev 141 ?
-> some uclibc based distros still use older udev
+>> > diff --git a/recipes/dropbear/dropbear/default
+>> > b/recipes/dropbear/dropbear/default
+>> > new file mode 100644
+>> > index 0000000..a4f2bfd
+>> > --- /dev/null
+>> > +++ b/recipes/dropbear/dropbear/default
+>> > @@ -0,0 +1,4 @@
+>> > +# DROPBEAR_BANNER=3D""
+>> > +# DROPBEAR_RSAKEY=3D"/etc/dropbear/dropbear_rsa_host_key"
+>> > +# DROPBEAR_DSSKEY=3D"/etc/dropbear/dropbear_dss_host_key"
+>>
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0^^^
+>> should this be dsa ?
+>
+>
+> Nope, it's DSS . You can look in=C2=A0recipes/dropbear/dropbear/init,
+> dropbearkey use dss for its key type.
 
-I use udev 141, but not uclibc; it seems to work here.
+interesting. It almost looks like a typo
 
-Mike
+> --
+> Camille Moncelier
+> http://devlife.org/
+>
+> If Java had true garbage collection, most programs would
+> delete themselves upon execution.
 
 
