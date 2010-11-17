@@ -1,38 +1,38 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PIngA-00019Y-DA
+	(envelope-from <raj.khem@gmail.com>) id 1PInk4-0000TO-Nd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 20:28:29 +0100
-Received: by gwaa11 with SMTP id a11so1404522gwa.6
+	Wed, 17 Nov 2010 20:32:46 +0100
+Received: by gyf3 with SMTP id 3so1414333gyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 11:27:15 -0800 (PST)
+	Wed, 17 Nov 2010 11:31:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=OtGkKA5emwlope+F60ZiNbfwLPXP66UCqKyf28GiMns=;
-	b=fhdRyboeQQcAxdfjOANTslnX9LgtGwzUn7n1eKcVJIqvcHYQ9b4t0qvsI7hw6Fcbmr
-	ykwndI6koJ1ZDpMJisCoxgpbmQUHLt8KRnB/N69w5+1Zr2mMDt5IrDRwxTFuIrm/rBoJ
-	goE5sVtQ6cvVNZShwqeeV5DsY9wSODc/U2qlY=
+	bh=Uha0eGDBLJQpT42RuANhKHGizeNkQ7syYPdfvUnIWXg=;
+	b=JyYY4YLRtWUUgSvP7m95s8SAFx0kIgu5Ya00cuzeNIeAGPh2hZA7EfzsflVnQfVPLL
+	qw9UJTiiTEbcmI55Hh39HJwd/gTr/CRSaUnbaaeXbWVJ4ovpfJHo0c6944y4P7iaSpar
+	QiORS69ufgF6ySkrdtYtLgTfe0FEiP8v+81go=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=P23VggMbJAGsTACIwnqq5ghIm10jKfNj7sftpm9HEXNGxOrE3pWRZmA4fponBErYZa
-	LWEst1DMVohI+Olb9wLa+4U3paLwaR193XZr8WaOfhVVt8YXziB5kfMZKOc3ab0VoIHv
-	xYlKhqrdn90lJmWD2ZZVCymMNC5fJ6GiXvTEA=
-Received: by 10.91.47.38 with SMTP id z38mr12064565agj.129.1290022035611; Wed,
-	17 Nov 2010 11:27:15 -0800 (PST)
+	b=EPiCzHea2IApIN3yTvnf8psUI676AAhkfXOjITjUT+T4TbSkfZXnqcWbVov6N93UqI
+	yI5bcjUhBv8/Jp1oUbKokJv/4VFI3e/ZZI9khYS4XtgzKLFfWKAzZ6HFToKSkoVIHgwb
+	MZvvc7jTSKEIwXEH4xnYWJJKesBOY9gdw79D0=
+Received: by 10.91.51.19 with SMTP id d19mr12029248agk.183.1290022276715; Wed,
+	17 Nov 2010 11:31:16 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Wed, 17 Nov 2010 11:26:55 -0800 (PST)
-In-Reply-To: <4CE411AF.1060804@cbnco.com>
-References: <1289482655-20086-1-git-send-email-msmith@cbnco.com>
-	<AANLkTimdHUNPec=AKNXJCbwbM9UeJ0yP+d5ZNDMwVmRC@mail.gmail.com>
-	<4CE411AF.1060804@cbnco.com>
+Received: by 10.90.120.8 with HTTP; Wed, 17 Nov 2010 11:30:56 -0800 (PST)
+In-Reply-To: <4CE3EF4C.2050105@gmail.com>
+References: <4CE3D70F.2000101@gmail.com>
+	<AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>
+	<4CE3EF4C.2050105@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 17 Nov 2010 11:26:55 -0800
-Message-ID: <AANLkTikaG8=waSwD+Qgq6jB=KO2wY0bpGXi6SJBzO3XG@mail.gmail.com>
+Date: Wed, 17 Nov 2010 11:30:56 -0800
+Message-ID: <AANLkTin2v1+3UP_rk593i+V4=e4QeKgPinAkoWNwY0BO@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Connect-IP: 209.85.160.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] usbutils 0.70 & 0.73: don't set DEFAULT_PREFERENCE = "1"
+Subject: Re: Error: git was compiled without libcurl support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,28 +54,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 19:28:29 -0000
+X-List-Received-Date: Wed, 17 Nov 2010 19:32:57 -0000
+X-List-Received-Date: Wed, 17 Nov 2010 19:32:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 17, 2010 at 9:32 AM, Michael Smith <msmith@cbnco.com> wrote:
-> Khem Raj wrote:
->>
->> On Thu, Nov 11, 2010 at 5:37 AM, Michael Smith <msmith@cbnco.com> wrote:
+On Wed, Nov 17, 2010 at 7:05 AM, Marco Cavallini <koansoftware@gmail.com> w=
+rote:
+> Frans Meulenbroeks ha scritto, Il 17/11/2010 15:01:
+>> 2010/11/17 Marco Cavallini <koansoftware@gmail.com>:
+>>> Hi, I just tried installing OE retrieving it from git
+>>> git clone git://git.openembedded.org/openembedded
 >>>
->>> I think it may be leftover from earlier. =C2=A0Let 0.86 build by defaul=
-t.
->>> Most distros already prefer it.
+>>> bitbake version 1.10.0
+>>> branch master
+>>> MACHINE=3Dakita time bitbake minimal-image
+>>> DISTRO =3D "angstrom-2008.1"
+>>> host machine : Debian lenny x86_64-linux
+>>>
+>>> I face to an unexpected error
+>>> "Error: git was compiled without libcurl support"
+>>>
+>>> I successfully built it until November 2nd but since last Saturday I
+>>> wonder if it should build or if is normal this behavoiur.
+>>> log: http://paste.ubuntu.com/533450/
 >>>
 >>
->> does it work well with udev 141 ?
->> some uclibc based distros still use older udev
+>> you're using git from the host, guess that got changed one way or anothe=
+r.
+>>
 >
-> I use udev 141, but not uclibc; it seems to work here.
+> Frans,
+> thank you for answering.
 >
-ok
+> I tried removing ASSUME_PROVIDED git-native from my config (local.conf)
+> in this case bitbake create git and use it instead of the host provided.
+> Then I did
+>
+> =C2=A0bitbake -b git-native
+>
+> Anyway there are errors again
+> http://tinderbox.openembedded.net/packages/985559/
+>
+can you post your local.conf and additionally what version of autoconf
+is installed on your build host.
 
-> Mike
+>
+> Is anybody out there building with Debian Lenny 64 ?
+> TIA
+>
+> /marco
 >
 > _______________________________________________
 > Openembedded-devel mailing list
