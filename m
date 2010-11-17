@@ -1,40 +1,44 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1PIjbE-0002Fq-M8
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PIjdR-00044D-Lb
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 16:07:05 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 0E36A2C7EB
+	Wed, 17 Nov 2010 16:09:22 +0100
+Received: by iwn9 with SMTP id 9so101380iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 15:05:31 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jGA4aeAXQoMO
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 15:05:26 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 83EC92C7DD
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 15:05:26 +0000 (UTC)
-Message-ID: <4CE3EF4C.2050105@gmail.com>
-Date: Wed, 17 Nov 2010 16:05:48 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+	Wed, 17 Nov 2010 07:08:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=c1RRLOM+AucOmt2L63P5+Ut8grJMFwoBEfUE9hoRkMc=;
+	b=j69eEADbUryXbW0VXqCSLpHxI2bLYwDWvPBEWoKNFiVtNYrzmFqxY6gdjRvn1PQyqR
+	s1BDLS7zzoy4oZu6BnTzpUNOMdvRA5pB4Lvx3AC1+6moZkKMRYxXJP0aJBvVQa80nCP1
+	aGB2eg3jPIyxhDCM25sSA05xYpYxyOMAgY2xs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=j9Hkxi2SvxRVWKYw5weLTFNPiv4IfkKmIZR4uQ6pKT0IXz/SwwzXkTTdd4TRvPRxaf
+	qxsPGMPm3IXk3+wZ5SFQZUsEaWfKnZxU8F8ZXz5lfh02osWnO+UiJoiv8AcyBexPqtOW
+	APm6RKRo3kMfsd6difDd05LVQe97h9GumiJqs=
 MIME-Version: 1.0
+Received: by 10.231.39.137 with SMTP id g9mr7096770ibe.101.1290006494421; Wed,
+	17 Nov 2010 07:08:14 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Wed, 17 Nov 2010 07:08:14 -0800 (PST)
+In-Reply-To: <4CE3E4F6.9000602@home.nl>
+References: <1290002290-9233-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<4CE3E4F6.9000602@home.nl>
+Date: Wed, 17 Nov 2010 16:08:14 +0100
+Message-ID: <AANLkTimHTM1FK4_dSWpe6JHvyQNFVzx5h3JdCQgw0g-V@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CE3D70F.2000101@gmail.com>
-	<AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>
-In-Reply-To: <AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Error: git was compiled without libcurl support
+Subject: Re: [PATCH v2] libX11: patch configure.ac so a nios2 system is not seen as an os2 system.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,48 +52,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 15:07:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 17 Nov 2010 15:09:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Frans Meulenbroeks ha scritto, Il 17/11/2010 15:01:
-> 2010/11/17 Marco Cavallini <koansoftware@gmail.com>:
->> Hi, I just tried installing OE retrieving it from git
->> git clone git://git.openembedded.org/openembedded
->>
->> bitbake version 1.10.0
->> branch master
->> MACHINE=akita time bitbake minimal-image
->> DISTRO = "angstrom-2008.1"
->> host machine : Debian lenny x86_64-linux
->>
->> I face to an unexpected error
->> "Error: git was compiled without libcurl support"
->>
->> I successfully built it until November 2nd but since last Saturday I
->> wonder if it should build or if is normal this behavoiur.
->> log: http://paste.ubuntu.com/533450/
->>
-> 
-> you're using git from the host, guess that got changed one way or another.
-> 
+2010/11/17 Walter Goossens <waltergoossens@home.nl>:
+> I just noticed my test build halted on that exact error...
+> I'll ack this one :)
 
-Frans,
-thank you for answering.
+it is pushed :-)
 
-I tried removing ASSUME_PROVIDED git-native from my config (local.conf)
-in this case bitbake create git and use it instead of the host provided.
-Then I did
+Thanks for your acks.
+I'm building console-image for nios as part of the testing branch.
+Seems there is also yet another issue left in the toolchain, but
+haven't had time to dig into that one.
 
- bitbake -b git-native
-
-Anyway there are errors again
-http://tinderbox.openembedded.net/packages/985559/
-
-
-Is anybody out there building with Debian Lenny 64 ?
-TIA
-
-/marco
+Frans
 
 
