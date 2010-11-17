@@ -1,43 +1,44 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1PIely-0001pg-8D
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PIemm-0001vW-Sl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 10:57:51 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 35F52A4C10
+	Wed, 17 Nov 2010 10:58:42 +0100
+Received: by iwn38 with SMTP id 38so657436iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 09:56:45 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 8BscK4456tSD
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 09:56:44 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 9777DA4BC9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 09:56:44 +0000 (GMT)
-Message-ID: <4CE3A6DE.2070203@xora.org.uk>
-Date: Wed, 17 Nov 2010 09:56:46 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+	Wed, 17 Nov 2010 01:57:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=PYa+HICk4Lzac/kUi7hF3Qwc7HaXoX4ogGo8PjUvsfE=;
+	b=E3/GywIdoeJeurvMQDCpCy59hpSm7b+3GHc1++NOMYE+Oo6vN6JLwALE4aSjKaMRv3
+	9XWYu+vxh7S0GmK7+uIk3d9r3LBuk3DuCNpzD79yVGjObWYJb5hp8VxLc96hPNyRkeNd
+	PjZ08TWERRvrwOt5LmvEkmv0u3Ukxq3h2h7xg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=DAKrPm+EmuRArhwHFzwh5HhsXmIw91rLYEmh/Hg/6sbVArWYosFPKrWBW3FYHUASia
+	7kIyv69PNMzNP83++rNqvYDvS48KboB2cu6nwLTqEFBj8XQyIrIoOFXru0FLwh00qCyw
+	WzVYKtpm4TAw8Uk646nMnigxFQVohZrk4XTqg=
 MIME-Version: 1.0
+Received: by 10.231.39.137 with SMTP id g9mr6799747ibe.101.1289987855543; Wed,
+	17 Nov 2010 01:57:35 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Wed, 17 Nov 2010 01:57:35 -0800 (PST)
+In-Reply-To: <AANLkTimgbSkwmvo4jH_-=gpswQopuSjvYDZF7kaR=HbN@mail.gmail.com>
+References: <AANLkTimAqPZaYRHA9xy0pOVhpdwyFKq=LWuuMZRBq0N=@mail.gmail.com>
+	<AANLkTimgbSkwmvo4jH_-=gpswQopuSjvYDZF7kaR=HbN@mail.gmail.com>
+Date: Wed, 17 Nov 2010 10:57:35 +0100
+Message-ID: <AANLkTi=AtzjhcrfUyZrpgZnFLneYmY-E3dEb4zriQZit@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=4sU4238+b8zyJJ35VCyJB2ysestx9N=_my697@mail.gmail.com>
-	<ic06a8$uft$1@dough.gmane.org>
-In-Reply-To: <ic06a8$uft$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Preparing for release - Freeze on master
+Subject: Re: PREFERRED_PROVIDER issue/question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,27 +52,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 09:57:51 -0000
+X-List-Received-Date: Wed, 17 Nov 2010 09:58:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 17/11/2010 09:12, Koen Kooi wrote:
-> On 16-11-10 19:20, Khem Raj wrote:
-> > Hello All,
+2010/11/17 Andrea Adami <andrea.adami@gmail.com>:
+> On Tue, Nov 16, 2010 at 10:44 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> When I am building mythtv-plugins for distro minimal I get:
+> ...
+>> NOTE: multiple providers are available for runtime
+>> module-init-tools-depmod (module-init-tools, module-init-tools-cross)
+> ..
 >
-> > In order to get to the 2010.12 release, I would like to request to
-> > stop pushing any changes to master until release. Please keep your
-> > changes in you local tree ready for when the window
-> > opens again after the release.
->
-> At OEDEM we agreed that the release would pick a tested branch tag to
-> avoid such a draconic freeze.
->
-I must say I am puzzled why the freeze when git supports branches. In
-the past we have just picked a point branched then cherry picked
-anything interesting that went into org.openemedded.dev until release date.
+> I see the same note building Angstrom since some months.
 
-Graeme
+Actually it depends which message your get.
+I suspect that if you build mythtv for angstrom you'll also get the
+libmysqlclient message.
+You won't get it if you have no dep on libmysqlclient.
+Similarly you won't get the module-init-tools-depmod warning if you
+build a package that does not need it. (guess building helloworld
+won't give it).
 
+It would be nice to get this fixed before the release, but I have no
+idea how to do so.
+
+>
+> Did not track yet the commit which originated that but seems a
+> conflict wrt module-init-tools-cross_3.2.2.bb
+> PROVIDES += "virtual/${TARGET_PREFIX}depmod virtual/${TARGET_PREFIX}depmod-2.6"
+
+Good find. I feel we should try to decide which of the two recipes
+should provide this (module-init-tools or module-init-tools-cross)
+
+Searched into it: that PROVIDES is there for > 1 yr.
+See http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=59ae038eec20833a9d07c43ddd9f0109f8bc3a74
+where it already was present
+
+Can't find the other virtual though (virtual/${TARGET_PREFIX}depmod),
+guess it is generated automagically.
+
+BTW noticed what we have module-init-ttols and modutils. Is this desired?
+
+frans@frans-desktop:~/workspace/openembedded/recipes$ grep depmod */*
+| grep virtual
+module-init-tools/module-init-tools-cross_3.2.2.bb:PROVIDES +=
+"virtual/${TARGET_PREFIX}depmod virtual/${TARGET_PREFIX}depmod-2.6"
+modutils/modutils-cross_2.4.27.bb:PROVIDES +=
+"virtual/${TARGET_PREFIX}depmod virtual/${TARGET_PREFIX}depmod-2.4"
+
+>
+>
+> Besides that, I'm not sure I understand following RDEPENDS in
+> module-init-tools.inc: runtime depending on a package created by
+> itself?
+>
+> PACKAGES =+ "module-init-tools-insmod-static module-init-tools-depmod"
+> RDEPENDS_${PN} += "module-init-tools-depmod"
+
+I guess this says that if you install module-init-tools you also need
+module-init-tools-depmod
+(but that is just a guess)
+
+Frans
+>
+>
+> Regards
+>
+> Andrea
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
