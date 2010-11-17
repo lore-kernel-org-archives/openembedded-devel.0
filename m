@@ -1,38 +1,38 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PIlBv-0007Rz-QC
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PIlBv-0007Rp-N5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 17:49:04 +0100
-Received: by qwd6 with SMTP id 6so8768qwd.6
+	Wed, 17 Nov 2010 17:49:05 +0100
+Received: by vws12 with SMTP id 12so1090566vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 08:47:57 -0800 (PST)
+	Wed, 17 Nov 2010 08:47:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:received
 	:in-reply-to:references:date:message-id:subject:from:to:content-type;
-	bh=fsvvAflqnf/jxPbE9/U7KRG0Ov04ZNhYooNIP7DdT/Y=;
-	b=xaFGYgM5hRV12yDPrpYHxRtGlqQLWZntMmzFa19+6/YzTi9LmPOrPW5JfJ7maPK9UJ
-	QMy+HbUNa0SNYLb+0JlPiNW3oxp9jM7EaLi4jpXhmsuh8qwh1v2F0HCUBW5bpGAs43lQ
-	2miRbWNYl0MHXQ/3uXcHVzoTUvMUrqBRrVhO4=
+	bh=IQAtOcLgoEUtXy2p8EFolWZlY4UxDOogwv/1TTlGeII=;
+	b=pX3v+GPE76IE9jN2kYZDNkSAilt59cFCgrrwprHsdD+674v6y9TzDkDagBR5vrms2R
+	m77aL2ycSL9USIcUGErB73eFDZ5gWvADY3zLOttD9dufqgiKrB0h2YzCfxYwz2LeJy81
+	FRRq7u8w5tS9idDlO66wwfnmRpR6si8d4IJ0Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=ezitk9+X7JixjvO619ttIyRt10MMakHqWVhI7ujrHzBLqAqcntTzmLB76tBdAYkfqK
-	/gk+boQ+Zi7A/TiyUm5nLsfqvVtwFRw89R2MaikC11sR+2lj6ihhgUXo3srj7lkAA2xZ
-	LE6n0UcOYsE1MSk6qnnzITgwnVc2FniIk8eEs=
+	b=e3mDIuYKNTFM70RuUDCT/Q5rsV7wofeOX92P1TLaLFjMYwOQ09YH9BPc7QGO3ngyMs
+	Ln/YBkUHvd5usPUCXAYvA6Ln7M881cPJ+I1xklptv/TKXyXgH6GEEKXCkqy3BFi0BkKl
+	ifEYF+nQA6QIWFyJUOvelADEwghNLHVSXE4ps=
 MIME-Version: 1.0
-Received: by 10.224.11.75 with SMTP id s11mr7358207qas.293.1290012477019; Wed,
-	17 Nov 2010 08:47:57 -0800 (PST)
+Received: by 10.229.238.16 with SMTP id kq16mr7579540qcb.134.1290012475443;
+	Wed, 17 Nov 2010 08:47:55 -0800 (PST)
 Received: by 10.220.193.4 with HTTP; Wed, 17 Nov 2010 08:47:54 -0800 (PST)
 Received: by 10.220.193.4 with HTTP; Wed, 17 Nov 2010 08:47:54 -0800 (PST)
-In-Reply-To: <4CE3F22C.8000104@mentor.com>
+In-Reply-To: <AANLkTi==WrNwoG_2u7zzb4V5hGc9Ctv2LYg8DLPv489p@mail.gmail.com>
 References: <AANLkTi=qSnufgxxDHZ+VW6mZED1LFXBduX81HA-kBZEu@mail.gmail.com>
 	<1290006345-22363-1-git-send-email-rep.dot.nop@gmail.com>
-	<4CE3F22C.8000104@mentor.com>
+	<AANLkTi==WrNwoG_2u7zzb4V5hGc9Ctv2LYg8DLPv489p@mail.gmail.com>
 Date: Wed, 17 Nov 2010 17:47:54 +0100
-Message-ID: <AANLkTi=REDDr=0wv9oQDEyUPAYh1KUyDq_p=q0s-0WAy@mail.gmail.com>
+Message-ID: <AANLkTikAtfH4woMaUn84Et_mPEb7VVWT0xaT3AG2PgV3@mail.gmail.com>
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Connect-IP: 209.85.212.47
 X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -55,29 +55,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2010 16:49:04 -0000
+X-List-Received-Date: Wed, 17 Nov 2010 16:49:06 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 Hi,
 
-Yeah, I will have a look, sure.
+Sorry for that!
+Apparently I've accidentally sent a commit and not a patch. I will
+follow-up.
 
-On 17 Nov 2010 16:20, "Tom Rini" <tom_rini@mentor.com> wrote:
+On 17 Nov 2010 16:13, "Frans Meulenbroeks" <fransmeulenbroeks@gmail.com>
+wrote:
 
-On 11/17/2010 08:05 AM, Bernhard Reutner-Fischer wrote:
+2010/11/17 Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>:
+
+>    bitbake.conf: add ext4 image support
 >
+>    Signed-off-by: Bernhard Reutner-Fischer <rep.dot.no...
+did you use git send-email?
+The subject line is not ok.
+
+
 >
->     bitbake.conf: add ext4 image suppo...
-Looks like e2fsprogs needs to be more careful about moving stuff for
-update-alternatives.  Mind fixing that and doing this as a 2 parter?
-
--- 
-Tom Rini
-Mentor Graphics Corporation
-
-
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index f1dc0ff..b7ec8ad 100644
+> --- a/conf...
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 _______________________________________________
 Openembedded-devel mailing list
-Openembedded-devel...
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
