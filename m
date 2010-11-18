@@ -1,43 +1,48 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PJ8yt-0001c5-8E
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1PJ9HL-0004T2-2x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 19:13:11 +0100
-Received: (qmail 5860 invoked by uid 503); 18 Nov 2010 18:34:51 -0000
-Received: from 63.mail-out.ovh.net (91.121.185.56)
-	by 68.mail-out.ovh.net with SMTP; 18 Nov 2010 18:34:51 -0000
-Received: (qmail 25647 invoked by uid 503); 18 Nov 2010 18:43:34 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 18 Nov 2010 18:43:34 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 18 Nov 2010 20:12:05 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 18 Nov 2010 20:12:04 +0200
-Message-ID: <4CE56C6B.1050009@eukrea.com>
-Date: Thu, 18 Nov 2010 19:11:55 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.6
+	Thu, 18 Nov 2010 19:32:15 +0100
+Received: by gyf3 with SMTP id 3so2141677gyf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Nov 2010 10:31:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=bx9/fVaF4PiIN9ErNkGDRSiyE37Vc2hxujSOMsPjCas=;
+	b=XbylofrSg5m+LunoGJW0dJnt4jK6CqOn1V/cidpjXJf3iHFa+zqGRPWzsVqC392aJ3
+	KECMXTtnAkpwZqz9BtpWO698p4j8qgpppsy72m/t70rxcDcGwh7+NOZ/Cb8V5G5P1A8R
+	BpA0n2S7vWNkrXlUXvLhtw8aIAUBoK44cBJ7U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=pdKk0wZtaAaktsJEi223yoFhNuf0WEJJsCe8e3+k2UYgMD7dUNGDTBmZRe68SlHCKV
+	QziUpRN8i2AWWYxtd17Ch6/VnePkJL8V+kPfDzx9VbDNOUXx/iZM7rUjsCzCsfMRAn2x
+	mwoJpMBvN/YYjZ7nt35dn1e7EHDRkZ9FTN9OM=
+Received: by 10.91.47.38 with SMTP id z38mr1450766agj.129.1290105059302; Thu,
+	18 Nov 2010 10:30:59 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.120.8 with HTTP; Thu, 18 Nov 2010 10:30:39 -0800 (PST)
+In-Reply-To: <4CE4EC1E.50903@gmail.com>
+References: <4CE3D70F.2000101@gmail.com>
+	<AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>
+	<4CE3EF4C.2050105@gmail.com>
+	<AANLkTin2v1+3UP_rk593i+V4=e4QeKgPinAkoWNwY0BO@mail.gmail.com>
+	<4CE42FF0.1000702@mentor.com> <4CE4EC1E.50903@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 18 Nov 2010 10:30:39 -0800
+Message-ID: <AANLkTi=cnG0DyVCmJjKrBEqR4AQgTVVn_ugHyUY194gF@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1290002140-17255-1-git-send-email-eric@eukrea.com>
-	<20101118180346.GA18493@denix.org>
-In-Reply-To: <20101118180346.GA18493@denix.org>
-X-Ovh-Tracer-Id: 7814871254224579913
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Ovh-Tracer-Id: 8199647546941680969
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] amend.bbclass: handle PACKAGE_ARCH change in	an amend.inc
+Subject: Re: Error: git was compiled without libcurl support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +56,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 18:13:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Nov 2010 18:32:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 18/11/2010 19:03, Denys Dmytriyenko wrote:
-> On Wed, Nov 17, 2010 at 02:55:40PM +0100, Eric B??nard wrote:
->> * setting PACKAGE_ARCH = "${MACHINE_ARCH}" in and amend.inc actually
->> leads to a packaga with the correct machine arch but the
->> work/stage/stamp dirs are not correct because MULTIMACH_ARCH is not
->> updated after amend.inc is parsed.
+On Thu, Nov 18, 2010 at 1:04 AM, Marco Cavallini <koansoftware@gmail.com> w=
+rote:
+> Tom Rini ha scritto, Il 17/11/2010 20:41:
+>> On 11/17/2010 12:30 PM, Khem Raj wrote:
+>>> On Wed, Nov 17, 2010 at 7:05 AM, Marco
+>>> Cavallini<koansoftware@gmail.com> =C2=A0wrote:
+>>>> Frans Meulenbroeks ha scritto, Il 17/11/2010 15:01:
+>>>>> 2010/11/17 Marco Cavallini<koansoftware@gmail.com>:
+>>>>>> Hi, I just tried installing OE retrieving it from git
+>>>>>> git clone git://git.openembedded.org/openembedded
+>>>>>>
+>>>>>> bitbake version 1.10.0
+>>>>>> branch master
+>>>>>> MACHINE=3Dakita time bitbake minimal-image
+>>>>>> DISTRO =3D "angstrom-2008.1"
+>>>>>> host machine : Debian lenny x86_64-linux
+>>>>>>
+>>>>>> I face to an unexpected error
+>>>>>> "Error: git was compiled without libcurl support"
+>>>>>>
+>>>>>> I successfully built it until November 2nd but since last Saturday I
+>>>>>> wonder if it should build or if is normal this behavoiur.
+>>>>>> log: http://paste.ubuntu.com/533450/
+>>>>>>
+>>>>>
+>>>>> you're using git from the host, guess that got changed one way or
+>>>>> another.
+>>>>>
+>>>>
+>>>> Frans,
+>>>> thank you for answering.
+>>>>
+>>>> I tried removing ASSUME_PROVIDED git-native from my config (local.conf=
+)
+>>>> in this case bitbake create git and use it instead of the host provide=
+d.
+>>>> Then I did
+>>>>
+>>>> =C2=A0 bitbake -b git-native
+>>>>
+>>>> Anyway there are errors again
+>>>> http://tinderbox.openembedded.net/packages/985559/
+>>>>
+>>> can you post your local.conf and additionally what version of autoconf
+>>> is installed on your build host.
 >>
->> * this patch updates MULTIMACH_ARCH if PACKAGE_ARCH is changed in
->> amend.inc
+>> On IRC we confirm that debian/lenny (on 64bit) has a git bug atm.
 >>
->> Signed-off-by: Eric B??nard<eric@eukrea.com>
 >
-> Thanks! We have faced this issue before.
+> Here is my workaround, if you are using Debian Lenny as host distro
+> please read this carefully
+> http://www.kaeilos.com/debian-lenny-and-git-native
 >
-> Acked-by: Denys Dmytriyenko<denis@denix.org>
+> Suggestions would be appreciated.
 
-I'm working on an update version after discussion with Kergoth on IRC. I hope 
-to send it for review by tomorrow.
-
-Eric
+why not just use git-native ?
 
 
