@@ -1,40 +1,39 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail.reciva.com ([62.7.80.110] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1PJ0R5-0004xJ-Le
+	(envelope-from <philb@gnu.org>) id 1PJ1Qr-0006QC-KT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 10:06:06 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 7BD132C7EB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Nov 2010 09:04:12 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PJgOAZTJ1yQm
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Nov 2010 09:04:08 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id BE1892C7DD
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Nov 2010 09:04:07 +0000 (UTC)
-Message-ID: <4CE4EC1E.50903@gmail.com>
-Date: Thu, 18 Nov 2010 10:04:30 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
-MIME-Version: 1.0
+	Thu, 18 Nov 2010 11:09:34 +0100
+Received: from [192.168.106.10] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PJ1Pk-0001tg-Dd
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Nov 2010 10:08:25 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1PJ1Pk-0005bF-7T
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Nov 2010 10:08:24 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4CE3D70F.2000101@gmail.com>	<AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>	<4CE3EF4C.2050105@gmail.com>	<AANLkTin2v1+3UP_rk593i+V4=e4QeKgPinAkoWNwY0BO@mail.gmail.com>
-	<4CE42FF0.1000702@mentor.com>
-In-Reply-To: <4CE42FF0.1000702@mentor.com>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+In-Reply-To: <AANLkTimdqZ1hdZNPN70LXd1WuJSn4pU2y=2C5tZs0-LT@mail.gmail.com>
+References: <AANLkTi=4sU4238+b8zyJJ35VCyJB2ysestx9N=_my697@mail.gmail.com>
+	<ic06a8$uft$1@dough.gmane.org> <4CE3A6DE.2070203@xora.org.uk>
+	<ic0aj2$hqc$1@dough.gmane.org>
+	<AANLkTimdqZ1hdZNPN70LXd1WuJSn4pU2y=2C5tZs0-LT@mail.gmail.com>
+Date: Thu, 18 Nov 2010 10:08:23 +0000
+Message-ID: <1290074903.3183.202.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 192.168.106.10
+X-SA-Exim-Connect-IP: 62.7.80.110
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Error: git was compiled without libcurl support
+Subject: Re: Preparing for release - Freeze on master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,73 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 09:06:15 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Nov 2010 10:09:34 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Tom Rini ha scritto, Il 17/11/2010 20:41:
-> On 11/17/2010 12:30 PM, Khem Raj wrote:
->> On Wed, Nov 17, 2010 at 7:05 AM, Marco
->> Cavallini<koansoftware@gmail.com>  wrote:
->>> Frans Meulenbroeks ha scritto, Il 17/11/2010 15:01:
->>>> 2010/11/17 Marco Cavallini<koansoftware@gmail.com>:
->>>>> Hi, I just tried installing OE retrieving it from git
->>>>> git clone git://git.openembedded.org/openembedded
->>>>>
->>>>> bitbake version 1.10.0
->>>>> branch master
->>>>> MACHINE=3Dakita time bitbake minimal-image
->>>>> DISTRO =3D "angstrom-2008.1"
->>>>> host machine : Debian lenny x86_64-linux
->>>>>
->>>>> I face to an unexpected error
->>>>> "Error: git was compiled without libcurl support"
->>>>>
->>>>> I successfully built it until November 2nd but since last Saturday =
-I
->>>>> wonder if it should build or if is normal this behavoiur.
->>>>> log: http://paste.ubuntu.com/533450/
->>>>>
->>>>
->>>> you're using git from the host, guess that got changed one way or
->>>> another.
->>>>
->>>
->>> Frans,
->>> thank you for answering.
->>>
->>> I tried removing ASSUME_PROVIDED git-native from my config (local.con=
-f)
->>> in this case bitbake create git and use it instead of the host provid=
-ed.
->>> Then I did
->>>
->>>   bitbake -b git-native
->>>
->>> Anyway there are errors again
->>> http://tinderbox.openembedded.net/packages/985559/
->>>
->> can you post your local.conf and additionally what version of autoconf
->> is installed on your build host.
->=20
-> On IRC we confirm that debian/lenny (on 64bit) has a git bug atm.
->=20
+On Wed, 2010-11-17 at 11:26 -0800, Khem Raj wrote:
+> Should we create a release branch before we release and solidify that ? 
 
-Here is my workaround, if you are using Debian Lenny as host distro
-please read this carefully
-http://www.kaeilos.com/debian-lenny-and-git-native
+Yes, please do that.  We discussed this issue at yesterday's TSC meeting
+(full minutes to follow shortly) and the consensus was that trying to
+enforce a complete freeze on master at short notice is not going to be
+practical.
 
-Suggestions would be appreciated.
-HTH
+Obviously the exact process you use is up to you, but I would suggest
+something along the lines of:
+
+1. make a stabilisation branch from some semi-arbitrary point, maybe one
+of the existing weekly test versions.
+
+2. do testing on this branch.
+
+3. cherry-pick and/or revert changesets on the branch as
+necessary/desired.
+
+4. iterate steps 2/3 until you are happy with the quality or the
+deadline is reached.
+
+5. tag the release from the current head of that branch.
+
+p.
 
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-        http://www.KaeilOS.com
 
 
