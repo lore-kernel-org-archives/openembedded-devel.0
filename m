@@ -1,47 +1,40 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PIzxm-00011J-JF
+	(envelope-from <koansoftware@gmail.com>) id 1PJ0R5-0004xJ-Le
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 09:35:27 +0100
-Received: by wwb17 with SMTP id 17so4706wwb.0
+	Thu, 18 Nov 2010 10:06:06 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 7BD132C7EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Nov 2010 00:34:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=BvGd+imYeAmciCKLm6wEo2sW17QzFMJcBKBszwQZzgU=;
-	b=J3fd35No75XOxGyZlGmMMiEwSFV78IxNbT8tRPgVsfXQF7PRZEddx2jj7TC6+s7ZC3
-	1chVLUVc95zqgATNEc37ApVKRabe0jM4zl9S9elWS7rPwUtE8dDQDOEZpkgaHj8z+uYH
-	okU9zASuOCcQ9jCKM0d8zVAs/5GbQ06d+1zb8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=PxLCz+GIWlFa5Ui0e5Atck+XwYa39AERCU6QW2nNe8CWU4BNfwr6riBsCbMS/YxZGV
-	d3DAjq9Yprdz6H3PMW6tfTTfbs/VNYvwp/zy4Pv3tRaE+Ei7PcxRCruuwf/3Ae8DI6Fe
-	eMbMOajT2dk93fy2pbvll3P2FxhUmustqR7fg=
+	Thu, 18 Nov 2010 09:04:12 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id PJgOAZTJ1yQm
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Nov 2010 09:04:08 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id BE1892C7DD
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Nov 2010 09:04:07 +0000 (UTC)
+Message-ID: <4CE4EC1E.50903@gmail.com>
+Date: Thu, 18 Nov 2010 10:04:30 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
-Received: by 10.227.147.129 with SMTP id l1mr311835wbv.55.1290069257134; Thu,
-	18 Nov 2010 00:34:17 -0800 (PST)
-Received: by 10.227.154.13 with HTTP; Thu, 18 Nov 2010 00:34:16 -0800 (PST)
-In-Reply-To: <AANLkTimRDgCPqg3g45cQkM6M1dnBa+SRD55Kyu=pFBcN@mail.gmail.com>
-References: <1290046421-22553-1-git-send-email-sgarman@zenlinux.com>
-	<4CE48CFF.7070406@balister.org> <4CE493E2.3010509@zenlinux.com>
-	<4CE49577.4030100@balister.org>
-	<AANLkTimRDgCPqg3g45cQkM6M1dnBa+SRD55Kyu=pFBcN@mail.gmail.com>
-Date: Thu, 18 Nov 2010 09:34:16 +0100
-Message-ID: <AANLkTikWQH5fqT3VuOyrPjmevfOGtP2bHxU1Kat2cjTX@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.41
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+References: <4CE3D70F.2000101@gmail.com>	<AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>	<4CE3EF4C.2050105@gmail.com>	<AANLkTin2v1+3UP_rk593i+V4=e4QeKgPinAkoWNwY0BO@mail.gmail.com>
+	<4CE42FF0.1000702@mentor.com>
+In-Reply-To: <4CE42FF0.1000702@mentor.com>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] tar: upgrade to version 1.25
+Subject: Re: Error: git was compiled without libcurl support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,90 +48,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 08:35:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 18 Nov 2010 09:06:15 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 18, 2010 at 4:28 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Wed, Nov 17, 2010 at 6:54 PM, Philip Balister <philip@balister.org> wr=
-ote:
->> On 11/17/2010 06:48 PM, Scott Garman wrote:
->>>
->>> On 11/17/2010 06:18 PM, Philip Balister wrote:
->>>>
->>>> On 11/17/2010 06:13 PM, Scott Garman wrote:
+Tom Rini ha scritto, Il 17/11/2010 20:41:
+> On 11/17/2010 12:30 PM, Khem Raj wrote:
+>> On Wed, Nov 17, 2010 at 7:05 AM, Marco
+>> Cavallini<koansoftware@gmail.com>  wrote:
+>>> Frans Meulenbroeks ha scritto, Il 17/11/2010 15:01:
+>>>> 2010/11/17 Marco Cavallini<koansoftware@gmail.com>:
+>>>>> Hi, I just tried installing OE retrieving it from git
+>>>>> git clone git://git.openembedded.org/openembedded
 >>>>>
->>>>> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
->>>>> ---
->>>>> recipes/tar/tar_1.23.bb | 6 ------
->>>>> recipes/tar/tar_1.25.bb | 6 ++++++
->>>>> 2 files changed, 6 insertions(+), 6 deletions(-)
->>>>> delete mode 100644 recipes/tar/tar_1.23.bb
->>>>> create mode 100644 recipes/tar/tar_1.25.bb
+>>>>> bitbake version 1.10.0
+>>>>> branch master
+>>>>> MACHINE=3Dakita time bitbake minimal-image
+>>>>> DISTRO =3D "angstrom-2008.1"
+>>>>> host machine : Debian lenny x86_64-linux
 >>>>>
->>>>> diff --git a/recipes/tar/tar_1.23.bb b/recipes/tar/tar_1.23.bb
->>>>> deleted file mode 100644
->>>>> index dc37247..0000000
->>>>> --- a/recipes/tar/tar_1.23.bb
->>>>> +++ /dev/null
->>>>> @@ -1,6 +0,0 @@
->>>>> -require tar.inc
->>>>> -
->>>>> -PR =3D "${INC_PR}"
->>>>> -
->>>>> -SRC_URI[md5sum] =3D "41e2ca4b924ec7860e51b43ad06cdb7e"
->>>>> -SRC_URI[sha256sum] =3D
->>>>> "c9328372db62fbb1d94c9e4e3cefc961111af46de47085b635359c00a0eebe36"
->>>>> diff --git a/recipes/tar/tar_1.25.bb b/recipes/tar/tar_1.25.bb
->>>>> new file mode 100644
->>>>> index 0000000..c611f77
->>>>> --- /dev/null
->>>>> +++ b/recipes/tar/tar_1.25.bb
->>>>> @@ -0,0 +1,6 @@
->>>>> +require tar.inc
->>>>> +
->>>>> +PR =3D "${INC_PR}"
->>>>> +
->>>>> +SRC_URI[md5sum] =3D "6e497f861c77bbba2f7da4e10270995b"
->>>>> +SRC_URI[sha256sum] =3D
->>>>> "f3f6ce41b8e0f327abd05c95990f113ddafbae131e10f79a99728ed46458494b"
+>>>>> I face to an unexpected error
+>>>>> "Error: git was compiled without libcurl support"
+>>>>>
+>>>>> I successfully built it until November 2nd but since last Saturday =
+I
+>>>>> wonder if it should build or if is normal this behavoiur.
+>>>>> log: http://paste.ubuntu.com/533450/
+>>>>>
 >>>>
+>>>> you're using git from the host, guess that got changed one way or
+>>>> another.
 >>>>
->>>> Acked-by: Philip Balister <philip@balister.org>
->>>>
->>>> Can you add tar-1.23 to the removal.txt file? Ask it be removed in a
->>>> couple of months. This way we have a schedule to delete the older reci=
-pe.
 >>>
->>> Thanks for the quick ack, Philip. Question though on the removal.txt
->>> addition - this patch deletes the v1.23 version already. Does it need t=
-o
->>> be kept around instead? I would think not given that this is a pretty
->>> trivial update.
+>>> Frans,
+>>> thank you for answering.
 >>>
->>> Perhaps you meant tar v1.18 and/or v1.20, which are still there?
->>
->> Oops, I wasn't paying that close attention. I'd still leave 1.23 around =
-for
->> a couple of months, just in case there is some weird issue with 1.25. We
->> should check on the older ones and add them to removal.txt also. I'd lik=
-e to
->> see us get into a sane clean up old stuff cycle, instead of the delete
->> everything at once approach. Of course checking to see if any in tree
->> distros use them is =A0good thing.
->>
->
-> Yeah probably a sane thing. Make 1.25 default and let 1.23 linger
-> around for a while
-> just in case.
+>>> I tried removing ASSUME_PROVIDED git-native from my config (local.con=
+f)
+>>> in this case bitbake create git and use it instead of the host provid=
+ed.
+>>> Then I did
+>>>
+>>>   bitbake -b git-native
+>>>
+>>> Anyway there are errors again
+>>> http://tinderbox.openembedded.net/packages/985559/
+>>>
+>> can you post your local.conf and additionally what version of autoconf
+>> is installed on your build host.
+>=20
+> On IRC we confirm that debian/lenny (on 64bit) has a git bug atm.
+>=20
 
-Gentoo already has serious bug reported against 1.25
-http://bugs.gentoo.org/342983
-resulting in added 1.25 being masked now there
+Here is my workaround, if you are using Debian Lenny as host distro
+please read this carefully
+http://www.kaeilos.com/debian-lenny-and-git-native
 
-Maybe we should keep 1.23 default until it's resolved or confirmed
-that OE is not affected by this.
+Suggestions would be appreciated.
+HTH
 
-Regards,
+
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+        http://www.KaeilOS.com
 
 
