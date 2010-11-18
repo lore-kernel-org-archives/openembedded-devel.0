@@ -1,33 +1,33 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1PJ89N-0003jr-6C
+	(envelope-from <denis@denix.org>) id 1PJ8rU-00064C-Tg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 18:19:58 +0100
-Received: (qmail 4110 invoked by uid 1003); 18 Nov 2010 17:18:47 -0000
-Received: from adsl-75-37-22-143.dsl.pltn13.sbcglobal.net (HELO
-	?192.168.1.148?) (philip@opensdr.com@75.37.22.143)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	18 Nov 2010 17:18:47 -0000
-Message-ID: <4CE55FF6.5030900@balister.org>
-Date: Thu, 18 Nov 2010 09:18:46 -0800
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101027 Fedora/3.1.6-1.fc13 Thunderbird/3.1.6
-MIME-Version: 1.0
+	Thu, 18 Nov 2010 19:05:33 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.55.54])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LC300J7JE6B7AB2@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	18 Nov 2010 12:04:00 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B055B14AF64; Thu,
+	18 Nov 2010 13:03:46 -0500 (EST)
+Date: Thu, 18 Nov 2010 13:03:46 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=4sU4238+b8zyJJ35VCyJB2ysestx9N=_my697@mail.gmail.com>	<ic06a8$uft$1@dough.gmane.org>
-	<4CE3A6DE.2070203@xora.org.uk>	<ic0aj2$hqc$1@dough.gmane.org>	<AANLkTimdqZ1hdZNPN70LXd1WuJSn4pU2y=2C5tZs0-LT@mail.gmail.com>	<1290074903.3183.202.camel@mill.internal.reciva.com>	<AANLkTimnEoW_9i8T65WTsQsYXc2E2gcx+015o13cVsKF@mail.gmail.com>
-	<1290079874.3183.222.camel@mill.internal.reciva.com>
-In-Reply-To: <1290079874.3183.222.camel@mill.internal.reciva.com>
-X-SA-Exim-Connect-IP: 216.168.135.166
-X-SA-Exim-Mail-From: philip@balister.org
+Message-id: <20101118180346.GA18493@denix.org>
+References: <1290002140-17255-1-git-send-email-eric@eukrea.com>
+MIME-version: 1.0
+In-reply-to: <1290002140-17255-1-git-send-email-eric@eukrea.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Preparing for release - Freeze on master
+Subject: Re: [PATCH] amend.bbclass: handle PACKAGE_ARCH change in an	amend.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,38 +41,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 17:19:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Nov 2010 18:05:34 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 11/18/2010 03:31 AM, Phil Blundell wrote:
-> On Thu, 2010-11-18 at 21:31 +1030, Graham Gower wrote:
->> So, why not just branch it already and apply the same commit policy as
->> the existing stable branch.
->
-> Essentially because nobody has yet volunteered to do the ongoing
-> maintenance work that would be involved in having a long-lived stable
-> branch.  And, if OE is going to have releases off master on a fairly
-> frequent schedule (I think the proposal is four releases per year or
-> thereabouts) then the requirement for such a branch is somewhat
-> diminished.
->
-> If you're interested in doing the work to maintain a new stable branch
-> along the same lines as stable/2009, and you can commit the time that is
-> required to make it work, then you are certainly very welcome to do so.
-> You don't need any particular permission to do this: you can (subject to
-> the Branching Policy) create a new branch at any time.
+On Wed, Nov 17, 2010 at 02:55:40PM +0100, Eric B??nard wrote:
+> * setting PACKAGE_ARCH = "${MACHINE_ARCH}" in and amend.inc actually
+> leads to a packaga with the correct machine arch but the
+> work/stage/stamp dirs are not correct because MULTIMACH_ARCH is not
+> updated after amend.inc is parsed.
+> 
+> * this patch updates MULTIMACH_ARCH if PACKAGE_ARCH is changed in
+> amend.inc
+> 
+> Signed-off-by: Eric B??nard <eric@eukrea.com>
 
-I'd like to emphasize this point, the tag is a sane place for people to 
-start from. The OE project deliver meta-data for people to build 
-products on. It is the responsibility of the people delivering 
-images/packages to people to manage their own branches for maintenance.
+Thanks! We have faced this issue before.
 
-We certainly encourage groups of people to collaborate with each other 
-to maintain branches, but I don't see a one policy suits all branch.
+Acked-by: Denys Dmytriyenko <denis@denix.org>
 
-One man's stable is anothers stagnant.
-
-Philip
+> ---
+>  classes/amend.bbclass |    7 +++++++
+>  1 files changed, 7 insertions(+), 0 deletions(-)
+> 
+> diff --git a/classes/amend.bbclass b/classes/amend.bbclass
+> index a03de64..da60611 100644
+> --- a/classes/amend.bbclass
+> +++ b/classes/amend.bbclass
+> @@ -42,5 +42,11 @@ python () {
+>              depends = set()
+>          depends |= set(newdata)
+>      d.setVar("__depends", depends)
+> +
+> +    mach_arch = bb.data.getVar('MACHINE_ARCH', d, 1)
+> +    pkg_arch = bb.data.getVar('PACKAGE_ARCH', d, 1)
+> +    multi_arch = bb.data.getVar('MULTIMACH_ARCH', d, 1)
+> +    if pkg_arch and pkg_arch == mach_arch and pkg_arch != multi_arch:
+> +        multi_arch = pkg_arch
+> +        bb.data.setVar('MULTIMACH_ARCH', multi_arch, d)
+>  }
+> -- 
+> 1.7.2.3
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
