@@ -1,54 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PJ9Tt-00009B-9c
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 19:45:13 +0100
-Received: by fxm11 with SMTP id 11so1923566fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Nov 2010 10:44:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=af2IAzrOE6dR585V2KqFk7W/f3BSchUvVlWyhrUNdKQ=;
-	b=UqFDhQ2qy7wTEENEa8o52xfi93ZPsyOZxvC2B1ujLFqOhH+IvS/C2xwmV2prAhebed
-	5mWnxetRr0jRQtf9TOyU0dWrEP+z4l3kk6muJAh8dK7VUGBRHKy5fNhtgF06b9wNFNOV
-	b17prm7C6l38FHz7b0j6+5ej3w3YblOSFARa8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=DsEP0bfvMz08St27e4pZ69FOoynalJ/YqEdJ6QFxEvFRE4cT76Le0jjp6f2QObd8fr
-	nY/49ShBczTLyK40gi7D0fKc1sSEyqF7YrGxymWzSn0Xu1iRJf41tB7LqaGiRopo/oCw
-	W6KcSIgPyuMOZB90sXgwAnPimu+Cs1n/S3yDo=
-Received: by 10.223.83.203 with SMTP id g11mr898881fal.84.1290105846029;
-	Thu, 18 Nov 2010 10:44:06 -0800 (PST)
-Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
-	[85.127.155.31])
-	by mx.google.com with ESMTPS id a25sm254595fab.13.2010.11.18.10.44.03
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 18 Nov 2010 10:44:04 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1PJ9Sk-0003cP-28; Thu, 18 Nov 2010 19:44:02 +0100
-Date: Thu, 18 Nov 2010 19:44:02 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PJ9W0-0000KG-5F for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Nov 2010 19:47:26 +0100
+Received: from f053032179.adsl.alicedsl.de ([78.53.32.179]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PJ9Uw-0004Kh-Sk for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Nov 2010 18:46:19 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101118184402.GL21346@mx.loc>
-References: <1289988503-14693-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<AANLkTi=YqETnOXFgSfbGvaR8AbW0HAtnm2=ZJVNCboUM@mail.gmail.com>
-	<AANLkTimq5JgxA+T3U9WhBMxgr+Of_H27RF3SemZc69fY@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTimq5JgxA+T3U9WhBMxgr+Of_H27RF3SemZc69fY@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+In-Reply-To: <4CE56C6B.1050009@eukrea.com>
+References: <1290002140-17255-1-git-send-email-eric@eukrea.com>
+	<20101118180346.GA18493@denix.org>  <4CE56C6B.1050009@eukrea.com>
+Date: Thu, 18 Nov 2010 19:46:17 +0100
+Message-ID: <1290105977.3755.8.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] uclibc++: moved to 0.2.2
+Subject: Re: [PATCH] amend.bbclass: handle PACKAGE_ARCH change in an amend.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,20 +40,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 18:45:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Nov 2010 18:47:33 -0000
+X-Groupsio-MsgNum: 26281
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-L3bJwPCj1/dY60aiOQgR"
 
-On Wed, Nov 17, 2010 at 08:56:13PM +0100, Frans Meulenbroeks wrote:
->>> +DESCRIPTION = "A C++ standard library targeted towards the embedded \
->>> +systems/software market."
->>> +HOMEPAGE = "http://cxx.uclibc.org/"
->>> +LICENSE = "LGPL"
->>
->> LGPL also have versions find out which one it is licensed under
->
->Will do
+--=-L3bJwPCj1/dY60aiOQgR
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-IIRC LGPL >= 2.1
+Am Donnerstag, den 18.11.2010, 19:11 +0100 schrieb Eric B=C3=A9nard:
+> On 18/11/2010 19:03, Denys Dmytriyenko wrote:
+> > On Wed, Nov 17, 2010 at 02:55:40PM +0100, Eric B??nard wrote:
+> >> * setting PACKAGE_ARCH =3D "${MACHINE_ARCH}" in and amend.inc actually
+> >> leads to a packaga with the correct machine arch but the
+
+s/packaga/package/
+
+> >> work/stage/stamp dirs are not correct because MULTIMACH_ARCH is not
+> >> updated after amend.inc is parsed.
+> >>
+> >> * this patch updates MULTIMACH_ARCH if PACKAGE_ARCH is changed in
+> >> amend.inc
+> >>
+> >> Signed-off-by: Eric B??nard<eric@eukrea.com>
+> >
+> > Thanks! We have faced this issue before.
+> >
+> > Acked-by: Denys Dmytriyenko<denis@denix.org>
+>=20
+> I'm working on an update version after discussion with Kergoth on IRC. I =
+hope=20
+> to send it for review by tomorrow.
+
+Just pointing out the typo above since you are going to update the
+patch.
 
 
+Thanks,
+
+Paul
+
+--=-L3bJwPCj1/dY60aiOQgR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzldHkACgkQPX1aK2wOHVi/WACfTMXJLiPbqvKIxLIqJzmWkFRQ
+pNkAn3A0RopUBNgtOg4gd0XU5bd3jJFt
+=5pRj
+-----END PGP SIGNATURE-----
+
+--=-L3bJwPCj1/dY60aiOQgR--
