@@ -1,43 +1,35 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <luke.leighton@gmail.com>) id 1PIsKr-0000V0-JZ
+	(envelope-from <Tom_Rini@mentor.com>) id 1PIsp9-0000wP-JS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 01:26:46 +0100
-Received: by qyk7 with SMTP id 7so698425qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Nov 2010 16:25:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=4/cEGLt7kI2r/5BVDHjsRo8WERl2hMj7pzgTfNt5HTI=;
-	b=WmBMwoq4LmlYctUGLWnLuFX5jrQYOFK2d+Sy2tZ1HkoDx0HknHm+WBTxT01Szx9/Wg
-	UR9X2+n729kcMcPpy5EcIean5sfDp/WHhrUQ2yq/F2BNZD9jPH4gMn98C0Cjeye7mVC1
-	2h5Ru4yaSbffQM8Q98zfeYgoifYIZw09RycIg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=Z+s32idV27W9g141dXXq4TiDsK25buQoqRa7XJtI6TSzgh+xFOnqN2uQrDgxDxauZ0
-	FtoQsd9U4h9MOTB47TVYWwFQ49rrkTYMIDLCJP/ut2LH3+SUwcUhakAJ01+9d2OPWs2n
-	njK44S2lJ/uJf695d55aWzJX2mPdmNzQryAGQ=
-MIME-Version: 1.0
-Received: by 10.229.224.212 with SMTP id ip20mr7974711qcb.278.1290039935563;
-	Wed, 17 Nov 2010 16:25:35 -0800 (PST)
-Sender: luke.leighton@gmail.com
-Received: by 10.220.112.210 with HTTP; Wed, 17 Nov 2010 16:25:35 -0800 (PST)
-Date: Thu, 18 Nov 2010 00:25:35 +0000
-X-Google-Sender-Auth: Ml2KjUVshVbv1AJPgtLveKCWlIg
-Message-ID: <AANLkTimWbWjmbVOm_X_KwXw9tKmd6u51seGVWd2JaRzM@mail.gmail.com>
-From: Luke Kenneth Casson Leighton <lkcl@lkcl.net>
+	Thu, 18 Nov 2010 01:58:06 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PIso3-0001mq-9r from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Nov 2010 16:56:55 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 17 Nov 2010 16:56:44 -0800
+Received: from localhost.localdomain ([172.30.7.13]) by
+	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 17 Nov 2010 17:56:44 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: luke.leighton@gmail.com
+Date: Wed, 17 Nov 2010 17:56:40 -0700
+Message-Id: <1290041800-30146-1-git-send-email-tom_rini@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 18 Nov 2010 00:56:44.0474 (UTC)
+	FILETIME=[784141A0:01CB86BB]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: starting with qt4 embedded (recent) builds
+Subject: [PATCH] help2man: Add native recipe, drop check for being provided.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,54 +43,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 00:26:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Nov 2010 00:58:06 -0000
 
-hi folks,
+With a recent change to auto* to not build the man pages for
+native recipes, we can make build progress without help2man
+being there already.  This adds help2man to local.conf.sample
+as an example of something that is assumed to be provided,
+drops the sanity.bbclass check and adds a help2man-native recipe.
+In order to catch the cases where help2man is likely to have been
+an implicit requirement before we add it to the list that
+autotools brings in.
 
-i gave up on gtk-directfb for various sensible reasons and am instead
-focussing on qt4 embedded.  i need to get python-qt4 compiled (and
-then patched - don't ask).  even getting qt4-embedded up-and-running
-is proving problematic due to the existence of 4 different versions of
-qmake (qmake-native which downloads the older qt "free" version from 4
-years ago, qmake2 which isn't native but somehow appears to be but it
-downloads qt4-embedded-linux-4.4.3) roughly the same number of
-versions of sip and in amongst this there's half a dozen versions of
-qt4.
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+---
+ classes/autotools.bbclass           |    4 ++--
+ classes/sanity.bbclass              |    2 +-
+ conf/local.conf.sample              |    4 ++++
+ recipes/help2man/help2man_1.37.1.bb |   21 +++++++++++++++++++++
+ 4 files changed, 28 insertions(+), 3 deletions(-)
+ create mode 100644 recipes/help2man/help2man_1.37.1.bb
 
-what i _need_ is a recent version of qt4 - i've spent money on the 3G
-connection downloading 150mb of qt-everywhere-opensource-4.6.3.tar.gz,
-more money on downloading python-qt4-4.7.3.tar.gz so assuming that
-those are reasonable how the heck do i even begin, when qmake-native
-gets installed (version 0.10 from 4 years ago), qmake2 wants
-qt4-embededded-linux-4.4.3.tar.gz, and the python-qt4 recipe is for
-qt4x11 not qt4e?  oh, and python-sip is off on a wild one, too,
-presently at python-sip-4.7.9-ml10,
+diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+index 2c27d0f..94dec13 100644
+--- a/classes/autotools.bbclass
++++ b/classes/autotools.bbclass
+@@ -8,9 +8,9 @@ def autotools_deps(d):
+ 	pn = bb.data.getVar('PN', d, 1)
+ 	deps = ''
+ 
+-	if pn in ['autoconf-native', 'automake-native']:
++	if pn in ['autoconf-native', 'automake-native', 'help2man-native']:
+ 		return deps
+-	deps += 'autoconf-native automake-native '
++	deps += 'autoconf-native automake-native help2man-native'
+ 
+ 	if not pn in ['libtool', 'libtool-native', 'libtool-cross']:
+ 		deps += 'libtool-native '
+diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
+index 575530a..1e6b170 100644
+--- a/classes/sanity.bbclass
++++ b/classes/sanity.bbclass
+@@ -84,7 +84,7 @@ def check_sanity(e):
+ 	if not check_app_exists('${BUILD_PREFIX}g++', e.data):
+ 		missing = missing + "C++ Compiler (${BUILD_PREFIX}g++),"
+ 
+-	required_utilities = "patch help2man diffstat texi2html makeinfo cvs svn bzip2 tar gzip gawk md5sum chrpath"
++	required_utilities = "patch diffstat texi2html makeinfo cvs svn bzip2 tar gzip gawk md5sum chrpath"
+ 
+ 	# If we'll be running qemu, perform some sanity checks
+ 	if data.getVar('ENABLE_BINARY_LOCALE_GENERATION', e.data, True):
+diff --git a/conf/local.conf.sample b/conf/local.conf.sample
+index c53c037..1085163 100644
+--- a/conf/local.conf.sample
++++ b/conf/local.conf.sample
+@@ -30,6 +30,10 @@ BBFILES := "${@bb.fatal('Edit your conf/local.conf: BBFILES')}"
+ # This is a regulary expression, so be sure to get your parenthesis balanced.
+ BBMASK = ""
+ 
++# Comment this if your host distribution does not provide the
++# help2man tool.
++ASSUME_PROVIDED += "help2man-native"
++
+ # Uncomment this if your host distribution has recent enough Linux
+ # Kernel header files.  Utilities we use to generate certain types of
+ # target filesystems need somewhat recent header files.
+diff --git a/recipes/help2man/help2man_1.37.1.bb b/recipes/help2man/help2man_1.37.1.bb
+new file mode 100644
+index 0000000..3a47aa1
+--- /dev/null
++++ b/recipes/help2man/help2man_1.37.1.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "Program to create simple man pages"
++SECTION = "devel"
++LICENSE = "GPLv3"
++DEPENDS = "gettext-native perl-native liblocale-gettext-perl-native"
++DEPENDS_virtclass-native = ""
++RDEPENDS_pn-help2man = "gettext perl liblocale-gettext-perl"
++PR = "r0"
++
++SRC_URI = "${GNU_MIRROR}/help4man/help2man-${PV}.tar.gz"
++SRC_URI[md5sum] = "371b5cc74fe9c2ea3ee1ca23c19b19a8"
++SRC_URI[sha256sum] = "3b44a91ef8e722c570a2a2d0e3f1cd249aac25dd2b2692c7792d87b30ed61561"
++
++inherit autotools
++
++EXTRA_OECONF = "--disable-nls"
++
++BBCLASSEXTEND = "native"
++
++do_configure() {
++	oe_runconf
++}
+-- 
+1.7.0.4
 
-some advice and help getting through this so that i can create free
-software released tried and tested bitbake recipes so that nobody else
-has to wade through hell and brimstone to get anything working would
-be great! :)
-
-so, starting with something simple:  qt4-embedded-4.6.3-r25.1 is
-compiled and installed as an ipkg: how do i now actually get to
-compile python-qt4-4.7.3?
-
-here's what i've done so far:
-
-* created python-qt4-embedded-4.7.3 based on python-pyqt4-4.4.3
-changing X11 to embedded and changing sip-native to
-sip-embedded-native
-
-* created sip-embedded-native_4.11.2 using
-SRC_URI = "http://www.riverbankcomputing.co.uk/static/Downloads/sip4/sip-${PV}.tar.gz"
-
-* created a python-sip-embedded to match the above sip-embedded-native
-
-that's as far as i've got... "how's my driving" as they say - this is
-_big_ compilations soo.... i'd rather i knew i was roughly along the
-right lines :)
-
-l.
 
 
