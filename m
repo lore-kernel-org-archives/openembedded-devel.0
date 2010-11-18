@@ -1,36 +1,44 @@
-Received: from mail.reciva.com ([62.7.80.110] helo=crown.reciva.com)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1PJ1Qr-0006QC-KT
+	(envelope-from <graham.gower@gmail.com>) id 1PJ2GK-00026U-6j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 11:09:34 +0100
-Received: from [192.168.106.10] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PJ1Pk-0001tg-Dd
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 10:08:25 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1PJ1Pk-0005bF-7T
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 10:08:24 +0000
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimdqZ1hdZNPN70LXd1WuJSn4pU2y=2C5tZs0-LT@mail.gmail.com>
+	Thu, 18 Nov 2010 12:02:44 +0100
+Received: by wyb34 with SMTP id 34so3187223wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Nov 2010 03:01:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=QGrfEHYA5kxv2+EjlXBqTPfWNJw7XBLoXNVDgZ0qBuE=;
+	b=TyR2Mmk/BdMocKRElTcfSOWElTds7Q9mgEVdiycQc6yEKolDGxvtfFf8NkgyOHLl7y
+	MxjpWWMP/zVmaBAmrxFaMdw70B1IMLejgGdf4ej5Qr43TophOjaNPuGBWfX2Wgn638Rg
+	laNNPFoaFckrTQBa1lX9ePmf6Oy4tNaqxgXu0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Em4HpNnc2X5zuXEHM6yV2banBSYUe7FEtRQOT88eaWTEPsidcgGt2K35W3Pu0BTqUz
+	Kcl25lw6VR42GbdT2mOY07rBkZ+xaAlhwexTTMQ/i2p44fY2IHstgP31dLAqvW8ntalk
+	N9ZNMKO5sCPKjWGCF/Yb5BO40DqUiaCfd08N4=
+MIME-Version: 1.0
+Received: by 10.227.148.17 with SMTP id n17mr446444wbv.223.1290078093004; Thu,
+	18 Nov 2010 03:01:33 -0800 (PST)
+Received: by 10.227.32.147 with HTTP; Thu, 18 Nov 2010 03:01:32 -0800 (PST)
+In-Reply-To: <1290074903.3183.202.camel@mill.internal.reciva.com>
 References: <AANLkTi=4sU4238+b8zyJJ35VCyJB2ysestx9N=_my697@mail.gmail.com>
 	<ic06a8$uft$1@dough.gmane.org> <4CE3A6DE.2070203@xora.org.uk>
 	<ic0aj2$hqc$1@dough.gmane.org>
 	<AANLkTimdqZ1hdZNPN70LXd1WuJSn4pU2y=2C5tZs0-LT@mail.gmail.com>
-Date: Thu, 18 Nov 2010 10:08:23 +0000
-Message-ID: <1290074903.3183.202.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 192.168.106.10
-X-SA-Exim-Connect-IP: 62.7.80.110
-X-SA-Exim-Mail-From: philb@gnu.org
+	<1290074903.3183.202.camel@mill.internal.reciva.com>
+Date: Thu, 18 Nov 2010 21:31:32 +1030
+Message-ID: <AANLkTimnEoW_9i8T65WTsQsYXc2E2gcx+015o13cVsKF@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Preparing for release - Freeze on master
@@ -47,36 +55,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 10:09:34 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Nov 2010 11:02:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, 2010-11-17 at 11:26 -0800, Khem Raj wrote:
-> Should we create a release branch before we release and solidify that ? 
+ Everyone is going to want to apply fixes to the release, so it makes
+sense to have this as a new stable branch.
 
-Yes, please do that.  We discussed this issue at yesterday's TSC meeting
-(full minutes to follow shortly) and the consensus was that trying to
-enforce a complete freeze on master at short notice is not going to be
-practical.
+OE is in a relatively stable state right now with no major changes
+causing large fallout recently. So, why not just branch it already and
+apply the same commit policy as the existing stable branch.
 
-Obviously the exact process you use is up to you, but I would suggest
-something along the lines of:
+More importantly are the logistics of handling what fixes go onto the
+both branches or only the dev branch. Since the current stable branch
+has been stale since I became involved in OE, I don't really know how
+this works but I am very interested in submitting fixes for a stable
+branch over the next few months.
 
-1. make a stabilisation branch from some semi-arbitrary point, maybe one
-of the existing weekly test versions.
-
-2. do testing on this branch.
-
-3. cherry-pick and/or revert changesets on the branch as
-necessary/desired.
-
-4. iterate steps 2/3 until you are happy with the quality or the
-deadline is reached.
-
-5. tag the release from the current head of that branch.
-
-p.
-
-
+-Graham
 
 
