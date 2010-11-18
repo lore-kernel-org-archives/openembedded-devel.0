@@ -1,36 +1,54 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PJ9Sy-0008Va-NB for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 19:44:17 +0100
-Received: from f053032179.adsl.alicedsl.de ([78.53.32.179]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PJ9Rv-0004EM-2C for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 18:43:11 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PJ9Tt-00009B-9c
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Nov 2010 19:45:13 +0100
+Received: by fxm11 with SMTP id 11so1923566fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Nov 2010 10:44:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=af2IAzrOE6dR585V2KqFk7W/f3BSchUvVlWyhrUNdKQ=;
+	b=UqFDhQ2qy7wTEENEa8o52xfi93ZPsyOZxvC2B1ujLFqOhH+IvS/C2xwmV2prAhebed
+	5mWnxetRr0jRQtf9TOyU0dWrEP+z4l3kk6muJAh8dK7VUGBRHKy5fNhtgF06b9wNFNOV
+	b17prm7C6l38FHz7b0j6+5ej3w3YblOSFARa8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=DsEP0bfvMz08St27e4pZ69FOoynalJ/YqEdJ6QFxEvFRE4cT76Le0jjp6f2QObd8fr
+	nY/49ShBczTLyK40gi7D0fKc1sSEyqF7YrGxymWzSn0Xu1iRJf41tB7LqaGiRopo/oCw
+	W6KcSIgPyuMOZB90sXgwAnPimu+Cs1n/S3yDo=
+Received: by 10.223.83.203 with SMTP id g11mr898881fal.84.1290105846029;
+	Thu, 18 Nov 2010 10:44:06 -0800 (PST)
+Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
+	[85.127.155.31])
+	by mx.google.com with ESMTPS id a25sm254595fab.13.2010.11.18.10.44.03
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 18 Nov 2010 10:44:04 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1PJ9Sk-0003cP-28; Thu, 18 Nov 2010 19:44:02 +0100
+Date: Thu, 18 Nov 2010 19:44:02 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=cnG0DyVCmJjKrBEqR4AQgTVVn_ugHyUY194gF@mail.gmail.com>
-References: <4CE3D70F.2000101@gmail.com>
-	<AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>
-	<4CE3EF4C.2050105@gmail.com>
-	<AANLkTin2v1+3UP_rk593i+V4=e4QeKgPinAkoWNwY0BO@mail.gmail.com>
-	<4CE42FF0.1000702@mentor.com> <4CE4EC1E.50903@gmail.com>
-	<AANLkTi=cnG0DyVCmJjKrBEqR4AQgTVVn_ugHyUY194gF@mail.gmail.com>
-Date: Thu, 18 Nov 2010 19:43:09 +0100
-Message-ID: <1290105789.3755.6.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-ID: <20101118184402.GL21346@mx.loc>
+References: <1289988503-14693-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<AANLkTi=YqETnOXFgSfbGvaR8AbW0HAtnm2=ZJVNCboUM@mail.gmail.com>
+	<AANLkTimq5JgxA+T3U9WhBMxgr+Of_H27RF3SemZc69fY@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTimq5JgxA+T3U9WhBMxgr+Of_H27RF3SemZc69fY@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: git-native: fails with `/usr/bin/autoreconf: unrecognized option `--exclude=autopoint'` (was: Error: git was compiled without libcurl support)
+Subject: Re: [PATCH] uclibc++: moved to 0.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,72 +62,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 18:44:17 -0000
-X-Groupsio-MsgNum: 26279
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Bl/+lIiHC4xosbA+iWFC"
+X-List-Received-Date: Thu, 18 Nov 2010 18:45:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-Bl/+lIiHC4xosbA+iWFC
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Nov 17, 2010 at 08:56:13PM +0100, Frans Meulenbroeks wrote:
+>>> +DESCRIPTION = "A C++ standard library targeted towards the embedded \
+>>> +systems/software market."
+>>> +HOMEPAGE = "http://cxx.uclibc.org/"
+>>> +LICENSE = "LGPL"
+>>
+>> LGPL also have versions find out which one it is licensed under
+>
+>Will do
 
-Am Donnerstag, den 18.11.2010, 10:30 -0800 schrieb Khem Raj:
-> On Thu, Nov 18, 2010 at 1:04 AM, Marco Cavallini <koansoftware@gmail.com>=
- wrote:
-> > Tom Rini ha scritto, Il 17/11/2010 20:41:
-> >> On 11/17/2010 12:30 PM, Khem Raj wrote:
-> >>> On Wed, Nov 17, 2010 at 7:05 AM, Marco Cavallini wrote:
-
-[=E2=80=A6]
-
-> >>>> I tried removing ASSUME_PROVIDED git-native from my config (local.co=
-nf)
-> >>>> in this case bitbake create git and use it instead of the host provi=
-ded.
-> >>>> Then I did
-> >>>>
-> >>>>   bitbake -b git-native
-> >>>>
-> >>>> Anyway there are errors again
-> >>>> http://tinderbox.openembedded.net/packages/985559/
-> >>>>
-> >>> can you post your local.conf and additionally what version of autocon=
-f
-> >>> is installed on your build host.
-> >>
-> >> On IRC we confirm that debian/lenny (on 64bit) has a git bug atm.
-> >>
-> >
-> > Here is my workaround, if you are using Debian Lenny as host distro
-> > please read this carefully
-> > http://www.kaeilos.com/debian-lenny-and-git-native
-> >
-> > Suggestions would be appreciated.
->=20
-> why not just use git-native ?
-
-As Marco wrote four messages before, it fails for him [1]. I guess you
-still need the version of `autoconf`.
+IIRC LGPL >= 2.1
 
 
-Thanks,
-
-Paul
-
-
-[1] http://tinderbox.openembedded.net/public/logs/task/10259740.txt
-
---=-Bl/+lIiHC4xosbA+iWFC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzlc70ACgkQPX1aK2wOHVg8WgCeOJo9Iq+F/l7H/YcRsomXcU9O
-nYsAn2X+S2MQlYAJO82maIx4cjJijYkU
-=wdof
------END PGP SIGNATURE-----
-
---=-Bl/+lIiHC4xosbA+iWFC--
