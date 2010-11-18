@@ -1,41 +1,33 @@
-Received: from li38-254.members.linode.com ([207.192.74.254]
-	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sgarman@zenlinux.com>) id 1PJ7TV-0000kp-Se
+Received: from starfish.geekisp.com ([216.168.135.166])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <philip@balister.org>) id 1PJ89N-0003jr-6C
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 17:36:42 +0100
-Received: from [192.168.1.12] (c-76-105-143-140.hsd1.or.comcast.net
-	[76.105.143.140])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id 97315304EC
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Nov 2010 11:35:25 -0500 (EST)
-Message-ID: <4CE555C8.5000503@zenlinux.com>
-Date: Thu, 18 Nov 2010 08:35:20 -0800
-From: Scott Garman <sgarman@zenlinux.com>
+	Thu, 18 Nov 2010 18:19:58 +0100
+Received: (qmail 4110 invoked by uid 1003); 18 Nov 2010 17:18:47 -0000
+Received: from adsl-75-37-22-143.dsl.pltn13.sbcglobal.net (HELO
+	?192.168.1.148?) (philip@opensdr.com@75.37.22.143)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	18 Nov 2010 17:18:47 -0000
+Message-ID: <4CE55FF6.5030900@balister.org>
+Date: Thu, 18 Nov 2010 09:18:46 -0800
+From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+	rv:1.9.2.12) Gecko/20101027 Fedora/3.1.6-1.fc13 Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1290046421-22553-1-git-send-email-sgarman@zenlinux.com>	<4CE48CFF.7070406@balister.org>
-	<4CE493E2.3010509@zenlinux.com>	<4CE49577.4030100@balister.org>	<AANLkTimRDgCPqg3g45cQkM6M1dnBa+SRD55Kyu=pFBcN@mail.gmail.com>
-	<AANLkTikWQH5fqT3VuOyrPjmevfOGtP2bHxU1Kat2cjTX@mail.gmail.com>
-In-Reply-To: <AANLkTikWQH5fqT3VuOyrPjmevfOGtP2bHxU1Kat2cjTX@mail.gmail.com>
-X-MasterFoo-MailScanner-Information: Please contact the ISP for more
-	information
-X-MailScanner-ID: 97315304EC.4C193
-X-MasterFoo-MailScanner: Found to be clean
-X-MasterFoo-MailScanner-SpamCheck: not spam
-X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
-X-SA-Exim-Connect-IP: 207.192.74.254
-X-SA-Exim-Mail-From: sgarman@zenlinux.com
+References: <AANLkTi=4sU4238+b8zyJJ35VCyJB2ysestx9N=_my697@mail.gmail.com>	<ic06a8$uft$1@dough.gmane.org>
+	<4CE3A6DE.2070203@xora.org.uk>	<ic0aj2$hqc$1@dough.gmane.org>	<AANLkTimdqZ1hdZNPN70LXd1WuJSn4pU2y=2C5tZs0-LT@mail.gmail.com>	<1290074903.3183.202.camel@mill.internal.reciva.com>	<AANLkTimnEoW_9i8T65WTsQsYXc2E2gcx+015o13cVsKF@mail.gmail.com>
+	<1290079874.3183.222.camel@mill.internal.reciva.com>
+In-Reply-To: <1290079874.3183.222.camel@mill.internal.reciva.com>
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] tar: upgrade to version 1.25
+Subject: Re: Preparing for release - Freeze on master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,62 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 16:36:42 -0000
+X-List-Received-Date: Thu, 18 Nov 2010 17:19:58 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 11/18/2010 12:34 AM, Martin Jansa wrote:
->>>>> Can you add tar-1.23 to the removal.txt file? Ask it be removed in a
->>>>> couple of months. This way we have a schedule to delete the older recipe.
->>>>
->>>> Thanks for the quick ack, Philip. Question though on the removal.txt
->>>> addition - this patch deletes the v1.23 version already. Does it need to
->>>> be kept around instead? I would think not given that this is a pretty
->>>> trivial update.
->>>>
->>>> Perhaps you meant tar v1.18 and/or v1.20, which are still there?
->>>
->>> Oops, I wasn't paying that close attention. I'd still leave 1.23 around for
->>> a couple of months, just in case there is some weird issue with 1.25. We
->>> should check on the older ones and add them to removal.txt also. I'd like to
->>> see us get into a sane clean up old stuff cycle, instead of the delete
->>> everything at once approach. Of course checking to see if any in tree
->>> distros use them is  good thing.
->>>
->>
->> Yeah probably a sane thing. Make 1.25 default and let 1.23 linger
->> around for a while
->> just in case.
+On 11/18/2010 03:31 AM, Phil Blundell wrote:
+> On Thu, 2010-11-18 at 21:31 +1030, Graham Gower wrote:
+>> So, why not just branch it already and apply the same commit policy as
+>> the existing stable branch.
 >
-> Gentoo already has serious bug reported against 1.25
-> http://bugs.gentoo.org/342983
-> resulting in added 1.25 being masked now there
+> Essentially because nobody has yet volunteered to do the ongoing
+> maintenance work that would be involved in having a long-lived stable
+> branch.  And, if OE is going to have releases off master on a fairly
+> frequent schedule (I think the proposal is four releases per year or
+> thereabouts) then the requirement for such a branch is somewhat
+> diminished.
 >
-> Maybe we should keep 1.23 default until it's resolved or confirmed
-> that OE is not affected by this.
+> If you're interested in doing the work to maintain a new stable branch
+> along the same lines as stable/2009, and you can commit the time that is
+> required to make it work, then you are certainly very welcome to do so.
+> You don't need any particular permission to do this: you can (subject to
+> the Branching Policy) create a new branch at any time.
 
-Thanks Martin for that research. I'm going to remove my patch from 
-patchwork and look into this further. If the bug against 1.25 doesn't 
-look like it will affect us, I will re-submit the patch such that 1.23 
-is kept around. Otherwise we may be better off simply waiting for 
-another release of tar.
+I'd like to emphasize this point, the tag is a sane place for people to 
+start from. The OE project deliver meta-data for people to build 
+products on. It is the responsibility of the people delivering 
+images/packages to people to manage their own branches for maintenance.
 
-FWIW tar 1.25 came out only two weeks after 1.24, which implies to me 
-that they were fixing some relatively urgent bugs. As mentioned on the 
-tar home page, these issues were reportedly fixed in 1.25:
+We certainly encourage groups of people to collaborate with each other 
+to maintain branches, but I don't see a one policy suits all branch.
 
-* Fix extraction of empty directories with the -C option in effect
-* Fix extraction of device nodes
-* Make sure name matching occurs before eventual name transformation
-* Fix the behavior of tar -x --overwrite on hosts lacking O_NOFOLLOW.
-* Improve the testsuite
+One man's stable is anothers stagnant.
 
-I also maintain the tar recipe for Poky, so I'll investigate further.
-
-Scott
-
--- 
-Scott Garman
-sgarman at zenlinux dot com
+Philip
 
 
