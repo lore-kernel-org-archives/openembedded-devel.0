@@ -1,40 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PIuA9-0007nS-DK
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1PIuaC-0004Yl-Ng
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 03:23:50 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PIu93-00054A-Oa from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Nov 2010 18:22:41 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 17 Nov 2010 18:22:41 -0800
-Received: from [172.30.7.13] ([172.30.7.13]) by na2-mail.mgc.mentorg.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Wed, 17 Nov 2010 19:22:40 -0700
-Message-ID: <4CE48DEC.1020900@mentor.com>
-Date: Wed, 17 Nov 2010 19:22:36 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+	Thu, 18 Nov 2010 03:50:48 +0100
+Received: from [127.0.0.1] (li38-254.members.linode.com [207.192.74.254])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id CC6643041C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Nov 2010 21:49:30 -0500 (EST)
+Message-ID: <4CE493E2.3010509@zenlinux.com>
+Date: Wed, 17 Nov 2010 18:48:02 -0800
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1290041800-30146-1-git-send-email-tom_rini@mentor.com>
-	<Pine.LNX.4.64.1011172054070.5082@juice.ott.cti.com>
-In-Reply-To: <Pine.LNX.4.64.1011172054070.5082@juice.ott.cti.com>
-X-OriginalArrivalTime: 18 Nov 2010 02:22:40.0916 (UTC)
-	FILETIME=[79BBDD40:01CB86C7]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <1290046421-22553-1-git-send-email-sgarman@zenlinux.com>
+	<4CE48CFF.7070406@balister.org>
+In-Reply-To: <4CE48CFF.7070406@balister.org>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: CC6643041C.E1B95
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-SpamCheck: not spam
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] help2man: Add native recipe, drop check for being provided.
+Subject: Re: [PATCH] tar: upgrade to version 1.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +48,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 02:23:50 -0000
+X-List-Received-Date: Thu, 18 Nov 2010 02:50:50 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 11/17/2010 07:02 PM, Michael Smith wrote:
-> On Wed, 17 Nov 2010, Tom Rini wrote:
->
->> --- a/classes/autotools.bbclass
->> +++ b/classes/autotools.bbclass
->> -	deps += 'autoconf-native automake-native '
->> +	deps += 'autoconf-native automake-native help2man-native'
->
-> Need a space before that closing quote.
-
-Will go fix.
-
->
+On 11/17/2010 06:18 PM, Philip Balister wrote:
+> On 11/17/2010 06:13 PM, Scott Garman wrote:
+>> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
+>> ---
+>> recipes/tar/tar_1.23.bb | 6 ------
+>> recipes/tar/tar_1.25.bb | 6 ++++++
+>> 2 files changed, 6 insertions(+), 6 deletions(-)
+>> delete mode 100644 recipes/tar/tar_1.23.bb
+>> create mode 100644 recipes/tar/tar_1.25.bb
+>>
+>> diff --git a/recipes/tar/tar_1.23.bb b/recipes/tar/tar_1.23.bb
+>> deleted file mode 100644
+>> index dc37247..0000000
+>> --- a/recipes/tar/tar_1.23.bb
+>> +++ /dev/null
+>> @@ -1,6 +0,0 @@
+>> -require tar.inc
+>> -
+>> -PR = "${INC_PR}"
+>> -
+>> -SRC_URI[md5sum] = "41e2ca4b924ec7860e51b43ad06cdb7e"
+>> -SRC_URI[sha256sum] =
+>> "c9328372db62fbb1d94c9e4e3cefc961111af46de47085b635359c00a0eebe36"
+>> diff --git a/recipes/tar/tar_1.25.bb b/recipes/tar/tar_1.25.bb
+>> new file mode 100644
+>> index 0000000..c611f77
 >> --- /dev/null
->> +++ b/recipes/help2man/help2man_1.37.1.bb
->> @@ -0,0 +1,21 @@
->> +SRC_URI = "${GNU_MIRROR}/help4man/help2man-${PV}.tar.gz"
+>> +++ b/recipes/tar/tar_1.25.bb
+>> @@ -0,0 +1,6 @@
+>> +require tar.inc
+>> +
+>> +PR = "${INC_PR}"
+>> +
+>> +SRC_URI[md5sum] = "6e497f861c77bbba2f7da4e10270995b"
+>> +SRC_URI[sha256sum] =
+>> "f3f6ce41b8e0f327abd05c95990f113ddafbae131e10f79a99728ed46458494b"
 >
-> s/4/2/ :)
 >
->> +do_configure() {
->> +	oe_runconf
->> +}
+> Acked-by: Philip Balister <philip@balister.org>
 >
-> Is this necessary? The old 1.36 recipe has it, too. Is it because auto*
-> may not be built yet? Could you add a comment explaining why it's there?
->
+> Can you add tar-1.23 to the removal.txt file? Ask it be removed in a
+> couple of months. This way we have a schedule to delete the older recipe.
 
-The problem is that it gets mad about perl stuff not being around yet 
-(since we use host perl here, like with automake/conf).  I'll add a 
-comment as well.
+Thanks for the quick ack, Philip. Question though on the removal.txt 
+addition - this patch deletes the v1.23 version already. Does it need to 
+be kept around instead? I would think not given that this is a pretty 
+trivial update.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Perhaps you meant tar v1.18 and/or v1.20, which are still there?
+
+Scott
 
 
