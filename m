@@ -1,41 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1PJAcA-0003hF-RM
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Nov 2010 20:57:51 +0100
-Received: by fxm11 with SMTP id 11so1994198fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Nov 2010 11:56:43 -0800 (PST)
+	(envelope-from <raj.khem@gmail.com>) id 1PJC2w-0007KS-F4
+	for Openembedded-devel@lists.openembedded.org;
+	Thu, 18 Nov 2010 22:29:35 +0100
+Received: by gyf3 with SMTP id 3so2312993gyf.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Nov 2010 13:28:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:from:date
 	:message-id:subject:to:content-type;
-	bh=aG2KYjyoSYW58RNo2mUKkGJJDk7bFmXrFzEEcTE6gac=;
-	b=HEMg6FRqwPaY85N+snw37SmJaOIdZIu3uk8STqKGelJFhm+C9gvIR9CtsgRVa9XfeM
-	H0PQgVU5c//X3MPbpKrbqBbcxD61GimK4L18/znn6YrJ/34FOvLKReMfXlB9UVyNQdgB
-	A9U9k3SRSZNYoRxh5vCqx5W5bNehbx6t2u97I=
+	bh=GVyiMIvDPHJhh2UA8JhyrFF2WFQ+bp+DeKkOWE8c2Yo=;
+	b=rxYpsWNz/JCdlNmRfPv/GT2TBkuOk7ICwSycDekRmEkWCWNtZDogrwEOxwWajiziU+
+	neBi/oZgr/yX+SZJMxDpacQf6V2gR1/jGy1O1MzI5k8sC2GFpZ9JthjIloMgXnWE8UYV
+	ApZ0IlBM52WTcyjIF2fhorj8rsOU/rn8+iORU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=EYS3qQU0KvnOd6gNJzxDzXRFUF0wB0y2kpS8t9SmEl00ylJuRy1h6gjF+58LywmKOP
-	VvsUWe60MlQCr1exM6p1OgT2dhkUVXNSmeZouZXS/YZhoBJVIKcohnWwLd8/+5Anc5UV
-	GyRxDll/ykqmoPyUC6piwuW0JJ8REBumv2L1o=
-Received: by 10.223.74.131 with SMTP id u3mr2076faj.99.1290110203137; Thu, 18
-	Nov 2010 11:56:43 -0800 (PST)
+	b=WJlb4vtw7at3gIOu+zvYnHUes/COY6Umh7GXyFcQiqtrqZ8VANEo+G19t0eIYEb50F
+	ogi4hFSjPFc5zm+Z7GvYOZlN41+uvO4Toy6AfTWCB4xmdVpJtC9z+hmab5tzaCcEMYls
+	xSQVtiKbXsSz+MIooc3w28t2qWBjeEbGqa61E=
+Received: by 10.91.42.30 with SMTP id u30mr28140agj.102.1290115695863; Thu, 18
+	Nov 2010 13:28:15 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.125.138 with HTTP; Thu, 18 Nov 2010 11:56:22 -0800 (PST)
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Thu, 18 Nov 2010 12:56:22 -0700
-Message-ID: <AANLkTik0thyw1SiJNdu9oDuPJtvpRY7Gfah8Z9z5ck7Y@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: coolaj86@gmail.com
+Received: by 10.90.120.8 with HTTP; Thu, 18 Nov 2010 13:27:55 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 18 Nov 2010 13:27:55 -0800
+Message-ID: <AANLkTinVj9oh0p9xp9ZUtBijB63Fy7O8LcXc5-tUF9v6@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: bitbake ntpdate failure
+Subject: release-2010.12 branch ready for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,47 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Nov 2010 19:57:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 18 Nov 2010 21:29:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-*| ntpdc.c:452: error: 'EAI_NODATA' undeclared (first use in this function)*
+Hello all,
 
+The work branch for upcoming 2010.12 release has been created. Please
+lend your hand in testing this branch and cherry-picking
+fixes that we need to make the release a robust one. Testing as many
+combinations of machine/distro/image as possible would be
+nice. Please use the Testing matrix to report the results.
 
-Full output:
-https://gist.github.com/705497
+If you are not cloning then ignore the first step
 
+$ git clone git://git.openembedded.org/openembedded
+$ cd openembedded
+$ git checkout -b release-2010.12 origin/release-2010.12
 
-Snippit:
+Cherry pick the patches that need to go into this branch and when you
+are ready to push them then do
 
-| make[3]: Entering directory
-`/mnt/local/overo-coolaj86/tmp/work/armv7a-angstrom-linux-gnueabi/ntp-4.2.0-r9/ntp-4.2.0/ntpdc'
-| arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon
--mfloat-abi=softfp -mthumb-interwork -mno-thumb -std=gnu99 -DHAVE_CONFIG_H
--I. -I.. -I../include
--isystem/mnt/local/overo-coolaj86/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
--isystem/mnt/local/overo-coolaj86/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
--fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb2
--DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -Wall -Wcast-qual -Wmissing-prototypes
--Wpointer-arith -Wshadow -Wstrict-prototypes -MT ntpdc.o -MD -MP -MF
-.deps/ntpdc.Tpo -c -o ntpdc.o ntpdc.c
-| ntpdc.c: In function 'openhost':
-*| ntpdc.c:452: error: 'EAI_NODATA' undeclared (first use in this function)*
-| ntpdc.c:452: error: (Each undeclared identifier is reported only once
-| ntpdc.c:452: error: for each function it appears in.)
-| make[3]: *** [ntpdc.o] Error 1
-| make[3]: Leaving directory
-`/mnt/local/overo-coolaj86/tmp/work/armv7a-angstrom-linux-gnueabi/ntp-4.2.0-r9/ntp-4.2.0/ntpdc'
-| make[2]: *** [all] Error 2
-| make[2]: Leaving directory
-`/mnt/local/overo-coolaj86/tmp/work/armv7a-angstrom-linux-gnueabi/ntp-4.2.0-r9/ntp-4.2.0/ntpdc'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory
-`/mnt/local/overo-coolaj86/tmp/work/armv7a-angstrom-linux-gnueabi/ntp-4.2.0-r9/ntp-4.2.0'
-| make: *** [all] Error 2
-| FATAL: oe_runmake failed
-NOTE: Task failed:
-/mnt/local/overo-coolaj86/tmp/work/armv7a-angstrom-linux-gnueabi/ntp-4.2.0-r9/temp/log.do_compile.7879
-ERROR: TaskFailed event exception, aborting
+$ git push -v origin release-2010.12:release-2010.12
 
-AJ ONeal
+this will only push the commits meant for release branch and other
+branches wont be pushed
+
+Please send the patches that need to be cherry picked to mailing list
+for review with subject line prefixed with [release-2010.12]
+or discuss on IRC.
+
+Thank you for help
+
+Lets make this release a success
+
+-Khem
+
 
