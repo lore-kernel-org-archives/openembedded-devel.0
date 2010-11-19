@@ -1,50 +1,46 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PJSDV-0007yz-Qm
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PJScj-0000ZJ-Vt
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Nov 2010 15:45:38 +0100
-Received: by fxm11 with SMTP id 11so2762566fxm.6
+	Fri, 19 Nov 2010 16:11:38 +0100
+Received: by iwn34 with SMTP id 34so138799iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 06:44:25 -0800 (PST)
+	Fri, 19 Nov 2010 07:10:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=FhSJGgW46aCBt+ESys3LS2Wl4qC75mYpDd3a1d2JSms=;
-	b=HCjqScMXio1ZhTIuWl2JdT47qG8nQvhZ2gmJrusNkwndBhtP0h8gtYyeYBMkFLlKv3
-	VL8tdsh2tbvWMKkCy9lw54mdmdcAE6/DQTokFg3hjIF5GgmQASpToqG6UOkf5BiJiZ7Y
-	ZhbPykvj4p6uY1t7nR7zCEuk/F63/GKA3khUA=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=5FwMqbSbVyRsw4PCDla9/pMt78UWzzmTyX9TEk5osgE=;
+	b=i+E+C10+ppfCp63odw0f0V4Rph2aC13MH1pFMd0MaOwy9oGOqzkoGpv6r4hqzrEqwV
+	NFX7eXNkcRw3WmB+6nT9F2Pa7k78+Nsf8rUx3DNNHNZ6QJ3iRXOX2XiaEojOBUIHUl/r
+	d5jExoobvDZlnoZfYibB/sSZMpqw8jx3lSr3A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Lzg7gvYIIJN15mL9wz+EWjo3SurJTYGH6jN1akNduQXE5cYIYgbXTvQ+PJpT7ggWHE
-	0frFLep545OtdYA9M6FGXmbIcg8dR3UPtHkrMgZWdRpKUJTl1cGxCSdD2J02O8n8H+/l
-	SnBLHebvuSPyuUeKRNthEOEENzCbDiaH/Y9j8=
-Received: by 10.223.86.194 with SMTP id t2mr938921fal.40.1290177865288;
-	Fri, 19 Nov 2010 06:44:25 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id j14sm524473faa.23.2010.11.19.06.44.23
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 19 Nov 2010 06:44:24 -0800 (PST)
-Date: Fri, 19 Nov 2010 15:44:25 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101119144425.GC3411@jama>
-References: <AANLkTinVj9oh0p9xp9ZUtBijB63Fy7O8LcXc5-tUF9v6@mail.gmail.com>
-	<ic5jrc$ksc$1@dough.gmane.org> <4CE67FA1.6020901@mentor.com>
-	<ic60r2$hrs$1@dough.gmane.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=RYGKnOBmp0KxYc7/WwGCTm5D4mH4rWdBO9yR0U1QBxGFgYbOycyqRURGmco5FbxsEq
+	VBGXo3o68eTwHxVWhIs8Mv47sYsA8Pb3wpptdphUAkZ4Psc2L3xU7mrNL1nn963kvVFq
+	R2dVVd1pRaNJK2ri4KbvlrMJ171XcjsZrwNm4=
 MIME-Version: 1.0
-In-Reply-To: <ic60r2$hrs$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.35.194 with SMTP id q2mr2173768ibd.26.1290179429990; Fri,
+	19 Nov 2010 07:10:29 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Fri, 19 Nov 2010 07:10:29 -0800 (PST)
+In-Reply-To: <20101118184402.GL21346@mx.loc>
+References: <1289988503-14693-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<AANLkTi=YqETnOXFgSfbGvaR8AbW0HAtnm2=ZJVNCboUM@mail.gmail.com>
+	<AANLkTimq5JgxA+T3U9WhBMxgr+Of_H27RF3SemZc69fY@mail.gmail.com>
+	<20101118184402.GL21346@mx.loc>
+Date: Fri, 19 Nov 2010 16:10:29 +0100
+Message-ID: <AANLkTin0RXUMxpn_NBCv3MQd4_Qs2Dqt_pSX7057janj@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release-2010.12 branch ready for testing
+Subject: Re: [PATCH] uclibc++: moved to 0.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,49 +54,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2010 14:45:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 19 Nov 2010 15:11:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Nov 19, 2010 at 03:16:02PM +0100, Koen Kooi wrote:
-> Well, that was the whole point. The release is supposed to be only a
-> testing tag...
-> 
-> We were very clear at OEDEM, no *branch* only a tag. If .dev isn't
-> working, find a testing tag in the past that does work and use that as a
-> release.
-> 
-> It seems people are trying to polarize issues, when they shouldn't. So
-> no "freeze .dev", but "pay more attention to .dev" and no "release
-> branch" but "encourage getting more green into tinderbox".
-> 
-> The idea was to get a release out and see how people are using it to
-> improve the process and test conditions, not making a kneejerk process
-> for this release.
-> 
-> I've seen no discussion on this list why we need a branch or a freeze
-> instead of following the OEDEM plam, only people stating that we need
-> it. So what's wrong with the original plan of getting the release out
-> and using actual experience as feedback for future releases?
+I'm withdrawing this patch.
+In a few moments I'll be submitting a new patch for the git head version.
+The last official version (0.2.2 is > 2 yrs old). There are several
+patches since, and it does not look like there will be a new release
+in the near future so git head seems a better option.
 
-Hi,
+I've also addressed the License issue (Rules.mak says LGPL v2 or
+later) and removed the do_stage.
+The cstring patch is still needed. The comment section of the patch
+contains the error messages).
 
-I think that short-lived branch is better, because every testing branch
-had few easy-to-fix issues which were fixed almost immediately in .dev 
-after testing branched and it would be hard to choose which branch was best.
-
-But tag from any testing branch + first few quick fixes would be almost as 
-good as based on any other testing branch. 
-
-And I also agree with Phil that this short lived branch should be
-removed when the tag is created (to show that it's final state without
-maintainance).
-
-Just my 2c.
-
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Frans.
 
 
