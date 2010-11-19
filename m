@@ -1,34 +1,29 @@
-Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicolas.ferre@atmel.com>) id 1PJTrW-0006gz-AV
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Nov 2010 17:30:59 +0100
-Received: from meyreuil.atmel.fr (meyreuil [10.159.254.132])
-	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id oAJGRLhu014269;
-	Fri, 19 Nov 2010 08:27:22 -0800 (PST)
-Received: from [127.0.0.1] ([10.159.245.112])
-	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id oAJGTkh26443; 
-	Fri, 19 Nov 2010 17:29:46 +0100 (MET)
-Message-ID: <4CE6A5F8.4090301@atmel.com>
-Date: Fri, 19 Nov 2010 17:29:44 +0100
-From: Nicolas Ferre <nicolas.ferre@atmel.com>
-Organization: atmel
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org,
-	Martin Jansa <martin.jansa@gmail.com>
-References: <4CE69DDB.9030500@atmel.com> <20101119160716.GD3411@jama>
-In-Reply-To: <20101119160716.GD3411@jama>
-X-SA-Exim-Connect-IP: 204.2.163.5
-X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PJU3y-00077g-RX for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Nov 2010 17:43:52 +0100
+Received: from f053041095.adsl.alicedsl.de ([78.53.41.95]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PJU2u-0007qo-Aq for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Nov 2010 16:42:44 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 Nov 2010 17:42:42 +0100
+Message-ID: <1290184963.3681.7.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: parsing error while building from scratch: literki_git.bb
+Subject: [PATCH] inkscape_0.48.0: add `boost` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +37,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2010 16:30:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Nov 2010 16:43:52 -0000
+X-Groupsio-MsgNum: 26329
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-x+Li8/AO2QwmV++hdxYZ"
 
-Le 19/11/2010 17:07, Martin Jansa :
-> On Fri, Nov 19, 2010 at 04:55:07PM +0100, Nicolas Ferre wrote:
->> Hi,
->>
->> While trying to build from scratch the latest .dev branch with:
->> - at91sam9m10g45ek machine
->> - angstrom-2010.x distribution
->> - bitbake 1.10.1
->>
->> I have the following error just after bitbake parsing .bb files:
-> 
-> what does it show if you do
-> git ls-remote http://git.senfdax.de/git/literki master
-> in terminal?
+--=-x+Li8/AO2QwmV++hdxYZ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-It seems to work:
-$ git ls-remote http://git.senfdax.de/git/literki master
-1da40724369c8adc069288f1bfc6b2e167bbb87b        refs/heads/master
+Date: Tue, 16 Nov 2010 00:50:42 +0100
 
-> are you using BB_LOCALCOUNT_OVERRIDE and/or BB_GIT_CLONE_FOR_SRCREV (ie
-> in your local.conf?
+Inkscape 0.48 committed in 2dfc5b [1] seems to have a new dependency on Boo=
+st.
 
-No, neither the one nor the other.
+        | checking boost/concept_check.hpp usability... no
+        | checking boost/concept_check.hpp presence... no
+        | checking for boost/concept_check.hpp... no
+        | configure: error: You need the boost package (e.g. libboost-dev)
+        | ERROR: Function do_configure failed
+        NOTE: package inkscape-0.48.0-r0: task do_configure: Failed
+        ERROR: TaskFailed event exception, aborting
+        ERROR: Build of /home/paul/oe/openembedded/recipes/inkscape/inkscap=
+e_0.48.0.bb do_configure failed
+        ERROR: Task 11 (/home/paul/oe/openembedded/recipes/inkscape/inkscap=
+e_0.48.0.bb, do_configure) failed with 256
+        ERROR: '/home/paul/oe/openembedded/recipes/inkscape/inkscape_0.48.0=
+.bb' failed
+        ERROR: '/home/paul/oe/openembedded/recipes/inkscape/inkscape_0.48.0=
+.bb' failed
+        ERROR: '/home/paul/oe/openembedded/recipes/inkscape/inkscape_0.48.0=
+.bb' failed
 
-Bye,
--- 
-Nicolas Ferre
+This patch fixes the build with `angstrom-2008.1`, `angstrom-2010.x` and `m=
+inimal` for `MACHINE =3D "beagleboard"`.
 
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D2dfc5b7=
+c9e0d32c3f61ff02aca2b08d22def56fc
 
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/inkscape/inkscape_0.48.0.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/recipes/inkscape/inkscape_0.48.0.bb b/recipes/inkscape/inkscap=
+e_0.48.0.bb
+index 3d78ba5..6e753e5 100644
+--- a/recipes/inkscape/inkscape_0.48.0.bb
++++ b/recipes/inkscape/inkscape_0.48.0.bb
+@@ -2,7 +2,7 @@ SECTION =3D "x11/utils"
+ DESCRIPTION =3D "Inkscape is an SVG-based graphics editor featuring alpha =
+\
+ blending, node editing, SVG to PNG export, and more. Its goal is for featu=
+res \
+ similar to Illustrator, CorelDraw, Visio, etc."
+-DEPENDS =3D "poppler gsl libgc intltool-native gtk+ gtkmm glibmm libart-lg=
+pl libxslt librsvg libxml2 libsigc++-1.2 popt"
++DEPENDS =3D "poppler gsl libgc intltool-native gtk+ gtkmm glibmm libart-lg=
+pl libxslt librsvg libxml2 libsigc++-1.2 popt boost"
+ LICENSE =3D "GPLv2"
+=20
+ #we know that GC version is 6.5, so we patch out the version check, since =
+gc_open was already detected
+--=20
+1.7.2.3
+
+--=-x+Li8/AO2QwmV++hdxYZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzmqPwACgkQPX1aK2wOHVg2XwCdGupQJE/1e+ao3H9ggtD8bBLa
+JQcAoIRNxoiwicTG+2KSvifstnrm3N7q
+=WbLl
+-----END PGP SIGNATURE-----
+
+--=-x+Li8/AO2QwmV++hdxYZ--
