@@ -1,40 +1,47 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PJRmL-00055G-0V for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Nov 2010 15:17:29 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PJRlB-0005tg-DU for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Nov 2010 15:16:17 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 15:16:17 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1PJSDV-0007yz-Qm
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Nov 2010 15:45:38 +0100
+Received: by fxm11 with SMTP id 11so2762566fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 15:16:17 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 19 Nov 2010 06:44:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=FhSJGgW46aCBt+ESys3LS2Wl4qC75mYpDd3a1d2JSms=;
+	b=HCjqScMXio1ZhTIuWl2JdT47qG8nQvhZ2gmJrusNkwndBhtP0h8gtYyeYBMkFLlKv3
+	VL8tdsh2tbvWMKkCy9lw54mdmdcAE6/DQTokFg3hjIF5GgmQASpToqG6UOkf5BiJiZ7Y
+	ZhbPykvj4p6uY1t7nR7zCEuk/F63/GKA3khUA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Lzg7gvYIIJN15mL9wz+EWjo3SurJTYGH6jN1akNduQXE5cYIYgbXTvQ+PJpT7ggWHE
+	0frFLep545OtdYA9M6FGXmbIcg8dR3UPtHkrMgZWdRpKUJTl1cGxCSdD2J02O8n8H+/l
+	SnBLHebvuSPyuUeKRNthEOEENzCbDiaH/Y9j8=
+Received: by 10.223.86.194 with SMTP id t2mr938921fal.40.1290177865288;
+	Fri, 19 Nov 2010 06:44:25 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id j14sm524473faa.23.2010.11.19.06.44.23
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 19 Nov 2010 06:44:24 -0800 (PST)
+Date: Fri, 19 Nov 2010 15:44:25 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 19 Nov 2010 15:16:02 +0100
-Message-ID: <ic60r2$hrs$1@dough.gmane.org>
-References: <AANLkTinVj9oh0p9xp9ZUtBijB63Fy7O8LcXc5-tUF9v6@mail.gmail.com>	<ic5jrc$ksc$1@dough.gmane.org>
-	<4CE67FA1.6020901@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <4CE67FA1.6020901@mentor.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20101119144425.GC3411@jama>
+References: <AANLkTinVj9oh0p9xp9ZUtBijB63Fy7O8LcXc5-tUF9v6@mail.gmail.com>
+	<ic5jrc$ksc$1@dough.gmane.org> <4CE67FA1.6020901@mentor.com>
+	<ic60r2$hrs$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <ic60r2$hrs$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: release-2010.12 branch ready for testing
@@ -51,67 +58,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2010 14:17:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Nov 2010 14:45:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 19-11-10 14:46, Tom Rini wrote:
-> On 11/19/2010 03:34 AM, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 18-11-10 22:27, Khem Raj wrote:
->>> Hello all,
->>>
->>> The work branch for upcoming 2010.12 release has been created.
->>
->> Why was this created? We were *very* clear at OEDEM that there would be
->> no branch, only a tag.
->>
->> Why was this changed? I only see some vague handwaving from the TSC
->> (well, from Phil, saying it was the TSC) who didn't consult the OE
->> developers at all.
->>
->> The whole point of releases was that they are based of a tag from .dev,
->> not some random branch. Again, why was that changed?
+On Fri, Nov 19, 2010 at 03:16:02PM +0100, Koen Kooi wrote:
+> Well, that was the whole point. The release is supposed to be only a
+> testing tag...
 > 
-> At least for making a release tag exist, if we can't have a freeze on
-> .dev (or otherwise an agreement that .dev should focus on making the
-> testing packages build and work, over new work) making a temporary
-> branch to cherry-pick into seems to be the next possible solution.
-> Otherwise the release tag is just another testing tag...
+> We were very clear at OEDEM, no *branch* only a tag. If .dev isn't
+> working, find a testing tag in the past that does work and use that as a
+> release.
+> 
+> It seems people are trying to polarize issues, when they shouldn't. So
+> no "freeze .dev", but "pay more attention to .dev" and no "release
+> branch" but "encourage getting more green into tinderbox".
+> 
+> The idea was to get a release out and see how people are using it to
+> improve the process and test conditions, not making a kneejerk process
+> for this release.
+> 
+> I've seen no discussion on this list why we need a branch or a freeze
+> instead of following the OEDEM plam, only people stating that we need
+> it. So what's wrong with the original plan of getting the release out
+> and using actual experience as feedback for future releases?
 
-Well, that was the whole point. The release is supposed to be only a
-testing tag...
+Hi,
 
-We were very clear at OEDEM, no *branch* only a tag. If .dev isn't
-working, find a testing tag in the past that does work and use that as a
-release.
+I think that short-lived branch is better, because every testing branch
+had few easy-to-fix issues which were fixed almost immediately in .dev 
+after testing branched and it would be hard to choose which branch was best.
 
-It seems people are trying to polarize issues, when they shouldn't. So
-no "freeze .dev", but "pay more attention to .dev" and no "release
-branch" but "encourage getting more green into tinderbox".
+But tag from any testing branch + first few quick fixes would be almost as 
+good as based on any other testing branch. 
 
-The idea was to get a release out and see how people are using it to
-improve the process and test conditions, not making a kneejerk process
-for this release.
+And I also agree with Phil that this short lived branch should be
+removed when the tag is created (to show that it's final state without
+maintainance).
 
-I've seen no discussion on this list why we need a branch or a freeze
-instead of following the OEDEM plam, only people stating that we need
-it. So what's wrong with the original plan of getting the release out
-and using actual experience as feedback for future releases?
+Just my 2c.
 
+Regards,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM5oahMkyGM64RGpERAk1OAJ9Oo6sMLydFi5HYoVQAfQr4AoVVrQCfRd0V
-v06+p6STeoj35fihSo/Lu2I=
-=d9+8
------END PGP SIGNATURE-----
-
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
