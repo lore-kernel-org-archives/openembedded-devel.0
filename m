@@ -1,45 +1,41 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PJZzE-0000sg-5c
+	(envelope-from <coolaj86@gmail.com>) id 1PJaEx-0007lO-7I
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 00:03:20 +0100
-Received: by wwb22 with SMTP id 22so52778wwb.24
+	Sat, 20 Nov 2010 00:20:07 +0100
+Received: by fxm11 with SMTP id 11so3259291fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 15:02:11 -0800 (PST)
+	Fri, 19 Nov 2010 15:18:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=vtWIzkghU6vNqG0jFfccX0zxveZ5XTSy1FdJHaFnqwQ=;
-	b=v4pd/VlmWGcTZ6WN0RhxRWsTKiEEQA/UdA6vsbt+tosmNLkBptaAf3ydX0z1TjY9cq
-	XF8Ws0DbhaZLU+jWHfHQsqK+5rPdxwXT1k+HfhnoI4Plesc2+i5Wkg7Sw2ZsmfC55r3o
-	z/+cQxXVEytqud/eQxBI9tNXalWNAX5/OMvwA=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=V7lgS4W2DKwNvEasISv9xgAHnOd7ioEfjzViuXLey5U=;
+	b=QXDvu5of9zSz3E9j7ZfIwK+ADYe4vFxHf2v8WDmBQKkhz7HYwJCpJIoNJGhPrFG3hd
+	ZFwEAeo6+LKI0yqVU159kjoEc+TvfmprzIR3YZG377ynNw1n+3jHjP3cPKxRb1pqJVTw
+	1twOLd4aYCjo6mL6UpyniYf+bT+QRZ1QPrGlU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=eB4yAppx0QJDxEpJq0RF504uI+0wkuQW3Ydzvvw5ORYHk8Ku8QdmQHLr89UtDF9Wcb
-	sWYVp2PRGyvZdBZCEm3jRu5pqtP6befL1Lz078CKvuDJHtpiJtCT7Wgv2oz55lyXrsns
-	621ulVcP4JB2Lw9BWBGYUW529+zRa/wG6kbwk=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=v0kQanWAHOJ58PGinnAuF41saVAqmvm896eTk34Z6uLPjbaLx0QJVLzbI9u9XcGWsK
+	qcX/j2tqNJw7693PgXQg6XYe6iwM9hUY/ovXBO5mq1jUJS5O4xqHd9Q6pGuXQBnzKlBW
+	CaEU64la0c6S6AcxprXtrZE9njcbgwBWG5y1Q=
+Received: by 10.223.116.200 with SMTP id n8mr1544605faq.61.1290208702439; Fri,
+	19 Nov 2010 15:18:22 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.216.173.194 with SMTP id v44mr2356910wel.100.1290207730633;
-	Fri, 19 Nov 2010 15:02:10 -0800 (PST)
-Received: by 10.216.49.130 with HTTP; Fri, 19 Nov 2010 15:02:10 -0800 (PST)
-In-Reply-To: <4CE664DB.30709@opendreambox.org>
-References: <E1PJA5d-0001qe-R1@melo.openembedded.org>
-	<AANLkTinfS==Wq=xreD6uJA8g7sNKwDw8roPGXRAsihkw@mail.gmail.com>
-	<4CE664DB.30709@opendreambox.org>
-Date: Sat, 20 Nov 2010 00:02:10 +0100
-Message-ID: <AANLkTi=XS7HQ9LTDBmMmKmas_R5BxfhrADu6T8X7OmYf@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Received: by 10.223.125.138 with HTTP; Fri, 19 Nov 2010 15:18:02 -0800 (PST)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Fri, 19 Nov 2010 16:18:02 -0700
+Message-ID: <AANLkTi=aMYQXCUQLzTAfAPeNmvV38Emtckaw_EmXzBmL@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Andreas Oberritter : pkgconfig.bbclass: don't blindly install every . pc file
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: any reason to not cache `opkg list`?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,16 +49,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2010 23:03:21 -0000
+X-List-Received-Date: Fri, 19 Nov 2010 23:20:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-> Please try removing the do_install function from libgpepimc.inc first.
+My assumption is that the only time the results of `opkg list`
+will change is after `opkg update`.
 
-Yes, that indeed seems to fix it.
-I did oversee that task when converting to new style staging...my bad ;)
+Is that correct?
 
-Thanks
 
-Andrea
+If so, why not have `opkg update` generate the output
+which `opkg list` produces such that `opkg list` is instantaneous?
 
+AJ ONeal
 
