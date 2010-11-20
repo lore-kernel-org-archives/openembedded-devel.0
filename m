@@ -1,29 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PJn1w-0000vt-Me for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 13:59:01 +0100
-Received: from f053039076.adsl.alicedsl.de ([78.53.39.76]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PJn0r-00079e-9K for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 12:57:53 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PJnWp-0004EG-Nq
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Nov 2010 14:30:56 +0100
+Received: from [192.168.178.20] (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id 4D4591B40D
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Nov 2010 14:31:02 +0100 (CET)
+Message-ID: <4CE7CD4B.2030804@sensortherm.de>
+Date: Sat, 20 Nov 2010 14:29:47 +0100
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Nov 2010 13:57:51 +0100
-Message-ID: <1290257871.3928.24.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <4CE64779.3020802@sensortherm.de> <ic5k25$ksc$2@dough.gmane.org>
+In-Reply-To: <ic5k25$ksc$2@dough.gmane.org>
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: x11-image: task `rootfs` fails with `opkg_install_cmd: Cannot install package locale-base-fr-fr.`
+Subject: Re: buildserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,82 +39,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Nov 2010 12:59:01 -0000
-X-Groupsio-MsgNum: 26349
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-faP45wVlm6MlXB79M8sv"
+X-List-Received-Date: Sat, 20 Nov 2010 13:30:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-faP45wVlm6MlXB79M8sv
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Dear OE folks,
+i think, ti and oe make a great job and i love the framework!!!
 
+But the ti-codecs-dm355_3.10.00.00.bb don't work on my machine.
+Could it be, that the autobuilder doesn't clean the download and temp 
+directory?
 
-`bitbake -k x11-image` fails for me with the following error.
+I can also have a misconfiguration!
 
-        Build Configuration:
-        BB_VERSION        =3D "1.10.0"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "18e9ef"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-gnueabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "minimal"
-        DISTRO_VERSION    =3D "dev-snapshot-20101120"
-        TARGET_FPU        =3D "hard"
-        [=E2=80=A6]
-        | Configuring psplash.
-        | Configuring sysvinit.
-        | Collected errors:
-        |  * resolve_conffiles: Existing conffile /oe/build-minimal-eglibc/=
-minimal-dev/rootfs/x11-image/etc/device_table is different from the conffil=
-e in the new package. The new conffile will be placed at /oe/build-minimal-=
-eglibc/minimal-dev/rootfs/x11-image/etc/device_table-opkg.
-        |  * opkg_install_cmd: Cannot install package locale-base-fr-fr.
-        | ERROR: Function do_rootfs failed
-        NOTE: package x11-image-1.0-r0: task do_rootfs: Failed
-        ERROR: TaskFailed event exception, aborting
-        ERROR: Build of /oe/openembedded/recipes/images/x11-image.bb do_roo=
-tfs failed
-        ERROR: Task 31 (/oe/openembedded/recipes/images/x11-image.bb, do_ro=
-otfs) failed with 256
-        NOTE: package console-image-1.0-r0: task do_rootfs: Succeeded
-        NOTE: Running task 7023 of 7029 (ID: 8, /oe/openembedded/recipes/im=
-ages/console-image.bb, do_build)
-        NOTE: package console-image-1.0-r0: task do_build: Started
-        NOTE: package console-image-1.0-r0: task do_build: Succeeded
-        NOTE: Running task 7024 of 7029 (ID: 15, /oe/openembedded/recipes/i=
-mages/console-image.bb, do_rm_work)
-        NOTE: package console-image-1.0-r0: task do_rm_work: Started
-        NOTE: package console-image-1.0-r0: task do_rm_work: Succeeded
-        ERROR: '/oe/openembedded/recipes/images/x11-image.bb' failed
-        NOTE: Running task 7025 of 7029 (ID: 16, /oe/openembedded/recipes/i=
-mages/console-image.bb, do_rm_work_all)
-        NOTE: package console-image-1.0-r0: task do_rm_work_all: Started
-        NOTE: package console-image-1.0-r0: task do_rm_work_all: Succeeded
-        ERROR: '/oe/openembedded/recipes/images/x11-image.bb' failed
-        ERROR: '/oe/openembedded/recipes/images/x11-image.bb' failed
+Greetings
 
-I have seen this error for several months so I think it is no recent
-commit that is causing this.
+Klaus
 
 
-Thanks,
 
-Paul
+Am 19.11.2010 11:37, schrieb Koen Kooi:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 19-11-10 10:46, Klaus Schwarzkopf wrote:
+>> Hi,
+>>
+>> i have some problems with the ti recipes, see my emails on the list.
+>>
+>> The two problems are:
+>> * the recipes are out of date and don't work.
+>
+> Why do you say that? They are currently tracking the state of the
+> unreleased upcoming SDK, so from a TI POV they are from the future!
+> Furthermore, they all build and work. An autobuilder builds them for all
+> TI boards multiple times per day and tinderbox is all green.
+> And on the boards we test, the resulting packages work.
+>
+>> * the recipes can't download the source files.
+>
+> Read the recipes, not all sources can be downloaded with wget, some
+> require certification.
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFM5lOFMkyGM64RGpERAqWbAJ0a8vPcNVIo8WI/V3Yf/MdEGofS3ACeLbQJ
+> vimYfl63vA/AAWPLik6M7OM=
+> =wlhc
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=-faP45wVlm6MlXB79M8sv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkznxcIACgkQPX1aK2wOHVhCLgCfbesb7zU7DVt21OlUAbtc92dc
-01AAn2xKao6dM/aoDA8q5tO7P8b8VbTv
-=qqIF
------END PGP SIGNATURE-----
-
---=-faP45wVlm6MlXB79M8sv--
