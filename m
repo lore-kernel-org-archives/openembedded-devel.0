@@ -1,43 +1,37 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PJut9-00071t-Aj
+Received: from dsl027-183-242.sfo1.dsl.speakeasy.net ([216.27.183.242]
+	helo=mail.qvxlabs.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <afalls@qvxlabs.com>) id 1PJvNs-0002hc-2r
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 22:22:41 +0100
-Received: by eya28 with SMTP id 28so3284325eya.6
+	Sat, 20 Nov 2010 22:54:13 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.qvxlabs.com (Postfix) with SMTP id 26575743866
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Nov 2010 13:21:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=jENoOJxIqEnBum1Q7cMiHRygJRWUYvW8Fs2yol8mpTg=;
-	b=NsI+fuJ+4XpFjZR933hs0C8WSXyBmWfahuInJugrigLJrbvKbqZsDOMITPY0Olr0v9
-	0Ec2OA+K5hUpoAIS2F5OfH9TwadeY3SwQuO9hB2iX0PbOM7keXn7fvxAaFh39oQ97W/C
-	2Uu89budAyVunb8kvSCQqTXMb+YyDRxkM5tYo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=kDQRKy5pTx5aHzlFbapHr6mCnnnmFrIB3Bq2WtHHG9MdwxTiV5v634S3LpNhhtGYS8
-	cw57lHu4GFxa7o3dbuS4e3VyQy5sCwytFpcGfa95ViZvfAgzzG4EEOFLiGRvzBIsH24j
-	CQILar71XJmszJ9vcr5MjzRYoa4gneUEper+c=
-Received: by 10.14.47.200 with SMTP id t48mr1921932eeb.23.1290288079571;
-	Sat, 20 Nov 2010 13:21:19 -0800 (PST)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id x54sm2926820eeh.11.2010.11.20.13.21.18
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 20 Nov 2010 13:21:18 -0800 (PST)
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 20 Nov 2010 13:53:03 -0800 (PST)
+Received: from earth.localnet (unknown [10.1.1.34])
+	by mail.qvxlabs.com (Postfix) with ESMTP id B7433743865
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Nov 2010 13:53:02 -0800 (PST)
+From: Ardavon Falls <afalls@qvxlabs.com>
+Organization: QVXLabs Inc
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Nov 2010 22:21:13 +0100
-Message-Id: <1290288073-7632-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Sat, 20 Nov 2010 13:53:02 -0800
+User-Agent: KMail/1.13.5 (Linux/2.6.35-22-generic; KDE/4.5.1; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <201011201353.02321.afalls@qvxlabs.com>
+X-DSPAM-Result: Whitelisted
+X-DSPAM-Processed: Sat Nov 20 13:53:03 2010
+X-DSPAM-Confidence: 0.9987
+X-DSPAM-Probability: 0.0000
+X-DSPAM-Signature: 4ce8433f16461642515012
+X-SA-Exim-Connect-IP: 216.27.183.242
+X-SA-Exim-Mail-From: afalls@qvxlabs.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	URI_NOVOWEL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] php: fixed path
+Subject: gst-plugins-base_0.10.30.bb fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,83 +45,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Nov 2010 21:22:41 -0000
+X-List-Received-Date: Sat, 20 Nov 2010 21:54:13 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-with the arrival of a new release the old php tarball moved to the
-museum site, Fixed SRC_URI and moved it from the inc file to the bb file
-so when adding the latest version there is no SRC_URI clash in the .inc
-file.
+Any suggestions here is the compile output from bitbake
 
-Also introduced INC_PR
+| make[3]: Leaving directory `/home/ardy/code/OE/build/tmp/work/armv5te-
+angstrom-linux-gnueabi/gst-plugins-base-0.10.30-r11.0/gst-plugins-
+base-0.10.30/gst/volume'
+|   CC     libgstdecodebin2_la-gstdecodebin2.lo
+|   CC     libgstdecodebin2_la-gsturidecodebin.lo
+| arm-angstrom-linux-gnueabi-libtool: link: `libgstffmpegcolorspace_la-
+gstffmpegcolorspace.lo' is not a valid libtool object
+| make[3]: *** [libgstffmpegcolorspace.la] Error 1
+| make[3]: Leaving directory `/home/ardy/code/OE/build/tmp/work/armv5te-
+angstrom-linux-gnueabi/gst-plugins-base-0.10.30-r11.0/gst-plugins-
+base-0.10.30/gst/ffmpegcolorspace'
+| make[2]: *** [ffmpegcolorspace] Error 2
+| make[2]: *** Waiting for unfinished jobs....
+|   CC     libgstdecodebin2_la-gstfactorylists.lo
+| arm-angstrom-linux-gnueabi-libtool: link: `libgsttcp_la-gsttcpplugin.lo' is 
+not a valid libtool object
+| make[4]: *** [libgsttcp.la] Error 1
+| make[4]: Leaving directory `/home/ardy/code/OE/build/tmp/work/armv5te-
+angstrom-linux-gnueabi/gst-plugins-base-0.10.30-r11.0/gst-plugins-
+base-0.10.30/gst/tcp'
+| make[3]: *** [all] Error 2
+| make[3]: Leaving directory `/home/ardy/code/OE/build/tmp/work/armv5te-
+angstrom-linux-gnueabi/gst-plugins-base-0.10.30-r11.0/gst-plugins-
+base-0.10.30/gst/tcp'
+| make[2]: *** [tcp] Error 2
+|   CC     libgstdecodebin2_la-gstplay-enum.lo
+| gstinputselector.c: In function 'gst_input_selector_class_init':
+| gstinputselector.c:790: error: 'gst_play_marshal_INT64__VOID' undeclared 
+(first use in this function)
+| gstinputselector.c:790: error: (Each undeclared identifier is reported only 
+once
+| gstinputselector.c:790: error: for each function it appears in.)
+| gstinputselector.c:840: error: 'gst_play_marshal_VOID__OBJECT_INT64_INT64' 
+undeclared (first use in this function)
+| gstdecodebin2.c: In function 'gst_decode_bin_class_init':
+| gstdecodebin2.c:603: error: 'gst_play_marshal_VOID__OBJECT_BOOLEAN' 
+undeclared (first use in this function)
+| gstdecodebin2.c:603: error: (Each undeclared identifier is reported only once
+| gstdecodebin2.c:603: error: for each function it appears in.)
+| gstdecodebin2.c:652: error: 'gst_play_marshal_BOOLEAN__OBJECT_BOXED' 
+undeclared (first use in this function)
+| gstdecodebin2.c:678: error: 'gst_play_marshal_BOXED__OBJECT_BOXED' 
+undeclared (first use in this function)
+| gstdecodebin2.c:701: error: 'gst_play_marshal_BOXED__OBJECT_BOXED_BOXED' 
+undeclared (first use in this function)
+| gstdecodebin2.c:735: error: 'gst_play_marshal_ENUM__OBJECT_BOXED_OBJECT' 
+undeclared (first use in this function)
+| gstdecodebin.c: In function 'gst_decode_bin_class_init':
+| gstdecodebin.c:247: error: 'gst_play_marshal_VOID__OBJECT_BOOLEAN' 
+undeclared (first use in this function)
+| gstdecodebin.c:247: error: (Each undeclared identifier is reported only once
+| gstdecodebin.c:247: error: for each function it appears in.)
+| make[4]: *** [libgstplaybin_la-gstinputselector.lo] Error 1
+| make[4]: *** Waiting for unfinished jobs....
+| gsturidecodebin.c: In function 'gst_uri_decode_bin_class_init':
+| gsturidecodebin.c:422: error: 'gst_play_marshal_BOOLEAN__OBJECT_BOXED' 
+undeclared (first use in this function)
+| gsturidecodebin.c:422: error: (Each undeclared identifier is reported only 
+once
+| gsturidecodebin.c:422: error: for each function it appears in.)
+| gsturidecodebin.c:448: error: 'gst_play_marshal_BOXED__OBJECT_BOXED' 
+undeclared (first use in this function)
+| gsturidecodebin.c:481: error: 'gst_play_marshal_ENUM__OBJECT_BOXED_OBJECT' 
+undeclared (first use in this function)
+| make[4]: *** [libgstdecodebin_la-gstdecodebin.lo] Error 1
+| make[4]: *** [libgstdecodebin2_la-gstdecodebin2.lo] Error 1
+| make[4]: *** [libgstdecodebin2_la-gsturidecodebin.lo] Error 1
+| make[4]: Leaving directory `/home/ardy/code/OE/build/tmp/work/armv5te-
+angstrom-linux-gnueabi/gst-plugins-base-0.10.30-r11.0/gst-plugins-
+base-0.10.30/gst/playback'
+| make[3]: *** [all] Error 2
+| make[3]: Leaving directory `/home/ardy/code/OE/build/tmp/work/armv5te-
+angstrom-linux-gnueabi/gst-plugins-base-0.10.30-r11.0/gst-plugins-
+base-0.10.30/gst/playback'
+| make[2]: *** [playback] Error 2
+| make[2]: Leaving directory `/home/ardy/code/OE/build/tmp/work/armv5te-
+angstrom-linux-gnueabi/gst-plugins-base-0.10.30-r11.0/gst-plugins-
+base-0.10.30/gst'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory `/home/ardy/code/OE/build/tmp/work/armv5te-
+angstrom-linux-gnueabi/gst-plugins-base-0.10.30-r11.0/gst-plugins-
+base-0.10.30'
+| make: *** [all] Error 2
+| FATAL: oe_runmake failed
+| ERROR: Function do_compile failed
+NOTE: package gst-plugins-base-0.10.30-r11.0: task do_compile: Failed
 
-Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- recipes/php/php-native_5.3.2.bb |    7 +++++--
- recipes/php/php.inc             |    4 +---
- recipes/php/php_5.2.13.bb       |   12 ++++++++----
- 3 files changed, 14 insertions(+), 9 deletions(-)
+!DSPAM:4ce8433f16461642515012!
 
-diff --git a/recipes/php/php-native_5.3.2.bb b/recipes/php/php-native_5.3.2.bb
-index d5ed932..3a2299c 100644
---- a/recipes/php/php-native_5.3.2.bb
-+++ b/recipes/php/php-native_5.3.2.bb
-@@ -1,8 +1,11 @@
- require php-native.inc
- 
--PR = "r1"
-+PR = "${INC_PR}.1"
- 
--SRC_URI += "file://CVE-2010-0397.patch"
-+SRC_URI =     "http://museum.php.net/php5/php-${PV}.tar.bz2;name=src \
-+               file://acinclude-xml2-config.patch \
-+               file://php-m4-divert.patch \
-+	       file://CVE-2010-0397.patch"
- 
- SRC_URI[src.md5sum] = "46f500816125202c48a458d0133254a4"
- SRC_URI[src.sha256sum] = "9a380a574adcb3a9abe3226e7c3a9bae619e8a1b90842ec2a7edf0ad92afdeda"
-diff --git a/recipes/php/php.inc b/recipes/php/php.inc
-index bfee93c..a48827a 100644
---- a/recipes/php/php.inc
-+++ b/recipes/php/php.inc
-@@ -3,9 +3,7 @@ HOMEPAGE = "http://www.php.net"
- SECTION = "console/network"
- LICENSE = "PHP"
- 
--SRC_URI =     "http://us2.php.net/distributions/php-${PV}.tar.bz2;name=src \
--               file://acinclude-xml2-config.patch \
--               file://php-m4-divert.patch"
-+INC_PR = "r7"
- 
- S = "${WORKDIR}/php-${PV}"
- 
-diff --git a/recipes/php/php_5.2.13.bb b/recipes/php/php_5.2.13.bb
-index 0f9317d..5871dca 100644
---- a/recipes/php/php_5.2.13.bb
-+++ b/recipes/php/php_5.2.13.bb
-@@ -3,12 +3,16 @@ require php.inc
- DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
-            libc-client openssl"
- 
--PR = "r7"
--
--SRC_URI += "file://pear-makefile.patch \
--            file://imap-fix-autofoo.patch \
--            file://CVE-2010-0397.patch \
-+PR = "${INC_PR}.1"
-+
-+SRC_URI =     "http://museum.php.net/php5/php-${PV}.tar.bz2;name=src \
-+               file://acinclude-xml2-config.patch \
-+               file://php-m4-divert.patch \
-+	       file://pear-makefile.patch \
-+	       file://imap-fix-autofoo.patch \
-+	       file://CVE-2010-0397.patch \
-             "
-+
- SRC_URI[src.md5sum] = "eb4d0766dc4fb9667f05a68b6041e7d1"
- SRC_URI[src.sha256sum] = "2b50a2535e3bb9a98cd4d1633f9452d877276c40b385915261f040d535c7eadb"
- 
--- 
-1.6.4.2
 
 
 
