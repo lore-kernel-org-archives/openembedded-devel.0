@@ -1,29 +1,41 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1PJdjS-0004AO-Ds
+	(envelope-from <koansoftware@gmail.com>) id 1PJkVD-0008Q0-Ii
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 04:04:37 +0100
-Received: (qmail 31490 invoked by uid 1003); 20 Nov 2010 03:01:12 -0000
-Received: from adsl-75-37-22-143.dsl.pltn13.sbcglobal.net (HELO
-	?192.168.1.148?) (philip@opensdr.com@75.37.22.143)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	20 Nov 2010 03:01:12 -0000
-Message-ID: <4CE739F6.5020303@balister.org>
-Date: Fri, 19 Nov 2010 19:01:10 -0800
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101027 Fedora/3.1.6-1.fc13 Thunderbird/3.1.6
+	Sat, 20 Nov 2010 11:17:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id BE2322C7EB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Nov 2010 10:15:25 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id b02vPJgamc8w
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Nov 2010 10:15:21 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 1E9D32C7DD
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Nov 2010 10:15:20 +0000 (UTC)
+Message-ID: <4CE79FD4.5040905@gmail.com>
+Date: Sat, 20 Nov 2010 11:15:48 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.166
-X-SA-Exim-Mail-From: philip@balister.org
+References: <4CE3D70F.2000101@gmail.com>	<AANLkTin0i5rSxwA8Q3+jN7tLR-Rn3JEei6D==1CjKOh9@mail.gmail.com>	<4CE3EF4C.2050105@gmail.com>	<AANLkTin2v1+3UP_rk593i+V4=e4QeKgPinAkoWNwY0BO@mail.gmail.com>	<4CE42FF0.1000702@mentor.com>
+	<4CE4EC1E.50903@gmail.com>
+	<AANLkTi=cnG0DyVCmJjKrBEqR4AQgTVVn_ugHyUY194gF@mail.gmail.com>
+In-Reply-To: <AANLkTi=cnG0DyVCmJjKrBEqR4AQgTVVn_ugHyUY194gF@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Commit for the release
+Subject: Re: Error: git was compiled without libcurl support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,14 +49,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Nov 2010 03:04:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 20 Nov 2010 10:17:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Khem, I'd like this commit to go into the release branch. Any objections?
+Khem Raj ha scritto, Il 18/11/2010 19:30:
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=c59afd9fd456766c473c4fb7f7cc4db3e8623c39
+>> Suggestions would be appreciated.
+>=20
+> why not just use git-native ?
+>=20
 
-Philip
+Due to another error
+http://tinderbox.openembedded.net/public/logs/task/10259740.txt
+
+
+Yes with Debian Lenny and Debian git native because git version is too
+old (git-1.6.3.3), and you should face to the following error:
+
+ error: git was compiled without libcurl support
+
+I solved it with this workaround (updated)
+
+http://www.kaeilos.com/debian-lenny-and-git-native
+
+HTH
+
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+        http://www.KaeilOS.com
+
 
 
