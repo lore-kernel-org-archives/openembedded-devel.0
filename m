@@ -1,40 +1,40 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin@ti.com>) id 1PJcn5-0000SQ-0y
+	(envelope-from <martin@ti.com>) id 1PJcn3-0000SM-QN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 03:03:03 +0100
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id oAK21XPr022905
+	Sat, 20 Nov 2010 03:03:02 +0100
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id oAK21TF1022288
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 20:01:33 -0600
+	Fri, 19 Nov 2010 20:01:29 -0600
 Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id oAK21WOZ000757
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id oAK21SYJ028140
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 20:01:32 -0600 (CST)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oAK21WP9004194
+	Fri, 19 Nov 2010 20:01:28 -0600 (CST)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oAK21ShQ004172
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 20:01:32 -0600 (CST)
-Received: from dlee02.ent.ti.com ([157.170.170.17]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Fri, 19 Nov 2010 20:01:32 -0600
+	Fri, 19 Nov 2010 20:01:28 -0600 (CST)
+Received: from dlee02.ent.ti.com ([157.170.170.17]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Fri, 19 Nov 2010 20:01:28 -0600
 From: "Ambrose, Martin" <martin@ti.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Nov 2010 20:01:32 -0600
+Date: Fri, 19 Nov 2010 20:01:28 -0600
 Thread-Topic: srctree and stamps
-Thread-Index: AQHLiFbaaG7jQwth0USzRX5m2Vibqg==
-Message-ID: <A24693684029E5489D1D202277BE894484FB9741@dlee02.ent.ti.com>
+Thread-Index: AQHLiFbXsFrsyHEZhUW5NvT6sbyheA==
+Message-ID: <A24693684029E5489D1D202277BE894484FB9740@dlee02.ent.ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 acceptlanguage: en-US
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.153
+X-SA-Exim-Connect-IP: 192.94.94.40
 X-SA-Exim-Mail-From: martin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
