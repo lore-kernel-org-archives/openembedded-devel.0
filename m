@@ -1,43 +1,44 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <luke.leighton@gmail.com>) id 1PJwGP-00065r-V3
+	(envelope-from <cazzeml@gmail.com>) id 1PJwSG-0000en-1n
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 23:50:34 +0100
-Received: by qwi4 with SMTP id 4so680182qwi.6
+	Sun, 21 Nov 2010 00:02:51 +0100
+Received: by eya28 with SMTP id 28so3299512eya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Nov 2010 14:49:23 -0800 (PST)
+	Sat, 20 Nov 2010 15:01:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=gFwt0+vxEsrMXlELpe+7d2XMteA/tbJS/pb8AZRNbMI=;
-	b=xOGg+nAHn0BRs/pSDJnTogFcyhx5knzEn2zo3/ATkGphn9iNNPNETjzNObdlc3vqyK
-	sEe7owXBlcBmk/OAg3PD8lCVE5w5NS2azodQPTwXUD/hslGKwRN0WXTjcDB/ZbrIshVU
-	AnGesWBfNjaoOltAL3W4x/4DRleNFjEvLqFEc=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=/fjO3oxLAa/PoNem9m8MP5LyptV2X3/lTctV9ocIuG0=;
+	b=awFJFmVBnnQP5Sc9+T67V3jRPA9k0UxehLh5KQL13iK7Jfg8z4Ee8HifY0fFAMeuFZ
+	qrb9X+nokBUfaKZPC7f78vmUuq4erDfyR5avl8rqxK+APif28Ff143ayZxdxmExjg4/j
+	dKixxD14cHekGHKDffgW4rMwLJRsR998FSO5g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=FTqCQ7iVX4NJ2x3I15hT4xAejk4DpB59+lByXzyD+8EQZDfk2+zQiKdIpPn3NHC1+C
-	ieExDwfu8ONVJBVkGIZi+h21bjhfWKgWlj4UbirpShLrRHqOCIvfvjnO3u6zLbkKvZEo
-	zFfwsgRU96FknIQ9H52OaTQlRFzJ1N7TMEMJE=
-MIME-Version: 1.0
-Received: by 10.229.241.194 with SMTP id lf2mr3389930qcb.164.1290293363519;
-	Sat, 20 Nov 2010 14:49:23 -0800 (PST)
-Sender: luke.leighton@gmail.com
-Received: by 10.220.112.210 with HTTP; Sat, 20 Nov 2010 14:49:23 -0800 (PST)
-Date: Sat, 20 Nov 2010 22:49:23 +0000
-X-Google-Sender-Auth: 87WwQDY1TqQJ6EpAUIDsFECGbGU
-Message-ID: <AANLkTinPGphYW71Ec6u7-BjWnqtW1sg-cggK6TnX08Xf@mail.gmail.com>
-From: Luke Kenneth Casson Leighton <lkcl@lkcl.net>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=HOV+pC8FcFC5jdah+wRJuQDhfQjfLX97Rj2Mb3tKVkdQtqPDy97nIUWX53qFA8QFlH
+	Bu4vCvOPNj2N+idF4e0AEzO8sjvnfL2Nlaihqk9iEetukrOFsiSmoke4xUqZXikNnFu5
+	H69XvnlgiVAJjjCuwTpq6/9df0WnwgNEiJDdw=
+Received: by 10.213.9.79 with SMTP id k15mr6207358ebk.27.1290294093975;
+	Sat, 20 Nov 2010 15:01:33 -0800 (PST)
+Received: from localhost.localdomain (d54C04D68.access.telenet.be
+	[84.192.77.104])
+	by mx.google.com with ESMTPS id v56sm2991640eeh.20.2010.11.20.15.01.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 20 Nov 2010 15:01:33 -0800 (PST)
+From: Cazze <cazzeml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: luke.leighton@gmail.com
+Date: Sun, 21 Nov 2010 00:01:02 +0100
+Message-Id: <1290294062-28078-1-git-send-email-cazzeml@gmail.com>
+X-Mailer: git-send-email 1.7.2.2
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: cazzeml@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [patch] v8 recipe
+Subject: [PATCH] Added udev-compat wrapper for h2200 Signed-off-by: Cazze <cazzeml@gmail.com>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,15 +52,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Nov 2010 22:50:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 20 Nov 2010 23:02:52 -0000
 
-http://bugs.openembedded.org/show_bug.cgi?id=5486
+---
+ conf/machine/h2200.conf  |    2 ++
+ recipes/udev/udev.inc    |    6 +++++-
+ recipes/udev/udev_151.bb |    6 +++++-
+ recipes/udev/udev_154.bb |    6 +++++-
+ 4 files changed, 17 insertions(+), 3 deletions(-)
 
-this is a recipe for a stand-alone libv8 _not_ as part of chromium.
-it's part of an ongoing effort to get webkit dfb and other webkit
-builds to build with v8 on ARM.  it depends on #5485.
+diff --git a/conf/machine/h2200.conf b/conf/machine/h2200.conf
+index abc1772..4bcdf7c 100644
+--- a/conf/machine/h2200.conf
++++ b/conf/machine/h2200.conf
+@@ -25,6 +25,8 @@ PCMCIA_MANAGER = "pcmciautils"
+ PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+ 
++# udev-141 is the latest version that works with linux-2.6.21
++PREFERRED_PROVIDER_udev-compat_h2200 = "udev-compat141"
+ MACHINE_ESSENTIAL_EXTRA_RDEPENDS = " h2200-bootloader "
+ MACHINE_EXTRA_RDEPENDS = " udev-hostap-cs-vcc-workaround "
+ MACHINE_EXTRA_RRECOMMENDS = "\
+diff --git a/recipes/udev/udev.inc b/recipes/udev/udev.inc
+index 0c8a662..5634635 100644
+--- a/recipes/udev/udev.inc
++++ b/recipes/udev/udev.inc
+@@ -14,7 +14,7 @@ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+            file://init \
+ 	   file://udev-compat-wrapper-patch"
+ 
+-INC_PR = "r30"
++INC_PR = "r31"
+ 
+ inherit update-rc.d autotools pkgconfig
+ 
+@@ -60,6 +60,10 @@ RDEPENDS_udev_poodle += "udev-compat"
+ do_unpack_append_poodle() {
+ 	bb.build.exec_func('do_apply_compat_wrapper', d)
+ }
++RDEPENDS_udev_h2200 += "udev-compat"
++do_unpack_append_h2200() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
+ 
+ # Modify init script on platforms that need to boot old kernels:
+ do_apply_compat_wrapper() {
+diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
+index ac14b56..7a6c31d 100644
+--- a/recipes/udev/udev_151.bb
++++ b/recipes/udev/udev_151.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
+ 
+-PR = "r21"
++PR = "r22"
+ 
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+@@ -99,6 +99,10 @@ RDEPENDS_udev_append_poodle = " udev-compat"
+ do_unpack_append_poodle() {
+ 	bb.build.exec_func('do_apply_compat_wrapper', d)
+ }
++RDEPENDS_udev_append_h2200 = " udev-compat"
++do_unpack_append_h2200() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
+ 
+ # Modify init script on platforms that need to boot old kernels:
+ do_apply_compat_wrapper() {
+diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
+index d7740a6..c9348f8 100644
+--- a/recipes/udev/udev_154.bb
++++ b/recipes/udev/udev_154.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+@@ -93,6 +93,10 @@ RDEPENDS_udev_append_poodle = " udev-compat"
+ do_unpack_append_poodle() {
+ 	bb.build.exec_func('do_apply_compat_wrapper', d)
+ }
++RDEPENDS_udev_append_h2200 = " udev-compat"
++do_unpack_append_h2200() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
+ 
+ # Modify init script on platforms that need to boot old kernels:
+ do_apply_compat_wrapper() {
+-- 
+1.5.6.4
 
-l.
 
 
