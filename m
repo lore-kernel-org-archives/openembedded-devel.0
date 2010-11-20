@@ -1,44 +1,29 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin@ti.com>) id 1PJcn3-0000SM-QN
+	(envelope-from <philip@balister.org>) id 1PJdjS-0004AO-Ds
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 03:03:02 +0100
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id oAK21TF1022288
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 20:01:29 -0600
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id oAK21SYJ028140
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 20:01:28 -0600 (CST)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oAK21ShQ004172
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Nov 2010 20:01:28 -0600 (CST)
-Received: from dlee02.ent.ti.com ([157.170.170.17]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Fri, 19 Nov 2010 20:01:28 -0600
-From: "Ambrose, Martin" <martin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Nov 2010 20:01:28 -0600
-Thread-Topic: srctree and stamps
-Thread-Index: AQHLiFbXsFrsyHEZhUW5NvT6sbyheA==
-Message-ID: <A24693684029E5489D1D202277BE894484FB9740@dlee02.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Sat, 20 Nov 2010 04:04:37 +0100
+Received: (qmail 31490 invoked by uid 1003); 20 Nov 2010 03:01:12 -0000
+Received: from adsl-75-37-22-143.dsl.pltn13.sbcglobal.net (HELO
+	?192.168.1.148?) (philip@opensdr.com@75.37.22.143)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	20 Nov 2010 03:01:12 -0000
+Message-ID: <4CE739F6.5020303@balister.org>
+Date: Fri, 19 Nov 2010 19:01:10 -0800
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101027 Fedora/3.1.6-1.fc13 Thunderbird/3.1.6
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.40
-X-SA-Exim-Mail-From: martin@ti.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: srctree and stamps
+Subject: Commit for the release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,89 +37,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Nov 2010 02:03:04 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 20 Nov 2010 03:04:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
+Khem, I'd like this commit to go into the release branch. Any objections?
 
-I find that using the latest srctree the stamps aren't updated in the same =
-fashion
-as regular recipes. In the example below I build the srctree recipe (mypack=
-age) and
-then build an image depending on same. Even though the package is built jus=
-t prior
-the image build still processes several steps which seem redundant.
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=c59afd9fd456766c473c4fb7f7cc4db3e8623c39
 
-I see some special handling of stamps in srctree.bbclass and wonder if this
-is expected/desired behavior.
-
-Thanks for any help/pointers.=20
-
-$ bitbake mypackage
-$ ls -l ~/work/oe/arago-tmp/stamps/armv5te-none-linux-gnueabi/*mypackage*
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_build
--rw-rw-r--. 1 user user 0 Nov 19 18:37 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_distribute_sources
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package_stage
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package_stage_all
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package_write
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package_write_ipk
--rw-rw-r--. 1 user user 0 Nov 19 18:39 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_populate_sysroot_post
--rw-rw-r--. 1 user user 0 Nov 19 18:39 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_qa_staging
--rw-rw-r--. 1 user user 0 Nov 19 18:37 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_setscene
-lm $ bitbake myimage
-...
-lm $ ls -l ~/work/oe/arago-tmp/stamps/armv5te-none-linux-gnueabi/*mypackage=
-*
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_build
--rw-rw-r--. 1 user user 0 Nov 19 19:03 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_compile
--rw-rw-r--. 1 user user 0 Nov 19 19:03 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_configure
--rw-rw-r--. 1 user user 0 Nov 19 19:03 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_copy_license
--rw-rw-r--. 1 user user 0 Nov 19 19:03 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_create_srcipk
--rw-rw-r--. 1 user user 0 Nov 19 18:37 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_distribute_sources
--rw-rw-r--. 1 user user 0 Nov 19 19:03 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_generate_toolchain_file
--rw-rw-r--. 1 user user 0 Nov 19 19:03 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_install
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package_stage
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package_stage_all
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package_write
--rw-rw-r--. 1 user user 0 Nov 19 18:40 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_package_write_ipk
--rw-rw-r--. 1 user user 0 Nov 19 19:03 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_populate_sysroot
--rw-rw-r--. 1 user user 0 Nov 19 18:39 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_populate_sysroot_post
--rw-rw-r--. 1 user user 0 Nov 19 19:03 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_qa_configure
--rw-rw-r--. 1 user user 0 Nov 19 18:39 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_qa_staging
--rw-rw-r--. 1 user user 0 Nov 19 18:37 /home/user/work/oe/arago-tmp/stamps/=
-armv5te-none-linux-gnueabi/mypackage-mypv-r1.do_setscene
-
--Martin=
+Philip
 
 
