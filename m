@@ -1,32 +1,40 @@
-Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PJnq1-0004RO-RT
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PJsXq-0003oD-IV
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Nov 2010 14:50:46 +0100
-Received: from [192.168.178.20] (77-22-235-200-dynip.superkabel.de
-	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 967F21B40D
+	Sat, 20 Nov 2010 19:52:19 +0100
+Received: by iwn38 with SMTP id 38so1317806iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Nov 2010 14:50:52 +0100 (CET)
-Message-ID: <4CE7D1F2.7010305@sensortherm.de>
-Date: Sat, 20 Nov 2010 14:49:38 +0100
-From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
+	Sat, 20 Nov 2010 10:51:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=NjsZsEQWItvxrbZXbXjBnQP+Lmm9HbJvyJQdtr5efQU=;
+	b=lCirGKQRBF0R+WmxmH4ROurUybpUHcJIxumA5y+cKOqqeamtEkTbSj7cJa6vvndC3S
+	XIGCc+9GEgBhGN4pj2Wryu3ncXAA+bnLTLX8hpH4GPFTLXIYnhzqvczD2Q68xNF+tQYV
+	A+0vf50t9HehJQRIxBXZTxorFk4P5ja7A1LRU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=u5SVC6EEd/Y6r/Vb4d9LCPTMASSMJf1U7krr9j9Se0g2QyGNnFR3jQI+YRd9yg6dmg
+	3d6qHWHqEcyuESXoFYB5HbCiimjNykz3oliaJAhmhROwa8pTTQiwVNA1O7GLrTzVQXP4
+	IqYv0TU70F3AFS9jqMuXu89CsWq3yLyXbLF9g=
 MIME-Version: 1.0
+Received: by 10.231.37.197 with SMTP id y5mr3986684ibd.151.1290279068305; Sat,
+	20 Nov 2010 10:51:08 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Sat, 20 Nov 2010 10:51:08 -0800 (PST)
+Date: Sat, 20 Nov 2010 19:51:08 +0100
+Message-ID: <AANLkTinsyLsC1DqEbaOQscF-GZJFiLBsL8uFouyPEzg2@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CE64779.3020802@sensortherm.de>
-	<AANLkTinAj4fG48Ppz_jwT1nmp+tzntZ9YJPaqat4HbES@mail.gmail.com>
-In-Reply-To: <AANLkTinAj4fG48Ppz_jwT1nmp+tzntZ9YJPaqat4HbES@mail.gmail.com>
-X-SA-Exim-Connect-IP: 188.40.84.136
-X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: buildserver
+Subject: handhelds.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,39 +48,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Nov 2010 13:50:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 20 Nov 2010 18:52:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+HI,
 
-> Other good idea is to have sanity checker running once per day too. It
-> may do next things:
-> - check recipes syntax
-> - check thath recipes SRC_URI can be fetched
+Today Jay mentioned on irc that handhelds.org is down permanently.
+We have at least 36 recipes that fetch from it.
+What are we doing with these?
 
-I think, bitbake can easily integrate this two features.
+One of the recipes that became unbuildable is update-rc.d which is in
+the dependency list of a lot of recipes ....
 
-For example the new options:
-
---download-only 		only download the source files for the given recipe
-
---download-only-with-depencies  only download the source files for the 
-given recipe and its depencies
-
---check-syntax			check recipes syntax	
-
-
-What do you think?
-
-Greetings,
-
-Klaus
-
-
-> - check recipes for security flaws (we have tool already)
-> - ...
-> - PROFIT! :) (sorry, just can't not to write this :)
->
-
+Frans.
 
 
