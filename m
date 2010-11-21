@@ -1,43 +1,38 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PKEx1-0008JU-54
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Nov 2010 19:47:47 +0100
-Received: (qmail 10293 invoked by uid 503); 21 Nov 2010 19:09:53 -0000
-Received: from 63.mail-out.ovh.net (91.121.185.56)
-	by 68.mail-out.ovh.net with SMTP; 21 Nov 2010 19:09:53 -0000
-Received: (qmail 19588 invoked by uid 503); 21 Nov 2010 19:18:30 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 21 Nov 2010 19:18:30 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 21 Nov 2010 20:46:38 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 21 Nov 2010 20:46:37 +0200
-Message-ID: <4CE9690D.2030307@eukrea.com>
-Date: Sun, 21 Nov 2010 19:46:37 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.6
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <koansoftware@gmail.com>) id 1PKFPT-0001zx-Tx
+	for Openembedded-devel@lists.openembedded.org;
+	Sun, 21 Nov 2010 20:17:13 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id B56E82C7DD
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Nov 2010 19:15:26 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xpu7iMysnALz
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Nov 2010 19:15:22 +0000 (UTC)
+Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
+	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 75C432C798
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Nov 2010 19:15:22 +0000 (UTC)
+Message-ID: <4CE96FE9.2080707@gmail.com>
+Date: Sun, 21 Nov 2010 20:15:53 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4CE56C6B.1050009@eukrea.com>	<1290352792-2563-1-git-send-email-eric@eukrea.com>
-	<AANLkTimB+pvrtjXGMrHds-MDQC5SOMw-kS=L5fG6UAGb@mail.gmail.com>
-In-Reply-To: <AANLkTimB+pvrtjXGMrHds-MDQC5SOMw-kS=L5fG6UAGb@mail.gmail.com>
-X-Ovh-Tracer-Id: 7569706548923247945
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Ovh-Tracer-Id: 7962645616841960777
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+To: Openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] handle PACKAGE_ARCH change in an amend.inc
+Subject: pixman_0.21.2.bb do_compile failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 18:47:48 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 21 Nov 2010 19:17:13 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
-On 21/11/2010 18:53, Chris Larson wrote:
-> 2010/11/21 Eric Bénard<eric@eukrea.com>
->
->> +    #
->> +    # We always try to scan SRC_URI for urls with machine overrides
->> +    # unless the package sets SRC_URI_OVERRIDES_PACKAGE_ARCH=0
->> +    #
->> +    override = bb.data.getVar('SRC_URI_OVERRIDES_PACKAGE_ARCH', d, 1)
->> +    if override != '0' and is_machine_specific(d):
->> +        bb.data.setVar('PACKAGE_ARCH', "${MACHINE_ARCH}", d)
->> +        bb.data.setVar('MULTIMACH_ARCH', mach_arch, d)
->> +        return
->> +
->> +    multiarch = pkg_arch
->> +
->> +    packages = bb.data.getVar('PACKAGES', d, 1).split()
->> +    for pkg in packages:
->> +        pkgarch = bb.data.getVar("PACKAGE_ARCH_%s" % pkg, d, 1)
->> +
->> +        # We could look for != PACKAGE_ARCH here but how to choose
->> +        # if multiple differences are present?
->> +        # Look through PACKAGE_ARCHS for the priority order?
->> +        if pkgarch and pkgarch == mach_arch:
->> +            multiarch = mach_arch
->> +            break
->> +
->>
->
-> This is wrong.  You do the loop here, set multiarch = mach_arch, and then
-> never do anything with multiarch.  If this function is really supposed to be
-> setting MULTIMACH_ARCH, then you need to do so here as well.
->   bb.data.setVar("MULTIMACH_ARCH", multiarch, d)
+Hi,
+Recently I am facing to a new error using DISTRO=kaeilos-2010 and
+MACHINE=ronetix-pm9263.
+I would be grateful if anybody could give me a hint about how could it
+be caused and how to solve it.
 
-you're right, I forget the last line when moving the block to set_multimach_arch .
+http://pastebin.com/hi2SVSuF
 
-Eric
+TIA
+/marco
 
 
