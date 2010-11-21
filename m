@@ -1,46 +1,47 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PK007-0006jg-LM
+	(envelope-from <luke.leighton@gmail.com>) id 1PK0Bd-0007If-0x
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Nov 2010 03:50:00 +0100
-Received: by gxk2 with SMTP id 2so3656990gxk.6
+	Sun, 21 Nov 2010 04:01:54 +0100
+Received: by vws6 with SMTP id 6so721293vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Nov 2010 18:48:49 -0800 (PST)
+	Sat, 20 Nov 2010 19:00:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=qSacLWcCsT7HfZ7AeE4lyeW70CVM08QAAEXZkL6kSjY=;
-	b=H7vAS07rESX2766bJhoGYY30ruTYKBWoqpm2qzYxpWdU0PgvQbnm0vQf5YcgJbxjYL
-	pc0jz/ymN9A+gIYSGH693fUubwJBHT0k2QiK5SNCJtM/c+an7Bz8VqTbzXpWmuLy2jCA
-	6BGs2+XPz/vFY7wun/a3lEYgXkJeEBuzW/Guc=
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=k2UFCpoyjKTOsXvBQ8ylsL1u2lIVjjSu27+swKDvm7c=;
+	b=BHveXSraXPlVzw/aOX+bFeXtw+xP1dlIjzT1pwvFLSwiU4ZW2P+qeMRb1seVrriGYF
+	w6zVyVKHJzaN7zK3iVlUv+NAjRuRgz1wF7RlG/AJ1EWvM6N3DmIDtI1/K0tG8UlT3+l7
+	YAjdfhiStTBiz7bkOrEnhUzsDrcAEAIlFeMWU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=POs2XxxIobI8NMkHXFz8yetSyJuKTBGmv69qthhop7M+x/CZm0f7uHypoOxFPNjau/
-	YU0kLSIHq92FKL3zL+pcJAeB0vIUq5vMbCX83GmObVbbvt7XMoreEd/lMJol7L/SRdft
-	EUhtM8xNbP7sJCKXh/a/gD9sxlu23sWuOoRnc=
-Received: by 10.91.42.30 with SMTP id u30mr3576994agj.102.1290307728437; Sat,
-	20 Nov 2010 18:48:48 -0800 (PST)
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=ImTRZjmXVK9lLX4EwgubA0DzX5YRJma4OVRenE6DxIpUp99EEAieH+E+OhffavorQO
+	/T767MXHwP1G+T3HkZEyMwr1MZ4xFlQFOH9sz4bpb5t8tYe2ag/GXD6On1cNXBTWC2Jv
+	tSeEkxnEXXDTIZn1q+MjxItqLSysZKy37AkMg=
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Sat, 20 Nov 2010 18:48:28 -0800 (PST)
-In-Reply-To: <4CE6B538.6050801@balister.org>
-References: <AANLkTinVj9oh0p9xp9ZUtBijB63Fy7O8LcXc5-tUF9v6@mail.gmail.com>
-	<ic5jrc$ksc$1@dough.gmane.org> <4CE67FA1.6020901@mentor.com>
-	<ic60r2$hrs$1@dough.gmane.org> <20101119144425.GC3411@jama>
-	<4CE6B538.6050801@balister.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 20 Nov 2010 18:48:28 -0800
-Message-ID: <AANLkTinunsDQVc6JpctLdDHXZwQReMPY6wr7ZqLNv2=N@mail.gmail.com>
+Received: by 10.220.179.205 with SMTP id br13mr1053722vcb.178.1290308441924;
+	Sat, 20 Nov 2010 19:00:41 -0800 (PST)
+Sender: luke.leighton@gmail.com
+Received: by 10.220.112.210 with HTTP; Sat, 20 Nov 2010 19:00:41 -0800 (PST)
+In-Reply-To: <mailman.168.1290299534.24873.openembedded-devel@lists.openembedded.org>
+References: <mailman.168.1290299534.24873.openembedded-devel@lists.openembedded.org>
+Date: Sun, 21 Nov 2010 03:00:41 +0000
+X-Google-Sender-Auth: vdVmQkNtH79dmDBLrc7B--7hh4Y
+Message-ID: <AANLkTi=Q6iGTksRU4nMpLPO3GZ-Zmdn_1dyo3LXGbMGw@mail.gmail.com>
+From: Luke Kenneth Casson Leighton <lkcl@lkcl.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: luke.leighton@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release-2010.12 branch ready for testing
+Subject: http://bugs.openembedded.org/show_bug.cgi?id=5485
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,55 +55,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 02:50:00 -0000
+X-List-Received-Date: Sun, 21 Nov 2010 03:01:54 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 19, 2010 at 9:34 AM, Philip Balister <philip@balister.org> wrote:
-> On 11/19/2010 06:44 AM, Martin Jansa wrote:
-> ....
->
->
->> I think that short-lived branch is better, because every testing branch
->> had few easy-to-fix issues which were fixed almost immediately in .dev
->> after testing branched and it would be hard to choose which branch was
->> best.
->>
->> But tag from any testing branch + first few quick fixes would be almost as
->> good as based on any other testing branch.
->>
->> And I also agree with Phil that this short lived branch should be
->> removed when the tag is created (to show that it's final state without
->> maintainance).
->
-> I also think a *short lived* branch is a good route to try. I've been
-> thinking about how the git history looks of a tag after you delete the
-> branch leading up to it.
->
-> For emphasis, the short lived branch will not be used to maintain the tag.
->
+From:=C2=A0Luke Kenneth Casson Leighton <luke.leighton@gmail.com>
+To:=C2=A0openembedded-devel@lists.openembedded.org
+Date:=C2=A0Sat, 20 Nov 2010 22:09:50 +0000
+Subject:=C2=A0http://bugs.openembedded.org/show_bug.cgi?id=3D5485
+i'm preparing a bb recipe for google v8 (NOT as part of chromium) and
+sadly v8 builds use scons. =C2=A0after a hit-and-miss bit of
+experimentation, cut/pasting do_compile from various places i got a
+compile working, but then when the install failed for exactly the same
+reasons as the compile i figured "fuck it" and looked for ways to copy
+what OECONF_EXTRA does. =C2=A0by modifying scons.bbclass to add optional
+compile and optional install flags, the silly necessity to completely
+replace do_compile and also do_install goes away.
 
-Yes this is exactly a short lived branch. The patches would come via
-master mostly.
+the reason why do_compile had to be replaced is because the SConstruct
+file for v8 does NOT import all environment variables: you have to add
+an option "importenv =3D PATH,CC,CXX" etc. etc. which if you think about
+it is a good way to do compilation as it means you no longer need to
+do that SCONS_ENV_FIX trick, which doesn't work in this case _anyway_
+because the google v8 developers decided in their infinite wisdom to
+create a function def Build() rather than put env =3D
+GetEnvironment(...) as a global variable.
 
-here are steps.
+ahh, the joys of having a build system in python, eh?
 
-1. Tag master with branchpoint
-2. Create branch
-3. Cherry-pick fixes (usually commit to master first) -- (current state)
-4. Tag the branch for release
-5. Collapse branch to master
-6. Delete release branch
-7. Announce the release
-
-Thanks
--Khem
-
-> Philip
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+l.
 
 
