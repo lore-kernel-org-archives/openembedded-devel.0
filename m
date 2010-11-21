@@ -1,43 +1,48 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PKItu-0007bi-35
+	(envelope-from <kergoth@gmail.com>) id 1PKJB1-0006j4-Bc
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 00:00:52 +0100
-Received: by wwb34 with SMTP id 34so134634wwb.24
+	Mon, 22 Nov 2010 00:18:33 +0100
+Received: by wyb34 with SMTP id 34so1940262wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Nov 2010 14:59:38 -0800 (PST)
+	Sun, 21 Nov 2010 15:17:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=ojcmaKWjPTckKKXeYarffBm9y0FfrUu9deVakP5mST8=;
-	b=wDB1/rpMi0+2jccybcnxsNDKgrNZX1M2eHEr/QLMq9hqrYw2X8/ImjiiM8vBCymnwD
-	DjIkH76XVZfVlXNCQEEJS9H0I8daD1JcjqwJHjvK5HBXbjoArzZvPcND3be+ApyapY8f
-	IzXkNHEYBYBZPL+/1RRiuostM6nTVKIWMsM2g=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=thX75UoWoZjYAy883iXNYYMFOuw13okrBiFbmuREV2w=;
+	b=K/B7CuKyXjUvt3twtmMog+AK9XCeVYgeee/8OCuW9trYb0HVoqKVPv2g7p6nPLjmwS
+	J/dzHVchBfCaj8und4xbgpzJJ4hKG1qb24oZzscyF4WKSmAtZMQy8X2EwtmwmS4LQIqb
+	ZKq4LCZvZTXUHhCSXsm3mhVII2Lf0MuP7VLK0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Cep9bHGrwN3L+HYERkwvqLhmGrFA4RHX+DcFLnIRsCk8KG4cgUVTFXwFGpXIZfmEmH
-	lahCZJVoLyZrg79ICJDdRqBqRn/N4xm9rmD0FtFKiEnaWO+jZAmjr2Z9yvUKQdOFSFXr
-	oTnH7SSgMLnAwwQsju7pHwRUKsLeX3iZcEOYk=
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=LNsli/xd9dgTayNPlWz4HScdODww+5qJsbCm90oxm67PVFLCEVlxkhFAT19DZZhNDb
+	VcFV6InTrCIB1Rdro3f8vIJT/WGsM2YbHdHdNOa87j3P/QmIBPM3Z8pEqhSksn6S3vBr
+	akxqcIDqNMRo6PvvXAyahr2Q5qJDA0lGSA3Lc=
+Received: by 10.216.239.199 with SMTP id c49mr4406773wer.12.1290381435174;
+	Sun, 21 Nov 2010 15:17:15 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.227.143.199 with SMTP id w7mr5133250wbu.20.1290380378197; Sun,
-	21 Nov 2010 14:59:38 -0800 (PST)
-Received: by 10.227.32.147 with HTTP; Sun, 21 Nov 2010 14:59:38 -0800 (PST)
-In-Reply-To: <AANLkTi=aMYQXCUQLzTAfAPeNmvV38Emtckaw_EmXzBmL@mail.gmail.com>
-References: <AANLkTi=aMYQXCUQLzTAfAPeNmvV38Emtckaw_EmXzBmL@mail.gmail.com>
-Date: Mon, 22 Nov 2010 09:29:38 +1030
-Message-ID: <AANLkTi=LXoE99ae4VdBt1BgHdsDh8h8nYddOacU3LGpv@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.216.67.67 with HTTP; Sun, 21 Nov 2010 15:16:54 -0800 (PST)
+In-Reply-To: <1290368520-9162-1-git-send-email-eric@eukrea.com>
+References: <AANLkTimB+pvrtjXGMrHds-MDQC5SOMw-kS=L5fG6UAGb@mail.gmail.com>
+	<1290368520-9162-1-git-send-email-eric@eukrea.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sun, 21 Nov 2010 16:16:54 -0700
+X-Google-Sender-Auth: nU4KCxQRnTPtx4pkx0ZKcLxtTqE
+Message-ID: <AANLkTin+EJVmRCh2otCbFPDE895YbNjjp47Kzk7TiZMF@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: any reason to not cache `opkg list`?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] handle PACKAGE_ARCH change in an amend.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,43 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 23:00:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 21 Nov 2010 23:18:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 20 November 2010 09:48, AJ ONeal <coolaj86@gmail.com> wrote:
-> My assumption is that the only time the results of `opkg list`
-> will change is after `opkg update`.
+On Sun, Nov 21, 2010 at 12:42 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+
+> * setting PACKAGE_ARCH =3D "${MACHINE_ARCH}" in an amend.inc actually
+> leads to a package with the correct machine arch but the
+> work/stage/stamp dirs are not correct because MULTIMACH_ARCH is not
+> updated after amend.inc is parsed.
 >
-> Is that correct?
+> * this patch :
+> - factorizes the code which compute MULTIMACH_ARCH in base.bbclass
+> - updates MULTIMACH_ARCH if required by an amend.inc
 >
->
-> If so, why not have `opkg update` generate the output
-> which `opkg list` produces such that `opkg list` is instantaneous?
->
-> AJ ONeal
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 
-On my 300Mhz mipsel:
 
-root@quokka:~# ls -l /var/lib/opkg/
--rw-r--r--    1 root     root      3558222 Nov 21 22:53 base
--rw-r--r--    1 root     root       145482 Nov 21 22:53 no-arch
--rw-r--r--    1 root     root        66288 Nov 21 22:53 quokka
-root@quokka:~# time opkg list > /dev/null
-real    0m 2.78s
-user    0m 2.50s
-sys     0m 0.26s
+Acked-by: Chris Larson <chris_larson@mentor.com>
 
-Ok, so its not the quickest. Opkg has to read in the package info and
-parse it each time.
-
-What is your use case for needing to call 'opkg list' so frequently
-that this becomes painful?
-
--Graham
-
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
