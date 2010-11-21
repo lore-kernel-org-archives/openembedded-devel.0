@@ -1,44 +1,45 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PKDeF-0002sB-IQ
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PKE1z-0002eG-DG
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Nov 2010 18:24:20 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 2111A314ADE9
+	Sun, 21 Nov 2010 18:50:05 +0100
+Received: by iwn38 with SMTP id 38so2242012iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Nov 2010 18:23:11 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id eshG-Ws2d6tM
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Nov 2010 18:23:04 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id A4D0E314ADD6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Nov 2010 18:23:04 +0100 (CET)
-Message-ID: <4CE95578.8000604@opendreambox.org>
-Date: Sun, 21 Nov 2010 18:23:04 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	Sun, 21 Nov 2010 09:47:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=LYpgbIivOoHVavOfGe0kvJsOFd35WtLNiE5r2ryFbeo=;
+	b=MQ77Vo8A1Bj2ug70JLxJcfO0lvMQ/6c0T/SBC+yU3qLkTw3+mUgbjZ6DUi34e/JlTW
+	npey0e6apFjWiwtzNnh5eoz+f25o8bzWt2lFut3sgrvzNedygkMlhUFboBs98frPgwJX
+	GxIhWKj15kbRjXBCiIA7tfLt1WuHbO/4G0+QI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Ph2n10YvWCAd6W9/Tguv9JKOqm946mdbH8iNMUCIJLB1JRgF2XzeYadiCr5xM4j0Jg
+	frqARd4/h99Mds//zgpPlxnNQB0dDWdfcVoHX3yUGsTruY2OdaxrOWzGeAP4KaIi1qsT
+	7G1nu8go58kp8mZj3/fo7xORuFbWqXAn6Sa8k=
 MIME-Version: 1.0
+Received: by 10.231.35.201 with SMTP id q9mr5536243ibd.176.1290361658646; Sun,
+	21 Nov 2010 09:47:38 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Sun, 21 Nov 2010 09:47:38 -0800 (PST)
+In-Reply-To: <4CE926A8.3000402@mentor.com>
+References: <E1PKA9U-00040x-SY@melo.openembedded.org>
+	<4CE926A8.3000402@mentor.com>
+Date: Sun, 21 Nov 2010 18:47:38 +0100
+Message-ID: <AANLkTik+48R--3w7woTqp=vQ324a5BsOFKAvzj8vg6Yi@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CE6FA0C.2090801@balister.org> <4CE9332C.7020701@opendreambox.org>
-	<AANLkTim-vJEbUXtQtm4TQLbKBBrwG2m_tbao0u4kJuWu@mail.gmail.com>
-In-Reply-To: <AANLkTim-vJEbUXtQtm4TQLbKBBrwG2m_tbao0u4kJuWu@mail.gmail.com>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Revert commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8
+Subject: Re: [oe-commits] Frans Meulenbroeks : flex: added perl to dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,65 +53,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 17:24:21 -0000
+X-List-Received-Date: Sun, 21 Nov 2010 17:50:12 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 11/21/2010 05:17 PM, Khem Raj wrote:
-> On Sun, Nov 21, 2010 at 6:56 AM, Andreas Oberritter
-> <obi@opendreambox.org> wrote:
->> On 11/19/2010 11:28 PM, Philip Balister wrote:
->>> I'd like to revert commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8. With
->>> this commit my build that includes angstrom-task-gnome.bb fails in a
->>> peculiar way. Basically, my process table is filled with a task. Looks
->>> like it is trying to run a pkg-config gtk+ operation. This is with
->>> angstrom-2010.x and a custom machine very similar to an overo.
->>>
->>> I realize this is a vague description, but I do not have time to isolate
->>> better at this time.
->>>
->>> Can we go ahead and revert this for now?
+2010/11/21 Tom Rini <tom_rini@mentor.com>:
+> On 11/21/2010 06:40 AM, git version control wrote:
 >>
->> No, please don't.
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: c3b5b68541320ed0104d8654a0793251ed0187b9
+>> URL:
+>> =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=3Dc=
+3b5b68541320ed0104d8654a0793251ed0187b9
 >>
->> I'm 100% sure that this patch is the only sane way of handling
->> pkg-config files. I hope you agree that it wasn't possible for me to
->> test every single package before this got merged.
+>> Author: Frans Meulenbroeks<fransmeulenbroeks@gmail.com>
+>> Date: =A0 Sun Nov 21 10:15:08 2010 +0100
 >>
-> 
-> agreed. but we are soon going to make a release. So it compiled (in
-> whatever way)
-> and now it doesnt (looking from 36000 ft above).
-> So either we fix the known regressions caused or backout because we
-> can not make release in this state for sure.
+>> flex: added perl to dependencies
+>>
+>> Without it (rebuilding from packaged staging) I got:
+>>
+>> |
+>> /home/frans/oe/tmp_minimal/work/i686-linux/flex-native-2.5.35-r5.1/temp/=
+run.do_configure.12240:
+>> /home/frans/oe/tmp_minimal/sysroots/i686-linux/usr/bin/automake:
+>> /home/frans/oe/tmp_minimal/sysroots/i686-linux/usr/bin/perl: bad
+>> interpreter: No such file or directory
+>
+> This starts to open up the very large can of worms of stuff that uses hos=
+t
+> perl (autotools, etc) and then what happens once perl-native has been bui=
+lt
+> and installed. =A0I've mentioned this before in
+> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg=
+08445.html
 
-Soon means in 10 days AFAIK, and you can still revert the patch in the
-release branch if needed. No need to revert it in master just to hide
-already existing bugs.
+After reading the archive and discussing this on irc.
 
->> Still, the solution for problems popping up now is simple: Make sure
->> that required libraries install their pkg-config files themselves.
->> Usually, they would already do it, but their install rules are
->> overridden by custom do_install or do_stage rules in their bitbake recipe.
->>
->> As you already mentioned, the package causing the problem is gtk+
->> (gtk+-1.2_1.2.10.bb).
->>
->> The solution in this case is very likely to
->> - remove do_stage
->> - add ${bindir}/gtk-config to FILES_${PN}-dev
->> - bump PR
->>
-> 
-> super can you cook up a patch.
+I feel DEPENDS should be complete (minus perhaps a few things that are
+always there, e.g. no depends on patch needed).
 
-Sure, but only after I either received positive feedback or the build on
-my newly set up host finished. That's why I wrote:
+I understand the very long pathname problem, but I don't think it is
+good to "solve" that by deferring building of perl-native (or
+restoring it from packaged staging).
+That solution does not work if someone rebuilds a package that suffers
+from the long path problem.
 
->> I'd have already submitted a patch, but testing takes a lot of time,
->> especially when a recipe takes down the build machine.
+Some alternate solutions (most of them coined in the thread mentioned befor=
+e).
+- always use perl from the host; not too desirable as the host version
+may not be what you want.
+- use perl from host for standard things (like configure etc), have a
+package (e.g. perl-cross) for things that really need perl on the host
+for the target (I can imagine libperl* recipes need this)
+- use /usr/bin/env perl instead of the long path
+- relax the line length of the command interpreter so longer paths are
+ok. Guess that would mean having a bash-native or so.
+- create (sym)links and use these. E.g. we could have $TMPDIR/links
+where there is a link for perl to the long path. By adding
+$TMPDIR/links to the front of the path executables in it wll be picked
+up first.
 
-Regards,
-Andreas
+Guess there are plenty other ways to skin this cat.
+My personal preference is using /usr/bin/env perl. This seems the
+cleanest solution.
+
+Best regards, Frans
 
 
