@@ -1,44 +1,40 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cazzeml@gmail.com>) id 1PK8Tj-0004HU-GT
+	(envelope-from <Tom_Rini@mentor.com>) id 1PKAWz-0002xa-Lm
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Nov 2010 12:53:21 +0100
-Received: by eya28 with SMTP id 28so3390691eya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Nov 2010 03:51:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=/fjO3oxLAa/PoNem9m8MP5LyptV2X3/lTctV9ocIuG0=;
-	b=gCWvfkRg9jPZZkCjbfrWmOgKr63t9TVBKD+jIbgPRviQpSUltGFLSF5CK1pZdSzM3k
-	sy+u6FCYAyMAtiLBp9TYf329X37dHvXEG4Zp1Yluz3cfY9gkbdjKl7ltuaz6BtpKS5D+
-	5zNeZiTLBDQn+smr+LXbVRiQ3/ZCoUk4yXTjc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=kIhpfPK6BCYgrW0H+tiZiBVp40IwKLDIhZQXyQTyhIlwtdDNsYKUWEsTDYVRSxklOH
-	sETx0kISxLYN/mZ3EoejXD9fFeXC2q5FcItjZDyLWVLPKS0ODX7vC+LnsA0n9/MSf37i
-	kgpTaXHPJ9IsAALEK9S9B9EmDnSfD1gK6X3MA=
-Received: by 10.213.108.196 with SMTP id g4mr3448545ebp.31.1290340318737;
-	Sun, 21 Nov 2010 03:51:58 -0800 (PST)
-Received: from localhost.localdomain (d54C04D68.access.telenet.be
-	[84.192.77.104])
-	by mx.google.com with ESMTPS id q58sm3506441eeh.9.2010.11.21.03.51.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 21 Nov 2010 03:51:58 -0800 (PST)
-From: Cazze <cazzeml@gmail.com>
+	Sun, 21 Nov 2010 15:04:38 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PKAVq-0003ON-Pu from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 21 Nov 2010 06:03:26 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Sun, 21 Nov 2010 06:03:26 -0800
+Received: from [172.30.80.10] ([172.30.80.10]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 21 Nov 2010 07:03:25 -0700
+Message-ID: <4CE926A8.3000402@mentor.com>
+Date: Sun, 21 Nov 2010 07:03:20 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Nov 2010 12:51:36 +0100
-Message-Id: <1290340296-18252-1-git-send-email-cazzeml@gmail.com>
-X-Mailer: git-send-email 1.7.2.2
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: cazzeml@gmail.com
+References: <E1PKA9U-00040x-SY@melo.openembedded.org>
+In-Reply-To: <E1PKA9U-00040x-SY@melo.openembedded.org>
+X-OriginalArrivalTime: 21 Nov 2010 14:03:25.0872 (UTC)
+	FILETIME=[DDB84300:01CB8984]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Added udev-compat wrapper for h2200 Signed-off-by: Cazze <cazzeml@gmail.com>
+Subject: Re: [oe-commits] Frans Meulenbroeks : flex: added perl to dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,102 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 11:53:22 -0000
+X-List-Received-Date: Sun, 21 Nov 2010 14:04:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
----
- conf/machine/h2200.conf  |    2 ++
- recipes/udev/udev.inc    |    6 +++++-
- recipes/udev/udev_151.bb |    6 +++++-
- recipes/udev/udev_154.bb |    6 +++++-
- 4 files changed, 17 insertions(+), 3 deletions(-)
+On 11/21/2010 06:40 AM, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: c3b5b68541320ed0104d8654a0793251ed0187b9
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=c3b5b68541320ed0104d8654a0793251ed0187b9
+>
+> Author: Frans Meulenbroeks<fransmeulenbroeks@gmail.com>
+> Date:   Sun Nov 21 10:15:08 2010 +0100
+>
+> flex: added perl to dependencies
+>
+> Without it (rebuilding from packaged staging) I got:
+>
+> | /home/frans/oe/tmp_minimal/work/i686-linux/flex-native-2.5.35-r5.1/temp/run.do_configure.12240:
+> /home/frans/oe/tmp_minimal/sysroots/i686-linux/usr/bin/automake:
+> /home/frans/oe/tmp_minimal/sysroots/i686-linux/usr/bin/perl: bad interpreter: No such file or directory
 
-diff --git a/conf/machine/h2200.conf b/conf/machine/h2200.conf
-index abc1772..4bcdf7c 100644
---- a/conf/machine/h2200.conf
-+++ b/conf/machine/h2200.conf
-@@ -25,6 +25,8 @@ PCMCIA_MANAGER = "pcmciautils"
- PREFERRED_PROVIDER_xserver = "xserver-kdrive"
- PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
- 
-+# udev-141 is the latest version that works with linux-2.6.21
-+PREFERRED_PROVIDER_udev-compat_h2200 = "udev-compat141"
- MACHINE_ESSENTIAL_EXTRA_RDEPENDS = " h2200-bootloader "
- MACHINE_EXTRA_RDEPENDS = " udev-hostap-cs-vcc-workaround "
- MACHINE_EXTRA_RRECOMMENDS = "\
-diff --git a/recipes/udev/udev.inc b/recipes/udev/udev.inc
-index 0c8a662..5634635 100644
---- a/recipes/udev/udev.inc
-+++ b/recipes/udev/udev.inc
-@@ -14,7 +14,7 @@ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
-            file://init \
- 	   file://udev-compat-wrapper-patch"
- 
--INC_PR = "r30"
-+INC_PR = "r31"
- 
- inherit update-rc.d autotools pkgconfig
- 
-@@ -60,6 +60,10 @@ RDEPENDS_udev_poodle += "udev-compat"
- do_unpack_append_poodle() {
- 	bb.build.exec_func('do_apply_compat_wrapper', d)
- }
-+RDEPENDS_udev_h2200 += "udev-compat"
-+do_unpack_append_h2200() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
- 
- # Modify init script on platforms that need to boot old kernels:
- do_apply_compat_wrapper() {
-diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
-index ac14b56..7a6c31d 100644
---- a/recipes/udev/udev_151.bb
-+++ b/recipes/udev/udev_151.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
- the hotplug package and requires a kernel not older than 2.6.12."
- LICENSE = "GPLv2+"
- 
--PR = "r21"
-+PR = "r22"
- 
- # Untested
- DEFAULT_PREFERENCE = "-1"
-@@ -99,6 +99,10 @@ RDEPENDS_udev_append_poodle = " udev-compat"
- do_unpack_append_poodle() {
- 	bb.build.exec_func('do_apply_compat_wrapper', d)
- }
-+RDEPENDS_udev_append_h2200 = " udev-compat"
-+do_unpack_append_h2200() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
- 
- # Modify init script on platforms that need to boot old kernels:
- do_apply_compat_wrapper() {
-diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
-index d7740a6..c9348f8 100644
---- a/recipes/udev/udev_154.bb
-+++ b/recipes/udev/udev_154.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
- the hotplug package and requires a kernel not older than 2.6.12."
- LICENSE = "GPLv2+"
- 
--PR = "r6"
-+PR = "r7"
- 
- # Untested
- DEFAULT_PREFERENCE = "-1"
-@@ -93,6 +93,10 @@ RDEPENDS_udev_append_poodle = " udev-compat"
- do_unpack_append_poodle() {
- 	bb.build.exec_func('do_apply_compat_wrapper', d)
- }
-+RDEPENDS_udev_append_h2200 = " udev-compat"
-+do_unpack_append_h2200() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
- 
- # Modify init script on platforms that need to boot old kernels:
- do_apply_compat_wrapper() {
+This starts to open up the very large can of worms of stuff that uses 
+host perl (autotools, etc) and then what happens once perl-native has 
+been built and installed.  I've mentioned this before in
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg08445.html
+
 -- 
-1.5.6.4
-
+Tom Rini
+Mentor Graphics Corporation
 
 
