@@ -1,32 +1,43 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1PKENj-0005xn-On
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PKEx1-0008JU-54
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Nov 2010 19:11:23 +0100
-Received: (qmail 2231 invoked by uid 1003); 21 Nov 2010 18:10:07 -0000
-Received: from adsl-75-37-22-143.dsl.pltn13.sbcglobal.net (HELO
-	?192.168.1.148?) (philip@opensdr.com@75.37.22.143)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	21 Nov 2010 18:10:07 -0000
-Message-ID: <4CE9607C.1050506@balister.org>
-Date: Sun, 21 Nov 2010 10:10:04 -0800
-From: Philip Balister <philip@balister.org>
+	Sun, 21 Nov 2010 19:47:47 +0100
+Received: (qmail 10293 invoked by uid 503); 21 Nov 2010 19:09:53 -0000
+Received: from 63.mail-out.ovh.net (91.121.185.56)
+	by 68.mail-out.ovh.net with SMTP; 21 Nov 2010 19:09:53 -0000
+Received: (qmail 19588 invoked by uid 503); 21 Nov 2010 19:18:30 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 21 Nov 2010 19:18:30 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 21 Nov 2010 20:46:38 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 21 Nov 2010 20:46:37 +0200
+Message-ID: <4CE9690D.2030307@eukrea.com>
+Date: Sun, 21 Nov 2010 19:46:37 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101027 Fedora/3.1.6-1.fc13 Thunderbird/3.1.6
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CE739F6.5020303@balister.org>
-	<AANLkTinq6+aKi37C5RvuaK6Ae7BT_vUZx6J39NHKz8t2@mail.gmail.com>
-In-Reply-To: <AANLkTinq6+aKi37C5RvuaK6Ae7BT_vUZx6J39NHKz8t2@mail.gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.166
-X-SA-Exim-Mail-From: philip@balister.org
+References: <4CE56C6B.1050009@eukrea.com>	<1290352792-2563-1-git-send-email-eric@eukrea.com>
+	<AANLkTimB+pvrtjXGMrHds-MDQC5SOMw-kS=L5fG6UAGb@mail.gmail.com>
+In-Reply-To: <AANLkTimB+pvrtjXGMrHds-MDQC5SOMw-kS=L5fG6UAGb@mail.gmail.com>
+X-Ovh-Tracer-Id: 7569706548923247945
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Ovh-Tracer-Id: 7962645616841960777
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Commit for the release
+Subject: Re: [PATCH] handle PACKAGE_ARCH change in an amend.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 18:11:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 21 Nov 2010 18:47:48 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 11/20/2010 11:53 PM, Khem Raj wrote:
-> On Fri, Nov 19, 2010 at 7:01 PM, Philip Balister<philip@balister.org>  wrote:
->> Khem, I'd like this commit to go into the release branch. Any objections?
->>
->> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=c59afd9fd456766c473c4fb7f7cc4db3e8623c39
+On 21/11/2010 18:53, Chris Larson wrote:
+> 2010/11/21 Eric Bénard<eric@eukrea.com>
+>
+>> +    #
+>> +    # We always try to scan SRC_URI for urls with machine overrides
+>> +    # unless the package sets SRC_URI_OVERRIDES_PACKAGE_ARCH=0
+>> +    #
+>> +    override = bb.data.getVar('SRC_URI_OVERRIDES_PACKAGE_ARCH', d, 1)
+>> +    if override != '0' and is_machine_specific(d):
+>> +        bb.data.setVar('PACKAGE_ARCH', "${MACHINE_ARCH}", d)
+>> +        bb.data.setVar('MULTIMACH_ARCH', mach_arch, d)
+>> +        return
+>> +
+>> +    multiarch = pkg_arch
+>> +
+>> +    packages = bb.data.getVar('PACKAGES', d, 1).split()
+>> +    for pkg in packages:
+>> +        pkgarch = bb.data.getVar("PACKAGE_ARCH_%s" % pkg, d, 1)
+>> +
+>> +        # We could look for != PACKAGE_ARCH here but how to choose
+>> +        # if multiple differences are present?
+>> +        # Look through PACKAGE_ARCHS for the priority order?
+>> +        if pkgarch and pkgarch == mach_arch:
+>> +            multiarch = mach_arch
+>> +            break
+>> +
 >>
 >
-> Looks good to me. Do you want me to cherry pick it ?
+> This is wrong.  You do the loop here, set multiarch = mach_arch, and then
+> never do anything with multiarch.  If this function is really supposed to be
+> setting MULTIMACH_ARCH, then you need to do so here as well.
+>   bb.data.setVar("MULTIMACH_ARCH", multiarch, d)
 
-Yes. Along with 8d91e8a1b6876c6b07cabbd94439eb9bdc295d87 (Thanks Eric).
+you're right, I forget the last line when moving the block to set_multimach_arch .
 
-Khem, have you thought about reviewing dev and merging from it, as long 
-as there are no major changes? I'm concerned we may miss some commits 
-that need to go in the release TAG.
-
-Philip
-
->
->> Philip
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Eric
 
 
