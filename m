@@ -1,34 +1,46 @@
-Received: from mail-vw0-f50.google.com ([209.85.212.50])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1PJy4g-0006Zr-LI
+	(envelope-from <raj.khem@gmail.com>) id 1PK007-0006jg-LM
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Nov 2010 01:46:35 +0100
-Received: by vws1 with SMTP id 1so2970780vws.9
+	Sun, 21 Nov 2010 03:50:00 +0100
+Received: by gxk2 with SMTP id 2so3656990gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Nov 2010 16:45:24 -0800 (PST)
+	Sat, 20 Nov 2010 18:48:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=qSacLWcCsT7HfZ7AeE4lyeW70CVM08QAAEXZkL6kSjY=;
+	b=H7vAS07rESX2766bJhoGYY30ruTYKBWoqpm2qzYxpWdU0PgvQbnm0vQf5YcgJbxjYL
+	pc0jz/ymN9A+gIYSGH693fUubwJBHT0k2QiK5SNCJtM/c+an7Bz8VqTbzXpWmuLy2jCA
+	6BGs2+XPz/vFY7wun/a3lEYgXkJeEBuzW/Guc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=POs2XxxIobI8NMkHXFz8yetSyJuKTBGmv69qthhop7M+x/CZm0f7uHypoOxFPNjau/
+	YU0kLSIHq92FKL3zL+pcJAeB0vIUq5vMbCX83GmObVbbvt7XMoreEd/lMJol7L/SRdft
+	EUhtM8xNbP7sJCKXh/a/gD9sxlu23sWuOoRnc=
+Received: by 10.91.42.30 with SMTP id u30mr3576994agj.102.1290307728437; Sat,
+	20 Nov 2010 18:48:48 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.220.202.135 with SMTP id fe7mr1054364vcb.69.1290300323376;
-	Sat, 20 Nov 2010 16:45:23 -0800 (PST)
-Sender: jay@jay-tech.ru
-Received: by 10.220.95.74 with HTTP; Sat, 20 Nov 2010 16:45:23 -0800 (PST)
-X-Originating-IP: [95.29.187.131]
-In-Reply-To: <4CE86872.6010905@balister.org>
-References: <4CE6FA0C.2090801@balister.org>
-	<4CE86872.6010905@balister.org>
-Date: Sun, 21 Nov 2010 03:45:23 +0300
-X-Google-Sender-Auth: PMEVzpNcSCWGBzGU_Nx-LLqT2cQ
-Message-ID: <AANLkTi=SJ1J=oZnaWUgZzd_yOJ7+xzFbCix55ivrQHBv@mail.gmail.com>
-From: Yury Bushmelev <jay4mail@gmail.com>
+Received: by 10.90.120.8 with HTTP; Sat, 20 Nov 2010 18:48:28 -0800 (PST)
+In-Reply-To: <4CE6B538.6050801@balister.org>
+References: <AANLkTinVj9oh0p9xp9ZUtBijB63Fy7O8LcXc5-tUF9v6@mail.gmail.com>
+	<ic5jrc$ksc$1@dough.gmane.org> <4CE67FA1.6020901@mentor.com>
+	<ic60r2$hrs$1@dough.gmane.org> <20101119144425.GC3411@jama>
+	<4CE6B538.6050801@balister.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 20 Nov 2010 18:48:28 -0800
+Message-ID: <AANLkTinunsDQVc6JpctLdDHXZwQReMPY6wr7ZqLNv2=N@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.50
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Revert commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8
+Subject: Re: release-2010.12 branch ready for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +54,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 00:46:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 21 Nov 2010 02:50:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-2010/11/21 Philip Balister <philip@balister.org>:
-> On 11/19/2010 02:28 PM, Philip Balister wrote:
->>
->> I'd like to revert commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8. With
->> this commit my build that includes angstrom-task-gnome.bb fails in a
->> peculiar way. Basically, my process table is filled with a task. Looks
->> like it is trying to run a pkg-config gtk+ operation. This is with
->> angstrom-2010.x and a custom machine very similar to an overo.
->>
->> I realize this is a vague description, but I do not have time to isolate
->> better at this time.
->>
->> Can we go ahead and revert this for now?
+On Fri, Nov 19, 2010 at 9:34 AM, Philip Balister <philip@balister.org> wrote:
+> On 11/19/2010 06:44 AM, Martin Jansa wrote:
+> ....
 >
-> This has been tracked to the xmms package. Anyone have any ideas how we can
-> fix the problem?
+>
+>> I think that short-lived branch is better, because every testing branch
+>> had few easy-to-fix issues which were fixed almost immediately in .dev
+>> after testing branched and it would be hard to choose which branch was
+>> best.
+>>
+>> But tag from any testing branch + first few quick fixes would be almost as
+>> good as based on any other testing branch.
+>>
+>> And I also agree with Phil that this short lived branch should be
+>> removed when the tag is created (to show that it's final state without
+>> maintainance).
+>
+> I also think a *short lived* branch is a good route to try. I've been
+> thinking about how the git history looks of a tag after you delete the
+> branch leading up to it.
+>
+> For emphasis, the short lived branch will not be used to maintain the tag.
+>
 
-I've affected by this problem with angstrom-2008.1 first time when
-tried to build angstrom-gnome-image, second time when tried to build
-just xmms.
+Yes this is exactly a short lived branch. The patches would come via
+master mostly.
 
--- 
-Yury Bushmelev
+here are steps.
+
+1. Tag master with branchpoint
+2. Create branch
+3. Cherry-pick fixes (usually commit to master first) -- (current state)
+4. Tag the branch for release
+5. Collapse branch to master
+6. Delete release branch
+7. Announce the release
+
+Thanks
+-Khem
+
+> Philip
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
