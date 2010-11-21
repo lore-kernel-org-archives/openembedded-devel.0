@@ -1,33 +1,43 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1PKGEs-0005zy-3a
+	(envelope-from <graham.gower@gmail.com>) id 1PKItu-0007bi-35
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Nov 2010 21:10:18 +0100
-Received: by qwf7 with SMTP id 7so83407qwf.6
+	Mon, 22 Nov 2010 00:00:52 +0100
+Received: by wwb34 with SMTP id 34so134634wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Nov 2010 12:09:06 -0800 (PST)
+	Sun, 21 Nov 2010 14:59:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=ojcmaKWjPTckKKXeYarffBm9y0FfrUu9deVakP5mST8=;
+	b=wDB1/rpMi0+2jccybcnxsNDKgrNZX1M2eHEr/QLMq9hqrYw2X8/ImjiiM8vBCymnwD
+	DjIkH76XVZfVlXNCQEEJS9H0I8daD1JcjqwJHjvK5HBXbjoArzZvPcND3be+ApyapY8f
+	IzXkNHEYBYBZPL+/1RRiuostM6nTVKIWMsM2g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Cep9bHGrwN3L+HYERkwvqLhmGrFA4RHX+DcFLnIRsCk8KG4cgUVTFXwFGpXIZfmEmH
+	lahCZJVoLyZrg79ICJDdRqBqRn/N4xm9rmD0FtFKiEnaWO+jZAmjr2Z9yvUKQdOFSFXr
+	oTnH7SSgMLnAwwQsju7pHwRUKsLeX3iZcEOYk=
 MIME-Version: 1.0
-Received: by 10.224.19.207 with SMTP id c15mr3517349qab.14.1290370146329; Sun,
-	21 Nov 2010 12:09:06 -0800 (PST)
-Sender: jay@jay-tech.ru
-Received: by 10.220.95.74 with HTTP; Sun, 21 Nov 2010 12:09:06 -0800 (PST)
-X-Originating-IP: [95.29.187.131]
-In-Reply-To: <4CE9332C.7020701@opendreambox.org>
-References: <4CE6FA0C.2090801@balister.org> <4CE9332C.7020701@opendreambox.org>
-Date: Sun, 21 Nov 2010 23:09:06 +0300
-X-Google-Sender-Auth: RIInPIMCThK5e8CbTeY3OHwt6gI
-Message-ID: <AANLkTi=q_cw274ureZth5YpqPHi6p_c=zrPgrP2yfnJh@mail.gmail.com>
-From: Yury Bushmelev <jay4mail@gmail.com>
+Received: by 10.227.143.199 with SMTP id w7mr5133250wbu.20.1290380378197; Sun,
+	21 Nov 2010 14:59:38 -0800 (PST)
+Received: by 10.227.32.147 with HTTP; Sun, 21 Nov 2010 14:59:38 -0800 (PST)
+In-Reply-To: <AANLkTi=aMYQXCUQLzTAfAPeNmvV38Emtckaw_EmXzBmL@mail.gmail.com>
+References: <AANLkTi=aMYQXCUQLzTAfAPeNmvV38Emtckaw_EmXzBmL@mail.gmail.com>
+Date: Mon, 22 Nov 2010 09:29:38 +1030
+Message-ID: <AANLkTi=LXoE99ae4VdBt1BgHdsDh8h8nYddOacU3LGpv@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Revert commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8
+Subject: Re: any reason to not cache `opkg list`?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,19 +51,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 20:10:18 -0000
+X-List-Received-Date: Sun, 21 Nov 2010 23:00:52 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/11/21 Andreas Oberritter <obi@opendreambox.org>:
+On 20 November 2010 09:48, AJ ONeal <coolaj86@gmail.com> wrote:
+> My assumption is that the only time the results of `opkg list`
+> will change is after `opkg update`.
+>
+> Is that correct?
+>
+>
+> If so, why not have `opkg update` generate the output
+> which `opkg list` produces such that `opkg list` is instantaneous?
+>
+> AJ ONeal
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-> Maybe it would be wise for bitbake or OE to set ulimit -u to a sane
-> value. Is there a way for a process to count the number of its direct
-> and indirect child processes?
+On my 300Mhz mipsel:
 
-Hm.. I'll count # of processes used while building OE with next testbuilder run.
-Just for our info and for my fun :)
+root@quokka:~# ls -l /var/lib/opkg/
+-rw-r--r--    1 root     root      3558222 Nov 21 22:53 base
+-rw-r--r--    1 root     root       145482 Nov 21 22:53 no-arch
+-rw-r--r--    1 root     root        66288 Nov 21 22:53 quokka
+root@quokka:~# time opkg list > /dev/null
+real    0m 2.78s
+user    0m 2.50s
+sys     0m 0.26s
 
--- 
-Yury Bushmelev
+Ok, so its not the quickest. Opkg has to read in the package info and
+parse it each time.
+
+What is your use case for needing to call 'opkg list' so frequently
+that this becomes painful?
+
+-Graham
 
 
