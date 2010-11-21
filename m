@@ -1,34 +1,34 @@
 Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PK4cE-0002Nt-BS
+	(envelope-from <raj.khem@gmail.com>) id 1PK4eJ-0002U6-3T
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Nov 2010 08:45:39 +0100
-Received: by gwaa11 with SMTP id a11so3706883gwa.6
+	Sun, 21 Nov 2010 08:47:47 +0100
+Received: by gwaa11 with SMTP id a11so3707236gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Nov 2010 23:44:27 -0800 (PST)
+	Sat, 20 Nov 2010 23:46:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=q2UG2is2deMIHnDCzM8BVo38ysP5mL1ES5E1hI1ZNqY=;
-	b=tnW1CuyATBmDCOoFIWC54KA9lzuA+ilyPuTW/a+ZmhCtTYbPxvsvasK9+q8olMcbo5
-	JIRaNLBgZcuZVvqQKSkcDIQtrYB5eA4dh0ZCVmf0c5du73PR3lHMM7Fn9wvVXRWHPNxJ
-	3tAicgXaalyV76hunwpmHTzVRApJ+Vid3C2EM=
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=fl4Jp7fRv6Kqi47LHPwpWi9esiNr4e0EDogoQbgwCGw=;
+	b=DqlxDEFC4dOT4F7OXLdzMJSaBQhSWaLnyeGMi+bbJoEmswEkZv6SAjKj/IGiCNwX8u
+	tYM6nLXUT/dF5vrx9NbGGN7TDAYMmhVznYECiALJ61IDSCUpFsXgWjS7hc6m6O4g5VZc
+	ack2XkmUzC2WzS7AbHCifOxY8B8F33uRxDiVU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=bE2g6gK1Df6y0uknvUdoguWWrumyVPxwZbsjK3yNCcbyJfDa7tIoaVcRfr06Q+6V8q
-	Krf/24wXIZx2P13gJJz+fDb/c4MsaOiD6gFXr6RaejWLb0O4C7THe+m0Lp6XgifBPtTG
-	pbW6o/1esoJnGCgmqW4kRmuYTGCIvzIUxwOck=
-Received: by 10.91.51.19 with SMTP id d19mr5273993agk.183.1290325465644; Sat,
-	20 Nov 2010 23:44:25 -0800 (PST)
+	:content-type:content-transfer-encoding;
+	b=yBSuPMiCv2XRjS1SnYzdrxnIY+8M7oNT0F1zLPMwgqObfGF5pVr5VIVbNa/esCzCu3
+	cMR4xP23cO3l/+HAoIi4K/3578/W7Kxd29kth7WPshpeT0wB7//B7o6Ij1ocKxa3/PSJ
+	V+HLNBrAePzz/7BzEDyXRCv+9Y1BovnlXoqLg=
+Received: by 10.91.10.21 with SMTP id n21mr3807997agi.75.1290325595553; Sat,
+	20 Nov 2010 23:46:35 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Sat, 20 Nov 2010 23:44:04 -0800 (PST)
-In-Reply-To: <AANLkTin9XtX07=hVvdyV19uU4PnJPm+7Aqx2qaw=41Vw@mail.gmail.com>
-References: <AANLkTinsyLsC1DqEbaOQscF-GZJFiLBsL8uFouyPEzg2@mail.gmail.com>
-	<AANLkTin9XtX07=hVvdyV19uU4PnJPm+7Aqx2qaw=41Vw@mail.gmail.com>
+Received: by 10.90.120.8 with HTTP; Sat, 20 Nov 2010 23:46:15 -0800 (PST)
+In-Reply-To: <1290288073-7632-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1290288073-7632-1-git-send-email-fransmeulenbroeks@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 20 Nov 2010 23:44:04 -0800
-Message-ID: <AANLkTinBZfAU-EKbUBq1E9rtuPMF_i6Q39UeGhoXpiLH@mail.gmail.com>
+Date: Sat, 20 Nov 2010 23:46:15 -0800
+Message-ID: <AANLkTims+n4ixJEoJZObTUaxFy_Hq4bm2PpnOZ7PnHZv@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: handhelds.org
+Subject: Re: [PATCH] php: fixed path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,195 +52,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Nov 2010 07:45:39 -0000
+X-List-Received-Date: Sun, 21 Nov 2010 07:47:48 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 20, 2010 at 4:42 PM, Yury Bushmelev <jay4mail@gmail.com> wrote:
-> 2010/11/20 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
->> HI,
->>
->> Today Jay mentioned on irc that handhelds.org is down permanently.
+On Sat, Nov 20, 2010 at 1:21 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> with the arrival of a new release the old php tarball moved to the
+> museum site, Fixed SRC_URI and moved it from the inc file to the bb file
+> so when adding the latest version there is no SRC_URI clash in the .inc
+> file.
 >
-> Sorry, but that was only my assumption :)
+> Also introduced INC_PR
 >
->> We have at least 36 recipes that fetch from it.
->> What are we doing with these?
->>
->> One of the recipes that became unbuildable is update-rc.d which is in
->> the dependency list of a lot of recipes ....
->
-> I hope someone will upload that files on one of our mirrors.
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
 
-they are now on sources.openembedded.org
-
+> ---
+> =C2=A0recipes/php/php-native_5.3.2.bb | =C2=A0 =C2=A07 +++++--
+> =C2=A0recipes/php/php.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=
+=A0 =C2=A04 +---
+> =C2=A0recipes/php/php_5.2.13.bb =C2=A0 =C2=A0 =C2=A0 | =C2=A0 12 ++++++++=
+----
+> =C2=A03 files changed, 14 insertions(+), 9 deletions(-)
 >
-> I have following files published on http://jay-home.ath.cx/handhelds.org/
-> --
-> apps.update-rc.d_anoncvs.handhelds.org_r0_7_.tar.gz
-> apps.update-rc.d_anoncvs.handhelds.org_r0_7_.tar.gz.md5
-> ipkg-utils_anoncvs.handhelds.org__20050930.tar.gz
-> ipkg-utils_anoncvs.handhelds.org__20050930.tar.gz.md5
-> opie.apps_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.apps_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.aboutapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.aboutapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.batteryapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.batteryapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.clockapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.clockapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.homeapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.homeapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.irdaapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.irdaapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.logoutapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.logoutapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.multikeyapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.multikeyapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.rotateapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.rotateapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.screenshotapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.screenshotapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.suspendapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.suspendapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.volumeapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.volumeapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.applets.vtapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.applets.vtapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.apps.calibrate_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.apps.calibrate_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.apps.qcop_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.apps.qcop_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.apps.qss_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.apps.qss_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.apps.textedit_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.apps.textedit_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.launcher_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.launcher_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.obex_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.obex_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.opiealarm_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.opiealarm_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.addressbook_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.addressbook_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.datebook.holiday.birthday_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.datebook.holiday.birthday_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.datebook_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.datebook_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.notes_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.notes_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.osearch_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.osearch_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.today.plugins.addressbook_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.today.plugins.addressbook_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.today.plugins.datebook_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.today.plugins.datebook_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.today.plugins.todolist_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.today.plugins.todolist_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.today_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.today_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.pim.todo_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.pim.todo_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.settings.button_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.settings.button_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.settings.citytime_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.settings.citytime_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.settings.launcher_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.settings.launcher_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.settings.light-and-power_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.settings.light-and-power_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.settings.security_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.settings.security_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.core.tools.quicklauncher_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.core.tools.quicklauncher_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.etc.qimpen_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.etc.qimpen_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.etc_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.etc_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.freetype_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.freetype_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.inputmethods.handwriting_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.inputmethods.handwriting_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.inputmethods.multikey_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.inputmethods.multikey_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.inputmethods.pickboard_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.inputmethods.pickboard_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.libopie2_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.libopie2_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.libqtaux_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.libqtaux_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.library_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.library_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.applets.autorotateapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.applets.autorotateapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.applets.brightnessapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.applets.brightnessapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.applets.cardapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.applets.cardapplet_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.apps.advancedfm_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.apps.advancedfm_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.apps.opie-console_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.apps.opie-console_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.decorations.flat_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.decorations.flat_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.decorations.liquid_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.decorations.liquid_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.decorations.polished_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.decorations.polished_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.graphics.drawpad_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.graphics.drawpad_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.net.opietooth.lib_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.net.opietooth.lib_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.securityplugins.pin_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.securityplugins.pin_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.appearance2_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.appearance2_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.backup_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.backup_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.doctab_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.doctab_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.language_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.language_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.mediummount_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.mediummount_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.netsystemtime_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.netsystemtime_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.networksettings_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.networksettings_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.packagemanager_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.packagemanager_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.settings.sysinfo_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.settings.sysinfo_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.styles.flat_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.styles.flat_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.styles.fresh_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.styles.fresh_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.styles.liquid_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.styles.liquid_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.styles.metal_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.styles.metal_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.styles.phase_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.styles.phase_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.styles.web_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.styles.web_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.noncore.tools.clock_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.noncore.tools.clock_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.pics-hires_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.pics-hires_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.pics_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.pics_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.root_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.root_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.rsync_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.rsync_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.share_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.share_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
-> opie.sounds_anoncvs.handhelds.org_v1_2_4_.tar.gz
-> opie.sounds_anoncvs.handhelds.org_v1_2_4_.tar.gz.md5
+> diff --git a/recipes/php/php-native_5.3.2.bb b/recipes/php/php-native_5.3=
+.2.bb
+> index d5ed932..3a2299c 100644
+> --- a/recipes/php/php-native_5.3.2.bb
+> +++ b/recipes/php/php-native_5.3.2.bb
+> @@ -1,8 +1,11 @@
+> =C2=A0require php-native.inc
 >
+> -PR =3D "r1"
+> +PR =3D "${INC_PR}.1"
+>
+> -SRC_URI +=3D "file://CVE-2010-0397.patch"
+> +SRC_URI =3D =C2=A0 =C2=A0 "http://museum.php.net/php5/php-${PV}.tar.bz2;=
+name=3Dsrc \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://acinclude-xml2-=
+config.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://php-m4-divert.p=
+atch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://CVE-2010-0397.pa=
+tch"
+>
+> =C2=A0SRC_URI[src.md5sum] =3D "46f500816125202c48a458d0133254a4"
+> =C2=A0SRC_URI[src.sha256sum] =3D "9a380a574adcb3a9abe3226e7c3a9bae619e8a1=
+b90842ec2a7edf0ad92afdeda"
+> diff --git a/recipes/php/php.inc b/recipes/php/php.inc
+> index bfee93c..a48827a 100644
+> --- a/recipes/php/php.inc
+> +++ b/recipes/php/php.inc
+> @@ -3,9 +3,7 @@ HOMEPAGE =3D "http://www.php.net"
+> =C2=A0SECTION =3D "console/network"
+> =C2=A0LICENSE =3D "PHP"
+>
+> -SRC_URI =3D =C2=A0 =C2=A0 "http://us2.php.net/distributions/php-${PV}.ta=
+r.bz2;name=3Dsrc \
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://acinclude-xml2-=
+config.patch \
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://php-m4-divert.p=
+atch"
+> +INC_PR =3D "r7"
+>
+> =C2=A0S =3D "${WORKDIR}/php-${PV}"
+>
+> diff --git a/recipes/php/php_5.2.13.bb b/recipes/php/php_5.2.13.bb
+> index 0f9317d..5871dca 100644
+> --- a/recipes/php/php_5.2.13.bb
+> +++ b/recipes/php/php_5.2.13.bb
+> @@ -3,12 +3,16 @@ require php.inc
+> =C2=A0DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lemon-native =
+mysql5 \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0libc-client openssl"
+>
+> -PR =3D "r7"
+> -
+> -SRC_URI +=3D "file://pear-makefile.patch \
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://imap-fix-autofoo.patch =
+\
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://CVE-2010-0397.patch \
+> +PR =3D "${INC_PR}.1"
+> +
+> +SRC_URI =3D =C2=A0 =C2=A0 "http://museum.php.net/php5/php-${PV}.tar.bz2;=
+name=3Dsrc \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://acinclude-xml2-=
+config.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://php-m4-divert.p=
+atch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://pear-makefile.pa=
+tch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://imap-fix-autofoo=
+.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://CVE-2010-0397.pa=
+tch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 "
+> +
+> =C2=A0SRC_URI[src.md5sum] =3D "eb4d0766dc4fb9667f05a68b6041e7d1"
+> =C2=A0SRC_URI[src.sha256sum] =3D "2b50a2535e3bb9a98cd4d1633f9452d877276c4=
+0b385915261f040d535c7eadb"
 >
 > --
-> Yury Bushmelev
+> 1.6.4.2
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
