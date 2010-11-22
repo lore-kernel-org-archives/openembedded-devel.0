@@ -1,49 +1,40 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PKb2g-0003Ou-9p
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PKbM3-0003m4-9Q
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 19:23:06 +0100
-Received: by iwn7 with SMTP id 7so83432iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 10:21:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=givCSZxLIg456CdojZs9m2l3QTnLmDn9HehcXxZiARk=;
-	b=LvF56bNNVwl1a0JsKtHsu6HI54Q9wlpOmdhHC8/QlejWGmZVab6dd4BuHb9+RJi4vo
-	Va817BXTlVcuZ1J7stMBKILzWyl/GtnL8np9qj/76GJ/ieVfzhKu1pcnlxkCxF8nsTuS
-	o5drrWT9HV447YPuj3WP+MI9r+vSvIq8Kuosw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=pLRQP7BO6LlWvjyg1C55HL2A8ii5Zn3V6LSfSR5+QYAYFIlZ0paGIOlLUs6Ehu4MkI
-	belWoeq0zXm/ar0tNuKSVmTpDIHzOlXqPK1HZdtiL3eLEIseMmLhYCeb3S2c1lqjCx23
-	ci31MHtefD8fiblVV1owtqfif+jhbCSUhDBVQ=
+	Mon, 22 Nov 2010 19:43:07 +0100
+Received: (qmail 17052 invoked by uid 503); 22 Nov 2010 19:05:20 -0000
+Received: from 63.mail-out.ovh.net (91.121.185.56)
+	by 68.mail-out.ovh.net with SMTP; 22 Nov 2010 19:05:20 -0000
+Received: (qmail 12522 invoked by uid 503); 22 Nov 2010 19:13:54 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 22 Nov 2010 19:13:54 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 22 Nov 2010 20:41:54 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 22 Nov 2010 20:41:53 +0200
+Message-ID: <4CEAB970.1070007@eukrea.com>
+Date: Mon, 22 Nov 2010 19:41:52 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.231.39.137 with SMTP id g9mr7083792ibe.101.1290450114429; Mon,
-	22 Nov 2010 10:21:54 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Mon, 22 Nov 2010 10:21:54 -0800 (PST)
-In-Reply-To: <4CEAA907.4080808@eukrea.com>
-References: <4CE64779.3020802@sensortherm.de>
-	<AANLkTinAj4fG48Ppz_jwT1nmp+tzntZ9YJPaqat4HbES@mail.gmail.com>
-	<4CE7D1F2.7010305@sensortherm.de>
-	<AANLkTi=VB3EJo1DU2pGWgCSqFrZX81t1Es4xTHP3eCWU@mail.gmail.com>
-	<4CEA2BFF.5090707@sensortherm.de>
-	<AANLkTimabe75SmdGTA5EemH83-4Yd7KjNwdx8D3dCNR6@mail.gmail.com>
-	<4CEA88D0.7070100@sensortherm.de>
-	<AANLkTinRPF12o0qhpPq=qohG9E6tXRYTd58uB0itKEQ1@mail.gmail.com>
-	<4CEAA907.4080808@eukrea.com>
-Date: Mon, 22 Nov 2010 19:21:54 +0100
-Message-ID: <AANLkTik7cBF59uNh=RCPNkN09jGEC8QFYTXB43DPFxEm@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4CE64779.3020802@sensortherm.de>	<AANLkTinAj4fG48Ppz_jwT1nmp+tzntZ9YJPaqat4HbES@mail.gmail.com>	<4CE7D1F2.7010305@sensortherm.de>	<AANLkTi=VB3EJo1DU2pGWgCSqFrZX81t1Es4xTHP3eCWU@mail.gmail.com>	<4CEA2BFF.5090707@sensortherm.de>	<AANLkTimabe75SmdGTA5EemH83-4Yd7KjNwdx8D3dCNR6@mail.gmail.com>	<4CEA88D0.7070100@sensortherm.de>	<AANLkTinRPF12o0qhpPq=qohG9E6tXRYTd58uB0itKEQ1@mail.gmail.com>	<4CEAA907.4080808@eukrea.com>
+	<AANLkTik7cBF59uNh=RCPNkN09jGEC8QFYTXB43DPFxEm@mail.gmail.com>
+In-Reply-To: <AANLkTik7cBF59uNh=RCPNkN09jGEC8QFYTXB43DPFxEm@mail.gmail.com>
+X-Ovh-Tracer-Id: 13362461571332353353
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Ovh-Tracer-Id: 13758496862734036297
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: buildserver
@@ -60,33 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 18:23:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 22 Nov 2010 18:43:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/11/22 Eric B=E9nard <eric@eukrea.com>:
-> On 22/11/2010 18:25, Frans Meulenbroeks wrote:
->>
->> Note that some of the errors Klaus reported are due to the outage of
->> www.handhelds.org.
->>
-> as a workaround, here adding this to the local.conf works :
+On 22/11/2010 19:21, Frans Meulenbroeks wrote:
+> After discussing things with Philip (the maintainer of update-rc.d) I
+> already pushed the change to have the update-rc.d file local (with his
+> ack).
+fine, this is a better fix.
+
+> We can try with other recipes.
 >
-> INHERIT +=3D "own-mirrors"
-> SOURCE_MIRROR_URL =3D "http://sources.openembedded.org/"
+> One other question: can I have two mirrors? I already have our local
+> mirror in my list.
 >
-> Can peoples having problem with update-rc.d try this and report here if t=
-hat
-> solves their problem ?
+this should be possible by adding your own my-mirrors.bbclass in your overlay 
+and filling :
+PREMIRRORS_append () { or MIRRORS_append () {
+as in several classes/*mirrors*
 
-After discussing things with Philip (the maintainer of update-rc.d) I
-already pushed the change to have the update-rc.d file local (with his
-ack).
-We can try with other recipes.
-
-One other question: can I have two mirrors? I already have our local
-mirror in my list.
-
-Frans.
+Eric
 
 
