@@ -1,32 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PKU0V-0000Gx-EB for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 11:52:26 +0100
-Received: from f053040216.adsl.alicedsl.de ([78.53.40.216]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PKTzN-0001Ga-5M for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 10:51:13 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <anilm@mistralsolutions.com>) id 1PKUUd-0003YR-Gk
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Nov 2010 12:23:33 +0100
+Received: by iwn4 with SMTP id 4so29182iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Nov 2010 03:22:21 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.231.10.134 with SMTP id p6mr6764033ibp.50.1290424941215; Mon,
+	22 Nov 2010 03:22:21 -0800 (PST)
+Received: by 10.231.199.201 with HTTP; Mon, 22 Nov 2010 03:22:21 -0800 (PST)
+In-Reply-To: <AANLkTimR1ZUrvsJHkwo9v536eCvkbFk4vCt1sJHZAKZy@mail.gmail.com>
+References: <AANLkTimHzbQ-OzrP_7bk2ZbwL2QPftnkBA6UMjBzJxtd@mail.gmail.com>
+	<AANLkTimR1ZUrvsJHkwo9v536eCvkbFk4vCt1sJHZAKZy@mail.gmail.com>
+Date: Mon, 22 Nov 2010 16:52:21 +0530
+Message-ID: <AANLkTikpcAqrvC942sozd1E-RtHV430f=UVPNRnSLcC1@mail.gmail.com>
+From: Anil Kumar Mamidala <anilm@mistralsolutions.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20101119210801.GE8017@gmail.com>
-References: <1290185336.3681.13.camel@mattotaupa>
-	<20101119210801.GE8017@gmail.com>
-Date: Mon, 22 Nov 2010 11:51:11 +0100
-Message-ID: <1290423071.3703.9.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: anilm@mistralsolutions.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gsl.inc: Remove `do_stage`.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Nagendra T S <nagendra@mistralsolutions.com>,
+	Srinath R <srinath@mistralsolutions.com>,
+	Umesh Krishnan <umeshk@mistralsolutions.com>, jdk@ti.com
+Subject: am3517/05 : Add am3517-crane machine type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,321 +43,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 10:52:26 -0000
-X-Groupsio-MsgNum: 26409
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-0qfRyEZHOpS1tYPMEOu/"
+X-List-Received-Date: Mon, 22 Nov 2010 11:23:33 -0000
+X-Groupsio-MsgNum: 26410
+Content-Type: multipart/mixed; boundary=0022152d7fed3b06020495a278b6
 
---=-0qfRyEZHOpS1tYPMEOu/
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--0022152d7fed3b06020495a278b6
+Content-Type: text/plain; charset=ISO-8859-1
 
-Am Freitag, den 19.11.2010, 13:08 -0800 schrieb Khem Raj:
-> On (19/11/10 17:48), Paul Menzel wrote:
-> > Date: Fri, 19 Nov 2010 17:33:00 +0100
-> >=20
-> > Inkscape fails to build after commit c2c8fe [1] with the following erro=
-r.
-> >=20
-> >     | checking for CAIRO_USER_FONTS... yes
-> >     | checking for INKSCAPE... configure: error: Package requirements (=
-gdkmm-2.4  glibmm-2.4 giomm-2.4 gtkmm-2.4 >=3D 2.10.0  gtk+-2.0  libxml-2.0=
- >=3D 2.6.11  libxslt >=3D 1.0.15  cairo  sigc++-2.0 >=3D 2.0.12    gthread=
--2.0 >=3D 2.0 libpng >=3D 1.2 gsl) were not met:
-> >     |
-> >     | No package 'gsl' found
-> >     |
-> >     | Consider adjusting the PKG_CONFIG_PATH environment variable if yo=
-u
-> >     | installed software in a non-standard prefix.
-> >     |
-> >     | Alternatively, you may set the environment variables INKSCAPE_CFL=
-AGS
-> >     | and INKSCAPE_LIBS to avoid the need to call pkg-config.
-> >     | See the pkg-config man page for more details.
-> >     |
-> >     | ERROR: Function do_configure failed
-> >     NOTE: package inkscape-0.48.0-r0: task do_configure: Failed
-> >     ERROR: TaskFailed event exception, aborting
-> >     ERROR: Build of /home/paul/oe/openembedded/recipes/inkscape/inkscap=
-e_0.48.0.bb do_configure failed
-> >=20
-> > Removing `do_stage` fixes building `inkscape_0.48.0.bb` with `angstrom-=
-2008.1`, `angstrom-2010.x` and `minimal` for `MACHINE =3D "beagleboard"`.
-> >=20
-> > [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc2c=
-8fe4c5629add94bd0b922f5b3446624a9f4d8
-> >=20
-> > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> > ---
-> > Please note, that I did not test the removal of this function any furth=
-er, that means I did not compare the package contents before and after, and=
- do not know about the implications. If someone more knowledgeable could ch=
-eck that, it would be very much appreciated.
->=20
-> if you checked what it installed into temp staging install then it should
-> be ok.
+Hi All,
 
-This is the output of `diff -ur` between both directories. (I left out
-the `temp` directory with the log files.) This was build using
-`angstrom-2010.x` for `MACHINE =3D "beagleboard"`.
+Adding support for AM3517/05-Craneboard machine type to openembedded.
 
-        Only in angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.12-r0=
-//gsl-1.12: .install
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/.libs/libgsl.a and /tmp/gsl-1.12-r1//gsl-1.12/.libs/libgsl.=
-a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/blas/.libs/libgslblas.a and /tmp/gsl-1.12-r1//gsl-1.12/blas=
-/.libs/libgslblas.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/block/.libs/libgslblock.a and /tmp/gsl-1.12-r1//gsl-1.12/bl=
-ock/.libs/libgslblock.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/bspline/.libs/libgslbspline.a and /tmp/gsl-1.12-r1//gsl-1.1=
-2/bspline/.libs/libgslbspline.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/cblas/.libs/libgslcblas.a and /tmp/gsl-1.12-r1//gsl-1.12/cb=
-las/.libs/libgslcblas.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/cdf/.libs/libgslcdf.a and /tmp/gsl-1.12-r1//gsl-1.12/cdf/.l=
-ibs/libgslcdf.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/cheb/.libs/libgslcheb.a and /tmp/gsl-1.12-r1//gsl-1.12/cheb=
-/.libs/libgslcheb.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/combination/.libs/libgslcombination.a and /tmp/gsl-1.12-r1/=
-/gsl-1.12/combination/.libs/libgslcombination.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/complex/.libs/libgslcomplex.a and /tmp/gsl-1.12-r1//gsl-1.1=
-2/complex/.libs/libgslcomplex.a differ
-        diff -ru angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.12-r=
-0//gsl-1.12/config.log /tmp/gsl-1.12-r1//gsl-1.12/config.log
-        --- angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.12-r0//gs=
-l-1.12/config.log	2010-11-22 11:27:21.270496425 +0100
-        +++ /tmp/gsl-1.12-r1//gsl-1.12/config.log	2010-11-22 10:19:04.31763=
-6601 +0100
-        @@ -1098,7 +1098,7 @@
-         configure:11408: result: yes
-         configure:11414: checking for _doprnt
-         configure:11414: arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -=
-mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-=
-thumb -o conftest -isystem/oe/build-angstrom-next/angstrom-dev/sysroots/arm=
-v7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-fra=
-me-pointer -frename-registers -O2 -ggdb2 -isystem/oe/build-angstrom-next/an=
-gstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -Wl,-O1 -Wl,-=
--hash-style=3Dgnu conftest.c  >&5
-        -/tmp/ccY718Kl.o: In function `main':
-        +/tmp/ccgGFYmB.o: In function `main':
-         /oe/build-angstrom-next/angstrom-dev/work/armv7a-angstrom-linux-gn=
-ueabi/gsl-1.12-r0/gsl-1.12/conftest.c:60: undefined reference to `_doprnt'
-         collect2: ld returned 1 exit status
-         configure:11414: $? =3D 1
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/deriv/.libs/libgslderiv.a and /tmp/gsl-1.12-r1//gsl-1.12/de=
-riv/.libs/libgslderiv.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/dht/.libs/libgsldht.a and /tmp/gsl-1.12-r1//gsl-1.12/dht/.l=
-ibs/libgsldht.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/diff/.libs/libgsldiff.a and /tmp/gsl-1.12-r1//gsl-1.12/diff=
-/.libs/libgsldiff.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/eigen/.libs/libgsleigen.a and /tmp/gsl-1.12-r1//gsl-1.12/ei=
-gen/.libs/libgsleigen.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/err/.libs/libgslerr.a and /tmp/gsl-1.12-r1//gsl-1.12/err/.l=
-ibs/libgslerr.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/fft/.libs/libgslfft.a and /tmp/gsl-1.12-r1//gsl-1.12/fft/.l=
-ibs/libgslfft.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/fit/.libs/libgslfit.a and /tmp/gsl-1.12-r1//gsl-1.12/fit/.l=
-ibs/libgslfit.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/histogram/.libs/libgslhistogram.a and /tmp/gsl-1.12-r1//gsl=
--1.12/histogram/.libs/libgslhistogram.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/ieee-utils/.libs/libgslieeeutils.a and /tmp/gsl-1.12-r1//gs=
-l-1.12/ieee-utils/.libs/libgslieeeutils.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/integration/.libs/libgslintegration.a and /tmp/gsl-1.12-r1/=
-/gsl-1.12/integration/.libs/libgslintegration.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/interpolation/.libs/libgslinterpolation.a and /tmp/gsl-1.12=
--r1//gsl-1.12/interpolation/.libs/libgslinterpolation.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/linalg/.libs/libgsllinalg.a and /tmp/gsl-1.12-r1//gsl-1.12/=
-linalg/.libs/libgsllinalg.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/matrix/.libs/libgslmatrix.a and /tmp/gsl-1.12-r1//gsl-1.12/=
-matrix/.libs/libgslmatrix.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/min/.libs/libgslmin.a and /tmp/gsl-1.12-r1//gsl-1.12/min/.l=
-ibs/libgslmin.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/monte/.libs/libgslmonte.a and /tmp/gsl-1.12-r1//gsl-1.12/mo=
-nte/.libs/libgslmonte.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/multifit/.libs/libgslmultifit.a and /tmp/gsl-1.12-r1//gsl-1=
-.12/multifit/.libs/libgslmultifit.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/multimin/.libs/libgslmultimin.a and /tmp/gsl-1.12-r1//gsl-1=
-.12/multimin/.libs/libgslmultimin.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/multiroots/.libs/libgslmultiroots.a and /tmp/gsl-1.12-r1//g=
-sl-1.12/multiroots/.libs/libgslmultiroots.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/ntuple/.libs/libgslntuple.a and /tmp/gsl-1.12-r1//gsl-1.12/=
-ntuple/.libs/libgslntuple.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/ode-initval/.libs/libgslodeiv.a and /tmp/gsl-1.12-r1//gsl-1=
-.12/ode-initval/.libs/libgslodeiv.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/permutation/.libs/libgslpermutation.a and /tmp/gsl-1.12-r1/=
-/gsl-1.12/permutation/.libs/libgslpermutation.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/poly/.libs/libgslpoly.a and /tmp/gsl-1.12-r1//gsl-1.12/poly=
-/.libs/libgslpoly.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/qrng/.libs/libgslqrng.a and /tmp/gsl-1.12-r1//gsl-1.12/qrng=
-/.libs/libgslqrng.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/randist/.libs/libgslrandist.a and /tmp/gsl-1.12-r1//gsl-1.1=
-2/randist/.libs/libgslrandist.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/rng/.libs/libgslrng.a and /tmp/gsl-1.12-r1//gsl-1.12/rng/.l=
-ibs/libgslrng.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/roots/.libs/libgslroots.a and /tmp/gsl-1.12-r1//gsl-1.12/ro=
-ots/.libs/libgslroots.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/siman/.libs/libgslsiman.a and /tmp/gsl-1.12-r1//gsl-1.12/si=
-man/.libs/libgslsiman.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/sort/.libs/libgslsort.a and /tmp/gsl-1.12-r1//gsl-1.12/sort=
-/.libs/libgslsort.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/specfunc/.libs/libgslspecfunc.a and /tmp/gsl-1.12-r1//gsl-1=
-.12/specfunc/.libs/libgslspecfunc.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/statistics/.libs/libgslstatistics.a and /tmp/gsl-1.12-r1//g=
-sl-1.12/statistics/.libs/libgslstatistics.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/sum/.libs/libgslsum.a and /tmp/gsl-1.12-r1//gsl-1.12/sum/.l=
-ibs/libgslsum.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/sys/.libs/libgslsys.a and /tmp/gsl-1.12-r1//gsl-1.12/sys/.l=
-ibs/libgslsys.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/test/.libs/libgsltest.a and /tmp/gsl-1.12-r1//gsl-1.12/test=
-/.libs/libgsltest.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/utils/.libs/libutils.a and /tmp/gsl-1.12-r1//gsl-1.12/utils=
-/.libs/libutils.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/vector/.libs/libgslvector.a and /tmp/gsl-1.12-r1//gsl-1.12/=
-vector/.libs/libgslvector.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//gsl-1.12/wavelet/.libs/libgslwavelet.a and /tmp/gsl-1.12-r1//gsl-1.1=
-2/wavelet/.libs/libgslwavelet.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//image/usr/lib/libgsl.a and /tmp/gsl-1.12-r1//image/usr/lib/libgsl.a =
-differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//image/usr/lib/libgslcblas.a and /tmp/gsl-1.12-r1//image/usr/lib/libg=
-slcblas.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//package/usr/lib/libgsl.a and /tmp/gsl-1.12-r1//package/usr/lib/libgs=
-l.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//package/usr/lib/libgslcblas.a and /tmp/gsl-1.12-r1//package/usr/lib/=
-libgslcblas.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//packages-split/gsl-static/usr/lib/libgsl.a and /tmp/gsl-1.12-r1//pac=
-kages-split/gsl-static/usr/lib/libgsl.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//packages-split/gsl-static/usr/lib/libgslcblas.a and /tmp/gsl-1.12-r1=
-//packages-split/gsl-static/usr/lib/libgslcblas.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//staging-pkg/deploy/eglibc/ipk/armv7a/gsl-dbg_1.12-r0.9_armv7a.ipk an=
-d /tmp/gsl-1.12-r1//staging-pkg/deploy/eglibc/ipk/armv7a/gsl-dbg_1.12-r0.9_=
-armv7a.ipk differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//staging-pkg/deploy/eglibc/ipk/armv7a/gsl-dev_1.12-r0.9_armv7a.ipk an=
-d /tmp/gsl-1.12-r1//staging-pkg/deploy/eglibc/ipk/armv7a/gsl-dev_1.12-r0.9_=
-armv7a.ipk differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//staging-pkg/deploy/eglibc/ipk/armv7a/gsl-doc_1.12-r0.9_armv7a.ipk an=
-d /tmp/gsl-1.12-r1//staging-pkg/deploy/eglibc/ipk/armv7a/gsl-doc_1.12-r0.9_=
-armv7a.ipk differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//staging-pkg/deploy/eglibc/ipk/armv7a/gsl-static_1.12-r0.9_armv7a.ipk=
- and /tmp/gsl-1.12-r1//staging-pkg/deploy/eglibc/ipk/armv7a/gsl-static_1.12=
--r0.9_armv7a.ipk differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//staging-pkg/deploy/eglibc/ipk/armv7a/gsl_1.12-r0.9_armv7a.ipk and /t=
-mp/gsl-1.12-r1//staging-pkg/deploy/eglibc/ipk/armv7a/gsl_1.12-r0.9_armv7a.i=
-pk differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//staging-pkg/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libgsl.a =
-and /tmp/gsl-1.12-r1//staging-pkg/sysroots/armv7a-angstrom-linux-gnueabi/us=
-r/lib/libgsl.a differ
-        Binary files angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gsl-1.=
-12-r0//staging-pkg/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libgslcbl=
-as.a and /tmp/gsl-1.12-r1//staging-pkg/sysroots/armv7a-angstrom-linux-gnuea=
-bi/usr/lib/libgslcblas.a differ
+Craneboard is a hardware development platform based on the Sitara AM3517 ARM
+Cortex - A8 microprocessor device. This is a low cost reference design.
 
-Andreas approved this patch already but I am posting this here for
-completeness.
+Please find the attached patches for am3517-crane board machine type and
+modified sort.sh file to support am3517-crane board.
 
+--0022152d7fed3b06020495a278b6
+Content-Type: text/x-patch; charset=US-ASCII; 
+	name="0001-Adding-new-am3517-crane-machine-type.patch"
+Content-Disposition: attachment; 
+	filename="0001-Adding-new-am3517-crane-machine-type.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_ggt7ougq0
 
-Thanks,
+RnJvbSAwZTEwYTBkMDg5ZTMzNTA4ZDI0MjNhOTVjNGUwZmUxYmMxOWVmZjZiIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmlsIEt1bWFyIDxhbmlsbUBtaXN0cmFsc29sdXRpb25zLmNv
+bT4KRGF0ZTogVGh1LCAxOCBOb3YgMjAxMCAyMToyMzoyMyArMDUzMApTdWJqZWN0OiBbUEFUQ0hd
+IEFkZGluZyBuZXcgYW0zNTE3LWNyYW5lIG1hY2hpbmUgdHlwZQoKU2lnbmVkLW9mZi1ieTogQW5p
+bCBLdW1hciA8YW5pbG1AbWlzdHJhbHNvbHV0aW9ucy5jb20+Ci0tLQogY29uZi9tYWNoaW5lL2Ft
+MzUxNy1jcmFuZS5jb25mIHwgICA1MiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrCiAxIGZpbGVzIGNoYW5nZWQsIDUyIGluc2VydGlvbnMoKyksIDAgZGVsZXRpb25zKC0p
+CiBjcmVhdGUgbW9kZSAxMDA2NDQgY29uZi9tYWNoaW5lL2FtMzUxNy1jcmFuZS5jb25mCgpkaWZm
+IC0tZ2l0IGEvY29uZi9tYWNoaW5lL2FtMzUxNy1jcmFuZS5jb25mIGIvY29uZi9tYWNoaW5lL2Ft
+MzUxNy1jcmFuZS5jb25mCm5ldyBmaWxlIG1vZGUgMTAwNjQ0CmluZGV4IDAwMDAwMDAuLmRhZDQ2
+MjUKLS0tIC9kZXYvbnVsbAorKysgYi9jb25mL21hY2hpbmUvYW0zNTE3LWNyYW5lLmNvbmYKQEAg
+LTAsMCArMSw1MiBAQAorI0BUWVBFOiBNYWNoaW5lCisjQE5BTUU6IGNyYW5lYm9hcmQgbWFjaGlu
+ZQorI0BERVNDUklQVElPTjogTWFjaGluZSBjb25maWd1cmF0aW9uIGZvciB0aGUgQU0zNTE3IENy
+YW5lIGJvYXJkCitUQVJHRVRfQVJDSCA9ICJhcm0iCitQUkVGRVJSRURfUFJPVklERVJfdmlydHVh
+bC94c2VydmVyID0gInhzZXJ2ZXIteG9yZyIKK1hTRVJWRVIgPSAieHNlcnZlci14b3JnIFwKKyAg
+ICAgICAgICAgeGY4Ni1pbnB1dC1ldmRldiBcCisgICAgICAgICAgIHhmODYtaW5wdXQtbW91c2Ug
+XAorICAgICAgICAgICB4Zjg2LXZpZGVvLW9tYXBmYiBcCisgICAgICAgICAgIHhmODYtaW5wdXQt
+a2V5Ym9hcmQiCisKKyMgT25seSBoYXMgRFZJIGNvbm5lY3RvciBmb3IgZXh0ZXJuYWwgc2NyZWVu
+CitHVUlfTUFDSElORV9DTEFTUyA9ICJiaWdzY3JlZW4iCisKK3JlcXVpcmUgY29uZi9tYWNoaW5l
+L2luY2x1ZGUvb21hcDMuaW5jCisKKyMgU2hpcCBhbGwga2VybmVsIG1vZHVsZXMKKworSU1BR0Vf
+RlNUWVBFUyA/PSAiamZmczIgdGFyLmJ6MiIKK0VYVFJBX0lNQUdFQ01EX2pmZnMyID0gIi1sbnAg
+LWUgMHgyMDAwMCAtcyAyMDQ4IgorRVhUUkFfSU1BR0VERVBFTkRTICs9ICIgdS1ib290IHgtbG9h
+ZCIKKworU0VSSUFMX0NPTlNPTEUgPSAiMTE1MjAwIHR0eVMyIgorVVNFX1ZUID0gIjIiCisKK1BS
+RUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2tlcm5lbCA9ICJsaW51eC1vbWFwLXBzcCIKKworUFJF
+RkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvYm9vdGxvYWRlciA9ICJ1LWJvb3QiCisKK1VCT09UX0FS
+Q0ggPSAiYXJtIgorVUJPT1RfTUFDSElORSA9ICJhbTM1MTdfY3JhbmVfY29uZmlnIgorWExPQURf
+TUFDSElORSA9ICJhbTM1MTdjcmFuZV9jb25maWciCisKK01BQ0hJTkVfRkVBVFVSRVMgPSAia2Vy
+bmVsMjYgYXBtIHVzYmdhZGdldCB1c2Job3N0IHZmYXQgZXh0MiBzY3JlZW4gZXRoZXJuZXQiCisK
+KyMgTk9URTogdGhlcmUgYXJlIE5BTkQgYW5kIE9uZU5BTkQgdmVyc2lvbnMgb2YgdGhpcyBib2Fy
+ZC4uLgorCisjIGRvIHViaWF0dGFjaCAvZGV2L3ViaV9jdHJsIC1tIDQKKyMgRnJvbSBkbWVzZzoK
+KyMgVUJJOiBzbWFsbGVzdCBmbGFzaCBJL08gdW5pdDogICAgMjA0OAorIyBVQkk6IGxvZ2ljYWwg
+ZXJhc2VibG9jayBzaXplOiAgICAxMjkwMjQgYnl0ZXMKKyMgZnJvbSB1YmlhdHRhY2ggc3Rkb3V0
+OgorIyBVQkkgZGV2aWNlIG51bWJlciAwLCB0b3RhbCAxOTk2IExFQnMKK01LVUJJRlNfQVJHUyA9
+ICItbSAyMDQ4IC1lIDEyOTAyNCAtYyAxOTk2IgorCisjIGRvIHViaWF0dGFjaCAvZGV2L3ViaV9j
+dHJsIC1tIDQKKyMgZnJvbSBkbWVzZzoKKyMgVUJJOiBzbWFsbGVzdCBmbGFzaCBJL08gdW5pdDog
+ICAgMjA0OAorIyBVQkk6IHBoeXNpY2FsIGVyYXNlYmxvY2sgc2l6ZTogICAxMzEwNzIgYnl0ZXMg
+KDEyOCBLaUIpCisjIFVCSTogc3ViLXBhZ2Ugc2l6ZTogICAgICAgICAgICAgIDUxMgorVUJJTkla
+RV9BUkdTID0gIi1tIDIwNDggLXAgMTI4S2lCIC1zIDUxMiIKKwotLSAKMS43LjAuNAoK
 
-Paul
+--0022152d7fed3b06020495a278b6
+Content-Type: text/x-patch; charset=US-ASCII; 
+	name="0001-Added-support-for-am3517-crane-in-sort.sh-file.patch"
+Content-Disposition: attachment; 
+	filename="0001-Added-support-for-am3517-crane-in-sort.sh-file.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_ggt8j13t1
 
+RnJvbSA2OWY2YWZjY2ZmNTMzNjYwNDdjNzdmNTIwODZjY2E2OGU4OWNmMDkyIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmlsIEt1bWFyIDxhbmlsbUBtaXN0cmFsc29sdXRpb25zLmNv
+bT4KRGF0ZTogRnJpLCAxOSBOb3YgMjAxMCAyMDo1NDoyOCArMDUzMApTdWJqZWN0OiBbUEFUQ0hd
+IEFkZGVkIHN1cHBvcnQgZm9yIGFtMzUxNy1jcmFuZSBpbiBzb3J0LnNoIGZpbGUKClNpZ25lZC1v
+ZmYtYnk6IEFuaWwgS3VtYXIgPGFuaWxtQG1pc3RyYWxzb2x1dGlvbnMuY29tPgotLS0KIGNvbnRy
+aWIvYW5nc3Ryb20vc29ydC5zaCB8ICAgIDYgKysrKystCiAxIGZpbGVzIGNoYW5nZWQsIDUgaW5z
+ZXJ0aW9ucygrKSwgMSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9jb250cmliL2FuZ3N0cm9t
+L3NvcnQuc2ggYi9jb250cmliL2FuZ3N0cm9tL3NvcnQuc2gKaW5kZXggM2U1OTQ2Ni4uYzg4Y2Iz
+ZCAxMDA3NTUKLS0tIGEvY29udHJpYi9hbmdzdHJvbS9zb3J0LnNoCisrKyBiL2NvbnRyaWIvYW5n
+c3Ryb20vc29ydC5zaApAQCAtNzksNyArNzksMTEgQEAgY2FzZSAiJGFyY2giIGluCiAJImFybXY2
+LW5vdmZwIikKIAkJCW1hY2hpbmVzPSJodGNibGFja3N0b25lIGh0Y2RpYW1vbmQgaHRjZHJlYW0g
+aHRja2Fpc2VyIGh0Y25pa2UgaHRjcG9sYXJpcyBodGNyYXBoYWVsIGh0Y3RpdGFuIGh0Y3ZvZ3Vl
+IiA7OwogCSJhcm12N2EiKQotCQkJbWFjaGluZXM9ImFtMzUxNy1ldm0gYXJjaG9zNSBhcmNob3M1
+aXQgYmVhZ2xlYm9hcmQgYnVnMjAgY20tdDM1IGRtMzd4LWV2bSBhbTM3eC1ldm0gYW0zODl4LWV2
+bSBiYWJiYWdlIGM2YTgxNngtZXZtIGVmaWthbXggaHRjbGVvIGlnZXAwMDIwIG5va2lhOTAwIG9t
+YXAzNTE3LWV2bSBvbWFwM2V2bSBvbWFwMy1wYW5kb3JhIG9tYXAzLXRvdWNoYm9vayBvbWFwNDQz
+MC1zZHAgb21hcHpvb20gb21hcHpvb20yIG9tYXB6b29tMzZ4IG92ZXJvIHBhbG1wcmUgb21hcDQ0
+MzAtcGFuZGEiIDs7CisJCQltYWNoaW5lcz0iYW0zNTE3LWNyYW5lIGFtMzUxNy1ldm0gYXJjaG9z
+NSBhcmNob3M1aXQKKyBiZWFnbGVib2FyZCBidWcyMCBjbS10MzUgZG0zN3gtZXZtIGFtMzd4LWV2
+bSBhbTM4OXgtZXZtIGJhYmJhZ2UgYzZhODE2eC1ldm0KKyBlZmlrYW14IGh0Y2xlbyBpZ2VwMDAy
+MCBub2tpYTkwMCBvbWFwMzUxNy1ldm0gb21hcDNldm0gb21hcDMtcGFuZG9yYQorIG9tYXAzLXRv
+dWNoYm9vayBvbWFwNDQzMC1zZHAgb21hcHpvb20gb21hcHpvb20yIG9tYXB6b29tMzZ4IG92ZXJv
+IHBhbG1wcmUKKyBvbWFwNDQzMC1wYW5kYSIgOzsKIAkiYXZyMzIiKQogCQkJbWFjaGluZXM9ImF0
+MzJzdGsxMDAwIGF0bmd3MTAwIiA7OwogCSJiZmluIikKLS0gCjEuNy4wLjQKCg==
 
-> > ---
-> >  recipes/gsl/gsl.inc |   11 +----------
-> >  1 files changed, 1 insertions(+), 10 deletions(-)
-> >=20
-> > diff --git a/recipes/gsl/gsl.inc b/recipes/gsl/gsl.inc
-> > index bc4865c..10bacc5 100644
-> > --- a/recipes/gsl/gsl.inc
-> > +++ b/recipes/gsl/gsl.inc
-> > @@ -3,17 +3,8 @@ HOMEPAGE =3D "http://www.gnu.org/software/gsl/"
-> >  SECTION =3D "libs"
-> >  PRIORITY =3D "optional"
-> >  LICENSE =3D "GPL"
-> > -PR =3D "r0"
-> > +PR =3D "r1"
-> > =20
-> >  inherit autotools pkgconfig binconfig
-> > =20
-> >  LEAD_SONAME =3D "libgsl.so"
-> > -
-> > -do_stage() {
-> > -	oe_runmake DESTDIR=3D${S}/.install install
-> > -	oe_libinstall -so -C cblas/.libs/ libgslcblas ${STAGING_LIBDIR}
-> > -	oe_libinstall -so -C .libs/ libgsl ${STAGING_LIBDIR}
-> > -
-> > -	install -d ${STAGING_INCDIR}/gsl
-> > -	install -m 0644 .install${includedir}/gsl/* ${STAGING_INCDIR}/gsl
-> > -}
-> > --=20
-> > 1.7.2.3
-
---=-0qfRyEZHOpS1tYPMEOu/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzqSxMACgkQPX1aK2wOHVitHQCePkOEsL7rPTiIbsn+0ZHhOKU7
-+XUAn1ka2sE14y3fOIRFSVhHiWQ50/47
-=MFMw
------END PGP SIGNATURE-----
-
---=-0qfRyEZHOpS1tYPMEOu/--
+--0022152d7fed3b06020495a278b6--
