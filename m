@@ -1,43 +1,48 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PKK4H-0006KL-Aw
+	(envelope-from <graham.gower@gmail.com>) id 1PKKHt-0001nw-US
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 01:15:39 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 2BAC6314AEA0
+	Mon, 22 Nov 2010 01:29:42 +0100
+Received: by wyb34 with SMTP id 34so1978876wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 01:14:27 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 0XewOHEOpMae
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 01:14:21 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 03E37314502D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 01:14:21 +0100 (CET)
-Message-ID: <4CE9B5DC.2080006@opendreambox.org>
-Date: Mon, 22 Nov 2010 01:14:20 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	Sun, 21 Nov 2010 16:28:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=Sl9RkiNX86vDPbf6HlIVPik/I6f02zb97arWxaoKGXI=;
+	b=A/WwW+gglQasLnC7T6QtavcSpGgj0ZuTVOhIwZhnxaNMuB+xQUyN0w2bPwwapvs9IR
+	RsfYzBS6+x6BsKIY1ebpdb/CLYaosjbInL+iPuWS4qU1BklI3YwQkgEAf7za3N6C+cnQ
+	tUkCRBppRTbCEUGvw5P7l74lWDP/P4p8ki1z0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=CZq3fDXiwRIVZXm5fTm+cudMrRroPttxtC8D/rNX93If9CraP/0nogFMZhBaCQY4Db
+	+acscu84s5wfLqixeSP1Qy4fJI2MJXnjKqnPNJeVTW9hAuBfTJgIAG51rAf/sgw03Oq2
+	FEfZsM393qFzoiKo4k2j/A+VjZVpSe+pUs98o=
 MIME-Version: 1.0
+Received: by 10.227.132.206 with SMTP id c14mr5188704wbt.78.1290385710405;
+	Sun, 21 Nov 2010 16:28:30 -0800 (PST)
+Received: by 10.227.32.147 with HTTP; Sun, 21 Nov 2010 16:28:30 -0800 (PST)
+In-Reply-To: <AANLkTi=Z8jNP+cQUqNppkju7Fe0K6rEB8nn_GYzuRh6A@mail.gmail.com>
+References: <AANLkTinXYcNN=iozP-aXPDuFzQqM13KDf5my1W6DTap6@mail.gmail.com>
+	<4CC500A2.7020702@gmail.com>
+	<AANLkTikzjkHxbXd3iCBny0yoNPBVTH4_LyhuYfSpg-SV@mail.gmail.com>
+	<AANLkTimXqxS4rCPXuxx=_MhdKfG1yTA8gbnowUEYB0vn@mail.gmail.com>
+	<AANLkTimHfcqX1ZkbD+c2gx5ujupyw-hA2mpUf=LJvjcY@mail.gmail.com>
+	<AANLkTi=Z8jNP+cQUqNppkju7Fe0K6rEB8nn_GYzuRh6A@mail.gmail.com>
+Date: Mon, 22 Nov 2010 10:58:30 +1030
+Message-ID: <AANLkTi=pUsWJCyV8ARjfkvKzHK-gGz+e4Ea8VdOcm3JU@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1290185336.3681.13.camel@mattotaupa>
-In-Reply-To: <1290185336.3681.13.camel@mattotaupa>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gsl.inc: Remove `do_stage`.
+Subject: Re: Race issues (lzma-native)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,41 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 00:15:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Nov 2010 00:29:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 11/19/2010 05:48 PM, Paul Menzel wrote:
-> Date: Fri, 19 Nov 2010 17:33:00 +0100
-> 
-> Inkscape fails to build after commit c2c8fe [1] with the following error.
-> 
->     | checking for CAIRO_USER_FONTS... yes
->     | checking for INKSCAPE... configure: error: Package requirements (gdkmm-2.4  glibmm-2.4 giomm-2.4 gtkmm-2.4 >= 2.10.0  gtk+-2.0  libxml-2.0 >= 2.6.11  libxslt >= 1.0.15  cairo  sigc++-2.0 >= 2.0.12    gthread-2.0 >= 2.0 libpng >= 1.2 gsl) were not met:
->     |
->     | No package 'gsl' found
->     |
->     | Consider adjusting the PKG_CONFIG_PATH environment variable if you
->     | installed software in a non-standard prefix.
->     |
->     | Alternatively, you may set the environment variables INKSCAPE_CFLAGS
->     | and INKSCAPE_LIBS to avoid the need to call pkg-config.
->     | See the pkg-config man page for more details.
->     |
->     | ERROR: Function do_configure failed
->     NOTE: package inkscape-0.48.0-r0: task do_configure: Failed
->     ERROR: TaskFailed event exception, aborting
->     ERROR: Build of /home/paul/oe/openembedded/recipes/inkscape/inkscape_0.48.0.bb do_configure failed
-> 
-> Removing `do_stage` fixes building `inkscape_0.48.0.bb` with `angstrom-2008.1`, `angstrom-2010.x` and `minimal` for `MACHINE = "beagleboard"`.
-> 
-> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=c2c8fe4c5629add94bd0b922f5b3446624a9f4d8
-> 
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
-> Please note, that I did not test the removal of this function any further, that means I did not compare the package contents before and after, and do not know about the implications. If someone more knowledgeable could check that, it would be very much appreciated.
-> ---
+On 22 November 2010 10:42, Andrea Adami <andrea.adami@gmail.com> wrote:
+> I though tthe issue had disappeared (in the meanwhile I remove an
+> obsolete dependency on zlib)
+> but yesterday again...
+>
+> run.SRC_DISTRIBUTECOMMAND was malformed, broken at line 122 (export
+> docdir="/oe/bu ).
+>
+> On second build the size is much bigger (1102 lines).
+>
+> Retrying..
+> Andrea
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Acked-by: Andreas Oberritter <obi@opendreambox.org>
+With pstaging disabled, do_fetch is called twice. The second do_fetch
+races with do_unpack. Presumably we see a problem in lzma-native
+because it does oe.process.run() in do_unpack_append. I can't see
+exactly *what* is racing though.
+
+I previously spoke to Kergoth about it on IRC and he suggested making
+bb.build.exec_func("do_fetch", d) conditional on whether the do_fetch
+stamp file exists... I've not gotten around to doing that (bad me).
+Want to try it?
+
+-Graham
 
 
