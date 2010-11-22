@@ -1,45 +1,42 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PKeHD-0005Yp-GM
+	(envelope-from <dp@xora.org.uk>) id 1PKeS8-0006DH-GJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 22:50:23 +0100
-Received: by iwn7 with SMTP id 7so271185iwn.6
+	Mon, 22 Nov 2010 23:01:38 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 989CBA5480
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 13:49:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=E9W5A1QBKW5NtXyOvNnud3Oc5F8LN4KFkZp17cboC9o=;
-	b=l8ECj50fQkENlJl1d8gnrkGktLnFubkf7zRXp68jwblKzRbjm6HwtSbVTG6G+hNNpK
-	XUEakUoY8bYiFRC38Xbm3Fir4wF00uZ1bP2FzUsrTlKFzstBjrbTySVF2YUcgNoSEiuG
-	9N9Rd8uYLFbIwsbElKQLZYDvROQ+rSdMuBB4s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=sBhqjSxfDTFaPacOvarY3hsNqX3oVHJP84t/xhW/y8PSQ+I9R5UTsUa4AWl5mDnv2U
-	qDUZdkPqEIQBY7yoGohDRVqpR8ZW9S6BSlaiGdvorM3Ajp4eSEb+VmhGhnM9a4nT6O4I
-	ADw7xxlAw29OkDX1LJDiP443/skhwoanTTjc8=
+	Mon, 22 Nov 2010 22:00:25 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id njahtHTbB6o6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Nov 2010 22:00:22 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 2505FA4033
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Nov 2010 22:00:22 +0000 (GMT)
+Message-ID: <4CEAE7F6.1010302@xora.org.uk>
+Date: Mon, 22 Nov 2010 22:00:22 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.231.35.194 with SMTP id q2mr7374558ibd.26.1290462548360; Mon,
-	22 Nov 2010 13:49:08 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Mon, 22 Nov 2010 13:49:08 -0800 (PST)
-In-Reply-To: <20101119205302.GA8017@gmail.com>
-References: <1290161253-19634-1-git-send-email-dp@xora.org.uk>
-	<20101119205302.GA8017@gmail.com>
-Date: Mon, 22 Nov 2010 22:49:08 +0100
-Message-ID: <AANLkTi=2eYwkdLnjuutWzoa6kRV5X7AUgRNLj6OLBydn@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <1290455639-7387-1-git-send-email-fransmeulenbroeks@gmail.com>
+In-Reply-To: <1290455639-7387-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Enigmail-Version: 1.1.1
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libffi_3.0.9.bb : add a BBCLASSEXTEND version of latest libffi
+Subject: Re: [PATCH v3] uclibc++: moved to git head
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,485 +50,354 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 21:50:23 -0000
+X-List-Received-Date: Mon, 22 Nov 2010 22:01:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-2010/11/19 Khem Raj <raj.khem@gmail.com>:
-> On (19/11/10 10:07), Graeme Gregory wrote:
->> Initially taken from poky with changes required for OE. Poky recipe is m=
-uch
->> simpler than the ones we have in OE and it seems we have a lot of histor=
-ic that
->> is no longer needed.
->
->
-> Sounds nice. May be cp will be better instead of mv in do_install_append =
-?
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+This looks sane to me,
 
-Review gives no issues, builds fine so:
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Acked-by: Graeme Gregory <dp@xora.org.uk>
+
+On 22/11/2010 19:53, Frans Meulenbroeks wrote:
+> Removed the 0.1.9 version as it is quite old and does not compile
+> renamed files dir to uclibc++
+> added patches to get things compiling.
+> Patches are gracefully picked from openwrt
+> (https://dev.openwrt.org/browser/packages/libs/uclibc%2B%2B/patches?rev=24017)
 >
->> ---
->> =A0recipes/libffi/libffi-2.0+gcc3.4.1/soname.patch | =A0 32 --------
->> =A0recipes/libffi/libffi-native_2.0+gcc4.3.2.bb =A0 =A0| =A0 32 --------
->> =A0recipes/libffi/libffi/autoconf-2.64.patch =A0 =A0 =A0 | =A0 24 ------
->> =A0recipes/libffi/libffi_2.0+gcc3.4.1.bb =A0 =A0 =A0 =A0 =A0 | =A0 68 --=
----------------
->> =A0recipes/libffi/libffi_2.0+gcc4.3.2.bb =A0 =A0 =A0 =A0 =A0 | =A0 90 --=
----------------------
->> =A0recipes/libffi/libffi_3.0.8.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 85 ---------------------
->> =A0recipes/libffi/libffi_3.0.9.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 15 ++++
->> =A07 files changed, 15 insertions(+), 331 deletions(-)
->> =A0delete mode 100644 recipes/libffi/libffi-2.0+gcc3.4.1/soname.patch
->> =A0delete mode 100644 recipes/libffi/libffi-native_2.0+gcc4.3.2.bb
->> =A0delete mode 100644 recipes/libffi/libffi/autoconf-2.64.patch
->> =A0delete mode 100644 recipes/libffi/libffi_2.0+gcc3.4.1.bb
->> =A0delete mode 100644 recipes/libffi/libffi_2.0+gcc4.3.2.bb
->> =A0delete mode 100644 recipes/libffi/libffi_3.0.8.bb
->> =A0create mode 100644 recipes/libffi/libffi_3.0.9.bb
->>
->> diff --git a/recipes/libffi/libffi-2.0+gcc3.4.1/soname.patch b/recipes/l=
-ibffi/libffi-2.0+gcc3.4.1/soname.patch
->> deleted file mode 100644
->> index bccf75d..0000000
->> --- a/recipes/libffi/libffi-2.0+gcc3.4.1/soname.patch
->> +++ /dev/null
->> @@ -1,32 +0,0 @@
->> ---- libffi.orig/Makefile.am =A02003-10-21 21:01:53.000000000 +0200
->> -+++ libffi/Makefile.am =A0 =A0 =A0 2004-08-09 13:26:13.000000000 +0200
->> -@@ -175,7 +175,7 @@
->> -
->> - AM_CFLAGS =3D -Wall -g -fexceptions
->> -
->> --libffi_la_LDFLAGS =3D -release $(VERSION)
->> -+libffi_la_LDFLAGS =3D -version-info `grep -v '^\#' $(srcdir)/libtool-v=
-ersion`
->> -
->> - INCLUDES =3D -I. -I$(top_srcdir)/include -Iinclude -I$(top_srcdir)/src
->> -
->> ---- libffi.orig/libtool-version =A0 =A0 =A01970-01-01 01:00:00.00000000=
-0 +0100
->> -+++ libffi/libtool-version =A0 2004-08-09 13:24:18.000000000 +0200
->> -@@ -0,0 +1,6 @@
->> -+# This file is used to maintain libtool version info for libffi. =A0Se=
-e
->> -+# the libtool manual to understand the meaning of the fields. =A0This =
-is
->> -+# a separate file so that version updates don't involve re-running
->> -+# automake.
->> -+# CURRENT:REVISION:AGE
->> -+3:0:0
->> -
->> ---- libtool.orig/Makefile.in 2004-08-09 14:29:09.000000000 +0200
->> -+++ libtool/Makefile.in =A0 =A0 =A02004-08-09 14:29:53.000000000 +0200
->> -@@ -226,7 +226,7 @@
->> -
->> - AM_CFLAGS =3D -Wall -g -fexceptions
->> -
->> --libffi_la_LDFLAGS =3D -release $(VERSION)
->> -+libffi_la_LDFLAGS =3D -version-info `grep -v '^\#' $(srcdir)/libtool-v=
-ersion`
->> -
->> - INCLUDES =3D -I. -I$(top_srcdir)/include -Iinclude -I$(top_srcdir)/src
->> - ACLOCAL_M4 =3D $(top_srcdir)/aclocal.m4
->> diff --git a/recipes/libffi/libffi-native_2.0+gcc4.3.2.bb b/recipes/libf=
-fi/libffi-native_2.0+gcc4.3.2.bb
->> deleted file mode 100644
->> index 4a26199..0000000
->> --- a/recipes/libffi/libffi-native_2.0+gcc4.3.2.bb
->> +++ /dev/null
->> @@ -1,32 +0,0 @@
->> -require libffi_${PV}.bb
->> -
->> -inherit native
->> -
->> -EXTRA_OECONF =3D "--with-gnu-ld \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-shared \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-target-optspace \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-languages=3Dc,c++,f77 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-threads=3Dposix \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-multilib \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-c99 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-long-long \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-symvers=3Dgnu \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--program-prefix=3D${TARGET_PREFIX} \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${EXTRA_OECONF_PATHS}"
->> -
->> -ffi_include =3D "ffi.h ffitarget.h"
->> -
->> -install_libffi_headers() {
->> - =A0 =A0 :
->> -}
->> -
->> -do_install () {
->> - =A0 =A0 install -d ${D}${libdir} ${D}${includedir}
->> - =A0 =A0 oe_libinstall -so -C .libs libffi ${D}${libdir}
->> -
->> - =A0 =A0 for i in ${ffi_include}; do
->> - =A0 =A0 =A0 =A0 =A0 =A0 install -m 0644 include/$i ${D}${includedir}/
->> - =A0 =A0 done
->> -}
->> -
->> -NATIVE_INSTALL_WORKS =3D "1"
->> diff --git a/recipes/libffi/libffi/autoconf-2.64.patch b/recipes/libffi/=
-libffi/autoconf-2.64.patch
->> deleted file mode 100644
->> index 7e5a41e..0000000
->> --- a/recipes/libffi/libffi/autoconf-2.64.patch
->> +++ /dev/null
->> @@ -1,24 +0,0 @@
->> -From cc8c1160a690a1eafc35e745da5f24e258436bda Mon Sep 17 00:00:00 2001
->> -From: Mike Lundy <mike@fluffypenguin.org>
->> -Date: Fri, 2 Oct 2009 12:28:13 -0700
->> -Subject: [PATCH] fix libffi for autoconf-2.64
->> -
->> ----
->> - libffi-3.0.8/configure.ac | =A0 =A01 +
->> - 1 files changed, 1 insertions(+), 0 deletions(-)
->> -
->> -diff --git libffi-3.0.8/configure.ac libffi-3.0.8/configure.ac
->> -index 6a7e7fb..4c3f190 100644
->> ---- libffi-3.0.8/configure.ac
->> -+++ libffi-3.0.8/configure.ac
->> -@@ -20,6 +20,7 @@ AM_INIT_AUTOMAKE
->> - m4_rename([_AC_ARG_VAR_PRECIOUS],[real_PRECIOUS])
->> - m4_define([_AC_ARG_VAR_PRECIOUS],[])
->> - AC_PROG_CC
->> -+m4_undefine([_AC_ARG_VAR_PRECIOUS])
->> - m4_rename([real_PRECIOUS],[_AC_ARG_VAR_PRECIOUS])
->> -
->> - AC_SUBST(CFLAGS)
->> ---
->> -1.6.4
->> -
->> diff --git a/recipes/libffi/libffi_2.0+gcc3.4.1.bb b/recipes/libffi/libf=
-fi_2.0+gcc3.4.1.bb
->> deleted file mode 100644
->> index ceb46b1..0000000
->> --- a/recipes/libffi/libffi_2.0+gcc3.4.1.bb
->> +++ /dev/null
->> @@ -1,68 +0,0 @@
->> -SECTION =3D "libs"
->> -DESCRIPTION =3D "Foreign Function Interface library"
->> -LICENSE =3D "libffi"
->> -PRIORITY =3D "optional"
->> -PR =3D "r1"
->> -
->> -inherit autotools gettext
->> -
->> -PACKAGES =3D "${PN}-dbg ${PN} ${PN}-dev"
->> -
->> -FILES_${PN} =3D "${libdir}/libffi.so.*"
->> -
->> -FILES_${PN}-dev =3D "${includedir}/ffi* \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.a \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.la \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.so"
->> -
->> -GCC_VER =3D "${@bb.data.getVar('PV',d,1).split('gcc')[1]}"
->> -
->> -SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${GCC_VER}/gcc-${GCC_VER}.tar.bz2 \
->> - =A0 =A0 =A0 =A0file://soname.patch"
->> -
->> -MIRRORS_prepend () {
->> -${GNU_MIRROR}/gcc/ =A0 http://gcc.get-software.com/releases/
->> -${GNU_MIRROR}/gcc/ =A0 http://mirrors.rcn.net/pub/sourceware/gcc/releas=
-es/
->> -}
->> -
->> -S =3D "${WORKDIR}/gcc-${GCC_VER}/libffi"
->> -B =3D "${S}/build.${HOST_SYS}.${TARGET_SYS}"
->> -
->> -EXTRA_OECONF =3D "--with-gnu-ld \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-shared \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-target-optspace \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-languages=3Dc,c++,f77 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-threads=3Dposix \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-multilib \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-c99 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-long-long \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-symvers=3Dgnu \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--program-prefix=3D${TARGET_PREFIX} \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${EXTRA_OECONF_PATHS}"
->> -
->> -EXTRA_OECONF_PATHS =3D "--with-local-prefix=3D${prefix}/local \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--with-gxx-include-dir=3D${=
-includedir}/c++/${PV}"
->> -
->> -do_configure () {
->> - =A0 =A0 (cd ${S}/.. && gnu-configize) || die "failure running gnu-conf=
-igize"
->> - =A0 =A0 oe_runconf
->> -}
->> -
->> -do_install_append() {
->> - =A0 =A0 # follow debian and move this to $includedir
->> - =A0 =A0 mv ${D}${libdir}/gcc/${TARGET_SYS}/${GCC_VER}/include/libffi/f=
-fitarget.h ${D}${includedir}/
->> -}
->> -
->> -ffi_include =3D "ffi.h ffitarget.h"
->> -
->> -do_stage () {
->> - =A0 =A0 oe_libinstall -so -C .libs libffi ${STAGING_LIBDIR}
->> -
->> - =A0 =A0 mkdir -p ${STAGING_INCDIR}/
->> - =A0 =A0 for i in ${ffi_include}; do
->> - =A0 =A0 =A0 =A0 =A0 =A0 install -m 0644 include/$i ${STAGING_INCDIR}/
->> - =A0 =A0 done
->> -}
->> -
->> -SRC_URI[md5sum] =3D "31b459062499f9f68d451db9cbf3205c"
->> -SRC_URI[sha256sum] =3D "5f3685533f8dc4b42b926fe70bb371b31e1368223a0ad73=
-98ba27ea3a20e8e7a"
->> diff --git a/recipes/libffi/libffi_2.0+gcc4.3.2.bb b/recipes/libffi/libf=
-fi_2.0+gcc4.3.2.bb
->> deleted file mode 100644
->> index 1694ce4..0000000
->> --- a/recipes/libffi/libffi_2.0+gcc4.3.2.bb
->> +++ /dev/null
->> @@ -1,90 +0,0 @@
->> -require ../gcc/gcc-common.inc
->> -SECTION =3D "libs"
->> -DESCRIPTION =3D "Foreign Function Interface library"
->> -LICENSE =3D "libffi"
->> -PRIORITY =3D "optional"
->> -
->> -inherit autotools gettext
->> -
->> -PR =3D "r1"
->> -
->> -PACKAGES =3D "${PN}-dbg ${PN} ${PN}-dev"
->> -
->> -FILES_${PN} =3D "${libdir}/libffi.so.*"
->> -
->> -FILES_${PN}-dev =3D "${includedir}/${TARGET_SYS}/ffi* \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.a \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.la \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.so"
->> -
->> -GCC_VER =3D "${@bb.data.getVar('PV',d,1).split('gcc')[1]}"
->> -
->> -SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${GCC_VER}/gcc-${GCC_VER}.tar.bz2 \
->> - =A0 =A0 =A0 =A0"
->> -
->> -MIRRORS_prepend () {
->> -${GNU_MIRROR}/gcc/ =A0 http://gcc.get-software.com/releases/
->> -${GNU_MIRROR}/gcc/ =A0 http://mirrors.rcn.net/pub/sourceware/gcc/releas=
-es/
->> -}
->> -
->> -S =3D "${WORKDIR}/gcc-${GCC_VER}/libffi"
->> -B =3D "${S}/build.${HOST_SYS}.${TARGET_SYS}"
->> -
->> -EXTRA_OECONF =3D "--with-gnu-ld \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-shared \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-target-optspace \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-languages=3Dc,c++,f77 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-threads=3Dposix \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-multilib \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-c99 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-long-long \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-symvers=3Dgnu \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--program-prefix=3D${TARGET_PREFIX} \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${EXTRA_OECONF_FPU} \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${EXTRA_OECONF_PATHS}"
->> -
->> -EXTRA_OECONF_PATHS =3D "--with-local-prefix=3D${prefix}/local \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--with-gxx-include-dir=3D${=
-includedir}/c++/${PV}"
->> -
->> -# Build uclibc compilers without cxa_atexit support
->> -EXTRA_OECONF_append_linux =A0 =A0 =A0 =A0 =A0 =A0 =A0 =3D " --enable-__=
-cxa_atexit"
->> -EXTRA_OECONF_append_linux-gnueabi =A0 =A0 =A0 =3D " --enable-__cxa_atex=
-it"
->> -EXTRA_OECONF_append_linux-uclibc =A0 =A0 =A0 =A0=3D " --disable-__cxa_a=
-texit"
->> -EXTRA_OECONF_append_linux-uclibceabi =A0 =A0=3D " --disable-__cxa_atexi=
-t"
->> -EXTRA_OECONF_FPU =3D "${@get_gcc_fpu_setting(bb, d)}"
->> -
->> -#Somehow gcc doesn't set __SOFTFP__ when passing -mfloatabi=3Dsoftp :(
->> -TARGET_CC_ARCH_append_armv6 =3D " -D__SOFTFP__"
->> -TARGET_CC_ARCH_append_armv7a =3D " -D__SOFTFP__"
->> -
->> -
->> -do_configure () {
->> - =A0 =A0 (cd ${S}/.. && gnu-configize) || die "failure running gnu-conf=
-igize"
->> - =A0 =A0 oe_runconf
->> -}
->> -
->> -do_install_append() {
->> - =A0 =A0 install_libffi_headers
->> -}
->> -
->> -# Separate function which can be disabled in the -native recipe.
->> -install_libffi_headers() {
->> - =A0 =A0 # follow Debian and move this to $includedir/${TARGET_SYS}
->> - =A0 =A0 install -d ${D}${includedir}/${TARGET_SYS}
->> - =A0 =A0 mv ${D}${libdir}/gcc/${TARGET_SYS}/${GCC_VER}/include/ffitarge=
-t.h ${D}${includedir}/${TARGET_SYS}
->> - =A0 =A0 mv ${D}${libdir}/gcc/${TARGET_SYS}/${GCC_VER}/include/ffi.h ${=
-D}${includedir}/${TARGET_SYS}
->> -}
->> -
->> -ffi_include =3D "ffi.h ffitarget.h"
->> -
->> -do_stage () {
->> - =A0 =A0 oe_libinstall -so -C .libs libffi ${STAGING_LIBDIR}
->> -
->> - =A0 =A0 mkdir -p ${STAGING_INCDIR}/
->> - =A0 =A0 for i in ${ffi_include}; do
->> - =A0 =A0 =A0 =A0 =A0 =A0 install -m 0644 include/$i ${STAGING_INCDIR}/
->> - =A0 =A0 done
->> -}
->> -
->> -SRC_URI[md5sum] =3D "5dfac5da961ecd5f227c3175859a486d"
->> -SRC_URI[sha256sum] =3D "bfbf487731ad5dca37efe480a837417de071bd67e685d5c=
-1df6a290707575165"
->> diff --git a/recipes/libffi/libffi_3.0.8.bb b/recipes/libffi/libffi_3.0.=
-8.bb
->> deleted file mode 100644
->> index b31d9ee..0000000
->> --- a/recipes/libffi/libffi_3.0.8.bb
->> +++ /dev/null
->> @@ -1,85 +0,0 @@
->> -require ../gcc/gcc-common.inc
->> -
->> -SECTION =3D "libs"
->> -DESCRIPTION =3D "Foreign Function Interface library"
->> -LICENSE =3D "libffi"
->> -PRIORITY =3D "optional"
->> -
->> -inherit autotools gettext pkgconfig
->> -
->> -PR =3D "r0"
->> -
->> -S =3D "${WORKDIR}/${P}"
->> -
->> -B =3D "${S}/build.${HOST_SYS}.${TARGET_SYS}"
->> -
->> -PACKAGES =3D "${PN}-dbg ${PN} ${PN}-dev ${PN}-doc"
->> -
->> -FILES_${PN} =3D "${libdir}/libffi.so.*"
->> -
->> -FILES_${PN}-dev =3D "${includedir}/${TARGET_SYS}/ffi* \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.a \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.la \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/libffi.so \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${libdir}/pkgconfig \
->> -"
->> -
->> -SRC_URI =3D "ftp://sourceware.org/pub/libffi/${P}.tar.gz \
->> - =A0 =A0 =A0 =A0 =A0 file://autoconf-2.64.patch"
->> -
->> -EXTRA_OECONF =3D "--with-gnu-ld \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-shared \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-target-optspace \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-languages=3Dc,c++,f77 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-threads=3Dposix \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-multilib \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-c99 \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-long-long \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-symvers=3Dgnu \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--program-prefix=3D${TARGET_PREFIX} \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${EXTRA_OECONF_FPU} \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0${EXTRA_OECONF_PATHS}"
->> -
->> -EXTRA_OECONF_PATHS =3D "--with-local-prefix=3D${prefix}/local \
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--with-gxx-include-dir=3D${=
-includedir}/c++/${PV}"
->> -
->> -# Build uclibc compilers without cxa_atexit support
->> -EXTRA_OECONF_append_linux =A0 =A0 =A0 =A0 =A0 =A0 =A0 =3D " --enable-__=
-cxa_atexit"
->> -EXTRA_OECONF_append_linux-gnueabi =A0 =A0 =A0 =3D " --enable-__cxa_atex=
-it"
->> -EXTRA_OECONF_append_linux-uclibc =A0 =A0 =A0 =A0=3D " --disable-__cxa_a=
-texit"
->> -EXTRA_OECONF_append_linux-uclibceabi =3D " --disable-__cxa_atexit"
->> -EXTRA_OECONF_FPU =3D "${@get_gcc_fpu_setting(bb, d)}"
->> -
->> -#Somehow gcc doesn't set __SOFTFP__ when passing -mfloatabi=3Dsoftp :(
->> -TARGET_CC_ARCH_append_armv6 =3D " -D__SOFTFP__"
->> -TARGET_CC_ARCH_append_armv7a =3D " -D__SOFTFP__"
->> -
->> -do_compile_append() {
->> - =A0 =A0 sed -i -e"s|\\${libdir}/${P}/include|\\${includedir}/${TARGET_=
-SYS}/|" libffi.pc
->> -}
->> -
->> -do_install_append() {
->> - =A0 =A0 install_libffi_headers
->> -}
->> -
->> -# Separate function which can be disabled in the -native recipe.
->> -install_libffi_headers() {
->> - =A0 =A0 # follow Debian and move this to $includedir/${TARGET_SYS}
->> - =A0 =A0 install -d ${D}${includedir}/${TARGET_SYS}
->> - =A0 =A0 mv ${D}${libdir}/${P}/include/ffitarget.h ${D}${includedir}/${=
-TARGET_SYS}
->> - =A0 =A0 mv ${D}${libdir}/${P}/include/ffi.h ${D}${includedir}/${TARGET=
-_SYS}
->> -}
->> -
->> -ffi_include =3D "ffi.h ffitarget.h"
->> -
->> -do_stage () {
->> - =A0 =A0 oe_libinstall -so -C .libs libffi ${STAGING_LIBDIR}
->> -
->> - =A0 =A0 mkdir -p ${STAGING_INCDIR}/
->> - =A0 =A0 for i in ${ffi_include}; do
->> - =A0 =A0 =A0 =A0 =A0 =A0 install -m 0644 include/$i ${STAGING_INCDIR}/
->> - =A0 =A0 done
->> -}
->> -
->> -SRC_URI[md5sum] =3D "188a4f79fdac2310044b44b7d3918ef9"
->> -SRC_URI[sha256sum] =3D "2c7c5b88a68fb362262889ba25ef25dc27864b7bbf03547=
-a8a36b8d567569406"
->> diff --git a/recipes/libffi/libffi_3.0.9.bb b/recipes/libffi/libffi_3.0.=
-9.bb
->> new file mode 100644
->> index 0000000..9f7dbc3
->> --- /dev/null
->> +++ b/recipes/libffi/libffi_3.0.9.bb
->> @@ -0,0 +1,15 @@
->> +SRC_URI =3D "ftp://sourceware.org/pub/libffi/${BPN}-${PV}.tar.gz"
->> +LICENSE =3D "MIT"
->> +
->> +SRC_URI[md5sum] =3D "1f300a7a7f975d4046f51c3022fa5ff1"
->> +SRC_URI[sha256sum] =3D "589d25152318bc780cd8919b14670793f4971d9838dab46=
-ed38c32b3ee92c452"
->> +
->> +inherit autotools
->> +
->> +do_install_append() {
->> + =A0 =A0 install -d ${D}${includedir}
->> + =A0 =A0 mv ${D}${libdir}/libffi-${PV}/include/* ${D}${includedir}/ || =
-true
->> +}
->> +
->> +BBCLASSEXTEND =3D "native"
->> +
->> --
->> 1.7.3.2
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> note that it was decided to move to git head instead of the latest release (0.2.2)
+> because there were quite some patches after 0.2.2 was made and it does not look like there will
+> be a new release soon (there is hardly any activity last 2 years or so).
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> ---
 >
+> moved to latest git version
+> this also eliminated some patches that are now upstream
+>
+>  recipes/uclibc++/files/defconfig             |   64 --------------------------
+>  recipes/uclibc++/files/nobash.patch          |   13 -----
+>  recipes/uclibc++/uclibc++/006-eabi_fix.patch |   42 +++++++++++++++++
+>  recipes/uclibc++/uclibc++/defconfig          |   53 +++++++++++++++++++++
+>  recipes/uclibc++/uclibc++_0.1.9.bb           |   54 ----------------------
+>  recipes/uclibc++/uclibc++_git.bb             |   47 +++++++++++++++++++
+>  6 files changed, 142 insertions(+), 131 deletions(-)
+>  delete mode 100644 recipes/uclibc++/files/defconfig
+>  delete mode 100644 recipes/uclibc++/files/nobash.patch
+>  create mode 100644 recipes/uclibc++/uclibc++/006-eabi_fix.patch
+>  create mode 100644 recipes/uclibc++/uclibc++/defconfig
+>  delete mode 100644 recipes/uclibc++/uclibc++_0.1.9.bb
+>  create mode 100644 recipes/uclibc++/uclibc++_git.bb
+>
+> diff --git a/recipes/uclibc++/files/defconfig b/recipes/uclibc++/files/defconfig
+> deleted file mode 100644
+> index 19b4aa5..0000000
+> --- a/recipes/uclibc++/files/defconfig
+> +++ /dev/null
+> @@ -1,64 +0,0 @@
+> -#
+> -# Automatically generated make config: don't edit
+> -#
+> -# TARGET_arm is not set
+> -TARGET_i386=y
+> -# TARGET_powerpc is not set
+> -
+> -#
+> -# Target Architecture Features and Options
+> -#
+> -HAVE_ELF=y
+> -TARGET_ARCH="i386"
+> -# CONFIG_GENERIC_386 is not set
+> -# CONFIG_386 is not set
+> -# CONFIG_486 is not set
+> -# CONFIG_586 is not set
+> -# CONFIG_586MMX is not set
+> -# CONFIG_686 is not set
+> -# CONFIG_PENTIUMIII is not set
+> -CONFIG_PENTIUM4=y
+> -# CONFIG_K6 is not set
+> -# CONFIG_K7 is not set
+> -# CONFIG_CRUSOE is not set
+> -# CONFIG_WINCHIPC6 is not set
+> -# CONFIG_WINCHIP2 is not set
+> -# CONFIG_CYRIXIII is not set
+> -ARCH_LITTLE_ENDIAN=y
+> -# ARCH_BIG_ENDIAN is not set
+> -UCLIBCXX_HAS_FLOATS=y
+> -WARNINGS="-Wall"
+> -HAVE_DOT_CONFIG=y
+> -
+> -#
+> -# String and I/O Stream Support
+> -#
+> -# UCLIBCXX_HAS_WCHAR is not set
+> -UCLIBCXX_IOSTREAM_BUFSIZE=32
+> -UCLIBCXX_HAS_LFS=y
+> -UCLIBCXX_SUPPORT_CDIR=y
+> -UCLIBCXX_SUPPORT_CIN=y
+> -UCLIBCXX_SUPPORT_COUT=y
+> -UCLIBCXX_SUPPORT_CERR=y
+> -
+> -#
+> -# STL and Code Expansion
+> -#
+> -UCLIBCXX_STL_BUFFER_SIZE=32
+> -UCLIBCXX_CODE_EXPANSION=y
+> -UCLIBCXX_EXPAND_STRING_CHAR=y
+> -UCLIBCXX_EXPAND_VECTOR_BASIC=y
+> -UCLIBCXX_EXPAND_ISTREAM_CHAR=y
+> -UCLIBCXX_EXPAND_OSTREAM_CHAR=y
+> -UCLIBCXX_EXPAND_FSTREAM_CHAR=y
+> -
+> -#
+> -# Library Installation Options
+> -#
+> -UCLIBCXX_RUNTIME_PREFIX="/usr/$(TARGET_ARCH)-linux-uclibc"
+> -UCLIBCXX_RUNTIME_INCLUDE_SUBDIR="/include"
+> -UCLIBCXX_RUNTIME_LIB_SUBDIR="/lib"
+> -UCLIBCXX_RUNTIME_BIN_SUBDIR="/bin"
+> -UCLIBCXX_EXCEPTION_SUPPORT=y
+> -IMPORT_LIBSUP=y
+> -# DODEBUG is not set
+> diff --git a/recipes/uclibc++/files/nobash.patch b/recipes/uclibc++/files/nobash.patch
+> deleted file mode 100644
+> index 657c47b..0000000
+> --- a/recipes/uclibc++/files/nobash.patch
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> -Index: uClibc++/bin/Makefile
+> -===================================================================
+> ---- uClibc++.orig/bin/Makefile	2005-01-18 12:22:26.000000000 -0500
+> -+++ uClibc++/bin/Makefile	2005-03-10 18:19:30.799531304 -0500
+> -@@ -26,7 +26,7 @@
+> - 	$(INSTALL) -m 755 $(WRAPPER) $(PREFIX)$(UCLIBCXX_RUNTIME_PREFIX)$(UCLIBCXX_RUNTIME_BIN_SUBDIR)
+> - 
+> - $(WRAPPER):
+> --	echo "#!/bin/bash" > $(WRAPPER)
+> -+	echo "#!/bin/sh" > $(WRAPPER)
+> - 	echo "" >> $(WRAPPER)
+> - 	echo "OPTIONS=\"$(INITIALOPTIONS)\"" >> $(WRAPPER)
+> - 	echo 'INCLIB="Y"' >> $(WRAPPER)
+> diff --git a/recipes/uclibc++/uclibc++/006-eabi_fix.patch b/recipes/uclibc++/uclibc++/006-eabi_fix.patch
+> new file mode 100644
+> index 0000000..bc970a7
+> --- /dev/null
+> +++ b/recipes/uclibc++/uclibc++/006-eabi_fix.patch
+> @@ -0,0 +1,42 @@
+> +Index: uClibc++-0.2.2/include/typeinfo
+> +===================================================================
+> +--- uClibc++-0.2.2.orig/include/typeinfo	2008-02-13 00:37:04.000000000 +0100
+> ++++ uClibc++-0.2.2/include/typeinfo	2008-02-13 00:37:34.000000000 +0100
+> +@@ -44,6 +44,7 @@
+> +   class __class_type_info;
+> + } // namespace __cxxabiv1
+> + 
+> ++#ifndef __GXX_MERGED_TYPEINFO_NAMES
+> + #if !__GXX_WEAK__
+> +   // If weak symbols are not supported, typeinfo names are not merged.
+> +   #define __GXX_MERGED_TYPEINFO_NAMES 0
+> +@@ -51,6 +52,7 @@
+> +   // On platforms that support weak symbols, typeinfo names are merged.
+> +   #define __GXX_MERGED_TYPEINFO_NAMES 1
+> + #endif
+> ++#endif
+> + 
+> + namespace std 
+> + {
+> +Index: uClibc++-0.2.2/include/unwind-cxx.h
+> +===================================================================
+> +--- uClibc++-0.2.2.orig/include/unwind-cxx.h	2008-02-13 00:38:04.000000000 +0100
+> ++++ uClibc++-0.2.2/include/unwind-cxx.h	2008-02-13 00:40:32.000000000 +0100
+> +@@ -135,6 +135,7 @@
+> + 
+> + // This is the exception class we report -- "GNUCC++\0".
+> + const _Unwind_Exception_Class __gxx_exception_class
+> ++#ifndef __ARM_EABI_UNWINDER__
+> + = ((((((((_Unwind_Exception_Class) 'G' 
+> + 	 << 8 | (_Unwind_Exception_Class) 'N')
+> + 	<< 8 | (_Unwind_Exception_Class) 'U')
+> +@@ -143,6 +144,9 @@
+> +      << 8 | (_Unwind_Exception_Class) '+')
+> +     << 8 | (_Unwind_Exception_Class) '+')
+> +    << 8 | (_Unwind_Exception_Class) '\0');
+> ++#else
+> ++= "GNUC++";
+> ++#endif
+> + 
+> + // GNU C++ personality routine, Version 0.
+> + extern "C" _Unwind_Reason_Code __gxx_personality_v0
+> diff --git a/recipes/uclibc++/uclibc++/defconfig b/recipes/uclibc++/uclibc++/defconfig
+> new file mode 100644
+> index 0000000..168e9a4
+> --- /dev/null
+> +++ b/recipes/uclibc++/uclibc++/defconfig
+> @@ -0,0 +1,53 @@
+> +#
+> +# Automatically generated make config: don't edit
+> +#
+> +
+> +#
+> +# Target Features and Options
+> +#
+> +# UCLIBCXX_HAS_FLOATS is not set
+> +UCLIBCXX_HAS_TLS=y
+> +WARNINGS="-Wall"
+> +BUILD_EXTRA_LIBRARIES=""
+> +HAVE_DOT_CONFIG=y
+> +
+> +#
+> +# String and I/O Stream Support
+> +#
+> +# UCLIBCXX_HAS_WCHAR is not set
+> +UCLIBCXX_IOSTREAM_BUFSIZE=32
+> +UCLIBCXX_HAS_LFS=y
+> +UCLIBCXX_SUPPORT_CDIR=y
+> +UCLIBCXX_SUPPORT_CIN=y
+> +UCLIBCXX_SUPPORT_COUT=y
+> +UCLIBCXX_SUPPORT_CERR=y
+> +# UCLIBCXX_SUPPORT_CLOG is not set
+> +
+> +#
+> +# STL and Code Expansion
+> +#
+> +UCLIBCXX_STL_BUFFER_SIZE=32
+> +UCLIBCXX_CODE_EXPANSION=y
+> +UCLIBCXX_EXPAND_CONSTRUCTORS_DESTRUCTORS=y
+> +UCLIBCXX_EXPAND_STRING_CHAR=y
+> +UCLIBCXX_EXPAND_VECTOR_BASIC=y
+> +UCLIBCXX_EXPAND_IOS_CHAR=y
+> +UCLIBCXX_EXPAND_STREAMBUF_CHAR=y
+> +UCLIBCXX_EXPAND_ISTREAM_CHAR=y
+> +UCLIBCXX_EXPAND_OSTREAM_CHAR=y
+> +UCLIBCXX_EXPAND_FSTREAM_CHAR=y
+> +UCLIBCXX_EXPAND_SSTREAM_CHAR=y
+> +
+> +#
+> +# Library Installation Options
+> +#
+> +UCLIBCXX_RUNTIME_PREFIX="/usr/uClibc++"
+> +UCLIBCXX_RUNTIME_INCLUDE_SUBDIR="/include"
+> +UCLIBCXX_RUNTIME_LIB_SUBDIR="/lib"
+> +UCLIBCXX_RUNTIME_BIN_SUBDIR="/bin"
+> +UCLIBCXX_EXCEPTION_SUPPORT=y
+> +IMPORT_LIBSUP=y
+> +IMPORT_LIBGCC_EH=y
+> +BUILD_STATIC_LIB=y
+> +# BUILD_ONLY_STATIC_LIB is not set
+> +# DODEBUG is not set
+> diff --git a/recipes/uclibc++/uclibc++_0.1.9.bb b/recipes/uclibc++/uclibc++_0.1.9.bb
+> deleted file mode 100644
+> index be1ac14..0000000
+> --- a/recipes/uclibc++/uclibc++_0.1.9.bb
+> +++ /dev/null
+> @@ -1,54 +0,0 @@
+> -DESCRIPTION = "A C++ standard library targeted towards the embedded \
+> -systems/software market."
+> -HOMEPAGE = "http://cxx.uclibc.org/"
+> -LICENSE = "LGPL"
+> -PRIORITY = "optional"
+> -SECTION = "libs"
+> -
+> -PR = "r2"
+> -
+> -SRC_URI = "http://cxx.uclibc.org/src/uClibc++-${PV}.tbz2 \
+> -	   file://nobash.patch \
+> -	   file://defconfig"
+> -S = "${WORKDIR}/uClibc++"
+> -
+> -# uClibc++ runtime prefix directory (UCLIBCXX_RUNTIME_PREFIX) [/usr/$(TARGET_ARCH)-linux-uclibc] (NEW)
+> -# uClibc++ header file subdirectory (UCLIBCXX_RUNTIME_INCLUDE_SUBDIR) [/include] (NEW)
+> -# uClibc++ library subdirectory (UCLIBCXX_RUNTIME_LIB_SUBDIR) [/lib] (NEW)
+> -# uClibc++ application file subdirectory (UCLIBCXX_RUNTIME_BIN_SUBDIR) [/bin] (NEW)
+> -
+> -do_unpack_real () {
+> -	bzcat uClibc++-${PV}.tbz2 | tar -xvf -
+> -}
+> -do_unpack_real[dirs] = "${WORKDIR}"
+> -addtask unpack_real before do_patch after do_unpack
+> -
+> -EXTRA_OEMAKE = "'OPTIMIZATION=' 'XWARNINGS=' 'XARCH_CFLAGS=${CFLAGS}' \
+> -		'CPU_FLAGS=' 'STRIPTOOL=true' 'LD=${LD}'"
+> -configmangle = 's,^UCLIBCXX_RUNTIME_PREFIX=.*,UCLIBCXX_RUNTIME_PREFIX="${exec_prefix}",; \
+> -		s,^UCLIBCXX_RUNTIME_INCLUDE_SUBDIR=.*,UCLIBCXX_RUNTIME_INCLUDE_SUBDIR="/include/c++-uc",; \
+> -		s,^UCLIBCXX_RUNTIME_LIB_SUBDIR=.*,UCLIBCXX_RUNTIME_LIB_SUBDIR="/lib",; \
+> -		s,^UCLIBCXX_RUNTIME_BIN_SUBDIR=.*,UCLIBCXX_RUNTIME_BIN_SUBDIR="/bin",;'
+> -PARALLEL_MAKE = ""
+> -
+> -do_configure () {
+> -	cp ${WORKDIR}/defconfig ${S}/.config
+> -
+> -	perl -i -p -e 's,^CROSS=.*,TARGET_ARCH=${TARGET_ARCH}\nCROSS=${TARGET_PREFIX},g' ${S}/Rules.mak
+> -	perl -i -p -e '${configmangle}' ${S}/.config
+> -
+> -	oe_runmake oldconfig
+> -}
+> -
+> -do_install () {
+> -	oe_runmake 'DESTDIR=${D}' install
+> -	chmod +x ${D}${libdir}/libuClibc++.so.*
+> -}
+> -
+> -PACKAGES = "g++-uc libuclibc++ libuclibc++-dev"
+> -FILES_g++-uc = "${bindir}/g++-uc"
+> -FILES_libuclibc++ = "${libdir}/*.so.*"
+> -FILES_libuclibc++-dev = "${FILES_uclibc++-dev}"
+> -
+> -SRC_URI[md5sum] = "ebf58e04d72eab5c131c2c9118737024"
+> -SRC_URI[sha256sum] = "82342a5d6088421e79699dd7af614ebecf6dd335eabce07690902a379f5ea8de"
+> diff --git a/recipes/uclibc++/uclibc++_git.bb b/recipes/uclibc++/uclibc++_git.bb
+> new file mode 100644
+> index 0000000..5b0d374
+> --- /dev/null
+> +++ b/recipes/uclibc++/uclibc++_git.bb
+> @@ -0,0 +1,47 @@
+> +DESCRIPTION = "A C++ standard library targeted towards the embedded \
+> +systems/software market."
+> +HOMEPAGE = "http://cxx.uclibc.org/"
+> +LICENSE = "LGPL"
+> +PRIORITY = "optional"
+> +SECTION = "libs"
+> +
+> +PR = "r0"
+> +
+> +SRCREV = "7efcc107b6bf7a59a85beaf7c7f35da6de0f321e"
+> +
+> +SRC_URI = "git://git.busybox.net/uClibc++;protocol=git \
+> +	   file://006-eabi_fix.patch \
+> +	   file://defconfig"
+> +S = "${WORKDIR}/git"
+> +
+> +# uClibc++ runtime prefix directory (UCLIBCXX_RUNTIME_PREFIX) [/usr/$(TARGET_ARCH)-linux-uclibc] (NEW)
+> +# uClibc++ header file subdirectory (UCLIBCXX_RUNTIME_INCLUDE_SUBDIR) [/include] (NEW)
+> +# uClibc++ library subdirectory (UCLIBCXX_RUNTIME_LIB_SUBDIR) [/lib] (NEW)
+> +# uClibc++ application file subdirectory (UCLIBCXX_RUNTIME_BIN_SUBDIR) [/bin] (NEW)
+> +
+> +EXTRA_OEMAKE = "'OPTIMIZATION=' 'XWARNINGS=' 'XARCH_CFLAGS=${CFLAGS}' \
+> +		'CPU_FLAGS=' 'STRIPTOOL=true' 'LD=${LD}'"
+> +configmangle = 's,^UCLIBCXX_RUNTIME_PREFIX=.*,UCLIBCXX_RUNTIME_PREFIX="${exec_prefix}",; \
+> +		s,^UCLIBCXX_RUNTIME_INCLUDE_SUBDIR=.*,UCLIBCXX_RUNTIME_INCLUDE_SUBDIR="/include/c++-uc",; \
+> +		s,^UCLIBCXX_RUNTIME_LIB_SUBDIR=.*,UCLIBCXX_RUNTIME_LIB_SUBDIR="/lib",; \
+> +		s,^UCLIBCXX_RUNTIME_BIN_SUBDIR=.*,UCLIBCXX_RUNTIME_BIN_SUBDIR="/bin",;'
+> +PARALLEL_MAKE = ""
+> +
+> +do_configure () {
+> +	cp ${WORKDIR}/defconfig ${S}/.config
+> +
+> +	perl -i -p -e 's,^CROSS=.*,TARGET_ARCH=${TARGET_ARCH}\nCROSS=${TARGET_PREFIX},g' ${S}/Rules.mak
+> +	perl -i -p -e '${configmangle}' ${S}/.config
+> +
+> +	oe_runmake oldconfig
+> +}
+> +
+> +do_install () {
+> +	oe_runmake 'DESTDIR=${D}' install
+> +	chmod +x ${D}${libdir}/libuClibc++.so.*
+> +}
+> +
+> +PACKAGES = "g++-uc libuclibc++ libuclibc++-dev"
+> +FILES_g++-uc = "${bindir}/g++-uc"
+> +FILES_libuclibc++ = "${libdir}/*.so.*"
+> +FILES_libuclibc++-dev = "${FILES_uclibc++-dev}"
+
 
 
