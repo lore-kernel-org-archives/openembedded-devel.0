@@ -1,40 +1,29 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1PKWGm-0001VQ-3q
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 14:17:20 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 681422C7DD
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 13:15:35 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SPz2uaiwtCJa
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 13:15:31 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id EA0272C798
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 13:15:30 +0000 (UTC)
-Message-ID: <4CEA6D14.1070702@gmail.com>
-Date: Mon, 22 Nov 2010 14:16:04 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PKWgV-0004eU-Fx for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Nov 2010 14:43:58 +0100
+Received: from f053040216.adsl.alicedsl.de ([78.53.40.216]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PKWfN-0002Jj-Su for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Nov 2010 13:42:46 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <4CE96FE9.2080707@gmail.com>
-	<AANLkTi=k06bB44UMxsQADDJxbPFkLKk53P9KCtvNH=qt@mail.gmail.com>
-In-Reply-To: <AANLkTi=k06bB44UMxsQADDJxbPFkLKk53P9KCtvNH=qt@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+Date: Mon, 22 Nov 2010 14:42:44 +0100
+Message-ID: <1290433364.3703.22.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: pixman_0.21.2.bb do_compile failed
+Subject: Patch queue/Patchwork not in sync with mailing list? Last listed patch from 2010-11-19.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,35 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 13:17:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Nov 2010 13:43:59 -0000
+X-Groupsio-MsgNum: 26416
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-tmd+x9j8oGE2JBHDw1+n"
 
-Khem Raj ha scritto, Il 22/11/2010 07:38:
-> On Sun, Nov 21, 2010 at 11:15 AM, Marco Cavallini
-> <koansoftware@gmail.com> wrote:
->> Hi,
->> Recently I am facing to a new error using DISTRO=kaeilos-2010 and
->> MACHINE=ronetix-pm9263.
->> I would be grateful if anybody could give me a hint about how could it
->> be caused and how to solve it.
-> 
-> as a quick workaround can you add
-> ARM_INSTRUCTION_SET = "arm" in the recipe and see if that helps ?
-> 
->> http://pastebin.com/hi2SVSuF
->>
->> TIA
->> /marco
->>
+--=-tmd+x9j8oGE2JBHDw1+n
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Khem,
-thank you for answering.
-
-Unfortunately the problem is deeper and more complex.
-BTW I can't figure out why Angstrom builds fine.
-
-/marco
+Dear OE folks,
 
 
+the last incoming patch listed by Patchwork is from Friday, November
+19th [1]. For example Andreas=E2=80=99s patches are not listed [2].
 
+Could some of the admins please take a look at this.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://patchwork.openembedded.org/project/openembedded/list/?state=3D*&=
+archive=3Dboth
+[2] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November/0=
+27079.html
+
+--=-tmd+x9j8oGE2JBHDw1+n
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzqc1QACgkQPX1aK2wOHVhb9ACdH/Qe7R7n5bR0hg3n9NwsdO0w
+cjgAn1pjXrozUBMMsqTCBHvIdEdv4xtU
+=2kDq
+-----END PGP SIGNATURE-----
+
+--=-tmd+x9j8oGE2JBHDw1+n--
