@@ -1,45 +1,40 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PKXQ7-00052W-OV
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PKXW4-0005ZW-UN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 15:31:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 5C6EF314AEDE
+	Mon, 22 Nov 2010 15:37:17 +0100
+Received: by iwn34 with SMTP id 34so94503iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 15:29:54 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 6Ueooo7v+kgH
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 15:29:48 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 64C66314AED5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 15:29:48 +0100 (CET)
-Message-ID: <4CEA7E5B.7070900@opendreambox.org>
-Date: Mon, 22 Nov 2010 15:29:47 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	Mon, 22 Nov 2010 06:36:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=67tzwYwx8VJHVpc+YAJ57v74VZa8J5o14dr1N5Ij5qA=;
+	b=lu5A4Ag+sj2AbvU70qX4d86GUuw+nKveqBllpgzJpsyS4vidFRzgP2WDX11fmEH+9k
+	d4KYzJZMwJPbY0E8ehyXIsFx4VfhyXUhFU15YE/nCfgtBN6S7+BVzYUHuj2qK1sMMMou
+	twnmgzdOtZi6FaxXX4W3k1dJ7C2aFE/HGfMcw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=m4McN8bU3+DI7pqBjLS1JJG87/kNUSmiaONwa/LTcKCPQnEhgZHG4lBYyyxqL+0wxP
+	0eiPkIQBSv4ce6g3AiSaODgghT/PU+VpRQ5d9PqBaAfrcHmhKE4nqPdTyIYRbbgw+8YQ
+	DPHMgo+4MVCjFwCaSFoGFRxSD2Y390VxvXeRI=
 MIME-Version: 1.0
+Received: by 10.231.39.137 with SMTP id g9mr6834297ibe.101.1290436561685; Mon,
+	22 Nov 2010 06:36:01 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Mon, 22 Nov 2010 06:36:01 -0800 (PST)
+Date: Mon, 22 Nov 2010 15:36:01 +0100
+Message-ID: <AANLkTi=5Ypor=R4EXQV7D7gkQHFtPu+WukVMz1p57d3N@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CE6FA0C.2090801@balister.org>
-	<4CE9332C.7020701@opendreambox.org>	<AANLkTim-vJEbUXtQtm4TQLbKBBrwG2m_tbao0u4kJuWu@mail.gmail.com>	<4CE95578.8000604@opendreambox.org>
-	<AANLkTikc4Pm+kgyym+Qdd32R3gPo1HX4QtWE0yCf3ykb@mail.gmail.com>
-In-Reply-To: <AANLkTikc4Pm+kgyym+Qdd32R3gPo1HX4QtWE0yCf3ykb@mail.gmail.com>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Merging the release branch into master (was: Re: Revert commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8)
+Subject: ipkg-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,23 +48,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 14:31:04 -0000
+X-List-Received-Date: Mon, 22 Nov 2010 14:37:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 11/21/2010 06:55 PM, Chris Larson wrote:
-> The release branch is being merged back to master after the release is
-> tagged, FYI.
+ipkg-utils has two issues:
 
-I've been thinking about it, but I'm not really sure what the point is
-in that if all fixes should already be in master before entering the
-release branch, except for maybe some release-branch specific stuff
-(which in turn must not exist, because it would get merged into master
-after release has been tagged)? You can't even put some release notes
-into the release branch?
+- the fetch from handhelds.org failed, so we need an update of the SRC_URI
+- the recipe is misnamed. It is ipkg-utils_1.6+cvs20050404.bb but it
+says SRCDATE = "20050930"
 
-Also, a revert can be reverted again, if needed, before a merge, i.e.
-revert, tag, release, unrevert, merge, delete.
+I can fix the latter, but not the former.
+We need to resolve the handhelds.org references before the release!
 
+Frans
 
 
