@@ -1,42 +1,48 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1PKeS8-0006DH-GJ
+	(envelope-from <graham.gower@gmail.com>) id 1PKfxs-0007zE-Cx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 23:01:38 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 989CBA5480
+	Tue, 23 Nov 2010 00:38:29 +0100
+Received: by pxi17 with SMTP id 17so1781131pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 22:00:25 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id njahtHTbB6o6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 22:00:22 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 2505FA4033
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 22:00:22 +0000 (GMT)
-Message-ID: <4CEAE7F6.1010302@xora.org.uk>
-Date: Mon, 22 Nov 2010 22:00:22 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+	Mon, 22 Nov 2010 15:37:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=OYPuDRwpSzpW/kXBwY1FM8RHKbIR3lJOiymTo6pi5Z0=;
+	b=dj+UJ+twVf0SJLCCGVJVjccUOZ6Im5PQQNEYIglqpEbXxxUVLE21Apxc8xM/SjFU64
+	24nK4LJf4lmRKWTZcS3buB0NIfgZ4+4tUgVXEEanGukQnG5WIpIGj+rG3qT2SG+REGeC
+	x/hrMBxAGMKULhfNGWFi18C2XW0CPLEEu1NmQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=kQ6wFCkySlSnF9aICGET1CpgSNtrajqPKB0tjeHHjDATEyLfXZ5ogGOBmTIMXeDIVX
+	cU+fpuwozahymM5o5S8eB5qT60D6Sd/x9Hag0tkZtWLmrq7R76hCMQVNIJ3biQOk8bT3
+	rUq595vksXt1xIlL7t9WVxjJ8Y1ONdXzKnJKc=
+Received: by 10.142.72.12 with SMTP id u12mr5759499wfa.159.1290469035381;
+	Mon, 22 Nov 2010 15:37:15 -0800 (PST)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	e14sm7061551wfg.20.2010.11.22.15.37.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 22 Nov 2010 15:37:14 -0800 (PST)
+Message-ID: <4CEAFEA4.8020005@gmail.com>
+Date: Tue, 23 Nov 2010 10:07:08 +1030
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1290455639-7387-1-git-send-email-fransmeulenbroeks@gmail.com>
-In-Reply-To: <1290455639-7387-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Enigmail-Version: 1.1.1
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v3] uclibc++: moved to git head
+Subject: [PATCH 1/2] busybox-config.inc: Fix build when DISTRO_FEATURES lacks "largefile".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,354 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 22:01:38 -0000
+X-List-Received-Date: Mon, 22 Nov 2010 23:38:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-This looks sane to me,
 
-Acked-by: Graeme Gregory <dp@xora.org.uk>
+  mipsel-oe-linux-uclibc-gcc -march=mips32 -Wp,-MD,util-linux/.fdisk.o.d   -std=gnu99 -Iinclude -Ilibbb  -include include/autoconf.h -D_GNU_SOURCE -DNDEBUG  -D"BB_VER=KBUILD_STR(1.17.3)" -DBB_BT=AUTOCONF_TIMESTAMP  -Wall -Wshadow -Wwrite-strings -Wundef -Wstrict-prototypes -Wunused -Wunused-parameter -Wunused-function -Wunused-value -Wmissing-prototypes -Wmissing-declarations -Wdeclaration-after-statement -Wold-style-definition -fno-builtin-strlen -finline-limit=0 -fomit-frame-pointer -ffunction-sections -fdata-sections -fno-guess-branch-probability -funsigned-char -static-libgcc -falign-functions=1 -falign-jumps=1 -falign-labels=1 -falign-loops=1 -Os -isystem/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -isystem/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os   -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(fdisk)"  -D"KBUIL
+D_MODNAME=KBUILD_STR(fdisk)" -c -o util-linux/fdisk.o util-linux/fdisk.c
+util-linux/fdisk.c: In function 'seek_sector':
+util-linux/fdisk.c:522:2: error: 'off64_t' undeclared (first use in this function)
+util-linux/fdisk.c:522:2: note: each undeclared identifier is reported only once for each function it appears in
+util-linux/fdisk.c:522:10: error: expected ';' before 'off'
+util-linux/fdisk.c:523:2: warning: implicit declaration of function 'lseek64'
+util-linux/fdisk.c:523:22: error: 'off' undeclared (first use in this function)
+util-linux/fdisk.c:519:22: warning: unused parameter 'secno'
+make[1]: *** [util-linux/fdisk.o] Error 1
+make[1]: Leaving directory `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/busybox-1.17.3-r38.1/busybox-1.17.3'
+make: *** [util-linux] Error 2
+make: *** Waiting for unfinished jobs....
 
-On 22/11/2010 19:53, Frans Meulenbroeks wrote:
-> Removed the 0.1.9 version as it is quite old and does not compile
-> renamed files dir to uclibc++
-> added patches to get things compiling.
-> Patches are gracefully picked from openwrt
-> (https://dev.openwrt.org/browser/packages/libs/uclibc%2B%2B/patches?rev=24017)
->
-> note that it was decided to move to git head instead of the latest release (0.2.2)
-> because there were quite some patches after 0.2.2 was made and it does not look like there will
-> be a new release soon (there is hardly any activity last 2 years or so).
->
-> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-> ---
->
-> moved to latest git version
-> this also eliminated some patches that are now upstream
->
->  recipes/uclibc++/files/defconfig             |   64 --------------------------
->  recipes/uclibc++/files/nobash.patch          |   13 -----
->  recipes/uclibc++/uclibc++/006-eabi_fix.patch |   42 +++++++++++++++++
->  recipes/uclibc++/uclibc++/defconfig          |   53 +++++++++++++++++++++
->  recipes/uclibc++/uclibc++_0.1.9.bb           |   54 ----------------------
->  recipes/uclibc++/uclibc++_git.bb             |   47 +++++++++++++++++++
->  6 files changed, 142 insertions(+), 131 deletions(-)
->  delete mode 100644 recipes/uclibc++/files/defconfig
->  delete mode 100644 recipes/uclibc++/files/nobash.patch
->  create mode 100644 recipes/uclibc++/uclibc++/006-eabi_fix.patch
->  create mode 100644 recipes/uclibc++/uclibc++/defconfig
->  delete mode 100644 recipes/uclibc++/uclibc++_0.1.9.bb
->  create mode 100644 recipes/uclibc++/uclibc++_git.bb
->
-> diff --git a/recipes/uclibc++/files/defconfig b/recipes/uclibc++/files/defconfig
-> deleted file mode 100644
-> index 19b4aa5..0000000
-> --- a/recipes/uclibc++/files/defconfig
-> +++ /dev/null
-> @@ -1,64 +0,0 @@
-> -#
-> -# Automatically generated make config: don't edit
-> -#
-> -# TARGET_arm is not set
-> -TARGET_i386=y
-> -# TARGET_powerpc is not set
-> -
-> -#
-> -# Target Architecture Features and Options
-> -#
-> -HAVE_ELF=y
-> -TARGET_ARCH="i386"
-> -# CONFIG_GENERIC_386 is not set
-> -# CONFIG_386 is not set
-> -# CONFIG_486 is not set
-> -# CONFIG_586 is not set
-> -# CONFIG_586MMX is not set
-> -# CONFIG_686 is not set
-> -# CONFIG_PENTIUMIII is not set
-> -CONFIG_PENTIUM4=y
-> -# CONFIG_K6 is not set
-> -# CONFIG_K7 is not set
-> -# CONFIG_CRUSOE is not set
-> -# CONFIG_WINCHIPC6 is not set
-> -# CONFIG_WINCHIP2 is not set
-> -# CONFIG_CYRIXIII is not set
-> -ARCH_LITTLE_ENDIAN=y
-> -# ARCH_BIG_ENDIAN is not set
-> -UCLIBCXX_HAS_FLOATS=y
-> -WARNINGS="-Wall"
-> -HAVE_DOT_CONFIG=y
-> -
-> -#
-> -# String and I/O Stream Support
-> -#
-> -# UCLIBCXX_HAS_WCHAR is not set
-> -UCLIBCXX_IOSTREAM_BUFSIZE=32
-> -UCLIBCXX_HAS_LFS=y
-> -UCLIBCXX_SUPPORT_CDIR=y
-> -UCLIBCXX_SUPPORT_CIN=y
-> -UCLIBCXX_SUPPORT_COUT=y
-> -UCLIBCXX_SUPPORT_CERR=y
-> -
-> -#
-> -# STL and Code Expansion
-> -#
-> -UCLIBCXX_STL_BUFFER_SIZE=32
-> -UCLIBCXX_CODE_EXPANSION=y
-> -UCLIBCXX_EXPAND_STRING_CHAR=y
-> -UCLIBCXX_EXPAND_VECTOR_BASIC=y
-> -UCLIBCXX_EXPAND_ISTREAM_CHAR=y
-> -UCLIBCXX_EXPAND_OSTREAM_CHAR=y
-> -UCLIBCXX_EXPAND_FSTREAM_CHAR=y
-> -
-> -#
-> -# Library Installation Options
-> -#
-> -UCLIBCXX_RUNTIME_PREFIX="/usr/$(TARGET_ARCH)-linux-uclibc"
-> -UCLIBCXX_RUNTIME_INCLUDE_SUBDIR="/include"
-> -UCLIBCXX_RUNTIME_LIB_SUBDIR="/lib"
-> -UCLIBCXX_RUNTIME_BIN_SUBDIR="/bin"
-> -UCLIBCXX_EXCEPTION_SUPPORT=y
-> -IMPORT_LIBSUP=y
-> -# DODEBUG is not set
-> diff --git a/recipes/uclibc++/files/nobash.patch b/recipes/uclibc++/files/nobash.patch
-> deleted file mode 100644
-> index 657c47b..0000000
-> --- a/recipes/uclibc++/files/nobash.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -Index: uClibc++/bin/Makefile
-> -===================================================================
-> ---- uClibc++.orig/bin/Makefile	2005-01-18 12:22:26.000000000 -0500
-> -+++ uClibc++/bin/Makefile	2005-03-10 18:19:30.799531304 -0500
-> -@@ -26,7 +26,7 @@
-> - 	$(INSTALL) -m 755 $(WRAPPER) $(PREFIX)$(UCLIBCXX_RUNTIME_PREFIX)$(UCLIBCXX_RUNTIME_BIN_SUBDIR)
-> - 
-> - $(WRAPPER):
-> --	echo "#!/bin/bash" > $(WRAPPER)
-> -+	echo "#!/bin/sh" > $(WRAPPER)
-> - 	echo "" >> $(WRAPPER)
-> - 	echo "OPTIONS=\"$(INITIALOPTIONS)\"" >> $(WRAPPER)
-> - 	echo 'INCLIB="Y"' >> $(WRAPPER)
-> diff --git a/recipes/uclibc++/uclibc++/006-eabi_fix.patch b/recipes/uclibc++/uclibc++/006-eabi_fix.patch
-> new file mode 100644
-> index 0000000..bc970a7
-> --- /dev/null
-> +++ b/recipes/uclibc++/uclibc++/006-eabi_fix.patch
-> @@ -0,0 +1,42 @@
-> +Index: uClibc++-0.2.2/include/typeinfo
-> +===================================================================
-> +--- uClibc++-0.2.2.orig/include/typeinfo	2008-02-13 00:37:04.000000000 +0100
-> ++++ uClibc++-0.2.2/include/typeinfo	2008-02-13 00:37:34.000000000 +0100
-> +@@ -44,6 +44,7 @@
-> +   class __class_type_info;
-> + } // namespace __cxxabiv1
-> + 
-> ++#ifndef __GXX_MERGED_TYPEINFO_NAMES
-> + #if !__GXX_WEAK__
-> +   // If weak symbols are not supported, typeinfo names are not merged.
-> +   #define __GXX_MERGED_TYPEINFO_NAMES 0
-> +@@ -51,6 +52,7 @@
-> +   // On platforms that support weak symbols, typeinfo names are merged.
-> +   #define __GXX_MERGED_TYPEINFO_NAMES 1
-> + #endif
-> ++#endif
-> + 
-> + namespace std 
-> + {
-> +Index: uClibc++-0.2.2/include/unwind-cxx.h
-> +===================================================================
-> +--- uClibc++-0.2.2.orig/include/unwind-cxx.h	2008-02-13 00:38:04.000000000 +0100
-> ++++ uClibc++-0.2.2/include/unwind-cxx.h	2008-02-13 00:40:32.000000000 +0100
-> +@@ -135,6 +135,7 @@
-> + 
-> + // This is the exception class we report -- "GNUCC++\0".
-> + const _Unwind_Exception_Class __gxx_exception_class
-> ++#ifndef __ARM_EABI_UNWINDER__
-> + = ((((((((_Unwind_Exception_Class) 'G' 
-> + 	 << 8 | (_Unwind_Exception_Class) 'N')
-> + 	<< 8 | (_Unwind_Exception_Class) 'U')
-> +@@ -143,6 +144,9 @@
-> +      << 8 | (_Unwind_Exception_Class) '+')
-> +     << 8 | (_Unwind_Exception_Class) '+')
-> +    << 8 | (_Unwind_Exception_Class) '\0');
-> ++#else
-> ++= "GNUC++";
-> ++#endif
-> + 
-> + // GNU C++ personality routine, Version 0.
-> + extern "C" _Unwind_Reason_Code __gxx_personality_v0
-> diff --git a/recipes/uclibc++/uclibc++/defconfig b/recipes/uclibc++/uclibc++/defconfig
-> new file mode 100644
-> index 0000000..168e9a4
-> --- /dev/null
-> +++ b/recipes/uclibc++/uclibc++/defconfig
-> @@ -0,0 +1,53 @@
-> +#
-> +# Automatically generated make config: don't edit
-> +#
-> +
-> +#
-> +# Target Features and Options
-> +#
-> +# UCLIBCXX_HAS_FLOATS is not set
-> +UCLIBCXX_HAS_TLS=y
-> +WARNINGS="-Wall"
-> +BUILD_EXTRA_LIBRARIES=""
-> +HAVE_DOT_CONFIG=y
-> +
-> +#
-> +# String and I/O Stream Support
-> +#
-> +# UCLIBCXX_HAS_WCHAR is not set
-> +UCLIBCXX_IOSTREAM_BUFSIZE=32
-> +UCLIBCXX_HAS_LFS=y
-> +UCLIBCXX_SUPPORT_CDIR=y
-> +UCLIBCXX_SUPPORT_CIN=y
-> +UCLIBCXX_SUPPORT_COUT=y
-> +UCLIBCXX_SUPPORT_CERR=y
-> +# UCLIBCXX_SUPPORT_CLOG is not set
-> +
-> +#
-> +# STL and Code Expansion
-> +#
-> +UCLIBCXX_STL_BUFFER_SIZE=32
-> +UCLIBCXX_CODE_EXPANSION=y
-> +UCLIBCXX_EXPAND_CONSTRUCTORS_DESTRUCTORS=y
-> +UCLIBCXX_EXPAND_STRING_CHAR=y
-> +UCLIBCXX_EXPAND_VECTOR_BASIC=y
-> +UCLIBCXX_EXPAND_IOS_CHAR=y
-> +UCLIBCXX_EXPAND_STREAMBUF_CHAR=y
-> +UCLIBCXX_EXPAND_ISTREAM_CHAR=y
-> +UCLIBCXX_EXPAND_OSTREAM_CHAR=y
-> +UCLIBCXX_EXPAND_FSTREAM_CHAR=y
-> +UCLIBCXX_EXPAND_SSTREAM_CHAR=y
-> +
-> +#
-> +# Library Installation Options
-> +#
-> +UCLIBCXX_RUNTIME_PREFIX="/usr/uClibc++"
-> +UCLIBCXX_RUNTIME_INCLUDE_SUBDIR="/include"
-> +UCLIBCXX_RUNTIME_LIB_SUBDIR="/lib"
-> +UCLIBCXX_RUNTIME_BIN_SUBDIR="/bin"
-> +UCLIBCXX_EXCEPTION_SUPPORT=y
-> +IMPORT_LIBSUP=y
-> +IMPORT_LIBGCC_EH=y
-> +BUILD_STATIC_LIB=y
-> +# BUILD_ONLY_STATIC_LIB is not set
-> +# DODEBUG is not set
-> diff --git a/recipes/uclibc++/uclibc++_0.1.9.bb b/recipes/uclibc++/uclibc++_0.1.9.bb
-> deleted file mode 100644
-> index be1ac14..0000000
-> --- a/recipes/uclibc++/uclibc++_0.1.9.bb
-> +++ /dev/null
-> @@ -1,54 +0,0 @@
-> -DESCRIPTION = "A C++ standard library targeted towards the embedded \
-> -systems/software market."
-> -HOMEPAGE = "http://cxx.uclibc.org/"
-> -LICENSE = "LGPL"
-> -PRIORITY = "optional"
-> -SECTION = "libs"
-> -
-> -PR = "r2"
-> -
-> -SRC_URI = "http://cxx.uclibc.org/src/uClibc++-${PV}.tbz2 \
-> -	   file://nobash.patch \
-> -	   file://defconfig"
-> -S = "${WORKDIR}/uClibc++"
-> -
-> -# uClibc++ runtime prefix directory (UCLIBCXX_RUNTIME_PREFIX) [/usr/$(TARGET_ARCH)-linux-uclibc] (NEW)
-> -# uClibc++ header file subdirectory (UCLIBCXX_RUNTIME_INCLUDE_SUBDIR) [/include] (NEW)
-> -# uClibc++ library subdirectory (UCLIBCXX_RUNTIME_LIB_SUBDIR) [/lib] (NEW)
-> -# uClibc++ application file subdirectory (UCLIBCXX_RUNTIME_BIN_SUBDIR) [/bin] (NEW)
-> -
-> -do_unpack_real () {
-> -	bzcat uClibc++-${PV}.tbz2 | tar -xvf -
-> -}
-> -do_unpack_real[dirs] = "${WORKDIR}"
-> -addtask unpack_real before do_patch after do_unpack
-> -
-> -EXTRA_OEMAKE = "'OPTIMIZATION=' 'XWARNINGS=' 'XARCH_CFLAGS=${CFLAGS}' \
-> -		'CPU_FLAGS=' 'STRIPTOOL=true' 'LD=${LD}'"
-> -configmangle = 's,^UCLIBCXX_RUNTIME_PREFIX=.*,UCLIBCXX_RUNTIME_PREFIX="${exec_prefix}",; \
-> -		s,^UCLIBCXX_RUNTIME_INCLUDE_SUBDIR=.*,UCLIBCXX_RUNTIME_INCLUDE_SUBDIR="/include/c++-uc",; \
-> -		s,^UCLIBCXX_RUNTIME_LIB_SUBDIR=.*,UCLIBCXX_RUNTIME_LIB_SUBDIR="/lib",; \
-> -		s,^UCLIBCXX_RUNTIME_BIN_SUBDIR=.*,UCLIBCXX_RUNTIME_BIN_SUBDIR="/bin",;'
-> -PARALLEL_MAKE = ""
-> -
-> -do_configure () {
-> -	cp ${WORKDIR}/defconfig ${S}/.config
-> -
-> -	perl -i -p -e 's,^CROSS=.*,TARGET_ARCH=${TARGET_ARCH}\nCROSS=${TARGET_PREFIX},g' ${S}/Rules.mak
-> -	perl -i -p -e '${configmangle}' ${S}/.config
-> -
-> -	oe_runmake oldconfig
-> -}
-> -
-> -do_install () {
-> -	oe_runmake 'DESTDIR=${D}' install
-> -	chmod +x ${D}${libdir}/libuClibc++.so.*
-> -}
-> -
-> -PACKAGES = "g++-uc libuclibc++ libuclibc++-dev"
-> -FILES_g++-uc = "${bindir}/g++-uc"
-> -FILES_libuclibc++ = "${libdir}/*.so.*"
-> -FILES_libuclibc++-dev = "${FILES_uclibc++-dev}"
-> -
-> -SRC_URI[md5sum] = "ebf58e04d72eab5c131c2c9118737024"
-> -SRC_URI[sha256sum] = "82342a5d6088421e79699dd7af614ebecf6dd335eabce07690902a379f5ea8de"
-> diff --git a/recipes/uclibc++/uclibc++_git.bb b/recipes/uclibc++/uclibc++_git.bb
-> new file mode 100644
-> index 0000000..5b0d374
-> --- /dev/null
-> +++ b/recipes/uclibc++/uclibc++_git.bb
-> @@ -0,0 +1,47 @@
-> +DESCRIPTION = "A C++ standard library targeted towards the embedded \
-> +systems/software market."
-> +HOMEPAGE = "http://cxx.uclibc.org/"
-> +LICENSE = "LGPL"
-> +PRIORITY = "optional"
-> +SECTION = "libs"
-> +
-> +PR = "r0"
-> +
-> +SRCREV = "7efcc107b6bf7a59a85beaf7c7f35da6de0f321e"
-> +
-> +SRC_URI = "git://git.busybox.net/uClibc++;protocol=git \
-> +	   file://006-eabi_fix.patch \
-> +	   file://defconfig"
-> +S = "${WORKDIR}/git"
-> +
-> +# uClibc++ runtime prefix directory (UCLIBCXX_RUNTIME_PREFIX) [/usr/$(TARGET_ARCH)-linux-uclibc] (NEW)
-> +# uClibc++ header file subdirectory (UCLIBCXX_RUNTIME_INCLUDE_SUBDIR) [/include] (NEW)
-> +# uClibc++ library subdirectory (UCLIBCXX_RUNTIME_LIB_SUBDIR) [/lib] (NEW)
-> +# uClibc++ application file subdirectory (UCLIBCXX_RUNTIME_BIN_SUBDIR) [/bin] (NEW)
-> +
-> +EXTRA_OEMAKE = "'OPTIMIZATION=' 'XWARNINGS=' 'XARCH_CFLAGS=${CFLAGS}' \
-> +		'CPU_FLAGS=' 'STRIPTOOL=true' 'LD=${LD}'"
-> +configmangle = 's,^UCLIBCXX_RUNTIME_PREFIX=.*,UCLIBCXX_RUNTIME_PREFIX="${exec_prefix}",; \
-> +		s,^UCLIBCXX_RUNTIME_INCLUDE_SUBDIR=.*,UCLIBCXX_RUNTIME_INCLUDE_SUBDIR="/include/c++-uc",; \
-> +		s,^UCLIBCXX_RUNTIME_LIB_SUBDIR=.*,UCLIBCXX_RUNTIME_LIB_SUBDIR="/lib",; \
-> +		s,^UCLIBCXX_RUNTIME_BIN_SUBDIR=.*,UCLIBCXX_RUNTIME_BIN_SUBDIR="/bin",;'
-> +PARALLEL_MAKE = ""
-> +
-> +do_configure () {
-> +	cp ${WORKDIR}/defconfig ${S}/.config
-> +
-> +	perl -i -p -e 's,^CROSS=.*,TARGET_ARCH=${TARGET_ARCH}\nCROSS=${TARGET_PREFIX},g' ${S}/Rules.mak
-> +	perl -i -p -e '${configmangle}' ${S}/.config
-> +
-> +	oe_runmake oldconfig
-> +}
-> +
-> +do_install () {
-> +	oe_runmake 'DESTDIR=${D}' install
-> +	chmod +x ${D}${libdir}/libuClibc++.so.*
-> +}
-> +
-> +PACKAGES = "g++-uc libuclibc++ libuclibc++-dev"
-> +FILES_g++-uc = "${bindir}/g++-uc"
-> +FILES_libuclibc++ = "${libdir}/*.so.*"
-> +FILES_libuclibc++-dev = "${FILES_uclibc++-dev}"
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ recipes/busybox/busybox-config.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/busybox/busybox-config.inc b/recipes/busybox/busybox-config.inc
+index 26ccec4..723ec0e 100644
+--- a/recipes/busybox/busybox-config.inc
++++ b/recipes/busybox/busybox-config.inc
+@@ -14,6 +14,7 @@ def features_to_busybox_settings(d):
+ 	machine_features = bb.data.getVar('MACHINE_FEATURES', d).split()
+ 	busybox_cfg('ipv6', distro_features, 'CONFIG_FEATURE_IPV6', cnf, rem)
+ 	busybox_cfg('largefile', distro_features, 'CONFIG_LFS', cnf, rem)
++	busybox_cfg('largefile', distro_features, 'CONFIG_FDISK_SUPPORT_LARGE_DISKS', cnf, rem)
+ 	busybox_cfg('nls',  distro_features, 'CONFIG_LOCALE_SUPPORT', cnf, rem)
+ 	busybox_cfg('ipv4', distro_features, 'CONFIG_FEATURE_IFUPDOWN_IPV4', cnf, rem)
+ 	busybox_cfg('ipv6', distro_features, 'CONFIG_FEATURE_IFUPDOWN_IPV6', cnf, rem)
+-- 
+1.7.1
 
 
 
