@@ -1,51 +1,32 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1PKZRq-00011U-QT
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 17:40:59 +0100
-Received: by wwb31 with SMTP id 31so339758wwb.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 08:39:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=xUGGCv1JgNp51HwfYM1dxh3LVyEslXbU7irUJ10PL/s=;
-	b=mwqZ25xq69mWgv0DF2fSKU+ZY75VxNmy+VEzQ93SJ1aZ2oKOMZAoSDVVtwrJvKes3t
-	r3GA/i+q1EKs7tcPAs1B3cC0RZqWiGbJyy05hVrtobYh/PskmN1ztSM/MIj2bKLp3LYr
-	FznfnNkoA5cbNahMLqv2d+fs1WzwJoJ0C36b4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=QYCqBRJiDqKxz+uiN3b3+THXZrF37+TEOLPUSXGjN2gt7MxS0e3rW+TmXNG92F7GHa
-	B5Gcc4iLPu1FPE8pensaytadXEj4oOBzLXF0Pzn4sDr3gHRekJ2CsEJFO+1RRd3G9Ts9
-	SksIKeD3Tk2gZcYnQRTaT7QwetDRI3rdNdmrc=
-Received: by 10.216.22.70 with SMTP id s48mr4377098wes.27.1290443981407; Mon,
-	22 Nov 2010 08:39:41 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Mon, 22 Nov 2010 08:39:20 -0800 (PST)
-In-Reply-To: <4CEA7E5B.7070900@opendreambox.org>
-References: <4CE6FA0C.2090801@balister.org> <4CE9332C.7020701@opendreambox.org>
-	<AANLkTim-vJEbUXtQtm4TQLbKBBrwG2m_tbao0u4kJuWu@mail.gmail.com>
-	<4CE95578.8000604@opendreambox.org>
-	<AANLkTikc4Pm+kgyym+Qdd32R3gPo1HX4QtWE0yCf3ykb@mail.gmail.com>
-	<4CEA7E5B.7070900@opendreambox.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 22 Nov 2010 09:39:20 -0700
-X-Google-Sender-Auth: 6LCFTIZ-yDWS4CfxDd2FxrtoEUA
-Message-ID: <AANLkTi=64shSQLA58Kxjb=i2S9nL+8Gc6E+OfvgGTFLP@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PKZdM-0001E6-Gp for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Nov 2010 17:52:54 +0100
+Received: from f053040216.adsl.alicedsl.de ([78.53.40.216]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PKZcE-0004b2-Re for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Nov 2010 16:51:42 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <4CE9D604.5040202@balister.org>
+References: <1290383951-6683-1-git-send-email-obi@opendreambox.org>
+	<4CE9D604.5040202@balister.org>
+Date: Mon, 22 Nov 2010 17:51:41 +0100
+Message-ID: <1290444701.3703.66.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Merging the release branch into master (was: Re: Revert commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8)
+Subject: Re: [PATCH 1/3] gtk+-1.2: convert to new style staging (fixes xmms build)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,31 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 16:40:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 22 Nov 2010 16:52:55 -0000
+X-Groupsio-MsgNum: 26429
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Fy3pYWu5BJNmtI0c7ln4"
 
-On Mon, Nov 22, 2010 at 7:29 AM, Andreas Oberritter <obi@opendreambox.org>wrote:
+--=-Fy3pYWu5BJNmtI0c7ln4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> On 11/21/2010 06:55 PM, Chris Larson wrote:
-> > The release branch is being merged back to master after the release is
-> > tagged, FYI.
->
-> I've been thinking about it, but I'm not really sure what the point is
-> in that if all fixes should already be in master before entering the
-> release branch, except for maybe some release-branch specific stuff
-> (which in turn must not exist, because it would get merged into master
-> after release has been tagged)? You can't even put some release notes
-> into the release branch?
->
+Am Sonntag, den 21.11.2010, 18:31 -0800 schrieb Philip Balister:
+> On 11/21/2010 03:59 PM, Andreas Oberritter wrote:
+> > * gtk+-1.2 didn't install its pkg-config file, but gtk-config
+> >    depended on it and went crazy without it. xmms uses gtk-config.
+> >
+> > Signed-off-by: Andreas Oberritter<obi@opendreambox.org>
+> > Tested-by: Yury Bushmelev<jay4mail@gmail.com>
+>=20
+> Tested-by: Philip Balister <philip@balister.org>
 
-Primarily for clean git logs.  By *marking* it merged, even though the merge
-wouldn't actually make any changes to content, we ensure that git knows
-there are no commits in the release tag that aren't also in master (git log
-master..releasetag would show nothing, rather than every cherry pick).
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Tested-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
+        Build Configuration:
+        BB_VERSION        =3D "1.10.0"
+        METADATA_BRANCH   =3D "org.openembedded.dev"
+        METADATA_REVISION =3D "483d58d"
+        TARGET_ARCH       =3D "arm"
+        TARGET_OS         =3D "linux-gnueabi"
+        MACHINE           =3D "beagleboard"
+        DISTRO            =3D "angstrom"
+        DISTRO_VERSION    =3D "2010.7-test-20101122"
+        TARGET_FPU        =3D "hard"
+
+[=E2=80=A6]
+
+--=-Fy3pYWu5BJNmtI0c7ln4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzqn50ACgkQPX1aK2wOHVgnQACcCNvdRupsGJw0KBCtKBDzdl+2
+wQ4An2V8wiGvUAikkeKS1ae4jk787NUZ
+=j5QS
+-----END PGP SIGNATURE-----
+
+--=-Fy3pYWu5BJNmtI0c7ln4--
