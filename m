@@ -1,44 +1,45 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PKX4w-0005Fk-6t
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PKXJZ-00029y-4N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 15:09:51 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id A94D3314AEC8
+	Mon, 22 Nov 2010 15:26:02 +0100
+Received: by gxk2 with SMTP id 2so4321509gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 15:07:58 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id A5f0tuSrGts7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 15:07:52 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id AFA42314A8FE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 15:07:52 +0100 (CET)
-Message-ID: <4CEA7937.2070005@opendreambox.org>
-Date: Mon, 22 Nov 2010 15:07:51 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
+	Mon, 22 Nov 2010 06:23:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=Z6rH6spyYmHXwrzZ55ouFDc9Xpb11hZTHLDVRU449Eo=;
+	b=m0n2O7tcxaZpe4joDk3il4ZJgukaBquE+kTm0uelaL6kTdNq3rVim+B1i+qV9c/F3U
+	ggAykSbDOPMsO3KLT+XIKRfPmdfe/ls0UwiJCyovhd9E5f+EfLtRpOBZyZDB4wZunncQ
+	efScqwDv2Xwi/ma3BwXnFhRszXIh2sWqP7p7g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=f2BhKHBgqD/gr1J3h/z6cthWyQTlAUvLTF3kAiQSjD7JmGOcYWdMVO/cNcGdHAonjL
+	sORNFL5BcDLS7dCRKgypJfS5PE/w+pDzyHVNgcVgxc3b9QsbXAqdyFUjvGxN95JdXVWF
+	LK0HknVF6HRc86aKiFZkYIeR8O8QyWV9V7t8o=
 MIME-Version: 1.0
+Received: by 10.231.144.21 with SMTP id x21mr6829415ibu.126.1290435783157;
+	Mon, 22 Nov 2010 06:23:03 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Mon, 22 Nov 2010 06:23:03 -0800 (PST)
+In-Reply-To: <AANLkTin81-gZjjVY-7ObKDZUksz-V=uNtxLWu=Ag7owX@mail.gmail.com>
+References: <1290284795-7824-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<icdase$jgd$1@dough.gmane.org>
+	<AANLkTin81-gZjjVY-7ObKDZUksz-V=uNtxLWu=Ag7owX@mail.gmail.com>
+Date: Mon, 22 Nov 2010 15:23:03 +0100
+Message-ID: <AANLkTinq+rRaXahzk4JagU4jvLimaqh_Ajtp5O0-KTO4@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1290383951-6683-1-git-send-email-obi@opendreambox.org>
-	<AANLkTinS-eXbu8JVq-eAt5+x=yu_rWZHRHSLJ4J3pCSt@mail.gmail.com>
-In-Reply-To: <AANLkTinS-eXbu8JVq-eAt5+x=yu_rWZHRHSLJ4J3pCSt@mail.gmail.com>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/3] gtk+-1.2: convert to new style staging (fixes xmms build)
+Subject: Re: [PATCH] update-rc.d: make update-rc.d local
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 14:10:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Nov 2010 14:26:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 11/22/2010 07:27 AM, Khem Raj wrote:
-> On Sun, Nov 21, 2010 at 3:59 PM, Andreas Oberritter
-> <obi@opendreambox.org> wrote:
->> * gtk+-1.2 didn't install its pkg-config file, but gtk-config
->>  depended on it and went crazy without it. xmms uses gtk-config.
+2010/11/22 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> 2010/11/22 Koen Kooi <k.kooi@student.utwente.nl>:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
 >>
->> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->> Tested-by: Yury Bushmelev <jay4mail@gmail.com>
-> 
-> while you are at it can you fix the license field to be more
-> precise too ?
+>> On 20-11-10 21:26, Frans Meulenbroeks wrote:
+>>> the recipe did not build any more as handhelds.org is gone.
+>>> Since this one is fairly crucial as lots of recipes depend on it
+>>> I decided to put the update-rc.d file in update-rc.d/ instead of
+>>> fetching it.
+>>
+>> If it's local, why are you still patching it in the recipe?
+>>
+>
+> I've been in doubt on this.
+> With the patch the original file is retained as is, but of course we
+> can also apply the patch directly.
+> I've no real preference and went for minimal change.
+> But if people feel getting rid of the patch is preferred, I'll happily
+> submit a new patch.
+> Or is it preferred to use a mirror of the original tarball?
+>
+> Anyway I feel this is something that needs to be resolved before a
+> release is made.
+> Same holds for the php SRC_URI patch. Guess we also need to tackle the
+> multiple providers for depmod and mysqlclient (but that is a different
+> topic).
+>
+> Frans
+>
+For the record.
 
-COPYING says LGPLv2, which could also mean LGPLv2+. Since I personally
-don't care which of both it is, I won't read the detailed license text
-and source code. Therefore no patch wrt. the license field.
+Discussed this with Phil Blundell on irc. He is the maintainer of the
+file and (on irc) has acked my patch.
+His preference was not to apply the patch.
+"because the OE convention is to keep local patchsets separate from
+the upstream source files".
 
-> You dont have to resend the patch for review
-> thanks for nailing it down
-> 
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+I don't have the patch handy here and it is not on patchwork, but I
+will push it tonight. Suggest to add it to the release branch too.
 
-Please apply the patches. My SSH key still hasn't been activated.
-
-Regards,
-Andreas
+Have fun!
+Frans.
 
 
