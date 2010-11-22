@@ -1,44 +1,43 @@
 Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PKbj1-0006ZG-KI
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PKcTy-0007Gd-Vq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 20:06:53 +0100
-Received: by ewy6 with SMTP id 6so3831386ewy.6
+	Mon, 22 Nov 2010 20:55:23 +0100
+Received: by ewy6 with SMTP id 6so3878212ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 11:05:41 -0800 (PST)
+	Mon, 22 Nov 2010 11:54:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer;
-	bh=D0PicCnS0U3RiPVOnot6k5f99BtsebcqYwKg3INEt4Y=;
-	b=aX9G6rrlB1H9ttZ95mcHHtqnjDLMDjrBz99MKu1fB3D46wsvh1bePwnqvmdbvRS27F
-	/5yXWOt7f1xmz5dtQ53F2K2BQPMOqykhnK+ytopQfmIzKJCdrzbHPJIYXmSi5zGqAyVd
-	cZqtR2B+RTnYwGguFAkl2YtpGGlM3iISMYAeg=
+	bh=rn8VH9clpvkWfU5JAlvS2dTIxVJ2N8sIWEFhEbgBjwc=;
+	b=Q/IKqUW8BCPJ5WG4IulTumXDragTEjfIMZLbz6koa5KTY0Xpmdb5D+Fe+3eRJ89ogX
+	7qAbDBf5UfrtE9WsqiTHPi0MmKMHN+RI8B0mrYTEW2oiv1OyBcWYXHBfqrcVAl2Ycw8y
+	YFOk7NPTneRYZCE6PLTDMlnrYaTm5UiODkNjA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=RTHWjh88Zbsl/AD7FTSiAqRzANBAR3Rb/XoOJhcZZWXu2PCfGreUYH1RJjJlDpaHDq
-	oH5llCSwToJM8mdXRbFBISjaFHSW1zbtgn1suQTKWnKn8UO9CxVF4ms0TnHWpr/CeTUM
-	1mf3XRVMWWxFcXHX56DoxbhkmGmapzlYBZyOw=
-Received: by 10.213.113.210 with SMTP id b18mr8357159ebq.50.1290452741543;
-	Mon, 22 Nov 2010 11:05:41 -0800 (PST)
-Received: from localhost.localdomain (D4B26BC1.static.ziggozakelijk.nl
-	[212.178.107.193])
-	by mx.google.com with ESMTPS id w20sm4949515eeh.12.2010.11.22.11.05.39
+	b=A5ipaXQZZrDVQvE9x2PLeoxLy4Ts3j2ktEaq5qI8xmIRq2cmf0AKhLml8EMtZvgP9w
+	AKvC7xYHIU43Cy0cWVRM3+ROFCkYoeeP3OaPVu+ChwpdQ0pEInqPoVPKVCnec4klZVYR
+	5/3dPe61Ic8RiyF7lIJTjoYNDhWp7Dckdcdgk=
+Received: by 10.14.37.10 with SMTP id x10mr4329907eea.33.1290455651383;
+	Mon, 22 Nov 2010 11:54:11 -0800 (PST)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id w20sm4981918eeh.18.2010.11.22.11.54.09
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 22 Nov 2010 11:05:40 -0800 (PST)
+	Mon, 22 Nov 2010 11:54:10 -0800 (PST)
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Nov 2010 20:04:07 +0100
-Message-Id: <1290452647-31323-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
+Date: Mon, 22 Nov 2010 20:53:59 +0100
+Message-Id: <1290455639-7387-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
 X-SA-Exim-Connect-IP: 209.85.215.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] uclibc++: moved to git head
+Subject: [PATCH v3] uclibc++: moved to git head
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,7 +51,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 19:06:53 -0000
+X-List-Received-Date: Mon, 22 Nov 2010 19:55:24 -0000
 
 Removed the 0.1.9 version as it is quite old and does not compile
 renamed files dir to uclibc++
@@ -67,25 +66,20 @@ be a new release soon (there is hardly any activity last 2 years or so).
 Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 ---
 
-This version does move to a newer rev so does not need a patch for cstring
+moved to latest git version
+this also eliminated some patches that are now upstream
 
- recipes/uclibc++/files/defconfig                   |   64 ------------------
- recipes/uclibc++/files/nobash.patch                |   13 ----
- recipes/uclibc++/uclibc++/006-eabi_fix.patch       |   42 ++++++++++++
- recipes/uclibc++/uclibc++/009-compile_fixes.patch  |   70 ++++++++++++++++++++
- .../uclibc++/900-dependent_exception.patch         |   68 +++++++++++++++++++
- recipes/uclibc++/uclibc++/defconfig                |   53 +++++++++++++++
- recipes/uclibc++/uclibc++/nobash.patch             |   13 ++++
- recipes/uclibc++/uclibc++_0.1.9.bb                 |   54 ---------------
- recipes/uclibc++/uclibc++_git.bb                   |   50 ++++++++++++++
- 9 files changed, 296 insertions(+), 131 deletions(-)
+ recipes/uclibc++/files/defconfig             |   64 --------------------------
+ recipes/uclibc++/files/nobash.patch          |   13 -----
+ recipes/uclibc++/uclibc++/006-eabi_fix.patch |   42 +++++++++++++++++
+ recipes/uclibc++/uclibc++/defconfig          |   53 +++++++++++++++++++++
+ recipes/uclibc++/uclibc++_0.1.9.bb           |   54 ----------------------
+ recipes/uclibc++/uclibc++_git.bb             |   47 +++++++++++++++++++
+ 6 files changed, 142 insertions(+), 131 deletions(-)
  delete mode 100644 recipes/uclibc++/files/defconfig
  delete mode 100644 recipes/uclibc++/files/nobash.patch
  create mode 100644 recipes/uclibc++/uclibc++/006-eabi_fix.patch
- create mode 100644 recipes/uclibc++/uclibc++/009-compile_fixes.patch
- create mode 100644 recipes/uclibc++/uclibc++/900-dependent_exception.patch
  create mode 100644 recipes/uclibc++/uclibc++/defconfig
- create mode 100644 recipes/uclibc++/uclibc++/nobash.patch
  delete mode 100644 recipes/uclibc++/uclibc++_0.1.9.bb
  create mode 100644 recipes/uclibc++/uclibc++_git.bb
 
@@ -226,156 +220,6 @@ index 0000000..bc970a7
 + 
 + // GNU C++ personality routine, Version 0.
 + extern "C" _Unwind_Reason_Code __gxx_personality_v0
-diff --git a/recipes/uclibc++/uclibc++/009-compile_fixes.patch b/recipes/uclibc++/uclibc++/009-compile_fixes.patch
-new file mode 100644
-index 0000000..efcb9e6
---- /dev/null
-+++ b/recipes/uclibc++/uclibc++/009-compile_fixes.patch
-@@ -0,0 +1,70 @@
-+--- a/include/associative_base
-++++ b/include/associative_base
-+@@ -318,7 +318,7 @@ protected:
-+ 	typedef std::list<ValueType> listtype;
-+ 
-+ 	typename listtype::iterator base_iter;
-+-	typedef _associative_citer<ValueType, Compare, Allocator> _associative_citer;
-++	typedef _associative_citer<ValueType, Compare, Allocator> __associative_citer;
-+ 
-+ 	
-+ public:
-+@@ -347,13 +347,13 @@ public:
-+ 	bool operator==(const _associative_iter & m) const{
-+ 		return m.base_iter == base_iter;
-+ 	}
-+-	bool operator==(const _associative_citer & m) const{
-++	bool operator==(const __associative_citer & m) const{
-+ 		return m.base_iter == base_iter;
-+ 	}
-+ 	bool operator!=(const _associative_iter & m) const{
-+ 		return m.base_iter != base_iter;
-+ 	}
-+-	bool operator!=(const _associative_citer & m) const{
-++	bool operator!=(const __associative_citer & m) const{
-+ 		return m.base_iter != base_iter;
-+ 	}
-+ 	_associative_iter & operator++(){
-+@@ -378,8 +378,8 @@ public:
-+ 		--base_iter;
-+ 		return temp;
-+ 	}
-+-	operator _associative_citer() const{
-+-		return _associative_citer(base_iter);
-++	operator __associative_citer() const{
-++		return __associative_citer(base_iter);
-+ 	}
-+ 	typename listtype::iterator base_iterator(){
-+ 		return base_iter;
-+--- a/include/string
-++++ b/include/string
-+@@ -1017,11 +1017,11 @@ template<class charT, class traits, clas
-+ 
-+ template <> _UCXXEXPORT bool operator==(const string & lhs, const string & rhs);
-+ template <> _UCXXEXPORT bool operator==(const char * lhs, const string & rhs);
-+-template <> _UCXXEXPORT bool operator==(const string & rhs, const char * rhs);
-++template <> _UCXXEXPORT bool operator==(const string & lhs, const char * rhs);
-+ 
-+ template <> _UCXXEXPORT bool operator!=(const string & lhs, const string & rhs);
-+ template <> _UCXXEXPORT bool operator!=(const char * lhs, const string & rhs);
-+-template <> _UCXXEXPORT bool operator!=(const string & rhs, const char * rhs);
-++template <> _UCXXEXPORT bool operator!=(const string & lhs, const char * rhs);
-+ 
-+ template <> _UCXXEXPORT string operator+(const string & lhs, const char* rhs);
-+ template <> _UCXXEXPORT string operator+(const char* lhs, const string & rhs);
-+--- a/src/string.cpp
-++++ b/src/string.cpp
-+@@ -76,11 +76,11 @@ namespace std{
-+ 
-+ 	template _UCXXEXPORT bool operator==(const string & lhs, const string & rhs);
-+ 	template _UCXXEXPORT bool operator==(const char * lhs, const string & rhs);
-+-	template _UCXXEXPORT bool operator==(const string & rhs, const char * rhs);
-++	template _UCXXEXPORT bool operator==(const string & lhs, const char * rhs);
-+ 
-+ 	template _UCXXEXPORT bool operator!=(const string & lhs, const string & rhs);
-+ 	template _UCXXEXPORT bool operator!=(const char * lhs, const string & rhs);
-+-	template _UCXXEXPORT bool operator!=(const string & rhs, const char * rhs);
-++	template _UCXXEXPORT bool operator!=(const string & lhs, const char * rhs);
-+ 
-+ 	template _UCXXEXPORT string operator+(const string & lhs, const char* rhs);
-+ 	template _UCXXEXPORT string operator+(const char* lhs, const string & rhs);
-diff --git a/recipes/uclibc++/uclibc++/900-dependent_exception.patch b/recipes/uclibc++/uclibc++/900-dependent_exception.patch
-new file mode 100644
-index 0000000..3a5cb7d
---- /dev/null
-+++ b/recipes/uclibc++/uclibc++/900-dependent_exception.patch
-@@ -0,0 +1,68 @@
-+--- a/src/eh_alloc.cpp	2007-06-03 23:51:13.000000000 +0100
-++++ b/src/eh_alloc.cpp	2009-07-13 09:42:39.000000000 +0100
-+@@ -42,4 +42,21 @@
-+ 	free( (char *)(vptr) - sizeof(__cxa_exception) );
-+ }
-+ 
-++#if __GNUC__ * 100 + __GNUC_MINOR__ >= 404
-++extern "C" __cxa_dependent_exception* __cxa_allocate_dependent_exception() throw(){
-++	__cxa_dependent_exception *retval;
-++
-++	retval = static_cast<__cxa_dependent_exception*>(malloc(sizeof(__cxa_dependent_exception)));
-++	if(0 == retval){
-++		std::terminate();
-++	}
-++	memset (retval, 0, sizeof(__cxa_dependent_exception));
-++	return retval ;
-++}
-++
-++extern "C" void __cxa_free_dependent_exception(__cxa_dependent_exception *vptr) throw(){
-++	free( vptr );
-++}
-++#endif
-++
-+ }
-+--- a/include/unwind-cxx.h	2009-07-13 10:01:11.000000000 +0100
-++++ b/include/unwind-cxx.h	2009-07-13 10:14:08.000000000 +0100
-+@@ -79,6 +79,41 @@
-+   _Unwind_Exception unwindHeader;
-+ };
-+ 
-++#if __GNUC__ * 100 + __GNUC_MINOR__ >= 404
-++// A dependent C++ exception object consists of a wrapper around an unwind
-++// object header with additional C++ specific information, containing a pointer
-++// to a primary exception object.
-++
-++struct __cxa_dependent_exception
-++{
-++  // The primary exception this thing depends on.
-++  void *primaryException;
-++
-++  // The C++ standard has entertaining rules wrt calling set_terminate
-++  // and set_unexpected in the middle of the exception cleanup process.
-++  std::unexpected_handler unexpectedHandler;
-++  std::terminate_handler terminateHandler;
-++
-++  // The caught exception stack threads through here.
-++  __cxa_exception *nextException;
-++
-++  // How many nested handlers have caught this exception.  A negated
-++  // value is a signal that this object has been rethrown.
-++  int handlerCount;
-++
-++  // Cache parsed handler data from the personality routine Phase 1
-++  // for Phase 2 and __cxa_call_unexpected.
-++  int handlerSwitchValue;
-++  const unsigned char *actionRecord;
-++  const unsigned char *languageSpecificData;
-++  _Unwind_Ptr catchTemp;
-++  void *adjustedPtr;
-++
-++  // The generic exception header.  Must be last.
-++  _Unwind_Exception unwindHeader;
-++};
-++
-++#endif
-+ // Each thread in a C++ program has access to a __cxa_eh_globals object.
-+ struct __cxa_eh_globals
-+ {
 diff --git a/recipes/uclibc++/uclibc++/defconfig b/recipes/uclibc++/uclibc++/defconfig
 new file mode 100644
 index 0000000..168e9a4
@@ -435,25 +279,6 @@ index 0000000..168e9a4
 +BUILD_STATIC_LIB=y
 +# BUILD_ONLY_STATIC_LIB is not set
 +# DODEBUG is not set
-diff --git a/recipes/uclibc++/uclibc++/nobash.patch b/recipes/uclibc++/uclibc++/nobash.patch
-new file mode 100644
-index 0000000..0b1501b
---- /dev/null
-+++ b/recipes/uclibc++/uclibc++/nobash.patch
-@@ -0,0 +1,13 @@
-+Index: uClibc++-0.2.2/bin/Makefile
-+===========================================================================
-+--- uClibc++-0.2.2.orig/bin/Makefile	2007-06-03 23:51:12.000000000 +0100
-++++ uClibc++-0.2.2/bin/Makefile	        2010-11-11 10:09:48.000000000 +0000
-+@@ -13,7 +13,7 @@
-+ 	$(INSTALL) -m 755 $(WRAPPER) $(PREFIX)$(UCLIBCXX_RUNTIME_BINDIR)
-+ 
-+ $(WRAPPER):
-+-	echo "#!/bin/bash" > $(WRAPPER)
-++	echo "#!/bin/sh" > $(WRAPPER)
-+ 	echo "" >> $(WRAPPER)
-+ 	echo 'WRAPPER_INCLUDEDIR="$${WRAPPER_INCLUDEDIR:=-I$(UCLIBCXX_RUNTIME_INCLUDEDIR)}"' >> $(WRAPPER)
-+ 	echo 'WRAPPER_LIBDIR="$${WRAPPER_LIBDIR:=-L$(UCLIBCXX_RUNTIME_LIBDIR)}"' >> $(WRAPPER)
 diff --git a/recipes/uclibc++/uclibc++_0.1.9.bb b/recipes/uclibc++/uclibc++_0.1.9.bb
 deleted file mode 100644
 index be1ac14..0000000
@@ -516,10 +341,10 @@ index be1ac14..0000000
 -SRC_URI[sha256sum] = "82342a5d6088421e79699dd7af614ebecf6dd335eabce07690902a379f5ea8de"
 diff --git a/recipes/uclibc++/uclibc++_git.bb b/recipes/uclibc++/uclibc++_git.bb
 new file mode 100644
-index 0000000..7a9b5ba
+index 0000000..5b0d374
 --- /dev/null
 +++ b/recipes/uclibc++/uclibc++_git.bb
-@@ -0,0 +1,50 @@
+@@ -0,0 +1,47 @@
 +DESCRIPTION = "A C++ standard library targeted towards the embedded \
 +systems/software market."
 +HOMEPAGE = "http://cxx.uclibc.org/"
@@ -532,10 +357,7 @@ index 0000000..7a9b5ba
 +SRCREV = "7efcc107b6bf7a59a85beaf7c7f35da6de0f321e"
 +
 +SRC_URI = "git://git.busybox.net/uClibc++;protocol=git \
-+	   file://nobash.patch \
 +	   file://006-eabi_fix.patch \
-+	   file://009-compile_fixes.patch \
-+	   file://900-dependent_exception.patch \
 +	   file://defconfig"
 +S = "${WORKDIR}/git"
 +
@@ -571,7 +393,7 @@ index 0000000..7a9b5ba
 +FILES_libuclibc++ = "${libdir}/*.so.*"
 +FILES_libuclibc++-dev = "${FILES_uclibc++-dev}"
 -- 
-1.7.0.4
+1.6.4.2
 
 
 
