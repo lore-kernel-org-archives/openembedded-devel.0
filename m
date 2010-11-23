@@ -1,47 +1,50 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1PKxqE-00013p-5P
+	(envelope-from <mrchapp@gmail.com>) id 1PKy5A-0003LK-N9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 19:43:46 +0100
-Received: by vws6 with SMTP id 6so2127277vws.6
+	Tue, 23 Nov 2010 19:59:13 +0100
+Received: by fxm7 with SMTP id 7so1589253fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 10:42:32 -0800 (PST)
+	Tue, 23 Nov 2010 10:57:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=1MBKKD6AzUzzBdU6X6sbePk1eZ2s5VgtWeDVmoDIzx8=;
-	b=b5omGFQp2LNJcGCL5ViCB0Z/J0jgfy+dNzh3WdoAJJSxDbYvHEGkpeQrlPRSPdg1iO
-	FRq4WFejF/XO0WevJ7GIhzK3+EJvY8sdDIl4FXCWKV/AlhBnKsmhWsL/bfXuztdYeR7b
-	W4ga75hZKMwgQ8qS7iPFih9r0Lsc7KEipZve0=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=Pkxi5S+ZHbtFE9Xmp9Qq0e+QUYBbjikbWJS7Kq7ON1E=;
+	b=pnSyFeCplssdu7Ddfa5lUBjuP08zNPD2LkTakrdJxFATCzb5F97eAPwstghoRYqutj
+	rk7Nzylh11/uEjwN3GOXiLRTmE62LECLKKFmU/p6kKmc/pTUog5gAaeOFjAN1Jz8DPD0
+	3bAgPHASBLmavdcAeeZQw68ihENayrYiEJ/jc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=rPud1todsxAmfg4X2vgQmS9CIb+6DjlbbiQH49hNVzs+JW3zfdymSvqXMvX81WLr8t
-	Jqhavr39gGDBIKZv9gp12RKBlv5cnQKYlmlCcGkPHyC0JIetiMgIDYhd4PM6Ord3AZ0l
-	75skWRr36cDBsFIK53Tw7RwplypyQK4mDUyjQ=
-Received: by 10.216.154.8 with SMTP id g8mr1440957wek.12.1290537751041; Tue,
-	23 Nov 2010 10:42:31 -0800 (PST)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=RvFnd5z35EA4laedDGHcAWS4MPs8K2n0JNlv7A9VnJnxV9P53P+UxftDpqpLfIT1+6
+	7iB0Z+Sa5z3O7S5/FK3jwJ3fwG61yaDYwZ5EosKt3ZVDQIbTpCgBJW7YSuUG4vzNMaUR
+	i/XHMIqHJKlAHxu1pob7uEymBAtMdta+0XfP4=
+Received: by 10.223.125.132 with SMTP id y4mr497744far.148.1290538676519; Tue,
+	23 Nov 2010 10:57:56 -0800 (PST)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Tue, 23 Nov 2010 10:42:10 -0800 (PST)
-In-Reply-To: <ich10v$f5b$1@dough.gmane.org>
-References: <AANLkTim3cKQRr0e1VQRiLf=95jOHC5=TGPQfXbDoZCmj@mail.gmail.com>
-	<ich10v$f5b$1@dough.gmane.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 23 Nov 2010 11:42:10 -0700
-X-Google-Sender-Auth: oP-I9POGnj04lTX7C7AzkJa_s7I
-Message-ID: <AANLkTimuLxR88D2jRH=-Ky0BRLK5GkbyqUcSO8FhK=KW@mail.gmail.com>
+Received: by 10.223.115.209 with HTTP; Tue, 23 Nov 2010 10:57:36 -0800 (PST)
+In-Reply-To: <ich14q$f5b$2@dough.gmane.org>
+References: <20101123113706.GA3533@lit.local.igalia.com>
+	<4CEBD252.7000502@mentor.com>
+	<20101123145713.GA3032@lit.local.igalia.com>
+	<4CEBDABB.1060607@mentor.com>
+	<6EB1C564-9BA3-4833-B7F3-72EA4B2F8C51@dominion.thruhere.net>
+	<20101123160525.GB3032@lit.local.igalia.com>
+	<ich14q$f5b$2@dough.gmane.org>
+From: =?ISO-8859-1?Q?Daniel_D=EDaz?= <mrchapp@gmail.com>
+Date: Tue, 23 Nov 2010 12:57:36 -0600
+Message-ID: <AANLkTiknZQDSiVKOyNPysN5cNjDKn2LwAk5ODAs8cRSN@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: mrchapp@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BitBake parallel parsing testing
+Subject: Re: external-toolchain-csl-1.0-r6 fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,54 +58,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 18:43:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Nov 2010 18:59:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 23, 2010 at 11:26 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 23-11-10 15:29, Chris Larson wrote:
+Hello!
+
+
+On Tue, Nov 23, 2010 at 12:28 PM, Koen Kooi <k.kooi@student.utwente.nl> wro=
+te:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
->> Thanks for your time, and do let me know what you think, either of the
->> code, performance in general, or the new progress bar (shows an ETA),
+> On 23-11-10 17:05, V=EDctor M. J=E1quez L. wrote:
+>> On Tue, Nov 23, 2010 at 04:58:54PM +0100, Koen Kooi wrote:
+>>>
+>>> Op 23 nov 2010, om 16:16 heeft Tom Rini het volgende geschreven:
+>>>
+>>>> On 11/23/2010 07:57 AM, V=EDctor M. J=E1quez L. wrote:
+>>>>> On Tue, Nov 23, 2010 at 07:40:18AM -0700, Tom Rini wrote:
+>>>>>> On 11/23/2010 04:37 AM, V=EDctor M. J=E1quez L. wrote:
+>>>>>>> I'm trying to build minimal-image with CSL toolchain, but I got thi=
+s error:
+>>>>>>>
+>>>>>>> NOTE: package external-toolchain-csl-1.0-r6: task do_install: Start=
+ed
+>>>>>>> ERROR: TaskFailed event exception, aborting
+>>>>>>> ERROR: Build of /media/DISK/vjaquez-angstrom-setup-scripts/sources/=
+openembedded/recipes/meta/external-toolchain-csl.bb do_install failed
+>>>>>>> ERROR: Task 187 (/media/DISK/vjaquez-angstrom-setup-scripts/sources=
+/openembedded/recipes/meta/external-toolchain-csl.bb, do_install) failed wi=
+th 256
+>>>>>>> ERROR: '/media/DISK/vjaquez-angstrom-setup-scripts/sources/openembe=
+dded/recipes/meta/external-toolchain-csl.bb' failed
+>>>>>>> ERROR: Function do_install failed
+>>>>>>> NOTE: Task failed: ('function do_install failed', '/media/DISK/vjaq=
+uez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-l=
+inux-gnueabi/external-toolchain-csl-1.0-r6/temp/log.do_install.22227')
+>>>>>>> ERROR: Logfile of failure stored in: /media/DISK/vjaquez-angstrom-s=
+etup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/e=
+xternal-toolchain-csl-1.0-r6/temp/log.do_install.22227
+>>>>>>> Log data follows:
+>>>>>>> | cp: cannot stat `/media/DISK/sgpp/arm-2010q1/arm-angstrom-linux-g=
+nueabi/libc/lib/*': No such file or directory
+>>>>>>> | ERROR: Function do_install failed
+>>>>>>> NOTE: package external-toolchain-csl-1.0-r6: task do_install: Faile=
+d
+>>>>>>> ERROR: TaskFailed event exception, aborting
+>>>>>>>
+>>>>>>> For some reason the variable ${TARGET_SYS} is evaluated as
+>>>>>>> arm-angstrom-linux-gnueabi instead of arm-none-linux-gnueabi which =
+is the
+>>>>>>> correct value.
+>>>>>>
+>>>>>> Please post your local.conf settings as well as what version of
+>>>>>> openembedded (and what branch) you are using.
+>>>>>
+>>>>> I'm using the openembedded's branch org.openembedded.dev (HEAD)
+>>>> [snip]
+>>>>>
+>>>>> If I apply this patch[1] the problem seems to be solved.
+>>>>>
+>>>>> 1. http://www.mail-archive.com/openembedded-devel@lists.openembedded.=
+org/msg11415.html
+>>>>
+>>>> I thought the patch had been applied. =A0Koen, do you still object aft=
+er it was explained that currently angstrom is always going to win setting =
+that variable unless it's made a ?=3D ? =A0Thanks!
+>>>
+>>> I still object to that patch, since a different solution has been appli=
+ed
+>>> already.
+>>
+>> But they not seem to work (at least for me).
+>>
+>>> And I still don't see why people want to use known broken
+>>> toolchains...
+>>
+>> If you make the statement that angstrom distribution _cannot_ be built u=
+sing any
+>> external toolchain,
 >
-> The heuristic for the progress needs some work, it currently seems to
-> take in account all the parsed recipes instead of the last N recipes.
+> It builds fine using external angstrom toolchains :)
 
-That's what our progress display always did, it's just more obvious now.
+I too need CSL support.
 
-> Try ctrl-c'ing it at 75% and restarting, you'll see the ETA taking weird
-> values. In my case it stayed on "10 seconds" for more than a minute.
+Do you mean to say that OE will NOT support CodeSourcery toolchains?
+It is already there for Poky and V=EDctor has shown it works with OE as
+well.
 
-The issue is one I've discussed with foerster a fair bit already.
-When you're fully cached, the majority of the time isn't in the
-parsing, it's in the loading of the cache file from disk, which isn't
-part of our progress at all right now.  Either we stall for seconds
-before the progress bar comes up, or we don't appear to stall, but the
-ETA is a bit off.
+Greetings!
 
-Long term the intent is to properly integrate cache loading into this
-progress bar, or into its own -- see
-https://github.com/foerster/bitbake/commit/320b114d92181b3f944776b7e8c8db4b868ee3f1
-for foerster's initial work on this.
+Daniel D=EDaz
+yosoy@danieldiaz.org
 
-After thinking about what you mentioned about the recipe count being
-parsed, and given the fact that cached recipes aren't "parsed",
-they're loaded from disk and then added to our CacheData, perhaps we
-should change the parsing progress display to truly only show the
-recipes being *parsed*, which is what you implied, and add a "Loading
-cache..." message before the progress bar comes up, so we don't appear
-to stall, then add a proper progress bar for the cache file loading as
-a second step.
 
-Alternatively, we change the progress display to truly indicate what's
-being done.. if we consider all recipes, it's not *parsing* that we're
-doing, its .. perhaps.. processing?
 
-*ponders*
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFM7AfaMkyGM64RGpERAsotAKCIK8UfxwWuUX6JUFPiVnB3FuflnwCglOLE
+> q/rixioxsF0CT/cg+gxgIj0=3D
+> =3DZ0T+
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
