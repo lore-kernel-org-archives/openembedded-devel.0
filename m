@@ -1,48 +1,44 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PKk2e-00050f-Po
+	(envelope-from <raj.khem@gmail.com>) id 1PKlLk-0006hq-5r
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 04:59:41 +0100
-Received: by pvd12 with SMTP id 12so1810752pvd.6
+	Tue, 23 Nov 2010 06:23:28 +0100
+Received: by pxi17 with SMTP id 17so1819630pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 19:58:27 -0800 (PST)
+	Mon, 22 Nov 2010 21:22:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=Oxrm1+NtydR8jWLfrC7F1qlAJgWC90a3XgxtnijwM9U=;
-	b=KAgeGOc3LryS3lEmtwwNJxjnnU1onHtFmoQ+05ZDYsSz2ornoDn33eDmIb+h/XvjR6
-	YVm36KB1rWxHaj2NQUQXZZ4PQcCRk5JzDv58A2tPSLbrvGFca/paOLNt841e7R3R83xP
-	J9dZiQxRPP8cL5rDhLcvaVzW+3FFGP9bE3icc=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=MuuvAIevBWlJ1lieDwGpkqDFhQ8l3tzOu5w++dWHNrE=;
+	b=jGpAWBGOFsSyGOdeJJcp5h9+4+YN+bNMU5gtyX9gWxHVpSFpn90B8LOrLOxzTk1pXF
+	yJFIhWb3IgCGmu2p2KzQR3hx1xyU98rS3y1nNEPaYZsmNh2ETbDPPqHkWUYQ/bJkOEG2
+	Otyu0Um8oo3P/2dR/BRyZFK/otj0eMvbL5qo0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=e6uriLxgxZKGD5zcFNHvRNVJ+VhnAguyq4NHuy7tKq6GrG1yxuzeWHBAwqtJ40NLSj
-	TniUBmdAAvOSqYrdNixwLdgEQy1vI4V4QXWBXKGtAiwxZ8C34hLUPfm8TToTPdJgVgVa
-	T7TyqmTqgYZormxCcPEBcYoHPVVlTiVe36L1A=
-Received: by 10.142.232.9 with SMTP id e9mr5883424wfh.153.1290484707817;
-	Mon, 22 Nov 2010 19:58:27 -0800 (PST)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	v19sm7310624wfh.12.2010.11.22.19.58.25
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=nT2zLwJR5M/H7bBnT39X3TYaxzMAXqoOzdv7J6G647pZqKdfBrVOkP3jSp7uPkTKAj
+	0g5Kf7CtaYYtzksDHIVmPPxKV3Y6m16xCkr/B7Lb2zGkUK3BHW+s4adrEzTtU7ke7XTz
+	lj89DBSLG3oxWoXE/5aR/+yBpJr1uBIPpbYIs=
+Received: by 10.142.98.3 with SMTP id v3mr5986044wfb.191.1290489735011;
+	Mon, 22 Nov 2010 21:22:15 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id f5sm4053863wfg.14.2010.11.22.21.22.13
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 22 Nov 2010 19:58:26 -0800 (PST)
-Message-ID: <4CEB3BDD.1050709@gmail.com>
-Date: Tue, 23 Nov 2010 14:28:21 +1030
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Mon, 22 Nov 2010 21:22:14 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Mon, 22 Nov 2010 21:21:25 -0800
+Message-Id: <1290489685-22499-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,LONGWORDS,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] sane-toolchain-uclibc.inc: s/PREFERRED_UCLIBC_VERSION/PREFERRED_UCLIBC/
+Subject: [PATCH] xserver-kdrive-common.inc: Add $PACKAGES to PROVIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,43 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 03:59:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Nov 2010 05:23:28 -0000
 
+Fixes the issue where opkg complains about missing
+Unknown package 'xserver-kdrive-fbdev'.
+| Collected errors:
+| * opkg_install_cmd: Cannot install package  xserver-kdrive-fbdev.
 
-Changed to match commit a69c8a4da6be7c3b6bd839f839d815e7de1b2c9f.
-
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/distro/include/sane-toolchain-uclibc.inc |   12 ++++++------
- 1 files changed, 6 insertions(+), 6 deletions(-)
+ recipes/xorg-xserver/xserver-kdrive-common.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/conf/distro/include/sane-toolchain-uclibc.inc b/conf/distro/include/sane-toolchain-uclibc.inc
-index bfe0bc8..41b133c 100644
---- a/conf/distro/include/sane-toolchain-uclibc.inc
-+++ b/conf/distro/include/sane-toolchain-uclibc.inc
-@@ -14,12 +14,12 @@ USE_NLS ?= "no"
- USE_NLS_glib-2.0-native = "yes"
- USE_NLS_gcc-cross = "no"
+diff --git a/recipes/xorg-xserver/xserver-kdrive-common.inc b/recipes/xorg-xserver/xserver-kdrive-common.inc
+index 6272a3a..7ee22b1 100644
+--- a/recipes/xorg-xserver/xserver-kdrive-common.inc
++++ b/recipes/xorg-xserver/xserver-kdrive-common.inc
+@@ -1,11 +1,12 @@
+ LICENSE = "MIT"
+ DEPENDS = "compositeproto damageproto fixesproto recordproto resourceproto scrnsaverproto xineramaproto videoproto xextproto xproto \
+ 	libxau libxext libxdmcp libxfont libxrandr tslib virtual/libx11 xtrans xextproto-70-includes"
+-INC_PR = "r28"
++INC_PR = "r29"
  
--PREFERRED_VERSION_uclibc                    ?= "${PREFERRED_UCLIBC_VERSION}"
--PREFERRED_VERSION_uclibc-initial            ?= "${PREFERRED_UCLIBC_VERSION}"
--PREFERRED_VERSION_uclibc-cross              ?= "${PREFERRED_UCLIBC_VERSION}"
--PREFERRED_VERSION_uclibc-cross-sdk          ?= "${PREFERRED_UCLIBC_VERSION}"
--PREFERRED_VERSION_uclibc-cross-initial      ?= "${PREFERRED_UCLIBC_VERSION}"
--PREFERRED_VERSION_uclibc-cross-intermediate ?= "${PREFERRED_UCLIBC_VERSION}"
-+PREFERRED_VERSION_uclibc                    ?= "${PREFERRED_UCLIBC}"
-+PREFERRED_VERSION_uclibc-initial            ?= "${PREFERRED_UCLIBC}"
-+PREFERRED_VERSION_uclibc-cross              ?= "${PREFERRED_UCLIBC}"
-+PREFERRED_VERSION_uclibc-cross-sdk          ?= "${PREFERRED_UCLIBC}"
-+PREFERRED_VERSION_uclibc-cross-initial      ?= "${PREFERRED_UCLIBC}"
-+PREFERRED_VERSION_uclibc-cross-intermediate ?= "${PREFERRED_UCLIBC}"
+ PKGN ?= "xserver-kdrive"
  
- #mess with compiler flags to use -Os instead of -O2
- #Please see http://free-electrons.com/doc/embedded_linux_optimizations/img47.html for some more info
+ PROVIDES = "virtual/xserver"
++PROVIDES += "${PACKAGES}"
+ PACKAGES =+ "${PKGN}-fbdev \
+              ${PKGN}-sdl \
+              ${PKGN}-fake \
 -- 
-1.7.1
+1.7.0.4
 
 
 
