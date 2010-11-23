@@ -1,32 +1,35 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PKg6L-0008Dn-Kq
+	(envelope-from <andrea.adami@gmail.com>) id 1PKgOY-0000fJ-Uf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 00:47:14 +0100
-Received: by wyb40 with SMTP id 40so790563wyb.6
+	Tue, 23 Nov 2010 01:06:03 +0100
+Received: by wwb29 with SMTP id 29so362182wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 15:46:01 -0800 (PST)
+	Mon, 22 Nov 2010 16:04:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=ZqtSvetx9U4+WqZoFwrdikjrhLvJ6HUrBblC+tkF0t0=;
-	b=shTb4vpvo9Km+PaUzedpbCrpalfO6GhIDZbyH3Oyu5cV/Hh9mpA8jFRT+WqTL5xWg/
-	O+eoU68NgV/xooZPtIhwOKBrAL7SB70R2U+YsDq9VuCw7DEDvziwOdQvDB7R7UHEH0kf
-	j+fERF0GAwNbgObhBWGexhefSZ0j4lU12ouBU=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=3lD9G5Mmhb+YC45fmy92k5LPTyuzsnGhGh8H/OTCxi0=;
+	b=adSDPFfc2ceC1QOdj6SJWwSQeAgppi2C0cElX0o4/sJqwq3G15X9CO/93glg9vMu0O
+	xN9URYfOe3hWsWLVeELZQJNOXiw/7aOknoZFWWHFtIWKHLQx4pJhBvJi8MzC0qS8Z6og
+	tEG+YJhyE0hGQf2J1XSyFhbD+a052Jm+a0N+c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=JWmia3NOn1XwsM2x0oIZFoB4MzqbRQo/PXGdj7TjRy3/q4xB+0ZOeqxJTq0dnlnIjY
-	yZTMZONZXVwBfTaRf5Z9Cf9XAXa0g5TrO/8miVy5oGfl5qPcPFjLQmrDDTGvPpX4hkm/
-	TCmR12ZIGQN/1+nFMeq7Solr3GIhnNj3bB+Kc=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=bJYX5PUjLmqhwWsRlx0Qy7yicpdceOytwgOHBkXhVhJTopsr4PfleicMbNonLBjqeF
+	cMFDUA++vYLSzNAGIOhjP3KC4mVl/AuOXZFaJOiZwM0ElJMC7pRVyMRdcU4c21PVwmcg
+	aJGuOx3OLPHLQmOsPi64BcNpz/pDmBZysq3U8=
 MIME-Version: 1.0
-Received: by 10.216.36.146 with SMTP id w18mr5670790wea.70.1290469560980; Mon,
-	22 Nov 2010 15:46:00 -0800 (PST)
-Received: by 10.216.49.130 with HTTP; Mon, 22 Nov 2010 15:46:00 -0800 (PST)
-Date: Tue, 23 Nov 2010 00:46:00 +0100
-Message-ID: <AANLkTimt7_P96yJMtLVd5S8ZOgH-=6VgTny=CezhOJ7P@mail.gmail.com>
+Received: by 10.216.38.84 with SMTP id z62mr255439wea.70.1290470690722; Mon,
+	22 Nov 2010 16:04:50 -0800 (PST)
+Received: by 10.216.49.130 with HTTP; Mon, 22 Nov 2010 16:04:50 -0800 (PST)
+In-Reply-To: <AANLkTimt7_P96yJMtLVd5S8ZOgH-=6VgTny=CezhOJ7P@mail.gmail.com>
+References: <AANLkTimt7_P96yJMtLVd5S8ZOgH-=6VgTny=CezhOJ7P@mail.gmail.com>
+Date: Tue, 23 Nov 2010 01:04:50 +0100
+Message-ID: <AANLkTikQLnSYpAF4YivEWQODjHpOdHowndLOkyh3LJAp@mail.gmail.com>
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Connect-IP: 74.125.82.43
 X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -34,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: automake-1.11 vs. host $perl_threads
+Subject: Re: automake-1.11 vs. host $perl_threads
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,55 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2010 23:47:14 -0000
+X-List-Received-Date: Tue, 23 Nov 2010 00:06:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+I found something in run.do_configure of automake-1.11
 
-in log.do_configure of automake-native-1.11.1-r3.1 I see
+do_configure() {
+        if false
+        then
+                export
+ac_cv_path_PERL="${ac_cv_path_PERL=/oe/build/tmp/sysroots/i686-linux/usr/bin/perl}"
+        fi
+        autotools_do_configure
 
-checking for perl... /usr/bin/perl
-checking whether /usr/bin/perl supports ithreads... yes
+}
 
-In fact I have in my
- /oe/build/tmp/sysroots/i686-linux/usr/share/automake-1.11/Automake/Config.pm
+It comes from
 
-our $APIVERSION = '1.11';
-our $PACKAGE = 'automake';
-our $VERSION = '1.11.1';
-our $libdir = '/oe/build/tmp/sysroots/i686-linux/usr/share/automake-1.11';
-our $perl_threads = 1;
 
-Well, that seems just fine but since some days building on a Gentoo
-host, whose perl is compiled without threads support (no 'ithreads'
-use flag) I trigger a nasty error:
+do_configure_prepend () {
+        if ${@['true', 'false'][bb.data.inherits_class('native', d)]}
+        then
+                export ac_cv_path_PERL="${ac_cv_path_PERL=${bindir}/perl}"
+        fi
+}
 
-NOTE: package libx11-1_1.4.0-r9.0: task do_configure: Started
-ERROR: Logfile of failure stored in:
-/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/libx11-1_1.4.0-r9.0/temp/log.do_configure.4482
-Log data follows:
-| This Perl not built to support threads
-| Compilation failed in require at
-/oe/build/tmp/sysroots/i686-linux/usr/bin/automake line 139.
-| BEGIN failed--compilation aborted at
-/oe/build/tmp/sysroots/i686-linux/usr/bin/automake line 144.
-| This Perl not built to support threads
-| Compilation failed in require at
-/oe/build/tmp/sysroots/i686-linux/usr/bin/automake line 139.
-| BEGIN failed--compilation aborted at
-/oe/build/tmp/sysroots/i686-linux/usr/bin/automake line 144.
-NOTE: package libx11-1_1.4.0-r9.0: task do_configure: Failed
+test fails...
 
-Note that in the host   /usr/share/automake-1.11/Automake/Config.pm I have
-
-our $perl_threads = 0;
-
-So it seems to me that something is getting mixed between perl-native
-and perl on host :/
-
-Any idea?
-
-Regards
 
 Andrea
 
