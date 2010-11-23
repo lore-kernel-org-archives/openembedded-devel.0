@@ -1,33 +1,38 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <robert@erafx.com>) id 1PKv1K-0004QN-IU
+	(envelope-from <koen@dominion.thruhere.net>) id 1PKvHw-00057e-Dy
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 16:43:03 +0100
-Received: by qyk7 with SMTP id 7so3319586qyk.6
+	Tue, 23 Nov 2010 17:00:15 +0100
+Received: by gwaa11 with SMTP id a11so5187373gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 07:41:49 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.224.180.131 with SMTP id bu3mr6668359qab.11.1290526909397;
-	Tue, 23 Nov 2010 07:41:49 -0800 (PST)
-Received: by 10.220.178.204 with HTTP; Tue, 23 Nov 2010 07:41:49 -0800 (PST)
-X-Originating-IP: [24.165.208.114]
-In-Reply-To: <4CEBDFF0.2070001@cbnco.com>
-References: <AANLkTim3cKQRr0e1VQRiLf=95jOHC5=TGPQfXbDoZCmj@mail.gmail.com>
-	<4CEBDFF0.2070001@cbnco.com>
-Date: Tue, 23 Nov 2010 10:41:49 -0500
-Message-ID: <AANLkTike5K3is8FUg9CiBD4t-3FDQRveH00Y1UAxW479@mail.gmail.com>
-From: Robert Foerster <robert@erafx.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: robert@erafx.com
+	Tue, 23 Nov 2010 07:58:58 -0800 (PST)
+Received: by 10.216.50.75 with SMTP id y53mr6597112web.85.1290527936985;
+	Tue, 23 Nov 2010 07:58:56 -0800 (PST)
+Received: from [172.20.0.255] (ip545070eb.adsl-surfen.hetnet.nl
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id a2sm2933931wer.17.2010.11.23.07.58.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 23 Nov 2010 07:58:55 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <4CEBDABB.1060607@mentor.com>
+Date: Tue, 23 Nov 2010 16:58:54 +0100
+Message-Id: <6EB1C564-9BA3-4833-B7F3-72EA4B2F8C51@dominion.thruhere.net>
+References: <20101123113706.GA3533@lit.local.igalia.com>	<4CEBD252.7000502@mentor.com>
+	<20101123145713.GA3032@lit.local.igalia.com>
+	<4CEBDABB.1060607@mentor.com>
+To: Tom Rini <tom_rini@mentor.com>
+X-Mailer: Apple Mail (2.1082)
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: koen@dominion.thruhere.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: BitBake parallel parsing testing
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: external-toolchain-csl-1.0-r6 fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +46,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 15:43:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 23 Nov 2010 16:00:15 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Yea, in testing again, I am getting the same results now with num_cpu or
-2*num_cpu.  All 4 cores are pegged at 100% either way.
 
-Not sure what causes the hiccup in the number before, must have been
-something else consuming CPU.
+Op 23 nov 2010, om 16:16 heeft Tom Rini het volgende geschreven:
 
-On Tue, Nov 23, 2010 at 10:38 AM, Michael Smith <msmith@cbnco.com> wrote:
+> On 11/23/2010 07:57 AM, V=EDctor M. J=E1quez L. wrote:
+>> On Tue, Nov 23, 2010 at 07:40:18AM -0700, Tom Rini wrote:
+>>> On 11/23/2010 04:37 AM, V=EDctor M. J=E1quez L. wrote:
+>>>> I'm trying to build minimal-image with CSL toolchain, but I got =
+this error:
+>>>>=20
+>>>> NOTE: package external-toolchain-csl-1.0-r6: task do_install: =
+Started
+>>>> ERROR: TaskFailed event exception, aborting
+>>>> ERROR: Build of =
+/media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/me=
+ta/external-toolchain-csl.bb do_install failed
+>>>> ERROR: Task 187 =
+(/media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/m=
+eta/external-toolchain-csl.bb, do_install) failed with 256
+>>>> ERROR: =
+'/media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/m=
+eta/external-toolchain-csl.bb' failed
+>>>> ERROR: Function do_install failed
+>>>> NOTE: Task failed: ('function do_install failed', =
+'/media/DISK/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/work=
+/armv7a-angstrom-linux-gnueabi/external-toolchain-csl-1.0-r6/temp/log.do_i=
+nstall.22227')
+>>>> ERROR: Logfile of failure stored in: =
+/media/DISK/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/=
+armv7a-angstrom-linux-gnueabi/external-toolchain-csl-1.0-r6/temp/log.do_in=
+stall.22227
+>>>> Log data follows:
+>>>> | cp: cannot stat =
+`/media/DISK/sgpp/arm-2010q1/arm-angstrom-linux-gnueabi/libc/lib/*': No =
+such file or directory
+>>>> | ERROR: Function do_install failed
+>>>> NOTE: package external-toolchain-csl-1.0-r6: task do_install: =
+Failed
+>>>> ERROR: TaskFailed event exception, aborting
+>>>>=20
+>>>> For some reason the variable ${TARGET_SYS} is evaluated as
+>>>> arm-angstrom-linux-gnueabi instead of arm-none-linux-gnueabi which =
+is the
+>>>> correct value.
+>>>=20
+>>> Please post your local.conf settings as well as what version of
+>>> openembedded (and what branch) you are using.
+>>=20
+>> I'm using the openembedded's branch org.openembedded.dev (HEAD)
+> [snip]
+>>=20
+>> If I apply this patch[1] the problem seems to be solved.
+>>=20
+>> 1. =
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg1=
+1415.html
+>=20
+> I thought the patch had been applied.  Koen, do you still object after =
+it was explained that currently angstrom is always going to win setting =
+that variable unless it's made a ?=3D ?  Thanks!
 
-> Chris Larson wrote:
->
->> Thanks for your time, and do let me know what you think, either of the
->> code, performance in general, or the new progress bar (shows an ETA),
->> or anything else :)
->>
->
-> On a Xen VM with 3 vcpus, this is just brilliant. I used the default number
-> of parse threads (i.e. 3). The CPUs are pretty much pegged.
->
-> Mike
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I still object to that patch, since a different solution has been =
+applied already. And I still don't see why people want to use known =
+broken toolchains...=
+
 
