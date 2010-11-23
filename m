@@ -1,40 +1,31 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PKx3q-0007uS-Jk
+	(envelope-from <morphis@gravedo.de>) id 1PKxM9-0000Cu-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 18:53:47 +0100
-Received: by ywo32 with SMTP id 32so542621ywo.6
+	Tue, 23 Nov 2010 19:12:42 +0100
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 09F4C275CE2F; Tue, 23 Nov 2010 19:11:31 +0100 (CET)
+Received: from [192.168.178.21] (brmn-4dbcc381.pool.mediaWays.net
+	[77.188.195.129])
+	by gravedo.de (Postfix) with ESMTPSA id 7A703275CD29
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 09:52:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=c0kE+PV8XzobqQeCSAdCsewjwo2PMp982zfHCOAngqk=;
-	b=o3yQZzociMRv3J+sPBNh4TfEd9E74zp4udlmiGecNbKRVZwYrEE+CwYlSBElPpdFGa
-	5Y2XaUi13BMyETpQApXucv3Fl+7KWMJJ0QFgdDH8IziPg3ouBW+A3mzKKwd6CPtU3SD4
-	sqD1Lm3CfNybnSsO/kR01hyGChkzpeO79Gb5s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=wEcaOhV8Q/ci6YrajyH425/ye9oBVx3VehKYeV76Usi4tD7P/2y0r6/SDU/2enwGg4
-	g/cv1t4HhgGtRJPuwHSiPaTfLyVwH8NAhigEJFg8AFLN8pYPplik9fmQouxWsnsv/D2C
-	rtOprlrqsVpQNOMc09zkimH3g4gKB4/bAoMZ8=
-Received: by 10.90.99.8 with SMTP id w8mr9127082agb.0.1290534752673; Tue, 23
-	Nov 2010 09:52:32 -0800 (PST)
+	Tue, 23 Nov 2010 19:11:30 +0100 (CET)
+Message-ID: <4CEC03D1.405@gravedo.de>
+Date: Tue, 23 Nov 2010 19:11:29 +0100
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13pre) Gecko/20101113 Lightning/1.0b2 Shredder/3.1.7pre
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Tue, 23 Nov 2010 09:52:12 -0800 (PST)
-In-Reply-To: <4CEBFD16.1040609@gravedo.de>
-References: <4CEBFD16.1040609@gravedo.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 23 Nov 2010 09:52:12 -0800
-Message-ID: <AANLkTimKz2CMcnh9E=jP8uRghU+06yNXpqJPt1kmNzaD@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <4CEBFD16.1040609@gravedo.de>
+	<AANLkTimKz2CMcnh9E=jP8uRghU+06yNXpqJPt1kmNzaD@mail.gmail.com>
+In-Reply-To: <AANLkTimKz2CMcnh9E=jP8uRghU+06yNXpqJPt1kmNzaD@mail.gmail.com>
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RELEASE-2010.12] Fix bug in lvm2 recipes
@@ -51,12 +42,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 17:53:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Nov 2010 18:12:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 23, 2010 at 9:42 AM, Simon Busch <morphis@gravedo.de> wrote:
-> Should I cherry-pick it in the release branch to fix the problem there too?
+On 23.11.2010 18:52, Khem Raj wrote:
+> On Tue, Nov 23, 2010 at 9:42 AM, Simon Busch<morphis@gravedo.de>  wrote:
+>> Should I cherry-pick it in the release branch to fix the problem there too?
+>
+> sure please do.
 
-sure please do.
+Done.
 
 
