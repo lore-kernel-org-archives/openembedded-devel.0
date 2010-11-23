@@ -1,38 +1,39 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PKgbX-0000vL-7D
+	(envelope-from <andrea.adami@gmail.com>) id 1PKgmH-00016q-65
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 01:19:27 +0100
-Received: by gxk2 with SMTP id 2so4823695gxk.6
+	Tue, 23 Nov 2010 01:30:33 +0100
+Received: by wyb40 with SMTP id 40so836543wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Nov 2010 16:18:14 -0800 (PST)
+	Mon, 22 Nov 2010 16:29:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=NvBrcHs8XC2AOBONEMoUvXBGYGkhOyzNXQVW7hw7llo=;
-	b=fHCscRl8ADsuafZwCdOfVJfIXdPpQSze8ZYuaS9TTp3y61bLhnQRiccBDS96jB1+c6
-	boz/PL7TWTCyG2goMPAb42OxZxm5phcZGQhyhn9KK7ZpaK27nBtZJlF3Z2UCp6lE+qPZ
-	uYwmbCACB8l1kggZ7CIDuy6272hx3zre4s2kY=
+	bh=u3idtFZaYn8Sm3T1IVIVhdML8mKZ7A4ZcCJr5auNblA=;
+	b=uDrtBED4UacspV5C1rAV2oQCuPN9gzwuI+lHo3gNMm/VwDwnNZRG/8SFDqPnY82PUv
+	stFKdupfIu3YkpgB3/sJSl44D3hLQbLJo6nGCsEqnNmGce7tyD0ZYhSpBeq4J12LJ2ew
+	sTcuhYGnW1yf7yISahT9rStZbN1Qr2tSgBono=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=P1z2xetj/IVp96iiyeLLjjR2+tEjLAumuBEAMjwVQKusNf5Fnlz40dcJ31bu3eiYRe
-	kdaxLYjVpakqCIKCArdnum+zdx640kON3V71N27bVJw6VUSRD2UOHrHZoLjHSXGazLPx
-	ParyGOpIiy21ZN8fSEJClcQlq2QmRf1S1hwdw=
-Received: by 10.91.51.19 with SMTP id d19mr8173401agk.183.1290471494503; Mon,
-	22 Nov 2010 16:18:14 -0800 (PST)
+	b=oySQ0tlTY8aBWtfn50wHl8UMFNEE8XyGS1Ov/Fzkav+UoRPalB8YjAqpp9BCSlMVit
+	c8L2DWXOBlwJVr6qIbNXXGOAhaMYqBJK1Q/z/cZkBtzJHfL5sGF1Ys99iYV4DKwWBdYw
+	i7eGOiSHMeMr22vpSWWooVzM9LVymPlzH0xC4=
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Mon, 22 Nov 2010 16:17:54 -0800 (PST)
-In-Reply-To: <AANLkTikQLnSYpAF4YivEWQODjHpOdHowndLOkyh3LJAp@mail.gmail.com>
+Received: by 10.216.52.133 with SMTP id e5mr5490295wec.0.1290472160540; Mon,
+	22 Nov 2010 16:29:20 -0800 (PST)
+Received: by 10.216.49.130 with HTTP; Mon, 22 Nov 2010 16:29:20 -0800 (PST)
+In-Reply-To: <AANLkTikyUr4Kf43w1Mt69BD3=OyuuKx+HuMWWw=do+jU@mail.gmail.com>
 References: <AANLkTimt7_P96yJMtLVd5S8ZOgH-=6VgTny=CezhOJ7P@mail.gmail.com>
 	<AANLkTikQLnSYpAF4YivEWQODjHpOdHowndLOkyh3LJAp@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 22 Nov 2010 16:17:54 -0800
-Message-ID: <AANLkTikyUr4Kf43w1Mt69BD3=OyuuKx+HuMWWw=do+jU@mail.gmail.com>
+	<AANLkTikyUr4Kf43w1Mt69BD3=OyuuKx+HuMWWw=do+jU@mail.gmail.com>
+Date: Tue, 23 Nov 2010 01:29:20 +0100
+Message-ID: <AANLkTi=vcHRVu_kyV255bw-TpHPGvKsk+PxfbxhRnk2F@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -53,25 +54,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 00:19:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Nov 2010 00:30:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-> It comes from
+On Tue, Nov 23, 2010 at 1:17 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> It comes from
+>>
+>>
+>> do_configure_prepend () {
+>> =A0 =A0 =A0 =A0if ${@['true', 'false'][bb.data.inherits_class('native', =
+d)]}
+>> =A0 =A0 =A0 =A0then
+>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0export ac_cv_path_PERL=3D"${ac_cv_path_PE=
+RL=3D${bindir}/perl}"
+>> =A0 =A0 =A0 =A0fi
+>> }
+>>
 >
->
-> do_configure_prepend () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0if ${@['true', 'false'][bb.data.inherits_class=
-('native', d)]}
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0then
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0export ac_cv_path_=
-PERL=3D"${ac_cv_path_PERL=3D${bindir}/perl}"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
-> }
->
-> test fails...
+> OK what happens if you get rid =A0of do_configure_prepend fully ?
 >
 
-OK what happens if you get rid  of do_configure_prepend fully ?
+ yes, fully removing do_configure_prepend allows e.g. libx11
+
+Bingo!
+
+Andrea
 
 
