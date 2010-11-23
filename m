@@ -1,49 +1,41 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PKthU-0008UD-9r
+	(envelope-from <kergoth@gmail.com>) id 1PKttD-000238-Eh
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 15:18:42 +0100
-Received: by bwz10 with SMTP id 10so7086409bwz.6
+	Tue, 23 Nov 2010 15:30:36 +0100
+Received: by gxk2 with SMTP id 2so5125266gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 06:17:17 -0800 (PST)
+	Tue, 23 Nov 2010 06:29:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=/bgqTaLc2FQoYCcQ8WpwHkqMZFaOgimRN4J15elsJHc=;
-	b=LNKLzkB6kelWVz5ks4hjOXjz9Bbx2nM0fvxxp/mVodOxt4xoxotVdbLRnJ1hoej0RU
-	T2ObY9uO7NvwTrBv2HUj6cHALQ0F5e6tjCFDWs8LBprlKATxrnshhSDK7d3j9cPbNLFS
-	TUoZF9CHdUC+pgpGMtWu41nHEhs35VgIU68OY=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=tQm1GjKbgaVDj3Vq80JuHeQzbdwn5CndNtsTHaJ5xrU=;
+	b=XiOZKFNK2PXVwVMu0AG3KW1B/SNEPO5+LSWIkRdVAXOlG0Bls+TzQh2/ZYo0WPfukc
+	sWDqnAeR0lq2vmmj/m4ZbUgPBeCi38Leey1Y4nP9fkpAn7GdROS18wHpF4/Eg2oqEJvA
+	WOULsNIZ1NpN4i+PwfoF8wMq+IhKeSGroHra8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=UcZ5U0bCsfB0qu4zTnuwGqtn6HyP+6WNY61DgiFlWpxKi4hs+2W5QVCVH51f3xqo7X
-	PEZdu7Qt6VI9BgryHrWqI/Lwp0ZO/7DZ/bv+s8wI7eyPvzmjrLpNxam4x5sVQj6qnxiM
-	QP2kFWsx2BbV0hh06l6HYbhhMFhq5zpJvgE/4=
-Received: by 10.204.71.65 with SMTP id g1mr6850134bkj.23.1290521833745;
-	Tue, 23 Nov 2010 06:17:13 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l3sm1017478fan.0.2010.11.23.06.17.07
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 23 Nov 2010 06:17:08 -0800 (PST)
-Date: Tue, 23 Nov 2010 15:17:03 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101123141703.GE3274@jama>
-References: <1290521490-1975-1-git-send-email-eric@eukrea.com>
+	h=mime-version:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	b=HZLfrYPR6uUNcM+Q1pSG/VXJI2DTNZuuLNGCz8w3GgdEEN0TX/USOQoreaj7kucBg6
+	clqGz4ZznGc9HNCbvQKVlhW+rFLZsXmZlG7zBEBYSYzDUf4mLSx4sYF7K12SjTU3oADn
+	9y1N8WbD6TJeTFscIfgLr6ww0ezxWBX6paGO4=
+Received: by 10.216.154.8 with SMTP id g8mr1090711wek.12.1290522560603; Tue,
+	23 Nov 2010 06:29:20 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1290521490-1975-1-git-send-email-eric@eukrea.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.216.67.67 with HTTP; Tue, 23 Nov 2010 06:29:00 -0800 (PST)
+From: Chris Larson <kergoth@gmail.com>
+Date: Tue, 23 Nov 2010 07:29:00 -0700
+Message-ID: <AANLkTim3cKQRr0e1VQRiLf=95jOHC5=TGPQfXbDoZCmj@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] micro: update prefered binutils for arm
+Subject: BitBake parallel parsing testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,20 +49,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 14:18:44 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 23 Nov 2010 14:30:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 23, 2010 at 03:11:30PM +0100, Eric Bénard wrote:
+Greetings all,
+This is a request for further testers for the parallel parsing branch
+of bitbake, as well as for review of the code. =C2=A0I'm fairly certain
+that the last real issue with it was resolved yesterday, and I haven't
+gotten any reports of problems from those testing it since last week,
+so I'm opening it up to more public testing, so we can be absolutely
+certain that we can merge it to master in the near future without
+risking problems.
 
-> * with this, the build finish but image creation fails with :
-> http://tinderbox.openembedded.net/public/logs/task/10935754.txt
+For code review:
+Either follow the below steps, then git log master..parallel-parsing
+or git diff master..parallel-parsing, or use the web interface at
+https://github.com/kergoth/bitbake/commits/parallel-parsing.
 
-this should be fixed with
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=237192e0a83e5a629133e387c2aa9e5dc322982a
+For testing from scratch:
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+git clone git://github.com/kergoth/bitbake
+cd bitbake
+git checkout -b parallel-parsing origin/parallel-parsing
+
+From an existing bitbake repository:
+
+git remote add kergoth git://github.com/kergoth/bitbake
+git remote update
+git checkout -b parallel-parsing kergoth/parallel-parsing
+
+Thanks for your time, and do let me know what you think, either of the
+code, performance in general, or the new progress bar (shows an ETA),
+or anything else :)
+
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
