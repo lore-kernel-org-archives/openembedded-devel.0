@@ -1,49 +1,44 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjaquez@igalia.com>) id 1PKvO9-0005J5-JR
+	(envelope-from <raj.khem@gmail.com>) id 1PKvuw-0005ts-Ot
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 17:06:39 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApsEAHN160xbdWOb/2dsb2JhbACjWL4UhUsEiW0
-X-IronPort-AV: E=Sophos;i="4.59,242,1288566000"; d="scan'208";a="702347910"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 23 Nov 2010 17:05:26 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PKvN0-0001Qe-7g
+	Tue, 23 Nov 2010 17:40:34 +0100
+Received: by gyd12 with SMTP id 12so2415476gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 17:05:26 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PKvN0-0006W7-3h
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 17:05:26 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PKvMz-0001Ut-QJ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 17:05:25 +0100
-Date: Tue, 23 Nov 2010 17:05:25 +0100
-From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101123160525.GB3032@lit.local.igalia.com>
-References: <20101123113706.GA3533@lit.local.igalia.com>
-	<4CEBD252.7000502@mentor.com>
-	<20101123145713.GA3032@lit.local.igalia.com>
-	<4CEBDABB.1060607@mentor.com>
-	<6EB1C564-9BA3-4833-B7F3-72EA4B2F8C51@dominion.thruhere.net>
+	Tue, 23 Nov 2010 08:39:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=jfmmrlqd9MdIlmMWokfB5CFnfSsS7Ueoh/CIYxrAsJ0=;
+	b=R29vZxC6lZP3vH3y7L0yphV8oBdPuGyx0izJoDdOCwyZ7UVAcFXTSEPyaiTWyQRKoT
+	vKQlnJsKILVFsuet0bMKRkw+T7b3AKAqt+yarzfyemItrQIZczerbKiht5k5Q8Hx/hOF
+	MSb3aQgsZ2HrFQt3afVKba5C4ZdSUcAmkfHGM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=H4TntI0nH5uMHSrXzvfEnQe3gNP+7vrcpuMyOBWc5Pvj5Ul4PkkFwfMT+K6lN8GSJt
+	RosxDgOu7B4A8FRCjC7ycAtM6BoClxckqhWs/EDfxpKYZaC+m+oAkYhHnHlMjL4rCYXM
+	ej1EyZZH6cRPF4KkakPCxoactEqPlhi7eO5oU=
+Received: by 10.91.47.38 with SMTP id z38mr8958864agj.129.1290530356393; Tue,
+	23 Nov 2010 08:39:16 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <6EB1C564-9BA3-4833-B7F3-72EA4B2F8C51@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 212.51.32.151
-X-SA-Exim-Mail-From: vjaquez@igalia.com
+Received: by 10.90.120.8 with HTTP; Tue, 23 Nov 2010 08:38:55 -0800 (PST)
+In-Reply-To: <4CEB8C49.9020000@eukrea.com>
+References: <4CEB8C49.9020000@eukrea.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Nov 2010 08:38:55 -0800
+Message-ID: <AANLkTimeW43zOzPvvfW+9_fPhM49M1xXVi=_iDv65fiM@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_NEUTRAL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: external-toolchain-csl-1.0-r6 fails
+Subject: Re: wrong file on sources.openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,68 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 16:06:40 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 23 Nov 2010 16:40:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 23, 2010 at 04:58:54PM +0100, Koen Kooi wrote:
-> 
-> Op 23 nov 2010, om 16:16 heeft Tom Rini het volgende geschreven:
-> 
-> > On 11/23/2010 07:57 AM, Víctor M. Jáquez L. wrote:
-> >> On Tue, Nov 23, 2010 at 07:40:18AM -0700, Tom Rini wrote:
-> >>> On 11/23/2010 04:37 AM, Víctor M. Jáquez L. wrote:
-> >>>> I'm trying to build minimal-image with CSL toolchain, but I got this error:
-> >>>> 
-> >>>> NOTE: package external-toolchain-csl-1.0-r6: task do_install: Started
-> >>>> ERROR: TaskFailed event exception, aborting
-> >>>> ERROR: Build of /media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/meta/external-toolchain-csl.bb do_install failed
-> >>>> ERROR: Task 187 (/media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/meta/external-toolchain-csl.bb, do_install) failed with 256
-> >>>> ERROR: '/media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/meta/external-toolchain-csl.bb' failed
-> >>>> ERROR: Function do_install failed
-> >>>> NOTE: Task failed: ('function do_install failed', '/media/DISK/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/external-toolchain-csl-1.0-r6/temp/log.do_install.22227')
-> >>>> ERROR: Logfile of failure stored in: /media/DISK/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/external-toolchain-csl-1.0-r6/temp/log.do_install.22227
-> >>>> Log data follows:
-> >>>> | cp: cannot stat `/media/DISK/sgpp/arm-2010q1/arm-angstrom-linux-gnueabi/libc/lib/*': No such file or directory
-> >>>> | ERROR: Function do_install failed
-> >>>> NOTE: package external-toolchain-csl-1.0-r6: task do_install: Failed
-> >>>> ERROR: TaskFailed event exception, aborting
-> >>>> 
-> >>>> For some reason the variable ${TARGET_SYS} is evaluated as
-> >>>> arm-angstrom-linux-gnueabi instead of arm-none-linux-gnueabi which is the
-> >>>> correct value.
-> >>> 
-> >>> Please post your local.conf settings as well as what version of
-> >>> openembedded (and what branch) you are using.
-> >> 
-> >> I'm using the openembedded's branch org.openembedded.dev (HEAD)
-> > [snip]
-> >> 
-> >> If I apply this patch[1] the problem seems to be solved.
-> >> 
-> >> 1. http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg11415.html
-> > 
-> > I thought the patch had been applied.  Koen, do you still object after it was explained that currently angstrom is always going to win setting that variable unless it's made a ?= ?  Thanks!
-> 
-> I still object to that patch, since a different solution has been applied
-> already.
+On Tue, Nov 23, 2010 at 1:41 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> Hi,
+>
+> http://sources.openembedded.org//binutils-2.19.51.tar.bz2
+> gives : ae08e3f6d3bd59a4855e99d9bfaa56fe =C2=A0binutils-2.19.51.tar.bz2
 
-But they not seem to work (at least for me).
+.51 means a random dev snapshot of binutils so the contents could
+vary we should avoid using the dev snapshots and not create
+recipes for such
 
-> And I still don't see why people want to use known broken
-> toolchains...
-
-If you make the statement that angstrom distribution _cannot_ be built using any
-external toolchain, I wouldn't object anything. Meanwhile, this patch makes my
-configuration work.
-
-vmjl
-
+>
+> but recipe (and sourceware's archive) have :
+> SRC_URI[md5sum] =3D "fd59f36022f6ea802d1c844a2576e616"
+>
+> Eric
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+>
 
 
