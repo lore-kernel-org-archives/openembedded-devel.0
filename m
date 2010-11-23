@@ -1,41 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PKucZ-0003cb-Jf
+	(envelope-from <luke.leighton@gmail.com>) id 1PKug3-0003n4-0C
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 16:17:30 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PKubO-0000vO-CJ from Tom_Rini@mentor.com ;
-	Tue, 23 Nov 2010 07:16:14 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 23 Nov 2010 07:16:13 -0800
-Received: from [172.30.80.10] ([172.30.80.10]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 23 Nov 2010 08:16:13 -0700
-Message-ID: <4CEBDABB.1060607@mentor.com>
-Date: Tue, 23 Nov 2010 08:16:11 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+	Tue, 23 Nov 2010 16:21:03 +0100
+Received: by pwi8 with SMTP id 8so1943920pwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Nov 2010 07:19:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=PaJhMuTb2kiVVdeFSlt4mTjL8iXIOorN1HCkZOjUrrA=;
+	b=NwjEhlaJriGpiBNRNSvAF3WhgwdRi7np2HQvQHLvX8zbxq09C+tpUEeqTRbFlnJKLJ
+	ahB2H2gxmDfF9MxBCYWBelQNq2tKkXUD1Heg83E2cZS1Dnz379CneQJ5WvzUkpB9FI/8
+	LrE7SvsTRqzOvvDrsO3zPuw2DKoKShsENaFBs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	b=bud/a+P8aj4/+jtRCb7ELsb8mJZ7R/FEDwqXVUGM89gWqay8k67f8QOIEFF6010hkp
+	fw/OSAnz2lggVAedUlApwTYzV6GDVMp8tNe2FsdQV0SUhyxQcIKVlMbS/jhjHKAecWWQ
+	ZjXXJ7jxkMxDj8QguOj1mihT3Q31SGWhlb/C8=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Koen Kooi <koen@dominion.thruhere.net>
-References: <20101123113706.GA3533@lit.local.igalia.com>	<4CEBD252.7000502@mentor.com>
-	<20101123145713.GA3032@lit.local.igalia.com>
-In-Reply-To: <20101123145713.GA3032@lit.local.igalia.com>
-X-OriginalArrivalTime: 23 Nov 2010 15:16:13.0515 (UTC)
-	FILETIME=[5DDD31B0:01CB8B21]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Received: by 10.142.229.18 with SMTP id b18mr6812776wfh.414.1290525589244;
+	Tue, 23 Nov 2010 07:19:49 -0800 (PST)
+Sender: luke.leighton@gmail.com
+Received: by 10.142.154.9 with HTTP; Tue, 23 Nov 2010 07:19:49 -0800 (PST)
+Date: Tue, 23 Nov 2010 15:19:49 +0000
+X-Google-Sender-Auth: _EAk03Z2awdqZ7egR0Cfqj_vkeI
+Message-ID: <AANLkTimVOOQ28E1NfJm5Rim4X+WmvXAtOSJ9W34KH7X-@mail.gmail.com>
+From: Luke Kenneth Casson Leighton <lkcl@lkcl.net>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: luke.leighton@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: external-toolchain-csl-1.0-r6 fails
+Subject: openembedded / dpkg-buildpackage hybrid
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,49 +51,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 15:17:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 23 Nov 2010 15:21:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 11/23/2010 07:57 AM, Víctor M. Jáquez L. wrote:
-> On Tue, Nov 23, 2010 at 07:40:18AM -0700, Tom Rini wrote:
->> On 11/23/2010 04:37 AM, Víctor M. Jáquez L. wrote:
->>> I'm trying to build minimal-image with CSL toolchain, but I got this error:
->>>
->>> NOTE: package external-toolchain-csl-1.0-r6: task do_install: Started
->>> ERROR: TaskFailed event exception, aborting
->>> ERROR: Build of /media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/meta/external-toolchain-csl.bb do_install failed
->>> ERROR: Task 187 (/media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/meta/external-toolchain-csl.bb, do_install) failed with 256
->>> ERROR: '/media/DISK/vjaquez-angstrom-setup-scripts/sources/openembedded/recipes/meta/external-toolchain-csl.bb' failed
->>> ERROR: Function do_install failed
->>> NOTE: Task failed: ('function do_install failed', '/media/DISK/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/external-toolchain-csl-1.0-r6/temp/log.do_install.22227')
->>> ERROR: Logfile of failure stored in: /media/DISK/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/external-toolchain-csl-1.0-r6/temp/log.do_install.22227
->>> Log data follows:
->>> | cp: cannot stat `/media/DISK/sgpp/arm-2010q1/arm-angstrom-linux-gnueabi/libc/lib/*': No such file or directory
->>> | ERROR: Function do_install failed
->>> NOTE: package external-toolchain-csl-1.0-r6: task do_install: Failed
->>> ERROR: TaskFailed event exception, aborting
->>>
->>> For some reason the variable ${TARGET_SYS} is evaluated as
->>> arm-angstrom-linux-gnueabi instead of arm-none-linux-gnueabi which is the
->>> correct value.
->>
->> Please post your local.conf settings as well as what version of
->> openembedded (and what branch) you are using.
->
-> I'm using the openembedded's branch org.openembedded.dev (HEAD)
-[snip]
->
-> If I apply this patch[1] the problem seems to be solved.
->
-> 1. http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg11415.html
+folks hi,
 
-I thought the patch had been applied.  Koen, do you still object after 
-it was explained that currently angstrom is always going to win setting 
-that variable unless it's made a ?= ?  Thanks!
+there's a debian embedded sprint on in february:
+http://wiki.debian.org/Sprints/2011/EmdebianSprint i came up with the
+mad idea of modifying openembedded so that it understands debian
+archives, debian/control and rules files, and back-ends into
+dpkg-buildpackage and/or dpkg-cross-buildpackage in order to
+recursively build entire debian archives.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+so i wanted to ask people here what they think.
+
+in particular, one of the challenges is that bitbake doesn't cope with
+numbered version dependencies, which i know has been discussed before
+(avoiding regex's) - i wanted to run the idea past people here: how
+about doing the same dependency numbering format as debian control
+files?  "Depends:" can be "python (>= 2.5) " for example or "glibc (>=
+0.0.1, <= 1.1.3)" which is a simple enough syntax to not be too
+resource-hungry.
+
+and it would solve the rather awkward situation where you have to
+specify blacklists of absolutely every single other version, but then
+someone adds a new bb recipe for that library and of course breaks
+_your_ build as a result, it's all rather fragile.
+
+thoughts?
+
+l.
 
 
