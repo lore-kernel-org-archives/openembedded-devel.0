@@ -1,41 +1,49 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PKhLF-0001xZ-6T
+	(envelope-from <bgamari.foss@gmail.com>) id 1PKhUq-00029I-JO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 02:06:42 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PKhK3-000229-Gp from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Nov 2010 17:05:27 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 22 Nov 2010 17:05:16 -0800
-Received: from [172.30.80.10] ([172.30.80.10]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 22 Nov 2010 18:05:16 -0700
-Message-ID: <4CEB1349.6080602@mentor.com>
-Date: Mon, 22 Nov 2010 18:05:13 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Tue, 23 Nov 2010 02:16:37 +0100
+Received: by qwf7 with SMTP id 7so152766qwf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Nov 2010 17:15:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:user-agent
+	:date:message-id:mime-version:content-type:content-transfer-encoding;
+	bh=bbLaMRQpBROna6Nd+pD1tuv0NvdEe/Phq83lVZLohsk=;
+	b=PN8s9u+VU2bVAPIsptffo/fGsysLHOWPCaeX5DIBYwsiey+Rkcum3BtjKg99sS43Nx
+	fCwv0cY6lfZ4NRaQuBc7mReJa5ekETiEohxouV+FAvQ7hZXOIwxg9gHwc7l6mmeRs4ap
+	E5kQZFpznYP678mrSXBfIWfxuK13M64EDU21k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:user-agent:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	b=nRu3WI07vq1qk5uUUwYKKMpwOs4GgYZ6FWRHftejkUE7lrTJ4GKzyi6kruyug+UQPm
+	c/+nElC8qxgtjrDN+Jkewlj14gZJ6zdUiwIBr5pFYmCImV3glc2Qq82kzqyLVeqmTPpm
+	8fXakvPSllmqIlgAGGLJ8MSlZjzIwu/TUj/Po=
+Received: by 10.224.54.143 with SMTP id q15mr565183qag.330.1290474922524;
+	Mon, 22 Nov 2010 17:15:22 -0800 (PST)
+Received: from localhost (gamari.physics.umass.edu [128.119.56.223])
+	by mx.google.com with ESMTPS id nb14sm3260068qcb.36.2010.11.22.17.15.21
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 22 Nov 2010 17:15:21 -0800 (PST)
+From: Ben Gamari <bgamari.foss@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimt7_P96yJMtLVd5S8ZOgH-=6VgTny=CezhOJ7P@mail.gmail.com>
-	<AANLkTikQLnSYpAF4YivEWQODjHpOdHowndLOkyh3LJAp@mail.gmail.com>
-In-Reply-To: <AANLkTikQLnSYpAF4YivEWQODjHpOdHowndLOkyh3LJAp@mail.gmail.com>
-X-OriginalArrivalTime: 23 Nov 2010 01:05:16.0486 (UTC)
-	FILETIME=[7D80D660:01CB8AAA]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+User-Agent: Notmuch/0.5-3-g22aadfc (http://notmuchmail.org) Emacs/23.1.1
+	(x86_64-pc-linux-gnu)
+Date: Mon, 22 Nov 2010 20:15:20 -0500
+Message-ID: <87y68kx2l3.fsf@gmail.com>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: bgamari.foss@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: automake-1.11 vs. host $perl_threads
+Cc: =?utf-8?Q?Am=C3=A9rico?= Wang <xiyou.wangcong@gmail.com>,
+	Egger <siccegge@cs.fau.de>, Sam Ravnborg <sam@ravnborg.org>,
+	linux-kbuild <linux-kbuild@vger.kernel.org>, Christoph
+Subject: Kernel build under meta-toolchain SDK fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,41 +57,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 01:06:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Nov 2010 01:16:37 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 11/22/2010 05:04 PM, Andrea Adami wrote:
-> I found something in run.do_configure of automake-1.11
->
-> do_configure() {
->          if false
->          then
->                  export
-> ac_cv_path_PERL="${ac_cv_path_PERL=/oe/build/tmp/sysroots/i686-linux/usr/bin/perl}"
->          fi
->          autotools_do_configure
->
-> }
->
-> It comes from
->
->
-> do_configure_prepend () {
->          if ${@['true', 'false'][bb.data.inherits_class('native', d)]}
->          then
->                  export ac_cv_path_PERL="${ac_cv_path_PERL=${bindir}/perl}"
->          fi
-> }
->
-> test fails...
+Hey all,
 
-Intentionally, yes.  There is no dependency on perl-native for 
-autoconf/automake and instead on the fake "throwing our hands up" 
-perl-runtime-native.
+Recently I tried updating our openembedded environment for an embedded
+application built around the BeagleBoard. Unfortunately, the build
+failed while configuring the kernel with an inexplicable bus error. To
+trace down the issue I installed the latest meta-toolchain sdk and tried
+building a kernel. This resulted in an identical failure,
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+$ make
+  HOSTCC  scripts/basic/fixdep
+In file included from /usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/us=
+r/include/stdlib.h:903,
+                 from scripts/basic/fixdep.c:112:
+/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/include/bits/stdlib.=
+h:65: warning: no previous prototype for =E2=80=98ptsname_r=E2=80=99
+/bin/sh: line 1:  4192 Bus error               scripts/basic/fixdep scripts=
+/basic/.fixdep.d scripts/basic/fixdep 'gcc -Wp,-MD,scripts/basic/.fixdep.d =
+-Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer    =
+ -o scripts/basic/fixdep scripts/basic/fixdep.c  ' > scripts/basic/.fixdep.=
+tmp
+make[2]: *** [scripts/basic/fixdep] Error 135
+make[1]: *** [scripts_basic] Error 2
+make: *** No rule to make target `include/config/auto.conf', needed by `inc=
+lude/config/kernel.release'.  Stop.
+
+The problem is quite early in the build since even make oldconfig fails
+in this way. I tried tracking down the bug on the LKML[1] but after some
+discussion it seems very likely the problem is a toolchain issue. At
+least part of the problem seems to be in fixdep, which fails very
+strangely in fstat[2]. I've done quite a bit of debugging[2], but it
+seems to be a bit of a heisenbug.
+
+Interestingly enough, I can reproduce the issue both on my personal
+laptop (running Ubuntu 10.10, gcc 4.4.5) and our build server (running
+Ubuntu 10.04, gcc 4.4.3). It would be great if someone could try
+building a kernel from master using openembedded master. Otherwise, any
+ideas would be greatly appreciated.
+
+Cheers,
+
+- Ben
+
+
+[1] http://lkml.org/lkml/2010/11/6/90
+[2] http://lkml.org/lkml/2010/11/7/78
 
 
