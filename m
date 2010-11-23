@@ -1,43 +1,34 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PKsGG-0007ye-Vh
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PKteP-0007Lh-JV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Nov 2010 13:46:17 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 9155F314AEFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 13:45:06 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id RPD682ZX8gxi
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 13:44:59 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id E057E314AE47
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 13:44:58 +0100 (CET)
-Message-ID: <4CEBB74A.6000606@opendreambox.org>
-Date: Tue, 23 Nov 2010 13:44:58 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
-MIME-Version: 1.0
+	Tue, 23 Nov 2010 15:15:18 +0100
+Received: (qmail 10283 invoked by uid 503); 23 Nov 2010 14:18:30 -0000
+Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 23 Nov 2010 14:18:29 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 23 Nov 2010 16:14:04 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 23 Nov 2010 16:14:02 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CEB3497.90607@gmail.com> <4CEBB582.3030106@opendreambox.org>
-In-Reply-To: <4CEBB582.3030106@opendreambox.org>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+Date: Tue, 23 Nov 2010 15:11:30 +0100
+Message-Id: <1290521490-1975-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 14711571133083462985
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.27.225
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] strace_4.5.20.bb: Fix build on mips{, el} when DISTRO_FEATURES lacks "largefile".
+Subject: [PATCH] micro: update prefered binutils for arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,35 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Nov 2010 12:46:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Nov 2010 14:15:19 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On 11/23/2010 01:37 PM, Andreas Oberritter wrote:
-> On 11/23/2010 04:27 AM, Graham Gower wrote:
->> diff --git a/recipes/strace/strace_4.5.20.bb b/recipes/strace/strace_4.5.20.bb
->> index 873ce52..086a4d7 100644
->> --- a/recipes/strace/strace_4.5.20.bb
->> +++ b/recipes/strace/strace_4.5.20.bb
->> @@ -4,9 +4,13 @@ LICENSE = "GPL"
->>  PR = "r0"
->>  
->>  DEFAULT_PREFERENCE = "-1"
->> +DEFAULT_PREFERENCE_mips = "1"
->> +DEFAULT_PREFERENCE_mipsel = "1"
->>  
->>  SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
->>            "
->> +SRC_URI_append_mipsel += " file://mips-nolargefile.patch "
->> +SRC_URI_append_mips += " file://mips-nolargefile.patch "
-> 
-> I think it would be better to apply this patch unconditionally, because
-> it doesn't impose negative effects on other archs, and future patches
-> which might only get compile-tested on other archs must make sure that
-> mips-nolargefile.patch still applies.
+* without this builds for arm fail with :
+http://tinderbox.openembedded.net/public/logs/task/10927261.txt
+* with this, the build finish but image creation fails with :
+http://tinderbox.openembedded.net/public/logs/task/10935754.txt
 
-Albeit, the correct syntax would be:
-SRC_URI_append_mipsel = " file://mips-nolargefile.patch"
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ conf/distro/micro.conf |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/conf/distro/micro.conf b/conf/distro/micro.conf
+index 19b5e62..a065cbb 100644
+--- a/conf/distro/micro.conf
++++ b/conf/distro/micro.conf
+@@ -62,6 +62,7 @@ MACHINE_KERNEL_VERSION = "2.6"
+ #############################################################################
+ LIBC ?= "eglibc"
+ PREFERRED_BINUTILS = "2.19.51"
++PREFERRED_BINUTILS_arm              ?= "2.20.1"
+ PREFERRED_VERSION_glibc             ?= "2.10.1"
+ PREFERRED_VERSION_glibc-initial     ?= "2.10.1"
+ PREFERRED_ARM_INSTRUCTION_SET ?= "thumb"
+-- 
+1.6.3.3
 
 
 
