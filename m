@@ -1,41 +1,46 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLAAt-0003ct-0G
+	(envelope-from <martin.jansa@gmail.com>) id 1PLAP0-0004EK-Km
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 08:53:55 +0100
-Received: by iwn7 with SMTP id 7so302514iwn.6
+	Wed, 24 Nov 2010 09:08:31 +0100
+Received: by fxm7 with SMTP id 7so2134547fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 23:52:42 -0800 (PST)
+	Wed, 24 Nov 2010 00:07:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=wz38IAnWyQX5IfW5bdMmjxAf+3hhWmHBu29v8sQcZcg=;
-	b=C9xK0uKWSQSOxZEuqWuJ9IBoUNVMFu9DNJdO2t8VbOQPLl3DG4RtJgWEeIFl2CE3oe
-	SEvoRlQunAYBEhJ0HlhB8VUbMqSP7DzU4i/d19hl9iYa2NrN7IPesZ17Pook+NsvQyTF
-	MA6N3v1BvfILqpgv5U+i5bCI5nwGkEVbM64ws=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=9/mgkdD9Jyfht2SGRB6sh9TQtmnuszJaTWU+IsHbjHs=;
+	b=pp03cb2vvPnF9XKfUDB4Hnkc1MZn0VvcXTf5cCtAMgSZeQMM7SLIcIZNTIxCzy8n24
+	0sfDEweT2wIRXa/GpmCEgXwv0U06iLZ5CSNNqzomA4VdX1vgHLFArrpt+V4I3bJZiq9c
+	6r4G3S+nRTP/OjY6T0prZTDvpFchvUjptOsKY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=gThiYg2RVS9Cg6uWYkrw48a75O0AwvBdqa27EYucGKrmQrwOPr2UmFAINgL851vTwU
-	YnZXieEx3SnKFD9jeZpIuj/RRN6RzPkjuu6ojxLk7rbeM1+M1RWR97UzOhf58AnYD3We
-	AB5itCuBHkZKnIkWwYOUsIX5ehii5chyk/qH0=
-MIME-Version: 1.0
-Received: by 10.231.13.137 with SMTP id c9mr42222iba.76.1290585161884; Tue, 23
-	Nov 2010 23:52:41 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Tue, 23 Nov 2010 23:52:41 -0800 (PST)
-In-Reply-To: <AANLkTinhykFBHcgJR5suXU8Q7op+FOxofExY-d42XmYw@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=XBZGYsDdvCrVxXIRZr9NplChM6g8Ig+sMMyJLCIZQ6hKw4uyAjuLnGlOPQMMXkJZGP
+	lN2ztpS5VN3Ay7WpyY0NSDXCc0mxgBoI5lJ2meNHoMzXF1mP9dnB+b2894WgYiLfHdnK
+	FMYP09pyVpECG7ZdM4GT7aezPUbl969O2ovRA=
+Received: by 10.223.72.195 with SMTP id n3mr6828672faj.132.1290586037281;
+	Wed, 24 Nov 2010 00:07:17 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 21sm465541fav.17.2010.11.24.00.07.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 24 Nov 2010 00:07:16 -0800 (PST)
+Date: Wed, 24 Nov 2010 09:07:07 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101124080705.GF3274@jama>
 References: <4CEC1E17.1030208@sensortherm.de>
 	<AANLkTinhykFBHcgJR5suXU8Q7op+FOxofExY-d42XmYw@mail.gmail.com>
-Date: Wed, 24 Nov 2010 08:52:41 +0100
-Message-ID: <AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	<AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -53,64 +58,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2010 07:53:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 24 Nov 2010 08:08:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/11/23 Khem Raj <raj.khem@gmail.com>:
-> On Tue, Nov 23, 2010 at 12:03 PM, Klaus Schwarzkopf
-> <schwarzkopf@sensortherm.de> wrote:
->> Hi,
->>
->> i've downloaded oe with this script (thanks frans):
->>
->> #!/bin/sh
->>
->> export OE=3D/home/klaus/development/oe/
->> export BBPATH=3D${OE}build:${OE}openembedded
->> export PATH=3D${OE}bitbake/bin:${PATH}
->> export MACHINE=3Ddm355-evm
->>
->> RECIPES=3D"${OE}/openembedded/recipes"
->> LOGFILE=3D"fetchsrc.log"
->>
->> #Find recipes how changed this week
->> #FIND_OPTIONS=3D"-atime 7"
->>
->> for i in $(find ${RECIPES} -name '*.bb' -type f ${FIND_OPTIONS} | sort )
->> do
->> =A0 =A0 =A0 =A0echo $i
->> =A0 =A0 =A0 =A0bitbake -c fetch -b $i
->> done > ${LOGFILE} 2>&1
->>
->> egrep -n 'ERROR.*bb..failed' ${LOGFILE}
->> egrep -n 'KeyError' ${LOGFILE}
->>
->>
->>
->>
->>
->> I found a lot of errors, see attachment! The whole logfile is on my
->> homepage:
->> http://fbi.hooster.de/download/sonstiges/oe/fetchsrc.log.tar.gz
->>
->> How can i/we fix this errors?
->>
->
-> You should ignore nonworking and obsolete dirs and some errors are due
-> to hh.org going AWOL too
->
->
-Agree with Khem.
+On Wed, Nov 24, 2010 at 08:52:41AM +0100, Frans Meulenbroeks wrote:
+> What about moving all recipes that do not fetch and also did not fetch
+> during Martins test from last march/april to a directory non-fetching
+> or so?
 
-What about moving all recipes that do not fetch and also did not fetch
-during Martins test from last march/april to a directory non-fetching
-or so?
-Apparently these are non fetchable for a long time, with no one
-apparently building them or having an interest to fix them.
-My proposal would be to do that before the release is made, thereby
-improving the % of the recipes that build.
+But those recipes were only those where I wasn't able to find the source
+at all (even with google help and couple of popular premirrors). Any
+origin for source was fine for me, because I was only interested in
+checksum check.
 
-Frans.
+> Apparently these are non fetchable for a long time, with no one
+> apparently building them or having an interest to fix them.
+
+More likely those who were building those before are still building
+OK, because they had it in theirs downloads dir. (but the second part is
+right :/).
+
+> My proposal would be to do that before the release is made, thereby
+> improving the % of the recipes that build.
+
+We can improve it also by putting those missing upstream files to
+sources.openembedded.org and use it as premirror. But first we hav to
+find someone who still have it in downloads dir :/ (I don't).
+
+Removing recipes would need to remove those also from tasks/images and
+in the end release images could miss some important functionaly in worst
+case.
+
+Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
