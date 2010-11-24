@@ -1,45 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PL9vR-0003Iv-04
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PLA97-0003Wo-Nw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 08:37:57 +0100
-Received: by fxm7 with SMTP id 7so2117081fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Nov 2010 23:36:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=d0Vl9J/FaFOfgdSUSUC4RCg0FAAqHFteXu7A+tI6oH0=;
-	b=lZ7GYAG/kcqna29tVluXYCMa+6y4Zr4yW28sN1dwQPfnpYOQeF9M1kB2qCN/3e/3qM
-	onH4/qvZNnPnBec6KEmSfvvzfuuxEMGcM3BYeZj5msPy5z2ePAzDC962nG5jdi4TThQU
-	R4C+mvf9Sxl61Qgs26LGSCZCjKNaAJYFyRACc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=myT4X0o6oLOLlCIfEJ9T8EwHwM7uZvFi9onWCEOHT/2kOO86ut6q0RHid1pHONLX8R
-	ngoCrcDzo8CU3hTW7T0XG/zsOI1norjSzzmBAzD3QYDuZnWmvrKp4MpDZkRE3PM1qbmb
-	kCv77qKFg1Z7fXjOt3csXipO5CyLK/1241mzo=
-Received: by 10.223.54.132 with SMTP id q4mr2334432fag.117.1290584202536;
-	Tue, 23 Nov 2010 23:36:42 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id e6sm2078491fav.32.2010.11.23.23.36.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 23 Nov 2010 23:36:40 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 24 Nov 2010 08:52:06 +0100
+Received: (qmail 30327 invoked by uid 503); 24 Nov 2010 08:14:34 -0000
+Received: from 63.mail-out.ovh.net (91.121.185.56)
+	by 68.mail-out.ovh.net with SMTP; 24 Nov 2010 08:14:34 -0000
+Received: (qmail 11372 invoked by uid 503); 24 Nov 2010 08:23:05 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 24 Nov 2010 08:23:05 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 24 Nov 2010 09:50:53 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 24 Nov 2010 09:50:53 +0200
+Message-ID: <4CECC3DC.1080301@eukrea.com>
+Date: Wed, 24 Nov 2010 08:50:52 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Nov 2010 08:36:24 +0100
-Message-Id: <1290584184-19331-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.3.2
-In-Reply-To: <1289914206-29909-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1289914206-29909-1-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-Ovh-Tracer-Id: 14113436807484452169
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Ovh-Tracer-Id: 14513412751141940553
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCHv2][RFC] binconfig: use / instead empty prefix/exec_prefix in get_binconfig_mangle
+Subject: Wiki SPAM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,64 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2010 07:37:57 -0000
+X-List-Received-Date: Wed, 24 Nov 2010 07:52:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* 952e5e2b7a5c1deefc939594d40b81a71fb16a54 appends / in sed call,
-  but it breaks ie =/usr replacement ie in libmikmod
-* using at least / in SLASH_PREFIX/SLASH_EXEC_PREFIX is needed ie for micro
-  distribution where prefix/exec_prefix are empty (/usr collapsed to /)
-* prefix and exec_prefix are expanded only in shell environment (after
-  get_binconfig_mangle is returned so to check if it's empty we have to
-  pass them expanded as params)
-* don't push this patch it fixes libmikmod with !micro, but in micro
-  it's still broken, because libmikmod-config has empty 'prefix=' which
-  is the case when we normaly don't want to add OEPREFIX (whole point of
-  this patch), but in this case it's needed (let's just fix libmikmod.in)
-* thanks to GNUtoo!
----
- classes/binconfig.bbclass |   14 ++++++++++----
- 1 files changed, 10 insertions(+), 4 deletions(-)
+Hi,
 
-diff --git a/classes/binconfig.bbclass b/classes/binconfig.bbclass
-index b3b2236..e462083 100644
---- a/classes/binconfig.bbclass
-+++ b/classes/binconfig.bbclass
-@@ -1,15 +1,21 @@
- FILES_${PN}-dev += "${bindir}/*-config"
- 
- # The namespaces can clash here hence the two step replace
--def get_binconfig_mangle(d):
-+def get_binconfig_mangle(d, env_prefix, env_exec_prefix):
-+	SLASH_PREFIX = env_prefix
-+	if SLASH_PREFIX is "":
-+		SLASH_PREFIX = "/"
-+	SLASH_EXEC_PREFIX = env_exec_prefix
-+	if SLASH_EXEC_PREFIX is "":
-+		SLASH_EXEC_PREFIX = "/"
- 	s = "-e ''"
- 	if not bb.data.inherits_class('native', d):
- 		optional_quote = r"\(\"\?\)"
- 		s += " -e 's:=%s${libdir}:=\\1OELIBDIR:;'" % optional_quote
- 		s += " -e 's:=%s${includedir}:=\\1OEINCDIR:;'" % optional_quote
- 		s += " -e 's:=%s${datadir}:=\\1OEDATADIR:'" % optional_quote
--		s += " -e 's:=%s${prefix}/:=\\1OEPREFIX/:'" % optional_quote
--		s += " -e 's:=%s${exec_prefix}/:=\\1OEEXECPREFIX/:'" % optional_quote
-+		s += " -e 's:=%s%s:=\\1OEPREFIX:'" % (optional_quote, SLASH_PREFIX)
-+		s += " -e 's:=%s%s:=\\1OEEXECPREFIX:'" % (optional_quote, SLASH_EXEC_PREFIX)
- 		s += " -e 's:-L${libdir}:-LOELIBDIR:;'"
- 		s += " -e 's:-I${includedir}:-IOEINCDIR:;'"
- 		s += " -e 's:OELIBDIR:${STAGING_LIBDIR}:;'"
-@@ -52,7 +58,7 @@ binconfig_sysroot_preprocess () {
- 	for config in `find ${S} -name '${BINCONFIG_GLOB}'`; do
- 		configname=`basename $config`
- 		install -d ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}
--		cat $config | sed ${@get_binconfig_mangle(d)} > ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$configname
-+		cat $config | sed ${@get_binconfig_mangle(d, "${prefix}", "${exec_prefix}")} > ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$configname
- 		chmod u+x ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$configname
- 	done
- }
--- 
-1.7.3.2
+http://wiki.openembedded.org/index.php/Special:Contributions/Yjytalamago
 
+is it posssible to remove this user which spent several hours to spam the wiki ?
+
+Thanks,
+Eric
 
 
