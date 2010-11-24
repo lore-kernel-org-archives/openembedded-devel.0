@@ -1,50 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PLAP0-0004EK-Km
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 09:08:31 +0100
-Received: by fxm7 with SMTP id 7so2134547fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PLAbP-0004R1-6p for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Nov 2010 09:21:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PLAaC-0002xc-PB for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Nov 2010 09:20:04 +0100
+Received: from ua-83-227-238-68.cust.bredbandsbolaget.se ([83.227.238.68])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Nov 2010 09:20:04 +0100
+Received: from a.tqvist by ua-83-227-238-68.cust.bredbandsbolaget.se with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Nov 2010 00:07:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=9/mgkdD9Jyfht2SGRB6sh9TQtmnuszJaTWU+IsHbjHs=;
-	b=pp03cb2vvPnF9XKfUDB4Hnkc1MZn0VvcXTf5cCtAMgSZeQMM7SLIcIZNTIxCzy8n24
-	0sfDEweT2wIRXa/GpmCEgXwv0U06iLZ5CSNNqzomA4VdX1vgHLFArrpt+V4I3bJZiq9c
-	6r4G3S+nRTP/OjY6T0prZTDvpFchvUjptOsKY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=XBZGYsDdvCrVxXIRZr9NplChM6g8Ig+sMMyJLCIZQ6hKw4uyAjuLnGlOPQMMXkJZGP
-	lN2ztpS5VN3Ay7WpyY0NSDXCc0mxgBoI5lJ2meNHoMzXF1mP9dnB+b2894WgYiLfHdnK
-	FMYP09pyVpECG7ZdM4GT7aezPUbl969O2ovRA=
-Received: by 10.223.72.195 with SMTP id n3mr6828672faj.132.1290586037281;
-	Wed, 24 Nov 2010 00:07:17 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 21sm465541fav.17.2010.11.24.00.07.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 24 Nov 2010 00:07:16 -0800 (PST)
-Date: Wed, 24 Nov 2010 09:07:07 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 24 Nov 2010 09:20:04 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101124080705.GF3274@jama>
-References: <4CEC1E17.1030208@sensortherm.de>
-	<AANLkTinhykFBHcgJR5suXU8Q7op+FOxofExY-d42XmYw@mail.gmail.com>
-	<AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+From: Anders =?utf-8?b?VMO2cm5xdmlzdA==?= <a.tqvist@gmail.com>
+Date: Wed, 24 Nov 2010 08:17:57 +0000 (UTC)
+Message-ID: <loom.20101124T090626-312@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 83.227.238.68 (Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.3) Gecko/20100423 Ubuntu/10.04 (lucid) Firefox/3.6.3)
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: I've downloaded oe
+Subject: Source distribution broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,40 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2010 08:08:31 -0000
+X-List-Received-Date: Wed, 24 Nov 2010 08:21:19 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On Wed, Nov 24, 2010 at 08:52:41AM +0100, Frans Meulenbroeks wrote:
-> What about moving all recipes that do not fetch and also did not fetch
-> during Martins test from last march/april to a directory non-fetching
-> or so?
+Hi,
 
-But those recipes were only those where I wasn't able to find the source
-at all (even with google help and couple of popular premirrors). Any
-origin for source was fine for me, because I was only interested in
-checksum check.
+Is the source distribution functionality broken?
 
-> Apparently these are non fetchable for a long time, with no one
-> apparently building them or having an interest to fix them.
+This is set in local.conf:
+SRC_DIST_LOCAL = "copy"
+INHERIT += "src_distribute_local"
 
-More likely those who were building those before are still building
-OK, because they had it in theirs downloads dir. (but the second part is
-right :/).
+New checkout of OE from git.
+Have tried different builds for MACHINE=beagleboard and images minimal-image and
+base-image.
 
-> My proposal would be to do that before the release is made, thereby
-> improving the % of the recipes that build.
+The only thing that is stored in the TMPDIR/deploy/glibc/sources is a MIT
+directory with the minimal-image/minimal-image.bb file.
 
-We can improve it also by putting those missing upstream files to
-sources.openembedded.org and use it as premirror. But first we hav to
-find someone who still have it in downloads dir :/ (I don't).
 
-Removing recipes would need to remove those also from tasks/images and
-in the end release images could miss some important functionaly in worst
-case.
+In src_distribute.bbclass there is a line
+addtask distribute_sources before do_build after do_fetch
+Does do_build actually get run for every task?
 
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+If set to something else instead of "do_build" like "do_compile" will trigger a
+lot of src_distribute calls and copying of files for a lot of licenses to
+TMPDIR/deploy/glibc/sources.
+
+Any ideas?
+
+/Anders
+
 
 
