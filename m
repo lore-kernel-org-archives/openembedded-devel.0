@@ -1,48 +1,52 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zach.frey@gmail.com>) id 1PLMlY-0004l8-P0
+	(envelope-from <martin.jansa@gmail.com>) id 1PLMuy-0004xr-Hj
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 22:20:37 +0100
-Received: by wyb40 with SMTP id 40so169668wyb.6
+	Wed, 24 Nov 2010 22:30:21 +0100
+Received: by fxm4 with SMTP id 4so30487fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Nov 2010 13:19:19 -0800 (PST)
+	Wed, 24 Nov 2010 13:29:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received
-	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=cRE5TkEbjm6uynDtwhFu0bRl4bgfjsXx/pcxCOZgYL4=;
-	b=AqnFc9UN96EVgNIc6AIGCORJnKolfEgITIm0hXdPi4qbZUO8Fgv9PC9iJgm1QVn+9j
-	bogWYg56in3Sx2AeagmYNF57wsQQ3ZgX88SfFK9q3V2RYYybeXbvPq8fn1THUWSxedRR
-	MxRH+755l34SkN8MBB9OIlSOvCxhlsCCuXmnE=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=rOguDIvsiDOrCBRAkRBBByhoftoPBGz4qRJCQy/ADAQ=;
+	b=cMaae14Futb0qycFt4zfsiXy6iYz/PF/RwhMvDBEVATGB1JlR3vcDxW/Yb/r7cURbJ
+	EspZ2wRCm6VN4uxIAohOuj/1QyuSjOv3XwNxqJ8tpbqNLqG43VhjysfQLaRR3k524+uv
+	PlZ+ymp92Wj+W7Q91PF8MA06d19HuUPCxJQQ4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=rfNzZXcIGaqVUTRd2fmjGrKS+lNyykCsszFEIeROpQFF62NWRy/nDGqZmFJn1Bef2U
-	ASC87ahCcI5+pFnqTXN3oIiSc0+U2hh/liJ4Mei7c35T3idxE/tlivRlUQtAc3eopP2O
-	vb0tmow7iihl0LdidtOAH+nAZGRp/WQl9CjOM=
-MIME-Version: 1.0
-Received: by 10.216.141.209 with SMTP id g59mr8881607wej.10.1290633557741;
-	Wed, 24 Nov 2010 13:19:17 -0800 (PST)
-Sender: zach.frey@gmail.com
-Received: by 10.217.3.211 with HTTP; Wed, 24 Nov 2010 13:19:17 -0800 (PST)
-In-Reply-To: <AANLkTims2A-RP8CRn5PPsQ+wyT6L7vzEqmutoF0ug=yj@mail.gmail.com>
-References: <AANLkTik7jiaQGPgnzi+AbygYSKsSTEY7jVPbk6CyRNAr@mail.gmail.com>
-	<AANLkTims2A-RP8CRn5PPsQ+wyT6L7vzEqmutoF0ug=yj@mail.gmail.com>
-Date: Wed, 24 Nov 2010 16:19:17 -0500
-X-Google-Sender-Auth: EX4fSUupk3AXvjMyUS-8xXq63FE
-Message-ID: <AANLkTi=Jv34yAH_hPjj0Jdnbkqh5Luor6xokMHXk=6z7@mail.gmail.com>
-From: Zach Frey <zach@znfrey.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=lFI/FLu2okLca0Ksv024zFodPjdZ2TG489GBSZzF2DG0yULiEQTq/JD8IuVsq42dB8
+	xc2QBDBnYKPCJ6WGKvKj7xI4xwdjcv2TKtkbsFqZaXNvcAJ2CTTPsVvdxT6bBj4rmDqX
+	tHPpiEAvdiJhHrpj4TX1Uq8pYmFUxM0G9Q/Oc=
+Received: by 10.223.103.2 with SMTP id i2mr8345597fao.115.1290634146484;
+	Wed, 24 Nov 2010 13:29:06 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n6sm2007201faa.28.2010.11.24.13.29.04
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 24 Nov 2010 13:29:04 -0800 (PST)
+Date: Wed, 24 Nov 2010 22:28:55 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: zach.frey@gmail.com
+Message-ID: <20101124212855.GH3274@jama>
+References: <1290620636-21238-1-git-send-email-eric@eukrea.com>
+	<1290620636-21238-2-git-send-email-eric@eukrea.com>
+	<AANLkTi=vHic9JYNfFH0-giLnB0x929Czhj3C_BriAN9L@mail.gmail.com>
+	<4CED64C8.7060909@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <4CED64C8.7060909@eukrea.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: error: C preprocessor "arm-angstrom-linux-gnueabi-gcc -E" fails sanity check
+Subject: Re: [PATCH 2/3] busybox: add 1.17.4 (latest stable version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,69 +60,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2010 21:20:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 24 Nov 2010 21:30:21 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-That does it, thanks.
+On Wed, Nov 24, 2010 at 08:17:28PM +0100, Eric Bénard wrote:
+> On 24/11/2010 19:44, Khem Raj wrote:
+> > On Wed, Nov 24, 2010 at 9:43 AM, Eric Bénard<eric@eukrea.com>  wrote:
+> >> this is the latest stable version (1.17.3 + its fixes).
+> >>
+> >> Signed-off-by: Eric Bénard<eric@eukrea.com>
+> >
+> > Please install it on release branch as well. Do we still need 1.17.3 ?
+> >
+> if SHR switch to 1.17.4 we shouldn't need it anymore.
+> (and if Ångström 2010 also switch to 1.17.4 we won't need 1.17.1).
+> 
+> Martin, Koen, are you ok with the patch below ?
 
--Zach
+If 1.17.4 is sorted as default (without D_P) then I'm ok with removing
+PREFERRED_VERSION_busybox from SHR config completely.
 
-On Wed, Nov 24, 2010 at 1:42 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Wed, Nov 24, 2010 at 9:32 AM, Zach Frey <zach@znfrey.com> wrote:
-> > Hi,
-> >
-> > I'm seeing a new error using git HEAD and trying to build for the
-> omapzoom2:
-> >
-> >
-> > Build Configuration:
-> > BB_VERSION        = "1.10.0"
-> > METADATA_BRANCH   = "master"
-> > METADATA_REVISION = "20117ec"
-> > TARGET_ARCH       = "arm"
-> > TARGET_OS         = "linux-gnueabi"
-> > MACHINE           = "omapzoom2"
-> > DISTRO            = "angstrom"
-> > DISTRO_VERSION    = "next"
-> > TARGET_FPU        = "hard"
-> >
-> > | checking how to run the C preprocessor...
-> arm-angstrom-linux-gnueabi-gcc
-> > -E
-> > | configure: error: in
-> >
-> `/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r16.7+svnr11982/build-arm-angstrom-linux-gnueabi':
-> > | configure: error: C preprocessor "arm-angstrom-linux-gnueabi-gcc -E"
-> fails
-> > sanity check
-> > | See `config.log' for more details.
-> > | ERROR: Function do_configure failed
-> >
-> > Suggestions?  More info I can provide?
-> >
->
-> sometimes rebuilding gcc can be a bit tricky and I think thats what
-> might have happened in your case. So please rebuild the toolchain
->
-> bitbake -c clean eglibc eglibc-initial gcc-cross-initial
-> gcc-cross-intermediate gcc-cross gcc
-> bitbake <your image>
->
-> that should help if the cross compiler was broken by  unstaging.
->
-> >
-> > Thanks,
-> > Zach Frey
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
+> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc 
+> b/conf/distro/include/angstrom-2010-preferred-v
+> index 12ee900..bda21d9 100644
+> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
+> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> @@ -13,7 +13,7 @@ PREFERRED_VERSION_autoconf = "2.65"
+>   PREFERRED_VERSION_autoconf-native = "2.65"
+>   PREFERRED_VERSION_automake = "1.11.1"
+>   PREFERRED_VERSION_automake-native = "1.11.1"
+> -PREFERRED_VERSION_busybox      = "1.17.1"
+> +PREFERRED_VERSION_busybox      = "1.17.4"
+>   PREFERRED_VERSION_cairo                = "1.10.0"
+>   PREFERRED_VERSION_dbus                 = "1.2.24"
+>   PREFERRED_VERSION_dropbear      = "0.51"
+> diff --git a/conf/distro/include/preferred-shr-versions.inc 
+> b/conf/distro/include/preferred-shr-versions.inc
+> index 22e1c82..da11164 100644
+> --- a/conf/distro/include/preferred-shr-versions.inc
+> +++ b/conf/distro/include/preferred-shr-versions.inc
+> @@ -13,7 +13,7 @@ PREFERRED_VERSION_emacs-x11 = "23.1"
+>   PREFERRED_VERSION_ncurses = "5.7"
+>   PREFERRED_VERSION_ncurses-native = "5.7"
+>   PREFERRED_VERSION_python-pycairo = "1.8.0"
+> -PREFERRED_VERSION_busybox = "1.17.3"
+> +PREFERRED_VERSION_busybox = "1.17.4"
+> 
+>   # we need new headers for libc, now OLDEST_KERNEL_linux-gnueabi = "2.6.24"
+>   # and 2.6.31 for fsodeviced
+> 
+> Eric
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
 
