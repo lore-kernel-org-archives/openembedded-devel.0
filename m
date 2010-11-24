@@ -1,45 +1,44 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PLIFf-000141-69
+	(envelope-from <zach.frey@gmail.com>) id 1PLJDu-0002Nj-FH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 17:31:24 +0100
-Received: by gwb11 with SMTP id 11so414564gwb.6
+	Wed, 24 Nov 2010 18:33:38 +0100
+Received: by vws6 with SMTP id 6so2874114vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Nov 2010 08:30:08 -0800 (PST)
+	Wed, 24 Nov 2010 09:32:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=9u8TcRiV4Rt/2Nhr4h9wEVWOaZH2jWj8ACau6JCJGrM=;
-	b=HCTCDXROSBsg4JfOuS6yO2Ad6EfxPLBkupwYBth9GZa1Z3b1bRShwNajYSnm8CH/Yp
-	I3TEd+dLFcqCgfRSI477cIzwZAH9C8sj6GB2EgBmOZ+BDewngaz2OPiCGwJFbJH8415c
-	AvQcpKd6lzDK2R+94xktbxCDdCeQR0f4FV2tA=
+	h=domainkey-signature:mime-version:received:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=922mEcJ1X+3pa+z0pRce9v6jEtbW3yfMbDkuszH+2eU=;
+	b=AdmYFa8TpPCejmtpTaC2PWUbveDmSJMhtooLfwEuWnMIvg09vCPZHeueSxGYCd+C6P
+	2eUa5Z2yOht+8emYEQhmw+TWTnedC7ukkhzaXFmu5ap4OCPDeMkmueVMkyMSY284RkJE
+	zh3HGsHLvtyCtzVE5NIARe4vwA8gTSRzTUXog=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=HgPjmadRHs6HbPXAcSREsY6mQFLNJGcMA0i7Vqt3I/MPAYhe4R0QzyA4fb4+BVCYOR
-	smDby5gsI1vouM4EctG/Mmz330DPeC28m6mVGne8KK+Uaofk67P10Aaik+dxkbiTaCLX
-	hqUugrA3LX4iF3Tq1OpdME/lDORQqVkPDOJb4=
-Received: by 10.91.12.18 with SMTP id p18mr1112122agi.48.1290616208190; Wed,
-	24 Nov 2010 08:30:08 -0800 (PST)
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	b=aGTins+CkfCFI+eHH/9zdCsBvqFx0u5QLV2hwNF8JbrqeP9piP79rZzIv49XYIoeux
+	/GGHTr7nNVKZvEuKbRrTNBMjsGwYJOlqO++dJ5q2SldqtxcTLRL32Qcc+Q3Be8UYBZIb
+	52S1tFP3lPFq0yBvdhXAtIjc41zgQu/sJTRLQ=
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Wed, 24 Nov 2010 08:29:47 -0800 (PST)
-In-Reply-To: <1290584184-19331-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1289914206-29909-1-git-send-email-Martin.Jansa@gmail.com>
-	<1290584184-19331-1-git-send-email-Martin.Jansa@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 24 Nov 2010 08:29:47 -0800
-Message-ID: <AANLkTimBhoRpWx6KmKq345=FJvUF99=X8jzn2tByYQAw@mail.gmail.com>
+Received: by 10.216.235.41 with SMTP id t41mr2822115weq.55.1290619939406; Wed,
+	24 Nov 2010 09:32:19 -0800 (PST)
+Sender: zach.frey@gmail.com
+Received: by 10.217.3.211 with HTTP; Wed, 24 Nov 2010 09:32:19 -0800 (PST)
+Date: Wed, 24 Nov 2010 12:32:19 -0500
+X-Google-Sender-Auth: FtQdGlwb0TemlgrYOYC2dUTKEm8
+Message-ID: <AANLkTik7jiaQGPgnzi+AbygYSKsSTEY7jVPbk6CyRNAr@mail.gmail.com>
+From: Zach Frey <zach@znfrey.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: zach.frey@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv2][RFC] binconfig: use / instead empty prefix/exec_prefix in get_binconfig_mangle
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: error: C preprocessor "arm-angstrom-linux-gnueabi-gcc -E" fails sanity check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,102 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2010 16:31:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 24 Nov 2010 17:33:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-seems fine to me.
+Hi,
 
-On Tue, Nov 23, 2010 at 11:36 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> * 952e5e2b7a5c1deefc939594d40b81a71fb16a54 appends / in sed call,
-> =C2=A0but it breaks ie =3D/usr replacement ie in libmikmod
-> * using at least / in SLASH_PREFIX/SLASH_EXEC_PREFIX is needed ie for mic=
-ro
-> =C2=A0distribution where prefix/exec_prefix are empty (/usr collapsed to =
-/)
-> * prefix and exec_prefix are expanded only in shell environment (after
-> =C2=A0get_binconfig_mangle is returned so to check if it's empty we have =
-to
-> =C2=A0pass them expanded as params)
-> * don't push this patch it fixes libmikmod with !micro, but in micro
-> =C2=A0it's still broken, because libmikmod-config has empty 'prefix=3D' w=
-hich
-> =C2=A0is the case when we normaly don't want to add OEPREFIX (whole point=
- of
-> =C2=A0this patch), but in this case it's needed (let's just fix libmikmod=
-.in)
-> * thanks to GNUtoo!
-> ---
-> =C2=A0classes/binconfig.bbclass | =C2=A0 14 ++++++++++----
-> =C2=A01 files changed, 10 insertions(+), 4 deletions(-)
->
-> diff --git a/classes/binconfig.bbclass b/classes/binconfig.bbclass
-> index b3b2236..e462083 100644
-> --- a/classes/binconfig.bbclass
-> +++ b/classes/binconfig.bbclass
-> @@ -1,15 +1,21 @@
-> =C2=A0FILES_${PN}-dev +=3D "${bindir}/*-config"
->
-> =C2=A0# The namespaces can clash here hence the two step replace
-> -def get_binconfig_mangle(d):
-> +def get_binconfig_mangle(d, env_prefix, env_exec_prefix):
-> + =C2=A0 =C2=A0 =C2=A0 SLASH_PREFIX =3D env_prefix
-> + =C2=A0 =C2=A0 =C2=A0 if SLASH_PREFIX is "":
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SLASH_PREFIX =3D "/"
-> + =C2=A0 =C2=A0 =C2=A0 SLASH_EXEC_PREFIX =3D env_exec_prefix
-> + =C2=A0 =C2=A0 =C2=A0 if SLASH_EXEC_PREFIX is "":
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SLASH_EXEC_PREFIX =3D =
-"/"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0s =3D "-e ''"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0if not bb.data.inherits_class('native', d):
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0optional_quote =3D=
- r"\(\"\?\)"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s +=3D " -e 's:=3D=
-%s${libdir}:=3D\\1OELIBDIR:;'" % optional_quote
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s +=3D " -e 's:=3D=
-%s${includedir}:=3D\\1OEINCDIR:;'" % optional_quote
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s +=3D " -e 's:=3D=
-%s${datadir}:=3D\\1OEDATADIR:'" % optional_quote
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s +=3D " -e 's:=3D%s${=
-prefix}/:=3D\\1OEPREFIX/:'" % optional_quote
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s +=3D " -e 's:=3D%s${=
-exec_prefix}/:=3D\\1OEEXECPREFIX/:'" % optional_quote
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s +=3D " -e 's:=3D%s%s=
-:=3D\\1OEPREFIX:'" % (optional_quote, SLASH_PREFIX)
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s +=3D " -e 's:=3D%s%s=
-:=3D\\1OEEXECPREFIX:'" % (optional_quote, SLASH_EXEC_PREFIX)
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s +=3D " -e 's:-L$=
-{libdir}:-LOELIBDIR:;'"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s +=3D " -e 's:-I$=
-{includedir}:-IOEINCDIR:;'"
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s +=3D " -e 's:OEL=
-IBDIR:${STAGING_LIBDIR}:;'"
-> @@ -52,7 +58,7 @@ binconfig_sysroot_preprocess () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0for config in `find ${S} -name '${BINCONFIG_GL=
-OB}'`; do
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0configname=3D`base=
-name $config`
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${SYSRO=
-OT_DESTDIR}${STAGING_BINDIR_CROSS}
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cat $config | sed ${@g=
-et_binconfig_mangle(d)} > ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$config=
-name
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cat $config | sed ${@g=
-et_binconfig_mangle(d, "${prefix}", "${exec_prefix}")} > ${SYSROOT_DESTDIR}=
-${STAGING_BINDIR_CROSS}/$configname
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0chmod u+x ${SYSROO=
-T_DESTDIR}${STAGING_BINDIR_CROSS}/$configname
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0done
-> =C2=A0}
-> --
-> 1.7.3.2
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I'm seeing a new error using git HEAD and trying to build for the omapzoom2:
 
+
+Build Configuration:
+BB_VERSION        = "1.10.0"
+METADATA_BRANCH   = "master"
+METADATA_REVISION = "20117ec"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "omapzoom2"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "next"
+TARGET_FPU        = "hard"
+
+| checking how to run the C preprocessor... arm-angstrom-linux-gnueabi-gcc
+-E
+| configure: error: in
+`/home/PHOENIX/frey/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/eglibc-2.12-r16.7+svnr11982/build-arm-angstrom-linux-gnueabi':
+| configure: error: C preprocessor "arm-angstrom-linux-gnueabi-gcc -E" fails
+sanity check
+| See `config.log' for more details.
+| ERROR: Function do_configure failed
+
+Suggestions?  More info I can provide?
+
+
+Thanks,
+Zach Frey
 
