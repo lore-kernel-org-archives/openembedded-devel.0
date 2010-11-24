@@ -1,37 +1,27 @@
-Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
+Received: from ibawizard.net ([82.208.49.253] helo=mengele.ibawizard.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1PLAsx-0007Fv-FL
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PLAxq-0007Om-Fl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 09:39:27 +0100
-Received: from durham.keylevel.com ([109.224.134.115]:55157
-	helo=[192.168.1.99])
-	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1PLArn-0007HL-Mu
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 08:38:15 +0000
-Message-Id: <B8472870-415E-4B4D-8764-2987EE61C2D4@keylevel.com>
-From: Chris Tapp <dokuwiki@keylevel.com>
+	Wed, 24 Nov 2010 09:44:31 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 45D1A1D36171; Wed, 24 Nov 2010 09:43:14 +0100 (CET)
+Date: Wed, 24 Nov 2010 09:43:13 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4CECC3DC.1080301@eukrea.com>
-Mime-Version: 1.0 (Apple Message framework v936)
-Date: Wed, 24 Nov 2010 08:38:14 +0000
-References: <4CECC3DC.1080301@eukrea.com>
-X-Mailer: Apple Mail (2.936)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - keylevel.com
-X-SA-Exim-Connect-IP: 80.254.228.43
-X-SA-Exim-Mail-From: dokuwiki@keylevel.com
+Message-ID: <20101124084313.GC10755@ibawizard.net>
+References: <AANLkTim3cKQRr0e1VQRiLf=95jOHC5=TGPQfXbDoZCmj@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTim3cKQRr0e1VQRiLf=95jOHC5=TGPQfXbDoZCmj@mail.gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Wiki SPAM
+Subject: Re: BitBake parallel parsing testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +35,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2010 08:39:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed; delsp=yes
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 24 Nov 2010 08:44:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+Chris Larson <kergoth@gmail.com> [2010-11-23 07:29:00]:
 
-On 24 Nov 2010, at 07:50, Eric B=E9nard wrote:
+> Greetings all,
 
-> =
-http://wiki.openembedded.org/index.php/Special:Contributions/Yjytalamago
->
-> is it posssible to remove this user which spent several hours to =20
-> spam the wiki ?
+Hi,
 
-My browser warns me that the "reserve website" linked from the =20
-modified pages (if that's the spam?) contains malware.
+> Thanks for your time, and do let me know what you think, either of the
+> code, performance in general, or the new progress bar (shows an ETA),
+> or anything else :)
 
-Chris
+I'm using it on two different systems for a few days now and it works fine, no
+issues at all. Well, I don't mind those eye candy progress bar glitches, speed
+is more important for me. Thanks a lot, nice Christmas gift in November :-)
 
+-- ynezz
 
 
