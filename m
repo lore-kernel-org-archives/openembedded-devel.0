@@ -1,37 +1,38 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PLKMQ-0004Md-0I
+	(envelope-from <raj.khem@gmail.com>) id 1PLKMt-0004QW-8n
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 19:46:32 +0100
-Received: by gwb11 with SMTP id 11so34901gwb.6
+	Wed, 24 Nov 2010 19:47:03 +0100
+Received: by gxk20 with SMTP id 20so35704gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Nov 2010 10:45:12 -0800 (PST)
+	Wed, 24 Nov 2010 10:45:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=kiiMYqYLkR8XoFsswlHLxP+oFKzxejb3C7VI1Uu8qh4=;
-	b=O2ot4gp/SG2WXS6vTL2Z1AsdBU4FfLeN1TI29MMUSobB3OgTneZqxpfMT1ulPkP52c
-	X23uerK1dK7wmgweS99amjNKrxc3hyWmt9KUy8oOyN3KXwkyJLIkhhtxYZCAjdDRmxVt
-	atnBtO/BO+LdUfdQdj4qKaq7cskzbiPDXFEkU=
+	bh=ImvNmWxHzGWXzIJ9wQm+atkqWcX17b2SQ2jL3RxjP0I=;
+	b=fsjDLxy430jFpZlUcxG244tx/SjHKh/5WkZur4oAysGkzS7DgZbDVCVV0oVLbSe4uR
+	vXCroJSju7ORyr5r8zVyJeMTyEI5Cp4huHZIJshj+vqZ49PD3QwwPyQHgUFbX+CL10P8
+	rf0lHP7uF5UYPJFfriaKg7B0+7eUbpkU27JBA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=En07OAs4dKVZNLGrfNYrQa2YiXdcFDqBJO5uAM1l5mDSLHH/rfbB9y1H+tiKWwWl1T
-	XqrtIrO3S0DunhoZQTWZpzAMEs4+MIWgWtHwqYU2qojcOxGfy2nWVkbNykBUX7KsJMuQ
-	gR6DUHbH8+oHSY989a9ZyBVjjGtFzBh5kA18U=
-Received: by 10.90.9.22 with SMTP id 22mr1272651agi.102.1290624311857; Wed, 24
-	Nov 2010 10:45:11 -0800 (PST)
+	b=mGvEsmhcou9FekPoZkG/vbyO/Csa3RMtsqxOx9vkmX9gmcGq+876q6gtQ8sVCqfsfc
+	7Qex/ws0z6aoK6ilhMuphdYgwsb0NTpIHq4wVnfcHhcSJ4/0ttlT6W2AbCQg7zWlj8Vx
+	l4bmw4NRl9Mwy9xIWgIEez4AnolMKq3/TNVaM=
+Received: by 10.90.99.8 with SMTP id w8mr1303889agb.0.1290624343380; Wed, 24
+	Nov 2010 10:45:43 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Wed, 24 Nov 2010 10:44:51 -0800 (PST)
-In-Reply-To: <1290620636-21238-2-git-send-email-eric@eukrea.com>
+Received: by 10.90.120.8 with HTTP; Wed, 24 Nov 2010 10:45:23 -0800 (PST)
+In-Reply-To: <1290620636-21238-3-git-send-email-eric@eukrea.com>
 References: <1290620636-21238-1-git-send-email-eric@eukrea.com>
 	<1290620636-21238-2-git-send-email-eric@eukrea.com>
+	<1290620636-21238-3-git-send-email-eric@eukrea.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 24 Nov 2010 10:44:51 -0800
-Message-ID: <AANLkTi=vHic9JYNfFH0-giLnB0x929Czhj3C_BriAN9L@mail.gmail.com>
+Date: Wed, 24 Nov 2010 10:45:23 -0800
+Message-ID: <AANLkTim76s5VBmpDEASq-QirXVTBfkUaBavbvrfERBL9@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Connect-IP: 209.85.161.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
 	UPPERCASE_50_75 autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] busybox: add 1.17.4 (latest stable version)
+Subject: Re: [PATCH 3/3] busybox: add 1.18.0 and its first fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,50 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2010 18:46:32 -0000
+X-List-Received-Date: Wed, 24 Nov 2010 18:47:03 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On Wed, Nov 24, 2010 at 9:43 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> this is the latest stable version (1.17.3 + its fixes).
+> this is the latest unstable version so DP=3D-1
 >
 > Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 
-Please install it on release branch as well. Do we still need 1.17.3 ?
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 > ---
-> =C2=A0recipes/busybox/busybox-1.17.4/B921600.patch =C2=A0 =C2=A0 =C2=A0 |=
+> =C2=A0recipes/busybox/busybox-1.18.0/B921600.patch =C2=A0 =C2=A0 =C2=A0 |=
  =C2=A0 13 +
-> =C2=A0recipes/busybox/busybox-1.17.4/defconfig =C2=A0 =C2=A0 =C2=A0 =C2=
+> =C2=A0.../busybox-1.18.0/busybox-1.18.0-buildsys.patch =C2=A0 | =C2=A0 21=
+ +
+> =C2=A0recipes/busybox/busybox-1.18.0/defconfig =C2=A0 =C2=A0 =C2=A0 =C2=
 =A0 =C2=A0 | =C2=A0873 ++++++++++++++++++++
-> =C2=A0recipes/busybox/busybox-1.17.4/fdisk_nios2.patch =C2=A0 | =C2=A0 13=
+> =C2=A0recipes/busybox/busybox-1.18.0/fdisk_nios2.patch =C2=A0 | =C2=A0 13=
  +
-> =C2=A0.../busybox/busybox-1.17.4/get_header_tar.patch =C2=A0 =C2=A0| =C2=
-=A0 11 +
-> =C2=A0.../busybox-1.17.4/udhcpc-fix-nfsroot.patch =C2=A0 =C2=A0 =C2=A0 =
+> =C2=A0.../busybox/busybox-1.18.0/get_header_tar.patch =C2=A0 =C2=A0| =C2=
+=A0 13 +
+> =C2=A0.../busybox-1.18.0/udhcpc-fix-nfsroot.patch =C2=A0 =C2=A0 =C2=A0 =
 =C2=A0| =C2=A0 47 ++
-> =C2=A0recipes/busybox/busybox-1.17.4/udhcpscript.patch =C2=A0 | =C2=A0 13=
+> =C2=A0recipes/busybox/busybox-1.18.0/udhcpscript.patch =C2=A0 | =C2=A0 13=
  +
-> =C2=A0recipes/busybox/busybox_1.17.4.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A05 +
-> =C2=A07 files changed, 975 insertions(+), 0 deletions(-)
-> =C2=A0create mode 100644 recipes/busybox/busybox-1.17.4/B921600.patch
-> =C2=A0create mode 100644 recipes/busybox/busybox-1.17.4/defconfig
-> =C2=A0create mode 100644 recipes/busybox/busybox-1.17.4/fdisk_nios2.patch
-> =C2=A0create mode 100644 recipes/busybox/busybox-1.17.4/get_header_tar.pa=
+> =C2=A0recipes/busybox/busybox_1.18.0.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 12 +
+> =C2=A08 files changed, 1005 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.0/B921600.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.0/busybox-1.18.0-bu=
+ildsys.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.0/defconfig
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.0/fdisk_nios2.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.0/get_header_tar.pa=
 tch
-> =C2=A0create mode 100644 recipes/busybox/busybox-1.17.4/udhcpc-fix-nfsroo=
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.0/udhcpc-fix-nfsroo=
 t.patch
-> =C2=A0create mode 100644 recipes/busybox/busybox-1.17.4/udhcpscript.patch
-> =C2=A0create mode 100644 recipes/busybox/busybox_1.17.4.bb
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.0/udhcpscript.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox_1.18.0.bb
 >
-> diff --git a/recipes/busybox/busybox-1.17.4/B921600.patch b/recipes/busyb=
-ox/busybox-1.17.4/B921600.patch
+> diff --git a/recipes/busybox/busybox-1.18.0/B921600.patch b/recipes/busyb=
+ox/busybox-1.18.0/B921600.patch
 > new file mode 100644
 > index 0000000..61cc32b
 > --- /dev/null
-> +++ b/recipes/busybox/busybox-1.17.4/B921600.patch
+> +++ b/recipes/busybox/busybox-1.18.0/B921600.patch
 > @@ -0,0 +1,13 @@
 > +diff -upNr busybox-1.7.2/libbb/speed_table.c busybox-1.7.2-921600/libbb/=
 speed_table.c
@@ -114,12 +118,57 @@ speed_table.c
 > + };
 > +
 > + enum { NUM_SPEEDS =3D ARRAY_SIZE(speeds) };
-> diff --git a/recipes/busybox/busybox-1.17.4/defconfig b/recipes/busybox/b=
-usybox-1.17.4/defconfig
+> diff --git a/recipes/busybox/busybox-1.18.0/busybox-1.18.0-buildsys.patch=
+ b/recipes/busybox/busybox-1.18.0/busybox-1.18.0-buildsys.patch
+> new file mode 100644
+> index 0000000..c72e4d3
+> --- /dev/null
+> +++ b/recipes/busybox/busybox-1.18.0/busybox-1.18.0-buildsys.patch
+> @@ -0,0 +1,21 @@
+> +diff -urpN busybox-1.18.0/scripts/gen_build_files.sh busybox-1.18.0-buil=
+dsys/scripts/gen_build_files.sh
+> +--- busybox-1.18.0/scripts/gen_build_files.sh =C2=A02010-11-22 21:43:22.=
+000000000 +0100
+> ++++ busybox-1.18.0-buildsys/scripts/gen_build_files.sh 2010-11-24 14:59:=
+47.732712663 +0100
+> +@@ -18,14 +18,14 @@ generate()
+> + =C2=A0 =C2=A0 =C2=A0 local src=3D"$1" dst=3D"$2" header=3D"$3" insert=
+=3D"$4"
+> + =C2=A0 =C2=A0 =C2=A0 #chk "${dst}"
+> + =C2=A0 =C2=A0 =C2=A0 (
+> +- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0echo "${header}"
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0printf "%s\n" "${heade=
+r}"
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if grep -qs '^INSERT$'=
+ "${src}"; then
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 sed -n '1,/^INSERT$/p' "${src}"
+> +- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0echo "${insert}"
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0printf "%s\n" "${insert}"
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 sed -n '/^INSERT$/,$p' "${src}"
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 else
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 if [ -n "${insert}" ]; then
+> +- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0echo "ERROR: INSERT line missing in: ${sr=
+c}" 1>&2
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0printf "%s\n" "ERROR: INSERT line missing=
+ in: ${src}" 1>&2
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 fi
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 cat "${src}"
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fi
+> diff --git a/recipes/busybox/busybox-1.18.0/defconfig b/recipes/busybox/b=
+usybox-1.18.0/defconfig
 > new file mode 100644
 > index 0000000..5a6870c
 > --- /dev/null
-> +++ b/recipes/busybox/busybox-1.17.4/defconfig
+> +++ b/recipes/busybox/busybox-1.18.0/defconfig
 > @@ -0,0 +1,873 @@
 > +#
 > +# Automatically generated make config: don't edit
@@ -994,12 +1043,12 @@ usybox-1.17.4/defconfig
 > +CONFIG_FEATURE_LOGREAD_REDUCED_LOCKING=3Dy
 > +CONFIG_KLOGD=3Dy
 > +CONFIG_LOGGER=3Dy
-> diff --git a/recipes/busybox/busybox-1.17.4/fdisk_nios2.patch b/recipes/b=
-usybox/busybox-1.17.4/fdisk_nios2.patch
+> diff --git a/recipes/busybox/busybox-1.18.0/fdisk_nios2.patch b/recipes/b=
+usybox/busybox-1.18.0/fdisk_nios2.patch
 > new file mode 100644
 > index 0000000..648e68e
 > --- /dev/null
-> +++ b/recipes/busybox/busybox-1.17.4/fdisk_nios2.patch
+> +++ b/recipes/busybox/busybox-1.18.0/fdisk_nios2.patch
 > @@ -0,0 +1,13 @@
 > +Index: busybox-1.15.3/util-linux/fdisk_osf.c
 > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
@@ -1016,18 +1065,20 @@ usybox/busybox-1.17.4/fdisk_nios2.patch
 > + =C2=A0|| defined(__s390__) || defined(__s390x__) \
 > + =C2=A0|| defined(__sh__) || defined(__x86_64__) || defined(__avr32__)
 > + # define BSD_LABELSECTOR =C2=A0 1
-> diff --git a/recipes/busybox/busybox-1.17.4/get_header_tar.patch b/recipe=
-s/busybox/busybox-1.17.4/get_header_tar.patch
+> diff --git a/recipes/busybox/busybox-1.18.0/get_header_tar.patch b/recipe=
+s/busybox/busybox-1.18.0/get_header_tar.patch
 > new file mode 100644
-> index 0000000..0121cd1
+> index 0000000..62b55af
 > --- /dev/null
-> +++ b/recipes/busybox/busybox-1.17.4/get_header_tar.patch
-> @@ -0,0 +1,11 @@
-> +--- busybox-1.13.2/archival/libunarchive/get_header_tar.c.orig 2008-11-0=
-9 18:28:02.000000000 +0100
-> ++++ busybox-1.13.2/archival/libunarchive/get_header_tar.c =C2=A0 =C2=A0 =
-=C2=A02009-02-11 22:34:52.000000000 +0100
-> +@@ -252,6 +252,8 @@
+> +++ b/recipes/busybox/busybox-1.18.0/get_header_tar.patch
+> @@ -0,0 +1,13 @@
+> +diff --git a/archival/libarchive/get_header_tar.c b/archival/libarchive/=
+get_header_tar.c
+> +index 78b0ae2..58b15c1 100644
+> +--- a/archival/libarchive/get_header_tar.c
+> ++++ b/archival/libarchive/get_header_tar.c
+> +@@ -314,6 +314,8 @@ char FAST_FUNC get_header_tar(archive_handle_t *arch=
+ive_handle)
 > + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
 =C2=A0 file_header->name =3D concat_path_file(tar.prefix, tar.name);
 > + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else
@@ -1040,12 +1091,12 @@ s/busybox/busybox-1.17.4/get_header_tar.patch
 > + =C2=A0 =C2=A0 =C2=A0 }
 > +
 > + =C2=A0 =C2=A0 =C2=A0 /* Set bits 12-15 of the files mode */
-> diff --git a/recipes/busybox/busybox-1.17.4/udhcpc-fix-nfsroot.patch b/re=
-cipes/busybox/busybox-1.17.4/udhcpc-fix-nfsroot.patch
+> diff --git a/recipes/busybox/busybox-1.18.0/udhcpc-fix-nfsroot.patch b/re=
+cipes/busybox/busybox-1.18.0/udhcpc-fix-nfsroot.patch
 > new file mode 100644
 > index 0000000..3b975b6
 > --- /dev/null
-> +++ b/recipes/busybox/busybox-1.17.4/udhcpc-fix-nfsroot.patch
+> +++ b/recipes/busybox/busybox-1.18.0/udhcpc-fix-nfsroot.patch
 > @@ -0,0 +1,47 @@
 > +Index: busybox-1.15.1/examples/udhcp/simple.script
 > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
@@ -1124,12 +1175,12 @@ tric $((metric++)) 2>/dev/null
 =C2=A0 done
 > + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fi
 > +
-> diff --git a/recipes/busybox/busybox-1.17.4/udhcpscript.patch b/recipes/b=
-usybox/busybox-1.17.4/udhcpscript.patch
+> diff --git a/recipes/busybox/busybox-1.18.0/udhcpscript.patch b/recipes/b=
+usybox/busybox-1.18.0/udhcpscript.patch
 > new file mode 100644
 > index 0000000..2ffba95
 > --- /dev/null
-> +++ b/recipes/busybox/busybox-1.17.4/udhcpscript.patch
+> +++ b/recipes/busybox/busybox-1.18.0/udhcpscript.patch
 > @@ -0,0 +1,13 @@
 > +Index: busybox-1.15.1/examples/udhcp/simple.script
 > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
@@ -1154,19 +1205,26 @@ then
 > + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
 =C2=A0 done
 > +
-> diff --git a/recipes/busybox/busybox_1.17.4.bb b/recipes/busybox/busybox_=
-1.17.4.bb
+> diff --git a/recipes/busybox/busybox_1.18.0.bb b/recipes/busybox/busybox_=
+1.18.0.bb
 > new file mode 100644
-> index 0000000..20786b8
+> index 0000000..3ee2c29
 > --- /dev/null
-> +++ b/recipes/busybox/busybox_1.17.4.bb
-> @@ -0,0 +1,5 @@
+> +++ b/recipes/busybox/busybox_1.18.0.bb
+> @@ -0,0 +1,12 @@
 > +require busybox_1.1x.inc
 > +PR =3D "${INC_PR}.1"
 > +
-> +SRC_URI[md5sum] =3D "b3254232e9919007ca803d3a4fe81f3c"
-> +SRC_URI[sha256sum] =3D "0c6b80f007e665228d1b271354b7e80450dcaa67c9162a30=
-eebf936c7cdfcbdc"
+> +DEFAULT_PREFERENCE =3D "-1"
+> +
+> +SRC_URI +=3D " \
+> + =C2=A0 =C2=A0 =C2=A0 file://busybox-1.18.0-buildsys.patch \
+> + =C2=A0 =C2=A0 =C2=A0 "
+> +
+> +SRC_URI[md5sum] =3D "7a8150a10558a5292fa1f52f1c65b0f5"
+> +SRC_URI[sha256sum] =3D "3a9d5e6929045440ec3d0c9987376cbbb78e98886d6c5fa5=
+8fc2306d2662eb00"
+> +
 > --
 > 1.6.3.3
 >
