@@ -1,43 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PLBSe-0008D9-PE for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 10:16:21 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PLBRU-0003Vz-RS for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Nov 2010 10:15:08 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Nov 2010 10:15:08 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLBVq-0008LR-1U
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Nov 2010 10:19:38 +0100
+Received: by iwn7 with SMTP id 7so387467iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Nov 2010 10:15:08 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 24 Nov 2010 01:18:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=c3hH0NTAWXIsDyGQcW9+xtk+K9eVWANiTl2/Qhtjg4s=;
+	b=eqFb+mtz/Qepy2K029JMuF+fl4nRL5nzR+y3pa06mgi3iozzBmKC/F9EXag4soLmYF
+	jI6+TwVr3v68R1LjnTP7z+zIWv7+CB0jekjZOET9+Eh7vkXBQD4vKe8XOfuq3yIf/4IR
+	QufPAJ0FqH0qF8+1koA8DqNlGEQujUH2/QA6g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=EHzRFqz52AGl/TzsPR0qKhs5iSVfd20yjbvd6MGZHTUk00QPDhqIdMfe2yZMo7JpeB
+	KCEdvLloWPbtRkCpN2N9VF6u6KFk3ksq7ewseCdWV46kyUUn/3RI+J6Ub63d0scb69VL
+	LJNihjC1hJYK0YAs7xlqgJzh/Ix1XjiBWPfzw=
+MIME-Version: 1.0
+Received: by 10.231.144.21 with SMTP id x21mr8569839ibu.126.1290590304854;
+	Wed, 24 Nov 2010 01:18:24 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Wed, 24 Nov 2010 01:18:24 -0800 (PST)
+In-Reply-To: <20101124080705.GF3274@jama>
+References: <4CEC1E17.1030208@sensortherm.de>
+	<AANLkTinhykFBHcgJR5suXU8Q7op+FOxofExY-d42XmYw@mail.gmail.com>
+	<AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>
+	<20101124080705.GF3274@jama>
+Date: Wed, 24 Nov 2010 10:18:24 +0100
+Message-ID: <AANLkTinv88_9h_1RB8OS5XuqSV2zKBhS2FcxMrpsWh8e@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 24 Nov 2010 10:14:55 +0100
-Message-ID: <icil2f$6jr$1@dough.gmane.org>
-References: <AANLkTim3cKQRr0e1VQRiLf=95jOHC5=TGPQfXbDoZCmj@mail.gmail.com>	<ich10v$f5b$1@dough.gmane.org>
-	<AANLkTimuLxR88D2jRH=-Ky0BRLK5GkbyqUcSO8FhK=KW@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <AANLkTimuLxR88D2jRH=-Ky0BRLK5GkbyqUcSO8FhK=KW@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BitBake parallel parsing testing
+Subject: Re: I've downloaded oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,71 +54,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2010 09:16:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 24 Nov 2010 09:19:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/11/24 Martin Jansa <martin.jansa@gmail.com>:
+> On Wed, Nov 24, 2010 at 08:52:41AM +0100, Frans Meulenbroeks wrote:
+>> What about moving all recipes that do not fetch and also did not fetch
+>> during Martins test from last march/april to a directory non-fetching
+>> or so?
+>
+> But those recipes were only those where I wasn't able to find the source
+> at all (even with google help and couple of popular premirrors). Any
+> origin for source was fine for me, because I was only interested in
+> checksum check.
+>
+>> Apparently these are non fetchable for a long time, with no one
+>> apparently building them or having an interest to fix them.
+>
+> More likely those who were building those before are still building
+> OK, because they had it in theirs downloads dir. (but the second part is
+> right :/).
+>
+>> My proposal would be to do that before the release is made, thereby
+>> improving the % of the recipes that build.
+>
+> We can improve it also by putting those missing upstream files to
+> sources.openembedded.org and use it as premirror. But first we hav to
+> find someone who still have it in downloads dir :/ (I don't).
+>
+> Removing recipes would need to remove those also from tasks/images and
+> in the end release images could miss some important functionaly in worst
+> case.
 
-On 23-11-10 19:42, Chris Larson wrote:
-> On Tue, Nov 23, 2010 at 11:26 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->> On 23-11-10 15:29, Chris Larson wrote:
->>
->>> Thanks for your time, and do let me know what you think, either of the
->>> code, performance in general, or the new progress bar (shows an ETA),
->>
->> The heuristic for the progress needs some work, it currently seems to
->> take in account all the parsed recipes instead of the last N recipes.
-> 
-> That's what our progress display always did, it's just more obvious now.
+I think most of the non fetching recipes would fall into one of these
+categories:
+- recipes that are very specific and are not part of a task or image
+- recipes that are older versions and that are not used/build
 
-That's not what I meant :) I meant that the progressbar will jump to 75%
-since that was already parsed and the ETA heuristic gets thrown off by
-the "75% in 1 second".
+Wrt the remark on missing important functionality:
+For a user with a clean slate, the functionality is already missing as
+the task/image cannot be build from scratch.
 
-regards,
+It might be a good idea to do a test trying to build all images for
+one distro/machine and see what comes out.
+Start with a clean system (empty downloads dir, empty TMPDIR, no
+pstaged files etc).
+Then bitbake all images. By doing it subsequently without cleaning
+TMPDIR inbetween it'll become clear which images do build from scratch
+and which don't.
 
-Koen
+Is someone able/willing to do this test and report the result (suggest
+using distro minimal or angstrom or probably shr and machine angstrom)
 
-> 
->> Try ctrl-c'ing it at 75% and restarting, you'll see the ETA taking weird
->> values. In my case it stayed on "10 seconds" for more than a minute.
-> 
-> The issue is one I've discussed with foerster a fair bit already.
-> When you're fully cached, the majority of the time isn't in the
-> parsing, it's in the loading of the cache file from disk, which isn't
-> part of our progress at all right now.  Either we stall for seconds
-> before the progress bar comes up, or we don't appear to stall, but the
-> ETA is a bit off.
-> 
-> Long term the intent is to properly integrate cache loading into this
-> progress bar, or into its own -- see
-> https://github.com/foerster/bitbake/commit/320b114d92181b3f944776b7e8c8db4b868ee3f1
-> for foerster's initial work on this.
-> 
-> After thinking about what you mentioned about the recipe count being
-> parsed, and given the fact that cached recipes aren't "parsed",
-> they're loaded from disk and then added to our CacheData, perhaps we
-> should change the parsing progress display to truly only show the
-> recipes being *parsed*, which is what you implied, and add a "Loading
-> cache..." message before the progress bar comes up, so we don't appear
-> to stall, then add a proper progress bar for the cache file loading as
-> a second step.
-> 
-> Alternatively, we change the progress display to truly indicate what's
-> being done.. if we consider all recipes, it's not *parsing* that we're
-> doing, its .. perhaps.. processing?
-> 
-> *ponders*
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM7NePMkyGM64RGpERAqWGAJoDVbAtMbIibKGGzLw03IBQMipa3QCghnTK
-wq00iIWQlV+R+SKupneaC7o=
-=IUFS
------END PGP SIGNATURE-----
-
+Frans
 
 
