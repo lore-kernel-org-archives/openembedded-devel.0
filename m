@@ -1,54 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PLbTw-0004UK-P9
+	(envelope-from <nicolas.ferre@atmel.com>) id 1PLcIU-0005T3-V2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 14:03:25 +0100
-Received: by fxm8 with SMTP id 8so111801fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 05:02:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=4X1Jt0hNYTMBVnKniIoP9f6zFy6vrz+7/DAac71z3z8=;
-	b=GKZLwsUy6Vl4r8+iE3Y5/aR40miJPB7REpReT/Jo82zmZNrgblxgO8ipfaOv+cmaBS
-	/dssdRfKEdWi4GbrltyEYmEpJYwtq0YfIpE55BG3awL9+UNYu00dmW4JFT1gpQTwcJRg
-	I7nsmct4okc4/8y84uNNrZ0Ofe/JnVdVp3YIw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=JFRHP1lpH5ZrxqOY1/V0mj1oewTTGLnnEMdPGfMSOStM77toK06ZN4MhQiEPVnjhbv
-	rhp6VPiGG4fDWndQ34HkJPjFOQ+xglBySbInO2HNtLYNvR6jo7JRDzRmonsOnCAfLSlf
-	A64nT5+1DuoP0nZ81KWQyQoqVAi66HuUY2DyY=
-Received: by 10.223.118.136 with SMTP id v8mr703411faq.90.1290690128948;
-	Thu, 25 Nov 2010 05:02:08 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n6sm182586faa.4.2010.11.25.05.02.07
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 25 Nov 2010 05:02:08 -0800 (PST)
-Date: Thu, 25 Nov 2010 14:01:56 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101125130156.GP3274@jama>
-References: <4CEC1E17.1030208@sensortherm.de>
-	<AANLkTinhykFBHcgJR5suXU8Q7op+FOxofExY-d42XmYw@mail.gmail.com>
-	<AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>
-	<20101124080705.GF3274@jama>
-	<AANLkTinv88_9h_1RB8OS5XuqSV2zKBhS2FcxMrpsWh8e@mail.gmail.com>
-	<4CEE5186.7070907@sensortherm.de>
-	<AANLkTi=LJkDCTR_PsUR52VuB9ckpms82MYyn9uyhO9hL@mail.gmail.com>
+	Thu, 25 Nov 2010 14:55:40 +0100
+Received: from meyreuil.atmel.fr (meyreuil [10.159.254.132])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id oAPDpdXO017743;
+	Thu, 25 Nov 2010 05:51:40 -0800 (PST)
+Received: from [127.0.0.1] ([10.159.245.112])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id oAPDs4h09105; 
+	Thu, 25 Nov 2010 14:54:04 +0100 (MET)
+Message-ID: <4CEE6A7B.4010603@atmel.com>
+Date: Thu, 25 Nov 2010 14:54:03 +0100
+From: Nicolas Ferre <nicolas.ferre@atmel.com>
+Organization: atmel
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-In-Reply-To: <AANLkTi=LJkDCTR_PsUR52VuB9ckpms82MYyn9uyhO9hL@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <4CEE24A8.2090007@atmel.com> <4CEE2ADA.7050004@eukrea.com>
+In-Reply-To: <4CEE2ADA.7050004@eukrea.com>
+X-MIME-Autoconverted: from 8bit to quoted-printable by sjogate2.atmel.com id
+	oAPDpdXO017743
+X-SA-Exim-Connect-IP: 204.2.163.5
+X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: I've downloaded oe
+Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Subject: Re: libXext-native fail to compile (x86_64)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,87 +44,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 13:03:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 25 Nov 2010 13:55:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 25, 2010 at 01:44:13PM +0100, Frans Meulenbroeks wrote:
-> 2010/11/25 Klaus Schwarzkopf <schwarzkopf@sensortherm.de>:
-> > Am 24.11.2010 10:18, schrieb Frans Meulenbroeks:
-> >>
-> >> 2010/11/24 Martin Jansa<martin.jansa@gmail.com>:
-> >>>
-> >>> On Wed, Nov 24, 2010 at 08:52:41AM +0100, Frans Meulenbroeks wrote:
-> >>>>
-> >>>> What about moving all recipes that do not fetch and also did not fetch
-> >>>> during Martins test from last march/april to a directory non-fetching
-> >>>> or so?
-> >>>
-> >>> But those recipes were only those where I wasn't able to find the source
-> >>> at all (even with google help and couple of popular premirrors). Any
-> >>> origin for source was fine for me, because I was only interested in
-> >>> checksum check.
-> >>>
-> >>>> Apparently these are non fetchable for a long time, with no one
-> >>>> apparently building them or having an interest to fix them.
-> >>>
-> >>> More likely those who were building those before are still building
-> >>> OK, because they had it in theirs downloads dir. (but the second part is
-> >>> right :/).
-> >>>
-> >>>> My proposal would be to do that before the release is made, thereby
-> >>>> improving the % of the recipes that build.
-> >>>
-> >>> We can improve it also by putting those missing upstream files to
-> >>> sources.openembedded.org and use it as premirror. But first we hav to
-> >>> find someone who still have it in downloads dir :/ (I don't).
-> >>>
-> >>> Removing recipes would need to remove those also from tasks/images and
-> >>> in the end release images could miss some important functionaly in worst
-> >>> case.
-> >>
-> >> I think most of the non fetching recipes would fall into one of these
-> >> categories:
-> >> - recipes that are very specific and are not part of a task or image
-> >> - recipes that are older versions and that are not used/build
-> >>
-> >> Wrt the remark on missing important functionality:
-> >> For a user with a clean slate, the functionality is already missing as
-> >> the task/image cannot be build from scratch.
-> >>
-> >> It might be a good idea to do a test trying to build all images for
-> >> one distro/machine and see what comes out.
-> >> Start with a clean system (empty downloads dir, empty TMPDIR, no
-> >> pstaged files etc).
-> >> Then bitbake all images. By doing it subsequently without cleaning
-> >> TMPDIR inbetween it'll become clear which images do build from scratch
-> >> and which don't.
-> >>
-> >> Is someone able/willing to do this test and report the result (suggest
-> >> using distro minimal or angstrom or probably shr and machine angstrom)
-> >>
-> >> Frans
-> >
-> >
-> > Is it usefull to have an image with all/most recipes? This image can be used
-> > for testing the recipes (fetch, compile) for several machines.
-> 
-> This functionality exists:
-> 
-> do a
-> bitbake world
-> or if you only want to fetch:
-> bitbake -c fetchall world
+Le 25/11/2010 10:22, Eric B=E9nard :
+> Hi Nicolas,
+>=20
+> On 25/11/2010 09:56, Nicolas Ferre wrote:
+>> While trying to build from scratch the latest .dev branch with:
+>> - angstrom-2010.x distribution
+>>
+>> Build Configuration:
+>> BB_VERSION        =3D "1.10.0"
+>> METADATA_BRANCH   =3D "dev_for2010.12"
+>> METADATA_REVISION =3D "a1bba89"
+>> TARGET_ARCH       =3D "arm"
+>> TARGET_OS         =3D "linux-gnueabi"
+>> MACHINE           =3D "at91sam9m10g45ek"
+>> DISTRO            =3D "angstrom"
+>> DISTRO_VERSION    =3D "next"
+>> TARGET_FPU        =3D "soft"
+>>
+>>
+>> I have the following error with libxext:
+>> NOTE: package libxext-native-1_1.2.0-r9.0: task do_compile: Failed
+>>
+> it seems to build fine for others also on x86_64 host :
+> http://tinderbox.openembedded.net/packages/1077651/
+> http://tinderbox.openembedded.net/packages/1087310/
 
-Also define
-SOURCE_MIRROR_FETCH
-to ignore COMPATIBLE_* vars
+Indeed, strange...
+I tried to clean the recipe and then rebuild without success.
+Someone has a hint where it can come from?
 
-and still it doesn't catch ie
-SRC_URI_machine, SRC_URI_distro
+Bye,
+--=20
+Nicolas Ferre
 
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
