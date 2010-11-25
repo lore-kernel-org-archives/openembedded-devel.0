@@ -1,32 +1,54 @@
-Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PLad5-0002tv-DQ
+	(envelope-from <martin.jansa@gmail.com>) id 1PLb7U-0003Sc-U5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 13:08:47 +0100
-Received: from [192.168.0.20] (77-22-235-200-dynip.superkabel.de
-	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 16E801B40D
+	Thu, 25 Nov 2010 13:40:13 +0100
+Received: by fxm8 with SMTP id 8so94155fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 13:08:51 +0100 (CET)
-Message-ID: <4CEE5186.7070907@sensortherm.de>
-Date: Thu, 25 Nov 2010 13:07:34 +0100
-From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Thu, 25 Nov 2010 04:38:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=AVYov4WH5/uUQCicsF/d/GOhkXY+vl1S6adDtfYNKVg=;
+	b=gGF7Pr5wLOk2R60nTfW5cRwF7owaEfcnGrDX18jVv1hHXGr6t9Wu6d0CHGMJAFx5mO
+	vZpc8PTMT22d4AfWir7QLcTYQrnxbqVP0UKU/eg9UVxwflvXLdIxG0FcsC4j7H7aV3SM
+	mQ2HA0Lz6bJi0Vcw4WaB5pcw4vf5yK4s6NrQM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=HgNRD0lTuYQ0aV4rsmwOYjBobsVyQfDCUzUa6wioSDStWy4Ms4WcdpNafAMOU7XV/A
+	pK19TuV/QQONUcHKOaECjwn8zPSpOIUmUC+phs4WBwCUTPHcNcIwryXcNZgEswxvhPX5
+	QwyhQkR1kEZONT6eBh+AwTRhoyijaasY+i9DE=
+Received: by 10.223.97.13 with SMTP id j13mr664247fan.146.1290688738163;
+	Thu, 25 Nov 2010 04:38:58 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n26sm174693fam.13.2010.11.25.04.38.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 25 Nov 2010 04:38:56 -0800 (PST)
+Date: Thu, 25 Nov 2010 13:38:45 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CEC1E17.1030208@sensortherm.de>	<AANLkTinhykFBHcgJR5suXU8Q7op+FOxofExY-d42XmYw@mail.gmail.com>	<AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>	<20101124080705.GF3274@jama>
-	<AANLkTinv88_9h_1RB8OS5XuqSV2zKBhS2FcxMrpsWh8e@mail.gmail.com>
-In-Reply-To: <AANLkTinv88_9h_1RB8OS5XuqSV2zKBhS2FcxMrpsWh8e@mail.gmail.com>
-X-SA-Exim-Connect-IP: 188.40.84.136
-X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
+Message-ID: <20101125123845.GO3274@jama>
+References: <AANLkTimpVmdKm5PcXijkpVm7uDUoNrFOupzddth1gRsM@mail.gmail.com>
+	<4CEE336E.9070306@eukrea.com>
+	<AANLkTiktUcmsYsQh-VFJtWTgpyzbQVmLgg7WuxEJkipW@mail.gmail.com>
+	<4CEE37DC.5040503@eukrea.com>
+	<AANLkTinr=RQ068ABqe8XVsrPpn+iyV9ecFT4n1VuiQTm@mail.gmail.com>
+	<4CEE4AB9.8050505@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <4CEE4AB9.8050505@eukrea.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: I've downloaded oe
+Subject: Re: qwt 5.2.1 failed to build here (om-gta02 , SHR, X11)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,69 +62,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 12:08:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Nov 2010 12:40:13 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Am 24.11.2010 10:18, schrieb Frans Meulenbroeks:
-> 2010/11/24 Martin Jansa<martin.jansa@gmail.com>:
->> On Wed, Nov 24, 2010 at 08:52:41AM +0100, Frans Meulenbroeks wrote:
->>> What about moving all recipes that do not fetch and also did not fetch
->>> during Martins test from last march/april to a directory non-fetching
->>> or so?
->>
->> But those recipes were only those where I wasn't able to find the source
->> at all (even with google help and couple of popular premirrors). Any
->> origin for source was fine for me, because I was only interested in
->> checksum check.
->>
->>> Apparently these are non fetchable for a long time, with no one
->>> apparently building them or having an interest to fix them.
->>
->> More likely those who were building those before are still building
->> OK, because they had it in theirs downloads dir. (but the second part is
->> right :/).
->>
->>> My proposal would be to do that before the release is made, thereby
->>> improving the % of the recipes that build.
->>
->> We can improve it also by putting those missing upstream files to
->> sources.openembedded.org and use it as premirror. But first we hav to
->> find someone who still have it in downloads dir :/ (I don't).
->>
->> Removing recipes would need to remove those also from tasks/images and
->> in the end release images could miss some important functionaly in worst
->> case.
->
-> I think most of the non fetching recipes would fall into one of these
-> categories:
-> - recipes that are very specific and are not part of a task or image
-> - recipes that are older versions and that are not used/build
->
-> Wrt the remark on missing important functionality:
-> For a user with a clean slate, the functionality is already missing as
-> the task/image cannot be build from scratch.
->
-> It might be a good idea to do a test trying to build all images for
-> one distro/machine and see what comes out.
-> Start with a clean system (empty downloads dir, empty TMPDIR, no
-> pstaged files etc).
-> Then bitbake all images. By doing it subsequently without cleaning
-> TMPDIR inbetween it'll become clear which images do build from scratch
-> and which don't.
->
-> Is someone able/willing to do this test and report the result (suggest
-> using distro minimal or angstrom or probably shr and machine angstrom)
->
-> Frans
+On Thu, Nov 25, 2010 at 12:38:33PM +0100, Eric Bénard wrote:
+> On 25/11/2010 12:12, Sylvain Paré wrote:
+> > I can't find any obj/ directory in
+> > SHR-Build/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qwt-5.2.1-r0/qwt-5.2.1/
+> > but I have an
+> > SHR-Build/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qwt-5.2.1-r0/qwt-5.2.1/src/obj${QT_LIBINFIX}/
+> >
+> here is your problem.
+> QT_LIBINFIX should be "" in your case.
 
+then something like
+QT_DIR_NAME = "qt4"
+QT_LIBINFIX = ""
 
-Is it usefull to have an image with all/most recipes? This image can be 
-used for testing the recipes (fetch, compile) for several machines.
+is missing in qt4x11.bbclass (it's defined only in qt4e.bbclass).
 
-At the moment, i try to build all images with the dm355-evm machine.
-
-
-Greetings Klaus
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
