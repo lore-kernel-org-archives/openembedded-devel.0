@@ -1,39 +1,37 @@
 Received: from 26.mail-out.ovh.net ([91.121.27.225])
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PLXyM-0006pH-LH
+	(envelope-from <eric@eukrea.com>) id 1PLXyO-0006pG-J6
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 25 Nov 2010 10:18:39 +0100
-Received: (qmail 17358 invoked by uid 503); 25 Nov 2010 09:21:45 -0000
+Received: (qmail 17348 invoked by uid 503); 25 Nov 2010 09:21:45 -0000
 Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
 	by 26.mail-out.ovh.net with SMTP; 25 Nov 2010 09:21:45 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
 	by b0.ovh.net with SMTP; 25 Nov 2010 11:17:21 +0200
 Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 25 Nov 2010 11:17:20 +0200
+	by ns0.ovh.net with SMTP; 25 Nov 2010 11:17:19 +0200
 From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Nov 2010 10:14:21 +0100
-Message-Id: <1290676461-13283-5-git-send-email-eric@eukrea.com>
+Date: Thu, 25 Nov 2010 10:14:19 +0100
+Message-Id: <1290676461-13283-3-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1290676461-13283-4-git-send-email-eric@eukrea.com>
+In-Reply-To: <1290676461-13283-2-git-send-email-eric@eukrea.com>
 References: <1290676461-13283-1-git-send-email-eric@eukrea.com>
 	<1290676461-13283-2-git-send-email-eric@eukrea.com>
-	<1290676461-13283-3-git-send-email-eric@eukrea.com>
-	<1290676461-13283-4-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 2999397353543281997
+X-Ovh-Tracer-Id: 2999115878566571339
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-SA-Exim-Connect-IP: 91.121.27.225
 X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL, BAYES_00, UPPERCASE_50_75
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 5/5] busybox: remove 1.17.3
+Subject: [PATCH 3/5] busybox: remove 1.17.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +49,42 @@ X-List-Received-Date: Thu, 25 Nov 2010 09:18:39 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-as it's no more default for SHR
+as it's no more default for Angstrom-2010
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/busybox/busybox-1.17.3/B921600.patch       |   13 -
- .../busybox-1.17.3/busybox-1.17.3-dnsd.patch       |   12 -
- .../busybox-1.17.3/busybox-1.17.3-iproute.patch    |   13 -
- .../busybox/busybox-1.17.3/busybox-1.17.3-ls.patch |   30 -
- .../busybox-1.17.3/busybox-1.17.3-sort.patch       |   12 -
- .../busybox-1.17.3/busybox-1.17.3-unicode.patch    |   12 -
- recipes/busybox/busybox-1.17.3/defconfig           |  873 --------------------
- recipes/busybox/busybox-1.17.3/fdisk_nios2.patch   |   13 -
- .../busybox/busybox-1.17.3/get_header_tar.patch    |   11 -
- .../busybox-1.17.3/udhcpc-fix-nfsroot.patch        |   47 --
- recipes/busybox/busybox-1.17.3/udhcpscript.patch   |   13 -
- recipes/busybox/busybox_1.17.3.bb                  |   13 -
- 12 files changed, 0 insertions(+), 1062 deletions(-)
- delete mode 100644 recipes/busybox/busybox-1.17.3/B921600.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-dnsd.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-iproute.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-ls.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-sort.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-unicode.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/defconfig
- delete mode 100644 recipes/busybox/busybox-1.17.3/fdisk_nios2.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/get_header_tar.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/udhcpc-fix-nfsroot.patch
- delete mode 100644 recipes/busybox/busybox-1.17.3/udhcpscript.patch
- delete mode 100644 recipes/busybox/busybox_1.17.3.bb
+ recipes/busybox/busybox-1.17.1/B921600.patch       |   13 -
+ .../busybox-1.17.1/busybox-1.17.1-grep.patch       |   39 -
+ .../busybox-1.17.1/busybox-1.17.1-make.patch       |   32 -
+ .../busybox-1.17.1/busybox-1.17.1-mdev.patch       |   49 --
+ .../busybox-1.17.1/busybox-1.17.1-mktemp.patch     |   12 -
+ .../busybox-1.17.1/busybox-1.17.1-sed.patch        |  117 ---
+ .../busybox-1.17.1/busybox-1.17.1-shell.patch      |  105 ---
+ recipes/busybox/busybox-1.17.1/defconfig           |  873 --------------------
+ recipes/busybox/busybox-1.17.1/fdisk_nios2.patch   |   13 -
+ .../busybox/busybox-1.17.1/get_header_tar.patch    |   11 -
+ .../busybox-1.17.1/udhcpc-fix-nfsroot.patch        |   47 --
+ recipes/busybox/busybox-1.17.1/udhcpscript.patch   |   13 -
+ recipes/busybox/busybox_1.17.1.bb                  |   16 -
+ 13 files changed, 0 insertions(+), 1340 deletions(-)
+ delete mode 100644 recipes/busybox/busybox-1.17.1/B921600.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-grep.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-make.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-mdev.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-mktemp.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-sed.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-shell.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/defconfig
+ delete mode 100644 recipes/busybox/busybox-1.17.1/fdisk_nios2.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/get_header_tar.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/udhcpc-fix-nfsroot.patch
+ delete mode 100644 recipes/busybox/busybox-1.17.1/udhcpscript.patch
+ delete mode 100644 recipes/busybox/busybox_1.17.1.bb
 
-diff --git a/recipes/busybox/busybox-1.17.3/B921600.patch b/recipes/busybox/busybox-1.17.3/B921600.patch
+diff --git a/recipes/busybox/busybox-1.17.1/B921600.patch b/recipes/busybox/busybox-1.17.1/B921600.patch
 deleted file mode 100644
 index 61cc32b..0000000
---- a/recipes/busybox/busybox-1.17.3/B921600.patch
+--- a/recipes/busybox/busybox-1.17.1/B921600.patch
 +++ /dev/null
 @@ -1,13 +0,0 @@
 -diff -upNr busybox-1.7.2/libbb/speed_table.c busybox-1.7.2-921600/libbb/speed_table.c
@@ -100,119 +100,400 @@ index 61cc32b..0000000
 - };
 - 
 - enum { NUM_SPEEDS = ARRAY_SIZE(speeds) };
-diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-dnsd.patch b/recipes/busybox/busybox-1.17.3/busybox-1.17.3-dnsd.patch
+diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-grep.patch b/recipes/busybox/busybox-1.17.1/busybox-1.17.1-grep.patch
 deleted file mode 100644
-index b135c14..0000000
---- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-dnsd.patch
+index f8fc25d..0000000
+--- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-grep.patch
 +++ /dev/null
-@@ -1,12 +0,0 @@
--diff -urpN busybox-1.17.3/networking/dnsd.c busybox-1.17.3-dnsd/networking/dnsd.c
----- busybox-1.17.3/networking/dnsd.c	2010-10-09 21:57:14.000000000 +0200
--+++ busybox-1.17.3-dnsd/networking/dnsd.c	2010-10-29 00:37:43.066043841 +0200
--@@ -388,7 +388,7 @@ static int process_packet(struct dns_ent
-- 	query_len = strlen(query_string) + 1;
-- 	/* may be unaligned! */
-- 	unaligned_type_class = (void *)(query_string + query_len);
---	query_len += sizeof(unaligned_type_class);
--+	query_len += sizeof(*unaligned_type_class);
-- 	/* where to append answer block */
-- 	answb = (void *)(unaligned_type_class + 1);
+@@ -1,39 +0,0 @@
+-diff -urpN busybox-1.17.1/findutils/grep.c busybox-1.17.1-grep/findutils/grep.c
+---- busybox-1.17.1/findutils/grep.c	2010-07-06 04:25:54.000000000 +0200
+-+++ busybox-1.17.1-grep/findutils/grep.c	2010-08-23 02:37:08.000000000 +0200
+-@@ -461,15 +461,19 @@ static int grep_file(FILE *file)
+- 						if (found)
+- 							print_line(gl->pattern, strlen(gl->pattern), linenum, ':');
+- 					} else while (1) {
+-+						unsigned start = gl->matched_range.rm_so;
+- 						unsigned end = gl->matched_range.rm_eo;
+-+						unsigned len = end - start;
+- 						char old = line[end];
+- 						line[end] = '\0';
+--						print_line(line + gl->matched_range.rm_so,
+--								end - gl->matched_range.rm_so,
+--								linenum, ':');
+-+						/* Empty match is not printed: try "echo test | grep -o ''" */
+-+						if (len != 0)
+-+							print_line(line + start, len, linenum, ':');
+- 						if (old == '\0')
+- 							break;
+- 						line[end] = old;
+-+						if (len == 0)
+-+							end++;
+- #if !ENABLE_EXTRA_COMPAT
+- 						if (regexec(&gl->compiled_regex, line + end,
+- 								1, &gl->matched_range, REG_NOTBOL) != 0)
+-diff -urpN busybox-1.17.1/testsuite/grep.tests busybox-1.17.1-grep/testsuite/grep.tests
+---- busybox-1.17.1/testsuite/grep.tests	2010-07-06 04:25:54.000000000 +0200
+-+++ busybox-1.17.1-grep/testsuite/grep.tests	2010-08-23 02:37:08.000000000 +0200
+-@@ -98,5 +98,9 @@ testing "grep -o does not loop forever" 
+- 	'grep -o "[^/]*$"' \
+- 	"test\n" \
+- 	"" "/var/test\n"
+-+testing "grep -o does not loop forever on zero-length match" \
+-+	'grep -o "" | head -n1' \
+-+	"" \
+-+	"" "test\n"
 - 
-diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-iproute.patch b/recipes/busybox/busybox-1.17.3/busybox-1.17.3-iproute.patch
+- exit $FAILCOUNT
+diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-make.patch b/recipes/busybox/busybox-1.17.1/busybox-1.17.1-make.patch
 deleted file mode 100644
-index 03c749f..0000000
---- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-iproute.patch
+index 6177696..0000000
+--- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-make.patch
 +++ /dev/null
-@@ -1,13 +0,0 @@
--diff -urpN busybox-1.17.3/networking/libiproute/iproute.c busybox-1.17.3-iproute/networking/libiproute/iproute.c
----- busybox-1.17.3/networking/libiproute/iproute.c	2010-10-09 21:57:14.000000000 +0200
--+++ busybox-1.17.3-iproute/networking/libiproute/iproute.c	2010-11-04 09:13:06.307919550 +0100
--@@ -791,8 +791,8 @@ static int iproute_get(char **argv)
+@@ -1,32 +0,0 @@
+-diff -urpN busybox-1.17.1/Makefile busybox-1.17.1-make/Makefile
+---- busybox-1.17.1/Makefile	2010-07-25 00:13:44.000000000 +0200
+-+++ busybox-1.17.1-make/Makefile	2010-08-22 09:30:33.000000000 +0200
+-@@ -433,7 +433,12 @@ ifeq ($(config-targets),1)
+- -include $(srctree)/arch/$(ARCH)/Makefile
+- export KBUILD_DEFCONFIG
+- 
+--config %config: scripts_basic outputmakefile gen_build_files FORCE
+-+config: scripts_basic outputmakefile gen_build_files FORCE
+-+	$(Q)mkdir -p include
+-+	$(Q)$(MAKE) $(build)=scripts/kconfig $@
+-+	$(Q)$(MAKE) -C $(srctree) KBUILD_SRC= .kernelrelease
+-+
+-+%config: scripts_basic outputmakefile gen_build_files FORCE
+- 	$(Q)mkdir -p include
+- 	$(Q)$(MAKE) $(build)=scripts/kconfig $@
+- 	$(Q)$(MAKE) -C $(srctree) KBUILD_SRC= .kernelrelease
+-@@ -1285,9 +1290,13 @@ endif
+- 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+- 
+- # Modules
+--/ %/: prepare scripts FORCE
+-+%/: prepare scripts FORCE
+- 	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
+- 	$(build)=$(build-dir)
+-+/: prepare scripts FORCE
+-+	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
+-+	$(build)=$(build-dir)
+-+
+- %.ko: prepare scripts FORCE
+- 	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1)   \
+- 	$(build)=$(build-dir) $(@:.ko=.o)
+diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mdev.patch b/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mdev.patch
+deleted file mode 100644
+index 71c7abd..0000000
+--- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mdev.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-diff -urpN busybox-1.17.1/testsuite/mdev.tests busybox-1.17.1-mdev/testsuite/mdev.tests
+---- busybox-1.17.1/testsuite/mdev.tests	2010-07-06 04:25:54.000000000 +0200
+-+++ busybox-1.17.1-mdev/testsuite/mdev.tests	2010-08-23 02:38:21.000000000 +0200
+-@@ -38,6 +38,16 @@ brw-rw---- 1 0 0 8,0 sda
+- SKIP=
+- 
+- # continuing to use directory structure from prev test
+-+optional STATIC FEATURE_MDEV_CONF FEATURE_LS_TIMESTAMPS FEATURE_LS_USERNAME
+-+testing "mdev deletes /block/sda" \
+-+	"env - PATH=$PATH ACTION=remove DEVPATH=/block/sda chroot mdev.testdir /mdev 2>&1;
+-+	ls -ln mdev.testdir/dev | $FILTER_LS" \
+-+"\
+-+" \
+-+	"" ""
+-+SKIP=
+-+
+-+# continuing to use directory structure from prev test
+- rm -rf mdev.testdir/dev/*
+- echo ".* 1:1 666" >mdev.testdir/etc/mdev.conf
+- echo "sda 2:2 444" >>mdev.testdir/etc/mdev.conf
+-diff -urpN busybox-1.17.1/util-linux/mdev.c busybox-1.17.1-mdev/util-linux/mdev.c
+---- busybox-1.17.1/util-linux/mdev.c	2010-07-06 04:25:54.000000000 +0200
+-+++ busybox-1.17.1-mdev/util-linux/mdev.c	2010-08-23 02:38:21.000000000 +0200
+-@@ -132,6 +132,7 @@ static void make_device(char *path, int 
+- 			major = -1;
+- 		}
+- 	}
+-+	/* else: for delete, -1 still deletes the node, but < -1 suppresses that */
+- 
+- 	/* Determine device name, type, major and minor */
+- 	device_name = (char*) bb_basename(path);
+-@@ -279,7 +280,7 @@ static void make_device(char *path, int 
+- 				if (aliaslink == '!' && s == a+1) {
+- 					val = st;
+- 					/* "!": suppress node creation/deletion */
+--					major = -1;
+-+					major = -2;
 - 				}
-- 				req.r.rtm_dst_len = addr.bitlen;
+- 				else if (aliaslink == '>' || aliaslink == '=') {
+- 					val = st;
+-@@ -379,7 +380,7 @@ static void make_device(char *path, int 
+- 				free(command);
 - 			}
---			argv++;
-- 		}
--+		argv++;
-- 	}
 - 
-- 	if (req.r.rtm_dst_len == 0) {
-diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-ls.patch b/recipes/busybox/busybox-1.17.3/busybox-1.17.3-ls.patch
+--			if (delete && major >= 0) {
+-+			if (delete && major >= -1) {
+- 				if (ENABLE_FEATURE_MDEV_RENAME && alias) {
+- 					if (aliaslink == '>')
+- 						unlink(device_name);
+diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mktemp.patch b/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mktemp.patch
 deleted file mode 100644
-index 1c4f895..0000000
---- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-ls.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--diff -urpN busybox-1.17.3/coreutils/ls.c busybox-1.17.3-ls/coreutils/ls.c
----- busybox-1.17.3/coreutils/ls.c	2010-10-09 21:57:13.000000000 +0200
--+++ busybox-1.17.3-ls/coreutils/ls.c	2010-11-06 00:26:48.467049575 +0100
--@@ -184,7 +184,7 @@ static const unsigned opt_flags[] = {
-- 	LIST_INO,                   /* i */
-- 	LIST_LONG | STYLE_LONG,     /* l - remember LS_DISP_HR in mask! */
-- 	LIST_SHORT | STYLE_SINGLE,  /* 1 */
---	0,                          /* g (don't show group) - handled via OPT_g */
--+	0,                          /* g (don't show owner) - handled via OPT_g */
-- 	LIST_ID_NUMERIC,            /* n */
-- 	LIST_BLOCKS,                /* s */
-- 	DISP_ROWS,                  /* x */
--@@ -621,7 +621,7 @@ static NOINLINE unsigned list_single(con
-- 	if (all_fmt & LIST_ID_NAME) {
-- 		if (option_mask32 & OPT_g) {
-- 			column += printf("%-8.8s ",
---				get_cached_username(dn->dstat.st_uid));
--+				get_cached_groupname(dn->dstat.st_gid));
-- 		} else {
-- 			column += printf("%-8.8s %-8.8s ",
-- 				get_cached_username(dn->dstat.st_uid),
--@@ -631,7 +631,7 @@ static NOINLINE unsigned list_single(con
-- #endif
-- 	if (all_fmt & LIST_ID_NUMERIC) {
-- 		if (option_mask32 & OPT_g)
---			column += printf("%-8u ", (int) dn->dstat.st_uid);
--+			column += printf("%-8u ", (int) dn->dstat.st_gid);
-- 		else
-- 			column += printf("%-8u %-8u ",
-- 					(int) dn->dstat.st_uid,
-diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-sort.patch b/recipes/busybox/busybox-1.17.3/busybox-1.17.3-sort.patch
-deleted file mode 100644
-index ebc9bf9..0000000
---- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-sort.patch
+index 557e337..0000000
+--- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mktemp.patch
 +++ /dev/null
 @@ -1,12 +0,0 @@
--diff -urpN busybox-1.17.3/coreutils/sort.c busybox-1.17.3-sort/coreutils/sort.c
----- busybox-1.17.3/coreutils/sort.c	2010-10-09 21:57:13.000000000 +0200
--+++ busybox-1.17.3-sort/coreutils/sort.c	2010-10-20 15:17:35.320293543 +0200
--@@ -412,7 +412,7 @@ int sort_main(int argc UNUSED_PARAM, cha
-- #if ENABLE_FEATURE_SORT_BIG
-- 	/* Open output file _after_ we read all input ones */
-- 	if (option_mask32 & FLAG_o)
---		xmove_fd(xopen3(str_o, O_WRONLY, 0666), STDOUT_FILENO);
--+		xmove_fd(xopen3(str_o, O_WRONLY|O_CREAT|O_TRUNC, 0666), STDOUT_FILENO);
-- #endif
-- 	flag = (option_mask32 & FLAG_z) ? '\0' : '\n';
-- 	for (i = 0; i < linecount; i++)
-diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-unicode.patch b/recipes/busybox/busybox-1.17.3/busybox-1.17.3-unicode.patch
-deleted file mode 100644
-index dc3b02e..0000000
---- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-unicode.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
--diff -urpN busybox-1.17.3/libbb/unicode.c busybox-1.17.3-unicode/libbb/unicode.c
----- busybox-1.17.3/libbb/unicode.c	2010-10-09 21:58:13.000000000 +0200
--+++ busybox-1.17.3-unicode/libbb/unicode.c	2010-10-29 00:48:36.951494079 +0200
--@@ -1006,7 +1006,7 @@ static char* FAST_FUNC unicode_conv_to_p
-- 			}
-- 		}
-- 		if (stats)
---			stats->byte_count = stats->unicode_count = (d - dst);
--+			stats->byte_count = stats->unicode_count = stats->unicode_width = (d - dst);
-- 		return dst;
-- 	}
+-diff -urpN busybox-1.17.1/debianutils/mktemp.c busybox-1.17.1-mktemp/debianutils/mktemp.c
+---- busybox-1.17.1/debianutils/mktemp.c	2010-07-25 00:12:56.000000000 +0200
+-+++ busybox-1.17.1-mktemp/debianutils/mktemp.c	2010-07-27 08:21:26.000000000 +0200
+-@@ -50,7 +50,7 @@ int mktemp_main(int argc UNUSED_PARAM, c
+- 	opts = getopt32(argv, "dqtp:", &path);
 - 
-diff --git a/recipes/busybox/busybox-1.17.3/defconfig b/recipes/busybox/busybox-1.17.3/defconfig
+- 	chp = argv[optind] ? argv[optind] : xstrdup("tmp.XXXXXX");
+--	if (chp[0] != '/' || (opts & 8))
+-+	if (!strchr(chp, '/') || (opts & 8))
+- 		chp = concat_path_file(path, chp);
+- 
+- 	if (opts & 1) { /* -d */
+diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-sed.patch b/recipes/busybox/busybox-1.17.1/busybox-1.17.1-sed.patch
+deleted file mode 100644
+index f65aebe..0000000
+--- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-sed.patch
++++ /dev/null
+@@ -1,117 +0,0 @@
+-diff -urpN busybox-1.17.1/editors/sed.c busybox-1.17.1-sed/editors/sed.c
+---- busybox-1.17.1/editors/sed.c	2010-07-06 04:25:53.000000000 +0200
+-+++ busybox-1.17.1-sed/editors/sed.c	2010-08-17 02:05:27.000000000 +0200
+-@@ -61,6 +61,10 @@
+- #include "libbb.h"
+- #include "xregex.h"
+- 
+-+enum {
+-+	OPT_in_place = 1 << 0,
+-+};
+-+
+- /* Each sed command turns into one of these structures. */
+- typedef struct sed_cmd_s {
+- 	/* Ordered by alignment requirements: currently 36 bytes on x86 */
+-@@ -938,8 +942,11 @@ static void process_files(void)
+- 
+- 		if (matched) {
+- 			/* once matched, "n,xxx" range is dead, disabling it */
+--			if (sed_cmd->beg_line > 0)
+-+			if (sed_cmd->beg_line > 0
+-+			 && !(option_mask32 & OPT_in_place) /* but not for -i */
+-+			) {
+- 				sed_cmd->beg_line = -2;
+-+			}
+- 			sed_cmd->in_match = !(
+- 				/* has the ending line come, or is this a single address command? */
+- 				(sed_cmd->end_line ?
+-@@ -985,6 +992,8 @@ static void process_files(void)
+- 		}
+- 
+- 		/* actual sedding */
+-+		//bb_error_msg("pattern_space:'%s' next_line:'%s' cmd:%c",
+-+		//pattern_space, next_line, sed_cmd->cmd);
+- 		switch (sed_cmd->cmd) {
+- 
+- 		/* Print line number */
+-@@ -1111,10 +1120,16 @@ static void process_files(void)
+- 		{
+- 			int len;
+- 			/* If no next line, jump to end of script and exit. */
+-+			/* http://www.gnu.org/software/sed/manual/sed.html:
+-+			 * "Most versions of sed exit without printing anything
+-+			 * when the N command is issued on the last line of
+-+			 * a file. GNU sed prints pattern space before exiting
+-+			 * unless of course the -n command switch has been
+-+			 * specified. This choice is by design."
+-+			 */
+- 			if (next_line == NULL) {
+--				free(next_line);
+--				next_line = NULL;
+--				goto discard_line;
+-+				//goto discard_line;
+-+				goto discard_commands; /* GNU behavior */
+- 			}
+- 			/* Append next_line, read new next_line. */
+- 			len = strlen(pattern_space);
+-@@ -1270,9 +1285,6 @@ static void add_cmd_block(char *cmdstr)
+- int sed_main(int argc, char **argv) MAIN_EXTERNALLY_VISIBLE;
+- int sed_main(int argc UNUSED_PARAM, char **argv)
+- {
+--	enum {
+--		OPT_in_place = 1 << 0,
+--	};
+- 	unsigned opt;
+- 	llist_t *opt_e, *opt_f;
+- 	int status = EXIT_SUCCESS;
+-@@ -1292,6 +1304,7 @@ int sed_main(int argc UNUSED_PARAM, char
+- 	opt_e = opt_f = NULL;
+- 	opt_complementary = "e::f::" /* can occur multiple times */
+- 	                    "nn"; /* count -n */
+-+	/* -i must be first, to match OPT_in_place definition */
+- 	opt = getopt32(argv, "irne:f:", &opt_e, &opt_f,
+- 			    &G.be_quiet); /* counter for -n */
+- 	//argc -= optind;
+-diff -urpN busybox-1.17.1/testsuite/sed.tests busybox-1.17.1-sed/testsuite/sed.tests
+---- busybox-1.17.1/testsuite/sed.tests	2010-07-06 04:25:54.000000000 +0200
+-+++ busybox-1.17.1-sed/testsuite/sed.tests	2010-08-17 02:05:27.000000000 +0200
+-@@ -80,10 +80,18 @@ test x"$SKIP_KNOWN_BUGS" = x"" && {
+- # Query: how does this interact with no newline at EOF?
+- testing "sed n (flushes pattern space, terminates early)" "sed -e 'n;p'" \
+- 	"a\nb\nb\nc\n" "" "a\nb\nc\n"
+--# N does _not_ flush pattern space, therefore c is still in there @ script end.
+--testing "sed N (doesn't flush pattern space when terminating)" "sed -e 'N;p'" \
+--	"a\nb\na\nb\nc\n" "" "a\nb\nc\n"
+- }
+-+# non-GNU sed: N does _not_ flush pattern space, therefore c is eaten @ script end
+-+# GNU sed: N flushes pattern space, therefore c is printed too @ script end
+-+testing "sed N (flushes pattern space (GNU behavior))" "sed -e 'N;p'" \
+-+	"a\nb\na\nb\nc\n" "" "a\nb\nc\n"
+-+
+-+testing "sed N test2" "sed ':a;N;s/\n/ /;ta'" \
+-+	"a b c\n" "" "a\nb\nc\n"
+-+
+-+testing "sed N test3" "sed 'N;s/\n/ /'" \
+-+	"a b\nc\n" "" "a\nb\nc\n"
+-+
+- testing "sed address match newline" 'sed "/b/N;/b\\nc/i woo"' \
+- 	"a\nwoo\nb\nc\nd\n" "" "a\nb\nc\nd\n"
+- 
+-@@ -270,11 +278,16 @@ testing "sed a cmd ended by double backs
+- 	| two \\
+- '
+- 
+--# fisrt three lines are deleted; 4th line is matched and printed by "2,3" and by "4" ranges
+-+# first three lines are deleted; 4th line is matched and printed by "2,3" and by "4" ranges
+- testing "sed with N skipping lines past ranges on next cmds" \
+- 	"sed -n '1{N;N;d};1p;2,3p;3p;4p'" \
+- 	"4\n4\n" "" "1\n2\n3\n4\n"
+- 
+-+testing "sed -i with address modifies all files, not only first" \
+-+	"cp input input2; sed -i -e '1s/foo/bar/' input input2 && cat input input2; rm input2" \
+-+	"bar\nbar\n" "foo\n" ""
+-+
+-+
+- # testing "description" "arguments" "result" "infile" "stdin"
+- 
+- exit $FAILCOUNT
+diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-shell.patch b/recipes/busybox/busybox-1.17.1/busybox-1.17.1-shell.patch
+deleted file mode 100644
+index 5279b12..0000000
+--- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-shell.patch
++++ /dev/null
+@@ -1,105 +0,0 @@
+-diff -urpN busybox-1.17.1/shell/ash.c busybox-1.17.1-shell/shell/ash.c
+---- busybox-1.17.1/shell/ash.c	2010-07-25 00:12:43.000000000 +0200
+-+++ busybox-1.17.1-shell/shell/ash.c	2010-07-25 13:09:32.000000000 +0200
+-@@ -4515,6 +4515,7 @@ clear_traps(void)
+- 			INT_ON;
+- 		}
+- 	}
+-+	may_have_traps = 0;
+- }
+- 
+- /* Lives far away from here, needed for forkchild */
+-diff -urpN busybox-1.17.1/shell/ash_test/ash-signals/signal7.right busybox-1.17.1-shell/shell/ash_test/ash-signals/signal7.right
+---- busybox-1.17.1/shell/ash_test/ash-signals/signal7.right	1970-01-01 01:00:00.000000000 +0100
+-+++ busybox-1.17.1-shell/shell/ash_test/ash-signals/signal7.right	2010-07-25 13:09:32.000000000 +0200
+-@@ -0,0 +1 @@
+-+Bug detected: 0
+-diff -urpN busybox-1.17.1/shell/ash_test/ash-signals/signal7.tests busybox-1.17.1-shell/shell/ash_test/ash-signals/signal7.tests
+---- busybox-1.17.1/shell/ash_test/ash-signals/signal7.tests	1970-01-01 01:00:00.000000000 +0100
+-+++ busybox-1.17.1-shell/shell/ash_test/ash-signals/signal7.tests	2010-07-25 13:09:32.000000000 +0200
+-@@ -0,0 +1,18 @@
+-+bug() {
+-+	trap : exit
+-+	# Bug was causing sh to be run in subshell,
+-+	# as if this line is replaced with (sh -c ...; exit $?) &
+-+	# here:
+-+	sh -c 'echo REAL_CHILD=$$' &
+-+	echo PARENTS_IDEA_OF_CHILD=$!
+-+	wait  # make sure bkgd shell completes
+-+}
+-+
+-+bug | {
+-+while read varval; do
+-+	eval $varval
+-+done
+-+test x"$REAL_CHILD" != x"" \
+-+&& test x"$REAL_CHILD" = x"$PARENTS_IDEA_OF_CHILD"
+-+echo "Bug detected: $?"
+-+}
+-diff -urpN busybox-1.17.1/shell/hush.c busybox-1.17.1-shell/shell/hush.c
+---- busybox-1.17.1/shell/hush.c	2010-07-25 00:12:43.000000000 +0200
+-+++ busybox-1.17.1-shell/shell/hush.c	2010-07-25 13:09:32.000000000 +0200
+-@@ -3901,8 +3901,6 @@ static void insert_bg_job(struct pipe *p
+- 
+- 	if (G_interactive_fd)
+- 		printf("[%d] %d %s\n", job->jobid, job->cmds[0].pid, job->cmdtext);
+--	/* Last command's pid goes to $! */
+--	G.last_bg_pid = job->cmds[job->num_cmds - 1].pid;
+- 	G.last_jobid = job->jobid;
+- }
+- 
+-@@ -4825,6 +4823,8 @@ static int run_list(struct pipe *pi)
+- 				if (G.run_list_level == 1)
+- 					insert_bg_job(pi);
+- #endif
+-+				/* Last command's pid goes to $! */
+-+				G.last_bg_pid = pi->cmds[pi->num_cmds - 1].pid;
+- 				G.last_exitcode = rcode = EXIT_SUCCESS;
+- 				debug_printf_exec(": cmd&: exitcode EXIT_SUCCESS\n");
+- 			} else {
+-diff -urpN busybox-1.17.1/shell/hush_test/hush-trap/signal7.right busybox-1.17.1-shell/shell/hush_test/hush-trap/signal7.right
+---- busybox-1.17.1/shell/hush_test/hush-trap/signal7.right	1970-01-01 01:00:00.000000000 +0100
+-+++ busybox-1.17.1-shell/shell/hush_test/hush-trap/signal7.right	2010-07-25 13:09:32.000000000 +0200
+-@@ -0,0 +1 @@
+-+Bug detected: 0
+-diff -urpN busybox-1.17.1/shell/hush_test/hush-trap/signal7.tests busybox-1.17.1-shell/shell/hush_test/hush-trap/signal7.tests
+---- busybox-1.17.1/shell/hush_test/hush-trap/signal7.tests	1970-01-01 01:00:00.000000000 +0100
+-+++ busybox-1.17.1-shell/shell/hush_test/hush-trap/signal7.tests	2010-07-25 13:09:32.000000000 +0200
+-@@ -0,0 +1,18 @@
+-+bug() {
+-+	trap : exit
+-+	# Bug was causing sh to be run in subshell,
+-+	# as if this line is replaced with (sh -c ...; exit $?) &
+-+	# here:
+-+	sh -c 'echo REAL_CHILD=$$' &
+-+	echo PARENTS_IDEA_OF_CHILD=$!
+-+	wait  # make sure bkgd shell completes
+-+}
+-+
+-+bug | {
+-+while read varval; do
+-+	eval $varval
+-+done
+-+test x"$REAL_CHILD" != x"" \
+-+&& test x"$REAL_CHILD" = x"$PARENTS_IDEA_OF_CHILD"
+-+echo "Bug detected: $?"
+-+}
+-diff -urpN busybox-1.17.1/shell/shell_common.c busybox-1.17.1-shell/shell/shell_common.c
+---- busybox-1.17.1/shell/shell_common.c	2010-07-06 04:25:54.000000000 +0200
+-+++ busybox-1.17.1-shell/shell/shell_common.c	2010-07-27 08:41:43.000000000 +0200
+-@@ -428,9 +428,14 @@ shell_builtin_ulimit(char **argv)
+- 						val <<= l->factor_shift;
+- 					}
+- //bb_error_msg("opt %c val_str:'%s' val:%lld", opt_char, val_str, (long long)val);
+-+					/* from man bash: "If neither -H nor -S
+-+					 * is specified, both the soft and hard
+-+					 * limits are set. */
+-+					if (!opts)
+-+						opts = OPT_hard + OPT_soft;
+- 					if (opts & OPT_hard)
+- 						limit.rlim_max = val;
+--					if ((opts & OPT_soft) || opts == 0)
+-+					if (opts & OPT_soft)
+- 						limit.rlim_cur = val;
+- //bb_error_msg("setrlimit(%d, %lld, %lld)", l->cmd, (long long)limit.rlim_cur, (long long)limit.rlim_max);
+- 					if (setrlimit(l->cmd, &limit) < 0) {
+diff --git a/recipes/busybox/busybox-1.17.1/defconfig b/recipes/busybox/busybox-1.17.1/defconfig
 deleted file mode 100644
 index 5a6870c..0000000
---- a/recipes/busybox/busybox-1.17.3/defconfig
+--- a/recipes/busybox/busybox-1.17.1/defconfig
 +++ /dev/null
 @@ -1,873 +0,0 @@
 -#
@@ -1088,10 +1369,10 @@ index 5a6870c..0000000
 -CONFIG_FEATURE_LOGREAD_REDUCED_LOCKING=y
 -CONFIG_KLOGD=y
 -CONFIG_LOGGER=y
-diff --git a/recipes/busybox/busybox-1.17.3/fdisk_nios2.patch b/recipes/busybox/busybox-1.17.3/fdisk_nios2.patch
+diff --git a/recipes/busybox/busybox-1.17.1/fdisk_nios2.patch b/recipes/busybox/busybox-1.17.1/fdisk_nios2.patch
 deleted file mode 100644
 index 648e68e..0000000
---- a/recipes/busybox/busybox-1.17.3/fdisk_nios2.patch
+--- a/recipes/busybox/busybox-1.17.1/fdisk_nios2.patch
 +++ /dev/null
 @@ -1,13 +0,0 @@
 -Index: busybox-1.15.3/util-linux/fdisk_osf.c
@@ -1107,10 +1388,10 @@ index 648e68e..0000000
 -  || defined(__s390__) || defined(__s390x__) \
 -  || defined(__sh__) || defined(__x86_64__) || defined(__avr32__)
 - # define BSD_LABELSECTOR   1
-diff --git a/recipes/busybox/busybox-1.17.3/get_header_tar.patch b/recipes/busybox/busybox-1.17.3/get_header_tar.patch
+diff --git a/recipes/busybox/busybox-1.17.1/get_header_tar.patch b/recipes/busybox/busybox-1.17.1/get_header_tar.patch
 deleted file mode 100644
 index 0121cd1..0000000
---- a/recipes/busybox/busybox-1.17.3/get_header_tar.patch
+--- a/recipes/busybox/busybox-1.17.1/get_header_tar.patch
 +++ /dev/null
 @@ -1,11 +0,0 @@
 ---- busybox-1.13.2/archival/libunarchive/get_header_tar.c.orig	2008-11-09 18:28:02.000000000 +0100
@@ -1124,10 +1405,10 @@ index 0121cd1..0000000
 - 	}
 - 
 - 	/* Set bits 12-15 of the files mode */
-diff --git a/recipes/busybox/busybox-1.17.3/udhcpc-fix-nfsroot.patch b/recipes/busybox/busybox-1.17.3/udhcpc-fix-nfsroot.patch
+diff --git a/recipes/busybox/busybox-1.17.1/udhcpc-fix-nfsroot.patch b/recipes/busybox/busybox-1.17.1/udhcpc-fix-nfsroot.patch
 deleted file mode 100644
 index 3b975b6..0000000
---- a/recipes/busybox/busybox-1.17.3/udhcpc-fix-nfsroot.patch
+--- a/recipes/busybox/busybox-1.17.1/udhcpc-fix-nfsroot.patch
 +++ /dev/null
 @@ -1,47 +0,0 @@
 -Index: busybox-1.15.1/examples/udhcp/simple.script
@@ -1177,10 +1458,10 @@ index 3b975b6..0000000
 - 			done
 - 		fi
 - 
-diff --git a/recipes/busybox/busybox-1.17.3/udhcpscript.patch b/recipes/busybox/busybox-1.17.3/udhcpscript.patch
+diff --git a/recipes/busybox/busybox-1.17.1/udhcpscript.patch b/recipes/busybox/busybox-1.17.1/udhcpscript.patch
 deleted file mode 100644
 index 2ffba95..0000000
---- a/recipes/busybox/busybox-1.17.3/udhcpscript.patch
+--- a/recipes/busybox/busybox-1.17.1/udhcpscript.patch
 +++ /dev/null
 @@ -1,13 +0,0 @@
 -Index: busybox-1.15.1/examples/udhcp/simple.script
@@ -1196,25 +1477,28 @@ index 2ffba95..0000000
 - 				:
 - 			done
 - 
-diff --git a/recipes/busybox/busybox_1.17.3.bb b/recipes/busybox/busybox_1.17.3.bb
+diff --git a/recipes/busybox/busybox_1.17.1.bb b/recipes/busybox/busybox_1.17.1.bb
 deleted file mode 100644
-index f1a0b74..0000000
---- a/recipes/busybox/busybox_1.17.3.bb
+index 12976f2..0000000
+--- a/recipes/busybox/busybox_1.17.1.bb
 +++ /dev/null
-@@ -1,13 +0,0 @@
+@@ -1,16 +0,0 @@
 -require busybox_1.1x.inc
--PR = "${INC_PR}.2"
+-PR = "${INC_PR}.0"
+-
+-DEFAULT_PREFERENCE = "-1"
 -
 -SRC_URI += "\
--  file://busybox-1.17.3-sort.patch  \
--  file://busybox-1.17.3-dnsd.patch \
--  file://busybox-1.17.3-unicode.patch \
--  file://busybox-1.17.3-iproute.patch \
--  file://busybox-1.17.3-ls.patch \
+-  file://busybox-1.17.1-grep.patch \
+-  file://busybox-1.17.1-make.patch \
+-  file://busybox-1.17.1-mdev.patch \
+-  file://busybox-1.17.1-mktemp.patch \
+-  file://busybox-1.17.1-sed.patch \
+-  file://busybox-1.17.1-shell.patch \
 -"
 -
--SRC_URI[md5sum] = "a2ce1a951571da8c6e0eaf75b1acef60"
--SRC_URI[sha256sum] = "de2f0274f61a068d75ad33861e0982e99c6b625681460ce420222371c3511ff2"
+-SRC_URI[md5sum] = "c7fe7533b7fc4018b0b49a05ee0ee601"
+-SRC_URI[sha256sum] = "bf9177810d7e151b0e662477c33b9afd062570e6298ec46f2a8397a6a839d164"
 -- 
 1.6.3.3
 
