@@ -1,39 +1,39 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1PLfKD-0001W0-DR
+	(envelope-from <nicolas.ferre@atmel.com>) id 1PLfYC-0001m0-IV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 18:09:37 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id DA3452C7DD
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 17:07:40 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Bwz45ROGjX+h
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 17:07:36 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 39A562C798
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 17:07:36 +0000 (UTC)
-Message-ID: <4CEE9800.9020601@gmail.com>
-Date: Thu, 25 Nov 2010 18:08:16 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+	Thu, 25 Nov 2010 18:24:05 +0100
+Received: from meyreuil.atmel.fr (meyreuil [10.159.254.132])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id oAPHKGZO008304;
+	Thu, 25 Nov 2010 09:20:17 -0800 (PST)
+Received: from [127.0.0.1] ([10.159.245.112])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id oAPHMfh18441; 
+	Thu, 25 Nov 2010 18:22:41 +0100 (MET)
+Message-ID: <4CEE9B60.1030309@atmel.com>
+Date: Thu, 25 Nov 2010 18:22:40 +0100
+From: Nicolas Ferre <nicolas.ferre@atmel.com>
+Organization: atmel
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CEE737B.4050703@sirius-es.it>
-In-Reply-To: <4CEE737B.4050703@sirius-es.it>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+References: <4CEE24A8.2090007@atmel.com>
+	<4CEE2ADA.7050004@eukrea.com>	<4CEE6A7B.4010603@atmel.com>
+	<20101125163139.GQ3274@jama>
+In-Reply-To: <20101125163139.GQ3274@jama>
+X-MIME-Autoconverted: from 8bit to quoted-printable by sjogate2.atmel.com id
+	oAPHKGZO008304
+X-SA-Exim-Connect-IP: 204.2.163.5
+X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: sysvinit modify for usb_serial_console
+Cc: Martin Jansa <martin.jansa@gmail.com>,
+	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Subject: Re: libXext-native fail to compile (x86_64)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,49 +47,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 17:09:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 25 Nov 2010 17:24:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Matteo Facchinetti ha scritto, Il 25/11/2010 15:32:
-> Hi,
+Le 25/11/2010 17:31, Martin Jansa :
+> On Thu, Nov 25, 2010 at 02:54:03PM +0100, Nicolas Ferre wrote:
+>> Le 25/11/2010 10:22, Eric B=E9nard :
+>>> Hi Nicolas,
+>>>
+>>> On 25/11/2010 09:56, Nicolas Ferre wrote:
+>>>> While trying to build from scratch the latest .dev branch with:
+>>>> - angstrom-2010.x distribution
+>>>>
+>>>> Build Configuration:
+>>>> BB_VERSION        =3D "1.10.0"
+>>>> METADATA_BRANCH   =3D "dev_for2010.12"
+>>>> METADATA_REVISION =3D "a1bba89"
+>>>> TARGET_ARCH       =3D "arm"
+>>>> TARGET_OS         =3D "linux-gnueabi"
+>>>> MACHINE           =3D "at91sam9m10g45ek"
+>>>> DISTRO            =3D "angstrom"
+>>>> DISTRO_VERSION    =3D "next"
+>>>> TARGET_FPU        =3D "soft"
+>>>>
+>>>>
+>>>> I have the following error with libxext:
+>>>> NOTE: package libxext-native-1_1.2.0-r9.0: task do_compile: Failed
+>>>>
+>>> it seems to build fine for others also on x86_64 host :
+>>> http://tinderbox.openembedded.net/packages/1077651/
+>>> http://tinderbox.openembedded.net/packages/1087310/
+>>
+>> Indeed, strange...
+>> I tried to clean the recipe and then rebuild without success.
+>> Someone has a hint where it can come from?
 >=20
-> There are many evaluationboard that use mini-usb port like as a serial
-> port + power supply.
-> Using it as serial console have to force getty with no need for carrier
-> detect.
-> For these boards have to use USB_SERIAL_CONSOLE variabile in config fil=
-e
-> instead of SERIAL_CONSOLE and getty runs with -L parameter.
-> By this way is simple to use usb serial port unless know in depth getty
-> manpage.
+> I've tried to reproduce on my 2 x86_64 hosts and both build it still
+> fine (both with gcc-4.5, SHR and micro)
 >=20
-> Can you merge this patch in mainline?
->=20
-> Regards
-> Matteo Facchinetti
-> Sirius Electronic Systems
->=20
+> But same problem was maybe reason here:
+> http://bugs.openembedded.org/show_bug.cgi?id=3D5490
+> but for him do_install failed.. weird
 
-Matteo,
-Looks ok to me, thanks.
+Well, not my case... I have my tmp and sources while running the building=
+ process.
 
-BTW IIRC your patches should have prefix [PATCH]
-http://wiki.openembedded.net/index.php/How_to_submit_a_patch_to_OpenEmbed=
-ded
+It may be related to my native "ld" that is too old?
 
-git format-patch --subject-prefix=3D"PATCH" -1
+For the record, here are my native ld and gcc revisions (comming from "Re=
+d Hat Enterprise Linux Client release 5.2 (Tikanga)"):
 
+$ /usr/bin/ld -V
+GNU ld version 2.17.50.0.6-6.el5 20061020
+  Supported emulations:
+   elf_x86_64
+   elf_i386
+   i386linux
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-        http://www.KaeilOS.com
+$ gcc -v
+Using built-in specs.
+Target: x86_64-redhat-linux
+Configured with: ../configure --prefix=3D/usr --mandir=3D/usr/share/man -=
+-infodir=3D/usr/share/info --enable-shared --enable-threads=3Dposix --ena=
+ble-checking=3Drelease --with-system-zlib --enable-__cxa_atexit --disable=
+-libunwind-exceptions --enable-libgcj-multifile --enable-languages=3Dc,c+=
++,objc,obj-c++,java,fortran,ada --enable-java-awt=3Dgtk --disable-dssi --=
+enable-plugin --with-java-home=3D/usr/lib/jvm/java-1.4.2-gcj-1.4.2.0/jre =
+--with-cpu=3Dgeneric --host=3Dx86_64-redhat-linux
+Thread model: posix
+gcc version 4.1.2 20071124 (Red Hat 4.1.2-42)
 
+Bye,
+--=20
+Nicolas Ferre
 
 
 
