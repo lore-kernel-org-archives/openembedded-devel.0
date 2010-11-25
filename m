@@ -1,35 +1,37 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLbBU-0003ci-AL
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLbCa-0003ik-1S
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 13:44:21 +0100
-Received: by iwn7 with SMTP id 7so1044193iwn.6
+	Thu, 25 Nov 2010 13:45:28 +0100
+Received: by iwn7 with SMTP id 7so1045209iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 04:43:04 -0800 (PST)
+	Thu, 25 Nov 2010 04:44:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=9b5FGS0MjFHB9EiEPb5zojLn2I930u4DfDd8Fs9K0p4=;
-	b=hBIkHnqjgKld5XsTh4+gf7DmmKkLP+bEsRIf/F2LKKv/m4TFkh/Zej4IiMlFT9Ur2r
-	D0JWh4G0fkHwLxt0QQhwQMQMS0EVdvu0tH4A0rOiRY9CWMYlC+zZjOffSqJTTJVPscEt
-	plmJ4p+YwNeR0TKYiEgWG8huJZT6b4KBnyYlE=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=GNJlh2ZRtStqdHBGkeA9TnzcryNHbwAtBBhO+FjMTYo=;
+	b=aAYAML5OnzvbO0TwCrxP0PCZj5/ejlD/paSw+xl8ov5zl0I6H1JGEt886hsvxRQ/KA
+	VpHrDA5yw3VNQUFlp5NJza1IAcU3K7QrN8nHGjRtS3bIrPzUhGAm26bxhjCWn83FO1Br
+	EXmUGuOHHX9/g3ZupmVVnfmxopkcn5JAcP64E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=U1mFApel0+AaezspPeUla1JtRNHT+k4hw5oOuYcE87wGWNyuzlaCIqrjj7bCw6Y+ii
-	sKRGT0WOki9wEsrWWz98iR/DUC7ZE7iIOlz1TeE5lwdS2d3JWWz0FZKDU4U7eGP3iCO3
-	9elW57/nqOwzxJrSeLv6roKjj/6QnPGrJYW9Q=
+	:content-type;
+	b=S7wNms4yoOYqJe8w7XoDWQdniJUG9ev+qhFaFWSqM6ImkbPdVqZNP/oAGLIdKvrDMp
+	TN7rhXNq7bdk1OWv3+9I9uqYPzc4P8WswRyb1XXuHzIxf+jfbmlQKY+MXM2iaLGWXEmr
+	p7HSGkmK0fJbQxlIgoY1W83JIPKdtTGHutYKo=
 MIME-Version: 1.0
-Received: by 10.231.13.137 with SMTP id c9mr467255iba.76.1290688984463; Thu,
-	25 Nov 2010 04:43:04 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Thu, 25 Nov 2010 04:43:04 -0800 (PST)
-In-Reply-To: <4CEE4F61.3060401@sensortherm.de>
+Received: by 10.231.15.136 with SMTP id k8mr477238iba.51.1290689053178; Thu,
+	25 Nov 2010 04:44:13 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Thu, 25 Nov 2010 04:44:13 -0800 (PST)
+In-Reply-To: <4CEE5186.7070907@sensortherm.de>
 References: <4CEC1E17.1030208@sensortherm.de>
 	<AANLkTinhykFBHcgJR5suXU8Q7op+FOxofExY-d42XmYw@mail.gmail.com>
-	<4CEE4F61.3060401@sensortherm.de>
-Date: Thu, 25 Nov 2010 13:43:04 +0100
-Message-ID: <AANLkTimpvN+hLUrk7LB1fOKbpY8aE1f-3hdoJA19JM2W@mail.gmail.com>
+	<AANLkTimymQB4kxvp-ybAzpUMMxQNy43GZyxKNzmRH3Uw@mail.gmail.com>
+	<20101124080705.GF3274@jama>
+	<AANLkTinv88_9h_1RB8OS5XuqSV2zKBhS2FcxMrpsWh8e@mail.gmail.com>
+	<4CEE5186.7070907@sensortherm.de>
+Date: Thu, 25 Nov 2010 13:44:13 +0100
+Message-ID: <AANLkTi=LJkDCTR_PsUR52VuB9ckpms82MYyn9uyhO9hL@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -54,99 +56,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 12:44:21 -0000
+X-List-Received-Date: Thu, 25 Nov 2010 12:45:28 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
 2010/11/25 Klaus Schwarzkopf <schwarzkopf@sensortherm.de>:
-> Am 23.11.2010 21:19, schrieb Khem Raj:
+> Am 24.11.2010 10:18, schrieb Frans Meulenbroeks:
 >>
->> On Tue, Nov 23, 2010 at 12:03 PM, Klaus Schwarzkopf
->> <schwarzkopf@sensortherm.de> =A0wrote:
+>> 2010/11/24 Martin Jansa<martin.jansa@gmail.com>:
 >>>
->>> Hi,
+>>> On Wed, Nov 24, 2010 at 08:52:41AM +0100, Frans Meulenbroeks wrote:
+>>>>
+>>>> What about moving all recipes that do not fetch and also did not fetch
+>>>> during Martins test from last march/april to a directory non-fetching
+>>>> or so?
 >>>
->>> i've downloaded oe with this script (thanks frans):
+>>> But those recipes were only those where I wasn't able to find the source
+>>> at all (even with google help and couple of popular premirrors). Any
+>>> origin for source was fine for me, because I was only interested in
+>>> checksum check.
 >>>
->>> #!/bin/sh
+>>>> Apparently these are non fetchable for a long time, with no one
+>>>> apparently building them or having an interest to fix them.
 >>>
->>> export OE=3D/home/klaus/development/oe/
->>> export BBPATH=3D${OE}build:${OE}openembedded
->>> export PATH=3D${OE}bitbake/bin:${PATH}
->>> export MACHINE=3Ddm355-evm
+>>> More likely those who were building those before are still building
+>>> OK, because they had it in theirs downloads dir. (but the second part is
+>>> right :/).
 >>>
->>> RECIPES=3D"${OE}/openembedded/recipes"
->>> LOGFILE=3D"fetchsrc.log"
+>>>> My proposal would be to do that before the release is made, thereby
+>>>> improving the % of the recipes that build.
 >>>
->>> #Find recipes how changed this week
->>> #FIND_OPTIONS=3D"-atime 7"
+>>> We can improve it also by putting those missing upstream files to
+>>> sources.openembedded.org and use it as premirror. But first we hav to
+>>> find someone who still have it in downloads dir :/ (I don't).
 >>>
->>> for i in $(find ${RECIPES} -name '*.bb' -type f ${FIND_OPTIONS} | sort =
-)
->>> do
->>> =A0 =A0 =A0 =A0echo $i
->>> =A0 =A0 =A0 =A0bitbake -c fetch -b $i
->>> done> =A0${LOGFILE} 2>&1
->>>
->>> egrep -n 'ERROR.*bb..failed' ${LOGFILE}
->>> egrep -n 'KeyError' ${LOGFILE}
->>>
->>>
->>>
->>>
->>>
->>> I found a lot of errors, see attachment! The whole logfile is on my
->>> homepage:
->>> http://fbi.hooster.de/download/sonstiges/oe/fetchsrc.log.tar.gz
->>>
->>> How can i/we fix this errors?
->>>
+>>> Removing recipes would need to remove those also from tasks/images and
+>>> in the end release images could miss some important functionaly in worst
+>>> case.
 >>
->> You should ignore nonworking and obsolete dirs and some errors are due
->> to hh.org going AWOL too
+>> I think most of the non fetching recipes would fall into one of these
+>> categories:
+>> - recipes that are very specific and are not part of a task or image
+>> - recipes that are older versions and that are not used/build
 >>
+>> Wrt the remark on missing important functionality:
+>> For a user with a clean slate, the functionality is already missing as
+>> the task/image cannot be build from scratch.
+>>
+>> It might be a good idea to do a test trying to build all images for
+>> one distro/machine and see what comes out.
+>> Start with a clean system (empty downloads dir, empty TMPDIR, no
+>> pstaged files etc).
+>> Then bitbake all images. By doing it subsequently without cleaning
+>> TMPDIR inbetween it'll become clear which images do build from scratch
+>> and which don't.
+>>
+>> Is someone able/willing to do this test and report the result (suggest
+>> using distro minimal or angstrom or probably shr and machine angstrom)
+>>
+>> Frans
 >
 >
-> egrep -n 'ERROR.*bb..failed' fetchsrc.log | egrep -v 'nonworking' | egrep=
- -v
-> 'obsolete' | wc -l
-> 434
->
-> egrep -n 'ERROR.*bb..failed' fetchsrc.log | egrep -v 'nonworking' | egrep=
- -v
-> 'obsolete' | egrep -v 'opie.*cvs' | wc -l
-> 253
->
->
-> I know, that the opie recipes missing the cvs server on hh.org.
->
-> What is the best way to fix the missing download files?
-> Move the recipes to nonworking directory?
-> Find the missing files in the internet and upload the files to
-> sources.openembedded.org?
->
-> A combination: If we could not find the files, move the recipes to
-> nonworking.
->
-> Greetings
->
-> Klaus
+> Is it usefull to have an image with all/most recipes? This image can be used
+> for testing the recipes (fetch, compile) for several machines.
 
-Thanks for your work.
-Best way forward is to first verify if the sources are not elsewhere
-(or renamed or so). E.g. php moves old versions to a "museum" site so
-if a new version arrives the old version suddenly does not fetch any
-more. In that case the solution is to change the SRC_URI
-If that does not help and the sources are elsewhere on a reputable and
-reliable server it might also be considered to change SRC_URI.
+This functionality exists:
 
-Otherwise if there happens to be a source found (e.g. in someones
-downloads dir) we can consider moving it to sources.openembedded.org.
-If the sources are unavailable moving to nonworking seems unavoidable.
+do a
+bitbake world
+or if you only want to fetch:
+bitbake -c fetchall world
 
-There is one other case. If a recipe is old and not pinned, it can
-also be considered to remove the recipe.
-
-Frans
+Enjoy, Frans
+>
+> At the moment, i try to build all images with the dm355-evm machine.
+>
+>
+> Greetings Klaus
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
