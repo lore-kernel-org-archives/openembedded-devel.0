@@ -1,48 +1,46 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLY7z-0007WK-6S
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLY8F-0007WK-Nj
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 10:28:33 +0100
-Received: by iwn7 with SMTP id 7so859110iwn.6
+	Thu, 25 Nov 2010 10:28:52 +0100
+Received: by mail-iw0-f175.google.com with SMTP id 7so859110iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 01:27:14 -0800 (PST)
+	Thu, 25 Nov 2010 01:27:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=xOSWqWxKBoUQgkZC6vPHVKW2jCTjCDihxqzFb7yGOh8=;
-	b=nn+hsitmkEPPy16BbkCEnJPui6raCK32nBI8BkIxFRql6vAI04VXP8pQ/hPzehsUbr
-	ve4dw4/3MUOeVT3Vaptpbok9IphqRowiwrBuy+qki6+OJwua9rhJ/wUP0s4ZDSgh8sy7
-	TgqTPVNZT7NeoRvRKv2xwC/1jkzfoP4FabpSY=
+	bh=mw/SpB6pTcl1PjgK3o3jjuQRv6JrwlgQCzK5noZZ5q4=;
+	b=dpl34w72MnIEMGDo6sV4RqRsmyVtFXgAPJ1/neYF1kmPWGQ3c828ecF1WbO3j4+XO8
+	ghhKBgsRFtsw6WrGT9B54BJkcnYAT3Ox0kiRdbstnS/u7Tr8oNMG0JvHvBNSm/odDWIN
+	B/UW4Pwtw5wfG4+F7NuShl6YryapOMtPkpaI0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=ZRER7GwkkNi29mDjVh2I+u0FeZ70g/QIPzjkSAF3+mDPmRurH4QziVZCmqsl2E/rYP
-	v7r51nVn0DeQa7bJW+tB6D3nbuZ33Is+8VFeOfn9w3WO1qEs5U8mDNF2hQm6fFa5+m7A
-	XvHV1jfjjqlnu4e5rcbjSzBF/lmAHTtAX53Bg=
+	b=CRkLRpT7ACFgE5ER2dXpIf3+Z9QQXvcoOT6FHvh4VrJp3ifAMSCBm7Uj7WAcoyde4T
+	zbHJ3uqIwaPnxxk3IO4/5GhI8+iHsGUQv3QrsG/MfxrrVl4aoIvC2mxewvVsFjcSPQK3
+	QdaarD2XyncnYUGe47N8nzxlN2DbQCY5erxwk=
 MIME-Version: 1.0
-Received: by 10.231.13.137 with SMTP id c9mr370019iba.76.1290677233370; Thu,
-	25 Nov 2010 01:27:13 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Thu, 25 Nov 2010 01:27:13 -0800 (PST)
-In-Reply-To: <1290676461-13283-5-git-send-email-eric@eukrea.com>
+Received: by 10.231.39.137 with SMTP id g9mr365132ibe.101.1290677246692; Thu,
+	25 Nov 2010 01:27:26 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Thu, 25 Nov 2010 01:27:26 -0800 (PST)
+In-Reply-To: <1290676461-13283-3-git-send-email-eric@eukrea.com>
 References: <1290676461-13283-1-git-send-email-eric@eukrea.com>
 	<1290676461-13283-2-git-send-email-eric@eukrea.com>
 	<1290676461-13283-3-git-send-email-eric@eukrea.com>
-	<1290676461-13283-4-git-send-email-eric@eukrea.com>
-	<1290676461-13283-5-git-send-email-eric@eukrea.com>
-Date: Thu, 25 Nov 2010 10:27:13 +0100
-Message-ID: <AANLkTi=0o6QYd+YdxUsUTLkOtGCWgc+0Fi=jPfrvewh2@mail.gmail.com>
+Date: Thu, 25 Nov 2010 10:27:26 +0100
+Message-ID: <AANLkTi=yXyMUtqaMJ=dtb3y8YSQDT3kv5xYcrhhn3utS@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	UPPERCASE_50_75 autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 5/5] busybox: remove 1.17.3
+Subject: Re: [PATCH 3/5] busybox: remove 1.17.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,55 +54,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 09:28:33 -0000
+X-List-Received-Date: Thu, 25 Nov 2010 09:28:52 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
 2010/11/25 Eric B=E9nard <eric@eukrea.com>:
-> as it's no more default for SHR
+> as it's no more default for Angstrom-2010
 >
 > Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+
 Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 > ---
-> =A0recipes/busybox/busybox-1.17.3/B921600.patch =A0 =A0 =A0 | =A0 13 -
-> =A0.../busybox-1.17.3/busybox-1.17.3-dnsd.patch =A0 =A0 =A0 | =A0 12 -
-> =A0.../busybox-1.17.3/busybox-1.17.3-iproute.patch =A0 =A0| =A0 13 -
-> =A0.../busybox/busybox-1.17.3/busybox-1.17.3-ls.patch | =A0 30 -
-> =A0.../busybox-1.17.3/busybox-1.17.3-sort.patch =A0 =A0 =A0 | =A0 12 -
-> =A0.../busybox-1.17.3/busybox-1.17.3-unicode.patch =A0 =A0| =A0 12 -
-> =A0recipes/busybox/busybox-1.17.3/defconfig =A0 =A0 =A0 =A0 =A0 | =A0873 =
+> =A0recipes/busybox/busybox-1.17.1/B921600.patch =A0 =A0 =A0 | =A0 13 -
+> =A0.../busybox-1.17.1/busybox-1.17.1-grep.patch =A0 =A0 =A0 | =A0 39 -
+> =A0.../busybox-1.17.1/busybox-1.17.1-make.patch =A0 =A0 =A0 | =A0 32 -
+> =A0.../busybox-1.17.1/busybox-1.17.1-mdev.patch =A0 =A0 =A0 | =A0 49 --
+> =A0.../busybox-1.17.1/busybox-1.17.1-mktemp.patch =A0 =A0 | =A0 12 -
+> =A0.../busybox-1.17.1/busybox-1.17.1-sed.patch =A0 =A0 =A0 =A0| =A0117 --=
+-
+> =A0.../busybox-1.17.1/busybox-1.17.1-shell.patch =A0 =A0 =A0| =A0105 ---
+> =A0recipes/busybox/busybox-1.17.1/defconfig =A0 =A0 =A0 =A0 =A0 | =A0873 =
 --------------------
-> =A0recipes/busybox/busybox-1.17.3/fdisk_nios2.patch =A0 | =A0 13 -
-> =A0.../busybox/busybox-1.17.3/get_header_tar.patch =A0 =A0| =A0 11 -
-> =A0.../busybox-1.17.3/udhcpc-fix-nfsroot.patch =A0 =A0 =A0 =A0| =A0 47 --
-> =A0recipes/busybox/busybox-1.17.3/udhcpscript.patch =A0 | =A0 13 -
-> =A0recipes/busybox/busybox_1.17.3.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0|=
- =A0 13 -
-> =A012 files changed, 0 insertions(+), 1062 deletions(-)
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/B921600.patch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-dnsd.=
+> =A0recipes/busybox/busybox-1.17.1/fdisk_nios2.patch =A0 | =A0 13 -
+> =A0.../busybox/busybox-1.17.1/get_header_tar.patch =A0 =A0| =A0 11 -
+> =A0.../busybox-1.17.1/udhcpc-fix-nfsroot.patch =A0 =A0 =A0 =A0| =A0 47 --
+> =A0recipes/busybox/busybox-1.17.1/udhcpscript.patch =A0 | =A0 13 -
+> =A0recipes/busybox/busybox_1.17.1.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0|=
+ =A0 16 -
+> =A013 files changed, 0 insertions(+), 1340 deletions(-)
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/B921600.patch
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-grep.=
 patch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-iprou=
-te.patch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-ls.pa=
-tch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-sort.=
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-make.=
 patch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/busybox-1.17.3-unico=
-de.patch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/defconfig
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/fdisk_nios2.patch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/get_header_tar.patch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/udhcpc-fix-nfsroot.p=
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-mdev.=
+patch
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-mktem=
+p.patch
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-sed.p=
 atch
-> =A0delete mode 100644 recipes/busybox/busybox-1.17.3/udhcpscript.patch
-> =A0delete mode 100644 recipes/busybox/busybox_1.17.3.bb
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/busybox-1.17.1-shell=
+.patch
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/defconfig
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/fdisk_nios2.patch
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/get_header_tar.patch
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/udhcpc-fix-nfsroot.p=
+atch
+> =A0delete mode 100644 recipes/busybox/busybox-1.17.1/udhcpscript.patch
+> =A0delete mode 100644 recipes/busybox/busybox_1.17.1.bb
 >
-> diff --git a/recipes/busybox/busybox-1.17.3/B921600.patch b/recipes/busyb=
-ox/busybox-1.17.3/B921600.patch
+> diff --git a/recipes/busybox/busybox-1.17.1/B921600.patch b/recipes/busyb=
+ox/busybox-1.17.1/B921600.patch
 > deleted file mode 100644
 > index 61cc32b..0000000
-> --- a/recipes/busybox/busybox-1.17.3/B921600.patch
+> --- a/recipes/busybox/busybox-1.17.1/B921600.patch
 > +++ /dev/null
 > @@ -1,13 +0,0 @@
 > -diff -upNr busybox-1.7.2/libbb/speed_table.c busybox-1.7.2-921600/libbb/=
@@ -123,158 +126,546 @@ speed_table.c
 > - };
 > -
 > - enum { NUM_SPEEDS =3D ARRAY_SIZE(speeds) };
-> diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-dnsd.patch b/r=
-ecipes/busybox/busybox-1.17.3/busybox-1.17.3-dnsd.patch
+> diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-grep.patch b/r=
+ecipes/busybox/busybox-1.17.1/busybox-1.17.1-grep.patch
 > deleted file mode 100644
-> index b135c14..0000000
-> --- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-dnsd.patch
+> index f8fc25d..0000000
+> --- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-grep.patch
 > +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -diff -urpN busybox-1.17.3/networking/dnsd.c busybox-1.17.3-dnsd/networki=
-ng/dnsd.c
-> ---- busybox-1.17.3/networking/dnsd.c =A0 2010-10-09 21:57:14.000000000 +=
-0200
-> -+++ busybox-1.17.3-dnsd/networking/dnsd.c =A0 =A0 =A02010-10-29 00:37:43=
-.066043841 +0200
-> -@@ -388,7 +388,7 @@ static int process_packet(struct dns_ent
-> - =A0 =A0 =A0 query_len =3D strlen(query_string) + 1;
-> - =A0 =A0 =A0 /* may be unaligned! */
-> - =A0 =A0 =A0 unaligned_type_class =3D (void *)(query_string + query_len)=
-;
-> -- =A0 =A0 =A0query_len +=3D sizeof(unaligned_type_class);
-> -+ =A0 =A0 =A0query_len +=3D sizeof(*unaligned_type_class);
-> - =A0 =A0 =A0 /* where to append answer block */
-> - =A0 =A0 =A0 answb =3D (void *)(unaligned_type_class + 1);
-> -
-> diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-iproute.patch =
-b/recipes/busybox/busybox-1.17.3/busybox-1.17.3-iproute.patch
-> deleted file mode 100644
-> index 03c749f..0000000
-> --- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-iproute.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -diff -urpN busybox-1.17.3/networking/libiproute/iproute.c busybox-1.17.3=
--iproute/networking/libiproute/iproute.c
-> ---- busybox-1.17.3/networking/libiproute/iproute.c =A0 =A0 2010-10-09 21=
-:57:14.000000000 +0200
-> -+++ busybox-1.17.3-iproute/networking/libiproute/iproute.c =A0 =A0 2010-=
-11-04 09:13:06.307919550 +0100
-> -@@ -791,8 +791,8 @@ static int iproute_get(char **argv)
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 req.r.rtm_d=
-st_len =3D addr.bitlen;
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
-> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0argv++;
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
-> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0argv++;
-> - =A0 =A0 =A0 }
-> -
-> - =A0 =A0 =A0 if (req.r.rtm_dst_len =3D=3D 0) {
-> diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-ls.patch b/rec=
-ipes/busybox/busybox-1.17.3/busybox-1.17.3-ls.patch
-> deleted file mode 100644
-> index 1c4f895..0000000
-> --- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-ls.patch
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -diff -urpN busybox-1.17.3/coreutils/ls.c busybox-1.17.3-ls/coreutils/ls.=
-c
-> ---- busybox-1.17.3/coreutils/ls.c =A0 =A0 =A02010-10-09 21:57:13.0000000=
-00 +0200
-> -+++ busybox-1.17.3-ls/coreutils/ls.c =A0 2010-11-06 00:26:48.467049575 +=
-0100
-> -@@ -184,7 +184,7 @@ static const unsigned opt_flags[] =3D {
-> - =A0 =A0 =A0 LIST_INO, =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* i */
-> - =A0 =A0 =A0 LIST_LONG | STYLE_LONG, =A0 =A0 /* l - remember LS_DISP_HR =
-in mask! */
-> - =A0 =A0 =A0 LIST_SHORT | STYLE_SINGLE, =A0/* 1 */
-> -- =A0 =A0 =A00, =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* g =
-(don't show group) - handled via OPT_g */
-> -+ =A0 =A0 =A00, =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* g =
-(don't show owner) - handled via OPT_g */
-> - =A0 =A0 =A0 LIST_ID_NUMERIC, =A0 =A0 =A0 =A0 =A0 =A0/* n */
-> - =A0 =A0 =A0 LIST_BLOCKS, =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* s */
-> - =A0 =A0 =A0 DISP_ROWS, =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* x */
-> -@@ -621,7 +621,7 @@ static NOINLINE unsigned list_single(con
-> - =A0 =A0 =A0 if (all_fmt & LIST_ID_NAME) {
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 if (option_mask32 & OPT_g) {
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 column +=3D printf("%-8.8s =
-",
-> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0get_cached_=
-username(dn->dstat.st_uid));
-> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0get_cached_=
-groupname(dn->dstat.st_gid));
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 } else {
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 column +=3D printf("%-8.8s =
-%-8.8s ",
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 get_cached_=
-username(dn->dstat.st_uid),
-> -@@ -631,7 +631,7 @@ static NOINLINE unsigned list_single(con
-> - #endif
-> - =A0 =A0 =A0 if (all_fmt & LIST_ID_NUMERIC) {
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 if (option_mask32 & OPT_g)
-> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0column +=3D printf("%-8u ",=
- (int) dn->dstat.st_uid);
-> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0column +=3D printf("%-8u ",=
- (int) dn->dstat.st_gid);
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 else
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 column +=3D printf("%-8u %-=
-8u ",
+> @@ -1,39 +0,0 @@
+> -diff -urpN busybox-1.17.1/findutils/grep.c busybox-1.17.1-grep/findutils=
+/grep.c
+> ---- busybox-1.17.1/findutils/grep.c =A0 =A02010-07-06 04:25:54.000000000=
+ +0200
+> -+++ busybox-1.17.1-grep/findutils/grep.c =A0 =A0 =A0 2010-08-23 02:37:08=
+.000000000 +0200
+> -@@ -461,15 +461,19 @@ static int grep_file(FILE *file)
 > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
- =A0 (int) dn->dstat.st_uid,
-> diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-sort.patch b/r=
-ecipes/busybox/busybox-1.17.3/busybox-1.17.3-sort.patch
-> deleted file mode 100644
-> index ebc9bf9..0000000
-> --- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-sort.patch
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -diff -urpN busybox-1.17.3/coreutils/sort.c busybox-1.17.3-sort/coreutils=
-/sort.c
-> ---- busybox-1.17.3/coreutils/sort.c =A0 =A02010-10-09 21:57:13.000000000=
- +0200
-> -+++ busybox-1.17.3-sort/coreutils/sort.c =A0 =A0 =A0 2010-10-20 15:17:35=
-.320293543 +0200
-> -@@ -412,7 +412,7 @@ int sort_main(int argc UNUSED_PARAM, cha
-> - #if ENABLE_FEATURE_SORT_BIG
-> - =A0 =A0 =A0 /* Open output file _after_ we read all input ones */
-> - =A0 =A0 =A0 if (option_mask32 & FLAG_o)
-> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0xmove_fd(xopen3(str_o, O_WRONLY, 0666), STD=
-OUT_FILENO);
-> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0xmove_fd(xopen3(str_o, O_WRONLY|O_CREAT|O_T=
-RUNC, 0666), STDOUT_FILENO);
-> - #endif
-> - =A0 =A0 =A0 flag =3D (option_mask32 & FLAG_z) ? '\0' : '\n';
-> - =A0 =A0 =A0 for (i =3D 0; i < linecount; i++)
-> diff --git a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-unicode.patch =
-b/recipes/busybox/busybox-1.17.3/busybox-1.17.3-unicode.patch
-> deleted file mode 100644
-> index dc3b02e..0000000
-> --- a/recipes/busybox/busybox-1.17.3/busybox-1.17.3-unicode.patch
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -diff -urpN busybox-1.17.3/libbb/unicode.c busybox-1.17.3-unicode/libbb/u=
-nicode.c
-> ---- busybox-1.17.3/libbb/unicode.c =A0 =A0 2010-10-09 21:58:13.000000000=
- +0200
-> -+++ busybox-1.17.3-unicode/libbb/unicode.c =A0 =A0 2010-10-29 00:48:36.9=
-51494079 +0200
-> -@@ -1006,7 +1006,7 @@ static char* FAST_FUNC unicode_conv_to_p
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 if (stats)
-> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0stats->byte_count =3D stats=
-->unicode_count =3D (d - dst);
-> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0stats->byte_count =3D stats=
-->unicode_count =3D stats->unicode_width =3D (d - dst);
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 return dst;
-> - =A0 =A0 =A0 }
+ =A0 =A0 =A0 =A0 =A0 if (found)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 print_line(gl->pattern, strlen(gl->pat=
+tern), linenum, ':');
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 } else while (1) {
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0unsigned start =3D gl->matched_range.rm_so;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 unsigned end =3D gl->matched_range.rm_eo;
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0unsigned len =3D end - start;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 char old =3D line[end];
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 line[end] =3D '\0';
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0print_line(line + gl->matched_range.rm_so,
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0end - gl->matched_ra=
+nge.rm_so,
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0linenum, ':');
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0/* Empty match is not printed: try "echo test | grep=
+ -o ''" */
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0if (len !=3D 0)
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0print_line(line + start, len, linenu=
+m, ':');
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 if (old =3D=3D '\0')
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 break;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 line[end] =3D old;
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0if (len =3D=3D 0)
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0end++;
+> - #if !ENABLE_EXTRA_COMPAT
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 if (regexec(&gl->compiled_regex, line + end,
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 1, &gl->matched_range,=
+ REG_NOTBOL) !=3D 0)
+> -diff -urpN busybox-1.17.1/testsuite/grep.tests busybox-1.17.1-grep/tests=
+uite/grep.tests
+> ---- busybox-1.17.1/testsuite/grep.tests =A0 =A0 =A0 =A02010-07-06 04:25:=
+54.000000000 +0200
+> -+++ busybox-1.17.1-grep/testsuite/grep.tests =A0 2010-08-23 02:37:08.000=
+000000 +0200
+> -@@ -98,5 +98,9 @@ testing "grep -o does not loop forever"
+> - =A0 =A0 =A0 'grep -o "[^/]*$"' \
+> - =A0 =A0 =A0 "test\n" \
+> - =A0 =A0 =A0 "" "/var/test\n"
+> -+testing "grep -o does not loop forever on zero-length match" \
+> -+ =A0 =A0 =A0'grep -o "" | head -n1' \
+> -+ =A0 =A0 =A0"" \
+> -+ =A0 =A0 =A0"" "test\n"
 > -
-> diff --git a/recipes/busybox/busybox-1.17.3/defconfig b/recipes/busybox/b=
-usybox-1.17.3/defconfig
+> - exit $FAILCOUNT
+> diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-make.patch b/r=
+ecipes/busybox/busybox-1.17.1/busybox-1.17.1-make.patch
+> deleted file mode 100644
+> index 6177696..0000000
+> --- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-make.patch
+> +++ /dev/null
+> @@ -1,32 +0,0 @@
+> -diff -urpN busybox-1.17.1/Makefile busybox-1.17.1-make/Makefile
+> ---- busybox-1.17.1/Makefile =A0 =A02010-07-25 00:13:44.000000000 +0200
+> -+++ busybox-1.17.1-make/Makefile =A0 =A0 =A0 2010-08-22 09:30:33.0000000=
+00 +0200
+> -@@ -433,7 +433,12 @@ ifeq ($(config-targets),1)
+> - -include $(srctree)/arch/$(ARCH)/Makefile
+> - export KBUILD_DEFCONFIG
+> -
+> --config %config: scripts_basic outputmakefile gen_build_files FORCE
+> -+config: scripts_basic outputmakefile gen_build_files FORCE
+> -+ =A0 =A0 =A0$(Q)mkdir -p include
+> -+ =A0 =A0 =A0$(Q)$(MAKE) $(build)=3Dscripts/kconfig $@
+> -+ =A0 =A0 =A0$(Q)$(MAKE) -C $(srctree) KBUILD_SRC=3D .kernelrelease
+> -+
+> -+%config: scripts_basic outputmakefile gen_build_files FORCE
+> - =A0 =A0 =A0 $(Q)mkdir -p include
+> - =A0 =A0 =A0 $(Q)$(MAKE) $(build)=3Dscripts/kconfig $@
+> - =A0 =A0 =A0 $(Q)$(MAKE) -C $(srctree) KBUILD_SRC=3D .kernelrelease
+> -@@ -1285,9 +1290,13 @@ endif
+> - =A0 =A0 =A0 $(Q)$(MAKE) $(build)=3D$(build-dir) $(target-dir)$(notdir $=
+@)
+> -
+> - # Modules
+> --/ %/: prepare scripts FORCE
+> -+%/: prepare scripts FORCE
+> - =A0 =A0 =A0 $(Q)$(MAKE) KBUILD_MODULES=3D$(if $(CONFIG_MODULES),1) \
+> - =A0 =A0 =A0 $(build)=3D$(build-dir)
+> -+/: prepare scripts FORCE
+> -+ =A0 =A0 =A0$(Q)$(MAKE) KBUILD_MODULES=3D$(if $(CONFIG_MODULES),1) \
+> -+ =A0 =A0 =A0$(build)=3D$(build-dir)
+> -+
+> - %.ko: prepare scripts FORCE
+> - =A0 =A0 =A0 $(Q)$(MAKE) KBUILD_MODULES=3D$(if $(CONFIG_MODULES),1) =A0 =
+\
+> - =A0 =A0 =A0 $(build)=3D$(build-dir) $(@:.ko=3D.o)
+> diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mdev.patch b/r=
+ecipes/busybox/busybox-1.17.1/busybox-1.17.1-mdev.patch
+> deleted file mode 100644
+> index 71c7abd..0000000
+> --- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mdev.patch
+> +++ /dev/null
+> @@ -1,49 +0,0 @@
+> -diff -urpN busybox-1.17.1/testsuite/mdev.tests busybox-1.17.1-mdev/tests=
+uite/mdev.tests
+> ---- busybox-1.17.1/testsuite/mdev.tests =A0 =A0 =A0 =A02010-07-06 04:25:=
+54.000000000 +0200
+> -+++ busybox-1.17.1-mdev/testsuite/mdev.tests =A0 2010-08-23 02:38:21.000=
+000000 +0200
+> -@@ -38,6 +38,16 @@ brw-rw---- 1 0 0 8,0 sda
+> - SKIP=3D
+> -
+> - # continuing to use directory structure from prev test
+> -+optional STATIC FEATURE_MDEV_CONF FEATURE_LS_TIMESTAMPS FEATURE_LS_USER=
+NAME
+> -+testing "mdev deletes /block/sda" \
+> -+ =A0 =A0 =A0"env - PATH=3D$PATH ACTION=3Dremove DEVPATH=3D/block/sda ch=
+root mdev.testdir /mdev 2>&1;
+> -+ =A0 =A0 =A0ls -ln mdev.testdir/dev | $FILTER_LS" \
+> -+"\
+> -+" \
+> -+ =A0 =A0 =A0"" ""
+> -+SKIP=3D
+> -+
+> -+# continuing to use directory structure from prev test
+> - rm -rf mdev.testdir/dev/*
+> - echo ".* 1:1 666" >mdev.testdir/etc/mdev.conf
+> - echo "sda 2:2 444" >>mdev.testdir/etc/mdev.conf
+> -diff -urpN busybox-1.17.1/util-linux/mdev.c busybox-1.17.1-mdev/util-lin=
+ux/mdev.c
+> ---- busybox-1.17.1/util-linux/mdev.c =A0 2010-07-06 04:25:54.000000000 +=
+0200
+> -+++ busybox-1.17.1-mdev/util-linux/mdev.c =A0 =A0 =A02010-08-23 02:38:21=
+.000000000 +0200
+> -@@ -132,6 +132,7 @@ static void make_device(char *path, int
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 major =3D -1;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
+> - =A0 =A0 =A0 }
+> -+ =A0 =A0 =A0/* else: for delete, -1 still deletes the node, but < -1 su=
+ppresses that */
+> -
+> - =A0 =A0 =A0 /* Determine device name, type, major and minor */
+> - =A0 =A0 =A0 device_name =3D (char*) bb_basename(path);
+> -@@ -279,7 +280,7 @@ static void make_device(char *path, int
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if (aliasli=
+nk =3D=3D '!' && s =3D=3D a+1) {
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 val =3D st;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 /* "!": suppress node creation/deletion */
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0major =3D -1;
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0major =3D -2;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 else if (al=
+iaslink =3D=3D '>' || aliaslink =3D=3D '=3D') {
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 val =3D st;
+> -@@ -379,7 +380,7 @@ static void make_device(char *path, int
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 free(comman=
+d);
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
+> -
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if (delete && major >=3D 0)=
+ {
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if (delete && major >=3D -1=
+) {
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if (ENABLE_=
+FEATURE_MDEV_RENAME && alias) {
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 if (aliaslink =3D=3D '>')
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 unlink(device_name);
+> diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mktemp.patch b=
+/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mktemp.patch
+> deleted file mode 100644
+> index 557e337..0000000
+> --- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-mktemp.patch
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -diff -urpN busybox-1.17.1/debianutils/mktemp.c busybox-1.17.1-mktemp/deb=
+ianutils/mktemp.c
+> ---- busybox-1.17.1/debianutils/mktemp.c =A0 =A0 =A0 =A02010-07-25 00:12:=
+56.000000000 +0200
+> -+++ busybox-1.17.1-mktemp/debianutils/mktemp.c 2010-07-27 08:21:26.00000=
+0000 +0200
+> -@@ -50,7 +50,7 @@ int mktemp_main(int argc UNUSED_PARAM, c
+> - =A0 =A0 =A0 opts =3D getopt32(argv, "dqtp:", &path);
+> -
+> - =A0 =A0 =A0 chp =3D argv[optind] ? argv[optind] : xstrdup("tmp.XXXXXX")=
+;
+> -- =A0 =A0 =A0if (chp[0] !=3D '/' || (opts & 8))
+> -+ =A0 =A0 =A0if (!strchr(chp, '/') || (opts & 8))
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 chp =3D concat_path_file(path, chp);
+> -
+> - =A0 =A0 =A0 if (opts & 1) { /* -d */
+> diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-sed.patch b/re=
+cipes/busybox/busybox-1.17.1/busybox-1.17.1-sed.patch
+> deleted file mode 100644
+> index f65aebe..0000000
+> --- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-sed.patch
+> +++ /dev/null
+> @@ -1,117 +0,0 @@
+> -diff -urpN busybox-1.17.1/editors/sed.c busybox-1.17.1-sed/editors/sed.c
+> ---- busybox-1.17.1/editors/sed.c =A0 =A0 =A0 2010-07-06 04:25:53.0000000=
+00 +0200
+> -+++ busybox-1.17.1-sed/editors/sed.c =A0 2010-08-17 02:05:27.000000000 +=
+0200
+> -@@ -61,6 +61,10 @@
+> - #include "libbb.h"
+> - #include "xregex.h"
+> -
+> -+enum {
+> -+ =A0 =A0 =A0OPT_in_place =3D 1 << 0,
+> -+};
+> -+
+> - /* Each sed command turns into one of these structures. */
+> - typedef struct sed_cmd_s {
+> - =A0 =A0 =A0 /* Ordered by alignment requirements: currently 36 bytes on=
+ x86 */
+> -@@ -938,8 +942,11 @@ static void process_files(void)
+> -
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 if (matched) {
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* once matched, "n,xxx" ra=
+nge is dead, disabling it */
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if (sed_cmd->beg_line > 0)
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if (sed_cmd->beg_line > 0
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 && !(option_mask32 & OPT_i=
+n_place) /* but not for -i */
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0) {
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sed_cmd->be=
+g_line =3D -2;
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0}
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sed_cmd->in_match =3D !(
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* has the =
+ending line come, or is this a single address command? */
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 (sed_cmd->e=
+nd_line ?
+> -@@ -985,6 +992,8 @@ static void process_files(void)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
+> -
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* actual sedding */
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0//bb_error_msg("pattern_space:'%s' next_lin=
+e:'%s' cmd:%c",
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0//pattern_space, next_line, sed_cmd->cmd);
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 switch (sed_cmd->cmd) {
+> -
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* Print line number */
+> -@@ -1111,10 +1120,16 @@ static void process_files(void)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 {
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 int len;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* If no next line, jump to=
+ end of script and exit. */
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* http://www.gnu.org/softw=
+are/sed/manual/sed.html:
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 * "Most versions of sed ex=
+it without printing anything
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 * when the N command is is=
+sued on the last line of
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 * a file. GNU sed prints p=
+attern space before exiting
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 * unless of course the -n =
+command switch has been
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 * specified. This choice i=
+s by design."
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 */
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if (next_line =3D=3D NULL) =
+{
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0free(next_l=
+ine);
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0next_line =
+=3D NULL;
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0goto discar=
+d_line;
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0//goto disc=
+ard_line;
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0goto discar=
+d_commands; /* GNU behavior */
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* Append next_line, read n=
+ew next_line. */
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 len =3D strlen(pattern_spac=
+e);
+> -@@ -1270,9 +1285,6 @@ static void add_cmd_block(char *cmdstr)
+> - int sed_main(int argc, char **argv) MAIN_EXTERNALLY_VISIBLE;
+> - int sed_main(int argc UNUSED_PARAM, char **argv)
+> - {
+> -- =A0 =A0 =A0enum {
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0OPT_in_place =3D 1 << 0,
+> -- =A0 =A0 =A0};
+> - =A0 =A0 =A0 unsigned opt;
+> - =A0 =A0 =A0 llist_t *opt_e, *opt_f;
+> - =A0 =A0 =A0 int status =3D EXIT_SUCCESS;
+> -@@ -1292,6 +1304,7 @@ int sed_main(int argc UNUSED_PARAM, char
+> - =A0 =A0 =A0 opt_e =3D opt_f =3D NULL;
+> - =A0 =A0 =A0 opt_complementary =3D "e::f::" /* can occur multiple times =
+*/
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 "nn"; /* count -n *=
+/
+> -+ =A0 =A0 =A0/* -i must be first, to match OPT_in_place definition */
+> - =A0 =A0 =A0 opt =3D getopt32(argv, "irne:f:", &opt_e, &opt_f,
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 &G.be_quiet); /* co=
+unter for -n */
+> - =A0 =A0 =A0 //argc -=3D optind;
+> -diff -urpN busybox-1.17.1/testsuite/sed.tests busybox-1.17.1-sed/testsui=
+te/sed.tests
+> ---- busybox-1.17.1/testsuite/sed.tests 2010-07-06 04:25:54.000000000 +02=
+00
+> -+++ busybox-1.17.1-sed/testsuite/sed.tests =A0 =A0 2010-08-17 02:05:27.0=
+00000000 +0200
+> -@@ -80,10 +80,18 @@ test x"$SKIP_KNOWN_BUGS" =3D x"" && {
+> - # Query: how does this interact with no newline at EOF?
+> - testing "sed n (flushes pattern space, terminates early)" "sed -e 'n;p'=
+" \
+> - =A0 =A0 =A0 "a\nb\nb\nc\n" "" "a\nb\nc\n"
+> --# N does _not_ flush pattern space, therefore c is still in there @ scr=
+ipt end.
+> --testing "sed N (doesn't flush pattern space when terminating)" "sed -e =
+'N;p'" \
+> -- =A0 =A0 =A0"a\nb\na\nb\nc\n" "" "a\nb\nc\n"
+> - }
+> -+# non-GNU sed: N does _not_ flush pattern space, therefore c is eaten @=
+ script end
+> -+# GNU sed: N flushes pattern space, therefore c is printed too @ script=
+ end
+> -+testing "sed N (flushes pattern space (GNU behavior))" "sed -e 'N;p'" \
+> -+ =A0 =A0 =A0"a\nb\na\nb\nc\n" "" "a\nb\nc\n"
+> -+
+> -+testing "sed N test2" "sed ':a;N;s/\n/ /;ta'" \
+> -+ =A0 =A0 =A0"a b c\n" "" "a\nb\nc\n"
+> -+
+> -+testing "sed N test3" "sed 'N;s/\n/ /'" \
+> -+ =A0 =A0 =A0"a b\nc\n" "" "a\nb\nc\n"
+> -+
+> - testing "sed address match newline" 'sed "/b/N;/b\\nc/i woo"' \
+> - =A0 =A0 =A0 "a\nwoo\nb\nc\nd\n" "" "a\nb\nc\nd\n"
+> -
+> -@@ -270,11 +278,16 @@ testing "sed a cmd ended by double backs
+> - =A0 =A0 =A0 | two \\
+> - '
+> -
+> --# fisrt three lines are deleted; 4th line is matched and printed by "2,=
+3" and by "4" ranges
+> -+# first three lines are deleted; 4th line is matched and printed by "2,=
+3" and by "4" ranges
+> - testing "sed with N skipping lines past ranges on next cmds" \
+> - =A0 =A0 =A0 "sed -n '1{N;N;d};1p;2,3p;3p;4p'" \
+> - =A0 =A0 =A0 "4\n4\n" "" "1\n2\n3\n4\n"
+> -
+> -+testing "sed -i with address modifies all files, not only first" \
+> -+ =A0 =A0 =A0"cp input input2; sed -i -e '1s/foo/bar/' input input2 && c=
+at input input2; rm input2" \
+> -+ =A0 =A0 =A0"bar\nbar\n" "foo\n" ""
+> -+
+> -+
+> - # testing "description" "arguments" "result" "infile" "stdin"
+> -
+> - exit $FAILCOUNT
+> diff --git a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-shell.patch b/=
+recipes/busybox/busybox-1.17.1/busybox-1.17.1-shell.patch
+> deleted file mode 100644
+> index 5279b12..0000000
+> --- a/recipes/busybox/busybox-1.17.1/busybox-1.17.1-shell.patch
+> +++ /dev/null
+> @@ -1,105 +0,0 @@
+> -diff -urpN busybox-1.17.1/shell/ash.c busybox-1.17.1-shell/shell/ash.c
+> ---- busybox-1.17.1/shell/ash.c 2010-07-25 00:12:43.000000000 +0200
+> -+++ busybox-1.17.1-shell/shell/ash.c =A0 2010-07-25 13:09:32.000000000 +=
+0200
+> -@@ -4515,6 +4515,7 @@ clear_traps(void)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 INT_ON;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
+> - =A0 =A0 =A0 }
+> -+ =A0 =A0 =A0may_have_traps =3D 0;
+> - }
+> -
+> - /* Lives far away from here, needed for forkchild */
+> -diff -urpN busybox-1.17.1/shell/ash_test/ash-signals/signal7.right busyb=
+ox-1.17.1-shell/shell/ash_test/ash-signals/signal7.right
+> ---- busybox-1.17.1/shell/ash_test/ash-signals/signal7.right =A0 =A01970-=
+01-01 01:00:00.000000000 +0100
+> -+++ busybox-1.17.1-shell/shell/ash_test/ash-signals/signal7.right =A0 =
+=A0 =A02010-07-25 13:09:32.000000000 +0200
+> -@@ -0,0 +1 @@
+> -+Bug detected: 0
+> -diff -urpN busybox-1.17.1/shell/ash_test/ash-signals/signal7.tests busyb=
+ox-1.17.1-shell/shell/ash_test/ash-signals/signal7.tests
+> ---- busybox-1.17.1/shell/ash_test/ash-signals/signal7.tests =A0 =A01970-=
+01-01 01:00:00.000000000 +0100
+> -+++ busybox-1.17.1-shell/shell/ash_test/ash-signals/signal7.tests =A0 =
+=A0 =A02010-07-25 13:09:32.000000000 +0200
+> -@@ -0,0 +1,18 @@
+> -+bug() {
+> -+ =A0 =A0 =A0trap : exit
+> -+ =A0 =A0 =A0# Bug was causing sh to be run in subshell,
+> -+ =A0 =A0 =A0# as if this line is replaced with (sh -c ...; exit $?) &
+> -+ =A0 =A0 =A0# here:
+> -+ =A0 =A0 =A0sh -c 'echo REAL_CHILD=3D$$' &
+> -+ =A0 =A0 =A0echo PARENTS_IDEA_OF_CHILD=3D$!
+> -+ =A0 =A0 =A0wait =A0# make sure bkgd shell completes
+> -+}
+> -+
+> -+bug | {
+> -+while read varval; do
+> -+ =A0 =A0 =A0eval $varval
+> -+done
+> -+test x"$REAL_CHILD" !=3D x"" \
+> -+&& test x"$REAL_CHILD" =3D x"$PARENTS_IDEA_OF_CHILD"
+> -+echo "Bug detected: $?"
+> -+}
+> -diff -urpN busybox-1.17.1/shell/hush.c busybox-1.17.1-shell/shell/hush.c
+> ---- busybox-1.17.1/shell/hush.c =A0 =A0 =A0 =A02010-07-25 00:12:43.00000=
+0000 +0200
+> -+++ busybox-1.17.1-shell/shell/hush.c =A02010-07-25 13:09:32.000000000 +=
+0200
+> -@@ -3901,8 +3901,6 @@ static void insert_bg_job(struct pipe *p
+> -
+> - =A0 =A0 =A0 if (G_interactive_fd)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 printf("[%d] %d %s\n", job->jobid, job->cmd=
+s[0].pid, job->cmdtext);
+> -- =A0 =A0 =A0/* Last command's pid goes to $! */
+> -- =A0 =A0 =A0G.last_bg_pid =3D job->cmds[job->num_cmds - 1].pid;
+> - =A0 =A0 =A0 G.last_jobid =3D job->jobid;
+> - }
+> -
+> -@@ -4825,6 +4823,8 @@ static int run_list(struct pipe *pi)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if (G.run_l=
+ist_level =3D=3D 1)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 insert_bg_job(pi);
+> - #endif
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* Last com=
+mand's pid goes to $! */
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0G.last_bg_p=
+id =3D pi->cmds[pi->num_cmds - 1].pid;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 G.last_exit=
+code =3D rcode =3D EXIT_SUCCESS;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 debug_print=
+f_exec(": cmd&: exitcode EXIT_SUCCESS\n");
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 } else {
+> -diff -urpN busybox-1.17.1/shell/hush_test/hush-trap/signal7.right busybo=
+x-1.17.1-shell/shell/hush_test/hush-trap/signal7.right
+> ---- busybox-1.17.1/shell/hush_test/hush-trap/signal7.right =A0 =A0 1970-=
+01-01 01:00:00.000000000 +0100
+> -+++ busybox-1.17.1-shell/shell/hush_test/hush-trap/signal7.right =A0 =A0=
+ =A0 2010-07-25 13:09:32.000000000 +0200
+> -@@ -0,0 +1 @@
+> -+Bug detected: 0
+> -diff -urpN busybox-1.17.1/shell/hush_test/hush-trap/signal7.tests busybo=
+x-1.17.1-shell/shell/hush_test/hush-trap/signal7.tests
+> ---- busybox-1.17.1/shell/hush_test/hush-trap/signal7.tests =A0 =A0 1970-=
+01-01 01:00:00.000000000 +0100
+> -+++ busybox-1.17.1-shell/shell/hush_test/hush-trap/signal7.tests =A0 =A0=
+ =A0 2010-07-25 13:09:32.000000000 +0200
+> -@@ -0,0 +1,18 @@
+> -+bug() {
+> -+ =A0 =A0 =A0trap : exit
+> -+ =A0 =A0 =A0# Bug was causing sh to be run in subshell,
+> -+ =A0 =A0 =A0# as if this line is replaced with (sh -c ...; exit $?) &
+> -+ =A0 =A0 =A0# here:
+> -+ =A0 =A0 =A0sh -c 'echo REAL_CHILD=3D$$' &
+> -+ =A0 =A0 =A0echo PARENTS_IDEA_OF_CHILD=3D$!
+> -+ =A0 =A0 =A0wait =A0# make sure bkgd shell completes
+> -+}
+> -+
+> -+bug | {
+> -+while read varval; do
+> -+ =A0 =A0 =A0eval $varval
+> -+done
+> -+test x"$REAL_CHILD" !=3D x"" \
+> -+&& test x"$REAL_CHILD" =3D x"$PARENTS_IDEA_OF_CHILD"
+> -+echo "Bug detected: $?"
+> -+}
+> -diff -urpN busybox-1.17.1/shell/shell_common.c busybox-1.17.1-shell/shel=
+l/shell_common.c
+> ---- busybox-1.17.1/shell/shell_common.c =A0 =A0 =A0 =A02010-07-06 04:25:=
+54.000000000 +0200
+> -+++ busybox-1.17.1-shell/shell/shell_common.c =A02010-07-27 08:41:43.000=
+000000 +0200
+> -@@ -428,9 +428,14 @@ shell_builtin_ulimit(char **argv)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 val <<=3D l->factor_shift;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 }
+> - //bb_error_msg("opt %c val_str:'%s' val:%lld", opt_char, val_str, (long=
+ long)val);
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0/* from man bash: "If neither -H nor -S
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 * is specified, both the soft and hard
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 * limits are set. */
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0if (!opts)
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0opts =3D OPT_hard + OPT_soft;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 if (opts & OPT_hard)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 limit.rlim_max =3D val;
+> -- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0if ((opts & OPT_soft) || opts =3D=3D 0)
+> -+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0if (opts & OPT_soft)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 limit.rlim_cur =3D val;
+> - //bb_error_msg("setrlimit(%d, %lld, %lld)", l->cmd, (long long)limit.rl=
+im_cur, (long long)limit.rlim_max);
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 if (setrlimit(l->cmd, &limit) < 0) {
+> diff --git a/recipes/busybox/busybox-1.17.1/defconfig b/recipes/busybox/b=
+usybox-1.17.1/defconfig
 > deleted file mode 100644
 > index 5a6870c..0000000
-> --- a/recipes/busybox/busybox-1.17.3/defconfig
+> --- a/recipes/busybox/busybox-1.17.1/defconfig
 > +++ /dev/null
 > @@ -1,873 +0,0 @@
 > -#
@@ -1150,11 +1541,11 @@ usybox-1.17.3/defconfig
 > -CONFIG_FEATURE_LOGREAD_REDUCED_LOCKING=3Dy
 > -CONFIG_KLOGD=3Dy
 > -CONFIG_LOGGER=3Dy
-> diff --git a/recipes/busybox/busybox-1.17.3/fdisk_nios2.patch b/recipes/b=
-usybox/busybox-1.17.3/fdisk_nios2.patch
+> diff --git a/recipes/busybox/busybox-1.17.1/fdisk_nios2.patch b/recipes/b=
+usybox/busybox-1.17.1/fdisk_nios2.patch
 > deleted file mode 100644
 > index 648e68e..0000000
-> --- a/recipes/busybox/busybox-1.17.3/fdisk_nios2.patch
+> --- a/recipes/busybox/busybox-1.17.1/fdisk_nios2.patch
 > +++ /dev/null
 > @@ -1,13 +0,0 @@
 > -Index: busybox-1.15.3/util-linux/fdisk_osf.c
@@ -1172,11 +1563,11 @@ usybox/busybox-1.17.3/fdisk_nios2.patch
 > - =A0|| defined(__s390__) || defined(__s390x__) \
 > - =A0|| defined(__sh__) || defined(__x86_64__) || defined(__avr32__)
 > - # define BSD_LABELSECTOR =A0 1
-> diff --git a/recipes/busybox/busybox-1.17.3/get_header_tar.patch b/recipe=
-s/busybox/busybox-1.17.3/get_header_tar.patch
+> diff --git a/recipes/busybox/busybox-1.17.1/get_header_tar.patch b/recipe=
+s/busybox/busybox-1.17.1/get_header_tar.patch
 > deleted file mode 100644
 > index 0121cd1..0000000
-> --- a/recipes/busybox/busybox-1.17.3/get_header_tar.patch
+> --- a/recipes/busybox/busybox-1.17.1/get_header_tar.patch
 > +++ /dev/null
 > @@ -1,11 +0,0 @@
 > ---- busybox-1.13.2/archival/libunarchive/get_header_tar.c.orig 2008-11-0=
@@ -1195,11 +1586,11 @@ up(tar.name);
 > - =A0 =A0 =A0 }
 > -
 > - =A0 =A0 =A0 /* Set bits 12-15 of the files mode */
-> diff --git a/recipes/busybox/busybox-1.17.3/udhcpc-fix-nfsroot.patch b/re=
-cipes/busybox/busybox-1.17.3/udhcpc-fix-nfsroot.patch
+> diff --git a/recipes/busybox/busybox-1.17.1/udhcpc-fix-nfsroot.patch b/re=
+cipes/busybox/busybox-1.17.1/udhcpc-fix-nfsroot.patch
 > deleted file mode 100644
 > index 3b975b6..0000000
-> --- a/recipes/busybox/busybox-1.17.3/udhcpc-fix-nfsroot.patch
+> --- a/recipes/busybox/busybox-1.17.1/udhcpc-fix-nfsroot.patch
 > +++ /dev/null
 > @@ -1,47 +0,0 @@
 > -Index: busybox-1.15.1/examples/udhcp/simple.script
@@ -1262,11 +1653,11 @@ efault gw $i dev $interface metric $((metric++)) 2>/dev/null
 > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 done
 > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 fi
 > -
-> diff --git a/recipes/busybox/busybox-1.17.3/udhcpscript.patch b/recipes/b=
-usybox/busybox-1.17.3/udhcpscript.patch
+> diff --git a/recipes/busybox/busybox-1.17.1/udhcpscript.patch b/recipes/b=
+usybox/busybox-1.17.1/udhcpscript.patch
 > deleted file mode 100644
 > index 2ffba95..0000000
-> --- a/recipes/busybox/busybox-1.17.3/udhcpscript.patch
+> --- a/recipes/busybox/busybox-1.17.1/udhcpscript.patch
 > +++ /dev/null
 > @@ -1,13 +0,0 @@
 > -Index: busybox-1.15.1/examples/udhcp/simple.script
@@ -1288,27 +1679,30 @@ usybox/busybox-1.17.3/udhcpscript.patch
 > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 :
 > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 done
 > -
-> diff --git a/recipes/busybox/busybox_1.17.3.bb b/recipes/busybox/busybox_=
-1.17.3.bb
+> diff --git a/recipes/busybox/busybox_1.17.1.bb b/recipes/busybox/busybox_=
+1.17.1.bb
 > deleted file mode 100644
-> index f1a0b74..0000000
-> --- a/recipes/busybox/busybox_1.17.3.bb
+> index 12976f2..0000000
+> --- a/recipes/busybox/busybox_1.17.1.bb
 > +++ /dev/null
-> @@ -1,13 +0,0 @@
+> @@ -1,16 +0,0 @@
 > -require busybox_1.1x.inc
-> -PR =3D "${INC_PR}.2"
+> -PR =3D "${INC_PR}.0"
+> -
+> -DEFAULT_PREFERENCE =3D "-1"
 > -
 > -SRC_URI +=3D "\
-> - =A0file://busybox-1.17.3-sort.patch =A0\
-> - =A0file://busybox-1.17.3-dnsd.patch \
-> - =A0file://busybox-1.17.3-unicode.patch \
-> - =A0file://busybox-1.17.3-iproute.patch \
-> - =A0file://busybox-1.17.3-ls.patch \
+> - =A0file://busybox-1.17.1-grep.patch \
+> - =A0file://busybox-1.17.1-make.patch \
+> - =A0file://busybox-1.17.1-mdev.patch \
+> - =A0file://busybox-1.17.1-mktemp.patch \
+> - =A0file://busybox-1.17.1-sed.patch \
+> - =A0file://busybox-1.17.1-shell.patch \
 > -"
 > -
-> -SRC_URI[md5sum] =3D "a2ce1a951571da8c6e0eaf75b1acef60"
-> -SRC_URI[sha256sum] =3D "de2f0274f61a068d75ad33861e0982e99c6b625681460ce4=
-20222371c3511ff2"
+> -SRC_URI[md5sum] =3D "c7fe7533b7fc4018b0b49a05ee0ee601"
+> -SRC_URI[sha256sum] =3D "bf9177810d7e151b0e662477c33b9afd062570e6298ec46f=
+2a8397a6a839d164"
 > --
 > 1.6.3.3
 >
