@@ -1,51 +1,51 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sylvain.pare@gmail.com>) id 1PLedJ-00070D-4R
+	(envelope-from <martin.jansa@gmail.com>) id 1PLekv-0000P9-Cc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 17:25:20 +0100
-Received: by qyk7 with SMTP id 7so2702724qyk.6
+	Thu, 25 Nov 2010 17:33:10 +0100
+Received: by fxm17 with SMTP id 17so47961fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 08:24:01 -0800 (PST)
+	Thu, 25 Nov 2010 08:31:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=TbMokPlyBUZq4xw9S1UV08b1sNFn1l3J0btjoE4PCuE=;
-	b=gnlAGzEWN1ZGgkFCN03n5kzIDjaquIUFlNNsKlm7Ugj/7Dnm4P42iqOx6fyY5jtO81
-	VZgFV5yWn+Wdh909s06qZJnKFJ1lLJ4A39X/MRGoQmeuVwAP5JifV9Ua4zEL1mXI/dEa
-	FY1Vv5j1CDvqI6XrRJZIE4NZD1akmCas5kmaA=
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=NRzCAbVJWsaCNEaoGZgtpl8TJCRPjBpVIPJN68Vrys0=;
+	b=tqFhIyBysS7UpPKMHOrmvdcwtESFP7r6igzaZabTPnYqXShFwiAiOIOPtpj7gkt56H
+	k5aLSYpm51h9MPzK/5h7c/fK7GxsvdVUDqYLdra7huSQGvhHMNY4Wvkkkp/PzWEgq/UW
+	NBmkHA69MHU+fsgPCDHewocVBZa0M7OsSp4es=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=Dv8ySZgSJ74noRNAcT3fWKp1uyUGWMZWuyhbFvyH90JrrM9RSwUz/ZW5CVd//MxjWc
-	DGBXhmfFQG/A49mW4PAZ3vMJPlZqYR4GsbTgWk0A8KdVWMD20bNtuQAWUVRn6Y88T138
-	0GLDpnQn+Hst0fwhp1EzlQCa1oUEB/2pPuQY0=
-Received: by 10.229.189.4 with SMTP id dc4mr822885qcb.106.1290702240546; Thu,
-	25 Nov 2010 08:24:00 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.229.185.81 with HTTP; Thu, 25 Nov 2010 08:23:40 -0800 (PST)
-In-Reply-To: <4CEE8B9A.8040603@eukrea.com>
-References: <AANLkTimpVmdKm5PcXijkpVm7uDUoNrFOupzddth1gRsM@mail.gmail.com>
-	<4CEE336E.9070306@eukrea.com>
-	<AANLkTiktUcmsYsQh-VFJtWTgpyzbQVmLgg7WuxEJkipW@mail.gmail.com>
-	<4CEE37DC.5040503@eukrea.com>
-	<AANLkTinr=RQ068ABqe8XVsrPpn+iyV9ecFT4n1VuiQTm@mail.gmail.com>
-	<4CEE4AB9.8050505@eukrea.com> <20101125123845.GO3274@jama>
-	<AANLkTi=tM7VYvnfq7+1RHy0mMtvgvxE+Ksc37t4D5vuJ@mail.gmail.com>
-	<4CEE8B9A.8040603@eukrea.com>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Thu, 25 Nov 2010 17:23:40 +0100
-Message-ID: <AANLkTimC8-wg+27EC520J5kSgineOueVBS9iJR1-AqB-@mail.gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=fHkJCACnp7Fk4F5FrZYZwhhOTbPnbySfwsEP0xUiaq1OSMEdRCFkCOsM1M8YbJ0VLL
+	pTRCOFJKEacTiCKIRmrpRCNPVyPVaQN6ZWoHiRG7vzDmY/1rn3BinYbp4PQjbWPwLYNb
+	3sEBm1GifHYw5V/eiyUfiFhfDeQAtvGky4Jg0=
+Received: by 10.223.100.9 with SMTP id w9mr982656fan.12.1290702713331;
+	Thu, 25 Nov 2010 08:31:53 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id z25sm242964fam.18.2010.11.25.08.31.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 25 Nov 2010 08:31:52 -0800 (PST)
+Date: Thu, 25 Nov 2010 17:31:39 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: sylvain.pare@gmail.com
+Message-ID: <20101125163139.GQ3274@jama>
+References: <4CEE24A8.2090007@atmel.com> <4CEE2ADA.7050004@eukrea.com>
+	<4CEE6A7B.4010603@atmel.com>
+MIME-Version: 1.0
+In-Reply-To: <4CEE6A7B.4010603@atmel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: qwt 5.2.1 failed to build here (om-gta02 , SHR, X11)
+Cc: Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Subject: Re: libXext-native fail to compile (x86_64)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,33 +59,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 16:25:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Nov 2010 16:33:10 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-yes I did thoses changes
-http://pastebin.com/5x9Gaxm7
-and it has build successfully .
+On Thu, Nov 25, 2010 at 02:54:03PM +0100, Nicolas Ferre wrote:
+> Le 25/11/2010 10:22, Eric Bénard :
+> > Hi Nicolas,
+> > 
+> > On 25/11/2010 09:56, Nicolas Ferre wrote:
+> >> While trying to build from scratch the latest .dev branch with:
+> >> - angstrom-2010.x distribution
+> >>
+> >> Build Configuration:
+> >> BB_VERSION        = "1.10.0"
+> >> METADATA_BRANCH   = "dev_for2010.12"
+> >> METADATA_REVISION = "a1bba89"
+> >> TARGET_ARCH       = "arm"
+> >> TARGET_OS         = "linux-gnueabi"
+> >> MACHINE           = "at91sam9m10g45ek"
+> >> DISTRO            = "angstrom"
+> >> DISTRO_VERSION    = "next"
+> >> TARGET_FPU        = "soft"
+> >>
+> >>
+> >> I have the following error with libxext:
+> >> NOTE: package libxext-native-1_1.2.0-r9.0: task do_compile: Failed
+> >>
+> > it seems to build fine for others also on x86_64 host :
+> > http://tinderbox.openembedded.net/packages/1077651/
+> > http://tinderbox.openembedded.net/packages/1087310/
+> 
+> Indeed, strange...
+> I tried to clean the recipe and then rebuild without success.
+> Someone has a hint where it can come from?
 
-2010/11/25 Eric B=E9nard <eric@eukrea.com>
+I've tried to reproduce on my 2 x86_64 hosts and both build it still
+fine (both with gcc-4.5, SHR and micro)
 
-> Hi Sylvain,
->
->
-> On 25/11/2010 16:40, Sylvain Par=E9 wrote:
->
->> I don't have acces to OE.
->> Eric can you do that please ?
->>
->>  can you please test the patch and say if that solves your problem ?
->
-> Thanks
-> Eric
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+But same problem was maybe reason here:
+http://bugs.openembedded.org/show_bug.cgi?id=5490
+but for him do_install failed.. weird
+
+Regards,
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
 
