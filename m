@@ -1,36 +1,29 @@
-Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
+Received: from ns1.gatteins.it ([193.58.239.94])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicolas.ferre@atmel.com>) id 1PLcIU-0005T3-V2
+	(envelope-from <matteo.facchinetti@sirius-es.it>) id 1PLctM-0001Xq-WA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 14:55:40 +0100
-Received: from meyreuil.atmel.fr (meyreuil [10.159.254.132])
-	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id oAPDpdXO017743;
-	Thu, 25 Nov 2010 05:51:40 -0800 (PST)
-Received: from [127.0.0.1] ([10.159.245.112])
-	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id oAPDs4h09105; 
-	Thu, 25 Nov 2010 14:54:04 +0100 (MET)
-Message-ID: <4CEE6A7B.4010603@atmel.com>
-Date: Thu, 25 Nov 2010 14:54:03 +0100
-From: Nicolas Ferre <nicolas.ferre@atmel.com>
-Organization: atmel
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+	Thu, 25 Nov 2010 15:33:45 +0100
+X-Virus-Scanned: amavisd-new at gattei.com
+Received: from [10.16.100.80] (89-96-49-192.ip10.fastwebnet.it [89.96.49.192])
+	by ns1.gatteins.it (Postfix) with ESMTPA id 6E139DEF24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Nov 2010 15:32:36 +0100 (MET)
+Message-ID: <4CEE737B.4050703@sirius-es.it>
+Date: Thu, 25 Nov 2010 15:32:27 +0100
+From: Matteo Facchinetti <matteo.facchinetti@sirius-es.it>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CEE24A8.2090007@atmel.com> <4CEE2ADA.7050004@eukrea.com>
-In-Reply-To: <4CEE2ADA.7050004@eukrea.com>
-X-MIME-Autoconverted: from 8bit to quoted-printable by sjogate2.atmel.com id
-	oAPDpdXO017743
-X-SA-Exim-Connect-IP: 204.2.163.5
-X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
+X-SA-Exim-Connect-IP: 193.58.239.94
+X-SA-Exim-Mail-From: matteo.facchinetti@sirius-es.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: libXext-native fail to compile (x86_64)
+Subject: sysvinit modify for usb_serial_console
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,43 +37,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 13:55:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Nov 2010 14:33:45 -0000
+X-Groupsio-MsgNum: 26578
+Content-Type: multipart/mixed; boundary="------------010201070500010106080200"
 
-Le 25/11/2010 10:22, Eric B=E9nard :
-> Hi Nicolas,
->=20
-> On 25/11/2010 09:56, Nicolas Ferre wrote:
->> While trying to build from scratch the latest .dev branch with:
->> - angstrom-2010.x distribution
->>
->> Build Configuration:
->> BB_VERSION        =3D "1.10.0"
->> METADATA_BRANCH   =3D "dev_for2010.12"
->> METADATA_REVISION =3D "a1bba89"
->> TARGET_ARCH       =3D "arm"
->> TARGET_OS         =3D "linux-gnueabi"
->> MACHINE           =3D "at91sam9m10g45ek"
->> DISTRO            =3D "angstrom"
->> DISTRO_VERSION    =3D "next"
->> TARGET_FPU        =3D "soft"
->>
->>
->> I have the following error with libxext:
->> NOTE: package libxext-native-1_1.2.0-r9.0: task do_compile: Failed
->>
-> it seems to build fine for others also on x86_64 host :
-> http://tinderbox.openembedded.net/packages/1077651/
-> http://tinderbox.openembedded.net/packages/1087310/
+--------------010201070500010106080200
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Indeed, strange...
-I tried to clean the recipe and then rebuild without success.
-Someone has a hint where it can come from?
+Hi,
 
-Bye,
---=20
-Nicolas Ferre
+There are many evaluationboard that use mini-usb port like as a serial 
+port + power supply.
+Using it as serial console have to force getty with no need for carrier 
+detect.
+For these boards have to use USB_SERIAL_CONSOLE variabile in config file 
+instead of SERIAL_CONSOLE and getty runs with -L parameter.
+By this way is simple to use usb serial port unless know in depth getty 
+manpage.
+
+Can you merge this patch in mainline?
+
+Regards
+Matteo Facchinetti
+Sirius Electronic Systems
+
+--------------010201070500010106080200
+Content-Type: text/x-diff;
+ name="0001-sysvinit_2.86.bb-add-possibility-to-use-USB-Serial-C.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0001-sysvinit_2.86.bb-add-possibility-to-use-USB-Serial-C.pa";
+ filename*1="tch"
+
+From 5b691f51009458385f24913e39acc698c523dbe5 Mon Sep 17 00:00:00 2001
+From: Matteo Facchinetti <engineering@sirius-es.it>
+Date: Thu, 25 Nov 2010 15:21:08 +0100
+Subject: sysvinit_2.86.bb: add possibility to use USB Serial Console with only rx/tx.
+
+There are many evaluationboard that use mini-usb port like as
+a serial port + power supply. Using it as serial console have
+to force getty with no need for carrier detect.
+---
+ recipes/sysvinit/sysvinit_2.86.bb |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvinit_2.86.bb
+index 6ab5290..c34cbc9 100644
+--- a/recipes/sysvinit/sysvinit_2.86.bb
++++ b/recipes/sysvinit/sysvinit_2.86.bb
+@@ -65,6 +65,11 @@ do_install () {
+ 	install -m 0644 ${WORKDIR}/inittab ${D}${sysconfdir}/inittab
+ 	if [ ! -z "${SERIAL_CONSOLE}" ]; then
+ 		echo "S:2345:respawn:${base_sbindir}/getty ${SERIAL_CONSOLE}" >> ${D}${sysconfdir}/inittab
++	else
++		 
++		if [ ! -z "${USB_SERIAL_CONSOLE}" ]; then
++			echo "S:2345:respawn:${base_sbindir}/getty -L ${USB_SERIAL_CONSOLE}" >> ${D}${sysconfdir}/inittab
++		fi
+ 	fi
+ 	if [ "${USE_VT}" = "1" ]; then
+ 		cat <<EOF >>${D}${sysconfdir}/inittab
+-- 
+1.7.0.4
 
 
-
+--------------010201070500010106080200--
