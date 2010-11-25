@@ -1,32 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PLfZc-0001ui-Df for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 18:25:33 +0100
-Received: from f053038108.adsl.alicedsl.de ([78.53.38.108]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PLfYR-0001QU-7j for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 17:24:19 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <andrea.adami@gmail.com>) id 1PLfZw-0001wv-Lx
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Nov 2010 18:25:53 +0100
+Received: by wwb31 with SMTP id 31so266417wwb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Nov 2010 09:24:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=bwiO9WKCJ5gJPrs3GPEx5zV1G35rw8gVerjlPkyf+7U=;
+	b=wtQqu4EgUQROSYa5SUYQViUN89i9pgE/+NQ4QzVrsnC65ea0liAu/0SgRAOv63EJ+o
+	eDd2GhaPdlzbEZ3NovAZIyuEC6enStSr0Gk9W25uybed2uS+1zoZTMOxS03zjda7tJQp
+	QrjTJWr+fWoV/o/CXo2J8dr9hsu1sX/ac/9Eo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=RfC8UIlNGogrfEnIE/QR+LrNFP4tMRx8igo4BXR9HhKkePwwvnagKhqOKUb54K3Ix2
+	FBAL6U7hiJZdSrRzJL7ehOnT1PsKou2Bv6dRxkxthb6SqQt67fJqFjbPwKmn4cOA6ZAV
+	/y+kGV2giAjHl3d+ZMwjgiMFRDgHPIIiaDPQM=
+MIME-Version: 1.0
+Received: by 10.216.173.194 with SMTP id v44mr965817wel.100.1290705876976;
+	Thu, 25 Nov 2010 09:24:36 -0800 (PST)
+Received: by 10.216.49.130 with HTTP; Thu, 25 Nov 2010 09:24:36 -0800 (PST)
+Date: Thu, 25 Nov 2010 18:24:36 +0100
+Message-ID: <AANLkTinbu9JpEw5fdX8pHcxraf4uTdCf7JKm9v1UekeS@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4CEBB74A.6000606@opendreambox.org>
-References: <4CEB3497.90607@gmail.com> <4CEBB582.3030106@opendreambox.org>
-	<4CEBB74A.6000606@opendreambox.org>
-Date: Thu, 25 Nov 2010 18:24:17 +0100
-Message-ID: <1290705857.3777.3.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: mixing `vname_append` with `+=` (was: [PATCH v2] strace_4.5.20.bb: Fix build on mips{, el} when DISTRO_FEATURES lacks "largefile".)
+Subject: bluez-dtl1-workaround not provided?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,70 +48,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 17:25:33 -0000
-X-Groupsio-MsgNum: 26594
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-gXSBFaRxpl2Ziem6DXc8"
+X-List-Received-Date: Thu, 25 Nov 2010 17:25:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-gXSBFaRxpl2Ziem6DXc8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-Am Dienstag, den 23.11.2010, 13:44 +0100 schrieb Andreas Oberritter:
-> On 11/23/2010 01:37 PM, Andreas Oberritter wrote:
-> > On 11/23/2010 04:27 AM, Graham Gower wrote:
-> >> diff --git a/recipes/strace/strace_4.5.20.bb b/recipes/strace/strace_4=
-.5.20.bb
-> >> index 873ce52..086a4d7 100644
-> >> --- a/recipes/strace/strace_4.5.20.bb
-> >> +++ b/recipes/strace/strace_4.5.20.bb
-> >> @@ -4,9 +4,13 @@ LICENSE =3D "GPL"
-> >>  PR =3D "r0"
-> >> =20
-> >>  DEFAULT_PREFERENCE =3D "-1"
-> >> +DEFAULT_PREFERENCE_mips =3D "1"
-> >> +DEFAULT_PREFERENCE_mipsel =3D "1"
-> >> =20
-> >>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
-> >>            "
-> >> +SRC_URI_append_mipsel +=3D " file://mips-nolargefile.patch "
-> >> +SRC_URI_append_mips +=3D " file://mips-nolargefile.patch "
-> >=20
-> > I think it would be better to apply this patch unconditionally, because
-> > it doesn't impose negative effects on other archs, and future patches
-> > which might only get compile-tested on other archs must make sure that
-> > mips-nolargefile.patch still applies.
->=20
-> Albeit, the correct syntax would be:
-> SRC_URI_append_mipsel =3D " file://mips-nolargefile.patch"
+build from scratch of console image for c7x0/armv5te leads to:
 
-Not necessarily. Quoting the user manual [1].
+...
+Configuring sysvinit.
+Collected errors:
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies
+for task-base-extended:
+ * <--->bluez-dtl1-workaround *.
+ * opkg_install_cmd: Cannot install package task-base-extended.
+ * resolve_conffiles: Existing conffile
+/oe/build/tmp/rootfs/console-image/etc/device_table is different from
+the conffile in the new package. The new conffile will be placed at
+/oe/build/tmp/rootfs/console-image/etc/device_table-opkg.
 
-        Note that the appended information is a variable itself, and
-        therefore it's possible to use +=3D or =3D+ to assign variables to
-        the _append information:
+A quick grep reveals:
 
-Although I do not know about the advantages or disadvantages.
+andrea@mizar /oe/openembedded $ grep -R bluez-dtl1-workaround .
+Binary file ./.git/index matches
+./classes/kernel.bbclass:DEPENDS_kernel-module-dtl1-cs = "bluez-dtl1-workaround"
+./classes/kernel.bbclass:RDEPENDS_kernel-module-dtl1-cs =
+"bluez-dtl1-workaround"
+./conf/machine/jornada7xx.conf:MACHINE_EXTRA_RDEPENDS =
+"kernel-modules bluez-dtl1-workaround"
+./recipes/tasks/task-base.bb:    ${@base_contains('COMBINED_FEATURES',
+'pcmcia', 'bluez-dtl1-workaround', '',d)} \
+./recipes/tasks/task-base.bb:# bluez-dtl1-workaround above is
+workaround for bitbake not handling DEPENDS on it in
+andrea@mizar /oe/openembedded $
 
 
-Thanks,
+So, first doubt is: why make this mandatory for everyone having pcmcia?
+Second, why is it failing now?
 
-Paul
+Any idea?
+
+Andrea
 
 
-[1] http://docs.openembedded.org/usermanual/usermanual.html#recipes_syntax
-
---=-gXSBFaRxpl2Ziem6DXc8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkzum7sACgkQPX1aK2wOHVgquwCfcBS8I/P+xUa7r8Pc9lo0dD25
-Lg8An2+f8RetCrD/iq6CmZyw3b1CAYv4
-=+Fli
------END PGP SIGNATURE-----
-
---=-gXSBFaRxpl2Ziem6DXc8--
