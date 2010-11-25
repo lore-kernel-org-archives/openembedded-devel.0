@@ -1,40 +1,43 @@
-Received: from anti.mobis.co.kr ([211.217.52.67] helo=sniper.mobis.co.kr)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <srinivasa.ragolu@gmobis.com>) id 1PLV5V-0006L4-Bq
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 07:13:46 +0100
-Received: (snipe 29320 invoked by uid 0); 25 Nov 2010 15:12:26 +0900
-Received: from srinivasa.ragolu@gmobis.com with Spamsniper 2.94.22 (Processed
-	in 0.012049 secs); 
-Received: from unknown (HELO msmobiweb.mobis.co.kr) (10.240.100.165)
-	by unknown with SMTP; 25 Nov 2010 15:12:26 +0900
-X-RCPTTO: openembedded-devel@lists.openembedded.org
-Received: from mkegmal01.global.mobis.co.kr ([10.240.200.82]) by
-	msmobiweb.mobis.co.kr with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 25 Nov 2010 15:12:26 +0900
-Received: from [10.126.162.122] ([10.126.162.122]) by
-	mkegmal01.global.mobis.co.kr with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 25 Nov 2010 15:12:26 +0900
-Message-ID: <4CEE4BB7.3060209@gmobis.com>
-Date: Thu, 25 Nov 2010 17:12:47 +0530
-From: Srinivasa Rao Ragolu <srinivasa.ragolu@gmobis.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.11) Gecko/20100720 Fedora/3.0.6-1.fc12 Thunderbird/3.0.6
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PLWoE-0001wN-Qb for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Nov 2010 09:04:03 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PLWn4-0008Au-5y for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Nov 2010 09:02:50 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Nov 2010 09:02:50 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Nov 2010 09:02:50 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 25 Nov 2010 06:12:26.0138 (UTC)
-	FILETIME=[BB420FA0:01CB8C67]
-X-SA-Exim-Connect-IP: 211.217.52.67
-X-SA-Exim-Mail-From: srinivasa.ragolu@gmobis.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 25 Nov 2010 09:02:37 +0100
+Message-ID: <icl56t$5k0$1@dough.gmane.org>
+References: <1290620636-21238-1-git-send-email-eric@eukrea.com>	<1290620636-21238-2-git-send-email-eric@eukrea.com>	<AANLkTi=vHic9JYNfFH0-giLnB0x929Czhj3C_BriAN9L@mail.gmail.com>
+	<4CED64C8.7060909@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <4CED64C8.7060909@eukrea.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,
-	DATE_IN_FUTURE_03_06, HTML_MESSAGE, SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: do_rootfs failing with gpgkey error
+Subject: Re: [PATCH 2/3] busybox: add 1.17.4 (latest stable version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,95 +51,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 06:13:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Nov 2010 08:04:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hi Friends,
-                  I have been working on a linux platform and mips 
-processor. I am using openembedded to prepare rootfs and SDK. Till now 
-for every package .ipk files are getting created. Now Its necessary to 
-me to move from .ipk to .rpm. so I modified the following stanzas in distro
+On 24-11-10 20:17, Eric Bénard wrote:
+> On 24/11/2010 19:44, Khem Raj wrote:
+>> On Wed, Nov 24, 2010 at 9:43 AM, Eric Bénard<eric@eukrea.com>  wrote:
+>>> this is the latest stable version (1.17.3 + its fixes).
+>>>
+>>> Signed-off-by: Eric Bénard<eric@eukrea.com>
+>>
+>> Please install it on release branch as well. Do we still need 1.17.3 ?
+>>
+> if SHR switch to 1.17.4 we shouldn't need it anymore.
+> (and if Ångström 2010 also switch to 1.17.4 we won't need 1.17.1).
+> 
+> Martin, Koen, are you ok with the patch below ?
 
-                  INHERIT += "package_rpm"
-                 PREFERRED_PKG_FORMAT ?= "rpm"
-# If we're using an .ipk based rootfs, we want to have opkg-nogpg 
-installed so postinst script can run
-IPKG_VARIANT = "opkg-nogpg" (/kept as it is for .rpm/)
+Yes, you can move angstrom 2010 to 1.18.x as well if you wish
 
-                      Now I could able to build all the packages as 
-.rpms successfully but in the final task do_rootfs failing with 
-following errors...
+regards,
 
-| Yum Version: 3.2.18
-| COMMAND: yum -c /home/srinivas/Downloads/build/openembedded/tmp/rootfs/avn-debug-image/etc/yum.conf --installroot /home/srinivas/Downloads/build/openembedded/tmp/rootfs/avn-debug-image -y install task-boot base-files base-passwd qt4-embedded dbus gstreamer gst-meta-base gst-meta-audio gst-meta-debug mtd-utils e2fsprogs upstart devicekit-disks audiomanagercore audiomanagerdistro gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-ffmpeg libncurses5 ncurses-base tmux ckermit python task-avn-debug wvdial usb-modeswitch usb-modeswitch-data libfontconfig1 tracker browser udev sysvinit sysvinit-pidof busybox
-| Installroot: /home/srinivas/Downloads/build/openembedded/tmp/rootfs/avn-debug-image
-| Ext Commands:
-|
-|    task-boot
-|    base-files
-|    base-passwd
-|    qt4-embedded
-|    dbus
-|    gstreamer
-|    gst-meta-base
-|    gst-meta-audio
-|    gst-meta-debug
-|    mtd-utils
-|    e2fsprogs
-|    upstart
-|    devicekit-disks
-|    audiomanagercore
-|    audiomanagerdistro
-|    gst-plugins-base
-|    gst-plugins-good
-|    gst-plugins-bad
-|    gst-plugins-ugly
-|    gst-ffmpeg
-|    libncurses5
-|    ncurses-base
-|    tmux
-|    ckermit
-|    python
-|    task-avn-debug
-|    wvdial
-|    usb-modeswitch
-|    usb-modeswitch-data
-|    libfontconfig1
-|    tracker
-|    browser
-|    udev
-|    sysvinit
-|    sysvinit-pidof
-|    busybox
-|
-| You have enabled checking of packages via GPG keys. This is a good thing.
-| However, you do not have any GPG public keys installed. You need to download
-| the keys for packages you wish to install and install them.
-| You can do that by running the command:
-|     rpm --import public.gpg.key
-|
-|
-| Alternatively you can specify the url to the key you would like to use
-| for a repository in the 'gpgkey' option in a repository section and yum
-| will install it for you.
-|
-| For more information contact your distribution or package provider.
-|
-NOTE: Task failed: /home/srinivas/Downloads/build/openembedded/tmp/work/avngen3-avn-linux/avn-debug-image-1.0-r0/temp/log.do_rootfs.2178
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/srinivas/Downloads/build/openembedded/recipes/images/avn-debug-image.bb do_rootfs failed
-ERROR: Task 9 (/home/srinivas/Downloads/build/openembedded/recipes/images/avn-debug-image.bb, do_rootfs) failed
-NOTE: Tasks Summary: Attempted 2492 tasks of which 2480 didn't need to be rerun and 1 failed.
-ERROR: '/home/srinivas/Downloads/build/openembedded/recipes/images/avn-debug-image.bb' failed
+Koen
 
-                              *  I have tried so many things to resolve this issue. Could you please suggest me, How to disable gpg keys and build rootfs successfully.....
+> 
+> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc
+> b/conf/distro/include/angstrom-2010-preferred-v
+> index 12ee900..bda21d9 100644
+> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
+> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> @@ -13,7 +13,7 @@ PREFERRED_VERSION_autoconf = "2.65"
+>  PREFERRED_VERSION_autoconf-native = "2.65"
+>  PREFERRED_VERSION_automake = "1.11.1"
+>  PREFERRED_VERSION_automake-native = "1.11.1"
+> -PREFERRED_VERSION_busybox      = "1.17.1"
+> +PREFERRED_VERSION_busybox      = "1.17.4"
+>  PREFERRED_VERSION_cairo                = "1.10.0"
+>  PREFERRED_VERSION_dbus                 = "1.2.24"
+>  PREFERRED_VERSION_dropbear      = "0.51"
+> diff --git a/conf/distro/include/preferred-shr-versions.inc
+> b/conf/distro/include/preferred-shr-versions.inc
+> index 22e1c82..da11164 100644
+> --- a/conf/distro/include/preferred-shr-versions.inc
+> +++ b/conf/distro/include/preferred-shr-versions.inc
+> @@ -13,7 +13,7 @@ PREFERRED_VERSION_emacs-x11 = "23.1"
+>  PREFERRED_VERSION_ncurses = "5.7"
+>  PREFERRED_VERSION_ncurses-native = "5.7"
+>  PREFERRED_VERSION_python-pycairo = "1.8.0"
+> -PREFERRED_VERSION_busybox = "1.17.3"
+> +PREFERRED_VERSION_busybox = "1.17.4"
+> 
+>  # we need new headers for libc, now OLDEST_KERNEL_linux-gnueabi = "2.6.24"
+>  # and 2.6.31 for fsodeviced
+> 
+> Eric
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-*
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-Thanks&  Regards
-Srinivasa Rao Ragolu
+iD8DBQFM7hgdMkyGM64RGpERAqSPAJ9Ol83LmCeidaDHmP0K7ogWfZnMXACeMzdP
+nTJj2PEoVVDGi19pt9t5GYU=
+=snIS
+-----END PGP SIGNATURE-----
+
 
 
