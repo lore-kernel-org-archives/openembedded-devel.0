@@ -1,40 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PLWoE-0001wN-Qb for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 09:04:03 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PLWn4-0008Au-5y for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 09:02:50 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 09:02:50 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 09:02:50 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PLXAT-00039W-CN
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Nov 2010 09:27:01 +0100
+Received: (qmail 4146 invoked by uid 503); 25 Nov 2010 08:30:11 -0000
+Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 25 Nov 2010 08:30:11 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 25 Nov 2010 10:25:47 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 25 Nov 2010 10:25:47 +0200
+Message-ID: <4CEE1D8A.10404@eukrea.com>
+Date: Thu, 25 Nov 2010 09:25:46 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 25 Nov 2010 09:02:37 +0100
-Message-ID: <icl56t$5k0$1@dough.gmane.org>
-References: <1290620636-21238-1-git-send-email-eric@eukrea.com>	<1290620636-21238-2-git-send-email-eric@eukrea.com>	<AANLkTi=vHic9JYNfFH0-giLnB0x929Czhj3C_BriAN9L@mail.gmail.com>
-	<4CED64C8.7060909@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <4CED64C8.7060909@eukrea.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1290620636-21238-1-git-send-email-eric@eukrea.com>	<1290620636-21238-2-git-send-email-eric@eukrea.com>	<AANLkTi=vHic9JYNfFH0-giLnB0x929Czhj3C_BriAN9L@mail.gmail.com>	<4CED64C8.7060909@eukrea.com>
+	<icl56t$5k0$1@dough.gmane.org>
+In-Reply-To: <icl56t$5k0$1@dough.gmane.org>
+X-Ovh-Tracer-Id: 2128795249328958793
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.27.225
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 2/3] busybox: add 1.17.4 (latest stable version)
@@ -51,77 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 08:04:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 25 Nov 2010 08:27:01 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 24-11-10 20:17, Eric Bénard wrote:
-> On 24/11/2010 19:44, Khem Raj wrote:
->> On Wed, Nov 24, 2010 at 9:43 AM, Eric Bénard<eric@eukrea.com>  wrote:
->>> this is the latest stable version (1.17.3 + its fixes).
+On 25/11/2010 09:02, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 24-11-10 20:17, Eric Bénard wrote:
+>> On 24/11/2010 19:44, Khem Raj wrote:
+>>> On Wed, Nov 24, 2010 at 9:43 AM, Eric Bénard<eric@eukrea.com>   wrote:
+>>>> this is the latest stable version (1.17.3 + its fixes).
+>>>>
+>>>> Signed-off-by: Eric Bénard<eric@eukrea.com>
 >>>
->>> Signed-off-by: Eric Bénard<eric@eukrea.com>
+>>> Please install it on release branch as well. Do we still need 1.17.3 ?
+>>>
+>> if SHR switch to 1.17.4 we shouldn't need it anymore.
+>> (and if Ångström 2010 also switch to 1.17.4 we won't need 1.17.1).
 >>
->> Please install it on release branch as well. Do we still need 1.17.3 ?
->>
-> if SHR switch to 1.17.4 we shouldn't need it anymore.
-> (and if Ångström 2010 also switch to 1.17.4 we won't need 1.17.1).
-> 
-> Martin, Koen, are you ok with the patch below ?
+>> Martin, Koen, are you ok with the patch below ?
+>
+> Yes, you can move angstrom 2010 to 1.18.x as well if you wish
+>
+OK, for the moment I switch to 1.17.4 and will wait 1.18.1 which should be the 
+next stable version as 1.18.0 is currently considered as unstable.
 
-Yes, you can move angstrom 2010 to 1.18.x as well if you wish
-
-regards,
-
-Koen
-
-> 
-> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc
-> b/conf/distro/include/angstrom-2010-preferred-v
-> index 12ee900..bda21d9 100644
-> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
-> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> @@ -13,7 +13,7 @@ PREFERRED_VERSION_autoconf = "2.65"
->  PREFERRED_VERSION_autoconf-native = "2.65"
->  PREFERRED_VERSION_automake = "1.11.1"
->  PREFERRED_VERSION_automake-native = "1.11.1"
-> -PREFERRED_VERSION_busybox      = "1.17.1"
-> +PREFERRED_VERSION_busybox      = "1.17.4"
->  PREFERRED_VERSION_cairo                = "1.10.0"
->  PREFERRED_VERSION_dbus                 = "1.2.24"
->  PREFERRED_VERSION_dropbear      = "0.51"
-> diff --git a/conf/distro/include/preferred-shr-versions.inc
-> b/conf/distro/include/preferred-shr-versions.inc
-> index 22e1c82..da11164 100644
-> --- a/conf/distro/include/preferred-shr-versions.inc
-> +++ b/conf/distro/include/preferred-shr-versions.inc
-> @@ -13,7 +13,7 @@ PREFERRED_VERSION_emacs-x11 = "23.1"
->  PREFERRED_VERSION_ncurses = "5.7"
->  PREFERRED_VERSION_ncurses-native = "5.7"
->  PREFERRED_VERSION_python-pycairo = "1.8.0"
-> -PREFERRED_VERSION_busybox = "1.17.3"
-> +PREFERRED_VERSION_busybox = "1.17.4"
-> 
->  # we need new headers for libc, now OLDEST_KERNEL_linux-gnueabi = "2.6.24"
->  # and 2.6.31 for fsodeviced
-> 
-> Eric
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM7hgdMkyGM64RGpERAqSPAJ9Ol83LmCeidaDHmP0K7ogWfZnMXACeMzdP
-nTJj2PEoVVDGi19pt9t5GYU=
-=snIS
------END PGP SIGNATURE-----
-
+Eric
 
 
