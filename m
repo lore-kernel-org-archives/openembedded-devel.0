@@ -1,39 +1,40 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PLXAT-00039W-CN
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLXZj-0005yC-RN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 09:27:01 +0100
-Received: (qmail 4146 invoked by uid 503); 25 Nov 2010 08:30:11 -0000
-Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 25 Nov 2010 08:30:11 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 25 Nov 2010 10:25:47 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 25 Nov 2010 10:25:47 +0200
-Message-ID: <4CEE1D8A.10404@eukrea.com>
-Date: Thu, 25 Nov 2010 09:25:46 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.6
+	Thu, 25 Nov 2010 09:53:08 +0100
+Received: by iwn7 with SMTP id 7so824468iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Nov 2010 00:51:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=sQJiy4I58P2qqxgbmhTl23wJe8gqwnGHgfwqybSag6Y=;
+	b=Z1rmKrtNedyEvQA6/yJ+1vUnGFymS6PvykdA2tv4CZB7tTLl/XF3nWyc/fEkOVJWoB
+	sxRzu4yNi/GQWxGwkB9yjixmS46dvLlQo0u+Owrz8KKTqfZ8H8aMpM6Q3WpE7YhRnfDi
+	d2CPzKGLXkKJPTsMDA3SPwreMcorWJklqHL+I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=ks1eRl0FZnldMGufSqH15nPwP021ThlPKH5jGpfnFXxi/zoK8N32000BAYVG/et0U/
+	L3G0Z0FsvwMuF01ilB7N7kPTsYVsDOsqHm6ipsFZUR4kWDsVx677TFCHcA9ZZGGX87HM
+	Xnc/q6j81K9mpMVrIrbQfe/jlmXLicFT/l48A=
 MIME-Version: 1.0
+Received: by 10.231.37.197 with SMTP id y5mr336103ibd.151.1290675114085; Thu,
+	25 Nov 2010 00:51:54 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Thu, 25 Nov 2010 00:51:54 -0800 (PST)
+Date: Thu, 25 Nov 2010 09:51:54 +0100
+Message-ID: <AANLkTinx62xyZaZyfa_m2M7MwJX8qQO9C3Zi92WnV6nf@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1290620636-21238-1-git-send-email-eric@eukrea.com>	<1290620636-21238-2-git-send-email-eric@eukrea.com>	<AANLkTi=vHic9JYNfFH0-giLnB0x929Czhj3C_BriAN9L@mail.gmail.com>	<4CED64C8.7060909@eukrea.com>
-	<icl56t$5k0$1@dough.gmane.org>
-In-Reply-To: <icl56t$5k0$1@dough.gmane.org>
-X-Ovh-Tracer-Id: 2128795249328958793
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.27.225
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] busybox: add 1.17.4 (latest stable version)
+Subject: [release-2010.12] minimal: multiple providers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 08:27:01 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 25 Nov 2010 08:53:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+Dear all,
 
-On 25/11/2010 09:02, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 24-11-10 20:17, Eric Bénard wrote:
->> On 24/11/2010 19:44, Khem Raj wrote:
->>> On Wed, Nov 24, 2010 at 9:43 AM, Eric Bénard<eric@eukrea.com>   wrote:
->>>> this is the latest stable version (1.17.3 + its fixes).
->>>>
->>>> Signed-off-by: Eric Bénard<eric@eukrea.com>
->>>
->>> Please install it on release branch as well. Do we still need 1.17.3 ?
->>>
->> if SHR switch to 1.17.4 we shouldn't need it anymore.
->> (and if Ångström 2010 also switch to 1.17.4 we won't need 1.17.1).
->>
->> Martin, Koen, are you ok with the patch below ?
->
-> Yes, you can move angstrom 2010 to 1.18.x as well if you wish
->
-OK, for the moment I switch to 1.17.4 and will wait 1.18.1 which should be the 
-next stable version as 1.18.0 is currently considered as unstable.
+I'm still getting multiple providers messages on the release branch:
 
-Eric
+Build Configuration:
+BB_VERSION        = "1.10.0"
+METADATA_BRANCH   = "release-2010.12"
+METADATA_REVISION = "ee4389e"
+TARGET_ARCH       = "powerpc"
+TARGET_OS         = "linux-gnuspe"
+MACHINE           = "calamari"
+DISTRO            = "minimal"
+DISTRO_VERSION    = "dev-snapshot-20101124"
+
+NOTE: oestats: build 106072
+NOTE: Resolving any missing task queue dependencies
+NOTE: preferred version git of u-boot not available (for item u-boot)
+ERROR: Multiple .bb files are due to be built which each provide
+bluez-libs (/home/hudson/jobs/OE_test/workspace/openembedded/recipes/bluez/bluez4_4.42.bb
+/home/hudson/jobs/OE_test/workspace/openembedded/recipes/bluez/bluez-libs_3.36.bb).
+ This usually means one provides something the other doesn't and should.
+NOTE: Preparing runqueue
+
+For james-image I also get:
+NOTE: multiple providers are available for libmodule-build-perl-native
+(libmodule-build-perl-native, perl-native);
+NOTE: consider defining PREFERRED_PROVIDER_libmodule-build-perl-native
+This is because I use perl 5.10 which has this provided,
+libmodule-builld-perl is still there for 5.8
+
+Btw the multiple providers for depmod seems gone.
+
+Frans
 
 
