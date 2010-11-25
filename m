@@ -1,39 +1,32 @@
-Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicolas.ferre@atmel.com>) id 1PLfYC-0001m0-IV
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 18:24:05 +0100
-Received: from meyreuil.atmel.fr (meyreuil [10.159.254.132])
-	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id oAPHKGZO008304;
-	Thu, 25 Nov 2010 09:20:17 -0800 (PST)
-Received: from [127.0.0.1] ([10.159.245.112])
-	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id oAPHMfh18441; 
-	Thu, 25 Nov 2010 18:22:41 +0100 (MET)
-Message-ID: <4CEE9B60.1030309@atmel.com>
-Date: Thu, 25 Nov 2010 18:22:40 +0100
-From: Nicolas Ferre <nicolas.ferre@atmel.com>
-Organization: atmel
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PLfZc-0001ui-Df for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Nov 2010 18:25:33 +0100
+Received: from f053038108.adsl.alicedsl.de ([78.53.38.108]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PLfYR-0001QU-7j for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Nov 2010 17:24:19 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <4CEE24A8.2090007@atmel.com>
-	<4CEE2ADA.7050004@eukrea.com>	<4CEE6A7B.4010603@atmel.com>
-	<20101125163139.GQ3274@jama>
-In-Reply-To: <20101125163139.GQ3274@jama>
-X-MIME-Autoconverted: from 8bit to quoted-printable by sjogate2.atmel.com id
-	oAPHKGZO008304
-X-SA-Exim-Connect-IP: 204.2.163.5
-X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
+In-Reply-To: <4CEBB74A.6000606@opendreambox.org>
+References: <4CEB3497.90607@gmail.com> <4CEBB582.3030106@opendreambox.org>
+	<4CEBB74A.6000606@opendreambox.org>
+Date: Thu, 25 Nov 2010 18:24:17 +0100
+Message-ID: <1290705857.3777.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: libXext-native fail to compile (x86_64)
+Subject: mixing `vname_append` with `+=` (was: [PATCH v2] strace_4.5.20.bb: Fix build on mips{, el} when DISTRO_FEATURES lacks "largefile".)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,80 +40,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 17:24:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 25 Nov 2010 17:25:33 -0000
+X-Groupsio-MsgNum: 26594
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-gXSBFaRxpl2Ziem6DXc8"
+
+--=-gXSBFaRxpl2Ziem6DXc8
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Le 25/11/2010 17:31, Martin Jansa :
-> On Thu, Nov 25, 2010 at 02:54:03PM +0100, Nicolas Ferre wrote:
->> Le 25/11/2010 10:22, Eric B=E9nard :
->>> Hi Nicolas,
->>>
->>> On 25/11/2010 09:56, Nicolas Ferre wrote:
->>>> While trying to build from scratch the latest .dev branch with:
->>>> - angstrom-2010.x distribution
->>>>
->>>> Build Configuration:
->>>> BB_VERSION        =3D "1.10.0"
->>>> METADATA_BRANCH   =3D "dev_for2010.12"
->>>> METADATA_REVISION =3D "a1bba89"
->>>> TARGET_ARCH       =3D "arm"
->>>> TARGET_OS         =3D "linux-gnueabi"
->>>> MACHINE           =3D "at91sam9m10g45ek"
->>>> DISTRO            =3D "angstrom"
->>>> DISTRO_VERSION    =3D "next"
->>>> TARGET_FPU        =3D "soft"
->>>>
->>>>
->>>> I have the following error with libxext:
->>>> NOTE: package libxext-native-1_1.2.0-r9.0: task do_compile: Failed
->>>>
->>> it seems to build fine for others also on x86_64 host :
->>> http://tinderbox.openembedded.net/packages/1077651/
->>> http://tinderbox.openembedded.net/packages/1087310/
->>
->> Indeed, strange...
->> I tried to clean the recipe and then rebuild without success.
->> Someone has a hint where it can come from?
+Am Dienstag, den 23.11.2010, 13:44 +0100 schrieb Andreas Oberritter:
+> On 11/23/2010 01:37 PM, Andreas Oberritter wrote:
+> > On 11/23/2010 04:27 AM, Graham Gower wrote:
+> >> diff --git a/recipes/strace/strace_4.5.20.bb b/recipes/strace/strace_4=
+.5.20.bb
+> >> index 873ce52..086a4d7 100644
+> >> --- a/recipes/strace/strace_4.5.20.bb
+> >> +++ b/recipes/strace/strace_4.5.20.bb
+> >> @@ -4,9 +4,13 @@ LICENSE =3D "GPL"
+> >>  PR =3D "r0"
+> >> =20
+> >>  DEFAULT_PREFERENCE =3D "-1"
+> >> +DEFAULT_PREFERENCE_mips =3D "1"
+> >> +DEFAULT_PREFERENCE_mipsel =3D "1"
+> >> =20
+> >>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
+> >>            "
+> >> +SRC_URI_append_mipsel +=3D " file://mips-nolargefile.patch "
+> >> +SRC_URI_append_mips +=3D " file://mips-nolargefile.patch "
+> >=20
+> > I think it would be better to apply this patch unconditionally, because
+> > it doesn't impose negative effects on other archs, and future patches
+> > which might only get compile-tested on other archs must make sure that
+> > mips-nolargefile.patch still applies.
 >=20
-> I've tried to reproduce on my 2 x86_64 hosts and both build it still
-> fine (both with gcc-4.5, SHR and micro)
->=20
-> But same problem was maybe reason here:
-> http://bugs.openembedded.org/show_bug.cgi?id=3D5490
-> but for him do_install failed.. weird
+> Albeit, the correct syntax would be:
+> SRC_URI_append_mipsel =3D " file://mips-nolargefile.patch"
 
-Well, not my case... I have my tmp and sources while running the building=
- process.
+Not necessarily. Quoting the user manual [1].
 
-It may be related to my native "ld" that is too old?
+        Note that the appended information is a variable itself, and
+        therefore it's possible to use +=3D or =3D+ to assign variables to
+        the _append information:
 
-For the record, here are my native ld and gcc revisions (comming from "Re=
-d Hat Enterprise Linux Client release 5.2 (Tikanga)"):
-
-$ /usr/bin/ld -V
-GNU ld version 2.17.50.0.6-6.el5 20061020
-  Supported emulations:
-   elf_x86_64
-   elf_i386
-   i386linux
-
-$ gcc -v
-Using built-in specs.
-Target: x86_64-redhat-linux
-Configured with: ../configure --prefix=3D/usr --mandir=3D/usr/share/man -=
--infodir=3D/usr/share/info --enable-shared --enable-threads=3Dposix --ena=
-ble-checking=3Drelease --with-system-zlib --enable-__cxa_atexit --disable=
--libunwind-exceptions --enable-libgcj-multifile --enable-languages=3Dc,c+=
-+,objc,obj-c++,java,fortran,ada --enable-java-awt=3Dgtk --disable-dssi --=
-enable-plugin --with-java-home=3D/usr/lib/jvm/java-1.4.2-gcj-1.4.2.0/jre =
---with-cpu=3Dgeneric --host=3Dx86_64-redhat-linux
-Thread model: posix
-gcc version 4.1.2 20071124 (Red Hat 4.1.2-42)
-
-Bye,
---=20
-Nicolas Ferre
+Although I do not know about the advantages or disadvantages.
 
 
+Thanks,
 
+Paul
+
+
+[1] http://docs.openembedded.org/usermanual/usermanual.html#recipes_syntax
+
+--=-gXSBFaRxpl2Ziem6DXc8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkzum7sACgkQPX1aK2wOHVgquwCfcBS8I/P+xUa7r8Pc9lo0dD25
+Lg8An2+f8RetCrD/iq6CmZyw3b1CAYv4
+=+Fli
+-----END PGP SIGNATURE-----
+
+--=-gXSBFaRxpl2Ziem6DXc8--
