@@ -1,44 +1,51 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLilf-0003EI-B4
+	(envelope-from <raj.khem@gmail.com>) id 1PLkRk-0000Gu-St
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 21:50:11 +0100
-Received: by iwn8 with SMTP id 8so118964iwn.6
+	Thu, 25 Nov 2010 23:37:46 +0100
+Received: by pxi17 with SMTP id 17so256395pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 12:48:57 -0800 (PST)
+	Thu, 25 Nov 2010 14:36:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=nDZNHtJV7Y7zMmrJOPtEytZ3EhblHCfKqlamYGMZvAo=;
-	b=OuDC2MU7iWRaUBsNssUErnzrnEx7JZeUXvDX1Mqk6jOyjKneykCzEwa2EQ+bdgAdyx
-	DdFfJ3z77DpgyI6yeXlWgTQukbMKyUonCIm8ERRe0+EzD8f/XWMeHUw7tZXaZYjYWt8M
-	xKOeTONcZ+vPOT7vBnNlncsfABBhs+bzDRRT0=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=t3MXbQZEzcCLNo51pWCs9QrnVwaOZAdEOkgkbzkU4o4=;
+	b=Kw8R/j0d+3fRxzdDftoCgf7RyHiAtlCLmtdur1xhzYIHmCTHsIkOcaVLGrGBsiFdW5
+	DsZBUE6Fxg8Ybe05FQv8wu1DFxvtkCa7mHDK1Vj7fO4VZ94v9xNq5W7ZB39rBLkzfX+P
+	C0JuJBl9ZpgkMf/RTdVEWv+FzIGn3G7vitFiI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ErIEFnkLlvdPCOtXUID9fYLVp8PaSmjE+t7wo5KzfxyNP5/IXxI/ZnuuF4KxnOWJJ+
-	/dNYyrmQnB8Kml/LiK3iXEidTgJvf8m6Rcnv6NjJ51RWdpKMUc2gMveQLm1vFfvgaNJ/
-	FTnpVWWuW8nmUbcZVmAXXlUrkFKtdazQ4r//I=
-MIME-Version: 1.0
-Received: by 10.231.39.137 with SMTP id g9mr705090ibe.101.1290718137131; Thu,
-	25 Nov 2010 12:48:57 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Thu, 25 Nov 2010 12:48:57 -0800 (PST)
-In-Reply-To: <AANLkTinbu9JpEw5fdX8pHcxraf4uTdCf7JKm9v1UekeS@mail.gmail.com>
-References: <AANLkTinbu9JpEw5fdX8pHcxraf4uTdCf7JKm9v1UekeS@mail.gmail.com>
-Date: Thu, 25 Nov 2010 21:48:57 +0100
-Message-ID: <AANLkTinBZooH6=-qHCMsV-E=UbDU2uXSOvuHe+rNhN09@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=vZ8zqsTSfxFLirOWY1xclVcaWUUeUayuwpSyQO9y/X34C2qi6wBmE4nZDchahVHLoo
+	RtN4W1DUb2TNAyyK5dxgEI+OAQ2QpRyIsBODpNbFqN/dmUtjiB36m37yAMqmYUgmwJBD
+	060QZR5IX1luLJdkGVhgZy/YkUKfJh1ibzjTI=
+Received: by 10.142.97.16 with SMTP id u16mr1500323wfb.185.1290724588403;
+	Thu, 25 Nov 2010 14:36:28 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id x18sm1571125wfa.11.2010.11.25.14.36.26
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 25 Nov 2010 14:36:27 -0800 (PST)
+Date: Thu, 25 Nov 2010 14:35:30 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20101125223530.GA26866@gmail.com>
+References: <AANLkTi=tM7VYvnfq7+1RHy0mMtvgvxE+Ksc37t4D5vuJ@mail.gmail.com>
+	<1290700469-3396-1-git-send-email-eric@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <1290700469-3396-1-git-send-email-eric@eukrea.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bluez-dtl1-workaround not provided?
+Subject: Re: [PATCH] qt4x11: set QT_LIBINFIX and QT_DIR_NAME
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,58 +59,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 20:50:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Nov 2010 22:37:46 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-2010/11/25 Andrea Adami <andrea.adami@gmail.com>:
-> Hello,
->
-> build from scratch of console image for c7x0/armv5te leads to:
->
-> ...
-> Configuring sysvinit.
-> Collected errors:
-> =A0* satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for task-base-extended:
-> =A0* <--->bluez-dtl1-workaround *.
-> =A0* opkg_install_cmd: Cannot install package task-base-extended.
-> =A0* resolve_conffiles: Existing conffile
-> /oe/build/tmp/rootfs/console-image/etc/device_table is different from
-> the conffile in the new package. The new conffile will be placed at
-> /oe/build/tmp/rootfs/console-image/etc/device_table-opkg.
->
-> A quick grep reveals:
->
-> andrea@mizar /oe/openembedded $ grep -R bluez-dtl1-workaround .
-> Binary file ./.git/index matches
-> ./classes/kernel.bbclass:DEPENDS_kernel-module-dtl1-cs =3D "bluez-dtl1-wo=
-rkaround"
-> ./classes/kernel.bbclass:RDEPENDS_kernel-module-dtl1-cs =3D
-> "bluez-dtl1-workaround"
-> ./conf/machine/jornada7xx.conf:MACHINE_EXTRA_RDEPENDS =3D
-> "kernel-modules bluez-dtl1-workaround"
-> ./recipes/tasks/task-base.bb: =A0 =A0${@base_contains('COMBINED_FEATURES'=
-,
-> 'pcmcia', 'bluez-dtl1-workaround', '',d)} \
-> ./recipes/tasks/task-base.bb:# bluez-dtl1-workaround above is
-> workaround for bitbake not handling DEPENDS on it in
-> andrea@mizar /oe/openembedded $
->
->
-> So, first doubt is: why make this mandatory for everyone having pcmcia?
-> Second, why is it failing now?
->
-> Any idea?
->
-> Andrea
->
+On (25/11/10 16:54), Eric Bénard wrote:
+> this will fix the following issue with qwt 5.2.1 where obj dir is:
+> work/armv4t-oe-linux-gnueabi/qwt-5.2.1-r0/qwt-5.2.1/src/obj${QT_LIBINFIX}/
+> instead of :
+> work/armv4t-oe-linux-gnueabi/qwt-5.2.1-r0/qwt-5.2.1/src/obj/
+> 
+> From: Martin Jansa <Martin.Jansa@gmail.com>
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
 
-And the strange thing is if you build the package
-bluez-dtl1-workaround manually first and after that build the image it
-works.
-Guess something is wrong with depends
+please install
 
-Frans
+Acked-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  classes/qt4x11.bbclass |    3 +++
+>  1 files changed, 3 insertions(+), 0 deletions(-)
+> 
+> diff --git a/classes/qt4x11.bbclass b/classes/qt4x11.bbclass
+> index 2d56b7e..abb1d9d 100644
+> --- a/classes/qt4x11.bbclass
+> +++ b/classes/qt4x11.bbclass
+> @@ -2,5 +2,8 @@ DEPENDS_prepend = "${@["qt4-x11-free ", ""][(bb.data.getVar('PN', d, 1)[:12] ==
+>  
+>  inherit qmake2
+>  
+> +QT_DIR_NAME = "qt4"
+> +QT_LIBINFIX = ""
+> +
+>  # Qt4 uses atomic instructions not supported in thumb mode
+>  ARM_INSTRUCTION_SET = "arm"
+> -- 
+> 1.6.3.3
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
