@@ -1,54 +1,46 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PLb7U-0003Sc-U5
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLbBU-0003ci-AL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Nov 2010 13:40:13 +0100
-Received: by fxm8 with SMTP id 8so94155fxm.6
+	Thu, 25 Nov 2010 13:44:21 +0100
+Received: by iwn7 with SMTP id 7so1044193iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 04:38:58 -0800 (PST)
+	Thu, 25 Nov 2010 04:43:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=AVYov4WH5/uUQCicsF/d/GOhkXY+vl1S6adDtfYNKVg=;
-	b=gGF7Pr5wLOk2R60nTfW5cRwF7owaEfcnGrDX18jVv1hHXGr6t9Wu6d0CHGMJAFx5mO
-	vZpc8PTMT22d4AfWir7QLcTYQrnxbqVP0UKU/eg9UVxwflvXLdIxG0FcsC4j7H7aV3SM
-	mQ2HA0Lz6bJi0Vcw4WaB5pcw4vf5yK4s6NrQM=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=9b5FGS0MjFHB9EiEPb5zojLn2I930u4DfDd8Fs9K0p4=;
+	b=hBIkHnqjgKld5XsTh4+gf7DmmKkLP+bEsRIf/F2LKKv/m4TFkh/Zej4IiMlFT9Ur2r
+	D0JWh4G0fkHwLxt0QQhwQMQMS0EVdvu0tH4A0rOiRY9CWMYlC+zZjOffSqJTTJVPscEt
+	plmJ4p+YwNeR0TKYiEgWG8huJZT6b4KBnyYlE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=HgNRD0lTuYQ0aV4rsmwOYjBobsVyQfDCUzUa6wioSDStWy4Ms4WcdpNafAMOU7XV/A
-	pK19TuV/QQONUcHKOaECjwn8zPSpOIUmUC+phs4WBwCUTPHcNcIwryXcNZgEswxvhPX5
-	QwyhQkR1kEZONT6eBh+AwTRhoyijaasY+i9DE=
-Received: by 10.223.97.13 with SMTP id j13mr664247fan.146.1290688738163;
-	Thu, 25 Nov 2010 04:38:58 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n26sm174693fam.13.2010.11.25.04.38.56
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 25 Nov 2010 04:38:56 -0800 (PST)
-Date: Thu, 25 Nov 2010 13:38:45 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101125123845.GO3274@jama>
-References: <AANLkTimpVmdKm5PcXijkpVm7uDUoNrFOupzddth1gRsM@mail.gmail.com>
-	<4CEE336E.9070306@eukrea.com>
-	<AANLkTiktUcmsYsQh-VFJtWTgpyzbQVmLgg7WuxEJkipW@mail.gmail.com>
-	<4CEE37DC.5040503@eukrea.com>
-	<AANLkTinr=RQ068ABqe8XVsrPpn+iyV9ecFT4n1VuiQTm@mail.gmail.com>
-	<4CEE4AB9.8050505@eukrea.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=U1mFApel0+AaezspPeUla1JtRNHT+k4hw5oOuYcE87wGWNyuzlaCIqrjj7bCw6Y+ii
+	sKRGT0WOki9wEsrWWz98iR/DUC7ZE7iIOlz1TeE5lwdS2d3JWWz0FZKDU4U7eGP3iCO3
+	9elW57/nqOwzxJrSeLv6roKjj/6QnPGrJYW9Q=
 MIME-Version: 1.0
-In-Reply-To: <4CEE4AB9.8050505@eukrea.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.13.137 with SMTP id c9mr467255iba.76.1290688984463; Thu,
+	25 Nov 2010 04:43:04 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Thu, 25 Nov 2010 04:43:04 -0800 (PST)
+In-Reply-To: <4CEE4F61.3060401@sensortherm.de>
+References: <4CEC1E17.1030208@sensortherm.de>
+	<AANLkTinhykFBHcgJR5suXU8Q7op+FOxofExY-d42XmYw@mail.gmail.com>
+	<4CEE4F61.3060401@sensortherm.de>
+Date: Thu, 25 Nov 2010 13:43:04 +0100
+Message-ID: <AANLkTimpvN+hLUrk7LB1fOKbpY8aE1f-3hdoJA19JM2W@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: qwt 5.2.1 failed to build here (om-gta02 , SHR, X11)
+Subject: Re: I've downloaded oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,28 +54,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2010 12:40:13 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 25 Nov 2010 12:44:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 25, 2010 at 12:38:33PM +0100, Eric Bénard wrote:
-> On 25/11/2010 12:12, Sylvain Paré wrote:
-> > I can't find any obj/ directory in
-> > SHR-Build/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qwt-5.2.1-r0/qwt-5.2.1/
-> > but I have an
-> > SHR-Build/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qwt-5.2.1-r0/qwt-5.2.1/src/obj${QT_LIBINFIX}/
-> >
-> here is your problem.
-> QT_LIBINFIX should be "" in your case.
+2010/11/25 Klaus Schwarzkopf <schwarzkopf@sensortherm.de>:
+> Am 23.11.2010 21:19, schrieb Khem Raj:
+>>
+>> On Tue, Nov 23, 2010 at 12:03 PM, Klaus Schwarzkopf
+>> <schwarzkopf@sensortherm.de> =A0wrote:
+>>>
+>>> Hi,
+>>>
+>>> i've downloaded oe with this script (thanks frans):
+>>>
+>>> #!/bin/sh
+>>>
+>>> export OE=3D/home/klaus/development/oe/
+>>> export BBPATH=3D${OE}build:${OE}openembedded
+>>> export PATH=3D${OE}bitbake/bin:${PATH}
+>>> export MACHINE=3Ddm355-evm
+>>>
+>>> RECIPES=3D"${OE}/openembedded/recipes"
+>>> LOGFILE=3D"fetchsrc.log"
+>>>
+>>> #Find recipes how changed this week
+>>> #FIND_OPTIONS=3D"-atime 7"
+>>>
+>>> for i in $(find ${RECIPES} -name '*.bb' -type f ${FIND_OPTIONS} | sort =
+)
+>>> do
+>>> =A0 =A0 =A0 =A0echo $i
+>>> =A0 =A0 =A0 =A0bitbake -c fetch -b $i
+>>> done> =A0${LOGFILE} 2>&1
+>>>
+>>> egrep -n 'ERROR.*bb..failed' ${LOGFILE}
+>>> egrep -n 'KeyError' ${LOGFILE}
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> I found a lot of errors, see attachment! The whole logfile is on my
+>>> homepage:
+>>> http://fbi.hooster.de/download/sonstiges/oe/fetchsrc.log.tar.gz
+>>>
+>>> How can i/we fix this errors?
+>>>
+>>
+>> You should ignore nonworking and obsolete dirs and some errors are due
+>> to hh.org going AWOL too
+>>
+>
+>
+> egrep -n 'ERROR.*bb..failed' fetchsrc.log | egrep -v 'nonworking' | egrep=
+ -v
+> 'obsolete' | wc -l
+> 434
+>
+> egrep -n 'ERROR.*bb..failed' fetchsrc.log | egrep -v 'nonworking' | egrep=
+ -v
+> 'obsolete' | egrep -v 'opie.*cvs' | wc -l
+> 253
+>
+>
+> I know, that the opie recipes missing the cvs server on hh.org.
+>
+> What is the best way to fix the missing download files?
+> Move the recipes to nonworking directory?
+> Find the missing files in the internet and upload the files to
+> sources.openembedded.org?
+>
+> A combination: If we could not find the files, move the recipes to
+> nonworking.
+>
+> Greetings
+>
+> Klaus
 
-then something like
-QT_DIR_NAME = "qt4"
-QT_LIBINFIX = ""
+Thanks for your work.
+Best way forward is to first verify if the sources are not elsewhere
+(or renamed or so). E.g. php moves old versions to a "museum" site so
+if a new version arrives the old version suddenly does not fetch any
+more. In that case the solution is to change the SRC_URI
+If that does not help and the sources are elsewhere on a reputable and
+reliable server it might also be considered to change SRC_URI.
 
-is missing in qt4x11.bbclass (it's defined only in qt4e.bbclass).
+Otherwise if there happens to be a source found (e.g. in someones
+downloads dir) we can consider moving it to sources.openembedded.org.
+If the sources are unavailable moving to nonworking seems unavoidable.
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+There is one other case. If a recipe is old and not pinned, it can
+also be considered to remove the recipe.
+
+Frans
 
 
