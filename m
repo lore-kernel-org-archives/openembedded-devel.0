@@ -1,42 +1,26 @@
-Received: from goliath.siemens.de ([192.35.17.28])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PLvjd-0000ZS-QI
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PLvqE-0000kE-9p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 11:41:00 +0100
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by goliath.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
-	oAQAdgOg000398 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Nov 2010 11:39:43 +0100
-Received: from DEMCHP99ET2MSX.ww902.siemens.net
-	(demchp99et2msx.ww902.siemens.net [139.25.131.241])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id oAQAdg1V027316
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Nov 2010 11:39:42 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
-	DEMCHP99ET2MSX.ww902.siemens.net ([139.25.131.241]) with mapi;
-	Fri, 26 Nov 2010 11:39:42 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Nov 2010 11:39:41 +0100
-Thread-Topic: [PATCH] crimsonfields: fixed wrong SDL_CONFIG
-Thread-Index: AcuNVjuZ6CBZn/CtRjWz0cImaag8Aw==
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3B1D383@DEMCHP99E35MSX.ww902.siemens.net>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Fri, 26 Nov 2010 11:47:46 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 0F0C81D36171; Fri, 26 Nov 2010 11:46:29 +0100 (CET)
+From: =?utf-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 26 Nov 2010 11:46:29 +0100
+Message-Id: <1290768389-13294-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.5.6.5
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.35.17.28
-X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=5.0 tests=AWL, BAYES_00,
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] crimsonfields: fixed wrong SDL_CONFIG
+Subject: [PATCH] mesa: fix build error on uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,36 +34,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2010 10:41:00 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 26 Nov 2010 10:47:47 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-* libsdl-native installs:
-     ${STAGING_BINDIR}/sdl-config
-  and not:
-     ${STAGING_BINDIR}/sdl-config-native
+main/imports.c: In function '_mesa_strtof':
+main/imports.c:804:20: error: expected '=3D', ',', ';', 'asm' or '__attri=
+bute__' before 'loc'
+main/imports.c:804:20: error: 'loc' undeclared (first use in this functio=
+n)
+main/imports.c:804:20: note: each undeclared identifier is reported only =
+once for each function it appears in
 
-Signed-off-by: Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
 ---
- .../crimsonfields/crimsonfields-native_0.4.8.bb    |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/mesa/mesa-7.8.2.inc                     |    6 ++++++
+ recipes/mesa/mesa-7.8.2/uclibc-locale-fix.patch |   13 +++++++++++++
+ recipes/mesa/mesa_7.8.2.bb                      |    2 +-
+ 3 files changed, 20 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/mesa/mesa-7.8.2/uclibc-locale-fix.patch
 
-diff --git a/recipes/crimsonfields/crimsonfields-native_0.4.8.bb b/recipes/=
-crimsonfields/crimsonfields-native_0.4.8.bb
-index 61157e2..0d30c3e 100644
---- a/recipes/crimsonfields/crimsonfields-native_0.4.8.bb
-+++ b/recipes/crimsonfields/crimsonfields-native_0.4.8.bb
-@@ -2,7 +2,7 @@ require crimsonfields_${PV}.bb
- inherit native
+diff --git a/recipes/mesa/mesa-7.8.2.inc b/recipes/mesa/mesa-7.8.2.inc
+index 42d726c..d38b22d 100644
+--- a/recipes/mesa/mesa-7.8.2.inc
++++ b/recipes/mesa/mesa-7.8.2.inc
+@@ -4,6 +4,12 @@ SRC_URI +=3D " \
+             file://glamo.patch \
+            "
 =20
- DEPENDS =3D "libsdl-native libsdl-ttf-native"
--export SDL_CONFIG =3D "${STAGING_BINDIR}/sdl-config-native"
-+export SDL_CONFIG =3D "${STAGING_BINDIR}/sdl-config"
++UCLIBC_PATCHES +=3D " \
++	file://uclibc-locale-fix.patch \
++	"
++SRC_URI_append_linux-uclibc =3D ${UCLIBC_PATCHES}
++SRC_URI_append_linux-uclibceabi =3D ${UCLIBC_PATCHES}
++
+ SRC_URI[archive.md5sum] =3D "6be2d343a0089bfd395ce02aaf8adb57"
+ SRC_URI[archive.sha256sum] =3D "505bf418dceba05837f4ea1b1972b9620c35f8cb=
+94bc4d1e6d573c15f562576d"
+ SRC_URI[demos.md5sum] =3D "757d9e2e06f48b1a52848be9b0307ced"
+diff --git a/recipes/mesa/mesa-7.8.2/uclibc-locale-fix.patch b/recipes/me=
+sa/mesa-7.8.2/uclibc-locale-fix.patch
+new file mode 100644
+index 0000000..e05f927
+--- /dev/null
++++ b/recipes/mesa/mesa-7.8.2/uclibc-locale-fix.patch
+@@ -0,0 +1,13 @@
++Index: Mesa-7.8.2/src/mesa/main/imports.c
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- Mesa-7.8.2.orig/src/mesa/main/imports.c	2010-11-26 07:52:49.40687900=
+1 +0100
+++++ Mesa-7.8.2/src/mesa/main/imports.c	2010-11-26 07:54:11.846879005 +01=
+00
++@@ -800,7 +800,7 @@
++ float
++ _mesa_strtof( const char *s, char **end )
++ {
++-#ifdef _GNU_SOURCE
+++#if defined(_GNU_SOURCE) && defined(__UCLIBC_HAS_LOCALE__)
++    static locale_t loc =3D NULL;
++    if (!loc) {
++       loc =3D newlocale(LC_CTYPE_MASK, "C", NULL);
+diff --git a/recipes/mesa/mesa_7.8.2.bb b/recipes/mesa/mesa_7.8.2.bb
+index bbd0c41..48aa0ba 100644
+--- a/recipes/mesa/mesa_7.8.2.bb
++++ b/recipes/mesa/mesa_7.8.2.bb
+@@ -3,6 +3,6 @@ require mesa-dri_${PV}.bb
 =20
- do_configure() {
-        gnu-configize
+ FILESPATHPKG =3D. "mesa-dri-${PV}:"
+=20
+-PR =3D "${INC_PR}.1"
++PR =3D "${INC_PR}.2"
+=20
+ EXTRA_OECONF +=3D "--disable-egl"
 --=20
-1.5.6.5
+1.7.0.4
+
 
 
