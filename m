@@ -1,47 +1,46 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PLqiE-0007OM-NR
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PLs3E-0000M1-8V
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 06:19:11 +0100
-Received: by pwi8 with SMTP id 8so344784pwi.6
+	Fri, 26 Nov 2010 07:44:56 +0100
+Received: by iwn8 with SMTP id 8so600148iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Nov 2010 21:17:53 -0800 (PST)
+	Thu, 25 Nov 2010 22:43:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=FA3p1cAvIQx7Yw4vlkhsNYs9bADrAmDJw1by5xtGq0g=;
-	b=Dkksn575QStPHTMt2loPzMnRc6eULS7OH1d3tCN7kPW3rmLZDpTHSQoOmATK+jkqA/
-	ynBowAWloS/W0opCylFl30l/L/nfUb5UwzIZa8jrGE2sD4kjXNG1q0SzSn5KSndnRBXY
-	uLHFn0PXjwx696Ggo42EjiPQETDOMmWugbV/4=
+	bh=XdlW/4AA0xKnlEMzHVStk2ZoUoTckGfaPGEtB0NflQc=;
+	b=OU5iDZVWm2WoBsf/hJEhZDINK+pulHwSQCBOSgo21KftqVj41Kg1zzqRn9ulAcWc3F
+	qDuvJuF/5PZF+7G2S1/TToRAK1etAmIJ2itMf4rlGz5iOAuh7SZrXyaXcDitQrW/45oZ
+	sgaCcJtTTGO5VAdv+XpbUKrFFIjmtGk7S5AOQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=KtYXmCD7Jto4v7pW2GZz5iw9/SpOoFDOBDryZyi2VTV5vvJgvuwjlAbZjgXOSqKPCD
-	LpmDljd1hdBswU9QuR4NNhRGxB7yi/c+P2WrikqiFG9mEd8oY86RJGYjjp7l7xI90vKp
-	6MBlD6Z8uITjehHdInpmqNUN5WlTzxKWuOQr4=
-Received: by 10.142.107.21 with SMTP id f21mr1710012wfc.427.1290748673599;
-	Thu, 25 Nov 2010 21:17:53 -0800 (PST)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id w42sm1999491wfh.3.2010.11.25.21.17.50
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 25 Nov 2010 21:17:52 -0800 (PST)
-Message-ID: <4CEF42F9.1090501@gmail.com>
-Date: Fri, 26 Nov 2010 15:47:45 +1030
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
+	b=Ipr1dBXZydu7rDUfsEjL9QDETq4UO9AcIHWmf1s/y/lv8JsAm9JS53IqKIn89BmAkr
+	nV1+7ySrupEQmpQ5MvaPvgkcC7SKB+O+p8D2xCB6i7PULgHOBPWtyr1au4zTr8PLgMHX
+	DFgXiNlACKQUDIB3d8G9R36djiBD096qhR3vc=
 MIME-Version: 1.0
+Received: by 10.231.35.194 with SMTP id q2mr1066524ibd.26.1290753817934; Thu,
+	25 Nov 2010 22:43:37 -0800 (PST)
+Received: by 10.231.33.4 with HTTP; Thu, 25 Nov 2010 22:43:37 -0800 (PST)
+In-Reply-To: <4CEEFC5F.9090703@cse.unsw.edu.au>
+References: <1290664003-17257-1-git-send-email-jayen@cse.unsw.edu.au>
+	<AANLkTinV+PWoPR9DuTHskOcLWCMU_h+suGQt1HNc4cMf@mail.gmail.com>
+	<4CEEFC5F.9090703@cse.unsw.edu.au>
+Date: Fri, 26 Nov 2010 07:43:37 +0100
+Message-ID: <AANLkTimiyn3JBroLv13EZ5UTOzgDn6YQbPDTCGhJBL0A@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Khem Raj : gcc-configure-sdk: Handle hardcoded /usr/include
+Subject: Re: [PATCH] IceE: New program
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,53 +54,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2010 05:19:11 -0000
+X-List-Received-Date: Fri, 26 Nov 2010 06:44:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
+2010/11/26 Jayen Ashar <jayen@cse.unsw.edu.au>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Hi Maksym,
+>
+> Thank you for the feedback. =A0I'll remove the patch from patchwork when =
+I
+> see it there. =A0Could you send me your patch(es), and if I have time
+> before you, I'll try and bring it to a committable state and [re]submit i=
+t?
+>
+> Thanks,
+> Jayen
+>
+> P.S. To any admins on this list: is there an ETA on patchwork? =A0I'm
+> seeing the same issue that Paul Menzel mentioned a few days ago
+> (Message-ID: <1290433364.3703.22.camel@mattotaupa>). =A0Thanks.
+>
 
-Commit 2e8e46955f15f54c78c91f1880a1bc776ac7fef9 doesn't seem to be enough
-for me to getting a gcc-cross-sdk to build.
+There are some issues with patchwork at the moment.
+It does not seem to pick up patches any more.
+The admins are aware of this.
 
-
-	    if ! false && test ! -d `echo /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc${sysroot_headers_suffix}/usr/include | sed -e :a -e 's,[^/]*/\.\.\/,,' -e ta`; then \
-	      echo The directory that should contain system headers does not exist: >&2 ; \
-	      echo "  `echo /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc${sysroot_headers_suffix}/usr/include | sed -e :a -e 's,[^/]*/\.\.\/,,' -e ta`" >&2 ; \
-	      tooldir_sysinc=`echo "/usr/local/micro-uclibc/mipsel/lib/gcc/mipsel-oe-linux-uclibc/4.5.2/../../../../mipsel-oe-linux-uclibc/sys-include" | sed -e :a -e "s,[^/]*/\.\.\/,," -e ta`; \
-	      if test "x`echo /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc${sysroot_headers_suffix}/usr/include | sed -e :a -e 's,[^/]*/\.\.\/,,' -e ta`" = "x${tooldir_sysinc}"; \
-	      then sleep 1; else exit 1; fi; \
-	    fi; \
-	    /bin/sh /mnt/oe/tmp/work/x86_64-mipsel-sdk-oe-linux-uclibc/gcc-cross-sdk-4.5-r19.1+svnr166342/gcc-4.5/gcc/../mkinstalldirs ${fix_dir}; \
-	    chmod a+rx ${fix_dir} || true; \
-	    (TARGET_MACHINE='mipsel-oe-linux-uclibc'; srcdir=`cd /mnt/oe/tmp/work/x86_64-mipsel-sdk-oe-linux-uclibc/gcc-cross-sdk-4.5-r19.1+svnr166342/gcc-4.5/gcc; ${PWDCMD-pwd}`; \
-	      SHELL='/bin/sh'; MACRO_LIST=`${PWDCMD-pwd}`/macro_list ; \
-	      gcc_dir=`${PWDCMD-pwd}` ; \
-	      export TARGET_MACHINE srcdir SHELL MACRO_LIST && \
-	      cd ../build-x86_64-linux/fixincludes && \
-	      /bin/sh ./fixinc.sh "${gcc_dir}/${fix_dir}" \
-	        `echo /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc${sysroot_headers_suffix}/usr/include | sed -e :a -e 's,[^/]*/\.\.\/,,' -e ta`  ); \
-	    rm -f ${fix_dir}/syslimits.h; \
-	    if [ -f ${fix_dir}/limits.h ]; then \
-	      mv ${fix_dir}/limits.h ${fix_dir}/syslimits.h; \
-	    else \
-	      cp /mnt/oe/tmp/work/x86_64-mipsel-sdk-oe-linux-uclibc/gcc-cross-sdk-4.5-r19.1+svnr166342/gcc-4.5/gcc/gsyslimits.h ${fix_dir}/syslimits.h; \
-	    fi; \
-	    chmod a+r ${fix_dir}/syslimits.h; \
-	  done; \
-	fi
-The directory that should contain system headers does not exist:
-  /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/usr/include
-make[2]: *** [stmp-fixinc] Error 1
-
-
-
-
-
-It looks like NATIVE_SYSTEM_HEADER_DIR is not being set in gcc-configure-common.inc
-(looking in gcc/Makefile I see NATIVE_SYSTEM_HEADER_DIR = /usr/include)
-
-Sorry, I'm not familiar enough with gcc buildy bits to propose the correct fix.
-
--Graham
+Frans
 
 
