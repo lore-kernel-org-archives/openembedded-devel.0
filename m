@@ -1,31 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PLxJF-0006Eh-8Y for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 13:21:49 +0100
-Received: from f053037197.adsl.alicedsl.de ([78.53.37.197]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PLxI3-0000r9-FH for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 12:20:35 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Alexander.Stohr@gmx.de>) id 1PLxsH-0006px-Ji
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Nov 2010 13:58:02 +0100
+Received: (qmail 7941 invoked by uid 0); 26 Nov 2010 12:56:45 -0000
+Received: from 193.8.40.126 by www050.gmx.net with HTTP;
+	Fri, 26 Nov 2010 13:56:44 +0100 (CET)
+Date: Fri, 26 Nov 2010 13:56:44 +0100
+From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
+Message-ID: <20101126125644.136270@gmx.net>
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1290773874.28296.34.camel@mattotaupa>
-References: <1290773874.28296.34.camel@mattotaupa>
-Date: Fri, 26 Nov 2010 13:20:34 +0100
-Message-ID: <1290774034.28296.37.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Authenticated: #15156664
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX18FC0dY22AFS3LZ7DnR87z7UI2wzDXIgyot4CcOY4
+	93E03iVDsb+OECwtQySb0bh4zvthl301NWyg== 
+X-GMX-UID: vZzJZBKSLi50ApBhjWtpDTJrZml1ZJgW
+X-SA-Exim-Connect-IP: 213.165.64.23
+X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/4] xbmc: add `libxtst` to `DEPENDS`
+Subject: Re: for doing screenshots from the command line - use scrot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,79 +40,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2010 12:21:50 -0000
-X-Groupsio-MsgNum: 26618
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-aPvLJKOG64NKrm6PVXQu"
+X-List-Received-Date: Fri, 26 Nov 2010 12:58:02 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
---=-aPvLJKOG64NKrm6PVXQu
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Marcin Juszkiewicz wrote:
+> Can you compare it with fbgrab? Less deps and same work done.
 
-Date: Fri, 26 Nov 2010 10:33:57 +0100
+fbgrab has a file size of 35k on my x86 system. scrot has 64k.
+(this would favor fbgrab.)
 
-Task `configure` fails with the following error.
+fbgrab depends on libs png12 & a few standard libs.
+(this would favor fbgrab.)
 
-        [=E2=80=A6]
-        checking for ENCA... yes
-        checking for XT... yes
-        checking for XTST... no
-        configure: error: Could not find a required library. Please see the=
- README for your platform.
-        ERROR: Function do_configure failed
+fbgrab uses the framebuffer devices. scrot uses X11.
+(this results in fbgrab getting some boot time fb ascii console contents
+on my x86 box whilst scrot really captures the scree X11 manages.
+this means fbgrab is a pretty local thing that wont work by principle
+when your X11 is based upon a driver that does NOT utilize fb buffers.
+this would favour scrot in terms of flexibility and compatibility.)
 
-Adding `libxtst` to `DEPENDS` fixes this error with the following build con=
-figuration.
+fbgrab allwos width/height specification. scrot allows window specific capture (using the mouse) and has an option for taking window borders - since its X11 aware.
+(this would favor scrot in terms of flexibility.)
 
-        Build Configuration:
-        BB_VERSION        =3D "1.10.0"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "97ea91e"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-gnueabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "angstrom"
-        DISTRO_VERSION    =3D "2010.7-test-20101126"
-        TARGET_FPU        =3D "hard"
+fbgrab works on a single framebuffer. scrot is multi head aware and can even join the grabbed images to a whole desktop image - since its X11 aware.
+(this would favor scrot in terms of flexibility.)
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/xbmc/xbmc_svn.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+fbgrab is very limited in bit depth. scrot man pages does not talk about any bit depth limitations.
+(this would favor scrot in terms of flexibility.)
 
-diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
-index d03ea0b..7880a57 100644
---- a/recipes/xbmc/xbmc_svn.bb
-+++ b/recipes/xbmc/xbmc_svn.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION =3D "XBMC Media Center"
- LICENSE =3D "xbmc"
-=20
--DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodpl=
-ug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virt=
-ual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi l=
-ibsamplerate0 libxrandr bzip2 virtual/libsdl jasper"
-+DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodpl=
-ug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virt=
-ual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi l=
-ibsamplerate0 libxrandr libxtst bzip2 virtual/libsdl jasper"
- require recipes/egl/egl.inc
-=20
- SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
---=20
-1.7.2.3
+fbgrab supports PNG. scrot supports PNG.
+(on par.)
 
---=-aPvLJKOG64NKrm6PVXQu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+fbgrab seems to have a fixed image quality. scrot takes a quality argument.
+(this would favor scrot in terms of flexibility.)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+fbgrab needs an external utility for time stamping. scrot has it built in.
+(time precision should be more accurate for scrot.
+scripted execution time is somehwat lower with scrot.
+this would favor scrot.)
 
-iEYEABECAAYFAkzvphIACgkQPX1aK2wOHViaggCeK0wJK0z7AJNmKnxtJ8mYULs7
-Cp4An3qqIla+V54UvSK86Fi4nwQWVEdE
-=eR58
------END PGP SIGNATURE-----
+fbgrab allows reading in sort of unformatted files. scrot allows imrpoved scripting using special wildcards and can pass these to a second application, e.g. a file system based hirarchical storage.
+(this would favor scrot in terms of flexibility.)
 
---=-aPvLJKOG64NKrm6PVXQu--
+fgrab stores the data as it is. scrot has a built in thumb nail option.
+(this would favor scrot in terms of flexibility.)
+
+
+my personal rationale why scrot is a good option to offer:
+
+- the built in time stamping is very handy.
+- the usage of X11 infrastructure makes it a different in functionality and thus working
+-- in cases where X11 is not based upon fbdev
+-- and for cases with alternate bit depths.
+ (you probably want screenshots to work, not to be urged to first "fix" an incompletly implemented utility.)
+- the compression ratio is flexible.
+- there are low-effort paths for file processing and storage automation.
+
+
+side note:
+if its only about freezing fbdev contents for e.g. inspection with a hexadezimal view, then sometimes a simple "cat /dev/fb0 >freezed.raw" will do the job. clipping and compressing the result using a few stand alone applications might be a post processing path.
+-- 
+GMX DSL Doppel-Flat ab 19,99 &euro;/mtl.! Jetzt auch mit 
+gratis Notebook-Flat! http://portal.gmx.net/de/go/dsl
+
+
