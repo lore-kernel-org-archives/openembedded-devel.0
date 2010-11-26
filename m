@@ -1,36 +1,29 @@
-Received: from mail.reciva.com ([62.7.80.110] helo=crown.reciva.com)
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1PLw2p-0001Ze-KD
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PLw3r-0001fT-DQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 12:00:48 +0100
-Received: from [192.168.106.10] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PLw1c-0006v7-6e
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 10:59:32 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1PLw1b-0007aQ-HS
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 10:59:31 +0000
-From: Phil Blundell <philb@gnu.org>
+	Fri, 26 Nov 2010 12:01:51 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 21E941D36171; Fri, 26 Nov 2010 12:00:34 +0100 (CET)
+Date: Fri, 26 Nov 2010 12:00:34 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinbu9JpEw5fdX8pHcxraf4uTdCf7JKm9v1UekeS@mail.gmail.com>
-References: <AANLkTinbu9JpEw5fdX8pHcxraf4uTdCf7JKm9v1UekeS@mail.gmail.com>
-Date: Fri, 26 Nov 2010 10:59:31 +0000
-Message-ID: <1290769171.20979.51.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-Broken-Reverse-DNS: no host name found for IP address 192.168.106.10
-X-SA-Exim-Connect-IP: 62.7.80.110
-X-SA-Exim-Mail-From: philb@gnu.org
+Message-ID: <20101126110034.GF10755@ibawizard.net>
+References: <1290768432-13366-1-git-send-email-ynezz@true.cz>
+	<AANLkTi=SB9wuO4wcTXz3M5fYb2WyO09_pK3ooA+i4xgo@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTi=SB9wuO4wcTXz3M5fYb2WyO09_pK3ooA+i4xgo@mail.gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bluez-dtl1-workaround not provided?
+Subject: Re: [PATCH] angstrom-2008.1: bump uclibc to 0.9.30.3 which	unbreaks x264
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,19 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2010 11:00:48 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Nov 2010 11:01:51 -0000
+Content-Type: text/plain; charset=iso-8859-2
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-11-25 at 18:24 +0100, Andrea Adami wrote:
-> So, first doubt is: why make this mandatory for everyone having pcmcia?
+Andrea Adami <andrea.adami@gmail.com> [2010-11-26 11:53:50]:
 
-It shouldn't be.  The dependency in kernel-module-dtl1-cs should be
-sufficient to pull it in for (only) those people who are installing the
-driver that needs those bits.
+> > -PREFERRED_VERSION_uclibc =A0 =A0 =A0 =A0 =A0 =A0 =A0 ?=3D "0.9.30.2"
+> > -PREFERRED_VERSION_uclibc-initial =A0 =A0 =A0 ?=3D "0.9.30.2"
+> > +PREFERRED_VERSION_uclibc =A0 =A0 =A0 =A0 =A0 =A0 =A0 ?=3D "0.9.30.3"
+> > +PREFERRED_VERSION_uclibc-initial =A0 =A0 =A0 ?=3D "0.9.30.3"
+>=20
+> Hi,
 
-p.
+Hi,
 
+> Unfortunately build will fail on e2fsprogs afterwards.
+> See http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2010-Nov=
+ember/004257.html
 
+ok, so then I'll fix e2fsprogs :-)
+
+> So I suppose we should do a combined upgrade of uclibc and binutils.
+> I'll test with current gcc-4.3.3 and let you know.
+
+Ok, I don't mind how, just fix it please, it's all errors on release-2010=
+.12
+branch...
+
+-- ynezz
 
 
