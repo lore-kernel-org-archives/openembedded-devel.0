@@ -1,20 +1,20 @@
 Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <anilm@mistralsolutions.com>) id 1PM0Nk-0006xH-Fi
+	(envelope-from <anilm@mistralsolutions.com>) id 1PM0Oz-00073g-EC
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 16:38:42 +0100
-Received: by vws6 with SMTP id 6so609134vws.6
+	Fri, 26 Nov 2010 16:40:00 +0100
+Received: by vws6 with SMTP id 6so609522vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Nov 2010 07:37:23 -0800 (PST)
-Received: by 10.220.81.9 with SMTP id v9mr512662vck.105.1290785842749;
-	Fri, 26 Nov 2010 07:37:22 -0800 (PST)
+	Fri, 26 Nov 2010 07:38:39 -0800 (PST)
+Received: by 10.220.201.77 with SMTP id ez13mr541135vcb.231.1290785918482;
+	Fri, 26 Nov 2010 07:38:38 -0800 (PST)
 Received: from anilm@mistralsolutions.com ([122.167.86.7])
-	by mx.google.com with ESMTPS id c40sm251069vcs.25.2010.11.26.07.37.18
-	(version=SSLv3 cipher=RC4-MD5); Fri, 26 Nov 2010 07:37:21 -0800 (PST)
-Date: Fri, 26 Nov 2010 21:07:14 +0530
+	by mx.google.com with ESMTPS id j7sm250115vcr.39.2010.11.26.07.38.33
+	(version=SSLv3 cipher=RC4-MD5); Fri, 26 Nov 2010 07:38:37 -0800 (PST)
+Date: Fri, 26 Nov 2010 21:08:30 +0530
 From: Anil Kumar <anilm@mistralsolutions.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <4cefd431.a87edc0a.44fe.2014@mx.google.com>
+Message-ID: <4cefd47d.077adc0a.2c1b.197f@mx.google.com>
 MIME-Version: 1.0
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.212.47
@@ -26,7 +26,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: nagendra@mistralsolutions.com, srinath@mistralsolutions.com, jdk@ti.com
-Subject: [PATCHv2 1/5] u-boot_git:add patch for am3517-crane board support
+Subject: [PATCHv2 2/5] x-load_git:add patch for am3517-crane board support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,102 +40,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2010 15:38:42 -0000
+X-List-Received-Date: Fri, 26 Nov 2010 15:40:00 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-    * This patch adds u-boot support for am3517-crane board.
+        * This patch adds x-load support for am3517-crane board.
 
-    * CraneBoard is a hardware development platform based
-      on the Sitara AM3517 ARM Cortex - A8 microprocessor
-      device. This is a low cost reference design.
+        * CraneBoard is a hardware development platform based
+          on the Sitara AM3517 ARM Cortex - A8 microprocessor
+          device. This is a low cost reference design.
 
-    * You can find more about CraneBoard here:
-           [1] http://www.ti.com/arm
-           [2] http://www.mistralsolutions.com/products/craneboard.php
+        * You can find more about CraneBoard here:
+               [1] http://www.ti.com/arm
+               [2] http://www.mistralsolutions.com/products/craneboard.php
 
 Signed-off-by: Anil Kumar <anilm@mistralsolutions.com>
 ---
- ...ed-Support-for-AM3517-05-based-CraneBoard.patch | 1236 ++++++++++++++++++++
- recipes/u-boot/u-boot_git.bb                       |    9 +-
- 2 files changed, 1244 insertions(+), 1 deletions(-)
- create mode 100644 recipes/u-boot/u-boot-git/am3517-crane/0001-Added-Support-for-AM3517-05-based-CraneBoard.patch
+ .../0001-Added-support-for-AM3517-CraneBoard.patch | 2660 ++++++++++++++++++++
+ recipes/x-load/x-load_git.bb                       |    9 +-
+ 2 files changed, 2668 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/x-load/x-load-git/am3517-crane/0001-Added-support-for-AM3517-CraneBoard.patch
 
-diff --git a/recipes/u-boot/u-boot-git/am3517-crane/0001-Added-Support-for-AM3517-05-based-CraneBoard.patch b/recipes/u-boot/u-boot-git/am3517-crane/0001-Added-Support-for-AM3517-05-based-CraneBoard.patch
+diff --git a/recipes/x-load/x-load-git/am3517-crane/0001-Added-support-for-AM3517-CraneBoard.patch b/recipes/x-load/x-load-git/am3517-crane/0001-Added-support-for-AM3517-CraneBoard.patch
 new file mode 100644
-index 0000000..ff058ec
+index 0000000..7755fa9
 --- /dev/null
-+++ b/recipes/u-boot/u-boot-git/am3517-crane/0001-Added-Support-for-AM3517-05-based-CraneBoard.patch
-@@ -0,0 +1,1236 @@
-+From 08141f3b09df19fbaf2ab2eba70bfdb419462ab6 Mon Sep 17 00:00:00 2001
++++ b/recipes/x-load/x-load-git/am3517-crane/0001-Added-support-for-AM3517-CraneBoard.patch
+@@ -0,0 +1,2660 @@
++From 45449d9eea0542713eb136eb576a7f7e19df57b9 Mon Sep 17 00:00:00 2001
 +From: Anil Kumar <anilm@mistralsolutions.com>
-+Date: Thu, 25 Nov 2010 18:18:13 +0530
-+Subject: [PATCH] Added Support for AM3517 05 based CraneBoard
++Date: Fri, 26 Nov 2010 20:01:43 +0530
++Subject: [PATCH] Added support for AM3517 CraneBoard
 +
 +Signed-off-by: Anil Kumar <anilm@mistralsolutions.com>
 +---
-+ Makefile                            |    4 +-
-+ board/ti/am3517crane/Makefile       |   47 +++++
-+ board/ti/am3517crane/am3517crane.c  |  146 +++++++++++++++
-+ board/ti/am3517crane/am3517crane.h  |  339 +++++++++++++++++++++++++++++++++
-+ board/ti/am3517crane/config.mk      |   29 +++
-+ common/Makefile                     |    1 +
-+ common/cmd_readmacid.c              |   51 +++++
-+ cpu/arm_cortexa8/omap3/clock.c      |    4 +-
-+ drivers/net/davinci_emac.c          |   10 +-
-+ drivers/net/davinci_emac.h          |    3 +-
-+ drivers/usb/musb/musb_core.c        |    4 +-
-+ include/asm-arm/arch-omap3/clocks.h |    2 +-
-+ include/asm-arm/arch-omap3/mem.h    |    6 +-
-+ include/asm-arm/mach-types.h        |   14 ++-
-+ include/configs/am3517_crane.h      |  352 +++++++++++++++++++++++++++++++++++
-+ 15 files changed, 998 insertions(+), 14 deletions(-)
-+ create mode 100644 board/ti/am3517crane/Makefile
-+ create mode 100644 board/ti/am3517crane/am3517crane.c
-+ create mode 100644 board/ti/am3517crane/am3517crane.h
-+ create mode 100644 board/ti/am3517crane/config.mk
-+ create mode 100644 common/cmd_readmacid.c
-+ create mode 100644 include/configs/am3517_crane.h
++ Makefile                          |   11 +
++ board/am3517crane/Makefile        |   49 +++
++ board/am3517crane/am3517crane.c   |  864 +++++++++++++++++++++++++++++++++++++
++ board/am3517crane/am3517crane.h   |  103 +++++
++ board/am3517crane/config.mk       |   20 +
++ board/am3517crane/platform.S      |  436 +++++++++++++++++++
++ board/am3517crane/x-load.lds      |   53 +++
++ common/Makefile                   |   50 +++
++ common/cmd_load.c                 |  537 +++++++++++++++++++++++
++ common/cmd_load.h                 |   47 ++
++ cpu/omap3/mmc.c                   |    3 +-
++ drivers/Makefile                  |    4 +
++ drivers/k9f1g08r0a.c              |   39 +--
++ include/asm/arch-omap3/cpu.h      |    6 +-
++ include/asm/arch-omap3/mem.h      |    9 +-
++ include/asm/arch-omap3/omap3430.h |    3 +-
++ include/configs/am3517crane.h     |  200 +++++++++
++ 17 files changed, 2401 insertions(+), 33 deletions(-)
++ create mode 100644 board/am3517crane/Makefile
++ create mode 100644 board/am3517crane/am3517crane.c
++ create mode 100644 board/am3517crane/am3517crane.h
++ create mode 100644 board/am3517crane/config.mk
++ create mode 100644 board/am3517crane/platform.S
++ create mode 100644 board/am3517crane/x-load.lds
++ create mode 100644 common/Makefile
++ create mode 100644 common/cmd_load.c
++ create mode 100644 common/cmd_load.h
++ create mode 100644 include/configs/am3517crane.h
 +
 +diff --git a/Makefile b/Makefile
-+index 1733d32..1e34872 100644
++index 4c94438..6bfae50 100644
 +--- a/Makefile
 ++++ b/Makefile
-+@@ -3144,7 +3144,6 @@ SMN42_config	:	unconfig
-+ #########################################################################
-+ ## ARM CORTEX Systems
-+ #########################################################################
-+-
-+ devkit8000_config :	unconfig
-+ 	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 devkit8000 timll omap3
++@@ -70,6 +70,7 @@ LIBS += lib/lib$(ARCH).a
++ LIBS += fs/fat/libfat.a
++ LIBS += disk/libdisk.a
++ LIBS += drivers/libdrivers.a
+++LIBS += common/libcommon.a
++ .PHONY : $(LIBS)
 +
-+@@ -3157,6 +3156,9 @@ omap3_overo_config :	unconfig
-+ omap3_evm_config :	unconfig
-+ 	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 evm ti omap3
++ # Add GCC lib
++@@ -152,6 +153,15 @@ omap3evm_config :	unconfig
++ am3517evm_config :       unconfig
++ 	@./mkconfig $(@:_config=) arm omap3 am3517evm
 +
-++am3517_crane_config :	unconfig
-++	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 am3517crane ti omap3
+++am3517crane_config :       unconfig
+++	@./mkconfig $(@:_config=) arm omap3 am3517crane
 ++
-+ am3517_evm_config :	unconfig
-+ 	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 am3517evm ti omap3
+++am3517crane_download_config :       unconfig
+++	@./mkconfig am3517crane arm omap3 am3517crane; \
+++	echo "#define START_LOADB_DOWNLOAD" >> ./include/config-2.h; \
+++	cat ./include/config.h >> ./include/config-2.h; \
+++	mv ./include/config-2.h ./include/config.h
+++
++ #########################################################################
 +
-+diff --git a/board/ti/am3517crane/Makefile b/board/ti/am3517crane/Makefile
++ clean:
++@@ -168,6 +178,7 @@ clobber:	clean
++ 	rm -f $(OBJS) *.bak tags TAGS
++ 	rm -fr *.*~
++ 	rm -f x-load x-load.map $(ALL)
+++	rm -f x-load.bin.ift
++ 	rm -f include/asm/proc include/asm/arch
++
++ mrproper \
++diff --git a/board/am3517crane/Makefile b/board/am3517crane/Makefile
 +new file mode 100644
-+index 0000000..021602e
++index 0000000..46a5b46
 +--- /dev/null
-++++ b/board/ti/am3517crane/Makefile
-+@@ -0,0 +1,47 @@
+++++ b/board/am3517crane/Makefile
++@@ -0,0 +1,49 @@
 ++#
-++# Author: Srinath.R <srinath@mistralsolutions.com>
+++# (C) Copyright 2010 Mistral Solutions Pvt Ltd. <www.mistralsolutions.com>
+++# Umesh Krishnan <umeshk@mistralsolutions.com>
 ++#
-++# Based on ti/am3517evm/Makefile
+++# This file is copied from board/am3517evm/Makefile
 ++#
-++# Copyright (C) 2010 Mistral Solutions Pvt Ltd
+++# See file CREDITS for list of people who contributed to this
+++# project.
 ++#
-++# This program is free software; you can redistribute it and/or modify
-++# it under the terms of the GNU General Public License as published by
-++# the Free Software Foundation; either version 2 of the License, or
-++# (at your option) any later version.
+++# This program is free software; you can redistribute it and/or
+++# modify it under the terms of the GNU General Public License as
+++# published by the Free Software Foundation; either version 2 of
+++# the License, or (at your option) any later version.
 ++#
 ++# This program is distributed in the hope that it will be useful,
 ++# but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -144,592 +166,48 @@ index 0000000..ff058ec
 ++#
 ++# You should have received a copy of the GNU General Public License
 ++# along with this program; if not, write to the Free Software
-++# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+++# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++# MA 02111-1307 USA
 ++#
 ++
 ++include $(TOPDIR)/config.mk
 ++
-++LIB	= $(obj)lib$(BOARD).a
+++LIB	= lib$(BOARD).a
 ++
-++COBJS	:= am3517crane.o
+++OBJS	:= am3517crane.o
+++SOBJS	:= platform.o
 ++
-++SRCS	:= $(COBJS:.o=.c)
-++OBJS	:= $(addprefix $(obj),$(COBJS))
-++
-++$(LIB):	$(obj).depend $(OBJS)
-++	$(AR) $(ARFLAGS) $@ $(OBJS)
+++$(LIB):	$(OBJS) $(SOBJS)
+++	$(AR) crv $@ $^
 ++
 ++clean:
-++	rm -f $(OBJS)
+++	rm -f $(SOBJS) $(OBJS)
 ++
 ++distclean:	clean
-++	rm -f $(LIB) core *.bak $(obj).depend
+++	rm -f $(LIB) core *.bak .depend
 ++
 ++#########################################################################
 ++
-++# defines $(obj).depend target
-++include $(SRCTREE)/rules.mk
+++.depend:	Makefile $(SOBJS:.o=.S) $(OBJS:.o=.c)
+++		$(CC) -M $(CPPFLAGS) $(SOBJS:.o=.S) $(OBJS:.o=.c) > $@
 ++
-++sinclude $(obj).depend
+++-include .depend
 ++
-+diff --git a/board/ti/am3517crane/am3517crane.c b/board/ti/am3517crane/am3517crane.c
+++#########################################################################
++diff --git a/board/am3517crane/am3517crane.c b/board/am3517crane/am3517crane.c
 +new file mode 100644
-+index 0000000..2f525b6
++index 0000000..a6006d3
 +--- /dev/null
-++++ b/board/ti/am3517crane/am3517crane.c
-+@@ -0,0 +1,146 @@
+++++ b/board/am3517crane/am3517crane.c
++@@ -0,0 +1,864 @@
 ++/*
-++ * am3517crane.c - board file for AM3517/05 Craneboard.
+++ * (C) Copyright 2010 Mistral Solutions Pvt Ltd. <www.mistralsolutions.com>
+++ * Umesh Krishnan <umeshk@mistralsolutions.com>
 ++ *
-++ * Author: Srinath.R <srinath@mistralsolutions.com>
+++ * This file is copied from board/am3517evm/am3517evm.c
 ++ *
-++ * Based on ti/am3517evm/am3517evm.c
-++ *
-++ * Copyright (C) 2010 Mistral Solutions Pvt Ltd
-++ *
-++ * This program is free software; you can redistribute it and/or modify
-++ * it under the terms of the GNU General Public License as published by
-++ * the Free Software Foundation; either version 2 of the License, or
-++ * (at your option) any later version.
-++ *
-++ * This program is distributed in the hope that it will be useful,
-++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-++ * GNU General Public License for more details.
-++ *
-++ * You should have received a copy of the GNU General Public License
-++ * along with this program; if not, write to the Free Software
-++ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-++ */
-++
-++#include <common.h>
-++#include <netdev.h>
-++#include <asm/io.h>
-++#include <asm/arch/mem.h>
-++#include <asm/arch/mux.h>
-++#include <asm/arch/sys_proto.h>
-++#include <asm/arch/emac_defs.h>
-++#include <asm/arch/gpio.h>
-++#include <i2c.h>
-++#include <asm/mach-types.h>
-++#include "am3517crane.h"
-++
-++
-++#if defined(CONFIG_DRIVER_TI_EMAC)
-++#define AM3517_IP_SW_RESET	0x48002598
-++#define CPGMACSS_SW_RST		(1 << 1)
-++#define ETHERNET_NRST		34
-++#define EMACID_ADDR_LSB 	0x48002380
-++#define EMACID_ADDR_MSB 	0x48002384
-++#endif
-++
-++DECLARE_GLOBAL_DATA_PTR;
-++
-++/*
-++ * Routine: board_init
-++ * Description: Early hardware init.
-++ */
-++int board_init(void)
-++{
-++	gpmc_init(); /* in SRAM or SDRAM, finish GPMC */
-++	/* board id for Linux */
-++	gd->bd->bi_arch_number = MACH_TYPE_CRANEBOARD;
-++	/* boot param addr */
-++	gd->bd->bi_boot_params = (OMAP34XX_SDRC_CS0 + 0x100);
-++
-++	return 0;
-++}
-++
-++/*
-++ * Routine: misc_init_r
-++ * Description: Init ethernet (done here so udelay works)
-++ */
-++int misc_init_r(void)
-++{
-++	u32 ctr;
-++	u32 reset;
-++
-++#ifdef CONFIG_DRIVER_OMAP34XX_I2C
-++	i2c_init(CONFIG_SYS_I2C_SPEED, CONFIG_SYS_I2C_SLAVE);
-++#endif
-++	dieid_num_r();
-++#if defined(CONFIG_DRIVER_TI_EMAC)
-++	omap_request_gpio(ETHERNET_NRST);
-++	omap_set_gpio_direction(ETHERNET_NRST, 0);
-++	omap_set_gpio_dataout(ETHERNET_NRST, 0);
-++	ctr  = 0;
-++	do {
-++		udelay(1000);
-++		ctr++;
-++		} while (ctr < 300);
-++	omap_set_gpio_dataout(ETHERNET_NRST, 1);
-++	ctr = 0;
-++	/* allow the PHY to stabilize and settle down */
-++	do {
-++		udelay(1000);
-++		ctr++;
-++		} while (ctr < 300);
-++
-++	/*ensure that the module is out of reset*/
-++	reset = readl(AM3517_IP_SW_RESET);
-++	reset &= (~CPGMACSS_SW_RST);
-++	writel(reset, AM3517_IP_SW_RESET);
-++#endif
-++	return 0;
-++}
-++
-++/*
-++ * Initializes on-chip ethernet controllers.
-++ * to override, implement board_eth_init()
-++ */
-++int cpu_eth_init(bd_t *bis)
-++{
-++#if defined(CONFIG_DRIVER_TI_EMAC)
-++	char mac_buf_lsb[8];
-++	char mac_buf_msb[16];
-++	char mac_id[24];
-++	const unsigned char separator = ':';
-++
-++	printf("davinci_emac_initialize\n");
-++	davinci_emac_initialize();
-++
-++	memset(mac_buf_lsb, '\0', sizeof(mac_buf_lsb));
-++	memset(mac_buf_msb, '\0', sizeof(mac_buf_msb));
-++	memset(mac_id, '\0', sizeof(mac_id));
-++
-++	sprintf(mac_buf_msb, "%x", readl(EMACID_ADDR_MSB));
-++	sprintf(mac_buf_lsb, "%x", readl(EMACID_ADDR_LSB));
-++	strcat(mac_buf_msb, mac_buf_lsb);
-++	sprintf(mac_id, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c",
-++			mac_buf_msb[0], mac_buf_msb[1], separator,
-++			mac_buf_msb[2], mac_buf_msb[3], separator,
-++			mac_buf_msb[4], mac_buf_msb[5], separator,
-++			mac_buf_msb[6], mac_buf_msb[7], separator,
-++			mac_buf_msb[8], mac_buf_msb[9], separator,
-++			mac_buf_msb[10], mac_buf_msb[11]);
-++
-++	printf("EMAC ID %s\n", mac_id);
-++	setenv("ethaddr", mac_id);
-++#endif
-++	return 0;
-++}
-++
-++/*
-++ * Routine: set_muxconf_regs
-++ * Description: Setting up the configuration Mux registers specific to the
-++ *		hardware. Many pins need to be moved from protect to primary
-++ *		mode.
-++ */
-++void set_muxconf_regs(void)
-++{
-++	MUX_AM3517CRANE();
-++}
-+diff --git a/board/ti/am3517crane/am3517crane.h b/board/ti/am3517crane/am3517crane.h
-+new file mode 100644
-+index 0000000..dbe2c34
-+--- /dev/null
-++++ b/board/ti/am3517crane/am3517crane.h
-+@@ -0,0 +1,339 @@
-++/*
-++ * am3517crane.h - Header file for the AM3517/05 Craneboard.
-++ *
-++ * Author: Srinath R <srinath@mistralsolutions.com>
-++ *
-++ * Based on ti/am3517evm/am3517evm.h
-++ *
-++ * Copyright (C) 2010 Mistral Solutions Pvt Ltd
-++ *
-++ * This program is free software; you can redistribute it and/or modify
-++ * it under the terms of the GNU General Public License as published by
-++ * the Free Software Foundation; either version 2 of the License, or
-++ * (at your option) any later version.
-++ *
-++ * This program is distributed in the hope that it will be useful,
-++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-++ * GNU General Public License for more details.
-++ *
-++ * You should have received a copy of the GNU General Public License
-++ * along with this program; if not, write to the Free Software
-++ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-++ */
-++
-++#ifndef _AM3517CRANE_H_
-++#define _AM3517CRANE_H_
-++
-++const omap3_sysinfo sysinfo = {
-++	DDR_DISCRETE,
-++	"Craneboard",
-++	"NAND",
-++};
-++
-++/*
-++ * IEN  - Input Enable
-++ * IDIS - Input Disable
-++ * PTD  - Pull type Down
-++ * PTU  - Pull type Up
-++ * DIS  - Pull type selection is inactive
-++ * EN   - Pull type selection is active
-++ * M0   - Mode 0
-++ * The commented string gives the final mux configuration for that pin
-++ */
-++#define MUX_AM3517CRANE() \
-++ /* SDRC */\
-++	MUX_VAL(CP(SDRC_D0),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D1),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D2),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D3),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D4),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D5),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D6),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D7),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D8),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D9),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D10),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D11),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D12),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D13),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D14),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D15),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D16),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D17),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D18),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D19),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D20),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D21),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D22),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D23),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D24),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D25),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D26),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D27),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D28),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D29),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D30),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_D31),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_CLK),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_DQS0),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_CKE0),		(M0)) \
-++	MUX_VAL(CP(SDRC_DQS1),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_DQS2),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_DQS3),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SDRC_DQS0N),		(IEN  | PTD | EN  | M0)) \
-++	MUX_VAL(CP(SDRC_DQS1N),		(IEN  | PTD | EN  | M0)) \
-++	MUX_VAL(CP(SDRC_DQS2N),		(IEN  | PTD | EN  | M0)) \
-++	MUX_VAL(CP(SDRC_DQS3N),		(IEN  | PTD | EN  | M0)) \
-++	MUX_VAL(CP(STRBEN_DLY0),	(IEN  | PTD | EN  | M0)) \
-++	MUX_VAL(CP(STRBEN_DLY1),	(IEN  | PTD | EN  | M0)) \
-++/* GPMC */\
-++	/* GPIO_34 ETHERNET_nRST */ \
-++	MUX_VAL(CP(GPMC_A1),		(IDIS | PTU | EN  | M4)) \
-++	/* GPIO_35 USB1_HOST_EN */ \
-++	MUX_VAL(CP(GPMC_A2),		(IDIS | PTU | EN  | M4)) \
-++	/* GPIO_36 USB0_OVER_CURRENT*/ \
-++	MUX_VAL(CP(GPMC_A3),		(IDIS | PTU | EN  | M4)) \
-++	/* GPIO_37 USB1_OVER_CURRENT */ \
-++	MUX_VAL(CP(GPMC_A4),		(IDIS | PTU | EN  | M4)) \
-++	/* GPIO_38 USB3320_RESET# */ \
-++	MUX_VAL(CP(GPMC_A5),		(IDIS | PTU | EN  | M4)) \
-++	MUX_VAL(CP(GPMC_A6),		(M7)) \
-++	/* GPIO_40 MMC1_WP */ \
-++	MUX_VAL(CP(GPMC_A7),		(IDIS | PTU | EN  | M4)) \
-++	/* GPIO_41 MMC1_CD */ \
-++	MUX_VAL(CP(GPMC_A8),		(IEN  | PTU | EN  | M4)) \
-++	MUX_VAL(CP(GPMC_A9),		(M7)) \
-++	MUX_VAL(CP(GPMC_A10),		(M7)) \
-++	MUX_VAL(CP(GPMC_D0),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D1),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D2),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D3),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D4),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D5),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D6),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D7),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D8),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D9),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D10),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D11),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D12),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D13),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D14),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_D15),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_NCS0),		(IDIS | PTU | EN  | M0)) \
-++	/* GPIO_52 DVI_LCD_PD */ \
-++	MUX_VAL(CP(GPMC_NCS1),		(IDIS | PTU | EN  | M4)) \
-++	MUX_VAL(CP(GPMC_NCS2),		(M7)) \
-++	MUX_VAL(CP(GPMC_NCS3),		(M7)) \
-++	MUX_VAL(CP(GPMC_NCS4),		(M7)) \
-++	MUX_VAL(CP(GPMC_NCS5),		(M7)) \
-++	MUX_VAL(CP(GPMC_NCS6),		(M7)) \
-++	MUX_VAL(CP(GPMC_NCS7),		(M7)) \
-++	MUX_VAL(CP(GPMC_CLK),		(IDIS | PTU | EN  | M0)) /* TP */ \
-++	MUX_VAL(CP(GPMC_NADV_ALE),	(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(GPMC_NOE),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(GPMC_NWE),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(GPMC_NBE0_CLE),	(IDIS | PTU | EN  | M0)) \
-++	MUX_VAL(CP(GPMC_NBE1),		(M7)) \
-++	MUX_VAL(CP(GPMC_NWP),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(GPMC_WAIT0),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(GPMC_WAIT1),		(M7)) \
-++	MUX_VAL(CP(GPMC_WAIT2),		(M7)) \
-++	MUX_VAL(CP(GPMC_WAIT3),		(M7)) \
-++/* DSS */\
-++	MUX_VAL(CP(DSS_PCLK),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_HSYNC),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_VSYNC),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_ACBIAS),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA0),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA1),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA2),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA3),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA4),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA5),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA6),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA7),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA8),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA9),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA10),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA11),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA12),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA13),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA14),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA15),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA16),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA17),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA18),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA19),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA20),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA21),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA22),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(DSS_DATA23),		(IDIS | PTD | DIS | M0)) \
-++ /* CCDC */\
-++	MUX_VAL(CP(CCDC_PCLK),		(IEN  | PTU | EN  | M0)) \
-++	/* CCDC_DATA8 */ \
-++	MUX_VAL(CP(CCDC_FIELD),		(IEN  | PTD | DIS | M1)) \
-++	MUX_VAL(CP(CCDC_HD),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(CCDC_VD),		(IEN  | PTU | EN  | M0)) \
-++	/* CCDC_DATA9 */ \
-++	MUX_VAL(CP(CCDC_WEN),		(IEN  | PTD | DIS | M1)) \
-++	MUX_VAL(CP(CCDC_DATA0),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(CCDC_DATA1),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(CCDC_DATA2),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(CCDC_DATA3),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(CCDC_DATA4),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(CCDC_DATA5),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(CCDC_DATA6),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(CCDC_DATA7),		(IEN  | PTD | DIS | M0)) \
-++ /* RMII */\
-++	MUX_VAL(CP(RMII_MDIO_DATA),	(IEN  |  M0)) \
-++	MUX_VAL(CP(RMII_MDIO_CLK),	(M0)) \
-++	MUX_VAL(CP(RMII_RXD0)	,	(IEN  | PTD | M0)) \
-++	MUX_VAL(CP(RMII_RXD1),		(IEN  | PTD | M0)) \
-++	MUX_VAL(CP(RMII_CRS_DV),	(IEN  | PTD | M0)) \
-++	MUX_VAL(CP(RMII_RXER),		(PTD  | M0)) \
-++	MUX_VAL(CP(RMII_TXD0),		(PTD  | M0)) \
-++	MUX_VAL(CP(RMII_TXD1),		(PTD  | M0)) \
-++	MUX_VAL(CP(RMII_TXEN),		(PTD  | M0)) \
-++	MUX_VAL(CP(RMII_50MHZ_CLK),	(IEN  | PTD | EN  | M0)) \
-++ /* McBSP2 */\
-++	MUX_VAL(CP(MCBSP2_FSX),		(M7)) \
-++	MUX_VAL(CP(MCBSP2_CLKX),	(M7)) \
-++	MUX_VAL(CP(MCBSP2_DR),		(M7)) \
-++	MUX_VAL(CP(MCBSP2_DX),		(M7)) \
-++ /* MMC1 */\
-++	MUX_VAL(CP(MMC1_CLK),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(MMC1_CMD),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MMC1_DAT0),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MMC1_DAT1),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MMC1_DAT2),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MMC1_DAT3),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MMC1_DAT4),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MMC1_DAT5),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MMC1_DAT6),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MMC1_DAT7),		(IEN  | PTU | DIS | M0)) \
-++ /* MMC2 */\
-++	MUX_VAL(CP(MMC2_CLK),		(IEN  | PTD | EN  | M0)) \
-++	MUX_VAL(CP(MMC2_CMD),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MMC2_DAT0),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MMC2_DAT1),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MMC2_DAT2),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MMC2_DAT3),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MMC2_DAT4),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MMC2_DAT5),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MMC2_DAT6),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MMC2_DAT7),		(IEN  | PTD | DIS | M0)) \
-++ /* McBSP3 */\
-++	MUX_VAL(CP(MCBSP3_DX),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MCBSP3_DR),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MCBSP3_CLKX),	(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MCBSP3_FSX),		(IEN  | PTD | DIS | M0)) \
-++ /* UART2 */\
-++	MUX_VAL(CP(UART2_CTS),		(M7)) \
-++	MUX_VAL(CP(UART2_RTS),		(M7)) \
-++	MUX_VAL(CP(UART2_TX),		(M7)) \
-++	MUX_VAL(CP(UART2_RX),		(M7)) \
-++ /* UART1 */\
-++	MUX_VAL(CP(UART1_TX),		(M7)) \
-++	MUX_VAL(CP(UART1_RTS),		(M7)) \
-++	MUX_VAL(CP(UART1_CTS),		(M7)) \
-++	MUX_VAL(CP(UART1_RX),		(M7)) \
-++	MUX_VAL(CP(MCBSP4_CLKX),	(M7)) \
-++	MUX_VAL(CP(MCBSP4_DR),		(M7)) \
-++	MUX_VAL(CP(MCBSP4_DX),		(M7)) \
-++	MUX_VAL(CP(MCBSP4_FSX),		(M7)) \
-++ /* McBSP1 */ \
-++	MUX_VAL(CP(MCBSP_CLKS),		(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(MCBSP1_CLKR),	(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MCBSP1_FSR),		(IDIS | PTU | EN  | M0)) \
-++	MUX_VAL(CP(MCBSP1_DX),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MCBSP1_DR),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MCBSP1_FSX),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(MCBSP1_CLKX),	(IEN  | PTD | DIS | M0)) \
-++ /* UART3 */\
-++	MUX_VAL(CP(UART3_CTS_RCTX),	(IEN  | PTU | DIS | M0)) \
-++	MUX_VAL(CP(UART3_RTS_SD),	(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(UART3_RX_IRRX),	(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(UART3_TX_IRTX),	(IDIS | PTD | DIS | M0)) \
-++ /* HSUSB */\
-++	MUX_VAL(CP(USB0_DRVBUS),	(IEN  | PTD | EN  | M0)) \
-++ /* HECC */\
-++	MUX_VAL(CP(HECC1_TXD),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(HECC1_RXD),		(IEN  | PTU | EN  | M0)) \
-++ /* I2C 1, 2, 3 */\
-++	MUX_VAL(CP(I2C1_SCL),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(I2C1_SDA),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(I2C3_SCL),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(I2C3_SDA),		(IEN  | PTU | EN  | M0)) \
-++ /* HDQ */\
-++	/* GPIO_170 TP */ \
-++	MUX_VAL(CP(HDQ_SIO),		(IEN  | PTU | EN  | M4)) \
-++	/* McSPI1 */\
-++	/* GPIO_171 TP */ \
-++	MUX_VAL(CP(MCSPI1_CLK),		(IEN  | PTU | EN  | M4)) \
-++	/* GPIO_172 TP */ \
-++	MUX_VAL(CP(MCSPI1_SIMO),	(IEN  | PTU | EN  | M4)) \
-++	/* GPIO_173 TP */ \
-++	MUX_VAL(CP(MCSPI1_SOMI),	(IEN  | PTU | EN  | M4)) \
-++	 /* GPIO_174 TP */ \
-++	MUX_VAL(CP(MCSPI1_CS0),		(IEN  | PTU | EN  | M4)) \
-++	/* GPIO_175 TP */ \
-++	MUX_VAL(CP(MCSPI1_CS1),		(IEN  | PTU | EN  | M4)) \
-++	/* GPIO_176 TP*/ \
-++	MUX_VAL(CP(MCSPI1_CS2),		(IEN  | PTU | EN  | M4)) \
-++	 /* GPIO_176 TP*/ \
-++	MUX_VAL(CP(MCSPI1_CS3),		(IEN  | PTD | EN  | M4)) \
-++ /* McSPI2 */\
-++	MUX_VAL(CP(MCSPI2_CLK),		(M7)) \
-++	MUX_VAL(CP(MCSPI2_SIMO),	(M7)) \
-++	MUX_VAL(CP(MCSPI2_SOMI),	(M7)) \
-++	MUX_VAL(CP(MCSPI2_CS0),		(M7)) \
-++	MUX_VAL(CP(MCSPI2_CS1),		(M7)) \
-++	MUX_VAL(CP(SYS_NIRQ),		(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(SYS_CLKOUT2),	(IEN  | PTU | EN  | M0)) \
-++ /* ETK (ES2 onwards) */\
-++	MUX_VAL(CP(ETK_CLK_ES2),	(IEN  | PTU | EN  | M3)) \
-++	MUX_VAL(CP(ETK_CTL_ES2),	(IDIS | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D0_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D1_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D2_ES2),		(IEN  | PTD | EN  | M3)) \
-++	MUX_VAL(CP(ETK_D3_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D4_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D5_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D6_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D7_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D8_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D9_ES2),		(IEN  | PTD | DIS | M3)) \
-++	MUX_VAL(CP(ETK_D10_ES2),	(M7)) \
-++	MUX_VAL(CP(ETK_D11_ES2),	(M7)) \
-++	MUX_VAL(CP(ETK_D12_ES2),	(M7)) \
-++	MUX_VAL(CP(ETK_D13_ES2),	(M7)) \
-++	MUX_VAL(CP(ETK_D14_ES2),	(M7)) \
-++	MUX_VAL(CP(ETK_D15_ES2),	(M7)) \
-++	MUX_VAL(CP(SYS_32K),		(IEN  | PTD | DIS | M0)) \
-++	/* GPIO_1 TPS_SLEEP */ \
-++	MUX_VAL(CP(SYS_CLKREQ),		(IEN  | PTD | DIS | M4)) \
-++	/* GPIO_30 TO Exp */ \
-++	MUX_VAL(CP(SYS_NRESWARM),     	(IEN  | PTU | EN  | M0)) \
-++	MUX_VAL(CP(SYS_BOOT1),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SYS_BOOT2),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SYS_BOOT3),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SYS_BOOT4),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SYS_BOOT5),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SYS_BOOT6),		(IDIS | PTD | DIS | M0)) \
-++	MUX_VAL(CP(SYS_BOOT7),		(IEN  | PTD | EN  | M0)) \
-++	MUX_VAL(CP(SYS_BOOT8),		(IEN  | PTD | EN  | M0)) \
-++	/* GPIO_10 TP */ \
-++	MUX_VAL(CP(SYS_CLKOUT1),	(IEN  | PTD | DIS | M4)) \
-++ /* JTAG */ \
-++	MUX_VAL(CP(JTAG_nTRST),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(JTAG_TCK),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(JTAG_TMS),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(JTAG_TDI),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(JTAG_EMU0),		(IEN  | PTD | DIS | M0)) \
-++	MUX_VAL(CP(JTAG_EMU1),		(IEN  | PTD | DIS | M0)) \
-++
-++#endif /* _AM3517CRANE_H_ */
-+diff --git a/board/ti/am3517crane/config.mk b/board/ti/am3517crane/config.mk
-+new file mode 100644
-+index 0000000..529edb5
-+--- /dev/null
-++++ b/board/ti/am3517crane/config.mk
-+@@ -0,0 +1,29 @@
-++#
-++# Author: Srinath.R <srinath@mistralsolutions.com>
-++#
-++# Based on ti/am3517evm/config.mk
-++#
-++# Copyright (C) 2010 Mistral Solutions Pvt Ltd
-++#
-++# This program is free software; you can redistribute it and/or modify
-++# it under the terms of the GNU General Public License as published by
-++# the Free Software Foundation; either version 2 of the License, or
-++# (at your option) any later version.
-++#
-++# This program is distributed in the hope that it will be useful,
-++# but WITHOUT ANY WARRANTY; without even the implied warranty of
-++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-++# GNU General Public License for more details.
-++#
-++# You should have received a copy of the GNU General Public License
-++# along with this program; if not, write to the Free Software
-++# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-++#
-++# Physical Address:
-++# 8000'0000 (bank0)
-++# A000/0000 (bank1)
-++# Linux-Kernel is expected to be at 8000'8000, entry 8000'8000
-++# (mem base + reserved)
-++
-++# For use with external or internal boots.
-++TEXT_BASE = 0x80e80000
-+diff --git a/common/Makefile b/common/Makefile
-+index 47f6a71..e5a7b7c 100644
-+--- a/common/Makefile
-++++ b/common/Makefile
-+@@ -159,6 +159,7 @@ COBJS-$(CONFIG_LYNXKDI) += lynxkdi.o
-+ COBJS-$(CONFIG_MODEM_SUPPORT) += modem.o
-+ COBJS-$(CONFIG_UPDATE_TFTP) += update.o
-+ COBJS-$(CONFIG_USB_KEYBOARD) += usb_kbd.o
-++COBJS-$(CONFIG_DRIVER_TI_EMAC) += cmd_readmacid.o
-+
-+
-+ COBJS	:= $(sort $(COBJS-y))
-+diff --git a/common/cmd_readmacid.c b/common/cmd_readmacid.c
-+new file mode 100644
-+index 0000000..4ebe870
-+--- /dev/null
-++++ b/common/cmd_readmacid.c
-+@@ -0,0 +1,51 @@
-++/*
-++ * cmd_readmacid.c
-++ *
-++ * Displays Craneboard's EMAC ID
-++ *
-++ * Author : Ulaganathan.V  <ulaganathan@mistralsolutions.com>
-++ *
-++ * Copyright (C) 2010 Mistral Solutions Pvt Ltd  <www.mistralsolutions.com>
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
 ++ *
 ++ * This program is free software; you can redistribute it and/or
 ++ * modify it under the terms of the GNU General Public License as
@@ -745,222 +223,866 @@ index 0000000..ff058ec
 ++ * along with this program; if not, write to the Free Software
 ++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 ++ * MA 02111-1307 USA
-++ *
-++ */
-++/*
-++ * modification history
-++ * --------------------
-++ * 23 Aug 2010 - Created
-++ *
 ++ */
 ++#include <common.h>
+++#include <command.h>
+++#include <part.h>
+++#include <fat.h>
+++#include <asm/arch/cpu.h>
+++#include <asm/arch/bits.h>
+++#include <asm/arch/mux.h>
+++#include <asm/arch/sys_proto.h>
+++#include <asm/arch/sys_info.h>
+++#include <asm/arch/clocks.h>
+++#include <asm/arch/mem.h>
+++#include "am3517crane.h"
 ++
-++#if defined(CONFIG_DRIVER_TI_EMAC)
-++/* MAC ID */
-++#define EMAC_MACID_ADDR_LSB 0x48002380
-++#define EMAC_MACID_ADDR_MSB 0x48002384
+++/* Used to index into DPLL parameter tables */
+++struct dpll_param {
+++	unsigned int m;
+++	unsigned int n;
+++	unsigned int fsel;
+++	unsigned int m2;
+++};
 ++
-++int read_mac_id(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
+++/*******************************************************
+++ * Routine: delay
+++ * Description: spinning delay to use before udelay works
+++ ******************************************************/
+++static inline void delay(unsigned long loops)
 ++{
-++	run_command("print ethaddr", 0);
+++	__asm__ volatile ("1:\n" "subs %0, %1, #1\n"
+++			  "bne 1b" : "=r" (loops) : "0"(loops));
+++}
+++
+++/*****************************************
+++ * Routine: board_init
+++ * Description: Early hardware init.
+++ *****************************************/
+++int board_init(void)
+++{
 ++	return 0;
 ++}
-++U_BOOT_CMD(readmacid, 10, 1, read_mac_id, "Display the EMAC ID of the board\n",
-++		"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+++
+++/* TODO: Move it to common place so that should be used
+++ * for all OMAP series of devices
+++ */
+++u32 is_cpu_family(void)
+++{
+++	u32 cpuid = 0, cpu_family = 0;
+++	u16 hawkeye;
+++
+++	cpuid = __raw_readl(OMAP34XX_CONTROL_ID);
+++	hawkeye  = (cpuid >> HAWKEYE_SHIFT) & 0xffff;
+++
+++	switch (hawkeye) {
+++	case HAWKEYE_AM35XX:
+++	default:
+++		cpu_family = CPU_AM35XX;
+++		break;
+++	}
+++	return cpu_family;
+++}
+++/*************************************************************
+++ *  get_device_type(): tell if GP/HS/EMU/TST
+++ *************************************************************/
+++u32 get_device_type(void)
+++{
+++	int mode;
+++	mode = __raw_readl(CONTROL_STATUS) & (DEVICE_MASK);
+++	return mode >>= 8;
+++}
+++
+++/************************************************
+++ * get_sysboot_value(void) - return SYS_BOOT[4:0]
+++ ************************************************/
+++u32 get_sysboot_value(void)
+++{
+++	int mode;
+++	mode = __raw_readl(CONTROL_STATUS) & (SYSBOOT_MASK);
+++	return mode;
+++}
+++/*************************************************************
+++ * Routine: get_mem_type(void) - returns the kind of memory connected
+++ * to GPMC that we are trying to boot form. Uses SYS BOOT settings.
+++ *************************************************************/
+++u32 get_mem_type(void)
+++{
+++	u32   mem_type = get_sysboot_value();
+++	switch (mem_type) {
+++
+++	case 1:
+++	case 12:
+++	case 15:
+++	case 21:
+++	case 27:
+++		return GPMC_NAND;
+++	case 13:
+++	case 16:
+++	case 17:
+++	case 18:
+++	case 24:
+++		return MMC_NAND;
+++	default:
+++		return GPMC_NAND;
+++	}
+++}
+++
+++/******************************************
+++ * get_cpu_rev(void) - extract version info
+++ ******************************************/
+++u32 get_cpu_rev(void)
+++{
+++	u32 cpuid = 0;
+++	/* On ES1.0 the IDCODE register is not exposed on L4
+++	 * so using CPU ID to differentiate
+++	 * between ES2.0 and ES1.0.
+++	 */
+++	__asm__ __volatile__("mrc p15, 0, %0, c0, c0, 0" : "=r" (cpuid));
+++	if ((cpuid  & 0xf) == 0x0)
+++		return CPU_3430_ES1;
+++	else
+++		return CPU_3430_ES2;
+++
+++}
+++
+++/*****************************************************************
+++ * sr32 - clear & set a value in a bit range for a 32 bit address
+++ *****************************************************************/
+++void sr32(u32 addr, u32 start_bit, u32 num_bits, u32 value)
+++{
+++	u32 tmp, msk = 0;
+++	msk = 1 << num_bits;
+++	--msk;
+++	tmp = __raw_readl(addr) & ~(msk << start_bit);
+++	tmp |=  value << start_bit;
+++	__raw_writel(tmp, addr);
+++}
+++
+++/*********************************************************************
+++ * wait_on_value() - common routine to allow waiting for changes in
+++ *   volatile regs.
+++ *********************************************************************/
+++u32 wait_on_value(u32 read_bit_mask, u32 match_value, u32 read_addr, u32 bound)
+++{
+++	u32 i = 0, val;
+++	do {
+++		++i;
+++		val = __raw_readl(read_addr) & read_bit_mask;
+++		if (val == match_value)
+++			return 1;
+++		if (i == bound)
+++			return 0;
+++	} while (1);
+++}
+++
+++/*********************************************************************
+++ * config_emif4_ddr() - Init/Configure DDR on AM3517 EVM board.
+++ *********************************************************************/
+++void config_emif4_ddr(void)
+++{
+++	unsigned int regval;
+++
+++	/* Set the DDR PHY parameters in PHY ctrl registers */
+++	regval = (EMIF4_DDR1_RD_LAT | (EMIF4_DDR1_PWRDN_DIS << 6) |
+++		(EMIF4_DDR1_STRBEN_EXT << 7) | (EMIF4_DDR1_DLL_MODE << 12) |
+++		(EMIF4_DDR1_VTP_DYN << 15) | (EMIF4_DDR1_LB_CK_SEL << 23));
+++	__raw_writel(regval, EMIF4_DDR_PHYCTL1);
+++	__raw_writel(regval, EMIF4_DDR_PHYCTL1_SHDW);
+++
+++	regval = (EMIF4_DDR2_TX_DATA_ALIGN | (EMIF4_DDR2_RX_DLL_BYPASS << 1));
+++	__raw_writel(regval, EMIF4_DDR_PHYCTL2);
+++
+++	/* Reset the DDR PHY and wait till completed */
+++	sr32(EMIF4_IODFT_TLGC, 10, 1, 1);
+++	/*Wait till that bit clears*/
+++	while ((__raw_readl(EMIF4_IODFT_TLGC) & BIT10) == 0x1)
+++		;
+++	/*Re-verify the DDR PHY status*/
+++	while ((__raw_readl(EMIF4_SDRAM_STS) & BIT2) == 0x0)
+++		;
+++
+++	sr32(EMIF4_IODFT_TLGC, 0, 1, 1);
+++	/* Set SDR timing registers */
+++	regval = (EMIF4_TIM1_T_WTR | (EMIF4_TIM1_T_RRD << 3) |
+++		(EMIF4_TIM1_T_RC << 6) | (EMIF4_TIM1_T_RAS << 12) |
+++		(EMIF4_TIM1_T_WR << 17) | (EMIF4_TIM1_T_RCD << 21) |
+++		(EMIF4_TIM1_T_RP << 25));
+++	__raw_writel(regval, EMIF4_SDRAM_TIM1);
+++	__raw_writel(regval, EMIF4_SDRAM_TIM1_SHDW);
+++
+++	regval = (EMIF4_TIM2_T_CKE | (EMIF4_TIM2_T_RTP << 3) |
+++		(EMIF4_TIM2_T_XSRD << 6) | (EMIF4_TIM2_T_XSNR << 16) |
+++		(EMIF4_TIM2_T_ODT << 25) | (EMIF4_TIM2_T_XP << 28));
+++	__raw_writel(regval, EMIF4_SDRAM_TIM2);
+++	__raw_writel(regval, EMIF4_SDRAM_TIM2_SHDW);
+++
+++	regval = (EMIF4_TIM3_T_RAS_MAX | (EMIF4_TIM3_T_RFC << 4) |
+++		(EMIF4_TIM3_T_TDQSCKMAX << 13));
+++	__raw_writel(regval, EMIF4_SDRAM_TIM3);
+++	__raw_writel(regval, EMIF4_SDRAM_TIM3_SHDW);
+++
+++	/* Set the PWR control register */
+++	regval = (EMIF4_PWR_PM_TIM | (EMIF4_PWR_PM_EN << 8) |
+++		(EMIF4_PWR_DPD_EN << 10) | (EMIF4_PWR_IDLE << 30));
+++	__raw_writel(regval, EMIF4_PWR_MGT_CTRL);
+++	__raw_writel(regval, EMIF4_PWR_MGT_CTRL_SHDW);
+++
+++	/* Set the DDR refresh rate control register */
+++	regval = (EMIF4_REFRESH_RATE | (EMIF4_PASR << 24) |
+++		(EMIF4_INITREF_DIS << 31));
+++	__raw_writel(regval, EMIF4_SDRAM_RFCR);
+++	__raw_writel(regval, EMIF4_SDRAM_RFCR_SHDW);
+++
+++	/* set the SDRAM configuration register */
+++	regval = (EMIF4_CFG_PGSIZE | (EMIF4_CFG_EBANK << 3) |
+++		(EMIF4_CFG_IBANK << 4) | (EMIF4_CFG_ROWSIZE << 7) |
+++		(EMIF4_CFG_CL << 10) | (EMIF4_CFG_NARROW_MD << 14) |
+++		(EMIF4_CFG_CWL << 16) | (EMIF4_CFG_SDR_DRV << 18) |
+++		(EMIF4_CFG_DDR_DIS_DLL << 20) | (EMIF4_CFG_DYN_ODT << 21) |
+++		(EMIF4_CFG_DDR2_DDQS << 23) | (EMIF4_CFG_DDR_TERM << 24) |
+++		(EMIF4_CFG_IBANK_POS << 27) | (EMIF4_CFG_SDRAM_TYP << 29));
+++	__raw_writel(regval, EMIF4_SDRAM_CFG);
+++}
+++
+++/*************************************************************
+++ * get_sys_clk_speed - determine reference oscillator speed
+++ *  based on known 32kHz clock and gptimer.
+++ *************************************************************/
+++u32 get_osc_clk_speed(void)
+++{
+++	u32 start, cstart, cend, cdiff, val;
+++
+++	val = __raw_readl(PRM_CLKSRC_CTRL);
+++	/* If SYS_CLK is being divided by 2, remove for now */
+++	val = (val & (~BIT7)) | BIT6;
+++	__raw_writel(val, PRM_CLKSRC_CTRL);
+++
+++	/* enable timer2 */
+++	val = __raw_readl(CM_CLKSEL_WKUP) | BIT0;
+++	/* select sys_clk for GPT1 */
+++	__raw_writel(val, CM_CLKSEL_WKUP);
+++
+++	/* Enable I and F Clocks for GPT1 */
+++	val = __raw_readl(CM_ICLKEN_WKUP) | BIT0 | BIT2;
+++	__raw_writel(val, CM_ICLKEN_WKUP);
+++	val = __raw_readl(CM_FCLKEN_WKUP) | BIT0;
+++	__raw_writel(val, CM_FCLKEN_WKUP);
+++
+++	/* start counting at 0 */
+++	__raw_writel(0, OMAP34XX_GPT1 + TLDR);
+++	/* enable clock */
+++	__raw_writel(GPT_EN, OMAP34XX_GPT1 + TCLR);
+++	/* enable 32kHz source *//* enabled out of reset */
+++	/* determine sys_clk via gauging */
+++
+++	/* start time in 20 cycles */
+++	start = 20 + __raw_readl(S32K_CR);
+++	/* dead loop till start time */
+++	while (__raw_readl(S32K_CR) < start)
+++		;
+++	/* get start sys_clk count */
+++	cstart = __raw_readl(OMAP34XX_GPT1 + TCRR);
+++	/* wait for 40 cycles */
+++	while (__raw_readl(S32K_CR) < (start + 20))
+++		;
+++	/* get end sys_clk count */
+++	cend = __raw_readl(OMAP34XX_GPT1 + TCRR);
+++	/* get elapsed ticks */
+++	cdiff = cend - cstart;
+++
+++	/* based on number of ticks assign speed */
+++	if (cdiff > 19000)
+++		return S38_4M;
+++	else if (cdiff > 15200)
+++		return S26M;
+++	else if (cdiff > 13000)
+++		return S24M;
+++	else if (cdiff > 9000)
+++		return S19_2M;
+++	else if (cdiff > 7600)
+++		return S13M;
+++	else
+++		return S12M;
+++}
+++
+++/******************************************************************************
+++ * get_sys_clkin_sel() - returns the sys_clkin_sel field value based on
+++ *   -- input oscillator clock frequency.
+++ *
+++ *****************************************************************************/
+++void get_sys_clkin_sel(u32 osc_clk, u32 *sys_clkin_sel)
+++{
+++	if (osc_clk == S38_4M)
+++		*sys_clkin_sel =  4;
+++	else if (osc_clk == S26M)
+++		*sys_clkin_sel = 3;
+++	else if (osc_clk == S19_2M)
+++		*sys_clkin_sel = 2;
+++	else if (osc_clk == S13M)
+++		*sys_clkin_sel = 1;
+++	else if (osc_clk == S12M)
+++		*sys_clkin_sel = 0;
+++}
+++
+++/******************************************************************************
+++ * prcm_init() - inits clocks for PRCM as defined in clocks.h
+++ *   -- called from SRAM, or Flash (using temp SRAM stack).
+++ *****************************************************************************/
+++void prcm_init(void)
+++{
+++	u32 osc_clk = 0, sys_clkin_sel;
+++	struct dpll_param *dpll_param_p;
+++	u32 clk_index, sil_index;
+++
+++	/* Gauge the input clock speed and find out the sys_clkin_sel
+++	 * value corresponding to the input clock.
+++	 */
+++	osc_clk = get_osc_clk_speed();
+++	get_sys_clkin_sel(osc_clk, &sys_clkin_sel);
+++
+++	sr32(PRM_CLKSEL, 0, 3, sys_clkin_sel); /* set input crystal speed */
+++
+++	/* If the input clock is greater than 19.2M always divide/2 */
+++	if (sys_clkin_sel > 2) {
+++		sr32(PRM_CLKSRC_CTRL, 6, 2, 2);/* input clock divider */
+++		clk_index = sys_clkin_sel/2;
+++	} else {
+++		sr32(PRM_CLKSRC_CTRL, 6, 2, 1);/* input clock divider */
+++		clk_index = sys_clkin_sel;
+++	}
+++
+++	/* The DPLL tables are defined according to sysclk value and
+++	 * silicon revision. The clk_index value will be used to get
+++	 * the values for that input sysclk from the DPLL param table
+++	 * and sil_index will get the values for that SysClk for the
+++	 * appropriate silicon rev.
+++	 */
+++	sil_index = get_cpu_rev() - 1;
+++
+++	/* Unlock MPU DPLL (slows things down, and needed later) */
+++	sr32(CM_CLKEN_PLL_MPU, 0, 3, PLL_LOW_POWER_BYPASS);
+++	wait_on_value(BIT0, 0, CM_IDLEST_PLL_MPU, LDELAY);
+++
+++	/* Getting the base address of Core DPLL param table*/
+++	dpll_param_p = (struct dpll_param *)get_core_dpll_param();
+++	/* Moving it to the right sysclk and ES rev base */
+++	dpll_param_p = dpll_param_p + 2*clk_index + sil_index;
+++	/* CORE DPLL */
+++	/* sr32(CM_CLKSEL2_EMU) set override to work when asleep */
+++	sr32(CM_CLKEN_PLL, 0, 3, PLL_FAST_RELOCK_BYPASS);
+++	wait_on_value(BIT0, 0, CM_IDLEST_CKGEN, LDELAY);
+++	sr32(CM_CLKSEL1_EMU, 16, 5, CORE_M3X2);	/* m3x2 */
+++	sr32(CM_CLKSEL1_PLL, 27, 2, dpll_param_p->m2);	/* Set M2 */
+++	sr32(CM_CLKSEL1_PLL, 16, 11, dpll_param_p->m);	/* Set M */
+++	sr32(CM_CLKSEL1_PLL, 8, 7, dpll_param_p->n);	/* Set N */
+++	sr32(CM_CLKSEL1_PLL, 6, 1, 0);			/* 96M Src */
+++	sr32(CM_CLKSEL_CORE, 2, 2, CORE_L4_DIV);	/* l4 */
+++	sr32(CM_CLKSEL_CORE, 0, 2, CORE_L3_DIV);	/* l3 */
+++	sr32(CM_CLKSEL_WKUP, 1, 2, WKUP_RSM);		/* reset mgr */
+++	sr32(CM_CLKEN_PLL, 4, 4, dpll_param_p->fsel);	/* FREQSEL */
+++	sr32(CM_CLKEN_PLL, 0, 3, PLL_LOCK);		/* lock mode */
+++	wait_on_value(BIT0, 1, CM_IDLEST_CKGEN, LDELAY);
+++
+++	/* Getting the base address to PER  DPLL param table*/
+++	dpll_param_p = (struct dpll_param *)get_per_dpll_param();
+++	/* Moving it to the right sysclk base */
+++	dpll_param_p = dpll_param_p + clk_index;
+++	/* PER DPLL */
+++	sr32(CM_CLKEN_PLL, 16, 3, PLL_STOP);
+++	wait_on_value(BIT1, 0, CM_IDLEST_CKGEN, LDELAY);
+++	sr32(CM_CLKSEL1_EMU, 24, 5, PER_M6X2);	/* set M6 */
+++	sr32(CM_CLKSEL_CAM, 0, 5, PER_M5X2);	/* set M5 */
+++	sr32(CM_CLKSEL_DSS, 0, 5, PER_M4X2);	/* set M4 */
+++	sr32(CM_CLKSEL_DSS, 8, 5, PER_M3X2);	/* set M3 */
+++	sr32(CM_CLKSEL3_PLL, 0, 5, dpll_param_p->m2);	/* set M2 */
+++	sr32(CM_CLKSEL2_PLL, 8, 11, dpll_param_p->m);	/* set m */
+++	sr32(CM_CLKSEL2_PLL, 0, 7, dpll_param_p->n);	/* set n */
+++	sr32(CM_CLKEN_PLL, 20, 4, dpll_param_p->fsel);/* FREQSEL */
+++	sr32(CM_CLKEN_PLL, 16, 3, PLL_LOCK);	/* lock mode */
+++	wait_on_value(BIT1, 2, CM_IDLEST_CKGEN, LDELAY);
+++
+++	/* Getting the base address to MPU DPLL param table*/
+++	dpll_param_p = (struct dpll_param *)get_mpu_dpll_param();
+++	/* Moving it to the right sysclk and ES rev base */
+++	dpll_param_p = dpll_param_p + 2*clk_index + sil_index;
+++	/* MPU DPLL (unlocked already) */
+++	sr32(CM_CLKSEL2_PLL_MPU, 0, 5, dpll_param_p->m2);	/* Set M2 */
+++	sr32(CM_CLKSEL1_PLL_MPU, 8, 11, dpll_param_p->m);	/* Set M */
+++	sr32(CM_CLKSEL1_PLL_MPU, 0, 7, dpll_param_p->n);	/* Set N */
+++	sr32(CM_CLKEN_PLL_MPU, 4, 4, dpll_param_p->fsel);	/* FREQSEL */
+++	sr32(CM_CLKEN_PLL_MPU, 0, 3, PLL_LOCK); /* lock mode */
+++	wait_on_value(BIT0, 1, CM_IDLEST_PLL_MPU, LDELAY);
+++
+++	/* Set up GPTimers to sys_clk source only */
+++	sr32(CM_CLKSEL_PER, 0, 8, 0xff);
+++	sr32(CM_CLKSEL_WKUP, 0, 1, 1);
+++
+++	delay(5000);
+++}
+++
+++/*****************************************
+++ * Routine: secure_unlock
+++ * Description: Setup security registers for access
+++ * (GP Device only)
+++ *****************************************/
+++void secure_unlock(void)
+++{
+++	/* Permission values for registers -Full fledged permissions to all */
+++	#define UNLOCK_1 0xFFFFFFFF
+++	#define UNLOCK_2 0x00000000
+++	#define UNLOCK_3 0x0000FFFF
+++	/* Protection Module Register Target APE (PM_RT)*/
+++	__raw_writel(UNLOCK_1, RT_REQ_INFO_PERMISSION_1);
+++	__raw_writel(UNLOCK_1, RT_READ_PERMISSION_0);
+++	__raw_writel(UNLOCK_1, RT_WRITE_PERMISSION_0);
+++	__raw_writel(UNLOCK_2, RT_ADDR_MATCH_1);
+++
+++	__raw_writel(UNLOCK_3, GPMC_REQ_INFO_PERMISSION_0);
+++	__raw_writel(UNLOCK_3, GPMC_READ_PERMISSION_0);
+++	__raw_writel(UNLOCK_3, GPMC_WRITE_PERMISSION_0);
+++
+++	__raw_writel(UNLOCK_3, OCM_REQ_INFO_PERMISSION_0);
+++	__raw_writel(UNLOCK_3, OCM_READ_PERMISSION_0);
+++	__raw_writel(UNLOCK_3, OCM_WRITE_PERMISSION_0);
+++	__raw_writel(UNLOCK_2, OCM_ADDR_MATCH_2);
+++
+++	__raw_writel(UNLOCK_1, SMS_RG_ATT0); /* SDRC region 0 public */
+++}
+++
+++/**********************************************************
+++ * Routine: try_unlock_sram()
+++ * Description: If chip is GP type, unlock the SRAM for
+++ *  general use.
+++ ***********************************************************/
+++void try_unlock_memory(void)
+++{
+++	int mode;
+++
+++	/* if GP device unlock device SRAM for general use */
+++	/* secure code breaks for Secure/Emulation device - HS/E/T*/
+++	mode = get_device_type();
+++	if (mode == GP_DEVICE)
+++		secure_unlock();
+++	return;
+++}
+++
+++/**********************************************************
+++ * Routine: s_init
+++ * Description: Does early system init of muxing and clocks.
+++ * - Called at time when only stack is available.
+++ **********************************************************/
+++
+++void s_init(void)
+++{
+++	watchdog_init();
+++#ifdef CONFIG_3430_AS_3410
+++	/* setup the scalability control register for
+++	 * 3430 to work in 3410 mode
+++	 */
+++	__raw_writel(0x5ABF, CONTROL_SCALABLE_OMAP_OCP);
 ++#endif
+++	try_unlock_memory();
+++	set_muxconf_regs();
+++	delay(100);
+++	prcm_init();
+++	per_clocks_enable();
 ++
+++	/* enable the DDRPHY clk */
+++	sr32((OMAP34XX_CTRL_BASE + 0x588), 15, 15, 0x1);
+++	/* enable the EMIF4 clk */
+++	sr32((OMAP34XX_CTRL_BASE + 0x588), 14, 14, 0x1);
+++	/* Enable the peripheral clocks */
+++	sr32((OMAP34XX_CTRL_BASE + 0x59C), 0, 4, 0xF);
+++	sr32((OMAP34XX_CTRL_BASE + 0x59C), 8, 10, 0x7);
 ++
+++	/* bring cpgmac out of reset */
+++	sr32((OMAP34XX_CTRL_BASE + 0x598), 1, 1, 0x1);
 ++
+++	/* Configure the EMIF4 for our DDR */
+++	config_emif4_ddr();
+++}
 ++
+++/*******************************************************
+++ * Routine: misc_init_r
+++ * Description: Init ethernet (done here so udelay works)
+++ ********************************************************/
+++int misc_init_r(void)
+++{
+++	return 0;
+++}
 ++
-+diff --git a/cpu/arm_cortexa8/omap3/clock.c b/cpu/arm_cortexa8/omap3/clock.c
-+index 5b90c5f..90d8a57 100644
-+--- a/cpu/arm_cortexa8/omap3/clock.c
-++++ b/cpu/arm_cortexa8/omap3/clock.c
-+@@ -685,7 +685,7 @@ void per_clocks_enable(void)
-+ 	sr32(&prcm_base->fclken1_core, 25, 1, 1);
-+ 	sr32(&prcm_base->iclken_wkup, 25, 1, 1);
-+
-+-#ifndef CONFIG_OMAP3_AM3517EVM
-++#if  (!defined(CONFIG_OMAP3_AM3517EVM) || !defined(CONFIG_OMAP3_AM3517CRANE))
-+ 	sr32(&prcm_base->fclken_iva2, 0, 32, FCK_IVA2_ON);
-+ #endif
-+
-+@@ -697,7 +697,7 @@ void per_clocks_enable(void)
-+ 	sr32(&prcm_base->fclken_dss, 0, 32, FCK_DSS_ON);
-+ 	sr32(&prcm_base->iclken_dss, 0, 32, ICK_DSS_ON);
-+
-+-#ifndef CONFIG_OMAP3_AM3517EVM
-++#if  (!defined(CONFIG_OMAP3_AM3517EVM) || !defined(CONFIG_OMAP3_AM3517CRANE))
-+ 	sr32(&prcm_base->fclken_cam, 0, 32, FCK_CAM_ON);
-+ 	sr32(&prcm_base->iclken_cam, 0, 32, ICK_CAM_ON);
-+ #endif
-+diff --git a/drivers/net/davinci_emac.c b/drivers/net/davinci_emac.c
-+index d0ee3a2..3f761ed 100644
-+--- a/drivers/net/davinci_emac.c
-++++ b/drivers/net/davinci_emac.c
-+@@ -301,7 +301,9 @@ static int davinci_eth_open(struct eth_device *dev, bd_t *bis)
-+ 	adap_emac->SOFTRESET = 1;
-+ 	while (adap_emac->SOFTRESET != 0) {;}
-+
-+-#if defined(CONFIG_SOC_DM646x) || defined(CONFIG_SOC_DM365) || (CONFIG_OMAP3_AM3517EVM)
-++#if (defined(CONFIG_SOC_DM646x) || defined(CONFIG_SOC_DM365) || \
-++     defined(CONFIG_OMAP3_AM3517EVM) || defined(CONFIG_OMAP3_AM3517CRANE))
+++/******************************************************
+++ * Routine: wait_for_command_complete
+++ * Description: Wait for posting to finish on watchdog
+++ ******************************************************/
+++void wait_for_command_complete(unsigned int wd_base)
+++{
+++	int pending = 1;
+++	do {
+++		pending = __raw_readl(wd_base + WWPS);
+++	} while (pending);
+++}
 ++
-+ 	adap_ewrap->SOFTRST = 1;
-+ 	while (adap_ewrap->SOFTRST != 0) {;}
-+ #else
-+@@ -324,7 +326,8 @@ static int davinci_eth_open(struct eth_device *dev, bd_t *bis)
-+ 		(davinci_eth_mac_addr[2] << 16) |
-+ 		(davinci_eth_mac_addr[1] << 8)  |
-+ 		(davinci_eth_mac_addr[0]);
-+-#if defined(CONFIG_SOC_DM646x) || defined(CONFIG_SOC_DM365) || (CONFIG_OMAP3_AM3517EVM)
-++#if (defined(CONFIG_SOC_DM646x) || defined(CONFIG_SOC_DM365) || \
-++     defined(CONFIG_OMAP3_AM3517EVM) || defined(CONFIG_OMAP3_AM3517CRANE))
-+ 	adap_emac->MACADDRLO =
-+ 		(davinci_eth_mac_addr[5] << 8) |
-+ 		(davinci_eth_mac_addr[4]| (1 << 19) | (1 << 20));
-+@@ -477,7 +480,8 @@ static void davinci_eth_close(struct eth_device *dev)
-+ 	/* Reset EMAC module and disable interrupts in wrapper */
-+ 	adap_emac->SOFTRESET = 1;
-+
-+-#if defined(CONFIG_SOC_DM646x) || defined(CONFIG_SOC_DM365) || (CONFIG_OMAP3_AM3517EVM)
-++#if (defined(CONFIG_SOC_DM646x) || defined(CONFIG_SOC_DM365) ||  \
-++     defined(CONFIG_OMAP3_AM3517EVM) || defined(CONFIG_OMAP3_AM3517CRANE))
-+ 	adap_ewrap->SOFTRST = 1;
-+ #else
-+ 	adap_ewrap->EWCTL = 0;
-+diff --git a/drivers/net/davinci_emac.h b/drivers/net/davinci_emac.h
-+index 66f4cdb..d1d19e1 100644
-+--- a/drivers/net/davinci_emac.h
-++++ b/drivers/net/davinci_emac.h
-+@@ -257,7 +257,8 @@ typedef struct  {
-+
-+ /* EMAC Wrapper Registers Structure */
-+ typedef struct  {
-+-#if defined(CONFIG_SOC_DM646x) || defined(CONFIG_SOC_DM365) || (CONFIG_OMAP3_AM3517EVM)
-++#if (defined(CONFIG_SOC_DM646x) || defined(CONFIG_SOC_DM365) || \
-++     defined(CONFIG_OMAP3_AM3517EVM) || defined(CONFIG_OMAP3_AM3517CRANE))
-+ 	dv_reg		IDVER;
-+ 	dv_reg		SOFTRST;
-+ 	dv_reg		EMCTRL;
-+diff --git a/drivers/usb/musb/musb_core.c b/drivers/usb/musb/musb_core.c
-+index 99c6c90..094ae0f 100644
-+--- a/drivers/usb/musb/musb_core.c
-++++ b/drivers/usb/musb/musb_core.c
-+@@ -142,7 +142,7 @@ void write_fifo(u8 ep, u32 length, void *fifo_data)
-+ void read_fifo(u8 ep, u32 length, void *fifo_data)
-+ {
-+ 	u8  *data = (u8 *)fifo_data;
-+-#ifdef CONFIG_OMAP3_AM3517EVM
-++#if (defined(CONFIG_OMAP3_AM3517EVM) || defined(CONFIG_OMAP3_AM3517CRANE))
-+ 	int i;
-+ 	u32 val;
-+ #endif
-+@@ -151,7 +151,7 @@ void read_fifo(u8 ep, u32 length, void *fifo_data)
-+ 	writeb(ep, &musbr->index);
-+
-+ 	/* read the data to the fifo */
-+-#ifdef CONFIG_OMAP3_AM3517EVM
-++#if (defined(CONFIG_OMAP3_AM3517EVM) || defined(CONFIG_OMAP3_AM3517CRANE))
-+ 	/* AM3517 FIFO should be read double word wise as bytewise
-+ 	 * FIFO read corrupts the FIFO
-+ 	 */
-+diff --git a/include/asm-arm/arch-omap3/clocks.h b/include/asm-arm/arch-omap3/clocks.h
-+index 117965a..cceedd2 100644
-+--- a/include/asm-arm/arch-omap3/clocks.h
-++++ b/include/asm-arm/arch-omap3/clocks.h
-+@@ -31,7 +31,7 @@
-+ #define S38_4M		38400000
-+
-+ #define FCK_IVA2_ON	0x00000001
-+-#ifdef CONFIG_OMAP3_AM3517EVM
-++#if (defined(CONFIG_OMAP3_AM3517EVM) || defined(CONFIG_OMAP3_AM3517CRANE))
-+ #define FCK_CORE1_ON    0x037ffe00
-+ #define ICK_CORE1_ON    0x037ffe42
-+ #define ICK_CORE2_ON    0x00000000
-+diff --git a/include/asm-arm/arch-omap3/mem.h b/include/asm-arm/arch-omap3/mem.h
-+index d3a0838..fd14f3f 100644
-+--- a/include/asm-arm/arch-omap3/mem.h
-++++ b/include/asm-arm/arch-omap3/mem.h
-+@@ -186,7 +186,7 @@ enum {
-+ #define SMNAND_GPMC_CONFIG6	0x1F0F0A80
-+ #define SMNAND_GPMC_CONFIG7	0x00000C44
-+
-+-#if defined(CONFIG_OMAP3_AM3517EVM)
-++#if (defined(CONFIG_OMAP3_AM3517EVM) || defined(CONFIG_OMAP3_AM3517CRANE))
-+ #define M_NAND_GPMC_CONFIG1	0x00001800
-+ #define M_NAND_GPMC_CONFIG2	0x00080800
-+ #define M_NAND_GPMC_CONFIG3	0x00080800
-+@@ -194,7 +194,7 @@ enum {
-+ #define M_NAND_GPMC_CONFIG5	0x00080808
-+ #define M_NAND_GPMC_CONFIG6	0x000003cf
-+ #define M_NAND_GPMC_CONFIG7	0x00000848
-+-#else	/* CONFIG_OMAP3_AM3517EVM */
-++#else	/* CONFIG_OMAP3_AM3517EVM or CONFIG_OMAP3_AM3517CRANE */
-+ #define M_NAND_GPMC_CONFIG1	0x00001800
-+ #define M_NAND_GPMC_CONFIG2	0x00141400
-+ #define M_NAND_GPMC_CONFIG3	0x00141400
-+@@ -202,7 +202,7 @@ enum {
-+ #define M_NAND_GPMC_CONFIG5	0x010C1414
-+ #define M_NAND_GPMC_CONFIG6	0x1f0f0A80
-+ #define M_NAND_GPMC_CONFIG7	0x00000C44
-+-#endif	/* CONFIG_OMAP3_AM3517EVM */
-++#endif	/* CONFIG_OMAP3_AM3517EVM or CONFIG_OMAP3_AM3517CRANE */
-+
-+ #define STNOR_GPMC_CONFIG1	0x3
-+ #define STNOR_GPMC_CONFIG2	0x00151501
-+diff --git a/include/asm-arm/mach-types.h b/include/asm-arm/mach-types.h
-+index 6c1f5ac..aacf39c 100644
-+--- a/include/asm-arm/mach-types.h
-++++ b/include/asm-arm/mach-types.h
-+@@ -2401,7 +2401,7 @@ extern unsigned int __machine_arch_type;
-+ #define MACH_TYPE_MULTIBUS_MASTER      2416
-+ #define MACH_TYPE_MULTIBUS_PBK         2417
-+ #define MACH_TYPE_TNETV107X            2418
-+-
-++#define MACH_TYPE_CRANEBOARD           2932
-+ #ifdef CONFIG_ARCH_EBSA110
-+ # ifdef machine_arch_type
-+ #  undef machine_arch_type
-+@@ -31034,6 +31034,18 @@ extern unsigned int __machine_arch_type;
-+ # define machine_is_tnetv107x()	(0)
-+ #endif
-+
-++#ifdef CONFIG_MACH_CRANEBOARD
-++# ifdef machine_arch_type
-++#  undef machine_arch_type
-++#  define machine_arch_type	__machine_arch_type
-++# else
-++#  define machine_arch_type	MACH_TYPE_CRANEBOARD
-++# endif
-++# define machine_is_craneboard() (machine_arch_type == MACH_TYPE_CRANEBOARD)
-++#else
-++# define machine_is_craneboard()	(0)
+++/****************************************
+++ * Routine: watchdog_init
+++ * Description: Shut down watch dogs
+++ *****************************************/
+++void watchdog_init(void)
+++{
+++	/* There are 3 watch dogs WD1=Secure, WD2=MPU, WD3=IVA. WD1 is
+++	 * either taken care of by ROM (HS/EMU) or not accessible (GP).
+++	 * We need to take care of WD2-MPU or take a PRCM reset.  WD3
+++	 * should not be running and does not generate a PRCM reset.
+++	 */
+++	sr32(CM_FCLKEN_WKUP, 5, 1, 1);
+++	sr32(CM_ICLKEN_WKUP, 5, 1, 1);
+++	wait_on_value(BIT5, 0x20, CM_IDLEST_WKUP, 5); /* some issue here */
+++
+++	__raw_writel(WD_UNLOCK1, WD2_BASE + WSPR);
+++	wait_for_command_complete(WD2_BASE);
+++	__raw_writel(WD_UNLOCK2, WD2_BASE + WSPR);
+++}
+++
+++/**********************************************
+++ * Routine: dram_init
+++ * Description: sets uboots idea of sdram size
+++ **********************************************/
+++int dram_init(void)
+++{
+++	return 0;
+++}
+++
+++/*****************************************************************
+++ * Routine: peripheral_enable
+++ * Description: Enable the clks & power for perifs (GPT2, UART1,...)
+++ ******************************************************************/
+++void per_clocks_enable(void)
+++{
+++	/* Enable GP2 timer. */
+++	sr32(CM_CLKSEL_PER, 0, 1, 0x1); /* GPT2 = sys clk */
+++	sr32(CM_ICLKEN_PER, 3, 1, 0x1); /* ICKen GPT2 */
+++	sr32(CM_FCLKEN_PER, 3, 1, 0x1); /* FCKen GPT2 */
+++
+++#ifdef CFG_NS16550
+++	/* Enable UART1 clocks */
+++	sr32(CM_FCLKEN1_CORE, 13, 1, 0x1);
+++	sr32(CM_ICLKEN1_CORE, 13, 1, 0x1);
+++
+++	/* Enable UART2 clocks */
+++	sr32(CM_FCLKEN1_CORE, 14, 1, 0x1);
+++	sr32(CM_ICLKEN1_CORE, 14, 1, 0x1);
+++
+++	/* Enable UART2 clocks */
+++	sr32(CM_FCLKEN_PER, 11, 1, 0x1);
+++	sr32(CM_ICLKEN_PER, 11, 1, 0x1);
 ++#endif
+++	/* Enable MMC1 clocks */
+++	sr32(CM_FCLKEN1_CORE, 24, 1, 0x1);
+++	sr32(CM_ICLKEN1_CORE, 24, 1, 0x1);
 ++
-+ /*
-+  * These have not yet been registered
-+  */
-+diff --git a/include/configs/am3517_crane.h b/include/configs/am3517_crane.h
-+new file mode 100644
-+index 0000000..9637e9d
-+--- /dev/null
-++++ b/include/configs/am3517_crane.h
-+@@ -0,0 +1,352 @@
+++	/* Enable MMC2 clocks */
+++	sr32(CM_FCLKEN1_CORE, 25, 1, 0x1);
+++	sr32(CM_ICLKEN1_CORE, 25, 1, 0x1);
+++
+++	delay(1000);
+++}
+++
+++/* Set MUX for UART, GPMC, SDRC, GPIO */
+++
+++#define 	MUX_VAL(OFFSET, VALUE)\
+++		__raw_writew((VALUE), OMAP34XX_CTRL_BASE + (OFFSET));
+++
+++#define		CP(x)	(CONTROL_PADCONF_##x)
 ++/*
-++ * am3517_crane.h - Default configuration for AM3517/05 Craneboard.
+++ * IEN  - Input Enable
+++ * IDIS - Input Disable
+++ * PTD  - Pull type Down
+++ * PTU  - Pull type Up
+++ * DIS  - Pull type selection is inactive
+++ * EN   - Pull type selection is active
+++ * M0   - Mode 0
+++ * The commented string gives the final mux configuration for that pin
+++ */
+++#define MUX_DEFAULT()\
+++	MUX_VAL(CP(SDRC_D0),        (IEN  | PTD | DIS | M0)) /*SDRC_D0*/\
+++	MUX_VAL(CP(SDRC_D1),        (IEN  | PTD | DIS | M0)) /*SDRC_D1*/\
+++	MUX_VAL(CP(SDRC_D2),        (IEN  | PTD | DIS | M0)) /*SDRC_D2*/\
+++	MUX_VAL(CP(SDRC_D3),        (IEN  | PTD | DIS | M0)) /*SDRC_D3*/\
+++	MUX_VAL(CP(SDRC_D4),        (IEN  | PTD | DIS | M0)) /*SDRC_D4*/\
+++	MUX_VAL(CP(SDRC_D5),        (IEN  | PTD | DIS | M0)) /*SDRC_D5*/\
+++	MUX_VAL(CP(SDRC_D6),        (IEN  | PTD | DIS | M0)) /*SDRC_D6*/\
+++	MUX_VAL(CP(SDRC_D7),        (IEN  | PTD | DIS | M0)) /*SDRC_D7*/\
+++	MUX_VAL(CP(SDRC_D8),        (IEN  | PTD | DIS | M0)) /*SDRC_D8*/\
+++	MUX_VAL(CP(SDRC_D9),        (IEN  | PTD | DIS | M0)) /*SDRC_D9*/\
+++	MUX_VAL(CP(SDRC_D10),       (IEN  | PTD | DIS | M0)) /*SDRC_D10*/\
+++	MUX_VAL(CP(SDRC_D11),       (IEN  | PTD | DIS | M0)) /*SDRC_D11*/\
+++	MUX_VAL(CP(SDRC_D12),       (IEN  | PTD | DIS | M0)) /*SDRC_D12*/\
+++	MUX_VAL(CP(SDRC_D13),       (IEN  | PTD | DIS | M0)) /*SDRC_D13*/\
+++	MUX_VAL(CP(SDRC_D14),       (IEN  | PTD | DIS | M0)) /*SDRC_D14*/\
+++	MUX_VAL(CP(SDRC_D15),       (IEN  | PTD | DIS | M0)) /*SDRC_D15*/\
+++	MUX_VAL(CP(SDRC_D16),       (IEN  | PTD | DIS | M0)) /*SDRC_D16*/\
+++	MUX_VAL(CP(SDRC_D17),       (IEN  | PTD | DIS | M0)) /*SDRC_D17*/\
+++	MUX_VAL(CP(SDRC_D18),       (IEN  | PTD | DIS | M0)) /*SDRC_D18*/\
+++	MUX_VAL(CP(SDRC_D19),       (IEN  | PTD | DIS | M0)) /*SDRC_D19*/\
+++	MUX_VAL(CP(SDRC_D20),       (IEN  | PTD | DIS | M0)) /*SDRC_D20*/\
+++	MUX_VAL(CP(SDRC_D21),       (IEN  | PTD | DIS | M0)) /*SDRC_D21*/\
+++	MUX_VAL(CP(SDRC_D22),       (IEN  | PTD | DIS | M0)) /*SDRC_D22*/\
+++	MUX_VAL(CP(SDRC_D23),       (IEN  | PTD | DIS | M0)) /*SDRC_D23*/\
+++	MUX_VAL(CP(SDRC_D24),       (IEN  | PTD | DIS | M0)) /*SDRC_D24*/\
+++	MUX_VAL(CP(SDRC_D25),       (IEN  | PTD | DIS | M0)) /*SDRC_D25*/\
+++	MUX_VAL(CP(SDRC_D26),       (IEN  | PTD | DIS | M0)) /*SDRC_D26*/\
+++	MUX_VAL(CP(SDRC_D27),       (IEN  | PTD | DIS | M0)) /*SDRC_D27*/\
+++	MUX_VAL(CP(SDRC_D28),       (IEN  | PTD | DIS | M0)) /*SDRC_D28*/\
+++	MUX_VAL(CP(SDRC_D29),       (IEN  | PTD | DIS | M0)) /*SDRC_D29*/\
+++	MUX_VAL(CP(SDRC_D30),       (IEN  | PTD | DIS | M0)) /*SDRC_D30*/\
+++	MUX_VAL(CP(SDRC_D31),       (IEN  | PTD | DIS | M0)) /*SDRC_D31*/\
+++	MUX_VAL(CP(SDRC_CLK),       (IEN  | PTD | DIS | M0)) /*SDRC_CLK*/\
+++	MUX_VAL(CP(SDRC_DQS0),      (IEN  | PTD | DIS | M0)) /*SDRC_DQS0*/\
+++	MUX_VAL(CP(SDRC_DQS1),      (IEN  | PTD | DIS | M0)) /*SDRC_DQS1*/\
+++	MUX_VAL(CP(SDRC_DQS2),      (IEN  | PTD | DIS | M0)) /*SDRC_DQS2*/\
+++	MUX_VAL(CP(SDRC_DQS3),      (IEN  | PTD | DIS | M0)) /*SDRC_DQS3*/\
+++	MUX_VAL(CP(sdrc_cke0),      (M0)) /*SDRC_CKE0*/\
+++	MUX_VAL(CP(sdrc_cke1),      (M0)) /*SDRC_CKE1*/\
+++	MUX_VAL(CP(GPMC_A1),        (IDIS | PTD | DIS | M0)) /*GPMC_A1*/\
+++	MUX_VAL(CP(GPMC_A2),        (IDIS | PTD | DIS | M0)) /*GPMC_A2*/\
+++	MUX_VAL(CP(GPMC_A3),        (IDIS | PTD | DIS | M0)) /*GPMC_A3*/\
+++	MUX_VAL(CP(GPMC_A4),        (IDIS | PTD | DIS | M0)) /*GPMC_A4*/\
+++	MUX_VAL(CP(GPMC_A5),        (IDIS | PTD | DIS | M0)) /*GPMC_A5*/\
+++	MUX_VAL(CP(GPMC_A6),        (IDIS | PTD | DIS | M0)) /*GPMC_A6*/\
+++	MUX_VAL(CP(GPMC_A7),        (IDIS | PTD | DIS | M0)) /*GPMC_A7*/\
+++	MUX_VAL(CP(GPMC_A8),        (IDIS | PTD | DIS | M0)) /*GPMC_A8*/\
+++	MUX_VAL(CP(GPMC_A9),        (IDIS | PTD | DIS | M0)) /*GPMC_A9*/\
+++	MUX_VAL(CP(GPMC_A10),       (IDIS | PTD | DIS | M0)) /*GPMC_A10*/\
+++	MUX_VAL(CP(GPMC_D0),        (IEN  | PTD | DIS | M0)) /*GPMC_D0*/\
+++	MUX_VAL(CP(GPMC_D1),        (IEN  | PTD | DIS | M0)) /*GPMC_D1*/\
+++	MUX_VAL(CP(GPMC_D2),        (IEN  | PTD | DIS | M0)) /*GPMC_D2*/\
+++	MUX_VAL(CP(GPMC_D3),        (IEN  | PTD | DIS | M0)) /*GPMC_D3*/\
+++	MUX_VAL(CP(GPMC_D4),        (IEN  | PTD | DIS | M0)) /*GPMC_D4*/\
+++	MUX_VAL(CP(GPMC_D5),        (IEN  | PTD | DIS | M0)) /*GPMC_D5*/\
+++	MUX_VAL(CP(GPMC_D6),        (IEN  | PTD | DIS | M0)) /*GPMC_D6*/\
+++	MUX_VAL(CP(GPMC_D7),        (IEN  | PTD | DIS | M0)) /*GPMC_D7*/\
+++	MUX_VAL(CP(GPMC_D8),        (IEN  | PTD | DIS | M0)) /*GPMC_D8*/\
+++	MUX_VAL(CP(GPMC_D9),        (IEN  | PTD | DIS | M0)) /*GPMC_D9*/\
+++	MUX_VAL(CP(GPMC_D10),       (IEN  | PTD | DIS | M0)) /*GPMC_D10*/\
+++	MUX_VAL(CP(GPMC_D11),       (IEN  | PTD | DIS | M0)) /*GPMC_D11*/\
+++	MUX_VAL(CP(GPMC_D12),       (IEN  | PTD | DIS | M0)) /*GPMC_D12*/\
+++	MUX_VAL(CP(GPMC_D13),       (IEN  | PTD | DIS | M0)) /*GPMC_D13*/\
+++	MUX_VAL(CP(GPMC_D14),       (IEN  | PTD | DIS | M0)) /*GPMC_D14*/\
+++	MUX_VAL(CP(GPMC_D15),       (IEN  | PTD | DIS | M0)) /*GPMC_D15*/\
+++	MUX_VAL(CP(GPMC_nCS0),      (IDIS | PTU | EN  | M0)) /*GPMC_nCS0*/\
+++	MUX_VAL(CP(GPMC_nCS1),      (IDIS | PTU | EN  | M0)) /*GPMC_nCS1*/\
+++	MUX_VAL(CP(GPMC_nCS2),      (IDIS | PTU | EN  | M0)) /*GPMC_nCS2*/\
+++	MUX_VAL(CP(GPMC_nCS3),      (IDIS | PTU | EN  | M0)) /*GPMC_nCS3*/\
+++	MUX_VAL(CP(GPMC_nCS4),      (IDIS | PTU | EN  | M0)) /*GPMC_nCS4*/\
+++	MUX_VAL(CP(GPMC_nCS5),      (IDIS | PTU | EN  | M0)) /*GPMC_nCS5*/\
+++	MUX_VAL(CP(GPMC_nCS6),      (IDIS | PTU | EN  | M0)) /*GPMC_nCS6*/\
+++	MUX_VAL(CP(GPMC_nCS7),      (IDIS | PTU | EN  | M0)) /*GPMC_nCS7*/\
+++	MUX_VAL(CP(GPMC_CLK),       (IDIS | PTD | DIS | M0)) /*GPMC_CLK*/\
+++	MUX_VAL(CP(GPMC_nADV_ALE),  (IDIS | PTD | DIS | M0)) /*GPMC_nADV_ALE*/\
+++	MUX_VAL(CP(GPMC_nOE),       (IDIS | PTD | DIS | M0)) /*GPMC_nOE*/\
+++	MUX_VAL(CP(GPMC_nWE),       (IDIS | PTD | DIS | M0)) /*GPMC_nWE*/\
+++	MUX_VAL(CP(GPMC_nBE0_CLE),  (IDIS | PTD | DIS | M0)) /*GPMC_nBE0_CLE*/\
+++	MUX_VAL(CP(GPMC_nBE1),      (IDIS | PTD | DIS | M4)) /*GPIO_61*/\
+++	MUX_VAL(CP(GPMC_nWP),       (IEN  | PTD | DIS | M0)) /*GPMC_nWP*/\
+++	MUX_VAL(CP(GPMC_WAIT0),     (IEN  | PTU | EN  | M0)) /*GPMC_WAIT0*/\
+++	MUX_VAL(CP(GPMC_WAIT1),     (IEN  | PTU | EN  | M0)) /*GPMC_WAIT1*/\
+++	MUX_VAL(CP(GPMC_WAIT2),     (IEN  | PTU | EN  | M4)) /*GPIO_64*/\
+++	MUX_VAL(CP(GPMC_WAIT3),     (IEN  | PTU | EN  | M4)) /*GPIO_65*/\
+++	MUX_VAL(CP(DSS_DATA18),     (IEN  | PTD | DIS | M4)) /*GPIO_88*/\
+++	MUX_VAL(CP(DSS_DATA19),     (IEN  | PTD | DIS | M4)) /*GPIO_89*/\
+++	MUX_VAL(CP(DSS_DATA20),     (IEN  | PTD | DIS | M4)) /*GPIO_90*/\
+++	MUX_VAL(CP(DSS_DATA21),     (IEN  | PTD | DIS | M4)) /*GPIO_91*/\
+++	MUX_VAL(CP(CAM_WEN),        (IEN  | PTD | DIS | M4)) /*GPIO_167*/\
+++	MUX_VAL(CP(UART3_TX_IRTX),       (IDIS | PTD | DIS | M0)) /*UART1_TX*/\
+++	MUX_VAL(CP(UART3_RTS_SD),      (IDIS | PTD | DIS | M0)) /*UART1_RTS*/\
+++	MUX_VAL(CP(UART3_CTS_RCTX),      (IEN | PTU | DIS | M0)) /*UART1_CTS*/\
+++	MUX_VAL(CP(UART3_RX_IRRX),       (IEN | PTD | DIS | M0)) /*UART1_RX*/\
+++	/*Expansion card  */\
+++	MUX_VAL(CP(MMC1_CLK),          (IEN  | PTU | EN  | M0)) /*MMC1_CLK*/\
+++	MUX_VAL(CP(MMC1_CMD),          (IEN  | PTU | DIS | M0)) /*MMC1_CMD*/\
+++	MUX_VAL(CP(MMC1_DAT0),         (IEN  | PTU | DIS | M0)) /*MMC1_DAT0*/\
+++	MUX_VAL(CP(MMC1_DAT1),         (IEN  | PTU | DIS | M0)) /*MMC1_DAT1*/\
+++	MUX_VAL(CP(MMC1_DAT2),         (IEN  | PTU | DIS | M0)) /*MMC1_DAT2*/\
+++	MUX_VAL(CP(MMC1_DAT3),         (IEN  | PTU | DIS | M0)) /*MMC1_DAT3*/\
+++	MUX_VAL(CP(MMC1_DAT4),         (IEN  | PTU | DIS | M0)) /*MMC1_DAT4*/\
+++	MUX_VAL(CP(MMC1_DAT5),         (IEN  | PTU | DIS | M0)) /*MMC1_DAT5*/\
+++	MUX_VAL(CP(MMC1_DAT6),         (IEN  | PTU | DIS | M0)) /*MMC1_DAT6*/\
+++	MUX_VAL(CP(MMC1_DAT7),         (IEN  | PTU | DIS | M0)) /*MMC1_DAT7*/\
+++	MUX_VAL(CP(McBSP1_DX),      (IEN  | PTD | DIS | M4)) /*GPIO_158*/\
+++	MUX_VAL(CP(SYS_32K),        (IEN  | PTD | DIS | M0)) /*SYS_32K*/\
+++	MUX_VAL(CP(SYS_BOOT0),      (IEN  | PTD | DIS | M4)) /*GPIO_2 */\
+++	MUX_VAL(CP(SYS_BOOT1),      (IEN  | PTD | DIS | M4)) /*GPIO_3 */\
+++	MUX_VAL(CP(SYS_BOOT2),      (IEN  | PTD | DIS | M4)) /*GPIO_4 */\
+++	MUX_VAL(CP(SYS_BOOT3),      (IEN  | PTD | DIS | M4)) /*GPIO_5 */\
+++	MUX_VAL(CP(SYS_BOOT4),      (IEN  | PTD | DIS | M4)) /*GPIO_6 */\
+++	MUX_VAL(CP(SYS_BOOT5),      (IEN  | PTD | DIS | M4)) /*GPIO_7 */\
+++	MUX_VAL(CP(SYS_BOOT6),      (IEN  | PTD | DIS | M4)) /*GPIO_8 */\
+++	MUX_VAL(CP(SYS_CLKOUT2),    (IEN  | PTU | EN  | M4)) /*GPIO_186*/\
+++	MUX_VAL(CP(JTAG_nTRST),     (IEN  | PTD | DIS | M0)) /*JTAG_nTRST*/\
+++	MUX_VAL(CP(JTAG_TCK),       (IEN  | PTD | DIS | M0)) /*JTAG_TCK*/\
+++	MUX_VAL(CP(JTAG_TMS),       (IEN  | PTD | DIS | M0)) /*JTAG_TMS*/\
+++	MUX_VAL(CP(JTAG_TDI),       (IEN  | PTD | DIS | M0)) /*JTAG_TDI*/\
+++	MUX_VAL(CP(JTAG_EMU0),      (IEN  | PTD | DIS | M0)) /*JTAG_EMU0*/\
+++	MUX_VAL(CP(JTAG_EMU1),      (IEN  | PTD | DIS | M0)) /*JTAG_EMU1*/\
+++	MUX_VAL(CP(ETK_CLK),        (IEN  | PTD | DIS | M4)) /*GPIO_12*/\
+++	MUX_VAL(CP(ETK_CTL),        (IEN  | PTD | DIS | M4)) /*GPIO_13*/\
+++	MUX_VAL(CP(ETK_D0),        (IEN  | PTD | DIS | M4)) /*GPIO_14*/\
+++	MUX_VAL(CP(ETK_D1),        (IEN  | PTD | DIS | M4)) /*GPIO_15*/\
+++	MUX_VAL(CP(ETK_D2),        (IEN  | PTD | DIS | M4)) /*GPIO_16*/\
+++	MUX_VAL(CP(ETK_D10),        (IEN  | PTD | DIS | M4)) /*GPIO_24*/\
+++	MUX_VAL(CP(ETK_D11),        (IEN  | PTD | DIS | M4)) /*GPIO_25*/\
+++	MUX_VAL(CP(ETK_D12),        (IEN  | PTD | DIS | M4)) /*GPIO_26*/\
+++	MUX_VAL(CP(ETK_D13),        (IEN  | PTD | DIS | M4)) /*GPIO_27*/\
+++	MUX_VAL(CP(ETK_D14),        (IEN  | PTD | DIS | M4)) /*GPIO_28*/\
+++	MUX_VAL(CP(ETK_D15),        (IEN  | PTD | DIS | M4)) /*GPIO_29*/
+++
+++/**********************************************************
+++ * Routine: set_muxconf_regs
+++ * Description: Setting up the configuration Mux registers
+++ *              specific to the hardware. Many pins need
+++ *              to be moved from protect to primary mode.
+++ *********************************************************/
+++void set_muxconf_regs(void)
+++{
+++	MUX_DEFAULT();
+++}
+++
+++/**********************************************************
+++ * Routine: nand+_init
+++ * Description: Set up nand for nand and jffs2 commands
+++ *********************************************************/
+++
+++int nand_init(void)
+++{
+++	/* global settings */
+++	__raw_writel(0x10, GPMC_SYSCONFIG);	/* smart idle */
+++	__raw_writel(0x0, GPMC_IRQENABLE);	/* isr's sources masked */
+++	__raw_writel(0, GPMC_TIMEOUT_CONTROL);/* timeout disable */
+++
+++	/* Set the GPMC Vals . For NAND boot on 3430SDP, NAND is mapped at CS0
+++	 * , NOR at CS1 and MPDB at CS3. And oneNAND boot, we map oneNAND at
+++	 * CS0. We configure only GPMC CS0 with required values. Configiring
+++	 * other devices at other CS in done in u-boot anyway. So we don't
+++	 * have to bother doing it here.
+++	 */
+++
+++	__raw_writel(0, GPMC_CONFIG7 + GPMC_CONFIG_CS0);
+++	delay(1000);
+++
+++	if ((get_mem_type() == GPMC_NAND) || (get_mem_type() == MMC_NAND)) {
+++		__raw_writel(M_NAND_GPMC_CONFIG1,
+++				GPMC_CONFIG1 + GPMC_CONFIG_CS0);
+++		__raw_writel(M_NAND_GPMC_CONFIG2,
+++				GPMC_CONFIG2 + GPMC_CONFIG_CS0);
+++		__raw_writel(M_NAND_GPMC_CONFIG3,
+++				GPMC_CONFIG3 + GPMC_CONFIG_CS0);
+++		__raw_writel(M_NAND_GPMC_CONFIG4,
+++				GPMC_CONFIG4 + GPMC_CONFIG_CS0);
+++		__raw_writel(M_NAND_GPMC_CONFIG5,
+++				GPMC_CONFIG5 + GPMC_CONFIG_CS0);
+++		__raw_writel(M_NAND_GPMC_CONFIG6,
+++				GPMC_CONFIG6 + GPMC_CONFIG_CS0);
+++
+++		/* Enable the GPMC Mapping */
+++		__raw_writel((((OMAP34XX_GPMC_CS0_SIZE & 0xF)<<8) |
+++					((NAND_BASE_ADR>>24) & 0x3F) | (1<<6)),
+++				(GPMC_CONFIG7 + GPMC_CONFIG_CS0));
+++		delay(2000);
+++
+++		if (nand_chip()) {
+++#ifdef CFG_PRINTF
+++			printf("Unsupported Chip!\n");
+++#endif
+++			return 1;
+++		}
+++	}
+++
+++	if ((get_mem_type() == GPMC_ONENAND) ||
+++			(get_mem_type() == MMC_ONENAND)) {
+++		__raw_writel(ONENAND_GPMC_CONFIG1,
+++				GPMC_CONFIG1 + GPMC_CONFIG_CS0);
+++		__raw_writel(ONENAND_GPMC_CONFIG2,
+++				GPMC_CONFIG2 + GPMC_CONFIG_CS0);
+++		__raw_writel(ONENAND_GPMC_CONFIG3,
+++				GPMC_CONFIG3 + GPMC_CONFIG_CS0);
+++		__raw_writel(ONENAND_GPMC_CONFIG4,
+++				GPMC_CONFIG4 + GPMC_CONFIG_CS0);
+++		__raw_writel(ONENAND_GPMC_CONFIG5,
+++				GPMC_CONFIG5 + GPMC_CONFIG_CS0);
+++		__raw_writel(ONENAND_GPMC_CONFIG6,
+++				GPMC_CONFIG6 + GPMC_CONFIG_CS0);
+++
+++		/* Enable the GPMC Mapping */
+++		__raw_writel((((OMAP34XX_GPMC_CS0_SIZE & 0xF)<<8) |
+++					((ONENAND_BASE>>24) & 0x3F) | (1<<6)),
+++				(GPMC_CONFIG7 + GPMC_CONFIG_CS0));
+++		delay(2000);
+++
+++		if (onenand_chip()) {
+++#ifdef CFG_PRINTF
+++			printf("OneNAND Unsupported !\n");
+++#endif
+++			return 1;
+++		}
+++	}
+++	return 0;
+++}
+++
+++
+++typedef int (mmc_boot_addr) (void);
+++int mmc_boot(unsigned char *buf)
+++{
+++	long size = 0;
+++#ifdef CFG_CMD_FAT
+++	block_dev_desc_t *dev_desc = NULL;
+++	unsigned char ret = 0;
+++	printf("Starting X-loader on MMC \n");
+++
+++	ret = mmc_init(1);
+++	if (ret == 0) {
+++		printf("\n MMC init failed \n");
+++		return 0;
+++	}
+++
+++	dev_desc = mmc_get_dev(0);
+++	fat_register_device(dev_desc, 1);
+++	size = file_fat_read("u-boot.bin", buf, 0);
+++	if (size == -1)
+++		return 0;
+++
+++	printf("\n%ld Bytes Read from MMC \n", size);
+++
+++	printf("Starting OS Bootloader from MMC...\n");
+++#endif
+++	return size;
+++}
+++
+++/* optionally do something like blinking LED */
+++void board_hang(void)
+++{
+++	while (0)
+++		;
+++}
++diff --git a/board/am3517crane/am3517crane.h b/board/am3517crane/am3517crane.h
++new file mode 100644
++index 0000000..400b774
++--- /dev/null
+++++ b/board/am3517crane/am3517crane.h
++@@ -0,0 +1,103 @@
+++/*
+++ * (C) Copyright 2010 Mistral Solutions Pvt Ltd. <www.mistralsolutions.com>
+++ * Umesh Krishnan <umeshk@mistralsolutions.com>
 ++ *
-++ * Author: Srinath.R <srinath@mistralsolutions.com>
+++ * Header file for board/am3517crane/am3517crane.c
 ++ *
-++ * Based on include/configs/am3517evm.h
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
 ++ *
-++ * Copyright (C) 2010 Mistral Solutions pvt Ltd
-++ *
-++ * This program is free software; you can redistribute it and/or modify
-++ * it under the terms of the GNU General Public License as published by
-++ * the Free Software Foundation; either version 2 of the License, or
-++ * (at your option) any later version.
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
 ++ *
 ++ * This program is distributed in the hope that it will be useful,
 ++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -969,365 +1091,1669 @@ index 0000000..ff058ec
 ++ *
 ++ * You should have received a copy of the GNU General Public License
 ++ * along with this program; if not, write to the Free Software
-++ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++#define MAX_SIL_INDEX	3
+++
+++/* Definitions for EMIF4 configuration values */
+++#define	EMIF4_TIM1_T_RP		0x2
+++#define	EMIF4_TIM1_T_RCD	0x2
+++#define	EMIF4_TIM1_T_WR		0x2
+++#define	EMIF4_TIM1_T_RAS	0x7
+++#define	EMIF4_TIM1_T_RC		0x9
+++#define	EMIF4_TIM1_T_RRD	0x1
+++#define	EMIF4_TIM1_T_WTR	0x1
+++
+++#define	EMIF4_TIM2_T_XP		0x1
+++#define	EMIF4_TIM2_T_ODT	0x2
+++#define	EMIF4_TIM2_T_XSNR	0xE
+++#define	EMIF4_TIM2_T_XSRD	0xC7
+++#define	EMIF4_TIM2_T_RTP	0x1
+++#define	EMIF4_TIM2_T_CKE	0x2
+++
+++#define	EMIF4_TIM3_T_TDQSCKMAX	0x0
+++#define	EMIF4_TIM3_T_RFC	0x15
+++#define	EMIF4_TIM3_T_RAS_MAX	0x7
+++
+++#define	EMIF4_PWR_IDLE		0x2
+++#define	EMIF4_PWR_DPD_EN	0x0
+++#define	EMIF4_PWR_PM_EN		0x0
+++#define	EMIF4_PWR_PM_TIM	0x0
+++
+++#define	EMIF4_INITREF_DIS	0x0
+++#define	EMIF4_PASR		0x0
+++#define	EMIF4_REFRESH_RATE	0x50F
+++
+++/*
+++ * SDRAM Config register
+++ */
+++#define	EMIF4_CFG_SDRAM_TYP	0x2
+++#define	EMIF4_CFG_IBANK_POS	0x0
+++#define	EMIF4_CFG_DDR_TERM	0x0
+++#define	EMIF4_CFG_DDR2_DDQS	0x1
+++#define	EMIF4_CFG_DYN_ODT	0x0
+++#define	EMIF4_CFG_DDR_DIS_DLL	0x0
+++#define	EMIF4_CFG_SDR_DRV	0x0
+++#define	EMIF4_CFG_CWL		0x0
+++#define	EMIF4_CFG_NARROW_MD	0x0
+++#define	EMIF4_CFG_CL		0x6
+++#define	EMIF4_CFG_ROWSIZE	0x0
+++#define	EMIF4_CFG_IBANK		0x3
+++#define	EMIF4_CFG_EBANK		0x0
+++#define	EMIF4_CFG_PGSIZE	0x2
+++
+++/*
+++ * EMIF4 PHY Control 1 register configuration
+++ */
+++#define EMIF4_DDR1_RD_LAT	0x6
+++#define	EMIF4_DDR1_PWRDN_DIS	0x0
+++#define EMIF4_DDR1_STRBEN_EXT	0x0
+++#define EMIF4_DDR1_DLL_MODE	0x0
+++#define EMIF4_DDR1_VTP_DYN	0x0
+++#define EMIF4_DDR1_LB_CK_SEL	0x0
+++
+++/*
+++ * EMIF4 PHY Control 2 register configuration
+++ */
+++#define EMIF4_DDR2_TX_DATA_ALIGN	0x0
+++#define EMIF4_DDR2_RX_DLL_BYPASS	0x0
+++
+++/* Following functions are exported from lowlevel_init.S */
+++extern struct dpll_param *get_mpu_dpll_param(void);
+++extern struct dpll_param *get_core_dpll_param(void);
+++extern struct dpll_param *get_per_dpll_param(void);
+++
+++extern int mmc_init(int verbose);
+++extern block_dev_desc_t *mmc_get_dev(int dev);
+++
+++#define __raw_readl(a)    (*(volatile unsigned int *)(a))
+++#define __raw_writel(v, a) (*(volatile unsigned int *)(a) = (v))
+++#define __raw_readw(a)    (*(volatile unsigned short *)(a))
+++#define __raw_writew(v, a) (*(volatile unsigned short *)(a) = (v))
+++
++diff --git a/board/am3517crane/config.mk b/board/am3517crane/config.mk
++new file mode 100644
++index 0000000..bc696de
++--- /dev/null
+++++ b/board/am3517crane/config.mk
++@@ -0,0 +1,20 @@
+++#
+++# (C) Copyright 2010 Mistral Solutions Pvt Ltd. <www.mistralsolutions.com>
+++# Umesh Krishnan <umeshk@mistralsolutions.com>
+++#
+++# Craneboard uses AM3517 (ARM-CortexA8) cpu
+++# see http://www.ti.com/ for more information
+++#
+++# Am3517 has 1 bank of 128MB Discrete SDRAM on CS0
+++# Physical Address:
+++# 8000'0000 (bank0)
+++#
+++# For use if you want X-Loader to relocate from SRAM to DDR
+++#TEXT_BASE = 0x80e80000
+++#
+++# For XIP in 64K of SRAM or debug (GP device has it all availabe)
+++# SRAM 40200000-4020FFFF base
+++# initial stack at 0x4020fffc used in s_init (below xloader).
+++# The run time stack is (above xloader, 2k below)
+++# If any globals exist there needs to be room for them also
+++TEXT_BASE = 0x40208800
++diff --git a/board/am3517crane/platform.S b/board/am3517crane/platform.S
++new file mode 100644
++index 0000000..f725bc5
++--- /dev/null
+++++ b/board/am3517crane/platform.S
++@@ -0,0 +1,436 @@
+++/*
+++ * Board specific setup info
+++ *
+++ * (C) Copyright 2010 Mistral Solutions Pvt Ltd. <www.mistralsolutions.com>
+++ * Umesh Krishnan <umeshk@mistralsolutions.com>
+++ *
+++ * This file is copied from board/am3517evm/platform.S
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++#include <config.h>
+++#include <asm/arch/cpu.h>
+++#include <asm/arch/mem.h>
+++#include <asm/arch/clocks.h>
+++
+++_TEXT_BASE:
+++	.word	TEXT_BASE	/* sdram load addr from config.mk */
+++
+++#if !defined(CFG_NAND_BOOT) && !defined(CFG_NAND_BOOT)
+++/**************************************************************************
+++ * cpy_clk_code: relocates clock code into SRAM where its safer to execute
+++ * R1 = SRAM destination address.
+++ *************************************************************************/
+++.global cpy_clk_code
+++ cpy_clk_code:
+++        /* Copy DPLL code into SRAM */
+++        adr     r0, go_to_speed         /* get addr of clock setting code */
+++        mov     r2, #384                /* r2 size to copy (div by 32 bytes) */
+++        mov     r1, r1                  /* r1 <- dest address (passed in) */
+++        add     r2, r2, r0              /* r2 <- source end address */
+++next2:
+++        ldmia   r0!, {r3-r10}           /* copy from source address [r0]    */
+++        stmia   r1!, {r3-r10}           /* copy to   target address [r1]    */
+++        cmp     r0, r2                  /* until source end address [r2]    */
+++        bne     next2
+++	mov	pc, lr                  /* back to caller */
+++
+++/* ****************************************************************************
+++ * NOTE: 3430 X-loader currently does not use this code.
+++*   It could be removed its is kept for compatabily with u-boot.
+++ *
+++ *  go_to_speed: -Moves to bypass, -Commits clock dividers, -puts dpll at speed
+++ *               -executed from SRAM.
+++ *  R0 = CM_CLKEN_PLL-bypass value
+++ *  R1 = CM_CLKSEL1_PLL-m, n, and divider values
+++ *  R2 = CM_CLKSEL_CORE-divider values
+++ *  R3 = CM_IDLEST_CKGEN - addr dpll lock wait
+++ *
+++ *  Note: If core unlocks/relocks and SDRAM is running fast already it gets
+++ *        confused.  A reset of the controller gets it back.  Taking away its
+++ *        L3 when its not in self refresh seems bad for it.  Normally, this code
+++ *        runs from flash before SDR is init so that should be ok.
+++ ******************************************************************************/
+++.global go_to_speed
+++ go_to_speed:
+++        stmfd sp!, {r4-r6}
+++
+++        /* move into fast relock bypass */
+++        ldr     r4, pll_ctl_add
+++        str     r0, [r4]
+++wait1:
+++        ldr     r5, [r3]       /* get status */
+++        and     r5, r5, #0x1   /* isolate core status */
+++        cmp     r5, #0x1       /* still locked? */
+++        beq     wait1          /* if lock, loop */
+++
+++	/* set new dpll dividers _after_ in bypass */
+++	ldr     r5, pll_div_add1
+++        str     r1, [r5]          /* set m, n, m2 */
+++        ldr     r5, pll_div_add2
+++        str     r2, [r5]          /* set l3/l4/.. dividers*/
+++        ldr     r5, pll_div_add3  /* wkup */
+++        ldr     r2, pll_div_val3  /* rsm val */
+++        str     r2, [r5]
+++        ldr     r5, pll_div_add4  /* gfx */
+++        ldr     r2, pll_div_val4
+++        str     r2, [r5]
+++        ldr     r5, pll_div_add5  /* emu */
+++        ldr     r2, pll_div_val5
+++        str     r2, [r5]
+++
+++        /* now prepare GPMC (flash) for new dpll speed */
+++	/* flash needs to be stable when we jump back to it */
+++        ldr     r5, flash_cfg3_addr
+++        ldr     r2, flash_cfg3_val
+++        str     r2, [r5]
+++        ldr     r5, flash_cfg4_addr
+++        ldr     r2, flash_cfg4_val
+++        str     r2, [r5]
+++        ldr     r5, flash_cfg5_addr
+++        ldr     r2, flash_cfg5_val
+++        str     r2, [r5]
+++        ldr     r5, flash_cfg1_addr
+++        ldr     r2, [r5]
+++        orr     r2, r2, #0x3     /* up gpmc divider */
+++        str     r2, [r5]
+++
+++        /* lock DPLL3 and wait a bit */
+++        orr     r0, r0, #0x7   /* set up for lock mode */
+++        str     r0, [r4]       /* lock */
+++        nop                    /* ARM slow at this point working at sys_clk */
+++        nop
+++        nop
+++        nop
+++wait2:
+++        ldr     r5, [r3]       /* get status */
+++        and     r5, r5, #0x1   /* isolate core status */
+++        cmp     r5, #0x1       /* still locked? */
+++        bne     wait2          /* if lock, loop */
+++        nop
+++        nop
+++        nop
+++        nop
+++        ldmfd sp!, {r4-r6}
+++        mov     pc, lr           /* back to caller, locked */
+++
+++_go_to_speed: .word go_to_speed
+++
+++/* these constants need to be close for PIC code */
+++/* The Nor has to be in the Flash Base CS0 for this condition to happen */
+++flash_cfg1_addr:
+++    .word (GPMC_CONFIG_CS0 + GPMC_CONFIG1)
+++flash_cfg3_addr:
+++    .word  (GPMC_CONFIG_CS0 + GPMC_CONFIG3)
+++flash_cfg3_val:
+++    .word  STNOR_GPMC_CONFIG3
+++flash_cfg4_addr:
+++    .word (GPMC_CONFIG_CS0 + GPMC_CONFIG4)
+++flash_cfg4_val:
+++    .word  STNOR_GPMC_CONFIG4
+++flash_cfg5_val:
+++    .word  STNOR_GPMC_CONFIG5
+++flash_cfg5_addr:
+++    .word (GPMC_CONFIG_CS0 + GPMC_CONFIG5)
+++pll_ctl_add:
+++    .word CM_CLKEN_PLL
+++pll_div_add1:
+++    .word CM_CLKSEL1_PLL
+++pll_div_add2:
+++    .word CM_CLKSEL_CORE
+++pll_div_add3:
+++    .word CM_CLKSEL_WKUP
+++pll_div_val3:
+++    .word (WKUP_RSM << 1)
+++pll_div_add4:
+++    .word CM_CLKSEL_GFX
+++pll_div_val4:
+++    .word (GFX_DIV << 0)
+++pll_div_add5:
+++    .word CM_CLKSEL1_EMU
+++pll_div_val5:
+++    .word CLSEL1_EMU_VAL
+++
+++#endif
+++
+++.globl lowlevel_init
+++lowlevel_init:
+++	ldr	sp,	SRAM_STACK
+++        str     ip,	[sp]    /* stash old link register */
+++	mov	ip,	lr	/* save link reg across call */
+++        bl      s_init          /* go setup pll,mux,memory */
+++        ldr     ip,	[sp]    /* restore save ip */
+++	mov	lr,	ip	/* restore link reg */
+++
+++	/* back to arch calling code */
+++	mov	pc,	lr
+++
+++	/* the literal pools origin */
+++	.ltorg
+++
+++REG_CONTROL_STATUS:
+++	.word CONTROL_STATUS
+++SRAM_STACK:
+++	.word LOW_LEVEL_SRAM_STACK
+++
+++
+++/* DPLL(1-4) PARAM TABLES */
+++/* Each of the tables has M, N, FREQSEL, M2 values defined for nominal
+++ * OPP (1.2V). The fields are defined according to dpll_param struct(clock.c).
+++ * The values are defined for all possible sysclk and for ES1 and ES2.
+++ */
+++
+++mpu_dpll_param:
+++/* 12MHz */
+++/* ES1 */
+++.word 0x0FE
+++.word 0x07
+++.word 0x05
+++.word 0x01
+++/* ES2 */
+++.word 0x0FA
+++.word 0x05
+++.word 0x07
+++.word 0x01
+++
+++/* 13MHz */
+++/* ES1 */
+++.word 0x17D
+++.word 0x0C
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x1F4
+++.word 0x0C
+++.word 0x03
+++.word 0x01
+++
+++/* 19.2MHz */
+++/* ES1 */
+++.word 0x179
+++.word 0x12
+++.word 0x04
+++.word 0x01
+++/* ES2 */
+++.word 0x271
+++.word 0x17
+++.word 0x03
+++.word 0x01
+++
+++/* 26MHz */
+++/* ES1 */
+++.word 0x17D
+++.word 0x19
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x0FA
+++.word 0x0C
+++.word 0x07
+++.word 0x01
+++
+++/* 38.4MHz */
+++/* ES1 */
+++.word 0x1FA
+++.word 0x32
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x271
+++.word 0x2F
+++.word 0x03
+++.word 0x01
+++
+++
+++.globl get_mpu_dpll_param
+++get_mpu_dpll_param:
+++	adr r0, mpu_dpll_param
+++	mov pc, lr
+++
+++iva_dpll_param:
+++/* 12MHz */
+++/* ES1 */
+++.word 0x07D
+++.word 0x05
+++.word 0x07
+++.word 0x01
+++/* ES2 */
+++.word 0x0B4
+++.word 0x05
+++.word 0x07
+++.word 0x01
+++
+++/* 13MHz */
+++/* ES1 */
+++.word 0x0FA
+++.word 0x0C
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x168
+++.word 0x0C
+++.word 0x03
+++.word 0x01
+++
+++/* 19.2MHz */
+++/* ES1 */
+++.word 0x082
+++.word 0x09
+++.word 0x07
+++.word 0x01
+++/* ES2 */
+++.word 0x0E1
+++.word 0x0B
+++.word 0x06
+++.word 0x01
+++
+++/* 26MHz */
+++/* ES1 */
+++.word 0x07D
+++.word 0x0C
+++.word 0x07
+++.word 0x01
+++/* ES2 */
+++.word 0x0B4
+++.word 0x0C
+++.word 0x07
+++.word 0x01
+++
+++/* 38.4MHz */
+++/* ES1 */
+++.word 0x13F
+++.word 0x30
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x0E1
+++.word 0x17
+++.word 0x06
+++.word 0x01
+++
+++
+++.globl get_iva_dpll_param
+++get_iva_dpll_param:
+++	adr r0, iva_dpll_param
+++	mov pc, lr
+++
+++core_dpll_param:
+++/* 12MHz */
+++/* ES1 */
+++.word 0x19F
+++.word 0x0E
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x0A6
+++.word 0x05
+++.word 0x07
+++.word 0x01
+++
+++/* 13MHz */
+++/* ES1 */
+++.word 0x1B2
+++.word 0x10
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x14C
+++.word 0x0C
+++.word 0x03
+++.word 0x01
+++
+++/* 19.2MHz */
+++/* ES1 */
+++.word 0x19F
+++.word 0x17
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x19F
+++.word 0x17
+++.word 0x03
+++.word 0x01
+++
+++/* 26MHz */
+++/* ES1 */
+++.word 0x1B2
+++.word 0x21
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x0A6
+++.word 0x0C
+++.word 0x07
+++.word 0x01
+++
+++/* 38.4MHz */
+++/* ES1 */
+++.word 0x19F
+++.word 0x2F
+++.word 0x03
+++.word 0x01
+++/* ES2 */
+++.word 0x19F
+++.word 0x2F
+++.word 0x03
+++.word 0x01
+++
+++.globl get_core_dpll_param
+++get_core_dpll_param:
+++	adr r0, core_dpll_param
+++	mov pc, lr
+++
+++/* PER DPLL values are same for both ES1 and ES2 */
+++per_dpll_param:
+++/* 12MHz */
+++.word 0xD8
+++.word 0x05
+++.word 0x07
+++.word 0x09
+++
+++/* 13MHz */
+++.word 0x1B0
+++.word 0x0C
+++.word 0x03
+++.word 0x09
+++
+++/* 19.2MHz */
+++.word 0xE1
+++.word 0x09
+++.word 0x07
+++.word 0x09
+++
+++/* 26MHz */
+++.word 0xD8
+++.word 0x0C
+++.word 0x07
+++.word 0x09
+++
+++/* 38.4MHz */
+++.word 0xE1
+++.word 0x13
+++.word 0x07
+++.word 0x09
+++
+++.globl get_per_dpll_param
+++get_per_dpll_param:
+++	adr r0, per_dpll_param
+++	mov pc, lr
+++
++diff --git a/board/am3517crane/x-load.lds b/board/am3517crane/x-load.lds
++new file mode 100644
++index 0000000..eb2a02a
++--- /dev/null
+++++ b/board/am3517crane/x-load.lds
++@@ -0,0 +1,53 @@
+++/*
+++ * (C) Copyright 2010 Mistral Solutions Pvt Ltd. <www.mistralsolutions.com>
+++ * Umesh Krishnan <umeshk@mistralsolutions.com>
+++ *
+++ * This file is copied from board/am3517evm/x-load.lds
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
+++OUTPUT_ARCH(arm)
+++ENTRY(_start)
+++SECTIONS
+++{
+++	. = 0x00000000;
+++
+++	. = ALIGN(4);
+++	.text      :
+++	{
+++	  cpu/omap3/start.o	(.text)
+++	  *(.text)
+++	}
+++
+++	. = ALIGN(4);
+++	.rodata : { *(.rodata) }
+++
+++	. = ALIGN(4);
+++	.data : { *(.data) }
+++
+++	. = ALIGN(4);
+++	.got : { *(.got) }
+++
+++	. = ALIGN(4);
+++	__bss_start = .;
+++	.bss : { *(.bss) }
+++	_end = .;
+++}
++diff --git a/common/Makefile b/common/Makefile
++new file mode 100644
++index 0000000..c1381e0
++--- /dev/null
+++++ b/common/Makefile
++@@ -0,0 +1,50 @@
+++
+++#
+++# (C) Copyright 2004
+++# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+++#
+++# See file CREDITS for list of people who contributed to this
+++# project.
+++#
+++# This program is free software; you can redistribute it and/or
+++# modify it under the terms of the GNU General Public License as
+++# published by the Free Software Foundation; either version 2 of
+++# the License, or (at your option) any later version.
+++#
+++# This program is distributed in the hope that it will be useful,
+++# but WITHOUT ANY WARRANTY; without even the implied warranty of
+++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++# GNU General Public License for more details.
+++#
+++# You should have received a copy of the GNU General Public License
+++# along with this program; if not, write to the Free Software
+++# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++# MA 02111-1307 USA
+++#
+++
+++include $(TOPDIR)/config.mk
+++
+++LIB     = libcommon.a
+++
+++AOBJS   =
+++
+++COBJS   = cmd_load.o
+++
+++OBJS    = $(AOBJS) $(COBJS)
+++
+++CPPFLAGS += -I..
+++
+++all:    $(LIB) $(AOBJS)
+++
+++$(LIB): .depend $(OBJS)
+++	$(AR) crv $@ $(OBJS)
+++
+++#########################################################################
+++
+++.depend:        Makefile $(AOBJS:.o=.S) $(COBJS:.o=.c)
+++	        $(CC) -M $(CFLAGS) $(AOBJS:.o=.S) $(COBJS:.o=.c) > $@
+++
+++sinclude .depend
+++
+++#########################################################################
+++
++diff --git a/common/cmd_load.c b/common/cmd_load.c
++new file mode 100644
++index 0000000..dcf89b4
++--- /dev/null
+++++ b/common/cmd_load.c
++@@ -0,0 +1,537 @@
+++/*
+++ * (C) Copyright 2000-2004
+++ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++/*
+++ * Serial up- and download support
+++ */
+++#include <common.h>
+++#include "cmd_load.h"
+++
+++
+++/*******************************************************
+++ * Routine: delay
+++ * Description: spinning delay to use before udelay works
+++ ******************************************************/
+++static inline void delay(unsigned long loops)
+++{
+++	__asm__ volatile ("1:\n" "subs %0, %1, #1\n"
+++			  "bne 1b" : "=r" (loops) : "0"(loops));
+++}
+++static inline void udelay(unsigned long us)
+++{
+++	delay(us * 200); /* approximate */
+++}
+++
+++#ifdef CFG_CMD_FAT
+++extern void *memcpy(void *dest, const void *src, size_t count);
+++#else
+++void *memcpy(void *dest, const void *src, size_t count)
+++{
+++	char *tmp = (char *) dest, *s = (char *) src;
+++
+++	while (count--)
+++		*tmp++ = *s++;
+++
+++	return dest;
+++}
+++#endif
+++
+++/* -------------------------------------------------------------------- */
+++
+++static void set_kerm_bin_mode(unsigned long *);
+++static int k_recv(void);
+++static ulong load_serial_bin(ulong offset);
+++
+++
+++char his_eol;        /* character he needs at end of packet */
+++int  his_pad_count;  /* number of pad chars he needs */
+++char his_pad_char;   /* pad chars he needs */
+++char his_quote;      /* quote chars he'll use */
+++
+++int do_load_serial_bin(ulong offset, int baudrate)
+++{
+++	ulong addr;
+++	int rcode = 0;
+++
+++	printf("## Ready for binary (kermit) download "
+++		"to 0x%08lX at %d bps...\n",
+++		offset,
+++		baudrate);
+++	addr = load_serial_bin(offset);
+++	if (addr == ~0) {
+++		printf("## Binary (kermit) download aborted\n");
+++		rcode = 1;
+++	} else {
+++		printf("## Start Addr      = 0x%08lX\n", addr);
+++	}
+++
+++	return rcode;
+++}
+++
+++
+++static ulong load_serial_bin(ulong offset)
+++{
+++	int size, i;
+++
+++	set_kerm_bin_mode((ulong *) offset);
+++	size = k_recv();
+++
+++	/*
+++	 * Gather any trailing characters (for instance, the ^D which
+++	 * is sent by 'cu' after sending a file), and give the
+++	 * box some time (100 * 1 ms)
+++	 */
+++	for (i = 0; i < 100; ++i) {
+++		if (tstc())
+++			(void) getc();
+++		udelay(1000);
+++	}
+++
+++	printf("## Total Size      = 0x%08x = %d Bytes\n", size, size);
+++
+++	return offset;
+++}
+++
+++void send_pad(void)
+++{
+++	int count = his_pad_count;
+++
+++	while (count-- > 0)
+++		putc(his_pad_char);
+++}
+++
+++/* converts escaped kermit char to binary char */
+++char ktrans(char in)
+++{
+++	if ((in & 0x60) == 0x40)
+++		return (char) (in & ~0x40);
+++	else if ((in & 0x7f) == 0x3f)
+++		return (char) (in | 0x40);
+++	else
+++		return in;
+++}
+++
+++int chk1(char *buffer)
+++{
+++	int total = 0;
+++
+++	while (*buffer)
+++		total += *buffer++;
+++
+++	return (int) ((total + ((total >> 6) & 0x03)) & 0x3f);
+++}
+++
+++void s1_sendpacket(char *packet)
+++{
+++	send_pad();
+++	while (*packet)
+++		putc(*packet++);
+++}
+++
+++static char a_b[24];
+++void send_ack(int n)
+++{
+++	a_b[0] = START_CHAR;
+++	a_b[1] = tochar(3);
+++	a_b[2] = tochar(n);
+++	a_b[3] = ACK_TYPE;
+++	a_b[4] = '\0';
+++	a_b[4] = tochar(chk1(&a_b[1]));
+++	a_b[5] = his_eol;
+++	a_b[6] = '\0';
+++	s1_sendpacket(a_b);
+++}
+++
+++void send_nack(int n)
+++{
+++	a_b[0] = START_CHAR;
+++	a_b[1] = tochar(3);
+++	a_b[2] = tochar(n);
+++	a_b[3] = NACK_TYPE;
+++	a_b[4] = '\0';
+++	a_b[4] = tochar(chk1(&a_b[1]));
+++	a_b[5] = his_eol;
+++	a_b[6] = '\0';
+++	s1_sendpacket(a_b);
+++}
+++
+++
+++/* os_data_* takes an OS Open image and puts it into memory, and
+++   puts the boot header in an array named os_data_header
+++
+++   if image is binary, no header is stored in os_data_header.
+++*/
+++void (*os_data_init) (void);
+++void (*os_data_char) (char new_char);
+++static int os_data_state, os_data_state_saved;
+++int os_data_count;
+++static int os_data_count_saved;
+++static char *os_data_addr, *os_data_addr_saved;
+++static char *bin_start_address;
+++int os_data_header[8];
+++static void bin_data_init(void)
+++{
+++	os_data_state = 0;
+++	os_data_count = 0;
+++	os_data_addr = bin_start_address;
+++}
+++static void os_data_save(void)
+++{
+++	os_data_state_saved = os_data_state;
+++	os_data_count_saved = os_data_count;
+++	os_data_addr_saved = os_data_addr;
+++}
+++static void os_data_restore(void)
+++{
+++	os_data_state = os_data_state_saved;
+++	os_data_count = os_data_count_saved;
+++	os_data_addr = os_data_addr_saved;
+++}
+++static void bin_data_char(char new_char)
+++{
+++	switch (os_data_state) {
+++	case 0:					/* data */
+++		*os_data_addr++ = new_char;
+++		--os_data_count;
+++		break;
+++	}
+++}
+++static void set_kerm_bin_mode(unsigned long *addr)
+++{
+++	bin_start_address = (char *) addr;
+++	os_data_init = bin_data_init;
+++	os_data_char = bin_data_char;
+++}
+++
+++
+++/* k_data_* simply handles the kermit escape translations */
+++static int k_data_escape, k_data_escape_saved;
+++void k_data_init(void)
+++{
+++	k_data_escape = 0;
+++	os_data_init();
+++}
+++void k_data_save(void)
+++{
+++	k_data_escape_saved = k_data_escape;
+++	os_data_save();
+++}
+++void k_data_restore(void)
+++{
+++	k_data_escape = k_data_escape_saved;
+++	os_data_restore();
+++}
+++void k_data_char(char new_char)
+++{
+++	if (k_data_escape) {
+++		/* last char was escape - translate this character */
+++		os_data_char(ktrans(new_char));
+++		k_data_escape = 0;
+++	} else {
+++		if (new_char == his_quote) {
+++			/* this char is escape - remember */
+++			k_data_escape = 1;
+++		} else {
+++			/* otherwise send this char as-is */
+++			os_data_char(new_char);
+++		}
+++	}
+++}
+++
+++#define SEND_DATA_SIZE  20
+++char send_parms[SEND_DATA_SIZE];
+++char *send_ptr;
+++
+++/* handle_send_packet interprits the protocol info and builds and
+++   sends an appropriate ack for what we can do */
+++void handle_send_packet(int n)
+++{
+++	int length = 3;
+++	int bytes;
+++
+++	/* initialize some protocol parameters */
+++	his_eol = END_CHAR;		/* default end of line character */
+++	his_pad_count = 0;
+++	his_pad_char = '\0';
+++	his_quote = K_ESCAPE;
+++
+++	/* ignore last character if it filled the buffer */
+++	if (send_ptr == &send_parms[SEND_DATA_SIZE - 1])
+++		--send_ptr;
+++	bytes = send_ptr - send_parms;	/* how many bytes we'll process */
+++	do {
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle MAXL - max length */
+++		/* ignore what he says - most I'll take (here) is 94 */
+++		a_b[++length] = tochar(94);
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle TIME - time you should wait for my packets */
+++		/* ignore what he says - don't wait for my
+++		 * ack longer than 1 second */
+++		a_b[++length] = tochar(1);
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle NPAD - number of pad chars I need */
+++		/* remember what he says - I need none */
+++		his_pad_count = untochar(send_parms[2]);
+++		a_b[++length] = tochar(0);
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle PADC - pad chars I need */
+++		/* remember what he says - I need none */
+++		his_pad_char = ktrans(send_parms[3]);
+++		a_b[++length] = 0x40;	/* He should ignore this */
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle EOL - end of line he needs */
+++		/* remember what he says - I need CR */
+++		his_eol = untochar(send_parms[4]);
+++		a_b[++length] = tochar(END_CHAR);
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle QCTL - quote control char he'll use */
+++		/* remember what he says - I'll use '#' */
+++		his_quote = send_parms[5];
+++		a_b[++length] = '#';
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle QBIN - 8-th bit prefixing */
+++		/* ignore what he says - I refuse */
+++		a_b[++length] = 'N';
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle CHKT - the clock check type */
+++		/* ignore what he says - I do type 1 (for now) */
+++		a_b[++length] = '1';
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle REPT - the repeat prefix */
+++		/* ignore what he says - I refuse (for now) */
+++		a_b[++length] = 'N';
+++		if (bytes-- <= 0)
+++			break;
+++		/* handle CAPAS - the capabilities mask */
+++		/* ignore what he says - I only do long packets
+++		 * - I don't do windows */
+++		a_b[++length] = tochar(2);	/* only long packets */
+++		a_b[++length] = tochar(0);	/* no windows */
+++		a_b[++length] = tochar(94);	/* large packet msb */
+++		a_b[++length] = tochar(94);	/* large packet lsb */
+++	} while (0);
+++
+++	a_b[0] = START_CHAR;
+++	a_b[1] = tochar(length);
+++	a_b[2] = tochar(n);
+++	a_b[3] = ACK_TYPE;
+++	a_b[++length] = '\0';
+++	a_b[length] = tochar(chk1(&a_b[1]));
+++	a_b[++length] = his_eol;
+++	a_b[++length] = '\0';
+++	s1_sendpacket(a_b);
+++}
+++
+++/* k_recv receives a OS Open image file over kermit line */
+++static int k_recv(void)
+++{
+++	char new_char;
+++	char k_state, k_state_saved;
+++	int sum;
+++	int done;
+++	int length;
+++	int n, last_n;
+++	int z = 0;
+++	int len_lo, len_hi;
+++
+++	/* initialize some protocol parameters */
+++	his_eol = END_CHAR;		/* default end of line character */
+++	his_pad_count = 0;
+++	his_pad_char = '\0';
+++	his_quote = K_ESCAPE;
+++
+++	/* initialize the k_recv and k_data state machine */
+++	done = 0;
+++	k_state = 0;
+++	k_data_init();
+++	k_state_saved = k_state;
+++	k_data_save();
+++	n = 0;				/* just to get rid of a warning */
+++	last_n = -1;
+++
+++	/* expect this "type" sequence (but don't check):
+++	   S: send initiate
+++	   F: file header
+++	   D: data (multiple)
+++	   Z: end of file
+++	   B: break transmission
+++	 */
+++
+++	/* enter main loop */
+++	while (!done) {
+++		/* set the send packet pointer to
+++		 * begining of send packet parms */
+++		send_ptr = send_parms;
+++
+++		/* With each packet, start summing the bytes starting
+++		 * with the length.
+++		 * Save the current sequence number.
+++		 * Note the type of the packet.
+++		 * If a character less than SPACE (0x20) is received - error.
+++		 */
+++
+++#if 0
+++		/* OLD CODE, Prior to checking sequence numbers */
+++		/* first have all state machines save current states */
+++		k_state_saved = k_state;
+++		k_data_save();
+++#endif
+++
+++		/* get a packet */
+++		/* wait for the starting character or ^C */
+++		for (;;) {
+++			switch (getc()) {
+++			case START_CHAR:	/* start packet */
+++				goto START;
+++			case ETX_CHAR:		/* ^C waiting for packet */
+++				return 0;
+++			default:
+++				;
+++			}
+++		}
+++START:
+++		/* get length of packet */
+++		sum = 0;
+++		new_char = getc();
+++		if ((new_char & 0xE0) == 0)
+++			goto packet_error;
+++		sum += new_char & 0xff;
+++		length = untochar(new_char);
+++		/* get sequence number */
+++		new_char = getc();
+++		if ((new_char & 0xE0) == 0)
+++			goto packet_error;
+++		sum += new_char & 0xff;
+++		n = untochar(new_char);
+++		--length;
+++
+++		/* NEW CODE - check sequence numbers for retried packets */
+++		/* Note - this new code assumes that the sequence number is
+++		 * correctly received.  Handling an invalid sequence number
+++		 * adds another layer of complexity that may not be needed
+++		 * - yet!  At this time, I'm hoping that I don't need to
+++		 * buffer the incoming data packets and can write the data
+++		 * into memory in real time.
+++		 */
+++		if (n == last_n) {
+++			/* same sequence number, restore the previous state */
+++			k_state = k_state_saved;
+++			k_data_restore();
+++		} else {
+++			/* new sequence number, checkpoint the download */
+++			last_n = n;
+++			k_state_saved = k_state;
+++			k_data_save();
+++		}
+++		/* END NEW CODE */
+++
+++		/* get packet type */
+++		new_char = getc();
+++		if ((new_char & 0xE0) == 0)
+++			goto packet_error;
+++		sum += new_char & 0xff;
+++		k_state = new_char;
+++		--length;
+++		/* check for extended length */
+++		if (length == -2) {
+++			/* (length byte was 0, decremented twice) */
+++			/* get the two length bytes */
+++			new_char = getc();
+++			if ((new_char & 0xE0) == 0)
+++				goto packet_error;
+++			sum += new_char & 0xff;
+++			len_hi = untochar(new_char);
+++			new_char = getc();
+++			if ((new_char & 0xE0) == 0)
+++				goto packet_error;
+++			sum += new_char & 0xff;
+++			len_lo = untochar(new_char);
+++			length = len_hi * 95 + len_lo;
+++			/* check header checksum */
+++			new_char = getc();
+++			if ((new_char & 0xE0) == 0)
+++				goto packet_error;
+++			if (new_char != tochar((sum + ((sum >> 6) & 0x03))
+++						& 0x3f))
+++				goto packet_error;
+++			sum += new_char & 0xff;
+++/* --length; */ /* new length includes only data and block check to come */
+++		}
+++		/* bring in rest of packet */
+++		while (length > 1) {
+++			new_char = getc();
+++			if ((new_char & 0xE0) == 0)
+++				goto packet_error;
+++			sum += new_char & 0xff;
+++			--length;
+++			if (k_state == DATA_TYPE) {
+++				/* pass on the data if this is a data packet */
+++				k_data_char(new_char);
+++			} else if (k_state == SEND_TYPE) {
+++				/* save send pack in buffer as is */
+++				*send_ptr++ = new_char;
+++				/* if too much data, back off the pointer */
+++				if (send_ptr >= &send_parms[SEND_DATA_SIZE])
+++					--send_ptr;
+++			}
+++		}
+++		/* get and validate checksum character */
+++		new_char = getc();
+++		if ((new_char & 0xE0) == 0)
+++			goto packet_error;
+++		if (new_char != tochar((sum + ((sum >> 6) & 0x03)) & 0x3f))
+++			goto packet_error;
+++		/* get END_CHAR */
+++		new_char = getc();
+++		if (new_char != END_CHAR) {
+++packet_error:
+++			/* restore state machines */
+++			k_state = k_state_saved;
+++			k_data_restore();
+++			/* send a negative acknowledge packet in */
+++			send_nack(n);
+++		} else if (k_state == SEND_TYPE) {
+++			/* Crack the protocol parms,
+++			 * build an appropriate ack packet */
+++			handle_send_packet(n);
+++		} else {
+++			/* send simple acknowledge packet in */
+++			send_ack(n);
+++			/* quit if end of transmission */
+++			if (k_state == BREAK_TYPE)
+++				done = 1;
+++		}
+++		++z;
+++	}
+++	return (ulong) os_data_addr - (ulong) bin_start_address;
+++}
++diff --git a/common/cmd_load.h b/common/cmd_load.h
++new file mode 100644
++index 0000000..f1b6eb7
++--- /dev/null
+++++ b/common/cmd_load.h
++@@ -0,0 +1,47 @@
+++/*
+++ * (C) Copyright 2010 Mistral Solutions Pvt Ltd.
+++ * Umesh Krishnan <umeshk@mistralsolutions.com>
+++ *
+++ * Header file for common/cmd_load.c
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++#define putc serial_putc
+++#define tstc serial_tstc
+++
+++#define XON_CHAR        17
+++#define XOFF_CHAR       19
+++#define START_CHAR      0x01
+++#define ETX_CHAR	0x03
+++#define END_CHAR        0x0D
+++#define SPACE           0x20
+++#define K_ESCAPE        0x23
+++#define SEND_TYPE       'S'
+++#define DATA_TYPE       'D'
+++#define ACK_TYPE        'Y'
+++#define NACK_TYPE       'N'
+++#define BREAK_TYPE      'B'
+++#define tochar(x) ((char) (((x) + SPACE) & 0xff))
+++#define untochar(x) ((int) (((x) - SPACE) & 0xff))
+++
+++extern int os_data_count;
+++extern int os_data_header[8];
+++
+++
++diff --git a/cpu/omap3/mmc.c b/cpu/omap3/mmc.c
++index 365df49..4b19dde 100755
++--- a/cpu/omap3/mmc.c
+++++ b/cpu/omap3/mmc.c
++@@ -46,7 +46,8 @@ block_dev_desc_t *mmc_get_dev(int dev)
++
++ unsigned char mmc_board_init(void)
++ {
++-#if defined (CONFIG_OMAP34XX) && !defined (CONFIG_AM3517EVM)
+++#if defined(CONFIG_OMAP34XX) && !defined(CONFIG_AM3517EVM) && \
+++				!defined(CONFIG_AM3517CRANE)
++ 	unsigned int value = 0;
++
++ 	value = CONTROL_PBIAS_LITE;
++diff --git a/drivers/Makefile b/drivers/Makefile
++index b39d983..d071397 100644
++--- a/drivers/Makefile
+++++ b/drivers/Makefile
++@@ -44,6 +44,10 @@ ifeq ($(BOARD), am3517evm)
++ OBJS    += k9f1g08r0a.o
++ endif
++
+++ifeq ($(BOARD), am3517crane)
+++OBJS    += k9f1g08r0a.o
+++endif
+++
++ ifeq ($(BOARD), omap2420h4)
++ OBJS 	+= k9k1216.o
++ endif
++diff --git a/drivers/k9f1g08r0a.c b/drivers/k9f1g08r0a.c
++index 870690d..80afdd9 100755
++--- a/drivers/k9f1g08r0a.c
+++++ b/drivers/k9f1g08r0a.c
++@@ -42,8 +42,7 @@
++  */
++ #define MT29F1G_MFR		0x2c  /* Micron */
++ #define MT29F1G_ID		0xa1  /* x8, 1GiB */
++-#define MT29F2G_ID		0xba	/* x16, 2GiB */
++-#define MT29F4G_ID		0xbc	/* x16, 4GiB */
+++#define MT29F2G_ID      0xba  /* x16, 2GiB */
++
++ #define HYNIX4GiB_MFR		0xAD  /* Hynix */
++ #define HYNIX4GiB_ID		0xBC  /* x16, 4GiB */
++@@ -62,7 +61,6 @@
++ #define ECC_SIZE		24
++ #define ECC_STEPS		3
++
++-unsigned int is_ddr_166M;
++ /*******************************************************
++  * Routine: delay
++  * Description: spinning delay to use before udelay works
++@@ -185,30 +183,19 @@ int nand_chip()
++
++ 	NAND_DISABLE_CE();
++
++-	switch (mfr) {
++-		/* Hynix NAND Part */
++-		case HYNIX4GiB_MFR:
++-			is_ddr_166M = 0;
++-			if (is_cpu_family() == CPU_OMAP36XX)
++-				return (id != HYNIX4GiB_ID);
++-			break;
++-		/* Micron NAND Part */
++-		case MT29F1G_MFR:
++-			is_ddr_166M = 1;
++-			if ((is_cpu_family() == CPU_OMAP34XX) ||
++-					(is_cpu_family() == CPU_AM35XX) ||
++-					(is_cpu_family() == CPU_OMAP36XX))
++-				return (!((id == MT29F1G_ID) ||
++-						(id == MT29F2G_ID) ||
++-						(id ==MT29F4G_ID)));
++-			break;
++-		case K9F1G08R0A_MFR:
++-		default:
++-			is_ddr_166M = 1;
++-			break;
+++	if (is_cpu_family() == CPU_OMAP36XX) {
+++		return (mfr != HYNIX4GiB_MFR || id != HYNIX4GiB_ID);
+++	} else {
+++		if (get_cpu_rev() == CPU_3430_ES2)
+++#if defined (CONFIG_OMAP34XX) || defined (CONFIG_OMAP3EVM)
+++			return (mfr != MT29F1G_MFR || !(id == MT29F1G_ID || id == MT29F2G_ID));
+++#elif defined(CONFIG_AM3517EVM) || defined(CONFIG_AM3517TEB) || \
+++		defined(CONFIG_AM3517CRANE)
+++		return (mfr != MT29F1G_MFR && !(id == MT29F1G_ID || id == MT29F2G_ID));
+++#endif
+++		else
+++			return (mfr != K9F1G08R0A_MFR || id != K9F1G08R0A_ID);
++ 	}
++-
++-	return (id != K9F1G08R0A_ID);
++ }
++
++ /* read a block data to buf
++diff --git a/include/asm/arch-omap3/cpu.h b/include/asm/arch-omap3/cpu.h
++index 5035c58..49c745c 100644
++--- a/include/asm/arch-omap3/cpu.h
+++++ b/include/asm/arch-omap3/cpu.h
++@@ -24,7 +24,8 @@
++
++ #ifndef _OMAP34XX_CPU_H
++ #define  _OMAP34XX_CPU_H
++-#if defined (CONFIG_AM3517EVM) || defined (CONFIG_AM3517TEB)
+++#if defined(CONFIG_AM3517EVM) || defined(CONFIG_AM3517TEB) || \
+++	defined(CONFIG_AM3517CRANE)
++ #include <asm/arch/omap3.h>
++ #elif defined (CONFIG_OMAP3430)
++ #include <asm/arch/omap3430.h>
++@@ -66,7 +67,8 @@
++ #define GPMC_CONFIG		(OMAP34XX_GPMC_BASE+0x50)
++ #define GPMC_STATUS		(OMAP34XX_GPMC_BASE+0x54)
++
++-#if defined (CONFIG_OMAP34XX) || defined (CONFIG_AM3517EVM)
+++#if defined(CONFIG_OMAP34XX) || defined(CONFIG_AM3517EVM) || \
+++	defined(CONFIG_AM3517CRANE)
++ #define GPMC_CONFIG_CS0		(OMAP34XX_GPMC_BASE+0x60)
++ #elif defined (CONFIG_AM3517TEB)
++ #define GPMC_CONFIG_CS0		(OMAP34XX_GPMC_BASE+0xC0)
++diff --git a/include/asm/arch-omap3/mem.h b/include/asm/arch-omap3/mem.h
++index 1982dcf..954d5ee 100644
++--- a/include/asm/arch-omap3/mem.h
+++++ b/include/asm/arch-omap3/mem.h
++@@ -376,7 +376,8 @@ typedef enum {
++ # define M_NAND_GPMC_CONFIG5 SMNAND_GPMC_CONFIG5
++ # define M_NAND_GPMC_CONFIG6 SMNAND_GPMC_CONFIG6
++
++-#elif defined (CONFIG_AM3517EVM) || defined (CONFIG_AM3517TEB)
+++#elif defined(CONFIG_AM3517EVM) || defined(CONFIG_AM3517TEB) || \
+++	defined(CONFIG_AM3517CRANE)
++
++ #ifdef NAND_16BIT
++ # define M_NAND_GPMC_CONFIG1 0x00001800
++@@ -425,7 +426,8 @@ typedef enum {
++ # define M_NAND_GPMC_CONFIG6 SMNAND_GPMC_CONFIG6
++ # define M_NAND_GPMC_CONFIG7 SMNAND_GPMC_CONFIG7
++
++-#elif defined (CONFIG_AM3517EVM) || defined (CONFIG_AM3517TEB)
+++#elif defined(CONFIG_AM3517EVM) || defined(CONFIG_AM3517TEB) || \
+++	defined(CONFIG_AM3517CRANE)
++
++ #ifdef NAND_16BIT
++ # define M_NAND_GPMC_CONFIG1 0x00001800
++@@ -498,7 +500,8 @@ typedef enum {
++ # define M_NAND_GPMC_CONFIG6 SMNAND_GPMC_CONFIG6
++ # define M_NAND_GPMC_CONFIG7 SMNAND_GPMC_CONFIG7
++
++-#elif defined (CONFIG_AM3517EVM) || defined (CONFIG_AM3517TEB)
+++#elif defined(CONFIG_AM3517EVM) || defined(CONFIG_AM3517TEB) || \
+++	defined(CONFIG_AM3517CRANE)
++
++ #ifdef NAND_16BIT
++ # define M_NAND_GPMC_CONFIG1 0x00001800
++diff --git a/include/asm/arch-omap3/omap3430.h b/include/asm/arch-omap3/omap3430.h
++index 16cde63..4fd700a 100644
++--- a/include/asm/arch-omap3/omap3430.h
+++++ b/include/asm/arch-omap3/omap3430.h
++@@ -130,7 +130,8 @@
++ #define ENHANCED_UI_EE_NAME		"750-2075"
++ #endif
++
++-#if defined (CONFIG_AM3517EVM) || defined (CONFIG_AM3517TEB)
+++#if defined(CONFIG_AM3517EVM) || defined(CONFIG_AM3517TEB) || \
+++	defined(CONFIG_AM3517CRANE)
++ /* EMIF 4 replaces SDRC in AM3517 for DDR */
++ #define EMIF4_MOD_ID			0x00
++ #define EMIF4_STATUS			0x04
++diff --git a/include/configs/am3517crane.h b/include/configs/am3517crane.h
++new file mode 100644
++index 0000000..76ed2c0
++--- /dev/null
+++++ b/include/configs/am3517crane.h
++@@ -0,0 +1,200 @@
+++/*
+++ * (C) Copyright 2010 Mistral Solutions Pvt Ltd. <www.mistralsolutions.com>
+++ * Umesh Krishnan <umeshk@mistralsolutions.com>
+++ *
+++ * X-Loader Configuation settings for the CRANE board.
+++ *
+++ * Derived from include/configs/am3517evm.h
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
 ++ */
 ++
 ++#ifndef __CONFIG_H
 ++#define __CONFIG_H
 ++
+++/* serial printf facility takes about 3.5K */
+++#define CFG_PRINTF
+++
 ++/*
 ++ * High Level Configuration Options
 ++ */
-++#define CONFIG_ARMCORTEXA8	1	/* This is an ARM V7 CPU core */
-++#define CONFIG_OMAP		1	/* in a TI OMAP core */
-++#define CONFIG_OMAP34XX		1	/* which is a 34XX */
-++#define CONFIG_EMIF4		1	/* The chip has EMIF4 controller */
+++#define CONFIG_ARMCORTEXA8	1    /* This is an ARM V7 CPU core */
+++#define CONFIG_OMAP		1    /* in a TI OMAP core */
 ++
-++/* working with AM3517/05 Craneboard */
-++#define CONFIG_OMAP3_AM3517CRANE	1
+++#define CONFIG_AM3517CRANE	1    /* working with CraneBoard */
 ++
-++
-++#include <asm/arch/cpu.h>		/* get chip and board defs */
-++#include <asm/arch/omap3.h>
-++
-++/*
-++ * Display CPU and Board information
+++/* Disabling CONFIG_MMC when serial download config (loadb)is used.
+++ * If loadb and MMC support are enabled together, the size of x-loader
+++ * (code + data) becomes greater than 32K - the size of SRAM. So don't enable
+++ * them together.
 ++ */
-++#define CONFIG_DISPLAY_CPUINFO		1
-++#define CONFIG_DISPLAY_BOARDINFO	1
+++#if !defined(START_LOADB_DOWNLOAD)
+++/* Enable the below macro if MMC boot support is required */
+++#define CONFIG_MMC               1
+++#endif
+++
+++#if defined(CONFIG_MMC)
+++	#define CFG_CMD_MMC              1
+++	#define CFG_CMD_FAT              1
+++#endif
+++
+++#include <asm/arch/cpu.h>        /* get chip and board defs */
+++
+++/* uncomment it if you need timer based udelay(). it takes about 250 bytes */
+++/* #define CFG_UDELAY */
 ++
 ++/* Clock Defines */
-++#define V_OSCK			26000000	/* Clock output from T2 */
-++#define V_SCLK			(V_OSCK >> 1)
+++#define V_OSCK                   26000000  /* Clock output from T2 */
 ++
-++#undef CONFIG_USE_IRQ				/* no support for IRQs */
-++#define CONFIG_MISC_INIT_R
+++#if (V_OSCK > 19200000)
+++#define V_SCLK                   (V_OSCK >> 1)
+++#else
+++#define V_SCLK                   V_OSCK
+++#endif
 ++
-++#define CONFIG_CMDLINE_TAG		1	/* enable passing of ATAGs */
-++#define CONFIG_SETUP_MEMORY_TAGS	1
-++#define CONFIG_INITRD_TAG		1
-++#define CONFIG_REVISION_TAG		1
+++/* #define PRCM_CLK_CFG2_266MHZ   1   */ /* VDD2=1.15v - 133MHz DDR */
+++#define PRCM_CLK_CFG2_332MHZ     1    /* VDD2=1.15v - 166MHz DDR */
+++#define PRCM_PCLK_OPP2           1    /* ARM=381MHz - VDD1=1.20v */
 ++
-++/*
-++ * Size of malloc() pool
-++ */
-++#define CONFIG_ENV_SIZE			(128 << 10)	/* 128 KiB sector */
-++#define CONFIG_SYS_MALLOC_LEN		(CONFIG_ENV_SIZE + (128 << 10))
-++#define CONFIG_SYS_GBL_DATA_SIZE	128	/* bytes reserved for */
-++						/* initial data */
-++/*
-++ * DDR related
-++ */
-++#define CONFIG_OMAP3_MICRON_DDR		1	/* Micron DDR */
-++#define CONFIG_SYS_CS0_SIZE		(256 * 1024 * 1024)
+++# define NAND_BASE_ADR           NAND_BASE  /* NAND flash */
+++# define ONENAND_BASE            ONENAND_MAP  /* OneNand flash */
 ++
-++/*
-++ * Hardware drivers
-++ */
+++#define OMAP34XX_GPMC_CS0_SIZE GPMC_SIZE_128M
+++#define ONENAND_ADDR ONENAND_BASE  /* physical address of OneNAND at CS0*/
 ++
-++/*
-++ * NS16550 Configuration
-++ */
-++#define V_NS16550_CLK			48000000	/* 48MHz (APLL96/2) */
+++#ifdef CFG_PRINTF
 ++
-++#define CONFIG_SYS_NS16550
-++#define CONFIG_SYS_NS16550_SERIAL
-++#define CONFIG_SYS_NS16550_REG_SIZE	(-4)
-++#define CONFIG_SYS_NS16550_CLK		V_NS16550_CLK
+++#define CFG_NS16550
+++#define CFG_NS16550_SERIAL
+++#define CFG_NS16550_REG_SIZE     (-4)
+++#define CFG_NS16550_CLK          (48000000)
+++#define CFG_NS16550_COM3         OMAP34XX_UART3
 ++
 ++/*
 ++ * select serial console configuration
 ++ */
-++#define CONFIG_CONS_INDEX		3
-++#define CONFIG_SYS_NS16550_COM3		OMAP34XX_UART3
-++#define CONFIG_SERIAL3			3	/* UART3 on AM3517 CRANE */
+++#define CONFIG_SERIAL3           3    /* UART1 on OMAP3EVM */
+++#define CONFIG_CONS_INDEX        3
 ++
-++/* allow to overwrite serial and ethaddr */
-++#define CONFIG_ENV_OVERWRITE
-++#define CONFIG_BAUDRATE			115200
-++#define CONFIG_SYS_BAUDRATE_TABLE	{4800, 9600, 19200, 38400, 57600,\
-++					115200}
-++#define CONFIG_MMC			1
-++#define CONFIG_OMAP3_MMC		1
-++#define CONFIG_DOS_PARTITION		1
+++#define CONFIG_BAUDRATE          115200
+++#define CFG_PBSIZE               256
 ++
-++/* USB
-++ * Enable CONFIG_MUSB_HCD for Host functionalities MSC, keyboard
-++ * Enable CONFIG_MUSB_UDD for Device functionalities.
-++ */
-++#define CONFIG_USB_AM3517		1
-++#define CONFIG_MUSB_HCD			1
-++#define CONFIG_MUSB_UDC			1
+++#endif /* CFG_PRINTF */
 ++
-++#ifdef CONFIG_USB_AM3517
-++
-++#ifdef CONFIG_MUSB_HCD
-++#define CONFIG_CMD_USB
-++
-++#define CONFIG_USB_STORAGE
-++#define CONGIG_CMD_STORAGE
-++#define CONFIG_CMD_FAT
-++
-++#ifdef CONFIG_USB_KEYBOARD
-++#define CONFIG_SYS_USB_EVENT_POLL
-++#define CONFIG_PREBOOT "usb start"
-++#endif /* CONFIG_USB_KEYBOARD */
-++
-++#endif /* CONFIG_MUSB_HCD */
-++
-++#ifdef CONFIG_MUSB_UDC
-++/* USB device configuration */
-++#define CONFIG_USB_DEVICE		1
-++#define CONFIG_USB_TTY			1
-++#define CONFIG_SYS_CONSOLE_IS_IN_ENV	1
-++/* Change these to suit your needs */
-++#define CONFIG_USBD_VENDORID		0x0451
-++#define CONFIG_USBD_PRODUCTID		0x5678
-++#define CONFIG_USBD_MANUFACTURER	"Texas Instruments"
-++#define CONFIG_USBD_PRODUCT_NAME	"CRANE"
-++#endif /* CONFIG_MUSB_UDC */
-++
-++#endif /* CONFIG_USB_AM3517 */
-++/* commands to include */
-++#include <config_cmd_default.h>
-++
-++#define CONFIG_CMD_EXT2		/* EXT2 Support			*/
-++#define CONFIG_CMD_FAT		/* FAT support			*/
-++#define CONFIG_CMD_JFFS2	/* JFFS2 Support		*/
-++
-++#define CONFIG_CMD_I2C		/* I2C serial bus support	*/
-++#define CONFIG_CMD_MMC		/* MMC support			*/
-++#define CONFIG_CMD_NAND		/* NAND support			*/
-++#define CONFIG_CMD_DHCP
-++#define CONFIG_CMD_PING
-++
-++#undef CONFIG_CMD_FLASH		/* flinfo, erase, protect	*/
-++#undef CONFIG_CMD_FPGA		/* FPGA configuration Support	*/
-++#undef CONFIG_CMD_IMI		/* iminfo			*/
-++#undef CONFIG_CMD_IMLS		/* List all found images	*/
-++
-++#define CONFIG_SYS_NO_FLASH
-++#define CONFIG_HARD_I2C			1
-++#define CONFIG_SYS_I2C_SPEED		100000
-++#define CONFIG_SYS_I2C_SLAVE		1
-++#define CONFIG_SYS_I2C_BUS		0
-++#define CONFIG_SYS_I2C_BUS_SELECT	1
-++#define CONFIG_DRIVER_OMAP34XX_I2C	1
-++
-++#define CONFIG_CMD_NET
-++/*
-++ * Board NAND Info.
-++ */
-++#define CONFIG_SYS_NAND_ADDR		NAND_BASE	/* physical address */
-++							/* to access nand */
-++#define CONFIG_SYS_NAND_BASE		NAND_BASE	/* physical address */
-++							/* to access */
-++							/* nand at CS0 */
-++
-++#define CONFIG_SYS_MAX_NAND_DEVICE	1		/* Max number of */
-++							/* NAND devices */
-++#define CONFIG_SYS_64BIT_VSPRINTF		/* needed for nand_util.c */
-++
-++#define CONFIG_JFFS2_NAND
-++/* nand device jffs2 lives on */
-++#define CONFIG_JFFS2_DEV		"nand0"
-++/* start of jffs2 partition */
-++#define CONFIG_JFFS2_PART_OFFSET	0x680000
-++#define CONFIG_JFFS2_PART_SIZE		0xf980000	/* sz of jffs2 part */
-++
-++/* Environment information */
-++#define CONFIG_BOOTDELAY	10
-++
-++#define CONFIG_BOOTFILE		uImage
-++
-++#define CONFIG_EXTRA_ENV_SETTINGS \
-++	"loadaddr=0x82000000\0" \
-++	"console=ttyS2,115200n8\0" \
-++	"mmcargs=setenv bootargs console=${console} " \
-++		"root=/dev/mmcblk0p2 rw " \
-++		"rootfstype=ext3 rootwait eth=${ethaddr} ip=dhcp\0" \
-++	"nandargs=setenv bootargs console=${console} " \
-++		"root=/dev/mtdblock4 rw " \
-++		"rootfstype=jffs2 eth=${ethaddr} ip=dhcp\0" \
-++	"loadbootscript=fatload mmc 0 ${loadaddr} boot.scr\0" \
-++	"bootscript=echo Running bootscript from mmc ...; " \
-++		"source ${loadaddr}\0" \
-++	"loaduimage=fatload mmc 0 ${loadaddr} uImage\0" \
-++	"mmcboot=echo Booting from mmc ...; " \
-++		"run mmcargs; " \
-++		"bootm ${loadaddr}\0" \
-++	"nandboot=echo Booting from nand ...; " \
-++		"run nandargs; " \
-++		"nand read ${loadaddr} 480000 e80000; " \
-++		"bootm ${loadaddr}\0" \
-++
-++#define CONFIG_BOOTCOMMAND \
-++	"if mmc init; then " \
-++		"if run loadbootscript; then " \
-++			"run bootscript; " \
-++		"else " \
-++			"if run loaduimage; then " \
-++				"run mmcboot; " \
-++			"else run nandboot; " \
-++			"fi; " \
-++		"fi; " \
-++	"else run nandboot; fi"
-++
-++#define CONFIG_AUTO_COMPLETE	1
 ++/*
 ++ * Miscellaneous configurable options
 ++ */
-++#define V_PROMPT			"AM3517_CRANE # "
+++#define CFG_LOADADDR             0x80008000
 ++
-++#define CONFIG_SYS_LONGHELP		/* undef to save memory */
-++#define CONFIG_SYS_HUSH_PARSER		/* use "hush" command parser */
-++#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
-++#define CONFIG_SYS_PROMPT		V_PROMPT
-++#define CONFIG_SYS_CBSIZE		512	/* Console I/O Buffer Size */
-++/* Print Buffer Size */
-++#define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + \
-++					sizeof(CONFIG_SYS_PROMPT) + 16)
-++#define CONFIG_SYS_MAXARGS		32	/* max number of command */
-++						/* args */
-++/* Boot Argument Buffer Size */
-++#define CONFIG_SYS_BARGSIZE		(CONFIG_SYS_CBSIZE)
-++/* memtest works on */
-++#define CONFIG_SYS_MEMTEST_START	(OMAP34XX_SDRC_CS0)
-++#define CONFIG_SYS_MEMTEST_END		(OMAP34XX_SDRC_CS0 + \
-++					0x01F00000) /* 31MB */
-++
-++#define CONFIG_SYS_LOAD_ADDR		(OMAP34XX_SDRC_CS0) /* default load */
-++								/* address */
-++
-++/*
-++ * AM3517 has 12 GP timers, they can be driven by the system clock
-++ * (12/13/16.8/19.2/38.4MHz) or by 32KHz clock. We use 13MHz (V_SCLK).
-++ * This rate is divided by a local divisor.
-++ */
-++#define CONFIG_SYS_TIMERBASE		OMAP34XX_GPT2
-++#define CONFIG_SYS_PTV			2	/* Divisor: 2^(PTV+1) => 8 */
-++#define CONFIG_SYS_HZ			1000
+++#undef	CFG_CLKS_IN_HZ		/* everything, incl board info, in Hz */
 ++
 ++/*-----------------------------------------------------------------------
 ++ * Stack sizes
 ++ *
 ++ * The stack sizes are set up in start.S using the settings below
 ++ */
-++#define CONFIG_STACKSIZE	(128 << 10)	/* regular stack 128 KiB */
-++#ifdef CONFIG_USE_IRQ
-++#define CONFIG_STACKSIZE_IRQ	(4 << 10)	/* IRQ stack 4 KiB */
-++#define CONFIG_STACKSIZE_FIQ	(4 << 10)	/* FIQ stack 4 KiB */
+++#define CONFIG_STACKSIZE         (128*1024) /* regular stack */
+++
+++/*-----------------------------------------------------------------------
+++ * Board NAND Info.
+++ */
+++/* Samsung 8-bit 128MB chip large page NAND chip*/
+++#define CFG_NAND_K9F1G08R0A
+++#define NAND_16BIT
+++
+++/* NAND is partitioned:
+++ * 0x00000000 - 0x0007FFFF  Booting Image
+++ * 0x00080000 - 0x0023FFFF  U-Boot Image
+++ * 0x00240000 - 0x0027FFFF  U-Boot Env Data (X-loader doesn't care)
+++ * 0x00280000 - 0x0077FFFF  Kernel Image
+++ * 0x00780000 - 0x08000000  depends on application
+++ */
+++/* Leaving first 4 blocks for x-load */
+++#define NAND_UBOOT_START         0x0080000
+++/* Giving a space of 2 blocks = 256KB */
+++#define NAND_UBOOT_END           0x0240000
+++#define NAND_BLOCK_SIZE          0x20000
+++
+++#define GPMC_CONFIG              (OMAP34XX_GPMC_BASE+0x50)
+++
+++#if defined(CONFIG_AM3517CRANE)
+++#define GPMC_NAND_COMMAND_0      (OMAP34XX_GPMC_BASE+0x7C)
+++#define GPMC_NAND_ADDRESS_0      (OMAP34XX_GPMC_BASE+0x80)
+++#define GPMC_NAND_DATA_0         (OMAP34XX_GPMC_BASE+0x84)
 ++#endif
 ++
-++/*-----------------------------------------------------------------------
-++ * Physical Memory Map
-++ */
-++#define CONFIG_NR_DRAM_BANKS	2	/* CS1 may or may not be populated */
-++#define PHYS_SDRAM_1		OMAP34XX_SDRC_CS0
-++#define PHYS_SDRAM_1_SIZE	(32 << 20)	/* at least 32 MiB */
-++#define PHYS_SDRAM_2		OMAP34XX_SDRC_CS1
+++#ifdef NAND_16BIT
+++#define WRITE_NAND_COMMAND(d, adr) \
+++	do {*(volatile u16 *)GPMC_NAND_COMMAND_0 = d; } while (0)
+++#define WRITE_NAND_ADDRESS(d, adr) \
+++	do {*(volatile u16 *)GPMC_NAND_ADDRESS_0 = d; } while (0)
+++#define WRITE_NAND(d, adr) \
+++	do {*(volatile u16 *)GPMC_NAND_DATA_0 = d; } while (0)
+++#define READ_NAND(adr) \
+++	(*(volatile u16 *)GPMC_NAND_DATA_0)
+++#define NAND_WAIT_READY()
+++#define NAND_WP_OFF()  \
+++	do {*(volatile u32 *)(GPMC_CONFIG) |= 0x00000010; } while (0)
+++#define NAND_WP_ON()  \
+++	do {*(volatile u32 *)(GPMC_CONFIG) &= ~0x00000010; } while (0)
 ++
-++/* SDRAM Bank Allocation method */
-++#define SDRC_R_B_C		1
+++#else /* to support 8-bit NAND devices */
+++#define WRITE_NAND_COMMAND(d, adr) \
+++	do {*(volatile u8 *)GPMC_NAND_COMMAND_0 = d; } while (0)
+++#define WRITE_NAND_ADDRESS(d, adr) \
+++	do {*(volatile u8 *)GPMC_NAND_ADDRESS_0 = d; } while (0)
+++#define WRITE_NAND(d, adr) \
+++	do {*(volatile u8 *)GPMC_NAND_DATA_0 = d; } while (0)
+++#define READ_NAND(adr) \
+++	(*(volatile u8 *)GPMC_NAND_DATA_0);
+++#define NAND_WAIT_READY()
+++#define NAND_WP_OFF()  \
+++	do {*(volatile u32 *)(GPMC_CONFIG) |= 0x00000010; } while (0)
+++#define NAND_WP_ON()  \
+++	do {*(volatile u32 *)(GPMC_CONFIG) &= ~0x00000010; } while (0)
 ++
-++/*-----------------------------------------------------------------------
-++ * FLASH and environment organization
-++ */
-++
-++/* **** PISMO SUPPORT *** */
-++
-++/* Configure the PISMO */
-++#define PISMO1_NAND_SIZE		GPMC_SIZE_128M
-++#define PISMO1_ONEN_SIZE		GPMC_SIZE_128M
-++
-++#define CONFIG_SYS_MAX_FLASH_SECT	520	/* max number of sectors */
-++						/* on one chip */
-++#define CONFIG_SYS_MAX_FLASH_BANKS	2	/* max number of flash banks */
-++#define CONFIG_SYS_MONITOR_LEN		(256 << 10)	/* Reserve 2 sectors */
-++
-++#define CONFIG_SYS_FLASH_BASE		boot_flash_base
-++
-++/* Monitor at start of flash */
-++#define CONFIG_SYS_MONITOR_BASE		CONFIG_SYS_FLASH_BASE
-++
-++#define CONFIG_NAND_OMAP_GPMC
-++#define GPMC_NAND_ECC_LP_x16_LAYOUT	1
-++#define CONFIG_ENV_IS_IN_NAND		1
-++#define SMNAND_ENV_OFFSET		0x260000 /* environment starts here */
-++
-++#define CONFIG_SYS_ENV_SECT_SIZE	boot_flash_sec
-++#define CONFIG_ENV_OFFSET		boot_flash_off
-++#define CONFIG_ENV_ADDR			boot_flash_env_addr
-++
-++/*-----------------------------------------------------------------------
-++ * CFI FLASH driver setup
-++ */
-++/* timeout values are in ticks */
-++#define CONFIG_SYS_FLASH_ERASE_TOUT	(100 * CONFIG_SYS_HZ)
-++#define CONFIG_SYS_FLASH_WRITE_TOUT	(100 * CONFIG_SYS_HZ)
-++
-++/* Flash banks JFFS2 should use */
-++#define CONFIG_SYS_MAX_MTD_BANKS	(CONFIG_SYS_MAX_FLASH_BANKS + \
-++					CONFIG_SYS_MAX_NAND_DEVICE)
-++#define CONFIG_SYS_JFFS2_MEM_NAND
-++/* use flash_info[2] */
-++#define CONFIG_SYS_JFFS2_FIRST_BANK	CONFIG_SYS_MAX_FLASH_BANKS
-++#define CONFIG_SYS_JFFS2_NUM_BANKS	1
-++
-++
-++/*
-++ * Include flash related variables
-++ */
-++#include <asm/arch/omap3_flash.h>
-++
-++
-++
-++/*-----------------------------------------------------
-++ * ethernet support for AM3517/05 Craneboard
-++ *------------------------------------------------
-++ */
-++#if defined(CONFIG_CMD_NET)
-++#define CONFIG_DRIVER_TI_EMAC
-++#define CONFIG_DRIVER_TI_EMAC_USE_RMII
-++#define CONFIG_MII
-++#define	CONFIG_BOOTP_DEFAULT
-++#define CONFIG_BOOTP_DNS
-++#define CONFIG_BOOTP_DNS2
-++#define CONFIG_BOOTP_SEND_HOSTNAME
-++#define CONFIG_NET_RETRY_COUNT 10
-++#define CONFIG_NET_MULTI
 ++#endif
+++
+++#define NAND_CTL_CLRALE(adr)
+++#define NAND_CTL_SETALE(adr)
+++#define NAND_CTL_CLRCLE(adr)
+++#define NAND_CTL_SETCLE(adr)
+++#define NAND_DISABLE_CE()
+++#define NAND_ENABLE_CE()
+++
+++/*-----------------------------------------------------------------------
+++ * Board oneNAND Info.
+++ */
+++#define CFG_SYNC_BURST_READ	1
+++
+++/* OneNAND is partitioned:
+++ *   0x0000000 - 0x0080000  X-Loader
+++ *   0x0080000 - 0x0240000   U-boot Image
+++ *   0x0240000 - 0x0280000   U-Boot Env Data (X-loader doesn't care)
+++ *   0x0280000 - 0x0780000   Kernel Image
+++ *   0x0780000 - 0x8000000   depends on application
+++ */
+++
+++#define ONENAND_START_BLOCK      4
+++#define ONENAND_END_BLOCK        18
+++#define ONENAND_PAGE_SIZE        2048     /* 2KB */
+++#define ONENAND_BLOCK_SIZE       0x20000  /* 128KB */
 ++
 ++#endif /* __CONFIG_H */
 ++
 +--
 +1.7.0.4
 +
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index 6f05b17..eb3d2a4 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -1,5 +1,5 @@
- require u-boot.inc
--PR ="r66"
-+PR ="r67"
+diff --git a/recipes/x-load/x-load_git.bb b/recipes/x-load/x-load_git.bb
+index 9daaf6c..e6df1cd 100644
+--- a/recipes/x-load/x-load_git.bb
++++ b/recipes/x-load/x-load_git.bb
+@@ -9,7 +9,7 @@ SRCREV_beagleboard = "1c9276af4d6a5b7014a7630a1abeddf3b3177563"
  
- FILESPATHPKG =. "u-boot-git:"
+ PV = "1.42+${PR}+gitr${SRCREV}"
+ PV_beagleboard = "1.44+${PR}+gitr${SRCREV}"
+-PR ="r17"
++PR ="r18"
+ PE = "1"
  
-@@ -164,6 +164,13 @@ SRCREV_dm37x-evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
- PV_dm37x-evm = "2009.11+${PR}+gitr${SRCREV}"
+ SRC_URI = "git://gitorious.org/x-load-omap3/mainline.git;branch=master;protocol=git"
+@@ -27,6 +27,13 @@ SRC_URI_append_omap3-touchbook = " \
+                              "
  
- # ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
-+SRC_URI_am3517-crane = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git \
-+                        file://0001-Added-Support-for-AM3517-05-based-Craneboard.patch \
+ # TI PSP v1.46_OMAPPSP_03.00.01.06 (Tag is one commit different)
++SRC_URI_am3517-crane = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git \
++                        file://0001-Added-support-for-AM3517-CraneBoard.patch \
 +"
-+SRCREV_am3517-crane = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
-+PV_am3517-crane = "2009.11+${PR}+gitr${SRCREV}"
++SRCREV_am3517-crane = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
++PV_am3517-crane = "1.46+${PR}+gitr${SRCREV}"
 +
-+# ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
- SRC_URI_am37x-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git \
- 	file://0001-omap3evm-Change-default-console-serial-port-from.patch \
- "
++# TI PSP v1.46_OMAPPSP_03.00.01.06 (Tag is one commit different)
+ SRC_URI_omap3evm = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git"
+ SRCREV_omap3evm = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
+ PV_omap3evm = "1.46+${PR}+gitr${SRCREV}"
 -- 
 1.7.0.4
 
