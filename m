@@ -1,36 +1,42 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PLvWV-0000Ee-Nu
+Received: from goliath.siemens.de ([192.35.17.28])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PLvjd-0000ZS-QI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Nov 2010 11:27:26 +0100
-Received: (qmail 16677 invoked by uid 503); 26 Nov 2010 10:30:29 -0000
-Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 26 Nov 2010 10:30:29 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 26 Nov 2010 12:26:06 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 26 Nov 2010 12:26:05 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Nov 2010 11:22:53 +0100
-Message-Id: <1290766973-11967-2-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1290766973-11967-1-git-send-email-eric@eukrea.com>
-References: <1290766973-11967-1-git-send-email-eric@eukrea.com>
+	Fri, 26 Nov 2010 11:41:00 +0100
+Received: from mail3.siemens.de (localhost [127.0.0.1])
+	by goliath.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
+	oAQAdgOg000398 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Nov 2010 11:39:43 +0100
+Received: from DEMCHP99ET2MSX.ww902.siemens.net
+	(demchp99et2msx.ww902.siemens.net [139.25.131.241])
+	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id oAQAdg1V027316
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Nov 2010 11:39:42 +0100
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
+	DEMCHP99ET2MSX.ww902.siemens.net ([139.25.131.241]) with mapi;
+	Fri, 26 Nov 2010 11:39:42 +0100
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 26 Nov 2010 11:39:41 +0100
+Thread-Topic: [PATCH] crimsonfields: fixed wrong SDL_CONFIG
+Thread-Index: AcuNVjuZ6CBZn/CtRjWz0cImaag8Aw==
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3B1D383@DEMCHP99E35MSX.ww902.siemens.net>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 10033175546519661898
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.27.225
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 192.35.17.28
+X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-9.6 required=5.0 tests=AWL, BAYES_00,
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] qt-demo-init: correctly handle qtdemo for qt4-x11
+Subject: [PATCH] crimsonfields: fixed wrong SDL_CONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,76 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2010 10:27:27 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 26 Nov 2010 10:41:00 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
+* libsdl-native installs:
+     ${STAGING_BINDIR}/sdl-config
+  and not:
+     ${STAGING_BINDIR}/sdl-config-native
+
+Signed-off-by: Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>
 ---
- recipes/qt4/qt-demo-init/qtdemo-init |   21 ++++++++++++++++++---
- recipes/qt4/qt-demo-init_0.1.bb      |    2 +-
- 2 files changed, 19 insertions(+), 4 deletions(-)
+ .../crimsonfields/crimsonfields-native_0.4.8.bb    |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/qt4/qt-demo-init/qtdemo-init b/recipes/qt4/qt-demo-init/qtdemo-init
-index 8eb8771..ee84be2 100644
---- a/recipes/qt4/qt-demo-init/qtdemo-init
-+++ b/recipes/qt4/qt-demo-init/qtdemo-init
-@@ -3,7 +3,7 @@
- set -e
- 
- if [ -f /usr/bin/qtdemo ]; then
--	QTDEMO=qtdemo
-+	QTDEMO="qtdemo > /var/log/Xsession.log 2>&1"
- else
- 	QTDEMO="qtdemoE -qws"
- fi
-@@ -18,14 +18,29 @@ case "$1" in
- 		if [ ! -f /etc/pointercal ]; then
- 			/usr/bin/ts_calibrate
- 		fi
--		QWS_MOUSE_PROTO=tslib:$TSLIB_TSDEVICE $QTDEMO &
-+		if [ $QTDEMO == qtdemo ]; then
-+			Xorg &
-+			export DISPLAY=:0
-+			$QTDEMO &
-+		else
-+			QWS_MOUSE_PROTO=tslib:$TSLIB_TSDEVICE $QTDEMO &
-+		fi
- 	else
-+		if [ $QTDEMO == qtdemo ]; then
-+			Xorg &
-+			export DISPLAY=:0
-+		fi
- 		$QTDEMO &
- 	fi
- 	;;
-   stop)
- 	echo "Stopping qtdemo"
--	killall qtdemoE
-+	if [ $QTDEMO == qtdemo ]; then
-+		killall Xorg
-+		killall qtdemo
-+	else
-+		killall qtdemoE
-+	fi
- 	;;
-   restart)
- 	$0 stop
-diff --git a/recipes/qt4/qt-demo-init_0.1.bb b/recipes/qt4/qt-demo-init_0.1.bb
-index 223ea7e..89eec6c 100644
---- a/recipes/qt4/qt-demo-init_0.1.bb
-+++ b/recipes/qt4/qt-demo-init_0.1.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Init script for qtdemo"
- LICENSE = "MIT"
- SRC_URI = "file://qtdemo-init"
--PR = "r0"
-+PR = "r1"
- 
- PACKAGE_ARCH = "all"
- 
--- 
-1.6.3.3
-
+diff --git a/recipes/crimsonfields/crimsonfields-native_0.4.8.bb b/recipes/=
+crimsonfields/crimsonfields-native_0.4.8.bb
+index 61157e2..0d30c3e 100644
+--- a/recipes/crimsonfields/crimsonfields-native_0.4.8.bb
++++ b/recipes/crimsonfields/crimsonfields-native_0.4.8.bb
+@@ -2,7 +2,7 @@ require crimsonfields_${PV}.bb
+ inherit native
+=20
+ DEPENDS =3D "libsdl-native libsdl-ttf-native"
+-export SDL_CONFIG =3D "${STAGING_BINDIR}/sdl-config-native"
++export SDL_CONFIG =3D "${STAGING_BINDIR}/sdl-config"
+=20
+ do_configure() {
+        gnu-configize
+--=20
+1.5.6.5
 
 
