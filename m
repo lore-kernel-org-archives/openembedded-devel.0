@@ -1,20 +1,17 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMMX1-0001fD-74
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMMmV-0001yT-5b
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 16:17:45 +0100
-Received: from [192.168.0.20] (77-22-235-200-dynip.superkabel.de
+	Sat, 27 Nov 2010 16:33:44 +0100
+Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 812861B421
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 16:17:45 +0100 (CET)
-Message-ID: <4CF120CB.9030808@sensortherm.de>
-Date: Sat, 27 Nov 2010 16:16:27 +0100
+	by email.infrascan.de (Postfix) with ESMTPSA id 62D151B421;
+	Sat, 27 Nov 2010 16:33:45 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
+Date: Sat, 27 Nov 2010 16:32:25 +0100
+Message-Id: <1290871945-19704-1-git-send-email-schwarzkopf@sensortherm.de>
+X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -23,7 +20,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: disko
+Subject: [PATCH] dkg_1.6: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,95 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 15:17:45 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 27 Nov 2010 15:33:44 -0000
 
-Hi,
+---
+ recipes/ekg/ekg_1.6.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-disko needs scons to build, but the recipes depends not to 
-python-scons-native. I changed DEPENDS in disko.inc from
-- DEPENDS = "sqlite3 libpng jpeg curl alsa-lib freetype libxml2 
-libsigc++-2.0 openssl"
-+ DEPENDS = "python-scons-native sqlite3 libpng jpeg curl alsa-lib 
-freetype libxml2 libsigc++-2.0 openssl"
-
-but it doesn't help.
-
-Can you help me?
-
-Regards,
-
-Klaus
-
-
-klaus@ubuntu:~/development/oe$ bitbake -v  -b disko_1.6.0.bb
-
-Build Configuration:
-BB_VERSION        = "1.8.18"
-METADATA_BRANCH   = "master"
-METADATA_REVISION = "9cc836b"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "dm355-evm"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "2010.7-test-20101127"
-TARGET_FPU        = "soft"
-
-NOTE: Preparing runqueue
-NOTE: Marking Active Tasks
-NOTE: Pruned 14 inactive tasks, 17 left
-NOTE: Assign Weightings
-NOTE: Compute totals (have 1 endpoint(s))
-NOTE: Executing runqueue
-NOTE: Running task 1 of 17 (ID: 10, 
-/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb, 
-do_setscene)
-NOTE: Running task 2 of 17 (ID: 8, 
-/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb, 
-do_fetch)
-NOTE: Running task 3 of 17 (ID: 0, 
-/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb, 
-do_unpack)
-NOTE: Unpacking downloads/disko_1.6.0.tar.bz2 to 
-tmp/work/armv5te-angstrom-linux-gnueabi/disko-1.6.0-r9/
-NOTE: Running task 4 of 17 (ID: 1, 
-/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb, 
-do_patch)
-NOTE: Applying patch 'pkgconfig.patch' 
-(openembedded/recipes/disko/files/pkgconfig.patch)
-NOTE: Running task 5 of 17 (ID: 11, 
-/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb, 
-do_configure)
-NOTE: Running task 6 of 17 (ID: 12, 
-/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb, 
-do_qa_configure)
-NOTE: Running task 7 of 17 (ID: 13, 
-/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb, 
-do_compile)
-ERROR: function do_compile failed
-ERROR: log data follows 
-(/home/klaus/development/oe/tmp/work/armv5te-angstrom-linux-gnueabi/disko-1.6.0-r9/temp/log.do_compile.19443)
-| 
-/home/klaus/development/oe/tmp/work/armv5te-angstrom-linux-gnueabi/disko-1.6.0-r9/temp/run.do_compile.19443: 
-line 244: 
-/home/klaus/development/oe/tmp/sysroots/x86_64-linux/usr/bin/scons: No 
-such file or directory
-| FATAL: scons build execution failed.
-NOTE: Task failed: 
-/home/klaus/development/oe/tmp/work/armv5te-angstrom-linux-gnueabi/disko-1.6.0-r9/temp/log.do_compile.19443
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of 
-/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb 
-do_compile failed
-ERROR: Task 13 
-(/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb, 
-do_compile) failed
-NOTE: Tasks Summary: Attempted 6 tasks of which 0 didn't need to be 
-rerun and 1 failed.
-ERROR: 
-'/home/klaus/development/oe/openembedded/recipes/disko/disko_1.6.0.bb' 
-failed
+diff --git a/recipes/ekg/ekg_1.6.bb b/recipes/ekg/ekg_1.6.bb
+index 9762355..2fa7a5c 100644
+--- a/recipes/ekg/ekg_1.6.bb
++++ b/recipes/ekg/ekg_1.6.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://ekg.chmurka.net/"
+ SECTION = "console/network"
+ LICENSE = "GPL LGPL"
+ 
+-SRC_URI = "http://ekg.chmurka.net/${PN}-${PV}.tar.gz"
++SRC_URI = "http://downloads.sourceforge.net/project/ekg/ekg/1.6/${PN}-${PV}.tar.gz"
+ 
+ inherit autotools
+ 
+-- 
+1.7.0.4
 
 
 
