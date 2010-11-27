@@ -1,16 +1,16 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMNo0-00037f-78
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMODW-0003xO-3F
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 17:39:20 +0100
+	Sat, 27 Nov 2010 18:05:43 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 667181B421;
-	Sat, 27 Nov 2010 17:39:22 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id 472D01B421;
+	Sat, 27 Nov 2010 18:05:44 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Nov 2010 17:38:03 +0100
-Message-Id: <1290875883-20882-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sat, 27 Nov 2010 18:04:26 +0100
+Message-Id: <1290877466-21034-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
@@ -20,7 +20,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libdessert: fixed SRC_URI
+Subject: [PATCH] libgsasl: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,24 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 16:39:20 -0000
+X-List-Received-Date: Sat, 27 Nov 2010 17:05:43 -0000
 
 ---
- recipes/libdessert/libdessert_0.86.14.bb |    2 +-
+ recipes/libgsasl/libgsasl_1.4.0.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/libdessert/libdessert_0.86.14.bb b/recipes/libdessert/libdessert_0.86.14.bb
-index 1308f71..42548c1 100644
---- a/recipes/libdessert/libdessert_0.86.14.bb
-+++ b/recipes/libdessert/libdessert_0.86.14.bb
-@@ -6,7 +6,7 @@ PR = "r2"
+diff --git a/recipes/libgsasl/libgsasl_1.4.0.bb b/recipes/libgsasl/libgsasl_1.4.0.bb
+index 2e6b461..f1ba25b 100644
+--- a/recipes/libgsasl/libgsasl_1.4.0.bb
++++ b/recipes/libgsasl/libgsasl_1.4.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/gsasl/"
+ DEPENDS = "libidn"  
+ PR = "r0"
  
- DEPENDS = "net-snmp libpcap libcli"
- 
--SRC_URI = "http://www.des-testbed.net/sites/default/files/${PN}${PV}.tar.gz \
-+SRC_URI = "http://www.des-testbed.net/sites/default/files/DES-SERT/${PN}${PV}.tar.gz \
- 	   file://0001-big-fat-autotools-patch.patch \
- 	  "
+-SRC_URI = "${GNU_MIRROR}/${PN}/${P}.tar.gz;name=libgsasl"
++SRC_URI = "${GNU_MIRROR}/gsasl/${P}.tar.gz;name=libgsasl"
+ SRC_URI[libgsasl.md5sum] = "e1e5ffac3f260a0412b8820d8e5229ab"
+ SRC_URI[libgsasl.sha256sum] = "1e3d42c414e09a8fb16fb3ce5fac2a3b3324048e123b7f682fb05b12c51bede8"
  
 -- 
 1.7.0.4
