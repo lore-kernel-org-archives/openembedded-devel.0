@@ -1,49 +1,43 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kristoffer.ericson@gmail.com>) id 1PMQg3-0007HB-Gt
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1PMSUe-0002P2-Ql
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 20:43:20 +0100
-Received: by eya28 with SMTP id 28so1304406eya.6
+	Sat, 27 Nov 2010 22:39:41 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E4AC711000B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 11:42:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:reply-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=X93Pb6d8l9lMltUHPal2+Q/7p/JA7QCqcQvXnCjvMP0=;
-	b=K8rU8v+G1qdFtUlrqrJQTF10+euthcsoFJB3xETnXn3wZl0oWQ0PUsAH2FX8g52wKg
-	PL+fZ+ZIvk221U1S7vjxJs1KKhZUENTa2gd792JTLR4efrUlozz5SDeLME7B44cc6Jy1
-	9P7ili49xUMmz52RpoSTBJVxGo+adhsN95ZZk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:reply-to:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=wOK6+kMwAknvM8+KIPkjn5gaxk638RQst1NW04utp6R8ivuMXP44hUb0cuUiHgBMwu
-	33xKR0ZNiQPTnBlPtvTy8iiSgZbiLHkMhfQLwbLfpzssa0tsC4pZZ2GuMYiWtCq8MJ+G
-	nTI+fNKEmdEoBg4lWqfVCrMy/f3MH6jULH9+8=
-Received: by 10.213.23.3 with SMTP id p3mr7692817ebb.52.1290886920081;
-	Sat, 27 Nov 2010 11:42:00 -0800 (PST)
-Received: from localhost (c-bad8e555.010-30-6c6b7012.cust.bredbandsbolaget.se
-	[85.229.216.186])
-	by mx.google.com with ESMTPS id q58sm3153290eeh.9.2010.11.27.11.41.59
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 27 Nov 2010 11:41:59 -0800 (PST)
-Date: Sat, 27 Nov 2010 20:42:22 +0100
-From: Kristoffer Ericson <kristoffer.ericson@gmail.com>
+	Sat, 27 Nov 2010 22:38:24 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 260F3110009C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Nov 2010 22:38:23 +0100 (CET)
+Received: from rhein.familie-heinold.de (g225147044.adsl.alicedsl.de
+	[92.225.147.44]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Nov 2010 22:38:23 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 5A2C43C121; Sat, 27 Nov 2010 22:38:19 +0100 (CET)
+Date: Sat, 27 Nov 2010 22:38:19 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101127194222.GC1878@boggieman.bredbandsbolaget.se>
-References: <AANLkTin4u=yb+3U32jcYjhgzYEhtXa9FwRr3xBJ7JE3K@mail.gmail.com>
+Message-ID: <20101127213818.GA1180@rhein.zuhause.netz>
+References: <4CF120CB.9030808@sensortherm.de>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTin4u=yb+3U32jcYjhgzYEhtXa9FwRr3xBJ7JE3K@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: kristoffer.ericson@gmail.com
+In-Reply-To: <4CF120CB.9030808@sensortherm.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Klaus Schwarzkopf 's patches
+Subject: Re: disko
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,27 +51,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 19:43:20 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Sat, 27 Nov 2010 21:39:41 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-
-Would be nice with a --signed-off-by:... otherwise the patches look good.
-
-On Sat, Nov 27, 2010 at 06:43:34PM +0100, Frans Meulenbroeks wrote:
+On Sat, Nov 27, 2010 at 04:16:27PM +0100, Klaus Schwarzkopf wrote:
 > Hi,
 > 
-> Can someone pick this up and push these (probably after testing).
-> They all seem quite OK to me, but as patchwork is not functioning at
-> the moment I cannot easily apply them (getting patches from gmail is a
-> little bit of a pain wrt spaces andl linebreaks if you read the mail
-> from internet).
+> disko needs scons to build, but the recipes depends not to
+> python-scons-native. I changed DEPENDS in disko.inc from
+> - DEPENDS = "sqlite3 libpng jpeg curl alsa-lib freetype libxml2
+> libsigc++-2.0 openssl"
+> + DEPENDS = "python-scons-native sqlite3 libpng jpeg curl alsa-lib
+> freetype libxml2 libsigc++-2.0 openssl"
 > 
-> Frans
+> but it doesn't help.
 > 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Can you help me?
+> 
+> Regards,
+> 
+> Klaus
+
+Hi Klaus,
+
+hm normaly the scons.bbclass should take care of it, but seems it does not for
+i386/x86_64. Could please try a newer bitbake version and send the install log
+of the python-native-scons
+
+Bye Henning
 
 
