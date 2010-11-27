@@ -1,39 +1,43 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PMHxb-0003ci-0O
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 11:24:51 +0100
-Received: from p5b034141.dip.t-dialin.net ([91.3.65.65] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PMHwL-0004mH-ME by authid <stefan@sostec.de> with cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PMHzD-0003kx-9F for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Nov 2010 11:26:31 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PMHxp-0000AF-5T for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Nov 2010 11:25:05 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Nov 2010 11:25:05 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 11:23:36 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PMHwK-0003D0-Mw
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 11:23:32 +0100
-Date: Sat, 27 Nov 2010 11:23:32 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sat, 27 Nov 2010 11:25:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101127102332.GK22419@excalibur.local>
-References: <1290852938-4776-1-git-send-email-schwarzkopf@sensortherm.de>
-	<4CF0DB6A.6010107@sensortherm.de>
-MIME-Version: 1.0
-In-Reply-To: <4CF0DB6A.6010107@sensortherm.de>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 27 Nov 2010 11:16:01 +0100
+Message-ID: <icqlp1$p90$2@dough.gmane.org>
+References: <1290773874.28296.34.camel@mattotaupa>	<1290774034.28296.37.camel@mattotaupa>	<1290821557.3795.11.camel@mattotaupa>
+	<1290822011.3795.13.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <1290822011.3795.13.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] download link fixed
+Subject: Re: [PATCH 4/4] xbmc: add `zip-native` to `DEPENDS` and increase `PR`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 10:24:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 27 Nov 2010 10:26:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Sat, 2010-11-27 at 11:20, Klaus Schwarzkopf wrote:
-> Is this patch ok or what can i do better?
+On 27-11-10 02:40, Paul Menzel wrote:
 
-You could do better, but already on the right way :)
+> I am not sure what the best way of submitting this series would be. Probably squashing everything in one patch or bump the `PR` in every patch.
 
-- The subject line does not mention which areas/recipes are touched.
-- Separate patches for separate recipes are better to track changes on recipe
-  level.
+Squashing :)
 
-http://wiki.openembedded.org/index.php/Commit_Policy
+I'll also talk to Tobias to see if we can pull in an updated version
+from e.g. trunk.
 
-regards
-Stefan Schmidt
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFM8NpgMkyGM64RGpERAt+RAJsHe1WFE0zwA4pdGeEYsJRTdk+GwgCePU+a
+5Q3XQ4E7wAMGeiE1hg/RQpg=
+=+A3b
+-----END PGP SIGNATURE-----
+
 
 
