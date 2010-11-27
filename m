@@ -1,16 +1,16 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMOWT-0004KH-1O
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMOfX-0004Xc-6z
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 18:25:17 +0100
+	Sat, 27 Nov 2010 18:34:39 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 14B0A1B421;
-	Sat, 27 Nov 2010 18:25:19 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id 612DC1B421;
+	Sat, 27 Nov 2010 18:34:41 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Nov 2010 18:24:01 +0100
-Message-Id: <1290878641-21360-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sat, 27 Nov 2010 18:33:22 +0100
+Message-Id: <1290879202-21546-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
@@ -20,7 +20,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libspf2: fixed SRC_URI
+Subject: [PATCH] lvm2: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,33 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 17:25:18 -0000
+X-List-Received-Date: Sat, 27 Nov 2010 17:34:39 -0000
 
-fixed URI, and homepage and checksum
+archive moved to old directory therefore no changes on lvm2.inc
 ---
- recipes/libspf2/libspf2_1.2.9.bb |    7 ++++---
- 1 files changed, 4 insertions(+), 3 deletions(-)
+ recipes/lvm2/lvm2_2.02.75.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/libspf2/libspf2_1.2.9.bb b/recipes/libspf2/libspf2_1.2.9.bb
-index 0f491c9..55227fe 100644
---- a/recipes/libspf2/libspf2_1.2.9.bb
-+++ b/recipes/libspf2/libspf2_1.2.9.bb
-@@ -2,11 +2,12 @@ DESCRIPTION = "libspf2 is a complete and robust implementation of SPF which \
- provides support for many MTAs."
- SECTION = "libs/network"
- LICENSE = "LGPL"
--SRC_URI = "http://www.libspf2.org/spf/libspf2-${PV}.tar.gz;name=src"
-+HOMEPAGE = "http://spf.anarres.org/index.html"
-+SRC_URI = "http://spf.anarres.org/spf/libspf2-${PV}.tar.gz"
- S = "${WORKDIR}/libspf2-${PV}"
+diff --git a/recipes/lvm2/lvm2_2.02.75.bb b/recipes/lvm2/lvm2_2.02.75.bb
+index bea54d6..785ea89 100644
+--- a/recipes/lvm2/lvm2_2.02.75.bb
++++ b/recipes/lvm2/lvm2_2.02.75.bb
+@@ -1,6 +1,8 @@
+ require lvm2.inc
  
--SRC_URI[src.md5sum] = "3305df4d1b13ca964d80b23bb5e4e2b6"
--SRC_URI[src.sha256sum] = "4837f6b063b1431673754cbf6bef8979de5ffc4d7f26f6b93abd42787ba04862"
-+SRC_URI[md5sum] = "3305df4d1b13ca964d80b23bb5e4e2b6"
-+SRC_URI[sha256sum] = "4837f6b063b1431673754cbf6bef8979de5ffc4d7f26f6b93abd42787ba04862"
+ PR = "${INC_PR}.0"
++SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
++           file://lvm.conf"
  
- inherit autotools
- 
+ SRC_URI[md5sum] = "30ef29785b0e8cfbc106b5203c08d0e7"
+ SRC_URI[sha256sum] = "f63ad083f9e371b4b490e8eaa9645447d456a76ae6a099e0b910e2e1ada75ba4"
 -- 
 1.7.0.4
 
