@@ -1,46 +1,26 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PMLYR-0008U9-Ta
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMLYu-00005X-IK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 15:15:08 +0100
-Received: by wyb40 with SMTP id 40so2897512wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 06:13:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Hr1QkL/O6FGKNf69Pj7HUuTn/E0cbOd/pcoMLhNV820=;
-	b=ZY5TZPwAbwrYHKkqDWN2gWgarqOHPtSky8q10Opc9vZvE3mDarRt4hUgL4MMDV+wrl
-	g4CdN574fWIqcvwZUM9r3NjS/CHZtXhehhIu39PDpEEyMWN96k+U101d/lt7Aqut76if
-	8N3roehN9wN28sxTrk5Z1s2yt8aV9I2HMjeV8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=T/cQXnsxPoKIem+uTYwhB8N3s4ycJGXt9uG9ajoIfCx08WW/LkDTm8WsyG/E8iI1m3
-	fPKiNeK6cYVpF3f+e+WIsMDcM7Al7FS8br00ORoSCdY7ZlRzRYUFaEDZbyNFWHJWBMGP
-	fpX4kdaT0+o1MITfmBx+UNtUSPQzh3hVqSkXg=
-MIME-Version: 1.0
-Received: by 10.216.199.81 with SMTP id w59mr967427wen.100.1290867226642; Sat,
-	27 Nov 2010 06:13:46 -0800 (PST)
-Received: by 10.216.49.130 with HTTP; Sat, 27 Nov 2010 06:13:46 -0800 (PST)
-In-Reply-To: <20101127140200.GH10755@ibawizard.net>
-References: <1290768432-13366-1-git-send-email-ynezz@true.cz>
-	<AANLkTi=SB9wuO4wcTXz3M5fYb2WyO09_pK3ooA+i4xgo@mail.gmail.com>
-	<ico56o$f8$2@dough.gmane.org>
-	<20101127140200.GH10755@ibawizard.net>
-Date: Sat, 27 Nov 2010 15:13:46 +0100
-Message-ID: <AANLkTi=kAyxY9i+_c-6UoeEp6ZjUf91m3z3UE272ibVu@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 27 Nov 2010 15:15:36 +0100
+Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id CC64A1B421;
+	Sat, 27 Nov 2010 15:15:38 +0100 (CET)
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Sat, 27 Nov 2010 15:14:18 +0100
+Message-Id: <1290867258-11637-1-git-send-email-schwarzkopf@sensortherm.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-2008.1: bump uclibc to 0.9.30.3 which unbreaks x264
+Subject: [PATCH] dgen-sdl_1.23: fixed download url
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,22 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 14:15:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 27 Nov 2010 14:15:37 -0000
 
-Ok, then I suggest to stay with 0.9.30.2 and add the two hacks documented here:
+found the archive at web.archive.org
+---
+ recipes/dgen/dgen-sdl_1.23.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-1) replacing log2f(i) with logf(i)/logf(2)
-http://www.mail-archive.com/uclibc@uclibc.org/msg04949.html
-2) '--disable-tls' for e2fsprogs
-http://patchwork.openembedded.org/patch/2069/
+diff --git a/recipes/dgen/dgen-sdl_1.23.bb b/recipes/dgen/dgen-sdl_1.23.bb
+index a7f0339..06913fc 100644
+--- a/recipes/dgen/dgen-sdl_1.23.bb
++++ b/recipes/dgen/dgen-sdl_1.23.bb
+@@ -4,7 +4,7 @@ SECTION = "x11/games"
+ LICENSE = "BSD"
+ 
+ SRC_URI = "\
+-  http://pknet.com/~joe/${PN}-${PV}.tar.gz \
++  http://web.archive.org/web/20070705161341/http://www.pknet.com/~joe/${PN}-${PV}.tar.gz \
+   file://fix-configure-and-make.patch \
+ "
+ 
+-- 
+1.7.0.4
 
-openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-Opinions?
-
-Andrea
 
 
