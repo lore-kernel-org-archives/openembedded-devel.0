@@ -1,16 +1,16 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMIeh-0006zn-0M
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMJp9-0008Ay-HY
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 12:09:26 +0100
+	Sat, 27 Nov 2010 13:24:17 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 587EF1B421;
-	Sat, 27 Nov 2010 12:09:25 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id A7FB21B421;
+	Sat, 27 Nov 2010 13:24:17 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Nov 2010 12:07:18 +0100
-Message-Id: <1290856038-5691-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sat, 27 Nov 2010 13:22:14 +0100
+Message-Id: <1290860534-8484-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
@@ -20,7 +20,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] cpusage_0.1: fixed download link
+Subject: [PATCH] dash_0.5.5.1: New download link for patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,31 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 11:09:27 -0000
+X-List-Received-Date: Sat, 27 Nov 2010 12:24:17 -0000
 
-cpusage have a new homepage: http://www.net.t-labs.tu-berlin.de/~fabian/proj_de.html
+The newest patch on the old download directory is dash_0.5.5.1-7.3.diff.gz
 ---
- recipes/cpusage/cpusage_0.1.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes/dash/dash_0.5.5.1.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/cpusage/cpusage_0.1.bb b/recipes/cpusage/cpusage_0.1.bb
-index 3f4ddfc..9a3811f 100644
---- a/recipes/cpusage/cpusage_0.1.bb
-+++ b/recipes/cpusage/cpusage_0.1.bb
-@@ -1,10 +1,12 @@
- DESCRIPTION = "This tool read out the tics counter of the operating system and \
- calculates the Percentages spend in each CPU_STATE."
-+HOMEPAGE = "http://www.net.t-labs.tu-berlin.de/~fabian/proj_de.html"
- SECTION = "base"
- PRIORITY = "optional"
- LICENSE = "GPL"
+diff --git a/recipes/dash/dash_0.5.5.1.bb b/recipes/dash/dash_0.5.5.1.bb
+index 319917d..bf00d4c 100644
+--- a/recipes/dash/dash_0.5.5.1.bb
++++ b/recipes/dash/dash_0.5.5.1.bb
+@@ -1,9 +1,10 @@
+ DESCRIPTION = "The Debian Almquist Shell is a POSIX compliant shell that is much smaller than 'bash'."
+ PROVIDES = "virtual/sh"
+ LICENSE = "BSD GPL"
 +PR = "r0"
  
--SRC_URI = "http://www8.in.tum.de/~schneifa/group/sources/cpusage-${PV}.tar.gz \
-+SRC_URI = "http://www.net.t-labs.tu-berlin.de/~fabian/sources/cpusage-${PV}.tar.gz \
-            file://cpusage.patch"
+ SRC_URI = "http://ftp.debian.org/debian/pool/main/d/dash/dash_${PV}.orig.tar.gz;name=archive \
+-	http://ftp.debian.org/debian/pool/main/d/dash/dash_${PV}-2.3.diff.gz;name=patch \
++	https://launchpad.net/debian/sid/+source/dash/0.5.5.1-2.3/+files/dash_${PV}-2.3.diff.gz;name=patch \
+ 	file://makefile-build-cc.diff"
  
- S = "${WORKDIR}/cpusage-${PV}"
+ SRC_URI[archive.md5sum] = "7ac832b440b91f5a52cf8eb68e172616"
 -- 
 1.7.0.4
 
