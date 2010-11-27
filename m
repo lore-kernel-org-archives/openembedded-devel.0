@@ -1,28 +1,36 @@
-Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMHuX-0003QH-HA
+	(envelope-from <stefan@datenfreihafen.org>) id 1PMHxb-0003ci-0O
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 11:21:44 +0100
-Received: from [192.168.0.20] (77-22-235-200-dynip.superkabel.de
-	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id E34431B421
+	Sat, 27 Nov 2010 11:24:51 +0100
+Received: from p5b034141.dip.t-dialin.net ([91.3.65.65] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1PMHwL-0004mH-ME by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 11:21:43 +0100 (CET)
-Message-ID: <4CF0DB6A.6010107@sensortherm.de>
-Date: Sat, 27 Nov 2010 11:20:26 +0100
-From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Sat, 27 Nov 2010 11:23:36 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PMHwK-0003D0-Mw
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Nov 2010 11:23:32 +0100
+Date: Sat, 27 Nov 2010 11:23:32 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101127102332.GK22419@excalibur.local>
 References: <1290852938-4776-1-git-send-email-schwarzkopf@sensortherm.de>
-In-Reply-To: <1290852938-4776-1-git-send-email-schwarzkopf@sensortherm.de>
-X-SA-Exim-Connect-IP: 188.40.84.136
-X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
+	<4CF0DB6A.6010107@sensortherm.de>
+MIME-Version: 1.0
+In-Reply-To: <4CF0DB6A.6010107@sensortherm.de>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] download link fixed
@@ -39,114 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 10:21:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 27 Nov 2010 10:24:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Is this patch ok or what can i do better?
+Hello.
 
+On Sat, 2010-11-27 at 11:20, Klaus Schwarzkopf wrote:
+> Is this patch ok or what can i do better?
 
-Am 27.11.2010 11:15, schrieb Klaus Schwarzkopf:
-> From: Klaus Schwarzkopf<schwarzkopf@sensortherm>
->
-> modified the download link for the commited recipes
-> ---
->   recipes/asterisk/asterisk_1.2.28.bb     |    8 ++++++--
->   recipes/bmon/bmon_2.1.0.bb              |    2 +-
->   recipes/cdtool/cdtool_2.1.8.bb          |    4 +++-
->   recipes/chillispot/chillispot_0.98.bb   |    6 +++---
->   recipes/chillispot/chillispot_1.0RC3.bb |    6 +++---
->   5 files changed, 16 insertions(+), 10 deletions(-)
->
-> diff --git a/recipes/asterisk/asterisk_1.2.28.bb b/recipes/asterisk/asterisk_1.2.28.bb
-> index e49e68d..e3c2009 100644
-> --- a/recipes/asterisk/asterisk_1.2.28.bb
-> +++ b/recipes/asterisk/asterisk_1.2.28.bb
-> @@ -5,9 +5,9 @@ HOMEPAGE="www.asterisk.org"
->   LICENSE="GPL"
->   DEPENDS="ncurses zlib openssl curl alsa-lib libogg libvorbis speex"
->   SECTION = "console/telephony"
-> -PR = "r2"
-> +PR = "r3"
->
-> -SRC_URI="http://ftp.digium.com/pub/asterisk/releases/asterisk-${PV}.tar.gz \
-> +SRC_URI="http://downloads.asterisk.org/pub/telephony/asterisk/releases/${P}.tar.gz \
->   	 file://uclibc-compat-getloadavg.patch \
->   	 file://uclibc-dns.patch \
->            file://asterisk.patch \
-> @@ -44,3 +44,7 @@ do_stage () {
->   FILES_${PN}-dbg += "${libdir}/asterisk/modules/.debug"
->   FILES_${PN}-dbg += "/var/lib/asterisk/agi-bin/.debug"
->
-> +
-> +SRC_URI[md5sum] = "facf156d84559f28ef4ce61790d161ef"
-> +SRC_URI[sha256sum] = "9a63d9d34d5ed9870d988ede614665e2105007705c0a878ff1e48afbaaae1c6d"
-> +
-> diff --git a/recipes/bmon/bmon_2.1.0.bb b/recipes/bmon/bmon_2.1.0.bb
-> index 0f263ab..e540eb5 100644
-> --- a/recipes/bmon/bmon_2.1.0.bb
-> +++ b/recipes/bmon/bmon_2.1.0.bb
-> @@ -5,7 +5,7 @@ LICENSE = "MIT"
->   # only works with libnl-0.5.0
->   DEPENDS = "libnl"
->
-> -SRC_URI = "http://people.suug.ch/~tgr/bmon/files/bmon-2.1.0.tar.gz \
-> +SRC_URI = "http://distfiles.macports.org/bmon/${P}.tar.gz \
->              file://no-strip.patch"
->
->   inherit autotools
-> diff --git a/recipes/cdtool/cdtool_2.1.8.bb b/recipes/cdtool/cdtool_2.1.8.bb
-> index eaed3f6..1d35d6b 100644
-> --- a/recipes/cdtool/cdtool_2.1.8.bb
-> +++ b/recipes/cdtool/cdtool_2.1.8.bb
-> @@ -7,7 +7,9 @@ DESCRIPTION="cdtool is a free software package to control the audio functions \
->   of an attached CDROM drive from the command line in a quick and scriptable way."
->   LICENSE = "GPL"
->
-> -SRC_URI="http://hinterhof.net/${PN}/dist/${PN}-${PV}.tar.gz \
-> +PR = "r0"
-> +
-> +SRC_URI="http://www.sfr-fresh.com/linux/misc/${PN}-${PV}.tar.gz \
->   	file://install-no-owner.patch"
->
->   inherit autotools
-> diff --git a/recipes/chillispot/chillispot_0.98.bb b/recipes/chillispot/chillispot_0.98.bb
-> index 687b17f..b9d36e7 100644
-> --- a/recipes/chillispot/chillispot_0.98.bb
-> +++ b/recipes/chillispot/chillispot_0.98.bb
-> @@ -1,9 +1,9 @@
->   DESCRIPTION = "ChilliSpot is an open source captive portal or wireless LAN access point controller. It is used for authenticating users of a wireless LAN."
-> -HOMEPAGE = "http://www.chillispot.org/"
-> +HOMEPAGE = "http://www.chillispot.info/"
->   LICENSE = "GPL"
-> -PR = "r2"
-> +PR = "r3"
->
-> -SRC_URI = "http://www.chillispot.org/download/chillispot-${PV}.tar.gz \
-> +SRC_URI = "http://www.chillispot.info/download/chillispot-${PV}.tar.gz \
->   	file://no-ansi.patch \
->   	file://init"
->   RRECOMMENDS_${PN} = "kernel-module-tun"
-> diff --git a/recipes/chillispot/chillispot_1.0RC3.bb b/recipes/chillispot/chillispot_1.0RC3.bb
-> index 0da9706..a3f7df5 100644
-> --- a/recipes/chillispot/chillispot_1.0RC3.bb
-> +++ b/recipes/chillispot/chillispot_1.0RC3.bb
-> @@ -1,11 +1,11 @@
->   DESCRIPTION = "ChilliSpot is an open source captive portal or wireless LAN access point controller. It is used for authenticating users of a wireless LAN."
-> -HOMEPAGE = "http://www.chillispot.org/"
-> +HOMEPAGE = "http://www.chillispot.info/"
->   LICENSE = "GPL"
-> -SRC_URI = "http://www.chillispot.org/download/chillispot-${PV}.tar.gz \
-> +SRC_URI = "http://www.chillispot.info/download/chillispot-${PV}.tar.gz \
->   	file://no-ansi.patch \
->   	file://init"
->   RDEPENDS_${PN} = "kernel-module-tun"
-> -PR = "r1"
-> +PR = "r2"
->
->   inherit autotools
->
+You could do better, but already on the right way :)
 
+- The subject line does not mention which areas/recipes are touched.
+- Separate patches for separate recipes are better to track changes on recipe
+  level.
 
+http://wiki.openembedded.org/index.php/Commit_Policy
+
+regards
+Stefan Schmidt
 
 
