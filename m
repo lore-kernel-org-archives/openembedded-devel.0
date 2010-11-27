@@ -1,47 +1,26 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PMLm9-0000Te-Fp
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMMQu-0001X2-3u
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 15:29:17 +0100
-Received: by wyb40 with SMTP id 40so2905586wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 06:28:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=wdU46YECho/ORjGMkN4LMctxsj7S01f4gjKO9mE3ZpE=;
-	b=C2CG8hVloalWwEm5u4PbHPI4gWrONfsRpTtjhoiZg3g9cb1jwZdvfqRIGFMz1ajGrX
-	EUjfxQ9NXPo6OIVPSu9hgV2UD1gM7XweDgaTHFebOHAyt4mr10c1GVOEmX9xa1OMMloA
-	OSfpU7w7GKYKx88ls2+wfneHTUERGKTRUhDjA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=csZD1V9VQfSYnqkgmCZVm6w8kLXgPnN9Jy6AgzO2GUs42LIPxUx4jvLAi2s2uIDFjj
-	BBONn9QNGD1gJ3iuscgdt3EDlVSZ/fInQSzqzY4j3JrpbHW+wSsKeIkALDfRs9nF2Kv4
-	miHPKJQ5pKIu5uAYv9n+DzkGS/w9tWnsoOyWs=
-MIME-Version: 1.0
-Received: by 10.216.52.11 with SMTP id d11mr2941387wec.0.1290868079830; Sat,
-	27 Nov 2010 06:27:59 -0800 (PST)
-Received: by 10.216.49.130 with HTTP; Sat, 27 Nov 2010 06:27:59 -0800 (PST)
-In-Reply-To: <AANLkTi=kAyxY9i+_c-6UoeEp6ZjUf91m3z3UE272ibVu@mail.gmail.com>
-References: <1290768432-13366-1-git-send-email-ynezz@true.cz>
-	<AANLkTi=SB9wuO4wcTXz3M5fYb2WyO09_pK3ooA+i4xgo@mail.gmail.com>
-	<ico56o$f8$2@dough.gmane.org>
-	<20101127140200.GH10755@ibawizard.net>
-	<AANLkTi=kAyxY9i+_c-6UoeEp6ZjUf91m3z3UE272ibVu@mail.gmail.com>
-Date: Sat, 27 Nov 2010 15:27:59 +0100
-Message-ID: <AANLkTinrTnrTXsLVFFxpnUWt1ivwn_V2xS=V8dsej97u@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 27 Nov 2010 16:11:25 +0100
+Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id 2D6951B421;
+	Sat, 27 Nov 2010 16:11:26 +0100 (CET)
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Sat, 27 Nov 2010 16:10:05 +0100
+Message-Id: <1290870605-19492-1-git-send-email-schwarzkopf@sensortherm.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-2008.1: bump uclibc to 0.9.30.3 which unbreaks x264
+Subject: [PATCH] disko_1.6.0: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,26 +34,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 14:29:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 27 Nov 2010 15:11:26 -0000
 
-On Sat, Nov 27, 2010 at 3:13 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
-> Ok, then I suggest to stay with 0.9.30.2 and add the two hacks documented here:
->
-> 1) replacing log2f(i) with logf(i)/logf(2)
-> http://www.mail-archive.com/uclibc@uclibc.org/msg04949.html
+diskohq provides tar.bz2
+---
+ recipes/disko/disko_1.6.0.bb |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
 
-Patch courtesy of Bernhard Guillon already done (bad that OE Patchwork
-is down...)
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November/027326.html
+diff --git a/recipes/disko/disko_1.6.0.bb b/recipes/disko/disko_1.6.0.bb
+index 4e43ec0..baf7fb3 100644
+--- a/recipes/disko/disko_1.6.0.bb
++++ b/recipes/disko/disko_1.6.0.bb
+@@ -6,7 +6,7 @@ require disko.inc
+ 
+ DEPENDS += "taglib directfb virtual/libx11 hal libxv libxxf86vm"
+ 
+-SRC_URI = "http://www.diskohq.org/downloads/${PN}-${PV}.tar.gz \
++SRC_URI = "http://www.diskohq.com/repository/ubuntu/pool/${PN}_${PV}.tar.bz2  \
+ 	   file://pkgconfig.patch \
+ 	  "
+ 
+@@ -14,6 +14,8 @@ do_compile() {
+         ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} graphics=all prefix=${prefix}/ || \
+         oefatal "scons build execution failed."
+ }
++SRC_URI[md5sum] = "9725e3d692492188b4c74e38884501b9"
++SRC_URI[sha256sum] = "6553d69dc4968f38840f408b6e75ece5f575a816ff8c2df76cccb6d966a836b7"
+ 
+-SRC_URI[md5sum] = "c63bad58524501e367af9842f510b458"
+-SRC_URI[sha256sum] = "fe578299be4031d0c2454ff4fd3b3034e332260b9695687adf27a776a61eb2e4"
++#SRC_URI[md5sum] = "c63bad58524501e367af9842f510b458"
++#SRC_URI[sha256sum] = "fe578299be4031d0c2454ff4fd3b3034e332260b9695687adf27a776a61eb2e4"
+-- 
+1.7.0.4
 
-> 2) '--disable-tls' for e2fsprogs
-> http://patchwork.openembedded.org/patch/2069/
->
-
-Here the patch is trivial...my concern is both should be Angstrom-only, isn't?
-
-
-Andrea
 
 
