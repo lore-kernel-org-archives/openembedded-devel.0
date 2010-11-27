@@ -1,16 +1,16 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMLYu-00005X-IK
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMLjV-0000Ll-6k
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 15:15:36 +0100
+	Sat, 27 Nov 2010 15:26:35 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id CC64A1B421;
-	Sat, 27 Nov 2010 15:15:38 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id 6A5171B421;
+	Sat, 27 Nov 2010 15:26:35 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Nov 2010 15:14:18 +0100
-Message-Id: <1290867258-11637-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sat, 27 Nov 2010 15:25:14 +0100
+Message-Id: <1290867914-14359-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
@@ -20,7 +20,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] dgen-sdl_1.23: fixed download url
+Subject: [PATCH] dircproxy_1.1.0: fixed download url
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,26 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 14:15:37 -0000
+X-List-Received-Date: Sat, 27 Nov 2010 14:26:35 -0000
 
-found the archive at web.archive.org
+new src url
 ---
- recipes/dgen/dgen-sdl_1.23.bb |    2 +-
+ recipes/dircproxy/dircproxy_1.1.0.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/dgen/dgen-sdl_1.23.bb b/recipes/dgen/dgen-sdl_1.23.bb
-index a7f0339..06913fc 100644
---- a/recipes/dgen/dgen-sdl_1.23.bb
-+++ b/recipes/dgen/dgen-sdl_1.23.bb
-@@ -4,7 +4,7 @@ SECTION = "x11/games"
- LICENSE = "BSD"
+diff --git a/recipes/dircproxy/dircproxy_1.1.0.bb b/recipes/dircproxy/dircproxy_1.1.0.bb
+index ec2a802..e9cc46b 100644
+--- a/recipes/dircproxy/dircproxy_1.1.0.bb
++++ b/recipes/dircproxy/dircproxy_1.1.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://dircproxy.securiweb.net/"
+ LICENSE = "GPLv2"
+ PR = "r1"
  
- SRC_URI = "\
--  http://pknet.com/~joe/${PN}-${PV}.tar.gz \
-+  http://web.archive.org/web/20070705161341/http://www.pknet.com/~joe/${PN}-${PV}.tar.gz \
-   file://fix-configure-and-make.patch \
- "
+-SRC_URI = "http://dircproxy.securiweb.net/pub/1.1/dircproxy-${PV}.tar.gz\
++SRC_URI = "http://dircproxy.googlecode.com/files/dircproxy-${PV}.tar.gz\
+            file://dircproxy.patch"
  
+ inherit autotools
 -- 
 1.7.0.4
 
