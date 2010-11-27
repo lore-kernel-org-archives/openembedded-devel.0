@@ -1,33 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PM9n4-0004ME-M6 for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 02:41:28 +0100
-Received: from f053037197.adsl.alicedsl.de ([78.53.37.197]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PM9ls-00019K-70 for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 01:40:12 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMHqx-0003DE-Lw
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Nov 2010 11:18:02 +0100
+Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id CF3681B421
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Nov 2010 11:18:01 +0100 (CET)
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1290821557.3795.11.camel@mattotaupa>
-References: <1290773874.28296.34.camel@mattotaupa>
-	<1290774034.28296.37.camel@mattotaupa>
-	<1290821557.3795.11.camel@mattotaupa>
-Date: Sat, 27 Nov 2010 02:40:11 +0100
-Message-ID: <1290822011.3795.13.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Sat, 27 Nov 2010 11:15:38 +0100
+Message-Id: <1290852938-4776-1-git-send-email-schwarzkopf@sensortherm.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 4/4] xbmc: add `zip-native` to `DEPENDS` and increase `PR`
+Subject: [PATCH] download link fixed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,103 +35,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 01:41:28 -0000
-X-Groupsio-MsgNum: 26636
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-NVw9CfTkSml5R0CyM4V4"
+X-List-Received-Date: Sat, 27 Nov 2010 10:18:02 -0000
 
---=-NVw9CfTkSml5R0CyM4V4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm>
 
-Date: Fri, 26 Nov 2010 11:34:59 +0100
-
-1. Task `configure` fails with the following error.
-
-	[=E2=80=A6]
-	| checking for unzip... yes
-	| checking for zip... no
-	| configure: error: Could not find a required program. Please see the READ=
-ME for your platform.
-	| ERROR: Function do_configure failed
-	NOTE: package xbmc-10.05-r8+gitr0+e2ab481ebe964321c358ab9d6402088c714adcbe=
-: task do_configure: Failed
-	ERROR: TaskFailed event exception, aborting
-	ERROR: Build of /oe/openembedded/recipes/xbmc/xbmc_svn.bb do_configure fai=
-led
-	ERROR: Task 11 (/oe/openembedded/recipes/xbmc/xbmc_svn.bb, do_configure) f=
-ailed with 256
-	ERROR: '/oe/openembedded/recipes/xbmc/xbmc_svn.bb' failed
-	ERROR: '/oe/openembedded/recipes/xbmc/xbmc_svn.bb' failed
-	ERROR: '/oe/openembedded/recipes/xbmc/xbmc_svn.bb' failed
-
-Adding `zip-native` to `DEPENDS` fixes this error with the following build =
-configuration.
-
-	Build Configuration:
-	BB_VERSION        =3D "1.10.0"
-	METADATA_BRANCH   =3D "org.openembedded.dev"
-	METADATA_REVISION =3D "97ea91e"
-	TARGET_ARCH       =3D "arm"
-	TARGET_OS         =3D "linux-gnueabi"
-	MACHINE           =3D "beagleboard"
-	DISTRO            =3D "angstrom"
-	DISTRO_VERSION    =3D "2010.7-test-20101126"
-	TARGET_FPU        =3D "hard"
-
-2. After the newly added dependencies the program release (`PR`) has to be =
-increased.
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+modified the download link for the commited recipes
 ---
-I am not sure what the best way of submitting this series would be. Probabl=
-y squashing everything in one patch or bump the `PR` in every patch.
----
- recipes/xbmc/xbmc_svn.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/asterisk/asterisk_1.2.28.bb     |    8 ++++++--
+ recipes/bmon/bmon_2.1.0.bb              |    2 +-
+ recipes/cdtool/cdtool_2.1.8.bb          |    4 +++-
+ recipes/chillispot/chillispot_0.98.bb   |    6 +++---
+ recipes/chillispot/chillispot_1.0RC3.bb |    6 +++---
+ 5 files changed, 16 insertions(+), 10 deletions(-)
 
-diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
-index d23cc8c..ad95a8a 100644
---- a/recipes/xbmc/xbmc_svn.bb
-+++ b/recipes/xbmc/xbmc_svn.bb
-@@ -1,13 +1,13 @@
- DESCRIPTION =3D "XBMC Media Center"
- LICENSE =3D "xbmc"
-=20
--DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodpl=
-ug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virt=
-ual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi l=
-ibsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper"
-+DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodpl=
-ug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virt=
-ual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi l=
-ibsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip=
--native"
- require recipes/egl/egl.inc
-=20
- SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
-=20
- PV =3D "10.05"
--PR =3D "r8"
-+PR =3D "r9"
- PR_append =3D "+gitr${SRCPV}"
-=20
- SRC_URI =3D "git://xbmc.git.sourceforge.net/gitroot/xbmc/xbmc;protocol=3Dg=
-it;branch=3Dmaster \
---=20
-1.7.2.3
+diff --git a/recipes/asterisk/asterisk_1.2.28.bb b/recipes/asterisk/asterisk_1.2.28.bb
+index e49e68d..e3c2009 100644
+--- a/recipes/asterisk/asterisk_1.2.28.bb
++++ b/recipes/asterisk/asterisk_1.2.28.bb
+@@ -5,9 +5,9 @@ HOMEPAGE="www.asterisk.org"
+ LICENSE="GPL"
+ DEPENDS="ncurses zlib openssl curl alsa-lib libogg libvorbis speex"
+ SECTION = "console/telephony"
+-PR = "r2"
++PR = "r3"
+ 
+-SRC_URI="http://ftp.digium.com/pub/asterisk/releases/asterisk-${PV}.tar.gz \
++SRC_URI="http://downloads.asterisk.org/pub/telephony/asterisk/releases/${P}.tar.gz \
+ 	 file://uclibc-compat-getloadavg.patch \
+ 	 file://uclibc-dns.patch \
+          file://asterisk.patch \
+@@ -44,3 +44,7 @@ do_stage () {
+ FILES_${PN}-dbg += "${libdir}/asterisk/modules/.debug"
+ FILES_${PN}-dbg += "/var/lib/asterisk/agi-bin/.debug"
+ 
++
++SRC_URI[md5sum] = "facf156d84559f28ef4ce61790d161ef"
++SRC_URI[sha256sum] = "9a63d9d34d5ed9870d988ede614665e2105007705c0a878ff1e48afbaaae1c6d"
++
+diff --git a/recipes/bmon/bmon_2.1.0.bb b/recipes/bmon/bmon_2.1.0.bb
+index 0f263ab..e540eb5 100644
+--- a/recipes/bmon/bmon_2.1.0.bb
++++ b/recipes/bmon/bmon_2.1.0.bb
+@@ -5,7 +5,7 @@ LICENSE = "MIT"
+ # only works with libnl-0.5.0
+ DEPENDS = "libnl"
+ 
+-SRC_URI = "http://people.suug.ch/~tgr/bmon/files/bmon-2.1.0.tar.gz \
++SRC_URI = "http://distfiles.macports.org/bmon/${P}.tar.gz \
+            file://no-strip.patch"
+ 
+ inherit autotools
+diff --git a/recipes/cdtool/cdtool_2.1.8.bb b/recipes/cdtool/cdtool_2.1.8.bb
+index eaed3f6..1d35d6b 100644
+--- a/recipes/cdtool/cdtool_2.1.8.bb
++++ b/recipes/cdtool/cdtool_2.1.8.bb
+@@ -7,7 +7,9 @@ DESCRIPTION="cdtool is a free software package to control the audio functions \
+ of an attached CDROM drive from the command line in a quick and scriptable way."
+ LICENSE = "GPL"
+ 
+-SRC_URI="http://hinterhof.net/${PN}/dist/${PN}-${PV}.tar.gz \
++PR = "r0"
++
++SRC_URI="http://www.sfr-fresh.com/linux/misc/${PN}-${PV}.tar.gz \
+ 	file://install-no-owner.patch"
+ 
+ inherit autotools
+diff --git a/recipes/chillispot/chillispot_0.98.bb b/recipes/chillispot/chillispot_0.98.bb
+index 687b17f..b9d36e7 100644
+--- a/recipes/chillispot/chillispot_0.98.bb
++++ b/recipes/chillispot/chillispot_0.98.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "ChilliSpot is an open source captive portal or wireless LAN access point controller. It is used for authenticating users of a wireless LAN."
+-HOMEPAGE = "http://www.chillispot.org/"
++HOMEPAGE = "http://www.chillispot.info/"
+ LICENSE = "GPL"
+-PR = "r2"
++PR = "r3"
+ 
+-SRC_URI = "http://www.chillispot.org/download/chillispot-${PV}.tar.gz \
++SRC_URI = "http://www.chillispot.info/download/chillispot-${PV}.tar.gz \
+ 	file://no-ansi.patch \
+ 	file://init"
+ RRECOMMENDS_${PN} = "kernel-module-tun"
+diff --git a/recipes/chillispot/chillispot_1.0RC3.bb b/recipes/chillispot/chillispot_1.0RC3.bb
+index 0da9706..a3f7df5 100644
+--- a/recipes/chillispot/chillispot_1.0RC3.bb
++++ b/recipes/chillispot/chillispot_1.0RC3.bb
+@@ -1,11 +1,11 @@
+ DESCRIPTION = "ChilliSpot is an open source captive portal or wireless LAN access point controller. It is used for authenticating users of a wireless LAN."
+-HOMEPAGE = "http://www.chillispot.org/"
++HOMEPAGE = "http://www.chillispot.info/"
+ LICENSE = "GPL"
+-SRC_URI = "http://www.chillispot.org/download/chillispot-${PV}.tar.gz \
++SRC_URI = "http://www.chillispot.info/download/chillispot-${PV}.tar.gz \
+ 	file://no-ansi.patch \
+ 	file://init"
+ RDEPENDS_${PN} = "kernel-module-tun"
+-PR = "r1"
++PR = "r2"
+ 
+ inherit autotools
+ 
+-- 
+1.7.0.4
 
---=-NVw9CfTkSml5R0CyM4V4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkzwYXsACgkQPX1aK2wOHVjAOwCdEoSF/pR6FOcaw6mdA3bMptzI
-bPAAn1L4gBOF5Y+M8A7buyHL7/QftrEs
-=8Ga3
------END PGP SIGNATURE-----
-
---=-NVw9CfTkSml5R0CyM4V4--
