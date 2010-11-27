@@ -1,44 +1,30 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PMLI1-0001lf-3j
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1PMLN2-0005HB-Lc
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 14:58:10 +0100
-Received: by iwn8 with SMTP id 8so1002411iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 05:56:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=HlKhyhOkbu3kaehLQyhPoUeDjPEZ4ConQ4NP9e8ibQ8=;
-	b=IQO7uPjjszf+hPA+FYOHGl7kJ7hiBLJKOdl7vrGQVcQW6uT3g3PR237Po0F2f/LfxD
-	0FlHNN8ItxL9vtz1TBdZ2Sl3F1S6TQd0gTr/kqZmbMFvT49qQSq9kRbPgP+xpfERmBHa
-	dlC32+jKHBpBUuqRRG11j5EsXwjOpXe3vVj14=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=fi1qJ+z8BTbbw65ikHYccSQ1NB9ZrT7Bm0YaxrcKUHS1353eltEPpAwFTK4MGijA3F
-	Bsb1kHyP4vOMECXwkykmZGYYMcxcv4w5WghUkk+780SKTP2ZXTWp2QqGuKY72oTLsg2q
-	+mxibcsPxxeXHNIpHkyl+QsPYq0f7TR+lyACI=
-MIME-Version: 1.0
-Received: by 10.231.17.203 with SMTP id t11mr2950283iba.1.1290866209346; Sat,
-	27 Nov 2010 05:56:49 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Sat, 27 Nov 2010 05:56:49 -0800 (PST)
-In-Reply-To: <1290856038-5691-1-git-send-email-schwarzkopf@sensortherm.de>
-References: <1290856038-5691-1-git-send-email-schwarzkopf@sensortherm.de>
-Date: Sat, 27 Nov 2010 14:56:49 +0100
-Message-ID: <AANLkTim2QyKSW4RpGFZb9Hu5PqYJXqDN632wqav_5R-p@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 27 Nov 2010 15:03:59 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 417D81D36171; Sat, 27 Nov 2010 15:02:00 +0100 (CET)
+Date: Sat, 27 Nov 2010 15:02:00 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20101127140200.GH10755@ibawizard.net>
+References: <1290768432-13366-1-git-send-email-ynezz@true.cz>
+	<AANLkTi=SB9wuO4wcTXz3M5fYb2WyO09_pK3ooA+i4xgo@mail.gmail.com>
+	<ico56o$f8$2@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <ico56o$f8$2@dough.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cpusage_0.1: fixed download link
+Subject: Re: [PATCH] angstrom-2008.1: bump uclibc to 0.9.30.3 which	unbreaks x264
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +38,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 13:58:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 27 Nov 2010 14:03:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/11/27 Klaus Schwarzkopf <schwarzkopf@sensortherm.de>:
-> cpusage have a new homepage: http://www.net.t-labs.tu-berlin.de/~fabian/p=
-roj_de.html
-> ---
-> =A0recipes/cpusage/cpusage_0.1.bb | =A0 =A04 +++-
-> =A01 files changed, 3 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/cpusage/cpusage_0.1.bb b/recipes/cpusage/cpusage_0.1=
-.bb
-> index 3f4ddfc..9a3811f 100644
-> --- a/recipes/cpusage/cpusage_0.1.bb
-> +++ b/recipes/cpusage/cpusage_0.1.bb
-> @@ -1,10 +1,12 @@
-> =A0DESCRIPTION =3D "This tool read out the tics counter of the operating =
-system and \
-> =A0calculates the Percentages spend in each CPU_STATE."
-> +HOMEPAGE =3D "http://www.net.t-labs.tu-berlin.de/~fabian/proj_de.html"
-> =A0SECTION =3D "base"
-> =A0PRIORITY =3D "optional"
-> =A0LICENSE =3D "GPL"
-> +PR =3D "r0"
->
-> -SRC_URI =3D "http://www8.in.tum.de/~schneifa/group/sources/cpusage-${PV}=
-.tar.gz \
-> +SRC_URI =3D "http://www.net.t-labs.tu-berlin.de/~fabian/sources/cpusage-=
-${PV}.tar.gz \
-> =A0 =A0 =A0 =A0 =A0 =A0file://cpusage.patch"
->
-> =A0S =3D "${WORKDIR}/cpusage-${PV}"
-> --
+Koen Kooi <k.kooi@student.utwente.nl> [2010-11-26 12:20:56]:
 
-Looks good to me, but since patchwork is down I cannot easily pull,
-test and push patches ...
+> An upgrade of binutils is out of the question for angstrom 2008.
 
-Frans
+Ok, what do you suggest to fix that uclibc breakage which happens with
+angstrom-2008 and angstrom-2010[1] (it's with mesa fix applied). Thanks.
+
+1. http://tinderbox.openembedded.net/packages/1099789/
+
+-- ynezz
 
 
