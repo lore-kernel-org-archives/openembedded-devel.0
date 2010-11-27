@@ -1,31 +1,27 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from tone.orchestra.cse.unsw.edu.au ([129.94.242.59])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1PM7ku-0001lN-E3
+	(envelope-from <jayen@cse.unsw.edu.au>) id 1PM8Rj-0002oQ-8e
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 00:31:04 +0100
-Received: from [192.168.1.135] (95-90-74-25-dynip.superkabel.de [95.90.74.25])
-	by dd20204.kasserver.com (Postfix) with ESMTP id 185D91805A69B
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 00:29:47 +0100 (CET)
-Message-ID: <4CF042E3.90504@opensimpad.org>
-Date: Sat, 27 Nov 2010 00:29:39 +0100
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
-MIME-Version: 1.0
+	Sat, 27 Nov 2010 01:15:22 +0100
+Received: From localhost.localdomain ([129.94.175.7] ==
+	runswift.cse.unsw.EDU.AU) By
+	tone With Smtp ; Sat, 27 Nov 2010 11:13:59 +1100 
+From: Jayen Ashar <jayen@cse.unsw.edu.au>
 To: openembedded-devel@lists.openembedded.org
-References: <1290768432-13366-1-git-send-email-ynezz@true.cz>
-	<AANLkTi=SB9wuO4wcTXz3M5fYb2WyO09_pK3ooA+i4xgo@mail.gmail.com>
-In-Reply-To: <AANLkTi=SB9wuO4wcTXz3M5fYb2WyO09_pK3ooA+i4xgo@mail.gmail.com>
-X-SA-Exim-Connect-IP: 85.13.140.93
-X-SA-Exim-Mail-From: Bernhard.Guillon@opensimpad.org
+Date: Sat, 27 Nov 2010 11:13:33 +1100
+Message-Id: <1290816813-20648-1-git-send-email-jayen@cse.unsw.edu.au>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 129.94.242.59
+X-SA-Exim-Mail-From: jayen@cse.unsw.edu.au
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-5.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS, SPF_NEUTRAL,
+	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-2008.1: bump uclibc to 0.9.30.3 which unbreaks x264
+Cc: Jayen Ashar <jayen@cse.unsw.edu.au>
+Subject: [PATCH] libQGLViewer: New program
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,19 +35,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2010 23:31:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 27 Nov 2010 00:15:22 -0000
 
-On 26.11.2010 11:53, Andrea Adami wrote:
->
-> this would only fix x264/freempeg.
+* Starting with libQGLViewer 2.3.8
+* libqglviewer (also known as libQGLViewer) is a free C++ library based on
+*  Qt that enables the quick creation of OpenGL 3D viewers. It features a
+*  powerful camera trackball and simple applications simply require an
+*  implementation of the draw() function. It is a tool of choice for OpenGL
+*  beginners and assignements. It provides screenshot saving, mouse
+*  manipulated frames, stereo display, interpolated keyFrames, object
+*  selection, and much more. It is fully customizable and easy to extend to
+*  create complex applications, with a possible Qt GUI.
 
-Hi, I just sent a patch to the list which fixes x264 with a hack that=20
-simply replaces all occurrences of log2f(x) with logf(x)/logf(2).
+Signed-off-by: Jayen Ashar <jayen@cse.unsw.edu.au>
+---
+ recipes/libqglviewer/libqglviewer.inc      |   21 +++++++++++++++++++++
+ recipes/libqglviewer/libqglviewer_2.3.8.bb |    3 +++
+ 2 files changed, 24 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libqglviewer/libqglviewer.inc
+ create mode 100644 recipes/libqglviewer/libqglviewer_2.3.8.bb
 
-best regards
-Bernhard Guillon
+diff --git a/recipes/libqglviewer/libqglviewer.inc b/recipes/libqglviewer/libqglviewer.inc
+new file mode 100644
+index 0000000..4d19276
+--- /dev/null
++++ b/recipes/libqglviewer/libqglviewer.inc
+@@ -0,0 +1,21 @@
++DESCRIPTION = "an OpenGL 3D viewer library based on Qt4 - development files\
++libqglviewer (also known as libQGLViewer) is a free C++ library based on Qt that enables the quick creation of OpenGL 3D viewers. It features a powerful camera trackball and simple applications simply require an implementation of the draw() function. It is a tool of choice for OpenGL beginners and assignements. It provides screenshot saving, mouse manipulated frames, stereo display, interpolated keyFrames, object selection, and much more. It is fully customizable and easy to extend to create complex applications, with a possible Qt GUI."
++HOMEPAGE = "http://www.libqglviewer.com/"
++SECTION = "libdevel"
++PRIORITY = "optional"
++LICENSE = "GPL"
++DEPENDS = ""
++
++INC_PR = "r0"
++
++SRC_URI = "http://www.libqglviewer.com/src/libQGLViewer-${PV}.tar.gz"
++
++S = "${WORKDIR}/libQGLViewer-${PV}/QGLViewer/"
++
++inherit qt4x11
++
++do_install() {
++    oe_runmake install INSTALL_ROOT=${D}
++}
++
++FILES_${PN}-dev += " ${libdir}/libQGLViewer.prl"
+diff --git a/recipes/libqglviewer/libqglviewer_2.3.8.bb b/recipes/libqglviewer/libqglviewer_2.3.8.bb
+new file mode 100644
+index 0000000..813f1a6
+--- /dev/null
++++ b/recipes/libqglviewer/libqglviewer_2.3.8.bb
+@@ -0,0 +1,3 @@
++require libqglviewer.inc
++
++PR = "${INC_PR}.0"
+-- 
+1.7.0.4
 
 
 
