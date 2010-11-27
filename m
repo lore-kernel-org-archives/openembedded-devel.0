@@ -1,16 +1,16 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMNgm-0002y2-QP
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMNo0-00037f-78
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 17:31:53 +0100
+	Sat, 27 Nov 2010 17:39:20 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 00F391B421;
-	Sat, 27 Nov 2010 17:31:54 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id 667181B421;
+	Sat, 27 Nov 2010 17:39:22 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Nov 2010 17:30:37 +0100
-Message-Id: <1290875437-20762-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sat, 27 Nov 2010 17:38:03 +0100
+Message-Id: <1290875883-20882-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
@@ -20,7 +20,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] hvsc_45: fixed SRC_URI
+Subject: [PATCH] libdessert: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 16:31:53 -0000
+X-List-Received-Date: Sat, 27 Nov 2010 16:39:20 -0000
 
-fixed SRC_URI and add homepage
 ---
- recipes/hvsc/hvsc_45.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes/libdessert/libdessert_0.86.14.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/hvsc/hvsc_45.bb b/recipes/hvsc/hvsc_45.bb
-index 4d91b28..b1ed2e0 100644
---- a/recipes/hvsc/hvsc_45.bb
-+++ b/recipes/hvsc/hvsc_45.bb
-@@ -2,8 +2,9 @@ DESCRIPTION = "The High Voltage SID Collection (HVSC) \
- Commodore 64 music for the masses"
- LICENSE = "PD"
- SECTION = "multimedia"
-+HOMEPAGE = "http://www.dottyflowers.com/HVSC/"
+diff --git a/recipes/libdessert/libdessert_0.86.14.bb b/recipes/libdessert/libdessert_0.86.14.bb
+index 1308f71..42548c1 100644
+--- a/recipes/libdessert/libdessert_0.86.14.bb
++++ b/recipes/libdessert/libdessert_0.86.14.bb
+@@ -6,7 +6,7 @@ PR = "r2"
  
--SRC_URI = "http://gallium.prg.dtu.dk/HVSC/random/HVSC_${PV}-all-of-them.rar"
-+SRC_URI = "http://www.dottyflowers.com/HVSC/HVSC_${PV}-all-of-them.rar"
- S = "${WORKDIR}"
+ DEPENDS = "net-snmp libpcap libcli"
  
- do_install() {
+-SRC_URI = "http://www.des-testbed.net/sites/default/files/${PN}${PV}.tar.gz \
++SRC_URI = "http://www.des-testbed.net/sites/default/files/DES-SERT/${PN}${PV}.tar.gz \
+ 	   file://0001-big-fat-autotools-patch.patch \
+ 	  "
+ 
 -- 
 1.7.0.4
 
