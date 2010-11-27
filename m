@@ -1,40 +1,45 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PMOpP-0004pm-9H
+	(envelope-from <andrea.adami@gmail.com>) id 1PMPoo-00066A-0O
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 18:44:51 +0100
-Received: by iwn8 with SMTP id 8so1185847iwn.6
+	Sat, 27 Nov 2010 19:48:18 +0100
+Received: by wyb40 with SMTP id 40so3057900wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 09:43:35 -0800 (PST)
+	Sat, 27 Nov 2010 10:46:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=2WVvvpNxBo6epjkysD7YaJN0VcqCuWRpDyIrhGBGwXU=;
-	b=OzOosZOE2597DXeFT3ye+sjZt4G+uqM8PhPz/bFaaQCcPX51+kPOViVvB/16CaoZz8
-	+UG7W44BlGB0m1/jMFmUGtUbx++Ys9NBZMT04OTTg0j33/wwa5DtIKSFWdlmeKOVI+LR
-	UIp3sI2xbACIsOhrqtnpWypPv2SfP38e8BAmc=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=R+gXN8pnBqI2ypfwf7fMA23b2bvdC7MPezatqH0A7II=;
+	b=tbVZ6Etc+OfnS2X75Dx6GWbDfR/VMqrvPMqepDOz/1FUcX92Tis50YEz4XFeRGbACH
+	pHKyLITmyNQzQOdXQsUy9vRR2UjWKaBAp9iaNl/tGvyJTJI/Al6FTb3zCvPv7dJMs8g1
+	Gpc/W4s9tiHy0USW2oDNGcwvSGtKf2oR9dlbs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=afsXmOMVZY19HJZ4J7ok/dv7f7L/FrRje51YA7yEPFcA8S0z/PiNB0MX34svyPEArI
-	MdV6xBqhMtMAeSv0+A0AO96lGuIwFll5cmdLcMxpX3To4r5NfjtGjO2Go6upmT8aTHI7
-	h0I30BAacyZ26mUeAnELMQUL3XFOSPZoFmK30=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Es4nOE4iYu7tGJBkAEH+03Y+3fgspEANsaq22OortIVKhxAtHllp3I4ISxOmPOLkQb
+	blHR8/VHHCQOnyr13VEEDHdUYHd0V6bgpHvavL0HsT+u3OF3JKBK1npj9VLLtbIvwG1x
+	jpSFEy70Dtnfgjfq1Ue+YpU8XVjE5vd5OsBOY=
 MIME-Version: 1.0
-Received: by 10.231.15.136 with SMTP id k8mr3162703iba.51.1290879814961; Sat,
-	27 Nov 2010 09:43:34 -0800 (PST)
-Received: by 10.231.33.4 with HTTP; Sat, 27 Nov 2010 09:43:34 -0800 (PST)
-Date: Sat, 27 Nov 2010 18:43:34 +0100
-Message-ID: <AANLkTin4u=yb+3U32jcYjhgzYEhtXa9FwRr3xBJ7JE3K@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.216.199.81 with SMTP id w59mr1137993wen.100.1290883617126;
+	Sat, 27 Nov 2010 10:46:57 -0800 (PST)
+Received: by 10.216.49.130 with HTTP; Sat, 27 Nov 2010 10:46:57 -0800 (PST)
+In-Reply-To: <1290769171.20979.51.camel@mill.internal.reciva.com>
+References: <AANLkTinbu9JpEw5fdX8pHcxraf4uTdCf7JKm9v1UekeS@mail.gmail.com>
+	<1290769171.20979.51.camel@mill.internal.reciva.com>
+Date: Sat, 27 Nov 2010 19:46:57 +0100
+Message-ID: <AANLkTimQ19OxwXNNPC6FsrV-_nS=6EcA59gSWyjMLSr4@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Klaus Schwarzkopf 's patches
+Subject: Re: bluez-dtl1-workaround not provided?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,17 +53,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 17:44:51 -0000
+X-List-Received-Date: Sat, 27 Nov 2010 18:48:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Fri, Nov 26, 2010 at 11:59 AM, Phil Blundell <philb@gnu.org> wrote:
+> On Thu, 2010-11-25 at 18:24 +0100, Andrea Adami wrote:
+>> So, first doubt is: why make this mandatory for everyone having pcmcia?
+>
+> It shouldn't be. =A0The dependency in kernel-module-dtl1-cs should be
+> sufficient to pull it in for (only) those people who are installing the
+> driver that needs those bits.
+>
+> p.
 
-Can someone pick this up and push these (probably after testing).
-They all seem quite OK to me, but as patchwork is not functioning at
-the moment I cannot easily apply them (getting patches from gmail is a
-little bit of a pain wrt spaces andl linebreaks if you read the mail
-from internet).
+The issue appeared again with today's metadata building
+glibc/uclibc/eglibc images.
+Can we clear the sensible task / classes before release?
 
-Frans
+Andrea
 
 
