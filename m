@@ -1,43 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PMHzD-0003kx-9F for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 11:26:31 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PMHxp-0000AF-5T for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 11:25:05 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 11:25:05 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PMI1q-0003rx-Bi
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Nov 2010 11:29:15 +0100
+Received: from [192.168.0.20] (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id CED421B421
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 11:25:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 27 Nov 2010 11:29:16 +0100 (CET)
+Message-ID: <4CF0DD2F.80102@sensortherm.de>
+Date: Sat, 27 Nov 2010 11:27:59 +0100
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 27 Nov 2010 11:16:01 +0100
-Message-ID: <icqlp1$p90$2@dough.gmane.org>
-References: <1290773874.28296.34.camel@mattotaupa>	<1290774034.28296.37.camel@mattotaupa>	<1290821557.3795.11.camel@mattotaupa>
-	<1290822011.3795.13.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <1290822011.3795.13.camel@mattotaupa>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1290852938-4776-1-git-send-email-schwarzkopf@sensortherm.de>	<4CF0DB6A.6010107@sensortherm.de>
+	<20101127102332.GK22419@excalibur.local>
+In-Reply-To: <20101127102332.GK22419@excalibur.local>
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 4/4] xbmc: add `zip-native` to `DEPENDS` and increase `PR`
+Subject: Re: [PATCH] download link fixed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,32 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 10:26:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 27 Nov 2010 10:29:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Stefan,
 
-On 27-11-10 02:40, Paul Menzel wrote:
+ok, i try it on my next patch ;-)
 
-> I am not sure what the best way of submitting this series would be. Probably squashing everything in one patch or bump the `PR` in every patch.
+Regards,
 
-Squashing :)
+Klaus
 
-I'll also talk to Tobias to see if we can pull in an updated version
-from e.g. trunk.
 
-regards,
+Am 27.11.2010 11:23, schrieb Stefan Schmidt:
+> Hello.
+>
+> On Sat, 2010-11-27 at 11:20, Klaus Schwarzkopf wrote:
+>> Is this patch ok or what can i do better?
+>
+> You could do better, but already on the right way :)
+>
+> - The subject line does not mention which areas/recipes are touched.
+> - Separate patches for separate recipes are better to track changes on recipe
+>    level.
+>
+> http://wiki.openembedded.org/index.php/Commit_Policy
+>
+> regards
+> Stefan Schmidt
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM8NpgMkyGM64RGpERAt+RAJsHe1WFE0zwA4pdGeEYsJRTdk+GwgCePU+a
-5Q3XQ4E7wAMGeiE1hg/RQpg=
-=+A3b
------END PGP SIGNATURE-----
 
 
 
