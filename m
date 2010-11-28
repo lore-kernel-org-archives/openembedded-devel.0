@@ -1,29 +1,37 @@
-Received: from tone.orchestra.cse.unsw.edu.au ([129.94.242.59])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jayen@cse.unsw.edu.au>) id 1PMX6n-00011B-HO
+Received: from dsl027-183-242.sfo1.dsl.speakeasy.net ([216.27.183.242]
+	helo=mail.qvxlabs.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <afalls@qvxlabs.com>) id 1PMbso-0005qp-FF
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Nov 2010 03:35:25 +0100
-Received: From localhost.localdomain ([129.94.175.7] ==
-	runswift.cse.unsw.EDU.AU) By
-	tone With Smtp ; Sun, 28 Nov 2010 13:33:59 +1100 
-From: Jayen Ashar <jayen@cse.unsw.edu.au>
+	Sun, 28 Nov 2010 08:41:15 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.qvxlabs.com (Postfix) with SMTP id DC9A1743866
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Nov 2010 23:39:56 -0800 (PST)
+Received: from earth.localnet (unknown [10.1.1.34])
+	by mail.qvxlabs.com (Postfix) with ESMTP id 8F25E743865
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Nov 2010 23:39:56 -0800 (PST)
+From: Ardavon Falls <afalls@qvxlabs.com>
+Organization: QVXLabs Inc
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Nov 2010 13:33:26 +1100
-Message-Id: <1290911606-9148-1-git-send-email-jayen@cse.unsw.edu.au>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <icqlst$p90$3@dough.gmane.org>
-References: <icqlst$p90$3@dough.gmane.org>
-X-SA-Exim-Connect-IP: 129.94.242.59
-X-SA-Exim-Mail-From: jayen@cse.unsw.edu.au
+Date: Sat, 27 Nov 2010 23:39:57 -0800
+User-Agent: KMail/1.13.5 (Linux/2.6.35-23-generic; KDE/4.5.1; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <201011272339.57718.afalls@qvxlabs.com>
+X-DSPAM-Result: Whitelisted
+X-DSPAM-Processed: Sat Nov 27 23:39:56 2010
+X-DSPAM-Confidence: 0.9979
+X-DSPAM-Probability: 0.0000
+X-DSPAM-Signature: 4cf2074c16461704514828
+X-SA-Exim-Connect-IP: 216.27.183.242
+X-SA-Exim-Mail-From: afalls@qvxlabs.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED, SPF_HELO_PASS, SPF_NEUTRAL,
-	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Jayen Ashar <jayen@cse.unsw.edu.au>
-Subject: [PATCH v2] libQGLViewer: New program
+Subject: Gumstix Verdex builds hang on boot, any ideas?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,63 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Nov 2010 02:35:25 -0000
+X-List-Received-Date: Sun, 28 Nov 2010 07:41:15 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-* Starting with libQGLViewer 2.3.8
-* libqglviewer (also known as libQGLViewer) is a free C++ library based on
-*  Qt that enables the quick creation of OpenGL 3D viewers. It features a
-*  powerful camera trackball and simple applications simply require an
-*  implementation of the draw() function. It is a tool of choice for OpenGL
-*  beginners and assignements. It provides screenshot saving, mouse
-*  manipulated frames, stereo display, interpolated keyFrames, object
-*  selection, and much more. It is fully customizable and easy to extend to
-*  create complex applications, with a possible Qt GUI.
+When I try to run the image created, everything appears to boot normally, 
+until halfway through the init/sysV boot process, it hangs printing the 
+message...
 
-Signed-off-by: Jayen Ashar <jayen@cse.unsw.edu.au>
----
- recipes/libqglviewer/libqglviewer.inc      |   20 ++++++++++++++++++++
- recipes/libqglviewer/libqglviewer_2.3.8.bb |    3 +++
- 2 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libqglviewer/libqglviewer.inc
- create mode 100644 recipes/libqglviewer/libqglviewer_2.3.8.bb
+sa1100-rtc sa1100-rtc: rtc core: registered sa1100-rtc as rtc0 
 
-diff --git a/recipes/libqglviewer/libqglviewer.inc b/recipes/libqglviewer/libqglviewer.inc
-new file mode 100644
-index 0000000..48ea5bc
---- /dev/null
-+++ b/recipes/libqglviewer/libqglviewer.inc
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "an OpenGL 3D viewer library based on Qt4 - development files\
-+libqglviewer (also known as libQGLViewer) is a free C++ library based on Qt that enables the quick creation of OpenGL 3D viewers. It features a powerful camera trackball and simple applications simply require an implementation of the draw() function. It is a tool of choice for OpenGL beginners and assignements. It provides screenshot saving, mouse manipulated frames, stereo display, interpolated keyFrames, object selection, and much more. It is fully customizable and easy to extend to create complex applications, with a possible Qt GUI."
-+HOMEPAGE = "http://www.libqglviewer.com/"
-+SECTION = "devel/libs" #seems to have more recipes than libs/devel
-+LICENSE = "GPL" #You may use, distribute and copy the QGLViewer library under the terms of GNU General Public License version 2 or version 3, both of which are included in the LICENSE file.
-+#DEPENDS = "" #requires qt4-x11-free with QT_CONFIG_FLAGS without -no-opengl
-+
-+INC_PR = "r0"
-+
-+SRC_URI = "http://www.libqglviewer.com/src/libQGLViewer-${PV}.tar.gz"
-+
-+S = "${WORKDIR}/libQGLViewer-${PV}/QGLViewer/"
-+
-+inherit qt4x11
-+
-+do_install() {
-+    oe_runmake install INSTALL_ROOT=${D}
-+}
-+
-+FILES_${PN}-dev += " ${libdir}/libQGLViewer.prl"
-diff --git a/recipes/libqglviewer/libqglviewer_2.3.8.bb b/recipes/libqglviewer/libqglviewer_2.3.8.bb
-new file mode 100644
-index 0000000..813f1a6
---- /dev/null
-+++ b/recipes/libqglviewer/libqglviewer_2.3.8.bb
-@@ -0,0 +1,3 @@
-+require libqglviewer.inc
-+
-+PR = "${INC_PR}.0"
--- 
-1.7.0.4
+I am using the following settings:
+distro: minimal
+machine: gumstix-verdex
+target_os: linux
+
+Any suggestions? has anyone else ran into this issue?
+
+Thanks
+Ardy
+
+!DSPAM:4cf2074c16461704514828!
+
 
 
 
