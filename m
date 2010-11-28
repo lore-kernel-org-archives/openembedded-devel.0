@@ -1,43 +1,29 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from tone.orchestra.cse.unsw.edu.au ([129.94.242.59])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1PMSUe-0002P2-Ql
+	(envelope-from <jayen@cse.unsw.edu.au>) id 1PMX6n-00011B-HO
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Nov 2010 22:39:41 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E4AC711000B9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 22:38:24 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 260F3110009C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 22:38:23 +0100 (CET)
-Received: from rhein.familie-heinold.de (g225147044.adsl.alicedsl.de
-	[92.225.147.44]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Nov 2010 22:38:23 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 5A2C43C121; Sat, 27 Nov 2010 22:38:19 +0100 (CET)
-Date: Sat, 27 Nov 2010 22:38:19 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Sun, 28 Nov 2010 03:35:25 +0100
+Received: From localhost.localdomain ([129.94.175.7] ==
+	runswift.cse.unsw.EDU.AU) By
+	tone With Smtp ; Sun, 28 Nov 2010 13:33:59 +1100 
+From: Jayen Ashar <jayen@cse.unsw.edu.au>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101127213818.GA1180@rhein.zuhause.netz>
-References: <4CF120CB.9030808@sensortherm.de>
-MIME-Version: 1.0
-In-Reply-To: <4CF120CB.9030808@sensortherm.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Date: Sun, 28 Nov 2010 13:33:26 +1100
+Message-Id: <1290911606-9148-1-git-send-email-jayen@cse.unsw.edu.au>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <icqlst$p90$3@dough.gmane.org>
+References: <icqlst$p90$3@dough.gmane.org>
+X-SA-Exim-Connect-IP: 129.94.242.59
+X-SA-Exim-Mail-From: jayen@cse.unsw.edu.au
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-5.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED, SPF_HELO_PASS, SPF_NEUTRAL,
+	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: disko
+Cc: Jayen Ashar <jayen@cse.unsw.edu.au>
+Subject: [PATCH v2] libQGLViewer: New program
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,34 +37,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Nov 2010 21:39:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 28 Nov 2010 02:35:25 -0000
 
-On Sat, Nov 27, 2010 at 04:16:27PM +0100, Klaus Schwarzkopf wrote:
-> Hi,
-> 
-> disko needs scons to build, but the recipes depends not to
-> python-scons-native. I changed DEPENDS in disko.inc from
-> - DEPENDS = "sqlite3 libpng jpeg curl alsa-lib freetype libxml2
-> libsigc++-2.0 openssl"
-> + DEPENDS = "python-scons-native sqlite3 libpng jpeg curl alsa-lib
-> freetype libxml2 libsigc++-2.0 openssl"
-> 
-> but it doesn't help.
-> 
-> Can you help me?
-> 
-> Regards,
-> 
-> Klaus
+* Starting with libQGLViewer 2.3.8
+* libqglviewer (also known as libQGLViewer) is a free C++ library based on
+*  Qt that enables the quick creation of OpenGL 3D viewers. It features a
+*  powerful camera trackball and simple applications simply require an
+*  implementation of the draw() function. It is a tool of choice for OpenGL
+*  beginners and assignements. It provides screenshot saving, mouse
+*  manipulated frames, stereo display, interpolated keyFrames, object
+*  selection, and much more. It is fully customizable and easy to extend to
+*  create complex applications, with a possible Qt GUI.
 
-Hi Klaus,
+Signed-off-by: Jayen Ashar <jayen@cse.unsw.edu.au>
+---
+ recipes/libqglviewer/libqglviewer.inc      |   20 ++++++++++++++++++++
+ recipes/libqglviewer/libqglviewer_2.3.8.bb |    3 +++
+ 2 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libqglviewer/libqglviewer.inc
+ create mode 100644 recipes/libqglviewer/libqglviewer_2.3.8.bb
 
-hm normaly the scons.bbclass should take care of it, but seems it does not for
-i386/x86_64. Could please try a newer bitbake version and send the install log
-of the python-native-scons
+diff --git a/recipes/libqglviewer/libqglviewer.inc b/recipes/libqglviewer/libqglviewer.inc
+new file mode 100644
+index 0000000..48ea5bc
+--- /dev/null
++++ b/recipes/libqglviewer/libqglviewer.inc
+@@ -0,0 +1,20 @@
++DESCRIPTION = "an OpenGL 3D viewer library based on Qt4 - development files\
++libqglviewer (also known as libQGLViewer) is a free C++ library based on Qt that enables the quick creation of OpenGL 3D viewers. It features a powerful camera trackball and simple applications simply require an implementation of the draw() function. It is a tool of choice for OpenGL beginners and assignements. It provides screenshot saving, mouse manipulated frames, stereo display, interpolated keyFrames, object selection, and much more. It is fully customizable and easy to extend to create complex applications, with a possible Qt GUI."
++HOMEPAGE = "http://www.libqglviewer.com/"
++SECTION = "devel/libs" #seems to have more recipes than libs/devel
++LICENSE = "GPL" #You may use, distribute and copy the QGLViewer library under the terms of GNU General Public License version 2 or version 3, both of which are included in the LICENSE file.
++#DEPENDS = "" #requires qt4-x11-free with QT_CONFIG_FLAGS without -no-opengl
++
++INC_PR = "r0"
++
++SRC_URI = "http://www.libqglviewer.com/src/libQGLViewer-${PV}.tar.gz"
++
++S = "${WORKDIR}/libQGLViewer-${PV}/QGLViewer/"
++
++inherit qt4x11
++
++do_install() {
++    oe_runmake install INSTALL_ROOT=${D}
++}
++
++FILES_${PN}-dev += " ${libdir}/libQGLViewer.prl"
+diff --git a/recipes/libqglviewer/libqglviewer_2.3.8.bb b/recipes/libqglviewer/libqglviewer_2.3.8.bb
+new file mode 100644
+index 0000000..813f1a6
+--- /dev/null
++++ b/recipes/libqglviewer/libqglviewer_2.3.8.bb
+@@ -0,0 +1,3 @@
++require libqglviewer.inc
++
++PR = "${INC_PR}.0"
+-- 
+1.7.0.4
 
-Bye Henning
 
 
