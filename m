@@ -1,48 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PMdk5-0002oL-AJ
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PMhsi-0007oB-Od
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Nov 2010 10:40:21 +0100
-Received: by fxm17 with SMTP id 17so1706860fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Nov 2010 01:39:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=7xZNcCZxpxJLCGMpYaehF46lWPUJ9ORDvb63M3AMHd0=;
-	b=ijbVaGDzxdrjYvXTN+R+1u3YJau68qgp40e3xqG15GA1LbAlmfUqh1ZLAb/b5gBSIO
-	9HUIbiu9SkCltebWVMvwV36egBqsR1RlUCEbt0itfD+Po6SDDHXrKZjOIM8Oy9xwNNlf
-	dlTryLJH1FCkPHZi5QuOaGn+z0P86zHmxHVC0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Q8zI7uhFLPHBPA2KlH7pQZSfeFRVT2+hG2pq2TxXerwiZ4Y+hzPZLTQJtK+tqFxvL1
-	p38sNydjZWMZ+d/+HI0+m4XSb/8oIn1Ig7coO/Zek1XLTO2JfycMKJJT12iceUnmXq9t
-	rp3jatbiVOZ6L7ZfN17Lq5q9tnvkmWeUA/m1w=
-Received: by 10.223.79.7 with SMTP id n7mr3509799fak.33.1290937142198;
-	Sun, 28 Nov 2010 01:39:02 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n1sm867940fam.16.2010.11.28.01.39.00
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 28 Nov 2010 01:39:00 -0800 (PST)
-Date: Sun, 28 Nov 2010 10:39:03 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sun, 28 Nov 2010 15:05:34 +0100
+Received: (qmail 30569 invoked by uid 503); 28 Nov 2010 14:08:34 -0000
+Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 28 Nov 2010 14:08:34 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 28 Nov 2010 16:04:14 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 28 Nov 2010 16:04:13 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101128093903.GA3387@jama>
-References: <4CEE24A8.2090007@atmel.com>
+Date: Sun, 28 Nov 2010 15:00:31 +0100
+Message-Id: <1290952831-12085-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <ico541$f8$1@dough.gmane.org>
+References: <ico541$f8$1@dough.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <4CEE24A8.2090007@atmel.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-Ovh-Tracer-Id: 7015763796590374217
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.27.225
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libXext-native fail to compile (x86_64)
+Subject: [PATCH] add task-qt4-x11 and qt4-x11 base & demo images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,35 +44,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Nov 2010 09:40:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 28 Nov 2010 14:05:34 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Nov 25, 2010 at 09:56:08AM +0100, Nicolas Ferre wrote:
-> Hi all,
-> 
-> While trying to build from scratch the latest .dev branch with:
-> - angstrom-2010.x distribution
-> 
-> Build Configuration:
-> BB_VERSION        = "1.10.0"
-> METADATA_BRANCH   = "dev_for2010.12"
-> METADATA_REVISION = "a1bba89"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "at91sam9m10g45ek"
-> DISTRO            = "angstrom"
-> DISTRO_VERSION    = "next"
-> TARGET_FPU        = "soft"
-> 
-> 
-> I have the following error with libxext:
-> NOTE: package libxext-native-1_1.2.0-r9.0: task do_compile: Failed
+these are images integrating qt4-x11-free librarie and its demo
+applications running using Xorg.
 
-fixed
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=b2822ad25e2a3db8936df34b0aebb65747f3f5d9
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/images/qt4-x11-base-image.bb |   30 ++++++++++++++++++++++
+ recipes/images/qt4-x11-demo-image.bb |    7 +++++
+ recipes/tasks/task-qt4-x11.bb        |   46 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 83 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/images/qt4-x11-base-image.bb
+ create mode 100644 recipes/images/qt4-x11-demo-image.bb
+ create mode 100644 recipes/tasks/task-qt4-x11.bb
 
+diff --git a/recipes/images/qt4-x11-base-image.bb b/recipes/images/qt4-x11-base-image.bb
+new file mode 100644
+index 0000000..83a1d34
+--- /dev/null
++++ b/recipes/images/qt4-x11-base-image.bb
+@@ -0,0 +1,30 @@
++require micro-base-image.bb
++
++TOUCH = ' ${@base_contains("MACHINE_FEATURES", "touchscreen", "tslib tslib-calibrate tslib-tests", "",d)}'
++
++XSERVER ?= "xserver-xorg \
++           xf86-input-evdev \
++           xf86-input-tslib \
++           xf86-video-fbdev "
++
++DEPENDS += "task-qt4-x11"
++
++RDEPENDS_${PN} += " \
++        task-qt4-x11-base \
++	task-qt4-x11-qwt \
++        "
++
++IMAGE_INSTALL += "\
++	initscripts \
++	kernel-modules \
++	gdbserver \
++	strace \
++	module-init-tools \
++	task-qt4-x11-base \
++	task-qt4-x11-qwt \
++	${TOUCH} \
++	pointercal \
++	${XSERVER} \
++	ttf-liberation-sans ttf-liberation-serif ttf-liberation-mono \
++	xauth xhost xset xrandr \
++"
+diff --git a/recipes/images/qt4-x11-demo-image.bb b/recipes/images/qt4-x11-demo-image.bb
+new file mode 100644
+index 0000000..8d14dc1
+--- /dev/null
++++ b/recipes/images/qt4-x11-demo-image.bb
+@@ -0,0 +1,7 @@
++require qt4-x11-base-image.bb
++
++IMAGE_INSTALL += "\
++        qt4-demos qt4-examples qt-demo-init \
++        qt4-assistant \
++        qwt-examples \
++"
+diff --git a/recipes/tasks/task-qt4-x11.bb b/recipes/tasks/task-qt4-x11.bb
+new file mode 100644
+index 0000000..e2e1fe2
+--- /dev/null
++++ b/recipes/tasks/task-qt4-x11.bb
+@@ -0,0 +1,46 @@
++DESCRIPTION = "QT4-X11 base Image Feed"
++PR = "r0"
++LICENSE = "MIT"
++
++inherit task
++
++PACKAGES += " \
++	${PN}-base \
++	${PN}-qwt \
++"
++
++RDEPENDS_${PN}-base = " \
++	qt4-x11-free \
++        libqt3support4 \
++        libqtclucene4 \
++        libqtcore4 \
++        libqtdbus4 \
++        libqtgui4 \
++        libqthelp4 \
++        libqtmultimedia4 \
++        libqtnetwork4 \
++        libqtscript4 \
++        libqtscripttools4 \
++        libqtsql4 \
++        libqtsvg4 \
++        libqttest4 \
++        libqtwebkit4 \
++        libqtxml4 \
++        libqtxmlpatterns4 \
++        qt4-fonts \
++        qt4-plugin-iconengine-svgicon \
++        qt4-plugin-imageformat-gif \
++        qt4-plugin-imageformat-ico \
++        qt4-plugin-imageformat-jpeg \
++        qt4-plugin-imageformat-mng \
++        qt4-plugin-imageformat-svg \
++        qt4-plugin-imageformat-tiff \
++        qt4-plugin-phonon-backend-gstreamer \
++        qt4-plugin-script-dbus \
++        qt4-plugin-sqldriver-sqlite2 \
++        qt4-plugin-sqldriver-sqlite \
++"
++
++RDEPENDS_${PN}-qwt = "\
++        qwt \
++"
+\ No newline at end of file
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.6.3.3
+
 
 
