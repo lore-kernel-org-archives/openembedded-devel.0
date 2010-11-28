@@ -1,36 +1,40 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PMhsi-0007oB-Od
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PMnV8-0005lv-0e
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Nov 2010 15:05:34 +0100
-Received: (qmail 30569 invoked by uid 503); 28 Nov 2010 14:08:34 -0000
-Received: from b9.ovh.net (HELO mail428.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 28 Nov 2010 14:08:34 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 28 Nov 2010 16:04:14 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 28 Nov 2010 16:04:13 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Nov 2010 15:00:31 +0100
-Message-Id: <1290952831-12085-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <ico541$f8$1@dough.gmane.org>
-References: <ico541$f8$1@dough.gmane.org>
+	Sun, 28 Nov 2010 21:05:34 +0100
+Received: by iwn8 with SMTP id 8so2248499iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Nov 2010 12:04:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=VfAgnk+LaP5f+77iJ9b51gLYHJl5p6l81MvPVxmEbXE=;
+	b=xblMO+XxXEvojHYylGbX6tzL2yb8pmzFfnQ/cIy3asbRwcl3POMrnedoShF4NjnXkJ
+	qE+3XFX16lKNLDOZnFxg4AeN8ytx89BbeMg4EP1o0HcyHXLjsqUrGDgv+GwnKYCXLDgt
+	uxrOx0rXBbBU7cydJo2j2xWiONTZkG3Z15INA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Rd2gBYbeyhD5m7EaR/MHjx7FJLWd3JcW4BUDGpnw0FMuKZVC/X3MnXLmXnxsa2wfhK
+	gEskmx07JTrsFE+uSrkzD+MBHCVxIlC4R3sepB8fMHSn9yY5D/Pi8Ly9yDsdgrSaUpvx
+	DqRq1Ze3z7gEREzm51GCTJIoj2hpcDNSwKrxU=
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 7015763796590374217
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.27.225
-X-SA-Exim-Mail-From: eric@eukrea.com
+Received: by 10.231.35.5 with SMTP id n5mr4065255ibd.182.1290974654537; Sun,
+	28 Nov 2010 12:04:14 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Sun, 28 Nov 2010 12:04:14 -0800 (PST)
+Date: Sun, 28 Nov 2010 21:04:14 +0100
+Message-ID: <AANLkTi=CZBGsEXOAHT_eW54EQ2KMn1e4mCNcMK1GB7ga@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] add task-qt4-x11 and qt4-x11 base & demo images
+Subject: php build issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,127 +48,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Nov 2010 14:05:34 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 28 Nov 2010 20:05:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-these are images integrating qt4-x11-free librarie and its demo
-applications running using Xorg.
+I had a very weird issue today.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/images/qt4-x11-base-image.bb |   30 ++++++++++++++++++++++
- recipes/images/qt4-x11-demo-image.bb |    7 +++++
- recipes/tasks/task-qt4-x11.bb        |   46 ++++++++++++++++++++++++++++++++++
- 3 files changed, 83 insertions(+), 0 deletions(-)
- create mode 100644 recipes/images/qt4-x11-base-image.bb
- create mode 100644 recipes/images/qt4-x11-demo-image.bb
- create mode 100644 recipes/tasks/task-qt4-x11.bb
+php - 5.2.13 - r7.2 does build locally, but refuses to build on our
+autobuilder as configure says fork is not found!
 
-diff --git a/recipes/images/qt4-x11-base-image.bb b/recipes/images/qt4-x11-base-image.bb
-new file mode 100644
-index 0000000..83a1d34
---- /dev/null
-+++ b/recipes/images/qt4-x11-base-image.bb
-@@ -0,0 +1,30 @@
-+require micro-base-image.bb
-+
-+TOUCH = ' ${@base_contains("MACHINE_FEATURES", "touchscreen", "tslib tslib-calibrate tslib-tests", "",d)}'
-+
-+XSERVER ?= "xserver-xorg \
-+           xf86-input-evdev \
-+           xf86-input-tslib \
-+           xf86-video-fbdev "
-+
-+DEPENDS += "task-qt4-x11"
-+
-+RDEPENDS_${PN} += " \
-+        task-qt4-x11-base \
-+	task-qt4-x11-qwt \
-+        "
-+
-+IMAGE_INSTALL += "\
-+	initscripts \
-+	kernel-modules \
-+	gdbserver \
-+	strace \
-+	module-init-tools \
-+	task-qt4-x11-base \
-+	task-qt4-x11-qwt \
-+	${TOUCH} \
-+	pointercal \
-+	${XSERVER} \
-+	ttf-liberation-sans ttf-liberation-serif ttf-liberation-mono \
-+	xauth xhost xset xrandr \
-+"
-diff --git a/recipes/images/qt4-x11-demo-image.bb b/recipes/images/qt4-x11-demo-image.bb
-new file mode 100644
-index 0000000..8d14dc1
---- /dev/null
-+++ b/recipes/images/qt4-x11-demo-image.bb
-@@ -0,0 +1,7 @@
-+require qt4-x11-base-image.bb
-+
-+IMAGE_INSTALL += "\
-+        qt4-demos qt4-examples qt-demo-init \
-+        qt4-assistant \
-+        qwt-examples \
-+"
-diff --git a/recipes/tasks/task-qt4-x11.bb b/recipes/tasks/task-qt4-x11.bb
-new file mode 100644
-index 0000000..e2e1fe2
---- /dev/null
-+++ b/recipes/tasks/task-qt4-x11.bb
-@@ -0,0 +1,46 @@
-+DESCRIPTION = "QT4-X11 base Image Feed"
-+PR = "r0"
-+LICENSE = "MIT"
-+
-+inherit task
-+
-+PACKAGES += " \
-+	${PN}-base \
-+	${PN}-qwt \
-+"
-+
-+RDEPENDS_${PN}-base = " \
-+	qt4-x11-free \
-+        libqt3support4 \
-+        libqtclucene4 \
-+        libqtcore4 \
-+        libqtdbus4 \
-+        libqtgui4 \
-+        libqthelp4 \
-+        libqtmultimedia4 \
-+        libqtnetwork4 \
-+        libqtscript4 \
-+        libqtscripttools4 \
-+        libqtsql4 \
-+        libqtsvg4 \
-+        libqttest4 \
-+        libqtwebkit4 \
-+        libqtxml4 \
-+        libqtxmlpatterns4 \
-+        qt4-fonts \
-+        qt4-plugin-iconengine-svgicon \
-+        qt4-plugin-imageformat-gif \
-+        qt4-plugin-imageformat-ico \
-+        qt4-plugin-imageformat-jpeg \
-+        qt4-plugin-imageformat-mng \
-+        qt4-plugin-imageformat-svg \
-+        qt4-plugin-imageformat-tiff \
-+        qt4-plugin-phonon-backend-gstreamer \
-+        qt4-plugin-script-dbus \
-+        qt4-plugin-sqldriver-sqlite2 \
-+        qt4-plugin-sqldriver-sqlite \
-+"
-+
-+RDEPENDS_${PN}-qwt = "\
-+        qwt \
-+"
-\ No newline at end of file
--- 
-1.6.3.3
+TInderbox log is at
+http://tinderbox.openembedded.net/public/logs/task/11550106.txt
 
+I'm especially confused/worried by some of the autotools messages in
+the log, but unfortunately my autoconf knowledge is not good enough to
+fix this.
+
+Anyone a suggestion?
+
+Thanks alot! Frans
 
 
