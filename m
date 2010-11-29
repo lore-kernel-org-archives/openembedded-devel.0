@@ -1,39 +1,43 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1PNBJB-0004Nl-Dl
+	(envelope-from <raj.khem@gmail.com>) id 1PNBfk-0005ZX-2M
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 22:30:51 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id E3D4D8FEA29
+	Mon, 29 Nov 2010 22:54:09 +0100
+Received: by gxk20 with SMTP id 20so2411497gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 16:29:30 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 19834-07 for <openembedded-devel@lists.openembedded.org>; 
-	Mon, 29 Nov 2010 16:29:30 -0500 (EST)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 1CE0E8FE69B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 16:29:30 -0500 (EST)
-Message-ID: <4CF41B36.2070407@cbnco.com>
-Date: Mon, 29 Nov 2010 16:29:26 -0500
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+	Mon, 29 Nov 2010 13:52:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=r494+RmQ5bejGf++i9z4TZwFSbPkCpGDfDmY6EOwmDA=;
+	b=BcYTUOMIwToNBwg2hnHmqi/H1MhiWrgF8Yyv8GEAYiGPi4dp/lLy2Q42pV8w4y7bZZ
+	mVMz/UTI1e9CFipzXEu32B4wNwAfeeSuO61LfAV0HJCWjF7JQaL+1L8P/60enWhSV3qZ
+	pMWjW6/m5PG2xsrIWuqIEOSTOCUBC/e1Zv0LE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=TpEmSccsgBM8IbPStuILeeoCfX2Y/P9vRfeTdazlP5pfbp7B7xF47Cv96VlyAUYEvO
+	5sQ456tS+VCrzaqfjDIP1yb5j8Q0q3GaopUdHY7z/lIQT8iNN9Q0nvFeCAxBIob3nHJ8
+	Pkku3eZ1XLq7eb+GzvydpNe1Q/sS3sJAZyhus=
+Received: by 10.90.9.22 with SMTP id 22mr9785276agi.102.1291067564298; Mon, 29
+	Nov 2010 13:52:44 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.120.8 with HTTP; Mon, 29 Nov 2010 13:52:23 -0800 (PST)
+In-Reply-To: <AANLkTinuAXEvP8wMWyr2udp7RGDW=J=Ct8C3F31=hEj0@mail.gmail.com>
+References: <AANLkTinuAXEvP8wMWyr2udp7RGDW=J=Ct8C3F31=hEj0@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 29 Nov 2010 13:52:23 -0800
+Message-ID: <AANLkTimcA8LwmqDgYv7LbtLbf39=AtVRwP2vsZ2F9c7s@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1291049553-8442-1-git-send-email-msmith@cbnco.com>
-	<AANLkTinst=Y1PMamwfmWNhLiYFanxTS_V-rJAmGbnTOt@mail.gmail.com>
-In-Reply-To: <AANLkTinst=Y1PMamwfmWNhLiYFanxTS_V-rJAmGbnTOt@mail.gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] xf86-input-tslib 0.0.6: move udev rule to	/etc/udev/rules.d
+Subject: Re: git-native and libz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,73 +51,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 21:30:51 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 29 Nov 2010 21:54:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Khem Raj wrote:
-> On Mon, Nov 29, 2010 at 8:52 AM, Michael Smith <msmith@cbnco.com> wrote:
->> /lib/udev/rules.d is a symlink to /etc/udev/rules.d.
->>
->> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> 
-> Will it upgrade seemlessly on deployed systems ?
+On Mon, Nov 29, 2010 at 1:33 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Since we got git-native I am getting this warning on every git command
+> I execute:
+>
+> git: /.../tmp/staging/x86_64-linux/lib/libz.so.1: no version
+> information available (required by git)
+>
+> How do I get around this ..
+>
 
-Hmm. No. The symlink /lib/udev/rules.d gets removed because it's in the 
-file list for the old package.
+It could be that while linking it used the libz from your build host
+and at runtime its using libz from staging because it was built
+afterwards and
+you have rpaths set. Newer versions of libz has introduced the symbol
+versioning scheme. So it could be that git now wants some specific
+version
+of zlib-native. One think you could try is to add a recipe to latest
+zlib and zlib-native and see if it solves the problem
 
-Should I add a postinst to recreate the symlink if it's missing? (should 
-actually be in the postrm for the old version but that would require 
-time travel)
-
-Mike
-
-> patch looks ok otherwise
-> 
-> Acked-by: Khem Raj <raj.khem@gmail.com>
-> 
->> ---
->>  recipes/xorg-driver/xf86-input-tslib_0.0.6.bb |    6 +++---
->>  1 files changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb b/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
->> index a1cecaa..4b910dd 100644
->> --- a/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
->> +++ b/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
->> @@ -3,7 +3,7 @@ DESCRIPTION = "X.Org X server -- tslib input driver"
->>  DEPENDS += "tslib"
->>  RRECOMMENDS_${PN} += "tslib-calibrate"
->>  RSUGGESTS_${PN} += "hal"
->> -PR = "${INC_PR}.1"
->> +PR = "${INC_PR}.2"
->>
->>  SRC_URI = "http://www.pengutronix.de/software/xf86-input-tslib/download/xf86-input-tslib-${PV}.tar.bz2;name=archive \
->>            file://double-free-crash.patch \
->> @@ -20,8 +20,8 @@ do_configure_prepend() {
->>  do_install_append() {
->>         install -d ${D}/${datadir}/hal/fdi/policy/20thirdparty
->>         install -m 0644 ${WORKDIR}/10-x11-input-tslib.fdi ${D}/${datadir}/hal/fdi/policy/20thirdparty
->> -        install -d ${D}/lib/udev/rules.d
->> -        install -m 0644 ${WORKDIR}/99-xf86-input-tslib.rules ${D}/lib/udev/rules.d/
->> +        install -d ${D}/${sysconfdir}/udev/rules.d
->> +        install -m 0644 ${WORKDIR}/99-xf86-input-tslib.rules ${D}/${sysconfdir}/udev/rules.d/
->>  }
->>
->>  FILES_${PN} += "${datadir}/hal /lib/udev"
->> --
->> 1.6.3.2
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> 
+> (guess the best way is to just uninstall it then say that git-native
+> is provided, but I think this is a more generic issue with git-native)
+>
+> Frans
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+>
 
 
