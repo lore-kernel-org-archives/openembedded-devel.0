@@ -1,41 +1,43 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <a.sappia@gmail.com>) id 1PMsvK-0003E4-Ic
+	(envelope-from <raj.khem@gmail.com>) id 1PMtRL-00045x-Sv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 02:52:59 +0100
-Received: by qwg5 with SMTP id 5so2570453qwg.6
+	Mon, 29 Nov 2010 03:26:04 +0100
+Received: by yxd5 with SMTP id 5so1824480yxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Nov 2010 17:51:39 -0800 (PST)
+	Sun, 28 Nov 2010 18:24:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=4c9BAM1+VyiihkpGB9mP+ovOdI3RmPDnFLf7Wib1cZ0=;
-	b=o8tPx/PNJ08oNYknfROw/C/HDjVZPEw2n3SY2Ev6fKJQnut6FZQdng30IcU3DMl5Lq
-	Da84xBVlmHZKaZ5hgvEAjGkTB3uA6SI59aVgv5X6bRx5n/vLdE85JKYILRxfaJurQA5+
-	ZJTTHXrNKMY75XGf77x+FKQgwrOgjtdDgxBOQ=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=/VXZmfLDMLp/UL66tCTwfqb1zQOJQffVO+pczvG4CG4=;
+	b=aH2va98J2nWF9KUVvQNRH5kea44rZjDgmohFWuNjyahi4YecX15Febz9vdIoR5n/za
+	9NtXB66wjwWeCYN7Gs/YLBtRQE4bAovp70wjn4qoa6Mk1Fe1fWY8/9jMZx2Q+zoE9IPl
+	J0rH1TQCDUy8B/9jrB8p2dDMhYpOcJb+VSs50=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=A4Gvmpgal9YGB0nbhTZF2JTQhizvSQiIWXvf1H2LcZ+v3TqsjIiMK3XSLrU1mwkPLL
-	kcaUOrU3/c9pJISSxJNnK8yaeeshgamzt01HEDNRmRB+b2a8AmyGF5LABh3CybNqyYdy
-	9qtGuenQ8l6pHUvEniliN3FOCiw90Qt7c/AMQ=
-Received: by 10.229.85.213 with SMTP id p21mr4398297qcl.127.1290995498881;
-	Sun, 28 Nov 2010 17:51:38 -0800 (PST)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=FU8kEMzku40XTmycgy9cGADuJU4N+mokrtmgoUacPZC78MBfJEN5HFBHf84A/ndNsw
+	JW+C3WJQ0qJjSeDlOwXHDKZMuQFFWMpYiZt0pqvJaI7CSFFfzBSYaNcrAoCz/KZooG6k
+	KFpo2E1oWPEU/WUqLoLQJjiREQWTAM+K6ONbk=
+Received: by 10.90.9.22 with SMTP id 22mr8274594agi.102.1290997484249; Sun, 28
+	Nov 2010 18:24:44 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.229.10.201 with HTTP; Sun, 28 Nov 2010 17:51:18 -0800 (PST)
-From: Alessandro Sappia <a.sappia@gmail.com>
-Date: Mon, 29 Nov 2010 02:51:18 +0100
-Message-ID: <AANLkTinNZPKsoML=dAyuXOQ=o_hH=memq8t2eq1P8WD=@mail.gmail.com>
+Received: by 10.90.120.8 with HTTP; Sun, 28 Nov 2010 18:24:24 -0800 (PST)
+In-Reply-To: <AANLkTi=CZBGsEXOAHT_eW54EQ2KMn1e4mCNcMK1GB7ga@mail.gmail.com>
+References: <AANLkTi=CZBGsEXOAHT_eW54EQ2KMn1e4mCNcMK1GB7ga@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 28 Nov 2010 18:24:24 -0800
+Message-ID: <AANLkTin=MAdG-Sr7=nVq_G587U6GFjMPtkkJ0G0kdHqF@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: a.sappia@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: psplash customization
+Subject: Re: php build issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,101 +51,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 01:52:59 -0000
+X-List-Received-Date: Mon, 29 Nov 2010 02:26:04 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-hi all,
-I'm fighting against psplash image customization. docs confuses me, as
-I don't want to change anything in the original oe repository.
-I configured enviroment to have a local overlay where I put my own
-psplash-winecooler_svn.bb and created with
-make-image-header.sh (both HAND and BAR) the .h needed in files/foo
-subdirectory of the same recipe. the image recipe I use is:
-winecooler-image.bb
-------------------
-IMAGE_PREPROCESS_COMMAND =3D "create_etc_timestamp"
+On Sun, Nov 28, 2010 at 12:04 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> I had a very weird issue today.
+>
+> php - 5.2.13 - r7.2 does build locally, but refuses to build on our
+> autobuilder as configure says fork is not found!
+>
+> TInderbox log is at
+> http://tinderbox.openembedded.net/public/logs/task/11550106.txt
+>
+> I'm especially confused/worried by some of the autotools messages in
+> the log, but unfortunately my autoconf knowledge is not good enough to
+> fix this.
+>
+> Anyone a suggestion?
 
-DEPENDS =3D=C2=A0 "task-base-extended \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 psplash-=
-winecooler \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 esekeyd u-boot-utils tslib \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 i2c-tools i2c screen rsync nfs-utils =
-\
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 directfb gdbserver directfb mtd-utils=
- \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0 "
-PREFERRED_PROVIDER_virtual/psplash =3D "psplash-winecooler"
+Well, from the message it seems that autoconf tests for fork
+are failing. So check the configure script and see how it is
+trying to test for fork() my guess is its doing a runtime test
+but if not check what is it trying to do.
 
-IMAGE_INSTALL =3D "task-base-extended \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 psplash-winecooler \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 qt4-embedded qwinecooler qt4-embedded=
--plugin-gfxdriver-gfxtransformed \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 qt4-embedded-plugin-sqldriver-sqlite =
-\
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qt4-embedded-plugin-imageformat-=
-jpeg \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qt4-embedded-plugin-imageformat-=
-gif \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qt4-embedded-plugin-imageformat-=
-mng \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qt4-embedded-fonts-ttf-vera \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qt4-embedded-fonts \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qt4-embedded-plugin-mousedriver-=
-tslib \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qt4-embedded-fonts-ttf-dejavu \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 esekeyd u-boot-utils tslib-calibrate =
-tslib-tests \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 i2c-tools i2c screen \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 directfb mtd-utils \
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0 "
-
-export IMAGE_BASENAME =3D "winecooler-image"
-IMAGE_LINGUAS =3D ""
-
-inherit image
-------------------
-
-psplash-vinecooler.bb
-------------------
-require psplash.inc
-require psplash-ua.inc
-
-ALTERNATIVE_PRIORITY =3D "20"
-
-# You can create your own pslash-poky-img.h by doing
-# ./make-image-header.sh <file>.png POKY
-# and rename the resulting .h to pslash-poky-img.h (for the logo)
-# respectively psplash-bar-img.h (BAR) for the bar.
-# You might also want to patch the colors (see patch)
-
-SRC_URI =3D "svn://svn.o-hand.com/repos/misc/trunk;module=3Dpsplash;proto=
-=3Dhttp \
-          file://psplash-18bpp.patch \
-          file://logo-math.patch \
-          file://psplash-poky-img.h \
-          file://psplash-bar-img.h \
-          file://psplash-default \
-          file://splashfuncs \
-          file://psplash-init"
-S =3D "${WORKDIR}/psplash"
-------------------
-bitbake winecooler-image builds psplash-angstrom and I obtain the base
-angstrom boot image. :(
-the psplash-winecooler.bb compiles fine.
-
-another issue is that bitbake winecooler-image complain me about
-psplash-angstrom and psplash-winecooler providing both virtual/psplash
-
-I'm quite new to OE, I know I'm doing it wrong, but may someone show
-me the way ?
-
-Regards,
-
-Alessandro
-
---
-Alessandro Sappia
-a.sappia@gmail.com
+>
+> Thanks alot! Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
