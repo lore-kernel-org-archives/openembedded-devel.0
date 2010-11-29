@@ -1,32 +1,38 @@
-Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PN4zx-0003GB-6p
+	(envelope-from <obi@opendreambox.org>) id 1PN5N6-00041w-K9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 15:46:33 +0100
-Received: from [192.168.0.20] (77-22-235-200-dynip.superkabel.de
-	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 512871B421
+	Mon, 29 Nov 2010 16:10:29 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 3A99E314B3D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 15:46:34 +0100 (CET)
-Message-ID: <4CF3BC7B.4090409@sensortherm.de>
-Date: Mon, 29 Nov 2010 15:45:15 +0100
-From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Mon, 29 Nov 2010 16:09:08 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id fG5RXOJ1+kxn
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Nov 2010 16:09:02 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 11B4B314B2A7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Nov 2010 16:09:01 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Mon, 29 Nov 2010 15:09:00 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1291023765-1226-1-git-send-email-schwarzkopf@sensortherm.de>
-	<4CF3830A.4050408@eukrea.com>
-In-Reply-To: <4CF3830A.4050408@eukrea.com>
-X-SA-Exim-Connect-IP: 188.40.84.136
-X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
+Date: Mon, 29 Nov 2010 15:09:00 +0000
+Message-Id: <1291043340-13199-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] disko: add dependency python-scons-native
+Subject: [PATCH] package.bbclass: call PACKAGESTRIPFUNCS before populate_packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,27 +46,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 14:46:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 29 Nov 2010 15:10:29 -0000
 
-Am 29.11.2010 11:40, schrieb Eric B=E9nard:
-> Hi,
->
-> On 29/11/2010 10:42, Klaus Schwarzkopf wrote:
-> > * add dependency python-scons-native
-> > * moved other dependencies to disko.inc
->
-> can you please use the -s option in git in order to add your signed off
-> to your patches ?
->
-> Thanks,
-> Eric
+  Introduce run_strip_funcs() to call the functions in
+  PACKAGESTRIPFUNCS and place it before populate_packages().
 
-Ok, i try it on the next patch.
+  This allows users of do_split_packages() to package the .debug
+  directories, which get created by do_runstrip().
 
-Regards,
+  do_split_packages() is usually prepended to populate_packages().
 
-Klaus
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ classes/package.bbclass |   12 +++++++-----
+ 1 files changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 2769595..678ffa9 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -367,6 +367,12 @@ python perform_packagecopy () {
+ 	os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
+ }
+ 
++python run_strip_funcs() {
++	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
++		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
++			bb.build.exec_func(f, d)
++}
++
+ python populate_packages () {
+ 	import glob, errno, re,os
+ 
+@@ -391,11 +397,6 @@ python populate_packages () {
+ 		else:
+ 			package_list.append(pkg)
+ 
+-
+-	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
+-		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
+-			bb.build.exec_func(f, d)
+-
+ 	pkgdest = bb.data.getVar('PKGDEST', d, True)
+ 	os.system('rm -rf %s' % pkgdest)
+ 
+@@ -1011,6 +1012,7 @@ PACKAGE_PREPROCESS_FUNCS ?= ""
+ PACKAGEFUNCS ?= "perform_packagecopy \
+                 ${PACKAGE_PREPROCESS_FUNCS} \
+ 		package_do_split_locales \
++		run_strip_funcs \
+ 		populate_packages \
+ 		package_do_shlibs \
+ 		package_do_pkgconfig \
+-- 
+1.7.1
+
 
 
