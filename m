@@ -1,42 +1,32 @@
-Received: from thoth.sbs.de ([192.35.17.2])
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PN4oO-0002xI-MG
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PN4yp-0003Ac-4t
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 15:34:37 +0100
-Received: from mail2.siemens.de (localhost [127.0.0.1])
-	by thoth.sbs.de (8.12.11.20060308/8.12.11) with ESMTP id oATEXIN4002366
+	Mon, 29 Nov 2010 15:45:25 +0100
+Received: from [192.168.0.20] (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id 380C81B421
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 15:33:18 +0100
-Received: from DEMCHP99ET0MSX.ww902.siemens.net
-	(demchp99et0msx.ww902.siemens.net [139.25.131.181])
-	by mail2.siemens.de (8.13.6/8.13.6) with ESMTP id oATEXIfQ027880
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 15:33:18 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
-	DEMCHP99ET0MSX.ww902.siemens.net ([139.25.131.181]) with mapi;
-	Mon, 29 Nov 2010 15:33:18 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 29 Nov 2010 15:33:16 +0100
-Thread-Topic: Error, lockfile path does not exist
-Thread-Index: AcuP0lx5cRM6BG65Sl+5Qun1XM6pSg==
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3B1D6CE@DEMCHP99E35MSX.ww902.siemens.net>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Mon, 29 Nov 2010 15:45:24 +0100 (CET)
+Message-ID: <4CF3BC35.7020208@sensortherm.de>
+Date: Mon, 29 Nov 2010 15:44:05 +0100
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.35.17.2
-X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
+To: openembedded-devel@lists.openembedded.org
+References: <4CF120CB.9030808@sensortherm.de>
+	<20101127213818.GA1180@rhein.zuhause.netz>
+In-Reply-To: <20101127213818.GA1180@rhein.zuhause.netz>
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.9 required=5.0 tests=AWL, BAYES_00,
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Error, lockfile path does not exist
+Subject: Re: disko
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,29 +40,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 14:34:38 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 29 Nov 2010 14:45:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Am 27.11.2010 22:38, schrieb Henning Heinold:
+> On Sat, Nov 27, 2010 at 04:16:27PM +0100, Klaus Schwarzkopf wrote:
+> > Hi,
+> >
+> > disko needs scons to build, but the recipes depends not to
+> > python-scons-native. I changed DEPENDS in disko.inc from
+> > - DEPENDS = "sqlite3 libpng jpeg curl alsa-lib freetype libxml2
+> > libsigc++-2.0 openssl"
+> > + DEPENDS = "python-scons-native sqlite3 libpng jpeg curl alsa-lib
+> > freetype libxml2 libsigc++-2.0 openssl"
+> >
+> > but it doesn't help.
+> >
+> > Can you help me?
+> >
+> > Regards,
+> >
+> > Klaus
+>
+> Hi Klaus,
+>
+> hm normaly the scons.bbclass should take care of it, but seems it does 
+> not for
+> i386/x86_64. Could please try a newer bitbake version and send the 
+> install log
+> of the python-native-scons
+>
+> Bye Henning
 
-I noticed following error message (for allmost every package) when building=
- in branch release-2010.12:
+Hi Henning,
 
-  ERROR: Error, lockfile path does not exist!: /home/projects/oe-testing/bu=
-ild/pstage/taurus/platform-2.0/arm
+sorry my mistake!
 
-Anyway, this does not prevent from building everything.
+bitbake -v disko-1.6.0
+worked but i used
+bitbake -v -b disko_1.6.0.bb
 
-If I manually create the missing directory, error disappears.
-Any idea how to sove this?
+Greetings,
 
-Note: in my site.conf, I put:
-PSTAGE_DIR    =3D ${OEBASE}/build/pstage/${MACHINE}
+Klaus
 
 
-Kind regards,
-Fabrice Aeschbacher
+
 
 
