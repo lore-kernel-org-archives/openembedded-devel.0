@@ -1,43 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from david.siemens.de ([192.35.17.14])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PN0ZA-0003Z5-0o for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 11:02:37 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PN0Xs-0005eV-PY for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 11:01:16 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 11:01:16 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PN0pR-0003ss-UE
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Nov 2010 11:19:26 +0100
+Received: from mail3.siemens.de (localhost [127.0.0.1])
+	by david.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
+	oATAI8Fp030052 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Nov 2010 11:18:08 +0100
+Received: from DEMCHP99ET2MSX.ww902.siemens.net
+	(demchp99et2msx.ww902.siemens.net [139.25.131.241])
+	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id oATAI8Hh008522
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 11:01:16 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 29 Nov 2010 11:01:06 +0100
-Message-ID: <icvtl2$4pb$1@dough.gmane.org>
-References: <ico541$f8$1@dough.gmane.org>
-	<1290952831-12085-1-git-send-email-eric@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <1290952831-12085-1-git-send-email-eric@eukrea.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Mon, 29 Nov 2010 11:18:08 +0100
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
+	DEMCHP99ET2MSX.ww902.siemens.net ([139.25.131.241]) with mapi;
+	Mon, 29 Nov 2010 11:18:08 +0100
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 29 Nov 2010 11:18:07 +0100
+Thread-Topic: [PATCH] libsdl-directfb: fixed qa_configure error
+Thread-Index: AcuNeMvC5CPEoDjyTQq6IKYahylPuACNWf7A
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3B1D5CE@DEMCHP99E35MSX.ww902.siemens.net>
+References: <09D9BE2AC4AA764DABAA8C91E48D819ED3B1D4A0@DEMCHP99E35MSX.ww902.siemens.net>
+In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819ED3B1D4A0@DEMCHP99E35MSX.ww902.siemens.net>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 192.35.17.14
+X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-9.8 required=5.0 tests=AWL, BAYES_00,
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] add task-qt4-x11 and qt4-x11 base & demo images
+Subject: Re: [PATCH] libsdl-directfb: fixed qa_configure error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,142 +52,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 10:02:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 29 Nov 2010 10:19:26 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 28-11-10 15:00, Eric Bénard wrote:
-> these are images integrating qt4-x11-free librarie and its demo
-> applications running using Xorg.
-> 
-> Signed-off-by: Eric Bénard <eric@eukrea.com>
+Is this patch likely to be accepted and commited soon in branch release-201=
+0.12, or should I overlay?
 
-Looks good enough to me:
+With kind regards,
+  Fabrice Aeschbacher
 
-Acked-by: Koen Kooi <k-kooi@ti.com>
-
+> -----Urspr=FCngliche Nachricht-----
+> Von: openembedded-devel-bounces@lists.openembedded.org=20
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] Im=20
+> Auftrag von Aeschbacher, Fabrice
+> Gesendet: Freitag, 26. November 2010 15:47
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: [oe] [PATCH] libsdl-directfb: fixed qa_configure error
+>=20
+> * without this patch, ${STAGING_DIR}/bin/directfb-config=20
+> --cflags returns:
+>     -I/usr/include/directfb -D_REENTRANT
+>   which makes qa_configure complain about /usr/include
+>=20
+>=20
+> Signed-off-by: Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>
 > ---
->  recipes/images/qt4-x11-base-image.bb |   30 ++++++++++++++++++++++
->  recipes/images/qt4-x11-demo-image.bb |    7 +++++
->  recipes/tasks/task-qt4-x11.bb        |   46 ++++++++++++++++++++++++++++++++++
->  3 files changed, 83 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/images/qt4-x11-base-image.bb
->  create mode 100644 recipes/images/qt4-x11-demo-image.bb
->  create mode 100644 recipes/tasks/task-qt4-x11.bb
-> 
-> diff --git a/recipes/images/qt4-x11-base-image.bb b/recipes/images/qt4-x11-base-image.bb
-> new file mode 100644
-> index 0000000..83a1d34
-> --- /dev/null
-> +++ b/recipes/images/qt4-x11-base-image.bb
-> @@ -0,0 +1,30 @@
-> +require micro-base-image.bb
-> +
-> +TOUCH = ' ${@base_contains("MACHINE_FEATURES", "touchscreen", "tslib tslib-calibrate tslib-tests", "",d)}'
-> +
-> +XSERVER ?= "xserver-xorg \
-> +           xf86-input-evdev \
-> +           xf86-input-tslib \
-> +           xf86-video-fbdev "
-> +
-> +DEPENDS += "task-qt4-x11"
-> +
-> +RDEPENDS_${PN} += " \
-> +        task-qt4-x11-base \
-> +	task-qt4-x11-qwt \
-> +        "
-> +
-> +IMAGE_INSTALL += "\
-> +	initscripts \
-> +	kernel-modules \
-> +	gdbserver \
-> +	strace \
-> +	module-init-tools \
-> +	task-qt4-x11-base \
-> +	task-qt4-x11-qwt \
-> +	${TOUCH} \
-> +	pointercal \
-> +	${XSERVER} \
-> +	ttf-liberation-sans ttf-liberation-serif ttf-liberation-mono \
-> +	xauth xhost xset xrandr \
-> +"
-> diff --git a/recipes/images/qt4-x11-demo-image.bb b/recipes/images/qt4-x11-demo-image.bb
-> new file mode 100644
-> index 0000000..8d14dc1
-> --- /dev/null
-> +++ b/recipes/images/qt4-x11-demo-image.bb
-> @@ -0,0 +1,7 @@
-> +require qt4-x11-base-image.bb
-> +
-> +IMAGE_INSTALL += "\
-> +        qt4-demos qt4-examples qt-demo-init \
-> +        qt4-assistant \
-> +        qwt-examples \
-> +"
-> diff --git a/recipes/tasks/task-qt4-x11.bb b/recipes/tasks/task-qt4-x11.bb
-> new file mode 100644
-> index 0000000..e2e1fe2
-> --- /dev/null
-> +++ b/recipes/tasks/task-qt4-x11.bb
-> @@ -0,0 +1,46 @@
-> +DESCRIPTION = "QT4-X11 base Image Feed"
-> +PR = "r0"
-> +LICENSE = "MIT"
-> +
-> +inherit task
-> +
-> +PACKAGES += " \
-> +	${PN}-base \
-> +	${PN}-qwt \
-> +"
-> +
-> +RDEPENDS_${PN}-base = " \
-> +	qt4-x11-free \
-> +        libqt3support4 \
-> +        libqtclucene4 \
-> +        libqtcore4 \
-> +        libqtdbus4 \
-> +        libqtgui4 \
-> +        libqthelp4 \
-> +        libqtmultimedia4 \
-> +        libqtnetwork4 \
-> +        libqtscript4 \
-> +        libqtscripttools4 \
-> +        libqtsql4 \
-> +        libqtsvg4 \
-> +        libqttest4 \
-> +        libqtwebkit4 \
-> +        libqtxml4 \
-> +        libqtxmlpatterns4 \
-> +        qt4-fonts \
-> +        qt4-plugin-iconengine-svgicon \
-> +        qt4-plugin-imageformat-gif \
-> +        qt4-plugin-imageformat-ico \
-> +        qt4-plugin-imageformat-jpeg \
-> +        qt4-plugin-imageformat-mng \
-> +        qt4-plugin-imageformat-svg \
-> +        qt4-plugin-imageformat-tiff \
-> +        qt4-plugin-phonon-backend-gstreamer \
-> +        qt4-plugin-script-dbus \
-> +        qt4-plugin-sqldriver-sqlite2 \
-> +        qt4-plugin-sqldriver-sqlite \
-> +"
-> +
-> +RDEPENDS_${PN}-qwt = "\
-> +        qwt \
-> +"
-> \ No newline at end of file
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFM83niMkyGM64RGpERAiqVAJ9R8Dp0IXMR2TTKtm0VNTL9hSBEuACfeqoU
-tXLGZiFGQrGlGyqcUodOWrU=
-=nbCV
------END PGP SIGNATURE-----
-
+>  recipes/libsdl/libsdl-directfb_1.2.14.bb |    3 ++-
+>  1 files changed, 2 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/libsdl/libsdl-directfb_1.2.14.bb=20
+> b/recipes/libsdl/libsdl-directfb_1.2.14.bb
+> index 9f22ee5..4a3dab0 100644
+> --- a/recipes/libsdl/libsdl-directfb_1.2.14.bb
+> +++ b/recipes/libsdl/libsdl-directfb_1.2.14.bb
+> @@ -41,6 +41,7 @@ do_configure_prepend () {
+>          # Remove old libtool macros.
+>          MACROS=3D"libtool.m4 lt~obsolete.m4 ltoptions.m4=20
+> ltsugar.m4 ltversion.m4"
+>          for i in ${MACROS}; do
+> -               rm acinclude/$i
+> +               rm -f acinclude/$i
+>          done
+> +	export SYSROOT=3D$PKG_CONFIG_SYSROOT_DIR
+>  }
+> --=20
+> 1.5.6.5
 
 
