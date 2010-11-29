@@ -1,44 +1,43 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PN0Ye-0003W7-Az
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 11:02:06 +0100
-Received: by wwi17 with SMTP id 17so1112235wwi.24
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PN0ZA-0003Z5-0o for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Nov 2010 11:02:37 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PN0Xs-0005eV-PY for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Nov 2010 11:01:16 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Nov 2010 11:01:16 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 02:00:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=jDFrVqcYJ2XuZ5st2TnXg6PrZCF2InHLw2SqOZ0bL8U=;
-	b=W0BaTaJks6T/3k4F2Xf7Z78MHK0pq7SGIrG1Rn+NyrD/DZPlgwJP9HxRMqNV2JyvoC
-	4zVdRp0UOkbYPXqxTkew4Z5XwdzRUnph0Dabc1id5VTMNFn6k/e7iey7ei2sghEdunq+
-	iAOmv01Ssc+gd9O1ckWnSib74uZGUU1EJFB4E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=tUKPd1l3w3cDgN5rlqY2KYlDE+5zO7djzfgZkyJkJ83WbnUCu1HEKmMzuyaDMajMRn
-	uLjGtuyBwEEobAyFSo+FYL+mEPWsF8oVpMZx8X01J9vR/xe5hskgTpgxMZ0HQgTRGuSS
-	uHSfV+VWqlfUNviLi0pWutYKMoXrq4RWniGRg=
-MIME-Version: 1.0
-Received: by 10.216.52.11 with SMTP id d11mr4453885wec.0.1291024836713; Mon,
-	29 Nov 2010 02:00:36 -0800 (PST)
-Received: by 10.216.49.130 with HTTP; Mon, 29 Nov 2010 02:00:36 -0800 (PST)
-In-Reply-To: <4CF32D52.1000901@gmail.com>
-References: <4CF32D52.1000901@gmail.com>
-Date: Mon, 29 Nov 2010 11:00:36 +0100
-Message-ID: <AANLkTim2+Qe+-ODy0+8eX2NXoW-_9RPbWjWJXb8zGDsp@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 29 Nov 2010 11:01:16 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 29 Nov 2010 11:01:06 +0100
+Message-ID: <icvtl2$4pb$1@dough.gmane.org>
+References: <ico541$f8$1@dough.gmane.org>
+	<1290952831-12085-1-git-send-email-eric@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <1290952831-12085-1-git-send-email-eric@eukrea.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] glib-2.0_2.24.1.bb: Fix build when DISTRO_FEATURES lacks ipv6.
+Subject: Re: [PATCH] add task-qt4-x11 and qt4-x11 base & demo images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,42 +51,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 10:02:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 29 Nov 2010 10:02:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 29, 2010 at 5:34 AM, Graham Gower <graham.gower@gmail.com> wrot=
-e:
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 28-11-10 15:00, Eric Bénard wrote:
+> these are images integrating qt4-x11-free librarie and its demo
+> applications running using Xorg.
+> 
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
+
+Looks good enough to me:
+
+Acked-by: Koen Kooi <k-kooi@ti.com>
+
 > ---
-> =A0.../glib-2.0/glib-2.0-2.24.1/disable-ipv6.patch =A0 =A0| =A0 26 ++++++=
-++++++++++++++
-> =A0recipes/glib-2.0/glib-2.0_2.24.1.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 =A04 +++
-> =A02 files changed, 30 insertions(+), 0 deletions(-)
-> =A0create mode 100644 recipes/glib-2.0/glib-2.0-2.24.1/disable-ipv6.patch
->
-> diff --git a/recipes/glib-2.0/glib-2.0-2.24.1/disable-ipv6.patch b/recipe=
-s/glib-2.0/glib-2.0-2.24.1/disable-ipv6.patch
+>  recipes/images/qt4-x11-base-image.bb |   30 ++++++++++++++++++++++
+>  recipes/images/qt4-x11-demo-image.bb |    7 +++++
+>  recipes/tasks/task-qt4-x11.bb        |   46 ++++++++++++++++++++++++++++++++++
+>  3 files changed, 83 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/images/qt4-x11-base-image.bb
+>  create mode 100644 recipes/images/qt4-x11-demo-image.bb
+>  create mode 100644 recipes/tasks/task-qt4-x11.bb
+> 
+> diff --git a/recipes/images/qt4-x11-base-image.bb b/recipes/images/qt4-x11-base-image.bb
 > new file mode 100644
-> index 0000000..9e7951b
+> index 0000000..83a1d34
+> --- /dev/null
+> +++ b/recipes/images/qt4-x11-base-image.bb
+> @@ -0,0 +1,30 @@
+> +require micro-base-image.bb
+> +
+> +TOUCH = ' ${@base_contains("MACHINE_FEATURES", "touchscreen", "tslib tslib-calibrate tslib-tests", "",d)}'
+> +
+> +XSERVER ?= "xserver-xorg \
+> +           xf86-input-evdev \
+> +           xf86-input-tslib \
+> +           xf86-video-fbdev "
+> +
+> +DEPENDS += "task-qt4-x11"
+> +
+> +RDEPENDS_${PN} += " \
+> +        task-qt4-x11-base \
+> +	task-qt4-x11-qwt \
+> +        "
+> +
+> +IMAGE_INSTALL += "\
+> +	initscripts \
+> +	kernel-modules \
+> +	gdbserver \
+> +	strace \
+> +	module-init-tools \
+> +	task-qt4-x11-base \
+> +	task-qt4-x11-qwt \
+> +	${TOUCH} \
+> +	pointercal \
+> +	${XSERVER} \
+> +	ttf-liberation-sans ttf-liberation-serif ttf-liberation-mono \
+> +	xauth xhost xset xrandr \
+> +"
+> diff --git a/recipes/images/qt4-x11-demo-image.bb b/recipes/images/qt4-x11-demo-image.bb
+> new file mode 100644
+> index 0000000..8d14dc1
+> --- /dev/null
+> +++ b/recipes/images/qt4-x11-demo-image.bb
+> @@ -0,0 +1,7 @@
+> +require qt4-x11-base-image.bb
+> +
+> +IMAGE_INSTALL += "\
+> +        qt4-demos qt4-examples qt-demo-init \
+> +        qt4-assistant \
+> +        qwt-examples \
+> +"
+> diff --git a/recipes/tasks/task-qt4-x11.bb b/recipes/tasks/task-qt4-x11.bb
+> new file mode 100644
+> index 0000000..e2e1fe2
+> --- /dev/null
+> +++ b/recipes/tasks/task-qt4-x11.bb
+> @@ -0,0 +1,46 @@
+> +DESCRIPTION = "QT4-X11 base Image Feed"
+> +PR = "r0"
+> +LICENSE = "MIT"
+> +
+> +inherit task
+> +
+> +PACKAGES += " \
+> +	${PN}-base \
+> +	${PN}-qwt \
+> +"
+> +
+> +RDEPENDS_${PN}-base = " \
+> +	qt4-x11-free \
+> +        libqt3support4 \
+> +        libqtclucene4 \
+> +        libqtcore4 \
+> +        libqtdbus4 \
+> +        libqtgui4 \
+> +        libqthelp4 \
+> +        libqtmultimedia4 \
+> +        libqtnetwork4 \
+> +        libqtscript4 \
+> +        libqtscripttools4 \
+> +        libqtsql4 \
+> +        libqtsvg4 \
+> +        libqttest4 \
+> +        libqtwebkit4 \
+> +        libqtxml4 \
+> +        libqtxmlpatterns4 \
+> +        qt4-fonts \
+> +        qt4-plugin-iconengine-svgicon \
+> +        qt4-plugin-imageformat-gif \
+> +        qt4-plugin-imageformat-ico \
+> +        qt4-plugin-imageformat-jpeg \
+> +        qt4-plugin-imageformat-mng \
+> +        qt4-plugin-imageformat-svg \
+> +        qt4-plugin-imageformat-tiff \
+> +        qt4-plugin-phonon-backend-gstreamer \
+> +        qt4-plugin-script-dbus \
+> +        qt4-plugin-sqldriver-sqlite2 \
+> +        qt4-plugin-sqldriver-sqlite \
+> +"
+> +
+> +RDEPENDS_${PN}-qwt = "\
+> +        qwt \
+> +"
+> \ No newline at end of file
 
-...
-Graham,
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-thx for the patch.
-However I did not encounter this failure, instead
-http://tinderbox.openembedded.org/builds/107121/
+iD8DBQFM83niMkyGM64RGpERAiqVAJ9R8Dp0IXMR2TTKtm0VNTL9hSBEuACfeqoU
+tXLGZiFGQrGlGyqcUodOWrU=
+=nbCV
+-----END PGP SIGNATURE-----
 
-(gconvert.c:55:2: error: #error GNU libiconv not in use but included
-iconv.h is from libiconv)
-
-I could fix it with  EXTRA_OECONF_append_libc-uclibc =3D "
---with-libiconv=3Dgnu "  but I'm not sure about the real cause and the
-best fix.
-
-Opinions?
-
-Andrea
 
 
