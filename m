@@ -1,40 +1,26 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PN07r-0006Pq-I7
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PN0HE-0000UN-Ha
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 10:34:25 +0100
-Received: by iwn8 with SMTP id 8so2945488iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 01:33:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=Umn58yoewOONmpgfkURUiqK6LExkeDzlMkkM6f814rQ=;
-	b=wRgmzg42wVMD6JJi/G7VOBPsLgBrQf+Z/N8T8QsAvGAiSlgKfuNUblFy5y7pPMRIYk
-	ocOxtPRixOf5BWHTufHzlNirnCvpIKDqbdN3o+RoES6jk+pPF0aGZsKynMVn3UwzX08W
-	MGhEQX2E/FCqFlRYPGIaLWf9uF0a9N/3G4+Hk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=cLNu6RFuNI8pBiPxWu6MkbkHeq6rogNzGugTAq7yHcrlbQJEW1ZpkS5/4uQmft1fy7
-	B3CrDlhynOqo55kD/Vgk16CKUf1HDQfk6XTw3MF43JVyNFDeCsT0G9E+dRunEpjORr2D
-	2vNXU1SGWzlvZwb4ESz7KEcCW6hIjWVyhHvzA=
-MIME-Version: 1.0
-Received: by 10.231.20.65 with SMTP id e1mr2086576ibb.32.1291023184139; Mon,
-	29 Nov 2010 01:33:04 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Mon, 29 Nov 2010 01:33:04 -0800 (PST)
-Date: Mon, 29 Nov 2010 10:33:04 +0100
-Message-ID: <AANLkTinuAXEvP8wMWyr2udp7RGDW=J=Ct8C3F31=hEj0@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 29 Nov 2010 10:44:07 +0100
+Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id 9E13B1B421;
+	Mon, 29 Nov 2010 10:44:05 +0100 (CET)
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 29 Nov 2010 10:42:45 +0100
+Message-Id: <1291023765-1226-1-git-send-email-schwarzkopf@sensortherm.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: git-native and libz
+Subject: [PATCH] disko: add dependency python-scons-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,20 +34,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 09:34:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 29 Nov 2010 09:44:07 -0000
 
-Since we got git-native I am getting this warning on every git command
-I execute:
+* add dependency python-scons-native
+* moved other dependencies to disko.inc
+---
+ recipes/disko/disko.inc      |    2 +-
+ recipes/disko/disko_1.6.0.bb |    1 -
+ recipes/disko/disko_1.7.0.bb |    1 -
+ recipes/disko/disko_git.bb   |    1 -
+ 4 files changed, 1 insertions(+), 4 deletions(-)
 
-git: /.../tmp/staging/x86_64-linux/lib/libz.so.1: no version
-information available (required by git)
+diff --git a/recipes/disko/disko.inc b/recipes/disko/disko.inc
+index 8f531c5..21375c6 100644
+--- a/recipes/disko/disko.inc
++++ b/recipes/disko/disko.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Disko is an application framework, that can be used to develop GUI applications for embedded devices."
+ LICENSE = "GPL"
+ 
+-DEPENDS = "sqlite3 libpng jpeg curl alsa-lib freetype libxml2 libsigc++-2.0 openssl"
++DEPENDS = "python-scons-native sqlite3 libpng jpeg curl alsa-lib freetype libxml2 libsigc++-2.0 openssl taglib directfb virtual/libx11 hal libxv libxxf86vm"
+ 
+ inherit scons pkgconfig
+ 
+diff --git a/recipes/disko/disko_1.6.0.bb b/recipes/disko/disko_1.6.0.bb
+index baf7fb3..db69223 100644
+--- a/recipes/disko/disko_1.6.0.bb
++++ b/recipes/disko/disko_1.6.0.bb
+@@ -4,7 +4,6 @@ PR = "r0"
+ 
+ require disko.inc
+ 
+-DEPENDS += "taglib directfb virtual/libx11 hal libxv libxxf86vm"
+ 
+ SRC_URI = "http://www.diskohq.com/repository/ubuntu/pool/${PN}_${PV}.tar.bz2  \
+ 	   file://pkgconfig.patch \
+diff --git a/recipes/disko/disko_1.7.0.bb b/recipes/disko/disko_1.7.0.bb
+index 7907d7a..c815a43 100644
+--- a/recipes/disko/disko_1.7.0.bb
++++ b/recipes/disko/disko_1.7.0.bb
+@@ -4,7 +4,6 @@ PR = "r0"
+ 
+ require disko.inc
+ 
+-DEPENDS += "taglib directfb virtual/libx11 hal libxv libxxf86vm"
+ 
+ SRC_URI = "http://www.diskohq.com/repository/ubuntu/pool/${PN}_${PV}.tar.gz \
+            file://mmsfiletransfer.patch \
+diff --git a/recipes/disko/disko_git.bb b/recipes/disko/disko_git.bb
+index 71d694d..8e853e6 100644
+--- a/recipes/disko/disko_git.bb
++++ b/recipes/disko/disko_git.bb
+@@ -8,7 +8,6 @@ DEFAULT_PREFERENCE = "-1"
+ 
+ require disko.inc
+ 
+-DEPENDS += "taglib directfb virtual/libx11 hal libxv libxxf86vm"
+ 
+ SRC_URI = "git://www.diskohq.org/disko.git;protocol=git \
+ 	   file://pkgconfig.patch \
+-- 
+1.7.0.4
 
-How do I get around this ..
-
-(guess the best way is to just uninstall it then say that git-native
-is provided, but I think this is a more generic issue with git-native)
-
-Frans
 
 
