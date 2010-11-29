@@ -1,46 +1,39 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PNBFJ-0004Bp-5T
+	(envelope-from <msmith@cbnco.com>) id 1PNBJB-0004Nl-Dl
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 22:26:50 +0100
-Received: by gxk20 with SMTP id 20so2397387gxk.6
+	Mon, 29 Nov 2010 22:30:51 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id E3D4D8FEA29
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 13:25:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=Yadyn38r6xYKCvay9Z4SzF/CBcEBmppuGWt4KqmTX9Y=;
-	b=OO5FlnOWMeShE67Cq2S+eBcpBY4YnUBL/F3cdJyDXmA9efBgvcAfEnR/iFS6KTZFQR
-	vxtpasNAKhGi/EEsujN1m1+NsdynBGW10oIUfKqCLmR6G2nxLW6JEHnmcAgNTiUIAcFP
-	W+rQP36ig7yML/pS9ewGQPpU054QvtaB0Um/k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=B6KCnxJ85VJzN/0/zAm3p0ZzmI90DDVxrLWo5f2LWEhIjQBLvStHgydbq66jnJMD+v
-	sfTHpJSealo/Z/8jKgoq4BMNAeimfyGj674xi2p0Z+ZmGa6ossiGEbOblJK5G9tH05ui
-	T69rFyTsoxukneA61f8q/GScN8mw4bL+cKSN0=
-Received: by 10.90.9.22 with SMTP id 22mr9748206agi.102.1291065928285; Mon, 29
-	Nov 2010 13:25:28 -0800 (PST)
+	Mon, 29 Nov 2010 16:29:30 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 19834-07 for <openembedded-devel@lists.openembedded.org>; 
+	Mon, 29 Nov 2010 16:29:30 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 1CE0E8FE69B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Nov 2010 16:29:30 -0500 (EST)
+Message-ID: <4CF41B36.2070407@cbnco.com>
+Date: Mon, 29 Nov 2010 16:29:26 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Mon, 29 Nov 2010 13:25:08 -0800 (PST)
-In-Reply-To: <icvtl2$4pb$1@dough.gmane.org>
-References: <ico541$f8$1@dough.gmane.org>
-	<1290952831-12085-1-git-send-email-eric@eukrea.com>
-	<icvtl2$4pb$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Nov 2010 13:25:08 -0800
-Message-ID: <AANLkTimOybgRmUYFmJXQEaZMDx9vbf=b3KzxLgv10WPu@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <1291049553-8442-1-git-send-email-msmith@cbnco.com>
+	<AANLkTinst=Y1PMamwfmWNhLiYFanxTS_V-rJAmGbnTOt@mail.gmail.com>
+In-Reply-To: <AANLkTinst=Y1PMamwfmWNhLiYFanxTS_V-rJAmGbnTOt@mail.gmail.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] add task-qt4-x11 and qt4-x11 base & demo images
+Subject: Re: [PATCH] xf86-input-tslib 0.0.6: move udev rule to	/etc/udev/rules.d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,161 +47,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 21:26:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 29 Nov 2010 21:30:51 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 29, 2010 at 2:01 AM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 28-11-10 15:00, Eric B=C3=A9nard wrote:
->> these are images integrating qt4-x11-free librarie and its demo
->> applications running using Xorg.
+Khem Raj wrote:
+> On Mon, Nov 29, 2010 at 8:52 AM, Michael Smith <msmith@cbnco.com> wrote:
+>> /lib/udev/rules.d is a symlink to /etc/udev/rules.d.
 >>
->> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
->
-> Looks good enough to me:
->
-> Acked-by: Koen Kooi <k-kooi@ti.com>
+>> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> 
+> Will it upgrade seemlessly on deployed systems ?
 
-Ditto.
+Hmm. No. The symlink /lib/udev/rules.d gets removed because it's in the 
+file list for the old package.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
->
+Should I add a postinst to recreate the symlink if it's missing? (should 
+actually be in the postrm for the old version but that would require 
+time travel)
+
+Mike
+
+> patch looks ok otherwise
+> 
+> Acked-by: Khem Raj <raj.khem@gmail.com>
+> 
 >> ---
->> =C2=A0recipes/images/qt4-x11-base-image.bb | =C2=A0 30 +++++++++++++++++=
-+++++
->> =C2=A0recipes/images/qt4-x11-demo-image.bb | =C2=A0 =C2=A07 +++++
->> =C2=A0recipes/tasks/task-qt4-x11.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =
-46 ++++++++++++++++++++++++++++++++++
->> =C2=A03 files changed, 83 insertions(+), 0 deletions(-)
->> =C2=A0create mode 100644 recipes/images/qt4-x11-base-image.bb
->> =C2=A0create mode 100644 recipes/images/qt4-x11-demo-image.bb
->> =C2=A0create mode 100644 recipes/tasks/task-qt4-x11.bb
+>>  recipes/xorg-driver/xf86-input-tslib_0.0.6.bb |    6 +++---
+>>  1 files changed, 3 insertions(+), 3 deletions(-)
 >>
->> diff --git a/recipes/images/qt4-x11-base-image.bb b/recipes/images/qt4-x=
-11-base-image.bb
->> new file mode 100644
->> index 0000000..83a1d34
->> --- /dev/null
->> +++ b/recipes/images/qt4-x11-base-image.bb
->> @@ -0,0 +1,30 @@
->> +require micro-base-image.bb
->> +
->> +TOUCH =3D ' ${@base_contains("MACHINE_FEATURES", "touchscreen", "tslib =
-tslib-calibrate tslib-tests", "",d)}'
->> +
->> +XSERVER ?=3D "xserver-xorg \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-evdev \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-tslib \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-video-fbdev "
->> +
->> +DEPENDS +=3D "task-qt4-x11"
->> +
->> +RDEPENDS_${PN} +=3D " \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0task-qt4-x11-base \
->> + =C2=A0 =C2=A0 task-qt4-x11-qwt \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0"
->> +
->> +IMAGE_INSTALL +=3D "\
->> + =C2=A0 =C2=A0 initscripts \
->> + =C2=A0 =C2=A0 kernel-modules \
->> + =C2=A0 =C2=A0 gdbserver \
->> + =C2=A0 =C2=A0 strace \
->> + =C2=A0 =C2=A0 module-init-tools \
->> + =C2=A0 =C2=A0 task-qt4-x11-base \
->> + =C2=A0 =C2=A0 task-qt4-x11-qwt \
->> + =C2=A0 =C2=A0 ${TOUCH} \
->> + =C2=A0 =C2=A0 pointercal \
->> + =C2=A0 =C2=A0 ${XSERVER} \
->> + =C2=A0 =C2=A0 ttf-liberation-sans ttf-liberation-serif ttf-liberation-=
-mono \
->> + =C2=A0 =C2=A0 xauth xhost xset xrandr \
->> +"
->> diff --git a/recipes/images/qt4-x11-demo-image.bb b/recipes/images/qt4-x=
-11-demo-image.bb
->> new file mode 100644
->> index 0000000..8d14dc1
->> --- /dev/null
->> +++ b/recipes/images/qt4-x11-demo-image.bb
->> @@ -0,0 +1,7 @@
->> +require qt4-x11-base-image.bb
->> +
->> +IMAGE_INSTALL +=3D "\
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-demos qt4-examples qt-demo-init \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-assistant \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qwt-examples \
->> +"
->> diff --git a/recipes/tasks/task-qt4-x11.bb b/recipes/tasks/task-qt4-x11.=
-bb
->> new file mode 100644
->> index 0000000..e2e1fe2
->> --- /dev/null
->> +++ b/recipes/tasks/task-qt4-x11.bb
->> @@ -0,0 +1,46 @@
->> +DESCRIPTION =3D "QT4-X11 base Image Feed"
->> +PR =3D "r0"
->> +LICENSE =3D "MIT"
->> +
->> +inherit task
->> +
->> +PACKAGES +=3D " \
->> + =C2=A0 =C2=A0 ${PN}-base \
->> + =C2=A0 =C2=A0 ${PN}-qwt \
->> +"
->> +
->> +RDEPENDS_${PN}-base =3D " \
->> + =C2=A0 =C2=A0 qt4-x11-free \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqt3support4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtclucene4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtcore4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtdbus4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtgui4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqthelp4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtmultimedia4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtnetwork4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtscript4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtscripttools4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtsql4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtsvg4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqttest4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtwebkit4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtxml4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0libqtxmlpatterns4 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-fonts \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-iconengine-svgicon \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-imageformat-gif \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-imageformat-ico \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-imageformat-jpeg \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-imageformat-mng \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-imageformat-svg \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-imageformat-tiff \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-phonon-backend-gstreamer \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-script-dbus \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-sqldriver-sqlite2 \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qt4-plugin-sqldriver-sqlite \
->> +"
->> +
->> +RDEPENDS_${PN}-qwt =3D "\
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0qwt \
->> +"
->> \ No newline at end of file
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFM83niMkyGM64RGpERAiqVAJ9R8Dp0IXMR2TTKtm0VNTL9hSBEuACfeqoU
-> tXLGZiFGQrGlGyqcUodOWrU=3D
-> =3DnbCV
-> -----END PGP SIGNATURE-----
->
->
+>> diff --git a/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb b/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
+>> index a1cecaa..4b910dd 100644
+>> --- a/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
+>> +++ b/recipes/xorg-driver/xf86-input-tslib_0.0.6.bb
+>> @@ -3,7 +3,7 @@ DESCRIPTION = "X.Org X server -- tslib input driver"
+>>  DEPENDS += "tslib"
+>>  RRECOMMENDS_${PN} += "tslib-calibrate"
+>>  RSUGGESTS_${PN} += "hal"
+>> -PR = "${INC_PR}.1"
+>> +PR = "${INC_PR}.2"
+>>
+>>  SRC_URI = "http://www.pengutronix.de/software/xf86-input-tslib/download/xf86-input-tslib-${PV}.tar.bz2;name=archive \
+>>            file://double-free-crash.patch \
+>> @@ -20,8 +20,8 @@ do_configure_prepend() {
+>>  do_install_append() {
+>>         install -d ${D}/${datadir}/hal/fdi/policy/20thirdparty
+>>         install -m 0644 ${WORKDIR}/10-x11-input-tslib.fdi ${D}/${datadir}/hal/fdi/policy/20thirdparty
+>> -        install -d ${D}/lib/udev/rules.d
+>> -        install -m 0644 ${WORKDIR}/99-xf86-input-tslib.rules ${D}/lib/udev/rules.d/
+>> +        install -d ${D}/${sysconfdir}/udev/rules.d
+>> +        install -m 0644 ${WORKDIR}/99-xf86-input-tslib.rules ${D}/${sysconfdir}/udev/rules.d/
+>>  }
+>>
+>>  FILES_${PN} += "${datadir}/hal /lib/udev"
+>> --
+>> 1.6.3.2
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
 
