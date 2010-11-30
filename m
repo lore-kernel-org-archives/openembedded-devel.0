@@ -1,35 +1,32 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PNBfk-0005ZX-2M
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Nov 2010 22:54:09 +0100
-Received: by gxk20 with SMTP id 20so2411497gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 13:52:44 -0800 (PST)
+	(envelope-from <raj.khem@gmail.com>) id 1PNEC6-0002rL-2a
+	for Openembedded-devel@lists.openembedded.org;
+	Tue, 30 Nov 2010 01:35:43 +0100
+Received: by gwj16 with SMTP id 16so2070330gwj.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Nov 2010 16:34:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=r494+RmQ5bejGf++i9z4TZwFSbPkCpGDfDmY6EOwmDA=;
-	b=BcYTUOMIwToNBwg2hnHmqi/H1MhiWrgF8Yyv8GEAYiGPi4dp/lLy2Q42pV8w4y7bZZ
-	mVMz/UTI1e9CFipzXEu32B4wNwAfeeSuO61LfAV0HJCWjF7JQaL+1L8P/60enWhSV3qZ
-	pMWjW6/m5PG2xsrIWuqIEOSTOCUBC/e1Zv0LE=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=WqYioRtAylXBpC9znpmPpw3+CCLULroH4jneAS/s9lk=;
+	b=hjJ6tXrorR1yvUbOPJu2XhRzQJvUgBP8YJ8HseaJh599WsaPG+ta0Dx1MNWkQSPZSN
+	GjiMSaj6/qGD/4LJ0yTYw5USuMcxaRIq/O+6S3vEmQX7J5GUX9z2wrrBGXC8Z8bORcbS
+	x8+RLjz7qnF7kTFnhsVWAZr3oxN7/spj1PdiQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=TpEmSccsgBM8IbPStuILeeoCfX2Y/P9vRfeTdazlP5pfbp7B7xF47Cv96VlyAUYEvO
-	5sQ456tS+VCrzaqfjDIP1yb5j8Q0q3GaopUdHY7z/lIQT8iNN9Q0nvFeCAxBIob3nHJ8
-	Pkku3eZ1XLq7eb+GzvydpNe1Q/sS3sJAZyhus=
-Received: by 10.90.9.22 with SMTP id 22mr9785276agi.102.1291067564298; Mon, 29
-	Nov 2010 13:52:44 -0800 (PST)
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=oATGsC2HHrEmuM2iay3auZpJMBy1uiBh8gButfIZOb7MZsWg+GJbAqv0SFFh3di/hd
+	40JK4d2DioessHCFGYaH9zgdnF8W5phJ2oJLmxG2m9Z1k2V+KT8Kmfv4oabzk7y3TNW4
+	+M/AtmwQ2SqOKXaeLfGTsQ5CnnThJYTeUe1p0=
+Received: by 10.90.99.8 with SMTP id w8mr10020656agb.0.1291077261593; Mon, 29
+	Nov 2010 16:34:21 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Mon, 29 Nov 2010 13:52:23 -0800 (PST)
-In-Reply-To: <AANLkTinuAXEvP8wMWyr2udp7RGDW=J=Ct8C3F31=hEj0@mail.gmail.com>
-References: <AANLkTinuAXEvP8wMWyr2udp7RGDW=J=Ct8C3F31=hEj0@mail.gmail.com>
+Received: by 10.90.120.8 with HTTP; Mon, 29 Nov 2010 16:34:01 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Nov 2010 13:52:23 -0800
-Message-ID: <AANLkTimcA8LwmqDgYv7LbtLbf39=AtVRwP2vsZ2F9c7s@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
+Date: Mon, 29 Nov 2010 16:34:01 -0800
+Message-ID: <AANLkTinyc8Pnpd3XMnTu=psPPHAmGKi4+DjvgWhSE1jt@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -37,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: git-native and libz
+Subject: release-2010 - last moment hot fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,38 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2010 21:54:09 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 00:35:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Nov 29, 2010 at 1:33 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Since we got git-native I am getting this warning on every git command
-> I execute:
->
-> git: /.../tmp/staging/x86_64-linux/lib/libz.so.1: no version
-> information available (required by git)
->
-> How do I get around this ..
->
+Hi Folks,
 
-It could be that while linking it used the libz from your build host
-and at runtime its using libz from staging because it was built
-afterwards and
-you have rpaths set. Newer versions of libz has introduced the symbol
-versioning scheme. So it could be that git now wants some specific
-version
-of zlib-native. One think you could try is to add a recipe to latest
-zlib and zlib-native and see if it solves the problem
+Please update your release branch to latest tip and rerun your builds
+and other tests that you have been doing
+and indicate any hot fixes that we need for the final release. Again
+update the Testing table with the results
 
-> (guess the best way is to just uninstall it then say that git-native
-> is provided, but I think this is a more generic issue with git-native)
->
-> Frans
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Thank you
+-Khem
 
 
