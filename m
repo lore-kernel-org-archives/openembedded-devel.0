@@ -1,35 +1,36 @@
 Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PNUfH-0002Lo-CF
+	(envelope-from <raj.khem@gmail.com>) id 1PNUhd-0002SB-6O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 19:10:56 +0100
-Received: by gwj16 with SMTP id 16so2555497gwj.6
+	Tue, 30 Nov 2010 19:13:21 +0100
+Received: by gwj16 with SMTP id 16so2557294gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 10:09:33 -0800 (PST)
+	Tue, 30 Nov 2010 10:11:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=vEpGKvUK969mQsfcg+20r328UWzc7jBKtYVFjnv/ym0=;
-	b=EWq+bWczzFRU4/YOOo/Kc+ybegmLD/SvggBkc8N36lwTrMMs+YvMiE8lWzks1m/BfR
-	nIOveNvdQ8IHGIcBOL6qgLWo7j/OpNFJTjwmlL9JUyivKaEZi8QyMcXL0+M2e7zNp8rX
-	WICG7Oddk9LaRbHyfaHJVQi9UBFN57iFAH86w=
+	bh=YD3Tr8sGKVvug5f7FFfSNvPgUjFBS5PuDp2/klkDZLk=;
+	b=rJs2+wRG7yw1m20cKASifsI5Iu1A7cohcN5ksJft0bIsPMqn2D+cQB+LmcvsjNDj64
+	yGW3Yoc6BnQJU3ARepLthkYhEkjTHlQCAzHo+qSH0dpjEa4+lV/GymPZLQvd73LFVOYR
+	WB0LpJhDgGkZFhWdUr2xdWw3G99x1LjzZ0rN8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=cz30TkJbXsOpCH+gBxyV/bvVHWkJMiH8t9y47bjGkh4Ma7+dzFrulqM86whTJL7Shc
-	yTnm6xdnvI484SFnLm7UgGgRIGjApFPftv0CvGN6qromtepjekmky2kiWwU5HIm/yj3h
-	oh3EYCvUGGx6QSfvQ7uImqj+mhqqVBfjI5XuM=
-Received: by 10.91.10.21 with SMTP id n21mr66550agi.75.1291140573692; Tue, 30
-	Nov 2010 10:09:33 -0800 (PST)
+	b=fsAIVsUdeRHljaVw9zEnaQ/LrNtgzl3ht3+jRUs3ZOWvk0ZaXTFmy8KbLz0ilNfeTC
+	/C2khJyB4eov6OUOcI4Vlnnf0jVPfPrxXe5fxBo2xYCNxn/l9LiY5MPGUMwQfmLLBCqr
+	Lk0sgDy156IO6Lbba7wWr4cIp7z700jvQC8fE=
+Received: by 10.90.9.22 with SMTP id 22mr70234agi.102.1291140716724; Tue, 30
+	Nov 2010 10:11:56 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Tue, 30 Nov 2010 10:09:13 -0800 (PST)
-In-Reply-To: <AANLkTinqmryB1Ofe2gDV959h2cLbLkrC-ZohbgrPMicA@mail.gmail.com>
+Received: by 10.90.120.8 with HTTP; Tue, 30 Nov 2010 10:11:36 -0800 (PST)
+In-Reply-To: <AANLkTin+D5JmWZXt4xkX=wqfa-A+kNjpN8R-2dFDssxZ@mail.gmail.com>
 References: <AANLkTinyc8Pnpd3XMnTu=psPPHAmGKi4+DjvgWhSE1jt@mail.gmail.com>
-	<AANLkTinqmryB1Ofe2gDV959h2cLbLkrC-ZohbgrPMicA@mail.gmail.com>
+	<20101130082314.GL10755@ibawizard.net>
+	<AANLkTin+D5JmWZXt4xkX=wqfa-A+kNjpN8R-2dFDssxZ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 30 Nov 2010 10:09:13 -0800
-Message-ID: <AANLkTindqEO8F9+zZDZbR_yoxENTZJi7cERUUTnHYFOf@mail.gmail.com>
+Date: Tue, 30 Nov 2010 10:11:36 -0800
+Message-ID: <AANLkTim9Q6wrbPav=b0Mvb0gpJXNrnsqf+PVaYTYfx8j@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -53,23 +54,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 18:10:56 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 18:13:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 29, 2010 at 11:56 PM, Frans Meulenbroeks
+On Tue, Nov 30, 2010 at 1:17 AM, Frans Meulenbroeks
 <fransmeulenbroeks@gmail.com> wrote:
-> I thought I already mentioned this, but we need from master
-> =C2=A0 =C2=A0 =C2=A0 =C2=A095035fb93f662b8036e1083a7a834030b4b98041
-> f2a9c8045666402811c4e5adeccb62ee2042e0c9
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0f7403d0b48339483fa02e4042d2c70b992228beb
+> Just committed the following 3 things to master, they could also go
+> into the release (at least the last two ones wrt php).
+> Still looking for a solution to get php working with iconv as without
+> it it breaks another recipe (I think ampache).
+> Open for ideas on that one.
 >
-> Without these the underlying recipes (and my test image) do not build.
+> Frans
+>
+> commit 7aa6b49cabce5f85705508a0ead01433b2dafbbe
+> Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> Date: =C2=A0 Tue Nov 30 09:30:36 2010 +0100
+>
+> =C2=A0 =C2=A0mythtv: removed 0.22
+>
+> =C2=A0 =C2=A0probably does not build with qt4.7
+> =C2=A0 =C2=A0this one was not maintained anyway and only stayed because a=
+ few
+> distro's pinned it.
+> =C2=A0 =C2=A0it is now unpinned by all so rm.
+> =C2=A0 =C2=A0we already have 0.23 for almost a year, and the metadata for=
+ 0.23 is better
+>
+> =C2=A0 =C2=A0Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.c=
+om>
+>
+> commit b0d9ce644c7847533e7b362441e45d8f7c7748b6
+> Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> Date: =C2=A0 Tue Nov 30 09:29:14 2010 +0100
+>
+> =C2=A0 =C2=A0php: reinstated --without-iconv, this seems to generate conf=
+igure issues
+>
+> =C2=A0 =C2=A0issues are wrt native paths being used.
+> =C2=A0 =C2=A0e.g. get that fork is not found
+> =C2=A0 =C2=A0adding --with-iconv-dir did not help
+> =C2=A0 =C2=A0This needs further investigation
+>
+> =C2=A0 =C2=A0Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.c=
+om>
+>
+> commit 9d3d91887fe4c36d89466dd08520449fd017928f
+> Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> Date: =C2=A0 Tue Nov 30 09:28:13 2010 +0100
+>
+> =C2=A0 =C2=A0php: removed --enable-memory-limit configure argument; does =
+not
+> exist any moe
+>
+> =C2=A0 =C2=A0Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.c=
+om>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-cherry-picked these three patches
 
-Thx
--Khem
+took these three too.
 
 
