@@ -1,46 +1,48 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PNUy8-0002z8-Q2
+	(envelope-from <martin.jansa@gmail.com>) id 1PNV1M-00036b-HH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 19:30:25 +0100
-Received: by pvd12 with SMTP id 12so964588pvd.6
+	Tue, 30 Nov 2010 19:33:44 +0100
+Received: by bwz10 with SMTP id 10so5185388bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 10:29:00 -0800 (PST)
+	Tue, 30 Nov 2010 10:32:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=sSPxPyo0Cv1cGzDHYMWWkpTvaC25lmc4Yd6Jy3r2msA=;
-	b=B2Lg/0ll5V2NudtakfYpXQYx45W9lPnkOxDdz8fpUpdVO+CyaIMHUAOOR36+yNtosG
-	zrg7DxJE95UXc9Y2LO/FywJ/CgnVgMIR7XkeoGjHZLg2iPZbqP9ix0I2/KmbM3mUPVev
-	NVEDFZk+VF7l8Peymxqr7yijCb/mDUrgq4SOs=
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=1EXB6jDpnakxWWLQgnexjfKEoI2gi1gL00W499i4gzs=;
+	b=H/6neem33itRNxfWrgAwnvEPcORW3XDUbfubeN8gTTho786yrssjIdx7CLTEdVZn4A
+	2cdioiRl8L9Q4VZ+GbMtK5IJm80rFqkeWCaeKQWpfMkJW5B7GVhbMV4+9EiYpsi+n+cV
+	ALAO052UUwXNQ54kp6Vu+hWZ1K4ElANxroaXA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=JfNULjCapvJD91+qKoMEOspYqHtm+b2IaCMLsH8B+rhOPDVjEDA5mM4qAjdaCcNp2+
-	bGonFWNTiT5qbhBsGotxUdHtVLBW/gSHCmz6DGOc1BxQfC+BeXdJ6Od13nAthlrP+bLg
-	9e5AO5ONwNffeYww3LEd8E/SghcUA//LT1s44=
-Received: by 10.142.154.3 with SMTP id b3mr352999wfe.277.1291141740189;
-	Tue, 30 Nov 2010 10:29:00 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id e14sm9295507wfg.20.2010.11.30.10.28.58
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=CjmTTsCz9hmBXu7ZLO43VLfrbuexAYFTmyAZMUl6TJpxJczNBM8FPdMaZWexfdvpM4
+	YCDvwDj0d6M3ANez3gU7wq54MnVnQ6nqTIOhQHEAkROstz/Nv5B+R5p+mJ/k9CCDZVfn
+	Sgq3GvgJeSW3k6+i41aCU5dWvEwhcyV1ekwLA=
+Received: by 10.204.121.136 with SMTP id h8mr7046134bkr.103.1291141943234;
+	Tue, 30 Nov 2010 10:32:23 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id l3sm615031fan.0.2010.11.30.10.32.22
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 30 Nov 2010 10:28:59 -0800 (PST)
-Date: Tue, 30 Nov 2010 10:28:55 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 30 Nov 2010 10:32:22 -0800 (PST)
+Date: Tue, 30 Nov 2010 19:32:21 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101130182855.GA5759@gmail.com>
+Message-ID: <20101130183221.GA3266@jama>
+References: <20101130182855.GA5759@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <20101130182855.GA5759@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Commit Access for Graham Gower (grg)
+Subject: Re: Commit Access for Graham Gower (grg)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,20 +56,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 18:30:25 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 18:33:44 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hi
+On Tue, Nov 30, 2010 at 10:28:55AM -0800, Khem Raj wrote:
+> Hi
+> 
+> I would like to propose Graham Gower for commit access. Over the past year
+> he has been consistently submitting good patches and quite a lot of them in
+> addition he does opkg and mipsel targets and micro distribution which is
+> largely unmaintained these days.
+> It would be a nice addition
 
-I would like to propose Graham Gower for commit access. Over the past year
-he has been consistently submitting good patches and quite a lot of them in
-addition he does opkg and mipsel targets and micro distribution which is
-largely unmaintained these days.
-It would be a nice addition
+I fully agree
 
-Thanks
--Khem
++1
 
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
