@@ -1,32 +1,32 @@
-Received: from mail-gx0-f193.google.com ([209.85.161.193])
+Received: from mail-yw0-f65.google.com ([209.85.213.65])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <anilm@mistralsolutions.com>) id 1PNJSe-0003ZP-Gq
+	(envelope-from <anilm@mistralsolutions.com>) id 1PNJTz-0003f5-BE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 07:13:09 +0100
-Received: by gxk7 with SMTP id 7so1554551gxk.0
+	Tue, 30 Nov 2010 07:14:31 +0100
+Received: by ywo32 with SMTP id 32so1459270ywo.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 22:11:48 -0800 (PST)
-Received: by 10.91.44.12 with SMTP id w12mr10476444agj.64.1291097507323;
-	Mon, 29 Nov 2010 22:11:47 -0800 (PST)
+	Mon, 29 Nov 2010 22:13:07 -0800 (PST)
+Received: by 10.151.11.12 with SMTP id o12mr11789333ybi.435.1291097587782;
+	Mon, 29 Nov 2010 22:13:07 -0800 (PST)
 Received: from anilm@mistralsolutions.com ([122.167.113.84])
-	by mx.google.com with ESMTPS id n67sm3764410yha.26.2010.11.29.22.11.43
-	(version=SSLv3 cipher=RC4-MD5); Mon, 29 Nov 2010 22:11:46 -0800 (PST)
-Date: Tue, 30 Nov 2010 11:41:39 +0530
+	by mx.google.com with ESMTPS id q41sm3826648ybk.13.2010.11.29.22.13.04
+	(version=SSLv3 cipher=RC4-MD5); Mon, 29 Nov 2010 22:13:07 -0800 (PST)
+Date: Tue, 30 Nov 2010 11:43:00 +0530
 From: Anil Kumar <anilm@mistralsolutions.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <4cf495a2.6720ec0a.7679.21c9@mx.google.com>
+Message-ID: <4cf495f3.293f970a.3d73.347a@mx.google.com>
 MIME-Version: 1.0
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.193
+X-SA-Exim-Connect-IP: 209.85.213.65
 X-SA-Exim-Mail-From: anilm@mistralsolutions.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: nagendra@mistralsolutions.com, srinath@mistralsolutions.com, jdk@ti.com
-Subject: [PATCHv3 4/5] am3517-crane: Add am3517-crane machine type
+Subject: [PATCHv3 5/5] sort.sh: add support for am3517-crane machine type
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,87 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 06:13:09 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 06:14:32 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-	
 	* Patch Version updated for latest git tree.
 
-        * Add new machine type for the am3517-crane board.
-
-        * CraneBoard is a hardware development platform based
-          on the Sitara AM3517 ARM Cortex - A8 microprocessor
-          device. This is a low cost reference design.
-
-        * You can find more about CraneBoard here:
-               [1] http://www.ti.com/arm
-               [2] http://www.mistralsolutions.com/products/craneboard.php
+        * Add support for the am3517-crane machine type to the
+          sort.sh script.
+        * For list of armv7a machines break the line for
+          allignment of 80 columns per line.
 
 Signed-off-by: Anil Kumar <anilm@mistralsolutions.com>
 ---
- conf/machine/am3517-crane.conf |   52 ++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 52 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/am3517-crane.conf
+ contrib/angstrom/sort.sh |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/am3517-crane.conf b/conf/machine/am3517-crane.conf
-new file mode 100644
-index 0000000..dad4625
---- /dev/null
-+++ b/conf/machine/am3517-crane.conf
-@@ -0,0 +1,52 @@
-+#@TYPE: Machine
-+#@NAME: craneboard machine
-+#@DESCRIPTION: Machine configuration for the AM3517 Crane board
-+TARGET_ARCH = "arm"
-+PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-+XSERVER = "xserver-xorg \
-+           xf86-input-evdev \
-+           xf86-input-mouse \
-+           xf86-video-omapfb \
-+           xf86-input-keyboard"
-+
-+# Only has DVI connector for external screen
-+GUI_MACHINE_CLASS = "bigscreen"
-+
-+require conf/machine/include/omap3.inc
-+
-+# Ship all kernel modules
-+
-+IMAGE_FSTYPES ?= "jffs2 tar.bz2"
-+EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
-+EXTRA_IMAGEDEPENDS += " u-boot x-load"
-+
-+SERIAL_CONSOLE = "115200 ttyS2"
-+USE_VT = "2"
-+
-+PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
-+
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-+
-+UBOOT_ARCH = "arm"
-+UBOOT_MACHINE = "am3517_crane_config"
-+XLOAD_MACHINE = "am3517crane_config"
-+
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen ethernet"
-+
-+# NOTE: there are NAND and OneNAND versions of this board...
-+
-+# do ubiattach /dev/ubi_ctrl -m 4
-+# From dmesg:
-+# UBI: smallest flash I/O unit:    2048
-+# UBI: logical eraseblock size:    129024 bytes
-+# from ubiattach stdout:
-+# UBI device number 0, total 1996 LEBs
-+MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
-+
-+# do ubiattach /dev/ubi_ctrl -m 4
-+# from dmesg:
-+# UBI: smallest flash I/O unit:    2048
-+# UBI: physical eraseblock size:   131072 bytes (128 KiB)
-+# UBI: sub-page size:              512
-+UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
-+
+diff --git a/contrib/angstrom/sort.sh b/contrib/angstrom/sort.sh
+index 3e59466..c88cb3d 100755
+--- a/contrib/angstrom/sort.sh
++++ b/contrib/angstrom/sort.sh
+@@ -79,7 +79,11 @@ case "$arch" in
+ 	"armv6-novfp")
+ 			machines="htcblackstone htcdiamond htcdream htckaiser htcnike htcpolaris htcraphael htctitan htcvogue" ;;
+ 	"armv7a")
+-			machines="am3517-evm archos5 archos5it beagleboard bug20 cm-t35 dm37x-evm am37x-evm am389x-evm babbage c6a816x-evm efikamx htcleo igep0020 nokia900 omap3517-evm omap3evm omap3-pandora omap3-touchbook omap4430-sdp omapzoom omapzoom2 omapzoom36x overo palmpre omap4430-panda" ;;
++			machines="am3517-crane am3517-evm archos5 archos5it
++ beagleboard bug20 cm-t35 dm37x-evm am37x-evm am389x-evm babbage c6a816x-evm
++ efikamx htcleo igep0020 nokia900 omap3517-evm omap3evm omap3-pandora
++ omap3-touchbook omap4430-sdp omapzoom omapzoom2 omapzoom36x overo palmpre
++ omap4430-panda" ;;
+ 	"avr32")
+ 			machines="at32stk1000 atngw100" ;;
+ 	"bfin")
 -- 
 1.7.0.4
 
