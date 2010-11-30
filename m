@@ -1,45 +1,46 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PNUi5-0002Vx-MC
+	(envelope-from <kergoth@gmail.com>) id 1PNUlw-0002kG-4e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 19:13:50 +0100
-Received: by yxd5 with SMTP id 5so2967781yxd.6
+	Tue, 30 Nov 2010 19:17:48 +0100
+Received: by eya28 with SMTP id 28so2759679eya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 10:12:28 -0800 (PST)
+	Tue, 30 Nov 2010 10:16:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=b7TZ/6a5U3UHubJ58+FFPIp9wTYfQ9w8upk7QG+eSW0=;
-	b=tkbA13VOuG/btHknTxy90i53hYKFyjP33rfvJYXjJayfKOEoi4IpsPuseQz/y52r+J
-	kqSihIxyjJ7NC7SslOVVwhhj2Pc5X4LxQfryTS1aAuCVetYVTtNFRFT+uZxH5rINvhW1
-	417IqsiS52kEt/GuDS9aZmdOg0KhQXlt3k2KA=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=MOCLHnJPVhkvyRqs0FcmKGzHr5Jw9bgsouZIMgdLTsw=;
+	b=G+92VQAxaHbsWFmPbzjl4Woh1zVsvfnXt/t8Ctp+dbnq8e9HbcjE5JERK+TAtPfl2E
+	01xWu9FMW9MrybK+xvb6WixvpOb64R3XNAMBinZlvx8wJxhtQRl7e2NXHlESy3i4aQ07
+	dyyJ/J0WgQ3XYMrwfklcpSLgysy2NCLkJg9Aw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=GqmrJxpkkF7NYJS9Zol3qCR+0+gFIHC37cwDGAeMBQypwgU46H6DzfwvzFs0I9OWv5
-	4j8exul/sbgGhjZl2yLcGeVtLn3nb9tkDlbAJigWn0/iT5MmSZmVoAd6s4QqooI5sMMD
-	g78KpP2FX3nOJWVtDSjVszMApdePMFtlPwH4o=
-Received: by 10.90.25.9 with SMTP id 9mr71197agy.48.1291140748238; Tue, 30 Nov
-	2010 10:12:28 -0800 (PST)
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=b8ef2JUazQNC4npgeMOpAanZ4v36SgYE+kHL3J6ANA8K1BGa3gONmUpkR0+0cO5ZwU
+	h8iWw9UUFWGQvWeheq85g4ss9tiDCOBdkG0ReJWC95PWnovMbJWHrChBr3einrT81S0d
+	k1GABlCrNkgOlWs3596dHjh8TsYymyDWuf3sA=
+Received: by 10.216.179.210 with SMTP id h60mr2767166wem.42.1291140981874;
+	Tue, 30 Nov 2010 10:16:21 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Tue, 30 Nov 2010 10:12:08 -0800 (PST)
-In-Reply-To: <20101130082314.GL10755@ibawizard.net>
-References: <AANLkTinyc8Pnpd3XMnTu=psPPHAmGKi4+DjvgWhSE1jt@mail.gmail.com>
-	<20101130082314.GL10755@ibawizard.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 30 Nov 2010 10:12:08 -0800
-Message-ID: <AANLkTikmbUDpw04xqRYE+pwY1_mBUNNOdfL+LdnahUrC@mail.gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.216.67.67 with HTTP; Tue, 30 Nov 2010 10:16:00 -0800 (PST)
+In-Reply-To: <4CF48B9D.9050907@gmail.com>
+References: <4CF48B9D.9050907@gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 30 Nov 2010 11:16:00 -0700
+X-Google-Sender-Auth: M4HLypeNFA4KTRcF0Z7BgcGQo8A
+Message-ID: <AANLkTik+2NBSfYKFBL02OS2B17qVKNBr_2bfjNqQxnkH@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release-2010 - last moment hot fixes
+Subject: Re: [PATCH] autoconf_2.65.bb: Fix configure for DISTRO=micro.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,38 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 18:13:50 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 18:17:48 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 30, 2010 at 12:23 AM, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
-> Khem Raj <raj.khem@gmail.com> [2010-11-29 16:34:01]:
+On Mon, Nov 29, 2010 at 10:29 PM, Graham Gower <graham.gower@gmail.com> wrote:
+> Update autoconf-dont-execute-perl.patch for autoconf-2.65.
+> See aa0d1e870c41d3375866c8180c720cd0fc27ffcd.
 >
->> Hi Folks,
+> checking for perl... (cached) /bin/perl
+> /mnt/oe/tmp/work/mipsel-oe-linux-uclibc/autoconf-2.65-r10.0/autoconf-2.65/configure: line 2507: /bin/perl: No such file or directory
+> configure: error: Perl 5.005_03 or better is required
 >
-> Hi,
->
->> Please update your release branch to latest tip and rerun your builds an=
-d
->> other tests that you have been doing and indicate any hot fixes that we =
-need
->> for the final release. Again update the Testing table with the results
->
-> as I see it, the uclibc variant seems to be really in the bad shape for
-> release, so I wonder what to do with this? I mean x264/mesa/e2fsprogs bui=
-ld
-> issues at least, maybe there's more.
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
 
-Do we already have some resolutions to these issues ? are there
-existing patches
 
->
-> -- ynezz
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Acked-by: Chris Larson <chris_larson@mentor.com>
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
