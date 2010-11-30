@@ -1,47 +1,44 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PNJr7-0004BA-Iw
+	(envelope-from <eric.colleu@gmail.com>) id 1PNK6k-0004Pm-1V
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 07:38:26 +0100
-Received: by pxi17 with SMTP id 17so866657pxi.6
+	Tue, 30 Nov 2010 07:54:34 +0100
+Received: by qyk8 with SMTP id 8so817285qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 22:37:04 -0800 (PST)
+	Mon, 29 Nov 2010 22:53:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=h447v2jta0LL0Sy2XkdWZr8p2Nh8RBj0NclLnKEfTec=;
-	b=j8HJUQtOjF3k6aUB9298vHRrOmsHraGCtHJFH0pe9BvAtEoMV+9r/MWTNO1ltvTJWn
-	Szwqo9lCfasEKXG0BmfBRZnZMi17xwmQBrw6PyeX/OxGfxQcKwfPaLj21SAASH454Z48
-	82NsVyM0z4y0ZmYHsCp/NzeCEb62jf2GMpXFY=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=pvmweF+KLNi4uB0xV9mWoE3iJera4iPNqp4KCehMdv8=;
+	b=f/cHW0p2HOn7eiKiLNQB7vI9lTbah8oKJfIWoU5qH7qGh2BQtk9pJndqutDCNBm8+0
+	hpzbT7mQkWgVp78MQeAukCJRlVpahYXOfz2olQcq6sRWoT4cZLKjTKvwgxWkWJGLUXki
+	gowiVouf9k2WzpFRnTZH3darKNzuq7CdE5OUc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=NEWX87oop2uhs8/FCxGK6bOZapGSur3NwexoY2DKdUmwj0Wwt/tKDX1QiW/PHoUFLB
-	kH+VvH2mW5ab5QBfyRtkbJ2vX2i1gRvusfotMeQwcLb7bWG3XpcfQFs8jKzLONdKf0PB
-	tw5IOmKYmBOmUoA625sfbAbypErvwf6U4Qalg=
-Received: by 10.142.140.15 with SMTP id n15mr6654579wfd.247.1291099023751;
-	Mon, 29 Nov 2010 22:37:03 -0800 (PST)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id p8sm8521260wff.16.2010.11.29.22.37.01
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 29 Nov 2010 22:37:02 -0800 (PST)
-Message-ID: <4CF49B89.5070808@gmail.com>
-Date: Tue, 30 Nov 2010 17:06:57 +1030
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=k6jPCZjMpRtz/wqAlYC1Om9eRF0DquT98MwdRyMwfeQXGQOkubFPs82Eu4mAn8ZX4r
+	UFfObUDwxgobGdKrEBBlk+EXKKD3ZBvWTSaEAb1IiYDobaHyHQsduFBkW0VXIddMqkJm
+	070cPJb73OW7qSqww+Qhwy7/1214J/pIMQ8/s=
 MIME-Version: 1.0
+Received: by 10.229.240.85 with SMTP id kz21mr5684975qcb.230.1291099993404;
+	Mon, 29 Nov 2010 22:53:13 -0800 (PST)
+Received: by 10.220.177.76 with HTTP; Mon, 29 Nov 2010 22:53:13 -0800 (PST)
+In-Reply-To: <1290773704.28296.30.camel@mattotaupa>
+References: <1290773704.28296.30.camel@mattotaupa>
+Date: Tue, 30 Nov 2010 07:53:13 +0100
+Message-ID: <AANLkTikA3awF9Ghc=Rgv5GUmfRxNLVD2XwW67wUvSiEM@mail.gmail.com>
+From: Eric Colleu <eric.colleu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: eric.colleu@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] syslog-ng.inc: Fix build when DISTRO_FEATURES lacks largefile and/or ipv6.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: xbmc: task `compile` fails with `/tools/TexturePacker/XBMCTex.cpp:394: undefined reference to `__lzo_init2'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,55 +52,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 06:38:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Nov 2010 06:54:34 -0000
+X-Groupsio-MsgNum: 26724
+Content-Type: multipart/mixed; boundary=0016363101e579f61804963fa43b
 
-In file included from /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/limits.h:27:0,
-                 from /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/lib/glib-2.0/include/glibconfig.h:11,
-                 from /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/glib-2.0/glib/gtypes.h:34,
-                 from /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/glib-2.0/glib/galloca.h:34,
-                 from /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/glib-2.0/glib.h:32,
-                 from syslog-ng.h:37,
-                 from misc.h:27,
-                 from misc.c:24:
-/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/features.h:216:5: error: #error It appears you have defined _FILE_OFFSET_BITS=64. Unfortunately, uClibc was built without large file support enabled.
+--0016363101e579f61804963fa43b
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-| afinet.c: In function 'afinet_setup_socket':
-| afinet.c:205:42: error: 'IPV6_JOIN_GROUP' undeclared (first use in this function)
-| afinet.c:205:42: note: each undeclared identifier is reported only once for each function it appears in
-| afinet.c:206:42: error: 'IPV6_MULTICAST_LOOP' undeclared (first use in this function)
-| afinet.c:211:44: error: 'IPV6_MULTICAST_HOPS' undeclared (first use in this function)
-| afinet.c:217:40: error: 'IPV6_UNICAST_HOPS' undeclared (first use in this function)
-| afinet.c: In function 'afinet_dd_construct_ipv6_packet':
-| afinet.c:448:36: warning: dereferencing type-punned pointer will break strict-aliasing rules
-| afinet.c:449:36: warning: dereferencing type-punned pointer will break strict-aliasing rules
+Try to add this patch to your xbmc recipe:
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/syslog-ng/syslog-ng.inc |    7 ++++++-
- 1 files changed, 6 insertions(+), 1 deletions(-)
+diff -Naur a/configure.in b/configure.in
+--- a/configure.in 2010-07-17 16:50:02.838501479 +0200
++++ b/configure.in 2010-07-17 16:50:20.633376618 +0200
+@@ -1205,12 +1205,6 @@
+   final_message=3D"$final_message\n  MID Support:\tNo"
+ fi
 
-diff --git a/recipes/syslog-ng/syslog-ng.inc b/recipes/syslog-ng/syslog-ng.inc
-index f12791d..452dd78 100644
---- a/recipes/syslog-ng/syslog-ng.inc
-+++ b/recipes/syslog-ng/syslog-ng.inc
-@@ -10,7 +10,12 @@ INC_PR = "r4"
- 
- inherit autotools
- 
--EXTRA_OECONF = "--with-libol=${STAGING_BINDIR_CROSS}/ --enable-dynamic-linking"
-+noipv6 = "${@base_contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6', d)}"
-+EXTRA_OECONF = "--with-libol=${STAGING_BINDIR_CROSS}/ --enable-dynamic-linking ${noipv6}"
-+
-+do_configure_prepend() {
-+	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
-+}
- 
- do_install_append() {
-         install -d ${D}/${sysconfdir}/${PN}
--- 
-1.7.1
+-if test -d "/usr/include/lzo"; then
+-  INCLUDES=3D"$INCLUDES -I/usr/include/lzo"
+-else
+-  INCLUDES=3D"$INCLUDES"
+-fi
+-
+ if test "x$use_ccache" !=3D "xno"; then
+   AC_PATH_PROG(CCACHE,ccache,none)
+   if test "$ac_cv_path_CCACHE" =3D "none"; then
+diff -Naur xbmc-31903/tools/TexturePacker/XBMCTex.cpp
+xbmc-31903.patch/tools/TexturePacker/XBMCTex.cpp
+--- a/tools/TexturePacker/XBMCTex.cpp 2010-07-17 16:28:40.000000000 +0200
++++ b/tools/TexturePacker/XBMCTex.cpp 2010-07-17 16:50:20.634375824 +0200
+@@ -37,7 +37,7 @@
+ #endif
 
+ #ifdef _LINUX
+-#include <lzo1x.h>
++#include <lzo/lzo1x.h>
+ #else
+ #include "../../xbmc/lib/liblzo/LZO1X.H"
+ #endif
 
+Eric Colleu
 
+2010/11/26 Paul Menzel <paulepanter@users.sourceforge.net>
+
+> Dear OE folks,
+>
+>
+> `bitbake -k xbmc` fails with the following error in task `compile`.
+>
+>        [=85]
+>
+
+--0016363101e579f61804963fa43b
+Content-Type: text/x-patch; charset=US-ASCII; name="0012-correct-lzo-include.patch"
+Content-Disposition: attachment; filename="0012-correct-lzo-include.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gh4fjb0c1
+
+ZGlmZiAtTmF1ciBhL2NvbmZpZ3VyZS5pbiBiL2NvbmZpZ3VyZS5pbgotLS0gYS9jb25maWd1cmUu
+aW4JMjAxMC0wNy0xNyAxNjo1MDowMi44Mzg1MDE0NzkgKzAyMDAKKysrIGIvY29uZmlndXJlLmlu
+CTIwMTAtMDctMTcgMTY6NTA6MjAuNjMzMzc2NjE4ICswMjAwCkBAIC0xMjA1LDEyICsxMjA1LDYg
+QEAKICAgZmluYWxfbWVzc2FnZT0iJGZpbmFsX21lc3NhZ2VcbiAgTUlEIFN1cHBvcnQ6XHRObyIK
+IGZpCiAKLWlmIHRlc3QgLWQgIi91c3IvaW5jbHVkZS9sem8iOyB0aGVuCi0gIElOQ0xVREVTPSIk
+SU5DTFVERVMgLUkvdXNyL2luY2x1ZGUvbHpvIgotZWxzZQotICBJTkNMVURFUz0iJElOQ0xVREVT
+IgotZmkKLQogaWYgdGVzdCAieCR1c2VfY2NhY2hlIiAhPSAieG5vIjsgdGhlbgogICBBQ19QQVRI
+X1BST0coQ0NBQ0hFLGNjYWNoZSxub25lKQogICBpZiB0ZXN0ICIkYWNfY3ZfcGF0aF9DQ0FDSEUi
+ID0gIm5vbmUiOyB0aGVuCmRpZmYgLU5hdXIgeGJtYy0zMTkwMy90b29scy9UZXh0dXJlUGFja2Vy
+L1hCTUNUZXguY3BwIHhibWMtMzE5MDMucGF0Y2gvdG9vbHMvVGV4dHVyZVBhY2tlci9YQk1DVGV4
+LmNwcAotLS0gYS90b29scy9UZXh0dXJlUGFja2VyL1hCTUNUZXguY3BwCTIwMTAtMDctMTcgMTY6
+Mjg6NDAuMDAwMDAwMDAwICswMjAwCisrKyBiL3Rvb2xzL1RleHR1cmVQYWNrZXIvWEJNQ1RleC5j
+cHAJMjAxMC0wNy0xNyAxNjo1MDoyMC42MzQzNzU4MjQgKzAyMDAKQEAgLTM3LDcgKzM3LDcgQEAK
+ICNlbmRpZgogCiAjaWZkZWYgX0xJTlVYCi0jaW5jbHVkZSA8bHpvMXguaD4KKyNpbmNsdWRlIDxs
+em8vbHpvMXguaD4KICNlbHNlCiAjaW5jbHVkZSAiLi4vLi4veGJtYy9saWIvbGlibHpvL0xaTzFY
+LkgiCiAjZW5kaWYK
+
+--0016363101e579f61804963fa43b--
