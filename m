@@ -1,44 +1,35 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PNMMp-00082P-61
+	(envelope-from <nicolas.ferre@atmel.com>) id 1PNMyO-00006U-LT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 10:19:19 +0100
-Received: by iwn8 with SMTP id 8so4262358iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 01:18:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=6OfWtOLX+/p+4rgE1JY574fIfoGl6b1vP2Y88MwZ1fs=;
-	b=tMT+uc9AFYIJe/+1nRycQj6tRacwYnplfXYLaAp+6/BvqYLr0ILxhUDHiIERK16pGY
-	trOSkgDVb7FHBGIWOlptlhprdbdo3+chZpXGDIRqwyAfem12PznayDFlpoz3/6NpInhe
-	zhBVVaDQQBd0TaCgrUe4HQPaY0Ps8QXBMIIT0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=jpFY4rqn5BZYVVsxD2peSJVbdvfkLSVJy3TOoJZn7eH0ugd7Ho6fIWqHQcsZ0lV5VL
-	/6fq1pyUQCX7d/+JR/q5CJYPyph2vwZTsI2OE96lncVVdNgzOsNTynqZROms7B2/29lH
-	HKCQChZSjQA3zl2rj1AgIotFVup+vp5krZlQg=
+	Tue, 30 Nov 2010 10:58:09 +0100
+Received: from meyreuil.atmel.fr (meyreuil [10.159.254.132])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id oAU9rvHI000916;
+	Tue, 30 Nov 2010 01:53:58 -0800 (PST)
+Received: from [127.0.0.1] ([10.159.245.112])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id oAU9uNh12815; 
+	Tue, 30 Nov 2010 10:56:23 +0100 (MET)
+Message-ID: <4CF4CA46.8000302@atmel.com>
+Date: Tue, 30 Nov 2010 10:56:22 +0100
+From: Nicolas Ferre <nicolas.ferre@atmel.com>
+Organization: atmel
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.231.35.75 with SMTP id o11mr7000558ibd.107.1291108679732; Tue,
-	30 Nov 2010 01:17:59 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Tue, 30 Nov 2010 01:17:59 -0800 (PST)
-In-Reply-To: <20101130082314.GL10755@ibawizard.net>
-References: <AANLkTinyc8Pnpd3XMnTu=psPPHAmGKi4+DjvgWhSE1jt@mail.gmail.com>
-	<20101130082314.GL10755@ibawizard.net>
-Date: Tue, 30 Nov 2010 10:17:59 +0100
-Message-ID: <AANLkTin+D5JmWZXt4xkX=wqfa-A+kNjpN8R-2dFDssxZ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4CE69DDB.9030500@atmel.com> <20101119160716.GD3411@jama>
+	<4CE6A5F8.4090301@atmel.com>
+In-Reply-To: <4CE6A5F8.4090301@atmel.com>
+X-SA-Exim-Connect-IP: 204.2.163.5
+X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release-2010 - last moment hot fixes
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: release-2010.12 (was: parsing error while building from scratch: literki_git.bb)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,51 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 09:19:19 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 09:58:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Just committed the following 3 things to master, they could also go
-into the release (at least the last two ones wrt php).
-Still looking for a solution to get php working with iconv as without
-it it breaks another recipe (I think ampache).
-Open for ideas on that one.
+Le 19/11/2010 17:29, Nicolas Ferre :
+> Le 19/11/2010 17:07, Martin Jansa :
+>> On Fri, Nov 19, 2010 at 04:55:07PM +0100, Nicolas Ferre wrote:
+>>> Hi,
+>>>
+>>> While trying to build from scratch the latest .dev branch with:
+>>> - at91sam9m10g45ek machine
+>>> - angstrom-2010.x distribution
+>>> - bitbake 1.10.1
+>>>
+>>> I have the following error just after bitbake parsing .bb files:
+>>
+>> what does it show if you do
+>> git ls-remote http://git.senfdax.de/git/literki master
+>> in terminal?
+> 
+> It seems to work:
+> $ git ls-remote http://git.senfdax.de/git/literki master
+> 1da40724369c8adc069288f1bfc6b2e167bbb87b        refs/heads/master
+> 
+>> are you using BB_LOCALCOUNT_OVERRIDE and/or BB_GIT_CLONE_FOR_SRCREV (ie
+>> in your local.conf?
+> 
+> No, neither the one nor the other.
 
-Frans
+My build on top of release-2010.12 is only working with the following
+commit form org.openembedded.dev:
+dc07958c6fad86917bd7d1b65614b14a1eec8c11
 
-commit 7aa6b49cabce5f85705508a0ead01433b2dafbbe
-Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-Date:   Tue Nov 30 09:30:36 2010 +0100
+Please include in release...
 
-    mythtv: removed 0.22
+Bye,
+-- 
+Nicolas Ferre
 
-    probably does not build with qt4.7
-    this one was not maintained anyway and only stayed because a few
-distro's pinned it.
-    it is now unpinned by all so rm.
-    we already have 0.23 for almost a year, and the metadata for 0.23 is better
-
-    Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-
-commit b0d9ce644c7847533e7b362441e45d8f7c7748b6
-Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-Date:   Tue Nov 30 09:29:14 2010 +0100
-
-    php: reinstated --without-iconv, this seems to generate configure issues
-
-    issues are wrt native paths being used.
-    e.g. get that fork is not found
-    adding --with-iconv-dir did not help
-    This needs further investigation
-
-    Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-
-commit 9d3d91887fe4c36d89466dd08520449fd017928f
-Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-Date:   Tue Nov 30 09:28:13 2010 +0100
-
-    php: removed --enable-memory-limit configure argument; does not
-exist any moe
-
-    Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
 
