@@ -1,45 +1,47 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PNYPk-000857-AJ
+	(envelope-from <graham.gower@gmail.com>) id 1PNZCN-0000lj-A2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 23:11:13 +0100
-Received: by gwj16 with SMTP id 16so2704712gwj.6
+	Wed, 01 Dec 2010 00:01:24 +0100
+Received: by pxi17 with SMTP id 17so1010518pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 14:09:46 -0800 (PST)
+	Tue, 30 Nov 2010 15:00:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
 	:content-transfer-encoding;
-	bh=gWN3REZ42qpLSjmL0miF1nUospUHekhBp/rJfovWK+k=;
-	b=jQzK8SDtLw2byEx5KoVWWIrYhMgFxxwqVqJrbxMU6c2Bby19Osby1k9zL75LKJtJIQ
-	bfXDmCy8h6/387kBQON47lCiPviY/oKGgxyaUtlP2DrLXP+Gg/4aM42pKjp8Zegg4dxY
-	w8KAUFbBuBDJALgN2+fgceIg7SjHRPuV8XllY=
+	bh=xNG01plzhakIN5B21VZBPtANtsGyLUK2sXRKYCK5ZTE=;
+	b=R/s+dqwKWq5FnKLjXSlas6ZYxfhNZ65fkY2QDK/Af0WmdOoZfyZ/GpEy9fgF6ty7Sb
+	OL/o7HrsYzPBIxlqGkQDo4fEGJskweobxU3nXjLDzPh5yo2xTRk7j4H5Ndn4pGP6JAJw
+	gL6eUo67hcgVWmnywFlZNmAhicdN0JvnUN6rw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=message-id:date:from:user-agent:mime-version:to:subject
 	:content-type:content-transfer-encoding;
-	b=vbLXUzAXHInAbiHRuoBgPkPHyeecpXJK9tdPJ+pCp/rW+piBWVxV0isxAexZCJ69Kc
-	Wvn2eIBUX/YtnUcSM5NXbRyMfFDI4LZjLQx7L2oApRf09fs/XhO+S5OVaZfjh7Vdq0Rm
-	Xzzy0050BY7hjlb38s3lJXtjgksagXfAH9NbM=
-Received: by 10.90.9.22 with SMTP id 22mr398311agi.102.1291154986655; Tue, 30
-	Nov 2010 14:09:46 -0800 (PST)
+	b=O5Tj6n62XnXUWL9TOkkqwMpg0xzD1/Sv83lXZkD5Y7S04+Ds/n87kZ/CYVfcjyEdFA
+	2jx+05kVCXR+wBisu2OVzij3jy23SYRS9rjsytfgDAHleLZI6Ok7/I5kW0NIZqr+lRLb
+	MASk6nIsi+yHbg2nqgQXq8bqwTzsqHVT5l8I0=
+Received: by 10.143.163.19 with SMTP id q19mr7954227wfo.289.1291158000908;
+	Tue, 30 Nov 2010 15:00:00 -0800 (PST)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id q13sm9580633wfc.5.2010.11.30.14.59.58
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 30 Nov 2010 14:59:59 -0800 (PST)
+Message-ID: <4CF581EA.2030206@gmail.com>
+Date: Wed, 01 Dec 2010 09:29:54 +1030
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Tue, 30 Nov 2010 14:09:26 -0800 (PST)
-In-Reply-To: <20101126074637.GS3274@jama>
-References: <AANLkTinbu9JpEw5fdX8pHcxraf4uTdCf7JKm9v1UekeS@mail.gmail.com>
-	<20101126074637.GS3274@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 30 Nov 2010 14:09:26 -0800
-Message-ID: <AANLkTi=Jcih2tFQYB2Qr2RJMAouZFFShfYmoWgE8M1rC@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bluez-dtl1-workaround not provided?
+Subject: [PATCH] procps.inc: Fix do_install for DISTRO=micro.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,35 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 22:11:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Nov 2010 23:01:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 25, 2010 at 11:46 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> On Thu, Nov 25, 2010 at 06:24:36PM +0100, Andrea Adami wrote:
->> Hello,
->>
->> build from scratch of console image for c7x0/armv5te leads to:
->
-> With new kernel I had this some time ago.. I'm using this patch since
-> then, but never send it here as I didn't look why this was needed
-> before..
->
+mv: cannot stat `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/procps-3.2.8-r12.1/image/bin/uptime': No such file or directory
 
-patch looks ok to me. Please install into master and release branch
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ recipes/procps/procps.inc |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
 
-Thx
--Khem
+diff --git a/recipes/procps/procps.inc b/recipes/procps/procps.inc
+index fbad8e7..4557596 100644
+--- a/recipes/procps/procps.inc
++++ b/recipes/procps/procps.inc
+@@ -9,7 +9,7 @@ LICENSE = "GPL"
+ DEPENDS = "ncurses"
+ RDEPENDS_${PN} = "ncurses-terminfo"
+ 
+-INC_PR = "r12"
++INC_PR = "r13"
+ 
+ SRC_URI = "http://procps.sourceforge.net/procps-${PV}.tar.gz;name=tarball \
+ 	   file://sysctl.conf \
+@@ -30,7 +30,10 @@ EXTRA_OEMAKE = "CFLAGS=-I${STAGING_INCDIR} \
+                 LDFLAGS="${LDFLAGS}" \
+                 CURSES=-lncurses \
+                 install='install -D' \
+-                ldconfig=echo"
++                ldconfig=echo \
++                usr/bin=${D}${bindir}/ \
++                usr/proc/bin=${D}${bindir}/ \
++                "
+ 
+ do_install_append () {
+ 	install -d ${D}${sysconfdir}/init.d
+-- 
+1.7.1
 
-> --
-> Martin 'JaMa' Jansa =C2=A0 =C2=A0 jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
 
 
