@@ -1,40 +1,40 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PNF6P-0004E5-UQ
+	(envelope-from <graham.gower@gmail.com>) id 1PNGrl-0006Ey-2s
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 02:33:55 +0100
-Received: by pxi17 with SMTP id 17so837734pxi.6
+	Tue, 30 Nov 2010 04:26:53 +0100
+Received: by pvd12 with SMTP id 12so846321pvd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 17:32:32 -0800 (PST)
+	Mon, 29 Nov 2010 19:25:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:content-type
 	:content-transfer-encoding;
-	bh=ASuBTs5HdugQFX04WEL0Mpbgox5H4vU9ij1fSkyk1jE=;
-	b=fCDmEYp3VpUbWRu39Q00eSbh/6XYjLB+ycqxZMtfahQ8+0oyAfu1+IhYPPqTM3gSpT
-	T7II8pgk+vjvxvkRZCTQDEXDvQduxReG0qsFDL58VPBnIanfiUxx4MH2peLkVKdH8JHe
-	niQuyP9GTIqVwJ9aOofMuHMl6++vj2pBAY8gU=
+	bh=gmfyPj9kEKnhQ0E8oakPyuHaHJ/HEZMiuZDEve9OIw8=;
+	b=YFWBgVUT0Ar5PXuBTr0zks8RqLu13qdDqKrk5g8viVyjcpHQxB8BbKA9RLKFBj9unB
+	8Co1o/Z4KO8WdH4o3K43px7N01GQIm6XLbhjKv+8yI9BRM8DJrrUG+SMLyaLUHVh9HUy
+	ifeh2xcWMefPspBTN5KXIIYY7PXfCNjMt9ZJw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject
 	:content-type:content-transfer-encoding;
-	b=W0hflh3ycZw3mQCjbJAOrl45UA7kenJFcQKlagMejBsbxno3AeFWzkRYTZdKkZjpJu
-	5s3a5NdrD0b2wkeplxX/A5CXC7aRIB8wyAQQrJog7CA+dznYOkL+hxCewbvsPiVkNojn
-	V0CSe9nysmKJxHjfv4qfCXHOq6V8UIdyWGfB4=
-Received: by 10.142.171.17 with SMTP id t17mr6417615wfe.88.1291080752221;
-	Mon, 29 Nov 2010 17:32:32 -0800 (PST)
+	b=iZq+GMWxYasHXcBelyy8FaESVqU0OUttvtY1ZIMizV6PmgvgwybhCCSPSS32pS7jNs
+	GSvev5wrNVS3Mz2Cqm4LA6Gqu7fZMLtAXQ65iOwrSyJJdOigJ3T/oI2fVExmLpWv9DGR
+	72nVOAUS/g2i0H1xUn4DzV1wuOG21H61wSw6g=
+Received: by 10.142.213.16 with SMTP id l16mr6411039wfg.333.1291087531251;
+	Mon, 29 Nov 2010 19:25:31 -0800 (PST)
 Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
 	by mx.google.com with ESMTPS id
-	w42sm8235786wfh.15.2010.11.29.17.32.28
+	b11sm8342871wff.21.2010.11.29.19.25.26
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 29 Nov 2010 17:32:31 -0800 (PST)
-Message-ID: <4CF45428.5030503@gmail.com>
-Date: Tue, 30 Nov 2010 12:02:24 +1030
+	Mon, 29 Nov 2010 19:25:30 -0800 (PST)
+Message-ID: <4CF46E9C.8090005@gmail.com>
+Date: Tue, 30 Nov 2010 13:55:16 +1030
 From: Graham Gower <graham.gower@gmail.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -42,7 +42,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] alsa-utils_1.0.20.bb: Fix build when DISTRO_FEATURES lacks largefile.
+Subject: [PATCH] openssl.inc: Fix build when DISTRO_FEATURES lacks largefile and/or ipv6.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,143 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 01:33:55 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 03:26:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-mipsel-oe-linux-uclibc-gcc -march=mips32 -DHAVE_CONFIG_H -I. -I../include -I../include  -isystem/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include  -isystem/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -I/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include -MT aplay.o -MD -MP -MF .deps/aplay.Tpo -c -o aplay.o aplay.c
-aplay.c:116:16: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'pbrec_count'
-aplay.c: In function 'test_wavefile':
-aplay.c:877:14: error: 'pbrec_count' undeclared (first use in this function)
-aplay.c:877:14: note: each undeclared identifier is reported only once for each function it appears in
-aplay.c: In function 'test_au':
-aplay.c:908:2: error: 'pbrec_count' undeclared (first use in this function)
-aplay.c: In function 'voc_play':
-aplay.c:1751:2: error: 'off64_t' undeclared (first use in this function)
-aplay.c:1751:10: error: expected ';' before 'filepos'
-aplay.c:1881:9: error: 'filepos' undeclared (first use in this function)
-aplay.c: At top level:
-aplay.c:1968:16: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'calc_count'
-aplay.c: In function 'end_voc':
-aplay.c:2137:2: error: 'off64_t' undeclared (first use in this function)
-aplay.c:2137:10: error: expected ';' before 'length_seek'
-aplay.c:2146:2: error: 'length_seek' undeclared (first use in this function)
-aplay.c:2150:8: error: 'fdcount' undeclared (first use in this function)
-aplay.c: In function 'end_wave':
-aplay.c:2166:2: error: 'off64_t' undeclared (first use in this function)
-aplay.c:2166:10: error: expected ';' before 'length_seek'
-aplay.c:2167:10: error: expected ';' before 'filelen'
-aplay.c:2170:2: error: 'length_seek' undeclared (first use in this function)
-aplay.c:2174:14: error: 'fdcount' undeclared (first use in this function)
-aplay.c:2175:2: error: 'filelen' undeclared (first use in this function)
-aplay.c: In function 'end_au':
-aplay.c:2188:2: error: 'off64_t' undeclared (first use in this function)
-aplay.c:2188:10: error: expected ';' before 'length_seek'
-aplay.c:2190:2: error: 'length_seek' undeclared (first use in this function)
-aplay.c:2191:17: error: 'fdcount' undeclared (first use in this function)
-aplay.c: At top level:
-aplay.c:2221:48: error: expected declaration specifiers or '...' before 'off64_t'
-aplay.c: In function 'playback_go':
-aplay.c:2224:2: error: 'off64_t' undeclared (first use in this function)
-aplay.c:2224:10: error: expected ';' before 'written'
-aplay.c:2225:10: error: expected ';' before 'c'
-aplay.c:2230:33: error: 'written' undeclared (first use in this function)
-aplay.c:2230:43: error: 'count' undeclared (first use in this function)
-aplay.c:2242:4: error: 'c' undeclared (first use in this function)
-aplay.c:2254:4: error: 'fdcount' undeclared (first use in this function)
-aplay.c: In function 'playback':
-aplay.c:2283:2: error: 'pbrec_count' undeclared (first use in this function)
-aplay.c:2284:2: error: 'fdcount' undeclared (first use in this function)
-aplay.c:2303:3: warning: passing argument 4 of 'playback_go' makes pointer from integer without a cast
-aplay.c:2221:13: note: expected 'char *' but argument is of type 'int'
-aplay.c:2303:3: error: too many arguments to function 'playback_go'
-aplay.c:2221:13: note: declared here
-aplay.c:2320:3: warning: passing argument 4 of 'playback_go' makes pointer from integer without a cast
-aplay.c:2221:13: note: expected 'char *' but argument is of type 'int'
-aplay.c:2320:3: error: too many arguments to function 'playback_go'
-aplay.c:2221:13: note: declared here
-aplay.c:2325:3: error: too many arguments to function 'playback_go'
-aplay.c:2221:13: note: declared here
-aplay.c: In function 'capture':
-aplay.c:2376:2: error: 'off64_t' undeclared (first use in this function)
-aplay.c:2376:10: error: expected ';' before 'count'
-aplay.c:2379:2: error: 'count' undeclared (first use in this function)
-aplay.c:2424:3: error: 'rest' undeclared (first use in this function)
-aplay.c:2433:3: error: 'fdcount' undeclared (first use in this function)
-aplay.c:2435:33: error: expected ')' before 'chunk_bytes'
-aplay.c: At top level:
-aplay.c:2461:74: error: expected declaration specifiers or '...' before 'off64_t'
-aplay.c: In function 'playbackv_go':
-aplay.c:2480:9: error: 'count' undeclared (first use in this function)
-aplay.c: At top level:
-aplay.c:2513:58: error: expected declaration specifiers or '...' before 'off64_t'
-aplay.c: In function 'capturev_go':
-aplay.c:2529:9: error: 'count' undeclared (first use in this function)
-aplay.c:2546:3: error: 'fdcount' undeclared (first use in this function)
-aplay.c: In function 'playbackv':
-aplay.c:2587:2: error: 'pbrec_count' undeclared (first use in this function)
-aplay.c:2588:2: error: too many arguments to function 'playbackv_go'
-aplay.c:2461:13: note: declared here
-aplay.c: In function 'capturev':
-aplay.c:2640:2: error: 'pbrec_count' undeclared (first use in this function)
-aplay.c:2641:2: error: too many arguments to function 'capturev_go'
-aplay.c:2513:13: note: declared here
-make[1]: *** [aplay.o] Error 1
+mipsel-oe-linux-uclibc-gcc -march=mips32 -I.. -I../.. -I../../include -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN 	-DTERMIO -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -Wall -isystem/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include  -c -o bss_file.o bss_file.c
+In file included from /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/stdio.h:28:0,
+                 from bss_file.c:86:
+/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/features.h:216:5: error: #error It appears you have defined _FILE_OFFSET_BITS=64. Unfortunately, uClibc was built without large file support enabled.
+In file included from /mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/stdio.h:72:0,
+                 from bss_file.c:86:
+/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/bits/uClibc_stdio.h:61:2: error: #error Sorry... uClibc was built without large file support!
+In file included from bss_file.c:86:0:
+/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/stdio.h:83:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'fpos_t'
+In file included from bss_file.c:86:0:
+/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/stdio.h:719:12: error: expected declaration specifiers or '...' before 'fpos_t'
+/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include/stdio.h:721:12: error: expected ';', ',' or ')' before '*' token
+make[2]: *** [bss_file.o] Error 1
+
+
+mipsel-oe-linux-uclibc-gcc -march=mips32 -I.. -I../.. -I../../include -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN 	-DTERMIO -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -Wall -isystem/mnt/oe/tmp/sysroots/mipsel-oe-linux-uclibc/include  -c -o bss_dgram.o bss_dgram.c
+bss_dgram.c: In function 'dgram_ctrl':
+bss_dgram.c:433:18: error: 'IPV6_PMTUDISC_DO' undeclared (first use in this function)
+bss_dgram.c:433:18: note: each undeclared identifier is reported only once for each function it appears in
+bss_dgram.c:434:48: error: 'IPV6_MTU_DISCOVER' undeclared (first use in this function)
+bss_dgram.c:474:48: error: 'IPV6_MTU' undeclared (first use in this function)
+make[2]: *** [bss_dgram.o] Error 1
+
 
 Signed-off-by: Graham Gower <graham.gower@gmail.com>
 ---
- recipes/alsa/alsa-utils-1.0.20/nolargefile.patch |   24 ++++++++++++++++++++++
- recipes/alsa/alsa-utils_1.0.20.bb                |    3 +-
- 2 files changed, 26 insertions(+), 1 deletions(-)
- create mode 100644 recipes/alsa/alsa-utils-1.0.20/nolargefile.patch
+ recipes/openssl/openssl.inc |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/alsa/alsa-utils-1.0.20/nolargefile.patch b/recipes/alsa/alsa-utils-1.0.20/nolargefile.patch
-new file mode 100644
-index 0000000..b32b509
---- /dev/null
-+++ b/recipes/alsa/alsa-utils-1.0.20/nolargefile.patch
-@@ -0,0 +1,24 @@
-+--- alsa-utils-1.0.20/aplay/aplay.c.orig	2010-11-30 11:45:41.000000000 +1030
-++++ alsa-utils-1.0.20/aplay/aplay.c	2010-11-30 11:55:57.000000000 +1030
-+@@ -51,6 +51,21 @@
-+ #include "formats.h"
-+ #include "version.h"
-+ 
-++#ifndef __USE_LARGEFILE64
-++#include <stdint.h>
-++typedef uint64_t off64_t;
-++off64_t
-++lseek64(int fd, off64_t offset, int whence)
-++{
-++	if (offset >= (1 << ((sizeof(off_t)*8) - 1))) {
-++		errno = EOVERFLOW;
-++		return -1;
-++	}
-++	return lseek(fd, (off_t) offset, whence);
-++}
-++#define open64 open
-++#endif
-++
-+ #ifndef LLONG_MAX
-+ #define LLONG_MAX    9223372036854775807LL
-+ #endif
-diff --git a/recipes/alsa/alsa-utils_1.0.20.bb b/recipes/alsa/alsa-utils_1.0.20.bb
-index ee0467e..74e9d13 100644
---- a/recipes/alsa/alsa-utils_1.0.20.bb
-+++ b/recipes/alsa/alsa-utils_1.0.20.bb
-@@ -3,10 +3,11 @@ HOMEPAGE = "http://www.alsa-project.org"
- SECTION = "console/utils"
- LICENSE = "GPLv2"
- DEPENDS = "alsa-lib ncurses"
--PR = "r4"
-+PR = "r5"
+diff --git a/recipes/openssl/openssl.inc b/recipes/openssl/openssl.inc
+index 885d933..3091b4e 100644
+--- a/recipes/openssl/openssl.inc
++++ b/recipes/openssl/openssl.inc
+@@ -98,6 +98,9 @@ do_configure () {
+                 useprefix=/
+         fi        
+ 	perl ./Configure shared --prefix=$useprefix --openssldir=${libdir}/ssl $target
++
++	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "/_FILE_OFFSET_BITS/,/#endif/d" ${S}/crypto/bio/bss_file.c', d)}"
++	eval "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'sed -i -e "/AF_INET6/,/break/d" ${S}/crypto/bio/bss_dgram.c', d)}"
+ }
  
- SRC_URI = "ftp://ftp.alsa-project.org/pub/utils/alsa-utils-${PV}.tar.bz2 \
- 	   file://alsa-utils-remove-xmlto-1.0.19plus.patch \
-+	   file://nolargefile.patch \
- 	  "
- 
- inherit gettext autotools
+ do_compile () {
 -- 
 1.7.1
 
