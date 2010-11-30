@@ -1,41 +1,31 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sylvain.pare@gmail.com>) id 1PNRLq-00067M-BG
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 15:38:38 +0100
-Received: by qwg5 with SMTP id 5so4468841qwg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 06:37:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=WevINoCTTVo9YM01/45RoYCBIqgmslLymH41CwKQpig=;
-	b=qYwByNOsY0hhoM79oNhFq80UB7da0GnE+EwuMKiI/ponfY9jbIlhZyI2DTyykUvMTn
-	V468WstZ3Uge0Tg0iYDxV6wYa3suuIcrNKChkiC582CDCuuVm4oDx6hBBc6xYEdLGuMv
-	+LKtQbYZJfnM+Z62gjsKzYW1g1QmAhJZAlTGk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=nszMYdcplhPAZ8KJR4OVagyhk+L0aYGupxxgnmFtWd0I5zJ1B1gdgPi7cD0v/tGPKJ
-	5umQyA36lW5ozHDjgJjdboElC4J03GKlLw571CAEqhEZpTWtQfKyg7zrxEhtR9+ZDgs6
-	aaj7A5XC+TiDOUc5ngeZgrzZLPu/owjapmBx0=
-Received: by 10.229.217.133 with SMTP id hm5mr6001827qcb.258.1291127836735;
-	Tue, 30 Nov 2010 06:37:16 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.229.185.81 with HTTP; Tue, 30 Nov 2010 06:36:55 -0800 (PST)
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Tue, 30 Nov 2010 15:36:55 +0100
-Message-ID: <AANLkTimx+osQLb0Km1pXgQuPEwx3r1-ovhD9um_9p8GV@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PNSwO-0008Ht-UA for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Nov 2010 17:20:29 +0100
+Received: from f053043073.adsl.alicedsl.de ([78.53.43.73]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PNSv7-0000zN-Fw for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Nov 2010 16:19:10 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: sylvain.pare@gmail.com
+In-Reply-To: <AANLkTimx+osQLb0Km1pXgQuPEwx3r1-ovhD9um_9p8GV@mail.gmail.com>
+References: <AANLkTimx+osQLb0Km1pXgQuPEwx3r1-ovhD9um_9p8GV@mail.gmail.com>
+Date: Tue, 30 Nov 2010 17:19:07 +0100
+Message-ID: <1291133947.3599.16.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: package request for Phonon-VLC backend
+Subject: Re: package request for Phonon-VLC backend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 14:38:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 30 Nov 2010 16:20:29 -0000
+X-Groupsio-MsgNum: 26739
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-gehddrLGrD0mrlFvdqvE"
 
-Hello,
+--=-gehddrLGrD0mrlFvdqvE
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I have a package request. If that interests somebody to make a receipe for
-Phonon-VLC backend
-at it seem to be the most stable backend for phononn according to Phonon's
-dev.
-Like this we could have Phonon-VLC backend additionnaly to Phonon-gstreamer
-one.
+Dear Sylvain
 
-I tried to make one myself but I can't manage to fix automoc-native
-(dependence) to make it build.
 
-Thanks by advance!
+Am Dienstag, den 30.11.2010, 15:36 +0100 schrieb Sylvain Par=C3=A9:
 
-Regards,
+> I have a package request. If that interests somebody to make a receipe
+> for Phonon-VLC backend at it seem to be the most stable backend for
+> phononn according to Phonon's dev.
+> Like this we could have Phonon-VLC backend additionnaly to
+> Phonon-gstreamer one.
+>=20
+> I tried to make one myself but I can't manage to fix automoc-native
+> (dependence) to make it build.
 
-Sylvain (aka GarthPS)
+please attach the work you have done so far with a Signed-off-by line.
 
+> Thanks by advance!
+
+
+Thanks,
+
+Paul
+
+--=-gehddrLGrD0mrlFvdqvE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkz1I/sACgkQPX1aK2wOHVha6wCfSWCcuFYRsoFeVa/Hax3pA1eo
+A/YAn0up42wiIxCEGo0rkRg/yRMZBW/L
+=m2sK
+-----END PGP SIGNATURE-----
+
+--=-gehddrLGrD0mrlFvdqvE--
