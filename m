@@ -1,32 +1,48 @@
-Received: from mail-yw0-f65.google.com ([209.85.213.65])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <anilm@mistralsolutions.com>) id 1PNJTz-0003f5-BE
+	(envelope-from <graham.gower@gmail.com>) id 1PNJfR-0003rN-PJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 07:14:31 +0100
-Received: by ywo32 with SMTP id 32so1459270ywo.0
+	Tue, 30 Nov 2010 07:26:22 +0100
+Received: by pxi17 with SMTP id 17so865532pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Nov 2010 22:13:07 -0800 (PST)
-Received: by 10.151.11.12 with SMTP id o12mr11789333ybi.435.1291097587782;
-	Mon, 29 Nov 2010 22:13:07 -0800 (PST)
-Received: from anilm@mistralsolutions.com ([122.167.113.84])
-	by mx.google.com with ESMTPS id q41sm3826648ybk.13.2010.11.29.22.13.04
-	(version=SSLv3 cipher=RC4-MD5); Mon, 29 Nov 2010 22:13:07 -0800 (PST)
-Date: Tue, 30 Nov 2010 11:43:00 +0530
-From: Anil Kumar <anilm@mistralsolutions.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <4cf495f3.293f970a.3d73.347a@mx.google.com>
+	Mon, 29 Nov 2010 22:24:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=KiybKJ/Cl/2NzvZtyGx76/YbiDoSRLXWu974nruFK/k=;
+	b=j4ymGLzbCRZGItdRCLHh5TiEjvbJ/Ea0lyWe/hP8p4yYTtYgDjtu5vDQWavp+yIjnf
+	Ldwq3waVYLNufCZM1Oc+Vo/uX5mXDZk4d5qoIhyNGcZ2mAuFeCeP1pP5wBcC6S7aPjOa
+	HC2H0tt20JYyC2MTR4+yU86ipcfEQdLQ47HiA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=lk6f7zfdi8veLuJ7aVThHAT8kAod3TCunwComrp1XpnDeAQi9+3Y9KkmWFRWnDnhHr
+	SZHBycu5DgO5eLA83pUVVY/SBjU0pegs7bJseBDMHWGzReQCoOWCUlLScbrr+US6/aaL
+	n3QI5+ziP8A7hNQRWgkzkeM7oU5IugFc+dKOg=
+Received: by 10.142.210.5 with SMTP id i5mr6540456wfg.324.1291098299096;
+	Mon, 29 Nov 2010 22:24:59 -0800 (PST)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	e14sm8511092wfg.20.2010.11.29.22.24.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 29 Nov 2010 22:24:58 -0800 (PST)
+Message-ID: <4CF498B4.4070206@gmail.com>
+Date: Tue, 30 Nov 2010 16:54:52 +1030
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.213.65
-X-SA-Exim-Mail-From: anilm@mistralsolutions.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: nagendra@mistralsolutions.com, srinath@mistralsolutions.com, jdk@ti.com
-Subject: [PATCHv3 5/5] sort.sh: add support for am3517-crane machine type
+Subject: [PATCH] openjade_1.3.2.bb: Install catalog with the correct path.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,41 +56,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 06:14:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 30 Nov 2010 06:26:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-	* Patch Version updated for latest git tree.
+Openjade was doing the following:
+install-catalog: addition of /mnt/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r4/image/mnt/oe/tmp/sysroots/x86_64-linux/share/sgml/openjade-1.3.2/catalog in /mnt/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat
 
-        * Add support for the am3517-crane machine type to the
-          sort.sh script.
-        * For list of armv7a machines break the line for
-          allignment of 80 columns per line.
+Which was causing lengthy errors like this one:
+http://tinderbox.openembedded.org/packages/1149296/
 
-Signed-off-by: Anil Kumar <anilm@mistralsolutions.com>
+Now I get:
+install-catalog: addition of /mnt/oe/tmp/sysroots/x86_64-linux/share/sgml/openjade-1.3.2/catalog in /mnt/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat
+
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
 ---
- contrib/angstrom/sort.sh |    6 +++++-
- 1 files changed, 5 insertions(+), 1 deletions(-)
+ recipes/openjade/openjade_1.3.2.bb |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/contrib/angstrom/sort.sh b/contrib/angstrom/sort.sh
-index 3e59466..c88cb3d 100755
---- a/contrib/angstrom/sort.sh
-+++ b/contrib/angstrom/sort.sh
-@@ -79,7 +79,11 @@ case "$arch" in
- 	"armv6-novfp")
- 			machines="htcblackstone htcdiamond htcdream htckaiser htcnike htcpolaris htcraphael htctitan htcvogue" ;;
- 	"armv7a")
--			machines="am3517-evm archos5 archos5it beagleboard bug20 cm-t35 dm37x-evm am37x-evm am389x-evm babbage c6a816x-evm efikamx htcleo igep0020 nokia900 omap3517-evm omap3evm omap3-pandora omap3-touchbook omap4430-sdp omapzoom omapzoom2 omapzoom36x overo palmpre omap4430-panda" ;;
-+			machines="am3517-crane am3517-evm archos5 archos5it
-+ beagleboard bug20 cm-t35 dm37x-evm am37x-evm am389x-evm babbage c6a816x-evm
-+ efikamx htcleo igep0020 nokia900 omap3517-evm omap3evm omap3-pandora
-+ omap3-touchbook omap4430-sdp omapzoom omapzoom2 omapzoom36x overo palmpre
-+ omap4430-panda" ;;
- 	"avr32")
- 			machines="at32stk1000 atngw100" ;;
- 	"bfin")
+diff --git a/recipes/openjade/openjade_1.3.2.bb b/recipes/openjade/openjade_1.3.2.bb
+index a84e899..6c69173 100644
+--- a/recipes/openjade/openjade_1.3.2.bb
++++ b/recipes/openjade/openjade_1.3.2.bb
+@@ -5,7 +5,7 @@ DESCRIPTION = "OpenJade is a suite of tools for validating, \
+ processing, and applying DSSSL (Document Style Semantics and \
+ Specification Language) stylesheets to SGML and XML documents."
+ LICENSE = "BSD"
+-PR = "r4"
++PR = "r5"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/openjade/openjade-${PV}.tar.gz \
+ 	   file://configure.patch \
+ 	   file://autoconf.patch \
+@@ -42,8 +42,11 @@ do_install_append () {
+        install -m 644 dsssl/catalog ${D}${datadir}/sgml/openjade-${PV}
+        install -m 644 dsssl/*.{dtd,dsl,sgm} ${D}${datadir}/sgml/openjade-${PV}
+ 
++       # The catalog must live in the sysroot and it must be there for
++       # install-catalog to do its thing.
++       install -m 644 dsssl/catalog ${datadir}/sgml/openjade-${PV}
+        install-catalog --add ${sysconfdir}/sgml/openjade-${PV}.cat \
+-           ${D}${datadir}/sgml/openjade-${PV}/catalog
++           ${datadir}/sgml/openjade-${PV}/catalog
+ 
+        install-catalog --add ${sysconfdir}/sgml/sgml-docbook.cat \
+            ${sysconfdir}/sgml/openjade-${PV}.cat
 -- 
-1.7.0.4
+1.7.1
 
 
 
