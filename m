@@ -1,43 +1,46 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <harvey.tim@gmail.com>) id 1PNTgI-0000wq-CO
+	(envelope-from <raj.khem@gmail.com>) id 1PNUbt-00026L-JN
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 18:07:55 +0100
-Received: by pvd12 with SMTP id 12so950325pvd.6
+	Tue, 30 Nov 2010 19:07:26 +0100
+Received: by ywt2 with SMTP id 2so2963727ywt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 09:06:32 -0800 (PST)
+	Tue, 30 Nov 2010 10:06:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=iowz97AhL1DoK7FCXO7cNYqgjY89GKH9OCPc7mGuqns=;
-	b=vuZU+obE1ohnCE7oSlYEPMYwh5pMCGC1oM054eWL1r0rOdu5UkK4EzW2v9/5QUrMFQ
-	c7oU1cgklsxl8SRdb5qXd12hRWnsWeZ8GYtBUG9sXZ8/j7s8WmYXP5Qx5g9WK15nUp2s
-	pQ5kIVuLpqPq0xcDt/MId8ourY7V/8m8eiVTc=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=hl368jMP0UWpKoBLnS9wqvULeK7auHiEep3gcEdOLf8=;
+	b=weJw5/bktJ7UoMUvsp+fDTx3H/eArzQHnf2nPHRYPcpAHEuJ2PZPdcexivAVreOn1m
+	J1VskRFNG1fm9yHSyvZmLclcv1Rd3eVzlWknL6tjWcdrtdsvEW5clKLqoKSHDFlBasMd
+	+5FbGLebfUPe5HIp5Xt9R1jha0fXI+5ZRI5aE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=G57Nhxncqs+XoqPzav/8wxdf+UtDE62rMKeey+M4MJgKCx05p5H0+dTCHYq1eAVwVZ
-	R5GXZGFA85gd6vfrvjpciteq5XwwTBV+RKWPiPJPdB2AfQKWvBAqeWdOlJQj0VS1Uxa+
-	gm1yFQZ3PCJvzgBBBqB68eXSQzYVta/lEHgwU=
-Received: by 10.142.43.5 with SMTP id q5mr7412230wfq.401.1291136792766;
-	Tue, 30 Nov 2010 09:06:32 -0800 (PST)
-Received: from localhost.localdomain ([76.205.222.173])
-	by mx.google.com with ESMTPS id b11sm9205768wff.21.2010.11.30.09.06.30
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 30 Nov 2010 09:06:31 -0800 (PST)
-From: Tim Harvey <harvey.tim@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=FdZnDIY5ZzS5bE4z3QCxtcNhZ1PRaXqqzepmxU8k+Obaqmfng1GsQENtLwNseJSdwR
+	VR7lykHeRFOp7YXP0WoRdNpu2FUXwN1V6qBDOFAOTdOxCtbcr0FhxU1NyQjQIF71BGzW
+	hfhs4SrUGjH3crTLlvei4R1Dn03Sn6h13oflQ=
+Received: by 10.91.87.20 with SMTP id p20mr61342agl.129.1291140363632; Tue, 30
+	Nov 2010 10:06:03 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.120.8 with HTTP; Tue, 30 Nov 2010 10:05:43 -0800 (PST)
+In-Reply-To: <4CF4CA46.8000302@atmel.com>
+References: <4CE69DDB.9030500@atmel.com> <20101119160716.GD3411@jama>
+	<4CE6A5F8.4090301@atmel.com> <4CF4CA46.8000302@atmel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 30 Nov 2010 10:05:43 -0800
+Message-ID: <AANLkTikC4dfW6kMjzaxxyW6Uoh8Nh=-uV-K8gsvOL_Uv@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Nov 2010 09:05:38 -0800
-Message-Id: <1291136738-32061-1-git-send-email-harvey.tim@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: harvey.tim@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] avrdude: does not reliably build with parallel make
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: release-2010.12 (was: parsing error while building from scratch: literki_git.bb)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,25 +54,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 17:07:55 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 18:07:27 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-disable parallel make for avrdude recipes
-Signed-off-by: Tim Harvey <harvey.tim@gmail.com>
----
- recipes/avrdude/avrdude.inc |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+On Tue, Nov 30, 2010 at 1:56 AM, Nicolas Ferre <nicolas.ferre@atmel.com> wr=
+ote:
+> Le 19/11/2010 17:29, Nicolas Ferre :
+>> Le 19/11/2010 17:07, Martin Jansa :
+>>> On Fri, Nov 19, 2010 at 04:55:07PM +0100, Nicolas Ferre wrote:
+>>>> Hi,
+>>>>
+>>>> While trying to build from scratch the latest .dev branch with:
+>>>> - at91sam9m10g45ek machine
+>>>> - angstrom-2010.x distribution
+>>>> - bitbake 1.10.1
+>>>>
+>>>> I have the following error just after bitbake parsing .bb files:
+>>>
+>>> what does it show if you do
+>>> git ls-remote http://git.senfdax.de/git/literki master
+>>> in terminal?
+>>
+>> It seems to work:
+>> $ git ls-remote http://git.senfdax.de/git/literki master
+>> 1da40724369c8adc069288f1bfc6b2e167bbb87b =C2=A0 =C2=A0 =C2=A0 =C2=A0refs=
+/heads/master
+>>
+>>> are you using BB_LOCALCOUNT_OVERRIDE and/or BB_GIT_CLONE_FOR_SRCREV (ie
+>>> in your local.conf?
+>>
+>> No, neither the one nor the other.
+>
+> My build on top of release-2010.12 is only working with the following
+> commit form org.openembedded.dev:
+> dc07958c6fad86917bd7d1b65614b14a1eec8c11
+>
+> Please include in release...
 
-diff --git a/recipes/avrdude/avrdude.inc b/recipes/avrdude/avrdude.inc
-index 679c4ba..3a387c3 100644
---- a/recipes/avrdude/avrdude.inc
-+++ b/recipes/avrdude/avrdude.inc
-@@ -9,3 +9,4 @@ SRC_URI = "http://savannah.nongnu.org/download/avrdude/avrdude-${PV}.tar.gz"
- 
- inherit autotools
- 
-+PARALLEL_MAKE = ""
--- 
-1.7.0.4
+thanks for informing. I have included cherry picked commit.
 
+>
+> Bye,
+> --
+> Nicolas Ferre
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
