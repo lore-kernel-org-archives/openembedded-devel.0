@@ -1,25 +1,26 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PNVB4-0003Ss-CO
+	(envelope-from <stefan@datenfreihafen.org>) id 1PNVFm-0003aV-RF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 19:43:46 +0100
+	Tue, 30 Nov 2010 19:48:39 +0100
 Received: from p5b0370b8.dip.t-dialin.net ([91.3.112.184] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PNV9l-0005ic-Iq by authid <stefan@sostec.de> with cram_md5
+	id 1PNVEU-0005p4-6P by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 19:42:28 +0100
+	Tue, 30 Nov 2010 19:47:20 +0100
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PNV9j-000584-Im
+	(envelope-from <stefan@excalibur.local>) id 1PNVES-0005AG-Ma
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 19:42:23 +0100
-Date: Tue, 30 Nov 2010 19:42:23 +0100
+	Tue, 30 Nov 2010 19:47:16 +0100
+Date: Tue, 30 Nov 2010 19:47:09 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101130184222.GA19832@excalibur.local>
-References: <20101130182855.GA5759@gmail.com>
+Message-ID: <20101130184708.GB19832@excalibur.local>
+References: <20101109082630.GA16948@excalibur.local>
+	<4CE63017.1060800@xora.org.uk> <4CF54552.4060407@xora.org.uk>
 MIME-Version: 1.0
-In-Reply-To: <20101130182855.GA5759@gmail.com>
+In-Reply-To: <4CF54552.4060407@xora.org.uk>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -32,7 +33,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Commit Access for Graham Gower (grg)
+Subject: Re: New Members Vote
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,23 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 18:43:46 -0000
+X-List-Received-Date: Tue, 30 Nov 2010 18:48:39 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Tue, 2010-11-30 at 10:28, Khem Raj wrote:
-> 
-> I would like to propose Graham Gower for commit access. Over the past year
-> he has been consistently submitting good patches and quite a lot of them in
-> addition he does opkg and mipsel targets and micro distribution which is
-> largely unmaintained these days.
-> It would be a nice addition
+On Tue, 2010-11-30 at 18:41, Graeme Gregory wrote:
+> All these people were voted into the eV successfully, welcome to the eV.
+> Will the web/mailing list team please add them to the wiki and members list.
 
-Indeed. Actually I wonder why he does not already have commit access.
+Great.
 
-I support this proposal.
+Thanks Graeme for taking care of the voting.
 
 regards
 Stefan Schmidt
