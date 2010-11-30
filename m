@@ -1,33 +1,45 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1PNXQm-0006oI-Dy
+	(envelope-from <raj.khem@gmail.com>) id 1PNYPk-000857-AJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 22:08:09 +0100
-Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
-	[91.64.83.241])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 0D0E91B10C0B
+	Tue, 30 Nov 2010 23:11:13 +0100
+Received: by gwj16 with SMTP id 16so2704712gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 21:11:16 +0000 (UTC)
-Message-ID: <4CF56767.3050007@freyther.de>
-Date: Tue, 30 Nov 2010 22:06:47 +0100
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
-	Lightning/1.0b2 Thunderbird/3.1.6
+	Tue, 30 Nov 2010 14:09:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=gWN3REZ42qpLSjmL0miF1nUospUHekhBp/rJfovWK+k=;
+	b=jQzK8SDtLw2byEx5KoVWWIrYhMgFxxwqVqJrbxMU6c2Bby19Osby1k9zL75LKJtJIQ
+	bfXDmCy8h6/387kBQON47lCiPviY/oKGgxyaUtlP2DrLXP+Gg/4aM42pKjp8Zegg4dxY
+	w8KAUFbBuBDJALgN2+fgceIg7SjHRPuV8XllY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=vbLXUzAXHInAbiHRuoBgPkPHyeecpXJK9tdPJ+pCp/rW+piBWVxV0isxAexZCJ69Kc
+	Wvn2eIBUX/YtnUcSM5NXbRyMfFDI4LZjLQx7L2oApRf09fs/XhO+S5OVaZfjh7Vdq0Rm
+	Xzzy0050BY7hjlb38s3lJXtjgksagXfAH9NbM=
+Received: by 10.90.9.22 with SMTP id 22mr398311agi.102.1291154986655; Tue, 30
+	Nov 2010 14:09:46 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.120.8 with HTTP; Tue, 30 Nov 2010 14:09:26 -0800 (PST)
+In-Reply-To: <20101126074637.GS3274@jama>
+References: <AANLkTinbu9JpEw5fdX8pHcxraf4uTdCf7JKm9v1UekeS@mail.gmail.com>
+	<20101126074637.GS3274@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 30 Nov 2010 14:09:26 -0800
+Message-ID: <AANLkTi=Jcih2tFQYB2Qr2RJMAouZFFShfYmoWgE8M1rC@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimx+osQLb0Km1pXgQuPEwx3r1-ovhD9um_9p8GV@mail.gmail.com>	<1291133947.3599.16.camel@mattotaupa>
-	<AANLkTi=DUaiM6LhuWG6MVOntGBu7oikQm9QesD37zRj5@mail.gmail.com>
-In-Reply-To: <AANLkTi=DUaiM6LhuWG6MVOntGBu7oikQm9QesD37zRj5@mail.gmail.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: package request for Phonon-VLC backend
+Subject: Re: bluez-dtl1-workaround not provided?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,19 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 21:08:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 30 Nov 2010 22:11:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 11/30/2010 08:03 PM, Sylvain Par=E9 wrote:
-> Thanks for your interest!
-> here is my too recipes which are not soo valueable as it is mainly bump
-> version or so.
-> here my automoc-native :
->=20
+On Thu, Nov 25, 2010 at 11:46 PM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> On Thu, Nov 25, 2010 at 06:24:36PM +0100, Andrea Adami wrote:
+>> Hello,
+>>
+>> build from scratch of console image for c7x0/armv5te leads to:
+>
+> With new kernel I had this some time ago.. I'm using this patch since
+> then, but never send it here as I didn't look why this was needed
+> before..
+>
 
-sorry, I didn't completely follow the thread but qt4-tools-native install=
-s
-moc4, rcc4 and all the other tools to build Qt applications.
+patch looks ok to me. Please install into master and release branch
+
+Thx
+-Khem
+
+> --
+> Martin 'JaMa' Jansa =C2=A0 =C2=A0 jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
