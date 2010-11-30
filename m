@@ -1,31 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PNSwO-0008Ht-UA for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 17:20:29 +0100
-Received: from f053043073.adsl.alicedsl.de ([78.53.43.73]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PNSv7-0000zN-Fw for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Nov 2010 16:19:10 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <harvey.tim@gmail.com>) id 1PNTgI-0000wq-CO
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Nov 2010 18:07:55 +0100
+Received: by pvd12 with SMTP id 12so950325pvd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Nov 2010 09:06:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=iowz97AhL1DoK7FCXO7cNYqgjY89GKH9OCPc7mGuqns=;
+	b=vuZU+obE1ohnCE7oSlYEPMYwh5pMCGC1oM054eWL1r0rOdu5UkK4EzW2v9/5QUrMFQ
+	c7oU1cgklsxl8SRdb5qXd12hRWnsWeZ8GYtBUG9sXZ8/j7s8WmYXP5Qx5g9WK15nUp2s
+	pQ5kIVuLpqPq0xcDt/MId8ourY7V/8m8eiVTc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=G57Nhxncqs+XoqPzav/8wxdf+UtDE62rMKeey+M4MJgKCx05p5H0+dTCHYq1eAVwVZ
+	R5GXZGFA85gd6vfrvjpciteq5XwwTBV+RKWPiPJPdB2AfQKWvBAqeWdOlJQj0VS1Uxa+
+	gm1yFQZ3PCJvzgBBBqB68eXSQzYVta/lEHgwU=
+Received: by 10.142.43.5 with SMTP id q5mr7412230wfq.401.1291136792766;
+	Tue, 30 Nov 2010 09:06:32 -0800 (PST)
+Received: from localhost.localdomain ([76.205.222.173])
+	by mx.google.com with ESMTPS id b11sm9205768wff.21.2010.11.30.09.06.30
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 30 Nov 2010 09:06:31 -0800 (PST)
+From: Tim Harvey <harvey.tim@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimx+osQLb0Km1pXgQuPEwx3r1-ovhD9um_9p8GV@mail.gmail.com>
-References: <AANLkTimx+osQLb0Km1pXgQuPEwx3r1-ovhD9um_9p8GV@mail.gmail.com>
-Date: Tue, 30 Nov 2010 17:19:07 +0100
-Message-ID: <1291133947.3599.16.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Tue, 30 Nov 2010 09:05:38 -0800
+Message-Id: <1291136738-32061-1-git-send-email-harvey.tim@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: harvey.tim@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: package request for Phonon-VLC backend
+Subject: [PATCH] avrdude: does not reliably build with parallel make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,49 +51,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Nov 2010 16:20:29 -0000
-X-Groupsio-MsgNum: 26739
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-gehddrLGrD0mrlFvdqvE"
+X-List-Received-Date: Tue, 30 Nov 2010 17:07:55 -0000
 
---=-gehddrLGrD0mrlFvdqvE
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+disable parallel make for avrdude recipes
+Signed-off-by: Tim Harvey <harvey.tim@gmail.com>
+---
+ recipes/avrdude/avrdude.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-Dear Sylvain
-
-
-Am Dienstag, den 30.11.2010, 15:36 +0100 schrieb Sylvain Par=C3=A9:
-
-> I have a package request. If that interests somebody to make a receipe
-> for Phonon-VLC backend at it seem to be the most stable backend for
-> phononn according to Phonon's dev.
-> Like this we could have Phonon-VLC backend additionnaly to
-> Phonon-gstreamer one.
->=20
-> I tried to make one myself but I can't manage to fix automoc-native
-> (dependence) to make it build.
-
-please attach the work you have done so far with a Signed-off-by line.
-
-> Thanks by advance!
+diff --git a/recipes/avrdude/avrdude.inc b/recipes/avrdude/avrdude.inc
+index 679c4ba..3a387c3 100644
+--- a/recipes/avrdude/avrdude.inc
++++ b/recipes/avrdude/avrdude.inc
+@@ -9,3 +9,4 @@ SRC_URI = "http://savannah.nongnu.org/download/avrdude/avrdude-${PV}.tar.gz"
+ 
+ inherit autotools
+ 
++PARALLEL_MAKE = ""
+-- 
+1.7.0.4
 
 
-Thanks,
 
-Paul
-
---=-gehddrLGrD0mrlFvdqvE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkz1I/sACgkQPX1aK2wOHVha6wCfSWCcuFYRsoFeVa/Hax3pA1eo
-A/YAn0up42wiIxCEGo0rkRg/yRMZBW/L
-=m2sK
------END PGP SIGNATURE-----
-
---=-gehddrLGrD0mrlFvdqvE--
