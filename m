@@ -1,37 +1,37 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PNsBI-0000Wn-Ap
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PNsBH-0000Wm-Pw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 20:17:32 +0100
-Received: by fxm17 with SMTP id 17so4946537fxm.6
+	Wed, 01 Dec 2010 20:17:33 +0100
+Received: by fxm17 with SMTP id 17so4946529fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 01 Dec 2010 11:16:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:received:from:to:cc:subject
 	:date:message-id:x-mailer:in-reply-to:references:in-reply-to
-	:references; bh=jOQnvAulnaZGlw9fRvM4Ou8cIxmBfrTa0oRJZh/Piqc=;
-	b=NZtQ7PVdxuN2kQGIhpL5aEuPN6pwfhBkUo8l6716jf4DLLlj2al7YixORG7EtEhjAc
-	2deQuq3PXpBiPcumJrCkiDRoI01MKNKTb9soE/PGNmFZQGEiTbA+qfWAMRwNjHOUgpsV
-	1tfXw6DQrR6uD7lynG8zOJWcOZrq3BYH6n1cc=
+	:references; bh=w6TW7jfivMn2zKWA5AOTNpwm+CxOMzpyyUJSsTARGD0=;
+	b=Smcd6tEpgQCm0yu8mYcHfNsNV1ogLUSfIeCMaqWFZmJUr8dtYgg9lnWeqP73lPQ6kK
+	UujqFctbqT0VWSOXh2/onAv4iVpXSJ2znevXsZphl23sRJBDHA8FxhQUJjCXbZUbNm2k
+	ZaqM84YjI5tWu4Hg4XJVSCuM09CkJEkSU5ShE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=W+7aAcmh45AwD62jwdsWdlKu93vOleiG6razel5rjk08JeQ/ep7Tq9UnnJF+R0ng71
-	SOZvfKQ1VKydaWwYYlcAdPFMr09sj1gY3LTEO307KVkftj7NWFpTjjHfeY6YlGLe6VjP
-	oSosrlNXl6i4qwV04W8Veu6uy3evXk6YpHkog=
-Received: by 10.223.71.198 with SMTP id i6mr8741848faj.140.1291230970674;
+	b=BpskPmzt3ce+BNeXVK5MMC2N8r+XgXYjOecn32t5SSlkztaRLZyfRqADFAUcUvqKP8
+	j3Wol4ELxeTqB7AJZo93UW0QJvgEA15N7ZSvjRCQ/pn3fCxW9ggToRJfJiWa0SobV4Ui
+	2Ba6Dc7RXIiZP2Yolhhq1Bi9qyGhujwZ/mqzc=
+Received: by 10.223.101.131 with SMTP id c3mr8984890fao.95.1291230970146;
 	Wed, 01 Dec 2010 11:16:10 -0800 (PST)
 Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
 	[85.127.155.31])
-	by mx.google.com with ESMTPS id n3sm152468fax.31.2010.12.01.11.16.06
+	by mx.google.com with ESMTPS id a10sm154513fai.4.2010.12.01.11.16.06
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
 	Wed, 01 Dec 2010 11:16:07 -0800 (PST)
 Received: from cow by s42.loc with local (Exim 4.72)
 	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1PNs9s-0008KY-Sc; Wed, 01 Dec 2010 20:16:04 +0100
+	id 1PNs9s-0008KU-OG; Wed, 01 Dec 2010 20:16:04 +0100
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: Tom Rini <tom_rini@mentor.com>
-Date: Wed,  1 Dec 2010 20:15:54 +0100
-Message-Id: <1291230954-31990-4-git-send-email-rep.dot.nop@gmail.com>
+Date: Wed,  1 Dec 2010 20:15:52 +0100
+Message-Id: <1291230954-31990-2-git-send-email-rep.dot.nop@gmail.com>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1291230954-31990-1-git-send-email-rep.dot.nop@gmail.com>
 References: <1291230954-31990-1-git-send-email-rep.dot.nop@gmail.com>
@@ -46,7 +46,7 @@ X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 3/3] add ext4 image support
+Subject: [PATCH v2 1/3] e2fsprogs: add 1.41.12, remove old versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,42 +60,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 19:17:32 -0000
+X-List-Received-Date: Wed, 01 Dec 2010 19:17:34 -0000
 
 Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 ---
- conf/bitbake.conf      |    4 ++++
- conf/local.conf.sample |    2 +-
- 2 files changed, 5 insertions(+), 1 deletions(-)
+ recipes/e2fsprogs/e2fsprogs_1.41.12.bb |   10 ++++++++++
+ recipes/e2fsprogs/e2fsprogs_1.41.9.bb  |   10 ----------
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+ create mode 100644 recipes/e2fsprogs/e2fsprogs_1.41.12.bb
+ delete mode 100644 recipes/e2fsprogs/e2fsprogs_1.41.9.bb
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index f1dc0ff..b476f28 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -369,6 +369,10 @@ IMAGE_CMD_ext2.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -b ${RO
- IMAGE_CMD_ext3 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"
- IMAGE_CMD_ext3.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz"
- IMAGE_CMD_ext3.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext3.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.bz2"
-+IMAGE_CMD_ext4 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac;"
-+IMAGE_CMD_ext4.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; set +e;e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.gz"
-+IMAGE_CMD_ext4.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.bz2"
+diff --git a/recipes/e2fsprogs/e2fsprogs_1.41.12.bb b/recipes/e2fsprogs/e2fsprogs_1.41.12.bb
+new file mode 100644
+index 0000000..5798501
+--- /dev/null
++++ b/recipes/e2fsprogs/e2fsprogs_1.41.12.bb
+@@ -0,0 +1,10 @@
++require e2fsprogs.inc
 +
- IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
- IMAGE_CMD_squashfs-lzma = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend -comp lzma"
- IMAGE_CMD_tar = "cd ${IMAGE_ROOTFS} && tar -cvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar ."
-diff --git a/conf/local.conf.sample b/conf/local.conf.sample
-index 1085163..7dfb7d7 100644
---- a/conf/local.conf.sample
-+++ b/conf/local.conf.sample
-@@ -118,7 +118,7 @@ PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
- # INHERIT = "package_tar"
- 
- # Add the required image file system types below. Valid are 
--# jffs2, tar(.gz|bz2), cpio(.gz), cramfs, ext2(.gz), ext3(.gz)
-+# jffs2, tar(.gz|bz2), cpio(.gz), cramfs, ext2(.gz), ext3(.gz), ext4(.gz|.bz2),
- # squashfs, squashfs-lzma
- IMAGE_FSTYPES = "jffs2 tar"
- 
++PR = "${INC_PR}"
++
++do_configure() {
++        oe_runconf
++}
++
++SRC_URI[md5sum] = "1b24a21fc0c2381ef420961cbfec733f"
++SRC_URI[sha256sum] = "9c26d0dc20bfdafd0f27f3564791d6121d1c1876549d4f2ff1e41955c9bb9f20"
+diff --git a/recipes/e2fsprogs/e2fsprogs_1.41.9.bb b/recipes/e2fsprogs/e2fsprogs_1.41.9.bb
+deleted file mode 100644
+index 6a8c113..0000000
+--- a/recipes/e2fsprogs/e2fsprogs_1.41.9.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require e2fsprogs.inc
+-
+-PR = "${INC_PR}"
+-
+-do_configure() {
+-        oe_runconf
+-}
+-
+-SRC_URI[md5sum] = "52f60a9e19a02f142f5546f1b5681927"
+-SRC_URI[sha256sum] = "cbf1e34261a16b3d7911b60b91290b19f2010036d6ba628d45b5f0b2af2b66e8"
 -- 
 1.7.2.3
 
