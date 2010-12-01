@@ -1,30 +1,35 @@
-Received: from note.orchestra.cse.unsw.edu.au ([129.94.242.24])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jayen@cse.unsw.edu.au>) id 1PNulY-0004PF-Gs
+	(envelope-from <robert@erafx.com>) id 1PNvSg-0004zQ-4q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 23:03:11 +0100
-Received: From [129.94.172.249] ([129.94.172.249] == tigger.cse.unsw.EDU.AU)
-	(auth-user jayen) (cse-authentic-sender jayen)
-	By note With Smtp ; Thu, 2 Dec 2010 09:01:38 +1100 
-From: Jayen Ashar <jayen@cse.unsw.edu.au>
-To: eric@eukrea.com
-Date: Thu, 02 Dec 2010 09:06:08 +1100
-Message-ID: <4CF6C6D0.5040205@cse.unsw.edu.au>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
+	Wed, 01 Dec 2010 23:47:43 +0100
+Received: by qyk8 with SMTP id 8so2991821qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Dec 2010 14:46:19 -0800 (PST)
 MIME-Version: 1.0
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 129.94.242.24
-X-SA-Exim-Mail-From: jayen@cse.unsw.edu.au
+Received: by 10.229.251.209 with SMTP id mt17mr7379963qcb.131.1291243579134;
+	Wed, 01 Dec 2010 14:46:19 -0800 (PST)
+Received: by 10.220.194.65 with HTTP; Wed, 1 Dec 2010 14:46:19 -0800 (PST)
+X-Originating-IP: [24.165.208.114]
+In-Reply-To: <20101201185406.GC20482@excalibur.local>
+References: <4CF68D24.80900@lambsys.com>
+	<20101201180621.GB20482@excalibur.local>
+	<4CF69653.5000504@lambsys.com>
+	<20101201185406.GC20482@excalibur.local>
+Date: Wed, 1 Dec 2010 17:46:19 -0500
+Message-ID: <AANLkTins+XE2Zq2P=wBHUc9N9XvD0f+t7zdyVjNevggS@mail.gmail.com>
+From: Robert Foerster <robert@erafx.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: robert@erafx.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS, SPF_NEUTRAL,
-	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] qwt: QT_LIBINFIX not being resolved when, running qmake
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,71 +43,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 22:03:11 -0000
+X-List-Received-Date: Wed, 01 Dec 2010 22:47:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Dec 1, 2010 at 1:54 PM, Stefan Schmidt <stefan@datenfreihafen.org>wrote:
 
-I'm using the master branch for qwt, but I'm supporting an old fork of
-OE, so I was using a snapshot at
-cb429c4b7ae91b538603e771685aa39f020a5b6e (2009-06-24) for qt4-x11-free.
-
-Thanks for that,
-Jayen
-
-- -------- Original Message --------
-Subject: Openembedded-devel Digest, Vol 53, Issue 3
-Date: Wed, 01 Dec 2010 09:55:55 +0100
-From: openembedded-devel-request@lists.openembedded.org
-Reply-To: openembedded-devel@lists.openembedded.org
-To: openembedded-devel@lists.openembedded.org
-
-Message: 2
-Date: Wed, 01 Dec 2010 07:48:17 +0100
-From: Eric B?nard <eric@eukrea.com>
-Subject: Re: [oe] [PATCH] qwt: QT_LIBINFIX not being resolved when
-	running qmake
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <4CF5EFB1.2010000@eukrea.com>
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-
-On 01/12/2010 05:47, Jayen Ashar wrote:
-> Fixed a problem where qmake would create a directory called 'obj${QT_LIBINFIX}'
-> instead of resolving the QT_LIBINFIX variable and creating the appropriately
-> resolved directory.
+> Hello.
 >
-> Signed-off-by: Jayen Ashar<jayen@cse.unsw.edu.au>
-> ---
->   recipes/qwt/qwt.inc |    2 +-
->   1 files changed, 1 insertions(+), 1 deletions(-)
+> On Wed, 2010-12-01 at 12:39, David Lambert wrote:
+> > That is indeed the version of documentation that I was reading. To
+> > be more specific, one of the subjects I was attempting to look up
+> > was how to specialize a recipe using "amend.inc". I do not see any
+> > documentation on this subject.
 >
-> diff --git a/recipes/qwt/qwt.inc b/recipes/qwt/qwt.inc
-> index 62c8656..89035c1 100644
-> --- a/recipes/qwt/qwt.inc
-> +++ b/recipes/qwt/qwt.inc
-> @@ -10,7 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=qwt"
->   S = "${WORKDIR}/qwt-${PV}"
+> We lack a good technical writer in the community. IIRC there was a blogpost
+> from
+> Khem about it and maybe some more infos on the mailling list. Thats of
+> course
+> not the most straight forward location for the information.
 >
->   do_configure_prepend() {
-> -	sed -i -e 's:RELEASE_SUFFIX      = :RELEASE_SUFFIX      = ${QT_LIBINFIX}:' *.pri
-> +	sed -i -e 's:RELEASE_SUFFIX      = :RELEASE_SUFFIX      = $\${QT_LIBINFIX}:' *.pri
->   	sed -i -e s:lqwt:lqwt${QT_LIBINFIX}:g -e s:/usr/local/qwt-$\${QwtVersion}:${prefix}:g *.prf
->   	sed -e 's/#CONFIG     += QwtExamples/CONFIG     += QwtExamples/g' -i qwtconfig.pri
->   	sed -i -e s:/usr/local/qwt-${PV}:${D}${prefix}:g ${S}/*.pri
+> If you searched together the information it would be great if you could
+> send a
+> patch updating the manual with it. :)
+>
+> regards
+> Stefan Schmidt
+>
+>
+I'm not an expert on the subject, but I've managed to utilize amend.inc
+based on some information I pieced together from the irc logs.  I hope to
+soon write an article on how to use amend.inc, but haven't yet found the
+time.
 
-Are you using the release branch ?
+(This is far from authoritative, but it's been working for me here)
 
-this should be fixed in 26002b31b7232ee71249cc39fd8184d80ecb9ec2
+You need to add the following to build-dir/conf/local.conf (can also go in
+overlay/conf/site.conf).
+INHERIT += "amend"
 
-Eric
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+DEV_BASE = "${HOME}/dev/openembedded/dev"
+COLLECTIONS = "${DEV_BASE}/overlay/recipes \
+                ${DEV_BASE}/openembedded/recipes"
 
-iEYEARECAAYFAkz2xs0ACgkQGplE/Ggo/I5OlgCgoOw/af/XFsR/zebOMg4hQ+Ll
-OTUAn2RwO/4SsKG6foVJIvvPNt3CCJjU
-=O2SL
------END PGP SIGNATURE-----
+# By default, file:// SRC_URIs only look under the current .bb file.
+# Prepend our overlays into the file:// search path, so we can override
+# openembedded recipes' SRC_URI files. Also, ensure the openembedded
+# files are always in the search path, so our overlay .bb's can
+# reference upstream files.
+FILESPATHBASE =. "${@ \
+        ':'.join([os.path.join(recipedir, \
+                                os.path.basename(os.path.dirname( \
+                                                        d.getVar('FILE',
+1)))) \
+                for recipedir in d.getVar('COLLECTIONS', 1).split()])}:"
 
+
+You'll need to make DEV_BASE and COLLECTIONS match your setup.  This assumes
+that I have two trees with recipes:
+ - openembedded
+ - overlay
+
+This makes sure that for a given recipe, my local overlay will be in its
+FILESPATH.
+
+
+Now, for example, I've added a patch to psplash to adjust the colors.
+In overlay/recipes/psplash/ I have two files:
+amend.inc:
+PR .= "-amend"
+SRC_URI += "file://0001-tweaked-for-company-colors.patch"
+
+and my patch, named 0001-tweaked-for-company-colors.patch
+
+Now, the new patch will be applied when psplash is built.  Also, I like
+updating PR with -amend, this way the package is now shown
+as psplash-0.0+svnr422-r34-amend, so that I can easily tell that I've
+amended the package.
+
+I'm sure there are others who can provide more/better information, but
+that'll hopefully get you started.
+
+Regards,
+Bob Foerster
 
