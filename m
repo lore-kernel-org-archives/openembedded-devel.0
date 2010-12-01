@@ -1,42 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PNpp7-0005iI-9f for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 17:46:29 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PNpnl-0001cw-Hh for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 17:45:05 +0100
-Received: from adsl-76-205-222-173.dsl.snlo01.sbcglobal.net ([76.205.222.173])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Dec 2010 17:45:05 +0100
-Received: from harvey.tim by adsl-76-205-222-173.dsl.snlo01.sbcglobal.net with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <harvey.tim@gmail.com>) id 1PNqhc-0006ja-7D
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Dec 2010 18:42:48 +0100
+Received: by pzk12 with SMTP id 12so1065297pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Dec 2010 17:45:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
+	Wed, 01 Dec 2010 09:41:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=0orB2QH7+AXyPuTMsTFK3qLcune/KJKTIBjmOvan5zY=;
+	b=V/lql1H45JPD4g5ehKRcs594LfYtyAB02GIywd2H2JoFcL/baulWGwdIMtjb+CWht9
+	1kWCi3Ryk7MHLMeVXlfp7wf0BEubAxHuCsJtuyRBUkGfhTbpzyQFwf4pYnpn2MMWvO6h
+	rpaWDvyznomA9iaFkYEMkJh5qezrDa/T8V8Pg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=YMARcpef0KBwTr3hdOHpnU9uPkrOoaeo5c2QsXewRGC3tObHUQRUU1QlM9+r1nE/KU
+	R0msmKkYxgdCxBomjPXuxAc9R+LAPb2GAyVIvWBF5KyAMUCcebk8tapEaqTi5Ir3y+D8
+	jDCoo9vCWYZ7y3bg8lcun1lrkDpH6DRddOcow=
+Received: by 10.142.166.7 with SMTP id o7mr9125269wfe.428.1291225285441;
+	Wed, 01 Dec 2010 09:41:25 -0800 (PST)
+Received: from localhost.localdomain ([76.205.222.173])
+	by mx.google.com with ESMTPS id p8sm258053wff.4.2010.12.01.09.41.23
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 01 Dec 2010 09:41:24 -0800 (PST)
 From: Tim Harvey <harvey.tim@gmail.com>
-Date: Wed, 01 Dec 2010 08:43:22 -0800
-Message-ID: <id5tvi$2qn$2@dough.gmane.org>
-References: <4CF498B4.4070206@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: adsl-76-205-222-173.dsl.snlo01.sbcglobal.net
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
-In-Reply-To: <4CF498B4.4070206@gmail.com>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  1 Dec 2010 09:41:09 -0800
+Message-Id: <1291225269-21801-1-git-send-email-harvey.tim@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: harvey.tim@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: 0@lo.gmane.org
-Subject: Re: [PATCH] openjade_1.3.2.bb: Install catalog with the correct path.
+Subject: [PATCHv2] avrdude: update SRC_URI and fix deps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,61 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 16:46:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Dec 2010 17:42:49 -0000
 
-On 11/29/2010 10:24 PM, Graham Gower wrote:
-> Openjade was doing the following:
-> install-catalog: addition of /mnt/oe/tmp/work/x86_64-linux/openjade-native-1.3.2-r4/image/mnt/oe/tmp/sysroots/x86_64-linux/share/sgml/openjade-1.3.2/catalog in /mnt/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat
->
-> Which was causing lengthy errors like this one:
-> http://tinderbox.openembedded.org/packages/1149296/
->
-> Now I get:
-> install-catalog: addition of /mnt/oe/tmp/sysroots/x86_64-linux/share/sgml/openjade-1.3.2/catalog in /mnt/oe/tmp/sysroots/x86_64-linux/etc/sgml/openjade-1.3.2.cat
->
-> Signed-off-by: Graham Gower<graham.gower@gmail.com>
-> ---
->   recipes/openjade/openjade_1.3.2.bb |    7 +++++--
->   1 files changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/openjade/openjade_1.3.2.bb b/recipes/openjade/openjade_1.3.2.bb
-> index a84e899..6c69173 100644
-> --- a/recipes/openjade/openjade_1.3.2.bb
-> +++ b/recipes/openjade/openjade_1.3.2.bb
-> @@ -5,7 +5,7 @@ DESCRIPTION = "OpenJade is a suite of tools for validating, \
->   processing, and applying DSSSL (Document Style Semantics and \
->   Specification Language) stylesheets to SGML and XML documents."
->   LICENSE = "BSD"
-> -PR = "r4"
-> +PR = "r5"
->   SRC_URI = "${SOURCEFORGE_MIRROR}/openjade/openjade-${PV}.tar.gz \
->   	   file://configure.patch \
->   	   file://autoconf.patch \
-> @@ -42,8 +42,11 @@ do_install_append () {
->          install -m 644 dsssl/catalog ${D}${datadir}/sgml/openjade-${PV}
->          install -m 644 dsssl/*.{dtd,dsl,sgm} ${D}${datadir}/sgml/openjade-${PV}
->
-> +       # The catalog must live in the sysroot and it must be there for
-> +       # install-catalog to do its thing.
-> +       install -m 644 dsssl/catalog ${datadir}/sgml/openjade-${PV}
->          install-catalog --add ${sysconfdir}/sgml/openjade-${PV}.cat \
-> -           ${D}${datadir}/sgml/openjade-${PV}/catalog
-> +           ${datadir}/sgml/openjade-${PV}/catalog
->
->          install-catalog --add ${sysconfdir}/sgml/sgml-docbook.cat \
->              ${sysconfdir}/sgml/openjade-${PV}.cat
+* SRC_URI updated to new location
+* Makefile.am patched to fix missing dep causing parallel make issue
 
-Acked-by: Tim Harvey <harvey.tim@gmail.com>
+Signed-off-by: Tim Harvey <harvey.tim@gmail.com>
+---
+ recipes/avrdude/avrdude.inc        |    5 ++++-
+ recipes/avrdude/avrdude/make.patch |   14 ++++++++++++++
+ 2 files changed, 18 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/avrdude/avrdude/make.patch
 
-Thanks - I've been running into this for quite some time now with 
-parallel builds and haven't been able to figure out what wasn't being 
-staged properly.
-
-This needs to get into release-2010.12 if someone can cherry-pick it.
-
-Tim
+diff --git a/recipes/avrdude/avrdude.inc b/recipes/avrdude/avrdude.inc
+index 679c4ba..4679c7a 100644
+--- a/recipes/avrdude/avrdude.inc
++++ b/recipes/avrdude/avrdude.inc
+@@ -5,7 +5,10 @@ LICENSE = "GPLv2"
+ 
+ DEPENDS = "virtual/libusb0 ncurses"
+ 
+-SRC_URI = "http://savannah.nongnu.org/download/avrdude/avrdude-${PV}.tar.gz"
++SRC_URI = " \
++   http://savannah.nongnu.org/releases/avrdude/avrdude-${PV}.tar.gz \
++   file://make.patch \
++   "
+ 
+ inherit autotools
+ 
+diff --git a/recipes/avrdude/avrdude/make.patch b/recipes/avrdude/avrdude/make.patch
+new file mode 100644
+index 0000000..30b3b1d
+--- /dev/null
++++ b/recipes/avrdude/avrdude/make.patch
+@@ -0,0 +1,14 @@
++fix missing deps causing build failure on parallel make
++Index: avrdude-5.10/Makefile.am
++===================================================================
++--- avrdude-5.10.orig/Makefile.am	2010-12-01 09:17:41.675507203 -0800
+++++ avrdude-5.10/Makefile.am	2010-12-01 09:17:44.474882497 -0800
++@@ -155,6 +155,8 @@
++ 
++ sysconf_DATA = avrdude.conf
++ 
+++config.c: config_gram.h
+++
++ install-exec-local: backup-avrdude-conf
++ 
++ distclean-local:
+-- 
+1.7.0.4
 
 
 
