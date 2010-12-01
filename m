@@ -1,43 +1,33 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1PNiXI-0003uV-Ef
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Alexander.Stohr@gmx.de>) id 1PNif5-0004To-Ef
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 09:59:36 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id F3931A56C9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Dec 2010 08:58:14 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id BJ2c00IlY2Gb
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Dec 2010 08:58:14 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 1FF65A5643
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Dec 2010 08:58:13 +0000 (GMT)
-Message-ID: <4CF60E25.5070506@xora.org.uk>
-Date: Wed, 01 Dec 2010 08:58:13 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+	Wed, 01 Dec 2010 10:07:39 +0100
+Received: (qmail 19244 invoked by uid 0); 1 Dec 2010 09:06:18 -0000
+Received: from 193.8.40.126 by www140.gmx.net with HTTP;
+	Wed, 01 Dec 2010 10:06:16 +0100 (CET)
+Date: Wed, 01 Dec 2010 10:06:16 +0100
+From: "Alexander Stohr" <Alexander.Stohr@gmx.de>
+Message-ID: <20101201090616.204910@gmx.net>
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinyc8Pnpd3XMnTu=psPPHAmGKi4+DjvgWhSE1jt@mail.gmail.com>	<20101130082314.GL10755@ibawizard.net>	<AANLkTikmbUDpw04xqRYE+pwY1_mBUNNOdfL+LdnahUrC@mail.gmail.com>	<20101201084510.GM10755@ibawizard.net>	<AANLkTikCDnhP-SoKC+fx-N-Tst3O7-AE_dkNz_g=gCo5@mail.gmail.com>
-	<AANLkTik_w9__s=gBQ=YeseiEbVptaPgrjdbwv8c=jbLn@mail.gmail.com>
-In-Reply-To: <AANLkTik_w9__s=gBQ=YeseiEbVptaPgrjdbwv8c=jbLn@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-Authenticated: #15156664
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX1+r9H09h12rmMGF6QOtEGOzHGwKSY2z8WDcKV3rZw
+	KX3QD+t2JMM2GwUPclY67w1hWt4Ynb1hUj8A== 
+X-GMX-UID: OyfEfT94IydmD50gk2drL3NSa2FkZlVI
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: Alexander.Stohr@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release-2010 - last moment hot fixes
+Cc: bitbake-dev@lists.berlios.de
+Subject: request for versioning on user manual.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 08:59:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 01 Dec 2010 09:07:40 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On 01/12/2010 08:54, Graham Gower wrote:
-> On 1 December 2010 19:21, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> 2010/12/1 Petr =C5=A0tetiar <ynezz@true.cz>:
->>> Khem Raj <raj.khem@gmail.com> [2010-11-30 10:12:08]:
->>>
->>>> Do we already have some resolutions to these issues ? are there
->>>> existing patches
->>> Yes, there are few patches around, but Koen didn't told us yet[1] wha=
-t
->>> fix/workaround he would preffer for Angstrom 2008/2010.
->>>
->>> 1. http://www.mail-archive.com/openembedded-devel@lists.openembedded.=
-org/msg13494.html
->>>
->>> -- ynezz
->> OE is more than angstrom, and no single distro should  block progress
->> for the rest, even not if it is the primary distro.
->> My suggestion would be to upgrade uclibc + binutils. to fix things.
->> Angstrom then can (and probably already does) pin the current versions=
-.
->>
->> My 2 cents, Frans.
->>
-> The alternative is remove uclibc bits from the angstrom distro conf,
-> removing all doubt about its current status as unsupported/nonworking.
->
->
-Wait a minute here, all the reports I keep seeing are a failure to
-compile in 3 non essential tools. I think as Angstrom maintainer Im
-quite happy for that state to exist in a release. I know I wouldnt be
-using OpenGL and h264 video on a uclibc target.
+i have two PDF documents for e.g. offline reading and archiving.
 
-Graeme
+both are titled:
+  OpenEmbedded User Manual
+
+both including the follwoing words in their preface:
+  Copyright © 2006, 2007, 2008, 2009 Holger Hans Peter FreytherKoen KooiDetlef VollmannJamie LenehanMarcin JuszkiewiczRolf Leggewie
+
+the origin of these documents is not clear to me.
+it might be the result from a build process or a PDF printed from the web.
+
+the one document has 147 pages and other has 151 pages
+and i have really no clue which one is the more recent one
+or the recommended one. the PDF internal property values are simply useless.
+
+how about adding a useable versioning to this document?
+i think of something that will be persistent even if printed on white paper.
 
 
+regards, Alex.
+
+PS: i think a very similar improvement can and should be done to the bitbake manuals.
+-- 
+GRATIS! Movie-FLAT mit über 300 Videos. 
+Jetzt freischalten unter http://portal.gmx.net/de/go/maxdome
 
 
