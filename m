@@ -1,31 +1,43 @@
-Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1PNhIY-0001uN-L4
+	(envelope-from <martin.jansa@gmail.com>) id 1PNheK-0002bc-Ay
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 08:40:19 +0100
-Received: (qmail 18066 invoked by uid 2404007); 1 Dec 2010 07:38:59 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from chello089073120020.chello.pl (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@89.73.120.20)
-	by host4.kei.pl with ESMTPA; 1 Dec 2010 07:38:58 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Wed, 01 Dec 2010 09:02:52 +0100
+Received: by fxm17 with SMTP id 17so4368210fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Dec 2010 00:01:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=I7KzG93tmekZkSJracZ9UxF7b//tz16Er7I4TTMQEPw=;
+	b=F92x/qLIKXv0zOVgYlSPBMei6CQLwvYVWS/AJUZOAEAS8NVylpnco9/JxMFcN/L0c9
+	d46iDH0ftCaTXer6bGDyaDwfemLtPsYsz8jqeWWE3D8LU0WXxvTmV18D3WZdLCbjQv+l
+	Ockl/X19rmualVXTJqlYayg0THC360DiPI8IM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=nZMAb21S4w7khsrIqax9iGnyd5WtuOOwxVwMa3KN8tYdgxwqBE4wlnp5PvXU3G6uMP
+	vnJulYwdFWYzM9+c6RnwQ1FPfK6HOrLTqBq4F/OVuftxqEvcBUPeczFZnZI6FNQCO7at
+	qMUNWi+nwzUjokTjvlHqU/tMSc1IwOQ8A3TwY=
+Received: by 10.223.118.211 with SMTP id w19mr227568faq.14.1291190486922;
+	Wed, 01 Dec 2010 00:01:26 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id e17sm1942964fak.34.2010.12.01.00.01.25
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 01 Dec 2010 00:01:26 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 1 Dec 2010 08:40:48 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.36-0-generic; KDE/4.5.80; x86_64; ; )
-References: <20101130182855.GA5759@gmail.com>
-	<20101130184222.GA19832@excalibur.local>
-In-Reply-To: <20101130184222.GA19832@excalibur.local>
-MIME-Version: 1.0
-Message-Id: <201012010840.49388.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 94.152.8.4
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Date: Wed,  1 Dec 2010 09:01:22 +0100
+Message-Id: <1291190482-6925-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.3.2
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Commit Access for Graham Gower (grg)
+Subject: [PATCH] opkg: move OPKG_SRCREV to opkg.inc directly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +51,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 07:40:19 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 01 Dec 2010 08:02:52 -0000
 
-Dnia wtorek, 30 listopada 2010 o 19:42:23 Stefan Schmidt napisa=C5=82(a):
+* now OPKG_SRCREV was used only in this one .inc, so move it there
 
-> Indeed. Actually I wonder why he does not already have commit access.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ conf/distro/include/sane-srcrevs.inc |    2 --
+ recipes/opkg/opkg.inc                |    2 +-
+ 2 files changed, 1 insertions(+), 3 deletions(-)
 
-I am also surprised - I thought that he has r/w already.
+diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
+index ab8fa89..9531ae4 100644
+--- a/conf/distro/include/sane-srcrevs.inc
++++ b/conf/distro/include/sane-srcrevs.inc
+@@ -1,5 +1,3 @@
+-# this is alphabetical!
+ # only SRCREVs included in more recipes should be here, otherwise put sane SRCREV to recipe directly
+ 
+-OPKG_SRCREV ?= "587"
+ EFL_SRCREV ?= "54714"
+diff --git a/recipes/opkg/opkg.inc b/recipes/opkg/opkg.inc
+index 0d84626..93d71e0 100644
+--- a/recipes/opkg/opkg.inc
++++ b/recipes/opkg/opkg.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Opkg Package Manager"
+ DESCRIPTION_libopkg = "Opkg Package Manager Library"
+ SECTION = "base"
+ LICENSE = "GPLv2"
+-SRCREV = ${OPKG_SRCREV}
++SRCREV = "587"
+ PV = "0.1.8+svnr${SRCPV}"
+ CONFLICTS = "ipkg"
+ INC_PR = "r3"
+-- 
+1.7.3.2
 
-So I support giving r/w access to Graham Gower.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
