@@ -1,46 +1,41 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PNoBr-0003yA-OU
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 16:01:52 +0100
-Received: by iwn8 with SMTP id 8so5920025iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PNplW-0005We-Nd for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Dec 2010 17:42:47 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PNpk5-0007mf-Qo for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Dec 2010 17:41:17 +0100
+Received: from adsl-76-205-222-173.dsl.snlo01.sbcglobal.net ([76.205.222.173])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Dec 2010 17:41:17 +0100
+Received: from harvey.tim by adsl-76-205-222-173.dsl.snlo01.sbcglobal.net with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Dec 2010 07:00:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=//uRGwpLSJMlqEKQaJz4Sc0ZrCVAyx3Fg9xOEXaaCIY=;
-	b=djNdWobgqDbPq11NEny3G0Offox0yDMTaAtCbfIoOVbH5wnD0ZN9gwIgFLUCgIN5Fu
-	t8AbpG8yx2OS3WR13P/rsUo52AHjmniH0Fa1DS3urHM391YC6+7ZFkVF9Oic0nj3qhaA
-	SsSS+R156qGaASNgzNL89HDJupb37QWPZIdX8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=kKlYQC1xmNpaN4tADNAU8vmrUXdW46LaLptKixgUSnaaJG8AQ2eMgIwdqVs31wLMnW
-	HHG6dLvvXzf0i9gOtfuqQQGOyoaMGn4dUHz32RBe5d3FBrWDziNAeT7k9wRs7cluwn1t
-	/MZ7AeHmhXb2QQDll7Zjah5A0ZU/+aUA5EEes=
-MIME-Version: 1.0
-Received: by 10.231.191.4 with SMTP id dk4mr9120893ibb.82.1291215630458; Wed,
-	01 Dec 2010 07:00:30 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Wed, 1 Dec 2010 07:00:30 -0800 (PST)
-In-Reply-To: <4CF65AB7.9070603@mentor.com>
-References: <1291211567-2520-1-git-send-email-Martin.Jansa@gmail.com>
-	<AANLkTikkpAXLe9ZAvp=CPC1gVjngeGfQHqV2-sCtjwPG@mail.gmail.com>
-	<4CF65AB7.9070603@mentor.com>
-Date: Wed, 1 Dec 2010 16:00:30 +0100
-Message-ID: <AANLkTi=Svdm8ZFt7pDcpwmDafQfZqsofMwDPk7S3hF6a@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 01 Dec 2010 17:41:17 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Tim Harvey <harvey.tim@gmail.com>
+Date: Wed, 01 Dec 2010 08:40:56 -0800
+Message-ID: <4CF67A98.2010708@gmail.com>
+References: <4CF4B540.4020108@cisco.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: adsl-76-205-222-173.dsl.snlo01.sbcglobal.net
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+In-Reply-To: <4CF4B540.4020108@cisco.com>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] module-init-tools: fix multiple runtime providers
+Subject: Re: gstreamer not getting populated in file system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,26 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 15:01:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 01 Dec 2010 16:42:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/12/1 Tom Rini <tom_rini@mentor.com>:
-> On 12/01/2010 07:11 AM, Frans Meulenbroeks wrote:
->>
-
->> still not really sure why we have module-init-tools-cross though.
->> A quick search did not give me a user (but maybe the search was too quic=
-k)
->> And still unsure why a cross recipe should produce a =A0package.
->> And maybe it should be module-init-tools-native ?
+On 11/30/2010 12:26 AM, harshada wrote:
+> We created new image by adding following into minimal-image.bb:
+> gstreamer \
+> gst-plugins-base \
+> gst-plugins-good \
+> gst-plugins-bad \
+> gst-plugins-ugly
+> Image is getting built without any compiling issues. But we are not able
+> to find required
+> gstreamer plugins in the file system image. In ipk directory, we could
+> find all of the corresponding ipks.
+> What to do to get the filesystem populated with these gstreamer plugins?
 >
-> It's used for running depmod on images during creation, iirc.
+> thanks and regards,
+> Harshada
 
-Do these produce packages (apart from packaged staging).
-I would expect it to install its stuff in cross or sysroots or so and be do=
-ne.
+I believe you need to place the actual plugins in your image - do a find 
+tmp/deploy/ipk -name gst-plugin-*
 
-Frans
+Tim
+
 
 
