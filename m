@@ -1,43 +1,43 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PNiVp-0003nn-Jy
+	(envelope-from <dp@xora.org.uk>) id 1PNiXI-0003uV-Ef
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 09:58:07 +0100
-Received: by wwi17 with SMTP id 17so1245589wwi.24
+	Wed, 01 Dec 2010 09:59:36 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id F3931A56C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Dec 2010 00:56:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=nAIoMRxiTdGgPbti8FSAyVMc4p8clHQOvQhP4jijQME=;
-	b=MU4Tinmkojkc45mM0sjeIGADnvvwCKBJ2q+95cmBssSTFrJK0NOWUxO8d9HAlyBmkC
-	69xrnQmmy2iX5YjctELrtsZWNwMVNX08/QiylZGiBoIiQvMKJJZUlF/1rLP5AVUnIeHM
-	NkBYFkGH934Q0CU1MF0Wz+a1VLOzRNvPcVz6s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=dZvEymLZbL+jHvaVKObGXoeiBj2cZekA73ERmaGu1OVOx4nU6K8oZ37BVSvtmW7xhV
-	3ndLRRrC2iyhtPMP6BT63u0V9YBkHyaYPgdMHSjMn+4wO3Zo5p+5Dgiox9WCdMlwcu52
-	ZQ0pBLOcKF3snaNblFFavtRDZ5iewOdhDp7C8=
+	Wed,  1 Dec 2010 08:58:14 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id BJ2c00IlY2Gb
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Dec 2010 08:58:14 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 1FF65A5643
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Dec 2010 08:58:13 +0000 (GMT)
+Message-ID: <4CF60E25.5070506@xora.org.uk>
+Date: Wed, 01 Dec 2010 08:58:13 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.227.134.149 with SMTP id j21mr8981360wbt.194.1291193804038;
-	Wed, 01 Dec 2010 00:56:44 -0800 (PST)
-Received: by 10.227.32.147 with HTTP; Wed, 1 Dec 2010 00:56:44 -0800 (PST)
-In-Reply-To: <1291190482-6925-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1291190482-6925-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Wed, 1 Dec 2010 19:26:44 +1030
-Message-ID: <AANLkTi=s1G3BmrUoe2Bzz8DpHxzt1RB2BPyUMLPWDDYb@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+References: <AANLkTinyc8Pnpd3XMnTu=psPPHAmGKi4+DjvgWhSE1jt@mail.gmail.com>	<20101130082314.GL10755@ibawizard.net>	<AANLkTikmbUDpw04xqRYE+pwY1_mBUNNOdfL+LdnahUrC@mail.gmail.com>	<20101201084510.GM10755@ibawizard.net>	<AANLkTikCDnhP-SoKC+fx-N-Tst3O7-AE_dkNz_g=gCo5@mail.gmail.com>
+	<AANLkTik_w9__s=gBQ=YeseiEbVptaPgrjdbwv8c=jbLn@mail.gmail.com>
+In-Reply-To: <AANLkTik_w9__s=gBQ=YeseiEbVptaPgrjdbwv8c=jbLn@mail.gmail.com>
+X-Enigmail-Version: 1.1.1
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] opkg: move OPKG_SRCREV to opkg.inc directly
+Subject: Re: release-2010 - last moment hot fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,14 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 08:58:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 01 Dec 2010 08:59:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 1 December 2010 18:31, Martin Jansa <martin.jansa@gmail.com> wrote:
-> * now OPKG_SRCREV was used only in this one .inc, so move it there
+On 01/12/2010 08:54, Graham Gower wrote:
+> On 1 December 2010 19:21, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> 2010/12/1 Petr =C5=A0tetiar <ynezz@true.cz>:
+>>> Khem Raj <raj.khem@gmail.com> [2010-11-30 10:12:08]:
+>>>
+>>>> Do we already have some resolutions to these issues ? are there
+>>>> existing patches
+>>> Yes, there are few patches around, but Koen didn't told us yet[1] wha=
+t
+>>> fix/workaround he would preffer for Angstrom 2008/2010.
+>>>
+>>> 1. http://www.mail-archive.com/openembedded-devel@lists.openembedded.=
+org/msg13494.html
+>>>
+>>> -- ynezz
+>> OE is more than angstrom, and no single distro should  block progress
+>> for the rest, even not if it is the primary distro.
+>> My suggestion would be to upgrade uclibc + binutils. to fix things.
+>> Angstrom then can (and probably already does) pin the current versions=
+.
+>>
+>> My 2 cents, Frans.
+>>
+> The alternative is remove uclibc bits from the angstrom distro conf,
+> removing all doubt about its current status as unsupported/nonworking.
 >
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
+Wait a minute here, all the reports I keep seeing are a failure to
+compile in 3 non essential tools. I think as Angstrom maintainer Im
+quite happy for that state to exist in a release. I know I wouldnt be
+using OpenGL and h264 video on a uclibc target.
 
-Acked-by: Graham Gower <graham.gower@gmail.com>
+Graeme
+
+
 
 
