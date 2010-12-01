@@ -1,33 +1,33 @@
 Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PNcV3-0004Xe-7j
+	(envelope-from <graham.gower@gmail.com>) id 1PNcyT-0005Eg-6K
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 03:32:55 +0100
-Received: by pxi17 with SMTP id 17so1033925pxi.6
+	Wed, 01 Dec 2010 04:03:18 +0100
+Received: by pxi17 with SMTP id 17so1037219pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 18:31:31 -0800 (PST)
+	Tue, 30 Nov 2010 19:01:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:content-type
 	:content-transfer-encoding;
-	bh=/dlVKT2Y43B9M9uHyt4+FAt+klPw1cnKd+xwUNoLJzk=;
-	b=sz1Yc8PyUsa28rRBjt11YVjh/qtmaIMIUvLOvd7J6kTQMGpMqXrf1Vw4X6DKgL3SzA
-	TwUkKRB5VtpQZT0ANqlo8soiO7YJcuIX68gcQcLx6IeGVVOaL7mj9XxF+7f4e5/rzdSt
-	BlYvyyjNyUtq2KgPa50ryDC44mnXlSHBoOVXQ=
+	bh=OI5fpYEofGMYzgEiz//+ELNmFtG5nwNLTlaZx55uWrY=;
+	b=RXKWNQy07a1tNl9gO7k8WD9qG+nYoNoDggDdWKZyhFZFQuA+TxXQsfbXoD7Thme48T
+	58KVglZ8yOl5tP6xDIQO3amXnvrXexlfC0Fb+bctIGW8sEoF2u3NT+WpEF+huHtJXrUp
+	c4bNRW2hdzHk1cZ0g+2qK1aQr/+TuXep2CtGY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject
 	:content-type:content-transfer-encoding;
-	b=bxMvdur4kUD/S8v08+gaG/woVkNjNdiWvWbY61Eahlz18xY7zKrXESOQjPFvot54KG
-	N83kzjZgzyCP8BsNYoUIcfBJ0ltjJDuzwLTLy+w1pl8kUH8WhPG5UW7bLbvF/XwYjIrf
-	bgHLRyweiNpN/JjQLMt7L4L/guJN5k0xf8YmY=
-Received: by 10.142.217.16 with SMTP id p16mr8134176wfg.279.1291170690007;
-	Tue, 30 Nov 2010 18:31:30 -0800 (PST)
+	b=ATxJ4YTdiVmcdKc22Bb+V3Nvi7WpjhmflKoA5scqXGsqP0ZH8jkZY4EpmqA9NIJpNM
+	sm8ktvfIFycyf0cf2d254YpM0t9d4dTBZgWX6W84dTqIs7p81bo8jRUfIKsd0g+j5c7z
+	HYMLiuJ+mpf36nevHQwD47NCRzMS5QldsdqdY=
+Received: by 10.142.221.17 with SMTP id t17mr8115589wfg.138.1291172515309;
+	Tue, 30 Nov 2010 19:01:55 -0800 (PST)
 Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id p8sm9786088wff.4.2010.11.30.18.31.27
+	by mx.google.com with ESMTPS id p8sm9814787wff.4.2010.11.30.19.01.48
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 30 Nov 2010 18:31:29 -0800 (PST)
-Message-ID: <4CF5B37B.9010508@gmail.com>
-Date: Wed, 01 Dec 2010 13:01:23 +1030
+	Tue, 30 Nov 2010 19:01:53 -0800 (PST)
+Message-ID: <4CF5BA94.1020007@gmail.com>
+Date: Wed, 01 Dec 2010 13:31:40 +1030
 From: Graham Gower <graham.gower@gmail.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
@@ -41,7 +41,7 @@ X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gzip_1.4.bb: Fix do_install for DISTRO=micro.
+Subject: [PATCH] e2fsprogs_1.41.9.bb: Fix build for uclibc when DISTRO_FEATURES lacks largefile.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,38 +55,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 02:32:55 -0000
+X-List-Received-Date: Wed, 01 Dec 2010 03:03:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-mv: `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/gzip-1.4-r3/image/bin/gunzip' and `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/gzip-1.4-r3/image/bin/gunzip' are the same file
+	CC llseek.c
+llseek.c:65:22: error: expected declaration specifiers or '...' before '_llseek'
+llseek.c:65:43: error: expected declaration specifiers or '...' before 'fd'
+llseek.c:65:60: error: expected declaration specifiers or '...' before 'offset_high'
+llseek.c:66:19: error: expected declaration specifiers or '...' before 'offset_low'
+llseek.c:66:44: error: expected declaration specifiers or '...' before 'result'
+llseek.c:67:18: error: expected declaration specifiers or '...' before 'origin'
+llseek.c: In function '_syscall5':
+llseek.c:71:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+llseek.c:91:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+llseek.c:65:1: error: parameter name omitted
+llseek.c:65:22: error: parameter name omitted
+llseek.c:65:43: error: parameter name omitted
+llseek.c:66:4: error: parameter name omitted
+llseek.c:66:19: error: parameter name omitted
+llseek.c:67:4: error: parameter name omitted
+llseek.c:114:1: error: expected '{' at end of input
+make[2]: *** [llseek.o] Error 1
 
 Signed-off-by: Graham Gower <graham.gower@gmail.com>
 ---
- recipes/gzip/gzip_1.4.bb |   10 ++++++----
- 1 files changed, 6 insertions(+), 4 deletions(-)
+ .../e2fsprogs/e2fsprogs-1.41.9/llseek-uclibc.patch |   24 ++++++++++++++++++++
+ recipes/e2fsprogs/e2fsprogs_1.41.9.bb              |    4 ++-
+ 2 files changed, 27 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/e2fsprogs/e2fsprogs-1.41.9/llseek-uclibc.patch
 
-diff --git a/recipes/gzip/gzip_1.4.bb b/recipes/gzip/gzip_1.4.bb
-index eb89f79..020e31a 100644
---- a/recipes/gzip/gzip_1.4.bb
-+++ b/recipes/gzip/gzip_1.4.bb
-@@ -19,10 +19,12 @@ alternatives = "gunzip gzip zcat"
- do_install () {
-     autotools_do_install
-     # Move files into /bin (FHS)
--    install -d ${D}${base_bindir}
--    for file in ${D}${bindir}/*; do
--        mv $file ${D}${base_bindir}/
--    done
-+    if [ "${base_bindir}" != "${bindir}" ]; then
-+        install -d ${D}${base_bindir}
-+        for file in ${D}${bindir}/*; do
-+            mv $file ${D}${base_bindir}/
-+        done
-+    fi
- }
+diff --git a/recipes/e2fsprogs/e2fsprogs-1.41.9/llseek-uclibc.patch b/recipes/e2fsprogs/e2fsprogs-1.41.9/llseek-uclibc.patch
+new file mode 100644
+index 0000000..026db2a
+--- /dev/null
++++ b/recipes/e2fsprogs/e2fsprogs-1.41.9/llseek-uclibc.patch
+@@ -0,0 +1,24 @@
++diff -ur e2fsprogs-1.41.9.orig/lib/blkid/llseek.c e2fsprogs-1.41.9/lib/blkid/llseek.c
++--- e2fsprogs-1.41.9.orig/lib/blkid/llseek.c	2009-08-13 11:09:57.000000000 +0930
+++++ e2fsprogs-1.41.9/lib/blkid/llseek.c	2010-12-01 13:23:48.000000000 +1030
++@@ -28,7 +28,7 @@
++ 
++ #include "blkidP.h"
++ 
++-#ifdef __linux__
+++#if defined(__linux__) && !(defined(__UCLIBC__) && !defined(__USE_FILE_OFFSET64))
++ 
++ #if defined(HAVE_LSEEK64) && defined(HAVE_LSEEK64_PROTOTYPE)
++ 
++diff -ur e2fsprogs-1.41.9.orig/lib/ext2fs/llseek.c e2fsprogs-1.41.9/lib/ext2fs/llseek.c
++--- e2fsprogs-1.41.9.orig/lib/ext2fs/llseek.c	2009-08-13 11:09:57.000000000 +0930
+++++ e2fsprogs-1.41.9/lib/ext2fs/llseek.c	2010-12-01 13:18:26.000000000 +1030
++@@ -28,7 +28,7 @@
++ #include "et/com_err.h"
++ #include "ext2fs/ext2_io.h"
++ 
++-#ifdef __linux__
+++#if defined(__linux__) && !(defined(__UCLIBC__) && !defined(__USE_FILE_OFFSET64))
++ 
++ #if defined(HAVE_LSEEK64) && defined(HAVE_LSEEK64_PROTOTYPE)
++ 
+diff --git a/recipes/e2fsprogs/e2fsprogs_1.41.9.bb b/recipes/e2fsprogs/e2fsprogs_1.41.9.bb
+index 6a8c113..026e35a 100644
+--- a/recipes/e2fsprogs/e2fsprogs_1.41.9.bb
++++ b/recipes/e2fsprogs/e2fsprogs_1.41.9.bb
+@@ -1,6 +1,8 @@
+ require e2fsprogs.inc
  
- do_install_append_pn-gzip () {
+-PR = "${INC_PR}"
++PR = "${INC_PR}.1"
++
++SRC_URI += "file://llseek-uclibc.patch"
+ 
+ do_configure() {
+         oe_runconf
 -- 
 1.7.1
 
