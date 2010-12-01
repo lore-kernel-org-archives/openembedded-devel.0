@@ -1,46 +1,27 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from tone.orchestra.cse.unsw.edu.au ([129.94.242.59])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1PNeNd-0006ie-Kd
+	(envelope-from <jayen@cse.unsw.edu.au>) id 1PNed4-0006vo-19
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 05:33:22 +0100
-Received: by wwi17 with SMTP id 17so1062428wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Nov 2010 20:32:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=Rap+aaFHk1sGNgEW3xWpGnup2LV5TyhOraz6rO5lt0M=;
-	b=X77pNhc1ViDfll8ie4HQIJ13NP07qfRkHgSdiebaygzVH7QSK3iYQKw+hzJWHOrLK5
-	xMPPS/oJ1fmNQS+a4b+lmEmNCdb0kLjHHcTHjV2mQ/TQiI8TmGs6zn4VONMMYwgJIQGh
-	QD6YmhimSnQFnzoyfsopPUuhlKB+uWwpeiXBA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=v6BMJ/jdQfTM8YlP3qMDeD0QO7PbCwMZ/z7/wGfyJBwMZtYAVg6Kmyw5V6hc7FdMsM
-	Pr5jzWqAeiJWdbX8q31Ab/1U99xiPd2Gm2AQeTWK/X3JxaiCb73/KDoA48rwqanQKXS5
-	7KdOhTZyU5wYsWwCizT83I9o5AHyA5S8dITCI=
-Received: by 10.216.59.193 with SMTP id s43mr1465509wec.42.1291177920375; Tue,
-	30 Nov 2010 20:32:00 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Tue, 30 Nov 2010 20:31:40 -0800 (PST)
-In-Reply-To: <4CF5BC8F.7060704@gmail.com>
-References: <4CF5BC8F.7060704@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 30 Nov 2010 21:31:40 -0700
-X-Google-Sender-Auth: xGfduS_TvwWRS1w_FWRRvEP2LfY
-Message-ID: <AANLkTimQ-CZDyqU_UGdf1qh2Bv-zLuWiOuEqUnY3-V5o@mail.gmail.com>
+	Wed, 01 Dec 2010 05:49:20 +0100
+Received: From localhost.localdomain ([129.94.175.7] ==
+	runswift.cse.unsw.EDU.AU) By
+	tone With Smtp ; Wed, 1 Dec 2010 15:47:50 +1100 
+From: Jayen Ashar <jayen@cse.unsw.edu.au>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Wed,  1 Dec 2010 15:47:21 +1100
+Message-Id: <1291178841-3975-1-git-send-email-jayen@cse.unsw.edu.au>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 129.94.242.59
+X-SA-Exim-Mail-From: jayen@cse.unsw.edu.au
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-5.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS, SPF_NEUTRAL,
+	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] debianutils.inc: Fix do_install for DISTRO=micro.
+Cc: Jayen Ashar <jayen@cse.unsw.edu.au>
+Subject: [PATCH] qwt: QT_LIBINFIX not being resolved when running qmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,21 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 04:33:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Dec 2010 04:49:20 -0000
 
-On Tue, Nov 30, 2010 at 8:10 PM, Graham Gower <graham.gower@gmail.com> wrote:
-> mv: `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/debianutils-2.30-r2/image/bin/run-parts.debianutils' and `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/debianutils-2.30-r2/image/bin/run-parts.debianutils' are the same file
->
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+Fixed a problem where qmake would create a directory called 'obj${QT_LIBINFIX}'
+instead of resolving the QT_LIBINFIX variable and creating the appropriately
+resolved directory.
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
+Signed-off-by: Jayen Ashar <jayen@cse.unsw.edu.au>
+---
+ recipes/qwt/qwt.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/recipes/qwt/qwt.inc b/recipes/qwt/qwt.inc
+index 62c8656..89035c1 100644
+--- a/recipes/qwt/qwt.inc
++++ b/recipes/qwt/qwt.inc
+@@ -10,7 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=qwt"
+ S = "${WORKDIR}/qwt-${PV}"
+ 
+ do_configure_prepend() {
+-	sed -i -e 's:RELEASE_SUFFIX      = :RELEASE_SUFFIX      = ${QT_LIBINFIX}:' *.pri
++	sed -i -e 's:RELEASE_SUFFIX      = :RELEASE_SUFFIX      = $\${QT_LIBINFIX}:' *.pri
+ 	sed -i -e s:lqwt:lqwt${QT_LIBINFIX}:g -e s:/usr/local/qwt-$\${QwtVersion}:${prefix}:g *.prf
+ 	sed -e 's/#CONFIG     += QwtExamples/CONFIG     += QwtExamples/g' -i qwtconfig.pri
+ 	sed -i -e s:/usr/local/qwt-${PV}:${D}${prefix}:g ${S}/*.pri
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.7.0.4
+
 
 
