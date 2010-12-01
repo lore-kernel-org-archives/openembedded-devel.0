@@ -1,34 +1,38 @@
-Received: from 173-11-172-146-houston.txt.hfc.comcastbusiness.net
-	([173.11.172.146] helo=mail.breakawaysystems.com)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dave@lambsys.com>) id 1PNqze-0007Nw-J7
+	(envelope-from <stefan@datenfreihafen.org>) id 1PNr5k-0007Xw-PL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 19:01:27 +0100
-Received: by mail.breakawaysystems.com (Postfix, from userid 1007)
-	id A63EB1489C5; Wed,  1 Dec 2010 12:00:05 -0600 (CST)
-Received: from [192.168.1.100]
-	(173-11.172.145-houston.txt.hfc.comcastbusiness.net [173.11.172.145])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: dlambert)
-	by mail.breakawaysystems.com (Postfix) with ESMTPSA id 52CD91489C0
+	Wed, 01 Dec 2010 19:07:45 +0100
+Received: from p5b034744.dip.t-dialin.net ([91.3.71.68] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1PNr4Q-0007V8-JO by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Dec 2010 12:00:04 -0600 (CST)
-Message-ID: <4CF68D24.80900@lambsys.com>
-Date: Wed, 01 Dec 2010 12:00:04 -0600
-From: David Lambert <dave@lambsys.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
-MIME-Version: 1.0
+	Wed, 01 Dec 2010 19:06:25 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PNr4P-0005Bp-Dw
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Dec 2010 19:06:21 +0100
+Date: Wed, 1 Dec 2010 19:06:21 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 173.11.172.146
-X-SA-Exim-Mail-From: dave@lambsys.com
+Message-ID: <20101201180621.GB20482@excalibur.local>
+References: <4CF68D24.80900@lambsys.com>
+MIME-Version: 1.0
+In-Reply-To: <4CF68D24.80900@lambsys.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Documentation
+Subject: Re: Documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,19 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 18:01:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Dec 2010 18:07:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I have been reading a copy of the OpenEmbedded User Manual (latest 
-copyright 2009). In this document I find that there are numerous 
-sections which are stubs and/or are incomplete. As a newcomer to the 
-world of OpenEmbedded what other documents are suggested for reading? 
-Also, is there a later version of this manual?
+Hello.
 
-Best regards,
+On Wed, 2010-12-01 at 12:00, David Lambert wrote:
+> I have been reading a copy of the OpenEmbedded User Manual (latest
+> copyright 2009). In this document I find that there are numerous
+> sections which are stubs and/or are incomplete. As a newcomer to the
+> world of OpenEmbedded what other documents are suggested for
+> reading? Also, is there a later version of this manual?
 
-Dave.
+My glassball is in repair so I can't see what manual you have and if a newer one
+is available. Adding some kind of date string would help us here.
 
+The user manual is build directly from the sources and should be always up to
+date here:
+http://docs.openembedded.org/usermanual/usermanual.html
+
+regards
+Stefan Schmidt
 
 
