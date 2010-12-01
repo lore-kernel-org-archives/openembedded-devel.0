@@ -1,38 +1,31 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PNkEy-0006Lk-FA
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1PNl6K-0007Pf-9p
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 11:48:48 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PNkDe-0001Ft-FX by authid <stefan@sostec.de> with cram_md5
+	Wed, 01 Dec 2010 12:43:57 +0100
+Received: from [192.168.1.128] (95-90-74-25-dynip.superkabel.de [95.90.74.25])
+	by dd20204.kasserver.com (Postfix) with ESMTP id 543CD1805BA39
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Dec 2010 11:47:29 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PNkDb-00024e-QD
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 11:47:23 +0100
-Date: Wed, 1 Dec 2010 11:47:23 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101201104723.GA20482@excalibur.local>
-References: <AANLkTi=yLLv7wx_M6fBkZV7+_RJaTqmDRbY995-xpb2P@mail.gmail.com>
+	Wed,  1 Dec 2010 12:42:20 +0100 (CET)
+Message-ID: <4CF6346B.2060407@opensimpad.org>
+Date: Wed, 01 Dec 2010 12:41:31 +0100
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
-In-Reply-To: <AANLkTi=yLLv7wx_M6fBkZV7+_RJaTqmDRbY995-xpb2P@mail.gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+To: openembedded-devel@lists.openembedded.org
+References: <1290768432-13366-1-git-send-email-ynezz@true.cz>	<AANLkTi=SB9wuO4wcTXz3M5fYb2WyO09_pK3ooA+i4xgo@mail.gmail.com>	<ico56o$f8$2@dough.gmane.org>	<20101127140200.GH10755@ibawizard.net>	<AANLkTi=kAyxY9i+_c-6UoeEp6ZjUf91m3z3UE272ibVu@mail.gmail.com>
+	<AANLkTinrTnrTXsLVFFxpnUWt1ivwn_V2xS=V8dsej97u@mail.gmail.com>
+In-Reply-To: <AANLkTinrTnrTXsLVFFxpnUWt1ivwn_V2xS=V8dsej97u@mail.gmail.com>
+X-SA-Exim-Connect-IP: 85.13.140.93
+X-SA-Exim-Mail-From: Bernhard.Guillon@opensimpad.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release-2010: when & what to do
+Subject: Re: [PATCH] angstrom-2008.1: bump uclibc to 0.9.30.3 which unbreaks x264
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 10:48:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Dec 2010 11:43:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+On 27.11.2010 15:27, Andrea Adami wrote:
+> On Sat, Nov 27, 2010 at 3:13 PM, Andrea Adami<andrea.adami@gmail.com>  =
+wrote:
+>   =20
+>> Ok, then I suggest to stay with 0.9.30.2 and add the two hacks documen=
+ted here:
+>>
+>> 1) replacing log2f(i) with logf(i)/logf(2)
+>> http://www.mail-archive.com/uclibc@uclibc.org/msg04949.html
+>>     =20
+> Patch courtesy of Bernhard Guillon already done (bad that OE Patchwork
+> is down...)
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-November/0=
+27326.html
+>
+>   =20
+>> 2) '--disable-tls' for e2fsprogs
+>> http://patchwork.openembedded.org/patch/2069/
+>>
+>>     =20
+> Here the patch is trivial...my concern is both should be Angstrom-only,=
+ isn't?
+>
+>   =20
 
-On Wed, 2010-12-01 at 10:06, Frans Meulenbroeks wrote:
-> 
-> I wanted to raise the issue of when to do the release. I seem to
-> recall dec 1 was coined in the past (which is today in most of the
-> timezones at the time of writing).
+This is true. We could add some python foo and check for angstrom? In my =
 
-Thats correct.
+opinion the log2f patch is of no real harm. The tls support might be a=20
+problem.
 
-> It seems to me that we still some areas needing attention (uclibc, the
-> multiple provides for a few packages and probably some more things).
-> What about if we try to get these resolved this week, plan an
-> additional testing session over the weekend and decide early next week
-> on how to proceed?
+Best regrads
+Bernhard Guillon
 
-Doe we already have patches for the issues? If not I think delaying the release
-for issues we don't even have fixes for is not a good idea. If we have fixes
-delaying some days for more testing would be ok imho.
-
-We need to keep in mind that none of our releases will be without issues.
-Striving for perfection is good but we should not start to delay releases just
-in the hope more time will fix more issues. That just does not work.
-
-Our next release would be targetted for 1th March. That means three months time
-to fix the issues with uclibc and getting it in good shape in master.
-
-So my opinion would be in short: Get in all fixes that we have today, test and
-release on friday. That would only make a two day slip and still a pretty solid
-release. The last word on this should be by Khem I think as he has the release
-manager hat on this time.
-
-regards
-Stefan Schmidt
 
 
