@@ -1,38 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PNndg-00037M-S2
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PNoBr-0003yA-OU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 15:26:33 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PNncL-0002Zu-V0 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Dec 2010 06:25:09 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 1 Dec 2010 06:25:09 -0800
-Received: from [172.30.80.45] ([172.30.80.45]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 1 Dec 2010 07:25:08 -0700
-Message-ID: <4CF65AB7.9070603@mentor.com>
-Date: Wed, 01 Dec 2010 07:24:55 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+	Wed, 01 Dec 2010 16:01:52 +0100
+Received: by iwn8 with SMTP id 8so5920025iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Dec 2010 07:00:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=//uRGwpLSJMlqEKQaJz4Sc0ZrCVAyx3Fg9xOEXaaCIY=;
+	b=djNdWobgqDbPq11NEny3G0Offox0yDMTaAtCbfIoOVbH5wnD0ZN9gwIgFLUCgIN5Fu
+	t8AbpG8yx2OS3WR13P/rsUo52AHjmniH0Fa1DS3urHM391YC6+7ZFkVF9Oic0nj3qhaA
+	SsSS+R156qGaASNgzNL89HDJupb37QWPZIdX8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=kKlYQC1xmNpaN4tADNAU8vmrUXdW46LaLptKixgUSnaaJG8AQ2eMgIwdqVs31wLMnW
+	HHG6dLvvXzf0i9gOtfuqQQGOyoaMGn4dUHz32RBe5d3FBrWDziNAeT7k9wRs7cluwn1t
+	/MZ7AeHmhXb2QQDll7Zjah5A0ZU/+aUA5EEes=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.231.191.4 with SMTP id dk4mr9120893ibb.82.1291215630458; Wed,
+	01 Dec 2010 07:00:30 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Wed, 1 Dec 2010 07:00:30 -0800 (PST)
+In-Reply-To: <4CF65AB7.9070603@mentor.com>
 References: <1291211567-2520-1-git-send-email-Martin.Jansa@gmail.com>
 	<AANLkTikkpAXLe9ZAvp=CPC1gVjngeGfQHqV2-sCtjwPG@mail.gmail.com>
-In-Reply-To: <AANLkTikkpAXLe9ZAvp=CPC1gVjngeGfQHqV2-sCtjwPG@mail.gmail.com>
-X-OriginalArrivalTime: 01 Dec 2010 14:25:08.0886 (UTC)
-	FILETIME=[8E81EB60:01CB9163]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	<4CF65AB7.9070603@mentor.com>
+Date: Wed, 1 Dec 2010 16:00:30 +0100
+Message-ID: <AANLkTi=Svdm8ZFt7pDcpwmDafQfZqsofMwDPk7S3hF6a@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] module-init-tools: fix multiple runtime providers
@@ -49,55 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 14:26:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Dec 2010 15:01:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 12/01/2010 07:11 AM, Frans Meulenbroeks wrote:
-> 2010/12/1 Martin Jansa<martin.jansa@gmail.com>:
->> * NOTE: multiple providers are available for runtime module-init-tools-depmod (module-init-tools, module-init-tools-cross)
->>   NOTE: consider defining a PREFERRED_PROVIDER entry to match module-init-tools-depmod
->> ---
->>   recipes/module-init-tools/module-init-tools.inc |   10 +++++-----
->>   1 files changed, 5 insertions(+), 5 deletions(-)
+2010/12/1 Tom Rini <tom_rini@mentor.com>:
+> On 12/01/2010 07:11 AM, Frans Meulenbroeks wrote:
 >>
->> diff --git a/recipes/module-init-tools/module-init-tools.inc b/recipes/module-init-tools/module-init-tools.inc
->> index 3cfaf11..247b39a 100644
->> --- a/recipes/module-init-tools/module-init-tools.inc
->> +++ b/recipes/module-init-tools/module-init-tools.inc
->> @@ -3,13 +3,13 @@ removing kernel modules for Linux (versions 2.5.48 and above). It serves \
->>   the same function that the modutils package serves for Linux 2.4."
->>   LICENSE = "GPLv2"
->>   SECTION = "base"
->> -PR = "r5"
->> +PR = "r6"
->>
->> -PACKAGES =+ "module-init-tools-insmod-static module-init-tools-depmod"
->> -RDEPENDS_${PN} += "module-init-tools-depmod"
->> +PACKAGES =+ "${PN}-insmod-static ${PN}-depmod"
->> +RDEPENDS_${PN} += "${PN}-depmod"
->>
->> -FILES_module-init-tools-depmod = "${sbindir}/depmod.26"
->> -FILES_module-init-tools-insmod-static = "${sbindir}/insmod.static"
->> +FILES_${PN}-depmod = "${sbindir}/depmod.26"
->> +FILES_${PN}-insmod-static = "${sbindir}/insmod.static"
->>
->>   SRC_URI = "${KERNELORG_MIRROR}/pub/linux/utils/kernel/module-init-tools/module-init-tools-${PV}.tar.bz2 \
->>            file://ignore_arch_directory;apply=yes \
->> --
+
+>> still not really sure why we have module-init-tools-cross though.
+>> A quick search did not give me a user (but maybe the search was too quic=
+k)
+>> And still unsure why a cross recipe should produce a =A0package.
+>> And maybe it should be module-init-tools-native ?
 >
-> Thanks for the patch!
-> Acked-by: Frans Meulenbroeks<fransmeulenbroeks@gmail.com>
->
-> still not really sure why we have module-init-tools-cross though.
-> A quick search did not give me a user (but maybe the search was too quick)
-> And still unsure why a cross recipe should produce a  package.
-> And maybe it should be module-init-tools-native ?
+> It's used for running depmod on images during creation, iirc.
 
-It's used for running depmod on images during creation, iirc.
+Do these produce packages (apart from packaged staging).
+I would expect it to install its stuff in cross or sysroots or so and be do=
+ne.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Frans
 
 
