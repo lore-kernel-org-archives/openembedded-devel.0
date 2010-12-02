@@ -1,30 +1,43 @@
-Received: from smtpweb22.aruba.it ([62.149.158.22] helo=smtplq03.aruba.it)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <pierluigi.passaro@phoenixsoftware.it>)
-	id 1POAMF-0008Kk-P1 for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 15:42:04 +0100
-Received: (qmail 24872 invoked by uid 89); 2 Dec 2010 14:40:37 -0000
-Received: from unknown (HELO smtp8.aruba.it) (62.149.158.228)
-	by smtplq03.aruba.it with SMTP; 2 Dec 2010 14:40:37 -0000
-Received: (qmail 18097 invoked by uid 89); 2 Dec 2010 14:40:38 -0000
-Received: from unknown (HELO ?192.168.1.65?)
-	(pierluigi.passaro@phoenixsoftware.it@94.33.39.20)
-	by smtp8.ad.aruba.it with SMTP; 2 Dec 2010 14:40:38 -0000
-Message-ID: <4CF7AFE7.3060201@phoenixsoftware.it>
-Date: Thu, 02 Dec 2010 15:40:39 +0100
-From: Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1POAdr-0000Xd-Ql
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Dec 2010 16:00:16 +0100
+Received: by iwn8 with SMTP id 8so7240875iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Dec 2010 06:58:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=sji1BjMg90NnUJ4r3YAsM513Cniql7TZfnrJZZKbKkE=;
+	b=pmPiaP6BK7o0aWQFjiU2R3J2YgWf4WN9p+MLGqChjOkAPVcIFrBh08OSxK1644vlUk
+	fCBIca8Frs59gSvTG0wgTJgTpLRJNSykUSBetbxxWfHnUJUCyNag7m7ga766MEdtd83T
+	JgPwAmYbGTs23meZ3dEVVfp4lCineyzedb7lE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=IVZGxpl2Xz+qMdqAINjURCIUwsSuSo1IXSEeVyzdcX8S/BIqkj3Z9GLTZBP9uT8xX2
+	vx6qqMBbsFsm6peYJtP9aU0J9YfKQKoqYOW4Gyq//AJfBem0fn1PK9WkHNSYwE5JRbAb
+	UGUOEdpAw1Yy+/OlhOXn3DYKAn2O9lABKs5dU=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.231.35.75 with SMTP id o11mr330071ibd.107.1291301933041; Thu,
+	02 Dec 2010 06:58:53 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Thu, 2 Dec 2010 06:58:52 -0800 (PST)
+In-Reply-To: <4CF7AFE7.3060201@phoenixsoftware.it>
 References: <4CF78E73.7010401@phoenixsoftware.it>
 	<AANLkTikriTQaU5yXKWkn9xyavdXZyfD2phaXbpgEBxRG@mail.gmail.com>
-In-Reply-To: <AANLkTikriTQaU5yXKWkn9xyavdXZyfD2phaXbpgEBxRG@mail.gmail.com>
-X-SA-Exim-Connect-IP: 62.149.158.22
-X-SA-Exim-Mail-From: pierluigi.passaro@phoenixsoftware.it
+	<4CF7AFE7.3060201@phoenixsoftware.it>
+Date: Thu, 2 Dec 2010 15:58:52 +0100
+Message-ID: <AANLkTinNd_jhP4Put1qKLaCoS30xVv4RE-R4sM6H23ZK@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: release-2010.12: PHP build issues
@@ -41,76 +54,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 14:42:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Dec 2010 15:00:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi Frans,
-thanks for your quick reply.
-I tested your solution without any building issue.
+2010/12/2 Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>:
+> Hi Frans,
+> thanks for your quick reply.
+> I tested your solution without any building issue.
+>
+> Who need to be advised for pushing either your or mine fix to
+> release-2010.12 branch?
+>
+> Thanks
+> Regards
+> Pierluigi
 
-Who need to be advised for pushing either your or mine fix to 
-release-2010.12 branch?
 
-Thanks
-Regards
-Pierluigi
+Thanks for the testing!
+I feel Khem Raj is the person to choose the patch in this case.
+I'm quite sure that a thread with release2010 in the name will draw
+his attention, so I don' tthink additional action is needed.
 
-Frans Meulenbroeks wrote:
-> 2010/12/2 Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>:
->   
->> Hi all,
->> I still have problem compiling PHP 5.2.13 with release-2010.12 branch.
+Frans
+> Frans Meulenbroeks wrote:
 >>
->> I fixed the problem with the following patch regarding iconv option. Can
->> anyone confirm the issue?
+>> 2010/12/2 Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>:
 >>
->> Thanks
->> Regards
->> Pierluigi
+>>>
+>>> Hi all,
+>>> I still have problem compiling PHP 5.2.13 with release-2010.12 branch.
+>>>
+>>> I fixed the problem with the following patch regarding iconv option. Ca=
+n
+>>> anyone confirm the issue?
+>>>
+>>> Thanks
+>>> Regards
+>>> Pierluigi
+>>>
+>>> --- a/recipes/php/php_5.2.13.bb
+>>> +++ b/recipes/php/php_5.2.13.bb
+>>> @@ -21,7 +21,7 @@ export LIBS=3D" -lpthread "
+>>>
+>>> EXTRA_OECONF =3D " =A0 =A0--enable-mbstring \
+>>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --enable-discard-path \
+>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-iconv \
+>>> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--without-iconv \
+>>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --enable-sockets \
+>>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --enable-shared \
+>>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --enable-pcntl \
+>>>
+>>> --
+>>> Ing. Pierluigi Passaro
+>>> Via Pasqualigo 31
+>>> 30174 Venezia Mestre
+>>> Cel: +39 348 355 4119
+>>> Tel: +39 041 862 3373
+>>> Fax: +39 041 862 3173
+>>> Web: www.phoenixsoftware.it
+>>> P.IVA 03884060272
+>>>
 >>
->> --- a/recipes/php/php_5.2.13.bb
->> +++ b/recipes/php/php_5.2.13.bb
->> @@ -21,7 +21,7 @@ export LIBS=" -lpthread "
+>> Pierluigi,
 >>
->> EXTRA_OECONF = "    --enable-mbstring \
->>                    --enable-discard-path \
->> -                    --disable-iconv \
->> +                    --without-iconv \
->>                    --enable-sockets \
->>                    --enable-shared \
->>                    --enable-pcntl \
+>> This indeed fixes the build problem.
+>> The disable has been a mistake at my side.
+>> A better solution is to merge
 >>
->> --
->> Ing. Pierluigi Passaro
->> Via Pasqualigo 31
->> 30174 Venezia Mestre
->> Cel: +39 348 355 4119
->> Tel: +39 041 862 3373
->> Fax: +39 041 862 3173
->> Web: www.phoenixsoftware.it
->> P.IVA 03884060272
->>     
->
-> Pierluigi,
->
-> This indeed fixes the build problem.
-> The disable has been a mistake at my side.
-> A better solution is to merge
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=fa117e417c1f2277c9c0fff0367edb678ea0d844
-> into the release version.
-> This fixes the problem and adds iconv support (which is needed by some
-> other recipes).
->
-> Anyway either your patch or my git patch above needs to be applied.
->
-> Frans. (who spent quite some time debugging php configure to find the
-> cause iconv support was not working properly)
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dfa117e41=
+7c1f2277c9c0fff0367edb678ea0d844
+>> into the release version.
+>> This fixes the problem and adds iconv support (which is needed by some
+>> other recipes).
+>>
+>> Anyway either your patch or my git patch above needs to be applied.
+>>
+>> Frans. (who spent quite some time debugging php configure to find the
+>> cause iconv support was not working properly)
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->   
+>
 
 
