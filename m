@@ -1,32 +1,36 @@
-Received: from ns1.gatteins.it ([193.58.239.94])
+Received: from mail-out.m-online.net ([212.18.0.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <matteo.facchinetti@sirius-es.it>) id 1PO9Ni-0006UK-TE
+	(envelope-from <mok@mnet-online.de>) id 1PO9Rx-0006bm-M7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 14:39:31 +0100
-X-Virus-Scanned: amavisd-new at gattei.com
-Received: from [10.16.100.77] (89-96-49-192.ip10.fastwebnet.it [89.96.49.192])
-	by ns1.gatteins.it (Postfix) with ESMTPA id 48DD1DEF26
+	Thu, 02 Dec 2010 14:43:54 +0100
+Received: from frontend1.mail.m-online.net (unknown [192.168.8.180])
+	by mail-out.m-online.net (Postfix) with ESMTP id 500471C08CE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Dec 2010 14:38:20 +0100 (MET)
-Message-ID: <4CF7A13D.2060309@sirius-es.it>
-Date: Thu, 02 Dec 2010 14:38:05 +0100
-From: Matteo Facchinetti <matteo.facchinetti@sirius-es.it>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Thu,  2 Dec 2010 14:42:31 +0100 (CET)
+Received: from gonzales.localnet (ppp-188-174-87-224.dynamic.mnet-online.de
+	[188.174.87.224])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTPS id 3A01C1C00214
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Dec 2010 14:42:31 +0100 (CET)
+From: Klaus Kurzmann <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1290790442-28006-1-git-send-email-matteo.facchinetti@sirius-es.it>
-	<icoqf5$9n4$1@dough.gmane.org>
-In-Reply-To: <icoqf5$9n4$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 193.58.239.94
-X-SA-Exim-Mail-From: matteo.facchinetti@sirius-es.it
+Date: Thu, 2 Dec 2010 14:42:32 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.36-ARCH; KDE/4.5.3; x86_64; ; )
+References: <1291284734-27056-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1291284734-27056-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201012021442.33112.mok@mnet-online.de>
+X-SA-Exim-Connect-IP: 212.18.0.9
+X-SA-Exim-Mail-From: mok@mnet-online.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sysvinit_2.86.bb: add possibility to use USB Serial Console with only rx/tx.
+Subject: Re: [PATCH] nokia900.conf: MACHINE_EXTRA_RRECOMMENDS add needed kernel-modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,71 +44,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 13:39:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 02 Dec 2010 13:43:54 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-USB_SERIAL_CONSOLE is similar to SERIAL_CONSOLE but SERIAL_CONSOLE 
-variabile isn't described too.
+Am Donnerstag, 2. Dezember 2010, 11:12:14 schrieb Martin Jansa:
+> * list all which are loaded after boot (ie with udev)
+> * remove those which are handled by some task-base-* anyways (like g-ether,
+> vfat etc) * remove those which are in RDEPENDS of some already listed
+> module here ---
+>  conf/machine/nokia900.conf |   36 +++++++++++++++++++++++++++++++++++-
+>  recipes/tasks/task-base.bb |    2 +-
+>  2 files changed, 36 insertions(+), 2 deletions(-)
+> 
+> diff --git a/conf/machine/nokia900.conf b/conf/machine/nokia900.conf
+> index caeb00a..5ed0dae 100644
+> --- a/conf/machine/nokia900.conf
+> +++ b/conf/machine/nokia900.conf
+> @@ -14,7 +14,41 @@ XSERVER = "xserver-xorg \
+>             xf86-input-keyboard \
+>             xf86-video-omapfb "
+> 
+> -MACHINE_EXTRA_RRECOMMENDS = "watchdog"
+> +MACHINE_EXTRA_RRECOMMENDS = "watchdog \
+> +# common \
+> +  kernel-module-tsl2563 \
+> +  kernel-module-smc91x \
+> +  kernel-module-leds-lp5523 \
+> +# 2.6.28 \
+> +  kernel-module-adp1653 \
+> +  kernel-module-ad5820 \
+> +  kernel-module-et8ek8 \
+> +  kernel-module-fmtx-si4713 \
+> +  kernel-module-leds-twl4030-vibra \
+> +  kernel-module-lis302dl \
+> +  kernel-module-nokia-av \
+> +  kernel-module-omap-ssi \
+> +  kernel-module-omap-wdt \
+> +  kernel-module-phonet \
+> +  kernel-module-radio-bcm2048 \
+> +  kernel-module-rtc-twl4030 \
+> +  kernel-module-smia-sensor \
+> +  kernel-module-ssi-mcsaab-imp \
+> +  kernel-module-tsc2005 \
+> +  kernel-module-twl4030-wdt \
+> +  kernel-module-wl12xx \
+> +# 2.6.35 \
+> +  kernel-module-cmt-speech \
+> +  kernel-module-gpio-keys \
+> +  kernel-module-hci-h4p \
+> +  kernel-module-hsi-char \
+> +  kernel-module-isp1704-charger \
+> +  kernel-module-lis3lv02d-i2c \
+> +  kernel-module-mailbox-mach \
+> +  kernel-module-rtc-twl \
+> +  kernel-module-twl4030-pwrbutton \
+> +  kernel-module-wl1251-spi \
+> +"
+> 
+>  GUI_MACHINE_CLASS = "bigscreen"
+>  MACHINE_DISPLAY_WIDTH_PIXELS = "800"
+> diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
+> index 6e2d9f0..32d871d 100644
+> --- a/recipes/tasks/task-base.bb
+> +++ b/recipes/tasks/task-base.bb
+> @@ -1,5 +1,5 @@
+>  DESCRIPTION = "Merge machine and distro options to create a basic machine
+> task/package" -PR = "r91"
+> +PR = "r92"
+> 
+>  inherit task
 
-IMHO could be need to add a new paragraph describing all kind of CONSOLE 
-available for machine conf file.
+Acked-by: Klaus Kurzmann <mok@fluxnetz.de>
+(for the parsing fixed version of couse :P)
 
-Where's the right place to add these variabiles in usermanual?
-
-
-
-On 11/26/2010 06:23 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Where's the patch that adds this new var to the usermanual?
->
-> On 26-11-10 17:54, matteo.facchinetti@sirius-es.it wrote:
->    
->> From: Matteo Facchinetti<engineering@sirius-es.it>
->>
->> There are many evaluationboard that use mini-usb port like as
->> a serial port + power supply. Using it as serial console have
->> to force getty with no need for carrier detect.
->>
->> Signed-off-by: Matteo Facchinetti<engineering@sirius-es.it>
->> ---
->>   recipes/sysvinit/sysvinit_2.86.bb |    5 +++++
->>   1 files changed, 5 insertions(+), 0 deletions(-)
->>
->> diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvinit_2.86.bb
->> index 6ab5290..c34cbc9 100644
->> --- a/recipes/sysvinit/sysvinit_2.86.bb
->> +++ b/recipes/sysvinit/sysvinit_2.86.bb
->> @@ -65,6 +65,11 @@ do_install () {
->>   	install -m 0644 ${WORKDIR}/inittab ${D}${sysconfdir}/inittab
->>   	if [ ! -z "${SERIAL_CONSOLE}" ]; then
->>   		echo "S:2345:respawn:${base_sbindir}/getty ${SERIAL_CONSOLE}">>  ${D}${sysconfdir}/inittab
->> +	else
->> +		
->> +		if [ ! -z "${USB_SERIAL_CONSOLE}" ]; then
->> +			echo "S:2345:respawn:${base_sbindir}/getty -L ${USB_SERIAL_CONSOLE}">>  ${D}${sysconfdir}/inittab
->> +		fi
->>   	fi
->>   	if [ "${USE_VT}" = "1" ]; then
->>   		cat<<EOF>>${D}${sysconfdir}/inittab
->>      
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFM7+0kMkyGM64RGpERAtPZAKCSHvZA9Eko51AqkoVR476+5tWoIQCgr1/Z
-> kxtr+B+5lfr+vqIxh6o5qGA=
-> =JSd7
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->    
-
+-- 
+Klaus 'mrmoku' Kurzmann
 
 
