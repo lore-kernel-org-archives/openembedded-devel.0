@@ -1,43 +1,44 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PO53l-0000tq-6h
+	(envelope-from <lazy.gopher@gmail.com>) id 1PO5SZ-0001I5-Rv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 10:02:37 +0100
-Received: by bwz10 with SMTP id 10so6872985bwz.6
+	Thu, 02 Dec 2010 10:28:16 +0100
+Received: by gxk20 with SMTP id 20so4069905gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Dec 2010 01:01:16 -0800 (PST)
+	Thu, 02 Dec 2010 01:26:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=v07duwFWXi/IOXkM7oSUqBGydqkjwFyX7OK+hEbldLE=;
-	b=nb3J6Q5QsiYZdThEAxV4j7RihCjLg3tINKmYT+zJw8gOt7bNNp2tUS90QTDYMk0WLB
-	c4YHNPykVjMxqrFdAMiouj5t2np0lYKEpSE73jcSX2QarnJ5uB7n+LZlaAceFRCIyxKh
-	be5kx9WDbW+OjdYlBGHbwdaJQqpsMMRlWHqKo=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=AS3zZJQVzWEyFLlsgqRwGVt8t4+I3ovyIKwMwfZrl+c=;
+	b=J0XZ0vRiz3vhQwR9/trLy59/bMJqF/Cn8J0iKqX+DXLJlCjG0mHJ6qKtjVz7KmREzN
+	+m+kjTMcU9rVthAui+YB34DnggStq43WeRrAvWn4ulgGzwyVv38ydmbkL2ixjXh2eI9Z
+	iaFYLOwIZq2YIeOsUVSRMm15lJRxJNTPh5KyA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=XE+xFFq1zPqVPnNoruu1vJm9+gSYZNS4+ZyxQVnoEntYoKN88iH1D6EjYHRTr3tx2I
-	pRRUfLucS977dJBOhrBxO4zDRY6W2fTk0wN8G33OpKfpPE6nVGE6n/G1ieApnuu9OKbx
-	wGzLNHipSWKp3l51hc6nIACesFYikPM5ExlYU=
-Received: by 10.204.66.83 with SMTP id m19mr239904bki.44.1291280476591;
-	Thu, 02 Dec 2010 01:01:16 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 11sm125951bkj.12.2010.12.02.01.01.14
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 02 Dec 2010 01:01:15 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=oDXGWrMWImHzrGw4B598O5+ojdZhr+uwtkh2xHQNUYH80RcvzjWw8cl41QwpoXjl1V
+	GBSnJWS7wD4+CzX/WHj/KhY0PUcDrIiokp1kQZqhKK4DCac6oBK9PSH9SQ/7woFoKTMD
+	F4QR6wzer4lGM44zNZQj/H137juJROpP2MvV8=
+MIME-Version: 1.0
+Received: by 10.90.59.4 with SMTP id h4mr907253aga.134.1291282012623; Thu, 02
+	Dec 2010 01:26:52 -0800 (PST)
+Received: by 10.90.35.11 with HTTP; Thu, 2 Dec 2010 01:26:52 -0800 (PST)
+In-Reply-To: <4CF67A98.2010708@gmail.com>
+References: <4CF4B540.4020108@cisco.com>
+	<4CF67A98.2010708@gmail.com>
+Date: Thu, 2 Dec 2010 10:26:52 +0100
+Message-ID: <AANLkTimqLt1knQWUZiDEGs4H-kf=o-2o9vRkcwPU4pRZ@mail.gmail.com>
+From: Maksym Parkachov <lazy.gopher@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Dec 2010 10:01:08 +0100
-Message-Id: <1291280468-25378-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.3.2
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: lazy.gopher@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] nokia900: build uImage instead of zImage
+Subject: Re: gstreamer not getting populated in file system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 09:02:37 -0000
+X-List-Received-Date: Thu, 02 Dec 2010 09:28:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* meego and debian on n900 are now using u-boot so we should too
----
- conf/machine/nokia900.conf |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+Hi Harshada,
 
-diff --git a/conf/machine/nokia900.conf b/conf/machine/nokia900.conf
-index a16f1da..10bce2a 100644
---- a/conf/machine/nokia900.conf
-+++ b/conf/machine/nokia900.conf
-@@ -20,7 +20,10 @@ GUI_MACHINE_CLASS = "bigscreen"
- MACHINE_DISPLAY_WIDTH_PIXELS = "800"
- MACHINE_DISPLAY_HEIGHT_PIXELS = "480"
- 
--KERNEL_IMAGETYPE = "zImage"
-+KERNEL_IMAGETYPE = "uImage"
-+
-+UBOOT_ENTRYPOINT = "0x80008000"
-+UBOOT_LOADADDRESS = "0x80008000"
- 
- ROOT_FLASH_SIZE = "100"
- EXTRA_IMAGECMD_jffs2_nokia900 = "--pad --little-endian --eraseblock=0x20000 -n"
--- 
-1.7.3.2
+I've seen the same behavior as you, instead of gst-plugins-base you
+need to use gst-plugins-base-meta, and correspondingly all other as
+well. During last couple of months gst-plugins-base, .etc. changed
+dependency on plugins from DEPENDS to RECOMMENDS.
 
+Hope this helps,
+Maksym.
+
+On Wed, Dec 1, 2010 at 5:40 PM, Tim Harvey <harvey.tim@gmail.com> wrote:
+> On 11/30/2010 12:26 AM, harshada wrote:
+>>
+>> We created new image by adding following into minimal-image.bb:
+>> gstreamer \
+>> gst-plugins-base \
+>> gst-plugins-good \
+>> gst-plugins-bad \
+>> gst-plugins-ugly
+>> Image is getting built without any compiling issues. But we are not able
+>> to find required
+>> gstreamer plugins in the file system image. In ipk directory, we could
+>> find all of the corresponding ipks.
+>> What to do to get the filesystem populated with these gstreamer plugins?
+>>
+>> thanks and regards,
+>> Harshada
+>
+> I believe you need to place the actual plugins in your image - do a find
+> tmp/deploy/ipk -name gst-plugin-*
+>
+> Tim
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
