@@ -1,40 +1,33 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PO9jT-0007ge-Ny
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 15:02:01 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PO9i7-0002pj-KR from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 06:00:35 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 2 Dec 2010 05:59:26 -0800
-Received: from [172.30.80.45] ([172.30.80.45]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 2 Dec 2010 06:59:25 -0700
-Message-ID: <4CF7A630.5030001@mentor.com>
-Date: Thu, 02 Dec 2010 06:59:12 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+Received: from smtpweb22.aruba.it ([62.149.158.22] helo=smtplq03.aruba.it)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <pierluigi.passaro@phoenixsoftware.it>)
+	id 1POAMF-0008Kk-P1 for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Dec 2010 15:42:04 +0100
+Received: (qmail 24872 invoked by uid 89); 2 Dec 2010 14:40:37 -0000
+Received: from unknown (HELO smtp8.aruba.it) (62.149.158.228)
+	by smtplq03.aruba.it with SMTP; 2 Dec 2010 14:40:37 -0000
+Received: (qmail 18097 invoked by uid 89); 2 Dec 2010 14:40:38 -0000
+Received: from unknown (HELO ?192.168.1.65?)
+	(pierluigi.passaro@phoenixsoftware.it@94.33.39.20)
+	by smtp8.ad.aruba.it with SMTP; 2 Dec 2010 14:40:38 -0000
+Message-ID: <4CF7AFE7.3060201@phoenixsoftware.it>
+Date: Thu, 02 Dec 2010 15:40:39 +0100
+From: Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4CF6E7CE.8090801@gmail.com>
-In-Reply-To: <4CF6E7CE.8090801@gmail.com>
-X-OriginalArrivalTime: 02 Dec 2010 13:59:25.0957 (UTC)
-	FILETIME=[21436350:01CB9229]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <4CF78E73.7010401@phoenixsoftware.it>
+	<AANLkTikriTQaU5yXKWkn9xyavdXZyfD2phaXbpgEBxRG@mail.gmail.com>
+In-Reply-To: <AANLkTikriTQaU5yXKWkn9xyavdXZyfD2phaXbpgEBxRG@mail.gmail.com>
+X-SA-Exim-Connect-IP: 62.149.158.22
+X-SA-Exim-Mail-From: pierluigi.passaro@phoenixsoftware.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] bind_9.3.6.bb: Don't remove nslookup, it exists in FILES_${PN}-utils.
+Subject: Re: release-2010.12: PHP build issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,21 +41,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 14:02:02 -0000
+X-List-Received-Date: Thu, 02 Dec 2010 14:42:04 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 12/01/2010 05:26 PM, Graham Gower wrote:
-> Also fixes the following with uclibc:
-> rm: cannot remove `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/bind-9.3.6-r1/image/usr/bin/nslookup': No such file or directory
+Hi Frans,
+thanks for your quick reply.
+I tested your solution without any building issue.
+
+Who need to be advised for pushing either your or mine fix to 
+release-2010.12 branch?
+
+Thanks
+Regards
+Pierluigi
+
+Frans Meulenbroeks wrote:
+> 2010/12/2 Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>:
+>   
+>> Hi all,
+>> I still have problem compiling PHP 5.2.13 with release-2010.12 branch.
+>>
+>> I fixed the problem with the following patch regarding iconv option. Can
+>> anyone confirm the issue?
+>>
+>> Thanks
+>> Regards
+>> Pierluigi
+>>
+>> --- a/recipes/php/php_5.2.13.bb
+>> +++ b/recipes/php/php_5.2.13.bb
+>> @@ -21,7 +21,7 @@ export LIBS=" -lpthread "
+>>
+>> EXTRA_OECONF = "    --enable-mbstring \
+>>                    --enable-discard-path \
+>> -                    --disable-iconv \
+>> +                    --without-iconv \
+>>                    --enable-sockets \
+>>                    --enable-shared \
+>>                    --enable-pcntl \
+>>
+>> --
+>> Ing. Pierluigi Passaro
+>> Via Pasqualigo 31
+>> 30174 Venezia Mestre
+>> Cel: +39 348 355 4119
+>> Tel: +39 041 862 3373
+>> Fax: +39 041 862 3173
+>> Web: www.phoenixsoftware.it
+>> P.IVA 03884060272
+>>     
 >
-> Signed-off-by: Graham Gower<graham.gower@gmail.com>
-
-Can you please go fixup all of the bind recipes and then add nslookup to 
-u-a?  Thanks.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+> Pierluigi,
+>
+> This indeed fixes the build problem.
+> The disable has been a mistake at my side.
+> A better solution is to merge
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=fa117e417c1f2277c9c0fff0367edb678ea0d844
+> into the release version.
+> This fixes the problem and adds iconv support (which is needed by some
+> other recipes).
+>
+> Anyway either your patch or my git patch above needs to be applied.
+>
+> Frans. (who spent quite some time debugging php configure to find the
+> cause iconv support was not working properly)
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
 
 
