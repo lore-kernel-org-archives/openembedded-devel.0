@@ -1,44 +1,43 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lazy.gopher@gmail.com>) id 1PO5SZ-0001I5-Rv
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1PO5Uu-0001Oa-Cx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 10:28:16 +0100
-Received: by gxk20 with SMTP id 20so4069905gxk.6
+	Thu, 02 Dec 2010 10:30:40 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 4CC8611001C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Dec 2010 01:26:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AS3zZJQVzWEyFLlsgqRwGVt8t4+I3ovyIKwMwfZrl+c=;
-	b=J0XZ0vRiz3vhQwR9/trLy59/bMJqF/Cn8J0iKqX+DXLJlCjG0mHJ6qKtjVz7KmREzN
-	+m+kjTMcU9rVthAui+YB34DnggStq43WeRrAvWn4ulgGzwyVv38ydmbkL2ixjXh2eI9Z
-	iaFYLOwIZq2YIeOsUVSRMm15lJRxJNTPh5KyA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=oDXGWrMWImHzrGw4B598O5+ojdZhr+uwtkh2xHQNUYH80RcvzjWw8cl41QwpoXjl1V
-	GBSnJWS7wD4+CzX/WHj/KhY0PUcDrIiokp1kQZqhKK4DCac6oBK9PSH9SQ/7woFoKTMD
-	F4QR6wzer4lGM44zNZQj/H137juJROpP2MvV8=
-MIME-Version: 1.0
-Received: by 10.90.59.4 with SMTP id h4mr907253aga.134.1291282012623; Thu, 02
-	Dec 2010 01:26:52 -0800 (PST)
-Received: by 10.90.35.11 with HTTP; Thu, 2 Dec 2010 01:26:52 -0800 (PST)
-In-Reply-To: <4CF67A98.2010708@gmail.com>
-References: <4CF4B540.4020108@cisco.com>
-	<4CF67A98.2010708@gmail.com>
-Date: Thu, 2 Dec 2010 10:26:52 +0100
-Message-ID: <AANLkTimqLt1knQWUZiDEGs4H-kf=o-2o9vRkcwPU4pRZ@mail.gmail.com>
-From: Maksym Parkachov <lazy.gopher@gmail.com>
+	Thu,  2 Dec 2010 10:29:18 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 7559911000B9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Dec 2010 10:29:17 +0100 (CET)
+Received: from rhein.familie-heinold.de (g225147217.adsl.alicedsl.de
+	[92.225.147.217]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Dec 2010 10:29:17 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 842593C121; Thu,  2 Dec 2010 10:28:45 +0100 (CET)
+Date: Thu, 2 Dec 2010 10:28:45 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: lazy.gopher@gmail.com
+Message-ID: <20101202092845.GA3507@rhein.zuhause.netz>
+References: <AANLkTim4pT1+eojwGWidVVoCeMKCSaDEWeXibO4t-e14@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTim4pT1+eojwGWidVVoCeMKCSaDEWeXibO4t-e14@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gstreamer not getting populated in file system
+Subject: Re: Commit Access for Bernhard Reutner-Fischer (blindvt)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +51,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 09:28:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Dec 2010 09:30:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi Harshada,
+On Thu, Dec 02, 2010 at 12:15:41AM +0100, Andrea Adami wrote:
+> Hello,
+> 
+> I would like to propose Bernhard Reutner-Fischer for commit access.
+> Already bitbake developer, is probably more known as maintainer of uclibc.
+> Surely he has some other outstanding works to share with us.
+> 
+> Thanks in advance
+> 
+> Andrea
 
-I've seen the same behavior as you, instead of gst-plugins-base you
-need to use gst-plugins-base-meta, and correspondingly all other as
-well. During last couple of months gst-plugins-base, .etc. changed
-dependency on plugins from DEPENDS to RECOMMENDS.
+I support this too.
 
-Hope this helps,
-Maksym.
-
-On Wed, Dec 1, 2010 at 5:40 PM, Tim Harvey <harvey.tim@gmail.com> wrote:
-> On 11/30/2010 12:26 AM, harshada wrote:
->>
->> We created new image by adding following into minimal-image.bb:
->> gstreamer \
->> gst-plugins-base \
->> gst-plugins-good \
->> gst-plugins-bad \
->> gst-plugins-ugly
->> Image is getting built without any compiling issues. But we are not able
->> to find required
->> gstreamer plugins in the file system image. In ipk directory, we could
->> find all of the corresponding ipks.
->> What to do to get the filesystem populated with these gstreamer plugins?
->>
->> thanks and regards,
->> Harshada
->
-> I believe you need to place the actual plugins in your image - do a find
-> tmp/deploy/ipk -name gst-plugin-*
->
-> Tim
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Bye Henning
 
 
