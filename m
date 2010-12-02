@@ -1,48 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PO3f5-0007WF-Kp
+	(envelope-from <raj.khem@gmail.com>) id 1PO3nF-0007g0-4p
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 08:33:04 +0100
-Received: by bwz10 with SMTP id 10so6821495bwz.6
+	Thu, 02 Dec 2010 08:41:29 +0100
+Received: by ywp4 with SMTP id 4so256068ywp.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Dec 2010 23:31:42 -0800 (PST)
+	Wed, 01 Dec 2010 23:40:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=hgQcbacUqRthSh2wiVzEMehrn/GSEIpReqnWr67/AUI=;
-	b=pNJ3V8bspDODeiWbK/197HXPb6v+rVTgnGZFV15aL6vJoQq66E5+d6YfjVG3Ys+VnC
-	9Vk4pITU8V7TonWiuCGNxBgvmiTUX5uNE4L2VPivUadQzn5Tc6nBAHtyKeBdsCqqVf7s
-	Qw5I5eabjmqGjs+D80mBSOWmCXIN5Ebil1qQc=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=hqO3LyMsr18Zq1MbcsTcUxfX77fFnTwHeZI7533EMx8=;
+	b=mGkNRgFzE6ii6d6lUxaOBQ8QfRX2IpOhu/8CkPu/J40Sqzwiwmczmkqrw2WQQHZaPD
+	fkas2ASFShxR9x7QJCjyCYASS7fOdtviII2P4Sg9M7bYtA2KDMI/LIIval5b93/qNMWT
+	AU2OzD28OeAFCfUEMTczNGEdZmZIo6+XwQ7fM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=TfqQjMK+/BTOTWYdMG5eZ/0MGs/zdmzFi7ZNzOadHo/qEqIh3mb88Kri1svZJrC7BI
-	1Qu6bgBKgqFFCiio8psOydm/zxwIsSQt4qsSSvm2HUr3oCuetMIUEcXO+0ac26gz2/2Y
-	0stVIfLgFEKnd77h2w/WBiu6I6zZOJXeFDQk4=
-Received: by 10.204.75.194 with SMTP id z2mr157064bkj.132.1291275102845;
-	Wed, 01 Dec 2010 23:31:42 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l3sm1152195fan.2.2010.12.01.23.31.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 01 Dec 2010 23:31:41 -0800 (PST)
-Date: Thu, 2 Dec 2010 08:31:36 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101202073136.GG3266@jama>
-References: <AANLkTim4pT1+eojwGWidVVoCeMKCSaDEWeXibO4t-e14@mail.gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=Z8IURjy6QePQDpLwUozHD3x5LpL1cT/idey6w9Q09WrLx2g4BhwBjpRDbjoZlI7TxS
+	rtoMLJubqrPBrtySJyyT3PF0bWNuBlLxyfJKN3XqYUQqBhUhANqXuhHudtxjJbQ1yQ4n
+	hOlYy1HfWgR4YVavPpNqC4RodFO+0NZWi+McY=
+Received: by 10.90.9.22 with SMTP id 22mr775219agi.102.1291275606091; Wed, 01
+	Dec 2010 23:40:06 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <AANLkTim4pT1+eojwGWidVVoCeMKCSaDEWeXibO4t-e14@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.90.120.8 with HTTP; Wed, 1 Dec 2010 23:39:45 -0800 (PST)
+In-Reply-To: <AANLkTi=4piRxXUC6GcBPg_pTsGjrbMC6sxEnUoVPJAy5@mail.gmail.com>
+References: <AANLkTi=yLLv7wx_M6fBkZV7+_RJaTqmDRbY995-xpb2P@mail.gmail.com>
+	<20101201104723.GA20482@excalibur.local>
+	<AANLkTi=4piRxXUC6GcBPg_pTsGjrbMC6sxEnUoVPJAy5@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 1 Dec 2010 23:39:45 -0800
+Message-ID: <AANLkTik2tNWSDTHi+z1M88dzGRjgYOh99yN_SKe9vwWP@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Commit Access for Bernhard Reutner-Fischer (blindvt)
+Subject: Re: release-2010: when & what to do
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,22 +53,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 07:33:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Dec 2010 07:41:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, Dec 02, 2010 at 12:15:41AM +0100, Andrea Adami wrote:
-> Hello,
-> 
-> I would like to propose Bernhard Reutner-Fischer for commit access.
-> Already bitbake developer, is probably more known as maintainer of uclibc.
-> Surely he has some other outstanding works to share with us.
+On Wed, Dec 1, 2010 at 5:33 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/12/1 Stefan Schmidt <stefan@datenfreihafen.org>:
+>> Hello.
+>>
+>> On Wed, 2010-12-01 at 10:06, Frans Meulenbroeks wrote:
+>>>
+>>> I wanted to raise the issue of when to do the release. I seem to
+>>> recall dec 1 was coined in the past (which is today in most of the
+>>> timezones at the time of writing).
+>>
+>> Thats correct.
+>>
 
-Agreed
+I planned it for this coming friday. There still are some patches
+for micro that needs to go in.
 
-+1
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>>> It seems to me that we still some areas needing attention (uclibc, the
+>>> multiple provides for a few packages and probably some more things).
+>>> What about if we try to get these resolved this week, plan an
+>>> additional testing session over the weekend and decide early next week
+>>> on how to proceed?
+>>
+>> Doe we already have patches for the issues? If not I think delaying the release
+>> for issues we don't even have fixes for is not a good idea. If we have fixes
+>> delaying some days for more testing would be ok imho.
+>>
+>> We need to keep in mind that none of our releases will be without issues.
+>> Striving for perfection is good but we should not start to delay releases just
+>> in the hope more time will fix more issues. That just does not work.
+>>
+>> Our next release would be targetted for 1th March. That means three months time
+>> to fix the issues with uclibc and getting it in good shape in master.
+>>
+>> So my opinion would be in short: Get in all fixes that we have today, test and
+>> release on friday. That would only make a two day slip and still a pretty solid
+>> release. The last word on this should be by Khem I think as he has the release
+>> manager hat on this time.
+>>
+>> regards
+>> Stefan Schmidt
+>>
+> I'm fine to make it Khems' call when to do the release
+> Wrt the uclibc/binutils: there is a patch, so Id' say go for bumping
+> versions. That at least gives a better baseline.
+>
+> Wrt the multiple DEPENDS issue:
+> It is not too difficult to fix these. E.g. for mysql nuke the old
+> version, for modutils decide which package delivers depmod. (modutils
+> or modutils-cross) and for bluez retire bluez-libs_3* (or maybe pin
+> bluez-libs_4* in distros that do not pin bluez)
+> But of course this does carry some political implications.
+>
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
