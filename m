@@ -1,44 +1,30 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PO6ZJ-0002nk-Lc
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 11:39:18 +0100
-Received: by wwi17 with SMTP id 17so2576585wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Dec 2010 02:37:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=GivVXWxxPkrX+FI3Z4w7DP1SgCFKUGjfhbQNXoomles=;
-	b=jCDj3QzPotXXX/Y5iHdRLKcU/tfncUyxVrWLp+6HHZTNONRWdCCAm0fHqJM38LBxUz
-	h7mZH1qdypIDmHd/adBBc3Vis4m8lSpx4KBIpW02sJRFwbBQ5UvAPm6V66gfIj8Sl5Op
-	E0YXP93F7yHJPhz2ADHYD6LKsh6ACir4tA5lY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=uAX9OP8rGVYh7OtgQrGuIlGuajX2xAIaXchqDSa9qsnHiITf3ReRtF92i6KAxQsT/9
-	dMMP+30F2oQIpx14vprE2ffn/HSCzEruyUt9oPKeMrs/7Sl+fvV8UlWlyngTDl6tNbVS
-	5r2RXXayBfXLLP/fK+va8EUNfs88jmQXTuMRw=
+Received: from smtplq-out12.aruba.it ([62.149.158.32] helo=smtplq03.aruba.it)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <pierluigi.passaro@phoenixsoftware.it>)
+	id 1PO88E-0004uw-P5 for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Dec 2010 13:19:27 +0100
+Received: (qmail 26910 invoked by uid 89); 2 Dec 2010 12:17:53 -0000
+Received: from unknown (HELO smtp3.aruba.it) (62.149.158.223)
+	by smtplq03.aruba.it with SMTP; 2 Dec 2010 12:17:53 -0000
+Received: (qmail 4090 invoked by uid 89); 2 Dec 2010 12:17:53 -0000
+Received: from unknown (HELO ?192.168.1.65?)
+	(pierluigi.passaro@phoenixsoftware.it@94.33.39.20)
+	by smtp3.ad.aruba.it with SMTP; 2 Dec 2010 12:17:53 -0000
+Message-ID: <4CF78E73.7010401@phoenixsoftware.it>
+Date: Thu, 02 Dec 2010 13:17:55 +0100
+From: Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
-Received: by 10.227.134.10 with SMTP id h10mr10782882wbt.200.1291286274725;
-	Thu, 02 Dec 2010 02:37:54 -0800 (PST)
-Received: by 10.227.154.13 with HTTP; Thu, 2 Dec 2010 02:37:54 -0800 (PST)
-In-Reply-To: <1291284734-27056-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1291284734-27056-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Thu, 2 Dec 2010 11:37:54 +0100
-Message-ID: <AANLkTimin5RNmDFtaqdpwqaQ_tZfTKbXuNFmeQKkx-rr@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 62.149.158.32
+X-SA-Exim-Mail-From: pierluigi.passaro@phoenixsoftware.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] nokia900.conf: MACHINE_EXTRA_RRECOMMENDS add needed kernel-modules
+Subject: release-2010.12: PHP build issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 10:39:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Dec 2010 12:19:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 2, 2010 at 11:12 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> * list all which are loaded after boot (ie with udev)
-> * remove those which are handled by some task-base-* anyways (like g-ethe=
-r, vfat etc)
-> * remove those which are in RDEPENDS of some already listed module here
-> ---
-> =A0conf/machine/nokia900.conf | =A0 36 ++++++++++++++++++++++++++++++++++=
-+-
-> =A0recipes/tasks/task-base.bb | =A0 =A02 +-
-> =A02 files changed, 36 insertions(+), 2 deletions(-)
->
-> diff --git a/conf/machine/nokia900.conf b/conf/machine/nokia900.conf
-> index caeb00a..5ed0dae 100644
-> --- a/conf/machine/nokia900.conf
-> +++ b/conf/machine/nokia900.conf
-> @@ -14,7 +14,41 @@ XSERVER =3D "xserver-xorg \
-> =A0 =A0 =A0 =A0 =A0 =A0xf86-input-keyboard \
-> =A0 =A0 =A0 =A0 =A0 =A0xf86-video-omapfb "
->
-> -MACHINE_EXTRA_RRECOMMENDS =3D "watchdog"
-> +MACHINE_EXTRA_RRECOMMENDS =3D "watchdog \
-> +# common \
+Hi all,
+I still have problem compiling PHP 5.2.13 with release-2010.12 branch.
 
-sorry for that those comments shouldn't be included..
+I fixed the problem with the following patch regarding iconv option. Can 
+anyone confirm the issue?
 
-haven't tested it before sending because I got parse errors before
-parsing task-base (due to unaccessible svn.enlightenment.org for a
-while).. now routing to svn went OK, task-base parse failed and I see
-that I need test run even for simple, safe-looking patches :/
+Thanks
+Regards
+Pierluigi
 
-sorry again and I'll send PATCHv2 if needed, but I think the idea
-behind that patch is clear..
+--- a/recipes/php/php_5.2.13.bb
++++ b/recipes/php/php_5.2.13.bb
+@@ -21,7 +21,7 @@ export LIBS=" -lpthread "
+ 
+ EXTRA_OECONF = "    --enable-mbstring \
+                     --enable-discard-path \
+-                    --disable-iconv \
++                    --without-iconv \
+                     --enable-sockets \
+                     --enable-shared \
+                     --enable-pcntl \
 
-Regards,
+-- 
+Ing. Pierluigi Passaro
+Via Pasqualigo 31
+30174 Venezia Mestre
+Cel: +39 348 355 4119
+Tel: +39 041 862 3373
+Fax: +39 041 862 3173
+Web: www.phoenixsoftware.it
+P.IVA 03884060272
+
 
 
