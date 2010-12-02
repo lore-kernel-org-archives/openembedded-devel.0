@@ -1,46 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1POAdr-0000Xd-Ql
+	(envelope-from <stefan@datenfreihafen.org>) id 1POBRx-0001YJ-T0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 16:00:16 +0100
-Received: by iwn8 with SMTP id 8so7240875iwn.6
+	Thu, 02 Dec 2010 16:52:02 +0100
+Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1POBQc-0006ZU-Mb by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Dec 2010 06:58:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=sji1BjMg90NnUJ4r3YAsM513Cniql7TZfnrJZZKbKkE=;
-	b=pmPiaP6BK7o0aWQFjiU2R3J2YgWf4WN9p+MLGqChjOkAPVcIFrBh08OSxK1644vlUk
-	fCBIca8Frs59gSvTG0wgTJgTpLRJNSykUSBetbxxWfHnUJUCyNag7m7ga766MEdtd83T
-	JgPwAmYbGTs23meZ3dEVVfp4lCineyzedb7lE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=IVZGxpl2Xz+qMdqAINjURCIUwsSuSo1IXSEeVyzdcX8S/BIqkj3Z9GLTZBP9uT8xX2
-	vx6qqMBbsFsm6peYJtP9aU0J9YfKQKoqYOW4Gyq//AJfBem0fn1PK9WkHNSYwE5JRbAb
-	UGUOEdpAw1Yy+/OlhOXn3DYKAn2O9lABKs5dU=
-MIME-Version: 1.0
-Received: by 10.231.35.75 with SMTP id o11mr330071ibd.107.1291301933041; Thu,
-	02 Dec 2010 06:58:53 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Thu, 2 Dec 2010 06:58:52 -0800 (PST)
-In-Reply-To: <4CF7AFE7.3060201@phoenixsoftware.it>
-References: <4CF78E73.7010401@phoenixsoftware.it>
-	<AANLkTikriTQaU5yXKWkn9xyavdXZyfD2phaXbpgEBxRG@mail.gmail.com>
-	<4CF7AFE7.3060201@phoenixsoftware.it>
-Date: Thu, 2 Dec 2010 15:58:52 +0100
-Message-ID: <AANLkTinNd_jhP4Put1qKLaCoS30xVv4RE-R4sM6H23ZK@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 02 Dec 2010 16:50:41 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1POBQa-0002ko-D6
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Dec 2010 16:50:36 +0100
+Date: Thu, 2 Dec 2010 16:50:36 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20101202155036.GD20482@excalibur.local>
+References: <4CF6FF0A.6090505@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <4CF6FF0A.6090505@gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release-2010.12: PHP build issues
+Subject: Re: [PATCH] util-linux-ng.inc, e2fsprogs.inc: Use update-alternatives for uuidd.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,95 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 15:00:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Dec 2010 15:52:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/12/2 Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>:
-> Hi Frans,
-> thanks for your quick reply.
-> I tested your solution without any building issue.
->
-> Who need to be advised for pushing either your or mine fix to
-> release-2010.12 branch?
->
-> Thanks
-> Regards
-> Pierluigi
+Hello.
 
+On Thu, 2010-12-02 at 12:36, Graham Gower wrote:
+> Util-linux-ng put uuidd in ${sbindir}, e2fsprogs put it in ${base_sbindir}.
+> This change puts both in ${base_sbindir}.
+> 
+> Fixes a conflict when DISTRO=micro.
+> 
+> | Collected errors:
+> |  * check_data_file_clashes: Package util-linux-ng wants to install file /mnt/oe/tmp/rootfs/native-sdk-image/sbin/uuidd
+> |       But that file is already provided by package  * e2fsprogs
+> 
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
 
-Thanks for the testing!
-I feel Khem Raj is the person to choose the patch in this case.
-I'm quite sure that a thread with release2010 in the name will draw
-his attention, so I don' tthink additional action is needed.
+I took all of your patches but the two automake and the one bind patch. Khem
+reviewed and acked them all.
 
-Frans
-> Frans Meulenbroeks wrote:
->>
->> 2010/12/2 Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>:
->>
->>>
->>> Hi all,
->>> I still have problem compiling PHP 5.2.13 with release-2010.12 branch.
->>>
->>> I fixed the problem with the following patch regarding iconv option. Ca=
-n
->>> anyone confirm the issue?
->>>
->>> Thanks
->>> Regards
->>> Pierluigi
->>>
->>> --- a/recipes/php/php_5.2.13.bb
->>> +++ b/recipes/php/php_5.2.13.bb
->>> @@ -21,7 +21,7 @@ export LIBS=3D" -lpthread "
->>>
->>> EXTRA_OECONF =3D " =A0 =A0--enable-mbstring \
->>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --enable-discard-path \
->>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-iconv \
->>> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--without-iconv \
->>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --enable-sockets \
->>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --enable-shared \
->>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 --enable-pcntl \
->>>
->>> --
->>> Ing. Pierluigi Passaro
->>> Via Pasqualigo 31
->>> 30174 Venezia Mestre
->>> Cel: +39 348 355 4119
->>> Tel: +39 041 862 3373
->>> Fax: +39 041 862 3173
->>> Web: www.phoenixsoftware.it
->>> P.IVA 03884060272
->>>
->>
->> Pierluigi,
->>
->> This indeed fixes the build problem.
->> The disable has been a mistake at my side.
->> A better solution is to merge
->>
->> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dfa117e41=
-7c1f2277c9c0fff0367edb678ea0d844
->> into the release version.
->> This fixes the problem and adds iconv support (which is needed by some
->> other recipes).
->>
->> Anyway either your patch or my git patch above needs to be applied.
->>
->> Frans. (who spent quite some time debugging php configure to find the
->> cause iconv support was not working properly)
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+If I missed one please let me know. Patchwork is down right now and keeping the
+overview is a bit of a hassle. :)
+
+regards
+Stefan Schmidt
 
 
