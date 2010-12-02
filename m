@@ -1,47 +1,44 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PNya4-0000tw-9q
+	(envelope-from <graham.gower@gmail.com>) id 1PNztB-0002AS-Mh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 03:07:33 +0100
-Received: by pvd12 with SMTP id 12so1224874pvd.6
+	Thu, 02 Dec 2010 04:31:22 +0100
+Received: by bwz10 with SMTP id 10so6695447bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Dec 2010 18:06:09 -0800 (PST)
+	Wed, 01 Dec 2010 19:30:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=vwOI1A6dQPowXVn+M+sx59ozxyayWLftsuPY4NyBdp8=;
-	b=WNH0Ova/QXxPW/gm2Oo7FL6WdtYl0Vjn27Td8itOfeXiCF4FyeC0SgcbmM2ILckGNK
-	2Qsss6+tiwCjdFnHKwsIJf54YQDHWalqq0Zi4AbehtnMp+HY9Zngb/qJUMWJht4DarJ+
-	hbnqPMR/eBDYo7ck3HFnVWnlBk1ZbTZnMQFUs=
+	bh=+K2I7bSd7AH8bnG1YzOM8xXOBMwJSu75Ja+DMQB662Q=;
+	b=LWxHqFMeXA6aN28xGiuuvcYf81oIXxaRFumlqyyBE2dvqbStQUbztYOiBlUMVWw9Zm
+	n89e0aV9K16R2HLhJtZpyVOA9XNoJK5RR0R9+J0nbfp5URezwctiltHjm+dEXE6Bz/sE
+	EeRKceX115aTk88+sytA8CAD7aZE54Ngf91NU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=TukMb4GLmOkBtFPkpXvG/RJsPjjjgRJ6/qLXPchF2ln6gsWWQAVg3Ut5m2rd7nN0zR
-	ke3hSxZDwF1iHXpL197KIVyK2Xro15glHhKvr3KhlXh7JoDpfyL1fkEuih6FKNef1Xu7
-	1gKOztdw+pxq/+sXv/ovrKMZObe524kd9OCP4=
-Received: by 10.142.164.4 with SMTP id m4mr9780847wfe.184.1291255569081;
-	Wed, 01 Dec 2010 18:06:09 -0800 (PST)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id x35sm44135wfd.1.2010.12.01.18.06.06
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 01 Dec 2010 18:06:08 -0800 (PST)
-Message-ID: <4CF6FF0A.6090505@gmail.com>
-Date: Thu, 02 Dec 2010 12:36:02 +1030
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
+	b=e9hBI6hANwGr0sZErSm540LDrmJO6P4nDTboTfQucWpRQ8qbmAyeo4dHpAq58csMDO
+	qcIsyHaPphgx44zgQ03sGlpsz+N3MOWBqSQIxVUjpxd+uOh7lQ5j0QLq9a6U8OTEDcXG
+	Pbj6pHCpllp4Q1s1CLor683DpRKtDKoXa8EXk=
 MIME-Version: 1.0
+Received: by 10.204.59.193 with SMTP id m1mr9435338bkh.176.1291260601350; Wed,
+	01 Dec 2010 19:30:01 -0800 (PST)
+Received: by 10.204.113.72 with HTTP; Wed, 1 Dec 2010 19:30:01 -0800 (PST)
+In-Reply-To: <4CF6E4B8.5020806@gmail.com>
+References: <4CF6E4B8.5020806@gmail.com>
+Date: Thu, 2 Dec 2010 14:00:01 +1030
+Message-ID: <AANLkTikeNJqUYTmNGJAjzgqVp4UBJqJCoDQ4ayr=AbXf@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.214.47
 X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] util-linux-ng.inc, e2fsprogs.inc: Use update-alternatives for uuidd.
+Subject: Re: [PATCH 2/2] automake.inc: bootstrap aclocal.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,100 +52,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 02:07:33 -0000
+X-List-Received-Date: Thu, 02 Dec 2010 03:31:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Util-linux-ng put uuidd in ${sbindir}, e2fsprogs put it in ${base_sbindir}.
-This change puts both in ${base_sbindir}.
+On 2 December 2010 10:43, Graham Gower <graham.gower@gmail.com> wrote:
+> Fixes problems seen with micro-uclibc.
+>
+> NOTE: make -j 12
+> CDPATH=3D"${ZSH_VERSION+.}:" && cd . && perllibdir=3D"/mnt/oe/tmp/work/mi=
+psel-oe-linux-uclibc/automake-1.11.1-r3.2/automake-1.11.1/lib:./lib" "/mnt/=
+oe/tmp/work/mipsel-oe-linux-uclibc/automake-1.11.1-r3.2/automake-1.11.1/acl=
+ocal" --acdir=3Dm4 -I m4
+> /bin/sh: /mnt/oe/tmp/work/mipsel-oe-linux-uclibc/automake-1.11.1-r3.2/aut=
+omake-1.11.1/aclocal: No such file or directory
+> make: *** [aclocal.m4] Error 127
+> FATAL: oe_runmake failed
+>
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> ---
+> =A0recipes/automake/automake.inc | =A0 31 ++++++++++++++++++++++++++++++-
+> =A01 files changed, 30 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/automake/automake.inc b/recipes/automake/automake.in=
+c
+> index e378c04..743c140 100644
+> --- a/recipes/automake/automake.inc
+> +++ b/recipes/automake/automake.inc
+> @@ -29,17 +29,46 @@ RDEPENDS_automake +=3D "\
+> =A0 =A0 perl-module-text-parsewords \
+> =A0 =A0 perl-module-vars "
+> =A0SRC_URI =3D "${GNU_MIRROR}/automake/automake-${PV}.tar.bz2;name=3Dauto=
+make"
+> -INC_PR =3D "r3"
+> +INC_PR =3D "r4"
+> =A0AUTOMAKE_API =3D "${@".".join(bb.data.getVar("PV",d,1).split(".")[0:2]=
+)}"
+>
+> =A0inherit autotools
+>
+> =A0FILES_${PN} +=3D "${datadir}/automake* ${datadir}/aclocal*"
+>
+> +dosubst () {
+> + =A0 =A0 =A0 ver=3D`echo "${PV}" | sed -e 's/^\([[0-9]]*\.[[0-9]]*[[a-z]=
+]*\).*$/\1/'`
+> + =A0 =A0 =A0 rm -f $2
+> + =A0 =A0 =A0 in=3D`echo $1 | sed 's,^.*/,,'`
+> + =A0 =A0 =A0 sed -e "s%@APIVERSION@%${ver}%g" \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e "s%@PACKAGE@%${PN}%g" \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e "s%@PERL@%${STAGING_BINDIR_NATIVE}/perl%=
+g" \
 
-Fixes a conflict when DISTRO=micro.
+This appears to introduce problems when doing a from scratch build.
+Automake-native cannot find the perl binary. Adding perl-native to
+DEPENDS creates a circular dependency.
 
-| Collected errors:
-|  * check_data_file_clashes: Package util-linux-ng wants to install file /mnt/oe/tmp/rootfs/native-sdk-image/sbin/uuidd
-|       But that file is already provided by package  * e2fsprogs
+Not to mention a whole lot of shebang lines pointing to
+/mnt/oe/tmp/sysroots/x86_64-linux/bin/perl get inserted into the cross
+automake scripts.
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/e2fsprogs/e2fsprogs.inc         |    5 ++++-
- recipes/util-linux-ng/util-linux-ng.inc |    7 ++++---
- 2 files changed, 8 insertions(+), 4 deletions(-)
+Anyone else got a bright idea how to resolve this?
 
-diff --git a/recipes/e2fsprogs/e2fsprogs.inc b/recipes/e2fsprogs/e2fsprogs.inc
-index 7697440..1366ce7 100644
---- a/recipes/e2fsprogs/e2fsprogs.inc
-+++ b/recipes/e2fsprogs/e2fsprogs.inc
-@@ -9,7 +9,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/e2fsprogs/e2fsprogs-${PV}.tar.gz"
- 
- S = "${WORKDIR}/e2fsprogs-${PV}"
- 
--INC_PR = "r24"
-+INC_PR = "r25"
- 
- inherit autotools
- 
-@@ -39,6 +39,7 @@ do_install_append () {
- 	rm ${D}${base_sbindir}/mkfs.ext2
- 	rm ${D}${base_sbindir}/mkfs.ext3
- 	rm ${D}${base_sbindir}/mkfs.ext4*
-+	mv ${D}${base_sbindir}/uuidd ${D}${base_sbindir}/uuidd.${PN}
- 
- 	cd ${D}/${base_sbindir}
- 	ln -sf ./e2fsck.${PN} fsck.ext2.${PN}
-@@ -58,10 +59,12 @@ do_install_append () {
- 
- pkg_postinst_e2fsprogs () {
- 	update-alternatives --install ${base_bindir}/chattr chattr chattr.${PN} 100
-+	update-alternatives --install ${base_sbindir}/uuidd uuidd uuidd.${PN} 10
- }
- 
- pkg_prerm_e2fsprogs () {
- 	update-alternatives --remove chattr chattr.${PN}
-+	update-alternatives --remove uuidd uuidd.${PN}
- }
- 
- 
-diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
-index 7455098..fbc92e4 100644
---- a/recipes/util-linux-ng/util-linux-ng.inc
-+++ b/recipes/util-linux-ng/util-linux-ng.inc
-@@ -6,7 +6,7 @@ DEPENDS_virtclass-native = "zlib-native ncurses-native lzo-native gettext-native
- 
- inherit autotools gettext
- 
--INC_PR = "r33"
-+INC_PR = "r34"
- 
- # allows for a release candidate
- RC ?= ""
-@@ -124,7 +124,7 @@ do_install () {
- 	mkdir -p ${D}${base_bindir}
- 
-         sbinprogs="agetty blockdev ctrlaltdel cfdisk"
--        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk fsck blkid vigr vipw"
-+        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk fsck blkid vigr vipw uuidd"
-         usrbinprogs_a="chfn chsh hexdump last logger mesg newgrp renice wall setsid chrt reset cal script flock"
-         usrsbinprogs_a="readprofile"
-         binprogs_a="dmesg kill more umount mount login"
-@@ -219,6 +219,7 @@ pkg_postinst_${PN} () {
- 	update-alternatives --install ${base_sbindir}/vigr vigr vigr.${PN} 100
- 	update-alternatives --install ${bindir}/setsid setsid setsid.${PN} 100
- 	update-alternatives --install ${bindir}/chrt chrt chrt.${PN} 100
-+	update-alternatives --install ${base_sbindir}/uuidd uuidd uuidd.${PN} 100
- 	
- 	# There seems to be problem, atleast on nslu2, with these, until they are
- 	# fixed the busybox ones have higher priority
-@@ -232,7 +233,7 @@ pkg_prerm_${PN} () {
- 	test -x ${base_sbindir}/pivot_root.${PN} && \
- 	update-alternatives --remove pivot_root pivot_root.${PN}
- 
--	for i in dmesg kill more halt hwclock mkswap reboot shutdown sln mkfs.minix fsck.minix hexdump setsid chrt last logger mesg renice wall vipw vigr chfn newgrp chsh login cal script flock; do
-+	for i in dmesg kill more halt hwclock mkswap reboot shutdown sln mkfs.minix fsck.minix hexdump setsid chrt last logger mesg renice wall vipw vigr chfn newgrp chsh login cal script flock uuidd; do
- 		update-alternatives --remove $i $i.${PN}
- 	done
- }
--- 
-1.7.1
-
+-Graham
 
 
