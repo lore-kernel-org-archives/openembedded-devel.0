@@ -1,44 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from ns1.gatteins.it ([193.58.239.94])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PO8gd-0005Rk-DQ
+	(envelope-from <matteo.facchinetti@sirius-es.it>) id 1PO9Ni-0006UK-TE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 13:54:59 +0100
-Received: by iwn8 with SMTP id 8so7125099iwn.6
+	Thu, 02 Dec 2010 14:39:31 +0100
+X-Virus-Scanned: amavisd-new at gattei.com
+Received: from [10.16.100.77] (89-96-49-192.ip10.fastwebnet.it [89.96.49.192])
+	by ns1.gatteins.it (Postfix) with ESMTPA id 48DD1DEF26
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Dec 2010 04:53:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=6Yg1oAnxvi2Z3KvZi7/ek3kVDtpo07mvP8hSTFsQDTg=;
-	b=km5tqLqP5JPEKL1R4A8kBGeBS1YzgYYZbOxhqgj/Q+TDH7YmrBJ+BJfeq6UUJMP9JX
-	c8JUBji43sdXdAAU6M6XbSXJfZj/5p9w6uMQYhsPqTuW2rWC3UPbpLJ82NvjKdeLSd2S
-	bdusws3Ms/4za4kCaxoXWqOhoePFPNxrFqkvI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=r7ht4VM1jLLa7Ws+PyWv1Ri3B2XcN02tkw/3Kn2A0T9RmIlDkLMmJC0n0srAsrclfd
-	6vLEvgA9YiYXbzh6cVopaibVNzjI+6KpvT0slwstRA+Hn4b6eTLHblbLtQdu/EA+gNa+
-	3jGbCj48S29e0phvqICDsVCsEEcBUR5C5g+iQ=
+	Thu,  2 Dec 2010 14:38:20 +0100 (MET)
+Message-ID: <4CF7A13D.2060309@sirius-es.it>
+Date: Thu, 02 Dec 2010 14:38:05 +0100
+From: Matteo Facchinetti <matteo.facchinetti@sirius-es.it>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
-Received: by 10.231.35.75 with SMTP id o11mr176930ibd.107.1291294411471; Thu,
-	02 Dec 2010 04:53:31 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Thu, 2 Dec 2010 04:53:31 -0800 (PST)
-In-Reply-To: <4CF78E73.7010401@phoenixsoftware.it>
-References: <4CF78E73.7010401@phoenixsoftware.it>
-Date: Thu, 2 Dec 2010 13:53:31 +0100
-Message-ID: <AANLkTikriTQaU5yXKWkn9xyavdXZyfD2phaXbpgEBxRG@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <1290790442-28006-1-git-send-email-matteo.facchinetti@sirius-es.it>
+	<icoqf5$9n4$1@dough.gmane.org>
+In-Reply-To: <icoqf5$9n4$1@dough.gmane.org>
+X-SA-Exim-Connect-IP: 193.58.239.94
+X-SA-Exim-Mail-From: matteo.facchinetti@sirius-es.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release-2010.12: PHP build issues
+Subject: Re: [PATCH] sysvinit_2.86.bb: add possibility to use USB Serial Console with only rx/tx.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,57 +40,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 12:55:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Dec 2010 13:39:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/12/2 Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>:
-> Hi all,
-> I still have problem compiling PHP 5.2.13 with release-2010.12 branch.
->
-> I fixed the problem with the following patch regarding iconv option. Can
-> anyone confirm the issue?
->
-> Thanks
-> Regards
-> Pierluigi
->
-> --- a/recipes/php/php_5.2.13.bb
-> +++ b/recipes/php/php_5.2.13.bb
-> @@ -21,7 +21,7 @@ export LIBS=3D" -lpthread "
->
-> EXTRA_OECONF =3D " =A0 =A0--enable-mbstring \
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-discard-path \
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-iconv \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--without-iconv \
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-sockets \
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-shared \
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-pcntl \
->
-> --
-> Ing. Pierluigi Passaro
-> Via Pasqualigo 31
-> 30174 Venezia Mestre
-> Cel: +39 348 355 4119
-> Tel: +39 041 862 3373
-> Fax: +39 041 862 3173
-> Web: www.phoenixsoftware.it
-> P.IVA 03884060272
+USB_SERIAL_CONSOLE is similar to SERIAL_CONSOLE but SERIAL_CONSOLE 
+variabile isn't described too.
 
-Pierluigi,
+IMHO could be need to add a new paragraph describing all kind of CONSOLE 
+available for machine conf file.
 
-This indeed fixes the build problem.
-The disable has been a mistake at my side.
-A better solution is to merge
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dfa117e417c1=
-f2277c9c0fff0367edb678ea0d844
-into the release version.
-This fixes the problem and adds iconv support (which is needed by some
-other recipes).
+Where's the right place to add these variabiles in usermanual?
 
-Anyway either your patch or my git patch above needs to be applied.
 
-Frans. (who spent quite some time debugging php configure to find the
-cause iconv support was not working properly)
+
+On 11/26/2010 06:23 PM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Where's the patch that adds this new var to the usermanual?
+>
+> On 26-11-10 17:54, matteo.facchinetti@sirius-es.it wrote:
+>    
+>> From: Matteo Facchinetti<engineering@sirius-es.it>
+>>
+>> There are many evaluationboard that use mini-usb port like as
+>> a serial port + power supply. Using it as serial console have
+>> to force getty with no need for carrier detect.
+>>
+>> Signed-off-by: Matteo Facchinetti<engineering@sirius-es.it>
+>> ---
+>>   recipes/sysvinit/sysvinit_2.86.bb |    5 +++++
+>>   1 files changed, 5 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvinit_2.86.bb
+>> index 6ab5290..c34cbc9 100644
+>> --- a/recipes/sysvinit/sysvinit_2.86.bb
+>> +++ b/recipes/sysvinit/sysvinit_2.86.bb
+>> @@ -65,6 +65,11 @@ do_install () {
+>>   	install -m 0644 ${WORKDIR}/inittab ${D}${sysconfdir}/inittab
+>>   	if [ ! -z "${SERIAL_CONSOLE}" ]; then
+>>   		echo "S:2345:respawn:${base_sbindir}/getty ${SERIAL_CONSOLE}">>  ${D}${sysconfdir}/inittab
+>> +	else
+>> +		
+>> +		if [ ! -z "${USB_SERIAL_CONSOLE}" ]; then
+>> +			echo "S:2345:respawn:${base_sbindir}/getty -L ${USB_SERIAL_CONSOLE}">>  ${D}${sysconfdir}/inittab
+>> +		fi
+>>   	fi
+>>   	if [ "${USE_VT}" = "1" ]; then
+>>   		cat<<EOF>>${D}${sysconfdir}/inittab
+>>      
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFM7+0kMkyGM64RGpERAtPZAKCSHvZA9Eko51AqkoVR476+5tWoIQCgr1/Z
+> kxtr+B+5lfr+vqIxh6o5qGA=
+> =JSd7
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>    
+
 
 
