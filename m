@@ -1,39 +1,39 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PNwp1-0006uX-RR
+	(envelope-from <graham.gower@gmail.com>) id 1PNwpN-0006vN-MC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 01:14:53 +0100
-Received: by pzk12 with SMTP id 12so1124280pzk.6
+	Thu, 02 Dec 2010 01:15:14 +0100
+Received: by pxi17 with SMTP id 17so1215148pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Dec 2010 16:13:28 -0800 (PST)
+	Wed, 01 Dec 2010 16:13:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:content-type
 	:content-transfer-encoding;
-	bh=uOcavoUWw3jJnJYQ2W5vR91Ft6xyca4wtlG9ydzROrc=;
-	b=UqnROtzG+cCt1xxrNnsiLvTNbWsz+Dhm5ot99ogJzFRlNdPdujO9oYkE/NZ76amYsl
-	CdjNEmFojNwLiVoYi6VvkXQA3+Vy+3R0KBiheRfH/N2e63siJrLENsHLSH1WrK5NFBmK
-	bmQyZ5JwCtTzWgrY2Kb87EQSQRDK5wO/A9TeI=
+	bh=U+Nsx3JVHnChUUFhsV0kQeSxbHSJmC3/KJJqg7ddMRA=;
+	b=udC7MvcrDq+9gH4leV8NXrJeijtn58UsL+Np1f1YAJD4lkpgwjjk8ZCHHE09kNyoAR
+	BUU+DJyUlQUBcNWuxV1JUE0EMsbtrn3ewoiWUHQor9jFAt7vDXwSrSOfV3bMBofll7DB
+	fO8mi/syTbE582Q80gVF+RbDRgPZ2uggCkeyw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject
 	:content-type:content-transfer-encoding;
-	b=ADBARZt9pZnlEj9i6z1YgcEW3aAuy6aqNY69sw08g9Tp+T0N/jSTXCf4QWOciK+opi
-	b2xGb/IznTpRedxxOj5uEqLz3Ttj4z7yRmwTMsHqlmZaoB5uABlu5IWn3h/8LN6ep7KN
-	Vtn2GrRIAyjoq04qUI54eF0BTRqHhqmYyvg6I=
-Received: by 10.142.143.8 with SMTP id q8mr9748692wfd.339.1291248799170;
-	Wed, 01 Dec 2010 16:13:19 -0800 (PST)
+	b=xCv9H5q327LtMxbAHlN06DG4E4cxsGnnlC3rEyvq9ANy3Q6uARnbNkuy38riKRbmzK
+	wpmqwGxZYwAWmWJfizVEQ3P9nHxOpSLNZ6QBDP3B0wfClKLaarwn4KhbFxLeuA4satJr
+	1/dsmeYUsPFFSNutKDQkQdn3MGg644N3Y5E6M=
+Received: by 10.142.164.13 with SMTP id m13mr9682587wfe.140.1291248829953;
+	Wed, 01 Dec 2010 16:13:49 -0800 (PST)
 Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id p8sm657060wff.16.2010.12.01.16.13.16
+	by mx.google.com with ESMTPS id b11sm654186wff.21.2010.12.01.16.13.47
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 01 Dec 2010 16:13:18 -0800 (PST)
-Message-ID: <4CF6E497.8060201@gmail.com>
-Date: Thu, 02 Dec 2010 10:43:11 +1030
+	Wed, 01 Dec 2010 16:13:49 -0800 (PST)
+Message-ID: <4CF6E4B8.5020806@gmail.com>
+Date: Thu, 02 Dec 2010 10:43:44 +1030
 From: Graham Gower <graham.gower@gmail.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -41,7 +41,7 @@ X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2] automake_1.11.1.bb: Don't try to execute perl.
+Subject: [PATCH 2/2] automake.inc: bootstrap aclocal.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,78 +55,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 00:14:53 -0000
+X-List-Received-Date: Thu, 02 Dec 2010 00:15:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-checking for perl... (cached) /bin/perl
-/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/automake-1.11.1-r3.1/automake-1.11.1/configure: line 2306: /bin/perl: No such file or directory
-configure: error: perl 5.6 or better is required; perl 5.8.2 or better
-is recommended.  If you have several perl versions
-installed, select the one Automake should use using
-  ./configure PERL=/path/to/perl
+Fixes problems seen with micro-uclibc.
+
+NOTE: make -j 12
+CDPATH="${ZSH_VERSION+.}:" && cd . && perllibdir="/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/automake-1.11.1-r3.2/automake-1.11.1/lib:./lib" "/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/automake-1.11.1-r3.2/automake-1.11.1/aclocal" --acdir=m4 -I m4
+/bin/sh: /mnt/oe/tmp/work/mipsel-oe-linux-uclibc/automake-1.11.1-r3.2/automake-1.11.1/aclocal: No such file or directory
+make: *** [aclocal.m4] Error 127
+FATAL: oe_runmake failed
 
 Signed-off-by: Graham Gower <graham.gower@gmail.com>
 ---
- .../automake-dont-execute-perl.patch               |   33 ++++++++++++++++++++
- recipes/automake/automake_1.11.1.bb                |    5 ++-
- 2 files changed, 36 insertions(+), 2 deletions(-)
- create mode 100644 recipes/automake/automake-1.11.1/automake-dont-execute-perl.patch
+ recipes/automake/automake.inc |   31 ++++++++++++++++++++++++++++++-
+ 1 files changed, 30 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/automake/automake-1.11.1/automake-dont-execute-perl.patch b/recipes/automake/automake-1.11.1/automake-dont-execute-perl.patch
-new file mode 100644
-index 0000000..be2e181
---- /dev/null
-+++ b/recipes/automake/automake-1.11.1/automake-dont-execute-perl.patch
-@@ -0,0 +1,33 @@
-+diff -ur automake-1.11.1.orig/configure automake-1.11.1/configure
-+--- automake-1.11.1.orig/configure	2009-12-09 04:45:46.000000000 +1030
-++++ automake-1.11.1/configure	2010-12-01 14:01:54.000000000 +1030
-+@@ -2303,12 +2303,6 @@
-+ if test -z "$PERL"; then
-+    as_fn_error "perl not found" "$LINENO" 5
-+ fi
-+-$PERL -e 'require 5.006;' || {
-+-   as_fn_error "perl 5.6 or better is required; perl 5.8.2 or better
-+-is recommended.  If you have several perl versions
-+-installed, select the one Automake should use using
-+-  ./configure PERL=/path/to/perl" "$LINENO" 5
-+-}
-+ 
-+ # We require ithreads support, and version 5.7.2 for CLONE.
-+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $PERL supports ithreads" >&5
-+diff -ur automake-1.11.1.orig/configure.ac automake-1.11.1/configure.ac
-+--- automake-1.11.1.orig/configure.ac	2009-12-09 04:45:40.000000000 +1030
-++++ automake-1.11.1/configure.ac	2010-12-01 14:01:42.000000000 +1030
-+@@ -53,13 +53,6 @@
-+ if test -z "$PERL"; then
-+    AC_MSG_ERROR([perl not found])
-+ fi
-+-$PERL -e 'require 5.006;' || {
-+-   AC_MSG_ERROR(
-+-[perl 5.6 or better is required; perl 5.8.2 or better
-+-is recommended.  If you have several perl versions
-+-installed, select the one Automake should use using
-+-  ./configure PERL=/path/to/perl])
-+-}
-+ 
-+ # We require ithreads support, and version 5.7.2 for CLONE.
-+ AC_CACHE_CHECK([whether $PERL supports ithreads], [am_cv_prog_PERL_ithreads],
-diff --git a/recipes/automake/automake_1.11.1.bb b/recipes/automake/automake_1.11.1.bb
-index 0579875..2f4af3a 100644
---- a/recipes/automake/automake_1.11.1.bb
-+++ b/recipes/automake/automake_1.11.1.bb
-@@ -1,7 +1,8 @@
- require automake.inc
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
+diff --git a/recipes/automake/automake.inc b/recipes/automake/automake.inc
+index e378c04..743c140 100644
+--- a/recipes/automake/automake.inc
++++ b/recipes/automake/automake.inc
+@@ -29,17 +29,46 @@ RDEPENDS_automake += "\
+     perl-module-text-parsewords \
+     perl-module-vars "
+ SRC_URI = "${GNU_MIRROR}/automake/automake-${PV}.tar.bz2;name=automake"
+-INC_PR = "r3"
++INC_PR = "r4"
+ AUTOMAKE_API = "${@".".join(bb.data.getVar("PV",d,1).split(".")[0:2])}"
  
--SRC_URI += "file://0001-py-compile-compile-only-optimized-byte-code.patch"
-+SRC_URI += "file://0001-py-compile-compile-only-optimized-byte-code.patch \
-+		file://automake-dont-execute-perl.patch"
+ inherit autotools
  
- SRC_URI[automake.md5sum] = "c2972c4d9b3e29c03d5f2af86249876f"
- SRC_URI[automake.sha256sum] = "5b159d3c0e0a1f87de71b68bcb9f1a1c49e9e71749c9b723f17e2e1e0295c7ae"
+ FILES_${PN} += "${datadir}/automake* ${datadir}/aclocal*"
+ 
++dosubst () {
++	ver=`echo "${PV}" | sed -e 's/^\([[0-9]]*\.[[0-9]]*[[a-z]]*\).*$/\1/'`
++	rm -f $2
++	in=`echo $1 | sed 's,^.*/,,'`
++	sed -e "s%@APIVERSION@%${ver}%g" \
++		-e "s%@PACKAGE@%${PN}%g" \
++		-e "s%@PERL@%${STAGING_BINDIR_NATIVE}/perl%g" \
++		-e "s%@PERL_THREADS@%1%g" \
++		-e "s%@SHELL@%/bin/sh%g" \
++		-e "s%@VERSION@%${PV}%g" \
++		-e "s%@datadir@%${datadir}%g" \
++		-e "s%@PATH_SEPARATOR@%:%g" \
++		-e "s%@configure_input@%Generated from \$in.%g" \
++		$1 > $2
++	chmod 755 $2
++}
++
+ do_configure_prepend () {
++
++	# See ${S}/bootstrap
++	dosubst lib/Automake/Config.in lib/Automake/Config.pm
++	dosubst aclocal.in aclocal
++	dosubst m4/amversion.in m4/amversion.m4
++	dosubst automake.in automake
++
+ 	if ${@['true', 'false'][bb.data.inherits_class('native', d)]}
+ 	then
+ 		export ac_cv_path_PERL="${ac_cv_path_PERL=${bindir}/perl}"
++
++		# Don't try to build the example (amhello), its ./configure
++		# is invoked incorrectly.
++		sed -i -e 's|dist_doc_DATA = .*$|dist_doc_DATA =|' \
++				${S}/doc/Makefile.am
+ 	fi
+ }
+ 
 -- 
 1.7.1
 
