@@ -1,37 +1,47 @@
-Received: from 31.mail-out.ovh.net ([213.186.62.10])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PNvx3-0005q8-38
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <graham.gower@gmail.com>) id 1PNwp1-0006uX-RR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 00:19:05 +0100
-Received: (qmail 28854 invoked by uid 503); 1 Dec 2010 23:44:55 -0000
-Received: from b6.ovh.net (HELO mail171.ha.ovh.net) (213.186.33.56)
-	by 31.mail-out.ovh.net with SMTP; 1 Dec 2010 23:44:55 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 2 Dec 2010 01:17:42 +0200
-Received: from unknown (HELO ?10.50.243.150?) (ebenard%eukrea.com@92.90.21.8)
-	by ns0.ovh.net with SMTP; 2 Dec 2010 01:17:42 +0200
-Message-ID: <4CF6D795.4010906@eukrea.com>
-Date: Thu, 02 Dec 2010 00:17:41 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+	Thu, 02 Dec 2010 01:14:53 +0100
+Received: by pzk12 with SMTP id 12so1124280pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Dec 2010 16:13:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=uOcavoUWw3jJnJYQ2W5vR91Ft6xyca4wtlG9ydzROrc=;
+	b=UqnROtzG+cCt1xxrNnsiLvTNbWsz+Dhm5ot99ogJzFRlNdPdujO9oYkE/NZ76amYsl
+	CdjNEmFojNwLiVoYi6VvkXQA3+Vy+3R0KBiheRfH/N2e63siJrLENsHLSH1WrK5NFBmK
+	bmQyZ5JwCtTzWgrY2Kb87EQSQRDK5wO/A9TeI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=ADBARZt9pZnlEj9i6z1YgcEW3aAuy6aqNY69sw08g9Tp+T0N/jSTXCf4QWOciK+opi
+	b2xGb/IznTpRedxxOj5uEqLz3Ttj4z7yRmwTMsHqlmZaoB5uABlu5IWn3h/8LN6ep7KN
+	Vtn2GrRIAyjoq04qUI54eF0BTRqHhqmYyvg6I=
+Received: by 10.142.143.8 with SMTP id q8mr9748692wfd.339.1291248799170;
+	Wed, 01 Dec 2010 16:13:19 -0800 (PST)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id p8sm657060wff.16.2010.12.01.16.13.16
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 01 Dec 2010 16:13:18 -0800 (PST)
+Message-ID: <4CF6E497.8060201@gmail.com>
+Date: Thu, 02 Dec 2010 10:43:11 +1030
+From: Graham Gower <graham.gower@gmail.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.6
+	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTim4pT1+eojwGWidVVoCeMKCSaDEWeXibO4t-e14@mail.gmail.com>
-In-Reply-To: <AANLkTim4pT1+eojwGWidVVoCeMKCSaDEWeXibO4t-e14@mail.gmail.com>
-X-Ovh-Tracer-Id: 15534603965747735881
-X-Ovh-Remote: 92.90.21.8 ()
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 213.186.62.10
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_BL_SPAMCOP_NET,RCVD_IN_SORBS_WEB autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Commit Access for Bernhard Reutner-Fischer (blindvt)
+Subject: [PATCH 1/2] automake_1.11.1.bb: Don't try to execute perl.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +55,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Dec 2010 23:19:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 02 Dec 2010 00:14:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+checking for perl... (cached) /bin/perl
+/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/automake-1.11.1-r3.1/automake-1.11.1/configure: line 2306: /bin/perl: No such file or directory
+configure: error: perl 5.6 or better is required; perl 5.8.2 or better
+is recommended.  If you have several perl versions
+installed, select the one Automake should use using
+  ./configure PERL=/path/to/perl
 
-On 02/12/2010 00:15, Andrea Adami wrote:
-> I would like to propose Bernhard Reutner-Fischer for commit access.
-> Already bitbake developer, is probably more known as maintainer of uclibc.
-> Surely he has some other outstanding works to share with us.
->
-I fully support this proposal,
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ .../automake-dont-execute-perl.patch               |   33 ++++++++++++++++++++
+ recipes/automake/automake_1.11.1.bb                |    5 ++-
+ 2 files changed, 36 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/automake/automake-1.11.1/automake-dont-execute-perl.patch
 
-Eric
+diff --git a/recipes/automake/automake-1.11.1/automake-dont-execute-perl.patch b/recipes/automake/automake-1.11.1/automake-dont-execute-perl.patch
+new file mode 100644
+index 0000000..be2e181
+--- /dev/null
++++ b/recipes/automake/automake-1.11.1/automake-dont-execute-perl.patch
+@@ -0,0 +1,33 @@
++diff -ur automake-1.11.1.orig/configure automake-1.11.1/configure
++--- automake-1.11.1.orig/configure	2009-12-09 04:45:46.000000000 +1030
+++++ automake-1.11.1/configure	2010-12-01 14:01:54.000000000 +1030
++@@ -2303,12 +2303,6 @@
++ if test -z "$PERL"; then
++    as_fn_error "perl not found" "$LINENO" 5
++ fi
++-$PERL -e 'require 5.006;' || {
++-   as_fn_error "perl 5.6 or better is required; perl 5.8.2 or better
++-is recommended.  If you have several perl versions
++-installed, select the one Automake should use using
++-  ./configure PERL=/path/to/perl" "$LINENO" 5
++-}
++ 
++ # We require ithreads support, and version 5.7.2 for CLONE.
++ { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $PERL supports ithreads" >&5
++diff -ur automake-1.11.1.orig/configure.ac automake-1.11.1/configure.ac
++--- automake-1.11.1.orig/configure.ac	2009-12-09 04:45:40.000000000 +1030
+++++ automake-1.11.1/configure.ac	2010-12-01 14:01:42.000000000 +1030
++@@ -53,13 +53,6 @@
++ if test -z "$PERL"; then
++    AC_MSG_ERROR([perl not found])
++ fi
++-$PERL -e 'require 5.006;' || {
++-   AC_MSG_ERROR(
++-[perl 5.6 or better is required; perl 5.8.2 or better
++-is recommended.  If you have several perl versions
++-installed, select the one Automake should use using
++-  ./configure PERL=/path/to/perl])
++-}
++ 
++ # We require ithreads support, and version 5.7.2 for CLONE.
++ AC_CACHE_CHECK([whether $PERL supports ithreads], [am_cv_prog_PERL_ithreads],
+diff --git a/recipes/automake/automake_1.11.1.bb b/recipes/automake/automake_1.11.1.bb
+index 0579875..2f4af3a 100644
+--- a/recipes/automake/automake_1.11.1.bb
++++ b/recipes/automake/automake_1.11.1.bb
+@@ -1,7 +1,8 @@
+ require automake.inc
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+-SRC_URI += "file://0001-py-compile-compile-only-optimized-byte-code.patch"
++SRC_URI += "file://0001-py-compile-compile-only-optimized-byte-code.patch \
++		file://automake-dont-execute-perl.patch"
+ 
+ SRC_URI[automake.md5sum] = "c2972c4d9b3e29c03d5f2af86249876f"
+ SRC_URI[automake.sha256sum] = "5b159d3c0e0a1f87de71b68bcb9f1a1c49e9e71749c9b723f17e2e1e0295c7ae"
+-- 
+1.7.1
+
 
 
