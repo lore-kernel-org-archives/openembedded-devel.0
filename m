@@ -1,49 +1,28 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sylvain.pare@gmail.com>) id 1POVkX-00005G-5F
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Dec 2010 14:32:34 +0100
-Received: by qyk36 with SMTP id 36so6515133qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Dec 2010 05:31:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=CQi033RovOQVGzSy0hOFux9Z8Or/TgZXTLCcbg53axw=;
-	b=t01Uk8Z+98n9C6GAZYrAvdfhZ+UyB+9vMbJ6GId7ex3EJarzqy7kZJ0v2VXkfL4F+0
-	UtEqs0Q6ndhOPeVwBW/SMN1clex4wbZ6YOwdWx574G08dKjdrV9kNaD9IFxQt3bnynge
-	0T6DRum1+OUueY4D/qwqs/HzpfHhqupj5Cajs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=mOiMwyINrm8YAmLF8yxpKmy5UcCNBLg99x46f4qK1JgDXm25dB+GLfRX5yXu7F99y3
-	zAzLYhQ1P3wTaUz7QsYNVKBstKBUyO3lSHQKuK2e0VKzlwmSReh0eYdtqGve9DEyKKsK
-	0gwbrHwZ6bx/PoV3qtioHe3k/RiW6d8zsXCyY=
-Received: by 10.229.183.135 with SMTP id cg7mr1197207qcb.296.1291383068652;
-	Fri, 03 Dec 2010 05:31:08 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.229.185.81 with HTTP; Fri, 3 Dec 2010 05:28:18 -0800 (PST)
-In-Reply-To: <AANLkTi=G2iFhxVK8kg5+rwLq82vVku3UD-CAUOBKrPEw@mail.gmail.com>
-References: <AANLkTimx+osQLb0Km1pXgQuPEwx3r1-ovhD9um_9p8GV@mail.gmail.com>
-	<1291133947.3599.16.camel@mattotaupa>
-	<AANLkTi=DUaiM6LhuWG6MVOntGBu7oikQm9QesD37zRj5@mail.gmail.com>
-	<4CF56767.3050007@freyther.de>
-	<AANLkTinp2NUm-WqGA+3n4sufPhMM0mB=dcH+Y-uMZ6Wf@mail.gmail.com>
-	<AANLkTi=G2iFhxVK8kg5+rwLq82vVku3UD-CAUOBKrPEw@mail.gmail.com>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Fri, 3 Dec 2010 14:28:18 +0100
-Message-ID: <AANLkTikPoB-_uDc79kh5XE5yLpvrS8ETukvAL6XsRWUG@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1POVxq-0000M6-Dr for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Dec 2010 14:46:19 +0100
+Received: from f053040093.adsl.alicedsl.de ([78.53.40.93]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1POVwW-0006iI-Nj; Fri, 03 Dec 2010 13:44:56 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: sylvain.pare@gmail.com
+Date: Fri, 03 Dec 2010 14:44:55 +0100
+Message-ID: <1291383895.3669.11.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: package request for Phonon-VLC backend
+Subject: [PATCH] eina: Remove `gnu_source.patch` which was applied upstream.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,71 +36,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Dec 2010 13:32:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 03 Dec 2010 13:46:19 -0000
+X-Groupsio-MsgNum: 26866
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-qkV7X7Wl6pvjpeijrE6E"
+
+--=-qkV7X7Wl6pvjpeijrE6E
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Martin could you sum up here what is wrong please ?
-for those interested by my attempts to build Phonon-VLC backend
-here is my personal/modified recipes
-http://pare.sylvain.perso.sfr.fr/recipes-perso.tar.gz
-containing qt4-tools-native.bb modified , automoc-native updated to git and
-qt4-plugin-phonon-backend-vlc.bb
-For now I am done about it.
-Thanks.
-Regards,
+Date: Fri, 3 Dec 2010 14:01:20 +0100
 
-Sylvain (aka GarthPS)
+Something similar to this patch was applied upstream r53157 [1] which close=
+s upstream ticket 537 [2].
 
-ps: if your are intersted like me in this backend, there could be an other
-way to do : to fix cmake's needs of the phonon vlc backend itself
-to don't need automoc-native anymore. it was proposed to me by j-b on
-#phonon chanel but i don't have the skill to that.
+	$ git grep EFL_SRCREV
+	classes/e-base.bbclass:EFL_SRCREV ?=3D "55157"
 
+This change is build tested with the following configurations.
 
-2010/12/1 Sylvain Par=E9 <sylvain.pare@gmail.com>
+	Build Configuration:
+	BB_VERSION        =3D "1.10.0"
+	METADATA_BRANCH   =3D "org.openembedded.dev"
+	METADATA_REVISION =3D "842f05d"
+	TARGET_ARCH       =3D "arm"
+	TARGET_OS         =3D "linux-gnueabi"
+	MACHINE           =3D "beagleboard"
+	DISTRO            =3D "minimal"
+	DISTRO_VERSION    =3D "dev-snapshot-20101203"
+	TARGET_FPU        =3D "hard"
 
-> Ok I made some progress!
-> Automoc build now ( attached my recipe for it)
-> but qt4-plugin-phonon-backend-vlc failed =3D>
-> http://tinderbox.openembedded.org/packages/1159577/
->
-> I have attached my recipe too.
-> If someone can give me an hint.
-> thanks.
-> regards,
->
-> Sylvain (aka GarthPS)
->
-> 2010/12/1 Sylvain Par=E9 <sylvain.pare@gmail.com>
->
-> Hello Holger,
->> I tried with qt4-tools-native but Phonon-VLC backend trally needs automo=
-c4
->> "Did not find automoc4"
->>
->> 2010/11/30 Holger Freyther <holger+oe@freyther.de<holger%2Boe@freyther.d=
-e>
->> >
->>
->> On 11/30/2010 08:03 PM, Sylvain Par=E9 wrote:
->>> > Thanks for your interest!
->>> > here is my too recipes which are not soo valueable as it is mainly bu=
-mp
->>> > version or so.
->>> > here my automoc-native :
->>> >
->>>
->>> sorry, I didn't completely follow the thread but qt4-tools-native
->>> installs
->>> moc4, rcc4 and all the other tools to build Qt applications.
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->>
->
+	Build Configuration:
+	BB_VERSION        =3D "1.10.0"
+	METADATA_BRANCH   =3D "org.openembedded.dev"
+	METADATA_REVISION =3D "842f05d"
+	TARGET_ARCH       =3D "arm"
+	TARGET_OS         =3D "linux-uclibceabi"
+	MACHINE           =3D "beagleboard"
+	DISTRO            =3D "minimal-uclibc"
+	DISTRO_VERSION    =3D "dev-snapshot-20101203"
+	TARGET_FPU        =3D "hard"
 
+[1] http://trac.enlightenment.org/e/changeset/53157
+[2] https://trac.enlightenment.org/e/ticket/537
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+CC: Henning Heinold <heinold@inf.fu-berlin.de>
+---
+ recipes/efl1/eina/gnu_source.patch |   12 ------------
+ recipes/efl1/eina_svn.bb           |    2 --
+ 2 files changed, 0 insertions(+), 14 deletions(-)
+ delete mode 100644 recipes/efl1/eina/gnu_source.patch
+
+diff --git a/recipes/efl1/eina/gnu_source.patch b/recipes/efl1/eina/gnu_sou=
+rce.patch
+deleted file mode 100644
+index 8af08eb..0000000
+--- a/recipes/efl1/eina/gnu_source.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-Index: eina/configure.ac
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- eina.orig/configure.ac	2009-11-26 15:58:28.784112802 +0100
+-+++ eina/configure.ac	2009-11-26 15:59:34.524939842 +0100
+-@@ -273,6 +273,7 @@
+- AC_C_INLINE
+- AC_C___ATTRIBUTE__
+- AC_PROG_CC_STDC
+-+AC_GNU_SOURCE
+-=20
+- EINA_CPPFLAGS=3D""
+- case "$host_os" in
+diff --git a/recipes/efl1/eina_svn.bb b/recipes/efl1/eina_svn.bb
+index 34e1aa8..406db18 100644
+--- a/recipes/efl1/eina_svn.bb
++++ b/recipes/efl1/eina_svn.bb
+@@ -6,8 +6,6 @@ SRCREV =3D "${EFL_SRCREV}"
+=20
+ inherit efl
+=20
+-SRC_URI +=3D "file://gnu_source.patch"
+-
+ # Some upgrade path tweaking
+ AUTO_LIBNAME_PKGS =3D ""
+=20
+--=20
+1.7.2.3
+
+--=-qkV7X7Wl6pvjpeijrE6E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkz49FcACgkQPX1aK2wOHVh75QCfZOXEoFAhT+cee7m5ZYX0uZyR
+u4YAnRM1XaZgboGdAEi/3ieFX7e/9YXA
+=z5d+
+-----END PGP SIGNATURE-----
+
+--=-qkV7X7Wl6pvjpeijrE6E--
