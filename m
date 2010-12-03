@@ -1,41 +1,41 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1POWJ6-0001MB-3Q
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1POXhl-0002s3-Lj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Dec 2010 15:08:18 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1POWHi-0003uI-O7 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Dec 2010 06:06:50 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 3 Dec 2010 06:06:53 -0800
-Received: from [172.30.80.45] ([172.30.80.45]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 3 Dec 2010 07:06:49 -0700
-Message-ID: <4CF8F96B.8080606@mentor.com>
-Date: Fri, 03 Dec 2010 07:06:35 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+	Fri, 03 Dec 2010 16:37:50 +0100
+Received: by ywp4 with SMTP id 4so1172385ywp.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 Dec 2010 07:36:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=BCy09Anm/Oc+ylaayJPtirzkMnXjsIMx1r6cPOyzg0s=;
+	b=bZWvv1hSzq52Tcp+w6d1HHDwf/GyHH0/K1X83jvst7tIjGzGJ67Qb08xfWN3Uh/VjH
+	QGnLG+ZDDJ3mzgC7aQPmz4Hu/aMsBFnJYTcH0+TU63aZMtpyPcRKTw8NQp7QGe5/dVxs
+	km/ibzsf2qcr9PnQl35aLOOKkYVDEwQ9Pk6xY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Gq6KymXnhyFqBvQ/HLHOsymFruPOg1qy76PFbAkcfxO/pRkXgsbKCVClfoN3VIIc6D
+	XOHESLgF5hHc5HCsdZMSmdoYsvJi8786Vuk3HvCIy4HMxKsDxwC5IQHQf2lFAOSsBkiK
+	L+YyqCgMhC7VxIBvCtalx3udpTVcv4pz6zQUM=
 MIME-Version: 1.0
+Received: by 10.231.35.5 with SMTP id n5mr1932704ibd.182.1291390584727; Fri,
+	03 Dec 2010 07:36:24 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Fri, 3 Dec 2010 07:36:24 -0800 (PST)
+Date: Fri, 3 Dec 2010 16:36:24 +0100
+Message-ID: <AANLkTim=weStfsykRNc7_bAZG6KExZt9sS_O15WH9F5=@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CF6E7CE.8090801@gmail.com>	<4CF7A630.5030001@mentor.com>
-	<AANLkTimjY7=meA6JrgEfAgQ4ozX_S0fg9r1Ya+_wqt9s@mail.gmail.com>
-In-Reply-To: <AANLkTimjY7=meA6JrgEfAgQ4ozX_S0fg9r1Ya+_wqt9s@mail.gmail.com>
-X-OriginalArrivalTime: 03 Dec 2010 14:06:49.0782 (UTC)
-	FILETIME=[54377560:01CB92F3]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] bind_9.3.6.bb: Don't remove nslookup, it exists in FILES_${PN}-utils.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: release 2010-12: tar error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,32 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Dec 2010 14:08:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Dec 2010 15:37:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 12/02/2010 05:23 PM, Graham Gower wrote:
-> On 3 December 2010 00:29, Tom Rini<tom_rini@mentor.com>  wrote:
->> On 12/01/2010 05:26 PM, Graham Gower wrote:
->>>
->>> Also fixes the following with uclibc:
->>> rm: cannot remove
->>> `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/bind-9.3.6-r1/image/usr/bin/nslookup':
->>> No such file or directory
->>>
->>> Signed-off-by: Graham Gower<graham.gower@gmail.com>
->>
->> Can you please go fixup all of the bind recipes and then add nslookup to
->> u-a?  Thanks.
->
-> I'm happy to fix all the bind recipes, but does it really need to be
-> added to u-a as well? What other recipe(s) ship this binary?
+Not sure if this is reproducible or a race but when building console-image
+for minimal for calamari I got:
 
-You know? I don't recall 100% off-hand but I think nas-server-image will 
-show the conflict.
+ERROR: Function staging_packager failed
+NOTE: Task failed: ('function staging_packager failed',
+'/home/hudson/jobs/FM_TEST/workspace/tmp/work/calamari-oe-linux-gnuspe/linux-2.6.30-r6/temp/log.staging_packager.27026')
+ERROR: Task 601
+(/home/hudson/jobs/FM_TEST/workspace/openembedded/recipes/linux/linux_2.6.30.bb,
+do_package_stage) failed with 256
+NOTE: oestats: task failed, see
+http://tinderbox.openembedded.net/packages/1176040/
+ERROR: Logfile of failure stored in:
+/home/hudson/jobs/FM_TEST/workspace/tmp/work/calamari-oe-linux-gnuspe/linux-2.6.30-r6/temp/log.staging_packager.27026
+Log data follows:
+| tar: .: file changed as we read it
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+NOTE: package linux-2.6.30-r6: task do_package_stage: Failed
 
+Didn't have time to dig into this. Sry.
+
+Frans
 
