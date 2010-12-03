@@ -1,41 +1,29 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1POUuy-0007G8-Bn
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1POUzf-0007OI-B8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Dec 2010 13:39:16 +0100
-Received: by gyd12 with SMTP id 12so4833790gyd.6
+	Fri, 03 Dec 2010 13:44:07 +0100
+Received: from [192.168.0.20] (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id EB90A1B40D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Dec 2010 04:37:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=CSutsNsI1zKDkfg5+u16DpDlP94uTq3xe+6B6sCc3lk=;
-	b=OxSub5C0mupCGxKeKZG+O7J9ce9jNHEBy3leD0p62i1fW3xsYpiZuhY/hSn9OgecDH
-	3j62OWaEaZXJnZjeEPM8GgKN0c9B6a9TbtVg31yPfcr7pDdheb73+RTdxKeLBVUGrcXO
-	pCXrImGCJNC0ClSGCfoFHms34GWbn6FvMs0RA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=U7Sh5NqyEnxykyogCvPVuoj0LTiegHXKxJ4ZdMMvkeUe11V/Od/v9N2cwrKesTpT9H
-	NKWplN4tc/GtIMCWzDuRGzZ0lBSiG9nkEEwZ2AzrauURlmGickTVlDp8vD86pzLrPWZg
-	bDu0NdgXkvYZLjeguSdw/AsTPjRTheY1H/Qkc=
+	Fri,  3 Dec 2010 13:44:05 +0100 (CET)
+Message-ID: <4CF8E5C5.9000703@sensortherm.de>
+Date: Fri, 03 Dec 2010 13:42:45 +0100
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
-Received: by 10.231.13.203 with SMTP id d11mr1732139iba.157.1291379871642;
-	Fri, 03 Dec 2010 04:37:51 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Fri, 3 Dec 2010 04:37:51 -0800 (PST)
-Date: Fri, 3 Dec 2010 13:37:51 +0100
-Message-ID: <AANLkTi=g1i2wB-9MKVh8AMctnFJVUccYFw0RYf600Tm-@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_LOW,SPF_PASS,WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: release 2010-12: slugos does not build due to handhelds.org breakage
+Subject: Can not boot console-image (dm355-leopard)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,23 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Dec 2010 12:39:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 03 Dec 2010 12:44:07 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Still get this on a clean build (machine nslu2le, distro slugos image
-slugos-image, rm-ed downloads, sources.openembedded.org as premirror).
+Hi,
 
-OTE: package ipkg-utils-native-1.6+cvs20050404-r25: task do_fetch: Started
-NOTE: fetch http://anoncvs@sources.openembedded.org//ipkg-utils_anoncvs.handhelds.org__20060106.tar.gz
---2010-12-03 10:23:42--
-http://anoncvs@sources.openembedded.org//ipkg-utils_anoncvs.handhelds.org__20060106.tar.gz
-Resolving sources.openembedded.org... 140.211.169.165
-Connecting to sources.openembedded.org|140.211.169.165|:80... connected.
-HTTP request sent, awaiting response... 404 Not Found
-2010-12-03 10:23:43 ERROR 404: Not Found.
+i make a console-image and this does not boot. The kernel hangs after 
+"done, booting the kernel.". Then i enabled CONFIG_DEBUG_LL and see, 
+that the machine ID does not match:
 
-cvs [checkout aborted]: connect to
-anoncvs.handhelds.org(128.31.0.23):2401 failed: Connection refused
 
-Frans
+Automatic boot of image at addr 0x87000000 ...
+## Booting kernel from Legacy Image at 87000000 ...
+    Image Name:   Angstrom/2.6.31+2.6.32-rc2-r49+g
+    Created:      2010-12-03  11:43:29 UTC
+    Image Type:   ARM Linux Kernel Image (uncompressed)
+    Data Size:    2004176 Bytes =  1.9 MB
+    Load Address: 80008000
+    Entry Point:  80008000
+    Verifying Checksum ... OK
+    Loading Kernel Image ... OK
+OK
+
+Starting kernel ...
+
+Uncompressing 
+Linux..................................................................................................................................... 
+done, booting the kernel.
+
+Error: unrecognized/unsupported machine ID (r1 = 0x0000085a).
+
+Available machine support:
+
+ID (hex)	NAME
+e2855034	
+
+Please check your kernel config and/or bootloader.
+
+
+
+MACH_DM355_LEOPARD, and ARCH_DAVINCI and ARCH_DAVINCI_DM355 are set to yes.
+
+What can i do?
+
+Thanks,
+
+Klaus
+
+
 
