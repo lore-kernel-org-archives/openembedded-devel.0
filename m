@@ -1,29 +1,48 @@
-Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1POUzf-0007OI-B8
+	(envelope-from <martin.jansa@gmail.com>) id 1POV2W-0007V7-N5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Dec 2010 13:44:07 +0100
-Received: from [192.168.0.20] (77-22-235-200-dynip.superkabel.de
-	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id EB90A1B40D
+	Fri, 03 Dec 2010 13:47:05 +0100
+Received: by fxm17 with SMTP id 17so6709933fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Dec 2010 13:44:05 +0100 (CET)
-Message-ID: <4CF8E5C5.9000703@sensortherm.de>
-Date: Fri, 03 Dec 2010 13:42:45 +0100
-From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
-MIME-Version: 1.0
+	Fri, 03 Dec 2010 04:45:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=OnsuAZWtydgwDP2TlpgjgIxTceWfs0V6D87G5w9XS40=;
+	b=aAkAbajjSUug/hvrb/2tGQ57MDaovyXDw4+l5nRPVb0rM3aNil/h3W43R5EpTz4wae
+	oPmKnLYy4h3Yx1Gopu3TpTRMdZ/hbtdASDVY/LjAKcjxnU9OjIYpEMQNP76immtE2GVG
+	cEH1veli0yGHIc1Nyu5OCpxPSTRIshz2ysIcc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=kMvydZVMwiAPzXkxCLGPCn3eTBs6ATnYixsu2txO1G4Wq16HWrTXmIXBUxO9rel8p6
+	aeFR3M5OyP2pSJ8cJoZGtB5W5UKKa3QoUD1ZI2JeHiGEHX15mTsBwTweZjN0bePqnKm/
+	sq9j3LpYOTvPR7ZrZX/5obM2eh25osrB/3E04=
+Received: by 10.223.101.196 with SMTP id d4mr2067220fao.23.1291380340112;
+	Fri, 03 Dec 2010 04:45:40 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 21sm601383fav.41.2010.12.03.04.45.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 03 Dec 2010 04:45:34 -0800 (PST)
+Date: Fri, 3 Dec 2010 13:45:34 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 188.40.84.136
-X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
+Message-ID: <20101203124534.GA3403@jama>
+References: <AANLkTi=g1i2wB-9MKVh8AMctnFJVUccYFw0RYf600Tm-@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTi=g1i2wB-9MKVh8AMctnFJVUccYFw0RYf600Tm-@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS,WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Can not boot console-image (dm355-leopard)
+Subject: Re: release 2010-12: slugos does not build due to handhelds.org breakage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,53 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Dec 2010 12:44:07 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Dec 2010 12:47:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
+On Fri, Dec 03, 2010 at 01:37:51PM +0100, Frans Meulenbroeks wrote:
+> Still get this on a clean build (machine nslu2le, distro slugos image
+> slugos-image, rm-ed downloads, sources.openembedded.org as premirror).
 
-i make a console-image and this does not boot. The kernel hangs after 
-"done, booting the kernel.". Then i enabled CONFIG_DEBUG_LL and see, 
-that the machine ID does not match:
+that's because slugos uses different SRCDATE for this package
+./distro/include/slugos.inc:SRCDATE_ipkg-utils-native ?= "20060106"
 
+I don't have that file in my downloads dir...
 
-Automatic boot of image at addr 0x87000000 ...
-## Booting kernel from Legacy Image at 87000000 ...
-    Image Name:   Angstrom/2.6.31+2.6.32-rc2-r49+g
-    Created:      2010-12-03  11:43:29 UTC
-    Image Type:   ARM Linux Kernel Image (uncompressed)
-    Data Size:    2004176 Bytes =  1.9 MB
-    Load Address: 80008000
-    Entry Point:  80008000
-    Verifying Checksum ... OK
-    Loading Kernel Image ... OK
-OK
+Regards,
 
-Starting kernel ...
+> OTE: package ipkg-utils-native-1.6+cvs20050404-r25: task do_fetch: Started
+> NOTE: fetch http://anoncvs@sources.openembedded.org//ipkg-utils_anoncvs.handhelds.org__20060106.tar.gz
+> --2010-12-03 10:23:42--
+> http://anoncvs@sources.openembedded.org//ipkg-utils_anoncvs.handhelds.org__20060106.tar.gz
+> Resolving sources.openembedded.org... 140.211.169.165
+> Connecting to sources.openembedded.org|140.211.169.165|:80... connected.
+> HTTP request sent, awaiting response... 404 Not Found
+> 2010-12-03 10:23:43 ERROR 404: Not Found.
+> 
+> cvs [checkout aborted]: connect to
+> anoncvs.handhelds.org(128.31.0.23):2401 failed: Connection refused
+> 
+> Frans
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Uncompressing 
-Linux..................................................................................................................................... 
-done, booting the kernel.
-
-Error: unrecognized/unsupported machine ID (r1 = 0x0000085a).
-
-Available machine support:
-
-ID (hex)	NAME
-e2855034	
-
-Please check your kernel config and/or bootloader.
-
-
-
-MACH_DM355_LEOPARD, and ARCH_DAVINCI and ARCH_DAVINCI_DM355 are set to yes.
-
-What can i do?
-
-Thanks,
-
-Klaus
-
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
