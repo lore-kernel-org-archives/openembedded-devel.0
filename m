@@ -1,38 +1,33 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail-ew0-f44.google.com ([209.85.215.44])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1POW0d-0000X5-3B
+	(envelope-from <jay@jay-tech.ru>) id 1POW52-0000df-Vs
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Dec 2010 14:49:11 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 6990890FEE9
+	Fri, 03 Dec 2010 14:53:45 +0100
+Received: by ewy8 with SMTP id 8so5003274ewy.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Dec 2010 08:47:48 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 07571-09 for <openembedded-devel@lists.openembedded.org>; 
-	Fri,  3 Dec 2010 08:47:48 -0500 (EST)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 30E2990FD2A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Dec 2010 08:47:48 -0500 (EST)
-Message-ID: <4CF8F503.6030202@cbnco.com>
-Date: Fri, 03 Dec 2010 08:47:47 -0500
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
-MIME-Version: 1.0
+	Fri, 03 Dec 2010 05:52:23 -0800 (PST)
+Received: by 10.213.31.78 with SMTP id x14mr588267ebc.1.1291384341520;
+	Fri, 03 Dec 2010 05:52:21 -0800 (PST)
+Received: from mozart.localnet (95-29-180-5.broadband.corbina.ru [95.29.180.5])
+	by mx.google.com with ESMTPS id b52sm1503943eei.19.2010.12.03.05.52.20
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 03 Dec 2010 05:52:20 -0800 (PST)
+Sender: Yury Bushmelev <jay@jay-tech.ru>
+From: Yuri Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4CF86DFD.904@gmail.com>
-In-Reply-To: <4CF86DFD.904@gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+Date: Fri, 3 Dec 2010 16:47:11 +0300
+User-Agent: KMail/1.13.5 (Linux/2.6.36-ARCH; KDE/4.5.4; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <201012031647.11748.jay4mail@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.44
+X-SA-Exim-Mail-From: jay@jay-tech.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] openjade_1.3.2.bb: Create directory before installing a file to that location.
+Subject: [release-2010.12] ffmpeg_svn build fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,15 +41,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Dec 2010 13:49:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 03 Dec 2010 13:53:45 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-Graham Gower wrote:
-> Fixes a breakage I introduced in last openjade commit.
-> 
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+Hello!
 
-Acked-by: Michael Smith <msmith@cbnco.com>
+Today's testbuilder run on release branch for angstrom-2008.1/angstrom-
+gnome-image-big was failed on ffmpeg_svn:
+http://tinderbox.openembedded.net/packages/1171052/
+
+-- 
+Yury Bushmelev
 
 
