@@ -1,37 +1,45 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <robert@erafx.com>) id 1POG9f-0007i7-Qi
+	(envelope-from <graham.gower@gmail.com>) id 1POJS5-00030c-Kr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Dec 2010 21:53:29 +0100
-Received: by vws6 with SMTP id 6so3540222vws.6
+	Fri, 03 Dec 2010 01:24:43 +0100
+Received: by wwi17 with SMTP id 17so3375653wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Dec 2010 12:52:04 -0800 (PST)
+	Thu, 02 Dec 2010 16:23:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=XvoD5X3+7RWQ91H9iOuerJzBJ2yE41iJBkH9Tq5LjCI=;
+	b=YBX0Ete9VrXTvcLyRyKFfYl/7U/iqm88wMu5zK9/LaPv9ZgWk3KPHyath1Hd7p2M+e
+	XS98mxcWqTjrE+tJ75Hv+tQ5nym+0Z/WabTt2lp7tRS9SxJr6AFlYifvmzP5G8PjnHYO
+	ZKLpcfsxgX0UE86zqqNXfFApWs9DW/A901TQk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=rQ5+uM8TSnU37q96jAUMHRu1oHNr0CxvRhY7yI86HPg1ooPev1r6hSbRlXpvFJnsqa
+	IRkHkQRq2P3MmNRnrA0xUmog/76It3Fk3IyadYzaJTFkMQa/S6IUw1n4KggcSO1EDe0e
+	O/ZopbfR1UDBfEB9weNiDmEnxgBkMuhzct0BQ=
 MIME-Version: 1.0
-Received: by 10.229.241.196 with SMTP id lf4mr442192qcb.55.1291323124151; Thu,
-	02 Dec 2010 12:52:04 -0800 (PST)
-Received: by 10.220.194.65 with HTTP; Thu, 2 Dec 2010 12:52:04 -0800 (PST)
-X-Originating-IP: [24.165.208.114]
-In-Reply-To: <4CF80383.6010401@lambsys.com>
-References: <4CF68D24.80900@lambsys.com>
-	<20101201180621.GB20482@excalibur.local>
-	<4CF69653.5000504@lambsys.com>
-	<20101201185406.GC20482@excalibur.local>
-	<AANLkTins+XE2Zq2P=wBHUc9N9XvD0f+t7zdyVjNevggS@mail.gmail.com>
-	<4CF80383.6010401@lambsys.com>
-Date: Thu, 2 Dec 2010 15:52:04 -0500
-Message-ID: <AANLkTimBA8-FcoVsePaoe8zi8FcdcZxRhupsviF8VWQC@mail.gmail.com>
-From: Robert Foerster <robert@erafx.com>
+Received: by 10.227.132.206 with SMTP id c14mr1079325wbt.78.1291335796168;
+	Thu, 02 Dec 2010 16:23:16 -0800 (PST)
+Received: by 10.227.155.208 with HTTP; Thu, 2 Dec 2010 16:23:16 -0800 (PST)
+In-Reply-To: <4CF7A630.5030001@mentor.com>
+References: <4CF6E7CE.8090801@gmail.com>
+	<4CF7A630.5030001@mentor.com>
+Date: Fri, 3 Dec 2010 10:53:16 +1030
+Message-ID: <AANLkTimjY7=meA6JrgEfAgQ4ozX_S0fg9r1Ya+_wqt9s@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: robert@erafx.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.2 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Documentation
+Subject: Re: [PATCH] bind_9.3.6.bb: Don't remove nslookup, it exists in FILES_${PN}-utils.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,132 +53,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Dec 2010 20:53:29 -0000
+X-List-Received-Date: Fri, 03 Dec 2010 00:24:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 2, 2010 at 3:37 PM, David Lambert <dave@lambsys.com> wrote:
-
-> Thanks for all the suggestions. While on the subject, does a dictionary of
-> keywords with their meanings exist anywhere? Newbies like me may find it
-> very useful when browsing recipes. Some terms are intuitively obvious, such
-> as DEV_BASE, but others such as PR, INHERIT, PV, leave me with some
-> ambiguity.
+On 3 December 2010 00:29, Tom Rini <tom_rini@mentor.com> wrote:
+> On 12/01/2010 05:26 PM, Graham Gower wrote:
+>>
+>> Also fixes the following with uclibc:
+>> rm: cannot remove
+>> `/mnt/oe/tmp/work/mipsel-oe-linux-uclibc/bind-9.3.6-r1/image/usr/bin/nsl=
+ookup':
+>> No such file or directory
+>>
+>> Signed-off-by: Graham Gower<graham.gower@gmail.com>
 >
+> Can you please go fixup all of the bind recipes and then add nslookup to
+> u-a? =A0Thanks.
 >
-Some info can be found in the manual:
-http://docs.openembedded.org/usermanual/usermanual.html#recipes_versioning
-Discussed in the manual are many of the items which are initially confusing:
-P, PN, PV, PR, PF, S, D, WORDIR, etc
-
-Also useful is to read the bitbake manual, which defines the basic metadata
-syntax handled by bitbake. http://bitbake.berlios.de/manual/
-
-Hope that helps.
-Bob
-
-
-
-> Regards,
->
-> Dave.
->
->
->
-> On 12/01/2010 04:46 PM, Robert Foerster wrote:
->
->> On Wed, Dec 1, 2010 at 1:54 PM, Stefan Schmidt<stefan@datenfreihafen.org
->> >wrote:
->>
->>  Hello.
->>>
->>> On Wed, 2010-12-01 at 12:39, David Lambert wrote:
->>>
->>>> That is indeed the version of documentation that I was reading. To
->>>> be more specific, one of the subjects I was attempting to look up
->>>> was how to specialize a recipe using "amend.inc". I do not see any
->>>> documentation on this subject.
->>>>
->>> We lack a good technical writer in the community. IIRC there was a
->>> blogpost
->>> from
->>> Khem about it and maybe some more infos on the mailling list. Thats of
->>> course
->>> not the most straight forward location for the information.
->>>
->>> If you searched together the information it would be great if you could
->>> send a
->>> patch updating the manual with it. :)
->>>
->>> regards
->>> Stefan Schmidt
->>>
->>>
->>>  I'm not an expert on the subject, but I've managed to utilize amend.inc
->> based on some information I pieced together from the irc logs.  I hope to
->> soon write an article on how to use amend.inc, but haven't yet found the
->> time.
->>
->> (This is far from authoritative, but it's been working for me here)
->>
->> You need to add the following to build-dir/conf/local.conf (can also go in
->> overlay/conf/site.conf).
->> INHERIT += "amend"
->>
->> DEV_BASE = "${HOME}/dev/openembedded/dev"
->> COLLECTIONS = "${DEV_BASE}/overlay/recipes \
->>                 ${DEV_BASE}/openembedded/recipes"
->>
->> # By default, file:// SRC_URIs only look under the current .bb file.
->> # Prepend our overlays into the file:// search path, so we can override
->> # openembedded recipes' SRC_URI files. Also, ensure the openembedded
->> # files are always in the search path, so our overlay .bb's can
->> # reference upstream files.
->> FILESPATHBASE =. "${@ \
->>         ':'.join([os.path.join(recipedir, \
->>                                 os.path.basename(os.path.dirname( \
->>                                                         d.getVar('FILE',
->> 1)))) \
->>                 for recipedir in d.getVar('COLLECTIONS', 1).split()])}:"
->>
->>
->> You'll need to make DEV_BASE and COLLECTIONS match your setup.  This
->> assumes
->> that I have two trees with recipes:
->>  - openembedded
->>  - overlay
->>
->> This makes sure that for a given recipe, my local overlay will be in its
->> FILESPATH.
->>
->>
->> Now, for example, I've added a patch to psplash to adjust the colors.
->> In overlay/recipes/psplash/ I have two files:
->> amend.inc:
->> PR .= "-amend"
->> SRC_URI += "file://0001-tweaked-for-company-colors.patch"
->>
->> and my patch, named 0001-tweaked-for-company-colors.patch
->>
->> Now, the new patch will be applied when psplash is built.  Also, I like
->> updating PR with -amend, this way the package is now shown
->> as psplash-0.0+svnr422-r34-amend, so that I can easily tell that I've
->> amended the package.
->>
->> I'm sure there are others who can provide more/better information, but
->> that'll hopefully get you started.
->>
->> Regards,
->> Bob Foerster
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->>
+> --
+> Tom Rini
+> Mentor Graphics Corporation
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
+
+I'm happy to fix all the bind recipes, but does it really need to be
+added to u-a as well? What other recipe(s) ship this binary?
+
+-Graham
+
 
