@@ -1,30 +1,31 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from mail.dns-net.ch ([195.160.190.3] helo=111.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1POPXf-0000aH-Ju
+	(envelope-from <c.aeschlimann@acn-group.ch>) id 1POQCi-0001Ut-Ad
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Dec 2010 07:54:52 +0100
-Received: from [192.168.1.128] (95-90-74-25-dynip.superkabel.de [95.90.74.25])
-	by dd20204.kasserver.com (Postfix) with ESMTP id B2899180F429D
+	Fri, 03 Dec 2010 08:37:17 +0100
+Received: from [172.16.145.92] (unknown [212.98.42.40])
+	by 111.com (Postfix) with ESMTPA id 0B8D62F071
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Dec 2010 07:53:27 +0100 (CET)
-Message-ID: <4CF893D3.50900@opensimpad.org>
-Date: Fri, 03 Dec 2010 07:53:07 +0100
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
+	Fri,  3 Dec 2010 08:35:53 +0100 (CET)
+Message-ID: <4CF89DD9.4030904@acn-group.ch>
+Date: Fri, 03 Dec 2010 08:35:53 +0100
+From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
+	rv:1.9.2.12) Gecko/20101027 Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20101201090616.204910@gmx.net>
-In-Reply-To: <20101201090616.204910@gmx.net>
-X-SA-Exim-Connect-IP: 85.13.140.93
-X-SA-Exim-Mail-From: Bernhard.Guillon@opensimpad.org
+References: <4CF68D24.80900@lambsys.com>	<20101201180621.GB20482@excalibur.local>	<4CF69653.5000504@lambsys.com>	<20101201185406.GC20482@excalibur.local>	<AANLkTins+XE2Zq2P=wBHUc9N9XvD0f+t7zdyVjNevggS@mail.gmail.com>	<4CF80383.6010401@lambsys.com>
+	<AANLkTimBA8-FcoVsePaoe8zi8FcdcZxRhupsviF8VWQC@mail.gmail.com>
+In-Reply-To: <AANLkTimBA8-FcoVsePaoe8zi8FcdcZxRhupsviF8VWQC@mail.gmail.com>
+X-SA-Exim-Connect-IP: 195.160.190.3
+X-SA-Exim-Mail-From: c.aeschlimann@acn-group.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_HELO_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: request for versioning on user manual.
+Subject: Re: Documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,26 +39,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Dec 2010 06:54:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 03 Dec 2010 07:37:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On 01.12.2010 10:06, Alexander Stohr wrote:
-> i have two PDF documents for e.g. offline reading and archiving.
-> [...]
-> how about adding a useable versioning to this document?
->   =20
-+1
-> i think of something that will be persistent even if printed on white p=
-aper.
->
->
->   =20
+Hi,
 
-What about the date + SRCREV ?
+On 02.12.2010 21:52, Robert Foerster wrote:
+> On Thu, Dec 2, 2010 at 3:37 PM, David Lambert <dave@lambsys.com> wrote:
+>=20
+>> Thanks for all the suggestions. While on the subject, does a dictionar=
+y of
+>> keywords with their meanings exist anywhere? Newbies like me may find =
+it
+>> very useful when browsing recipes. Some terms are intuitively obvious,=
+ such
+>> as DEV_BASE, but others such as PR, INHERIT, PV, leave me with some
+>> ambiguity.
+>>
+>>
+> Some info can be found in the manual:
+> http://docs.openembedded.org/usermanual/usermanual.html#recipes_version=
+ing
+> Discussed in the manual are many of the items which are initially confu=
+sing:
+> P, PN, PV, PR, PF, S, D, WORDIR, etc
 
-Best regards
-Bernhard Guillon
+The poky handbook also gives a few useful definitions:
 
+http://www.pokylinux.org/releases/green-3.3/doc/poky-handbook.html#var-gl=
+ossary-a
+
+>=20
+> Also useful is to read the bitbake manual, which defines the basic meta=
+data
+> syntax handled by bitbake. http://bitbake.berlios.de/manual/
+>=20
+> Hope that helps.
+> Bob
+>=20
+
+[...]
+
+
+--=20
+Christophe Aeschlimann
+
+Embedded Software Engineer
+
+Advanced Communications Networks S.A.
+
+Rue du Puits-Godet 8a
+2000 Neuch=E2tel, Switzerland
+
+T=E9l. +41 32 724 74 31
+
+c.aeschlimann@acn-group.ch
 
 
