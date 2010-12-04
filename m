@@ -1,25 +1,43 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1POrYi-0001nU-EQ
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Dec 2010 13:49:49 +0100
-Received: from localhost (95-90-74-25-dynip.superkabel.de [95.90.74.25])
-	by dd20204.kasserver.com (Postfix) with ESMTP id 525AF18051DB2;
-	Sat,  4 Dec 2010 13:48:25 +0100 (CET)
-From: Bernhard.Guillon@opensimpad.org
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 Dec 2010 13:48:22 +0100
-Message-Id: <1291466902-9119-1-git-send-email-Bernhard.Guillon@opensimpad.org>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 85.13.140.93
-X-SA-Exim-Mail-From: Bernhard.Guillon@opensimpad.org
+	(envelope-from <raj.khem@gmail.com>)
+	id 1POuYe-0005Wh-9c; Sat, 04 Dec 2010 17:01:57 +0100
+Received: by gyd12 with SMTP id 12so5411482gyd.6
+	for <multiple recipients>; Sat, 04 Dec 2010 08:00:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type;
+	bh=EIuC2dt06Y3mMzvrfCMi1bIYcXKzQ5Lh7SM1JLDbgb4=;
+	b=APjvZQIyjmwZFMa9pppNelVXXuHXNtvMjM87WVq84OLWIR3PlYxpR2/CpGKA8gYd62
+	jfvOx0U7NmNz7enkMXIqgT/+QyKsBIGBwxSjhJ/tcaMJSentPkIPJYwRYt6gkOJvp+9R
+	Cql7Wl1VK42HCCnRWnWiQ70GP/IAlgwyffAW4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	b=se9AkLAydPDFvrVW18KuFZU/nsNJz27RkalIVpVYXMwEMIkxjGhBO8DZdM2v7HwYZf
+	AT6WsmDxf2Ig/FeidtP5bg/c1Z4KxXbZZUgDpjxrSymrt1MgV6bb4c5Sw5LA2LDT8PZY
+	v3qKP5eZctuVfree5A3X5UG4Srm/rugZLLdz8=
+Received: by 10.90.31.16 with SMTP id e16mr5083177age.21.1291478430379; Sat,
+	04 Dec 2010 08:00:30 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.120.8 with HTTP; Sat, 4 Dec 2010 08:00:10 -0800 (PST)
+In-Reply-To: <AANLkTinu8LHgHVr58VjZmfvv2p1m4HsDMJ81Phzh8XGr@mail.gmail.com>
+References: <AANLkTinu8LHgHVr58VjZmfvv2p1m4HsDMJ81Phzh8XGr@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 4 Dec 2010 08:00:10 -0800
+Message-ID: <AANLkTikmKv3GmnPgMQGD8ynwyn=JD2EVZtFGzybnxkPv@mail.gmail.com>
+To: Sathishkumar Duraisamy <flowerslab@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] usermanual: use the latest git revison date of the usermanual dir as pubdate. Basic idea taken from http://sources.redhat.com/ml/docbook-apps/2003-q2/msg00036.html
+Cc: openembeded-users <Openembedded-users@lists.openembedded.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: [Openembedded-users] package glibc-2.9-r37.4: task do_package: Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,68 +51,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Dec 2010 12:49:49 -0000
+X-List-Received-Date: Sat, 04 Dec 2010 16:01:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+On Fri, Dec 3, 2010 at 8:50 PM, Sathishkumar Duraisamy
+<flowerslab@gmail.com> wrote:
+> Hi all,
+> I have been trying to build base-image using angstrom distribution. The
+> package glibc is failed. I have attached the log using "tee" command.
 
 
-Signed-off-by: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
----
- docs/usermanual/Makefile       |    7 ++++++-
- docs/usermanual/usermanual.xml |    3 +++
- 2 files changed, 9 insertions(+), 1 deletions(-)
+qemu-arm: relocation error: qemu-arm: symbol sigprocmask, version
+GLIBC_2.0 not defined in file libc.so.6 with link time reference
 
-diff --git a/docs/usermanual/Makefile b/docs/usermanual/Makefile
-index 36ea5e2..cde0918 100644
---- a/docs/usermanual/Makefile
-+++ b/docs/usermanual/Makefile
-@@ -26,12 +26,15 @@ define command
- endef
- endif
- 
-+releasedate:
-+	git log --date=iso -n 1 --date-order ./ | grep Date | cut -f 2-$N -d ":" > releasedate.txt
-+
- all: $(types)
- 
- lint: $(manual) FORCE
- 	$(call command,xmllint --xinclude --postvalid --noout $(manual),XMLLINT $(manual))
- 
--$(types) $(foreach type,$(htmltypes),$(type)-nochunks): lint FORCE
-+$(types) $(foreach type,$(htmltypes),$(type)-nochunks): releasedate lint FORCE
- 
- $(foreach type,$(htmltypes),$(type)-nochunks): $(if $(htmlcss),$(htmlcss)) $(manual)
- 	@mkdir -p $@
-@@ -59,4 +62,6 @@ clean:
- $(foreach i,$(types) $(foreach type,$(htmltypes),$(type)-nochunks),clean-$(i)):
- 	rm -rf $(patsubst clean-%,%,$@)
- 
-+.PHONY: releasedate
-+
- FORCE: 
-diff --git a/docs/usermanual/usermanual.xml b/docs/usermanual/usermanual.xml
-index dc38aba..8cd5d97 100644
---- a/docs/usermanual/usermanual.xml
-+++ b/docs/usermanual/usermanual.xml
-@@ -5,6 +5,7 @@
- -->
- <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
- "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd" [
-+<!ENTITY releasedate SYSTEM "releasedate.txt">
- <!ENTITY chapter-introduction SYSTEM "chapters/introduction.xml">
- <!ENTITY chapter-metadata SYSTEM "chapters/metadata.xml">
- <!ENTITY chapter-gettingoe SYSTEM "chapters/getting_oe.xml">
-@@ -59,6 +60,8 @@
-       <holder>Rolf Leggewie</holder>
-     </copyright>
- 
-+    <pubdate>&releasedate;</pubdate>
-+
-     <legalnotice>
-       <para>This work is licensed under the Creative Commons Attribution
-       License. To view a copy of this license, visit <ulink
--- 
-1.7.1
+what distro are you using on the build host. It seems that qemu did
+not build properly on your host.
+are you using qemu-native ? if not try that if you were using
+qemu-native then try to find out how it was linked from
+the build logs
 
+alternatively you can disable locale generation if not needed and you
+wll bypass this issue.
+> With Thanks
+> Sathishkumar
+> _______________________________________________
+> Openembedded-users mailing list
+> Openembedded-users@linuxtogo.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+>
+>
 
 
