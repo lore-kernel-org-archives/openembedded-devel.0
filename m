@@ -1,43 +1,40 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1POuYe-0005Wh-9c; Sat, 04 Dec 2010 17:01:57 +0100
-Received: by gyd12 with SMTP id 12so5411482gyd.6
-	for <multiple recipients>; Sat, 04 Dec 2010 08:00:30 -0800 (PST)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PP1bH-00044u-6h
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 05 Dec 2010 00:33:08 +0100
+Received: by iwn8 with SMTP id 8so10158728iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 04 Dec 2010 15:31:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type;
-	bh=EIuC2dt06Y3mMzvrfCMi1bIYcXKzQ5Lh7SM1JLDbgb4=;
-	b=APjvZQIyjmwZFMa9pppNelVXXuHXNtvMjM87WVq84OLWIR3PlYxpR2/CpGKA8gYd62
-	jfvOx0U7NmNz7enkMXIqgT/+QyKsBIGBwxSjhJ/tcaMJSentPkIPJYwRYt6gkOJvp+9R
-	Cql7Wl1VK42HCCnRWnWiQ70GP/IAlgwyffAW4=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=q3/fflIxEI7ApNsm55aNIeTcukl6wvkZhIQZFHQroSQ=;
+	b=Bhjk2/ZeKAAfm+RjxxVF6Lt/1QKwPNa2rqZSfbSMuziGzqP2oo+PZLtvXOq47wTiL0
+	sz6UKqB0p1Tn8ZZia9LFt3goSuE2oXZBJrMQBTswVolMg3ZeeCh47K4jOraR6IwvgrcW
+	7UBhCXUEWOfNaOcUZk0Mmreal2LBcXHCHy7Wo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=se9AkLAydPDFvrVW18KuFZU/nsNJz27RkalIVpVYXMwEMIkxjGhBO8DZdM2v7HwYZf
-	AT6WsmDxf2Ig/FeidtP5bg/c1Z4KxXbZZUgDpjxrSymrt1MgV6bb4c5Sw5LA2LDT8PZY
-	v3qKP5eZctuVfree5A3X5UG4Srm/rugZLLdz8=
-Received: by 10.90.31.16 with SMTP id e16mr5083177age.21.1291478430379; Sat,
-	04 Dec 2010 08:00:30 -0800 (PST)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=TQJgrUh7qQ716mplUanDciGC18DOPAVBtQpjo0D8hJcd0qOFrjmwKLFKBGHehZaMKZ
+	P+xAGsvp0T1etTIuR3dHaenIcemDs/DHcetPwCPIbrkmLCHBkuWDe04l4xU4r4g2F3yz
+	3odHIWMX1CHGUVZ1rQ9woaNvrRvqKBcGcsjso=
 MIME-Version: 1.0
-Received: by 10.90.120.8 with HTTP; Sat, 4 Dec 2010 08:00:10 -0800 (PST)
-In-Reply-To: <AANLkTinu8LHgHVr58VjZmfvv2p1m4HsDMJ81Phzh8XGr@mail.gmail.com>
-References: <AANLkTinu8LHgHVr58VjZmfvv2p1m4HsDMJ81Phzh8XGr@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 4 Dec 2010 08:00:10 -0800
-Message-ID: <AANLkTikmKv3GmnPgMQGD8ynwyn=JD2EVZtFGzybnxkPv@mail.gmail.com>
-To: Sathishkumar Duraisamy <flowerslab@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Received: by 10.231.20.65 with SMTP id e1mr3790133ibb.32.1291505502137; Sat,
+	04 Dec 2010 15:31:42 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Sat, 4 Dec 2010 15:31:42 -0800 (PST)
+Date: Sun, 5 Dec 2010 00:31:42 +0100
+Message-ID: <AANLkTimOUSrRJd+bVLmprX+e+tCTtQHLQEC52GNgMCZ=@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org, yocto@yoctoproject.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS,URI_NOVOWEL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembeded-users <Openembedded-users@lists.openembedded.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [Openembedded-users] package glibc-2.9-r37.4: task do_package: Failed
+Subject: AUTOTOOLS_STAGE_PKGCONFIG still used?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,34 +48,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Dec 2010 16:01:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 04 Dec 2010 23:33:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Dec 3, 2010 at 8:50 PM, Sathishkumar Duraisamy
-<flowerslab@gmail.com> wrote:
-> Hi all,
-> I have been trying to build base-image using angstrom distribution. The
-> package glibc is failed. I have attached the log using "tee" command.
+Dear all.
 
+Is AUTOTOOLS_STAGE_PKGCONFIG still of any use?
+I was trying to fidn out what I did, I ran a grep on both my
+openembedded dir (results see below) and my yocto tree, both trees at
+git head.
+I see a lot of places where it is set but no place where it is used.
 
-qemu-arm: relocation error: qemu-arm: symbol sigprocmask, version
-GLIBC_2.0 not defined in file libc.so.6 with link time reference
+Anyone who can confirm that this is a stale var? Or otherwise anyone
+who can explain how this is used. (and no, bitbake does not know the
+var either, not that I had expected it)
 
-what distro are you using on the build host. It seems that qemu did
-not build properly on your host.
-are you using qemu-native ? if not try that if you were using
-qemu-native then try to find out how it was linked from
-the build logs
-
-alternatively you can disable locale generation if not needed and you
-wll bypass this issue.
-> With Thanks
-> Sathishkumar
-> _______________________________________________
-> Openembedded-users mailing list
-> Openembedded-users@linuxtogo.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
->
->
+frans@linux-suse:~/oe/openembedded> grep -r AUTOTOOLS_STAGE_PKGCONFIG .
+./recipes/gnome/libsoup_2.2.100.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/gnome/gnome-python-extras_2.25.3.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/gnome/hippo-canvas_0.3.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/openmax/libomxil-bellagio_0.9.2.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/openmax/libomxil-bellagio_0.9.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/openmax/libomxil-bellagio_0.9.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/openmax/libomxil-bellagio_0.9.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/musicpd/libmpd_0.17.96.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/musicpd/libmpd_0.20.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/libexif/libexif.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/obsolete/pixman/pixman_0.17.6.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/mml-widget/gtkmathview_0.8.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = 1
+./recipes/ggz/libggz_0.0.14.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/vlc/libdvdcss_1.2.10.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/gnutls/libtasn1_1.7.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/gstreamer/gst-common.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/mythtv/gmyth_0.7.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/mythtv/gmyth-upnp_0.7.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/lcms/lcms_1.17.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/jpeg/jasper_1.900.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/redland/redland_1.0.8.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/telepathy/telepathy-gabble_0.7.27.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/telepathy/telepathy-farsight_0.0.7.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/telepathy/telepathy-mission-control_4.67.bb:AUTOTOOLS_STAGE_PKGCONFIG
+= "1"
+./recipes/telepathy/telepathy-glib_0.7.29.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/kde4/gmm_3.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/kde4/kde4.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/kde4/strigi_0.5.10.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/device-mapper/device-mapper_1.02.28.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sdr/hamlib_1.2.10.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/libusb/libusb-compat_0.1.3.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/libusb/libusb-compat_0.1.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/libusb/libusb1_1.0.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/bluez/bluez4-libs.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/bluez/bluez4.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/boxee/tre_0.7.5.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/fann/fann_2.0.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/pango/pangomm_2.26.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/icon-slicer/icon-slicer-native_0.3.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar_0.83.4.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-datastore_0.82.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-artwork_0.84.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-toolkit_0.82.11.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-datastore_0.84.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-base_0.82.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-artwork_0.82.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar_0.82.9.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-toolkit_0.84.4.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-toolkit_0.83.3.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-presence-service_0.82.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-base_0.84.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-presence-service_0.84.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar_0.84.6.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/sugar/sugar-base_0.83.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/schroedinger/schroedinger_1.0.9.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/devicekit/devicekit-disks_004.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/upnp/gupnp-av_0.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/upnp/libupnp_1.6.5.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/libdlo/libdlo_git.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/obexftp/obexftp_0.23.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/pulseaudio/libcanberra_0.17.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/pulseaudio/libcanberra_0.14.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/pulseaudio/libcanberra_0.12.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/farsight/farsight2_0.0.9.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/farsight/libnice_0.0.13.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/farsight/farsight2_0.0.22.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./recipes/farsight/libnice_0.0.6.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./classes/xfce.bbclass:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./classes/gnomebase.bbclass:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./classes/xfce46.bbclass:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+./classes/efl.bbclass:AUTOTOOLS_STAGE_PKGCONFIG = "1"
+frans@linux-suse:~/oe/openembedded>
 
 
