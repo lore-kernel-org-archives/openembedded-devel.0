@@ -1,43 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1POqG6-0001tW-PL
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Dec 2010 12:26:40 +0100
-Received: by iwn8 with SMTP id 8so9576610iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1POrAx-0001R1-Va for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Dec 2010 13:25:17 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1POr9Z-00035X-CX for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Dec 2010 13:23:49 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 04 Dec 2010 13:23:49 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Dec 2010 03:25:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=0bucv0j5NfvnWr97LC2fz2wSw2nlw6qKkuVcJiK5PSE=;
-	b=VcKsj3UpfwWN6NKG4aE+6WOew17HhhKxIbsPRjCfxa9xAR4LMpuWmJsQ4A0g6MJ6Jn
-	x1fzaa8cB3BTPGs9Ba2WXqzVW9fFvZ2dNnbtqI5qeQh6LJ7d/ga9PMk1IJAHtlO0CR/4
-	+odvjVsLWHh76xBKOci+9mO1heZJ6O1SpmyZk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=aSsU3ly7wejyZPmIC31qOXMPykBYblweLRyWOsoX5TRdp8G+6ifQ+VgXkN3ihy7v/+
-	hwqhgw9FfkzVapsLdJAxuFnDkDAhTSJhHW+OPj2L6JsjqbIBqPAl0cUgaF+I8NejrJeQ
-	3a3+zPHleLhTzPeUt4aakr4Eqjj5xe2XVJxHU=
-MIME-Version: 1.0
-Received: by 10.231.20.65 with SMTP id e1mr3132231ibb.32.1291461904216; Sat,
-	04 Dec 2010 03:25:04 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Sat, 4 Dec 2010 03:25:04 -0800 (PST)
-In-Reply-To: <AANLkTik0zjtfygu8taBf_bUAdgu_yCtkH_1ZaKb5WX0+@mail.gmail.com>
-References: <AANLkTik0zjtfygu8taBf_bUAdgu_yCtkH_1ZaKb5WX0+@mail.gmail.com>
-Date: Sat, 4 Dec 2010 12:25:04 +0100
-Message-ID: <AANLkTikZg5fKLGiOQZ488noo0ahaLSAfaSZMq3Xwr=7O@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 04 Dec 2010 13:23:49 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 04 Dec 2010 13:23:37 +0100
+Message-ID: <iddbs9$ufk$1@dough.gmane.org>
+References: <1291390869-14422-1-git-send-email-m-watkins@ti.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080329CC1EDC@dlee06.ent.ti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080329CC1EDC@dlee06.ent.ti.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [ANNOUNCE]: OpenEmbedded 2010.12 released
+Subject: Re: [PATCH 6/6] defconfig: Add omapl138 defconfig file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,46 +51,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Dec 2010 11:26:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 04 Dec 2010 12:25:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/12/4 Khem Raj <raj.khem@gmail.com>
->
-> On behalf of OpenEmbedded Commmunity, I am excited to announce 2010.12
-> release of OpenEmbedded.
-> This release was focussed on stabilizing the metadata and getting
-> various distro/machine/image
-> combinations to work. A lot of effort was put by community to make
-> this happen and a table of tested combination is available at
->
-> http://www.openembedded.org/index.php/Release-2010.12
->
-> In order to get the release using git
->
-> $ git clone git://git.openembedded.org/openembedded
->
-> $ cd openembedded
->
-> $ git checkout -b release-2010.12 release-2010.12
->
-> To download the release in form of tarballs
->
-> http://git.openembedded.org/cgit.cgi/openembedded/snapshot/release-2010.12.tar.bz2
-> http://git.openembedded.org/cgit.cgi/openembedded/snapshot/release-2010.12.tar.gz
->
-> BIG thanks to everyone who tested different combinations, took part in
-> stabilization effort, provided patches
-> and provided feedback for the release to make it happen
->
-> Enjoy !
->
-> -Khem
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Khem, thanks alot on making this happen!
-I know you spent quite some time on this.
-Greatly appreciated!
+On 03-12-10 20:43, Maupin, Chase wrote:
+> My main comment here is that these patches might be better in a different order.  Currently if they were applied one at a time they would fail because of the dependency order.  I would suggest re-ordering the existing patches into the following order:
+> 
+> 0005
+> 0006
+> 0004
+> 0003
+> 0002
+> 0001
+> 
+> Sorry that I didn't notice this the first time I looked at these patches.
 
-Frans
+I applied them as 6,5,4,3,2,1 to get the defconfig change in before the
+PR bump.
+
+> 
+>> -----Original Message-----
+>> From: Melissa Watkins [mailto:mwatkins.ti@gmail.com]
+>> Sent: Friday, December 03, 2010 9:41 AM
+>> To: openembedded-devel@lists.openembedded.org
+>> Cc: Watkins, Melissa; Maupin, Chase
+>> Subject: [PATCH 6/6] defconfig: Add omapl138 defconfig file
+>>
+>> * Add defconfig file for omapl138 machines
+>>
+>> Signed-off-by: Melissa Watkins <m-watkins@ti.com>
+>> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+>> ---
+>>  recipes/linux/linux-davinci/omapl138/defconfig |    8 +++++++-
+>>  1 files changed, 7 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/linux/linux-davinci/omapl138/defconfig
+>> b/recipes/linux/linux-davinci/omapl138/defconfig
+>> index 8462139..ad52484 100644
+>> --- a/recipes/linux/linux-davinci/omapl138/defconfig
+>> +++ b/recipes/linux/linux-davinci/omapl138/defconfig
+>> @@ -1383,6 +1383,7 @@ CONFIG_USB_MUSB_HDRC=y
+>>  CONFIG_USB_MUSB_SOC=y
+>>  CONFIG_USB_MUSB_HOST=y
+>>  # CONFIG_USB_MUSB_PERIPHERAL is not set
+>> +# CONFIG_USB_MUSB_DUAL_ROLE is not set
+>>  # CONFIG_USB_MUSB_OTG is not set
+>>  CONFIG_USB_MUSB_HDRC_HCD=y
+>>  # CONFIG_MUSB_PIO_ONLY is not set
+>> @@ -1557,7 +1558,12 @@ CONFIG_RTC_INTF_DEV=y
+>>  CONFIG_RTC_DRV_OMAP=y
+>>  # CONFIG_DMADEVICES is not set
+>>  # CONFIG_AUXDISPLAY is not set
+>> -# CONFIG_UIO is not set
+>> +CONFIG_UIO=y
+>> +# CONFIG_UIO_PDRV is not set
+>> +# CONFIG_UIO_PDRV_GENIRQ is not set
+>> +# CONFIG_UIO_SMX is not set
+>> +# CONFIG_UIO_SERCOS3 is not set
+>> +CONFIG_UIO_PRUSS=m
+>>
+>>  #
+>>  # TI VLYNQ
+>> --
+>> 1.7.0.4
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFM+jLJMkyGM64RGpERAjdCAJ98STnzUtWkWjV82UtD4nXdKz1lxACgmLST
+jDoGC7W25MXAFUfua+di3QU=
+=QEQv
+-----END PGP SIGNATURE-----
+
 
 
