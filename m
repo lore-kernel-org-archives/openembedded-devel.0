@@ -1,16 +1,16 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPEDC-0006Ss-6q
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPEJz-0006f5-MZ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 14:01:07 +0100
+	Sun, 05 Dec 2010 14:08:08 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 748C11B40D;
-	Sun,  5 Dec 2010 14:01:03 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id EE28E1B40D;
+	Sun,  5 Dec 2010 14:08:04 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Dec 2010 13:59:41 +0100
-Message-Id: <1291553981-4483-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sun,  5 Dec 2010 14:06:43 +0100
+Message-Id: <1291554403-4732-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
@@ -20,7 +20,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,URIBL_RHS_DOB
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] qxmp_1.0: fixed SRC_URI
+Subject: [PATCH] redfang: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 13:01:07 -0000
+X-List-Received-Date: Sun, 05 Dec 2010 13:08:08 -0000
 
-Homepage closed
 
 Signed-off-by: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 ---
- recipes/qxmp/qxmp_1.0.bb |    2 +-
+ recipes/redfang/redfang.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/qxmp/qxmp_1.0.bb b/recipes/qxmp/qxmp_1.0.bb
-index a70d326..7434b59 100644
---- a/recipes/qxmp/qxmp_1.0.bb
-+++ b/recipes/qxmp/qxmp_1.0.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.xm1math.net/qxmp/index.html"
- RDEPENDS_${PN} = "mplayer"
- PR = "r1"
+diff --git a/recipes/redfang/redfang.bb b/recipes/redfang/redfang.bb
+index 65a0d5c..49385ed 100644
+--- a/recipes/redfang/redfang.bb
++++ b/recipes/redfang/redfang.bb
+@@ -1,5 +1,5 @@
+ SECTION = "unknown"
+-SRC_URI = "http://packetstormsecurity.org/wireless/redfang.2.5.tar.gz \
++SRC_URI = "http://dl.packetstormsecurity.net/wireless/redfang.2.5.tar.gz \
+     	   file://Makefile.patch;striplevel=0"
  
--SRC_URI = "http://www.xm1math.net/qxmp/qxmp-${PV}.tar.bz2"
-+SRC_URI = "http://www.sourcefiles.org/Multimedia/Video/Players/qxmp-${PV}.tar.bz2"
- 
- inherit qt4x11
- 
+ DEFAULT_PREFERENCE="-1"
 -- 
 1.7.0.4
 
