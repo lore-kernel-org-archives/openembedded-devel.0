@@ -1,26 +1,26 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPGmJ-0005R4-Q7
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPGpe-0005Yj-4S
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 16:45:32 +0100
+	Sun, 05 Dec 2010 16:49:03 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id CF3581B40D;
-	Sun,  5 Dec 2010 16:45:28 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id 52B1D1B40D;
+	Sun,  5 Dec 2010 16:48:55 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Dec 2010 16:44:06 +0100
-Message-Id: <1291563846-8593-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sun,  5 Dec 2010 16:47:33 +0100
+Message-Id: <1291564053-8701-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,URIBL_RHS_DOB
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] kanjipad_svn: fixed SRC_URI
+Subject: [PATCH] kismet_svn: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,27 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 15:45:32 -0000
+X-List-Received-Date: Sun, 05 Dec 2010 15:49:03 -0000
 
 
 Signed-off-by: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 ---
- recipes/kanjipad/kanjipad_svn.bb |    2 +-
+ recipes/kismet/kismet_svn.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/kanjipad/kanjipad_svn.bb b/recipes/kanjipad/kanjipad_svn.bb
-index 73c6ddb..fb83a50 100644
---- a/recipes/kanjipad/kanjipad_svn.bb
-+++ b/recipes/kanjipad/kanjipad_svn.bb
-@@ -4,7 +4,7 @@ DEPENDS += "perl-native"
- PV = "2.0.0+svn${SRCDATE}"
- PR = "r1"
+diff --git a/recipes/kismet/kismet_svn.bb b/recipes/kismet/kismet_svn.bb
+index 1321a7a..177f1e7 100644
+--- a/recipes/kismet/kismet_svn.bb
++++ b/recipes/kismet/kismet_svn.bb
+@@ -6,6 +6,6 @@ SRCREV = "2285"
+ PV = "2007-10-R1+svnr${SRCPV}"
+ PR = "r2"
  
--SRC_URI = "svn://svn.gnome.org/svn/${PN}/;module=trunk"
-+SRC_URI = "svn://svn.gnome.org/svn/${PN}/;module=trunk;proto=http"
+-SRC_URI = "svn://svn.kismetwireless.net/code/;module=trunk;proto=http"
++SRC_URI = "svn://www.kismetwireless.net/code/svn/;module=trunk;proto=https"
+ 
  S = "${WORKDIR}/trunk"
- 
- do_compile_prepend() {
 -- 
 1.7.0.4
 
