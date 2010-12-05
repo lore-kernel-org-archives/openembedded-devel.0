@@ -1,26 +1,38 @@
-Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPHAg-0006PP-K1
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PPHEZ-0006Xu-LP
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 17:10:42 +0100
-Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
-	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id C6E6E1B40D;
-	Sun,  5 Dec 2010 17:10:39 +0100 (CET)
-From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
+	Sun, 05 Dec 2010 17:14:44 +0100
+Received: (qmail 25201 invoked by uid 503); 5 Dec 2010 16:46:55 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 5 Dec 2010 16:46:55 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 5 Dec 2010 18:13:19 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 5 Dec 2010 18:13:17 +0200
+Message-ID: <4CFBBA1C.4080103@eukrea.com>
+Date: Sun, 05 Dec 2010 17:13:16 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Dec 2010 17:09:17 +0100
-Message-Id: <1291565357-9196-1-git-send-email-schwarzkopf@sensortherm.de>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 188.40.84.136
-X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
+References: <1291564968-3502-1-git-send-email-matthewbot@gmail.com>
+In-Reply-To: <1291564968-3502-1-git-send-email-matthewbot@gmail.com>
+X-Ovh-Tracer-Id: 13410875266409016649
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] litestream_1.3RC3: fixed SRC_URI
+Subject: Re: [PATCH] wxwidgets: added libxinerama to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,29 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 16:10:43 -0000
+X-List-Received-Date: Sun, 05 Dec 2010 16:14:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
+Hi,
 
-Signed-off-by: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
----
- recipes/litestream/litestream_1.3RC3.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On 05/12/2010 17:02, Matt Thompson wrote:
+> Signed-off-by: Matt Thompson<matthewbot@gmail.com>
+> ---
+>   recipes/wxwidgets/wxwidgets.inc |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/wxwidgets/wxwidgets.inc b/recipes/wxwidgets/wxwidgets.inc
+> index 2fb2bef..4c4f77f 100644
+> --- a/recipes/wxwidgets/wxwidgets.inc
+> +++ b/recipes/wxwidgets/wxwidgets.inc
+> @@ -2,7 +2,7 @@ DESCRIPTION = "wxWidgets is a cross platform application framework utilizing nat
+>   HOMEPAGE = "http://www.wxwidgets.org"
+>   SECTION = "x11/libs"
+>   LICENSE = "wxWindows"
+> -DEPENDS = "gtk+ jpeg tiff libpng zlib expat"
+> +DEPENDS = "gtk+ jpeg tiff libpng zlib expat libxinerama"
+>
+maybe this is obvious for wxwidgets'users but can you please add a comment 
+detailing why this is needed ?
 
-diff --git a/recipes/litestream/litestream_1.3RC3.bb b/recipes/litestream/litestream_1.3RC3.bb
-index 9469c05..5d45705 100644
---- a/recipes/litestream/litestream_1.3RC3.bb
-+++ b/recipes/litestream/litestream_1.3RC3.bb
-@@ -2,7 +2,7 @@ LICENSE = "GPL"
- DESCRIPTION = "ShoutCast-compatible streamer"
- PR = "r0"
- 
--SRC_URI = "http://www.litestream.org/litestream/${P}.tar.gz"
-+SRC_URI = "http://ftp.osuosl.org/pub/nslu2/sources/${P}.tar.gz"
- 
- inherit autotools
- 
--- 
-1.7.0.4
-
+Thanks,
+Eric
 
 
