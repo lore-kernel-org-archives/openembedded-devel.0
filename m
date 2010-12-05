@@ -1,40 +1,48 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-gx0-f179.google.com ([209.85.161.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PPKkH-0004xA-Q6
+	(envelope-from <matthewbot@gmail.com>) id 1PPKyH-0005dm-VY
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 20:59:43 +0100
-Received: by iwn8 with SMTP id 8so11015410iwn.6
+	Sun, 05 Dec 2010 21:14:10 +0100
+Received: by gxk21 with SMTP id 21so5946922gxk.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Dec 2010 11:58:16 -0800 (PST)
+	Sun, 05 Dec 2010 12:12:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=FF/vDhpJSdqQrobj4ViEptN1MY0nPWb9CtHmNb2shN8=;
-	b=RD0RW8kNWeaFtGXKNKGxBjL0UQ3wJPOEllQfFPm+U3DAEE8KiuhkSMwxBqfehyRMB8
-	t4zrAgsGWlIn4p+taL36K+5GSdd+zS/r1+UPwm2L7r45t8y1jdKfvPGzNF5Gqky8da+D
-	+qSIXSa3/78UoKKV6x6HbJLW/jYW3GJMMoi38=
+	h=domainkey-signature:received:received:subject:from:to:in-reply-to
+	:references:content-type:date:message-id:mime-version:x-mailer
+	:content-transfer-encoding;
+	bh=cdZzLKxTeDXpn/PBZsfRwwP0abKLvuF+SX4+sK4Y8B0=;
+	b=smcsB/10GKr1Ed3B5jn7aDv0rWyg98EZaFA5/wljHOGFby7rckFNQHn+0QI61ICkXN
+	lUyuYlWweSnsxsdfIx5s4iRLIkkC3UxfXDh7/qZuY4DB43wjt5YUaPWlux3tiCmWIy1x
+	AfIEwkALZbk7o/AD4c9kV4DSQV4zCJNZIsUXE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=HdhD0D9iIv0yGJYJGPR5i4xTmyV4DFJ5Uk6reqtb1R1Mu9bAcR4gg+BQHVfRAJRFUR
-	bbAgPLoapzMwqfQB4nEDxDzHw5ZY7duGQI2yLZKBF7XOm9+FWxS5ZyPCTyk99/tTrE6y
-	aiAONGdQQKgjU6xRR9xiI//86AcQmqTS6rJJc=
-MIME-Version: 1.0
-Received: by 10.231.191.4 with SMTP id dk4mr4861344ibb.82.1291579096602; Sun,
-	05 Dec 2010 11:58:16 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Sun, 5 Dec 2010 11:58:16 -0800 (PST)
-Date: Sun, 5 Dec 2010 20:58:16 +0100
-Message-ID: <AANLkTinoazy9yOU04JPZEJTB8+Huea6wPVW8uGfP2hKd@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=subject:from:to:in-reply-to:references:content-type:date:message-id
+	:mime-version:x-mailer:content-transfer-encoding;
+	b=xcCim0+ZmvGrKcs0iB6dKsG24W9ZMW+7bwb1yeCjpwHaWaATf/uwwLxLSLkc6dnu/B
+	r6RHRLbM3dBCQQ5mPQM0aU67NwuVgr7nVOexrbjx4QrauLfpdTH5t0eDLuIAnYbzE18Q
+	wDMkkIU4agt3CFa5RV/QgtP6bpyqTrf8I1dG0=
+Received: by 10.151.41.6 with SMTP id t6mr7865335ybj.125.1291579962805;
+	Sun, 05 Dec 2010 12:12:42 -0800 (PST)
+Received: from [10.24.160.187] (n128-227-48-245.xlate.ufl.edu [128.227.48.245])
+	by mx.google.com with ESMTPS id q8sm1084891ybk.12.2010.12.05.12.12.40
+	(version=SSLv3 cipher=RC4-MD5); Sun, 05 Dec 2010 12:12:41 -0800 (PST)
+From: Matthew Thompson <matthewbot@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <4CFBBA1C.4080103@eukrea.com>
+References: <1291564968-3502-1-git-send-email-matthewbot@gmail.com>
+	<4CFBBA1C.4080103@eukrea.com>
+Date: Sun, 05 Dec 2010 15:12:40 -0500
+Message-ID: <1291579960.7355.8.camel@matthew-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 209.85.161.179
+X-SA-Exim-Mail-From: matthewbot@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS,URI_NOVOWEL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] remove AUTOTOOLS_STAGE_PKGCONFIG
+Subject: Re: [PATCH] wxwidgets: added libxinerama to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,103 +56,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 19:59:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 05 Dec 2010 20:14:11 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Dear all,
+On Sun, 2010-12-05 at 17:13 +0100, Eric Bénard wrote:
+> Hi,
+> 
+> On 05/12/2010 17:02, Matt Thompson wrote:
+> > Signed-off-by: Matt Thompson<matthewbot@gmail.com>
+> > ---
+> >   recipes/wxwidgets/wxwidgets.inc |    2 +-
+> >   1 files changed, 1 insertions(+), 1 deletions(-)
+> >
+> > diff --git a/recipes/wxwidgets/wxwidgets.inc b/recipes/wxwidgets/wxwidgets.inc
+> > index 2fb2bef..4c4f77f 100644
+> > --- a/recipes/wxwidgets/wxwidgets.inc
+> > +++ b/recipes/wxwidgets/wxwidgets.inc
+> > @@ -2,7 +2,7 @@ DESCRIPTION = "wxWidgets is a cross platform application framework utilizing nat
+> >   HOMEPAGE = "http://www.wxwidgets.org"
+> >   SECTION = "x11/libs"
+> >   LICENSE = "wxWindows"
+> > -DEPENDS = "gtk+ jpeg tiff libpng zlib expat"
+> > +DEPENDS = "gtk+ jpeg tiff libpng zlib expat libxinerama"
+> >
+> maybe this is obvious for wxwidgets'users but can you please add a comment 
+> detailing why this is needed ?
+> 
+> Thanks,
+> Eric
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-As confirmed and proved by Robert (see
-http://article.gmane.org/gmane.comp.handhelds.openembedded/40268/match=autotools_stage_pkgconfig
-)
-AUTOTOOLS_STAGE_PKGCONFIG is not used any more since about a year.
+I'm not entirely sure myself, but under the recipes fails to build
+wxwidgets without libxinerama on my box at least.
 
-Proposal is to remove this var from all 4 classes that define it and
-all 66 recipes.
-Below is a list of all files.
+I'm using the overo-oe branch of openembedded, but it appears as though
+they haven't made any changes to this recipe, so I sent the patch here.
+I'm also using their configuration files if that matters.
 
-If you disagree with this, or feel there are reasons to keep it,
-please speak up.
-And if you feel removal is OK, please reply with an ACK (that I then
-will use when making the edit).
+This is my first time sending a patch via a mailing list, so should I
+amend my commit with an additional line in the commit message to the
+effect of "wxwidgets depends on libxinerama, which was missing from the
+recipe" and then perform git send-email again as detailed in the wiki?
+Is there some additional step to mark it as a revision to this patch?
 
-Thanks alot! Frans
 
-PS: rationale for asking for ack's upfront is because if I author a
-patch and wait two weeks some of the files will be touched, causing
-additional work or a repeated edit session.
-The plan is to remove only the lines mentioned below. As there is no
-function change (the var is dead), no PR bump or so is needed.
-
-classes/efl.bbclass:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-classes/gnomebase.bbclass:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-classes/xfce.bbclass:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-classes/xfce46.bbclass:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-
-bluez/bluez4-libs.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-bluez/bluez4.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-boxee/tre_0.7.5.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-device-mapper/device-mapper_1.02.28.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-devicekit/devicekit-disks_004.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-fann/fann_2.0.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-farsight/farsight2_0.0.22.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-farsight/farsight2_0.0.9.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-farsight/libnice_0.0.13.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-farsight/libnice_0.0.6.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-ggz/libggz_0.0.14.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-gnome/gnome-python-extras_2.25.3.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-gnome/hippo-canvas_0.3.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-gnome/libsoup_2.2.100.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-gnutls/libtasn1_1.7.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-gstreamer/gst-common.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-icon-slicer/icon-slicer-native_0.3.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-jpeg/jasper_1.900.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-kde4/gmm_3.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-kde4/kde4.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-kde4/strigi_0.5.10.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-lcms/lcms_1.17.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-libdlo/libdlo_git.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-libexif/libexif.inc:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-libusb/libusb-compat_0.1.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-libusb/libusb-compat_0.1.3.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-libusb/libusb1_1.0.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-mml-widget/gtkmathview_0.8.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = 1
-musicpd/libmpd_0.17.96.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-musicpd/libmpd_0.20.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-mythtv/gmyth-upnp_0.7.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-mythtv/gmyth_0.7.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-obexftp/obexftp_0.23.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-openmax/libomxil-bellagio_0.9.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-openmax/libomxil-bellagio_0.9.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-openmax/libomxil-bellagio_0.9.2.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-openmax/libomxil-bellagio_0.9.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-pango/pangomm_2.26.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-pulseaudio/libcanberra_0.12.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-pulseaudio/libcanberra_0.14.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-pulseaudio/libcanberra_0.17.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-redland/redland_1.0.8.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-schroedinger/schroedinger_1.0.9.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sdr/hamlib_1.2.10.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-artwork_0.82.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-artwork_0.84.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-base_0.82.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-base_0.83.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-base_0.84.1.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-datastore_0.82.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-datastore_0.84.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-presence-service_0.82.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-presence-service_0.84.0.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-toolkit_0.82.11.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-toolkit_0.83.3.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar-toolkit_0.84.4.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar_0.82.9.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar_0.83.4.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-sugar/sugar_0.84.6.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-telepathy/telepathy-farsight_0.0.7.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-telepathy/telepathy-gabble_0.7.27.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-telepathy/telepathy-glib_0.7.29.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-telepathy/telepathy-mission-control_4.67.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-upnp/gupnp-av_0.2.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-upnp/libupnp_1.6.5.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
-vlc/libdvdcss_1.2.10.bb:AUTOTOOLS_STAGE_PKGCONFIG = "1"
 
 
