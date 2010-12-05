@@ -1,26 +1,26 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPEwU-0006lA-3o
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPFEz-0001EU-WF
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 14:47:54 +0100
+	Sun, 05 Dec 2010 15:07:03 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 5B5261B40D;
-	Sun,  5 Dec 2010 14:47:51 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id 3013A1B40D;
+	Sun,  5 Dec 2010 15:06:59 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Dec 2010 14:46:29 +0100
-Message-Id: <1291556789-5681-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sun,  5 Dec 2010 15:05:37 +0100
+Message-Id: <1291557937-6056-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL, BAYES_00, TVD_SPACE_RATIO
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] uml-utilities_20040406: fixed SRC_URI
+Subject: [PATCH] xfcalendar_4.2.3: fixed SCR_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,27 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 13:47:55 -0000
+X-List-Received-Date: Sun, 05 Dec 2010 14:07:03 -0000
 
 
 Signed-off-by: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 ---
- recipes/uml-utilities/uml-utilities_20040406.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/xfce-extras/xfcalendar_4.2.3.bb |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/uml-utilities/uml-utilities_20040406.bb b/recipes/uml-utilities/uml-utilities_20040406.bb
-index db5ad17..8bbad1c 100644
---- a/recipes/uml-utilities/uml-utilities_20040406.bb
-+++ b/recipes/uml-utilities/uml-utilities_20040406.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Utilities for User-Mode-Linux"
- LICENSE = "GPL"
- DEPENDS = "zlib ncurses readline"
- PR = "r1"
--SRC_URI = "http://mirror.usermodelinux.org/uml/uml_utilities_${PV}.tar.bz2 \
-+SRC_URI = "http://downloads.sourceforge.net/project/user-mode-linux/tools/1/uml_utilities_${PV}.tar.bz2  \
-            file://fix-ldflags.patch"
- SRC_URI[md5sum] = "2c1ccd9efacbfb39e42d482b89b2550a"
- SRC_URI[sha256sum] = "4f179b1db021ef15ac7e9b2eed57c525db127a754c574f591c367460cded9f41"
+diff --git a/recipes/xfce-extras/xfcalendar_4.2.3.bb b/recipes/xfce-extras/xfcalendar_4.2.3.bb
+index ebab53e..1e6647b 100644
+--- a/recipes/xfce-extras/xfcalendar_4.2.3.bb
++++ b/recipes/xfce-extras/xfcalendar_4.2.3.bb
+@@ -4,6 +4,11 @@
+ 
+ require ${PN}.inc
+ 
++SRC_URI = "http://www.us.xfce.org/archive/xfce/${XFCE_VERSION}/src/${PN}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "d2e2c8e010cca708295aeaf621086205"
++SRC_URI[sha256sum] = "ad8d141d23f48736180d3913a0600d1733d71a341fd1889e69f727a998cfa0a3"
++
+ PACKAGES += " ${PN}-mcs-plugins"
+ FILES_${PN}-mcs-plugins += "${libdir}/xfce4/mcs-plugins/*.so"
+ 
 -- 
 1.7.0.4
 
