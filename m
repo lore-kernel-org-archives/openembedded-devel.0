@@ -1,16 +1,16 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPJRV-0003Kn-4p
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPJoF-0003do-7u
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 19:36:14 +0100
+	Sun, 05 Dec 2010 19:59:43 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id 418221B40D;
-	Sun,  5 Dec 2010 19:36:10 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id 189411B40D;
+	Sun,  5 Dec 2010 19:59:40 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Dec 2010 19:34:48 +0100
-Message-Id: <1291574088-11620-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sun,  5 Dec 2010 19:58:16 +0100
+Message-Id: <1291575496-12093-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
@@ -20,7 +20,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] qc-usb-messenger_1.1: fixed SRC_URI
+Subject: [PATCH] scsi-idle_2.4.23: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,27 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 18:36:14 -0000
+X-List-Received-Date: Sun, 05 Dec 2010 18:59:43 -0000
 
 
 Signed-off-by: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 ---
- recipes/qc-usb/qc-usb-messenger_1.1.bb |    2 +-
+ recipes/scsi-idle/scsi-idle_2.4.23.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/qc-usb/qc-usb-messenger_1.1.bb b/recipes/qc-usb/qc-usb-messenger_1.1.bb
-index 9542a7b..486e06e 100644
---- a/recipes/qc-usb/qc-usb-messenger_1.1.bb
-+++ b/recipes/qc-usb/qc-usb-messenger_1.1.bb
-@@ -4,7 +4,7 @@ SECTION = "kernel/modules"
- LICENSE = "GPL"
+diff --git a/recipes/scsi-idle/scsi-idle_2.4.23.bb b/recipes/scsi-idle/scsi-idle_2.4.23.bb
+index 4b85648..edee65a 100644
+--- a/recipes/scsi-idle/scsi-idle_2.4.23.bb
++++ b/recipes/scsi-idle/scsi-idle_2.4.23.bb
+@@ -9,7 +9,7 @@ HOMEPAGE = "http://packages.debian.org/unstable/admin/scsi-idle"
+ AUTHOR = "Eduard Bloch <blade@debian.org>"
  PR = "r1"
  
--SRC_URI = "http://home.mag.cx/messenger/source/${PN}-${PV}.tar.gz"
-+SRC_URI = "http://home.mag.cx/messenger/source/old/${PN}-${PV}.tar.gz"
+-SRC_URI = "${DEBIAN_MIRROR}/main/s/scsi-idle/scsi-idle_${PV}-5.tar.gz \
++SRC_URI = "http://ftp.osuosl.org/pub/nslu2/sources/scsi-idle_${PV}-5.tar.gz \
+ 	file://makefile.patch \
+ 	file://scsi-idle.init.patch"
  
- SRC_URI[md5sum] = "47cdbf10bdff4dd111c867127ffc7928"
- SRC_URI[sha256sum] = "81f67fd6a43f101f5f19d169130d182440c1aec39d1ad856be05a5f5976d782c"
 -- 
 1.7.0.4
 
