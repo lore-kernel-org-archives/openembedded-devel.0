@@ -1,16 +1,16 @@
 Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPFpA-0003sZ-NH
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPG3I-0004Bz-JK
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 15:44:25 +0100
+	Sun, 05 Dec 2010 15:59:00 +0100
 Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
 	[77.22.235.200])
-	by email.infrascan.de (Postfix) with ESMTPSA id E92061B40D;
-	Sun,  5 Dec 2010 15:44:21 +0100 (CET)
+	by email.infrascan.de (Postfix) with ESMTPSA id C9C851B40D;
+	Sun,  5 Dec 2010 15:58:57 +0100 (CET)
 From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Dec 2010 15:43:00 +0100
-Message-Id: <1291560180-6981-1-git-send-email-schwarzkopf@sensortherm.de>
+Date: Sun,  5 Dec 2010 15:57:35 +0100
+Message-Id: <1291561055-7239-1-git-send-email-schwarzkopf@sensortherm.de>
 X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 188.40.84.136
 X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
@@ -20,7 +20,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] esc-gst_6: fixed SRC_URI
+Subject: [PATCH] esc-media_5: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,27 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 14:44:25 -0000
+X-List-Received-Date: Sun, 05 Dec 2010 14:59:01 -0000
 
 
 Signed-off-by: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 ---
- recipes/esc/esc-gst_6.bb |    2 +-
+ recipes/esc/esc-media_5.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/esc/esc-gst_6.bb b/recipes/esc/esc-gst_6.bb
-index 88840db..ef65600 100644
---- a/recipes/esc/esc-gst_6.bb
-+++ b/recipes/esc/esc-gst_6.bb
+diff --git a/recipes/esc/esc-media_5.bb b/recipes/esc/esc-media_5.bb
+index 725de19..083e0cc 100644
+--- a/recipes/esc/esc-media_5.bb
++++ b/recipes/esc/esc-media_5.bb
 @@ -1,7 +1,7 @@
- DESCRIPTION = "Gstreamer scripts for Embedded Systems Conference workshop"
- LICENSE = "Various"
+ DESCRIPTION = "Media files to include on the Embedded Systems Conference workshop"
+ LICENSE="Various"
  
--SRC_URI = "http://hivelocity.dl.sourceforge.net/project/showoff/esc_gst_scripts.tar.gz \
-+SRC_URI = "http://downloads.sourceforge.net/project/showoff/esc_gst_scripts.tar.gz \
- "
- SRC_URI[md5sum] = "944f4ea58e81c3a32b947322ac8f9e1d"
- SRC_URI[sha256sum] = "589c3b611406f255204e1993e470d0d69ac8f12ff479febf4d5dc92915f982da"
+-SRC_URI = "http://hivelocity.dl.sourceforge.net/project/showoff/esc_media_files.tar.gz"
++SRC_URI = "http://downloads.sourceforge.net/project/showoff/esc_media_files.tar.gz"
+ SRC_URI[md5sum] = "b75cbc0ce0dfcbd85de12e7fe9ecab8b"
+ SRC_URI[sha256sum] = "364f474a6356326c113d964885207d90741f2e95770b079d96fffc4295e62739"
+ 
 -- 
 1.7.0.4
 
