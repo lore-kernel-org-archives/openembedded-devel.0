@@ -1,43 +1,26 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail.infrascan.de ([188.40.84.136] helo=infrascan.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1PPB7C-0008FF-No
+	(envelope-from <schwarzkopf@sensortherm.de>) id 1PPDZm-0005Mz-Uc
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 10:42:43 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 8FD2D11000B4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 Dec 2010 10:41:18 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 65618110009A
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 Dec 2010 10:41:17 +0100 (CET)
-Received: from rhein.familie-heinold.de (g225074249.adsl.alicedsl.de
-	[92.225.74.249]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 Dec 2010 10:41:17 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 281C23C121; Sun,  5 Dec 2010 10:40:43 +0100 (CET)
-Date: Sun, 5 Dec 2010 10:40:43 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Sun, 05 Dec 2010 13:20:23 +0100
+Received: from localhost.localdomain (77-22-235-200-dynip.superkabel.de
+	[77.22.235.200])
+	by email.infrascan.de (Postfix) with ESMTPSA id 052C51B40D;
+	Sun,  5 Dec 2010 13:20:19 +0100 (CET)
+From: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101205094042.GA3572@rhein.zuhause.netz>
-References: <4CD27E26.1070706@nedap.com>
-MIME-Version: 1.0
-In-Reply-To: <4CD27E26.1070706@nedap.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Date: Sun,  5 Dec 2010 13:18:47 +0100
+Message-Id: <1291551527-3806-1-git-send-email-schwarzkopf@sensortherm.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 188.40.84.136
+X-SA-Exim-Mail-From: schwarzkopf@sensortherm.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: openjdk-6 fails to translate
+Subject: [PATCH] asterisk_1.2.24: Set correct Checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,22 +34,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 09:42:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 05 Dec 2010 12:20:24 -0000
 
-On Thu, Nov 04, 2010 at 10:34:30AM +0100, Jaap de Jong wrote:
-> Hi All,
-> I've been trying to tackle this myself, but no luck so far...
-> What I can make of it is that -lz is translated into a reference to
-> /usr/lib/libz.so
-> Any help is appreciated!
-> Jaap
-> 
+Tilghman Lesher <tlesher@digium.com> wrote on asterisk-users@lists.digium.com:
 
-Hi I looked a bit deeper into it.
-The only fast and ugly solution is to delete libz.la from the target sysrootdir.
+Due to a licensing issue with some of the files we distributed with previous
+tarballs, we removed those files from archived tarballs in order to avoid
+continuing to distribute those files in any form.  So yes, the checksums
+will have changed, although the checksums we distribute with the tarballs
+were also updated at the same time.
 
-Bye Henning
+Given that most of the changes since 1.2.24 have been security fixes, I
+would strongly encourage you to update your packages.  There is no excuse
+for distributing vulnerable packages beyond the date that the vulnerability
+is disclosed, plus a brief period necessary for releasing updated packages.
+
+Additionally, the 1.2 branch has been EOLed, which means if any additional
+security issues are found, we will not be releasing updated packages to
+deal with those issues.  For this reason, you would be better off putting
+forth the work to release packages based upon 1.4 or 1.8.
+
+Signed-off-by: Klaus Schwarzkopf <schwarzkopf@sensortherm.de>
+---
+ recipes/asterisk/asterisk_1.2.24.bb |   10 +++++-----
+ 1 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/recipes/asterisk/asterisk_1.2.24.bb b/recipes/asterisk/asterisk_1.2.24.bb
+index fb2fd4b..0db2b70 100644
+--- a/recipes/asterisk/asterisk_1.2.24.bb
++++ b/recipes/asterisk/asterisk_1.2.24.bb
+@@ -45,8 +45,8 @@ FILES_${PN}-dbg += "${libdir}/asterisk/modules/.debug"
+ FILES_${PN}-dbg += "/var/lib/asterisk/agi-bin/.debug"
+ 
+ 
+-SRC_URI[md5sum] = "63dc8b7be4cd10375c5fbda893c780bc"
+-SRC_URI[sha256sum] = "9debaf410636fa477e1e1f09fe0b16a1c2814afaf7195f34f29e4ce5b8debbbd"
+-# CHECKSUMS.INI MISMATCH: I've got this instead:
+-#SRC_URI[md5sum] = "db7bcaaa494804af361157a37c224dfa"
+-#SRC_URI[sha256sum] = "eed3493b1409d7100e0f983af0486bd7f8965e9e47b7a6d5ab8539b2dd3609aa"
++#SRC_URI[md5sum] = "63dc8b7be4cd10375c5fbda893c780bc"
++#SRC_URI[sha256sum] = "9debaf410636fa477e1e1f09fe0b16a1c2814afaf7195f34f29e4ce5b8debbbd"
++
++SRC_URI[md5sum] = "db7bcaaa494804af361157a37c224dfa"
++SRC_URI[sha256sum] = "eed3493b1409d7100e0f983af0486bd7f8965e9e47b7a6d5ab8539b2dd3609aa"
+-- 
+1.7.0.4
+
 
 
