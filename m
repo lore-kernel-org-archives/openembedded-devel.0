@@ -1,38 +1,46 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1PPLYR-0006Gd-Pa
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <graham.gower@gmail.com>) id 1PPMDP-0007FQ-2M
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Dec 2010 21:51:32 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id oB5Ko42Z030306;
-	Sun, 5 Dec 2010 20:50:04 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30249-01; Sun,  5 Dec 2010 20:50:00 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id oB5KnwKu030289
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Sun, 5 Dec 2010 20:49:58 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-In-Reply-To: <AANLkTimOUSrRJd+bVLmprX+e+tCTtQHLQEC52GNgMCZ=@mail.gmail.com>
-References: <AANLkTimOUSrRJd+bVLmprX+e+tCTtQHLQEC52GNgMCZ=@mail.gmail.com>
-Date: Sun, 05 Dec 2010 20:49:57 +0000
-Message-ID: <1291582197.14277.2908.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Sun, 05 Dec 2010 22:33:52 +0100
+Received: by wyb40 with SMTP id 40so11594391wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 05 Dec 2010 13:32:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=LhvZqKvyi5l5PPnaBY8U01eboLpHxIC0eLKSc5YFMeg=;
+	b=i/SyQn/jRT/PadCdx0xqOMLf+XzFF13fE6RSwGl9DnJgoXjCTAubVcxsslHGB5WdWV
+	kJGFDaAzd22tWGtaMsvELov9A/7wc2jav5opYYPtsnbFGcTbqhvcg4hP/etI8mACRH33
+	UZOtz0YdiDava8jjeSQKOzThdwJsUb+wkRWfU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=WYdt5YYm85isdgOgvHOYKDQggeY9IzoYO9DpOwT8XrNYZQ53JDE0G3QWt4LL+fIn9e
+	ONPM1cz8WEZ8fhTIOwvozNe+c5lJTuatzEH80kR9gX737Z3m+A314pPwE/0cqG7Khijo
+	luFFR5uZPTzs79ZqtQ59kB7lHra+OZCdq1Pcw=
+MIME-Version: 1.0
+Received: by 10.227.195.144 with SMTP id ec16mr4852825wbb.20.1291584742609;
+	Sun, 05 Dec 2010 13:32:22 -0800 (PST)
+Received: by 10.227.155.208 with HTTP; Sun, 5 Dec 2010 13:32:22 -0800 (PST)
+In-Reply-To: <1291579960.7355.8.camel@matthew-laptop>
+References: <1291564968-3502-1-git-send-email-matthewbot@gmail.com>
+	<4CFBBA1C.4080103@eukrea.com>
+	<1291579960.7355.8.camel@matthew-laptop>
+Date: Mon, 6 Dec 2010 08:02:22 +1030
+Message-ID: <AANLkTik7tMZ1eXOmb741F892THAv-crQ3OisD587x+xc@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [yocto] AUTOTOOLS_STAGE_PKGCONFIG still used?
+Subject: Re: [PATCH] wxwidgets: added libxinerama to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +54,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Dec 2010 20:51:32 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 05 Dec 2010 21:33:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, 2010-12-05 at 00:31 +0100, Frans Meulenbroeks wrote:
-> Is AUTOTOOLS_STAGE_PKGCONFIG still of any use?
+On 6 December 2010 06:42, Matthew Thompson <matthewbot@gmail.com> wrote:
+> On Sun, 2010-12-05 at 17:13 +0100, Eric B=E9nard wrote:
+>> Hi,
+>>
+>> On 05/12/2010 17:02, Matt Thompson wrote:
+>> > Signed-off-by: Matt Thompson<matthewbot@gmail.com>
+>> > ---
+>> > =A0 recipes/wxwidgets/wxwidgets.inc | =A0 =A02 +-
+>> > =A0 1 files changed, 1 insertions(+), 1 deletions(-)
+>> >
+>> > diff --git a/recipes/wxwidgets/wxwidgets.inc b/recipes/wxwidgets/wxwid=
+gets.inc
+>> > index 2fb2bef..4c4f77f 100644
+>> > --- a/recipes/wxwidgets/wxwidgets.inc
+>> > +++ b/recipes/wxwidgets/wxwidgets.inc
+>> > @@ -2,7 +2,7 @@ DESCRIPTION =3D "wxWidgets is a cross platform applica=
+tion framework utilizing nat
+>> > =A0 HOMEPAGE =3D "http://www.wxwidgets.org"
+>> > =A0 SECTION =3D "x11/libs"
+>> > =A0 LICENSE =3D "wxWindows"
+>> > -DEPENDS =3D "gtk+ jpeg tiff libpng zlib expat"
+>> > +DEPENDS =3D "gtk+ jpeg tiff libpng zlib expat libxinerama"
+>> >
+>> maybe this is obvious for wxwidgets'users but can you please add a comme=
+nt
+>> detailing why this is needed ?
+>>
+>> Thanks,
+>> Eric
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> I'm not entirely sure myself, but under the recipes fails to build
+> wxwidgets without libxinerama on my box at least.
+>
+> I'm using the overo-oe branch of openembedded, but it appears as though
+> they haven't made any changes to this recipe, so I sent the patch here.
+> I'm also using their configuration files if that matters.
+>
+> This is my first time sending a patch via a mailing list, so should I
+> amend my commit with an additional line in the commit message to the
+> effect of "wxwidgets depends on libxinerama, which was missing from the
+> recipe" and then perform git send-email again as detailed in the wiki?
+> Is there some additional step to mark it as a revision to this patch?
 
-No, it used to do something but hasn't for over a year in either OE or
-Poky.
+If you include a snippet of the failure message then anyone else
+encountering the problem will find your patch in the archives (which
+is useful even after it gets applied).
 
-> I was trying to fidn out what I did, I ran a grep on both my
-> openembedded dir (results see below) and my yocto tree, both trees at
-> git head.
-> I see a lot of places where it is set but no place where it is used.
-> 
-> Anyone who can confirm that this is a stale var? Or otherwise anyone
-> who can explain how this is used. (and no, bitbake does not know the
-> var either, not that I had expected it)
-
-Its not needed and can be removed. I've pushed a patch to poky removing
-the references and acked your patch for OE.
-
-Cheers,
-
-Richard
-
-
+-Graham
 
 
