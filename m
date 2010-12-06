@@ -1,35 +1,34 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <saul.wold@intel.com>) id 1PPjuG-0003Oy-7K
+	(envelope-from <denis@denix.org>) id 1PPjwq-0003Uz-Sp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Dec 2010 23:51:41 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 06 Dec 2010 14:50:11 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.59,307,1288594800"; d="scan'208";a="684500224"
-Received: from unknown (HELO [10.255.13.6]) ([10.255.13.6])
-	by orsmga001.jf.intel.com with ESMTP; 06 Dec 2010 14:50:11 -0800
-Message-ID: <4CFD68A2.20408@intel.com>
-Date: Mon, 06 Dec 2010 14:50:10 -0800
-From: Saul Wold <saul.wold@intel.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.10) Gecko/20100621 Fedora/3.0.5-1.fc13 Lightning/1.0b2pre
-	Thunderbird/3.0.5
-MIME-Version: 1.0
-To: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 06 Dec 2010 23:54:21 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.236.20])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LD1008SH3JOBPA4@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	06 Dec 2010 16:52:42 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1964614AF64; Mon,
+	06 Dec 2010 17:52:36 -0500 (EST)
+Date: Mon, 06 Dec 2010 17:52:36 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20101206225236.GD29253@denix.org>
 References: <AANLkTi==kWiyOrmeUeUVNeC8FT0B8XxruHA0X4qMaPs_@mail.gmail.com>
-In-Reply-To: <AANLkTi==kWiyOrmeUeUVNeC8FT0B8XxruHA0X4qMaPs_@mail.gmail.com>
-X-SA-Exim-Connect-IP: 134.134.136.20
-X-SA-Exim-Mail-From: saul.wold@intel.com
+	<4CFD68A2.20408@intel.com>
+MIME-version: 1.0
+In-reply-to: <4CFD68A2.20408@intel.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.9
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "poky@yoctoproject.org" <poky@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+Cc: "poky@yoctoproject.org" <poky@yoctoproject.org>
 Subject: Re: [poky] libcdaudio license issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,36 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Dec 2010 22:51:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 06 Dec 2010 22:54:21 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 12/06/2010 11:48 AM, Frans Meulenbroeks wrote:
-> I was checking libcdaudio for LICENSE info.
-> recipe says GPL
-> COPYING file is the GPLv2 one
-> README file says:
->
-> libcdaudio is distributed under the GNU Library General Public
-> License, included in this package under the top level source directory
-> in the file COPYING
->
-> C files also mention LGPL. but say v2 or later
->
-> What to do with this in the LICENSE field? LGPLv2+ ?
->
-This seems reasonable, you should also include the header chunk in the 
-LIC_FILES_CHKSUM, you can specify start and end lines for the checksum.
+On Mon, Dec 06, 2010 at 02:50:10PM -0800, Saul Wold wrote:
+> On 12/06/2010 11:48 AM, Frans Meulenbroeks wrote:
+>> I was checking libcdaudio for LICENSE info.
+>> recipe says GPL
+>> COPYING file is the GPLv2 one
+>> README file says:
+>>
+>> libcdaudio is distributed under the GNU Library General Public
+>> License, included in this package under the top level source directory
+>> in the file COPYING
+>>
+>> C files also mention LGPL. but say v2 or later
+>>
+>> What to do with this in the LICENSE field? LGPLv2+ ?
+>>
+> This seems reasonable, you should also include the header chunk in the 
+> LIC_FILES_CHKSUM, you can specify start and end lines for the checksum.
 
+Saul,
 
-Sau!
+We don't have this feature in OpenEmbedded yet... But it would be nice to port 
+it from Poky though! :)
 
-> Frans
-> _______________________________________________
-> poky mailing list
-> poky@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/poky
->
-
+-- 
+Denys
 
 
