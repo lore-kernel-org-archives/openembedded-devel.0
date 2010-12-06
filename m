@@ -1,46 +1,37 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from mail-out.m-online.net ([212.18.0.10])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1PPdJa-0002xh-Pg
+	(envelope-from <mok@mnet-online.de>) id 1PPe4a-00044B-5v
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Dec 2010 16:49:24 +0100
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id oB6Fls9e012649
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Mon, 06 Dec 2010 17:37:56 +0100
+Received: from frontend1.mail.m-online.net (frontend1.mail.intern.m-online.net
+	[192.168.8.180])
+	by mail-out.m-online.net (Postfix) with ESMTP id EA6ED186DEE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Dec 2010 09:47:54 -0600
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id oB6FlsOJ005884
+	Mon,  6 Dec 2010 17:36:30 +0100 (CET)
+Received: from gonzales.localnet (ppp-188-174-74-102.dynamic.mnet-online.de
+	[188.174.74.102])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTPS id 1D40B1C00142
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Dec 2010 09:47:54 -0600 (CST)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oB6Flsvh008695
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Dec 2010 09:47:54 -0600 (CST)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Mon, 6 Dec 2010 09:47:54 -0600
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 6 Dec 2010 09:47:53 -0600
-Thread-Topic: [oe] PREFERRED_PROVIDER and RDEPENDS
-Thread-Index: AcuUygbA/4JMxod1QMmgj+jf1OLhuQAkpurg
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080329CC20E3@dlee06.ent.ti.com>
-References: <AANLkTi=hznaSZz6erP3oQF4Ffnw+jxdK=+1hzYK-kusU@mail.gmail.com>
-In-Reply-To: <AANLkTi=hznaSZz6erP3oQF4Ffnw+jxdK=+1hzYK-kusU@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Mon,  6 Dec 2010 17:36:31 +0100 (CET)
+From: Klaus Kurzmann <mok@mnet-online.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 6 Dec 2010 17:36:35 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.36-ARCH; KDE/4.5.4; x86_64; ; )
+References: <1291642945.3756.16.camel@mattotaupa>
+In-Reply-To: <1291642945.3756.16.camel@mattotaupa>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.41
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Message-Id: <201012061736.35834.mok@mnet-online.de>
+X-SA-Exim-Connect-IP: 212.18.0.10
+X-SA-Exim-Mail-From: mok@mnet-online.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: PREFERRED_PROVIDER and RDEPENDS
+Subject: Re: [PATCH 1/2] enjoy: Fix commit 1265ac and append to `DEPENDS`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,50 +45,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Dec 2010 15:49:24 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 06 Dec 2010 16:37:56 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: quoted-printable
 
+Am Montag, 6. Dezember 2010, 14:42:25 schrieb Paul Menzel:
+> Date: Mon, 6 Dec 2010 14:11:30 +0100
+>=20
+> With commit 1265ac =BBenjoy_svn.bb: add missing DEPENDS for the needed
+> gst-plugins=AB [1] previous `DEPENDS` assignment was discarded and task
+> `configure` failed with the following error.
+>=20
+>         checking pkg-config is at least version 0.9.0... yes
+>         checking for EDBUS... configure: error: Package requirements
+> (edbus) were not met:
+>=20
+>         No package 'edbus' found
+>=20
+>         Consider adjusting the PKG_CONFIG_PATH environment variable if you
+>         installed software in a non-standard prefix.
+>=20
+>         Alternatively, you may set the environment variables EDBUS_CFLAGS
+>         and EDBUS_LIBS to avoid the need to call pkg-config.
+>         See the pkg-config man page for more details.
+>=20
+>         ERROR: Function do_configure failed
+>=20
+> This patch fixes the error above and is tested using the following
+> configurations.
+>=20
+>         Build Configuration:
+>         BB_VERSION        =3D "1.10.0"
+>         METADATA_BRANCH   =3D "org.openembedded.dev"
+>         METADATA_REVISION =3D "2bd4f33"
+>         TARGET_ARCH       =3D "arm"
+>         TARGET_OS         =3D "linux-gnueabi"
+>         MACHINE           =3D "beagleboard"
+>         DISTRO            =3D "angstrom"
+>         DISTRO_VERSION    =3D "next"
+>         TARGET_FPU        =3D "hard"
+>=20
+>         Build Configuration:
+>         BB_VERSION        =3D "1.10.0"
+>         METADATA_BRANCH   =3D "org.openembedded.dev"
+>         METADATA_REVISION =3D "fa3f861"
+>         TARGET_ARCH       =3D "arm"
+>         TARGET_OS         =3D "linux-gnueabi"
+>         MACHINE           =3D "beagleboard"
+>         DISTRO            =3D "minimal"
+>         DISTRO_VERSION    =3D "dev-snapshot-20101206"
+>         TARGET_FPU        =3D "hard"
+>=20
+> [1]
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D1265ac068=
+aa9
+> f5bf0d8fee2cfbf8a1492cabe5a3
+>=20
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+>  recipes/e17/enjoy_svn.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/e17/enjoy_svn.bb b/recipes/e17/enjoy_svn.bb
+> index bd1c659..20c9c63 100644
+> --- a/recipes/e17/enjoy_svn.bb
+> +++ b/recipes/e17/enjoy_svn.bb
+> @@ -3,9 +3,9 @@ LICENSE =3D "LGPLv3"
+>  DEPENDS =3D "evas ecore edje emotion lightmediascanner"
+>  SRCREV =3D "${EFL_SRCREV}"
+>  PV =3D "0.0+svnr${SRCPV}"
+> -PR =3D "r2"
+> +PR =3D "r3"
+>=20
+> -DEPENDS =3D "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '=
+1',
+> '', 'gst-plugins-ugly', d)}" +DEPENDS +=3D "gst-plugins-good
+> ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly', d)}"
+>=20
+>  #1st needed for all formats
+>  #2nd needed for mp3 playback
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Bj=F6rn Krombholz
-> Sent: Sunday, December 05, 2010 4:15 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] PREFERRED_PROVIDER and RDEPENDS
->=20
-> qt4-x11-free and qt4-x11-free-gles both provide qt4-x11-free.
->=20
-> Setting
->=20
-> PREFERRED_PROVIDER_qt4-x11-free =3D "qt4-x11-free-gles"
->=20
-> works as expected. When you bitbake qt4-x11-free you will get the -gles
-> variant.
->=20
-> On the other hand, when bitbaking task-qt4-x11 which RDEPENDS
-> on qt4-x11-free it is trying to build qt4-x11-free.bb and not the -gles
-> recipe.
->=20
-> Is this a general bug? Or would the correct way be adding something like
-> RPROVIDES +=3D "virtual/qt4-x11"
-> to qt4-x11-free.inc and changing the RDEPENDS to the virtual package?
+Duhh. I'm a blind man :/ Thanks for fixing :-)
 
-When I was doing something similar I added the following lines to my recipe=
-:
-
-RPROVIDES_${PN} =3D "qt4-embedded"
-RPROVIDES_${PN}-dev =3D "qt4-embedded-dev"
-
-This was for an embedded variant but I would image the same holds true for =
-x11 (of course with a change to qt4-x11-free, etc)
-
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+=2D-=20
+Klaus 'mrmoku' Kurzmann
 
 
