@@ -1,34 +1,34 @@
-Received: from ppsw-52.csi.cam.ac.uk ([131.111.8.152])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jic23@cam.ac.uk>)
-	id 1PPjef-00034F-12; Mon, 06 Dec 2010 23:35:33 +0100
-X-Cam-AntiVirus: no malware found
-X-Cam-SpamDetails: not scanned
-X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
-Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:44434)
-	by ppsw-52.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.159]:25)
-	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-CAMELLIA256-SHA:256)
-	id 1PPjdG-0000AQ-Eo (Exim 4.72)
-	(return-path <jic23@cam.ac.uk>); Mon, 06 Dec 2010 22:34:06 +0000
-Message-ID: <4CFD666A.7070100@cam.ac.uk>
-Date: Mon, 06 Dec 2010 22:40:42 +0000
-From: Jonathan Cameron <jic23@cam.ac.uk>
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1PPjiP-0003Bj-88
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Dec 2010 23:39:25 +0100
+Received: (qmail invoked by alias); 06 Dec 2010 22:37:57 -0000
+Received: from 251.118.101-84.rev.gaoland.net (EHLO [192.168.1.72])
+	[84.101.118.251]
+	by mail.gmx.net (mp022) with SMTP; 06 Dec 2010 23:37:57 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18atk4EKMgaXm2FVYs2iEbo7jcS3TXsgq11Kpnqkd
+	/daFriAHvfLr4O
+Message-ID: <4CFD65C4.9000901@gmx.net>
+Date: Mon, 06 Dec 2010 23:37:56 +0100
+From: Robert Schuster <thebohemian@gmx.net>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101123 Lightning/1.0b3pre Thunderbird/3.1.6
+	rv:1.9.1.15) Gecko/20101027 Thunderbird/3.0.10
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <AANLkTik0zjtfygu8taBf_bUAdgu_yCtkH_1ZaKb5WX0+@mail.gmail.com>
 In-Reply-To: <AANLkTik0zjtfygu8taBf_bUAdgu_yCtkH_1ZaKb5WX0+@mail.gmail.com>
-X-Enigmail-Version: 1.1.2
-X-SA-Exim-Connect-IP: 131.111.8.152
-X-SA-Exim-Mail-From: jic23@cam.ac.uk
+X-Enigmail-Version: 1.0.1
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembeded-users <Openembedded-users@lists.openembedded.org>
 Subject: Re: [ANNOUNCE]: OpenEmbedded 2010.12 released
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,39 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Dec 2010 22:35:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 06 Dec 2010 22:39:25 -0000
+X-Groupsio-MsgNum: 26937
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig883B27D83509D754B7E8A741"
 
-On 12/04/10 04:08, Khem Raj wrote:
+--------------enig883B27D83509D754B7E8A741
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+Am 04.12.2010 05:08, schrieb Khem Raj:
 > On behalf of OpenEmbedded Commmunity, I am excited to announce 2010.12
 > release of OpenEmbedded.
-> This release was focussed on stabilizing the metadata and getting
-> various distro/machine/image
-> combinations to work. A lot of effort was put by community to make
-> this happen and a table of tested combination is available at
-> 
-> http://www.openembedded.org/index.php/Release-2010.12
-> 
-> In order to get the release using git
-> 
-> $ git clone git://git.openembedded.org/openembedded
-> 
-> $ cd openembedded
-> 
-> $ git checkout -b release-2010.12 release-2010.12
-> 
-> To download the release in form of tarballs
-> 
-> http://git.openembedded.org/cgit.cgi/openembedded/snapshot/release-2010.12.tar.bz2
-> http://git.openembedded.org/cgit.cgi/openembedded/snapshot/release-2010.12.tar.gz
-> 
-> BIG thanks to everyone who tested different combinations, took part in
-> stabilization effort, provided patches
-> and provided feedback for the release to make it happen
+w00t!
 
-Worth publicizing this a bit?  Perhaps send it to lwn and see if they
-want to pick it up for their announcements page if someone hasn't done
-it already?
+=2E.. and extra kudos for mentioning it on the homepage. :)
+
+Looking forward to a good get together at FOSDEM!
+
+Cheers,
+Robert
 
 
+--------------enig883B27D83509D754B7E8A741
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAkz9ZcQACgkQG9cfwmwwEtrb8QCeNhhssXF2IpNhkcwtqqszbkmP
+iQIAn3K9KYUABYjG4novaGdssazBlngk
+=BYan
+-----END PGP SIGNATURE-----
+
+--------------enig883B27D83509D754B7E8A741--
