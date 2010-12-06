@@ -1,40 +1,46 @@
-Received: from mail-gw0-f41.google.com ([74.125.83.41])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PPh4O-0004mX-TY
+	(envelope-from <chase.maupin@ti.com>) id 1PPhUZ-0005VO-VE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Dec 2010 20:49:57 +0100
-Received: by gwj22 with SMTP id 22so4596815gwj.28
+	Mon, 06 Dec 2010 21:17:03 +0100
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id oB6KFV4U006456
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Dec 2010 11:48:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=IawqZZdwZSDBBs3YgQS7Y909u0l5N9KYBNjQv6EJN3E=;
-	b=MasXeJ85e96ExqpjRMVI3vJZHaGQelec0KhAJgrDT6eWSrXgI99hqXibEHbhgNlLb2
-	4EnRdWnJ9rw3SffW65hJxNhCG1JPWztVn2HTD7bbULwxj/HBoQGsRN29Qc3UU7JIKz/K
-	jNbSwzPdeNgweSUwEGFsWwlWz3l4GVjSuDtyA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=SpxMnoSwTgaPiTs83cdjvWqiKYsmCz7XQ/jwV8hbEBK2P1TjGBjPT/dW0ot6VM1xa1
-	rUpUwKSxgglHo4b7EPTXdULYMi9ufoO0ktRYmqb1iCCHku1lWWYjqDXoXkyHqzpgF7ip
-	Lfrgiip+fVX9+tXncrE0oGPNMHRjzA4omZVX4=
+	Mon, 6 Dec 2010 14:15:31 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id oB6KFVDE010510
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 6 Dec 2010 14:15:31 -0600 (CST)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oB6KFU7r004065
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 6 Dec 2010 14:15:30 -0600 (CST)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Mon, 6 Dec 2010 14:15:30 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 6 Dec 2010 14:15:28 -0600
+Thread-Topic: [oe] libcdaudio license issue
+Thread-Index: AcuVfr27Dq0DKBXySD25Xu1v94j/lwAA2lOw
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080329CC2233@dlee06.ent.ti.com>
+References: <AANLkTi==kWiyOrmeUeUVNeC8FT0B8XxruHA0X4qMaPs_@mail.gmail.com>
+In-Reply-To: <AANLkTi==kWiyOrmeUeUVNeC8FT0B8XxruHA0X4qMaPs_@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.231.20.65 with SMTP id e1mr6412704ibb.32.1291664908427; Mon,
-	06 Dec 2010 11:48:28 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Mon, 6 Dec 2010 11:48:28 -0800 (PST)
-Date: Mon, 6 Dec 2010 20:48:28 +0100
-Message-ID: <AANLkTi==kWiyOrmeUeUVNeC8FT0B8XxruHA0X4qMaPs_@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org, poky@yoctoproject.org
-X-SA-Exim-Connect-IP: 74.125.83.41
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: libcdaudio license issue
+Subject: Re: libcdaudio license issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,22 +54,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Dec 2010 19:49:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 Dec 2010 20:17:03 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-I was checking libcdaudio for LICENSE info.
-recipe says GPL
-COPYING file is the GPLv2 one
-README file says:
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Frans Meulenbroeks
+> Sent: Monday, December 06, 2010 1:48 PM
+> To: openembedded-devel@lists.openembedded.org; poky@yoctoproject.org
+> Subject: [oe] libcdaudio license issue
+>=20
+> I was checking libcdaudio for LICENSE info.
+> recipe says GPL
+> COPYING file is the GPLv2 one
+> README file says:
+>=20
+> libcdaudio is distributed under the GNU Library General Public
+> License, included in this package under the top level source directory
+> in the file COPYING
+>=20
+> C files also mention LGPL. but say v2 or later
+>=20
+> What to do with this in the LICENSE field? LGPLv2+ ?
 
-libcdaudio is distributed under the GNU Library General Public
-License, included in this package under the top level source directory
-in the file COPYING
+Frans,
 
-C files also mention LGPL. but say v2 or later
+My thought would be to follow what is in the code.  Some files can be autog=
+enerated by tools like automake and if someone doesn't set the up right the=
+n they get the wrong output.  But the code is usually what someone has writ=
+ten and what they intended.
 
-What to do with this in the LICENSE field? LGPLv2+ ?
+Anyone else have a differing opinion?
 
-Frans
+>=20
+> Frans
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
