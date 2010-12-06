@@ -1,31 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PPbSw-0004Zz-L3 for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Dec 2010 14:50:55 +0100
-Received: from f053044154.adsl.alicedsl.de ([78.53.44.154]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PPbRZ-0001gB-Ir for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Dec 2010 13:49:29 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1291642945.3756.16.camel@mattotaupa>
-References: <1291642945.3756.16.camel@mattotaupa>
-Date: Mon, 06 Dec 2010 14:49:28 +0100
-Message-ID: <1291643368.3756.21.camel@mattotaupa>
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>)
+	id 1PPdDG-0002nx-Oh; Mon, 06 Dec 2010 16:42:51 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id oB6FfOSe008548;
+	Mon, 6 Dec 2010 15:41:24 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 08268-05; Mon,  6 Dec 2010 15:41:20 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id oB6FfE1L008542
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 6 Dec 2010 15:41:15 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-members@lists.openembedded.org
+In-Reply-To: <4CF54552.4060407@xora.org.uk>
+References: <20101109082630.GA16948@excalibur.local>
+	<4CE63017.1060800@xora.org.uk>  <4CF54552.4060407@xora.org.uk>
+Date: Mon, 06 Dec 2010 15:41:10 +0000
+Message-ID: <1291650070.14277.2955.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] enjoy: add `elementary` to `DEPENDS`
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: New Members Vote
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,105 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Dec 2010 13:50:55 -0000
-X-Groupsio-MsgNum: 26927
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-x8TrPfy123jgZPm58TZw"
-
---=-x8TrPfy123jgZPm58TZw
+X-List-Received-Date: Mon, 06 Dec 2010 15:42:51 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Date: Mon, 6 Dec 2010 14:22:16 +0100
+On Tue, 2010-11-30 at 18:41 +0000, Graeme Gregory wrote:
+> All these people were voted into the eV successfully, welcome to the eV.
+> Will the web/mailing list team please add them to the wiki and members list.
 
-Task `configure` fails with the following error message.
+Thanks for running the vote Graeme!
 
-	| checking pkg-config is at least version 0.9.0... yes
-	| checking for EDBUS... yes
-	| checking for ELEMENTARY... configure: error: Package requirements (eleme=
-ntary ecore-file) were not met:
-	|
-	| No package 'elementary' found
-	|
-	| Consider adjusting the PKG_CONFIG_PATH environment variable if you
-	| installed software in a non-standard prefix.
-	|
-	| Alternatively, you may set the environment variables ELEMENTARY_CFLAGS
-	| and ELEMENTARY_LIBS to avoid the need to call pkg-config.
-	| See the pkg-config man page for more details.
-	|
-	| ERROR: Function do_configure failed
-	NOTE: package enjoy-0.0+svnr55157-r2: task do_configure: Failed
-	ERROR: TaskFailed event exception, aborting
-	ERROR: Build of /oe/openembedded/recipes/e17/enjoy_svn.bb do_configure fai=
-led
-	ERROR: Task 12 (/oe/openembedded/recipes/e17/enjoy_svn.bb, do_configure) f=
-ailed with 256
-	ERROR: '/oe/openembedded/recipes/e17/enjoy_svn.bb' failed
-	ERROR: '/oe/openembedded/recipes/e17/enjoy_svn.bb' failed
-	ERROR: '/oe/openembedded/recipes/e17/enjoy_svn.bb' failed
+(and welcome to the new members)
 
-Adding `elementary` to `DEPENDS` fixes this problem and is tested with the =
-following configurations.
+Cheers,
 
-        Build Configuration:
-        BB_VERSION        =3D "1.10.0"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "2bd4f33"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-gnueabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "angstrom"
-        DISTRO_VERSION    =3D "next"
-        TARGET_FPU        =3D "hard"
+Richard
 
-        Build Configuration:
-        BB_VERSION        =3D "1.10.0"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "fa3f861"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-gnueabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "minimal"
-        DISTRO_VERSION    =3D "dev-snapshot-20101206"
-        TARGET_FPU        =3D "hard"
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/e17/enjoy_svn.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/e17/enjoy_svn.bb b/recipes/e17/enjoy_svn.bb
-index 20c9c63..3288338 100644
---- a/recipes/e17/enjoy_svn.bb
-+++ b/recipes/e17/enjoy_svn.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION =3D "Enjoy music player"
- LICENSE =3D "LGPLv3"
--DEPENDS =3D "evas ecore edje emotion lightmediascanner"
-+DEPENDS =3D "evas ecore edje elementary emotion lightmediascanner"
- SRCREV =3D "${EFL_SRCREV}"
- PV =3D "0.0+svnr${SRCPV}"
--PR =3D "r3"
-+PR =3D "r4"
-=20
- DEPENDS +=3D "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1=
-', '', 'gst-plugins-ugly', d)}"
-=20
---=20
-1.7.2.3
-
---=-x8TrPfy123jgZPm58TZw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkz86egACgkQPX1aK2wOHVhDxwCghTU6vvn1IOepkgvQtqNrsp7q
-IdgAmwRRJY0uR88VQ8gZhuC045wCpzpY
-=sU++
------END PGP SIGNATURE-----
-
---=-x8TrPfy123jgZPm58TZw--
