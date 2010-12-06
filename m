@@ -1,34 +1,35 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from ppsw-52.csi.cam.ac.uk ([131.111.8.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1PPi0J-00069H-I6
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Dec 2010 21:49:48 +0100
-Received: from gandalf.denix.org ([unknown] [71.255.236.20])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LD0009GZXRTVI15@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	06 Dec 2010 14:47:59 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0F3E914AF64; Mon,
-	06 Dec 2010 15:47:53 -0500 (EST)
-Date: Mon, 06 Dec 2010 15:47:53 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <jic23@cam.ac.uk>)
+	id 1PPjef-00034F-12; Mon, 06 Dec 2010 23:35:33 +0100
+X-Cam-AntiVirus: no malware found
+X-Cam-SpamDetails: not scanned
+X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
+Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:44434)
+	by ppsw-52.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.159]:25)
+	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-CAMELLIA256-SHA:256)
+	id 1PPjdG-0000AQ-Eo (Exim 4.72)
+	(return-path <jic23@cam.ac.uk>); Mon, 06 Dec 2010 22:34:06 +0000
+Message-ID: <4CFD666A.7070100@cam.ac.uk>
+Date: Mon, 06 Dec 2010 22:40:42 +0000
+From: Jonathan Cameron <jic23@cam.ac.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101123 Lightning/1.0b3pre Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20101206204753.GC29253@denix.org>
-References: <AANLkTim=weStfsykRNc7_bAZG6KExZt9sS_O15WH9F5=@mail.gmail.com>
-	<AANLkTikSuqFKS=1j-KWm3XY75J=qhe+towHjdfanW1JG@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <AANLkTikSuqFKS=1j-KWm3XY75J=qhe+towHjdfanW1JG@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.17
-X-SA-Exim-Mail-From: denis@denix.org
+References: <AANLkTik0zjtfygu8taBf_bUAdgu_yCtkH_1ZaKb5WX0+@mail.gmail.com>
+In-Reply-To: <AANLkTik0zjtfygu8taBf_bUAdgu_yCtkH_1ZaKb5WX0+@mail.gmail.com>
+X-Enigmail-Version: 1.1.2
+X-SA-Exim-Connect-IP: 131.111.8.152
+X-SA-Exim-Mail-From: jic23@cam.ac.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: release 2010-12: tar error
+Cc: openembeded-users <Openembedded-users@lists.openembedded.org>
+Subject: Re: [ANNOUNCE]: OpenEmbedded 2010.12 released
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Dec 2010 20:49:48 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 06 Dec 2010 22:35:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Dec 03, 2010 at 11:44:14AM -0800, Khem Raj wrote:
-> On Fri, Dec 3, 2010 at 7:36 AM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
-> > Not sure if this is reproducible or a race but when building console-image
-> > for minimal for calamari I got:
-> >
-> > ERROR: Function staging_packager failed
-> > NOTE: Task failed: ('function staging_packager failed',
-> > '/home/hudson/jobs/FM_TEST/workspace/tmp/work/calamari-oe-linux-gnuspe/linux-2.6.30-r6/temp/log.staging_packager.27026')
-> > ERROR: Task 601
-> > (/home/hudson/jobs/FM_TEST/workspace/openembedded/recipes/linux/linux_2.6.30.bb,
-> > do_package_stage) failed with 256
-> > NOTE: oestats: task failed, see
-> > http://tinderbox.openembedded.net/packages/1176040/
-> > ERROR: Logfile of failure stored in:
-> > /home/hudson/jobs/FM_TEST/workspace/tmp/work/calamari-oe-linux-gnuspe/linux-2.6.30-r6/temp/log.staging_packager.27026
-> > Log data follows:
-> > | tar: .: file changed as we read it
-> >
-> > NOTE: package linux-2.6.30-r6: task do_package_stage: Failed
-> >
-> > Didn't have time to dig into this. Sry.
+On 12/04/10 04:08, Khem Raj wrote:
+> On behalf of OpenEmbedded Commmunity, I am excited to announce 2010.12
+> release of OpenEmbedded.
+> This release was focussed on stabilizing the metadata and getting
+> various distro/machine/image
+> combinations to work. A lot of effort was put by community to make
+> this happen and a table of tested combination is available at
 > 
-> yes this happens time to time. Its some sort of race condition. I get
-> it sometimes in different packages but never went in deep to fix it.
+> http://www.openembedded.org/index.php/Release-2010.12
+> 
+> In order to get the release using git
+> 
+> $ git clone git://git.openembedded.org/openembedded
+> 
+> $ cd openembedded
+> 
+> $ git checkout -b release-2010.12 release-2010.12
+> 
+> To download the release in form of tarballs
+> 
+> http://git.openembedded.org/cgit.cgi/openembedded/snapshot/release-2010.12.tar.bz2
+> http://git.openembedded.org/cgit.cgi/openembedded/snapshot/release-2010.12.tar.gz
+> 
+> BIG thanks to everyone who tested different combinations, took part in
+> stabilization effort, provided patches
+> and provided feedback for the release to make it happen
 
-I can confirm that this is a long standing race condition, presumably in 
-packaged staging - there were several attempts at fixing it w/o much success.
-
--- 
-Denys
+Worth publicizing this a bit?  Perhaps send it to lwn and see if they
+want to pick it up for their announcements page if someone hasn't done
+it already?
 
 
