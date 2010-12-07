@@ -1,47 +1,45 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1PPwno-00054B-Bv
+	(envelope-from <martin.jansa@gmail.com>) id 1PPxHB-0006rX-3D
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Dec 2010 13:37:55 +0100
-Received: by pvd12 with SMTP id 12so2138440pvd.6
+	Tue, 07 Dec 2010 14:08:20 +0100
+Received: by fxm17 with SMTP id 17so9869780fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Dec 2010 04:36:23 -0800 (PST)
+	Tue, 07 Dec 2010 05:06:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=oD+FdieTOCNiRIypmjpwiPnUOtfNmwwb8rQ8LgTzwbY=;
-	b=pzJKgw8BdVaViEJmGJHRa80JokTrBt3eWoTp9ml7u4fbtdOlr/Yiov/xjoc89LDDYL
-	A1sjjDTCyFzryKghbH1jRFGvdcfdvkQuOCcG1SzyvnB/Pif+ROOxBOTL2p4lfRsh0JL0
-	1wdez+KMGcaTJZuu90t1OpQCzjkEfgMiBst7Y=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=75zEb198ih11J0xBHTgEhtk9xTCvuT7JEDI/+h+dNq0=;
+	b=FVnSfVMdX2iP6YUBUWNCLDcQNgP1dZ9pkXscyh7g5UP+m3TNCN/K2XDbx8hAeaQxqC
+	pQswXCMkbZd1vjgtyAZ4j/Xx+vfoyeTI+Ilf7dfZGRHywwZ3MzwLpZJVG4Z7m3iRxwRc
+	zpzZ7qJ9Nb+FkWPY1hV26ZnYvbPcIEvzHXbuI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=tjoGdKVg1haIiUgX5KxjcWlH5RDsDtlhLKkWGtHITRR9X9L6XruLADcr149NjGseoD
-	7gkzZl01SQK0lSpnQCpdFzbUmI/5+obLxrFxjW+89VzNiTVJueEK0Rfcb0+70m+4FWl+
-	gqia8jMHiaMbnsZjm9O7FeXLl/hntTESAqhNw=
-MIME-Version: 1.0
-Received: by 10.142.193.4 with SMTP id q4mr700037wff.152.1291725383022; Tue,
-	07 Dec 2010 04:36:23 -0800 (PST)
-Received: by 10.142.127.12 with HTTP; Tue, 7 Dec 2010 04:36:22 -0800 (PST)
-In-Reply-To: <AANLkTikm-rGwOYQKp4NcwyOet44UpdtHNR0cOOvmbu+Z@mail.gmail.com>
-References: <AANLkTimt7_P96yJMtLVd5S8ZOgH-=6VgTny=CezhOJ7P@mail.gmail.com>
-	<AANLkTikQLnSYpAF4YivEWQODjHpOdHowndLOkyh3LJAp@mail.gmail.com>
-	<4CEB1349.6080602@mentor.com>
-	<AANLkTikRdtg1U3gd6z3i0_UkifMgoRnSgSj9OW2dSL37@mail.gmail.com>
-	<AANLkTikm-rGwOYQKp4NcwyOet44UpdtHNR0cOOvmbu+Z@mail.gmail.com>
-Date: Tue, 7 Dec 2010 13:36:22 +0100
-Message-ID: <AANLkTikii9xZVQCamUKbffR2mRVt+OQE=pgttnv_ACp9@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=Kn1M2rJkMpUWu+SjGy9uwsa2Nz3RZvkTsbFKDseE917GGGjbyP+M7q5A9K0RcprVYj
+	eGeEJgeDUMKv/NKwuzgaKIxDm0cvBNauiRJ2EOnPQZxixd2AQZuvs4lLnY6V67uDs+m1
+	IjL8YBkMyZpeG/3KayON9QrcfIZfeD6jzzrwo=
+Received: by 10.223.86.130 with SMTP id s2mr7066516fal.66.1291727204727;
+	Tue, 07 Dec 2010 05:06:44 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id y3sm1900452fai.38.2010.12.07.05.06.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 07 Dec 2010 05:06:42 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Tue,  7 Dec 2010 14:06:36 +0100
+Message-Id: <1291727196-11177-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.3.2
+In-Reply-To: <1291681239-21167-1-git-send-email-raj.khem@gmail.com>
+References: <1291681239-21167-1-git-send-email-raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: automake-1.11 vs. host $perl_threads
+Subject: [PATCH] eglibc_2.12: remove upstream applied eglibc-make-382 patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,20 +53,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Dec 2010 12:37:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Dec 2010 13:08:27 -0000
 
-Still, is a bit unclear to me why the package was testing host
-perl...and recently I read
+---
+ recipes/eglibc/eglibc_2.12.bb |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-[oe] [PATCH 1/2] automake_1.11.1.bb: Don't try to execute perl.
-( http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-December/027516.html
-)
+diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.bb
+index 8c019a1..1285568 100644
+--- a/recipes/eglibc/eglibc_2.12.bb
++++ b/recipes/eglibc/eglibc_2.12.bb
+@@ -16,7 +16,6 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://sh4_local-fpscr_values.patch \
+            file://eglibc-dont-cache-slibdir.patch \
+            file://armv4-eabi-compile-fix.patch \
+-           file://eglibc-make-382.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+-- 
+1.7.3.2
 
-so indeed there is something strange...
-
-Will test the patch and reply
-
-Andrea
 
 
