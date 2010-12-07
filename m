@@ -1,40 +1,39 @@
-Received: from out3.smtp.messagingengine.com ([66.111.4.27])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1PQ4pN-0002PM-UI
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1PQ5eO-0001CN-Hf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Dec 2010 22:12:03 +0100
-Received: from compute3.internal (compute3.nyi.mail.srv.osa [10.202.2.43])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 0E19C68F
+	Tue, 07 Dec 2010 23:04:45 +0100
+Received: from [192.168.1.12] (c-76-105-143-140.hsd1.or.comcast.net
+	[76.105.143.140])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id AEB21304F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Dec 2010 16:10:35 -0500 (EST)
-Received: from frontend1.messagingengine.com ([10.202.2.160])
-	by compute3.internal (MEProxy); Tue, 07 Dec 2010 16:10:35 -0500
-X-Sasl-enc: 08zfXEXpDpcH0DNE8c94ORMyZBHjeqSzJBs5EySLhQ7p 1291756234
-Received: from [192.168.1.37] (hnvr-4d07b35e.pool.mediaWays.net [77.7.179.94])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 79516403927
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Dec 2010 16:10:34 -0500 (EST)
-Date: Tue, 7 Dec 2010 22:12:58 +0100 (CET)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1291732373-17953-1-git-send-email-GNUtoo@no-log.org>
-Message-ID: <alpine.LNX.2.00.1012072206420.6290@asterix.crazy-teaparty.dyndns.org>
-References: <1291732373-17953-1-git-send-email-GNUtoo@no-log.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Tue,  7 Dec 2010 17:03:12 -0500 (EST)
+Message-ID: <4CFEAF1F.70606@zenlinux.com>
+Date: Tue, 07 Dec 2010 14:03:11 -0800
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.27
-X-SA-Exim-Mail-From: vjensen@gmx.de
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTi==kWiyOrmeUeUVNeC8FT0B8XxruHA0X4qMaPs_@mail.gmail.com>
+In-Reply-To: <AANLkTi==kWiyOrmeUeUVNeC8FT0B8XxruHA0X4qMaPs_@mail.gmail.com>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: AEB21304F3.E08F2
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-SpamCheck: not spam
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] add iphone3g support
+Subject: Re: libcdaudio license issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Dec 2010 21:12:03 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Tue, 07 Dec 2010 22:04:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, 7 Dec 2010, Denis 'GNUtoo' Carikli wrote:
-
-> Android was ported to the some apple devices(iphones,ipod etc...)
-> Fortunately the kernel is standard enough to be able to run some
->  GNU/Linux distributions such as SHR.
-...
-> Chris Spehn is part of the iX project ( http://www.ixproject.org )
+On 12/06/2010 11:48 AM, Frans Meulenbroeks wrote:
+> I was checking libcdaudio for LICENSE info.
+> recipe says GPL
+> COPYING file is the GPLv2 one
+> README file says:
 >
-> He did all the testing and the configurations files, I just helped to make
->  the openembedded patches.
+> libcdaudio is distributed under the GNU Library General Public
+> License, included in this package under the top level source directory
+> in the file COPYING
 >
-> Note that I didn't have an iphone3g for testing the changes.
+> C files also mention LGPL. but say v2 or later
+>
+> What to do with this in the LICENSE field? LGPLv2+ ?
 
-There is an iphone3g in this household...  Is testing possible without 
-permanent modifications to the iphone?  The above website is "suspended" 
-and it's hard to imagine, given that there is no SDHC card in the iPhone.
+Like others I agree with going with what the source files have in them.
 
-If it's possible I would like to talk the iphone owner into trying it :-D
+Maybe this is obvious, but since I don't think anyone else has mentioned 
+it, I think it would also be helpful to notify the upstream folks about 
+this ambiguity so they can correct it.
 
-Vitus
+Regards,
+
+Scott
 
 -- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+Scott Garman
+sgarman at zenlinux dot com
 
 
