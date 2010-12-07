@@ -1,38 +1,47 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PPvwD-0005lz-0r
+	(envelope-from <andrea.adami@gmail.com>) id 1PPwno-00054B-Bv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Dec 2010 12:42:29 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PPvum-0008Vd-9Z by authid <stefan@sostec.de> with cram_md5
+	Tue, 07 Dec 2010 13:37:55 +0100
+Received: by pvd12 with SMTP id 12so2138440pvd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Dec 2010 12:41:03 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PPvuk-0000cO-VL
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Dec 2010 12:40:58 +0100
-Date: Tue, 7 Dec 2010 12:40:58 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101207114058.GI20482@excalibur.local>
-References: <4cf4953d.09ab960a.26e7.2e8f@mx.google.com>
+	Tue, 07 Dec 2010 04:36:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=oD+FdieTOCNiRIypmjpwiPnUOtfNmwwb8rQ8LgTzwbY=;
+	b=pzJKgw8BdVaViEJmGJHRa80JokTrBt3eWoTp9ml7u4fbtdOlr/Yiov/xjoc89LDDYL
+	A1sjjDTCyFzryKghbH1jRFGvdcfdvkQuOCcG1SzyvnB/Pif+ROOxBOTL2p4lfRsh0JL0
+	1wdez+KMGcaTJZuu90t1OpQCzjkEfgMiBst7Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=tjoGdKVg1haIiUgX5KxjcWlH5RDsDtlhLKkWGtHITRR9X9L6XruLADcr149NjGseoD
+	7gkzZl01SQK0lSpnQCpdFzbUmI/5+obLxrFxjW+89VzNiTVJueEK0Rfcb0+70m+4FWl+
+	gqia8jMHiaMbnsZjm9O7FeXLl/hntTESAqhNw=
 MIME-Version: 1.0
-In-Reply-To: <4cf4953d.09ab960a.26e7.2e8f@mx.google.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Received: by 10.142.193.4 with SMTP id q4mr700037wff.152.1291725383022; Tue,
+	07 Dec 2010 04:36:23 -0800 (PST)
+Received: by 10.142.127.12 with HTTP; Tue, 7 Dec 2010 04:36:22 -0800 (PST)
+In-Reply-To: <AANLkTikm-rGwOYQKp4NcwyOet44UpdtHNR0cOOvmbu+Z@mail.gmail.com>
+References: <AANLkTimt7_P96yJMtLVd5S8ZOgH-=6VgTny=CezhOJ7P@mail.gmail.com>
+	<AANLkTikQLnSYpAF4YivEWQODjHpOdHowndLOkyh3LJAp@mail.gmail.com>
+	<4CEB1349.6080602@mentor.com>
+	<AANLkTikRdtg1U3gd6z3i0_UkifMgoRnSgSj9OW2dSL37@mail.gmail.com>
+	<AANLkTikm-rGwOYQKp4NcwyOet44UpdtHNR0cOOvmbu+Z@mail.gmail.com>
+Date: Tue, 7 Dec 2010 13:36:22 +0100
+Message-ID: <AANLkTikii9xZVQCamUKbffR2mRVt+OQE=pgttnv_ACp9@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv3 3/5] linux-omap-psp-2.6.32:add patch for am3517-crane board support
+Subject: Re: automake-1.11 vs. host $perl_threads
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +55,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Dec 2010 11:42:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Dec 2010 12:37:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello.
+Still, is a bit unclear to me why the package was testing host
+perl...and recently I read
 
-On Tue, 2010-11-30 at 11:39, Anil Kumar wrote:
-> 	* Patch Version updated for latest git tree.
-> 
->         * This patch adds linux-omap-psp kernel support for am3517-crane board.
-> 
->         * CraneBoard is a hardware development platform based
->           on the Sitara AM3517 ARM Cortex - A8 microprocessor
->           device. This is a low cost reference design.
-> 
->         * You can find more about CraneBoard here:
->                [1] http://www.ti.com/arm
->                [2] http://www.mistralsolutions.com/products/craneboard.php
-> 
-> Signed-off-by: Anil Kumar <anilm@mistralsolutions.com>
+[oe] [PATCH 1/2] automake_1.11.1.bb: Don't try to execute perl.
+( http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-December/027516.html
+)
 
-I only reviewd the OE part, not the kernel patch itself.
+so indeed there is something strange...
 
-Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+Will test the patch and reply
 
-regards
-Stefan Schmidt
+Andrea
 
 
