@@ -1,27 +1,41 @@
-Received: from smtp201.alice.it ([82.57.200.97])
+Received: from mail-ew0-f44.google.com ([209.85.215.44])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1PPyd8-00072c-BZ
+	(envelope-from <cliff.brake@gmail.com>) id 1PPyfh-00007W-4E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Dec 2010 15:35:17 +0100
-Received: from localhost.localdomain (80.117.37.237) by smtp201.alice.it
-	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4CC05A4C041ACA22; Tue, 7 Dec 2010 15:33:29 +0100
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Dec 2010 15:32:53 +0100
-Message-Id: <1291732373-17953-5-git-send-email-GNUtoo@no-log.org>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1291732373-17953-1-git-send-email-GNUtoo@no-log.org>
-References: <1291732373-17953-1-git-send-email-GNUtoo@no-log.org>
-X-SA-Exim-Connect-IP: 82.57.200.97
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+	Tue, 07 Dec 2010 15:37:39 +0100
+Received: by ewy8 with SMTP id 8so7531414ewy.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Dec 2010 06:36:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=vOhJ6JdTJZsNSW/Au3+lc1O6Mp3U/CymRFFwimAm3i0=;
+	b=Qz+1O1T4kAFt1w/jELcrxZtH5PQwD4U+6kn6itFYKBzAb8iMBXY3u7d4ZQVxyM1I3G
+	GuyvIQ1so2DjfP7y9nMHd3YuILaP3zR+lcoWAN2S52rFWXsJTbWoZq028Otc8Y4AjpQc
+	u9IjvlVetYt96+Bo8n2AOdgzHiI8AOBO5db80=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=KA6jIOuvbv4lDH37/Gk1Xqt+XfR5ytMBTahKID0dQShQ18rR9gOczh+u5+BIRYF7Kz
+	NsUOpNK4uSmeWBBViH77XFSjKnldcP7bP8pNaj1fmgD1ACcIGHyc8WjUEMWIjSLBeQHu
+	0eJM9BbvincF6cLulxXeriLsNl9Rvm7qXXvJo=
+MIME-Version: 1.0
+Received: by 10.216.162.70 with SMTP id x48mr447708wek.4.1291732570613; Tue,
+	07 Dec 2010 06:36:10 -0800 (PST)
+Received: by 10.216.235.214 with HTTP; Tue, 7 Dec 2010 06:36:10 -0800 (PST)
+Date: Tue, 7 Dec 2010 09:36:10 -0500
+Message-ID: <AANLkTinwToVev48_ehHomQ+T_1G3ivLNc+EL-a8WVR15@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.215.44
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,FUZZY_VLIUM,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 4/4] alsa-state: add iphone3g support
+Subject: OE weekly changelog 2010-11-29 to 2010-12-06
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,1126 +49,276 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Dec 2010 14:35:17 -0000
+X-List-Received-Date: Tue, 07 Dec 2010 14:37:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The state file has 121 controls(yes 121).
-So this patch makes sound work out of the box, without
-  making the user mess with this 121 controls(if he does he would
-  spend hours trying to figure out how to make it work)
+OE weekly changelog for org.openembedded.dev, 2010-11-29 to 2010-12-06
 
-Signed-off-by: Chris 'Lopi' Spehn <chris.spehn@gmail.com>
-Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
----
- recipes/alsa/alsa-state.bb                    |    2 +-
- recipes/alsa/alsa-state/iphone3g/asound.state | 1084 +++++++++++++++++++++++++
- 2 files changed, 1085 insertions(+), 1 deletions(-)
- create mode 100644 recipes/alsa/alsa-state/iphone3g/asound.state
+Alex Ferguson (5):
+  netsurf: Update recipes, fix_makefile.patch for netsurf.
+  fileselector: Update recipe to version 1.3.
+  jlime-extras-nanonote: Update recipe to version 1.0.1.
+  linux-jlime-ben-nanonote: Update bootsplash for new jlime logo.
+  psplash: Update psplash-poky-img.h for new jlime-logo.
 
-diff --git a/recipes/alsa/alsa-state.bb b/recipes/alsa/alsa-state.bb
-index e78d004..de97681 100644
---- a/recipes/alsa/alsa-state.bb
-+++ b/recipes/alsa/alsa-state.bb
-@@ -7,7 +7,7 @@
- DESCRIPTION = "Alsa Scenario Files"
- LICENSE = "MIT"
- PV = "0.2.0"
--PR = "r21"
-+PR = "r22"
- 
- SRC_URI = "\
-   file://asound.conf \
-diff --git a/recipes/alsa/alsa-state/iphone3g/asound.state b/recipes/alsa/alsa-state/iphone3g/asound.state
-new file mode 100644
-index 0000000..192620c
---- /dev/null
-+++ b/recipes/alsa/alsa-state/iphone3g/asound.state
-@@ -0,0 +1,1084 @@
-+state.iPhoneSound {
-+	control.1 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN12 PGA Boost'
-+		value false
-+	}
-+	control.2 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN34 PGA Boost'
-+		value false
-+	}
-+	control.3 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN12 PGA Boost'
-+		value false
-+	}
-+	control.4 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN34 PGA Boost'
-+		value false
-+	}
-+	control.5 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'LOMIX LIN3 Bypass Volume'
-+		value 7
-+	}
-+	control.6 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'LOMIX RIN12 PGA Bypass Volume'
-+		value 7
-+	}
-+	control.7 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'LOMIX LIN12 PGA Bypass Volume'
-+		value 7
-+	}
-+	control.8 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'LOMIX RIN3 Bypass Volume'
-+		value 7
-+	}
-+	control.9 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'LOMIX AINRMUX Bypass Volume'
-+		value 7
-+	}
-+	control.10 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'LOMIX AINLMUX Bypass Volume'
-+		value 7
-+	}
-+	control.11 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'ROMIX RIN3 Bypass Volume'
-+		value 7
-+	}
-+	control.12 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'ROMIX LIN12 PGA Bypass Volume'
-+		value 7
-+	}
-+	control.13 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'ROMIX RIN12 PGA Bypass Volume'
-+		value 7
-+	}
-+	control.14 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'ROMIX LIN3 Bypass Volume'
-+		value 7
-+	}
-+	control.15 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'ROMIX AINLMUX Bypass Volume'
-+		value 7
-+	}
-+	control.16 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin 0
-+		comment.dbmax -2100
-+		iface MIXER
-+		name 'ROMIX AINRMUX Bypass Volume'
-+		value 7
-+	}
-+	control.17 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 127'
-+		comment.dbmin -7300
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'LOUT Volume'
-+		value 127
-+	}
-+	control.18 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOUT ZC'
-+		value true
-+	}
-+	control.19 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 127'
-+		comment.dbmin -7300
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'ROUT Volume'
-+		value 127
-+	}
-+	control.20 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROUT ZC'
-+		value true
-+	}
-+	control.21 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 127'
-+		comment.dbmin -7300
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'LOPGA Volume'
-+		value 121
-+	}
-+	control.22 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOPGA ZC Switch'
-+		value true
-+	}
-+	control.23 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 127'
-+		comment.dbmin -7300
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'ROPGA Volume'
-+		value 121
-+	}
-+	control.24 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROPGA ZC Switch'
-+		value true
-+	}
-+	control.25 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LON Mute Switch'
-+		value true
-+	}
-+	control.26 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOP Mute Switch'
-+		value true
-+	}
-+	control.27 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOP Attenuation Switch'
-+		value false
-+	}
-+	control.28 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RON Mute Switch'
-+		value true
-+	}
-+	control.29 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROP Mute Switch'
-+		value true
-+	}
-+	control.30 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROP Attenuation Switch'
-+		value false
-+	}
-+	control.31 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'OUT3 Mute Switch'
-+		value true
-+	}
-+	control.32 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'OUT3 Attenuation Switch'
-+		value false
-+	}
-+	control.33 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'OUT4 Mute Switch'
-+		value true
-+	}
-+	control.34 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'OUT4 Attenuation Switch'
-+		value false
-+	}
-+	control.35 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'Speaker Mode Switch'
-+		value true
-+	}
-+	control.36 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 3'
-+		iface MIXER
-+		name 'Speaker Output Attenuation Volume'
-+		value 0
-+	}
-+	control.37 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 127'
-+		iface MIXER
-+		name 'Speaker PGA Volume'
-+		value 127
-+	}
-+	control.38 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		iface MIXER
-+		name 'Speaker DC Boost Volume'
-+		value 0
-+	}
-+	control.39 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		iface MIXER
-+		name 'Speaker AC Boost Volume'
-+		value 0
-+	}
-+	control.40 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 255'
-+		comment.dbmin -7163
-+		comment.dbmax 0
-+		iface MIXER
-+		name 'Left DAC Digital Volume'
-+		value 192
-+	}
-+	control.41 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 255'
-+		comment.dbmin -7163
-+		comment.dbmax 0
-+		iface MIXER
-+		name 'Right DAC Digital Volume'
-+		value 192
-+	}
-+	control.42 {
-+		comment.access 'read write'
-+		comment.type ENUMERATED
-+		comment.count 1
-+		comment.item.0 None
-+		comment.item.1 'Left ADC'
-+		comment.item.2 'Right ADC'
-+		iface MIXER
-+		name 'Left Digital Sidetone'
-+		value None
-+	}
-+	control.43 {
-+		comment.access 'read write'
-+		comment.type ENUMERATED
-+		comment.count 1
-+		comment.item.0 None
-+		comment.item.1 'Left ADC'
-+		comment.item.2 'Right ADC'
-+		iface MIXER
-+		name 'Right Digital Sidetone'
-+		value None
-+	}
-+	control.44 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 15'
-+		comment.dbmin -3600
-+		comment.dbmax 0
-+		iface MIXER
-+		name 'Left Digital Sidetone Volume'
-+		value 0
-+	}
-+	control.45 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 15'
-+		comment.dbmin -3600
-+		comment.dbmax 0
-+		iface MIXER
-+		name 'Right Digital Sidetone Volume'
-+		value 0
-+	}
-+	control.46 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ADC Digital High Pass Filter Switch'
-+		value true
-+	}
-+	control.47 {
-+		comment.access 'read write'
-+		comment.type ENUMERATED
-+		comment.count 1
-+		comment.item.0 'Hi-fi mode'
-+		comment.item.1 'Voice mode 1'
-+		comment.item.2 'Voice mode 2'
-+		iface MIXER
-+		name 'ADC HPF Mode'
-+		value 'Hi-fi mode'
-+	}
-+	control.48 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 255'
-+		comment.dbmin -7163
-+		comment.dbmax 1763
-+		iface MIXER
-+		name 'Left ADC Digital Volume'
-+		value 192
-+	}
-+	control.49 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 255'
-+		comment.dbmin -7163
-+		comment.dbmax 1763
-+		iface MIXER
-+		name 'Right ADC Digital Volume'
-+		value 192
-+	}
-+	control.50 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 31'
-+		comment.dbmin -1650
-+		comment.dbmax 3000
-+		iface MIXER
-+		name 'LIN12 Volume'
-+		value 11
-+	}
-+	control.51 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN12 ZC Switch'
-+		value false
-+	}
-+	control.52 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN12 Mute Switch'
-+		value true
-+	}
-+	control.53 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 31'
-+		comment.dbmin -1650
-+		comment.dbmax 3000
-+		iface MIXER
-+		name 'LIN34 Volume'
-+		value 11
-+	}
-+	control.54 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN34 ZC Switch'
-+		value false
-+	}
-+	control.55 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN34 Mute Switch'
-+		value true
-+	}
-+	control.56 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 31'
-+		comment.dbmin -1650
-+		comment.dbmax 3000
-+		iface MIXER
-+		name 'RIN12 Volume'
-+		value 11
-+	}
-+	control.57 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN12 ZC Switch'
-+		value false
-+	}
-+	control.58 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN12 Mute Switch'
-+		value true
-+	}
-+	control.59 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 31'
-+		comment.dbmin -1650
-+		comment.dbmax 3000
-+		iface MIXER
-+		name 'RIN34 Volume'
-+		value 11
-+	}
-+	control.60 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN34 ZC Switch'
-+		value false
-+	}
-+	control.61 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN34 Mute Switch'
-+		value true
-+	}
-+	control.62 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROMIX ROMIX Left ADC Bypass Switch'
-+		value false
-+	}
-+	control.63 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROMIX ROMIX Right ADC Bypass Switch'
-+		value false
-+	}
-+	control.64 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROMIX ROMIX LIN3 Bypass Switch'
-+		value false
-+	}
-+	control.65 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROMIX ROMIX RIN3 Bypass Switch'
-+		value false
-+	}
-+	control.66 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROMIX ROMIX LIN12 PGA Bypass Switch'
-+		value false
-+	}
-+	control.67 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROMIX ROMIX RIN12 PGA Bypass Switch'
-+		value false
-+	}
-+	control.68 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROMIX ROMIX Right DAC Switch'
-+		value false
-+	}
-+	control.69 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RONMIX RONMIX Right Mixer PGA Switch'
-+		value false
-+	}
-+	control.70 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RONMIX RONMIX Left Mixer PGA Switch'
-+		value false
-+	}
-+	control.71 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RONMIX RONMIX Inverted ROP Switch'
-+		value false
-+	}
-+	control.72 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROPMIX ROPMIX Left Mic Bypass Switch'
-+		value false
-+	}
-+	control.73 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROPMIX ROPMIX Right Mic Bypass Switch'
-+		value false
-+	}
-+	control.74 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'ROPMIX ROPMIX Right Mixer PGA Switch'
-+		value false
-+	}
-+	control.75 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'OUT4MIX OUT4MIX Right Out PGA Switch'
-+		value false
-+	}
-+	control.76 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'OUT4MIX OUT4MIX RIN4/RXP Bypass Switch'
-+		value false
-+	}
-+	control.77 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'SPKMIX SPKMIX LIN2 Bypass Switch'
-+		value false
-+	}
-+	control.78 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'SPKMIX SPKMIX LADC Bypass Switch'
-+		value false
-+	}
-+	control.79 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'SPKMIX SPKMIX Left Mixer PGA Switch'
-+		value false
-+	}
-+	control.80 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'SPKMIX SPKMIX Left DAC Switch'
-+		value true
-+	}
-+	control.81 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'SPKMIX SPKMIX Right DAC Switch'
-+		value true
-+	}
-+	control.82 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'SPKMIX SPKMIX Right Mixer PGA Switch'
-+		value false
-+	}
-+	control.83 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'SPKMIX SPKMIX RADC Bypass Switch'
-+		value false
-+	}
-+	control.84 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'SPKMIX SPKMIX RIN2 Bypass Switch'
-+		value false
-+	}
-+	control.85 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'OUT3MIX OUT3MIX LIN4/RXN Bypass Switch'
-+		value false
-+	}
-+	control.86 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'OUT3MIX OUT3MIX Left Out PGA Switch'
-+		value false
-+	}
-+	control.87 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOPMIX LOPMIX Right Mic Bypass Switch'
-+		value false
-+	}
-+	control.88 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOPMIX LOPMIX Left Mic Bypass Switch'
-+		value false
-+	}
-+	control.89 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOPMIX LOPMIX Left Mixer PGA Switch'
-+		value false
-+	}
-+	control.90 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LONMIX LONMIX Left Mixer PGA Switch'
-+		value false
-+	}
-+	control.91 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LONMIX LONMIX Right Mixer PGA Switch'
-+		value false
-+	}
-+	control.92 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LONMIX LONMIX Inverted LOP Switch'
-+		value false
-+	}
-+	control.93 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOMIX LOMIX Right ADC Bypass Switch'
-+		value false
-+	}
-+	control.94 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOMIX LOMIX Left ADC Bypass Switch'
-+		value false
-+	}
-+	control.95 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOMIX LOMIX RIN3 Bypass Switch'
-+		value false
-+	}
-+	control.96 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOMIX LOMIX LIN3 Bypass Switch'
-+		value false
-+	}
-+	control.97 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOMIX LOMIX RIN12 PGA Bypass Switch'
-+		value false
-+	}
-+	control.98 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOMIX LOMIX LIN12 PGA Bypass Switch'
-+		value false
-+	}
-+	control.99 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LOMIX LOMIX Left DAC Switch'
-+		value false
-+	}
-+	control.100 {
-+		comment.access 'read write'
-+		comment.type ENUMERATED
-+		comment.count 1
-+		comment.item.0 'INMIXR Mix'
-+		comment.item.1 'RXVOICE Mix'
-+		comment.item.2 'DIFFINR Mix'
-+		iface MIXER
-+		name AIRNMUX
-+		value 'INMIXR Mix'
-+	}
-+	control.101 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin -1200
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'INMIXR Record Right Volume'
-+		value 0
-+	}
-+	control.102 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin -1200
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'INMIXR RIN2 Volume'
-+		value 0
-+	}
-+	control.103 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'INMIXR RINPGA12 Switch'
-+		value false
-+	}
-+	control.104 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'INMIXR RINPGA34 Switch'
-+		value false
-+	}
-+	control.105 {
-+		comment.access 'read write'
-+		comment.type ENUMERATED
-+		comment.count 1
-+		comment.item.0 'INMIXL Mix'
-+		comment.item.1 'RXVOICE Mix'
-+		comment.item.2 'DIFFINL Mix'
-+		iface MIXER
-+		name AILNMUX
-+		value 'INMIXL Mix'
-+	}
-+	control.106 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin -1200
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'INMIXL Record Left Volume'
-+		value 0
-+	}
-+	control.107 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 7'
-+		comment.dbmin -1200
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'INMIXL LIN2 Volume'
-+		value 0
-+	}
-+	control.108 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'INMIXL LINPGA12 Switch'
-+		value false
-+	}
-+	control.109 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'INMIXL LINPGA34 Switch'
-+		value false
-+	}
-+	control.110 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN34 PGA RIN3 Switch'
-+		value false
-+	}
-+	control.111 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN34 PGA RIN4 Switch'
-+		value false
-+	}
-+	control.112 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN12 PGA RIN1 Switch'
-+		value false
-+	}
-+	control.113 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'RIN12 PGA RIN2 Switch'
-+		value false
-+	}
-+	control.114 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN34 PGA LIN3 Switch'
-+		value false
-+	}
-+	control.115 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN34 PGA LIN4 Switch'
-+		value false
-+	}
-+	control.116 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN12 PGA LIN1 Switch'
-+		value false
-+	}
-+	control.117 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'LIN12 PGA LIN2 Switch'
-+		value false
-+	}
-+        control.118 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'Speaker ZC'
-+		value true
-+        }
-+	control.119 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 1
-+		comment.range '0 - 3'
-+		iface MIXER
-+		name 'Mic Short Circuit Current Detect Threshold'
-+		value 0
-+	}
-+	control.120 {
-+		comment.access 'read write'
-+		comment.type BOOLEAN
-+		comment.count 1
-+		iface MIXER
-+		name 'Mic Enable Switch'
-+		value false
-+	}
-+	control.121 {
-+		comment.access 'read write'
-+		comment.type INTEGER
-+		comment.count 2
-+		comment.range '0 - 127'
-+		comment.dbmin -7300
-+		comment.dbmax 600
-+		iface MIXER
-+		name 'Headphone Volume'
-+		value.0 127
-+		value.1 127
-+	}
-+}
--- 
-1.7.0.4
+Daniele Ricci (2):
+  librest: git is now hosted on gnome.org
+  libmokosuite: new recipe
 
+Denis 'GNUtoo' Carikli (7):
+  xmame: fix runtime endianess issue and bump PR
+  xmame: switch to x11 backend(to improve scaling performance on xv-enabled=
+ de
+  nokia900.conf: migrate to newer linux-nokia900 kernel and bump PR
+  libsdl-mixer 1.2.11: wrap the mp3 dependency in enterprise and bump PR
+  lightmediascanner: add new 0.4.1.0 version
+  enjoy: add new recipe(efl music player)
+  enjoy_svn: fix dependencies and bump PR
+
+Denys Dmytriyenko (2):
+  font-update-common: explicitly set LICENSE to MIT, as part of OE metadata
+  policykit: update LICENSE to LGPLv2+
+
+Eric B=E9nard (6):
+  fix busybox' CONFIG_LFS
+  fix busybox' CONFIG_LFS
+  add task-qt4-x11 and qt4-x11 base & demo images
+  qt-demo-init: correctly handle qtdemo for qt4-x11
+  qt4x11: set QT_LIBINFIX and QT_DIR_NAME
+  busybox-1.18.0: add latest fix
+
+Frans Meulenbroeks (16):
+  php: removed --enable-memory-limit configure argument; does not exist any=
+ mo
+  php: reinstated --without-iconv, this seems to generate configure issues
+  mythtv: removed 0.22
+  u-boot_git: updated SRC_URI for sheevaplug; moved to newer version
+  cwiid: updated & fixed SRC_URI
+  mythtv: moved to rev 27202
+  mythtv: removed 0.22
+  php: reinstated --without-iconv, this seems to generate configure issues
+  php: removed --enable-memory-limit configure argument; does not exist any=
+ mo
+  php: add iconv support
+  php: add iconv support
+  gmpc/libmpd: update to 0.20.0
+  cdparanoia_10.2.bb: fixed LICENSE
+  gob2: updated to 2.0.17
+  cdparanoia_svn.bb: updated SVN version; fixed LICENSE, added pkgconfig st=
+uff
+  libcddb: added missing dependency on gettext
+
+Graham Gower (46):
+  busybox-config.inc: Fix build when DISTRO_FEATURES lacks "largefile".
+  util-linux-ng_2.17.bb: Fix for uClibc when DISTRO_FEATURES lacks "largefi=
+le"
+  gettext_0.18.bb: Fix build when uclibc lacks large file support.
+  libxml2: Fix build when DISTRO_FEATURES lacks "largefile".
+  orbit2_2.14.17.bb: Fix build when DISTRO_FEATURES lacks ipv6.
+  libdrm_2.4.22.bb: Fix build for uclibc when DISTRO_FEATURES lacks largefi=
+le.
+  glib-2.0_2.24.1.bb: Fix build when DISTRO_FEATURES lacks ipv6.
+  udev_124.bb: Fix build when DISTRO_FEATURES lacks "largefile".
+  avahi_0.6.25.bb: Fix build when DISTRO_FEATURES lacks ipv6.
+  gnome-vfs_2.24.1.bb: Fix build when DISTRO_FEATURES lacks "largefile".
+  sqlite3.inc: Fix build when DISTRO_FEATURES lacks "largefile".
+  x264_r2245.bb: Fix build when DISTRO_FEATURES lacks "largefile".
+  alsa-utils_1.0.20.bb: Fix build when DISTRO_FEATURES lacks largefile.
+  openssl.inc: Fix build when DISTRO_FEATURES lacks largefile and/or ipv6.
+  perl_5.8.8.bb, perl_5.10.1.bb: Fix build when DISTRO_FEATURES lacks large=
+fil
+  openjade_1.3.2.bb: Install catalog with the correct path.
+  syslog-ng.inc: Fix build when DISTRO_FEATURES lacks largefile and/or ipv6=
+.
+  procps.inc: Fix do_install for DISTRO=3Dmicro.
+  iputils_20071127.bb: Don't build ipv6 utils if DISTRO_FEATURES lacks ipv6=
+.
+  e2fsprogs_1.41.9.bb: Fix build for uclibc when DISTRO_FEATURES lacks larg=
+efi
+  openssl.inc: Use cp -L, busybox cp doesn't support the long option.
+  inetutils_1.8.bb: Fix build when DISTRO_FEATURES lacks ipv6.
+  fbset_2.1.bb: Use ${sbindir} and ${datadir} instead of hardcoding.
+  util-linux-ng.inc, e2fsprogs.inc: Use update-alternatives for uuidd.
+  avahi_0.6.25.bb: Fix build when DISTRO_FEATURES lacks ipv6.
+  gnome-vfs_2.24.1.bb: Fix build when DISTRO_FEATURES lacks "largefile".
+  sqlite3.inc: Fix build when DISTRO_FEATURES lacks "largefile".
+  x264_r2245.bb: Fix build when DISTRO_FEATURES lacks "largefile".
+  alsa-utils_1.0.20.bb: Fix build when DISTRO_FEATURES lacks largefile.
+  openssl.inc: Fix build when DISTRO_FEATURES lacks largefile and/or ipv6.
+  perl_5.8.8.bb, perl_5.10.1.bb: Fix build when DISTRO_FEATURES lacks large=
+fil
+  openjade_1.3.2.bb: Install catalog with the correct path.
+  syslog-ng.inc: Fix build when DISTRO_FEATURES lacks largefile and/or ipv6=
+.
+  procps.inc: Fix do_install for DISTRO=3Dmicro.
+  iputils_20071127.bb: Don't build ipv6 utils if DISTRO_FEATURES lacks ipv6=
+.
+  e2fsprogs_1.41.9.bb: Fix build for uclibc when DISTRO_FEATURES lacks larg=
+efi
+  openssl.inc: Use cp -L, busybox cp doesn't support the long option.
+  inetutils_1.8.bb: Fix build when DISTRO_FEATURES lacks ipv6.
+  fbset_2.1.bb: Use ${sbindir} and ${datadir} instead of hardcoding.
+  util-linux-ng.inc, e2fsprogs.inc: Use update-alternatives for uuidd.
+  bind: Fix for DISTRO=3Dmicro: s|/usr/bin|${bindir}|
+  openjade_1.3.2.bb: Create directory before installing a file to that loca=
+tio
+  automake_1.11.1.bb: Don't try to execute perl.
+  bind: Fix for DISTRO=3Dmicro: s|/usr/bin|${bindir}|
+  openjade_1.3.2.bb: Create directory before installing a file to that loca=
+tio
+  automake_1.11.1.bb: Don't try to execute perl.
+
+Khem Raj (11):
+  powerpc-common: Cache alignof variables for postgresql
+  powerpc-common: Cache alignof variables for postgresql
+  eglibc: Move eglibc-static after eglibc-dev in order
+  gcc-package-target.inc: Fix the broken libgcc_s.so symlink
+  eglibc: Move eglibc-static after eglibc-dev in order
+  gcc-package-target.inc: Fix the broken libgcc_s.so symlink
+  Merge remote branch 'origin/release-2010.12'
+  gcc-4.5: Apply linaro updates and upstream updates
+  uclibc_git.bb: Bump SRCREV to latest git
+  gcc-4.5: Refresh the lately added patches with quilt
+  gcc-4.5.inc: Re-enable linaro/gcc-4.5-linaro-r99419.patch
+
+Klaus Kurzmann (4):
+  nokia900.conf: remove SERIAL_CONSOLE because it's causing a respawning ge=
+tty
+  nokia900.conf: remove SERIAL_CONSOLE because it's causing a respawning ge=
+tty
+  glib-2.0: add 2.26 with DEFAULT_PREFERENCE =3D "-1" and prefer it for SHR
+  enjoy_svn.bb: add missing DEPENDS for the needed gst-plugins
+
+Klaus Schwarzkopf (16):
+  dcetest: fixed download link
+  dash_0.5.5.1: New download link for patch
+  cpusage_0.1: fixed download link
+  dgen-sdl_1.23: fixed download url
+  dircproxy_1.1.0: fixed download url
+  disko_1.6.0: fixed SRC_URI
+  dkg_1.6: fixed SRC_URI
+  emelfm2_0.0.8: fixed SRC_URI
+  frotz: new homepage
+  gnome-games_2.30.2: add checksums
+  hvsc_45: fixed SRC_URI
+  libdessert: fixed SRC_URI
+  libgsasl: fixed SRC_URI
+  libspf2: fixed SRC_URI
+  lvm2: fixed SRC_URI
+  mb-applet-tasks: fixed SRC_URI
+
+Koen Kooi (16):
+  dropbear: remove 'set -e' from initscript
+  gcc 4.3.3, 4.5: bump PR for gcc-package-target.inc fixes
+  pixman 0.21.2: updates
+  gcc 4.5: comment out patch that doesn't apply
+  omap3-sgx-modules: some more for fixes for 2.6.37rc
+  linux-omap 2.6.37rc: bump to rc4
+  tune-cortexa8: change '-mfloat-abi=3Dhardfp' to '-mfloat-abi=3Dhard'
+  powertop: fix CFLAGS in .inc and add a git version
+  udev 162: fix libudev packaging
+  ti-dsplink 1.65.00.03: add patch to fix build with recent kernels
+  ti-local-power-manager: fix build with recent kernels
+  ti-linuxutils 2.25.05.11: fix build with recent kernels
+  Angstrom next: prefer linux-omap 2.6.37rcX as main kernel for beagle
+  bc 1.06: fix segfault when using -l
+  angstrom next: prefer glibc 2.26.x
+  xorg-proto: move BBCLASSEXTEND to .inc
+
+Kristoffer Ericson (2):
+  /conf/machine/ben-nanonote.conf
+  /conf/machine/ben-nanonote.conf
+
+Martin Jansa (25):
+  libxext-1.2.0: fix native build on some hosts
+  e-wm-theme-illume-neo,elementary-theme-neo: bump SRCREV
+  evopedia: bump SRCREV
+  literki: fix SRCREV, fix few ugly parts
+  linux_git: bump SRCREV for 2.6.37-rc4
+  usermanual: update info with SRCPV, in recipe SRCREV and remove sane-srcd=
+ate
+  sane-srcdates.inc: remove from all distro configs as well as file itself
+  opkg: move OPKG_SRCREV to opkg.inc directly
+  shr: remove EFL_SRCREV from PV
+  shr: add more PACKAGE_ARCH =3D all for theme and e-wm recipes
+  e-wm,efl: create e-base.bbclass with common settings and EFL_SRCREV
+  sane-srcrevs.inc: remove it from distro configs, and file itself
+  linux-kexecboot_git: bump SRCREV for 2.6.37-rc4
+  kernel.bbclass: put bluez-dtl1-workaround to DEPENDS directly
+  module-init-tools: fix multiple runtime providers
+  nokia900: build uImage instead of zImage
+  nokia900.conf: MACHINE_EXTRA_RRECOMMENDS add needed kernel-modules
+  e-base: bump SRCREV
+  kernel.bbclass: put bluez-dtl1-workaround to DEPENDS directly
+  module-init-tools: fix multiple runtime providers
+  nokia900: build uImage instead of zImage
+  nokia900.conf: MACHINE_EXTRA_RRECOMMENDS add needed kernel-modules
+  exquisite-theme-illume: use e-base
+  task-shr-feed: add enjoy and shr-theme-efenniht
+  xorg: new versions 2010-12-06, xcalc, xeyex, xf86-video-savage and xserve=
+r-x
+
+Melissa Watkins (6):
+  linux-davinci: enable UIO support in l138 defconfigs
+  linux-davinci_git: Patch omapl138 kernel
+  ti-pru-sw-edma-driver: first addition of PRU sw edma driver
+  ti-pru-sw-edma-library: first addition of PRU sw edma library
+  ti-pru-sw-app-loader: first addition of PRU sw application loader recipe
+  ti-pru-sw-example: first addition of PRU sw examples recipe
+
+Pau Espin Pedrol (3):
+  e-wm-theme-illume-efenniht: add recipe for efenniht e17 theme.
+  elementary-theme-efenniht: add recipe for efenniht elementary theme.
+  shr-theme-efenniht: add recipe for efenniht shr theme.
+
+Paul Menzel (2):
+  enjoy: Fix commit 1265ac and append to `DEPENDS`.
+  enjoy: add `elementary` to `DEPENDS`
+
+Philip Balister (2):
+  uhd-firmware : Convert to inc file and update recipe.
+  uhd-firmware : fix bad path in require line.
+
+Prabindh Sundareson (1):
+  xgxperf: updated to SRCREV 77, fix build failure
+
+Stefan Schmidt (5):
+  hostap-daemon: Respect LDFLAGS for GNU_HASH
+  contacts: Add 0.12 as latest release.
+  alsa-state: Fix stereo configuration asound state for bug20
+  hostap-daemon: Respect LDFLAGS for GNU_HASH
+  alsa-state: Fix stereo configuration asound state for bug20
+
+Steve Sakoman (1):
+  udev: Add recipe for 162
+
+Yuri Bushmelev (7):
+  klibc: fix linking for mipsel
+  kexec-tools-klibc: switch to using klibc's staged includes
+  klibc: bump PR to force rebuild after mipsel fix
+  contrib/testing: add testbuilder script
+  klibc: fix linking for mipsel
+  kexec-tools-klibc: switch to using klibc's staged includes
+  klibc: bump PR to force rebuild after mipsel fix
+
+
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+Bugs fixed:
+bug_id resolution        short_desc
+5490 FIXED       Build of libxext_1.2.0 native failed
+
+Bugs opened:
+bug_id resolution        short_desc
+
+
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
 
 
