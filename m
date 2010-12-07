@@ -1,43 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PPzah-0001Ws-9f for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Dec 2010 16:36:32 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PPzZI-00045p-Lm for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Dec 2010 16:35:04 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Dec 2010 16:35:04 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Dec 2010 16:35:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 07 Dec 2010 16:34:32 +0100
-Message-ID: <idlk69$rbg$2@dough.gmane.org>
-References: <4cf49384.a26fe50a.019c.ffffed4d@mx.google.com>
-	<20101207113857.GG20482@excalibur.local>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <20101207113857.GG20482@excalibur.local>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <raj.khem@gmail.com>) id 1PQ24h-0005LN-RT
+	for Openembedded-devel@lists.openembedded.org;
+	Tue, 07 Dec 2010 19:15:40 +0100
+Received: by gyh20 with SMTP id 20so173780gyh.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Dec 2010 10:14:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=uwzjOtc9EsJtgHWjBkwfREnavHSxGhS2uYWTze/bi6s=;
+	b=pjHbroyn6M/ACVyGTTHqqrqX46KhmW/XBqPmXTGGrqxEonhQwBQ653f+d9UAdlCzNF
+	HEIfNqrN4RHupuV9p+eWlkuFECoPDv6LCsDtbDatBFSA06N+jM0YXgLkBDzJ8bvYs876
+	GeY0vfUQyTBmy56MDAPGHKlqeo7s4XOHExD9A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=n2lkW3d99P/fcjs1oOpNr5awXqUZ/IVcnna5fN0Fx4Ob5kLzU9GCkGEejSssxhaWt9
+	LGcQeVyudImMW+JiIgPD1XtVNTKJ6Cd4TBw5Cyb+BEpoSKHxe8v1CSOH2AdeB919M6P1
+	x2bDdvvzaTYMOuLAGaJ8mmUq9ppPX7Xdp+f88=
+Received: by 10.91.87.20 with SMTP id p20mr10096425agl.129.1291745646278; Tue,
+	07 Dec 2010 10:14:06 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.120.8 with HTTP; Tue, 7 Dec 2010 10:13:46 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 7 Dec 2010 10:13:46 -0800
+Message-ID: <AANLkTinb3AL5zchPtvqDfv7mRCi+eVO4_ESqr=AVd0Rw@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv3 1/5] u-boot_git:add patch for am3517-crane board support
+Subject: [ANNOUNCE] The new patchwork is here
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,47 +48,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Dec 2010 15:36:32 -0000
+X-List-Received-Date: Tue, 07 Dec 2010 18:15:40 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi
 
-On 07-12-10 12:38, Stefan Schmidt wrote:
-> Hello.
-> 
-> On Tue, 2010-11-30 at 11:32, Anil Kumar wrote:
->>     * Patch Version updated for latest git tree.
->>
->>     * This patch adds u-boot support for am3517-crane board.
->>
->>     * CraneBoard is a hardware development platform based
->>       on the Sitara AM3517 ARM Cortex - A8 microprocessor
->>       device. This is a low cost reference design.
->>
->>     * You can find more about CraneBoard here:
->>            [1] http://www.ti.com/arm
->>            [2] http://www.mistralsolutions.com/products/craneboard.php
->>
->> Signed-off-by: Anil Kumar <anilm@mistralsolutions.com>
-> 
-> I only reviewd the OE part, not the u-boot patch itself.
-> 
-> Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
-> 
-> Who is going to take this one? On some earlier iterations I have seen Koen
-> stating that he will take them. Still the case?
+The patchwork has been setup newly. The url is live at
+http://patches.openembedded.org
+Please sign up for the new patchwork. The old patchwork data has not
+been moved to this one.
+Its still available on the usual old site. The
+contrib/patchwork/pw-am.sh script has been modified to grok the
+patches
+from the new url.
 
-It is. My craneboard should be arriving this week, so I'm waiting for
-that :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Depending on available time I might be able to add the patches that
+went in after the old patchwork stopped
+working. However it has started to catch the patches from now on.
 
-iD8DBQFM/lQIMkyGM64RGpERApXJAJwJI8k0tfAMSTcYbLro6oWRSwm/owCfXwpl
-aeA1LnJ3ZIQPBciOPX0Jdjw=
-=OKVC
------END PGP SIGNATURE-----
+Let us know if there are any issues you encounter
 
+Thank you
+
+-Khem
 
 
