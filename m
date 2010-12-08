@@ -1,28 +1,28 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PQJen-000644-Oh
+	(envelope-from <obi@opendreambox.org>) id 1PQJfN-0006C3-7b
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Dec 2010 14:02:06 +0100
+	Wed, 08 Dec 2010 14:02:43 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 91D4F314B85D
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 16E2C314B02B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Dec 2010 14:00:38 +0100 (CET)
+	Wed,  8 Dec 2010 14:01:11 +0100 (CET)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id Nwk2X8kzsFTq
+	port 10024) with LMTP id XfbVoBWrP9ep
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Dec 2010 14:00:32 +0100 (CET)
+	Wed,  8 Dec 2010 14:01:04 +0100 (CET)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 0D99F314B02B
+	by mail.multimedia-labs.de (Postfix) with SMTP id 8B21B314B85E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Dec 2010 14:00:31 +0100 (CET)
+	Wed,  8 Dec 2010 14:01:03 +0100 (CET)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Wed, 08 Dec 2010 13:00:31 +0000
+	Wed, 08 Dec 2010 13:01:03 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Dec 2010 13:00:31 +0000
-Message-Id: <1291813231-24536-1-git-send-email-obi@opendreambox.org>
+Date: Wed,  8 Dec 2010 13:01:03 +0000
+Message-Id: <1291813263-24629-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.2.3
 X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
@@ -32,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH resend] package.bbclass: call PACKAGESTRIPFUNCS before populate_packages
+Subject: [PATCH] vsftpd-2.0.5: don't run pkg_postinst on host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,58 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Dec 2010 13:02:06 -0000
-
-  Introduce run_strip_funcs() to call the functions in
-  PACKAGESTRIPFUNCS and place it before populate_packages().
-
-  This allows users of do_split_packages() to package the .debug
-  directories, which get created by do_runstrip().
-
-  do_split_packages() is usually prepended to populate_packages().
+X-List-Received-Date: Wed, 08 Dec 2010 13:02:43 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- classes/package.bbclass |   12 +++++++-----
- 1 files changed, 7 insertions(+), 5 deletions(-)
+ recipes/vsftpd/vsftpd_2.0.5.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/classes/package.bbclass b/classes/package.bbclass
-index 2769595..678ffa9 100644
---- a/classes/package.bbclass
-+++ b/classes/package.bbclass
-@@ -367,6 +367,12 @@ python perform_packagecopy () {
- 	os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
+diff --git a/recipes/vsftpd/vsftpd_2.0.5.bb b/recipes/vsftpd/vsftpd_2.0.5.bb
+index 0b9e75d..518628e 100644
+--- a/recipes/vsftpd/vsftpd_2.0.5.bb
++++ b/recipes/vsftpd/vsftpd_2.0.5.bb
+@@ -35,6 +35,9 @@ do_install() {
  }
  
-+python run_strip_funcs() {
-+	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
-+		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
-+			bb.build.exec_func(f, d)
-+}
-+
- python populate_packages () {
- 	import glob, errno, re,os
- 
-@@ -391,11 +397,6 @@ python populate_packages () {
- 		else:
- 			package_list.append(pkg)
- 
--
--	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
--		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
--			bb.build.exec_func(f, d)
--
- 	pkgdest = bb.data.getVar('PKGDEST', d, True)
- 	os.system('rm -rf %s' % pkgdest)
- 
-@@ -1011,6 +1012,7 @@ PACKAGE_PREPROCESS_FUNCS ?= ""
- PACKAGEFUNCS ?= "perform_packagecopy \
-                 ${PACKAGE_PREPROCESS_FUNCS} \
- 		package_do_split_locales \
-+		run_strip_funcs \
- 		populate_packages \
- 		package_do_shlibs \
- 		package_do_pkgconfig \
+ pkg_postinst() {
++        if [ "x$D" != "x" ]; then
++                exit 1
++        fi
+         addgroup ftp
+         adduser --system --home /var/lib/ftp --no-create-home --ingroup ftp --disabled-password -s /bin/false ftp
+         mkdir -p ${localstatedir}/share/empty
 -- 
 1.7.2.3
 
