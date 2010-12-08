@@ -1,36 +1,30 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PQHtr-0003DF-3t
+	(envelope-from <philip@balister.org>) id 1PQJDt-0004i7-D7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Dec 2010 12:09:31 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PQHsP-0001VR-EM by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Dec 2010 12:08:04 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PQHsN-0006ib-PH
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Dec 2010 12:07:59 +0100
-Date: Wed, 8 Dec 2010 12:07:59 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101208110759.GA27687@excalibur.local>
-References: <AANLkTinb3AL5zchPtvqDfv7mRCi+eVO4_ESqr=AVd0Rw@mail.gmail.com>
-	<4CFF61D2.60606@gravedo.de>
+	Wed, 08 Dec 2010 13:34:19 +0100
+Received: (qmail 9105 invoked by uid 1003); 8 Dec 2010 12:32:43 -0000
+Received: from pool-74-107-167-114.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	8 Dec 2010 12:32:43 -0000
+Message-ID: <4CFF7AEA.5010300@balister.org>
+Date: Wed, 08 Dec 2010 07:32:42 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Thunderbird/3.1.6
 MIME-Version: 1.0
-In-Reply-To: <4CFF61D2.60606@gravedo.de>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTinb3AL5zchPtvqDfv7mRCi+eVO4_ESqr=AVd0Rw@mail.gmail.com>	<4CFF61D2.60606@gravedo.de>
+	<20101208110759.GA27687@excalibur.local>
+In-Reply-To: <20101208110759.GA27687@excalibur.local>
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [ANNOUNCE] The new patchwork is here
@@ -47,36 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Dec 2010 11:09:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Dec 2010 12:34:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
+On 12/08/2010 06:07 AM, Stefan Schmidt wrote:
+> Hello.
+>
+> On Wed, 2010-12-08 at 11:45, Simon Busch wrote:
+>> On 07.12.2010 19:13, Khem Raj wrote:
+>>>
+>>> The patchwork has been setup newly. The url is live at
+>>> http://patches.openembedded.org
+>>> Please sign up for the new patchwork. The old patchwork data has not
+>>> been moved to this one.
+>>> Its still available on the usual old site. The
+>>> contrib/patchwork/pw-am.sh script has been modified to grok the
+>>> patches
+>> >from the new url.
+>>>
+>>> Depending on available time I might be able to add the patches that
+>>> went in after the old patchwork stopped
+>>> working. However it has started to catch the patches from now on.
+>>>
+>>> Let us know if there are any issues you encounter
+>>
+>> This includes that everyone has to create a new account for the new
+>> installation, right?
+>
+> Yes.
 
-On Wed, 2010-12-08 at 11:45, Simon Busch wrote:
-> On 07.12.2010 19:13, Khem Raj wrote:
-> >
-> >The patchwork has been setup newly. The url is live at
-> >http://patches.openembedded.org
-> >Please sign up for the new patchwork. The old patchwork data has not
-> >been moved to this one.
-> >Its still available on the usual old site. The
-> >contrib/patchwork/pw-am.sh script has been modified to grok the
-> >patches
-> >from the new url.
-> >
-> >Depending on available time I might be able to add the patches that
-> >went in after the old patchwork stopped
-> >working. However it has started to catch the patches from now on.
-> >
-> >Let us know if there are any issues you encounter
-> 
-> This includes that everyone has to create a new account for the new
-> installation, right?
+Hopefully the new registration process reduces the number of spam 
+accounts the admins need to deal with.
 
-Yes.
-
-regards
-Stefan Schmidt
+Philip
 
 
