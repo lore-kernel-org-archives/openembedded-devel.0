@@ -1,44 +1,38 @@
-Received: from mail-qw0-f65.google.com ([209.85.216.65])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jan.paesmans@gmail.com>) id 1PQJeW-00060g-23
+	(envelope-from <obi@opendreambox.org>) id 1PQJen-000644-Oh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Dec 2010 14:01:48 +0100
-Received: by qwg8 with SMTP id 8so568406qwg.0
+	Wed, 08 Dec 2010 14:02:06 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 91D4F314B85D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Dec 2010 05:00:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=PYvgOnz9ez8pd2hHxLjPl0e1A1Q8xtUzQqeO7IJ01xs=;
-	b=ENaLsD7Byrrbh1eD6XSJR+9EHdkf6wVLXGT61SFK5EcCkJ0Bv1EoW9IpK1B3aMCEpb
-	B7qQHdVP8tNTEpbJXNrIO2vCyveJokmCB1Tt8+Ofj1lyk6J3ULpsl25Dn7R4KT4QiZIw
-	IEEoUjHNAFPO1Ayrt6Inxx4lBIkR54JrTZ0OI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=wn19EI3YJzUkXFs8rrT+agc+KmdrCBqqQ6+4kNWNed18nE2GdsWwpab1dRSohKJMBw
-	VVKBNspXQ1qJkLbSaCNI0Y00UYxDCvzgmzNWacpJhY+Byx069zf1RZeSbM2JG1n2+/Xd
-	QqnKiqQHAtQn4D9NpqPitRT4jel7WLe4/XE3s=
-MIME-Version: 1.0
-Received: by 10.229.218.210 with SMTP id hr18mr6803856qcb.78.1291813217399;
-	Wed, 08 Dec 2010 05:00:17 -0800 (PST)
-Received: by 10.229.211.198 with HTTP; Wed, 8 Dec 2010 05:00:17 -0800 (PST)
-In-Reply-To: <4CFF7B83.50200@balister.org>
-References: <201012081031.15609.marcin@juszkiewicz.com.pl>
-	<4CFF7B83.50200@balister.org>
-Date: Wed, 8 Dec 2010 14:00:17 +0100
-Message-ID: <AANLkTimY2cHoVrWnBuJfM1J6jCk_+2zkis7Zm2r_atW-@mail.gmail.com>
-From: Jan Paesmans <jan.paesmans@gmail.com>
+	Wed,  8 Dec 2010 14:00:38 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id Nwk2X8kzsFTq
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Dec 2010 14:00:32 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 0D99F314B02B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Dec 2010 14:00:31 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Wed, 08 Dec 2010 13:00:31 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.65
-X-SA-Exim-Mail-From: jan.paesmans@gmail.com
+Date: Wed,  8 Dec 2010 13:00:31 +0000
+Message-Id: <1291813231-24536-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: "OE blessed" hotel for FOSDEM?
+Subject: [PATCH resend] package.bbclass: call PACKAGESTRIPFUNCS before populate_packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,32 +46,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Dec 2010 13:01:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Dec 2010 13:02:06 -0000
 
-A list of suggestions on the fosdem website:
+  Introduce run_strip_funcs() to call the functions in
+  PACKAGESTRIPFUNCS and place it before populate_packages().
 
-http://fosdem.org/2011/practical/accommodation
+  This allows users of do_split_packages() to package the .debug
+  directories, which get created by do_runstrip().
 
+  do_split_packages() is usually prepended to populate_packages().
 
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ classes/package.bbclass |   12 +++++++-----
+ 1 files changed, 7 insertions(+), 5 deletions(-)
 
-On Wed, Dec 8, 2010 at 1:35 PM, Philip Balister <philip@balister.org> wrote:
-> On 12/08/2010 04:31 AM, Marcin Juszkiewicz wrote:
->>
->> Will people book Astrid as usual or other one?
->
-> Does anyone have any alternate suggestions? Issues with the Astrid are the
-> breakfast price seems to creep up and the wifi costs money and all the open
-> access point have gone away.
->
-> On the other hand, two years ago the bar across the street was closed.
->
-> Philip
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 2769595..678ffa9 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -367,6 +367,12 @@ python perform_packagecopy () {
+ 	os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
+ }
+ 
++python run_strip_funcs() {
++	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
++		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
++			bb.build.exec_func(f, d)
++}
++
+ python populate_packages () {
+ 	import glob, errno, re,os
+ 
+@@ -391,11 +397,6 @@ python populate_packages () {
+ 		else:
+ 			package_list.append(pkg)
+ 
+-
+-	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
+-		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
+-			bb.build.exec_func(f, d)
+-
+ 	pkgdest = bb.data.getVar('PKGDEST', d, True)
+ 	os.system('rm -rf %s' % pkgdest)
+ 
+@@ -1011,6 +1012,7 @@ PACKAGE_PREPROCESS_FUNCS ?= ""
+ PACKAGEFUNCS ?= "perform_packagecopy \
+                 ${PACKAGE_PREPROCESS_FUNCS} \
+ 		package_do_split_locales \
++		run_strip_funcs \
+ 		populate_packages \
+ 		package_do_shlibs \
+ 		package_do_pkgconfig \
+-- 
+1.7.2.3
+
 
 
