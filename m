@@ -1,44 +1,38 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1PQKGR-0007Qz-W8
+	(envelope-from <obi@opendreambox.org>) id 1PQKil-0008En-7d
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Dec 2010 14:41:00 +0100
-Received: by vws6 with SMTP id 6so974422vws.6
+	Wed, 08 Dec 2010 15:10:15 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 017F8314B863
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Dec 2010 05:39:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=BdT+WLyd88J4vQrTnrzhBd7oJQWKdCpyyBNEg2ulgkY=;
-	b=nkPMYiburciVQnrlCc66sPRucwDneNZ+nvWwRH8bNSjiHX8Ql7l4QKpbMhY8jcS7wd
-	7lRFBARocwO0r/+6intK0z8s3m086cDU0gvJmsCnNIv1TmUqCd+fGQnhnfgcuKYiGaB4
-	5GDw4CYztX4kDHdGjgZOqLzsxS/5cHB8+fA0k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=K3OjSi4+6fJ7bB4gOru0iiLgP1mSMB7tAx0cxdeTfSi3ZvBouxp+a+FPSsfeXNgxnK
-	bpUu/Tf6jwNtYrszLjFukszfBbS+oQR6bO4L19lScMjTVi7I65qYkZk+r+VDzHs9EmpW
-	osX9QJjwDkyD0qHNQoxKHN4acPmygXg7rSVbw=
-MIME-Version: 1.0
-Received: by 10.229.226.72 with SMTP id iv8mr6825166qcb.79.1291815569022; Wed,
-	08 Dec 2010 05:39:29 -0800 (PST)
-Received: by 10.229.223.203 with HTTP; Wed, 8 Dec 2010 05:39:28 -0800 (PST)
-In-Reply-To: <4CFF7B83.50200@balister.org>
-References: <201012081031.15609.marcin@juszkiewicz.com.pl>
-	<4CFF7B83.50200@balister.org>
-Date: Wed, 8 Dec 2010 14:39:28 +0100
-Message-ID: <AANLkTi=xRDm3pfS_rZOXUr+HHJUiT7AXx-HeYY16LuDq@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Wed,  8 Dec 2010 15:08:48 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id etcmg1u1fHAn
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Dec 2010 15:08:41 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 43D16314B856
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Dec 2010 15:08:40 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Wed, 08 Dec 2010 14:08:40 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Date: Wed,  8 Dec 2010 14:08:39 +0000
+Message-Id: <1291817320-5270-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: "OE blessed" hotel for FOSDEM?
+Subject: [PATCH 1/2] ffmpeg: set default license to GPLv2+, because --enable-gpl is used.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,29 +46,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Dec 2010 13:41:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Dec 2010 14:10:15 -0000
 
-Hello,
+* See http://www.ffmpeg.org/legal.html
 
-On Wed, Dec 8, 2010 at 1:35 PM, Philip Balister <philip@balister.org> wrote:
-> On 12/08/2010 04:31 AM, Marcin Juszkiewicz wrote:
->>
->> Will people book Astrid as usual or other one?
->
-> Does anyone have any alternate suggestions? Issues with the Astrid are the
-> breakfast price seems to creep up and the wifi costs money and all the open
-> access point have gone away.
->
-This is generic for most hotels, except for the more expensive ones.
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ recipes/ffmpeg/ffmpeg.inc    |    4 ++--
+ recipes/ffmpeg/ffmpeg_svn.bb |    3 ---
+ 2 files changed, 2 insertions(+), 5 deletions(-)
 
-I think Astrid seems the de-facto OE hotel for some.
-
-Any discussion here will probably not lead to more concensus, as
-typically only more and more options come up :-)
-
-Regards,
+diff --git a/recipes/ffmpeg/ffmpeg.inc b/recipes/ffmpeg/ffmpeg.inc
+index b6dfe53..9cfdc19 100644
+--- a/recipes/ffmpeg/ffmpeg.inc
++++ b/recipes/ffmpeg/ffmpeg.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://ffmpeg.mplayerhq.hu/"
+ AUTHOR = "Fabrice Bellard ffmpeg-devel@mplayerhq.hu"
+ SECTION = "libs"
+ PRIORITY = "optional"
+-LICENSE = "LGPL"
++LICENSE = "GPLv2+"
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+@@ -12,7 +12,7 @@ PE = "2"
+ DEPENDS = "zlib libogg libvorbis libtheora faac faad2 ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'lame liba52', d)}"
+ RSUGGESTS_${PN} = "mplayer"
+ 
+-INC_PR = "r16"
++INC_PR = "r17"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/recipes/ffmpeg/ffmpeg_svn.bb b/recipes/ffmpeg/ffmpeg_svn.bb
+index 6f51a60..573de03 100644
+--- a/recipes/ffmpeg/ffmpeg_svn.bb
++++ b/recipes/ffmpeg/ffmpeg_svn.bb
+@@ -1,8 +1,5 @@
+ require ffmpeg.inc
+ 
+-# The license depends on the configure option selected in this recipe 'non-free' is disabled and 'gpl' is enabled
+-LICENSE = "GPLv2+"
+-
+ DEPENDS += "virtual/libsdl schroedinger libgsm libvpx"
+ 
+ # When bumping SRCREV make sure you bump PR here and in dependant recipes (gst-ffmpeg, gnash, omxil, etc) to account for SOVERSION changes
 -- 
-Leon
+1.7.2.3
+
 
 
