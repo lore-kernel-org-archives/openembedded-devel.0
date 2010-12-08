@@ -1,44 +1,46 @@
-Received: from mail-iw0-f173.google.com ([209.85.214.173])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PQ65X-0006R6-AV
+	(envelope-from <jefflance01@gmail.com>) id 1PQ8Gj-0007iM-Vn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Dec 2010 23:32:48 +0100
-Received: by iwn40 with SMTP id 40so225469iwn.18
+	Wed, 08 Dec 2010 01:52:30 +0100
+Received: by yxd5 with SMTP id 5so366625yxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Dec 2010 14:31:20 -0800 (PST)
+	Tue, 07 Dec 2010 16:51:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=LverG5LSrxpR2ch6Z4WLhCnEdcbdrpWMFvW40RqaJDQ=;
-	b=D5GHAqkUyXpZGxfPnp6u6WjXBiH4VL9uAZuk0A6lZSeJ9fDMTY5yy2VGJzPvalypvJ
-	EFqIbeqCEnMovLkWej/UUwr12C1/VKe3ELHU8+SJ1z1hfBVm4f5QgC+4BaybCQBJNlyX
-	RZxvR/LB8N3mxdCYObkPObBEytUqTYgSLqOB8=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=QSseRSRbSX7gGFpeVuxo4jGfZ3OoQJH/oxDd14dYWZQ=;
+	b=pIL1SkYeNCTPK11baroXVuon5DrNQ7y675uc91IUPX2tkPQVOfsDUBngBWXiqf+DPy
+	wyvSKzmspjZo4Td9xRh1k8HOugOD2Y97ZLdW7KbXX+blqDb0yma4/PPxtxU94eUlHchp
+	qLB98oHmLcJcbqJ4jBp8axH0rFLgclxskigts=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=w4U9F/vnbN2ayqZ3vzVs6XQN2wzhKSjUNcwBAccFhKHQjTNG3T1JapPZevBfnhOju6
-	mPHHWQaVd7r71SwlNHtrBGQLwZtdFBRZDzzR6/t2usuesWJciywquQzugwBrP98yU3KI
-	1pqZFD4bW27fHe0t9o4rxYzfZ5+zPrcboD1iw=
-MIME-Version: 1.0
-Received: by 10.231.31.1 with SMTP id w1mr8284467ibc.7.1291761079955; Tue, 07
-	Dec 2010 14:31:19 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Tue, 7 Dec 2010 14:31:19 -0800 (PST)
-In-Reply-To: <4CFEAF1F.70606@zenlinux.com>
-References: <AANLkTi==kWiyOrmeUeUVNeC8FT0B8XxruHA0X4qMaPs_@mail.gmail.com>
-	<4CFEAF1F.70606@zenlinux.com>
-Date: Tue, 7 Dec 2010 23:31:19 +0100
-Message-ID: <AANLkTi=Fdzno-FEVemtQ6GQGk8XpunYPy-bHSm=cnRBu@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=qfiWcWSosSh4X0sd66e8T3al0bHBqtuH03ACqarxh/d8Bg879tib5K+eMgYWGDX6I/
+	SoS6NoPFQ9dzUDMajLwbY+GnzNcN/h2ThFJJxiuW680iC87BsU5U/OXrWSmRTW0Kr1K7
+	tkYrZOu9Q3KvF0DeMsLKrF/q8cb2M3Is0Wu80=
+Received: by 10.90.29.19 with SMTP id c19mr10444277agc.209.1291769460516;
+	Tue, 07 Dec 2010 16:51:00 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id r38sm563yhi.43.2010.12.07.16.50.59
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 07 Dec 2010 16:51:00 -0800 (PST)
+From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.173
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue,  7 Dec 2010 18:26:30 -0600
+Message-Id: <1291767990-18403-2-git-send-email-j-lance1@ti.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <1291767990-18403-1-git-send-email-j-lance1@ti.com>
+References: <1291767990-18403-1-git-send-email-j-lance1@ti.com>
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: jefflance01@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libcdaudio license issue
+Cc: Jeff Lance <j-lance1@ti.com>, Jeff Lance <j-lance@ti.com>
+Subject: [PATCH 2/2] matrix-gui: Adding additional platform support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,38 +54,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Dec 2010 22:32:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Dec 2010 00:52:30 -0000
 
-2010/12/7 Scott Garman <sgarman@zenlinux.com>:
-> On 12/06/2010 11:48 AM, Frans Meulenbroeks wrote:
->>
->> I was checking libcdaudio for LICENSE info.
->> recipe says GPL
->> COPYING file is the GPLv2 one
->> README file says:
->>
->> libcdaudio is distributed under the GNU Library General Public
->> License, included in this package under the top level source directory
->> in the file COPYING
->>
->> C files also mention LGPL. but say v2 or later
->>
->> What to do with this in the LICENSE field? LGPLv2+ ?
->
-> Like others I agree with going with what the source files have in them.
->
-> Maybe this is obvious, but since I don't think anyone else has mentioned it,
-> I think it would also be helpful to notify the upstream folks about this
-> ambiguity so they can correct it.
+  * Add platform support for am180x
+  * Add platform support for am181x
+  * Add platform support for am3517
 
-Good remark.
-However, the project seems dead. Last post on the users mailing list
-is from sep 2008 or so.
-There seems also to be an app in the zip (cdcd) maybe the gplv2
-applies to that one.
-Will peek at it when I have more time, really need to zzz now)
+Signed-off-by: Jeff Lance <j-lance@ti.com>
+---
+ recipes/ti/matrix-gui-common.inc |    5 ++++-
+ recipes/ti/matrix-gui-e.inc      |    5 ++++-
+ recipes/ti/matrix-gui.inc        |    5 ++++-
+ 3 files changed, 12 insertions(+), 3 deletions(-)
 
-Frans
+diff --git a/recipes/ti/matrix-gui-common.inc b/recipes/ti/matrix-gui-common.inc
+index b5a368e..4185b34 100644
+--- a/recipes/ti/matrix-gui-common.inc
++++ b/recipes/ti/matrix-gui-common.inc
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
+ 
+-INC_PR = "r5"
++INC_PR = "r6"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
+ 
+@@ -15,6 +15,9 @@ PLATFORM_dm37x-evm = "dm3730"
+ PLATFORM_am37x-evm = "am3715"
+ PLATFORM_beagleboard = "am3715"
+ PLATFORM_ti816x = "ti816x"
++PLATFORM_am180x-evm = "am180x"
++PLATFORM_am181x-evm = "am181x"
++PLATFORM_am3517-evm = "am3517"
+ 
+ #Checkout the project repository to get access to the scripts and data
+ #files.
+diff --git a/recipes/ti/matrix-gui-e.inc b/recipes/ti/matrix-gui-e.inc
+index 86f08b1..ba8012c 100644
+--- a/recipes/ti/matrix-gui-e.inc
++++ b/recipes/ti/matrix-gui-e.inc
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
+ 
+-INC_PR = "r20"
++INC_PR = "r21"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
+ 
+@@ -15,6 +15,9 @@ PLATFORM_dm37x-evm = "dm3730"
+ PLATFORM_am37x-evm = "am3715"
+ PLATFORM_beagleboard = "am3715"
+ PLATFORM_ti816x = "ti816x"
++PLATFORM_am180x-evm = "am180x"
++PLATFORM_am181x-evm = "am181x"
++PLATFORM_am3517-evm = "am3517"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' "
+ 
+diff --git a/recipes/ti/matrix-gui.inc b/recipes/ti/matrix-gui.inc
+index a2a2721..82ec6ab 100644
+--- a/recipes/ti/matrix-gui.inc
++++ b/recipes/ti/matrix-gui.inc
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
+ 
+-INC_PR = "r18"
++INC_PR = "r19"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
+ 
+@@ -15,6 +15,9 @@ PLATFORM_dm37x-evm = "dm3730"
+ PLATFORM_am37x-evm = "am3715"
+ PLATFORM_beagleboard = "am3715"
+ PLATFORM_ti816x = "ti816x"
++PLATFORM_am180x-evm = "am180x"
++PLATFORM_am181x-evm = "am181x"
++PLATFORM_am3517-evm = "am3517"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' "
+ 
+-- 
+1.6.3.3
+
 
 
