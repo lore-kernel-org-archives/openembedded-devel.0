@@ -1,29 +1,31 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PQJcW-0005J9-4D
+	(envelope-from <obi@opendreambox.org>) id 1PQJcW-0005JH-VV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Dec 2010 13:59:44 +0100
+	Wed, 08 Dec 2010 13:59:45 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id E8711314B85F
+	by mail.multimedia-labs.de (Postfix) with ESMTP id CD540314B02B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Dec 2010 13:58:16 +0100 (CET)
+	Wed,  8 Dec 2010 13:58:17 +0100 (CET)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id pLzC3uY49a9r
+	port 10024) with LMTP id WX7bSlzS7ve8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Dec 2010 13:58:11 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 45295314B856
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed,  8 Dec 2010 13:58:10 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 2B7EA314B02B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Dec 2010 13:58:09 +0100 (CET)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Wed, 08 Dec 2010 12:58:09 +0000
+	Wed, 08 Dec 2010 12:58:10 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Dec 2010 12:58:05 +0000
-Message-Id: <1291813088-23444-1-git-send-email-obi@opendreambox.org>
+Date: Wed,  8 Dec 2010 12:58:06 +0000
+Message-Id: <1291813088-23444-2-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.2.3
+In-Reply-To: <1291813088-23444-1-git-send-email-obi@opendreambox.org>
+References: <1291813088-23444-1-git-send-email-obi@opendreambox.org>
 X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -32,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/4] conf/distro: remove unused variable CVS_TARBALL_STASH
+Subject: [PATCH 2/4] conf/local.conf.sample: remove unused variable CVS_TARBALL_STASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,90 +48,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Dec 2010 12:59:44 -0000
+X-List-Received-Date: Wed, 08 Dec 2010 12:59:45 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- conf/distro/angstrom-2008.1.conf |    5 -----
- conf/distro/include/oplinux.inc  |    4 ----
- conf/distro/include/slugos.inc   |    1 -
- conf/distro/kaeilos.conf         |    6 ------
- conf/distro/shr.conf             |    2 --
- 5 files changed, 0 insertions(+), 18 deletions(-)
+ conf/local.conf.sample |    4 ----
+ 1 files changed, 0 insertions(+), 4 deletions(-)
 
-diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
-index ec03276..30ec35b 100644
---- a/conf/distro/angstrom-2008.1.conf
-+++ b/conf/distro/angstrom-2008.1.conf
-@@ -50,11 +50,6 @@ FEED_BASEPATH = "feeds/unstable/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
- # Uncomment this to fetch packaged-staging packages from the central angstrom server
- #PSTAGE_MIRROR = "${ANGSTROM_URI}/${FEED_BASEPATH}packaged-staging"
- 
--#The angstrom-mirrors.bbclass should have everything, but we can use this as a fallback
--CVS_TARBALL_STASH ?= "\
--		     http://www.angstrom-distribution.org/unstable/sources/ \
--		    "
--
- 
- #Make sure we use 2.6 on machines with a 2.4/2.6 selector
- KERNEL = "kernel26"
-diff --git a/conf/distro/include/oplinux.inc b/conf/distro/include/oplinux.inc
-index 36eca58..6e6bddb 100644
---- a/conf/distro/include/oplinux.inc
-+++ b/conf/distro/include/oplinux.inc
-@@ -28,10 +28,6 @@ MAINTAINER = "Digital OPSiS Developers Team <oplinux-developers@digital-opsis.co
- # Packaging and output format
- IMAGE_FSTYPES = "tar.gz jffs2 ext2.gz cramfs squashfs squashfs-lzma cpio.gz"
+diff --git a/conf/local.conf.sample b/conf/local.conf.sample
+index 1085163..ac42f29 100644
+--- a/conf/local.conf.sample
++++ b/conf/local.conf.sample
+@@ -176,10 +176,6 @@ IMAGE_FSTYPES = "jffs2 tar"
+ # Uncomment this if you want BitBake to emit the log if a build fails.
+ BBINCLUDELOGS = "yes"
  
 -# Specifies a location to search for pre-generated tarballs when fetching
 -# a cvs:// URI. Outcomment this, if you always want to pull directly from CVS.
--#CVS_TARBALL_STASH = "http://www.digital-opsis.com/oplinux/sources/"
+-#CVS_TARBALL_STASH = ""
 -
- PREMIRRORS = "(ftp|http)://.*/.*/ http://source.digital-opsis.com/"
- 
- #
-diff --git a/conf/distro/include/slugos.inc b/conf/distro/include/slugos.inc
-index c2a380d..07dfd65 100644
---- a/conf/distro/include/slugos.inc
-+++ b/conf/distro/include/slugos.inc
-@@ -109,7 +109,6 @@ DISTRO_EXTRA_DEPENDS ?= ""
- DISTRO_EXTRA_RDEPENDS ?= ""
- DISTRO_EXTRA_RRECOMMENDS ?= ""
- 
--CVS_TARBALL_STASH = "http://sources.nslu2-linux.org/sources/"
- INHERIT += "nslu2-mirrors"
- 
- #FIXME: HACK: REMOVE THIS
-diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
-index 815d40f..84ea4e7 100644
---- a/conf/distro/kaeilos.conf
-+++ b/conf/distro/kaeilos.conf
-@@ -48,12 +48,6 @@ EXTRA_IMAGECMD_ext2 = "-i 4096"
- FEED_BASEPATH = "feeds/unstable/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
- 
- 
--#The angstrom-mirrors.bbclass should have everything, but we can use this as a fallback
--CVS_TARBALL_STASH ?= "\
--		     http://www.angstrom-distribution.org/unstable/sources/ \
--		    "
--
--
- #Make sure we use 2.6 on machines with a 2.4/2.6 selector
- KERNEL = "kernel26"
- MACHINE_KERNEL_VERSION = "2.6"
-diff --git a/conf/distro/shr.conf b/conf/distro/shr.conf
-index 0258231..bf615f8 100644
---- a/conf/distro/shr.conf
-+++ b/conf/distro/shr.conf
-@@ -79,8 +79,6 @@ ANGSTROM_BLACKLIST_pn-linux-ml403-mvista-2.6.x = "strange kernel, spank maintain
- ANGSTROM_BLACKLIST_pn-linux-davinci = "strange kernel, spank maintainer"
- 
- 
--CVS_TARBALL_STASH += "http://build.shr-project.org/sources/"
--
- #The shr-mirrors.bbclass repleaces this
- #PREMIRRORS = "(ftp|https?)$://.*/.* http://build.shr-project.org/sources/"
- INHERIT += "shr-mirrors" 
+ # Uncomment this if you want to install shared libraries directly under their SONAME,
+ # rather than installing as the full version and symlinking to the SONAME.
+ # PACKAGE_SNAP_LIB_SYMLINKS = "1"
 -- 
 1.7.2.3
 
