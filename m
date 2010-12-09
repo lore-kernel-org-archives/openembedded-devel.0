@@ -1,34 +1,33 @@
-Received: from 29.mail-out.ovh.net ([87.98.216.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PQj7I-0004pF-IO
+Received: from qmta09.emeryville.ca.mail.comcast.net ([76.96.30.96])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <enelson1000@comcast.net>) id 1PQjAg-0004yx-Id
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 17:13:13 +0100
-Received: (qmail 25486 invoked by uid 503); 9 Dec 2010 16:26:50 -0000
-Received: from b6.ovh.net (HELO mail645.ha.ovh.net) (213.186.33.56)
-	by 29.mail-out.ovh.net with SMTP; 9 Dec 2010 16:26:50 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 9 Dec 2010 18:15:47 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 9 Dec 2010 18:15:45 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Dec 2010 17:11:00 +0100
-Message-Id: <1291911060-8451-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
+	Thu, 09 Dec 2010 17:16:43 +0100
+Received: from omta20.emeryville.ca.mail.comcast.net ([76.96.30.87])
+	by qmta09.emeryville.ca.mail.comcast.net with comcast
+	id h1c31f0031smiN4A94FAN2; Thu, 09 Dec 2010 16:15:10 +0000
+Received: from [192.168.1.101] ([71.202.66.210])
+	by omta20.emeryville.ca.mail.comcast.net with comcast
+	id h4F91f0014YBSof8g4F9hS; Thu, 09 Dec 2010 16:15:10 +0000
+Message-ID: <4D01008A.7080404@comcast.net>
+Date: Thu, 09 Dec 2010 08:15:06 -0800
+From: Ed Nelson <enelson1000@comcast.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 49821071880924489
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 87.98.216.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+References: <4D00F942.6040103@comcast.net> <4D00FA94.4000101@eukrea.com>
+In-Reply-To: <4D00FA94.4000101@eukrea.com>
+X-SA-Exim-Connect-IP: 76.96.30.96
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] meta-toolchain: fix directories rights
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Release-2010.12 build failure - eglibc do_package Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 16:13:13 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Thu, 09 Dec 2010 16:16:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Actual sdk change rights of /usr and /usr/local to 775 when
-untaring the archives with sudo ... giving group write access
-to these directories.
-This patch fix the rights before creating the archive.
+On 12/9/2010 7:49 AM, Eric Bénard wrote:
+> Hi,
+>
+> On 09/12/2010 16:44, Ed Nelson wrote:
+>> I am using the latest release-2010.12 and doing a completely new 
+>> build for the
+>> AT91SAM9g20 development board(no tmp directory and source directory 
+>> empty).
+>> I am trying to build a base image that includes python.
+>> My build machine is running Ubuntu 10.04LTS.
+>>
+> are you runing Ubuntu as the native OS on the machine or in a virtual 
+> machine (VirtualBox for example) ?
+>
+> Eric
+>
+I am using on Native machine
 
-Signed-off-by: Eric BÃ©nard <eric@eukrea.com>
----
- recipes/meta/meta-toolchain.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
-
-diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
-index 82918ad..e949432 100644
---- a/recipes/meta/meta-toolchain.bb
-+++ b/recipes/meta/meta-toolchain.bb
-@@ -171,8 +171,10 @@ do_populate_sdk() {
- 	# Package it up
- 	mkdir -p ${SDK_DEPLOY}
- 	cd ${SDK_OUTPUT}
-+	chmod -R go-w ${SDK_OUTPUT}
- 	fakeroot tar cfj ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.tar.bz2 .
- 	cd ${SDK_OUTPUT2}
-+	chmod -R go-w ${SDK_OUTPUT2}
- 	fakeroot tar cfj ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}-extras.tar.bz2 .
- }
- 
--- 
-1.6.3.3
-
+Ed
 
 
