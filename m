@@ -1,43 +1,30 @@
-Received: from mail-gx0-f179.google.com ([209.85.161.179])
+Received: from qmta12.emeryville.ca.mail.comcast.net ([76.96.27.227])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PQkvQ-0002ZB-Dd
+	(envelope-from <enelson1000@comcast.net>) id 1PQlSJ-0003Eq-O5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 19:09:05 +0100
-Received: by gxk21 with SMTP id 21so1601128gxk.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Dec 2010 10:07:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=ns//qkV4ZqZmHTpAABwUTDQbYCtKpUJjbBMmScV89iE=;
-	b=QtWPpL+sJe7QUZ5y0VcTeuKToidJbjaHTr+WA/GtxrUCy69/o4+j77etZ5mSaiJvH/
-	npm/r3uWttF2m6Muwy14gm0IuZ2pK6tgq1o/OWw2wODfYk7YdZApLJrrKoHwAWRrQ8ha
-	fTcV8jf3FSn6s2sPgwcLsHF0+X+0XrPx1dJh0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=E6hyL6hs1fNoTi/3UWRlAhmM7G41L9zpsX5HVmbm6tDE8FvYqOH/uKoKgx6x6XKlJ1
-	VyrE991WXIJWFr2jQK9uREkg8RBwQSLDEHGinz2AHtcY7S43pk02/MqaEPAOI1S1hH64
-	2ALeY2X/RcA0Nnv/cgKMFUWXW1sDNTcZy2Tc0=
-Received: by 10.91.163.27 with SMTP id q27mr13720382ago.139.1291918052156;
-	Thu, 09 Dec 2010 10:07:32 -0800 (PST)
+	Thu, 09 Dec 2010 19:43:07 +0100
+Received: from omta22.emeryville.ca.mail.comcast.net ([76.96.30.89])
+	by qmta12.emeryville.ca.mail.comcast.net with comcast
+	id h2Fj1f0031vN32cAC6hXG9; Thu, 09 Dec 2010 18:41:31 +0000
+Received: from [192.168.1.101] ([71.202.66.210])
+	by omta22.emeryville.ca.mail.comcast.net with comcast
+	id h6hV1f00S4YBSof8i6hWJG; Thu, 09 Dec 2010 18:41:30 +0000
+Message-ID: <4D0122D7.7030402@comcast.net>
+Date: Thu, 09 Dec 2010 10:41:27 -0800
+From: Ed Nelson <enelson1000@comcast.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Thu, 9 Dec 2010 10:07:11 -0800 (PST)
-In-Reply-To: <4D011A13.5000202@balister.org>
-References: <4D011A13.5000202@balister.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 Dec 2010 10:07:11 -0800
-Message-ID: <AANLkTikOd+EoS+Xx0kngmfCMBeWy4f5qfK7PtuP47FGn@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.179
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 76.96.27.227
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Revert commit 8da17586c547f365ae667eb2608ba89a1c375afc
+Subject: Release-2010.12 build failure - unifdef-native-2.4-0 do_fetch Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,24 +38,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 18:09:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Dec 2010 18:43:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 9, 2010 at 10:04 AM, Philip Balister <philip@balister.org> wrote:
-> I am going to revert commit 8da17586c547f365ae667eb2608ba89a1c375afc. I have
-> talked with Tom and he agrees this is the best course of action for now.
->
-> The commit breaks autoconf running on the target.
+I don't think this is a problem with the release but do_fetch complains 
+that the check sum is incorrect.
 
-Thanks for notifying to the ml. Please go ahead.
+==========================================================================================================
+NOTE: fetch http://dotat.at/prog/unifdef/unifdef-2.4.tar.gz
+200 OK
+Length: 440320 (430K) [application/x-tar]
+Saving to: `/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz'
 
->
-> Philip
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+      0K .......... .......... .......... .......... .......... 11% 85.8M 0s
+     50K .......... .......... .......... .......... .......... 23%  118M 0s
+    100K .......... .......... .......... .......... .......... 34%  202M 0s
+    150K .......... .......... .......... .......... .......... 46%  138M 0s
+    200K .......... .......... .......... .......... .......... 58% 85.2M 0s
+    250K .......... .......... .......... .......... .......... 69% 98.7M 0s
+    300K .......... .......... .......... .......... .......... 81%  141M 0s
+    350K .......... .......... .......... .......... .......... 93% 20.0M 0s
+    400K .......... .......... ..........                      100% 
+30.1M=0.006s
+
+2010-12-09 10:15:23 (65.5 MB/s) - 
+`/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz' saved 
+[440320/440320]
+
+FATAL: unifdef-native-2.4: 
+http://dotat.at/prog/unifdef/unifdef-2.4.tar.gz cannot check archive 
+integrity
+ERROR: Error in executing python function in: 
+/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Function base_do_fetch failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb 
+do_fetch failed
+ERROR: Task 1334 
+(virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb, 
+do_fetch) failed with 256
+ERROR: 
+'virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb' 
+failed
+NOTE: The checksums for 
+'/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz' did not match.
+Expected MD5: '9aba8b30187244677f25834cbc11bfe2' and Got: 
+'dc1f77a04dd49048d71bbba896bff60e'
+Expected SHA256: 
+'52b8b5c411b3d33646b6a7518c37c3a2a308887c45ac58a13122823b02fd4f4a' and 
+Got: '853a234ae4c6f36035d01ad7d97e8b8e548a499c3de6bac6cf275f2a334979ca'
+NOTE: Your checksums:
+SRC_URI[md5sum] = "dc1f77a04dd49048d71bbba896bff60e"
+SRC_URI[sha256sum] = 
+"853a234ae4c6f36035d01ad7d97e8b8e548a499c3de6bac6cf275f2a334979ca"
+
+FATAL: unifdef-native-2.4: 
+http://dotat.at/prog/unifdef/unifdef-2.4.tar.gz cannot check archive 
+integrity
+ERROR: 
+'virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb' 
+faile
+
+==============================================================================================================
+
+
+
+If I modify the recipe with the checksums that bitbake thinks they 
+should be and then run it again it fails with the following:
+
+===================================================================================================
+NOTE: package unifdef-native-2.4-0: task do_fetch: Succeeded
+NOTE: Running task 30 of 4003 (ID: 1327, 
+virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb, 
+do_unpack)
+FATAL: Unable to unpack 
+'/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz' to 
+'/home/ed/oe/build-at91sam9g20-angstrom/tmp/work/x86_64-linux/unifdef-native-2.4-0' 
+(cmd: tar xz --no-same-owner -f 
+/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz):
+Execution of 'tar xz --no-same-owner -f 
+/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz' failed with 
+exit code 2:
+
+gzip: stdin: not in gzip format
+tar: Child returned status 1
+tar: Exiting with failure status due to previous errors
+===========================================================
+
+
+So is the source file at http://dotat.at/prog/unifdef/unifdef-2.4.tar.gz 
+corrupted?
+If so were can I download a clean file?
+
+Thanks
+Ed
+
+
+
 
 
