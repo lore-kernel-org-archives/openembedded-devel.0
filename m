@@ -1,36 +1,30 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1PQceK-000395-Pt
+	(envelope-from <philip@balister.org>) id 1PQfSo-00067C-QY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 10:18:54 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id AA8332C81C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 09:16:11 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id C5iFLW8S9OiQ
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 09:16:07 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 716C42C800
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 09:16:07 +0000 (UTC)
-Message-ID: <4D009E9A.90009@gmail.com>
-Date: Thu, 09 Dec 2010 10:17:14 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
+	Thu, 09 Dec 2010 13:19:11 +0100
+Received: (qmail 29347 invoked by uid 1003); 9 Dec 2010 12:17:33 -0000
+Received: from pool-74-107-167-114.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	9 Dec 2010 12:17:33 -0000
+Message-ID: <4D00C8DD.2000708@balister.org>
+Date: Thu, 09 Dec 2010 07:17:33 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <201012081031.15609.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201012081031.15609.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+	<4D009E9A.90009@gmail.com>
+In-Reply-To: <4D009E9A.90009@gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: "OE blessed" hotel for FOSDEM?
@@ -47,16 +41,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 09:18:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Dec 2010 12:19:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz ha scritto, Il 08/12/2010 10:31:
-> Will people book Astrid as usual or other one?
-> 
+On 12/09/2010 04:17 AM, Marco Cavallini wrote:
+> Marcin Juszkiewicz ha scritto, Il 08/12/2010 10:31:
+>> Will people book Astrid as usual or other one?
+>>
+>
+> not me, Ibis as usual ;-)
 
-not me, Ibis as usual ;-)
+What are the advantages to the Ibis?
 
-/marco
+Philip
 
 
