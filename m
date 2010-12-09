@@ -1,35 +1,36 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PQheq-0000xi-0i
+	(envelope-from <msmith@cbnco.com>) id 1PQhmt-0001BF-1l
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 15:39:44 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PQhdN-0004je-8j by authid <stefan@sostec.de> with cram_md5
+	Thu, 09 Dec 2010 15:48:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 86FF7917CE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Dec 2010 15:38:15 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PQhdM-0000bv-3T
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 15:38:12 +0100
-Date: Thu, 9 Dec 2010 15:38:11 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101209143811.GA31742@excalibur.local>
-References: <1291817934-20226-1-git-send-email-msmith@cbnco.com>
+	Thu,  9 Dec 2010 09:46:28 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 15103-10 for <openembedded-devel@lists.openembedded.org>; 
+	Thu,  9 Dec 2010 09:46:28 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 5B203912E23
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Dec 2010 09:46:28 -0500 (EST)
+Message-ID: <4D00EBC4.1000006@cbnco.com>
+Date: Thu, 09 Dec 2010 09:46:28 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
-In-Reply-To: <1291817934-20226-1-git-send-email-msmith@cbnco.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+To: openembedded-devel@lists.openembedded.org
+References: <1291817934-20226-1-git-send-email-msmith@cbnco.com>
+	<20101209143811.GA31742@excalibur.local>
+In-Reply-To: <20101209143811.GA31742@excalibur.local>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] iproute2: upgrade to 2.6.35.1
@@ -46,24 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 14:39:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 09 Dec 2010 14:48:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
-
-On Wed, 2010-12-08 at 09:18, Michael Smith wrote:
-> Upgrade 2.6.35 to 2.6.35.1. The new version fixes "ip route get" and
-> "ip addr flush".
+Stefan Schmidt wrote:
+> Hello.
 > 
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> On Wed, 2010-12-08 at 09:18, Michael Smith wrote:
+>> Upgrade 2.6.35 to 2.6.35.1. The new version fixes "ip route get" and
+>> "ip addr flush".
+>>
+>> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> 
+> Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+> 
+> Git hint of the day: Use -M for rename detection to make such patches a lot
+> smaller and easier to review.
 
-Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+Yes, I'm forever forgetting the -M. Actually, "-M -C -C" is a bit better 
+at finding copies. Thanks for the ack.
 
-Git hint of the day: Use -M for rename detection to make such patches a lot
-smaller and easier to review.
-
-regards
-Stefan Schmidt
+Mike
 
 
