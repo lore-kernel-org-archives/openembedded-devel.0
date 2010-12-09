@@ -1,32 +1,31 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PQjvt-00005S-O2
+	(envelope-from <obi@opendreambox.org>) id 1PQjvv-00006Y-OX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 18:05:30 +0100
+	Thu, 09 Dec 2010 18:05:33 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 490E1314B8D9
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 4BF74314B04A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 18:03:59 +0100 (CET)
+	Thu,  9 Dec 2010 18:04:03 +0100 (CET)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 3smBN6Yr1aLb
+	port 10024) with LMTP id JU+oDs907o23
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Dec 2010 18:03:56 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 46C2E314B8DC
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  9 Dec 2010 18:03:52 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 32276314B8DB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 18:03:51 +0100 (CET)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Thu, 09 Dec 2010 17:03:51 +0000
+	Thu, 09 Dec 2010 17:03:52 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Dec 2010 17:03:43 +0000
-Message-Id: <1291914227-25068-4-git-send-email-obi@opendreambox.org>
+Date: Thu,  9 Dec 2010 17:03:44 +0000
+Message-Id: <1291914227-25068-5-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1291914227-25068-1-git-send-email-obi@opendreambox.org>
 References: <1291914227-25068-1-git-send-email-obi@opendreambox.org>
-MIME-Version: 1.0
 X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -35,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 4/8] gst-plugins-good: remove unpinned versions
+Subject: [PATCH 5/8] gst-plugins-base: removed unpinned versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,209 +48,224 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 17:05:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Dec 2010 17:05:33 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- .../gstreamer/gst-plugins-good/flvdemux-ecma.diff  |   26 --------------=
-------
- recipes/gstreamer/gst-plugins-good_0.10.13.bb      |   14 ----------
- recipes/gstreamer/gst-plugins-good_0.10.14.bb      |   14 ----------
- recipes/gstreamer/gst-plugins-good_0.10.17.bb      |   18 -------------
- recipes/gstreamer/gst-plugins-good_0.10.21.bb      |   16 ------------
- recipes/gstreamer/gst-plugins-good_0.10.23.bb      |   15 -----------
- recipes/gstreamer/gst-plugins-good_0.10.25.bb      |   15 -----------
- 7 files changed, 0 insertions(+), 118 deletions(-)
- delete mode 100644 recipes/gstreamer/gst-plugins-good/flvdemux-ecma.diff
- delete mode 100644 recipes/gstreamer/gst-plugins-good_0.10.13.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-good_0.10.14.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-good_0.10.17.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-good_0.10.21.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-good_0.10.23.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-good_0.10.25.bb
+ recipes/gstreamer/gst-plugins-base/make382.patch |   25 --------------------
+ recipes/gstreamer/gst-plugins-base_0.10.17.bb    |   17 -------------
+ recipes/gstreamer/gst-plugins-base_0.10.22.bb    |   17 -------------
+ recipes/gstreamer/gst-plugins-base_0.10.23.bb    |   15 ------------
+ recipes/gstreamer/gst-plugins-base_0.10.28.bb    |   27 ----------------------
+ recipes/gstreamer/gst-plugins-base_0.10.29.bb    |   27 ----------------------
+ recipes/gstreamer/gst-plugins-base_0.10.30.bb    |   27 ----------------------
+ 7 files changed, 0 insertions(+), 155 deletions(-)
+ delete mode 100644 recipes/gstreamer/gst-plugins-base/make382.patch
+ delete mode 100644 recipes/gstreamer/gst-plugins-base_0.10.17.bb
+ delete mode 100644 recipes/gstreamer/gst-plugins-base_0.10.22.bb
+ delete mode 100644 recipes/gstreamer/gst-plugins-base_0.10.23.bb
+ delete mode 100644 recipes/gstreamer/gst-plugins-base_0.10.28.bb
+ delete mode 100644 recipes/gstreamer/gst-plugins-base_0.10.29.bb
+ delete mode 100644 recipes/gstreamer/gst-plugins-base_0.10.30.bb
 
-diff --git a/recipes/gstreamer/gst-plugins-good/flvdemux-ecma.diff b/reci=
-pes/gstreamer/gst-plugins-good/flvdemux-ecma.diff
+diff --git a/recipes/gstreamer/gst-plugins-base/make382.patch b/recipes/gstreamer/gst-plugins-base/make382.patch
 deleted file mode 100644
-index 6def2e0..0000000
---- a/recipes/gstreamer/gst-plugins-good/flvdemux-ecma.diff
+index f41dd76..0000000
+--- a/recipes/gstreamer/gst-plugins-base/make382.patch
 +++ /dev/null
-@@ -1,26 +0,0 @@
--From dd82612340001e7ff821725ac257a0a36ab1fea7 Mon Sep 17 00:00:00 2001
--From: Jan Urba=C5=84ski <wulczer@wulczer.org>
--Date: Mon, 09 Nov 2009 11:17:34 +0000
--Subject: flvmux: properly finish the ECMA array
--
--The ECMA array with the file index was missing a mandatory end marker.
--Fixes bug #601242.
-----
--diff --git a/gst/flv/gstflvmux.c b/gst/flv/gstflvmux.c
--index 89e8279..e1cb143 100644
----- a/gst/flv/gstflvmux.c
--+++ b/gst/flv/gstflvmux.c
--@@ -1060,6 +1060,11 @@ gst_flv_mux_write_index (GstFlvMux * mux)
--   }
--   script_tag =3D gst_buffer_join (script_tag, tmp);
--=20
--+  tmp =3D gst_buffer_new_and_alloc (3);
--+  data =3D GST_BUFFER_DATA (tmp);
--+  GST_WRITE_UINT24_BE (data, 9);        /* finish the ECMA array */
--+  script_tag =3D gst_buffer_join (script_tag, tmp);
--+
--   tmp =3D gst_buffer_new_and_alloc (4);
--   data =3D GST_BUFFER_DATA (tmp);
--   GST_WRITE_UINT32_BE (data, GST_BUFFER_SIZE (script_tag));
----
--cgit v0.8.3-6-g21f6
-diff --git a/recipes/gstreamer/gst-plugins-good_0.10.13.bb b/recipes/gstr=
-eamer/gst-plugins-good_0.10.13.bb
+@@ -1,25 +0,0 @@
+-Index: gst-plugins-base-0.10.29/common/gtk-doc.mak
+-===================================================================
+---- gst-plugins-base-0.10.29.orig/common/gtk-doc.mak
+-+++ gst-plugins-base-0.10.29/common/gtk-doc.mak
+-@@ -232,6 +232,6 @@ dist-hook: dist-check-gtkdoc dist-hook-l
+- 	-cp $(srcdir)/$(DOC_MODULE).types $(distdir)/
+- 	-cp $(srcdir)/$(DOC_MODULE)-sections.txt $(distdir)/
+- 	cd $(distdir) && rm -f $(DISTCLEANFILES)
+--        -gtkdoc-rebase --online --relative --html-dir=$(distdir)/html
+-+	-gtkdoc-rebase --online --relative --html-dir=$(distdir)/html
+- 
+- .PHONY : dist-hook-local docs
+-Index: gst-plugins-base-0.10.29/common/gtk-doc-plugins.mak
+-===================================================================
+---- gst-plugins-base-0.10.29.orig/common/gtk-doc-plugins.mak
+-+++ gst-plugins-base-0.10.29/common/gtk-doc-plugins.mak
+-@@ -352,7 +352,7 @@ dist-hook: dist-check-gtkdoc dist-hook-l
+- 	-cp $(srcdir)/$(DOC_MODULE).types $(distdir)/
+- 	-cp $(srcdir)/$(DOC_MODULE)-sections.txt $(distdir)/
+- 	cd $(distdir) && rm -f $(DISTCLEANFILES)
+--        -gtkdoc-rebase --online --relative --html-dir=$(distdir)/html
+-+	-gtkdoc-rebase --online --relative --html-dir=$(distdir)/html
+- 
+- .PHONY : dist-hook-local docs
+- 
+diff --git a/recipes/gstreamer/gst-plugins-base_0.10.17.bb b/recipes/gstreamer/gst-plugins-base_0.10.17.bb
 deleted file mode 100644
-index 17b0a93..0000000
---- a/recipes/gstreamer/gst-plugins-good_0.10.13.bb
+index 5948796..0000000
+--- a/recipes/gstreamer/gst-plugins-base_0.10.17.bb
 +++ /dev/null
-@@ -1,14 +0,0 @@
+@@ -1,17 +0,0 @@
 -require gst-plugins.inc
 -
--PR =3D "${INC_PR}.1"
+-PR = "${INC_PR}.1"
 -
--inherit gconf=20
+-PROVIDES += "gst-plugins"
 -
--EXTRA_OECONF +=3D " --enable-experimental  --enable-gst_v4l2 --enable-gc=
-onftool  --enable-external --with-check=3Dno"
--DEPENDS +=3D "jpeg libtheora gst-plugins-base esound"
+-# gst-plugins-base only builds the alsa plugin
+-# if alsa has been built and is present.  You will
+-# not get an error if this is not present, just 
+-# a missing alsa plugin
+-DEPENDS += "alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv"
 -
--PACKAGES =3D+ "gst-plugin-gconfelements"
--FILES_gst-plugin-gconfelements +=3D "${sysconfdir}/gconf"
+-PR = "r5"
 -
--SRC_URI[archive.md5sum] =3D "27f27151ccefad1157c9eaa322e14ac4"
--SRC_URI[archive.sha256sum] =3D "dfffb80ef01b8fee9af3576311e65b60c378d998=
-5099dea532be090ede54ebaa"
-diff --git a/recipes/gstreamer/gst-plugins-good_0.10.14.bb b/recipes/gstr=
-eamer/gst-plugins-good_0.10.14.bb
+-
+-SRC_URI[archive.md5sum] = "151b66228e08ab0c7601713030fb1c3f"
+-SRC_URI[archive.sha256sum] = "f82cfd5669c756726f503dde5936e2fbe2969631095f0efc40df1fae1a74f70d"
+diff --git a/recipes/gstreamer/gst-plugins-base_0.10.22.bb b/recipes/gstreamer/gst-plugins-base_0.10.22.bb
 deleted file mode 100644
-index 22d9a57..0000000
---- a/recipes/gstreamer/gst-plugins-good_0.10.14.bb
+index 21ed3e2..0000000
+--- a/recipes/gstreamer/gst-plugins-base_0.10.22.bb
 +++ /dev/null
-@@ -1,14 +0,0 @@
+@@ -1,17 +0,0 @@
 -require gst-plugins.inc
 -
--PR =3D "${INC_PR}.1"
+-PR = "${INC_PR}.1"
 -
--inherit gconf=20
+-PROVIDES += "gst-plugins"
 -
--EXTRA_OECONF +=3D " --enable-experimental  --enable-gst_v4l2 --enable-gc=
-onftool  --enable-external --with-check=3Dno"
--DEPENDS +=3D "jpeg libtheora gst-plugins-base esound"
+-PR = "r2"
 -
--PACKAGES =3D+ "gst-plugin-gconfelements"
--FILES_gst-plugin-gconfelements +=3D "${sysconfdir}/gconf"
+-# gst-plugins-base only builds the alsa plugin
+-# if alsa has been built and is present.  You will
+-# not get an error if this is not present, just 
+-# a missing alsa plugin
+-DEPENDS += "libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv"
 -
--SRC_URI[archive.md5sum] =3D "a861ccbb90a176d1242608502f45f0ac"
--SRC_URI[archive.sha256sum] =3D "12205d01cb99900ed6f936a09ac31b5849f8a7ff=
-3c9a93e5857a76dc3e30788a"
-diff --git a/recipes/gstreamer/gst-plugins-good_0.10.17.bb b/recipes/gstr=
-eamer/gst-plugins-good_0.10.17.bb
+-
+-SRC_URI[archive.md5sum] = "5d0f1e07f8f6db564971b50f75261e8a"
+-SRC_URI[archive.sha256sum] = "184c5aed03ebfe38a276fc03cb7d8685d9a6da5a48bf6a0565c83e11a29cd5f9"
+diff --git a/recipes/gstreamer/gst-plugins-base_0.10.23.bb b/recipes/gstreamer/gst-plugins-base_0.10.23.bb
 deleted file mode 100644
-index 7875039..0000000
---- a/recipes/gstreamer/gst-plugins-good_0.10.17.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--require gst-plugins.inc
--
--SRC_URI +=3D "file://flvdemux-ecma.diff \
--"
--
--PR =3D "r3"
--
--inherit gconf=20
--
--DEPENDS +=3D "hal pulseaudio speex libsoup-2.4 flac gst-plugins-base ope=
-nssl popt esound libv4l"
--
--PACKAGES =3D+ "gst-plugin-gconfelements"
--FILES_gst-plugin-gconfelements +=3D "${sysconfdir}/gconf"
--
--EXTRA_OECONF +=3D " --with-libv4l2 "
--
--SRC_URI[archive.md5sum] =3D "833546cd2b8bbf86b8ed083b00897918"
--SRC_URI[archive.sha256sum] =3D "4f41fbd325270416c9f55d900e470482a7d1e7ef=
-bdbb725ed03a085dec307ad6"
-diff --git a/recipes/gstreamer/gst-plugins-good_0.10.21.bb b/recipes/gstr=
-eamer/gst-plugins-good_0.10.21.bb
-deleted file mode 100644
-index 0f6ff3f..0000000
---- a/recipes/gstreamer/gst-plugins-good_0.10.21.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require gst-plugins.inc
--
--SRC_URI +=3D "file://flvdemux-ecma.diff \
--"
--
--SRC_URI[archive.md5sum] =3D "9bc5c9b390edbb96bda42fc553eae5ae"
--SRC_URI[archive.sha256sum] =3D "24445a1cf56302ab4ad5f56055d5c3d81c704b8f=
-9f6875fe78a25d4f72716d22"
--
--inherit gconf=20
--
--DEPENDS +=3D "hal pulseaudio speex libsoup-2.4 flac gst-plugins-base ope=
-nssl popt esound libv4l"
--
--PACKAGES =3D+ "gst-plugin-gconfelements"
--FILES_gst-plugin-gconfelements +=3D "${sysconfdir}/gconf"
--
--EXTRA_OECONF +=3D " --with-libv4l2 "
-diff --git a/recipes/gstreamer/gst-plugins-good_0.10.23.bb b/recipes/gstr=
-eamer/gst-plugins-good_0.10.23.bb
-deleted file mode 100644
-index ebd978f..0000000
---- a/recipes/gstreamer/gst-plugins-good_0.10.23.bb
+index 9d2fbb7..0000000
+--- a/recipes/gstreamer/gst-plugins-base_0.10.23.bb
 +++ /dev/null
 @@ -1,15 +0,0 @@
 -require gst-plugins.inc
 -
--PR =3D "${INC_PR}.1"
+-PR = "${INC_PR}.1"
 -
--SRC_URI[archive.md5sum] =3D "9cddbb0e7e90677f0cc05c23feffef5c"
--SRC_URI[archive.sha256sum] =3D "2e7771a611cedb1e8208601cb26744fbf3310959=
-8e222afee1be8811ba4babcf"
+-PROVIDES += "gst-plugins"
 -
--inherit gconf=20
+-# gst-plugins-base only builds the alsa plugin
+-# if alsa has been built and is present.  You will
+-# not get an error if this is not present, just 
+-# a missing alsa plugin
+-DEPENDS += "libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv"
 -
--DEPENDS +=3D "hal pulseaudio speex libsoup-2.4 flac gst-plugins-base ope=
-nssl popt esound libv4l"
 -
--PACKAGES =3D+ "gst-plugin-gconfelements"
--FILES_gst-plugin-gconfelements +=3D "${sysconfdir}/gconf"
--
--EXTRA_OECONF +=3D " --with-libv4l2 "
-diff --git a/recipes/gstreamer/gst-plugins-good_0.10.25.bb b/recipes/gstr=
-eamer/gst-plugins-good_0.10.25.bb
+-SRC_URI[archive.md5sum] = "641cc7def2d8667b9b4df15e69dba25f"
+-SRC_URI[archive.sha256sum] = "1c11d98eb9a1b1bc54becf465e74c2aa4019bb57a31dd70686269af6a9b9e93b"
+diff --git a/recipes/gstreamer/gst-plugins-base_0.10.28.bb b/recipes/gstreamer/gst-plugins-base_0.10.28.bb
 deleted file mode 100644
-index 5bc578d..0000000
---- a/recipes/gstreamer/gst-plugins-good_0.10.25.bb
+index 000761f..0000000
+--- a/recipes/gstreamer/gst-plugins-base_0.10.28.bb
 +++ /dev/null
-@@ -1,15 +0,0 @@
+@@ -1,27 +0,0 @@
 -require gst-plugins.inc
 -
--PR =3D "${INC_PR}.0"
+-SRC_URI += " \
+-            file://gst-plugins-base_rowstride.patch \
+-            file://ivorbis-thumb.patch \
+-"
 -
--SRC_URI[archive.md5sum] =3D "d734bc866788d1d6fc74c4ff1318926c"
--SRC_URI[archive.sha256sum] =3D "b5d5750c12412c47d85ba9391c842f6f02cad951=
-1876695e48b15fb37e4699f6"
+-SRC_URI[archive.md5sum] = "0107cf985ac90544bae70288220f5bab"
+-SRC_URI[archive.sha256sum] = "132b6fd7749fcbfa9ad88c854aada44b6870c4175bda21cdb01a52b59a98e14f"
 -
--inherit gconf
+-PR = "${INC_PR}.1"
 -
--DEPENDS +=3D "hal pulseaudio speex libsoup-2.4 flac gst-plugins-base ope=
-nssl popt esound libv4l"
+-PROVIDES += "gst-plugins"
 -
--PACKAGES =3D+ "gst-plugin-gconfelements"
--FILES_gst-plugin-gconfelements +=3D "${sysconfdir}/gconf"
+-# gst-plugins-base only builds the alsa plugin
+-# if alsa has been built and is present.  You will
+-# not get an error if this is not present, just 
+-# a missing alsa plugin
+-DEPENDS += "udev cdparanoia pango libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv"
 -
--EXTRA_OECONF +=3D " --with-libv4l2 "
---=20
+-# Needs a udev that enabled gudev, which isn't the default
+-EXTRA_OECONF_append = " --with-gudev"
+-
+-do_configure_prepend() {
+-	sed -i -e s:QtGui:NoQtGui:g ${S}/configure.ac
+-}
+-
+diff --git a/recipes/gstreamer/gst-plugins-base_0.10.29.bb b/recipes/gstreamer/gst-plugins-base_0.10.29.bb
+deleted file mode 100644
+index 7931ba1..0000000
+--- a/recipes/gstreamer/gst-plugins-base_0.10.29.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-require gst-plugins.inc
+-
+-SRC_URI += " \
+-            file://ivorbis-thumb.patch \
+-            file://make382.patch \
+-"
+-
+-SRC_URI[archive.md5sum] = "d07e251152cccbaa81807c14cf0fd8c0"
+-SRC_URI[archive.sha256sum] = "ac035cce4d68e2e0b980d3ddb6c74674667cbfde6cddc65e18ea16368d34732c"
+-
+-PR = "${INC_PR}.1"
+-
+-PROVIDES += "gst-plugins"
+-
+-# gst-plugins-base only builds the alsa plugin
+-# if alsa has been built and is present.  You will
+-# not get an error if this is not present, just 
+-# a missing alsa plugin
+-DEPENDS += "udev cdparanoia pango libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv"
+-
+-# Needs a udev that enabled gudev, which isn't the default
+-EXTRA_OECONF_append = " --with-gudev"
+-
+-do_configure_prepend() {
+-	sed -i -e s:QtGui:NoQtGui:g ${S}/configure.ac
+-}
+-
+diff --git a/recipes/gstreamer/gst-plugins-base_0.10.30.bb b/recipes/gstreamer/gst-plugins-base_0.10.30.bb
+deleted file mode 100644
+index 0826562..0000000
+--- a/recipes/gstreamer/gst-plugins-base_0.10.30.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-require gst-plugins.inc
+-
+-SRC_URI += " \
+-            file://ivorbis-thumb.patch \
+-            file://make382.patch \
+-"
+-
+-SRC_URI[archive.md5sum] = "3ad90152b58563e1314af26c263f3c4c"
+-SRC_URI[archive.sha256sum] = "63938641380be9935c804ae8d55acdcfd93920ed2deb72dcf70f027a78b085d7"
+-
+-PR = "${INC_PR}.0"
+-
+-PROVIDES += "gst-plugins"
+-
+-# gst-plugins-base only builds the alsa plugin
+-# if alsa has been built and is present.  You will
+-# not get an error if this is not present, just 
+-# a missing alsa plugin
+-DEPENDS += "udev cdparanoia pango libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv gtk+"
+-
+-# Needs a udev that enabled gudev, which isn't the default
+-EXTRA_OECONF_append = " --with-gudev"
+-
+-do_configure_prepend() {
+-	sed -i -e s:QtGui:NoQtGui:g ${S}/configure.ac
+-}
+-
+-- 
 1.7.2.3
 
 
