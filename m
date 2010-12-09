@@ -1,44 +1,30 @@
-Received: from mail-iw0-f173.google.com ([209.85.214.173])
+Received: from qmta15.emeryville.ca.mail.comcast.net ([76.96.27.228])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PQhtt-0001Nj-PJ
+	(envelope-from <enelson1000@comcast.net>) id 1PQigk-0003fk-3W
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 15:55:18 +0100
-Received: by iwn40 with SMTP id 40so3369112iwn.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Dec 2010 06:53:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=lRI36pfqDud85UKNkvV9VRX+rFUevhLzErt8NZwWMHA=;
-	b=c8oNEoLCkJ7doUn8j7labJ0ZHvFuq6vx6DyRgEYRwLP/KNtZEYlzFpSL89HpOqbfEm
-	Lvr3mk7nBqYPGGmuL1WKeAzG8rV5abj2WyoKK78DkZoUr6RomGHKSi69jt4hQiqNlXEx
-	oAvXoqE3sIaYgeFX4duzhTINRUPzIdHOB1XAM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Y1k4gdw50mypWyWyJfaa5wfwVh9z7n/GMXBxo/P0D2vrWlzmmR/GP7Uh2SOCHfuxGr
-	BHMDnpY0BS8lJ8F3JUScdDYDPzutv4M0uyg00mAnikL9Du9SkWvfDxiSElEjHORqZ08A
-	DN3InFqyYqf97hjY4ja6ZKOHvyciWO1IHcviY=
+	Thu, 09 Dec 2010 16:45:52 +0100
+Received: from omta09.emeryville.ca.mail.comcast.net ([76.96.30.20])
+	by qmta15.emeryville.ca.mail.comcast.net with comcast
+	id h1fG1f0020S2fkCAF3kDDE; Thu, 09 Dec 2010 15:44:13 +0000
+Received: from [192.168.1.101] ([71.202.66.210])
+	by omta09.emeryville.ca.mail.comcast.net with comcast
+	id h3k71f00C4YBSof8V3k8rh; Thu, 09 Dec 2010 15:44:08 +0000
+Message-ID: <4D00F942.6040103@comcast.net>
+Date: Thu, 09 Dec 2010 07:44:02 -0800
+From: Ed Nelson <enelson1000@comcast.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.231.206.7 with SMTP id fs7mr380930ibb.82.1291906426560; Thu,
-	09 Dec 2010 06:53:46 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Thu, 9 Dec 2010 06:53:46 -0800 (PST)
-In-Reply-To: <4D00C8DD.2000708@balister.org>
-References: <201012081031.15609.marcin@juszkiewicz.com.pl>
-	<4D009E9A.90009@gmail.com> <4D00C8DD.2000708@balister.org>
-Date: Thu, 9 Dec 2010 15:53:46 +0100
-Message-ID: <AANLkTin59-J4kzGeiSNVsSsbR=PRvkasdtDZDu5XT0s4@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.173
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 76.96.27.228
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: "OE blessed" hotel for FOSDEM?
+Subject: Release-2010.12 build failure - eglibc do_package Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,28 +38,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 14:55:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 09 Dec 2010 15:45:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/12/9 Philip Balister <philip@balister.org>:
-> On 12/09/2010 04:17 AM, Marco Cavallini wrote:
->>
->> Marcin Juszkiewicz ha scritto, Il 08/12/2010 10:31:
->>>
->>> Will people book Astrid as usual or other one?
->>>
->>
->> not me, Ibis as usual ;-)
->
-> What are the advantages to the Ibis?
->
-> Philip
+I am using the latest release-2010.12 and doing a completely new build 
+for the AT91SAM9g20 development board(no tmp directory  and source 
+directory empty).
+I am trying to build a base image that includes python.
+My build machine is running Ubuntu 10.04LTS.
 
-Which one has a decent parking?
-Last year, the one I had, had a very cramped and crowded parking in
-the cellar. Quite inconvenient. Forgot the name.
-(tho if I recall correclty they had free wifi)
+Build Configuration:
+BB_VERSION        = "1.10.0"
+METADATA_BRANCH   = "release-2010.12"
+METADATA_REVISION = "dec3967"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "at91sam9g20ek"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "next"
+TARGET_FPU        = "soft"
 
-Frans
+
+The build fails on eglibc do_package with the following information.
+
+NOTE: Running task 1006 of 4003 (ID: 143, 
+/home/ed/oe/oe-release-2010.12/openembedded/recipes/eglibc/eglibc_2.12.bb, 
+do_package)
+NOTE: package eglibc-2.12-r17.7+svnr11982: task do_package: Started
+NOTE: preparing tree for binary locale generation
+NOTE: generating locale es_NI (UTF-8)
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/ed/oe/oe-release-2010.12/openembedded/recipes/eglibc/eglibc_2.12.bb do_package 
+failed
+ERROR: Task 143 
+(/home/ed/oe/oe-release-2010.12/openembedded/recipes/eglibc/eglibc_2.12.bb, 
+do_package) failed with 256
+ERROR: 
+'/home/ed/oe/oe-release-2010.12/openembedded/recipes/eglibc/eglibc_2.12.bb' 
+failed
+NOTE: Task failed: localedef returned an error (command was 
+PATH="/home/ed/oe/build-at91sam9g20-angstrom/tmp/sysroots/i686-linux/usr/armv5te/bin:/home/ed/oe/build-at91sam9g20-angstrom/tmp/sysroots/i686-linux/usr/sbin:/home/ed/oe/build-at91sam9g20-angstrom/tmp/sysroots/i686-linux/usr/bin:/home/ed/oe/build-at91sam9g20-angstrom/tmp/sysroots/i686-linux/sbin:/home/ed/oe/build-at91sam9g20-angstrom/tmp/sysroots/i686-linux//bin:/home/ed/oe/oe-release-2010.12/bitbake-1.10.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games" 
+I18NPATH="/home/ed/oe/build-at91sam9g20-angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/eglibc-2.12-r17.7+svnr11982/locale-tree/usr/share/i18n" 
+qemu-arm -s 1048576 -r 2.6.24 -L 
+/home/ed/oe/build-at91sam9g20-angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/eglibc-2.12-r17.7+svnr11982/locale-tree 
+-E 
+LD_LIBRARY_PATH=/home/ed/oe/build-at91sam9g20-angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/eglibc-2.12-r17.7+svnr11982/locale-tree/lib  
+/home/ed/oe/build-at91sam9g20-angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/eglibc-2.12-r17.7+svnr11982/locale-tree/bin/localedef 
+--force --old-style --no-archive 
+--prefix=/home/ed/oe/build-at91sam9g20-angstrom/tmp/work/armv5te-angstrom-linux-gnueabi/eglibc-2.12-r17.7+svnr11982/locale-tree 
+--inputfile=/usr/share/i18n/locales/es_NI --charmap=UTF-8 es_NI).
+NOTE: package eglibc-2.12-r17.7+svnr11982: task do_package: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/ed/oe/oe-release-2010.12/openembedded/recipes/eglibc/eglibc_2.12.bb do_package 
+failed
+ERROR: Task 143 
+(/home/ed/oe/oe-release-2010.12/openembedded/recipes/eglibc/eglibc_2.12.bb, 
+do_package) failed with 256
+ERROR: 
+'/home/ed/oe/oe-release-2010.12/openembedded/recipes/eglibc/eglibc_2.12.bb' 
+failed
+ERROR: 
+'/home/ed/oe/oe-release-2010.12/openembedded/recipes/eglibc/eglibc_2.12.bb' 
+failed
+
+There are 2 eglibc directors in 
+ed/oe/build-at91sam9g20-angstrom/tmp/work/armv5te-angstrom-linux-gnueabi
+eglibc-2.12-r17.7+svnr11982
+and
+eglibc-intial-2.12-r17.7+svnr11982
+
+The file run.package_do_package.23963 was empty
+
+Any ideas
+Thanks
+Ed
+
+
 
 
