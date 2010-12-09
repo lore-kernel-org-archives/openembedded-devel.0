@@ -1,33 +1,39 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1PQfSo-00067C-QY
+	(envelope-from <stefan@datenfreihafen.org>) id 1PQg7j-00073P-Bk
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 13:19:11 +0100
-Received: (qmail 29347 invoked by uid 1003); 9 Dec 2010 12:17:33 -0000
-Received: from pool-74-107-167-114.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@74.107.167.114)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	9 Dec 2010 12:17:33 -0000
-Message-ID: <4D00C8DD.2000708@balister.org>
-Date: Thu, 09 Dec 2010 07:17:33 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
-	Thunderbird/3.1.6
-MIME-Version: 1.0
+	Thu, 09 Dec 2010 14:01:27 +0100
+Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1PQg6G-0003Ju-R0 by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Dec 2010 13:59:59 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PQg6E-0000w2-IL
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Dec 2010 13:59:54 +0100
+Date: Thu, 9 Dec 2010 13:59:54 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-References: <201012081031.15609.marcin@juszkiewicz.com.pl>
-	<4D009E9A.90009@gmail.com>
-In-Reply-To: <4D009E9A.90009@gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.166
-X-SA-Exim-Mail-From: philip@balister.org
+Message-ID: <20101209125954.GA29826@excalibur.local>
+References: <1291813088-23444-1-git-send-email-obi@opendreambox.org>
+	<1291813088-23444-4-git-send-email-obi@opendreambox.org>
+MIME-Version: 1.0
+In-Reply-To: <1291813088-23444-4-git-send-email-obi@opendreambox.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: "OE blessed" hotel for FOSDEM?
+Subject: Re: [PATCH 4/4] linux-omap-hah: remove unused variable CVS_TARBALL_STASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,19 +47,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 12:19:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Dec 2010 13:01:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 12/09/2010 04:17 AM, Marco Cavallini wrote:
-> Marcin Juszkiewicz ha scritto, Il 08/12/2010 10:31:
->> Will people book Astrid as usual or other one?
->>
->
-> not me, Ibis as usual ;-)
+Hello.
 
-What are the advantages to the Ibis?
+On Wed, 2010-12-08 at 12:58, Andreas Oberritter wrote:
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 
-Philip
+Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+
+I carried this over from our stable overlay. Can go.
+
+regards
+Stefan Schmidt
 
 
