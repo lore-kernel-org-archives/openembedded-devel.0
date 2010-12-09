@@ -1,22 +1,26 @@
-Received: from qmta12.emeryville.ca.mail.comcast.net ([76.96.27.227])
+Received: from qmta14.emeryville.ca.mail.comcast.net ([76.96.27.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enelson1000@comcast.net>) id 1PQlSJ-0003Eq-O5
+	(envelope-from <enelson1000@comcast.net>) id 1PQlU6-0003M5-46
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 19:43:07 +0100
-Received: from omta22.emeryville.ca.mail.comcast.net ([76.96.30.89])
-	by qmta12.emeryville.ca.mail.comcast.net with comcast
-	id h2Fj1f0031vN32cAC6hXG9; Thu, 09 Dec 2010 18:41:31 +0000
+	Thu, 09 Dec 2010 19:44:55 +0100
+Received: from omta11.emeryville.ca.mail.comcast.net ([76.96.30.36])
+	by qmta14.emeryville.ca.mail.comcast.net with comcast
+	id h6Qp1f0010mlR8UAE6jNLf; Thu, 09 Dec 2010 18:43:22 +0000
 Received: from [192.168.1.101] ([71.202.66.210])
-	by omta22.emeryville.ca.mail.comcast.net with comcast
-	id h6hV1f00S4YBSof8i6hWJG; Thu, 09 Dec 2010 18:41:30 +0000
-Message-ID: <4D0122D7.7030402@comcast.net>
-Date: Thu, 09 Dec 2010 10:41:27 -0800
+	by omta11.emeryville.ca.mail.comcast.net with comcast
+	id h6jD1f0074YBSof8X6jFaX; Thu, 09 Dec 2010 18:43:17 +0000
+Message-ID: <4D01233C.70408@comcast.net>
+Date: Thu, 09 Dec 2010 10:43:08 -0800
 From: Ed Nelson <enelson1000@comcast.net>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 76.96.27.227
+References: <4D00F942.6040103@comcast.net>
+	<4D00FA94.4000101@eukrea.com>	<4D01008A.7080404@comcast.net>
+	<4D01096E.6010105@eukrea.com>
+In-Reply-To: <4D01096E.6010105@eukrea.com>
+X-SA-Exim-Connect-IP: 76.96.27.212
 X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -24,7 +28,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Release-2010.12 build failure - unifdef-native-2.4-0 do_fetch Failed
+Subject: Re: Release-2010.12 build failure - eglibc do_package Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,106 +42,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 18:43:07 -0000
+X-List-Received-Date: Thu, 09 Dec 2010 18:44:55 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-I don't think this is a problem with the release but do_fetch complains 
-that the check sum is incorrect.
+On 12/9/2010 8:53 AM, Eric Bénard wrote:
+> On 09/12/2010 17:15, Ed Nelson wrote:
+>> On 12/9/2010 7:49 AM, Eric Bénard wrote:
+>>> Hi,
+>>>
+>>> On 09/12/2010 16:44, Ed Nelson wrote:
+>>>> I am using the latest release-2010.12 and doing a completely new 
+>>>> build for the
+>>>> AT91SAM9g20 development board(no tmp directory and source directory 
+>>>> empty).
+>>>> I am trying to build a base image that includes python.
+>>>> My build machine is running Ubuntu 10.04LTS.
+>>>>
+>>> are you runing Ubuntu as the native OS on the machine or in a virtual
+>>> machine (VirtualBox for example) ?
+>>>
+>>> Eric
+>>>
+>> I am using on Native machine
+>>
+> ok I have the same problem on virtual machines running Ubuntu 10.04 & 
+> 10.10.
+> I have to test a VirtualBox with an other distribution to see if the 
+> problem comes from the virtualmachine or Ubuntu 10.04 & 10.10.
+>
+> Setting PREFERRED_VERSION_qemu-native = "0.12.5" "solved" the problem 
+> here.
+>
+> Eric
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-==========================================================================================================
-NOTE: fetch http://dotat.at/prog/unifdef/unifdef-2.4.tar.gz
-200 OK
-Length: 440320 (430K) [application/x-tar]
-Saving to: `/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz'
-
-      0K .......... .......... .......... .......... .......... 11% 85.8M 0s
-     50K .......... .......... .......... .......... .......... 23%  118M 0s
-    100K .......... .......... .......... .......... .......... 34%  202M 0s
-    150K .......... .......... .......... .......... .......... 46%  138M 0s
-    200K .......... .......... .......... .......... .......... 58% 85.2M 0s
-    250K .......... .......... .......... .......... .......... 69% 98.7M 0s
-    300K .......... .......... .......... .......... .......... 81%  141M 0s
-    350K .......... .......... .......... .......... .......... 93% 20.0M 0s
-    400K .......... .......... ..........                      100% 
-30.1M=0.006s
-
-2010-12-09 10:15:23 (65.5 MB/s) - 
-`/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz' saved 
-[440320/440320]
-
-FATAL: unifdef-native-2.4: 
-http://dotat.at/prog/unifdef/unifdef-2.4.tar.gz cannot check archive 
-integrity
-ERROR: Error in executing python function in: 
-/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb
-ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-ERROR: Printing the environment of the function
-ERROR: Function base_do_fetch failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of 
-virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb 
-do_fetch failed
-ERROR: Task 1334 
-(virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb, 
-do_fetch) failed with 256
-ERROR: 
-'virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb' 
-failed
-NOTE: The checksums for 
-'/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz' did not match.
-Expected MD5: '9aba8b30187244677f25834cbc11bfe2' and Got: 
-'dc1f77a04dd49048d71bbba896bff60e'
-Expected SHA256: 
-'52b8b5c411b3d33646b6a7518c37c3a2a308887c45ac58a13122823b02fd4f4a' and 
-Got: '853a234ae4c6f36035d01ad7d97e8b8e548a499c3de6bac6cf275f2a334979ca'
-NOTE: Your checksums:
-SRC_URI[md5sum] = "dc1f77a04dd49048d71bbba896bff60e"
-SRC_URI[sha256sum] = 
-"853a234ae4c6f36035d01ad7d97e8b8e548a499c3de6bac6cf275f2a334979ca"
-
-FATAL: unifdef-native-2.4: 
-http://dotat.at/prog/unifdef/unifdef-2.4.tar.gz cannot check archive 
-integrity
-ERROR: 
-'virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb' 
-faile
-
-==============================================================================================================
-
-
-
-If I modify the recipe with the checksums that bitbake thinks they 
-should be and then run it again it fails with the following:
-
-===================================================================================================
-NOTE: package unifdef-native-2.4-0: task do_fetch: Succeeded
-NOTE: Running task 30 of 4003 (ID: 1327, 
-virtual:native:/home/ed/oe/oe-release-2010.12/openembedded/recipes/unifdef/unifdef_2.4.bb, 
-do_unpack)
-FATAL: Unable to unpack 
-'/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz' to 
-'/home/ed/oe/build-at91sam9g20-angstrom/tmp/work/x86_64-linux/unifdef-native-2.4-0' 
-(cmd: tar xz --no-same-owner -f 
-/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz):
-Execution of 'tar xz --no-same-owner -f 
-/home/ed/oe/oe-release-2010.12/sources/unifdef-2.4.tar.gz' failed with 
-exit code 2:
-
-gzip: stdin: not in gzip format
-tar: Child returned status 1
-tar: Exiting with failure status due to previous errors
-===========================================================
-
-
-So is the source file at http://dotat.at/prog/unifdef/unifdef-2.4.tar.gz 
-corrupted?
-If so were can I download a clean file?
+This also solved the problem for me.  I added to local.conf
 
 Thanks
 Ed
-
-
-
 
 
