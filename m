@@ -1,40 +1,39 @@
-Received: from smtp1.irobot.com ([206.83.81.187])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <harvey.tim@gmail.com>) id 1PQjgn-0007ZJ-Ct
+Received: from 29.mail-out.ovh.net ([87.98.216.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PQjlI-0007nt-KF
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 17:49:54 +0100
-X-AuditID: 0a460614-b7b13ae0000039bc-34-4d010855bb0b
-Received: from webmail.irobot.com (Unknown_Domain [10.70.6.12])
-	by smtp1.irobot.com (Symantec Brightmail Gateway) with SMTP id
-	4D.1D.14780.558010D4; Thu,  9 Dec 2010 11:48:21 -0500 (EST)
-Received: from fever2.wardrobe.irobot.com ([192.168.163.187]) by
-	webmail.irobot.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 9 Dec 2010 11:48:21 -0500
-Received: from [192.168.69.108] ([192.168.69.108]) by
-	fever2.wardrobe.irobot.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 9 Dec 2010 11:48:21 -0500
-Message-ID: <4D01084A.1040103@gmail.com>
-Date: Thu, 09 Dec 2010 08:48:10 -0800
-From: Tim Harvey <harvey.tim@gmail.com>
+	Thu, 09 Dec 2010 17:54:33 +0100
+Received: (qmail 31393 invoked by uid 503); 9 Dec 2010 17:08:10 -0000
+Received: from b6.ovh.net (HELO mail645.ha.ovh.net) (213.186.33.56)
+	by 29.mail-out.ovh.net with SMTP; 9 Dec 2010 17:08:10 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 9 Dec 2010 18:57:07 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 9 Dec 2010 18:57:05 +0200
+Message-ID: <4D01096E.6010105@eukrea.com>
+Date: Thu, 09 Dec 2010 17:53:02 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.15) Gecko/20101027 Lightning/1.0b1 Thunderbird/3.0.10
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.6
 MIME-Version: 1.0
-Newsgroups: gmane.comp.handhelds.openembedded
 To: openembedded-devel@lists.openembedded.org
-References: <1291225269-21801-1-git-send-email-harvey.tim@gmail.com>
-In-Reply-To: <1291225269-21801-1-git-send-email-harvey.tim@gmail.com>
-X-OriginalArrivalTime: 09 Dec 2010 16:48:21.0236 (UTC)
-	FILETIME=[E3407B40:01CB97C0]
-X-Brightmail-Tracker: AAAAAA==
-X-SA-Exim-Connect-IP: 206.83.81.187
-X-SA-Exim-Mail-From: harvey.tim@gmail.com
+References: <4D00F942.6040103@comcast.net> <4D00FA94.4000101@eukrea.com>
+	<4D01008A.7080404@comcast.net>
+In-Reply-To: <4D01008A.7080404@comcast.net>
+X-Ovh-Tracer-Id: 747879013488241993
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 87.98.216.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv2] avrdude: update SRC_URI and fix deps
+Subject: Re: Release-2010.12 build failure - eglibc do_package Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,63 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 16:49:54 -0000
+X-List-Received-Date: Thu, 09 Dec 2010 16:54:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 12/01/2010 09:41 AM, Tim Harvey wrote:
-> * SRC_URI updated to new location
-> * Makefile.am patched to fix missing dep causing parallel make issue
+On 09/12/2010 17:15, Ed Nelson wrote:
+> On 12/9/2010 7:49 AM, Eric Bénard wrote:
+>> Hi,
+>>
+>> On 09/12/2010 16:44, Ed Nelson wrote:
+>>> I am using the latest release-2010.12 and doing a completely new build for the
+>>> AT91SAM9g20 development board(no tmp directory and source directory empty).
+>>> I am trying to build a base image that includes python.
+>>> My build machine is running Ubuntu 10.04LTS.
+>>>
+>> are you runing Ubuntu as the native OS on the machine or in a virtual
+>> machine (VirtualBox for example) ?
+>>
+>> Eric
+>>
+> I am using on Native machine
 >
-> Signed-off-by: Tim Harvey<harvey.tim@gmail.com>
-> ---
->   recipes/avrdude/avrdude.inc        |    5 ++++-
->   recipes/avrdude/avrdude/make.patch |   14 ++++++++++++++
->   2 files changed, 18 insertions(+), 1 deletions(-)
->   create mode 100644 recipes/avrdude/avrdude/make.patch
->
-> diff --git a/recipes/avrdude/avrdude.inc b/recipes/avrdude/avrdude.inc
-> index 679c4ba..4679c7a 100644
-> --- a/recipes/avrdude/avrdude.inc
-> +++ b/recipes/avrdude/avrdude.inc
-> @@ -5,7 +5,10 @@ LICENSE = "GPLv2"
->
->   DEPENDS = "virtual/libusb0 ncurses"
->
-> -SRC_URI = "http://savannah.nongnu.org/download/avrdude/avrdude-${PV}.tar.gz"
-> +SRC_URI = " \
-> +   http://savannah.nongnu.org/releases/avrdude/avrdude-${PV}.tar.gz \
-> +   file://make.patch \
-> +   "
->
->   inherit autotools
->
-> diff --git a/recipes/avrdude/avrdude/make.patch b/recipes/avrdude/avrdude/make.patch
-> new file mode 100644
-> index 0000000..30b3b1d
-> --- /dev/null
-> +++ b/recipes/avrdude/avrdude/make.patch
-> @@ -0,0 +1,14 @@
-> +fix missing deps causing build failure on parallel make
-> +Index: avrdude-5.10/Makefile.am
-> +===================================================================
-> +--- avrdude-5.10.orig/Makefile.am	2010-12-01 09:17:41.675507203 -0800
-> ++++ avrdude-5.10/Makefile.am	2010-12-01 09:17:44.474882497 -0800
-> +@@ -155,6 +155,8 @@
-> +
-> + sysconf_DATA = avrdude.conf
-> +
-> ++config.c: config_gram.h
-> ++
-> + install-exec-local: backup-avrdude-conf
-> +
-> + distclean-local:
+ok I have the same problem on virtual machines running Ubuntu 10.04 & 10.10.
+I have to test a VirtualBox with an other distribution to see if the problem 
+comes from the virtualmachine or Ubuntu 10.04 & 10.10.
 
-can someone ack/nak this?  This should get into master if there are no 
-objections.
+Setting PREFERRED_VERSION_qemu-native = "0.12.5" "solved" the problem here.
 
-Thanks,
-
-Tim
+Eric
 
 
