@@ -1,30 +1,38 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1PQks4-0002Mw-Gn
+	(envelope-from <msmith@cbnco.com>) id 1PQkut-0002TA-Jx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 19:05:37 +0100
-Received: (qmail 29422 invoked by uid 1003); 9 Dec 2010 18:04:05 -0000
-Received: from pool-74-107-167-114.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@74.107.167.114)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	9 Dec 2010 18:04:05 -0000
-Message-ID: <4D011A13.5000202@balister.org>
-Date: Thu, 09 Dec 2010 13:04:03 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
-	Thunderbird/3.1.6
+	Thu, 09 Dec 2010 19:08:32 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id DEAFF6E518C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Dec 2010 13:07:01 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 23471-03 for <openembedded-devel@lists.openembedded.org>; 
+	Thu,  9 Dec 2010 13:07:01 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id DC274693F80
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Dec 2010 13:07:00 -0500 (EST)
+Message-ID: <4D011AC4.6000805@cbnco.com>
+Date: Thu, 09 Dec 2010 13:07:00 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.166
-X-SA-Exim-Mail-From: philip@balister.org
+References: <1291914292-25223-1-git-send-email-obi@opendreambox.org>
+In-Reply-To: <1291914292-25223-1-git-send-email-obi@opendreambox.org>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Revert commit 8da17586c547f365ae667eb2608ba89a1c375afc
+Subject: Re: [PATCH] openssl: allow to add configure options through EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,16 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 18:05:37 -0000
+X-List-Received-Date: Thu, 09 Dec 2010 18:08:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I am going to revert commit 8da17586c547f365ae667eb2608ba89a1c375afc. I 
-have talked with Tom and he agrees this is the best course of action for 
-now.
+Andreas Oberritter wrote:
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 
-The commit breaks autoconf running on the target.
+ > -	perl ./Configure shared --prefix=$useprefix 
+--openssldir=${libdir}/ssl $target
+ > +	perl ./Configure ${EXTRA_OECONF} shared --prefix=$useprefix 
+--openssldir=${libdir}/ssl $target
 
-Philip
+Acked-by: Michael Smith <msmith@cbnco.com>
+
 
 
