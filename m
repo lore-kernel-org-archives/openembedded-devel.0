@@ -1,28 +1,28 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PQjvy-00008p-R4
+	(envelope-from <obi@opendreambox.org>) id 1PQjvz-00009y-U0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 18:05:37 +0100
+	Thu, 09 Dec 2010 18:05:38 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 58DA7314B04A
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 72CDE314B86C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 18:04:06 +0100 (CET)
+	Thu,  9 Dec 2010 18:04:07 +0100 (CET)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id z-MGXj3YxRFT
+	port 10024) with LMTP id HzPPLKkWl5LB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 18:03:58 +0100 (CET)
+	Thu,  9 Dec 2010 18:03:59 +0100 (CET)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 6E060314B8DE
+	by mail.multimedia-labs.de (Postfix) with SMTP id 7E95E314B8DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 18:03:54 +0100 (CET)
+	Thu,  9 Dec 2010 18:03:55 +0100 (CET)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Thu, 09 Dec 2010 17:03:54 +0000
+	Thu, 09 Dec 2010 17:03:55 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Dec 2010 17:03:46 +0000
-Message-Id: <1291914227-25068-7-git-send-email-obi@opendreambox.org>
+Date: Thu,  9 Dec 2010 17:03:47 +0000
+Message-Id: <1291914227-25068-8-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1291914227-25068-1-git-send-email-obi@opendreambox.org>
 References: <1291914227-25068-1-git-send-email-obi@opendreambox.org>
@@ -34,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 7/8] gst-plugins-ugly: remove unpinned versions
+Subject: [PATCH 8/8] gst-ffmpeg: remove unpinned versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,271 +48,273 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 17:05:37 -0000
+X-List-Received-Date: Thu, 09 Dec 2010 17:05:38 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- .../gst-plugins-ugly-sid/gstsid_autofoo_HACK.patch |  107 --------------------
- recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb   |   21 ----
- recipes/gstreamer/gst-plugins-ugly_0.10.10.bb      |   21 ----
- recipes/gstreamer/gst-plugins-ugly_0.10.11.bb      |   21 ----
- recipes/gstreamer/gst-plugins-ugly_0.10.14.bb      |   21 ----
- recipes/gstreamer/gst-plugins-ugly_0.10.15.bb      |   20 ----
- 6 files changed, 0 insertions(+), 211 deletions(-)
- delete mode 100644 recipes/gstreamer/gst-plugins-ugly-sid/gstsid_autofoo_HACK.patch
- delete mode 100644 recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-ugly_0.10.14.bb
- delete mode 100644 recipes/gstreamer/gst-plugins-ugly_0.10.15.bb
+ .../gst-ffmpeg-0.10.4/configure-hack.diff          |   10 ------
+ .../gst-ffmpeg-0.10.6/configure-hack.diff          |   10 ------
+ .../gst-ffmpeg-0.10.7/configure-hack.diff          |   12 -------
+ recipes/gstreamer/gst-ffmpeg_0.10.10.bb            |   30 -----------------
+ recipes/gstreamer/gst-ffmpeg_0.10.4.bb             |   34 -------------------
+ recipes/gstreamer/gst-ffmpeg_0.10.6.bb             |   35 --------------------
+ recipes/gstreamer/gst-ffmpeg_0.10.7.bb             |   35 --------------------
+ recipes/gstreamer/gst-ffmpeg_0.10.8.bb             |   31 -----------------
+ 8 files changed, 0 insertions(+), 197 deletions(-)
+ delete mode 100644 recipes/gstreamer/gst-ffmpeg-0.10.4/configure-hack.diff
+ delete mode 100644 recipes/gstreamer/gst-ffmpeg-0.10.6/configure-hack.diff
+ delete mode 100644 recipes/gstreamer/gst-ffmpeg-0.10.7/configure-hack.diff
+ delete mode 100644 recipes/gstreamer/gst-ffmpeg_0.10.10.bb
+ delete mode 100644 recipes/gstreamer/gst-ffmpeg_0.10.4.bb
+ delete mode 100644 recipes/gstreamer/gst-ffmpeg_0.10.6.bb
+ delete mode 100644 recipes/gstreamer/gst-ffmpeg_0.10.7.bb
+ delete mode 100644 recipes/gstreamer/gst-ffmpeg_0.10.8.bb
 
-diff --git a/recipes/gstreamer/gst-plugins-ugly-sid/gstsid_autofoo_HACK.patch b/recipes/gstreamer/gst-plugins-ugly-sid/gstsid_autofoo_HACK.patch
+diff --git a/recipes/gstreamer/gst-ffmpeg-0.10.4/configure-hack.diff b/recipes/gstreamer/gst-ffmpeg-0.10.4/configure-hack.diff
 deleted file mode 100644
-index 963ddde..0000000
---- a/recipes/gstreamer/gst-plugins-ugly-sid/gstsid_autofoo_HACK.patch
+index 0c3b5b1..0000000
+--- a/recipes/gstreamer/gst-ffmpeg-0.10.4/configure-hack.diff
 +++ /dev/null
-@@ -1,107 +0,0 @@
--Index: gst-plugins-ugly-0.10.7/m4/gst-sid.m4
+@@ -1,10 +0,0 @@
+---- /tmp/configure.ac	2008-07-03 19:47:44.000000000 +0200
+-+++ gst-ffmpeg-0.10.4/configure.ac	2008-07-03 19:47:57.000000000 +0200
+-@@ -294,7 +294,6 @@
+-   AC_SUBST(FFMPEG_CO_DIR)
+-   AC_SUBST(FFMPEG_SVN)
+-   AC_SUBST(FFMPEG_REVISION)
+--  AC_CONFIG_SUBDIRS(gst-libs/ext/ffmpeg)
+-   AC_MSG_NOTICE([Using included FFMpeg code])
+- fi
+- 
+diff --git a/recipes/gstreamer/gst-ffmpeg-0.10.6/configure-hack.diff b/recipes/gstreamer/gst-ffmpeg-0.10.6/configure-hack.diff
+deleted file mode 100644
+index 0c3b5b1..0000000
+--- a/recipes/gstreamer/gst-ffmpeg-0.10.6/configure-hack.diff
++++ /dev/null
+@@ -1,10 +0,0 @@
+---- /tmp/configure.ac	2008-07-03 19:47:44.000000000 +0200
+-+++ gst-ffmpeg-0.10.4/configure.ac	2008-07-03 19:47:57.000000000 +0200
+-@@ -294,7 +294,6 @@
+-   AC_SUBST(FFMPEG_CO_DIR)
+-   AC_SUBST(FFMPEG_SVN)
+-   AC_SUBST(FFMPEG_REVISION)
+--  AC_CONFIG_SUBDIRS(gst-libs/ext/ffmpeg)
+-   AC_MSG_NOTICE([Using included FFMpeg code])
+- fi
+- 
+diff --git a/recipes/gstreamer/gst-ffmpeg-0.10.7/configure-hack.diff b/recipes/gstreamer/gst-ffmpeg-0.10.7/configure-hack.diff
+deleted file mode 100644
+index 874ba57..0000000
+--- a/recipes/gstreamer/gst-ffmpeg-0.10.7/configure-hack.diff
++++ /dev/null
+@@ -1,12 +0,0 @@
+-Index: gst-ffmpeg-0.10.7/configure.ac
 -===================================================================
----- gst-plugins-ugly-0.10.7.orig/m4/gst-sid.m4
--+++ gst-plugins-ugly-0.10.7/m4/gst-sid.m4
--@@ -16,14 +16,7 @@ if test $HAVE_SIDPLAY = "yes"; then
+---- gst-ffmpeg-0.10.7.orig/configure.ac	2009-03-21 00:44:01.000000000 +0000
+-+++ gst-ffmpeg-0.10.7/configure.ac	2009-03-30 20:45:05.000000000 +0000
+-@@ -337,7 +337,6 @@
+-   AC_SUBST(FFMPEG_SVN)
+-   AC_SUBST(FFMPEG_REVISION)
+-   AC_SUBST(FFMPEG_EXTERNALS_REVISION)
+--  AC_CONFIG_SUBDIRS(gst-libs/ext/ffmpeg)
+-   AC_MSG_NOTICE([Using included FFMpeg code])
+- fi
 - 
--   LIBS="-lsidplay"
-- 
---  AC_TRY_RUN([
---    #include <sidplay/player.h>
---    int main()
---    { sidTune tune = sidTune(0);  }
---    ],
---    HAVE_SIDPLAY="yes",
---    HAVE_SIDPLAY="no",
---    HAVE_SIDPLAY="no")
--+  HAVE_SIDPLAY="yes"
-- 
--   LIBS="$ac_libs_safe"
-- 
--Index: gst-plugins-ugly-0.10.7/ext/Makefile.am
--===================================================================
----- gst-plugins-ugly-0.10.7.orig/ext/Makefile.am
--+++ gst-plugins-ugly-0.10.7/ext/Makefile.am
--@@ -1,67 +1,5 @@
---if USE_A52DEC
---A52DEC_DIR = a52dec
---else
---A52DEC_DIR =
---endif
---
---if USE_AMRNB
--- AMRNB_DIR = amrnb
---else
--- AMRNB_DIR =
---endif
---
---if USE_DVDREAD
--- DVDREAD_DIR = dvdread
---else
--- DVDREAD_DIR =
---endif
---
---if USE_DVDNAV
--- DVDNAV_DIR = dvdnav
---else
--- DVDNAV_DIR =
---endif
---
---if USE_LAME
---LAME_DIR = lame
---else
---LAME_DIR =
---endif
---
---if USE_MAD
---MAD_DIR = mad
---else
---MAD_DIR =
---endif
---
---if USE_MPEG2DEC
---MPEG2DEC_DIR = mpeg2dec
---else
---MPEG2DEC_DIR =
---endif
---
---if USE_SIDPLAY
-- SIDPLAY_DIR = sidplay
---else
---SIDPLAY_DIR =
---endif
-- 
---SUBDIRS = \
---	$(A52DEC_DIR) \
---	$(AMRNB_DIR) \
---	$(DVDREAD_DIR) \
---	$(DVDNAV_DIR) \
---	$(LAME_DIR) \
---	$(MAD_DIR) \
---	$(MPEG2DEC_DIR) \
---	$(SIDPLAY_DIR)
--+SUBDIRS = sidplay
-- 
---DIST_SUBDIRS = \
---	a52dec \
---	amrnb \
---	dvdnav \
---	dvdread \
---	lame \
---	mad \
---	mpeg2dec \
---	sidplay
--+DIST_SUBDIRS = sidplay
--Index: gst-plugins-ugly-0.10.7/Makefile.am
--===================================================================
----- gst-plugins-ugly-0.10.7.orig/Makefile.am
--+++ gst-plugins-ugly-0.10.7/Makefile.am
--@@ -1,7 +1,7 @@
-- DISTCHECK_CONFIGURE_FLAGS=--enable-gtk-doc
-- 
-- SUBDIRS = \
---	gst-libs gst ext docs m4 tests common po
--+	ext docs m4 tests common po
-- 
-- # include before EXTRA_DIST for win32 assignment
-- include $(top_srcdir)/common/win32.mak
-diff --git a/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb b/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
+diff --git a/recipes/gstreamer/gst-ffmpeg_0.10.10.bb b/recipes/gstreamer/gst-ffmpeg_0.10.10.bb
 deleted file mode 100644
-index 5c446e6..0000000
---- a/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
+index c5fec35..0000000
+--- a/recipes/gstreamer/gst-ffmpeg_0.10.10.bb
 +++ /dev/null
-@@ -1,21 +0,0 @@
--require gst-plugins.inc
--DEPENDS += "gst-plugins-base libsidplay"
--PROVIDES += "gst-plugin-sid"
+@@ -1,30 +0,0 @@
+-DESCRIPTION = "FFmpeg-based GStreamer plug-in"
+-SECTION = "multimedia"
+-PRIORITY = "optional"
+-LICENSE = "LGPL"
+-HOMEPAGE = "http://www.gstreamer.net/"
+-DEPENDS = "ffmpeg gstreamer gst-plugins-base zlib"
 -
--PR = "${INC_PR}.1"
+-PR = "r1"
 -
--SRC_URI = "\
--  http://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-${PV}.tar.bz2 \
--  file://gstsid_autofoo_HACK.patch \
--"
--S = "${WORKDIR}/gst-plugins-ugly-${PV}"
+-inherit autotools pkgconfig
 -
--python() {
--    # Don't build, if we are building an ENTERPRISE distro
--    enterprise = bb.data.getVar("ENTERPRISE_DISTRO", d, 1)
--    if enterprise != "1":
--            raise bb.parse.SkipPackage("gst-plugins-ugly-sid will only build if ENTERPRISE_DISTRO == 1")
--}
--
--SRC_URI[md5sum] = "cff4f55138d12152cf580a3ee71c2519"
--SRC_URI[sha256sum] = "556ba24072bdb32ee568adc682d69add1241d77936bc9563e50cdb953097be35"
-diff --git a/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb b/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
-deleted file mode 100644
-index e21abc9..0000000
---- a/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--require gst-plugins.inc
--
--PR = "${INC_PR}.1"
--
--DEPENDS += "gst-plugins-base mpeg2dec libsidplay"
--
--SRC_URI += "\
--  file://gstmad_16bit.patch \
--  file://gstsid_autofoo_HACK.patch \
+-SRC_URI = "http://gstreamer.freedesktop.org/src/${PN}/${PN}-${PV}.tar.bz2 \
+-           file://lower-rank.diff \
 -"
 -
--python() {
--    # Don't build, if we are building an ENTERPRISE distro
--    enterprise = bb.data.getVar("ENTERPRISE_DISTRO", d, 1)
--    if enterprise == "1":
--            raise bb.parse.SkipPackage("gst-plugins-ugly will only build if ENTERPRISE_DISTRO != 1")
--}
+-SRC_URI[md5sum] = "447292deff5f3748444e6a5fba41da29"
+-SRC_URI[sha256sum] = "697114483444a0a469028857a1d58145c99e6f5d2cd7edd8cb04cdc3fc72ad94"
 -
+-FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
+-FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
+-FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la ${libdir}/gstreamer-0.10/*.a"
 -
--SRC_URI[archive.md5sum] = "031205d5599fce73fc36766f928b2515"
--SRC_URI[archive.sha256sum] = "ced80afedd105cb9b1b72749f8bda29c71fa9eda06120d6b07e7362f705c9987"
-diff --git a/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb b/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
+-EXTRA_OECONF = " --with-system-ffmpeg "
+-
+-# We do this because the install program is called with -s which causes it to
+-# call "strip" and it then mangles cross compiled stuff..
+-PATH_prepend := "${TOOLCHAIN_PATH}/${TARGET_SYS}/bin:"
+-
+-# Hack to get STAGING_LIBDIR into the linker path when building ffmpeg
+-CC = "${CCACHE} ${HOST_PREFIX}gcc ${TARGET_CC_ARCH} -L${STAGING_LIBDIR}"
+diff --git a/recipes/gstreamer/gst-ffmpeg_0.10.4.bb b/recipes/gstreamer/gst-ffmpeg_0.10.4.bb
 deleted file mode 100644
-index c82370b..0000000
---- a/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
+index a80c8dd..0000000
+--- a/recipes/gstreamer/gst-ffmpeg_0.10.4.bb
 +++ /dev/null
-@@ -1,21 +0,0 @@
--require gst-plugins.inc
+@@ -1,34 +0,0 @@
+-DESCRIPTION = "FFmpeg-based GStreamer plug-in"
+-SECTION = "multimedia"
+-PRIORITY = "optional"
+-LICENSE = "LGPL"
+-HOMEPAGE = "http://www.gstreamer.net/"
+-DEPENDS = "ffmpeg gstreamer gst-plugins-base zlib"
+-PR = "r7"
 -
--PR = "${INC_PR}.1"
+-inherit autotools pkgconfig
 -
--DEPENDS += "gst-plugins-base mpeg2dec libsidplay"
--
--SRC_URI += "\
--  file://gstmad_16bit.patch \
--  file://gstsid_autofoo_HACK.patch \
+-SRC_URI = "http://gstreamer.freedesktop.org/src/${PN}/${PN}-${PV}.tar.bz2 \
+-           file://configure-hack.diff \
 -"
 -
--python() {
--	# Don't build, if we are building an ENTERPRISE distro
--	enterprise = bb.data.getVar("ENTERPRISE_DISTRO", d, 1)
--	if enterprise == "1":
--		raise bb.parse.SkipPackage("gst-plugins-ugly will only build if ENTERPRISE_DISTRO != 1")
--}
+-FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
+-FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
+-FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la ${libdir}/gstreamer-0.10/*.a"
+-
+-EXTRA_OECONF = "--disable-sdltest --disable-ffplay --disable-freetypetest \
+-		--disable-vorbis --disable-vorbistest --disable-encoders \
+-		--disable-v4l --disable-audio-oss --disable-dv1394 \
+-		--disable-vhook --with-system-ffmpeg --disable-ffserver \
+-		--enable-pp --disable-decoder-vorbis"
+-
+-# We do this because the install program is called with -s which causes it to
+-# call "strip" and it then mangles cross compiled stuff..
+-PATH_prepend := "${TOOLCHAIN_PATH}/${TARGET_SYS}/bin:"
+-
+-# Hack to get STAGING_LIBDIR into the linker path when building ffmpeg
+-CC = "${CCACHE} ${HOST_PREFIX}gcc ${TARGET_CC_ARCH} -L${STAGING_LIBDIR}"
 -
 -
--SRC_URI[archive.md5sum] = "dfe2e201e066a3e86a9598b6769d9739"
--SRC_URI[archive.sha256sum] = "681d3cf7ae124bff1949187db858e5439a41be162bdad59dd69b52b70fd62dfa"
-diff --git a/recipes/gstreamer/gst-plugins-ugly_0.10.14.bb b/recipes/gstreamer/gst-plugins-ugly_0.10.14.bb
+-SRC_URI[md5sum] = "761cbbc0b5f077449082d0ea7527941e"
+-SRC_URI[sha256sum] = "840015b4e0f0e7248b178eafc37476d6eb9aea3876eb3b07e2a66b430b526da2"
+diff --git a/recipes/gstreamer/gst-ffmpeg_0.10.6.bb b/recipes/gstreamer/gst-ffmpeg_0.10.6.bb
 deleted file mode 100644
-index bc0a3b9..0000000
---- a/recipes/gstreamer/gst-plugins-ugly_0.10.14.bb
+index 2ca8a95..0000000
+--- a/recipes/gstreamer/gst-ffmpeg_0.10.6.bb
 +++ /dev/null
-@@ -1,21 +0,0 @@
--require gst-plugins.inc
+@@ -1,35 +0,0 @@
+-DESCRIPTION = "FFmpeg-based GStreamer plug-in"
+-SECTION = "multimedia"
+-PRIORITY = "optional"
+-LICENSE = "LGPL"
+-HOMEPAGE = "http://www.gstreamer.net/"
+-DEPENDS = "ffmpeg gstreamer gst-plugins-base zlib"
+-PR = "r1"
 -
--PR = "${INC_PR}.0"
+-inherit autotools pkgconfig
 -
--DEPENDS += "gst-plugins-base mpeg2dec libsidplay"
--
--SRC_URI += "\
--  file://gstmad_16bit.patch \
--  file://gstsid_autofoo_HACK.patch \
+-SRC_URI = "http://gstreamer.freedesktop.org/src/${PN}/${PN}-${PV}.tar.bz2 \
+-           file://configure-hack.diff \
+-           file://lower-rank.diff \
 -"
 -
--SRC_URI[archive.md5sum] = "0bc0d27bcce88c73ef6c81e88624e686"
--SRC_URI[archive.sha256sum] = "78dba9963e130cfd09f294b60219e6562459c5d848bc3b38a653db7f21fc850b"
+-FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
+-FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
+-FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la ${libdir}/gstreamer-0.10/*.a"
 -
--python() {
--	# Don't build, if we are building an ENTERPRISE distro
--	enterprise = bb.data.getVar("ENTERPRISE_DISTRO", d, 1)
--	if enterprise == "1":
--		raise bb.parse.SkipPackage("gst-plugins-ugly will only build if ENTERPRISE_DISTRO != 1")
--}
+-EXTRA_OECONF = "--disable-sdltest --disable-ffplay --disable-freetypetest \
+-		--disable-vorbis --disable-vorbistest --disable-encoders \
+-		--disable-v4l --disable-audio-oss --disable-dv1394 \
+-		--disable-vhook --with-system-ffmpeg --disable-ffserver \
+-		--enable-pp --disable-decoder-vorbis"
 -
-diff --git a/recipes/gstreamer/gst-plugins-ugly_0.10.15.bb b/recipes/gstreamer/gst-plugins-ugly_0.10.15.bb
+-# We do this because the install program is called with -s which causes it to
+-# call "strip" and it then mangles cross compiled stuff..
+-PATH_prepend := "${TOOLCHAIN_PATH}/${TARGET_SYS}/bin:"
+-
+-# Hack to get STAGING_LIBDIR into the linker path when building ffmpeg
+-CC = "${CCACHE} ${HOST_PREFIX}gcc ${TARGET_CC_ARCH} -L${STAGING_LIBDIR}"
+-
+-
+-SRC_URI[md5sum] = "063a8184916426d6b79a97dea9636a78"
+-SRC_URI[sha256sum] = "c9a5f4c9b1eddd7cb042d83390072f832f19f3712d023e4d6568391e5eb4878a"
+diff --git a/recipes/gstreamer/gst-ffmpeg_0.10.7.bb b/recipes/gstreamer/gst-ffmpeg_0.10.7.bb
 deleted file mode 100644
-index eaefc54..0000000
---- a/recipes/gstreamer/gst-plugins-ugly_0.10.15.bb
+index caaf374..0000000
+--- a/recipes/gstreamer/gst-ffmpeg_0.10.7.bb
 +++ /dev/null
-@@ -1,20 +0,0 @@
--require gst-plugins.inc
+@@ -1,35 +0,0 @@
+-DESCRIPTION = "FFmpeg-based GStreamer plug-in"
+-SECTION = "multimedia"
+-PRIORITY = "optional"
+-LICENSE = "LGPL"
+-HOMEPAGE = "http://www.gstreamer.net/"
+-DEPENDS = "ffmpeg gstreamer gst-plugins-base zlib"
+-PR = "r2"
 -
--PR = "${INC_PR}.0"
+-inherit autotools pkgconfig
 -
--DEPENDS += "gst-plugins-base mpeg2dec libsidplay"
--
--SRC_URI += "\
--  file://gstmad_16bit.patch \
--  file://gstsid_autofoo_HACK.patch \
+-SRC_URI = "http://gstreamer.freedesktop.org/src/${PN}/${PN}-${PV}.tar.bz2 \
+-           file://configure-hack.diff \
+-           file://lower-rank.diff \
 -"
--SRC_URI[archive.md5sum] = "21c034a762a5da252f91640e53bfe457"
--SRC_URI[archive.sha256sum] = "ceebb7878d957a61cf437c1f93934a0371631fa50e4111ef016691d65866790c"
 -
--python() {
--	# Don't build, if we are building an ENTERPRISE distro
--	enterprise = bb.data.getVar("ENTERPRISE_DISTRO", d, 1)
--	if enterprise == "1":
--		raise bb.parse.SkipPackage("gst-plugins-ugly will only build if ENTERPRISE_DISTRO != 1")
--}
+-FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
+-FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
+-FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la ${libdir}/gstreamer-0.10/*.a"
 -
+-EXTRA_OECONF = "--disable-sdltest --disable-ffplay --disable-freetypetest \
+-		--disable-vorbis --disable-vorbistest --disable-encoders \
+-		--disable-v4l --disable-audio-oss --disable-dv1394 \
+-		--disable-vhook --with-system-ffmpeg --disable-ffserver \
+-		--enable-pp --disable-decoder-vorbis"
+-
+-# We do this because the install program is called with -s which causes it to
+-# call "strip" and it then mangles cross compiled stuff..
+-PATH_prepend := "${TOOLCHAIN_PATH}/${TARGET_SYS}/bin:"
+-
+-# Hack to get STAGING_LIBDIR into the linker path when building ffmpeg
+-CC = "${CCACHE} ${HOST_PREFIX}gcc ${TARGET_CC_ARCH} -L${STAGING_LIBDIR}"
+-
+-
+-SRC_URI[md5sum] = "6be89b26592f36ef631b22a68b8e06c4"
+-SRC_URI[sha256sum] = "94bd5110a03837145afe5c81760f22bd7bef9ef455f4417340eeeb2b12e54fb0"
+diff --git a/recipes/gstreamer/gst-ffmpeg_0.10.8.bb b/recipes/gstreamer/gst-ffmpeg_0.10.8.bb
+deleted file mode 100644
+index fa42b91..0000000
+--- a/recipes/gstreamer/gst-ffmpeg_0.10.8.bb
++++ /dev/null
+@@ -1,31 +0,0 @@
+-DESCRIPTION = "FFmpeg-based GStreamer plug-in"
+-SECTION = "multimedia"
+-PRIORITY = "optional"
+-LICENSE = "LGPL"
+-HOMEPAGE = "http://www.gstreamer.net/"
+-DEPENDS = "ffmpeg gstreamer gst-plugins-base zlib"
+-
+-inherit autotools pkgconfig
+-
+-SRC_URI = "http://gstreamer.freedesktop.org/src/${PN}/${PN}-${PV}.tar.bz2 \
+-           file://lower-rank.diff \
+-"
+-
+-PR = "r4"
+-
+-FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
+-FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
+-FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la ${libdir}/gstreamer-0.10/*.a"
+-
+-EXTRA_OECONF = " --with-system-ffmpeg "
+-
+-# We do this because the install program is called with -s which causes it to
+-# call "strip" and it then mangles cross compiled stuff..
+-PATH_prepend := "${TOOLCHAIN_PATH}/${TARGET_SYS}/bin:"
+-
+-# Hack to get STAGING_LIBDIR into the linker path when building ffmpeg
+-CC = "${CCACHE} ${HOST_PREFIX}gcc ${TARGET_CC_ARCH} -L${STAGING_LIBDIR}"
+-
+-
+-SRC_URI[md5sum] = "a7177f85c87d404a3c0d511b835129d1"
+-SRC_URI[sha256sum] = "d9e056793d05bf0b6f4989b27d3107c2f223a14205ee54be403bbe52945c8853"
 -- 
 1.7.2.3
 
