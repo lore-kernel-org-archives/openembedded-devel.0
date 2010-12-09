@@ -1,33 +1,44 @@
-Received: from qmta09.emeryville.ca.mail.comcast.net ([76.96.30.96])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enelson1000@comcast.net>) id 1PQjAg-0004yx-Id
+	(envelope-from <raj.khem@gmail.com>) id 1PQjE4-00058k-PC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 17:16:43 +0100
-Received: from omta20.emeryville.ca.mail.comcast.net ([76.96.30.87])
-	by qmta09.emeryville.ca.mail.comcast.net with comcast
-	id h1c31f0031smiN4A94FAN2; Thu, 09 Dec 2010 16:15:10 +0000
-Received: from [192.168.1.101] ([71.202.66.210])
-	by omta20.emeryville.ca.mail.comcast.net with comcast
-	id h4F91f0014YBSof8g4F9hS; Thu, 09 Dec 2010 16:15:10 +0000
-Message-ID: <4D01008A.7080404@comcast.net>
-Date: Thu, 09 Dec 2010 08:15:06 -0800
-From: Ed Nelson <enelson1000@comcast.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+	Thu, 09 Dec 2010 17:20:13 +0100
+Received: by yxd5 with SMTP id 5so1507710yxd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Dec 2010 08:18:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=eAmY0X5AZg0LVv/ikze+CUBTK0xiajUCJfis0MPRT8Y=;
+	b=a15MwgujQ4Flm9JuV4XSzZJ1Xi7tgvUXzEvWAVzPYo3DcQZwmgdrqn6XEGUm4MRyvg
+	9u0QTCI2hIPv1iAw4oxmwnsjSN0eVguW0L4KZTH5F4czYtxDDb4FRccrS61n7G92YleD
+	flnLc+B4QITzWj2UPBfi4Jpl6tu5GiGUo6xZI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=VgowgMePyhKw4vg5y4K+wz0nfuwQ+ajMMOqNr7ZjSpTZQ82EWJSaU7peKiD6p1YoU2
+	b5nVX0JIJNqswBL2bIMw9xaoSFnw8w7X70wmcadR7tK2PDbTcAV4cdk5x+M0OyhG4DmD
+	dC8zQSbPu364/LpsW2jZu4b1pKdqkg1X4z0z8=
+Received: by 10.91.163.27 with SMTP id q27mr13575934ago.139.1291911521606;
+	Thu, 09 Dec 2010 08:18:41 -0800 (PST)
 MIME-Version: 1.0
-To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-References: <4D00F942.6040103@comcast.net> <4D00FA94.4000101@eukrea.com>
-In-Reply-To: <4D00FA94.4000101@eukrea.com>
-X-SA-Exim-Connect-IP: 76.96.30.96
-X-SA-Exim-Mail-From: enelson1000@comcast.net
+Received: by 10.90.86.4 with HTTP; Thu, 9 Dec 2010 08:18:20 -0800 (PST)
+In-Reply-To: <1291911060-8451-1-git-send-email-eric@eukrea.com>
+References: <1291911060-8451-1-git-send-email-eric@eukrea.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 9 Dec 2010 08:18:20 -0800
+Message-ID: <AANLkTi=pVLrAmWjSOmYU9oNNqyUfgkb9M8jM=_8L9AZ7@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Release-2010.12 build failure - eglibc do_package Failed
+Subject: Re: [PATCH] meta-toolchain: fix directories rights
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +52,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 16:16:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 09 Dec 2010 16:20:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 12/9/2010 7:49 AM, Eric Bénard wrote:
-> Hi,
+On Thu, Dec 9, 2010 at 8:11 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> Actual sdk change rights of /usr and /usr/local to 775 when
+> untaring the archives with sudo ... giving group write access
+> to these directories.
+> This patch fix the rights before creating the archive.
 >
-> On 09/12/2010 16:44, Ed Nelson wrote:
->> I am using the latest release-2010.12 and doing a completely new 
->> build for the
->> AT91SAM9g20 development board(no tmp directory and source directory 
->> empty).
->> I am trying to build a base image that includes python.
->> My build machine is running Ubuntu 10.04LTS.
->>
-> are you runing Ubuntu as the native OS on the machine or in a virtual 
-> machine (VirtualBox for example) ?
->
-> Eric
->
-I am using on Native machine
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 
-Ed
+Acked-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =C2=A0recipes/meta/meta-toolchain.bb | =C2=A0 =C2=A02 ++
+> =C2=A01 files changed, 2 insertions(+), 0 deletions(-)
+>
+> diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain=
+.bb
+> index 82918ad..e949432 100644
+> --- a/recipes/meta/meta-toolchain.bb
+> +++ b/recipes/meta/meta-toolchain.bb
+> @@ -171,8 +171,10 @@ do_populate_sdk() {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0# Package it up
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0mkdir -p ${SDK_DEPLOY}
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0cd ${SDK_OUTPUT}
+> + =C2=A0 =C2=A0 =C2=A0 chmod -R go-w ${SDK_OUTPUT}
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0fakeroot tar cfj ${SDK_DEPLOY}/${TOOLCHAIN_OUT=
+PUTNAME}.tar.bz2 .
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0cd ${SDK_OUTPUT2}
+> + =C2=A0 =C2=A0 =C2=A0 chmod -R go-w ${SDK_OUTPUT2}
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0fakeroot tar cfj ${SDK_DEPLOY}/${TOOLCHAIN_OUT=
+PUTNAME}-extras.tar.bz2 .
+> =C2=A0}
+>
+> --
+> 1.6.3.3
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
