@@ -1,34 +1,30 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1PQkoW-0002FG-7p
+	(envelope-from <philip@balister.org>) id 1PQks4-0002Mw-Gn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 19:01:56 +0100
-Received: by qwg5 with SMTP id 5so2814274qwg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Dec 2010 10:00:24 -0800 (PST)
+	Thu, 09 Dec 2010 19:05:37 +0100
+Received: (qmail 29422 invoked by uid 1003); 9 Dec 2010 18:04:05 -0000
+Received: from pool-74-107-167-114.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	9 Dec 2010 18:04:05 -0000
+Message-ID: <4D011A13.5000202@balister.org>
+Date: Thu, 09 Dec 2010 13:04:03 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Thunderbird/3.1.6
 MIME-Version: 1.0
-Received: by 10.224.131.18 with SMTP id v18mr8399846qas.243.1291917624280;
-	Thu, 09 Dec 2010 10:00:24 -0800 (PST)
-Sender: jay@jay-tech.ru
-Received: by 10.220.29.2 with HTTP; Thu, 9 Dec 2010 10:00:24 -0800 (PST)
-X-Originating-IP: [95.29.187.136]
-In-Reply-To: <20101209170734.GM3186@jama>
-References: <4D00F942.6040103@comcast.net> <4D010B10.1060903@gmail.com>
-	<20101209170734.GM3186@jama>
-Date: Thu, 9 Dec 2010 21:00:24 +0300
-X-Google-Sender-Auth: knkS9DJdF5wordA0RPfhA4j3kNk
-Message-ID: <AANLkTimuRZ345Oi=idYh+_7RxjA+LP87-MEaHqZHVNG-@mail.gmail.com>
-From: Yury Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Release-2010.12 build failure - eglibc do_package Failed
+Subject: Revert commit 8da17586c547f365ae667eb2608ba89a1c375afc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +38,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 18:01:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 09 Dec 2010 18:05:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/12/9 Martin Jansa <martin.jansa@gmail.com>:
-> On Thu, Dec 09, 2010 at 09:00:00AM -0800, Tim Harvey wrote:
-[skip]
-> better to go to that directory dirrectly and running that command in
-> terminal to see whole output from localedef, it can be unrelated issue like this one
->
-> http://sourceware.org/bugzilla/show_bug.cgi?id=11258
+I am going to revert commit 8da17586c547f365ae667eb2608ba89a1c375afc. I 
+have talked with Tom and he agrees this is the best course of action for 
+now.
 
-I'll note again that poky have code in libc-package.bbclass that is
-using cross-localedef instead of qemu to generate locales.
+The commit breaks autoconf running on the target.
 
-http://git.pokylinux.org/cgit/cgit.cgi/poky/tree/meta/classes/libc-package.bbclass#n277
-
-It would be great to port this to OE..
-
--- 
-Yury Bushmelev
+Philip
 
 
