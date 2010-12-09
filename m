@@ -1,38 +1,34 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from qmta11.emeryville.ca.mail.comcast.net ([76.96.27.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PQjx2-0000oe-2F
+	(envelope-from <enelson1000@comcast.net>) id 1PQjyI-0000ya-AV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 18:06:40 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 6706E314B8D9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 18:05:09 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id fwe-WCSO0nhQ
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 18:05:03 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 0C248314B04A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Dec 2010 18:05:02 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Thu, 09 Dec 2010 17:05:02 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Thu, 09 Dec 2010 18:07:59 +0100
+Received: from omta17.emeryville.ca.mail.comcast.net ([76.96.30.73])
+	by qmta11.emeryville.ca.mail.comcast.net with comcast
+	id h0pk1f0031afHeLAB56SBi; Thu, 09 Dec 2010 17:06:26 +0000
+Received: from [192.168.1.101] ([71.202.66.210])
+	by omta17.emeryville.ca.mail.comcast.net with comcast
+	id h56R1f00Q4YBSof8d56RWq; Thu, 09 Dec 2010 17:06:26 +0000
+Message-ID: <4D010C8E.1080309@comcast.net>
+Date: Thu, 09 Dec 2010 09:06:22 -0800
+From: Ed Nelson <enelson1000@comcast.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.12) Gecko/20101027 Lightning/1.0b2 Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Dec 2010 17:05:02 +0000
-Message-Id: <1291914302-25298-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+References: <4D00F942.6040103@comcast.net>
+	<4D00FA94.4000101@eukrea.com>	<4D01008A.7080404@comcast.net>
+	<4D01096E.6010105@eukrea.com>
+In-Reply-To: <4D01096E.6010105@eukrea.com>
+X-SA-Exim-Connect-IP: 76.96.27.211
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] oe-stylize: remove trailing newline when printing unknown variable/routine
+Subject: Re: Release-2010.12 build failure - eglibc do_package Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,28 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 17:06:40 -0000
+X-List-Received-Date: Thu, 09 Dec 2010 17:07:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- contrib/oe-stylize.py |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On 12/9/2010 8:53 AM, Eric Bénard wrote:
+> On 09/12/2010 17:15, Ed Nelson wrote:
+>> On 12/9/2010 7:49 AM, Eric Bénard wrote:
+>>> Hi,
+>>>
+>>> On 09/12/2010 16:44, Ed Nelson wrote:
+>>>> I am using the latest release-2010.12 and doing a completely new 
+>>>> build for the
+>>>> AT91SAM9g20 development board(no tmp directory and source directory 
+>>>> empty).
+>>>> I am trying to build a base image that includes python.
+>>>> My build machine is running Ubuntu 10.04LTS.
+>>>>
+>>> are you runing Ubuntu as the native OS on the machine or in a virtual
+>>> machine (VirtualBox for example) ?
+>>>
+>>> Eric
+>>>
+>> I am using on Native machine
+>>
+> ok I have the same problem on virtual machines running Ubuntu 10.04 & 
+> 10.10.
+> I have to test a VirtualBox with an other distribution to see if the 
+> problem comes from the virtualmachine or Ubuntu 10.04 & 10.10.
+>
+> Setting PREFERRED_VERSION_qemu-native = "0.12.5" "solved" the problem 
+> here.
+>
+> Eric
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+Did you add that to the local.conf file or somewhere else?
 
-diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py
-index 0a1346c..3c383bc 100755
---- a/contrib/oe-stylize.py
-+++ b/contrib/oe-stylize.py
-@@ -379,7 +379,7 @@ if __name__ == "__main__":
-                 line = follow_rule(5, line)
-             if var == "":
-                 if not in_routine:
--                    print "## Warning: unknown variable/routine \"%s\"" % originalLine
-+                    print "## Warning: unknown variable/routine \"%s\"" % originalLine.rstrip('\n')
-                 var = 'others'
-             for c in commentBloc: seen_vars[var].append(c)
-             commentBloc = []
--- 
-1.7.2.3
-
+Thanks
+Ed
 
 
