@@ -1,28 +1,28 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PR6sr-0003Oo-5B
+	(envelope-from <stefan@datenfreihafen.org>) id 1PR6ua-0003Vb-Qw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 18:35:53 +0100
+	Fri, 10 Dec 2010 18:37:41 +0100
 Received: from p5b036cab.dip.t-dialin.net ([91.3.108.171] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1PR6rM-0000jN-Q0 by authid <stefan@sostec.de> with cram_md5
+	id 1PR6t6-0000mi-QZ by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Dec 2010 18:34:23 +0100
+	Fri, 10 Dec 2010 18:36:11 +0100
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PR6rL-00034u-Jh
+	(envelope-from <stefan@excalibur.local>) id 1PR6t5-000350-MP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 18:34:19 +0100
-Date: Fri, 10 Dec 2010 18:34:19 +0100
+	Fri, 10 Dec 2010 18:36:07 +0100
+Date: Fri, 10 Dec 2010 18:36:07 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101210173419.GB31742@excalibur.local>
+Message-ID: <20101210173607.GC31742@excalibur.local>
 References: <1291732373-17953-1-git-send-email-GNUtoo@no-log.org>
-	<1291732373-17953-2-git-send-email-GNUtoo@no-log.org>
-	<20101209143141.GB29826@excalibur.local>
-	<AANLkTikt0-foWmGMM7dH78Ph9J3YhuN8+g8a-1L2-cop@mail.gmail.com>
+	<1291732373-17953-4-git-send-email-GNUtoo@no-log.org>
+	<20101209143500.GD29826@excalibur.local>
+	<AANLkTi=XyUfKKrFLrgwb3GAcNH6gqTRXA3OCSb-hoRKm@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTikt0-foWmGMM7dH78Ph9J3YhuN8+g8a-1L2-cop@mail.gmail.com>
+In-Reply-To: <AANLkTi=XyUfKKrFLrgwb3GAcNH6gqTRXA3OCSb-hoRKm@mail.gmail.com>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -35,7 +35,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/4] Add initial support for iphone3g(machine config and kernel)
+Subject: Re: [PATCH 3/4] xserver-xorg-conf: add iphone3g support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +49,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2010 17:35:53 -0000
+X-List-Received-Date: Fri, 10 Dec 2010 17:37:41 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Thu, 2010-12-09 at 13:03, Chris Spehn wrote:
-> The file system is currently emulated. We mount the loopback image
-> formatted as ext2 from the iOS partition. I think I misunderstood what
-> ext2 actually does in the machine configuration file. Although, in the
-> future the iDroid project plans to partition the NAND. When this will
-> get done, I have no idea. I could probably remove gps and bluetooth
-> from MACHINE_FEATURES as well since I have not implemented those
-> features yet.
+On Thu, 2010-12-09 at 13:05, Chris Spehn wrote:
+> I think Jama mentioned this to me on irc in #openmoko-cdevel, but I
+> simply forgot about it. I can make a pointercal file instead of using
+> the xorg.conf option.
 
-Thanks for the explanation. Its no big deal to leave them in for now even if the
-kernel support is not ready yet. GNUtoo, its up to you if you want to commit the
-patch or remove the features before commiting.
+The hardcoded input device worries me a bit more then the ts calibration. :)
+
+The other three pathces are fine to go in via GNUtoo. And if you can tell my why
+it always will be the same device this one is fine, too. :)
 
 regards
 Stefan Schmidt
