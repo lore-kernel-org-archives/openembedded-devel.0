@@ -1,38 +1,31 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PR4y2-0000ro-Ee
+	(envelope-from <philip@balister.org>) id 1PR518-0000yn-CW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 16:33:07 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 9EA20314B7E6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Dec 2010 16:31:36 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 3Y3Gu8O8a01L
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Dec 2010 16:31:30 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 22E59314B72A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Dec 2010 16:31:29 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Fri, 10 Dec 2010 15:31:28 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Dec 2010 15:31:28 +0000
-Message-Id: <1291995088-1706-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+	Fri, 10 Dec 2010 16:36:19 +0100
+Received: (qmail 2855 invoked by uid 1003); 10 Dec 2010 15:34:45 -0000
+Received: from pool-74-107-167-114.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	10 Dec 2010 15:34:45 -0000
+Message-ID: <4D024894.6000906@balister.org>
+Date: Fri, 10 Dec 2010 10:34:44 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Thunderbird/3.1.6
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-members@lists.openembedded.org
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gstreamer: update to 0.10.31
+Subject: Write up of Embedded Summit by Cliff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +39,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2010 15:33:07 -0000
+X-List-Received-Date: Fri, 10 Dec 2010 15:36:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
-This patch somehow didn't make it into the last batch of gstreamer patches
-sent to the list, but it is a preqequisite for them.
+I nice write up of the Embedded Summit held last week. Cliff Brake was 
+one of the OE people that attended. Here is his write up the meetings:
 
- recipes/gstreamer/gstreamer_0.10.31.bb |   11 +++++++++++
- 1 files changed, 11 insertions(+), 0 deletions(-)
- create mode 100644 recipes/gstreamer/gstreamer_0.10.31.bb
+http://bec-systems.com/site/755/yocto-and-openembedded
 
-diff --git a/recipes/gstreamer/gstreamer_0.10.31.bb b/recipes/gstreamer/gstreamer_0.10.31.bb
-new file mode 100644
-index 0000000..2127aa5
---- /dev/null
-+++ b/recipes/gstreamer/gstreamer_0.10.31.bb
-@@ -0,0 +1,11 @@
-+require gstreamer.inc
-+
-+SRC_URI[archive.md5sum] = "a21fb08bdb578d972c7c14e77da8fbb6"
-+SRC_URI[archive.sha256sum] = "7f737e6d047c1ebeb4e1e0725fc377c5d9f12ee89186de7960be3cbba709ab84"
-+
-+EXTRA_OECONF += "ac_cv_func_register_printf_function=no"
-+
-+do_configure_prepend() {
-+	sed -i -e s:docs::g Makefile.am
-+}
-+
--- 
-1.7.2.3
-
+Philip
 
 
