@@ -1,29 +1,30 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1PQnRo-0006PB-Pt
+	(envelope-from <philip@balister.org>) id 1PQqUC-0002zs-IP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Dec 2010 21:50:41 +0100
-Received: from [192.168.1.105] (89.226.118.50) by smtp205.alice.it
-	(8.5.124.08) (authenticated as editempo)
-	id 4C1A26450C87AB60 for openembedded-devel@lists.openembedded.org;
-	Thu, 9 Dec 2010 21:49:09 +0100
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+	Fri, 10 Dec 2010 01:05:21 +0100
+Received: (qmail 20531 invoked by uid 1003); 10 Dec 2010 00:03:48 -0000
+Received: from pool-74-107-167-114.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	10 Dec 2010 00:03:48 -0000
+Message-ID: <4D016E63.5040301@balister.org>
+Date: Thu, 09 Dec 2010 19:03:47 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.12) Gecko/20101103 Fedora/1.0-0.33.b2pre.fc14
+	Thunderbird/3.1.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201012081031.15609.marcin@juszkiewicz.com.pl>
-References: <201012081031.15609.marcin@juszkiewicz.com.pl>
-Date: Thu, 09 Dec 2010 21:49:08 +0100
-Message-ID: <1291927748.3063.1.camel@gnutoo-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 82.57.200.101
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: "OE blessed" hotel for FOSDEM?
+Subject: i2c-dev.h header file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,17 +38,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Dec 2010 20:50:41 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 10 Dec 2010 00:05:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I prefer coutryhouse best western, they are far from the center and the
-beer event, but closer to the fossdem and have free wifi(comes with the
-room,you have to ask for it tough).
+It turns out i2c-dev.h is being staged by two bb files. I assume the 
+correct copy comes from the kernel headers file.
 
-Denis.
+The i2c-tools package is also staging a copy that over writes this one. 
+This causes a problem with the uhd build.
 
+I'd like to stop the i2c-tools package from staging that header. I think 
+this is the proper solution. Installing i2c-tools on my desktop did not 
+install this header anywhere and there was no corresponding dev package.
 
+Thoughts? If there are no objections I will implement this in the morning.
 
+Philip
 
 
