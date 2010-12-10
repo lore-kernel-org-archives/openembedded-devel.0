@@ -1,39 +1,46 @@
-Received: from mail.reciva.com ([62.7.80.110] helo=crown.reciva.com)
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1PR2MZ-0002ib-SU
+	(envelope-from <martin@ti.com>) id 1PR3ok-0007Sm-Qg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 13:46:16 +0100
-Received: from [192.168.106.10] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1PR2L6-0001a0-Kc
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 12:44:44 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1PR2L6-0006DG-8r
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 12:44:44 +0000
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1291917139.15336.2.camel@saphir>
-References: <201012081031.15609.marcin@juszkiewicz.com.pl>
-	<4D009E9A.90009@gmail.com> <4D00C8DD.2000708@balister.org>
-	<AANLkTin59-J4kzGeiSNVsSsbR=PRvkasdtDZDu5XT0s4@mail.gmail.com>
-	<1291917139.15336.2.camel@saphir>
-Date: Fri, 10 Dec 2010 12:44:43 +0000
-Message-ID: <1291985083.20979.517.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-Broken-Reverse-DNS: no host name found for IP address 192.168.106.10
-X-SA-Exim-Connect-IP: 62.7.80.110
-X-SA-Exim-Mail-From: philb@gnu.org
+	Fri, 10 Dec 2010 15:19:28 +0100
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id oBAEHrMg031696
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Dec 2010 08:17:53 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBAEHqg5011882
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Dec 2010 08:17:52 -0600 (CST)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBAEHq9p010619
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Dec 2010 08:17:52 -0600 (CST)
+Received: from dlee02.ent.ti.com ([157.170.170.17]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Fri, 10 Dec 2010 08:17:52 -0600
+From: "Ambrose, Martin" <martin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 10 Dec 2010 08:17:51 -0600
+Thread-Topic: srctree and stamps
+Thread-Index: AQHLiFbXsFrsyHEZhUW5NvT6sbyheJOZjbGw
+Message-ID: <A24693684029E5489D1D202277BE89448587464B@dlee02.ent.ti.com>
+References: <A24693684029E5489D1D202277BE894484FB9740@dlee02.ent.ti.com>
+In-Reply-To: <A24693684029E5489D1D202277BE894484FB9740@dlee02.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: martin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: "OE blessed" hotel for FOSDEM?
+Subject: Re: srctree and stamps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +54,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2010 12:46:16 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 10 Dec 2010 14:19:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-12-09 at 18:52 +0100, Michael 'Mickey' Lauer wrote:
-> Last year, pb_ stayed in a decent one, Phil, which one
-> was that?
+On Fri, Nov 19, 2010 at 20:01:28, Ambrose, Martin wrote:
 
-That was Le Meridien Brussels, which is just opposite the Gare Centrale.
-I think I'm going to give FOSDEM a miss this time but, if I was going
-back, I would probably try to stay in Le Meridien again.
+> I find that using the latest srctree the stamps aren't updated in the sam=
+e fashion
+> as regular recipes. In the example below I build the srctree recipe (mypa=
+ckage) and
+> then build an image depending on same. Even though the package is built j=
+ust prior
+> the image build still processes several steps which seem redundant.
+>=20
+> I see some special handling of stamps in srctree.bbclass and wonder if th=
+is
+> is expected/desired behavior.
+>=20
+> Thanks for any help/pointers.=20
 
-The year before that, I stayed in the Marriott which is just across the
-street from the bourse.  That was fine too but I think it was a bit more
-expensive.
+First: sorry for the double post -- some transitory problem with our mail s=
+erver.
 
-p.
+I found that the lack of expected stamps resulted in errors when building i=
+mages
+with srctree recipes as run time dependencies. Since the do_populate_sysroo=
+t,
+among others, task stamp was not present it was run again. Various errors
+could occur depending on the nature of the recipe but I often saw
 
+* resolve_conffiles: Existing conffile /home/user/work/oe/arago-tmp/rootfs/=
+my-image/etc/device_table is different from the conffile in the new package=
+.
 
+The following patch to create the missing stamps is my resolution.
+Comments welcome.
+
+$ git diff classes
+diff --git a/classes/srctree.bbclass b/classes/srctree.bbclass
+index 4884b62..2effb89 100644
+--- a/classes/srctree.bbclass
++++ b/classes/srctree.bbclass
+@@ -100,7 +100,7 @@ python () {
+ # Manually run do_install & all of its deps
+ python do_populate_sysroot_post () {
+     from os.path import exists
+-    from bb.build import exec_task, exec_func
++    from bb.build import exec_task, exec_func, make_stamp
+     from bb import note
+
+     stamp =3D d.getVar("STAMP", True)
+@@ -113,6 +113,7 @@ python do_populate_sysroot_post () {
+         if not exists("%s.%s" % (stamp, task)):
+             note("%s: executing task %s" % (d.getVar("PF", True), task))
+             exec_func(task, d)
++            make_stamp(task,d)
+
+     rec_exec_task("do_populate_sysroot", set())
+ }
+
+Regards,=20
+Martin
 
 
