@@ -1,40 +1,41 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1PR5V9-0001th-2M
+	(envelope-from <stefan@datenfreihafen.org>) id 1PR6sr-0003Oo-5B
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 17:07:19 +0100
-Received: by wyb40 with SMTP id 40so3739936wyb.6
+	Fri, 10 Dec 2010 18:35:53 +0100
+Received: from p5b036cab.dip.t-dialin.net ([91.3.108.171] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1PR6rM-0000jN-Q0 by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Dec 2010 08:05:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=5fqRufQJiMRAFMeGQ6lo00HWppeAs26C+ttXTXUZWGU=;
-	b=KmeIpFjPxxV7dfGSaoqhWKVSevtS/6rX4UKEWzJC5ewu9G1Raq0mE7GyovlF6TSxWy
-	ru+CLhgeTfwx5I355z9/nxNECeuZh+LKCvp1vJTreKLZvjNQHXXG8215nYjrSY0u1uzO
-	EVSx9A1/sSX9fjppPmVCP2y0xQJDOZVOwL2SQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Wq0iNuuKjROHUbNP4tdCMs9HghNnfrOOZj2AvLTrT2Ep3lwHKi+uKuq3JeJHJv0qcM
-	Kb3kOBdweWEZulCmuruYIAn/9PJxN1oMY3KYQLAIpB51DBSoKOGgO9PFE7NpNmIYt25i
-	iVlWNqe/W0g3ei0rNnBTzo/xA7lpRJeoaTGq4=
+	Fri, 10 Dec 2010 18:34:23 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PR6rL-00034u-Jh
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Dec 2010 18:34:19 +0100
+Date: Fri, 10 Dec 2010 18:34:19 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101210173419.GB31742@excalibur.local>
+References: <1291732373-17953-1-git-send-email-GNUtoo@no-log.org>
+	<1291732373-17953-2-git-send-email-GNUtoo@no-log.org>
+	<20101209143141.GB29826@excalibur.local>
+	<AANLkTikt0-foWmGMM7dH78Ph9J3YhuN8+g8a-1L2-cop@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.216.169.71 with SMTP id m49mr873545wel.4.1291997146882; Fri,
-	10 Dec 2010 08:05:46 -0800 (PST)
-Received: by 10.216.229.96 with HTTP; Fri, 10 Dec 2010 08:05:46 -0800 (PST)
-Date: Fri, 10 Dec 2010 11:05:46 -0500
-Message-ID: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+In-Reply-To: <AANLkTikt0-foWmGMM7dH78Ph9J3YhuN8+g8a-1L2-cop@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: testing branch 2010-12-10
+Subject: Re: [PATCH 1/4] Add initial support for iphone3g(machine config and kernel)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,26 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2010 16:07:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 10 Dec 2010 17:35:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello,
+Hello.
 
-We are resuming our weekly testing now that the 2010.12 release is
-finished.  The testing-next branch has been synced with the master,
-and is ready for builds.  Please update:
+On Thu, 2010-12-09 at 13:03, Chris Spehn wrote:
+> The file system is currently emulated. We mount the loopback image
+> formatted as ext2 from the iOS partition. I think I misunderstood what
+> ext2 actually does in the machine configuration file. Although, in the
+> future the iDroid project plans to partition the NAND. When this will
+> get done, I have no idea. I could probably remove gps and bluetooth
+> from MACHINE_FEATURES as well since I have not implemented those
+> features yet.
 
-http://wiki.openembedded.org/index.php/Testing
+Thanks for the explanation. Its no big deal to leave them in for now even if the
+kernel support is not ready yet. GNUtoo, its up to you if you want to commit the
+patch or remove the features before commiting.
 
-with results.
-
-Please do not push to the testing-next branch.
-
-Thanks,
-Cliff
-
--- 
-=================
-http://bec-systems.com
+regards
+Stefan Schmidt
 
 
