@@ -1,29 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from [213.160.213.92] (helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PR4Dz-00087e-KS for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 15:45:32 +0100
-Received: from g225083164.adsl.alicedsl.de ([92.225.83.164]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PR4CX-0004Ua-OG for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Dec 2010 14:44:01 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <jaap.dejong@nedap.com>) id 1PR4If-0008G3-Dz
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Dec 2010 15:50:22 +0100
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Fri, 10 Dec 2010 15:47:53 +0100
+X-TM-IMSS-Message-ID: <1bf369f30000bf70@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 1bf369f30000bf70 ;
+	Fri, 10 Dec 2010 15:47:55 +0100
+Message-ID: <4D023D98.4080606@nedap.com>
+Date: Fri, 10 Dec 2010 15:47:52 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Dec 2010 15:44:00 +0100
-Message-ID: <1291992240.3970.74.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-OriginalArrivalTime: 10 Dec 2010 14:47:53.0485 (UTC)
+	FILETIME=[3996F3D0:01CB9879]
+X-SA-Exim-Connect-IP: 213.160.213.92
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gypsy: add `bluez4` to `DEPENDS` instead of `bluez-libs`
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: strange usb behavior
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,94 +41,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2010 14:45:32 -0000
-X-Groupsio-MsgNum: 27072
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-sqlvRKGmJU/GuJbjLO+7"
+X-List-Received-Date: Fri, 10 Dec 2010 14:50:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-sqlvRKGmJU/GuJbjLO+7
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi All!
 
-Date: Fri, 10 Dec 2010 15:17:07 +0100
+I'm observing some strange usb behavior.
+I have a board with an onboard ftdi usb chip acting as 2 rs232 ports.
+And I have on the same board an external usb device with again a ftdi 
+chip on board, this time acting as a single rs485 port.
 
-Task `configure` when running `bitbake gypsy` failed with the following err=
-or.
+    Build Configuration:
+    BB_VERSION        = "1.8.18"
+    METADATA_BRANCH   = "release-2010.12"
+    METADATA_REVISION = "dec3967"
+    TARGET_ARCH       = "arm"
+    TARGET_OS         = "linux-gnueabi"
+    MACHINE           = "at91sam9263ek-special"
+    DISTRO            = "angstrom"
+    DISTRO_VERSION    = "2010.7-test-20101210"
+    TARGET_FPU        = "soft"
 
-        checking pkg-config is at least version 0.9.0... yes
-        checking for GYPSY... configure: error: Package requirements (glib-=
-2.0 dbus-glib-1 >=3D 0.60 bluez) were not met:
-       =20
-        No package 'bluez' found
-       =20
-        Consider adjusting the PKG_CONFIG_PATH environment variable if you
-        installed software in a non-standard prefix.
-       =20
-        Alternatively, you may set the environment variables GYPSY_CFLAGS
-        and GYPSY_LIBS to avoid the need to call pkg-config.
-        See the pkg-config man page for more details.
-       =20
-        ERROR: Function do_configure failed
+So when I boot with the external device in the connector the internal 
+and external devices are detected as expected.
 
-`bluez4` is needed in the `DEPENDS` list instead of `bluez-libs`.
-
-This patch is build tested with the following configurations.
-
-        Build Configuration:
-        BB_VERSION        =3D "1.10.0"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "a3f3bc0"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-uclibceabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "minimal-uclibc"
-        DISTRO_VERSION    =3D "dev-snapshot-20101210"
-        TARGET_FPU        =3D "hard"
-
-        Build Configuration:
-        BB_VERSION        =3D "1.10.0"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "a3f3bc0"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-gnueabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "minimal"
-        DISTRO_VERSION    =3D "dev-snapshot-20101210"
-        TARGET_FPU        =3D "hard"
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/gypsy/gypsy.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/gypsy/gypsy.inc b/recipes/gypsy/gypsy.inc
-index 793fee4..eab062c 100644
---- a/recipes/gypsy/gypsy.inc
-+++ b/recipes/gypsy/gypsy.inc
-@@ -1,7 +1,7 @@
- DESCRIPTION =3D "GPS Controlling Daemon"
- LICENSE =3D "GPL"
- SECTION =3D "x11"
--DEPENDS =3D "glib-2.0 dbus-glib bluez-libs libxslt-native"
-+DEPENDS =3D "glib-2.0 dbus-glib bluez4 libxslt-native"
-=20
- inherit autotools pkgconfig
-=20
---=20
-1.7.2.3
+     [    1.280000] usb 1-1: new full speed USB device using at91_ohci 
+and address 2
+     [    1.460000] usb 1-1: configuration #1 chosen from 1 choice
+     [    1.470000] ftdi_sio 1-1:1.0: FTDI USB Serial Device converter 
+detected
+     [    1.470000] usb 1-1: Detected FT2232C
+     [    1.480000] usb 1-1: Number of endpoints 2
+     [    1.480000] usb 1-1: Endpoint 1 MaxPacketSize 64
+     [    1.490000] usb 1-1: Endpoint 2 MaxPacketSize 64
+     [    1.490000] usb 1-1: Setting MaxPacketSize 64
+     [    1.500000] usb 1-1: FTDI USB Serial Device converter now 
+attached to ttyUSB0
+     [    1.510000] ftdi_sio 1-1:1.1: FTDI USB Serial Device converter 
+detected
+     [    1.510000] usb 1-1: Detected FT2232C
+     [    1.520000] usb 1-1: Number of endpoints 2
+     [    1.520000] usb 1-1: Endpoint 1 MaxPacketSize 64
+     [    1.530000] usb 1-1: Endpoint 2 MaxPacketSize 64
+     [    1.530000] usb 1-1: Setting MaxPacketSize 64
+     [    1.540000] usb 1-1: FTDI USB Serial Device converter now 
+attached to ttyUSB1
+     [    1.680000] usb 1-2: new full speed USB device using at91_ohci 
+and address 3
+     [    1.860000] usb 1-2: configuration #1 chosen from 1 choice
+     [    1.870000] ftdi_sio 1-2:1.0: FTDI USB Serial Device converter 
+detected
+     [    1.880000] usb 1-2: Detected FT232RL
+     [    1.880000] usb 1-2: Number of endpoints 2
+     [    1.890000] usb 1-2: Endpoint 1 MaxPacketSize 64
+     [    1.890000] usb 1-2: Endpoint 2 MaxPacketSize 64
+     [    1.900000] usb 1-2: Setting MaxPacketSize 64
+     [    1.900000] usb 1-2: FTDI USB Serial Device converter now 
+attached to ttyUSB2
 
 
---=-sqlvRKGmJU/GuJbjLO+7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+But if I look at the /dev directory ttyUSB2 is missing!
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+     # ls -l /dev/ttyU*
+         crw-rw----    1 root     dialout  188,   0 Jan  1  1970 
+/dev/ttyUSB0
+         crw-rw----    1 root     dialout  188,   1 Jan  1  1970 
+/dev/ttyUSB1
 
-iEYEABECAAYFAk0CPLAACgkQPX1aK2wOHVj9JACcD2QPWc6SUnFKSOHHkdWNuhqK
-zYMAnjMSwUDRfLLUlTXk+OMk/m/4fel1
-=tPhM
------END PGP SIGNATURE-----
+     # lsusb
+         Bus 001 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+         Bus 001 Device 002: ID 0403:6010 Future Technology Devices 
+International, Ltd FT2232C Dual USB-UART/FIFO IC
+         Bus 001 Device 003: ID 0403:6001 Future Technology Devices 
+International, Ltd FT232 USB-Serial (UART) IC
 
---=-sqlvRKGmJU/GuJbjLO+7--
+So, why is ttyUSB2 gone and are ttyUSB[01] still available??
+
+If I then remove (mark the second line!)
+
+     [  103.600000] usb 1-2: USB disconnect, address 3
+     [  103.610000] ftdi_sio ttyUSB2: FTDI USB Serial Device converter 
+now disconnected from ttyUSB2
+     [  103.630000] ftdi_sio 1-2:1.0: device disconnected
+
+and re-enter the external device life is OK!
+
+     [  140.020000] usb 1-2: new full speed USB device using at91_ohci 
+and address 4
+     [  140.200000] usb 1-2: configuration #1 chosen from 1 choice
+     [  140.230000] ftdi_sio 1-2:1.0: FTDI USB Serial Device converter 
+detected
+     [  140.250000] usb 1-2: Detected FT232RL
+     [  140.250000] usb 1-2: Number of endpoints 2
+     [  140.250000] usb 1-2: Endpoint 1 MaxPacketSize 64
+     [  140.260000] usb 1-2: Endpoint 2 MaxPacketSize 64
+     [  140.260000] usb 1-2: Setting MaxPacketSize 64
+     [  140.270000] usb 1-2: FTDI USB Serial Device converter now 
+attached to ttyUSB2
+
+     # ls -l /dev/ttyU*
+         crw-rw----    1 root     dialout  188,   0 Jan  1  1970 
+/dev/ttyUSB0
+         crw-rw----    1 root     dialout  188,   1 Jan  1  1970 
+/dev/ttyUSB1
+         crw-rw----    1 root     dialout  188,   2 Dec 10 02:18 
+/dev/ttyUSB2
+
+     # lsusb
+         Bus 001 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+         Bus 001 Device 002: ID 0403:6010 Future Technology Devices 
+International, Ltd FT2232C Dual USB-UART/FIFO IC
+         Bus 001 Device 004: ID 0403:6001 Future Technology Devices 
+International, Ltd FT232 USB-Serial (UART) IC
+
+Any ideas??
+
+Thanks!
+Jaap
+
+
+
