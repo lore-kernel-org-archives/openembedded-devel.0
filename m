@@ -1,53 +1,46 @@
-Received: from mail-gx0-f179.google.com ([209.85.161.179])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ka6sox@gmail.com>) id 1PRWrC-0007xV-2J
+	(envelope-from <raj.khem@gmail.com>) id 1PRYO3-0005wH-J3
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Dec 2010 22:19:54 +0100
-Received: by gxk21 with SMTP id 21so3052627gxk.10
+	Sat, 11 Dec 2010 23:57:56 +0100
+Received: by ywi6 with SMTP id 6so2766714ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Dec 2010 13:18:17 -0800 (PST)
+	Sat, 11 Dec 2010 14:56:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:x-rim-org-msg-ref-id
-	:message-id:content-transfer-encoding:reply-to:x-priority:references
-	:in-reply-to:sensitivity:importance:subject:to:from:date
-	:content-type:mime-version;
-	bh=3zJX6zNCsbr539Kiyez6ayr94llzUjEik1Qfs58XytY=;
-	b=ImOnzMGIH3t4hI178i9dXfcT/JlM9Klo0NF0aph13Y/sX2vtwpme89lBuCG4Ihdzcb
-	o9nMg75wuoTtOJbG0h0+q7cCZ9EFlc5JkhwJbfNuTVqNHoAWY2R1NkuZhnD/m7kzVb2x
-	aVdr/bTyZ9sj6+p8hCQ2kXOUoJ6G+qcmSbifM=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=lCTyJCjXDim7n7xeZPYT4fV072kEQPr6P7NlVF6Xl7I=;
+	b=pXqC7lvpA1E4ZO+YoEvhEEKh2kh+57JOEnGf2HPIVWukFJSdUcigbysGHnAlKs8y5p
+	GmFJFC+fYHG+cVibm7cHVfff8x2wqxqb6Lh3vzabkUN0+69Ppag5JvTQd0mVjg9eb+K8
+	3vIxeXTRHhomgxcFoKuu5rvOgQwQxkOtIxvSI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=x-rim-org-msg-ref-id:message-id:content-transfer-encoding:reply-to
-	:x-priority:references:in-reply-to:sensitivity:importance:subject:to
-	:from:date:content-type:mime-version;
-	b=PUU0E9Dt2MIFOCTnFohw8Q6YYi/8wzdDnJg3uktURH3L7ku26/CdflovFKHjIx6dFZ
-	WnxSveOfS/gPoDM2gjEIRW1zOIHsDzINTdqIG6cJ4YMfxdBXPyK75Ed++mFuMzniqweC
-	OmGeDObOz1qIndk/zKdVOWVP70232yAYsL6bk=
-Received: by 10.150.177.9 with SMTP id z9mr3617702ybe.148.1292102295472;
-	Sat, 11 Dec 2010 13:18:15 -0800 (PST)
-Received: from bda228.bisx.prod.on.blackberry
-	(bda-67-223-82-40.bise.na.blackberry.com [67.223.82.40])
-	by mx.google.com with ESMTPS id u10sm1357769yba.1.2010.12.11.13.18.13
-	(version=SSLv3 cipher=RC4-MD5); Sat, 11 Dec 2010 13:18:14 -0800 (PST)
-X-rim-org-msg-ref-id: 1605966256
-Message-ID: <1605966256-1292102291-cardhu_decombobulator_blackberry.rim.net-1937449162-@bda2712.bisx.prod.on.blackberry>
-X-Priority: Normal
-References: <mailman.3252.1292097260.24873.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.3252.1292097260.24873.openembedded-devel@lists.openembedded.org>
-Sensitivity: Normal
-Importance: Normal
-To: openembedded-devel@lists.openembedded.org
-From: ka6sox@gmail.com
-Date: Sat, 11 Dec 2010 21:12:22 +0000
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=UGvQW9HRVh+bo+jntSYOGiYzHe6hgi8fkshyQ8q826dNe1ndZ/mMAeXtlQiDA7IESw
+	k0bupVVXJDrBOkBIPOw7P14nv6LLb+JDKgYfh0jgNtiYmeMpn6BF1mu7h5eXX556QZE8
+	FFIlJgzVtA7bffBlWB6rAEkxqNtp+y9hfAMmo=
+Received: by 10.90.97.19 with SMTP id u19mr3033149agb.166.1292108180010; Sat,
+	11 Dec 2010 14:56:20 -0800 (PST)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.161.179
-X-SA-Exim-Mail-From: ka6sox@gmail.com
+Received: by 10.90.86.4 with HTTP; Sat, 11 Dec 2010 14:55:59 -0800 (PST)
+In-Reply-To: <AANLkTimN_uxrQ+=L9hWQWubK+xLcBeuD2Nw8oxt5z8Dh@mail.gmail.com>
+References: <A24693684029E5489D1D202277BE894484FB9740@dlee02.ent.ti.com>
+	<A24693684029E5489D1D202277BE89448587464B@dlee02.ent.ti.com>
+	<AANLkTimN_uxrQ+=L9hWQWubK+xLcBeuD2Nw8oxt5z8Dh@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 11 Dec 2010 14:55:59 -0800
+Message-ID: <AANLkTinNEFAp__NDHi05MUXm0ewEcCSJUdcdKMiNX6XO@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,MIME_BASE64_TEXT,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Openembedded-devel Digest, Vol 53, Issue 57
+Subject: Re: srctree and stamps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,28 +54,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Dec 2010 21:19:54 -0000
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="Windows-1252"
+X-List-Received-Date: Sat, 11 Dec 2010 22:57:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-SSBzdXBwb3J0IHRoaXMgcHJvcG9zYWwuICAgVG9tDQpTZW50IGZyb20gbXkgQmxhY2tCZXJyea4g
-c21hcnRwaG9uZSB3aXRoIE5leHRlbCBEaXJlY3QgQ29ubmVjdA0KDQotLS0tLU9yaWdpbmFsIE1l
-c3NhZ2UtLS0tLQ0KRnJvbTogb3BlbmVtYmVkZGVkLWRldmVsLXJlcXVlc3RAbGlzdHMub3BlbmVt
-YmVkZGVkLm9yZw0KU2VuZGVyOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnDQpEYXRlOiBTYXQsIDExIERlYyAyMDEwIDIwOjU0OjIwIA0KVG86IDxvcGVu
-ZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NClJlcGx5LVRvOiBvcGVuZW1i
-ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU3ViamVjdDogT3BlbmVtYmVkZGVk
-LWRldmVsIERpZ2VzdCwgVm9sIDUzLCBJc3N1ZSA1Nw0KDQpTZW5kIE9wZW5lbWJlZGRlZC1kZXZl
-bCBtYWlsaW5nIGxpc3Qgc3VibWlzc2lvbnMgdG8NCglvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZw0KDQpUbyBzdWJzY3JpYmUgb3IgdW5zdWJzY3JpYmUgdmlhIHRoZSBX
-b3JsZCBXaWRlIFdlYiwgdmlzaXQNCglodHRwOi8vbGlzdHMubGludXh0b2dvLm9yZy9jZ2ktYmlu
-L21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQoNCm9yLCB2aWEgZW1haWwsIHNl
-bmQgYSBtZXNzYWdlIHdpdGggc3ViamVjdCBvciBib2R5ICdoZWxwJyB0bw0KCW9wZW5lbWJlZGRl
-ZC1kZXZlbC1yZXF1ZXN0QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCg0KWW91IGNhbiByZWFjaCB0
-aGUgcGVyc29uIG1hbmFnaW5nIHRoZSBsaXN0IGF0DQoJb3BlbmVtYmVkZGVkLWRldmVsLW93bmVy
-QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCg0KV2hlbiByZXBseWluZywgcGxlYXNlIGVkaXQgeW91
-ciBTdWJqZWN0IGxpbmUgc28gaXQgaXMgbW9yZSBzcGVjaWZpYw0KdGhhbiAiUmU6IENvbnRlbnRz
-IG9mIE9wZW5lbWJlZGRlZC1kZXZlbCBkaWdlc3QuLi4iDQoNCg==
+On Sat, Dec 11, 2010 at 7:00 AM, Chris Larson <clarson@kergoth.com> wrote:
+> On Fri, Dec 10, 2010 at 7:17 AM, Ambrose, Martin <martin@ti.com> wrote:
+>> On Fri, Nov 19, 2010 at 20:01:28, Ambrose, Martin wrote:
+>>
+>>> I find that using the latest srctree the stamps aren't updated in the s=
+ame fashion
+>>> as regular recipes. In the example below I build the srctree recipe (my=
+package) and
+>>> then build an image depending on same. Even though the package is built=
+ just prior
+>>> the image build still processes several steps which seem redundant.
+>>>
+>>> I see some special handling of stamps in srctree.bbclass and wonder if =
+this
+>>> is expected/desired behavior.
+>>>
+>>> Thanks for any help/pointers.
+>>
+>> First: sorry for the double post -- some transitory problem with our mai=
+l server.
+>>
+>> I found that the lack of expected stamps resulted in errors when buildin=
+g images
+>> with srctree recipes as run time dependencies. Since the do_populate_sys=
+root,
+>> among others, task stamp was not present it was run again. Various error=
+s
+>> could occur depending on the nature of the recipe but I often saw
+>>
+>> * resolve_conffiles: Existing conffile /home/user/work/oe/arago-tmp/root=
+fs/my-image/etc/device_table is different from the conffile in the new pack=
+age.
+>>
+>> The following patch to create the missing stamps is my resolution.
+>> Comments welcome.
+>
+> This looks right to me. =C2=A0When it was switched from exec_task to
+> exec_func to avoid other complications, I guess it was forgotten that
+> exec_task is what runs make_stamp :)
+hmmm seems right.
 
+
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
