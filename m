@@ -1,49 +1,46 @@
-Received: from mail-iw0-f173.google.com ([209.85.214.173])
+Received: from mail-fx0-f42.google.com ([209.85.161.42])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PRNGg-0004RP-BS
+	(envelope-from <martin.jansa@gmail.com>) id 1PRPbx-0006zY-Mb
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Dec 2010 12:05:36 +0100
-Received: by iwn40 with SMTP id 40so6559639iwn.4
+	Sat, 11 Dec 2010 14:35:43 +0100
+Received: by fxm11 with SMTP id 11so4264152fxm.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Dec 2010 03:04:03 -0800 (PST)
+	Sat, 11 Dec 2010 05:34:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=suYBpD5czJd0eWkQU+85zEtLE4e3HIC9HjIG1Xo+SPE=;
-	b=jkMVcBAI9YSNMy28Ma/cT82qxR+i/TyyhCMvNKtGBJe2IPogYcm8e2t6oYvTrV8Dpf
-	mtWOgIksB6sSDQLpsVCe/OYzx6SpNaB2clHmTiRQv3gB2SIMVXrwHN5X0BcP5Z5reHuA
-	pORNCP7Gu8iJQanbHEBzuXxspj/leFJI0BqRs=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=kWkfRdhSNnkcwNAd1C+8/JXU6sAg4YsZGZvtqAjHMY4=;
+	b=SYRGhhw/24FWRbsAkAAZyZoupaFQsSajAGNKuZUlInHjYbYMUzt15tvLncYWXivZfy
+	+FIp1frvSRS70s/BOjZXuW9tFqwZRRLNxaoGF5n7I0/v2rKTkRl8hHmCzc2uZDCR9hh6
+	c+mdO04kFmjoY5B7KHeH8XhzfPchm2LkxRrSc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=U+LHcXZSRP6e8ZTQIl3aV0fyY8P5ZkXwJXIfs8mWhB46WKiGm9qIYQiIfri9FoMxXp
-	w9hJcCS/Cwx1c/utOIwFIsAgaY9anOPiTeLn4AVdLmpgw9Fhjhn/sugAiyYlwBDlXDpC
-	SPMR+KblZIrLwGrHs4ph3qshrfKkNwjPB0tLI=
-Received: by 10.42.167.66 with SMTP id r2mr1324200icy.124.1292065443024;
-	Sat, 11 Dec 2010 03:04:03 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 34sm3669077ibi.14.2010.12.11.03.04.01
+	h=from:to:cc:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	b=d+J44IL6sHdXA3DWf77k4GiF7FgiurUtLYBNuvPKQ+RKujo5qB4JNumSOXdrhkZuIe
+	zighwpxL7QZhy/k9xuO73GxP8aGDv4uglznYRIHYtu0sTmzdHA44XUBdg/zt0Yodvydr
+	BY9u30AwHXr2XWEU/N4pCvDPqTH0lof0O9TD4=
+Received: by 10.223.85.204 with SMTP id p12mr1621488fal.146.1292074445074;
+	Sat, 11 Dec 2010 05:34:05 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n7sm1189914fam.11.2010.12.11.05.34.02
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 11 Dec 2010 03:04:02 -0800 (PST)
-Date: Sat, 11 Dec 2010 03:04:02 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 11 Dec 2010 05:34:03 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101211110402.GC10409@gmail.com>
-References: <AANLkTimi=FMoZrm_Yum8xLkUkwd5+aYXDjguAqHj3mQS@mail.gmail.com>
+Date: Sat, 11 Dec 2010 14:34:01 +0100
+Message-Id: <1292074441-2304-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.3.3
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimi=FMoZrm_Yum8xLkUkwd5+aYXDjguAqHj3mQS@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.214.173
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.42
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gcc QA issue
+Subject: [PATCH] libdrm: remove old not pinned versions, update libdrm.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,29 +54,2428 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Dec 2010 11:05:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 11 Dec 2010 13:35:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On (08/12/10 09:18), Frans Meulenbroeks wrote:
-> We bumped intot he following gcc QA issue (distro angsgtrom, machine
-> mpc8313e-rdb)
-> 
-> ERROR: QA Issue with gcc: non -dev package contains symlink .so: gcc
-> path '/work/ppce300c3-angstrom-linux/gcc-4.3.3-r20.1/packages-split/gcc/usr/lib/gcc/powerpc-angstrom-linux/4.3.3/libgcc_s.so'
-> NOTE: package objc skipped
-> NOTE: package gcc-4.3.3-r20.1: task do_package: Succeeded
-> 
-> Anyone a suggestion?
+* disable radeon for all distributions unless x86 is in MACHINE_FEATURES
 
-Do you still see this after my latest fixes to gcc ?
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes/dri/libdrm-2.4.21/glamo.patch | 1095 ---------------------------------
+ recipes/dri/libdrm-2.4.22/glamo.patch | 1095 ---------------------------------
+ recipes/dri/libdrm.inc                |    7 +-
+ recipes/dri/libdrm_2.3.0.bb           |    6 -
+ recipes/dri/libdrm_2.3.1.bb           |    6 -
+ recipes/dri/libdrm_2.4.11.bb          |   10 -
+ recipes/dri/libdrm_2.4.17.bb          |   12 -
+ recipes/dri/libdrm_2.4.18.bb          |   15 -
+ recipes/dri/libdrm_2.4.21.bb          |   19 -
+ recipes/dri/libdrm_2.4.22.bb          |   25 -
+ recipes/dri/libdrm_2.4.23.bb          |   11 -
+ 11 files changed, 6 insertions(+), 2295 deletions(-)
+ delete mode 100644 recipes/dri/libdrm-2.4.21/glamo.patch
+ delete mode 100644 recipes/dri/libdrm-2.4.22/glamo.patch
+ delete mode 100644 recipes/dri/libdrm_2.3.0.bb
+ delete mode 100644 recipes/dri/libdrm_2.3.1.bb
+ delete mode 100644 recipes/dri/libdrm_2.4.11.bb
+ delete mode 100644 recipes/dri/libdrm_2.4.17.bb
+ delete mode 100644 recipes/dri/libdrm_2.4.18.bb
+ delete mode 100644 recipes/dri/libdrm_2.4.21.bb
+ delete mode 100644 recipes/dri/libdrm_2.4.22.bb
 
-> 
-> Frans
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/recipes/dri/libdrm-2.4.21/glamo.patch b/recipes/dri/libdrm-2.4.21/glamo.patch
+deleted file mode 100644
+index b397ded..0000000
+--- a/recipes/dri/libdrm-2.4.21/glamo.patch
++++ /dev/null
+@@ -1,1095 +0,0 @@
+-diff --git a/Makefile.am b/Makefile.am
+-index 25d1747..f384228 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -41,7 +41,11 @@ if HAVE_RADEON
+- RADEON_SUBDIR = radeon
+- endif
+- 
+--SUBDIRS = . $(LIBKMS_SUBDIR) $(INTEL_SUBDIR) $(NOUVEAU_SUBDIR) $(RADEON_SUBDIR) tests include
+-+if HAVE_GLAMO
+-+GLAMO_SUBDIR = glamo
+-+endif
+-+
+-+SUBDIRS = . $(LIBKMS_SUBDIR) $(INTEL_SUBDIR) $(NOUVEAU_SUBDIR) $(RADEON_SUBDIR) $(GLAMO_SUBDIR) tests include
+- 
+- libdrm_la_LTLIBRARIES = libdrm.la
+- libdrm_ladir = $(libdir)
+-diff --git a/configure.ac b/configure.ac
+-index 62db817..0b2a33e 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -73,6 +73,11 @@ AC_ARG_ENABLE(nouveau-experimental-api,
+- 	      [NOUVEAU=$enableval], [NOUVEAU=no])
+- 
+- 
+-+AC_ARG_ENABLE(glamo-experimental-api,
+-+	      AS_HELP_STRING([--enable-glamo-experimental-api],
+-+	      [Enable support for Glamo's KMS API (default: disabled)]),
+-+	      [GLAMO=$enableval], [GLAMO=no])
+-+
+- dnl ===========================================================================
+- dnl check compiler flags
+- AC_DEFUN([LIBDRM_CC_TRY_FLAG], [
+-@@ -169,6 +174,11 @@ if test "x$NOUVEAU" = xyes; then
+- 	AC_DEFINE(HAVE_NOUVEAU, 1, [Have nouveau (nvidia) support])
+- fi
+- 
+-+AM_CONDITIONAL(HAVE_GLAMO, [test "x$GLAMO" = xyes])
+-+if test "x$GLAMO" = xyes; then
+-+	AC_DEFINE(HAVE_GLAMO, 1, [Have glamo support])
+-+fi
+-+
+- PKG_CHECK_MODULES(CAIRO, cairo, [HAVE_CAIRO=yes], [HAVE_CAIRO=no])
+- if test "x$HAVE_CAIRO" = xyes; then
+- 	AC_DEFINE(HAVE_CAIRO, 1, [Have cairo support])
+-@@ -262,6 +272,8 @@ AC_OUTPUT([
+- 	radeon/libdrm_radeon.pc
+- 	nouveau/Makefile
+- 	nouveau/libdrm_nouveau.pc
+-+	glamo/Makefile
+-+	glamo/libdrm_glamo.pc
+- 	tests/Makefile
+- 	tests/modeprint/Makefile
+- 	tests/modetest/Makefile
+-diff --git a/glamo/Makefile.am b/glamo/Makefile.am
+-new file mode 100644
+-index 0000000..1f17aa3
+---- /dev/null
+-+++ b/glamo/Makefile.am
+-@@ -0,0 +1,52 @@
+-+# Copyright (c) 2009 Thomas Whtie <taw@bitwiz.org.uk>
+-+# Based on libdrm-glamo Copyright © 2008 Jérôme Glisse
+-+#
+-+# Permission is hereby granted, free of charge, to any person obtaining a
+-+# copy of this software and associated documentation files (the "Software"),
+-+# to deal in the Software without restriction, including without limitation
+-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+-+# and/or sell copies of the Software, and to permit persons to whom the
+-+# Software is furnished to do so, subject to the following conditions:
+-+#
+-+# The above copyright notice and this permission notice (including the next
+-+# paragraph) shall be included in all copies or substantial portions of the
+-+# Software.
+-+#
+-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+-+# IN THE SOFTWARE.
+-+#
+-+# Authors:
+-+#    Jérôme Glisse <glisse@freedesktop.org>
+-+#    Thomas White <taw@bitwiz.org.uk>
+-+
+-+AM_CFLAGS = \
+-+	$(WARN_CFLAGS) \
+-+	-I$(top_srcdir) \
+-+	-I$(top_srcdir)/glamo \
+-+	$(PTHREADSTUBS_CFLAGS) \
+-+	-I$(top_srcdir)/include/drm
+-+
+-+libdrm_glamo_la_LTLIBRARIES = libdrm_glamo.la
+-+libdrm_glamo_ladir = $(libdir)
+-+libdrm_glamo_la_LDFLAGS = -version-number 1:0:0 -no-undefined
+-+libdrm_glamo_la_LIBADD = ../libdrm.la @PTHREADSTUBS_LIBS@
+-+
+-+libdrm_glamo_la_SOURCES = \
+-+	glamo_bo_gem.c \
+-+	glamo_track.c
+-+
+-+libdrm_glamoincludedir = ${includedir}/libdrm
+-+libdrm_glamoinclude_HEADERS = \
+-+	glamo_bo.h \
+-+	glamo_bo_gem.h \
+-+	glamo_track.h
+-+
+-+pkgconfigdir = @pkgconfigdir@
+-+pkgconfig_DATA = libdrm_glamo.pc
+-+
+-+EXTRA_DIST = libdrm_glamo.pc.in
+-diff --git a/glamo/glamo_bo.h b/glamo/glamo_bo.h
+-new file mode 100644
+-index 0000000..8ef2a18
+---- /dev/null
+-+++ b/glamo/glamo_bo.h
+-@@ -0,0 +1,183 @@
+-+/*
+-+ * Copyright (c) 2009 Thomas White
+-+ *
+-+ * Heavily based on radeon_bo.h
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ *	Thomas White <taw@bitwiz.org.uk>
+-+ */
+-+#ifndef GLAMO_BO_H
+-+#define GLAMO_BO_H
+-+
+-+#include <stdio.h>
+-+#include <stdint.h>
+-+#include "glamo_track.h"
+-+
+-+/* bo object */
+-+#define GLAMO_BO_FLAGS_MACRO_TILE  1
+-+#define GLAMO_BO_FLAGS_MICRO_TILE  2
+-+
+-+struct glamo_bo_manager;
+-+
+-+struct glamo_bo {
+-+    uint32_t                    alignment;
+-+    uint32_t                    handle;
+-+    uint32_t                    size;
+-+    uint32_t                    domains;
+-+    uint32_t                    flags;
+-+    unsigned                    cref;
+-+#ifdef GLAMO_BO_TRACK
+-+    struct glamo_track		*track;
+-+#endif
+-+    struct glamo_bo_manager	*bom;
+-+    void			*virtual;
+-+    uint32_t			space_accounted;
+-+};
+-+
+-+/* bo functions */
+-+struct glamo_bo_funcs {
+-+    struct glamo_bo *(*bo_open)(struct glamo_bo_manager *bom,
+-+                                 uint32_t handle,
+-+                                 uint32_t size,
+-+                                 uint32_t alignment,
+-+                                 uint32_t domains,
+-+                                 uint32_t flags);
+-+    void (*bo_ref)(struct glamo_bo *bo);
+-+    struct glamo_bo *(*bo_unref)(struct glamo_bo *bo);
+-+    int (*bo_map)(struct glamo_bo *bo, int write);
+-+    int (*bo_unmap)(struct glamo_bo *bo);
+-+    int (*bo_wait)(struct glamo_bo *bo);
+-+};
+-+
+-+struct glamo_bo_manager {
+-+    struct glamo_bo_funcs  *funcs;
+-+    int                     fd;
+-+    struct glamo_tracker   tracker;
+-+};
+-+
+-+static inline void _glamo_bo_debug(struct glamo_bo *bo,
+-+                                    const char *op,
+-+                                    const char *file,
+-+                                    const char *func,
+-+                                    int line)
+-+{
+-+    fprintf(stderr, "%s %p 0x%08X 0x%08X 0x%08X [%s %s %d]\n",
+-+            op, (void *)bo, bo->handle, bo->size, bo->cref, file, func, line);
+-+}
+-+
+-+static inline struct glamo_bo *_glamo_bo_open(struct glamo_bo_manager *bom,
+-+                                                uint32_t handle,
+-+                                                uint32_t size,
+-+                                                uint32_t alignment,
+-+                                                uint32_t domains,
+-+                                                uint32_t flags,
+-+                                                const char *file,
+-+                                                const char *func,
+-+                                                int line)
+-+{
+-+    struct glamo_bo *bo;
+-+
+-+    bo = bom->funcs->bo_open(bom, handle, size, alignment, domains, flags);
+-+#ifdef GLAMO_BO_TRACK
+-+    if (bo) {
+-+        bo->track = glamo_tracker_add_track(&bom->tracker, bo->handle);
+-+        glamo_track_add_event(bo->track, file, func, "open", line);
+-+    }
+-+#endif
+-+    return bo;
+-+}
+-+
+-+static inline void _glamo_bo_ref(struct glamo_bo *bo,
+-+                                  const char *file,
+-+                                  const char *func,
+-+                                  int line)
+-+{
+-+    bo->cref++;
+-+#ifdef GLAMO_BO_TRACK
+-+    glamo_track_add_event(bo->track, file, func, "ref", line);
+-+#endif
+-+    bo->bom->funcs->bo_ref(bo);
+-+}
+-+
+-+static inline struct glamo_bo *_glamo_bo_unref(struct glamo_bo *bo,
+-+                                                 const char *file,
+-+                                                 const char *func,
+-+                                                 int line)
+-+{
+-+    bo->cref--;
+-+#ifdef GLAMO_BO_TRACK
+-+    glamo_track_add_event(bo->track, file, func, "unref", line);
+-+    if (bo->cref <= 0) {
+-+        glamo_tracker_remove_track(&bo->bom->tracker, bo->track);
+-+        bo->track = NULL;
+-+    }
+-+#endif
+-+    return bo->bom->funcs->bo_unref(bo);
+-+}
+-+
+-+static inline int _glamo_bo_map(struct glamo_bo *bo,
+-+                                 int write,
+-+                                 const char *file,
+-+                                 const char *func,
+-+                                 int line)
+-+{
+-+    return bo->bom->funcs->bo_map(bo, write);
+-+}
+-+
+-+static inline int _glamo_bo_unmap(struct glamo_bo *bo,
+-+                                   const char *file,
+-+                                   const char *func,
+-+                                   int line)
+-+{
+-+    return bo->bom->funcs->bo_unmap(bo);
+-+}
+-+
+-+static inline int _glamo_bo_wait(struct glamo_bo *bo,
+-+                                  const char *file,
+-+                                  const char *func,
+-+                                  int line)
+-+{
+-+    return bo->bom->funcs->bo_wait(bo);
+-+}
+-+
+-+#define glamo_bo_open(bom, h, s, a, d, f)\
+-+    _glamo_bo_open(bom, h, s, a, d, f, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_ref(bo)\
+-+    _glamo_bo_ref(bo, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_unref(bo)\
+-+    _glamo_bo_unref(bo, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_map(bo, w)\
+-+    _glamo_bo_map(bo, w, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_unmap(bo)\
+-+    _glamo_bo_unmap(bo, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_debug(bo, opcode)\
+-+    _glamo_bo_debug(bo, opcode, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_wait(bo) \
+-+    _glamo_bo_wait(bo, __FILE__, __func__, __LINE__)
+-+
+-+#endif
+-diff --git a/glamo/glamo_bo_gem.c b/glamo/glamo_bo_gem.c
+-new file mode 100644
+-index 0000000..38a4436
+---- /dev/null
+-+++ b/glamo/glamo_bo_gem.c
+-@@ -0,0 +1,336 @@
+-+/*
+-+ * Copyright © 2009 Thomas White
+-+ *
+-+ * Based on radeon_bo_gem.c, to which the following notice applies:
+-+ *
+-+ * Copyright © 2008 Dave Airlie
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Dave Airlie
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ *
+-+ *
+-+ * Memory mapping functions are based on intel_bufmgr_gem.c, to which the
+-+ * following notice applies:
+-+ *
+-+ * Copyright © 2007 Red Hat Inc.
+-+ * Copyright © 2007 Intel Corporation
+-+ * Copyright 2006 Tungsten Graphics, Inc., Bismarck, ND., USA
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining a
+-+ * copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+-+ * THE COPYRIGHT HOLDERS, AUTHORS AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM,
+-+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+-+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ *
+-+ *
+-+ **************************************************************************/
+-+/*
+-+ * Authors: Thomas Hellström <thomas-at-tungstengraphics-dot-com>
+-+ *          Keith Whitwell <keithw-at-tungstengraphics-dot-com>
+-+ *	    Eric Anholt <eric@anholt.net>
+-+ *	    Dave Airlie <airlied@linux.ie>
+-+ */
+-+
+-+#ifdef HAVE_CONFIG_H
+-+#include "config.h"
+-+#endif
+-+
+-+#include <stdio.h>
+-+#include <stdint.h>
+-+#include <stdlib.h>
+-+#include <string.h>
+-+#include <sys/mman.h>
+-+#include <sys/ioctl.h>
+-+#include <errno.h>
+-+
+-+#include "xf86drm.h"
+-+#include "drm.h"
+-+#include "glamo_drm.h"
+-+#include "glamo_bo.h"
+-+#include "glamo_bo_gem.h"
+-+
+-+struct glamo_bo_gem {
+-+	struct glamo_bo   base;
+-+	uint32_t          name;
+-+	int               map_count;
+-+};
+-+
+-+struct bo_manager_gem {
+-+	struct glamo_bo_manager    base;
+-+};
+-+
+-+static struct glamo_bo *bo_open(struct glamo_bo_manager *bom,
+-+                                 uint32_t handle,
+-+                                 uint32_t size,
+-+                                 uint32_t alignment,
+-+                                 uint32_t domains,
+-+                                 uint32_t flags)
+-+{
+-+	struct glamo_bo_gem *bo;
+-+	int r;
+-+
+-+	bo = (struct glamo_bo_gem*)calloc(1, sizeof(struct glamo_bo_gem));
+-+	if (bo == NULL) {
+-+		return NULL;
+-+	}
+-+
+-+	bo->base.bom = bom;
+-+	bo->base.handle = 0;
+-+	bo->base.size = size;
+-+	bo->base.alignment = alignment;
+-+	bo->base.domains = domains;
+-+	bo->base.flags = flags;
+-+	bo->base.cref = 0;
+-+	bo->map_count = 0;
+-+	bo->base.virtual = NULL;
+-+	if (handle) {
+-+		struct drm_gem_open open_arg;
+-+
+-+		memset(&open_arg, 0, sizeof(open_arg));
+-+		open_arg.name = handle;
+-+		r = ioctl(bom->fd, DRM_IOCTL_GEM_OPEN, &open_arg);
+-+		if (r != 0) {
+-+			free(bo);
+-+			return NULL;
+-+		}
+-+		bo->base.handle = open_arg.handle;
+-+		bo->base.size = open_arg.size;
+-+		bo->name = handle;
+-+	} else {
+-+		struct drm_glamo_gem_create args;
+-+
+-+		args.size = size;
+-+		args.alignment = alignment;
+-+		args.initial_domain = bo->base.domains;
+-+		args.no_backing_store = 0;
+-+		args.handle = 0;
+-+		r = drmCommandWriteRead(bom->fd, DRM_GLAMO_GEM_CREATE,
+-+		                        &args, sizeof(args));
+-+		bo->base.handle = args.handle;
+-+		if (r) {
+-+			fprintf(stderr, "Failed to allocate :\n");
+-+			fprintf(stderr, "   size      : %d bytes\n", size);
+-+			fprintf(stderr, "   alignment : %d bytes\n", alignment);
+-+			free(bo);
+-+			return NULL;
+-+		}
+-+	}
+-+	glamo_bo_ref((struct glamo_bo*)bo);
+-+	return (struct glamo_bo*)bo;
+-+}
+-+
+-+static void bo_ref(struct glamo_bo *bo)
+-+{
+-+}
+-+
+-+static struct glamo_bo *bo_unref(struct glamo_bo *bo)
+-+{
+-+	struct glamo_bo_gem *bo_gem = (struct glamo_bo_gem*)bo;
+-+	struct drm_gem_close args;
+-+
+-+	if (bo == NULL) {
+-+		return NULL;
+-+	}
+-+	if (bo->cref) {
+-+		return bo;
+-+	}
+-+	if (bo_gem->map_count) {
+-+		munmap(bo->virtual, bo->size);
+-+	}
+-+
+-+	/* close object */
+-+	args.handle = bo->handle;
+-+	ioctl(bo->bom->fd, DRM_IOCTL_GEM_CLOSE, &args);
+-+	memset(bo_gem, 0, sizeof(struct glamo_bo_gem));
+-+	free(bo_gem);
+-+	return NULL;
+-+}
+-+
+-+static int bo_map(struct glamo_bo *bo, int write)
+-+{
+-+	struct glamo_bo_gem *bo_gem;
+-+	struct glamo_bo_manager *bufmgr;
+-+	int ret;
+-+
+-+	bo_gem = (struct glamo_bo_gem *)bo;
+-+	bufmgr = (struct glamo_bo_manager*)bo->bom;
+-+
+-+	/* Get a mapping of the buffer if we haven't before. */
+-+	if (bo->virtual == NULL) {
+-+
+-+		struct drm_glamo_gem_mmap mmap_arg;
+-+
+-+		memset(&mmap_arg, 0, sizeof(mmap_arg));
+-+		mmap_arg.handle = bo->handle;
+-+
+-+		/* Get the fake offset back... */
+-+		ret = ioctl(bufmgr->fd, DRM_IOCTL_GLAMO_GEM_MMAP, &mmap_arg);
+-+		if (ret != 0) {
+-+			fprintf(stderr,
+-+			        "%s:%d: Error preparing BO map %d (%d): %s .\n",
+-+			        __FILE__, __LINE__,
+-+			        bo->handle, bo_gem->name,
+-+			        strerror(errno));
+-+			return ret;
+-+		}
+-+		/* and mmap it */
+-+		bo->virtual = mmap(0, bo->size, PROT_READ | PROT_WRITE,
+-+		                       MAP_SHARED, bufmgr->fd,
+-+		                       mmap_arg.offset);
+-+		if (bo->virtual == MAP_FAILED) {
+-+			fprintf(stderr,
+-+			        "%s:%d: Error mapping buffer %d (%d): %s .\n",
+-+			        __FILE__, __LINE__,
+-+			        bo->handle, bo_gem->name,
+-+			        strerror(errno));
+-+			return errno;
+-+		}
+-+	}
+-+	bo_gem->map_count++;
+-+
+-+	return 0;
+-+}
+-+
+-+static int bo_unmap(struct glamo_bo *bo)
+-+{
+-+	struct glamo_bo_gem *bo_gem = (struct glamo_bo_gem*)bo;
+-+
+-+	if ( bo_gem->map_count == 0 ) {
+-+		fprintf(stderr, "Not unmapping %p, because its map count"
+-+		                " is already zero.\n", bo_gem);
+-+		return 0;
+-+	}
+-+
+-+	if (--bo_gem->map_count > 0) {
+-+		return 0;
+-+	}
+-+	munmap(bo->virtual, bo->size);
+-+	bo->virtual = NULL;
+-+	return 0;
+-+}
+-+
+-+static int bo_wait(struct glamo_bo *bo)
+-+{
+-+	struct drm_glamo_gem_wait_rendering args;
+-+	int ret;
+-+
+-+	args.handle = bo->handle;
+-+	args.have_handle = 1;
+-+	do {
+-+		ret = drmCommandWriteRead(bo->bom->fd,
+-+		                          DRM_GLAMO_GEM_WAIT_RENDERING,
+-+		                          &args, sizeof(args));
+-+	} while (ret == -EAGAIN);
+-+	return ret;
+-+}
+-+
+-+static struct glamo_bo_funcs bo_gem_funcs = {
+-+	bo_open,
+-+	bo_ref,
+-+	bo_unref,
+-+	bo_map,
+-+	bo_unmap,
+-+	bo_wait
+-+};
+-+
+-+struct glamo_bo_manager *glamo_bo_manager_gem_ctor(int fd)
+-+{
+-+	struct bo_manager_gem *bomg;
+-+
+-+	bomg = (struct bo_manager_gem*)calloc(1, sizeof(struct bo_manager_gem));
+-+	if (bomg == NULL) return NULL;
+-+
+-+	bomg->base.funcs = &bo_gem_funcs;
+-+	bomg->base.fd = fd;
+-+	return (struct glamo_bo_manager*)bomg;
+-+}
+-+
+-+void glamo_bo_manager_gem_dtor(struct glamo_bo_manager *bom)
+-+{
+-+	struct bo_manager_gem *bomg = (struct bo_manager_gem*)bom;
+-+
+-+	if (bom == NULL) return;
+-+	free(bomg);
+-+}
+-+
+-+uint32_t glamo_gem_get_name(struct glamo_bo *bo)
+-+{
+-+	struct glamo_bo_gem *bo_gem = (struct glamo_bo_gem*)bo;
+-+	return bo_gem->name;
+-+}
+-+
+-+int glamo_gem_name_buffer(struct glamo_bo *bo, uint32_t *name)
+-+{
+-+	struct drm_gem_flink flink;
+-+	int r;
+-+
+-+	if ( !bo ) {
+-+		fprintf(stderr, "No buffer object!\n");
+-+		return -1;
+-+	}
+-+
+-+	flink.handle = bo->handle;
+-+	r = ioctl(bo->bom->fd, DRM_IOCTL_GEM_FLINK, &flink);
+-+	if (r) return r;
+-+
+-+	*name = flink.name;
+-+	return 0;
+-+}
+-+
+-+int glamo_bo_subdata(struct glamo_bo *bo, unsigned long offset,
+-+                     unsigned long size, const void *data)
+-+{
+-+	int ret;
+-+
+-+	if (size == 0 || data == NULL)
+-+		return 0;
+-+
+-+	ret = bo_map(bo, 1);
+-+	if ( ret ) return ret;
+-+
+-+	memcpy((unsigned char *)bo->virtual + offset, data, size);
+-+
+-+	bo_unmap(bo);
+-+
+-+	return 0;
+-+}
+-diff --git a/glamo/glamo_bo_gem.h b/glamo/glamo_bo_gem.h
+-new file mode 100644
+-index 0000000..05b5fb9
+---- /dev/null
+-+++ b/glamo/glamo_bo_gem.h
+-@@ -0,0 +1,43 @@
+-+/*
+-+ * Copyright © 2008 Dave Airlie
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Dave Airlie
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ */
+-+#ifndef GLAMO_BO_GEM_H
+-+#define GLAMO_BO_GEM_H
+-+
+-+#include "glamo_bo.h"
+-+
+-+struct glamo_bo_manager *glamo_bo_manager_gem_ctor(int fd);
+-+void glamo_bo_manager_gem_dtor(struct glamo_bo_manager *bom);
+-+int glamo_gem_name_buffer(struct glamo_bo *bo, uint32_t *name);
+-+uint32_t glamo_gem_get_name(struct glamo_bo *bo);
+-+extern int glamo_bo_subdata(struct glamo_bo *bo, unsigned long offset,
+-+                            unsigned long size, const void *data);
+-+#endif
+-diff --git a/glamo/glamo_track.c b/glamo/glamo_track.c
+-new file mode 100644
+-index 0000000..27ffe41
+---- /dev/null
+-+++ b/glamo/glamo_track.c
+-@@ -0,0 +1,140 @@
+-+/* 
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ * 
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ * 
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ */
+-+#include <stdio.h>
+-+#include <stdlib.h>
+-+#include <string.h>
+-+#include "glamo_track.h"
+-+
+-+void glamo_track_add_event(struct glamo_track *track,
+-+                            const char *file,
+-+                            const char *func,
+-+                            const char *op,
+-+                            unsigned line)
+-+{
+-+    struct glamo_track_event *event;
+-+
+-+    if (track == NULL) {
+-+        return;
+-+    }
+-+    event = (void*)calloc(1,sizeof(struct glamo_track_event));
+-+    if (event == NULL) {
+-+        return;
+-+    }
+-+    event->line = line;
+-+    event->file = strdup(file);
+-+    event->func = strdup(func);
+-+    event->op = strdup(op);
+-+    if (event->file == NULL || event->func == NULL || event->op == NULL) {
+-+        free(event->file);
+-+        free(event->func);
+-+        free(event->op);
+-+        free(event);
+-+        return;
+-+    }
+-+    event->next = track->events;
+-+    track->events = event;
+-+}
+-+
+-+struct glamo_track *glamo_tracker_add_track(struct glamo_tracker *tracker,
+-+                                              unsigned key)
+-+{
+-+    struct glamo_track *track;
+-+
+-+    track = (struct glamo_track*)calloc(1, sizeof(struct glamo_track));
+-+    if (track) {
+-+        track->next = tracker->tracks.next;
+-+        track->prev = &tracker->tracks;
+-+        tracker->tracks.next = track;
+-+        if (track->next) {
+-+            track->next->prev = track;
+-+        }
+-+        track->key = key;
+-+        track->events = NULL;
+-+    }
+-+    return track;
+-+}
+-+
+-+void glamo_tracker_remove_track(struct glamo_tracker *tracker,
+-+                                 struct glamo_track *track)
+-+{
+-+    struct glamo_track_event *event;
+-+    void *tmp;
+-+
+-+    if (track == NULL) {
+-+        return;
+-+    }
+-+    track->prev->next = track->next;
+-+    if (track->next) {
+-+        track->next->prev = track->prev;
+-+    }
+-+    track->next = track->prev = NULL;
+-+    event = track->events;
+-+    while (event) {
+-+        tmp = event;
+-+        free(event->file);
+-+        free(event->func);
+-+        free(event->op);
+-+        event = event->next;
+-+        free(tmp);
+-+    }
+-+    track->events = NULL;
+-+    free(track);
+-+}
+-+
+-+void glamo_tracker_print(struct glamo_tracker *tracker, FILE *file)
+-+{
+-+    struct glamo_track *track;
+-+    struct glamo_track_event *event;
+-+    void *tmp;
+-+
+-+    track = tracker->tracks.next;
+-+    while (track) {
+-+        event = track->events;
+-+        fprintf(file, "[0x%08X] :\n", track->key);
+-+        while (event) {
+-+            tmp = event;
+-+            fprintf(file, "  [0x%08X:%s](%s:%s:%d)\n",
+-+                    track->key, event->op,  event->file,
+-+                    event->func, event->line);
+-+            free(event->file);
+-+            free(event->func);
+-+            free(event->op);
+-+            event->file = NULL;
+-+            event->func = NULL;
+-+            event->op = NULL;
+-+            event = event->next;
+-+            free(tmp);
+-+        }
+-+        track->events = NULL;
+-+        tmp = track;
+-+        track = track->next;
+-+        free(tmp);
+-+    }
+-+}
+-diff --git a/glamo/glamo_track.h b/glamo/glamo_track.h
+-new file mode 100644
+-index 0000000..fedead7
+---- /dev/null
+-+++ b/glamo/glamo_track.h
+-@@ -0,0 +1,64 @@
+-+/*
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ */
+-+#ifndef GLAMO_TRACK_H
+-+#define GLAMO_TRACK_H
+-+
+-+struct glamo_track_event {
+-+    struct glamo_track_event   *next;
+-+    char                        *file;
+-+    char                        *func;
+-+    char                        *op;
+-+    unsigned                    line;
+-+};
+-+
+-+struct glamo_track {
+-+    struct glamo_track         *next;
+-+    struct glamo_track         *prev;
+-+    unsigned                    key;
+-+    struct glamo_track_event   *events;
+-+};
+-+
+-+struct glamo_tracker {
+-+    struct glamo_track         tracks;
+-+};
+-+
+-+void glamo_track_add_event(struct glamo_track *track,
+-+                            const char *file,
+-+                            const char *func,
+-+                            const char *op,
+-+                            unsigned line);
+-+struct glamo_track *glamo_tracker_add_track(struct glamo_tracker *tracker,
+-+                                              unsigned key);
+-+void glamo_tracker_remove_track(struct glamo_tracker *tracker,
+-+                                 struct glamo_track *track);
+-+void glamo_tracker_print(struct glamo_tracker *tracker,
+-+                          FILE *file);
+-+
+-+#endif
+-diff --git a/glamo/libdrm_glamo.pc.in b/glamo/libdrm_glamo.pc.in
+-new file mode 100644
+-index 0000000..d4d8e70
+---- /dev/null
+-+++ b/glamo/libdrm_glamo.pc.in
+-@@ -0,0 +1,10 @@
+-+prefix=@prefix@
+-+exec_prefix=@exec_prefix@
+-+libdir=@libdir@
+-+includedir=@includedir@
+-+
+-+Name: libdrm_glamo
+-+Description: Userspace interface to kernel DRM services for Glamo
+-+Version: 1.0.1
+-+Libs: -L${libdir} -ldrm_glamo
+-+Cflags: -I${includedir} -I${includedir}/libdrm
+-diff --git a/include/drm/Makefile.am b/include/drm/Makefile.am
+-index 43695bd..f3f7edf 100644
+---- a/include/drm/Makefile.am
+-+++ b/include/drm/Makefile.am
+-@@ -35,6 +35,7 @@ klibdrminclude_HEADERS = \
+- 	savage_drm.h \
+- 	sis_drm.h \
+- 	via_drm.h \
+-+	glamo_drm.h \
+- 	mach64_drm.h
+- 
+- 
+-diff --git a/include/drm/glamo_drm.h b/include/drm/glamo_drm.h
+-new file mode 100644
+-index 0000000..7629ebc
+---- /dev/null
+-+++ b/include/drm/glamo_drm.h
+-@@ -0,0 +1,153 @@
+-+/* glamo_drm.h -- Public header for the Glamo driver
+-+ *
+-+ * Copyright 2009 Thomas White
+-+ * Copyright 2000 Precision Insight, Inc., Cedar Park, Texas.
+-+ * Copyright 2000 VA Linux Systems, Inc., Fremont, California.
+-+ * Copyright 2002 Tungsten Graphics, Inc., Cedar Park, Texas.
+-+ * All rights reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining a
+-+ * copy of this software and associated documentation files (the "Software"),
+-+ * to deal in the Software without restriction, including without limitation
+-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+-+ * and/or sell copies of the Software, and to permit persons to whom the
+-+ * Software is furnished to do so, subject to the following conditions:
+-+ *
+-+ * The above copyright notice and this permission notice (including the next
+-+ * paragraph) shall be included in all copies or substantial portions of the
+-+ * Software.
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+-+ * PRECISION INSIGHT AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+-+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+-+ * DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * Authors:
+-+ *    Thomas White <taw@bitwiz.org.uk>
+-+ *    Kevin E. Martin <martin@valinux.com>
+-+ *    Gareth Hughes <gareth@valinux.com>
+-+ *    Keith Whitwell <keith@tungstengraphics.com>
+-+ */
+-+
+-+#ifndef __GLAMO_DRM_H__
+-+#define __GLAMO_DRM_H__
+-+
+-+#include "drm.h"
+-+
+-+#define GLAMO_GEM_DOMAIN_VRAM (0x1)
+-+
+-+/* Glamo specific ioctls */
+-+#define DRM_GLAMO_CMDBUF     0x01
+-+#define DRM_GLAMO_SWAP       0x02
+-+#define DRM_GLAMO_CMDBURST   0x03
+-+
+-+#define DRM_GLAMO_GEM_INFO     0x1c
+-+#define DRM_GLAMO_GEM_CREATE   0x1d
+-+#define DRM_GLAMO_GEM_MMAP     0x1e
+-+#define DRM_GLAMO_GEM_PIN      0x1f
+-+#define DRM_GLAMO_GEM_UNPIN    0x20
+-+#define DRM_GLAMO_GEM_PREAD    0x21
+-+#define DRM_GLAMO_GEM_PWRITE   0x22
+-+#define DRM_GLAMO_GEM_WAIT_RENDERING 0x24
+-+
+-+#define DRM_IOCTL_GLAMO_CMDBUF     DRM_IOW(DRM_COMMAND_BASE + DRM_GLAMO_CMDBUF, drm_glamo_cmd_buffer_t)
+-+#define DRM_IOCTL_GLAMO_SWAP       DRM_IO(DRM_COMMAND_BASE + DRM_GLAMO_SWAP)
+-+#define DRM_IOCTL_GLAMO_CMDBURST     DRM_IOW(DRM_COMMAND_BASE + DRM_GLAMO_CMDBURST, drm_glamo_cmd_burst_t)
+-+
+-+#define DRM_IOCTL_GLAMO_GEM_INFO   DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_INFO, struct drm_glamo_gem_info)
+-+#define DRM_IOCTL_GLAMO_GEM_CREATE DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_CREATE, struct drm_glamo_gem_create)
+-+#define DRM_IOCTL_GLAMO_GEM_MMAP   DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_MMAP, struct drm_glamo_gem_mmap)
+-+#define DRM_IOCTL_GLAMO_GEM_PIN    DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_PIN, struct drm_glamo_gem_pin)
+-+#define DRM_IOCTL_GLAMO_GEM_UNPIN  DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_UNPIN, struct drm_glamo_gem_unpin)
+-+#define DRM_IOCTL_GLAMO_GEM_PREAD  DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_PREAD, struct drm_glamo_gem_pread)
+-+#define DRM_IOCTL_GLAMO_GEM_PWRITE DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_PWRITE, struct drm_glamo_gem_pwrite)
+-+#define DRM_IOCTL_GLAMO_GEM_WAIT_RENDERING DRM_IOW(DRM_COMMAND_BASE + DRM_GLAMO_GEM_WAIT_RENDERING, struct drm_glamo_gem_wait_rendering)
+-+
+-+
+-+/* Simple command submission - a list of 16-bit address-data pairs */
+-+typedef struct drm_glamo_cmd_buffer {
+-+	unsigned int bufsz;	/* Size of buffer, in bytes */
+-+	char *buf;		/* Buffer of stuff to go onto the ring buffer */
+-+	unsigned int *obj_pos;	/* Offsets (in bytes) at which to put objs */
+-+	uint32_t *objs;		/* List of buffer object (handles) to use */
+-+	unsigned int nobjs;	/* Number of objects referenced */
+-+	int nbox;
+-+	struct drm_clip_rect *boxes;
+-+} drm_glamo_cmd_buffer_t;
+-+
+-+
+-+/* Burst command submission - base address and data:
+-+ *  - Data can be 32-bit (more easily)
+-+ *  - Easier for the kernel to validate */
+-+typedef struct drm_glamo_cmd_burst {
+-+	uint16_t base;		/* Base address (command) */
+-+	int bufsz;		/* Size of data, in bytes */
+-+	uint16_t *data;		/* Pointer to data */
+-+	unsigned int *obj_pos;	/* Offsets (in bytes) at which to put objs */
+-+	uint32_t *objs;		/* List of buffer object (handles) to use */
+-+	unsigned int nobjs;	/* Number of objects referenced */
+-+} drm_glamo_cmd_burst_t;
+-+
+-+struct drm_glamo_gem_info {
+-+	uint64_t vram_start;
+-+	uint64_t vram_size;
+-+};
+-+
+-+struct drm_glamo_gem_create {
+-+	uint64_t size;
+-+	uint64_t alignment;
+-+	uint32_t handle;
+-+	uint32_t initial_domain; // to allow VRAM to be created
+-+	uint32_t no_backing_store;
+-+};
+-+
+-+struct drm_glamo_gem_mmap {
+-+	uint32_t handle;	/* Handle goes in... */
+-+	uint64_t offset;	/* ...offset comes out */
+-+};
+-+
+-+struct drm_glamo_gem_wait_rendering {
+-+	uint32_t handle;
+-+	int have_handle;
+-+};
+-+
+-+struct drm_glamo_gem_pin {
+-+	uint32_t handle;
+-+	uint32_t pin_domain;
+-+	uint64_t alignment;
+-+	uint64_t offset;
+-+};
+-+
+-+struct drm_glamo_gem_unpin {
+-+	uint32_t handle;
+-+	uint32_t pad;
+-+};
+-+
+-+struct drm_glamo_gem_pread {
+-+	/** Handle for the object being read. */
+-+	uint32_t handle;
+-+	uint32_t pad;
+-+	/** Offset into the object to read from */
+-+	uint64_t offset;
+-+	/** Length of data to read */
+-+	uint64_t size;
+-+	/** Pointer to write the data into. */
+-+	uint64_t data_ptr;	/* void *, but pointers are not 32/64 compatible */
+-+};
+-+
+-+struct drm_glamo_gem_pwrite {
+-+	/** Handle for the object being written to. */
+-+	uint32_t handle;
+-+	uint32_t pad;
+-+	/** Offset into the object to write to */
+-+	uint64_t offset;
+-+	/** Length of data to write */
+-+	uint64_t size;
+-+	/** Pointer to read the data from. */
+-+	uint64_t data_ptr;	/* void *, but pointers are not 32/64 compatible */
+-+};
+-+
+-+#endif
+diff --git a/recipes/dri/libdrm-2.4.22/glamo.patch b/recipes/dri/libdrm-2.4.22/glamo.patch
+deleted file mode 100644
+index b397ded..0000000
+--- a/recipes/dri/libdrm-2.4.22/glamo.patch
++++ /dev/null
+@@ -1,1095 +0,0 @@
+-diff --git a/Makefile.am b/Makefile.am
+-index 25d1747..f384228 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -41,7 +41,11 @@ if HAVE_RADEON
+- RADEON_SUBDIR = radeon
+- endif
+- 
+--SUBDIRS = . $(LIBKMS_SUBDIR) $(INTEL_SUBDIR) $(NOUVEAU_SUBDIR) $(RADEON_SUBDIR) tests include
+-+if HAVE_GLAMO
+-+GLAMO_SUBDIR = glamo
+-+endif
+-+
+-+SUBDIRS = . $(LIBKMS_SUBDIR) $(INTEL_SUBDIR) $(NOUVEAU_SUBDIR) $(RADEON_SUBDIR) $(GLAMO_SUBDIR) tests include
+- 
+- libdrm_la_LTLIBRARIES = libdrm.la
+- libdrm_ladir = $(libdir)
+-diff --git a/configure.ac b/configure.ac
+-index 62db817..0b2a33e 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -73,6 +73,11 @@ AC_ARG_ENABLE(nouveau-experimental-api,
+- 	      [NOUVEAU=$enableval], [NOUVEAU=no])
+- 
+- 
+-+AC_ARG_ENABLE(glamo-experimental-api,
+-+	      AS_HELP_STRING([--enable-glamo-experimental-api],
+-+	      [Enable support for Glamo's KMS API (default: disabled)]),
+-+	      [GLAMO=$enableval], [GLAMO=no])
+-+
+- dnl ===========================================================================
+- dnl check compiler flags
+- AC_DEFUN([LIBDRM_CC_TRY_FLAG], [
+-@@ -169,6 +174,11 @@ if test "x$NOUVEAU" = xyes; then
+- 	AC_DEFINE(HAVE_NOUVEAU, 1, [Have nouveau (nvidia) support])
+- fi
+- 
+-+AM_CONDITIONAL(HAVE_GLAMO, [test "x$GLAMO" = xyes])
+-+if test "x$GLAMO" = xyes; then
+-+	AC_DEFINE(HAVE_GLAMO, 1, [Have glamo support])
+-+fi
+-+
+- PKG_CHECK_MODULES(CAIRO, cairo, [HAVE_CAIRO=yes], [HAVE_CAIRO=no])
+- if test "x$HAVE_CAIRO" = xyes; then
+- 	AC_DEFINE(HAVE_CAIRO, 1, [Have cairo support])
+-@@ -262,6 +272,8 @@ AC_OUTPUT([
+- 	radeon/libdrm_radeon.pc
+- 	nouveau/Makefile
+- 	nouveau/libdrm_nouveau.pc
+-+	glamo/Makefile
+-+	glamo/libdrm_glamo.pc
+- 	tests/Makefile
+- 	tests/modeprint/Makefile
+- 	tests/modetest/Makefile
+-diff --git a/glamo/Makefile.am b/glamo/Makefile.am
+-new file mode 100644
+-index 0000000..1f17aa3
+---- /dev/null
+-+++ b/glamo/Makefile.am
+-@@ -0,0 +1,52 @@
+-+# Copyright (c) 2009 Thomas Whtie <taw@bitwiz.org.uk>
+-+# Based on libdrm-glamo Copyright © 2008 Jérôme Glisse
+-+#
+-+# Permission is hereby granted, free of charge, to any person obtaining a
+-+# copy of this software and associated documentation files (the "Software"),
+-+# to deal in the Software without restriction, including without limitation
+-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+-+# and/or sell copies of the Software, and to permit persons to whom the
+-+# Software is furnished to do so, subject to the following conditions:
+-+#
+-+# The above copyright notice and this permission notice (including the next
+-+# paragraph) shall be included in all copies or substantial portions of the
+-+# Software.
+-+#
+-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+-+# IN THE SOFTWARE.
+-+#
+-+# Authors:
+-+#    Jérôme Glisse <glisse@freedesktop.org>
+-+#    Thomas White <taw@bitwiz.org.uk>
+-+
+-+AM_CFLAGS = \
+-+	$(WARN_CFLAGS) \
+-+	-I$(top_srcdir) \
+-+	-I$(top_srcdir)/glamo \
+-+	$(PTHREADSTUBS_CFLAGS) \
+-+	-I$(top_srcdir)/include/drm
+-+
+-+libdrm_glamo_la_LTLIBRARIES = libdrm_glamo.la
+-+libdrm_glamo_ladir = $(libdir)
+-+libdrm_glamo_la_LDFLAGS = -version-number 1:0:0 -no-undefined
+-+libdrm_glamo_la_LIBADD = ../libdrm.la @PTHREADSTUBS_LIBS@
+-+
+-+libdrm_glamo_la_SOURCES = \
+-+	glamo_bo_gem.c \
+-+	glamo_track.c
+-+
+-+libdrm_glamoincludedir = ${includedir}/libdrm
+-+libdrm_glamoinclude_HEADERS = \
+-+	glamo_bo.h \
+-+	glamo_bo_gem.h \
+-+	glamo_track.h
+-+
+-+pkgconfigdir = @pkgconfigdir@
+-+pkgconfig_DATA = libdrm_glamo.pc
+-+
+-+EXTRA_DIST = libdrm_glamo.pc.in
+-diff --git a/glamo/glamo_bo.h b/glamo/glamo_bo.h
+-new file mode 100644
+-index 0000000..8ef2a18
+---- /dev/null
+-+++ b/glamo/glamo_bo.h
+-@@ -0,0 +1,183 @@
+-+/*
+-+ * Copyright (c) 2009 Thomas White
+-+ *
+-+ * Heavily based on radeon_bo.h
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ *	Thomas White <taw@bitwiz.org.uk>
+-+ */
+-+#ifndef GLAMO_BO_H
+-+#define GLAMO_BO_H
+-+
+-+#include <stdio.h>
+-+#include <stdint.h>
+-+#include "glamo_track.h"
+-+
+-+/* bo object */
+-+#define GLAMO_BO_FLAGS_MACRO_TILE  1
+-+#define GLAMO_BO_FLAGS_MICRO_TILE  2
+-+
+-+struct glamo_bo_manager;
+-+
+-+struct glamo_bo {
+-+    uint32_t                    alignment;
+-+    uint32_t                    handle;
+-+    uint32_t                    size;
+-+    uint32_t                    domains;
+-+    uint32_t                    flags;
+-+    unsigned                    cref;
+-+#ifdef GLAMO_BO_TRACK
+-+    struct glamo_track		*track;
+-+#endif
+-+    struct glamo_bo_manager	*bom;
+-+    void			*virtual;
+-+    uint32_t			space_accounted;
+-+};
+-+
+-+/* bo functions */
+-+struct glamo_bo_funcs {
+-+    struct glamo_bo *(*bo_open)(struct glamo_bo_manager *bom,
+-+                                 uint32_t handle,
+-+                                 uint32_t size,
+-+                                 uint32_t alignment,
+-+                                 uint32_t domains,
+-+                                 uint32_t flags);
+-+    void (*bo_ref)(struct glamo_bo *bo);
+-+    struct glamo_bo *(*bo_unref)(struct glamo_bo *bo);
+-+    int (*bo_map)(struct glamo_bo *bo, int write);
+-+    int (*bo_unmap)(struct glamo_bo *bo);
+-+    int (*bo_wait)(struct glamo_bo *bo);
+-+};
+-+
+-+struct glamo_bo_manager {
+-+    struct glamo_bo_funcs  *funcs;
+-+    int                     fd;
+-+    struct glamo_tracker   tracker;
+-+};
+-+
+-+static inline void _glamo_bo_debug(struct glamo_bo *bo,
+-+                                    const char *op,
+-+                                    const char *file,
+-+                                    const char *func,
+-+                                    int line)
+-+{
+-+    fprintf(stderr, "%s %p 0x%08X 0x%08X 0x%08X [%s %s %d]\n",
+-+            op, (void *)bo, bo->handle, bo->size, bo->cref, file, func, line);
+-+}
+-+
+-+static inline struct glamo_bo *_glamo_bo_open(struct glamo_bo_manager *bom,
+-+                                                uint32_t handle,
+-+                                                uint32_t size,
+-+                                                uint32_t alignment,
+-+                                                uint32_t domains,
+-+                                                uint32_t flags,
+-+                                                const char *file,
+-+                                                const char *func,
+-+                                                int line)
+-+{
+-+    struct glamo_bo *bo;
+-+
+-+    bo = bom->funcs->bo_open(bom, handle, size, alignment, domains, flags);
+-+#ifdef GLAMO_BO_TRACK
+-+    if (bo) {
+-+        bo->track = glamo_tracker_add_track(&bom->tracker, bo->handle);
+-+        glamo_track_add_event(bo->track, file, func, "open", line);
+-+    }
+-+#endif
+-+    return bo;
+-+}
+-+
+-+static inline void _glamo_bo_ref(struct glamo_bo *bo,
+-+                                  const char *file,
+-+                                  const char *func,
+-+                                  int line)
+-+{
+-+    bo->cref++;
+-+#ifdef GLAMO_BO_TRACK
+-+    glamo_track_add_event(bo->track, file, func, "ref", line);
+-+#endif
+-+    bo->bom->funcs->bo_ref(bo);
+-+}
+-+
+-+static inline struct glamo_bo *_glamo_bo_unref(struct glamo_bo *bo,
+-+                                                 const char *file,
+-+                                                 const char *func,
+-+                                                 int line)
+-+{
+-+    bo->cref--;
+-+#ifdef GLAMO_BO_TRACK
+-+    glamo_track_add_event(bo->track, file, func, "unref", line);
+-+    if (bo->cref <= 0) {
+-+        glamo_tracker_remove_track(&bo->bom->tracker, bo->track);
+-+        bo->track = NULL;
+-+    }
+-+#endif
+-+    return bo->bom->funcs->bo_unref(bo);
+-+}
+-+
+-+static inline int _glamo_bo_map(struct glamo_bo *bo,
+-+                                 int write,
+-+                                 const char *file,
+-+                                 const char *func,
+-+                                 int line)
+-+{
+-+    return bo->bom->funcs->bo_map(bo, write);
+-+}
+-+
+-+static inline int _glamo_bo_unmap(struct glamo_bo *bo,
+-+                                   const char *file,
+-+                                   const char *func,
+-+                                   int line)
+-+{
+-+    return bo->bom->funcs->bo_unmap(bo);
+-+}
+-+
+-+static inline int _glamo_bo_wait(struct glamo_bo *bo,
+-+                                  const char *file,
+-+                                  const char *func,
+-+                                  int line)
+-+{
+-+    return bo->bom->funcs->bo_wait(bo);
+-+}
+-+
+-+#define glamo_bo_open(bom, h, s, a, d, f)\
+-+    _glamo_bo_open(bom, h, s, a, d, f, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_ref(bo)\
+-+    _glamo_bo_ref(bo, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_unref(bo)\
+-+    _glamo_bo_unref(bo, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_map(bo, w)\
+-+    _glamo_bo_map(bo, w, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_unmap(bo)\
+-+    _glamo_bo_unmap(bo, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_debug(bo, opcode)\
+-+    _glamo_bo_debug(bo, opcode, __FILE__, __FUNCTION__, __LINE__)
+-+#define glamo_bo_wait(bo) \
+-+    _glamo_bo_wait(bo, __FILE__, __func__, __LINE__)
+-+
+-+#endif
+-diff --git a/glamo/glamo_bo_gem.c b/glamo/glamo_bo_gem.c
+-new file mode 100644
+-index 0000000..38a4436
+---- /dev/null
+-+++ b/glamo/glamo_bo_gem.c
+-@@ -0,0 +1,336 @@
+-+/*
+-+ * Copyright © 2009 Thomas White
+-+ *
+-+ * Based on radeon_bo_gem.c, to which the following notice applies:
+-+ *
+-+ * Copyright © 2008 Dave Airlie
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Dave Airlie
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ *
+-+ *
+-+ * Memory mapping functions are based on intel_bufmgr_gem.c, to which the
+-+ * following notice applies:
+-+ *
+-+ * Copyright © 2007 Red Hat Inc.
+-+ * Copyright © 2007 Intel Corporation
+-+ * Copyright 2006 Tungsten Graphics, Inc., Bismarck, ND., USA
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining a
+-+ * copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+-+ * THE COPYRIGHT HOLDERS, AUTHORS AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM,
+-+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+-+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ *
+-+ *
+-+ **************************************************************************/
+-+/*
+-+ * Authors: Thomas Hellström <thomas-at-tungstengraphics-dot-com>
+-+ *          Keith Whitwell <keithw-at-tungstengraphics-dot-com>
+-+ *	    Eric Anholt <eric@anholt.net>
+-+ *	    Dave Airlie <airlied@linux.ie>
+-+ */
+-+
+-+#ifdef HAVE_CONFIG_H
+-+#include "config.h"
+-+#endif
+-+
+-+#include <stdio.h>
+-+#include <stdint.h>
+-+#include <stdlib.h>
+-+#include <string.h>
+-+#include <sys/mman.h>
+-+#include <sys/ioctl.h>
+-+#include <errno.h>
+-+
+-+#include "xf86drm.h"
+-+#include "drm.h"
+-+#include "glamo_drm.h"
+-+#include "glamo_bo.h"
+-+#include "glamo_bo_gem.h"
+-+
+-+struct glamo_bo_gem {
+-+	struct glamo_bo   base;
+-+	uint32_t          name;
+-+	int               map_count;
+-+};
+-+
+-+struct bo_manager_gem {
+-+	struct glamo_bo_manager    base;
+-+};
+-+
+-+static struct glamo_bo *bo_open(struct glamo_bo_manager *bom,
+-+                                 uint32_t handle,
+-+                                 uint32_t size,
+-+                                 uint32_t alignment,
+-+                                 uint32_t domains,
+-+                                 uint32_t flags)
+-+{
+-+	struct glamo_bo_gem *bo;
+-+	int r;
+-+
+-+	bo = (struct glamo_bo_gem*)calloc(1, sizeof(struct glamo_bo_gem));
+-+	if (bo == NULL) {
+-+		return NULL;
+-+	}
+-+
+-+	bo->base.bom = bom;
+-+	bo->base.handle = 0;
+-+	bo->base.size = size;
+-+	bo->base.alignment = alignment;
+-+	bo->base.domains = domains;
+-+	bo->base.flags = flags;
+-+	bo->base.cref = 0;
+-+	bo->map_count = 0;
+-+	bo->base.virtual = NULL;
+-+	if (handle) {
+-+		struct drm_gem_open open_arg;
+-+
+-+		memset(&open_arg, 0, sizeof(open_arg));
+-+		open_arg.name = handle;
+-+		r = ioctl(bom->fd, DRM_IOCTL_GEM_OPEN, &open_arg);
+-+		if (r != 0) {
+-+			free(bo);
+-+			return NULL;
+-+		}
+-+		bo->base.handle = open_arg.handle;
+-+		bo->base.size = open_arg.size;
+-+		bo->name = handle;
+-+	} else {
+-+		struct drm_glamo_gem_create args;
+-+
+-+		args.size = size;
+-+		args.alignment = alignment;
+-+		args.initial_domain = bo->base.domains;
+-+		args.no_backing_store = 0;
+-+		args.handle = 0;
+-+		r = drmCommandWriteRead(bom->fd, DRM_GLAMO_GEM_CREATE,
+-+		                        &args, sizeof(args));
+-+		bo->base.handle = args.handle;
+-+		if (r) {
+-+			fprintf(stderr, "Failed to allocate :\n");
+-+			fprintf(stderr, "   size      : %d bytes\n", size);
+-+			fprintf(stderr, "   alignment : %d bytes\n", alignment);
+-+			free(bo);
+-+			return NULL;
+-+		}
+-+	}
+-+	glamo_bo_ref((struct glamo_bo*)bo);
+-+	return (struct glamo_bo*)bo;
+-+}
+-+
+-+static void bo_ref(struct glamo_bo *bo)
+-+{
+-+}
+-+
+-+static struct glamo_bo *bo_unref(struct glamo_bo *bo)
+-+{
+-+	struct glamo_bo_gem *bo_gem = (struct glamo_bo_gem*)bo;
+-+	struct drm_gem_close args;
+-+
+-+	if (bo == NULL) {
+-+		return NULL;
+-+	}
+-+	if (bo->cref) {
+-+		return bo;
+-+	}
+-+	if (bo_gem->map_count) {
+-+		munmap(bo->virtual, bo->size);
+-+	}
+-+
+-+	/* close object */
+-+	args.handle = bo->handle;
+-+	ioctl(bo->bom->fd, DRM_IOCTL_GEM_CLOSE, &args);
+-+	memset(bo_gem, 0, sizeof(struct glamo_bo_gem));
+-+	free(bo_gem);
+-+	return NULL;
+-+}
+-+
+-+static int bo_map(struct glamo_bo *bo, int write)
+-+{
+-+	struct glamo_bo_gem *bo_gem;
+-+	struct glamo_bo_manager *bufmgr;
+-+	int ret;
+-+
+-+	bo_gem = (struct glamo_bo_gem *)bo;
+-+	bufmgr = (struct glamo_bo_manager*)bo->bom;
+-+
+-+	/* Get a mapping of the buffer if we haven't before. */
+-+	if (bo->virtual == NULL) {
+-+
+-+		struct drm_glamo_gem_mmap mmap_arg;
+-+
+-+		memset(&mmap_arg, 0, sizeof(mmap_arg));
+-+		mmap_arg.handle = bo->handle;
+-+
+-+		/* Get the fake offset back... */
+-+		ret = ioctl(bufmgr->fd, DRM_IOCTL_GLAMO_GEM_MMAP, &mmap_arg);
+-+		if (ret != 0) {
+-+			fprintf(stderr,
+-+			        "%s:%d: Error preparing BO map %d (%d): %s .\n",
+-+			        __FILE__, __LINE__,
+-+			        bo->handle, bo_gem->name,
+-+			        strerror(errno));
+-+			return ret;
+-+		}
+-+		/* and mmap it */
+-+		bo->virtual = mmap(0, bo->size, PROT_READ | PROT_WRITE,
+-+		                       MAP_SHARED, bufmgr->fd,
+-+		                       mmap_arg.offset);
+-+		if (bo->virtual == MAP_FAILED) {
+-+			fprintf(stderr,
+-+			        "%s:%d: Error mapping buffer %d (%d): %s .\n",
+-+			        __FILE__, __LINE__,
+-+			        bo->handle, bo_gem->name,
+-+			        strerror(errno));
+-+			return errno;
+-+		}
+-+	}
+-+	bo_gem->map_count++;
+-+
+-+	return 0;
+-+}
+-+
+-+static int bo_unmap(struct glamo_bo *bo)
+-+{
+-+	struct glamo_bo_gem *bo_gem = (struct glamo_bo_gem*)bo;
+-+
+-+	if ( bo_gem->map_count == 0 ) {
+-+		fprintf(stderr, "Not unmapping %p, because its map count"
+-+		                " is already zero.\n", bo_gem);
+-+		return 0;
+-+	}
+-+
+-+	if (--bo_gem->map_count > 0) {
+-+		return 0;
+-+	}
+-+	munmap(bo->virtual, bo->size);
+-+	bo->virtual = NULL;
+-+	return 0;
+-+}
+-+
+-+static int bo_wait(struct glamo_bo *bo)
+-+{
+-+	struct drm_glamo_gem_wait_rendering args;
+-+	int ret;
+-+
+-+	args.handle = bo->handle;
+-+	args.have_handle = 1;
+-+	do {
+-+		ret = drmCommandWriteRead(bo->bom->fd,
+-+		                          DRM_GLAMO_GEM_WAIT_RENDERING,
+-+		                          &args, sizeof(args));
+-+	} while (ret == -EAGAIN);
+-+	return ret;
+-+}
+-+
+-+static struct glamo_bo_funcs bo_gem_funcs = {
+-+	bo_open,
+-+	bo_ref,
+-+	bo_unref,
+-+	bo_map,
+-+	bo_unmap,
+-+	bo_wait
+-+};
+-+
+-+struct glamo_bo_manager *glamo_bo_manager_gem_ctor(int fd)
+-+{
+-+	struct bo_manager_gem *bomg;
+-+
+-+	bomg = (struct bo_manager_gem*)calloc(1, sizeof(struct bo_manager_gem));
+-+	if (bomg == NULL) return NULL;
+-+
+-+	bomg->base.funcs = &bo_gem_funcs;
+-+	bomg->base.fd = fd;
+-+	return (struct glamo_bo_manager*)bomg;
+-+}
+-+
+-+void glamo_bo_manager_gem_dtor(struct glamo_bo_manager *bom)
+-+{
+-+	struct bo_manager_gem *bomg = (struct bo_manager_gem*)bom;
+-+
+-+	if (bom == NULL) return;
+-+	free(bomg);
+-+}
+-+
+-+uint32_t glamo_gem_get_name(struct glamo_bo *bo)
+-+{
+-+	struct glamo_bo_gem *bo_gem = (struct glamo_bo_gem*)bo;
+-+	return bo_gem->name;
+-+}
+-+
+-+int glamo_gem_name_buffer(struct glamo_bo *bo, uint32_t *name)
+-+{
+-+	struct drm_gem_flink flink;
+-+	int r;
+-+
+-+	if ( !bo ) {
+-+		fprintf(stderr, "No buffer object!\n");
+-+		return -1;
+-+	}
+-+
+-+	flink.handle = bo->handle;
+-+	r = ioctl(bo->bom->fd, DRM_IOCTL_GEM_FLINK, &flink);
+-+	if (r) return r;
+-+
+-+	*name = flink.name;
+-+	return 0;
+-+}
+-+
+-+int glamo_bo_subdata(struct glamo_bo *bo, unsigned long offset,
+-+                     unsigned long size, const void *data)
+-+{
+-+	int ret;
+-+
+-+	if (size == 0 || data == NULL)
+-+		return 0;
+-+
+-+	ret = bo_map(bo, 1);
+-+	if ( ret ) return ret;
+-+
+-+	memcpy((unsigned char *)bo->virtual + offset, data, size);
+-+
+-+	bo_unmap(bo);
+-+
+-+	return 0;
+-+}
+-diff --git a/glamo/glamo_bo_gem.h b/glamo/glamo_bo_gem.h
+-new file mode 100644
+-index 0000000..05b5fb9
+---- /dev/null
+-+++ b/glamo/glamo_bo_gem.h
+-@@ -0,0 +1,43 @@
+-+/*
+-+ * Copyright © 2008 Dave Airlie
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Dave Airlie
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ */
+-+#ifndef GLAMO_BO_GEM_H
+-+#define GLAMO_BO_GEM_H
+-+
+-+#include "glamo_bo.h"
+-+
+-+struct glamo_bo_manager *glamo_bo_manager_gem_ctor(int fd);
+-+void glamo_bo_manager_gem_dtor(struct glamo_bo_manager *bom);
+-+int glamo_gem_name_buffer(struct glamo_bo *bo, uint32_t *name);
+-+uint32_t glamo_gem_get_name(struct glamo_bo *bo);
+-+extern int glamo_bo_subdata(struct glamo_bo *bo, unsigned long offset,
+-+                            unsigned long size, const void *data);
+-+#endif
+-diff --git a/glamo/glamo_track.c b/glamo/glamo_track.c
+-new file mode 100644
+-index 0000000..27ffe41
+---- /dev/null
+-+++ b/glamo/glamo_track.c
+-@@ -0,0 +1,140 @@
+-+/* 
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ * 
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ * 
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ */
+-+#include <stdio.h>
+-+#include <stdlib.h>
+-+#include <string.h>
+-+#include "glamo_track.h"
+-+
+-+void glamo_track_add_event(struct glamo_track *track,
+-+                            const char *file,
+-+                            const char *func,
+-+                            const char *op,
+-+                            unsigned line)
+-+{
+-+    struct glamo_track_event *event;
+-+
+-+    if (track == NULL) {
+-+        return;
+-+    }
+-+    event = (void*)calloc(1,sizeof(struct glamo_track_event));
+-+    if (event == NULL) {
+-+        return;
+-+    }
+-+    event->line = line;
+-+    event->file = strdup(file);
+-+    event->func = strdup(func);
+-+    event->op = strdup(op);
+-+    if (event->file == NULL || event->func == NULL || event->op == NULL) {
+-+        free(event->file);
+-+        free(event->func);
+-+        free(event->op);
+-+        free(event);
+-+        return;
+-+    }
+-+    event->next = track->events;
+-+    track->events = event;
+-+}
+-+
+-+struct glamo_track *glamo_tracker_add_track(struct glamo_tracker *tracker,
+-+                                              unsigned key)
+-+{
+-+    struct glamo_track *track;
+-+
+-+    track = (struct glamo_track*)calloc(1, sizeof(struct glamo_track));
+-+    if (track) {
+-+        track->next = tracker->tracks.next;
+-+        track->prev = &tracker->tracks;
+-+        tracker->tracks.next = track;
+-+        if (track->next) {
+-+            track->next->prev = track;
+-+        }
+-+        track->key = key;
+-+        track->events = NULL;
+-+    }
+-+    return track;
+-+}
+-+
+-+void glamo_tracker_remove_track(struct glamo_tracker *tracker,
+-+                                 struct glamo_track *track)
+-+{
+-+    struct glamo_track_event *event;
+-+    void *tmp;
+-+
+-+    if (track == NULL) {
+-+        return;
+-+    }
+-+    track->prev->next = track->next;
+-+    if (track->next) {
+-+        track->next->prev = track->prev;
+-+    }
+-+    track->next = track->prev = NULL;
+-+    event = track->events;
+-+    while (event) {
+-+        tmp = event;
+-+        free(event->file);
+-+        free(event->func);
+-+        free(event->op);
+-+        event = event->next;
+-+        free(tmp);
+-+    }
+-+    track->events = NULL;
+-+    free(track);
+-+}
+-+
+-+void glamo_tracker_print(struct glamo_tracker *tracker, FILE *file)
+-+{
+-+    struct glamo_track *track;
+-+    struct glamo_track_event *event;
+-+    void *tmp;
+-+
+-+    track = tracker->tracks.next;
+-+    while (track) {
+-+        event = track->events;
+-+        fprintf(file, "[0x%08X] :\n", track->key);
+-+        while (event) {
+-+            tmp = event;
+-+            fprintf(file, "  [0x%08X:%s](%s:%s:%d)\n",
+-+                    track->key, event->op,  event->file,
+-+                    event->func, event->line);
+-+            free(event->file);
+-+            free(event->func);
+-+            free(event->op);
+-+            event->file = NULL;
+-+            event->func = NULL;
+-+            event->op = NULL;
+-+            event = event->next;
+-+            free(tmp);
+-+        }
+-+        track->events = NULL;
+-+        tmp = track;
+-+        track = track->next;
+-+        free(tmp);
+-+    }
+-+}
+-diff --git a/glamo/glamo_track.h b/glamo/glamo_track.h
+-new file mode 100644
+-index 0000000..fedead7
+---- /dev/null
+-+++ b/glamo/glamo_track.h
+-@@ -0,0 +1,64 @@
+-+/*
+-+ * Copyright © 2008 Jérôme Glisse
+-+ * All Rights Reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining
+-+ * a copy of this software and associated documentation files (the
+-+ * "Software"), to deal in the Software without restriction, including
+-+ * without limitation the rights to use, copy, modify, merge, publish,
+-+ * distribute, sub license, and/or sell copies of the Software, and to
+-+ * permit persons to whom the Software is furnished to do so, subject to
+-+ * the following conditions:
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-+ * NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS, AUTHORS
+-+ * AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+-+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * The above copyright notice and this permission notice (including the
+-+ * next paragraph) shall be included in all copies or substantial portions
+-+ * of the Software.
+-+ */
+-+/*
+-+ * Authors:
+-+ *      Jérôme Glisse <glisse@freedesktop.org>
+-+ */
+-+#ifndef GLAMO_TRACK_H
+-+#define GLAMO_TRACK_H
+-+
+-+struct glamo_track_event {
+-+    struct glamo_track_event   *next;
+-+    char                        *file;
+-+    char                        *func;
+-+    char                        *op;
+-+    unsigned                    line;
+-+};
+-+
+-+struct glamo_track {
+-+    struct glamo_track         *next;
+-+    struct glamo_track         *prev;
+-+    unsigned                    key;
+-+    struct glamo_track_event   *events;
+-+};
+-+
+-+struct glamo_tracker {
+-+    struct glamo_track         tracks;
+-+};
+-+
+-+void glamo_track_add_event(struct glamo_track *track,
+-+                            const char *file,
+-+                            const char *func,
+-+                            const char *op,
+-+                            unsigned line);
+-+struct glamo_track *glamo_tracker_add_track(struct glamo_tracker *tracker,
+-+                                              unsigned key);
+-+void glamo_tracker_remove_track(struct glamo_tracker *tracker,
+-+                                 struct glamo_track *track);
+-+void glamo_tracker_print(struct glamo_tracker *tracker,
+-+                          FILE *file);
+-+
+-+#endif
+-diff --git a/glamo/libdrm_glamo.pc.in b/glamo/libdrm_glamo.pc.in
+-new file mode 100644
+-index 0000000..d4d8e70
+---- /dev/null
+-+++ b/glamo/libdrm_glamo.pc.in
+-@@ -0,0 +1,10 @@
+-+prefix=@prefix@
+-+exec_prefix=@exec_prefix@
+-+libdir=@libdir@
+-+includedir=@includedir@
+-+
+-+Name: libdrm_glamo
+-+Description: Userspace interface to kernel DRM services for Glamo
+-+Version: 1.0.1
+-+Libs: -L${libdir} -ldrm_glamo
+-+Cflags: -I${includedir} -I${includedir}/libdrm
+-diff --git a/include/drm/Makefile.am b/include/drm/Makefile.am
+-index 43695bd..f3f7edf 100644
+---- a/include/drm/Makefile.am
+-+++ b/include/drm/Makefile.am
+-@@ -35,6 +35,7 @@ klibdrminclude_HEADERS = \
+- 	savage_drm.h \
+- 	sis_drm.h \
+- 	via_drm.h \
+-+	glamo_drm.h \
+- 	mach64_drm.h
+- 
+- 
+-diff --git a/include/drm/glamo_drm.h b/include/drm/glamo_drm.h
+-new file mode 100644
+-index 0000000..7629ebc
+---- /dev/null
+-+++ b/include/drm/glamo_drm.h
+-@@ -0,0 +1,153 @@
+-+/* glamo_drm.h -- Public header for the Glamo driver
+-+ *
+-+ * Copyright 2009 Thomas White
+-+ * Copyright 2000 Precision Insight, Inc., Cedar Park, Texas.
+-+ * Copyright 2000 VA Linux Systems, Inc., Fremont, California.
+-+ * Copyright 2002 Tungsten Graphics, Inc., Cedar Park, Texas.
+-+ * All rights reserved.
+-+ *
+-+ * Permission is hereby granted, free of charge, to any person obtaining a
+-+ * copy of this software and associated documentation files (the "Software"),
+-+ * to deal in the Software without restriction, including without limitation
+-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+-+ * and/or sell copies of the Software, and to permit persons to whom the
+-+ * Software is furnished to do so, subject to the following conditions:
+-+ *
+-+ * The above copyright notice and this permission notice (including the next
+-+ * paragraph) shall be included in all copies or substantial portions of the
+-+ * Software.
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+-+ * PRECISION INSIGHT AND/OR ITS SUPPLIERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+-+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+-+ * DEALINGS IN THE SOFTWARE.
+-+ *
+-+ * Authors:
+-+ *    Thomas White <taw@bitwiz.org.uk>
+-+ *    Kevin E. Martin <martin@valinux.com>
+-+ *    Gareth Hughes <gareth@valinux.com>
+-+ *    Keith Whitwell <keith@tungstengraphics.com>
+-+ */
+-+
+-+#ifndef __GLAMO_DRM_H__
+-+#define __GLAMO_DRM_H__
+-+
+-+#include "drm.h"
+-+
+-+#define GLAMO_GEM_DOMAIN_VRAM (0x1)
+-+
+-+/* Glamo specific ioctls */
+-+#define DRM_GLAMO_CMDBUF     0x01
+-+#define DRM_GLAMO_SWAP       0x02
+-+#define DRM_GLAMO_CMDBURST   0x03
+-+
+-+#define DRM_GLAMO_GEM_INFO     0x1c
+-+#define DRM_GLAMO_GEM_CREATE   0x1d
+-+#define DRM_GLAMO_GEM_MMAP     0x1e
+-+#define DRM_GLAMO_GEM_PIN      0x1f
+-+#define DRM_GLAMO_GEM_UNPIN    0x20
+-+#define DRM_GLAMO_GEM_PREAD    0x21
+-+#define DRM_GLAMO_GEM_PWRITE   0x22
+-+#define DRM_GLAMO_GEM_WAIT_RENDERING 0x24
+-+
+-+#define DRM_IOCTL_GLAMO_CMDBUF     DRM_IOW(DRM_COMMAND_BASE + DRM_GLAMO_CMDBUF, drm_glamo_cmd_buffer_t)
+-+#define DRM_IOCTL_GLAMO_SWAP       DRM_IO(DRM_COMMAND_BASE + DRM_GLAMO_SWAP)
+-+#define DRM_IOCTL_GLAMO_CMDBURST     DRM_IOW(DRM_COMMAND_BASE + DRM_GLAMO_CMDBURST, drm_glamo_cmd_burst_t)
+-+
+-+#define DRM_IOCTL_GLAMO_GEM_INFO   DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_INFO, struct drm_glamo_gem_info)
+-+#define DRM_IOCTL_GLAMO_GEM_CREATE DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_CREATE, struct drm_glamo_gem_create)
+-+#define DRM_IOCTL_GLAMO_GEM_MMAP   DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_MMAP, struct drm_glamo_gem_mmap)
+-+#define DRM_IOCTL_GLAMO_GEM_PIN    DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_PIN, struct drm_glamo_gem_pin)
+-+#define DRM_IOCTL_GLAMO_GEM_UNPIN  DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_UNPIN, struct drm_glamo_gem_unpin)
+-+#define DRM_IOCTL_GLAMO_GEM_PREAD  DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_PREAD, struct drm_glamo_gem_pread)
+-+#define DRM_IOCTL_GLAMO_GEM_PWRITE DRM_IOWR(DRM_COMMAND_BASE + DRM_GLAMO_GEM_PWRITE, struct drm_glamo_gem_pwrite)
+-+#define DRM_IOCTL_GLAMO_GEM_WAIT_RENDERING DRM_IOW(DRM_COMMAND_BASE + DRM_GLAMO_GEM_WAIT_RENDERING, struct drm_glamo_gem_wait_rendering)
+-+
+-+
+-+/* Simple command submission - a list of 16-bit address-data pairs */
+-+typedef struct drm_glamo_cmd_buffer {
+-+	unsigned int bufsz;	/* Size of buffer, in bytes */
+-+	char *buf;		/* Buffer of stuff to go onto the ring buffer */
+-+	unsigned int *obj_pos;	/* Offsets (in bytes) at which to put objs */
+-+	uint32_t *objs;		/* List of buffer object (handles) to use */
+-+	unsigned int nobjs;	/* Number of objects referenced */
+-+	int nbox;
+-+	struct drm_clip_rect *boxes;
+-+} drm_glamo_cmd_buffer_t;
+-+
+-+
+-+/* Burst command submission - base address and data:
+-+ *  - Data can be 32-bit (more easily)
+-+ *  - Easier for the kernel to validate */
+-+typedef struct drm_glamo_cmd_burst {
+-+	uint16_t base;		/* Base address (command) */
+-+	int bufsz;		/* Size of data, in bytes */
+-+	uint16_t *data;		/* Pointer to data */
+-+	unsigned int *obj_pos;	/* Offsets (in bytes) at which to put objs */
+-+	uint32_t *objs;		/* List of buffer object (handles) to use */
+-+	unsigned int nobjs;	/* Number of objects referenced */
+-+} drm_glamo_cmd_burst_t;
+-+
+-+struct drm_glamo_gem_info {
+-+	uint64_t vram_start;
+-+	uint64_t vram_size;
+-+};
+-+
+-+struct drm_glamo_gem_create {
+-+	uint64_t size;
+-+	uint64_t alignment;
+-+	uint32_t handle;
+-+	uint32_t initial_domain; // to allow VRAM to be created
+-+	uint32_t no_backing_store;
+-+};
+-+
+-+struct drm_glamo_gem_mmap {
+-+	uint32_t handle;	/* Handle goes in... */
+-+	uint64_t offset;	/* ...offset comes out */
+-+};
+-+
+-+struct drm_glamo_gem_wait_rendering {
+-+	uint32_t handle;
+-+	int have_handle;
+-+};
+-+
+-+struct drm_glamo_gem_pin {
+-+	uint32_t handle;
+-+	uint32_t pin_domain;
+-+	uint64_t alignment;
+-+	uint64_t offset;
+-+};
+-+
+-+struct drm_glamo_gem_unpin {
+-+	uint32_t handle;
+-+	uint32_t pad;
+-+};
+-+
+-+struct drm_glamo_gem_pread {
+-+	/** Handle for the object being read. */
+-+	uint32_t handle;
+-+	uint32_t pad;
+-+	/** Offset into the object to read from */
+-+	uint64_t offset;
+-+	/** Length of data to read */
+-+	uint64_t size;
+-+	/** Pointer to write the data into. */
+-+	uint64_t data_ptr;	/* void *, but pointers are not 32/64 compatible */
+-+};
+-+
+-+struct drm_glamo_gem_pwrite {
+-+	/** Handle for the object being written to. */
+-+	uint32_t handle;
+-+	uint32_t pad;
+-+	/** Offset into the object to write to */
+-+	uint64_t offset;
+-+	/** Length of data to write */
+-+	uint64_t size;
+-+	/** Pointer to read the data from. */
+-+	uint64_t data_ptr;	/* void *, but pointers are not 32/64 compatible */
+-+};
+-+
+-+#endif
+diff --git a/recipes/dri/libdrm.inc b/recipes/dri/libdrm.inc
+index 9772e5c..b8015ca 100644
+--- a/recipes/dri/libdrm.inc
++++ b/recipes/dri/libdrm.inc
+@@ -2,14 +2,19 @@ SECTION = "x11/base"
+ LICENSE = "MIT"
+ SRC_URI = "http://dri.freedesktop.org/libdrm/libdrm-${PV}.tar.bz2"
+ PROVIDES = "drm"
++DEPENDS = "libpthread-stubs"
+ 
+ INC_PR = "r6"
+ PE = "1"
+ 
+ inherit autotools pkgconfig
+ 
+-PACKAGES =+ "${PN}-drivers ${PN}-kms"
++PACKAGES =+ "${PN}-drivers ${PN}-kms ${@base_contains('MACHINE_FEATURES', 'x86', '${PN}-intel', '',d)}"
+ FILES_${PN}-drivers = "${libdir}/libdrm_*.so.*"
++FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+ FILES_${PN}-kms = "${libdir}/libkms*.so.*"
+ 
++EXTRA_OECONF_append = " ${@base_contains('MACHINE_FEATURES', 'x86', '', '--disable-intel --disable-radeon',d)}"
++EXTRA_OECONF_append_shr = " --enable-glamo-experimental-api"
++
+ LEAD_SONAME = "libdrm.so"
+diff --git a/recipes/dri/libdrm_2.3.0.bb b/recipes/dri/libdrm_2.3.0.bb
+deleted file mode 100644
+index 1d7046b..0000000
+--- a/recipes/dri/libdrm_2.3.0.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require libdrm.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "01a1e1ee0268a2403db42fa630036ab2"
+-SRC_URI[sha256sum] = "f8c711427fea50845811360c92f6350ff3dacb9533741470d54ae5d0a2f6848e"
+diff --git a/recipes/dri/libdrm_2.3.1.bb b/recipes/dri/libdrm_2.3.1.bb
+deleted file mode 100644
+index dc0e91e..0000000
+--- a/recipes/dri/libdrm_2.3.1.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require libdrm.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "620fe7dd02c3236c3e9881a3a238173d"
+-SRC_URI[sha256sum] = "ddfd398383729707846e1f1689e9acb3bc672e4f255a632c8f0d0c55ddf8718c"
+diff --git a/recipes/dri/libdrm_2.4.11.bb b/recipes/dri/libdrm_2.4.11.bb
+deleted file mode 100644
+index e49d6a2..0000000
+--- a/recipes/dri/libdrm_2.4.11.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require libdrm.inc
+-
+-PR = "${INC_PR}.0"
+-
+-PACKAGES =+ "${PN}-intel"
+-
+-FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+-
+-SRC_URI[md5sum] = "e0e66fae165d0b665b61e9516bf33ade"
+-SRC_URI[sha256sum] = "5e07ec4b644f50160900d4281a74dd1cbf1535cfe4ab24e0c28ae5b038836a8c"
+diff --git a/recipes/dri/libdrm_2.4.17.bb b/recipes/dri/libdrm_2.4.17.bb
+deleted file mode 100644
+index 902db02..0000000
+--- a/recipes/dri/libdrm_2.4.17.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require libdrm.inc
+-
+-PR = "${INC_PR}.0"
+-
+-EXTRA_OECONF_append = " ${@base_contains('MACHINE_FEATURES', 'x86', '', '--disable-intel',d)}"
+-
+-PACKAGES =+ "${@base_contains('MACHINE_FEATURES', 'x86', '${PN}-intel', '',d)}"
+-
+-FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+-
+-SRC_URI[md5sum] = "667d81f993f7fd8a1b1b1b830a28a748"
+-SRC_URI[sha256sum] = "b8a4e7c610b0e970546d791c06e28882857a49d34698633a89292d7ae142316a"
+diff --git a/recipes/dri/libdrm_2.4.18.bb b/recipes/dri/libdrm_2.4.18.bb
+deleted file mode 100644
+index 27c82c2..0000000
+--- a/recipes/dri/libdrm_2.4.18.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-require libdrm.inc
+-
+-DEPENDS = "libpthread-stubs"
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "d2b5fbfd37742af7d2169f7d26ce3007"
+-SRC_URI[sha256sum] = "f6c5b44fff5cb602096cc48a1bced426496bc8060463c577a7d86f2e56eeb604"
+-
+-
+-EXTRA_OECONF_append = " ${@base_contains('MACHINE_FEATURES', 'x86', '', '--disable-intel',d)}"
+-
+-PACKAGES =+ "${@base_contains('MACHINE_FEATURES', 'x86', '${PN}-intel', '',d)}"
+-
+-FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+diff --git a/recipes/dri/libdrm_2.4.21.bb b/recipes/dri/libdrm_2.4.21.bb
+deleted file mode 100644
+index 5102933..0000000
+--- a/recipes/dri/libdrm_2.4.21.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-require libdrm.inc
+-
+-DEPENDS = "libpthread-stubs"
+-
+-PR = "${INC_PR}.1"
+-
+-SRC_URI += "file://glamo.patch"
+-
+-SRC_URI[md5sum] = "273ed9dad986e3a931649f3d8762ff74"
+-SRC_URI[sha256sum] = "4e1b612ba3b6b1deae4a8c14946099283e7a00e48a5ab002eaf4312f5a8ba14b"
+-
+-EXTRA_OECONF_append = " ${@base_contains('MACHINE_FEATURES', 'x86', '', '--disable-intel',d)}"
+-EXTRA_OECONF_append_shr = " --enable-glamo-experimental-api --disable-radeon --disable-intel"
+-
+-EXTRA_OECONF_append_angstrom = " --disable-radeon "
+-
+-PACKAGES =+ "${@base_contains('MACHINE_FEATURES', 'x86', '${PN}-intel', '',d)}"
+-
+-FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+diff --git a/recipes/dri/libdrm_2.4.22.bb b/recipes/dri/libdrm_2.4.22.bb
+deleted file mode 100644
+index fb94e4c..0000000
+--- a/recipes/dri/libdrm_2.4.22.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-require libdrm.inc
+-
+-DEPENDS = "libpthread-stubs"
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI += "file://glamo.patch"
+-
+-SRC_URI[md5sum] = "3bdfa33f35d1c902e5115cceb5500c83"
+-SRC_URI[sha256sum] = "0bb0e594e4094d9000d80f38e96e8f640b6364f96cfef5b970cf4481443c6b3d"
+-
+-EXTRA_OECONF_append = " ${@base_contains('MACHINE_FEATURES', 'x86', '', '--disable-intel',d)}"
+-EXTRA_OECONF_append_shr = " --enable-glamo-experimental-api --disable-radeon --disable-intel"
+-
+-EXTRA_OECONF_append_angstrom = " --disable-radeon "
+-
+-PACKAGES =+ "${@base_contains('MACHINE_FEATURES', 'x86', '${PN}-intel', '',d)}"
+-
+-FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+-
+-do_compile_prepend_libc-uclibc() {
+-	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "/_FILE_OFFSET_BITS/d" ${S}/libkms/intel.c', d)}"
+-	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "/_FILE_OFFSET_BITS/d" ${S}/libkms/vmwgfx.c', d)}"
+-	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "/_FILE_OFFSET_BITS/d" ${S}/libkms/nouveau.c', d)}"
+-}
+diff --git a/recipes/dri/libdrm_2.4.23.bb b/recipes/dri/libdrm_2.4.23.bb
+index 5233256..f4feae5 100644
+--- a/recipes/dri/libdrm_2.4.23.bb
++++ b/recipes/dri/libdrm_2.4.23.bb
+@@ -1,7 +1,5 @@
+ require libdrm.inc
+ 
+-DEPENDS = "libpthread-stubs"
+-
+ PR = "${INC_PR}.0"
+ 
+ SRC_URI += "file://glamo.patch"
+@@ -9,15 +7,6 @@ SRC_URI += "file://glamo.patch"
+ SRC_URI[md5sum] = "7577ff36ec364d88fae466d4f7fc5fc6"
+ SRC_URI[sha256sum] = "c0f06d68c3edba7a1ad937f5481a8c287efd4cd368cee66cd9e678b06a911c18"
+ 
+-EXTRA_OECONF_append = " ${@base_contains('MACHINE_FEATURES', 'x86', '', '--disable-intel',d)}"
+-EXTRA_OECONF_append_shr = " --enable-glamo-experimental-api --disable-radeon --disable-intel"
+-
+-EXTRA_OECONF_append_angstrom = " --disable-radeon "
+-
+-PACKAGES =+ "${@base_contains('MACHINE_FEATURES', 'x86', '${PN}-intel', '',d)}"
+-
+-FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+-
+ do_compile_prepend_libc-uclibc() {
+ 	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "/_FILE_OFFSET_BITS/d" ${S}/libkms/intel.c', d)}"
+ 	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "/_FILE_OFFSET_BITS/d" ${S}/libkms/vmwgfx.c', d)}"
+-- 
+1.7.3.3
+
 
 
