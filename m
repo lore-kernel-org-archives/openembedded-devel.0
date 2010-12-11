@@ -1,45 +1,45 @@
-Received: from mail-iw0-f173.google.com ([209.85.214.173])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PRLQM-00077w-6G
+	(envelope-from <raj.khem@gmail.com>) id 1PRLaV-0008Fl-W4
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Dec 2010 10:07:27 +0100
-Received: by iwn40 with SMTP id 40so6469020iwn.4
+	Sat, 11 Dec 2010 10:17:56 +0100
+Received: by pwi8 with SMTP id 8so876262pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Dec 2010 01:05:54 -0800 (PST)
+	Sat, 11 Dec 2010 01:16:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=gvR7G7AIDGoL106V+/FL+A2Mo/QaX9zhW0vgjRgVKX8=;
-	b=VOOVX8yzcb9smOgKYU0y2rnSdAjjHB/S1IqJ5LbDQEjjLEp7ID0Ez+I3R7ZBg4v7jU
-	1GCDZIQ37e70RLJAssR7y+FCkI2iENXJ9o6Dp7RXiDUrjCC0lBxS1iPLUSLeBkNgoxFC
-	tZpGZqqImC9xLz59zkarB+TNx3JkZOeXCn+FU=
+	:in-reply-to:user-agent;
+	bh=rcEGXL4MjBvqL/Dl5Lgr0BNM0URyY3BncLUVFb824Ws=;
+	b=jLGP3a4letVrSvyFibABgUGKW8EvzxXB2G/kSJk5xxEEXjeg+HvQe8UaSHAfGlMroa
+	WFywaHAmmLISksbb6Oqd9paRmnP30Up0K/yoPfAEqG7SBIj2H+SmnfbtGhBF98SZLcb6
+	H7ZQgKOBlYW/Z6FKMfv5HBomInvJJPqfr4KS0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=fG3zxWYvR/xul2OkH8nmAIuTdy+8Y9S9aRx83yEXuQqvuwCexnbzQkJ4zOuy9gsh3Y
-	TjXVICJBY8QexNGgTMvuw5n8Pp1iSn4/YmnNQlwsRAWVgJOVu58XTpnVh61C2yPRPYdf
-	tqqlFi50d3SSxkqS3Cj5ltYDHBGB8h0U0b5SE=
-Received: by 10.42.167.136 with SMTP id s8mr1289933icy.8.1292058352691;
-	Sat, 11 Dec 2010 01:05:52 -0800 (PST)
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=UeLD5aIU9vnk7APDPilQjRT6ZRkVSaEUJRgo7BlXKbI2fORdRC+cOw1XoZQcF2z0YP
+	86PpK+pypXQ7sXd1lfsG89olBgAC4KD5gPZJzNiNuuvUtbYSivOtRfbbteNLtsVWBojm
+	xPHUSGNlAF0oyBt3U7Dj35WNXe1xeltLFVgVs=
+Received: by 10.142.136.6 with SMTP id j6mr1247156wfd.422.1292058981529;
+	Sat, 11 Dec 2010 01:16:21 -0800 (PST)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id 34sm3534846ibi.20.2010.12.11.01.05.51
+	by mx.google.com with ESMTPS id q13sm5314321wfc.5.2010.12.11.01.16.20
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 11 Dec 2010 01:05:51 -0800 (PST)
-Date: Sat, 11 Dec 2010 01:05:51 -0800
+	Sat, 11 Dec 2010 01:16:20 -0800 (PST)
+Date: Sat, 11 Dec 2010 01:16:20 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101211090551.GB8894@gmail.com>
-References: <09D9BE2AC4AA764DABAA8C91E48D819ED3B1D34C@DEMCHP99E35MSX.ww902.siemens.net>
-	<09D9BE2AC4AA764DABAA8C91E48D819ED3B1D5D0@DEMCHP99E35MSX.ww902.siemens.net>
-	<4CF38257.3040406@eukrea.com>
-	<09D9BE2AC4AA764DABAA8C91E48D819ED3B1D61C@DEMCHP99E35MSX.ww902.siemens.net>
+Message-ID: <20101211091620.GC8894@gmail.com>
+References: <1290773874.28296.34.camel@mattotaupa>
+	<1290774034.28296.37.camel@mattotaupa>
+	<1290821557.3795.11.camel@mattotaupa>
+	<1290822011.3795.13.camel@mattotaupa>
+	<icqlp1$p90$2@dough.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <09D9BE2AC4AA764DABAA8C91E48D819ED3B1D61C@DEMCHP99E35MSX.ww902.siemens.net>
+In-Reply-To: <icqlp1$p90$2@dough.gmane.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.214.173
+X-SA-Exim-Connect-IP: 209.85.160.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -47,7 +47,7 @@ X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] qte: fixed do_configure() for powercpc
+Subject: Re: [PATCH 4/4] xbmc: add `zip-native` to `DEPENDS` and increase `PR`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,82 +61,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Dec 2010 09:07:27 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Sat, 11 Dec 2010 09:17:57 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On (29/11/10 12:35), Aeschbacher, Fabrice wrote:
-> Hi,
+On (27/11/10 11:16), Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> Here is my 'git format-patch' again, after having run 'git rebase master'
+> On 27-11-10 02:40, Paul Menzel wrote:
+> 
+> > I am not sure what the best way of submitting this series would be. Probably squashing everything in one patch or bump the `PR` in every patch.
+> 
+> Squashing :)
 
-still I have to apply this patch manually
+squashed and applied
 
 > 
-> With kind regards,
->   Fabrice
+> I'll also talk to Tobias to see if we can pull in an updated version
+> from e.g. trunk.
+> 
+> regards,
+> 
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> 
+> iD8DBQFM8NpgMkyGM64RGpERAt+RAJsHe1WFE0zwA4pdGeEYsJRTdk+GwgCePU+a
+> 5Q3XQ4E7wAMGeiE1hg/RQpg=
+> =+A3b
+> -----END PGP SIGNATURE-----
 > 
 > 
-> Signed-off-by: Aeschbacher <fabrice.aeschbacher@siemens.com>
-> ---
->  recipes/qte/qte-common_2.3.10.inc |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/qte/qte-common_2.3.10.inc b/recipes/qte/qte-common_2.3.10.inc
-> index 18811c7..2eed76d 100644
-> --- a/recipes/qte/qte-common_2.3.10.inc
-> +++ b/recipes/qte/qte-common_2.3.10.inc
-> @@ -109,7 +109,7 @@ export SYSCONF_LFLAGS = "${LDFLAGS} -lts"
->  export SYSCONF_MOC = "${STAGING_BINDIR_NATIVE}/moc"
->  export SYSCONF_UIC = "${STAGING_BINDIR_NATIVE}/uic"
->  
-> -# generate uclibc and eabi configurations
-> +# generate uclibc, eabi and powerpc configurations
->  do_configure() {
->         for f in ${S}/configs/linux-*-g++-shared; do
->                 sed -e 's,-linux-,-linux-uclibc-,g' < $f \
-> @@ -119,6 +119,7 @@ do_configure() {
->                 sed -e 's,-linux-,-linux-uclibceabi-,g' < $f \
->                         > `dirname $f`/`basename $f | sed -e 's,linux-,linux-uclibceabi-,'`
->         done
-> +       sed -e 's/arm/powerpc/'  ${S}/configs/linux-arm-g++-shared > ${S}/configs/linux-powerpc-g++-shared
->         echo yes | ./configure ${EXTRA_OECONF} || die "Configuring qte failed. EXTRA_OECONF was ${EXTRA_OECONF}"
->  }
->  
-> -- 
-> 1.5.6.5
-> 
-> 
-> 
-> > -----Ursprüngliche Nachricht-----
-> > Von: openembedded-devel-bounces@lists.openembedded.org 
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] Im 
-> > Auftrag von Eric Bénard
-> > Gesendet: Montag, 29. November 2010 11:37
-> > An: openembedded-devel@lists.openembedded.org
-> > Betreff: Re: [oe] [PATCH] qte: fixed do_configure() for powercpc
-> > 
-> > Hi,
-> > 
-> > On 29/11/2010 11:19, Aeschbacher, Fabrice wrote:
-> > > Is this patch likely to be accepted and commited soon in 
-> > branch release-2010.12, or should I overlay?
-> > >
-> > the patch doesn't apply can you please rebase it against master ?
-> > 
-> > Applying: qte: fixed do_configure() for powercpc
-> > error: patch failed: recipes/qte/qte-common_2.3.10.inc:109
-> > error: recipes/qte/qte-common_2.3.10.inc: patch does not apply
-> > Patch failed at 0001 qte: fixed do_configure() for powercpc
-> > 
-> > Eric
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
