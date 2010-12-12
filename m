@@ -1,43 +1,29 @@
-Received: from mail-ey0-f170.google.com ([209.85.215.170])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PRnUN-0007WK-3e
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Dec 2010 16:05:27 +0100
-Received: by eyf5 with SMTP id 5so3011863eyf.29
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Dec 2010 07:03:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=vG0zX2ooK3rHL/ix2iCymS2JDSTTvKP9bOOjLHO/oh4=;
-	b=vclhRrP2qqRo8MQmJMz0TPlsrpEDPNYp+DD3Xq84l0rUYtvxoIKy5M6YlZfZso1k+e
-	I/d5M3+6I1YDyi7blzDczDo7fUF6cPHpPaynJ1kfdXZRi43mN/nKXfNVQEQkhpXnJWdb
-	MbSfw6Y+ijj2gwBgMBdS18OLrC4/u8YL3Fnn4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=nioGBE3L8VVfYLu751oRjcjRlvW27ih4MBNE+rJvaLG99olOpUyzpcfBAi8B2IXgff
-	ss/BbYll/rKDEKX+Q5tPh1SVMn/lzkvCZQUU+0Tt1OSiZe/W+CCJUedf4D1V5mC7ci7P
-	uUaxqSe71gU1U8l+aDDpOTZGIM1+TD5NOCHUo=
-Received: by 10.213.19.1 with SMTP id y1mr3036971eba.55.1292166234620;
-	Sun, 12 Dec 2010 07:03:54 -0800 (PST)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id x54sm4253645eeh.23.2010.12.12.07.03.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 12 Dec 2010 07:03:53 -0800 (PST)
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PRoGn-0008RL-NU for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Dec 2010 16:55:30 +0100
+Received: from f053045090.adsl.alicedsl.de ([78.53.45.90]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PRoFJ-0005Ry-FA for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Dec 2010 15:53:57 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Dec 2010 16:03:49 +0100
-Message-Id: <1292166229-23112-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.215.170
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Sun, 12 Dec 2010 16:53:56 +0100
+Message-ID: <1292169236.13905.40.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] rm_work.bbclass: allow a shell var to override rm_work
+Subject: OT: cross compiling: `?=` or `+=` for `INCLUDES`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,65 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Dec 2010 15:05:27 -0000
+X-List-Received-Date: Sun, 12 Dec 2010 15:55:30 -0000
+X-Groupsio-MsgNum: 27101
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-jrL/HkWgWbEZx/6N+Hzz"
 
-Sometimes one is building with rm_work, but for a specific build you want to
-keep the work even if the build is successful.
-One way to achieve this is to comment the INHERIT += "rm_work" from your
-local.conf file, but this means that all recipes need to be reparsed which takes some time.
+--=-jrL/HkWgWbEZx/6N+Hzz
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This patch introduces a variable KEEP_WORK
-If this variable is set the work will not be removed.
-Intended use is
-KEEP_WORK=1 bitbake yourrecipe.bb
-Default behaviour is kept the same (in case KEEP_WORK is not set)
-
-Note that in order for this to work KEEP_WORK needs to be added to the env var BB_ENV_EXTRAWHITE
-e.g. export BB_ENV_EXTRAWHITE="KEEP_WORK"
-
-We still might want to improve the test so it only keeps the work if KEEP_WORK is > 0
-(or do not execute the task at all if KEEP_WORK is not set).
-Also we might want to add KEEP_WORK to the whitelist of vars that are always ok
-
-Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- classes/rm_work.bbclass |   21 ++++++++++++---------
- 1 files changed, 12 insertions(+), 9 deletions(-)
-
-diff --git a/classes/rm_work.bbclass b/classes/rm_work.bbclass
-index e6f3aa0..cab74cc 100644
---- a/classes/rm_work.bbclass
-+++ b/classes/rm_work.bbclass
-@@ -14,15 +14,18 @@ RMWORK_ORIG_TASK := "${BB_DEFAULT_TASK}"
- BB_DEFAULT_TASK = "rm_work_all"
- 
- do_rm_work () {
--    cd ${WORKDIR}
--    for dir in *
--    do
--        if [ `basename ${dir}` = "temp" ]; then
--            echo "Not removing temp"
--        else 
--            echo "Removing $dir" ; rm -rf $dir
--        fi
--    done
-+    if [ ! ${KEEP_WORK} ]
-+    then
-+        cd ${WORKDIR}
-+        for dir in *
-+        do
-+            if [ `basename ${dir}` = "temp" ]; then
-+                echo "Not removing temp"
-+            else 
-+                echo "Removing $dir" ; rm -rf $dir
-+            fi
-+        done
-+    fi
- }
- addtask rm_work after do_${RMWORK_ORIG_TASK}
- 
--- 
-1.6.4.2
+Dear OE folks,
 
 
+what is the best practice for Makefiles with `INCLUDES`? On the VDR list
+it was requested to use `+=3D` instead of `?=3D`. [1]
 
+        However, in the Makefile changes:
+        -INCLUDES =3D -I/usr/include/freetype2
+        +INCLUDES ?=3D -I/usr/include/freetype2
+       =20
+        Shouldn't that be +=3D instead of ?=3D.
+       =20
+        In my case, my IDE sets INCLUDES with some custom stuff. Therefore =
+the
+        Makefile does not touch INCLUDES any more and I get an error.
+
+Is it common when changing `INCLUDES` that one has to take care about
+this by oneself, i. e. by adding `-I/usr/include/freetype2` to
+`INCLUDES`? Or is there a better way?
+
+
+Thanks,
+
+Paul
+
+
+[1] http://www.linuxtv.org/pipermail/vdr/2010-November/023953.html
+[2] http://www.linuxtv.org/pipermail/vdr/2010-December/024019.html
+
+--=-jrL/HkWgWbEZx/6N+Hzz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0E8BMACgkQPX1aK2wOHVjQJACfdY+lLMsQXWafW7B2T/Zv2MSm
+YGoAn3DoiEdcWi7S5Rdcu/OeSEFnROmx
+=xMlZ
+-----END PGP SIGNATURE-----
+
+--=-jrL/HkWgWbEZx/6N+Hzz--
