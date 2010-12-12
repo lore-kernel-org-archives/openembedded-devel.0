@@ -1,47 +1,41 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-iw0-f169.google.com ([209.85.214.169])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1PRakr-0000mx-Q8
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PRkj5-0004gT-Sb
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Dec 2010 02:29:38 +0100
-Received: by wwi17 with SMTP id 17so4766492wwi.24
+	Sun, 12 Dec 2010 13:08:28 +0100
+Received: by iwn40 with SMTP id 40so1751646iwn.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Dec 2010 17:28:04 -0800 (PST)
+	Sun, 12 Dec 2010 04:06:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=vRhvH6N0CGhrwjB9bpOr95pNPqWnCLCyKXlwe5Ag0Ks=;
-	b=tfslI0yzo/xD9xVJ+MePd7N99kYSqzJi8IoCfrugXnNcRyY78QTfv6uBMTg6FZnYzA
-	GOVA0wgVEAaaI/smBXM78e3s9s+dpauUp3aGebyJ7NyNSQLSbHtDkTyHDjuU3j7oEC4z
-	fFcEN+lGZCHJJXBGCVFwT26Ah9HwuGOMCFnrY=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=e9ngkGFaXXN0IFhPQuSQR0/DoqqfcQCIabIjwK7R1DA=;
+	b=Al3ZsqRyLwVO2HxAZbnVjGl4lZsGqsNNOy3tnDWiu8WYASO2mnvON8GkpRGOh41zG3
+	bS8p4xga+fH02yvjR7uLvcQM44V38fJSYZC7NN1TXHzF9WYei5QhVSPgstyUhD7fF73c
+	V9nJPoUnKNPDHIVABHZeM0TDlsO2GglIhENAE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=uiAsp94MrtjC3Ii0TZQsNA1UW9PniFbRUHDFSJSrwUb5k77ldk3nIglCb1/OiXS3BQ
-	rjPWSGBCo2WJShpTsiADKaXrM77tuvnT0iWnbQztiUT7uZdj+i3lYHL0WW7yjdxvUOvm
-	UmZObp4PcfGVbNy/7Z6286FmrGixgFMJglu9E=
-Received: by 10.216.170.80 with SMTP id o58mr2879610wel.12.1292117284195; Sat,
-	11 Dec 2010 17:28:04 -0800 (PST)
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=mNqEo4gLd9o+B5xauxVbb4YXY3PAgR3ji0KDxBB/dfm4+zUgNDRiaxiA4X7vtHDVNk
+	IB1zZmEO15e3A08g3dD6od3YAA4xwiibmGkLHJu8O3YDMqOhz2j36pxIuOEU7JhBGw2Z
+	fLVrpfXgBY+l1noPbJEol8jAYLnE+gfw+mvg0=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Sat, 11 Dec 2010 17:27:44 -0800 (PST)
-In-Reply-To: <A24693684029E5489D1D202277BE89448587464B@dlee02.ent.ti.com>
-References: <A24693684029E5489D1D202277BE894484FB9740@dlee02.ent.ti.com>
-	<A24693684029E5489D1D202277BE89448587464B@dlee02.ent.ti.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sat, 11 Dec 2010 18:27:44 -0700
-X-Google-Sender-Auth: 8QFpZ-JltG7nz4cHAxhJ83eq_FE
-Message-ID: <AANLkTimJUw+qY=+Wt46FSeqxsV78NrhmcBHD6ez2JUPH@mail.gmail.com>
+Received: by 10.231.182.13 with SMTP id ca13mr1070392ibb.57.1292155613352;
+	Sun, 12 Dec 2010 04:06:53 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Sun, 12 Dec 2010 04:06:53 -0800 (PST)
+Date: Sun, 12 Dec 2010 13:06:53 +0100
+Message-ID: <AANLkTi=20woN1TEygXwHwgoOm3_OPp+GLU6JMNpAq3eV@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.169
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: srctree and stamps
+Subject: js compilation oddity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,42 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Dec 2010 01:29:38 -0000
+X-List-Received-Date: Sun, 12 Dec 2010 12:08:28 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 10, 2010 at 7:17 AM, Ambrose, Martin <martin@ti.com> wrote:
-> On Fri, Nov 19, 2010 at 20:01:28, Ambrose, Martin wrote:
->
->> I find that using the latest srctree the stamps aren't updated in the same fashion
->> as regular recipes. In the example below I build the srctree recipe (mypackage) and
->> then build an image depending on same. Even though the package is built just prior
->> the image build still processes several steps which seem redundant.
->>
->> I see some special handling of stamps in srctree.bbclass and wonder if this
->> is expected/desired behavior.
->>
->> Thanks for any help/pointers.
->
-> First: sorry for the double post -- some transitory problem with our mail server.
->
-> I found that the lack of expected stamps resulted in errors when building images
-> with srctree recipes as run time dependencies. Since the do_populate_sysroot,
-> among others, task stamp was not present it was run again. Various errors
-> could occur depending on the nature of the recipe but I often saw
->
-> * resolve_conffiles: Existing conffile /home/user/work/oe/arago-tmp/rootfs/my-image/etc/device_table is different from the conffile in the new package.
->
-> The following patch to create the missing stamps is my resolution.
-> Comments welcome.
+When compiling js (for beagleboard/minimal) I got this:
 
-Applied it in principle, slightly altered to follow the same logic for
-stamp creation that bitbake's exec_task does, just to be safe.  Thanks
-much.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+| k_cos.c: In function =EF=BF=BD=EF=BF=BD=EF=BF=BD__kernel_cos=EF=BF=BD=EF=
+=BF=BD=EF=BF=BD:
+| k_cos.c:125:21: warning: =EF=BF=BD=EF=BF=BD=EF=BF=BDqx=EF=BF=BD=EF=BF=BD=
+=EF=BF=BD may be used uninitialized in this function
+| Assembler messages:
+| Fatal error: can't create Linux_All_DBG.OBJ/k_cos.o: No such file or dire=
+ctory
+| make[1]: *** [Linux_All_DBG.OBJ/k_cos.o] Error 1
+
+Full log at:
+http://tinderbox.openembedded.net/public/logs/task/13169490.txt
+
+bitbake -cclean js; bitbake js
+resulted in a proper build; so apparently this is not reproducible.
+
+Anyone an idea ?
+
+Frans
 
 
