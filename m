@@ -1,25 +1,31 @@
-Received: from ausc60ps301.us.dell.com ([143.166.148.206])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ryan_d_phillips@dell.com>) id 1PSBzK-0002rX-N6
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Dec 2010 18:15:04 +0100
-X-Loopcount0: from 10.210.138.66
-Message-ID: <4D065431.6080304@dell.com>
-Date: Mon, 13 Dec 2010 11:13:21 -0600
-From: Ryan D Phillips <ryan_d_phillips@dell.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PSDOb-0000Pr-8d for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Dec 2010 19:45:13 +0100
+Received: from f053042178.adsl.alicedsl.de ([78.53.42.178]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PSDN5-0007Wv-Sn for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Dec 2010 18:43:40 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 143.166.148.206
-X-SA-Exim-Mail-From: ryan_d_phillips@dell.com
+In-Reply-To: <1292246420-5969-1-git-send-email-m-watkins@ti.com>
+References: <1292246420-5969-1-git-send-email-m-watkins@ti.com>
+Date: Mon, 13 Dec 2010 19:43:39 +0100
+Message-ID: <1292265819.4146.43.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] eglibc: use HTTP for svn checkout
+Subject: Re: [PATCH 4/4] ti-pru-sw-examples: fix package run-time dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,98 +39,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2010 17:15:04 -0000
-X-Groupsio-MsgNum: 27126
-Content-Type: multipart/mixed; boundary="------------090409010604050707080008"
+X-List-Received-Date: Mon, 13 Dec 2010 18:45:14 -0000
+X-Groupsio-MsgNum: 27127
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-yVaVYZSwWOy27jXD1XYW"
 
---------------090409010604050707080008
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+--=-yVaVYZSwWOy27jXD1XYW
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-  SVN over HTTP is a more reliable transport for developers behind 
-restrictive
-proxies.
+Am Montag, den 13.12.2010, 07:20 -0600 schrieb Melissa Watkins:
+> * This package depends on the ti-pru-sw-edma-driver and
+>   kernel-module-uio-pru modules at run-tim.  Added these packages
 
-Regards,
-Ryan
+tim*e*
 
---------------090409010604050707080008
-Content-Type: text/plain;
- name="0001-eglibc-Use-HTTP-for-svn-checkout.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="0001-eglibc-Use-HTTP-for-svn-checkout.patch"
+>   to the RDEPENDS.
+> * Bump PR
+> * Update SRC_REV
 
-From c0a5ad76e64d961735b5c07326d86107ef98f6a1 Mon Sep 17 00:00:00 2001
-From: Ryan D Phillips <ryan_d_phillips@dell.com>
-Date: Mon, 13 Dec 2010 10:00:27 -0600
-Subject: [PATCH] eglibc: Use HTTP for svn checkout
+SRCREV
 
-SVN over HTTP is a more reliable transport for developers behind restrictive
-proxies.
+> * Update COMPATIBLE_MACHINE
 
-Signed-off-by: Ryan D Phillips <ryan_d_phillips@dell.com>
----
- recipes/eglibc/eglibc_2.10.bb |    2 +-
- recipes/eglibc/eglibc_2.11.bb |    2 +-
- recipes/eglibc/eglibc_2.12.bb |    2 +-
- recipes/eglibc/eglibc_2.9.bb  |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+In all your four patches you update `SRCREV` and `COMPATIBLE_MACHINE`.
+Could you please factor that out into separate patches. (At least next
+time.)
 
-diff --git a/recipes/eglibc/eglibc_2.10.bb b/recipes/eglibc/eglibc_2.10.bb
-index 1eab7eb..e873bea 100644
---- a/recipes/eglibc/eglibc_2.10.bb
-+++ b/recipes/eglibc/eglibc_2.10.bb
-@@ -7,7 +7,7 @@ PR = "${INC_PR}.10"
- PR_append = "+svnr${SRCPV}"
- SRCREV="10152"
- EGLIBC_BRANCH="eglibc-2_10"
--SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-+SRC_URI = "svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
-            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
-            file://armv4t-interworking.patch \
-            file://IO-acquire-lock-fix.patch \
-diff --git a/recipes/eglibc/eglibc_2.11.bb b/recipes/eglibc/eglibc_2.11.bb
-index b249f29..4a6f25d 100644
---- a/recipes/eglibc/eglibc_2.11.bb
-+++ b/recipes/eglibc/eglibc_2.11.bb
-@@ -8,7 +8,7 @@ PR = "${INC_PR}.8"
- PR_append = "+svnr${SRCPV}"
- SRCREV="12231"
- EGLIBC_BRANCH="eglibc-2_11"
--SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-+SRC_URI = "svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
-            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
-            file://IO-acquire-lock-fix.patch \
-            file://shorten-build-commands.patch \
-diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.bb
-index 1285568..214da69 100644
---- a/recipes/eglibc/eglibc_2.12.bb
-+++ b/recipes/eglibc/eglibc_2.12.bb
-@@ -8,7 +8,7 @@ PR = "${INC_PR}.7"
- PR_append = "+svnr${SRCPV}"
- SRCREV="12230"
- EGLIBC_BRANCH="eglibc-2_12"
--SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-+SRC_URI = "svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
-            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
-            file://IO-acquire-lock-fix.patch \
-            file://shorten-build-commands.patch \
-diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
-index c06345e..b096469 100644
---- a/recipes/eglibc/eglibc_2.9.bb
-+++ b/recipes/eglibc/eglibc_2.9.bb
-@@ -7,7 +7,7 @@ PR = "${INC_PR}.10"
- PR_append = "+svnr${SRCPV}"
- SRCREV="10153"
- EGLIBC_BRANCH="eglibc-2_9"
--SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-+SRC_URI = "svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
-            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
-            file://armv4t-interworking.patch \
-            file://IO-acquire-lock-fix.patch \
--- 
-1.7.2.3
+I do not know anything about this program, but why is
+`COMPATIBLE_MACHINE` changed? Was it incorrectly set from the beginning
+or did something change upstream.
+
+> Signed-off-by: Melissa Watkins <m-watkins@ti.com>
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+>
+> ---
+>  recipes/ti/ti-pru-sw-examples_1.00.00.bb |    9 +++++----
+>  1 files changed, 5 insertions(+), 4 deletions(-)
+>  mode change 100755 =3D> 100644 recipes/ti/ti-pru-sw-examples_1.00.00.bb
+>=20
+> diff --git a/recipes/ti/ti-pru-sw-examples_1.00.00.bb b/recipes/ti/ti-pru=
+-sw-examples_1.00.00.bb
+> old mode 100755
+> new mode 100644
+> index a9239f8..02c3376
+> --- a/recipes/ti/ti-pru-sw-examples_1.00.00.bb
+> +++ b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
+> @@ -1,14 +1,15 @@
+>  DESCRIPTION =3D "PRU sw example applications"
+>  HOMEPAGE =3D "https://gforge.ti.com/gf/project/pru_sw/"
+>  LICENSE =3D "BSD"
+> -DEPENDS =3D "ti-pru-sw-app-loader ti-pru-sw-edma-library"
+> -PR =3D "r0+svnr${SRCPV}"
+> +DEPENDS +=3D "ti-pru-sw-app-loader ti-pru-sw-edma-library"
+> +RDEPENDS +=3D "ti-pru-sw-edma-driver kernel-module-uio-pru"
+> +PR =3D "r1+svnr${SRCPV}"
+> =20
+> -COMPATIBLE_MACHINE =3D "omapl138|am180x-evm"
+> +COMPATIBLE_MACHINE =3D "omapl138"
+> =20
+>  SRC_URI =3D "svn://gforge.ti.com/svn/pru_sw/;module=3Dtrunk;proto=3Dhttp=
+s;user=3Danonymous;pswd=3D''"
+> =20
+> -SRCREV =3D "18"
+> +SRCREV =3D "20"
+>  S =3D "${WORKDIR}/trunk"
+> =20
+>  do_compile () {
 
 
---------------090409010604050707080008--
+Thanks,
+
+Paul
+
+--=-yVaVYZSwWOy27jXD1XYW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0GaVsACgkQPX1aK2wOHVieaQCfdOgO609sY796CjPp6m/paOTI
+W9YAoI0LemgDECfKG1KhjhS2qLa2iI1O
+=3T0t
+-----END PGP SIGNATURE-----
+
+--=-yVaVYZSwWOy27jXD1XYW--
