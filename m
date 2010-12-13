@@ -1,38 +1,38 @@
-Received: from zmta01.irigo.dk ([193.200.44.52])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eha@doredevelopment.dk>) id 1PS4Pn-0006XZ-SO
+Received: from 29.mail-out.ovh.net ([87.98.216.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1PS4av-0006mW-5A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Dec 2010 10:09:52 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by zmta01.irigo.dk (Postfix) with ESMTP id 96CEE142C678F
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 10:08:16 +0100 (CET)
-X-Virus-Scanned: amavisd-new at zmta01.irigo.dk
-Received: from zmta01.irigo.dk ([127.0.0.1])
-	by localhost (zmta01.irigo.dk [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 02d612ChSBzv
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 10:08:12 +0100 (CET)
-Received: from [192.168.18.32] (unknown [77.233.226.4])
-	by zmta01.irigo.dk (Postfix) with ESMTP id 202D8142C678E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 10:08:12 +0100 (CET)
-From: Esben Haabendal <eha@doredevelopment.dk>
+	Mon, 13 Dec 2010 10:21:23 +0100
+Received: (qmail 32318 invoked by uid 503); 13 Dec 2010 09:35:07 -0000
+Received: from b9.ovh.net (HELO mail645.ha.ovh.net) (213.186.33.59)
+	by 29.mail-out.ovh.net with SMTP; 13 Dec 2010 09:35:07 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Dec 2010 11:24:02 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 13 Dec 2010 11:24:01 +0200
+Message-ID: <4D05E531.9050909@eukrea.com>
+Date: Mon, 13 Dec 2010 10:19:45 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Organization: =?ISO-8859-1?Q?Dor=E9Development?= ApS
-Date: Mon, 13 Dec 2010 10:08:11 +0100
-Message-ID: <1292231291.3072.39.camel@eha>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 193.200.44.52
-X-SA-Exim-Mail-From: eha@doredevelopment.dk
+References: <1292228116-6248-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1292228116-6248-1-git-send-email-Martin.Jansa@gmail.com>
+X-Ovh-Tracer-Id: 16587038903341002057
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 87.98.216.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Really package based staging
+Subject: Re: [PATCH] qemu-0.13.0: add D_P -1 for now, some people have segfault with it where 0.12.5 worked ok
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,70 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2010 09:09:52 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 13 Dec 2010 09:21:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi
-
-As part of some work we have been doing here at Dor=C3=A9Development sinc=
-e
-spring 2010, I would like to share with the OpenEmbedded community my
-idea on how build dependencies could/should be handled.
-
-I hope that some will take the time to consider the underlying
-concepts and think of where it might be lead to.
-
-The basic idea is:
-
-For each recipe being build (ie. each ${WORKDIR}), a complete stage
-directory is being setup completely from scratch, built entirely from
-"normal" packages.  A typical stage directory will thus contain a mix
-of native packages, cross packages and machine/target packages (the
-sysroot part of this staging), unpacked to a defined directory layout.
-
-For recipe developers, this means that ${DEPENDS} must be specified in
-the form of the packages needed, and not the recipes needed.  You
-cannot depend on a recipe, only the packages it provides.  This is
-obviously fundamentally different to how ${DEPENDS} is specified in
-existing OpenEmbedded recipes.
-
-This way we don't have to have a lot of special handling of staging
-and build dependencies.  It is mostly "business as usual" as we know
-it when building fx. a target filesystem. KISS.
-
-With this per-recipe staging, there are no more race conditions
-related to shared staging/sysroot.
-
-There is no need to care about packaging for both build and run-time
-usage, reducing both the amount of code needed to handle this, and the
-diskspace consumed in tmp/.
-
-The concept is fully working, with code available at
-http://www.gitorious.org/oe-lite
-
-A lot of existing OpenEmbedded features are not supported by OE-lite,
-as the focus has been exclusively on building "deeply-embedded" Linux
-system images for industrial use.  But the concept above is not the
-root to any of these omissions.
-
-Also, if you dig into the OE-lite code, you will find other
-differentiators in OE-lite, but they are not directly related to the
-subject of this mail.
-
-I am fully aware that it will require significant effort to extend
-this concept to OpenEmbedded as a whole, but I strongly believe that
-it would be worth the effort in the long run.  Also, I don't see a way
-to do this in "microsteps", as it will require a specific point in
-time where the metadata should be changed over to this new way of
-defining build dependencies. Alternatively, something like OE-lite
-that is significantly smaller in scope than OpenEmbedded will at least
-be here.
-
-So what do you think?
-
-Best regards,
-Esben Haabendal
+On 13/12/2010 09:15, Martin Jansa wrote:
+> * I've seen it on one host while building emacs-x11
+> * locale generation: http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-December/027723.html
+>
+> Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
+Acked-by: Eric Bénard <eric@eukrea.com>
+> ---
+>   recipes/qemu/qemu_0.13.0.bb |    1 +
+>   1 files changed, 1 insertions(+), 0 deletions(-)
+>
+> diff --git a/recipes/qemu/qemu_0.13.0.bb b/recipes/qemu/qemu_0.13.0.bb
+> index 9ecfaa9..29ef11d 100644
+> --- a/recipes/qemu/qemu_0.13.0.bb
+> +++ b/recipes/qemu/qemu_0.13.0.bb
+> @@ -1,6 +1,7 @@
+>   LICENSE = "GPL"
+>   DEPENDS = "zlib ncurses gnutls"
+>   PR = "r2"
+> +DEFAULT_PREFERENCE = "-1"
+>   SRC_URI = "\
+>       http://download.savannah.gnu.org/releases/qemu/qemu-${PV}.tar.gz \
+>       file://leftover.patch \
 
 
 
