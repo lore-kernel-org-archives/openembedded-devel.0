@@ -1,45 +1,44 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PS5eb-0002Uc-O2
+	(envelope-from <obi@opendreambox.org>) id 1PS7km-00057k-8V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Dec 2010 11:29:15 +0100
-Received: by wwi17 with SMTP id 17so5719615wwi.24
+	Mon, 13 Dec 2010 13:43:45 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 05F11314B9EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 02:27:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=tTtlgGtD9S1jHpM80Gnnyf+RnZpdDcHfYqhd7xZQ6fc=;
-	b=fVvoNAjNWTZfJtju7ae2anLuvjXQaMkzq79h0bLcDxpTRJHp6y3WoEIO3rWP2nEPGJ
-	we0Ta3ow/jX72AqQqNdSr/C+q/gvvBzcZMQqDGUdQr7hELu0ESCepmblphZ8Qk44YYzN
-	iTccgCKrqlqAXAW9WC0gvSJNFU20h8UFt5AS4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=UXzQJ5H1+qHBIejGpZ1b9svWbCUgOWU7rxhuMajtn/V+xuz8iGEZf5N7ISM9Upuhh1
-	roFBs4n5nv9LakyUzgufzQt5wqJrI4ozC3Ke6sYyN+uGOsi4AFYPZ/m4DINmOZePOtXF
-	PgIggvYn3q7XW7fiup60mn7uYGGTnhlyQ0g/A=
+	Mon, 13 Dec 2010 13:42:11 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id r1GMkht4jD72
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Dec 2010 13:42:04 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 187E2314B5DC
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Dec 2010 13:42:04 +0100 (CET)
+Message-ID: <4D06149B.6020201@opendreambox.org>
+Date: Mon, 13 Dec 2010 13:42:03 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.227.58.73 with SMTP id f9mr983703wbh.171.1292236058678; Mon,
-	13 Dec 2010 02:27:38 -0800 (PST)
-Received: by 10.227.20.15 with HTTP; Mon, 13 Dec 2010 02:27:38 -0800 (PST)
-In-Reply-To: <1291914227-25068-8-git-send-email-obi@opendreambox.org>
-References: <1291914227-25068-1-git-send-email-obi@opendreambox.org>
-	<1291914227-25068-8-git-send-email-obi@opendreambox.org>
-Date: Mon, 13 Dec 2010 11:27:38 +0100
-Message-ID: <AANLkTind9YHSDAj9Q0nxzghiXWMSSZdF24OM5iPMO_Am@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+References: <1291813088-23444-1-git-send-email-obi@opendreambox.org>	<idoklh$pb4$2@dough.gmane.org>
+	<4CFFDE13.5050900@opendreambox.org>
+In-Reply-To: <4CFFDE13.5050900@opendreambox.org>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.2 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 8/8] gst-ffmpeg: remove unpinned versions
+Subject: Re: [PATCH 1/4] conf/distro: remove unused	variable	CVS_TARBALL_STASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,32 +52,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2010 10:29:15 -0000
+X-List-Received-Date: Mon, 13 Dec 2010 12:43:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 9, 2010 at 6:03 PM, Andreas Oberritter <obi@opendreambox.org> w=
-rote:
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
-> =A0.../gst-ffmpeg-0.10.4/configure-hack.diff =A0 =A0 =A0 =A0 =A0| =A0 10 =
-------
-> =A0.../gst-ffmpeg-0.10.6/configure-hack.diff =A0 =A0 =A0 =A0 =A0| =A0 10 =
-------
-> =A0.../gst-ffmpeg-0.10.7/configure-hack.diff =A0 =A0 =A0 =A0 =A0| =A0 12 =
--------
-> =A0recipes/gstreamer/gst-ffmpeg_0.10.10.bb =A0 =A0 =A0 =A0 =A0 =A0| =A0 3=
-0 -----------------
-> =A0recipes/gstreamer/gst-ffmpeg_0.10.4.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 3=
-4 -------------------
-> =A0recipes/gstreamer/gst-ffmpeg_0.10.6.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 3=
-5 --------------------
-> =A0recipes/gstreamer/gst-ffmpeg_0.10.7.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 3=
-5 --------------------
-> =A0recipes/gstreamer/gst-ffmpeg_0.10.8.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 3=
-1 -----------------
-> =A08 files changed, 0 insertions(+), 197 deletions(-)
+Ping.
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+I think we should at least remove this variable from local.conf.sample
+and from the documentation, because bitbake >= 1.10 does not support it
+(patches 2 and 3).
+
+http://patches.openembedded.org/patch/15/
+http://patches.openembedded.org/patch/17/
+
+On 12/08/2010 08:35 PM, Andreas Oberritter wrote:
+> On 12/08/2010 08:01 PM, Koen Kooi wrote:
+>> And it isn't used in bitbake either?
+> 
+> BitBake master and 1.10 don't use it. Now that you've asked, I checked
+> older versions and saw that 1.8 still uses the variable.
+> 
+> Reasons for creating the patches were a) BitBake ignoring my
+> CVS_TARBALL_STASH variable and b) the existence of PREMIRRORS and
+> MIRRORS, which provide more flexible functionality.
+> 
+> What's your opinion to solve this inconsistency between BitBake versions?
+> 
+> Regards,
+> Andreas
+> 
+>> On 08-12-10 13:58, Andreas Oberritter wrote:
+>>> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+>>> ---
+>>>  conf/distro/angstrom-2008.1.conf |    5 -----
+>>>  conf/distro/include/oplinux.inc  |    4 ----
+>>>  conf/distro/include/slugos.inc   |    1 -
+>>>  conf/distro/kaeilos.conf         |    6 ------
+>>>  conf/distro/shr.conf             |    2 --
+>>>  5 files changed, 0 insertions(+), 18 deletions(-)
+>>
+>>> diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+>>> index ec03276..30ec35b 100644
+>>> --- a/conf/distro/angstrom-2008.1.conf
+>>> +++ b/conf/distro/angstrom-2008.1.conf
+>>> @@ -50,11 +50,6 @@ FEED_BASEPATH = "feeds/unstable/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
+>>>  # Uncomment this to fetch packaged-staging packages from the central angstrom server
+>>>  #PSTAGE_MIRROR = "${ANGSTROM_URI}/${FEED_BASEPATH}packaged-staging"
+>>
+>>> -#The angstrom-mirrors.bbclass should have everything, but we can use this as a fallback
+>>> -CVS_TARBALL_STASH ?= "\
+>>> -		     http://www.angstrom-distribution.org/unstable/sources/ \
+>>> -		    "
+>>> -
+>>
+>>>  #Make sure we use 2.6 on machines with a 2.4/2.6 selector
+>>>  KERNEL = "kernel26"
+>>> diff --git a/conf/distro/include/oplinux.inc b/conf/distro/include/oplinux.inc
+>>> index 36eca58..6e6bddb 100644
+>>> --- a/conf/distro/include/oplinux.inc
+>>> +++ b/conf/distro/include/oplinux.inc
+>>> @@ -28,10 +28,6 @@ MAINTAINER = "Digital OPSiS Developers Team <oplinux-developers@digital-opsis.co
+>>>  # Packaging and output format
+>>>  IMAGE_FSTYPES = "tar.gz jffs2 ext2.gz cramfs squashfs squashfs-lzma cpio.gz"
+>>
+>>> -# Specifies a location to search for pre-generated tarballs when fetching
+>>> -# a cvs:// URI. Outcomment this, if you always want to pull directly from CVS.
+>>> -#CVS_TARBALL_STASH = "http://www.digital-opsis.com/oplinux/sources/"
+>>> -
+>>>  PREMIRRORS = "(ftp|http)://.*/.*/ http://source.digital-opsis.com/"
+>>
+>>>  #
+>>> diff --git a/conf/distro/include/slugos.inc b/conf/distro/include/slugos.inc
+>>> index c2a380d..07dfd65 100644
+>>> --- a/conf/distro/include/slugos.inc
+>>> +++ b/conf/distro/include/slugos.inc
+>>> @@ -109,7 +109,6 @@ DISTRO_EXTRA_DEPENDS ?= ""
+>>>  DISTRO_EXTRA_RDEPENDS ?= ""
+>>>  DISTRO_EXTRA_RRECOMMENDS ?= ""
+>>
+>>> -CVS_TARBALL_STASH = "http://sources.nslu2-linux.org/sources/"
+>>>  INHERIT += "nslu2-mirrors"
+>>
+>>>  #FIXME: HACK: REMOVE THIS
+>>> diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
+>>> index 815d40f..84ea4e7 100644
+>>> --- a/conf/distro/kaeilos.conf
+>>> +++ b/conf/distro/kaeilos.conf
+>>> @@ -48,12 +48,6 @@ EXTRA_IMAGECMD_ext2 = "-i 4096"
+>>>  FEED_BASEPATH = "feeds/unstable/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
+>>
+>>
+>>> -#The angstrom-mirrors.bbclass should have everything, but we can use this as a fallback
+>>> -CVS_TARBALL_STASH ?= "\
+>>> -		     http://www.angstrom-distribution.org/unstable/sources/ \
+>>> -		    "
+>>> -
+>>> -
+>>>  #Make sure we use 2.6 on machines with a 2.4/2.6 selector
+>>>  KERNEL = "kernel26"
+>>>  MACHINE_KERNEL_VERSION = "2.6"
+>>> diff --git a/conf/distro/shr.conf b/conf/distro/shr.conf
+>>> index 0258231..bf615f8 100644
+>>> --- a/conf/distro/shr.conf
+>>> +++ b/conf/distro/shr.conf
+>>> @@ -79,8 +79,6 @@ ANGSTROM_BLACKLIST_pn-linux-ml403-mvista-2.6.x = "strange kernel, spank maintain
+>>>  ANGSTROM_BLACKLIST_pn-linux-davinci = "strange kernel, spank maintainer"
+>>
+>>
+>>> -CVS_TARBALL_STASH += "http://build.shr-project.org/sources/"
+>>> -
+>>>  #The shr-mirrors.bbclass repleaces this
+>>>  #PREMIRRORS = "(ftp|https?)$://.*/.* http://build.shr-project.org/sources/"
+>>>  INHERIT += "shr-mirrors" 
+>>
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
