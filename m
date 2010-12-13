@@ -1,38 +1,45 @@
-Received: from 29.mail-out.ovh.net ([87.98.216.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1PS4av-0006mW-5A
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martin.jansa@gmail.com>) id 1PS5cS-00025x-01
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Dec 2010 10:21:23 +0100
-Received: (qmail 32318 invoked by uid 503); 13 Dec 2010 09:35:07 -0000
-Received: from b9.ovh.net (HELO mail645.ha.ovh.net) (213.186.33.59)
-	by 29.mail-out.ovh.net with SMTP; 13 Dec 2010 09:35:07 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Dec 2010 11:24:02 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 Dec 2010 11:24:01 +0200
-Message-ID: <4D05E531.9050909@eukrea.com>
-Date: Mon, 13 Dec 2010 10:19:45 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Mon, 13 Dec 2010 11:27:00 +0100
+Received: by wwi17 with SMTP id 17so5717721wwi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Dec 2010 02:25:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=8eG2eud485LQ48fegYI2gsuA8yzpwvdSAkAUonRyoN4=;
+	b=JB23U0h2aKEG9+2UK49qGJ6gz4UqxluU9bOglpPSM7mJh9sLD5lypZ/5KDBWHWkpzw
+	SHiMF4DGue40ZPIIY4KFxPTPGp65OFzcKMeO4vytgcDWnW2pkMCt5sCjsueiLF2IZQuT
+	EAVb+aD4A3cs0NyCNcbmTTTwWCcyd/rUNgRlw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=DHa4o86I7vgRFCRBQvn0VuAxea5p6aMC3ppoMx1OPw+ZWKf8Tb8LqanUz7Qy9a0v+b
+	lz5q4ob+xwxtTbl/tVBJHASM397gFs/LHts9ZouUOb6depBSI13lZ18ysuhIhHNLfKKA
+	RrMvJG6CFRUp2KDIcYeh80fVh44YH2orv4yH4=
 MIME-Version: 1.0
+Received: by 10.227.135.13 with SMTP id l13mr1521654wbt.84.1292235924458; Mon,
+	13 Dec 2010 02:25:24 -0800 (PST)
+Received: by 10.227.20.15 with HTTP; Mon, 13 Dec 2010 02:25:24 -0800 (PST)
+In-Reply-To: <1291914227-25068-4-git-send-email-obi@opendreambox.org>
+References: <1291914227-25068-1-git-send-email-obi@opendreambox.org>
+	<1291914227-25068-4-git-send-email-obi@opendreambox.org>
+Date: Mon, 13 Dec 2010 11:25:24 +0100
+Message-ID: <AANLkTimDYOC3SwV1TpJATQ9h6F8f+Apw58oEwuYtVH8i@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1292228116-6248-1-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1292228116-6248-1-git-send-email-Martin.Jansa@gmail.com>
-X-Ovh-Tracer-Id: 16587038903341002057
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 87.98.216.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] qemu-0.13.0: add D_P -1 for now, some people have segfault with it where 0.12.5 worked ok
+Subject: Re: [PATCH 4/8] gst-plugins-good: remove unpinned versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2010 09:21:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 13 Dec 2010 10:27:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 13/12/2010 09:15, Martin Jansa wrote:
-> * I've seen it on one host while building emacs-x11
-> * locale generation: http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-December/027723.html
->
-> Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
-Acked-by: Eric Bénard <eric@eukrea.com>
+On Thu, Dec 9, 2010 at 6:03 PM, Andreas Oberritter <obi@opendreambox.org> w=
+rote:
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 > ---
->   recipes/qemu/qemu_0.13.0.bb |    1 +
->   1 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/qemu/qemu_0.13.0.bb b/recipes/qemu/qemu_0.13.0.bb
-> index 9ecfaa9..29ef11d 100644
-> --- a/recipes/qemu/qemu_0.13.0.bb
-> +++ b/recipes/qemu/qemu_0.13.0.bb
-> @@ -1,6 +1,7 @@
->   LICENSE = "GPL"
->   DEPENDS = "zlib ncurses gnutls"
->   PR = "r2"
-> +DEFAULT_PREFERENCE = "-1"
->   SRC_URI = "\
->       http://download.savannah.gnu.org/releases/qemu/qemu-${PV}.tar.gz \
->       file://leftover.patch \
+> =A0.../gstreamer/gst-plugins-good/flvdemux-ecma.diff =A0| =A0 26 --------=
+------------
+> =A0recipes/gstreamer/gst-plugins-good_0.10.13.bb =A0 =A0 =A0| =A0 14 ----=
+------
+> =A0recipes/gstreamer/gst-plugins-good_0.10.14.bb =A0 =A0 =A0| =A0 14 ----=
+------
+> =A0recipes/gstreamer/gst-plugins-good_0.10.17.bb =A0 =A0 =A0| =A0 18 ----=
+---------
+> =A0recipes/gstreamer/gst-plugins-good_0.10.21.bb =A0 =A0 =A0| =A0 16 ----=
+--------
+> =A0recipes/gstreamer/gst-plugins-good_0.10.23.bb =A0 =A0 =A0| =A0 15 ----=
+-------
+> =A0recipes/gstreamer/gst-plugins-good_0.10.25.bb =A0 =A0 =A0| =A0 15 ----=
+-------
+> =A07 files changed, 0 insertions(+), 118 deletions(-)
 
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
 
