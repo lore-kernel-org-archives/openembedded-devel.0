@@ -1,35 +1,34 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PS7km-00057k-8V
+	(envelope-from <obi@opendreambox.org>) id 1PS7lR-00059n-Mt
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Dec 2010 13:43:45 +0100
+	Mon, 13 Dec 2010 13:44:26 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 05F11314B9EF
+	by mail.multimedia-labs.de (Postfix) with ESMTP id CAC9A314B5DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 13:42:11 +0100 (CET)
+	Mon, 13 Dec 2010 13:42:52 +0100 (CET)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id r1GMkht4jD72
+	port 10024) with LMTP id 0vpynpv-uOcL
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 13:42:04 +0100 (CET)
+	Mon, 13 Dec 2010 13:42:46 +0100 (CET)
 Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
 	[109.90.189.193])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 187E2314B5DC
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 649B8314B9EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 13:42:04 +0100 (CET)
-Message-ID: <4D06149B.6020201@opendreambox.org>
-Date: Mon, 13 Dec 2010 13:42:03 +0100
+	Mon, 13 Dec 2010 13:42:46 +0100 (CET)
+Message-ID: <4D0614C6.5060105@opendreambox.org>
+Date: Mon, 13 Dec 2010 13:42:46 +0100
 From: Andreas Oberritter <obi@opendreambox.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1291813088-23444-1-git-send-email-obi@opendreambox.org>	<idoklh$pb4$2@dough.gmane.org>
-	<4CFFDE13.5050900@opendreambox.org>
-In-Reply-To: <4CFFDE13.5050900@opendreambox.org>
+References: <1291813231-24536-1-git-send-email-obi@opendreambox.org>
+In-Reply-To: <1291813231-24536-1-git-send-email-obi@opendreambox.org>
 X-SA-Exim-Connect-IP: 82.149.226.172
 X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -38,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/4] conf/distro: remove unused	variable	CVS_TARBALL_STASH
+Subject: Re: [PATCH resend] package.bbclass: call PACKAGESTRIPFUNCS before populate_packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,130 +51,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2010 12:43:45 -0000
+X-List-Received-Date: Mon, 13 Dec 2010 12:44:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Ping.
+Ping
 
-I think we should at least remove this variable from local.conf.sample
-and from the documentation, because bitbake >= 1.10 does not support it
-(patches 2 and 3).
-
-http://patches.openembedded.org/patch/15/
-http://patches.openembedded.org/patch/17/
-
-On 12/08/2010 08:35 PM, Andreas Oberritter wrote:
-> On 12/08/2010 08:01 PM, Koen Kooi wrote:
->> And it isn't used in bitbake either?
+On 12/08/2010 02:00 PM, Andreas Oberritter wrote:
+>   Introduce run_strip_funcs() to call the functions in
+>   PACKAGESTRIPFUNCS and place it before populate_packages().
 > 
-> BitBake master and 1.10 don't use it. Now that you've asked, I checked
-> older versions and saw that 1.8 still uses the variable.
+>   This allows users of do_split_packages() to package the .debug
+>   directories, which get created by do_runstrip().
 > 
-> Reasons for creating the patches were a) BitBake ignoring my
-> CVS_TARBALL_STASH variable and b) the existence of PREMIRRORS and
-> MIRRORS, which provide more flexible functionality.
+>   do_split_packages() is usually prepended to populate_packages().
 > 
-> What's your opinion to solve this inconsistency between BitBake versions?
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  classes/package.bbclass |   12 +++++++-----
+>  1 files changed, 7 insertions(+), 5 deletions(-)
 > 
-> Regards,
-> Andreas
-> 
->> On 08-12-10 13:58, Andreas Oberritter wrote:
->>> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->>> ---
->>>  conf/distro/angstrom-2008.1.conf |    5 -----
->>>  conf/distro/include/oplinux.inc  |    4 ----
->>>  conf/distro/include/slugos.inc   |    1 -
->>>  conf/distro/kaeilos.conf         |    6 ------
->>>  conf/distro/shr.conf             |    2 --
->>>  5 files changed, 0 insertions(+), 18 deletions(-)
->>
->>> diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
->>> index ec03276..30ec35b 100644
->>> --- a/conf/distro/angstrom-2008.1.conf
->>> +++ b/conf/distro/angstrom-2008.1.conf
->>> @@ -50,11 +50,6 @@ FEED_BASEPATH = "feeds/unstable/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
->>>  # Uncomment this to fetch packaged-staging packages from the central angstrom server
->>>  #PSTAGE_MIRROR = "${ANGSTROM_URI}/${FEED_BASEPATH}packaged-staging"
->>
->>> -#The angstrom-mirrors.bbclass should have everything, but we can use this as a fallback
->>> -CVS_TARBALL_STASH ?= "\
->>> -		     http://www.angstrom-distribution.org/unstable/sources/ \
->>> -		    "
->>> -
->>
->>>  #Make sure we use 2.6 on machines with a 2.4/2.6 selector
->>>  KERNEL = "kernel26"
->>> diff --git a/conf/distro/include/oplinux.inc b/conf/distro/include/oplinux.inc
->>> index 36eca58..6e6bddb 100644
->>> --- a/conf/distro/include/oplinux.inc
->>> +++ b/conf/distro/include/oplinux.inc
->>> @@ -28,10 +28,6 @@ MAINTAINER = "Digital OPSiS Developers Team <oplinux-developers@digital-opsis.co
->>>  # Packaging and output format
->>>  IMAGE_FSTYPES = "tar.gz jffs2 ext2.gz cramfs squashfs squashfs-lzma cpio.gz"
->>
->>> -# Specifies a location to search for pre-generated tarballs when fetching
->>> -# a cvs:// URI. Outcomment this, if you always want to pull directly from CVS.
->>> -#CVS_TARBALL_STASH = "http://www.digital-opsis.com/oplinux/sources/"
->>> -
->>>  PREMIRRORS = "(ftp|http)://.*/.*/ http://source.digital-opsis.com/"
->>
->>>  #
->>> diff --git a/conf/distro/include/slugos.inc b/conf/distro/include/slugos.inc
->>> index c2a380d..07dfd65 100644
->>> --- a/conf/distro/include/slugos.inc
->>> +++ b/conf/distro/include/slugos.inc
->>> @@ -109,7 +109,6 @@ DISTRO_EXTRA_DEPENDS ?= ""
->>>  DISTRO_EXTRA_RDEPENDS ?= ""
->>>  DISTRO_EXTRA_RRECOMMENDS ?= ""
->>
->>> -CVS_TARBALL_STASH = "http://sources.nslu2-linux.org/sources/"
->>>  INHERIT += "nslu2-mirrors"
->>
->>>  #FIXME: HACK: REMOVE THIS
->>> diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
->>> index 815d40f..84ea4e7 100644
->>> --- a/conf/distro/kaeilos.conf
->>> +++ b/conf/distro/kaeilos.conf
->>> @@ -48,12 +48,6 @@ EXTRA_IMAGECMD_ext2 = "-i 4096"
->>>  FEED_BASEPATH = "feeds/unstable/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
->>
->>
->>> -#The angstrom-mirrors.bbclass should have everything, but we can use this as a fallback
->>> -CVS_TARBALL_STASH ?= "\
->>> -		     http://www.angstrom-distribution.org/unstable/sources/ \
->>> -		    "
->>> -
->>> -
->>>  #Make sure we use 2.6 on machines with a 2.4/2.6 selector
->>>  KERNEL = "kernel26"
->>>  MACHINE_KERNEL_VERSION = "2.6"
->>> diff --git a/conf/distro/shr.conf b/conf/distro/shr.conf
->>> index 0258231..bf615f8 100644
->>> --- a/conf/distro/shr.conf
->>> +++ b/conf/distro/shr.conf
->>> @@ -79,8 +79,6 @@ ANGSTROM_BLACKLIST_pn-linux-ml403-mvista-2.6.x = "strange kernel, spank maintain
->>>  ANGSTROM_BLACKLIST_pn-linux-davinci = "strange kernel, spank maintainer"
->>
->>
->>> -CVS_TARBALL_STASH += "http://build.shr-project.org/sources/"
->>> -
->>>  #The shr-mirrors.bbclass repleaces this
->>>  #PREMIRRORS = "(ftp|https?)$://.*/.* http://build.shr-project.org/sources/"
->>>  INHERIT += "shr-mirrors" 
->>
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> diff --git a/classes/package.bbclass b/classes/package.bbclass
+> index 2769595..678ffa9 100644
+> --- a/classes/package.bbclass
+> +++ b/classes/package.bbclass
+> @@ -367,6 +367,12 @@ python perform_packagecopy () {
+>  	os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
+>  }
+>  
+> +python run_strip_funcs() {
+> +	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
+> +		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
+> +			bb.build.exec_func(f, d)
+> +}
+> +
+>  python populate_packages () {
+>  	import glob, errno, re,os
+>  
+> @@ -391,11 +397,6 @@ python populate_packages () {
+>  		else:
+>  			package_list.append(pkg)
+>  
+> -
+> -	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
+> -		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
+> -			bb.build.exec_func(f, d)
+> -
+>  	pkgdest = bb.data.getVar('PKGDEST', d, True)
+>  	os.system('rm -rf %s' % pkgdest)
+>  
+> @@ -1011,6 +1012,7 @@ PACKAGE_PREPROCESS_FUNCS ?= ""
+>  PACKAGEFUNCS ?= "perform_packagecopy \
+>                  ${PACKAGE_PREPROCESS_FUNCS} \
+>  		package_do_split_locales \
+> +		run_strip_funcs \
+>  		populate_packages \
+>  		package_do_shlibs \
+>  		package_do_pkgconfig \
 
 
 
