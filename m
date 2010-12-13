@@ -1,44 +1,25 @@
-Received: from mail-gx0-f179.google.com ([209.85.161.179])
+Received: from ausc60ps301.us.dell.com ([143.166.148.206])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwatkins.ti@gmail.com>) id 1PSBwj-0002VM-D1
+	(envelope-from <ryan_d_phillips@dell.com>) id 1PSBzK-0002rX-N6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Dec 2010 18:12:21 +0100
-Received: by mail-gx0-f179.google.com with SMTP id 21so3994673gxk.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 09:10:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=tj1ObCQwZL1xLfercD195QrwhY3Yfe00Rocm1cJAAsc=;
-	b=UN+ShZuBeXKVPosGzu9xGsDwl+pDXWYDWDJJADJPIpMNzCw3lDQhsmwEbbsrzTCFTO
-	Mbb6Q3HODyCXVln3nD88syXm7Pqo5G2YcMADZ2cjPGu/C9zZgMMhHGO1+aA1v1j/2XAF
-	Lxm0KcpGRwoPoGtqoKm7fKqhQCeewB7sC6abw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=EyjoduaNO0Hsaq0RMuaGzifmMcuN8Lql54rLaS4KCUjMMXPkr/yg/s8J7aU762dcMb
-	VbQKllfArzefvKMfb61kwSl4dK/VurqMDjb044MX5yoViHcFYrnd5caQYD2ja/bkdE0Q
-	uMdWlfQEy3T2l3vGsilZl+ydUwG4FXyW63QGs=
-Received: by 10.91.38.6 with SMTP id q6mr5452612agj.8.1292260247973;
-	Mon, 13 Dec 2010 09:10:47 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id 2sm326187anw.18.2010.12.13.09.10.47
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 13 Dec 2010 09:10:47 -0800 (PST)
-From: Melissa Watkins <mwatkins.ti@gmail.com>
+	Mon, 13 Dec 2010 18:15:04 +0100
+X-Loopcount0: from 10.210.138.66
+Message-ID: <4D065431.6080304@dell.com>
+Date: Mon, 13 Dec 2010 11:13:21 -0600
+From: Ryan D Phillips <ryan_d_phillips@dell.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Dec 2010 07:20:20 -0600
-Message-Id: <1292246420-5969-1-git-send-email-m-watkins@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.161.179
-X-SA-Exim-Mail-From: mwatkins.ti@gmail.com
+X-SA-Exim-Connect-IP: 143.166.148.206
+X-SA-Exim-Mail-From: ryan_d_phillips@dell.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00, DATE_IN_PAST_03_06, 
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Melissa Watkins <m-watkins@ti.com>, Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 4/4] ti-pru-sw-examples: fix package run-time dependencies
+Subject: [PATCH] eglibc: use HTTP for svn checkout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,50 +33,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2010 17:12:21 -0000
+X-List-Received-Date: Mon, 13 Dec 2010 17:15:04 -0000
+X-Groupsio-MsgNum: 27126
+Content-Type: multipart/mixed; boundary="------------090409010604050707080008"
 
-* This package depends on the ti-pru-sw-edma-driver and
-  kernel-module-uio-pru modules at run-tim.  Added these packages
-  to the RDEPENDS.
-* Bump PR
-* Update SRC_REV
-* Update COMPATIBLE_MACHINE
+--------------090409010604050707080008
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Melissa Watkins <m-watkins@ti.com>
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+  SVN over HTTP is a more reliable transport for developers behind 
+restrictive
+proxies.
+
+Regards,
+Ryan
+
+--------------090409010604050707080008
+Content-Type: text/plain;
+ name="0001-eglibc-Use-HTTP-for-svn-checkout.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-eglibc-Use-HTTP-for-svn-checkout.patch"
+
+From c0a5ad76e64d961735b5c07326d86107ef98f6a1 Mon Sep 17 00:00:00 2001
+From: Ryan D Phillips <ryan_d_phillips@dell.com>
+Date: Mon, 13 Dec 2010 10:00:27 -0600
+Subject: [PATCH] eglibc: Use HTTP for svn checkout
+
+SVN over HTTP is a more reliable transport for developers behind restrictive
+proxies.
+
+Signed-off-by: Ryan D Phillips <ryan_d_phillips@dell.com>
 ---
- recipes/ti/ti-pru-sw-examples_1.00.00.bb |    9 +++++----
- 1 files changed, 5 insertions(+), 4 deletions(-)
- mode change 100755 => 100644 recipes/ti/ti-pru-sw-examples_1.00.00.bb
+ recipes/eglibc/eglibc_2.10.bb |    2 +-
+ recipes/eglibc/eglibc_2.11.bb |    2 +-
+ recipes/eglibc/eglibc_2.12.bb |    2 +-
+ recipes/eglibc/eglibc_2.9.bb  |    2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes/ti/ti-pru-sw-examples_1.00.00.bb b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-old mode 100755
-new mode 100644
-index a9239f8..02c3376
---- a/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-@@ -1,14 +1,15 @@
- DESCRIPTION = "PRU sw example applications"
- HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
- LICENSE = "BSD"
--DEPENDS = "ti-pru-sw-app-loader ti-pru-sw-edma-library"
--PR = "r0+svnr${SRCPV}"
-+DEPENDS += "ti-pru-sw-app-loader ti-pru-sw-edma-library"
-+RDEPENDS += "ti-pru-sw-edma-driver kernel-module-uio-pru"
-+PR = "r1+svnr${SRCPV}"
- 
--COMPATIBLE_MACHINE = "omapl138|am180x-evm"
-+COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "18"
-+SRCREV = "20"
- S = "${WORKDIR}/trunk"
- 
- do_compile () {
+diff --git a/recipes/eglibc/eglibc_2.10.bb b/recipes/eglibc/eglibc_2.10.bb
+index 1eab7eb..e873bea 100644
+--- a/recipes/eglibc/eglibc_2.10.bb
++++ b/recipes/eglibc/eglibc_2.10.bb
+@@ -7,7 +7,7 @@ PR = "${INC_PR}.10"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="10152"
+ EGLIBC_BRANCH="eglibc-2_10"
+-SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
++SRC_URI = "svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
+            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
+            file://armv4t-interworking.patch \
+            file://IO-acquire-lock-fix.patch \
+diff --git a/recipes/eglibc/eglibc_2.11.bb b/recipes/eglibc/eglibc_2.11.bb
+index b249f29..4a6f25d 100644
+--- a/recipes/eglibc/eglibc_2.11.bb
++++ b/recipes/eglibc/eglibc_2.11.bb
+@@ -8,7 +8,7 @@ PR = "${INC_PR}.8"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="12231"
+ EGLIBC_BRANCH="eglibc-2_11"
+-SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
++SRC_URI = "svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
+            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
+            file://IO-acquire-lock-fix.patch \
+            file://shorten-build-commands.patch \
+diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.bb
+index 1285568..214da69 100644
+--- a/recipes/eglibc/eglibc_2.12.bb
++++ b/recipes/eglibc/eglibc_2.12.bb
+@@ -8,7 +8,7 @@ PR = "${INC_PR}.7"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="12230"
+ EGLIBC_BRANCH="eglibc-2_12"
+-SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
++SRC_URI = "svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
+            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
+            file://IO-acquire-lock-fix.patch \
+            file://shorten-build-commands.patch \
+diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
+index c06345e..b096469 100644
+--- a/recipes/eglibc/eglibc_2.9.bb
++++ b/recipes/eglibc/eglibc_2.9.bb
+@@ -7,7 +7,7 @@ PR = "${INC_PR}.10"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="10153"
+ EGLIBC_BRANCH="eglibc-2_9"
+-SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
++SRC_URI = "svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
+            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
+            file://armv4t-interworking.patch \
+            file://IO-acquire-lock-fix.patch \
 -- 
-1.7.0.4
+1.7.2.3
 
 
-
+--------------090409010604050707080008--
