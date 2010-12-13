@@ -1,45 +1,46 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1PRvJO-0001t7-ND
+	(envelope-from <raj.khem@gmail.com>) id 1PS32G-0004XT-Cz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Dec 2010 00:26:39 +0100
-Received: by wyb40 with SMTP id 40so5523344wyb.6
+	Mon, 13 Dec 2010 08:41:29 +0100
+Received: by ywi6 with SMTP id 6so3202876ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Dec 2010 15:25:04 -0800 (PST)
+	Sun, 12 Dec 2010 23:39:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=DyLc53iHjiVHOWDz1fSHsDf1b/zo4/vXHAWGPqS5QLY=;
-	b=RhBzYQULydydldNYnB7qcmD27INFezQlKCAFYny+AZkY8FXt+zWqgJW2kua4Yva9uS
-	9S/5SSBM6kp31k0x7w2q7oewKLRrX6GwHRgLskLZEyYPb3Yxq4TJQ9JfIJeHWlkQsWOx
-	FCMsIWzi5Nj3PBqZ1JOpSV/9GRdq7jVJUDGdY=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=bWy5/DA0z3cuhNsV2P2q/ssrWEJaxiNl0C0NDEPDU5s=;
+	b=ThNJfbpViQ+uujbdKAXxdg7biQEsKAlWGLQJnx0pUuwifeLHaxHD0y6M3kFucmL52d
+	Md+9cGtnCPFXgGy393BlmxP9GFsMvMjyTR0ytqlIu5E5WuUc9x19RRoPjsDmX/MrvBGi
+	aHH4p/H1S0eYCFkQH509fKyg7hwFqwTxEauaE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=XgH0YJ25VOTNATaAi8NBQvA84aXYpLJe0EPg9Sl2p7K9UTaLqYWeZ7vPDMiU9jQokS
-	R+LgyQo4CmwHeB5ARz0uaqAdzIANrhg7mQmmxjPrZk4MByt+PdD2jvPSohtZQyZrH+6k
-	7jPaF/QvdZ5cBSa5U133F08awWc94cdcL/Kv4=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=da7V/pqZ15zskmRDaF3vn4pt7iAJ3i8R280E8SDGXFWvCYRZQqrRG4kdk5q5NyYt7r
+	av9H1eZ3dgrHQ27l7kS0t/Gud8DbLnERsAADffkHA2zdBjLguTVgz7mEW6hEEJlkbyHr
+	JNvBtpwjJNIHwKJmKLqmHIngt95yBebQxqjiM=
+Received: by 10.90.98.11 with SMTP id v11mr4577534agb.58.1292225988307; Sun,
+	12 Dec 2010 23:39:48 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.227.196.78 with SMTP id ef14mr1236648wbb.165.1292196302809;
-	Sun, 12 Dec 2010 15:25:02 -0800 (PST)
-Received: by 10.227.155.208 with HTTP; Sun, 12 Dec 2010 15:25:02 -0800 (PST)
-In-Reply-To: <AANLkTi=LseZRJ6e2907nGsPeLz=H8ZfDpmWjaPqM=0FK@mail.gmail.com>
-References: <AANLkTi=20woN1TEygXwHwgoOm3_OPp+GLU6JMNpAq3eV@mail.gmail.com>
-	<AANLkTi=LseZRJ6e2907nGsPeLz=H8ZfDpmWjaPqM=0FK@mail.gmail.com>
-Date: Mon, 13 Dec 2010 09:55:02 +1030
-Message-ID: <AANLkTi=UT-4d=NqVwEgWfh39Ygjp4=xH-vSyTuCA5xXR@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+Received: by 10.90.86.4 with HTTP; Sun, 12 Dec 2010 23:39:28 -0800 (PST)
+In-Reply-To: <AANLkTinyRWYTduFgvs3nKwvB4J=67Cj91CRPXai_yKr6@mail.gmail.com>
+References: <AANLkTinb3AL5zchPtvqDfv7mRCi+eVO4_ESqr=AVd0Rw@mail.gmail.com>
+	<4CFF61D2.60606@gravedo.de> <20101208110759.GA27687@excalibur.local>
+	<4CFF7AEA.5010300@balister.org>
+	<AANLkTinyRWYTduFgvs3nKwvB4J=67Cj91CRPXai_yKr6@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 12 Dec 2010 23:39:28 -0800
+Message-ID: <AANLkTimpy+QBbV9Kx09P=q946EL-vPL-534RzbKB7iUC@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: js compilation oddity
+Subject: Re: [ANNOUNCE] The new patchwork is here
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,43 +54,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Dec 2010 23:26:39 -0000
+X-List-Received-Date: Mon, 13 Dec 2010 07:41:29 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On 13 December 2010 09:07, Graham Gower <graham.gower@gmail.com> wrote:
-> On 12 December 2010 22:36, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> When compiling js (for beagleboard/minimal) I got this:
->>
->> | k_cos.c: In function =EF=BF=BD=EF=BF=BD=EF=BF=BD__kernel_cos=EF=BF=BD=
-=EF=BF=BD=EF=BF=BD:
->> | k_cos.c:125:21: warning: =EF=BF=BD=EF=BF=BD=EF=BF=BDqx=EF=BF=BD=EF=BF=
-=BD=EF=BF=BD may be used uninitialized in this function
->> | Assembler messages:
->> | Fatal error: can't create Linux_All_DBG.OBJ/k_cos.o: No such file or d=
-irectory
->> | make[1]: *** [Linux_All_DBG.OBJ/k_cos.o] Error 1
->>
->> Full log at:
->> http://tinderbox.openembedded.net/public/logs/task/13169490.txt
->>
->> bitbake -cclean js; bitbake js
->> resulted in a proper build; so apparently this is not reproducible.
->>
->> Anyone an idea ?
->>
->> Frans
->
-> Unicode function names? Would that alter compilation depending on the
-> locale of the build system?
+On Wed, Dec 8, 2010 at 3:19 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Dec 8, 2010 at 4:32 AM, Philip Balister <philip@balister.org> wrote:
+>> On 12/08/2010 06:07 AM, Stefan Schmidt wrote:
+>>>
+>>> Hello.
+>>>
+>>> On Wed, 2010-12-08 at 11:45, Simon Busch wrote:
+>>>>
+>>>> On 07.12.2010 19:13, Khem Raj wrote:
+>>>>>
+>>>>> The patchwork has been setup newly. The url is live at
+>>>>> http://patches.openembedded.org
+>>>>> Please sign up for the new patchwork. The old patchwork data has not
+>>>>> been moved to this one.
+>>>>> Its still available on the usual old site. The
+>>>>> contrib/patchwork/pw-am.sh script has been modified to grok the
+>>>>> patches
+>>>>
+>>>> >from the new url.
+>>>>>
+>>>>> Depending on available time I might be able to add the patches that
+>>>>> went in after the old patchwork stopped
+>>>>> working. However it has started to catch the patches from now on.
+>>>>>
+>>>>> Let us know if there are any issues you encounter
+>>>>
 
-Well I checked the c99 draft and indeed universal characters are
-allowed (section 6.4.3).
+Please resend your patches to the mailing list that were not captured
+in patchwork after the old patchwork stopped functioning
+and new patchwork was not in service yet. This will help a lot in
+getting them applied and reviewed.
 
-But I looked at k_cos.c and these characters are not there. I assume
-you have local modifications. What happens when you remove them?
+Thank you for help
 
--Graham
+-Khem
 
 
