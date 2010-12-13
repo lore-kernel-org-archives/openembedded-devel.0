@@ -1,43 +1,43 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-iw0-f178.google.com ([209.85.214.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PS7lR-00059n-Mt
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PS9QA-0007UW-0s
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Dec 2010 13:44:26 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id CAC9A314B5DC
+	Mon, 13 Dec 2010 15:30:34 +0100
+Received: by iwn1 with SMTP id 1so9737555iwn.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 13:42:52 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 0vpynpv-uOcL
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 13:42:46 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 649B8314B9EF
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 13:42:46 +0100 (CET)
-Message-ID: <4D0614C6.5060105@opendreambox.org>
-Date: Mon, 13 Dec 2010 13:42:46 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Mon, 13 Dec 2010 06:28:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=R77snYx9+ivgpGd3+oMlkX5v2wivPg0sRLvcUOjzg6I=;
+	b=rZPqlRfO8ya4C1xfiGrZah2lGApGLhBqALa8OZMGCpdXFVgH9v/4l+7rrB/slAtxtU
+	6B13zc+CpP9kTJcDxuLksekUeBqFW2mRs3k9RBOYlc2UqvLURsiitluUniFsnbZOSz0X
+	Rn5kPga0/H48cgnBTmcBhtzU48VpVEV1qOenQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=WW+WuMY+2iZVJOqiLgq8uAVOyKxM7FVIMEcKXm/tSkbYMZg8BjkZumbButc5q+0kE4
+	lYWk2Iv5JYneRO6sAYWGaZA/V3XcdezwOOiL7CvJzy/sTuPYyeEBdYC0EAsvdiLan8RX
+	Tiinv+yN9KzXK4HNnbPvxTSQPoW54fUYbMBDk=
 MIME-Version: 1.0
+Received: by 10.231.206.7 with SMTP id fs7mr1912192ibb.82.1292250539527; Mon,
+	13 Dec 2010 06:28:59 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Mon, 13 Dec 2010 06:28:59 -0800 (PST)
+In-Reply-To: <AANLkTim6OtGFRPtXA-pQuGT0efA755FpxJVsUghks8gg@mail.gmail.com>
+References: <AANLkTim6OtGFRPtXA-pQuGT0efA755FpxJVsUghks8gg@mail.gmail.com>
+Date: Mon, 13 Dec 2010 15:28:59 +0100
+Message-ID: <AANLkTi=XiHz=Aza5CC9Y0yOqtgrntQ6Edf0rKNkO2aT8@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1291813231-24536-1-git-send-email-obi@opendreambox.org>
-In-Reply-To: <1291813231-24536-1-git-send-email-obi@opendreambox.org>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 209.85.214.178
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH resend] package.bbclass: call PACKAGESTRIPFUNCS before populate_packages
+Subject: Re: gettext libtool ARM issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,63 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2010 12:44:26 -0000
+X-List-Received-Date: Mon, 13 Dec 2010 14:30:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Ping
+2010/12/12 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> We seem to have an issue with gettext and libtool on ARM
+> I cannot build git head on our autobuilder for ARM based platforms.
+> (tried sheevaplug, armv5te and beagleboard armv7a). (distro minimal
+> build host ubuntu 10.04 x64)
 
-On 12/08/2010 02:00 PM, Andreas Oberritter wrote:
->   Introduce run_strip_funcs() to call the functions in
->   PACKAGESTRIPFUNCS and place it before populate_packages().
-> 
->   This allows users of do_split_packages() to package the .debug
->   directories, which get created by do_runstrip().
-> 
->   do_split_packages() is usually prepended to populate_packages().
-> 
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  classes/package.bbclass |   12 +++++++-----
->  1 files changed, 7 insertions(+), 5 deletions(-)
-> 
-> diff --git a/classes/package.bbclass b/classes/package.bbclass
-> index 2769595..678ffa9 100644
-> --- a/classes/package.bbclass
-> +++ b/classes/package.bbclass
-> @@ -367,6 +367,12 @@ python perform_packagecopy () {
->  	os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
->  }
->  
-> +python run_strip_funcs() {
-> +	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
-> +		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
-> +			bb.build.exec_func(f, d)
-> +}
-> +
->  python populate_packages () {
->  	import glob, errno, re,os
->  
-> @@ -391,11 +397,6 @@ python populate_packages () {
->  		else:
->  			package_list.append(pkg)
->  
-> -
-> -	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
-> -		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
-> -			bb.build.exec_func(f, d)
-> -
->  	pkgdest = bb.data.getVar('PKGDEST', d, True)
->  	os.system('rm -rf %s' % pkgdest)
->  
-> @@ -1011,6 +1012,7 @@ PACKAGE_PREPROCESS_FUNCS ?= ""
->  PACKAGEFUNCS ?= "perform_packagecopy \
->                  ${PACKAGE_PREPROCESS_FUNCS} \
->  		package_do_split_locales \
-> +		run_strip_funcs \
->  		populate_packages \
->  		package_do_shlibs \
->  		package_do_pkgconfig \
+Woglinde suggested on irc that it would be highly useful to have the config log.
+I've uploaded it and config.status and configure here:
 
+http://www.easy-share.com/1913272622/config.log
+http://www.easy-share.com/1913272623/config.status
+http://www.easy-share.com/1913272624/configure
+
+(filebin was not responding so diverted to easy-share, sorry for the
+inconvenience, if someone has a better suggestion, please let me
+know).
+
+Frans
 
 
