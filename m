@@ -1,35 +1,41 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>)
-	id 1PSbCp-0002OF-4c; Tue, 14 Dec 2010 21:10:41 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id oBEK92Vx011648;
-	Tue, 14 Dec 2010 20:09:02 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11607-01; Tue, 14 Dec 2010 20:08:58 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id oBEK8tno011642
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 14 Dec 2010 20:08:56 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-members <openembedded-members@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Tue, 14 Dec 2010 20:08:54 +0000
-Message-ID: <1292357334.14420.3939.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1PSbO3-0002kZ-Kn
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Dec 2010 21:22:16 +0100
+Received: by yxd5 with SMTP id 5so632594yxd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Dec 2010 12:20:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=CTpshKEc74e8wkRovcF+IkY1cXfDJ8bQseYauc5Ibi0=;
+	b=O9k/oCMUIMvbDQOwJprotThDzpFrivGLAhUc4lmtxOCA+aQjfU1MtPF68sQqCW/QAr
+	f9Rjbo2psy8IkFR/JOLwUNLbzAlCV4Bh6tncFQyyZ24MtssQuDKMkXfIWvbPziaeTCol
+	anclttfBNfF5AtW0vJwzMbeHHBqFqMmxVkYGQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	b=uyo33sl7LzcuTqR1DRQotCa+RCw5g8v2e3qBH6/cUB5HK+6AnlZIkDOKWFAbFrLCsR
+	dpuXcjZK84nxxbEvOBVZNWC5pCDsGobuOenmWAKywZLEx72MFPdzUv3v27lzUUO6VwO4
+	JPCM8b58dWyPCS4Xg95SocVv/Tyr4zVYa4frM=
+Received: by 10.90.10.31 with SMTP id 31mr7298328agj.85.1292358037702; Tue, 14
+	Dec 2010 12:20:37 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Tue, 14 Dec 2010 12:20:17 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 14 Dec 2010 12:20:17 -0800
+Message-ID: <AANLkTikeZUPL0hPHrEVgm5xQyPCVg+4xz6WcH+T=WV=x@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: More about the Yocto Project
+Subject: Re: [PATCH] This patch applied to ltp runalltests.sh script to make default set of test suits configurable which is not the default behaviour. By default rullalltests.sh invokes runltp wihout specifying any set of tests to run. This patch will g
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,109 +49,388 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2010 20:10:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Dec 2010 20:22:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Its probably a good time to talk further about the Yocto Project,
-OpenEmbedded, Poky and the Linux Foundation.
+On Tue, Dec 14, 2010 at 12:00 AM, irfan sadiq <irfan_sadiq@mentor.com> wrot=
+e:
+> From: hmsadiq <irfan_sadiq@mentor.com>
+>
+> Signed-off-by: hmsadiq <irfan_sadiq@mentor.com>
 
-The Linux foundation isn't perhaps as well known in the OE community as
-it is elsewhere but its the legal non-profit entity that represents
-Linux and provides various support functions for Linux in a company
-independent way. Its for this reason that the Yocto Project is a Linux
-Foundation project and whilst the project was started by Wind River and
-Intel, wider industry involvement in the project is actively being
-sought.
+thank you for the patch. Couple of things
 
-Its for exactly this reason the Linux Foundation organised an Embedded
-Linux summit recently to which key companies from the embedded industry
-were invited along with a variety of representatives from a cross
-section of the OE community. Notice was a little short for the meeting
-and unfortunately not everyone invited was able to attend but there was
-significant and representative attendance.
+1. You should bump up the PR
+2. The summary field should be concise and more details should be put
+in after the summary follow this
+http://wiki.openembedded.org/index.php/Commit_Policy
 
-There was significant interest as there is a common problem faced by
-many companies in the industry which is that they're all repeating
-similar "commercialising" steps against OE in some form or another for
-little differentiation. There is therefore great interest in being able
-to do this in one shared place through the Yocto Project instead of
-doing the same things.
+Thanks
+-Khem
 
-There was some concern that a key architect and maintainer role for
-Yocto was being played by me but I was working for Intel and there was
-potential for conflict of interest. To address this it was announced at
-the summit that I have been made a fellow of the Linux Foundation. This
-is a great honour as other fellows include people like Linus Torvalds
-and Andrew Morton.
-
-One other major concern raised was the relationship between Poky and OE.
-There is a strong value to the OE name, community, metadata and
-everything it encompasses. Nobody at any of the companies involved in
-the discussions, or in the Yocto Project or at the Linux Foundation
-wants to damage this, its value is appreciated.
-
-Its hard to put together something short which people will read yet
-fully convey the opportunity here. To put it simply, the Yocto Project
-has the potential to take OpenEmbedded to a whole new level. Jim Zemlin
-(Executive Director of the Linux Foundation) had a good illustration of
-this. He goes out to companies and raises literally millions of dollars
-for Linux. The offer is the ability to do this for the "OpenEmbedded
-Architecture". Funds can directly and indirectly benefit the project.
-Some examples:
-
-Developers - Being able to find ways to allow developers to focus not
-just on their product but on improving the core architecture and add
-missing features. I know all too well the pressures of needing to focus
-on direct revenue generating work and not on the architecture but its
-only a short term solution. 
-
-Conferences - Conferences don't just happen, there is a heck of a lot of
-work involved in the organisation of them as well as the funding. The LF
-has people who can do this as well as systems for travel funds.
-
-Standardisation - An implicit LF endorsement of OE as a technology is
-not to be underestimated.
-
-Education and Training - The LF recognises the shortage of Embedded
-Linux developers and wants to help educate and train more people. This
-translates to more people using the OE architecture and a strong
-industry and community.
-
-Jim needs something to work with to do this. This is pretty much what
-the steering group within the Yocto governance model is for as it allows
-sponsors of the project to have some involvement/influence. I cannot
-stress enough that the model and setup is to actually never use this
-influence though, crazy as it sounds. The maintainers are the people
-with the power, they make the decisions and the steering group is only
-there for oversight.
-
-To fully realise these benefits, the relationship between Yocto and
-OpenEmbedded or specifically OE and Poky needs to be established and
-that probably means changes for both OE and Poky.
-
-What changes these are and what the relationship could be needs
-discussion and I don't want to start on that in this email. I think
-people have ideas about what could work and we can get to that in
-another email. Here, I wanted to highlight try and illustrate the
-tremendous opportunity we have and why we should consider change.
-
-Finally, I'd like to suggest people to talk to one another. We've now
-had an OEDEM and the Embedded Summit mentioned above where these things
-have been discussed and there have been plenty of OE developers and
-users present at these. Please talk to people and see what their
-impressions are.
-
-Cheers,
-
-Richard
--- 
-Richard Purdie
-Linux Foundation Fellow
-(richard.purdie@linuxfoundation.org)
-(Sent from my personal account, only as the members list wouldn't let me
-post otherwise)
-
-
+> ---
+> =C2=A0recipes/ltp/ltp-20100831/runalltests.patch | =C2=A0302 ++++++++++++=
+++++++++++++++++
+> =C2=A0recipes/ltp/ltp_20100831.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A03 +-
+> =C2=A02 files changed, 304 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/ltp/ltp-20100831/runalltests.patch b/recipes/ltp/ltp=
+-20100831/runalltests.patch
+> new file mode 100644
+> index 0000000..c567769
+> --- /dev/null
+> +++ b/recipes/ltp/ltp-20100831/runalltests.patch
+> @@ -0,0 +1,302 @@
+> +--- ltp-full-20100831.orig/runalltests.sh =C2=A0 =C2=A0 =C2=A02010-09-14=
+ 16:04:32.000000000 +0500
+> ++++ ltp-full-20100831/runalltests.sh =C2=A0 2010-12-13 11:18:11.85738210=
+7 +0500
+> +@@ -68,6 +68,12 @@ export RUN_FILECAPS=3D0
+> + export LIBCAPS_INSTALLED=3D0
+> + export LIBATTR_INSTALLED=3D0
+> +
+> ++## Set this to 1 if tmp_tools tests are required to be tested
+> ++export RUN_TPM_TOOLS=3D0
+> ++
+> ++## Set this to 1 if tcore tests are required to be tested
+> ++export RUN_TCORE=3D0
+> ++
+> + ## Set this to 1 if you wish to execute the stress_cd tests
+> + ## Make sure you have FLOPPY inserted, be warned that you
+> + ## will loose all data on it after the tests,
+> +@@ -202,6 +208,194 @@ export RUN_SMACK_SECURITY_TESTS=3D0
+> + ##Set this to 1 if you wish to run the Basic PERFORMANCE COUNTER tests
+> + export RUN_PERFORMANCE_COUNTERS_TESTS=3D0
+> +
+> ++### Additional tests That are not included in runalltests.sh
+> ++export RUN_LTP_AIODIO_PART1=3D0
+> ++export RUN_LTP_AIODIO_PART2=3D0
+> ++export RUN_LTP_AIODIO_PART3=3D0
+> ++export RUN_LTP_AIODIO_PART4=3D0
+> ++
+> ++if [ $RUN_LTP_AIODIO_PART1 -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0AIODIO_PART1_STR=3D"ltp-aiodio.part1"
+> ++fi
+> ++
+> ++if [ $RUN_LTP_AIODIO_PART2 -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0AIODIO_PART2_STR=3D"ltp-aiodio.part2"
+> ++fi
+> ++
+> ++if [ $RUN_LTP_AIODIO_PART3 -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0AIODIO_PART3_STR=3D"ltp-aiodio.part3"
+> ++fi
+> ++
+> ++if [ $RUN_LTP_AIODIO_PART4 -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0AIODIO_PART4_STR=3D"ltp-aiodio.part4"
+> ++fi
+> ++
+> ++## This is default set of tests chose which tests you want to perform b=
+y default
+> ++## Set this to 1 if you wish to run the specific tests
+> ++
+> ++export RUN_DEFAULT_MATH=3D0
+> ++export RUN_DEFAULT_NPTL=3D0
+> ++export RUN_DEFAULT_PTY=3D0
+> ++export RUN_DEFAULT_IO=3D0
+> ++export RUN_DEFAULT_TIMERS=3D0
+> ++export RUN_DEFAULT_MM=3D0
+> ++export RUN_DEFAULT_IPC=3D0
+> ++export RUN_DEFAULT_SCHED=3D0
+> ++export RUN_DEFAULT_CONTAINERS=3D0
+> ++export RUN_DEFAULT_CONNECTORS=3D0
+> ++export RUN_DEFAULT_FILECAPS=3D0
+> ++export RUN_DEFAULT_CAP_BOUNDS=3D0
+> ++export RUN_DEFAULT_FSX=3D0
+> ++export RUN_DEFAULT_FCNTL_LOCKTESTS=3D0
+> ++export RUN_DEFAULT_CONTROLLERS=3D0
+> ++export RUN_DEFAULT_ADMIN_TOOLS=3D0
+> ++export RUN_DEFAULT_HYPERTHREADING=3D0
+> ++export RUN_DEFAULT_DIO=3D0
+> ++export RUN_DEFAULT_SYSCALLS=3D0
+> ++export RUN_DEFAULT_FS_PERMS_SIMPLE=3D0
+> ++export RUN_DEFAULT_POWER_MANAGEMENT_TESTS=3D0
+> ++export RUN_DEFAULT_NUMA=3D0
+> ++export RUN_DEFAULT_HUGETLB=3D0
+> ++export RUN_DEFAULT_COMMANDS=3D0
+> ++export RUN_DEFAULT_FS=3D0
+> ++export RUN_DEFAULT_FS_BIND=3D0
+> ++
+> ++if [ $RUN_DEFAULT_SYSCALLS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0SYSCALLS_STR=3D"syscalls"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_FS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0FS_STR=3D"fs"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_FS_PERMS_SIMPLE -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0FS_PERMS_SIMPLE_STR=3D"fs_perms_simple"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_FSX -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0FSX_STR=3D"fsx"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_DIO -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0DIO_STR=3D"dio"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_IO -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0IO_STR=3D"io"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_MM -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0MM_STR=3D"mm"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_IPC -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0IPC_STR=3D"ipc"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_SCHED -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0SCHED_STR=3D"sched"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_MATH -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0MATH_STR=3D"math"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_NPTL -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0NPTL_STR=3D"nptl"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_PTY -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0PTY_STR=3D"pty"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_CONTAINERS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0CONTAINERS_STR=3D"containers"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_FS_BIND -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0FS_BIND_STR=3D"fs_bind"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_CONTROLLERS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0CONTROLLERS_STR=3D"controllers"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_FILECAPS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0FILECAPS_STR=3D"filecaps"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_CAP_BOUNDS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0CAP_BOUNDS_STR=3D"cap_bounds"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_FCNTL_LOCKTESTS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0FCNTL_LOCKTESTS_STR=3D"fcntl-locktests"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_CONNECTORS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0CONNECTORS_STR=3D"connectors"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_ADMIN_TOOLS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0ADMIN_TOOLS_STR=3D"admin_tools"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_TIMERS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0TIMERS_STR=3D"timers"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_POWER_MANAGEMENT_TESTS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0POWER_MANAGEMENT_TESTS_STR=3D"power_managem=
+ent_tests"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_NUMA -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0NUMA_STR=3D"numa"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_HUGETLB -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0HUGETLB_STR=3D"hugetlb"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_COMMANDS -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0COMMANDS_STR=3D"commands"
+> ++fi
+> ++
+> ++if [ $RUN_DEFAULT_HYPERTHREADING -eq 1 ]
+> ++then
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0HYPERTHREADING_STR=3D"hyperthreading"
+> ++fi
+> ++
+> ++
+> ++
+> + export LTP_VERSION=3D`"${RUNLTP}" -e`
+> + export TEST_START_TIME=3D`date +"%Y_%b_%d-%Hh_%Mm_%Ss"`
+> + export HARDWARE_TYPE=3D$(uname -i)
+> +@@ -215,13 +409,68 @@ if ! cd "${LTPROOT}"; then
+> + =C2=A0 =C2=A0 =C2=A0 exit $rc
+> + fi
+> +
+> ++# ## The First one i plan to run is the default LTP run ##
+> ++# ## START =3D> Test Series 1 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> ++# echo "Running Default LTP..."
+> ++# "${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+> ++# printf "Completed running Default LTP\n\n\n"
+> ++# ## END =3D> Test Series 1 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> ++
+> + ## The First one i plan to run is the default LTP run ##
+> + ## START =3D> Test Series 1 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> + echo "Running Default LTP..."
+> +-"${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0RUN_DEFAULT_SET=3D"$SYSCALLS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$FS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$FS_PERMS_SIMPLE_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$FSX_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$DIO_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$IO_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$MM_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$IPC_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$SCHED_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$MATH_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$NPTL_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$PTY_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$CONTAINERS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$FS_BIND_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$CONTROLLERS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$FILECAPS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$CAP_BOUNDS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$FCNTL_LOCKTESTS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$CONNECTORS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$ADMIN_TOOLS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$TIMERS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$POWER_MANAGEMENT_TESTS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$NUMA_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$HUGETLB_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$COMMANDS_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$HYPERTHREADING_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$AIODIO_PART1_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$AIODIO_PART2_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$AIODIO_PART3_STR \
+> ++ =C2=A0 =C2=A0 =C2=A0$AIODIO_PART4_STR"
+> ++
+> ++ =C2=A0 =C2=A0 =C2=A0rm -f runtest/defaultset
+> ++ =C2=A0 =C2=A0 =C2=A0for TEST in $RUN_DEFAULT_SET
+> ++ =C2=A0 =C2=A0 =C2=A0do
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0UPPER=3D`echo $TEST | tr "[:lower:]"=
+ "[:upper:]"`
+> ++# # =C2=A0 =C2=A0 =C2=A0 var=3D"_STR"
+> ++# # =C2=A0 =C2=A0 =C2=A0 echo " =C2=A0 =C2=A0 =C2=A0\$$UPPER$var \\"
+> ++# # =C2=A0 =C2=A0 =C2=A0 echo "Running Test $UPPER"
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0echo "Running Test $TEST"
+> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cat =C2=A0runtest/$TEST >> runtest/d=
+efaultset
+> ++# # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo=
+ "if [ \$RUN_DEFAULT_$UPPER -eq 1 ]"
+> ++# # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo=
+ "then"
+> ++# # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo=
+ " =C2=A0$UPPER$var=3D\"$TEST\""
+> ++# # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo=
+ "fi"
+> ++# # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo=
+ ""
+> ++# # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo=
+ "export RUN_DEFAULT_$UPPER=3D1"
+> ++ =C2=A0 =C2=A0 =C2=A0done
+> ++ =C2=A0 =C2=A0 =C2=A0"${RUNLTP}" -f defaultset -g defaultset.html
+> + printf "Completed running Default LTP\n\n\n"
+> + ## END =3D> Test Series 1 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> +
+> ++
+> + ## The next one i plan to run is ballista =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 ##
+> + ## START =3D> Test Series 2 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> + if [ $RUN_BALLISTA -eq 1 ]
+> +@@ -353,15 +602,20 @@ then
+> + fi
+> + ## END =3D> Test Series 6 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> +
+> +-
+> + ## The next one i plan to run is tpm_tools =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0##
+> + ## START =3D> Test Series 7 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> ++if [ $RUN_TPM_TOOLS -eq 1 ]
+> ++then
+> + "${RUNLTP}" -f tpm_tools
+> ++fi
+> + ## END =3D> Test Series 7 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> +
+> + ## The next one i plan to run is tcore_patch_test_suites
+> + ## START =3D> Test Series 8 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> ++if [ $RUN_TCORE -eq 1 ]
+> ++then
+> + "${RUNLTP}" -f tcore
+> ++fi
+> + ## END =3D> Test Series 8 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ##
+> +
+> +
+> diff --git a/recipes/ltp/ltp_20100831.bb b/recipes/ltp/ltp_20100831.bb
+> index 6c5a0ae..c57b5e2 100644
+> --- a/recipes/ltp/ltp_20100831.bb
+> +++ b/recipes/ltp/ltp_20100831.bb
+> @@ -7,7 +7,8 @@ PR =3D "r0"
+>
+> =C2=A0inherit autotools
+>
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz"
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://runalltests.patch;patch=3D1 "
+>
+> =C2=A0S =3D "${WORKDIR}/ltp-full-${PV}"
+>
+> --
+> 1.7.0.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
