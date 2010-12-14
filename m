@@ -1,32 +1,44 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <robert@erafx.com>) id 1PSHjM-0000oX-Ex
+	(envelope-from <raj.khem@gmail.com>) id 1PSIMC-0001nl-4d
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Dec 2010 00:22:57 +0100
-Received: by qyk36 with SMTP id 36so16302qyk.6
+	Tue, 14 Dec 2010 01:03:05 +0100
+Received: by ywi6 with SMTP id 6so25859ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 15:21:20 -0800 (PST)
-Received: by 10.229.85.80 with SMTP id n16mr4322247qcl.50.1292282480056;
-	Mon, 13 Dec 2010 15:21:20 -0800 (PST)
-Received: from localhost.localdomain (cpe-24-165-208-114.neo.res.rr.com
-	[24.165.208.114])
-	by mx.google.com with ESMTPS id y17sm4363705qci.21.2010.12.13.15.21.18
+	Mon, 13 Dec 2010 16:01:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=knEMqH/gMsevQ+K3QxfM6kpUuaJWj/lejbsXcIRCHVs=;
+	b=JIHEpiNGdXcVeaC8jjbTsmoAgIhp8GNd3PNEBm9L/65fd3LX0P97ghFz55hXKmqQMK
+	HBuUNI0dE8sIVOGEVXZjzkhOmL63vN+tRorY2nmS1B9bHq40E6HDsubJj2/zVGy3441j
+	vausdLtg2A3KIKfP3RjhZfxQV8vJFZCpH/GPg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=tErgj1UgKbQvbdje5QSWJ+ptmUtZ0X0RY6d/JEP+HYxr0v4TvDVqmO+2hbL2QqnrEH
+	GsumVaKLz90h8n1+Qp0mONTNKfYeIqXbvOGn/Cc2nK4ZRDdHTUXhmKbS6m38kCiwTaV1
+	XZ4+RcFvkx3PJK1rUGlx4R3dDGr1CqH0NhcLA=
+Received: by 10.42.165.74 with SMTP id j10mr3466536icy.130.1292284887670;
+	Mon, 13 Dec 2010 16:01:27 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id y3sm303465icw.11.2010.12.13.16.01.26
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 13 Dec 2010 15:21:19 -0800 (PST)
-From: Bob Foerster <robert@erafx.com>
+	Mon, 13 Dec 2010 16:01:27 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Dec 2010 18:21:01 -0500
-Message-Id: <1292282461-13310-1-git-send-email-robert@erafx.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: robert@erafx.com
+Date: Mon, 13 Dec 2010 16:01:19 -0800
+Message-Id: <1292284879-11158-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] base.bbclass: Get rid of "WARNING: Function do_build doesn't exist"
+Subject: [PATCH] gcc-4.5.inc: Revert PR 42172 backport
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,29 +52,1035 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2010 23:22:57 -0000
+X-List-Received-Date: Tue, 14 Dec 2010 00:03:05 -0000
 
-Signed-off-by: Bob Foerster <robert@erafx.com>
+* This fixes the gcc ICE as seen compiling samba
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- classes/base.bbclass |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ recipes/gcc/gcc-4.5.inc                      |    3 +-
+ recipes/gcc/gcc-4.5/gcc-revert-pr42172.patch |  989 ++++++++++++++++++++++++++
+ 2 files changed, 991 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/gcc/gcc-4.5/gcc-revert-pr42172.patch
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index ac0f388..4c27273 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -287,6 +287,9 @@ base_do_package() {
- addtask build
- do_build = ""
- do_build[func] = "1"
-+do_build() {
-+       :
-+}
+diff --git a/recipes/gcc/gcc-4.5.inc b/recipes/gcc/gcc-4.5.inc
+index df462e0..1116331 100644
+--- a/recipes/gcc/gcc-4.5.inc
++++ b/recipes/gcc/gcc-4.5.inc
+@@ -8,7 +8,7 @@ DEPENDS = "mpfr gmp libmpc libelf"
+ NATIVEDEPS = "mpfr-native gmp-native libmpc-native"
  
- def set_multimach_arch(d):
-     # 'multimachine' handling
+ 
+-INC_PR = "r24"
++INC_PR = "r25"
+ 
+ SRCREV = "167449"
+ PV = "4.5"
+@@ -137,6 +137,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
+ 	   file://linaro/gcc-4.5-linaro-r99419.patch \
+ 	   file://linaro/gcc-4.5-linaro-r99420.patch \
+ 	   file://gcc-scalar-widening-pr45847.patch \
++	   file://gcc-revert-pr42172.patch \
+ 	  "
+ 
+ SRC_URI_append_mips64 = " file://mips64-nomultilib.patch "
+diff --git a/recipes/gcc/gcc-4.5/gcc-revert-pr42172.patch b/recipes/gcc/gcc-4.5/gcc-revert-pr42172.patch
+new file mode 100644
+index 0000000..c49cdf1
+--- /dev/null
++++ b/recipes/gcc/gcc-4.5/gcc-revert-pr42172.patch
+@@ -0,0 +1,989 @@
++This reverts the fix for pr 42172
++http://gcc.gnu.org/bugzilla/show_bug.cgi?id=42172
++It causes regression in samba compilation for arches below armv7
++-Khem
++
++Index: gcc-4_5-branch/gcc/config/arm/arm.c
++===================================================================
++--- gcc-4_5-branch.orig/gcc/config/arm/arm.c
+++++ gcc-4_5-branch/gcc/config/arm/arm.c
++@@ -6420,7 +6420,6 @@ static inline int
++ thumb1_rtx_costs (rtx x, enum rtx_code code, enum rtx_code outer)
++ {
++   enum machine_mode mode = GET_MODE (x);
++-  int total;
++ 
++   switch (code)
++     {
++@@ -6523,20 +6522,24 @@ thumb1_rtx_costs (rtx x, enum rtx_code c
++ 	return 14;
++       return 2;
++ 
++-    case SIGN_EXTEND:
++     case ZERO_EXTEND:
++-      total = mode == DImode ? COSTS_N_INSNS (1) : 0;
++-      total += thumb1_rtx_costs (XEXP (x, 0), GET_CODE (XEXP (x, 0)), code);
++-
++-      if (mode == SImode)
++-	return total;
+++      /* XXX still guessing.  */
+++      switch (GET_MODE (XEXP (x, 0)))
+++	{
+++	case QImode:
+++	  return (1 + (mode == DImode ? 4 : 0)
+++		  + (GET_CODE (XEXP (x, 0)) == MEM ? 10 : 0));
+++
+++	case HImode:
+++	  return (4 + (mode == DImode ? 4 : 0)
+++		  + (GET_CODE (XEXP (x, 0)) == MEM ? 10 : 0));
++ 
++-      if (arm_arch6)
++-	return total + COSTS_N_INSNS (1);
+++	case SImode:
+++	  return (1 + (GET_CODE (XEXP (x, 0)) == MEM ? 10 : 0));
++ 
++-      /* Assume a two-shift sequence.  Increase the cost slightly so
++-	 we prefer actual shifts over an extend operation.  */
++-      return total + 1 + COSTS_N_INSNS (2);
+++	default:
+++	  return 99;
+++	}
++ 
++     default:
++       return 99;
++@@ -7020,39 +7023,44 @@ arm_rtx_costs_1 (rtx x, enum rtx_code ou
++       return false;
++ 
++     case SIGN_EXTEND:
+++      if (GET_MODE_CLASS (mode) == MODE_INT)
+++	{
+++	  *total = 0;
+++	  if (mode == DImode)
+++	    *total += COSTS_N_INSNS (1);
+++
+++	  if (GET_MODE (XEXP (x, 0)) != SImode)
+++	    {
+++	      if (arm_arch6)
+++		{
+++		  if (GET_CODE (XEXP (x, 0)) != MEM)
+++		    *total += COSTS_N_INSNS (1);
+++		}
+++	      else if (!arm_arch4 || GET_CODE (XEXP (x, 0)) != MEM)
+++		*total += COSTS_N_INSNS (2);
+++	    }
+++
+++	  return false;
+++	}
+++
+++      /* Fall through */
++     case ZERO_EXTEND:
++       *total = 0;
++       if (GET_MODE_CLASS (mode) == MODE_INT)
++ 	{
++-	  rtx op = XEXP (x, 0);
++-	  enum machine_mode opmode = GET_MODE (op);
++-
++ 	  if (mode == DImode)
++ 	    *total += COSTS_N_INSNS (1);
++ 
++-	  if (opmode != SImode)
+++	  if (GET_MODE (XEXP (x, 0)) != SImode)
++ 	    {
++-	      if (MEM_P (op))
+++	      if (arm_arch6)
++ 		{
++-		  /* If !arm_arch4, we use one of the extendhisi2_mem
++-		     or movhi_bytes patterns for HImode.  For a QImode
++-		     sign extension, we first zero-extend from memory
++-		     and then perform a shift sequence.  */
++-		  if (!arm_arch4 && (opmode != QImode || code == SIGN_EXTEND))
++-		    *total += COSTS_N_INSNS (2);
+++		  if (GET_CODE (XEXP (x, 0)) != MEM)
+++		    *total += COSTS_N_INSNS (1);
++ 		}
++-	      else if (arm_arch6)
++-		*total += COSTS_N_INSNS (1);
++-
++-	      /* We don't have the necessary insn, so we need to perform some
++-		 other operation.  */
++-	      else if (TARGET_ARM && code == ZERO_EXTEND && mode == QImode)
++-		/* An and with constant 255.  */
++-		*total += COSTS_N_INSNS (1);
++-	      else
++-		/* A shift sequence.  Increase costs slightly to avoid
++-		   combining two shifts into an extend operation.  */
++-		*total += COSTS_N_INSNS (2) + 1;
+++	      else if (!arm_arch4 || GET_CODE (XEXP (x, 0)) != MEM)
+++		*total += COSTS_N_INSNS (GET_MODE (XEXP (x, 0)) == QImode ?
+++					 1 : 2);
++ 	    }
++ 
++ 	  return false;
++@@ -7302,8 +7310,41 @@ arm_size_rtx_costs (rtx x, enum rtx_code
++       return false;
++ 
++     case SIGN_EXTEND:
+++      *total = 0;
+++      if (GET_MODE_SIZE (GET_MODE (XEXP (x, 0))) < 4)
+++	{
+++	  if (!(arm_arch4 && MEM_P (XEXP (x, 0))))
+++	    *total += COSTS_N_INSNS (arm_arch6 ? 1 : 2);
+++	}
+++      if (mode == DImode)
+++	*total += COSTS_N_INSNS (1);
+++      return false;
+++
++     case ZERO_EXTEND:
++-      return arm_rtx_costs_1 (x, outer_code, total, 0);
+++      *total = 0;
+++      if (!(arm_arch4 && MEM_P (XEXP (x, 0))))
+++	{
+++	  switch (GET_MODE (XEXP (x, 0)))
+++	    {
+++	    case QImode:
+++	      *total += COSTS_N_INSNS (1);
+++	      break;
+++
+++	    case HImode:
+++	      *total += COSTS_N_INSNS (arm_arch6 ? 1 : 2);
+++
+++	    case SImode:
+++	      break;
+++
+++	    default:
+++	      *total += COSTS_N_INSNS (2);
+++	    }
+++	}
+++
+++      if (mode == DImode)
+++	*total += COSTS_N_INSNS (1);
+++
+++      return false;
++ 
++     case CONST_INT:
++       if (const_ok_for_arm (INTVAL (x)))
++Index: gcc-4_5-branch/gcc/config/arm/arm.md
++===================================================================
++--- gcc-4_5-branch.orig/gcc/config/arm/arm.md
+++++ gcc-4_5-branch/gcc/config/arm/arm.md
++@@ -156,9 +156,6 @@
++ ; patterns that share the same RTL in both ARM and Thumb code.
++ (define_attr "is_thumb" "no,yes" (const (symbol_ref "thumb_code")))
++ 
++-; IS_ARCH6 is set to 'yes' when we are generating code form ARMv6.
++-(define_attr "is_arch6" "no,yes" (const (symbol_ref "arm_arch6")))
++-
++ ;; Operand number of an input operand that is shifted.  Zero if the
++ ;; given instruction does not shift one of its input operands.
++ (define_attr "shift" "" (const_int 0))
++@@ -4094,46 +4091,92 @@
++ )
++ 
++ (define_expand "zero_extendhisi2"
++-  [(set (match_operand:SI 0 "s_register_operand" "")
++-	(zero_extend:SI (match_operand:HI 1 "nonimmediate_operand" "")))]
+++  [(set (match_dup 2)
+++	(ashift:SI (match_operand:HI 1 "nonimmediate_operand" "")
+++		   (const_int 16)))
+++   (set (match_operand:SI 0 "s_register_operand" "")
+++	(lshiftrt:SI (match_dup 2) (const_int 16)))]
++   "TARGET_EITHER"
++-{
++-  if (TARGET_ARM && !arm_arch4 && MEM_P (operands[1]))
++-    {
++-      emit_insn (gen_movhi_bytes (operands[0], operands[1]));
++-      DONE;
++-    }
++-  if (!arm_arch6 && !MEM_P (operands[1]))
+++  "
+++  {
+++    if ((TARGET_THUMB1 || arm_arch4) && GET_CODE (operands[1]) == MEM)
+++      {
+++	emit_insn (gen_rtx_SET (VOIDmode, operands[0],
+++				gen_rtx_ZERO_EXTEND (SImode, operands[1])));
+++	DONE;
+++      }
+++    if (TARGET_ARM && GET_CODE (operands[1]) == MEM)
+++      {
+++	emit_insn (gen_movhi_bytes (operands[0], operands[1]));
+++	DONE;
+++      }
+++
+++    if (!s_register_operand (operands[1], HImode))
+++      operands[1] = copy_to_mode_reg (HImode, operands[1]);
+++
+++    if (arm_arch6)
+++      {
+++	emit_insn (gen_rtx_SET (VOIDmode, operands[0],
+++				gen_rtx_ZERO_EXTEND (SImode, operands[1])));
+++	DONE;
+++      }
+++
+++    operands[1] = gen_lowpart (SImode, operands[1]);
+++    operands[2] = gen_reg_rtx (SImode);
+++  }"
+++)
+++
+++(define_insn "*thumb1_zero_extendhisi2"
+++  [(set (match_operand:SI 0 "register_operand" "=l")
+++	(zero_extend:SI (match_operand:HI 1 "memory_operand" "m")))]
+++  "TARGET_THUMB1 && !arm_arch6"
+++  "*
+++  rtx mem = XEXP (operands[1], 0);
+++
+++  if (GET_CODE (mem) == CONST)
+++    mem = XEXP (mem, 0);
+++
+++  if (GET_CODE (mem) == LABEL_REF)
+++    return \"ldr\\t%0, %1\";
+++
+++  if (GET_CODE (mem) == PLUS)
++     {
++-      rtx t = gen_lowpart (SImode, operands[1]);
++-      rtx tmp = gen_reg_rtx (SImode);
++-      emit_insn (gen_ashlsi3 (tmp, t, GEN_INT (16)));
++-      emit_insn (gen_lshrsi3 (operands[0], tmp, GEN_INT (16)));
++-      DONE;
+++      rtx a = XEXP (mem, 0);
+++      rtx b = XEXP (mem, 1);
+++
+++      /* This can happen due to bugs in reload.  */
+++      if (GET_CODE (a) == REG && REGNO (a) == SP_REGNUM)
+++        {
+++          rtx ops[2];
+++          ops[0] = operands[0];
+++          ops[1] = a;
+++
+++          output_asm_insn (\"mov	%0, %1\", ops);
+++
+++          XEXP (mem, 0) = operands[0];
+++       }
+++
+++      else if (   GET_CODE (a) == LABEL_REF
+++	       && GET_CODE (b) == CONST_INT)
+++        return \"ldr\\t%0, %1\";
++     }
++-})
++ 
++-(define_split
++-  [(set (match_operand:SI 0 "register_operand" "")
++-	(zero_extend:SI (match_operand:HI 1 "register_operand" "")))]
++-  "!TARGET_THUMB2 && !arm_arch6"
++-  [(set (match_dup 0) (ashift:SI (match_dup 2) (const_int 16)))
++-   (set (match_dup 0) (lshiftrt:SI (match_dup 0) (const_int 16)))]
++-{
++-  operands[2] = gen_lowpart (SImode, operands[1]);
++-})
+++  return \"ldrh\\t%0, %1\";
+++  "
+++  [(set_attr "length" "4")
+++   (set_attr "type" "load_byte")
+++   (set_attr "pool_range" "60")]
+++)
++ 
++-(define_insn "*thumb1_zero_extendhisi2"
+++(define_insn "*thumb1_zero_extendhisi2_v6"
++   [(set (match_operand:SI 0 "register_operand" "=l,l")
++ 	(zero_extend:SI (match_operand:HI 1 "nonimmediate_operand" "l,m")))]
++-  "TARGET_THUMB1"
+++  "TARGET_THUMB1 && arm_arch6"
++   "*
++   rtx mem;
++ 
++-  if (which_alternative == 0 && arm_arch6)
++-    return \"uxth\\t%0, %1\";
++   if (which_alternative == 0)
++-    return \"#\";
+++    return \"uxth\\t%0, %1\";
++ 
++   mem = XEXP (operands[1], 0);
++ 
++@@ -4167,25 +4210,20 @@
++     
++   return \"ldrh\\t%0, %1\";
++   "
++-  [(set_attr_alternative "length"
++-			 [(if_then_else (eq_attr "is_arch6" "yes")
++-				       (const_int 2) (const_int 4))
++-			 (const_int 4)])
+++  [(set_attr "length" "2,4")
++    (set_attr "type" "alu_shift,load_byte")
++    (set_attr "pool_range" "*,60")]
++ )
++ 
++ (define_insn "*arm_zero_extendhisi2"
++-  [(set (match_operand:SI 0 "s_register_operand" "=r,r")
++-	(zero_extend:SI (match_operand:HI 1 "nonimmediate_operand" "r,m")))]
+++  [(set (match_operand:SI 0 "s_register_operand" "=r")
+++	(zero_extend:SI (match_operand:HI 1 "memory_operand" "m")))]
++   "TARGET_ARM && arm_arch4 && !arm_arch6"
++-  "@
++-   #
++-   ldr%(h%)\\t%0, %1"
++-  [(set_attr "type" "alu_shift,load_byte")
+++  "ldr%(h%)\\t%0, %1"
+++  [(set_attr "type" "load_byte")
++    (set_attr "predicable" "yes")
++-   (set_attr "pool_range" "*,256")
++-   (set_attr "neg_pool_range" "*,244")]
+++   (set_attr "pool_range" "256")
+++   (set_attr "neg_pool_range" "244")]
++ )
++ 
++ (define_insn "*arm_zero_extendhisi2_v6"
++@@ -4215,49 +4253,50 @@
++   [(set (match_operand:SI 0 "s_register_operand" "")
++ 	(zero_extend:SI (match_operand:QI 1 "nonimmediate_operand" "")))]
++   "TARGET_EITHER"
++-{
++-  if (TARGET_ARM && !arm_arch6 && GET_CODE (operands[1]) != MEM)
++-    {
++-      emit_insn (gen_andsi3 (operands[0],
++-			     gen_lowpart (SImode, operands[1]),
++-					  GEN_INT (255)));
++-      DONE;
++-    }
++-  if (!arm_arch6 && !MEM_P (operands[1]))
+++  "
+++  if (!arm_arch6 && GET_CODE (operands[1]) != MEM)
++     {
++-      rtx t = gen_lowpart (SImode, operands[1]);
++-      rtx tmp = gen_reg_rtx (SImode);
++-      emit_insn (gen_ashlsi3 (tmp, t, GEN_INT (24)));
++-      emit_insn (gen_lshrsi3 (operands[0], tmp, GEN_INT (24)));
++-      DONE;
++-    }
++-})
+++      if (TARGET_ARM)
+++        {
+++          emit_insn (gen_andsi3 (operands[0],
+++				 gen_lowpart (SImode, operands[1]),
+++			         GEN_INT (255)));
+++        }
+++      else /* TARGET_THUMB */
+++        {
+++          rtx temp = gen_reg_rtx (SImode);
+++	  rtx ops[3];
++ 
++-(define_split
++-  [(set (match_operand:SI 0 "register_operand" "")
++-	(zero_extend:SI (match_operand:QI 1 "register_operand" "")))]
++-  "!arm_arch6"
++-  [(set (match_dup 0) (ashift:SI (match_dup 2) (const_int 24)))
++-   (set (match_dup 0) (lshiftrt:SI (match_dup 0) (const_int 24)))]
++-{
++-  operands[2] = simplify_gen_subreg (SImode, operands[1], QImode, 0);
++-  if (TARGET_ARM)
++-    {
++-      emit_insn (gen_andsi3 (operands[0], operands[2], GEN_INT (255)));
+++          operands[1] = copy_to_mode_reg (QImode, operands[1]);
+++          operands[1] = gen_lowpart (SImode, operands[1]);
+++
+++	  ops[0] = temp;
+++	  ops[1] = operands[1];
+++	  ops[2] = GEN_INT (24);
+++
+++	  emit_insn (gen_rtx_SET (VOIDmode, ops[0],
+++				  gen_rtx_ASHIFT (SImode, ops[1], ops[2])));
+++
+++          ops[0] = operands[0];
+++	  ops[1] = temp;
+++	  ops[2] = GEN_INT (24);
+++
+++	  emit_insn (gen_rtx_SET (VOIDmode, ops[0],
+++				  gen_rtx_LSHIFTRT (SImode, ops[1], ops[2])));
+++	}
++       DONE;
++     }
++-})
+++  "
+++)
++ 
++ (define_insn "*thumb1_zero_extendqisi2"
++-  [(set (match_operand:SI 0 "register_operand" "=l,l")
++-	(zero_extend:SI (match_operand:QI 1 "nonimmediate_operand" "l,m")))]
+++  [(set (match_operand:SI 0 "register_operand" "=l")
+++	(zero_extend:SI (match_operand:QI 1 "memory_operand" "m")))]
++   "TARGET_THUMB1 && !arm_arch6"
++-  "@
++-   #
++-   ldrb\\t%0, %1"
++-  [(set_attr "length" "4,2")
++-   (set_attr "type" "alu_shift,load_byte")
++-   (set_attr "pool_range" "*,32")]
+++  "ldrb\\t%0, %1"
+++  [(set_attr "length" "2")
+++   (set_attr "type" "load_byte")
+++   (set_attr "pool_range" "32")]
++ )
++ 
++ (define_insn "*thumb1_zero_extendqisi2_v6"
++@@ -4273,17 +4312,14 @@
++ )
++ 
++ (define_insn "*arm_zero_extendqisi2"
++-  [(set (match_operand:SI 0 "s_register_operand" "=r,r")
++-	(zero_extend:SI (match_operand:QI 1 "nonimmediate_operand" "r,m")))]
+++  [(set (match_operand:SI 0 "s_register_operand" "=r")
+++	(zero_extend:SI (match_operand:QI 1 "memory_operand" "m")))]
++   "TARGET_ARM && !arm_arch6"
++-  "@
++-   #
++-   ldr%(b%)\\t%0, %1\\t%@ zero_extendqisi2"
++-  [(set_attr "length" "8,4")
++-   (set_attr "type" "alu_shift,load_byte")
+++  "ldr%(b%)\\t%0, %1\\t%@ zero_extendqisi2"
+++  [(set_attr "type" "load_byte")
++    (set_attr "predicable" "yes")
++-   (set_attr "pool_range" "*,4096")
++-   (set_attr "neg_pool_range" "*,4084")]
+++   (set_attr "pool_range" "4096")
+++   (set_attr "neg_pool_range" "4084")]
++ )
++ 
++ (define_insn "*arm_zero_extendqisi2_v6"
++@@ -4362,42 +4398,108 @@
++ )
++ 
++ (define_expand "extendhisi2"
++-  [(set (match_operand:SI 0 "s_register_operand" "")
++-	(sign_extend:SI (match_operand:HI 1 "nonimmediate_operand" "")))]
+++  [(set (match_dup 2)
+++	(ashift:SI (match_operand:HI 1 "nonimmediate_operand" "")
+++		   (const_int 16)))
+++   (set (match_operand:SI 0 "s_register_operand" "")
+++	(ashiftrt:SI (match_dup 2)
+++		     (const_int 16)))]
++   "TARGET_EITHER"
++-{
++-  if (TARGET_THUMB1)
++-    {
++-      emit_insn (gen_thumb1_extendhisi2 (operands[0], operands[1]));
++-      DONE;
++-    }
++-  if (MEM_P (operands[1]) && TARGET_ARM && !arm_arch4)
++-    {
++-      emit_insn (gen_extendhisi2_mem (operands[0], operands[1]));
++-      DONE;
++-    }
+++  "
+++  {
+++    if (GET_CODE (operands[1]) == MEM)
+++      {
+++	if (TARGET_THUMB1)
+++	  {
+++	    emit_insn (gen_thumb1_extendhisi2 (operands[0], operands[1]));
+++	    DONE;
+++          }
+++	else if (arm_arch4)
+++	  {
+++	    emit_insn (gen_rtx_SET (VOIDmode, operands[0],
+++		       gen_rtx_SIGN_EXTEND (SImode, operands[1])));
+++	    DONE;
+++	  }
+++      }
++ 
++-  if (!arm_arch6 && !MEM_P (operands[1]))
++-    {
++-      rtx t = gen_lowpart (SImode, operands[1]);
++-      rtx tmp = gen_reg_rtx (SImode);
++-      emit_insn (gen_ashlsi3 (tmp, t, GEN_INT (16)));
++-      emit_insn (gen_ashrsi3 (operands[0], tmp, GEN_INT (16)));
++-      DONE;
++-    }
++-})
+++    if (TARGET_ARM && GET_CODE (operands[1]) == MEM)
+++      {
+++        emit_insn (gen_extendhisi2_mem (operands[0], operands[1]));
+++        DONE;
+++      }
++ 
++-(define_split
++-  [(parallel
++-    [(set (match_operand:SI 0 "register_operand" "")
++-	  (sign_extend:SI (match_operand:HI 1 "register_operand" "")))
++-     (clobber (match_scratch:SI 2 ""))])]
++-  "!arm_arch6"
++-  [(set (match_dup 0) (ashift:SI (match_dup 2) (const_int 16)))
++-   (set (match_dup 0) (ashiftrt:SI (match_dup 0) (const_int 16)))]
++-{
++-  operands[2] = simplify_gen_subreg (SImode, operands[1], HImode, 0);
++-})
+++    if (!s_register_operand (operands[1], HImode))
+++      operands[1] = copy_to_mode_reg (HImode, operands[1]);
+++
+++    if (arm_arch6)
+++      {
+++	if (TARGET_THUMB1)
+++	  emit_insn (gen_thumb1_extendhisi2 (operands[0], operands[1]));
+++	else
+++	  emit_insn (gen_rtx_SET (VOIDmode, operands[0],
+++		     gen_rtx_SIGN_EXTEND (SImode, operands[1])));
+++
+++	DONE;
+++      }
+++
+++    operands[1] = gen_lowpart (SImode, operands[1]);
+++    operands[2] = gen_reg_rtx (SImode);
+++  }"
+++)
+++
+++(define_insn "thumb1_extendhisi2"
+++  [(set (match_operand:SI 0 "register_operand" "=l")
+++	(sign_extend:SI (match_operand:HI 1 "memory_operand" "m")))
+++   (clobber (match_scratch:SI 2 "=&l"))]
+++  "TARGET_THUMB1 && !arm_arch6"
+++  "*
+++  {
+++    rtx ops[4];
+++    rtx mem = XEXP (operands[1], 0);
+++
+++    /* This code used to try to use 'V', and fix the address only if it was
+++       offsettable, but this fails for e.g. REG+48 because 48 is outside the
+++       range of QImode offsets, and offsettable_address_p does a QImode
+++       address check.  */
+++
+++    if (GET_CODE (mem) == CONST)
+++      mem = XEXP (mem, 0);
+++
+++    if (GET_CODE (mem) == LABEL_REF)
+++      return \"ldr\\t%0, %1\";
+++
+++    if (GET_CODE (mem) == PLUS)
+++      {
+++        rtx a = XEXP (mem, 0);
+++        rtx b = XEXP (mem, 1);
+++
+++        if (GET_CODE (a) == LABEL_REF
+++	    && GET_CODE (b) == CONST_INT)
+++          return \"ldr\\t%0, %1\";
+++
+++        if (GET_CODE (b) == REG)
+++          return \"ldrsh\\t%0, %1\";
+++
+++        ops[1] = a;
+++        ops[2] = b;
+++      }
+++    else
+++      {
+++        ops[1] = mem;
+++        ops[2] = const0_rtx;
+++      }
+++
+++    gcc_assert (GET_CODE (ops[1]) == REG);
+++
+++    ops[0] = operands[0];
+++    ops[3] = operands[2];
+++    output_asm_insn (\"mov\\t%3, %2\;ldrsh\\t%0, [%1, %3]\", ops);
+++    return \"\";
+++  }"
+++  [(set_attr "length" "4")
+++   (set_attr "type" "load_byte")
+++   (set_attr "pool_range" "1020")]
+++)
++ 
++ ;; We used to have an early-clobber on the scratch register here.
++ ;; However, there's a bug somewhere in reload which means that this
++@@ -4406,18 +4508,16 @@
++ ;; we try to verify the operands.  Fortunately, we don't really need
++ ;; the early-clobber: we can always use operand 0 if operand 2
++ ;; overlaps the address.
++-(define_insn "thumb1_extendhisi2"
+++(define_insn "*thumb1_extendhisi2_insn_v6"
++   [(set (match_operand:SI 0 "register_operand" "=l,l")
++ 	(sign_extend:SI (match_operand:HI 1 "nonimmediate_operand" "l,m")))
++    (clobber (match_scratch:SI 2 "=X,l"))]
++-  "TARGET_THUMB1"
+++  "TARGET_THUMB1 && arm_arch6"
++   "*
++   {
++     rtx ops[4];
++     rtx mem;
++ 
++-    if (which_alternative == 0 && !arm_arch6)
++-      return \"#\";
++     if (which_alternative == 0)
++       return \"sxth\\t%0, %1\";
++ 
++@@ -4465,10 +4565,7 @@
++     output_asm_insn (\"mov\\t%3, %2\;ldrsh\\t%0, [%1, %3]\", ops);
++     return \"\";
++   }"
++-  [(set_attr_alternative "length"
++-			 [(if_then_else (eq_attr "is_arch6" "yes")
++-					(const_int 2) (const_int 4))
++-			  (const_int 4)])
+++  [(set_attr "length" "2,4")
++    (set_attr "type" "alu_shift,load_byte")
++    (set_attr "pool_range" "*,1020")]
++ )
++@@ -4509,28 +4606,15 @@
++   }"
++ )
++ 
++-(define_split
++-  [(set (match_operand:SI 0 "register_operand" "")
++-	(sign_extend:SI (match_operand:HI 1 "register_operand" "")))]
++-  "!arm_arch6"
++-  [(set (match_dup 0) (ashift:SI (match_dup 2) (const_int 16)))
++-   (set (match_dup 0) (ashiftrt:SI (match_dup 0) (const_int 16)))]
++-{
++-  operands[2] = simplify_gen_subreg (SImode, operands[1], HImode, 0);
++-})
++-
++ (define_insn "*arm_extendhisi2"
++-  [(set (match_operand:SI 0 "s_register_operand" "=r,r")
++-	(sign_extend:SI (match_operand:HI 1 "nonimmediate_operand" "r,m")))]
+++  [(set (match_operand:SI 0 "s_register_operand" "=r")
+++	(sign_extend:SI (match_operand:HI 1 "memory_operand" "m")))]
++   "TARGET_ARM && arm_arch4 && !arm_arch6"
++-  "@
++-   #
++-   ldr%(sh%)\\t%0, %1"
++-  [(set_attr "length" "8,4")
++-   (set_attr "type" "alu_shift,load_byte")
+++  "ldr%(sh%)\\t%0, %1"
+++  [(set_attr "type" "load_byte")
++    (set_attr "predicable" "yes")
++-   (set_attr "pool_range" "*,256")
++-   (set_attr "neg_pool_range" "*,244")]
+++   (set_attr "pool_range" "256")
+++   (set_attr "neg_pool_range" "244")]
++ )
++ 
++ ;; ??? Check Thumb-2 pool range
++@@ -4592,45 +4676,46 @@
++ )
++ 
++ (define_expand "extendqisi2"
++-  [(set (match_operand:SI 0 "s_register_operand" "")
++-	(sign_extend:SI (match_operand:QI 1 "arm_reg_or_extendqisi_mem_op" "")))]
+++  [(set (match_dup 2)
+++	(ashift:SI (match_operand:QI 1 "arm_reg_or_extendqisi_mem_op" "")
+++		   (const_int 24)))
+++   (set (match_operand:SI 0 "s_register_operand" "")
+++	(ashiftrt:SI (match_dup 2)
+++		     (const_int 24)))]
++   "TARGET_EITHER"
++-{
++-  if (!arm_arch4 && MEM_P (operands[1]))
++-    operands[1] = copy_to_mode_reg (QImode, operands[1]);
+++  "
+++  {
+++    if ((TARGET_THUMB || arm_arch4) && GET_CODE (operands[1]) == MEM)
+++      {
+++        emit_insn (gen_rtx_SET (VOIDmode, operands[0],
+++			        gen_rtx_SIGN_EXTEND (SImode, operands[1])));
+++        DONE;
+++      }
++ 
++-  if (!arm_arch6 && !MEM_P (operands[1]))
++-    {
++-      rtx t = gen_lowpart (SImode, operands[1]);
++-      rtx tmp = gen_reg_rtx (SImode);
++-      emit_insn (gen_ashlsi3 (tmp, t, GEN_INT (24)));
++-      emit_insn (gen_ashrsi3 (operands[0], tmp, GEN_INT (24)));
++-      DONE;
++-    }
++-})
+++    if (!s_register_operand (operands[1], QImode))
+++      operands[1] = copy_to_mode_reg (QImode, operands[1]);
++ 
++-(define_split
++-  [(set (match_operand:SI 0 "register_operand" "")
++-	(sign_extend:SI (match_operand:QI 1 "register_operand" "")))]
++-  "!arm_arch6"
++-  [(set (match_dup 0) (ashift:SI (match_dup 2) (const_int 24)))
++-   (set (match_dup 0) (ashiftrt:SI (match_dup 0) (const_int 24)))]
++-{
++-  operands[2] = simplify_gen_subreg (SImode, operands[1], QImode, 0);
++-})
+++    if (arm_arch6)
+++      {
+++        emit_insn (gen_rtx_SET (VOIDmode, operands[0],
+++			        gen_rtx_SIGN_EXTEND (SImode, operands[1])));
+++        DONE;
+++      }
+++
+++    operands[1] = gen_lowpart (SImode, operands[1]);
+++    operands[2] = gen_reg_rtx (SImode);
+++  }"
+++)
++ 
++ (define_insn "*arm_extendqisi"
++-  [(set (match_operand:SI 0 "s_register_operand" "=r,r")
++-	(sign_extend:SI (match_operand:QI 1 "arm_reg_or_extendqisi_mem_op" "r,Uq")))]
+++  [(set (match_operand:SI 0 "s_register_operand" "=r")
+++	(sign_extend:SI (match_operand:QI 1 "arm_extendqisi_mem_op" "Uq")))]
++   "TARGET_ARM && arm_arch4 && !arm_arch6"
++-  "@
++-   #
++-   ldr%(sb%)\\t%0, %1"
++-  [(set_attr "length" "8,4")
++-   (set_attr "type" "alu_shift,load_byte")
+++  "ldr%(sb%)\\t%0, %1"
+++  [(set_attr "type" "load_byte")
++    (set_attr "predicable" "yes")
++-   (set_attr "pool_range" "*,256")
++-   (set_attr "neg_pool_range" "*,244")]
+++   (set_attr "pool_range" "256")
+++   (set_attr "neg_pool_range" "244")]
++ )
++ 
++ (define_insn "*arm_extendqisi_v6"
++@@ -4658,55 +4743,83 @@
++    (set_attr "predicable" "yes")]
++ )
++ 
++-(define_split
++-  [(set (match_operand:SI 0 "register_operand" "")
++-	(sign_extend:SI (match_operand:QI 1 "memory_operand" "")))]
++-  "TARGET_THUMB1 && reload_completed"
++-  [(set (match_dup 0) (match_dup 2))
++-   (set (match_dup 0) (sign_extend:SI (match_dup 3)))]
++-{
++-  rtx addr = XEXP (operands[1], 0);
+++(define_insn "*thumb1_extendqisi2"
+++  [(set (match_operand:SI 0 "register_operand" "=l,l")
+++	(sign_extend:SI (match_operand:QI 1 "memory_operand" "V,m")))]
+++  "TARGET_THUMB1 && !arm_arch6"
+++  "*
+++  {
+++    rtx ops[3];
+++    rtx mem = XEXP (operands[1], 0);
++ 
++-  if (GET_CODE (addr) == CONST)
++-    addr = XEXP (addr, 0);
+++    if (GET_CODE (mem) == CONST)
+++      mem = XEXP (mem, 0);
++ 
++-  if (GET_CODE (addr) == PLUS
++-      && REG_P (XEXP (addr, 0)) && REG_P (XEXP (addr, 1)))
++-    /* No split necessary.  */
++-    FAIL;
+++    if (GET_CODE (mem) == LABEL_REF)
+++      return \"ldr\\t%0, %1\";
++ 
++-  if (GET_CODE (addr) == PLUS
++-      && !REG_P (XEXP (addr, 0)) && !REG_P (XEXP (addr, 1)))
++-    FAIL;
+++    if (GET_CODE (mem) == PLUS
+++        && GET_CODE (XEXP (mem, 0)) == LABEL_REF)
+++      return \"ldr\\t%0, %1\";
++ 
++-  if (reg_overlap_mentioned_p (operands[0], addr))
++-    {
++-      rtx t = gen_lowpart (QImode, operands[0]);
++-      emit_move_insn (t, operands[1]);
++-      emit_insn (gen_thumb1_extendqisi2 (operands[0], t));
++-      DONE;
++-    }
+++    if (which_alternative == 0)
+++      return \"ldrsb\\t%0, %1\";
++ 
++-  if (REG_P (addr))
++-    {
++-      addr = gen_rtx_PLUS (Pmode, addr, operands[0]);
++-      operands[2] = const0_rtx;
++-    }
++-  else if (GET_CODE (addr) != PLUS)
++-    FAIL;
++-  else if (REG_P (XEXP (addr, 0)))
++-    {
++-      operands[2] = XEXP (addr, 1);
++-      addr = gen_rtx_PLUS (Pmode, XEXP (addr, 0), operands[0]);
++-    }
++-  else
++-    {
++-      operands[2] = XEXP (addr, 0);
++-      addr = gen_rtx_PLUS (Pmode, XEXP (addr, 1), operands[0]);
++-    }
+++    ops[0] = operands[0];
++ 
++-  operands[3] = change_address (operands[1], QImode, addr);
++-})
+++    if (GET_CODE (mem) == PLUS)
+++      {
+++        rtx a = XEXP (mem, 0);
+++	rtx b = XEXP (mem, 1);
+++
+++        ops[1] = a;
+++        ops[2] = b;
+++
+++        if (GET_CODE (a) == REG)
+++	  {
+++	    if (GET_CODE (b) == REG)
+++              output_asm_insn (\"ldrsb\\t%0, [%1, %2]\", ops);
+++            else if (REGNO (a) == REGNO (ops[0]))
+++	      {
+++                output_asm_insn (\"ldrb\\t%0, [%1, %2]\", ops);
+++		output_asm_insn (\"lsl\\t%0, %0, #24\", ops);
+++		output_asm_insn (\"asr\\t%0, %0, #24\", ops);
+++	      }
+++	    else
+++              output_asm_insn (\"mov\\t%0, %2\;ldrsb\\t%0, [%1, %0]\", ops);
+++	  }
+++	else
+++          {
+++	    gcc_assert (GET_CODE (b) == REG);
+++            if (REGNO (b) == REGNO (ops[0]))
+++	      {
+++                output_asm_insn (\"ldrb\\t%0, [%2, %1]\", ops);
+++		output_asm_insn (\"lsl\\t%0, %0, #24\", ops);
+++		output_asm_insn (\"asr\\t%0, %0, #24\", ops);
+++	      }
+++	    else
+++              output_asm_insn (\"mov\\t%0, %2\;ldrsb\\t%0, [%1, %0]\", ops);
+++          }
+++      }
+++    else if (GET_CODE (mem) == REG && REGNO (ops[0]) == REGNO (mem))
+++      {
+++        output_asm_insn (\"ldrb\\t%0, [%0, #0]\", ops);
+++	output_asm_insn (\"lsl\\t%0, %0, #24\", ops);
+++	output_asm_insn (\"asr\\t%0, %0, #24\", ops);
+++      }
+++    else
+++      {
+++        ops[1] = mem;
+++        ops[2] = const0_rtx;
+++
+++        output_asm_insn (\"mov\\t%0, %2\;ldrsb\\t%0, [%1, %0]\", ops);
+++      }
+++    return \"\";
+++  }"
+++  [(set_attr "length" "2,6")
+++   (set_attr "type" "load_byte,load_byte")
+++   (set_attr "pool_range" "32,32")]
+++)
++ 
++ (define_peephole2
++   [(set (match_operand:SI 0 "register_operand" "")
++@@ -4729,32 +4842,83 @@
++   operands[4] = change_address (operands[4], QImode, addr);
++ })
++ 
++-(define_insn "thumb1_extendqisi2"
+++(define_insn "*thumb1_extendqisi2_v6"
++   [(set (match_operand:SI 0 "register_operand" "=l,l,l")
++ 	(sign_extend:SI (match_operand:QI 1 "nonimmediate_operand" "l,V,m")))]
++-  "TARGET_THUMB1"
++-{
++-  rtx addr;
+++  "TARGET_THUMB1 && arm_arch6"
+++  "*
+++  {
+++    rtx ops[3];
+++    rtx mem;
++ 
++-  if (which_alternative == 0 && arm_arch6)
++-    return "sxtb\\t%0, %1";
++-  if (which_alternative == 0)
++-    return "#";
+++    if (which_alternative == 0)
+++      return \"sxtb\\t%0, %1\";
+++
+++    mem = XEXP (operands[1], 0);
++ 
++-  addr = XEXP (operands[1], 0);
++-  if (GET_CODE (addr) == PLUS
++-      && REG_P (XEXP (addr, 0)) && REG_P (XEXP (addr, 1)))
++-    return "ldrsb\\t%0, %1";
+++    if (GET_CODE (mem) == CONST)
+++      mem = XEXP (mem, 0);
+++
+++    if (GET_CODE (mem) == LABEL_REF)
+++      return \"ldr\\t%0, %1\";
+++
+++    if (GET_CODE (mem) == PLUS
+++        && GET_CODE (XEXP (mem, 0)) == LABEL_REF)
+++      return \"ldr\\t%0, %1\";
+++    if (which_alternative == 0)
+++      return \"ldrsb\\t%0, %1\";
++       
++-  return "#";
++-}
++-  [(set_attr_alternative "length"
++-			 [(if_then_else (eq_attr "is_arch6" "yes")
++-					(const_int 2) (const_int 4))
++-			  (const_int 2)
++-			  (if_then_else (eq_attr "is_arch6" "yes")
++-					(const_int 4) (const_int 6))])
++-   (set_attr "type" "alu_shift,load_byte,load_byte")]
+++    ops[0] = operands[0];
+++
+++    if (GET_CODE (mem) == PLUS)
+++      {
+++        rtx a = XEXP (mem, 0);
+++	rtx b = XEXP (mem, 1);
+++
+++        ops[1] = a;
+++        ops[2] = b;
+++
+++        if (GET_CODE (a) == REG)
+++	  {
+++	    if (GET_CODE (b) == REG)
+++              output_asm_insn (\"ldrsb\\t%0, [%1, %2]\", ops);
+++            else if (REGNO (a) == REGNO (ops[0]))
+++	      {
+++                output_asm_insn (\"ldrb\\t%0, [%1, %2]\", ops);
+++		output_asm_insn (\"sxtb\\t%0, %0\", ops);
+++	      }
+++	    else
+++              output_asm_insn (\"mov\\t%0, %2\;ldrsb\\t%0, [%1, %0]\", ops);
+++	  }
+++	else
+++          {
+++	    gcc_assert (GET_CODE (b) == REG);
+++            if (REGNO (b) == REGNO (ops[0]))
+++	      {
+++                output_asm_insn (\"ldrb\\t%0, [%2, %1]\", ops);
+++		output_asm_insn (\"sxtb\\t%0, %0\", ops);
+++	      }
+++	    else
+++              output_asm_insn (\"mov\\t%0, %2\;ldrsb\\t%0, [%1, %0]\", ops);
+++          }
+++      }
+++    else if (GET_CODE (mem) == REG && REGNO (ops[0]) == REGNO (mem))
+++      {
+++        output_asm_insn (\"ldrb\\t%0, [%0, #0]\", ops);
+++	output_asm_insn (\"sxtb\\t%0, %0\", ops);
+++      }
+++    else
+++      {
+++        ops[1] = mem;
+++        ops[2] = const0_rtx;
+++
+++        output_asm_insn (\"mov\\t%0, %2\;ldrsb\\t%0, [%1, %0]\", ops);
+++      }
+++    return \"\";
+++  }"
+++  [(set_attr "length" "2,2,4")
+++   (set_attr "type" "alu_shift,load_byte,load_byte")
+++   (set_attr "pool_range" "*,32,32")]
++ )
++ 
++ (define_expand "extendsfdf2"
++Index: gcc-4_5-branch/gcc/testsuite/gcc.target/arm/pr42172-1.c
++===================================================================
++--- gcc-4_5-branch.orig/gcc/testsuite/gcc.target/arm/pr42172-1.c
+++++ /dev/null
++@@ -1,19 +0,0 @@
++-/* { dg-options "-O2" }  */
++-
++-struct A {
++-  unsigned int f1 : 3;
++-  unsigned int f2 : 3;
++-  unsigned int f3 : 1;
++-  unsigned int f4 : 1;
++-
++-};
++-
++-void init_A (struct A *this)
++-{
++-  this->f1 = 0;
++-  this->f2 = 1;
++-  this->f3 = 0;
++-  this->f4 = 0;
++-}
++-
++-/* { dg-final { scan-assembler-times "ldr" 1 } } */
 -- 
-1.7.0.4
+1.7.1
 
 
 
