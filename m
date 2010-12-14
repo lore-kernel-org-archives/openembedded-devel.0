@@ -1,31 +1,48 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail-fx0-f42.google.com ([209.85.161.42])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1PSTg3-0006k4-MW
+	(envelope-from <martin.jansa@gmail.com>) id 1PSUBC-0007Fz-M6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Dec 2010 13:08:20 +0100
-Received: from [192.168.1.10] (business-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id E25735841E7
+	Tue, 14 Dec 2010 13:40:31 +0100
+Received: by fxm11 with SMTP id 11so585039fxm.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Dec 2010 13:20:12 +0100 (CET)
-Mime-Version: 1.0 (Apple Message framework v1082)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <E1PR45K-0000jK-SU@melo.openembedded.org>
-Date: Tue, 14 Dec 2010 13:06:42 +0100
-Message-Id: <01EE9A12-BE87-4EF6-9F0B-EAA20A1DBAAE@vanille-media.de>
-References: <E1PR45K-0000jK-SU@melo.openembedded.org>
+	Tue, 14 Dec 2010 04:38:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=/wvuqUyyJN+BrGPhSZpRtkALREEJEUUoeHf1oJR5sHs=;
+	b=W6/NuZdQT2mdnKBoKyW+S1dGb3EQci2WtZDTDlUI1j1QR/ckTdmcyJSol5r6PNjouE
+	/Ikz8SUB/J7U1sFX83YfSPGVEdGZLAnwr0QCm9TLOjfK69Txlp7NRSAiXYhIKAuVIQn+
+	M4CHi7uPfnvWu7hzJiGpME9Nj3QDb3WtmjML8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=RNmWwue2c5rA7aIA/wpw3Zww6oyV/pzAEen9QLCh8RjOBbQS2rZOApSh3sB1oXHCQ4
+	+v/2fzyMCSrgF8Xjbg6ZNWPLSzZnL7MmwiX+LyPOk0FRwO3A2QOBOPE/dN+5XNWFnH8V
+	CujtLKzNjyuShZy7MhqElzQxyAvIHmQf2dw74=
+Received: by 10.223.83.133 with SMTP id f5mr1786219fal.101.1292330334366;
+	Tue, 14 Dec 2010 04:38:54 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id c11sm2096489fav.2.2010.12.14.04.38.52
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 14 Dec 2010 04:38:53 -0800 (PST)
+Date: Tue, 14 Dec 2010 13:39:27 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1082)
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Message-ID: <20101214123927.GB6662@jama>
+References: <1292284879-11158-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1292284879-11158-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.42
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Philip Balister : i2c-tools : Stage i2c-dev.h header as i2c-dev-user.h.
+Subject: Re: [PATCH] gcc-4.5.inc: Revert PR 42172 backport
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,40 +56,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2010 12:08:20 -0000
+X-List-Received-Date: Tue, 14 Dec 2010 12:40:31 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Am 10.12.2010 um 15:36 schrieb git version control:
+On Mon, Dec 13, 2010 at 04:01:19PM -0800, Khem Raj wrote:
+> * This fixes the gcc ICE as seen compiling samba
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 48e6a063370a38a35f31a28efd8f6ce6ebf00840
-> URL:    =
-http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=3D48e6a0=
-63370a38a35f31a28efd8f6ce6ebf00840
->=20
-> Author: Philip Balister <philip@balister.org>
-> Date:   Fri Dec 10 09:31:01 2010 -0500
->=20
-> i2c-tools : Stage i2c-dev.h header as i2c-dev-user.h.
->=20
-> Thanks to John Faith for suggesting this approach on the ML. The =
-problem is
-> i2c-tools overwrites the header staged by the kernel. This breaks =
-programs
-> that depend on the kernel header.
+I can confirm that with this and your other samba patch it 
+compiles now fine on armv4t (om-gta02), Thanks
 
-I don't think this a good solution. Now all programs break which expect
-this very i2c-dev.h as being staged by i2c-tools. Interestingly, the
-desktop distros don't bother about staging it differently, so why
-can't we do the same? Besides, the i2c-dev.h as staged by i2c-tools
-is supposed to be a superset. If it isn't we should complain with the
-i2c-tools developers.
-
-What can we do in the meantime?
-
-:M:
-
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
