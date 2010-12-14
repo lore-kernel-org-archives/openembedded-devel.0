@@ -1,30 +1,32 @@
-Received: from qmta03.emeryville.ca.mail.comcast.net ([76.96.30.32])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enelson1000@comcast.net>) id 1PSYoq-0006w6-3k
+	(envelope-from <philip@balister.org>) id 1PSZJ7-0007oa-AD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Dec 2010 18:37:44 +0100
-Received: from omta03.emeryville.ca.mail.comcast.net ([76.96.30.27])
-	by qmta03.emeryville.ca.mail.comcast.net with comcast
-	id j2qS1f0030b6N64A35c8Uo; Tue, 14 Dec 2010 17:36:08 +0000
-Received: from [192.168.1.101] ([71.202.66.210])
-	by omta03.emeryville.ca.mail.comcast.net with comcast
-	id j5c51f00U4YBSof8P5c6wa; Tue, 14 Dec 2010 17:36:07 +0000
-Message-ID: <4D07AB03.6030408@comcast.net>
-Date: Tue, 14 Dec 2010 09:36:03 -0800
-From: Ed Nelson <enelson1000@comcast.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Tue, 14 Dec 2010 19:09:02 +0100
+Received: (qmail 18733 invoked by uid 1003); 14 Dec 2010 18:07:15 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	14 Dec 2010 18:07:15 -0000
+Message-ID: <4D07B25A.6000707@balister.org>
+Date: Tue, 14 Dec 2010 13:07:22 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 76.96.30.32
-X-SA-Exim-Mail-From: enelson1000@comcast.net
+References: <4D07AB03.6030408@comcast.net>
+In-Reply-To: <4D07AB03.6030408@comcast.net>
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: i2c-tools_3.0.2.bb recipe question
+Subject: Re: i2c-tools_3.0.2.bb recipe question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,21 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2010 17:37:44 -0000
+X-List-Received-Date: Tue, 14 Dec 2010 18:09:02 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Sorry if this is a lame question.
-In the do_install_append() section
-install -d ${D}{$includedir}/linux
+Urg.
 
-Is there a difference between
-${includedir}
-and
-{$includedir}
-
-
-Thanks
-Ed
+On 12/14/2010 12:36 PM, Ed Nelson wrote:
+> Sorry if this is a lame question.
+> In the do_install_append() section
+> install -d ${D}{$includedir}/linux
+>
+> Is there a difference between
+> ${includedir}
+> and
+> {$includedir}
+>
+>
+> Thanks
+> Ed
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
