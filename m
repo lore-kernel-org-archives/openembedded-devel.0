@@ -1,44 +1,32 @@
-Received: from goliath.siemens.de ([192.35.17.28])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PSPn0-0001XX-Gd
+	(envelope-from <Irfan_Sadiq@mentor.com>) id 1PSPqg-00020q-5k
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Dec 2010 08:59:15 +0100
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by goliath.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
-	oBE7vdtT020954 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Dec 2010 08:57:40 +0100
-Received: from DEMCHP99ET1MSX.ww902.siemens.net
-	(demchp99et1msx.ww902.siemens.net [139.25.131.180])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id oBE7vd6i015156
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Dec 2010 08:57:39 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.7]) by
-	DEMCHP99ET1MSX.ww902.siemens.net ([139.25.131.180]) with mapi;
-	Tue, 14 Dec 2010 08:57:39 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 14 Dec 2010 08:57:38 +0100
-Thread-Topic: [oe] [PATCH] eglibc: use HTTP for svn checkout
-Thread-Index: Acua6SC8dIj1oNtBTQe0jVZRVgK7VwAe0WMw
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED3B95194@DEMCHP99E35MSX.ww902.siemens.net>
-References: <4D065431.6080304@dell.com>
-In-Reply-To: <4D065431.6080304@dell.com>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.35.17.28
-X-SA-Exim-Mail-From: Fabrice.Aeschbacher@siemens.com
+	Tue, 14 Dec 2010 09:03:03 +0100
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1PSPp6-0001po-A1 from Irfan_Sadiq@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Dec 2010 00:01:24 -0800
+Received: from localhost.localdomain ([137.202.156.135]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 14 Dec 2010 09:01:22 +0100
+From: irfan sadiq <irfan_sadiq@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Dec 2010 13:00:16 +0500
+Message-Id: <1292313616-31119-1-git-send-email-irfan_sadiq@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 14 Dec 2010 08:01:23.0144 (UTC)
+	FILETIME=[19774480:01CB9B65]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Irfan_Sadiq@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.0 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] eglibc: use HTTP for svn checkout
+Subject: [PATCH] This patch applied to ltp runalltests.sh script to make default set of test suits configurable which is not the default behaviour. By default rullalltests.sh invokes runltp wihout specifying any set of tests to run. This patch will give the user option to chose from defaults suits setting their respective variables named RUN_DEFAULT_SUITENAME to '0' or '1'. Thus executing only desired suites.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,28 +40,340 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2010 07:59:15 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 14 Dec 2010 08:03:03 -0000
 
-Agreed; this is a change I have to do manually every time
+From: hmsadiq <irfan_sadiq@mentor.com>
 
-Regards,
-  Fabrice
+Signed-off-by: hmsadiq <irfan_sadiq@mentor.com>
+---
+ recipes/ltp/ltp-20100831/runalltests.patch |  302 ++++++++++++++++++++++++++++
+ recipes/ltp/ltp_20100831.bb                |    3 +-
+ 2 files changed, 304 insertions(+), 1 deletions(-)
 
------Urspr=FCngliche Nachricht-----
-Von: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded=
--devel-bounces@lists.openembedded.org] Im Auftrag von Ryan D Phillips
-Gesendet: Montag, 13. Dezember 2010 18:13
-An: openembedded-devel@lists.openembedded.org
-Betreff: [oe] [PATCH] eglibc: use HTTP for svn checkout
+diff --git a/recipes/ltp/ltp-20100831/runalltests.patch b/recipes/ltp/ltp-20100831/runalltests.patch
+new file mode 100644
+index 0000000..c567769
+--- /dev/null
++++ b/recipes/ltp/ltp-20100831/runalltests.patch
+@@ -0,0 +1,302 @@
++--- ltp-full-20100831.orig/runalltests.sh	2010-09-14 16:04:32.000000000 +0500
+++++ ltp-full-20100831/runalltests.sh	2010-12-13 11:18:11.857382107 +0500
++@@ -68,6 +68,12 @@ export RUN_FILECAPS=0
++ export LIBCAPS_INSTALLED=0
++ export LIBATTR_INSTALLED=0
++ 
+++## Set this to 1 if tmp_tools tests are required to be tested
+++export RUN_TPM_TOOLS=0
+++
+++## Set this to 1 if tcore tests are required to be tested
+++export RUN_TCORE=0
+++
++ ## Set this to 1 if you wish to execute the stress_cd tests
++ ## Make sure you have FLOPPY inserted, be warned that you
++ ## will loose all data on it after the tests,
++@@ -202,6 +208,194 @@ export RUN_SMACK_SECURITY_TESTS=0
++ ##Set this to 1 if you wish to run the Basic PERFORMANCE COUNTER tests
++ export RUN_PERFORMANCE_COUNTERS_TESTS=0
++ 
+++### Additional tests That are not included in runalltests.sh
+++export RUN_LTP_AIODIO_PART1=0
+++export RUN_LTP_AIODIO_PART2=0
+++export RUN_LTP_AIODIO_PART3=0
+++export RUN_LTP_AIODIO_PART4=0
+++
+++if [ $RUN_LTP_AIODIO_PART1 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART1_STR="ltp-aiodio.part1"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART2 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART2_STR="ltp-aiodio.part2"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART3 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART3_STR="ltp-aiodio.part3"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART4 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART4_STR="ltp-aiodio.part4"
+++fi                                                                 
+++
+++## This is default set of tests chose which tests you want to perform by default
+++## Set this to 1 if you wish to run the specific tests
+++
+++export RUN_DEFAULT_MATH=0
+++export RUN_DEFAULT_NPTL=0
+++export RUN_DEFAULT_PTY=0
+++export RUN_DEFAULT_IO=0
+++export RUN_DEFAULT_TIMERS=0
+++export RUN_DEFAULT_MM=0
+++export RUN_DEFAULT_IPC=0
+++export RUN_DEFAULT_SCHED=0
+++export RUN_DEFAULT_CONTAINERS=0
+++export RUN_DEFAULT_CONNECTORS=0
+++export RUN_DEFAULT_FILECAPS=0
+++export RUN_DEFAULT_CAP_BOUNDS=0
+++export RUN_DEFAULT_FSX=0
+++export RUN_DEFAULT_FCNTL_LOCKTESTS=0
+++export RUN_DEFAULT_CONTROLLERS=0
+++export RUN_DEFAULT_ADMIN_TOOLS=0
+++export RUN_DEFAULT_HYPERTHREADING=0
+++export RUN_DEFAULT_DIO=0
+++export RUN_DEFAULT_SYSCALLS=0
+++export RUN_DEFAULT_FS_PERMS_SIMPLE=0
+++export RUN_DEFAULT_POWER_MANAGEMENT_TESTS=0
+++export RUN_DEFAULT_NUMA=0
+++export RUN_DEFAULT_HUGETLB=0
+++export RUN_DEFAULT_COMMANDS=0
+++export RUN_DEFAULT_FS=0
+++export RUN_DEFAULT_FS_BIND=0
+++
+++if [ $RUN_DEFAULT_SYSCALLS -eq 1 ]                                 
+++then                                                               
+++        SYSCALLS_STR="syscalls"                                    
+++fi                                                                 
+++
+++if [ $RUN_DEFAULT_FS -eq 1 ]
+++then                        
+++        FS_STR="fs"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_FS_PERMS_SIMPLE -eq 1 ]
+++then                                     
+++        FS_PERMS_SIMPLE_STR="fs_perms_simple"
+++fi                                           
+++
+++if [ $RUN_DEFAULT_FSX -eq 1 ]
+++then                         
+++        FSX_STR="fsx"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_DIO -eq 1 ]
+++then                         
+++        DIO_STR="dio"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_IO -eq 1 ]
+++then                        
+++        IO_STR="io"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_MM -eq 1 ]
+++then                        
+++        MM_STR="mm"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_IPC -eq 1 ]
+++then                         
+++        IPC_STR="ipc"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_SCHED -eq 1 ]
+++then                           
+++        SCHED_STR="sched"      
+++fi                             
+++
+++if [ $RUN_DEFAULT_MATH -eq 1 ]
+++then                          
+++        MATH_STR="math"       
+++fi                            
+++
+++if [ $RUN_DEFAULT_NPTL -eq 1 ]
+++then                          
+++        NPTL_STR="nptl"       
+++fi                            
+++
+++if [ $RUN_DEFAULT_PTY -eq 1 ]
+++then                         
+++        PTY_STR="pty"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_CONTAINERS -eq 1 ]
+++then                                
+++        CONTAINERS_STR="containers" 
+++fi                                  
+++
+++if [ $RUN_DEFAULT_FS_BIND -eq 1 ]
+++then                             
+++        FS_BIND_STR="fs_bind"    
+++fi                               
+++
+++if [ $RUN_DEFAULT_CONTROLLERS -eq 1 ]
+++then                                 
+++        CONTROLLERS_STR="controllers"
+++fi
+++
+++if [ $RUN_DEFAULT_FILECAPS -eq 1 ]
+++then
+++        FILECAPS_STR="filecaps"
+++fi
+++
+++if [ $RUN_DEFAULT_CAP_BOUNDS -eq 1 ]
+++then
+++        CAP_BOUNDS_STR="cap_bounds"
+++fi
+++
+++if [ $RUN_DEFAULT_FCNTL_LOCKTESTS -eq 1 ]
+++then
+++        FCNTL_LOCKTESTS_STR="fcntl-locktests"
+++fi
+++
+++if [ $RUN_DEFAULT_CONNECTORS -eq 1 ]
+++then
+++        CONNECTORS_STR="connectors"
+++fi
+++
+++if [ $RUN_DEFAULT_ADMIN_TOOLS -eq 1 ]
+++then
+++        ADMIN_TOOLS_STR="admin_tools"
+++fi
+++
+++if [ $RUN_DEFAULT_TIMERS -eq 1 ]
+++then
+++        TIMERS_STR="timers"
+++fi
+++
+++if [ $RUN_DEFAULT_POWER_MANAGEMENT_TESTS -eq 1 ]
+++then
+++        POWER_MANAGEMENT_TESTS_STR="power_management_tests"
+++fi
+++
+++if [ $RUN_DEFAULT_NUMA -eq 1 ]
+++then
+++        NUMA_STR="numa"
+++fi
+++
+++if [ $RUN_DEFAULT_HUGETLB -eq 1 ]
+++then
+++        HUGETLB_STR="hugetlb"
+++fi
+++
+++if [ $RUN_DEFAULT_COMMANDS -eq 1 ]
+++then
+++        COMMANDS_STR="commands"
+++fi
+++
+++if [ $RUN_DEFAULT_HYPERTHREADING -eq 1 ]
+++then
+++        HYPERTHREADING_STR="hyperthreading"
+++fi
+++
+++
+++
++ export LTP_VERSION=`"${RUNLTP}" -e`
++ export TEST_START_TIME=`date +"%Y_%b_%d-%Hh_%Mm_%Ss"`
++ export HARDWARE_TYPE=$(uname -i)
++@@ -215,13 +409,68 @@ if ! cd "${LTPROOT}"; then
++ 	exit $rc
++ fi
++ 
+++# ## The First one i plan to run is the default LTP run ##
+++# ## START => Test Series 1                             ##
+++# echo "Running Default LTP..."
+++# "${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+++# printf "Completed running Default LTP\n\n\n"
+++# ## END => Test Series 1                               ##
+++
++ ## The First one i plan to run is the default LTP run ##
++ ## START => Test Series 1                             ##
++ echo "Running Default LTP..."
++-"${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+++        RUN_DEFAULT_SET="$SYSCALLS_STR \
+++	$FS_STR \
+++	$FS_PERMS_SIMPLE_STR \
+++	$FSX_STR \
+++	$DIO_STR \
+++	$IO_STR \
+++	$MM_STR \
+++	$IPC_STR \
+++	$SCHED_STR \
+++	$MATH_STR \
+++	$NPTL_STR \
+++	$PTY_STR \
+++	$CONTAINERS_STR \
+++	$FS_BIND_STR \
+++	$CONTROLLERS_STR \
+++	$FILECAPS_STR \
+++	$CAP_BOUNDS_STR \
+++	$FCNTL_LOCKTESTS_STR \
+++	$CONNECTORS_STR \
+++	$ADMIN_TOOLS_STR \
+++	$TIMERS_STR \
+++	$POWER_MANAGEMENT_TESTS_STR \
+++	$NUMA_STR \
+++	$HUGETLB_STR \
+++	$COMMANDS_STR \
+++	$HYPERTHREADING_STR \
+++	$AIODIO_PART1_STR \
+++	$AIODIO_PART2_STR \
+++	$AIODIO_PART3_STR \
+++	$AIODIO_PART4_STR"
+++
+++	rm -f runtest/defaultset
+++	for TEST in $RUN_DEFAULT_SET
+++	do
+++	    UPPER=`echo $TEST | tr "[:lower:]" "[:upper:]"`
+++# # 	    var="_STR"
+++# # 	    echo "	\$$UPPER$var \\"
+++# # 	    echo "Running Test $UPPER"
+++	    echo "Running Test $TEST"
+++	    cat  runtest/$TEST >> runtest/defaultset
+++# # 			echo "if [ \$RUN_DEFAULT_$UPPER -eq 1 ]"
+++# # 			echo "then"
+++# # 			echo "	$UPPER$var=\"$TEST\""
+++# # 			echo "fi"
+++# # 			echo ""
+++# #			echo "export RUN_DEFAULT_$UPPER=1"
+++	done
+++	"${RUNLTP}" -f defaultset -g defaultset.html
++ printf "Completed running Default LTP\n\n\n"
++ ## END => Test Series 1                               ##
++ 
+++
++ ## The next one i plan to run is ballista             ##
++ ## START => Test Series 2                             ##
++ if [ $RUN_BALLISTA -eq 1 ]
++@@ -353,15 +602,20 @@ then
++ fi
++ ## END => Test Series 6                               ##
++ 
++-
++ ## The next one i plan to run is tpm_tools            ##
++ ## START => Test Series 7                             ##
+++if [ $RUN_TPM_TOOLS -eq 1 ]
+++then
++ "${RUNLTP}" -f tpm_tools
+++fi
++ ## END => Test Series 7                               ##
++ 
++ ## The next one i plan to run is tcore_patch_test_suites
++ ## START => Test Series 8                             ##
+++if [ $RUN_TCORE -eq 1 ]
+++then
++ "${RUNLTP}" -f tcore
+++fi
++ ## END => Test Series 8                               ##
++ 
++ 
+diff --git a/recipes/ltp/ltp_20100831.bb b/recipes/ltp/ltp_20100831.bb
+index 6c5a0ae..c57b5e2 100644
+--- a/recipes/ltp/ltp_20100831.bb
++++ b/recipes/ltp/ltp_20100831.bb
+@@ -7,7 +7,8 @@ PR = "r0"
+ 
+ inherit autotools
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz \
++	  file://runalltests.patch;patch=1 "
+ 
+ S = "${WORKDIR}/ltp-full-${PV}"
+ 
+-- 
+1.7.0.4
 
-  SVN over HTTP is a more reliable transport for developers behind=20
-restrictive
-proxies.
-
-Regards,
-Ryan
 
 
