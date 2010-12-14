@@ -1,46 +1,30 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from qmta04.emeryville.ca.mail.comcast.net ([76.96.30.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1PSKe0-0004JT-OG
+	(envelope-from <enelson1000@comcast.net>) id 1PSLsl-0005Za-5e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Dec 2010 03:29:36 +0100
-Received: by wwi17 with SMTP id 17so111707wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Dec 2010 18:28:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=aqPXpVSHI5oik+gssG0UI4m/RKPKdTrs9/5+rTT/tbY=;
-	b=vpETHjmy10VvruMKT6vaPLpe4KaCC+f5Tj+uJGGZ/knNBCVS3KGqYgo46uiumpgEdc
-	4cGGL5bTHg3zj7ChzAD03zbX2gy57y9M7BxXTFAvNUN7uDRhPv+PxEuJSy0DyfpzowQG
-	LFMHj9+xpLe1+tGkYTouoEwXjUCdZib+gihUs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=g//C2vFJRZfCUmMIs6afOa92HPsMo8jgovRMR1LC6l03sgqDRyzb4uISVwahiup75r
-	ePJP6R+mi3gBfwP9NXcfQQG/c6cFMntqZ5+2/ZqFpiOQhT4HT3IYneMvY4NXCQBioSCL
-	ONykKzBNdBFAhnCe3Z4MjxVWmuhtYWMolCs+Y=
-Received: by 10.216.220.219 with SMTP id o69mr2189518wep.57.1292293680706;
-	Mon, 13 Dec 2010 18:28:00 -0800 (PST)
+	Tue, 14 Dec 2010 04:48:55 +0100
+Received: from omta09.emeryville.ca.mail.comcast.net ([76.96.30.20])
+	by qmta04.emeryville.ca.mail.comcast.net with comcast
+	id ipye1f0210S2fkCA4rnHmG; Tue, 14 Dec 2010 03:47:17 +0000
+Received: from [192.168.1.101] ([71.202.66.210])
+	by omta09.emeryville.ca.mail.comcast.net with comcast
+	id irnG1f0064YBSof8VrnGH3; Tue, 14 Dec 2010 03:47:16 +0000
+Message-ID: <4D06E8C1.8090108@comcast.net>
+Date: Mon, 13 Dec 2010 19:47:13 -0800
+From: Ed Nelson <enelson1000@comcast.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Mon, 13 Dec 2010 18:27:40 -0800 (PST)
-In-Reply-To: <1292282461-13310-1-git-send-email-robert@erafx.com>
-References: <1292282461-13310-1-git-send-email-robert@erafx.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 13 Dec 2010 19:27:40 -0700
-X-Google-Sender-Auth: 19wXysQsqQ0b-gcm_0oKHL4YQ-o
-Message-ID: <AANLkTikj4knk7sH5w0PckcAu63HB1dEqmzKok7yZqvku@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 76.96.30.40
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: Get rid of "WARNING: Function do_build doesn't exist"
+Subject: How do i get py-smbus include in image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,18 +38,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2010 02:29:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 14 Dec 2010 03:48:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Dec 13, 2010 at 4:21 PM, Bob Foerster <robert@erafx.com> wrote:
-> Signed-off-by: Bob Foerster <robert@erafx.com>
+I am trying to use py-smbus and see that it is included in i2c-tool but 
+by default it is not built. It also looks like from the readme file 
+under py-smbus that lm-sensors need to be built 1st.
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+I assume I would add both i2c-tools and lm-sensor to my image recipe as 
+follows but is there anything else I need to do to get py-smbus built.
+
+========
+
+#Angstrom base-image with python
+
+require base-image.bb
+
+DEPENDS += "python \
+                         python-pyserial \
+                         mtd-utils \
+                         i2c-tools \
+                         lm-sensors \
+        "
+
+IMAGE_INSTALL += "python \
+                                    python-pyserial \
+                                    mtd-utils \
+                                    i2c-tools \
+                                    lm-sensors \
+                                    nano \
+              "
+
+export IMAGE_BASENAME = "base-python-image"
+
+========================
+
+Thanks
+Ed
+
 
 
