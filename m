@@ -1,29 +1,28 @@
-Received: from smtp.fchosted.com ([205.234.75.10] helo=mail.fchosted.com)
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jfaith@soundmetrics.com>) id 1PSahx-0001NL-W8
+	(envelope-from <philip@balister.org>) id 1PSb8I-0002FF-1W
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Dec 2010 20:38:47 +0100
-Received: from MBXCLUS01.fchosted.com ([10.10.2.22]) by hubex01.fchosted.com
-	([10.10.1.51]) with mapi; Tue, 14 Dec 2010 11:40:08 -0800
-From: John Faith <jfaith@soundmetrics.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 14 Dec 2010 11:36:56 -0800
-Thread-Topic: [oe] i2c-tools_3.0.2.bb  recipe question
-Thread-Index: AcubxrYEl4SuwOTET7KTEqLSXXSybA==
-Message-ID: <F176A515-C19A-4734-81B8-039CC1FD13E6@soundmetrics.com>
+	Tue, 14 Dec 2010 21:06:00 +0100
+Received: (qmail 6780 invoked by uid 1003); 14 Dec 2010 20:04:20 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	14 Dec 2010 20:04:20 -0000
+Message-ID: <4D07CDC3.60808@balister.org>
+Date: Tue, 14 Dec 2010 15:04:19 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
 References: <4D07AB03.6030408@comcast.net>
 In-Reply-To: <4D07AB03.6030408@comcast.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 205.234.75.10
-X-SA-Exim-Mail-From: jfaith@soundmetrics.com
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -41,34 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2010 19:38:47 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 14 Dec 2010 20:06:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Dec 14, 2010, at 9:36 AM, Ed Nelson wrote:
-
+On 12/14/2010 12:36 PM, Ed Nelson wrote:
 > Sorry if this is a lame question.
 > In the do_install_append() section
 > install -d ${D}{$includedir}/linux
->=20
+>
 > Is there a difference between
 > ${includedir}
 > and
 > {$includedir}
->=20
->=20
-> Thanks
-> Ed
->=20
 
-Hi Ed,
-Not sure where the 2nd one came from, but the ${var} format is as shown her=
-e:
-http://docs.openembedded.org/usermanual/usermanual.html#directories_install=
-ation
+I fixed this. Thanks for pointing it out.
 
-,
-John=
+Philip
 
 
