@@ -1,48 +1,43 @@
-Received: from mail-fx0-f42.google.com ([209.85.161.42])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PSUDb-0007N2-W9
+	(envelope-from <obi@opendreambox.org>) id 1PSUNR-0007YS-L7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Dec 2010 13:43:00 +0100
-Received: by fxm11 with SMTP id 11so587216fxm.29
+	Tue, 14 Dec 2010 13:53:10 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 98537314BAA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Dec 2010 04:41:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=0PHOTfPKDczPIFTG4Sckg/5/hHg5nS3PxC23Cdxpg/U=;
-	b=vbq2YMV3pZ57sevGRtETo9SDJjg6oo9QPhb/Np1hn2ak/HlfDW/oONv86KI/JuYMGv
-	WcoLGtQ3Je70kEb4xPjATS5vYUISKi0bhMy+79PUuaXSaUoPirGZ1Wvtq9yyqbIAiN24
-	W6PqsqHmATiAdstaWpWMUfOqVOcdAAvrBuw4o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=RndA1AN5nZ8umTS6eSWbX1okROCU62fdyThejh80MU3BU4JRANncPqEfEVx8KMhulf
-	KahmtPYlGIAk2QnupKDAE9KQO/Um5xFsavOvDCktkCZVCdzhW9uVEuynz2winieesJ7G
-	p5ZPl9w5o60cvEbZSjEsMB7DOMeZh8W7boD4U=
-Received: by 10.223.87.16 with SMTP id u16mr1484056fal.138.1292330474700;
-	Tue, 14 Dec 2010 04:41:14 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n3sm2103388faa.5.2010.12.14.04.41.13
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 14 Dec 2010 04:41:13 -0800 (PST)
-Date: Tue, 14 Dec 2010 13:41:49 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101214124149.GC6662@jama>
-References: <1292277061-32592-1-git-send-email-raj.khem@gmail.com>
+	Tue, 14 Dec 2010 13:51:35 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id e7lXqpCoTCfp
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Dec 2010 13:51:30 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 1BACC314BA89
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Dec 2010 13:51:30 +0100 (CET)
+Message-ID: <4D076851.1030406@opendreambox.org>
+Date: Tue, 14 Dec 2010 13:51:29 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <1292277061-32592-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.42
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1292166229-23112-1-git-send-email-fransmeulenbroeks@gmail.com>
+In-Reply-To: <1292166229-23112-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] eglibc/glibc: Use/add cross-localedef to generate locales
+Subject: Re: [PATCH] rm_work.bbclass: allow a shell var to override rm_work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,41 +51,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2010 12:43:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 14 Dec 2010 12:53:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, Dec 13, 2010 at 01:51:01PM -0800, Khem Raj wrote:
-> * Add recipe for cross-localedef-native
-> * Consolidate eglibc/glibc to share common contructs in bbclass
-> * Move common code in eglibc to eglibc.inc
-> * By default use cross-locaedef to generate locales now instead of qemu
+On 12/12/2010 04:03 PM, Frans Meulenbroeks wrote:
+> Sometimes one is building with rm_work, but for a specific build you want to
+> keep the work even if the build is successful.
+> One way to achieve this is to comment the INHERIT += "rm_work" from your
+> local.conf file, but this means that all recipes need to be reparsed which takes some time.
 > 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> This patch introduces a variable KEEP_WORK
+> If this variable is set the work will not be removed.
+> Intended use is
+> KEEP_WORK=1 bitbake yourrecipe.bb
+> Default behaviour is kept the same (in case KEEP_WORK is not set)
+> 
+> Note that in order for this to work KEEP_WORK needs to be added to the env var BB_ENV_EXTRAWHITE
+> e.g. export BB_ENV_EXTRAWHITE="KEEP_WORK"
+> 
+> We still might want to improve the test so it only keeps the work if KEEP_WORK is > 0
+> (or do not execute the task at all if KEEP_WORK is not set).
+> Also we might want to add KEEP_WORK to the whitelist of vars that are always ok
+> 
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+I'd prefer a variable with a prefix like OE_, but that's probably just a
+matter of taste. Are there any guidelines?
 
-Compiled fine, and ie eglibc-binary-localedata-cs-cz looks identical on
-target :).
+This patch motivates me to enable rm_work by default for our distro. It
+would be nice if this variable would become documented on the wiki.
 
-> ---
->  classes/glibc-package.bbclass                 |  308 -----------------
->  classes/libc-package.bbclass                  |  400 ++++++++++++++++++++++
->  recipes/eglibc/cross-localedef-native_2.12.bb |   37 ++
->  recipes/eglibc/eglibc-package.bbclass         |  448 -------------------------
->  recipes/eglibc/eglibc-package.inc             |   93 +++++
->  recipes/eglibc/eglibc.inc                     |   17 +-
->  recipes/eglibc/eglibc_2.10.bb                 |   15 +-
->  recipes/eglibc/eglibc_2.11.bb                 |   15 +-
->  recipes/eglibc/eglibc_2.12.bb                 |   21 +-
->  recipes/eglibc/eglibc_2.9.bb                  |   15 +-
->  recipes/eglibc/eglibc_svn.bb                  |   15 +-
->  recipes/glibc/glibc-package.inc               |  129 ++++----
->  12 files changed, 624 insertions(+), 889 deletions(-)
->  delete mode 100644 classes/glibc-package.bbclass
->  create mode 100644 classes/libc-package.bbclass
->  create mode 100644 recipes/eglibc/cross-localedef-native_2.12.bb
->  delete mode 100644 recipes/eglibc/eglibc-package.bbclass
->  create mode 100644 recipes/eglibc/eglibc-package.inc
+Acked-by: Andreas Oberritter <obi@opendreambox.org>
+
 
 
