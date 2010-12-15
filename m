@@ -1,53 +1,30 @@
-Received: from mail-fx0-f42.google.com ([209.85.161.42])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PSx8A-00066B-Cx
+	(envelope-from <roman@khimov.ru>) id 1PSxF8-0006Hr-FJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 20:35:19 +0100
-Received: by fxm11 with SMTP id 11so2275225fxm.29
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 11:33:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=l46rMDkP7o6nwxezrY8UNyWgGhjPoYPRV+4/vNzrmtc=;
-	b=pQappTOLMaKo3NXwyHSsD/ACHlP/AN5zyh7j4VTWOwDdK7cbyI5c4ObTooRW4dT59z
-	yJ56BLHipXLy2BZOkPA1kPvU8NxVgJAotXsjyH1BeV9AmY1bbjCgT2o3/wqvv2EHX5we
-	PyLQEW3wRAijAXpot1zP/ib2VurIO34Ayws5s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=CHptt910+W+LBpsATCKSReO1BZLlSSCtqgvceKDr9ZiIqkpawkM2xqOtSh03JT1tV5
-	9nnDkrTjWhiEL7T9VSCNEBNRXMmb6A7Iu3z9TJ9ZGDzLHUw+TAJa2uvkRRz9/glCPkMJ
-	In0IgqFdL55aRBnDQtCHo/1Ku4ohCgkbCq9CY=
-Received: by 10.223.122.201 with SMTP id m9mr2839811far.79.1292441620604;
-	Wed, 15 Dec 2010 11:33:40 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 5sm602219fak.23.2010.12.15.11.33.37
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 15 Dec 2010 11:33:38 -0800 (PST)
-Date: Wed, 15 Dec 2010 20:33:39 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Message-ID: <20101215193339.GC3238@jama>
-References: <1292416949-688-1-git-send-email-otavio@ossystems.com.br>
-	<1292417425-1328-1-git-send-email-otavio@ossystems.com.br>
-	<20101215130120.GB3238@jama>
-	<AANLkTin_QS4A+UM2Oj3K82i+rtC4Qd_aD=oTDQ3iZB7q@mail.gmail.com>
+	Wed, 15 Dec 2010 20:42:31 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PSxDS-0000XJ-Us
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Dec 2010 22:40:50 +0300
+From: Roman I Khimov <roman@khimov.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Dec 2010 22:40:38 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
+References: <131E5DFBE7373E4C8D813795A6AA7F080329DB6BBC@dlee06.ent.ti.com>
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080329DB6BBC@dlee06.ent.ti.com>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTin_QS4A+UM2Oj3K82i+rtC4Qd_aD=oTDQ3iZB7q@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.161.42
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Message-Id: <201012152240.45068.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] classes/gitpv.bbclass: use 'git describe' to for package version
+Subject: Re: [RFC] move openssl.cnf file into base openssl package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,81 +38,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 19:35:19 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 15 Dec 2010 19:42:31 -0000
+X-Groupsio-MsgNum: 27202
+Content-Type: multipart/signed; boundary="nextPart1709738.Q35zKhK6S8";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Dec 15, 2010 at 12:27:12PM -0200, Otavio Salvador wrote:
-> On Wed, Dec 15, 2010 at 11:01, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > On Wed, Dec 15, 2010 at 10:50:25AM -0200, Otavio Salvador wrote:
-> >> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> >> ---
-> >>  classes/gitpv.bbclass |   41 +++++++++++++++++++++++++++++++++++++++++
-> >>  1 files changed, 41 insertions(+), 0 deletions(-)
-> >>  create mode 100644 classes/gitpv.bbclass
-> >>
-> >> diff --git a/classes/gitpv.bbclass b/classes/gitpv.bbclass
-> >> new file mode 100644
-> >> index 0000000..c9496f1
-> >> --- /dev/null
-> >> +++ b/classes/gitpv.bbclass
-> >> @@ -0,0 +1,41 @@
-> >> +# gitpv.bbclass provides a PV variable which is a sortable version
-> >> +# with the output of "git describe".
-> >> +#
-> >> +# It can handle SRCREV = ${AUTOREV}, as well as SRCREV = "<hash>"
-> >> +
-> >> +PV = "${@get_git_pv(d)}"
-> >
-> > can you integrate it with
-> > classes/gitpkgv.bbclass ?
-> 
-> I can however I think the usage is different.
+--nextPart1709738.Q35zKhK6S8
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-I find 3 similar classes a bit confusing
-gitpkgv, gitver and now gitpv
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 15 =D0=B4=D0=B5=D0=BA=D0=B0=D0=B1=D1=80=D1=
+=8F 2010 21:38:07 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Maupin, Chase =D0=BD=D0=B0=
+=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> From the log I see that the openssl.cnf file was originally added to the
+>  libcrypto package since it was accessed directly from libcrypto (commit
+>  f95a95435ca79e7b9942b6e321d30e264c728791).  I then see that it was moved
+>  the file to the misc package to make different libcrypto versions parall=
+el
+>  installable (commit 26b7d6514111d5ac0171c1834fa85d4576d783bf) but no oth=
+er
+>  justification as to why the .cnf was placed in the misc instead of base
+>  package.
+>=20
+> I have a patch to move the openssl.cnf file into the openssl package but I
+>  wanted to better understand why this file was not already in the openssl
+>  package before submitting my patch.
 
-so I was hoping that all 3 classes could be merged to one (probably
-gitver is best name) where all usefull variables will be prepared, and
-then only the right one used in recipe.
+Missed that change. Seems wrong to me. And I still think that it belongs to=
+=20
+libcrypto, not openssl since you can easily not install openssl binary and =
+=20
+still use it with tuned openssl.cnf in your apps.
 
-Like in gitpkgv.bbclass example:
-# inherit gitpkgv
-#
-# PV = "1.0+git${SRCPV}"        
-# PKGV = "1.0+git${GITPKGV}"
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-btw there should be '+gitr' not '+git' AFAIK
+--nextPart1709738.Q35zKhK6S8
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-in your case, you can use something like
-PV = "${GITVER}"
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
-btw your current implementation imho doesn't provide sortable version in
-case someone makes tag "something-special" between tags "release-2010.12" and
-"release-2011.03".
+iEYEABECAAYFAk0JGb0ACgkQXJ70z+XgVcNjdQCgnlUsJOsFMxXWNS/REpUMgeWc
+BxUAnjNBwf16zCWqwBpQpWdTw6YoNI/+
+=eplg
+-----END PGP SIGNATURE-----
 
-> The gitpkgv does not use describe and if there's users of it (there's
-> no in recipes) we'd change it for them. That is wrong in my opinion.
-
-agreed but it can still be in same bbclass maybe in new variable ?GITTAGVER?
-as long as bbclass is not changing variables like PV (and expects recipe
-to use provided variables itself).
-
-> about assign to PV ?= I agree however why someone might want to use it
-> only in PKGV?
-
-Here is a bit longer thread with reasoning and description
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg06746.html
-
-Even after converting many recipes from SRCREV to SRCPV I find this
-concept nice and if local persistent cache will be still needed in new fetchers 
-implementation, then we should probably convert git recipes using SRCPV to
-something like GITPKGV (this time hopefully without PE bump).
-
-Regards,
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+--nextPart1709738.Q35zKhK6S8--
