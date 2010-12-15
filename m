@@ -1,43 +1,44 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PSogu-0006FP-CY
+	(envelope-from <obi@opendreambox.org>) id 1PSqNx-000094-2k
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 11:34:37 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id oBFAWvBw000558
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Wed, 15 Dec 2010 13:23:09 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id B11F6314BB6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 11:32:58 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>) id 1PSofI-0006Jv-Si
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 11:32:56 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <4D065431.6080304@dell.com>
-	<AANLkTin2DnrgjhA4Qt63+pyfhPP=rLcs94CL_gbOeBGC@mail.gmail.com>
-	<4D079B88.9010503@dell.com>
-Date: Wed, 15 Dec 2010 11:32:56 +0100
-In-Reply-To: <4D079B88.9010503@dell.com> (Ryan D. Phillips's message of "Tue, 
-	14 Dec 2010 10:30:00 -0600")
-Message-ID: <lyaak7z5pj.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Wed, 15 Dec 2010 13:21:33 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id vha6x-uSjrWf
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Dec 2010 13:21:29 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 070D3314BAC3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Dec 2010 13:21:29 +0100 (CET)
+Message-ID: <4D08B2C8.5010508@opendreambox.org>
+Date: Wed, 15 Dec 2010 13:21:28 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 1
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+To: openembedded-devel@lists.openembedded.org
+References: <1291941859-29257-1-git-send-email-eric@eukrea.com>
+	<AANLkTinOcF=bKiZGZz1p4YZHSpW8Hy3LLumvG6VbqWg6@mail.gmail.com>
+In-Reply-To: <AANLkTinOcF=bKiZGZz1p4YZHSpW8Hy3LLumvG6VbqWg6@mail.gmail.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_FAIL,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] eglibc: use HTTP for svn checkout
+Subject: Re: [PATCH] gcc: introduce version 4.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,25 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 10:34:37 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 15 Dec 2010 12:23:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Ryan D Phillips <ryan_d_phillips@dell.com> writes:
+On 12/10/2010 03:54 AM, Khem Raj wrote:
+> On Thu, Dec 9, 2010 at 4:44 PM, Eric B=C3=A9nard <eric@eukrea.com> wrot=
+e:
+>> - based on gcc-4.5.2-RC-20101208 (svn 167585)
+>> - without linaro patches (which seem to be the root of
+>> problems when compiling at least on armv4 and armv5) :
+>>        - samba 3.2.15 or 3.3.9 : http://tinderbox.openembedded.net/pub=
+lic/logs/task/8666826.txt
+>>        - samba 3.5.6 : http://pastebin.com/yuiYX2CM
+>>
+>=20
+> as discussed on IRC may be we should try to find the faulty patch in
+> current gcc 4.5 linaro patches we have.
 
-> I would like to see this patch get into the OE tree to make the tree
-> more robust to proxies. Currently, this is the only customization I
-> need for the projects I work on.
+I don't think that we need another svn-based pre-release recipe for gcc.
+But I would still prefer to have a recipe for gcc 4.5.2 once it's
+released, because I'd like to be able to pin a stable version with only
+few required patches and Linaro only cares about ARM while I do not.
 
-fwiw, I wrote a local patch for bitbake
-
-          https://www.cvg.de/people/ensc/0004-svn-tunnel.patch
-
-which allows fetching of svn:// uris through an http proxy (which must
-be configured to allow CONNECTs to svn servers).  I thought it would be
-some local hack but when there is wider interest I will submit it to the
-bitbake ml.
-
-
-Enrico
+Regards,
+Andreas
 
 
