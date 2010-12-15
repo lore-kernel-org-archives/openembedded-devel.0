@@ -1,37 +1,42 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PSsay-0003bN-2s
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PStO0-0006wv-0B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 15:44:45 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PSsZN-0001YW-Ek from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 06:43:05 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 15 Dec 2010 06:43:04 -0800
-Received: from [172.30.80.111] ([172.30.80.111]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 15 Dec 2010 07:43:03 -0700
-Message-ID: <4D08D3F5.1060608@mentor.com>
-Date: Wed, 15 Dec 2010 07:43:01 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 15 Dec 2010 16:35:24 +0100
+Received: by iyj18 with SMTP id 18so980199iyj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Dec 2010 07:33:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=+3ZxRjW1swFr+oivERl3ndHCTWgwTwb9KUdX7KqXyXY=;
+	b=Xozb9YKYalncgKfdvIz6eEzPUwMTcBR0yJqe2B+/bEH17C5W9IMRlnIyuOKVe+K/jt
+	gD16/FhSS89DfushBi8BUPBGtj+xnmjsrnW84gtZ9vK42BPUUL8QOYc4tURaHQyjl/r6
+	vzimUXgCdpiMC+cBCfHowGxISFk50fxywKETo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=srJPn7KabW6DQLshD9ZC2AWbWS0ASFQ2hIX7v8ozxtMXby7MnIbYBHHyVBHdQFqVGJ
+	b6GUM2kVxZmf4NHELa4KHqzKVimi5U7tnDJlhrDnIZZisbYQTVcd+VECaHQZozWV3hoy
+	WAMi8/S1r6jeTgyULOGKFKP88fR5Au4wuI5Bs=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.231.182.13 with SMTP id ca13mr5029359ibb.57.1292427225615;
+	Wed, 15 Dec 2010 07:33:45 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Wed, 15 Dec 2010 07:33:45 -0800 (PST)
+In-Reply-To: <4D08D3F5.1060608@mentor.com>
 References: <AANLkTimTaZyPywc_B8g4k4QO+gTJq67K=OgcoSe6BpJh@mail.gmail.com>
-In-Reply-To: <AANLkTimTaZyPywc_B8g4k4QO+gTJq67K=OgcoSe6BpJh@mail.gmail.com>
-X-OriginalArrivalTime: 15 Dec 2010 14:43:03.0966 (UTC)
-	FILETIME=[61169BE0:01CB9C66]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	<4D08D3F5.1060608@mentor.com>
+Date: Wed, 15 Dec 2010 16:33:45 +0100
+Message-ID: <AANLkTim5ChRd3XDTo+E25HiWwpnmyMDgeg17xXd0=GxA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: testing 2010-12-10 (wiki, results, bluez-libs)
@@ -48,25 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 14:44:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Dec 2010 15:35:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 12/15/2010 12:51 AM, Frans Meulenbroeks wrote:
-> Dear all,
+2010/12/15 Tom Rini <tom_rini@mentor.com>:
+> On 12/15/2010 12:51 AM, Frans Meulenbroeks wrote:
+>>
+>> Dear all,
+>>
+>> I just wanted to update the testing table with my entries and I
+>> noticed two (possibly related) things.
+>> - no other entries for 2010-12-10 are there yet (and it is already
+>> wednesday)
 >
-> I just wanted to update the testing table with my entries and I
-> noticed two (possibly related) things.
-> - no other entries for 2010-12-10 are there yet (and it is already wednesday)
+> I haven't updated the stuff we're building since just about everything
+> failed due to the gcc issue Khem fixed in
+> 2c8570552549da2e11428d08b2bc08849cac39b1. =A0This is why I sometimes wond=
+er if
+> it would be desirable to cherry-pick a few things in to the testing-next
+> branch.
 
-I haven't updated the stuff we're building since just about everything 
-failed due to the gcc issue Khem fixed in 
-2c8570552549da2e11428d08b2bc08849cac39b1.  This is why I sometimes 
-wonder if it would be desirable to cherry-pick a few things in to the 
-testing-next branch.
+Hm. Yeah. I've re-checked and I am definitely building the
+testing-next branch, not git head.
+Then again I only build console-image and no high end images.
+My james-image also had quite some issues (js, samba) which are now resolve=
+d.
+Only issue left for now seems to be gettext/libtool related.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Frans
 
 
