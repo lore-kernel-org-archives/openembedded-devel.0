@@ -1,45 +1,43 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PStO0-0006wv-0B
+	(envelope-from <kergoth@gmail.com>) id 1PSuIC-0001ha-Tz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 16:35:24 +0100
-Received: by iyj18 with SMTP id 18so980199iyj.6
+	Wed, 15 Dec 2010 17:33:29 +0100
+Received: by wyb40 with SMTP id 40so1691004wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 07:33:45 -0800 (PST)
+	Wed, 15 Dec 2010 08:31:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=+3ZxRjW1swFr+oivERl3ndHCTWgwTwb9KUdX7KqXyXY=;
-	b=Xozb9YKYalncgKfdvIz6eEzPUwMTcBR0yJqe2B+/bEH17C5W9IMRlnIyuOKVe+K/jt
-	gD16/FhSS89DfushBi8BUPBGtj+xnmjsrnW84gtZ9vK42BPUUL8QOYc4tURaHQyjl/r6
-	vzimUXgCdpiMC+cBCfHowGxISFk50fxywKETo=
+	h=domainkey-signature:received:mime-version:sender:received:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=ts2QzFimY1BON+bfDWYCROrrTl8XBn6ZYxLSZQLmR+c=;
+	b=Whw/7deKZEPFlXpz4nK1pv7Qvvt4/3tb7D6P14XO65puCxlBFpwEE3JvpgNiNxXdaU
+	wreGOxl5gOP1j1Fqdk0SBygQ3l0kGnPl+fXaHgrecAd7+5Flf6HlgJdL4zYyDuDxrGiK
+	dNfklnnivTTlM5Ij72+a8/z2AEy4pJulQ72q0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=srJPn7KabW6DQLshD9ZC2AWbWS0ASFQ2hIX7v8ozxtMXby7MnIbYBHHyVBHdQFqVGJ
-	b6GUM2kVxZmf4NHELa4KHqzKVimi5U7tnDJlhrDnIZZisbYQTVcd+VECaHQZozWV3hoy
-	WAMi8/S1r6jeTgyULOGKFKP88fR5Au4wuI5Bs=
+	h=mime-version:sender:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	b=TAii69XrwrprKFFWlSkamzf8dAClo+svG8xien3R9rIvZP2lboY/ZLnJ8WKxgL5gyd
+	P1fdSlS8r0Yl9QWUSOEn2AbmYEmFrhD/y7artunCmJPqquEG3Ojwo9RiN1S8q5nfv9qF
+	NJ9Wu/u8PkMVPNCpCJ9ov+Oxk6V1t+NMgnVtA=
+Received: by 10.216.165.85 with SMTP id d63mr453613wel.12.1292430710983; Wed,
+	15 Dec 2010 08:31:50 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.231.182.13 with SMTP id ca13mr5029359ibb.57.1292427225615;
-	Wed, 15 Dec 2010 07:33:45 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Wed, 15 Dec 2010 07:33:45 -0800 (PST)
-In-Reply-To: <4D08D3F5.1060608@mentor.com>
-References: <AANLkTimTaZyPywc_B8g4k4QO+gTJq67K=OgcoSe6BpJh@mail.gmail.com>
-	<4D08D3F5.1060608@mentor.com>
-Date: Wed, 15 Dec 2010 16:33:45 +0100
-Message-ID: <AANLkTim5ChRd3XDTo+E25HiWwpnmyMDgeg17xXd0=GxA@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Sender: kergoth@gmail.com
+Received: by 10.216.67.67 with HTTP; Wed, 15 Dec 2010 08:31:30 -0800 (PST)
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 15 Dec 2010 09:31:30 -0700
+X-Google-Sender-Auth: xDjfEmG9QI9G-3kLuMAz1sxbSTQ
+Message-ID: <AANLkTik+TNUXiWsBu5nY1wN3yR-qK4qAeSe3REbmysrD@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing 2010-12-10 (wiki, results, bluez-libs)
+Subject: [RFC] Variable typing support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,34 +51,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 15:35:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Dec 2010 16:33:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-2010/12/15 Tom Rini <tom_rini@mentor.com>:
-> On 12/15/2010 12:51 AM, Frans Meulenbroeks wrote:
->>
->> Dear all,
->>
->> I just wanted to update the testing table with my entries and I
->> noticed two (possibly related) things.
->> - no other entries for 2010-12-10 are there yet (and it is already
->> wednesday)
->
-> I haven't updated the stuff we're building since just about everything
-> failed due to the gcc issue Khem fixed in
-> 2c8570552549da2e11428d08b2bc08849cac39b1. =A0This is why I sometimes wond=
-er if
-> it would be desirable to cherry-pick a few things in to the testing-next
-> branch.
+Greetings,
 
-Hm. Yeah. I've re-checked and I am definitely building the
-testing-next branch, not git head.
-Then again I only build console-image and no high end images.
-My james-image also had quite some issues (js, samba) which are now resolve=
-d.
-Only issue left for now seems to be gettext/libtool related.
+I'd like to propose inclusion of some work I've done on a branch to implement
+variable typing.  This implementation consists of three components:
 
-Frans
+- oe.types python module, whose job it is to construct objects of the defined
+  type for a given variable in the metadata
+- typecheck.bbclass, which iterates over all configuration variables with a
+  type defined and uses oe.types to check the validity of the values
+- flags to mark up the variables with the appropriate types
+
+This gives us a few benefits:
+
+- Automatic sanity checking of all configuration variables with a defined type
+- Avoid duplicating the "how do I make use of the value of this variable"
+  logic between its users.  For variables like PATH, this is simply a split(),
+  for boolean variables, the duplication can result in confusing, or even
+  mismatched semantics (is this 0/1, empty/nonempty, what?)
+- Make it easier to create a configuration UI, as the type information could
+  be used to provide a better interface than a text edit box (e.g checkbox for
+  'boolean', dropdown for 'choice')
+
+This functionality is entirely opt-in right now.  To enable the configuration
+variable type checking, simply INHERIT += "typecheck".  Example of a failing
+type check:
+
+BAZ = "foo"
+BAZ[type] = "boolean"
+
+$ bitbake -p
+FATAL: BAZ: Invalid boolean value 'foo'
+$
+
+Examples of leveraging oe.types in a python snippet:
+
+PACKAGES[type] = "list"
+
+python () {
+    import oe.types
+    for pkg in oe.types.value("PACKAGES", d):
+        bb.note("package: %s" % pkg)
+}
+
+LIBTOOL_HAS_SYSROOT = "yes"
+LIBTOOL_HAS_SYSROOT[type] = "boolean"
+
+python () {
+    import oe.types
+    assert(oe.types.value("LIBTOOL_HAS_SYSROOT", d) == True)
+}
+
+https://github.com/kergoth/openembedded/commit/c278cd7 shows the core
+implementation, along with the description, which is shown above.
+https://github.com/kergoth/openembedded/compare/master...typing shows
+the changes I've done for it so far, including the python module,
+variable type checking class, and examples of usage in both
+bitbake.conf and classes.
+
+Comments?  I'd love to hear what people think of this.  Note that the
+main purpose of the type *checking* is to catch issues with user
+configuration variables, as opposed to variables set by recipes or
+classes, but of course the markup for the others is useful if one
+wants to utilize oe.types in python code.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
