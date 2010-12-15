@@ -1,40 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PSmAA-0001rK-SC
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 08:52:40 +0100
-Received: by iwn8 with SMTP id 8so1845179iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PSmYZ-0002cl-GL for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Dec 2010 09:17:52 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PSmX2-0006Jr-Da for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Dec 2010 09:16:16 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Dec 2010 09:16:16 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Dec 2010 23:51:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=K2skXSD/9GYYFPDkZFxozHPfAZG6Uqood7egVk8eiTY=;
-	b=M32i0p0ZRAf9M1femZF2NAo1BdZqFqZk1iZGLTUFUeOXuLi7ETIGHEW/+gXhHYF851
-	sL2sF7uv5bp4M/8Sh+CrQhhvnnn6nh7Lk11xErz4o+ifnjUa20jYVVbMGSBafZdQF0z7
-	r07auoyocykrAhp1FCu57WDysM9Akasu4bapM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=rDoJEb8Z1SeVsl8Muy1ec7xIciJkcIEgnLEQhw5J/DBf0ufBOh4ZJdqVTtQ1eYQhA6
-	ZOCOwhl/Oi03OVnyDHgLparekH4CEWp8CmbHYPHTKf9XeFA5DpjOnY2Qn1MxEbfrnU0c
-	Dq2WrI10we+j44ZnjE+X85dfM0apojILZm79o=
-MIME-Version: 1.0
-Received: by 10.231.182.13 with SMTP id ca13mr4525821ibb.57.1292399462839;
-	Tue, 14 Dec 2010 23:51:02 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Tue, 14 Dec 2010 23:51:02 -0800 (PST)
-Date: Wed, 15 Dec 2010 08:51:02 +0100
-Message-ID: <AANLkTimTaZyPywc_B8g4k4QO+gTJq67K=OgcoSe6BpJh@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 15 Dec 2010 09:16:16 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 15 Dec 2010 09:16:04 +0100
+Message-ID: <ie9tg4$9t0$1@dough.gmane.org>
+References: <E1PR45K-0000jK-SU@melo.openembedded.org>	<01EE9A12-BE87-4EF6-9F0B-EAA20A1DBAAE@vanille-media.de>	<4D077186.2050708@balister.org>
+	<20101214133729.GE6662@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <20101214133729.GE6662@jama>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: testing 2010-12-10 (wiki, results, bluez-libs)
+Subject: Re: [oe-commits] Philip Balister : i2c-tools : Stage i2c-dev.h header as i2c-dev-user.h.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +51,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 07:52:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Dec 2010 08:17:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dear all,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I just wanted to update the testing table with my entries and I
-noticed two (possibly related) things.
-- no other entries for 2010-12-10 are there yet (and it is already wednesday)
-- when I tried to save my data the wiki gave me an error (which is
-reported in a separate mail, but which might be the cause that no
-other entries are there).
+On 14-12-10 14:37, Martin Jansa wrote:
+> On Tue, Dec 14, 2010 at 08:30:46AM -0500, Philip Balister wrote:
+>> On 12/14/2010 07:06 AM, Dr. Michael Lauer wrote:
+>>> Am 10.12.2010 um 15:36 schrieb git version control:
+>>>
+>>>> Module: openembedded.git
+>>>> Branch: org.openembedded.dev
+>>>> Commit: 48e6a063370a38a35f31a28efd8f6ce6ebf00840
+>>>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=48e6a063370a38a35f31a28efd8f6ce6ebf00840
+>>>>
+>>>> Author: Philip Balister<philip@balister.org>
+>>>> Date:   Fri Dec 10 09:31:01 2010 -0500
+>>>>
+>>>> i2c-tools : Stage i2c-dev.h header as i2c-dev-user.h.
+>>>>
+>>>> Thanks to John Faith for suggesting this approach on the ML. The problem is
+>>>> i2c-tools overwrites the header staged by the kernel. This breaks programs
+>>>> that depend on the kernel header.
+>>>
+>>> I don't think this a good solution. Now all programs break which expect
+>>> this very i2c-dev.h as being staged by i2c-tools. Interestingly, the
+>>> desktop distros don't bother about staging it differently, so why
+>>> can't we do the same? Besides, the i2c-dev.h as staged by i2c-tools
+>>> is supposed to be a superset. If it isn't we should complain with the
+>>> i2c-tools developers.
+>>>
+>>> What can we do in the meantime?
+>>
+>> Can we get a survey of how other distros handle the situation?
+> 
+> Gentoo
+> i2c-tools-3.0.[012] (all versions)
+> src_install() {
+>     emake install prefix="${D}"/usr || die
+>     rm -rf "${D}"/usr/include # part of linux-headers
+> ...
+> }
+> 
+> so it's not part of i2c-tools package (gentoo doesn't have concept of
+> -dev packages as it's always usefull to have all -dev stuff on source
+> based distribution).
 
-So here my results:
-neek: fails in udev:
-nslu2le, nslu2be, calamari, mpc8313e, sheevaplug: build.
+What are other distributions based on? Pixie dust?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Remark:
-The last three still give me this error:
+iD8DBQFNCHlEMkyGM64RGpERAjhiAJ0ZSOL1sTzWT1vz9B5BR4bW4wqwqwCgj2Zh
+BHqHQqhZva9Zh3MekrMNk7I=
+=632I
+-----END PGP SIGNATURE-----
 
-ERROR: Multiple .bb files are due to be built which each provide
-bluez-libs (/home/hudson/jobs/OE_test/workspace/openembedded/recipes/bluez/bluez4_4.42.bb
-/home/hudson/jobs/OE_test/workspace/openembedded/recipes/bluez/bluez-libs_3.36.bb).
- This usually means one provides something the other doesn't and should.
-NOTE: Preparing runqueue
-ERROR: Multiple .bb files are due to be built which each provide
-bluez-libs (/home/hudson/jobs/OE_test/workspace/openembedded/recipes/bluez/bluez4_4.42.bb
-/home/hudson/jobs/OE_test/workspace/openembedded/recipes/bluez/bluez-libs_3.36.bb).
- This usually means one provides something the other doesn't and should.
-
-First of all I get it twice (where once would suffice).
-Secondly I'd like to get rid of this. I tried pinning in the past, but
-that did not help.
-Not sure if the 3.36 stuff is still used/useful. Or should we go (or
-have gone) for bluez4-libs?
-Or do we need a virtual/bluez-libs ?
-
-Suggestions are appreciated.
-
-Frans
 
 
