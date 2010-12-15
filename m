@@ -1,43 +1,32 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vadmium@gmail.com>) id 1PSlwC-0001Pz-31
+	(envelope-from <Irfan_Sadiq@mentor.com>) id 1PSlzi-0001Yd-8G
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 08:38:12 +0100
-Received: by wyb40 with SMTP id 40so1241405wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Dec 2010 23:36:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=A6dZsGxo/H4xyDyrPVBm4KI7OKjq8dDNxPfGJkrsqAg=;
-	b=OIell3ucnYkg1Ce8UUZDsD4sRkakEXOSY4IpkTzLQvTYLtdVlMhDMGZd+7T2aTbBou
-	6WjbGeDw7/M52vBtC/Pw8VkBaop5gdmRxRc6f+ht72Ll6Q1MGMtmyXe9BkQtIr2Kmx02
-	stnNBs8J2NcP7Eufv1sat+/GruLkf+d/KNw/w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=IxcFAKwQ5u28IemZyZVPrlUWypSXq7YrUjhqXFmW37Fo/TDNxb2cetQe00oLYv3xZ1
-	dDgBUak45+1quQRrYNBp/2iQnWDcSzWiXftM8n1HGHubLAk3jsYrtb+pCy01+aa5/KPH
-	Mndx5BT75B54W1mofFkbIb+iL7wBmsf3/evmY=
-MIME-Version: 1.0
-Received: by 10.216.23.18 with SMTP id u18mr341931weu.92.1292398594431; Tue,
-	14 Dec 2010 23:36:34 -0800 (PST)
-Sender: vadmium@gmail.com
-Received: by 10.216.17.203 with HTTP; Tue, 14 Dec 2010 23:36:34 -0800 (PST)
-Date: Wed, 15 Dec 2010 07:36:34 +0000
-X-Google-Sender-Auth: NuFxXbAOUyWQYzre3ZmMM35XJ-A
-Message-ID: <AANLkTimMz5m27fxSGVw-YyOAH2=Wbye2Ug71mZ9t+py1@mail.gmail.com>
-From: Martin Panter <vadmium+floss@gmail.com>
+	Wed, 15 Dec 2010 08:41:51 +0100
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1PSly7-0004GE-LB from Irfan_Sadiq@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Dec 2010 23:40:12 -0800
+Received: from localhost.localdomain ([137.202.157.168]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 15 Dec 2010 08:40:10 +0100
+From: irfan sadiq <irfan_sadiq@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: vadmium@gmail.com
+Date: Wed, 15 Dec 2010 12:39:52 +0500
+Message-Id: <1292398792-3714-1-git-send-email-irfan_sadiq@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 15 Dec 2010 07:40:10.0431 (UTC)
+	FILETIME=[4D486CF0:01CB9C2B]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Irfan_Sadiq@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Stop Libtool relinking against host's /usr/lib (file format not recognised)
+Subject: To make runalltests.sh configurable for default tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,119 +40,345 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 07:38:12 -0000
-X-Groupsio-MsgNum: 27168
-Content-Type: multipart/mixed; boundary=0016364c7e8b21240204976dff0a
+X-List-Received-Date: Wed, 15 Dec 2010 07:41:51 -0000
 
---0016364c7e8b21240204976dff0a
-Content-Type: text/plain; charset=UTF-8
+ This patch applied to ltp runalltests.sh script to make default set of test 
+ suits configurable which is not the default behaviour.
+ By default rullalltests.sh invokes runltp wihout specifying any set of tests
+ to run. This patch will give the user option to chose from defaults suits
+ setting their respective variables named RUN_DEFAULT_SUITENAME to '0' or '1'.
+ Thus executing only desired suites.
 
-So far in my attempt to build Angstrom for my Beagle board I've found
-two instances where Libtool is trying to "relink" against host
-libraries.
+Signed-off-by: Irfan Sadiq <irfan_sadiq@mentor.com>
+---
+ recipes/ltp/ltp-20100831/runalltests.patch |  302 ++++++++++++++++++++++++++++
+ recipes/ltp/ltp_20100831.bb                |    3 +-
+ 2 files changed, 304 insertions(+), 1 deletions(-)
 
-The first looks like it's already been fixed in the past with a patch
-to Libtool (recipes/libtool/libtool-2.2.6b/cross_compile.patch), but
-at least for me that fix is being bypassed. The patch changes the
-ltmain.m4sh source file but in the Libtool tarball there is already an
-ltmain.sh generated file which seems to be used instead.
+diff --git a/recipes/ltp/ltp-20100831/runalltests.patch b/recipes/ltp/ltp-20100831/runalltests.patch
+new file mode 100644
+index 0000000..c567769
+--- /dev/null
++++ b/recipes/ltp/ltp-20100831/runalltests.patch
+@@ -0,0 +1,302 @@
++--- ltp-full-20100831.orig/runalltests.sh	2010-09-14 16:04:32.000000000 +0500
+++++ ltp-full-20100831/runalltests.sh	2010-12-13 11:18:11.857382107 +0500
++@@ -68,6 +68,12 @@ export RUN_FILECAPS=0
++ export LIBCAPS_INSTALLED=0
++ export LIBATTR_INSTALLED=0
++ 
+++## Set this to 1 if tmp_tools tests are required to be tested
+++export RUN_TPM_TOOLS=0
+++
+++## Set this to 1 if tcore tests are required to be tested
+++export RUN_TCORE=0
+++
++ ## Set this to 1 if you wish to execute the stress_cd tests
++ ## Make sure you have FLOPPY inserted, be warned that you
++ ## will loose all data on it after the tests,
++@@ -202,6 +208,194 @@ export RUN_SMACK_SECURITY_TESTS=0
++ ##Set this to 1 if you wish to run the Basic PERFORMANCE COUNTER tests
++ export RUN_PERFORMANCE_COUNTERS_TESTS=0
++ 
+++### Additional tests That are not included in runalltests.sh
+++export RUN_LTP_AIODIO_PART1=0
+++export RUN_LTP_AIODIO_PART2=0
+++export RUN_LTP_AIODIO_PART3=0
+++export RUN_LTP_AIODIO_PART4=0
+++
+++if [ $RUN_LTP_AIODIO_PART1 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART1_STR="ltp-aiodio.part1"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART2 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART2_STR="ltp-aiodio.part2"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART3 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART3_STR="ltp-aiodio.part3"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART4 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART4_STR="ltp-aiodio.part4"
+++fi                                                                 
+++
+++## This is default set of tests chose which tests you want to perform by default
+++## Set this to 1 if you wish to run the specific tests
+++
+++export RUN_DEFAULT_MATH=0
+++export RUN_DEFAULT_NPTL=0
+++export RUN_DEFAULT_PTY=0
+++export RUN_DEFAULT_IO=0
+++export RUN_DEFAULT_TIMERS=0
+++export RUN_DEFAULT_MM=0
+++export RUN_DEFAULT_IPC=0
+++export RUN_DEFAULT_SCHED=0
+++export RUN_DEFAULT_CONTAINERS=0
+++export RUN_DEFAULT_CONNECTORS=0
+++export RUN_DEFAULT_FILECAPS=0
+++export RUN_DEFAULT_CAP_BOUNDS=0
+++export RUN_DEFAULT_FSX=0
+++export RUN_DEFAULT_FCNTL_LOCKTESTS=0
+++export RUN_DEFAULT_CONTROLLERS=0
+++export RUN_DEFAULT_ADMIN_TOOLS=0
+++export RUN_DEFAULT_HYPERTHREADING=0
+++export RUN_DEFAULT_DIO=0
+++export RUN_DEFAULT_SYSCALLS=0
+++export RUN_DEFAULT_FS_PERMS_SIMPLE=0
+++export RUN_DEFAULT_POWER_MANAGEMENT_TESTS=0
+++export RUN_DEFAULT_NUMA=0
+++export RUN_DEFAULT_HUGETLB=0
+++export RUN_DEFAULT_COMMANDS=0
+++export RUN_DEFAULT_FS=0
+++export RUN_DEFAULT_FS_BIND=0
+++
+++if [ $RUN_DEFAULT_SYSCALLS -eq 1 ]                                 
+++then                                                               
+++        SYSCALLS_STR="syscalls"                                    
+++fi                                                                 
+++
+++if [ $RUN_DEFAULT_FS -eq 1 ]
+++then                        
+++        FS_STR="fs"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_FS_PERMS_SIMPLE -eq 1 ]
+++then                                     
+++        FS_PERMS_SIMPLE_STR="fs_perms_simple"
+++fi                                           
+++
+++if [ $RUN_DEFAULT_FSX -eq 1 ]
+++then                         
+++        FSX_STR="fsx"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_DIO -eq 1 ]
+++then                         
+++        DIO_STR="dio"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_IO -eq 1 ]
+++then                        
+++        IO_STR="io"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_MM -eq 1 ]
+++then                        
+++        MM_STR="mm"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_IPC -eq 1 ]
+++then                         
+++        IPC_STR="ipc"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_SCHED -eq 1 ]
+++then                           
+++        SCHED_STR="sched"      
+++fi                             
+++
+++if [ $RUN_DEFAULT_MATH -eq 1 ]
+++then                          
+++        MATH_STR="math"       
+++fi                            
+++
+++if [ $RUN_DEFAULT_NPTL -eq 1 ]
+++then                          
+++        NPTL_STR="nptl"       
+++fi                            
+++
+++if [ $RUN_DEFAULT_PTY -eq 1 ]
+++then                         
+++        PTY_STR="pty"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_CONTAINERS -eq 1 ]
+++then                                
+++        CONTAINERS_STR="containers" 
+++fi                                  
+++
+++if [ $RUN_DEFAULT_FS_BIND -eq 1 ]
+++then                             
+++        FS_BIND_STR="fs_bind"    
+++fi                               
+++
+++if [ $RUN_DEFAULT_CONTROLLERS -eq 1 ]
+++then                                 
+++        CONTROLLERS_STR="controllers"
+++fi
+++
+++if [ $RUN_DEFAULT_FILECAPS -eq 1 ]
+++then
+++        FILECAPS_STR="filecaps"
+++fi
+++
+++if [ $RUN_DEFAULT_CAP_BOUNDS -eq 1 ]
+++then
+++        CAP_BOUNDS_STR="cap_bounds"
+++fi
+++
+++if [ $RUN_DEFAULT_FCNTL_LOCKTESTS -eq 1 ]
+++then
+++        FCNTL_LOCKTESTS_STR="fcntl-locktests"
+++fi
+++
+++if [ $RUN_DEFAULT_CONNECTORS -eq 1 ]
+++then
+++        CONNECTORS_STR="connectors"
+++fi
+++
+++if [ $RUN_DEFAULT_ADMIN_TOOLS -eq 1 ]
+++then
+++        ADMIN_TOOLS_STR="admin_tools"
+++fi
+++
+++if [ $RUN_DEFAULT_TIMERS -eq 1 ]
+++then
+++        TIMERS_STR="timers"
+++fi
+++
+++if [ $RUN_DEFAULT_POWER_MANAGEMENT_TESTS -eq 1 ]
+++then
+++        POWER_MANAGEMENT_TESTS_STR="power_management_tests"
+++fi
+++
+++if [ $RUN_DEFAULT_NUMA -eq 1 ]
+++then
+++        NUMA_STR="numa"
+++fi
+++
+++if [ $RUN_DEFAULT_HUGETLB -eq 1 ]
+++then
+++        HUGETLB_STR="hugetlb"
+++fi
+++
+++if [ $RUN_DEFAULT_COMMANDS -eq 1 ]
+++then
+++        COMMANDS_STR="commands"
+++fi
+++
+++if [ $RUN_DEFAULT_HYPERTHREADING -eq 1 ]
+++then
+++        HYPERTHREADING_STR="hyperthreading"
+++fi
+++
+++
+++
++ export LTP_VERSION=`"${RUNLTP}" -e`
++ export TEST_START_TIME=`date +"%Y_%b_%d-%Hh_%Mm_%Ss"`
++ export HARDWARE_TYPE=$(uname -i)
++@@ -215,13 +409,68 @@ if ! cd "${LTPROOT}"; then
++ 	exit $rc
++ fi
++ 
+++# ## The First one i plan to run is the default LTP run ##
+++# ## START => Test Series 1                             ##
+++# echo "Running Default LTP..."
+++# "${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+++# printf "Completed running Default LTP\n\n\n"
+++# ## END => Test Series 1                               ##
+++
++ ## The First one i plan to run is the default LTP run ##
++ ## START => Test Series 1                             ##
++ echo "Running Default LTP..."
++-"${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+++        RUN_DEFAULT_SET="$SYSCALLS_STR \
+++	$FS_STR \
+++	$FS_PERMS_SIMPLE_STR \
+++	$FSX_STR \
+++	$DIO_STR \
+++	$IO_STR \
+++	$MM_STR \
+++	$IPC_STR \
+++	$SCHED_STR \
+++	$MATH_STR \
+++	$NPTL_STR \
+++	$PTY_STR \
+++	$CONTAINERS_STR \
+++	$FS_BIND_STR \
+++	$CONTROLLERS_STR \
+++	$FILECAPS_STR \
+++	$CAP_BOUNDS_STR \
+++	$FCNTL_LOCKTESTS_STR \
+++	$CONNECTORS_STR \
+++	$ADMIN_TOOLS_STR \
+++	$TIMERS_STR \
+++	$POWER_MANAGEMENT_TESTS_STR \
+++	$NUMA_STR \
+++	$HUGETLB_STR \
+++	$COMMANDS_STR \
+++	$HYPERTHREADING_STR \
+++	$AIODIO_PART1_STR \
+++	$AIODIO_PART2_STR \
+++	$AIODIO_PART3_STR \
+++	$AIODIO_PART4_STR"
+++
+++	rm -f runtest/defaultset
+++	for TEST in $RUN_DEFAULT_SET
+++	do
+++	    UPPER=`echo $TEST | tr "[:lower:]" "[:upper:]"`
+++# # 	    var="_STR"
+++# # 	    echo "	\$$UPPER$var \\"
+++# # 	    echo "Running Test $UPPER"
+++	    echo "Running Test $TEST"
+++	    cat  runtest/$TEST >> runtest/defaultset
+++# # 			echo "if [ \$RUN_DEFAULT_$UPPER -eq 1 ]"
+++# # 			echo "then"
+++# # 			echo "	$UPPER$var=\"$TEST\""
+++# # 			echo "fi"
+++# # 			echo ""
+++# #			echo "export RUN_DEFAULT_$UPPER=1"
+++	done
+++	"${RUNLTP}" -f defaultset -g defaultset.html
++ printf "Completed running Default LTP\n\n\n"
++ ## END => Test Series 1                               ##
++ 
+++
++ ## The next one i plan to run is ballista             ##
++ ## START => Test Series 2                             ##
++ if [ $RUN_BALLISTA -eq 1 ]
++@@ -353,15 +602,20 @@ then
++ fi
++ ## END => Test Series 6                               ##
++ 
++-
++ ## The next one i plan to run is tpm_tools            ##
++ ## START => Test Series 7                             ##
+++if [ $RUN_TPM_TOOLS -eq 1 ]
+++then
++ "${RUNLTP}" -f tpm_tools
+++fi
++ ## END => Test Series 7                               ##
++ 
++ ## The next one i plan to run is tcore_patch_test_suites
++ ## START => Test Series 8                             ##
+++if [ $RUN_TCORE -eq 1 ]
+++then
++ "${RUNLTP}" -f tcore
+++fi
++ ## END => Test Series 8                               ##
++ 
++ 
+diff --git a/recipes/ltp/ltp_20100831.bb b/recipes/ltp/ltp_20100831.bb
+index 6c5a0ae..c57b5e2 100644
+--- a/recipes/ltp/ltp_20100831.bb
++++ b/recipes/ltp/ltp_20100831.bb
+@@ -7,7 +7,8 @@ PR = "r0"
+ 
+ inherit autotools
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz \
++	  file://runalltests.patch;patch=1 "
+ 
+ S = "${WORKDIR}/ltp-full-${PV}"
+ 
+-- 
+1.7.0.4
 
-It looks like running Libtool's "bootstrap" script regenerates
-libtool.sh, and I've changed my code to do this according to the
-attached "libtool-bootstrap.diff.txt".
 
-The second instance is with SDL which seems to provide its own Libtool
-script. It looks like Git commit
-a23202736001afe7f520ef64e2431d9f994130b8 (2010-11-14) removed a patch
-that previously fixed my problem, so I restored the relevant bit
-according to the attached "sdl-libtool-host-dir.diff.txt".
 
-The original problem that led me to this was that it was failing at a
-Free type "install" step. (And then later for the SDL install step.)
-For reference, the Free type messages were something like this,
-paraphrased to remove the ridiculously long path names:
-
-NOTE: make LIBTOOL=arm-angstrom-linux-gnueabi-libtool DESTDIR=${IMAGE} install
-. . .
-arm-angstrom-linux-gnueabi-libtool --mode=install
-${SYS}/usr/bin/install -c ${OBJS}/libfreetype.la ${IMAGE}/usr/lib
-arm-angstrom-linux-gnueabi-libtool: install: warning: relinking
-`${OBJS}/libfreetype.la'
-arm-angstrom-linux-gnueabi-libtool: relink:
-arm-angstrom-linux-gnueabi-gcc . . . -L${SYS}/usr/lib
--L${IMAGE}/usr/lib -L/usr/lib -lz . . .
-/usr/lib/libgcc_s.so: file not recognized: File format not recognized
-
-It turned out that on my host computer (Arch linux x68_64) I indeed
-have this /usr/lib/libgcc_s.so file. I temporarily moved it out of the
-way and the relink and install worked fine. The linker seemed to be
-trying to use that file because of the -L/usr/lib option passed to it,
-and one of the changes in cross_compile.patch removes that -L/usr/lib
-option.
-
--Martin
-
---0016364c7e8b21240204976dff0a
-Content-Type: text/plain; charset=UTF-8; name="libtool-bootstrap.diff.txt"
-Content-Disposition: attachment; filename="libtool-bootstrap.diff.txt"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gh5rnhaz0
-
-RnJvbSBiOTMwMGJjOTUwYjBkYjUzNDY3Nzg4NTQyZmU0MWIxOTRhZmNjNWJiIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBNYXJ0aW4gUGFudGVyIDx2YWRtaXVtIMOgIGdtYWlsLmNvbT4K
-RGF0ZTogV2VkLCAxIERlYyAyMDEwIDAzOjUxOjUxICswMDAwClN1YmplY3Q6IFtQQVRDSF0gUnVu
-IGxpYnRvb2wncyBib290c3RyYXAgdG8gcmVnZW5lcmF0ZSBsdG1haW4uc2ggZnJvbSB0aGUgcGF0
-Y2hlZCBsdG1haW4ubTRzaAoKLS0tCiByZWNpcGVzL2xpYnRvb2wvbGlidG9vbF8yLjIuNmIuYmIg
-fCAgICA0ICsrKysKIDEgZmlsZXMgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspLCAwIGRlbGV0aW9u
-cygtKQoKZGlmZiAtLWdpdCBhL3JlY2lwZXMvbGlidG9vbC9saWJ0b29sXzIuMi42Yi5iYiBiL3Jl
-Y2lwZXMvbGlidG9vbC9saWJ0b29sXzIuMi42Yi5iYgppbmRleCBhMTljYWFjLi42YWZlOTJhIDEw
-MDY0NAotLS0gYS9yZWNpcGVzL2xpYnRvb2wvbGlidG9vbF8yLjIuNmIuYmIKKysrIGIvcmVjaXBl
-cy9saWJ0b29sL2xpYnRvb2xfMi4yLjZiLmJiCkBAIC0xMyw2ICsxMywxMCBAQCBGSUxFU19saWJs
-dGRsID0gIiR7bGliZGlyfS9saWJsdGRsLnNvLioiCiBGSUxFU19saWJsdGRsLWRldiA9ICIke2xp
-YmRpcn0vbGlibHRkbC4qICR7aW5jbHVkZWRpcn0vbHRkbC5oIgogRklMRVNfbGlibHRkbC1kYmcg
-PSAiJHtsaWJkaXJ9Ly5kZWJ1Zy8iCiAKK2RvX2NvbmZpZ3VyZV9wcmVwZW5kICgpIHsKKyAgICAg
-ICAuL2Jvb3RzdHJhcAorfQorCiBkb19zdGFnZSAoKSB7CiAgICAgICAgaW5zdGFsbCAtZCAke1NU
-QUdJTkdfSU5DRElSfS9saWJsdGRsCiAgICAgICAgaW5zdGFsbCAtbSAwNjQ0IGxpYmx0ZGwvbHRk
-bC5oICR7U1RBR0lOR19JTkNESVJ9LwotLSAKMS43LjEKCg==
-
---0016364c7e8b21240204976dff0a
-Content-Type: text/plain; charset=UTF-8; name="sdl-libtool-host-dir.diff.txt"
-Content-Disposition: attachment; filename="sdl-libtool-host-dir.diff.txt"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: file0
-
-RnJvbSA3MzYzZjM3YjEwZWM4M2QyMmMwNmVlYWJkZjdjZmE4YmYxYWViOWM2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBNYXJ0aW4gUGFudGVyIDx2YWRtaXVtIMOgIGdtYWlsLmNvbT4K
-RGF0ZTogVGh1LCAyIERlYyAyMDEwIDAzOjQ0OjIwICswMDAwClN1YmplY3Q6IFtQQVRDSF0gUmVz
-dG9yZSBsaWJ0b29sIHBhdGNoIHNvIHRoYXQgTGlidG9vbCBkb2Vzbid0ICJyZWxpbmsiIGFnYWlu
-c3QgaG9zdCBsaWJyYXJpZXMKCi0tLQogcmVjaXBlcy9saWJzZGwvZmlsZXMvbGlidG9vbC1ob3N0
-LWRpci5wYXRjaCB8ICAgMTYgKysrKysrKysrKysrKysrKwogcmVjaXBlcy9saWJzZGwvbGlic2Rs
-LXgxMV8xLjIuMTQuYmIgICAgICAgICB8ICAgIDEgKwogMiBmaWxlcyBjaGFuZ2VkLCAxNyBpbnNl
-cnRpb25zKCspLCAwIGRlbGV0aW9ucygtKQogY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMvbGli
-c2RsL2ZpbGVzL2xpYnRvb2wtaG9zdC1kaXIucGF0Y2gKCmRpZmYgLS1naXQgYS9yZWNpcGVzL2xp
-YnNkbC9maWxlcy9saWJ0b29sLWhvc3QtZGlyLnBhdGNoIGIvcmVjaXBlcy9saWJzZGwvZmlsZXMv
-bGlidG9vbC1ob3N0LWRpci5wYXRjaApuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAw
-Li5iM2Y0NDNmCi0tLSAvZGV2L251bGwKKysrIGIvcmVjaXBlcy9saWJzZGwvZmlsZXMvbGlidG9v
-bC1ob3N0LWRpci5wYXRjaApAQCAtMCwwICsxLDE2IEBACitTdG9wIExpYnRvb2wgZnJvbSB0cnlp
-bmcgdG8gcmVsaW5rIGFnYWluc3QgaG9zdCBsaWJyYXJpZXMgZHVyaW5nIGluc3RhbGwKK29wZXJh
-dGlvbnMgYnkgdXNpbmcgdGhlIC1ML3Vzci9saWIgb3B0aW9uLiBTYW1lIGFzIHBhcnQgb2YgTGli
-dG9vbCByZWNpcGUncworbGlidG9vbC0yLjIuNmIvY3Jvc3NfY29tcGlsZS5wYXRjaC4KK0luZGV4
-OiBTREwtMS4yLjE0L2J1aWxkLXNjcmlwdHMvbHRtYWluLnNoCis9PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CistLS0gU0RM
-LTEuMi4xNC5vcmlnL2J1aWxkLXNjcmlwdHMvbHRtYWluLnNoCisrKysgU0RMLTEuMi4xNC9idWls
-ZC1zY3JpcHRzL2x0bWFpbi5zaAorQEAgLTU3ODUsOCArNTc5MCw2IEBAIGZ1bmNfbW9kZV9saW5r
-ICgpCisgCQlhZGQ9IiRsaWJkaXIvJGxpbmtsaWIiCisgCSAgICAgIGZpCisgCSAgICBlbHNlCist
-CSAgICAgICMgV2UgY2Fubm90IHNlZW0gdG8gaGFyZGNvZGUgaXQsIGd1ZXNzIHdlJ2xsIGZha2Ug
-aXQuCistCSAgICAgIGFkZF9kaXI9Ii1MJGxpYmRpciIKKyAJICAgICAgIyBUcnkgbG9va2luZyBm
-aXJzdCBpbiB0aGUgbG9jYXRpb24gd2UncmUgYmVpbmcgaW5zdGFsbGVkIHRvLgorIAkgICAgICBp
-ZiB0ZXN0IC1uICIkaW5zdF9wcmVmaXhfZGlyIjsgdGhlbgorIAkJY2FzZSAkbGliZGlyIGluCmRp
-ZmYgLS1naXQgYS9yZWNpcGVzL2xpYnNkbC9saWJzZGwteDExXzEuMi4xNC5iYiBiL3JlY2lwZXMv
-bGlic2RsL2xpYnNkbC14MTFfMS4yLjE0LmJiCmluZGV4IDU0MTdiYTMuLjQ2MmVhNjcgMTAwNjQ0
-Ci0tLSBhL3JlY2lwZXMvbGlic2RsL2xpYnNkbC14MTFfMS4yLjE0LmJiCisrKyBiL3JlY2lwZXMv
-bGlic2RsL2xpYnNkbC14MTFfMS4yLjE0LmJiCkBAIC0xNCw2ICsxNCw3IEBAIFNSQ19VUkkgPSAi
-IFwKICAgaHR0cDovL3d3dy5saWJzZGwub3JnL3JlbGVhc2UvU0RMLSR7UFZ9LnRhci5neiBcCiAg
-IGZpbGU6Ly9zZGxfYnVnXzg5NF9maXgucGF0Y2ggXAogICBmaWxlOi8vc2RsLm00IFwKKyAgZmls
-ZTovL2xpYnRvb2wtaG9zdC1kaXIucGF0Y2ggXAogIgogCiBTID0gIiR7V09SS0RJUn0vU0RMLSR7
-UFZ9IgotLSAKMS43LjEKCg==
-
---0016364c7e8b21240204976dff0a--
