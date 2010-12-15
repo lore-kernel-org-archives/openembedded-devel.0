@@ -1,32 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Irfan_Sadiq@mentor.com>) id 1PSlzi-0001Yd-8G
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PSm3N-0001h6-SH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 08:41:51 +0100
-Received: from nat-dem.mentorg.com ([195.212.93.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1PSly7-0004GE-LB from Irfan_Sadiq@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Dec 2010 23:40:12 -0800
-Received: from localhost.localdomain ([137.202.157.168]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 15 Dec 2010 08:40:10 +0100
-From: irfan sadiq <irfan_sadiq@mentor.com>
+	Wed, 15 Dec 2010 08:45:38 +0100
+Received: by iwn8 with SMTP id 8so1839151iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Dec 2010 23:44:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=YOLr3v9oRNaq4/C+axVXla+iKs9pFMhlqR7ZimUDB2c=;
+	b=UL8lUQswSE5iNXDxXPGSjL43pvsXWFO7XO+TmFIUXBcFvyCaVVBmJoNnyzCNUYSbJV
+	AptOyi6Wje/9rSdVuHK9tLc3pSG+a6JQzC5sRG1tAJQS75WD4D7q7zJHuwEqtpJxMa9y
+	JeMrCtmcwTvQvh+NHEcvc9azZNtHrznyjEwZQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=a/wcARuF6K9Psud/umlI7V04UXJ6baWxos6hVhM5+MSZ5vq8KLJdJiKicXFGSyztfv
+	TkboD/BGrFfMT+AI4OkzqKhnj0b9umlVvnmX7f1mi3ckDZPwq0ml6d4RycAZ/Mv8/808
+	93FGdGFzHyTWc6bmKXgku8/cEob951a3SZ5qA=
+MIME-Version: 1.0
+Received: by 10.231.31.1 with SMTP id w1mr4546464ibc.7.1292399041781; Tue, 14
+	Dec 2010 23:44:01 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Tue, 14 Dec 2010 23:44:01 -0800 (PST)
+Date: Wed, 15 Dec 2010 08:44:01 +0100
+Message-ID: <AANLkTik94Y+YrBAhFsbj8TRhNgbEuY0GWfHKxmuHx_iG@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Dec 2010 12:39:52 +0500
-Message-Id: <1292398792-3714-1-git-send-email-irfan_sadiq@mentor.com>
-X-Mailer: git-send-email 1.7.0.4
-X-OriginalArrivalTime: 15 Dec 2010 07:40:10.0431 (UTC)
-	FILETIME=[4D486CF0:01CB9C2B]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Irfan_Sadiq@mentor.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: To make runalltests.sh configurable for default tests
+Subject: wiki issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,345 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 07:41:51 -0000
+X-List-Received-Date: Wed, 15 Dec 2010 07:45:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
- This patch applied to ltp runalltests.sh script to make default set of test 
- suits configurable which is not the default behaviour.
- By default rullalltests.sh invokes runltp wihout specifying any set of tests
- to run. This patch will give the user option to chose from defaults suits
- setting their respective variables named RUN_DEFAULT_SUITENAME to '0' or '1'.
- Thus executing only desired suites.
+Hi,
 
-Signed-off-by: Irfan Sadiq <irfan_sadiq@mentor.com>
----
- recipes/ltp/ltp-20100831/runalltests.patch |  302 ++++++++++++++++++++++++++++
- recipes/ltp/ltp_20100831.bb                |    3 +-
- 2 files changed, 304 insertions(+), 1 deletions(-)
+I tried to update the wiki with my testing results but failed miserably.
 
-diff --git a/recipes/ltp/ltp-20100831/runalltests.patch b/recipes/ltp/ltp-20100831/runalltests.patch
-new file mode 100644
-index 0000000..c567769
---- /dev/null
-+++ b/recipes/ltp/ltp-20100831/runalltests.patch
-@@ -0,0 +1,302 @@
-+--- ltp-full-20100831.orig/runalltests.sh	2010-09-14 16:04:32.000000000 +0500
-++++ ltp-full-20100831/runalltests.sh	2010-12-13 11:18:11.857382107 +0500
-+@@ -68,6 +68,12 @@ export RUN_FILECAPS=0
-+ export LIBCAPS_INSTALLED=0
-+ export LIBATTR_INSTALLED=0
-+ 
-++## Set this to 1 if tmp_tools tests are required to be tested
-++export RUN_TPM_TOOLS=0
-++
-++## Set this to 1 if tcore tests are required to be tested
-++export RUN_TCORE=0
-++
-+ ## Set this to 1 if you wish to execute the stress_cd tests
-+ ## Make sure you have FLOPPY inserted, be warned that you
-+ ## will loose all data on it after the tests,
-+@@ -202,6 +208,194 @@ export RUN_SMACK_SECURITY_TESTS=0
-+ ##Set this to 1 if you wish to run the Basic PERFORMANCE COUNTER tests
-+ export RUN_PERFORMANCE_COUNTERS_TESTS=0
-+ 
-++### Additional tests That are not included in runalltests.sh
-++export RUN_LTP_AIODIO_PART1=0
-++export RUN_LTP_AIODIO_PART2=0
-++export RUN_LTP_AIODIO_PART3=0
-++export RUN_LTP_AIODIO_PART4=0
-++
-++if [ $RUN_LTP_AIODIO_PART1 -eq 1 ]                        
-++then                                                               
-++        AIODIO_PART1_STR="ltp-aiodio.part1"
-++fi                                                                 
-++
-++if [ $RUN_LTP_AIODIO_PART2 -eq 1 ]                        
-++then                                                               
-++        AIODIO_PART2_STR="ltp-aiodio.part2"
-++fi                                                                 
-++
-++if [ $RUN_LTP_AIODIO_PART3 -eq 1 ]                        
-++then                                                               
-++        AIODIO_PART3_STR="ltp-aiodio.part3"
-++fi                                                                 
-++
-++if [ $RUN_LTP_AIODIO_PART4 -eq 1 ]                        
-++then                                                               
-++        AIODIO_PART4_STR="ltp-aiodio.part4"
-++fi                                                                 
-++
-++## This is default set of tests chose which tests you want to perform by default
-++## Set this to 1 if you wish to run the specific tests
-++
-++export RUN_DEFAULT_MATH=0
-++export RUN_DEFAULT_NPTL=0
-++export RUN_DEFAULT_PTY=0
-++export RUN_DEFAULT_IO=0
-++export RUN_DEFAULT_TIMERS=0
-++export RUN_DEFAULT_MM=0
-++export RUN_DEFAULT_IPC=0
-++export RUN_DEFAULT_SCHED=0
-++export RUN_DEFAULT_CONTAINERS=0
-++export RUN_DEFAULT_CONNECTORS=0
-++export RUN_DEFAULT_FILECAPS=0
-++export RUN_DEFAULT_CAP_BOUNDS=0
-++export RUN_DEFAULT_FSX=0
-++export RUN_DEFAULT_FCNTL_LOCKTESTS=0
-++export RUN_DEFAULT_CONTROLLERS=0
-++export RUN_DEFAULT_ADMIN_TOOLS=0
-++export RUN_DEFAULT_HYPERTHREADING=0
-++export RUN_DEFAULT_DIO=0
-++export RUN_DEFAULT_SYSCALLS=0
-++export RUN_DEFAULT_FS_PERMS_SIMPLE=0
-++export RUN_DEFAULT_POWER_MANAGEMENT_TESTS=0
-++export RUN_DEFAULT_NUMA=0
-++export RUN_DEFAULT_HUGETLB=0
-++export RUN_DEFAULT_COMMANDS=0
-++export RUN_DEFAULT_FS=0
-++export RUN_DEFAULT_FS_BIND=0
-++
-++if [ $RUN_DEFAULT_SYSCALLS -eq 1 ]                                 
-++then                                                               
-++        SYSCALLS_STR="syscalls"                                    
-++fi                                                                 
-++
-++if [ $RUN_DEFAULT_FS -eq 1 ]
-++then                        
-++        FS_STR="fs"         
-++fi                          
-++
-++if [ $RUN_DEFAULT_FS_PERMS_SIMPLE -eq 1 ]
-++then                                     
-++        FS_PERMS_SIMPLE_STR="fs_perms_simple"
-++fi                                           
-++
-++if [ $RUN_DEFAULT_FSX -eq 1 ]
-++then                         
-++        FSX_STR="fsx"        
-++fi                           
-++
-++if [ $RUN_DEFAULT_DIO -eq 1 ]
-++then                         
-++        DIO_STR="dio"        
-++fi                           
-++
-++if [ $RUN_DEFAULT_IO -eq 1 ]
-++then                        
-++        IO_STR="io"         
-++fi                          
-++
-++if [ $RUN_DEFAULT_MM -eq 1 ]
-++then                        
-++        MM_STR="mm"         
-++fi                          
-++
-++if [ $RUN_DEFAULT_IPC -eq 1 ]
-++then                         
-++        IPC_STR="ipc"        
-++fi                           
-++
-++if [ $RUN_DEFAULT_SCHED -eq 1 ]
-++then                           
-++        SCHED_STR="sched"      
-++fi                             
-++
-++if [ $RUN_DEFAULT_MATH -eq 1 ]
-++then                          
-++        MATH_STR="math"       
-++fi                            
-++
-++if [ $RUN_DEFAULT_NPTL -eq 1 ]
-++then                          
-++        NPTL_STR="nptl"       
-++fi                            
-++
-++if [ $RUN_DEFAULT_PTY -eq 1 ]
-++then                         
-++        PTY_STR="pty"        
-++fi                           
-++
-++if [ $RUN_DEFAULT_CONTAINERS -eq 1 ]
-++then                                
-++        CONTAINERS_STR="containers" 
-++fi                                  
-++
-++if [ $RUN_DEFAULT_FS_BIND -eq 1 ]
-++then                             
-++        FS_BIND_STR="fs_bind"    
-++fi                               
-++
-++if [ $RUN_DEFAULT_CONTROLLERS -eq 1 ]
-++then                                 
-++        CONTROLLERS_STR="controllers"
-++fi
-++
-++if [ $RUN_DEFAULT_FILECAPS -eq 1 ]
-++then
-++        FILECAPS_STR="filecaps"
-++fi
-++
-++if [ $RUN_DEFAULT_CAP_BOUNDS -eq 1 ]
-++then
-++        CAP_BOUNDS_STR="cap_bounds"
-++fi
-++
-++if [ $RUN_DEFAULT_FCNTL_LOCKTESTS -eq 1 ]
-++then
-++        FCNTL_LOCKTESTS_STR="fcntl-locktests"
-++fi
-++
-++if [ $RUN_DEFAULT_CONNECTORS -eq 1 ]
-++then
-++        CONNECTORS_STR="connectors"
-++fi
-++
-++if [ $RUN_DEFAULT_ADMIN_TOOLS -eq 1 ]
-++then
-++        ADMIN_TOOLS_STR="admin_tools"
-++fi
-++
-++if [ $RUN_DEFAULT_TIMERS -eq 1 ]
-++then
-++        TIMERS_STR="timers"
-++fi
-++
-++if [ $RUN_DEFAULT_POWER_MANAGEMENT_TESTS -eq 1 ]
-++then
-++        POWER_MANAGEMENT_TESTS_STR="power_management_tests"
-++fi
-++
-++if [ $RUN_DEFAULT_NUMA -eq 1 ]
-++then
-++        NUMA_STR="numa"
-++fi
-++
-++if [ $RUN_DEFAULT_HUGETLB -eq 1 ]
-++then
-++        HUGETLB_STR="hugetlb"
-++fi
-++
-++if [ $RUN_DEFAULT_COMMANDS -eq 1 ]
-++then
-++        COMMANDS_STR="commands"
-++fi
-++
-++if [ $RUN_DEFAULT_HYPERTHREADING -eq 1 ]
-++then
-++        HYPERTHREADING_STR="hyperthreading"
-++fi
-++
-++
-++
-+ export LTP_VERSION=`"${RUNLTP}" -e`
-+ export TEST_START_TIME=`date +"%Y_%b_%d-%Hh_%Mm_%Ss"`
-+ export HARDWARE_TYPE=$(uname -i)
-+@@ -215,13 +409,68 @@ if ! cd "${LTPROOT}"; then
-+ 	exit $rc
-+ fi
-+ 
-++# ## The First one i plan to run is the default LTP run ##
-++# ## START => Test Series 1                             ##
-++# echo "Running Default LTP..."
-++# "${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
-++# printf "Completed running Default LTP\n\n\n"
-++# ## END => Test Series 1                               ##
-++
-+ ## The First one i plan to run is the default LTP run ##
-+ ## START => Test Series 1                             ##
-+ echo "Running Default LTP..."
-+-"${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
-++        RUN_DEFAULT_SET="$SYSCALLS_STR \
-++	$FS_STR \
-++	$FS_PERMS_SIMPLE_STR \
-++	$FSX_STR \
-++	$DIO_STR \
-++	$IO_STR \
-++	$MM_STR \
-++	$IPC_STR \
-++	$SCHED_STR \
-++	$MATH_STR \
-++	$NPTL_STR \
-++	$PTY_STR \
-++	$CONTAINERS_STR \
-++	$FS_BIND_STR \
-++	$CONTROLLERS_STR \
-++	$FILECAPS_STR \
-++	$CAP_BOUNDS_STR \
-++	$FCNTL_LOCKTESTS_STR \
-++	$CONNECTORS_STR \
-++	$ADMIN_TOOLS_STR \
-++	$TIMERS_STR \
-++	$POWER_MANAGEMENT_TESTS_STR \
-++	$NUMA_STR \
-++	$HUGETLB_STR \
-++	$COMMANDS_STR \
-++	$HYPERTHREADING_STR \
-++	$AIODIO_PART1_STR \
-++	$AIODIO_PART2_STR \
-++	$AIODIO_PART3_STR \
-++	$AIODIO_PART4_STR"
-++
-++	rm -f runtest/defaultset
-++	for TEST in $RUN_DEFAULT_SET
-++	do
-++	    UPPER=`echo $TEST | tr "[:lower:]" "[:upper:]"`
-++# # 	    var="_STR"
-++# # 	    echo "	\$$UPPER$var \\"
-++# # 	    echo "Running Test $UPPER"
-++	    echo "Running Test $TEST"
-++	    cat  runtest/$TEST >> runtest/defaultset
-++# # 			echo "if [ \$RUN_DEFAULT_$UPPER -eq 1 ]"
-++# # 			echo "then"
-++# # 			echo "	$UPPER$var=\"$TEST\""
-++# # 			echo "fi"
-++# # 			echo ""
-++# #			echo "export RUN_DEFAULT_$UPPER=1"
-++	done
-++	"${RUNLTP}" -f defaultset -g defaultset.html
-+ printf "Completed running Default LTP\n\n\n"
-+ ## END => Test Series 1                               ##
-+ 
-++
-+ ## The next one i plan to run is ballista             ##
-+ ## START => Test Series 2                             ##
-+ if [ $RUN_BALLISTA -eq 1 ]
-+@@ -353,15 +602,20 @@ then
-+ fi
-+ ## END => Test Series 6                               ##
-+ 
-+-
-+ ## The next one i plan to run is tpm_tools            ##
-+ ## START => Test Series 7                             ##
-++if [ $RUN_TPM_TOOLS -eq 1 ]
-++then
-+ "${RUNLTP}" -f tpm_tools
-++fi
-+ ## END => Test Series 7                               ##
-+ 
-+ ## The next one i plan to run is tcore_patch_test_suites
-+ ## START => Test Series 8                             ##
-++if [ $RUN_TCORE -eq 1 ]
-++then
-+ "${RUNLTP}" -f tcore
-++fi
-+ ## END => Test Series 8                               ##
-+ 
-+ 
-diff --git a/recipes/ltp/ltp_20100831.bb b/recipes/ltp/ltp_20100831.bb
-index 6c5a0ae..c57b5e2 100644
---- a/recipes/ltp/ltp_20100831.bb
-+++ b/recipes/ltp/ltp_20100831.bb
-@@ -7,7 +7,8 @@ PR = "r0"
- 
- inherit autotools
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz \
-+	  file://runalltests.patch;patch=1 "
- 
- S = "${WORKDIR}/ltp-full-${PV}"
- 
--- 
-1.7.0.4
+After logging in and making my changes I get:
 
+Internal error
+From Openembedded
+Jump to: navigation, search
+
+Set $wgShowExceptionDetails = true; at the bottom of LocalSettings.php
+to show detailed debugging information.
+
+Resubmitting did not help.
+Can one of our wiki/php wizards look into this?
+
+Frans.
 
 
