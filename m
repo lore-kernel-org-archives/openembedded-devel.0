@@ -1,47 +1,53 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-fx0-f42.google.com ([209.85.161.42])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PSwJv-0004zQ-Di
+	(envelope-from <martin.jansa@gmail.com>) id 1PSx8A-00066B-Cx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 19:43:23 +0100
-Received: by iyj18 with SMTP id 18so1068983iyj.6
+	Wed, 15 Dec 2010 20:35:19 +0100
+Received: by fxm11 with SMTP id 11so2275225fxm.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 10:41:42 -0800 (PST)
+	Wed, 15 Dec 2010 11:33:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=6O/xE11f3KYgTomoVvv+oNtx2giH1FqOe53KCJpkwfk=;
-	b=g8K+7kJyki8iQLhB8U+fQvtmba8ysxHaMx7F3SVzQiK4a9Px2Upbr41vfMwNaRVC80
-	oz55HK+S7quyDbJBE1iMTM6lEj9gsWS0ap5Al3ezuGdkO/FBe4IiAjSkRZw7muPq8PgO
-	yPzc65yFhfVMOgFOYZtmIoGcQP5yI5ONJrkNg=
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=l46rMDkP7o6nwxezrY8UNyWgGhjPoYPRV+4/vNzrmtc=;
+	b=pQappTOLMaKo3NXwyHSsD/ACHlP/AN5zyh7j4VTWOwDdK7cbyI5c4ObTooRW4dT59z
+	yJ56BLHipXLy2BZOkPA1kPvU8NxVgJAotXsjyH1BeV9AmY1bbjCgT2o3/wqvv2EHX5we
+	PyLQEW3wRAijAXpot1zP/ib2VurIO34Ayws5s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ZlKZgnK9bH/RMlQoKkqNCk/rPMzkgNRAHjBA7q1hUYXcn92meozbaT+GOP4zZoYYnD
-	Z66JZHOLgDyOYssYj0gHB/NRXSNOx3st1vx7ri52X9khuAbpIUhM/573G58hAbpye5BQ
-	sKD3uf7mIIs6XT5S8Y52s1etd1dZSR2E/dIbE=
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=CHptt910+W+LBpsATCKSReO1BZLlSSCtqgvceKDr9ZiIqkpawkM2xqOtSh03JT1tV5
+	9nnDkrTjWhiEL7T9VSCNEBNRXMmb6A7Iu3z9TJ9ZGDzLHUw+TAJa2uvkRRz9/glCPkMJ
+	In0IgqFdL55aRBnDQtCHo/1Ku4ohCgkbCq9CY=
+Received: by 10.223.122.201 with SMTP id m9mr2839811far.79.1292441620604;
+	Wed, 15 Dec 2010 11:33:40 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 5sm602219fak.23.2010.12.15.11.33.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 15 Dec 2010 11:33:38 -0800 (PST)
+Date: Wed, 15 Dec 2010 20:33:39 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20101215193339.GC3238@jama>
+References: <1292416949-688-1-git-send-email-otavio@ossystems.com.br>
+	<1292417425-1328-1-git-send-email-otavio@ossystems.com.br>
+	<20101215130120.GB3238@jama>
+	<AANLkTin_QS4A+UM2Oj3K82i+rtC4Qd_aD=oTDQ3iZB7q@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.231.38.10 with SMTP id z10mr5246164ibd.107.1292438502123; Wed,
-	15 Dec 2010 10:41:42 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Wed, 15 Dec 2010 10:41:42 -0800 (PST)
-In-Reply-To: <4D08F9A6.1010607@mentor.com>
-References: <AANLkTimTaZyPywc_B8g4k4QO+gTJq67K=OgcoSe6BpJh@mail.gmail.com>
-	<4D08D3F5.1060608@mentor.com>
-	<AANLkTim5ChRd3XDTo+E25HiWwpnmyMDgeg17xXd0=GxA@mail.gmail.com>
-	<4D08F9A6.1010607@mentor.com>
-Date: Wed, 15 Dec 2010 19:41:42 +0100
-Message-ID: <AANLkTimWn_duyaL30DF0uhHNj6sVb1F5-TG4jKReKD+w@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <AANLkTin_QS4A+UM2Oj3K82i+rtC4Qd_aD=oTDQ3iZB7q@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-SA-Exim-Connect-IP: 209.85.161.42
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing 2010-12-10 (wiki, results, bluez-libs)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] classes/gitpv.bbclass: use 'git describe' to for package version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,47 +61,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 18:43:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Dec 2010 19:35:19 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-2010/12/15 Tom Rini <tom_rini@mentor.com>:
-> On 12/15/2010 08:33 AM, Frans Meulenbroeks wrote:
->>
->> 2010/12/15 Tom Rini<tom_rini@mentor.com>:
->>>
->>> On 12/15/2010 12:51 AM, Frans Meulenbroeks wrote:
->>>>
->>>> Dear all,
->>>>
->>>> I just wanted to update the testing table with my entries and I
->>>> noticed two (possibly related) things.
->>>> - no other entries for 2010-12-10 are there yet (and it is already
->>>> wednesday)
->>>
->>> I haven't updated the stuff we're building since just about everything
->>> failed due to the gcc issue Khem fixed in
->>> 2c8570552549da2e11428d08b2bc08849cac39b1. =A0This is why I sometimes wo=
-nder
->>> if
->>> it would be desirable to cherry-pick a few things in to the testing-nex=
-t
->>> branch.
->>
->> Hm. Yeah. I've re-checked and I am definitely building the
->> testing-next branch, not git head.
->> Then again I only build console-image and no high end images.
->> My james-image also had quite some issues (js, samba) which are now
->> resolved.
->> Only issue left for now seems to be gettext/libtool related.
->
-> What distro? =A0Almost _everything_ was broken for me since it was
-> micro/minimal (including console-image).
+On Wed, Dec 15, 2010 at 12:27:12PM -0200, Otavio Salvador wrote:
+> On Wed, Dec 15, 2010 at 11:01, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > On Wed, Dec 15, 2010 at 10:50:25AM -0200, Otavio Salvador wrote:
+> >> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> >> ---
+> >>  classes/gitpv.bbclass |   41 +++++++++++++++++++++++++++++++++++++++++
+> >>  1 files changed, 41 insertions(+), 0 deletions(-)
+> >>  create mode 100644 classes/gitpv.bbclass
+> >>
+> >> diff --git a/classes/gitpv.bbclass b/classes/gitpv.bbclass
+> >> new file mode 100644
+> >> index 0000000..c9496f1
+> >> --- /dev/null
+> >> +++ b/classes/gitpv.bbclass
+> >> @@ -0,0 +1,41 @@
+> >> +# gitpv.bbclass provides a PV variable which is a sortable version
+> >> +# with the output of "git describe".
+> >> +#
+> >> +# It can handle SRCREV = ${AUTOREV}, as well as SRCREV = "<hash>"
+> >> +
+> >> +PV = "${@get_git_pv(d)}"
+> >
+> > can you integrate it with
+> > classes/gitpkgv.bbclass ?
+> 
+> I can however I think the usage is different.
 
-Distro minimal, targets mpc8313e-rds, sheevaplug, calamari, neek
-(latter does not build) recipe console-image
-distro slugos, targets nlsu2le nslu2be, target slugos-image.
+I find 3 similar classes a bit confusing
+gitpkgv, gitver and now gitpv
 
-Frans
+so I was hoping that all 3 classes could be merged to one (probably
+gitver is best name) where all usefull variables will be prepared, and
+then only the right one used in recipe.
+
+Like in gitpkgv.bbclass example:
+# inherit gitpkgv
+#
+# PV = "1.0+git${SRCPV}"        
+# PKGV = "1.0+git${GITPKGV}"
+
+btw there should be '+gitr' not '+git' AFAIK
+
+in your case, you can use something like
+PV = "${GITVER}"
+
+btw your current implementation imho doesn't provide sortable version in
+case someone makes tag "something-special" between tags "release-2010.12" and
+"release-2011.03".
+
+> The gitpkgv does not use describe and if there's users of it (there's
+> no in recipes) we'd change it for them. That is wrong in my opinion.
+
+agreed but it can still be in same bbclass maybe in new variable ?GITTAGVER?
+as long as bbclass is not changing variables like PV (and expects recipe
+to use provided variables itself).
+
+> about assign to PV ?= I agree however why someone might want to use it
+> only in PKGV?
+
+Here is a bit longer thread with reasoning and description
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg06746.html
+
+Even after converting many recipes from SRCREV to SRCPV I find this
+concept nice and if local persistent cache will be still needed in new fetchers 
+implementation, then we should probably convert git recipes using SRCPV to
+something like GITPKGV (this time hopefully without PE bump).
+
+Regards,
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
