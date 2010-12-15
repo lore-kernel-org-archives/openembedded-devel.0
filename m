@@ -1,44 +1,41 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PSv1G-0003A6-3J
+	(envelope-from <Tom_Rini@mentor.com>) id 1PSv6b-0003JO-Pp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 18:20:02 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id ADD8D314BAE7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 18:18:24 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id DldOldeXvQZC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 18:18:20 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 0B9A7314BAEA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 18:18:20 +0100 (CET)
-Message-ID: <4D08F85B.30407@opendreambox.org>
-Date: Wed, 15 Dec 2010 18:18:19 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
+	Wed, 15 Dec 2010 18:25:34 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PSv50-0006Wj-UB from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Dec 2010 09:23:54 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 15 Dec 2010 09:24:00 -0800
+Received: from [172.30.80.111] ([172.30.80.111]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 15 Dec 2010 10:23:54 -0700
+Message-ID: <4D08F9A6.1010607@mentor.com>
+Date: Wed, 15 Dec 2010 10:23:50 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1292416949-688-1-git-send-email-otavio@ossystems.com.br>	<1292417425-1328-1-git-send-email-otavio@ossystems.com.br>	<20101215130120.GB3238@jama>	<AANLkTin_QS4A+UM2Oj3K82i+rtC4Qd_aD=oTDQ3iZB7q@mail.gmail.com>
-	<AANLkTikSQRgPsWPx2D8kc78T=gyK6HcQxfsDxzwy9_7J@mail.gmail.com>
-In-Reply-To: <AANLkTikSQRgPsWPx2D8kc78T=gyK6HcQxfsDxzwy9_7J@mail.gmail.com>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+References: <AANLkTimTaZyPywc_B8g4k4QO+gTJq67K=OgcoSe6BpJh@mail.gmail.com>	<4D08D3F5.1060608@mentor.com>
+	<AANLkTim5ChRd3XDTo+E25HiWwpnmyMDgeg17xXd0=GxA@mail.gmail.com>
+In-Reply-To: <AANLkTim5ChRd3XDTo+E25HiWwpnmyMDgeg17xXd0=GxA@mail.gmail.com>
+X-OriginalArrivalTime: 15 Dec 2010 17:23:54.0189 (UTC)
+	FILETIME=[D911C7D0:01CB9C7C]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] classes/gitpv.bbclass: use 'git describe' to for package version
+Subject: Re: testing 2010-12-10 (wiki, results, bluez-libs)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,19 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 17:20:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Dec 2010 17:25:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 12/15/2010 05:36 PM, Otavio Salvador wrote:
-> On Wed, Dec 15, 2010 at 12:27, Otavio Salvador <otavio@ossystems.com.br> wrote:
->> about assign to PV ?= I agree however why someone might want to use it
->> only in PKGV?
-> 
-> ?= doesn't seem to work. PV is preset so it won't override it.
-> 
+On 12/15/2010 08:33 AM, Frans Meulenbroeks wrote:
+> 2010/12/15 Tom Rini<tom_rini@mentor.com>:
+>> On 12/15/2010 12:51 AM, Frans Meulenbroeks wrote:
+>>>
+>>> Dear all,
+>>>
+>>> I just wanted to update the testing table with my entries and I
+>>> noticed two (possibly related) things.
+>>> - no other entries for 2010-12-10 are there yet (and it is already
+>>> wednesday)
+>>
+>> I haven't updated the stuff we're building since just about everything
+>> failed due to the gcc issue Khem fixed in
+>> 2c8570552549da2e11428d08b2bc08849cac39b1.  This is why I sometimes wonder if
+>> it would be desirable to cherry-pick a few things in to the testing-next
+>> branch.
+>
+> Hm. Yeah. I've re-checked and I am definitely building the
+> testing-next branch, not git head.
+> Then again I only build console-image and no high end images.
+> My james-image also had quite some issues (js, samba) which are now resolved.
+> Only issue left for now seems to be gettext/libtool related.
 
-How about PV .= "${@get_git_pv(d)}"?
+What distro?  Almost _everything_ was broken for me since it was 
+micro/minimal (including console-image).
 
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
