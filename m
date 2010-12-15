@@ -1,44 +1,47 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1PSwGT-0004ry-Ek
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PSwJv-0004zQ-Di
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 19:39:51 +0100
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id oBFIcAmf016033
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Wed, 15 Dec 2010 19:43:23 +0100
+Received: by iyj18 with SMTP id 18so1068983iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 12:38:10 -0600
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBFIcAAd008682
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 12:38:10 -0600 (CST)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBFIcAsU015312
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 12:38:10 -0600 (CST)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Wed, 15 Dec 2010 12:38:10 -0600
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 15 Dec 2010 12:38:07 -0600
-Thread-Topic: [RFC] move openssl.cnf file into base openssl package
-Thread-Index: Acuchzd7eDj9Zk2cRqeyITHzaVRFMA==
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080329DB6BBC@dlee06.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Wed, 15 Dec 2010 10:41:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=6O/xE11f3KYgTomoVvv+oNtx2giH1FqOe53KCJpkwfk=;
+	b=g8K+7kJyki8iQLhB8U+fQvtmba8ysxHaMx7F3SVzQiK4a9Px2Upbr41vfMwNaRVC80
+	oz55HK+S7quyDbJBE1iMTM6lEj9gsWS0ap5Al3ezuGdkO/FBe4IiAjSkRZw7muPq8PgO
+	yPzc65yFhfVMOgFOYZtmIoGcQP5yI5ONJrkNg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ZlKZgnK9bH/RMlQoKkqNCk/rPMzkgNRAHjBA7q1hUYXcn92meozbaT+GOP4zZoYYnD
+	Z66JZHOLgDyOYssYj0gHB/NRXSNOx3st1vx7ri52X9khuAbpIUhM/573G58hAbpye5BQ
+	sKD3uf7mIIs6XT5S8Y52s1etd1dZSR2E/dIbE=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.41
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Received: by 10.231.38.10 with SMTP id z10mr5246164ibd.107.1292438502123; Wed,
+	15 Dec 2010 10:41:42 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Wed, 15 Dec 2010 10:41:42 -0800 (PST)
+In-Reply-To: <4D08F9A6.1010607@mentor.com>
+References: <AANLkTimTaZyPywc_B8g4k4QO+gTJq67K=OgcoSe6BpJh@mail.gmail.com>
+	<4D08D3F5.1060608@mentor.com>
+	<AANLkTim5ChRd3XDTo+E25HiWwpnmyMDgeg17xXd0=GxA@mail.gmail.com>
+	<4D08F9A6.1010607@mentor.com>
+Date: Wed, 15 Dec 2010 19:41:42 +0100
+Message-ID: <AANLkTimWn_duyaL30DF0uhHNj6sVb1F5-TG4jKReKD+w@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] move openssl.cnf file into base openssl package
+Subject: Re: testing 2010-12-10 (wiki, results, bluez-libs)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,43 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 18:39:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 15 Dec 2010 18:43:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-All,
+2010/12/15 Tom Rini <tom_rini@mentor.com>:
+> On 12/15/2010 08:33 AM, Frans Meulenbroeks wrote:
+>>
+>> 2010/12/15 Tom Rini<tom_rini@mentor.com>:
+>>>
+>>> On 12/15/2010 12:51 AM, Frans Meulenbroeks wrote:
+>>>>
+>>>> Dear all,
+>>>>
+>>>> I just wanted to update the testing table with my entries and I
+>>>> noticed two (possibly related) things.
+>>>> - no other entries for 2010-12-10 are there yet (and it is already
+>>>> wednesday)
+>>>
+>>> I haven't updated the stuff we're building since just about everything
+>>> failed due to the gcc issue Khem fixed in
+>>> 2c8570552549da2e11428d08b2bc08849cac39b1. =A0This is why I sometimes wo=
+nder
+>>> if
+>>> it would be desirable to cherry-pick a few things in to the testing-nex=
+t
+>>> branch.
+>>
+>> Hm. Yeah. I've re-checked and I am definitely building the
+>> testing-next branch, not git head.
+>> Then again I only build console-image and no high end images.
+>> My james-image also had quite some issues (js, samba) which are now
+>> resolved.
+>> Only issue left for now seems to be gettext/libtool related.
+>
+> What distro? =A0Almost _everything_ was broken for me since it was
+> micro/minimal (including console-image).
 
-Currently in openssl.inc the openssl.cnf file is being placed in the openss=
-l-misc package.  However, when running the openssl command you will frequen=
-tly receive warnings about this configuration file missing.  i.e.:
+Distro minimal, targets mpc8313e-rds, sheevaplug, calamari, neek
+(latter does not build) recipe console-image
+distro slugos, targets nlsu2le nslu2be, target slugos-image.
 
-WARNING: can't open config file: /usr/lib/ssl/openssl.cnf
-
-Also, when running the command "openssl req" to request and generate a cert=
-ificate the command will fail without the openssl.cnf file being installed =
-on the target system. i.e.
-
-WARNING: can't open config file: /usr/lib/ssl/openssl.cnf
-Unable to load config info from /usr/lib/ssl/openssl.cnf
-
-Is there a reason why this file is placed in the misc package since it seem=
-s to be either looked for or required by the openssl executable shipped in =
-the base openssl package?
-
-From the log I see that the openssl.cnf file was originally added to the li=
-bcrypto package since it was accessed directly from libcrypto (commit f95a9=
-5435ca79e7b9942b6e321d30e264c728791).  I then see that it was moved the fil=
-e to the misc package to make different libcrypto versions parallel install=
-able (commit 26b7d6514111d5ac0171c1834fa85d4576d783bf) but no other justifi=
-cation as to why the .cnf was placed in the misc instead of base package.
-
-I have a patch to move the openssl.cnf file into the openssl package but I =
-wanted to better understand why this file was not already in the openssl pa=
-ckage before submitting my patch.=20
-
-Sincerely,
-Chase Maupin
-
+Frans
 
 
