@@ -1,47 +1,45 @@
-Received: from mail-ew0-f44.google.com ([209.85.215.44])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PSuOo-00022y-PU
+	(envelope-from <obi@opendreambox.org>) id 1PSuT8-0002CX-FU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Dec 2010 17:40:19 +0100
-Received: by ewy8 with SMTP id 8so1397626ewy.3
+	Wed, 15 Dec 2010 17:44:46 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 10724314BB94
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 08:38:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received
-	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=rlRTmgyhqDoa5CBnTFqvJZRFoqLRR8ifMeTHKJVSazc=;
-	b=jj6D1d2dt53jsQfM/VWAhBfiqraM3cBlS1fSXHSYXWLvjHJIjv34sT91cfdNrEijjg
-	ydlVxe/cky6F0z1M+zFSGMcdBvMoASU/mE0+ukFK3tzFJOu5q39IESVTr5FHRwgKzQI8
-	NMQVimSG1lCDmfC0D7aFaMnae/+L2iOsryo3E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=IcuBT+50e+sxI5qA2mCb96b3M3AD3NR6vMdcE3Y1aDQzb+zA/BeuNnzAg6a7Cxb1fm
-	eDV8h83IWp8UP+ciUEPa785nT5851JSprtWTseV39/O/jFPxnuMA0KjyT/M1LhFQnBth
-	pltx9rgtiQt5zOv3J7Xk3JWr8HQuoxJb+cVO0=
+	Wed, 15 Dec 2010 17:43:11 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id e0V1U6mx2+Gp
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Dec 2010 17:43:06 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 512DB314BACB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Dec 2010 17:43:06 +0100 (CET)
+Message-ID: <4D08F019.1010701@opendreambox.org>
+Date: Wed, 15 Dec 2010 17:43:05 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.204.103.133 with SMTP id k5mr1888449bko.53.1292431122986; Wed,
-	15 Dec 2010 08:38:42 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.71.8 with HTTP; Wed, 15 Dec 2010 08:38:42 -0800 (PST)
-In-Reply-To: <AANLkTik+TNUXiWsBu5nY1wN3yR-qK4qAeSe3REbmysrD@mail.gmail.com>
-References: <AANLkTik+TNUXiWsBu5nY1wN3yR-qK4qAeSe3REbmysrD@mail.gmail.com>
-Date: Wed, 15 Dec 2010 14:38:42 -0200
-X-Google-Sender-Auth: 3QRes1I-tt_FoHPgF3CjN3QepAQ
-Message-ID: <AANLkTi=qrrG5WWTNrYHfBB9Sx==cpYAjctPOu47DaBZp@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.44
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+References: <4D065431.6080304@dell.com>	<AANLkTin2DnrgjhA4Qt63+pyfhPP=rLcs94CL_gbOeBGC@mail.gmail.com>	<4D079B88.9010503@dell.com>
+	<4D07A19D.8090602@mentor.com>	<AANLkTinBqEGcOWys5+C3y8bGo0AMEiiOa8QTfgTxOgQ-@mail.gmail.com>
+	<AANLkTin3EjUBP6Q84g-3B=rgO7Z_04oTUYqFN8hcR3a-@mail.gmail.com>
+In-Reply-To: <AANLkTin3EjUBP6Q84g-3B=rgO7Z_04oTUYqFN8hcR3a-@mail.gmail.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.2 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Variable typing support
+Subject: Re: [PATCH] eglibc: use HTTP for svn checkout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,23 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2010 16:40:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Dec 2010 16:44:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Dec 15, 2010 at 14:31, Chris Larson <clarson@kergoth.com> wrote:
-...
+On 12/15/2010 05:35 PM, Chris Larson wrote:
+> On Tue, Dec 14, 2010 at 10:11 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> Note that if you use a mirror site with the SVN checkout archive in it, you
+>>> won't try and do the fetch at all.  This may or may not be applicable to
+>>> your case.  For your case I think what we really want is a way to globally
+>>> toggle the svn protocol argument.
+>>
+>> yes that would be something more useful. I guess we could add it to
+>> all SCM fetching recipes.
+> 
+> I wonder if the PREMIRRORS/MIRRORS handling is smart enough to let us
+> use its regex for the components to replace protocol= in the url
+> parameters.
 
-I think it is a nice features specially because it makes harder to
-have multiple meanings for same type.
+This won't suffice, because svn may have different URLs for svn and
+http, like in the discussed patch (branches vs. svn/branches):
 
-+1 from me.
+-SRC_URI =
+"svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
++SRC_URI =
+"svn://svn.eglibc.org/svn/branches;module=${EGLIBC_BRANCH};proto=http \
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Regards,
+Andreas
+
 
 
