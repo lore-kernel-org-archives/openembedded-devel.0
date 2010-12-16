@@ -1,51 +1,37 @@
-Received: from mail-bw0-f44.google.com ([209.85.214.44])
+Received: from f43.mail.ru ([217.69.128.200])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1PT9le-0004gy-LK
+	(envelope-from <nyrl@mail.ru>) id 1PTBy9-00075w-HE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 10:04:55 +0100
-Received: by bwz12 with SMTP id 12so3272358bwz.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Dec 2010 01:03:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=3sERuE69pdLIlEbJz35hTr+vEA3YmoAfvRqzYlSQksg=;
-	b=FU1ltnC/YQyzVFCevaxeOwlgKK6DbGxZlxOMrgawVtcSqdqgYFFGBl58hHgUtIvtKE
-	Ba1oPZheNzDtIlVg2tAL8qDolRajjtvPOsI3TV8+w5soJfHDegF+D4YwUqehXMnz5rSQ
-	Q1B4cvSZODhleIdPRD9A8CzyOeRURlhpv38yM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=TF2YNsZ7YaMKU+WFOoO8lfedAivVG2oVQy9qa1XXSoslM0C7UGaYjVdR1Vomnb3MPa
-	VxUHgo5mVZBcZTb9Cj7N+UqzOcq5zVtoaiZBqBSMk0rkvhjR6FsW4ZxFQP1QzbZB+fGr
-	kOJzOnchtCMr4cj+/i3Ms4TkMJZB/lCO4Y7LM=
-Received: by 10.204.8.24 with SMTP id f24mr7957076bkf.206.1292490198024;
-	Thu, 16 Dec 2010 01:03:18 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l3sm1735378fan.2.2010.12.16.01.03.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 16 Dec 2010 01:03:16 -0800 (PST)
-Date: Thu, 16 Dec 2010 10:03:22 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 16 Dec 2010 12:25:58 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
+	s=mail; 
+	h=Message-Id:Content-Type:Reply-To:Date:Mime-Version:Subject:To:From;
+	bh=x4RGn45EdioleNEIAAxEn7Rz7vbrYvaSLDKCxoG/G58=; 
+	b=ED/48M2/h7CrpfW9EnD1JrBAF9c+dVQ9RcFjOc4t73nll9fE1/WknU/5FfI0EC7F69jycdK1KYo95JotUNBe+Vrux1PVEHDkp/gNpcrs8ifYtwSMMZsMCb/QTWnL291l;
+Received: from mail by f43.mail.ru with local id 1PTBwY-0002OI-00
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Dec 2010 14:24:18 +0300
+Received: from [79.173.78.16] by win.mail.ru with HTTP;
+	Thu, 16 Dec 2010 14:24:18 +0300
+From: =?koi8-r?Q?=E4=C5=CE=C9=D3_=E4=D9=C4=D9=DE=CB=C9=CE?= <nyrl@mail.ru>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101216090322.GA19482@jama>
-References: <E1PSZng-0001y3-K3@melo.openembedded.org>
-	<20101214205943.GF6662@jama> <4D07DF4B.7000800@balister.org>
-	<20101214215011.GG6662@jama> <4D095CA5.5020400@balister.org>
-	<AANLkTikKhNKT4kB4BC5Tog8bJvtzTyto9s7hRoPNW_TE@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTikKhNKT4kB4BC5Tog8bJvtzTyto9s7hRoPNW_TE@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-SA-Exim-Connect-IP: 209.85.214.44
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Mime-Version: 1.0
+X-Mailer: mPOP Web-Mail 2.19
+X-Originating-IP: [79.173.78.16]
+Date: Thu, 16 Dec 2010 14:24:18 +0300
+Message-Id: <E1PTBwY-0002OI-00.nyrl-mail-ru@f43.mail.ru>
+X-Spam: Not detected
+X-Mras: Ok
+X-SA-Exim-Connect-IP: 217.69.128.200
+X-SA-Exim-Mail-From: nyrl@mail.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	HTML_TAG_BALANCE_BODY,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Steve Sakoman : coreutils: experimental coreutils fix
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [RFC] Local files search in overlay folders first
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,30 +45,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 09:04:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Dec 2010 11:25:58 -0000
+X-Groupsio-MsgNum: 27217
+Content-Type: multipart/mixed;
+	boundary="----AyMh6DQF-KEs2YRSt1KYIg35z:1292498658"
 
-On Thu, Dec 16, 2010 at 09:58:37AM +0100, Frans Meulenbroeks wrote:
-> 2010/12/16 Philip Balister <philip@balister.org>:
-> > On 12/14/2010 04:50 PM, Martin Jansa wrote:
-> >>
-> >> Then please remove all older coreutils versions which doesn't provide
-> >> complete set of bindir_progs, base_bindir_progs, sbindir_progs, because
-> >> ie coreutils-6.0 now breaks ie timeout:
-> >
-> > So it looks like we can remove the coreutils-7.2 directory since there is no
-> > recipe for it. Does anyone object to removing coreutils-6.0?
-> >
-> > Philip
-> 
-> You have my ack to remove both.
-> Frans
-
-My too
-(I've built coreutils-6.0 only to show example why that test was needed)
-
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+------AyMh6DQF-KEs2YRSt1KYIg35z:1292498658
+Content-Type: text/plain; charset=koi8-r
+Content-Transfer-Encoding: 8bit
 
 
+Hi,
+
+I am using OE with my own overlay and I want to adjust linux kernel settings with minimal efforts. I have the following structure:
+oe/
+  recipes/
+    linux/
+      linux-davinci.inc
+      linux-davinci_git.bb
+      <others-includes>
+      linux-davinci/
+        <patches>
+        omapl137/
+          defconfig
+overlay/
+  recipes/
+BBPATH="<topdir>/overlay:<topdir>/oe"
+
+What I generally want is to simply replace defconfig with my own without changing recipe and touching other patches. I consider that having this structure could be fine for me:
+overlay/
+  recipes/
+    linux/
+      linux-davinci/
+        omapl137/
+          defconfig     (modified)
+
+It does not work for release-2010.12 of OE and it does not seems to work in master either.
+
+
+I believe that changing FILESPATHBASE so that it will look in "recipes/linux/linux-davinci/omapl137" subfolder for each entry in BBPATH in defined order would solve my problem. For given example having FILESPATHBASE defines as "<topdir>/overlay/recipes/linux:<topdir>/oe/recipes/linux" would be enough.
+
+I created recurrent-filespathbase.bbclass which redefines FILESPATHBASE so that instead of FILE_DIRNAME it is defined with each BBPATH's root followed by suffix derived from FILE_DIRNAME. It only does so for paths known by BBPATH.
+To use this one has to define INHERIT += "recurrent-filespathbase.bbclass" in local.conf and then one can put just overriding files for any patch or source.
+
+I attach this recurrent-filespathbase.bbclass. Please consider whether it is a safe approach to solve the problem I described, and whether it should be included into OE.
+
+Thank you in advance, Denis.
+
+
+------AyMh6DQF-KEs2YRSt1KYIg35z:1292498658
+Content-Type: application/octet-stream; name="recurrent-filespathbase.bbclass"
+Content-Disposition: attachment
+Content-Transfer-Encoding: base64
+
+IyBSZXBsYWNlIEZJTEVTUEFUSEJBU0Ugc28gaXQgd2lsbCByZWN1cnJlbnRseSBsb29rIGluIGV2
+ZXJ5IGZvbGRlciBkZWZpbmVkIGluIEJCUEFUSApkZWYgY29uc3RydWN0X0ZJTEVTUEFUSEJBU0Vf
+YnlfRklMRV9ESVJOQU1FIChkbiwgZCk6CglpbXBvcnQgYmIKCWJicGF0aExpc3QgPSBiYi5kYXRh
+LmdldFZhcignQkJQQVRIJywgZCkuc3BsaXQoJzonKQoJZm9yIGZwIGluIGJicGF0aExpc3Q6CgkJ
+aWYgZG4uc3RhcnRzd2l0aChmcCk6CgkJCXN1ZmZpeCA9IGRuLnJlcGxhY2UoZnAsICcnLCAxKQoJ
+CQlyZXN1bHQgPSAnJwoJCQlmb3IgbGkgaW4gYmJwYXRoTGlzdDoKIAkJCQlyZXN1bHQgKz0gJzon
+K29zLnBhdGgubm9ybXBhdGgobGkrIi8iK3N1ZmZpeCkKCQkJcmV0dXJuIHJlc3VsdC5zdHJpcCgn
+OicpCglyZXR1cm4gZG4KCkZJTEVTUEFUSEJBU0UgPS4gIiR7QGNvbnN0cnVjdF9GSUxFU1BBVEhC
+QVNFX2J5X0ZJTEVfRElSTkFNRShiYi5kYXRhLmdldFZhcignRklMRV9ESVJOQU1FJywgZCwgMSks
+IGQpfSIKCg==
+
+------AyMh6DQF-KEs2YRSt1KYIg35z:1292498658--
