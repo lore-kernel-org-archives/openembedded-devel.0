@@ -1,42 +1,36 @@
-Received: from mail-bw0-f44.google.com ([209.85.214.44])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PTms5-0001ip-DJ
+	(envelope-from <chase.maupin@ti.com>) id 1PTmup-0001l4-8Q
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Dec 2010 03:50:09 +0100
-Received: by bwz12 with SMTP id 12so1695474bwz.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Dec 2010 18:50:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received
-	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
-	:from:to:cc:content-type:content-transfer-encoding;
-	bh=HCb4sQhEAHaWa0AqFWvjg6A4YTrFcbXOL/IFwGWq5cw=;
-	b=VPLpdJ6utBFw7e49MCMd1Hn4kpRxHqUOu4NeimOLub4fA0qwwYMylYBsDUYHTgO9Zo
-	AKjpsFuNFwgunTjORSo6EYTu52z9PiJovVAqiw0DNSiSuKr8GyMOxZmq8kJEQIDCP3gj
-	n9AGrZT3SfbwjsMzY9UnidKYHqLFf6zGwo5zU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=hPTVqClf9r/XeBwqrdZzW1S79biuCivONwtf3m3BkzjCp7QkCZ3C/Y5Ljm2mDVF2CF
-	R/Wrs2CO/ia2oAAbOnQ9GsGF7fujMqXHUkVpyaQaVJa3kbKWq3srfPb0Wtespim6lhug
-	wATiZSLkYoGpZdRCACw/oHIzwlH/7jkHBGUUg=
+	Sat, 18 Dec 2010 03:52:59 +0100
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id oBGMPaZe008956
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 16 Dec 2010 16:25:36 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id oBGMPavc020730;
+	Thu, 16 Dec 2010 16:25:36 -0600 (CST)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBGMPa7x011872;
+	Thu, 16 Dec 2010 16:25:36 -0600 (CST)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Thu, 16 Dec 2010 16:25:36 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Chase Maupin <chasemaupin03@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Dec 2010 16:25:34 -0600
+Thread-Topic: [PATCH] sourceipk: copy over hidden files and dirs
+Thread-Index: AcudajsUfQEDycXTQe29g5Fvmh4MkAABddCQ
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080329E92CF1@dlee06.ent.ti.com>
+References: <1292535782-19714-1-git-send-email-Chase.Maupin@ti.com>
+In-Reply-To: <1292535782-19714-1-git-send-email-Chase.Maupin@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.204.122.65 with SMTP id k1mr476367bkr.80.1292583642061; Fri,
-	17 Dec 2010 03:00:42 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.71.8 with HTTP; Fri, 17 Dec 2010 03:00:41 -0800 (PST)
-In-Reply-To: <20101216215228.GB19482@jama>
-References: <1292510112-32629-1-git-send-email-otavio@ossystems.com.br>
-	<1292515657-15330-1-git-send-email-otavio@ossystems.com.br>
-	<20101216215228.GB19482@jama>
-Date: Fri, 17 Dec 2010 09:00:41 -0200
-X-Google-Sender-Auth: TyJWLPfLlg-n4kOaYlIPJ2c3B8U
-Message-ID: <AANLkTi=F=kgEos0ZZb+7zefOq1G2fn5w+Wf8HqafFYsh@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] classes/gitpkgv.bbclass: add GITPKGVTAG that uses 'git describe'
+Subject: Re: [PATCH] sourceipk: copy over hidden files and dirs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,117 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Dec 2010 02:50:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 18 Dec 2010 02:52:59 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 16, 2010 at 19:52, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Thu, Dec 16, 2010 at 02:07:37PM -0200, Otavio Salvador wrote:
->> Using ${GITPKGVTAG} allows for automatic versioning based on the
->> repository tags. For those that doesn't want to use it, ${GITPKGV} is
->> still available.
->
-> Thanks for merging it to one bbclass. IMHO looks much better now.
-> Consider providing examples and warning as suggested bellow.
+Please ignore this patch for now.  I forgot the case where there are no hid=
+den files and I need to update to handle this.
+> -----Original Message-----
+> From: Chase Maupin [mailto:chasemaupin03@gmail.com]
+> Sent: Thursday, December 16, 2010 3:43 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Maupin, Chase
+> Subject: [PATCH] sourceipk: copy over hidden files and dirs
+>=20
+> * Copy hidden files and directories such as eclipse
+>   project files.  Currently these files are not copied
+>   (particularly for the top-level directory) which makes
+>   applications with eclipse project files not usable with eclipse.
+>=20
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> ---
+>  classes/sourceipk.bbclass |    6 ++++++
+>  1 files changed, 6 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
+> index 97068de..213bff9 100644
+> --- a/classes/sourceipk.bbclass
+> +++ b/classes/sourceipk.bbclass
+> @@ -106,6 +106,12 @@ sourceipk_do_create_srcipk() {
+>          # Copy sources for packaging
+>          mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
+>          cp -RLf ${S}/* $tmp_dir/${SRCIPK_INSTALL_DIR}/
+> +        # Copy any hidden files in the source directory such as
+> +        # eclipse project files.  Use a regex to avoid trying to
+> +        # copy the . and .. directories.  This is only required for
+> +        # the top-level directory as the hidden files will be copied
+> +        # for subdiretories.
+> +        cp -r ${S}/.[a-zA-Z0-9]* $tmp_dir/${SRCIPK_INSTALL_DIR}/
+>=20
+>          if [ ${SRCIPK_INCLUDE_EXTRAFILES} !=3D "0" ]
+>          then
+> --
+> 1.7.0.4
 
-You're welcome. Thanks for keep commenting on it and helping with good advi=
-ces.
-
-...
-> # PV =3D "1.0+gitr${SRCPV}" =A0 =A0 =A0# expands to something like 1.0+gi=
-tr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
-> # PKGV =3D "1.0+gitr${GITPKGV}" =A0# expands also to something like 1.0+g=
-itr31337+4c1c21d7dbbf93b0df336994524313dfe0d4963b
-
-added.
-
-...
-> As we were discussing with otavio on #oe, I think there should be
-> warning, that GITPKGVTAG is really sortable only if the upstream repo
-> keeps consistent AND sortable tag names.
->
-> For example tags in OE repo will fail, because only tested_2010-* tags
-> are sortable but this sequence:
->
-> tested_2010-11-04
-> release-2010.12-branchpoint
-> tested_2010-11-12
->
-> is not. And only way to fix it when it's shiped with non-standard tag to
-> targets is to bump PE :/.
-
-Yes. I fully agree that it is something the user of the class need to
-be aware of.
-
-> Even better solution would be to set something like GITTAGFORMAT in
-> recipe, to expected consistent tag scheme and if returned git describe
-> prefix is different then warn builder about it or even fail or ignore
-> that tag.
-
-I like the idea but I prefer to have this merged soon so I can started
-using it (for example in freerdp package) and at company.
-
-> Proposed "warning":
->
-> # or if upstream repository is always using consistent and sortable tag
-> # name scheme you can get sortable version including tag name with
-> # GITPKGVTAG, but be aware that ie tag sequence "v1.0, v1.2, xtest, v2.0"
-> # will force you to increment PE to get upgradeable path to v2.0 revision=
-s
-
-I added it as a warning on the comment.
-
-The final header is:
-
-# gitpkgv.bbclass provides a GITPKGV and GITPKGVTAG variables to be
-# used in PKGV, as described bellow:
-#
-# - GITPKGV which is a sortable version with the format NN+GITHASH, to
-#   be used in PKGV, where
-#
-#   NN equals the total number of revs up to SRCREV
-#   GITHASH is SRCREV's (full) hash
-#
-# - GITPKGVTAG which is the output of 'git describe' allowing for
-#   automatic versioning
-#
-# gitpkgv.bbclass assumes the git repository has been cloned, and
-# contains SRCREV. So ${GITPKGV} and ${GITPKGVTAG} should never be
-# used in PV, only in PKGV.  It can handle SRCREV =3D ${AUTOREV}, as
-# well as SRCREV =3D "<some fixed git hash>".
-#
-# WARNING: if upstream repository is always using consistent and
-# sortable tag name scheme you can get sortable version including tag
-# name with ${GITPKGVTAG}, but be aware that ie tag sequence "v1.0,
-# v1.2, xtest, v2.0" will force you to increment PE to get upgradeable
-# path to v2.0 revisions
-#
-# use example:
-#
-# inherit gitpkgv
-#
-# PV =3D "1.0+gitr${SRCPV}"      # expands to something like
-1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
-# PKGV =3D "1.0+gitr${GITPKGV}"  # expands also to something like
-1.0+gitr31337+4c1c21d7d
-#
-# or
-#
-# inherit gitpkgv
-#
-# PV =3D "1.0+gitr${SRCPV}" # expands to something like
-1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
-# PKGV =3D "${GITPKGVTAG}"  # expands to something like 1.0-31337+g4c1c21d
-#                           if there is tag v1.0 before this revision or
-#                           ver1.0-31337+g4c1c21d if there is tag ver1.0
-
-Does it seems good enough for pushing it?
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
 
 
