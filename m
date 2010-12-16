@@ -1,44 +1,49 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1PTEK6-0003jg-To
+	(envelope-from <chase.maupin@ti.com>) id 1PTESr-0001Xp-Ti
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 14:56:47 +0100
-Received: by wyb40 with SMTP id 40so2618563wyb.6
+	Thu, 16 Dec 2010 15:05:54 +0100
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id oBGE4CW9014353
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Dec 2010 05:55:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=AKjJrNd6uA8p4u2TAw7fvRTonRVxHi1pOXN5xjGRbgM=;
-	b=HxLR8GS+X8kWwDWBrgn586QdY15JAmR82JhB8AkIEgnqhH5YtMYo2ccY4S5uZVoqrz
-	iV6EfPPXPA4uWELgliZOvrH1/e+MYJ3xu5OgCMjpmDPxO8WsCiDOk9N19lb7cK/cUCU5
-	/GLv7YRcQdbsqxEc5ymg57KkSez/2BdBKmRxg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=PNbGRnqY33ZsngPGf13ITxf9np02U1f37INmgsXlwm97s88xeDfcWyP+4F8qRoT25n
-	ED+3d7n1kh8zodak/46nQBsTcMmNSSlDlhoo6o1hUhpmJSi05StdB8BaOfYtHVqUkMKg
-	mXWX4MVROwZlVV0QXmOw0h35dTAdAF9MZg3ng=
+	Thu, 16 Dec 2010 08:04:12 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBGE4Ccf008496
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Dec 2010 08:04:12 -0600 (CST)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBGE4CrE025733
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Dec 2010 08:04:12 -0600 (CST)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Thu, 16 Dec 2010 08:04:11 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Dec 2010 08:04:10 -0600
+Thread-Topic: [oe] [RFC] move openssl.cnf file into base openssl package
+Thread-Index: AcucmEPq2nwq7QWNRBGTYFgvEYC2cAAkOqFA
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080329E92ADA@dlee06.ent.ti.com>
+References: <131E5DFBE7373E4C8D813795A6AA7F080329DB6BBC@dlee06.ent.ti.com>
+	<201012152240.45068.roman@khimov.ru>
+	<131E5DFBE7373E4C8D813795A6AA7F080329DB6BEA@dlee06.ent.ti.com>
+	<201012152339.06515.roman@khimov.ru>
+In-Reply-To: <201012152339.06515.roman@khimov.ru>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.216.169.71 with SMTP id m49mr9289279wel.4.1292507703044; Thu,
-	16 Dec 2010 05:55:03 -0800 (PST)
-Received: by 10.216.254.137 with HTTP; Thu, 16 Dec 2010 05:55:02 -0800 (PST)
-In-Reply-To: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>
-References: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>
-Date: Thu, 16 Dec 2010 08:55:02 -0500
-Message-ID: <AANLkTikXVCmv0phk5OLOMciBOpC296Z2XtF9jO=Bn1Jn@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-12-10
+Subject: Re: [RFC] move openssl.cnf file into base openssl package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,51 +57,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 13:56:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Dec 2010 14:06:01 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-beagleboard beagleboard-linuxtag2010-demo-image is failing with:
-
-http://tinderbox.openembedded.net/packages/1321155/
-
-ti-c6accel
-
-Linking c6accel_app from appMain.o c6accel_testfxns.o
-../c6accelw/lib/c6accelw_omap3530.a470MV
-c6accel_app_config/linker.cmd..
-/lib/libgcc_s.so.1: file not recognized: File format not recognized
-
-Thanks,
-Cliff
-
-
-On Fri, Dec 10, 2010 at 11:05 AM, Cliff Brake <cliff.brake@gmail.com> wrote=
-:
-> Hello,
->
-> We are resuming our weekly testing now that the 2010.12 release is
-> finished. =A0The testing-next branch has been synced with the master,
-> and is ready for builds. =A0Please update:
->
-> http://wiki.openembedded.org/index.php/Testing
->
-> with results.
->
-> Please do not push to the testing-next branch.
->
-> Thanks,
-> Cliff
->
-> --
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> http://bec-systems.com
->
-
-
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IFJvbWFu
+IEkgS2hpbW92DQo+IFNlbnQ6IFdlZG5lc2RheSwgRGVjZW1iZXIgMTUsIDIwMTAgMjozOSBQTQ0K
+PiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVj
+dDogUmU6IFtvZV0gW1JGQ10gbW92ZSBvcGVuc3NsLmNuZiBmaWxlIGludG8gYmFzZSBvcGVuc3Ns
+IHBhY2thZ2UNCj4gDQo+INCSINGB0L7QvtCx0YnQtdC90LjQuCDQvtGCINCh0YDQtdC00LAgMTUg
+0LTQtdC60LDQsdGA0Y8gMjAxMCAyMjo0NzowNSDQsNCy0YLQvtGAIE1hdXBpbiwgQ2hhc2Ug0L3Q
+sNC/0LjRgdCw0Ls6DQo+ID4gPiBNaXNzZWQgdGhhdCBjaGFuZ2UuIFNlZW1zIHdyb25nIHRvIG1l
+LiBBbmQgSSBzdGlsbCB0aGluayB0aGF0IGl0DQo+IGJlbG9uZ3MNCj4gPiA+IHRvDQo+ID4gPiBs
+aWJjcnlwdG8sIG5vdCBvcGVuc3NsIHNpbmNlIHlvdSBjYW4gZWFzaWx5IG5vdCBpbnN0YWxsIG9w
+ZW5zc2wgYmluYXJ5DQo+ID4gPiBhbmQgc3RpbGwgdXNlIGl0IHdpdGggdHVuZWQgb3BlbnNzbC5j
+bmYgaW4geW91ciBhcHBzLg0KPiA+DQo+ID4gU28gaXQgc2VlbXMgbGlrZSB0aGVyZSBhcmUgdHdv
+IHBhY2thZ2VzIHRoYXQgbmVlZCB0aGlzIGRlZmF1bHQNCj4gb3BlbnNzbC5jbmYNCj4gPiAgZmls
+ZSwgdGhlIGxpYmNyeXB0byBhbmQgb3BlbnNzbCBwYWNrYWdlcy4gIFdvdWxkIGl0IHBlcmhhcHMg
+YmUgYSBiZXR0ZXINCj4gPiAgaWRlYSB0byBwdWxsIHRoZSBjb25maWd1cmF0aW9uIGZpbGUgaW50
+byBpdHMgb3duIHBhY2thZ2UgYW5kIHRoZW4gc2V0DQo+IHRoZQ0KPiA+ICBSREVQRU5EUyBmb3Ig
+dGhlIGxpYmNyeXB0byBhbmQgb3BlbnNzbCBwYWNrYWdlcyB0byB1c2UgdGhlIG9wZW5zc2wNCj4g
+PiAgY29uZmlndXJhdGlvbiBwYWNrYWdlPyBUaGF0IHdheSB5b3UgY2FuIHN0aWxsIGhhdmUgbXVs
+dGlwbGUgdmVyc2lvbnMgb2YNCj4gPiAgbGliY3J5cHRvIChsaWtlIEtvZW4gd2FzIHRyeWluZyB0
+byBkbykgYW5kIGhhdmUgdGhlIGRlZmF1bHQgZmlsZSBzaGFyZWQNCj4gPiAgYmV0d2VlbiBib3Ro
+IHBhY2thZ2VzIHRoYXQgbmVlZCBpdC4NCj4gDQo+IG9wZW5zc2wgaXMgcmRlcGVuZGluZyBvbiBs
+aWJjcnlwdG8gYW55d2F5IChpdCdzIGxpbmtlZCB3aXRoIGl0IGFuZCBJIGRvbid0DQo+IHRoaW5r
+IGl0J2xsIGNoYW5nZSBhbnkgdGltZSBzb29uKS4gQnV0IGNvbmZpZ3MgZm9yIGRpZmZlcmVudCB2
+ZXJzaW9ucyBjYW4NCj4gYmUNCj4gY29uZmxpY3RpbmcsIHNvIEknbSBub3Qgc3VyZSB0aGlzIGtp
+bmQgb2YgYXBwcm9hY2ggc29sdmVzIGFueXRoaW5nLg0KDQpJIG5vdGljZWQgdGhhdC4gIEkgdGhp
+bmsgdGhlIG9ubHkgdGhpbmcgdGhhdCBwdXR0aW5nIHRoaXMgaW50byBpdHMgb3duIHBhY2thZ2Ug
+d291bGQgc29sdmUgaXMgYWRkcmVzc2luZyBLb2VuJ3MgY29tbWVudCBhYm91dCBoYXZpbmcgbXVs
+dGlwbGUgdmVyc2lvbnMgb2YgbGliY3J5cHRvIGluc3RhbGxlZC4NCg0KS29lbiwgY2FuIHlvdSBj
+b21tZW50IG9uIHlvdXIgY2hhbmdlIHRoYXQgbW92ZWQgdGhlIG9wZW5zc2wuY25mIGZpbGUgdG8g
+dGhlIG1pc2MgcGFja2FnZT8gIERvIHlvdSBzdGlsbCBuZWVkIHRvIGJlIGFibGUgdG8gaW5zdGFs
+bCBtdWx0aXBsZSB2ZXJzaW9ucyBvZiBsaWJjcnlwdG8/DQoNCj4gDQo+IC0tDQo+ICBodHRwOi8v
+cm9tYW4ua2hpbW92LnJ1DQo+IG1haWx0bzogcm9tYW5Aa2hpbW92LnJ1DQo+IGdwZyAtLWtleXNl
+cnZlciBoa3A6Ly9zdWJrZXlzLnBncC5uZXQgLS1yZWN2LWtleXMgMHhFNUUwNTVDMw0K
 
 
