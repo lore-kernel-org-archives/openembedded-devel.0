@@ -1,37 +1,44 @@
-Received: from f43.mail.ru ([217.69.128.200])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nyrl@mail.ru>) id 1PTBy9-00075w-HE
+	(envelope-from <obi@opendreambox.org>) id 1PTCJL-0007cT-Tv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 12:25:58 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
-	s=mail; 
-	h=Message-Id:Content-Type:Reply-To:Date:Mime-Version:Subject:To:From;
-	bh=x4RGn45EdioleNEIAAxEn7Rz7vbrYvaSLDKCxoG/G58=; 
-	b=ED/48M2/h7CrpfW9EnD1JrBAF9c+dVQ9RcFjOc4t73nll9fE1/WknU/5FfI0EC7F69jycdK1KYo95JotUNBe+Vrux1PVEHDkp/gNpcrs8ifYtwSMMZsMCb/QTWnL291l;
-Received: from mail by f43.mail.ru with local id 1PTBwY-0002OI-00
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 14:24:18 +0300
-Received: from [79.173.78.16] by win.mail.ru with HTTP;
-	Thu, 16 Dec 2010 14:24:18 +0300
-From: =?koi8-r?Q?=E4=C5=CE=C9=D3_=E4=D9=C4=D9=DE=CB=C9=CE?= <nyrl@mail.ru>
+	Thu, 16 Dec 2010 12:47:53 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id A1CC6314AB22
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Dec 2010 12:46:13 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id x5z4Jb3BQOHi
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Dec 2010 12:46:08 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 76D20314B882
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Dec 2010 12:46:08 +0100 (CET)
+Message-ID: <4D09FC00.1010304@opendreambox.org>
+Date: Thu, 16 Dec 2010 12:46:08 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0
-X-Mailer: mPOP Web-Mail 2.19
-X-Originating-IP: [79.173.78.16]
-Date: Thu, 16 Dec 2010 14:24:18 +0300
-Message-Id: <E1PTBwY-0002OI-00.nyrl-mail-ru@f43.mail.ru>
-X-Spam: Not detected
-X-Mras: Ok
-X-SA-Exim-Connect-IP: 217.69.128.200
-X-SA-Exim-Mail-From: nyrl@mail.ru
+References: <1291941859-29257-1-git-send-email-eric@eukrea.com>	<AANLkTinOcF=bKiZGZz1p4YZHSpW8Hy3LLumvG6VbqWg6@mail.gmail.com>	<4D08B2C8.5010508@opendreambox.org>
+	<AANLkTi=rzhtfxbfi8VS_R+W8uZV_qe=Ur1or861LJoPm@mail.gmail.com>
+In-Reply-To: <AANLkTi=rzhtfxbfi8VS_R+W8uZV_qe=Ur1or861LJoPm@mail.gmail.com>
+X-SA-Exim-Connect-IP: 82.149.226.172
+X-SA-Exim-Mail-From: obi@opendreambox.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	HTML_TAG_BALANCE_BODY,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [RFC] Local files search in overlay folders first
+Subject: Re: [PATCH] gcc: introduce version 4.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,68 +52,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 11:25:58 -0000
-X-Groupsio-MsgNum: 27217
-Content-Type: multipart/mixed;
-	boundary="----AyMh6DQF-KEs2YRSt1KYIg35z:1292498658"
+X-List-Received-Date: Thu, 16 Dec 2010 11:47:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-------AyMh6DQF-KEs2YRSt1KYIg35z:1292498658
-Content-Type: text/plain; charset=koi8-r
-Content-Transfer-Encoding: 8bit
+On 12/16/2010 01:48 AM, Khem Raj wrote:
+> On Wed, Dec 15, 2010 at 4:21 AM, Andreas Oberritter
+> <obi@opendreambox.org> wrote:
+>> On 12/10/2010 03:54 AM, Khem Raj wrote:
+>>> On Thu, Dec 9, 2010 at 4:44 PM, Eric B=C3=A9nard <eric@eukrea.com> wr=
+ote:
+>>>> - based on gcc-4.5.2-RC-20101208 (svn 167585)
+>>>> - without linaro patches (which seem to be the root of
+>>>> problems when compiling at least on armv4 and armv5) :
+>>>>        - samba 3.2.15 or 3.3.9 : http://tinderbox.openembedded.net/p=
+ublic/logs/task/8666826.txt
+>>>>        - samba 3.5.6 : http://pastebin.com/yuiYX2CM
+>>>>
+>>>
+>>> as discussed on IRC may be we should try to find the faulty patch in
+>>> current gcc 4.5 linaro patches we have.
+>>
+>> I don't think that we need another svn-based pre-release recipe for gc=
+c.
+>> But I would still prefer to have a recipe for gcc 4.5.2 once it's
+>> released, because I'd like to be able to pin a stable version with onl=
+y
+>> few required patches and Linaro only cares about ARM while I do not.
+>>
+>=20
+> We should avoid creating recipes for every minor release. As we see
+> minor release only contain bug fixes.
+
+What's wrong with bug fixes in minor releases? Btw., I have no problem
+moving from one minor release to another, which means that I would be
+happy with only one recipe for every major release.
+
+> agreed. If you dont care about linaro thats fine. Would you prefer a
+> gcc which is widely used or just used by you
+> hence supported only by you.
+
+I'd prefer a gcc which is widely used. We just seem to have different
+opinions on what that means. IMO, a released version will surely be used
+by many more people globally (i.e. outside OE) than a random svn version
+of a linaro gcc. Also, since Eric already sent this patch, I'm sure that
+I'm not the only one who'd prefer to have a recipe for a current,
+released version in OE.
+
+While gcc*_4.5.bb is widely in use (well, because it's the default
+recipe and there is no alternative for 4.5 yet), its revision and linaro
+patch level changes every other day. It went from r10 to r25 during the
+last 10 weeks. This wastes a lot of time rebuilding the compiler, or -
+if you don't want to mix different gcc's output - rebuilding the whole
+system. In comparison, gcc-4.4.4 is still at r7.
+
+> My point it more common we use better we
+> have the support for it and community as a whole gets benefitted. If
+> linaro patches dont
+> harm your case negatively would you still be averse to them ? Do you
+> have some cases where they created regressions compile time or run
+> time or degraded the performance ?
+> that will be interesting.
+
+I haven't discovered any regressions by the compiler itself, but I also
+haven't discovered any benefits.
+
+My main concern is that a weekly changing compiler can hardly ever
+become a good foundation of a stable build environment. Of course I
+could pin a random SRCREV, but then again I'm likely to become the only
+user of this specific SRCREV globally, some day. Oh, wait, I can not pin
+a SRCREV, because the patches keep getting added as local files.
+
+> why do you think gcc-4.5.2 will be more stable then say gcc-4.5.2 +
+> patches from upstream 4.5 branch
+
+It depends on the patches. Most of them need testing. Releases (and
+their candidates) already would have been tested and/or reviewed by some
+people before hitting OE.
+
+As already stated in my previous mail, I'm not against applying patches
+from upstream, provided they are _required_ to make it work in some
+configuration.
+
+> What advantage do you see of having a vanilla gcc without linaro patche=
+s ?
+
+See above.
+
+In the (hopefully unlikely) event that a random svn version of linaro
+gcc introduces a regression, say on the MIPS platform, who am I going to
+report that to? Would I have to bisect all linaro patches manually?
+Surely, the upstream developers wouldn't care about reports about
+heavily patched gccs, and linaro developers wouldn't care about MIPS.
+
+Regards,
+Andreas
 
 
-Hi,
-
-I am using OE with my own overlay and I want to adjust linux kernel settings with minimal efforts. I have the following structure:
-oe/
-  recipes/
-    linux/
-      linux-davinci.inc
-      linux-davinci_git.bb
-      <others-includes>
-      linux-davinci/
-        <patches>
-        omapl137/
-          defconfig
-overlay/
-  recipes/
-BBPATH="<topdir>/overlay:<topdir>/oe"
-
-What I generally want is to simply replace defconfig with my own without changing recipe and touching other patches. I consider that having this structure could be fine for me:
-overlay/
-  recipes/
-    linux/
-      linux-davinci/
-        omapl137/
-          defconfig     (modified)
-
-It does not work for release-2010.12 of OE and it does not seems to work in master either.
-
-
-I believe that changing FILESPATHBASE so that it will look in "recipes/linux/linux-davinci/omapl137" subfolder for each entry in BBPATH in defined order would solve my problem. For given example having FILESPATHBASE defines as "<topdir>/overlay/recipes/linux:<topdir>/oe/recipes/linux" would be enough.
-
-I created recurrent-filespathbase.bbclass which redefines FILESPATHBASE so that instead of FILE_DIRNAME it is defined with each BBPATH's root followed by suffix derived from FILE_DIRNAME. It only does so for paths known by BBPATH.
-To use this one has to define INHERIT += "recurrent-filespathbase.bbclass" in local.conf and then one can put just overriding files for any patch or source.
-
-I attach this recurrent-filespathbase.bbclass. Please consider whether it is a safe approach to solve the problem I described, and whether it should be included into OE.
-
-Thank you in advance, Denis.
-
-
-------AyMh6DQF-KEs2YRSt1KYIg35z:1292498658
-Content-Type: application/octet-stream; name="recurrent-filespathbase.bbclass"
-Content-Disposition: attachment
-Content-Transfer-Encoding: base64
-
-IyBSZXBsYWNlIEZJTEVTUEFUSEJBU0Ugc28gaXQgd2lsbCByZWN1cnJlbnRseSBsb29rIGluIGV2
-ZXJ5IGZvbGRlciBkZWZpbmVkIGluIEJCUEFUSApkZWYgY29uc3RydWN0X0ZJTEVTUEFUSEJBU0Vf
-YnlfRklMRV9ESVJOQU1FIChkbiwgZCk6CglpbXBvcnQgYmIKCWJicGF0aExpc3QgPSBiYi5kYXRh
-LmdldFZhcignQkJQQVRIJywgZCkuc3BsaXQoJzonKQoJZm9yIGZwIGluIGJicGF0aExpc3Q6CgkJ
-aWYgZG4uc3RhcnRzd2l0aChmcCk6CgkJCXN1ZmZpeCA9IGRuLnJlcGxhY2UoZnAsICcnLCAxKQoJ
-CQlyZXN1bHQgPSAnJwoJCQlmb3IgbGkgaW4gYmJwYXRoTGlzdDoKIAkJCQlyZXN1bHQgKz0gJzon
-K29zLnBhdGgubm9ybXBhdGgobGkrIi8iK3N1ZmZpeCkKCQkJcmV0dXJuIHJlc3VsdC5zdHJpcCgn
-OicpCglyZXR1cm4gZG4KCkZJTEVTUEFUSEJBU0UgPS4gIiR7QGNvbnN0cnVjdF9GSUxFU1BBVEhC
-QVNFX2J5X0ZJTEVfRElSTkFNRShiYi5kYXRhLmdldFZhcignRklMRV9ESVJOQU1FJywgZCwgMSks
-IGQpfSIKCg==
-
-------AyMh6DQF-KEs2YRSt1KYIg35z:1292498658--
