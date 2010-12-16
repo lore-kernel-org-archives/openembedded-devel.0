@@ -1,43 +1,43 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pz0-f51.google.com ([209.85.210.51])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PT66H-0000DP-Qv
+	(envelope-from <raj.khem@gmail.com>) id 1PT6ES-0000Mz-EM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 06:09:58 +0100
-Received: by pvd12 with SMTP id 12so455398pvd.6
+	Thu, 16 Dec 2010 06:18:25 +0100
+Received: by pzk34 with SMTP id 34so515252pzk.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 21:08:18 -0800 (PST)
+	Wed, 15 Dec 2010 21:16:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=8BHH1yEz2LcdKsL/UmzBUc3iodrvf50YkjkAOD9kG4A=;
-	b=ZUPMrboTLIaF5alJL8Esx5wDDwHo7S3oMdFCOYsvadvTvZIbuhjXKwHQIhstD7+Vfk
-	oqPnNNxlSX845l8uK4a1hcvnwoC6eai/7jYajy/uVFekPpdTQEm20liAnbOU3kE5FiHF
-	BaNLhuMI89FIXwHgUkaNUcQJtdcGEeHq/9aJs=
+	:in-reply-to:user-agent;
+	bh=kWvHXaNIFKMyCUApiUnKJ0HSmEFyhQVrJiDbPcf0hJI=;
+	b=hS1gKquHvrml9d52T5wx+ZTt9lR5fbEW6Wx0h8h+TO0zWauqyscWRMa/XnX32pGHoE
+	fFmguuKQyAONDctebpu3N+lCV+YC+nbhFeBKNiJjcZrSpUo9fd/r1lsxPtP1VlekXV8q
+	bKP6S7ZVZr7SeqqfDmhiH9NgBQ0KQs8zL6fYs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=BRTabFF0Xrx/5Sr4uDHg/tYUrb+J0HfX7t32XnF73pMvUMAY3sQi45FQ0IqPDoSSvS
-	UZN2cNhZU4aZ75/PkRDBBcgWzrEEJOnuswOZKNl9Vu5NuHjqqNQfs9gWOgGQo514mJ4R
-	ltHiHk8hFF2o1H1a5eyxVF+teQVgTzC9dInqE=
-Received: by 10.142.165.10 with SMTP id n10mr6468426wfe.70.1292476097580;
-	Wed, 15 Dec 2010 21:08:17 -0800 (PST)
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=EBhLV9kXECtU1qhqjTVESr5fR0/b3e7K6rLg9MfF3Zxg2o45VZVqz9ZCjJhM5baAXt
+	3b8p9IxzAaUKPq9uG7qxdFO8RvUUECDGrOT+ltT1hjh2ykRf73AoWUVvrLWoYfF6qygA
+	WxVFc0JEEfAQ3unNdzVDugCtCIPICFFVwjHyk=
+Received: by 10.142.164.18 with SMTP id m18mr6400823wfe.420.1292476605298;
+	Wed, 15 Dec 2010 21:16:45 -0800 (PST)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id w22sm2550431wfd.19.2010.12.15.21.08.15
+	by mx.google.com with ESMTPS id w42sm2562440wfh.15.2010.12.15.21.16.43
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 15 Dec 2010 21:08:16 -0800 (PST)
-Date: Wed, 15 Dec 2010 21:08:18 -0800
+	Wed, 15 Dec 2010 21:16:44 -0800 (PST)
+Date: Wed, 15 Dec 2010 21:16:48 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101216050818.GA18068@gmail.com>
-References: <loom.20101124T090626-312@post.gmane.org>
-	<AANLkTi=gaij=zue+LuXxr-bv7LHfYE_Nqo7xu1+QBzWS@mail.gmail.com>
+Message-ID: <20101216051648.GB18068@gmail.com>
+References: <1291813088-23444-1-git-send-email-obi@opendreambox.org>
+	<idoklh$pb4$2@dough.gmane.org> <4CFFDE13.5050900@opendreambox.org>
+	<4D06149B.6020201@opendreambox.org>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTi=gaij=zue+LuXxr-bv7LHfYE_Nqo7xu1+QBzWS@mail.gmail.com>
+In-Reply-To: <4D06149B.6020201@opendreambox.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.210.51
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -45,7 +45,7 @@ X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Source distribution broken?
+Subject: Re: [PATCH 1/4] conf/distro: remove unused	variable CVS_TARBALL_STASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,29 +59,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 05:09:58 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Thu, 16 Dec 2010 05:18:25 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On (15/12/10 23:35), Michael Poole wrote:
-> 2010/11/24 Anders Törnqvist <a.tqvist@gmail.com>:
-> > Hi,
-> >
-> > Is the source distribution functionality broken?
-> >
-> > This is set in local.conf:
-> > SRC_DIST_LOCAL = "copy"
-> > INHERIT += "src_distribute_local"
-> >
-> > New checkout of OE from git.
-> > Have tried different builds for MACHINE=beagleboard and images minimal-image and
-> > base-image.
-> >
-> > The only thing that is stored in the TMPDIR/deploy/glibc/sources is a MIT
-> > directory with the minimal-image/minimal-image.bb file.
+On (13/12/10 13:42), Andreas Oberritter wrote:
+> Ping.
+> 
+> I think we should at least remove this variable from local.conf.sample
+> and from the documentation, because bitbake >= 1.10 does not support it
+> (patches 2 and 3).
+> 
+> http://patches.openembedded.org/patch/15/
+> http://patches.openembedded.org/patch/17/
 
-hmm I get it properly populated for console-image, do_build is added in
-base.bbclass I think it should be there for all recipes
+yes. Applied thx
 
 
