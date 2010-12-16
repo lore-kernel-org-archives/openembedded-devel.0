@@ -1,42 +1,45 @@
-Received: from mail-gx0-f179.google.com ([209.85.161.179])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PT6PA-0000YY-JR
+	(envelope-from <raj.khem@gmail.com>) id 1PT7S2-0001bC-32
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 06:29:29 +0100
-Received: by gxk21 with SMTP id 21so1946236gxk.10
+	Thu, 16 Dec 2010 07:36:30 +0100
+Received: by iwn8 with SMTP id 8so3125906iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 21:27:49 -0800 (PST)
+	Wed, 15 Dec 2010 22:34:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=1yrbZJS7bp5mCyoCPbUZfcbsvqhjFJvkImEwc3R51no=;
-	b=Hyp5ApML6Ckg47nrzNd/vYE5lEwfqAdS60bSX8fQa0uXsAlT3N3HxHyxnYyfSTtnNP
-	kCXJJuTEaPr6yEcvDp8b8UGq6T1m1CGW/asGuKI9xTc3DPKBmN3gNM0Wequ0SVzFoQU6
-	+NE4MLYVeRbeP8jwlG/PtxiZPD2tmGJLYXhDA=
+	bh=6VBouZm1aadhcOj12DZdFzXhn5VHb6o1cyFTzLdJSLM=;
+	b=GHW/gkhbpTVDIKWUtwTzY6FlOggDJ+uQhDz33scOeQBsWNcT0CDVEPnrGRXEc5vRt3
+	Rbb16wZ6rR1qutl3d1T6/ekjLJXwBsb1W7l/3wjrYymK9TzhjRyqXT8wyh81ANYoA7lz
+	CUoNH46bR0QM45ZSsxWhklnkmp3XEHdQhinOc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=PcsWMvNArV6v7+nmxv8YYo7j1KODbAixRz+Eg5EjtZMDWCWjbLrbUpFEQWGsRLtnsF
-	lbfUEIVW7hWizdqwkfODZLN/jpqJjKleXaza7JOECDJnjZKDgP/BBZvnkoHghUJqA2gy
-	7u8zp9MNJFl5g9bV8ZEpLA8u23QoDgIE/igQ4=
-Received: by 10.236.103.169 with SMTP id f29mr1552383yhg.15.1292477269828;
-	Wed, 15 Dec 2010 21:27:49 -0800 (PST)
+	b=rRwMlDBbtf4eSBs3ZHf/PYQf0tbO5DaBSo0/UgCeCGHOLSn5uA2gFeRPbvmSM2piXX
+	As85CiXvMNSVFExMSN/QsxFtGcopmduGlN4e46Z30AxkYfMPQLCJOBsEER09T9kOabE0
+	s7NWnWY0QgPwFGZwauvLkDIrOT4Fw5rthxaJY=
+Received: by 10.42.173.71 with SMTP id q7mr6901786icz.65.1292481292519;
+	Wed, 15 Dec 2010 22:34:52 -0800 (PST)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id l4sm1252234yhl.21.2010.12.15.21.27.48
+	by mx.google.com with ESMTPS id z4sm1640343ibg.1.2010.12.15.22.34.50
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 15 Dec 2010 21:27:48 -0800 (PST)
-Date: Wed, 15 Dec 2010 21:27:52 -0800
+	Wed, 15 Dec 2010 22:34:51 -0800 (PST)
+Date: Wed, 15 Dec 2010 22:34:56 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101216052752.GC18068@gmail.com>
-References: <1291813231-24536-1-git-send-email-obi@opendreambox.org>
-	<4D0614C6.5060105@opendreambox.org>
+Message-ID: <20101216063456.GG18068@gmail.com>
+References: <E1PR45K-0000jK-SU@melo.openembedded.org>
+	<01EE9A12-BE87-4EF6-9F0B-EAA20A1DBAAE@vanille-media.de>
+	<4D077186.2050708@balister.org> <20101214133729.GE6662@jama>
+	<ie9tg4$9t0$1@dough.gmane.org> <20101215082910.GA3238@jama>
+	<4D08B85B.3000404@balister.org> <4D08BF5E.5050105@opendreambox.org>
 MIME-Version: 1.0
-In-Reply-To: <4D0614C6.5060105@opendreambox.org>
+In-Reply-To: <4D08BF5E.5050105@opendreambox.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.179
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -44,7 +47,7 @@ X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH resend] package.bbclass: call PACKAGESTRIPFUNCS before populate_packages
+Subject: Re: [oe-commits] Philip Balister : i2c-tools : Stage i2c-dev.h header as i2c-dev-user.h.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,70 +61,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 05:29:29 -0000
+X-List-Received-Date: Thu, 16 Dec 2010 06:36:30 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (13/12/10 13:42), Andreas Oberritter wrote:
-> Ping
+On (15/12/10 14:15), Andreas Oberritter wrote:
+> On 12/15/2010 01:45 PM, Philip Balister wrote:
+> > On 12/15/2010 03:29 AM, Martin Jansa wrote:
+> >> On Wed, Dec 15, 2010 at 09:16:04AM +0100, Koen Kooi wrote:
+> >>> What are other distributions based on? Pixie dust?
+> >>
+> >> I meant distritubions where end-user normally gets only recipes how to
+> >> build from source
+> >> on his machine instead of installing prebuilt binary packages shipped
+> >> by distribution.
+> >>
+> > I am not sure there is a lot od software that uses the problematic
+> > header :)
+> > 
+> > Khem suggested we put the file in include/i2c-tools/i2c-dev.h. This
+> > means programs that need the i2c-tools version can adjust the header
+> > search path with a -I.
 > 
-> On 12/08/2010 02:00 PM, Andreas Oberritter wrote:
-> >   Introduce run_strip_funcs() to call the functions in
-> >   PACKAGESTRIPFUNCS and place it before populate_packages().
-> > 
-> >   This allows users of do_split_packages() to package the .debug
-> >   directories, which get created by do_runstrip().
-> > 
-> >   do_split_packages() is usually prepended to populate_packages().
-> > 
-> > Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> I think what Khem suggested was ${include}/i2c-tools/linux/i2c-dev.h,
+> because otherwise programs including <linux/i2c-dev.h> would still pick
+> up the kernel header, even if -I${include}/i2c-tools was prepended to
+> the program's CPPFLAGS.
 
-looks ok to me. I thought .debug are automatically picked into -debug
-packages 
-In what cases will this help ?
+Yes. that would be ok too. However I think it will be better to
+differentiate here in source code. and I would expecte the inclusion
+of linux/i2c-dev.h to change to i2c-tools/i2c-dev.h that would make
+it more clear that a given package does not use linux provided header
 
-> > ---
-> >  classes/package.bbclass |   12 +++++++-----
-> >  1 files changed, 7 insertions(+), 5 deletions(-)
-> > 
-> > diff --git a/classes/package.bbclass b/classes/package.bbclass
-> > index 2769595..678ffa9 100644
-> > --- a/classes/package.bbclass
-> > +++ b/classes/package.bbclass
-> > @@ -367,6 +367,12 @@ python perform_packagecopy () {
-> >  	os.system('cp -pPR %s/. %s/' % (installdest, pkgcopy))
-> >  }
-> >  
-> > +python run_strip_funcs() {
-> > +	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
-> > +		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
-> > +			bb.build.exec_func(f, d)
-> > +}
-> > +
-> >  python populate_packages () {
-> >  	import glob, errno, re,os
-> >  
-> > @@ -391,11 +397,6 @@ python populate_packages () {
-> >  		else:
-> >  			package_list.append(pkg)
-> >  
-> > -
-> > -	if (bb.data.getVar('PACKAGE_STRIP', d, True) != 'no'):
-> > -		for f in (bb.data.getVar('PACKAGESTRIPFUNCS', d, True) or '').split():
-> > -			bb.build.exec_func(f, d)
-> > -
-> >  	pkgdest = bb.data.getVar('PKGDEST', d, True)
-> >  	os.system('rm -rf %s' % pkgdest)
-> >  
-> > @@ -1011,6 +1012,7 @@ PACKAGE_PREPROCESS_FUNCS ?= ""
-> >  PACKAGEFUNCS ?= "perform_packagecopy \
-> >                  ${PACKAGE_PREPROCESS_FUNCS} \
-> >  		package_do_split_locales \
-> > +		run_strip_funcs \
-> >  		populate_packages \
-> >  		package_do_shlibs \
-> >  		package_do_pkgconfig \
 > 
+> Regards,
+> Andreas
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
