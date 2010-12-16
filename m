@@ -1,47 +1,33 @@
-Received: from mail-gw0-f41.google.com ([74.125.83.41])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1PT1ds-0003Ro-7x
+	(envelope-from <philip@balister.org>) id 1PT1hK-0003Zw-3Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 01:24:20 +0100
-Received: by gwj22 with SMTP id 22so1689703gwj.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 16:22:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=BipmYkpYG+lpMB750mdfXytJXWdjTmcX+h1injA9c+I=;
-	b=xaroF3t7uCAx7eroAamFNehELn+EIy5309Qvatz95U+bqt6KXObibTD6g3SEv7lgN2
-	MhZbaQl+k5EOzaK9RvxHI73VCyVzAkF3+m6neMlC7oOwJRfzOoQqymYC4Q/Fp9h+1kgv
-	LdVlBFKl/micAhV2UVcIibjlMiP4o7YogHxus=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=U76N6X8BhhT1zMWsMb6R+X2UyA2Man+YwxIPvmLMD3xbjdx2Dn33r5+MLApZ9ebr7z
-	mXjgAqM1OfhbFLMWAZni+R2F64mdG+weO6IK6uQsFAb4j4c1XtiK5n9PKuNTIBexV6CA
-	Xqk81biqjt1MXDxFhsGrr6GDiLlG1oMCRYmTA=
-Received: by 10.90.120.17 with SMTP id s17mr9044926agc.193.1292458961050; Wed,
-	15 Dec 2010 16:22:41 -0800 (PST)
+	Thu, 16 Dec 2010 01:27:54 +0100
+Received: (qmail 30397 invoked by uid 1003); 16 Dec 2010 00:26:15 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	16 Dec 2010 00:26:15 -0000
+Message-ID: <4D095CA5.5020400@balister.org>
+Date: Wed, 15 Dec 2010 19:26:13 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Wed, 15 Dec 2010 16:22:20 -0800 (PST)
-In-Reply-To: <AANLkTik_OhkXYdd658Job2F8w_6PkH9wr_NbV_X-=_vL@mail.gmail.com>
-References: <AANLkTik3B0Boi4PuUqZiSd8no_BwBoSzcgWVmFcKcY3L@mail.gmail.com>
-	<AANLkTinvRwriJ=W50duDtc50t2fCT5PM_3-D6Ec8VwM5@mail.gmail.com>
-	<AANLkTi=ZP2qTYw3A6KGKppb82D-hoc1LQFQ2DGjbHxN0@mail.gmail.com>
-	<AANLkTik_OhkXYdd658Job2F8w_6PkH9wr_NbV_X-=_vL@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 15 Dec 2010 16:22:20 -0800
-Message-ID: <AANLkTikkJXG3riNLq=4ZnE9N9zsruKNhdv8qA71M16q-@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.41
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <E1PSZng-0001y3-K3@melo.openembedded.org>	<20101214205943.GF6662@jama>
+	<4D07DF4B.7000800@balister.org> <20101214215011.GG6662@jama>
+In-Reply-To: <20101214215011.GG6662@jama>
+X-SA-Exim-Connect-IP: 216.168.135.166
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: task-sdk-native hard-coded to depend on sysvinit
+Subject: Re: [oe-commits] Steve Sakoman : coreutils: experimental coreutils fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,101 +41,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 00:24:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Dec 2010 00:27:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Dec 15, 2010 at 3:24 PM, AJ ONeal <coolaj86@gmail.com> wrote:
-> upstart's sysvinit-compat is part of my image and installed on the system=
-.
+On 12/14/2010 04:50 PM, Martin Jansa wrote:
 >
-> Or do you mean some other type of compat package?
->
+> Then please remove all older coreutils versions which doesn't provide
+> complete set of bindir_progs, base_bindir_progs, sbindir_progs, because
+> ie coreutils-6.0 now breaks ie timeout:
 
-no something like that is what I expected.
+So it looks like we can remove the coreutils-7.2 directory since there 
+is no recipe for it. Does anyone object to removing coreutils-6.0?
 
-> AJ ONeal
->
->
-> On Tue, Dec 14, 2010 at 1:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
->> On Mon, Dec 13, 2010 at 2:19 PM, AJ ONeal <coolaj86@gmail.com> wrote:
->> > actually, the error only seems to happen when another package is
->> installed
->> > or when it is part of a my-custom-image.bb - which is a problem since =
-I
->> want
->> > to install both it and upstart.
->>
->> if there are conflicts then probably you need something like a compat
->> package
->> where you can make sure that the bits that conflict are taken care of
->> upstart and sysvinit are conflicting
->> packages.
->>
->> >
->> > opkg install python python-misc task-sdk-native
->> >
->> > when I tried it all on it's lonesome it worked.
->> >
->> > AJ ONeal
->> >
->> > On Mon, Dec 13, 2010 at 2:27 PM, AJ ONeal <coolaj86@gmail.com> wrote:
->> >
->> >> Why should task-sdk-native depend on sysvinit in the first place?
->> >>
->> >> And in the second place, isn't there something like virtual/init that=
- it
->> >> should depend on instead?
->> >>
->> >> opkg install task-sdk-native
->> >>
->> >> Collected errors:
->> >> =C2=A0* check_data_file_clashes: Package sysvinit wants to install fi=
-le
->> >> /sbin/telinit
->> >> =C2=A0 =C2=A0 But that file is already provided by package =C2=A0* up=
-start-sysvcompat
->> >> =C2=A0* check_data_file_clashes: Package sysvinit wants to install fi=
-le
->> >> /sbin/killall5
->> >> =C2=A0 =C2=A0 But that file is already provided by package =C2=A0* sy=
-svinit-utils
->> >> =C2=A0* check_data_file_clashes: Package sysvinit wants to install fi=
-le
->> >> /etc/init.d/rc
->> >> =C2=A0 =C2=A0 But that file is already provided by package =C2=A0* up=
-start-sysvcompat
->> >> =C2=A0* check_data_file_clashes: Package sysvinit wants to install fi=
-le
->> >> /etc/init.d/rcS
->> >> =C2=A0 =C2=A0 But that file is already provided by package =C2=A0* up=
-start-sysvcompat
->> >> =C2=A0* check_data_file_clashes: Package sysvinit wants to install fi=
-le
->> >> /etc/default/rcS
->> >> =C2=A0 =C2=A0 But that file is already provided by package =C2=A0* up=
-start-sysvcompat
->> >> =C2=A0* opkg_install_cmd: Cannot install package task-sdk-native.
->> >>
->> >>
->> >> AJ ONeal
->> >>
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->> >
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Philip
 
 
