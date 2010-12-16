@@ -1,40 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PTEZG-000273-Qe for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 15:12:27 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PTEXi-0004II-76 for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 15:10:50 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Dec 2010 15:10:50 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <khimov@altell.ru>) id 1PTEnS-0002OT-OX
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Dec 2010 15:27:07 +0100
+Received: from keemun.altell.local (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id 212C753EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Dec 2010 15:10:50 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 16 Dec 2010 17:25:18 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 16 Dec 2010 15:10:37 +0100
-Message-ID: <ied6kt$dqa$1@dough.gmane.org>
-References: <131E5DFBE7373E4C8D813795A6AA7F080329DB6BBC@dlee06.ent.ti.com>	<201012152240.45068.roman@khimov.ru>	<131E5DFBE7373E4C8D813795A6AA7F080329DB6BEA@dlee06.ent.ti.com>	<201012152339.06515.roman@khimov.ru>
+Date: Thu, 16 Dec 2010 17:32:17 +0300
+User-Agent: KMail/1.13.5 (Linux/2.6.34.7-0.5-desktop; KDE/4.4.4; x86_64; ; )
+References: <131E5DFBE7373E4C8D813795A6AA7F080329DB6BBC@dlee06.ent.ti.com>
 	<131E5DFBE7373E4C8D813795A6AA7F080329E92ADA@dlee06.ent.ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080329E92ADA@dlee06.ent.ti.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<ied6kt$dqa$1@dough.gmane.org>
+In-Reply-To: <ied6kt$dqa$1@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201012161732.17976.khimov@altell.ru>
+X-Altell-MailScanner-ID: 212C753EF.93680
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] move openssl.cnf file into base openssl package
@@ -51,61 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 14:12:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 16 Dec 2010 14:27:07 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 16 =D0=B4=D0=B5=D0=BA=D0=B0=D0=
+=B1=D1=80=D1=8F 2010 17:10:37 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Koen Kooi =D0=
+=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> >>> So it seems like there are two packages that need this default
+> >> openssl.cnf
+> >>=20
+> >>>  file, the libcrypto and openssl packages.  Would it perhaps be a
+> >>>  better idea to pull the configuration file into its own package and
+> >>>  then set
+> >> the
+> >>>  RDEPENDS for the libcrypto and openssl packages to use the openssl
+> >>>  configuration package? That way you can still have multiple versions
+> >>>  of libcrypto (like Koen was trying to do) and have the default file
+> >>>  shared between both packages that need it.
+> >>=20
+> >> openssl is rdepending on libcrypto anyway (it's linked with it and I
+> >> don't think it'll change any time soon). But configs for different
+> >> versions can be
+> >> conflicting, so I'm not sure this kind of approach solves anything.
+> >=20
+> > I noticed that.  I think the only thing that putting this into its own
+> > package would solve is addressing Koen's comment about having multiple
+> > versions of libcrypto installed.
+> >=20
+> > Koen, can you comment on your change that moved the openssl.cnf file to
+> > the misc package?  Do you still need to be able to install multiple
+> > versions of libcrypto?
+>=20
+> Yes, I still need to be able to do that, couldn't you just add an
+> rrecommend for -misc?
 
-On 16-12-10 15:04, Maupin, Chase wrote:
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Roman I Khimov
->> Sent: Wednesday, December 15, 2010 2:39 PM
->> To: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] [RFC] move openssl.cnf file into base openssl package
->>
->> В сообщении от Среда 15 декабря 2010 22:47:05 автор Maupin, Chase написал:
->>>> Missed that change. Seems wrong to me. And I still think that it
->> belongs
->>>> to
->>>> libcrypto, not openssl since you can easily not install openssl binary
->>>> and still use it with tuned openssl.cnf in your apps.
->>>
->>> So it seems like there are two packages that need this default
->> openssl.cnf
->>>  file, the libcrypto and openssl packages.  Would it perhaps be a better
->>>  idea to pull the configuration file into its own package and then set
->> the
->>>  RDEPENDS for the libcrypto and openssl packages to use the openssl
->>>  configuration package? That way you can still have multiple versions of
->>>  libcrypto (like Koen was trying to do) and have the default file shared
->>>  between both packages that need it.
->>
->> openssl is rdepending on libcrypto anyway (it's linked with it and I don't
->> think it'll change any time soon). But configs for different versions can
->> be
->> conflicting, so I'm not sure this kind of approach solves anything.
-> 
-> I noticed that.  I think the only thing that putting this into its own package would solve is addressing Koen's comment about having multiple versions of libcrypto installed.
-> 
-> Koen, can you comment on your change that moved the openssl.cnf file to the misc package?  Do you still need to be able to install multiple versions of libcrypto?
-
-Yes, I still need to be able to do that, couldn't you just add an
-rrecommend for -misc?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNCh3dMkyGM64RGpERAseRAJ9KEl9B6YuGjRmZNzK3mFGhMZlAlwCfYJqK
-1MNv3HdFqJteWCrn+kFD48Q=
-=eo6B
------END PGP SIGNATURE-----
-
+To get all -misc stuff? I'd opt for putting openssl.cnf in its own package =
+and=20
+setting it as RRECOMMENDS for libcrypto in that case.
 
 
