@@ -1,31 +1,48 @@
-Received: from na3sys009aog113.obsmtp.com ([74.125.149.209])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mdpoole@troilus.org>) id 1PT5as-0007qZ-E1
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1PT66H-0000DP-Qv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 05:37:31 +0100
-Received: from source ([209.85.213.54]) (using TLSv1) by
-	na3sys009aob113.postini.com ([74.125.148.12]) with SMTP
-	ID DSNKTQmXKWefsjla0Xe7iTPZUYu6j49rFAEZ@postini.com;
-	Wed, 15 Dec 2010 20:35:54 PST
-Received: by ywp6 with SMTP id 6so1592662ywp.27
+	Thu, 16 Dec 2010 06:09:58 +0100
+Received: by pvd12 with SMTP id 12so455398pvd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Dec 2010 20:35:52 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.236.95.36 with SMTP id o24mr15997679yhf.97.1292474152204; Wed,
-	15 Dec 2010 20:35:52 -0800 (PST)
-Received: by 10.236.108.44 with HTTP; Wed, 15 Dec 2010 20:35:52 -0800 (PST)
-In-Reply-To: <loom.20101124T090626-312@post.gmane.org>
-References: <loom.20101124T090626-312@post.gmane.org>
-Date: Wed, 15 Dec 2010 23:35:52 -0500
-Message-ID: <AANLkTi=gaij=zue+LuXxr-bv7LHfYE_Nqo7xu1+QBzWS@mail.gmail.com>
-From: Michael Poole <mdpoole@troilus.org>
+	Wed, 15 Dec 2010 21:08:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=8BHH1yEz2LcdKsL/UmzBUc3iodrvf50YkjkAOD9kG4A=;
+	b=ZUPMrboTLIaF5alJL8Esx5wDDwHo7S3oMdFCOYsvadvTvZIbuhjXKwHQIhstD7+Vfk
+	oqPnNNxlSX845l8uK4a1hcvnwoC6eai/7jYajy/uVFekPpdTQEm20liAnbOU3kE5FiHF
+	BaNLhuMI89FIXwHgUkaNUcQJtdcGEeHq/9aJs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=BRTabFF0Xrx/5Sr4uDHg/tYUrb+J0HfX7t32XnF73pMvUMAY3sQi45FQ0IqPDoSSvS
+	UZN2cNhZU4aZ75/PkRDBBcgWzrEEJOnuswOZKNl9Vu5NuHjqqNQfs9gWOgGQo514mJ4R
+	ltHiHk8hFF2o1H1a5eyxVF+teQVgTzC9dInqE=
+Received: by 10.142.165.10 with SMTP id n10mr6468426wfe.70.1292476097580;
+	Wed, 15 Dec 2010 21:08:17 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id w22sm2550431wfd.19.2010.12.15.21.08.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 15 Dec 2010 21:08:16 -0800 (PST)
+Date: Wed, 15 Dec 2010 21:08:18 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.149.209
-X-SA-Exim-Mail-From: mdpoole@troilus.org
+Message-ID: <20101216050818.GA18068@gmail.com>
+References: <loom.20101124T090626-312@post.gmane.org>
+	<AANLkTi=gaij=zue+LuXxr-bv7LHfYE_Nqo7xu1+QBzWS@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTi=gaij=zue+LuXxr-bv7LHfYE_Nqo7xu1+QBzWS@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Source distribution broken?
@@ -42,54 +59,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 04:37:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Dec 2010 05:09:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-2010/11/24 Anders T=F6rnqvist <a.tqvist@gmail.com>:
-> Hi,
->
-> Is the source distribution functionality broken?
->
-> This is set in local.conf:
-> SRC_DIST_LOCAL =3D "copy"
-> INHERIT +=3D "src_distribute_local"
->
-> New checkout of OE from git.
-> Have tried different builds for MACHINE=3Dbeagleboard and images minimal-=
-image and
-> base-image.
->
-> The only thing that is stored in the TMPDIR/deploy/glibc/sources is a MIT
-> directory with the minimal-image/minimal-image.bb file.
->
->
-> In src_distribute.bbclass there is a line
-> addtask distribute_sources before do_build after do_fetch
-> Does do_build actually get run for every task?
->
-> If set to something else instead of "do_build" like "do_compile" will tri=
-gger a
-> lot of src_distribute calls and copying of files for a lot of licenses to
-> TMPDIR/deploy/glibc/sources.
->
-> Any ideas?
+On (15/12/10 23:35), Michael Poole wrote:
+> 2010/11/24 Anders Törnqvist <a.tqvist@gmail.com>:
+> > Hi,
+> >
+> > Is the source distribution functionality broken?
+> >
+> > This is set in local.conf:
+> > SRC_DIST_LOCAL = "copy"
+> > INHERIT += "src_distribute_local"
+> >
+> > New checkout of OE from git.
+> > Have tried different builds for MACHINE=beagleboard and images minimal-image and
+> > base-image.
+> >
+> > The only thing that is stored in the TMPDIR/deploy/glibc/sources is a MIT
+> > directory with the minimal-image/minimal-image.bb file.
 
-I see substantially similar behavior, and am glad to know it's not
-just me.  (Thanks, by the way, for mentioning the change from
-"do_build" to "do_compile".)
-
-I see a few more files on my system.  Curiously, and perhaps
-significantly, they correspond to the targets that I pass to bitbake.
-That is, I run "bitbake x-load u-boot-omap3 linux-omap3 company-image"
-(where company-image extends micro-image), and inside
-TMPDIR/deploy/uclibc/sources/ I have GPLv2+/x-load,
-GPLv2/u-boot-omap3, GPLv2/linux-omap3 and MIT/company-image.
-
-Unfortunately, I am not familiar enough with OpenEmbedded or bitbake
-to help much beyond this.  Hopefully someone else on the list can
-help.
-
-Michael
+hmm I get it properly populated for console-image, do_build is added in
+base.bbclass I think it should be there for all recipes
 
 
