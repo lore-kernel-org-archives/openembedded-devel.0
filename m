@@ -1,44 +1,45 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <obi@opendreambox.org>) id 1PTCb6-0001tA-NW
+	(envelope-from <cliff.brake@gmail.com>) id 1PTDzC-0003KW-Od
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 13:06:13 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 3AC78314BB65
+	Thu, 16 Dec 2010 14:35:11 +0100
+Received: by wwi17 with SMTP id 17so2179249wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Dec 2010 13:04:36 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 4EvBQ9d0-qTE
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Dec 2010 13:04:31 +0100 (CET)
-Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 9B8F1314BB3A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Dec 2010 13:04:31 +0100 (CET)
-Message-ID: <4D0A004F.8030408@opendreambox.org>
-Date: Thu, 16 Dec 2010 13:04:31 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Thu, 16 Dec 2010 05:33:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=pkB8eEKLZnh25ZxnpHLJ1MEMvUbV0dcPTG9pnbWHXVM=;
+	b=Dfw1KgFDSBm2S6iCsxqG4A/on8As4lfWyb+KbtP39tKoTM3zK1OcS5NStHIedgcB5n
+	Um2I4HNd1Q5GAHNXMLyrLW4TsuvJ5i5xXIN/QN+fX61915P/CWamMiIRIR9VPGkVKl7N
+	0pGRyKhMXgi1iKCmGXrppGOn/BsQzQBXuDqqM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=EXTUxJm9fULiWJQCoG+1j7Tj/UDhCNiFusZERpI5MPeAb83sZ3WUx97hf7171ZeZbq
+	fv8Q5qlv9ix0o5RJac3A5jMkrSj0Q9/bv2hVEhI1c3b7Eeh6Zlhs8/POxT1cwHuaurNn
+	2YGL96LzNGLuUpZYFHGdt60OEHkrDNTs2T86o=
 MIME-Version: 1.0
+Received: by 10.216.24.134 with SMTP id x6mr2322002wex.34.1292506408042; Thu,
+	16 Dec 2010 05:33:28 -0800 (PST)
+Received: by 10.216.254.137 with HTTP; Thu, 16 Dec 2010 05:33:27 -0800 (PST)
+In-Reply-To: <4D08D3F5.1060608@mentor.com>
+References: <AANLkTimTaZyPywc_B8g4k4QO+gTJq67K=OgcoSe6BpJh@mail.gmail.com>
+	<4D08D3F5.1060608@mentor.com>
+Date: Thu, 16 Dec 2010 08:33:27 -0500
+Message-ID: <AANLkTimuRa8EC=U_CvgiZV1tWySg_AQTwWBQTxdpv7Zn@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1291813231-24536-1-git-send-email-obi@opendreambox.org>	<4D0614C6.5060105@opendreambox.org>
-	<20101216052752.GC18068@gmail.com>
-In-Reply-To: <20101216052752.GC18068@gmail.com>
-X-SA-Exim-Connect-IP: 82.149.226.172
-X-SA-Exim-Mail-From: obi@opendreambox.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH resend] package.bbclass: call PACKAGESTRIPFUNCS before populate_packages
+Subject: Re: testing 2010-12-10 (wiki, results, bluez-libs)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,35 +53,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 12:06:13 -0000
+X-List-Received-Date: Thu, 16 Dec 2010 13:35:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 12/16/2010 06:27 AM, Khem Raj wrote:
-> On (13/12/10 13:42), Andreas Oberritter wrote:
->> Ping
+On Wed, Dec 15, 2010 at 9:43 AM, Tom Rini <tom_rini@mentor.com> wrote:
+> On 12/15/2010 12:51 AM, Frans Meulenbroeks wrote:
 >>
->> On 12/08/2010 02:00 PM, Andreas Oberritter wrote:
->>>   Introduce run_strip_funcs() to call the functions in
->>>   PACKAGESTRIPFUNCS and place it before populate_packages().
->>>
->>>   This allows users of do_split_packages() to package the .debug
->>>   directories, which get created by do_runstrip().
->>>
->>>   do_split_packages() is usually prepended to populate_packages().
->>>
->>> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> 
-> looks ok to me. I thought .debug are automatically picked into -debug
-> packages 
-> In what cases will this help ?
+>> Dear all,
+>>
+>> I just wanted to update the testing table with my entries and I
+>> noticed two (possibly related) things.
+>> - no other entries for 2010-12-10 are there yet (and it is already
+>> wednesday)
+>
+> I haven't updated the stuff we're building since just about everything
+> failed due to the gcc issue Khem fixed in
+> 2c8570552549da2e11428d08b2bc08849cac39b1. =A0This is why I sometimes wond=
+er if
+> it would be desirable to cherry-pick a few things in to the testing-next
+> branch.
 
-We have a set of plugins split into one package each. With this patch, I
-can create "plugin-foo-dbg" packages, which seems to be much nicer than
-having one meta-dbg package containing all debug symbols, especially
-with a large amount of plugins.
+One of my concerns is coordinating with all the people doing testing
+if we start committing to the testing-next branch.  How do we know who
+restarted builds, etc.  I guess we could assume the cherry-picked
+changes would be minor enough that people who have already finished
+builds would not need to re-build.
 
-Regards,
-Andreas
+At this point I'm just more inclined if the weekly testing branch
+crashes and burns horribly to just throw away that week, and focus on
+getting things fixed in the master for next week.  Its not perfect,
+but with so many people participating, it seems like we need to keep
+it as simple as possible.  But, keep the ideas flowing, and perhaps
+something better will emerge.
+
+Thanks,
+Cliff
+
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
 
 
