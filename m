@@ -1,47 +1,35 @@
-Received: from mail-gx0-f179.google.com ([209.85.161.179])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PTExa-0002gt-OP
+	(envelope-from <khimov@altell.ru>) id 1PTFBG-00030S-9K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Dec 2010 15:37:35 +0100
-Received: by gxk21 with SMTP id 21so2183212gxk.10
+	Thu, 16 Dec 2010 15:51:43 +0100
+Received: from keemun.altell.local (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id C965F5442
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Dec 2010 06:35:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to:cc
-	:subject:date:message-id:x-mailer;
-	bh=QNx0eCES//4T7Sqj6dd6OQ0ggtER/CekqxFGoHh2G5M=;
-	b=Xdhj6GC8zTG7JxpLsWbN2NFUrZ3dvdwsRSni/tO9TcNGm+quOgTtoAmxAn99MIagvF
-	lCWgtgJQJJc9coNRWhma40vDkX7UI5XhqHXllz8ZsCG1+zd9mquQ57c2jk6j+BmOoJol
-	Lc9PG+0jMjI4UltONeu95S48yxZaJWxkyISW8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	b=hUvmhagrROUOFpH9Vgx4rntg0+p6/vMVCWwgGb8ezgRw3T7qVRzrp8/oqQ4LWcC0Vs
-	8LYOjeW3FpRh/SAh618C+V54rNkx7L5RiNHo/UBiZYsySIofU2RCMAo1CMkksNh4shZY
-	2Zx3aNvX7Oacy5ZoeW/1QqhrBBiYtkzDcnJIw=
-Received: by 10.150.97.16 with SMTP id u16mr969242ybb.185.1292510154326;
-	Thu, 16 Dec 2010 06:35:54 -0800 (PST)
-Received: from ossystems.com.br ([189.114.111.55])
-	by mx.google.com with ESMTPS id l4sm4751840ybj.21.2010.12.16.06.35.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 16 Dec 2010 06:35:53 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 436AD6100FB; Thu, 16 Dec 2010 12:35:14 -0200 (BRST)
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Thu, 16 Dec 2010 17:49:54 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Dec 2010 12:35:12 -0200
-Message-Id: <1292510112-32629-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.3
-X-SA-Exim-Connect-IP: 209.85.161.179
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+Date: Thu, 16 Dec 2010 17:56:57 +0300
+User-Agent: KMail/1.13.5 (Linux/2.6.34.7-0.5-desktop; KDE/4.4.4; x86_64; ; )
+References: <131E5DFBE7373E4C8D813795A6AA7F080329DB6BBC@dlee06.ent.ti.com>
+	<201012161732.17976.khimov@altell.ru>
+	<131E5DFBE7373E4C8D813795A6AA7F080329E92AE9@dlee06.ent.ti.com>
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080329E92AE9@dlee06.ent.ti.com>
+MIME-Version: 1.0
+Message-Id: <201012161756.57857.khimov@altell.ru>
+X-Altell-MailScanner-ID: C965F5442.F0B6E
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH] classes/gitpkgv.bbclass: add GITPKGVTAG that uses 'git describe'
+Subject: Re: [RFC] move openssl.cnf file into base openssl package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,100 +43,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2010 14:37:35 -0000
+X-List-Received-Date: Thu, 16 Dec 2010 14:51:43 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Using ${GITPKGVTAG} allows for automatic versioning based on the
-repository tags. For those that doesn't want to use it, ${GITPKGV} is
-still available.
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 16 =D0=B4=D0=B5=D0=BA=D0=B0=D0=
+=B1=D1=80=D1=8F 2010 17:30:58 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Maupin, Chase =
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org
+> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> > Roman I Khimov
+> > Sent: Thursday, December 16, 2010 8:32 AM
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] [RFC] move openssl.cnf file into base openssl package
+> >=20
+> > =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 16 =D0=B4=D0=B5=D0=BA=D0=B0=
+=D0=B1=D1=80=D1=8F 2010 17:10:37 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Koen Kooi =
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> > > >>> So it seems like there are two packages that need this default
+> > > >>=20
+> > > >> openssl.cnf
+> > > >>=20
+> > > >>>  file, the libcrypto and openssl packages.  Would it perhaps be a
+> > > >>>  better idea to pull the configuration file into its own package
+> > > >>>  and then set
+> > > >>=20
+> > > >> the
+> > > >>=20
+> > > >>>  RDEPENDS for the libcrypto and openssl packages to use the opens=
+sl
+> > > >>>  configuration package? That way you can still have multiple
+> >=20
+> > versions
+> >=20
+> > > >>>  of libcrypto (like Koen was trying to do) and have the default
+> > > >>>  file shared between both packages that need it.
+> > > >>=20
+> > > >> openssl is rdepending on libcrypto anyway (it's linked with it and=
+ I
+> > > >> don't think it'll change any time soon). But configs for different
+> > > >> versions can be
+> > > >> conflicting, so I'm not sure this kind of approach solves anything.
+> > > >=20
+> > > > I noticed that.  I think the only thing that putting this into its
+> > > > own package would solve is addressing Koen's comment about having
+> > > > multiple versions of libcrypto installed.
+> > > >=20
+> > > > Koen, can you comment on your change that moved the openssl.cnf file
+> >=20
+> > to
+> >=20
+> > > > the misc package?  Do you still need to be able to install multiple
+> > > > versions of libcrypto?
+> > >=20
+> > > Yes, I still need to be able to do that, couldn't you just add an
+> > > rrecommend for -misc?
+> >=20
+> > To get all -misc stuff? I'd opt for putting openssl.cnf in its own
+> > package and
+> > setting it as RRECOMMENDS for libcrypto in that case.
+>=20
+> Agreed.  Although would you say RRECOMMENDS or RDEPENDS?
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- classes/gitpkgv.bbclass |   54 +++++++++++++++++++++++++++++++++++++---------
- 1 files changed, 43 insertions(+), 11 deletions(-)
+I've just said above, RRECOMMENDS. Most applications using libcrypto can wo=
+rk=20
+without a default config file. They even worked for a long time before I've=
+=20
+packaged it. But you get it installed by default with RRECOMMENDS, and only=
+ if=20
+you know what you're doing you add it in BAD_RECOMMENDATIONS or delete it i=
+n=20
+some other way.
 
-diff --git a/classes/gitpkgv.bbclass b/classes/gitpkgv.bbclass
-index bc1dc32..ab8ba6e 100644
---- a/classes/gitpkgv.bbclass
-+++ b/classes/gitpkgv.bbclass
-@@ -1,12 +1,19 @@
--# gitpkgv.bbclass provides a GITPKGV variable which is a sortable version
--# with the format NN+GITHASH, to be used in PKGV, where
-+# gitpkgv.bbclass provides a GITPKGV and GITPKGVTAG variables to be
-+# used in PKGV, as described bellow:
- #
--# NN equals the total number of revs up to SRCREV
--# GITHASH is SRCREV's (full) hash
-+# - GITPKGV which is a sortable version with the format NN+GITHASH, to
-+#   be used in PKGV, where
- #
--# gitpkgv.bbclass assumes the git repository has been cloned, and contains
--# SRCREV. So ${GITPKGV} should never be used in PV, only in PKGV.
--# It can handle SRCREV = ${AUTOREV}, as well as SRCREV = "<some fixed git hash>"
-+#   NN equals the total number of revs up to SRCREV
-+#   GITHASH is SRCREV's (full) hash
-+#
-+# - GITPKGVTAG which is the output of 'git describe' allowing for
-+#   automatic versioning
-+#
-+# gitpkgv.bbclass assumes the git repository has been cloned, and
-+# contains SRCREV. So ${GITPKGV} and ${GITPKGVTAG}should never be used
-+# in PV, only in PKGV.  It can handle SRCREV = ${AUTOREV}, as well as
-+# SRCREV = "<some fixed git hash>"
- #
- # use example:
- #
-@@ -14,10 +21,26 @@
- #
- # PV = "1.0+git${SRCPV}"
- # PKGV = "1.0+git${GITPKGV}"
-+#
-+# or
-+#
-+# inherit gitpkgv
-+#
-+# PV = "gitr${SRCPV}"
-+# PKGV = "${GITPKGVTAG}"
- 
--GITPKGV = "${@get_git_pkgv(d)}"
- 
--def get_git_pkgv(d):
-+GITPKGV = "${@get_git_pkgv(d, False)}"
-+GITPKGVTAG = "${@get_git_pkgv(d, True)}"
-+
-+def git_drop_tag_prefix(version):
-+    import re
-+    if re.match("v\d", version):
-+        return version[1:]
-+    else:
-+        return version
-+
-+def get_git_pkgv(d, use_tags):
- 	import os
- 	import bb
- 
-@@ -33,9 +56,18 @@ def get_git_pkgv(d):
- 
- 			cwd = os.getcwd()
- 			os.chdir(repodir)
--			output = bb.fetch.runfetchcmd("git rev-list %s -- 2> /dev/null | wc -l" % rev, d, quiet=True)
-+
-+			try:
-+				if not use_tags:
-+					raise Exception("Ignoring tag values.")
-+
-+				ver = git_drop_tag_prefix(bb.fetch.runfetchcmd("git describe %s 2>/dev/null" % rev, d, quiet=True).strip())
-+			except Exception:
-+				commits = bb.fetch.runfetchcmd("git rev-list %s -- 2> /dev/null | wc -l" % rev, d, quiet=True).strip()
-+				ver = "%s+%s" % commits, rev[:7]
-+
- 			os.chdir(cwd)
- 
--			return "%s+%s" % (output.split()[0], rev)
-+			return ver
- 
- 	return "0+0"
--- 
-1.7.3
-
+Speaking of which, it should also be listed in CONFFILES, missed that in=20
+March.
 
 
