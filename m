@@ -1,26 +1,36 @@
-Received: from mail-ew0-f44.google.com ([209.85.215.44])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jay@jay-tech.ru>) id 1PTsCy-00043o-KZ
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PTsQS-00069a-MX
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Dec 2010 09:32:04 +0100
-Received: by ewy8 with SMTP id 8so732245ewy.3
+	Sat, 18 Dec 2010 09:46:03 +0100
+Received: by iwn8 with SMTP id 8so1643587iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Dec 2010 00:32:02 -0800 (PST)
-Received: by 10.213.101.5 with SMTP id a5mr2052001ebo.93.1292661122081;
-	Sat, 18 Dec 2010 00:32:02 -0800 (PST)
-Received: from mozart.localnet (95-29-187-197.broadband.corbina.ru
-	[95.29.187.197])
-	by mx.google.com with ESMTPS id q58sm908304eeh.15.2010.12.18.00.31.58
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 18 Dec 2010 00:31:58 -0800 (PST)
-Sender: Yury Bushmelev <jay@jay-tech.ru>
-From: Yuri Bushmelev <jay4mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Dec 2010 11:31:27 +0300
-User-Agent: KMail/1.13.5 (Linux/2.6.36-ARCH; KDE/4.5.4; x86_64; ; )
+	Sat, 18 Dec 2010 00:45:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=Wm67aWl4mu7O8yHrsYzySaAeyaExuuXt71r1ZApznWA=;
+	b=T+xPQfhEl4VYENPyHeQwSXIo4HHXRKU0C3WpUHyH9Svmu6wfTpwJ0EnNNCtdkH9q2F
+	4833Bt4p0Jsqz7c1elcvF7kCF5h4Ulxx3bezyvt02k3smnxfo0qVuVIrz/ElUhL4PSj7
+	Lzyuf9HSZkIq0DeJPQ8cmiqqAqGmAXdQInN3A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=LhlTkS1GrfRsGjMge9U93hWbSaRLwMA0HM33wuSCQZpaWXmKLOar+SVwXUQsHNiYMz
+	K+EjjhMWpexS8IyIzqu3YnVAyPSHHdLszhFYySuWueLRprZNztWK8ra6aatpF5fvrGS8
+	MEtcN0kA16MzN2sTtguyuHCnJaId3BNPYTQFQ=
 MIME-Version: 1.0
-Message-Id: <201012181131.27436.jay4mail@gmail.com>
-Subject: e2fsprogs do_install failed ('uuid' absence)
+Received: by 10.231.31.1 with SMTP id w1mr1779671ibc.7.1292661958568; Sat, 18
+	Dec 2010 00:45:58 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Sat, 18 Dec 2010 00:45:58 -0800 (PST)
+In-Reply-To: <4D0C65A2.6060106@zenlinux.com>
+References: <AANLkTin7AtzCpMmNq_SSHcbDjZqaFXcdgd6T5fHrfb0r@mail.gmail.com>
+	<4D0C65A2.6060106@zenlinux.com>
+Date: Sat, 18 Dec 2010 09:45:58 +0100
+Message-ID: <AANLkTi=dyL9me_pJyQeFpd47hHX+7+xYh-djOx7bdQVj@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: do_rootfs and mkfs.jffs2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,33 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Dec 2010 08:32:04 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Dec 2010 08:46:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello!
+2010/12/18 Scott Garman <sgarman@zenlinux.com>:
+> On 12/17/2010 02:08 PM, Frans Meulenbroeks wrote:
+>>
+>> I just tried to make a jffs2 image, but got an error that mkfs.jffs2
+>> was not found.
+>> Apparently somewhere a dependency to mtd-utils-native should be added,
+>> but I have no idea where.
+>
+> In conf/bitbake.conf there is a line:
+>
+> IMAGE_DEPENDS_jffs2 = "mtd-utils-native"
+>
+> So one would think that would do the trick. Were you doing anything unusual
+> to generate the jffs2 image (e.g, trying to override the default image type
+> for your target)?
 
-Most of my tonight's build was failed because of e2fsprogs.
-Bitbake master, latest OE tree.
+That line is here as well.
+I did not do anything special. I was building james-image distro
+minimal target sheevaplug
+The only odd thing I noticed was that there was some mtd-utils output
+in my recipes dir.
+Maybe somewhere a build put stuff at the wrong place. Frankly no idea
+how that could happen though (and didn't verify file times before I
+nuked them.
+We'll see if it reoccurs.
 
-Below are links to tinderbox but all logs was truncated today. Looks like close() was not called before oestats-client uploaded the log.
+Frans.
 
-http://tinderbox.openembedded.net/packages/1352620/
-http://tinderbox.openembedded.net/packages/1354448/
-http://tinderbox.openembedded.net/packages/1355387/
-http://tinderbox.openembedded.net/packages/1364600/
-
-Typical log message is below:
-| make[1]: Leaving directory `/storage/oe/testbuilder/build/testing/angstrom-2008.1/armv5/work/armv5te-angstrom-linux-gnueabi/e2fsprogs-1.41.12-
-r26/e2fsprogs-1.41.12/intl'
-| mv: cannot stat `/storage/oe/testbuilder/build/testing/angstrom-2008.1/armv5/work/armv5te-angstrom-linux-gnueabi/e2fsprogs-1.41.12-
-r26/image/sbin/uuid': No such file or directory
-NOTE: package e2fsprogs-1.41.12-r26: task do_install: Failed
-ERROR: Function 'do_install' failed (see /storage/oe/testbuilder/build/testing/angstrom-2008.1/armv5/work/armv5te-angstrom-linux-
-gnueabi/e2fsprogs-1.41.12-r26/temp/log.do_install.18126 for further information)
-
--- 
-Yury Bushmelev
+PS: was about to press send, then Yuri mentionen a bitbake issue
+causing output to end up at the wrong place.
+Guess I've been bitten by that and the stamps tell that the package is
+build but the exe is not there.
 
 
