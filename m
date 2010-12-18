@@ -1,31 +1,33 @@
-Received: from 29.mail-out.ovh.net ([87.98.216.213])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PTu40-0005N7-FI
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PTumO-0006Wc-EG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Dec 2010 11:30:56 +0100
-Received: (qmail 19983 invoked by uid 503); 18 Dec 2010 10:39:52 -0000
-Received: from b6.ovh.net (HELO mail642.ha.ovh.net) (213.186.33.56)
-	by 29.mail-out.ovh.net with SMTP; 18 Dec 2010 10:39:52 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 18 Dec 2010 12:25:01 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 18 Dec 2010 12:24:59 +0200
-Message-ID: <4D0C8BCC.9050800@eukrea.com>
-Date: Sat, 18 Dec 2010 11:24:12 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Sat, 18 Dec 2010 12:16:48 +0100
+Received: by iwn8 with SMTP id 8so1732753iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Dec 2010 03:16:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:cc:content-type;
+	bh=rdTBxea/yOWSGqk5iP6Ou4I2JwK8mx46zNNNKxe2MHE=;
+	b=MQkS2/wOnty43VF0BYi3ejZ3oFbkmpUIcaw1TWFHAjo9naxVO38osBVO8nrvxa564U
+	QcOS0FYjOUxDbuEjPuN+Gy6/dPF+GfjM81oReVbHHmSKsFX320JOEyhiNkD7Zm/hKY8Y
+	ZAjrEQh4gO9x6dib8z356ENVRbzMuHAwZtwV4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	b=m2YZSsEnUbxT69hIAKMpNgUebPi2Wjvxv6Fj/iK5X729hI2tYMlG+60hjVNTA3h5i8
+	zGKDI+7B7987fwkyUAuR4HTLIEww2begoLiJ1DjO04B0f5B3tAS51oPmaNYxngeT/1+D
+	ytG7pZgDrKRW4e1TLr8MLspRSq4uuR3xH23aM=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1292667009.12094.13.camel@mattotaupa>
-In-Reply-To: <1292667009.12094.13.camel@mattotaupa>
-X-Ovh-Tracer-Id: 10086655791303667017
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: minimal{, -uclibc}: linux-omap-psp_2.6.32: task `do_compileconfigs` fails
+Received: by 10.231.149.194 with SMTP id u2mr1884843ibv.32.1292671003559; Sat,
+	18 Dec 2010 03:16:43 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Sat, 18 Dec 2010 03:16:43 -0800 (PST)
+Date: Sat, 18 Dec 2010 12:16:43 +0100
+Message-ID: <AANLkTim1ZFrjZuvJgKGB-+2wTNUAx5cdiNsRXK8bvRf9@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: bitbake-dev@lists.berlios.de
+Cc: openembedded-devel@lists.openembedded.org
+Subject: bitbake git head issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,18 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Dec 2010 10:30:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Dec 2010 11:16:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
 Hi,
 
-On 18/12/2010 11:10, Paul Menzel wrote:
-> Error: selected processor does not support ARM mode `smc #0'
+If I use bitbake git head I get:
 
-this seems to be a known problem with gcc 4.5 :
-https://bugs.launchpad.net/ubuntu/+source/gcc-4.5/+bug/669912
+frans@linux-suse:~/oe/openembedded> bitbake james-image
+Process ProcessServer-1:
+Traceback (most recent call last):
+  File "/usr/lib/python2.6/multiprocessing/process.py", line 231, in _bootstrap
+    self.run()
+  File "/home/frans/oe/bitbake/lib/bb/server/process.py", line 95, in run
+    [NULL, NULL, NULL]):
+  File "/usr/lib/python2.6/contextlib.py", line 16, in __enter__
+    return self.gen.next()
+  File "/home/frans/oe/bitbake/lib/bb/utils.py", line 805, in redirected_fds
+    old_fds.append(os.dup(fd))
+OSError: [Errno 9] Bad file descriptor
 
-Eric
+I did not fully bisect it but rev
+144887553097a288a76b8de78f71548d5ef9a350 still works fine with me.
+The problem seems to be introduced in one of the next 5 or so commits
+after that one.
+
+Frans.
 
 
