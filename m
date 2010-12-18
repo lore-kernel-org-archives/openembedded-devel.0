@@ -1,27 +1,22 @@
-Received: from 64.mail-out.ovh.net ([91.121.185.65])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PTnhw-0003ZN-IX
+Received: from sencha.khimov.ru ([89.223.109.22])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <roman@khimov.ru>) id 1PTr6j-0002rS-An
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Dec 2010 04:43:44 +0100
-Received: (qmail 28231 invoked by uid 503); 17 Dec 2010 14:00:47 -0000
-Received: from b9.ovh.net (HELO mail411.ha.ovh.net) (213.186.33.59)
-	by 64.mail-out.ovh.net with SMTP; 17 Dec 2010 14:00:46 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 17 Dec 2010 16:16:59 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 17 Dec 2010 16:16:58 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Sat, 18 Dec 2010 08:21:33 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PTr6g-0006Ew-IL
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Dec 2010 10:21:32 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Dec 2010 15:14:38 +0100
-Message-Id: <1292595278-13654-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
+Date: Sat, 18 Dec 2010 10:21:25 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
+References: <1292520711-25044-1-git-send-email-Chase.Maupin@ti.com>
+In-Reply-To: <1292520711-25044-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 8131812077531147593
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH] fontconfig: update SRC_URI
+Message-Id: <201012181021.29229.roman@khimov.ru>
+Subject: Re: [PATCH] openssl: create package for openssl configuration file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,47 +30,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Dec 2010 03:43:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 18 Dec 2010 07:21:33 -0000
+X-Groupsio-MsgNum: 27253
+Content-Type: multipart/signed; boundary="nextPart1696085.9zVdoLMH5u";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-fontconfig's website's configuration actually prevents to fetch the
-source archives so use gentoo's mirror until the website is fixed.
+--nextPart1696085.9zVdoLMH5u
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/fontconfig/fontconfig_2.6.0.bb |    2 +-
- recipes/fontconfig/fontconfig_2.8.0.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 16 =D0=B4=D0=B5=D0=BA=D0=B0=D0=
+=B1=D1=80=D1=8F 2010 20:31:51 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Chase Maupin =
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> * Add the openssl-conf package to the list of packages to
+>   be created.  This package contains the openssl.cnf file
+>   which is used by both the openssl executable in the
+>   openssl package and the libcrypto library.
+> * This is to avoid messages like:
+>     WARNING: can't open config file: /usr/lib/ssl/openssl.cnf
+> * When running "openssl req" to request and generate a certificate
+>   the command will fail without the openssl.cnf file being
+>   installed on the target system.
+> * Made this package an RRECOMMENDS for libcrypto since:
+>     * libcrypto is a RDEPENDS for the openssl package
+>     * Users can specify a configuration file at another
+>       location so it is not stricly required and many
+>       commands will work without it (with warnings)
+> * Bumped the PR
+>=20
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 
-diff --git a/recipes/fontconfig/fontconfig_2.6.0.bb b/recipes/fontconfig/fontconfig_2.6.0.bb
-index fd46235..84eaa4d 100644
---- a/recipes/fontconfig/fontconfig_2.6.0.bb
-+++ b/recipes/fontconfig/fontconfig_2.6.0.bb
-@@ -5,7 +5,7 @@ DEPENDS = "expat freetype zlib"
- 
- PR = "r4"
- 
--SRC_URI = "http://fontconfig.org/release/fontconfig-${PV}.tar.gz \
-+SRC_URI = "${GENTOO_MIRROR}/fontconfig-${PV}.tar.gz \
-            file://fix-pkgconfig.patch"
- 
- PACKAGES =+ "fontconfig-utils-dbg fontconfig-utils "
-diff --git a/recipes/fontconfig/fontconfig_2.8.0.bb b/recipes/fontconfig/fontconfig_2.8.0.bb
-index 5c6f854..64d7ee5 100644
---- a/recipes/fontconfig/fontconfig_2.8.0.bb
-+++ b/recipes/fontconfig/fontconfig_2.8.0.bb
-@@ -7,7 +7,7 @@ DEPENDS = "expat freetype zlib"
- RPROVIDES_fontconfig-utils = "libfontconfig-utils"
- RCONFLICTS_fontconfig-utils = "libfontconfig-utils"
- 
--SRC_URI = "http://fontconfig.org/release/fontconfig-${PV}.tar.gz;name=fontconfig"
-+SRC_URI = "${GENTOO_MIRROR}/fontconfig-${PV}.tar.gz;name=fontconfig"
- SRC_URI[fontconfig.md5sum] = "77e15a92006ddc2adbb06f840d591c0e"
- SRC_URI[fontconfig.sha256sum] = "fa2a1c6eea654d9fce7a4b1220f10c99cdec848dccaf1625c01f076b31382335"
- 
--- 
-1.6.3.3
+Acked-by: Roman I Khimov <khimov@altell.ru>
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart1696085.9zVdoLMH5u
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAk0MYPkACgkQXJ70z+XgVcPgagCfcvcnIyFrBeMHYx6lTfzm4nSu
+9FkAnA33YI83zHHzo/jaJs7hzMVrnTPA
+=5gXN
+-----END PGP SIGNATURE-----
+
+--nextPart1696085.9zVdoLMH5u--
