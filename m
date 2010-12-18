@@ -1,23 +1,24 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1PTvAW-0000Rg-F3
+	(envelope-from <robert@erafx.com>) id 1PTwO4-00053J-Ln
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Dec 2010 12:41:44 +0100
-Received: from [192.168.1.2] (e180139016.adsl.alicedsl.de [85.180.139.16])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id F2A8758410E
+	Sat, 18 Dec 2010 13:59:48 +0100
+Received: by vws6 with SMTP id 6so618744vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Dec 2010 12:55:30 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Sat, 18 Dec 2010 04:59:44 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.220.76.7 with SMTP id a7mr578791vck.26.1292677182001; Sat, 18
+	Dec 2010 04:59:42 -0800 (PST)
+Received: by 10.220.178.72 with HTTP; Sat, 18 Dec 2010 04:59:41 -0800 (PST)
+X-Originating-IP: [24.165.208.114]
+In-Reply-To: <AANLkTim1ZFrjZuvJgKGB-+2wTNUAx5cdiNsRXK8bvRf9@mail.gmail.com>
+References: <AANLkTim1ZFrjZuvJgKGB-+2wTNUAx5cdiNsRXK8bvRf9@mail.gmail.com>
+Date: Sat, 18 Dec 2010 07:59:41 -0500
+Message-ID: <AANLkTikT2Y14XM+-iKGpesPDfX4KDMz5B=4z7PCKXSya@mail.gmail.com>
+From: Robert Foerster <robert@erafx.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTik+TNUXiWsBu5nY1wN3yR-qK4qAeSe3REbmysrD@mail.gmail.com>
-References: <AANLkTik+TNUXiWsBu5nY1wN3yR-qK4qAeSe3REbmysrD@mail.gmail.com>
-Organization: Vanille-Media
-Date: Sat, 18 Dec 2010 12:41:48 +0100
-Message-ID: <1292672508.15336.8.camel@saphir>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [RFC] Variable typing support
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: bitbake git head issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,18 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Dec 2010 11:41:44 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Dec 2010 12:59:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-This is a good idea, especially for boolean since we have
-a nightmare with "0", "1", "True", "False", "Yes", "No" etc.
-in our metadata.
+On Sat, Dec 18, 2010 at 6:16 AM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
 
-Cheers,
+> Hi,
+>
+> If I use bitbake git head I get:
+>
+> frans@linux-suse:~/oe/openembedded> bitbake james-image
+> Process ProcessServer-1:
+> Traceback (most recent call last):
+>  File "/usr/lib/python2.6/multiprocessing/process.py", line 231, in
+> _bootstrap
+>    self.run()
+>  File "/home/frans/oe/bitbake/lib/bb/server/process.py", line 95, in run
+>    [NULL, NULL, NULL]):
+>  File "/usr/lib/python2.6/contextlib.py", line 16, in __enter__
+>    return self.gen.next()
+>  File "/home/frans/oe/bitbake/lib/bb/utils.py", line 805, in redirected_fds
+>    old_fds.append(os.dup(fd))
+> OSError: [Errno 9] Bad file descriptor
+>
+>
+What's the status of /dev/null on your system?  ls -l /dev/null ?
 
--- 
-:M:
+Bob
 
 
+
+> I did not fully bisect it but rev
+> 144887553097a288a76b8de78f71548d5ef9a350 still works fine with me.
+> The problem seems to be introduced in one of the next 5 or so commits
+> after that one.
+>
+> Frans.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
