@@ -1,41 +1,26 @@
-Received: from mail-fx0-f42.google.com ([209.85.161.42])
+Received: from mail-ew0-f44.google.com ([209.85.215.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PTs7j-0003u4-HV
+	(envelope-from <jay@jay-tech.ru>) id 1PTsCy-00043o-KZ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Dec 2010 09:26:39 +0100
-Received: by fxm11 with SMTP id 11so1349294fxm.29
+	Sat, 18 Dec 2010 09:32:04 +0100
+Received: by ewy8 with SMTP id 8so732245ewy.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Dec 2010 00:26:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=W+jEAZAujfM2e4HLSrtmjpGt5EV4CDQGaIFdbs9EZXs=;
-	b=aXvtUpH7lBoamX0AYJ4VG7knLRwdQUdYzyT8UyMhB5Txqr1QdDqQm3Edem+9pS+DQM
-	VExWAQ51seg6QTY1+SDwXPbqEAyHK/4+NAawW/RAsl160XrgEFUI9W34igitlUllRJif
-	zy3MzftRcNWd73L3XuiVDxn1WomQwguUP4UHE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=drl4MoFvuzGjvK8k2ElWXUNtOa96GwsPx+T0pTWrEq5+MeLbdWu9pcaA5S7Clbe+hy
-	w0885FTvYpQwdClviTuhSQzpxh9sRoyhx04AQ6klx9Uvm5rPzbciFF97d4inQ2GCqVHK
-	cvqo34FDyPA3CibepXZKmisikQmwSOFJKnjZY=
-Received: by 10.223.95.203 with SMTP id e11mr1632835fan.60.1292660791807;
-	Sat, 18 Dec 2010 00:26:31 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l14sm318319fan.33.2010.12.18.00.26.30
+	Sat, 18 Dec 2010 00:32:02 -0800 (PST)
+Received: by 10.213.101.5 with SMTP id a5mr2052001ebo.93.1292661122081;
+	Sat, 18 Dec 2010 00:32:02 -0800 (PST)
+Received: from mozart.localnet (95-29-187-197.broadband.corbina.ru
+	[95.29.187.197])
+	by mx.google.com with ESMTPS id q58sm908304eeh.15.2010.12.18.00.31.58
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 18 Dec 2010 00:26:30 -0800 (PST)
-Date: Sat, 18 Dec 2010 09:26:51 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 18 Dec 2010 00:31:58 -0800 (PST)
+Sender: Yury Bushmelev <jay@jay-tech.ru>
+From: Yuri Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101218082651.GH19482@jama>
-References: <1292507333-20222-1-git-send-email-Martin.Jansa@gmail.com>
-	<4D0B7C5B.2020302@cbnco.com>
+Date: Sat, 18 Dec 2010 11:31:27 +0300
+User-Agent: KMail/1.13.5 (Linux/2.6.36-ARCH; KDE/4.5.4; x86_64; ; )
 MIME-Version: 1.0
-In-Reply-To: <4D0B7C5B.2020302@cbnco.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [RFC] xorg: upgrade to X11R7.6 and remove preferred-xorg-versions*.inc files
+Message-Id: <201012181131.27436.jay4mail@gmail.com>
+Subject: e2fsprogs do_install failed ('uuid' absence)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,45 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Dec 2010 08:26:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 18 Dec 2010 08:32:04 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Dec 17, 2010 at 10:06:03AM -0500, Michael Smith wrote:
-> Martin Jansa wrote:
-> > * X11R7.6-RC1 was already released
-> >   http://www.x.org/releases/X11R7.6-RC1/doc/xorg-docs/ReleaseNotes.html
-> >   so it's IMHO time to start migration there
-> 
-> >  .../include/angstrom-2010-preferred-versions.inc   |    1 -
-> >  .../preferred-xorg-versions-X11R7.5-latest.inc     |  126 ------
-> >  .../include/preferred-xorg-versions-X11R7.5.inc    |  286 -------------
-> 
-> Hi Martin,
+Hello!
 
-Hi Michael,
+Most of my tonight's build was failed because of e2fsprogs.
+Bitbake master, latest OE tree.
 
-thanks for comment.
+Below are links to tinderbox but all logs was truncated today. Looks like close() was not called before oestats-client uploaded the log.
 
-> As someone who has to update an embedded X11 build maybe once or twice a 
->   year, but still wants to pull in other OE changes once in a while in 
-> between, I'd prefer to see the X11R7.5 includes stick around. There are 
-> many packages and it's hard for a non-expert to know which versions are 
-> meant to be used together.
+http://tinderbox.openembedded.net/packages/1352620/
+http://tinderbox.openembedded.net/packages/1354448/
+http://tinderbox.openembedded.net/packages/1355387/
+http://tinderbox.openembedded.net/packages/1364600/
 
-Well I understand your point, but imho it's valid only in case X11R7.6 
-doesn't work on device you're supporting. I haven't seen any "dangerous" 
-changes between 7.5 and 7.6.
-
-In other words, my proposal was about single set of versions maintained
-as most other recipes, just with keeping latest unless maintainer puts
-negative D_P there, so no need for any non-expert to know which versions
-are meant to be used together and keep one globally tested set with
-"rolling" updates instead jumping whole X11R* release once a year.
-
-Regards,
+Typical log message is below:
+| make[1]: Leaving directory `/storage/oe/testbuilder/build/testing/angstrom-2008.1/armv5/work/armv5te-angstrom-linux-gnueabi/e2fsprogs-1.41.12-
+r26/e2fsprogs-1.41.12/intl'
+| mv: cannot stat `/storage/oe/testbuilder/build/testing/angstrom-2008.1/armv5/work/armv5te-angstrom-linux-gnueabi/e2fsprogs-1.41.12-
+r26/image/sbin/uuid': No such file or directory
+NOTE: package e2fsprogs-1.41.12-r26: task do_install: Failed
+ERROR: Function 'do_install' failed (see /storage/oe/testbuilder/build/testing/angstrom-2008.1/armv5/work/armv5te-angstrom-linux-
+gnueabi/e2fsprogs-1.41.12-r26/temp/log.do_install.18126 for further information)
 
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Yury Bushmelev
 
 
