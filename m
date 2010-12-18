@@ -1,37 +1,39 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PTxxJ-000705-MJ
+	(envelope-from <kergoth@gmail.com>) id 1PTypA-00089b-8T
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Dec 2010 15:40:17 +0100
-Received: by iyj18 with SMTP id 18so1163772iyj.6
+	Sat, 18 Dec 2010 16:35:56 +0100
+Received: by wwi17 with SMTP id 17so1622228wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Dec 2010 06:40:13 -0800 (PST)
+	Sat, 18 Dec 2010 07:35:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=OtQ9t/CBo9ptyzF2NV4RDIulEzPMDQ95VwXNkq6oOf4=;
-	b=XormxIytEZ8s7pja1OvIRitcPz4Mut7is2DOkkZad+Y1lznX+zqhJ+AxHA2Jbhtb/S
-	4eK11dk4+5rpOAqeK+aQs/I/sl9Ixeg6xw2eIJwwFAU+LPSCh8nPcHHVRY7WCpK/3Rr/
-	hnzyIqfnIhnTv/YycCLdlQDoF+dfii/ZTIW3g=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:cc:content-type:content-transfer-encoding;
+	bh=jffUIy8ITamqQlzZm7S+ex6/K1YkaAv8LCSsOTc9SfA=;
+	b=xQRvswozLsL5of81JLtEiP8Aob8cXfVaJcecRd7vLhSatQC1DlmTzldqcbC9t6nmI7
+	/mO8IDo+5GPZEOT2SIHkq32DIDGOaQ40j7f3v36BXuoQTZlxKBmmcKIG+3w+FRhK3f77
+	KP7Z0HdC25yb97dRQuvyCjnf4OVsCYKsv4+ns=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=GngsKcV/GIRVreQtPMkzrAx6cDOOSQL8rB4AwGWtMz+B9htHmGWDFHRjsstd4utmCp
-	oHvlY8RbPtUgJSqjmhoyATkpsg847yYV0b+so1wINuLowMX/qVUIUE6IIziK6vu2WMiI
-	fkD0VDyZ9dLT7DZ9WL/1y+tSrvAVz5/Yqnebw=
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	b=tBICbwFMHC1++1WrBrRPKoku7MaEfP+uXkmrj+Bhowui7cONJZNmLvnOOuENZ75jwj
+	YTxpQWPy4Fjmcip8GcwwBeiMFXLYDQamKOuXlQMliz18wE0Lih29AN0At50SbYGTNLRy
+	PW2RrxMEQzqE3AUYO89W/5jcOSOSg5SSvKYac=
+Received: by 10.216.220.219 with SMTP id o69mr2605598wep.57.1292686552845;
+	Sat, 18 Dec 2010 07:35:52 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.231.38.10 with SMTP id z10mr1984068ibd.107.1292683212816; Sat,
-	18 Dec 2010 06:40:12 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Sat, 18 Dec 2010 06:40:12 -0800 (PST)
-In-Reply-To: <AANLkTinBWptJBBgLtsae9_80CdxwWTEP-L-hiCFzFWLC@mail.gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.216.67.67 with HTTP; Sat, 18 Dec 2010 07:35:04 -0800 (PST)
+In-Reply-To: <AANLkTim1ZFrjZuvJgKGB-+2wTNUAx5cdiNsRXK8bvRf9@mail.gmail.com>
 References: <AANLkTim1ZFrjZuvJgKGB-+2wTNUAx5cdiNsRXK8bvRf9@mail.gmail.com>
-	<AANLkTikT2Y14XM+-iKGpesPDfX4KDMz5B=4z7PCKXSya@mail.gmail.com>
-	<AANLkTi=ptFSTuWbvkEAg+5EsLgyeBzWsrPYvr5TLf=PR@mail.gmail.com>
-	<AANLkTinBWptJBBgLtsae9_80CdxwWTEP-L-hiCFzFWLC@mail.gmail.com>
-Date: Sat, 18 Dec 2010 15:40:12 +0100
-Message-ID: <AANLkTimhOoG9Euq06jBibbBdbF7TPjcSxOg-xcf-fra+@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org, bitbake-dev@lists.berlios.de
+From: Chris Larson <clarson@kergoth.com>
+Date: Sat, 18 Dec 2010 08:35:04 -0700
+X-Google-Sender-Auth: t9LHxIZCLCsl5scheVlFpuR4s3k
+Message-ID: <AANLkTimkoAmu_Qy=t635mP3ufHTqhUbQbr4PTpMjFBLq@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: bitbake-dev@lists.berlios.de
 Subject: Re: bitbake git head issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,27 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Dec 2010 14:40:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 18 Dec 2010 15:35:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-I did some more analysis on this by popping commits.
+On Sat, Dec 18, 2010 at 4:16 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> If I use bitbake git head I get:
+>
+> frans@linux-suse:~/oe/openembedded> bitbake james-image
+> Process ProcessServer-1:
+> Traceback (most recent call last):
+> =C2=A0File "/usr/lib/python2.6/multiprocessing/process.py", line 231, in =
+_bootstrap
+> =C2=A0 =C2=A0self.run()
+> =C2=A0File "/home/frans/oe/bitbake/lib/bb/server/process.py", line 95, in=
+ run
+> =C2=A0 =C2=A0[NULL, NULL, NULL]):
+> =C2=A0File "/usr/lib/python2.6/contextlib.py", line 16, in __enter__
+> =C2=A0 =C2=A0return self.gen.next()
+> =C2=A0File "/home/frans/oe/bitbake/lib/bb/utils.py", line 805, in redirec=
+ted_fds
+> =C2=A0 =C2=A0old_fds.append(os.dup(fd))
+> OSError: [Errno 9] Bad file descriptor
+>
+> I did not fully bisect it but rev
+> 144887553097a288a76b8de78f71548d5ef9a350 still works fine with me.
+> The problem seems to be introduced in one of the next 5 or so commits
+> after that one.
 
-THis commit
-
-commit 416dfe211ff0c37d746efe113bb6064b7e57d43a
-Author: Chris Larson <chris_larson@mentor.com>
-Date:   Fri Dec 10 10:37:11 2010 -0700
-
-    server: kill stdin/stdout/stderr
-
-    This ensures that nothing run from the server can touch the console, in
-    particular event handlers and python tasks, both of which can use bb.msg or
-    the bitbake loggers to send output to the UI in a correct fashion instead.
-
-
-Seems to be the bad guy. If I reset until this commit,  I get the error.
-If I then drop one more commit (git reset --hard HEAD^) the problem is gone.
-
-Frans
+There are 32 commits after that one, not 5 ;)
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
