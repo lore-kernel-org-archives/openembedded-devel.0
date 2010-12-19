@@ -1,37 +1,33 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from fallback1.mail.ru ([94.100.176.18])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PUD3A-0001gu-61
+	(envelope-from <nyrl@mail.ru>) id 1PUNLR-0001Le-Hy
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Dec 2010 07:47:20 +0100
-Received: by gyh20 with SMTP id 20so830642gyh.6
+	Sun, 19 Dec 2010 18:46:53 +0100
+Received: from f212.mail.ru (f212.mail.ru [217.69.128.149])
+	by fallback1.mail.ru (mPOP.Fallback_MX) with ESMTP id A23C21F89F32
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Dec 2010 22:47:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=550XymH3v50tmPCI+Wlt/vrKAnOKbC8NGJy24wI2zTc=;
-	b=dGI7fpUmDgL7iDaAACFbFUgS+wozkYAFVY507tmx5/aS6uHGg8CWEo8njDpxUShE+u
-	gA1HVmSS4tRSw0oxGuKsZ4eUsXKzdNUD8ceDrRvOzIdRF+KG9pGpXmmyzNi7GonUr/ZR
-	Wz3odIts1vZ5G1gx8iAkwxilhbb7JUoeOOKaY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=fL9rMkwS+YPHJyen19c5/1nCXFLCya2Gr/M5q8FTnhP8Ho2LY2wi+fI48DYI+5j6EV
-	OmVJ07NavsqHsAZzajJ5UlF3jObp0EUkoc6MBcm3AGkugGul/cz6XBDuc3JY4ucKaOaZ
-	rF5Zj7oCabNYLQnx5fdINcAu4otfvMLvhtRVs=
-Received: by 10.90.97.19 with SMTP id u19mr4022041agb.166.1292741233768; Sat,
-	18 Dec 2010 22:47:13 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Sat, 18 Dec 2010 22:46:53 -0800 (PST)
-In-Reply-To: <4D0C8BCC.9050800@eukrea.com>
-References: <1292667009.12094.13.camel@mattotaupa>
-	<4D0C8BCC.9050800@eukrea.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 18 Dec 2010 22:46:53 -0800
-Message-ID: <AANLkTik2cV=NMv1=Xj1gd6pBaL-kVVo7=tUH9gmqTxCE@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: minimal{, -uclibc}: linux-omap-psp_2.6.32: task `do_compileconfigs` fails
+	Sun, 19 Dec 2010 20:41:04 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
+	s=mail; 
+	h=Message-Id:Content-Type:Reply-To:Date:Mime-Version:Subject:To:From;
+	bh=2OaoXzmlS4zUIV5dUIDxG58ZKgWV8IbQOXCUgR5ykBA=; 
+	b=LskLHlt7Dw0fxWxTFPnAwgU9RlSJFg7noUcmryubbN6zXdKUFxJ2EbtEI+pYWJEE12dh2TJ6n9p68y7/IMeR1JCWsUAL/QKeuYGg5rsOX/Ci6D8mrDgkkaDgZVELVyz5;
+Received: from mail by f212.mail.ru with local id 1PUNFl-0004B8-00
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Dec 2010 20:41:01 +0300
+Received: from [95.55.187.105] by win.mail.ru with HTTP;
+	Sun, 19 Dec 2010 20:41:01 +0300
+From: Denis Dydychkin <nyrl@mail.ru>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0
+X-Mailer: mPOP Web-Mail 2.19
+X-Originating-IP: [95.55.187.105]
+Date: Sun, 19 Dec 2010 20:41:01 +0300
+Message-Id: <E1PUNFl-0004B8-00.nyrl-mail-ru@f212.mail.ru>
+X-Spam: Not detected
+X-Mras: Ok
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Source distribution broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Dec 2010 06:47:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 19 Dec 2010 17:46:53 -0000
+Content-Type: text/plain; charset=koi8-r
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 18, 2010 at 2:24 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> Hi,
->
-> On 18/12/2010 11:10, Paul Menzel wrote:
->>
->> Error: selected processor does not support ARM mode `smc #0'
->
-> this seems to be a known problem with gcc 4.5 :
-> https://bugs.launchpad.net/ubuntu/+source/gcc-4.5/+bug/669912
->
-Eric
 
-Its not a gcc problem to clarify. Its just that older compilers did
-not differentiate security extentions presence.
-http://kernel.ubuntu.com/git?p=3Dubuntu/ubuntu-natty.git;a=3Dcommitdiff;h=
-=3D1ebe13dea156358f1044a7a755f02945ad3890e4;hp=3Df31ff7673ef77d04e74e1a1e45=
-bb2940781f35f0
 
-http://kernel.ubuntu.com/git?p=3Dubuntu/ubuntu-natty.git;a=3Dcommitdiff;h=
-=3D99340d7b23f3df75d9b752fb25088a10064cd0a6;hp=3D9523bd6810e0229a8147e8c3d6=
-498e2f40b38974
+> Is the source distribution functionality broken?
 
-are the fixes you should apply to kernel.
+> The only thing that is stored in the TMPDIR/deploy/glibc/sources is a M=
+IT
+> directory with the minimal-image/minimal-image.bb file.
 
-> Eric
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> If set to something else instead of "do_build" like "do_compile" will t=
+rigger a
+> lot of src_distribute calls and copying of files for a lot of licenses =
+to
+> TMPDIR/deploy/glibc/sources.
+
+Try bitbake minimal-image -c buildall
+
+As far as I got it, do_build target is *not* invoked for each dependent p=
+ackage while building image since it is not required (unlike do_compile w=
+hich is required). To ensure that do_build is called for each packet belo=
+nging to image, you should use do_buildall target for whole image.
+
+I suppose (never tried) that calling bitbake minimal-image -c distribute_=
+sources_all is enough to generate sources if you just need them.
 
 
