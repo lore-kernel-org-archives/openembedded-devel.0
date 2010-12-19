@@ -1,33 +1,24 @@
-Received: from mail-fx0-f42.google.com ([209.85.161.42])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1PURav-00065Y-Gz
+	(envelope-from <philip@balister.org>) id 1PURhN-0006Ee-GV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Dec 2010 23:19:09 +0100
-Received: by fxm11 with SMTP id 11so2170001fxm.29
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Dec 2010 14:19:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=kaGr5SGnF8On9RUHLnLyLpbeSfsoEAELgZTDK4CYk3M=;
-	b=q4flOLpOGdgU8QvPmfwAtmLDYZDdgr+HRaT81gCh4gfT+DT9xhsu5nmVjGnsOot37y
-	l57uyrM+yzmXsHC3eJJP3uR/nannti+/nYi6kgXTBnF632Jc3pc58KEHJpUN8bNMW9l7
-	LKC6tcydKjQIo4x4E6WKZBI0wtJBKwXP7RYp8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=I5D8DHMnmr17hB26dHc8LhCoChaVwl1cpHEzL5xIvb5aNRWYw4QGc1WRVaGrW5T64Z
-	OQ0DEEeOWZxhPOKKoADIz3a9Fg1RoM+T1Sj/CXBggt3Yw7o7ft8aH3NpsQLh0y59pGdo
-	kMFan20iw9krJHkD93qrHrMSdeWDf/pseiMlU=
-Received: by 10.223.72.6 with SMTP id k6mr3857386faj.46.1292797144073; Sun, 19
-	Dec 2010 14:19:04 -0800 (PST)
+	Sun, 19 Dec 2010 23:25:51 +0100
+Received: (qmail 7263 invoked by uid 1003); 19 Dec 2010 22:25:43 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	19 Dec 2010 22:25:43 -0000
+Message-ID: <4D0E865D.8010002@balister.org>
+Date: Sun, 19 Dec 2010 17:25:33 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.223.110.140 with HTTP; Sun, 19 Dec 2010 14:18:43 -0800 (PST)
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Sun, 19 Dec 2010 15:18:43 -0700
-Message-ID: <AANLkTiknCPruK-CPRKg7hkzhL02Byqk42Tur0a6_fu-7@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: python-inotify broken
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTiknCPruK-CPRKg7hkzhL02Byqk42Tur0a6_fu-7@mail.gmail.com>
+In-Reply-To: <AANLkTiknCPruK-CPRKg7hkzhL02Byqk42Tur0a6_fu-7@mail.gmail.com>
+Subject: Re: python-inotify broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Dec 2010 22:19:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 19 Dec 2010 22:25:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-python-inotify, (bearing no relation to pyinotify or python-inotifyx, btw)
-is broken.
-it compiles, but it doesn't work.
+On 12/19/2010 05:18 PM, AJ ONeal wrote:
+> python-inotify, (bearing no relation to pyinotify or python-inotifyx, btw)
+> is broken.
+> it compiles, but it doesn't work.
+>
+> Can someone else confirm?
+> test case:
+> https://github.com/coolaj86/python-examples/tree/master/inotify
+>
+> After a few events it just freezes.
+>
+> I've also informed the author.
+>
+> Generally speaking, is there much point in leaving a library in OE that
+> gives false
+> hope and then shatters dreams and crushes aspirations?
 
-Can someone else confirm?
-test case:
-https://github.com/coolaj86/python-examples/tree/master/inotify
+Now you know it is broken, you should fix. Better for people to have a 
+place to start and not reinvent the wheel.
 
-After a few events it just freezes.
+Deleting something just because it does not work is silly. Better to 
+figure out why and fix it.
 
-I've also informed the author.
+Philip
 
-Generally speaking, is there much point in leaving a library in OE that
-gives false
-hope and then shatters dreams and crushes aspirations?
-
-AJ ONeal
 
