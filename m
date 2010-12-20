@@ -1,34 +1,24 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>) id 1PUbCc-0004VZ-Fa
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Dec 2010 09:34:43 +0100
-Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
-	id 1PUbCX-00049R-Qg by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Dec 2010 09:34:39 +0100
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1PUbCV-0001H5-Nc
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Dec 2010 09:34:35 +0100
-Date: Mon, 20 Dec 2010 09:34:35 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PUgXJ-0007E8-Ql for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Dec 2010 15:16:25 +0100
+Received: from f053037216.adsl.alicedsl.de ([78.53.37.216]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PUgXG-0005Vf-C2 for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Dec 2010 14:16:22 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101220083435.GB3776@excalibur.local>
-References: <20101213081533.GE31742@excalibur.local>
-MIME-Version: 1.0
-In-Reply-To: <20101213081533.GE31742@excalibur.local>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
-	autolearn=ham version=3.2.5
-Subject: Re: [ANNOUNCE] Next patchwork weekend december 17. - 19.
+In-Reply-To: <20101220031047.GB26429@gmail.com>
+References: <1292521608-26072-1-git-send-email-Chase.Maupin@ti.com>
+	<20101220031047.GB26429@gmail.com>
+Date: Mon, 20 Dec 2010 15:16:20 +0100
+Message-ID: <1292854580.8833.15.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH] lftp: add ti LFTB recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +32,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2010 08:34:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Dec 2010 14:16:25 -0000
+X-Groupsio-MsgNum: 27292
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-bUXE9V5EZ64SLjcLS2RH"
 
-Hello.
+--=-bUXE9V5EZ64SLjcLS2RH
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2010-12-13 at 09:15, Stefan Schmidt wrote:
-> 
-> As already written in the other patchwork thread I would like to hold another
-> patchwork weekend.
-
-This weekend more or less turned out as a failure. I had way less time this
-weekend to coordinate and motivate people and so it more or less got forgotten.
-
-We are down from 179 to 167 patches in the old patchwork installation though.
-
-A lot of these outstanding patches are just in an unclear state: applied but not
-updated in patchwork, a better fix applied, waiting for feedback, does not apply
-anymore,...
-
-I will go over the patches step by step in january but would appreciate if
-people could have a look at their own patches sitting there to update the
-status.
-
-regards
-Stefan Schmidt
+Dear Naresh and Chase,
 
 
+I am adding my comments to Khem=E2=80=99s.
+
+
+Am Sonntag, den 19.12.2010, 19:10 -0800 schrieb Khem Raj:
+> On (16/12/10 11:46), Chase Maupin wrote:
+
+First of all the commit summary should be.
+
+	lftb: add TI LFTP 2.0
+
+lft*b*
+
+> > From: naresh <naresh@ti.com>
+
+If there is no compelling reason against it usually the real name
+(Naresh Medisetty) is used.
+
+> > * This package contains functional test suites for TI devices
+> >   used to verify the Linux kernel and drivers for the various
+> >   peripherals found on TI devices.
+> >=20
+> > Signed-off-by: naresh <naresh@ti.com>
+
+Here too.
+
+> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> > ---
+> >  recipes/ti/ti-lftb.inc    |   47 +++++++++++++++++++++++++++++++++++++=
+++++++++
+> >  recipes/ti/ti-lftb_2.0.bb |    9 ++++++++
+> >  2 files changed, 56 insertions(+), 0 deletions(-)
+> >  create mode 100644 recipes/ti/ti-lftb.inc
+> >  create mode 100644 recipes/ti/ti-lftb_2.0.bb
+> >=20
+> > diff --git a/recipes/ti/ti-lftb.inc b/recipes/ti/ti-lftb.inc
+> > new file mode 100644
+> > index 0000000..176f983
+> > --- /dev/null
+> > +++ b/recipes/ti/ti-lftb.inc
+> > @@ -0,0 +1,47 @@
+> > +DESCRIPTION =3D "Linux Functional test bench"
+>=20
+> may be F should be f
+>=20
+> > +HOMEPAGE =3D "http://arago-project.org/git/projects/?p=3Dtest-automati=
+on/target-code/psp/lftb.git;a=3Dsummary"
+> > +LICENSE=3D"BSD"
+> > +
+> > +INC_PR =3D "r1"
+>=20
+> New recipes begin at 'r0'
+>=20
+> > +
+> > +DEPENDS =3D "virtual/kernel"
+> > +
+> > +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> > +
+> > +COMPATIBLE_MACHINE =3D "(dm365|dm355|dm6446|dm6467|omapl137|omapl138|o=
+map3|ti816x)"
+> > +
+>=20
+> could it use SOC_FAMILY
+>=20
+>=20
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +#Machine specific overrides
+> > +PLATFORM_omap3evm=3D"omap35x"
+> > +PLATFORM_am180x-evm=3D"am18x"
+> > +PLATFORM_am3517-evm=3D"am3517"
+> > +PLATFORM_am37x-evm=3D"am37x"
+> > +PLATFORM_beagleboard=3D"beagle"
+> > +PLATFORM_da830-omapl137-evm=3D"am17x"
+> > +PLATFORM_da850-omapl138-evm=3D"am18x"
+> > +PLATFORM_am181x-evm=3D"am18x"
+> > +PLATFORM_dm355-evm=3D"dm355"
+> > +PLATFORM_dm365-evm=3D"dm365"
+> > +PLATFORM_dm37x-evm=3D"am37x"
+> > +PLATFORM_dm6446-evm=3D"dm644x"
+> > +PLATFORM_dm6467-evm=3D"dm646x"
+> > +PLATFORM_ti816x=3D"ti816x"
+> > +
+> > +do_compile () {
+
+I think the coding sytle is without a space before `()`.
+
+> > +    cd ${S}
+> > +    make KERNEL_DIR=3D${STAGING_KERNEL_DIR} PLATFORM=3D${PLATFORM} TOO=
+L_PREFIX=3D${TARGET_PREFIX}
+> > +}
+> > +
+> > +do_install () {
+> > +    install -d ${D}${bindir}/lftb
+> > +    cd ${S}
+>=20
+> is this cd needed ?
+>=20
+> > +    make INSTALL_DIR=3D${D}${bindir}/lftb install
+> > +
+> > +    # Remove unneeded tarball placed in bindir by install target
+> > +    rm -rf ${D}${bindir}/lftb.tar.gz
+> > +}
+> > +
+> > +INSANE_SKIP_${PN} =3D True
+> > +
+> > +FILES_${PN} =3D "${bindir}/lftb"
+> > diff --git a/recipes/ti/ti-lftb_2.0.bb b/recipes/ti/ti-lftb_2.0.bb
+> > new file mode 100644
+> > index 0000000..62c936c
+> > --- /dev/null
+> > +++ b/recipes/ti/ti-lftb_2.0.bb
+> > @@ -0,0 +1,9 @@
+> > +require ti-lftb.inc
+> > +
+> > +SRCREV =3D "3d0be58aee659ef7e8eda43e916172bab300235f"
+> > +
+> > +PR =3D "${MACHINE_KERNEL_PR}+${INC_PR}"
+> > +PR_append =3D "a"
+> > +
+> > +SRC_URI =3D "git://arago-project.org/git/projects/test-automation/targ=
+et-code/psp/lftb.git;protocol=3Dgit \
+> > +"
+
+
+Thanks,
+
+Paul
+
+--=-bUXE9V5EZ64SLjcLS2RH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0PZS4ACgkQPX1aK2wOHVitdgCcCDvNMJkL9uYkA75dftnjm8XO
+A0cAnR2lwyJiesmyIVVvjXZxGjgKEvXd
+=8HsS
+-----END PGP SIGNATURE-----
+
+--=-bUXE9V5EZ64SLjcLS2RH--
