@@ -1,40 +1,41 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-pz0-f41.google.com ([209.85.210.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PUXUD-00054z-Su
+	(envelope-from <raj.khem@gmail.com>) id 1PUa78-0003NM-A1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Dec 2010 05:36:37 +0100
-Received: by wwi17 with SMTP id 17so2501558wwi.24
+	Mon, 20 Dec 2010 08:24:58 +0100
+Received: by pzk27 with SMTP id 27so799256pzk.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Dec 2010 20:36:33 -0800 (PST)
+	Sun, 19 Dec 2010 23:24:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=5wKV1osXGU09qWDg6GJycsCSYfKNZu0BXPBpsp5olxc=;
-	b=RA+nw2OHs43Fe9aqIXoZGwqTn8TIhN6LWsEZ2VRROIO+ScIoc6tsPKI6jB3vKf5vMO
-	WNXG6daa6vuNgUL9ufIA4hAODcWUXGPWznRdr5TTMXXsLbare9X4aesjGMpE1zjv4lUF
-	YR+8bUe8vTYSj4Y3bpezwI49P2oEDfTpG90PE=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=yR0R04oY4fcOjyHhLVM/FdCxvrA7T0epv8ZzS9x+BdU=;
+	b=c5BWRwxnjJPwIxBgLLFHEGMaXP8gB+3+ZL67izoJmtwaq/VIL3foX9i9pZ31lPBXsV
+	AI4j9MJZOEXiy+9OSGbXVB9nSX0qPwleOsirrW3ekPCsmkl33KC50SHSfMEGNfXML7VY
+	MUz22Pj63WVbxU9L0HpSQONPEYM1NcUbIwV3I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=OKql3aqZ1mVdCjDWQ43ceKvpoWrL8eYfU8WZsXXixj/gOK7BW5T7UC7pC/FgoFupd9
-	fnTt7sJxz53syT5jv5B3uqJLEHY6uOn8rBF7SJHy9DzI/iLUt8zVkE/5enwJIo658zYr
-	+HryUBCmOBz3cTOaJJk96ZZiJh96fSu6AHx8c=
-Received: by 10.216.150.134 with SMTP id z6mr4257273wej.27.1292819792862; Sun,
-	19 Dec 2010 20:36:32 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Sun, 19 Dec 2010 20:36:11 -0800 (PST)
-In-Reply-To: <AANLkTik=T2vcvcpbM2_nxdycS=1EvOJj=mwzp3HHfTZC@mail.gmail.com>
-References: <AANLkTikotnoR4+_vA7_O1xAyRj5FBosconGFkWjSfzr4@mail.gmail.com>
-	<AANLkTi=GGyxNfDzV==iO+nNPKqoShRbUXLY-QDAUMzrN@mail.gmail.com>
-	<AANLkTik=T2vcvcpbM2_nxdycS=1EvOJj=mwzp3HHfTZC@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sun, 19 Dec 2010 21:36:11 -0700
-X-Google-Sender-Auth: EnNZe9HV3lBs75EnmwBPDFpf9FU
-Message-ID: <AANLkTim+tDLOaSn2wwZTw6WoUhgAXCdchve1rBRWKp-s@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=ImpfSkXfweqowcTqcEZ3w66DKu5PwHha5fef22EFctHibxdsPltnS/24S+biA86Xr5
+	XkXmSx2OoPUhcPMDRam4LKcdZ6K41Z3TCmO4aBEmEiJcXIsEmdK41gsUKNIZCTmpeH4N
+	pY0BLPeSUDhEZwdsRGZDlPxEWDAbXylXWgfoQ=
+Received: by 10.142.12.4 with SMTP id 4mr3101953wfl.242.1292829890197;
+	Sun, 19 Dec 2010 23:24:50 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id w22sm5404307wfd.19.2010.12.19.23.24.48
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 19 Dec 2010 23:24:49 -0800 (PST)
+Date: Sun, 19 Dec 2010 23:24:58 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Building Image with all dbg packages?
+Message-ID: <20101220072458.GA17079@gmail.com>
+References: <1292507333-20222-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1292507333-20222-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [RFC] xorg: upgrade to X11R7.6 and remove preferred-xorg-versions*.inc files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +49,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2010 04:36:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 20 Dec 2010 07:24:58 -0000
+X-Groupsio-MsgNum: 27290
+Content-Type: multipart/mixed; boundary="n8g4imXOkfNTN/H1"
+Content-Disposition: inline
 
-On Sun, Dec 19, 2010 at 9:16 PM, AJ ONeal <coolaj86@gmail.com> wrote:
-> Is there someway that I can tell it to ignore the several packages that
-> don't have dbg packages?
->
-> ERROR: Required build target coolaj86-image' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['coolaj86-image',
-> 'upstart-sysvcompat-dbg']
+--n8g4imXOkfNTN/H1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Not currently.  bitbake should really do a better job of handling
-RRECOMMENDS.  The better bet would be to change those recipes to use
-more standard packaging, make them emit a -dbg, the way the default
-PACKAGES does.  As an alternative, you can test with INHERIT +=
-'package_dbg', which enables per-binary-package -dbg packages, but you
-need to do that from the beginning of the build if you use it.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+On (16/12/10 14:48), Martin Jansa wrote:
+> * X11R7.6-RC1 was already released
+>   http://www.x.org/releases/X11R7.6-RC1/doc/xorg-docs/ReleaseNotes.html
+>   so it's IMHO time to start migration there
+> * preferred-xorg-versions-live.inc was tracking latest stable released
+>   tarballs, but only reason I was maintaining it was to overwrite older
+>   preferred-xorg-versions-X11R7.5.inc if your distribution included ie
+>   X11R7.5.inc and you wanted live.inc from local.conf
+> * default recipe versions without any preferred-xorg-versions include
+>   are now the same as live.inc
+> * we will get better test coverage if we use same versions
+> * if someone really needs older release then pinning only core stuff
+>   like xserver/libx11 will be probably better, than pinning every xorg
+>   app/proto/font etc.
+> * I can slow down adding newest xorg stuff or ie keep it everytime for
+>   at least a week on ML for another review and test on more targets
+>   (I'm testing it only on om-gta02/spitz/nokia900)
+> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+I am still testing the builds on uclibc. However here is one patch you need
+to apply to mesa 7.9 (earlier it was using mesa 7.2) to get it building on
+uclibc.
+
+Thanks
+-Khem 
 
 
+--n8g4imXOkfNTN/H1
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="uclibc.patch"
+
+Index: Mesa-7.9/src/mesa/main/imports.c
+===================================================================
+--- Mesa-7.9.orig/src/mesa/main/imports.c
++++ Mesa-7.9/src/mesa/main/imports.c
+@@ -756,7 +756,7 @@ _mesa_strdup( const char *s )
+ float
+ _mesa_strtof( const char *s, char **end )
+ {
+-#if defined(_GNU_SOURCE) && !defined(__CYGWIN__) && !defined(__FreeBSD__)
++#if defined(_GNU_SOURCE) && !defined(__CYGWIN__) && !defined(__FreeBSD__) && !defined(__UCLIBC__)
+    static locale_t loc = NULL;
+    if (!loc) {
+       loc = newlocale(LC_CTYPE_MASK, "C", NULL);
+
+--n8g4imXOkfNTN/H1--
