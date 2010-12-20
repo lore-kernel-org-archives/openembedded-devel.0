@@ -1,33 +1,35 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PUj2D-0007Bx-MU
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PUjLz-0007tw-K7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Dec 2010 17:56:29 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 384B6A5AD4
+	Mon, 20 Dec 2010 18:16:55 +0100
+Received: by iyj18 with SMTP id 18so2477787iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Dec 2010 16:56:25 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id qgyOiyzHrwTv
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Dec 2010 16:56:24 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 49DA0A5AC9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Dec 2010 16:56:24 +0000 (GMT)
-Message-ID: <4D0F8AB7.1020104@xora.org.uk>
-Date: Mon, 20 Dec 2010 16:56:23 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Mon, 20 Dec 2010 09:16:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=BF+Fl7KUdPdYIJPGtdJxxYuRs99fmZ8OtC07ReIp+mI=;
+	b=g7XBpCLXeF64Y3s2U3ndIvIQbh2x6ijXSj1Q2cVFSNA2Zl/AYrPDwOxct3ZHJo+FEY
+	UY8xDAGlfhDCELFFEJeVNKGig6tPj5DUqfW3acOvJdFEiCYavaEdHIOuTF/AU9K7cA8j
+	da3KPLvxE4zSzIqKtVTs6hvwf+4sl/JU2p/UU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ojZL9lgP42cUSbqRJeheczANtzf7Hr16oAMujBu+jrV4vd6kmipU3rTyzHi0/U/RSf
+	q/kcEswd0oEkkM92SX4/Lr/+KIKB4uSFaaYy8QxRJXeqACT7Uzof9mochN589qHOR+DM
+	+QMhXlSgRwtTsNUhu5C2OSdUh2CEgtuVo71+0=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.231.149.194 with SMTP id u2mr4357036ibv.32.1292865409452; Mon,
+	20 Dec 2010 09:16:49 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Mon, 20 Dec 2010 09:16:49 -0800 (PST)
+In-Reply-To: <4D0F8AB7.1020104@xora.org.uk>
 References: <ienu66$5gf$1@dough.gmane.org>
-In-Reply-To: <ienu66$5gf$1@dough.gmane.org>
-X-Enigmail-Version: 1.1.1
+	<4D0F8AB7.1020104@xora.org.uk>
+Date: Mon, 20 Dec 2010 18:16:49 +0100
+Message-ID: <AANLkTiks4PYZxZCQgsprveY1jNQgpy_mMVTOwg3DtsqX@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,38 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2010 16:56:29 -0000
+X-List-Received-Date: Mon, 20 Dec 2010 17:16:55 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 20/12/2010 15:53, Koen Kooi wrote:
-> Hi,
->
-> I've locally split
-> http://gitorious.org/angstrom/angstrom-layers/commits/master into 3
-> seperate git repos with git-filter-branch. I would like to move the
-> meta-openembedded layer to the OE git server to make it easier for
-> others to help in cleaning it up and getting more use to layers. The
-> beagle and angstrom layers could move there as well, but those will need
-> a more restricted set of committers.
->
-> In essence I would like this to be the "official" OE layer for yocto
-> while the board is dealing with the yocto negotiations.
->
-> This would be a good chance to try out things like 'maintainers' and
-> 'pull requests' if we wanted to :)
->
-> regards,
->
-> Koen
-+1
+Nice piece of work & a good plan but...
 
-G
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Who will be the owners/maintainers of the layers?
+I maintain several multimedia recipes (mythtv with all that is dragged
+in (which is a.o. a lot of perl stuff), various cd*  related recipes,
+python-coherence and the python stuff it uses, mediatomb, and it seems
+recently people seem to see me as the first line of contact if they
+have musicpd issues), as well as some file sharing recipes.
+Any idea on how I get them added, and how to deal with updates for these?
 
+An alternate approach would be to let the stuff live in poky-extras.
+See this proposal from RP:
+http://www.mail-archive.com/yocto@yoctoproject.org/msg00286.html
 
+Frans.
+
+PS: personally I would have preferred it if console-image was in the
+common part.I guess some other recipes will get fairly identical
+recipes.
+Maybe we should have a generic console-image and let each distro use
+.bbappend or aminc to extend on it.
 
 
