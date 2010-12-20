@@ -1,41 +1,37 @@
-Received: from mail-gw0-f41.google.com ([74.125.83.41])
+Received: from mail-fx0-f42.google.com ([209.85.161.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PUWjE-00044D-Nk
+	(envelope-from <coolaj86@gmail.com>) id 1PUXB4-0004rO-36
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Dec 2010 04:48:04 +0100
-Received: by gwj22 with SMTP id 22so1398308gwj.28
+	Mon, 20 Dec 2010 05:16:50 +0100
+Received: by fxm11 with SMTP id 11so2307242fxm.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Dec 2010 19:47:59 -0800 (PST)
+	Sun, 19 Dec 2010 20:16:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=XA2XyI4c5UaAa4d5Leo8YRurBIGetNBpeEQFNh4t6R8=;
-	b=ObLqrJ1qOjDTksJMi5gtMTkV5utSbzAmcmu2Uj3/W6zuxNOmUcaDfCzrNPWUJYDyYW
-	1jZ79CjYFJfmTuhCn7H6HWgHGjYJI95f+rlW860gqA9QoVjg789okYjWIDYbN9IWyEJd
-	lwGriJ1ZbrQuxHvg1tGOcmYtefX96y2Bby9Qk=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=ZVMUmQjMt4ES8ho5juIx5o81CfTi96Zhuq/QtBq2S64=;
+	b=HsTvwCBQsTDPpEECBaxB2E9nqyzRbZHfuEsb4nLlhvm55sGYJoiH2oaXKes4RTzXPB
+	z5TTZH78yBfFclryDthDKqEZ+dRFqqY+Uv8obOV13kV8VY4JMqXxDJnd0g5bNCg665ru
+	rhKrCeVEX48TpSqPyWdV1O4PflOJ1WO65xUz0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=HpnxjDA/y8rmT3aFWHgxZvvQY93FjJj/n7OnycloSXi3rSUMGWW5J/qY4hLXKMU0Xm
-	xF5Da6MHmvxl+maMvCiEpv/StJ5hz0HU+wcaNICjaRumBPFQZxHsWfx8oPeKWZX6ULSl
-	7X2ND+qxVoEopU57Z8Xw/TjFfAtKUzOIhKPr0=
-Received: by 10.90.72.5 with SMTP id u5mr4895617aga.114.1292816878310;
-	Sun, 19 Dec 2010 19:47:58 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 37sm7771878anr.24.2010.12.19.19.47.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 19 Dec 2010 19:47:57 -0800 (PST)
-Date: Sun, 19 Dec 2010 19:48:09 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101220034809.GE26429@gmail.com>
-References: <AANLkTiknCPruK-CPRKg7hkzhL02Byqk42Tur0a6_fu-7@mail.gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=gNDversmEoKqjgzaGIAFHpgi19VLZMcdkydLB+D5tEO1k9a18ldT2OgPv7MCqk3xx4
+	t3w5+d6zVEvL5ZpfRbovrsYDRn9bGEzOjCCFZl3uyo8RrZlIC73YUZngXfW4kCfjBtda
+	q8/USdm6TRQZLcS9yQyobBqi4wgc8hPVyafP0=
+Received: by 10.223.103.6 with SMTP id i6mr4073207fao.84.1292818604305; Sun,
+	19 Dec 2010 20:16:44 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <AANLkTiknCPruK-CPRKg7hkzhL02Byqk42Tur0a6_fu-7@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: python-inotify broken
+Received: by 10.223.110.140 with HTTP; Sun, 19 Dec 2010 20:16:23 -0800 (PST)
+In-Reply-To: <AANLkTi=GGyxNfDzV==iO+nNPKqoShRbUXLY-QDAUMzrN@mail.gmail.com>
+References: <AANLkTikotnoR4+_vA7_O1xAyRj5FBosconGFkWjSfzr4@mail.gmail.com>
+	<AANLkTi=GGyxNfDzV==iO+nNPKqoShRbUXLY-QDAUMzrN@mail.gmail.com>
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Sun, 19 Dec 2010 21:16:23 -0700
+Message-ID: <AANLkTik=T2vcvcpbM2_nxdycS=1EvOJj=mwzp3HHfTZC@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Building Image with all dbg packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,32 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2010 03:48:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Dec 2010 04:16:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (19/12/10 15:18), AJ ONeal wrote:
-> python-inotify, (bearing no relation to pyinotify or python-inotifyx, btw)
-> is broken.
-> it compiles, but it doesn't work.
-> 
-> Can someone else confirm?
-> test case:
-> https://github.com/coolaj86/python-examples/tree/master/inotify
-> 
-> After a few events it just freezes.
-> 
-> I've also informed the author.
-> 
-> Generally speaking, is there much point in leaving a library in OE that
-> gives false
-> hope and then shatters dreams and crushes aspirations?
+Is there someway that I can tell it to ignore the several packages that
+don't have dbg packages?
 
-hmmm well its there, it may not be in best shape but I guess you get a
-starting point. here is your opportunity I guess you have to debug it and fix it if possible and
-contribute to OE
-someone who is stuck in same situation as you can help.
+ERROR: Required build target coolaj86-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['coolaj86-image',
+'upstart-sysvcompat-dbg']
 
--Khem
+AJ ONeal
 
+
+On Sun, Dec 19, 2010 at 6:54 PM, Chris Larson <clarson@kergoth.com> wrote:
+
+> On Sun, Dec 19, 2010 at 6:18 PM, AJ ONeal <coolaj86@gmail.com> wrote:
+> > How do I get all -dbg packages to be installed by default?
+> >
+> > I have
+> > DISTRO_TYPE = "debug"
+> > in build/conf/local.conf
+> >
+> > but when I gdb stuff I still get a bunch of
+> > ?? 0x2345() ??
+> >
+> > What else should I do?
+>
+> IMAGE_FEATURES += "dbg"
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
