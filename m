@@ -1,42 +1,42 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-pz0-f41.google.com ([209.85.210.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PUW93-0003R1-LK
+	(envelope-from <raj.khem@gmail.com>) id 1PUWEC-0003YT-RI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Dec 2010 04:10:41 +0100
-Received: by iyj18 with SMTP id 18so1954033iyj.6
+	Mon, 20 Dec 2010 04:16:01 +0100
+Received: by pzk27 with SMTP id 27so753196pzk.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Dec 2010 19:10:36 -0800 (PST)
+	Sun, 19 Dec 2010 19:15:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:cc:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=cFyz9IlbK86Eh4xxnmTJhCI3ZDVBsUh36YD5yWA4/P4=;
-	b=CSKqn38robYcPvN8kwAmwhbbH6Lzmv9hOj/G1ZnE4XVrwfAOQ1+NhFwFGOcRZQOmmY
-	mhok/K1VO7zYKNY7pmsw60GmwFH8sXSBrS5nN/fLBzKWPVCpY109KNIp8Yj8xRZT4FXC
-	OkD+7wI0gJYrtW/NY4P6+4cfiQCV/WfkhDlD4=
+	bh=rA6xNTumQgT18ubHNOd9xXnLa+lJA4MchYsjDIE3nvk=;
+	b=sSHnrl1HjEP+zC4He+krEBk0CRXq3/ZGL2VqwrCJ6elNQOweOz7shn2KtE1OQaoxM1
+	LH3jYVNASpCQNO2EFUn66BW4wf3BeqArNQ2FQPfd7mtLq3/ewjSCDkWBcntcvDLyqTLF
+	2ehWaYxx6qRKzHCDuvwgnBr+smko4TeodeWjU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=DoYDqzKLidU0PYpO8M9nfw6/0963yMtQ9PPAOKhviKsY7D6lczqXYOIcd0hOrLp3tQ
-	0PFwUXfM3JliTGt6rdSu5T+OmBwSzK42T6e5qh3y3UB7LAkVJ0hEwTgC1ZMginLfW3gK
-	nloEy+A7qxwm8IoV5UUVdeY+XDztWx3qQzTcg=
-Received: by 10.42.178.138 with SMTP id bm10mr3611109icb.277.1292814636104;
-	Sun, 19 Dec 2010 19:10:36 -0800 (PST)
+	b=Fuf1Hrt3ce35idsrc8+OU+ggwOoscdbHhBRXe4owmrbDe7i7tIfAmp88HJhArbKyyH
+	V3uMnx1tfO2lsDJHpUAVyIfTqw4y0PklEhur7Lua8GB4At+ifSjHhS7agqxzW6rWnWih
+	ixmArxx0RgJIQEIUvK+3dr6e/+yeWpy0oPis4=
+Received: by 10.142.89.20 with SMTP id m20mr2953002wfb.13.1292814954172;
+	Sun, 19 Dec 2010 19:15:54 -0800 (PST)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id z4sm3090270ibg.19.2010.12.19.19.10.34
+	by mx.google.com with ESMTPS id b11sm5112383wff.21.2010.12.19.19.15.52
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 19 Dec 2010 19:10:35 -0800 (PST)
-Date: Sun, 19 Dec 2010 19:10:47 -0800
+	Sun, 19 Dec 2010 19:15:53 -0800 (PST)
+Date: Sun, 19 Dec 2010 19:16:06 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101220031047.GB26429@gmail.com>
-References: <1292521608-26072-1-git-send-email-Chase.Maupin@ti.com>
+Message-ID: <20101220031606.GC26429@gmail.com>
+References: <1292540192-26920-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1292521608-26072-1-git-send-email-Chase.Maupin@ti.com>
+In-Reply-To: <1292540192-26920-1-git-send-email-Chase.Maupin@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: naresh <naresh@ti.com>, Chase Maupin <Chase.Maupin@ti.com>
-Subject: Re: [PATCH] lftp: add ti LFTB recipe
+Cc: Chase Maupin <Chase.Maupin@ti.com>
+Subject: Re: [PATCHv2] sourceipk: copy over hidden files and dirs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,107 +50,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2010 03:10:41 -0000
+X-List-Received-Date: Mon, 20 Dec 2010 03:16:01 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (16/12/10 11:46), Chase Maupin wrote:
-> From: naresh <naresh@ti.com>
+On (16/12/10 16:56), Chase Maupin wrote:
+> * Copy hidden files and directories such as eclipse
+>   project files.  Currently these files are not copied
+>   for the top-level directory which makes applications with
+>   eclipse project files not usable with eclipse.
+> * Only need to copy hidden files for the top-level directory
+>   since subdirectories do not experience this problem
 > 
-> * This package contains functional test suites for TI devices
->   used to verify the Linux kernel and drivers for the various
->   peripherals found on TI devices.
-> 
-> Signed-off-by: naresh <naresh@ti.com>
 > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+
 > ---
->  recipes/ti/ti-lftb.inc    |   47 +++++++++++++++++++++++++++++++++++++++++++++
->  recipes/ti/ti-lftb_2.0.bb |    9 ++++++++
->  2 files changed, 56 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/ti/ti-lftb.inc
->  create mode 100644 recipes/ti/ti-lftb_2.0.bb
+> updated in version 2:
+>     * Only copy hidden files in the top-level directory
+>     * Handle the case where there are no hidden files
+> ---
+>  classes/sourceipk.bbclass |   10 ++++++++++
+>  1 files changed, 10 insertions(+), 0 deletions(-)
 > 
-> diff --git a/recipes/ti/ti-lftb.inc b/recipes/ti/ti-lftb.inc
-> new file mode 100644
-> index 0000000..176f983
-> --- /dev/null
-> +++ b/recipes/ti/ti-lftb.inc
-> @@ -0,0 +1,47 @@
-> +DESCRIPTION = "Linux Functional test bench"
-
-may be F should be f
-
-> +HOMEPAGE = "http://arago-project.org/git/projects/?p=test-automation/target-code/psp/lftb.git;a=summary"
-> +LICENSE="BSD"
-> +
-> +INC_PR = "r1"
-
-New recipes begin at 'r0'
-
-> +
-> +DEPENDS = "virtual/kernel"
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +COMPATIBLE_MACHINE = "(dm365|dm355|dm6446|dm6467|omapl137|omapl138|omap3|ti816x)"
-> +
-
-could it use SOC_FAMILY
-
-
-> +S = "${WORKDIR}/git"
-> +
-> +#Machine specific overrides
-> +PLATFORM_omap3evm="omap35x"
-> +PLATFORM_am180x-evm="am18x"
-> +PLATFORM_am3517-evm="am3517"
-> +PLATFORM_am37x-evm="am37x"
-> +PLATFORM_beagleboard="beagle"
-> +PLATFORM_da830-omapl137-evm="am17x"
-> +PLATFORM_da850-omapl138-evm="am18x"
-> +PLATFORM_am181x-evm="am18x"
-> +PLATFORM_dm355-evm="dm355"
-> +PLATFORM_dm365-evm="dm365"
-> +PLATFORM_dm37x-evm="am37x"
-> +PLATFORM_dm6446-evm="dm644x"
-> +PLATFORM_dm6467-evm="dm646x"
-> +PLATFORM_ti816x="ti816x"
-> +
-> +do_compile () {
-> +    cd ${S}
-> +    make KERNEL_DIR=${STAGING_KERNEL_DIR} PLATFORM=${PLATFORM} TOOL_PREFIX=${TARGET_PREFIX}
-> +}
-> +
-> +do_install () {
-> +    install -d ${D}${bindir}/lftb
-> +    cd ${S}
-
-is this cd needed ?
-
-> +    make INSTALL_DIR=${D}${bindir}/lftb install
-> +
-> +    # Remove unneeded tarball placed in bindir by install target
-> +    rm -rf ${D}${bindir}/lftb.tar.gz
-> +}
-> +
-> +INSANE_SKIP_${PN} = True
-> +
-> +FILES_${PN} = "${bindir}/lftb"
-> diff --git a/recipes/ti/ti-lftb_2.0.bb b/recipes/ti/ti-lftb_2.0.bb
-> new file mode 100644
-> index 0000000..62c936c
-> --- /dev/null
-> +++ b/recipes/ti/ti-lftb_2.0.bb
-> @@ -0,0 +1,9 @@
-> +require ti-lftb.inc
-> +
-> +SRCREV = "3d0be58aee659ef7e8eda43e916172bab300235f"
-> +
-> +PR = "${MACHINE_KERNEL_PR}+${INC_PR}"
-> +PR_append = "a"
-> +
-> +SRC_URI = "git://arago-project.org/git/projects/test-automation/target-code/psp/lftb.git;protocol=git \
-> +"
+> diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
+> index 97068de..17a7cdd 100644
+> --- a/classes/sourceipk.bbclass
+> +++ b/classes/sourceipk.bbclass
+> @@ -106,6 +106,16 @@ sourceipk_do_create_srcipk() {
+>          # Copy sources for packaging
+>          mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
+>          cp -RLf ${S}/* $tmp_dir/${SRCIPK_INSTALL_DIR}/
+> +        # Copy any hidden files in the source directory such as
+> +        # eclipse project files.  Use a regex to avoid trying to
+> +        # copy the . and .. directories.  This is only required for
+> +        # the top-level directory as the hidden files will be copied
+> +        # for subdiretories.
+> +        hidden_files=`find ${S} -maxdepth 1 -name ".*"`
+> +        for f in $hidden_files
+> +        do
+> +            cp -rf $f $tmp_dir/${SRCIPK_INSTALL_DIR}/
+> +        done
+>  
+>          if [ ${SRCIPK_INCLUDE_EXTRAFILES} != "0" ]
+>          then
 > -- 
 > 1.7.0.4
 > 
