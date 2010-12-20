@@ -1,24 +1,24 @@
 Received: from mail-vw0-f65.google.com ([209.85.212.65])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anilm@mistralsolutions.com>) id 1PUgaD-0007Hg-M8
+	(envelope-from <anilm@mistralsolutions.com>) id 1PUgds-0007p7-17
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Dec 2010 15:19:30 +0100
-Received: by vws7 with SMTP id 7so247170vws.0
+	Mon, 20 Dec 2010 15:23:14 +0100
+Received: by vws7 with SMTP id 7so247462vws.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Dec 2010 06:19:19 -0800 (PST)
-Received: by 10.220.199.8 with SMTP id eq8mr2201868vcb.3.1292854757824;
-	Mon, 20 Dec 2010 06:19:17 -0800 (PST)
+	Mon, 20 Dec 2010 06:23:06 -0800 (PST)
+Received: by 10.220.194.2 with SMTP id dw2mr1232892vcb.102.1292854982702;
+	Mon, 20 Dec 2010 06:23:02 -0800 (PST)
 Received: from anilm@mistralsolutions.com ([122.166.150.147])
-	by mx.google.com with ESMTPS id c11sm97476vcc.38.2010.12.20.06.19.13
-	(version=SSLv3 cipher=RC4-MD5); Mon, 20 Dec 2010 06:19:16 -0800 (PST)
-Date: Mon, 20 Dec 2010 19:49:09 +0530
+	by mx.google.com with ESMTPS id c15sm700244vcs.31.2010.12.20.06.22.57
+	(version=SSLv3 cipher=RC4-MD5); Mon, 20 Dec 2010 06:23:00 -0800 (PST)
+Date: Mon, 20 Dec 2010 19:52:53 +0530
 From: Anil kumar M <anilm@mistralsolutions.com>
 To: koen@dominion.thruhere.net, openembedded-devel@lists.openembedded.org
-Message-ID: <4d0f65e4.4b07dc0a.35dc.043a@mx.google.com>
+Message-ID: <4d0f66c4.8f7edc0a.67dd.2a69@mx.google.com>
 MIME-Version: 1.0
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: nagendra@mistralsolutions.com, srinath@mistralsolutions.com, jdk@ti.com
-Subject: [PATCH 1/5] u-boot_git:add patch for am3517-crane board support
+Subject: [PATCHv4 1/5] u-boot_git:add patch for am3517-crane board support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2010 14:19:30 -0000
+X-List-Received-Date: Mon, 20 Dec 2010 14:23:14 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
