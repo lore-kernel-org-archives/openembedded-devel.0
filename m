@@ -1,39 +1,40 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1PUlSn-0002LW-K6
+	(envelope-from <jan.paesmans@gmail.com>) id 1PUlfZ-0002cs-Bu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Dec 2010 20:32:05 +0100
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id oBKJPV15024656
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Mon, 20 Dec 2010 20:45:17 +0100
+Received: by wwi18 with SMTP id 18so3275937wwi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Dec 2010 13:25:31 -0600
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id oBKJPUHd007528
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Dec 2010 13:25:30 -0600 (CST)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBKJPUKw014466
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Dec 2010 13:25:30 -0600 (CST)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Mon, 20 Dec 2010 13:25:30 -0600
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 20 Dec 2010 13:25:28 -0600
-Thread-Topic: [oe] [RFC] meta-openembedded layer for yocto hosted on oe.org
-Thread-Index: AcugasbzN0nleOHcTvW5WA6b9LNHygADwbCQ
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080329E93051@dlee06.ent.ti.com>
-References: <ienu66$5gf$1@dough.gmane.org>	<4D0F8AB7.1020104@xora.org.uk>
-	<AANLkTiks4PYZxZCQgsprveY1jNQgpy_mMVTOwg3DtsqX@mail.gmail.com>
-In-Reply-To: <AANLkTiks4PYZxZCQgsprveY1jNQgpy_mMVTOwg3DtsqX@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Mon, 20 Dec 2010 11:45:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=/e9jULbya2N+BB4Ia1LUJdJJCANzorKu5yX22mLa00Y=;
+	b=rS2PSFAV4dSj5HuSsVQLx0fHdFDoOnr+yqQph9mr9o+9Of0rlxSpWzdYcp4YiJ+Lt4
+	s9A5Q19ndwc2xmfVnpgm1L0XF+o30R73yxZWPZqd0moWP/E/8vev8n86afQlQd6nfDho
+	TdOeS1E03qe1B6tXkBZboRxgsMk5i0wFB7ip0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=UvS5n1U7X+Ph9dUHH7PoYnVX6scSZnWZU5PhDB2lXD7opFjkicjgcK9SlhOuY1nEk2
+	HLj+pHBKIBYA/3gYHD0rmqDuhBF18Imsh1G+r/CvYb01Jl8hsxEPOslR77IcrQOe2AXr
+	5rnTgwiy9cdC+0Wkmf6MjQzkPOr0PQPUuCNzY=
+Received: by 10.227.69.11 with SMTP id x11mr2836864wbi.57.1292874311607;
+	Mon, 20 Dec 2010 11:45:11 -0800 (PST)
+Received: from [192.168.1.103] (243.204-242-81.adsl-dyn.isp.belgacom.be
+	[81.242.204.243])
+	by mx.google.com with ESMTPS id 11sm2982641wbi.12.2010.12.20.11.45.10
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 20 Dec 2010 11:45:10 -0800 (PST)
+Message-ID: <4D0FB245.90008@gmail.com>
+Date: Mon, 20 Dec 2010 20:45:09 +0100
+From: Jan Paesmans <jan.paesmans@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101213 Thunderbird/3.1.7
 MIME-Version: 1.0
-Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
+To: openembedded-devel@lists.openembedded.org
+Subject: qemu-native_0.13.0 do_compile fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,80 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2010 19:32:06 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 20 Dec 2010 19:45:17 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
+Hi,
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Frans Meulenbroeks
-> Sent: Monday, December 20, 2010 11:17 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [RFC] meta-openembedded layer for yocto hosted on oe.or=
-g
->=20
-> Nice piece of work & a good plan but...
->=20
-> Who will be the owners/maintainers of the layers?
-> I maintain several multimedia recipes (mythtv with all that is dragged
-> in (which is a.o. a lot of perl stuff), various cd*  related recipes,
-> python-coherence and the python stuff it uses, mediatomb, and it seems
-> recently people seem to see me as the first line of contact if they
-> have musicpd issues), as well as some file sharing recipes.
-> Any idea on how I get them added, and how to deal with updates for these?
->=20
-> An alternate approach would be to let the stuff live in poky-extras.
-> See this proposal from RP:
-> http://www.mail-archive.com/yocto@yoctoproject.org/msg00286.html
+After hacking the problem with openssl-native, the following happens for
+qemu-native.
+I found a reference describing the same problem with the new gold linker.
+Any advice?
 
-Frans,
+|   LINK  alpha-linux-user/qemu-alpha
+| /usr/bin/ld: error: address of section '.tbss' moves backward from
+0x6018e440 to 0x6018e260
+| collect2: ld returned 1 exit status
+| make[1]: *** [qemu-alpha] Error 1
+| make: *** [subdir-alpha-linux-user] Error 2
+| FATAL: oe_runmake failed
+| ERROR: Function do_compile failed
+NOTE: package qemu-native-0.13.0-r2: task do_compile: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+virtual:native:/home/janp/hudson/openembedded/recipes/qemu/qemu_0.13.0.bb do_compile
+failed
+ERROR: Task 947
+(virtual:native:/home/janp/hudson/openembedded/recipes/qemu/qemu_0.13.0.bb,
+do_compile) failed with 256
 
-What is the difference between poky-extras and angstrom-layers in regards t=
-o the intention.  My understanding is that Koen wanted to put the meta-open=
-embedded layer on OE so it would be open to anyone.  Couldn't you then add =
-recipes for the components you maintain into this layer in places like reci=
-pes-multimedia? =20
-
-Or are you concerned about who would maintain some of the individual recipe=
- groupings like multimedia?  i.e. if recipes-multimedia is part of meta-ope=
-nembedded are you concerned that you won't be able to push changes to your =
-recipes?  I see your issue here in that you want to maintain your recipes w=
-ithout restriction but at the same time if everyone just puts their recipes=
- into their own layer we would have way too many layers and it would be ext=
-remely hard to keep track of.
-
-So would a good solution be to have multiple committers to the meta-openemb=
-edded layer (like Koen was suggesting) and let each committer be a maintain=
-er with an emphasis on a particular area (Also seems in line with what Rich=
-ard was suggesting)?
-
-Perhaps I am misunderstanding the proposal here but it seems like we are re=
-ally discussing whether we use poky-extras or angstrom-layers, or something=
- with another name.  I would say that we leave angstrom-layers containing t=
-he angstrom stuff, make an openembedded layer hosted on OE (like Koen sugge=
-sted) rather than cramming everything into poky-extras (since poky is just =
-one distribution and there are others).
-
-I guess an alternative suggestion is to have each functional grouping like =
-multimedia be its own layer and then you can have one or more maintainers p=
-er layer.  Then you can just group these layers under the OE name (which is=
- basically what Richard was suggesting but calling it poky-extras).
-
->=20
-> Frans.
->=20
-> PS: personally I would have preferred it if console-image was in the
-> common part.I guess some other recipes will get fairly identical
-> recipes.
-> Maybe we should have a generic console-image and let each distro use
-> .bbappend or aminc to extend on it.
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
