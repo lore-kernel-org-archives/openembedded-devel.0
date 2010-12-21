@@ -1,41 +1,39 @@
 Received: from mail-fx0-f42.google.com ([209.85.161.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PV5sh-0002SB-Q5
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PV5st-0002SB-R7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 18:20:11 +0100
-Received: by fxm11 with SMTP id 11so4040249fxm.29
+	Tue, 21 Dec 2010 18:20:23 +0100
+Received: by mail-fx0-f42.google.com with SMTP id 11so4040249fxm.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 09:20:05 -0800 (PST)
+	Tue, 21 Dec 2010 09:20:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:received:from:to:cc:subject
-	:date:message-id:x-mailer:in-reply-to:references;
-	bh=UfmClfTlEmQ/Jg9ijmmzxOX12AL9SkL2o+/hvBRYXEk=;
-	b=eQzn54tQx5mNo4vAIxMFU1PuPeTAyby9lmNBRWEEmroH8OB1PoCZ45tYg6gLbW3X1Y
-	fYCj16ez1+yztxcHGQPi31Au0nPX+TAAo73H2x7m8xJz48KyOSDAJlgagkvdJ2k9HUI9
-	EaBNdCwvtAXrCsxE1nGulL6X95KY0dt2hkU48=
+	:date:message-id:x-mailer;
+	bh=Z56Zs9yjE1ufgYPlkEAJPYXQ2lBPIZ5pnk3SAKL9cX8=;
+	b=R5dKEaaEjK2dcYEW/y4UDM8Y3hQtDYhzrsTtWV8OYVkzYeOYtZWMB9rukgsqDaMICG
+	+IwihGVG44fcnMYMS84JKhihYUngS+SfCUT9JzHqmIZP+9ogIXUlmHKs5UlI3yBXjLdW
+	IKFHrpFksT5AUnkDTcqhCHSN/4JhmeNJ5XwEc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=ABtdcWz8tFfy7ETnn17bcSc7reMQA4LpWgYRixnCig6RCdmmgI6qcIolD3qGIZclGQ
-	4/gPORcvij3Y16cfzPdeUZvcojYttASMWjDu8uCQnX73N7XD2OttdIUqoM4Rs5ru2EWL
-	Aflz7q/+hwY0SaKrTc3H68wJqGdXPeDYq1NFg=
-Received: by 10.223.101.141 with SMTP id c13mr1024709fao.118.1292952005290;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=HTWSRKilm9baCmHnaJRpp61RmIKfAric/dnUwo8Q/ihWD6zC/TaWmLOTzeP2SikY9/
+	hrydD2TfrbYMWN9r/AJLJw1VxHSO1q1L+7SkXsotQYU8VLlnrxG2aydWxA/y45nu9vrB
+	6B7WL6t8e9v4b2gUvbRK/2HfQmOMTrA7rYqXk=
+Received: by 10.223.83.199 with SMTP id g7mr6272553fal.81.1292952005460;
 	Tue, 21 Dec 2010 09:20:05 -0800 (PST)
 Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
 	[85.127.155.31])
-	by mx.google.com with ESMTPS id 5sm1416901fak.23.2010.12.21.09.20.03
+	by mx.google.com with ESMTPS id y14sm1401082fak.42.2010.12.21.09.20.03
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
 	Tue, 21 Dec 2010 09:20:04 -0800 (PST)
 Received: from cow by s42.loc with local (Exim 4.72)
 	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1PV5sY-0004xZ-UY; Tue, 21 Dec 2010 18:20:02 +0100
+	id 1PV5sY-0004xX-TM; Tue, 21 Dec 2010 18:20:02 +0100
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Dec 2010 18:19:59 +0100
-Message-Id: <1292951999-18969-2-git-send-email-rep.dot.nop@gmail.com>
+Date: Tue, 21 Dec 2010 18:19:58 +0100
+Message-Id: <1292951999-18969-1-git-send-email-rep.dot.nop@gmail.com>
 X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1292951999-18969-1-git-send-email-rep.dot.nop@gmail.com>
-References: <1292951999-18969-1-git-send-email-rep.dot.nop@gmail.com>
-Subject: [PATCH] patch.bbclass: conditional patch-tool dependency
+Subject: [PATCH] conditional patch-tool dep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,55 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 17:20:12 -0000
+X-List-Received-Date: Tue, 21 Dec 2010 17:20:24 -0000
 
-only depend do_patch on patch-tool if recipe references any patch
+Hi,
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
----
+If a recipe doesn't reference any patch then patching doesn't make sense
+and neither does depending on patch-tool.
+
+I didn't look yet if i can say
+addtask patch after do_unpack if needs_patching_at_all(d)
+(or something like that).
+So, for a start, don't depend do_patch on the patch tool if there is no
+patch in the SRC_URI.
+
+untested.
+
+PS: There should be some oe.is_compressed(uri) shorthand that is used to
+decide if an uri is in a compressed format, imho.
+
+Bernhard Reutner-Fischer (1):
+  patch.bbclass: conditional patch-tool dependency
+
  classes/patch.bbclass |   21 +++++++++++++++++++--
  1 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/classes/patch.bbclass b/classes/patch.bbclass
-index 7629e9a..1cfe24c 100644
---- a/classes/patch.bbclass
-+++ b/classes/patch.bbclass
-@@ -38,7 +38,7 @@ python patch_do_patch() {
- 	src_uri = d.getVar("SRC_URI", True).split()
- 	srcurldata = bb.fetch.init(src_uri, d, True)
- 	workdir = bb.data.getVar('WORKDIR', d, 1)
--	for url in d.getVar("SRC_URI", True).split():
-+	for url in src_uri:
- 		urldata = srcurldata[url]
- 
- 		local = urldata.localpath
-@@ -120,8 +120,25 @@ python patch_do_patch() {
- 			bb.fatal(str(exc))
- }
- 
-+def patch_deps(d):
-+    import oe.unpack
-+
-+    src_uri = d.getVar("SRC_URI", True).split()
-+    srcurldata = bb.fetch.init(src_uri, d, True)
-+    for url in src_uri:
-+        urldata = srcurldata[url]
-+        local = urldata.localpath
-+        if local:
-+            base, ext = os.path.splitext(os.path.basename(local))
-+            if ext in ('.gz', '.bz2', '.Z', '.xz'):
-+                local = base
-+            if oe.unpack.is_patch(local, urldata.parm):
-+                return "${PATCHDEPENDENCY}"
-+    return ""
-+        
-+
- addtask patch after do_unpack
- do_patch[dirs] = "${WORKDIR}"
--do_patch[depends] = "${PATCHDEPENDENCY}"
-+do_patch[depends] = "${@patch_deps(d)}"
- 
- EXPORT_FUNCTIONS do_patch
 -- 
 1.7.2.3
 
