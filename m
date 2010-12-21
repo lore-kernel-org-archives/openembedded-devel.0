@@ -1,35 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PUxOj-0001xY-SO for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 09:16:41 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PUxOe-0004LD-Aw for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 09:16:36 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 09:16:36 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 09:16:36 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 21 Dec 2010 09:16:22 +0100
-Message-ID: <iepnom$tk9$1@dough.gmane.org>
-References: <ienu66$5gf$1@dough.gmane.org>	<4D0F8AB7.1020104@xora.org.uk>
-	<AANLkTiks4PYZxZCQgsprveY1jNQgpy_mMVTOwg3DtsqX@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <AANLkTiks4PYZxZCQgsprveY1jNQgpy_mMVTOwg3DtsqX@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PUxPz-0001yg-Il
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Dec 2010 09:17:59 +0100
+Received: (qmail 19340 invoked by uid 503); 21 Dec 2010 08:53:27 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 21 Dec 2010 08:53:27 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 21 Dec 2010 10:17:53 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 21 Dec 2010 10:17:51 +0200
+Message-ID: <4D1062AF.1080609@eukrea.com>
+Date: Tue, 21 Dec 2010 09:17:51 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
+MIME-Version: 1.0
+To: bitbake-dev@lists.berlios.de
+X-Ovh-Tracer-Id: 7110902337355099523
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Problem with bitbake master & OE master during fetch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,39 +38,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 08:16:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 Dec 2010 08:17:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 20-12-10 18:16, Frans Meulenbroeks wrote:
-> Nice piece of work & a good plan but...
-> 
-> Who will be the owners/maintainers of the layers?
+while testing bitbake -c fetch on recipes in a script to fix SRC_URI, I meet 
+the following error on (and found it to be reproducable at least with both 
+following recipes) :
+bitbake -b openembedded/recipes/adobe-flash/flash-plugin_10.0.22.87.bb -c fetch
+bitbake -b openembedded/recipes/alsa/alsa-driver_0.9.6-hh4c.bb -c fetch
 
-My intention was that the meta-openembedded layer will be maintained by
-the people interested in it. There will be a new MAINTAINERS file inside
-listing who feels responsible for various recipes.
+NOTE: Executing runqueue
+ERROR: Running idle function
+Traceback (most recent call last):
+   File "/home/ebenard/OEUKREA/bitbake/lib/bb/server/process.py", line 124, in 
+idle_commands
+     retval = function(self, data, False)
+   File "/home/ebenard/OEUKREA/bitbake/lib/bb/cooker.py", line 655, in 
+buildFileIdle
+     retval = rq.execute_runqueue()
+   File "/home/ebenard/OEUKREA/bitbake/lib/bb/runqueue.py", line 875, in 
+execute_runqueue
+     self.rqexe = RunQueueExecuteTasks(self)
+   File "/home/ebenard/OEUKREA/bitbake/lib/bb/runqueue.py", line 1036, in __init__
+     event.fire(bb.event.StampUpdate(self.rqdata.target_pairs, 
+self.rqdata.dataCache.stamp), self.cfgData)
+AttributeError: RunQueueData instance has no attribute 'target_pairs'
 
-> An alternate approach would be to let the stuff live in poky-extras.
-> See this proposal from RP:
-> http://www.mail-archive.com/yocto@yoctoproject.org/msg00286.html
+=> 1st & 2nd Control C leads to :
 
-The poky-extras thing is not what I want, and more importantly, I don't
-want to start diluting the OE brand.
+Keyboard Interrupt, closing down...
 
-regards,
+ERROR: Running idle function
+Traceback (most recent call last):
+   File "/home/ebenard/OEUKREA/bitbake/lib/bb/server/process.py", line 124, in 
+idle_commands
+     retval = function(self, data, False)
+   File "/home/ebenard/OEUKREA/bitbake/lib/bb/cooker.py", line 652, in 
+buildFileIdle
+     rq.finish_runqueue(False)
+   File "/home/ebenard/OEUKREA/bitbake/lib/bb/runqueue.py", line 907, in 
+finish_runqueue
+     self.rqexe.finish()
+AttributeError: RunQueue instance has no attribute 'rqexe'
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+=> 3rd Control C exit as expected.
 
-iD8DBQFNEGJWMkyGM64RGpERApHaAJ9Nk5bO08BlF40T3LH8S9ymgRFsvwCdGeQ3
-WREzWeCb8t1INOGEfxILgTM=
-=3PyE
------END PGP SIGNATURE-----
+I still haven't investigated the reason of the error.
 
+Eric
 
 
