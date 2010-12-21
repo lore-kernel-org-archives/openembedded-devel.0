@@ -1,34 +1,34 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1PV4N8-0004w1-Rf
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 16:43:50 +0100
-Received: by wyb40 with SMTP id 40so4130335wyb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PV51l-0005kX-Nv for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Dec 2010 17:25:30 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PV51f-0003hI-PL for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Dec 2010 17:25:23 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Dec 2010 17:25:23 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 07:43:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=joV9E/6j1SATnLtEiQItkrv1EfiruuZuYY0NUCJHHe8=;
-	b=NBxZQAyxfG9HKPlv/LN8RrppL1uQ2NszCUJVfR+xoW/v8QZ5/biHts98IM7it2rUvO
-	+cObxaCbrDbTNY/F5dl/cjxp8tEXR/oMpWeZWtFNW+X/N8Jb5OPpQQ6ASo72rADr48he
-	rL+9pBa6dYzSAb3JcYzpT171coCRJsYT9F0Hs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=E98gzsTyd64nPMqLx6I4DctagjDHZ88JQP1el0kew4y60YYLnOdjn1LaQfpB7BeEo0
-	82C6fQl0J34plj++ayrOKYHHJNYil8b6AJtLSz+FZmSFajoTFiuzltd5rFQ9CAkxsxOW
-	x+TfUCGoW+egx88nS+KGu0lwi6WMvH8ifHCoo=
-MIME-Version: 1.0
-Received: by 10.216.169.71 with SMTP id m49mr6405069wel.4.1292946187317; Tue,
-	21 Dec 2010 07:43:07 -0800 (PST)
-Received: by 10.216.254.137 with HTTP; Tue, 21 Dec 2010 07:43:07 -0800 (PST)
-In-Reply-To: <ienu66$5gf$1@dough.gmane.org>
-References: <ienu66$5gf$1@dough.gmane.org>
-Date: Tue, 21 Dec 2010 10:43:07 -0500
-Message-ID: <AANLkTikyHnG0dxxRt=hsvk3ry_kHfqa1b6ND++3n1nhQ@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Tue, 21 Dec 2010 17:25:23 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 21 Dec 2010 17:25:13 +0100
+Message-ID: <ieqkd9$8ql$1@dough.gmane.org>
+References: <ienu66$5gf$1@dough.gmane.org>
+	<AANLkTikyHnG0dxxRt=hsvk3ry_kHfqa1b6ND++3n1nhQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <AANLkTikyHnG0dxxRt=hsvk3ry_kHfqa1b6ND++3n1nhQ@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
 Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,24 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 15:43:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 Dec 2010 16:25:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Dec 20, 2010 at 10:53 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> I've locally split
-> http://gitorious.org/angstrom/angstrom-layers/commits/master into 3
-> seperate git repos with git-filter-branch. I would like to move the
-> meta-openembedded layer to the OE git server to make it easier for
-> others to help in cleaning it up and getting more use to layers.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-git@git.openembedded.org:meta-openembedded is now available.  Note,
-someone will need to push something to it before it exists.
+On 21-12-10 16:43, Cliff Brake wrote:
+> On Mon, Dec 20, 2010 at 10:53 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+>> I've locally split
+>> http://gitorious.org/angstrom/angstrom-layers/commits/master into 3
+>> seperate git repos with git-filter-branch. I would like to move the
+>> meta-openembedded layer to the OE git server to make it easier for
+>> others to help in cleaning it up and getting more use to layers.
+> 
+> git@git.openembedded.org:meta-openembedded is now available.  Note,
+> someone will need to push something to it before it exists.
 
-Thanks,
-Cliff
+And here it is: http://cgit.openembedded.org/cgit.cgi/meta-openembedded/
 
--- 
-=================
-http://bec-systems.com
+Thanks Cliff & Tom!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNENToMkyGM64RGpERAmZfAJ95GWNvBXjmvu7YvETrkXtP8Pa9vQCeOWUv
+VN2bymFBMFiTNiScPR52kWI=
+=xhQy
+-----END PGP SIGNATURE-----
+
 
 
