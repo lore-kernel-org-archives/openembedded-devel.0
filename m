@@ -1,30 +1,37 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PUxPz-0001yg-Il
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <jan.paesmans@gmail.com>) id 1PUxZA-00028z-QX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 09:17:59 +0100
-Received: (qmail 19340 invoked by uid 503); 21 Dec 2010 08:53:27 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 21 Dec 2010 08:53:27 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 21 Dec 2010 10:17:53 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 21 Dec 2010 10:17:51 +0200
-Message-ID: <4D1062AF.1080609@eukrea.com>
-Date: Tue, 21 Dec 2010 09:17:51 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Tue, 21 Dec 2010 09:27:29 +0100
+Received: by qyk36 with SMTP id 36so3593584qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Dec 2010 00:27:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=nNvDsvnaeB9M2bk3RaXtNvcTvsm65nZkdZXmRW6EuK4=;
+	b=e5wG6+5mwKYIoRzmlfcYXsQnwYUFmub0XW0Yxc8ZxQaG8Oxj9uNJsOXPnl7Rdg16dn
+	v3XtJcF2t2L2bjiNfBKQAxQhJKG+HqtvKay0Gb3LhtH1rdBpY8elKXBKKGI+9VnU4E0s
+	QRo5Ft6+ngOHY8hEO9L53PScNM0497ekd5XjQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=YUEQh8e/kXVoKpqlRCN9ha/DCnEevOxFjj+kZXPN/COXMnPL9N9ryzCXYFyatzpENC
+	o+ZBjAbQk2sOD4dXLudStlT1/+E3ZxmFlpQ0gGDprE/EFEqdtqIdrQ2mPP5FFYCSnAA0
+	Du7i7m42lcRE164daPon3jdensyAdRpxzp31s=
 MIME-Version: 1.0
-To: bitbake-dev@lists.berlios.de
-X-Ovh-Tracer-Id: 7110902337355099523
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Problem with bitbake master & OE master during fetch
+Received: by 10.224.67.211 with SMTP id s19mr4999017qai.142.1292920040566;
+	Tue, 21 Dec 2010 00:27:20 -0800 (PST)
+Received: by 10.229.211.198 with HTTP; Tue, 21 Dec 2010 00:27:20 -0800 (PST)
+In-Reply-To: <AANLkTim+M3jX41Ryk-wJ4OOyJ6o--Vq89dCS3=aUYC9r@mail.gmail.com>
+References: <4D0FB245.90008@gmail.com> <20101220213243.GD17904@gmail.com>
+	<4D0FE2CC.5050003@gmail.com>
+	<AANLkTim+M3jX41Ryk-wJ4OOyJ6o--Vq89dCS3=aUYC9r@mail.gmail.com>
+Date: Tue, 21 Dec 2010 09:27:20 +0100
+Message-ID: <AANLkTinTsbFrf+AWZDYTL0UuVkM9648Nt_STiZXf0NPa@mail.gmail.com>
+From: Jan Paesmans <jan.paesmans@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: qemu-native_0.13.0 do_compile fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,56 +45,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 08:17:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Dec 2010 08:27:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+> which ubuntu version are you using
 
-while testing bitbake -c fetch on recipes in a script to fix SRC_URI, I meet 
-the following error on (and found it to be reproducable at least with both 
-following recipes) :
-bitbake -b openembedded/recipes/adobe-flash/flash-plugin_10.0.22.87.bb -c fetch
-bitbake -b openembedded/recipes/alsa/alsa-driver_0.9.6-hh4c.bb -c fetch
+Ubuntu 10.10
+As for the linker: GNU ld (GNU Binutils for Ubuntu) 2.20.51-system.20100908
 
-NOTE: Executing runqueue
-ERROR: Running idle function
-Traceback (most recent call last):
-   File "/home/ebenard/OEUKREA/bitbake/lib/bb/server/process.py", line 124, in 
-idle_commands
-     retval = function(self, data, False)
-   File "/home/ebenard/OEUKREA/bitbake/lib/bb/cooker.py", line 655, in 
-buildFileIdle
-     retval = rq.execute_runqueue()
-   File "/home/ebenard/OEUKREA/bitbake/lib/bb/runqueue.py", line 875, in 
-execute_runqueue
-     self.rqexe = RunQueueExecuteTasks(self)
-   File "/home/ebenard/OEUKREA/bitbake/lib/bb/runqueue.py", line 1036, in __init__
-     event.fire(bb.event.StampUpdate(self.rqdata.target_pairs, 
-self.rqdata.dataCache.stamp), self.cfgData)
-AttributeError: RunQueueData instance has no attribute 'target_pairs'
+Regards,
 
-=> 1st & 2nd Control C leads to :
-
-Keyboard Interrupt, closing down...
-
-ERROR: Running idle function
-Traceback (most recent call last):
-   File "/home/ebenard/OEUKREA/bitbake/lib/bb/server/process.py", line 124, in 
-idle_commands
-     retval = function(self, data, False)
-   File "/home/ebenard/OEUKREA/bitbake/lib/bb/cooker.py", line 652, in 
-buildFileIdle
-     rq.finish_runqueue(False)
-   File "/home/ebenard/OEUKREA/bitbake/lib/bb/runqueue.py", line 907, in 
-finish_runqueue
-     self.rqexe.finish()
-AttributeError: RunQueue instance has no attribute 'rqexe'
-
-=> 3rd Control C exit as expected.
-
-I still haven't investigated the reason of the error.
-
-Eric
+Jan
 
 
