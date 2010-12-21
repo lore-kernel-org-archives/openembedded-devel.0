@@ -1,36 +1,23 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chasemaupin03@gmail.com>) id 1PV8qh-0002bE-Bl
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1PV8vQ-0002kg-D2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 21:30:19 +0100
-Received: by ywi6 with SMTP id 6so2012811ywi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 12:30:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=cIIJQA3NQOXhhbDnCFUClQuXmXQDPlMc9tzWUv1izZg=;
-	b=cR1T2LLd9Ebd6uN4YywO9PU8v5vPVVD+eaviap2wMmAQ7WZqS3JoY+GHlQjox4VTHx
-	vjZ5mrhG+TYlsql6nZLkW8GXp3tgSvZ8CRYqwU4fKP9BrbKsJVSDlGvCR3ZklFSAMC3Z
-	yyYmxy9VnKg74coSzVFE+ceOVmxdS8c884JhM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=N90SvL/wiUFZprAFF5DmTQT/shoTOpKfV97ykFBn7Sxfy6cHuPL87FHhqIROkZYOIn
-	PGniTLTneD1Z/dBKzYIdbrOUW8mVj2C+C+shsHEnv8g9l1xaG6cizqDpNuZnazeq0ZF6
-	dW0a6Zq0jdLlfBTEwIXH05QeIDI8V66aJJCV8=
-Received: by 10.236.109.146 with SMTP id s18mr8670056yhg.28.1292963409506;
-	Tue, 21 Dec 2010 12:30:09 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id t38sm3049015yhg.9.2010.12.21.12.30.07
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 21 Dec 2010 12:30:08 -0800 (PST)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	Tue, 21 Dec 2010 21:35:12 +0100
+Received: (qmail 29065 invoked by uid 2404007); 21 Dec 2010 20:28:26 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 89-73-120-20.dynamic.chello.pl (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@89.73.120.20)
+	by host4.kei.pl with ESMTPA; 21 Dec 2010 20:28:26 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Dec 2010 14:30:05 -0600
-Message-Id: <1292963406-19767-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH 1/2] ti-pru-sw-edma-library: stage needed header
+Date: Tue, 21 Dec 2010 21:28:13 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.37-10-generic; KDE/4.5.85; x86_64; ; )
+References: <ienu66$5gf$1@dough.gmane.org> <iepnom$tk9$1@dough.gmane.org>
+	<AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
+In-Reply-To: <AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201012212128.17392.marcin@juszkiewicz.com.pl>
+Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,44 +31,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 20:30:19 -0000
+X-List-Received-Date: Tue, 21 Dec 2010 20:35:12 -0000
+X-Groupsio-MsgNum: 27373
+Content-Type: multipart/signed; boundary="nextPart3522878.iuGKlCG6s2";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-* Stage the edma.h header which is needed by other example
-  applications that link with this library.
-* Bump the PR
+--nextPart3522878.iuGKlCG6s2
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- recipes/ti/ti-pru-sw-edma-library_1.00.00.bb |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
+Dnia wtorek, 21 grudnia 2010 o 18:51:25 Frans Meulenbroeks napisa=C5=82(a):
+> 2010/12/21 Koen Kooi <k.kooi@student.utwente.nl>:
+> >> Nice piece of work & a good plan but...
+> >> Who will be the owners/maintainers of the layers?
+> >=20
+> > My intention was that the meta-openembedded layer will be maintained by
+> > the people interested in it. There will be a new MAINTAINERS file inside
+> > listing who feels responsible for various recipes.
 
-diff --git a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-index 128d79d..7571421 100644
---- a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "eDMA library for use by PRU sw example applications"
- HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
- LICENSE = "BSD"
--PR = "r1+svnr${SRCPV}"
-+PR = "r2+svnr${SRCPV}"
- 
- DEPENDS += "virtual/kernel ti-pru-sw-edma-driver"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -18,7 +18,9 @@ do_compile () {
- }
- 
- do_install () {
--	install -d ${D}/${libdir}
--	install -m 0755 ${S}/../lib/libedmautils.a ${D}/${libdir}/
-+	install -d ${D}${libdir}
-+    install -d ${D}${includedir}
-+	install -m 0755 ${S}/../lib/libedmautils.a ${D}${libdir}/
-+    install -m 0644 ${S}/../include/edma.h ${D}${includedir}/
- }
- 
--- 
-1.7.0.4
+> Seems a good plan.
 
+I just gave on irc how I see cooperation with Yocto:
 
+=2D yocto-core layer - maintained by Yocto, builds always for selected targ=
+ets,
+  pull only way of providing changes - just like Poky was
+=2D oe-core layer - extra images, classes required by OE builds. Same polic=
+ies=20
+  as Yocto core - only pull from user branches if changes pass test builds
+=2D oe-distro-DISTRO (for those distros which needs own layers - like angst=
+rom
+  does) maintained by distro maintainers with their policies
+=2D oe-bsp-STH maintained by layer maintainers with their policies
+=2D oe-extra-STH (STH =3D opie, xfce, whatever) maintained by person/team
+=2D oe-unmaintained layer with everything not fit in layers
 
+This way we can get stable core (yocto-core + oe-core) which builds always =
+for=20
+selected targets + layers with UI environments, multimedia, boards/soc=20
+support, etc each of them maintained by person or team. How we will split=20
+metadata into layers (and subdirs in layers) is other thing and will need t=
+o=20
+be discussed too.
+
+> >> An alternate approach would be to let the stuff live in poky-extras.
+> >> See this proposal from RP:
+> >> http://www.mail-archive.com/yocto@yoctoproject.org/msg00286.html
+> >=20
+> > The poky-extras thing is not what I want, and more importantly, I don't
+> > want to start diluting the OE brand.
+>=20
+> Why wouldn't you want poky-extras?
+> My concern is that we get lots of duplicated effort because both
+> poky-extras and meta-openembedded might get the same recipes.
+
+Poky-extras is part of Poky not OpenEmbedded. Our brand has 7 years and we =
+do=20
+not want to let it disappear. This will send wrong message to people who us=
+e=20
+our work.
+=20
+> Wrt diluting the OE brand. This is a completely different topic.
+> IMHO the mere fact that yocto exists impacts OE.
+> Yocto also has much more resources (both people-hour wise as well as
+> HW wise), so I strongly doubt we can compete on it wrt the quality of
+> the base recipes.
+
+Thats why we should move to use Yocto as base. We have skilled developers t=
+oo=20
+which can and will provide changes to yocto-core layer. But those changes w=
+ill=20
+require testing before being merged which can be new thing for some of OE=20
+developers ;)
+=20
+> That leaves the question:
+> Given the existence of Yocto in which parts do we see added value of
+> OE and on which things should we as OE focus.
+
+OE supports more targets then Yocto does or will ever support. I do not exp=
+ect=20
+Yocto to support Intel Mainstone or Simpad or even Alix.1c which I use for =
+my=20
+router. But OE supports those machines (more or less) and this is our value=
+=2E=20
+There are boards outside which boots to OpenEmbedded derived root filesyste=
+ms=20
+=2D not Yocto or Poky but OE based.
+
+If we do proper separation of layers then who knows - maybe some vendors wh=
+ich=20
+base on OE will start to base on Yocto directly. But as OE will also base o=
+n=20
+Yocto then it will be not a problem to use vendor layers with our ones to=20
+provide extra packages.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+--nextPart3522878.iuGKlCG6s2
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0RDd4ACgkQeQ6MlGH/2qtxCwCfeWkK3ZNuDkoHh9XWae1l3wvx
+MKMAn3MR/UHXakujOTGdA/C+8L5hnjBg
+=yjET
+-----END PGP SIGNATURE-----
+
+--nextPart3522878.iuGKlCG6s2--
