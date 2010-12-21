@@ -1,37 +1,32 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PV79o-0006MB-I2
+	(envelope-from <Tom_Rini@mentor.com>) id 1PV7Gr-0006UM-2P
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 19:41:56 +0100
-Received: by gyh20 with SMTP id 20so1854397gyh.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 10:41:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=Y5pf5qO8OeSDVO56Kf+D/DVG60anGz+tr08hWT7SVs8=;
-	b=suaZvSowPlmLs/JLMiEVF7zM0HePxMkgP8Eb+JhFZpnjzvdusK5Zj+uTRDSWEjLQ4p
-	agTUC9EyoA9RgBl1rAW9CdXPoodzG7v5qJ1nJzjOo2Jq1h0wAN1IRlYLG0Y+spp8xug8
-	5qZb9GE53ee32gOPh64uNx5hb2Cv6+eAz/rlI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=F5y46sYl218QPou7TgPpYelBrCSbVICbi+YeBVEVrQhhej5EUmSTDdC2t44sVvdOw+
-	5HLqxENpX+1FAfiDZECG8hFaU0GTca+yOCRHZZpguFnxzD3KLWf/s0hZ4qj4rZzXm3EM
-	TtMQ2vs4EEtxjuarUp18VVREnDCKTUIzSB0xs=
-Received: by 10.90.10.21 with SMTP id 21mr7416697agj.112.1292956908856; Tue,
-	21 Dec 2010 10:41:48 -0800 (PST)
+	Tue, 21 Dec 2010 19:49:13 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PV7Gj-0002al-3C from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Dec 2010 10:49:05 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 21 Dec 2010 10:49:02 -0800
+Received: from [172.30.80.150] ([172.30.80.150]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 21 Dec 2010 11:49:02 -0700
+Message-ID: <4D10F69B.8080604@mentor.com>
+Date: Tue, 21 Dec 2010 11:48:59 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Tue, 21 Dec 2010 10:41:28 -0800 (PST)
-In-Reply-To: <AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
-References: <ienu66$5gf$1@dough.gmane.org> <4D0F8AB7.1020104@xora.org.uk>
-	<AANLkTiks4PYZxZCQgsprveY1jNQgpy_mMVTOwg3DtsqX@mail.gmail.com>
-	<iepnom$tk9$1@dough.gmane.org>
-	<AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 Dec 2010 10:41:28 -0800
-Message-ID: <AANLkTi=FPA_K0R64NEmi4W-atjT4NPG3TE-odppxLYQ8@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
+References: <ienu66$5gf$1@dough.gmane.org>
+	<AANLkTimSZHSb23N1opQc=zQ4cNgsEzA_jaO_rn0=pV3o@mail.gmail.com>
+In-Reply-To: <AANLkTimSZHSb23N1opQc=zQ4cNgsEzA_jaO_rn0=pV3o@mail.gmail.com>
+X-OriginalArrivalTime: 21 Dec 2010 18:49:02.0256 (UTC)
+	FILETIME=[BC317300:01CBA13F]
 Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,84 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 18:41:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 Dec 2010 18:49:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Dec 21, 2010 at 9:51 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/12/21 Koen Kooi <k.kooi@student.utwente.nl>:
+On 12/21/2010 02:45 AM, Khem Raj wrote:
+> On Mon, Dec 20, 2010 at 7:53 AM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
 >> -----BEGIN PGP SIGNED MESSAGE-----
 >> Hash: SHA1
 >>
->> On 20-12-10 18:16, Frans Meulenbroeks wrote:
->>> Nice piece of work & a good plan but...
->>>
->>> Who will be the owners/maintainers of the layers?
+>> Hi,
 >>
->> My intention was that the meta-openembedded layer will be maintained by
->> the people interested in it. There will be a new MAINTAINERS file inside
->> listing who feels responsible for various recipes.
->
-> Ah ok.
-> Seems a good plan.
+>> I've locally split
+>> http://gitorious.org/angstrom/angstrom-layers/commits/master into 3
+>> seperate git repos with git-filter-branch. I would like to move the
+>> meta-openembedded layer to the OE git server to make it easier for
+>> others to help in cleaning it up and getting more use to layers. The
+>> beagle and angstrom layers could move there as well, but those will need
+>> a more restricted set of committers.
 >>
->>> An alternate approach would be to let the stuff live in poky-extras.
->>> See this proposal from RP:
->>> http://www.mail-archive.com/yocto@yoctoproject.org/msg00286.html
+>> In essence I would like this to be the "official" OE layer for yocto
+>> while the board is dealing with the yocto negotiations.
 >>
->> The poky-extras thing is not what I want, and more importantly, I don't
->> want to start diluting the OE brand.
 >
-> Why wouldn't you want poky-extras?
-> My concern is that we get lots of duplicated effort because both
-> poky-extras and meta-openembedded might get the same recipes.
-> Maybe this should be one of the items to be discussed with the yocto
-> board (and maybe come to one user contributed layer).
->
+> yes this is something what we should do. We need to setup gitolite on
+> the git server
 
-duplication of recipes can occur within layers and will happen
-deliberately too no matter where the layer is hosted. If someone wants
-to override
-the default provided layer. its a OE layer so hosting it on OE infra
-is logical thing as most of OE users
-will look it up here.
+Can I just put in my 2 cents for some github love?  Chris got me started 
+using it and I'm quite happy.  It'd also be less admin work and since I 
+forked Chris' tree, my space usage is still practically nil (I'm not 
+sure about his), so the free accounts are fine.
 
-> BTW it seems good to come up with some guidelines on the
-> meta-openembedded layer (or maybe usage rules or so).
-> E.g. personally I would expect that if I put meta-openembedded on top
-> of e.g. poky/laverne that a recipe in it builds).
-> So no dependencies on non poky recipes. Is that an agreed assumption?
->
-> Wrt diluting the OE brand. This is a completely different topic.
-> IMHO the mere fact that yocto exists impacts OE.
-
-It impacts but in a good way.
-
-> Yocto also has much more resources (both people-hour wise as well as
-> HW wise), so I strongly doubt we can compete on it wrt the quality of
-> the base recipes.
->
-
-you take is wrongly I think. I think its a good thing for
-openemebedded as an architecture
-
-> That leaves the question:
-> Given the existence of Yocto in which parts do we see added value of
-> OE and on which things should we as OE focus.
-
-there is more closer collaboration needed on day to day bases to get
-it to work seemlessly together.
-You just cant say OE should focus on xyz only as yocto has
-openembedded at its core.
-
-> But I guess this is more something for a different thread.
->
-> Frans
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
