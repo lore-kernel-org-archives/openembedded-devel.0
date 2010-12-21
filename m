@@ -1,35 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f44.google.com ([209.85.214.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PV5B8-00060A-4g for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 17:35:10 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PV5B2-0000Mi-JN for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 17:35:04 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 17:35:04 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1PV5Fp-00068Y-FX
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Dec 2010 17:40:01 +0100
+Received: by bwz12 with SMTP id 12so4786257bwz.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 17:35:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 21 Dec 2010 08:39:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=rgfG6Rz437DCLkXFnV4IuadLDo1Q50YYlTmudxrJSBo=;
+	b=MED/uKeIaJQRimPersCvZC2PlxDkpslmIr5lIzxzh3yyYmzVAvqda1BFHnyV1Bn+R8
+	YaHFDphE81DR3GBITpiVAfv/u3WvS977Kxcs7WLtJMhXfO4I9mKHeRE5vLyfIZgbjLqL
+	nt/1Qt5A722EGMxtxZ6aKoWqRU/TX2+7x8Mk8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=If6OMQm8X0zCLapMNkch3/d5kpY6VMd196Mne1OBCBk77TNueZnkldMLBEINKsAKh7
+	mXHgGXM+6T7PF4d0MkSK3nwNUpKU+exUit7cA1jEivkKCakHXYb3IJL9ooovFgPyv5ii
+	owokTMf/g5DQZcUT/DJ8J5DiIHLpxLVNDq7Yg=
+Received: by 10.204.55.65 with SMTP id t1mr3682330bkg.140.1292949596492;
+	Tue, 21 Dec 2010 08:39:56 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id j11sm4482753bka.12.2010.12.21.08.39.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 21 Dec 2010 08:39:55 -0800 (PST)
+Date: Tue, 21 Dec 2010 17:39:37 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 21 Dec 2010 17:26:00 +0100
-Message-ID: <ieqkeo$8ql$2@dough.gmane.org>
+Message-ID: <20101221163937.GJ3282@jama>
 References: <20101221133550.GI3282@jama>
-	<1292940593-22743-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <1292940593-22743-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/2] talloc: install .so links
+ <20101221151113.GC4665@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20101221151113.GC4665@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: mesa depending on samba or samba depending on extern talloc?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,51 +49,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 16:35:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Dec 2010 16:40:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
-On 21-12-10 15:09, Martin Jansa wrote:
-> * otherwise mesa finds talloc.pc, but doesn't link to libtalloc.so.2 in the end
-> ---
->  recipes/talloc/talloc_2.0.1.bb |    9 +++++++++
->  1 files changed, 9 insertions(+), 0 deletions(-)
+On Tue, Dec 21, 2010 at 07:11:13AM -0800, Khem Raj wrote:
+> On (21/12/10 14:35), Martin Jansa wrote:
+> > On 2010-10-20 I've pushed newer mesa-7.9
+> > http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=30a3ea891d4511059a51882674f33aff2dddb96e
+> > which depends on talloc
+> > http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=fabce288e40037d28c70f0f034185176f85e8664
+> > and separate talloc recipe (because building whole samba just to provide talloc for mesa seems wrong
+> > and samba produced ICE before khem's fix) 
+> > http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=afce52663d6b5b79c097136fa794dd3f76a4afff
+> > 
+> > Today I noticed, that usr/lib/pkgconfig/talloc.pc from talloc recipe was enough for mesa to compile, 
+> > but because there was no libtalloc.so link it wasn't used in the end (as ldd confirms).
+> > 
+> > so talloc stages:
+> > bitbake@jama ~ $ ll tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.*
+> > -rwxr-xr-x 1 bitbake bitbake  32K Dec 21 13:30 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.a
+> > -rwxr-xr-x 1 bitbake bitbake  73K Dec 21 13:30 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.so.2.0.1
+> > bitbake@jama ~ $ ll tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/pkgconfig/talloc.pc
+> > -rw-r--r-- 1 bitbake bitbake 251 Dec 21 13:30 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/pkgconfig/talloc.pc
+> > 
+> > samba adds:
+> > bitbake@jama ~ $ ll tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.*
+> > lrwxrwxrwx 1 bitbake bitbake   14 Dec 14 13:33 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.so -> libtalloc.so.1
+> > -rwxr-xr-x 1 bitbake bitbake 123K Dec 14 13:33 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.so.1
+> > 
+> > now for sure I don't want to install whole samba on target (just for libtalloc) so I have few options
+> > 
+> > 1) fix talloc to install libtalloc.so -> libtalloc.so.2.0.1 (conflicts with samba in sysroot)
+> > 2a) move libtalloc to separate package in samba recipe and make mesa depending on samba
+> > 2b) move libtalloc to separate package in samba recipe in case someone builds 
+> >     it before mesa, but still depend only on fixed talloc
+> > 3) fix talloc + force samba build to use already installed libtalloc instead of building own version
+> > 
+> > Option 3) looks best, but I'm not sure how tightly samba depends on talloc 
+> > and don't have time to test all samba versions we currently have
+> > (3.0.23c, 3.0.34, 3.2.15, 3.3.0, 3.3.9, 3.5.6), so 2b) looks as easier fix.
+> > 
+> > CCed 2 samba maintainers (wrt MAINTAINERS file) or if there is someone who cares about samba
+> > recipes: can you clean recipes/samba a bit and provide some feedback on talloc issue?
 > 
-> diff --git a/recipes/talloc/talloc_2.0.1.bb b/recipes/talloc/talloc_2.0.1.bb
-> index 9514a15..80f4b37 100644
-> --- a/recipes/talloc/talloc_2.0.1.bb
-> +++ b/recipes/talloc/talloc_2.0.1.bb
-> @@ -10,8 +10,17 @@ SRC_URI[sha256sum] = "5b810527405f29d54f50efd78bf2c89e318f2cd8bed001f22f2a1412fd
->  
->  TARGET_CC_ARCH += "${LDFLAGS}"
->  
-> +PR = "r1"
-> +
->  # autoreconf doesn't work well while reconfiguring included libreplace
->  do_configure () {
->         gnu-configize
->         oe_runconf
->  }
-> +
-> +do_install_append() {
-> +       install -d ${D}${libdir}
-> +       ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
-> +       ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
-> +       ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
-> +}
+> I think its the same problem as described here 
+> http://lists-archives.org/samba/39218-re-re-libtalloc-on-samba-3-2-0.html
+> 
+> I think disabling the use of shared libs would be an ok solutions to. Try
+> that out.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Hi,
 
-iD8DBQFNENUYMkyGM64RGpERAipoAJwO7iq3HesWj8x9o4vnW3v2aNEirACgvDn9
-QaeCjBOjMtbmsD1cd+T+1P0=
-=Vb7w
------END PGP SIGNATURE-----
+after reading
+http://lists.freedesktop.org/archives/mesa-dev/2010-August/002523.html
+and checking how is this solved in gentoo, I have tried Option 3) 
+(see resulting 2 patches sent here)
 
+and resulting /usr/sbin/smbd is not linked to libtalloc
+(--without-talloc seems enough).
+
+Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
