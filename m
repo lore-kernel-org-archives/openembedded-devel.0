@@ -1,36 +1,37 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PV6B6-0002ov-9J
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PV6N4-00039h-4j
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 18:39:12 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AmAFAMd0EE1bdWOb/2dsb2JhbACDY5INjwywBYM7AY10gSCDNXQEiwI
-X-IronPort-AV: E=Sophos;i="4.60,208,1291590000"; d="scan'208";a="313825973"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 21 Dec 2010 18:39:07 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PV6B1-0006GY-5r
+	Tue, 21 Dec 2010 18:51:34 +0100
+Received: by iwn8 with SMTP id 8so4598224iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 18:39:07 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PV6B1-0000fm-1d
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 18:39:07 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PV6B0-0005x2-Gu
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 18:39:06 +0100
-From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
-	<vjaquez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Dec 2010 18:39:06 +0100
-Message-Id: <1292953146-22849-1-git-send-email-vjaquez@igalia.com>
-X-Mailer: git-send-email 1.7.2.3
+	Tue, 21 Dec 2010 09:51:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=nmgI8IQtZbCXkaODshuPzeBHWdH9PRVX83Z4rvQdtzs=;
+	b=Z6uOrkaCYnEmhsOI7pRJ1ju6ajRjlBbh7qzzMH00S/8DJkoa813QbK3FYP05GlbviC
+	zgc+OL9eOi/nH8ZafnG0soG1TJvS9iOpuX9yNLq1uRjSM9HWgm+i9jNA2/Q1mhQLwT51
+	Sekz8pwg3IF7knVEeMXt8VOGXV7q/Mxw3lljk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=DnYWWRYu8+5vmspMU33GQ46043YUzrE9D23DYLjnadJSMXNwJy2fpe9pliiCN2w7jp
+	LkNHFwisKloGGuOfm7tI4hWPPItlS2GW9XHHOrTHsOiSYpXuAw2yfjBQZbwOlPCwpA4x
+	egFa61EkULKssP3HK2XpbfztJIC08oUwcmv+Q=
 MIME-Version: 1.0
-Subject: [RFC] strace: add netlink/netlink-compat.h in configure.ac
+Received: by 10.231.182.13 with SMTP id ca13mr5794709ibb.57.1292953885742;
+	Tue, 21 Dec 2010 09:51:25 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Tue, 21 Dec 2010 09:51:25 -0800 (PST)
+In-Reply-To: <iepnom$tk9$1@dough.gmane.org>
+References: <ienu66$5gf$1@dough.gmane.org> <4D0F8AB7.1020104@xora.org.uk>
+	<AANLkTiks4PYZxZCQgsprveY1jNQgpy_mMVTOwg3DtsqX@mail.gmail.com>
+	<iepnom$tk9$1@dough.gmane.org>
+Date: Tue, 21 Dec 2010 18:51:25 +0100
+Message-ID: <AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,71 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 17:39:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 Dec 2010 17:51:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I found, compiling an console-image for omap4330-panda machine, that strace
-compilation broke because the netlink.h wasn't included. It was not included
-because the AC_CHECK_HEADERS failed. If failed because sa_family_t wasn't
-defined, even though linux/socket.h is supposed to define it.
+2010/12/21 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 20-12-10 18:16, Frans Meulenbroeks wrote:
+>> Nice piece of work & a good plan but...
+>>
+>> Who will be the owners/maintainers of the layers?
+>
+> My intention was that the meta-openembedded layer will be maintained by
+> the people interested in it. There will be a new MAINTAINERS file inside
+> listing who feels responsible for various recipes.
 
-This patch modifies the configure.ac in order to include
-netlink/netlink-compat.h in the AC_CHECK_HEADER macro, so the header is
-detected correctly.
+Ah ok.
+Seems a good plan.
+>
+>> An alternate approach would be to let the stuff live in poky-extras.
+>> See this proposal from RP:
+>> http://www.mail-archive.com/yocto@yoctoproject.org/msg00286.html
+>
+> The poky-extras thing is not what I want, and more importantly, I don't
+> want to start diluting the OE brand.
 
-Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
----
- recipes/strace/strace-4.5.14/netlink.patch |   16 ++++++++++++++++
- recipes/strace/strace_4.5.14.bb            |    3 ++-
- 2 files changed, 18 insertions(+), 1 deletions(-)
- create mode 100644 recipes/strace/strace-4.5.14/netlink.patch
+Why wouldn't you want poky-extras?
+My concern is that we get lots of duplicated effort because both
+poky-extras and meta-openembedded might get the same recipes.
+Maybe this should be one of the items to be discussed with the yocto
+board (and maybe come to one user contributed layer).
 
-diff --git a/recipes/strace/strace-4.5.14/netlink.patch b/recipes/strace/strace-4.5.14/netlink.patch
-new file mode 100644
-index 0000000..ba89a10
---- /dev/null
-+++ b/recipes/strace/strace-4.5.14/netlink.patch
-@@ -0,0 +1,16 @@
-+Index: strace-4.5.14/configure.ac
-+===================================================================
-+--- strace-4.5.14.orig/configure.ac
-++++ strace-4.5.14/configure.ac
-+@@ -194,7 +194,10 @@ fi
-+ AC_CHECK_FUNCS(sigaction strerror strsignal pread sys_siglist _sys_siglist getdents mctl prctl sendmsg inet_ntop if_indextoname)
-+ AC_CHECK_HEADERS([sys/reg.h sys/filio.h sys/acl.h sys/asynch.h sys/door.h stropts.h sys/conf.h sys/stream.h sys/tihdr.h sys/tiuser.h sys/sysconfig.h ioctls.h sys/ioctl.h sys/ptrace.h termio.h linux/ptrace.h asm/reg.h sys/uio.h sys/aio.h  poll.h sys/poll.h sys/vfs.h asm/sysmips.h linux/utsname.h sys/nscsys.h mqueue.h sys/epoll.h libaio.h], [], [])
-+ AC_CHECK_HEADERS([linux/icmp.h linux/in6.h linux/netlink.h linux/if_packet.h],
-+-                 [], [], [#include <linux/socket.h>])
-++                 [], [], [
-++#include <netlink/netlink-compat.h>
-++#include <linux/socket.h>
-++])
-+ AC_CHECK_HEADERS([asm/sigcontext.h], [], [], [#include <signal.h>])
-+ AC_CHECK_HEADERS([netinet/tcp.h netinet/udp.h],,, [#include <netinet/in.h>])
-+ 
-diff --git a/recipes/strace/strace_4.5.14.bb b/recipes/strace/strace_4.5.14.bb
-index 33a44ad..a4a0981 100644
---- a/recipes/strace/strace_4.5.14.bb
-+++ b/recipes/strace/strace_4.5.14.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "strace is a system call tracing tool."
- SECTION = "console/utils"
- LICENSE = "BSD"
--PR = "r9"
-+PR = "r10"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
-            file://glibc-2.5.patch \
-@@ -13,6 +13,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
-            file://strace-arm-no-cachectl.patch \
-            file://strace-dont-include-linux-dirent-h.patch \
-            file://mips-sigcontext.patch \
-+           file://netlink.patch \
-           "
- 
- # The strace-4.5.14-avr32.patch conflicts with some other patches.
--- 
-1.7.2.3
+BTW it seems good to come up with some guidelines on the
+meta-openembedded layer (or maybe usage rules or so).
+E.g. personally I would expect that if I put meta-openembedded on top
+of e.g. poky/laverne that a recipe in it builds).
+So no dependencies on non poky recipes. Is that an agreed assumption?
 
+Wrt diluting the OE brand. This is a completely different topic.
+IMHO the mere fact that yocto exists impacts OE.
+Yocto also has much more resources (both people-hour wise as well as
+HW wise), so I strongly doubt we can compete on it wrt the quality of
+the base recipes.
+
+That leaves the question:
+Given the existence of Yocto in which parts do we see added value of
+OE and on which things should we as OE focus.
+But I guess this is more something for a different thread.
+
+Frans
 
 
