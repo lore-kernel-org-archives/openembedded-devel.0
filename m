@@ -1,37 +1,41 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jan.paesmans@gmail.com>) id 1PUxZA-00028z-QX
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1PUyhd-0005j2-Nr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 09:27:29 +0100
-Received: by qyk36 with SMTP id 36so3593584qyk.6
+	Tue, 21 Dec 2010 10:40:18 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B02D011000DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 00:27:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=nNvDsvnaeB9M2bk3RaXtNvcTvsm65nZkdZXmRW6EuK4=;
-	b=e5wG6+5mwKYIoRzmlfcYXsQnwYUFmub0XW0Yxc8ZxQaG8Oxj9uNJsOXPnl7Rdg16dn
-	v3XtJcF2t2L2bjiNfBKQAxQhJKG+HqtvKay0Gb3LhtH1rdBpY8elKXBKKGI+9VnU4E0s
-	QRo5Ft6+ngOHY8hEO9L53PScNM0497ekd5XjQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=YUEQh8e/kXVoKpqlRCN9ha/DCnEevOxFjj+kZXPN/COXMnPL9N9ryzCXYFyatzpENC
-	o+ZBjAbQk2sOD4dXLudStlT1/+E3ZxmFlpQ0gGDprE/EFEqdtqIdrQ2mPP5FFYCSnAA0
-	Du7i7m42lcRE164daPon3jdensyAdRpxzp31s=
-MIME-Version: 1.0
-Received: by 10.224.67.211 with SMTP id s19mr4999017qai.142.1292920040566;
-	Tue, 21 Dec 2010 00:27:20 -0800 (PST)
-Received: by 10.229.211.198 with HTTP; Tue, 21 Dec 2010 00:27:20 -0800 (PST)
-In-Reply-To: <AANLkTim+M3jX41Ryk-wJ4OOyJ6o--Vq89dCS3=aUYC9r@mail.gmail.com>
-References: <4D0FB245.90008@gmail.com> <20101220213243.GD17904@gmail.com>
-	<4D0FE2CC.5050003@gmail.com>
-	<AANLkTim+M3jX41Ryk-wJ4OOyJ6o--Vq89dCS3=aUYC9r@mail.gmail.com>
-Date: Tue, 21 Dec 2010 09:27:20 +0100
-Message-ID: <AANLkTinTsbFrf+AWZDYTL0UuVkM9648Nt_STiZXf0NPa@mail.gmail.com>
-From: Jan Paesmans <jan.paesmans@gmail.com>
+	Tue, 21 Dec 2010 10:34:23 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 9A6EF11000B2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Dec 2010 10:34:22 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from rhein.familie-heinold.de (g225147091.adsl.alicedsl.de
+	[92.225.147.91]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Dec 2010 10:34:22 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 60F8E3C124; Tue, 21 Dec 2010 10:33:48 +0100 (CET)
+Date: Tue, 21 Dec 2010 10:33:48 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: qemu-native_0.13.0 do_compile fails
+Message-ID: <20101221093348.GA3927@rhein.zuhause.netz>
+References: <4D10315D.5020707@gmail.com>
+	<AANLkTin8Fk1Zs3U-s_SAHrHOCn+NW2j=utt0J5OYtbKb@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTin8Fk1Zs3U-s_SAHrHOCn+NW2j=utt0J5OYtbKb@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: uclibc - which virtual/libintl?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,16 +49,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 08:27:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 Dec 2010 09:40:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> which ubuntu version are you using
+Hi,
 
-Ubuntu 10.10
-As for the linker: GNU ld (GNU Binutils for Ubuntu) 2.20.51-system.20100908
+in my tests proxy-libintl provided the smallest lib. So we should use it.
 
-Regards,
-
-Jan
+Bye Henning
 
 
