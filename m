@@ -1,35 +1,36 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PUymp-0005qK-Sd
+	(envelope-from <koen.kooi@gmail.com>) id 1PUz6t-0000nJ-Kw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 10:45:40 +0100
-Received: by gyh20 with SMTP id 20so1643217gyh.6
+	Tue, 21 Dec 2010 11:06:23 +0100
+Received: by wyb40 with SMTP id 40so3835542wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 01:45:32 -0800 (PST)
+	Tue, 21 Dec 2010 02:06:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=yxR5aJ9aIXvVgnDw1FYfNJOjWlcV4HEEXVN/mq/fgZw=;
-	b=oWjHp6f46LiFLLWG/+oIqAG3wtpr9p7u5RelXu+9XUncckxo3kO7H3drXYCIGD408G
-	+whQIEfuJ14BiRqozrRc/y4BnHKMP6Y5gM+r6VGHxfqFexXK2Fpg296/qTNv1ye2tK/A
-	maLPQoI3n2XVtd9bkMBYkTn01yf7M/XK2LVaY=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=iGs8zKg/HSMmxeWCuDSWgwiSv2WjV6xfupkXbPxCwRI=;
+	b=h3u5uEL4K/jznj1ygdQDmhHxlGpB6TCQU65Y/OqxP1vWPYRrELDOtaKlJ+bML6IYO9
+	Hp10ITDDeYZu5QAR/UrT/93mKMpviTnNLbmv6y6RSJERefnLMczJ3qD6lBlWd7H2Umuq
+	ot/dFH2Shk3gxCIbHlKxC4p0phS5XnRQh/z/A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=RTZGZAQBKqO3VT50tebT27qd9lwzBby95n9QG7MDCb7HWjDrcu/9FR5coNw6nBQlKP
-	zThIGIgrM/HvHqV+wL5CCmZyCS00PCPV3aVkzhJJ9NiAp0MLVCu3wweNENMWDPXU4bXj
-	lB5QORBK2m1BW/O4lr1ozEdEJL0xwtAZ6KvkI=
-Received: by 10.90.98.11 with SMTP id v11mr6760078agb.58.1292924732097; Tue,
-	21 Dec 2010 01:45:32 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Tue, 21 Dec 2010 01:45:09 -0800 (PST)
-In-Reply-To: <ienu66$5gf$1@dough.gmane.org>
-References: <ienu66$5gf$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 Dec 2010 01:45:09 -0800
-Message-ID: <AANLkTimSZHSb23N1opQc=zQ4cNgsEzA_jaO_rn0=pV3o@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=SI+1dQDfjH3Svp5SJd9+jq/lY1zJE+svtcHi2X9UiOGeJO9rX/tyt7Orjge/ettl+Q
+	uQyawucCvJ4gXOXE/Pf9JRyfwbMBexntJ4BK9JDeZnFMsB/yeYcFl7s2bLbCoEB2fr5q
+	odjQGDDrEquiws0WPxwQtyQT8bXaqlIA0hUJI=
+Received: by 10.216.188.141 with SMTP id a13mr919425wen.59.1292925973990;
+	Tue, 21 Dec 2010 02:06:13 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id n78sm2386018weq.3.2010.12.21.02.06.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 21 Dec 2010 02:06:13 -0800 (PST)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
+Date: Tue, 21 Dec 2010 11:06:06 +0100
+Message-Id: <1292925966-65237-1-git-send-email-koen@openembedded.org>
+X-Mailer: git-send-email 1.7.0
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [PATCH 1/2] package ipk bbclass: store build branch and revision in ipkg metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,55 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 09:45:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 Dec 2010 10:06:23 -0000
 
-On Mon, Dec 20, 2010 at 7:53 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi,
->
-> I've locally split
-> http://gitorious.org/angstrom/angstrom-layers/commits/master into 3
-> seperate git repos with git-filter-branch. I would like to move the
-> meta-openembedded layer to the OE git server to make it easier for
-> others to help in cleaning it up and getting more use to layers. The
-> beagle and angstrom layers could move there as well, but those will need
-> a more restricted set of committers.
->
-> In essence I would like this to be the "official" OE layer for yocto
-> while the board is dealing with the yocto negotiations.
->
+The ipkg metadata will look like this now:
 
-yes this is something what we should do. We need to setup gitolite on
-the git server
-first which will give us finer control on access types. Cliff has been
-working on it.
+koen@dominion:/OE/angstrom-dev/deploy/glibc$ dpkg-deb -I ipk/am3517-evm/matrix-gui_1.3-r19.0.6_am3517-evm.ipk
+ new debian package, version 2.0.
+ size 24112 bytes: control archive= 540 bytes.
+     629 bytes,    13 lines      control
+ Package: matrix-gui
+ Version: 1.3-r19.0.6
+ Description: Matrix GUI for Qt X11
+ Section: multimedia
+ Priority: optional
+ Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
+ License: BSD
+ Architecture: am3517-evm
+ OE: matrix-gui
+ Homepage: https://gforge.ti.com/gf/project/matrix_gui/
+ Build: org.openembedded.dev/f35ab2d
+ Depends: matrix-gui-common, libpng12-0, libfreetype6, libz1, libgthread-2.0-0, libqtwebkit4, libphonon4, libqtdbus4, libqtxml4, libqtgui4, libqtnetwork4, libqtcore4, libglib-2.0-0, libc6, libstdc++6, libgcc1
+ Source: svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd=''
+koen@dominion:/OE/angstrom-dev/deploy/glibc$
 
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ classes/package_ipk.bbclass |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-> This would be a good chance to try out things like 'maintainers' and
-> 'pull requests' if we wanted to :)
->
+diff --git a/classes/package_ipk.bbclass b/classes/package_ipk.bbclass
+index 5d388da..97e5cd8 100644
+--- a/classes/package_ipk.bbclass
++++ b/classes/package_ipk.bbclass
+@@ -224,6 +224,7 @@ python do_package_ipk () {
+ 		fields.append(["Architecture: %s\n", ['PACKAGE_ARCH']])
+ 		fields.append(["OE: %s\n", ['PN']])
+ 		fields.append(["Homepage: %s\n", ['HOMEPAGE']])
++		fields.append(["Build: %s/%s\n", ['METADATA_BRANCH', 'METADATA_REVISION']])
+ 
+ 		def pullData(l, d):
+ 			l2 = []
+-- 
+1.6.6.1
 
-yes this would be the intended model thereafter.
-
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFND3wGMkyGM64RGpERAspRAKCQS+ZtZqw/my9oTZ8l+O4KqD+WDQCcDeij
-> 7XzhyxcmFBpGtwWwGZC7QT0=
-> =EH9g
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
