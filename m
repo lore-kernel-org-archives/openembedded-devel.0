@@ -1,42 +1,40 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PV3rn-0004Lq-Uv
+	(envelope-from <kergoth@gmail.com>) id 1PV3vJ-0004Qo-BJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 16:11:08 +0100
-Received: by ywi6 with SMTP id 6so1877992ywi.6
+	Tue, 21 Dec 2010 16:14:45 +0100
+Received: by wwi17 with SMTP id 17so4034986wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 07:11:00 -0800 (PST)
+	Tue, 21 Dec 2010 07:14:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=/uyF8pcKqftXTZBWq3hlS+3lm5d0Iz/60f64eAbItmY=;
-	b=YCIT9tm8sJbqBtxbngPp1dyJAZ98RNcR69pUBY+FI4Xo7SE39zASJaVZ1trSd+SLCH
-	qBICGgeiivTQv+byB0ySFwVNjPy90gHGtLOu2wAlxVc8++znLOfbUm93dh4UmDLQYO6j
-	oLpt3yhunJJhqDSE3U6pfXnYragxy4xku3yZk=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:cc:content-type:content-transfer-encoding;
+	bh=6azOTxs0K/mK/9O+ecq7egI4MSWuYuiSrGd307iazxM=;
+	b=HlVI4vGLcQQcQywqXTWO8gjNr9mlvZg1HNNci3tmIcdClF1ZO+nVGFXpDL07sAFek/
+	E+kqEYJuqFg59eI2B45Vyl7ZoqpfRI3ijiPfzRs6XIKOtURKX/KXP1BSHfjS6vKqDvSo
+	HeqP51lYKRTJCH5g7d21jwz3fi7YU50c+1i9s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Rklo7xyS5j9CWCH6K/WJMEJXlD7DISCaWVh8NwuxiCfLVuNambQo8q9V6H64BH4Rfs
-	EPKd23aVpe4gLvBufz01ENHnFByIJPJwcelcpsVSWjq0tBM+LP6ZqTurE20l7rTv1OaH
-	03tn26u0pkTGb8utM7BmcRlzJ9mz7/s57LY6g=
-Received: by 10.150.57.16 with SMTP id f16mr8864290yba.16.1292944260535;
-	Tue, 21 Dec 2010 07:11:00 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id l4sm8238466ybj.21.2010.12.21.07.10.58
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 21 Dec 2010 07:10:59 -0800 (PST)
-Date: Tue, 21 Dec 2010 07:11:13 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101221151113.GC4665@gmail.com>
-References: <20101221133550.GI3282@jama>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	b=RuvqlgnnXzev7DFO5dXgaIKHSfMxmooqLfk22gkG2AbCRKGJY9imM9p25Z2N6IiYpp
+	8LIwp2iQScPW7W+XCE6QE5P0iGpnjcyIrQVn5XeefHxkNgtA2URIa6sAgRRPGL74g3fu
+	dKux19qQ6L1Vk1nC+Zf/+eZONsQy+KvMlK934=
+Received: by 10.216.220.219 with SMTP id o69mr6358530wep.57.1292944478848;
+	Tue, 21 Dec 2010 07:14:38 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20101221133550.GI3282@jama>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: nail@nslu2-linux.org, tim.ellis@foonas.org
-Subject: Re: mesa depending on samba or samba depending on extern talloc?
+Sender: kergoth@gmail.com
+Received: by 10.216.67.67 with HTTP; Tue, 21 Dec 2010 07:14:13 -0800 (PST)
+In-Reply-To: <4D1086EB.8020405@eukrea.com>
+References: <4D1062AF.1080609@eukrea.com> <4D1086EB.8020405@eukrea.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 21 Dec 2010 08:14:13 -0700
+X-Google-Sender-Auth: KYDcWda9hx1T9C9pK8iIhH-smz8
+Message-ID: <AANLkTinGaP=WYqcNCifYuFQjyvB9ZYLqgDJQkTpr1Cog@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: bitbake-dev@lists.berlios.de
+Subject: Re: Problem with bitbake master & OE master during fetch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,64 +48,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 15:11:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 21 Dec 2010 15:14:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On (21/12/10 14:35), Martin Jansa wrote:
-> On 2010-10-20 I've pushed newer mesa-7.9
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=30a3ea891d4511059a51882674f33aff2dddb96e
-> which depends on talloc
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=fabce288e40037d28c70f0f034185176f85e8664
-> and separate talloc recipe (because building whole samba just to provide talloc for mesa seems wrong
-> and samba produced ICE before khem's fix) 
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=afce52663d6b5b79c097136fa794dd3f76a4afff
-> 
-> Today I noticed, that usr/lib/pkgconfig/talloc.pc from talloc recipe was enough for mesa to compile, 
-> but because there was no libtalloc.so link it wasn't used in the end (as ldd confirms).
-> 
-> so talloc stages:
-> bitbake@jama ~ $ ll tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.*
-> -rwxr-xr-x 1 bitbake bitbake  32K Dec 21 13:30 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.a
-> -rwxr-xr-x 1 bitbake bitbake  73K Dec 21 13:30 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.so.2.0.1
-> bitbake@jama ~ $ ll tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/pkgconfig/talloc.pc
-> -rw-r--r-- 1 bitbake bitbake 251 Dec 21 13:30 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/pkgconfig/talloc.pc
-> 
-> samba adds:
-> bitbake@jama ~ $ ll tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.*
-> lrwxrwxrwx 1 bitbake bitbake   14 Dec 14 13:33 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.so -> libtalloc.so.1
-> -rwxr-xr-x 1 bitbake bitbake 123K Dec 14 13:33 tmpdir-shr/sysroots/armv4t-oe-linux-gnueabi/usr/lib/libtalloc.so.1
-> 
-> now for sure I don't want to install whole samba on target (just for libtalloc) so I have few options
-> 
-> 1) fix talloc to install libtalloc.so -> libtalloc.so.2.0.1 (conflicts with samba in sysroot)
-> 2a) move libtalloc to separate package in samba recipe and make mesa depending on samba
-> 2b) move libtalloc to separate package in samba recipe in case someone builds 
->     it before mesa, but still depend only on fixed talloc
-> 3) fix talloc + force samba build to use already installed libtalloc instead of building own version
-> 
-> Option 3) looks best, but I'm not sure how tightly samba depends on talloc 
-> and don't have time to test all samba versions we currently have
-> (3.0.23c, 3.0.34, 3.2.15, 3.3.0, 3.3.9, 3.5.6), so 2b) looks as easier fix.
-> 
-> CCed 2 samba maintainers (wrt MAINTAINERS file) or if there is someone who cares about samba
-> recipes: can you clean recipes/samba a bit and provide some feedback on talloc issue?
+On Tue, Dec 21, 2010 at 3:52 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> Hi,
+>
+> On 21/12/2010 09:17, Eric B=C3=A9nard wrote:
+>>
+>> I still haven't investigated the reason of the error.
+>>
+> OK the reason of the error is that the machine I'm fetching for is an arm
+> and these recipes have either COMPATIBLE_MACHINE =3D "(h3600|h3900)"
+> or COMPATIBLE_HOST =3D "i.86.*-linux"
+> Same thing occur with recipes/apache/apache_2.0.54.bb
+>
+> which has :
+> python () {
+> =C2=A0 =C2=A0# Don't build apache unless we are building nativly
+> =C2=A0 =C2=A0target =3D bb.data.getVar("TARGET_ARCH", d, 1)
+> =C2=A0 =C2=A0build =3D bb.data.getVar("BUILD_ARCH", d, 1)
+> =C2=A0 =C2=A0if target !=3D build:
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0raise bb.parse.SkipPackage("Apache will only b=
+uild nativly
+> (TARGET_ARCH =3D=3D BUILD_ARCH)")
+> }
+>
+> Also, the problem is only present when doing bitbake -b the_recipe.bb
+>
+> .
+> Doing bitbake the_recipe exit fine with the following message : "NoProvid=
+er:
+> adobe-flash".
+>
+> If would be great if bitbake -b the_recipe.bb
+>
+> could exit properly instead of looping on these errors
 
-I think its the same problem as described here 
-http://lists-archives.org/samba/39218-re-re-libtalloc-on-samba-3-2-0.html
-
-I think disabling the use of shared libs would be an ok solutions to. Try
-that out.
-
-> 
-> Regards,
-> 
-> -- 
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I just pulled over a commit from poky that fixes that.  That is, at
+least it doesn't error.  Unfortunately, it just returns saying 0 tasks
+were run, and not *why* it didn't run anything, but it's a step in the
+right direction.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
