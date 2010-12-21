@@ -1,40 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from exprod5og104.obsmtp.com ([64.18.0.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PV3vJ-0004Qo-BJ
+	(envelope-from <martyn.welch@ge.com>) id 1PV4HG-0004pI-QF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 16:14:45 +0100
-Received: by wwi17 with SMTP id 17so4034986wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 07:14:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type:content-transfer-encoding;
-	bh=6azOTxs0K/mK/9O+ecq7egI4MSWuYuiSrGd307iazxM=;
-	b=HlVI4vGLcQQcQywqXTWO8gjNr9mlvZg1HNNci3tmIcdClF1ZO+nVGFXpDL07sAFek/
-	E+kqEYJuqFg59eI2B45Vyl7ZoqpfRI3ijiPfzRs6XIKOtURKX/KXP1BSHfjS6vKqDvSo
-	HeqP51lYKRTJCH5g7d21jwz3fi7YU50c+1i9s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	b=RuvqlgnnXzev7DFO5dXgaIKHSfMxmooqLfk22gkG2AbCRKGJY9imM9p25Z2N6IiYpp
-	8LIwp2iQScPW7W+XCE6QE5P0iGpnjcyIrQVn5XeefHxkNgtA2URIa6sAgRRPGL74g3fu
-	dKux19qQ6L1Vk1nC+Zf/+eZONsQy+KvMlK934=
-Received: by 10.216.220.219 with SMTP id o69mr6358530wep.57.1292944478848;
-	Tue, 21 Dec 2010 07:14:38 -0800 (PST)
+	Tue, 21 Dec 2010 16:37:28 +0100
+Received: from source ([4.79.213.129]) (using TLSv1) by
+	exprod5ob104.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKTRDJsONXpioPoQ7JLUTx6zA0xpdVDxxV@postini.com;
+	Tue, 21 Dec 2010 07:37:22 PST
+Received: from unknown (HELO cinmlef09.e2k.ad.ge.com) ([3.159.213.56])
+	by Alpmlip06.e2k.ad.ge.com with ESMTP; 21 Dec 2010 06:50:11 -0500
+Received: from [3.138.54.92] ([3.138.54.92]) by cinmlef09.e2k.ad.ge.com with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 21 Dec 2010 06:50:11 -0500
+Message-ID: <4D109471.6010202@ge.com>
+Date: Tue, 21 Dec 2010 11:50:09 +0000
+From: Martyn Welch <martyn.welch@ge.com>
+Organization: GE Intelligent Platforms
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Tue, 21 Dec 2010 07:14:13 -0800 (PST)
-In-Reply-To: <4D1086EB.8020405@eukrea.com>
-References: <4D1062AF.1080609@eukrea.com> <4D1086EB.8020405@eukrea.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 21 Dec 2010 08:14:13 -0700
-X-Google-Sender-Auth: KYDcWda9hx1T9C9pK8iIhH-smz8
-Message-ID: <AANLkTinGaP=WYqcNCifYuFQjyvB9ZYLqgDJQkTpr1Cog@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: bitbake-dev@lists.berlios.de
-Subject: Re: Problem with bitbake master & OE master during fetch
+References: <AANLkTim=weStfsykRNc7_bAZG6KExZt9sS_O15WH9F5=@mail.gmail.com>	<AANLkTikSuqFKS=1j-KWm3XY75J=qhe+towHjdfanW1JG@mail.gmail.com>
+	<20101206204753.GC29253@denix.org>
+In-Reply-To: <20101206204753.GC29253@denix.org>
+X-Enigmail-Version: 1.1.2
+X-OriginalArrivalTime: 21 Dec 2010 11:50:11.0164 (UTC)
+	FILETIME=[38E521C0:01CBA105]
+Subject: Re: release 2010-12: tar error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,53 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 15:14:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Dec 2010 15:37:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Dec 21, 2010 at 3:52 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> Hi,
->
-> On 21/12/2010 09:17, Eric B=C3=A9nard wrote:
+On 06/12/10 20:47, Denys Dmytriyenko wrote:
+> On Fri, Dec 03, 2010 at 11:44:14AM -0800, Khem Raj wrote:
+>> On Fri, Dec 3, 2010 at 7:36 AM, Frans Meulenbroeks
+>> <fransmeulenbroeks@gmail.com> wrote:
+>>> Not sure if this is reproducible or a race but when building console-image
+>>> for minimal for calamari I got:
+>>>
+>>> ERROR: Function staging_packager failed
+>>> NOTE: Task failed: ('function staging_packager failed',
+>>> '/home/hudson/jobs/FM_TEST/workspace/tmp/work/calamari-oe-linux-gnuspe/linux-2.6.30-r6/temp/log.staging_packager.27026')
+>>> ERROR: Task 601
+>>> (/home/hudson/jobs/FM_TEST/workspace/openembedded/recipes/linux/linux_2.6.30.bb,
+>>> do_package_stage) failed with 256
+>>> NOTE: oestats: task failed, see
+>>> http://tinderbox.openembedded.net/packages/1176040/
+>>> ERROR: Logfile of failure stored in:
+>>> /home/hudson/jobs/FM_TEST/workspace/tmp/work/calamari-oe-linux-gnuspe/linux-2.6.30-r6/temp/log.staging_packager.27026
+>>> Log data follows:
+>>> | tar: .: file changed as we read it
+>>>
+>>> NOTE: package linux-2.6.30-r6: task do_package_stage: Failed
+>>>
+>>> Didn't have time to dig into this. Sry.
 >>
->> I still haven't investigated the reason of the error.
->>
-> OK the reason of the error is that the machine I'm fetching for is an arm
-> and these recipes have either COMPATIBLE_MACHINE =3D "(h3600|h3900)"
-> or COMPATIBLE_HOST =3D "i.86.*-linux"
-> Same thing occur with recipes/apache/apache_2.0.54.bb
->
-> which has :
-> python () {
-> =C2=A0 =C2=A0# Don't build apache unless we are building nativly
-> =C2=A0 =C2=A0target =3D bb.data.getVar("TARGET_ARCH", d, 1)
-> =C2=A0 =C2=A0build =3D bb.data.getVar("BUILD_ARCH", d, 1)
-> =C2=A0 =C2=A0if target !=3D build:
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0raise bb.parse.SkipPackage("Apache will only b=
-uild nativly
-> (TARGET_ARCH =3D=3D BUILD_ARCH)")
-> }
->
-> Also, the problem is only present when doing bitbake -b the_recipe.bb
->
-> .
-> Doing bitbake the_recipe exit fine with the following message : "NoProvid=
-er:
-> adobe-flash".
->
-> If would be great if bitbake -b the_recipe.bb
->
-> could exit properly instead of looping on these errors
+>> yes this happens time to time. Its some sort of race condition. I get
+>> it sometimes in different packages but never went in deep to fix it.
+> 
+> I can confirm that this is a long standing race condition, presumably in 
+> packaged staging - there were several attempts at fixing it w/o much success.
+> 
 
-I just pulled over a commit from poky that fixes that.  That is, at
-least it doesn't error.  Unfortunately, it just returns saying 0 tasks
-were run, and not *why* it didn't run anything, but it's a step in the
-right direction.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+I recently repeatedly hit this. I'm in the process of setting up some
+automated testing which made this particularly annoying. I had
+BB_NUMBER_THREADS and PARALLEL_MAKE setup in my local.conf. I think this is
+arises when BB_NUMBER_THREADS is set. I've removed it and taken the hit in
+build time instead (preferable in my situation). This seems to have stop it
+being an issue, but I need to do quite a few more runs to make sure.
+
+Martyn
+
+
+-- 
+Martyn Welch (Principal Software Engineer) | Registered in England and
+GE Intelligent Platforms                   | Wales (3828642) at 100
+T +44(0)127322748                          | Barbirolli Square, Manchester,
+E martyn.welch@ge.com                      | M2 3AB  VAT:GB 927559189
 
 
