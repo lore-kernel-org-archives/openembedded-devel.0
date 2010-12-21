@@ -1,39 +1,36 @@
-Received: from mail-fx0-f42.google.com ([209.85.161.42])
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PV5st-0002SB-R7
+	(envelope-from <vjaquez@igalia.com>) id 1PV6B6-0002ov-9J
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 18:20:23 +0100
-Received: by mail-fx0-f42.google.com with SMTP id 11so4040249fxm.29
+	Tue, 21 Dec 2010 18:39:12 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AmAFAMd0EE1bdWOb/2dsb2JhbACDY5INjwywBYM7AY10gSCDNXQEiwI
+X-IronPort-AV: E=Sophos;i="4.60,208,1291590000"; d="scan'208";a="313825973"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 21 Dec 2010 18:39:07 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PV6B1-0006GY-5r
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 09:20:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=Z56Zs9yjE1ufgYPlkEAJPYXQ2lBPIZ5pnk3SAKL9cX8=;
-	b=R5dKEaaEjK2dcYEW/y4UDM8Y3hQtDYhzrsTtWV8OYVkzYeOYtZWMB9rukgsqDaMICG
-	+IwihGVG44fcnMYMS84JKhihYUngS+SfCUT9JzHqmIZP+9ogIXUlmHKs5UlI3yBXjLdW
-	IKFHrpFksT5AUnkDTcqhCHSN/4JhmeNJ5XwEc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=HTWSRKilm9baCmHnaJRpp61RmIKfAric/dnUwo8Q/ihWD6zC/TaWmLOTzeP2SikY9/
-	hrydD2TfrbYMWN9r/AJLJw1VxHSO1q1L+7SkXsotQYU8VLlnrxG2aydWxA/y45nu9vrB
-	6B7WL6t8e9v4b2gUvbRK/2HfQmOMTrA7rYqXk=
-Received: by 10.223.83.199 with SMTP id g7mr6272553fal.81.1292952005460;
-	Tue, 21 Dec 2010 09:20:05 -0800 (PST)
-Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
-	[85.127.155.31])
-	by mx.google.com with ESMTPS id y14sm1401082fak.42.2010.12.21.09.20.03
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 21 Dec 2010 09:20:04 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1PV5sY-0004xX-TM; Tue, 21 Dec 2010 18:20:02 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Tue, 21 Dec 2010 18:39:07 +0100
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PV6B1-0000fm-1d
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Dec 2010 18:39:07 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>) id 1PV6B0-0005x2-Gu
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Dec 2010 18:39:06 +0100
+From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
+	<vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Dec 2010 18:19:58 +0100
-Message-Id: <1292951999-18969-1-git-send-email-rep.dot.nop@gmail.com>
+Date: Tue, 21 Dec 2010 18:39:06 +0100
+Message-Id: <1292953146-22849-1-git-send-email-vjaquez@igalia.com>
 X-Mailer: git-send-email 1.7.2.3
-Subject: [PATCH] conditional patch-tool dep
+MIME-Version: 1.0
+Subject: [RFC] strace: add netlink/netlink-compat.h in configure.ac
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,30 +44,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 17:20:24 -0000
+X-List-Received-Date: Tue, 21 Dec 2010 17:39:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+I found, compiling an console-image for omap4330-panda machine, that strace
+compilation broke because the netlink.h wasn't included. It was not included
+because the AC_CHECK_HEADERS failed. If failed because sa_family_t wasn't
+defined, even though linux/socket.h is supposed to define it.
 
-If a recipe doesn't reference any patch then patching doesn't make sense
-and neither does depending on patch-tool.
+This patch modifies the configure.ac in order to include
+netlink/netlink-compat.h in the AC_CHECK_HEADER macro, so the header is
+detected correctly.
 
-I didn't look yet if i can say
-addtask patch after do_unpack if needs_patching_at_all(d)
-(or something like that).
-So, for a start, don't depend do_patch on the patch tool if there is no
-patch in the SRC_URI.
+Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
+---
+ recipes/strace/strace-4.5.14/netlink.patch |   16 ++++++++++++++++
+ recipes/strace/strace_4.5.14.bb            |    3 ++-
+ 2 files changed, 18 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/strace/strace-4.5.14/netlink.patch
 
-untested.
-
-PS: There should be some oe.is_compressed(uri) shorthand that is used to
-decide if an uri is in a compressed format, imho.
-
-Bernhard Reutner-Fischer (1):
-  patch.bbclass: conditional patch-tool dependency
-
- classes/patch.bbclass |   21 +++++++++++++++++++--
- 1 files changed, 19 insertions(+), 2 deletions(-)
-
+diff --git a/recipes/strace/strace-4.5.14/netlink.patch b/recipes/strace/strace-4.5.14/netlink.patch
+new file mode 100644
+index 0000000..ba89a10
+--- /dev/null
++++ b/recipes/strace/strace-4.5.14/netlink.patch
+@@ -0,0 +1,16 @@
++Index: strace-4.5.14/configure.ac
++===================================================================
++--- strace-4.5.14.orig/configure.ac
+++++ strace-4.5.14/configure.ac
++@@ -194,7 +194,10 @@ fi
++ AC_CHECK_FUNCS(sigaction strerror strsignal pread sys_siglist _sys_siglist getdents mctl prctl sendmsg inet_ntop if_indextoname)
++ AC_CHECK_HEADERS([sys/reg.h sys/filio.h sys/acl.h sys/asynch.h sys/door.h stropts.h sys/conf.h sys/stream.h sys/tihdr.h sys/tiuser.h sys/sysconfig.h ioctls.h sys/ioctl.h sys/ptrace.h termio.h linux/ptrace.h asm/reg.h sys/uio.h sys/aio.h  poll.h sys/poll.h sys/vfs.h asm/sysmips.h linux/utsname.h sys/nscsys.h mqueue.h sys/epoll.h libaio.h], [], [])
++ AC_CHECK_HEADERS([linux/icmp.h linux/in6.h linux/netlink.h linux/if_packet.h],
++-                 [], [], [#include <linux/socket.h>])
+++                 [], [], [
+++#include <netlink/netlink-compat.h>
+++#include <linux/socket.h>
+++])
++ AC_CHECK_HEADERS([asm/sigcontext.h], [], [], [#include <signal.h>])
++ AC_CHECK_HEADERS([netinet/tcp.h netinet/udp.h],,, [#include <netinet/in.h>])
++ 
+diff --git a/recipes/strace/strace_4.5.14.bb b/recipes/strace/strace_4.5.14.bb
+index 33a44ad..a4a0981 100644
+--- a/recipes/strace/strace_4.5.14.bb
++++ b/recipes/strace/strace_4.5.14.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "strace is a system call tracing tool."
+ SECTION = "console/utils"
+ LICENSE = "BSD"
+-PR = "r9"
++PR = "r10"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
+            file://glibc-2.5.patch \
+@@ -13,6 +13,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
+            file://strace-arm-no-cachectl.patch \
+            file://strace-dont-include-linux-dirent-h.patch \
+            file://mips-sigcontext.patch \
++           file://netlink.patch \
+           "
+ 
+ # The strace-4.5.14-avr32.patch conflicts with some other patches.
 -- 
 1.7.2.3
 
