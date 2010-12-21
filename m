@@ -1,32 +1,40 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PV0Yk-0003lA-6R
+Received: from comal.ext.ti.com ([198.47.26.152])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <chase.maupin@ti.com>) id 1PV2Ao-0007rx-Ij
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 12:39:14 +0100
-Received: (qmail 19618 invoked by uid 503); 21 Dec 2010 12:14:44 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 21 Dec 2010 12:14:43 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 21 Dec 2010 13:39:08 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 21 Dec 2010 13:39:04 +0200
-Message-ID: <4D1091D6.8040705@eukrea.com>
-Date: Tue, 21 Dec 2010 12:39:02 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Tue, 21 Dec 2010 14:22:39 +0100
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id oBLDMUr9007609
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Dec 2010 07:22:30 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id oBLDMUXP027427
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Dec 2010 07:22:30 -0600 (CST)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id oBLDMUGT003652
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Dec 2010 07:22:30 -0600 (CST)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Tue, 21 Dec 2010 07:22:30 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 21 Dec 2010 07:22:28 -0600
+Thread-Topic: [oe] [PATCH 1/2] package ipk bbclass: store build branch and
+	revision in ipkg metadata
+Thread-Index: Acug+tPDSoiJV/2WSDC35tR+Xam8VwAFvGoA
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080329E930FE@dlee06.ent.ti.com>
+References: <1292925966-65237-1-git-send-email-koen@openembedded.org>
+	<iepusv$t59$1@dough.gmane.org> <20101221103004.GH3282@jama>
+In-Reply-To: <20101221103004.GH3282@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1291941859-29257-1-git-send-email-eric@eukrea.com>	<AANLkTinOcF=bKiZGZz1p4YZHSpW8Hy3LLumvG6VbqWg6@mail.gmail.com>	<4D08B2C8.5010508@opendreambox.org>	<AANLkTi=rzhtfxbfi8VS_R+W8uZV_qe=Ur1or861LJoPm@mail.gmail.com>	<4D09FC00.1010304@opendreambox.org>
-	<20101216154641.GA22134@gmail.com>
-In-Reply-To: <20101216154641.GA22134@gmail.com>
-X-Ovh-Tracer-Id: 10509149731289935177
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] gcc: introduce version 4.5.2
+Subject: Re: [PATCH 1/2] package ipk bbclass: store build branch and revision in ipkg metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +48,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 11:39:14 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Dec 2010 13:22:39 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Khem, hi Andreas,
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Tuesday, December 21, 2010 4:30 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH 1/2] package ipk bbclass: store build branch and
+> revision in ipkg metadata
+>=20
+> On Tue, Dec 21, 2010 at 11:18:07AM +0100, Koen Kooi wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> >
+> > There is no 2/2, this is the only patch in the series, I had a git
+> > format-patch slip up on my end.
+>=20
+> Ah :), looks usefull to me
+>=20
+> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-On 16/12/2010 16:46, Khem Raj wrote:
-> On (16/12/10 12:46), Andreas Oberritter wrote:
->> In the (hopefully unlikely) event that a random svn version of linaro
->> gcc introduces a regression, say on the MIPS platform, who am I going to
->> report that to? Would I have to bisect all linaro patches manually?
->> Surely, the upstream developers wouldn't care about reports about
->> heavily patched gccs, and linaro developers wouldn't care about MIPS.
->>
-> Quite a lot of OE users are right now using armv7 in some form so I think linaro
-> patches are very helpful to them.
+I agree.  Thanks for adding this.
 
-Linaro is having an interesting discussion on the linaro-toolchain list about 
-this :
-http://lists.linaro.org/pipermail/linaro-toolchain/2010-December/000650.html
-http://lists.linaro.org/pipermail/linaro-toolchain/2010-December/000651.html
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
-Eric
+>=20
+> > On 21-12-10 11:06, Koen Kooi wrote:
+> > > The ipkg metadata will look like this now:
+> > >
+> > > koen@dominion:/OE/angstrom-dev/deploy/glibc$ dpkg-deb -I ipk/am3517-
+> evm/matrix-gui_1.3-r19.0.6_am3517-evm.ipk
+> > >  new debian package, version 2.0.
+> > >  size 24112 bytes: control archive=3D 540 bytes.
+> > >      629 bytes,    13 lines      control
+> > >  Package: matrix-gui
+> > >  Version: 1.3-r19.0.6
+> > >  Description: Matrix GUI for Qt X11
+> > >  Section: multimedia
+> > >  Priority: optional
+> > >  Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org=
+>
+> > >  License: BSD
+> > >  Architecture: am3517-evm
+> > >  OE: matrix-gui
+> > >  Homepage: https://gforge.ti.com/gf/project/matrix_gui/
+> > >  Build: org.openembedded.dev/f35ab2d
+> > >  Depends: matrix-gui-common, libpng12-0, libfreetype6, libz1,
+> libgthread-2.0-0, libqtwebkit4, libphonon4, libqtdbus4, libqtxml4,
+> libqtgui4, libqtnetwork4, libqtcore4, libglib-2.0-0, libc6, libstdc++6,
+> libgcc1
+> > >  Source:
+> svn://gforge.ti.com/svn/matrix_gui/;module=3Dtrunk;proto=3Dhttps;user=3Da=
+nonymou
+> s;pswd=3D''
+> > > koen@dominion:/OE/angstrom-dev/deploy/glibc$
+> > >
+> > > Signed-off-by: Koen Kooi <koen@openembedded.org>
+> > > ---
+> > >  classes/package_ipk.bbclass |    1 +
+> > >  1 files changed, 1 insertions(+), 0 deletions(-)
+> > >
+> > > diff --git a/classes/package_ipk.bbclass b/classes/package_ipk.bbclas=
+s
+> > > index 5d388da..97e5cd8 100644
+> > > --- a/classes/package_ipk.bbclass
+> > > +++ b/classes/package_ipk.bbclass
+> > > @@ -224,6 +224,7 @@ python do_package_ipk () {
+> > >  		fields.append(["Architecture: %s\n", ['PACKAGE_ARCH']])
+> > >  		fields.append(["OE: %s\n", ['PN']])
+> > >  		fields.append(["Homepage: %s\n", ['HOMEPAGE']])
+> > > +		fields.append(["Build: %s/%s\n", ['METADATA_BRANCH',
+> 'METADATA_REVISION']])
+> > >
+> > >  		def pullData(l, d):
+> > >  			l2 =3D []
+> >
+> > -----BEGIN PGP SIGNATURE-----
+> > Version: GnuPG v1.4.5 (Darwin)
+> >
+> > iD8DBQFNEH7fMkyGM64RGpERAtfoAJ4wwHII7rXn7YG4gCKFSQd1B9SmEACeIg/Y
+> > rhw39nBhCibyooRTxx+zAZM=3D
+> > =3DSkML
+> > -----END PGP SIGNATURE-----
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
