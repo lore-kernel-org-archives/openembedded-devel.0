@@ -1,38 +1,39 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PVKkh-00005P-9D
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PVL89-0000Qf-O6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 10:12:55 +0100
-Received: by iwn8 with SMTP id 8so5212499iwn.6
+	Wed, 22 Dec 2010 10:37:09 +0100
+Received: by iyj18 with SMTP id 18so4086065iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 01:12:49 -0800 (PST)
+	Wed, 22 Dec 2010 01:37:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=Oz6sJ/sEXNHuL6upvh/3F0haTp8F1jf62Gpr88R++vM=;
-	b=O4oMJ/4BxaAmA2M4fnBU0AuPy9YMFcHj+gPJAOae0L/ZVhQGWU8rYCJJCG6ca3EpH1
-	oJVMiXqU7dBIF6RAbenTkUQVIFpEif/ZsyTDgVS1Hgzhh3dpPckZoVGbYdIrBSQgukxT
-	hY0I0FzuWHOeJhvtb6+u/ufEcT5L6pPmzeCXc=
+	bh=iWE021YXsGRedXh9QYuum3RCW61BYCZZPZPtut62JkI=;
+	b=f/mtoiEB8RXwX8Rbgm5LDMT2Ni6gachNbeq1XawCajbbKxESt7dsrLa1VUvlucjZ6C
+	g3NgEgMkFHMuGmK/4LDMs6fxewVfPv842aj4FeEXg+Wuh7E3yWnTidUMZBWvLw1uLeIv
+	U4stdr+53gj74Q83ZmVE3whMV7VP+/IyfGixM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=vUqnwl9ezA+orPdi7/5YkxniDUfFXF5WgwGziWQGmpx9s3BslJjb+FailoQgNDfgUE
-	/ClrQLYzjYfrgnRrG5ko66outbc39nbG5ggKoCqQNucuQfihA08Z/Ex3v4E+VY0Wsdo8
-	gOgkIevAf2NOJMy7jHjd1zXl4AT1WA796MA7w=
+	b=vRW8n0YGParCW4Klx2maTHLZhgBlIxYrM3rcc6IWJQ9pwphzkhhl8a6VIW3CGl+QG0
+	LphnCBT53lFb6NlDgYlHQtZqjSvqSopVT3Z4YfYK0FMEEy/MCOM6/fNSQKawMTW8mppH
+	KfK6X6Ee50iH3I54EyAKbdwRp8ix759YScNUE=
 MIME-Version: 1.0
-Received: by 10.231.206.7 with SMTP id fs7mr6541680ibb.82.1293009169183; Wed,
-	22 Dec 2010 01:12:49 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Wed, 22 Dec 2010 01:12:49 -0800 (PST)
-In-Reply-To: <AANLkTimMbqWP4JwW6FaDT+_C-uaWZVsVNRjmcUM2F4g_@mail.gmail.com>
+Received: by 10.231.182.13 with SMTP id ca13mr540351ibb.57.1293010621412; Wed,
+	22 Dec 2010 01:37:01 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Wed, 22 Dec 2010 01:37:01 -0800 (PST)
+In-Reply-To: <AANLkTik4ZXMff-vHGJTK4sJcEuUHuvGNcsGjGPgwLZng@mail.gmail.com>
 References: <20101221150222.GB4665@gmail.com>
 	<1292969027-18762-1-git-send-email-eric@eukrea.com>
-	<AANLkTimMbqWP4JwW6FaDT+_C-uaWZVsVNRjmcUM2F4g_@mail.gmail.com>
-Date: Wed, 22 Dec 2010 10:12:49 +0100
-Message-ID: <AANLkTi=y+2gxjMqQoX0ze3DVkzPaycAu=MgTjiPWcjC-@mail.gmail.com>
+	<1292969027-18762-2-git-send-email-eric@eukrea.com>
+	<AANLkTik4ZXMff-vHGJTK4sJcEuUHuvGNcsGjGPgwLZng@mail.gmail.com>
+Date: Wed, 22 Dec 2010 10:37:01 +0100
+Message-ID: <AANLkTikDnXGbBWf2c=KHrAvUbZq3J1ndHWexPYvQZ06Q@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] asterisk: move non working recipes to nonworking directory
+Subject: Re: [PATCH 2/2] asterisk: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,12 +47,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 09:12:55 -0000
+X-List-Received-Date: Wed, 22 Dec 2010 09:37:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/12/22 Khem Raj <raj.khem@gmail.com>:
+2010/12/21 Khem Raj <raj.khem@gmail.com>:
 > On Tue, Dec 21, 2010 at 2:03 PM, Eric B=E9nard <eric@eukrea.com> wrote:
+>> * keep the higher version which fetch and patch
+>> * fix SRC_URI for all the asterisk recipes
+>>
 >> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
 >
 > Acked-by: Khem Raj <raj.khem@gmail.com>
