@@ -1,42 +1,33 @@
 Received: from mail-fx0-f42.google.com ([209.85.161.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PVRrg-0000Em-VA
+	(envelope-from <coolaj86@gmail.com>) id 1PVSxA-0001Rj-0c
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 17:48:37 +0100
-Received: by fxm11 with SMTP id 11so5109974fxm.29
+	Wed, 22 Dec 2010 18:58:20 +0100
+Received: by fxm11 with SMTP id 11so5183457fxm.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 08:48:26 -0800 (PST)
+	Wed, 22 Dec 2010 09:58:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=R+8U3fR1Cy/UVyM4vuLRi0k7QMQEyjk1vXVW9cM/aFw=;
-	b=jbfIwQzOEUfHlG1UOWTVH2cDY4DGF5Q20rBTbZWfHAAT1K6TOXX/iyMjogeEuuUyHZ
-	KP7l2j/IGHSQrw7iUQTtK4Iy1pW22bM60V8Hc7n5Y+hTEjyOxDiWwqXRVHSl9NJoQYr3
-	R0qaoDO6w4HRajeI6eqPao5tNXfYsY3JWJ6p0=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=48X7wbXCBeEgPG+5zum9dOf1md9NwgaTl8a1brbh0ts=;
+	b=JNPpxMWIKd8/SxaBijwU5kZVbQVInaapMRxXfRQ32EPomqVL3Gjr9aU6aMcPRuAuB6
+	ptYy/xcynIkUtWAXo0KpRQNtrBpFNN/xw4dDXcC+7e9Drx5dJ3SOTCTFYFA30NlN08+V
+	OVZTBRmc1dMP66rkdDM8E5xW1J4n+G0pufa9o=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=naue9O7yR7uZNSG/LmxOy92t1rekd806get2bCpVPetoH3L9j2KZMnppRJNN1ULHWp
-	ujG/JIqm6+q4JmWei+OLPywNQggbvXw+HHP9JZeBHLJzQ+zSWI0HFKdGhQWmuRscTRWW
-	Ns79dUQuy9RWDvufAhdrhVCJI1+GP4dnqXG/8=
-Received: by 10.223.86.199 with SMTP id t7mr535592fal.29.1293036505273;
-	Wed, 22 Dec 2010 08:48:25 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id y3sm1752712fai.38.2010.12.22.08.48.23
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 22 Dec 2010 08:48:23 -0800 (PST)
-Date: Wed, 22 Dec 2010 17:48:21 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101222164821.GA3295@jama>
-References: <1292911102-13199-1-git-send-email-raj.khem@gmail.com>
-	<4D1201DE.4030905@eukrea.com>
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=Uk0lFBA+9tV7iF2+3dAac4AtCBIdBlC2ExrZEn1U3myBo5XlxP+GFgdeLf5/BM564g
+	b5pk3qElQKM1Vaomi4p0UpmEKbJnnO0JS+sWDuPvdfzVN4IemMa+2NUwV3ROyyNoT1WE
+	Qmwz3F/McEO8mOSlFOAJ4inQqDTUhYxhwyuew=
+Received: by 10.223.71.194 with SMTP id i2mr3199562faj.15.1293040692308; Wed,
+	22 Dec 2010 09:58:12 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <4D1201DE.4030905@eukrea.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] gcc-4.5: Apply patches upto 2010.12 release of linaro gcc
+Received: by 10.223.42.18 with HTTP; Wed, 22 Dec 2010 09:57:51 -0800 (PST)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Wed, 22 Dec 2010 10:57:51 -0700
+Message-ID: <AANLkTimDyv3ouBLRCvrfR9Ywudwf_TqOrBztwmxWLa3x@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Subversion depends on Apache2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,34 +41,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 16:48:37 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Dec 2010 17:58:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Dec 22, 2010 at 02:49:18PM +0100, Eric Bénard wrote:
-> Hi Khem,
-> 
-> On 21/12/2010 06:58, Khem Raj wrote:
-> > This patch brings in more Linaro patches. So far I have built a x11-image
-> > for qemuarm and it has shown no issues. I plan to test it more thoroughly
-> > in coming days on different arches and different images and also run gcc
-> > regression testsuite for them. But while I do this I wanted to bring it to
-> > everyone who would be interested to try and test the patch out and report
-> > any issues one sees and we could weed them out before installing this patch
-> >
-> > -Khem
-> >
-> > Signed-off-by: Khem Raj<raj.khem@gmail.com>
-> 
-> Acked-by: Eric Bénard <eric@eukrea.com>
+Overkill?
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+root@overo:~# opkg install subversion
+Installing subversion (1.6.5-r0.5) to root...
+Downloading
+http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/subversion_1.6.5-r0.5_armv7a.ipk
+.
+Installing libneon25 (0.25.5-r4.5) to root...
+Downloading
+http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/libneon25_0.25.5-r4.5_armv7a.ipk
+.
+Installing libsqlite3-0 (3.6.23.1-r1.0.5) to root...
+Downloading
+http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/libsqlite3-0_3.6.23.1-r1.0.5_armv7a.ipk
+.
+Installing libaprutil-1-0 (1.3.4-r5.5) to root...
+Downloading
+http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/libaprutil-1-0_1.3.4-r5.5_armv7a.ipk
+.
+Installing apache2 (2.2.14-r0.5) to root...
+Downloading
+http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/apache2_2.2.14-r0.5_armv7a.ipk
+.
+Configuring libsqlite3-0.
+Configuring libneon25.
+Configuring libaprutil-1-0.
+Collected errors:
+ * check_data_file_clashes: Package apache2 wants to install file
+/usr/lib/libaprutil-1.so.0
+    But that file is already provided by package  * libaprutil-1-0
+ * opkg_install_cmd: Cannot install package subversion.
 
-Tested for armv4t (om-gta02), armv5te (spitz), armv7a (nokia900).
+root@overo:~# opkg install subversion --force-overwrite
+Installing subversion (1.6.5-r0.5) to root...
+Downloading
+http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/subversion_1.6.5-r0.5_armv7a.ipk
+.
+Installing apache2 (2.2.14-r0.5) to root...
+Downloading
+http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/apache2_2.2.14-r0.5_armv7a.ipk
+.
+Installing libssl0.9.8 (0.9.8m-r12.0.5) to root...
+Downloading
+http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/libssl0.9.8_0.9.8m-r12.0.5_armv7a.ipk
+.
+Configuring libssl0.9.8.
+Configuring apache2.
+ Adding system startup for /etc/init.d/apache2.
+ln: /etc/rc3.d/S91apache2: File exists
+ln: /etc/rc4.d/S91apache2: File exists
+ln: /etc/rc5.d/S91apache2: File exists
+Starting web server: apache2.
+Configuring subversion.
 
-Thanks
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
+AJ ONeal
 
