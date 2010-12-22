@@ -1,37 +1,37 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-gx0-f179.google.com ([209.85.161.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <graham.gower@gmail.com>) id 1PVBAK-0006OB-RI
+	(envelope-from <raj.khem@gmail.com>) id 1PVE9u-0001BE-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Dec 2010 23:58:44 +0100
-Received: by wyb40 with SMTP id 40so4543648wyb.6
+	Wed, 22 Dec 2010 03:10:30 +0100
+Received: by gxk21 with SMTP id 21so2774831gxk.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Dec 2010 14:58:34 -0800 (PST)
+	Tue, 21 Dec 2010 18:10:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=mQ8FhClJtrhFgaLbMhbvIfL9HzX7WKbZP79ko2x/9jw=;
-	b=A3N5MHqHkfjVwIuClVmHqkdRx+wf/9HOauVRDmdisMir2LvN8kqOZhBLgDwEW4kv+J
-	1x8hpSl/pyYHd0BxcwpcNkAktmsCiAqf5FEXu+R+Qz6pNn8Jipygneof4Clqsvptgt3L
-	oMDpjUR+AKYXE8PJ8RIbdhYzlTq45vXDB8RXA=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=61qGdnB3wbOn61NNWeriX+AadGygckyuIU6fFXcMBYA=;
+	b=NhHTCQIFyHMEkICo9skGwkJ737zBYFAYrhLxO2q8JxTWRVZ/hJP7juDnSpOA5xBwOv
+	rMazjCgevaP84q8MO86MK+zDvSP4176hxhOUzJjeYfibtcIkSR+WlCfcObQQZSMOwTQF
+	rMEBbtpQWMlBMXEdFfAQqY2NF1BrPEhAs+k2g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=HwnlGfDtoLXnfXek4eKjmCxXC/2l2rH7QIUTuTb53GY98m2V+lidh5MyoB+WzH7Vno
-	wUDhf0We72cnqXmXDEIP8gYb1y0eXH+Ib9Mng+tjjd47EYLGOqaDT5biSyxp67A00Ak1
-	oGZc/6lVbnPM8TDOLdjusAQXwFJ515v9nfHvk=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=XIv0Yc4cE3TS8IKdE9POFg0DPObzEOUaGs0jq4RYqoNUxnamj+0LjgEuEw0kkUjLn6
+	wdOiak4HP5oVUUHClg0uqAc70TGXjKrdasLXyywfi66X3Pl0ShgjF+TIPqpLJK2VZM+1
+	0wiIWQoz8UbhoudJ7roRtun/6eNgoSoJ4DOJ4=
+Received: by 10.90.10.31 with SMTP id 31mr7897682agj.85.1292983822090; Tue, 21
+	Dec 2010 18:10:22 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.227.129.69 with SMTP id n5mr3724060wbs.136.1292972313976; Tue,
-	21 Dec 2010 14:58:33 -0800 (PST)
-Received: by 10.227.155.208 with HTTP; Tue, 21 Dec 2010 14:58:33 -0800 (PST)
-In-Reply-To: <4D109471.6010202@ge.com>
-References: <AANLkTim=weStfsykRNc7_bAZG6KExZt9sS_O15WH9F5=@mail.gmail.com>
-	<AANLkTikSuqFKS=1j-KWm3XY75J=qhe+towHjdfanW1JG@mail.gmail.com>
-	<20101206204753.GC29253@denix.org> <4D109471.6010202@ge.com>
-Date: Wed, 22 Dec 2010 09:28:33 +1030
-Message-ID: <AANLkTin=CKQTx0ybBNnequq1vFzm0re8yAY3Z5QsyTLo@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+Received: by 10.90.86.4 with HTTP; Tue, 21 Dec 2010 18:10:01 -0800 (PST)
+In-Reply-To: <1292969027-18762-1-git-send-email-eric@eukrea.com>
+References: <20101221150222.GB4665@gmail.com>
+	<1292969027-18762-1-git-send-email-eric@eukrea.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 Dec 2010 18:10:01 -0800
+Message-ID: <AANLkTimMbqWP4JwW6FaDT+_C-uaWZVsVNRjmcUM2F4g_@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: release 2010-12: tar error
+Subject: Re: [PATCH 1/2] asterisk: move non working recipes to nonworking directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,56 +45,220 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2010 22:58:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 22 Dec 2010 02:10:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 21 December 2010 22:20, Martyn Welch <martyn.welch@ge.com> wrote:
-> On 06/12/10 20:47, Denys Dmytriyenko wrote:
->> On Fri, Dec 03, 2010 at 11:44:14AM -0800, Khem Raj wrote:
->>> On Fri, Dec 3, 2010 at 7:36 AM, Frans Meulenbroeks
->>> <fransmeulenbroeks@gmail.com> wrote:
->>>> Not sure if this is reproducible or a race but when building console-image
->>>> for minimal for calamari I got:
->>>>
->>>> ERROR: Function staging_packager failed
->>>> NOTE: Task failed: ('function staging_packager failed',
->>>> '/home/hudson/jobs/FM_TEST/workspace/tmp/work/calamari-oe-linux-gnuspe/linux-2.6.30-r6/temp/log.staging_packager.27026')
->>>> ERROR: Task 601
->>>> (/home/hudson/jobs/FM_TEST/workspace/openembedded/recipes/linux/linux_2.6.30.bb,
->>>> do_package_stage) failed with 256
->>>> NOTE: oestats: task failed, see
->>>> http://tinderbox.openembedded.net/packages/1176040/
->>>> ERROR: Logfile of failure stored in:
->>>> /home/hudson/jobs/FM_TEST/workspace/tmp/work/calamari-oe-linux-gnuspe/linux-2.6.30-r6/temp/log.staging_packager.27026
->>>> Log data follows:
->>>> | tar: .: file changed as we read it
->>>>
->>>> NOTE: package linux-2.6.30-r6: task do_package_stage: Failed
->>>>
->>>> Didn't have time to dig into this. Sry.
->>>
->>> yes this happens time to time. Its some sort of race condition. I get
->>> it sometimes in different packages but never went in deep to fix it.
->>
->> I can confirm that this is a long standing race condition, presumably in
->> packaged staging - there were several attempts at fixing it w/o much success.
->>
+On Tue, Dec 21, 2010 at 2:03 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+> ---
+> =C2=A0recipes/asterisk/asterisk-1.2.24/asterisk.patch =C2=A0 =C2=A0| =C2=
+=A0221 --------------------
+> =C2=A0.../asterisk/asterisk-1.2.24/enable-speex.patch =C2=A0 =C2=A0| =C2=
+=A0 21 --
+> =C2=A0.../asterisk-1.2.24/uclibc-compat-getloadavg.patch | =C2=A0 13 --
+> =C2=A0recipes/asterisk/asterisk-1.2.24/uclibc-dns.patch =C2=A0| =C2=A0 18=
+ --
+> =C2=A0recipes/asterisk/asterisk-1.2.28/asterisk.patch =C2=A0 =C2=A0| =C2=
+=A0221 --------------------
+> =C2=A0.../asterisk/asterisk-1.2.28/enable-speex.patch =C2=A0 =C2=A0| =C2=
+=A0 21 --
+> =C2=A0.../asterisk-1.2.28/uclibc-compat-getloadavg.patch | =C2=A0 13 --
+> =C2=A0recipes/asterisk/asterisk-1.2.28/uclibc-dns.patch =C2=A0| =C2=A0 18=
+ --
+> =C2=A0recipes/asterisk/asterisk-1.4.17/Makefile.patch =C2=A0 =C2=A0| =C2=
+=A0 20 --
+> =C2=A0recipes/asterisk/asterisk-1.4.17/init =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0| =C2=A0 77 -------
+> =C2=A0recipes/asterisk/asterisk-1.4.17/logrotate =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | =C2=A0 12 -
+> =C2=A0recipes/asterisk/asterisk-1.4.17/sounds.xml.patch =C2=A0| =C2=A0 18=
+ --
+> =C2=A0recipes/asterisk/asterisk-1.4.17/volatiles =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | =C2=A0 =C2=A07 -
+> =C2=A0recipes/asterisk/asterisk-1.4.19.1/Makefile.patch =C2=A0| =C2=A0 20=
+ --
+> =C2=A0recipes/asterisk/asterisk-1.4.19.1/init =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0| =C2=A0 77 -------
+> =C2=A0recipes/asterisk/asterisk-1.4.19.1/logrotate =C2=A0 =C2=A0 =C2=A0 |=
+ =C2=A0 12 -
+> =C2=A0.../asterisk/asterisk-1.4.19.1/sounds.xml.patch =C2=A0 =C2=A0| =C2=
+=A0 18 --
+> =C2=A0recipes/asterisk/asterisk-1.4.19.1/volatiles =C2=A0 =C2=A0 =C2=A0 |=
+ =C2=A0 =C2=A07 -
+> =C2=A0.../asterisk/asterisk-1.6.0-beta8/Makefile.patch =C2=A0 | =C2=A0 20=
+ --
+> =C2=A0recipes/asterisk/asterisk-1.6.0-beta8/init =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | =C2=A0 77 -------
+> =C2=A0recipes/asterisk/asterisk-1.6.0-beta8/logrotate =C2=A0 =C2=A0| =C2=
+=A0 12 -
+> =C2=A0.../asterisk/asterisk-1.6.0-beta8/sounds.xml.patch | =C2=A0 18 --
+> =C2=A0recipes/asterisk/asterisk-1.6.0-beta8/volatiles =C2=A0 =C2=A0| =C2=
+=A0 =C2=A07 -
+> =C2=A0recipes/asterisk/asterisk-addons_1.6.0-beta2.bb =C2=A0 =C2=A0| =C2=
+=A0 66 ------
+> =C2=A0recipes/asterisk/asterisk_1.2.24.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 52 -----
+> =C2=A0recipes/asterisk/asterisk_1.2.28.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 46 ----
+> =C2=A0recipes/asterisk/asterisk_1.4.17.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0174 ---------------
+> =C2=A0recipes/asterisk/asterisk_1.4.19.1.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0| =C2=A0173 ---------------
+> =C2=A0recipes/asterisk/asterisk_1.6.0-beta8.bb =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | =C2=A0185 ----------------
+> =C2=A0.../asterisk/asterisk-1.2.24/asterisk.patch =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0221 ++++++++++++++++++++
+> =C2=A0.../asterisk/asterisk-1.2.24/enable-speex.patch =C2=A0 =C2=A0| =C2=
+=A0 21 ++
+> =C2=A0.../asterisk-1.2.24/uclibc-compat-getloadavg.patch | =C2=A0 13 ++
+> =C2=A0.../asterisk/asterisk-1.2.24/uclibc-dns.patch =C2=A0 =C2=A0 =C2=A0|=
+ =C2=A0 18 ++
+> =C2=A0.../asterisk/asterisk-1.2.28/asterisk.patch =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0221 ++++++++++++++++++++
+> =C2=A0.../asterisk/asterisk-1.2.28/enable-speex.patch =C2=A0 =C2=A0| =C2=
+=A0 21 ++
+> =C2=A0.../asterisk-1.2.28/uclibc-compat-getloadavg.patch | =C2=A0 13 ++
+> =C2=A0.../asterisk/asterisk-1.2.28/uclibc-dns.patch =C2=A0 =C2=A0 =C2=A0|=
+ =C2=A0 18 ++
+> =C2=A0.../asterisk/asterisk-1.4.17/Makefile.patch =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0 20 ++
+> =C2=A0recipes/nonworking/asterisk/asterisk-1.4.17/init =C2=A0 | =C2=A0 77=
+ +++++++
+> =C2=A0.../nonworking/asterisk/asterisk-1.4.17/logrotate =C2=A0| =C2=A0 12=
+ +
+> =C2=A0.../asterisk/asterisk-1.4.17/sounds.xml.patch =C2=A0 =C2=A0 =C2=A0|=
+ =C2=A0 18 ++
+> =C2=A0.../nonworking/asterisk/asterisk-1.4.17/volatiles =C2=A0| =C2=A0 =
+=C2=A07 +
+> =C2=A0.../asterisk/asterisk-1.4.19.1/Makefile.patch =C2=A0 =C2=A0 =C2=A0|=
+ =C2=A0 20 ++
+> =C2=A0recipes/nonworking/asterisk/asterisk-1.4.19.1/init | =C2=A0 77 ++++=
++++
+> =C2=A0.../asterisk/asterisk-1.4.19.1/logrotate =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | =C2=A0 12 +
+> =C2=A0.../asterisk/asterisk-1.4.19.1/sounds.xml.patch =C2=A0 =C2=A0| =C2=
+=A0 18 ++
+> =C2=A0.../asterisk/asterisk-1.4.19.1/volatiles =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | =C2=A0 =C2=A07 +
+> =C2=A0.../asterisk/asterisk-1.6.0-beta8/Makefile.patch =C2=A0 | =C2=A0 20=
+ ++
+> =C2=A0.../nonworking/asterisk/asterisk-1.6.0-beta8/init =C2=A0| =C2=A0 77=
+ +++++++
+> =C2=A0.../asterisk/asterisk-1.6.0-beta8/logrotate =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0 12 +
+> =C2=A0.../asterisk/asterisk-1.6.0-beta8/sounds.xml.patch | =C2=A0 18 ++
+> =C2=A0.../asterisk/asterisk-1.6.0-beta8/volatiles =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0 =C2=A07 +
+> =C2=A0.../asterisk/asterisk-addons_1.6.0-beta2.bb =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0 66 ++++++
+> =C2=A0recipes/nonworking/asterisk/asterisk_1.2.24.bb =C2=A0 =C2=A0 | =C2=
+=A0 52 +++++
+> =C2=A0recipes/nonworking/asterisk/asterisk_1.2.28.bb =C2=A0 =C2=A0 | =C2=
+=A0 46 ++++
+> =C2=A0recipes/nonworking/asterisk/asterisk_1.4.17.bb =C2=A0 =C2=A0 | =C2=
+=A0174 +++++++++++++++
+> =C2=A0recipes/nonworking/asterisk/asterisk_1.4.19.1.bb =C2=A0 | =C2=A0173=
+ +++++++++++++++
+> =C2=A0.../nonworking/asterisk/asterisk_1.6.0-beta8.bb =C2=A0 =C2=A0| =C2=
+=A0185 ++++++++++++++++
+> =C2=A058 files changed, 1644 insertions(+), 1644 deletions(-)
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.2.24/asterisk.patch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.2.24/enable-speex.pa=
+tch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.2.24/uclibc-compat-g=
+etloadavg.patch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.2.24/uclibc-dns.patc=
+h
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.2.28/asterisk.patch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.2.28/enable-speex.pa=
+tch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.2.28/uclibc-compat-g=
+etloadavg.patch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.2.28/uclibc-dns.patc=
+h
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.17/Makefile.patch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.17/init
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.17/logrotate
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.17/sounds.xml.patc=
+h
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.17/volatiles
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.19.1/Makefile.patc=
+h
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.19.1/init
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.19.1/logrotate
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.19.1/sounds.xml.pa=
+tch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.4.19.1/volatiles
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.6.0-beta8/Makefile.p=
+atch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.6.0-beta8/init
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.6.0-beta8/logrotate
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.6.0-beta8/sounds.xml=
+.patch
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-1.6.0-beta8/volatiles
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk-addons_1.6.0-beta2.bb
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk_1.2.24.bb
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk_1.2.28.bb
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk_1.4.17.bb
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk_1.4.19.1.bb
+> =C2=A0delete mode 100644 recipes/asterisk/asterisk_1.6.0-beta8.bb
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.2.24/aste=
+risk.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.2.24/enab=
+le-speex.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.2.24/ucli=
+bc-compat-getloadavg.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.2.24/ucli=
+bc-dns.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.2.28/aste=
+risk.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.2.28/enab=
+le-speex.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.2.28/ucli=
+bc-compat-getloadavg.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.2.28/ucli=
+bc-dns.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.17/Make=
+file.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.17/init
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.17/logr=
+otate
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.17/soun=
+ds.xml.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.17/vola=
+tiles
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.19.1/Ma=
+kefile.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.19.1/in=
+it
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.19.1/lo=
+grotate
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.19.1/so=
+unds.xml.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.4.19.1/vo=
+latiles
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.6.0-beta8=
+/Makefile.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.6.0-beta8=
+/init
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.6.0-beta8=
+/logrotate
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.6.0-beta8=
+/sounds.xml.patch
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-1.6.0-beta8=
+/volatiles
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk-addons_1.6.=
+0-beta2.bb
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk_1.2.24.bb
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk_1.2.28.bb
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk_1.4.17.bb
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk_1.4.19.1.bb
+> =C2=A0create mode 100644 recipes/nonworking/asterisk/asterisk_1.6.0-beta8=
+.bb
 >
-> I recently repeatedly hit this. I'm in the process of setting up some
-> automated testing which made this particularly annoying. I had
-> BB_NUMBER_THREADS and PARALLEL_MAKE setup in my local.conf. I think this is
-> arises when BB_NUMBER_THREADS is set. I've removed it and taken the hit in
-> build time instead (preferable in my situation). This seems to have stop it
-> being an issue, but I need to do quite a few more runs to make sure.
->
-> Martyn
->
-
-If you have a good way to reproduce any race, please provide instructions.
-
-I have PARALLEL_MAKE = "-j 12" and BB_NUMBER_THREADS = "12" in my
-local.conf and have never seen this race.
-
--Graham
 
 
