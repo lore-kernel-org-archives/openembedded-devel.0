@@ -1,31 +1,38 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PVP4H-00052a-Ok
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <kergoth@gmail.com>) id 1PVPFs-0005aX-Uh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 14:49:25 +0100
-Received: (qmail 12958 invoked by uid 503); 22 Dec 2010 13:23:02 -0000
-Received: from b6.ovh.net (HELO mail420.ha.ovh.net) (213.186.33.56)
-	by 30.mail-out.ovh.net with SMTP; 22 Dec 2010 13:23:02 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 22 Dec 2010 15:49:19 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 22 Dec 2010 15:49:18 +0200
-Message-ID: <4D1201DE.4030905@eukrea.com>
-Date: Wed, 22 Dec 2010 14:49:18 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Wed, 22 Dec 2010 15:01:25 +0100
+Received: by wwi17 with SMTP id 17so5063691wwi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Dec 2010 06:01:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=rBrE9+GQSdtLj7+IX67O6MHDPjbaU/O9swTGEC+NXgg=;
+	b=Hz/b4Bbt00oDxMEhVkmSixQJhP6KqEcokXc3oo+1vGfRR3rZB2sZSWwO/4IBktOJoj
+	UuuUL2WWqYD/+rd+4mU/9ab2ScATQteXjgH7CB95JKQF9K5E/At8ysrWVhC2u9tFzx0j
+	k4dM8tfzYxSzLBTKchFA5pBjuz52mwLNsb2ZU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=l5k2ORaXXk6yZO6V3GgWOnZ0aobOaKMHdxvKDxWrtAQpS7yv6SjLWxGB50+eaKAglz
+	G7APXcNfMmy16g9BT9bJKAQaa6WFVCSe7Z6p+rOrAd6huzGgQdVtEEbJL7GJ+jbyUbsp
+	Fp16Fg7jDK+g4A1/z1miLZcekrkgjE4BoGx/o=
+Received: by 10.216.59.193 with SMTP id s43mr1423215wec.42.1293026476968; Wed,
+	22 Dec 2010 06:01:16 -0800 (PST)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.67.67 with HTTP; Wed, 22 Dec 2010 06:00:56 -0800 (PST)
+In-Reply-To: <iescrt$keo$2@dough.gmane.org>
+References: <20101221220041.GD19986@denix.org> <iescrt$keo$2@dough.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 22 Dec 2010 07:00:56 -0700
+X-Google-Sender-Auth: mFxVZ1yugxSe00lKx9B1i4dOOcM
+Message-ID: <AANLkTinjVkLHn9+3YryPDWKWTUQF0dzunBKVchhYACjq@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1292911102-13199-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1292911102-13199-1-git-send-email-raj.khem@gmail.com>
-X-Ovh-Tracer-Id: 134545039947509065
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] gcc-4.5: Apply patches upto 2010.12 release of linaro gcc
+Subject: Re: base.bbclass changes broke BitBake 1.8.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 13:49:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Dec 2010 14:01:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Khem,
-
-On 21/12/2010 06:58, Khem Raj wrote:
-> This patch brings in more Linaro patches. So far I have built a x11-image
-> for qemuarm and it has shown no issues. I plan to test it more thoroughly
-> in coming days on different arches and different images and also run gcc
-> regression testsuite for them. But while I do this I wanted to bring it to
-> everyone who would be interested to try and test the patch out and report
-> any issues one sees and we could weed them out before installing this patch
+On Wed, Dec 22, 2010 at 1:28 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> -Khem
+> On 21-12-10 23:00, Denys Dmytriyenko wrote:
+>> Chris,
+>>
+>> The c67b95955d023c1f198531b4f06100a40b05efa7 has introduced the following
+>> problem with BitBake 1.8.19 and even af81d52e48cb6d4f91fff0c70e09dfd421e0057d
+>> didn't fix it. Any thoughts? Thanks.
 >
-> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+> Since the release is out, can be bump to 1.10.0 as minimum bitbake now?
 
-Acked-by: Eric Bénard <eric@eukrea.com>
-
-Tested for armv4, armv5, armv6 targets
-
-Eric
+I'm all for this, personally.  The only reason the TSC didn't decide
+to bump it already was the release, so I don't see any reason why not.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
