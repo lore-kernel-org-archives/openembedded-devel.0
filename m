@@ -1,35 +1,36 @@
-Received: from zmta01.irigo.dk ([193.200.44.52])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eha@doredevelopment.dk>) id 1PVHcM-0007rr-BP
+	(envelope-from <raj.khem@gmail.com>) id 1PVI8l-0000Bw-MK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 06:52:06 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by zmta01.irigo.dk (Postfix) with ESMTP id A982E14319F81
+	Wed, 22 Dec 2010 07:25:35 +0100
+Received: by gyh20 with SMTP id 20so2070957gyh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 06:43:14 +0100 (CET)
-X-Virus-Scanned: amavisd-new at zmta01.irigo.dk
-Received: from zmta01.irigo.dk ([127.0.0.1])
-	by localhost (zmta01.irigo.dk [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JqwFcfpiRXUm
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 06:43:10 +0100 (CET)
-Received: from [192.168.1.21] (0x55532124.adsl.cybercity.dk [85.83.33.36])
-	by zmta01.irigo.dk (Postfix) with ESMTP id 72B88142C1AB2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 06:43:10 +0100 (CET)
-From: Esben Haabendal <eha@doredevelopment.dk>
+	Tue, 21 Dec 2010 22:25:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=7vRuO17x66w977sJre9xQKdoShwY1l24bL4V9PjYs2Q=;
+	b=gpduC8CR/Y6EKyRMpZGQJ/izUuJGjFg4JNrbflSf/3MRssy9ZovVNXpjLUH0E8P1ir
+	T/yRdy6+xUZrCGkhtksTcRk8mFc+mWl75b3rsN8/O43nZE2xWJct5nvqo7UOG7h3rPwM
+	Jun/K0ZQ09iim7QqqkOIvso2iWaNEmLC2fk1g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=jhmFdXQAdmPmerYNJvk/LMSP5QuhXKjUHQoDvVjdbgLquvxvSowegKPraehS7ghxbC
+	bD49A5KaPKrmGyRdW0UEnaoPRa47V3Sg2nrQFGDowYF71s4sEctlzQB9po+Km1whF0rD
+	562TsHKiPh0dButsC0we7c7GMilrMLJ+axIW4=
+Received: by 10.100.201.15 with SMTP id y15mr3814028anf.259.1292999127828;
+	Tue, 21 Dec 2010 22:25:27 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id f10sm10716127anh.25.2010.12.21.22.25.26
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 21 Dec 2010 22:25:27 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
-References: <ienu66$5gf$1@dough.gmane.org> <4D0F8AB7.1020104@xora.org.uk>
-	<AANLkTiks4PYZxZCQgsprveY1jNQgpy_mMVTOwg3DtsqX@mail.gmail.com>
-	<iepnom$tk9$1@dough.gmane.org>
-	<AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
-Organization: =?ISO-8859-1?Q?Dor=E9Development?= ApS
-Date: Wed, 22 Dec 2010 06:43:09 +0100
-Message-ID: <1292996589.13721.1.camel@eha>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
+Date: Tue, 21 Dec 2010 22:25:42 -0800
+Message-Id: <1292999142-28338-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] sane-toolchain.inc: FEED_ARCH should be prepended to OVERRIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 05:52:06 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Dec 2010 06:25:35 -0000
 
-On Tue, 2010-12-21 at 18:51 +0100, Frans Meulenbroeks wrote:
+Currently it ends up after local override and hence appears first in FILESPATH
+and for buiding uclibc_git.bb on qemuarm it picks wrong uClibc.machine file from
+uclibc-git/armv5te where as it should have picked from uclibc-git/qemuarm
 
-> That leaves the question:
-> Given the existence of Yocto in which parts do we see added value of
-> OE and on which things should we as OE focus.
-> But I guess this is more something for a different thread.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/distro/include/sane-toolchain.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-With or without Yocto, it seems like a good question to ask what we
-would like to see improved in OE, ie. what would we like to see go into
-OE within the next 1-2 years.
-
-With that in mind, it should be somewhat easier to find out how to guide
-OE community directions with relation to Yocto project.
-
-I personally have the feeling that Yocto project have been given the
-man-power to brute-force improve the quality of Poky/OpenEmbedded on a
-day-by-day basis, and I expect they will be doing a good job at that.
-
-One attractive direction of OE development would in my opinion to look a
-bit further into the future, and work on fundamental improvements on
-selected focus areas.
-
-I imagine that Yocto will be expected to deliver continuous stream of
-improvements to Poky, and will in practise be restricted to development
-in microsteps of improvements.  Any improvements to OE that will require
-a break in this continous stream is therefore something that OE might be
-able to add value compared to what Yocto will deliver.
-
-Of-course, I might just be beating a dead horse...
-
-/Esben
-
+diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include/sane-toolchain.inc
+index 6802eb2..f5ca22b 100644
+--- a/conf/distro/include/sane-toolchain.inc
++++ b/conf/distro/include/sane-toolchain.inc
+@@ -75,7 +75,7 @@ require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
+ # Add FEED_ARCH to the overrides list so that we can override the
+ # ARM_INSTRUCTION_SET like below
+ 
+-OVERRIDES .= ":${FEED_ARCH}"
++OVERRIDES =. "${FEED_ARCH}:"
+ 
+ # ARM920T and up can use thumb mode to decrease binary size at the expense of speed
+ # (the complete story is a bit more nuanced due to cache starvation)
+-- 
+1.7.0.4
 
 
 
