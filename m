@@ -1,40 +1,32 @@
-Received: from mail-fx0-f42.google.com ([209.85.161.42])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PVUr3-0006ct-Jc
+	(envelope-from <Tom_Rini@mentor.com>) id 1PVUwA-0006k2-1R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 21:00:09 +0100
-Received: by fxm11 with SMTP id 11so5302388fxm.29
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 12:00:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=P8aXTxz1QboQJNhPXB/DapqmbOc8F4/HPnJ2wRbOSFw=;
-	b=b0DHafAt992mC4Gm8kCidgICJuJQTsyRnluUvQXdo/f4tNBcl0NswIp4Ms64GODDmY
-	i8RZj31CbiYshVQew8U/neNL4KKgFrn//a6WOrtqItin0m8K3wzBV9TltBw5peERYYOW
-	8h/lq8/Rzl8gC+dnpysXLCxuKS+ju2syznXwk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=gaKbTQbz1C4dHVsK4xV1s0OIQOQ/HmSWm4gX6yqwbrxYv8fjUEodDfD2s0tkjMn2Q+
-	Td2OXwQZqfh2UTVX7IRN/iVptAcbzLNioLM7Gw+wH7lUwKmdBQdM9aCmPbEcXHnQgGAu
-	e5HAuLZJScLrLmwAYV4Lp+55sPzIUB0j5T+BU=
-Received: by 10.223.78.136 with SMTP id l8mr168281fak.82.1293048001249;
-	Wed, 22 Dec 2010 12:00:01 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id a25sm1816543fak.20.2010.12.22.11.59.59
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 22 Dec 2010 12:00:00 -0800 (PST)
-Date: Wed, 22 Dec 2010 20:59:57 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 22 Dec 2010 21:05:26 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PVUw1-0007k1-5u from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Dec 2010 12:05:17 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 22 Dec 2010 12:05:16 -0800
+Received: from [172.30.80.150] ([172.30.80.150]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 22 Dec 2010 13:05:16 -0700
+Message-ID: <4D1259F7.9030905@mentor.com>
+Date: Wed, 22 Dec 2010 13:05:11 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101222195957.GB3295@jama>
 References: <1293016481-703-1-git-send-email-koen@openembedded.org>
 	<ietk2q$jdr$1@dough.gmane.org>
-MIME-Version: 1.0
 In-Reply-To: <ietk2q$jdr$1@dough.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+X-OriginalArrivalTime: 22 Dec 2010 20:05:16.0145 (UTC)
+	FILETIME=[8CDB4610:01CBA213]
 Subject: Re: [PATCH] sanity: release 2010.12 is out, so bump minimum bitbake to 1.10.0 per TSC decision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,55 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 20:00:09 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Dec 2010 20:05:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Dec 22, 2010 at 08:38:02PM +0100, Koen Kooi wrote:
+On 12/22/2010 12:38 PM, Koen Kooi wrote:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
-> 
+>
 > On 22-12-10 12:14, Koen Kooi wrote:
-> > Signed-off-by: Koen Kooi <koen@openembedded.org>
-> > ---
-> >  conf/sanity.conf |    2 +-
-> >  1 files changed, 1 insertions(+), 1 deletions(-)
-> > 
-> > diff --git a/conf/sanity.conf b/conf/sanity.conf
-> > index 0f53cb2..1c83c14 100644
-> > --- a/conf/sanity.conf
-> > +++ b/conf/sanity.conf
-> > @@ -3,7 +3,7 @@
-> >  # See sanity.bbclass
-> >  #
-> >  # Expert users can confirm their sanity with "touch conf/sanity.conf"
-> > -BB_MIN_VERSION = "1.8.18"
-> > +BB_MIN_VERSION = "1.10.0"
-> >  
-> >  SANITY_ABIFILE = "${TMPDIR}/abi_version"
-> >  SANITY_PRFILE = "${TMPDIR}/distro_pr"
-> 
+>> Signed-off-by: Koen Kooi<koen@openembedded.org>
+>> ---
+>>   conf/sanity.conf |    2 +-
+>>   1 files changed, 1 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/conf/sanity.conf b/conf/sanity.conf
+>> index 0f53cb2..1c83c14 100644
+>> --- a/conf/sanity.conf
+>> +++ b/conf/sanity.conf
+>> @@ -3,7 +3,7 @@
+>>   # See sanity.bbclass
+>>   #
+>>   # Expert users can confirm their sanity with "touch conf/sanity.conf"
+>> -BB_MIN_VERSION = "1.8.18"
+>> +BB_MIN_VERSION = "1.10.0"
+>>
+>>   SANITY_ABIFILE = "${TMPDIR}/abi_version"
+>>   SANITY_PRFILE = "${TMPDIR}/distro_pr"
+>
 > If people are agreeing, can I get some Acked-by lines please?
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-(also in favor of any 1.10.* version)
-
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFNElOaMkyGM64RGpERAgvLAJ9CFKK5yUiCxG7H4tcRq2OKpDDb1QCfSHz3
-> 7fCKAbIj8QYD8XO8IoJg2Nc=
-> =ZtSj
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I agree with the concept but I want a patch that says 1.10.2 once Chris 
+releases that hopefully later today.
 
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Tom Rini
+Mentor Graphics Corporation
 
 
