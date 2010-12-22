@@ -1,38 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PVJhp-00021G-Rx
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 09:05:54 +0100
-Received: by iyj18 with SMTP id 18so4029164iyj.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PVK2w-0002Ic-TR for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Dec 2010 09:27:42 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PVK2n-0002X1-0u for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Dec 2010 09:27:33 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Dec 2010 09:27:33 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 00:05:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=dAB14z448GqdpVZQSFjmLidH/flZpUX6Tnx0LGpbwIU=;
-	b=myudPjLm1DWn0kEh5LCUgh+riChfqGrwCKdmqg25qGVybBKDvckK14EpgR7MJrV4PZ
-	D5ecCZULST5KkIh7Z3rHHufjkQiFg1b6w1uHsITZqU2VEBSJZW1UpCsNBJUDV4YHGl82
-	PVdIDxc7/LJd8W9eU4RIYf5GXzHVXQ/Un9Or8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=l/jRegNUSc3JpcTZ4UnqV+ePLAWKPYtWQ4hAZWElzyvSiSytRitRHD6SWeWMpwpa1n
-	IYK4b8jjaE03e5vbNjMvVJlh9R64IAz9IuIWPRWFKLB9wtj9x7yTRNKFMxOgkzN4pxZ4
-	AEug/iZ87UcwpCJxhOR0l9PHHI70hMP58gQto=
-MIME-Version: 1.0
-Received: by 10.231.31.1 with SMTP id w1mr6609631ibc.7.1293005139431; Wed, 22
-	Dec 2010 00:05:39 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Wed, 22 Dec 2010 00:05:39 -0800 (PST)
-In-Reply-To: <20101222065627.GA28822@gmail.com>
-References: <AANLkTimMz5m27fxSGVw-YyOAH2=Wbye2Ug71mZ9t+py1@mail.gmail.com>
-	<AANLkTinQRHzSyLwso9MBC2JDRd76056_T2Nutfedtrn_@mail.gmail.com>
-	<AANLkTin5G7ObMsQAE-DZEi8K4hA=gDcHs1gDRaKG_-yJ@mail.gmail.com>
-	<1292996573.13721.0.camel@eha> <20101222065627.GA28822@gmail.com>
-Date: Wed, 22 Dec 2010 09:05:39 +0100
-Message-ID: <AANLkTimwiMhJ4kc6s1inQdNjWM4qSRa1WWUFAEJdYFP7@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 22 Dec 2010 09:27:33 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Stop Libtool relinking against host's /usr/lib (file format not recognised)
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 22 Dec 2010 09:27:19 +0100
+Message-ID: <iescp7$keo$1@dough.gmane.org>
+References: <20101208053240.GD3186@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <20101208053240.GD3186@jama>
+X-Enigmail-Version: 1.0.1
+Subject: Re: glib-2.0_2.26.1 missing dependency on dbus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 08:05:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 22 Dec 2010 08:27:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/12/22 Khem Raj <raj.khem@gmail.com>:
-> On (22/12/10 06:42), Esben Haabendal wrote:
->> On Wed, 2010-12-15 at 11:10 +0100, Frans Meulenbroeks wrote:
->>
->> > As the reporter of the gettext problem it at least gives me a
->> > suggestion on where to look.
->>
->> Any news on resolving this for gettext?
->>
-> I think it was wrong usage of libtool 2.4 it should be workin now I think
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm not sure if I would qualify using libtool 2.4 without the sysroot
-support as "wong usage".
-Anyway, if you use oe head or libtool 2.4 with sysroot support enabeld
-the problem is gone.
-Not that all my libtool problems are gone though...
+On 08-12-10 06:32, Martin Jansa wrote:
+> Hi,
+> 
+> simply adding it to depends create circular dependency
+> 
+> bitbake@jama ~/dev/recipes $ grep glib dbus/dbus.inc 
+> DEPENDS = "expat glib-2.0 virtual/libintl libsm libice virtual/libx11"
+> 
+> dbus needs glib it only for dbus-viewer and builds ok without glib, so
+> I've removed glib-2.0 in dbus and added dbus to glib-2.0_2.26.1 and 
+> tried again...
+> 
+> These are usually caused by circular dependencies and any circular 
+> dependency chains found will be printed below. Increase the debug 
+> level to see a list of unbuildable tasks.
+> 
+> It didn't detect it.. so I had to find it manually:
+> bitbake@jama ~/dev/recipes $ grep glib dbus/dbus.inc
+> DEPENDS = "expat glib-2.0 virtual/libintl libsm libice virtual/libx11"
+> 
+> bitbake@jama ~/dev/recipes $ grep util-linux-ng xorg-lib/libsm_1.2.0.bb
+> DEPENDS += "libice xproto xtrans util-linux-ng"
+> bitbake@jama ~/dev/recipes $ grep udev util-linux-ng/util-linux-ng.inc
+> DEPENDS = "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} udev  zlib ncurses virtual/libintl"
+> bitbake@jama ~/dev/recipes $ grep glib udev/udev_151.bb
+> # Needed for udev-extras
+> DEPENDS = "gperf-native usbutils acl glib-2.0"
+> 
+> util-linux-ng seems to build fine without udev but is there better place
+> to break this curcular dependency?
 
-Frans
+If util-linux-ng builds without udev nowadays, we should remove it. IIRC
+I only added it to fix a build error.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNEbZmMkyGM64RGpERAqQDAJ0WFzv9Iqr2Hzb6aWqOwpZusCEk8wCcDlz8
+u0D1MLe1T2dj3ptxHpRlxp4=
+=GQ+U
+-----END PGP SIGNATURE-----
+
 
 
