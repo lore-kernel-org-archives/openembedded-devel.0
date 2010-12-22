@@ -1,31 +1,36 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1PVMKP-0001cz-0I
+	(envelope-from <koen.kooi@gmail.com>) id 1PVMek-0002Es-K8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 11:53:53 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id C13EE2C812
+	Wed, 22 Dec 2010 12:14:54 +0100
+Received: by wwi17 with SMTP id 17so4921437wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 10:45:06 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Da02P0+usMG9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 10:45:02 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 7CC192C7DF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 10:45:02 +0000 (UTC)
-Message-ID: <4D11D70E.8050104@gmail.com>
-Date: Wed, 22 Dec 2010 11:46:38 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini
-User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
-MIME-Version: 1.0
+	Wed, 22 Dec 2010 03:14:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=etiCl3CkWK44BW7TFD10hZ06K6aR8r/ANKbnAhDYYjE=;
+	b=andQO57HjCAfrtohdXgrN14IIdExqe4VfXH0LPiscu80cYbZ83BIsYR6j7YUkFeOOh
+	qRYZcf+aZ9GXivAp498Eu7H0UrE673Y0dtJcvpSxoPR50MP7LUcrxRhVCNxOSjDp0WH3
+	Ieo/sFH26TgkdlOHsdPxnhVMiOkB8Mb8uKStg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=w8NivMSrRw0zI/+Id98AR8TzclWCYf7ijVG+HLDpAw9m72T+WZJH96Q6eSFSgc5x9l
+	pzCzMqyGxZpi8Df9AC+HCpp3syT14WZsmkZRuX7oOccVi3onDtmNzOFtdo1t5E25m4tm
+	wWKhDdDRDWfLW6o2mitmJ1RgLLir/KZMzP6HE=
+Received: by 10.216.254.89 with SMTP id g67mr10406347wes.7.1293016486532;
+	Wed, 22 Dec 2010 03:14:46 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id m6sm3045550wej.34.2010.12.22.03.14.44
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 22 Dec 2010 03:14:45 -0800 (PST)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTin7=Y-zTioQWoMegS4pU3McHnORx-jC+z6petZ-@mail.gmail.com>
-In-Reply-To: <AANLkTin7=Y-zTioQWoMegS4pU3McHnORx-jC+z6petZ-@mail.gmail.com>
-Subject: Re: OE git repository organization
+Date: Wed, 22 Dec 2010 12:14:41 +0100
+Message-Id: <1293016481-703-1-git-send-email-koen@openembedded.org>
+X-Mailer: git-send-email 1.7.0
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [PATCH] sanity: release 2010.12 is out, so bump minimum bitbake to 1.10.0 per TSC decision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,30 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 10:53:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Dec 2010 11:14:54 -0000
 
-Cliff Brake ha scritto, Il 21/12/2010 22:53:
-> Now that we have the capability to do per branch permissions, etc, I
-> would like to discuss what makes sense going forward for repository
-> admin.  My initial thoughts:
-> 
-> - put all user branches in openembedded-user
-> - restrict branch creation on the main openembedded repo to commonly
-> used branches
-> 
-> We can also do things like give users permission to branches that
-> start with their name, etc.  This would allow rewriting history on
-> user branches, etc.  That said, it may make more sense to just do user
-> branches on github as some are already doing.
-> 
-> Thanks,
-> Cliff
-> 
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ conf/sanity.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Fine
+diff --git a/conf/sanity.conf b/conf/sanity.conf
+index 0f53cb2..1c83c14 100644
+--- a/conf/sanity.conf
++++ b/conf/sanity.conf
+@@ -3,7 +3,7 @@
+ # See sanity.bbclass
+ #
+ # Expert users can confirm their sanity with "touch conf/sanity.conf"
+-BB_MIN_VERSION = "1.8.18"
++BB_MIN_VERSION = "1.10.0"
+ 
+ SANITY_ABIFILE = "${TMPDIR}/abi_version"
+ SANITY_PRFILE = "${TMPDIR}/distro_pr"
+-- 
+1.7.0
 
-/marco
 
 
