@@ -1,33 +1,37 @@
-Received: from mail-fx0-f42.google.com ([209.85.161.42])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1PVSxA-0001Rj-0c
+	(envelope-from <raj.khem@gmail.com>) id 1PVT2p-0001tG-4E
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 18:58:20 +0100
-Received: by fxm11 with SMTP id 11so5183457fxm.29
+	Wed, 22 Dec 2010 19:04:11 +0100
+Received: by gyh20 with SMTP id 20so2313064gyh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 09:58:12 -0800 (PST)
+	Wed, 22 Dec 2010 10:03:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=48X7wbXCBeEgPG+5zum9dOf1md9NwgaTl8a1brbh0ts=;
-	b=JNPpxMWIKd8/SxaBijwU5kZVbQVInaapMRxXfRQ32EPomqVL3Gjr9aU6aMcPRuAuB6
-	ptYy/xcynIkUtWAXo0KpRQNtrBpFNN/xw4dDXcC+7e9Drx5dJ3SOTCTFYFA30NlN08+V
-	OVZTBRmc1dMP66rkdDM8E5xW1J4n+G0pufa9o=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=PPHxJnXgTxc92sl4FWx9SUm50MQJYsJK7B/wNpkSXrA=;
+	b=HjT8zXmPeqPPegX8ZTxz0SAyDg4rZlhA/dC7mQTOK2gwyHYw6OEEOQYbC/j7DWvbCM
+	3RRgANZkcJL0TcECtUMmFsHFhWHxmH9lnMLc5Fb4TqhzPBshJWBBIY0LYufos3f6hJfH
+	1YwOBsy0RQzXECBTLAi8ZSgJPpvOWnv8fFZsA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=Uk0lFBA+9tV7iF2+3dAac4AtCBIdBlC2ExrZEn1U3myBo5XlxP+GFgdeLf5/BM564g
-	b5pk3qElQKM1Vaomi4p0UpmEKbJnnO0JS+sWDuPvdfzVN4IemMa+2NUwV3ROyyNoT1WE
-	Qmwz3F/McEO8mOSlFOAJ4inQqDTUhYxhwyuew=
-Received: by 10.223.71.194 with SMTP id i2mr3199562faj.15.1293040692308; Wed,
-	22 Dec 2010 09:58:12 -0800 (PST)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=Td5pGYYAJpgXwlGz1ZbMzAYc8t0a+ZpfWVlCPhkdRqtYjcJGbLhn/4j1RUMqzmFdYN
+	rjQRiQFGpVzWvMqDi19j22MoiIIusaqW1X2Tq+IpsofDf/bna6MaPJX2V1QXA9ZeyQAL
+	4GW05o9bniTOToucAtKCtCKYaUo2ovy1oRWVE=
+Received: by 10.90.97.19 with SMTP id u19mr8847938agb.166.1293041039752; Wed,
+	22 Dec 2010 10:03:59 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.42.18 with HTTP; Wed, 22 Dec 2010 09:57:51 -0800 (PST)
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Wed, 22 Dec 2010 10:57:51 -0700
-Message-ID: <AANLkTimDyv3ouBLRCvrfR9Ywudwf_TqOrBztwmxWLa3x@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Subversion depends on Apache2
+Received: by 10.90.86.4 with HTTP; Wed, 22 Dec 2010 10:03:38 -0800 (PST)
+In-Reply-To: <iesd3q$kf4$1@dough.gmane.org>
+References: <1292999142-28338-1-git-send-email-raj.khem@gmail.com>
+	<iesd3q$kf4$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 22 Dec 2010 10:03:38 -0800
+Message-ID: <AANLkTi=2BJmJz26aijSnZHuHV4cRpSQxuRmfOnCDJscz@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] sane-toolchain.inc: FEED_ARCH should be prepended to OVERRIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,62 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 17:58:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 22 Dec 2010 18:04:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Overkill?
+On Wed, Dec 22, 2010 at 12:32 AM, Koen Kooi <k.kooi@student.utwente.nl> wro=
+te:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 22-12-10 07:25, Khem Raj wrote:
+>> Currently it ends up after local override and hence appears first in FIL=
+ESPATH
+>> and for buiding uclibc_git.bb on qemuarm it picks wrong uClibc.machine f=
+ile from
+>> uclibc-git/armv5te where as it should have picked from uclibc-git/qemuar=
+m
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>> =C2=A0conf/distro/include/sane-toolchain.inc | =C2=A0 =C2=A02 +-
+>> =C2=A01 files changed, 1 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/includ=
+e/sane-toolchain.inc
+>> index 6802eb2..f5ca22b 100644
+>> --- a/conf/distro/include/sane-toolchain.inc
+>> +++ b/conf/distro/include/sane-toolchain.inc
+>> @@ -75,7 +75,7 @@ require conf/distro/include/toolchain-${TOOLCHAIN_TYPE=
+}.inc
+>> =C2=A0# Add FEED_ARCH to the overrides list so that we can override the
+>> =C2=A0# ARM_INSTRUCTION_SET like below
+>>
+>> -OVERRIDES .=3D ":${FEED_ARCH}"
+>> +OVERRIDES =3D. "${FEED_ARCH}:"
+>>
+>> =C2=A0# ARM920T and up can use thumb mode to decrease binary size at the=
+ expense of speed
+>> =C2=A0# (the complete story is a bit more nuanced due to cache starvatio=
+n)
+>
+> Shouldn't that be BASE_PACKAGE_ARCH nowadays?
 
-root@overo:~# opkg install subversion
-Installing subversion (1.6.5-r0.5) to root...
-Downloading
-http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/subversion_1.6.5-r0.5_armv7a.ipk
-.
-Installing libneon25 (0.25.5-r4.5) to root...
-Downloading
-http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/libneon25_0.25.5-r4.5_armv7a.ipk
-.
-Installing libsqlite3-0 (3.6.23.1-r1.0.5) to root...
-Downloading
-http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/libsqlite3-0_3.6.23.1-r1.0.5_armv7a.ipk
-.
-Installing libaprutil-1-0 (1.3.4-r5.5) to root...
-Downloading
-http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/libaprutil-1-0_1.3.4-r5.5_armv7a.ipk
-.
-Installing apache2 (2.2.14-r0.5) to root...
-Downloading
-http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/apache2_2.2.14-r0.5_armv7a.ipk
-.
-Configuring libsqlite3-0.
-Configuring libneon25.
-Configuring libaprutil-1-0.
-Collected errors:
- * check_data_file_clashes: Package apache2 wants to install file
-/usr/lib/libaprutil-1.so.0
-    But that file is already provided by package  * libaprutil-1-0
- * opkg_install_cmd: Cannot install package subversion.
+logically yes. I think I will change it to BASE_PACKAGE_ARCH
 
-root@overo:~# opkg install subversion --force-overwrite
-Installing subversion (1.6.5-r0.5) to root...
-Downloading
-http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/subversion_1.6.5-r0.5_armv7a.ipk
-.
-Installing apache2 (2.2.14-r0.5) to root...
-Downloading
-http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/apache2_2.2.14-r0.5_armv7a.ipk
-.
-Installing libssl0.9.8 (0.9.8m-r12.0.5) to root...
-Downloading
-http://www.gumstix.net/feeds/unstable/ipk/glibc/armv7a/base/libssl0.9.8_0.9.8m-r12.0.5_armv7a.ipk
-.
-Configuring libssl0.9.8.
-Configuring apache2.
- Adding system startup for /etc/init.d/apache2.
-ln: /etc/rc3.d/S91apache2: File exists
-ln: /etc/rc4.d/S91apache2: File exists
-ln: /etc/rc5.d/S91apache2: File exists
-Starting web server: apache2.
-Configuring subversion.
-
-AJ ONeal
 
