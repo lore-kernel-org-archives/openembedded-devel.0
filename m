@@ -1,34 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PVUW0-0005jB-Ud for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 20:38:25 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PVUVr-0001kr-AS for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 20:38:15 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 20:38:15 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1PVUXf-0005lD-6d
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Dec 2010 20:40:07 +0100
+Received: by ywi6 with SMTP id 6so2465938ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 20:38:15 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 22 Dec 2010 11:39:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=YsigtskMMwjjn7EgVu4hY6dsd78T43F/xDyFdFfa1vA=;
+	b=J2EaG/JgI3xH9XsqZTbc27JxlyA8YKZ7nAg1gi9sYzhvAigOx6VyqfsZxXAebMl/yt
+	04OHkxE18YgFb9d8PzBs2g2YNZHHqMF3A0XIDtlpcWkUEeJxehPUlPAEX4ekbsaCiI3I
+	pmduz4bQRcJdTe362gpVE9HNU8vSatXlEfgdM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=eSt/U/DXEB9piEUdAizD3iWcZ1a+RHWMYAgcOm/dSht8iPbAmyYYqPoUXpWu2tJRu5
+	Z+jyXAktKePsP21ovxmOULvnJoOvfW8PhLmFUSZhNwXMO0r8ADfluXjK/DL0XZRO6cEs
+	8z84lVYWP1bFoNftaEe0CgqPoyMznCZ9F/vaY=
+Received: by 10.90.98.11 with SMTP id v11mr9086583agb.58.1293046797739; Wed,
+	22 Dec 2010 11:39:57 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Wed, 22 Dec 2010 11:39:35 -0800 (PST)
+In-Reply-To: <AANLkTimDyv3ouBLRCvrfR9Ywudwf_TqOrBztwmxWLa3x@mail.gmail.com>
+References: <AANLkTimDyv3ouBLRCvrfR9Ywudwf_TqOrBztwmxWLa3x@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 22 Dec 2010 11:39:35 -0800
+Message-ID: <AANLkTimyubn1G4JOxxnSfo_M=vWqyexHL--bumNa0emf@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 22 Dec 2010 20:38:02 +0100
-Message-ID: <ietk2q$jdr$1@dough.gmane.org>
-References: <1293016481-703-1-git-send-email-koen@openembedded.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <1293016481-703-1-git-send-email-koen@openembedded.org>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] sanity: release 2010.12 is out, so bump minimum bitbake to 1.10.0 per TSC decision
+Subject: Re: Subversion depends on Apache2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,41 +43,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 19:38:25 -0000
+X-List-Received-Date: Wed, 22 Dec 2010 19:40:07 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Dec 22, 2010 at 9:57 AM, AJ ONeal <coolaj86@gmail.com> wrote:
+> Overkill?
+>
 
-On 22-12-10 12:14, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
->  conf/sanity.conf |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/conf/sanity.conf b/conf/sanity.conf
-> index 0f53cb2..1c83c14 100644
-> --- a/conf/sanity.conf
-> +++ b/conf/sanity.conf
-> @@ -3,7 +3,7 @@
->  # See sanity.bbclass
->  #
->  # Expert users can confirm their sanity with "touch conf/sanity.conf"
-> -BB_MIN_VERSION = "1.8.18"
-> +BB_MIN_VERSION = "1.10.0"
->  
->  SANITY_ABIFILE = "${TMPDIR}/abi_version"
->  SANITY_PRFILE = "${TMPDIR}/distro_pr"
-
-If people are agreeing, can I get some Acked-by lines please?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNElOaMkyGM64RGpERAgvLAJ9CFKK5yUiCxG7H4tcRq2OKpDDb1QCfSHz3
-7fCKAbIj8QYD8XO8IoJg2Nc=
-=ZtSj
------END PGP SIGNATURE-----
-
+I think apache2 is shipping libapr.so with it which should not be the
+case. Apache2 should depend on libapr instead
+this seems to be a packaging problem with OE apache. File a bug
 
 
