@@ -1,38 +1,34 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from out3.smtp.messagingengine.com ([66.111.4.27])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PVPFs-0005aX-Uh
+	(envelope-from <vjensen@gmx.de>) id 1PVQ2R-00069g-6w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 15:01:25 +0100
-Received: by wwi17 with SMTP id 17so5063691wwi.24
+	Wed, 22 Dec 2010 15:51:35 +0100
+Received: from compute2.internal (compute2.nyi.mail.srv.osa [10.202.2.42])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 60EF89A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 06:01:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=rBrE9+GQSdtLj7+IX67O6MHDPjbaU/O9swTGEC+NXgg=;
-	b=Hz/b4Bbt00oDxMEhVkmSixQJhP6KqEcokXc3oo+1vGfRR3rZB2sZSWwO/4IBktOJoj
-	UuuUL2WWqYD/+rd+4mU/9ab2ScATQteXjgH7CB95JKQF9K5E/At8ysrWVhC2u9tFzx0j
-	k4dM8tfzYxSzLBTKchFA5pBjuz52mwLNsb2ZU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=l5k2ORaXXk6yZO6V3GgWOnZ0aobOaKMHdxvKDxWrtAQpS7yv6SjLWxGB50+eaKAglz
-	G7APXcNfMmy16g9BT9bJKAQaa6WFVCSe7Z6p+rOrAd6huzGgQdVtEEbJL7GJ+jbyUbsp
-	Fp16Fg7jDK+g4A1/z1miLZcekrkgjE4BoGx/o=
-Received: by 10.216.59.193 with SMTP id s43mr1423215wec.42.1293026476968; Wed,
-	22 Dec 2010 06:01:16 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Wed, 22 Dec 2010 06:00:56 -0800 (PST)
-In-Reply-To: <iescrt$keo$2@dough.gmane.org>
-References: <20101221220041.GD19986@denix.org> <iescrt$keo$2@dough.gmane.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 22 Dec 2010 07:00:56 -0700
-X-Google-Sender-Auth: mFxVZ1yugxSe00lKx9B1i4dOOcM
-Message-ID: <AANLkTinjVkLHn9+3YryPDWKWTUQF0dzunBKVchhYACjq@mail.gmail.com>
+	Wed, 22 Dec 2010 09:44:30 -0500 (EST)
+Received: from frontend1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Wed, 22 Dec 2010 09:44:30 -0500
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:message-id:mime-version:content-type;
+	s=smtpout; bh=Ckyn+SB1dROxTniKocxS8XU9FpQ=;
+	b=fcojop9H9AZ2CmAYfu027y9MUPFrX9LKNAs3Pm+mCirnZExVjSy+J+vHFefj9Lv20ssn9Z+o9Clse9EVPhpiVUKo6ZC8o+vLMdwNDVdI485L/kMC4yS0wakvNCvtvFu9zNM8+uU6L2Iijn3a1pLjZu9BV1RBUK7+jRwjsBicZI4=
+X-Sasl-enc: DKfb3EDsUTr9MkpL8O/HXC/frmfqGqJ9OqGQ3oCX09K9 1293029069
+Received: from [192.168.1.34] (hnvr-4dbd3c60.pool.mediaWays.net [77.189.60.96])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 76624404779
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Dec 2010 09:44:29 -0500 (EST)
+Date: Wed, 22 Dec 2010 15:47:07 +0100 (CET)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: base.bbclass changes broke BitBake 1.8.19
+Message-ID: <alpine.LNX.2.00.1012221538090.11293@asterix.crazy-teaparty.dyndns.org>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+Subject: monit, no include from monit.d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,29 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 14:01:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Dec 2010 14:51:35 -0000
+Content-Type: TEXT/PLAIN; format=flowed; charset=US-ASCII
 
-On Wed, Dec 22, 2010 at 1:28 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 21-12-10 23:00, Denys Dmytriyenko wrote:
->> Chris,
->>
->> The c67b95955d023c1f198531b4f06100a40b05efa7 has introduced the following
->> problem with BitBake 1.8.19 and even af81d52e48cb6d4f91fff0c70e09dfd421e0057d
->> didn't fix it. Any thoughts? Thanks.
->
-> Since the release is out, can be bump to 1.10.0 as minimum bitbake now?
+Hej!
 
-I'm all for this, personally.  The only reason the TSC didn't decide
-to bump it already was the release, so I don't see any reason why not.
+OE contains a receipe for the monit daemon which can monitor processes and 
+restart them if they are not there.  The receipe creates a directory 
+/etc/monit.d/ on the target system but does not enable the include 
+directive in /etc/monitrc so the service is unusable from other receipes 
+without editiing a file on the target system.  I think /etc/monit.d/ is a 
+good idea and receipes should rely on monit to include from it.
+
+The current receipe contains sed commands to modify monitrc, which I'm 
+not very familiar with, so I added a path for the include.  Please comment 
+if all monitrc changes should be combined somewhere (sed vs patch).  Patch 
+to current head follows.
+
+Vitus
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
