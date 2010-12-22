@@ -1,33 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from asmtpout029.mac.com ([17.148.16.104])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PVW7m-00089t-Q6
+	(envelope-from <elvis.dowson@mac.com>) id 1PVWzS-0000ku-P2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 22:21:30 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PVW7e-0000kr-Fd from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 13:21:22 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 22 Dec 2010 13:21:21 -0800
-Received: from [172.30.80.150] ([172.30.80.150]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 22 Dec 2010 14:21:21 -0700
-Message-ID: <4D126BCC.1020508@mentor.com>
-Date: Wed, 22 Dec 2010 14:21:16 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Wed, 22 Dec 2010 23:16:58 +0100
+MIME-version: 1.0
+Received: from [192.168.1.30] ([87.201.169.175])
+	by asmtp029.mac.com (Sun Java(tm) System Messaging Server 6.3-7.04
+	(built Sep
+	26 2008; 64bit)) with ESMTPSA id <0LDU00BWMLR77M70@asmtp029.mac.com> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	22 Dec 2010 13:16:23 -0800 (PST)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 suspectscore=1 phishscore=0 bulkscore=0 adultscore=0
+	classifier=spam
+	adjust=0 reason=mlx engine=6.0.2-1010190000 definitions=main-1012220117
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.2.15,1.0.148,0.0.0000
+	definitions=2010-12-22_09:2010-12-22, 2010-12-22,
+	1970-01-01 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+In-reply-to: <4D12671D.1050008@eukrea.com>
+Date: Thu, 23 Dec 2010 01:16:06 +0400
+Message-id: <C3CB9E8E-9B24-417B-8F37-34509EDD4D2B@mac.com>
+References: <ABD557DA-5595-4CD8-AE87-C5FCC45F41BF@mac.com>
+	<4D12671D.1050008@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1293016481-703-1-git-send-email-koen@openembedded.org>	<ietk2q$jdr$1@dough.gmane.org>
-	<4D1259F7.9030905@mentor.com>
-In-Reply-To: <4D1259F7.9030905@mentor.com>
-X-OriginalArrivalTime: 22 Dec 2010 21:21:21.0329 (UTC)
-	FILETIME=[2DEB1210:01CBA21E]
-Subject: Re: [PATCH] sanity: release 2010.12 is out, so bump minimum bitbake to 1.10.0 per TSC decision
+X-Mailer: Apple Mail (2.1082)
+Subject: Re: compat-wireless recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,47 +40,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 21:21:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Dec 2010 22:16:59 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: quoted-printable
 
-On 12/22/2010 01:05 PM, Tom Rini wrote:
-> On 12/22/2010 12:38 PM, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 22-12-10 12:14, Koen Kooi wrote:
->>> Signed-off-by: Koen Kooi<koen@openembedded.org>
->>> ---
->>> conf/sanity.conf | 2 +-
->>> 1 files changed, 1 insertions(+), 1 deletions(-)
->>>
->>> diff --git a/conf/sanity.conf b/conf/sanity.conf
->>> index 0f53cb2..1c83c14 100644
->>> --- a/conf/sanity.conf
->>> +++ b/conf/sanity.conf
->>> @@ -3,7 +3,7 @@
->>> # See sanity.bbclass
->>> #
->>> # Expert users can confirm their sanity with "touch conf/sanity.conf"
->>> -BB_MIN_VERSION = "1.8.18"
->>> +BB_MIN_VERSION = "1.10.0"
->>>
->>> SANITY_ABIFILE = "${TMPDIR}/abi_version"
->>> SANITY_PRFILE = "${TMPDIR}/distro_pr"
->>
->> If people are agreeing, can I get some Acked-by lines please?
->
-> I agree with the concept but I want a patch that says 1.10.2 once Chris
-> releases that hopefully later today.
+Hi Eric,
 
-To be clear, this is because 1.10.0 has some bugs that aren't all that 
-hard to hit and 1.10.1 reports itself as 1.10.0.  I strongly suspect we 
-have users that stay on the trailing edge, would get 1.10.0 release and 
-hit issues.
+On Dec 23, 2010, at 1:01 AM, Eric B=E9nard wrote:
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+> I did one which worked on x86 but didn't have time to update/test it =
+for integration. You can find it here :
+> http://patchwork.openembedded.org/patch/2013/
+
+Awesome!! :-)=20
+
+I'm still processing some more dependencies. I've managed to build the =
+wl1271 driver, but need to backport the wl12xx platform data to get the =
+wl1271_sdio.ko module built before I can test it out.
+
+Once I finish getting it to work the manual way, I'll try to modify your =
+OE recipe to work with wl1271.
+
+Best regards,
+
+Elvis Dowson=
 
 
