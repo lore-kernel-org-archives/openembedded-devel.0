@@ -1,35 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PVQzh-0007TX-TG for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 16:52:49 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PVQzb-0002cE-Nx for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 16:52:43 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 16:52:43 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <cliff.brake@gmail.com>) id 1PVRFX-00082q-51
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Dec 2010 17:09:11 +0100
+Received: by wyb40 with SMTP id 40so5283003wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 16:52:43 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 22 Dec 2010 16:52:33 +0100
-Message-ID: <iet6s1$h1r$1@dough.gmane.org>
-References: <1293016481-703-1-git-send-email-koen@openembedded.org>	<AANLkTinhDm2O+71-+ec_LX1DOQ9bO6gpiwNOE3fauswA@mail.gmail.com>	<iesrb1$mue$1@dough.gmane.org>	<AANLkTinurP-H+XiaeLgaUe6Uq6oN5xYd1H0QnqiyhEW_@mail.gmail.com>
-	<4D121D05.4090806@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
-In-Reply-To: <4D121D05.4090806@mentor.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] sanity: release 2010.12 is out, so bump minimum bitbake to 1.10.0 per TSC decision
+	Wed, 22 Dec 2010 08:09:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=9/5p8vx8Y4l1SJLayP+aux7mVzm7Wm1fFejAhA3B7nc=;
+	b=r21GNNtZQkReefxC7gqvjva63lEL3SJmhdxeQJvGm0QwTQC0zuJNnmlbqXhahekCMP
+	77e0CwCSbqQybfBpMT22H5UnxvQf2hS4CNsRoS6wkXORTZJhDU8s2CG+ByxiB1EUqH+f
+	j3dJMNGEPiCUaLhpvQZwgzM68ml38i2VDq6o0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=WEfiM7ZqGX44Hk0D/adVIh190knc2O3+LWeoCVqc/0zoJtv1oKH+xwAR4yiQym6emT
+	GcXTiy/ONd5nZtlh66GaKv5Ip7uPK6cNhgp+8wo/yab+DMoZlnmFbLPPMJNlY+G4mWGu
+	Sbz7zI4fl/7H9x2yVAcFxCZe20kH8Uy0h0oHA=
+MIME-Version: 1.0
+Received: by 10.216.59.143 with SMTP id s15mr2973106wec.49.1293034142706; Wed,
+	22 Dec 2010 08:09:02 -0800 (PST)
+Received: by 10.216.254.137 with HTTP; Wed, 22 Dec 2010 08:09:02 -0800 (PST)
+Date: Wed, 22 Dec 2010 11:09:02 -0500
+Message-ID: <AANLkTik3-5x2W+DRTJ9bC0YnUQB9HbvSWEYLSMWLTPjZ@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: yocto@yoctoproject.org, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Multiple Repository support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,72 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 15:52:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Dec 2010 16:09:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-On 22-12-10 16:45, Tom Rini wrote:
-> On 12/22/2010 05:48 AM, Frans Meulenbroeks wrote:
->> 2010/12/22 Koen Kooi<k.kooi@student.utwente.nl>:
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
->>>
->>> On 22-12-10 12:55, Frans Meulenbroeks wrote:
->>>> 2010/12/22 Koen Kooi<koen.kooi@gmail.com>:
->>>>> Signed-off-by: Koen Kooi<koen@openembedded.org>
->>>>> ---
->>>>>   conf/sanity.conf |    2 +-
->>>>>   1 files changed, 1 insertions(+), 1 deletions(-)
->>>>>
->>>>> diff --git a/conf/sanity.conf b/conf/sanity.conf
->>>>> index 0f53cb2..1c83c14 100644
->>>>> --- a/conf/sanity.conf
->>>>> +++ b/conf/sanity.conf
->>>>> @@ -3,7 +3,7 @@
->>>>>   # See sanity.bbclass
->>>>>   #
->>>>>   # Expert users can confirm their sanity with "touch
->>>>> conf/sanity.conf"
->>>>> -BB_MIN_VERSION = "1.8.18"
->>>>> +BB_MIN_VERSION = "1.10.0"
->>>>>
->>>>>   SANITY_ABIFILE = "${TMPDIR}/abi_version"
->>>>>   SANITY_PRFILE = "${TMPDIR}/distro_pr"
->>>>> -- 
->>>>> 1.7.0
->>>>>
->>>>
->>>> As 1.10.1 is already out for quite a while and (if I recall correctly)
->>>> 1.10.0 had some issues that are resolved in 1.10.1 wouldn't it be
->>>> better to set 1.10.1 as minimal version?
->>>> Otherwise no objections.
->>>
->>> The head of the 1.10 branch says it's 1.10.0, not 1.10.1 :(
->>
->> Indeed :-(
->> Guess this should be changed then
->>
->> There is http://developer.berlios.de/projects/bitbake/ which lists 1.10.1
->> and the git also has a tag for 1.10.1 and a donwload for it.
->>
->> Btw I assume we also need to update the wiki
-> 
-> I think what happened was Chris forgot to bump the version number when
-> tagging / etc.  As he plans to do a 1.10.2 soon, maybe we can wait for
-> that?  And maybe we can get that done this week?
+I've started collecting ideas from various emails on multiple
+repository support.
 
-I really want the 1.10 in sooner than later, since at OEDEM we agreed to
-do it before the release, but the TSC disagreed for undisclosed reasons.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+http://wiki.openembedded.org/index.php/MultipleRepositoryMethods
 
-iD8DBQFNEh7BMkyGM64RGpERAq2CAKCU9ozyZchRMe2PCzF6gA2mM3hEXQCfYubv
-eOxFfH6IOkk2jGe6QbMaT8I=
-=DVUe
------END PGP SIGNATURE-----
+Please feel free to update the above page.
 
+In my mind, this is a key problem we need to solve, not just for
+Yocto/OE, but also for anyone doing product development.
+
+I've personally been using git submodules for most projects, and repo
+for Android based projects.
+
+Appreciate any ideas, experiences, or insights into how we solve this problem.
+
+Thanks,
+Cliff
+
+-- 
+=================
+http://bec-systems.com
 
 
