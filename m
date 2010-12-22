@@ -1,45 +1,42 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-fx0-f42.google.com ([209.85.161.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PVRnc-00008C-BK
+	(envelope-from <martin.jansa@gmail.com>) id 1PVRrg-0000Em-VA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 17:44:24 +0100
-Received: by wwi17 with SMTP id 17so5227546wwi.24
+	Wed, 22 Dec 2010 17:48:37 +0100
+Received: by fxm11 with SMTP id 11so5109974fxm.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 08:44:13 -0800 (PST)
+	Wed, 22 Dec 2010 08:48:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type:content-transfer-encoding;
-	bh=mmgQWYWR+D9E0PH4Usy8z2g8nIvdYlxsCIKFYcEEki4=;
-	b=tkwBiIktBIBxRfT5SR4kmbcusbnKEa99GLLprkTXnyMM1QNkldrrg+bq2MDdX5PxMC
-	eOfT50H7D2PD4lxI1+lfvqOlgn6Gh2KeEhcfRKCTvDJaEiCO5eTEmjxgNvOPVRcwggCC
-	qv2qr3KxPXndf0SGGSbnRSECHldYmbJCWvA04=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=R+8U3fR1Cy/UVyM4vuLRi0k7QMQEyjk1vXVW9cM/aFw=;
+	b=jbfIwQzOEUfHlG1UOWTVH2cDY4DGF5Q20rBTbZWfHAAT1K6TOXX/iyMjogeEuuUyHZ
+	KP7l2j/IGHSQrw7iUQTtK4Iy1pW22bM60V8Hc7n5Y+hTEjyOxDiWwqXRVHSl9NJoQYr3
+	R0qaoDO6w4HRajeI6eqPao5tNXfYsY3JWJ6p0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	b=XYAE9Xkr0+zJGO0DaBae8/DCTQnSdnOjZPPSjh5CLXwB8aFZ2ChGXtb5FAH67JX/9r
-	WI1CZirapzPJI+dQJloYbA6enhixV4WQFMri72E6Fy7cLs6NZHZfzStaHgMAnjO/lVvc
-	CuDUaImPLj2QiLioLVUpZUwHxD1awzQF6t9f8=
-Received: by 10.216.150.134 with SMTP id z6mr7980521wej.27.1293036253450; Wed,
-	22 Dec 2010 08:44:13 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Wed, 22 Dec 2010 08:43:53 -0800 (PST)
-In-Reply-To: <4D1228DF.6090004@mentor.com>
-References: <1293016481-703-1-git-send-email-koen@openembedded.org>
-	<AANLkTinhDm2O+71-+ec_LX1DOQ9bO6gpiwNOE3fauswA@mail.gmail.com>
-	<iesrb1$mue$1@dough.gmane.org>
-	<AANLkTinurP-H+XiaeLgaUe6Uq6oN5xYd1H0QnqiyhEW_@mail.gmail.com>
-	<4D121D05.4090806@mentor.com> <iet6s1$h1r$1@dough.gmane.org>
-	<4D1228DF.6090004@mentor.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 22 Dec 2010 09:43:53 -0700
-X-Google-Sender-Auth: VgAFJprVNK5v6XZ1v8Tsg5QWhE4
-Message-ID: <AANLkTi=+2cXyskJw=U-yQ-R94z7UO_U09h4EO_e=+=1p@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=naue9O7yR7uZNSG/LmxOy92t1rekd806get2bCpVPetoH3L9j2KZMnppRJNN1ULHWp
+	ujG/JIqm6+q4JmWei+OLPywNQggbvXw+HHP9JZeBHLJzQ+zSWI0HFKdGhQWmuRscTRWW
+	Ns79dUQuy9RWDvufAhdrhVCJI1+GP4dnqXG/8=
+Received: by 10.223.86.199 with SMTP id t7mr535592fal.29.1293036505273;
+	Wed, 22 Dec 2010 08:48:25 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id y3sm1752712fai.38.2010.12.22.08.48.23
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 22 Dec 2010 08:48:23 -0800 (PST)
+Date: Wed, 22 Dec 2010 17:48:21 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH] sanity: release 2010.12 is out, so bump minimum bitbake to 1.10.0 per TSC decision
+Message-ID: <20101222164821.GA3295@jama>
+References: <1292911102-13199-1-git-send-email-raj.khem@gmail.com>
+	<4D1201DE.4030905@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <4D1201DE.4030905@eukrea.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] gcc-4.5: Apply patches upto 2010.12 release of linaro gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,26 +50,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 16:44:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Dec 2010 16:48:37 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Wed, Dec 22, 2010 at 9:35 AM, Tom Rini <tom_rini@mentor.com> wrote:
-> I agree and would like it done soon too (well, I'd almost rather see 1.11=
- be
-> required, yaaay parallel parsing) but since we can't tell 1.10.0 from .1 =
-and
-> I don't think this week (since that's just a few more days) is too bad.
-> =C2=A0Chris, when can you do a 1.10.2?
+On Wed, Dec 22, 2010 at 02:49:18PM +0100, Eric Bénard wrote:
+> Hi Khem,
+> 
+> On 21/12/2010 06:58, Khem Raj wrote:
+> > This patch brings in more Linaro patches. So far I have built a x11-image
+> > for qemuarm and it has shown no issues. I plan to test it more thoroughly
+> > in coming days on different arches and different images and also run gcc
+> > regression testsuite for them. But while I do this I wanted to bring it to
+> > everyone who would be interested to try and test the patch out and report
+> > any issues one sees and we could weed them out before installing this patch
+> >
+> > -Khem
+> >
+> > Signed-off-by: Khem Raj<raj.khem@gmail.com>
+> 
+> Acked-by: Eric Bénard <eric@eukrea.com>
 
-I might be able to get to it today.  We really need to make the
-process more automated.  We should also stop using berlios for bitbake
-release tarballs and just rely on the oe site / freshmeat / cgit, imo.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Tested for armv4t (om-gta02), armv5te (spitz), armv7a (nokia900).
+
+Thanks
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
