@@ -1,39 +1,31 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PVL89-0000Qf-O6
+	(envelope-from <koansoftware@gmail.com>) id 1PVMKP-0001cz-0I
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Dec 2010 10:37:09 +0100
-Received: by iyj18 with SMTP id 18so4086065iyj.6
+	Wed, 22 Dec 2010 11:53:53 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id C13EE2C812
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 01:37:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=iWE021YXsGRedXh9QYuum3RCW61BYCZZPZPtut62JkI=;
-	b=f/mtoiEB8RXwX8Rbgm5LDMT2Ni6gachNbeq1XawCajbbKxESt7dsrLa1VUvlucjZ6C
-	g3NgEgMkFHMuGmK/4LDMs6fxewVfPv842aj4FeEXg+Wuh7E3yWnTidUMZBWvLw1uLeIv
-	U4stdr+53gj74Q83ZmVE3whMV7VP+/IyfGixM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=vRW8n0YGParCW4Klx2maTHLZhgBlIxYrM3rcc6IWJQ9pwphzkhhl8a6VIW3CGl+QG0
-	LphnCBT53lFb6NlDgYlHQtZqjSvqSopVT3Z4YfYK0FMEEy/MCOM6/fNSQKawMTW8mppH
-	KfK6X6Ee50iH3I54EyAKbdwRp8ix759YScNUE=
+	Wed, 22 Dec 2010 10:45:06 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Da02P0+usMG9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Dec 2010 10:45:02 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 7CC192C7DF
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Dec 2010 10:45:02 +0000 (UTC)
+Message-ID: <4D11D70E.8050104@gmail.com>
+Date: Wed, 22 Dec 2010 11:46:38 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini
+User-Agent: Thunderbird 2.0.0.24 (X11/20101027)
 MIME-Version: 1.0
-Received: by 10.231.182.13 with SMTP id ca13mr540351ibb.57.1293010621412; Wed,
-	22 Dec 2010 01:37:01 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Wed, 22 Dec 2010 01:37:01 -0800 (PST)
-In-Reply-To: <AANLkTik4ZXMff-vHGJTK4sJcEuUHuvGNcsGjGPgwLZng@mail.gmail.com>
-References: <20101221150222.GB4665@gmail.com>
-	<1292969027-18762-1-git-send-email-eric@eukrea.com>
-	<1292969027-18762-2-git-send-email-eric@eukrea.com>
-	<AANLkTik4ZXMff-vHGJTK4sJcEuUHuvGNcsGjGPgwLZng@mail.gmail.com>
-Date: Wed, 22 Dec 2010 10:37:01 +0100
-Message-ID: <AANLkTikDnXGbBWf2c=KHrAvUbZq3J1ndHWexPYvQZ06Q@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] asterisk: fix SRC_URI
+References: <AANLkTin7=Y-zTioQWoMegS4pU3McHnORx-jC+z6petZ-@mail.gmail.com>
+In-Reply-To: <AANLkTin7=Y-zTioQWoMegS4pU3McHnORx-jC+z6petZ-@mail.gmail.com>
+Subject: Re: OE git repository organization
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,19 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Dec 2010 09:37:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Dec 2010 10:53:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/12/21 Khem Raj <raj.khem@gmail.com>:
-> On Tue, Dec 21, 2010 at 2:03 PM, Eric B=E9nard <eric@eukrea.com> wrote:
->> * keep the higher version which fetch and patch
->> * fix SRC_URI for all the asterisk recipes
->>
->> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
->
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+Cliff Brake ha scritto, Il 21/12/2010 22:53:
+> Now that we have the capability to do per branch permissions, etc, I
+> would like to discuss what makes sense going forward for repository
+> admin.  My initial thoughts:
+> 
+> - put all user branches in openembedded-user
+> - restrict branch creation on the main openembedded repo to commonly
+> used branches
+> 
+> We can also do things like give users permission to branches that
+> start with their name, etc.  This would allow rewriting history on
+> user branches, etc.  That said, it may make more sense to just do user
+> branches on github as some are already doing.
+> 
+> Thanks,
+> Cliff
+> 
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Fine
+
+/marco
 
 
