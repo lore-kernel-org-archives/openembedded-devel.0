@@ -1,35 +1,35 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PVfqJ-0005FT-3Y
+	(envelope-from <martin.jansa@gmail.com>) id 1PVgGR-0005u6-FY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Dec 2010 08:44:08 +0100
-Received: by iwn8 with SMTP id 8so6152605iwn.6
+	Thu, 23 Dec 2010 09:11:07 +0100
+Received: by fxm17 with SMTP id 17so5963426fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Dec 2010 23:43:59 -0800 (PST)
+	Thu, 23 Dec 2010 00:10:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=YumEHnJF7u/kRXohTqhXXdQecw4onXbpuLMnef1U/XI=;
-	b=ktFpE3j1THoCHWc6qhll1kb8dKo075xd1Db/LEb+QzTDDz+lmRXfQ86Gpa77CUat9a
-	9/wsFY2+JuFb2ONj0byNLiZ8eW5fia7kLuC/TLm/7b3D4S0DwltJKK2TFT1OYMXKuKj5
-	hXAutW1tuzq33UdBAC3yATSU60g1XjiklaeJo=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=rPj/8v3K/eVXhUf7c+hpFAb7ytaSdShwfkIwxZUgJOg=;
+	b=sRN5avMEz1/5MbA/VSYoJ5kg/kHfCse76pvNjX77Sd+mPyl1mFujf59fvayyrX/aP9
+	4gB65RbTXJj7nuNNcIYils8lvxqhvhIu/s48KGsSnhKY/YO6iXX0hw/11DaEuTYBqJfq
+	VNpbU9ViTmU4RJIVuGh1BvvSACvQZc1KpNmSQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=S6JnLXM95UZek10lUFpt1DZ9jXY72XMQbYAmGLFdoGLZNdc4Dlf9kmg4JtcJYW6Ny9
-	iWB1s+CtRZQvKMJR362ygrBxyaEFwshYUWMBhhpur5aYxVTRAUK4h7HcqWuhG/YD0iAA
-	YQjxlMG7Qlnn1azcguc1mn2AJOb6rU0ZhKWvU=
-MIME-Version: 1.0
-Received: by 10.231.37.136 with SMTP id x8mr7768848ibd.132.1293090239599; Wed,
-	22 Dec 2010 23:43:59 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Wed, 22 Dec 2010 23:43:59 -0800 (PST)
-In-Reply-To: <AANLkTinhwtWJfCFLWdB_QFVMWBYZi1G_C6sPt-qCAL8n@mail.gmail.com>
-References: <AANLkTinhwtWJfCFLWdB_QFVMWBYZi1G_C6sPt-qCAL8n@mail.gmail.com>
-Date: Thu, 23 Dec 2010 08:43:59 +0100
-Message-ID: <AANLkTimGtgXwtoTS94WHRdNsgShmSkCxj25o6MnVfgHx@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=RvGYbONWuaE/nQTzVY6CMZYHEaszED5m1P0q/djtZUjaiVINcCNYOyZevuaAYWU/fB
+	jsJ+Ja75H24OW3DWOVVZ9j3KeQYuuHexpmjJCqST1UIiJqqvcBJ6e/NE15/ZCZGF3UV3
+	bs3y5kPHqn9erFxGbW996ioo0cC57eJ8b9Aaw=
+Received: by 10.223.83.4 with SMTP id d4mr3955552fal.59.1293091857088;
+	Thu, 23 Dec 2010 00:10:57 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id a25sm1931457fak.44.2010.12.23.00.10.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 23 Dec 2010 00:10:56 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: QA issue with staging (workdir) for .la files in xmlrpc-c package
+Date: Thu, 23 Dec 2010 09:10:50 +0100
+Message-Id: <1293091850-26441-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.3.4
+Subject: [PATCH] dbus: upgrade 1.4.0 to 1.4.1 and make it new default CVE-2010-4352
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,72 +43,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Dec 2010 07:44:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 23 Dec 2010 08:11:07 -0000
 
-2010/12/23 Martin Panter <vadmium+floss@gmail.com>:
-> Hi all
->
-> I'm having trouble building "xmlrpc-c", which I think is required for
-> rtorrent. It's failing at the "do_qa_staging" stage with the messages
-> such as "QA Issue with staging: libxmlrpc.la failed sanity test
-> (workdir)".
->
-> I gather the issue is that my sysroots/*/usr/lib/libxmlrpc.la file has
-> the following, which mentions the tmp/work/ directory:
->
-> # Libraries that this one depends upon.
-> dependency_libs=' -L.libs
-> -L/media/disk/home/vadmium/proj/aegle/build/tmp/work/armv7a-angstrom-linux-gnueabi/xmlrpc-c-1.06.41-r1/xmlrpc-c-1.06.41/src/../lib/libutil/.libs
-> -lxmlrpc_util -lxml2 -lz -lm'
->
-> So looks like another Libtool issue. But I'm stuck this time so if
-> anyone has any hints that would be awesome. For instance why does that
-> -L. . ./tmp/work/. . . component get there, and perhaps is there some
-> Libtool option to prevent or fix it?
->
-> I think the xmlrpc-c packages has its own version of Libtool (1.3.4?).
-> I tried coaxing the build process to use OE's Libtool version
-> (EXTRA_OEMAKE = "LIBTOOL='${HOST_SYS}-libtool'", after the import
-> line, in the recipe file), but this didn't seem to help.
->
-> Previously I thought I had another "QA issue" with this xmlrpc-c
-> package, something about a "hash style", which I thought I solved by
-> passing LADD='${LDFLAGS}' to the Make command. But recently when I
-> removed this change I am not getting the earlier "hash style QA
-> issue"; only this newer "workdir" one. But I may be confused.
->
-> -Martin
->
-> These are the full messages taken straight from log.do_qa_staging file
-> with awesome-long path names:
->
-> ERROR: QA Issue with staging: libxmlrpc.la failed sanity test
-> (workdir) in path
-> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> ERROR: QA Issue with staging: libxmlrpc_server_abyss.la failed sanity
-> test (workdir) in path
-> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> ERROR: QA Issue with staging: libxmlrpc_server.la failed sanity test
-> (workdir) in path
-> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> ERROR: QA Issue with staging: libxmlrpc_server_cgi.la failed sanity
-> test (workdir) in path
-> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> ERROR: QA Issue with staging: libxmlrpc_client.la failed sanity test
-> (workdir) in path
-> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> FATAL: QA staging was broken by the package built above
->
-> _______________________________________________
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ conf/distro/include/preferred-shr-versions.inc |    2 --
+ recipes/dbus/dbus_1.4.0.bb                     |   18 ------------------
+ recipes/dbus/dbus_1.4.1.bb                     |   15 +++++++++++++++
+ 3 files changed, 15 insertions(+), 20 deletions(-)
+ delete mode 100644 recipes/dbus/dbus_1.4.0.bb
+ create mode 100644 recipes/dbus/dbus_1.4.1.bb
 
+diff --git a/conf/distro/include/preferred-shr-versions.inc b/conf/distro/include/preferred-shr-versions.inc
+index 1c336b3..6a96798 100644
+--- a/conf/distro/include/preferred-shr-versions.inc
++++ b/conf/distro/include/preferred-shr-versions.inc
+@@ -1,7 +1,5 @@
+ # Upgraded
+ # use newer version then preferred by default
+-PREFERRED_VERSION_dbus = "1.4.0"
+-PREFERRED_VERSION_dbus-native = "1.4.0"
+ PREFERRED_VERSION_libmikmod = "3.2.0-beta2"
+ PREFERRED_VERSION_strace = "4.5.15"
+ PREFERRED_VERSION_emacs-x11 = "23.1"
+diff --git a/recipes/dbus/dbus_1.4.0.bb b/recipes/dbus/dbus_1.4.0.bb
+deleted file mode 100644
+index 2c4943b..0000000
+--- a/recipes/dbus/dbus_1.4.0.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-include dbus.inc
+-PR = "${INC_PR}.0"
+-
+-BBCLASSEXTEND = "native"
+-
+-SRC_URI = "\
+-  http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz \
+-  \
+-  file://tmpdir.patch \
+-  file://add-configurable-reply-timeouts.patch \
+-  file://dbus-1.init \
+-"            
+-
+-# This needs more testing before pushing as default dbus
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRC_URI[md5sum] = "f59618b18d2fb2bd1fce9e1c5a2a3282"
+-SRC_URI[sha256sum] = "c96d2f86d40e158e2bf405925a0a42cce0533a8466098e2f2238aa1614926652"
+diff --git a/recipes/dbus/dbus_1.4.1.bb b/recipes/dbus/dbus_1.4.1.bb
+new file mode 100644
+index 0000000..5dec10e
+--- /dev/null
++++ b/recipes/dbus/dbus_1.4.1.bb
+@@ -0,0 +1,15 @@
++include dbus.inc
++PR = "${INC_PR}.0"
++
++BBCLASSEXTEND = "native"
++
++SRC_URI = "\
++  http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz \
++  \
++  file://tmpdir.patch \
++  file://add-configurable-reply-timeouts.patch \
++  file://dbus-1.init \
++"            
++
++SRC_URI[md5sum] = "99cb057700c0455fb68f8d57902f77ac"
++SRC_URI[sha256sum] = "caa1a0ded2d0f2e95c1d4ec7e3c8bd44834928c5b0ed41a7189963f3593983bd"
+-- 
+1.7.3.4
 
-I *think* I've rebuild rtorrent yesterday. for beagleboard/minimal.
-Didn't get the error. Can't verify things right now. Feel frree to
-ping me this evening on irc (roughly 18.00-22.00 gmt) or tomorrow
-during the day)
-What libtool are you using? and is this on git head ?
-
-Frans
 
 
