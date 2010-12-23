@@ -1,46 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PVk8Z-0008Sa-8Q
+Received: from 27.mail-out.ovh.net ([91.121.30.210])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PVn5j-00039u-Rn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Dec 2010 13:19:15 +0100
-Received: by fxm17 with SMTP id 17so6120826fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 04:19:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=V1EocP25LPWNyFiSTuT4lJFC0EoavqiaA6UrE7WxtGY=;
-	b=KnndkF4Yo2POi22VhTsGDOw4ykvp72bSu7MmwPV175u1LqYRak6P+m+13NxM2mSGTC
-	KPhZ+aSRnvEx52RA3snV2ijNxXHDqIfgy98h2PVNvq8yy2TegUgyezJZNn0ZU8G3WBxB
-	3CCEk75CBkaz8JaCccQk2tU86DN6lff0kpGc0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=oPgfaaf6UT1onNB/bxTuiGMjU/R/qR5ueWumzRMxaugHjApEDf9IBpjNPohm5hdual
-	ZSAwU45l3e9sRdT5Sl3O6cNcHQBn/WUOLfiOtKLzI0gCd+pcmQk0DLqd1OIddlgRTSsK
-	hpvlODkUG9oDYQg5zYssL1PkOiPDHth5/3ajs=
-Received: by 10.223.79.68 with SMTP id o4mr8757268fak.0.1293106744512;
-	Thu, 23 Dec 2010 04:19:04 -0800 (PST)
-Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
-	[85.127.155.31])
-	by mx.google.com with ESMTPS id a6sm1453745fak.1.2010.12.23.04.19.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 23 Dec 2010 04:19:03 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1PVk8L-0007vG-SD; Thu, 23 Dec 2010 13:19:01 +0100
-Date: Thu, 23 Dec 2010 13:19:01 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101223121901.GB27028@mx.loc>
-References: <4D10B09F.2050505@opendreambox.org>
-	<1293097031-26936-1-git-send-email-rep.dot.nop@gmail.com>
-	<4D132B38.3050808@opendreambox.org>
+	Thu, 23 Dec 2010 16:28:31 +0100
+Received: (qmail 8474 invoked by uid 503); 23 Dec 2010 15:23:30 -0000
+Received: from b6.ovh.net (HELO mail630.ha.ovh.net) (213.186.33.56)
+	by 27.mail-out.ovh.net with SMTP; 23 Dec 2010 15:23:24 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 23 Dec 2010 17:21:38 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 23 Dec 2010 17:21:38 +0200
+Message-ID: <4D136901.2010609@eukrea.com>
+Date: Thu, 23 Dec 2010 16:21:37 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <4D132B38.3050808@opendreambox.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] e2fsprogs: fix symlinks and work with dash
+To: openembedded-devel@lists.openembedded.org
+References: <ABD557DA-5595-4CD8-AE87-C5FCC45F41BF@mac.com>	<4D12671D.1050008@eukrea.com>
+	<AANLkTim9YeR7NqM7XnjT_LfDS8aQqkOYk2Kaf1dO+NGg@mail.gmail.com>
+In-Reply-To: <AANLkTim9YeR7NqM7XnjT_LfDS8aQqkOYk2Kaf1dO+NGg@mail.gmail.com>
+X-Ovh-Tracer-Id: 7566610324010413385
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: compat-wireless recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,20 +40,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Dec 2010 12:19:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Dec 2010 15:28:32 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Dec 23, 2010 at 11:58:00AM +0100, Andreas Oberritter wrote:
+Hi Khem,
 
->this would create fsck.ext3.e2fsprogs -> e2fsck.ext3.e2fsprogs.ext3
->etc., which is not what we want. Also, PR needs to be incremented,
->because the links didn't appear in the current package.
+On 22/12/2010 23:44, Khem Raj wrote:
+> On Wed, Dec 22, 2010 at 1:01 PM, Eric Bénard<eric@eukrea.com>  wrote:
+>> I did one which worked on x86 but didn't have time to update/test it for
+>> integration. You can find it here :
+>> http://patchwork.openembedded.org/patch/2013/
+>>
 >
->Would you mind if I pushed the following changeset instead?
+> hmmm refresh it with current master and re-propose please
 >
->http://git.opendreambox.org/?p=obi/openembedded.git;a=commitdiff;h=d87d337f2d2693f3859de64a8b09c5b4b362abdd
+OK boss ;-) recipe updated compile tested and pushed with Gnutoo's fix.
 
-Sounds good.
+Eric
 
 
