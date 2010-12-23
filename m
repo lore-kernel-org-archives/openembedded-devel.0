@@ -1,36 +1,21 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PVnXL-0003XT-4h
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Dec 2010 16:57:03 +0100
-Received: by yie16 with SMTP id 16so893049yie.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 07:56:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=3l7UYR/eOz2iHgvcPryhyCn9d7f12F9arsS1moPXHp8=;
-	b=u2RYPXXHdFxe/Wz+x9Poc3EzGzW3SPS9OfwawlB+Ne+xEcPm3+m6ERCPXqE/5dMfua
-	/PKX57y8e1oE2ewu++XN3iUruBf8hVEzhb0QkCoEp31T7aHbfaC6eI/Rqjl3Gs8lulIK
-	c59Jwt81YJZbkIyzR4q8ibxAaTXn0PSg5xuKs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=K1bPg2sl8Jx9aQdU205CJg/lspV8CPT3+wVt+I2HzKHCl30t39e3Od2O13TKX87sZy
-	mIROS1pq6YgB5lJWBBWV6wPycIbfTb9REQnBkHxhXR7YZ85iqlNsLA7T7XA2B/1VPinh
-	RfT0bja3GCmVUC4LllyNjEtWQa70jCPPqahqo=
-Received: by 10.90.10.21 with SMTP id 21mr10288096agj.112.1293119813577; Thu,
-	23 Dec 2010 07:56:53 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Thu, 23 Dec 2010 07:56:33 -0800 (PST)
-In-Reply-To: <1293091850-26441-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1293091850-26441-1-git-send-email-Martin.Jansa@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 23 Dec 2010 07:56:33 -0800
-Message-ID: <AANLkTikREzR0KCObpS8qTCmE9168y60pJRcBxBRmF7TD@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PVnwB-0004Dg-RG for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Dec 2010 17:22:43 +0100
+Received: from f053038033.adsl.alicedsl.de ([78.53.38.33]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PVnw4-00057a-T4 for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Dec 2010 16:22:37 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] dbus: upgrade 1.4.0 to 1.4.1 and make it new default CVE-2010-4352
+Date: Thu, 23 Dec 2010 17:22:35 +0100
+Message-ID: <1293121355.3905.30.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: [PATCH] ffmpeg: replace tabulators with spaces for consistency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,94 +29,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Dec 2010 15:57:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 23 Dec 2010 16:22:43 -0000
+X-Groupsio-MsgNum: 27456
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Eg6/uGcPsGcjexsl4m/r"
+
+--=-Eg6/uGcPsGcjexsl4m/r
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 23, 2010 at 12:10 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 17 Dec 2010 13:27:02 +0100
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+`omapfbplay*.bb` recipes use tabulators consistently and therefore they are=
+ not changed.
 
-> ---
-> =C2=A0conf/distro/include/preferred-shr-versions.inc | =C2=A0 =C2=A02 --
-> =C2=A0recipes/dbus/dbus_1.4.0.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 18 ------------------
-> =C2=A0recipes/dbus/dbus_1.4.1.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 15 +++++++++++++++
-> =C2=A03 files changed, 15 insertions(+), 20 deletions(-)
-> =C2=A0delete mode 100644 recipes/dbus/dbus_1.4.0.bb
-> =C2=A0create mode 100644 recipes/dbus/dbus_1.4.1.bb
->
-> diff --git a/conf/distro/include/preferred-shr-versions.inc b/conf/distro=
-/include/preferred-shr-versions.inc
-> index 1c336b3..6a96798 100644
-> --- a/conf/distro/include/preferred-shr-versions.inc
-> +++ b/conf/distro/include/preferred-shr-versions.inc
-> @@ -1,7 +1,5 @@
-> =C2=A0# Upgraded
-> =C2=A0# use newer version then preferred by default
-> -PREFERRED_VERSION_dbus =3D "1.4.0"
-> -PREFERRED_VERSION_dbus-native =3D "1.4.0"
-> =C2=A0PREFERRED_VERSION_libmikmod =3D "3.2.0-beta2"
-> =C2=A0PREFERRED_VERSION_strace =3D "4.5.15"
-> =C2=A0PREFERRED_VERSION_emacs-x11 =3D "23.1"
-> diff --git a/recipes/dbus/dbus_1.4.0.bb b/recipes/dbus/dbus_1.4.0.bb
-> deleted file mode 100644
-> index 2c4943b..0000000
-> --- a/recipes/dbus/dbus_1.4.0.bb
-> +++ /dev/null
-> @@ -1,18 +0,0 @@
-> -include dbus.inc
-> -PR =3D "${INC_PR}.0"
-> -
-> -BBCLASSEXTEND =3D "native"
-> -
-> -SRC_URI =3D "\
-> - =C2=A0http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz \
-> - =C2=A0\
-> - =C2=A0file://tmpdir.patch \
-> - =C2=A0file://add-configurable-reply-timeouts.patch \
-> - =C2=A0file://dbus-1.init \
-> -"
-> -
-> -# This needs more testing before pushing as default dbus
-> -DEFAULT_PREFERENCE =3D "-1"
-> -
-> -SRC_URI[md5sum] =3D "f59618b18d2fb2bd1fce9e1c5a2a3282"
-> -SRC_URI[sha256sum] =3D "c96d2f86d40e158e2bf405925a0a42cce0533a8466098e2f=
-2238aa1614926652"
-> diff --git a/recipes/dbus/dbus_1.4.1.bb b/recipes/dbus/dbus_1.4.1.bb
-> new file mode 100644
-> index 0000000..5dec10e
-> --- /dev/null
-> +++ b/recipes/dbus/dbus_1.4.1.bb
-> @@ -0,0 +1,15 @@
-> +include dbus.inc
-> +PR =3D "${INC_PR}.0"
-> +
-> +BBCLASSEXTEND =3D "native"
-> +
-> +SRC_URI =3D "\
-> + =C2=A0http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz \
-> + =C2=A0\
-> + =C2=A0file://tmpdir.patch \
-> + =C2=A0file://add-configurable-reply-timeouts.patch \
-> + =C2=A0file://dbus-1.init \
-> +"
-> +
-> +SRC_URI[md5sum] =3D "99cb057700c0455fb68f8d57902f77ac"
-> +SRC_URI[sha256sum] =3D "caa1a0ded2d0f2e95c1d4ec7e3c8bd44834928c5b0ed41a7=
-189963f3593983bd"
-> --
-> 1.7.3.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Use
+
+	grep -e $'\t' ffmpeg_*bb
+
+to find tabulators in Bash [1].
 
 
+[1] http://www.claudiokuenzler.com/blog/99/tabulator-in-bash
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/ffmpeg/ffmpeg_0.4.9-pre1.bb |    2 +-
+ recipes/ffmpeg/ffmpeg_0.5.bb        |    6 +++---
+ recipes/ffmpeg/ffmpeg_git.bb        |   10 +++++-----
+ recipes/ffmpeg/ffmpeg_svn.bb        |    2 +-
+ 4 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/recipes/ffmpeg/ffmpeg_0.4.9-pre1.bb b/recipes/ffmpeg/ffmpeg_0.=
+4.9-pre1.bb
+index 1ac8610..e6a7abe 100644
+--- a/recipes/ffmpeg/ffmpeg_0.4.9-pre1.bb
++++ b/recipes/ffmpeg/ffmpeg_0.4.9-pre1.bb
+@@ -6,7 +6,7 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/ffmpeg/ffmpeg-${PV}.tar.=
+gz \
+            file://configure.patch \
+            file://gcc4.patch \
+            file://soname.patch \
+-	   file://Makefile-avformat-use-LDFLAGS.patch \
++           file://Makefile-avformat-use-LDFLAGS.patch \
+            file://Makefile-add-liblame.patch \
+            file://install-must-not-strip.patch \
+           "
+diff --git a/recipes/ffmpeg/ffmpeg_0.5.bb b/recipes/ffmpeg/ffmpeg_0.5.bb
+index 07af21d..f3a6d21 100644
+--- a/recipes/ffmpeg/ffmpeg_0.5.bb
++++ b/recipes/ffmpeg/ffmpeg_0.5.bb
+@@ -8,9 +8,9 @@ DEFAULT_PREFERENCE =3D "1"
+=20
+ SRCREV_libswscale =3D "b2e1c8222eeef74b0ca8053b400957dd69e18e4d"
+ SRC_URI =3D "http://ffmpeg.org/releases/ffmpeg-${PV}.tar.bz2 \
+-	   file://armv4.patch \
++       file://armv4.patch \
+        file://ffmpeg-arm-update.diff \
+-	  "
++"
+=20
+ #S =3D "${WORKDIR}/git"
+ B =3D "${S}/build.${HOST_SYS}.${TARGET_SYS}"
+@@ -57,7 +57,7 @@ do_configure() {
+         mkdir -p ${B}
+         cd ${B}
+         ${S}/configure ${EXTRA_OECONF}
+-		sed -i -e s:Os:O4:g ${B}/config.h
++        sed -i -e s:Os:O4:g ${B}/config.h
+ }
+=20
+=20
+diff --git a/recipes/ffmpeg/ffmpeg_git.bb b/recipes/ffmpeg/ffmpeg_git.bb
+index 5c84ea7..231b9cb 100644
+--- a/recipes/ffmpeg/ffmpeg_git.bb
++++ b/recipes/ffmpeg/ffmpeg_git.bb
+@@ -57,13 +57,13 @@ EXTRA_OECONF =3D " \
+ do_configure() {
+         sed -i -e s:'check_cflags -std=3Dc99'::g ${S}/configure
+         cd ${S}
+-	git clone git://git.mplayerhq.hu/libswscale || true
+-	cd libswscale
+-	git checkout ${SRCREV_libswscale} || true
+-	cd ${S}
++        git clone git://git.mplayerhq.hu/libswscale || true
++        cd libswscale
++        git checkout ${SRCREV_libswscale} || true
++        cd ${S}
+         mkdir -p ${B}
+         cd ${B}
+         ${S}/configure ${EXTRA_OECONF}
+-		sed -i -e s:Os:O4:g ${B}/config.h
++        sed -i -e s:Os:O4:g ${B}/config.h
+ }
+=20
+diff --git a/recipes/ffmpeg/ffmpeg_svn.bb b/recipes/ffmpeg/ffmpeg_svn.bb
+index 573de03..ea0d757 100644
+--- a/recipes/ffmpeg/ffmpeg_svn.bb
++++ b/recipes/ffmpeg/ffmpeg_svn.bb
+@@ -56,6 +56,6 @@ do_configure() {
+         mkdir -p ${B}
+         cd ${B}
+         ${S}/configure ${EXTRA_OECONF}
+-		sed -i -e s:Os:O4:g ${B}/config.h
++        sed -i -e s:Os:O4:g ${B}/config.h
+ }
+=20
+--=20
+1.7.2.3
+
+--=-Eg6/uGcPsGcjexsl4m/r
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0Td0YACgkQPX1aK2wOHVhDTgCfZYvaV1prMnCb0LTxIqKkuhM1
+7s8AnR5s/5aohNE6zRmUZhsVxCK1zeGW
+=hPF1
+-----END PGP SIGNATURE-----
+
+--=-Eg6/uGcPsGcjexsl4m/r--
