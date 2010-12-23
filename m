@@ -1,33 +1,34 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PVozV-0005YO-Ji
+	(envelope-from <raj.khem@gmail.com>) id 1PVpYn-0006Jp-2f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Dec 2010 18:30:13 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id B85B71C050
+	Thu, 23 Dec 2010 19:06:41 +0100
+Received: by gyh20 with SMTP id 20so2764503gyh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 17:30:05 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id Uhq9mzTcJe87
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 17:30:05 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 3627EA5B59
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 17:30:05 +0000 (GMT)
-Message-ID: <4D13871A.6040001@xora.org.uk>
-Date: Thu, 23 Dec 2010 17:30:02 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Thu, 23 Dec 2010 10:06:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=Wywjvu23nDAgdTKbBvwIMhPYb0ebzSqJ7En6vFutBgY=;
+	b=GvnQwwArIznzuuUaH+eEuA544isc6sM4EgXrMwoCnvlODzh79IiMAOx/Ht5j+/cJF9
+	+xzCewJ6zGicvsZgvBHt/vydsNWnUA+JXxAmGCbHvJ/S9zfuLUZ8RCKiJYh9xZONBQpE
+	HHD3Iiv/DIllxnC5IfBKfvbjI4BWAD7TDVHP8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=SQw3+SoIIOlKWDPp64+VqMpZnVSzYuHN5EmTV6UK2aHSJSShG8BIHd1S/d9n+K/YmI
+	/4lwxOKL/ybLq+a18oQB3AJuUccSwYAIVIRBXJvVmo/Uix/cbfzLKfSnYjx0D9AhMk2Y
+	B77QOlCUp1HeWB5XGNNj3+rcGhtTNov4RXPDY=
+Received: by 10.90.97.19 with SMTP id u19mr10375774agb.166.1293127589321; Thu,
+	23 Dec 2010 10:06:29 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4D13843E.3070304@freyther.de>
+Received: by 10.90.86.4 with HTTP; Thu, 23 Dec 2010 10:06:09 -0800 (PST)
 In-Reply-To: <4D13843E.3070304@freyther.de>
-X-Enigmail-Version: 1.1.1
+References: <4D13843E.3070304@freyther.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 23 Dec 2010 10:06:09 -0800
+Message-ID: <AANLkTik=rATXzz-ECuTrL6tTc+yiQnQGoOAMOK+MvFJt@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: curl-native and requiring ldap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,21 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Dec 2010 17:30:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 23 Dec 2010 18:06:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 23/12/2010 17:17, Holger Freyther wrote:
+On Thu, Dec 23, 2010 at 9:17 AM, Holger Freyther <holger+oe@freyther.de> wrote:
 > Hi all,
 >
 > I finally have a machine that is fast enough for OE again. I have a build
 > failure in curl-native as it tries to link to -ldap and -lrt. I have seen the
 > recipe changed a lot since the last time I looked at it. What is the best way
 > to insert --disable-ldap for the native build?
+
+you need to add 'ldap' to CURL_FEATURES accordingly add code in the
+anonymous python code
+to add it to extra_oeconf
+
 >
-EXTRA_OECONF_virtclass-native = "--disable-ldap"
-
-Graeme
-
+> z.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
