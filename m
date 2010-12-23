@@ -1,33 +1,35 @@
-Received: from [77.233.226.4] (helo=public.doredevelopment.dk)
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eha@dev.doredevelopment.dk>) id 1PVihM-0006dL-6M
+	(envelope-from <obi@opendreambox.org>) id 1PVis7-0006nV-L6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Dec 2010 11:47:04 +0100
+	Thu, 23 Dec 2010 11:58:11 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by public.doredevelopment.dk (Postfix) with ESMTP id E24067BBA;
-	Thu, 23 Dec 2010 11:39:46 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at dev.doredevelopment.dk
-Received: from public.doredevelopment.dk ([127.0.0.1])
-	by localhost (public.doredevelopment.dk [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id kWicuowZDg-c; Thu, 23 Dec 2010 11:39:40 +0100 (CET)
-Received: from [192.168.18.32] (eha.doredevelopment.dk [192.168.18.32])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 3D566314BE59
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Dec 2010 11:58:05 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 0xa1a9N3jqp8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Dec 2010 11:58:00 +0100 (CET)
+Received: from [10.200.6.10] (unknown [82.149.226.166])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by public.doredevelopment.dk (Postfix) with ESMTPS id 2165531B;
-	Thu, 23 Dec 2010 11:39:40 +0100 (CET)
-From: Esben Haabendal <eha@dev.doredevelopment.dk>
-To: Cliff Brake <cliff.brake@gmail.com>
-In-Reply-To: <AANLkTik3-5x2W+DRTJ9bC0YnUQB9HbvSWEYLSMWLTPjZ@mail.gmail.com>
-References: <AANLkTik3-5x2W+DRTJ9bC0YnUQB9HbvSWEYLSMWLTPjZ@mail.gmail.com>
-Organization: =?ISO-8859-1?Q?Dor=E9Development?= ApS
-Date: Thu, 23 Dec 2010 07:11:46 +0100
-Message-ID: <1293084706.2594.5.camel@eha>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Cc: yocto@yoctoproject.org,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [yocto] Multiple Repository support
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 79134314BE56
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Dec 2010 11:58:00 +0100 (CET)
+Message-ID: <4D132B38.3050808@opendreambox.org>
+Date: Thu, 23 Dec 2010 11:58:00 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4D10B09F.2050505@opendreambox.org>
+	<1293097031-26936-1-git-send-email-rep.dot.nop@gmail.com>
+In-Reply-To: <1293097031-26936-1-git-send-email-rep.dot.nop@gmail.com>
+Subject: Re: [PATCH] e2fsprogs: fix symlinks and work with dash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,56 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Dec 2010 10:47:04 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 23 Dec 2010 10:58:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-12-22 at 11:09 -0500, Cliff Brake wrote:
-> Hello,
+Hello Bernhard,
+
+On 12/23/2010 10:37 AM, Bernhard Reutner-Fischer wrote:
+> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> ---
+>  recipes/e2fsprogs/e2fsprogs.inc |   11 ++++++-----
+>  1 files changed, 6 insertions(+), 5 deletions(-)
 > 
-> I've started collecting ideas from various emails on multiple
-> repository support.
-> 
-> http://wiki.openembedded.org/index.php/MultipleRepositoryMethods
-> 
-> Please feel free to update the above page.
-> 
-> In my mind, this is a key problem we need to solve, not just for
-> Yocto/OE, but also for anyone doing product development.
-> 
-> I've personally been using git submodules for most projects, and repo
-> for Android based projects.
-> 
-> Appreciate any ideas, experiences, or insights into how we solve this problem.
+> diff --git a/recipes/e2fsprogs/e2fsprogs.inc b/recipes/e2fsprogs/e2fsprogs.inc
+> index ef9aace..e400c75 100644
+> --- a/recipes/e2fsprogs/e2fsprogs.inc
+> +++ b/recipes/e2fsprogs/e2fsprogs.inc
+> @@ -30,8 +30,8 @@ do_compile_prepend () {
+>  do_install_append () {
+>  
+>      	oe_runmake install-libs DESTDIR=${D}
+> -	ln -sf ${D}/${base_sbindir}/tune2fs findfs
+> -	ln -sf ${D}/${base_sbindir}/tune2fs e2label
+> +	ln -sf tune2fs ${D}${base_sbindir}/findfs
+> +	ln -sf tune2fs ${D}${base_sbindir}/e2label
+>  }
+>  
+>  do_install_append_pn-e2fsprogs () {
+> @@ -43,9 +43,10 @@ do_install_append_pn-e2fsprogs () {
+>  	done
+>  	fsck=$(cd ${D}${base_sbindir}/ && ls -1 fsck.ext* | sed s/[^\.]*//)
+>  	for e in $fsck; do
+> -		rm ${D}${base_sbindir}/{fsck,mkfs}$e;
+> -		ln -s ${D}${base_sbindir}/e2fsck$e.${PN}$e fsck$e.${PN}
+> -		ln -s ${D}${base_sbindir}/mke2fs$e.${PN}$e mkfs$e.${PN}
+> +		rm ${D}${base_sbindir}/fsck$e;
+> +		rm ${D}${base_sbindir}/mkfs$e;
+> +		ln -s e2fsck$e.${PN}$e ${D}${base_sbindir}/fsck$e.${PN}
+> +		ln -s mke2fs$e.${PN}$e ${D}${base_sbindir}/mkfs$e.${PN}
 
-We are using git submodules for just this task in OE-lite.
-It works pretty well, but I fear that this will not be the case if a
-push model is used for the top repository.
+this would create fsck.ext3.e2fsprogs -> e2fsck.ext3.e2fsprogs.ext3
+etc., which is not what we want. Also, PR needs to be incremented,
+because the links didn't appear in the current package.
 
-We have partly wrapped the git submodule configuration into a bitbake
-parsed configuration file, looking something like:
+Would you mind if I pushed the following changeset instead?
 
-# OE-lite/core metadata
-OE_MODULES                      += "core"
-OE_MODULE_PATH_core              = "meta/core"
-OE_MODULE_URL_core               =
-"git://git.doredevelopment.dk/oe-lite/core.git"
-OE_MODULE_PUSHURL_core           =
-"ssh://dev.doredevelopment.dk/srv/public/git/oe-lite/core.git"
-OE_MODULE_BRANCH_core            = "master"
-OE_MODULE_REMOTES_core          += "gitorious"
-OE_MODULE_REMOTE_core_gitorious  = "git@gitorious.org:oe-lite/core.git"
+http://git.opendreambox.org/?p=obi/openembedded.git;a=commitdiff;h=d87d337f2d2693f3859de64a8b09c5b4b362abdd
 
-So developers get a more complete and consistent submodule setup.
-
-We considered repo, but the KISS principle ruled in favor of git
-submodules.  I believe the learning curve is steep enough for any
-newcomers to OE, so having to figure out how to master something like
-repo also does not seem so attractive.
-
-/Esben
-
-/Esben
-
+Regards,
+Andreas
 
 
