@@ -1,34 +1,45 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PVis7-0006nV-L6
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PVk8Z-0008Sa-8Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Dec 2010 11:58:11 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 3D566314BE59
+	Thu, 23 Dec 2010 13:19:15 +0100
+Received: by fxm17 with SMTP id 17so6120826fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 11:58:05 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 0xa1a9N3jqp8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 11:58:00 +0100 (CET)
-Received: from [10.200.6.10] (unknown [82.149.226.166])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 79134314BE56
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 11:58:00 +0100 (CET)
-Message-ID: <4D132B38.3050808@opendreambox.org>
-Date: Thu, 23 Dec 2010 11:58:00 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Thu, 23 Dec 2010 04:19:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=V1EocP25LPWNyFiSTuT4lJFC0EoavqiaA6UrE7WxtGY=;
+	b=KnndkF4Yo2POi22VhTsGDOw4ykvp72bSu7MmwPV175u1LqYRak6P+m+13NxM2mSGTC
+	KPhZ+aSRnvEx52RA3snV2ijNxXHDqIfgy98h2PVNvq8yy2TegUgyezJZNn0ZU8G3WBxB
+	3CCEk75CBkaz8JaCccQk2tU86DN6lff0kpGc0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=oPgfaaf6UT1onNB/bxTuiGMjU/R/qR5ueWumzRMxaugHjApEDf9IBpjNPohm5hdual
+	ZSAwU45l3e9sRdT5Sl3O6cNcHQBn/WUOLfiOtKLzI0gCd+pcmQk0DLqd1OIddlgRTSsK
+	hpvlODkUG9oDYQg5zYssL1PkOiPDHth5/3ajs=
+Received: by 10.223.79.68 with SMTP id o4mr8757268fak.0.1293106744512;
+	Thu, 23 Dec 2010 04:19:04 -0800 (PST)
+Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
+	[85.127.155.31])
+	by mx.google.com with ESMTPS id a6sm1453745fak.1.2010.12.23.04.19.02
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 23 Dec 2010 04:19:03 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1PVk8L-0007vG-SD; Thu, 23 Dec 2010 13:19:01 +0100
+Date: Thu, 23 Dec 2010 13:19:01 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20101223121901.GB27028@mx.loc>
 References: <4D10B09F.2050505@opendreambox.org>
 	<1293097031-26936-1-git-send-email-rep.dot.nop@gmail.com>
-In-Reply-To: <1293097031-26936-1-git-send-email-rep.dot.nop@gmail.com>
+	<4D132B38.3050808@opendreambox.org>
+MIME-Version: 1.0
+In-Reply-To: <4D132B38.3050808@opendreambox.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Subject: Re: [PATCH] e2fsprogs: fix symlinks and work with dash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,54 +54,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Dec 2010 10:58:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 23 Dec 2010 12:19:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello Bernhard,
+On Thu, Dec 23, 2010 at 11:58:00AM +0100, Andreas Oberritter wrote:
 
-On 12/23/2010 10:37 AM, Bernhard Reutner-Fischer wrote:
-> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-> ---
->  recipes/e2fsprogs/e2fsprogs.inc |   11 ++++++-----
->  1 files changed, 6 insertions(+), 5 deletions(-)
-> 
-> diff --git a/recipes/e2fsprogs/e2fsprogs.inc b/recipes/e2fsprogs/e2fsprogs.inc
-> index ef9aace..e400c75 100644
-> --- a/recipes/e2fsprogs/e2fsprogs.inc
-> +++ b/recipes/e2fsprogs/e2fsprogs.inc
-> @@ -30,8 +30,8 @@ do_compile_prepend () {
->  do_install_append () {
->  
->      	oe_runmake install-libs DESTDIR=${D}
-> -	ln -sf ${D}/${base_sbindir}/tune2fs findfs
-> -	ln -sf ${D}/${base_sbindir}/tune2fs e2label
-> +	ln -sf tune2fs ${D}${base_sbindir}/findfs
-> +	ln -sf tune2fs ${D}${base_sbindir}/e2label
->  }
->  
->  do_install_append_pn-e2fsprogs () {
-> @@ -43,9 +43,10 @@ do_install_append_pn-e2fsprogs () {
->  	done
->  	fsck=$(cd ${D}${base_sbindir}/ && ls -1 fsck.ext* | sed s/[^\.]*//)
->  	for e in $fsck; do
-> -		rm ${D}${base_sbindir}/{fsck,mkfs}$e;
-> -		ln -s ${D}${base_sbindir}/e2fsck$e.${PN}$e fsck$e.${PN}
-> -		ln -s ${D}${base_sbindir}/mke2fs$e.${PN}$e mkfs$e.${PN}
-> +		rm ${D}${base_sbindir}/fsck$e;
-> +		rm ${D}${base_sbindir}/mkfs$e;
-> +		ln -s e2fsck$e.${PN}$e ${D}${base_sbindir}/fsck$e.${PN}
-> +		ln -s mke2fs$e.${PN}$e ${D}${base_sbindir}/mkfs$e.${PN}
+>this would create fsck.ext3.e2fsprogs -> e2fsck.ext3.e2fsprogs.ext3
+>etc., which is not what we want. Also, PR needs to be incremented,
+>because the links didn't appear in the current package.
+>
+>Would you mind if I pushed the following changeset instead?
+>
+>http://git.opendreambox.org/?p=obi/openembedded.git;a=commitdiff;h=d87d337f2d2693f3859de64a8b09c5b4b362abdd
 
-this would create fsck.ext3.e2fsprogs -> e2fsck.ext3.e2fsprogs.ext3
-etc., which is not what we want. Also, PR needs to be incremented,
-because the links didn't appear in the current package.
-
-Would you mind if I pushed the following changeset instead?
-
-http://git.opendreambox.org/?p=obi/openembedded.git;a=commitdiff;h=d87d337f2d2693f3859de64a8b09c5b4b362abdd
-
-Regards,
-Andreas
+Sounds good.
 
 
