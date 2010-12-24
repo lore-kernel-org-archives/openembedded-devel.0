@@ -1,32 +1,40 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1PVw5N-0005Cm-A5
+	(envelope-from <graham.gower@gmail.com>) id 1PVwE1-0005N5-5z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Dec 2010 02:04:45 +0100
-Received: by wyb40 with SMTP id 40so6789831wyb.6
+	Fri, 24 Dec 2010 02:13:41 +0100
+Received: by pwi8 with SMTP id 8so563211pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Dec 2010 17:04:35 -0800 (PST)
+	Thu, 23 Dec 2010 17:13:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=Lm2LR2aKu6tmQzEtAWB4yr0+bH0wA3YuI0BdeaCiGCI=;
-	b=GIvGwJdOgmP4N1eSpRIovDih6qIeXKKZRFyQifjs9aah+AvOvnDzLig8H3hAIyzdTm
-	WB+PKHJpHl8wNfW84QffXRjWTNgBDZPUfCbo+Uf4dkvHAYLm4Ixg//xK9I04lgnZvoyu
-	1NzcQrOJSBfMWJU712f2NgoHU/+P6BZszA4+A=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=Xr7457nQFgM0ApHYbkcrR4vBAjbJv3CoQiBs4Jun41E=;
+	b=lzaiJ2ke3XinIl2S9A4oiWQpzn627cVHoUuar66M89/SbBUvCZS/G7TWJzITCvqarw
+	WqvOP0qqWwjDNdzM7pM72ry35LNOmJKPj8JThhpr4OK/9RuHnyMRY6p4eZcnQ/kJpUgD
+	xsGSePpfDOMrKMbPICL0/X1B+L83UTI0ycmls=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=SBX/o2bFqfGVyFdMlvj3BZUsiXU5IFjOiCSECg18wpDIzTVBcEIaVfc1s3cKEdQV7Q
-	9oS/2x+S4uuiD3a04iaE5hTxx27IwPBRDkJfXg5LudeUvJ1PSrAKICQad/sOAsyxDbmm
-	WR94KGU9AouJVRJb48jQ4znJ+65aLYVJuDnhk=
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=WYF+5wUZTZnVf3tsq/wqDw3njmBQvxv9edVsN0ktKzRYxhUdeVxXKnnHofPXd3oOtA
+	CBaGtujWEMwCHh5NZFMyOaB68v9rmZ10oIKBk623gix7aFwg7x6QiaMfc4Y7jmb8UA4N
+	dvVtoKzFwT1AZmeej1vpSbe/QOfKQFuSQj2Cs=
+Received: by 10.143.16.6 with SMTP id t6mr7061265wfi.113.1293153210927;
+	Thu, 23 Dec 2010 17:13:30 -0800 (PST)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	q13sm11502579wfc.5.2010.12.23.17.13.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 23 Dec 2010 17:13:30 -0800 (PST)
+Message-ID: <4D13F3B4.2050104@gmail.com>
+Date: Fri, 24 Dec 2010 11:43:24 +1030
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.15) Gecko/20101113 Thunderbird/3.0.10
 MIME-Version: 1.0
-Received: by 10.216.169.71 with SMTP id m49mr9835870wel.4.1293152675647; Thu,
-	23 Dec 2010 17:04:35 -0800 (PST)
-Received: by 10.216.254.137 with HTTP; Thu, 23 Dec 2010 17:04:35 -0800 (PST)
-Date: Thu, 23 Dec 2010 20:04:35 -0500
-Message-ID: <AANLkTin7z1wu1hewCq9f=PCwoYv3-JrCj2OPXf0V6jWc@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: testing branch 2010-12-23
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] ublibc.inc, micro-uclibc.conf: Avoid gettext in uclibc systems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,22 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Dec 2010 01:04:45 -0000
+X-List-Received-Date: Fri, 24 Dec 2010 01:13:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-master has been merged to testing-next and is ready for clean builds.
 
-Last weeks testing branch did not fare so well, so no tags.
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ conf/distro/include/uclibc.inc |    2 +-
+ conf/distro/micro-uclibc.conf  |    2 ++
+ 2 files changed, 3 insertions(+), 1 deletions(-)
 
-For more information on testing, see:
-
-http://www.openembedded.org/index.php/Testing
-
-Thanks,
-Cliff
-
+diff --git a/conf/distro/include/uclibc.inc b/conf/distro/include/uclibc.inc
+index dd00647..200fac2 100644
+--- a/conf/distro/include/uclibc.inc
++++ b/conf/distro/include/uclibc.inc
+@@ -3,7 +3,7 @@ OVERRIDES =. "libc-uclibc:"
+ 
+ # The things uclibc can provide.  We default to wanting uclibc to provide them.
+ PREFERRED_PROVIDER_virtual/libiconv ?= "libiconv"
+-PREFERRED_PROVIDER_virtual/libintl ?= "gettext"
++PREFERRED_PROVIDER_virtual/libintl ?= "proxy-libintl"
+ #fix some iconv issues, needs to be adjusted when doing uclibc builds
+ PREFERRED_PROVIDER_virtual/libintl_avr32 = "proxy-libintl"
+ PREFERRED_PROVIDER_virtual/libc = "uclibc"
+diff --git a/conf/distro/micro-uclibc.conf b/conf/distro/micro-uclibc.conf
+index fb1887c..85ea9b3 100644
+--- a/conf/distro/micro-uclibc.conf
++++ b/conf/distro/micro-uclibc.conf
+@@ -24,3 +24,5 @@ require conf/distro/micro.conf
+ # Use overrides for micro as well
+ OVERRIDES .= ":micro"
+ 
++# Don't let glib-2.0 pull in gettext
++USE_NLS_glib-2.0 = "no"
 -- 
-=================
-http://bec-systems.com
+1.7.1
+
 
 
