@@ -1,21 +1,23 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PWCv8-0006At-SQ for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Dec 2010 20:03:18 +0100
-Received: from f053044232.adsl.alicedsl.de ([78.53.44.232]
+	id 1PWGpZ-0002gK-CA for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Dec 2010 00:13:49 +0100
+Received: from f053036054.adsl.alicedsl.de ([78.53.36.54]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PWCv0-0006qA-To for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Dec 2010 19:03:11 +0000
+	id 1PWGpR-0001Hy-4l for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Dec 2010 23:13:41 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Dec 2010 20:03:09 +0100
-Message-ID: <1293217389.4027.39.camel@mattotaupa>
+In-Reply-To: <1293217389.4027.39.camel@mattotaupa>
+References: <1293217389.4027.39.camel@mattotaupa>
+Date: Sat, 25 Dec 2010 00:13:39 +0100
+Message-ID: <1293232419.4027.53.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
-Subject: [PATCH 1/2] xbmc: add `zlib` to `DEPENDS`
+Subject: Re: [PATCH 1/2 v2] xbmc: add `zlib` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,92 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Dec 2010 19:03:18 -0000
-X-Groupsio-MsgNum: 27492
+X-List-Received-Date: Fri, 24 Dec 2010 23:13:49 -0000
+X-Groupsio-MsgNum: 27493
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-8RkC0zr7lnwcG42J4Y6F"
+	boundary="=-OlJK6cN5iziEiKkEAcjA"
 
---=-8RkC0zr7lnwcG42J4Y6F
+--=-OlJK6cN5iziEiKkEAcjA
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 Date: Wed, 1 Dec 2010 17:27:33 +0100
 
-Task `compile` fails with `/bin/grep: /usr/lib/libz.la: No such file or dir=
-ectory`.
+XBMC depends on `zlib` [1] which is indirectly provided by other dependenci=
+es like `ffmpeg.inc` [2]. Add `zlib` to `DEPENDS` to avoid possible future =
+breakage.
 
-	| make -C ..
-	| make[2]: Entering directory `/oe/build-angstrom-next/angstrom-dev/work/a=
-rmv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d64=
-02088c714adcbe/git/lib/libass'
-	|  cd . && /bin/sh ./config.status Makefile
-	| config.status: creating Makefile
-	| make[2]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/ar=
-mv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d640=
-2088c714adcbe/git/lib/libass'
-	| make[2]: Entering directory `/oe/build-angstrom-next/angstrom-dev/work/a=
-rmv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d64=
-02088c714adcbe/git/lib/libass'
-	| make[3]: Entering directory `/oe/build-angstrom-next/angstrom-dev/work/a=
-rmv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d64=
-02088c714adcbe/git/lib/libass'
-	| Making all in libass
-	| make[4]: Entering directory `/oe/build-angstrom-next/angstrom-dev/work/a=
-rmv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d64=
-02088c714adcbe/git/lib/libass/libass'
-	|  cd .. && /bin/sh ./config.status libass/Makefile depfiles
-	| config.status: creating libass/Makefile
-	| config.status: executing depfiles commands
-	| make[4]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/ar=
-mv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d640=
-2088c714adcbe/git/lib/libass/libass'
-	| make[4]: Entering directory `/oe/build-angstrom-next/angstrom-dev/work/a=
-rmv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d64=
-02088c714adcbe/git/lib/libass/libass'
-	|   CC    ass.o
-	|   CC    ass_cache.o
-	|   CC    ass_font.o
-	|   CC    ass_fontconfig.o
-	|   CC    ass_render.o
-	|   CC    ass_utils.o
-	|   CC    ass_bitmap.o
-	|   CC    ass_library.o
-	|   CC    ass_drawing.o
-	|   CC    ass_parse.o
-	|   CC    ass_strtod.o
-	|   LINK  libass.la
-	| arm-angstrom-linux-gnueabi-libtool: link: warning: library `/oe/build-an=
-gstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/lib=
-freetype.la' was moved.
-	| /bin/grep: /usr/lib/libz.la: No such file or directory
-	| /bin/sed: can't read /usr/lib/libz.la: No such file or directory
-	| arm-angstrom-linux-gnueabi-libtool: link: `/usr/lib/libz.la' is not a va=
-lid libtool archive
-	| make[4]: *** [libass.la] Error 1
-	| make[4]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/ar=
-mv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d640=
-2088c714adcbe/git/lib/libass/libass'
-	| make[3]: *** [all-recursive] Error 1
-	| make[3]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/ar=
-mv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d640=
-2088c714adcbe/git/lib/libass'
-	| make[2]: *** [all] Error 2
-	| make[2]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/ar=
-mv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d640=
-2088c714adcbe/git/lib/libass'
-	| make[1]: *** [../libass/.libs/libass.so] Error 2
-	| make[1]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/ar=
-mv7a-angstrom-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d640=
-2088c714adcbe/git/lib/libass/xbmc'
-	| make: *** [dvdpcodecs] Error 2
-	| FATAL: oe_runmake failed
-	| ERROR: Function do_compile failed
-
-Adding `zlib` to `DEPENDS` fixes the problem for `angstrom-2008.1` and `min=
-imal` with `MACHINE =3D "beagleboard"`.
+[1] http://trac.xbmc.org/browser/trunk/README.linux?rev=3D35279#L54
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/ffmpeg/=
+ffmpeg.inc?h=3Dorg.openembedded.dev&id=3D5316c5b1416391f15277ce867489e525b7=
+eccd6e#n12
 
 Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+v2: Updated commit message.
+
+The build still fails with `angstrom-2010.x` with the error message in v1.
 ---
  recipes/xbmc/xbmc_svn.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
@@ -151,16 +93,16 @@ it;branch=3Dmaster \
 --=20
 1.7.2.3
 
---=-8RkC0zr7lnwcG42J4Y6F
+--=-OlJK6cN5iziEiKkEAcjA
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAk0U7m0ACgkQPX1aK2wOHVhKvwCcC+gntZowwLTA+65nAojXohRa
-bioAnjJhPxh/ijXCpdxo7SPfT+GmkuC9
-=gsGZ
+iEYEABECAAYFAk0VKSMACgkQPX1aK2wOHVjZfgCeLo36gJ8gjuvk3tfvQzVmOPkM
+cCIAnRIHlD5xv5HGP6T7j2GUIWUYme0V
+=9nq9
 -----END PGP SIGNATURE-----
 
---=-8RkC0zr7lnwcG42J4Y6F--
+--=-OlJK6cN5iziEiKkEAcjA--
