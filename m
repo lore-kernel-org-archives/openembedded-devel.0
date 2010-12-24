@@ -1,38 +1,37 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PW9XA-0002Gc-5u
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PW9v6-0002iH-SW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Dec 2010 16:26:20 +0100
-Received: by ywi6 with SMTP id 6so3217128ywi.6
+	Fri, 24 Dec 2010 16:51:05 +0100
+Received: by iwn8 with SMTP id 8so7362446iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Dec 2010 07:26:06 -0800 (PST)
+	Fri, 24 Dec 2010 07:50:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=E+CLyUHyIzHCcjTBSq9ayikyNV1+f4wMYDPGqe6MLhQ=;
-	b=BphDdGlHCacMcsK4++1K80FztIFkOOgOvGecY2hVT8hMZ7rjH6FlSydDxXqIgKKBd9
-	58m904aacAg9jCUS/212eEsFqA7elIqh3WPr2nPRv05JacFLJnVBogSN6SjuUxTu/vrE
-	WCsLAQgw8sB5cuFDQ91GC6GiEscDJjm8St918=
+	bh=xTPfZR5pNLdQX9xC3aM8YocNTWG1rq1YkJ3Jd+iSYv0=;
+	b=bpVVNqQ+NeWNYJL7X2IN+PxdnZ/UPL5y9kprEG2Cc6125rZOPA2nlJ8ITu1qnr/V0y
+	+sTecri/EccGI7GIdNwt1G906yyKHAmnpF0V+k1eMbuPXHZ+50vFEtxZDuEp2wFoWz9n
+	ki/FmpQzkYkdYGINXevchEldKcUdpGEdimGwI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=QHcnG2fvyIrGiJB3I1DMZE5GW11vwE6jdjRuqfdVKbyBHqyihm1nPPG3wW5pWc2FBY
-	qncBzbsO539Cn4oUFR2vuAJ6Ec279GQgvLfqRFKY7URcbkub1cbQ/w6mnREmiXgJeZ3f
-	pLqNJkOEi8hPpey/pmpHqtUJhkPw6JxxVzEeE=
-Received: by 10.90.120.17 with SMTP id s17mr908446agc.193.1293204365897; Fri,
-	24 Dec 2010 07:26:05 -0800 (PST)
+	b=cTTsra2XLsJCKcQMIXAuFdgrOfSAUlrO0eTJEN4PFJ8HzOZozgBfDFAYlZsfufZkjn
+	RH3l7S/sPUy22o2008WC0GmkUxsaoHX9tEnuhPZvUB/HVdOtbZQPtfLmqQLYdQbcXaRN
+	iMEwW/ofBrohcvDBy7RJlZFUa4FB15v0yy/o8=
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Fri, 24 Dec 2010 07:25:45 -0800 (PST)
-In-Reply-To: <4D14B770.3000601@eukrea.com>
-References: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>
-	<AANLkTikXVCmv0phk5OLOMciBOpC296Z2XtF9jO=Bn1Jn@mail.gmail.com>
-	<20101216154854.GB22134@gmail.com> <4D14B770.3000601@eukrea.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 24 Dec 2010 07:25:45 -0800
-Message-ID: <AANLkTimyD4zL1eOcN2oKjhd2NWRV3VXD1vbei0WVR9Az@mail.gmail.com>
+Received: by 10.231.149.194 with SMTP id u2mr9456292ibv.32.1293205855759; Fri,
+	24 Dec 2010 07:50:55 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Fri, 24 Dec 2010 07:50:55 -0800 (PST)
+In-Reply-To: <AANLkTinucpseeTTp=KHr_UVRp25RuRkxWcEaued564Ld@mail.gmail.com>
+References: <AANLkTi=YRSMBzSihPEddjSNR+B7UFGWcAr_P9AgGs3eQ@mail.gmail.com>
+	<AANLkTinucpseeTTp=KHr_UVRp25RuRkxWcEaued564Ld@mail.gmail.com>
+Date: Fri, 24 Dec 2010 16:50:55 +0100
+Message-ID: <AANLkTi=F-h0tS-5nXd_uVoy5sj2nzJEmiwWHU5NSn+R=@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: testing branch 2010-12-10
+Subject: Re: avoid addtask?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,64 +45,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Dec 2010 15:26:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 24 Dec 2010 15:51:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 24, 2010 at 7:08 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> Hi Khem,
+2010/12/24 Khem Raj <raj.khem@gmail.com>:
+> On Fri, Dec 24, 2010 at 12:33 AM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> I was wondering whether it is better to avoid addtask where easily possi=
+ble.
+>>
 >
-> On 16/12/2010 16:48, Khem Raj wrote:
->>
->> On (16/12/10 08:55), Cliff Brake wrote:
->>>
->>> beagleboard beagleboard-linuxtag2010-demo-image is failing with:
->>>
->>> http://tinderbox.openembedded.net/packages/1321155/
->>>
->>> ti-c6accel
->>>
->>> Linking c6accel_app from appMain.o c6accel_testfxns.o
->>> ../c6accelw/lib/c6accelw_omap3530.a470MV
->>> c6accel_app_config/linker.cmd..
->>> /lib/libgcc_s.so.1: file not recognized: File format not recognized
->>
->>
->> Have you tried with latest .dev ? It might work with latest .dev
->> I have fixed libgcc install locations
->>
-> I tested beagleboard-linuxtag2010-demo-image for machine beagleboard with
-> today's master and it still fails with the following messages :
->
-> Linking c6accel_app from appMain.o c6accel_testfxns.o
-> ../c6accelw/lib/c6accelw_omap3530.a470MV c6accel_app_config/linker.cmd..
-> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/=
-sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../=
-../../../arm-angstrom-linux-gnueabi/bin/ld:
-> warning: c6accel_app_config/linker.cmd contains output sections; did you
-> forget -T?
-> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/=
-sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../=
-../../../arm-angstrom-linux-gnueabi/bin/ld:
-> skipping incompatible /lib/libgcc_s.so.1 when searching for libgcc_s.so.1
-> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/=
-sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../=
-../../../arm-angstrom-linux-gnueabi/bin/ld:
-> skipping incompatible /lib/libgcc_s.so.1 when searching for libgcc_s.so.1
-> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/=
-sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../=
-../../../arm-angstrom-linux-gnueabi/bin/ld:
-> .gnu.attributes not found for insert
-> collect2: ld returned 1 exit status
-> make[2]: *** [c6accel_app] Error 1
->
-> Do you have any idea on how to fix this ?
+> If the tasks are logically inline in existing tasks then it would be
+> ok. Although I dont know the big O notation of
+> runqueue algorithm to ascertain the gain.
 
-check how libgcc is specified on linker commandlne and what search
-paths are given to ld
-
+I was more considering the overhead starting and handling the task.
+But I guess it will be marginally.
 >
-> Eric
+>> E.g. from one recipe:
+>>
+>> do_postpatch() {
+>> =A0 =A0 =A0 =A0rm -rf patches && rm -rf .pc && mv -f debian/patches patc=
+hes
+>> && quilt push -av
+>> }
+>> addtask postpatch after do_patch before do_configure
+>>
+>>
+>> Wouldn't it be simpler and probably even a little bit faster just to say=
+:
+>>
+>> do_configure_prepend() {
+>> =A0 =A0 =A0 =A0rm -rf patches && rm -rf .pc && mv -f debian/patches patc=
+hes
+>> && quilt push -av
+>> }
+>>
+>
+> Well this seems more like a patching task then configure to me.
+
+True do_patch_append
+>
+>> (or if there is already a do_configure_prepend add the line to it)
+>>
+>> Currently we have 142 addtasks and some of these are definitely useful
+>> and desirable but I feel a lot of these could easily be merged into
+>> the previous or next task.
+>>
+>> How do you feel about this?
+>>
+>> Frans
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
