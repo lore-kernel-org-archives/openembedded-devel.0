@@ -1,32 +1,36 @@
-Received: from 29.mail-out.ovh.net ([87.98.216.213])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PW9G9-0001gv-GB
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1PW9IU-0001kP-Cy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Dec 2010 16:08:45 +0100
-Received: (qmail 27428 invoked by uid 503); 24 Dec 2010 15:24:34 -0000
-Received: from b6.ovh.net (HELO mail642.ha.ovh.net) (213.186.33.56)
-	by 29.mail-out.ovh.net with SMTP; 24 Dec 2010 15:24:34 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 24 Dec 2010 17:09:25 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 24 Dec 2010 17:09:24 +0200
-Message-ID: <4D14B770.3000601@eukrea.com>
-Date: Fri, 24 Dec 2010 16:08:32 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Fri, 24 Dec 2010 16:11:10 +0100
+Received: by ywi6 with SMTP id 6so3212716ywi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Dec 2010 07:10:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=VffQr69iOE/Ct2tf7E6y5OMQr/itIcwKQ6eUx70h+i0=;
+	b=O7dWQQv/RN1E+AHa/Cuv+tRBQlrWLc8VTDx85QRB+EoBMubsUDVTIY5s2oLLfku4eG
+	yupK31+Nev0wfNI3y6hLcx6slyAumXcF05P2rHQHKcaawb1vC2k7L+9HjqPt1BeRcSfs
+	K6NFGPfuAFCU4uVgk8eNOoFDwJHrc9spJa1/4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=YKsB9qb0uoXEzpfwAOuDIX6EMpwD8sOe1c9hk6v9ADBBRarAz/Xwo2yizgJFB9ccvU
+	Rk6yrwCyKzX/SeQMR3M4eTbVjeI3+A4i/EhsqUFj1mF3CFYB4YQAKilWY5B6J/Zqj/r4
+	jMao8CMPUbG7Ci5A32pTLfN77cTFrFDhek/8U=
+Received: by 10.90.120.17 with SMTP id s17mr891782agc.193.1293203458415; Fri,
+	24 Dec 2010 07:10:58 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Fri, 24 Dec 2010 07:10:38 -0800 (PST)
+In-Reply-To: <1293139278-18438-1-git-send-email-eric@eukrea.com>
+References: <1293139278-18438-1-git-send-email-eric@eukrea.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 24 Dec 2010 07:10:38 -0800
+Message-ID: <AANLkTik9Yo0v-YAg8ccvs+OGz1-XqOH06UXKZpp-DRVJ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>	<AANLkTikXVCmv0phk5OLOMciBOpC296Z2XtF9jO=Bn1Jn@mail.gmail.com>
-	<20101216154854.GB22134@gmail.com>
-In-Reply-To: <20101216154854.GB22134@gmail.com>
-X-Ovh-Tracer-Id: 13232701605616069961
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: testing branch 2010-12-10
+Subject: Re: [PATCH] busybox: update 1.18.0 to 1.18.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,48 +44,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Dec 2010 15:08:45 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Dec 2010 15:11:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Khem,
-
-On 16/12/2010 16:48, Khem Raj wrote:
-> On (16/12/10 08:55), Cliff Brake wrote:
->> beagleboard beagleboard-linuxtag2010-demo-image is failing with:
->>
->> http://tinderbox.openembedded.net/packages/1321155/
->>
->> ti-c6accel
->>
->> Linking c6accel_app from appMain.o c6accel_testfxns.o
->> ../c6accelw/lib/c6accelw_omap3530.a470MV
->> c6accel_app_config/linker.cmd..
->> /lib/libgcc_s.so.1: file not recognized: File format not recognized
+On Thu, Dec 23, 2010 at 1:21 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> 1.18.1 is considered as the latest stable version
 >
->
-> Have you tried with latest .dev ? It might work with latest .dev
-> I have fixed libgcc install locations
->
-I tested beagleboard-linuxtag2010-demo-image for machine beagleboard with 
-today's master and it still fails with the following messages :
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 
-Linking c6accel_app from appMain.o c6accel_testfxns.o 
-../c6accelw/lib/c6accelw_omap3530.a470MV c6accel_app_config/linker.cmd..
-/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: 
-warning: c6accel_app_config/linker.cmd contains output sections; did you 
-forget -T?
-/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: 
-skipping incompatible /lib/libgcc_s.so.1 when searching for libgcc_s.so.1
-/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: 
-skipping incompatible /lib/libgcc_s.so.1 when searching for libgcc_s.so.1
-/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: 
-.gnu.attributes not found for insert
-collect2: ld returned 1 exit status
-make[2]: *** [c6accel_app] Error 1
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
-Do you have any idea on how to fix this ?
-
-Eric
+> ---
+> =C2=A0recipes/busybox/busybox-1.18.0/B921600.patch =C2=A0 =C2=A0 =C2=A0 |=
+ =C2=A0 13 -
+> =C2=A0.../busybox-1.18.0/busybox-1.18.0-buildsys.patch =C2=A0 | =C2=A0 21=
+ -
+> =C2=A0.../busybox-1.18.0/busybox-1.18.0-runsvdir.patch =C2=A0 | =C2=A0 17=
+ -
+> =C2=A0.../busybox-1.18.0/busybox-1.18.0-sha.patch =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0118 ---
+> =C2=A0recipes/busybox/busybox-1.18.0/defconfig =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | =C2=A0873 --------------------
+> =C2=A0recipes/busybox/busybox-1.18.0/fdisk_nios2.patch =C2=A0 | =C2=A0 13=
+ -
+> =C2=A0.../busybox/busybox-1.18.0/get_header_tar.patch =C2=A0 =C2=A0| =C2=
+=A0 13 -
+> =C2=A0.../busybox-1.18.0/udhcpc-fix-nfsroot.patch =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0 47 --
+> =C2=A0recipes/busybox/busybox-1.18.0/udhcpscript.patch =C2=A0 | =C2=A0 13=
+ -
+> =C2=A0recipes/busybox/busybox-1.18.1/B921600.patch =C2=A0 =C2=A0 =C2=A0 |=
+ =C2=A0 13 +
+> =C2=A0.../busybox-1.18.1/busybox-1.18.1-hush.patch =C2=A0 =C2=A0 =C2=A0 |=
+ =C2=A0241 ++++++
+> =C2=A0recipes/busybox/busybox-1.18.1/defconfig =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | =C2=A0873 ++++++++++++++++++++
+> =C2=A0recipes/busybox/busybox-1.18.1/fdisk_nios2.patch =C2=A0 | =C2=A0 13=
+ +
+> =C2=A0.../busybox/busybox-1.18.1/get_header_tar.patch =C2=A0 =C2=A0| =C2=
+=A0 13 +
+> =C2=A0.../busybox-1.18.1/udhcpc-fix-nfsroot.patch =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| =C2=A0 47 ++
+> =C2=A0recipes/busybox/busybox-1.18.1/udhcpscript.patch =C2=A0 | =C2=A0 13=
+ +
+> =C2=A0recipes/busybox/busybox_1.18.0.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 14 -
+> =C2=A0recipes/busybox/busybox_1.18.1.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 12 +
+> =C2=A018 files changed, 1225 insertions(+), 1142 deletions(-)
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/B921600.patch
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/busybox-1.18.0-bu=
+ildsys.patch
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/busybox-1.18.0-ru=
+nsvdir.patch
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/busybox-1.18.0-sh=
+a.patch
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/defconfig
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/fdisk_nios2.patch
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/get_header_tar.pa=
+tch
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/udhcpc-fix-nfsroo=
+t.patch
+> =C2=A0delete mode 100644 recipes/busybox/busybox-1.18.0/udhcpscript.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/B921600.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/busybox-1.18.1-hu=
+sh.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/defconfig
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/fdisk_nios2.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/get_header_tar.pa=
+tch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/udhcpc-fix-nfsroo=
+t.patch
+> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/udhcpscript.patch
+> =C2=A0delete mode 100644 recipes/busybox/busybox_1.18.0.bb
+> =C2=A0create mode 100644 recipes/busybox/busybox_1.18.1.bb
 
 
