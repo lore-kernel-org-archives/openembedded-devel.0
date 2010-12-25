@@ -1,42 +1,42 @@
 Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PWXxc-0006rE-Ij
+	(envelope-from <raj.khem@gmail.com>) id 1PWY0M-0006ts-Sd
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 18:31:16 +0100
-Received: by pxi17 with SMTP id 17so1634620pxi.6
+	Sat, 25 Dec 2010 18:34:07 +0100
+Received: by pxi17 with SMTP id 17so1634816pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Dec 2010 09:31:04 -0800 (PST)
+	Sat, 25 Dec 2010 09:33:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding;
-	bh=UiR8HoJ22UD3uttiVgddlXIA6kAo1eTG5MixLPS/C/M=;
-	b=M1HySxolMk3KV4acTtMU5OkxeBMJ1y0/1RfCSR9IL5zwb1bslscVLNA1diWnt6FjJ5
-	M3HLJ7dvWMw3NFTM0KFFlPdzgJZxiGl85FLTmXqTVOt9kP+xk9SO4FVfvxFRATsBmKvx
-	Wa36KABsM30nEKeH9BDvShs3TjxpweeGKeYvI=
+	bh=FEp5GGAGQOFV2Blrj7Yb0ff946S5VxEc3YkejWMeW5g=;
+	b=R4na+tzJyoksr/IYcvbuP+vEEw/9YIvhyNR/lrJrus+hvt2ijdNSU7hL1OcXw7aPQJ
+	0ZL6q58yJlu7SnlcNm6E3+LiFIs+FVf0nsdjQOwlnPMmSSgaWe9AQGN4Cs9xk3c/7qL2
+	S+sMZfM/rWvHu0OMwrrgbSyehR0rOAX0ko4dU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	b=O9SYO8mkz4MLSnZhvP7w9t1UW1A3QeZa6LoKwlhqY3BGNayVVygF1s1S33vQ7Myxps
-	ukTyaCXhL9de4/lZqPj4ksy/rzcX2fl+8B+zg+ujz3Mn2c5nkOZkwPfd+0plVvkFK1Iw
-	spXgqiWfIUxh5oE9zmZi/bBs1CvjgObPKQLaw=
-Received: by 10.142.7.6 with SMTP id 6mr8391228wfg.363.1293298256815;
-	Sat, 25 Dec 2010 09:30:56 -0800 (PST)
+	b=Maa5djin79Z/3OsogWY8K5QiYJexsOFV0JXOKGif0eavLzsGqCrDCw2fwTG3L37EDb
+	HCHvKBZPlFGNBRxWITx/m4Q6Lp4tpR1tZC14G53xC9b1Hbm22EJKdFSIGnYO1zwCF6Fz
+	ccpyN6EYXhSX9naOrGe6lgliUkwj+VQX0o8gE=
+Received: by 10.142.135.18 with SMTP id i18mr8395278wfd.377.1293298423980;
+	Sat, 25 Dec 2010 09:33:43 -0800 (PST)
 Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id p8sm14395683wff.16.2010.12.25.09.30.55
-	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 09:30:55 -0800 (PST)
-Message-ID: <4D162A49.8060009@gmail.com>
-Date: Sat, 25 Dec 2010 09:30:49 -0800
+	by mx.google.com with ESMTPS id p8sm14401673wff.4.2010.12.25.09.33.42
+	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 09:33:43 -0800 (PST)
+Message-ID: <4D162AF0.3050608@gmail.com>
+Date: Sat, 25 Dec 2010 09:33:36 -0800
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1293274109-15695-1-git-send-email-khimov@altell.ru>
-	<1293274109-15695-2-git-send-email-khimov@altell.ru>
-In-Reply-To: <1293274109-15695-2-git-send-email-khimov@altell.ru>
-Subject: Re: [PATCH 2/5] perl 5.10.1: fix Time::HiRes cross-compilation
+References: <1293274109-15695-1-git-send-email-khimov@altell.ru>	<1293274109-15695-2-git-send-email-khimov@altell.ru>
+	<1293274109-15695-3-git-send-email-khimov@altell.ru>
+In-Reply-To: <1293274109-15695-3-git-send-email-khimov@altell.ru>
+Subject: Re: [PATCH 3/5] perl-native: fix ExtUtils::Liblist::Kid library check for cross-build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,87 +50,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 17:31:16 -0000
+X-List-Received-Date: Sat, 25 Dec 2010 17:34:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 12/25/2010 2:48 AM, Roman I Khimov wrote:
-> We can't do 'run' check, so let's hope compile check is enough.
-> Fixes
+> MakeMaker uses it to check for libraries presence and if the library is not
+> found in host dirs (/lib, /usr/lib, etc) it fails with messages like:
 >
-> Time::HiRes::nanosleep(): unimplemented in this platform
+> Note (probably harmless): No library found for -lpcap
 >
-> error.
+> Unfortunately it's not harmless, since MakeMaker removes such libs from flags
+> passed to link target modules which obviously breaks them.
+>
+> As I don't know exact semantic and all use-cases of libpth config variable
+> I've workarounded this issue by prepending ldflags (and this does contain the
+> right path) to lib flags.
 >
 > Signed-off-by: Roman I Khimov<khimov@altell.ru>
 
-is it possible to cache the vars instead? that will be better to keep
-list of variables that are not runchecked
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
+is this a problem for perl-native or target perl ?
 
 > ---
->   .../perl-time-hires-fix-cross-compilation.patch    |   29 ++++++++++++++++++++
->   recipes/perl/perl_5.10.1.bb                        |    3 +-
->   2 files changed, 31 insertions(+), 1 deletions(-)
->   create mode 100644 recipes/perl/perl-5.10.1/perl-time-hires-fix-cross-compilation.patch
+>   .../perl-5.10.1/perl-fix-cross-library-check.patch |   19 +++++++++++++++++++
+>   recipes/perl/perl-native_5.10.1.bb                 |    3 ++-
+>   2 files changed, 21 insertions(+), 1 deletions(-)
+>   create mode 100644 recipes/perl/perl-5.10.1/perl-fix-cross-library-check.patch
 >
-> diff --git a/recipes/perl/perl-5.10.1/perl-time-hires-fix-cross-compilation.patch b/recipes/perl/perl-5.10.1/perl-time-hires-fix-cross-compilation.patch
+> diff --git a/recipes/perl/perl-5.10.1/perl-fix-cross-library-check.patch b/recipes/perl/perl-5.10.1/perl-fix-cross-library-check.patch
 > new file mode 100644
-> index 0000000..7c8b47e
+> index 0000000..1c51609
 > --- /dev/null
-> +++ b/recipes/perl/perl-5.10.1/perl-time-hires-fix-cross-compilation.patch
-> @@ -0,0 +1,29 @@
-> +Index: perl-5.10.1/ext/Time-HiRes/Makefile.PL
+> +++ b/recipes/perl/perl-5.10.1/perl-fix-cross-library-check.patch
+> @@ -0,0 +1,19 @@
+> +Index: perl-5.10.1/lib/ExtUtils/Liblist/Kid.pm
 > +===================================================================
-> +--- perl-5.10.1.orig/ext/Time-HiRes/Makefile.PL	2010-11-23 12:05:59.000000000 +0300
-> ++++ perl-5.10.1/ext/Time-HiRes/Makefile.PL	2010-11-23 12:06:42.000000000 +0300
-> +@@ -157,24 +157,6 @@
-> + 	    my $res = system($cccmd);
-> + 	    $ok = defined($res)&&  $res == 0&&  -s $tmp_exe&&  -x _;
-> +
-> +-	    if ( $ok&&  exists $args{run}&&  $args{run}) {
-> +-		my $tmp_exe =
-> +-		    File::Spec->catfile(File::Spec->curdir, $tmp_exe);
-> +-		printf "Running $tmp_exe..." if $VERBOSE;
-> +-		if (system($tmp_exe) == 0) {
-> +-		    $ok = 1;
-> +-		} else {
-> +-		    $ok = 0;
-> +-		    my $errno = $?>>  8;
-> +-		    local $! = $errno;
-> +-		    printf<<EOF;
-> +-
-> +-*** The test run of '$tmp_exe' failed: status $?
-> +-*** (the status means: errno = $errno or '$!')
-> +-*** DO NOT PANIC: this just means that *some* functionality will be missing.
-> +-EOF
-> +-		}
-> +-	    }
-> + 	    unlink("$tmp.c", $tmp_exe);
-> +         }
+> +--- perl-5.10.1.orig/lib/ExtUtils/Liblist/Kid.pm	2010-11-23 13:54:41.000000000 +0300
+> ++++ perl-5.10.1/lib/ExtUtils/Liblist/Kid.pm	2010-11-23 14:18:13.000000000 +0300
+> +@@ -33,6 +33,14 @@
+> + 	$potential_libs .= " " if $potential_libs;
+> + 	$potential_libs .= $Config{perllibs};
 > +     }
-> diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
-> index 387755e..0e6a1f9 100644
-> --- a/recipes/perl/perl_5.10.1.bb
-> +++ b/recipes/perl/perl_5.10.1.bb
-> @@ -5,7 +5,7 @@ LICENSE = "Artistic|GPLv1+"
->   PRIORITY = "optional"
->   # We need gnugrep (for -I)
->   DEPENDS = "virtual/db perl-native grep-native"
-> -PR = "r15"
-> +PR = "r16"
+> ++
+> ++    if ($Config{ldflags}) {
+> ++	# Dynamic libraries are not transitive, so we may need including
+> ++	# the libraries linked against perl.dll again.
+> ++
+> ++	$potential_libs = $Config{ldflags} . " " . $potential_libs;
+> ++    }
+> ++
+> +     return ("", "", "", "", ($give_libs ? [] : ())) unless $potential_libs;
+> +     warn "Potential libraries are '$potential_libs':\n" if $verbose;
+> +
+> diff --git a/recipes/perl/perl-native_5.10.1.bb b/recipes/perl/perl-native_5.10.1.bb
+> index 8b275a2..c523974 100644
+> --- a/recipes/perl/perl-native_5.10.1.bb
+> +++ b/recipes/perl/perl-native_5.10.1.bb
+> @@ -3,7 +3,7 @@ HOMEPAGE = "http://www.perl.org/"
+>   SECTION = "libs"
+>   LICENSE = "Artistic|GPLv1+"
+>   DEPENDS = "virtual/db-native gdbm-native"
+> -PR = "r7"
+> +PR = "r8"
+>   NATIVE_INSTALL_WORKS = "1"
 >
->   # 5.10.1 has Module::Build built-in
->   PROVIDES += "libmodule-build-perl"
-> @@ -62,6 +62,7 @@ SRC_URI = "ftp://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz;name=perl-${PV} \
->   	file://arm-alignment.diff \
->   	file://fcgi-test.diff \
->   	file://hurd-ccflags.diff \
-> +	file://perl-time-hires-fix-cross-compilation.patch \
->   	\
->           file://Makefile.patch \
->           file://Makefile.SH.patch \
+>   # Not tested enough
+> @@ -21,6 +21,7 @@ SRC_URI = "http://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz;name=perl-${PV} \
+>              file://perl-configpm-switch.patch \
+>              file://native-nopacklist.patch \
+>              file://native-perlinc.patch \
+> +	   file://perl-fix-cross-library-check.patch \
+>   	   "
+>
+>   SRC_URI[perl-5.10.1.md5sum] = "b9b2fdb957f50ada62d73f43ee75d044"
 
 
 
