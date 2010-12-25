@@ -1,42 +1,42 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PWaHj-0004Cc-A0
+	(envelope-from <raj.khem@gmail.com>) id 1PWaJi-0004Id-8W
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 21:00:11 +0100
-Received: by pwi8 with SMTP id 8so781781pwi.6
+	Sat, 25 Dec 2010 21:02:15 +0100
+Received: by pzk12 with SMTP id 12so1956962pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Dec 2010 11:59:48 -0800 (PST)
+	Sat, 25 Dec 2010 12:01:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding;
-	bh=ttKkWUL5PwBmbBsQogSQTmGFdkniey6reoLqF9e3SrI=;
-	b=npn1aebdzKXW/A4TXmS4EbR79qq5CMbM7hayYBCaM7ojmX0Udq4QzngGTiixqkbGxw
-	2pOwqrarsgAU69NzUiRkiH3zWwumMA8Dj9cUu9ZJsCxv9ZQMd4bqDCoAV2/9Bee0mIhb
-	CAAyJxX7LwTW2+sjcfmYAUN9nMfs+a/Vp01ic=
+	bh=vEw/yU2B0dutOcKOdHK56NiRe4ZimofD5/Tm73zH+6I=;
+	b=tUudFE8fbPT46W5IiyyMjtZNyE6vYR7HiY253v421j0TkY18PYot5o1mzcb0ToG27E
+	SpYa51JpsrrmdsqJFjojYsT4e0V55T9bnlV2ISQ98XDFae86zvuX/hffpIca0pU3DIIz
+	2A1uStWo82Oj0KfJY2zpW70YHJcmkGPOziVQY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	b=N64rNcESQaqDwvooz3CNTEkaMr9AikstS0gCy3qPeaFUAQncUYKKZeXT7C/JsX4ZAQ
-	0r8R8gzksCDekhBEGvJw2lUSceP+JXLCHZt2g1AHEMO0uFqS+Ol/ZRiZc6a5xISaCEsD
-	Pzsn8xl0WlPqcc0or1p/O/I0ECTBy+kcZ67oQ=
-Received: by 10.142.226.4 with SMTP id y4mr8575303wfg.8.1293307186536;
-	Sat, 25 Dec 2010 11:59:46 -0800 (PST)
+	b=J0mZzPfPyful5acP/5CWSzR6Nv9ScEaPwWpnLqJI0nbnNMR1/HgRUS+jh1EA+yK8Rp
+	dFxn1DsKiZUfOONr09RqNujLMnw5bhYemm1ZSL6ZTjBmkkYosFaqUEsuDX3ClEWjiWMX
+	YM5Zlah6x7GyDzS11+qnzxzBnyzjNS1SoMdGQ=
+Received: by 10.142.211.20 with SMTP id j20mr8433325wfg.408.1293307312890;
+	Sat, 25 Dec 2010 12:01:52 -0800 (PST)
 Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id y42sm14604675wfd.22.2010.12.25.11.59.45
-	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 11:59:45 -0800 (PST)
-Message-ID: <4D164D30.3080301@gmail.com>
-Date: Sat, 25 Dec 2010 11:59:44 -0800
+	by mx.google.com with ESMTPS id w42sm14608108wfh.3.2010.12.25.12.01.51
+	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 12:01:52 -0800 (PST)
+Message-ID: <4D164DAF.1070604@gmail.com>
+Date: Sat, 25 Dec 2010 12:01:51 -0800
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>	<AANLkTikXVCmv0phk5OLOMciBOpC296Z2XtF9jO=Bn1Jn@mail.gmail.com>	<20101216154854.GB22134@gmail.com>	<4D14B770.3000601@eukrea.com>	<if2l7k$6v8$1@dough.gmane.org>	<4D163892.4070205@eukrea.com>
-	<4D163B57.8040808@eukrea.com>
-In-Reply-To: <4D163B57.8040808@eukrea.com>
-Subject: Re: testing branch 2010-12-10
+References: <1293274109-15695-1-git-send-email-khimov@altell.ru>	<4D162876.1000401@gmail.com>
+	<201012252144.11796.roman@khimov.ru>
+In-Reply-To: <201012252144.11796.roman@khimov.ru>
+Subject: Re: [PATCH 1/5] perl: fix PERLCONFIGTARGET for multimach builds, move cpan vars
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,51 +50,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 20:00:11 -0000
+X-List-Received-Date: Sat, 25 Dec 2010 20:02:15 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 12/25/2010 10:43 AM, Eric Bénard wrote:
-> On 25/12/2010 19:31, Eric Bénard wrote:
->> On 24/12/2010 18:28, Koen Kooi wrote:
->>> That looks like the xdctools linkerscript problem we had before. Maybe
->>> an xdc .clean and xdc .make would help.
+On 12/25/2010 10:44 AM, Roman I Khimov wrote:
+> В сообщении от Суббота 25 декабря 2010 20:23:02 автор Khem Raj написал:
+>> On 12/25/2010 2:48 AM, Roman I Khimov wrote:
+>>> Multimachine builds race staging Config_heavy-target.pl to native
+>>> directory. Solve that by changing PERLCONFIGTARGET variable semantics,
+>>> now it will contain $TARGET_SYS. Change perl patch and stage functions
+>>> accordingly.
 >>>
->> thanks, will try this.
+>>> Also, move PERLCONFIGTARGET and other target-specific variable settings
+>>> from cpan to cpan-base as I think they're also useful for cpan_build and
+>>> anywhere else cpan-base is needed.
+>>>
+>>> Signed-off-by: Roman I Khimov<khimov@altell.ru>
+>>> ---
+>>>    classes/cpan-base.bbclass                          |   14
+>>> ++++++++++++-- classes/cpan.bbclass                               |   10
+>>> ---------- classes/cpan_build.bbclass                         |    4 ++--
+>>> .../perl/perl-5.10.1/perl-configpm-switch.patch    |    6 +++---
+>>> recipes/perl/perl-5.8.8/perl-configpm-switch.patch |    6 +++---
+>>> recipes/perl/perl-native_5.10.1.bb                 |    2 +-
+>>>    recipes/perl/perl-native_5.8.8.bb                  |    2 +-
+>>>    recipes/perl/perl_5.10.1.bb                        |    4 ++--
+>>>    recipes/perl/perl_5.8.8.bb                         |    2 +-
+>>>    9 files changed, 25 insertions(+), 25 deletions(-)
+>>>
+>>> diff --git a/classes/cpan-base.bbclass b/classes/cpan-base.bbclass
+>>> index a04f61c..53621ed 100644
+>>> --- a/classes/cpan-base.bbclass
+>>> +++ b/classes/cpan-base.bbclass
+>>> @@ -32,11 +32,21 @@ def perl_get_libdirs(d):
+>>>
+>>>    def is_target(d):
+>>>        if not bb.data.inherits_class('native', d):
+>>> -        return "yes"
+>>> -    return "no"
+>>> +        return bb.data.expand('${TARGET_SYS}', d)
+>>> +    return ""
 >>
->> other problem found with ti-dmai_svn during the same build :
->> cc1: warnings being treated as errors
->> In file included from
->> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include/linux/videodev2.h:66:0,
->>
->>
->> from linux/Capture.c:43:
->> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include/linux/types.h:13:2:
->>
->> error: #warning "Attempt to use kernel headers from user space, see
->> http://kernelnewbies.org/KernelHeaders"
->> make[1]: *** [obj/linux/Capture.omap3530.o470MV] Error 1
->>
-> and removing -Werror to workaround this issue leads to a link error :
+>> not that its wrong but I think you could also use MULTIMACH_ARCH instead
+>> of TARGET_SYS here
 >
-> Linking linux/audio_decode1_omap3530.x470MV from appMain.omap3530.o470MV
-> linux/main.omap3530.o470MV linux/audio_decode1_oma
-> p3530_config/linker.cmd..
-> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/bin/arm-angstrom-linux-gnueabi-gcc
-> -lpthread -lm
-> -L/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> -lasound -Wl,-Map,linux/audio_decode1_omap3530.x470MV.map -o
-> linux/audio_decode1_omap3530.x470MV appMain.omap3530.o470MV
-> linux/main.omap3530.o470MV
-> linux/audio_decode1_omap3530_config/linker.cmd/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-> warning: linux/audio_decode1_omap3530_config/linker.cmd contains output
-> sections; did you forget -T?
-> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-> .gnu.attributes not found for insert
+> MULTIMACH_ARCH = "${PACKAGE_ARCH}"
+>
+> So if there is a perl lib that is "PACKAGE_ARCH = all" it will use
+> Config_heavy-all.sh which won't exist if we don't symlink something there and
+> that raises a question of what to symlink. Also, I don't know whether it's
+> possible now, but in theory we can have builds with different target C
+> libraries reusing same native perl, so complete TARGET_SYS specification is
+> more appropriate IMO.
+>
 
-it seems like linker scripts for this need some scrutiny. How can I 
-reproduce this problem.
+OK yes that is right.
 
--Khem
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
