@@ -1,23 +1,19 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PWGpZ-0002gK-CA for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 00:13:49 +0100
-Received: from f053036054.adsl.alicedsl.de ([78.53.36.54]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PWGpR-0001Hy-4l for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Dec 2010 23:13:41 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <rik@mate.hex>) id 1PWRg7-0006Tv-FP
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Dec 2010 11:48:47 +0100
+Received: by mate.hex (Postfix, from userid 1000)
+	id 87767205D3; Sat, 25 Dec 2010 13:48:34 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1293217389.4027.39.camel@mattotaupa>
-References: <1293217389.4027.39.camel@mattotaupa>
-Date: Sat, 25 Dec 2010 00:13:39 +0100
-Message-ID: <1293232419.4027.53.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH 1/2 v2] xbmc: add `zlib` to `DEPENDS`
+Date: Sat, 25 Dec 2010 13:48:27 +0300
+Message-Id: <1293274109-15695-3-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <1293274109-15695-2-git-send-email-khimov@altell.ru>
+References: <1293274109-15695-1-git-send-email-khimov@altell.ru>
+	<1293274109-15695-2-git-send-email-khimov@altell.ru>
+Subject: [PATCH 3/5] perl-native: fix ExtUtils::Liblist::Kid library check for cross-build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,78 +27,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Dec 2010 23:13:49 -0000
-X-Groupsio-MsgNum: 27493
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-OlJK6cN5iziEiKkEAcjA"
+X-List-Received-Date: Sat, 25 Dec 2010 10:48:47 -0000
 
---=-OlJK6cN5iziEiKkEAcjA
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+MakeMaker uses it to check for libraries presence and if the library is not
+found in host dirs (/lib, /usr/lib, etc) it fails with messages like:
 
-Date: Wed, 1 Dec 2010 17:27:33 +0100
+Note (probably harmless): No library found for -lpcap
 
-XBMC depends on `zlib` [1] which is indirectly provided by other dependenci=
-es like `ffmpeg.inc` [2]. Add `zlib` to `DEPENDS` to avoid possible future =
-breakage.
+Unfortunately it's not harmless, since MakeMaker removes such libs from flags
+passed to link target modules which obviously breaks them.
 
-[1] http://trac.xbmc.org/browser/trunk/README.linux?rev=3D35279#L54
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/ffmpeg/=
-ffmpeg.inc?h=3Dorg.openembedded.dev&id=3D5316c5b1416391f15277ce867489e525b7=
-eccd6e#n12
+As I don't know exact semantic and all use-cases of libpth config variable
+I've workarounded this issue by prepending ldflags (and this does contain the
+right path) to lib flags.
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
 ---
-v2: Updated commit message.
+ .../perl-5.10.1/perl-fix-cross-library-check.patch |   19 +++++++++++++++++++
+ recipes/perl/perl-native_5.10.1.bb                 |    3 ++-
+ 2 files changed, 21 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/perl/perl-5.10.1/perl-fix-cross-library-check.patch
 
-The build still fails with `angstrom-2010.x` with the error message in v1.
----
- recipes/xbmc/xbmc_svn.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+diff --git a/recipes/perl/perl-5.10.1/perl-fix-cross-library-check.patch b/recipes/perl/perl-5.10.1/perl-fix-cross-library-check.patch
+new file mode 100644
+index 0000000..1c51609
+--- /dev/null
++++ b/recipes/perl/perl-5.10.1/perl-fix-cross-library-check.patch
+@@ -0,0 +1,19 @@
++Index: perl-5.10.1/lib/ExtUtils/Liblist/Kid.pm
++===================================================================
++--- perl-5.10.1.orig/lib/ExtUtils/Liblist/Kid.pm	2010-11-23 13:54:41.000000000 +0300
+++++ perl-5.10.1/lib/ExtUtils/Liblist/Kid.pm	2010-11-23 14:18:13.000000000 +0300
++@@ -33,6 +33,14 @@
++ 	$potential_libs .= " " if $potential_libs;
++ 	$potential_libs .= $Config{perllibs};
++     }
+++
+++    if ($Config{ldflags}) { 
+++	# Dynamic libraries are not transitive, so we may need including
+++	# the libraries linked against perl.dll again.
+++
+++	$potential_libs = $Config{ldflags} . " " . $potential_libs;
+++    }
+++
++     return ("", "", "", "", ($give_libs ? [] : ())) unless $potential_libs;
++     warn "Potential libraries are '$potential_libs':\n" if $verbose;
++ 
+diff --git a/recipes/perl/perl-native_5.10.1.bb b/recipes/perl/perl-native_5.10.1.bb
+index 8b275a2..c523974 100644
+--- a/recipes/perl/perl-native_5.10.1.bb
++++ b/recipes/perl/perl-native_5.10.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.perl.org/"
+ SECTION = "libs"
+ LICENSE = "Artistic|GPLv1+"
+ DEPENDS = "virtual/db-native gdbm-native"
+-PR = "r7"
++PR = "r8"
+ NATIVE_INSTALL_WORKS = "1"
+ 
+ # Not tested enough
+@@ -21,6 +21,7 @@ SRC_URI = "http://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz;name=perl-${PV} \
+            file://perl-configpm-switch.patch \
+            file://native-nopacklist.patch \
+            file://native-perlinc.patch \
++	   file://perl-fix-cross-library-check.patch \
+ 	   "
+ 
+ SRC_URI[perl-5.10.1.md5sum] = "b9b2fdb957f50ada62d73f43ee75d044"
+-- 
+1.6.4.2
 
-diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
-index ad95a8a..3ca90e0 100644
---- a/recipes/xbmc/xbmc_svn.bb
-+++ b/recipes/xbmc/xbmc_svn.bb
-@@ -1,13 +1,13 @@
- DESCRIPTION =3D "XBMC Media Center"
- LICENSE =3D "xbmc"
-=20
--DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodpl=
-ug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virt=
-ual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi l=
-ibsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip=
--native"
-+DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodpl=
-ug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virt=
-ual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi l=
-ibsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip=
--native zlib"
- require recipes/egl/egl.inc
-=20
- SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
-=20
- PV =3D "10.05"
--PR =3D "r9"
-+PR =3D "r10"
- PR_append =3D "+gitr${SRCPV}"
-=20
- SRC_URI =3D "git://xbmc.git.sourceforge.net/gitroot/xbmc/xbmc;protocol=3Dg=
-it;branch=3Dmaster \
---=20
-1.7.2.3
 
---=-OlJK6cN5iziEiKkEAcjA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk0VKSMACgkQPX1aK2wOHVjZfgCeLo36gJ8gjuvk3tfvQzVmOPkM
-cCIAnRIHlD5xv5HGP6T7j2GUIWUYme0V
-=9nq9
------END PGP SIGNATURE-----
-
---=-OlJK6cN5iziEiKkEAcjA--
