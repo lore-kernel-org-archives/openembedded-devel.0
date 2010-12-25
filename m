@@ -1,16 +1,37 @@
-Received: from [93.100.16.104] (helo=mate.hex)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rik@mate.hex>) id 1PWRgE-0006UB-Uj
+	(envelope-from <raj.khem@gmail.com>) id 1PWSGC-0007dT-Sy
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 11:48:55 +0100
-Received: by mate.hex (Postfix, from userid 1000)
-	id 2FE642101B; Sat, 25 Dec 2010 13:48:34 +0300 (MSK)
-From: Roman I Khimov <khimov@altell.ru>
+	Sat, 25 Dec 2010 12:26:05 +0100
+Received: by gyh20 with SMTP id 20so3303817gyh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Dec 2010 03:25:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=4HYyAmw8PUgy5h+QELd/MfE0mIZW/Fu4P+AZF049rG8=;
+	b=Oa529PtKc6Hmw4a6jY0mhPLvHTYCyW4El74ts72BJOvO6Lj7z/gN0GW3cTjtJYfJn1
+	+MlZj9az8qjg+7fXpm/UqvAinq3EumRjCQ7HHI+EuI4r5EyKan36bm1ZjhsvN7BHGJuw
+	Ze+nn7L3jtPvTQq0aT6jFIzbIR7tLW29S1Dzw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=agyLmmG8QZhUHHFrMOgWP5Xr7gvv/gzcXzRDL4fyKdutI8Ndy/q/mlRojpsXCeGBD5
+	3dBdzmoI8WhROcfyntJINEpKivXBIe6rF2Z+Mcrajq0zatMhRxUMEj/kFfuBT9f8W5wK
+	UHzK86XEm4lTM4TI/mcuClcmMLwmpEJ71v3n4=
+Received: by 10.90.98.11 with SMTP id v11mr1603570agb.58.1293276345036; Sat,
+	25 Dec 2010 03:25:45 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Sat, 25 Dec 2010 03:25:24 -0800 (PST)
+In-Reply-To: <1293232419.4027.53.camel@mattotaupa>
+References: <1293217389.4027.39.camel@mattotaupa>
+	<1293232419.4027.53.camel@mattotaupa>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 25 Dec 2010 03:25:24 -0800
+Message-ID: <AANLkTi=BJKBab7h_oi4SwMVFuDdDFwW_AsJ8YpCsx9X6@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Dec 2010 13:48:25 +0300
-Message-Id: <1293274109-15695-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.4.2
-Subject: [PATCH 1/5] perl: fix PERLCONFIGTARGET for multimach builds, move cpan vars
+Subject: Re: [PATCH 1/2 v2] xbmc: add `zlib` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,212 +45,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 10:48:55 -0000
+X-List-Received-Date: Sat, 25 Dec 2010 11:26:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Multimachine builds race staging Config_heavy-target.pl to native directory.
-Solve that by changing PERLCONFIGTARGET variable semantics, now it will
-contain $TARGET_SYS. Change perl patch and stage functions accordingly.
+Hi Paul
 
-Also, move PERLCONFIGTARGET and other target-specific variable settings from
-cpan to cpan-base as I think they're also useful for cpan_build and anywhere
-else cpan-base is needed.
+Can you rebase your patches and send them as a single patch for xbmc please
 
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- classes/cpan-base.bbclass                          |   14 ++++++++++++--
- classes/cpan.bbclass                               |   10 ----------
- classes/cpan_build.bbclass                         |    4 ++--
- .../perl/perl-5.10.1/perl-configpm-switch.patch    |    6 +++---
- recipes/perl/perl-5.8.8/perl-configpm-switch.patch |    6 +++---
- recipes/perl/perl-native_5.10.1.bb                 |    2 +-
- recipes/perl/perl-native_5.8.8.bb                  |    2 +-
- recipes/perl/perl_5.10.1.bb                        |    4 ++--
- recipes/perl/perl_5.8.8.bb                         |    2 +-
- 9 files changed, 25 insertions(+), 25 deletions(-)
+Thx
+-Khem
 
-diff --git a/classes/cpan-base.bbclass b/classes/cpan-base.bbclass
-index a04f61c..53621ed 100644
---- a/classes/cpan-base.bbclass
-+++ b/classes/cpan-base.bbclass
-@@ -32,11 +32,21 @@ def perl_get_libdirs(d):
- 
- def is_target(d):
-     if not bb.data.inherits_class('native', d):
--        return "yes"
--    return "no"
-+        return bb.data.expand('${TARGET_SYS}', d)
-+    return ""
- 
- PERLLIBDIRS = "${@perl_get_libdirs(d)}"
- 
- FILES_${PN}-dbg += "${PERLLIBDIRS}/auto/*/.debug \
-                     ${PERLLIBDIRS}/auto/*/*/.debug \
-                     ${PERLLIBDIRS}/auto/*/*/*/.debug"
-+
-+# Env var which tells perl if it should use host ('') or target ('$TARGET_SYS') settings
-+export PERLCONFIGTARGET = "${@is_target(d)}"
-+
-+EXTRA_CPANFLAGS ?= ""
-+
-+# Env var which tells perl where the perl include files are
-+export PERL_INC = "${STAGING_LIBDIR}/perl/${@get_perl_version(d)}/CORE"
-+export PERL_LIB = "${STAGING_DATADIR}/perl/${@get_perl_version(d)}"
-+export PERL_ARCHLIB = "${STAGING_LIBDIR}/perl/${@get_perl_version(d)}"
-\ No newline at end of file
-diff --git a/classes/cpan.bbclass b/classes/cpan.bbclass
-index 24e0c6e..b81ae9a 100644
---- a/classes/cpan.bbclass
-+++ b/classes/cpan.bbclass
-@@ -3,16 +3,6 @@
- #
- inherit cpan-base
- 
--EXTRA_CPANFLAGS ?= ""
--
--# Env var which tells perl if it should use host (no) or target (yes) settings
--export PERLCONFIGTARGET = "${@is_target(d)}"
--
--# Env var which tells perl where the perl include files are
--export PERL_INC = "${STAGING_LIBDIR}/perl/${@get_perl_version(d)}/CORE"
--export PERL_LIB = "${STAGING_DATADIR}/perl/${@get_perl_version(d)}"
--export PERL_ARCHLIB = "${STAGING_LIBDIR}/perl/${@get_perl_version(d)}"
--
- NATIVE_INSTALL_WORKS = "1"
- 
- cpan_do_configure () {
-diff --git a/classes/cpan_build.bbclass b/classes/cpan_build.bbclass
-index d1bbc4f..3f52cc2 100644
---- a/classes/cpan_build.bbclass
-+++ b/classes/cpan_build.bbclass
-@@ -22,7 +22,7 @@ def cpan_build_deps(d):
- DEPENDS_prepend = "${@cpan_build_deps(d)}"
- 
- cpan_build_do_configure () {
--	if [ ${@is_target(d)} = "yes" ]; then
-+	if [ ${@is_target(d)} != "" ]; then
- 		# build for target
- 		. ${STAGING_LIBDIR}/perl/config.sh
- 		perl Build.PL --installdirs vendor \
-@@ -44,7 +44,7 @@ cpan_build_do_compile () {
- }
- 
- cpan_build_do_install () {
--	if [ ${@is_target(d)} = "yes" ]; then
-+	if [ ${@is_target(d)} != "" ]; then
- 		perl Build install
- 	else
- 		perl Build install destdir="${WORKDIR}/image"
-diff --git a/recipes/perl/perl-5.10.1/perl-configpm-switch.patch b/recipes/perl/perl-5.10.1/perl-configpm-switch.patch
-index 1aacd35..8becb8e 100644
---- a/recipes/perl/perl-5.10.1/perl-configpm-switch.patch
-+++ b/recipes/perl/perl-5.10.1/perl-configpm-switch.patch
-@@ -1,6 +1,6 @@
- This patch is used for perl-native only. It enables the switching of
- configuration files between Config_heavy.pl and
--Config_heavy-target.pl by setting the environment variables
-+Config_heavy-$TARGET_SYS.pl by setting the environment variables
- PERLCONFIGTARGET - the later containing settings for the target while
- the former contains those for the host. This will allow cpan.bbclass
- to use the settings appropriate for the native and/or target builds
-@@ -24,9 +24,9 @@ values would be valid for the host only.
-  sub AUTOLOAD {
- -    require 'Config_heavy.pl';
- +    my $cfgfile = 'Config_heavy.pl';
--+    if (defined $ENV{PERLCONFIGTARGET} and $ENV{PERLCONFIGTARGET} eq "yes")
-++    if (defined $ENV{PERLCONFIGTARGET} and $ENV{PERLCONFIGTARGET} ne "")
- +    {
--+        $cfgfile = 'Config_heavy-target.pl';
-++        $cfgfile = "Config_heavy-$ENV{PERLCONFIGTARGET}.pl";
- +    }
- +    require $cfgfile;
-      goto \&launcher unless $Config::AUTOLOAD =~ /launcher$/;
-diff --git a/recipes/perl/perl-5.8.8/perl-configpm-switch.patch b/recipes/perl/perl-5.8.8/perl-configpm-switch.patch
-index 1aacd35..8becb8e 100644
---- a/recipes/perl/perl-5.8.8/perl-configpm-switch.patch
-+++ b/recipes/perl/perl-5.8.8/perl-configpm-switch.patch
-@@ -1,6 +1,6 @@
- This patch is used for perl-native only. It enables the switching of
- configuration files between Config_heavy.pl and
--Config_heavy-target.pl by setting the environment variables
-+Config_heavy-$TARGET_SYS.pl by setting the environment variables
- PERLCONFIGTARGET - the later containing settings for the target while
- the former contains those for the host. This will allow cpan.bbclass
- to use the settings appropriate for the native and/or target builds
-@@ -24,9 +24,9 @@ values would be valid for the host only.
-  sub AUTOLOAD {
- -    require 'Config_heavy.pl';
- +    my $cfgfile = 'Config_heavy.pl';
--+    if (defined $ENV{PERLCONFIGTARGET} and $ENV{PERLCONFIGTARGET} eq "yes")
-++    if (defined $ENV{PERLCONFIGTARGET} and $ENV{PERLCONFIGTARGET} ne "")
- +    {
--+        $cfgfile = 'Config_heavy-target.pl';
-++        $cfgfile = "Config_heavy-$ENV{PERLCONFIGTARGET}.pl";
- +    }
- +    require $cfgfile;
-      goto \&launcher unless $Config::AUTOLOAD =~ /launcher$/;
-diff --git a/recipes/perl/perl-native_5.10.1.bb b/recipes/perl/perl-native_5.10.1.bb
-index 61d57f4..8b275a2 100644
---- a/recipes/perl/perl-native_5.10.1.bb
-+++ b/recipes/perl/perl-native_5.10.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.perl.org/"
- SECTION = "libs"
- LICENSE = "Artistic|GPLv1+"
- DEPENDS = "virtual/db-native gdbm-native"
--PR = "r6"
-+PR = "r7"
- NATIVE_INSTALL_WORKS = "1"
- 
- # Not tested enough
-diff --git a/recipes/perl/perl-native_5.8.8.bb b/recipes/perl/perl-native_5.8.8.bb
-index dbff4c5..a7f85a3 100644
---- a/recipes/perl/perl-native_5.8.8.bb
-+++ b/recipes/perl/perl-native_5.8.8.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.perl.org/"
- SECTION = "libs"
- LICENSE = "Artistic|GPLv1+"
- DEPENDS = "virtual/db-native gdbm-native"
--PR = "r21"
-+PR = "r22"
- NATIVE_INSTALL_WORKS = "1"
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/perl-${PV}"
-diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
-index 91434e2..387755e 100644
---- a/recipes/perl/perl_5.10.1.bb
-+++ b/recipes/perl/perl_5.10.1.bb
-@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPLv1+"
- PRIORITY = "optional"
- # We need gnugrep (for -I)
- DEPENDS = "virtual/db perl-native grep-native"
--PR = "r14"
-+PR = "r15"
- 
- # 5.10.1 has Module::Build built-in
- PROVIDES += "libmodule-build-perl"
-@@ -211,7 +211,7 @@ do_stage() {
-         # target config, used by cpan.bbclass to extract version information
-         install config.sh ${STAGING_LIBDIR}/perl/
-         # target configuration, used by native perl when cross-compiling
--        install lib/Config_heavy.pl ${STAGING_LIBDIR_NATIVE}/perl/${PV}/Config_heavy-target.pl
-+        install lib/Config_heavy.pl ${STAGING_LIBDIR_NATIVE}/perl/${PV}/Config_heavy-${TARGET_SYS}.pl
- 	# target configuration
-         install lib/Config.pm       ${STAGING_LIBDIR}/perl/${PV}/
- 	install lib/ExtUtils/typemap ${STAGING_DATADIR}/perl/${PV}/ExtUtils/
-diff --git a/recipes/perl/perl_5.8.8.bb b/recipes/perl/perl_5.8.8.bb
-index 69078e8..3e14bc3 100644
---- a/recipes/perl/perl_5.8.8.bb
-+++ b/recipes/perl/perl_5.8.8.bb
-@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPLv1+"
- PRIORITY = "optional"
- # We need gnugrep (for -I)
- DEPENDS = "virtual/db perl-native grep-native"
--PR = "r36"
-+PR = "r37"
- 
- # Major part of version
- PVM = "5.8"
--- 
-1.6.4.2
-
+On Fri, Dec 24, 2010 at 3:13 PM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Date: Wed, 1 Dec 2010 17:27:33 +0100
+>
+> XBMC depends on `zlib` [1] which is indirectly provided by other dependen=
+cies like `ffmpeg.inc` [2]. Add `zlib` to `DEPENDS` to avoid possible futur=
+e breakage.
+>
+> [1] http://trac.xbmc.org/browser/trunk/README.linux?rev=3D35279#L54
+> [2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/ffmpe=
+g/ffmpeg.inc?h=3Dorg.openembedded.dev&id=3D5316c5b1416391f15277ce867489e525=
+b7eccd6e#n12
+>
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+> v2: Updated commit message.
+>
+> The build still fails with `angstrom-2010.x` with the error message in v1=
+.
+> ---
+> =C2=A0recipes/xbmc/xbmc_svn.bb | =C2=A0 =C2=A04 ++--
+> =C2=A01 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
+> index ad95a8a..3ca90e0 100644
+> --- a/recipes/xbmc/xbmc_svn.bb
+> +++ b/recipes/xbmc/xbmc_svn.bb
+> @@ -1,13 +1,13 @@
+> =C2=A0DESCRIPTION =3D "XBMC Media Center"
+> =C2=A0LICENSE =3D "xbmc"
+>
+> -DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmod=
+plug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer vi=
+rtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi=
+ libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper z=
+ip-native"
+> +DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmod=
+plug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer vi=
+rtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi=
+ libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper z=
+ip-native zlib"
+> =C2=A0require recipes/egl/egl.inc
+>
+> =C2=A0SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
+>
+> =C2=A0PV =3D "10.05"
+> -PR =3D "r9"
+> +PR =3D "r10"
+> =C2=A0PR_append =3D "+gitr${SRCPV}"
+>
+> =C2=A0SRC_URI =3D "git://xbmc.git.sourceforge.net/gitroot/xbmc/xbmc;proto=
+col=3Dgit;branch=3Dmaster \
+> --
+> 1.7.2.3
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
