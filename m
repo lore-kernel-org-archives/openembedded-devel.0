@@ -1,24 +1,32 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roman@khimov.ru>) id 1PWYoD-0008Eq-6F
+Received: from 27.mail-out.ovh.net ([91.121.30.210])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PWYuU-0008N2-1o
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 19:25:37 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PWYo2-0006dz-Tm
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 21:25:27 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Dec 2010 21:25:18 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
-References: <1293274109-15695-1-git-send-email-khimov@altell.ru>
-	<1293274109-15695-2-git-send-email-khimov@altell.ru>
-	<4D162A49.8060009@gmail.com>
-In-Reply-To: <4D162A49.8060009@gmail.com>
+	Sat, 25 Dec 2010 19:32:06 +0100
+Received: (qmail 25296 invoked by uid 503); 25 Dec 2010 18:33:44 -0000
+Received: from b9.ovh.net (HELO mail194.ha.ovh.net) (213.186.33.59)
+	by 27.mail-out.ovh.net with SMTP; 25 Dec 2010 18:33:39 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 25 Dec 2010 20:31:48 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 25 Dec 2010 20:31:47 +0200
+Message-ID: <4D163892.4070205@eukrea.com>
+Date: Sat, 25 Dec 2010 19:31:46 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-Message-Id: <201012252125.25836.roman@khimov.ru>
-Subject: Re: [PATCH 2/5] perl 5.10.1: fix Time::HiRes cross-compilation
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>	<AANLkTikXVCmv0phk5OLOMciBOpC296Z2XtF9jO=Bn1Jn@mail.gmail.com>	<20101216154854.GB22134@gmail.com>	<4D14B770.3000601@eukrea.com>
+	<if2l7k$6v8$1@dough.gmane.org>
+In-Reply-To: <if2l7k$6v8$1@dough.gmane.org>
+X-Ovh-Tracer-Id: 4076320613199686985
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: testing branch 2010-12-10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,54 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 18:25:37 -0000
-X-Groupsio-MsgNum: 27507
-Content-Type: multipart/signed; boundary="nextPart1467793.1h7oI2UhUK";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 25 Dec 2010 18:32:06 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---nextPart1467793.1h7oI2UhUK
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Koen,
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 25 =D0=B4=D0=B5=D0=BA=D0=B0=D0=
-=B1=D1=80=D1=8F 2010 20:30:49 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj =D0=
-=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> On 12/25/2010 2:48 AM, Roman I Khimov wrote:
-> > We can't do 'run' check, so let's hope compile check is enough.
-> > Fixes
-> >
-> > Time::HiRes::nanosleep(): unimplemented in this platform
-> >
-> > error.
-> >
-> > Signed-off-by: Roman I Khimov<khimov@altell.ru>
->=20
-> is it possible to cache the vars instead? that will be better to keep
-> list of variables that are not runchecked
+On 24/12/2010 18:28, Koen Kooi wrote:
+> On 24-12-10 16:08, Eric Bénard wrote:
+>> I tested beagleboard-linuxtag2010-demo-image for machine beagleboard
+>> with today's master and it still fails with the following messages :
+>>
+>> Linking c6accel_app from appMain.o c6accel_testfxns.o
+>> ../c6accelw/lib/c6accelw_omap3530.a470MV c6accel_app_config/linker.cmd..
+>> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+>> warning: c6accel_app_config/linker.cmd contains output sections; did you
+>> forget -T?
+>> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+>> skipping incompatible /lib/libgcc_s.so.1 when searching for libgcc_s.so.1
+>> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+>> skipping incompatible /lib/libgcc_s.so.1 when searching for libgcc_s.so.1
+>> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+>> .gnu.attributes not found for insert
+>> collect2: ld returned 1 exit status
+>> make[2]: *** [c6accel_app] Error 1
+>>
+>> Do you have any idea on how to fix this ?
+>
+> That looks like the xdctools linkerscript problem we had before. Maybe
+> an xdc .clean and xdc .make would help.
+>
+thanks, will try this.
 
-Well, glancing at code another time, it probably could be solved via=20
-d_nanosleep in Config.sh. I think it's safe to assume that all of our targe=
-ts=20
-implement nanosleep().
+other problem found with ti-dmai_svn during the same build :
+cc1: warnings being treated as errors
+In file included from 
+/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include/linux/videodev2.h:66:0,
+                  from linux/Capture.c:43:
+/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include/linux/types.h:13:2: 
+error: #warning "Attempt to use kernel headers from user space, see 
+http://kernelnewbies.org/KernelHeaders"
+make[1]: *** [obj/linux/Capture.omap3530.o470MV] Error 1
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+Eric
 
---nextPart1467793.1h7oI2UhUK
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAk0WNxUACgkQXJ70z+XgVcO7AACeN0VJqrYlsIxdyF60SdtChleO
-OZ0AoNIPdo8Ctci0N7oGJhQG8bhfsib4
-=UxAC
------END PGP SIGNATURE-----
-
---nextPart1467793.1h7oI2UhUK--
