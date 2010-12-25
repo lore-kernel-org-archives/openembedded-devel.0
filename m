@@ -1,42 +1,24 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PWaJi-0004Id-8W
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 21:02:15 +0100
-Received: by pzk12 with SMTP id 12so1956962pzk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Dec 2010 12:01:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=vEw/yU2B0dutOcKOdHK56NiRe4ZimofD5/Tm73zH+6I=;
-	b=tUudFE8fbPT46W5IiyyMjtZNyE6vYR7HiY253v421j0TkY18PYot5o1mzcb0ToG27E
-	SpYa51JpsrrmdsqJFjojYsT4e0V55T9bnlV2ISQ98XDFae86zvuX/hffpIca0pU3DIIz
-	2A1uStWo82Oj0KfJY2zpW70YHJcmkGPOziVQY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=J0mZzPfPyful5acP/5CWSzR6Nv9ScEaPwWpnLqJI0nbnNMR1/HgRUS+jh1EA+yK8Rp
-	dFxn1DsKiZUfOONr09RqNujLMnw5bhYemm1ZSL6ZTjBmkkYosFaqUEsuDX3ClEWjiWMX
-	YM5Zlah6x7GyDzS11+qnzxzBnyzjNS1SoMdGQ=
-Received: by 10.142.211.20 with SMTP id j20mr8433325wfg.408.1293307312890;
-	Sat, 25 Dec 2010 12:01:52 -0800 (PST)
-Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id w42sm14608108wfh.3.2010.12.25.12.01.51
-	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 12:01:52 -0800 (PST)
-Message-ID: <4D164DAF.1070604@gmail.com>
-Date: Sat, 25 Dec 2010 12:01:51 -0800
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PWaaW-0004bW-9c for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Dec 2010 21:19:36 +0100
+Received: from f053037080.adsl.alicedsl.de ([78.53.37.80]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PWaaN-0002qG-0G for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Dec 2010 20:19:27 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1293274109-15695-1-git-send-email-khimov@altell.ru>	<4D162876.1000401@gmail.com>
-	<201012252144.11796.roman@khimov.ru>
-In-Reply-To: <201012252144.11796.roman@khimov.ru>
-Subject: Re: [PATCH 1/5] perl: fix PERLCONFIGTARGET for multimach builds, move cpan vars
+In-Reply-To: <1293217263.4027.38.camel@mattotaupa>
+References: <1293197342.4027.2.camel@mattotaupa>
+	<1293217263.4027.38.camel@mattotaupa>
+Date: Sat, 25 Dec 2010 21:19:25 +0100
+Message-ID: <1293308365.4089.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: =?UTF-8?B?UmU6IFtQQVRDSCAyLzIgdjJdIHhibWNfc3ZuOiBhcHBseSB1cHN0cmVhbSBwYXRjaCDCu2NvbXBsZXRlIHJlcGxhY2VtZW50IG9mIGxpYmx6byB3aXRoIGxpYmx6bzIsIGxpbnV4IHdhcyBhbHJlYWR5IGxpYmx6bzLCqw==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,72 +32,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 20:02:15 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 25 Dec 2010 20:19:36 -0000
+X-Groupsio-MsgNum: 27516
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-NX9BKhpCKmnXoPD7cK3r"
 
-On 12/25/2010 10:44 AM, Roman I Khimov wrote:
-> В сообщении от Суббота 25 декабря 2010 20:23:02 автор Khem Raj написал:
->> On 12/25/2010 2:48 AM, Roman I Khimov wrote:
->>> Multimachine builds race staging Config_heavy-target.pl to native
->>> directory. Solve that by changing PERLCONFIGTARGET variable semantics,
->>> now it will contain $TARGET_SYS. Change perl patch and stage functions
->>> accordingly.
->>>
->>> Also, move PERLCONFIGTARGET and other target-specific variable settings
->>> from cpan to cpan-base as I think they're also useful for cpan_build and
->>> anywhere else cpan-base is needed.
->>>
->>> Signed-off-by: Roman I Khimov<khimov@altell.ru>
->>> ---
->>>    classes/cpan-base.bbclass                          |   14
->>> ++++++++++++-- classes/cpan.bbclass                               |   10
->>> ---------- classes/cpan_build.bbclass                         |    4 ++--
->>> .../perl/perl-5.10.1/perl-configpm-switch.patch    |    6 +++---
->>> recipes/perl/perl-5.8.8/perl-configpm-switch.patch |    6 +++---
->>> recipes/perl/perl-native_5.10.1.bb                 |    2 +-
->>>    recipes/perl/perl-native_5.8.8.bb                  |    2 +-
->>>    recipes/perl/perl_5.10.1.bb                        |    4 ++--
->>>    recipes/perl/perl_5.8.8.bb                         |    2 +-
->>>    9 files changed, 25 insertions(+), 25 deletions(-)
->>>
->>> diff --git a/classes/cpan-base.bbclass b/classes/cpan-base.bbclass
->>> index a04f61c..53621ed 100644
->>> --- a/classes/cpan-base.bbclass
->>> +++ b/classes/cpan-base.bbclass
->>> @@ -32,11 +32,21 @@ def perl_get_libdirs(d):
->>>
->>>    def is_target(d):
->>>        if not bb.data.inherits_class('native', d):
->>> -        return "yes"
->>> -    return "no"
->>> +        return bb.data.expand('${TARGET_SYS}', d)
->>> +    return ""
->>
->> not that its wrong but I think you could also use MULTIMACH_ARCH instead
->> of TARGET_SYS here
->
-> MULTIMACH_ARCH = "${PACKAGE_ARCH}"
->
-> So if there is a perl lib that is "PACKAGE_ARCH = all" it will use
-> Config_heavy-all.sh which won't exist if we don't symlink something there and
-> that raises a question of what to symlink. Also, I don't know whether it's
-> possible now, but in theory we can have builds with different target C
-> libraries reusing same native perl, so complete TARGET_SYS specification is
-> more appropriate IMO.
->
+--=-NX9BKhpCKmnXoPD7cK3r
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-OK yes that is right.
+Am Freitag, den 24.12.2010, 20:01 +0100 schrieb Paul Menzel:
+> Date: Tue, 30 Nov 2010 16:45:26 +0100
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+This is commit 17ccf452 [4]. My thanks go to Khem for pushing this
+patch.
 
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Task `compile` fails with `/bin/grep: /usr/lib/libz.la: No such file or d=
+irectory`.
+
+As you can see below the actual error is the following.
+
+	tools/TexturePacker/XBMCTex.cpp:394: undefined reference to `__lzo_init2'
+
+[=E2=80=A6]
+
+> 	| arm-angstrom-linux-gnueabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8 -mf=
+pu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/oe/bui=
+ld/angstrom-dev/sysroots/armv7a
+> 	-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -frename-r=
+egisters -fomit-frame-pointer -O2 -ggdb2 -fpermissive -fvisibility-inlines-=
+hidden -fPIC -DPIC -D_REENTRANT -
+> 	D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=3D64 -g -D_DEBUG -Wall -O2 -mfl=
+oat-abi=3Dsoftfp -mno-apcs-stack-check -Wa,-march=3Darmv7a -mcpu=3Dcortex-a=
+8 -mfpu=3Dneon -mvectorize-with-neon-quad -
+> 	isystem/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr=
+/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer =
+-O2 -ggdb2 -fpermissive
+> 	 -fvisibility-inlines-hidden -fPIC -DPIC -D_REENTRANT -D_LARGEFILE64_SOU=
+RCE -D_FILE_OFFSET_BITS=3D64 -g -D_DEBUG -Wall -O2 -mfloat-abi=3Dsoftfp -mn=
+o-apcs-stack-check -Wa,-march=3Darmv7a=20
+> 	-mcpu=3Dcortex-a8 -mfpu=3Dneon -mvectorize-with-neon-quad -isystem/oe/bu=
+ild/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpen=
+sive-optimizations -frename
+> 	-registers -fomit-frame-pointer -O2 -ggdb2 -fpermissive -fvisibility-inl=
+ines-hidden -fPIC -DPIC -D_REENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_B=
+ITS=3D64 -g -D_DEBUG -Wall -O2 -mfl
+> 	oat-abi=3Dsoftfp -mno-apcs-stack-check -Wa,-march=3Darmv7a -mcpu=3Dcorte=
+x-a8 -mfpu=3Dneon -mvectorize-with-neon-quad SDL_anigif.o XBTFWriter.o XBMC=
+Tex.o ../../guilib/XBTF.o      -L/home/pa
+> 	ul/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib =
+-Wl,-rpath-link,/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnuea=
+bi/usr/lib -Wl,-O1 -Wl,
+> 	--hash-style=3Dgnu ../../xbmc/lib/libsquish/libsquish-arm.a -lSDL_image =
+-lSDL -llzo2 -o TexturePacker
+> 	| XBMCTex.o: In function `main':
+> 	| /oe/build/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/xbmc-10.05-r=
+9+gitr0+e2ab481ebe964321c358ab9d6402088c714adcbe/git/tools/TexturePacker/XB=
+MCTex.cpp:394: undefined reference to `__lzo_init2'
+> 	| collect2: ld returned 1 exit status
+> 	| make[1]: *** [TexturePacker] Error 1
+> 	| make[1]: Leaving directory `/oe/build/angstrom-dev/work/armv7a-angstro=
+m-linux-gnueabi/xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d6402088c714adcb=
+e/git/tools/TexturePacker'
+> 	| make: *** [tools/TexturePacker/TexturePacker] Error 2
+> 	| FATAL: oe_runmake failed
+> 	| ERROR: Function do_compile failed
+> 	NOTE: package xbmc-10.05-r9+gitr0+e2ab481ebe964321c358ab9d6402088c714adc=
+be: task do_compile: Failed
+> 	ERROR: TaskFailed event exception, aborting
+> 	ERROR: Build of /oe/openembedded/recipes/xbmc/xbmc_svn.bb do_compile fai=
+led
+> 	ERROR: Task 13 (/oe/openembedded/recipes/xbmc/xbmc_svn.bb, do_compile) f=
+ailed with 256
+> 	ERROR: '/oe/openembedded/recipes/xbmc/xbmc_svn.bb' failed
+> 	ERROR: '/oe/openembedded/recipes/xbmc/xbmc_svn.bb' failed
+> 	ERROR: '/oe/openembedded/recipes/xbmc/xbmc_svn.bb' failed
+
+I am sorry for messing that up.
+
+[=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+
+[4] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D17ccf45=
+2ed2744555dfd70c2b25bbe7b2b5d5460
+
+--=-NX9BKhpCKmnXoPD7cK3r
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0WUcYACgkQPX1aK2wOHViTfACfYYXvL2qqvG5qKlXOZSCYMklE
+LfMAniAlMS1f77+Ek1tr5pi4YeBG+Pkx
+=v3Zy
+-----END PGP SIGNATURE-----
+
+--=-NX9BKhpCKmnXoPD7cK3r--
