@@ -1,42 +1,42 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PWaDt-0003iK-76
+	(envelope-from <raj.khem@gmail.com>) id 1PWaFb-0003la-EQ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 20:56:13 +0100
-Received: by pvd12 with SMTP id 12so1526238pvd.6
+	Sat, 25 Dec 2010 20:58:00 +0100
+Received: by pxi17 with SMTP id 17so1645508pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Dec 2010 11:55:56 -0800 (PST)
+	Sat, 25 Dec 2010 11:57:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding;
-	bh=Ntnw8ftCQbCJLUIziRgZL/Z3KfzuazvFlQ3sxN8YOuI=;
-	b=q21CuBCQY5bcbhJDtGq24WQQzYIunX1XB691Qw7evNAHmLy8/Snw6pJ6ls6qjEBsE3
-	wX5SLiEj4vnXyUm2W1nRU4qZ+USVy1Mg2o9/wxcVp2V6LUZvLUpp7qaqPwcOo5eTaOkV
-	+zC0URC+gDGrhtGOLCDQGXUqvUtKOGezWXzg4=
+	bh=g+7QennOXoZZYAYikaazHXhkAJnwBlSelbSxIuF6Z4Y=;
+	b=kW6OrtdxuunLNqGdt1Pu9JCQsMVhxc2zqc3oNxNqJSE0+Zaj0YQ5vDJDI+8xYXAriZ
+	y9bT2isST0t06pk6JyjJGLabdmivuatTyMwpB/ra/zb3rPeWZlLO0+brbSQTYQK/F9rF
+	gXL4Pk8QuiKPFfQxsKOU0TvxTtebYdb1h+4kE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	b=Qd5hxajxVW9do9IUqBU1Dl/5bH6rq3oxv6kvKaPMOdC3834ukAu5BcrCV95xLhL+hD
-	5uztvvuAJ6tb70189Rl9TmDpFE6N1HW67Ixy2HoYijtIAyBNwvtQHoGruJFCabwkh/Wf
-	xR+La6uJ9kNI2lsh4FFPvjRUbrCsqYdj6UolI=
-Received: by 10.142.203.16 with SMTP id a16mr8467559wfg.144.1293306954480;
-	Sat, 25 Dec 2010 11:55:54 -0800 (PST)
+	b=hTskCty++Dfk8SzjqaGyixDzTTZPtw083Q6Rx57IYUvnOAvTTqTLUSqkSOHDbiENvv
+	iUbjqnkAi82YL17DwiT1Ar1RjyzWvNGHfSNPUUvQrtJkt2G8EM+tGvkjaSWHVAeD1i+h
+	r5/hUChvqGvDuRYGL6RrCH7dPzGtlYlkIDjLk=
+Received: by 10.142.232.15 with SMTP id e15mr8555328wfh.341.1293307066048;
+	Sat, 25 Dec 2010 11:57:46 -0800 (PST)
 Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id x35sm14596905wfd.13.2010.12.25.11.55.52
-	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 11:55:53 -0800 (PST)
-Message-ID: <4D164C48.9020500@gmail.com>
-Date: Sat, 25 Dec 2010 11:55:52 -0800
+	by mx.google.com with ESMTPS id e14sm14599430wfg.8.2010.12.25.11.57.44
+	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 11:57:45 -0800 (PST)
+Message-ID: <4D164CB7.8010509@gmail.com>
+Date: Sat, 25 Dec 2010 11:57:43 -0800
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1293274109-15695-1-git-send-email-khimov@altell.ru>	<1293274109-15695-3-git-send-email-khimov@altell.ru>	<4D162AF0.3050608@gmail.com>
-	<201012252105.20486.roman@khimov.ru>
-In-Reply-To: <201012252105.20486.roman@khimov.ru>
-Subject: Re: [PATCH 3/5] perl-native: fix ExtUtils::Liblist::Kid library check for cross-build
+References: <1293274109-15695-1-git-send-email-khimov@altell.ru>	<1293274109-15695-2-git-send-email-khimov@altell.ru>	<4D162A49.8060009@gmail.com>
+	<201012252125.25836.roman@khimov.ru>
+In-Reply-To: <201012252125.25836.roman@khimov.ru>
+Subject: Re: [PATCH 2/5] perl 5.10.1: fix Time::HiRes cross-compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,38 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 19:56:13 -0000
+X-List-Received-Date: Sat, 25 Dec 2010 19:58:00 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 12/25/2010 10:05 AM, Roman I Khimov wrote:
-> В сообщении от Суббота 25 декабря 2010 20:33:36 автор Khem Raj написал:
+On 12/25/2010 10:25 AM, Roman I Khimov wrote:
+> В сообщении от Суббота 25 декабря 2010 20:30:49 автор Khem Raj написал:
 >> On 12/25/2010 2:48 AM, Roman I Khimov wrote:
->>> MakeMaker uses it to check for libraries presence and if the library is
->>> not found in host dirs (/lib, /usr/lib, etc) it fails with messages like:
+>>> We can't do 'run' check, so let's hope compile check is enough.
+>>> Fixes
 >>>
->>> Note (probably harmless): No library found for -lpcap
+>>> Time::HiRes::nanosleep(): unimplemented in this platform
 >>>
->>> Unfortunately it's not harmless, since MakeMaker removes such libs from
->>> flags passed to link target modules which obviously breaks them.
->>>
->>> As I don't know exact semantic and all use-cases of libpth config
->>> variable I've workarounded this issue by prepending ldflags (and this
->>> does contain the right path) to lib flags.
+>>> error.
 >>>
 >>> Signed-off-by: Roman I Khimov<khimov@altell.ru>
 >>
->> is this a problem for perl-native or target perl ?
+>> is it possible to cache the vars instead? that will be better to keep
+>> list of variables that are not runchecked
 >
-> For target perl libraries. Seen that on Net::PCAP, the package built fine, but
-> the actual library wasn't linked to pcap, thus not working. But in order for
-> target perl libraries to build properly native perl needs to be patched.
+> Well, glancing at code another time, it probably could be solved via
+> d_nanosleep in Config.sh. I think it's safe to assume that all of our targets
+> implement nanosleep().
+>
 
-got it.
+hmmm, I would be skeptical on the assumption but if you add this to the 
+comment that would help someone who would want to use on  a weird 
+architecture one day
+
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
->
 >
 >
 >
