@@ -1,41 +1,42 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PWXpy-0006m2-Ft
+	(envelope-from <raj.khem@gmail.com>) id 1PWXxc-0006rE-Ij
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 18:23:22 +0100
-Received: by pvd12 with SMTP id 12so1515249pvd.6
+	Sat, 25 Dec 2010 18:31:16 +0100
+Received: by pxi17 with SMTP id 17so1634620pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Dec 2010 09:23:10 -0800 (PST)
+	Sat, 25 Dec 2010 09:31:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding;
-	bh=LbhjFPiKDnhFtAzjiZ2p273+jYqOkZkKQxqmUWfBJs0=;
-	b=bRL2d55casA/TihcmjPQDnjincLzvAI1i/czce5ZtVYJNwZAQDCG8Ze2uit4J5wmIO
-	P0NQr1IivDr2ij2VG4WdWu1in9IeNnAulIQjeXahdrXTXUp5yrjtRvP4lLH0m/w2MQyY
-	3PTdF5rUR85UpHi+YX7ToVi1FA7DFZc0FoXB8=
+	bh=UiR8HoJ22UD3uttiVgddlXIA6kAo1eTG5MixLPS/C/M=;
+	b=M1HySxolMk3KV4acTtMU5OkxeBMJ1y0/1RfCSR9IL5zwb1bslscVLNA1diWnt6FjJ5
+	M3HLJ7dvWMw3NFTM0KFFlPdzgJZxiGl85FLTmXqTVOt9kP+xk9SO4FVfvxFRATsBmKvx
+	Wa36KABsM30nEKeH9BDvShs3TjxpweeGKeYvI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	b=OYoJhEkLV9YrMr8i1kBChUE060qfnBVuUxFBy3mz71sIcVf8Bt6Ee55+9n+RikVbHV
-	xxlM0yPbHRweOnXpT3cKesH2Rd3N1ucbGQZY6N8SyPy9slzblNj1pEFRsMPJt94V2Obs
-	Mm2cJPkWu6VSKJii3G+24DO/ltwnZywJgUqMo=
-Received: by 10.142.128.6 with SMTP id a6mr7082142wfd.290.1293297789534;
-	Sat, 25 Dec 2010 09:23:09 -0800 (PST)
+	b=O9SYO8mkz4MLSnZhvP7w9t1UW1A3QeZa6LoKwlhqY3BGNayVVygF1s1S33vQ7Myxps
+	ukTyaCXhL9de4/lZqPj4ksy/rzcX2fl+8B+zg+ujz3Mn2c5nkOZkwPfd+0plVvkFK1Iw
+	spXgqiWfIUxh5oE9zmZi/bBs1CvjgObPKQLaw=
+Received: by 10.142.7.6 with SMTP id 6mr8391228wfg.363.1293298256815;
+	Sat, 25 Dec 2010 09:30:56 -0800 (PST)
 Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id w22sm14383990wfd.19.2010.12.25.09.23.07
-	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 09:23:08 -0800 (PST)
-Message-ID: <4D162876.1000401@gmail.com>
-Date: Sat, 25 Dec 2010 09:23:02 -0800
+	by mx.google.com with ESMTPS id p8sm14395683wff.16.2010.12.25.09.30.55
+	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 09:30:55 -0800 (PST)
+Message-ID: <4D162A49.8060009@gmail.com>
+Date: Sat, 25 Dec 2010 09:30:49 -0800
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1293274109-15695-1-git-send-email-khimov@altell.ru>
-In-Reply-To: <1293274109-15695-1-git-send-email-khimov@altell.ru>
-Subject: Re: [PATCH 1/5] perl: fix PERLCONFIGTARGET for multimach builds, move cpan vars
+	<1293274109-15695-2-git-send-email-khimov@altell.ru>
+In-Reply-To: <1293274109-15695-2-git-send-email-khimov@altell.ru>
+Subject: Re: [PATCH 2/5] perl 5.10.1: fix Time::HiRes cross-compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,47 +50,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 17:23:22 -0000
+X-List-Received-Date: Sat, 25 Dec 2010 17:31:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 12/25/2010 2:48 AM, Roman I Khimov wrote:
-> Multimachine builds race staging Config_heavy-target.pl to native directory.
-> Solve that by changing PERLCONFIGTARGET variable semantics, now it will
-> contain $TARGET_SYS. Change perl patch and stage functions accordingly.
+> We can't do 'run' check, so let's hope compile check is enough.
+> Fixes
 >
-> Also, move PERLCONFIGTARGET and other target-specific variable settings from
-> cpan to cpan-base as I think they're also useful for cpan_build and anywhere
-> else cpan-base is needed.
+> Time::HiRes::nanosleep(): unimplemented in this platform
+>
+> error.
 >
 > Signed-off-by: Roman I Khimov<khimov@altell.ru>
-> ---
->   classes/cpan-base.bbclass                          |   14 ++++++++++++--
->   classes/cpan.bbclass                               |   10 ----------
->   classes/cpan_build.bbclass                         |    4 ++--
->   .../perl/perl-5.10.1/perl-configpm-switch.patch    |    6 +++---
->   recipes/perl/perl-5.8.8/perl-configpm-switch.patch |    6 +++---
->   recipes/perl/perl-native_5.10.1.bb                 |    2 +-
->   recipes/perl/perl-native_5.8.8.bb                  |    2 +-
->   recipes/perl/perl_5.10.1.bb                        |    4 ++--
->   recipes/perl/perl_5.8.8.bb                         |    2 +-
->   9 files changed, 25 insertions(+), 25 deletions(-)
->
-> diff --git a/classes/cpan-base.bbclass b/classes/cpan-base.bbclass
-> index a04f61c..53621ed 100644
-> --- a/classes/cpan-base.bbclass
-> +++ b/classes/cpan-base.bbclass
-> @@ -32,11 +32,21 @@ def perl_get_libdirs(d):
->
->   def is_target(d):
->       if not bb.data.inherits_class('native', d):
-> -        return "yes"
-> -    return "no"
-> +        return bb.data.expand('${TARGET_SYS}', d)
-> +    return ""
 
-not that its wrong but I think you could also use MULTIMACH_ARCH instead 
-of TARGET_SYS here
+is it possible to cache the vars instead? that will be better to keep
+list of variables that are not runchecked
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+> ---
+>   .../perl-time-hires-fix-cross-compilation.patch    |   29 ++++++++++++++++++++
+>   recipes/perl/perl_5.10.1.bb                        |    3 +-
+>   2 files changed, 31 insertions(+), 1 deletions(-)
+>   create mode 100644 recipes/perl/perl-5.10.1/perl-time-hires-fix-cross-compilation.patch
+>
+> diff --git a/recipes/perl/perl-5.10.1/perl-time-hires-fix-cross-compilation.patch b/recipes/perl/perl-5.10.1/perl-time-hires-fix-cross-compilation.patch
+> new file mode 100644
+> index 0000000..7c8b47e
+> --- /dev/null
+> +++ b/recipes/perl/perl-5.10.1/perl-time-hires-fix-cross-compilation.patch
+> @@ -0,0 +1,29 @@
+> +Index: perl-5.10.1/ext/Time-HiRes/Makefile.PL
+> +===================================================================
+> +--- perl-5.10.1.orig/ext/Time-HiRes/Makefile.PL	2010-11-23 12:05:59.000000000 +0300
+> ++++ perl-5.10.1/ext/Time-HiRes/Makefile.PL	2010-11-23 12:06:42.000000000 +0300
+> +@@ -157,24 +157,6 @@
+> + 	    my $res = system($cccmd);
+> + 	    $ok = defined($res)&&  $res == 0&&  -s $tmp_exe&&  -x _;
+> +
+> +-	    if ( $ok&&  exists $args{run}&&  $args{run}) {
+> +-		my $tmp_exe =
+> +-		    File::Spec->catfile(File::Spec->curdir, $tmp_exe);
+> +-		printf "Running $tmp_exe..." if $VERBOSE;
+> +-		if (system($tmp_exe) == 0) {
+> +-		    $ok = 1;
+> +-		} else {
+> +-		    $ok = 0;
+> +-		    my $errno = $?>>  8;
+> +-		    local $! = $errno;
+> +-		    printf<<EOF;
+> +-
+> +-*** The test run of '$tmp_exe' failed: status $?
+> +-*** (the status means: errno = $errno or '$!')
+> +-*** DO NOT PANIC: this just means that *some* functionality will be missing.
+> +-EOF
+> +-		}
+> +-	    }
+> + 	    unlink("$tmp.c", $tmp_exe);
+> +         }
+> +     }
+> diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
+> index 387755e..0e6a1f9 100644
+> --- a/recipes/perl/perl_5.10.1.bb
+> +++ b/recipes/perl/perl_5.10.1.bb
+> @@ -5,7 +5,7 @@ LICENSE = "Artistic|GPLv1+"
+>   PRIORITY = "optional"
+>   # We need gnugrep (for -I)
+>   DEPENDS = "virtual/db perl-native grep-native"
+> -PR = "r15"
+> +PR = "r16"
+>
+>   # 5.10.1 has Module::Build built-in
+>   PROVIDES += "libmodule-build-perl"
+> @@ -62,6 +62,7 @@ SRC_URI = "ftp://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz;name=perl-${PV} \
+>   	file://arm-alignment.diff \
+>   	file://fcgi-test.diff \
+>   	file://hurd-ccflags.diff \
+> +	file://perl-time-hires-fix-cross-compilation.patch \
+>   	\
+>           file://Makefile.patch \
+>           file://Makefile.SH.patch \
 
 
 
