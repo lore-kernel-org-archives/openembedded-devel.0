@@ -1,42 +1,42 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PWaFb-0003la-EQ
+	(envelope-from <raj.khem@gmail.com>) id 1PWaHj-0004Cc-A0
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 20:58:00 +0100
-Received: by pxi17 with SMTP id 17so1645508pxi.6
+	Sat, 25 Dec 2010 21:00:11 +0100
+Received: by pwi8 with SMTP id 8so781781pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Dec 2010 11:57:46 -0800 (PST)
+	Sat, 25 Dec 2010 11:59:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding;
-	bh=g+7QennOXoZZYAYikaazHXhkAJnwBlSelbSxIuF6Z4Y=;
-	b=kW6OrtdxuunLNqGdt1Pu9JCQsMVhxc2zqc3oNxNqJSE0+Zaj0YQ5vDJDI+8xYXAriZ
-	y9bT2isST0t06pk6JyjJGLabdmivuatTyMwpB/ra/zb3rPeWZlLO0+brbSQTYQK/F9rF
-	gXL4Pk8QuiKPFfQxsKOU0TvxTtebYdb1h+4kE=
+	bh=ttKkWUL5PwBmbBsQogSQTmGFdkniey6reoLqF9e3SrI=;
+	b=npn1aebdzKXW/A4TXmS4EbR79qq5CMbM7hayYBCaM7ojmX0Udq4QzngGTiixqkbGxw
+	2pOwqrarsgAU69NzUiRkiH3zWwumMA8Dj9cUu9ZJsCxv9ZQMd4bqDCoAV2/9Bee0mIhb
+	CAAyJxX7LwTW2+sjcfmYAUN9nMfs+a/Vp01ic=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	b=hTskCty++Dfk8SzjqaGyixDzTTZPtw083Q6Rx57IYUvnOAvTTqTLUSqkSOHDbiENvv
-	iUbjqnkAi82YL17DwiT1Ar1RjyzWvNGHfSNPUUvQrtJkt2G8EM+tGvkjaSWHVAeD1i+h
-	r5/hUChvqGvDuRYGL6RrCH7dPzGtlYlkIDjLk=
-Received: by 10.142.232.15 with SMTP id e15mr8555328wfh.341.1293307066048;
-	Sat, 25 Dec 2010 11:57:46 -0800 (PST)
+	b=N64rNcESQaqDwvooz3CNTEkaMr9AikstS0gCy3qPeaFUAQncUYKKZeXT7C/JsX4ZAQ
+	0r8R8gzksCDekhBEGvJw2lUSceP+JXLCHZt2g1AHEMO0uFqS+Ol/ZRiZc6a5xISaCEsD
+	Pzsn8xl0WlPqcc0or1p/O/I0ECTBy+kcZ67oQ=
+Received: by 10.142.226.4 with SMTP id y4mr8575303wfg.8.1293307186536;
+	Sat, 25 Dec 2010 11:59:46 -0800 (PST)
 Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id e14sm14599430wfg.8.2010.12.25.11.57.44
-	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 11:57:45 -0800 (PST)
-Message-ID: <4D164CB7.8010509@gmail.com>
-Date: Sat, 25 Dec 2010 11:57:43 -0800
+	by mx.google.com with ESMTPS id y42sm14604675wfd.22.2010.12.25.11.59.45
+	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 11:59:45 -0800 (PST)
+Message-ID: <4D164D30.3080301@gmail.com>
+Date: Sat, 25 Dec 2010 11:59:44 -0800
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1293274109-15695-1-git-send-email-khimov@altell.ru>	<1293274109-15695-2-git-send-email-khimov@altell.ru>	<4D162A49.8060009@gmail.com>
-	<201012252125.25836.roman@khimov.ru>
-In-Reply-To: <201012252125.25836.roman@khimov.ru>
-Subject: Re: [PATCH 2/5] perl 5.10.1: fix Time::HiRes cross-compilation
+References: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>	<AANLkTikXVCmv0phk5OLOMciBOpC296Z2XtF9jO=Bn1Jn@mail.gmail.com>	<20101216154854.GB22134@gmail.com>	<4D14B770.3000601@eukrea.com>	<if2l7k$6v8$1@dough.gmane.org>	<4D163892.4070205@eukrea.com>
+	<4D163B57.8040808@eukrea.com>
+In-Reply-To: <4D163B57.8040808@eukrea.com>
+Subject: Re: testing branch 2010-12-10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,44 +50,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 19:58:00 -0000
+X-List-Received-Date: Sat, 25 Dec 2010 20:00:11 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 12/25/2010 10:25 AM, Roman I Khimov wrote:
-> В сообщении от Суббота 25 декабря 2010 20:30:49 автор Khem Raj написал:
->> On 12/25/2010 2:48 AM, Roman I Khimov wrote:
->>> We can't do 'run' check, so let's hope compile check is enough.
->>> Fixes
+On 12/25/2010 10:43 AM, Eric Bénard wrote:
+> On 25/12/2010 19:31, Eric Bénard wrote:
+>> On 24/12/2010 18:28, Koen Kooi wrote:
+>>> That looks like the xdctools linkerscript problem we had before. Maybe
+>>> an xdc .clean and xdc .make would help.
 >>>
->>> Time::HiRes::nanosleep(): unimplemented in this platform
->>>
->>> error.
->>>
->>> Signed-off-by: Roman I Khimov<khimov@altell.ru>
+>> thanks, will try this.
 >>
->> is it possible to cache the vars instead? that will be better to keep
->> list of variables that are not runchecked
+>> other problem found with ti-dmai_svn during the same build :
+>> cc1: warnings being treated as errors
+>> In file included from
+>> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include/linux/videodev2.h:66:0,
+>>
+>>
+>> from linux/Capture.c:43:
+>> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include/linux/types.h:13:2:
+>>
+>> error: #warning "Attempt to use kernel headers from user space, see
+>> http://kernelnewbies.org/KernelHeaders"
+>> make[1]: *** [obj/linux/Capture.omap3530.o470MV] Error 1
+>>
+> and removing -Werror to workaround this issue leads to a link error :
 >
-> Well, glancing at code another time, it probably could be solved via
-> d_nanosleep in Config.sh. I think it's safe to assume that all of our targets
-> implement nanosleep().
->
+> Linking linux/audio_decode1_omap3530.x470MV from appMain.omap3530.o470MV
+> linux/main.omap3530.o470MV linux/audio_decode1_oma
+> p3530_config/linker.cmd..
+> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/bin/arm-angstrom-linux-gnueabi-gcc
+> -lpthread -lm
+> -L/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+> -lasound -Wl,-Map,linux/audio_decode1_omap3530.x470MV.map -o
+> linux/audio_decode1_omap3530.x470MV appMain.omap3530.o470MV
+> linux/main.omap3530.o470MV
+> linux/audio_decode1_omap3530_config/linker.cmd/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+> warning: linux/audio_decode1_omap3530_config/linker.cmd contains output
+> sections; did you forget -T?
+> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+> .gnu.attributes not found for insert
 
-hmmm, I would be skeptical on the assumption but if you add this to the 
-comment that would help someone who would want to use on  a weird 
-architecture one day
+it seems like linker scripts for this need some scrutiny. How can I 
+reproduce this problem.
 
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+-Khem
 
 
