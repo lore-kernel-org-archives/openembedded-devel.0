@@ -1,23 +1,42 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roman@khimov.ru>) id 1PWZ6Q-00006h-8u
+	(envelope-from <raj.khem@gmail.com>) id 1PWa8O-0003ZV-Mk
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 19:44:26 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PWZ6C-0006fY-Un
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 21:44:17 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Dec 2010 21:44:08 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
-References: <1293274109-15695-1-git-send-email-khimov@altell.ru>
-	<4D162876.1000401@gmail.com>
-In-Reply-To: <4D162876.1000401@gmail.com>
+	Sat, 25 Dec 2010 20:50:33 +0100
+Received: by pwi8 with SMTP id 8so781112pwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Dec 2010 11:50:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=LRTRbtePPSj8dDIgyapwlhRvtv2Zwor8IazK9tm5P90=;
+	b=nDZLw7HJKmD/WLjd2yuvIIFyxUajNeTYYnBvp9CgwLM9siETv7UsvujURVkRowLJwY
+	8SeekNIlNollGkYzVzf3F51znue+rZCWMb9GBL1lEotul/UpaPzA6WZ5MpZu+b7EbAt7
+	KBDkP/QpMbhycwXK43aLGpUQ4Nqy24UTYnd1I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=JTg9nN4GEc6vb7hSqKlFXPdt1KJjUE3yxaS5jBAAK2H1WyRWU73ZybAMaF34xL/pz2
+	RAuQz/OeQZv8ZeSgYD6eKnS7OsTK0Qf1tIlt/AfYNShVqSs0QgDizFfhc4tLVCm4Zm1X
+	U0CNyj88V/ZYjS3wrNt1wymiNRFwGPzqIzsBo=
+Received: by 10.142.170.13 with SMTP id s13mr8467967wfe.139.1293306616639;
+	Sat, 25 Dec 2010 11:50:16 -0800 (PST)
+Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id v19sm14594256wfh.0.2010.12.25.11.50.15
+	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Dec 2010 11:50:15 -0800 (PST)
+Message-ID: <4D164AF6.4050206@gmail.com>
+Date: Sat, 25 Dec 2010 11:50:14 -0800
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
-Message-Id: <201012252144.11796.roman@khimov.ru>
-Subject: Re: [PATCH 1/5] perl: fix PERLCONFIGTARGET for multimach builds, move cpan vars
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTinhwtWJfCFLWdB_QFVMWBYZi1G_C6sPt-qCAL8n@mail.gmail.com>	<AANLkTimGtgXwtoTS94WHRdNsgShmSkCxj25o6MnVfgHx@mail.gmail.com>
+	<AANLkTi=9JdAfD7te7fySLJFvADFqAht=cE0typQsRxy7@mail.gmail.com>
+In-Reply-To: <AANLkTi=9JdAfD7te7fySLJFvADFqAht=cE0typQsRxy7@mail.gmail.com>
+Subject: Re: QA issue with staging (workdir) for .la files in xmlrpc-c package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,88 +50,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 18:44:26 -0000
-X-Groupsio-MsgNum: 27510
-Content-Type: multipart/signed; boundary="nextPart1692613.M0SBZphsN9";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Sat, 25 Dec 2010 19:50:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
---nextPart1692613.M0SBZphsN9
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+On 12/23/2010 1:44 AM, Martin Panter wrote:
+> On 23 December 2010 18:43, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com>  wrote:
+>> 2010/12/23 Martin Panter<vadmium+floss@gmail.com>:
+>>> Hi all
+>>>
+>>> I'm having trouble building "xmlrpc-c", which I think is required for
+>>> rtorrent. It's failing at the "do_qa_staging" stage with the messages
+>>> such as "QA Issue with staging: libxmlrpc.la failed sanity test
+>>> (workdir)".
+>>>
+>>> I gather the issue is that my sysroots/*/usr/lib/libxmlrpc.la file has
+>>> the following, which mentions the tmp/work/ directory:
+>>>
+>>> # Libraries that this one depends upon.
+>>> dependency_libs=' -L.libs
+>>> -L/media/disk/home/vadmium/proj/aegle/build/tmp/work/armv7a-angstrom-linux-gnueabi/xmlrpc-c-1.06.41-r1/xmlrpc-c-1.06.41/src/../lib/libutil/.libs
+>>> -lxmlrpc_util -lxml2 -lz -lm'
+>>>
+>>> So looks like another Libtool issue. But I'm stuck this time so if
+>>> anyone has any hints that would be awesome. For instance why does that
+>>> -L. . ./tmp/work/. . . component get there, and perhaps is there some
+>>> Libtool option to prevent or fix it?
+>>>
+>>> I think the xmlrpc-c packages has its own version of Libtool (1.3.4?).
+>>> I tried coaxing the build process to use OE's Libtool version
+>>> (EXTRA_OEMAKE = "LIBTOOL='${HOST_SYS}-libtool'", after the import
+>>> line, in the recipe file), but this didn't seem to help.
+>>>
+>>> Previously I thought I had another "QA issue" with this xmlrpc-c
+>>> package, something about a "hash style", which I thought I solved by
+>>> passing LADD='${LDFLAGS}' to the Make command. But recently when I
+>>> removed this change I am not getting the earlier "hash style QA
+>>> issue"; only this newer "workdir" one. But I may be confused.
+>>>
+>>> -Martin
+>>>
+>>> These are the full messages taken straight from log.do_qa_staging file
+>>> with awesome-long path names:
+>>>
+>>> ERROR: QA Issue with staging: libxmlrpc.la failed sanity test
+>>> (workdir) in path
+>>> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+>>> ERROR: QA Issue with staging: libxmlrpc_server_abyss.la failed sanity
+>>> test (workdir) in path
+>>> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+>>> ERROR: QA Issue with staging: libxmlrpc_server.la failed sanity test
+>>> (workdir) in path
+>>> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+>>> ERROR: QA Issue with staging: libxmlrpc_server_cgi.la failed sanity
+>>> test (workdir) in path
+>>> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+>>> ERROR: QA Issue with staging: libxmlrpc_client.la failed sanity test
+>>> (workdir) in path
+>>> /media/disk/home/vadmium/proj/aegle/build/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+>>> FATAL: QA staging was broken by the package built above
+>>
+>> I *think* I've rebuild rtorrent yesterday. for beagleboard/minimal.
+>> Didn't get the error. Can't verify things right now. Feel frree to
+>> ping me this evening on irc (roughly 18.00-22.00 gmt) or tomorrow
+>> during the day)
+>> What libtool are you using? and is this on git head ?
+>
+> On 23/12/2010, Frans Meulenbroeks<fransmeulenbroeks@gmail.com>  wrote:
+>> 2010/12/23 Martin Panter<vadmium+floss@gmail.com>:
+>>> Hi all
+>>>
+>>> I'm having trouble building "xmlrpc-c", which I think is required for
+>>> rtorrent. It's failing at the "do_qa_staging" stage with the messages
+>>> such as "QA Issue with staging: libxmlrpc.la failed sanity test
+>>> (workdir)".
+>>>
+>>> I gather the issue is that my sysroots/*/usr/lib/libxmlrpc.la file has
+>>> the following, which mentions the tmp/work/ directory:
+>>>
+>>> # Libraries that this one depends upon.
+>>> dependency_libs=' -L.libs
+>>> -L/media/disk/home/vadmium/proj/aegle/build/tmp/work/armv7a-angstrom-linux-gnueabi/xmlrpc-c-1.06.41-r1/xmlrpc-c-1.06.41/src/../lib/libutil/.libs
+>>> -lxmlrpc_util -lxml2 -lz -lm'
+>>>
+>>> So looks like another Libtool issue. But I'm stuck this time so if
+>>> anyone has any hints that would be awesome. For instance why does that
+>>> -L. . ./tmp/work/. . . component get there, and perhaps is there some
+>>> Libtool option to prevent or fix it?
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 25 =D0=B4=D0=B5=D0=BA=D0=B0=D0=
-=B1=D1=80=D1=8F 2010 20:23:02 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj =D0=
-=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> On 12/25/2010 2:48 AM, Roman I Khimov wrote:
-> > Multimachine builds race staging Config_heavy-target.pl to native
-> > directory. Solve that by changing PERLCONFIGTARGET variable semantics,
-> > now it will contain $TARGET_SYS. Change perl patch and stage functions
-> > accordingly.
-> >
-> > Also, move PERLCONFIGTARGET and other target-specific variable settings
-> > from cpan to cpan-base as I think they're also useful for cpan_build and
-> > anywhere else cpan-base is needed.
-> >
-> > Signed-off-by: Roman I Khimov<khimov@altell.ru>
-> > ---
-> >   classes/cpan-base.bbclass                          |   14
-> > ++++++++++++-- classes/cpan.bbclass                               |   10
-> > ---------- classes/cpan_build.bbclass                         |    4 ++=
-=2D-
-> > .../perl/perl-5.10.1/perl-configpm-switch.patch    |    6 +++---
-> > recipes/perl/perl-5.8.8/perl-configpm-switch.patch |    6 +++---
-> > recipes/perl/perl-native_5.10.1.bb                 |    2 +-
-> >   recipes/perl/perl-native_5.8.8.bb                  |    2 +-
-> >   recipes/perl/perl_5.10.1.bb                        |    4 ++--
-> >   recipes/perl/perl_5.8.8.bb                         |    2 +-
-> >   9 files changed, 25 insertions(+), 25 deletions(-)
-> >
-> > diff --git a/classes/cpan-base.bbclass b/classes/cpan-base.bbclass
-> > index a04f61c..53621ed 100644
-> > --- a/classes/cpan-base.bbclass
-> > +++ b/classes/cpan-base.bbclass
-> > @@ -32,11 +32,21 @@ def perl_get_libdirs(d):
-> >
-> >   def is_target(d):
-> >       if not bb.data.inherits_class('native', d):
-> > -        return "yes"
-> > -    return "no"
-> > +        return bb.data.expand('${TARGET_SYS}', d)
-> > +    return ""
->=20
-> not that its wrong but I think you could also use MULTIMACH_ARCH instead
-> of TARGET_SYS here
 
-MULTIMACH_ARCH =3D "${PACKAGE_ARCH}"
+Yes it a mix of libtool and the xmlrpc-c build system combined issue. 
+The patch you provided solved some part of the problem. I have committed 
+a modified patch which fixes several problems along with this
+one in xmlrpc-c recipe
 
-So if there is a perl lib that is "PACKAGE_ARCH =3D all" it will use=20
-Config_heavy-all.sh which won't exist if we don't symlink something there a=
-nd=20
-that raises a question of what to symlink. Also, I don't know whether it's=
-=20
-possible now, but in theory we can have builds with different target C=20
-libraries reusing same native perl, so complete TARGET_SYS specification is=
-=20
-more appropriate IMO.
+-Khem
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart1692613.M0SBZphsN9
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAk0WO3sACgkQXJ70z+XgVcMcgQCgzg3ZWUFGQA7F+sW/mBi0g+eO
-PJ8AoKYFM0GlYpdL1oTARlcEUhxeCttZ
-=3bgi
------END PGP SIGNATURE-----
-
---nextPart1692613.M0SBZphsN9--
