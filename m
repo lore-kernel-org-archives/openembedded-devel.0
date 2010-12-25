@@ -1,32 +1,23 @@
-Received: from 27.mail-out.ovh.net ([91.121.30.210])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PWZ5r-00005s-JH
+Received: from sencha.khimov.ru ([89.223.109.22])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <roman@khimov.ru>) id 1PWZ6Q-00006h-8u
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Dec 2010 19:43:51 +0100
-Received: (qmail 32270 invoked by uid 503); 25 Dec 2010 18:45:32 -0000
-Received: from b9.ovh.net (HELO mail194.ha.ovh.net) (213.186.33.59)
-	by 27.mail-out.ovh.net with SMTP; 25 Dec 2010 18:45:26 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 25 Dec 2010 20:43:36 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 25 Dec 2010 20:43:35 +0200
-Message-ID: <4D163B57.8040808@eukrea.com>
-Date: Sat, 25 Dec 2010 19:43:35 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	Sat, 25 Dec 2010 19:44:26 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PWZ6C-0006fY-Un
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Dec 2010 21:44:17 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinBFLqKJci1P1UZFx6FrrzK5gpm7unsjxEpZ8qk@mail.gmail.com>	<AANLkTikXVCmv0phk5OLOMciBOpC296Z2XtF9jO=Bn1Jn@mail.gmail.com>	<20101216154854.GB22134@gmail.com>	<4D14B770.3000601@eukrea.com>	<if2l7k$6v8$1@dough.gmane.org>
-	<4D163892.4070205@eukrea.com>
-In-Reply-To: <4D163892.4070205@eukrea.com>
-X-Ovh-Tracer-Id: 4275886372283133257
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: testing branch 2010-12-10
+Date: Sat, 25 Dec 2010 21:44:08 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
+References: <1293274109-15695-1-git-send-email-khimov@altell.ru>
+	<4D162876.1000401@gmail.com>
+In-Reply-To: <4D162876.1000401@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201012252144.11796.roman@khimov.ru>
+Subject: Re: [PATCH 1/5] perl: fix PERLCONFIGTARGET for multimach builds, move cpan vars
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +31,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2010 18:43:51 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 25 Dec 2010 18:44:26 -0000
+X-Groupsio-MsgNum: 27510
+Content-Type: multipart/signed; boundary="nextPart1692613.M0SBZphsN9";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On 25/12/2010 19:31, Eric Bénard wrote:
-> On 24/12/2010 18:28, Koen Kooi wrote:
->> That looks like the xdctools linkerscript problem we had before. Maybe
->> an xdc .clean and xdc .make would help.
->>
-> thanks, will try this.
->
-> other problem found with ti-dmai_svn during the same build :
-> cc1: warnings being treated as errors
-> In file included from
-> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include/linux/videodev2.h:66:0,
->
-> from linux/Capture.c:43:
-> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/beagleboard-angstrom-linux-gnueabi/kernel/include/linux/types.h:13:2:
-> error: #warning "Attempt to use kernel headers from user space, see
-> http://kernelnewbies.org/KernelHeaders"
-> make[1]: *** [obj/linux/Capture.omap3530.o470MV] Error 1
->
-and removing -Werror to workaround this issue leads to a link error :
+--nextPart1692613.M0SBZphsN9
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Linking linux/audio_decode1_omap3530.x470MV from appMain.omap3530.o470MV 
-linux/main.omap3530.o470MV linux/audio_decode1_oma
-p3530_config/linker.cmd..
-/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/bin/arm-angstrom-linux-gnueabi-gcc 
-  -lpthread -lm 
--L/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib 
--lasound -Wl,-Map,linux/audio_decode1_omap3530.x470MV.map -o 
-linux/audio_decode1_omap3530.x470MV appMain.omap3530.o470MV 
-linux/main.omap3530.o470MV 
-linux/audio_decode1_omap3530_config/linker.cmd/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: 
-warning: linux/audio_decode1_omap3530_config/linker.cmd contains output 
-sections; did you forget -T?
-/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: 
-.gnu.attributes not found for insert
-collect2: ld returned 1 exit status
-make[2]: *** [linux/audio_decode1_omap3530.x470MV] Error 1
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 25 =D0=B4=D0=B5=D0=BA=D0=B0=D0=
+=B1=D1=80=D1=8F 2010 20:23:02 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj =D0=
+=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> On 12/25/2010 2:48 AM, Roman I Khimov wrote:
+> > Multimachine builds race staging Config_heavy-target.pl to native
+> > directory. Solve that by changing PERLCONFIGTARGET variable semantics,
+> > now it will contain $TARGET_SYS. Change perl patch and stage functions
+> > accordingly.
+> >
+> > Also, move PERLCONFIGTARGET and other target-specific variable settings
+> > from cpan to cpan-base as I think they're also useful for cpan_build and
+> > anywhere else cpan-base is needed.
+> >
+> > Signed-off-by: Roman I Khimov<khimov@altell.ru>
+> > ---
+> >   classes/cpan-base.bbclass                          |   14
+> > ++++++++++++-- classes/cpan.bbclass                               |   10
+> > ---------- classes/cpan_build.bbclass                         |    4 ++=
+=2D-
+> > .../perl/perl-5.10.1/perl-configpm-switch.patch    |    6 +++---
+> > recipes/perl/perl-5.8.8/perl-configpm-switch.patch |    6 +++---
+> > recipes/perl/perl-native_5.10.1.bb                 |    2 +-
+> >   recipes/perl/perl-native_5.8.8.bb                  |    2 +-
+> >   recipes/perl/perl_5.10.1.bb                        |    4 ++--
+> >   recipes/perl/perl_5.8.8.bb                         |    2 +-
+> >   9 files changed, 25 insertions(+), 25 deletions(-)
+> >
+> > diff --git a/classes/cpan-base.bbclass b/classes/cpan-base.bbclass
+> > index a04f61c..53621ed 100644
+> > --- a/classes/cpan-base.bbclass
+> > +++ b/classes/cpan-base.bbclass
+> > @@ -32,11 +32,21 @@ def perl_get_libdirs(d):
+> >
+> >   def is_target(d):
+> >       if not bb.data.inherits_class('native', d):
+> > -        return "yes"
+> > -    return "no"
+> > +        return bb.data.expand('${TARGET_SYS}', d)
+> > +    return ""
+>=20
+> not that its wrong but I think you could also use MULTIMACH_ARCH instead
+> of TARGET_SYS here
 
-Eric
+MULTIMACH_ARCH =3D "${PACKAGE_ARCH}"
 
+So if there is a perl lib that is "PACKAGE_ARCH =3D all" it will use=20
+Config_heavy-all.sh which won't exist if we don't symlink something there a=
+nd=20
+that raises a question of what to symlink. Also, I don't know whether it's=
+=20
+possible now, but in theory we can have builds with different target C=20
+libraries reusing same native perl, so complete TARGET_SYS specification is=
+=20
+more appropriate IMO.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart1692613.M0SBZphsN9
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAk0WO3sACgkQXJ70z+XgVcMcgQCgzg3ZWUFGQA7F+sW/mBi0g+eO
+PJ8AoKYFM0GlYpdL1oTARlcEUhxeCttZ
+=3bgi
+-----END PGP SIGNATURE-----
+
+--nextPart1692613.M0SBZphsN9--
