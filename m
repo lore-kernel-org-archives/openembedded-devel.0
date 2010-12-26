@@ -1,29 +1,35 @@
-Received: from 27.mail-out.ovh.net ([91.121.30.210])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PWmNP-0005jX-9f
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PWx2d-0001o0-Ca
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Dec 2010 09:54:51 +0100
-Received: (qmail 31208 invoked by uid 503); 26 Dec 2010 08:56:31 -0000
-Received: from b9.ovh.net (HELO mail191.ha.ovh.net) (213.186.33.59)
-	by 27.mail-out.ovh.net with SMTP; 26 Dec 2010 08:56:26 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 26 Dec 2010 10:54:34 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 26 Dec 2010 10:54:33 +0200
-Message-ID: <4D1702C8.6050300@eukrea.com>
-Date: Sun, 26 Dec 2010 09:54:32 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	Sun, 26 Dec 2010 21:19:15 +0100
+Received: by eya28 with SMTP id 28so4129446eya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 26 Dec 2010 12:17:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=8fUpwxtz71hw7zItXWd+jhkkBYpSaNzjy0YrEO+6o2g=;
+	b=g2Vejs6y01FrGjZ2c+uOaAnZQirRDbgPdv/L/LYdAJaDrxUvKo9ugh5xpAwsK0IG+P
+	16kCzBw5QAHrdPbFQBSb7acUNPLdDsOb+BV97iz/RS27EHHDG6y1ja69ZbzRUjiqMFen
+	sawL+SITLzHR7BmxMa34caKyo3nQs3qRcrq6A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=L2sFQfiXf7dR+9MaaZoMjEW9toExestvFeZuCKntoKUNPtK4cp5Sgz+gfin93OvSyT
+	6gIHA4fNPPPGZm3iMfOk1hDsgK3jc/0ODIhiJ3S4nwFruXDo71A3b19nwTPs1Pfxp4oB
+	sHuwEbau/H8L5MYe4yN35F52DYJiaOojH5wIU=
+Received: by 10.213.32.6 with SMTP id a6mr10782530ebd.31.1293394634713;
+	Sun, 26 Dec 2010 12:17:14 -0800 (PST)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id q58sm8287418eeh.3.2010.12.26.12.17.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 26 Dec 2010 12:17:13 -0800 (PST)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Tracer-Id: 200691658758270281
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: angstrom-2010.x : gnome-power-manager-2.30.0-r0: libtool: Command not found
+Date: Sun, 26 Dec 2010 21:17:07 +0100
+Message-Id: <1293394627-21453-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] cpan_build.bbclass; added cc and ld flags to the perl Build.PL invocation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,45 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Dec 2010 08:54:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 26 Dec 2010 20:19:15 -0000
 
-Hi,
+Without these gcc would be used which resolves to /usr/bin/gcc
+and one gets an intel exe.
+This showed up with libparams-validate-perl and libdatetime-perl
+The LDFLAGS are added to resolve the GNU_HASH QA error
 
-MACHINE=beagleboard
-DISTRO=angstrom-2010.x
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
+ classes/cpan_build.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-error log :
-NOTE: make
-make  all-recursive
-make[1]: Entering directory 
-`/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/work/armv7a-angs
-trom-linux-gnueabi/gnome-power-manager-2.30.0-r0/gnome-power-manager-2.30.0'
-Making all in src
-make[2]: Entering directory 
-`/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/work/armv7a-angs
-trom-linux-gnueabi/gnome-power-manager-2.30.0-r0/gnome-power-manager-2.30.0/src'
-libtool --mode=execute dbus-binding-tool	\
-		--prefix=gpm_manager			\
-		--mode=glib-server			\
-		--output=org.gnome.PowerManager.h	\
-		./org.gnome.PowerManager.xml
-make[2]: libtool: Command not found
-make[2]: *** [org.gnome.PowerManager.h] Error 127
-make[2]: Leaving directory 
-`/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/work/armv7a-angst
-rom-linux-gnueabi/gnome-power-manager-2.30.0-r0/gnome-power-manager-2.30.0/src'
-make[1]: *** [all-recursive] Error 1
-make[1]: Leaving directory 
-`/home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/work/armv7a-angst
-rom-linux-gnueabi/gnome-power-manager-2.30.0-r0/gnome-power-manager-2.30.0'
-make: *** [all] Error 2
-FATAL: oe_runmake failed
-ebenard@eukrea-desktop:~/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/work/armv7a-angstrom-linux-gnueabi/gnome-power-manager-2.30.0-r0/temp$ 
-more log.do_compile.*
+diff --git a/classes/cpan_build.bbclass b/classes/cpan_build.bbclass
+index 37f430d..070e061 100644
+--- a/classes/cpan_build.bbclass
++++ b/classes/cpan_build.bbclass
+@@ -26,7 +26,7 @@ cpan_build_do_configure () {
+ 		# build for target
+ 		. ${STAGING_LIBDIR}/perl/config.sh
+ 		perl Build.PL --installdirs vendor \
+-		        --config cc="${CC}" --config ld="${CCLD}" \
++		        --config cc="${CC} ${LDFLAGS}" --config ld="${CCLD} ${LDFLAGS}" \
+ 			--destdir ${D} \
+ 			--install_path lib="${datadir}/perl5" \
+ 			--install_path arch="${libdir}/perl5" \
+-- 
+1.7.1
 
-
-Eric
 
 
