@@ -1,35 +1,41 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PXGdA-0007eY-1h
+	(envelope-from <raj.khem@gmail.com>) id 1PXGnU-0007j7-A6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Dec 2010 18:13:08 +0100
-Received: by ewy28 with SMTP id 28so1099537ewy.6
+	Mon, 27 Dec 2010 18:23:51 +0100
+Received: by pvd12 with SMTP id 12so1729072pvd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Dec 2010 09:11:15 -0800 (PST)
+	Mon, 27 Dec 2010 09:21:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=eyHvczBxHxhSiEJZVhQQ++vPfre7qG6nIeh7luQ3MdE=;
-	b=Rxaa4n1snIktDJpxjcwlkCeNKNS2HWriBIySqPrjpAALixYXquzwlv1+eC7rQZcwVw
-	+yGsD7VVc8zBFa7uNQX2Md+p1VoamJ63zWSl2Ptpr2QCLWWe5PQBOT4u0doGAtBzkyOV
-	yslBMdVcrPOaMJgsJwjHXQgrDXqF4pjkYSn3U=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=bPHRr5LH9XMjOBUGhyRHypBEKFboRnwRry/ZOdwKByc=;
+	b=Fbow9J2jCFXDbaA+oD34W8zA91+w1CZiAAe0hjrwhQbL7IB6HNx6tau+gi5WFXiu32
+	WIg9YDXWNHKdZo4V28tTM+YkAhtVgoEmnlnQITJpDbhyjeGSBINAZ3IsFPvlXFFbWNfh
+	cmYx6umv8K9+6tDAJO7uQZ546Cyx6AWh58ycE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=TjrdQceVIudk1aApJJmpVk9yDST/C7ooEnVfjCAh8EeauHVCpWybqTSj3XjZS+8Mdt
-	p2awwTz5N5TWzReiNf2YXglsP8fGqqjyOUPONmgyIsGP/VePLpc6Ftu+PVb6z/NjzQgY
-	3Iwq0+ObzvguSdprGMRNSb/qKgFSftrcyqEtY=
-Received: by 10.213.104.136 with SMTP id p8mr9910932ebo.59.1293469874869;
-	Mon, 27 Dec 2010 09:11:14 -0800 (PST)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id x54sm9008191eeh.23.2010.12.27.09.11.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 27 Dec 2010 09:11:13 -0800 (PST)
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=Oj6jCLtt2KsQf++F7KbIoQ+ToRb4q3Vq4fDED4/dRq0pDtnBKo5RzknZmfP0LHpe/V
+	ncyAVmP1eRGqKtqtYP9LnF5HJdURhc6iJpOGfSTf3/KeYfFOHngX+3Bq0FurjQm4/UVf
+	kC9oW4dV+12mpfQlaqaTQ7GNfEwY8D2+Cx3+I=
+Received: by 10.142.134.4 with SMTP id h4mr10170808wfd.4.1293470092458;
+	Mon, 27 Dec 2010 09:14:52 -0800 (PST)
+Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id b11sm17952734wff.21.2010.12.27.09.14.50
+	(version=SSLv3 cipher=RC4-MD5); Mon, 27 Dec 2010 09:14:51 -0800 (PST)
+Message-ID: <4D18C988.5030701@gmail.com>
+Date: Mon, 27 Dec 2010 09:14:48 -0800
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Dec 2010 18:11:07 +0100
-Message-Id: <1293469867-18737-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH v3] cpan_build.bbclass; added cc and ld flags to the perl Build.PL invocation
+References: <E1PXBjV-00008M-00.nyrl-mail-ru@f68.mail.ru>
+In-Reply-To: <E1PXBjV-00008M-00.nyrl-mail-ru@f68.mail.ru>
+Subject: Re: qmake_base.bbclass patch to lookup for *.pro within ${S} instead of ${B}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Dec 2010 17:13:08 -0000
+X-List-Received-Date: Mon, 27 Dec 2010 17:23:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Without these gcc would be used which resolves to /usr/bin/gcc
-and one gets an intel exe.
-This showed up with libparams-validate-perl and libdatetime-perl
-The LDFLAGS are added to resolve the GNU_HASH QA error
+On 12/27/2010 3:59 AM, Denis Dydychkin wrote:
+>
+> qmake_base.bbclass from release-2010.12 has ability to lookup for QMAKE_PROFILES if none specified by recipe. Unfortunately it does that in ${B} directory instead of ${S}, thus it does not work if they differ.
+>
 
-Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- classes/cpan_build.bbclass     |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+seems ok to me.Wait for qmake expert to comment.
 
-diff --git a/classes/cpan_build.bbclass b/classes/cpan_build.bbclass
-index d1bbc4f..070e061 100644
---- a/classes/cpan_build.bbclass
-+++ b/classes/cpan_build.bbclass
-@@ -26,6 +26,7 @@ cpan_build_do_configure () {
- 		# build for target
- 		. ${STAGING_LIBDIR}/perl/config.sh
- 		perl Build.PL --installdirs vendor \
-+		        --config cc="${CC} ${LDFLAGS}" --config ld="${CCLD} ${LDFLAGS}" \
- 			--destdir ${D} \
- 			--install_path lib="${datadir}/perl5" \
- 			--install_path arch="${libdir}/perl5" \
+> Here is suggested patch:
+>
+>
+> --- a/classes/qmake_base.bbclass
+> +++ b/classes/qmake_base.bbclass
+> @@ -61,7 +61,7 @@ qmake_base_do_configure() {
+>   	oenote "using qmake spec in ${QMAKESPEC}, using profiles '${QMAKE_PROFILES}'"
+>
+>   	if [ -z "${QMAKE_PROFILES}" ]; then
+> -		PROFILES="`ls *.pro`"
+> +		PROFILES="`ls ${S}/*.pro`"
+>   	else
+>   		PROFILES="${QMAKE_PROFILES}"
+>   	fi
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
