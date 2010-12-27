@@ -1,41 +1,34 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PXGnU-0007j7-A6
+	(envelope-from <bgamari.foss@gmail.com>) id 1PXIPG-0000zd-WC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Dec 2010 18:23:51 +0100
-Received: by pvd12 with SMTP id 12so1729072pvd.6
+	Mon, 27 Dec 2010 20:06:59 +0100
+Received: by qyk8 with SMTP id 8so9289717qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Dec 2010 09:21:50 -0800 (PST)
+	Mon, 27 Dec 2010 11:06:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=bPHRr5LH9XMjOBUGhyRHypBEKFboRnwRry/ZOdwKByc=;
-	b=Fbow9J2jCFXDbaA+oD34W8zA91+w1CZiAAe0hjrwhQbL7IB6HNx6tau+gi5WFXiu32
-	WIg9YDXWNHKdZo4V28tTM+YkAhtVgoEmnlnQITJpDbhyjeGSBINAZ3IsFPvlXFFbWNfh
-	cmYx6umv8K9+6tDAJO7uQZ546Cyx6AWh58ycE=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=Zd9OTy5TAsbzAJYVfTQEvsUDg0vqa1IGXiY1TgY32NY=;
+	b=T/gzdBScTcf2JJfDddtyNWw9h7vewh+CRpUaONPrAAttzm76cZk5SbD5CvTSs0hFxv
+	iKa5RV7tF3t03YolTOWGI2CuhO8ErMfWU8Tiy/hJ17HnN8N9UNgwYcQ10OwzYMbuzbU8
+	KuqTAxczlnWXJYj4WS6AE9aOXMa0uHIzEKuqg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=Oj6jCLtt2KsQf++F7KbIoQ+ToRb4q3Vq4fDED4/dRq0pDtnBKo5RzknZmfP0LHpe/V
-	ncyAVmP1eRGqKtqtYP9LnF5HJdURhc6iJpOGfSTf3/KeYfFOHngX+3Bq0FurjQm4/UVf
-	kC9oW4dV+12mpfQlaqaTQ7GNfEwY8D2+Cx3+I=
-Received: by 10.142.134.4 with SMTP id h4mr10170808wfd.4.1293470092458;
-	Mon, 27 Dec 2010 09:14:52 -0800 (PST)
-Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id b11sm17952734wff.21.2010.12.27.09.14.50
-	(version=SSLv3 cipher=RC4-MD5); Mon, 27 Dec 2010 09:14:51 -0800 (PST)
-Message-ID: <4D18C988.5030701@gmail.com>
-Date: Mon, 27 Dec 2010 09:14:48 -0800
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
-MIME-Version: 1.0
+	h=from:to:subject:date:message-id:x-mailer;
+	b=OV/NIP/5D9a3bILZVnPSQzgmPAMNfwSMz1e2f/qxKmAw4auiyHjMFfu2QoT3U800tr
+	BKXawovRb/bisKn10uLE836fE/5fEXFkxehyVGWT9p6oUTvuPNkb88mfiiwTlrFvYDR9
+	U0igtTwh5t+grpFPQHnE8AZvajGDViXAimPzg=
+Received: by 10.224.2.79 with SMTP id 15mr12049981qai.177.1293476391551;
+	Mon, 27 Dec 2010 10:59:51 -0800 (PST)
+Received: from ben-laptop (c-24-61-223-13.hsd1.nh.comcast.net [24.61.223.13])
+	by mx.google.com with ESMTPS id p13sm7119717qcu.5.2010.12.27.10.59.50
+	(version=SSLv3 cipher=RC4-MD5); Mon, 27 Dec 2010 10:59:51 -0800 (PST)
+From: Ben Gamari <bgamari.foss@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <E1PXBjV-00008M-00.nyrl-mail-ru@f68.mail.ru>
-In-Reply-To: <E1PXBjV-00008M-00.nyrl-mail-ru@f68.mail.ru>
-Subject: Re: qmake_base.bbclass patch to lookup for *.pro within ${S} instead of ${B}
+Date: Mon, 27 Dec 2010 13:59:44 -0500
+Message-Id: <1293476385-7289-1-git-send-email-bgamari.foss@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: Python 2.7.1 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,38 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Dec 2010 17:23:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Dec 2010 19:07:00 -0000
 
-On 12/27/2010 3:59 AM, Denis Dydychkin wrote:
->
-> qmake_base.bbclass from release-2010.12 has ability to lookup for QMAKE_PROFILES if none specified by recipe. Unfortunately it does that in ${B} directory instead of ${S}, thus it does not work if they differ.
->
 
-seems ok to me.Wait for qmake expert to comment.
+I spent a few hours over the last few days forward porting the python 2.6
+recipes to 2.7.1. At this point I can build both python-native and python on
+for my ARM target. I don't have time or access to hardware at the moment so I
+can't test the produce binaries but I figured I'd send this out in the name of
+release early, release often.
 
-> Here is suggested patch:
->
->
-> --- a/classes/qmake_base.bbclass
-> +++ b/classes/qmake_base.bbclass
-> @@ -61,7 +61,7 @@ qmake_base_do_configure() {
->   	oenote "using qmake spec in ${QMAKESPEC}, using profiles '${QMAKE_PROFILES}'"
->
->   	if [ -z "${QMAKE_PROFILES}" ]; then
-> -		PROFILES="`ls *.pro`"
-> +		PROFILES="`ls ${S}/*.pro`"
->   	else
->   		PROFILES="${QMAKE_PROFILES}"
->   	fi
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+If someone has the time and inclination to test this, I'm sure it would be
+appreciated. I believe the 2.7 series should be API compatible with 2.6, so all
+of the existing extensions should work unmodified. Are there any other barriers
+to merging that I haven't thought of?
+
+Has anyone thought about how we are going to handle python 2/3 coexistence? Or,
+even better, has anyone looked into putting together some recipes? 
+
+Cheers,
+
+- Ben
 
 
 
