@@ -1,35 +1,34 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PXKty-0003HN-FW
+	(envelope-from <bgamari.foss@gmail.com>) id 1PXMVA-0004pM-63
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Dec 2010 22:46:47 +0100
-Received: by iwn8 with SMTP id 8so9264858iwn.6
+	Tue, 28 Dec 2010 00:29:16 +0100
+Received: by qyk8 with SMTP id 8so9443757qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Dec 2010 13:46:21 -0800 (PST)
+	Mon, 27 Dec 2010 15:28:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=DAckvUxJCctQcj0bZy6pZztFA3mrzvNH5FeTBtye3CA=;
-	b=T1/ntvo1fB2djUciHb4kTOqw3ZPR8SIyuba/6+iVPqPSl8hsD/P+RnlzSZFqR/C+5v
-	kcQoCRagz5Yr/9mBhgcZsIv5cqdbw7bWj85HbksJQxh4x/ttK+vzMqPC7O3muIqkYa2p
-	/pML1hzF8+n8E7PvHhUelqyU03MPAkDaJIG6c=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=BpSw5ewGr+6ly0+y56KBw+ehJmMK6aXoj+oLC7Cp+cI=;
+	b=hWOqTMuzWmyblf4zrhEtm5axeD1OkgX+eT0SZjx/wMaEiANT+L2XYJI6ScysRAKznx
+	LHhQgCMuGCuiraThlgh5cpS6nHP6gSoTM1VPMmY3oO7WUShOjiTmA3bFe5NqlNv07+fQ
+	8oTiS0zqKktnDrpHHM2dfn2bUdF2pneLFo4Gc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=pR5/KjP7hLHP7oYg4UXcJQ4kOq9v/AODSTqJU9fB0hMDu6ADyQNxBZJTIy6WBwiMGj
-	f9FYcrcLWj2LivdNqsMKUXcogU3jm9fe7o2GSwPSpdlpD24h4jLR+9hIvfYg4qZ5tSO4
-	a02MjErlR+lbopmsXIvMOZI7cikQCxe7ALc7k=
-MIME-Version: 1.0
-Received: by 10.231.31.1 with SMTP id w1mr12847977ibc.7.1293486381539; Mon, 27
-	Dec 2010 13:46:21 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Mon, 27 Dec 2010 13:46:21 -0800 (PST)
-In-Reply-To: <1293476385-7289-1-git-send-email-bgamari.foss@gmail.com>
-References: <1293476385-7289-1-git-send-email-bgamari.foss@gmail.com>
-Date: Mon, 27 Dec 2010 22:46:21 +0100
-Message-ID: <AANLkTinJOUZtpiQowkHH6CHs1wdoMXrobNR_Qb9StxM6@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:subject:date:message-id:x-mailer;
+	b=DREtTceuBYXMceNSfl/QARZBORCxXGVSbdKX47A9y0e8HZ7uZLrBmsXe/Yq92xuZpK
+	2WTNLivpyLYryOhlxNw/SjhrHL7g20k300P5wc/7NMtQpxoEPz6waNh127ISDHDlB42X
+	GmV9Xvt5rbRfXOqwgdbaNYw7dUxGeDz0cm6LA=
+Received: by 10.229.187.196 with SMTP id cx4mr11452670qcb.178.1293492489262;
+	Mon, 27 Dec 2010 15:28:09 -0800 (PST)
+Received: from ben-laptop (c-24-61-223-13.hsd1.nh.comcast.net [24.61.223.13])
+	by mx.google.com with ESMTPS id t7sm6133841qcs.40.2010.12.27.15.28.08
+	(version=SSLv3 cipher=RC4-MD5); Mon, 27 Dec 2010 15:28:08 -0800 (PST)
+From: Ben Gamari <bgamari.foss@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Python 2.7.1 support
+Date: Mon, 27 Dec 2010 18:28:03 -0500
+Message-Id: <1293492484-13523-1-git-send-email-bgamari.foss@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: Boost 1.45
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Dec 2010 21:46:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 27 Dec 2010 23:29:16 -0000
 
-2010/12/27 Ben Gamari <bgamari.foss@gmail.com>:
->
-> I spent a few hours over the last few days forward porting the python 2.6
-> recipes to 2.7.1. At this point I can build both python-native and python on
-> for my ARM target. I don't have time or access to hardware at the moment so I
-> can't test the produce binaries but I figured I'd send this out in the name of
-> release early, release often.
->
-> If someone has the time and inclination to test this, I'm sure it would be
-> appreciated. I believe the 2.7 series should be API compatible with 2.6, so all
-> of the existing extensions should work unmodified. Are there any other barriers
-> to merging that I haven't thought of?
->
-> Has anyone thought about how we are going to handle python 2/3 coexistence? Or,
-> even better, has anyone looked into putting together some recipes?
->
-> Cheers,
->
-> - Ben
 
-What about sending a patch for this (with DEFAULT_PREFERENCE = "-1" as
-it is not tested).
-That at least gives others the possibility to peek into it.
+For a long time, the newest version of boost in openembedded has been 1.41,
+released over two years ago. As far as I can tell, the reason for this is that
+the recipe uses the cmake branch, which has been stagnant for the last several
+years. The reason for this is that the build system used by boost, bjam, is a
+travesty at best and a crime against packagers for the most (see the comment in
+the existing boost.inc for another poor soul's thoughts on the matter). Over
+the last few days, I've been trying to bring my embedded environment up-to-date
+with the current openembedded tree.  Unfortunately, as it turns out boost 1.41
+has some serious issues with gcc 4.5.
 
-Frans
+After quite a few exchanges with the boost folks and many hours of frustration,
+I think I finally have a working recipe. I'd appreciate it if people could try
+this and perhaps give some feedback. I can successfully build the package, but
+given the quirky nature of the build system it seems likely someone will find
+some configuration-specific issues.
+
+Thanks,
+
+- Ben
+
 
 
