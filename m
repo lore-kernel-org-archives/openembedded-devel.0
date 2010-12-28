@@ -1,37 +1,37 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bgamari.foss@gmail.com>) id 1PXbst-0006KH-4K
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PXeND-0000qW-27
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Dec 2010 16:55:39 +0100
-Received: by qyk36 with SMTP id 36so9196370qyk.6
+	Tue, 28 Dec 2010 19:34:16 +0100
+Received: by iwn8 with SMTP id 8so9931323iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Dec 2010 07:53:34 -0800 (PST)
+	Tue, 28 Dec 2010 10:33:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=hmUcPj5jeegdYuBKLCg/kLH0woAE8QsL4p9PWkmEU34=;
-	b=RjJiyHYpADMwMLY/QWlzvLdmAQD0zfnN8tGGLo7lngc/Au+Skvo+V/h9D6fUATWTid
-	p/G0sT94WaQXLx27vh56UqpfXM5uc7c03aVixB82J6lV1qhpRYQgM3EdQGovJTLJV9xB
-	fX5llC+6eUm/n1G+fo6tchUfWUCtG+4wvnew0=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=KF2/biDo3UcjGfQblFbJWB81s6naPM9iTtMx+g5XjCA=;
+	b=dWQ+cwXIVP8PWKq2pFk+lmMLuIktlfA+20D5/yY7SVIfYSseq091oDl4rzHnd0kj1P
+	uX9cFEyjCO2MyIBt9q+SFIhzgue9pFk6QBKamgiGSmEyDilsjhO1mn/wET3BA/pHzjnJ
+	L1o/4Yl7LLZpDvIK4xfsi96XT5QtXbFygj2AA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=utlJA/RZsgXLmMMNh09PiwmVRkp9CI2WmqwoLhMKW5D2gDSkaoSSuHboXVYTOoVEgc
-	TYwAp8zsPgeBZyQ21JDbJUtykyC8qZ264L6FwMWC7b82LvtWwWDzE8KurGKhRdWQYUe9
-	nExMKbxDTjacnmRWLqqOceUjuRqm6JgqWJnFU=
-Received: by 10.224.185.129 with SMTP id co1mr12850945qab.232.1293547784556;
-	Tue, 28 Dec 2010 06:49:44 -0800 (PST)
-Received: from ben-laptop (c-24-61-223-13.hsd1.nh.comcast.net [24.61.223.13])
-	by mx.google.com with ESMTPS id
-	e29sm7681766qck.15.2010.12.28.06.49.43
-	(version=SSLv3 cipher=RC4-MD5); Tue, 28 Dec 2010 06:49:43 -0800 (PST)
-From: Ben Gamari <bgamari.foss@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Zf6INxfxtbDB/CQryABafygkwlvJNELYqMZQkevOA6LlU258YHvn74YfCrStqG2sxQ
+	3OPaGzRT6/n5qrgTUvxlvlvdyrK9U6h4zo8IaCZGJ/1KWIcX533MgVkmmsvcr6EePG+8
+	4k/Gztbm/qlZ2kgmgXIkqX4GpsFraPhdKz/SI=
+MIME-Version: 1.0
+Received: by 10.231.39.199 with SMTP id h7mr13476126ibe.157.1293560619434;
+	Tue, 28 Dec 2010 10:23:39 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Tue, 28 Dec 2010 10:23:39 -0800 (PST)
+In-Reply-To: <201012272236.01404.roman@khimov.ru>
+References: <1293469867-18737-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<201012272236.01404.roman@khimov.ru>
+Date: Tue, 28 Dec 2010 19:23:39 +0100
+Message-ID: <AANLkTi=P_dKFv4JiyU8_g_EoLK_Zn+HvNtVfUEccTA56@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Dec 2010 09:49:22 -0500
-Message-Id: <1293547762-30837-1-git-send-email-bgamari.foss@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <AANLkTin-A9NjN_heXGtk1k=9WTrKPoaAa0i=bP5B41zU@mail.gmail.com>
-References: <AANLkTin-A9NjN_heXGtk1k=9WTrKPoaAa0i=bP5B41zU@mail.gmail.com>
-Subject: [PATCH] boost: Initial commit of 1.45.0
+Subject: Re: [PATCH v3] cpan_build.bbclass; added cc and ld flags to the perl Build.PL invocation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,245 +45,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Dec 2010 15:55:39 -0000
+X-List-Received-Date: Tue, 28 Dec 2010 18:34:16 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
----
- .../01-fix-default-python-config.patch             |   29 ++++
- recipes/boost/boost-with-bjam.inc                  |  164 ++++++++++++++++++++
- recipes/boost/boost_1.45.0.bb                      |   15 ++
- 3 files changed, 208 insertions(+), 0 deletions(-)
- create mode 100644 recipes/boost/boost-1.45.0/01-fix-default-python-config.patch
- create mode 100644 recipes/boost/boost-with-bjam.inc
- create mode 100644 recipes/boost/boost_1.45.0.bb
+2010/12/27 Roman I Khimov <roman@khimov.ru>:
+> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB =
+27 =C4=C5=CB=C1=C2=D2=D1 2010 20:11:07 =C1=D7=D4=CF=D2 Frans Meulenbroeks =
+=CE=C1=D0=C9=D3=C1=CC:
+>> Without these gcc would be used which resolves to /usr/bin/gcc
+>> and one gets an intel exe.
+>> This showed up with libparams-validate-perl and libdatetime-perl
+>> The LDFLAGS are added to resolve the GNU_HASH QA error
+>>
+>> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>> ---
+>> =9Aclasses/cpan_build.bbclass =9A =9A | =9A =9A1 +
+>> =9A1 files changed, 1 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/classes/cpan_build.bbclass b/classes/cpan_build.bbclass
+>> index d1bbc4f..070e061 100644
+>> --- a/classes/cpan_build.bbclass
+>> +++ b/classes/cpan_build.bbclass
+>> @@ -26,6 +26,7 @@ cpan_build_do_configure () {
+>> =9A =9A =9A =9A =9A =9A =9A # build for target
+>> =9A =9A =9A =9A =9A =9A =9A . ${STAGING_LIBDIR}/perl/config.sh
+>> =9A =9A =9A =9A =9A =9A =9A perl Build.PL --installdirs vendor \
+>> + =9A =9A =9A =9A =9A =9A =9A =9A =9A =9A --config cc=3D"${CC} ${LDFLAGS=
+}" --config ld=3D"${CCLD} ${LDFLAGS}"
+>> =9A\ --destdir ${D} \
+>> =9A =9A =9A =9A =9A =9A =9A =9A =9A =9A =9A --install_path lib=3D"${data=
+dir}/perl5" \
+>> =9A =9A =9A =9A =9A =9A =9A =9A =9A =9A =9A --install_path arch=3D"${lib=
+dir}/perl5" \
+>>
+>
+> Seems strange to me. ${STAGING_LIBDIR}/perl/config.sh for example:
+>
+> rik@kettle:oe-arm$ cat tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/li=
+b/perl/config.sh | grep -E "^(cc=3D|ld=3D|ldflags=3D)"
+> cc=3D"arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s=
+ -mthumb-interwork -mno-thumb"
+> ld=3D"arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s=
+ -mthumb-interwork -mno-thumb"
+> ldflags=3D"-L/storage/work/oe/oe-arm/tmp/sysroots/armv5te-angstrom-linux-=
+gnueabi/usr/lib -Wl,-rpath-link,/storage/work/oe/oe-arm/tmp/sysroots/armv5t=
+e-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu"
 
-diff --git a/recipes/boost/boost-1.45.0/01-fix-default-python-config.patch b/recipes/boost/boost-1.45.0/01-fix-default-python-config.patch
-new file mode 100644
-index 0000000..de7ff36
---- /dev/null
-+++ b/recipes/boost/boost-1.45.0/01-fix-default-python-config.patch
-@@ -0,0 +1,29 @@
-+Index: boost_1_45_0/tools/build/v2/tools/python.jam
-+===================================================================
-+--- boost_1_45_0.orig/tools/build/v2/tools/python.jam	2010-12-27 16:10:56.340207790 -0500
-++++ boost_1_45_0/tools/build/v2/tools/python.jam	2010-12-27 16:11:53.751709203 -0500
-+@@ -806,11 +806,7 @@
-+     }
-+ 
-+     # Anything left to compute?
-+-    if $(includes) && $(libraries)
-+-    {
-+-        .configured = true ;
-+-    }
-+-    else
-++    if ! $(includes) || ! $(libraries)
-+     {
-+         version ?= $(fallback-version) ;
-+         version ?= 2.5 ;
-+@@ -818,6 +814,11 @@
-+         compute-default-paths $(target-os) : $(version) : $(prefix:E=) ;
-+     }
-+ 
-++    if $(includes) && $(libraries)
-++    {
-++        .configured = true ;
-++    }
-++
-+     if ! $(interpreter-cmd)
-+     {
-+         fallback-cmd ?= python ;
-diff --git a/recipes/boost/boost-with-bjam.inc b/recipes/boost/boost-with-bjam.inc
-new file mode 100644
-index 0000000..ac6f485
---- /dev/null
-+++ b/recipes/boost/boost-with-bjam.inc
-@@ -0,0 +1,164 @@
-+# The Boost web site provides free peer-reviewed portable
-+# C++ source libraries. The emphasis is on libraries which
-+# work well with the C++ Standard Library. The libraries are
-+# intended to be widely useful, and are in regular use by
-+# thousands of programmers across a broad spectrum of applications.
-+
-+# This recipe is for building Boost versions > 1.45, where bjam has been merged
-+# into the Boost tree.
-+
-+DESCRIPTION = "Free peer-reviewed portable C++ source libraries"
-+HOMEPAGE = "http://www.boost.org/"
-+SECTION = "libs"
-+DEPENDS = "zlib icu"
-+PRIORITY = "optional"
-+LICENSE = "Boost Software License"
-+INC_PR = "r9"
-+
-+BOOST_VER = "${@"_".join(bb.data.getVar("PV",d,1).split("."))}"
-+BOOST_MAJ = "${@"_".join(bb.data.getVar("PV",d,1).split(".")[0:2])}"
-+BOOST_P = "boost_${BOOST_VER}"
-+
-+S = "${WORKDIR}/${BOOST_P}"
-+
-+# Make a package for each library, plus -dev and -python
-+PACKAGES = "${PN}-dbg"
-+BOOSTLIBS = ""
-+
-+PACKAGES += "boost-date-time"
-+FILES_boost-date-time = "${libdir}/libboost_date_time.so.${PV}"
-+
-+BOOSTLIBS += "boost-filesystem"
-+FILES_boost-filesystem = "${libdir}/libboost_filesystem.so.${PV}"
-+
-+BOOSTLIBS += "boost-prg-exec-monitor"
-+FILES_boost-prg-exec-monitor = "${libdir}/libboost_prg_exec_monitor.so.${PV}"
-+
-+BOOSTLIBS += "boost-program-options"
-+FILES_boost-program-options = "${libdir}/libboost_program_options.so.${PV}"
-+
-+BOOSTLIBS += "boost-regex"
-+FILES_boost-regex = "${libdir}/libboost_regex.so.${PV}"
-+
-+BOOSTLIBS += "boost-signals"
-+FILES_boost-signals = "${libdir}/libboost_signals.so.${PV}"
-+
-+BOOSTLIBS += "boost-test-exec-monitor"
-+FILES_boost-test-exec-monitor = "${libdir}/libboost_test_exec_monitor.so.${PV}"
-+
-+BOOSTLIBS += "boost-thread-mt"
-+FILES_boost-thread-mt = "${libdir}/libboost_thread-mt.so.${PV}"
-+
-+BOOSTLIBS += "boost-unit-test-framework"
-+FILES_boost-unit-test-framework = "${libdir}/libboost_unit_test_framework.so.${PV}"
-+
-+BOOSTLIBS += "boost-iostreams"
-+FILES_boost-iostreams = "${libdir}/libboost_iostreams.so.${PV}"
-+
-+BOOSTLIBS += "boost-serialization"
-+FILES_boost-serialization = "${libdir}/libboost_serialization.so.${PV}"
-+
-+BOOSTLIBS += "boost-wserialization"
-+FILES_boost-wserialization = "${libdir}/libboost_wserialization.so.${PV}"
-+
-+# Python - remove this and set:
-+#PYTHON_ROOT = "/dev/null"
-+# to remove the python build
-+DEPENDS += "python"
-+PYTHON_ROOT = "${STAGING_DIR_HOST}/${layout_prefix}"
-+PYTHON_VERSION = "2.6"
-+
-+BOOSTLIBS += "boost-python"
-+FILES_boost-python = "${libdir}/libboost_python.so.${PV}"
-+
-+PACKAGES += "${BOOSTLIBS}"
-+
-+# -dev last to pick up the remaining stuff
-+PACKAGES += "${PN}-dev"
-+FILES_${PN}-dev = "${includedir} ${libdir}/libboost_*.so ${libdir}/libboost_*.a"
-+
-+# "boost" is a metapackage which pulls in all boost librabries
-+PACKAGES += "${PN}"
-+RRECOMMENDS_${PN} += "${BOOSTLIBS}"
-+
-+# to avoid GNU_HASH QA errors added LDFLAGS to ARCH; a little bit dirty but at least it works
-+TARGET_CC_ARCH += " ${LDFLAGS}" 
-+
-+# Oh yippee, a new build system, it's sooo cooool I could eat my own
-+# foot.  inlining=on lets the compiler choose, I think.  At least this
-+# stuff is documented...
-+# NOTE: if you leave <debug-symbols>on then in a debug build the build sys
-+# objcopy will be invoked, and that won't work.  Building debug apparently
-+# requires hacking gcc-tools.jam
-+#
-+# Sometimes I wake up screaming.  Famous figures are gathered in the nightmare,
-+# Steve Bourne, Larry Wall, the whole of the ANSI C committee.  They're just
-+# standing there, waiting, but the truely terrifying thing is what they carry
-+# in their hands.  At first sight each seems to bear the same thing, but it is
-+# not so for the forms in their grasp are ever so slightly different one from
-+# the other.  Each is twisted in some grotesque way from the other to make each
-+# an unspeakable perversion impossible to perceive without the onset of madness.
-+# True insanity awaits anyone who perceives all of these horrors together.
-+#
-+# Quotation marks, there might be an easier way to do this, but I can't find
-+# it.  The problem is that the user.hpp configuration file must receive a
-+# pre-processor macro defined as the appropriate string - complete with "'s
-+# around it.  (<> is a possibility here but the danger to that is that the
-+# failure case interprets the < and > as shell redirections, creating
-+# random files in the source tree.)
-+#
-+#bjam: '-DBOOST_PLATFORM_CONFIG=\"config\"'
-+#do_compile: '-sGCC=... '"'-DBOOST_PLATFORM_CONFIG=\"config\"'"
-+SQD = '"'
-+EQD = '\"'
-+#boost.bb:   "...  '-sGCC=... '${SQD}'-DBOOST_PLATFORM_CONFIG=${EQD}config${EQD}'${SQD} ..."
-+BJAM_CONF = "${SQD}'-DBOOST_PLATFORM_CONFIG=${EQD}boost/config/platform/${TARGET_OS}.hpp${EQD}'${SQD}"
-+
-+BJAM_TOOLS   = "--layout=system \
-+                --toolset=gcc-target \
-+                -sICU_PATH=${STAGING_DIR_TARGET} \
-+		'-sGCC_INCLUDE_DIRECTORY=${STAGING_INCDIR}' \
-+		'-sGCC_STDLIB_DIRECTORY=${STAGING_LIBDIR}' \
-+                "
-+
-+BJAM_OPTS    = '${BJAM_TOOLS} \
-+		--builddir=${S}/${TARGET_SYS} \
-+		${BJAM_EXTRA} \
-+                ${PARALLEL_MAKE}'
-+
-+
-+do_configure_prepend() {
-+	cp -f boost/config/platform/linux.hpp boost/config/platform/linux-gnueabi.hpp
-+        echo "using gcc : host : ${HOST_CXX} : <cxxflags>${HOST_CFLAGS} ${HOST_CXXFLAGS} <linkflags>${HOST_LDFLAGS} ;" >> tools/build/v2/user-config.jam
-+        echo "using gcc : target : ${CXX} : <cxxflags>${CFLAGS} ${CXXFLAGS} <linkflags>${LDFLAGS} ;" >> tools/build/v2/user-config.jam
-+        echo "using python : ${PYTHON_VERSION} : : ${STAGING_INCDIR}/python${PYTHON_VERSION} ;" >> tools/build/v2/user-config.jam
-+
-+        CC="${BUILD_CC}" CFLAGS="${BUILD_CFLAGS}" ./bootstrap.sh --with-toolset=gcc
-+        sed -i '/^using python/d' project-config.jam
-+}
-+
-+do_compile() {
-+	set -ex
-+	./bjam -d2 ${BJAM_OPTS} --prefix=${prefix} \
-+		--exec-prefix=${exec_prefix} \
-+		--libdir=${libdir} \
-+		--includedir=${includedir} \
-+                --include=${STAGING_INCDIR} \
-+                --debug-configuration
-+}
-+
-+do_stage() {
-+	set -ex
-+	./bjam ${BJAM_OPTS} \
-+		--libdir=${STAGING_LIBDIR} \
-+		--includedir=${STAGING_INCDIR} \
-+		install
-+}
-+
-+do_install() {
-+	set -ex
-+	./bjam ${BJAM_OPTS} \
-+		--libdir=${D}${libdir} \
-+		--includedir=${D}${includedir} \
-+		install
-+}
-diff --git a/recipes/boost/boost_1.45.0.bb b/recipes/boost/boost_1.45.0.bb
-new file mode 100644
-index 0000000..ab4200a
---- /dev/null
-+++ b/recipes/boost/boost_1.45.0.bb
-@@ -0,0 +1,15 @@
-+require boost-with-bjam.inc
-+
-+PR = "${INC_PR}.1"
-+
-+SRC_URI = " \
-+  http://downloads.sourceforge.net/project/boost/boost/1.45.0/boost_1_45_0.tar.gz \
-+  file://01-fix-default-python-config.patch \
-+"
-+S = "${WORKDIR}/boost_1_45_0"
-+
-+SRC_URI[md5sum] = "739792c98fafb95e7a6b5da23a30062c"
-+SRC_URI[sha256sum] = "7cd7a327ebe0f43db829eccce024b7f3b0d9d4d382422d59dc710793d55c6a12"
-+
-+DEPENDS += " icu "
-+
--- 
-1.7.0.4
+Comparing notes: I have:
 
+frans@linux-suse:~/oe> cat
+tmp_minimal/sysroots/armv5te-oe-linux-gnueabi/usr/lib/perl/config.sh |
+grep -E "^(cc=3D|ld=3D|ldflags=3D)"
+cc=3D"arm-oe-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mthumb"
+ld=3D"arm-oe-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mthumb"
+ldflags=3D"-Wl,-O1 -Wl,--hash-style=3Dgnu"
+
+Note the different definition of ldflags. (no -L ) and the -mthumb
+versus -mno-thumb.
+
+Btw I am using libtool 2.4 with systool support (should that matter)
+
+>
+> Same definitions in Config_heavy. It should be working without that. I've
+
+Should I have this file in sysroots/armv5te....  ?
+I only have
+frans@linux-suse:~/oe/tmp_minimal/sysroots> find | grep heavy
+./i686-linux/usr/lib/perl/5.10.1/Config_heavy.pl
+./i686-linux/usr/lib/perl/5.10.1/utf8_heavy.pl
+./i686-linux/usr/lib/perl/5.10.1/Config_heavy-target.pl
+./i686-linux/usr/lib/perl/5.10.1/bytes_heavy.pl
+./armv5te-oe-linux-gnueabi/usr/share/mysql/my-innodb-heavy-4G.cnf
+./armv7a-oe-linux-gnueabi/usr/share/mysql/my-innodb-heavy-4G.cnf
+
+And Config_heavy.pl says:
+frans@linux-suse:~/oe/tmp_minimal/sysroots> grep -E
+"^(cc=3D|ld=3D|ldflags=3D)" ./i686-linux/usr/lib/perl/5.10.1/Config_heavy.p=
+l
+cc=3D'gcc '
+ld=3D'gcc '
+ldflags=3D'-L/home/frans/oe/tmp_minimal/sysroots/i686-linux/usr/lib
+-Wl,-rpath-link,/home/frans/oe/tmp_minimal/sysroots/i686-linux/usr/lib
+-Wl,-rpath,/home/frans/oe/tmp_minimal/sysroots/i686-linux/usr/lib
+-Wl,-O1 -fstack-protector -L/usr/local/lib'
+
+
+> just built it here for qemuarm (with Angstrom distro) and seems to be OK:
+>
+> rik@kettle:oe-arm$ ./tmp/sysroots/x86_64-linux/usr/armv5te/bin/arm-angstr=
+om-linux-gnueabi-objdump -f tmp/work/armv5te-angstrom-linux-gnueabi/libdate=
+time-perl-0.61-r1/image/usr/lib/perl5/auto/DateTime/DateTime.so
+>
+> tmp/work/armv5te-angstrom-linux-gnueabi/libdatetime-perl-0.61-r1/image/us=
+r/lib/perl5/auto/DateTime/DateTime.so: =9A =9A file format elf32-littlearm
+> architecture: arm, flags 0x00000150:
+> HAS_SYMS, DYNAMIC, D_PAGED
+> start address 0x00000c94
+>
+
+Will try a compile test later.
+
+Frans
 
 
