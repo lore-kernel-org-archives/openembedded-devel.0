@@ -1,24 +1,38 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roman@khimov.ru>) id 1PXemf-0001lC-8a
+	(envelope-from <raj.khem@gmail.com>) id 1PXeob-0001qh-JR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Dec 2010 20:00:33 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PXemQ-0003cc-Vh
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Dec 2010 22:00:20 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Dec 2010 22:00:14 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
-References: <1293469867-18737-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<201012272236.01404.roman@khimov.ru>
-	<AANLkTi=P_dKFv4JiyU8_g_EoLK_Zn+HvNtVfUEccTA56@mail.gmail.com>
-In-Reply-To: <AANLkTi=P_dKFv4JiyU8_g_EoLK_Zn+HvNtVfUEccTA56@mail.gmail.com>
+	Tue, 28 Dec 2010 20:02:33 +0100
+Received: by gwaa12 with SMTP id a12so1704260gwa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Dec 2010 11:02:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=hRxSCC8z4zWIj3C7E7QQHBxHCswjcr2zttSpI9IHhq8=;
+	b=qKpGvzdSgyKGwkAUN25sdhblPshaeb4p9pP/m0Gm1eostwtxO1ukCOLdpUZ6AhagFF
+	Hd42Oq8b153tBpXKV4JhJ6eScAx5tmhrzsaJugemgpJS2Hd6YN3/qx4liRdd46bLq3Ra
+	uSB0oyscnDh9ANdFbMrDK8f6jn7FCnbBN6vrA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=C7MIoisW3n7U9OU/2clTdKQZLQ1PV0tMfvHg9AW2C25ULHj8cSYMZtkIwJRnVbHi/b
+	yt2skVFzb8SHQK9kVGV+WxTQV4HKO77EHYBkw+74YSkP+gd5hvO58N2zIKyLdhHXb3cz
+	L8LCZip3rdvGO6llwLqH11uXvd/o6qnBhVZZk=
+Received: by 10.90.10.31 with SMTP id 31mr4564433agj.85.1293562937446; Tue, 28
+	Dec 2010 11:02:17 -0800 (PST)
 MIME-Version: 1.0
-Message-Id: <201012282200.18012.roman@khimov.ru>
-Subject: Re: [PATCH v3] cpan_build.bbclass; added cc and ld flags to the perl Build.PL invocation
+Received: by 10.90.86.4 with HTTP; Tue, 28 Dec 2010 11:01:57 -0800 (PST)
+In-Reply-To: <AANLkTimmk7wnCS66EUFu6=A+c9ckgse8ECRGLz+RD-mx@mail.gmail.com>
+References: <1293476385-7289-1-git-send-email-bgamari.foss@gmail.com>
+	<1293476385-7289-2-git-send-email-bgamari.foss@gmail.com>
+	<1293499083.2173.26.camel@saphir>
+	<AANLkTimmk7wnCS66EUFu6=A+c9ckgse8ECRGLz+RD-mx@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 28 Dec 2010 11:01:57 -0800
+Message-ID: <AANLkTikkEQF90jW6NvzsC8zBg5O2bo-FH4UAaubcJAKX@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] python: Initial commit of python 2.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,98 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Dec 2010 19:00:33 -0000
-X-Groupsio-MsgNum: 27545
-Content-Type: multipart/signed; boundary="nextPart2019149.eLBPp7AY5c";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Dec 2010 19:02:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
---nextPart2019149.eLBPp7AY5c
-Content-Type: Text/Plain;
-  charset="koi8-r"
-Content-Transfer-Encoding: quoted-printable
+On Tue, Dec 28, 2010 at 3:11 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Strange.
+> I see the patch on gmane, but it never made it into my mailbox (not
+> even the spam folder, also re-checked the trash).
+>
 
-=F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F7=D4=CF=D2=CE=C9=CB 28 =C4=C5=CB=
-=C1=C2=D2=D1 2010 21:23:39 =C1=D7=D4=CF=D2 Frans Meulenbroeks=20
-=CE=C1=D0=C9=D3=C1=CC:
-> 2010/12/27 Roman I Khimov <roman@khimov.ru>:
-> > rik@kettle:oe-arm$ cat
-> > tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib/perl/config.sh | gr=
-ep
-> > -E "^(cc=3D|ld=3D|ldflags=3D)" cc=3D"arm-angstrom-linux-gnueabi-gcc
-> > -march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb"
-> > ld=3D"arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej=
-=2Ds
-> > -mthumb-interwork -mno-thumb"
-> > ldflags=3D"-L/storage/work/oe/oe-arm/tmp/sysroots/armv5te-angstrom-linu=
-x-gn
-> >ueabi/usr/lib
-> > -Wl,-rpath-link,/storage/work/oe/oe-arm/tmp/sysroots/armv5te-angstrom-l=
-in
-> >ux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu"
->=20
-> Comparing notes: I have:
->=20
-> frans@linux-suse:~/oe> cat
-> tmp_minimal/sysroots/armv5te-oe-linux-gnueabi/usr/lib/perl/config.sh |
-> grep -E "^(cc=3D|ld=3D|ldflags=3D)"
-> cc=3D"arm-oe-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
-> -mthumb-interwork -mthumb"
-> ld=3D"arm-oe-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
-> -mthumb-interwork -mthumb"
-> ldflags=3D"-Wl,-O1 -Wl,--hash-style=3Dgnu"
->=20
-> Note the different definition of ldflags. (no -L ) and the -mthumb
-> versus -mno-thumb.
+somehow it did not get caught in patchwork as well. Please resend the
+the patch probably use git format-patch and git send-email
+as described in
+http://wiki.openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
 
-We might have different targets for thumb things (mine is qemuarm), but "-L=
-"=20
-difference seems suspicious (my test build is for 'angstrom-2008.1' if that=
-=20
-matters).
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-> Btw I am using libtool 2.4 with systool support (should that matter)
 
-Maybe, maybe. I should try some newer distro for my test builds.
-
-> > Same definitions in Config_heavy. It should be working without that. I'=
-ve
->=20
-> Should I have this file in sysroots/armv5te....  ?
-> I only have
-> frans@linux-suse:~/oe/tmp_minimal/sysroots> find | grep heavy
-> ./i686-linux/usr/lib/perl/5.10.1/Config_heavy.pl
-> ./i686-linux/usr/lib/perl/5.10.1/utf8_heavy.pl
-> ./i686-linux/usr/lib/perl/5.10.1/Config_heavy-target.pl
-> ./i686-linux/usr/lib/perl/5.10.1/bytes_heavy.pl
-> ./armv5te-oe-linux-gnueabi/usr/share/mysql/my-innodb-heavy-4G.cnf
-> ./armv7a-oe-linux-gnueabi/usr/share/mysql/my-innodb-heavy-4G.cnf
->=20
-> And Config_heavy.pl says:
-> frans@linux-suse:~/oe/tmp_minimal/sysroots> grep -E
-> "^(cc=3D|ld=3D|ldflags=3D)" ./i686-linux/usr/lib/perl/5.10.1/Config_heavy=
-=2Epl
-
-That's the wrong one, you're interested in Config_heavy-target.pl, or=20
-Config_heavy-arm-angstrom-linux-gnueabi.pl after my recent patch series (th=
-at=20
-I'll push today).
-
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
-
---nextPart2019149.eLBPp7AY5c
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAk0aM8IACgkQXJ70z+XgVcNM6ACgjevZtAunJuhW2/9w592sMphl
-xeAAoKm5dwaKDETISevMpo5l5X0uEpGS
-=F7FU
------END PGP SIGNATURE-----
-
---nextPart2019149.eLBPp7AY5c--
