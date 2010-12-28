@@ -1,39 +1,21 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PXht7-0004bm-KJ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Dec 2010 23:19:25 +0100
-Received: by iyj18 with SMTP id 18so8931329iyj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Dec 2010 14:19:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=0IP58RQAFU2ninSZ3ZQYmSYzb45A5qNvuENSSziEPTE=;
-	b=uQIIQle8anA+FqfvRMcO1SPRIAA2UA9TA84AV0YX9a0IM1gu36WW03vhSQr6YP8lHL
-	zlNB3TOMguWCy+cl2d5oqDqMYNb0twUv1sbSFGTin9/J+fsQynAdTEKLzIQzXHU88MDX
-	6E+khGivX5IBXWpIcYD/GAUPQeKkpAi0pCwfQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=QWV1Xj53VGFXKAcKAVN2lIotlXDTWvVwN9JPrLkhF2vJzz7R7SdzKqkvbyPEmXQi3r
-	InKxA6T9585n5Szz7xXv3+0aAHzX3I2NqrwXT86UwuogZ8k0vIT65b/y5M67yNa1JwLW
-	l/QHPsQcPm9Feg0BtDQurRSvPKH6S8RbxNSXc=
-MIME-Version: 1.0
-Received: by 10.231.37.136 with SMTP id x8mr13806476ibd.132.1293574749702;
-	Tue, 28 Dec 2010 14:19:09 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Tue, 28 Dec 2010 14:19:09 -0800 (PST)
-In-Reply-To: <AANLkTinj-pWTJfLqszpHVkN29McgpZ1Lidg8n-+V7RYo@mail.gmail.com>
-References: <1293469867-18737-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<201012272236.01404.roman@khimov.ru>
-	<AANLkTi=P_dKFv4JiyU8_g_EoLK_Zn+HvNtVfUEccTA56@mail.gmail.com>
-	<201012282200.18012.roman@khimov.ru>
-	<AANLkTinj-pWTJfLqszpHVkN29McgpZ1Lidg8n-+V7RYo@mail.gmail.com>
-Date: Tue, 28 Dec 2010 23:19:09 +0100
-Message-ID: <AANLkTikKLawM78rC4mc2B4M2S2N1+eqa-9Tp9TS1M__5@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PXi2v-0004mo-Or for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Dec 2010 23:29:33 +0100
+Received: from f053041248.adsl.alicedsl.de ([78.53.41.248]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PXi2i-0004SO-PQ for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Dec 2010 22:29:20 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v3] cpan_build.bbclass; added cc and ld flags to the perl Build.PL invocation
+Date: Tue, 28 Dec 2010 23:29:19 +0100
+Message-ID: <1293575359.19557.0.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: [PATCH] glib-2.0_2.26.1: remove `DEFAULT_PREFERENCE = "-1"`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,26 +29,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Dec 2010 22:19:25 -0000
-Content-Type: text/plain; charset=KOI8-R
+X-List-Received-Date: Tue, 28 Dec 2010 22:29:33 -0000
+X-Groupsio-MsgNum: 27552
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ZTirNvVWidP5Kw0q+7ak"
 
-One more test result.
+--=-ZTirNvVWidP5Kw0q+7ak
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-After Roman pushed his patches, I tried again.
-It seems the proper compiler is invoked, but  this time I get a compiler error:
+Date: Sat, 25 Dec 2010 20:09:34 +0100
 
-| arm-oe-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s
--mthumb-interwork -mthumb -Ic -I/usr/lib/perl/5.10/CORE
--DXS_VERSION="0.61" -DVERSION="0.61" -fPIC -c
--isystem/home/frans/oe/tmp_minimal/sysroots/armv5te-oe-linux-gnueabi/usr/include
--fexpensive-optimizations -fomit-frame-pointer -frename-registers -O1
--DDEBIAN -D_REENTRANT -D_GNU_SOURCE -DTHREADS_HAVE_PIDS
--fno-strict-aliasing -pipe -O2 -o lib/DateTime.o lib/DateTime.c
-| lib/DateTime.xs:7:20: fatal error: EXTERN.h: No such file or directory
+Since commit 07d94e [1] (upstream 2729be [2]) task `configure` of `libfso-g=
+lib` fails with the following error, since GLib 2.26 is needed and Minimal =
+and Minimal uClibc just provide GLib 2.24 since `glib-2.0_2.26.1.bb` has `D=
+EFAULT_PREFERENCE =3D "-1"` set.
 
+	checking pkg-config is at least version 0.9.0... yes
+	checking for VALA_DBUS_BINDING_TOOL... yes
+	checking for SPECS... yes
+	checking for DEPS... configure: error: Package requirements (glib-2.0 >=3D=
+ 2.26.0
+		      gobject-2.0 >=3D 2.26.0
+		      gio-2.0 >=3D 2.26.0
+		      gthread-2.0 >=3D 2.26.0) were not met:
 
-Too late to investigate this now.
+	Requested 'glib-2.0 >=3D 2.26.0' but version of GLib is 2.24.1
+	Requested 'gobject-2.0 >=3D 2.26.0' but version of GObject is 2.24.1
+	Requested 'gio-2.0 >=3D 2.26.0' but version of GIO is 2.24.1
+	Requested 'gthread-2.0 >=3D 2.26.0' but version of GThread is 2.24.1
 
-Frans
+	Consider adjusting the PKG_CONFIG_PATH environment variable if you
+	installed software in a non-standard prefix.
 
+	Alternatively, you may set the environment variables DEPS_CFLAGS
+	and DEPS_LIBS to avoid the need to call pkg-config.
+	See the pkg-config man page for more details.
 
+	ERROR: Function do_configure failed
+
+Other packages from the freesmartphone.org API reference implementation wil=
+l also require GLib 2.26 in the future.
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?h=3Dorg.open=
+embedded.dev&id=3D07d94ebc8fd3d21fa83fb13fdf511ac008c316e6
+[2] http://git.freesmartphone.org/?p=3Dlibfso-glib.git;a=3Dcommit;h=3D2729b=
+e7c82a676455f93d201b0d0255ad7e139ba
+[3] http://git.freesmartphone.org/?p=3Dcornucopia.git;a=3Dcommit;h=3D709ef6=
+3eab6eb9736c15e6731a50de4ccbb3613c
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/glib-2.0/glib-2.0_2.26.1.bb |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/glib-2.0/glib-2.0_2.26.1.bb b/recipes/glib-2.0/glib-2.=
+0_2.26.1.bb
+index ded471b..1c855e2 100644
+--- a/recipes/glib-2.0/glib-2.0_2.26.1.bb
++++ b/recipes/glib-2.0/glib-2.0_2.26.1.bb
+@@ -29,8 +29,6 @@ inherit autotools gettext
+=20
+ S =3D "${WORKDIR}/glib-${PV}"
+=20
+-DEFAULT_PREFERENCE =3D "-1"
+-
+ EXTRA_OECONF =3D "--disable-debug "
+=20
+ # Add and entry for your favourite arch if your (g)libc has a sane printf
+--=20
+1.7.2.3
+
+--=-ZTirNvVWidP5Kw0q+7ak
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0aZLoACgkQPX1aK2wOHVjIcACdHZVUTd/JABym/D9CqKGRAQiP
+I+YAn2sJ57LLsXKbkvLEEHHkcKC6L2Dw
+=hC4a
+-----END PGP SIGNATURE-----
+
+--=-ZTirNvVWidP5Kw0q+7ak--
