@@ -1,19 +1,36 @@
-Received: from [93.100.16.104] (helo=mate.hex)
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rik@mate.hex>) id 1PY4Bx-0006uI-Pg
+	(envelope-from <obi@opendreambox.org>) id 1PY59h-0008KG-P9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Dec 2010 23:08:21 +0100
-Received: by mate.hex (Postfix, from userid 1000)
-	id 67FAB205D3; Thu, 30 Dec 2010 01:08:00 +0300 (MSK)
-From: Roman I Khimov <khimov@altell.ru>
+	Thu, 30 Dec 2010 00:10:05 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id D1BA9314C143
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Dec 2010 00:09:51 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id LzSwhujDtlbS
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Dec 2010 00:09:47 +0100 (CET)
+Received: from [172.22.22.60] (ip-109-90-189-193.unitymediagroup.de
+	[109.90.189.193])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 0801E314C141
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Dec 2010 00:09:47 +0100 (CET)
+Message-ID: <4D1BBFBA.9050300@opendreambox.org>
+Date: Thu, 30 Dec 2010 00:09:46 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Dec 2010 01:07:58 +0300
-Message-Id: <1293660478-3080-2-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.4.2
-In-Reply-To: <1293660478-3080-1-git-send-email-khimov@altell.ru>
-References: <201012292340.40618.roman@khimov.ru>
-	<1293660478-3080-1-git-send-email-khimov@altell.ru>
-Subject: [PATCH 2/2] classes/cpan: fix bin/script/man1/man3 installation dirs
+References: <1293644563.4238.7.camel@mattotaupa>	<1293645497-22323-1-git-send-email-Martin.Jansa@gmail.com>	<AANLkTimF8brtuRiXYU-kNRQQdur8FpM9=Xo4cGdJxyAG@mail.gmail.com>
+	<4D1B8FA8.2040400@eukrea.com>
+In-Reply-To: <4D1B8FA8.2040400@eukrea.com>
+Subject: Re: [PATCH 1/2] glib-2.0, dbus: drop dbus's dependency on glib and add dbus dependency to glib-2.0_2.26.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,33 +44,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Dec 2010 22:08:21 -0000
+X-List-Received-Date: Wed, 29 Dec 2010 23:10:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Strange that it wasn't done before, but if some perl module wants to install
-man pages or some binaries or scripts they all were installed with wrong prefix.
+On 12/29/2010 08:44 PM, Eric B=E9nard wrote:
+> PKG_CONFIG_PATH contains both native
+> and non native directories.
 
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- classes/cpan.bbclass |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+Is this a bug or expected behavior? If expected, why is it needed at all?
 
-diff --git a/classes/cpan.bbclass b/classes/cpan.bbclass
-index b81ae9a..c21130f 100644
---- a/classes/cpan.bbclass
-+++ b/classes/cpan.bbclass
-@@ -13,6 +13,10 @@ cpan_do_configure () {
- 			-e "s:\(SITEARCHEXP = \).*:\1${sitearchexp}:" \
- 			-e "s:\(INSTALLVENDORLIB = \).*:\1${D}${datadir}/perl5:" \
- 			-e "s:\(INSTALLVENDORARCH = \).*:\1${D}${libdir}/perl5:" \
-+			-e "s:\(INSTALLVENDORMAN1DIR = \).*:\1${D}${man1dir}:" \
-+			-e "s:\(INSTALLVENDORMAN3DIR = \).*:\1${D}${man1dir}:" \
-+			-e "s:\(INSTALLVENDORBIN = \).*:\1${D}${bindir}:" \
-+			-e "s:\(INSTALLVENDORSCRIPT = \).*:\1${D}${bindir}:" \
- 			-e "s:\(LDDLFLAGS.*\)${STAGING_LIBDIR_NATIVE}:\1${STAGING_LIBDIR}:" \
- 			Makefile
- 	fi
--- 
-1.6.4.2
-
+Regards,
+Andreas
 
 
