@@ -1,37 +1,18 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PY3RB-0005zx-K1
+	(envelope-from <rik@mate.hex>) id 1PY4Bs-0006uH-R6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Dec 2010 22:20:01 +0100
-Received: by gwaa12 with SMTP id a12so2034891gwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Dec 2010 13:19:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=MalU6d+TCMCUtGO/c6UPBM0JP9+zo/lqNNBnZiHdvbc=;
-	b=SC04PNtRX7HJFEVbEiN+52CGCMgl/KiIerBE/CNmJLLrbyFMt0vMAEu52q5UJajOLx
-	Dh16C1g1SoXDIcQRb99wE7VH3mPs1ZFKR6SVwZ2eNVO5bxKX/wuADmely5Ci+rB0mbVk
-	xkDIx0uACsAKYLEl9hwubntuouZ1iZixoEC58=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=Pql6AogZQtI1Es4COcsBl2JUxWWlcu4qa71NZDNOzRYh+OkLrddldEDVDdmeDcbEw8
-	axh3xfc6ZJfUxxzrNJ4TSDHA8/AhnXyw/9iNFFb4OmGAox5RRPB0Obv/v/LLpMDnTw1e
-	J1LFswjaHofMOZOkOZ/mO9BuymtInkP33MOfM=
-Received: by 10.90.120.17 with SMTP id s17mr6056338agc.193.1293657581602; Wed,
-	29 Dec 2010 13:19:41 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Wed, 29 Dec 2010 13:19:21 -0800 (PST)
-In-Reply-To: <1293651953-2998-1-git-send-email-eric@eukrea.com>
-References: <1293644563.4238.7.camel@mattotaupa>
-	<1293651953-2998-1-git-send-email-eric@eukrea.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 Dec 2010 13:19:21 -0800
-Message-ID: <AANLkTimdAyrfzSq1zvFf1Nyg2xfrXZO2N-3a04=EKYpD@mail.gmail.com>
+	Wed, 29 Dec 2010 23:08:16 +0100
+Received: by mate.hex (Postfix, from userid 1000)
+	id 4669720B4B; Thu, 30 Dec 2010 01:07:59 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] glib 2.26.1: fix compilation failure
+Date: Thu, 30 Dec 2010 01:07:57 +0300
+Message-Id: <1293660478-3080-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <201012292340.40618.roman@khimov.ru>
+References: <201012292340.40618.roman@khimov.ru>
+Subject: [PATCH 1/2] perl 5.10.1: fix archlib(exp) and privlib(exp) vars in target configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,62 +26,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Dec 2010 21:20:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 29 Dec 2010 22:08:17 -0000
 
-On Wed, Dec 29, 2010 at 11:45 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> during configure, pkgconfig detects dbus-1.pc which was installed
-> by dbus-native and thus the compilation fails because it can't
-> find dbus/dbus.h which is not yet installed for in the target's
-> sysroot.
->
-> This patch workaround this problem by not compiling the test program
-> which depends on dbus's headers.
->
-> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+These vars can be used to derive build flags for perl modules and thus should
+point to build-time directories in staged configs.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ recipes/perl/perl_5.10.1.bb |    9 ++++++++-
+ 1 files changed, 8 insertions(+), 1 deletions(-)
 
-> ---
-> =C2=A0recipes/glib-2.0/glib-2.0_2.26.1.bb | =C2=A0 =C2=A03 ++-
-> =C2=A01 files changed, 2 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/glib-2.0/glib-2.0_2.26.1.bb b/recipes/glib-2.0/glib-=
-2.0_2.26.1.bb
-> index d95f894..e19fb9f 100644
-> --- a/recipes/glib-2.0/glib-2.0_2.26.1.bb
-> +++ b/recipes/glib-2.0/glib-2.0_2.26.1.bb
-> @@ -10,7 +10,7 @@ DEPENDS =3D "glib-2.0-native gtk-doc zlib"
-> =C2=A0DEPENDS_virtclass-native =3D "gettext-native gtk-doc-native \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 pkgconfig-native"
->
-> -PR =3D "r0"
-> +PR =3D "r1"
->
-> =C2=A0SRC_URI =3D "\
-> =C2=A0 http://ftp.gnome.org/pub/GNOME/sources/glib/2.26/glib-${PV}.tar.bz=
-2;name=3Darchive \
-> @@ -38,6 +38,7 @@ EXTRA_OECONF_append_glibc_arm =3D " =C2=A0--enable-incl=
-uded-printf=3Dno "
->
-> =C2=A0do_configure_prepend () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0644 ${WORKDIR}/glibconfig-sysdefs.=
-h .
-> + =C2=A0 =C2=A0 =C2=A0 sed -i -e "s:TEST_PROGS +=3D gdbus-serialization::=
-g" =C2=A0${S}/gio/tests/Makefile.am
-> =C2=A0}
->
-> =C2=A0do_install_append() {
-> --
-> 1.7.0.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
+index d8c374b..4e6bc33 100644
+--- a/recipes/perl/perl_5.10.1.bb
++++ b/recipes/perl/perl_5.10.1.bb
+@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPLv1+"
+ PRIORITY = "optional"
+ # We need gnugrep (for -I)
+ DEPENDS = "virtual/db perl-native grep-native"
+-PR = "r18"
++PR = "r19"
+ 
+ # 5.10.1 has Module::Build built-in
+ PROVIDES += "libmodule-build-perl"
+@@ -224,6 +224,13 @@ do_stage() {
+         install config.sh ${STAGING_LIBDIR}/perl/
+         # target configuration, used by native perl when cross-compiling
+         install lib/Config_heavy.pl ${STAGING_LIBDIR_NATIVE}/perl/${PV}/Config_heavy-${TARGET_SYS}.pl
++	sed -r -i \
++		-e "s,^(archlib=).*$,\1'${STAGING_LIBDIR}/perl/${PV}'," \
++		-e "s,^(archlibexp=).*$,\1'${STAGING_LIBDIR}/perl/${PV}'," \
++		-e "s,^(privlib=).*$,\1'${STAGING_DATADIR}/perl/${PV}'," \
++		-e "s,^(privlibexp=).*$,\1'${STAGING_DATADIR}/perl/${PV}'," \
++		${STAGING_LIBDIR_NATIVE}/perl/${PV}/Config_heavy-${TARGET_SYS}.pl \
++		${STAGING_LIBDIR}/perl/config.sh
+ 	# target configuration
+         install lib/Config.pm       ${STAGING_LIBDIR}/perl/${PV}/
+ 	install lib/ExtUtils/typemap ${STAGING_DATADIR}/perl/${PV}/ExtUtils/
+-- 
+1.6.4.2
+
 
 
