@@ -1,22 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PYFcm-0005f7-AJ for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 11:20:48 +0100
-Received: from f053036091.adsl.alicedsl.de ([78.53.36.91]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PYFcX-0002Es-J6 for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 10:20:33 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from 31.mail-out.ovh.net ([213.186.62.10])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PYFzF-0005yS-FB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 11:44:01 +0100
+Received: (qmail 14124 invoked by uid 503); 30 Dec 2010 11:15:44 -0000
+Received: from b7.ovh.net (HELO mail91.ha.ovh.net) (213.186.33.57)
+	by 31.mail-out.ovh.net with SMTP; 30 Dec 2010 11:15:44 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 30 Dec 2010 12:43:37 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 30 Dec 2010 12:43:34 +0200
+Message-ID: <4D1C6256.6030100@eukrea.com>
+Date: Thu, 30 Dec 2010 11:43:34 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1293699334-4159-1-git-send-email-eric@eukrea.com>
 References: <1293699334-4159-1-git-send-email-eric@eukrea.com>
-Date: Thu, 30 Dec 2010 11:20:31 +0100
-Message-ID: <1293704431.5436.5.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
+	<1293704431.5436.5.camel@mattotaupa>
+In-Reply-To: <1293704431.5436.5.camel@mattotaupa>
+X-Ovh-Tracer-Id: 7085851065853390153
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
 Subject: Re: [PATCH] gnome-power-manager: fix compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,67 +40,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 10:20:48 -0000
-X-Groupsio-MsgNum: 27579
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-IDSf+XiTr7fcBPdHbejb"
+X-List-Received-Date: Thu, 30 Dec 2010 10:44:01 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---=-IDSf+XiTr7fcBPdHbejb
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Paul,
 
-Am Donnerstag, den 30.12.2010, 09:55 +0100 schrieb Eric B=C3=A9nard:
+On 30/12/2010 11:20, Paul Menzel wrote:
+> Am Donnerstag, den 30.12.2010, 09:55 +0100 schrieb Eric Bénard:
+>
+> I would prefer if the error message `libtool: Command not found` (if it
+> is that short) is noted in the commit summary.
+>
+> 	gnome-power-manager: fix compilation: `libtool: Command not found`
+>
+OK fixed and pushed.
 
-I would prefer if the error message `libtool: Command not found` (if it
-is that short) is noted in the commit summary.
+>> * libtool is hardcoded in src/Makefile and leads to
+>> libtool: Command not found
+>>
+>> Signed-off-by: Eric Bénard<eric@eukrea.com>
+>> ---
+>>   recipes/gnome/gnome-power-manager_2.30.0.bb |    1 +
+>>   1 files changed, 1 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/recipes/gnome/gnome-power-manager_2.30.0.bb b/recipes/gnome/gnome-power-manager_2.30.0.bb
+>> index a752852..0c7bcb5 100644
+>> --- a/recipes/gnome/gnome-power-manager_2.30.0.bb
+>> +++ b/recipes/gnome/gnome-power-manager_2.30.0.bb
+>> @@ -27,6 +27,7 @@ do_configure_append() {
+>>           for i in $(find ${S} -name "Makefile") ; do
+>>               sed -i -e s:-Werror::g $i
+>>           done
+>> +		sed -e "s/libtool --/${TARGET_SYS}-libtool --/" -i ${S}/src/Makefile
+>>   }
+>>
+>>   PACKAGES =+ "${PN}-applets"
+>
+> Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
+>
+> What is the proper patch to send upstream? Is `${TARGET_SYS}` always
+> defined? But »-« would still make problems, wouldn’t it? Is there a
+> program implementing this correctly in `Makefile`?
+>
+- TARGET_SYS is OE specific.
+- The "--" is here to only replace the 2 or 3 instances of libtool concerned 
+by the workaround.
+- I don't know what would be the proper patch to send upstream (and don't have 
+time to check for this now). I've just seen there are several new release of 
+gnome-power-manager so the problem may already be fixed, will see when I have 
+some time.
 
-	gnome-power-manager: fix compilation: `libtool: Command not found`
-
-> * libtool is hardcoded in src/Makefile and leads to
-> libtool: Command not found
->=20
-> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
-> ---
->  recipes/gnome/gnome-power-manager_2.30.0.bb |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
->=20
-> diff --git a/recipes/gnome/gnome-power-manager_2.30.0.bb b/recipes/gnome/=
-gnome-power-manager_2.30.0.bb
-> index a752852..0c7bcb5 100644
-> --- a/recipes/gnome/gnome-power-manager_2.30.0.bb
-> +++ b/recipes/gnome/gnome-power-manager_2.30.0.bb
-> @@ -27,6 +27,7 @@ do_configure_append() {
->          for i in $(find ${S} -name "Makefile") ; do
->              sed -i -e s:-Werror::g $i
->          done
-> +		sed -e "s/libtool --/${TARGET_SYS}-libtool --/" -i ${S}/src/Makefile
->  }
-> =20
->  PACKAGES =3D+ "${PN}-applets"
-
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-What is the proper patch to send upstream? Is `${TARGET_SYS}` always
-defined? But =C2=BB-=C2=AB would still make problems, wouldn=E2=80=99t it? =
-Is there a
-program implementing this correctly in `Makefile`?
+Eric
 
 
-Thanks,
-
-Paul
-
---=-IDSf+XiTr7fcBPdHbejb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk0cXOgACgkQPX1aK2wOHVhsCQCcDQPMwP78DTFkV07XBNP21Ujg
-iggAn08wrgToell6xOk+bv4uzUizHxRR
-=IpEG
------END PGP SIGNATURE-----
-
---=-IDSf+XiTr7fcBPdHbejb--
