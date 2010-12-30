@@ -1,39 +1,24 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PYMQ6-0005uk-8V
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 18:36:10 +0100
-Received: by iyj18 with SMTP id 18so10401071iyj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Dec 2010 09:35:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Ip3mcp1jSX78FhhD7WkmWAwTfhs7mGMttIxKxEe082c=;
-	b=DY9KOAS4kxFsEzRAOR3ZKoI72TRMhyy4072V4BLeh0Cp7ZxWuZiDLDxcYClcHtC9d/
-	htDz57wyAvQL9CkWiHZrMiNHfb4kdRAq7DTviZg11oI10bDvC04xl2MI15LqIKFthmAH
-	b7hWHoxeHKmKkSeeAoepDFP+nTKG4h/EouZw8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=cuT8cTjfM03fav0AA8vE22e/dq4U3jljKPpQXhuz/uSjwrtTCFAZCPwzf65tOQHKhN
-	119XP/cmZcOieQbfqbWwSi4FfQrgXhRJ4XYzDocA6ViTs5E1AE1PO56wbRdlR2CniEKG
-	0EIW2AFKxHWXHGhiwN9tHXlei8UIYaF3APX/Q=
-MIME-Version: 1.0
-Received: by 10.231.39.71 with SMTP id f7mr296760ibe.182.1293730552712; Thu,
-	30 Dec 2010 09:35:52 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Thu, 30 Dec 2010 09:35:52 -0800 (PST)
-In-Reply-To: <201012301023.43492.roman@khimov.ru>
-References: <201012292340.40618.roman@khimov.ru>
-	<1293660478-3080-1-git-send-email-khimov@altell.ru>
-	<1293660478-3080-2-git-send-email-khimov@altell.ru>
-	<201012301023.43492.roman@khimov.ru>
-Date: Thu, 30 Dec 2010 18:35:52 +0100
-Message-ID: <AANLkTinpra3e_F8Qw1CG5f5yB8zXz1rJSATtVj9o6Z5C@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PYNCR-0006vw-OA for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 19:26:07 +0100
+Received: from f053036091.adsl.alicedsl.de ([78.53.36.91]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PYNCC-0008NA-MX for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 18:25:52 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] classes/cpan: fix bin/script/man1/man3 installation dirs
+In-Reply-To: <4D1C6256.6030100@eukrea.com>
+References: <1293699334-4159-1-git-send-email-eric@eukrea.com>
+	<1293704431.5436.5.camel@mattotaupa>  <4D1C6256.6030100@eukrea.com>
+Date: Thu, 30 Dec 2010 19:25:51 +0100
+Message-ID: <1293733551.5436.83.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: [RFC] dealing with hard coded `libtool` in `Makefile.*` (was: [PATCH] gnome-power-manager: fix compilation)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,23 +32,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 17:36:10 -0000
-Content-Type: text/plain; charset=KOI8-R
+X-List-Received-Date: Thu, 30 Dec 2010 18:26:07 -0000
+X-Groupsio-MsgNum: 27586
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-DNxpzuLxh62jeGGjp50c"
+
+--=-DNxpzuLxh62jeGGjp50c
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-2010/12/30 Roman I Khimov <roman@khimov.ru>:
-> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =FE=C5=D4=D7=C5=D2=C7 30 =C4=C5=CB=
-=C1=C2=D2=D1 2010 01:07:58 =C1=D7=D4=CF=D2 Roman I Khimov =CE=C1=D0=C9=D3=
-=C1=CC:
->> + =9A =9A =9A =9A =9A =9A =9A =9A =9A =9A -e "s:\(INSTALLVENDORMAN1DIR =
-=3D \).*:\1${D}${man1dir}:" \
->> + =9A =9A =9A =9A =9A =9A =9A =9A =9A =9A -e "s:\(INSTALLVENDORMAN3DIR =
-=3D \).*:\1${D}${man1dir}:" \
+Dear Eric,
+
+
+Am Donnerstag, den 30.12.2010, 11:43 +0100 schrieb Eric B=C3=A9nard:
+
+> On 30/12/2010 11:20, Paul Menzel wrote:
+> > Am Donnerstag, den 30.12.2010, 09:55 +0100 schrieb Eric B=C3=A9nard:
+> >
+> > I would prefer if the error message `libtool: Command not found` (if it
+> > is that short) is noted in the commit summary.
+> >
+> > 	gnome-power-manager: fix compilation: `libtool: Command not found`
 >
-> The latter should be man3dir, obviously.
->
-With this patch:
+> OK fixed and pushed.
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+great! This is ae6002 [1].
+
+> >> * libtool is hardcoded in src/Makefile and leads to
+> >> libtool: Command not found
+> >>
+> >> Signed-off-by: Eric B=C3=A9nard<eric@eukrea.com>
+> >> ---
+> >>   recipes/gnome/gnome-power-manager_2.30.0.bb |    1 +
+> >>   1 files changed, 1 insertions(+), 0 deletions(-)
+> >>
+> >> diff --git a/recipes/gnome/gnome-power-manager_2.30.0.bb b/recipes/gno=
+me/gnome-power-manager_2.30.0.bb
+> >> index a752852..0c7bcb5 100644
+> >> --- a/recipes/gnome/gnome-power-manager_2.30.0.bb
+> >> +++ b/recipes/gnome/gnome-power-manager_2.30.0.bb
+> >> @@ -27,6 +27,7 @@ do_configure_append() {
+> >>           for i in $(find ${S} -name "Makefile") ; do
+> >>               sed -i -e s:-Werror::g $i
+> >>           done
+> >> +		sed -e "s/libtool --/${TARGET_SYS}-libtool --/" -i ${S}/src/Makefil=
+e
+> >>   }
+> >>
+> >>   PACKAGES =3D+ "${PN}-applets"
+> >
+> > Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
+> >
+> > What is the proper patch to send upstream? Is `${TARGET_SYS}` always
+> > defined? But =C2=BB-=C2=AB would still make problems, wouldn=E2=80=99t =
+it? Is there a
+> > program implementing this correctly in `Makefile`?
+> >
+> - TARGET_SYS is OE specific.
+> - The "--" is here to only replace the 2 or 3 instances of libtool concer=
+ned=20
+> by the workaround.
+
+I meant the `-` in `${TARGET_SYS}-libtool`, so if `${TARGET_SYS}` would
+be empty than `-libtool` is not usable.
+
+> - I don't know what would be the proper patch to send upstream (and don't=
+ have=20
+> time to check for this now). I've just seen there are several new release=
+ of=20
+> gnome-power-manager so the problem may already be fixed, will see when I =
+have=20
+> some time.
+
+Well as you wrote it is hard coded twice `src/Makefile.am`, also in
+2.32.0. But I cannot find it in the current in master branch. It was
+removed in commit 756876 [2]. But I guess this will not be compatible
+with the current GNOME stuff in OE and is for the migration to GNOME 3.
+But I have no idea.
+
+`system-tools-backend_2.10.1.bb` also has to deal with hard coded
+`libtool` and just copies it over [3].
+
+        do_configure() {
+        	sed -i -e 's:CC=3D$(CC):CC=3D"$(CC)":g' ${S}/Net-DBus/Makefile.am
+        	sed -i -e 's:CC=3D$(CC):CC=3D"$(CC)":g' ${S}/Net-DBus/Makefile.in
+        	libtoolize --force --install
+        	aclocal
+        	gnu-configize
+        	oe_runconf
+        	cp ${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool ${S}
+        }
+
+To summarize, it is not useful to prepare a patch for upstream inclusion
+since there will not be a 2.34 or 2.32.x release, I guess.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dae60020=
+2dbf68be4cc7515b877ef143c1f5f8c31
+[2] http://git.gnome.org/browse/gnome-power-manager/commit/?id=3D7568769fb1=
+e46de1b8ed8601fe106df9b367bb45
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gnome/s=
+ystem-tools-backends_2.10.1.bb?id=3D8d914cdf124e940b7a06ad3343077b68e01e601=
+9
+
+--=-DNxpzuLxh62jeGGjp50c
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0czq8ACgkQPX1aK2wOHVjJLQCdG8VBMra8NiswpOViqUHSQRrK
+OxEAn3l9C7FhzYEyEG/H+WXFGXGaEJ0x
+=GkTE
+-----END PGP SIGNATURE-----
+
+--=-DNxpzuLxh62jeGGjp50c--
