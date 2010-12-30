@@ -1,32 +1,31 @@
 Received: from 64.mail-out.ovh.net ([91.121.185.65])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PYNf2-0007To-Ab
+	(envelope-from <eric@eukrea.com>) id 1PYNhl-0007Y6-6E
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 19:55:40 +0100
-Received: (qmail 982 invoked by uid 503); 30 Dec 2010 18:37:55 -0000
+	Thu, 30 Dec 2010 19:58:29 +0100
+Received: (qmail 2147 invoked by uid 503); 30 Dec 2010 18:40:44 -0000
 Received: from b9.ovh.net (HELO mail413.ha.ovh.net) (213.186.33.59)
-	by 64.mail-out.ovh.net with SMTP; 30 Dec 2010 18:37:54 -0000
+	by 64.mail-out.ovh.net with SMTP; 30 Dec 2010 18:40:44 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 30 Dec 2010 20:55:23 +0200
+	by b0.ovh.net with SMTP; 30 Dec 2010 20:58:13 +0200
 Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
 	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 30 Dec 2010 20:55:23 +0200
-Message-ID: <4D1CD597.70205@eukrea.com>
-Date: Thu, 30 Dec 2010 19:55:19 +0100
+	by ns0.ovh.net with SMTP; 30 Dec 2010 20:58:11 +0200
+Message-ID: <4D1CD643.8070702@eukrea.com>
+Date: Thu, 30 Dec 2010 19:58:11 +0100
 From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
 	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4D1C4E4A.5000705@eukrea.com> <ifhrie$a01$1@dough.gmane.org>
-	<ifije4$p3n$1@dough.gmane.org>
-In-Reply-To: <ifije4$p3n$1@dough.gmane.org>
-X-Ovh-Tracer-Id: 15391896153449934153
+References: <1293575359.19557.0.camel@mattotaupa>
+In-Reply-To: <1293575359.19557.0.camel@mattotaupa>
+X-Ovh-Tracer-Id: 15439183949687532873
 X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-Subject: Re: ti-c6accel-1_01_00_01: link error
+Subject: Re: [PATCH] glib-2.0_2.26.1: remove `DEFAULT_PREFERENCE = "-1"`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,106 +39,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 18:55:40 -0000
+X-List-Received-Date: Thu, 30 Dec 2010 18:58:29 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 30/12/2010 19:35, Koen Kooi wrote:
-> FWIW, the full commandline is:
+On 28/12/2010 23:29, Paul Menzel wrote:
+> Date: Sat, 25 Dec 2010 20:09:34 +0100
 >
-> | Linking c6accel_app from appMain.o c6accel_testfxns.o
-> ../c6accelw/lib/c6accelw_omap3530.a470MV c6accel_app_config/linker.cmd..
-> |
-> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/bin/arm-angstrom-linux-gnueabi-gcc
+> Since commit 07d94e [1] (upstream 2729be [2]) task `configure` of `libfso-glib` fails with the following error, since GLib 2.26 is needed and Minimal and Minimal uClibc just provide GLib 2.24 since `glib-2.0_2.26.1.bb` has `DEFAULT_PREFERENCE = "-1"` set.
+>
+> 	checking pkg-config is at least version 0.9.0... yes
+> 	checking for VALA_DBUS_BINDING_TOOL... yes
+> 	checking for SPECS... yes
+> 	checking for DEPS... configure: error: Package requirements (glib-2.0>= 2.26.0
+> 		      gobject-2.0>= 2.26.0
+> 		      gio-2.0>= 2.26.0
+> 		      gthread-2.0>= 2.26.0) were not met:
+>
+> 	Requested 'glib-2.0>= 2.26.0' but version of GLib is 2.24.1
+> 	Requested 'gobject-2.0>= 2.26.0' but version of GObject is 2.24.1
+> 	Requested 'gio-2.0>= 2.26.0' but version of GIO is 2.24.1
+> 	Requested 'gthread-2.0>= 2.26.0' but version of GThread is 2.24.1
+>
+> 	Consider adjusting the PKG_CONFIG_PATH environment variable if you
+> 	installed software in a non-standard prefix.
+>
+> 	Alternatively, you may set the environment variables DEPS_CFLAGS
+> 	and DEPS_LIBS to avoid the need to call pkg-config.
+> 	See the pkg-config man page for more details.
+>
+> 	ERROR: Function do_configure failed
+>
+> Other packages from the freesmartphone.org API reference implementation will also require GLib 2.26 in the future.
+>
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?h=org.openembedded.dev&id=07d94ebc8fd3d21fa83fb13fdf511ac008c316e6
+> [2] http://git.freesmartphone.org/?p=libfso-glib.git;a=commit;h=2729be7c82a676455f93d201b0d0255ad7e139ba
+> [3] http://git.freesmartphone.org/?p=cornucopia.git;a=commit;h=709ef63eab6eb9736c15e6731a50de4ccbb3613c
+>
+> Signed-off-by: Paul Menzel<paulepanter@users.sourceforge.net>
+Acked-by: Eric Bénard <eric@eukrea.com>
+> ---
+>   recipes/glib-2.0/glib-2.0_2.26.1.bb |    2 --
+>   1 files changed, 0 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/glib-2.0/glib-2.0_2.26.1.bb b/recipes/glib-2.0/glib-2.0_2.26.1.bb
+> index ded471b..1c855e2 100644
+> --- a/recipes/glib-2.0/glib-2.0_2.26.1.bb
+> +++ b/recipes/glib-2.0/glib-2.0_2.26.1.bb
+> @@ -29,8 +29,6 @@ inherit autotools gettext
+>
+>   S = "${WORKDIR}/glib-${PV}"
+>
+> -DEFAULT_PREFERENCE = "-1"
 > -
-> -L/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/lib
-> -
-> -L/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> - -Wl,-O1 -Wl,--hash-style=gnu -lm -lpthread -o c6accel_app appMain.o
-> c6accel_testfxns.o ../c6accelw/lib/c6accelw_omap3530.a470MV
-> c6accel_app_config/linker.cmd
-> |
-> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/bin/arm-angstrom-linux-gnueabi-gcc
-> -
-> -L/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/lib
-> -
-> -L/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> - -Wl,-O1 -Wl,--hash-style=gnu -lm -lpthread -o c6accel_app appMain.o
-> c6accel_testfxns.o ../c6accelw/lib/c6accelw_omap3530.a470MV
-> c6accel_app_config/linker.cmd
-> |
-> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-> warning: c6accel_app_config/linker.cmd contains output sections; did you
-> forget -T?
-> |
-> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-> .gnu.attributes not found for insert
+>   EXTRA_OECONF = "--disable-debug "
+>
+>   # Add and entry for your favourite arch if your (g)libc has a sane printf
 >
 >
-> And the linkerscript is:
->
-> INPUT(
->
-> /OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/usrp-e1xx-angstrom-linux-gnueabi/ti-c6accel-1_01_00_03-r95a/c6accel_1_01_00_03/soc/app/c6accel_app_config/package/cfg/c6accel_app_xv5T.ov5T
->
-> staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/universal/lib/release/universal.av5T
->
-> staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/lib/release/ce.av5T
->
-> staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/alg/lib/release/Algorithm_noOS.av5T
->
-> staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/alg/lib/release/alg.av5T
->
-> staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/ipc/dsplink/lib/release/ipc_dsplink_3530.av5T
->
-> staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/osal/linux/lib/release/osal_linux_470.av5T
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/acpy3/lib/release/acpy3.a470MV
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/dman3/lib/release/dman3Cfg.a470MV
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/rmm.av5T
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/smgr.av5T
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/rmmp.av5T
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/smgrmp.av5T
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/shm.av5T
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/memutils/lib/release/memutils.av5T
->
-> staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/utils/xdm/lib/release/XdmUtils.av5T
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/utils/trace/lib/release/gt.av5T
->
-> staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/node/lib/release/node.av5T
->
-> staging/usr/share/ti/ti-local-power-manager-tree/packages/ti/bios/power/lib/release/lpm.av5T
->
-> staging/usr/share/ti/ti-dsplink-tree/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplink.lib
->
-> staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/scpy/lib/release/scpy.av5T
->
-> staging/usr/share/ti/ti-linuxutils-tree/packages/ti/sdo/linuxutils/cmem/lib/cmem.a470MV
->
-> staging/usr/share/ti/ti-linuxutils-tree/packages/ti/sdo/linuxutils/sdma/lib/sdma.a470MV
->
-> staging/usr/share/ti/ti-xdctools-tree/packages/gnu/targets/arm/rtsv5T/lib/gnu.targets.arm.rtsv5T.av5T
-> )
->
-> SECTIONS {
->      xdc.meta (COPY) : {*(xdc.meta)}
->
-> }
->
-> INSERT BEFORE .gnu.attributes
->
-just back to this. I have the same logs here, removing SECTIONS & INSERT 
-BEFORE in the linkerscript allows to finish the compilation but I don't know 
-if the software still runs.
-
-Eric
 
 
