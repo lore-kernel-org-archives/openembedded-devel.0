@@ -1,32 +1,32 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PYPVi-0001Ka-66
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <cliff.brake@gmail.com>) id 1PYPp5-0003Jj-MI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 21:54:10 +0100
-Received: (qmail 16053 invoked by uid 503); 30 Dec 2010 20:26:48 -0000
-Received: from b6.ovh.net (HELO mail640.ha.ovh.net) (213.186.33.56)
-	by 30.mail-out.ovh.net with SMTP; 30 Dec 2010 20:26:48 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 30 Dec 2010 22:53:54 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 30 Dec 2010 22:53:54 +0200
-Message-ID: <4D1CF15E.4020003@eukrea.com>
-Date: Thu, 30 Dec 2010 21:53:50 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Thu, 30 Dec 2010 22:14:12 +0100
+Received: by wyb40 with SMTP id 40so11620218wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Dec 2010 13:13:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=1wpLu8p4X4IYZttuy0bk9kNmooXxk5PBa5LNfUia3p4=;
+	b=RpNL8YYaEuFCoVQ6Y5tsxVHTKyPLaI5zPctWZ1iX61h90tOj+SiuNLg7R+Ow5gkQ7+
+	RkoSd5eiT+NBPg8Jt7079sYK5lVJ0iQzTw04Ymgh8J7HH9wspilrQ3zJwWJpDuxUck1U
+	fMT/m8MrMnZ8qoaXy3+BiHMKZh02+MkwHoAAQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=bgsMzfAbN3qyWrN+DWvMnc3vqgGO4uB20NI1a1uJixmUOMl6oetpJW795HDEI58ioD
+	dHzIJGIurJTWc2oIhvoIpObaDUseG6ublG4fqyKuPlcmN8/nf5ILN6rc8y7rZigYYX7C
+	22a5jlzlGF0LCOtfZPSTAKBTdw4rn2Ei4eZqc=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4D1C4E4A.5000705@eukrea.com>	<ifhrie$a01$1@dough.gmane.org>	<ifije4$p3n$1@dough.gmane.org>	<4D1CD8F2.6000209@eukrea.com>
-	<ifipuv$nbt$1@dough.gmane.org>
-In-Reply-To: <ifipuv$nbt$1@dough.gmane.org>
-X-Ovh-Tracer-Id: 17393464712181624137
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: ti-c6accel-1_01_00_01: link error
+Received: by 10.216.142.101 with SMTP id h79mr17650390wej.49.1293743634591;
+	Thu, 30 Dec 2010 13:13:54 -0800 (PST)
+Received: by 10.216.254.137 with HTTP; Thu, 30 Dec 2010 13:13:54 -0800 (PST)
+Date: Thu, 30 Dec 2010 16:13:54 -0500
+Message-ID: <AANLkTim6CbThEpukkx42bqHNhwDH4tdoVf+hxRzdC=tX@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: testing branch 2010-12-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,41 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 20:54:10 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Dec 2010 21:14:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 30/12/2010 21:27, Koen Kooi wrote:
->
-> If you build the new xdctools with the linker hack (
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=7993e4ca7746a4ca9e7116cc76e6c1da32a76690
-> ) then you only need a few changes to make it all build:
->
-> 1) edit
-> conf/distro/include/angstrom-codec-engine-latest-preferred-versions.inc:
->
-> - -PREFERRED_VERSION_ti-linuxutils = "2_25_05_11"
-> +PREFERRED_VERSION_ti-linuxutils = "2_26_01_02"
->
-> - -PREFERRED_VERSION_ti-xdctools = "3_20_05_76"
-> +PREFERRED_VERSION_ti-xdctools = "3_20_06_81"
->
-> 2) Add -fPIC to C_FLAGS in the c6accel soc/ Makefiles (plural)
->
-> 3) remove -Werror from DMAI makefiles
->
-> 4) remove -Werror from gstreamer-ti makefiles
->
-> That will get you a succesfull build, but you will have some runtime
-> problems. My current goal is to get c6accel working on my USRP E100 so
-> gnuradio can use that, so gst-ti is out of scope for that.
->
-thanks, I'll try that.
+Last weeks testing was moderately successful:
 
-In order to finish the image build, I removed gstreamer-ti from 
-beagleboard-linuxtag2010-demo-image which also "fixed" the problem as I don't 
-need gst-ti for my tests ;-)
+http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-12-24
 
-Eric
+for details on what is failing, there are a number of issues listed on
+this page:
+
+http://wiki.openembedded.org/index.php/Testing
+
+master has been merged to testing-next, and we are ready for clean builds.
+
+Thanks,
+Cliff
+
+-- 
+=================
+http://bec-systems.com
 
 
