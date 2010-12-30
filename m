@@ -1,24 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PYNCR-0006vw-OA for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 19:26:07 +0100
-Received: from f053036091.adsl.alicedsl.de ([78.53.36.91]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PYNCC-0008NA-MX for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 18:25:52 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4D1C6256.6030100@eukrea.com>
-References: <1293699334-4159-1-git-send-email-eric@eukrea.com>
-	<1293704431.5436.5.camel@mattotaupa>  <4D1C6256.6030100@eukrea.com>
-Date: Thu, 30 Dec 2010 19:25:51 +0100
-Message-ID: <1293733551.5436.83.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: [RFC] dealing with hard coded `libtool` in `Makefile.*` (was: [PATCH] gnome-power-manager: fix compilation)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PYNGJ-000718-4D
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 19:30:07 +0100
+Received: by iyj18 with SMTP id 18so10441203iyj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Dec 2010 10:29:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=4dK7i+GGJ/xdJuv1dw43ijW2f+3qKYoh546VXSBcTFM=;
+	b=OdjbnRHxm8hv7RF76lvaE6+8TGR9HA5vkvVDJ1SB8KzrvRMF5e16jRQBtJi6eGEp15
+	LbqG2YDF61JQA7TT1kdvSztzhUJYZD+089KDbWaAiWcsgOQRCVkb39AFeLGinWTDpYcB
+	fDyr041b0cyiFv8RLyuY9MBAyQx99Ehz2ABTc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=AGEusa7Kn7CXLJvZWTfdszebNdtAhbJBILUUVRVeB05zQvvIhXcYuDhbSVbUJCfQ0+
+	K4nJYNiyvKTZAyog9VNGFI8YZb7S9nE4lClFMqx4cTJEjDh5PB+iBCw2d8k5Vj/jQJoS
+	CKbmFumsH1RVqndoa4cd3wn32YPLs5GtZldoM=
+MIME-Version: 1.0
+Received: by 10.231.182.13 with SMTP id ca13mr166950ibb.57.1293733789070; Thu,
+	30 Dec 2010 10:29:49 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Thu, 30 Dec 2010 10:29:49 -0800 (PST)
+Date: Thu, 30 Dec 2010 19:29:49 +0100
+Message-ID: <AANLkTikxUP2WpUeaX19vu8wMecM4MHDQHh0wKArdQ_o+@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org, Bitbake-de@lists.berlios.de
+Subject: bitbake oddity, wong kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,125 +40,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 18:26:07 -0000
-X-Groupsio-MsgNum: 27586
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-DNxpzuLxh62jeGGjp50c"
+X-List-Received-Date: Thu, 30 Dec 2010 18:30:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-DNxpzuLxh62jeGGjp50c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Got this today with OE git head of today and bitbake git head of today.
+Note that I am building for haowkboard, still somehow it wants to
+remove the linux-nios2 recipe.
+However virtual kernel is not using the nios2 kernel.
+from the conf/machine/include/davinci.inc  file:
+PREFERRED_PROVIDER_virtual/kernel = "linux-davinci"
 
-Dear Eric,
+removing $TMPDIR/cache did not help.
+host is opensuse 11.3 (i686)
 
-
-Am Donnerstag, den 30.12.2010, 11:43 +0100 schrieb Eric B=C3=A9nard:
-
-> On 30/12/2010 11:20, Paul Menzel wrote:
-> > Am Donnerstag, den 30.12.2010, 09:55 +0100 schrieb Eric B=C3=A9nard:
-> >
-> > I would prefer if the error message `libtool: Command not found` (if it
-> > is that short) is noted in the commit summary.
-> >
-> > 	gnome-power-manager: fix compilation: `libtool: Command not found`
->
-> OK fixed and pushed.
-
-great! This is ae6002 [1].
-
-> >> * libtool is hardcoded in src/Makefile and leads to
-> >> libtool: Command not found
-> >>
-> >> Signed-off-by: Eric B=C3=A9nard<eric@eukrea.com>
-> >> ---
-> >>   recipes/gnome/gnome-power-manager_2.30.0.bb |    1 +
-> >>   1 files changed, 1 insertions(+), 0 deletions(-)
-> >>
-> >> diff --git a/recipes/gnome/gnome-power-manager_2.30.0.bb b/recipes/gno=
-me/gnome-power-manager_2.30.0.bb
-> >> index a752852..0c7bcb5 100644
-> >> --- a/recipes/gnome/gnome-power-manager_2.30.0.bb
-> >> +++ b/recipes/gnome/gnome-power-manager_2.30.0.bb
-> >> @@ -27,6 +27,7 @@ do_configure_append() {
-> >>           for i in $(find ${S} -name "Makefile") ; do
-> >>               sed -i -e s:-Werror::g $i
-> >>           done
-> >> +		sed -e "s/libtool --/${TARGET_SYS}-libtool --/" -i ${S}/src/Makefil=
-e
-> >>   }
-> >>
-> >>   PACKAGES =3D+ "${PN}-applets"
-> >
-> > Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
-> >
-> > What is the proper patch to send upstream? Is `${TARGET_SYS}` always
-> > defined? But =C2=BB-=C2=AB would still make problems, wouldn=E2=80=99t =
-it? Is there a
-> > program implementing this correctly in `Makefile`?
-> >
-> - TARGET_SYS is OE specific.
-> - The "--" is here to only replace the 2 or 3 instances of libtool concer=
-ned=20
-> by the workaround.
-
-I meant the `-` in `${TARGET_SYS}-libtool`, so if `${TARGET_SYS}` would
-be empty than `-libtool` is not usable.
-
-> - I don't know what would be the proper patch to send upstream (and don't=
- have=20
-> time to check for this now). I've just seen there are several new release=
- of=20
-> gnome-power-manager so the problem may already be fixed, will see when I =
-have=20
-> some time.
-
-Well as you wrote it is hard coded twice `src/Makefile.am`, also in
-2.32.0. But I cannot find it in the current in master branch. It was
-removed in commit 756876 [2]. But I guess this will not be compatible
-with the current GNOME stuff in OE and is for the migration to GNOME 3.
-But I have no idea.
-
-`system-tools-backend_2.10.1.bb` also has to deal with hard coded
-`libtool` and just copies it over [3].
-
-        do_configure() {
-        	sed -i -e 's:CC=3D$(CC):CC=3D"$(CC)":g' ${S}/Net-DBus/Makefile.am
-        	sed -i -e 's:CC=3D$(CC):CC=3D"$(CC)":g' ${S}/Net-DBus/Makefile.in
-        	libtoolize --force --install
-        	aclocal
-        	gnu-configize
-        	oe_runconf
-        	cp ${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool ${S}
-        }
-
-To summarize, it is not useful to prepare a patch for upstream inclusion
-since there will not be a 2.34 or 2.32.x release, I guess.
+Puzzled, Frans
 
 
-Thanks,
+frans@linux-suse:~/oe> bitbake -cclean virtual/kernel
+Loading cache: 100%
+|##############################################################################|
+ETA:  00:00:00
+Loaded 7218 entries from dependency cache.
+Parsing recipes: 100%
+|############################################################################|
+Time: 00:00:24
+Parsing of 7273 .bb files complete (6526 cached, 747 parsed). 7977
+targets, 317 skipped, 0 masked, 0 errors.
 
-Paul
+Build Configuration:
+BB_VERSION        = "1.11.0"
+METADATA_BRANCH   = "org.openembedded.dev"
+METADATA_REVISION = "b04d637"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "hawkboard"
+DISTRO            = "minimal"
+DISTRO_VERSION    = "dev-snapshot-20101230"
+TARGET_FPU        = "soft"
+
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing PROVIDES 'virtual/arm-oe-linux-gnueabi-depmod-None'
+ERROR: Nothing RPROVIDES 'virtual/arm-oe-linux-gnueabi-depmod-None'
+NOTE: Runtime target 'virtual/arm-oe-linux-gnueabi-depmod-None' is
+unbuildable, removing...
+Missing or unbuildable dependency chain was:
+['virtual/arm-oe-linux-gnueabi-depmod-None']
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1 of 1 (ID: 0,
+/home/frans/oe/openembedded/recipes/linux/linux-nios2_2.6.34.bb,
+do_clean)
+NOTE: package linux-nios2-2.6.34-r50: task do_clean: Started
+NOTE: removing tmp_minimal/work/hawkboard-oe-linux-gnueabi/linux-nios2-2.6.34-r50
+NOTE: removing tmp_minimal/stamps/hawkboard-oe-linux-gnueabi/linux-nios2-2.6.34-r50.*
+NOTE: package linux-nios2-2.6.34-r50: task do_clean: Succeeded
+NOTE: Tasks Summary: Attempted 1 tasks of which 0 didn't need to be
+rerun and 0 failed.
+frans@linux-suse:~/oe> cd openembedded/
 
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dae60020=
-2dbf68be4cc7515b877ef143c1f5f8c31
-[2] http://git.gnome.org/browse/gnome-power-manager/commit/?id=3D7568769fb1=
-e46de1b8ed8601fe106df9b367bb45
-[3] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gnome/s=
-ystem-tools-backends_2.10.1.bb?id=3D8d914cdf124e940b7a06ad3343077b68e01e601=
-9
-
---=-DNxpzuLxh62jeGGjp50c
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk0czq8ACgkQPX1aK2wOHVjJLQCdG8VBMra8NiswpOViqUHSQRrK
-OxEAn3l9C7FhzYEyEG/H+WXFGXGaEJ0x
-=GkTE
------END PGP SIGNATURE-----
-
---=-DNxpzuLxh62jeGGjp50c--
