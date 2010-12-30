@@ -1,32 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PYNGJ-000718-4D
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 19:30:07 +0100
-Received: by iyj18 with SMTP id 18so10441203iyj.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PYNMJ-0007Bj-0W for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 19:36:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PYNM2-0005xx-ON for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 19:36:02 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Dec 2010 19:36:02 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Dec 2010 10:29:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=4dK7i+GGJ/xdJuv1dw43ijW2f+3qKYoh546VXSBcTFM=;
-	b=OdjbnRHxm8hv7RF76lvaE6+8TGR9HA5vkvVDJ1SB8KzrvRMF5e16jRQBtJi6eGEp15
-	LbqG2YDF61JQA7TT1kdvSztzhUJYZD+089KDbWaAiWcsgOQRCVkb39AFeLGinWTDpYcB
-	fDyr041b0cyiFv8RLyuY9MBAyQx99Ehz2ABTc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=AGEusa7Kn7CXLJvZWTfdszebNdtAhbJBILUUVRVeB05zQvvIhXcYuDhbSVbUJCfQ0+
-	K4nJYNiyvKTZAyog9VNGFI8YZb7S9nE4lClFMqx4cTJEjDh5PB+iBCw2d8k5Vj/jQJoS
-	CKbmFumsH1RVqndoa4cd3wn32YPLs5GtZldoM=
-MIME-Version: 1.0
-Received: by 10.231.182.13 with SMTP id ca13mr166950ibb.57.1293733789070; Thu,
-	30 Dec 2010 10:29:49 -0800 (PST)
-Received: by 10.231.200.140 with HTTP; Thu, 30 Dec 2010 10:29:49 -0800 (PST)
-Date: Thu, 30 Dec 2010 19:29:49 +0100
-Message-ID: <AANLkTikxUP2WpUeaX19vu8wMecM4MHDQHh0wKArdQ_o+@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org, Bitbake-de@lists.berlios.de
-Subject: bitbake oddity, wong kernel
+	Thu, 30 Dec 2010 19:36:02 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 30 Dec 2010 19:35:48 +0100
+Message-ID: <ifije4$p3n$1@dough.gmane.org>
+References: <4D1C4E4A.5000705@eukrea.com> <ifhrie$a01$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <ifhrie$a01$1@dough.gmane.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: ti-c6accel-1_01_00_01: link error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,62 +42,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 18:30:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 30 Dec 2010 18:36:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Got this today with OE git head of today and bitbake git head of today.
-Note that I am building for haowkboard, still somehow it wants to
-remove the linux-nios2 recipe.
-However virtual kernel is not using the nios2 kernel.
-from the conf/machine/include/davinci.inc  file:
-PREFERRED_PROVIDER_virtual/kernel = "linux-davinci"
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-removing $TMPDIR/cache did not help.
-host is opensuse 11.3 (i686)
+On 30-12-10 12:48, Koen Kooi wrote:
+> On 30-12-10 10:18, Eric Bénard wrote:
+>> hi,
+> 
+>> using today's master + angstrom 2010.x + beagleboard I get the following
+>> error :
+> 
+>> .../...
+>> Linking c6accel_app from appMain.o c6accel_testfxns.o
+>> ../c6accelw/lib/c6accelw_omap3530.a470MV c6accel_app_config/linker.cmd..
+>> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+>> warning: c6accel_app_config/linker.cmd contains output sections; did you
+>> forget -T?
+>> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+>> .gnu.attributes not found for insert
+>> collect2: ld returned 1 exit status
+> 
+>> Any idea on how to fix this ?
+> 
+> This is a combination of a bug in xdctools and c6accel, could you open
+> an issue on e2e.ti.com for this so the right people (e.g. Gagan for
+> c6accel and Sasa for xdctools) can have a look at it?
+> There was a work around for a codesourcery bug in xdctools that broke
+> any non-CSL toolchain when building codec-engine, and the fix seems to
+> have some side effects, like the one you are seeing.
+> 
+> You can get the command it's trying to run by commenting the 'VERBOSE =
+> @' in the Makefile in soc/app/something.
 
-Puzzled, Frans
+FWIW, the full commandline is:
+
+| Linking c6accel_app from appMain.o c6accel_testfxns.o
+../c6accelw/lib/c6accelw_omap3530.a470MV c6accel_app_config/linker.cmd..
+|
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/bin/arm-angstrom-linux-gnueabi-gcc
+-
+-L/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/lib
+-
+-L/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+- -Wl,-O1 -Wl,--hash-style=gnu -lm -lpthread -o c6accel_app appMain.o
+c6accel_testfxns.o ../c6accelw/lib/c6accelw_omap3530.a470MV
+c6accel_app_config/linker.cmd
+|
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/bin/arm-angstrom-linux-gnueabi-gcc
+-
+-L/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/lib
+-
+-L/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+- -Wl,-O1 -Wl,--hash-style=gnu -lm -lpthread -o c6accel_app appMain.o
+c6accel_testfxns.o ../c6accelw/lib/c6accelw_omap3530.a470MV
+c6accel_app_config/linker.cmd
+|
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+warning: c6accel_app_config/linker.cmd contains output sections; did you
+forget -T?
+|
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+.gnu.attributes not found for insert
 
 
-frans@linux-suse:~/oe> bitbake -cclean virtual/kernel
-Loading cache: 100%
-|##############################################################################|
-ETA:  00:00:00
-Loaded 7218 entries from dependency cache.
-Parsing recipes: 100%
-|############################################################################|
-Time: 00:00:24
-Parsing of 7273 .bb files complete (6526 cached, 747 parsed). 7977
-targets, 317 skipped, 0 masked, 0 errors.
+And the linkerscript is:
 
-Build Configuration:
-BB_VERSION        = "1.11.0"
-METADATA_BRANCH   = "org.openembedded.dev"
-METADATA_REVISION = "b04d637"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "hawkboard"
-DISTRO            = "minimal"
-DISTRO_VERSION    = "dev-snapshot-20101230"
-TARGET_FPU        = "soft"
+INPUT(
 
-NOTE: Resolving any missing task queue dependencies
-ERROR: Nothing PROVIDES 'virtual/arm-oe-linux-gnueabi-depmod-None'
-ERROR: Nothing RPROVIDES 'virtual/arm-oe-linux-gnueabi-depmod-None'
-NOTE: Runtime target 'virtual/arm-oe-linux-gnueabi-depmod-None' is
-unbuildable, removing...
-Missing or unbuildable dependency chain was:
-['virtual/arm-oe-linux-gnueabi-depmod-None']
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 1 of 1 (ID: 0,
-/home/frans/oe/openembedded/recipes/linux/linux-nios2_2.6.34.bb,
-do_clean)
-NOTE: package linux-nios2-2.6.34-r50: task do_clean: Started
-NOTE: removing tmp_minimal/work/hawkboard-oe-linux-gnueabi/linux-nios2-2.6.34-r50
-NOTE: removing tmp_minimal/stamps/hawkboard-oe-linux-gnueabi/linux-nios2-2.6.34-r50.*
-NOTE: package linux-nios2-2.6.34-r50: task do_clean: Succeeded
-NOTE: Tasks Summary: Attempted 1 tasks of which 0 didn't need to be
-rerun and 0 failed.
-frans@linux-suse:~/oe> cd openembedded/
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/usrp-e1xx-angstrom-linux-gnueabi/ti-c6accel-1_01_00_03-r95a/c6accel_1_01_00_03/soc/app/c6accel_app_config/package/cfg/c6accel_app_xv5T.ov5T
+
+staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/universal/lib/release/universal.av5T
+
+staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/lib/release/ce.av5T
+
+staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/alg/lib/release/Algorithm_noOS.av5T
+
+staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/alg/lib/release/alg.av5T
+
+staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/ipc/dsplink/lib/release/ipc_dsplink_3530.av5T
+
+staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/osal/linux/lib/release/osal_linux_470.av5T
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/acpy3/lib/release/acpy3.a470MV
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/dman3/lib/release/dman3Cfg.a470MV
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/rmm.av5T
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/smgr.av5T
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/rmmp.av5T
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/smgrmp.av5T
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/utils/lib/release/shm.av5T
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/memutils/lib/release/memutils.av5T
+
+staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/utils/xdm/lib/release/XdmUtils.av5T
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/utils/trace/lib/release/gt.av5T
+
+staging/usr/share/ti/ti-codec-engine-tree/packages/ti/sdo/ce/node/lib/release/node.av5T
+
+staging/usr/share/ti/ti-local-power-manager-tree/packages/ti/bios/power/lib/release/lpm.av5T
+
+staging/usr/share/ti/ti-dsplink-tree/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplink.lib
+
+staging/usr/share/ti/ti-framework-components-tree/packages/ti/sdo/fc/scpy/lib/release/scpy.av5T
+
+staging/usr/share/ti/ti-linuxutils-tree/packages/ti/sdo/linuxutils/cmem/lib/cmem.a470MV
+
+staging/usr/share/ti/ti-linuxutils-tree/packages/ti/sdo/linuxutils/sdma/lib/sdma.a470MV
+
+staging/usr/share/ti/ti-xdctools-tree/packages/gnu/targets/arm/rtsv5T/lib/gnu.targets.arm.rtsv5T.av5T
+)
+
+SECTIONS {
+    xdc.meta (COPY) : {*(xdc.meta)}
+
+}
+
+INSERT BEFORE .gnu.attributes
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNHNEEMkyGM64RGpERAg6kAJ4jzEirkwTUT/UzHfBnMoNdqRaSlACfWQJC
+a0cHcgDlPFC8wTecJiOMVpE=
+=owMO
+-----END PGP SIGNATURE-----
+
 
 
