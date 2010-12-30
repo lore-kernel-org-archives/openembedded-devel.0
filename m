@@ -1,24 +1,27 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roman@khimov.ru>) id 1PYCri-0002ij-4C
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PYENd-0004K8-NB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 08:24:03 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PYCrQ-0000QQ-FC
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 10:23:47 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Thu, 30 Dec 2010 10:01:05 +0100
+Received: (qmail 25111 invoked by uid 503); 30 Dec 2010 09:37:18 -0000
+Received: from b6.ovh.net (HELO mail606.ha.ovh.net) (213.186.33.56)
+	by 63.mail-out.ovh.net with SMTP; 30 Dec 2010 09:37:18 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 30 Dec 2010 11:00:36 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 30 Dec 2010 11:00:35 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Dec 2010 10:23:38 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
-References: <201012292340.40618.roman@khimov.ru>
-	<1293660478-3080-1-git-send-email-khimov@altell.ru>
-	<1293660478-3080-2-git-send-email-khimov@altell.ru>
-In-Reply-To: <1293660478-3080-2-git-send-email-khimov@altell.ru>
+Date: Thu, 30 Dec 2010 09:55:34 +0100
+Message-Id: <1293699334-4159-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
 MIME-Version: 1.0
-Message-Id: <201012301023.43492.roman@khimov.ru>
-Subject: Re: [PATCH 2/2] classes/cpan: fix bin/script/man1/man3 installation dirs
+X-Ovh-Tracer-Id: 5346335709683952969
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH] gnome-power-manager: fix compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,35 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 07:24:03 -0000
-X-Groupsio-MsgNum: 27576
-Content-Type: multipart/signed; boundary="nextPart1638680.L85KQ5u3XA";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Dec 2010 09:01:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---nextPart1638680.L85KQ5u3XA
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+* libtool is hardcoded in src/Makefile and leads to
+libtool: Command not found
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0KfQtdGC0LLQtdGA0LMgMzAg0LTQtdC60LDQsdGA
-0Y8gMjAxMCAwMTowNzo1OCDQsNCy0YLQvtGAIFJvbWFuIEkgS2hpbW92INC90LDQv9C40YHQsNC7
-Ogo+ICsJCQktZSAiczpcKElOU1RBTExWRU5ET1JNQU4xRElSID0gXCkuKjpcMSR7RH0ke21hbjFk
-aXJ9OiIgXAo+ICsJCQktZSAiczpcKElOU1RBTExWRU5ET1JNQU4zRElSID0gXCkuKjpcMSR7RH0k
-e21hbjFkaXJ9OiIgXAoKVGhlIGxhdHRlciBzaG91bGQgYmUgbWFuM2Rpciwgb2J2aW91c2x5LgoK
-LS0gCiBodHRwOi8vcm9tYW4ua2hpbW92LnJ1Cm1haWx0bzogcm9tYW5Aa2hpbW92LnJ1CmdwZyAt
-LWtleXNlcnZlciBoa3A6Ly9zdWJrZXlzLnBncC5uZXQgLS1yZWN2LWtleXMgMHhFNUUwNTVDMwo=
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/gnome/gnome-power-manager_2.30.0.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
---nextPart1638680.L85KQ5u3XA
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+diff --git a/recipes/gnome/gnome-power-manager_2.30.0.bb b/recipes/gnome/gnome-power-manager_2.30.0.bb
+index a752852..0c7bcb5 100644
+--- a/recipes/gnome/gnome-power-manager_2.30.0.bb
++++ b/recipes/gnome/gnome-power-manager_2.30.0.bb
+@@ -27,6 +27,7 @@ do_configure_append() {
+         for i in $(find ${S} -name "Makefile") ; do
+             sed -i -e s:-Werror::g $i
+         done
++		sed -e "s/libtool --/${TARGET_SYS}-libtool --/" -i ${S}/src/Makefile
+ }
+ 
+ PACKAGES =+ "${PN}-applets"
+-- 
+1.7.0.4
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAk0cM38ACgkQXJ70z+XgVcNVHgCgv/ODk1elQUNTZG3CqvjEHE/e
-QsMAn0BK2NJ1rmL0NTuzsFkpPobGZ+gz
-=2ZY/
------END PGP SIGNATURE-----
 
---nextPart1638680.L85KQ5u3XA--
