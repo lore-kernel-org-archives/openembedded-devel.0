@@ -1,35 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PYLoC-000588-Nq for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 17:57:01 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PYLnv-0007d8-Kt for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 17:56:43 +0100
-Received: from ua-83-227-238-68.cust.bredbandsbolaget.se ([83.227.238.68])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Dec 2010 17:56:43 +0100
-Received: from a.tqvist by ua-83-227-238-68.cust.bredbandsbolaget.se with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PYMPZ-0005uE-6o
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 18:35:37 +0100
+Received: by iwn8 with SMTP id 8so11522952iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Dec 2010 17:56:43 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 30 Dec 2010 09:35:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=gFy9MpkigI/LKVgdyK4n2MyqInpTOpWtbtD0LxsnDmk=;
+	b=tkKd4E0OTr6s+YTVshRdqPg79eLl2Y7HJmyjv2gNJUv1cInHdC0zunNw4Tas4gwW7S
+	7Froh5azxwMlbeUyn6OX1f4qXl/bo3N4OpfXs4u8ovDj8TFZCtOtYrEgLgEBsHCaunYv
+	CIpAF14xVYWpwmeZU6HvSr6LuAiwWQVYAScqc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ERqqou5mKKMDDTw6GDcg5udsg0wjLjPu88oH2wJbFMjMZbqPTAO5e6uq5OoDzBWobY
+	TkH6fLFmZLyEEcVClmh8xvPgzD2bGq4CIsgQxlOt86/JUqaWlzB4dvgkX9NnlIYyCXjS
+	t1ycYLW+dGu4pri3b0FzAHD+8QWuC0JYPgbBw=
+MIME-Version: 1.0
+Received: by 10.231.182.13 with SMTP id ca13mr86036ibb.57.1293730514284; Thu,
+	30 Dec 2010 09:35:14 -0800 (PST)
+Received: by 10.231.200.140 with HTTP; Thu, 30 Dec 2010 09:35:14 -0800 (PST)
+In-Reply-To: <1293660478-3080-1-git-send-email-khimov@altell.ru>
+References: <201012292340.40618.roman@khimov.ru>
+	<1293660478-3080-1-git-send-email-khimov@altell.ru>
+Date: Thu, 30 Dec 2010 18:35:14 +0100
+Message-ID: <AANLkTinYyaiQYK_4S+gR3fJHcgndV-JTWJsrzsSRyNc1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Anders =?utf-8?b?VMO2cm5xdmlzdA==?= <a.tqvist@gmail.com>
-Date: Thu, 30 Dec 2010 16:56:31 +0000 (UTC)
-Message-ID: <loom.20101230T174744-823@post.gmane.org>
-References: <loom.20101124T090626-312@post.gmane.org>
-	<AANLkTi=gaij=zue+LuXxr-bv7LHfYE_Nqo7xu1+QBzWS@mail.gmail.com>
-	<20101216050818.GA18068@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 83.227.238.68 (Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.3) Gecko/20100423 Ubuntu/10.04 (lucid) Firefox/3.6.3)
-Subject: Re: Source distribution broken?
+Subject: Re: [PATCH 1/2] perl 5.10.1: fix archlib(exp) and privlib(exp) vars in target configs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,62 +45,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 16:57:01 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 30 Dec 2010 17:35:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Khem Raj <raj.khem <at> gmail.com> writes:
+2010/12/29 Roman I Khimov <khimov@altell.ru>:
+> These vars can be used to derive build flags for perl modules and thus sh=
+ould
+> point to build-time directories in staged configs.
+>
+> Signed-off-by: Roman I Khimov <khimov@altell.ru>
 
-> 
-> On (15/12/10 23:35), Michael Poole wrote:
-> > 2010/11/24 Anders Törnqvist <a.tqvist <at> gmail.com>:
-> > > Hi,
-> > >
-> > > Is the source distribution functionality broken?
-> > >
-> > > This is set in local.conf:
-> > > SRC_DIST_LOCAL = "copy"
-> > > INHERIT += "src_distribute_local"
-> > >
-> > > New checkout of OE from git.
-> > > Have tried different builds for MACHINE=beagleboard and images
-minimal-image and
-> > > base-image.
-> > >
-> > > The only thing that is stored in the TMPDIR/deploy/glibc/sources is a MIT
-> > > directory with the minimal-image/minimal-image.bb file.
-> 
-> hmm I get it properly populated for console-image, do_build is added in
-> base.bbclass I think it should be there for all recipes
-> 
+Tested this patch and the next one together. They solve my libdatetime prob=
+lem.
+Thanks alot!
+
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> ---
+> =A0recipes/perl/perl_5.10.1.bb | =A0 =A09 ++++++++-
+> =A01 files changed, 8 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
+> index d8c374b..4e6bc33 100644
+> --- a/recipes/perl/perl_5.10.1.bb
+> +++ b/recipes/perl/perl_5.10.1.bb
+> @@ -5,7 +5,7 @@ LICENSE =3D "Artistic|GPLv1+"
+> =A0PRIORITY =3D "optional"
+> =A0# We need gnugrep (for -I)
+> =A0DEPENDS =3D "virtual/db perl-native grep-native"
+> -PR =3D "r18"
+> +PR =3D "r19"
+>
+> =A0# 5.10.1 has Module::Build built-in
+> =A0PROVIDES +=3D "libmodule-build-perl"
+> @@ -224,6 +224,13 @@ do_stage() {
+> =A0 =A0 =A0 =A0 install config.sh ${STAGING_LIBDIR}/perl/
+> =A0 =A0 =A0 =A0 # target configuration, used by native perl when cross-co=
+mpiling
+> =A0 =A0 =A0 =A0 install lib/Config_heavy.pl ${STAGING_LIBDIR_NATIVE}/perl=
+/${PV}/Config_heavy-${TARGET_SYS}.pl
+> + =A0 =A0 =A0 sed -r -i \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e "s,^(archlib=3D).*$,\1'${STAGING_LIBDIR}=
+/perl/${PV}'," \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e "s,^(archlibexp=3D).*$,\1'${STAGING_LIBD=
+IR}/perl/${PV}'," \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e "s,^(privlib=3D).*$,\1'${STAGING_DATADIR=
+}/perl/${PV}'," \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 -e "s,^(privlibexp=3D).*$,\1'${STAGING_DATA=
+DIR}/perl/${PV}'," \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 ${STAGING_LIBDIR_NATIVE}/perl/${PV}/Config_=
+heavy-${TARGET_SYS}.pl \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 ${STAGING_LIBDIR}/perl/config.sh
+> =A0 =A0 =A0 =A0# target configuration
+> =A0 =A0 =A0 =A0 install lib/Config.pm =A0 =A0 =A0 ${STAGING_LIBDIR}/perl/=
+${PV}/
+> =A0 =A0 =A0 =A0install lib/ExtUtils/typemap ${STAGING_DATADIR}/perl/${PV}=
+/ExtUtils/
+> --
+> 1.6.4.2
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
-> Openembedded-devel <at> lists.openembedded.org
+> Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
-Hmm. I do not get the TMPDIR/deploy/glibc/sources populated by any other sources
-than the console-image.bb file in a MIT directory.
-
-I have tested several builds with different images (micro, minimal, console,
-base) in combination with DISTRO set to "angstrom-2008.1".
-These combinations have I build based on release 2010.12 from tar file as well
-as a GIT dev-branch dated christmas.
-
-The result is always that the TMPDIR/deploy/glibc/sources is not populated.
-
-On the other hand is the  TMPDIR/deploy/glibc/sources always populated if I add
-"-c buildall" in all combinations (image, distro, and branch) mentioned above.
-
-"-c distribute_sources_all" also always work to get TMPDIR/deploy/glibc/sources
-populated.
-
-Isn't the idea that TMPDIR/deploy/glibc/sources should be populated
-automatically without having to add "-c buildall"?
-
-/Anders Törnqvist
-
-
-
+>
 
 
