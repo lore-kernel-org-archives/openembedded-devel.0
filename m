@@ -1,32 +1,34 @@
-Received: from 31.mail-out.ovh.net ([213.186.62.10])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PYFzF-0005yS-FB
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 11:44:01 +0100
-Received: (qmail 14124 invoked by uid 503); 30 Dec 2010 11:15:44 -0000
-Received: from b7.ovh.net (HELO mail91.ha.ovh.net) (213.186.33.57)
-	by 31.mail-out.ovh.net with SMTP; 30 Dec 2010 11:15:44 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 30 Dec 2010 12:43:37 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 30 Dec 2010 12:43:34 +0200
-Message-ID: <4D1C6256.6030100@eukrea.com>
-Date: Thu, 30 Dec 2010 11:43:34 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PYH09-00075y-AV for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 12:49:01 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PYGzt-0008O5-N7 for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 12:48:45 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Dec 2010 12:48:45 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Dec 2010 12:48:45 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1293699334-4159-1-git-send-email-eric@eukrea.com>
-	<1293704431.5436.5.camel@mattotaupa>
-In-Reply-To: <1293704431.5436.5.camel@mattotaupa>
-X-Ovh-Tracer-Id: 7085851065853390153
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] gnome-power-manager: fix compilation
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 30 Dec 2010 12:48:30 +0100
+Message-ID: <ifhrie$a01$1@dough.gmane.org>
+References: <4D1C4E4A.5000705@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.15) Gecko/20101031 Shredder/3.0.11pre
+In-Reply-To: <4D1C4E4A.5000705@eukrea.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: ti-c6accel-1_01_00_01: link error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,57 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 10:44:01 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 30 Dec 2010 11:49:01 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hi Paul,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On 30/12/2010 11:20, Paul Menzel wrote:
-> Am Donnerstag, den 30.12.2010, 09:55 +0100 schrieb Eric Bénard:
->
-> I would prefer if the error message `libtool: Command not found` (if it
-> is that short) is noted in the commit summary.
->
-> 	gnome-power-manager: fix compilation: `libtool: Command not found`
->
-OK fixed and pushed.
+On 30-12-10 10:18, Eric Bénard wrote:
+> hi,
+> 
+> using today's master + angstrom 2010.x + beagleboard I get the following
+> error :
+> 
+> .../...
+> Linking c6accel_app from appMain.o c6accel_testfxns.o
+> ../c6accelw/lib/c6accelw_omap3530.a470MV c6accel_app_config/linker.cmd..
+> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+> warning: c6accel_app_config/linker.cmd contains output sections; did you
+> forget -T?
+> /home/ebenard/OMAP/2010/angstrom-setup-scripts/build/tmp-angstrom_2010_x/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+> .gnu.attributes not found for insert
+> collect2: ld returned 1 exit status
+> 
+> Any idea on how to fix this ?
 
->> * libtool is hardcoded in src/Makefile and leads to
->> libtool: Command not found
->>
->> Signed-off-by: Eric Bénard<eric@eukrea.com>
->> ---
->>   recipes/gnome/gnome-power-manager_2.30.0.bb |    1 +
->>   1 files changed, 1 insertions(+), 0 deletions(-)
->>
->> diff --git a/recipes/gnome/gnome-power-manager_2.30.0.bb b/recipes/gnome/gnome-power-manager_2.30.0.bb
->> index a752852..0c7bcb5 100644
->> --- a/recipes/gnome/gnome-power-manager_2.30.0.bb
->> +++ b/recipes/gnome/gnome-power-manager_2.30.0.bb
->> @@ -27,6 +27,7 @@ do_configure_append() {
->>           for i in $(find ${S} -name "Makefile") ; do
->>               sed -i -e s:-Werror::g $i
->>           done
->> +		sed -e "s/libtool --/${TARGET_SYS}-libtool --/" -i ${S}/src/Makefile
->>   }
->>
->>   PACKAGES =+ "${PN}-applets"
->
-> Acked-by: Paul Menzel<paulepanter@users.sourceforge.net>
->
-> What is the proper patch to send upstream? Is `${TARGET_SYS}` always
-> defined? But »-« would still make problems, wouldn’t it? Is there a
-> program implementing this correctly in `Makefile`?
->
-- TARGET_SYS is OE specific.
-- The "--" is here to only replace the 2 or 3 instances of libtool concerned 
-by the workaround.
-- I don't know what would be the proper patch to send upstream (and don't have 
-time to check for this now). I've just seen there are several new release of 
-gnome-power-manager so the problem may already be fixed, will see when I have 
-some time.
+This is a combination of a bug in xdctools and c6accel, could you open
+an issue on e2e.ti.com for this so the right people (e.g. Gagan for
+c6accel and Sasa for xdctools) can have a look at it?
+There was a work around for a codesourcery bug in xdctools that broke
+any non-CSL toolchain when building codec-engine, and the fix seems to
+have some side effects, like the one you are seeing.
 
-Eric
+You can get the command it's trying to run by commenting the 'VERBOSE =
+@' in the Makefile in soc/app/something.
+
+I'm on holiday till the 9th :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNHHGOMkyGM64RGpERAj/GAKCMNGZm1Z5bb/FhhVZFPWYPN/YIfACdE2M8
+/I9n89tfyEc8iMJ4Qn3RFQs=
+=Po04
+-----END PGP SIGNATURE-----
+
 
 
