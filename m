@@ -1,32 +1,43 @@
-Received: from 64.mail-out.ovh.net ([91.121.185.65])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PY5MV-00005n-Ht
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1PYABi-0004lT-Ts
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 00:23:20 +0100
-Received: (qmail 6771 invoked by uid 503); 29 Dec 2010 23:05:40 -0000
-Received: from b6.ovh.net (HELO mail32.ha.ovh.net) (213.186.33.56)
-	by 64.mail-out.ovh.net with SMTP; 29 Dec 2010 23:05:40 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 30 Dec 2010 01:23:04 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 30 Dec 2010 01:23:04 +0200
-Message-ID: <4D1BC2D8.9050308@eukrea.com>
-Date: Thu, 30 Dec 2010 00:23:04 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	Thu, 30 Dec 2010 05:32:30 +0100
+Received: by fxm17 with SMTP id 17so10121877fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Dec 2010 20:32:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=t57Fcuc4kbB16VOzRMglzwtJUzjiZMBrFutWoNEE6i0=;
+	b=LnEyUAAuj6izpgRyCphTBq1M4oLoNZy+lPdppf2VDFtyDlglYQzubBVslC5gYZoFRP
+	zToL1LKfRWUSWKSj4SDqhEQQ67YYTCS2BJan1ITq5HUcFWbFoJxZnmCNfWkgnscJNy3P
+	Xvv4mNFGRvAsPBYa1f2G//v5h4QHo+nmD7+E0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=hHbPNIOdCmr7oQcHYG4wuzIPDwztG/fj0gsxauCSY3/d3LMya2eSpwxYr08c9pQpWY
+	JePRT68THkhRQIMSeGR5xziUB3FWOe+K13EvfKAXqDJNmSbFJ0ZnX5YaC2EzXVRsHeMi
+	5u+jOT+m3D+q+lQOnTbmslgiD7K/34nyLQWi0=
+Received: by 10.223.72.197 with SMTP id n5mr1481487faj.8.1293683519759;
+	Wed, 29 Dec 2010 20:31:59 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id l14sm3699909fan.33.2010.12.29.20.31.57
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 29 Dec 2010 20:31:58 -0800 (PST)
+Date: Thu, 30 Dec 2010 05:32:00 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1293644563.4238.7.camel@mattotaupa>	<1293645497-22323-1-git-send-email-Martin.Jansa@gmail.com>	<AANLkTimF8brtuRiXYU-kNRQQdur8FpM9=Xo4cGdJxyAG@mail.gmail.com>	<4D1B8FA8.2040400@eukrea.com>
-	<4D1BBFBA.9050300@opendreambox.org>
-In-Reply-To: <4D1BBFBA.9050300@opendreambox.org>
-X-Ovh-Tracer-Id: 14039971839029456201
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH 1/2] glib-2.0, dbus: drop dbus's dependency on glib and add dbus dependency to glib-2.0_2.26.1
+Message-ID: <20101230043200.GA10141@jama>
+References: <1293644563.4238.7.camel@mattotaupa>
+	<1293651953-2998-1-git-send-email-eric@eukrea.com>
+	<AANLkTimdAyrfzSq1zvFf1Nyg2xfrXZO2N-3a04=EKYpD@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTimdAyrfzSq1zvFf1Nyg2xfrXZO2N-3a04=EKYpD@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] glib 2.26.1: fix compilation failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,21 +51,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Dec 2010 23:23:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 30 Dec 2010 04:32:31 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-On 30/12/2010 00:09, Andreas Oberritter wrote:
-> On 12/29/2010 08:44 PM, Eric Bénard wrote:
->> PKG_CONFIG_PATH contains both native
->> and non native directories.
->
-> Is this a bug or expected behavior? If expected, why is it needed at all?
->
-this is an expected behavior as PKG_CONFIG_PATH is set in bitbake.conf
-Kergoth told me on IRC it's for compiling sources which needs to compile 
-something which runs on the host to generate the code for the target.
+On Wed, Dec 29, 2010 at 01:19:21PM -0800, Khem Raj wrote:
+> On Wed, Dec 29, 2010 at 11:45 AM, Eric Bénard <eric@eukrea.com> wrote:
+> > during configure, pkgconfig detects dbus-1.pc which was installed
+> > by dbus-native and thus the compilation fails because it can't
+> > find dbus/dbus.h which is not yet installed for in the target's
+> > sysroot.
+> >
+> > This patch workaround this problem by not compiling the test program
+> > which depends on dbus's headers.
+> >
+> > Signed-off-by: Eric Bénard <eric@eukrea.com>
+> 
+> Acked-by: Khem Raj <raj.khem@gmail.com>
 
-Eric
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+> 
+> > ---
+> >  recipes/glib-2.0/glib-2.0_2.26.1.bb |    3 ++-
+> >  1 files changed, 2 insertions(+), 1 deletions(-)
+> >
+> > diff --git a/recipes/glib-2.0/glib-2.0_2.26.1.bb b/recipes/glib-2.0/glib-2.0_2.26.1.bb
+> > index d95f894..e19fb9f 100644
+> > --- a/recipes/glib-2.0/glib-2.0_2.26.1.bb
+> > +++ b/recipes/glib-2.0/glib-2.0_2.26.1.bb
+> > @@ -10,7 +10,7 @@ DEPENDS = "glib-2.0-native gtk-doc zlib"
+> >  DEPENDS_virtclass-native = "gettext-native gtk-doc-native \
+> >                             pkgconfig-native"
+> >
+> > -PR = "r0"
+> > +PR = "r1"
+> >
+> >  SRC_URI = "\
+> >   http://ftp.gnome.org/pub/GNOME/sources/glib/2.26/glib-${PV}.tar.bz2;name=archive \
+> > @@ -38,6 +38,7 @@ EXTRA_OECONF_append_glibc_arm = "  --enable-included-printf=no "
+> >
+> >  do_configure_prepend () {
+> >        install -m 0644 ${WORKDIR}/glibconfig-sysdefs.h .
+> > +       sed -i -e "s:TEST_PROGS += gdbus-serialization::g"  ${S}/gio/tests/Makefile.am
+> >  }
+> >
+> >  do_install_append() {
+> > --
+> > 1.7.0.4
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
