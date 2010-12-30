@@ -1,43 +1,24 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PYABi-0004lT-Ts
+	(envelope-from <roman@khimov.ru>) id 1PYCri-0002ij-4C
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Dec 2010 05:32:30 +0100
-Received: by fxm17 with SMTP id 17so10121877fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Dec 2010 20:32:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=t57Fcuc4kbB16VOzRMglzwtJUzjiZMBrFutWoNEE6i0=;
-	b=LnEyUAAuj6izpgRyCphTBq1M4oLoNZy+lPdppf2VDFtyDlglYQzubBVslC5gYZoFRP
-	zToL1LKfRWUSWKSj4SDqhEQQ67YYTCS2BJan1ITq5HUcFWbFoJxZnmCNfWkgnscJNy3P
-	Xvv4mNFGRvAsPBYa1f2G//v5h4QHo+nmD7+E0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=hHbPNIOdCmr7oQcHYG4wuzIPDwztG/fj0gsxauCSY3/d3LMya2eSpwxYr08c9pQpWY
-	JePRT68THkhRQIMSeGR5xziUB3FWOe+K13EvfKAXqDJNmSbFJ0ZnX5YaC2EzXVRsHeMi
-	5u+jOT+m3D+q+lQOnTbmslgiD7K/34nyLQWi0=
-Received: by 10.223.72.197 with SMTP id n5mr1481487faj.8.1293683519759;
-	Wed, 29 Dec 2010 20:31:59 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id l14sm3699909fan.33.2010.12.29.20.31.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 29 Dec 2010 20:31:58 -0800 (PST)
-Date: Thu, 30 Dec 2010 05:32:00 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 30 Dec 2010 08:24:03 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PYCrQ-0000QQ-FC
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Dec 2010 10:23:47 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20101230043200.GA10141@jama>
-References: <1293644563.4238.7.camel@mattotaupa>
-	<1293651953-2998-1-git-send-email-eric@eukrea.com>
-	<AANLkTimdAyrfzSq1zvFf1Nyg2xfrXZO2N-3a04=EKYpD@mail.gmail.com>
+Date: Thu, 30 Dec 2010 10:23:38 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
+References: <201012292340.40618.roman@khimov.ru>
+	<1293660478-3080-1-git-send-email-khimov@altell.ru>
+	<1293660478-3080-2-git-send-email-khimov@altell.ru>
+In-Reply-To: <1293660478-3080-2-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimdAyrfzSq1zvFf1Nyg2xfrXZO2N-3a04=EKYpD@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] glib 2.26.1: fix compilation failure
+Message-Id: <201012301023.43492.roman@khimov.ru>
+Subject: Re: [PATCH 2/2] classes/cpan: fix bin/script/man1/man3 installation dirs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,69 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 04:32:31 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 30 Dec 2010 07:24:03 -0000
+X-Groupsio-MsgNum: 27576
+Content-Type: multipart/signed; boundary="nextPart1638680.L85KQ5u3XA";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Dec 29, 2010 at 01:19:21PM -0800, Khem Raj wrote:
-> On Wed, Dec 29, 2010 at 11:45 AM, Eric Bénard <eric@eukrea.com> wrote:
-> > during configure, pkgconfig detects dbus-1.pc which was installed
-> > by dbus-native and thus the compilation fails because it can't
-> > find dbus/dbus.h which is not yet installed for in the target's
-> > sysroot.
-> >
-> > This patch workaround this problem by not compiling the test program
-> > which depends on dbus's headers.
-> >
-> > Signed-off-by: Eric Bénard <eric@eukrea.com>
-> 
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+--nextPart1638680.L85KQ5u3XA
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0KfQtdGC0LLQtdGA0LMgMzAg0LTQtdC60LDQsdGA
+0Y8gMjAxMCAwMTowNzo1OCDQsNCy0YLQvtGAIFJvbWFuIEkgS2hpbW92INC90LDQv9C40YHQsNC7
+Ogo+ICsJCQktZSAiczpcKElOU1RBTExWRU5ET1JNQU4xRElSID0gXCkuKjpcMSR7RH0ke21hbjFk
+aXJ9OiIgXAo+ICsJCQktZSAiczpcKElOU1RBTExWRU5ET1JNQU4zRElSID0gXCkuKjpcMSR7RH0k
+e21hbjFkaXJ9OiIgXAoKVGhlIGxhdHRlciBzaG91bGQgYmUgbWFuM2Rpciwgb2J2aW91c2x5LgoK
+LS0gCiBodHRwOi8vcm9tYW4ua2hpbW92LnJ1Cm1haWx0bzogcm9tYW5Aa2hpbW92LnJ1CmdwZyAt
+LWtleXNlcnZlciBoa3A6Ly9zdWJrZXlzLnBncC5uZXQgLS1yZWN2LWtleXMgMHhFNUUwNTVDMwo=
 
-> 
-> > ---
-> >  recipes/glib-2.0/glib-2.0_2.26.1.bb |    3 ++-
-> >  1 files changed, 2 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/recipes/glib-2.0/glib-2.0_2.26.1.bb b/recipes/glib-2.0/glib-2.0_2.26.1.bb
-> > index d95f894..e19fb9f 100644
-> > --- a/recipes/glib-2.0/glib-2.0_2.26.1.bb
-> > +++ b/recipes/glib-2.0/glib-2.0_2.26.1.bb
-> > @@ -10,7 +10,7 @@ DEPENDS = "glib-2.0-native gtk-doc zlib"
-> >  DEPENDS_virtclass-native = "gettext-native gtk-doc-native \
-> >                             pkgconfig-native"
-> >
-> > -PR = "r0"
-> > +PR = "r1"
-> >
-> >  SRC_URI = "\
-> >   http://ftp.gnome.org/pub/GNOME/sources/glib/2.26/glib-${PV}.tar.bz2;name=archive \
-> > @@ -38,6 +38,7 @@ EXTRA_OECONF_append_glibc_arm = "  --enable-included-printf=no "
-> >
-> >  do_configure_prepend () {
-> >        install -m 0644 ${WORKDIR}/glibconfig-sysdefs.h .
-> > +       sed -i -e "s:TEST_PROGS += gdbus-serialization::g"  ${S}/gio/tests/Makefile.am
-> >  }
-> >
-> >  do_install_append() {
-> > --
-> > 1.7.0.4
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+--nextPart1638680.L85KQ5u3XA
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
+iEYEABECAAYFAk0cM38ACgkQXJ70z+XgVcNVHgCgv/ODk1elQUNTZG3CqvjEHE/e
+QsMAn0BK2NJ1rmL0NTuzsFkpPobGZ+gz
+=2ZY/
+-----END PGP SIGNATURE-----
 
+--nextPart1638680.L85KQ5u3XA--
