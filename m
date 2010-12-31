@@ -1,24 +1,24 @@
 Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
 	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1PYmny-0002Qm-G2
+	(envelope-from <mickey@vanille-media.de>) id 1PYmqY-0002TV-BK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Dec 2010 22:46:34 +0100
+	Fri, 31 Dec 2010 22:49:14 +0100
 Received: from [192.168.1.2] (e180161166.adsl.alicedsl.de [85.180.161.166])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id CEC7F584109
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id D9533584109
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Dec 2010 23:01:12 +0100 (CET)
+	Fri, 31 Dec 2010 23:03:52 +0100 (CET)
 From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <iflbfm$rlm$1@dough.gmane.org>
+In-Reply-To: <4D1E32AF.70203@balister.org>
 References: <1293810428-31078-1-git-send-email-fransmeulenbroeks@gmail.com>
 	<1293810428-31078-2-git-send-email-fransmeulenbroeks@gmail.com>
 	<ifl85e$ets$1@dough.gmane.org>
 	<AANLkTikBC4nhO1ZSkuYcyoEPNonS4YeXCP6vzKJ3d3Fr@mail.gmail.com>
-	<iflbfm$rlm$1@dough.gmane.org>
+	<4D1E32AF.70203@balister.org>
 Organization: Vanille-Media
-Date: Fri, 31 Dec 2010 22:46:02 +0100
-Message-ID: <1293831962.2173.33.camel@saphir>
+Date: Fri, 31 Dec 2010 22:48:42 +0100
+Message-ID: <1293832122.2173.35.camel@saphir>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
 Subject: Re: [PATCH 2/2] omap4430-panda: fix u-boot
@@ -35,19 +35,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Dec 2010 21:46:34 -0000
+X-List-Received-Date: Fri, 31 Dec 2010 21:49:14 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Am Freitag, den 31.12.2010, 20:38 +0100 schrieb Koen Kooi:
-> The configurations I'm concerned about use angstrom-mirrors.bbclass, I
-> don't care about others. I can send you my rate card if you want to pay
-> me to support crap like minimal.
+By that logic we either need to ban everything but the one blessed
+distro to rule them all or introduce a DISTRO_COMPATIBLE asap.
 
-Ah finally, Mr. Attitude is back. We missed you so much. Happy new year!
+I don't think OpenEmbedded benefits from either choice.
 
+-- 
 :M:
-
 
 
 
