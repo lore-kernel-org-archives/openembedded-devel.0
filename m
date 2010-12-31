@@ -1,22 +1,29 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from zmta01.irigo.dk ([193.200.44.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roman@khimov.ru>) id 1PYfpv-00037W-FZ
+	(envelope-from <eha@doredevelopment.dk>) id 1PYfue-0003Fu-MF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Dec 2010 15:20:07 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1PYfpZ-0007Bi-3y
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Dec 2010 17:19:46 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Dec 2010 17:19:36 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.14-0.4-desktop; KDE/4.3.5; x86_64; ; )
-References: <1293803369.6161.23.camel@mattotaupa>
-In-Reply-To: <1293803369.6161.23.camel@mattotaupa>
-MIME-Version: 1.0
-Message-Id: <201012311719.43538.roman@khimov.ru>
-Subject: Re: perl program breakage: `Can't locate Config_heavy-arm-oe-linux-gnueabi.pl`
+	Fri, 31 Dec 2010 15:25:00 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by zmta01.irigo.dk (Postfix) with ESMTP id 70FA622B485E;
+	Fri, 31 Dec 2010 15:24:42 +0100 (CET)
+X-Virus-Scanned: amavisd-new at zmta01.irigo.dk
+Received: from zmta01.irigo.dk ([127.0.0.1])
+	by localhost (zmta01.irigo.dk [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id y78tLpfmqvgX; Fri, 31 Dec 2010 15:24:37 +0100 (CET)
+Received: from [192.168.1.20] (0x55532124.adsl.cybercity.dk [85.83.33.36])
+	by zmta01.irigo.dk (Postfix) with ESMTP id 5A84927B1D06;
+	Fri, 31 Dec 2010 15:24:37 +0100 (CET)
+From: Esben Haabendal <eha@doredevelopment.dk>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>
+In-Reply-To: <1293763348.17519.11220.camel@rex>
+References: <1293763348.17519.11220.camel@rex>
+Organization: =?ISO-8859-1?Q?Dor=E9Development?= ApS
+Date: Fri, 31 Dec 2010 15:24:34 +0100
+Message-ID: <1293805474.18787.366.camel@eha>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Bitbake Architecture, Roadmap, Maintainers and the future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,43 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Dec 2010 14:20:07 -0000
-X-Groupsio-MsgNum: 27607
-Content-Type: multipart/signed; boundary="nextPart1360691.u0Nk3QfdKM";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Fri, 31 Dec 2010 14:25:00 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
---nextPart1360691.u0Nk3QfdKM
-Content-Type: Text/Plain;
-  charset="windows-1251"
-Content-Transfer-Encoding: quoted-printable
+Hi
 
-=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =CF=FF=F2=ED=E8=F6=E0 31 =E4=E5=EA=
-=E0=E1=F0=FF 2010 16:49:29 =E0=E2=F2=EE=F0 Paul Menzel =ED=E0=EF=E8=F1=E0=
-=EB:
->         $ more libhtml-treebuilder-perl-3.23-r4/temp/log.do_configure.282=
-13
->         Can't locate Config_heavy-arm-oe-linux-gnueabi.pl in @INC (@INC
+On Fri, 2010-12-31 at 02:42 +0000, Richard Purdie wrote:
 
-Should be fixed by 2be79cc83040d2540f41c9224baa76a388f194c5. Sorry for the=
-=20
-breakage.
+> There are a bunch of people who can commit to bitbake, some inactive,
+> some active in different areas with different priorities. I think mine
+> are clear above, I'd appreciate others to make their objectives clear so
+> everyone understand people's positions and what people plan and don't
+> plan to do.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+While I do not and cannot be considered a maintainer in any form, I do
+have a special use for BitBake.  I use an (almost) upstream BitBake as
+part of the OE-lite project, and as such has rather strong investment in
+BitBake.
 
---nextPart1360691.u0Nk3QfdKM
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+I do not use BitBake as a command, but as a Python module, as OE-lite
+has a different dependency and runqueue/cooker model.  Because of this I
+hope to find some time improve the separation between the parser, data
+and cooker in BitBake, but I will surely notice and have to do something
+about it if BitBake is regressed with regards to this.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+As for merging with sstate, OE-lite uses a completely different staging
+model (simple per-recipe package based), and I would be very unhappy if
+merging sstate into BitBake will make it impossible for OE-lite to use
+upstream BitBake.  I haven't looked enough into the sstate
+implementation with regards to this yet though.
 
-iEYEABECAAYFAk0d5n8ACgkQXJ70z+XgVcMGSACgomzZB2W+iC6Y+jXrmElVTzr0
-HuoAniOxGBMm8SPjBY2tvXbk+73KGgy0
-=vnrh
------END PGP SIGNATURE-----
+Most of all, I would like to stress that there actually are other users
+of BitBake than OE and Poky. I hope this is considered a good thing seen
+from a BitBake perspective, and not a disturbance.
 
---nextPart1360691.u0Nk3QfdKM--
+If possible, perhaps we could have a small BitBake meeting at FOSDEM,
+trying to coordinate the way forward?
+
+Oh, btw.  I feel completely comfortable with Chris as BitBake maintainer,
+that were 
+
+/Esben
+
+
+
+
