@@ -1,37 +1,28 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PYSNU-0005fA-Lx
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <rpurdie@rpsys.net>) id 1PYV8C-0008Lz-Mg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Dec 2010 00:57:53 +0100
-Received: by ywi6 with SMTP id 6so4879433ywi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Dec 2010 15:57:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=2OP044EGRwFUQQDaioPhu4J1Pr0BiQyMRUwS8JEyfUc=;
-	b=wShnbMN/AATU4BJQb6CT2+Z+eYybtJgd5txaskuVV0njDmmpTeRCMbeE019BwwOrlA
-	9hBOFELsUYWsgCpXmMB5a/kFaSEkSYsf+3JlkyLF2BctRO9upzX+Fup6fMxNC041y83e
-	MQnqamLHXHhDZr3n2P8zFjBWlLeHsW4xYtqc8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=LmcdZh4DsQhtftwN2DoKSLeYXI8If8oJDlP5R/AEXPwCU+923BGzmmE3Lhk1qDI+C2
-	uFSBZ22uxMsErmJLcnj5G2mMYnsP/v1ZO63e+K4yPrFrSg5kmRi8oRxlmFiNtDFt+KTz
-	dqXjB2aOWF+4NUfim9pDLBty+K94id8ibqjkI=
-Received: by 10.90.80.18 with SMTP id d18mr7937225agb.31.1293753453137; Thu,
-	30 Dec 2010 15:57:33 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Thu, 30 Dec 2010 15:57:10 -0800 (PST)
-In-Reply-To: <AANLkTikxUP2WpUeaX19vu8wMecM4MHDQHh0wKArdQ_o+@mail.gmail.com>
-References: <AANLkTikxUP2WpUeaX19vu8wMecM4MHDQHh0wKArdQ_o+@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 30 Dec 2010 15:57:10 -0800
-Message-ID: <AANLkTinPxtGJCLRD8JgyPdjotigU_UMH4D-tduv04Kxo@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Bitbake-de@lists.berlios.de
-Subject: Re: bitbake oddity, wong kernel
+	Fri, 31 Dec 2010 03:54:17 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id oBV2ggdV020619;
+	Fri, 31 Dec 2010 02:42:42 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20454-03; Fri, 31 Dec 2010 02:42:38 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id oBV2gW5T020613
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 31 Dec 2010 02:42:32 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>
+Date: Fri, 31 Dec 2010 02:42:28 +0000
+Message-ID: <1293763348.17519.11220.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Bitbake Architecture, Roadmap, Maintainers and the future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,79 +36,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2010 23:57:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 31 Dec 2010 02:54:17 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 30, 2010 at 10:29 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Got this today with OE git head of today and bitbake git head of today.
-> Note that I am building for haowkboard, still somehow it wants to
-> remove the linux-nios2 recipe.
-> However virtual kernel is not using the nios2 kernel.
-> from the conf/machine/include/davinci.inc =C2=A0file:
-> PREFERRED_PROVIDER_virtual/kernel =3D "linux-davinci"
->
-> removing $TMPDIR/cache did not help.
-> host is opensuse 11.3 (i686)
->
-> Puzzled, Frans
->
+There is a little friction around bitbake at the moment. I think after a
+discussion I had with Chris earlier on some things are clearer and its
+probably good to summarise how things stand.
 
-hmmm I would say do a clean build for both the machines again
-and retry this and see if it is reproducable
+I should make it clear I've not abandoned bitbake. Anyone who has
+attended any OEDEM or other Yocto/Poky discussions will know that I
+still think/talk a lot about it. I send RFC type emails about major
+feature changes before implementation. I've also been actively
+developing new bitbake features (checksums and sstate) which just
+haven't been ready IMO for bitbake upstream until recently. People have
+yet to see the real power of these but they're *very* close to being
+useful in the real world now as anyone watching Poky will have seen.
 
->
-> frans@linux-suse:~/oe> bitbake -cclean virtual/kernel
-> Loading cache: 100%
-> |########################################################################=
-######|
-> ETA: =C2=A000:00:00
-> Loaded 7218 entries from dependency cache.
-> Parsing recipes: 100%
-> |########################################################################=
-####|
-> Time: 00:00:24
-> Parsing of 7273 .bb files complete (6526 cached, 747 parsed). 7977
-> targets, 317 skipped, 0 masked, 0 errors.
->
-> Build Configuration:
-> BB_VERSION =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D "1.11.0"
-> METADATA_BRANCH =C2=A0 =3D "org.openembedded.dev"
-> METADATA_REVISION =3D "b04d637"
-> TARGET_ARCH =C2=A0 =C2=A0 =C2=A0 =3D "arm"
-> TARGET_OS =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D "linux-gnueabi"
-> MACHINE =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D "hawkboard"
-> DISTRO =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D "minimal"
-> DISTRO_VERSION =C2=A0 =C2=A0=3D "dev-snapshot-20101230"
-> TARGET_FPU =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D "soft"
->
-> NOTE: Resolving any missing task queue dependencies
-> ERROR: Nothing PROVIDES 'virtual/arm-oe-linux-gnueabi-depmod-None'
-> ERROR: Nothing RPROVIDES 'virtual/arm-oe-linux-gnueabi-depmod-None'
-> NOTE: Runtime target 'virtual/arm-oe-linux-gnueabi-depmod-None' is
-> unbuildable, removing...
-> Missing or unbuildable dependency chain was:
-> ['virtual/arm-oe-linux-gnueabi-depmod-None']
-> NOTE: Preparing runqueue
-> NOTE: Executing runqueue
-> NOTE: Running task 1 of 1 (ID: 0,
-> /home/frans/oe/openembedded/recipes/linux/linux-nios2_2.6.34.bb,
-> do_clean)
-> NOTE: package linux-nios2-2.6.34-r50: task do_clean: Started
-> NOTE: removing tmp_minimal/work/hawkboard-oe-linux-gnueabi/linux-nios2-2.=
-6.34-r50
-> NOTE: removing tmp_minimal/stamps/hawkboard-oe-linux-gnueabi/linux-nios2-=
-2.6.34-r50.*
-> NOTE: package linux-nios2-2.6.34-r50: task do_clean: Succeeded
-> NOTE: Tasks Summary: Attempted 1 tasks of which 0 didn't need to be
-> rerun and 0 failed.
-> frans@linux-suse:~/oe> cd openembedded/
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Poky and bitbake upstream were in sync earlier this year. Unfortunately
+a bad combination of circumstances have conspired to mean they've
+diverged and I've not had a chance to sync between the two. Now I've
+come to do so I've found some features I rely on as part of the roadmap
+for bitbake have been removed, thus complicating the sync up and further
+delaying it.
+
+As a quick summary, the Poky bitbake has the checksum code and next
+generation packaged-staging (sstate) whilst bitbake upstream has
+parallel parsing and a number of other significant cleanups and features
+such as the logging overhaul. For a while Poky's bitbake used a
+different execution model to bitbake upstream but we've ended up backing
+those changes out due to performance which took a long time and
+complicated things as it wasn't desired (or particularly practical to
+have that history in bitbake master).
+
+Rightly or wrongly, maintainership of a project like bitbake is as much
+about socialising changes and getting discussion and agreement on them
+as it is about developing code. It eats a lot of time, you don't get
+much thanks for it but it does make life smoother in the long run. I
+tend to focus on this a lot having had bad experiences in the past where
+ideas don't get socialised properly as it creates friction. I know
+others much prefer just to share patches, request review and push, its a
+different way of working. This is fine if you know one or the other is
+going to happen but if one happens and you expect the other it causes
+friction in itself. Discussion first can have benefits as "review" of
+code already considered finished is hard as changes are unwelcome.
+
+I consider myself a maintainer of bitbake as I've a long track record of
+looking after the architecture of the project long term and ignoring the
+past few  months, a strong record of improving the code base, certainly
+not making it worse. I don't claim to write perfect code, far from it. I
+do intend to continue to work steadily on improving bitbake as per the
+roadmaps I've published over the past few years (taking on board input
+from others as always as these aren't set in stone).
+
+At present I don't know what role Chris wants to claim with regard to
+bitbake, I have assumed now he's back working on it he wanted a
+maintainership type role but that brings responsibility for roadmaps and
+architecture discussion which I'm not sure he wants. I believe the
+nature of bitbake needs these though.
+
+So, bitbake in the future? At present it has bits on berlios (releases,
+mailing list and a web manpage) and the git source SCM on
+git.openembedded.org. Are we happy with those locations? I find it a bit
+confusing...
+
+There are a bunch of people who can commit to bitbake, some inactive,
+some active in different areas with different priorities. I think mine
+are clear above, I'd appreciate others to make their objectives clear so
+everyone understand people's positions and what people plan and don't
+plan to do.
+
+Some things bitbake does need are more regular releases and a decent
+website and manual overhaul. I know Chris has helped the regular
+releases and I appreciate that. I also appreciate the work Chris has
+done on bitbake over the past while in general. I have mentioned this
+before but people often forget to say thanks so I'll mention it again.
+This email isn't meant in any negative way against Chris btw, I just
+want to work out what we can do better in future.
+
+For releases, I know the berlios interface isn't ideal and it might be
+possible to automate things more which the investment might be worth it
+into for more regular releases.
+
+There is also the possibility Yocto could help in some way,
+infrastructure wise, manpower to undertake certain tasks (release
+automation) and maybe others. What I don't want is for any assistance
+offered to be seen as "takeover" or other "interference" from Yocto as
+that isn't the intention and I'd rather stay clear than have that
+happen.
+
+Thoughts/Comments?
+
+Cheers,
+
+Richard
+
+
 
 
