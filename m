@@ -1,28 +1,30 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1PZ7EF-0004HQ-Pu
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Jan 2011 20:35:04 +0100
-Received: from server ([unknown] [71.164.183.134]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LEC00H4LWXP0D20@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	01 Jan 2011 12:34:37 -0600 (CST)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 2E6F40; Sat, 01 Jan 2011 12:34:30 -0600
-Received: from [192.168.1.2] by rkmorris.us with HTTP; Sat,
-	01 Jan 2011 12:34:28 -0600
-From: <openembedded@rkmorris.us>
-Date: Sat, 01 Jan 2011 12:34:28 -0600
-X-Mailer: Axigen WebMail
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1PZ7Se-0004WI-Kk for openembedded-devel@lists.openembedded.org;
+	Sat, 01 Jan 2011 20:49:56 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	p01JpAwr018397; Sat, 1 Jan 2011 19:51:10 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id F9KbRkigR0eb; Sat,  1 Jan 2011 19:51:10 +0000 (GMT)
+Received: from [192.168.1.42] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	p01Jp41Q018393
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Sat, 1 Jan 2011 19:51:06 GMT
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1293906868062803500@rkmorris.us>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 6
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: H1940 Boot Issues -> Executable Build Problems?
+In-Reply-To: <1293805474.18787.366.camel@eha>
+References: <1293763348.17519.11220.camel@rex> <1293805474.18787.366.camel@eha>
+Date: Sat, 01 Jan 2011 19:49:17 +0000
+Message-ID: <1293911357.17519.17117.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: Bitbake Architecture, Roadmap, Maintainers and the future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,194 +38,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jan 2011 19:35:04 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sat, 01 Jan 2011 19:49:56 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On Fri, 2010-12-31 at 15:24 +0100, Esben Haabendal wrote:
+> While I do not and cannot be considered a maintainer in any form, I do
+> have a special use for BitBake.  I use an (almost) upstream BitBake as
+> part of the OE-lite project, and as such has rather strong investment in
+> BitBake.
+> 
+> I do not use BitBake as a command, but as a Python module, as OE-lite
+> has a different dependency and runqueue/cooker model.  Because of this I
+> hope to find some time improve the separation between the parser, data
+> and cooker in BitBake, but I will surely notice and have to do something
+> about it if BitBake is regressed with regards to this.
 
-=20
+I know we've talked about your use of bitbake and I'm aware of it at
+least.
 
-As I have been debugging this it's looking more like a build issue - so let=
- me try the developer group, in case someone here has seen this before.
+The split between the code in general in bitbake is in general ever
+improving in my opinion. Chris has some some really great work on
+bitbake recently, particularly making it more pythonic. Some of the
+changes just before the holidays, particularly the UI changes on the
+cooker to UI relationship make me uncomfortable, particularly if they
+mean the xmlrpc client/server code no longer works. My concern is that
+they cross the boundary into what I'd class as regressing an API
+boundary, particularly one that is only in the early stages of being
+properly established and that we very much need. I don't know if this is
+an API you use or not but its the kind of thing we need to be careful
+about. FWIW, its independent of the parallel parsing code and other
+changes which is partly why I'm so concerned it was merged as is :(.
 
-=20
+> As for merging with sstate, OE-lite uses a completely different staging
+> model (simple per-recipe package based), and I would be very unhappy if
+> merging sstate into BitBake will make it impossible for OE-lite to use
+> upstream BitBake.  I haven't looked enough into the sstate
+> implementation with regards to this yet though.
 
-Copying over the key point from below ... I (successfully) built the hellow=
-orld-image, but cannot run the resulting helloworld binary on the target ma=
-chine - it does execute under QEMU, which doesn't provide support this CPU =
-(arm920t - armv4t). However, a functioning binary from the target (armv4t) =
-machine runs on the target, but not on QEMU (as expected). So it seems that=
- OpenEmbedded is not building for the right machine (which is strange, as t=
-he OpenEmbedded built kernel works!).
+To put your mind at rest, there is no "policy" enforced by bitbake on
+the way staging works in sstate. You might find the checksums useful and
+you might be able to use them in your code but its all opt in. I'm
+therefore not worried about this breaking OE-lite. If there are
+problems, please just let us/me know and we'll see how we can fix that
+but since everything is backwards compatible, it shouldn't be an issue.
 
-=20
+> Most of all, I would like to stress that there actually are other users
+> of BitBake than OE and Poky. I hope this is considered a good thing seen
+> from a BitBake perspective, and not a disturbance.
 
-Any thoughts on this? It seems that OpenEmbedded / bitbake may be using QEM=
-U to create the binary for the target ... is that right (as it's what I hav=
-e seen in a bit of poking around)? This would be a problem, as QEMU doesn't=
- support the arm920t processor. Perhaps I have to apply the QEMU patch that=
- adds this support to QEMU, or change my config to somehow create the execu=
-table in a different way?
+Its what the bitbake developers have always wanted/intended. It doesn't
+mean bitbake won't change as the need for functionality appears but we
+will do our best to keep things backwards compatible within reason
+(although replaced functionality will still get phased out over time if
+nobody needs it).
 
-=20
+I would suggest it would be time well spent for you to find a way to be
+able to use a standard upstream bitbake rather than requiring any patch
+set as it will then be easier to understand what functionality and APIs
+are being used and what impact changes to bitbake have.
 
-Any suggestions would be greatly appreciated - as my current built (actuall=
-y, rootfs) is not functioning on the target machine.
+> If possible, perhaps we could have a small BitBake meeting at FOSDEM,
+> trying to coordinate the way forward?
 
-=20
+I think I will be at FOSDEM and as always, am happy to talk :). I don't
+think Chris is likely to be there based on previous FOSDEMs but I could
+be wrong.
 
-Thanks!
+Cheers,
 
-=20
-
-... Russell
-
-=20
-
-=20
-
-
-=20
-
-
-
-Subject: Re: [Openembedded-users] H1940 Boot Issues
-From: <openembedded@rkmorris.us>
-Date: Thu, Dec 30, 2010 11:36 PM
-To: Openembedded-users@lists.openembedded.org
-
-
-
-
-
-
-Hi,
-
-=20
-
-OK, I haven't given up on this - and now it gets more interesting ... :-). =
-It seems that OpenEmbedded is not properly building a binary for the ARM920=
-T CPU (arm4t) - has anyone else seen this?
-
-=20
-
-I built the helloworld-image, and cannot run the resulting helloworld binar=
-y on the target machine - but can run it under QEMU, which doesn't even sup=
-port this CPU. However, a functioning binary from the target (arm4t) machin=
-e runs on the target, but not on QEMU (as expected). So it seems that OpenE=
-mbedded is not building for the right machine (which is strange, as the Ope=
-nEmbedded built kernel works!).
-
-=20
-
-The config files seem to be set up for the right target machine, but the bi=
-nary is not being built right for some reason. Does anyone have any ideas?
-
-=20
-
-Thanks!
-
-=20
-
-... Russell
-
-=20
-
-=20
+Richard
 
 
-On Fri, Dec 24, 2010 09:20  AM, <openembedded@rkmorris.us> wrote:
-
-
->=20
-
-
-
-Hi,
-
-=20
-
-I have tried quite a few more things here, still with no luck. It really do=
-es seem that OpenEmbedded does not properly / fully build an image that wor=
-ks on (real?) embedded systems ... :-(. I am out of things to try, but let =
-me pass this info along in the hope that it will save others some time / gr=
-ief if they try to do similar things.
-
-=20
-
-I have tried several different formats / approaches to the rootfs, none of =
-which work (except for the legacy Familiar Linux file system that I found).=
- I cannot load the OpenEmbedded rootfs as an initrd, or when extracted to a=
-n SD card (as a "normal" file system, either copied from the ext2 file, or =
-extracted from tar.gz). While this seems to be a rootfs issue, it still cou=
-ld be the build of init, as replacing the Familiar Linux init.sysvinit with=
- the one generated by OpenEmbedded does in fact break the working file syst=
-em. I tried reducing the size of generated rootfs (by setting IMAGE_ROOTFS_=
-SIZE), but that doesn't seem to be working either (so I cannot use the Open=
-Embedded rootfs as an initrd, as it is 64 MB, which seems to cause problems=
- on the target system). BTW, the OpenEmbedded generated linuxrc file is jus=
-t a link to /bin/busybox, which seems a bit strange - so perhaps this is th=
-e issue?
-
-=20
-
-Hopefully this helps other folks - by not trying these same things.
-
-=20
-
-... Russell
-
-=20
-
-=20
-
->=20
-> On Wed, Dec 22, 2010 11:28  PM, <openembedded@rkmorris.us> wrote:
->=20
-
->=20
-Hi,
->=20
-> I have been strugging with this for quite some now, and really am stuck -=
- so I really would appreciate any thoughts or pointers anyone has! Let me t=
-ry to explain my problem.
->=20
-> I have been able to build OpenEmbedded on my machine, with a target of ei=
-ther h1940 or qemuarm - and for the console-image both build just fine. I c=
-an use the kernel for both of these (on the appropriate target), but my issue is with the rootfs. If I use the OpenEmbedded built =
-rootfs in qemuarm, targeted for either qemuarm or the h1940 (but always usi=
-ng the qemuarm kernel) everything works just fine.
->=20
-> My issue arises when trying to use the rootfs on the h1940 - I cannot get=
- my system to boot, and actually INIT is never launched (but the kernel see=
-ms fine). If I take an old file system that I was able to find (from Famili=
-ar Linux, ~ 2004-2005 vintage), it works fine on my h1940 (with the kernel =
-from OpenEmbedded!) ... so the issue seems to be the rootfs. If I just repl=
-ace /sbin/init.sysvinit in the Familiar Linux file system with the one from=
- OpenEmbedded - then I get kernel panic (and no init found it says ... :-()=
-. Oddly enough, if I use the Familiar LInux file system with qemuarm - it d=
-oesn't work, I have file system errors (and kernel panic), but the OpenEmbe=
-dded built file system (even for the h1940) works just great).
->=20
-> So it seems that I have some sort of filesystem incompatibility ... or am=
- I wrong? BTW, I can load the above mentioned filesystems as ext2 or ext3 i=
-n (OpenSUSE) Linux, no issues there.
->=20
-> Again, any suggestions of how to fix this would be greatly appreciated!
->=20
-> Thanks!
->=20
-> ... Russell
->=20
->=20
-> _______________________________________________
-> Openembedded-users mailing list
-> Openembedded-users@linuxtogo.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
-> _______________________________________________
-Openembedded-users mailing list
-Openembedded-users@linuxtogo.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
 
