@@ -1,37 +1,38 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PYvvV-00063P-GS
+	(envelope-from <raj.khem@gmail.com>) id 1PYvw4-00063e-AP
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Jan 2011 08:30:57 +0100
-Received: by gwaa12 with SMTP id a12so2628862gwa.6
+	Sat, 01 Jan 2011 08:31:32 +0100
+Received: by gxk20 with SMTP id 20so5388050gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Dec 2010 23:30:35 -0800 (PST)
+	Fri, 31 Dec 2010 23:31:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=Co0RpNqfj9qaEl8MNNPacRs5ppTM+LK6F0SrI1C/IBA=;
-	b=P+++CiTsotJUOKx0u/b44Q0k/3nB1Ww9wvXYhMHPvsz+idYQNKV/u4cJgax6LXS5AF
-	C1cRGMDUJZHbQIQxo4olMo09pgmFkXv0tBzVKXuZ0h1DEeRj892E5oDi0prnocepRMQi
-	h/c0voeJNF5QutXfFkDS0KwhyYxpesf0KtZoU=
+	bh=MpFBz3G2Wiu0qnRSzxU+vdGfh0SE+nHv+V8qIwsQHAc=;
+	b=t7SVzCTrGLR/j2UO4wZSJhKMwxWCAvdGiHXKqm6/8GcBVYAqGktrpY6tfWF9sp4dbK
+	K95XcA67E+7RcyzeOevMdxhwkkIRSg/bMCsDr1MK0SJRSytaLO31Vbf6WfWQYXJzRuIK
+	mRWZHCQO+CzPR+xy9qMO2grBoFxlhixbybp2U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=X7yB8KR/arvgB1OD5d/pUhtBGp6p3fZwEaHNe48lEKLsm0vkhDio+G674KFclpjBWj
-	V1Uj9kY0c/SIaChPkcjUJyG2qlqg1djAj46aSRLZoZ3dnLOVH21coGiNiNpjAX+xs2mU
-	q6Nry3DJhJq75qA/9aVID0KpUmy96dwy6HrGw=
-Received: by 10.90.10.21 with SMTP id 21mr9687050agj.112.1293867034886; Fri,
-	31 Dec 2010 23:30:34 -0800 (PST)
+	b=k201HbIyMfuucJluZFc2ExAX+tKWwTUg0J08wRQqpr86e6afS3Yp+ALboozotW6lUj
+	jduPw5HbN6OzSF4yjwhIZDXawClx47w0YcWr5Q1EWeMIhD4z5XupbtyeP5hHhAn71UaV
+	FTuwUaW6uej1bpj7cygml7VDenfPXy5dZLchs=
+Received: by 10.90.10.31 with SMTP id 31mr9682587agj.85.1293867069689; Fri, 31
+	Dec 2010 23:31:09 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Fri, 31 Dec 2010 23:30:13 -0800 (PST)
-In-Reply-To: <1293835744-10837-2-git-send-email-eric@eukrea.com>
+Received: by 10.90.86.4 with HTTP; Fri, 31 Dec 2010 23:30:49 -0800 (PST)
+In-Reply-To: <1293835744-10837-3-git-send-email-eric@eukrea.com>
 References: <1293835744-10837-1-git-send-email-eric@eukrea.com>
 	<1293835744-10837-2-git-send-email-eric@eukrea.com>
+	<1293835744-10837-3-git-send-email-eric@eukrea.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 31 Dec 2010 23:30:13 -0800
-Message-ID: <AANLkTik+hx2nV7OyKDRvHYVPhFZOM524HYCEUtqOZF2o@mail.gmail.com>
+Date: Fri, 31 Dec 2010 23:30:49 -0800
+Message-ID: <AANLkTi=tLW+-zGxuFyATQwCwLF4Dx=KOWErTZS6cnPnV@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/3] busybox-1.18.1 is stable so can be the default
+Subject: Re: [PATCH 3/3] busybox-static: add 1.18.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jan 2011 07:30:57 -0000
+X-List-Received-Date: Sat, 01 Jan 2011 07:31:32 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On Fri, Dec 31, 2010 at 2:49 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> so remove DP=3D-1
->
 > Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > ---
-> =C2=A0recipes/busybox/busybox_1.18.1.bb | =C2=A0 =C2=A02 --
-> =C2=A01 files changed, 0 insertions(+), 2 deletions(-)
+> =C2=A0recipes/busybox/busybox-static_1.18.1.bb | =C2=A0 10 ++++++++++
+> =C2=A01 files changed, 10 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/busybox/busybox-static_1.18.1.bb
 >
-> diff --git a/recipes/busybox/busybox_1.18.1.bb b/recipes/busybox/busybox_=
-1.18.1.bb
-> index e41f46d..2f78be9 100644
-> --- a/recipes/busybox/busybox_1.18.1.bb
-> +++ b/recipes/busybox/busybox_1.18.1.bb
-> @@ -1,8 +1,6 @@
-> =C2=A0require busybox_1.1x.inc
-> =C2=A0PR =3D "${INC_PR}.1"
->
-> -DEFAULT_PREFERENCE =3D "-1"
-> -
-> =C2=A0SRC_URI +=3D " \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://busybox-1.18.1-hush.patch \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://busybox-1.18.1-cpio.patch \
+> diff --git a/recipes/busybox/busybox-static_1.18.1.bb b/recipes/busybox/b=
+usybox-static_1.18.1.bb
+> new file mode 100644
+> index 0000000..58aca93
+> --- /dev/null
+> +++ b/recipes/busybox/busybox-static_1.18.1.bb
+> @@ -0,0 +1,10 @@
+> +require busybox_${PV}.bb
+> +
+> +FILESPATHPKG =3D. "busybox-${PV}:"
+> +S =3D "${WORKDIR}/busybox-${PV}"
+> +
+> +do_configure_append() {
+> + =C2=A0 =C2=A0 =C2=A0 sed -i -e '/CONFIG_STATIC/d' .config
+> + =C2=A0 =C2=A0 =C2=A0 echo "CONFIG_STATIC=3Dy" >>.config
+> +}
+> +
 > --
 > 1.6.3.3
 >
