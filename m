@@ -1,41 +1,23 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PZ6VV-0003GX-9r
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1PZ6mH-0003rg-0g
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Jan 2011 19:48:49 +0100
-Received: by iwn8 with SMTP id 8so12805491iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Jan 2011 10:48:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=9DBYLuoZgBuMnqrHdZg+SlgYH6tSSN7Q3ceuiyn2JGk=;
-	b=rB+ruGOtGuQrauS8QgH+3OLhfYVTduL8UJYlDoKnD3oootyzW0UV1QEhYDxbLIlwD9
-	aSmP1R+9BDvmEX7TETrLVjuqULhn0VXvD4OLgD5ycYLGNHVJHc4UmICCoAsiFSr3Tg6M
-	4K8MCBZmoWpkQfZOkuyzBf1h+mSSoHA7cCBSs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Jwr9nx77HrKiRxb7PQ64E5dh5BlGW7gDMYhb4uBkzEhL4S08B3915blmw9OrmKylDe
-	GdXqikkm12tXMNfmo4pbOZBM/pbo9v/RU7K6RkpaHWwZJ/2QIBd319OywUD1LIf4AGNL
-	I1ys16I8t8kw0mCQVGDPghJ1qHMdIGaYfAr1Q=
-MIME-Version: 1.0
-Received: by 10.231.14.74 with SMTP id f10mr19070436iba.119.1293907704843;
-	Sat, 01 Jan 2011 10:48:24 -0800 (PST)
-Received: by 10.231.38.11 with HTTP; Sat, 1 Jan 2011 10:48:24 -0800 (PST)
-In-Reply-To: <4D1F718C.60601@balister.org>
-References: <1293810428-31078-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1293810428-31078-2-git-send-email-fransmeulenbroeks@gmail.com>
-	<ifl85e$ets$1@dough.gmane.org>
-	<AANLkTikBC4nhO1ZSkuYcyoEPNonS4YeXCP6vzKJ3d3Fr@mail.gmail.com>
-	<iflbfm$rlm$1@dough.gmane.org>
-	<AANLkTi=fQY0ovo=UU4+cJLSj4J68Nu2uiFne37zUBOQX@mail.gmail.com>
-	<4D1F718C.60601@balister.org>
-Date: Sat, 1 Jan 2011 19:48:24 +0100
-Message-ID: <AANLkTi=swkavj97qSGR8rUkcJF=AVB-8=vQmv3jFEz4o@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] omap4430-panda: fix u-boot
+	Sat, 01 Jan 2011 20:06:09 +0100
+Received: (qmail 20888 invoked by uid 2404007); 1 Jan 2011 19:05:48 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from apn-77-112-174-6.dynamic.gprs.plus.pl (HELO ?77.112.174.6?)
+	(marcin@juszkiewicz.com.pl@77.112.174.6)
+	by host4.kei.pl with ESMTPA; 1 Jan 2011 19:05:46 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>
+X-Mailer: Modest 3.2
+References: <1293763348.17519.11220.camel@rex>
+In-Reply-To: <1293763348.17519.11220.camel@rex>
+Date: Sat, 01 Jan 2011 20:05:49 +0100
+Message-Id: <1293908749.2293.6.camel@n900>
+Mime-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [Bitbake-dev] Bitbake Architecture, Roadmap, Maintainers and	the future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,54 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jan 2011 18:48:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 01 Jan 2011 19:06:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-ID: <1293908749.2293.5.camel@n900>
+Content-Transfer-Encoding: 7bit
 
-2011/1/1 Philip Balister <philip@balister.org>:
-> On 01/01/2011 01:12 PM, Frans Meulenbroeks wrote:
->>
->> We have a broken recipe and I feel it should be fixed.
->
-> Broken only for some OE use cases. Not broken for others.
->
-> The wrong solution to the problem is to replace a recipe that works for the
-> people who use it with a recipe that creates untested output. U-boot is a
-> fiddly piece of software, updates should be tested on hardware before they
-> are pushed.
->
-> Let's keep the focus on the real issue here, disappearing sources versus
-> recipes that produce untested output.
->
-> Disappearing sources are an issue beyond just rebased git repos. Distros
-> that provide binaries to end users must provide for this event to provide
-> GPL compliance. So it really is not a big deal.
->
-> Philip
->
 
-I am not going to rehash what I wrote a few minutes ago.
+> There is a little friction around bitbake at the moment. I think after a
+> discussion I had with Chris earlier on some things are clearer and its
+> probably good to summarise how things stand.
 
-What I want to say is that there are other ways to fix the problem,
-but the recipe maintainer does not care to fix the problem in a
-generic way.
+Thank You Richard for mail.
+ 
+> Rightly or wrongly, maintainership of a project like bitbake is as much
+> about socialising changes and getting discussion and agreement on them
+> as it is about developing code. It eats a lot of time, you don't get
+> much thanks for it but it does make life smoother in the long run. 
 
-I'm well aware that u-boot is a complex thing
-And I am more than happy to test the recipe as soon as my board
-arrives. (actually I bumped into this issue as I was already preparing
-the image I want to run on it).
+> I consider myself a maintainer of bitbake
 
-Disappearing sources is indeed an issue. We saw that with
-handhelds.org last month. Distro specific source archives, leading to
-broken recipes for other distros is probably not the best solution.
+So do I - for me you are Bitbake maintainer. And I am fine with having Chris and you as maintainers.
 
-One other thing:
-I feel the way Koen is acting and the tone of his emails is not really
-desirable for an open source project where several developers
-cooperate to achieve a common goal.
-Actually this kind of behaviour may well drive away people (e.g. to
-Yocto). I am not too sure if that is desired.
+> So, bitbake in the future? At present it has bits on berlios (releases,
+> mailing list and a web manpage) and the git source SCM on
+> git.openembedded.org. Are we happy with those locations? I find it a bit
+> confusing...
 
-Frans. (who wants to take this opportunity to wish everyone a good
-2011 with lots of fun).
+I think that we should replace berlios with redirects to OE infrastructure. Tarballs should be available for download for any 1.8.0+ releases (older ones should not be in use now and can be generated from cgit). Manual available as separate website. I prefer to not host it at Yocto.
+ 
+> There are a bunch of people who can commit to bitbake, some inactive,
+> some active in different areas with different priorities. I think mine
+> are clear above, I'd appreciate others to make their objectives clear so
+> everyone understand people's positions and what people plan and don't
+> plan to do.
+
+I still have r/w to bitbake svn, no idea about git tree. There is no need for it so please remove my write access. If there will be a need for it I will send patches + pull request to proper mailing list.
 
 
