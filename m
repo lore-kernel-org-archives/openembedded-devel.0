@@ -1,38 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from vms173019pub.verizon.net ([206.46.173.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PZM89-0006FL-71
+	(envelope-from <openembedded@rkmorris.us>) id 1PZO6A-0006rP-Iv
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Jan 2011 12:29:45 +0100
-Received: by iwn8 with SMTP id 8so13118706iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Jan 2011 03:29:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=LdcFQP1L0QkCj4jUYPdzPcgVAceCCIXp3lFAPLHNFhU=;
-	b=KWBfvU8R+WIFDklHGIcCIuwGu6oXgJH9eu5wz2mvqcgyrJ3BI3X4/pQUh8dPg7T7ao
-	wxxb3RsWehAOD5P9V7yYT2xl1a2zBVt4W9GoNGhcg0EhPs0jBjIwyLtaVI73Iofg5Rtb
-	iUvSNe9Ya0rWLKEubUhdC/33GuS01Nn9KGKgo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=WvjayDEH9Cn1fvqULGl8tiuthBZymtZnAJqNAe7Jm4MYvou96Q7S/AcUrftKP6jQcG
-	tw8BxnYLXYngBrqL3UpDRfT2+06A3pfYbgrVMSVTLAK/wEuuk0iY7lmEong2PDfUCKYI
-	n/R5t4nDi2wqavLS4n6BRz4VDY7utAAWD2MUw=
-MIME-Version: 1.0
-Received: by 10.231.199.77 with SMTP id er13mr3402674ibb.44.1293967762467;
-	Sun, 02 Jan 2011 03:29:22 -0800 (PST)
-Received: by 10.231.38.11 with HTTP; Sun, 2 Jan 2011 03:29:22 -0800 (PST)
-In-Reply-To: <201012212128.17392.marcin@juszkiewicz.com.pl>
-References: <ienu66$5gf$1@dough.gmane.org> <iepnom$tk9$1@dough.gmane.org>
-	<AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
-	<201012212128.17392.marcin@juszkiewicz.com.pl>
-Date: Sun, 2 Jan 2011 12:29:22 +0100
-Message-ID: <AANLkTi=MC8dELQ2BmCDKfKcojZNStjo-rUPX9TmHO6oF@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 02 Jan 2011 14:35:51 +0100
+Received: from server ([unknown] [71.164.183.134]) by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LEE00074AYJAD50@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	02 Jan 2011 06:35:07 -0600 (CST)
+Received: from server (127.0.0.1) by server (Axigen)
+	with ESMTPSA id 08C6B2; Sun, 02 Jan 2011 06:35:00 -0600
+Received: from [192.168.1.10] by rkmorris.us with HTTP; Sun,
+	02 Jan 2011 06:34:58 -0600
+From: <openembedded@rkmorris.us>
+Date: Sun, 02 Jan 2011 06:34:58 -0600
+X-Mailer: Axigen WebMail
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
+Message-id: <1293971698169074500@rkmorris.us>
+In-reply-to: <AANLkTim4xrqcQ2MoikD0jhjf3SJ8=g+HF9ikT=d01k8Y@mail.gmail.com>
+References: <1293906868062803500@rkmorris.us>
+	<AANLkTim4xrqcQ2MoikD0jhjf3SJ8=g+HF9ikT=d01k8Y@mail.gmail.com>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 5
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: H1940 Boot Issues -> Executable Build Problems?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,123 +39,251 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Jan 2011 11:29:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 02 Jan 2011 13:35:51 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-There hasn't been too much discussion on Marcin's proposal below
-(maybe lots of people enjoyed a good Xmas holiday!)
+My sincere apologies - as I never got that earlier email (but was having is=
+sues with Norton filtering my email, so I'm sure it was on my side .. :-().
 
-I still feel Marcin's proposal is a good plan.
-Do we want to move this way?
+To answer your question though - the MACHINE is h1940, and I have tried tw=
+o different DISTRO's ... minimal and angstrom-2008.1. I am using the master=
+ branch of OpenEmbedded, and last updated it ~ 30 days ago.
 
-If so, what about some action?
+Thoughts?
 
-Frans
+Thanks!
+
+... Russell
 
 
-2010/12/21 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
-> Dnia wtorek, 21 grudnia 2010 o 18:51:25 Frans Meulenbroeks napisa=C5=82(a=
-):
->> 2010/12/21 Koen Kooi <k.kooi@student.utwente.nl>:
->> >> Nice piece of work & a good plan but...
->> >> Who will be the owners/maintainers of the layers?
->> >
->> > My intention was that the meta-openembedded layer will be maintained b=
-y
->> > the people interested in it. There will be a new MAINTAINERS file insi=
-de
->> > listing who feels responsible for various recipes.
->
->> Seems a good plan.
->
-> I just gave on irc how I see cooperation with Yocto:
->
-> - yocto-core layer - maintained by Yocto, builds always for selected targ=
-ets,
-> =C2=A0pull only way of providing changes - just like Poky was
-> - oe-core layer - extra images, classes required by OE builds. Same polic=
-ies
-> =C2=A0as Yocto core - only pull from user branches if changes pass test b=
-uilds
-> - oe-distro-DISTRO (for those distros which needs own layers - like angst=
-rom
-> =C2=A0does) maintained by distro maintainers with their policies
-> - oe-bsp-STH maintained by layer maintainers with their policies
-> - oe-extra-STH (STH =3D opie, xfce, whatever) maintained by person/team
-> - oe-unmaintained layer with everything not fit in layers
->
-> This way we can get stable core (yocto-core + oe-core) which builds alway=
-s for
-> selected targets + layers with UI environments, multimedia, boards/soc
-> support, etc each of them maintained by person or team. How we will split
-> metadata into layers (and subdirs in layers) is other thing and will need=
- to
-> be discussed too.
->
->> >> An alternate approach would be to let the stuff live in poky-extras.
->> >> See this proposal from RP:
->> >> http://www.mail-archive.com/yocto@yoctoproject.org/msg00286.html
->> >
->> > The poky-extras thing is not what I want, and more importantly, I don'=
-t
->> > want to start diluting the OE brand.
->>
->> Why wouldn't you want poky-extras?
->> My concern is that we get lots of duplicated effort because both
->> poky-extras and meta-openembedded might get the same recipes.
->
-> Poky-extras is part of Poky not OpenEmbedded. Our brand has 7 years and w=
-e do
-> not want to let it disappear. This will send wrong message to people who =
-use
-> our work.
->
->> Wrt diluting the OE brand. This is a completely different topic.
->> IMHO the mere fact that yocto exists impacts OE.
->> Yocto also has much more resources (both people-hour wise as well as
->> HW wise), so I strongly doubt we can compete on it wrt the quality of
->> the base recipes.
->
-> Thats why we should move to use Yocto as base. We have skilled developers=
- too
-> which can and will provide changes to yocto-core layer. But those changes=
- will
-> require testing before being merged which can be new thing for some of OE
-> developers ;)
->
->> That leaves the question:
->> Given the existence of Yocto in which parts do we see added value of
->> OE and on which things should we as OE focus.
->
-> OE supports more targets then Yocto does or will ever support. I do not e=
-xpect
-> Yocto to support Intel Mainstone or Simpad or even Alix.1c which I use fo=
-r my
-> router. But OE supports those machines (more or less) and this is our val=
-ue.
-> There are boards outside which boots to OpenEmbedded derived root filesys=
-tems
-> - not Yocto or Poky but OE based.
->
-> If we do proper separation of layers then who knows - maybe some vendors =
-which
-> base on OE will start to base on Yocto directly. But as OE will also base=
- on
-> Yocto then it will be not a problem to use vendor layers with our ones to
-> provide extra packages.
->
-> Regards,
-> --
-> JID: =C2=A0 =C2=A0 =C2=A0hrw@jabber.org
-> Website: =C2=A0http://marcin.juszkiewicz.com.pl/
-> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
->
+On Sun, Jan 2, 2011 00:44  AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Sat, Jan 1, 2011 at 10:34 AM,  <openembedded@rkmorris.us> wrote:
+> > Hi,
+> >
+> >
+> >
+> > As I have been debugging this it's looking more like a build issue - s=
+o let me try the developer group, in case someone here has seen this before=
+.
+> >
+> >
+> >
+> > Copying over the key point from below ... I (successfully) built the h=
+elloworld-image,
+>=20
+>=20
+> what was MACHINE and DISTRO and OpenEmbedded revision you used ? I
+> think I asked same qestion when you posted this to oe-users ml. If you
+> are not going to provide information then I am afraid not many can
+> help you here
+>=20
+> but cannot run the resulting helloworld binary on the target machine -
+> it does execute under QEMU, which doesn't provide support this CPU
+> (arm920t - armv4t). However, a functioning binary from the target
+> (armv4t) machine runs on the target, but not on QEMU (as expected). So
+> it seems that OpenEmbedded is not building for the right machine
+> (which is strange, as the OpenEmbedded built kernel works!).
+> >
+> >
+> >
+> > Any thoughts on this? It seems that OpenEmbedded / bitbake may be usin=
+g QEMU to create the binary for the target ... is that right (as it's what =
+I have seen in a bit of poking around)? This would be a problem, as QEMU do=
+esn't support the arm920t processor. Perhaps I have to apply the QEMU patch=
+ that adds this support to QEMU, or change my config to somehow create the =
+executable in a different way?
+> >
+> >
+> >
+> > Any suggestions would be greatly appreciated - as my current built (ac=
+tually, rootfs) is not functioning on the target machine.
+> >
+> >
+> >
+> > Thanks!
+> >
+> >
+> >
+> > ... Russell
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> >
+> > Subject: Re: [Openembedded-users] H1940 Boot Issues
+> > From: <openembedded@rkmorris.us>
+> > Date: Thu, Dec 30, 2010 11:36 PM
+> > To: Openembedded-users@lists.openembedded.org
+> >
+> >
+> >
+> >
+> >
+> >
+> > Hi,
+> >
+> >
+> >
+> > OK, I haven't given up on this - and now it gets more interesting ... =
+:-). It seems that OpenEmbedded is not properly building a binary for the A=
+RM920T CPU (arm4t) - has anyone else seen this?
+> >
+> >
+> >
+> > I built the helloworld-image, and cannot run the resulting helloworld =
+binary on the target machine - but can run it under QEMU, which doesn't eve=
+n support this CPU. However, a functioning binary from the target (arm4t) m=
+achine runs on the target, but not on QEMU (as expected). So it seems that =
+OpenEmbedded is not building for the right machine (which is strange, as th=
+e OpenEmbedded built kernel works!).
+> >
+> >
+> >
+> > The config files seem to be set up for the right target machine, but t=
+he binary is not being built right for some reason. Does anyone have any id=
+eas?
+> >
+> >
+> >
+> > Thanks!
+> >
+> >
+> >
+> > ... Russell
+> >
+> >
+> >
+> >
+> >
+> >
+> > On Fri, Dec 24, 2010 09:20  AM, <openembedded@rkmorris.us> wrote:
+> >
+> >
+> >>
+> >
+> >
+> >
+> > Hi,
+> >
+> >
+> >
+> > I have tried quite a few more things here, still with no luck. It real=
+ly does seem that OpenEmbedded does not properly / fully build an image tha=
+t works on (real?) embedded systems ... :-(. I am out of things to try, but=
+ let me pass this info along in the hope that it will save others some time=
+ / grief if they try to do similar things.
+> >
+> >
+> >
+> > I have tried several different formats / approaches to the rootfs, non=
+e of which work (except for the legacy Familiar Linux file system that I fo=
+und). I cannot load the OpenEmbedded rootfs as an initrd, or when extracted=
+ to an SD card (as a "normal" file system, either copied from the ext2 file=
+, or extracted from tar.gz). While this seems to be a rootfs issue, it stil=
+l could be the build of init, as replacing the Familiar Linux init.sysvinit=
+ with the one generated by OpenEmbedded does in fact break the working file=
+ system. I tried reducing the size of generated rootfs (by setting IMAGE_RO=
+OTFS_SIZE), but that doesn't seem to be working either (so I cannot use the=
+ OpenEmbedded rootfs as an initrd, as it is 64 MB, which seems to cause pro=
+blems on the target system). BTW, the OpenEmbedded generated linuxrc file i=
+s just a link to /bin/busybox, which seems a bit strange - so perhaps this =
+is the issue?
+> >
+> >
+> >
+> > Hopefully this helps other folks - by not trying these same things.
+> >
+> >
+> >
+> > ... Russell
+> >
+> >
+> >
+> >
+> >
+> >>
+> >> On Wed, Dec 22, 2010 11:28  PM, <openembedded@rkmorris.us> wrote:
+> >>
+> >
+> >>
+> > Hi,
+> >>
+> >> I have been strugging with this for quite some now, and really am stu=
+ck - so I really would appreciate any thoughts or pointers anyone has! Let =
+me try to explain my problem.
+> >>
+> >> I have been able to build OpenEmbedded on my machine, with a target o=
+f either h1940 or qemuarm - and for the console-image both build just fine.=
+ I can use the kernel for both of these (on the appropriate target), but my=
+ issue is with the rootfs. If I use the OpenEmbedded built rootfs in qemuar=
+m, targeted for either qemuarm or the h1940 (but always using the qemuarm k=
+ernel) everything works just fine.
+> >>
+> >> My issue arises when trying to use the rootfs on the h1940 - I cannot=
+ get my system to boot, and actually INIT is never launched (but the kernel=
+ seems fine). If I take an old file system that I was able to find (from Fa=
+miliar Linux, ~ 2004-2005 vintage), it works fine on my h1940 (with the ker=
+nel from OpenEmbedded!) ... so the issue seems to be the rootfs. If I just =
+replace /sbin/init.sysvinit in the Familiar Linux file system with the one =
+from OpenEmbedded - then I get kernel panic (and no init found it says ... =
+:-(). Oddly enough, if I use the Familiar LInux file system with qemuarm - =
+it doesn't work, I have file system errors (and kernel panic), but the Open=
+Embedded built file system (even for the h1940) works just great).
+> >>
+> >> So it seems that I have some sort of filesystem incompatibility ... o=
+r am I wrong? BTW, I can load the above mentioned filesystems as ext2 or ex=
+t3 in (OpenSUSE) Linux, no issues there.
+> >>
+> >> Again, any suggestions of how to fix this would be greatly appreciate=
+d!
+> >>
+> >> Thanks!
+> >>
+> >> ... Russell
+> >>
+> >>
+> >> _______________________________________________
+> >> Openembedded-users mailing list
+> >> Openembedded-users@linuxtogo.org
+> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-user=
+s
+> >> _______________________________________________
+> > Openembedded-users mailing list
+> > Openembedded-users@linuxtogo.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-users
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
->
-
-
+From mike@mwester.net Sun Jan 02 16:22:34 2011
+Received: from p3plsmtpa01-08.prod.phx3.secureserver.net ([72.167.82.88])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <mike@mwester.net>) id 1PZPlS-0000CP-0N
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 02 Jan 2011 16:22:34 +0100
+Received: (qmail 11844 invoked from network); 2 Jan 2011 15:15:32 -0000
+Received: from unknown (209.242.7.132)
+	by p3plsmtpa01-08.prod.phx3.secureserver.net (72.167.82.88) with ESMTP;
+	02 Jan 2011 15:15:31 -0000
+Message-ID: <4D20968B.4030004@mwester.net>
+Date: Sun, 02 Jan 2011 09:15:23 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset
