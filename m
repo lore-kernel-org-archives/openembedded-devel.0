@@ -1,34 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PZRwn-0004eK-Lb for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Jan 2011 18:42:25 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PZRwS-0005O3-Q1 for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Jan 2011 18:42:04 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Jan 2011 18:42:04 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Jan 2011 18:42:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 02 Jan 2011 18:41:52 +0100
-Message-ID: <ifqdd0$7cl$1@dough.gmane.org>
-References: <4D20968B.4030004@mwester.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D20968B.4030004@mwester.net>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] e2fsprogs.inc - break shared libs into separate packages
+	(envelope-from <raj.khem@gmail.com>) id 1PZVKe-0008Fa-2s
+	for Openembedded-devel@lists.openembedded.org;
+	Sun, 02 Jan 2011 22:19:16 +0100
+Received: by ywi6 with SMTP id 6so5420363ywi.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Jan 2011 13:18:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=e9Xv+2wc6LLLlMxRxDpgjcV247hY9WyT/HIt6oM/hfs=;
+	b=nha6aPXFwsyQSsMcxZUwKTd/zJpiRV3exfQVhJ2qfaI1MX6j06i3cwR1kvZ6jUZniO
+	sadrjedi/OhH2fX2HVyG/vboc1qTwRn750Mg2TFZIBZwPIQJcU0h9YtzG2dqTADgdyc0
+	b6BTHfPF9efvlQPFCwqGNqnrdwidg0WELkrUg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=sZsq0zMZuSSZNQLOxX6CSN3/zezFHqArtGqr9c/pca0aIEUJDQ/HxTSxLcxraBDlCW
+	r6xtY705VHav+ISbZm23ay1O9tNibVUrG0qItOrxUZdW8exQ1TPLBs2ZNWTrPxmYJU8T
+	nWMn9Yag81OmBX5fCe/mXD1k6nSxRWNZcdN/E=
+Received: by 10.90.98.11 with SMTP id v11mr11580752agb.58.1294003130480; Sun,
+	02 Jan 2011 13:18:50 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Sun, 2 Jan 2011 13:18:30 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 2 Jan 2011 13:18:30 -0800
+Message-ID: <AANLkTikZ+em=pxLmGQ+z27Xb43wJxK7GZAWPMB39L8w-@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: gcc-cross 4.5 regressions results on cortex-a8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,34 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Jan 2011 17:42:25 -0000
+X-List-Received-Date: Sun, 02 Jan 2011 21:19:16 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi
 
-On 02-01-11 16:15, Mike Westerhof wrote:
-> Break the two shared libraries (libe2p and libext2fs) out of the general e2fsprogs
-> package and into their own packages.  This avoids pulling in unwanted executables
-> when a distro only desires the basic tools (such as e2fsck and/or mke2fs).
-> 
-> Signed-off-by: Mike Westerhof <mike@mwester.net>
+I have put the gcc 4.5 results here http://uclibc.org/~kraj/gcc-results/
+these are currently only for armv7a
 
-Recipes with e2fsprogs in DEPENDS will need a PR bump as well, since
-they might link to these libs as well. This will result in missing
-libraries when using package feeds.
+Ideally the recent results should be better than former reports.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNILjgMkyGM64RGpERAl63AJ9d+oy10QAFluRD89/YB6g9ircOuwCfXljo
-L2xm9I2E6/rkDke1UFvCG9c=
-=Xptt
------END PGP SIGNATURE-----
-
+Thanks
+-Khem
 
 
