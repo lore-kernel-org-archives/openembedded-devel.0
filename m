@@ -1,30 +1,38 @@
-Received: from zmta01.irigo.dk ([193.200.44.52])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eha@doredevelopment.dk>) id 1PZJ9x-0003xv-9x
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PZM89-0006FL-71
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Jan 2011 09:19:25 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by zmta01.irigo.dk (Postfix) with ESMTP id 371F522B4834;
-	Sun,  2 Jan 2011 09:19:05 +0100 (CET)
-X-Virus-Scanned: amavisd-new at zmta01.irigo.dk
-Received: from zmta01.irigo.dk ([127.0.0.1])
-	by localhost (zmta01.irigo.dk [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vM6yk+9jtOTi; Sun,  2 Jan 2011 09:19:00 +0100 (CET)
-Received: from [192.168.1.20] (0x55532124.adsl.cybercity.dk [85.83.33.36])
-	by zmta01.irigo.dk (Postfix) with ESMTP id 8B62D22B48E4;
-	Sun,  2 Jan 2011 09:19:00 +0100 (CET)
-From: Esben Haabendal <eha@doredevelopment.dk>
+	Sun, 02 Jan 2011 12:29:45 +0100
+Received: by iwn8 with SMTP id 8so13118706iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Jan 2011 03:29:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=LdcFQP1L0QkCj4jUYPdzPcgVAceCCIXp3lFAPLHNFhU=;
+	b=KWBfvU8R+WIFDklHGIcCIuwGu6oXgJH9eu5wz2mvqcgyrJ3BI3X4/pQUh8dPg7T7ao
+	wxxb3RsWehAOD5P9V7yYT2xl1a2zBVt4W9GoNGhcg0EhPs0jBjIwyLtaVI73Iofg5Rtb
+	iUvSNe9Ya0rWLKEubUhdC/33GuS01Nn9KGKgo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=WvjayDEH9Cn1fvqULGl8tiuthBZymtZnAJqNAe7Jm4MYvou96Q7S/AcUrftKP6jQcG
+	tw8BxnYLXYngBrqL3UpDRfT2+06A3pfYbgrVMSVTLAK/wEuuk0iY7lmEong2PDfUCKYI
+	n/R5t4nDi2wqavLS4n6BRz4VDY7utAAWD2MUw=
+MIME-Version: 1.0
+Received: by 10.231.199.77 with SMTP id er13mr3402674ibb.44.1293967762467;
+	Sun, 02 Jan 2011 03:29:22 -0800 (PST)
+Received: by 10.231.38.11 with HTTP; Sun, 2 Jan 2011 03:29:22 -0800 (PST)
+In-Reply-To: <201012212128.17392.marcin@juszkiewicz.com.pl>
+References: <ienu66$5gf$1@dough.gmane.org> <iepnom$tk9$1@dough.gmane.org>
+	<AANLkTimv-=g7qhYQynPYi65Vp2sQk_a6mPUsVbh-M0eA@mail.gmail.com>
+	<201012212128.17392.marcin@juszkiewicz.com.pl>
+Date: Sun, 2 Jan 2011 12:29:22 +0100
+Message-ID: <AANLkTi=MC8dELQ2BmCDKfKcojZNStjo-rUPX9TmHO6oF@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1293911357.17519.17117.camel@rex>
-References: <1293763348.17519.11220.camel@rex>
-	<1293805474.18787.366.camel@eha>  <1293911357.17519.17117.camel@rex>
-Organization: =?ISO-8859-1?Q?Dor=E9Development?= ApS
-Date: Sun, 02 Jan 2011 09:18:59 +0100
-Message-ID: <1293956339.18787.425.camel@eha>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: Bitbake Architecture, Roadmap, Maintainers and the future
+Subject: Re: [RFC] meta-openembedded layer for yocto hosted on oe.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,162 +46,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Jan 2011 08:19:25 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 02 Jan 2011 11:29:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, 2011-01-01 at 19:49 +0000, Richard Purdie wrote:
+There hasn't been too much discussion on Marcin's proposal below
+(maybe lots of people enjoyed a good Xmas holiday!)
 
-> The split between the code in general in bitbake is in general ever
-> improving in my opinion. Chris has some some really great work on
-> bitbake recently, particularly making it more pythonic. Some of the
-> changes just before the holidays, particularly the UI changes on the
-> cooker to UI relationship make me uncomfortable, particularly if they
-> mean the xmlrpc client/server code no longer works. My concern is that
-> they cross the boundary into what I'd class as regressing an API
-> boundary, particularly one that is only in the early stages of being
-> properly established and that we very much need. I don't know if this is
-> an API you use or not but its the kind of thing we need to be careful
-> about. FWIW, its independent of the parallel parsing code and other
-> changes which is partly why I'm so concerned it was merged as is :(.
+I still feel Marcin's proposal is a good plan.
+Do we want to move this way?
 
-While when I first heard of the xmlrpc client/server code, I was
-extremely exited, believing it was a near perfect fit for OE-lite.  But
-later on I had second thoughtsBut looking more into it, I don't like the
-complexity it adds. I believe that projects like OE, Poky and OE-lite is
-best served by a BitBake implementation that is as simple as possible,
-so that as many meta-data developers as possible will dare wander off
-into BitBake code land also. So BitBake code improvement in general, and
-simplification of BitBake in particular is on the road to better OE like
-projects IMHO.
+If so, what about some action?
 
-I haven't looked into the parallel parsing code yet, but hope to find
-the time for it in the not so distant future.  As I am not using the
-BitBake cooker, I assume I will have to hand-carry Chris' work on this
-to OE-lite.
+Frans
 
-> > As for merging with sstate, OE-lite uses a completely different staging
-> > model (simple per-recipe package based), and I would be very unhappy if
-> > merging sstate into BitBake will make it impossible for OE-lite to use
-> > upstream BitBake.  I haven't looked enough into the sstate
-> > implementation with regards to this yet though.
-> 
-> To put your mind at rest, there is no "policy" enforced by bitbake on
-> the way staging works in sstate.
 
-Great.  I assume also that the sstate code lives in the cooker part of
-BitBake, right?
-
-> You might find the checksums useful and
-> you might be able to use them in your code but its all opt in. I'm
-> therefore not worried about this breaking OE-lite.
-
-I have a different checksums implementation, with a different
-fundamental cooncept.  I do not try to figure out which variables is
-(seemingly) related to a specific task, but simply checksums all
-variables that is available to a task.  I plan to instead improve the
-meta-data to remove unrelated variables.  This way, I don't have to
-worry about calling python functions with access to the all-inclusive
-'d' variable, and thus potentially voiding the generated signature.
-
-This approach turns out to be much smaller in code size, so I am bit
-reluctant to change course unless some really good technical arguments
-mandates it.
-
-> If there are
-> problems, please just let us/me know and we'll see how we can fix that
-> but since everything is backwards compatible, it shouldn't be an issue.
-
-Well, as the API's I am using is not really in any form properly
-formalized, I will not put to much money on BitBake staying backwards
-compatible on them.
-
-This leads to my #1 wishlist item for BitBake.  A real split between
-BitBake as a parser and BitBake as a cooker (called baker in OE-lite,
-just to stay in the bakery :).
-
-Opposite to what seems to be the common belief, the current BitBake has
-a rather strong linkage with OE (and thus Poky) meta-data, but all of
-this seems to be concentrated in the cooker/runqueue code which has a
-lot of assumptions on the dependency model used. So for a project like
-OE-lite, using a different dependenncy model, the cooker/runqueue code
-is not really usable. And I do not believe it would be sane to try and
-code up a "super cooker" that handles multiple/any dependency models
-thrown at it.  It would simply be to complex, and thereby making it
-unreasonably difficult for innocent meta-data developers to figure out
-what is going on. KISS.
-
-> > Most of all, I would like to stress that there actually are other users
-> > of BitBake than OE and Poky. I hope this is considered a good thing seen
-> > from a BitBake perspective, and not a disturbance.
-> 
-> Its what the bitbake developers have always wanted/intended. It doesn't
-> mean bitbake won't change as the need for functionality appears but we
-> will do our best to keep things backwards compatible within reason
-> (although replaced functionality will still get phased out over time if
-> nobody needs it).
-
-I feel confident that yours "within reasons" is much stronger than I
-would find reasonable, so no worries here ;-)
-
-> I would suggest it would be time well spent for you to find a way to be
-> able to use a standard upstream bitbake rather than requiring any patch
-> set as it will then be easier to understand what functionality and APIs
-> are being used and what impact changes to bitbake have.
-
-I actually already did 99.9% of that work.  The first work was some kind
-of work-in-progress/prototype, with a lot of ugly hacking to get the
-cooker/runqueue code to do what I needed.  I have now reimplemented this
-entirely in OE-lite, and using an (almost) upstream BitBake for parsing
-and task execution.
-
-The main change is a rather innocent addition of recdeptask (similar to
-recrdeptask, just for build dependencies), and recadeptask (a special
-kind of "any" recursive dependency I need for fetchall and stuff like
-that).
-
-The __init__.py code is a fix or workaround, I would like to discuss
-here on list, as I am not sure if that is a proper fix for upstream, and
-if not, how to fix it properly (or if it is even considered a bug in
-BitBake).
-
-eha@fire:~/oe-lite/master/bitbake$ git diff oe/master|diffstat
- __init__.py       |    1 +
- build.py          |    2 ++
- fetch/__init__.py |    3 +++
- 3 files changed, 6 insertions(+)
-
-I should be safe and make sense to get the recdeptask/recadeptask into
-upstream, but on the other hand, it is not really a big issue to keep it
-in an OE-lite branch.  But having this in upstream BitBake would make it
-possible for users to use any new upstream BitBake, although a big YMMV
-boiler plate will have to be placed on it.
-
-> > If possible, perhaps we could have a small BitBake meeting at FOSDEM,
-> > trying to coordinate the way forward?
-> 
-> I think I will be at FOSDEM and as always, am happy to talk :). I don't
-> think Chris is likely to be there based on previous F
-> Cheers,
-> 
-> Richard
-> 
-> 
+2010/12/21 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
+> Dnia wtorek, 21 grudnia 2010 o 18:51:25 Frans Meulenbroeks napisa=C5=82(a=
+):
+>> 2010/12/21 Koen Kooi <k.kooi@student.utwente.nl>:
+>> >> Nice piece of work & a good plan but...
+>> >> Who will be the owners/maintainers of the layers?
+>> >
+>> > My intention was that the meta-openembedded layer will be maintained b=
+y
+>> > the people interested in it. There will be a new MAINTAINERS file insi=
+de
+>> > listing who feels responsible for various recipes.
+>
+>> Seems a good plan.
+>
+> I just gave on irc how I see cooperation with Yocto:
+>
+> - yocto-core layer - maintained by Yocto, builds always for selected targ=
+ets,
+> =C2=A0pull only way of providing changes - just like Poky was
+> - oe-core layer - extra images, classes required by OE builds. Same polic=
+ies
+> =C2=A0as Yocto core - only pull from user branches if changes pass test b=
+uilds
+> - oe-distro-DISTRO (for those distros which needs own layers - like angst=
+rom
+> =C2=A0does) maintained by distro maintainers with their policies
+> - oe-bsp-STH maintained by layer maintainers with their policies
+> - oe-extra-STH (STH =3D opie, xfce, whatever) maintained by person/team
+> - oe-unmaintained layer with everything not fit in layers
+>
+> This way we can get stable core (yocto-core + oe-core) which builds alway=
+s for
+> selected targets + layers with UI environments, multimedia, boards/soc
+> support, etc each of them maintained by person or team. How we will split
+> metadata into layers (and subdirs in layers) is other thing and will need=
+ to
+> be discussed too.
+>
+>> >> An alternate approach would be to let the stuff live in poky-extras.
+>> >> See this proposal from RP:
+>> >> http://www.mail-archive.com/yocto@yoctoproject.org/msg00286.html
+>> >
+>> > The poky-extras thing is not what I want, and more importantly, I don'=
+t
+>> > want to start diluting the OE brand.
+>>
+>> Why wouldn't you want poky-extras?
+>> My concern is that we get lots of duplicated effort because both
+>> poky-extras and meta-openembedded might get the same recipes.
+>
+> Poky-extras is part of Poky not OpenEmbedded. Our brand has 7 years and w=
+e do
+> not want to let it disappear. This will send wrong message to people who =
+use
+> our work.
+>
+>> Wrt diluting the OE brand. This is a completely different topic.
+>> IMHO the mere fact that yocto exists impacts OE.
+>> Yocto also has much more resources (both people-hour wise as well as
+>> HW wise), so I strongly doubt we can compete on it wrt the quality of
+>> the base recipes.
+>
+> Thats why we should move to use Yocto as base. We have skilled developers=
+ too
+> which can and will provide changes to yocto-core layer. But those changes=
+ will
+> require testing before being merged which can be new thing for some of OE
+> developers ;)
+>
+>> That leaves the question:
+>> Given the existence of Yocto in which parts do we see added value of
+>> OE and on which things should we as OE focus.
+>
+> OE supports more targets then Yocto does or will ever support. I do not e=
+xpect
+> Yocto to support Intel Mainstone or Simpad or even Alix.1c which I use fo=
+r my
+> router. But OE supports those machines (more or less) and this is our val=
+ue.
+> There are boards outside which boots to OpenEmbedded derived root filesys=
+tems
+> - not Yocto or Poky but OE based.
+>
+> If we do proper separation of layers then who knows - maybe some vendors =
+which
+> base on OE will start to base on Yocto directly. But as OE will also base=
+ on
+> Yocto then it will be not a problem to use vendor layers with our ones to
+> provide extra packages.
+>
+> Regards,
+> --
+> JID: =C2=A0 =C2=A0 =C2=A0hrw@jabber.org
+> Website: =C2=A0http://marcin.juszkiewicz.com.pl/
+> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> OSDEMs but I could
-> be wrong.
-
-With Chris being the most active BitBake maintainer right now, I hope to
-find him there as well.
-
-But I will of-course be very much interested in talking with you about
-the future of BitBake anyways.  See you there!
- 
-/Esben
-
+>
+>
 
 
