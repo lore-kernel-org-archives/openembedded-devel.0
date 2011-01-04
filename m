@@ -1,36 +1,24 @@
-Received: from mail-yi0-f65.google.com ([209.85.218.65])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1PaDrz-0000gT-Fn
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1PaE6z-0001Gc-3X
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 21:52:39 +0100
-Received: by yib12 with SMTP id 12so2293738yib.0
+	Tue, 04 Jan 2011 22:08:09 +0100
+Received: from [192.168.1.135] (188-195-80-208-dynip.superkabel.de
+	[188.195.80.208])
+	by dd20204.kasserver.com (Postfix) with ESMTP id 5427B180445E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 12:52:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=paJNyiQbdZHB6G0sA8+ZHqpdKkGQChqc/efGq2epbCE=;
-	b=sTBHcAILAdPoxI76LRh66/6Yzkb3Oo38q/1k5SGROujeItmVn5e59Lw9KnXzchBIAK
-	++KYrXL1pUNFPtIx4RSXdaR2gPKsWqyemoYj7PBgd6smmobpqQ33WWp4s3tmVg3wiReH
-	28REdTEJBy/zFAGt4MY8o+KndRcNVBsQZbO7Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Br1TyZuOMYpZZPnGr2HdjojCFnLqvUIL7fzOEYnvE5opcWehPP2wbGQaULBn4XXb9E
-	ORBkzEeawXwFetAeDgvSjIeOBmTp4TZdVQhXNavpVJAH1XFYud8DVJhetJ1L5IajEGy1
-	vbZQkW4YiRr1AYN4oE9wK3PLzbLIAI/+Xcfbc=
-Received: by 10.151.150.11 with SMTP id c11mr20876210ybo.413.1294174334867;
-	Tue, 04 Jan 2011 12:52:14 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id r6sm14160651yba.23.2011.01.04.12.52.14
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 04 Jan 2011 12:52:14 -0800 (PST)
-From: Jeff Lance <jefflance01@gmail.com>
+	Tue,  4 Jan 2011 21:41:39 +0100 (CET)
+Message-ID: <4D2385FB.7030706@opensimpad.org>
+Date: Tue, 04 Jan 2011 21:41:31 +0100
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Jan 2011 14:51:36 -0600
-Message-Id: <1294174296-23336-1-git-send-email-j-lance1@ti.com>
-X-Mailer: git-send-email 1.6.3.3
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH v2 1/1] am-benchmarks: add platform support and correct makefile
+References: <87lj3ge0yd.fsf@gmail.com>	<AANLkTimdpd-se=XR1N_E92UuNN3Ci0Tr6WJRLkDxV2=E@mail.gmail.com>	<AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>
+	<4D2339D3.1000901@dresearch.de>
+In-Reply-To: <4D2339D3.1000901@dresearch.de>
+Subject: Re: Wiki spam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,67 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 20:52:39 -0000
+X-List-Received-Date: Tue, 04 Jan 2011 21:08:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-  * Modify recipe name to include package version
-  * add support for additional platforms am181x-evm and am180x-evm
-  * Update the SRCREV
-    * Fix pathname to Rules.make in each Makefile
+On 04.01.2011 16:16, Steffen Sledz wrote:
+>
+> I can try to add the ConfirmEdit[1] mediawiki extension for this purpos=
+e.
+>
 
-Signed-off-by: Jeff Lance <j-lance1@ti.com>
----
-Updated in version 2:
-  * Removed PV since it is now in the filename
-  * Removed ARCHITECTURE override for am180x and am181x since they are already covered under the SOC famile omapl138
----
- recipes/ti/am-benchmarks_1.2.bb |   36 ++++++++++++++++++++++++++++++++++++
- 1 files changed, 36 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ti/am-benchmarks_1.2.bb
+ConfirmEdits default math question is looking too simple. reCAPTCHA=20
+might be better? Recent anti reCHAPCHA tools having rates about 17%. It=20
+is also solvable for blind people. The only drawback, it helps google to =
 
-diff --git a/recipes/ti/am-benchmarks_1.2.bb b/recipes/ti/am-benchmarks_1.2.bb
-new file mode 100644
-index 0000000..88b38e7
---- /dev/null
-+++ b/recipes/ti/am-benchmarks_1.2.bb
-@@ -0,0 +1,36 @@
-+#NOTE: This package is currently only supported for the Angstrom
-+#      distribution.  Other distributions and toolchains may or
-+#      may not work.
-+
-+DESCRIPTION = "AM Benchmarks"
-+HOMEPAGE = "https://gforge.ti.com/gf/project/am_benchmarks/"
-+LICENSE = "BSD"
-+SECTION = "system"
-+PRIORITY = "optional"
-+
-+SRCREV = "58"
-+PR = "r2+svnr${SRCPV}"
-+
-+COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
-+
-+ARCHITECTURE_dm365 = "arm9"
-+ARCHITECTURE_omapl138 = "arm9"
-+ARCHITECTURE_omap3 = "cortex-a8"
-+ARCHITECTURE_ti816x = "cortex-a8"
-+
-+INSANE_SKIP_${PN} = "True"
-+
-+SRC_URI = "svn://gforge.ti.com/svn/am_benchmarks/;module=trunk;proto=https;user=anonymous;pswd=''"
-+
-+S = "${WORKDIR}/trunk/${ARCHITECTURE}"
-+
-+do_compile() {
-+	# don't build debug version
-+	touch debug
-+	export CROSS_COMPILE=${TARGET_PREFIX}
-+	make release
-+}
-+
-+do_install() {
-+	make DESTDIR=${D} install
-+}
--- 
-1.6.3.3
+steal books...
+
+What about a SpamBlacklist [1] with a regex to everything and a=20
+SpamWhitelist for OpenEmbedded related links? This will not need any=20
+captchas and do not help google. For adding a new item to the whitelist=20
+a request to the mailing list is necessary.
+
+Best regards
+Bernhard Guillon
+
+1 http://www.mediawiki.org/wiki/Extension:SpamBlacklist
 
 
 
