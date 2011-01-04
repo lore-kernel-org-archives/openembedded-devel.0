@@ -1,36 +1,36 @@
-Received: from mail-gx0-f193.google.com ([209.85.161.193])
+Received: from mail-yi0-f65.google.com ([209.85.218.65])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mwatkins.ti@gmail.com>) id 1PaD2L-0008DL-80
+	(envelope-from <jefflance01@gmail.com>) id 1PaDrz-0000gT-Fn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 20:59:17 +0100
-Received: by gxk7 with SMTP id 7so3813675gxk.0
+	Tue, 04 Jan 2011 21:52:39 +0100
+Received: by yib12 with SMTP id 12so2293738yib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 11:58:51 -0800 (PST)
+	Tue, 04 Jan 2011 12:52:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer;
-	bh=j64xc532GXAzXqXNfRVK2ZAOOvZ9cXOGsRw+qZa/vr4=;
-	b=gW2SDfB5eAsZ0AxbKfTCXx+M2Zjr+HzsL8zU0DE9v01k6AZzenuSZ+jh6RF/kGRmb0
-	GFxOhOtvfEPudP+eZZDxDdeSQhcE6bIkSIjYMFgjjw8x9IBctI6K7IR9XbiZvPYU4oXC
-	5MOJhPmH5ZeUBnrhmLwvl7Y/6RdIywfKdEyaU=
+	bh=paJNyiQbdZHB6G0sA8+ZHqpdKkGQChqc/efGq2epbCE=;
+	b=sTBHcAILAdPoxI76LRh66/6Yzkb3Oo38q/1k5SGROujeItmVn5e59Lw9KnXzchBIAK
+	++KYrXL1pUNFPtIx4RSXdaR2gPKsWqyemoYj7PBgd6smmobpqQ33WWp4s3tmVg3wiReH
+	28REdTEJBy/zFAGt4MY8o+KndRcNVBsQZbO7Q=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=tHTmtArw7aZF0zozgO66QSxAy7wySOKxmJ/mm+Ab+HZRk0BnoCyT1Swv6pMCIyY/HP
-	sQaTG9mYtiBq5GzMRfLTwWpdnD+KaF3RNe5O6FCcTKHRGq7guQNdQuXkDFaM42wN/gGJ
-	P4YIhVwmoBN5INJoH5vSWmwWb0YglZR42mD7I=
-Received: by 10.150.200.7 with SMTP id x7mr21116319ybf.153.1294171130286;
-	Tue, 04 Jan 2011 11:58:50 -0800 (PST)
+	b=Br1TyZuOMYpZZPnGr2HdjojCFnLqvUIL7fzOEYnvE5opcWehPP2wbGQaULBn4XXb9E
+	ORBkzEeawXwFetAeDgvSjIeOBmTp4TZdVQhXNavpVJAH1XFYud8DVJhetJ1L5IajEGy1
+	vbZQkW4YiRr1AYN4oE9wK3PLzbLIAI/+Xcfbc=
+Received: by 10.151.150.11 with SMTP id c11mr20876210ybo.413.1294174334867;
+	Tue, 04 Jan 2011 12:52:14 -0800 (PST)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id q4sm14068680ybe.0.2011.01.04.11.58.49
+	by mx.google.com with ESMTPS id r6sm14160651yba.23.2011.01.04.12.52.14
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 04 Jan 2011 11:58:49 -0800 (PST)
-From: Melissa Watkins <mwatkins.ti@gmail.com>
+	Tue, 04 Jan 2011 12:52:14 -0800 (PST)
+From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Jan 2011 10:15:37 -0600
-Message-Id: <1294157737-18899-1-git-send-email-m-watkins@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Melissa Watkins <m-watkins@ti.com>
-Subject: [PATCHv2] ti-pru-sw: Update SRC_REV
+Date: Tue,  4 Jan 2011 14:51:36 -0600
+Message-Id: <1294174296-23336-1-git-send-email-j-lance1@ti.com>
+X-Mailer: git-send-email 1.6.3.3
+Cc: Jeff Lance <j-lance1@ti.com>
+Subject: [PATCH v2 1/1] am-benchmarks: add platform support and correct makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,80 +44,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 19:59:17 -0000
+X-List-Received-Date: Tue, 04 Jan 2011 20:52:39 -0000
 
-For the ti-pru-sw-examples, ti-pru-sw-app-loader, ti-pru-sw-edma-driver,
-ti-pru-sw-edma-library:
+  * Modify recipe name to include package version
+  * add support for additional platforms am181x-evm and am180x-evm
+  * Update the SRCREV
+    * Fix pathname to Rules.make in each Makefile
 
-* Update SRC_REV
-
-Signed-off-by: Melissa Watkins <m-watkins@ti.com>
+Signed-off-by: Jeff Lance <j-lance1@ti.com>
 ---
-In version 2:
-
-* Removed bumping PR
-
+Updated in version 2:
+  * Removed PV since it is now in the filename
+  * Removed ARCHITECTURE override for am180x and am181x since they are already covered under the SOC famile omapl138
 ---
- recipes/ti/ti-pru-sw-app-loader_1.00.00.bb   |    2 +-
- recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb  |    2 +-
- recipes/ti/ti-pru-sw-edma-library_1.00.00.bb |    2 +-
- recipes/ti/ti-pru-sw-examples_1.00.00.bb     |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ recipes/ti/am-benchmarks_1.2.bb |   36 ++++++++++++++++++++++++++++++++++++
+ 1 files changed, 36 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ti/am-benchmarks_1.2.bb
 
-diff --git a/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb b/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-index 6b7514d..20fd153 100644
---- a/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-@@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "20"
-+SRCREV = "21"
- S = "${WORKDIR}/trunk/app_loader"
- 
- do_compile () {
-diff --git a/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-index b975d78..8b1cd0c 100644
---- a/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "20"
-+SRCREV = "21"
- S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/module"
- 
- PACKAGE_STRIP = "no"
-diff --git a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-index cb517de..73990e9 100644
---- a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-@@ -10,7 +10,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "20"
-+SRCREV = "21"
- S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/interface"
- 
- do_compile () {
-diff --git a/recipes/ti/ti-pru-sw-examples_1.00.00.bb b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-index 5df6c6e..d13990a 100644
---- a/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "20"
-+SRCREV = "21"
- S = "${WORKDIR}/trunk"
- 
- do_compile () {
+diff --git a/recipes/ti/am-benchmarks_1.2.bb b/recipes/ti/am-benchmarks_1.2.bb
+new file mode 100644
+index 0000000..88b38e7
+--- /dev/null
++++ b/recipes/ti/am-benchmarks_1.2.bb
+@@ -0,0 +1,36 @@
++#NOTE: This package is currently only supported for the Angstrom
++#      distribution.  Other distributions and toolchains may or
++#      may not work.
++
++DESCRIPTION = "AM Benchmarks"
++HOMEPAGE = "https://gforge.ti.com/gf/project/am_benchmarks/"
++LICENSE = "BSD"
++SECTION = "system"
++PRIORITY = "optional"
++
++SRCREV = "58"
++PR = "r2+svnr${SRCPV}"
++
++COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
++
++ARCHITECTURE_dm365 = "arm9"
++ARCHITECTURE_omapl138 = "arm9"
++ARCHITECTURE_omap3 = "cortex-a8"
++ARCHITECTURE_ti816x = "cortex-a8"
++
++INSANE_SKIP_${PN} = "True"
++
++SRC_URI = "svn://gforge.ti.com/svn/am_benchmarks/;module=trunk;proto=https;user=anonymous;pswd=''"
++
++S = "${WORKDIR}/trunk/${ARCHITECTURE}"
++
++do_compile() {
++	# don't build debug version
++	touch debug
++	export CROSS_COMPILE=${TARGET_PREFIX}
++	make release
++}
++
++do_install() {
++	make DESTDIR=${D} install
++}
 -- 
-1.7.0.4
+1.6.3.3
 
 
 
