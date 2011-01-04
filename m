@@ -1,40 +1,27 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1Pa8Ju-0005AZ-Ih
+	(envelope-from <sledz@dresearch.de>) id 1Pa8dB-0007ws-V0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 15:57:24 +0100
-Received: by wwi17 with SMTP id 17so14420178wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 06:56:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=oCGXF8h1R0RHgo8Vz/I+HvB8FT0RaEsvqlFFEoTUzvA=;
-	b=A3x63lt+VpyirV3CCXfkLhBeKO8UbtXAowKWVJ2zba1w7wHEwPno9J1Ijws0JG1lWb
-	eDK0tgjqwNTj1EdjPUouup/FY9Bs7qQCAdt2df6HePKqA/SVSMm1vN6en8BhZfSszO9O
-	14rggSzKwwDwrZiStebqnhiI3l3tITRPtNNIM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=cVVA2DWfeKGqgSWpFf/r6W5wARfGJ+0Dni4Pn8wNz1R9j9XndIu8pJiIobHZbqqeLW
-	IGIu1Qv0h+TRUI6lZbml4JTsWLAVBu8hAKOBch5mniopGLq8cKWZFcCMcR4JlMw8drrM
-	pySaog41jLM72gvQY2nkJKnshPUiOZH9k+2jw=
-Received: by 10.216.154.147 with SMTP id h19mr16216312wek.42.1294152990562;
-	Tue, 04 Jan 2011 06:56:30 -0800 (PST)
+	Tue, 04 Jan 2011 16:17:02 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 56DFD491282;
+	Tue,  4 Jan 2011 16:16:41 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 4 Jan 2011 16:16:41 +0100
+Message-ID: <4D2339D3.1000901@dresearch.de>
+Date: Tue, 04 Jan 2011 16:16:35 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Tue, 4 Jan 2011 06:56:10 -0800 (PST)
-In-Reply-To: <1293911357.17519.17117.camel@rex>
-References: <1293763348.17519.11220.camel@rex> <1293805474.18787.366.camel@eha>
-	<1293911357.17519.17117.camel@rex>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 4 Jan 2011 07:56:10 -0700
-X-Google-Sender-Auth: QqfluSs5O0s7OYYaNpHYdafTius
-Message-ID: <AANLkTi=YuEBqPtCGnutaW_-JF0F=ZwmT8OS8rCmr9886@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: Bitbake Architecture, Roadmap, Maintainers and the future
+References: <87lj3ge0yd.fsf@gmail.com>	<AANLkTimdpd-se=XR1N_E92UuNN3Ci0Tr6WJRLkDxV2=E@mail.gmail.com>
+	<AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>
+In-Reply-To: <AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>
+X-OriginalArrivalTime: 04 Jan 2011 15:16:41.0476 (UTC)
+	FILETIME=[63E13440:01CBAC22]
+Subject: Re: Wiki spam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,34 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 14:57:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 04 Jan 2011 15:17:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jan 1, 2011 at 12:49 PM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> The split between the code in general in bitbake is in general ever
-> improving in my opinion. Chris has some some really great work on
-> bitbake recently, particularly making it more pythonic. Some of the
-> changes just before the holidays, particularly the UI changes on the
-> cooker to UI relationship make me uncomfortable, particularly if they
-> mean the xmlrpc client/server code no longer works. My concern is that
-> they cross the boundary into what I'd class as regressing an API
-> boundary, particularly one that is only in the early stages of being
-> properly established and that we very much need. I don't know if this is
-> an API you use or not but its the kind of thing we need to be careful
-> about. FWIW, its independent of the parallel parsing code and other
-> changes which is partly why I'm so concerned it was merged as is :(.
+Am 23.12.2010 23:14, schrieb Khem Raj:
+>> ...
+>> It looks like someone is spamming our wiki with new users :-(
+>>
+>> Any ideas where to go from here?
+> 
+> Add a captcha when creating new user acct
 
-Unless you think parallel parsing is the only work I've done on
-bitbake, I fail to see what it being independent of parallel parsing
-has to do with anything.  Of course it's independent.  It's entirely
-different work for an entirely different purpose, done on different
-branches, and trying to compare them is pointless and means nothing.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+I can try to add the ConfirmEdit[1] mediawiki extension for this purpose.
+
+Would a captcha be accepted for user registration by the community? Captchas for the edits itself i consider to be overkill.
+
+Steffen
+
+[1] http://www.mediawiki.org/wiki/Extension:ConfirmEdit
+
 
 
