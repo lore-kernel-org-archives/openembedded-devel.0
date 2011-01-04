@@ -1,36 +1,40 @@
-Received: from mail-gx0-f193.google.com ([209.85.161.193])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1PaC4e-0006sH-UE
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PaCbt-0007hp-KP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 19:57:37 +0100
-Received: by gxk7 with SMTP id 7so3804319gxk.0
+	Tue, 04 Jan 2011 20:31:57 +0100
+Received: by iyj18 with SMTP id 18so13954373iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 10:57:12 -0800 (PST)
+	Tue, 04 Jan 2011 11:31:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=vWxmiIpsHSVqMTxLkrHIBPhLiFZUalN1MTC7JW7bDgI=;
-	b=UL+MOYJPuHKYRuCn9Mv2npx6SG1dSYX/aePsrBtaXl+RMT3V3xSSlvFj8ugjtKEy/1
-	Wt2K06qv75cXpqEkWb0ELbpngm09x9WX31mxEHE5vrKlPkAacDSB1ISGd4LVXMcdRKk4
-	sMhf1PdHIgOGjmn/cdFsECxJJzg/Gz5+x/hRY=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=FJXlGf90wbhMn3uAHiDVbeOFCyONqaIq6J8vuNTzpgE=;
+	b=XHwFP81KgcH12UeialhsgjH3IahK+GuKii1BH/lBe5dxrvohmoNM/6NSn8woUuBPsf
+	9K7YAASd+7zpCc6F8LPGzwB5WQhko6mk3hHN1fQ5XAv5+2IznEvq0486S3JFjq7qw44/
+	17S2qQ/SUcBCvSVoO9bjPFjzu6m9dsvk73Lpg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Z3DxzZaFEqH1NeajwoLukVeZ4pqTZtedKYYq15oTuSPbID+5WwEGpm/SSP+PR7dPlw
-	djbDN72Ex2wLnGZKWZExzPBSYQiBR30LNzeCB+fJl1ozwmfAXssgAmseYjuw+5B22/UL
-	X7WEn70auFJtS+Z7A+AYHt13DloVqySn8Ejf8=
-Received: by 10.150.212.14 with SMTP id k14mr2192363ybg.73.1294167432245;
-	Tue, 04 Jan 2011 10:57:12 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id k2sm10915622ybj.22.2011.01.04.10.57.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 04 Jan 2011 10:57:11 -0800 (PST)
-From: Jeff Lance <jefflance01@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=FkF/JwsrKQGcEZfnUaGTqRy+WjFgko3hrTB8LuZhz4oOytWsnwZPjquZGk+0Qgjh6E
+	DMQIDByo/35kZqVLhfT6QGvUTWxKywu0AtQbWB6u2xbQ6LxzNaoVbX3LO48jlTryQfWo
+	5H4zEu07wlN0siz4qJhzekQT2P72n4AAqrpJ8=
+MIME-Version: 1.0
+Received: by 10.231.15.202 with SMTP id l10mr6091576iba.19.1294169493943; Tue,
+	04 Jan 2011 11:31:33 -0800 (PST)
+Received: by 10.231.38.11 with HTTP; Tue, 4 Jan 2011 11:31:33 -0800 (PST)
+In-Reply-To: <4D236933.20308@balister.org>
+References: <87lj3ge0yd.fsf@gmail.com>
+	<AANLkTimdpd-se=XR1N_E92UuNN3Ci0Tr6WJRLkDxV2=E@mail.gmail.com>
+	<AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>
+	<4D2339D3.1000901@dresearch.de>
+	<AANLkTikTQdcMf2sFP8ePMxo8btx2bev9mVpo+YzuCpcZ@mail.gmail.com>
+	<4D236933.20308@balister.org>
+Date: Tue, 4 Jan 2011 20:31:33 +0100
+Message-ID: <AANLkTin+QuOwgnJpCjBYowp0nB_sm2zDy8z_r95Ku+Cm@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Jan 2011 12:56:32 -0600
-Message-Id: <1294167392-20610-1-git-send-email-j-lance1@ti.com>
-X-Mailer: git-send-email 1.6.3.3
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 1/1] am-benchmarks: add platform support and correct makefile
+Subject: Re: Wiki spam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,50 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 18:57:37 -0000
+X-List-Received-Date: Tue, 04 Jan 2011 19:31:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-  * Modify recipe name to include package version
-  * add support for additional platforms am181x-evm and am180x-evm
-  * Update the SRCREV
-    * Fix pathname to Rules.make in each Makefile
+2011/1/4 Philip Balister <philip@balister.org>:
+> On 01/04/2011 01:15 PM, AJ ONeal wrote:
+>>
+>> I'm pro captcha.
+>
+> Since we are having a poll, I am for anything that helps out the guys doing
+> admin work :)
+>
+>
+I fully agree!
 
-Signed-off-by: Jeff Lance <j-lance1@ti.com>
----
- .../{am-benchmarks_svn.bb => am-benchmarks_1.2.bb} |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
- copy recipes/ti/{am-benchmarks_svn.bb => am-benchmarks_1.2.bb} (87%)
+but if there are alternatives that are as effective as the captcha,
+I'm in favour of those. I find the current captchas hard to read and
+it does not really help that it are obscure words that I (as a
+non-native speaker) do not know.
 
-diff --git a/recipes/ti/am-benchmarks_svn.bb b/recipes/ti/am-benchmarks_1.2.bb
-similarity index 87%
-copy from recipes/ti/am-benchmarks_svn.bb
-copy to recipes/ti/am-benchmarks_1.2.bb
-index 63c122f..dbe2db7 100644
---- a/recipes/ti/am-benchmarks_svn.bb
-+++ b/recipes/ti/am-benchmarks_1.2.bb
-@@ -8,9 +8,9 @@ LICENSE = "BSD"
- SECTION = "system"
- PRIORITY = "optional"
- 
--SRCREV = "56"
--PV = "1.1"
--PR = "r1+svnr${SRCPV}"
-+SRCREV = "58"
-+PV = "1.2"
-+PR = "r2+svnr${SRCPV}"
- 
- COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
- 
-@@ -18,6 +18,8 @@ ARCHITECTURE_dm365 = "arm9"
- ARCHITECTURE_omapl138 = "arm9"
- ARCHITECTURE_omap3 = "cortex-a8"
- ARCHITECTURE_ti816x = "cortex-a8"
-+ARCHITECTURE_am180x-evm = "arm9"
-+ARCHITECTURE_am181x-evm = "arm9"
- 
- INSANE_SKIP_${PN} = "True"
- 
--- 
-1.6.3.3
-
+Frans.
 
 
