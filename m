@@ -1,38 +1,24 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from starfish.geekisp.com ([216.168.135.166])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1PaBaA-0006NC-HN
+	(envelope-from <philip@balister.org>) id 1PaBmr-0006cc-EU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 19:26:06 +0100
-Received: by fxm17 with SMTP id 17so13552491fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 10:25:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=8jXIhvmI8WW4NRHClIaP1GuXVMGbUrRrrkasSW1LOWo=;
-	b=EXBwRMIfBCLo9NHh2a0xiKL9M3LrGnT6R9OvZwuQ4plkSg8wRDQBROV2p70ZxApRpK
-	TzVTh/NYqNWFaPxU5sZvQAdg+IGNuziI1XMhPYW2Nud+IJFn9e+tERNNtoMpImkqvMj6
-	Rzk5w25WoyUmwyNRSC4sJt2kg0nYcu5E5X+jA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=jv38RyZKkL3lLruR+HZT5nZZXCt7NG4B9IDk4p85vnvdf7qLUf0fbhBjAMfFTRiE2C
-	6kCzpb9ApSM/8Ip71j1BKwEV4FHy9YHLr1cvoDJY8semXS4VW5EISZwjADB/UuFmPDu3
-	Cp58FVezYaQ18zqdOWqgrZsh1JVsS7hIgwYUg=
-Received: by 10.223.71.194 with SMTP id i2mr3043448faj.15.1294164964811; Tue,
-	04 Jan 2011 10:16:04 -0800 (PST)
+	Tue, 04 Jan 2011 19:39:14 +0100
+Received: (qmail 15094 invoked by uid 1003); 4 Jan 2011 18:38:42 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	4 Jan 2011 18:38:42 -0000
+Message-ID: <4D236933.20308@balister.org>
+Date: Tue, 04 Jan 2011 13:38:43 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.223.42.18 with HTTP; Tue, 4 Jan 2011 10:15:43 -0800 (PST)
-In-Reply-To: <4D2339D3.1000901@dresearch.de>
-References: <87lj3ge0yd.fsf@gmail.com>
-	<AANLkTimdpd-se=XR1N_E92UuNN3Ci0Tr6WJRLkDxV2=E@mail.gmail.com>
-	<AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>
-	<4D2339D3.1000901@dresearch.de>
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Tue, 4 Jan 2011 11:15:43 -0700
-Message-ID: <AANLkTikTQdcMf2sFP8ePMxo8btx2bev9mVpo+YzuCpcZ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+References: <87lj3ge0yd.fsf@gmail.com>	<AANLkTimdpd-se=XR1N_E92UuNN3Ci0Tr6WJRLkDxV2=E@mail.gmail.com>	<AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>	<4D2339D3.1000901@dresearch.de>
+	<AANLkTikTQdcMf2sFP8ePMxo8btx2bev9mVpo+YzuCpcZ@mail.gmail.com>
+In-Reply-To: <AANLkTikTQdcMf2sFP8ePMxo8btx2bev9mVpo+YzuCpcZ@mail.gmail.com>
 Subject: Re: Wiki spam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,37 +33,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 18:26:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 04 Jan 2011 18:39:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I'm pro captcha.
+On 01/04/2011 01:15 PM, AJ ONeal wrote:
+> I'm pro captcha.
 
-AJ ONeal
+Since we are having a poll, I am for anything that helps out the guys 
+doing admin work :)
 
+Philip
 
-On Tue, Jan 4, 2011 at 8:16 AM, Steffen Sledz <sledz@dresearch.de> wrote:
-
-> Am 23.12.2010 23:14, schrieb Khem Raj:
-> >> ...
-> >> It looks like someone is spamming our wiki with new users :-(
-> >>
-> >> Any ideas where to go from here?
-> >
-> > Add a captcha when creating new user acct
 >
-> I can try to add the ConfirmEdit[1] mediawiki extension for this purpose.
->
-> Would a captcha be accepted for user registration by the community?
-> Captchas for the edits itself i consider to be overkill.
->
-> Steffen
->
-> [1] http://www.mediawiki.org/wiki/Extension:ConfirmEdit
+> AJ ONeal
 >
 >
+> On Tue, Jan 4, 2011 at 8:16 AM, Steffen Sledz<sledz@dresearch.de>  wrote:
+>
+>> Am 23.12.2010 23:14, schrieb Khem Raj:
+>>>> ...
+>>>> It looks like someone is spamming our wiki with new users :-(
+>>>>
+>>>> Any ideas where to go from here?
+>>>
+>>> Add a captcha when creating new user acct
+>>
+>> I can try to add the ConfirmEdit[1] mediawiki extension for this purpose.
+>>
+>> Would a captcha be accepted for user registration by the community?
+>> Captchas for the edits itself i consider to be overkill.
+>>
+>> Steffen
+>>
+>> [1] http://www.mediawiki.org/wiki/Extension:ConfirmEdit
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
+
 
