@@ -1,36 +1,40 @@
-Received: from mail-yw0-f65.google.com ([209.85.213.65])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chasemaupin03@gmail.com>) id 1PaCgi-0007oo-Sg
+	(envelope-from <chase.maupin@ti.com>) id 1PaCjx-0007vb-Fa
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 20:36:57 +0100
-Received: by ywo32 with SMTP id 32so3734759ywo.0
+	Tue, 04 Jan 2011 20:40:17 +0100
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p04JdrdC016255
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 11:36:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=Iq9B+F16umyjrNUJL51DiZEMYg1PdTuha7n8wgAzpkk=;
-	b=wpYkQI7n6oMMyttfHr5ngyZ6u25ATOolenCvzPVwJ7toY6JrGpuXvMP4ChjsbzmVag
-	h8GDfDv7f41g3+UWj518DWHtCKj5Gsn63V/BTKCQh9cxPRI0AfU4daNS9zZYGb6+GZtW
-	YghMfrf+O4YnREIzFylNYOAF3eR7FglWzHKn0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=GpauM1jtSUVrHdsdu/M8JKiK4FsAY4ZJKi9fSKTc0ftHnMeGOEAJdCqdwKOTPdveuQ
-	YXT5QIHB2iE9s0LzmbewC8K0TKrUNhYOoYPNWbUd7WuRuVPLOrARBGpfdaiMRenuCQAG
-	iTNfSrW+WpqzLB5Ge1tlQoniTMBFajnAcqa+k=
-Received: by 10.151.84.10 with SMTP id m10mr2102524ybl.177.1294169784460;
-	Tue, 04 Jan 2011 11:36:24 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id q31sm10921751yba.18.2011.01.04.11.36.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 04 Jan 2011 11:36:23 -0800 (PST)
-From: Chase Maupin <chasemaupin03@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Jan 2011 13:36:17 -0600
-Message-Id: <1294169777-9968-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Jeff Lance <j-lance@ti.com>, Chase Maupin <Chase.Maupin@ti.com>
-Subject: [PATCH] matrix-tui: adding multi platform support
+	Tue, 4 Jan 2011 13:39:53 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id p04JdrJj020668
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 4 Jan 2011 13:39:53 -0600 (CST)
+Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p04JdrwA001966
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 4 Jan 2011 13:39:53 -0600 (CST)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
+	([157.170.170.8]) with mapi; Tue, 4 Jan 2011 13:39:53 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 4 Jan 2011 13:39:50 -0600
+Thread-Topic: [oe] [PATCH 1/1] am-benchmarks: add platform support and
+	correct	makefile
+Thread-Index: AcusQiq5WJUAXCOlReyprFtWKvOrewABMB+w
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080329E939EA@dlee06.ent.ti.com>
+References: <1294167392-20610-1-git-send-email-j-lance1@ti.com>
+In-Reply-To: <1294167392-20610-1-git-send-email-j-lance1@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+Cc: "Lance, Jeff" <j-lance1@ti.com>
+Subject: Re: [PATCH 1/1] am-benchmarks: add platform support and correct	makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,67 +48,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 19:36:57 -0000
+X-List-Received-Date: Tue, 04 Jan 2011 19:40:17 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* adding am180x, am181x, da850-omapl138, am3517 and am3715 support
-* Updating SRC rev to pull in matrix-tui project with platform support
-* removing INSANE_SKIP, it originally handled pre-built binaries which
-  have since been removed
-* Creating version 1.1 of the recipe
-* matrix-tui.inc with platform support is backwards compatible with
-  previous versions
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Jeff Lance
+> Sent: Tuesday, January 04, 2011 12:57 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Lance, Jeff
+> Subject: [oe] [PATCH 1/1] am-benchmarks: add platform support and correct
+> makefile
+>=20
+>   * Modify recipe name to include package version
+>   * add support for additional platforms am181x-evm and am180x-evm
+>   * Update the SRCREV
+>     * Fix pathname to Rules.make in each Makefile
+>=20
+> Signed-off-by: Jeff Lance <j-lance1@ti.com>
+> ---
+>  .../{am-benchmarks_svn.bb =3D> am-benchmarks_1.2.bb} |    8 +++++---
+>  1 files changed, 5 insertions(+), 3 deletions(-)
+>  copy recipes/ti/{am-benchmarks_svn.bb =3D> am-benchmarks_1.2.bb} (87%)
+>=20
+> diff --git a/recipes/ti/am-benchmarks_svn.bb b/recipes/ti/am-
+> benchmarks_1.2.bb
+> similarity index 87%
+> copy from recipes/ti/am-benchmarks_svn.bb
+> copy to recipes/ti/am-benchmarks_1.2.bb
+> index 63c122f..dbe2db7 100644
+> --- a/recipes/ti/am-benchmarks_svn.bb
+> +++ b/recipes/ti/am-benchmarks_1.2.bb
+> @@ -8,9 +8,9 @@ LICENSE =3D "BSD"
+>  SECTION =3D "system"
+>  PRIORITY =3D "optional"
+>=20
+> -SRCREV =3D "56"
+> -PV =3D "1.1"
+> -PR =3D "r1+svnr${SRCPV}"
+> +SRCREV =3D "58"
+> +PV =3D "1.2"
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-Signed-off-by: Jeff Lance <j-lance@ti.com>
----
- recipes/ti/matrix-tui.inc    |   12 ++++++++++--
- recipes/ti/matrix-tui_1.1.bb |    4 ++++
- 2 files changed, 14 insertions(+), 2 deletions(-)
- create mode 100644 recipes/ti/matrix-tui_1.1.bb
+No need to set PV to 1.2 since you have changed the recipe name to am-bench=
+marks_1.2.bb.  PV will automatically get set to 1.2 because of the recipe n=
+ame.
 
-diff --git a/recipes/ti/matrix-tui.inc b/recipes/ti/matrix-tui.inc
-index 6983406..1ad8aa8 100644
---- a/recipes/ti/matrix-tui.inc
-+++ b/recipes/ti/matrix-tui.inc
-@@ -5,9 +5,16 @@ SECTION = "multimedia"
- PRIORITY = "optional"
- DEPENDS = "libxml2 zlib ncurses"
- 
--INC_PR = "r5"
-+INC_PR = "r7"
- 
--INSANE_SKIP_${PN} = "True"
-+COMPATIBLE_MACHINE = "(omapl138|omap3)"
-+
-+PLATFORM_am37x-evm = "am3715"
-+PLATFORM_beagleboard = "am3715"
-+PLATFORM_am3517-evm = "am3517"
-+PLATFORM_am180x-evm = "am180x"
-+PLATFORM_am181x-evm = "am181x"
-+PLATFORM_da850-omapl138-evm = "am180x"
- 
- SRC_URI = "svn://gforge.ti.com/svn/matrix_tui/;module=trunk;proto=https;user=anonymous;pswd='' \
- 	file://init \
-@@ -36,6 +43,7 @@ do_compile() {
- }
- 
- do_install() {
-+	export PLATFORM=${PLATFORM}
- 	make DESTDIR=${D} install
- 	install -d ${D}${sysconfdir}/init.d/
- 	install -c -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-tui
-diff --git a/recipes/ti/matrix-tui_1.1.bb b/recipes/ti/matrix-tui_1.1.bb
-new file mode 100644
-index 0000000..8f2ccbe
---- /dev/null
-+++ b/recipes/ti/matrix-tui_1.1.bb
-@@ -0,0 +1,4 @@
-+require matrix-tui.inc
-+
-+SRCREV = "34"
-+PR = "${INC_PR}.2"
--- 
-1.7.0.4
+> +PR =3D "r2+svnr${SRCPV}"
+>=20
+>  COMPATIBLE_MACHINE =3D "(dm365|omapl138|omap3|ti816x)"
+>=20
+> @@ -18,6 +18,8 @@ ARCHITECTURE_dm365 =3D "arm9"
+>  ARCHITECTURE_omapl138 =3D "arm9"
+>  ARCHITECTURE_omap3 =3D "cortex-a8"
+>  ARCHITECTURE_ti816x =3D "cortex-a8"
+> +ARCHITECTURE_am180x-evm =3D "arm9"
+> +ARCHITECTURE_am181x-evm =3D "arm9"
 
+You do not need to set architecture for am180x-evm and am181x-evm since the=
+ ARCHITECTURE_omapl138 override applies to these already and sets the archi=
+tecture to "arm9"
+
+>=20
+>  INSANE_SKIP_${PN} =3D "True"
+>=20
+> --
+> 1.6.3.3
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
