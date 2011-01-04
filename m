@@ -1,25 +1,36 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
+Received: from mail-gx0-f193.google.com ([209.85.161.193])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1PaBmr-0006cc-EU
+	(envelope-from <jefflance01@gmail.com>) id 1PaC4e-0006sH-UE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 19:39:14 +0100
-Received: (qmail 15094 invoked by uid 1003); 4 Jan 2011 18:38:42 -0000
-Received: from unknown (HELO ?192.168.1.167?)
-	(philip@opensdr.com@74.107.167.114)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	4 Jan 2011 18:38:42 -0000
-Message-ID: <4D236933.20308@balister.org>
-Date: Tue, 04 Jan 2011 13:38:43 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
-MIME-Version: 1.0
+	Tue, 04 Jan 2011 19:57:37 +0100
+Received: by gxk7 with SMTP id 7so3804319gxk.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Jan 2011 10:57:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=vWxmiIpsHSVqMTxLkrHIBPhLiFZUalN1MTC7JW7bDgI=;
+	b=UL+MOYJPuHKYRuCn9Mv2npx6SG1dSYX/aePsrBtaXl+RMT3V3xSSlvFj8ugjtKEy/1
+	Wt2K06qv75cXpqEkWb0ELbpngm09x9WX31mxEHE5vrKlPkAacDSB1ISGd4LVXMcdRKk4
+	sMhf1PdHIgOGjmn/cdFsECxJJzg/Gz5+x/hRY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Z3DxzZaFEqH1NeajwoLukVeZ4pqTZtedKYYq15oTuSPbID+5WwEGpm/SSP+PR7dPlw
+	djbDN72Ex2wLnGZKWZExzPBSYQiBR30LNzeCB+fJl1ozwmfAXssgAmseYjuw+5B22/UL
+	X7WEn70auFJtS+Z7A+AYHt13DloVqySn8Ejf8=
+Received: by 10.150.212.14 with SMTP id k14mr2192363ybg.73.1294167432245;
+	Tue, 04 Jan 2011 10:57:12 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id k2sm10915622ybj.22.2011.01.04.10.57.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 04 Jan 2011 10:57:11 -0800 (PST)
+From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <87lj3ge0yd.fsf@gmail.com>	<AANLkTimdpd-se=XR1N_E92UuNN3Ci0Tr6WJRLkDxV2=E@mail.gmail.com>	<AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>	<4D2339D3.1000901@dresearch.de>
-	<AANLkTikTQdcMf2sFP8ePMxo8btx2bev9mVpo+YzuCpcZ@mail.gmail.com>
-In-Reply-To: <AANLkTikTQdcMf2sFP8ePMxo8btx2bev9mVpo+YzuCpcZ@mail.gmail.com>
-Subject: Re: Wiki spam
+Date: Tue,  4 Jan 2011 12:56:32 -0600
+Message-Id: <1294167392-20610-1-git-send-email-j-lance1@ti.com>
+X-Mailer: git-send-email 1.6.3.3
+Cc: Jeff Lance <j-lance1@ti.com>
+Subject: [PATCH 1/1] am-benchmarks: add platform support and correct makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,51 +44,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 18:39:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 04 Jan 2011 18:57:37 -0000
 
-On 01/04/2011 01:15 PM, AJ ONeal wrote:
-> I'm pro captcha.
+  * Modify recipe name to include package version
+  * add support for additional platforms am181x-evm and am180x-evm
+  * Update the SRCREV
+    * Fix pathname to Rules.make in each Makefile
 
-Since we are having a poll, I am for anything that helps out the guys 
-doing admin work :)
+Signed-off-by: Jeff Lance <j-lance1@ti.com>
+---
+ .../{am-benchmarks_svn.bb => am-benchmarks_1.2.bb} |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
+ copy recipes/ti/{am-benchmarks_svn.bb => am-benchmarks_1.2.bb} (87%)
 
-Philip
+diff --git a/recipes/ti/am-benchmarks_svn.bb b/recipes/ti/am-benchmarks_1.2.bb
+similarity index 87%
+copy from recipes/ti/am-benchmarks_svn.bb
+copy to recipes/ti/am-benchmarks_1.2.bb
+index 63c122f..dbe2db7 100644
+--- a/recipes/ti/am-benchmarks_svn.bb
++++ b/recipes/ti/am-benchmarks_1.2.bb
+@@ -8,9 +8,9 @@ LICENSE = "BSD"
+ SECTION = "system"
+ PRIORITY = "optional"
+ 
+-SRCREV = "56"
+-PV = "1.1"
+-PR = "r1+svnr${SRCPV}"
++SRCREV = "58"
++PV = "1.2"
++PR = "r2+svnr${SRCPV}"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
+ 
+@@ -18,6 +18,8 @@ ARCHITECTURE_dm365 = "arm9"
+ ARCHITECTURE_omapl138 = "arm9"
+ ARCHITECTURE_omap3 = "cortex-a8"
+ ARCHITECTURE_ti816x = "cortex-a8"
++ARCHITECTURE_am180x-evm = "arm9"
++ARCHITECTURE_am181x-evm = "arm9"
+ 
+ INSANE_SKIP_${PN} = "True"
+ 
+-- 
+1.6.3.3
 
->
-> AJ ONeal
->
->
-> On Tue, Jan 4, 2011 at 8:16 AM, Steffen Sledz<sledz@dresearch.de>  wrote:
->
->> Am 23.12.2010 23:14, schrieb Khem Raj:
->>>> ...
->>>> It looks like someone is spamming our wiki with new users :-(
->>>>
->>>> Any ideas where to go from here?
->>>
->>> Add a captcha when creating new user acct
->>
->> I can try to add the ConfirmEdit[1] mediawiki extension for this purpose.
->>
->> Would a captcha be accepted for user registration by the community?
->> Captchas for the edits itself i consider to be overkill.
->>
->> Steffen
->>
->> [1] http://www.mediawiki.org/wiki/Extension:ConfirmEdit
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
