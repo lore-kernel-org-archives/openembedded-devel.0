@@ -1,35 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pa26k-0004Sv-O9 for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 09:19:07 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Pa26Q-00028W-9I for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 09:18:46 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 09:18:46 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 09:18:46 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <sledz@dresearch.de>) id 1Pa4kE-00015P-HP
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 Jan 2011 12:08:02 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id EC0DC491282;
+	Tue,  4 Jan 2011 11:36:45 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 4 Jan 2011 11:36:46 +0100
+Message-ID: <4D22F838.8020806@dresearch.de>
+Date: Tue, 04 Jan 2011 11:36:40 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 04 Jan 2011 09:18:33 +0100
-Message-ID: <iful4p$9us$1@dough.gmane.org>
-References: <4D20968B.4030004@mwester.net>	<ifqdd0$7cl$1@dough.gmane.org>	<4D212058.5050001@mwester.net>	<ifrv28$ko7$1@dough.gmane.org>
-	<4D22A477.5010205@mwester.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D22A477.5010205@mwester.net>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] e2fsprogs.inc - break shared libs into separate packages
+References: <AANLkTin8E_sSKJcCW7_gtx85_Uo6SvwHFTdiUA8XZ2tv@mail.gmail.com>
+	<AANLkTimHjCR5N8WDd5kz4qPqZE=-XCyzz-xqYiE6VeaJ@mail.gmail.com>
+In-Reply-To: <AANLkTimHjCR5N8WDd5kz4qPqZE=-XCyzz-xqYiE6VeaJ@mail.gmail.com>
+X-OriginalArrivalTime: 04 Jan 2011 10:36:46.0081 (UTC)
+	FILETIME=[490B4F10:01CBABFB]
+Subject: Re: testing branch 2010-11-12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,68 +35,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 08:19:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 04 Jan 2011 11:08:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 04-01-11 05:39, Mike Westerhof wrote:
-> On 1/3/2011 1:49 AM, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 03-01-11 02:03, Mike Westerhof wrote:
->>> On 1/2/2011 11:41 AM, Koen Kooi wrote:
->>> On 02-01-11 16:15, Mike Westerhof wrote:
->>>>>> Break the two shared libraries (libe2p and libext2fs) out of the general e2fsprogs
->>>>>> package and into their own packages.  This avoids pulling in unwanted executables
->>>>>> when a distro only desires the basic tools (such as e2fsck and/or mke2fs).
->>>>>>
->>>>>> Signed-off-by: Mike Westerhof <mike@mwester.net>
->>>
->>> Recipes with e2fsprogs in DEPENDS will need a PR bump as well, since
->>> they might link to these libs as well. This will result in missing
->>> libraries when using package feeds.
->>>
->>>> Ok, I can do that.  But I'm not sure I understand why this is the case.
->>>>  OE detects the dependencies on the shared libs, and automagically adds
->>>> the necessary dependencies to the opkg control file.  Hence, if opkg on
->>>> a device updates "e2fsprogs", it will see that the new version of
->>>> "e2fsprogs" depends on the two new libraries, and it should pull those
->>>> in from the feeds as well.
->>>
->>>> Perhaps a use-case that will fail will help me understand, and
->>>> consequently, help me put together a more-correct patch.
->>
->> Say you have built gparted which (r)depends on e2fsprogs and links to
->> libe2p. After this patch the "old" gparted in the feeds will only pull
->> in e2fsprogs and not libe2p.
->> If the e2fsprogs package rdepends on libe2p and friends this isn't a
->> problem, but if it doesn't you'll get spurious libs. This has happened a
->> number of times in the past and I'd like to avoid it happening in the
->> future :)
+Am 18.11.2010 23:13, schrieb Cliff Brake:
+> Last week's test run was a success with 38 combinations passing.
+> Thanks to all running tests:
 > 
-> Got it.  So here's the pertinent line from the control file in the
-> e2fsck ipk:
-> 
-> "Depends: util-linux-ng, e2fsprogs-badblocks, libext2fs2, libcom-err2,
-> libe2p2, libuuid1, libc6, libgcc1, libss2, libblkid1"
-> 
-> Both new library packages (libext2fs2 and libe2p2) are present and will
-> be pulled in by opkg, so no other packages will require PR bumps.
+> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-11-12
 
-Awesome! Thanks for checking.
+Just a short question (i was "offline" for some weeks).
 
-Acked-by: Koen Kooi <koen@openembedded.org>
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+The Testing Log [1] ends with "tested_2010-10-29". Is this indented?
 
-iD8DBQFNItfZMkyGM64RGpERAvCLAKC9BjKNaH7OCwb+zCLTa383UpGJ7ACgpJrR
-Nm9ZRWgWzxEdXMInxccB3yE=
-=TyUM
------END PGP SIGNATURE-----
+Steffen
+
+[1] http://wiki.openembedded.net/index.php/Testing#Testing_Log
 
 
 
