@@ -1,27 +1,40 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <wohauser@gmx.de>) id 1Pa5dq-0002L8-4h
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <otavio.salvador@gmail.com>) id 1Pa5ul-0002aw-Jt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Jan 2011 13:05:30 +0100
-Received: (qmail invoked by alias); 04 Jan 2011 11:58:27 -0000
-Received: from p549CCA5E.dip.t-dialin.net (EHLO [192.168.3.102])
-	[84.156.202.94]
-	by mail.gmx.net (mp057) with SMTP; 04 Jan 2011 12:58:27 +0100
-X-Authenticated: #656260
-X-Provags-ID: V01U2FsdGVkX19+7Gpv3uh+/Pzms9S5oX+6RC8qMfSGt5+rqm4yxx
-	DaYgThsI0TEcyL
-Message-ID: <4D230B5A.3030202@gmx.de>
-Date: Tue, 04 Jan 2011 12:58:18 +0100
-From: Wolfgang Hauser <wohauser@gmx.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; de-AT;
-	rv:1.9.1.16) Gecko/20101123 SeaMonkey/2.0.11
+	Tue, 04 Jan 2011 13:22:59 +0100
+Received: by bwz10 with SMTP id 10so13886798bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Jan 2011 04:22:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=0RfNulvUyh3Y/1S/+H+ETipQtJwPaP5xlS/07INSTJQ=;
+	b=sfvJLRTpPmNINNjsy1Z9V1QNSBiKh9nBS6+dvhJKzOnmt+IZBAV9XC9BGpL2OUxYM+
+	mqlvEeSA1kISZQO0JOUBTkMhaYL7tqOYzixFi9CyozxQOWgCYP2y2vPLPRDc5lDiptmO
+	Hbz/RJQA2YgbDHdsJCv7f1ta8iLGrKpdmL/Xs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=gv5eUHiFnnuU7LZhfmr1nSA9vFCVyXmcm272eGh0eCpS+EMpd/+K4WI3JuhNcGiYvy
+	Jy47d+CJGLqG92mLSO7YMsuI/bFhc/oylPbu3BLxOHYKG8K4t/l4i9zR9b4yNvjWtmuG
+	BL3nBEhPWaYAM5yths8dZ8R1qwaRbErzrRdMA=
 MIME-Version: 1.0
+Received: by 10.204.101.81 with SMTP id b17mr10531416bko.126.1294143758358;
+	Tue, 04 Jan 2011 04:22:38 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.59.147 with HTTP; Tue, 4 Jan 2011 04:22:38 -0800 (PST)
+In-Reply-To: <4D230B5A.3030202@gmx.de>
+References: <1294084926-3115-1-git-send-email-rep.dot.nop@gmail.com>
+	<1294084926-3115-9-git-send-email-rep.dot.nop@gmail.com>
+	<201101032354.25037.roman@khimov.ru> <4D230B5A.3030202@gmx.de>
+Date: Tue, 4 Jan 2011 10:22:38 -0200
+X-Google-Sender-Auth: BO3dpU8xK7L9lhNZllb2kZ_BQpM
+Message-ID: <AANLkTikAsHGf9H2YUVt6c7eqauOHyWuNUGC9Oy92TOBV@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <1294084926-3115-1-git-send-email-rep.dot.nop@gmail.com>	<1294084926-3115-9-git-send-email-rep.dot.nop@gmail.com>
-	<201101032354.25037.roman@khimov.ru>
-In-Reply-To: <201101032354.25037.roman@khimov.ru>
-X-Enigmail-Version: 1.0.1
-X-Y-GMX-Trusted: 0
 Subject: Re: [PATCH 09/12] busybox: provide postrm for package mdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,34 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 12:05:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 04 Jan 2011 12:22:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Keep it simple and stupid!
-So I vote for the long, readable and less error prone version.
+On Tue, Jan 4, 2011 at 09:58, Wolfgang Hauser <wohauser@gmx.de> wrote:
+> Keep it simple and stupid!
+> So I vote for the long, readable and less error prone version.
 
-Regards
-Wolfgang Hauser
+I usually prefer the KISS however on this specific case I disagree.
 
-Roman I Khimov schrieb:
-> В сообщении от Понедельник 03 января 2011 23:02:03 автор Bernhard Reutner-
-> Fischer написал:
->> -if test "x$D" != "x"; then
->> -	OPT="-r $D"
->> -else
->> -	OPT="-s"
->> -fi
->> +	[ -n "$D" ] && OPT="-r $D" || OPT="-s"
-> 
-> Looks good except for this part (see other mail).
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+The new code avoid using test and a fork. This allows for "test"
+applet removal if desired.
+
+I prefer the ugly but more "embedded like" code.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
