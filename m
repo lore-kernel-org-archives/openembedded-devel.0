@@ -1,31 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-yi0-f65.google.com ([209.85.218.65])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PaYJe-0004xy-0v
+	(envelope-from <raj.khem@gmail.com>) id 1PaZFw-00005O-V2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 19:42:34 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PaYJE-00014h-Nb from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 10:42:08 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 5 Jan 2011 10:42:08 -0800
-Received: from [172.30.80.239] ([172.30.80.239]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 5 Jan 2011 11:42:07 -0700
-Message-ID: <4D24BB76.30300@mentor.com>
-Date: Wed, 05 Jan 2011 11:41:58 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 05 Jan 2011 20:42:49 +0100
+Received: by yib12 with SMTP id 12so2474687yib.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Jan 2011 11:42:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=cXDv34NjYmJciAMn5PtyCBpwmF63PGhEO397AJSQCFE=;
+	b=AOW0bImT7SQrY+bX4yoALJDteqYksYdEjBbQTqbVORJ19BMB7CmQKVOBapzaML3nQH
+	oUYNeL33MQCdFQagNviQc0Md14T32Ry6Iv9YGnYvkPWceKqnQ0rmydsFXzIUpQ6osasf
+	6uPhgYggcZFlDdEIGSk1qgy1IzBswbQus6fqQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=fRuSANV3SFNO8QuE8I3pK7CTyogKGf6FEAUNQOXQEQVman27cX4koKgNtMfcNN2H+Y
+	7AR4qbqcQyGuC0jvJFKfhlFw/ByxlZsLexZ3VvkYWtt3xY4j84l8SKB7gy6kYj5klaGc
+	4Slvug47BQPe/GlCSHdONttAOFJEzJ7vwPgg0=
+Received: by 10.90.104.20 with SMTP id b20mr1092082agc.193.1294256541042; Wed,
+	05 Jan 2011 11:42:21 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.90.86.4 with HTTP; Wed, 5 Jan 2011 11:42:00 -0800 (PST)
+In-Reply-To: <4D24BB76.30300@mentor.com>
 References: <1294249787-6035-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1294249787-6035-1-git-send-email-raj.khem@gmail.com>
-X-OriginalArrivalTime: 05 Jan 2011 18:42:07.0843 (UTC)
-	FILETIME=[41614B30:01CBAD08]
+	<4D24BB76.30300@mentor.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 5 Jan 2011 11:42:00 -0800
+Message-ID: <AANLkTinYDoX7WbNEfHdYEVAPV6wRW3zvoyA8VpSWj3Y5@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] distro/slugos: Upgrade to use gcc 4.5 and libtool 2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,19 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 18:42:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 05 Jan 2011 19:42:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 01/05/2011 10:49 AM, Khem Raj wrote:
-> * Depend on sane-toolchain
-> * Upgrade few old pinned versions
-> * Inherit own-mirrors to define slug src mirror
+On Wed, Jan 5, 2011 at 10:41 AM, Tom Rini <tom_rini@mentor.com> wrote:
+> On 01/05/2011 10:49 AM, Khem Raj wrote:
+>>
+>> * Depend on sane-toolchain
+>> * Upgrade few old pinned versions
+>> * Inherit own-mirrors to define slug src mirror
+>
+> Nuke slugos-mirrors while you're at it?
+>
 
-Nuke slugos-mirrors while you're at it?
+yes will do that once Mike is ok with the change.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
