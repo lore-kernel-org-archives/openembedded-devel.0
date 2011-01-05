@@ -1,35 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PaVNA-0006qf-HP
+	(envelope-from <obi@opendreambox.org>) id 1PaW3y-00082c-7Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 16:34:00 +0100
-Received: by bwz10 with SMTP id 10so14949517bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jan 2011 07:33:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=y7lasOl2Z91Lp+wu+WsHJXxi/5l9xvna042r6HfsXPA=;
-	b=vOwN71VlypLsXEzhsbg8BVB3kEW2BCt7gGfqjOBl2Nxn2kc1IFgz1+A6ZkwYfD6yXZ
-	ZB5yru6WLCuDWZqE2ihHgF1no2vfbeViJUL2ikkrqrRhfZRaH3r8SQjtjIN8C4TZ5zXY
-	U81BdUN38FOTTp6OXKxbab7rre9Je4w9oR+lo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=PZ1bnWceqN8dZmwjg1EnHslze0qVsROgo5P42nFX6R+GNVs6VeI0+6quAHWUJg+AbS
-	ZHw/mN3N74+9bUBwsUSSyklWxLPD5CIhrYqcDe6261b47qU/ENLlNKExi8c/AYqfB1Qi
-	/dldx5AS7c4Ypk7rSagFk9coW5pH+DqjGZzH8=
-Received: by 10.204.59.76 with SMTP id k12mr17618175bkh.70.1294241614587;
-	Wed, 05 Jan 2011 07:33:34 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id v25sm12982935bkt.18.2011.01.05.07.33.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 05 Jan 2011 07:33:33 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 05 Jan 2011 17:18:14 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 784DC314C79C;
+	Wed,  5 Jan 2011 17:17:52 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id 3Zi0NNmUPvFj; Wed,  5 Jan 2011 17:17:47 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 55D01314C770;
+	Wed,  5 Jan 2011 17:17:46 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Wed, 05 Jan 2011 16:17:46 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Jan 2011 16:33:31 +0100
-Message-Id: <1294241612-28405-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.3.4
-Subject: [PATCH 1/2] azy: add mysql5 to depends it's used in azy/src/tests/T_SQL.azy_server_stubs.h if mysql-config is found
+Date: Wed,  5 Jan 2011 16:17:46 +0000
+Message-Id: <1294244266-18700-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+In-Reply-To: <C10E6CF1-BF3B-4A0F-B064-F468E0A25821@dominion.thruhere.net>
+References: <C10E6CF1-BF3B-4A0F-B064-F468E0A25821@dominion.thruhere.net>
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: [PATCH v2] qt4: fix incorrect pkg-config files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,27 +38,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 15:34:00 -0000
+X-List-Received-Date: Wed, 05 Jan 2011 16:18:14 -0000
 
+* Previously, include statements were generated like this:
+  -I.../mipsel-oe-linux/usr/include/qtopia/QtCore
+  -I.../mipsel-oe-linux/usr/include/qtopia/QtCore/qt4-embedded/QtCoreE
+  -I.../mipsel-oe-linux/usr/include/qtopia/QtCore/qtopia
+
+* The sed rules ignored QT_LIBINFIX.
+* The sed rules incorrectly used QT_BASE_NAME instead of QT_DIR_NAME.
+
+* Now, they look like this, which is what an application expects:
+  -I.../mipsel-oe-linux/usr/include/qtopia/QtCore
+  -I.../mipsel-oe-linux/usr/include/qtopia
+
+* Tested with qt4-embedded on mipsel
+
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+CC: Koen Kooi <k.kooi@student.utwente.nl>
 ---
- recipes/efl1/azy_svn.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+* v2: bumped INC_PR
 
-diff --git a/recipes/efl1/azy_svn.bb b/recipes/efl1/azy_svn.bb
-index 5d6cb00..7e96c60 100644
---- a/recipes/efl1/azy_svn.bb
-+++ b/recipes/efl1/azy_svn.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Azy is a library meant for implementing rpc clients and servers in a simple manner."
--DEPENDS = "pkgconfig zlib openssl eina gnutls ecore libxml2 re2c-native azy-native"
--DEPENDS_virtclass-native = "pkgconfig-native zlib-native openssl-native eina-native gnutls-native ecore-native libxml2-native re2c-native"
-+DEPENDS = "pkgconfig zlib openssl eina gnutls ecore libxml2 re2c-native mysql5 azy-native"
-+DEPENDS_virtclass-native = "pkgconfig-native zlib-native openssl-native eina-native gnutls-native ecore-native libxml2-native re2c-native mysql5-native"
- LICENSE = "LGPLv2.1+"
- PV = "1.0.0+svnr${SRCPV}"
- SRCREV = "${EFL_SRCREV}"
+ recipes/qt4/qt4-embedded.inc |    2 +-
+ recipes/qt4/qt4-x11-free.inc |    2 +-
+ recipes/qt4/qt4.inc          |   12 +++++-------
+ 3 files changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
+index 87b19d4..223c4f3 100644
+--- a/recipes/qt4/qt4-embedded.inc
++++ b/recipes/qt4/qt4-embedded.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPL QPL"
+ PRIORITY = "optional"
+ HOMEPAGE = "http://www.trolltech.com"
+ DEPENDS += "directfb tslib"
+-INC_PR = "r26"
++INC_PR = "r27"
+ 
+ QT_BASE_NAME ?= "qt4-embedded"
+ QT_BASE_LIB  ?= "libqt-embedded"
+diff --git a/recipes/qt4/qt4-x11-free.inc b/recipes/qt4/qt4-x11-free.inc
+index ae79d58..a98e268 100644
+--- a/recipes/qt4/qt4-x11-free.inc
++++ b/recipes/qt4/qt4-x11-free.inc
+@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.trolltech.com"
+ LICENSE = "GPL QPL"
+ DEPENDS += "virtual/libx11 fontconfig libxft libxext libxrender libxrandr libxcursor"
+ 
+-INC_PR = "r22"
++INC_PR = "r23"
+ 
+ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-x11-opensource-src-${PV}.tar.gz \
+            file://0001-cross-compile.patch \
+diff --git a/recipes/qt4/qt4.inc b/recipes/qt4/qt4.inc
+index ac1fc83..52fa146 100644
+--- a/recipes/qt4/qt4.inc
++++ b/recipes/qt4/qt4.inc
+@@ -285,15 +285,13 @@ do_install() {
+            ${D}${libdir}/pkgconfig/*.pc
+     for name in ${QT_LIB_NAMES}; do
+            sed -i -e /Requires/s#"${name}"#"${name}${QT_LIBINFIX}"#g ${D}${libdir}/pkgconfig/*.pc
++           if [ -f ${D}${libdir}/pkgconfig/${name}${QT_LIBINFIX}.pc ]; then
++               sed -i -e /^includedir=/s#"/${name}"## \
++                      -e /^Cflags:/s#"${QT_DIR_NAME}"#"${name}"# \
++                         ${D}${libdir}/pkgconfig/${name}${QT_LIBINFIX}.pc
++           fi
+     done
+ 
+-	# QT abuses $includedir to point to its headers, which breaks pkgconfig sysroot, so manually fix it up here:
+-	for pc in ${D}${libdir}/pkgconfig/*.pc ; do
+-		sed -i -e "s:prefix}include/${QT_BASE_NAME}/$(basename $pc .pc):prefix}/include:" \
+-		       -e "s,Cflags: ,Cflags: -IP{includedir}/${QT_BASE_NAME}/$(basename $pc .pc) ," \
+-		       -e 's:IP{:I${:g' $pc
+-	done
+-
+     install -d ${D}/${libdir}/fonts
+     touch ${D}/${libdir}/fonts/fontdir
+ }
 -- 
-1.7.3.4
+1.7.2.3
 
 
 
