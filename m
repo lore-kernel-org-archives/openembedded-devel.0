@@ -1,46 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1PaGLR-00041j-OZ
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <rpurdie@rpsys.net>) id 1PaHVm-00057j-Ev
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 00:31:13 +0100
-Received: by wwi17 with SMTP id 17so14928153wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 15:30:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=5NMCLHqUNHQ9ewIPLl/b2tE5D3Tl6tchlbCajB+X3vE=;
-	b=wGkGxZVUnGpS95Xxbcn+NeVqqssIouLVVOiN59Ki9W82lRo6FZCU8kIAv4Ohts5yKH
-	jjofyrKnrpO5TVSusQjCOqi/vyvcjztIcxzXzQHBgWiP1rYIxMayCi7XXX1EdY2Lacg8
-	U4N6gwRTS2vGD932bbBkm577+XWLM3VrqCfpQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=f7NEadrIAorrtzUgygjuu0oUmzvDqw2frHfkEQfRP0loTNzu9hsbyoyZbOIKL1G+02
-	FSvEy6pFCLkOND4o+8aX0eYLpp7cTa8XkHiAoS2bwwx885loT18tgH3AFSfmRHvZSWtg
-	8kbOirjeD4+2Wpcuc7wBpCuHB7MNuLQgygfLw=
-Received: by 10.216.155.75 with SMTP id i53mr16381312wek.27.1294183849170;
-	Tue, 04 Jan 2011 15:30:49 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.67.67 with HTTP; Tue, 4 Jan 2011 15:30:29 -0800 (PST)
-In-Reply-To: <1294183063.17519.22104.camel@rex>
-References: <1293763348.17519.11220.camel@rex> <1293805474.18787.366.camel@eha>
-	<1293911357.17519.17117.camel@rex>
-	<AANLkTi=YuEBqPtCGnutaW_-JF0F=ZwmT8OS8rCmr9886@mail.gmail.com>
-	<1294155569.17519.21577.camel@rex>
-	<AANLkTin0O_GYVLqi5=Q3VmLZXJPufoPmH+WgcFHSEY8Z@mail.gmail.com>
-	<1294183063.17519.22104.camel@rex>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 4 Jan 2011 16:30:29 -0700
-X-Google-Sender-Auth: 5tPVOakDkNYRSdcNhJaoln_8RiU
-Message-ID: <AANLkTimHLz0xCzsUBQB0ThSO9hWAmGE=ddCmniVWHp-1@mail.gmail.com>
-To: Richard Purdie <rpurdie@rpsys.net>
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [Bitbake-dev] Bitbake Architecture, Roadmap, Maintainers and the future
+	Wed, 05 Jan 2011 01:45:58 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p050jaN1005272;
+	Wed, 5 Jan 2011 00:45:36 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04638-06; Wed,  5 Jan 2011 00:45:32 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p050jUoN005266
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Wed, 5 Jan 2011 00:45:31 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTinpcYFR8JaDHMtUcKW2YoaH6fG_+4An+Aq3mMoA@mail.gmail.com>
+References: <1293905677.17519.16909.camel@rex>
+	<AANLkTinpcYFR8JaDHMtUcKW2YoaH6fG_+4An+Aq3mMoA@mail.gmail.com>
+Date: Wed, 05 Jan 2011 00:45:12 +0000
+Message-ID: <1294188312.17519.22193.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: Bitbake task logging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,23 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2011 23:31:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 05 Jan 2011 00:45:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jan 4, 2011 at 4:17 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> I'm also going to look at getting back the XMLRPC interfaces and
-> abstraction that the removal of triggered this discussion. There does
-> appear to be some differences in opinion on the future of bitbake from
-> the server/UI perspective and I will do what I can to ensure we all have
-> common goals.
->
+On Wed, 2011-01-05 at 00:40 +0300, Yury Bushmelev wrote:
+> 2011/1/1 Richard Purdie <richard.purdie@linuxfoundation.org>:
+> > I've been looking at the changes in bitbake master and those in Poky.
+> > Both are trying to improve the logging situation but I think we need to
+> > discuss/agree what we're trying to achieve.
+> 
+> [skip]
+> 
+> > Thoughts/Comments/Suggestions?
+> 
+> I'm interested in build perfomance monitoring/analyze. It would be
+> great to have some tool (may be like bootchart) to be able to look at
+> CPU time/RAM/Disk bandwidth/network traffic per task.
 
-To clarify, the abstraction is not gone, only the server is.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+You should already be able to do this with the addhandler functionality
+in a bbclass file to tap into bitbake's event stream. If you find you
+can't, we should enhance things so you can :).
+
+Cheers,
+
+Richard
+
+
 
 
