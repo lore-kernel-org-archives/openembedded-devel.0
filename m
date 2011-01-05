@@ -1,22 +1,36 @@
-Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1PaRuT-0002qj-HH
+	(envelope-from <leon.woestenberg@gmail.com>) id 1PaSeY-0003nt-9M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 12:52:09 +0100
-Received: (qmail 24684 invoked by uid 2404007); 5 Jan 2011 11:51:47 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 89-73-120-20.dynamic.chello.pl (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@89.73.120.20)
-	by host4.kei.pl with ESMTPA; 5 Jan 2011 11:51:47 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 5 Jan 2011 12:52:07 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.37-11-generic; KDE/4.5.90; x86_64; ; )
-References: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
-In-Reply-To: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
+	Wed, 05 Jan 2011 13:39:46 +0100
+Received: by qyk36 with SMTP id 36so15241482qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Jan 2011 04:39:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=S65EGpwstbs6Dp5pEgYvn4AwKtmkhUWsK55KdPRHYNo=;
+	b=WAd/i0MbkMBXw6Y4vmhvkkL1GSH890dQUGS/sdrzyWC2SFtrKPubmq89lsl2KYZNcQ
+	0Z5naovpczLgfFGdfO7eGNEzjU5/+pxolPPBW1kg856BZd8Iw+RLfHBVS6SRj//bzScV
+	VeOCcwC6EQsGaDbBvp2OXdmgdxhCzVeHT65mI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=naCoLvutRy5wChEkUwfJ8szFdKf9Tu0/yoMJKk/4UjP7jdVJ7xc7FPEAYpqHiAQJBG
+	IOC9yTf3aFAoK7LtrSA4OHA4RF6jyvm5Zt3xM4STJg9pshlJ3a3peVLlqNV6wCoWoGO0
+	EB6jPp0dc+pBbvOjGhSAqzq0JLenbxPp1cwmc=
 MIME-Version: 1.0
-Message-Id: <201101051252.07668.marcin@juszkiewicz.com.pl>
-Subject: Re: [RFC] linux 2.6.36: upgrade to 2.6.36.2
+Received: by 10.229.238.17 with SMTP id kq17mr19939519qcb.79.1294231158921;
+	Wed, 05 Jan 2011 04:39:18 -0800 (PST)
+Received: by 10.229.227.16 with HTTP; Wed, 5 Jan 2011 04:39:18 -0800 (PST)
+In-Reply-To: <1292951999-18969-2-git-send-email-rep.dot.nop@gmail.com>
+References: <1292951999-18969-1-git-send-email-rep.dot.nop@gmail.com>
+	<1292951999-18969-2-git-send-email-rep.dot.nop@gmail.com>
+Date: Wed, 5 Jan 2011 13:39:18 +0100
+Message-ID: <AANLkTintu-ji9jq0pEWD38QagqQWgNoKpeZEYdZ2Qnf8@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] patch.bbclass: conditional patch-tool dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,41 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 11:52:09 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 05 Jan 2011 12:39:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Dnia wtorek, 4 stycznia 2011 o 22:12:29 Frans Meulenbroeks napisa=C5=82(a):
-> Hi,
->=20
-> I'm in the process of upgrading the sheevaplug kernel to 2.6.36. I
-> noticed the current version of 2.6.36 is at patch 1 but 2.6.36.2 is
-> already out.
-> Guess this needs some coordination with the other users. Currently the
-> recipe says:
->=20
-> DEFAULT_PREFERENCE =3D "-1"
-> DEFAULT_PREFERENCE_mx31ads =3D "1"
-> DEFAULT_PREFERENCE_ts72xx =3D "1"
->=20
-> Seems Petr, Eric and Robert are involved in these two machines.
-> Care to comment on moving to 2.6.36.2 (or give it a stab)?
+Hello,
 
-Long time ago (July 2009) I had similar RFC. In October 2009 I did mass upd=
-ate=20
-for all versions.
+On Tue, Dec 21, 2010 at 6:19 PM, Bernhard Reutner-Fischer
+<rep.dot.nop@gmail.com> wrote:
+> only depend do_patch on patch-tool if recipe references any patch
+>
+> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> ---
 
-I think that stable kernel updates should be applied without asking - but i=
-f=20
-there are some patches for some machines in recipe then it needs to be chec=
-ked=20
-does it patch/build before pushing update.
+Untested but I like it.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Acked-by: Leon Woestenberg <leon@sidebranch.com>
+
+-- 
+Leon
 
 
