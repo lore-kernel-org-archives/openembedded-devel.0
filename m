@@ -1,36 +1,28 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1PaSeY-0003nt-9M
+	(envelope-from <obi@opendreambox.org>) id 1PaSnI-0003zb-Ai
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 13:39:46 +0100
-Received: by qyk36 with SMTP id 36so15241482qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jan 2011 04:39:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=S65EGpwstbs6Dp5pEgYvn4AwKtmkhUWsK55KdPRHYNo=;
-	b=WAd/i0MbkMBXw6Y4vmhvkkL1GSH890dQUGS/sdrzyWC2SFtrKPubmq89lsl2KYZNcQ
-	0Z5naovpczLgfFGdfO7eGNEzjU5/+pxolPPBW1kg856BZd8Iw+RLfHBVS6SRj//bzScV
-	VeOCcwC6EQsGaDbBvp2OXdmgdxhCzVeHT65mI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=naCoLvutRy5wChEkUwfJ8szFdKf9Tu0/yoMJKk/4UjP7jdVJ7xc7FPEAYpqHiAQJBG
-	IOC9yTf3aFAoK7LtrSA4OHA4RF6jyvm5Zt3xM4STJg9pshlJ3a3peVLlqNV6wCoWoGO0
-	EB6jPp0dc+pBbvOjGhSAqzq0JLenbxPp1cwmc=
-MIME-Version: 1.0
-Received: by 10.229.238.17 with SMTP id kq17mr19939519qcb.79.1294231158921;
-	Wed, 05 Jan 2011 04:39:18 -0800 (PST)
-Received: by 10.229.227.16 with HTTP; Wed, 5 Jan 2011 04:39:18 -0800 (PST)
-In-Reply-To: <1292951999-18969-2-git-send-email-rep.dot.nop@gmail.com>
-References: <1292951999-18969-1-git-send-email-rep.dot.nop@gmail.com>
-	<1292951999-18969-2-git-send-email-rep.dot.nop@gmail.com>
-Date: Wed, 5 Jan 2011 13:39:18 +0100
-Message-ID: <AANLkTintu-ji9jq0pEWD38QagqQWgNoKpeZEYdZ2Qnf8@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Wed, 05 Jan 2011 13:48:48 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id CD6FA314C778;
+	Wed,  5 Jan 2011 13:48:26 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id JIKY2MNeOzwG; Wed,  5 Jan 2011 13:48:22 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id E7652314C774;
+	Wed,  5 Jan 2011 13:48:20 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Wed, 05 Jan 2011 12:48:20 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] patch.bbclass: conditional patch-tool dependency
+Date: Wed,  5 Jan 2011 12:48:20 +0000
+Message-Id: <1294231700-27043-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+Cc: k.kooi@student.utwente.nl
+Subject: [PATCH] qt4: fix incorrect pkg-config files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +36,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 12:39:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 05 Jan 2011 12:48:48 -0000
 
-Hello,
+* Previously, include statements were generated like this:
+  -I.../mipsel-oe-linux/usr/include/qtopia/QtCore
+  -I.../mipsel-oe-linux/usr/include/qtopia/QtCore/qt4-embedded/QtCoreE
+  -I.../mipsel-oe-linux/usr/include/qtopia/QtCore/qtopia
 
-On Tue, Dec 21, 2010 at 6:19 PM, Bernhard Reutner-Fischer
-<rep.dot.nop@gmail.com> wrote:
-> only depend do_patch on patch-tool if recipe references any patch
->
-> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-> ---
+* The sed rules ignored QT_LIBINFIX.
+* The sed rules incorrectly used QT_BASE_NAME instead of QT_DIR_NAME.
 
-Untested but I like it.
+* Now, they look like this, which is what an application expects:
+  -I.../mipsel-oe-linux/usr/include/qtopia/QtCore
+  -I.../mipsel-oe-linux/usr/include/qtopia
 
-Acked-by: Leon Woestenberg <leon@sidebranch.com>
+* Tested with qt4-embedded on mipsel
 
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ recipes/qt4/qt4.inc |   12 +++++-------
+ 1 files changed, 5 insertions(+), 7 deletions(-)
+
+diff --git a/recipes/qt4/qt4.inc b/recipes/qt4/qt4.inc
+index ac1fc83..52fa146 100644
+--- a/recipes/qt4/qt4.inc
++++ b/recipes/qt4/qt4.inc
+@@ -285,15 +285,13 @@ do_install() {
+            ${D}${libdir}/pkgconfig/*.pc
+     for name in ${QT_LIB_NAMES}; do
+            sed -i -e /Requires/s#"${name}"#"${name}${QT_LIBINFIX}"#g ${D}${libdir}/pkgconfig/*.pc
++           if [ -f ${D}${libdir}/pkgconfig/${name}${QT_LIBINFIX}.pc ]; then
++               sed -i -e /^includedir=/s#"/${name}"## \
++                      -e /^Cflags:/s#"${QT_DIR_NAME}"#"${name}"# \
++                         ${D}${libdir}/pkgconfig/${name}${QT_LIBINFIX}.pc
++           fi
+     done
+ 
+-	# QT abuses $includedir to point to its headers, which breaks pkgconfig sysroot, so manually fix it up here:
+-	for pc in ${D}${libdir}/pkgconfig/*.pc ; do
+-		sed -i -e "s:prefix}include/${QT_BASE_NAME}/$(basename $pc .pc):prefix}/include:" \
+-		       -e "s,Cflags: ,Cflags: -IP{includedir}/${QT_BASE_NAME}/$(basename $pc .pc) ," \
+-		       -e 's:IP{:I${:g' $pc
+-	done
+-
+     install -d ${D}/${libdir}/fonts
+     touch ${D}/${libdir}/fonts/fontdir
+ }
 -- 
-Leon
+1.7.2.3
+
 
 
