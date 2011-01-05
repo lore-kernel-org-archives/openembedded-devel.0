@@ -1,37 +1,35 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PaVN9-0006qY-Ee
+	(envelope-from <martin.jansa@gmail.com>) id 1PaVNA-0006qf-HP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 16:33:59 +0100
-Received: by bwz10 with SMTP id 10so14949573bwz.6
+	Wed, 05 Jan 2011 16:34:00 +0100
+Received: by bwz10 with SMTP id 10so14949517bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jan 2011 07:33:37 -0800 (PST)
+	Wed, 05 Jan 2011 07:33:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=IQ6+vbSut+rXRjz6CphErQ/CaKyl69RF86EScBo5sN8=;
-	b=LNy9gT3TQL3onm1hxabxJCr6hJXwlMvcAXYTXy6jonA/62mepOZZ0p7tlLOLgmvRYI
-	8WhBsylHM2Mud3iB4+GcrFi8zQrqqrX4yx4L1nhL7aOr+4eJS+ao83aXc5JIJitETkS/
-	p7tY643vosEkvtXdmskmmywE2CsbLARPYvB9g=
+	:message-id:x-mailer;
+	bh=y7lasOl2Z91Lp+wu+WsHJXxi/5l9xvna042r6HfsXPA=;
+	b=vOwN71VlypLsXEzhsbg8BVB3kEW2BCt7gGfqjOBl2Nxn2kc1IFgz1+A6ZkwYfD6yXZ
+	ZB5yru6WLCuDWZqE2ihHgF1no2vfbeViJUL2ikkrqrRhfZRaH3r8SQjtjIN8C4TZ5zXY
+	U81BdUN38FOTTp6OXKxbab7rre9Je4w9oR+lo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=I8gJPg7KPz4qRSPsBaddEfLbh95N8LmvUR0+l/AQfLQVadvMfuYJ+bSJqiUthYWWTP
-	OIwulTqsa/XWWpndKEG4Rpse1TCB/N1jEYoSIIAv2cDFCJp3kS2E2GujM93XEl6mgmn9
-	s8XYgL1ZidPwlQLn3QSwqC4TGngyGkyj3LG8E=
-Received: by 10.204.68.13 with SMTP id t13mr759816bki.164.1294241616980;
-	Wed, 05 Jan 2011 07:33:36 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=PZ1bnWceqN8dZmwjg1EnHslze0qVsROgo5P42nFX6R+GNVs6VeI0+6quAHWUJg+AbS
+	ZHw/mN3N74+9bUBwsUSSyklWxLPD5CIhrYqcDe6261b47qU/ENLlNKExi8c/AYqfB1Qi
+	/dldx5AS7c4Ypk7rSagFk9coW5pH+DqjGZzH8=
+Received: by 10.204.59.76 with SMTP id k12mr17618175bkh.70.1294241614587;
+	Wed, 05 Jan 2011 07:33:34 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id j11sm12983289bka.12.2011.01.05.07.33.36
+	by mx.google.com with ESMTPS id v25sm12982935bkt.18.2011.01.05.07.33.33
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 05 Jan 2011 07:33:36 -0800 (PST)
+	Wed, 05 Jan 2011 07:33:33 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Jan 2011 16:33:32 +0100
-Message-Id: <1294241612-28405-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed,  5 Jan 2011 16:33:31 +0100
+Message-Id: <1294241612-28405-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.3.4
-In-Reply-To: <1294241612-28405-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1294241612-28405-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH 2/2] mysql5-native: put make install to do_install after autotools_stage_all was removed with do_stage in eaf0fc03acfb262bcd614a14086a1b28ec850f46
+Subject: [PATCH 1/2] azy: add mysql5 to depends it's used in azy/src/tests/T_SQL.azy_server_stubs.h if mysql-config is found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 15:33:59 -0000
+X-List-Received-Date: Wed, 05 Jan 2011 15:34:00 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes/mysql/mysql5-native_5.1.40.bb |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+ recipes/efl1/azy_svn.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/mysql/mysql5-native_5.1.40.bb b/recipes/mysql/mysql5-native_5.1.40.bb
-index 40d07ec..8001783 100644
---- a/recipes/mysql/mysql5-native_5.1.40.bb
-+++ b/recipes/mysql/mysql5-native_5.1.40.bb
-@@ -12,6 +12,10 @@ EXTRA_OEMAKE = ""
- EXTRA_OECONF = " --with-embedded-server "
- 
- do_install() {
-+        oe_runmake 'DESTDIR=${D}' install
-+        mv -f ${D}${libdir}/mysql/* ${D}${libdir}
-+        rmdir ${D}${libdir}/mysql
-+
-         install -d ${D}${bindir}
-         install -m 0755 sql/gen_lex_hash ${D}${bindir}/
- }
+diff --git a/recipes/efl1/azy_svn.bb b/recipes/efl1/azy_svn.bb
+index 5d6cb00..7e96c60 100644
+--- a/recipes/efl1/azy_svn.bb
++++ b/recipes/efl1/azy_svn.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Azy is a library meant for implementing rpc clients and servers in a simple manner."
+-DEPENDS = "pkgconfig zlib openssl eina gnutls ecore libxml2 re2c-native azy-native"
+-DEPENDS_virtclass-native = "pkgconfig-native zlib-native openssl-native eina-native gnutls-native ecore-native libxml2-native re2c-native"
++DEPENDS = "pkgconfig zlib openssl eina gnutls ecore libxml2 re2c-native mysql5 azy-native"
++DEPENDS_virtclass-native = "pkgconfig-native zlib-native openssl-native eina-native gnutls-native ecore-native libxml2-native re2c-native mysql5-native"
+ LICENSE = "LGPLv2.1+"
+ PV = "1.0.0+svnr${SRCPV}"
+ SRCREV = "${EFL_SRCREV}"
 -- 
 1.7.3.4
 
