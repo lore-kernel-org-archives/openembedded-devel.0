@@ -1,36 +1,32 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PaYGM-0004uj-3I
+	(envelope-from <Tom_Rini@mentor.com>) id 1PaYJe-0004xy-0v
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 19:39:10 +0100
-Received: by wyb40 with SMTP id 40so16019078wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jan 2011 10:38:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=f+UwlSHacsFEyu2Nt6Zhdxyo9T4Sz8GGBOSg7BzQ7NE=;
-	b=HB8LkzSUcIxnBxXG4T/lT88HLaBGayYqhjIf8VCYe1oaq0b3ei/0v+V6/311VT7jod
-	36yRS//woEWHKneUSG3FNWpacpbaN15djBoTYl6YIxU6M7Qq2Ji1hZ45G1aM2EbZCPfZ
-	dLOYuVLwTv35jmok/kfD6jZ68t5Z7oGu1j0Lg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	b=Uyl7vtqcsSM4nQJ6/xmx73Y0ToHIfrI6Y9yaW76Ip/9aNNrEkDf+xrcGNqUacWI4rw
-	wbVoucFt762hL92ERDFFz8OidW66N7N8iivy5pySrxCt1DV8mQHksc/6y1gsGVjq4js0
-	rt8VfC9agxL0VIxw9iHE+OfGWbvvYKgQVpqn0=
+	Wed, 05 Jan 2011 19:42:34 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PaYJE-00014h-Nb from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Jan 2011 10:42:08 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 5 Jan 2011 10:42:08 -0800
+Received: from [172.30.80.239] ([172.30.80.239]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 5 Jan 2011 11:42:07 -0700
+Message-ID: <4D24BB76.30300@mentor.com>
+Date: Wed, 05 Jan 2011 11:41:58 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.216.89.71 with SMTP id b49mr23774882wef.28.1294252724624; Wed,
-	05 Jan 2011 10:38:44 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.216.190.15 with HTTP; Wed, 5 Jan 2011 10:38:44 -0800 (PST)
-Date: Wed, 5 Jan 2011 16:38:44 -0200
-X-Google-Sender-Auth: X-q8Z6znZ3ouOVkO34EStzHO-u8
-Message-ID: <AANLkTi=JuR1mCh5CrKoKfUFKWgCikvb9BYKQTSp=syb8@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: busybox.links at postinst
+To: openembedded-devel@lists.openembedded.org
+References: <1294249787-6035-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1294249787-6035-1-git-send-email-raj.khem@gmail.com>
+X-OriginalArrivalTime: 05 Jan 2011 18:42:07.0843 (UTC)
+	FILETIME=[41614B30:01CBAD08]
+Subject: Re: [PATCH] distro/slugos: Upgrade to use gcc 4.5 and libtool 2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,25 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 18:39:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 05 Jan 2011 18:42:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On 01/05/2011 10:49 AM, Khem Raj wrote:
+> * Depend on sane-toolchain
+> * Upgrade few old pinned versions
+> * Inherit own-mirrors to define slug src mirror
 
-I am having a problem with busybox providing linuxrc and which was
-suppose to have a specific package for it.
+Nuke slugos-mirrors while you're at it?
 
-Basically, it does not work since linuxrc is a symlink to busybox done
-at postinst so the package cannot be splited.
-
-Any reason to not having those links at packaging time?
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
