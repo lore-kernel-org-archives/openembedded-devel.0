@@ -1,27 +1,35 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1PaL3h-0008VI-VY
+	(envelope-from <raj.khem@gmail.com>) id 1PaO1s-0006jg-EG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 05:33:14 +0100
-Received: from server ([unknown] [71.164.183.134]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LEJ00MVN5UFJ370@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	04 Jan 2011 21:32:44 -0600 (CST)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 3288FB; Tue, 04 Jan 2011 21:32:32 -0600
-Received: from [192.168.1.2] by rkmorris.us with HTTP; Tue,
-	04 Jan 2011 21:32:29 -0600
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Tue, 04 Jan 2011 21:32:29 -0600
-X-Mailer: Axigen WebMail
+	Wed, 05 Jan 2011 08:43:32 +0100
+Received: by gxk20 with SMTP id 20so6461627gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Jan 2011 23:43:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=7O2PGZEaxgaNEc8KQYZX/BrI35FNGRmN5Ra/9hDgzDI=;
+	b=CwMfIU1ryX/Uum7avUQwjhky/TkpvcV1cV5qNpF4PUdB+38xMUpOC5Byp0BC8fOxQk
+	84frWL68KT/guEJXmtuYpHbz4YfAAKOdP7yBfYNvJFICUpXu1pajkKbNxtpi5lxsvv1v
+	VCtcxG1z3KdyEhEIIq4QVtxcDxrwUf2lo/NqM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=tzwuyUvIsBB6IB0ONbnlZGzwjQhiBXVxd8zOEmiVhjnD5Ef7KI4FDx2Mb3WIVGCVTy
+	rB/7gDzRMoxe30AbCeszcShGFYnUWuo8POp1YZkTtIX8ETudu9AL5OJ096gFiSXkdu/3
+	x93gZSY+hr67POYhKdWUL+bxqqu0wjYREhBeU=
+Received: by 10.90.104.20 with SMTP id b20mr335961agc.193.1294213388555; Tue,
+	04 Jan 2011 23:43:08 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.86.4 with HTTP; Tue, 4 Jan 2011 23:42:48 -0800 (PST)
+In-Reply-To: <AANLkTim22AbOed09n1Ez6A2gtJhnjUDm3Ksv+tRDnn=8@mail.gmail.com>
+References: <1294198349769396500@rkmorris.us>
+	<AANLkTim22AbOed09n1Ez6A2gtJhnjUDm3Ksv+tRDnn=8@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 4 Jan 2011 23:42:48 -0800
+Message-ID: <AANLkTimbxOoZQRPQ+MsSNT++aXYnJsta8VmOA_Nbmc-k@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1294198349769396500@rkmorris.us>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 5
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: H1940 Boot Issues -> Executable Build Problems?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,285 +44,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 04:33:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 05 Jan 2011 07:43:32 -0000
+X-Groupsio-MsgNum: 27716
+Content-Type: multipart/mixed; boundary=001636163f3749d6420499148931
+
+--001636163f3749d6420499148931
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Hi,
-
-=20
-
-A bit more info to try and help out here - as I'm fighting with this as be=
-st I can, but it's still kicking my butt ... :-).
-
-=20
-
-It really does look like the executable that is being created is not build=
- for the arm920t (armv4t). I have tried to run the executable on the target=
-, and also with a modified version of qemu - and neither one works. If I te=
-ll qemu that the target is an arm920t the executable will not run, but if I=
- let it be the default qemu-arm it runs just fine.
-
-=20
-
-Has anyone else been able to get an OE build to run on an arm920t (armv4t)=
- processor?
-
-=20
-
-Thanks,
-
-... Russell
-
-=20
+here is updated patch
 
 
 
-
-On Sun, Jan 2, 2011 06:34  AM, <openembedded@rkmorris.us> wrote:
-
->=20
-My sincere apologies - as I never got that earlier email (but was having i=
-ssues with Norton filtering my email, so I'm sure it was on my side .. :-()=
-.
->=20
-> To answer your question though - the MACHINE is h1940, and I have tried =
-two different DISTRO's ... minimal and angstrom-2008.1. I am using the mast=
-er branch of OpenEmbedded, and last updated it ~ 30 days ago.
->=20
-> Thoughts?
->=20
-> Thanks!
->=20
-> ... Russell
->=20
->=20
-> On Sun, Jan 2, 2011 00:44 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> > On Sat, Jan 1, 2011 at 10:34 AM, <openembedded@rkmorris.us> wrote:
-> > > Hi,
-> > >
-> > >
-> > >
-> > > As I have been debugging this it's looking more like a build issue -=
- so let me try the developer group, in case someone here has seen this befo=
-re.
-> > >
-> > >
-> > >
-> > > Copying over the key point from below ... I (successfully) built the=
- helloworld-image,
-> >=20
-> >=20
-> > what was MACHINE and DISTRO and OpenEmbedded revision you used ? I
-> > think I asked same qestion when you posted this to oe-users ml. If you
-> > are not going to provide information then I am afraid not many can
-> > help you here
-> >=20
-> > but cannot run the resulting helloworld binary on the target machine -
-> > it does execute under QEMU, which doesn't provide support this CPU
-> > (arm920t - armv4t). However, a functioning binary from the target
-> > (armv4t) machine runs on the target, but not on QEMU (as expected). So
-> > it seems that OpenEmbedded is not building for the right machine
-> > (which is strange, as the OpenEmbedded built kernel works!).
-> > >
-> > >
-> > >
-> > > Any thoughts on this? It seems that OpenEmbedded / bitbake may be us=
-ing QEMU to create the binary for the target ... is that right (as it's wha=
-t I have seen in a bit of poking around)? This would be a problem, as QEMU =
-doesn't support the arm920t processor. Perhaps I have to apply the QEMU pat=
-ch that adds this support to QEMU, or change my config to somehow create th=
-e executable in a different way?
-> > >
-> > >
-> > >
-> > > Any suggestions would be greatly appreciated - as my current built (=
-actually, rootfs) is not functioning on the target machine.
-> > >
-> > >
-> > >
-> > > Thanks!
-> > >
-> > >
-> > >
-> > > ... Russell
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >
-> > > Subject: Re: [Openembedded-users] H1940 Boot Issues
-> > > From: <openembedded@rkmorris.us>
-> > > Date: Thu, Dec 30, 2010 11:36 PM
-> > > To: Openembedded-users@lists.openembedded.org
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >
-> > > Hi,
-> > >
-> > >
-> > >
-> > > OK, I haven't given up on this - and now it gets more interesting ..=
-. :-). It seems that OpenEmbedded is not properly building a binary for the=
- ARM920T CPU (arm4t) - has anyone else seen this?
-> > >
-> > >
-> > >
-> > > I built the helloworld-image, and cannot run the resulting helloworl=
-d binary on the target machine - but can run it under QEMU, which doesn't e=
-ven support this CPU. However, a functioning binary from the target (arm4t)=
- machine runs on the target, but not on QEMU (as expected). So it seems tha=
-t OpenEmbedded is not building for the right machine (which is strange, as =
-the OpenEmbedded built kernel works!).
-> > >
-> > >
-> > >
-> > > The config files seem to be set up for the right target machine, but=
- the binary is not being built right for some reason. Does anyone have any =
-ideas?
-> > >
-> > >
-> > >
-> > > Thanks!
-> > >
-> > >
-> > >
-> > > ... Russell
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >
-> > > On Fri, Dec 24, 2010 09:20 AM, <openembedded@rkmorris.us> wrote:
-> > >
-> > >
-> > >>
-> > >
-> > >
-> > >
-> > > Hi,
-> > >
-> > >
-> > >
-> > > I have tried quite a few more things here, still with no luck. It re=
-ally does seem that OpenEmbedded does not properly / fully build an image t=
-hat works on (real?) embedded systems ... :-(. I am out of things to try, b=
-ut let me pass this info along in the hope that it will save others some ti=
-me / grief if they try to do similar things.
-> > >
-> > >
-> > >
-> > > I have tried several different formats / approaches to the rootfs, n=
-one of which work (except for the legacy Familiar Linux file system that I =
-found). I cannot load the OpenEmbedded rootfs as an initrd, or when extract=
-ed to an SD card (as a "normal" file system, either copied from the ext2 fi=
-le, or extracted from tar.gz). While this seems to be a rootfs issue, it st=
-ill could be the build of init, as replacing the Familiar Linux init.sysvin=
-it with the one generated by OpenEmbedded does in fact break the working fi=
-le system. I tried reducing the size of generated rootfs (by setting IMAGE_=
-ROOTFS_SIZE), but that doesn't seem to be working either (so I cannot use t=
-he OpenEmbedded rootfs as an initrd, as it is 64 MB, which seems to cause p=
-roblems on the target system). BTW, the OpenEmbedded generated linuxrc file=
- is just a link to /bin/busybox, which seems a bit strange - so perhaps thi=
-s is the issue?
-> > >
-> > >
-> > >
-> > > Hopefully this helps other folks - by not trying these same things.
-> > >
-> > >
-> > >
-> > > ... Russell
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >>
-> > >> On Wed, Dec 22, 2010 11:28 PM, <openembedded@rkmorris.us> wrote:
-> > >>
-> > >
-> > >>
-> > > Hi,
-> > >>
-> > >> I have been strugging with this for quite some now, and really am s=
-tuck - so I really would appreciate any thoughts or pointers anyone has! Le=
-t me try to explain my problem.
-> > >>
-> > >> I have been able to build OpenEmbedded on my machine, with a target=
- of either h1940 or qemuarm - and for the console-image both build just fin=
-e. I can use the kernel for both of these (on the appropriate target), but =
-my issue is with the rootfs. If I use the OpenEmbedded built rootfs in qemu=
-arm, targeted for either qemuarm or the h1940 (but always using the qemuarm=
- kernel) everything works just fine.
-> > >>
-> > >> My issue arises when trying to use the rootfs on the h1940 - I cann=
-ot get my system to boot, and actually INIT is never launched (but the kern=
-el seems fine). If I take an old file system that I was able to find (from =
-Familiar Linux, ~ 2004-2005 vintage), it works fine on my h1940 (with the k=
-ernel from OpenEmbedded!) ... so the issue seems to be the rootfs. If I jus=
-t replace /sbin/init.sysvinit in the Familiar Linux file system with the on=
-e from OpenEmbedded - then I get kernel panic (and no init found it says ..=
-. :-(). Oddly enough, if I use the Familiar LInux file system with qemuarm =
-- it doesn't work, I have file system errors (and kernel panic), but the Op=
-enEmbedded built file system (even for the h1940) works just great).
-> > >>
-> > >> So it seems that I have some sort of filesystem incompatibility ...=
- or am I wrong? BTW, I can load the above mentioned filesystems as ext2 or =
-ext3 in (OpenSUSE) Linux, no issues there.
-> > >>
-> > >> Again, any suggestions of how to fix this would be greatly apprecia=
-ted!
-> > >>
-> > >> Thanks!
-> > >>
-> > >> ... Russell
-> > >>
-> > >>
-> > >> _______________________________________________
-> > >> Openembedded-users mailing list
-> > >> Openembedded-users@linuxtogo.org
-> > >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-us=
-ers
-> > >> _______________________________________________
-> > > Openembedded-users mailing list
-> > > Openembedded-users@linuxtogo.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-use=
-rs
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-dev=
-el
-> > >
-> >=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+On Tue, Jan 4, 2011 at 10:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Tue, Jan 4, 2011 at 7:32 PM, Russell Morris <openembedded@rkmorris.us>=
+ wrote:
+>> Hi,
+>>
+>>
+>>
+>> A bit more info to try and help out here - as I'm fighting with this as =
+best I can, but it's still kicking my butt ... :-).
+>>
+>>
+>>
+>> It really does look like the executable that is being created is not bui=
+ld for the arm920t (armv4t). I have tried to run the executable on the targ=
+et, and also with a modified version of qemu - and neither one works. If I =
+tell qemu that the target is an arm920t the executable will not run, but if=
+ I let it be the default qemu-arm it runs just fine.
+>>
+>>
+>>
+>> Has anyone else been able to get an OE build to run on an arm920t (armv4=
+t) processor?
+>>
+>>
 >
-From raj.khem@gmail.com Wed Jan 05 07:47:18 2011
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PaN9S-0005ew-GI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 07:47:18 +0100
-Received: by yxd5 with SMTP id 5so6229548yxd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Jan 2011 22:46:54 -0800 (PST)
-DKIM-Signature: v
+> OK you seem to be one patient guy :) Here is totally untested patch
+> for gcc. Please apply it on top of your openembedded. Then use
+> DISTRO=3Dminimal
+> or any other distro that uses gcc 4.5 and build OE from scratch again
+> and see if that helps and report back.
+>
+> Thanks
+> -Khem
+>
+
+--001636163f3749d6420499148931
+Content-Type: application/octet-stream; name="v4t.patch"
+Content-Disposition: attachment; filename="v4t.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gijx7og31
+
+ZGlmZiAtLWdpdCBhL3JlY2lwZXMvZ2NjL2djYy00LjUuaW5jIGIvcmVjaXBlcy9nY2MvZ2NjLTQu
+NS5pbmMKaW5kZXggYmFjMTVlZi4uM2U2ZmI3NSAxMDA2NDQKLS0tIGEvcmVjaXBlcy9nY2MvZ2Nj
+LTQuNS5pbmMKKysrIGIvcmVjaXBlcy9nY2MvZ2NjLTQuNS5pbmMKQEAgLTMyLDYgKzMyLDcgQEAg
+U1JDX1VSSSA9ICJzdm46Ly9nY2MuZ251Lm9yZy9zdm4vZ2NjL2JyYW5jaGVzO21vZHVsZT0ke0JS
+QU5DSH0gXAogCSAgIGZpbGU6Ly9hcm0tYnN3YXBzaTIucGF0Y2ggXAogCSAgIGZpbGU6Ly9NYWtl
+ZmlsZS5pbi5wYXRjaCBcCiAJICAgZmlsZTovL2djYy1hcm12NC1wYXNzLWZpeC12NGJ4LXRvLWxk
+LnBhdGNoIFwKKwkgICBmaWxlOi8vYXJtLWRlZmF1bHQtdG8tYXJtdjR0LnBhdGNoIFwKIAkgICBm
+aWxlOi8vbGluYXJvL2djYy00LjUtbGluYXJvLXI5OTI5Ny5wYXRjaCBcCiAJICAgZmlsZTovL2xp
+bmFyby9nY2MtNC41LWxpbmFyby1yOTkyOTgucGF0Y2ggXAogCSAgIGZpbGU6Ly9saW5hcm8vZ2Nj
+LTQuNS1saW5hcm8tcjk5Mjk5LnBhdGNoIFwKZGlmZiAtLWdpdCBhL3JlY2lwZXMvZ2NjL2djYy00
+LjUvYXJtLWRlZmF1bHQtdG8tYXJtdjR0LnBhdGNoIGIvcmVjaXBlcy9nY2MvZ2NjLTQuNS9hcm0t
+ZGVmYXVsdC10by1hcm12NHQucGF0Y2gKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAw
+MC4uNTgwZmNjYgotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lwZXMvZ2NjL2djYy00LjUvYXJtLWRl
+ZmF1bHQtdG8tYXJtdjR0LnBhdGNoCkBAIC0wLDAgKzEsMTMgQEAKK0luZGV4OiBnY2MtNF81LWJy
+YW5jaC9nY2MvY29uZmlnL2FybS9saW51eC1lYWJpLmgKKz09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KKy0tLSBnY2MtNF81
+LWJyYW5jaC5vcmlnL2djYy9jb25maWcvYXJtL2xpbnV4LWVhYmkuaAorKysrIGdjYy00XzUtYnJh
+bmNoL2djYy9jb25maWcvYXJtL2xpbnV4LWVhYmkuaAorQEAgLTQ0LDcgKzQ0LDcgQEAKKyAgICBU
+aGUgQVJNMTBURE1JIGNvcmUgaXMgdGhlIGRlZmF1bHQgZm9yIGFybXY1dCwgc28gc2V0CisgICAg
+U1VCVEFSR0VUX0NQVV9ERUZBVUxUIHRvIGFjaGlldmUgdGhpcy4gICovCisgI3VuZGVmICBTVUJU
+QVJHRVRfQ1BVX0RFRkFVTFQKKy0jZGVmaW5lIFNVQlRBUkdFVF9DUFVfREVGQVVMVCBUQVJHRVRf
+Q1BVX2FybTEwdGRtaQorKyNkZWZpbmUgU1VCVEFSR0VUX0NQVV9ERUZBVUxUIFRBUkdFVF9DUFVf
+YXJtOXRkbWkKKyAKKyAvKiBUQVJHRVRfQklHX0VORElBTl9ERUZBVUxUIGlzIHNldCBpbgorICAg
+IGNvbmZpZy5nY2MgZm9yIGJpZyBlbmRpYW4gY29uZmlndXJhdGlvbnMuICAqLwo=
+
+--001636163f3749d6420499148931--
