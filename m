@@ -1,37 +1,32 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from vms173011pub.verizon.net ([206.46.173.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PaTmT-0005Gh-Dn
+	(envelope-from <openembedded@rkmorris.us>) id 1PaUeX-0005cB-JA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 14:52:02 +0100
-Received: by iyj18 with SMTP id 18so14626063iyj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jan 2011 05:51:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=2GnETMX7jgqliePjunjyel/wfnlHhfZxarpddCzRmCU=;
-	b=xhwSZfxSAe8fyvKgf+GaBsmzeDRzLEu8nAvdjzNI+trSrfxdGDSJiTzVE71cFSl26z
-	/FGk21iNan1ccopKr+rK/p55nwbY4WZ8Ou7hrjlaIWYSbLzH3w9LoTg0Zw2qj1r1Rr4m
-	IiDiWDb+i8S2hP1oRwn9HvhaE1s0PWVFIO2jk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=R6WNQiEnGZbbGzL6a3eLCf5vXwxJ8H7z1m7ftjuPyTtc/0LHcJBha14jRlu22c9qbV
-	NnAxVK9tYVyCb9r4xyrIi81LDBRfhkIeu8fE/n1gMXILnj3nOOvCRoNM5zAa8rTGlhZm
-	cnb+qptrEOwl8RRRxd0IWTBQztUgDMeaXL8rc=
-MIME-Version: 1.0
-Received: by 10.231.14.74 with SMTP id f10mr23452936iba.119.1294235495819;
-	Wed, 05 Jan 2011 05:51:35 -0800 (PST)
-Received: by 10.231.38.11 with HTTP; Wed, 5 Jan 2011 05:51:35 -0800 (PST)
-In-Reply-To: <201101051252.07668.marcin@juszkiewicz.com.pl>
-References: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
-	<201101051252.07668.marcin@juszkiewicz.com.pl>
-Date: Wed, 5 Jan 2011 14:51:35 +0100
-Message-ID: <AANLkTiks7z6oag1GLC=cj9a-mmtYqm-0Z1oCE2zZXT9R@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 05 Jan 2011 15:47:53 +0100
+Received: from server ([unknown] [71.164.183.134]) by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LEK00MB412WYI90@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	05 Jan 2011 08:47:20 -0600 (CST)
+Received: from server (127.0.0.1) by server (Axigen)
+	with ESMTPSA id 31F0AE; Wed, 05 Jan 2011 08:47:13 -0600
+Received: from [192.168.1.12] by rkmorris.us with HTTP; Wed,
+	05 Jan 2011 08:47:10 -0600
+From: Russell Morris <openembedded@rkmorris.us>
+Date: Wed, 05 Jan 2011 08:47:10 -0600
+X-Mailer: Axigen WebMail
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] linux 2.6.36: upgrade to 2.6.36.2
+Message-id: <1294238830971940500@rkmorris.us>
+In-reply-to: <AANLkTimbxOoZQRPQ+MsSNT++aXYnJsta8VmOA_Nbmc-k@mail.gmail.com>
+References: <1294198349769396500@rkmorris.us>
+	<AANLkTim22AbOed09n1Ez6A2gtJhnjUDm3Ksv+tRDnn=8@mail.gmail.com>
+	<AANLkTimbxOoZQRPQ+MsSNT++aXYnJsta8VmOA_Nbmc-k@mail.gmail.com>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 5
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: H1940 Boot Issues -> Executable Build Problems?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,47 +40,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 13:52:02 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Wed, 05 Jan 2011 14:47:53 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-2011/1/5 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
-> Dnia wtorek, 4 stycznia 2011 o 22:12:29 Frans Meulenbroeks napisa=B3(a):
->> Hi,
->>
->> I'm in the process of upgrading the sheevaplug kernel to 2.6.36. I
->> noticed the current version of 2.6.36 is at patch 1 but 2.6.36.2 is
->> already out.
->> Guess this needs some coordination with the other users. Currently the
->> recipe says:
->>
->> DEFAULT_PREFERENCE =3D "-1"
->> DEFAULT_PREFERENCE_mx31ads =3D "1"
->> DEFAULT_PREFERENCE_ts72xx =3D "1"
->>
->> Seems Petr, Eric and Robert are involved in these two machines.
->> Care to comment on moving to 2.6.36.2 (or give it a stab)?
+Hi,
+
+=20
+
+As I don't know you that well, not sure if you're joking or not - but in a=
+ny case my apologies if I seem impatient ... that's not my intention at lea=
+st! Just trying to debug here, and keeping folks in the loop as I progress.=
+ If the armv4t builds don't really work I'm likely not the only person impa=
+cted, so I'd like to help others avoid the issue if possible.
+
+=20
+
+I have applied the patch, and have started the build from scratch. Fingers=
+ crossed ... :-).
+
+=20
+
+FYI - I did look in the old TMPDIR, and found that inside gcc-cross-initia=
+l (and intermediate), the test directory seemed to call out an armv5te, so =
+I'm hopeful that this is the issue.
+
+=20
+
+Thanks for all your help!
+
+=20
+
+... Russell
+
+
+On Wed, Jan 5, 2011 01:42  AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+
+>=20
+here is updated patch
+>=20
+>=20
+>=20
+> On Tue, Jan 4, 2011 at 10:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Tue, Jan 4, 2011 at 7:32 PM, Russell Morris <openembedded@rkmorris.=
+us> wrote:
+> >> Hi,
+> >>
+> >>
+> >>
+> >> A bit more info to try and help out here - as I'm fighting with this =
+as best I can, but it's still kicking my butt ... :-).
+> >>
+> >>
+> >>
+> >> It really does look like the executable that is being created is not =
+build for the arm920t (armv4t). I have tried to run the executable on the t=
+arget, and also with a modified version of qemu - and neither one works. If=
+ I tell qemu that the target is an arm920t the executable will not run, but=
+ if I let it be the default qemu-arm it runs just fine.
+> >>
+> >>
+> >>
+> >> Has anyone else been able to get an OE build to run on an arm920t (ar=
+mv4t) processor?
+> >>
+> >>
+> >
+> > OK you seem to be one patient guy :) Here is totally untested patch
+> > for gcc. Please apply it on top of your openembedded. Then use
+> > DISTRO=3Dminimal
+> > or any other distro that uses gcc 4.5 and build OE from scratch again
+> > and see if that helps and report back.
+> >
+> > Thanks
+> > -Khem
+> >
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> Long time ago (July 2009) I had similar RFC. In October 2009 I did mass u=
-pdate
-> for all versions.
->
-> I think that stable kernel updates should be applied without asking - but=
- if
-> there are some patches for some machines in recipe then it needs to be ch=
-ecked
-> does it patch/build before pushing update.
-
-There are. Both systems mentioned above have patches.
-I've no idea if they will remain to apply after moving to .2. Of
-course I can verify that, but if they fail I am not too sure if I can
-fix things.
-They are machines that I do not have.
-
-Thinking of it, probably it is better to create a 2.6.36.2 recipe with
-DP =3D -1 for all but my board and leave it to the mx31ads and ts72xx
-machines to move to that recipe when they see fit.
-
-Frans.
-
-
+From openembedded@rkmorris.us Wed Jan 05 15:49:08 2011
+Received: from vms173011pub.verizon.net ([206.46.173.11])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <openembedded@rkmorris.us>) id 1PaUfk-0005d1-F0
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Jan 2011 15:49:08 +0100
+Received: from server ([unknown] [71.164.183.134]) by vms173011.mailsrvcs.=
+net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LEK00MDH157YI90@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	05 Jan 2011 08:48:44 -0600 (CST)
+Received: from server (127.0.0.1) by server (Axigen)
+	with ESMTPSA id 393506; Wed, 05 Jan 2011 08:48:38 -0600
+Received: from [192.168.1.12] by rkmorris.us with HTTP; Wed,
+	05 Jan 2011 08:48:36 -0600
+From: Russell Morris <openembedded@rkmorris.us>
+Date: Wed, 05 Jan 2011 08:48:36 -0600
+X-Mailer: Axigen WebMail
+To: openembedded-devel@lists.openembedded.org
+Message-id: <1294238916100625500@rkmorris.us>
+In-reply-to: <ig1b7c$j8n$1@dough.gmane.org>
+References: <1294198349769396500@rkmorris.us> <ig1b7c$j8n$1@dough.gmane.or=
+g>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 6
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [oe] H1940 Boot Issues -> Executable Build Problems?
+X-BeenThere: openembedded-devel@lists.openembedded.org
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: openembedded-devel@lists.openembedded.org
+List-Id: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel.lists.openembedded.org>
+List-Unsubscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/options/open=
+embedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject
