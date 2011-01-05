@@ -1,38 +1,21 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PaRaO-0002WT-31
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1PaRuT-0002qj-HH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 12:31:24 +0100
-Received: by bwz10 with SMTP id 10so14769569bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jan 2011 03:30:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received
-	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=8aYpk+xy4axE9Ae39OXgtoy9T/36GrOGh5L4LJioLaE=;
-	b=DOTb+HLkE+7SRz1fRK8l17EWq9VqKG1SBqWdFjPI3sGU/Lkwm5vuXFKaP8woDb+J0s
-	s3PkmNZ/vAWr3GtjBmkSUDxnEo3vHLeTmxN0PYoNWKN+2QZMNbZ+OLcjv7mFhXnNYeEi
-	KQnDwDBnxd9HDHzKUAoT+0hSRHgYpGBfUcSuI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=LgtV4O5iQyS63ojM8Xx1joRXtQAMqKTBovBgJUmvPv/nfTWpoCyRbQyMIaURpAWlqv
-	8wMsFpo0FR0jURXVzyXrNNw3tdA8LFkJl6AEU4n/1iFyu/pU96uVm4yySlL+l0/Bifgl
-	YxErcTSP0Fd+Qcp4mE0gkXiYx3sZAZRls029g=
-MIME-Version: 1.0
-Received: by 10.204.71.141 with SMTP id h13mr5401254bkj.180.1294227059873;
-	Wed, 05 Jan 2011 03:30:59 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.59.147 with HTTP; Wed, 5 Jan 2011 03:30:59 -0800 (PST)
-In-Reply-To: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
-References: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
-Date: Wed, 5 Jan 2011 09:30:59 -0200
-X-Google-Sender-Auth: d-jh6LQLFNNrg22aapc0X_uQEiM
-Message-ID: <AANLkTin_4KLFT9FADfeN=MN6RaDNH-ssueOK2w=sVbxh@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 05 Jan 2011 12:52:09 +0100
+Received: (qmail 24684 invoked by uid 2404007); 5 Jan 2011 11:51:47 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 89-73-120-20.dynamic.chello.pl (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@89.73.120.20)
+	by host4.kei.pl with ESMTPA; 5 Jan 2011 11:51:47 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
+Date: Wed, 5 Jan 2011 12:52:07 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.37-11-generic; KDE/4.5.90; x86_64; ; )
+References: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
+In-Reply-To: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201101051252.07668.marcin@juszkiewicz.com.pl>
 Subject: Re: [RFC] linux 2.6.36: upgrade to 2.6.36.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,25 +30,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 11:31:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 05 Jan 2011 11:52:09 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 4, 2011 at 19:12, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
+Dnia wtorek, 4 stycznia 2011 o 22:12:29 Frans Meulenbroeks napisa=C5=82(a):
+> Hi,
+>=20
+> I'm in the process of upgrading the sheevaplug kernel to 2.6.36. I
+> noticed the current version of 2.6.36 is at patch 1 but 2.6.36.2 is
+> already out.
+> Guess this needs some coordination with the other users. Currently the
+> recipe says:
+>=20
+> DEFAULT_PREFERENCE =3D "-1"
+> DEFAULT_PREFERENCE_mx31ads =3D "1"
+> DEFAULT_PREFERENCE_ts72xx =3D "1"
+>=20
 > Seems Petr, Eric and Robert are involved in these two machines.
 > Care to comment on moving to 2.6.36.2 (or give it a stab)?
 
-I am using 2.6.36 and I support the update.
+Long time ago (July 2009) I had similar RFC. In October 2009 I did mass upd=
+ate=20
+for all versions.
 
-You might do it and post the patch for testing so the affected people
-could comment on it.
+I think that stable kernel updates should be applied without asking - but i=
+f=20
+there are some patches for some machines in recipe then it needs to be chec=
+ked=20
+does it patch/build before pushing update.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
