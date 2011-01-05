@@ -1,36 +1,39 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PaXUy-0002W5-EK
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PaXyE-0004ZZ-3R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 18:50:12 +0100
-Received: by pxi17 with SMTP id 17so3021771pxi.6
+	Wed, 05 Jan 2011 19:20:26 +0100
+Received: by iwn8 with SMTP id 8so15962246iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jan 2011 09:49:47 -0800 (PST)
+	Wed, 05 Jan 2011 10:20:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=DnxVaTwDzBC+HYhduJikBm4uOCRCgP0L8Yw/kzSDK9g=;
-	b=fOa5z7umVuOPXpFtxWAySzLtQrX8hETUMthujc+sKPqpdHFCdID+3uyOAwuL7xHNQ1
-	C6gHfrUSPPlcyWbZTDLeOlMH1eQejMqQn0Es12xTuZVy+Rqv4LVlEMlyrIbNgQzrxuUo
-	h6za+2yAy7v3/wQlKwUbyy2jQG9+DcVU2fIDQ=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=K48PrvzpMFHM+znN5b+8w3I2wOTSt1A4iM1eek6l/ME=;
+	b=Z+jaK77ppNZd4jaPAPiIrwKzhunKl3qWQnzjzvn2TzRmRG/tEUuPxEFScLQsLaXYYq
+	j9iwoPksdGM1TnoYiKf5GGlUMqQC9wwWF7XWOJ/bH03QrtjtIkPdSmTvSbv0JsmsnKOW
+	gaR/sU1eJtmNINHL1fj31VTcLZzR+xiOpQU44=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=IWHNzb2c/WoCkl9TV02FKyf9Ddkui3eWoWPgqN1lqUL/+3J0pDv7EdgAB+W+3FhEvk
-	i7LzJr4RAHgrnAJ9hc6YOzTzsmWKVy/QaLoM4F9sezNu+I/CTlssF20LowoNMgT9XQDl
-	D4XYzT4TvQJgFkBEy6voGUza6Q8/l2QQcOGMs=
-Received: by 10.142.49.11 with SMTP id w11mr15567213wfw.166.1294249786346;
-	Wed, 05 Jan 2011 09:49:46 -0800 (PST)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id e14sm32701903wfg.20.2011.01.05.09.49.44
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 05 Jan 2011 09:49:45 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=VhiV+ctDXlFDB1DY7d/biRM4OPUPjEtiJPHlyLPrwnnC0sC+O9HaGgcoqhetxpUxIc
+	MqcXN/PqrTyWtoh19s5uhcWZXIXtg+UgGrkODB94ciabcyPczs7JHzOhSE1RhoCR+eaS
+	kCGTWtMU/Kuj/v2RWvTPbkFyY+Thp4K0gsKnU=
+MIME-Version: 1.0
+Received: by 10.231.37.70 with SMTP id w6mr13465341ibd.169.1294251601040; Wed,
+	05 Jan 2011 10:20:01 -0800 (PST)
+Received: by 10.231.38.11 with HTTP; Wed, 5 Jan 2011 10:20:01 -0800 (PST)
+In-Reply-To: <201101051735.43988.marcin@juszkiewicz.com.pl>
+References: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
+	<201101051252.07668.marcin@juszkiewicz.com.pl>
+	<AANLkTiks7z6oag1GLC=cj9a-mmtYqm-0Z1oCE2zZXT9R@mail.gmail.com>
+	<201101051735.43988.marcin@juszkiewicz.com.pl>
+Date: Wed, 5 Jan 2011 19:20:01 +0100
+Message-ID: <AANLkTinuhK6fOzjf5gYmZZxeHh8bRkSiVr1pF4ckGZWn@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Jan 2011 09:49:47 -0800
-Message-Id: <1294249787-6035-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH] distro/slugos: Upgrade to use gcc 4.5 and libtool 2.4
+Subject: Re: [RFC] linux 2.6.36: upgrade to 2.6.36.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,118 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 17:50:13 -0000
+X-List-Received-Date: Wed, 05 Jan 2011 18:20:27 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-* Depend on sane-toolchain
-* Upgrade few old pinned versions
-* Inherit own-mirrors to define slug src mirror
+2011/1/5 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
+> Dnia =B6roda, 5 stycznia 2011 o 14:51:35 Frans Meulenbroeks napisa=B3(a):
+>> > I think that stable kernel updates should be applied without asking - =
+but
+>> > if there are some patches for some machines in recipe then it needs to
+>> > be checked does it patch/build before pushing update.
+>
+>> There are. Both systems mentioned above have patches.
+>> I've no idea if they will remain to apply after moving to .2. Of
+>> course I can verify that, but if they fail I am not too sure if I can
+>> fix things. They are machines that I do not have.
+>
+> for mach in machine1 machine2;do MACHINE=3D$mach bitbake -b linux_2.6.36.=
+bb -
+> cpatch;done
+>
+> This will test does patches apply. If they are then push change, if they =
+not
+> then check why - maybe they contain patches from stable update (edit them
+> then)>
+>> Thinking of it, probably it is better to create a 2.6.36.2 recipe with
+>> DP =3D -1 for all but my board and leave it to the mx31ads and ts72xx
+>> machines to move to that recipe when they see fit.
+>
+> Why not linux-yourmachine_2.6.36.2.bb then? linux_BASE_VER.bb recipes wer=
+e
+> created to limit amount of kernel recipes, not to enlarge it.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/distro/include/preferred-slugos-versions.inc |   22 +-------------------
- conf/distro/include/slugos.inc                    |    9 ++-----
- conf/distro/slugos.conf                           |    7 +-----
- 3 files changed, 6 insertions(+), 32 deletions(-)
+linux-yourmachine_2.6.36.2.bb also enlarges the number of recipes.
+And as a policy we could decide to phase out e.g. 2.6.32.1 after a while.
 
-diff --git a/conf/distro/include/preferred-slugos-versions.inc b/conf/distro/include/preferred-slugos-versions.inc
-index 6ae4432..a92f95f 100644
---- a/conf/distro/include/preferred-slugos-versions.inc
-+++ b/conf/distro/include/preferred-slugos-versions.inc
-@@ -26,38 +26,20 @@ PREFERRED_VERSION_autoconf			?= "2.65"
- PREFERRED_VERSION_autoconf-native		?= "2.65"
- PREFERRED_VERSION_automake			?= "1.11.1"
- PREFERRED_VERSION_automake-native		?= "1.11.1"
--PREFERRED_VERSION_binutils			?= "2.20.1"
--PREFERRED_VERSION_binutils-cross		?= "2.20.1"
--PREFERRED_VERSION_binutils-cross-sdk		?= "2.20.1"
- PREFERRED_VERSION_busybox			?= "1.18.1"
- PREFERRED_VERSION_dbus				?= "1.2.3"
--PREFERRED_VERSION_eglibc			?= "2.11"
--PREFERRED_VERSION_eglibc-initial		?= "2.11"
--PREFERRED_VERSION_gcc				?= "4.4.4"
--PREFERRED_VERSION_gcc-cross			?= "4.4.4"
--PREFERRED_VERSION_gcc-cross-sdk			?= "4.4.4"
--PREFERRED_VERSION_gcc-cross-initial		?= "4.4.4"
--PREFERRED_VERSION_gcc-cross-intermediate	?= "4.4.4"
--PREFERRED_VERSION_glib-2.0			?= "2.22.1"
--PREFERRED_VERSION_glib-2.0-native		?= "2.22.1"
--PREFERRED_VERSION_glibc				?= "2.10.1"
--PREFERRED_VERSION_glibc-initial			?= "2.10.1"
-+PREFERRED_VERSION_glib-2.0			?= "2.26.1"
-+PREFERRED_VERSION_glib-2.0-native		?= "2.26.1"
- PREFERRED_VERSION_gtk+				?= "2.18.6"
- PREFERRED_VERSION_gtk+-native			?= "2.18.6"
- PREFERRED_VERSION_ipkg				?= "0.99.163"
- PREFERRED_VERSION_ipkg-native			?= "0.99.163"
--PREFERRED_VERSION_libtool			?= "2.2.6b"
--PREFERRED_VERSION_libtool-native		?= "2.2.6b"
--PREFERRED_VERSION_libtool-cross			?= "2.2.6b"
--PREFERRED_VERSION_libtool-sdk			?= "2.2.6b"
- PREFERRED_VERSION_linux-libc-headers		?= "2.6.23"
- PREFERRED_VERSION_m4				?= "1.4.14"
- PREFERRED_VERSION_m4-native			?= "1.4.14"
- PREFERRED_VERSION_nslu2-linksys-firmware	?= "2.3r63"
- PREFERRED_VERSION_pkgconfig			?= "0.23"
- PREFERRED_VERSION_pkgconfig-native		?= "0.23"
--PREFERRED_VERSION_uclibc			?= "0.9.30.1"
--PREFERRED_VERSION_uclibc-initial		?= "0.9.30.1"
- PREFERRED_VERSION_udev				?= "118"
- 
- ##################### Stuff with special notes, and broken stuff:
-diff --git a/conf/distro/include/slugos.inc b/conf/distro/include/slugos.inc
-index bbfd907..2fb6957 100644
---- a/conf/distro/include/slugos.inc
-+++ b/conf/distro/include/slugos.inc
-@@ -30,13 +30,10 @@ THUMB_INTERWORK = "yes"
- #    arm system and vice versa.  It is strongly recommended that DISTROs not
- #    turn this off - the actual cost is very small.
- # We want images supporting the following features (for task-base)
--DISTRO_FEATURES = "largefile ipv4 ipv6 nfs smbfs wifi ppp alsa bluetooth ext2 vfat irda pcmcia usbhost pci"
-+DISTRO_FEATURES = "largefile ipv4 ipv6 nfs smbfs wifi ppp alsa bluetooth ext2 vfat irda pcmcia usbhost pci eabi"
- # We may also wish to enable raid support at some point (space permitting)
- #DISTRO_FEATURES += " raid"
- 
--# Add thumb-interwork to feature list if selected machine supports it.
--DISTRO_FEATURES += ' ${@["", "thumb-interwork"][bb.data.getVar('THUMB_INTERWORK', d, 1) == "yes"]}'
--
- IMAGE_BASENAME = "${@['slugos${SITEINFO_ENDIANNESS}', 'ucslugc'][bb.data.getVar('TARGET_OS', d, 1) == 'linux-uclibc']}"
- 
- # The following need not be set, the defaults should be adequate
-@@ -111,8 +108,8 @@ DISTRO_EXTRA_DEPENDS ?= ""
- DISTRO_EXTRA_RDEPENDS ?= ""
- DISTRO_EXTRA_RRECOMMENDS ?= ""
- 
--CVS_TARBALL_STASH = "http://sources.nslu2-linux.org/sources/"
--INHERIT += "nslu2-mirrors"
-+SOURCE_MIRROR_URL = "http://sources.nslu2-linux.org/sources/"
-+INHERIT += "own-mirrors"
- 
- #FIXME: HACK: REMOVE THIS
- IGNORE_STRIP_ERRORS = ""
-diff --git a/conf/distro/slugos.conf b/conf/distro/slugos.conf
-index 5f9c06c..7fb6d1c 100644
---- a/conf/distro/slugos.conf
-+++ b/conf/distro/slugos.conf
-@@ -11,16 +11,11 @@ DISTRO_NAME = "SlugOS"
- DISTRO_TYPE = "alpha"
- TARGET_ARCH ?= "armeb"
- ARM_INSTRUCTION_SET = "arm"
--TARGET_OS = "linux-gnueabi"
- IPKG_VARIANT ?= "opkg-nogpg-nocurl-slugos"
- PREFERRED_PROVIDER_opkg ?= "opkg-nogpg-nocurl-slugos"
- PREFERRED_PROVIDER_virtual/update-alternatives ?= "opkg-nogpg-nocurl-slugos"
- IMAGE_INITSCRIPTS ?= "initscripts-slugos"
- 
- require conf/distro/include/slugos.inc
--
--# Can be either glibc or eglibc (or perhaps even uclibc)
--LIBC ?= "eglibc"
--require conf/distro/include/${LIBC}.inc
-+require conf/distro/include/sane-toolchain.inc
- require conf/distro/include/arm-thumb.inc
--
--- 
-1.7.0.4
+Anyway, the topic is moot as I saw that today 2.6.37 was released so
+since I have to take a leap anyway, I'll probably go to that version.
 
+Frans.
 
 
