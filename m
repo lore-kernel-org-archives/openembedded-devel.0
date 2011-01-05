@@ -1,39 +1,39 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PaP4V-000833-BK
+	(envelope-from <otavio.salvador@gmail.com>) id 1PaRaO-0002WT-31
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jan 2011 09:50:19 +0100
-Received: by gwaa12 with SMTP id a12so3713479gwa.6
+	Wed, 05 Jan 2011 12:31:24 +0100
+Received: by bwz10 with SMTP id 10so14769569bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jan 2011 00:49:55 -0800 (PST)
+	Wed, 05 Jan 2011 03:30:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=47KS8U2UPIWd9o5eZiPwFVECsx2Zft/7r7pfybdJd6M=;
-	b=bW4g8Bgtykg6cRULW6SfN5XWrUuHmny/sHgW2Itqhrn9YrwbB+bqTy3Dlz9v4pb4rZ
-	y6mss3+0/nBJXGH9LjVnTubFzfwiSxRMx8KLmssbzGBUQ6BA3Sn+VV1mY1CxLD25kj1c
-	IfvGEVCoUoRgsQL6ANzniqmEJW3C0nKl7jA3g=
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=8aYpk+xy4axE9Ae39OXgtoy9T/36GrOGh5L4LJioLaE=;
+	b=DOTb+HLkE+7SRz1fRK8l17EWq9VqKG1SBqWdFjPI3sGU/Lkwm5vuXFKaP8woDb+J0s
+	s3PkmNZ/vAWr3GtjBmkSUDxnEo3vHLeTmxN0PYoNWKN+2QZMNbZ+OLcjv7mFhXnNYeEi
+	KQnDwDBnxd9HDHzKUAoT+0hSRHgYpGBfUcSuI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=HNSvKAjBxPJjye3uHB4ImtQYElMZ94+SLX8JDyGDTy/mtdDF5lkEy9mn7lIDxHSMci
-	kxKVRFdnsZV0c6KhmIQ9zUYpdyQFBufg8K6xryx9zoXqCBe5emK8Q6PDh2O6i7ScZW/N
-	vsAVPSxw769uQc4aMrNNwEAGCtdD43ZtOFAnw=
-Received: by 10.90.98.11 with SMTP id v11mr388173agb.58.1294217394896; Wed, 05
-	Jan 2011 00:49:54 -0800 (PST)
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=LgtV4O5iQyS63ojM8Xx1joRXtQAMqKTBovBgJUmvPv/nfTWpoCyRbQyMIaURpAWlqv
+	8wMsFpo0FR0jURXVzyXrNNw3tdA8LFkJl6AEU4n/1iFyu/pU96uVm4yySlL+l0/Bifgl
+	YxErcTSP0Fd+Qcp4mE0gkXiYx3sZAZRls029g=
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Wed, 5 Jan 2011 00:49:32 -0800 (PST)
-In-Reply-To: <ig1ac2$ej0$1@dough.gmane.org>
-References: <1294198349769396500@rkmorris.us>
-	<AANLkTim22AbOed09n1Ez6A2gtJhnjUDm3Ksv+tRDnn=8@mail.gmail.com>
-	<AANLkTimbxOoZQRPQ+MsSNT++aXYnJsta8VmOA_Nbmc-k@mail.gmail.com>
-	<ig1ac2$ej0$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 5 Jan 2011 00:49:32 -0800
-Message-ID: <AANLkTi=Ut9T_gyoaeiJO5Gubj3e4rb8hOxgCOwwR4hbT@mail.gmail.com>
+Received: by 10.204.71.141 with SMTP id h13mr5401254bkj.180.1294227059873;
+	Wed, 05 Jan 2011 03:30:59 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.59.147 with HTTP; Wed, 5 Jan 2011 03:30:59 -0800 (PST)
+In-Reply-To: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
+References: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
+Date: Wed, 5 Jan 2011 09:30:59 -0200
+X-Google-Sender-Auth: d-jh6LQLFNNrg22aapc0X_uQEiM
+Message-ID: <AANLkTin_4KLFT9FADfeN=MN6RaDNH-ssueOK2w=sVbxh@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: H1940 Boot Issues -> Executable Build Problems?
+Subject: Re: [RFC] linux 2.6.36: upgrade to 2.6.36.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,84 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2011 08:50:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 05 Jan 2011 11:31:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 5, 2011 at 12:33 AM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> That looks suspiciously like
-> http://www.flickr.com/photos/quimgil/478715643/ :)
->
+On Tue, Jan 4, 2011 at 19:12, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Seems Petr, Eric and Robert are involved in these two machines.
+> Care to comment on moving to 2.6.36.2 (or give it a stab)?
 
-heh yes indeed no suspicion. I am just making sure that he is not
-getting bitten by potential clz instructions from libgcc because now
-it defaults to armv5te. If thats the case then we have to use
---with-arch=3D${BASE_PACKAGE_ARCH} while configuring gcc and then it
-will compile the gcc runtime libraries with proper options for an arch.
+I am using 2.6.36 and I support the update.
 
-> On 05-01-11 08:42, Khem Raj wrote:
->> here is updated patch
->>
->>
->>
->> On Tue, Jan 4, 2011 at 10:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>> On Tue, Jan 4, 2011 at 7:32 PM, Russell Morris <openembedded@rkmorris.u=
-s> wrote:
->>>> Hi,
->>>>
->>>>
->>>>
->>>> A bit more info to try and help out here - as I'm fighting with this a=
-s best I can, but it's still kicking my butt ... :-).
->>>>
->>>>
->>>>
->>>> It really does look like the executable that is being created is not b=
-uild for the arm920t (armv4t). I have tried to run the executable on the ta=
-rget, and also with a modified version of qemu - and neither one works. If =
-I tell qemu that the target is an arm920t the executable will not run, but =
-if I let it be the default qemu-arm it runs just fine.
->>>>
->>>>
->>>>
->>>> Has anyone else been able to get an OE build to run on an arm920t (arm=
-v4t) processor?
->>>>
->>>>
->>>
->>> OK you seem to be one patient guy :) Here is totally untested patch
->>> for gcc. Please apply it on top of your openembedded. Then use
->>> DISTRO=3Dminimal
->>> or any other distro that uses gcc 4.5 and build OE from scratch again
->>> and see if that helps and report back.
->>>
->>> Thanks
->>> -Khem
->>>
->>>
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNJCzCMkyGM64RGpERAvW/AKCTiQztYmWbEMLOvxHWtP0TrfGSwgCgnIdQ
-> Df+XY7rjrMPTZKaMxfAXwRg=3D
-> =3DJXQ8
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+You might do it and post the patch for testing so the affected people
+could comment on it.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
