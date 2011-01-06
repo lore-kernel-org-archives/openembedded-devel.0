@@ -1,25 +1,42 @@
-Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1PakzK-000746-Rn
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1Pakzd-0008AQ-6j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Jan 2011 09:14:27 +0100
-Received: (qmail invoked by alias); 06 Jan 2011 08:07:22 -0000
-Received: from 137.163.71-86.rev.gaoland.net (EHLO [192.168.1.72])
-	[86.71.163.137]
-	by mail.gmx.net (mp018) with SMTP; 06 Jan 2011 09:07:22 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18eBy0n4cAea5pcuP5Vaks90XZImdUiYowTixZAIX
-	UpA0zGjh06nG9t
-Message-ID: <4D257835.6020904@gmx.net>
-Date: Thu, 06 Jan 2011 09:07:17 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Thu, 06 Jan 2011 09:15:18 +0100
+Received: by fxm17 with SMTP id 17so15062655fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Jan 2011 00:14:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=wRzdJotx+iNXWZnBYthuY0gsCyqZjObclfqJwKhaLt4=;
+	b=T72mALqvBK6pD6qm8p4quSYu0p6XSNHqzMPJT+i/omoxulYhJd2LnzJPBff/TVh/LZ
+	w79y6QGJGfudMvflAfonz3Iy3fkqviLrYnt88JZ/YCPNfGrTw53bjAUgLQvJZhvj2Kaz
+	OHzbG88FmZ92hCl/WI6+GLSdxX3/dBPCccX+k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=qRuNsmWF5g4vIT12OVd9xkIVN1ppgIN6K2TdQ052lp8Adu8+c+izIY4RdXlkRB9gUK
+	UAylc+JTQD2ejXnBRiItYKV2wAE9CGk1FP1/DVUBidwX5m2VBrhj5lSznT/f6gAql0g9
+	7dU9eX+yLq2Gp0zPQ3S/m6ahjoBsX6gB7IlM8=
+Received: by 10.223.75.194 with SMTP id z2mr1190544faj.38.1294301660696;
+	Thu, 06 Jan 2011 00:14:20 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n1sm5751106fam.16.2011.01.06.00.14.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 06 Jan 2011 00:14:20 -0800 (PST)
+Date: Thu, 6 Jan 2011 09:14:31 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
-X-Y-GMX-Trusted: 0
-Subject: OE got stand for FOSDEM 2011
+Message-ID: <20110106081431.GC3205@jama>
+References: <1294241612-28405-1-git-send-email-Martin.Jansa@gmail.com>
+	<1294241612-28405-2-git-send-email-Martin.Jansa@gmail.com>
+	<ig3svu$g6s$2@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <ig3svu$g6s$2@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH 2/2] mysql5-native: put make install to do_install after autotools_stage_all was removed with do_stage in eaf0fc03acfb262bcd614a14086a1b28ec850f46
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,79 +50,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2011 08:14:27 -0000
-X-Groupsio-MsgNum: 27758
+X-List-Received-Date: Thu, 06 Jan 2011 08:15:19 -0000
+X-Groupsio-MsgNum: 27759
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigE0F66EFC8F270E4FA245D758"
+	protocol="application/pgp-signature"; boundary="xesSdrSSBC0PokLI"
+Content-Disposition: inline
 
---------------enigE0F66EFC8F270E4FA245D758
-Content-Type: text/plain; charset=ISO-8859-15
+--xesSdrSSBC0PokLI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi everyone,
+On Thu, Jan 06, 2011 at 09:03:10AM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 05-01-11 16:33, Martin Jansa wrote:
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  recipes/mysql/mysql5-native_5.1.40.bb |    4 ++++
+> >  1 files changed, 4 insertions(+), 0 deletions(-)
+> >=20
+> > diff --git a/recipes/mysql/mysql5-native_5.1.40.bb b/recipes/mysql/mysq=
+l5-native_5.1.40.bb
+> > index 40d07ec..8001783 100644
+> > --- a/recipes/mysql/mysql5-native_5.1.40.bb
+> > +++ b/recipes/mysql/mysql5-native_5.1.40.bb
+> > @@ -12,6 +12,10 @@ EXTRA_OEMAKE =3D ""
+> >  EXTRA_OECONF =3D " --with-embedded-server "
+> > =20
+> >  do_install() {
+> > +        oe_runmake 'DESTDIR=3D${D}' install
+> > +        mv -f ${D}${libdir}/mysql/* ${D}${libdir}
+> > +        rmdir ${D}${libdir}/mysql
+> > +
+> >          install -d ${D}${bindir}
+> >          install -m 0755 sql/gen_lex_hash ${D}${bindir}/
+> >  }
+>=20
+> Weird, I saw no build errors with my builds from scratch, but I guess my
+> builds only needed gen_lex_hash and target headers.
+>=20
+> Which recipes actually need the native libs and headers?
 
-hey folks look at that!
+I've noticed it in azy-native (see 1st patch).
 
-We got a stand for 2011's FOSDEM and we even got our 2nd table
-extension! Kudos to FOSDEM organizers!
+Regards,
 
-Now, we should really start thinking about what to bring (devices,
-posters, flyers) and who can be there to man the booth.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Cheers
-Robert
-
--------- Original-Nachricht --------
-Betreff: [FOSDEM] OpenEmbedded stand acceptance
-Datum: Wed, 22 Dec 2010 00:04:27 -0800 (PST)
-Von: Elise Huard <ehuard@fosdem.org>
-An: r.schuster@tarent.de
-CC: devrooms <devrooms@fosdem.org>
-
-Hi,
-
-Your request for a stand of OpenEmbedded at FOSDEM 2010 has been
-accepted, and we will put the following at your disposal:
-  - on Saturday from 10:00 to 18:00 and Sunday from 10:00 to 17:00,
-  - 2 table(s) of 2 meter width and 1 meter depth, 2 seats per table,
-  - most probably in the AW building (subject to change),
-  - best-effort wireless interenet and one(!) type C/E power plug.
-If you want to decline this offer, please tell us as soon as possible.
-
-We provide only one power plug per stand, but you can hook up several
-multi-socket power chords. Because we can not provide those for every
-stand, we must ask you to bring your own multi-socket power chords.
-
-To make the stands look more professional, we would also like to ask you
-to bring a table cloth that covers the table and the front of it. The
-front side is a very good place to put your logo and name in large on,
-this will increase your visibility.
-
-We will stick A4 sheets with your project name on the tables, so you'll
-know where to install stuff. The best time to build up your stands in
-the H building is around 09:00. From 09:30-10:00 the people start to
-rush in, heading for the opening talks. In the AW building, things are
-typically more quiet until the opening talks are finished, which is
-around 12:00.
-
-
-With kind regards,
-The FOSDEM stand organizers.
-
-
---------------enigE0F66EFC8F270E4FA245D758
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+--xesSdrSSBC0PokLI
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+Version: GnuPG v2.0.16 (GNU/Linux)
 
-iEYEARECAAYFAk0leDcACgkQG9cfwmwwEtoIwACfajs8JbfAzAPDOiSxyGZTqVe7
-ZdoAmwcgF2Pd2t74piS783dPbEIN3R/9
-=6uCC
+iEUEARECAAYFAk0leecACgkQN1Ujt2V2gBwswACYqNJ/f2CeaGT7UM/oAjF54Tet
+ogCfa3OKreh7uCYn1Eut8r8JVPfe1cw=
+=jtsO
 -----END PGP SIGNATURE-----
 
---------------enigE0F66EFC8F270E4FA245D758--
+--xesSdrSSBC0PokLI--
