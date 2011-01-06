@@ -1,29 +1,30 @@
 Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PapH9-00055n-1z
+	(envelope-from <obi@opendreambox.org>) id 1PapHB-00055m-GM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Jan 2011 13:49:07 +0100
+	Thu, 06 Jan 2011 13:49:17 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 791AF314C868;
-	Thu,  6 Jan 2011 13:48:44 +0100 (CET)
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 72822314BE42;
+	Thu,  6 Jan 2011 13:48:41 +0100 (CET)
 X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
 Received: from mail.multimedia-labs.de ([127.0.0.1])
 	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with LMTP id cJKbnmSDxFPh; Thu,  6 Jan 2011 13:48:35 +0100 (CET)
+	with LMTP id niY62K0CCErP; Thu,  6 Jan 2011 13:48:34 +0100 (CET)
 Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 547BF314C88A;
-	Thu,  6 Jan 2011 13:48:34 +0100 (CET)
+	by mail.multimedia-labs.de (Postfix) with SMTP id A3C2E314C872;
+	Thu,  6 Jan 2011 13:48:32 +0100 (CET)
 Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Thu, 06 Jan 2011 12:48:34 +0000
+	Thu, 06 Jan 2011 12:48:32 +0000
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Jan 2011 12:48:30 +0000
-Message-Id: <1294318110-23521-4-git-send-email-obi@opendreambox.org>
+Date: Thu,  6 Jan 2011 12:48:29 +0000
+Message-Id: <1294318110-23521-3-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.2.3
 In-Reply-To: <1294318110-23521-1-git-send-email-obi@opendreambox.org>
 References: <1294318110-23521-1-git-send-email-obi@opendreambox.org>
-Subject: [PATCH 4/4] gcc: replace unconditional SRC_URI_append with SRC_URI +=
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: [PATCH 3/4] unpack.py: add SRC_URI parameter unpack=<bool> (default: true)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,233 +38,169 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2011 12:49:07 -0000
+X-List-Received-Date: Thu, 06 Jan 2011 12:49:18 -0000
 
-* Fixes missing leading whitespace character at some locations
+* This allows to download compressed files without extracting them
+* Use case: gcj requires ecj.jar, which must be downloaded separately
+  and put into the gcc source directory before configure gets executed.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-CC: Khem Raj <raj.khem@gmail.com>
+CC: Chris Larson <chris_larson@mentor.com>
 ---
- recipes/gcc/gcc-3.4.4.inc             |    2 +-
- recipes/gcc/gcc-3.4.6.inc             |    2 +-
- recipes/gcc/gcc-4.0.2.inc             |    2 +-
- recipes/gcc/gcc-canadian-sdk_4.2.4.bb |    2 +-
- recipes/gcc/gcc_4.2.2.bb              |    2 +-
- recipes/gcc/gcc_4.2.3.bb              |    2 +-
- recipes/gcc/gcc_4.2.4.bb              |    2 +-
- recipes/gcc/gcc_4.3.1.bb              |    2 +-
- recipes/gcc/gcc_4.3.2.bb              |    2 +-
- recipes/gcc/gcc_4.3.3.bb              |    2 +-
- recipes/gcc/gcc_4.3.4.bb              |    2 +-
- recipes/gcc/gcc_4.4.1.bb              |    2 +-
- recipes/gcc/gcc_4.4.2.bb              |    2 +-
- recipes/gcc/gcc_4.4.4.bb              |    2 +-
- recipes/gcc/gcc_4.5.bb                |    2 +-
- recipes/gcc/gcc_svn.bb                |    2 +-
- 16 files changed, 16 insertions(+), 16 deletions(-)
+ classes/base.bbclass                      |    3 +-
+ docs/usermanual/reference/var_src_uri.xml |   13 ++++-
+ lib/oe/unpack.py                          |   81 +++++++++++++++++------------
+ 3 files changed, 61 insertions(+), 36 deletions(-)
 
-diff --git a/recipes/gcc/gcc-3.4.4.inc b/recipes/gcc/gcc-3.4.4.inc
-index 99e680f..8a3ce02 100644
---- a/recipes/gcc/gcc-3.4.4.inc
-+++ b/recipes/gcc/gcc-3.4.4.inc
-@@ -26,7 +26,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
- 	   file://gcc-cross-fixincl.patch \
- 	   file://gcc-posix-open-fix.patch \
- 	   "
--SRC_URI_append = " file://zecke-no-host-includes.patch "
-+SRC_URI += "file://zecke-no-host-includes.patch"
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index c76b77d..25d72d4 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -190,12 +190,11 @@ def oe_unpack(d, local, urldata):
+         bb.mkdirhier(destdir)
+     else:
+         destdir = workdir
+-    dos = urldata.parm.get("dos")
  
- SRC_URI[archive.md5sum] = "b594ff4ea4fbef4ba9220887de713dfe"
- SRC_URI[archive.sha256sum] = "3444179840638cb8664e8e53604900c4521d29d57785a5091202ee4937d8d0fd"
-diff --git a/recipes/gcc/gcc-3.4.6.inc b/recipes/gcc/gcc-3.4.6.inc
-index 5296f26..3991cdc 100644
---- a/recipes/gcc/gcc-3.4.6.inc
-+++ b/recipes/gcc/gcc-3.4.6.inc
-@@ -23,7 +23,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+     bb.note("Unpacking %s to %s/" % (base_path_out(local, d),
+                                      base_path_out(destdir, d)))
+     try:
+-        unpack_file(local, destdir, env={"PATH": d.getVar("PATH", True)}, dos=dos)
++        unpack_file(local, destdir, urldata.parm, env={"PATH": d.getVar("PATH", True)})
+     except UnpackError, exc:
+         bb.fatal(str(exc))
  
- SRC_URI += "file://gcc34-configure.in.patch"
- SRC_URI += "file://gcc34-thumb-support.patch"
--SRC_URI_append = " file://zecke-no-host-includes.patch "
-+SRC_URI += "file://zecke-no-host-includes.patch"
+diff --git a/docs/usermanual/reference/var_src_uri.xml b/docs/usermanual/reference/var_src_uri.xml
+index 706452f..521c7d5 100644
+--- a/docs/usermanual/reference/var_src_uri.xml
++++ b/docs/usermanual/reference/var_src_uri.xml
+@@ -91,7 +91,8 @@ SRC_URI[sha256sum] = &quot;36bdb85c97b39ac604bc58cb7857ee08295242c78a12848ef8a31
+   it is unpacked into the work directory, <command>${WORKDIR}</command>. The
+   unpacker recognises several archive and compression types and for these it
+   will decompress any compressed files and extract all of the files from
+-  archives into the work directory. The supported types are:</para>
++  archives into the work directory, unless the option <command>unpack=no</command>
++  is set for the given file. The supported types are:</para>
  
- SRC_URI[archive.md5sum] = "4a21ac777d4b5617283ce488b808da7b"
- SRC_URI[archive.sha256sum] = "7791a601878b765669022b8b3409fba33cc72f9e39340fec8af6d0e6f72dec39"
-diff --git a/recipes/gcc/gcc-4.0.2.inc b/recipes/gcc/gcc-4.0.2.inc
-index 63f9772..9d3c660 100644
---- a/recipes/gcc/gcc-4.0.2.inc
-+++ b/recipes/gcc/gcc-4.0.2.inc
-@@ -13,7 +13,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
- 	file://zecke-xgcc-cpp.patch "
+   <variablelist>
+     <varlistentry>
+@@ -192,6 +193,16 @@ SRC_URI[sha256sum] = &quot;36bdb85c97b39ac604bc58cb7857ee08295242c78a12848ef8a31
+           md5sum option provided.</para>
+         </listitem>
+       </varlistentry>
++
++      <varlistentry>
++        <term>unpack={yes|no}</term>
++
++        <listitem>
++          <para>If set to 'yes' (default) and the source file is an archive,
++          then the archive will be decompressed and unpacked into the ${WORKDIR}.
++	  Otherwise, the archive will be copied into the ${WORKDIR}.</para>
++        </listitem>
++      </varlistentry>
+     </variablelist>
  
- # uclibc patches below
--SRC_URI_append = " file://100-uclibc-conf.patch   \
-+SRC_URI += "file://100-uclibc-conf.patch   \
-                    file://200-uclibc-locale.patch \
-                    file://301-missing-execinfo_h.patch \
-                    file://302-c99-snprintf.patch  \
-diff --git a/recipes/gcc/gcc-canadian-sdk_4.2.4.bb b/recipes/gcc/gcc-canadian-sdk_4.2.4.bb
-index 7a1402f..08a4c95 100644
---- a/recipes/gcc/gcc-canadian-sdk_4.2.4.bb
-+++ b/recipes/gcc/gcc-canadian-sdk_4.2.4.bb
-@@ -14,7 +14,7 @@ DEPENDS = "gmp-canadian mpfr-canadian"
- require gcc-configure-canadian-sdk.inc
- require gcc-package-sdk.inc
+     <para>Related variables:</para>
+diff --git a/lib/oe/unpack.py b/lib/oe/unpack.py
+index e4fe5d8..8e8bf36 100644
+--- a/lib/oe/unpack.py
++++ b/lib/oe/unpack.py
+@@ -47,47 +47,62 @@ def subprocess_setup():
+     # non-Python subprocesses expect.
+     signal.signal(signal.SIGPIPE, signal.SIG_DFL)
  
--SRC_URI_append = "file://fortran-cross-compile-hack.patch \
-+SRC_URI += "file://fortran-cross-compile-hack.patch \
- 		  file://pr22133-mingw-path-fixup.patch \
- 		  file://pr33281-mingw-host-fragment.patch \
- 		  file://pr35916-mingw-__USE_MINGW_ACCESS-everywhere.patch \
-diff --git a/recipes/gcc/gcc_4.2.2.bb b/recipes/gcc/gcc_4.2.2.bb
-index 30713f8..4822da9 100644
---- a/recipes/gcc/gcc_4.2.2.bb
-+++ b/recipes/gcc/gcc_4.2.2.bb
-@@ -4,6 +4,6 @@ require gcc-${PV}.inc
- require gcc-configure-target.inc
- require gcc-package-target.inc
+-def unpack_file(file, destdir, dos=False, env=None):
++def unpack_file(file, destdir, parameters, env=None):
+     import subprocess, shutil
  
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
++    try:
++        dos = to_boolean(parameters.get("dos"), False)
++    except ValueError, exc:
++        bb.fatal("Invalid value for 'dos' parameter for %s: %s" %
++                 (filename, parameters.get("dos")))
++
++    try:
++        unpack = to_boolean(parameters.get("unpack"), True)
++    except ValueError, exc:
++        bb.fatal("Invalid value for 'unpack' parameter for %s: %s" %
++                 (filename, parameters.get("unpack")))
++
+     dest = os.path.join(destdir, os.path.basename(file))
+     if os.path.exists(dest):
+         if os.path.samefile(file, dest):
+             return True
  
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
-diff --git a/recipes/gcc/gcc_4.2.3.bb b/recipes/gcc/gcc_4.2.3.bb
-index 6fe3028..a174e11 100644
---- a/recipes/gcc/gcc_4.2.3.bb
-+++ b/recipes/gcc/gcc_4.2.3.bb
-@@ -4,7 +4,7 @@ require gcc-${PV}.inc
- require gcc-configure-target.inc
- require gcc-package-target.inc
+     cmd = None
+-    if file.endswith('.tar'):
+-        cmd = 'tar x --no-same-owner -f %s' % file
+-    elif file.endswith('.tgz') or file.endswith('.tar.gz') or file.endswith('.tar.Z'):
+-        cmd = 'tar xz --no-same-owner -f %s' % file
+-    elif file.endswith('.tbz') or file.endswith('.tbz2') or file.endswith('.tar.bz2'):
+-        cmd = 'bzip2 -dc %s | tar x --no-same-owner -f -' % file
+-    elif file.endswith('.gz') or file.endswith('.Z') or file.endswith('.z'):
+-        root, ext = os.path.splitext(file)
+-        cmd = 'gzip -dc %s > %s' % (file, os.path.basename(root))
+-    elif file.endswith('.bz2'):
+-        root, ext = os.path.splitext(file)
+-        cmd = 'bzip2 -dc %s > %s' % (file, os.path.basename(root))
+-    elif file.endswith('.tar.xz'):
+-        cmd = 'xz -dc %s | tar x --no-same-owner -f -' % file
+-    elif file.endswith('.xz'):
+-        root, ext = os.path.splitext(file)
+-        cmd = 'xz -dc %s > %s' % (file, os.path.basename(root))
+-    elif file.endswith('.tar.lz'):
+-        cmd = 'lzip -dc %s | tar x --no-same-owner -f -' % file
+-    elif file.endswith('.lz'):
+-        root, ext = os.path.splitext(file)
+-        cmd = 'lzip -dc %s > %s' % (file, os.path.basename(root))
+-    elif file.endswith('.zip') or file.endswith('.jar'):
+-        cmd = 'unzip -q -o'
+-        if dos:
+-            cmd = '%s -a' % cmd
+-        cmd = "%s '%s'" % (cmd, file)
+-    elif os.path.isdir(file):
+-        shutil.rmtree(dest, True)
+-        shutil.copytree(file, dest, True)
+-    else:
+-        shutil.copy2(file, dest)
++    if unpack:
++        if file.endswith('.tar'):
++            cmd = 'tar x --no-same-owner -f %s' % file
++        elif file.endswith('.tgz') or file.endswith('.tar.gz') or file.endswith('.tar.Z'):
++            cmd = 'tar xz --no-same-owner -f %s' % file
++        elif file.endswith('.tbz') or file.endswith('.tbz2') or file.endswith('.tar.bz2'):
++            cmd = 'bzip2 -dc %s | tar x --no-same-owner -f -' % file
++        elif file.endswith('.gz') or file.endswith('.Z') or file.endswith('.z'):
++            root, ext = os.path.splitext(file)
++            cmd = 'gzip -dc %s > %s' % (file, os.path.basename(root))
++        elif file.endswith('.bz2'):
++            root, ext = os.path.splitext(file)
++            cmd = 'bzip2 -dc %s > %s' % (file, os.path.basename(root))
++        elif file.endswith('.tar.xz'):
++            cmd = 'xz -dc %s | tar x --no-same-owner -f -' % file
++        elif file.endswith('.xz'):
++            root, ext = os.path.splitext(file)
++            cmd = 'xz -dc %s > %s' % (file, os.path.basename(root))
++        elif file.endswith('.tar.lz'):
++            cmd = 'lzip -dc %s | tar x --no-same-owner -f -' % file
++        elif file.endswith('.lz'):
++            root, ext = os.path.splitext(file)
++            cmd = 'lzip -dc %s > %s' % (file, os.path.basename(root))
++        elif file.endswith('.zip') or file.endswith('.jar'):
++            cmd = 'unzip -q -o'
++            if dos:
++                cmd = '%s -a' % cmd
++            cmd = "%s '%s'" % (cmd, file)
++
++    if not unpack or not cmd:
++        if os.path.isdir(file):
++            shutil.rmtree(dest, True)
++            shutil.copytree(file, dest, True)
++        else:
++            shutil.copy2(file, dest)
  
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
- 
-diff --git a/recipes/gcc/gcc_4.2.4.bb b/recipes/gcc/gcc_4.2.4.bb
-index 6fe3028..a174e11 100644
---- a/recipes/gcc/gcc_4.2.4.bb
-+++ b/recipes/gcc/gcc_4.2.4.bb
-@@ -4,7 +4,7 @@ require gcc-${PV}.inc
- require gcc-configure-target.inc
- require gcc-package-target.inc
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
- 
-diff --git a/recipes/gcc/gcc_4.3.1.bb b/recipes/gcc/gcc_4.3.1.bb
-index 442c273..38ae714 100644
---- a/recipes/gcc/gcc_4.3.1.bb
-+++ b/recipes/gcc/gcc_4.3.1.bb
-@@ -4,7 +4,7 @@ require gcc-${PV}.inc
- require gcc-configure-target.inc
- require gcc-package-target.inc
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
- 
-diff --git a/recipes/gcc/gcc_4.3.2.bb b/recipes/gcc/gcc_4.3.2.bb
-index c73dfc1..998f58c 100644
---- a/recipes/gcc/gcc_4.3.2.bb
-+++ b/recipes/gcc/gcc_4.3.2.bb
-@@ -8,6 +8,6 @@ FILES_${PN} += "\
-         ${gcclibdir}/${TARGET_SYS}/*/*.o \
- "
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
-diff --git a/recipes/gcc/gcc_4.3.3.bb b/recipes/gcc/gcc_4.3.3.bb
-index 274f474..263969a 100644
---- a/recipes/gcc/gcc_4.3.3.bb
-+++ b/recipes/gcc/gcc_4.3.3.bb
-@@ -8,7 +8,7 @@ FILES_${PN} += "\
-         ${gcclibdir}/${TARGET_SYS}/*/*.o \
- "
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
- 
-diff --git a/recipes/gcc/gcc_4.3.4.bb b/recipes/gcc/gcc_4.3.4.bb
-index ec20085..57ced16 100644
---- a/recipes/gcc/gcc_4.3.4.bb
-+++ b/recipes/gcc/gcc_4.3.4.bb
-@@ -8,6 +8,6 @@ FILES_${PN} += "\
-         ${gcclibdir}/${TARGET_SYS}/*/*.o \
- "
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
-diff --git a/recipes/gcc/gcc_4.4.1.bb b/recipes/gcc/gcc_4.4.1.bb
-index 52b09cf..30ab402 100644
---- a/recipes/gcc/gcc_4.4.1.bb
-+++ b/recipes/gcc/gcc_4.4.1.bb
-@@ -8,7 +8,7 @@ FILES_${PN} += "\
-         ${gcclibdir}/${TARGET_SYS}/*/*.o \
- "
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
- 
-diff --git a/recipes/gcc/gcc_4.4.2.bb b/recipes/gcc/gcc_4.4.2.bb
-index d1d50ad..55f05b5 100644
---- a/recipes/gcc/gcc_4.4.2.bb
-+++ b/recipes/gcc/gcc_4.4.2.bb
-@@ -8,7 +8,7 @@ FILES_${PN} += "\
-         ${gcclibdir}/${TARGET_SYS}/*/*.o \
- "
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
- 
-diff --git a/recipes/gcc/gcc_4.4.4.bb b/recipes/gcc/gcc_4.4.4.bb
-index 271e9d1..6aeac2f 100644
---- a/recipes/gcc/gcc_4.4.4.bb
-+++ b/recipes/gcc/gcc_4.4.4.bb
-@@ -8,6 +8,6 @@ FILES_${PN} += "\
-         ${gcclibdir}/${TARGET_SYS}/*/*.o \
- "
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
-diff --git a/recipes/gcc/gcc_4.5.bb b/recipes/gcc/gcc_4.5.bb
-index ad71ada..bc59b14 100644
---- a/recipes/gcc/gcc_4.5.bb
-+++ b/recipes/gcc/gcc_4.5.bb
-@@ -10,6 +10,6 @@ FILES_${PN} += "\
- 	${libexecdir}/gcc/${TARGET_SYS}/${BINV}/lto-wrapper \
- "
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
-diff --git a/recipes/gcc/gcc_svn.bb b/recipes/gcc/gcc_svn.bb
-index 9b69a23..0332174 100644
---- a/recipes/gcc/gcc_svn.bb
-+++ b/recipes/gcc/gcc_svn.bb
-@@ -8,6 +8,6 @@ FILES_${PN} += "\
-         ${gcclibdir}/${TARGET_SYS}/*/*.o \
- "
- 
--SRC_URI_append = "file://fortran-cross-compile-hack.patch"
-+SRC_URI += "file://fortran-cross-compile-hack.patch"
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
+     if not cmd:
+         return
 -- 
 1.7.2.3
 
