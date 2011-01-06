@@ -1,32 +1,21 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Pav1a-0006lJ-3e
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Jan 2011 19:57:26 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 6FD1E27C403;
-	Thu,  6 Jan 2011 19:57:02 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Received: from 192.168.32.8 ([192.168.32.8]) by exchange.intern.dresearch.de
-	([192.168.32.16]) with Microsoft Exchange Server HTTP-DAV ;
-	Thu,  6 Jan 2011 18:57:02 +0000
+Received: from mx194.callplus.net.nz ([202.180.66.194]
+	helo=mxi2.callplus.net.nz) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <roystonvasey@slingshot.co.nz>) id 1PaweY-0006Ms-3X
+	for Openembedded-devel@lists.openembedded.org;
+	Thu, 06 Jan 2011 21:41:46 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApwFADK3JU3LYgoS/2dsb2JhbACCKZNnjwK9dQ2FPwSQMA
+Received: from smtp.connexionz.co.nz (HELO mikepad) ([203.98.10.18])
+	by ismtp02.callplus.net.nz with ESMTP; 07 Jan 2011 09:40:13 +1300
+From: "R U Local" <roystonvasey@slingshot.co.nz>
+To: <Openembedded-devel@lists.openembedded.org>
+Date: Fri, 7 Jan 2011 09:40:11 +1300
+Message-ID: <00a001cbade1$ea44dee0$bece9ca0$@slingshot.co.nz>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; de;
-	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
-	Thunderbird/3.0.11
-Date: Thu, 6 Jan 2011 19:57:00 +0100
-Message-ID: <DB561678F08F554EB0D9F21B70E268A505AF6C@exchange.intern.dresearch.de>
-In-Reply-To: <4D2385FB.7030706@opensimpad.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Wiki spam
-Thread-Index: Acut04EUe5tH8pY3RMifNO7AVZl+Og==
-References: <87lj3ge0yd.fsf@gmail.com>	<AANLkTimdpd-se=XR1N_E92UuNN3Ci0Tr6WJRLkDxV2=E@mail.gmail.com>	<AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>	<4D2339D3.1000901@dresearch.de>
-	<4D2385FB.7030706@opensimpad.org>
-From: "Sledz, Steffen" <sledz@dresearch.de>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Wiki spam
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: Acut4em3h8hh8lSiRTWhh8HpwuugOg==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Mono recipe fails at do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,31 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2011 18:57:26 -0000
+X-List-Received-Date: Thu, 06 Jan 2011 20:41:46 -0000
+Content-Language: en-nz
 Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-class: urn:content-classes:message
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Am 04.01.2011 21:41, schrieb Bernhard Guillon:
-> What about a SpamBlacklist [1] with a regex to everything and a
-> SpamWhitelist for OpenEmbedded related links? This will not need any
-> captchas and do not help google. For adding a new item to the =
-whitelist
-> a request to the mailing list is necessary.
+Dear List, 
+I'm working on the Overo branch and just done a git pull to rebuild my
+platform. 
+My previous head was 58feb7f form 2010-11-10. 
+I'm getting an error in the Mono package build for task do_install. 
+The mono-native and mono-mcs-intermediate parts build fine. 
+There have been no changes to the mono source or the recipe during this
+time. 
 
-SpamBlacklist is up and running now.
+Has there been any changes to the way OE  is structured between these
+commits that I should take a look at? 
 
-But currently =
-<http://wiki.openembedded.org/index.php/MediaWiki:Spam-blacklist> is =
-used.
+Any help or suggestions would be appreciated. 
 
-Let's try this first. We can come back to your suggestion if it does not =
-work well enough.
+Cheers Mike. 
 
-Steffen
+ 
 
-PS@melo-admins: What about the policy to track all config changes with =
-git? A 'git status' in /etc shows a lot of 'Changed but not updated'. :(
+ 
+
+ 
 
 
