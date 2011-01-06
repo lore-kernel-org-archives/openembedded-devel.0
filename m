@@ -1,21 +1,35 @@
-Received: from mx194.callplus.net.nz ([202.180.66.194]
-	helo=mxi2.callplus.net.nz) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roystonvasey@slingshot.co.nz>) id 1PaweY-0006Ms-3X
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 06 Jan 2011 21:41:46 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApwFADK3JU3LYgoS/2dsb2JhbACCKZNnjwK9dQ2FPwSQMA
-Received: from smtp.connexionz.co.nz (HELO mikepad) ([203.98.10.18])
-	by ismtp02.callplus.net.nz with ESMTP; 07 Jan 2011 09:40:13 +1300
-From: "R U Local" <roystonvasey@slingshot.co.nz>
-To: <Openembedded-devel@lists.openembedded.org>
-Date: Fri, 7 Jan 2011 09:40:11 +1300
-Message-ID: <00a001cbade1$ea44dee0$bece9ca0$@slingshot.co.nz>
-MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: Acut4em3h8hh8lSiRTWhh8HpwuugOg==
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Mono recipe fails at do_install
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pawoq-0000af-NY
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Jan 2011 21:52:24 +0100
+Received: by ewy28 with SMTP id 28so4178546ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Jan 2011 12:52:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=pwVHpd/p+7t4WxvLhc3fOzOMrSowwJMiJVLP5fZK7js=;
+	b=K/8YMn+1buZCnoApMDSuykHG7GKvok4RN71ms6taIAOIOHkIExjFtvDFdx1Ix/RP3k
+	k6w421ljn6cmCY/FJBpU6it5J1XRAoyh+gvPryDVadPF5rWX/V9hLsd4p794axf3I/Cj
+	0Qjnrft7N2ZRhPh31U00etdxfDyTcjGkhMqQo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=VGcdPM7uYNdrKgP9b2KLe0X3MT8+AvFTHXoZ8kVHu6XrCd4XeJZI6i/6Hfi7gIree5
+	l3Jjw6S5TNODrN4bwBCsPHTncx2Eba0oCigzRUiOS7KET+1KDn6s32C0/UdsVGI9UO2S
+	xEwzibHpmhTNRkaTgEho9QIt7w3SHMAQTOnIU=
+Received: by 10.213.19.137 with SMTP id a9mr681086ebb.68.1294347121406;
+	Thu, 06 Jan 2011 12:52:01 -0800 (PST)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id b52sm1616494eei.7.2011.01.06.12.52.00
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 06 Jan 2011 12:52:00 -0800 (PST)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  6 Jan 2011 21:51:54 +0100
+Message-Id: <1294347114-8645-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] kirkwood: move preferred kernel provider to linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,32 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2011 20:41:46 -0000
-Content-Language: en-nz
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 06 Jan 2011 20:52:24 -0000
 
-Dear List, 
-I'm working on the Overo branch and just done a git pull to rebuild my
-platform. 
-My previous head was 58feb7f form 2010-11-10. 
-I'm getting an error in the Mono package build for task do_install. 
-The mono-native and mono-mcs-intermediate parts build fine. 
-There have been no changes to the mono source or the recipe during this
-time. 
+preferred kernel provider used to be linux-kirkwood, but
+that has not been updated for almost a year and seems dead
 
-Has there been any changes to the way OE  is structured between these
-commits that I should take a look at? 
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
 
-Any help or suggestions would be appreciated. 
+I am not too sure if there are much other kirkwood users.
+If you are one, please verify if the linux recipe works for you too.
+If I get no objections I will push this in two weeks time (around jan 20)
 
-Cheers Mike. 
+Frans
 
+ conf/machine/include/kirkwood.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/conf/machine/include/kirkwood.inc b/conf/machine/include/kirkwood.inc
+index 6325403..d1619cb 100644
+--- a/conf/machine/include/kirkwood.inc
++++ b/conf/machine/include/kirkwood.inc
+@@ -9,9 +9,9 @@ MACHINE_TASK_PROVIDER 		= "task-base"
+ USE_DEVFS = "0"
  
-
+ PREFERRED_PROVIDER_virtual/bootloader = ""
+-PREFERRED_PROVIDER_virtual/kernel = "linux-kirkwood"
++PREFERRED_PROVIDER_virtual/kernel = "linux"
  
-
+-MACHINE_KERNEL_PR = "r18"
++MACHINE_KERNEL_PR = "r19"
  
+ IMAGE_FSTYPES += "tar.gz ubi"
+ SERIAL_CONSOLE = "ttyS0 115200"
+-- 
+1.7.1
+
 
 
