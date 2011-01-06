@@ -1,34 +1,32 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@rkmorris.us>) id 1Pat3e-0002DV-9B
+	(envelope-from <sledz@dresearch.de>) id 1Pav1a-0006lJ-3e
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Jan 2011 17:51:26 +0100
-Received: from server ([unknown] [71.164.183.134]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LEM005SI1GAU970@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	06 Jan 2011 10:50:42 -0600 (CST)
-Received: from server (127.0.0.1) by server (Axigen)
-	with ESMTPSA id 1918E0; Thu, 06 Jan 2011 10:50:31 -0600
-Received: from [192.168.1.12] by rkmorris.us with HTTP; Thu,
-	06 Jan 2011 10:50:28 -0600
-From: Russell Morris <openembedded@rkmorris.us>
-Date: Thu, 06 Jan 2011 10:50:28 -0600
-X-Mailer: Axigen WebMail
-To: Vasily Khoruzhick <anarsoul@gmail.com>
-Message-id: <1294332628528842500@rkmorris.us>
-In-reply-to: <201101061832.25160.anarsoul@gmail.com>
-References: <1294253374472299500@rkmorris.us>
-	<201101061721.30643.anarsoul@gmail.com>
-	<1294330448552193500@rkmorris.us>
-	<201101061832.25160.anarsoul@gmail.com>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 5
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: H1940 Boot Issues -> Executable Build Problems?
+	Thu, 06 Jan 2011 19:57:26 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 6FD1E27C403;
+	Thu,  6 Jan 2011 19:57:02 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Received: from 192.168.32.8 ([192.168.32.8]) by exchange.intern.dresearch.de
+	([192.168.32.16]) with Microsoft Exchange Server HTTP-DAV ;
+	Thu,  6 Jan 2011 18:57:02 +0000
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; de;
+	rv:1.9.1.16) Gecko/20101125 SUSE/3.0.11 Lightning/1.0b1
+	Thunderbird/3.0.11
+Date: Thu, 6 Jan 2011 19:57:00 +0100
+Message-ID: <DB561678F08F554EB0D9F21B70E268A505AF6C@exchange.intern.dresearch.de>
+In-Reply-To: <4D2385FB.7030706@opensimpad.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Wiki spam
+Thread-Index: Acut04EUe5tH8pY3RMifNO7AVZl+Og==
+References: <87lj3ge0yd.fsf@gmail.com>	<AANLkTimdpd-se=XR1N_E92UuNN3Ci0Tr6WJRLkDxV2=E@mail.gmail.com>	<AANLkTimEnDhJaWu4VMPExRMbTXTmdfo_m5PmZ5_yY-zh@mail.gmail.com>	<4D2339D3.1000901@dresearch.de>
+	<4D2385FB.7030706@opensimpad.org>
+From: "Sledz, Steffen" <sledz@dresearch.de>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: Wiki spam
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,74 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2011 16:51:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 06 Jan 2011 18:57:26 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Content-class: urn:content-classes:message
 
-Hi,
+Am 04.01.2011 21:41, schrieb Bernhard Guillon:
+> What about a SpamBlacklist [1] with a regex to everything and a
+> SpamWhitelist for OpenEmbedded related links? This will not need any
+> captchas and do not help google. For adding a new item to the =
+whitelist
+> a request to the mailing list is necessary.
 
-=20
+SpamBlacklist is up and running now.
 
-Well, let me try this. The only real difference that I see is the distro -=
- agreed? I'll give that a shot though!
+But currently =
+<http://wiki.openembedded.org/index.php/MediaWiki:Spam-blacklist> is =
+used.
 
-=20
+Let's try this first. We can come back to your suggestion if it does not =
+work well enough.
 
-The kernel I used is from OE (targeting the h1940).=20
+Steffen
 
-=20
-
-Thanks,
-
-... Russell
-
-=20
-
-=20
-
-PS: Sorry, not sure what the mailer is doing ... :-(.
+PS@melo-admins: What about the policy to track all config changes with =
+git? A 'git status' in /etc shows a lot of 'Changed but not updated'. :(
 
 
-On Thu, Jan 6, 2011 10:32  AM, Vasily Khoruzhick <anarsoul@gmail.com> wrot=
-e:
-
-
->=20
-On Thursday 06 January 2011 18:14:08 Russell Morris wrote:
-> > Hi Vasily,
-> >=20
-> > Absolutely! I'm very glad to hear that you have it working on an h1940=
-. I
-> > think I'm likely the problem ... :-(.
-> >=20
-> > The file is attached. Do you have any suggestions? If you don't mind, =
-could
-> > you share your local.conf file for me to try also?
-> >=20
-> > Thanks!!!
->=20
-> Here it is, however it's not for minimal distro, and machine is rx1950 (=
-seems=20
-> I lost one for rx1950, but I'm sure that it differs only in machine name=
-)
->=20
-> What kernel do you use on your h1940? One built via OE?
->=20
-> Regards
-> Vasily
->=20
-> P.S. Your mailer inserts too much empty lines in message, could you fix =
-it=20
-> somehow please? :)
->
-From anarsoul@gmail.com Thu Jan 06 19:42:03 2011
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anarsoul@gmail.com>) id 1Paumh-0006Xm-1J
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Jan 2011 19:42:03 +0100
-Received: by eya28 with SMTP id 28so7301262eya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Jan 2011 10:41:38 -0800 (PST)
-DKIM-Signature: v
