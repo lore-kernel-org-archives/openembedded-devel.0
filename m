@@ -1,35 +1,27 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pam6a-0001sK-2L
+	(envelope-from <obi@opendreambox.org>) id 1PapH3-00055R-81
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Jan 2011 10:26:00 +0100
-Received: by iwn8 with SMTP id 8so16513199iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Jan 2011 01:25:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=7JvbuWF6bw3L0VgNvaqkyNulgKVK9YfNaw7AMMAFhVU=;
-	b=SJ+grs/YeMZ4LwL495eTEaQbYg+sbo/vPhwsiStr1pHGwKMfPiH2bMA8RPPY0RbMpa
-	zfdXCeMd1RzdNADY+wh2w63jthC8aHP8fKrLtV31H1LTLlWnANZRNfberIoKJj+8EN64
-	t3PRSn6wEQ/0meE9Kezh/sCb6h9gfAdn2jlvw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=sg6xxS9/bp+R1uZkqVYJfLw6l6t7xSeAl5lecPpIhoj5CJ9ADQqtJdbyTkW8g1uXvm
-	8nAWvWWEvymbKtPjMpljQpV4hb+yA6XELk1KArzXkyNslEmLiAPCIDere2LRa6wHik7Y
-	pWe6aJ7PMdorTXqHGYbAVa0AIUqrowV/T65V4=
-MIME-Version: 1.0
-Received: by 10.231.199.77 with SMTP id er13mr8214149ibb.44.1294305935258;
-	Thu, 06 Jan 2011 01:25:35 -0800 (PST)
-Received: by 10.231.38.11 with HTTP; Thu, 6 Jan 2011 01:25:35 -0800 (PST)
-In-Reply-To: <4D257C14.8030108@gmx.net>
-References: <4D257C14.8030108@gmx.net>
-Date: Thu, 6 Jan 2011 10:25:35 +0100
-Message-ID: <AANLkTi=srvASG3bYJw1VhQsSrHsh=rM007sLpmjND5vE@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 06 Jan 2011 13:49:01 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 908F4314C8B5;
+	Thu,  6 Jan 2011 13:48:38 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id f2lCMzpTzIgg; Thu,  6 Jan 2011 13:48:31 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id 7D522314BE42;
+	Thu,  6 Jan 2011 13:48:30 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Thu, 06 Jan 2011 12:48:30 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: FOSDEM stand organization thread
+Date: Thu,  6 Jan 2011 12:48:27 +0000
+Message-Id: <1294318110-23521-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH 1/4] python-wifi: add recipe for version 0.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,72 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2011 09:26:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 06 Jan 2011 12:49:01 -0000
 
-2011/1/6 Robert Schuster <thebohemian@gmx.net>:
-> Hi,
-> I intend to use this posts' thread for organizing the OpenEmbedded stand
-> for FOSDEM 2011. The event takes place on the weekend of the 5th and 6th
-> February.
+* package previously unpackaged files into -doc and -examples
 
-Thanks for taking this up~
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+CC: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes/python/python-wifi_0.5.0.bb |   25 +++++++++++++++++++++++++
+ 1 files changed, 25 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/python/python-wifi_0.5.0.bb
 
->
-> I hijacked the FOSDEM 2011 OE-Wiki page[0] and added the necessary bits
-> to allow people signing up for the manning stand etc. If you can help
-> please add your name to any of the suggested lists.
+diff --git a/recipes/python/python-wifi_0.5.0.bb b/recipes/python/python-wifi_0.5.0.bb
+new file mode 100644
+index 0000000..faa3b43
+--- /dev/null
++++ b/recipes/python/python-wifi_0.5.0.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Provides access to Linux Wireless Extensions"
++HOMEPAGE = "http://pythonwifi.wikispot.org/"
++SECTION = "devel/python"
++LICENSE = "LGPLv2+"
++LICENSE_${PN}-examples = "GPLv2+"
++RDEPENDS_${PN} = "python-ctypes python-datetime"
++
++SRC_URI = "http://download.berlios.de/pythonwifi/${P}.tar.bz2"
++SRC_URI[md5sum] = "8fe7fd0a4edce1f9bedaff4acb7fd500"
++SRC_URI[sha256sum] = "3e3f645d37ab20450f60c785cec5f21b330f28a6c46c7c1b0898305dd7a34b26"
++
++inherit setuptools
++
++do_install_append() {
++        install -d ${D}${docdir}/${PN}
++        mv ${D}${datadir}/README ${D}${docdir}/${PN}
++        mv ${D}${datadir}/INSTALL ${D}${docdir}/${PN}
++        mv ${D}${datadir}/docs/* ${D}${docdir}/${PN}
++        install -d ${D}${sbindir}
++        mv ${D}${datadir}/examples/* ${D}${sbindir}
++}
++
++PACKAGES =+ "${PN}-examples"
++
++FILES_${PN}-examples = "${sbindir}"
+-- 
+1.7.2.3
 
-I don't consider the wiki page as hijacked.
-Using the page for getting things organized etc etc is imho perfectly
-within the scope of the page.
-And it is a wiki so everyone is able to contribute.
-
-I merely created the page as a copy of the 2010 page (editing out the
-2010 specific bits).
-This was needed as I asked ka6sox to update the news section and the
-news section contains a link to the page.
-
->
-> Furthermore this thread is supposed to serve all remaining questions
-> regarding OE's FOSDEM 2011 participation.
->
-> First question by me? Do we still have printed OE flyers and the posters
-> around? If so, who has them and is this person attending? (If not I
-> suggest sending them to me or giving them to someone who goes to FOSDEM).
-
-I suspect the posters are with Florian.
-If they are not available any more I *might* be able to get them reprinted.
-In that case I probably *do* need some help from Leon (who printed the
-previous set iirc) and I *do* need the sources.
-
-> Note: Remember to book your tickets soon. The event is due in 4 weeks!
-
-Tickets? for Fosdem? Ah you mean airline tickets.
-I'll be traveling by car. Only 1 - 1.5 hr drive :-)
-
-(and happy to take carpoolers from my area (SW of Eindhoven) or
-carpool with someone else passing by on the A67 (I live between
-Eindhoven and Antwerp).
-
-I can also bring some stuff, but probably nothing extremely exciting.
-I have: eeepc/sheevaplug/openrd-client/beagleboard/beagleboard-xm/hawkboard,
-as well as media renderer devices)
-If I need to bring something, let me know.
-
-Frans
->
-> Regards,
-> Robert
->
-> [0] - http://wiki.openembedded.org/index.php/Fosdem_2011
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
 
 
