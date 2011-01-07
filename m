@@ -1,37 +1,38 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PbKc2-0008Hy-TI
+	(envelope-from <raj.khem@gmail.com>) id 1PbKck-0008K5-Mh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 23:16:47 +0100
-Received: by mail-yx0-f175.google.com with SMTP id 5so7280261yxd.6
+	Fri, 07 Jan 2011 23:17:30 +0100
+Received: by gwaa12 with SMTP id a12so4822205gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 14:16:22 -0800 (PST)
+	Fri, 07 Jan 2011 14:17:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=A2F3LhhwKpZay3RoHpIbszCiPvd3kT93CYx9PY70NBA=;
-	b=BUJZWiV5LQgh/eFTxHlqSHUyaXeSf9VuprHpDxrcn+ytKwezRlYVw+0B5plvT71sGB
-	Kgfvq/ni6crcvHrsXIM64X9ea0svxli+4iM5B/yo3Oed+gnCyyTpdyC8pZT7bVA1FREo
-	e4b5eHtMVIx8YhvLFRuuc+BwAyi7C50TItRHw=
+	bh=buepSOeqSn39hmEmMnMOq6kf33hPdH2lbFCN3OJrjD0=;
+	b=X8jxuexP2z+F5DD35fj0Grk114/5R3jtfdloKHcW9qyvWWkgMqXp2i3eoMAOAhQG9q
+	1ixVGouyQR9bGP4BZmboMCV5SvTtmO+RK34QzLBeqxZb5jbPXVQ89y1o8HaxA4iCfmrl
+	hH6QZBMB3vcvAZ39c1bV0begb7QAzG3agYGzE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=J9hm6wJkaBrBOGm4ysfXrLUh1r2FY68Ru1EVW9UrUfaSNxdvQ9w33atZRJ/iMGj65c
-	941vfLde4NNFlWovMCSe2JOABKK4XvgTqrdrNmSC9EOUo1LGh2vqt1+wmSEE6LstThSJ
-	lJIFjt7sLciEsHOB2Z/xd9Q4lJE6jWagLBwmM=
-Received: by 10.90.104.20 with SMTP id b20mr3847173agc.193.1294438582450; Fri,
-	07 Jan 2011 14:16:22 -0800 (PST)
+	b=T3klucXnzw20IDiSITUaa/pKKERMVtFVCFC+Mbdmw5oCvuBmkOukeb0ivWHW0f71MJ
+	nmmCa/ygHmB2oIT7qMMYJgp9b56oi2SNdTFex24fUF9sUlO+DEDZzrMjp0hTTeVzAWGf
+	oq2ZGAf164l88OHXeJnMRZGi5TsRfFM3u0L/k=
+Received: by 10.91.163.27 with SMTP id q27mr3885511ago.139.1294438623574; Fri,
+	07 Jan 2011 14:17:03 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Fri, 7 Jan 2011 14:16:02 -0800 (PST)
-In-Reply-To: <1294436836-28074-2-git-send-email-eric@eukrea.com>
+Received: by 10.90.86.4 with HTTP; Fri, 7 Jan 2011 14:16:42 -0800 (PST)
+In-Reply-To: <1294436836-28074-3-git-send-email-eric@eukrea.com>
 References: <1294436836-28074-1-git-send-email-eric@eukrea.com>
 	<1294436836-28074-2-git-send-email-eric@eukrea.com>
+	<1294436836-28074-3-git-send-email-eric@eukrea.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Jan 2011 14:16:02 -0800
-Message-ID: <AANLkTimo=EFRJO_zdjcJG1O6hgm=KUunDg8YdXSDv52=@mail.gmail.com>
+Date: Fri, 7 Jan 2011 14:16:42 -0800
+Message-ID: <AANLkTi=31BuBptiBpykDUK1awzQP3jThQDikvtx3myfP@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/3] dosfstools: update to latest 3.0.11
+Subject: Re: [PATCH 3/3] i2c-tools: update to latest 3.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,111 +46,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 22:16:47 -0000
+X-List-Received-Date: Fri, 07 Jan 2011 22:17:31 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On Fri, Jan 7, 2011 at 1:47 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> 3.0.10 :
-> bugfix in LFN handling, fixes false positives with bad filenames
-> 3.0.11 :
-> bugfix for s390x, better error message ifdevices can't be opened
+> from CHANGES :
+> =C2=A0Makefile: Let the environment set CC and CFLAGS
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Integrate py-smbus into the buil=
+d system
+> =C2=A0README: Point users to the linux-i2c mailing list
+> =C2=A0decode-dimms: Handle CRC of FB-DIMM and DDR3 SDRAM memory modules
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Add support for DD=
+R3 SDRAM
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Fix decoding of SD=
+R SDRAM bytes 12-14
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Add side-by-side f=
+ormatting option
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Add merged cells f=
+ormatting option
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Try harder to deco=
+de the manufacturing date
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Handle read errors=
+ on sysfs
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Decode voltage int=
+erface level of DDR SDRAM
+> =C2=A0decode-xeon: Delete
+> =C2=A0eepromer: Fix array initialization overrun
+> =C2=A0i2cdetect: Drop legacy reference to ISA bus
+> =C2=A0i2cset: Add support for short writes with PEC
+> =C2=A0i2c-stub-from-dump: Use udev settle to speed up initialization
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0Unload i2c-stub automatically if needed
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0Add support for multiple dumps
+> =C2=A0tools: Properly handle /dev/i2c not being a directory
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 Increase limit on I2C bus number
 >
 > Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
 
+Acked-by: Khem Raj <raj.khem@gmail.com>
 > ---
-> =C2=A0recipes/dosfstools/dosfstools_3.0.11.bb | =C2=A0 28 +++++++++++++++=
-+++++++++++++
-> =C2=A0recipes/dosfstools/dosfstools_3.0.9.bb =C2=A0| =C2=A0 28 ----------=
-------------------
-> =C2=A02 files changed, 28 insertions(+), 28 deletions(-)
-> =C2=A0create mode 100644 recipes/dosfstools/dosfstools_3.0.11.bb
-> =C2=A0delete mode 100644 recipes/dosfstools/dosfstools_3.0.9.bb
+> =C2=A0recipes/i2c-tools/i2c-tools_3.0.2.bb | =C2=A0 27 ------------------=
+---------
+> =C2=A0recipes/i2c-tools/i2c-tools_3.0.3.bb | =C2=A0 26 ++++++++++++++++++=
+++++++++
+> =C2=A02 files changed, 26 insertions(+), 27 deletions(-)
+> =C2=A0delete mode 100644 recipes/i2c-tools/i2c-tools_3.0.2.bb
+> =C2=A0create mode 100644 recipes/i2c-tools/i2c-tools_3.0.3.bb
 >
-> diff --git a/recipes/dosfstools/dosfstools_3.0.11.bb b/recipes/dosfstools=
-/dosfstools_3.0.11.bb
-> new file mode 100644
-> index 0000000..1717157
-> --- /dev/null
-> +++ b/recipes/dosfstools/dosfstools_3.0.11.bb
-> @@ -0,0 +1,28 @@
-> +# dosfstools OE build file
-> +# Copyright (C) 2004-2006, Advanced Micro Devices, Inc. =C2=A0All Rights=
- Reserved
-> +# Released under the MIT license (see packages/COPYING)
-> +
-> +DESCRIPTION =3D "DOS FAT Filesystem Utilities"
-> +
-> +SECTION =3D "base"
-> +PRIORITY =3D "optional"
-> +LICENSE =3D "GPLv3"
-> +
-> +DEFAULT_PREFERENCE =3D "-1"
-> +
-> +PR =3D "r1"
-> +
-> +SRC_URI =3D "http://www.daniel-baumann.ch/software/dosfstools/dosfstools=
--${PV}.tar.bz2 \
-> + =C2=A0 =C2=A0 =C2=A0 "
-> +# output of getconf LFS_CFLAGS
-> +#
-> +CFLAGS_append =3D ' -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64'
-> +CFLAGS_append_libc-uclibc =3D ' ${@base_contains("DISTRO_FEATURES", "lar=
-gefile", "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64", "", d)}'
-> +
-> +do_install () {
-> + =C2=A0 =C2=A0 =C2=A0 oe_runmake "PREFIX=3D${D}" "SBINDIR=3D${D}${sbindi=
-r}" \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"MANDIR=
-=3D${D}${mandir}/man8" install
-> +}
-> +
-> +SRC_URI[md5sum] =3D "8d2211d5bd813164e20740e7c852aa06"
-> +SRC_URI[sha256sum] =3D "94b27a0f53f4aa86b0c049eb26df7a681ec6c31bc352c57d=
-3ac53881bcfcd9a8"
-> diff --git a/recipes/dosfstools/dosfstools_3.0.9.bb b/recipes/dosfstools/=
-dosfstools_3.0.9.bb
+> diff --git a/recipes/i2c-tools/i2c-tools_3.0.2.bb b/recipes/i2c-tools/i2c=
+-tools_3.0.2.bb
 > deleted file mode 100644
-> index 676c751..0000000
-> --- a/recipes/dosfstools/dosfstools_3.0.9.bb
+> index 44559ef..0000000
+> --- a/recipes/i2c-tools/i2c-tools_3.0.2.bb
 > +++ /dev/null
-> @@ -1,28 +0,0 @@
-> -# dosfstools OE build file
-> -# Copyright (C) 2004-2006, Advanced Micro Devices, Inc. =C2=A0All Rights=
- Reserved
-> -# Released under the MIT license (see packages/COPYING)
-> -
-> -DESCRIPTION =3D "DOS FAT Filesystem Utilities"
-> -
+> @@ -1,27 +0,0 @@
+> -DESCRIPTION =3D "Set of i2c tools for linux"
 > -SECTION =3D "base"
-> -PRIORITY =3D "optional"
-> -LICENSE =3D "GPLv3"
+> -LICENSE =3D "GPLv2"
 > -
-> -DEFAULT_PREFERENCE =3D "-1"
+> -PR =3D "r5"
 > -
-> -PR =3D "r1"
+> -SRC_URI =3D "http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${PV}=
+.tar.bz2 \
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://Module.mk \
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"
 > -
-> -SRC_URI =3D "http://www.daniel-baumann.ch/software/dosfstools/dosfstools=
--${PV}.tar.bz2 \
-> - =C2=A0 =C2=A0 =C2=A0 "
-> -# output of getconf LFS_CFLAGS
-> -#
-> -CFLAGS_append =3D ' -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64'
-> -CFLAGS_append_libc-uclibc =3D ' ${@base_contains("DISTRO_FEATURES", "lar=
-gefile", "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64", "", d)}'
+> -inherit autotools
 > -
-> -do_install () {
-> - =C2=A0 =C2=A0 =C2=A0 oe_runmake "PREFIX=3D${D}" "SBINDIR=3D${D}${sbindi=
-r}" \
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"MANDIR=
-=3D${D}${mandir}/man8" install
+> -do_compile_prepend() {
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0cp ${WORKDIR}/Module.mk ${S}/eepromer/
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i 's#/usr/local#/usr#' Makefile
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i 's#CC\t:=3D gcc#CC\t:=3D ${CC}#' Make=
+file
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0echo "include eepromer/Module.mk" >> Makefil=
+e
 > -}
 > -
-> -SRC_URI[md5sum] =3D "7f159ec44d3b9c502904bab0236050e4"
-> -SRC_URI[sha256sum] =3D "3f63676faeac507e909d84c8920ddb6597da1eb688577c2f=
-c9c756b821d0458f"
+> -do_install_append() {
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${includedir}/linux
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0644 include/linux/i2c-dev.h ${D}=
+${includedir}/linux/i2c-dev-user.h
+> - =C2=A0 =C2=A0 =C2=A0 rm -f ${D}${includedir}/linux/i2c-dev.h
+> -}
+> -
+> -SRC_URI[md5sum] =3D "b546345ac19db56719dea6b8199f11e0"
+> -SRC_URI[sha256sum] =3D "0b4d6455a30a3264a60b4d3be55855d996d52ea4f162a2f0=
+4ffff378e24f98a2"
+> diff --git a/recipes/i2c-tools/i2c-tools_3.0.3.bb b/recipes/i2c-tools/i2c=
+-tools_3.0.3.bb
+> new file mode 100644
+> index 0000000..7d6d668
+> --- /dev/null
+> +++ b/recipes/i2c-tools/i2c-tools_3.0.3.bb
+> @@ -0,0 +1,26 @@
+> +DESCRIPTION =3D "Set of i2c tools for linux"
+> +SECTION =3D "base"
+> +LICENSE =3D "GPLv2"
+> +
+> +PR =3D "r0"
+> +
+> +SRC_URI =3D "http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${PV}=
+.tar.bz2 \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://Module.mk \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"
+> +
+> +inherit autotools
+> +
+> +do_compile_prepend() {
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0cp ${WORKDIR}/Module.mk ${S}/eepromer/
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i 's#/usr/local#/usr#' Makefile
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0echo "include eepromer/Module.mk" >> Makefil=
+e
+> +}
+> +
+> +do_install_append() {
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${includedir}/linux
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0644 include/linux/i2c-dev.h ${D}=
+${includedir}/linux/i2c-dev-user.h
+> + =C2=A0 =C2=A0 =C2=A0 rm -f ${D}${includedir}/linux/i2c-dev.h
+> +}
+> +
+> +SRC_URI[md5sum] =3D "511376eed04455cdb277ef19c5f73bb4"
+> +SRC_URI[sha256sum] =3D "23b28e474741834e3f1b35b0686528769a13adc92d2ff560=
+3cbda1d6bd5e5629"
 > --
 > 1.6.3.3
 >
