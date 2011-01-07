@@ -1,40 +1,34 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PbI14-0008HN-Sj
+	(envelope-from <vjaquez@igalia.com>) id 1PbJLG-0001Ce-Sn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 20:30:27 +0100
-Received: by yie16 with SMTP id 16so4861563yie.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 11:30:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=X6qvLB+sPSYdS8aE6qvkk7bWBSlUYhEpIi7sZqs3Fh0=;
-	b=ll0rkvvSwwAgZVVRetiycIE0VbdmqCByH1H9J4cIEuBa9QOD1B3vi5+KnW/192rH5l
-	iSMxFM52YvEcCt3ygokvcH5GdI6/Z0p7XNVcG0NF9ipGgZPved7u3ligeepoVJrFqbwT
-	4TlbYV8Z7D4fayhpi154XBarXN77WKLg5DF6c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=ns9p8JdEdBVmVgNC0ZN+wWXg1Y80C0WG31pHYCjpqU0cwRCNI9njABNXzdCBHeED4z
-	MlpJNZw9E7GBk4VtWdRz4y6eYcG/NIR/6gF0hyWodXwkBDHFGqFFZHk9gSJLh36i+X3u
-	Z9NeWjMMefCLK5TsRAlBNqHWzKtMLKTAzBT5I=
-Received: by 10.90.10.21 with SMTP id 21mr3688150agj.112.1294428600114; Fri,
-	07 Jan 2011 11:30:00 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Fri, 7 Jan 2011 11:29:39 -0800 (PST)
-In-Reply-To: <AANLkTi=SAg9i3VVH4Ac81ap0EtjXuMhs918uPyEsCknv@mail.gmail.com>
-References: <1294392497-24747-1-git-send-email-raj.khem@gmail.com>
-	<AANLkTi=UUDxkTNDoWBoOxaCPDyupG8BazYtt6nGs3-7E@mail.gmail.com>
-	<4D272079.5000402@opendreambox.org>
-	<AANLkTikTFe9ytvKcD1T=_L8GFiPo5bqBQ2o29McmzYU4@mail.gmail.com>
-	<AANLkTi=SAg9i3VVH4Ac81ap0EtjXuMhs918uPyEsCknv@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Jan 2011 11:29:39 -0800
-Message-ID: <AANLkTimTMhbbVskXqkdejGREQFhZe8aayNY8S2D_8L6C@mail.gmail.com>
+	Fri, 07 Jan 2011 21:55:22 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AgkFAOoMJ01bdWOb/2dsb2JhbACDd5IljwKtX40pgSGDN3QEiwmFKA
+X-IronPort-AV: E=Sophos;i="4.60,290,1291590000"; d="scan'208";a="715974567"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 07 Jan 2011 21:54:57 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1PbJKr-0001um-2w; Fri, 07 Jan 2011 21:54:57 +0100
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1PbJKq-000050-S8; Fri, 07 Jan 2011 21:54:56 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>)
+	id 1PbJKq-0000kC-C1; Fri, 07 Jan 2011 21:54:56 +0100
+From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
+	<vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] eglibc: Make it configurable by tuning eglibc options
+Date: Fri,  7 Jan 2011 21:54:55 +0100
+Message-Id: <1294433696-2824-1-git-send-email-vjaquez@igalia.com>
+X-Mailer: git-send-email 1.7.2.3
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@openembedded.org>, Michael Lauer <mickey@vanille-media.de>
+Subject: [PATCH] scons: add EXTRA_OESCONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 19:30:27 -0000
+X-List-Received-Date: Fri, 07 Jan 2011 20:55:23 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jan 7, 2011 at 10:15 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Fri, Jan 7, 2011 at 15:30, Khem Raj <raj.khem@gmail.com> wrote:
->>> Maybe it would be better to introduce EGLIBC_FEATURES and
->>> BUSYBOX_FEATURES, possibly presetting some values with options already
->>> present in DISTRO_FEATURES.
->>>
->>
->> I think it can get to many knobs and confusion in settings. With
->> system library any feature en|disable
->> is system =C2=A0wide so having it as a distro policy is right way to go =
-imo.
->
-> We can use DISTRO_EGLIBC_FEATURES or DISTRO_LIBC_FEATURES (so we can
-> add to uclibc support for it too). Spliting it from DISTRO_FEATURES
-> makes sense IMO since we'd use the same concept to recipes (as
-> busybox) that are ofthen customized.
+It's similar to EXTRA_OEMAKE, which appends arguments to the scons
+command
 
-so what would be difference between DISTRO_FEATURES and DISTRO_EGLIBC_FEATU=
-RES
-and what will be their relation
+Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
+---
+ classes/scons.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
->
-> --
-> Otavio Salvador=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0O.S. Systems
-> E-mail: otavio@ossystems.com.br=C2=A0 http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854=C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0http://projetos.ossystems.com.br
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/classes/scons.bbclass b/classes/scons.bbclass
+index 2a935e4..13243a0 100644
+--- a/classes/scons.bbclass
++++ b/classes/scons.bbclass
+@@ -11,7 +11,7 @@ scons_do_compile() {
+         fi
+     fi
+ 
+-    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX="${CXX}" PREFIX=${prefix} prefix=${prefix} || \
++    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX="${CXX}" PREFIX=${prefix} prefix=${prefix} ${EXTRA_OESCONS} || \
+     oefatal "scons build execution failed."
+ }
+ 
+-- 
+1.7.2.3
+
 
 
