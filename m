@@ -1,32 +1,36 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PbKed-0008UQ-PU
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PbKws-0000dI-4l
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 23:19:27 +0100
-Received: (qmail 25806 invoked by uid 503); 7 Jan 2011 21:51:09 -0000
-Received: from b9.ovh.net (HELO mail631.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 7 Jan 2011 21:51:08 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 8 Jan 2011 00:19:02 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 8 Jan 2011 00:19:01 +0200
-Message-ID: <4D279154.9000608@eukrea.com>
-Date: Fri, 07 Jan 2011 23:19:00 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Fri, 07 Jan 2011 23:38:18 +0100
+Received: by fxm17 with SMTP id 17so16647299fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Jan 2011 14:37:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:x-user-agent:mime-version
+	:content-type:content-transfer-encoding:subject:from:date:to
+	:message-id; bh=qM6+Z88uzwgGbw6AvjK//XmQfNfQuHnBStA4mMYUEjk=;
+	b=GZv61G2/G2MH0pDAzKfMg/nc25epseCEn/uR2waspsyuTl5MtC4jXddd5/eWWzQYIs
+	gvzvy8vV5nw4xJN/yPgl7H37yW7TKPkySKnPCPRLvS3EjfPNy4QXg6gGFafS0EzuyTW7
+	1FVMSO3jIVIMEF4S8nEedl55jeszsmbxVpil0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=x-user-agent:mime-version:content-type:content-transfer-encoding
+	:subject:from:date:to:message-id;
+	b=CRM25zo+jlz9ZH/A5taOrF8dFBelW5zU8MXJD7O/Atu2numhEVO54PH/8iwfyKgg+3
+	fGhMg7QUka/8X/LR0/A2jIqnBxMAIpFUFsroCkRVfb45CBbjc8iY6Klwz6W+HLFWE0ky
+	BvIzOmokJDClPSy5v0ry1gKMZorh830Nkw2j0=
+Received: by 10.223.112.79 with SMTP id v15mr145348fap.143.1294439871697;
+	Fri, 07 Jan 2011 14:37:51 -0800 (PST)
+Received: from [10.106.42.193] ([213.162.68.20])
+	by mx.google.com with ESMTPS id n26sm6296084fam.37.2011.01.07.14.37.47
+	(version=SSLv3 cipher=RC4-MD5); Fri, 07 Jan 2011 14:37:51 -0800 (PST)
+X-User-Agent: K-9 Mail for Android
 MIME-Version: 1.0
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+Date: Fri, 07 Jan 2011 23:38:22 +0100
 To: openembedded-devel@lists.openembedded.org
-References: <1294435710-2622-1-git-send-email-eric@eukrea.com>
-	<AANLkTi=4WsYzkEMbY+861QseH9XQGsr=3nN4p36ynko6@mail.gmail.com>
-In-Reply-To: <AANLkTi=4WsYzkEMbY+861QseH9XQGsr=3nN4p36ynko6@mail.gmail.com>
-X-Ovh-Tracer-Id: 10472276509026725193
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH] busybox-1.8.1 : add latest fixes
+Message-ID: <62eff391-99ba-49f7-b280-73656938bee7@email.android.com>
+Subject: Possibly mistyped PN references
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 22:19:27 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 07 Jan 2011 22:38:18 -0000
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-On 07/01/2011 23:15, Khem Raj wrote:
-> On Fri, Jan 7, 2011 at 1:28 PM, Eric Bénard<eric@eukrea.com>  wrote:
->> patches from : http://busybox.net/downloads/fixes-1.18.1/
->> * hush : fix wrong prompt problem on empty interactive commants
->> http://git.busybox.net/busybox/commit/?id=642e71a789156a96bcb18e6c5a0f52416c49d3b5
->> * mkswap : selinux build fix
->> http://git.busybox.net/busybox/commit/?id=e66a212081bcca521760ccff3a2da0deccd99340
->> * suppress "'fast_strtol_10' defined but not used" warning
->> http://git.busybox.net/busybox/commit/?id=f42c7b8fc161f5b3eb4e9c13f392daf7a11760c8
->>
->
->> Signed-off-by: Eric Bénard<eric@eukrea.com>
->
->
-> looks ok you have a typo in the commit message though
->
-it's the typo from the busybox's git commit that I copied ;-)
+Hi,
 
-Eric
+git grep "[^$]{PN}"
+Should IMHO turn up nothing, but it does.
+
+Hits come from recipe docs (ugh), hostap-modules-rawtx and iptables 20071127
+
+HTH,
 
 
