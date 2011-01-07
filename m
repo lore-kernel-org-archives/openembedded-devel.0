@@ -1,36 +1,39 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PbBbN-00086g-46
+	(envelope-from <otavio.salvador@gmail.com>) id 1PbCfk-0001rD-3Q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 13:39:29 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 57F4D314C9DF
+	Fri, 07 Jan 2011 14:48:04 +0100
+Received: by bwz10 with SMTP id 10so16614665bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Jan 2011 13:39:05 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id NVnBhcJ0GPdz
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Jan 2011 13:38:59 +0100 (CET)
-Received: from [172.22.22.61] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id B4C82314C89F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Jan 2011 13:38:59 +0100 (CET)
-Message-ID: <4D27096A.2050605@opendreambox.org>
-Date: Fri, 07 Jan 2011 13:39:06 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101210 Lightning/1.0b2 Thunderbird/3.1.7
+	Fri, 07 Jan 2011 05:47:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=dewh/+y1PDzGFi37Gk7WuJtp0Y3270Af6ZXldr4VSzw=;
+	b=hu1GnvRP7Z/3RFxDUztGc931LhqQ21ZJRqBGlk8Pe3xntRyGf9YtYomuAXIN7lTwDY
+	C9xD+d77HtZ4jp0UdO7KJu3LRh9r2Gco9534CkWA0zZa0SVm9wfITyu+lvog2f7wocQ9
+	lOKNL1gXub7JBV9/4qx9WdzP8W703xHPY9O2M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=iS3pMvshHH2ddDagXsHyeaA5w2CkSBzvIKvVVdl9jRXmVGWJTb4qLntc7wepC8CxPr
+	4R7w83UYzAz/0QEAC4gKgOR4vPrtW6l1A0TYLFGA+iMzfLcyojPrc9A6kStRIikNvEQI
+	A4kML2NxXichNyyAVX/PWVWY7oLW/BIYu3GDM=
 MIME-Version: 1.0
+Received: by 10.204.122.68 with SMTP id k4mr7845415bkr.153.1294408057689; Fri,
+	07 Jan 2011 05:47:37 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.59.147 with HTTP; Fri, 7 Jan 2011 05:47:37 -0800 (PST)
+In-Reply-To: <1294392497-24747-1-git-send-email-raj.khem@gmail.com>
+References: <1294392497-24747-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 7 Jan 2011 11:47:37 -0200
+X-Google-Sender-Auth: 8ToSzFgdlWVP5XJnxzBjI_2dTxI
+Message-ID: <AANLkTi=UUDxkTNDoWBoOxaCPDyupG8BazYtt6nGs3-7E@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <1294318110-23521-1-git-send-email-obi@opendreambox.org>	<1294318110-23521-4-git-send-email-obi@opendreambox.org>
-	<1294393961.3699.5.camel@mattotaupa>
-In-Reply-To: <1294393961.3699.5.camel@mattotaupa>
-Subject: Re: [PATCH 4/4] gcc: replace unconditional SRC_URI_append with SRC_URI +=
+Subject: Re: [PATCH] eglibc: Make it configurable by tuning eglibc options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,56 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 12:39:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Jan 2011 13:48:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On 01/07/2011 10:52 AM, Paul Menzel wrote:
-> Am Donnerstag, den 06.01.2011, 12:48 +0000 schrieb Andreas Oberritter:
->=20
-> What do you mean by =C2=BBunconditional SRC_URI_append=C2=AB? I searche=
-d through
-> the documentation and could not find the word.
+On Fri, Jan 7, 2011 at 07:28, Khem Raj <raj.khem@gmail.com> wrote:
+> * Look for disabled features in DISTRO_FEATURES and disable them while bu=
+ilding eglibc
+> * By default all features are built
+> * One can disable a feature by specifying DISTRO_FEATURES +=3D "noinet6 n=
+obsd ...." e.g.
 
-Unconditional, because it doesn't contain an override like e.g.
-SRC_URI_append_beagleboard does.
+Awesome.
 
-> I always thought
-> `SRC_URI_append =3D` and `SRC_URI +=3D` is the same and if I am not mis=
-taken
-> the manual says the same [1].
->=20
-> Do I understand your patch correctly, that when `_append` was used in
-> the recipe in some places, the space was missing and that you chose to
-> replace it by `+=3D` for consistency?
+Do you think we could do something similar to busybox to avoid having
+many defconfigs?
 
-Yes. I think that +=3D is easier to use and less error-prone.
-
-- As Koen already pointed out, it adds whitespace automatically, so in
-whitespace separated lists like SRC_URI you don't have to care.
-
-- You can use multiple statements in a recipe.
-
-SRC_URI +=3D "foo"
-SRC_URI +=3D "bar"
-
-vs.
-
-SRC_URI_append =3D " foo"
-SRC_URI_append =3D " bar"
-
-The latter wouldn't work.
-
-In the case of gcc, I modified SRC_URI in some inc file resulting in
-"... file://my.patchfile://fortran-cross-compile-hack.patch ...".
-
-> [1] http://docs.openembedded.org/usermanual/usermanual.html#recipes_syn=
-tax
-
-SRC_URI_append =3D "file://fixup.patch" is probably a bad example.
-
-Regards,
-Andreas
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
