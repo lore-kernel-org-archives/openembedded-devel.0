@@ -1,37 +1,32 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PbKeF-0008RJ-Kj
+Received: from 30.mail-out.ovh.net ([213.186.62.213])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PbKed-0008UQ-PU
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 23:19:03 +0100
-Received: by gwaa12 with SMTP id a12so4822637gwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 14:18:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=txd623Vf+rBdcNYfJXJWG2V58hw7OHuHtV4VbFSWb1o=;
-	b=uUPZlQY2smPKwPwWYOsR/4Df4dQKTMOB8hpxeG+u8NafcZAEuFYlmUYhIgQ0apnOJ0
-	uqZp07E/txJvYMqgDa+vx/hfyDlQFnHkhtjtFaPs5sGy+CfMQzCKmrfYnooxewQrFpJt
-	FGWCmz4/iSdZeQtVgGYqTnu6IhN0H+b5nhzFg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=NJhSYJrZwmL8CBfRo2tyTr6PsycO2D6he3ZYGHMdPLgwFnq3loj6g1B32Tv934XZrk
-	kKD1BvhvNjaMtLb6BjmkiWZPIrgEspv2/S3XOivbBnohe+pf8Q6n969PYuowFvdA7nUE
-	hml8xWhWy5sMvZPDNoQFPwnQl3kF5jlb9Rj1k=
-Received: by 10.90.104.20 with SMTP id b20mr3849149agc.193.1294438716633; Fri,
-	07 Jan 2011 14:18:36 -0800 (PST)
+	Fri, 07 Jan 2011 23:19:27 +0100
+Received: (qmail 25806 invoked by uid 503); 7 Jan 2011 21:51:09 -0000
+Received: from b9.ovh.net (HELO mail631.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 7 Jan 2011 21:51:08 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 8 Jan 2011 00:19:02 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 8 Jan 2011 00:19:01 +0200
+Message-ID: <4D279154.9000608@eukrea.com>
+Date: Fri, 07 Jan 2011 23:19:00 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Fri, 7 Jan 2011 14:18:15 -0800 (PST)
-In-Reply-To: <1294428159-5340-1-git-send-email-j-lance1@ti.com>
-References: <1294428159-5340-1-git-send-email-j-lance1@ti.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Jan 2011 14:18:15 -0800
-Message-ID: <AANLkTikptt38aAptW4Mbcxr578LPmHB9ZOQfuM0ODKfH@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: Re: [PATCH 1/1] am-sysinfo: update the SRCREV
+References: <1294435710-2622-1-git-send-email-eric@eukrea.com>
+	<AANLkTi=4WsYzkEMbY+861QseH9XQGsr=3nN4p36ynko6@mail.gmail.com>
+In-Reply-To: <AANLkTi=4WsYzkEMbY+861QseH9XQGsr=3nN4p36ynko6@mail.gmail.com>
+X-Ovh-Tracer-Id: 10472276509026725193
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH] busybox-1.8.1 : add latest fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,52 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 22:19:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Jan 2011 22:19:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jan 7, 2011 at 11:22 AM, Jeff Lance <jefflance01@gmail.com> wrote:
-> =C2=A0* SRCREV update to pull in the following:
-> =C2=A0 =C2=A0* remove all compiler generated files from this repository
-> =C2=A0 =C2=A0* Modification for CCSv5 projects to build for arm926ej-s.
-> =C2=A0 =C2=A0* This is to overcome a CCSv5 limitation where you can't pas=
-s in CFLAGS externally
-> =C2=A0 =C2=A0* This only affects building with CCSv5, it does not affect =
-the Arago build.
+On 07/01/2011 23:15, Khem Raj wrote:
+> On Fri, Jan 7, 2011 at 1:28 PM, Eric Bénard<eric@eukrea.com>  wrote:
+>> patches from : http://busybox.net/downloads/fixes-1.18.1/
+>> * hush : fix wrong prompt problem on empty interactive commants
+>> http://git.busybox.net/busybox/commit/?id=642e71a789156a96bcb18e6c5a0f52416c49d3b5
+>> * mkswap : selinux build fix
+>> http://git.busybox.net/busybox/commit/?id=e66a212081bcca521760ccff3a2da0deccd99340
+>> * suppress "'fast_strtol_10' defined but not used" warning
+>> http://git.busybox.net/busybox/commit/?id=f42c7b8fc161f5b3eb4e9c13f392daf7a11760c8
+>>
 >
-> Signed-off-by: Jeff Lance <j-lance1@ti.com>
-> ---
-> =C2=A0recipes/ti/am-sysinfo_svn.bb | =C2=A0 =C2=A04 ++--
-> =C2=A01 files changed, 2 insertions(+), 2 deletions(-)
+>> Signed-off-by: Eric Bénard<eric@eukrea.com>
 >
-> diff --git a/recipes/ti/am-sysinfo_svn.bb b/recipes/ti/am-sysinfo_svn.bb
-> index 9193836..07c292d 100644
-> --- a/recipes/ti/am-sysinfo_svn.bb
-> +++ b/recipes/ti/am-sysinfo_svn.bb
-> @@ -4,9 +4,9 @@ LICENSE =3D "BSD"
-> =C2=A0SECTION =3D "system"
-> =C2=A0PRIORITY =3D "optional"
 >
-> -SRCREV =3D "2"
-> +SRCREV =3D "5"
-> =C2=A0PV =3D "1.0"
-> -PR =3D "r1+svnr${SRCPV}"
-> +PR =3D "r2+svnr${SRCPV}"
+> looks ok you have a typo in the commit message though
 >
+it's the typo from the busybox's git commit that I copied ;-)
 
-I think you do not need to bump r1->r2
-
-> =C2=A0SRC_URI =3D "svn://gforge.ti.com/svn/am_sysinfo/;module=3Dtrunk;pro=
-to=3Dhttps;user=3Danonymous;pswd=3D''"
->
-> --
-> 1.6.3.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Eric
 
 
