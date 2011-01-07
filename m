@@ -1,38 +1,35 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from out1.smtp.messagingengine.com ([66.111.4.25])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1PbD8q-0002cB-1l
+	(envelope-from <vjensen@gmx.de>) id 1PbEKA-00040W-AA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 15:18:08 +0100
-Received: by mail-wy0-f175.google.com with SMTP id 40so17926747wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 06:17:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type;
-	bh=0lq1svLoM++sZ4hrR81+lywNMaQz+XOh0sImLwK/w60=;
-	b=YhOB66+e5dX3FTBZljbzR2393mpMMEi8D/zf1druHmXX/JI5OPkuvKq8FlHsrAlcMS
-	Mf9ScsVNmysoNXMMzp5NTIuEZQb6uz9mH+PRS3mP51M6Q8tgSCv1MVDaW+y3Y6KmhkMB
-	rX0P9JGQEmqBJnvp2guwycHrtwR9+gpUiPSRQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=HqI4Pw59WvGvnxnNyXgLSONUMsquPngFx1R8qmk3aGhX4UYEs7LEP00BiBzrdJLl1a
-	1UcQO7A6oIOng9ntSIHTdPDvY3Y5ucFv796iDKesYf4hq9YPsR2z7tbGh5ArW5parg5j
-	J/UnVkzqRUn0sz/r94IfmTbDjw9+JMShlQ2Vc=
+	Fri, 07 Jan 2011 16:33:54 +0100
+Received: from compute1.internal (compute1.nyi.mail.srv.osa [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id BBE6120B79;
+	Fri,  7 Jan 2011 10:27:21 -0500 (EST)
+Received: from frontend1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Fri, 07 Jan 2011 10:27:21 -0500
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:cc:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=IKxZiwi5qNnJNXBfMnZ5p5HWUKQ=;
+	b=gyoBQVZLjDyOO2WAkHi1bAuXeMMYR8v4Y26hGp1c59KB9MMoNDSqs6Aa5VMT1O17CUhm4pEAZq0LM0wYd8xhwiIVvNSRJAlE/iTYE8hIpzBfek2OjDO4WW0LuOW+lHmwVM6Y/Rmnop5IkC4uDhVXmBnJJ2hxD4elAohE1YSBPbc=
+X-Sasl-enc: T24z2rqsbOA87S13v6lrHetRMHSunUtot+i2nDS1rhxA 1294414041
+Received: from [192.168.1.34] (hnvr-4dbd3c5d.pool.mediaWays.net [77.189.60.93])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 1A91340A809;
+	Fri,  7 Jan 2011 10:27:20 -0500 (EST)
+Date: Fri, 7 Jan 2011 16:30:11 +0100 (CET)
+From: Vitus Jensen <vjensen@gmx.de>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <AANLkTik3-5x2W+DRTJ9bC0YnUQB9HbvSWEYLSMWLTPjZ@mail.gmail.com>
+Message-ID: <alpine.LNX.2.00.1101071623480.6291@asterix.crazy-teaparty.dyndns.org>
+References: <AANLkTik3-5x2W+DRTJ9bC0YnUQB9HbvSWEYLSMWLTPjZ@mail.gmail.com>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
 MIME-Version: 1.0
-Received: by 10.216.51.67 with SMTP id a45mr1560300wec.19.1294409840874; Fri,
-	07 Jan 2011 06:17:20 -0800 (PST)
-Received: by 10.216.254.137 with HTTP; Fri, 7 Jan 2011 06:17:20 -0800 (PST)
-In-Reply-To: <4D22F838.8020806@dresearch.de>
-References: <AANLkTin8E_sSKJcCW7_gtx85_Uo6SvwHFTdiUA8XZ2tv@mail.gmail.com>
-	<AANLkTimHjCR5N8WDd5kz4qPqZE=-XCyzz-xqYiE6VeaJ@mail.gmail.com>
-	<4D22F838.8020806@dresearch.de>
-Date: Fri, 7 Jan 2011 09:17:20 -0500
-Message-ID: <AANLkTimQasPfRMTbzSOYDTiQ3KPhVV5smQ_-VfisCpAm@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: Steffen Sledz <sledz@dresearch.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: testing branch 2010-11-12
+Cc: yocto@yoctoproject.org
+Subject: Re: Multiple Repository support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 14:18:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 Jan 2011 15:33:54 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Tue, Jan 4, 2011 at 5:36 AM, Steffen Sledz <sledz@dresearch.de> wrote:
-> Am 18.11.2010 23:13, schrieb Cliff Brake:
->> Last week's test run was a success with 38 combinations passing.
->> Thanks to all running tests:
->>
->> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-11-12
->
-> Just a short question (i was "offline" for some weeks).
->
-> The Testing Log [1] ends with "tested_2010-10-29". Is this indented?
->
-> Steffen
->
-> [1] http://wiki.openembedded.net/index.php/Testing#Testing_Log
+Hi Cliff,
 
-Looks like I neglected to update this list.  Since cgit provides a
-nice list of tags, I decided to simply reference cgit for the tags.
 
-Thanks,
-Cliff
+On Wed, 22 Dec 2010, Cliff Brake wrote:
+
+> Hello,
+>
+> I've started collecting ideas from various emails on multiple
+> repository support.
+>
+> http://wiki.openembedded.org/index.php/MultipleRepositoryMethods
+>
+> Please feel free to update the above page.
+
+I seem to have no account and only administrators may create one.
+
+> In my mind, this is a key problem we need to solve, not just for
+> Yocto/OE, but also for anyone doing product development.
+>
+> I've personally been using git submodules for most projects, and repo
+> for Android based projects.
+>
+> Appreciate any ideas, experiences, or insights into how we solve this problem.
+
+From the list mentioned in that page I only used git submodules so far. 
+Handling could be simpler, that's right.  On the other hand there was work 
+done in git regarding submodules, see
+
+http://git.kernel.org/?p=git/git.git;a=commit;h=4bb4d30095fbc3b1689cc656e71f6a51e43fbd69
+
+16-dec-2010.  So perhaps some of the bad things will be easier in the next 
+release.
+
+Vitus
 
 -- 
-=================
-http://bec-systems.com
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
