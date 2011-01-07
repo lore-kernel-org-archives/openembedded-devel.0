@@ -1,9 +1,9 @@
 Received: from 30.mail-out.ovh.net ([213.186.62.213])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PbK9w-0006YR-Or
+	(envelope-from <eric@eukrea.com>) id 1PbK9w-0006YQ-Oh
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 07 Jan 2011 22:47:45 +0100
-Received: (qmail 10252 invoked by uid 503); 7 Jan 2011 21:19:26 -0000
+Received: (qmail 10248 invoked by uid 503); 7 Jan 2011 21:19:26 -0000
 Received: from b9.ovh.net (HELO mail421.ha.ovh.net) (213.186.33.59)
 	by 30.mail-out.ovh.net with SMTP; 7 Jan 2011 21:19:25 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
@@ -13,18 +13,17 @@ Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	by ns0.ovh.net with SMTP; 7 Jan 2011 23:47:18 +0200
 From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Jan 2011 22:47:16 +0100
-Message-Id: <1294436836-28074-3-git-send-email-eric@eukrea.com>
+Date: Fri,  7 Jan 2011 22:47:15 +0100
+Message-Id: <1294436836-28074-2-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1294436836-28074-2-git-send-email-eric@eukrea.com>
+In-Reply-To: <1294436836-28074-1-git-send-email-eric@eukrea.com>
 References: <1294436836-28074-1-git-send-email-eric@eukrea.com>
-	<1294436836-28074-2-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 9936629629558631755
+X-Ovh-Tracer-Id: 9936629629558631754
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH 3/3] i2c-tools: update to latest 3.0.3
+Subject: [PATCH 2/3] dosfstools: update to latest 3.0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,101 +41,87 @@ X-List-Received-Date: Fri, 07 Jan 2011 21:47:46 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-from CHANGES :
-  Makefile: Let the environment set CC and CFLAGS
-            Integrate py-smbus into the build system
-  README: Point users to the linux-i2c mailing list
-  decode-dimms: Handle CRC of FB-DIMM and DDR3 SDRAM memory modules
-                Add support for DDR3 SDRAM
-                Fix decoding of SDR SDRAM bytes 12-14
-                Add side-by-side formatting option
-                Add merged cells formatting option
-                Try harder to decode the manufacturing date
-                Handle read errors on sysfs
-                Decode voltage interface level of DDR SDRAM
-  decode-xeon: Delete
-  eepromer: Fix array initialization overrun
-  i2cdetect: Drop legacy reference to ISA bus
-  i2cset: Add support for short writes with PEC
-  i2c-stub-from-dump: Use udev settle to speed up initialization
-                      Unload i2c-stub automatically if needed
-                      Add support for multiple dumps
-  tools: Properly handle /dev/i2c not being a directory
-         Increase limit on I2C bus number
+3.0.10 :
+bugfix in LFN handling, fixes false positives with bad filenames
+3.0.11 :
+bugfix for s390x, better error message ifdevices can't be opened
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/i2c-tools/i2c-tools_3.0.2.bb |   27 ---------------------------
- recipes/i2c-tools/i2c-tools_3.0.3.bb |   26 ++++++++++++++++++++++++++
- 2 files changed, 26 insertions(+), 27 deletions(-)
- delete mode 100644 recipes/i2c-tools/i2c-tools_3.0.2.bb
- create mode 100644 recipes/i2c-tools/i2c-tools_3.0.3.bb
+ recipes/dosfstools/dosfstools_3.0.11.bb |   28 ++++++++++++++++++++++++++++
+ recipes/dosfstools/dosfstools_3.0.9.bb  |   28 ----------------------------
+ 2 files changed, 28 insertions(+), 28 deletions(-)
+ create mode 100644 recipes/dosfstools/dosfstools_3.0.11.bb
+ delete mode 100644 recipes/dosfstools/dosfstools_3.0.9.bb
 
-diff --git a/recipes/i2c-tools/i2c-tools_3.0.2.bb b/recipes/i2c-tools/i2c-tools_3.0.2.bb
-deleted file mode 100644
-index 44559ef..0000000
---- a/recipes/i2c-tools/i2c-tools_3.0.2.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "Set of i2c tools for linux"
--SECTION = "base"
--LICENSE = "GPLv2"
--
--PR = "r5"
--
--SRC_URI = "http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${PV}.tar.bz2 \
--           file://Module.mk \
--          "
--
--inherit autotools
--
--do_compile_prepend() {
--        cp ${WORKDIR}/Module.mk ${S}/eepromer/
--        sed -i 's#/usr/local#/usr#' Makefile
--        sed -i 's#CC\t:= gcc#CC\t:= ${CC}#' Makefile
--        echo "include eepromer/Module.mk" >> Makefile
--}
--
--do_install_append() {
--        install -d ${D}${includedir}/linux
--        install -m 0644 include/linux/i2c-dev.h ${D}${includedir}/linux/i2c-dev-user.h
--	rm -f ${D}${includedir}/linux/i2c-dev.h
--}
--
--SRC_URI[md5sum] = "b546345ac19db56719dea6b8199f11e0"
--SRC_URI[sha256sum] = "0b4d6455a30a3264a60b4d3be55855d996d52ea4f162a2f04ffff378e24f98a2"
-diff --git a/recipes/i2c-tools/i2c-tools_3.0.3.bb b/recipes/i2c-tools/i2c-tools_3.0.3.bb
+diff --git a/recipes/dosfstools/dosfstools_3.0.11.bb b/recipes/dosfstools/dosfstools_3.0.11.bb
 new file mode 100644
-index 0000000..7d6d668
+index 0000000..1717157
 --- /dev/null
-+++ b/recipes/i2c-tools/i2c-tools_3.0.3.bb
-@@ -0,0 +1,26 @@
-+DESCRIPTION = "Set of i2c tools for linux"
++++ b/recipes/dosfstools/dosfstools_3.0.11.bb
+@@ -0,0 +1,28 @@
++# dosfstools OE build file
++# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
++# Released under the MIT license (see packages/COPYING)
++
++DESCRIPTION = "DOS FAT Filesystem Utilities"
++
 +SECTION = "base"
-+LICENSE = "GPLv2"
++PRIORITY = "optional"
++LICENSE = "GPLv3"
 +
-+PR = "r0"
++DEFAULT_PREFERENCE = "-1"
 +
-+SRC_URI = "http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${PV}.tar.bz2 \
-+           file://Module.mk \
-+          "
++PR = "r1"
 +
-+inherit autotools
++SRC_URI = "http://www.daniel-baumann.ch/software/dosfstools/dosfstools-${PV}.tar.bz2 \
++	"
++# output of getconf LFS_CFLAGS
++#
++CFLAGS_append = ' -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
++CFLAGS_append_libc-uclibc = ' ${@base_contains("DISTRO_FEATURES", "largefile", "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64", "", d)}'
 +
-+do_compile_prepend() {
-+        cp ${WORKDIR}/Module.mk ${S}/eepromer/
-+        sed -i 's#/usr/local#/usr#' Makefile
-+        echo "include eepromer/Module.mk" >> Makefile
++do_install () {
++	oe_runmake "PREFIX=${D}" "SBINDIR=${D}${sbindir}" \
++		   "MANDIR=${D}${mandir}/man8" install
 +}
 +
-+do_install_append() {
-+        install -d ${D}${includedir}/linux
-+        install -m 0644 include/linux/i2c-dev.h ${D}${includedir}/linux/i2c-dev-user.h
-+	rm -f ${D}${includedir}/linux/i2c-dev.h
-+}
-+
-+SRC_URI[md5sum] = "511376eed04455cdb277ef19c5f73bb4"
-+SRC_URI[sha256sum] = "23b28e474741834e3f1b35b0686528769a13adc92d2ff5603cbda1d6bd5e5629"
++SRC_URI[md5sum] = "8d2211d5bd813164e20740e7c852aa06"
++SRC_URI[sha256sum] = "94b27a0f53f4aa86b0c049eb26df7a681ec6c31bc352c57d3ac53881bcfcd9a8"
+diff --git a/recipes/dosfstools/dosfstools_3.0.9.bb b/recipes/dosfstools/dosfstools_3.0.9.bb
+deleted file mode 100644
+index 676c751..0000000
+--- a/recipes/dosfstools/dosfstools_3.0.9.bb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-# dosfstools OE build file
+-# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
+-# Released under the MIT license (see packages/COPYING)
+-
+-DESCRIPTION = "DOS FAT Filesystem Utilities"
+-
+-SECTION = "base"
+-PRIORITY = "optional"
+-LICENSE = "GPLv3"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-PR = "r1"
+-
+-SRC_URI = "http://www.daniel-baumann.ch/software/dosfstools/dosfstools-${PV}.tar.bz2 \
+-	"
+-# output of getconf LFS_CFLAGS
+-#
+-CFLAGS_append = ' -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
+-CFLAGS_append_libc-uclibc = ' ${@base_contains("DISTRO_FEATURES", "largefile", "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64", "", d)}'
+-
+-do_install () {
+-	oe_runmake "PREFIX=${D}" "SBINDIR=${D}${sbindir}" \
+-		   "MANDIR=${D}${mandir}/man8" install
+-}
+-
+-SRC_URI[md5sum] = "7f159ec44d3b9c502904bab0236050e4"
+-SRC_URI[sha256sum] = "3f63676faeac507e909d84c8920ddb6597da1eb688577c2fc9c756b821d0458f"
 -- 
 1.6.3.3
 
