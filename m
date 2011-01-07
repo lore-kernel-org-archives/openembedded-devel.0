@@ -1,36 +1,38 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PbD8c-0002cO-PC
+	(envelope-from <cliff.brake@gmail.com>) id 1PbD8q-0002cB-1l
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 15:17:55 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 831F1314CA2A
+	Fri, 07 Jan 2011 15:18:08 +0100
+Received: by mail-wy0-f175.google.com with SMTP id 40so17926747wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Jan 2011 15:17:27 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id k2Je-zRGtpoA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Jan 2011 15:17:22 +0100 (CET)
-Received: from [172.22.22.61] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 80444314C9FF
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Jan 2011 15:17:22 +0100 (CET)
-Message-ID: <4D272079.5000402@opendreambox.org>
-Date: Fri, 07 Jan 2011 15:17:29 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101210 Lightning/1.0b2 Thunderbird/3.1.7
+	Fri, 07 Jan 2011 06:17:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type;
+	bh=0lq1svLoM++sZ4hrR81+lywNMaQz+XOh0sImLwK/w60=;
+	b=YhOB66+e5dX3FTBZljbzR2393mpMMEi8D/zf1druHmXX/JI5OPkuvKq8FlHsrAlcMS
+	Mf9ScsVNmysoNXMMzp5NTIuEZQb6uz9mH+PRS3mP51M6Q8tgSCv1MVDaW+y3Y6KmhkMB
+	rX0P9JGQEmqBJnvp2guwycHrtwR9+gpUiPSRQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=HqI4Pw59WvGvnxnNyXgLSONUMsquPngFx1R8qmk3aGhX4UYEs7LEP00BiBzrdJLl1a
+	1UcQO7A6oIOng9ntSIHTdPDvY3Y5ucFv796iDKesYf4hq9YPsR2z7tbGh5ArW5parg5j
+	J/UnVkzqRUn0sz/r94IfmTbDjw9+JMShlQ2Vc=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1294392497-24747-1-git-send-email-raj.khem@gmail.com>
-	<AANLkTi=UUDxkTNDoWBoOxaCPDyupG8BazYtt6nGs3-7E@mail.gmail.com>
-In-Reply-To: <AANLkTi=UUDxkTNDoWBoOxaCPDyupG8BazYtt6nGs3-7E@mail.gmail.com>
-Subject: Re: [PATCH] eglibc: Make it configurable by tuning eglibc	options
+Received: by 10.216.51.67 with SMTP id a45mr1560300wec.19.1294409840874; Fri,
+	07 Jan 2011 06:17:20 -0800 (PST)
+Received: by 10.216.254.137 with HTTP; Fri, 7 Jan 2011 06:17:20 -0800 (PST)
+In-Reply-To: <4D22F838.8020806@dresearch.de>
+References: <AANLkTin8E_sSKJcCW7_gtx85_Uo6SvwHFTdiUA8XZ2tv@mail.gmail.com>
+	<AANLkTimHjCR5N8WDd5kz4qPqZE=-XCyzz-xqYiE6VeaJ@mail.gmail.com>
+	<4D22F838.8020806@dresearch.de>
+Date: Fri, 7 Jan 2011 09:17:20 -0500
+Message-ID: <AANLkTimQasPfRMTbzSOYDTiQ3KPhVV5smQ_-VfisCpAm@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: Steffen Sledz <sledz@dresearch.de>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: testing branch 2010-11-12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,36 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 14:17:55 -0000
+X-List-Received-Date: Fri, 07 Jan 2011 14:18:08 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 01/07/2011 02:47 PM, Otavio Salvador wrote:
-> On Fri, Jan 7, 2011 at 07:28, Khem Raj <raj.khem@gmail.com> wrote:
->> * Look for disabled features in DISTRO_FEATURES and disable them while building eglibc
->> * By default all features are built
->> * One can disable a feature by specifying DISTRO_FEATURES += "noinet6 nobsd ...." e.g.
-> 
-> Awesome.
-> 
-> Do you think we could do something similar to busybox to avoid having
-> many defconfigs?
-> 
+On Tue, Jan 4, 2011 at 5:36 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> Am 18.11.2010 23:13, schrieb Cliff Brake:
+>> Last week's test run was a success with 38 combinations passing.
+>> Thanks to all running tests:
+>>
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2010-11-12
+>
+> Just a short question (i was "offline" for some weeks).
+>
+> The Testing Log [1] ends with "tested_2010-10-29". Is this indented?
+>
+> Steffen
+>
+> [1] http://wiki.openembedded.net/index.php/Testing#Testing_Log
 
-Maybe it would be better to introduce EGLIBC_FEATURES and
-BUSYBOX_FEATURES, possibly presetting some values with options already
-present in DISTRO_FEATURES.
+Looks like I neglected to update this list.  Since cgit provides a
+nice list of tags, I decided to simply reference cgit for the tags.
 
-Now it seems to be possible to specify both ipv6 and noipv6, which seems
-inintuitive to me. It's not defined, which one would take precedence
-over the other, or whether such conflicts could be catched to display an
-error message.
+Thanks,
+Cliff
 
-Also, as an example, nobsd's name doesn't contain an implicit
-relationship to eglibc, so one might think that it would affect other
-packages as well.
-
-Regards,
-Andreas
+-- 
+=================
+http://bec-systems.com
 
 
