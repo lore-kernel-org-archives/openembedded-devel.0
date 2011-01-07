@@ -1,36 +1,37 @@
 Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PbKba-0008Hy-Rc
+	(envelope-from <raj.khem@gmail.com>) id 1PbKc2-0008Hy-TI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 23:16:19 +0100
-Received: by yxd5 with SMTP id 5so7280261yxd.6
+	Fri, 07 Jan 2011 23:16:47 +0100
+Received: by mail-yx0-f175.google.com with SMTP id 5so7280261yxd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 14:15:51 -0800 (PST)
+	Fri, 07 Jan 2011 14:16:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=4BFcxxvKDX4lWB+nwCMpp6EaAWF7KVcY8wcm9ph+b28=;
-	b=jAHg3ruWNS3MPAlQp0PlRAjXPTp4UNGTr/Kq0uz8ldRrXoIi+F7fl4WTtLPxNHnSoa
-	ZJ10axxEipsZ/ivd8S/f8zySm52smBHlTDUHXVGq9yehQOHJPWWVlLjuIjuX0bScE+XL
-	Dp1ROtp9REjHjYsoOq9Wx1lOpDLm8lPByehBI=
+	bh=A2F3LhhwKpZay3RoHpIbszCiPvd3kT93CYx9PY70NBA=;
+	b=BUJZWiV5LQgh/eFTxHlqSHUyaXeSf9VuprHpDxrcn+ytKwezRlYVw+0B5plvT71sGB
+	Kgfvq/ni6crcvHrsXIM64X9ea0svxli+4iM5B/yo3Oed+gnCyyTpdyC8pZT7bVA1FREo
+	e4b5eHtMVIx8YhvLFRuuc+BwAyi7C50TItRHw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=VYedNBm+wN4pPK/nL3wkvN5zkCgBsKMMPZutvh2damK0T+AriZs1lPDCa2/w/NHbba
-	9u+ItDqO9Uj1/+QOa2pya+cfbKZJVozpZ+sDZNcmiGRmMk/hriIUA6Z1R535AaLZwzAo
-	dvw3Gj5EaIYkmOczQyje3KbD0ELAAwErZvBQE=
-Received: by 10.90.80.18 with SMTP id d18mr3889332agb.31.1294438547500; Fri,
-	07 Jan 2011 14:15:47 -0800 (PST)
+	b=J9hm6wJkaBrBOGm4ysfXrLUh1r2FY68Ru1EVW9UrUfaSNxdvQ9w33atZRJ/iMGj65c
+	941vfLde4NNFlWovMCSe2JOABKK4XvgTqrdrNmSC9EOUo1LGh2vqt1+wmSEE6LstThSJ
+	lJIFjt7sLciEsHOB2Z/xd9Q4lJE6jWagLBwmM=
+Received: by 10.90.104.20 with SMTP id b20mr3847173agc.193.1294438582450; Fri,
+	07 Jan 2011 14:16:22 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Fri, 7 Jan 2011 14:15:25 -0800 (PST)
-In-Reply-To: <1294435710-2622-1-git-send-email-eric@eukrea.com>
-References: <1294435710-2622-1-git-send-email-eric@eukrea.com>
+Received: by 10.90.86.4 with HTTP; Fri, 7 Jan 2011 14:16:02 -0800 (PST)
+In-Reply-To: <1294436836-28074-2-git-send-email-eric@eukrea.com>
+References: <1294436836-28074-1-git-send-email-eric@eukrea.com>
+	<1294436836-28074-2-git-send-email-eric@eukrea.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Jan 2011 14:15:25 -0800
-Message-ID: <AANLkTi=4WsYzkEMbY+861QseH9XQGsr=3nN4p36ynko6@mail.gmail.com>
+Date: Fri, 7 Jan 2011 14:16:02 -0800
+Message-ID: <AANLkTimo=EFRJO_zdjcJG1O6hgm=KUunDg8YdXSDv52=@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] busybox-1.8.1 : add latest fixes
+Subject: Re: [PATCH 2/3] dosfstools: update to latest 3.0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,234 +45,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 22:16:19 -0000
+X-List-Received-Date: Fri, 07 Jan 2011 22:16:47 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 7, 2011 at 1:28 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> patches from : http://busybox.net/downloads/fixes-1.18.1/
-> * hush : fix wrong prompt problem on empty interactive commants
-> http://git.busybox.net/busybox/commit/?id=3D642e71a789156a96bcb18e6c5a0f5=
-2416c49d3b5
-> * mkswap : selinux build fix
-> http://git.busybox.net/busybox/commit/?id=3De66a212081bcca521760ccff3a2da=
-0deccd99340
-> * suppress "'fast_strtol_10' defined but not used" warning
-> http://git.busybox.net/busybox/commit/?id=3Df42c7b8fc161f5b3eb4e9c13f392d=
-af7a11760c8
+On Fri, Jan 7, 2011 at 1:47 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> 3.0.10 :
+> bugfix in LFN handling, fixes false positives with bad filenames
+> 3.0.11 :
+> bugfix for s390x, better error message ifdevices can't be opened
 >
-
 > Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
-
-
-looks ok you have a typo in the commit message though
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > ---
-> =C2=A0.../busybox-1.18.1/busybox-1.18.1-hush.patch =C2=A0 =C2=A0 =C2=A0 |=
- =C2=A0 28 ++++++++++++++++---
-> =C2=A0.../busybox-1.18.1/busybox-1.18.1-mkswap.patch =C2=A0 =C2=A0 | =C2=
-=A0 12 ++++++++
-> =C2=A0.../busybox-1.18.1/busybox-1.18.1-warning.patch =C2=A0 =C2=A0| =C2=
-=A0 28 ++++++++++++++++++++
-> =C2=A0recipes/busybox/busybox_1.18.1.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A04 ++-
-> =C2=A04 files changed, 66 insertions(+), 6 deletions(-)
-> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/busybox-1.18.1-mk=
-swap.patch
-> =C2=A0create mode 100644 recipes/busybox/busybox-1.18.1/busybox-1.18.1-wa=
-rning.patch
+> =C2=A0recipes/dosfstools/dosfstools_3.0.11.bb | =C2=A0 28 +++++++++++++++=
++++++++++++++
+> =C2=A0recipes/dosfstools/dosfstools_3.0.9.bb =C2=A0| =C2=A0 28 ----------=
+------------------
+> =C2=A02 files changed, 28 insertions(+), 28 deletions(-)
+> =C2=A0create mode 100644 recipes/dosfstools/dosfstools_3.0.11.bb
+> =C2=A0delete mode 100644 recipes/dosfstools/dosfstools_3.0.9.bb
 >
-> diff --git a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch b/r=
-ecipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
-> index 3e189a9..5281a52 100644
-> --- a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
-> +++ b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
-> @@ -1,6 +1,6 @@
-> =C2=A0diff -urpN busybox-1.18.1/shell/hush.c busybox-1.18.1-hush/shell/hu=
-sh.c
-> =C2=A0--- busybox-1.18.1/shell/hush.c =C2=A0 =C2=A0 =C2=A0 =C2=A02010-12-=
-21 05:31:04.000000000 +0100
-> -+++ busybox-1.18.1-hush/shell/hush.c =C2=A0 2010-12-21 21:20:02.49365181=
-3 +0100
-> ++++ busybox-1.18.1-hush/shell/hush.c =C2=A0 2011-01-07 14:59:19.64995615=
-6 +0100
-> =C2=A0@@ -913,7 +913,7 @@ static const struct built_in_command blt
-> =C2=A0 */
-> =C2=A0#if HUSH_DEBUG
-> @@ -177,7 +177,25 @@ diff -urpN busybox-1.18.1/shell/hush.c busybox-1.18.=
-1-hush/shell/hush.c
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0prn++;
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pi =3D pi->next;
-> -@@ -7445,7 +7461,7 @@ int hush_main(int argc, char **argv)
-> +@@ -4106,7 +4122,16 @@ static struct pipe *parse_stream(char **
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (IS_NULL_CMD(ctx.command)
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&& dest.length =3D=3D 0 && !dest.h=
-as_quoted_part
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ) {
-> +- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0continue;
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* This newli=
-ne can be ignored. But...
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * without th=
-e below check, interactive shell
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * will ignor=
-e even lines with bare <newline>,
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * and show t=
-he continuation prompt:
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * ps1_prompt=
-$ <enter>
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * ps2> _ =C2=
-=A0 <=3D=3D=3D wrong prompt, should be ps1
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 */
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0struct pipe *=
-pi =3D ctx.list_head;
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (pi->num_c=
-mds !=3D 0)
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0continue;
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Treat newline as a command separator.=
- */
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 done_pipe(&ctx, PIPE_SEQ);
-> +@@ -7445,7 +7470,7 @@ int hush_main(int argc, char **argv)
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned builtin_argc;
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0char **e;
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0struct variable *cur_var;
-> @@ -186,7 +204,7 @@ diff -urpN busybox-1.18.1/shell/hush.c busybox-1.18.1=
--hush/shell/hush.c
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0INIT_G();
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0if (EXIT_SUCCESS) /* if EXIT_SUCCESS =3D=3D 0,=
- it is already done */
-> -@@ -7454,17 +7470,17 @@ int hush_main(int argc, char **argv)
-> +@@ -7454,17 +7479,17 @@ int hush_main(int argc, char **argv)
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0G.argv0_for_re_execing =3D argv[0];
-> =C2=A0#endif
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Deal with HUSH_VERSION */
-> @@ -209,7 +227,7 @@ diff -urpN busybox-1.18.1/shell/hush.c busybox-1.18.1=
--hush/shell/hush.c
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0cur_var =3D G.top_var;
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0e =3D environ;
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0if (e) while (*e) {
-> -@@ -7479,8 +7495,8 @@ int hush_main(int argc, char **argv)
-> +@@ -7479,8 +7504,8 @@ int hush_main(int argc, char **argv)
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0e++;
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0}
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0/* (Re)insert HUSH_VERSION into env (AFTER we =
-scanned the env!) */
-> @@ -220,7 +238,7 @@ diff -urpN busybox-1.18.1/shell/hush.c busybox-1.18.1=
--hush/shell/hush.c
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Export PWD */
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0set_pwd_var(/*exp:*/ 1);
-> -@@ -7840,18 +7856,6 @@ int hush_main(int argc, char **argv)
-> +@@ -7840,18 +7865,6 @@ int hush_main(int argc, char **argv)
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0parse_and_run_file(stdin);
->
-> =C2=A0 final_return:
-> diff --git a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-mkswap.patch b=
-/recipes/busybox/busybox-1.18.1/busybox-1.18.1-mkswap.patch
+> diff --git a/recipes/dosfstools/dosfstools_3.0.11.bb b/recipes/dosfstools=
+/dosfstools_3.0.11.bb
 > new file mode 100644
-> index 0000000..41dff57
+> index 0000000..1717157
 > --- /dev/null
-> +++ b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-mkswap.patch
-> @@ -0,0 +1,12 @@
-> +diff -urpN busybox-1.18.1/util-linux/mkswap.c busybox-1.18.1-mkswap/util=
--linux/mkswap.c
-> +--- busybox-1.18.1/util-linux/mkswap.c 2010-12-20 01:41:27.000000000 +01=
-00
-> ++++ busybox-1.18.1-mkswap/util-linux/mkswap.c =C2=A02011-01-05 11:41:24.=
-455856773 +0100
-> +@@ -15,7 +15,7 @@ static void mkswap_selinux_setcontext(in
-> + =C2=A0 =C2=A0 =C2=A0 if (!is_selinux_enabled())
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;
-> +
-> +- =C2=A0 =C2=A0 =C2=A0xfstat(fd, &stbuf, argv[0]);
-> ++ =C2=A0 =C2=A0 =C2=A0xfstat(fd, &stbuf, path);
-> + =C2=A0 =C2=A0 =C2=A0 if (S_ISREG(stbuf.st_mode)) {
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 security_context_t new=
-con;
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 security_context_t old=
-con =3D NULL;
-> diff --git a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-warning.patch =
-b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-warning.patch
-> new file mode 100644
-> index 0000000..cda94bd
-> --- /dev/null
-> +++ b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-warning.patch
+> +++ b/recipes/dosfstools/dosfstools_3.0.11.bb
 > @@ -0,0 +1,28 @@
-> +diff -urpN busybox-1.18.1/libbb/procps.c busybox-1.18.1-warning/libbb/pr=
-ocps.c
-> +--- busybox-1.18.1/libbb/procps.c =C2=A0 =C2=A0 =C2=A02010-12-21 05:29:4=
-5.000000000 +0100
-> ++++ busybox-1.18.1-warning/libbb/procps.c =C2=A0 =C2=A0 =C2=A02011-01-07=
- 13:41:22.000000000 +0100
-> +@@ -154,6 +154,7 @@ static unsigned long fast_strtoul_10(cha
-> + =C2=A0 =C2=A0 =C2=A0 return n;
-> + }
+> +# dosfstools OE build file
+> +# Copyright (C) 2004-2006, Advanced Micro Devices, Inc. =C2=A0All Rights=
+ Reserved
+> +# Released under the MIT license (see packages/COPYING)
 > +
-> ++# if ENABLE_FEATURE_FAST_TOP
-> + static long fast_strtol_10(char **endptr)
-> + {
-> + =C2=A0 =C2=A0 =C2=A0 if (**endptr !=3D '-')
-> +@@ -162,6 +163,7 @@ static long fast_strtol_10(char **endptr
-> + =C2=A0 =C2=A0 =C2=A0 (*endptr)++;
-> + =C2=A0 =C2=A0 =C2=A0 return - (long)fast_strtoul_10(endptr);
-> + }
-> ++# endif
+> +DESCRIPTION =3D "DOS FAT Filesystem Utilities"
 > +
-> + static char *skip_fields(char *str, int count)
-> + {
-> +@@ -448,7 +450,7 @@ procps_status_t* FAST_FUNC procps_scan(p
-> + //FIXME: is it safe to assume this field exists?
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 sp->last_seen_on_cpu =3D fast_strtoul_10(&cp);
-> + # endif
-> +-#endif /* end of !ENABLE_FEATURE_TOP_SMP_PROCESS */
-> ++#endif /* FEATURE_FAST_TOP */
+> +SECTION =3D "base"
+> +PRIORITY =3D "optional"
+> +LICENSE =3D "GPLv3"
 > +
-> + #if ENABLE_FEATURE_PS_ADDITIONAL_COLUMNS
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 sp->niceness =3D tasknice;
-> diff --git a/recipes/busybox/busybox_1.18.1.bb b/recipes/busybox/busybox_=
-1.18.1.bb
-> index 2f78be9..69daef5 100644
-> --- a/recipes/busybox/busybox_1.18.1.bb
-> +++ b/recipes/busybox/busybox_1.18.1.bb
-> @@ -1,10 +1,12 @@
-> =C2=A0require busybox_1.1x.inc
-> -PR =3D "${INC_PR}.1"
-> +PR =3D "${INC_PR}.2"
->
-> =C2=A0SRC_URI +=3D " \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://busybox-1.18.1-hush.patch \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://busybox-1.18.1-cpio.patch \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://busybox-1.18.1-bzip2.patch \
-> + =C2=A0 =C2=A0 =C2=A0 file://busybox-1.18.1-mkswap.patch \
-> + =C2=A0 =C2=A0 =C2=A0 file://busybox-1.18.1-warning.patch \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0"
->
-> =C2=A0SRC_URI[md5sum] =3D "f15fe752d8b7012aa5e59f83b88ccb1c"
+> +DEFAULT_PREFERENCE =3D "-1"
+> +
+> +PR =3D "r1"
+> +
+> +SRC_URI =3D "http://www.daniel-baumann.ch/software/dosfstools/dosfstools=
+-${PV}.tar.bz2 \
+> + =C2=A0 =C2=A0 =C2=A0 "
+> +# output of getconf LFS_CFLAGS
+> +#
+> +CFLAGS_append =3D ' -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64'
+> +CFLAGS_append_libc-uclibc =3D ' ${@base_contains("DISTRO_FEATURES", "lar=
+gefile", "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64", "", d)}'
+> +
+> +do_install () {
+> + =C2=A0 =C2=A0 =C2=A0 oe_runmake "PREFIX=3D${D}" "SBINDIR=3D${D}${sbindi=
+r}" \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"MANDIR=
+=3D${D}${mandir}/man8" install
+> +}
+> +
+> +SRC_URI[md5sum] =3D "8d2211d5bd813164e20740e7c852aa06"
+> +SRC_URI[sha256sum] =3D "94b27a0f53f4aa86b0c049eb26df7a681ec6c31bc352c57d=
+3ac53881bcfcd9a8"
+> diff --git a/recipes/dosfstools/dosfstools_3.0.9.bb b/recipes/dosfstools/=
+dosfstools_3.0.9.bb
+> deleted file mode 100644
+> index 676c751..0000000
+> --- a/recipes/dosfstools/dosfstools_3.0.9.bb
+> +++ /dev/null
+> @@ -1,28 +0,0 @@
+> -# dosfstools OE build file
+> -# Copyright (C) 2004-2006, Advanced Micro Devices, Inc. =C2=A0All Rights=
+ Reserved
+> -# Released under the MIT license (see packages/COPYING)
+> -
+> -DESCRIPTION =3D "DOS FAT Filesystem Utilities"
+> -
+> -SECTION =3D "base"
+> -PRIORITY =3D "optional"
+> -LICENSE =3D "GPLv3"
+> -
+> -DEFAULT_PREFERENCE =3D "-1"
+> -
+> -PR =3D "r1"
+> -
+> -SRC_URI =3D "http://www.daniel-baumann.ch/software/dosfstools/dosfstools=
+-${PV}.tar.bz2 \
+> - =C2=A0 =C2=A0 =C2=A0 "
+> -# output of getconf LFS_CFLAGS
+> -#
+> -CFLAGS_append =3D ' -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64'
+> -CFLAGS_append_libc-uclibc =3D ' ${@base_contains("DISTRO_FEATURES", "lar=
+gefile", "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64", "", d)}'
+> -
+> -do_install () {
+> - =C2=A0 =C2=A0 =C2=A0 oe_runmake "PREFIX=3D${D}" "SBINDIR=3D${D}${sbindi=
+r}" \
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"MANDIR=
+=3D${D}${mandir}/man8" install
+> -}
+> -
+> -SRC_URI[md5sum] =3D "7f159ec44d3b9c502904bab0236050e4"
+> -SRC_URI[sha256sum] =3D "3f63676faeac507e909d84c8920ddb6597da1eb688577c2f=
+c9c756b821d0458f"
 > --
 > 1.6.3.3
 >
