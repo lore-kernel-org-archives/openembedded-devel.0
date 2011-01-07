@@ -1,34 +1,29 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PbJLG-0001Ce-Sn
+	(envelope-from <koen@dominion.thruhere.net>) id 1PbJh8-0001qB-Dh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 21:55:22 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AgkFAOoMJ01bdWOb/2dsb2JhbACDd5IljwKtX40pgSGDN3QEiwmFKA
-X-IronPort-AV: E=Sophos;i="4.60,290,1291590000"; d="scan'208";a="715974567"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 07 Jan 2011 21:54:57 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
-	id 1PbJKr-0001um-2w; Fri, 07 Jan 2011 21:54:57 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
-	id 1PbJKq-000050-S8; Fri, 07 Jan 2011 21:54:56 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>)
-	id 1PbJKq-0000kC-C1; Fri, 07 Jan 2011 21:54:56 +0100
-From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
-	<vjaquez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Jan 2011 21:54:55 +0100
-Message-Id: <1294433696-2824-1-git-send-email-vjaquez@igalia.com>
-X-Mailer: git-send-email 1.7.2.3
-MIME-Version: 1.0
-Cc: Koen Kooi <koen@openembedded.org>, Michael Lauer <mickey@vanille-media.de>
-Subject: [PATCH] scons: add EXTRA_OESCONS
+	Fri, 07 Jan 2011 22:17:58 +0100
+Received: by wyb40 with SMTP id 40so18300964wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Jan 2011 13:17:28 -0800 (PST)
+Received: by 10.227.132.143 with SMTP id b15mr20726wbt.9.1294435048523;
+	Fri, 07 Jan 2011 13:17:28 -0800 (PST)
+Received: from [172.20.1.5] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id
+	j49sm11465998wer.14.2011.01.07.13.17.25
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 07 Jan 2011 13:17:26 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1294433696-2824-1-git-send-email-vjaquez@igalia.com>
+Date: Fri, 7 Jan 2011 22:17:23 +0100
+Message-Id: <7C157FC8-1FA9-47C4-B6AC-119A6DC7A3F7@dominion.thruhere.net>
+References: <1294433696-2824-1-git-send-email-vjaquez@igalia.com>
+To: =?iso-8859-1?Q?V=EDctor_Manuel_J=E1quez_Leal?= <vjaquez@igalia.com>
+X-Mailer: Apple Mail (2.1082)
+Cc: Koen Kooi <koen@openembedded.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] scons: add EXTRA_OESCONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 20:55:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 07 Jan 2011 21:17:58 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-It's similar to EXTRA_OEMAKE, which appends arguments to the scons
-command
 
-Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
----
- classes/scons.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Op 7 jan 2011, om 21:54 heeft V=EDctor Manuel J=E1quez Leal het volgende =
+geschreven:
 
-diff --git a/classes/scons.bbclass b/classes/scons.bbclass
-index 2a935e4..13243a0 100644
---- a/classes/scons.bbclass
-+++ b/classes/scons.bbclass
-@@ -11,7 +11,7 @@ scons_do_compile() {
-         fi
-     fi
- 
--    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX="${CXX}" PREFIX=${prefix} prefix=${prefix} || \
-+    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX="${CXX}" PREFIX=${prefix} prefix=${prefix} ${EXTRA_OESCONS} || \
-     oefatal "scons build execution failed."
- }
- 
--- 
-1.7.2.3
+> It's similar to EXTRA_OEMAKE, which appends arguments to the scons
+> command
+>=20
+> Signed-off-by: V=EDctor Manuel J=E1quez Leal <vjaquez@igalia.com>
+> ---
+> classes/scons.bbclass |    2 +-
+> 1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/classes/scons.bbclass b/classes/scons.bbclass
+> index 2a935e4..13243a0 100644
+> --- a/classes/scons.bbclass
+> +++ b/classes/scons.bbclass
+> @@ -11,7 +11,7 @@ scons_do_compile() {
+>         fi
+>     fi
+>=20
+> -    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX=3D"${CXX}" =
+PREFIX=3D${prefix} prefix=3D${prefix} || \
+> +    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX=3D"${CXX}" =
+PREFIX=3D${prefix} prefix=3D${prefix} ${EXTRA_OESCONS} || \
+>     oefatal "scons build execution failed."
+>=20
+
+It would be best to do
+
+EXTRA_OESCONS ?=3D ""
+
+right above that to avoid weird expansion problems.
+
+regards,
+
+Koen
 
 
 
