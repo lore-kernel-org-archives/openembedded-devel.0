@@ -1,35 +1,36 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjensen@gmx.de>) id 1PbEKA-00040W-AA
+	(envelope-from <mwatkins.ti@gmail.com>) id 1PbEwM-0004uR-Cm
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 16:33:54 +0100
-Received: from compute1.internal (compute1.nyi.mail.srv.osa [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id BBE6120B79;
-	Fri,  7 Jan 2011 10:27:21 -0500 (EST)
-Received: from frontend1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Fri, 07 Jan 2011 10:27:21 -0500
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:cc:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=IKxZiwi5qNnJNXBfMnZ5p5HWUKQ=;
-	b=gyoBQVZLjDyOO2WAkHi1bAuXeMMYR8v4Y26hGp1c59KB9MMoNDSqs6Aa5VMT1O17CUhm4pEAZq0LM0wYd8xhwiIVvNSRJAlE/iTYE8hIpzBfek2OjDO4WW0LuOW+lHmwVM6Y/Rmnop5IkC4uDhVXmBnJJ2hxD4elAohE1YSBPbc=
-X-Sasl-enc: T24z2rqsbOA87S13v6lrHetRMHSunUtot+i2nDS1rhxA 1294414041
-Received: from [192.168.1.34] (hnvr-4dbd3c5d.pool.mediaWays.net [77.189.60.93])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 1A91340A809;
-	Fri,  7 Jan 2011 10:27:20 -0500 (EST)
-Date: Fri, 7 Jan 2011 16:30:11 +0100 (CET)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <AANLkTik3-5x2W+DRTJ9bC0YnUQB9HbvSWEYLSMWLTPjZ@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1101071623480.6291@asterix.crazy-teaparty.dyndns.org>
-References: <AANLkTik3-5x2W+DRTJ9bC0YnUQB9HbvSWEYLSMWLTPjZ@mail.gmail.com>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-Cc: yocto@yoctoproject.org
-Subject: Re: Multiple Repository support
+	Fri, 07 Jan 2011 17:13:22 +0100
+Received: by gxk20 with SMTP id 20so7470001gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Jan 2011 08:12:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=Dt2b2NDeYgu16LU9rmrN6Rxe5bmHNYfOmZ6gisMflkA=;
+	b=Cip7XPX8G3XnxHVcMxqJq5a5jKNQKaK7tjLMRNXTsmNBa6V54XFjfEDsuboAtRt2L6
+	FHuwTGA9IGpc6i7Zwse+JRE0+m+ZY5UXrY331roTKf1UOP0VcvfFs0hJPIfZLmsrxRdH
+	sG7RmgzJvPZ6BbH4JXSdQeBm/k4zD65YoVNzI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=xD5R22b0TIshSMcumvB6iG7hSR81o/oogZggZUqDnqy4VYvdR9JuzvQ/iP6qvIWFw/
+	+fL1i83i8xJhZ9uxkRgSMb4pNFlHDM063BFOsZaXPXnivrGhRlHsb/eJvcMtanlWZu8L
+	wn2grOxRYRA3ahChR+M1Jj9dl0tm6i9+YA2jw=
+Received: by 10.91.45.8 with SMTP id x8mr3436672agj.199.1294416774498;
+	Fri, 07 Jan 2011 08:12:54 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id 2sm33738638anw.38.2011.01.07.08.12.53
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 07 Jan 2011 08:12:53 -0800 (PST)
+From: Melissa Watkins <mwatkins.ti@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  7 Jan 2011 06:30:37 -0600
+Message-Id: <1294403437-3834-1-git-send-email-m-watkins@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: Melissa Watkins <m-watkins@ti.com>
+Subject: [PATCH] ti-pru-sw: Update SRC_REV to 23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +44,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 15:33:54 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Fri, 07 Jan 2011 16:13:22 -0000
 
-Hi Cliff,
+For the ti-pru-sw-examples, ti-pru-sw-app-loader, ti-pru-sw-edma-driver,
+ti-pru-sw-edma-library:
 
+* Update SRC_REV to 23
 
-On Wed, 22 Dec 2010, Cliff Brake wrote:
+Signed-off-by: Melissa Watkins <m-watkins@ti.com>
+---
+ recipes/ti/ti-pru-sw-app-loader_1.00.00.bb   |    2 +-
+ recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb  |    2 +-
+ recipes/ti/ti-pru-sw-edma-library_1.00.00.bb |    2 +-
+ recipes/ti/ti-pru-sw-examples_1.00.00.bb     |    2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-> Hello,
->
-> I've started collecting ideas from various emails on multiple
-> repository support.
->
-> http://wiki.openembedded.org/index.php/MultipleRepositoryMethods
->
-> Please feel free to update the above page.
-
-I seem to have no account and only administrators may create one.
-
-> In my mind, this is a key problem we need to solve, not just for
-> Yocto/OE, but also for anyone doing product development.
->
-> I've personally been using git submodules for most projects, and repo
-> for Android based projects.
->
-> Appreciate any ideas, experiences, or insights into how we solve this problem.
-
-From the list mentioned in that page I only used git submodules so far. 
-Handling could be simpler, that's right.  On the other hand there was work 
-done in git regarding submodules, see
-
-http://git.kernel.org/?p=git/git.git;a=commit;h=4bb4d30095fbc3b1689cc656e71f6a51e43fbd69
-
-16-dec-2010.  So perhaps some of the bad things will be easier in the next 
-release.
-
-Vitus
-
+diff --git a/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb b/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
+index 6a5a707..197b1ae 100644
+--- a/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
++++ b/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
+@@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "omapl138"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
+ 
+-SRCREV = "21"
++SRCREV = "23"
+ S = "${WORKDIR}/trunk/app_loader"
+ 
+ do_compile () {
+diff --git a/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
+index d75aa7f..5747f3d 100644
+--- a/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
++++ b/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
+@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "omapl138"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
+ 
+-SRCREV = "21"
++SRCREV = "23"
+ S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/module"
+ 
+ PACKAGE_STRIP = "no"
+diff --git a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
+index c77bc12..00ecfa6 100644
+--- a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
++++ b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
+@@ -10,7 +10,7 @@ COMPATIBLE_MACHINE = "omapl138"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
+ 
+-SRCREV = "21"
++SRCREV = "23"
+ S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/interface"
+ 
+ do_compile () {
+diff --git a/recipes/ti/ti-pru-sw-examples_1.00.00.bb b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
+index be8d859..5ae25c9 100644
+--- a/recipes/ti/ti-pru-sw-examples_1.00.00.bb
++++ b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
+@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE = "omapl138"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
+ 
+-SRCREV = "21"
++SRCREV = "23"
+ S = "${WORKDIR}/trunk"
+ 
+ do_compile () {
 -- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+1.7.0.4
+
 
 
