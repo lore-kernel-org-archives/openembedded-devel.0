@@ -1,37 +1,20 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pb7FY-000776-Cr
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1Pb8Ak-00063Y-QS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 09:00:40 +0100
-Received: by iyj18 with SMTP id 18so16348857iyj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 00:00:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ZMVMb/NZoNu9BuKeDgvbzGK9SSfEtTXCFC289+RncVg=;
-	b=xGipK8RPfvA7rOsphqrZLJHaFZPi9wUZVCwH2+m8dV1o1EPGe2Ui3j4/zV5ciNCJ1E
-	+imnhp6iV5RC2vYNQbQQXp2OBFSnmlQ5qYOlCnUSjKXOQX8d2qeZNvVSIoMO7bBRqE0F
-	qCXZOnvJR8J7u6G0Xje5cc3xJ5CVzULY4KGcU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ttnWlePobGTRa3Bto4Hy/fEfBD9AZoZeArV8MzyseOrcy48FlPnMTA3Ou94TdJbyxS
-	Cjz+rJf8Tm45zgO+zK148V8IYjaKJIBa60yAxxtMsAVAsNbBMzn/D1cW/4lrZopkpWFq
-	xc7wKmEPMSVNhxsQpLVC79FDonfu+rdF50i/M=
-MIME-Version: 1.0
-Received: by 10.231.20.68 with SMTP id e4mr25135280ibb.194.1294387210692; Fri,
-	07 Jan 2011 00:00:10 -0800 (PST)
-Received: by 10.231.38.11 with HTTP; Fri, 7 Jan 2011 00:00:10 -0800 (PST)
-In-Reply-To: <4D266CA1.4060306@mentor.com>
-References: <AANLkTimqbQNtFt6NUi5D03nSnfRMyPxqrLYsN=PB4v+C@mail.gmail.com>
-	<4D266CA1.4060306@mentor.com>
-Date: Fri, 7 Jan 2011 09:00:10 +0100
-Message-ID: <AANLkTimRs2Cb=-TgmJxoKu8c-SxAA8PS0RquRQsvDGRE@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 07 Jan 2011 09:59:47 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id CB14A1D366AF; Fri,  7 Jan 2011 09:49:50 +0100 (CET)
+Date: Fri, 7 Jan 2011 09:49:50 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: testing branch 2011-01-06
+Message-ID: <20110107084950.GA2466@ibawizard.net>
+References: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTink9h1dkjww1+Vi3arnTagSF2yCwygSHnPLcTdU@mail.gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [RFC] linux 2.6.36: upgrade to 2.6.36.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +28,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 08:00:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Jan 2011 08:59:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2011/1/7 Tom Rini <tom_rini@mentor.com>:
-> On 01/06/2011 04:22 PM, Cliff Brake wrote:
->>
->> master has been merged to testing-next and is ready for clean builds.
->>
->> There are only 7 combinations listed as passing. =A0If anyone has data
->> that is not entered, I'll check back tomorrow morning before I create
->> the tag.
->>
->> For more information on OpenEmbedded testing, see:
->>
->> http://www.openembedded.org/index.php/Testing
->>
->> We have lost some momentum with testing, so it would be nice to pick
->> up this effort again (speaking to myself first). =A0I just ordered a 2TB
->> drive, so hopefully that will give me the capacity to do some more
->> builds.
+Frans Meulenbroeks <fransmeulenbroeks@gmail.com> [2011-01-04 22:12:29]:
 
-My results have been added and my new tests will automatically kick off ton=
-ight.
-Will report results after the weekend.
+> Seems Petr, Eric and Robert are involved in these two machines.
+> Care to comment on moving to 2.6.36.2 (or give it a stab)?
 
-It might be convenient so move some of the less-active testers to the
-end. Quite some entries have been added for the release, but those are
-apparently not part of the weekly test.
+Hi,
 
-Frans
+thank you for asking, you've my ack. I just wonder, if it's necessary to ask
+the maintainers of other machines using this kernel recipe for such small
+kernel patchlevel bump.
+
+-- ynezz
 
 
