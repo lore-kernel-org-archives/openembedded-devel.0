@@ -1,36 +1,41 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mwatkins.ti@gmail.com>) id 1PbEwM-0004uR-Cm
+	(envelope-from <otavio.salvador@gmail.com>) id 1PbG3P-00066i-QW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 17:13:22 +0100
-Received: by gxk20 with SMTP id 20so7470001gxk.6
+	Fri, 07 Jan 2011 18:24:43 +0100
+Received: by bwz10 with SMTP id 10so16801348bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 08:12:55 -0800 (PST)
+	Fri, 07 Jan 2011 09:24:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=Dt2b2NDeYgu16LU9rmrN6Rxe5bmHNYfOmZ6gisMflkA=;
-	b=Cip7XPX8G3XnxHVcMxqJq5a5jKNQKaK7tjLMRNXTsmNBa6V54XFjfEDsuboAtRt2L6
-	FHuwTGA9IGpc6i7Zwse+JRE0+m+ZY5UXrY331roTKf1UOP0VcvfFs0hJPIfZLmsrxRdH
-	sG7RmgzJvPZ6BbH4JXSdQeBm/k4zD65YoVNzI=
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=NoRFESlixyeb80GfBHnTE2oahHGDDNe6RxbF9N7yGzo=;
+	b=PhOkTw/CO86qBw8h7eLT/zFhLC9mJnByishKxBxuhXYgXSfFyEwf5XfaNVlkoG4llV
+	B/r7+MxU4hTwmeRmxLz2gVlj/JxgH021bbdh+qgGHb/TioBHwani3bSFHctodUn+kBVj
+	tw/SjiKFyCjW5eQEyBDLExJHSfFhhYObitVSI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=xD5R22b0TIshSMcumvB6iG7hSR81o/oogZggZUqDnqy4VYvdR9JuzvQ/iP6qvIWFw/
-	+fL1i83i8xJhZ9uxkRgSMb4pNFlHDM063BFOsZaXPXnivrGhRlHsb/eJvcMtanlWZu8L
-	wn2grOxRYRA3ahChR+M1Jj9dl0tm6i9+YA2jw=
-Received: by 10.91.45.8 with SMTP id x8mr3436672agj.199.1294416774498;
-	Fri, 07 Jan 2011 08:12:54 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id 2sm33738638anw.38.2011.01.07.08.12.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 07 Jan 2011 08:12:53 -0800 (PST)
-From: Melissa Watkins <mwatkins.ti@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=OOvtAoKYUvyfvBz8hYpzSfjhMyPikUykXo39qlJSnd7IClEBgJYJr506TPm+ud7H4W
+	B5lmTHcQDfaft2yYjSxdvOxEKNahV06KFAU2DurcabsBSj+v9gMHgFSS8I1/1eTDrXPw
+	VXdVTNl8W1jd8VkfS+awpsNzKDJ5gvwaAoIu4=
+MIME-Version: 1.0
+Received: by 10.204.102.206 with SMTP id h14mr929911bko.45.1294421054814; Fri,
+	07 Jan 2011 09:24:14 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.59.147 with HTTP; Fri, 7 Jan 2011 09:24:14 -0800 (PST)
+In-Reply-To: <4D272079.5000402@opendreambox.org>
+References: <1294392497-24747-1-git-send-email-raj.khem@gmail.com>
+	<AANLkTi=UUDxkTNDoWBoOxaCPDyupG8BazYtt6nGs3-7E@mail.gmail.com>
+	<4D272079.5000402@opendreambox.org>
+Date: Fri, 7 Jan 2011 15:24:14 -0200
+X-Google-Sender-Auth: o0BxFdQVlOH7AtH-y5inHnfynoQ
+Message-ID: <AANLkTimnL4Pdm2CexD+p+XZVeNCyRGw0yyRCnbdVemvV@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Jan 2011 06:30:37 -0600
-Message-Id: <1294403437-3834-1-git-send-email-m-watkins@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: Melissa Watkins <m-watkins@ti.com>
-Subject: [PATCH] ti-pru-sw: Update SRC_REV to 23
+Subject: Re: [PATCH] eglibc: Make it configurable by tuning eglibc options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,75 +49,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 16:13:22 -0000
+X-List-Received-Date: Fri, 07 Jan 2011 17:24:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-For the ti-pru-sw-examples, ti-pru-sw-app-loader, ti-pru-sw-edma-driver,
-ti-pru-sw-edma-library:
+On Fri, Jan 7, 2011 at 12:17, Andreas Oberritter <obi@opendreambox.org> wro=
+te:
+> On 01/07/2011 02:47 PM, Otavio Salvador wrote:
+>> On Fri, Jan 7, 2011 at 07:28, Khem Raj <raj.khem@gmail.com> wrote:
+>>> * Look for disabled features in DISTRO_FEATURES and disable them while =
+building eglibc
+>>> * By default all features are built
+>>> * One can disable a feature by specifying DISTRO_FEATURES +=3D "noinet6=
+ nobsd ...." e.g.
+>>
+>> Awesome.
+>>
+>> Do you think we could do something similar to busybox to avoid having
+>> many defconfigs?
+>>
+>
+> Maybe it would be better to introduce EGLIBC_FEATURES and
+> BUSYBOX_FEATURES, possibly presetting some values with options already
+> present in DISTRO_FEATURES.
 
-* Update SRC_REV to 23
+This does look better IMO.
 
-Signed-off-by: Melissa Watkins <m-watkins@ti.com>
----
- recipes/ti/ti-pru-sw-app-loader_1.00.00.bb   |    2 +-
- recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb  |    2 +-
- recipes/ti/ti-pru-sw-edma-library_1.00.00.bb |    2 +-
- recipes/ti/ti-pru-sw-examples_1.00.00.bb     |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb b/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-index 6a5a707..197b1ae 100644
---- a/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-app-loader_1.00.00.bb
-@@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "21"
-+SRCREV = "23"
- S = "${WORKDIR}/trunk/app_loader"
- 
- do_compile () {
-diff --git a/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-index d75aa7f..5747f3d 100644
---- a/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-edma-driver_1.00.00.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "21"
-+SRCREV = "23"
- S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/module"
- 
- PACKAGE_STRIP = "no"
-diff --git a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-index c77bc12..00ecfa6 100644
---- a/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-edma-library_1.00.00.bb
-@@ -10,7 +10,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "21"
-+SRCREV = "23"
- S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/interface"
- 
- do_compile () {
-diff --git a/recipes/ti/ti-pru-sw-examples_1.00.00.bb b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-index be8d859..5ae25c9 100644
---- a/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-+++ b/recipes/ti/ti-pru-sw-examples_1.00.00.bb
-@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE = "omapl138"
- 
- SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;proto=https;user=anonymous;pswd=''"
- 
--SRCREV = "21"
-+SRCREV = "23"
- S = "${WORKDIR}/trunk"
- 
- do_compile () {
--- 
-1.7.0.4
-
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
