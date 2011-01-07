@@ -1,36 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PbKws-0000dI-4l
+	(envelope-from <Tom_Rini@mentor.com>) id 1PbL2y-0000sr-9p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 23:38:18 +0100
-Received: by fxm17 with SMTP id 17so16647299fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 14:37:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:x-user-agent:mime-version
-	:content-type:content-transfer-encoding:subject:from:date:to
-	:message-id; bh=qM6+Z88uzwgGbw6AvjK//XmQfNfQuHnBStA4mMYUEjk=;
-	b=GZv61G2/G2MH0pDAzKfMg/nc25epseCEn/uR2waspsyuTl5MtC4jXddd5/eWWzQYIs
-	gvzvy8vV5nw4xJN/yPgl7H37yW7TKPkySKnPCPRLvS3EjfPNy4QXg6gGFafS0EzuyTW7
-	1FVMSO3jIVIMEF4S8nEedl55jeszsmbxVpil0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=x-user-agent:mime-version:content-type:content-transfer-encoding
-	:subject:from:date:to:message-id;
-	b=CRM25zo+jlz9ZH/A5taOrF8dFBelW5zU8MXJD7O/Atu2numhEVO54PH/8iwfyKgg+3
-	fGhMg7QUka/8X/LR0/A2jIqnBxMAIpFUFsroCkRVfb45CBbjc8iY6Klwz6W+HLFWE0ky
-	BvIzOmokJDClPSy5v0ry1gKMZorh830Nkw2j0=
-Received: by 10.223.112.79 with SMTP id v15mr145348fap.143.1294439871697;
-	Fri, 07 Jan 2011 14:37:51 -0800 (PST)
-Received: from [10.106.42.193] ([213.162.68.20])
-	by mx.google.com with ESMTPS id n26sm6296084fam.37.2011.01.07.14.37.47
-	(version=SSLv3 cipher=RC4-MD5); Fri, 07 Jan 2011 14:37:51 -0800 (PST)
-X-User-Agent: K-9 Mail for Android
+	Fri, 07 Jan 2011 23:44:36 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PbL2X-0002FG-4C from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Jan 2011 14:44:09 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 7 Jan 2011 14:44:08 -0800
+Received: from [172.30.33.71] ([172.30.33.71]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 7 Jan 2011 15:44:07 -0700
+Message-ID: <4D279734.4@mentor.com>
+Date: Fri, 07 Jan 2011 15:44:04 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-Date: Fri, 07 Jan 2011 23:38:22 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <62eff391-99ba-49f7-b280-73656938bee7@email.android.com>
-Subject: Possibly mistyped PN references
+References: <AANLkTimqbQNtFt6NUi5D03nSnfRMyPxqrLYsN=PB4v+C@mail.gmail.com>
+	<4D266CA1.4060306@mentor.com>
+In-Reply-To: <4D266CA1.4060306@mentor.com>
+X-OriginalArrivalTime: 07 Jan 2011 22:44:07.0999 (UTC)
+	FILETIME=[64E4C4F0:01CBAEBC]
+Subject: Re: testing branch 2011-01-06
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,18 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 22:38:18 -0000
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 07 Jan 2011 22:44:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 01/06/2011 06:30 PM, Tom Rini wrote:
+> On 01/06/2011 04:22 PM, Cliff Brake wrote:
+>> master has been merged to testing-next and is ready for clean builds.
+>>
+>> There are only 7 combinations listed as passing. If anyone has data
+>> that is not entered, I'll check back tomorrow morning before I create
+>> the tag.
+>>
+>> For more information on OpenEmbedded testing, see:
+>>
+>> http://www.openembedded.org/index.php/Testing
+>>
+>> We have lost some momentum with testing, so it would be nice to pick
+>> up this effort again (speaking to myself first). I just ordered a 2TB
+>> drive, so hopefully that will give me the capacity to do some more
+>> builds.
+>
+> I see that the testing branch does contain the super long path fixes I
+> pushed today so I expect to finally be able to push some real results
+> (and failures!) over to the wiki this week. Build has started.
 
-git grep "[^$]{PN}"
-Should IMHO turn up nothing, but it does.
+So, unfortunately the help2man fix I pushed today is also needed to get 
+a lot of things pushed towards building.  I'm also working on building 
+(so I can test) moving the qemu boards over to xserver-xorg & co from 
+kdrive since we can get build failures if xserver-kdrive is the winner 
+(or provided anything at all? Not sure off the top of my head) for some 
+headers as other parts of X11R7.5 say "too old!" and bail.
 
-Hits come from recipe docs (ugh), hostap-modules-rawtx and iptables 20071127
-
-HTH,
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
