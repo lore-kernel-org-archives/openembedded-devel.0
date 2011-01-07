@@ -1,35 +1,40 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PbG9R-0006EX-7D
+	(envelope-from <otavio.salvador@gmail.com>) id 1PbGrQ-000794-S4
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Jan 2011 18:30:57 +0100
-Received: by yie16 with SMTP id 16so4822263yie.6
+	Fri, 07 Jan 2011 19:16:24 +0100
+Received: by bwz10 with SMTP id 10so16845348bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jan 2011 09:30:30 -0800 (PST)
+	Fri, 07 Jan 2011 10:16:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=JYZbI3phj3vfCJYk5Cg4mzwiSUWU7Ep5DsSqLaOXqAU=;
-	b=AbUYm83rh9Qv7/bOUTO9lJA8MILQwhvBFJsIce9EQ8dZ9CvRudo5ECxipTbqEj9pan
-	rlOVHNAM5ojjSle9FJj9i/6dKDxMsdjpF/pv+zsG72BiDY60geV4Ju3ona6vF3YLDMCy
-	h+wK0EN0F1MDJGfm6p3UFotKwyqVJPV6R+nEE=
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=oSgsk79WYBLEDOU7BJZRLz8xH0FVnOANv44Bw+S0FNk=;
+	b=UyVlGpzftor1bTRVHp5Y2tsk6MxjQvb71VvxZYaQBqCwTcwXcX4geafM2Se6eeAcgw
+	H+94XQPj2GmACjLs+UCDKCgCj2H3eQTOshEykFV82o+A5pCudIjZMS9ZQTDo7UPiWicU
+	kxdpsr+RPR2dQDfbkB0A1cwLdbknuth/N5nIc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=pOgHjDOUNl2dKVgU/B0rxENYWPv2uwWpiz3BvoAVE3RjwC9FfDtkSfuW63YV9bexeS
-	6iX0ETk1GczK1t+NRdwyINW+s0LA36p2d/BgIEo0F8VsghmXRebLv75wuhIdvyFDjCW8
-	WurTCcMIrNI+i78oTeXIpBxfOIDQLls8bCA5I=
-Received: by 10.90.120.14 with SMTP id s14mr1681688agc.58.1294421429476; Fri,
-	07 Jan 2011 09:30:29 -0800 (PST)
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=tYfEaRnM+ntQTktTMXOHf3np+rBNPHWjwLKh4HO0KAQI7egXTT5s1Icl6sGmhg9YLA
+	7cwIcNsAvxtQd1AcnFvSXJlzINYYHSFysXGf7QO/toCizA40k1LLJmAo58emSYb8z3vr
+	Q4DrMan5y9NQ2P0dkPfLrBxBM9HkkeC6B0IwM=
 MIME-Version: 1.0
-Received: by 10.90.86.4 with HTTP; Fri, 7 Jan 2011 09:30:08 -0800 (PST)
-In-Reply-To: <4D272079.5000402@opendreambox.org>
+Received: by 10.204.68.69 with SMTP id u5mr8265745bki.99.1294424158904; Fri,
+	07 Jan 2011 10:15:58 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.59.147 with HTTP; Fri, 7 Jan 2011 10:15:58 -0800 (PST)
+In-Reply-To: <AANLkTikTFe9ytvKcD1T=_L8GFiPo5bqBQ2o29McmzYU4@mail.gmail.com>
 References: <1294392497-24747-1-git-send-email-raj.khem@gmail.com>
 	<AANLkTi=UUDxkTNDoWBoOxaCPDyupG8BazYtt6nGs3-7E@mail.gmail.com>
 	<4D272079.5000402@opendreambox.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Jan 2011 09:30:08 -0800
-Message-ID: <AANLkTikTFe9ytvKcD1T=_L8GFiPo5bqBQ2o29McmzYU4@mail.gmail.com>
+	<AANLkTikTFe9ytvKcD1T=_L8GFiPo5bqBQ2o29McmzYU4@mail.gmail.com>
+Date: Fri, 7 Jan 2011 16:15:58 -0200
+X-Google-Sender-Auth: uswEjKaX4-iIqqHQn4dX1CEmKvY
+Message-ID: <AANLkTi=SAg9i3VVH4Ac81ap0EtjXuMhs918uPyEsCknv@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] eglibc: Make it configurable by tuning eglibc options
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -45,56 +50,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2011 17:30:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Jan 2011 18:16:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 7, 2011 at 6:17 AM, Andreas Oberritter <obi@opendreambox.org> wrote:
-> On 01/07/2011 02:47 PM, Otavio Salvador wrote:
->> On Fri, Jan 7, 2011 at 07:28, Khem Raj <raj.khem@gmail.com> wrote:
->>> * Look for disabled features in DISTRO_FEATURES and disable them while building eglibc
->>> * By default all features are built
->>> * One can disable a feature by specifying DISTRO_FEATURES += "noinet6 nobsd ...." e.g.
->>
->> Awesome.
->>
->> Do you think we could do something similar to busybox to avoid having
->> many defconfigs?
+On Fri, Jan 7, 2011 at 15:30, Khem Raj <raj.khem@gmail.com> wrote:
+>> Maybe it would be better to introduce EGLIBC_FEATURES and
+>> BUSYBOX_FEATURES, possibly presetting some values with options already
+>> present in DISTRO_FEATURES.
 >>
 >
-> Maybe it would be better to introduce EGLIBC_FEATURES and
-> BUSYBOX_FEATURES, possibly presetting some values with options already
-> present in DISTRO_FEATURES.
->
+> I think it can get to many knobs and confusion in settings. With
+> system library any feature en|disable
+> is system =A0wide so having it as a distro policy is right way to go imo.
 
-I think it can get to many knobs and confusion in settings. With
-system library any feature en|disable
-is system  wide so having it as a distro policy is right way to go imo.
+We can use DISTRO_EGLIBC_FEATURES or DISTRO_LIBC_FEATURES (so we can
+add to uclibc support for it too). Spliting it from DISTRO_FEATURES
+makes sense IMO since we'd use the same concept to recipes (as
+busybox) that are ofthen customized.
 
-> Now it seems to be possible to specify both ipv6 and noipv6, which seems
-> inintuitive to me. It's not defined, which one would take precedence
-> over the other, or whether such conflicts could be catched to display an
-> error message.
-
-good one
-hmm yes ipv6 exists already so probably I could reuse that one in eglibc
-
->
-> Also, as an example, nobsd's name doesn't contain an implicit
-> relationship to eglibc, so one might think that it would affect other
-> packages as well.
-
-Its a system wide feature not limited to eglibc if we disable BSD
-functions in libc then we better not use them in applications
-so this feature knob is the way to handle that for more than eglibc
-possibly so are others.
->
-> Regards,
-> Andreas
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
