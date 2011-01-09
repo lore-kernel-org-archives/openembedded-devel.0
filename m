@@ -1,21 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pc2Us-0007BM-4z for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Jan 2011 22:08:18 +0100
-Received: from f053039058.adsl.alicedsl.de ([78.53.39.58]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pc2UR-00051b-IX for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Jan 2011 21:07:51 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from 27.mail-out.ovh.net ([91.121.30.210])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Pc2gq-0007LJ-Rn
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Jan 2011 22:20:40 +0100
+Received: (qmail 5074 invoked by uid 503); 9 Jan 2011 21:22:34 -0000
+Received: from b6.ovh.net (HELO mail626.ha.ovh.net) (213.186.33.56)
+	by 27.mail-out.ovh.net with SMTP; 9 Jan 2011 21:22:25 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 9 Jan 2011 23:21:45 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 9 Jan 2011 23:21:45 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 09 Jan 2011 22:07:50 +0100
-Message-ID: <1294607270.4036.73.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: OT: determining in `Makefile.in` the Python version/path
+Date: Sun,  9 Jan 2011 22:19:55 +0100
+Message-Id: <1294607995-10242-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 2803772243139145033
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH] busybox-1.18.1: add latest fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,78 +35,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Jan 2011 21:08:18 -0000
-X-Groupsio-MsgNum: 27844
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-7MwWOyMvLvM1EyYWQffm"
+X-List-Received-Date: Sun, 09 Jan 2011 21:20:40 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
---=-7MwWOyMvLvM1EyYWQffm
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+modprobe-small: support compressed modules in insmodmaster
+http://git.busybox.net/busybox/commit/?id=e9d12b57bfb941e754d09a7d5f54c183ca7dbb25
 
-Dear OE folks,
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ .../busybox-1.18.1/busybox-1.18.1-hush.patch       |    2 +-
+ .../busybox-1.18.1-modprobe-small.patch            |   21 ++++++++++++++++++++
+ recipes/busybox/busybox_1.18.1.bb                  |    3 +-
+ 3 files changed, 24 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/busybox/busybox-1.18.1/busybox-1.18.1-modprobe-small.patch
+
+diff --git a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
+index 5281a52..590ed88 100644
+--- a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
++++ b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
+@@ -1,6 +1,6 @@
+ diff -urpN busybox-1.18.1/shell/hush.c busybox-1.18.1-hush/shell/hush.c
+ --- busybox-1.18.1/shell/hush.c	2010-12-21 05:31:04.000000000 +0100
+-+++ busybox-1.18.1-hush/shell/hush.c	2011-01-07 14:59:19.649956156 +0100
+++++ busybox-1.18.1-hush/shell/hush.c	2011-01-09 21:00:02.000000000 +0100
+ @@ -913,7 +913,7 @@ static const struct built_in_command blt
+   */
+  #if HUSH_DEBUG
+diff --git a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-modprobe-small.patch b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-modprobe-small.patch
+new file mode 100644
+index 0000000..c1d5615
+--- /dev/null
++++ b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-modprobe-small.patch
+@@ -0,0 +1,21 @@
++diff -urpN busybox-1.18.1/modutils/modprobe-small.c busybox-1.18.1-modprobe-small/modutils/modprobe-small.c
++--- busybox-1.18.1/modutils/modprobe-small.c	2010-12-20 01:41:27.000000000 +0100
+++++ busybox-1.18.1-modprobe-small/modutils/modprobe-small.c	2011-01-09 21:00:26.000000000 +0100
++@@ -844,13 +844,15 @@ int modprobe_main(int argc UNUSED_PARAM,
++ 		void *map;
++ 
++ 		len = MAXINT(ssize_t);
++-		map = xmalloc_xopen_read_close(*argv, &len);
+++		map = xmalloc_open_zipped_read_close(*argv, &len);
++ 		if (init_module(map, len,
++ 			IF_FEATURE_MODPROBE_SMALL_OPTIONS_ON_CMDLINE(options ? options : "")
++ 			IF_NOT_FEATURE_MODPROBE_SMALL_OPTIONS_ON_CMDLINE("")
++-				) != 0)
+++			) != 0
+++		) {
++ 			bb_error_msg_and_die("can't insert '%s': %s",
++ 					*argv, moderror(errno));
+++		}
++ 		return 0;
++ 	}
++ 
+diff --git a/recipes/busybox/busybox_1.18.1.bb b/recipes/busybox/busybox_1.18.1.bb
+index 69daef5..7c7f21f 100644
+--- a/recipes/busybox/busybox_1.18.1.bb
++++ b/recipes/busybox/busybox_1.18.1.bb
+@@ -1,5 +1,5 @@
+ require busybox_1.1x.inc
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
+ 
+ SRC_URI += " \
+ 	file://busybox-1.18.1-hush.patch \
+@@ -7,6 +7,7 @@ SRC_URI += " \
+ 	file://busybox-1.18.1-bzip2.patch \
+ 	file://busybox-1.18.1-mkswap.patch \
+ 	file://busybox-1.18.1-warning.patch \
++	file://busybox-1.18.1-modprobe-small.patch \
+ 	"
+ 
+ SRC_URI[md5sum] = "f15fe752d8b7012aa5e59f83b88ccb1c"
+-- 
+1.6.3.3
 
 
-when compiling XBMC for the ARM architecture it hard codes Python 2.5
-[1] and a patch in the OE repository changes this to Python 2.6 [2].
 
-I tried to use `python-config` to determine the Python version [3].
-
-        ifeq (arm, $(ARCH))
-        -# Force external python2.5 for now!
-        -LIBS +=3D-lpython2.5
-        +# Force external Python for now!
-        +LIBS +=3D $(shell python-config --libs)
-         endif
-
-This fails with the following error though documented in `log.do_compile`.
-
-        Traceback (most recent call last):
-          File "/oe/build/angstrom-dev/sysroots/i686-linux/usr/bin/python-c=
-onfig", line 6, in <module>
-            from distutils import sysconfig
-          File "/oe/build/angstrom-dev/sysroots/i686-linux/usr/lib/python2.=
-6/distutils/sysconfig.py", line 22, in <module>
-            PREFIX =3D os.path.normpath(sys.prefix).replace( os.getenv("BUI=
-LD_SYS"), os.getenv("HOST_SYS") )
-
-Do you know of an easy way to fix this with just adapting `Makefile.in`?
-Or is using a separate variable as `PYTHON_LIBS` [4] the only option
-besides hard coding and patching?
-
-        ifeq (arm, $(ARCH))
-         # Force external Python for now!
-        -LIBS +=3D $(shell python-config --libs)
-        +PYTHON_LIBS ?=3D $(shell python-config --libs)
-        +LIBS +=3D $(PYTHON_LIBS)
-         endif
-
-
-Thanks,
-
-Paul
-
-
-[1] https://github.com/xbmc/xbmc/#L470
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/xbmc/xb=
-mc/0006-Hardcode-python2.6-for-now.patch?id=3D0cc02ded7bd429208ccb0e0e0aa3e=
-43aec8a4722
-[3] http://trac.xbmc.org/ticket/11041 (Please notice the updated patch wher=
-e `($` is changed to `$(`.)
-[4] http://trac.xbmc.org/ticket/11042 (Please notice the updated patch wher=
-e `($` is changed to `$(`.)
-
---=-7MwWOyMvLvM1EyYWQffm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk0qI6YACgkQPX1aK2wOHVgWOgCggZt44mLq81OTYhbsmW0VxJO6
-5FsAn03M9VlpVv5BBsteLslZgcRwxs8k
-=7ihM
------END PGP SIGNATURE-----
-
---=-7MwWOyMvLvM1EyYWQffm--
