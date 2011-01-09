@@ -1,37 +1,27 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PbqPm-0007XY-60
+Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <thebohemian@gmx.net>) id 1PbtjH-0004A2-6K
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Jan 2011 09:14:14 +0100
-Received: by iwn8 with SMTP id 8so18823602iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Jan 2011 00:13:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=GsqpZpI53IyE7Wn01TWdcQf5Z2pell+jKd4LkgW9LOI=;
-	b=TOIM5+irJPrSnhPiJYwq3Y2SQTQjnZlqpMvQN5Cxiz/FG6SA7lCa7yiK+ftCUnIQNM
-	fdBvAgkvMchqXK7HfH59Una/1tOM2N7k3EfpT3a0soHh8anzGydBOzC0xx42AkEv9+hX
-	LneW9MI2KAsXZnkH78aILA7QO6vGjzAFOy0V4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=YcbgUwShTLFp1Gici2AX0MMRT2cnOjcb26+Zs2OMsyBIy/XacRxhlov6B/amq9UEoX
-	xOGuZFA949ex1Ja5JcpnuDbaff0uftvlcpoJzMSa71QDg4OUOoVbAvzscBSTIgf55Y9s
-	kBDVfsHGnMWRu+7sSqrrPApKYBMOgqzRzFVtg=
+	Sun, 09 Jan 2011 12:46:35 +0100
+Received: (qmail invoked by alias); 09 Jan 2011 11:39:25 -0000
+Received: from 137.163.71-86.rev.gaoland.net (EHLO [192.168.1.71])
+	[86.71.163.137]
+	by mail.gmx.net (mp007) with SMTP; 09 Jan 2011 12:39:25 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18C1bhk8DYCoRrvbOWW04hLDzcyT3eZZlxQ6DfRQ4
+	93wMairvGzEr31
+Message-ID: <4D299E6B.20407@gmx.net>
+Date: Sun, 09 Jan 2011 12:39:23 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.231.199.77 with SMTP id er13mr11548291ibb.44.1294560821504;
-	Sun, 09 Jan 2011 00:13:41 -0800 (PST)
-Received: by 10.231.38.11 with HTTP; Sun, 9 Jan 2011 00:13:41 -0800 (PST)
-In-Reply-To: <AANLkTiktjuq4GmwEeG0c5-xeqQ3fhgvJ30O2UrRUrGh=@mail.gmail.com>
-References: <AANLkTikSaajw_VESs+5jFfKpvqL25Ofwu9HO6ogh2+G8@mail.gmail.com>
-	<AANLkTinRb_EZG8npPqa3b9Td2XXYmvddYwDpbqdMG8t=@mail.gmail.com>
-	<AANLkTiktjuq4GmwEeG0c5-xeqQ3fhgvJ30O2UrRUrGh=@mail.gmail.com>
-Date: Sun, 9 Jan 2011 09:13:41 +0100
-Message-ID: <AANLkTi=9Y+Hc8rvXNspy0zG-XMVL72sjfscXj-0_YeBv@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Please undelete this wiki page
+References: <4D257C14.8030108@gmx.net>
+In-Reply-To: <4D257C14.8030108@gmx.net>
+X-Enigmail-Version: 1.1.2
+X-Y-GMX-Trusted: 0
+Subject: Re: FOSDEM stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,42 +35,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Jan 2011 08:14:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 09 Jan 2011 11:46:35 -0000
+X-Groupsio-MsgNum: 27837
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigF0CAEA310BCB7CE76C7F55EA"
 
-2011/1/8 Khem Raj <raj.khem@gmail.com>:
-> On Sat, Jan 8, 2011 at 2:47 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Sat, Jan 8, 2011 at 1:24 PM, AJ ONeal <coolaj86@gmail.com> wrote:
->>> The page that I created was vandalized and then deleted instead of reverted.
->>>
->>> http://www.openembedded.org/index.php/How_to_create_a_bitbake_recipe_for_dummies
->>>
->>> Will someone with the power to do so please revert that?
->>>
->>
->> is it same as http://www.openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmbedded
->> if so then it has been renamed
->>
->>> I don't personally have a backup copy of that documentation. My bad, I know,
->>> but I expected that it would stick around.
->
->
-> hmmm it really has been deleted. I can see a cached copy on google but
-> it does not let you to the editing
->
-> http://webcache.googleusercontent.com/search?q=cache:fx7ZWqnOH48J:www.openembedded.org/index.php/How_to_create_a_bitbake_recipe_for_dummies+How+to+create+a+bitbake+recipe+for+dummies&cd=1&hl=en&ct=clnk&gl=us
->
-> it will take some time to recreate. Meanwhile it would be better if it
-> can be restored from wiki backups.
-> may be Tom K can help
->>>
+--------------enigF0CAEA310BCB7CE76C7F55EA
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-I think in mediawiki a sysop can undelete.
+Hi,
+I have some more questions: Who has the sheet that we used as table
+cloth for the stand last year? Will it be brought to FOSDEM'11?
 
-http://www.mediawiki.org/wiki/Manual:Administrators#Deletion
+Could we get a second one for our 2nd table?
 
-see 2nd dot.
+Regards
+Robert
 
-Frans
+Am 06.01.2011 09:23, schrieb Robert Schuster:
+> Hi,
+> I intend to use this posts' thread for organizing the OpenEmbedded stan=
+d
+> for FOSDEM 2011. The event takes place on the weekend of the 5th and 6t=
+h
+> February.
+>=20
+> I hijacked the FOSDEM 2011 OE-Wiki page[0] and added the necessary bits=
+
+> to allow people signing up for the manning stand etc. If you can help
+> please add your name to any of the suggested lists.
+>=20
+> Furthermore this thread is supposed to serve all remaining questions
+> regarding OE's FOSDEM 2011 participation.
+>=20
+> First question by me? Do we still have printed OE flyers and the poster=
+s
+> around? If so, who has them and is this person attending? (If not I
+> suggest sending them to me or giving them to someone who goes to FOSDEM=
+).
+>=20
+> Note: Remember to book your tickets soon. The event is due in 4 weeks!
+>=20
+> Regards,
+> Robert
+>=20
+> [0] - http://wiki.openembedded.org/index.php/Fosdem_2011
+>=20
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
+
+
+
+--------------enigF0CAEA310BCB7CE76C7F55EA
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAk0pnmsACgkQG9cfwmwwEtqZigCeMf9w0JdKZomLPv/gWU4ze9Ke
+Y7cAniqZ3Rkvz1IoKqfLjRQ8DFZBjcfM
+=OvY2
+-----END PGP SIGNATURE-----
+
+--------------enigF0CAEA310BCB7CE76C7F55EA--
