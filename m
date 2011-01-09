@@ -1,27 +1,21 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1PbtjH-0004A2-6K
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Jan 2011 12:46:35 +0100
-Received: (qmail invoked by alias); 09 Jan 2011 11:39:25 -0000
-Received: from 137.163.71-86.rev.gaoland.net (EHLO [192.168.1.71])
-	[86.71.163.137]
-	by mail.gmx.net (mp007) with SMTP; 09 Jan 2011 12:39:25 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18C1bhk8DYCoRrvbOWW04hLDzcyT3eZZlxQ6DfRQ4
-	93wMairvGzEr31
-Message-ID: <4D299E6B.20407@gmx.net>
-Date: Sun, 09 Jan 2011 12:39:23 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
-MIME-Version: 1.0
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PbwN5-0006ub-Bu for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Jan 2011 15:35:51 +0100
+Received: from f053039058.adsl.alicedsl.de ([78.53.39.58]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PbwMf-0008ND-2Q for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Jan 2011 14:35:25 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <4D257C14.8030108@gmx.net>
-In-Reply-To: <4D257C14.8030108@gmx.net>
-X-Enigmail-Version: 1.1.2
-X-Y-GMX-Trusted: 0
-Subject: Re: FOSDEM stand organization thread
+Date: Sun, 09 Jan 2011 15:35:23 +0100
+Message-ID: <1294583723.4036.39.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: [PATCH] xbmc: add `python` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,78 +29,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Jan 2011 11:46:35 -0000
-X-Groupsio-MsgNum: 27837
-Content-Type: multipart/signed; micalg=pgp-sha1;
+X-List-Received-Date: Sun, 09 Jan 2011 14:35:51 -0000
+X-Groupsio-MsgNum: 27838
+Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="------------enigF0CAEA310BCB7CE76C7F55EA"
+	boundary="=-+fxoKE8mB6B6Lb1fA+QU"
 
---------------enigF0CAEA310BCB7CE76C7F55EA
-Content-Type: text/plain; charset=ISO-8859-15
+--=-+fxoKE8mB6B6Lb1fA+QU
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-I have some more questions: Who has the sheet that we used as table
-cloth for the stand last year? Will it be brought to FOSDEM'11?
+Date: Sun, 9 Jan 2011 15:03:38 +0100
 
-Could we get a second one for our 2nd table?
+XBMC needs Python to be built properly [1][2]. Python is pulled in implicit=
+ly [3], so no error is seen. Make it explicit though to be safe.
 
-Regards
-Robert
+[1] https://github.com/xbmc/xbmc/blob/e9e7990b428863b8f2daad4dc5fd2b0a320aa=
+965/Makefile.in#L475
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/xbmc/xb=
+mc/0006-Hardcode-python2.6-for-now.patch?id=3D0cc02ded7bd429208ccb0e0e0aa3e=
+43aec8a4722
+[3] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/boost/b=
+oost-with-bjam.inc?id=3Dd470cfde5bd1d4c9ab23a37d286456726711229f#n67
 
-Am 06.01.2011 09:23, schrieb Robert Schuster:
-> Hi,
-> I intend to use this posts' thread for organizing the OpenEmbedded stan=
-d
-> for FOSDEM 2011. The event takes place on the weekend of the 5th and 6t=
-h
-> February.
->=20
-> I hijacked the FOSDEM 2011 OE-Wiki page[0] and added the necessary bits=
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+1. I do not know if `RDEPENDS +=3D python` is needed as well.
+2. If `python-core` would be enough I do not know either.
+---
+ recipes/xbmc/xbmc_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-> to allow people signing up for the manning stand etc. If you can help
-> please add your name to any of the suggested lists.
->=20
-> Furthermore this thread is supposed to serve all remaining questions
-> regarding OE's FOSDEM 2011 participation.
->=20
-> First question by me? Do we still have printed OE flyers and the poster=
-s
-> around? If so, who has them and is this person attending? (If not I
-> suggest sending them to me or giving them to someone who goes to FOSDEM=
-).
->=20
-> Note: Remember to book your tickets soon. The event is due in 4 weeks!
->=20
-> Regards,
-> Robert
->=20
-> [0] - http://wiki.openembedded.org/index.php/Fosdem_2011
->=20
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
+index 766d74a..3689715 100644
+--- a/recipes/xbmc/xbmc_svn.bb
++++ b/recipes/xbmc/xbmc_svn.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION =3D "XBMC Media Center"
+ LICENSE =3D "xbmc"
+=20
+-DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodpl=
+ug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virt=
+ual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi l=
+ibsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip=
+-native zlib"
++DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python l=
+ibmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mix=
+er virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca =
+avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jas=
+per zip-native zlib"
+ require recipes/egl/egl.inc
+=20
+ SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
+--=20
+1.7.2.3
 
 
-
-
---------------enigF0CAEA310BCB7CE76C7F55EA
+--=-+fxoKE8mB6B6Lb1fA+QU
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iEYEARECAAYFAk0pnmsACgkQG9cfwmwwEtqZigCeMf9w0JdKZomLPv/gWU4ze9Ke
-Y7cAniqZ3Rkvz1IoKqfLjRQ8DFZBjcfM
-=OvY2
+iEYEABECAAYFAk0px6sACgkQPX1aK2wOHVgMlACfTILXVeotn3luanczj0Hzv9Jd
+E5cAn1DEkorZYBrtBodQrGfMpx/Qby2a
+=hg9e
 -----END PGP SIGNATURE-----
 
---------------enigF0CAEA310BCB7CE76C7F55EA--
+--=-+fxoKE8mB6B6Lb1fA+QU--
