@@ -1,17 +1,17 @@
 Received: from smtp203.alice.it ([82.57.200.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <GNUtoo@no-log.org>) id 1Pc4MG-0006gx-GQ
+	(envelope-from <GNUtoo@no-log.org>) id 1Pc4NE-0006iX-Fb
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 00:07:32 +0100
+	Mon, 10 Jan 2011 00:08:33 +0100
 Received: from localhost.localdomain (80.180.55.19) by smtp203.alice.it
 	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4C1A2A9606E4FE36; Mon, 10 Jan 2011 00:04:52 +0100
+	id 4C1A2A9606E4FE5A; Mon, 10 Jan 2011 00:05:04 +0100
 From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Jan 2011 00:04:45 +0100
-Message-Id: <1294614285-19077-1-git-send-email-GNUtoo@no-log.org>
+Date: Mon, 10 Jan 2011 00:05:02 +0100
+Message-Id: <1294614302-19117-1-git-send-email-GNUtoo@no-log.org>
 X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH 1/2] xkeyboard-config_git : remove DEFAULT_PREFERENCE = "-1"
+Subject: [PATCH 2/2] xkeyboard-config_git: remove DEFAULT_PREFERENCE = "-1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,27 +25,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Jan 2011 23:07:32 -0000
+X-List-Received-Date: Sun, 09 Jan 2011 23:08:33 -0000
 
 Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 ---
- recipes/gtk-webcore/midori_git.bb |    3 ---
+ recipes/xkeyboard-config/xkeyboard-config_git.bb |    3 ---
  1 files changed, 0 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/gtk-webcore/midori_git.bb b/recipes/gtk-webcore/midori_git.bb
-index 4f05132..f1b0556 100644
---- a/recipes/gtk-webcore/midori_git.bb
-+++ b/recipes/gtk-webcore/midori_git.bb
-@@ -2,9 +2,6 @@ require midori.inc
- 
- DEPENDS += "vala-native python-native python-docutils-native"
+diff --git a/recipes/xkeyboard-config/xkeyboard-config_git.bb b/recipes/xkeyboard-config/xkeyboard-config_git.bb
+index 5fc0a77..b92bdc1 100644
+--- a/recipes/xkeyboard-config/xkeyboard-config_git.bb
++++ b/recipes/xkeyboard-config/xkeyboard-config_git.bb
+@@ -6,9 +6,6 @@ SRCREV = "547ae8589afb208d7b44ffe1e0ff7aba466c2ee3"
+ PV = "2.0+gitr${SRCPV}"
+ PR = "r0"
  
 -DEFAULT_PREFERENCE = "-1"
 -DEFAULT_PREFERENCE_shr = "1"
 -
- # increment PR every time SRCREV is updated!
- SRCREV = "ad2f0066ce969152080cd841ce4cdd0920565409"
- PR = "r0"
+ SRC_URI = "git://anongit.freedesktop.org/xkeyboard-config;protocol=git;branch=master"
+ 
+ S = "${WORKDIR}/git"
 -- 
 1.7.0.4
 
