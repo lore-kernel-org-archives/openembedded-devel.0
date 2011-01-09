@@ -1,22 +1,21 @@
-Received: from mx194.callplus.net.nz ([202.180.66.194]
-	helo=mxi2.callplus.net.nz) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roystonvasey@slingshot.co.nz>) id 1Pc1LW-00041v-G3
-	for Openembedded-devel@lists.openembedded.org;
-	Sun, 09 Jan 2011 20:54:34 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApgFACahKU3LYgoS/2dsb2JhbACWL48CsW0BiRINhT8EkDQ
-Received: from smtp.connexionz.co.nz (HELO mikepad) ([203.98.10.18])
-	by ismtp02.callplus.net.nz with ESMTP; 10 Jan 2011 08:53:56 +1300
-From: "R U Local" <roystonvasey@slingshot.co.nz>
-To: <Openembedded-devel@lists.openembedded.org>
-References: 
-In-Reply-To: 
-Date: Mon, 10 Jan 2011 08:53:55 +1300
-Message-ID: <00ce01cbb036$f31d3010$d9579030$@slingshot.co.nz>
-MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: Acut4em3h8hh8lSiRTWhh8HpwuugOgCVESuA
-Subject: Re: Mono recipe fails at do_install
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pc2Us-0007BM-4z for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Jan 2011 22:08:18 +0100
+Received: from f053039058.adsl.alicedsl.de ([78.53.39.58]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pc2UR-00051b-IX for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Jan 2011 21:07:51 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 09 Jan 2011 22:07:50 +0100
+Message-ID: <1294607270.4036.73.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: OT: determining in `Makefile.in` the Python version/path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,68 +29,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Jan 2011 19:54:34 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Sun, 09 Jan 2011 21:08:18 -0000
+X-Groupsio-MsgNum: 27844
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-7MwWOyMvLvM1EyYWQffm"
+
+--=-7MwWOyMvLvM1EyYWQffm
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Language: en-nz
 
-Dear List,=20
-I=92m working on the Overo branch and just done a git pull to rebuild my
-platform.=20
-My previous head was 58feb7f form 2010-11-10.=20
-I'm getting an error in the Mono package build for task do_install.=20
-The mono-native and mono-mcs-intermediate parts build fine.=20
-There have been no changes to the mono source or the recipe during this
-time.=20
-
-Has there been any changes to the way OE =A0is structured between these
-commits that I should take a look at?=20
-
-Any help or suggestions would be appreciated.=20
-
-Cheers Mike.=20
+Dear OE folks,
 
 
-Sorry forgot the error log.
+when compiling XBMC for the ARM architecture it hard codes Python 2.5
+[1] and a patch in the OE repository changes this to Python 2.6 [2].
 
-NOTE: package mono-2.6.3-r0.0: task do_install: Started
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /opt/vm-share/user.collection/recipes/mono/mono_2.6.3.bb
-do_install failed
-ERROR: Task 3 (/opt/vm-share/user.collection/recipes/mono/mono_2.6.3.bb,
-do_install) failed with 256
-ERROR: '/opt/vm-share/user.collection/recipes/mono/mono_2.6.3.bb' failed
-ERROR: Function do_install failed
-NOTE: Task failed: ('function do_install failed',
-'/home/ctm100/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/mono-2.6.3-=
-r0.
-0/temp/log.do_install.1883')
-ERROR: Logfile of failure stored in:
-/home/ctm100/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/mono-2.6.3-r=
-0.0
-/temp/log.do_install.1883
-Log data follows:
-|
-/home/ctm100/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/mono-2.6.3-r=
-0.0
-/image
-| /home/ctm100
-| NOTE: make
-DESTDIR=3D/home/ctm100/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/mo=
-no-2.
-6.3-r0.0/image install
-| make: *** No rule to make target `install'.  Stop.
-| FATAL: oe_runmake failed
-| ERROR: Function do_install failed
-NOTE: package mono-2.6.3-r0.0: task do_install: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /opt/vm-share/user.collection/recipes/mono/mono_2.6.3.bb
-do_install failed
-ERROR: Task 3 (/opt/vm-share/user.collection/recipes/mono/mono_2.6.3.bb,
-do_install) failed with 256
-ERROR: '/opt/vm-share/user.collection/recipes/mono/mono_2.6.3.bb' failed
-ERROR: '/opt/vm-share/user.collection/recipes/mono/mono_2.6.3.bb' failed
+I tried to use `python-config` to determine the Python version [3].
+
+        ifeq (arm, $(ARCH))
+        -# Force external python2.5 for now!
+        -LIBS +=3D-lpython2.5
+        +# Force external Python for now!
+        +LIBS +=3D $(shell python-config --libs)
+         endif
+
+This fails with the following error though documented in `log.do_compile`.
+
+        Traceback (most recent call last):
+          File "/oe/build/angstrom-dev/sysroots/i686-linux/usr/bin/python-c=
+onfig", line 6, in <module>
+            from distutils import sysconfig
+          File "/oe/build/angstrom-dev/sysroots/i686-linux/usr/lib/python2.=
+6/distutils/sysconfig.py", line 22, in <module>
+            PREFIX =3D os.path.normpath(sys.prefix).replace( os.getenv("BUI=
+LD_SYS"), os.getenv("HOST_SYS") )
+
+Do you know of an easy way to fix this with just adapting `Makefile.in`?
+Or is using a separate variable as `PYTHON_LIBS` [4] the only option
+besides hard coding and patching?
+
+        ifeq (arm, $(ARCH))
+         # Force external Python for now!
+        -LIBS +=3D $(shell python-config --libs)
+        +PYTHON_LIBS ?=3D $(shell python-config --libs)
+        +LIBS +=3D $(PYTHON_LIBS)
+         endif
 
 
+Thanks,
 
+Paul
+
+
+[1] https://github.com/xbmc/xbmc/#L470
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/xbmc/xb=
+mc/0006-Hardcode-python2.6-for-now.patch?id=3D0cc02ded7bd429208ccb0e0e0aa3e=
+43aec8a4722
+[3] http://trac.xbmc.org/ticket/11041 (Please notice the updated patch wher=
+e `($` is changed to `$(`.)
+[4] http://trac.xbmc.org/ticket/11042 (Please notice the updated patch wher=
+e `($` is changed to `$(`.)
+
+--=-7MwWOyMvLvM1EyYWQffm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0qI6YACgkQPX1aK2wOHVgWOgCggZt44mLq81OTYhbsmW0VxJO6
+5FsAn03M9VlpVv5BBsteLslZgcRwxs8k
+=7ihM
+-----END PGP SIGNATURE-----
+
+--=-7MwWOyMvLvM1EyYWQffm--
