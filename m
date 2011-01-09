@@ -1,21 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pbwhu-0007Av-C3 for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Jan 2011 15:57:22 +0100
+	id 1Pbwz4-0007oZ-VF for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Jan 2011 16:15:06 +0100
 Received: from f053039058.adsl.alicedsl.de ([78.53.39.58]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PbwhU-0000cU-0c for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Jan 2011 14:56:56 +0000
+	id 1Pbwye-0001QJ-Oy for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Jan 2011 15:14:40 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 09 Jan 2011 15:56:54 +0100
-Message-ID: <1294585014.4036.47.camel@mattotaupa>
+Date: Sun, 09 Jan 2011 16:14:39 +0100
+Message-ID: <1294586079.4036.63.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
-Subject: libcap_1.10: ERROR: QA Issue with libcap: non -dev package contains symlink .so
+Subject: [PATCH] libcap_1.10: remove `do_stage()`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,56 +29,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Jan 2011 14:57:23 -0000
-X-Groupsio-MsgNum: 27839
+X-List-Received-Date: Sun, 09 Jan 2011 15:15:07 -0000
+X-Groupsio-MsgNum: 27840
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-O+DU/WcNJgdaWziQzRFZ"
+	boundary="=-vO46zPln+H6hKXYu18+h"
 
---=-O+DU/WcNJgdaWziQzRFZ
+--=-vO46zPln+H6hKXYu18+h
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+Date: Sun, 9 Jan 2011 15:59:33 +0100
 
+Convert `libcap_1.10` to new staging system by removing `do_stage()` [1].
 
-doing `bitbake -k libcap` with latest master (3d030f) with
-`minimal-uclibc` for `MACHINE =3D "beagleboard"`
+This change is build tested with the following configuration and `PREFERRED=
+_BINUTILS_VERSION =3D "2.21"`.
 
-        NOTE: package libcap-1.10-r2: task do_qa_staging: Succeeded
-        ERROR: QA Issue with libcap: non -dev package contains symlink .so:=
- libcap path '/work/armv7a-oe-linux-uclibceabi/libcap-1.10-r2/packages-spli=
-t/libcap/usr/lib/libcap.so'
-        ERROR: QA Issue with libcap: non -dev package contains symlink .so:=
- libcap path '/work/armv7a-oe-linux-uclibceabi/libcap-1.10-r2/packages-spli=
-t/libcap/usr/lib/libcap.so'
-        NOTE: package libcap-1.10-r2: task do_package: Succeeded
+        Build Configuration:
+        BB_VERSION        =3D "1.10.2"
+        METADATA_BRANCH   =3D "org.openembedded.dev"
+        METADATA_REVISION =3D "224c193"
+        TARGET_ARCH       =3D "arm"
+        TARGET_OS         =3D "linux-uclibceabi"
+        MACHINE           =3D "beagleboard"
+        DISTRO            =3D "minimal-uclibc"
+        DISTRO_VERSION    =3D "dev-snapshot-20110109"
+        TARGET_FPU        =3D "soft"
 
-Is that error reasonable or are library packages not allowed to have
-symlinks [1]?
+[1] http://wiki.openembedded.org/index.php/Legacy_staging
 
-        FILES_${PN} =3D "${libdir}"
-        FILES_${PN}-dev =3D "${includedir}"
+Signed-off-by: Paul Menzel <paul@gw90.de>
+---
+ recipes/libcap/libcap_1.10.bb |    6 ------
+ 1 files changed, 0 insertions(+), 6 deletions(-)
 
+diff --git a/recipes/libcap/libcap_1.10.bb b/recipes/libcap/libcap_1.10.bb
+index e6ca393..af5600b 100644
+--- a/recipes/libcap/libcap_1.10.bb
++++ b/recipes/libcap/libcap_1.10.bb
+@@ -22,11 +22,5 @@ do_install() {
+        oe_libinstall -s -C libcap libcap ${D}${libdir}
+ }
+=20
+-do_stage() {
+-       install -d ${STAGING_INCDIR}/sys
+-       install -m 0644 libcap/include/sys/capability.h ${STAGING_INCDIR}/s=
+ys/
+-       oe_libinstall -s -C libcap libcap ${STAGING_LIBDIR}
+-}
+-
+ SRC_URI[md5sum] =3D "4426a413128142cab89eb2e6f13d8571"
+ SRC_URI[sha256sum] =3D "66c3f033fdc8f9ba0bd9d0ae2d1f2c11f9fa51bf0d1418e5cb=
+75e29e6577a5bc"
+--=20
+1.7.2.3
 
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/libcap/=
-libcap_1.10.bb?id=3D3d030ffa57af27275fbb42eaa0fcd611f4925348
-
---=-O+DU/WcNJgdaWziQzRFZ
+--=-vO46zPln+H6hKXYu18+h
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAk0pzLYACgkQPX1aK2wOHVgCWACfe8BILw8EXOO7ktrD2375X32A
-Q3gAnjnkpJ9kKeSkTUEt/VI7Ezul+3Gx
-=AKo8
+iEYEABECAAYFAk0p0N8ACgkQPX1aK2wOHVh4oACfZAqw/XIGoLFLyxPnuAPrhAOr
+Z58AoIDiCBI9AwluxsVT1VsB+Fe7UlMz
+=qaKM
 -----END PGP SIGNATURE-----
 
---=-O+DU/WcNJgdaWziQzRFZ--
+--=-vO46zPln+H6hKXYu18+h--
