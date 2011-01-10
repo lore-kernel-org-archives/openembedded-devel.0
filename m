@@ -1,29 +1,33 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PcKYc-0005R5-PR
+	(envelope-from <Tom_Rini@mentor.com>) id 1PcKZR-0005Rx-Eb
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 17:25:22 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	Mon, 10 Jan 2011 17:26:13 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
 	by relay1.mentorg.com with esmtp 
-	id 1PcKY4-0005wG-O8 from Tom_Rini@mentor.com 
+	id 1PcKYx-000654-HX from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 08:24:48 -0800
+	Mon, 10 Jan 2011 08:25:43 -0800
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 10 Jan 2011 08:24:48 -0800
-Received: from localhost.localdomain ([134.86.97.1]) by
-	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 10 Jan 2011 09:24:47 -0700
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 10 Jan 2011 08:25:43 -0800
+Received: from [172.30.80.227] ([172.30.80.227]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 10 Jan 2011 09:25:42 -0700
+Message-ID: <4D2B3303.4000008@mentor.com>
+Date: Mon, 10 Jan 2011 09:25:39 -0700
 From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Jan 2011 09:24:56 -0700
-Message-Id: <1294676696-13896-2-git-send-email-tom_rini@mentor.com>
-X-Mailer: git-send-email 1.7.0.2
-In-Reply-To: <1294676696-13896-1-git-send-email-tom_rini@mentor.com>
-References: <1294676696-13896-1-git-send-email-tom_rini@mentor.com>
-X-OriginalArrivalTime: 10 Jan 2011 16:24:47.0454 (UTC)
-	FILETIME=[E5CA77E0:01CBB0E2]
-Subject: [PATCH 2/2] qemu.inc: Switch to xserver-xorg
+References: <1292507333-20222-1-git-send-email-Martin.Jansa@gmail.com>	<AANLkTik6N-zh9_o819ipEyu7-k3k5Nt24+GbVTg0q24n@mail.gmail.com>
+	<AANLkTimea7_8xcgXXb751V_Jhk_q9GP7VAUcEupGUrGW@mail.gmail.com>
+In-Reply-To: <AANLkTimea7_8xcgXXb751V_Jhk_q9GP7VAUcEupGUrGW@mail.gmail.com>
+X-OriginalArrivalTime: 10 Jan 2011 16:25:42.0421 (UTC)
+	FILETIME=[068DC450:01CBB0E3]
+Subject: Re: [RFC] xorg: upgrade to X11R7.6 and remove preferred-xorg-versions*.inc files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,38 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 16:25:23 -0000
+X-List-Received-Date: Mon, 10 Jan 2011 16:26:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Keeping with xserver-kdrive means that we have a sometimes race
-in that xserver-kdrive is too old for the other xorg components that
-are built (with X11R7.5) to build.  So we switch to xserver-xorg and
-appropriate modules.  Tested on qemux86 and x11-image.
+On 01/10/2011 05:20 AM, Otavio Salvador wrote:
+> On Mon, Jan 10, 2011 at 06:31, Martin Jansa<martin.jansa@gmail.com>  wrote:
+>> Or just push and see who complains? :/
+>
+> +1
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
----
- conf/machine/include/qemu.inc |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
++1
 
-diff --git a/conf/machine/include/qemu.inc b/conf/machine/include/qemu.inc
-index 852c12a..83bd67f 100644
---- a/conf/machine/include/qemu.inc
-+++ b/conf/machine/include/qemu.inc
-@@ -1,5 +1,11 @@
- PCMCIA_MANAGER = "pcmciautils"
--PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
-+PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-+XSERVER = "xserver-xorg \
-+           xf86-input-evdev \
-+           xf86-input-tslib \
-+           xf86-input-mouse \
-+           xf86-video-fbdev \
-+           xf86-input-keyboard"
- GUI_MACHINE_CLASS = "bigscreen"
- 
- MACHINE_FEATURES = "kernel26 apm alsa pcmcia bluetooth irda usbgadget screen keyboard touchscreen"
 -- 
-1.7.0.2
-
+Tom Rini
+Mentor Graphics Corporation
 
 
