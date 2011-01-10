@@ -1,23 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pc4Ox-0006pF-WD for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 00:10:20 +0100
-Received: from f053039058.adsl.alicedsl.de ([78.53.39.58]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pc4OX-0001IB-F7 for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Jan 2011 23:09:53 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1Pc9Hz-00031o-KF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Jan 2011 05:23:27 +0100
+Received: from nat-dem.mentorg.com ([195.212.93.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Pc96v-0005QW-26 from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Jan 2011 20:12:01 -0800
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 10 Jan 2011 05:11:59 +0100
+From: "Ahsan, Noor" <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1294614285-19077-1-git-send-email-GNUtoo@no-log.org>
-References: <1294614285-19077-1-git-send-email-GNUtoo@no-log.org>
-Date: Mon, 10 Jan 2011 00:09:51 +0100
-Message-ID: <1294614591.4036.77.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH 1/2] xkeyboard-config_git : remove DEFAULT_PREFERENCE = "-1"
+Date: Mon, 10 Jan 2011 09:13:57 +0500
+Message-Id: <1294632837-21666-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 10 Jan 2011 04:11:59.0813 (UTC)
+	FILETIME=[8708DF50:01CBB07C]
+Subject: [PATCH] packaged-staging.bbclass: bug fix in ipk file name generation for searching ipk file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,42 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Jan 2011 23:10:20 -0000
-X-Groupsio-MsgNum: 27851
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-rBVsF4uInFmBadNblB2c"
+X-List-Received-Date: Mon, 10 Jan 2011 04:23:27 -0000
 
---=-rBVsF4uInFmBadNblB2c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* First check the availability of PKGV_pkg variable, if it is not available then get value from PKGV variable for creating ipk file name for searching ipk file.
 
-Am Montag, den 10.01.2011, 00:04 +0100 schrieb Denis 'GNUtoo' Carikli:
-> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
-> ---
->  recipes/gtk-webcore/midori_git.bb |    3 ---
->  1 files changed, 0 insertions(+), 3 deletions(-)
+Signed-off-by: Ahsan, Noor <noor_ahsan@mentor.com>
+---
+ classes/packaged-staging.bbclass |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-So commit summary talks about `xkeyboard-config_git` and you changed
-`midori_git`.
+diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging.bbclass
+index d0aaea1..1200abc 100644
+--- a/classes/packaged-staging.bbclass
++++ b/classes/packaged-staging.bbclass
+@@ -454,10 +454,13 @@ python do_package_stage () {
+             pr = bb.data.getVar('PR_%s' % pkg, d, 1)
+             if not pr:
+                 pr = bb.data.getVar('PR', d, 1)
++            pkgv = bb.data.getVar('PKGV_%s' % pkg, d, 1)
++            if not pkgv:
++                pkgv = bb.data.getVar('PKGV', d, 1)
+             if not oe.packagedata.packaged(pkg, d):
+                 continue
+             if bb.data.inherits_class('package_ipk', d):
+-                srcname = bb.data.expand(pkgname + "_${PKGV}-" + pr + "${DISTRO_PR}" + "_" + arch + ".ipk", d)
++                srcname = bb.data.expand(pkgname + "_" + pkgv + "-" + pr + "${DISTRO_PR}" + "_" + arch + ".ipk", d)
+                 srcfile = bb.data.expand("${DEPLOY_DIR_IPK}/" + arch + "/" + srcname, d)
+                 if os.path.exists(srcfile):
+                     destpath = ipkpath + "/" + arch + "/"
+-- 
+1.6.3.3
 
-[=E2=80=A6]
 
 
-Thanks,
-
-Paul
-
---=-rBVsF4uInFmBadNblB2c
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk0qQD8ACgkQPX1aK2wOHVgL5ACfYnMR3GSapa7zVmSyGzpLNfAp
-zM8An0oFnsngBPpdnl9C4D3suZWztg2r
-=DFjE
------END PGP SIGNATURE-----
-
---=-rBVsF4uInFmBadNblB2c--
