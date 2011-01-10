@@ -1,27 +1,22 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
+Received: from p3plsmtpa01-10.prod.phx3.secureserver.net ([72.167.82.90])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PcKuZ-0000La-7W
+	(envelope-from <mike@mwester.net>) id 1PcL3G-0000cZ-Kd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 17:48:03 +0100
-Received: (qmail 27379 invoked by uid 503); 10 Jan 2011 17:25:41 -0000
-Received: from b6.ovh.net (HELO mail610.ha.ovh.net) (213.186.33.56)
-	by 63.mail-out.ovh.net with SMTP; 10 Jan 2011 17:25:41 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 10 Jan 2011 18:47:35 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 10 Jan 2011 18:47:32 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Jan 2011 17:47:24 +0100
-Message-Id: <1294678044-11675-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
+	Mon, 10 Jan 2011 17:57:03 +0100
+Received: (qmail 9572 invoked from network); 10 Jan 2011 16:49:49 -0000
+Received: from unknown (209.242.7.132)
+	by p3plsmtpa01-10.prod.phx3.secureserver.net (72.167.82.90) with ESMTP;
+	10 Jan 2011 16:49:49 -0000
+Message-ID: <4D2B389B.80407@mwester.net>
+Date: Mon, 10 Jan 2011 10:49:31 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 4045358366247595337
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH] linux-libc-headers_2.6.37: fix SRC_URI
+To: openembedded-devel@lists.openembedded.org
+References: <1294640096-21868-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1294640096-21868-1-git-send-email-raj.khem@gmail.com>
+Subject: Re: [PATCH] slugos.conf: Use thumb mode to save some more space
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,37 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 16:48:03 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 10 Jan 2011 16:57:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-actual SRC_URI can't work because :
-- linux-libc-headers-2.6.37.tar.bz2 or linux-libc-headers-native-2.6.37.tar.bz2
-don't exist on kernel.org's FTP
-- there is no file://defconfig
+On 1/10/2011 12:14 AM, Khem Raj wrote:
+> I have successfully nfs booted nslu box with the console-image generated
+> with thumb enabled gcc. This should help in reducing the code size a bit
+> more. I will build the image in all arm mode and compare how much we really
+> save
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- .../linux-libc-headers_2.6.37.bb                   |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Acked-by: Mike Westerhof <mike@mwester.net>
 
-diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.37.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.37.bb
-index c8b3871..67bc5f0 100644
---- a/recipes/linux-libc-headers/linux-libc-headers_2.6.37.bb
-+++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.37.bb
-@@ -7,8 +7,8 @@ DEPENDS += "unifdef-native"
- PR = "r0"
- 
- COMPATIBLE_TARGET_SYS = "."
--SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/${P}.tar.bz2;name=kernel \
--           file://defconfig "
-+SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
-+          "
- 
- SRC_URI[kernel.md5sum] = "c8ee37b4fdccdb651e0603d35350b434"
- SRC_URI[kernel.sha256sum] = "edbf091805414739cf57a3bbfeba9e87f5e74f97e38f04d12060e9e0c71e383a"
--- 
-1.6.3.3
+> ---
+>  conf/distro/slugos.conf |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/distro/slugos.conf b/conf/distro/slugos.conf
+> index e2e7cc0..853a58e 100644
+> --- a/conf/distro/slugos.conf
+> +++ b/conf/distro/slugos.conf
+> @@ -10,7 +10,7 @@ DISTRO_NAME = "SlugOS"
+>  # DISTRO_FEED = "unstable"
+>  DISTRO_TYPE = "alpha"
+>  TARGET_ARCH ?= "armeb"
+> -ARM_INSTRUCTION_SET = "arm"
+> +ARM_INSTRUCTION_SET = "thumb"
+>  IPKG_VARIANT ?= "opkg-nogpg-nocurl-slugos"
+>  PREFERRED_PROVIDER_opkg ?= "opkg-nogpg-nocurl-slugos"
+>  PREFERRED_PROVIDER_virtual/update-alternatives ?= "opkg-nogpg-nocurl-slugos"
 
 
 
