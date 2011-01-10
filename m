@@ -1,28 +1,25 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1PcIk3-0001tP-Pi
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 15:29:03 +0100
-Received: by wwi18 with SMTP id 18so1696177wwi.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jan 2011 06:28:33 -0800 (PST)
-Received: by 10.227.167.8 with SMTP id o8mr2793338wby.166.1294669713538;
-	Mon, 10 Jan 2011 06:28:33 -0800 (PST)
-Received: from [172.20.0.255] (ip545070eb.adsl-surfen.hetnet.nl
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id f35sm20104356wbf.14.2011.01.10.06.28.30
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 10 Jan 2011 06:28:31 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1082)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1294668735-25620-1-git-send-email-vjaquez@igalia.com>
-Date: Mon, 10 Jan 2011 15:28:29 +0100
-Message-Id: <2C4CA055-732C-4192-8E13-C85372B9950E@dominion.thruhere.net>
-References: <1294668735-25620-1-git-send-email-vjaquez@igalia.com>
-To: =?iso-8859-1?Q?V=EDctor_Manuel_J=E1quez_Leal?= <vjaquez@igalia.com>
-X-Mailer: Apple Mail (2.1082)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] scons: add EXTRA_OESCONS
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PcJ0N-0003Zf-5n for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Jan 2011 15:45:55 +0100
+Received: from f053035160.adsl.alicedsl.de ([78.53.35.160]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PcIzv-0005zn-Kq; Mon, 10 Jan 2011 14:45:27 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4D2B0D23.4070003@nospam.arcornews.de>
+References: <1294585014.4036.47.camel@mattotaupa>
+	<4D29FC65.9010608@gmail.com> <1294659553.4342.69.camel@mattotaupa>
+	<4D2B0D23.4070003@nospam.arcornews.de>
+Date: Mon, 10 Jan 2011 15:45:26 +0100
+Message-ID: <1294670726.4342.72.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Cc: Dirk Opfer <dirk@opfer-online.de>
+Subject: Re: [PATCH] libcap, libcap2: use automatic packaging to fix QA errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,55 +33,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 14:29:03 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Mon, 10 Jan 2011 14:45:55 -0000
+X-Groupsio-MsgNum: 27869
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-XksD27/TuYVqgU4BQH4H"
+
+--=-XksD27/TuYVqgU4BQH4H
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+Am Montag, den 10.01.2011, 21:44 +0800 schrieb Rolf Leggewie:
+> On 10.01.2011 19:39, Paul Menzel wrote
+> >>>          FILES_${PN} =3D "${libdir}"
+> >>>          FILES_${PN}-dev =3D "${includedir}"
+> >=20
+> > I am putting Rolf into CC to get the reasoning for the previous
+> > behavior.
+>=20
+> My commit did not change the previous behaviour as far as I can see and
+> thus I cannot comment on it.
 
-Op 10 jan 2011, om 15:12 heeft V=EDctor Manuel J=E1quez Leal het =
-volgende geschreven:
+Sorry, I misinterpreted `git blame`.
 
-> It's similar to EXTRA_OEMAKE, which appends arguments to the scons
-> command
->=20
-> v2:
-> * initialise the EXTRA_OECONS if it is not defined
->=20
-> Signed-off-by: V=EDctor Manuel J=E1quez Leal <vjaquez@igalia.com>
+> Maybe you want to look deeper into the history of that file.  Sorry.
 
-Acked-by: Koen Kooi <koen@openembedded.org>
+It looks Dirk committed these lines when adding 1.10 in commit b823b4
+[1].
 
-
-> ---
-> classes/scons.bbclass |    4 +++-
-> 1 files changed, 3 insertions(+), 1 deletions(-)
->=20
-> diff --git a/classes/scons.bbclass b/classes/scons.bbclass
-> index 2a935e4..c19f8d4 100644
-> --- a/classes/scons.bbclass
-> +++ b/classes/scons.bbclass
-> @@ -1,5 +1,7 @@
-> DEPENDS +=3D "python-scons-native"
->=20
-> +EXTRA_OESCONS ?=3D ""
-> +
-> export TARGET_LINK_HASH_STYLE
->=20
-> scons_do_compile() {
-> @@ -11,7 +13,7 @@ scons_do_compile() {
->         fi
->     fi
->=20
-> -    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX=3D"${CXX}" =
-PREFIX=3D${prefix} prefix=3D${prefix} || \
-> +    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX=3D"${CXX}" =
-PREFIX=3D${prefix} prefix=3D${prefix} ${EXTRA_OESCONS} || \
->     oefatal "scons build execution failed."
-> }
->=20
-> --=20
-> 1.7.2.3
->=20
+Dirk, could you please comment on [2].
 
 
+Thanks,
 
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Db823b49=
+470515182cb6f7a536d6a63fac53948aa
+[2] http://patches.openembedded.org/patch/218/
+
+--=-XksD27/TuYVqgU4BQH4H
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0rG4YACgkQPX1aK2wOHVjD9QCffru80ACKhNEZOp4IQKEDMGtU
+0MAAnR1HQEkt8VMVX+B7KOR8qau0nCJr
+=VcSE
+-----END PGP SIGNATURE-----
+
+--=-XksD27/TuYVqgU4BQH4H--
