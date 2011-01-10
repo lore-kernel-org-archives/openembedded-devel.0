@@ -1,32 +1,42 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PcKZR-0005Rx-Eb
+	(envelope-from <martin.jansa@gmail.com>) id 1PcKhw-0005mW-09
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 17:26:13 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PcKYx-000654-HX from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 08:25:43 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 10 Jan 2011 08:25:43 -0800
-Received: from [172.30.80.227] ([172.30.80.227]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 10 Jan 2011 09:25:42 -0700
-Message-ID: <4D2B3303.4000008@mentor.com>
-Date: Mon, 10 Jan 2011 09:25:39 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 10 Jan 2011 17:35:00 +0100
+Received: by fxm17 with SMTP id 17so18206845fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Jan 2011 08:34:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=JsDt++WD21+AIQG5Xhz/c1ETd62j878fpsndIVqjtK4=;
+	b=H7HCbe/bTJo1AP9/fg5pXtR1D2BnmtXvHBm/NXbWImzrI/rCk1BRrAvILapX8r1ZmD
+	RG5gy8vcdNQNp9ry6NzgAMJ57qd8IezkwvQsU4QNRYaa3JK3mHG0GbJFveKaYMSBIPYE
+	mU0koxys85m9jBX7boDjCA+NvCK9ivUUBb+24=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=pKclGPlYSCxltoo5+87Q5+Ji9nPbReAILFUgY+lcJ+CkMNAzLHZikAvxG6gDH5tEc7
+	6/L7Jf5TA1KQnTZi676x/cRLToJ9mXfvZKnyXFtxMyK7tmtGw/0ipzgu2KBjSkE0L8tb
+	/LECGjG10P+LfrJvlEeRdGDdmn8+Mqh1uMriM=
+Received: by 10.223.96.199 with SMTP id i7mr1168454fan.56.1294677270570;
+	Mon, 10 Jan 2011 08:34:30 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n1sm7024046fam.16.2011.01.10.08.34.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 10 Jan 2011 08:34:29 -0800 (PST)
+Date: Mon, 10 Jan 2011 17:34:32 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1292507333-20222-1-git-send-email-Martin.Jansa@gmail.com>	<AANLkTik6N-zh9_o819ipEyu7-k3k5Nt24+GbVTg0q24n@mail.gmail.com>
+Message-ID: <20110110163432.GF3244@jama>
+References: <1292507333-20222-1-git-send-email-Martin.Jansa@gmail.com>
+	<AANLkTik6N-zh9_o819ipEyu7-k3k5Nt24+GbVTg0q24n@mail.gmail.com>
 	<AANLkTimea7_8xcgXXb751V_Jhk_q9GP7VAUcEupGUrGW@mail.gmail.com>
-In-Reply-To: <AANLkTimea7_8xcgXXb751V_Jhk_q9GP7VAUcEupGUrGW@mail.gmail.com>
-X-OriginalArrivalTime: 10 Jan 2011 16:25:42.0421 (UTC)
-	FILETIME=[068DC450:01CBB0E3]
+	<4D2B3303.4000008@mentor.com>
+MIME-Version: 1.0
+In-Reply-To: <4D2B3303.4000008@mentor.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [RFC] xorg: upgrade to X11R7.6 and remove preferred-xorg-versions*.inc files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,20 +51,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 16:26:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 10 Jan 2011 16:35:00 -0000
+X-Groupsio-MsgNum: 27873
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="UBnjLfzoMQYIXCvq"
+Content-Disposition: inline
 
-On 01/10/2011 05:20 AM, Otavio Salvador wrote:
-> On Mon, Jan 10, 2011 at 06:31, Martin Jansa<martin.jansa@gmail.com>  wrote:
->> Or just push and see who complains? :/
->
+--UBnjLfzoMQYIXCvq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jan 10, 2011 at 09:25:39AM -0700, Tom Rini wrote:
+> On 01/10/2011 05:20 AM, Otavio Salvador wrote:
+> > On Mon, Jan 10, 2011 at 06:31, Martin Jansa<martin.jansa@gmail.com>  wr=
+ote:
+> >> Or just push and see who complains? :/
+> >
+> > +1
+>=20
 > +1
 
-+1
+can I sed 's/+1/Ackey-by you 2/g' ?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--UBnjLfzoMQYIXCvq
+Content-Type: application/pgp-signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.16 (GNU/Linux)
+
+iEYEARECAAYFAk0rNRgACgkQN1Ujt2V2gByEaQCgoEf9yiKRqHECqP2IHFZUu1Md
+fCQAoLh9teUJLlJw9ELKEgwcgSXKsbyF
+=XFzm
+-----END PGP SIGNATURE-----
+
+--UBnjLfzoMQYIXCvq--
