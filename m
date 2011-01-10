@@ -1,33 +1,34 @@
-Received: from mail-in-10.arcor-online.net ([151.189.21.50])
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <no2spam@nospam.arcornews.de>) id 1PcIa3-0000gD-FD
+	(envelope-from <vjaquez@igalia.com>) id 1PcIaT-0000gZ-HL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 15:18:43 +0100
-Received: from mail-in-13-z2.arcor-online.net (mail-in-13-z2.arcor-online.net
-	[151.189.8.30]) by mx.arcor.de (Postfix) with ESMTP id 881B52D66DC;
-	Mon, 10 Jan 2011 14:44:13 +0100 (CET)
-Received: from mail-in-15.arcor-online.net (mail-in-15.arcor-online.net
-	[151.189.21.55])
-	by mail-in-13-z2.arcor-online.net (Postfix) with ESMTP id 7D558E1B4F;
-	Mon, 10 Jan 2011 14:44:13 +0100 (CET)
-Received: from [192.168.3.100] (unknown [112.206.128.158])
-	(Authenticated sender: leggewie@arcor.de)
-	by mail-in-15.arcor-online.net (Postfix) with ESMTPA id CB3681AC8FB;
-	Mon, 10 Jan 2011 14:44:11 +0100 (CET)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-15.arcor-online.net CB3681AC8FB
-Message-ID: <4D2B0D23.4070003@nospam.arcornews.de>
-Date: Mon, 10 Jan 2011 21:44:03 +0800
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Mon, 10 Jan 2011 15:19:09 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AuoFAAaiKk1bdWOb/2dsb2JhbACECJIqjwGuKI0WgSGDN3QEiwqFKg
+X-IronPort-AV: E=Sophos;i="4.60,300,1291590000"; d="scan'208";a="318803459"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 10 Jan 2011 15:12:16 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1PcITo-0003nn-HO; Mon, 10 Jan 2011 15:12:16 +0100
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1PcITo-0003nQ-An; Mon, 10 Jan 2011 15:12:16 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>)
+	id 1PcITn-0006fq-TY; Mon, 10 Jan 2011 15:12:15 +0100
+From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
+	<vjaquez@igalia.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Jan 2011 15:12:14 +0100
+Message-Id: <1294668735-25620-1-git-send-email-vjaquez@igalia.com>
+X-Mailer: git-send-email 1.7.2.3
 MIME-Version: 1.0
-To: Paul Menzel <paulepanter@users.sourceforge.net>, 
-	Paul Menzel <paulepanter@users.sourceforge.net>
-References: <1294585014.4036.47.camel@mattotaupa>	 <4D29FC65.9010608@gmail.com>
-	<1294659553.4342.69.camel@mattotaupa>
-In-Reply-To: <1294659553.4342.69.camel@mattotaupa>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] libcap, libcap2: use automatic packaging to fix QA errors
+Cc: Koen Kooi <koen@openembedded.org>, Michael Lauer <mickey@vanille-media.de>
+Subject: [PATCH v2] scons: add EXTRA_OESCONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,19 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 14:18:43 -0000
+X-List-Received-Date: Mon, 10 Jan 2011 14:19:09 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 10.01.2011 19:39, Paul Menzel wrote
->>>          FILES_${PN} = "${libdir}"
->>>          FILES_${PN}-dev = "${includedir}"
-> 
-> I am putting Rolf into CC to get the reasoning for the previous
-> behavior.
+It's similar to EXTRA_OEMAKE, which appends arguments to the scons
+command
 
-My commit did not change the previous behaviour as far as I can see and
-thus I cannot comment on it.  Maybe you want to look deeper into the
-history of that file.  Sorry.
+v2:
+* initialise the EXTRA_OECONS if it is not defined
+
+Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
+---
+ classes/scons.bbclass |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/classes/scons.bbclass b/classes/scons.bbclass
+index 2a935e4..c19f8d4 100644
+--- a/classes/scons.bbclass
++++ b/classes/scons.bbclass
+@@ -1,5 +1,7 @@
+ DEPENDS += "python-scons-native"
+ 
++EXTRA_OESCONS ?= ""
++
+ export TARGET_LINK_HASH_STYLE
+ 
+ scons_do_compile() {
+@@ -11,7 +13,7 @@ scons_do_compile() {
+         fi
+     fi
+ 
+-    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX="${CXX}" PREFIX=${prefix} prefix=${prefix} || \
++    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX="${CXX}" PREFIX=${prefix} prefix=${prefix} ${EXTRA_OESCONS} || \
+     oefatal "scons build execution failed."
+ }
+ 
+-- 
+1.7.2.3
+
 
 
