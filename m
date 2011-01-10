@@ -1,23 +1,24 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PcF00-0004iV-3n for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 11:29:16 +0100
+	id 1PcFHG-0004wZ-24 for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Jan 2011 11:47:06 +0100
 Received: from f053035160.adsl.alicedsl.de ([78.53.35.160]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PcEzY-0006Ti-P7 for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 10:28:48 +0000
+	id 1PcFGo-0007EF-T5 for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Jan 2011 10:46:39 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4D2A0680.6030704@gmail.com>
-References: <1294586079.4036.63.camel@mattotaupa> <4D2A0680.6030704@gmail.com>
-Date: Mon, 10 Jan 2011 11:28:47 +0100
-Message-ID: <1294655327.4342.18.camel@mattotaupa>
+In-Reply-To: <4D2A3410.6090906@opendreambox.org>
+References: <1294607270.4036.73.camel@mattotaupa>
+	<4D2A3410.6090906@opendreambox.org>
+Date: Mon, 10 Jan 2011 11:46:37 +0100
+Message-ID: <1294656397.4342.30.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
-Subject: [PATCH] [RESEND] Convert `libcap_1.10` to new staging system by removing `do_stage()` [1].
+Subject: Re: OT: determining in `Makefile.in` the Python version/path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,82 +32,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 10:29:16 -0000
-X-Groupsio-MsgNum: 27861
+X-List-Received-Date: Mon, 10 Jan 2011 10:47:06 -0000
+X-Groupsio-MsgNum: 27862
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-odbX9RmhRl66l9axDbGi"
+	boundary="=-3YdUWlScyknM2tpHg+Dt"
 
---=-odbX9RmhRl66l9axDbGi
+--=-3YdUWlScyknM2tpHg+Dt
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Date: Sun, 9 Jan 2011 15:59:33 +0100
+Am Sonntag, den 09.01.2011, 23:17 +0100 schrieb Andreas Oberritter:
+> On 01/09/2011 10:07 PM, Paul Menzel wrote:
+> > I tried to use `python-config` to determine the Python version [3].
+> >=20
+> >         ifeq (arm, $(ARCH))
+> >         -# Force external python2.5 for now!
+> >         -LIBS +=3D-lpython2.5
+> >         +# Force external Python for now!
+> >         +LIBS +=3D $(shell python-config --libs)
+> >          endif
+> >=20
+> > This fails with the following error though documented in `log.do_compil=
+e`.
+> >=20
+> >         Traceback (most recent call last):
+> >           File "/oe/build/angstrom-dev/sysroots/i686-linux/usr/bin/pyth=
+on-config", line 6, in <module>
+> >             from distutils import sysconfig
+> >           File "/oe/build/angstrom-dev/sysroots/i686-linux/usr/lib/pyth=
+on2.6/distutils/sysconfig.py", line 22, in <module>
+> >             PREFIX =3D os.path.normpath(sys.prefix).replace( os.getenv(=
+"BUILD_SYS"), os.getenv("HOST_SYS") )
+> >=20
+>=20
+> For OE's Python, you need to set some variables in your recipe, e.g.:
+>=20
+> EXTRA_OECONF =3D " \
+>         BUILD_SYS=3D${BUILD_SYS} \
+>         HOST_SYS=3D${HOST_SYS} \
+>         STAGING_INCDIR=3D${STAGING_INCDIR} \
+>         STAGING_LIBDIR=3D${STAGING_LIBDIR} \
+> "
 
-This change is build tested with the following configuration and `PREFERRED=
-_BINUTILS_VERSION =3D "2.21"`.
+Andreas, thank you very much. At first it did not work and I got the
+same error. Then I tried to put it into `EXTRA_OEMAKE`, since the error
+was during task `compile`. That did not work either and I got the same
+error again.
 
-        Build Configuration:
-        BB_VERSION        =3D "1.10.2"
-        METADATA_BRANCH   =3D "org.openembedded.dev"
-        METADATA_REVISION =3D "224c193"
-        TARGET_ARCH       =3D "arm"
-        TARGET_OS         =3D "linux-uclibceabi"
-        MACHINE           =3D "beagleboard"
-        DISTRO            =3D "minimal-uclibc"
-        DISTRO_VERSION    =3D "dev-snapshot-20110109"
-        TARGET_FPU        =3D "soft"
+With a manual test recipe (attached, `git am --scissors`) manually
+running
 
-[1] http://wiki.openembedded.org/index.php/Legacy_staging
+	python-config --libs
+
+worked, so I think the problem is, that the environment variables are
+not passed to the shell(?) opened by `$(shell =E2=80=A6)`.
+
+Searching for `'BUILD_SYS=3D${BUILD_SYS}'` through the repository I found
+that sometimes those variables are exported and tried the following
+
+        do_configure_prepend() {
+               export BUILD_SYS=3D${BUILD_SYS}
+               export HOST_SYS=3D${HOST_SYS}
+               export STAGING_INCDIR=3D${STAGING_INCDIR}
+               export STAGING_LIBDIR=3D${STAGING_LIBDIR}
+        }
+       =20
+        [=E2=80=A6]
+       =20
+        do_compile_prepend() {
+               export BUILD_SYS=3D${BUILD_SYS}
+               export HOST_SYS=3D${HOST_SYS}
+               export STAGING_INCDIR=3D${STAGING_INCDIR}
+               export STAGING_LIBDIR=3D${STAGING_LIBDIR}
+        }
+
+which seems to work. Is that the right explanation and is there an
+easier way to do this?
+
+
+Thanks,
+
+Paul
+
+8<-------------------------------------------------------------------->8
+=46rom dbf2af72601e5998af0d3cc0f0dc4abcc5d4fa6e Mon Sep 17 00:00:00 2001
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+Date: Mon, 10 Jan 2011 11:00:45 +0100
+Subject: [PATCH] test-python-config: add test program for `python-config`
+
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/028563=
+.html
 
 Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 ---
-Am Sonntag, den 09.01.2011, 11:03 -0800 schrieb Khem Raj:
-> On 1/9/2011 7:14 AM, Paul Menzel wrote:
+ recipes/helloworld/test-python-config_1.0.0.bb |   18 ++++++++++++++++++
+ 1 files changed, 18 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/helloworld/test-python-config_1.0.0.bb
 
-[=E2=80=A6]
-
-> this patch is malformed and have spurious line breaks and other stuff.=
-=20
-> Please redo and send again
-
-Sorry Khem. I copied the output from `more git-am-formatted.mbox` over
-an SSH session into the MUA. It looks like that does not work well. The
-Signed-off-by line was wrong too.
----
- recipes/libcap/libcap_1.10.bb |    6 ------
- 1 files changed, 0 insertions(+), 6 deletions(-)
-
-diff --git a/recipes/libcap/libcap_1.10.bb b/recipes/libcap/libcap_1.10.bb
-index e6ca393..af5600b 100644
---- a/recipes/libcap/libcap_1.10.bb
-+++ b/recipes/libcap/libcap_1.10.bb
-@@ -22,11 +22,5 @@ do_install() {
- 	oe_libinstall -s -C libcap libcap ${D}${libdir}
- }
-=20
--do_stage() {
--	install -d ${STAGING_INCDIR}/sys
--	install -m 0644 libcap/include/sys/capability.h ${STAGING_INCDIR}/sys/
--	oe_libinstall -s -C libcap libcap ${STAGING_LIBDIR}
--}
--
- SRC_URI[md5sum] =3D "4426a413128142cab89eb2e6f13d8571"
- SRC_URI[sha256sum] =3D "66c3f033fdc8f9ba0bd9d0ae2d1f2c11f9fa51bf0d1418e5cb=
-75e29e6577a5bc"
+diff --git a/recipes/helloworld/test-python-config_1.0.0.bb b/recipes/hello=
+world/test-python-config_1.0.0.bb
+new file mode 100644
+index 0000000..89c89e9
+--- /dev/null
++++ b/recipes/helloworld/test-python-config_1.0.0.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION =3D "run `python-config --libs`"
++LICENSE =3D "GPLv3"
++PR =3D "r0"
++DEPENDS =3D "python"
++
++S =3D "${WORKDIR}/${P}"
++
++do_fetch () {
++	mkdir -p ${WORKDIR}/${P}
++	cd ${WORKDIR}/${P}
++}
++
++do_compile () {
++	BUILD_SYS=3D${BUILD_SYS} HOST_SYS=3D${HOST_SYS} STAGING_INCDIR=3D${STAGIN=
+G_INCDIR} STAGING_LIBDIR=3D${STAGING_LIBDIR} python-config --libs
++}
++
++do_install () {
++}
 --=20
 1.7.2.3
 
---=-odbX9RmhRl66l9axDbGi
+--=-3YdUWlScyknM2tpHg+Dt
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAk0q318ACgkQPX1aK2wOHVheOACfb5kLthUwvZpvy17Ubhb1+bxx
-8B8An0V6R1L2NDEBr73DlvX78sEHbU6P
-=AyNH
+iEYEABECAAYFAk0q440ACgkQPX1aK2wOHVj9UACggwvAQCRVxpWO+lhxfOQoQiYL
+cQ8An3ALpWRhEngMakwGcQ9WzT0zT6Vj
+=4Q0v
 -----END PGP SIGNATURE-----
 
---=-odbX9RmhRl66l9axDbGi--
+--=-3YdUWlScyknM2tpHg+Dt--
