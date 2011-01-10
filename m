@@ -1,43 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PcKhw-0005mW-09
+	(envelope-from <Tom_Rini@mentor.com>) id 1PcKkV-0008O3-Ah
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 17:35:00 +0100
-Received: by fxm17 with SMTP id 17so18206845fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jan 2011 08:34:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=JsDt++WD21+AIQG5Xhz/c1ETd62j878fpsndIVqjtK4=;
-	b=H7HCbe/bTJo1AP9/fg5pXtR1D2BnmtXvHBm/NXbWImzrI/rCk1BRrAvILapX8r1ZmD
-	RG5gy8vcdNQNp9ry6NzgAMJ57qd8IezkwvQsU4QNRYaa3JK3mHG0GbJFveKaYMSBIPYE
-	mU0koxys85m9jBX7boDjCA+NvCK9ivUUBb+24=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pKclGPlYSCxltoo5+87Q5+Ji9nPbReAILFUgY+lcJ+CkMNAzLHZikAvxG6gDH5tEc7
-	6/L7Jf5TA1KQnTZi676x/cRLToJ9mXfvZKnyXFtxMyK7tmtGw/0ipzgu2KBjSkE0L8tb
-	/LECGjG10P+LfrJvlEeRdGDdmn8+Mqh1uMriM=
-Received: by 10.223.96.199 with SMTP id i7mr1168454fan.56.1294677270570;
-	Mon, 10 Jan 2011 08:34:30 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n1sm7024046fam.16.2011.01.10.08.34.28
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 10 Jan 2011 08:34:29 -0800 (PST)
-Date: Mon, 10 Jan 2011 17:34:32 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110110163432.GF3244@jama>
-References: <1292507333-20222-1-git-send-email-Martin.Jansa@gmail.com>
-	<AANLkTik6N-zh9_o819ipEyu7-k3k5Nt24+GbVTg0q24n@mail.gmail.com>
-	<AANLkTimea7_8xcgXXb751V_Jhk_q9GP7VAUcEupGUrGW@mail.gmail.com>
-	<4D2B3303.4000008@mentor.com>
+	Mon, 10 Jan 2011 17:37:45 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PcKk0-0000h1-Sl from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Jan 2011 08:37:08 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 10 Jan 2011 08:37:08 -0800
+Received: from [172.30.80.227] ([172.30.80.227]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 10 Jan 2011 09:37:07 -0700
+Message-ID: <4D2B35B1.4080401@mentor.com>
+Date: Mon, 10 Jan 2011 09:37:05 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <4D2B3303.4000008@mentor.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [RFC] xorg: upgrade to X11R7.6 and remove preferred-xorg-versions*.inc files
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTimqbQNtFt6NUi5D03nSnfRMyPxqrLYsN=PB4v+C@mail.gmail.com>
+	<4D266CA1.4060306@mentor.com>
+In-Reply-To: <4D266CA1.4060306@mentor.com>
+X-OriginalArrivalTime: 10 Jan 2011 16:37:07.0801 (UTC)
+	FILETIME=[9F127490:01CBB0E4]
+Subject: Re: testing branch 2011-01-06
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,41 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 16:35:00 -0000
-X-Groupsio-MsgNum: 27873
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="UBnjLfzoMQYIXCvq"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 10 Jan 2011 16:37:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---UBnjLfzoMQYIXCvq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 01/06/2011 06:30 PM, Tom Rini wrote:
+> On 01/06/2011 04:22 PM, Cliff Brake wrote:
+>> master has been merged to testing-next and is ready for clean builds.
+>>
+>> There are only 7 combinations listed as passing. If anyone has data
+>> that is not entered, I'll check back tomorrow morning before I create
+>> the tag.
+>>
+>> For more information on OpenEmbedded testing, see:
+>>
+>> http://www.openembedded.org/index.php/Testing
+>>
+>> We have lost some momentum with testing, so it would be nice to pick
+>> up this effort again (speaking to myself first). I just ordered a 2TB
+>> drive, so hopefully that will give me the capacity to do some more
+>> builds.
+>
+> I see that the testing branch does contain the super long path fixes I
+> pushed today so I expect to finally be able to push some real results
+> (and failures!) over to the wiki this week. Build has started.
 
-On Mon, Jan 10, 2011 at 09:25:39AM -0700, Tom Rini wrote:
-> On 01/10/2011 05:20 AM, Otavio Salvador wrote:
-> > On Mon, Jan 10, 2011 at 06:31, Martin Jansa<martin.jansa@gmail.com>  wr=
-ote:
-> >> Or just push and see who complains? :/
-> >
-> > +1
->=20
-> +1
+OK, I'm going to update the table sometime today.  Unfortunately I ran 
+into some problems:
+- The help2man-native change I pushed is needed for native-image-sdk to 
+move on
+- The xserver switch for qemu* is needed for qemu* + x11-image
+- There's a race in libnl2 (http://pastebin.com/e3rwyg9H) that I'm 
+trying to fix now (rather than PARALLEL_MAKE="") that broke a lot of 
+other images.
 
-can I sed 's/+1/Ackey-by you 2/g' ?
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---UBnjLfzoMQYIXCvq
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.16 (GNU/Linux)
-
-iEYEARECAAYFAk0rNRgACgkQN1Ujt2V2gByEaQCgoEf9yiKRqHECqP2IHFZUu1Md
-fCQAoLh9teUJLlJw9ELKEgwcgSXKsbyF
-=XFzm
------END PGP SIGNATURE-----
-
---UBnjLfzoMQYIXCvq--
