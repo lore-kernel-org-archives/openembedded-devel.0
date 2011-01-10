@@ -1,35 +1,27 @@
-Received: from moutng.kundenserver.de ([212.227.126.186])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Dirk@Do13.de>) id 1PcPJH-0000s9-3X
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PcPNf-0000xC-WC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 22:29:51 +0100
-Received: from mail.opfer.lan (do13.in-dsl.de [217.197.85.204])
-	by mrelayeu.kundenserver.de (node=mrbap2) with ESMTP (Nemesis)
-	id 0M0bdu-1QRce41970-00uL7O; Mon, 10 Jan 2011 22:16:42 +0100
-Received: from [192.168.2.47] by mail.opfer.lan with esmtpa (Exim 4.69)
-	(envelope-from <Dirk@Do13.de>) id 1PcP6I-0003W7-4a
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 22:16:41 +0100
-Message-ID: <4D2B7703.2030605@Do13.de>
-Date: Mon, 10 Jan 2011 22:15:47 +0100
-From: Dirk Opfer <Dirk@Do13.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 10 Jan 2011 22:34:24 +0100
+Received: (qmail 10715 invoked by uid 503); 10 Jan 2011 22:12:03 -0000
+Received: from b9.ovh.net (HELO mail179.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 10 Jan 2011 22:12:03 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 10 Jan 2011 23:33:55 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 10 Jan 2011 23:33:54 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1294585014.4036.47.camel@mattotaupa>	 <4D29FC65.9010608@gmail.com>
-	<1294659553.4342.69.camel@mattotaupa>	
-	<4D2B0D23.4070003@nospam.arcornews.de>
-	<1294670726.4342.72.camel@mattotaupa>
-In-Reply-To: <1294670726.4342.72.camel@mattotaupa>
-X-Scan-Signature: 52a5e346f66052aa3727d80d37b66b0f
-X-Spam-Score: -4.4 (----)
-X-Provags-ID: V02:K0:jy/JUy0keTwrBrN2zeluKUBu9AbfIZHOLz/e5cAwIDt
-	H8r1XYmakpLIv8MH8d3Tjg9P5he5rD9byxgAu/cLb/RZn23gaJ
-	dNR8xw7D9cKe73sak3scBHXtcs+PlE65RTdswUW1/LAuQIhe4u
-	RngW/u8qBsTmYHtrdTpPZwaDyuDli02D/a1OfwxhDcH6NWpRZ9
-	L+ccznS0DcwG1SBE4dG3Hx4MxgDMQnxlxpEpvxE9aY=
-Subject: Re: [PATCH] libcap, libcap2: use automatic packaging to fix QA errors
+Date: Mon, 10 Jan 2011 22:33:41 +0100
+Message-Id: <1294695225-16321-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 8881661415288843593
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH] busybox-1.18.1: add latest fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,100 +35,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 21:29:51 -0000
-X-Groupsio-MsgNum: 27882
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
-	micalg=sha1; boundary="------------ms070301090905090405010003"
+X-List-Received-Date: Mon, 10 Jan 2011 21:34:24 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
---------------ms070301090905090405010003
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+* tftp: fix bad interaction betweel poll() and alarm(). Closes bug 3061
+This was breaking timeout handling.
+http://git.busybox.net/busybox/commit/?id=84dba9c5bbd99cb80c0e201bbffa27a51766c63f
 
-Am 10.01.2011 15:45, schrieb Paul Menzel:
-> Maybe you want to look deeper into the history of that file.  Sorry.
-> It looks Dirk committed these lines when adding 1.10 in commit b823b4
-> [1].
->
-> Dirk, could you please comment on [2].
->
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ .../busybox-1.18.1/busybox-1.18.1-hush.patch       |    2 +-
+ .../busybox-1.18.1/busybox-1.18.1-tftp.patch       |   72 ++++++++++++++++++++
+ recipes/busybox/busybox_1.18.1.bb                  |    3 +-
+ 3 files changed, 75 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/busybox/busybox-1.18.1/busybox-1.18.1-tftp.patch
 
-No idea why this was needed in the old version.
-Looks fine to me.
+diff --git a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
+index 590ed88..5281a52 100644
+--- a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
++++ b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-hush.patch
+@@ -1,6 +1,6 @@
+ diff -urpN busybox-1.18.1/shell/hush.c busybox-1.18.1-hush/shell/hush.c
+ --- busybox-1.18.1/shell/hush.c	2010-12-21 05:31:04.000000000 +0100
+-+++ busybox-1.18.1-hush/shell/hush.c	2011-01-09 21:00:02.000000000 +0100
+++++ busybox-1.18.1-hush/shell/hush.c	2011-01-07 14:59:19.649956156 +0100
+ @@ -913,7 +913,7 @@ static const struct built_in_command blt
+   */
+  #if HUSH_DEBUG
+diff --git a/recipes/busybox/busybox-1.18.1/busybox-1.18.1-tftp.patch b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-tftp.patch
+new file mode 100644
+index 0000000..b038ea8
+--- /dev/null
++++ b/recipes/busybox/busybox-1.18.1/busybox-1.18.1-tftp.patch
+@@ -0,0 +1,72 @@
++diff -urpN busybox-1.18.1/networking/tftp.c busybox-1.18.1-tftp/networking/tftp.c
++--- busybox-1.18.1/networking/tftp.c	2010-12-20 01:41:27.000000000 +0100
+++++ busybox-1.18.1-tftp/networking/tftp.c	2011-01-10 12:50:02.687941194 +0100
++@@ -105,39 +105,22 @@ struct BUG_G_too_big {
++ #define error_pkt_str    (error_pkt + 4)
++ 
++ #if ENABLE_FEATURE_TFTP_PROGRESS_BAR
++-/* SIGALRM logic nicked from the wget applet */
++-static void progress_meter(int flag)
+++static void tftp_progress_update(void)
++ {
++-	/* We can be called from signal handler */
++-	int save_errno = errno;
++-
++-	if (flag == -1) { /* first call to progress_meter */
++-		bb_progress_init(&G.pmt);
++-	}
++-
++ 	bb_progress_update(&G.pmt, G.file, 0, G.pos, G.size);
++-
++-	if (flag == 0) {
++-		/* last call to progress_meter */
++-		alarm(0);
++-		bb_putchar_stderr('\n');
++-	} else {
++-		if (flag == -1) { /* first call to progress_meter */
++-			signal_SA_RESTART_empty_mask(SIGALRM, progress_meter);
++-		}
++-		alarm(1);
++-	}
++-
++-	errno = save_errno;
++ }
++ static void tftp_progress_init(void)
++ {
++-	progress_meter(-1);
+++	bb_progress_init(&G.pmt);
+++	tftp_progress_update();
++ }
++ static void tftp_progress_done(void)
++ {
++-	if (G.pmt.inited)
++-		progress_meter(0);
+++	if (G.pmt.inited) {
+++		tftp_progress_update();
+++		bb_putchar_stderr('\n');
+++		G.pmt.inited = 0;
+++	}
++ }
++ #else
++ # define tftp_progress_init() ((void)0)
++@@ -460,9 +443,10 @@ static int tftp_protocol(
++ 		xsendto(socket_fd, xbuf, send_len, &peer_lsa->u.sa, peer_lsa->len);
++ 
++ #if ENABLE_FEATURE_TFTP_PROGRESS_BAR
++-		if (ENABLE_TFTP && remote_file) { /* tftp */
+++		if (ENABLE_TFTP && remote_file) /* tftp */
++ 			G.pos = (block_nr - 1) * (uoff_t)blksize;
++-		}
+++		if (G.pmt.inited)
+++			tftp_progress_update();
++ #endif
++ 		/* Was it final ACK? then exit */
++ 		if (finished && (opcode == TFTP_ACK))
++@@ -479,6 +463,7 @@ static int tftp_protocol(
++ 		case 0:
++ 			retries--;
++ 			if (retries == 0) {
+++				tftp_progress_done();
++ 				bb_error_msg("timeout");
++ 				goto ret; /* no err packet sent */
++ 			}
+diff --git a/recipes/busybox/busybox_1.18.1.bb b/recipes/busybox/busybox_1.18.1.bb
+index 7c7f21f..a2b4475 100644
+--- a/recipes/busybox/busybox_1.18.1.bb
++++ b/recipes/busybox/busybox_1.18.1.bb
+@@ -1,5 +1,5 @@
+ require busybox_1.1x.inc
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
+ 
+ SRC_URI += " \
+ 	file://busybox-1.18.1-hush.patch \
+@@ -8,6 +8,7 @@ SRC_URI += " \
+ 	file://busybox-1.18.1-mkswap.patch \
+ 	file://busybox-1.18.1-warning.patch \
+ 	file://busybox-1.18.1-modprobe-small.patch \
++	file://busybox-1.18.1-tftp.patch \
+ 	"
+ 
+ SRC_URI[md5sum] = "f15fe752d8b7012aa5e59f83b88ccb1c"
+-- 
+1.6.3.3
 
-Acked-by: Dirk Opfer <dirk@do13.de>
-
-Thanks,
-
-Dirk
 
 
---------------ms070301090905090405010003
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIILSTCCBTkw
-ggMhoAMCAQICAwClnzANBgkqhkiG9w0BAQUFADBUMRQwEgYDVQQKEwtDQWNlcnQgSW5jLjEeMBwG
-A1UECxMVaHR0cDovL3d3dy5DQWNlcnQub3JnMRwwGgYDVQQDExNDQWNlcnQgQ2xhc3MgMyBSb290
-MB4XDTEwMDQxMjIwMjgzMFoXDTEyMDQxMTIwMjgzMFowVzETMBEGA1UEAxMKRGlyayBPcGZlcjEj
-MCEGCSqGSIb3DQEJARYUZGlya0BvcGZlci1vbmxpbmUuZGUxGzAZBgkqhkiG9w0BCQEWDGRpcmtA
-ZG8xMy5kZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMRLmuBr8c1wXFOFT8dDu/Wh
-ROqpByuNl7CUkliQ5jgakSu5W55Fm2jy4mT+wfacBaBuAtB4JBP2eP96SaMXSyyWt0GGedIzoYQ8
-rt2CcrPj+7RFob4s7v9xnpe9WYBUOigwkcQsDinfgJ/GUwMnghOjOunLqx59vgjfaNeZwRMuM/M0
-tKwiIxTfpYBz4oDGsDMo3LVZR+Bf1/MMNZsWblYU8BPAD2AH7bRjW6liz4+yyReKNSfG+DL3b2jk
-kHVGcz6qie8OLnOIjMqWanrDELrEHDBXOWG5uPq4MyYvgfqX7c+aiwLINIXgelS+qcyWw7TYagC/
-PKP6EoAGaULulfMCAwEAAaOCAQ8wggELMAwGA1UdEwEB/wQCMAAwVgYJYIZIAYb4QgENBEkWR1Rv
-IGdldCB5b3VyIG93biBjZXJ0aWZpY2F0ZSBmb3IgRlJFRSBoZWFkIG92ZXIgdG8gaHR0cDovL3d3
-dy5DQWNlcnQub3JnMEAGA1UdJQQ5MDcGCCsGAQUFBwMEBggrBgEFBQcDAgYKKwYBBAGCNwoDBAYK
-KwYBBAGCNwoDAwYJYIZIAYb4QgQBMDIGCCsGAQUFBwEBBCYwJDAiBggrBgEFBQcwAYYWaHR0cDov
-L29jc3AuY2FjZXJ0Lm9yZzAtBgNVHREEJjAkgRRkaXJrQG9wZmVyLW9ubGluZS5kZYEMZGlya0Bk
-bzEzLmRlMA0GCSqGSIb3DQEBBQUAA4ICAQA7tatU31DAl9C1K/daJNJZ9LcdABxsNHmnbWb3zkrT
-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
-
---------------ms070301090905090405010003--
