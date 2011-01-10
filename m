@@ -1,25 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PcJ0N-0003Zf-5n for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jan 2011 15:45:55 +0100
-Received: from f053035160.adsl.alicedsl.de ([78.53.35.160]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PcIzv-0005zn-Kq; Mon, 10 Jan 2011 14:45:27 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Tom_Rini@mentor.com>) id 1PcKYY-0005R4-Qn
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Jan 2011 17:25:19 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PcKY4-0005wA-Ft from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Jan 2011 08:24:48 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 10 Jan 2011 08:24:48 -0800
+Received: from localhost.localdomain ([134.86.97.1]) by
+	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 10 Jan 2011 09:24:47 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4D2B0D23.4070003@nospam.arcornews.de>
-References: <1294585014.4036.47.camel@mattotaupa>
-	<4D29FC65.9010608@gmail.com> <1294659553.4342.69.camel@mattotaupa>
-	<4D2B0D23.4070003@nospam.arcornews.de>
-Date: Mon, 10 Jan 2011 15:45:26 +0100
-Message-ID: <1294670726.4342.72.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Cc: Dirk Opfer <dirk@opfer-online.de>
-Subject: Re: [PATCH] libcap, libcap2: use automatic packaging to fix QA errors
+Date: Mon, 10 Jan 2011 09:24:55 -0700
+Message-Id: <1294676696-13896-1-git-send-email-tom_rini@mentor.com>
+X-Mailer: git-send-email 1.7.0.2
+X-OriginalArrivalTime: 10 Jan 2011 16:24:47.0173 (UTC)
+	FILETIME=[E59F9750:01CBB0E2]
+Subject: [PATCH 1/2] minimal.conf: Fully switch to bluez4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,56 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2011 14:45:55 -0000
-X-Groupsio-MsgNum: 27869
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-XksD27/TuYVqgU4BQH4H"
+X-List-Received-Date: Mon, 10 Jan 2011 16:25:19 -0000
 
---=-XksD27/TuYVqgU4BQH4H
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+We still had bluez-libs being set for bluez-libs rather than bluez4 which
+meant that both were being built.
 
-Am Montag, den 10.01.2011, 21:44 +0800 schrieb Rolf Leggewie:
-> On 10.01.2011 19:39, Paul Menzel wrote
-> >>>          FILES_${PN} =3D "${libdir}"
-> >>>          FILES_${PN}-dev =3D "${includedir}"
-> >=20
-> > I am putting Rolf into CC to get the reasoning for the previous
-> > behavior.
->=20
-> My commit did not change the previous behaviour as far as I can see and
-> thus I cannot comment on it.
+Acked-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+---
+ conf/distro/minimal.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Sorry, I misinterpreted `git blame`.
-
-> Maybe you want to look deeper into the history of that file.  Sorry.
-
-It looks Dirk committed these lines when adding 1.10 in commit b823b4
-[1].
-
-Dirk, could you please comment on [2].
+diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+index c935080..f9bfe03 100644
+--- a/conf/distro/minimal.conf
++++ b/conf/distro/minimal.conf
+@@ -24,7 +24,7 @@ DISTRO_CHECK := "${@bb.data.getVar('DISTRO_VERSION',d,1) or bb.fatal('Remove thi
+ # Use bluetooth 4.0
+ DISTRO_BLUETOOTH_MANAGER            = "bluez4"
+ PREFERRED_PROVIDER_bluez-utils-dbus = "bluez4"
+-PREFERRED_PROVIDER_bluez-libs       = "bluez-libs"
++PREFERRED_PROVIDER_bluez-libs       = "bluez4"
+ PREFERRED_PROVIDER_bluez-utils      = "bluez4"
+ 
+ # We want images supporting the following features (for task-base)
+-- 
+1.7.0.2
 
 
-Thanks,
 
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Db823b49=
-470515182cb6f7a536d6a63fac53948aa
-[2] http://patches.openembedded.org/patch/218/
-
---=-XksD27/TuYVqgU4BQH4H
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk0rG4YACgkQPX1aK2wOHVjD9QCffru80ACKhNEZOp4IQKEDMGtU
-0MAAnR1HQEkt8VMVX+B7KOR8qau0nCJr
-=VcSE
------END PGP SIGNATURE-----
-
---=-XksD27/TuYVqgU4BQH4H--
