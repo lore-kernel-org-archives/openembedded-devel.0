@@ -1,33 +1,49 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PcjOW-00056x-NS
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Pck6C-00062X-Kt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Jan 2011 19:56:36 +0100
-Received: (qmail 19313 invoked by uid 503); 11 Jan 2011 18:59:48 -0000
-Received: from b9.ovh.net (HELO mail95.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 11 Jan 2011 18:59:47 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 11 Jan 2011 20:56:07 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 11 Jan 2011 20:56:06 +0200
-Message-ID: <4D2CA7C5.9060307@eukrea.com>
-Date: Tue, 11 Jan 2011 19:56:05 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	Tue, 11 Jan 2011 20:41:44 +0100
+Received: by fxm17 with SMTP id 17so19489217fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jan 2011 11:41:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=9WPdsYEx3DzL7xhDr5+F59FcRQGcul/QOqYtKqrenuM=;
+	b=H7onEUXQTejd9WsHFjklANFwNZehU1dhe4OSrchmWuQsw80hYtgRCYPpNId7llw6kL
+	z3bWVHd6wjEmVR+dHGbJouaQYQ/n1GsYJwieBM/Jpnf063M9Y/G2rTXqMQrawS3775I3
+	HdwPafnnNooSbyX4RzJZISfOFV0n8CrKOtSHk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=tVKWRU7X71LHoVS5qHnyXbqLp5IsHWn2eXacDmh0AptBprMht2oBuj+m8fT8JN5Opo
+	OpH6owWwy6OWjvqt1bwM3G3CNSEgLW0bGPGRZ9+85qhOUUYK0cfK2anjYMEgvezooZXx
+	1N8Xxj7A2gPOfyAa2jUQOGaquSv6gCqoRavQc=
+Received: by 10.223.72.14 with SMTP id k14mr33933faj.45.1294774873384;
+	Tue, 11 Jan 2011 11:41:13 -0800 (PST)
+Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
+	[85.127.155.31])
+	by mx.google.com with ESMTPS id a2sm7547824faw.46.2011.01.11.11.41.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 11 Jan 2011 11:41:11 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1Pck5e-0001r0-6f; Tue, 11 Jan 2011 20:41:10 +0100
+Date: Tue, 11 Jan 2011 20:41:10 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1293810428-31078-1-git-send-email-fransmeulenbroeks@gmail.com>	<4D2C22A3.3030602@xora.org.uk>
-	<4D2C2456.9050000@eukrea.com>
-	<201101111251.15050.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201101111251.15050.marcin@juszkiewicz.com.pl>
-X-Ovh-Tracer-Id: 12089350250605096265
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH 2/2] omap4430-panda: fix u-boot
+Message-ID: <20110111194110.GC6584@mx.loc>
+References: <1294084926-3115-1-git-send-email-rep.dot.nop@gmail.com>
+	<1294084926-3115-9-git-send-email-rep.dot.nop@gmail.com>
+	<201101032354.25037.roman@khimov.ru> <4D230B5A.3030202@gmx.de>
+	<AANLkTikAsHGf9H2YUVt6c7eqauOHyWuNUGC9Oy92TOBV@mail.gmail.com>
+	<4D23186C.8080803@gmx.de>
+MIME-Version: 1.0
+In-Reply-To: <4D23186C.8080803@gmx.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH 09/12] busybox: provide postrm for package mdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jan 2011 18:56:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 11 Jan 2011 19:41:44 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-On 11/01/2011 19:51, Marcin Juszkiewicz wrote:
-> Dnia wtorek, 11 stycznia 2011 o 03:35:18 Eric Bénard napisał(a):
->> On 11/01/2011 10:28, Graeme Gregory wrote:
->>> If some distro does not have the sources in its fetchable list can
->>> the source archive not be copied to a more general source mirror?
->>
->> more globally, shouldn't OE provide a source mirror for everything
->> which can  be fetched by the project. This would avoid problems like
->> handhelds.org's vanishing.
+On Tue, Jan 04, 2011 at 01:54:04PM +0100, Wolfgang Hauser wrote:
+>I agree for the test statement, but that may be solved by using �the
+>brackets in the long statement.
 >
-> OpenEmbedded project provided metadata. It is distributions which should
-> provide sources. They select which SRCREVs are used...
+>Otavio Salvador schrieb:
+>> On Tue, Jan 4, 2011 at 09:58, Wolfgang Hauser <wohauser@gmx.de> wrote:
+>>> Keep it simple and stupid!
+>>> So I vote for the long, readable and less error prone version.
+>> 
+>> I usually prefer the KISS however on this specific case I disagree.
+>> 
+>> The new code avoid using test and a fork. This allows for "test"
+>> applet removal if desired.
+>> 
+>> I prefer the ugly but more "embedded like" code.
 
-I was thinking of thttp://sources.openembedded.org/ which doesn't seems to be 
-linked to any distro and already mirrors some sources archives.
+remember that this stuff potentially ends up on the target, so KISS
+(byte-wise) is always the preferred way. And yes, update-rc.d and the
+required inode itself is bloat, but heck, if you want online
+pkg-management you have to take that penalty, FWIW.
 
-Eric
+So.. Can i please have an explicit ACK for that space-saver?
 
 
