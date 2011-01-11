@@ -1,38 +1,45 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1Pcb1c-00040h-UI
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PccNl-0007hr-Ln
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Jan 2011 11:00:25 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApsEAGe5K01bdWOb/2dsb2JhbAClKbs9hUwEkDg
-X-IronPort-AV: E=Sophos;i="4.60,306,1291590000"; d="scan'208";a="716694869"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 11 Jan 2011 10:59:31 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pcb0l-0007Cc-MZ
+	Tue, 11 Jan 2011 12:27:21 +0100
+Received: by iwn8 with SMTP id 8so20555184iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 10:59:31 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pcb0l-0006VP-IB
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 10:59:31 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1Pcb0l-00027u-BN
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Jan 2011 10:59:31 +0100
-Date: Tue, 11 Jan 2011 10:59:30 +0100
-From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20110111095930.GA25123@lit.local.igalia.com>
-References: <1294668735-25620-1-git-send-email-vjaquez@igalia.com>
-	<2C4CA055-732C-4192-8E13-C85372B9950E@dominion.thruhere.net>
+	Tue, 11 Jan 2011 03:26:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=7/nMR8MvKdFLCiaOZNC72hDb5dFS8zY4a9OBnqs4/+M=;
+	b=KBVL9oOFjsFpcoHDc2H12n5hDNsUeEOvZ8FrSRCjXOUjlnE3XYmMWAVbWnbcq17Zcq
+	aIfYbst3WVGAxPkuGqZDzWYEIwhkEemLgpGFrG0Zlt2+9Lf2GqLJJsG5lBzxExGQ7KP1
+	/ovxyHodwPlHmdiWsGP5P3GJkmD0jn96UMsS8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=wZN1XFaAS+XuvOE959U32F29Y9VYc0nlvXwMQUeAWo4fTpbukAwQ0Sof/9byk5jLo3
+	LigpMlf2xYnpnp4gyCGbhtNiGkV204E2l7avoor4d8evyTiBFCUlUjeWALlNWgkEKbnp
+	BbN0E4h+rsJWILbIvXchJIYXGW2clHLpPp1mc=
 MIME-Version: 1.0
-In-Reply-To: <2C4CA055-732C-4192-8E13-C85372B9950E@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH v2] scons: add EXTRA_OESCONS
+Received: by 10.231.36.5 with SMTP id r5mr30202205ibd.134.1294745208623; Tue,
+	11 Jan 2011 03:26:48 -0800 (PST)
+Received: by 10.231.213.234 with HTTP; Tue, 11 Jan 2011 03:26:48 -0800 (PST)
+In-Reply-To: <4D2C22A3.3030602@xora.org.uk>
+References: <1293810428-31078-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<1293810428-31078-2-git-send-email-fransmeulenbroeks@gmail.com>
+	<ifl85e$ets$1@dough.gmane.org>
+	<AANLkTikBC4nhO1ZSkuYcyoEPNonS4YeXCP6vzKJ3d3Fr@mail.gmail.com>
+	<4D1E32AF.70203@balister.org>
+	<AANLkTinDNZbGuuXj4rkkphC5bdN+zaLfc+TYYD5gQS+j@mail.gmail.com>
+	<1294680282.4307.7639.camel@mill.internal.reciva.com>
+	<AANLkTimXV8BGQf8DQ7rNqu42d2E-RFaEUYkfMEOLPh+6@mail.gmail.com>
+	<4D2C22A3.3030602@xora.org.uk>
+Date: Tue, 11 Jan 2011 12:26:48 +0100
+Message-ID: <AANLkTi=or8LJypOX5fGRBUrHA6DfsJTv8vb3nrHjxpD7@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: Graeme Gregory <dp@xora.org.uk>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2] omap4430-panda: fix u-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,60 +53,218 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jan 2011 10:00:25 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 11 Jan 2011 11:27:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 10, 2011 at 03:28:29PM +0100, Koen Kooi wrote:
-> 
-> Op 10 jan 2011, om 15:12 heeft Víctor Manuel Jáquez Leal het volgende geschreven:
-> 
-> > It's similar to EXTRA_OEMAKE, which appends arguments to the scons
-> > command
-> > 
-> > v2:
-> > * initialise the EXTRA_OECONS if it is not defined
-> > 
-> > Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
-> 
-> Acked-by: Koen Kooi <koen@openembedded.org>
+Dear Graeme,
 
-Do I need another ack in order to push this patch?
+Personally I feel it is not done to forward private mail without
+permission of the author to a public mailing list, especially not if
+the email contains opinions on other people.
+If I did want to send this to the list I would have done so myself.
+I would have expected a more prudent behaviour of a board member.
 
-vmjl
+Best regards,
+Frans.
 
-> 
-> 
-> > ---
-> > classes/scons.bbclass |    4 +++-
-> > 1 files changed, 3 insertions(+), 1 deletions(-)
-> > 
-> > diff --git a/classes/scons.bbclass b/classes/scons.bbclass
-> > index 2a935e4..c19f8d4 100644
-> > --- a/classes/scons.bbclass
-> > +++ b/classes/scons.bbclass
-> > @@ -1,5 +1,7 @@
-> > DEPENDS += "python-scons-native"
-> > 
-> > +EXTRA_OESCONS ?= ""
-> > +
-> > export TARGET_LINK_HASH_STYLE
-> > 
-> > scons_do_compile() {
-> > @@ -11,7 +13,7 @@ scons_do_compile() {
-> >         fi
-> >     fi
-> > 
-> > -    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX="${CXX}" PREFIX=${prefix} prefix=${prefix} || \
-> > +    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} CXX="${CXX}" PREFIX=${prefix} prefix=${prefix} ${EXTRA_OESCONS} || \
-> >     oefatal "scons build execution failed."
-> > }
-> > 
-> > -- 
-> > 1.7.2.3
-> > 
-> 
-> 
+Dear list,
+
+As you can read above this was forwarded to the list without my
+permission or consent.
+
+Frans.
+
+2011/1/11 Graeme Gregory <dp@xora.org.uk>:
+> This is really a technical disagreement between two developers so forward=
+ed
+> it back to the technical list.
+>
+> I do not have my panda yet to test new bootloaders, I can rely on the one
+> official supported by TI working well until tests on a newer version can =
+be
+> performed. Until new version is tested on real panda I am against upgradi=
+ng
+> it. If some distro does not have the sources in its fetchable list can th=
+e
+> source archive not be copied to a more general source mirror?
+>
+> Graeme
+>
+> On 10/01/2011 22:10, Frans Meulenbroeks wrote:
+>>
+>> Dear TSC,
+>>
+>> Thank you for your reply.
+>> I agree that replacing the SRC_URI with one that is fetchable
+>> independent on distro specifics is the safest way to handle this.
+>> (but then again the solution I took was suggested by the upstream
+>> maintainer of the code).
+>>
+>> Unfortunately I feel that this decision does not touch the core of the
+>> problem.
+>> The issue at hand is that we have a maintainer that is already aware
+>> of the issue for almost three months (I've reported this problem
+>> already back in october).
+>> However this maintainer fails to take action, and has an attitude of
+>> "it works for me and my distro it is ok, and if it does not work for
+>> someone else, I don't care".
+>> I would have appreciated it if the TSC would take a position against
+>> this attitude,and the neglection to properly act as a maintainer.
+>>
+>> I feel this attitude is damaging OE.
+>> The blunt actions of this person have already driven away several
+>> people, and frankly speaking I'm also rapidly loosing interest to work
+>> on issues that are not strictly needed for my own projects.
+>> I feel we have a serious problem at hand that should have been dealt
+>> with a long time ago, difficult as it is.
+>>
+>> If we want to have a future beside yocto, it is important to be a
+>> friendly, respectful and cooperative community. Otherwise I fear OE
+>> will be history in a short while (which is something that I would
+>> pity, having been a member of the project for 5 years or so). As a
+>> crew I feel we are already close to being subcritical in number.
+>> Anyway, I for me, I am getting tired of being bitched at, where a
+>> polite message probably would have had much more effect.
+>> This is especially the case if it is by someone who has repeatedly
+>> shown disrespect for the work of others when it comes to making
+>> changes.
+>>
+>> A bit sad,
+>> Frans Meulenbroeks.
+>>
+>>
+>> 2011/1/10 Phil Blundell<philb@gnu.org>:
+>>>
+>>> Frans,
+>>>
+>>> Thanks for your email. =A0We discussed this issue at the TSC meeting he=
+ld
+>>> on 2011-01-05.
+>>>
+>>> The TSC feels that we should be guided by two key principles, namely:
+>>>
+>>> a) all recipes should have a SRC_URI which is fetchable without relying
+>>> on any DISTRO-specific configuration (e.g. custom source mirrors); and
+>>>
+>>> b) the version number (or SRCREV) of a given recipe should only be
+>>> bumped after testing and consultation with its users. =A0This applies
+>>> particularly to packages such as bootloaders and kernels which contain
+>>> many machine-specific parts and which would have particularly bad
+>>> consequences if inadvertently upgraded to nonworking versions.
+>>>
+>>> In this particular case the TSC believes that the right course of actio=
+n
+>>> is to:
+>>>
+>>> 1. Find a way to repair the SRC_URI for the existing u-boot recipe so
+>>> that it is fetchable for everyone, but without changing the version of
+>>> the source code in use or the resulting binaries. =A0(For example, the
+>>> SRC_URI could be pointed directly at a snapshot tarball hosted in some
+>>> suitable place.)
+>>>
+>>> 2. Create an additional recipe for the current mainline version of
+>>> u-boot which can be fetched from SVN. =A0Individual machine maintainers
+>>> can test this version and, if it works for them, switch to using it at
+>>> their discretion.
+>>>
+>>> Regards
+>>>
+>>> Phil
+>>> (for the TSC)
+>>>
+>>> On Sat, 2011-01-01 at 19:37 +0100, Frans Meulenbroeks wrote:
+>>>>
+>>>> [Added TSC to the email, as I would like to request a decision on how
+>>>> to handle this]
+>>>>
+>>>>> Frans, given these two choices:
+>>>>>
+>>>>> 1) Recipe that builds and has tested output (but depends on distro
+>>>>> source
+>>>>> mirrors).
+>>>>>
+>>>>> 2) Recipe that builds (even without source mirrors), BUT the output i=
+s
+>>>>> not
+>>>>> tested.
+>>>>>
+>>>>> We should use choice #1, since the OUTPUT is tested. If someone who c=
+an
+>>>>> test
+>>>>> the output wants to bump the SRCREV, that is fine. Bumping SRCREVs ju=
+st
+>>>>> to
+>>>>> get recipes to build and not testing the output only leads to
+>>>>> frustrated
+>>>>> users who think the output works.
+>>>>>
+>>>>> I'd point out that no one on the panda list (or this list) has
+>>>>> mentioned
+>>>>> they noticed the recipe doesn't build, so I am not sure you are
+>>>>> addressing
+>>>>> an actual problem.
+>>>>>
+>>>>> Philip
+>>>>>
+>>>> Philip, thanks for your reply.
+>>>>
+>>>> I'd like to point out that the fact that the recipe does not build has
+>>>> been reported to this very list late oct 2010.
+>>>> At that point Steve Sakoman (the owner of the git from which the
+>>>> recipe pulls) suggested to use u-boot 2010.09.
+>>>> I did not get to fixing the recipe until yesterday. As u-boot 2010.12
+>>>> is already out I figured that this would be a better choice.
+>>>> I am also on the u-boot list and I know the changes from Steve are
+>>>> pulled into u-boot master.
+>>>> (and wrt to availability: I am quite confident that in a few years
+>>>> time this version can still be retrieved).
+>>>>
+>>>> The problem that this recipe does not build is already known for more
+>>>> than 2 months but the machine maintainer apparently is not interested
+>>>> in fixing his recipe.
+>>>> As such I feel the maintainer is doing a bad job.
+>>>>
+>>>> There are several ways to fix the problem.
+>>>> To coin a few:
+>>>> - move to a SRCREV that seems to me more stable (e.g. because it is a
+>>>> merge with upstream). I agree that there is still a chance of getting
+>>>> a breakage in the future
+>>>> - putting the tarball for the version that we have now at e.g.
+>>>> downloads.openembedded.org or so and adapt the recipe (we have done
+>>>> this for other recipes as well)
+>>>> - move to upstream. The panda changes from Steve have been merged by
+>>>> Wolfgang. I am not aware of any reason not to do so.
+>>>>
+>>>> While each alternative has its pro's and con's none of them is
+>>>> complicated, and any of them could have been done easily.
+>>>> As the problem is already reported last october, I feel the maintainer
+>>>> is not doing a good job, and actually makes things worse by abusing
+>>>> his powers to block others who want to fix it.
+>>>> Apparently spending a few minutes to resolve the issue is too much
+>>>> work, but there is of course always time to bitch and moan toward
+>>>> others who do want to keep OE a system that supports multiple machines
+>>>> and multiple distros.
+>>>>
+>>>> I'd like to ask the TSC to come up with a decision on how we should
+>>>> fix this recipe. I have already indicated a few solutions above. Yet
+>>>> another alternative (which is not too desirable) is to create another
+>>>> machine that chooses a proper recipe for u-boot.
+>>>>
+>>>> Frans
+>>>>
+>>>> PS: the fact that there are no other reports of this is probably
+>>>> because not many people rebuild u-boot. Most of my boards still use
+>>>> the u-boot that was on the board when I got it. I guess this also
+>>>> holds for other people.
+>>>>
+>>>> _______________________________________________
+>>>> tsc mailing list
+>>>> tsc@lists.linuxtogo.org
+>>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/tsc
+>>>
+>>>
+>
+>
 
 
