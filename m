@@ -1,25 +1,35 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PcYHX-0005g5-Rp
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Jan 2011 08:04:39 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 72796491278
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PcaDN-0001ek-7j for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Jan 2011 10:08:29 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PcaCq-0003Ji-Ua for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Jan 2011 10:07:56 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jan 2011 10:07:56 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 08:04:11 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 11 Jan 2011 08:04:11 +0100
-Message-ID: <4D2C00E7.2010807@dresearch.de>
-Date: Tue, 11 Jan 2011 08:04:07 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 11 Jan 2011 07:04:11.0553 (UTC)
-	FILETIME=[BFA50910:01CBB15D]
-Subject: epiphany still broken
+	Tue, 11 Jan 2011 10:07:56 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 11 Jan 2011 10:07:45 +0100
+Message-ID: <igh6l1$r9$1@dough.gmane.org>
+References: <1294695225-16321-1-git-send-email-eric@eukrea.com>	<1294695225-16321-2-git-send-email-eric@eukrea.com>
+	<1294695225-16321-3-git-send-email-eric@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1294695225-16321-3-git-send-email-eric@eukrea.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] angstrom-2010: prefer busybox-1.18.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,19 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jan 2011 07:04:40 -0000
+X-List-Received-Date: Tue, 11 Jan 2011 09:08:29 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-I'm back to OE after two month and do_configure for epiphany-2.30.2 still fails [1]. :(
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-As mentioned in earlier threads[2] i'll push my original patch which disables the ca-file use [3], if nobody can fix this in the next days.
+On 10-01-11 22:33, Eric Bénard wrote:
+> this is the latest stable version
+> 
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
 
-Steffen
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-[1] <http://tinderbox.openembedded.org/packages/1591919/>
-[2] <http://thread.gmane.org/gmane.comp.handhelds.openembedded/38251/focus=38830>
-[3] <http://thread.gmane.org/gmane.comp.handhelds.openembedded/37453/focus=37585>
+> ---
+>  .../include/angstrom-2010-preferred-versions.inc   |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> index a36cb21..4549bfa 100644
+> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
+> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> @@ -13,7 +13,7 @@ PREFERRED_VERSION_autoconf = "2.65"
+>  PREFERRED_VERSION_autoconf-native = "2.65"
+>  PREFERRED_VERSION_automake = "1.11.1"
+>  PREFERRED_VERSION_automake-native = "1.11.1"
+> -PREFERRED_VERSION_busybox 	= "1.17.4"
+> +PREFERRED_VERSION_busybox 	= "1.18.1"
+>  PREFERRED_VERSION_cairo		= "1.10.0"
+>  PREFERRED_VERSION_dbus 		= "1.2.24"
+>  PREFERRED_VERSION_dropbear      = "0.52"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNLB3hMkyGM64RGpERAmB6AJ0UhjnCZzZh06A8Xj0F1J7VXuSUYgCgkk46
+3g6kpG4t9mKPnjc0nqTUziM=
+=NB7D
+-----END PGP SIGNATURE-----
 
 
 
