@@ -1,34 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PceSM-0006Y8-KY for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Jan 2011 14:40:14 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PceRp-00071S-9s for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Jan 2011 14:39:41 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 14:39:41 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 14:39:41 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pcf9N-0007PM-5Q for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Jan 2011 15:24:41 +0100
+Received: from f053038202.adsl.alicedsl.de ([78.53.38.202]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pcf8u-0000GM-76 for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Jan 2011 14:24:12 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 11 Jan 2011 14:39:29 +0100
-Message-ID: <ighmih$lbd$1@dough.gmane.org>
+In-Reply-To: <1294774001-29322-1-git-send-email-sledz@dresearch.de>
 References: <ighiieMAN_POSIXLY_CORRECT=1@dough.gmane.org>
 	<1294774001-29322-1-git-send-email-sledz@dresearch.de>
+Date: Tue, 11 Jan 2011 15:24:10 +0100
+Message-ID: <1294755850.9717.0.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1294774001-29322-1-git-send-email-sledz@dresearch.de>
-X-Enigmail-Version: 1.0.1
+X-Mailer: Evolution 2.30.3 
 Subject: Re: [PATCH v2] alsa-lib: fix packaging error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,60 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jan 2011 13:40:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Jan 2011 14:24:41 -0000
+X-Groupsio-MsgNum: 27901
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-4lECGC8g2ygEWp6y1sFp"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-4lECGC8g2ygEWp6y1sFp
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 11-01-11 20:26, Steffen Sledz wrote:
-> * symlink libasound.so -> libasound.so.2.0.0 in /usr/lib was missing in
->   dev package
-> 
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+Am Dienstag, den 11.01.2011, 14:26 -0500 schrieb Steffen Sledz:
 
-Acked-by: Koen Kooi <koen@openembedded.org>
+Your clock/time is incorrect.
 
-> ---
->  recipes/alsa/alsa-lib_1.0.20.bb |    2 +-
->  recipes/alsa/alsa-lib_1.0.23.bb |    2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/alsa/alsa-lib_1.0.20.bb b/recipes/alsa/alsa-lib_1.0.20.bb
-> index de522c7..fc508ec 100644
-> --- a/recipes/alsa/alsa-lib_1.0.20.bb
-> +++ b/recipes/alsa/alsa-lib_1.0.20.bb
-> @@ -34,7 +34,7 @@ FILES_${PN}-dbg += "${libdir}/alsa-lib/*/.debu*"
->  FILES_libasound = "${libdir}/libasound.so.*"
->  FILES_alsa-server = "${bindir}/*"
->  FILES_alsa-conf = "${datadir}/alsa/"
-> -FILES_alsa-dev += "${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
-> +FILES_alsa-dev += "${libdir}/libasound.so ${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
->  FILES_alsa-conf-base = "\
->  ${datadir}/alsa/alsa.conf \
->  ${datadir}/alsa/cards/aliases.conf \
-> diff --git a/recipes/alsa/alsa-lib_1.0.23.bb b/recipes/alsa/alsa-lib_1.0.23.bb
-> index 0f9b14c..0085047 100644
-> --- a/recipes/alsa/alsa-lib_1.0.23.bb
-> +++ b/recipes/alsa/alsa-lib_1.0.23.bb
-> @@ -36,7 +36,7 @@ FILES_${PN}-dbg += "${libdir}/alsa-lib/*/.debu*"
->  FILES_libasound = "${libdir}/libasound.so.*"
->  FILES_alsa-server = "${bindir}/*"
->  FILES_alsa-conf = "${datadir}/alsa/"
-> -FILES_alsa-dev += "${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
-> +FILES_alsa-dev += "${libdir}/libasound.so ${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
->  FILES_alsa-conf-base = "\
->  ${datadir}/alsa/alsa.conf \
->  ${datadir}/alsa/cards/aliases.conf \
+
+Thanks,
+
+Paul
+
+--=-4lECGC8g2ygEWp6y1sFp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFNLF2RMkyGM64RGpERAv8DAJ9ipAyHrIazFiPN/+GdTRzaIWYMSgCeIUFx
-Q0W7A2UtNVuNrVFkUwdht9g=
-=1noC
+iEYEABECAAYFAk0saAUACgkQPX1aK2wOHVh4kwCeIwes3aD1YpDjAw2rwRR1W5Gf
+4bkAn3phhpouohFYhcWFg6tHwSm7R+8n
+=GD3m
 -----END PGP SIGNATURE-----
 
-
-
+--=-4lECGC8g2ygEWp6y1sFp--
