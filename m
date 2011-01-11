@@ -1,40 +1,37 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Pcgap-0000ZV-UA
+	(envelope-from <martin.jansa@gmail.com>) id 1Pcgas-0000Zw-N1
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Jan 2011 16:57:08 +0100
-Received: by mail-fx0-f47.google.com with SMTP id 17so19263452fxm.6
+	Tue, 11 Jan 2011 16:57:11 +0100
+Received: by eya28 with SMTP id 28so8986747eya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 07:56:39 -0800 (PST)
+	Tue, 11 Jan 2011 07:56:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=IQ4fb2Jb9eVbjaKHEh+cAnYa0TkdKVoK8h422lH4NcE=;
-	b=V7fuD0veTvyB5wtX/+GO8wCFySuFUdT1WDSlAr01Mj9VUv421IkkIwjRLEMh+iBAmH
-	/dU1DVvAUI1fZTjDwU8/3oPLUGDA0j/qtgSfD1UK14UYFhsUQZxChAPQMy9q0VZqUaJ+
-	n9XjCuyq2iz3OE86yWzQ9iKwc3e/g7TOddnMc=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=ojrrvPWQV2kwD/k8pC6xS+ZhZwRyAxLtIr52jcc0o3c=;
+	b=jiFCoNYzfpPLeGkWUEyurBX73cMVzfR0b6nlOjP5HdjlH+lgSdHcfA06GprQtCzZWY
+	Kw7Fd+Bqxo8iMCJWBnYeApTWNKpYoK02yR4s9nWxyXcLUaU1ZTlJE7ctkbuGxdjLF585
+	CvhVvAn+msidB/5brBLbz+COHp/iA+nsdZ+xI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	b=t0RsQZelAOsQmpMSa3k4pEv5WGsNdDjXDLswul93lFMswIMsX96lrfltJH+E1S/3B8
-	cz1N7J6TNYpWgo9lw1zQdM3hilDBAu6sosb9BOtmZIluSNSuD9aSdEi4XEj94xQlowWj
-	iTwv742aGelP65DxpIf1gsMIEDb9QwfY2cimk=
-Received: by 10.223.81.70 with SMTP id w6mr4421298fak.62.1294761399311;
-	Tue, 11 Jan 2011 07:56:39 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=PHuAgmEcZ+fFCYTjCWBLwA0AU0k4Ejuv89hbXl+y3o3rHHGJOUwTL9VQG8Ww7b9guG
+	LS0rA6kqHDhH4fF/ejrOXsNOViY583r/zwOW6vIKcN3/DCPsBIc0M/XfLgqRhCOvsfpc
+	zc4rDirf7TiGSPZc45EX6945VvW3XpsoGImo0=
+Received: by 10.223.106.134 with SMTP id x6mr3081487fao.73.1294761401740;
+	Tue, 11 Jan 2011 07:56:41 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id o17sm7447434fal.1.2011.01.11.07.56.35
+	by mx.google.com with ESMTPS id n7sm7445272fam.35.2011.01.11.07.56.39
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 11 Jan 2011 07:56:38 -0800 (PST)
+	Tue, 11 Jan 2011 07:56:41 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jan 2011 16:56:25 +0100
-Message-Id: <1294761389-13634-8-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 11 Jan 2011 16:56:26 +0100
+Message-Id: <1294761389-13634-9-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.4.rc1
 In-Reply-To: <1294761389-13634-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1294761389-13634-1-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-Subject: [PATCH 08/12] xorg-lib: obsolete old versions
+Subject: [PATCH 09/12] xorg-app: obsolete old versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,8100 +45,3222 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jan 2011 15:57:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 11 Jan 2011 15:57:11 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes/obsolete/xorg-lib/libdmx_1.1.0.bb          |    8 +
- recipes/obsolete/xorg-lib/libfontenc_1.0.5.bb      |   11 +
- recipes/obsolete/xorg-lib/libfs_1.0.2.bb           |   10 +
- recipes/obsolete/xorg-lib/libice_1.0.6.bb          |   12 +
- recipes/obsolete/xorg-lib/libpciaccess_0.10.9.bb   |    6 +
- recipes/obsolete/xorg-lib/libsm_1.1.1.bb           |   12 +
- .../xorg-lib/libx11-1.3.2/configure.ac-nios2.patch |   33 +
- .../obsolete/xorg-lib/libx11-1.3.2/dolt-fix.patch  |   21 +
- .../xorg-lib/libx11-1.3.2/keysymdef_include.patch  |   29 +
- .../libx11-1.3.2/x11_disable_makekeys.patch        |   23 +
- .../xorg-lib/libx11-1.3.6/configure.ac-nios2.patch |   33 +
- .../obsolete/xorg-lib/libx11-1.3.6/dolt-fix.patch  |   22 +
- .../xorg-lib/libx11-1.3.6/keysymdef_include.patch  |   19 +
- .../libx11-1.3.6/x11_disable_makekeys.patch        |   29 +
- recipes/obsolete/xorg-lib/libx11_1.3.2.bb          |   11 +
- recipes/obsolete/xorg-lib/libx11_1.3.6.bb          |    7 +
- recipes/obsolete/xorg-lib/libxau_1.0.5.bb          |   12 +
- recipes/obsolete/xorg-lib/libxaw_1.0.7.bb          |   25 +
- recipes/obsolete/xorg-lib/libxcomposite_0.4.1.bb   |   11 +
- recipes/obsolete/xorg-lib/libxcursor_1.1.10.bb     |   13 +
- recipes/obsolete/xorg-lib/libxdamage_1.1.2.bb      |   11 +
- recipes/obsolete/xorg-lib/libxdmcp_1.0.3.bb        |   12 +
- recipes/obsolete/xorg-lib/libxevie_1.0.2.bb        |   10 +
- recipes/obsolete/xorg-lib/libxext_1.1.1.bb         |   12 +
- recipes/obsolete/xorg-lib/libxfixes_4.0.4.bb       |   13 +
- recipes/obsolete/xorg-lib/libxfont_1.4.1.bb        |   16 +
- .../xorg-lib/libxft-2.1.14/autotools.patch         |   54 ++
- recipes/obsolete/xorg-lib/libxft_2.1.14.bb         |   22 +
- recipes/obsolete/xorg-lib/libxi_1.3.bb             |   10 +
- recipes/obsolete/xorg-lib/libxinerama_1.1.bb       |   10 +
- recipes/obsolete/xorg-lib/libxkbfile_1.0.6.bb      |   11 +
- recipes/obsolete/xorg-lib/libxmu_1.0.5.bb          |   17 +
- recipes/obsolete/xorg-lib/libxpm_3.5.8.bb          |   16 +
- recipes/obsolete/xorg-lib/libxrandr_1.2.1.bb       |   13 +
- recipes/obsolete/xorg-lib/libxrandr_1.3.0.bb       |   13 +
- recipes/obsolete/xorg-lib/libxrender_0.9.5.bb      |   13 +
- recipes/obsolete/xorg-lib/libxres_1.0.4.bb         |   10 +
- recipes/obsolete/xorg-lib/libxscrnsaver_1.2.0.bb   |   13 +
- recipes/obsolete/xorg-lib/libxt_1.0.7.bb           |   22 +
- recipes/obsolete/xorg-lib/libxtst_1.1.0.bb         |   10 +
- recipes/obsolete/xorg-lib/libxv_1.0.5.bb           |   10 +
- recipes/obsolete/xorg-lib/libxxf86dga_1.1.1.bb     |   10 +
- recipes/obsolete/xorg-lib/libxxf86misc_1.0.2.bb    |   10 +
- recipes/obsolete/xorg-lib/libxxf86vm_1.1.0.bb      |   10 +
- .../xorg-lib/pixman-0.12.0/pixman-arm.patch        |  632 ++++++++++++++++++++
- .../xorg-lib/pixman-0.12.0/pixman-x888-565.patch   |   68 +++
- ...mplementation-of-pixman_blt-with-overlapp.patch |  114 ++++
- ...of-overlapping-src-dst-for-pixman_blt_mmx.patch |   91 +++
- ...f-overlapping-src-dst-for-pixman_blt_sse2.patch |   91 +++
- ...f-overlapping-src-dst-for-pixman_blt_neon.patch |   94 +++
- ...EON-optimizations-for-fetch-store-r5g6b5-.patch |  169 ++++++
- ...e-version-of-16bpp-bilinear-scanline-fetc.patch |  261 ++++++++
- .../0007-ARM-added-missing-cache-preload.patch     |   32 +
- .../xorg-lib/pixman-0.18.4/565-over-neon.patch     |   23 +
- .../xorg-lib/pixman-0.18.4/neon-reverse-u.patch    |  175 ++++++
- .../0000-Add-pixman_bits_override_accessors.patch  |   77 +++
- ...mplementation-of-pixman_blt-with-overlapp.patch |  114 ++++
- ...of-overlapping-src-dst-for-pixman_blt_mmx.patch |   91 +++
- ...f-overlapping-src-dst-for-pixman_blt_sse2.patch |   91 +++
- ...f-overlapping-src-dst-for-pixman_blt_neon.patch |   94 +++
- ...EON-optimizations-for-fetch-store-r5g6b5-.patch |  109 ++++
- ...EON-optimizations-for-fetch-store-a8-scan.patch |  148 +++++
- ...EON-optimizations-for-fetching-x8r8g8b8-s.patch |   77 +++
- ...ation-for-scaled-src_0565_0565-operation-.patch |  172 ++++++
- recipes/obsolete/xorg-lib/pixman_0.12.0.bb         |    9 +
- recipes/obsolete/xorg-lib/pixman_0.16.2.bb         |    7 +
- recipes/obsolete/xorg-lib/pixman_0.18.4.bb         |   21 +
- recipes/obsolete/xorg-lib/pixman_0.20.0.bb         |   23 +
- recipes/obsolete/xorg-lib/xtrans_1.2.5.bb          |   13 +
- recipes/xorg-lib/libdmx_1.1.0.bb                   |    8 -
- recipes/xorg-lib/libfontenc_1.0.5.bb               |   11 -
- recipes/xorg-lib/libfs_1.0.2.bb                    |   10 -
- recipes/xorg-lib/libice_1.0.6.bb                   |   12 -
- recipes/xorg-lib/libpciaccess_0.10.9.bb            |    6 -
- recipes/xorg-lib/libsm_1.1.1.bb                    |   12 -
- .../xorg-lib/libx11-1.3.2/configure.ac-nios2.patch |   33 -
- recipes/xorg-lib/libx11-1.3.2/dolt-fix.patch       |   21 -
- .../xorg-lib/libx11-1.3.2/keysymdef_include.patch  |   29 -
- .../libx11-1.3.2/x11_disable_makekeys.patch        |   23 -
- .../xorg-lib/libx11-1.3.6/configure.ac-nios2.patch |   33 -
- recipes/xorg-lib/libx11-1.3.6/dolt-fix.patch       |   22 -
- .../xorg-lib/libx11-1.3.6/keysymdef_include.patch  |   19 -
- .../libx11-1.3.6/x11_disable_makekeys.patch        |   29 -
- recipes/xorg-lib/libx11_1.3.2.bb                   |   11 -
- recipes/xorg-lib/libx11_1.3.6.bb                   |    7 -
- recipes/xorg-lib/libxau_1.0.5.bb                   |   12 -
- recipes/xorg-lib/libxaw_1.0.7.bb                   |   25 -
- recipes/xorg-lib/libxcomposite_0.4.1.bb            |   11 -
- recipes/xorg-lib/libxcursor_1.1.10.bb              |   13 -
- recipes/xorg-lib/libxdamage_1.1.2.bb               |   11 -
- recipes/xorg-lib/libxdmcp_1.0.3.bb                 |   12 -
- recipes/xorg-lib/libxevie_1.0.2.bb                 |   10 -
- recipes/xorg-lib/libxext_1.1.1.bb                  |   12 -
- recipes/xorg-lib/libxfixes_4.0.4.bb                |   13 -
- recipes/xorg-lib/libxfont_1.4.1.bb                 |   16 -
- recipes/xorg-lib/libxft-2.1.14/autotools.patch     |   54 --
- recipes/xorg-lib/libxft_2.1.14.bb                  |   22 -
- recipes/xorg-lib/libxi_1.3.bb                      |   10 -
- recipes/xorg-lib/libxinerama_1.1.bb                |   10 -
- recipes/xorg-lib/libxkbfile_1.0.6.bb               |   11 -
- recipes/xorg-lib/libxmu_1.0.5.bb                   |   17 -
- recipes/xorg-lib/libxpm_3.5.8.bb                   |   16 -
- recipes/xorg-lib/libxrandr_1.2.1.bb                |   13 -
- recipes/xorg-lib/libxrandr_1.3.0.bb                |   13 -
- recipes/xorg-lib/libxrender_0.9.5.bb               |   13 -
- recipes/xorg-lib/libxres_1.0.4.bb                  |   10 -
- recipes/xorg-lib/libxscrnsaver_1.2.0.bb            |   13 -
- recipes/xorg-lib/libxt_1.0.7.bb                    |   22 -
- recipes/xorg-lib/libxtst_1.1.0.bb                  |   10 -
- recipes/xorg-lib/libxv_1.0.5.bb                    |   10 -
- recipes/xorg-lib/libxxf86dga_1.1.1.bb              |   10 -
- recipes/xorg-lib/libxxf86misc_1.0.2.bb             |   10 -
- recipes/xorg-lib/libxxf86vm_1.1.0.bb               |   10 -
- recipes/xorg-lib/pixman-0.12.0/pixman-arm.patch    |  632 --------------------
- .../xorg-lib/pixman-0.12.0/pixman-x888-565.patch   |   68 ---
- ...mplementation-of-pixman_blt-with-overlapp.patch |  114 ----
- ...of-overlapping-src-dst-for-pixman_blt_mmx.patch |   91 ---
- ...f-overlapping-src-dst-for-pixman_blt_sse2.patch |   91 ---
- ...f-overlapping-src-dst-for-pixman_blt_neon.patch |   94 ---
- ...EON-optimizations-for-fetch-store-r5g6b5-.patch |  169 ------
- ...e-version-of-16bpp-bilinear-scanline-fetc.patch |  261 --------
- .../0007-ARM-added-missing-cache-preload.patch     |   32 -
- recipes/xorg-lib/pixman-0.18.4/565-over-neon.patch |   23 -
- .../xorg-lib/pixman-0.18.4/neon-reverse-u.patch    |  175 ------
- .../0000-Add-pixman_bits_override_accessors.patch  |   77 ---
- ...mplementation-of-pixman_blt-with-overlapp.patch |  114 ----
- ...of-overlapping-src-dst-for-pixman_blt_mmx.patch |   91 ---
- ...f-overlapping-src-dst-for-pixman_blt_sse2.patch |   91 ---
- ...f-overlapping-src-dst-for-pixman_blt_neon.patch |   94 ---
- ...EON-optimizations-for-fetch-store-r5g6b5-.patch |  109 ----
- ...EON-optimizations-for-fetch-store-a8-scan.patch |  148 -----
- ...EON-optimizations-for-fetching-x8r8g8b8-s.patch |   77 ---
- ...ation-for-scaled-src_0565_0565-operation-.patch |  172 ------
- recipes/xorg-lib/pixman_0.12.0.bb                  |    9 -
- recipes/xorg-lib/pixman_0.16.2.bb                  |    7 -
- recipes/xorg-lib/pixman_0.18.4.bb                  |   21 -
- recipes/xorg-lib/pixman_0.20.0.bb                  |   23 -
- recipes/xorg-lib/xtrans_1.2.5.bb                   |   13 -
- 138 files changed, 3491 insertions(+), 3491 deletions(-)
- create mode 100644 recipes/obsolete/xorg-lib/libdmx_1.1.0.bb
- create mode 100644 recipes/obsolete/xorg-lib/libfontenc_1.0.5.bb
- create mode 100644 recipes/obsolete/xorg-lib/libfs_1.0.2.bb
- create mode 100644 recipes/obsolete/xorg-lib/libice_1.0.6.bb
- create mode 100644 recipes/obsolete/xorg-lib/libpciaccess_0.10.9.bb
- create mode 100644 recipes/obsolete/xorg-lib/libsm_1.1.1.bb
- create mode 100644 recipes/obsolete/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch
- create mode 100644 recipes/obsolete/xorg-lib/libx11-1.3.2/dolt-fix.patch
- create mode 100644 recipes/obsolete/xorg-lib/libx11-1.3.2/keysymdef_include.patch
- create mode 100644 recipes/obsolete/xorg-lib/libx11-1.3.2/x11_disable_makekeys.patch
- create mode 100644 recipes/obsolete/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch
- create mode 100644 recipes/obsolete/xorg-lib/libx11-1.3.6/dolt-fix.patch
- create mode 100644 recipes/obsolete/xorg-lib/libx11-1.3.6/keysymdef_include.patch
- create mode 100644 recipes/obsolete/xorg-lib/libx11-1.3.6/x11_disable_makekeys.patch
- create mode 100644 recipes/obsolete/xorg-lib/libx11_1.3.2.bb
- create mode 100644 recipes/obsolete/xorg-lib/libx11_1.3.6.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxau_1.0.5.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxaw_1.0.7.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxcomposite_0.4.1.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxcursor_1.1.10.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxdamage_1.1.2.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxdmcp_1.0.3.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxevie_1.0.2.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxext_1.1.1.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxfixes_4.0.4.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxfont_1.4.1.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxft-2.1.14/autotools.patch
- create mode 100644 recipes/obsolete/xorg-lib/libxft_2.1.14.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxi_1.3.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxinerama_1.1.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxkbfile_1.0.6.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxmu_1.0.5.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxpm_3.5.8.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxrandr_1.2.1.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxrandr_1.3.0.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxrender_0.9.5.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxres_1.0.4.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxscrnsaver_1.2.0.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxt_1.0.7.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxtst_1.1.0.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxv_1.0.5.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxxf86dga_1.1.1.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxxf86misc_1.0.2.bb
- create mode 100644 recipes/obsolete/xorg-lib/libxxf86vm_1.1.0.bb
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.12.0/pixman-arm.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.12.0/pixman-x888-565.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/0007-ARM-added-missing-cache-preload.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/565-over-neon.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.18.4/neon-reverse-u.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0000-Add-pixman_bits_override_accessors.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman-0.20.0/0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch
- create mode 100644 recipes/obsolete/xorg-lib/pixman_0.12.0.bb
- create mode 100644 recipes/obsolete/xorg-lib/pixman_0.16.2.bb
- create mode 100644 recipes/obsolete/xorg-lib/pixman_0.18.4.bb
- create mode 100644 recipes/obsolete/xorg-lib/pixman_0.20.0.bb
- create mode 100644 recipes/obsolete/xorg-lib/xtrans_1.2.5.bb
- delete mode 100644 recipes/xorg-lib/libdmx_1.1.0.bb
- delete mode 100644 recipes/xorg-lib/libfontenc_1.0.5.bb
- delete mode 100644 recipes/xorg-lib/libfs_1.0.2.bb
- delete mode 100644 recipes/xorg-lib/libice_1.0.6.bb
- delete mode 100644 recipes/xorg-lib/libpciaccess_0.10.9.bb
- delete mode 100644 recipes/xorg-lib/libsm_1.1.1.bb
- delete mode 100644 recipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch
- delete mode 100644 recipes/xorg-lib/libx11-1.3.2/dolt-fix.patch
- delete mode 100644 recipes/xorg-lib/libx11-1.3.2/keysymdef_include.patch
- delete mode 100644 recipes/xorg-lib/libx11-1.3.2/x11_disable_makekeys.patch
- delete mode 100644 recipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch
- delete mode 100644 recipes/xorg-lib/libx11-1.3.6/dolt-fix.patch
- delete mode 100644 recipes/xorg-lib/libx11-1.3.6/keysymdef_include.patch
- delete mode 100644 recipes/xorg-lib/libx11-1.3.6/x11_disable_makekeys.patch
- delete mode 100644 recipes/xorg-lib/libx11_1.3.2.bb
- delete mode 100644 recipes/xorg-lib/libx11_1.3.6.bb
- delete mode 100644 recipes/xorg-lib/libxau_1.0.5.bb
- delete mode 100644 recipes/xorg-lib/libxaw_1.0.7.bb
- delete mode 100644 recipes/xorg-lib/libxcomposite_0.4.1.bb
- delete mode 100644 recipes/xorg-lib/libxcursor_1.1.10.bb
- delete mode 100644 recipes/xorg-lib/libxdamage_1.1.2.bb
- delete mode 100644 recipes/xorg-lib/libxdmcp_1.0.3.bb
- delete mode 100644 recipes/xorg-lib/libxevie_1.0.2.bb
- delete mode 100644 recipes/xorg-lib/libxext_1.1.1.bb
- delete mode 100644 recipes/xorg-lib/libxfixes_4.0.4.bb
- delete mode 100644 recipes/xorg-lib/libxfont_1.4.1.bb
- delete mode 100644 recipes/xorg-lib/libxft-2.1.14/autotools.patch
- delete mode 100644 recipes/xorg-lib/libxft_2.1.14.bb
- delete mode 100644 recipes/xorg-lib/libxi_1.3.bb
- delete mode 100644 recipes/xorg-lib/libxinerama_1.1.bb
- delete mode 100644 recipes/xorg-lib/libxkbfile_1.0.6.bb
- delete mode 100644 recipes/xorg-lib/libxmu_1.0.5.bb
- delete mode 100644 recipes/xorg-lib/libxpm_3.5.8.bb
- delete mode 100644 recipes/xorg-lib/libxrandr_1.2.1.bb
- delete mode 100644 recipes/xorg-lib/libxrandr_1.3.0.bb
- delete mode 100644 recipes/xorg-lib/libxrender_0.9.5.bb
- delete mode 100644 recipes/xorg-lib/libxres_1.0.4.bb
- delete mode 100644 recipes/xorg-lib/libxscrnsaver_1.2.0.bb
- delete mode 100644 recipes/xorg-lib/libxt_1.0.7.bb
- delete mode 100644 recipes/xorg-lib/libxtst_1.1.0.bb
- delete mode 100644 recipes/xorg-lib/libxv_1.0.5.bb
- delete mode 100644 recipes/xorg-lib/libxxf86dga_1.1.1.bb
- delete mode 100644 recipes/xorg-lib/libxxf86misc_1.0.2.bb
- delete mode 100644 recipes/xorg-lib/libxxf86vm_1.1.0.bb
- delete mode 100644 recipes/xorg-lib/pixman-0.12.0/pixman-arm.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.12.0/pixman-x888-565.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/0007-ARM-added-missing-cache-preload.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/565-over-neon.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.18.4/neon-reverse-u.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0000-Add-pixman_bits_override_accessors.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
- delete mode 100644 recipes/xorg-lib/pixman-0.20.0/0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch
- delete mode 100644 recipes/xorg-lib/pixman_0.12.0.bb
- delete mode 100644 recipes/xorg-lib/pixman_0.16.2.bb
- delete mode 100644 recipes/xorg-lib/pixman_0.18.4.bb
- delete mode 100644 recipes/xorg-lib/pixman_0.20.0.bb
- delete mode 100644 recipes/xorg-lib/xtrans_1.2.5.bb
+ recipes/obsolete/xorg-app/appres_1.0.2.bb          |    8 ++
+ recipes/obsolete/xorg-app/bdftopcf_1.0.2.bb        |   10 +++
+ recipes/obsolete/xorg-app/beforelight_1.0.3.bb     |    8 ++
+ recipes/obsolete/xorg-app/bitmap_1.0.4.bb          |    7 ++
+ recipes/obsolete/xorg-app/constype_1.0.2.bb        |    8 ++
+ recipes/obsolete/xorg-app/editres_1.0.4.bb         |    7 ++
+ recipes/obsolete/xorg-app/fslsfonts_1.0.2.bb       |    7 ++
+ recipes/obsolete/xorg-app/fstobdf_1.0.3.bb         |    7 ++
+ recipes/obsolete/xorg-app/iceauth_1.0.3.bb         |    8 ++
+ recipes/obsolete/xorg-app/ico_1.0.2.bb             |    8 ++
+ recipes/obsolete/xorg-app/listres_1.0.1.bb         |    7 ++
+ recipes/obsolete/xorg-app/luit_1.0.4.bb            |    8 ++
+ recipes/obsolete/xorg-app/mkfontdir_1.0.5.bb       |   10 +++
+ recipes/obsolete/xorg-app/mkfontscale_1.0.7.bb     |    9 ++
+ recipes/obsolete/xorg-app/oclock_1.0.1.bb          |    7 ++
+ recipes/obsolete/xorg-app/proxymngr_1.0.1.bb       |    7 ++
+ recipes/obsolete/xorg-app/rendercheck_1.3.bb       |    7 ++
+ recipes/obsolete/xorg-app/rgb_1.0.3.bb             |    9 ++
+ recipes/obsolete/xorg-app/rstart_1.0.3.bb          |    6 ++
+ recipes/obsolete/xorg-app/sessreg_1.0.5.bb         |    7 ++
+ recipes/obsolete/xorg-app/setxkbmap_1.1.0.bb       |    7 ++
+ recipes/obsolete/xorg-app/showfont_1.0.2.bb        |    7 ++
+ recipes/obsolete/xorg-app/smproxy_1.0.3.bb         |    7 ++
+ recipes/obsolete/xorg-app/twm_1.0.4.bb             |   13 +++
+ recipes/obsolete/xorg-app/viewres_1.0.1.bb         |    7 ++
+ recipes/obsolete/xorg-app/x11perf_1.5.1.bb         |   10 +++
+ recipes/obsolete/xorg-app/xauth_1.0.4.bb           |    8 ++
+ recipes/obsolete/xorg-app/xbacklight_1.1.1.bb      |    8 ++
+ recipes/obsolete/xorg-app/xbiff_1.0.1.bb           |    7 ++
+ recipes/obsolete/xorg-app/xcalc_1.0.2.bb           |    8 ++
+ recipes/obsolete/xorg-app/xclipboard_1.1.0.bb      |    7 ++
+ recipes/obsolete/xorg-app/xclock_1.0.4.bb          |    8 ++
+ recipes/obsolete/xorg-app/xcmsdb_1.0.2.bb          |    6 ++
+ recipes/obsolete/xorg-app/xcompmgr_1.1.4.bb        |    9 ++
+ recipes/obsolete/xorg-app/xconsole_1.0.3.bb        |    8 ++
+ recipes/obsolete/xorg-app/xcursorgen_1.0.3.bb      |   10 +++
+ recipes/obsolete/xorg-app/xdbedizzy_1.0.2.bb       |    7 ++
+ recipes/obsolete/xorg-app/xditview_1.0.1.bb        |    7 ++
+ recipes/obsolete/xorg-app/xdm_1.1.9.bb             |   15 ++++
+ .../obsolete/xorg-app/xdpyinfo/disable-xkb.patch   |   18 +++++
+ recipes/obsolete/xorg-app/xdpyinfo_1.1.0.bb        |   12 +++
+ recipes/obsolete/xorg-app/xdriinfo_1.0.3.bb        |    8 ++
+ recipes/obsolete/xorg-app/xedit_1.1.2.bb           |    7 ++
+ recipes/obsolete/xorg-app/xev/diet-x11.patch       |   80 ++++++++++++++++++++
+ recipes/obsolete/xorg-app/xev_1.0.4.bb             |    9 ++
+ recipes/obsolete/xorg-app/xeyes_1.1.0.bb           |    7 ++
+ recipes/obsolete/xorg-app/xf86dga_1.0.2.bb         |    7 ++
+ recipes/obsolete/xorg-app/xfd_1.0.1.bb             |    7 ++
+ recipes/obsolete/xorg-app/xfontsel_1.0.2.bb        |    7 ++
+ recipes/obsolete/xorg-app/xfs_1.1.0.bb             |    8 ++
+ recipes/obsolete/xorg-app/xfsinfo_1.0.2.bb         |    7 ++
+ recipes/obsolete/xorg-app/xgamma_1.0.3.bb          |    8 ++
+ recipes/obsolete/xorg-app/xgc_1.0.1.bb             |    7 ++
+ recipes/obsolete/xorg-app/xhost_1.0.3.bb           |    9 ++
+ recipes/obsolete/xorg-app/xinit_1.1.1.bb           |    9 ++
+ recipes/obsolete/xorg-app/xinput_1.5.0.bb          |    7 ++
+ recipes/obsolete/xorg-app/xkbcomp_1.1.1.bb         |    9 ++
+ recipes/obsolete/xorg-app/xkbevd_1.1.0.bb          |    7 ++
+ recipes/obsolete/xorg-app/xkbprint_1.0.1.bb        |    7 ++
+ recipes/obsolete/xorg-app/xkbutils_1.0.2.bb        |    6 ++
+ recipes/obsolete/xorg-app/xkill_1.0.2.bb           |    7 ++
+ recipes/obsolete/xorg-app/xload_1.0.2.bb           |    8 ++
+ recipes/obsolete/xorg-app/xlogo_1.0.1.bb           |    7 ++
+ recipes/obsolete/xorg-app/xlsatoms_1.0.2.bb        |    7 ++
+ recipes/obsolete/xorg-app/xlsclients_1.0.2.bb      |    7 ++
+ recipes/obsolete/xorg-app/xlsfonts_1.0.2.bb        |    6 ++
+ recipes/obsolete/xorg-app/xmag_1.0.3.bb            |    8 ++
+ recipes/obsolete/xorg-app/xman_1.1.0.bb            |   11 +++
+ recipes/obsolete/xorg-app/xmessage_1.0.2.bb        |    8 ++
+ recipes/obsolete/xorg-app/xmh_1.0.1.bb             |    7 ++
+ recipes/obsolete/xorg-app/xmodmap_1.0.4.bb         |    8 ++
+ recipes/obsolete/xorg-app/xmore_1.0.1.bb           |    7 ++
+ recipes/obsolete/xorg-app/xprop_1.1.0.bb           |    8 ++
+ .../xorg-app/xrandr/resolve_symbol_clash.patch     |   33 ++++++++
+ recipes/obsolete/xorg-app/xrandr_1.3.2.bb          |   10 +++
+ recipes/obsolete/xorg-app/xrdb_1.0.6.bb            |    9 ++
+ recipes/obsolete/xorg-app/xrefresh_1.0.3.bb        |    6 ++
+ recipes/obsolete/xorg-app/xrx_1.0.3.bb             |    7 ++
+ .../obsolete/xorg-app/xset-1.1.0/disable-xkb.patch |   18 +++++
+ recipes/obsolete/xorg-app/xset_1.1.0.bb            |   14 ++++
+ recipes/obsolete/xorg-app/xsetroot_1.0.3.bb        |    9 ++
+ recipes/obsolete/xorg-app/xsm_1.0.1.bb             |    8 ++
+ recipes/obsolete/xorg-app/xstdcmap_1.0.1.bb        |    7 ++
+ recipes/obsolete/xorg-app/xterm_207.bb             |   21 +++++
+ recipes/obsolete/xorg-app/xterm_251.bb             |   21 +++++
+ recipes/obsolete/xorg-app/xvidtune_1.0.1.bb        |    9 ++
+ recipes/obsolete/xorg-app/xvinfo_1.1.0.bb          |    8 ++
+ recipes/obsolete/xorg-app/xwd_1.0.3.bb             |    7 ++
+ recipes/obsolete/xorg-app/xwininfo_1.0.5.bb        |    7 ++
+ recipes/obsolete/xorg-app/xwud_1.0.2.bb            |    6 ++
+ recipes/xorg-app/appres_1.0.2.bb                   |    8 --
+ recipes/xorg-app/bdftopcf_1.0.2.bb                 |   10 ---
+ recipes/xorg-app/beforelight_1.0.3.bb              |    8 --
+ recipes/xorg-app/bitmap_1.0.4.bb                   |    7 --
+ recipes/xorg-app/constype_1.0.2.bb                 |    8 --
+ recipes/xorg-app/editres_1.0.4.bb                  |    7 --
+ recipes/xorg-app/fslsfonts_1.0.2.bb                |    7 --
+ recipes/xorg-app/fstobdf_1.0.3.bb                  |    7 --
+ recipes/xorg-app/iceauth_1.0.3.bb                  |    8 --
+ recipes/xorg-app/ico_1.0.2.bb                      |    8 --
+ recipes/xorg-app/listres_1.0.1.bb                  |    7 --
+ recipes/xorg-app/luit_1.0.4.bb                     |    8 --
+ .../mkbold-mkitalic-native-0.11/makebifonts        |    5 +
+ .../xorg-app/mkbold-mkitalic-native/makebifonts    |    5 -
+ recipes/xorg-app/mkfontdir_1.0.5.bb                |   10 ---
+ recipes/xorg-app/mkfontscale_1.0.7.bb              |    9 --
+ recipes/xorg-app/oclock_1.0.1.bb                   |    7 --
+ recipes/xorg-app/proxymngr_1.0.1.bb                |    7 --
+ recipes/xorg-app/rendercheck_1.3.bb                |    7 --
+ recipes/xorg-app/rgb_1.0.3.bb                      |    9 --
+ recipes/xorg-app/rstart_1.0.3.bb                   |    6 --
+ recipes/xorg-app/sessreg_1.0.5.bb                  |    7 --
+ recipes/xorg-app/setxkbmap_1.1.0.bb                |    7 --
+ recipes/xorg-app/showfont_1.0.2.bb                 |    7 --
+ recipes/xorg-app/smproxy_1.0.3.bb                  |    7 --
+ recipes/xorg-app/twm_1.0.4.bb                      |   13 ---
+ recipes/xorg-app/viewres_1.0.1.bb                  |    7 --
+ recipes/xorg-app/x11perf_1.5.1.bb                  |   10 ---
+ recipes/xorg-app/xauth_1.0.4.bb                    |    8 --
+ recipes/xorg-app/xbacklight_1.1.1.bb               |    8 --
+ recipes/xorg-app/xbiff_1.0.1.bb                    |    7 --
+ recipes/xorg-app/xcalc_1.0.2.bb                    |    8 --
+ recipes/xorg-app/xclipboard_1.1.0.bb               |    7 --
+ recipes/xorg-app/xclock_1.0.4.bb                   |    8 --
+ recipes/xorg-app/xcmsdb_1.0.2.bb                   |    6 --
+ recipes/xorg-app/xcompmgr_1.1.4.bb                 |    9 --
+ recipes/xorg-app/xconsole_1.0.3.bb                 |    8 --
+ recipes/xorg-app/xcursorgen_1.0.3.bb               |   10 ---
+ recipes/xorg-app/xdbedizzy_1.0.2.bb                |    7 --
+ recipes/xorg-app/xditview_1.0.1.bb                 |    7 --
+ recipes/xorg-app/xdm_1.1.9.bb                      |   15 ----
+ recipes/xorg-app/xdpyinfo-1.2.0/disable-xkb.patch  |   18 +++++
+ recipes/xorg-app/xdpyinfo/disable-xkb.patch        |   18 -----
+ recipes/xorg-app/xdpyinfo_1.1.0.bb                 |   12 ---
+ recipes/xorg-app/xdriinfo_1.0.3.bb                 |    8 --
+ recipes/xorg-app/xedit_1.1.2.bb                    |    7 --
+ recipes/xorg-app/xev/diet-x11.patch                |   80 --------------------
+ recipes/xorg-app/xev_1.0.4.bb                      |    9 --
+ recipes/xorg-app/xeyes_1.1.0.bb                    |    7 --
+ recipes/xorg-app/xf86dga_1.0.2.bb                  |    7 --
+ recipes/xorg-app/xfd_1.0.1.bb                      |    7 --
+ recipes/xorg-app/xfontsel_1.0.2.bb                 |    7 --
+ recipes/xorg-app/xfs_1.1.0.bb                      |    8 --
+ recipes/xorg-app/xfsinfo_1.0.2.bb                  |    7 --
+ recipes/xorg-app/xgamma_1.0.3.bb                   |    8 --
+ recipes/xorg-app/xgc_1.0.1.bb                      |    7 --
+ recipes/xorg-app/xhost_1.0.3.bb                    |    9 --
+ recipes/xorg-app/xinit_1.1.1.bb                    |    9 --
+ recipes/xorg-app/xinput_1.5.0.bb                   |    7 --
+ recipes/xorg-app/xkbcomp_1.1.1.bb                  |    9 --
+ recipes/xorg-app/xkbevd_1.1.0.bb                   |    7 --
+ recipes/xorg-app/xkbprint_1.0.1.bb                 |    7 --
+ recipes/xorg-app/xkbutils_1.0.2.bb                 |    6 --
+ recipes/xorg-app/xkill_1.0.2.bb                    |    7 --
+ recipes/xorg-app/xload_1.0.2.bb                    |    8 --
+ recipes/xorg-app/xlogo_1.0.1.bb                    |    7 --
+ recipes/xorg-app/xlsatoms_1.0.2.bb                 |    7 --
+ recipes/xorg-app/xlsclients_1.0.2.bb               |    7 --
+ recipes/xorg-app/xlsfonts_1.0.2.bb                 |    6 --
+ recipes/xorg-app/xmag_1.0.3.bb                     |    8 --
+ recipes/xorg-app/xman_1.1.0.bb                     |   11 ---
+ recipes/xorg-app/xmessage_1.0.2.bb                 |    8 --
+ recipes/xorg-app/xmh_1.0.1.bb                      |    7 --
+ recipes/xorg-app/xmodmap_1.0.4.bb                  |    8 --
+ recipes/xorg-app/xmore_1.0.1.bb                    |    7 --
+ recipes/xorg-app/xprop_1.1.0.bb                    |    8 --
+ recipes/xorg-app/xrandr/resolve_symbol_clash.patch |   33 --------
+ recipes/xorg-app/xrandr_1.3.2.bb                   |   10 ---
+ recipes/xorg-app/xrdb_1.0.6.bb                     |    9 --
+ recipes/xorg-app/xrefresh_1.0.3.bb                 |    6 --
+ recipes/xorg-app/xrx_1.0.3.bb                      |    7 --
+ recipes/xorg-app/xset-1.1.0/disable-xkb.patch      |   18 -----
+ recipes/xorg-app/xset_1.1.0.bb                     |   14 ----
+ recipes/xorg-app/xsetroot_1.0.3.bb                 |    9 --
+ recipes/xorg-app/xsm_1.0.1.bb                      |    8 --
+ recipes/xorg-app/xstdcmap_1.0.1.bb                 |    7 --
+ recipes/xorg-app/xterm_207.bb                      |   21 -----
+ recipes/xorg-app/xterm_251.bb                      |   21 -----
+ recipes/xorg-app/xvidtune_1.0.1.bb                 |    9 --
+ recipes/xorg-app/xvinfo_1.1.0.bb                   |    8 --
+ recipes/xorg-app/xwd_1.0.3.bb                      |    7 --
+ recipes/xorg-app/xwininfo_1.0.5.bb                 |    7 --
+ recipes/xorg-app/xwud_1.0.2.bb                     |    6 --
+ 183 files changed, 882 insertions(+), 864 deletions(-)
+ create mode 100644 recipes/obsolete/xorg-app/appres_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/bdftopcf_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/beforelight_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/bitmap_1.0.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/constype_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/editres_1.0.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/fslsfonts_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/fstobdf_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/iceauth_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/ico_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/listres_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/luit_1.0.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/mkfontdir_1.0.5.bb
+ create mode 100644 recipes/obsolete/xorg-app/mkfontscale_1.0.7.bb
+ create mode 100644 recipes/obsolete/xorg-app/oclock_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/proxymngr_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/rendercheck_1.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/rgb_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/rstart_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/sessreg_1.0.5.bb
+ create mode 100644 recipes/obsolete/xorg-app/setxkbmap_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/showfont_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/smproxy_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/twm_1.0.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/viewres_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/x11perf_1.5.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xauth_1.0.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/xbacklight_1.1.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xbiff_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xcalc_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xclipboard_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xclock_1.0.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/xcmsdb_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xcompmgr_1.1.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/xconsole_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xcursorgen_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xdbedizzy_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xditview_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xdm_1.1.9.bb
+ create mode 100644 recipes/obsolete/xorg-app/xdpyinfo/disable-xkb.patch
+ create mode 100644 recipes/obsolete/xorg-app/xdpyinfo_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xdriinfo_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xedit_1.1.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xev/diet-x11.patch
+ create mode 100644 recipes/obsolete/xorg-app/xev_1.0.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/xeyes_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xf86dga_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xfd_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xfontsel_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xfs_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xfsinfo_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xgamma_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xgc_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xhost_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xinit_1.1.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xinput_1.5.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xkbcomp_1.1.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xkbevd_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xkbprint_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xkbutils_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xkill_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xload_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xlogo_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xlsatoms_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xlsclients_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xlsfonts_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xmag_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xman_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xmessage_1.0.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xmh_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xmodmap_1.0.4.bb
+ create mode 100644 recipes/obsolete/xorg-app/xmore_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xprop_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xrandr/resolve_symbol_clash.patch
+ create mode 100644 recipes/obsolete/xorg-app/xrandr_1.3.2.bb
+ create mode 100644 recipes/obsolete/xorg-app/xrdb_1.0.6.bb
+ create mode 100644 recipes/obsolete/xorg-app/xrefresh_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xrx_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xset-1.1.0/disable-xkb.patch
+ create mode 100644 recipes/obsolete/xorg-app/xset_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xsetroot_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xsm_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xstdcmap_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xterm_207.bb
+ create mode 100644 recipes/obsolete/xorg-app/xterm_251.bb
+ create mode 100644 recipes/obsolete/xorg-app/xvidtune_1.0.1.bb
+ create mode 100644 recipes/obsolete/xorg-app/xvinfo_1.1.0.bb
+ create mode 100644 recipes/obsolete/xorg-app/xwd_1.0.3.bb
+ create mode 100644 recipes/obsolete/xorg-app/xwininfo_1.0.5.bb
+ create mode 100644 recipes/obsolete/xorg-app/xwud_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/appres_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/bdftopcf_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/beforelight_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/bitmap_1.0.4.bb
+ delete mode 100644 recipes/xorg-app/constype_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/editres_1.0.4.bb
+ delete mode 100644 recipes/xorg-app/fslsfonts_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/fstobdf_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/iceauth_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/ico_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/listres_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/luit_1.0.4.bb
+ create mode 100644 recipes/xorg-app/mkbold-mkitalic-native-0.11/makebifonts
+ delete mode 100644 recipes/xorg-app/mkbold-mkitalic-native/makebifonts
+ delete mode 100644 recipes/xorg-app/mkfontdir_1.0.5.bb
+ delete mode 100644 recipes/xorg-app/mkfontscale_1.0.7.bb
+ delete mode 100644 recipes/xorg-app/oclock_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/proxymngr_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/rendercheck_1.3.bb
+ delete mode 100644 recipes/xorg-app/rgb_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/rstart_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/sessreg_1.0.5.bb
+ delete mode 100644 recipes/xorg-app/setxkbmap_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/showfont_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/smproxy_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/twm_1.0.4.bb
+ delete mode 100644 recipes/xorg-app/viewres_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/x11perf_1.5.1.bb
+ delete mode 100644 recipes/xorg-app/xauth_1.0.4.bb
+ delete mode 100644 recipes/xorg-app/xbacklight_1.1.1.bb
+ delete mode 100644 recipes/xorg-app/xbiff_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xcalc_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xclipboard_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xclock_1.0.4.bb
+ delete mode 100644 recipes/xorg-app/xcmsdb_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xcompmgr_1.1.4.bb
+ delete mode 100644 recipes/xorg-app/xconsole_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xcursorgen_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xdbedizzy_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xditview_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xdm_1.1.9.bb
+ create mode 100644 recipes/xorg-app/xdpyinfo-1.2.0/disable-xkb.patch
+ delete mode 100644 recipes/xorg-app/xdpyinfo/disable-xkb.patch
+ delete mode 100644 recipes/xorg-app/xdpyinfo_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xdriinfo_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xedit_1.1.2.bb
+ delete mode 100644 recipes/xorg-app/xev/diet-x11.patch
+ delete mode 100644 recipes/xorg-app/xev_1.0.4.bb
+ delete mode 100644 recipes/xorg-app/xeyes_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xf86dga_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xfd_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xfontsel_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xfs_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xfsinfo_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xgamma_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xgc_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xhost_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xinit_1.1.1.bb
+ delete mode 100644 recipes/xorg-app/xinput_1.5.0.bb
+ delete mode 100644 recipes/xorg-app/xkbcomp_1.1.1.bb
+ delete mode 100644 recipes/xorg-app/xkbevd_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xkbprint_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xkbutils_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xkill_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xload_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xlogo_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xlsatoms_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xlsclients_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xlsfonts_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xmag_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xman_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xmessage_1.0.2.bb
+ delete mode 100644 recipes/xorg-app/xmh_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xmodmap_1.0.4.bb
+ delete mode 100644 recipes/xorg-app/xmore_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xprop_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xrandr/resolve_symbol_clash.patch
+ delete mode 100644 recipes/xorg-app/xrandr_1.3.2.bb
+ delete mode 100644 recipes/xorg-app/xrdb_1.0.6.bb
+ delete mode 100644 recipes/xorg-app/xrefresh_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xrx_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xset-1.1.0/disable-xkb.patch
+ delete mode 100644 recipes/xorg-app/xset_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xsetroot_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xsm_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xstdcmap_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xterm_207.bb
+ delete mode 100644 recipes/xorg-app/xterm_251.bb
+ delete mode 100644 recipes/xorg-app/xvidtune_1.0.1.bb
+ delete mode 100644 recipes/xorg-app/xvinfo_1.1.0.bb
+ delete mode 100644 recipes/xorg-app/xwd_1.0.3.bb
+ delete mode 100644 recipes/xorg-app/xwininfo_1.0.5.bb
+ delete mode 100644 recipes/xorg-app/xwud_1.0.2.bb
 
-diff --git a/recipes/obsolete/xorg-lib/libdmx_1.1.0.bb b/recipes/obsolete/xorg-lib/libdmx_1.1.0.bb
+diff --git a/recipes/obsolete/xorg-app/appres_1.0.2.bb b/recipes/obsolete/xorg-app/appres_1.0.2.bb
 new file mode 100644
-index 0000000..5a806a4
+index 0000000..bb76f3e
 --- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libdmx_1.1.0.bb
++++ b/recipes/obsolete/xorg-app/appres_1.0.2.bb
 @@ -0,0 +1,8 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Distributed Multihead extension library"
-+DEPENDS += "libxext dmxproto"
++require xorg-app-common.inc
++DESCRIPTION = "The appres program prints the resources seen by an application."
++DEPENDS += " libxt"
 +PE = "1"
 +PR = "${INC_PR}.0"
 +
-+SRC_URI[archive.md5sum] = "a2fcf0382837888d3781b714489a8999"
-+SRC_URI[archive.sha256sum] = "1904a8f848cc5d76105cb07707890aca095540a37fb0a63d359f71da51d3e2d5"
-diff --git a/recipes/obsolete/xorg-lib/libfontenc_1.0.5.bb b/recipes/obsolete/xorg-lib/libfontenc_1.0.5.bb
++SRC_URI[archive.md5sum] = "6f2f5d9f41669d498b56d73dc3206951"
++SRC_URI[archive.sha256sum] = "37d0fbb16c553fa09878d107f29f26c2ca4206c98dd23c44a0cb670ace531e36"
+diff --git a/recipes/obsolete/xorg-app/bdftopcf_1.0.2.bb b/recipes/obsolete/xorg-app/bdftopcf_1.0.2.bb
 new file mode 100644
-index 0000000..6c11158
+index 0000000..450eb63
 --- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libfontenc_1.0.5.bb
-@@ -0,0 +1,11 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 font encoding library"
-+LICENSE = "BSD-X"
-+DEPENDS += "zlib xproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "4f0d8191819be9f2bdf9dad49a65e43b"
-+SRC_URI[archive.sha256sum] = "7f3cde0331e9ad3da720b1a8255e121673701199df0802b62380436e74222700"
-+
-+BBCLASSEXTEND = "native"
-diff --git a/recipes/obsolete/xorg-lib/libfs_1.0.2.bb b/recipes/obsolete/xorg-lib/libfs_1.0.2.bb
-new file mode 100644
-index 0000000..d892132
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libfs_1.0.2.bb
++++ b/recipes/obsolete/xorg-app/bdftopcf_1.0.2.bb
 @@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Font Services library"
-+DEPENDS += "xproto fontsproto xtrans"
++require xorg-app-common.inc
++DESCRIPTION = "converts BDF fonts to PCF fonts"
++DEPENDS += " libxfont"
 +PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "ecf2d6a27da053500283e803efa2a808"
-+SRC_URI[archive.sha256sum] = "af2a5fe5eaa2b026e10bddb4e3f39976dc13deb5dbdc714abe1f016435ce3049"
-+
-+XORG_PN = "libFS"
-diff --git a/recipes/obsolete/xorg-lib/libice_1.0.6.bb b/recipes/obsolete/xorg-lib/libice_1.0.6.bb
-new file mode 100644
-index 0000000..1c7f3cb
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libice_1.0.6.bb
-@@ -0,0 +1,12 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Inter-Client Exchange library"
-+DEPENDS += "xproto xtrans"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "2d39bc924af24325dae589e9a849180c"
-+SRC_URI[archive.sha256sum] = "a8346859505d2aa27ecc4531f1c86d72801936d96c31c5beaeff4587441b568b"
-+
-+BBCLASSEXTEND = "native"
-+
-+XORG_PN = "libICE"
-diff --git a/recipes/obsolete/xorg-lib/libpciaccess_0.10.9.bb b/recipes/obsolete/xorg-lib/libpciaccess_0.10.9.bb
-new file mode 100644
-index 0000000..d963c3c
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libpciaccess_0.10.9.bb
-@@ -0,0 +1,6 @@
-+require xorg-lib-common.inc
-+DEPENDS += "xproto virtual/libx11"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "685cb20e7a6165bc010972f1183addbd"
-+SRC_URI[archive.sha256sum] = "5ccb9683b8be76edfceab4bf006e1cce9018e0d3dea5e54aa72e82798213fead"
-diff --git a/recipes/obsolete/xorg-lib/libsm_1.1.1.bb b/recipes/obsolete/xorg-lib/libsm_1.1.1.bb
-new file mode 100644
-index 0000000..b87bcdf
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libsm_1.1.1.bb
-@@ -0,0 +1,12 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Session management library"
-+DEPENDS += "libice xproto xtrans util-linux-ng"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "6889a455496aaaa65b1fa05fc518d179"
-+SRC_URI[archive.sha256sum] = "f50d184d8c6a031b3ff4f0d52efcfd4ffa811b0362b166a9ff9ba4c2e9aa7ce0"
-+
-+BBCLASSEXTEND = "native"
-+
-+XORG_PN = "libSM"
-diff --git a/recipes/obsolete/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch b/recipes/obsolete/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch
-new file mode 100644
-index 0000000..2e2d475
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch
-@@ -0,0 +1,33 @@
-+From affc2488a7f2660a74dc8354fc3e0bff2c4f879c Mon Sep 17 00:00:00 2001
-+From: Dan Nicholson <dbn.lists@gmail.com>
-+Date: Sat, 06 Nov 2010 21:58:09 +0000
-+Subject: config: Fix architecture check for OS/2 to skip nios2 cpu
-+
-+The OS/2 platform requires some utility functions as well as having a
-+non-32 bit wchar_t. Fix the configure check so that it doesn't also
-+affect the nios2 cpu, which wouldn't influence these operating system
-+issues.
-+
-+Signed-off-by: Dan Nicholson <dbn.lists@gmail.com>
-+Tested-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-+Reviewed-by: Alan Coopersmith <alan.coopersmith@oracle.com>
-+Reviewed-by: Julien Cristau <jcristau@debian.org>
-+Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
-+---
-+diff --git a/configure.ac b/configure.ac
-+index 1b4a8b7..01f43fb 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -246,8 +246,8 @@ dnl AC_PATH_XTRA
-+ 
-+ # arch specific things
-+ WCHAR32="1"
-+-case $target_alias in
-+-  *os2*) os2="true" ; WCHAR32="0" ;;
-++case $target_os in
-++  os2*) os2="true" ; WCHAR32="0" ;;
-+   *) ;;
-+ esac
-+ AC_SUBST(WCHAR32)
-+--
-+cgit v0.8.3-6-g21f6
-diff --git a/recipes/obsolete/xorg-lib/libx11-1.3.2/dolt-fix.patch b/recipes/obsolete/xorg-lib/libx11-1.3.2/dolt-fix.patch
-new file mode 100644
-index 0000000..ea1a8bd
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11-1.3.2/dolt-fix.patch
-@@ -0,0 +1,21 @@
-+diff -uNr libX11-1.2.99.901.orig/acinclude.m4 libX11-1.2.99.901/acinclude.m4
-+--- libX11-1.2.99.901.orig/acinclude.m4	2009-09-05 10:57:11.000000000 +0200
-++++ libX11-1.2.99.901/acinclude.m4	2009-09-05 10:59:14.000000000 +0200
-+@@ -197,7 +197,7 @@
-+     cat <<__DOLTLIBTOOL__EOF__ > doltlibtool
-+ #!$DOLT_BASH
-+ __DOLTLIBTOOL__EOF__
-+-    cat <<'__DOLTLIBTOOL__EOF__' >>doltlibtool
-++    cat <<'__DOLTLIBTOOL__EOF__' | sed -e "s/@host_alias@/$host_alias/g" >>doltlibtool
-+ top_builddir_slash="${0%%doltlibtool}"
-+ : ${top_builddir_slash:=./}
-+ args=()
-+@@ -213,7 +213,7 @@
-+ if $modeok && $tagok ; then
-+     . ${top_builddir_slash}doltcompile "${args@<:@@@:>@}"
-+ else
-+-    exec ${top_builddir_slash}libtool "$[]@"
-++    exec ${top_builddir_slash}@host_alias@-libtool "$[]@"
-+ fi
-+ __DOLTLIBTOOL__EOF__
-+ 
-diff --git a/recipes/obsolete/xorg-lib/libx11-1.3.2/keysymdef_include.patch b/recipes/obsolete/xorg-lib/libx11-1.3.2/keysymdef_include.patch
-new file mode 100644
-index 0000000..7e725b2
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11-1.3.2/keysymdef_include.patch
-@@ -0,0 +1,29 @@
-+Index: libX11-1.1.5/configure.ac
-+===================================================================
-+--- libX11-1.1.5.orig/configure.ac	2008-10-28 11:36:49.000000000 +0000
-++++ libX11-1.1.5/configure.ac	2008-10-28 11:40:05.000000000 +0000
-+@@ -221,13 +221,21 @@
-+ # Find keysymdef.h
-+ #
-+ AC_MSG_CHECKING([keysymdef.h])
-+-dir=`pkg-config --variable=includedir xproto`
-+-KEYSYMDEF="$dir/X11/keysymdef.h"
-++AC_ARG_WITH(keysymdefdir,
-++	AC_HELP_STRING([--with-keysymdefdir=DIR], [The location of keysymdef.h]),
-++	KEYSYMDEF=$withval/keysymdef.h, KEYSYMDEF="")
-++
-++if test x$KEYSYMDEF = x; then
-++	dir=`pkg-config --variable=includedir xproto`
-++	KEYSYMDEF="$dir/X11/keysymdef.h"
-++fi
-++
-+ if test -f "$KEYSYMDEF"; then
-+-        AC_MSG_RESULT([$KEYSYMDEF])
-++	AC_MSG_RESULT([$KEYSYMDEF])
-+ else
-+ 	AC_MSG_ERROR([Cannot find keysymdef.h])
-+ fi
-++
-+ AC_SUBST(KEYSYMDEF)
-+ 
-+ AM_CONDITIONAL(UDC, test xfalse = xtrue)
-diff --git a/recipes/obsolete/xorg-lib/libx11-1.3.2/x11_disable_makekeys.patch b/recipes/obsolete/xorg-lib/libx11-1.3.2/x11_disable_makekeys.patch
-new file mode 100644
-index 0000000..5d0a24c
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11-1.3.2/x11_disable_makekeys.patch
-@@ -0,0 +1,23 @@
-+diff -uNr libX11-1.3.3.orig/src/util/Makefile.am libX11-1.3.3/src/util/Makefile.am
-+--- libX11-1.3.3.orig/src/util/Makefile.am	2010-01-15 02:11:36.000000000 +0100
-++++ libX11-1.3.3/src/util/Makefile.am	2010-01-18 14:48:27.000000000 +0100
-+@@ -1,19 +1 @@
-+-
-+-noinst_PROGRAMS=makekeys
-+-
-+-makekeys_CFLAGS=$(X11_CFLAGS)
-+-
-+-CC = @CC_FOR_BUILD@
-+-
-+ EXTRA_DIST = mkks.sh
-+-
-+-if LINT
-+-# Check source code with tools like lint & sparse
-+-
-+-ALL_LINT_FLAGS=$(LINT_FLAGS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-+-		$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS)
-+-
-+-lint:
-+-	$(LINT) $(ALL_LINT_FLAGS) makekeys.c
-+-
-+-endif LINT
-diff --git a/recipes/obsolete/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch b/recipes/obsolete/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch
-new file mode 100644
-index 0000000..2e2d475
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch
-@@ -0,0 +1,33 @@
-+From affc2488a7f2660a74dc8354fc3e0bff2c4f879c Mon Sep 17 00:00:00 2001
-+From: Dan Nicholson <dbn.lists@gmail.com>
-+Date: Sat, 06 Nov 2010 21:58:09 +0000
-+Subject: config: Fix architecture check for OS/2 to skip nios2 cpu
-+
-+The OS/2 platform requires some utility functions as well as having a
-+non-32 bit wchar_t. Fix the configure check so that it doesn't also
-+affect the nios2 cpu, which wouldn't influence these operating system
-+issues.
-+
-+Signed-off-by: Dan Nicholson <dbn.lists@gmail.com>
-+Tested-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-+Reviewed-by: Alan Coopersmith <alan.coopersmith@oracle.com>
-+Reviewed-by: Julien Cristau <jcristau@debian.org>
-+Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
-+---
-+diff --git a/configure.ac b/configure.ac
-+index 1b4a8b7..01f43fb 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -246,8 +246,8 @@ dnl AC_PATH_XTRA
-+ 
-+ # arch specific things
-+ WCHAR32="1"
-+-case $target_alias in
-+-  *os2*) os2="true" ; WCHAR32="0" ;;
-++case $target_os in
-++  os2*) os2="true" ; WCHAR32="0" ;;
-+   *) ;;
-+ esac
-+ AC_SUBST(WCHAR32)
-+--
-+cgit v0.8.3-6-g21f6
-diff --git a/recipes/obsolete/xorg-lib/libx11-1.3.6/dolt-fix.patch b/recipes/obsolete/xorg-lib/libx11-1.3.6/dolt-fix.patch
-new file mode 100644
-index 0000000..7e96075
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11-1.3.6/dolt-fix.patch
-@@ -0,0 +1,22 @@
-+Index: libX11-1.3.4/m4/dolt.m4
-+===================================================================
-+--- libX11-1.3.4/m4/dolt.m4
-++++ libX11-1.3.4/m4/dolt.m4
-+@@ -155,7 +155,7 @@ dnl without '=', because automake does n
-+     cat <<__DOLTLIBTOOL__EOF__ > doltlibtool
-+ #!$DOLT_BASH
-+ __DOLTLIBTOOL__EOF__
-+-    cat <<'__DOLTLIBTOOL__EOF__' >>doltlibtool
-++    cat <<'__DOLTLIBTOOL__EOF__' | sed -e "s/@host_alias@/$host_alias/g" >>doltlibtool
-+ top_builddir_slash="${0%%doltlibtool}"
-+ : ${top_builddir_slash:=./}
-+ args=()
-+@@ -171,7 +171,7 @@ done
-+ if $modeok && $tagok ; then
-+     . ${top_builddir_slash}doltcompile "${args@<:@@@:>@}"
-+ else
-+-    exec ${top_builddir_slash}libtool "$[]@"
-++    exec ${top_builddir_slash}@host_alias@-libtool "$[]@"
-+ fi
-+ __DOLTLIBTOOL__EOF__
-+ 
-diff --git a/recipes/obsolete/xorg-lib/libx11-1.3.6/keysymdef_include.patch b/recipes/obsolete/xorg-lib/libx11-1.3.6/keysymdef_include.patch
-new file mode 100644
-index 0000000..1a30e34
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11-1.3.6/keysymdef_include.patch
-@@ -0,0 +1,19 @@
-+diff -uNr libX11-1.3.6.orig//configure.ac libX11-1.3.6/configure.ac
-+--- libX11-1.3.6.orig//configure.ac	2010-09-20 08:04:16.000000000 +0200
-++++ libX11-1.3.6/configure.ac	2010-09-28 16:29:26.000000000 +0200
-+@@ -355,7 +355,14 @@
-+ # Find keysymdef.h
-+ #
-+ AC_MSG_CHECKING([keysym definitions])
-+-KEYSYMDEFDIR=`$PKG_CONFIG --variable=includedir xproto`/X11
-++AC_ARG_WITH(keysymdefdir,
-++        AC_HELP_STRING([--with-keysymdefdir=DIR], [The location of keysymdef.h]),
-++        KEYSYMDEFDIR=$withval, KEYSYMDEFDIR="")
-++
-++if test x$KEYSYMDEFDIR = x; then
-++	KEYSYMDEFDIR=`$PKG_CONFIG --variable=includedir xproto`/X11
-++fi
-++
-+ FILES="keysymdef.h XF86keysym.h Sunkeysym.h DECkeysym.h HPkeysym.h"
-+ for i in $FILES; do
-+     if test -f "$KEYSYMDEFDIR/$i"; then
-diff --git a/recipes/obsolete/xorg-lib/libx11-1.3.6/x11_disable_makekeys.patch b/recipes/obsolete/xorg-lib/libx11-1.3.6/x11_disable_makekeys.patch
-new file mode 100644
-index 0000000..9763313
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11-1.3.6/x11_disable_makekeys.patch
-@@ -0,0 +1,29 @@
-+Index: libX11-1.3.4/src/util/Makefile.am
-+===================================================================
-+--- libX11-1.3.4.orig/src/util/Makefile.am
-++++ libX11-1.3.4/src/util/Makefile.am
-+@@ -1,24 +1 @@
-+-
-+-noinst_PROGRAMS=makekeys
-+-
-+-makekeys_CFLAGS = \
-+-	$(X11_CFLAGS) \
-+-	$(CWARNFLAGS)
-+-
-+-CC = @CC_FOR_BUILD@
-+-CPPFLAGS = @CPPFLAGS_FOR_BUILD@
-+-CFLAGS = @CFLAGS_FOR_BUILD@
-+-LDFLAGS = @LDFLAGS_FOR_BUILD@
-+-
-+ EXTRA_DIST = mkks.sh
-+-
-+-if LINT
-+-# Check source code with tools like lint & sparse
-+-
-+-ALL_LINT_FLAGS=$(LINT_FLAGS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-+-		$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS)
-+-
-+-lint:
-+-	$(LINT) $(ALL_LINT_FLAGS) makekeys.c
-+-
-+-endif LINT
-diff --git a/recipes/obsolete/xorg-lib/libx11_1.3.2.bb b/recipes/obsolete/xorg-lib/libx11_1.3.2.bb
-new file mode 100644
-index 0000000..189d1ff
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11_1.3.2.bb
-@@ -0,0 +1,11 @@
-+require libx11.inc
-+PR = "${INC_PR}.3"
-+# gcc 4.5 ends up ICEing with thumb and -O1 with -fno-omit-framepointer
-+# therefore if we are in thumb mode then we use -Os instead of -O1 for
-+# DEBUG_OPTIMIZATION
-+
-+DEBUG_OPTIMIZATION_thumb_append = " -Os"
-+SRC_URI += " file://dolt-fix.patch"
-+SRC_URI += " file://configure.ac-nios2.patch"
-+SRC_URI[archive.md5sum] = "001d780829f936e34851ef7cd37b4dfd"
-+SRC_URI[archive.sha256sum] = "4def4d5c9fce85d690f1f29d675154594acdea3d3fe792d0cb513732c7b4bcb2"
-diff --git a/recipes/obsolete/xorg-lib/libx11_1.3.6.bb b/recipes/obsolete/xorg-lib/libx11_1.3.6.bb
-new file mode 100644
-index 0000000..8d9f343
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libx11_1.3.6.bb
-@@ -0,0 +1,7 @@
-+require libx11.inc
 +PR = "${INC_PR}.1"
 +
-+SRC_URI += " file://dolt-fix.patch"
-+SRC_URI += " file://configure.ac-nios2.patch"
-+SRC_URI[archive.md5sum] = "8e0a8a466aa78f66e09fe06cb395319f"
-+SRC_URI[archive.sha256sum] = "599826765c59a98b1e58b4f6c4ad50dca69eeb0e7bd78aea736ca815f45bea40"
-diff --git a/recipes/obsolete/xorg-lib/libxau_1.0.5.bb b/recipes/obsolete/xorg-lib/libxau_1.0.5.bb
-new file mode 100644
-index 0000000..3e95f97
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxau_1.0.5.bb
-@@ -0,0 +1,12 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "A Sample Authorization Protocol for X"
-+DEPENDS += " xproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "993b3185c629e4b89401fca072dcb663"
-+SRC_URI[archive.sha256sum] = "a503b3e88d29fa9c45cce1b2d1af54106c2ce21491348c394e251a071d8108ee"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+XORG_PN = "libXau"
-diff --git a/recipes/obsolete/xorg-lib/libxaw_1.0.7.bb b/recipes/obsolete/xorg-lib/libxaw_1.0.7.bb
-new file mode 100644
-index 0000000..e072411
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxaw_1.0.7.bb
-@@ -0,0 +1,25 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X Athena Widget Set"
-+DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxp printproto libxau"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "815e74de989ccda684e2baf8d12cf519"
-+SRC_URI[archive.sha256sum] = "740aaee9b09586b1c80f80890381c5ee70ea11efa4b6159f707c0f3684c6f328"
-+
-+# disable docs as groff detection doesn't work on some hosts while cross compilling
-+EXTRA_OECONF += " --disable-docs "
-+
-+do_install_append () {
-+        ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
-+        ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so.7
-+        ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so
-+}
-+
-+PACKAGES =+ "libxaw6 libxaw7 libxaw8"
-+
-+FILES_libxaw6 = "${libdir}/libXaw*.so.6*"
-+FILES_libxaw7 = "${libdir}/libXaw*.so.7*"
-+FILES_libxaw8 = "${libdir}/libXaw8.so.8*"
-+
-+XORG_PN = "libXaw"
-diff --git a/recipes/obsolete/xorg-lib/libxcomposite_0.4.1.bb b/recipes/obsolete/xorg-lib/libxcomposite_0.4.1.bb
-new file mode 100644
-index 0000000..f9460c3
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxcomposite_0.4.1.bb
-@@ -0,0 +1,11 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X Composite extension library."
-+LICENSE = "BSD-X"
-+DEPENDS += " compositeproto virtual/libx11 libxfixes libxext"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "0f1367f57fdf5df17a8dd71d0fa68248"
-+SRC_URI[archive.sha256sum] = "3715a25565222d8eb0468805db1113b514128ee5e9bc6908400f189f680d7a13"
-+
-+XORG_PN = "libXcomposite"
-diff --git a/recipes/obsolete/xorg-lib/libxcursor_1.1.10.bb b/recipes/obsolete/xorg-lib/libxcursor_1.1.10.bb
-new file mode 100644
-index 0000000..7f3f0f9
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxcursor_1.1.10.bb
-@@ -0,0 +1,13 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X cursor management library"
-+LICENSE = "BSD-X"
-+DEPENDS += "libxrender libxfixes"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "7dcdad1c10daea872cb3355af414b2ca"
-+SRC_URI[archive.sha256sum] = "b9446df62203f2c3204b6bcc0057dc909d0dc792f0dd97bc491581b08be36cbd"
++SRC_URI[archive.md5sum] = "148f20d28caaa69bbe7dcca7c2674fb6"
++SRC_URI[archive.sha256sum] = "11017f0dd637fd3228bd56fdbbd72193fd747c10d893a711c25bf6734c4da06b"
 +
 +BBCLASSEXTEND = "native"
-+
-+XORG_PN = "libXcursor"
-diff --git a/recipes/obsolete/xorg-lib/libxdamage_1.1.2.bb b/recipes/obsolete/xorg-lib/libxdamage_1.1.2.bb
+diff --git a/recipes/obsolete/xorg-app/beforelight_1.0.3.bb b/recipes/obsolete/xorg-app/beforelight_1.0.3.bb
 new file mode 100644
-index 0000000..294e514
+index 0000000..4d45541
 --- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxdamage_1.1.2.bb
-@@ -0,0 +1,11 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 damaged region extension library"
-+LICENSE = "BSD-X"
-+DEPENDS += "damageproto libxfixes"
++++ b/recipes/obsolete/xorg-app/beforelight_1.0.3.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "a sample implementation of a screen saver for X"
++DEPENDS += " libxscrnsaver libxt libxaw libxt"
 +PE = "1"
 +PR = "${INC_PR}.0"
 +
-+SRC_URI[archive.md5sum] = "b42780bce703ec202a33e5693991c09d"
-+SRC_URI[archive.sha256sum] = "a56a10acb34827c4d1a0ee282a338cbb04baa03d7fc7bc69e5690915c8fc7c0a"
-+
-+XORG_PN = "libXdamage"
-diff --git a/recipes/obsolete/xorg-lib/libxdmcp_1.0.3.bb b/recipes/obsolete/xorg-lib/libxdmcp_1.0.3.bb
++SRC_URI[archive.md5sum] = "d55b0e7196dafcfeb4db3886af2e1969"
++SRC_URI[archive.sha256sum] = "cae9427fa083a0ec3f2d1a3a6391508b31a2cf0220cb8d732c5d473a8c995c4e"
+diff --git a/recipes/obsolete/xorg-app/bitmap_1.0.4.bb b/recipes/obsolete/xorg-app/bitmap_1.0.4.bb
 new file mode 100644
-index 0000000..1e38efa
+index 0000000..f9cb165
 --- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxdmcp_1.0.3.bb
-@@ -0,0 +1,12 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X Display Manager Control Protocol library"
-+DEPENDS += "xproto"
++++ b/recipes/obsolete/xorg-app/bitmap_1.0.4.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxmu xbitmaps libxt"
 +PE = "1"
 +PR = "${INC_PR}.0"
 +
-+SRC_URI[archive.md5sum] = "d60941d471800f41a3f19b24bea855a7"
-+SRC_URI[archive.sha256sum] = "d8033a2fae20fed6de4f16b73ad69ca1c511e7da31c88e9bc6e75976187378cb"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+XORG_PN = "libXdmcp"
-diff --git a/recipes/obsolete/xorg-lib/libxevie_1.0.2.bb b/recipes/obsolete/xorg-lib/libxevie_1.0.2.bb
++SRC_URI[archive.md5sum] = "7d0c1ac193be2491c72a91ccf37ef18e"
++SRC_URI[archive.sha256sum] = "2517aaa015795a348435e4e83bafe7642d4b2fe1976ee982a5d652cf417f79d8"
+diff --git a/recipes/obsolete/xorg-app/constype_1.0.2.bb b/recipes/obsolete/xorg-app/constype_1.0.2.bb
 new file mode 100644
-index 0000000..d418768
+index 0000000..c72a171
 --- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxevie_1.0.2.bb
++++ b/recipes/obsolete/xorg-app/constype_1.0.2.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "print an X window dump"
++DEPENDS += " libxmu "
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "83f623f961400ecc56ff52a716308173"
++SRC_URI[archive.sha256sum] = "70375ea6b3e17cabc35492f87b5b138295c8f0258d65b0fbba998e3ff69bb634"
+diff --git a/recipes/obsolete/xorg-app/editres_1.0.4.bb b/recipes/obsolete/xorg-app/editres_1.0.4.bb
+new file mode 100644
+index 0000000..fd09300
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/editres_1.0.4.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxt libxmu libxaw"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "1800dda934ebb7c588ea686278a10e9f"
++SRC_URI[archive.sha256sum] = "d7ce4c0bb214e055cb7680d8b88b9f551610fc40c28269cb51649133862f3302"
+diff --git a/recipes/obsolete/xorg-app/fslsfonts_1.0.2.bb b/recipes/obsolete/xorg-app/fslsfonts_1.0.2.bb
+new file mode 100644
+index 0000000..b792a08
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/fslsfonts_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libfs"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "a61be25c87ee42169ee4dc8344acc9e2"
++SRC_URI[archive.sha256sum] = "9c8e7d573284272c633b5cf18e3358830b27bde72f4bc1ae83a1ab337d463a92"
+diff --git a/recipes/obsolete/xorg-app/fstobdf_1.0.3.bb b/recipes/obsolete/xorg-app/fstobdf_1.0.3.bb
+new file mode 100644
+index 0000000..0d92d5b
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/fstobdf_1.0.3.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libfs"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "49a6225380f6c18fff664a043cd569b1"
++SRC_URI[archive.sha256sum] = "f2242720045c69f69dc9e18320a1c6402e92234d40c237367560fae3d210f7b0"
+diff --git a/recipes/obsolete/xorg-app/iceauth_1.0.3.bb b/recipes/obsolete/xorg-app/iceauth_1.0.3.bb
+new file mode 100644
+index 0000000..5be63a0
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/iceauth_1.0.3.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "a tool for manipulating ICE protocol authorization records"
++DEPENDS += " libice"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "975ade3f238c1eb10705da0a91e6e8e7"
++SRC_URI[archive.sha256sum] = "abca3ff6c9f2da2600a474f0e92ae5e62c43914f7bd3d948b91b0a7f9117d81e"
+diff --git a/recipes/obsolete/xorg-app/ico_1.0.2.bb b/recipes/obsolete/xorg-app/ico_1.0.2.bb
+new file mode 100644
+index 0000000..040017c
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/ico_1.0.2.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "an X graphics demo using an animated polyhedron"
++DEPENDS += " libxau libxdmcp"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "5711827c5c2563620b56c33aababbc63"
++SRC_URI[archive.sha256sum] = "db2e96e18a2bcc29b91b9de7b758a7c67cebee27772fb540c44c7bc2c2218aa5"
+diff --git a/recipes/obsolete/xorg-app/listres_1.0.1.bb b/recipes/obsolete/xorg-app/listres_1.0.1.bb
+new file mode 100644
+index 0000000..7b466d8
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/listres_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxt libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "827a1ac5adf9aadd0c13b54a897e297b"
++SRC_URI[archive.sha256sum] = "7156e58025e240a501d5b32244b923b283bb35014ea5a4081b70044af8aef7a3"
+diff --git a/recipes/obsolete/xorg-app/luit_1.0.4.bb b/recipes/obsolete/xorg-app/luit_1.0.4.bb
+new file mode 100644
+index 0000000..71a2910
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/luit_1.0.4.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "a filter for locale and ISO 2022 support on Unicode terminals"
++DEPENDS += " zlib zlib libfontenc"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "4e45233e310d72dce307709761cf241b"
++SRC_URI[archive.sha256sum] = "d11cd500975f652060f89d79cb8034011d99ee9aa6c82951680fc0621ecb8252"
+diff --git a/recipes/obsolete/xorg-app/mkfontdir_1.0.5.bb b/recipes/obsolete/xorg-app/mkfontdir_1.0.5.bb
+new file mode 100644
+index 0000000..0786a90
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/mkfontdir_1.0.5.bb
 @@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 EvIE extension library"
-+DEPENDS += "libxext evieext"
++require xorg-app-common.inc
++DESCRIPTION = "a program to create an index of X font files in a directory"
++RDEPENDS_${PN} += "mkfontscale"
 +PE = "1"
-+PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
 +
-+SRC_URI[archive.md5sum] = "88e9bf535364e7c821ef4014fb1ca2dd"
-+SRC_URI[archive.sha256sum] = "ff70b81ad145932db2d206735cefcb698dadad241001df7ba6b97e8081d174da"
-+
-+XORG_PN = "libXevie"
-diff --git a/recipes/obsolete/xorg-lib/libxext_1.1.1.bb b/recipes/obsolete/xorg-lib/libxext_1.1.1.bb
-new file mode 100644
-index 0000000..d3d6c66
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxext_1.1.1.bb
-@@ -0,0 +1,12 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 miscellaneous extension library"
-+DEPENDS += "xproto virtual/libx11 xextproto libxau"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "c417c0e8df39a067f90a2a2e7133637d"
-+SRC_URI[archive.sha256sum] = "110ce3bc7fb3a86659556994d0801c74bedcbd8ba8d1f90ee33d4c47a91e9bb3"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+XORG_PN = "libXext"
-diff --git a/recipes/obsolete/xorg-lib/libxfixes_4.0.4.bb b/recipes/obsolete/xorg-lib/libxfixes_4.0.4.bb
-new file mode 100644
-index 0000000..26ccb96
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxfixes_4.0.4.bb
-@@ -0,0 +1,13 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X Fixes extension library."
-+LICENSE = "BSD-X"
-+DEPENDS += "virtual/libx11 xproto fixesproto xextproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "7f2c40852eb337b237ad944ca5c30d49"
-+SRC_URI[archive.sha256sum] = "ba31d7e5c5c1907c30cba50bfd669aa7fe860555287c29f6e786612e4be33b48"
++SRC_URI[archive.md5sum] = "9365ac66d19186eaf030482d312fca06"
++SRC_URI[archive.sha256sum] = "a534650cff503619f9101577d816cde283da993bc039273477bd8dfbd01a2d0b"
 +
 +BBCLASSEXTEND = "native"
-+
-+XORG_PN = "libXfixes"
-diff --git a/recipes/obsolete/xorg-lib/libxfont_1.4.1.bb b/recipes/obsolete/xorg-lib/libxfont_1.4.1.bb
+diff --git a/recipes/obsolete/xorg-app/mkfontscale_1.0.7.bb b/recipes/obsolete/xorg-app/mkfontscale_1.0.7.bb
 new file mode 100644
-index 0000000..8d046d1
+index 0000000..8655664
 --- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxfont_1.4.1.bb
-@@ -0,0 +1,16 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 font rasterisation library"
-+LICENSE = "BSD-X"
-+DEPENDS += "freetype fontcacheproto xtrans fontsproto libfontenc"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "4f2bed2a2be82e90a51a24bb3a22cdf0"
-+SRC_URI[archive.sha256sum] = "112bfc30820b98deec4c9914536c5aa2f8b5162bd2b0bdb342343168e06f7679"
-+
-+# disable docs
-+EXTRA_OECONF += " --disable-devel-docs "
-+
-+BBCLASSEXTEND = "native"
-+
-+XORG_PN = "libXfont"
-diff --git a/recipes/obsolete/xorg-lib/libxft-2.1.14/autotools.patch b/recipes/obsolete/xorg-lib/libxft-2.1.14/autotools.patch
-new file mode 100644
-index 0000000..62f4442
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxft-2.1.14/autotools.patch
-@@ -0,0 +1,54 @@
-+Index: libXft-2.1.14/configure.ac
-+===================================================================
-+--- libXft-2.1.14.orig/configure.ac	2009-10-10 01:44:49.000000000 +0200
-++++ libXft-2.1.14/configure.ac	2009-12-23 20:56:25.759695121 +0100
-+@@ -37,26 +37,14 @@
-+ # Require xorg-macros: XORG_DEFAULT_OPTIONS
-+ m4_ifndef([XORG_MACROS_VERSION], [AC_FATAL([must install xorg-macros 1.3 or later before running autoconf/autogen])])
-+ XORG_MACROS_VERSION(1.3)
-+-AM_CONFIG_HEADER(config.h)
-++AC_CONFIG_HEADERS([config.h])
-++AC_CONFIG_HEADERS([include/X11/Xft/Xft.h])
-+ 
-+ # checks for progs
-+ AC_PROG_CC
-+ AC_PROG_LIBTOOL
-+ XORG_DEFAULT_OPTIONS
-+ 
-+-# Set library version for Xft.h from package version set in AC_INIT
-+-# copied from PACKAGE_VERSION_* settings in XORG_VERSION
-+-AC_CONFIG_HEADERS([include/X11/Xft/Xft.h])
-+-AC_DEFINE_UNQUOTED([XFT_MAJOR],
-+-                [`echo $PACKAGE_VERSION | cut -d . -f 1`],
-+-                [Major version of Xft])
-+-AC_DEFINE_UNQUOTED([XFT_MINOR],
-+-                [`echo $PACKAGE_VERSION | cut -d . -f 2 | cut -d - -f 1`],
-+-                [Minor version of Xft])
-+-AC_DEFINE_UNQUOTED([XFT_REVISION],
-+-                [`echo $PACKAGE_VERSION | cut -d . -f 3 | cut -d - -f 1`],
-+-                [Micro revision of Xft])
-+-
-+ #
-+ # Check for Xrender
-+ #
-+Index: libXft-2.1.14/include/X11/Xft/Xft.h.in
-+===================================================================
-+--- libXft-2.1.14.orig/include/X11/Xft/Xft.h.in	2009-10-06 09:36:40.000000000 +0200
-++++ libXft-2.1.14/include/X11/Xft/Xft.h.in	2009-12-23 20:55:52.063859518 +0100
-+@@ -27,11 +27,12 @@
-+  * Current Xft version number, set from version in the Xft configure.ac file.
-+  */
-+ 
-+-#undef XFT_MAJOR	/* Will be substituted by configure */
-+-#undef XFT_MINOR	/* Will be substituted by configure */
-+-#undef XFT_REVISION	/* Will be substituted by configure */
-++/* Will be substituted by configure */
-++#undef PACKAGE_VERSION_MAJOR
-++#undef PACKAGE_VERSION_MINOR
-++#undef PACKAGE_VERSION_PATCHLEVEL
-+ 
-+-#define XFT_VERSION	((XFT_MAJOR * 10000) + (XFT_MINOR * 100) + (XFT_REVISION))
-++#define XFT_VERSION	((PACKAGE_VERSION_MAJOR * 10000) + (PACKAGE_VERSION_MINOR * 100) + (PACKAGE_VERSION_PATCHLEVEL))
-+ #define XftVersion	XFT_VERSION
-+ 
-+ #include <stdarg.h>
-diff --git a/recipes/obsolete/xorg-lib/libxft_2.1.14.bb b/recipes/obsolete/xorg-lib/libxft_2.1.14.bb
-new file mode 100644
-index 0000000..34fadcd
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxft_2.1.14.bb
-@@ -0,0 +1,22 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "FreeType-based font drawing library for X"
-+DEPENDS += "libxrender freetype fontconfig"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI += "file://autotools.patch"
-+SRC_URI[archive.md5sum] = "254e62a233491e0e1251636536163e20"
-+SRC_URI[archive.sha256sum] = "700e9d594b81cad3dfd5fac4a5cfd0c4cf7780c812507ef04eb40139ebf5175e"
-+
-+FILES_${PN} = "${libdir}/lib*${SOLIBS}"
-+FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/*.la \
-+                ${libdir}/*.a ${libdir}/pkgconfig \
-+                ${datadir}/aclocal ${bindir} ${sbindir}"
-+
-+python do_package() {
-+        if bb.data.getVar('DEBIAN_NAMES', d, 1):
-+            bb.data.setVar('PKG_${PN}', 'libxft2', d)
-+        bb.build.exec_func('package_do_package', d)
-+}
-+
-+XORG_PN = "libXft"
-diff --git a/recipes/obsolete/xorg-lib/libxi_1.3.bb b/recipes/obsolete/xorg-lib/libxi_1.3.bb
-new file mode 100644
-index 0000000..22ef799
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxi_1.3.bb
-@@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Input extension library"
-+DEPENDS += "libxext inputproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "8df4ece9bd1efb02c28acb2b6f485e09"
-+SRC_URI[archive.sha256sum] = "362b8c0c60386841063bd7e01afa72e37eb87ada6e64e539d960f88c780a944b"
-+
-+XORG_PN = "libXi"
-diff --git a/recipes/obsolete/xorg-lib/libxinerama_1.1.bb b/recipes/obsolete/xorg-lib/libxinerama_1.1.bb
-new file mode 100644
-index 0000000..4d5f427
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxinerama_1.1.bb
-@@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Xinerama extension library"
-+DEPENDS += "libxext xineramaproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "a2ac01fc0426cdbb713c5d59cf9955ed"
-+SRC_URI[archive.sha256sum] = "e0d39e74c2e131b44cc98dd4910165c9b8d937df93be58e6afb7c2a56772bf34"
-+
-+XORG_PN = "libXinerama"
-diff --git a/recipes/obsolete/xorg-lib/libxkbfile_1.0.6.bb b/recipes/obsolete/xorg-lib/libxkbfile_1.0.6.bb
-new file mode 100644
-index 0000000..a7fc91d
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxkbfile_1.0.6.bb
-@@ -0,0 +1,11 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 keyboard file manipulation library"
-+LICENSE = "GPL"
-+DEPENDS += "virtual/libx11 kbproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "b01156e263eca8177e6b7f10441951c4"
-+SRC_URI[archive.sha256sum] = "2ca43c1f6b2782994167a328471aa859d366cd7303c6dcbc8bda951a84a06039"
-+
-+BBCLASSEXTEND = "native"
-diff --git a/recipes/obsolete/xorg-lib/libxmu_1.0.5.bb b/recipes/obsolete/xorg-lib/libxmu_1.0.5.bb
-new file mode 100644
-index 0000000..5f361ef
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxmu_1.0.5.bb
-@@ -0,0 +1,17 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 miscellaneous utility library"
-+DEPENDS += "libxt libxext"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "fc4d66be7a1a1eb474954728415e46d6"
-+SRC_URI[archive.sha256sum] = "0692b6b0ec1019cfaa8418020b1127bfb0975f5a579a0b1f9eb7fd8f2f7126d7"
-+
-+PACKAGES =+ "libxmuu libxmuu-dev"
-+
-+FILES_libxmuu = "${libdir}/libXmuu.so.*"
-+FILES_libxmuu-dev = "${libdir}/libXmuu.so"
-+
-+LEAD_SONAME = "libXmu"
-+
-+XORG_PN = "libXmu"
-diff --git a/recipes/obsolete/xorg-lib/libxpm_3.5.8.bb b/recipes/obsolete/xorg-lib/libxpm_3.5.8.bb
-new file mode 100644
-index 0000000..9bb7c8e
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxpm_3.5.8.bb
-@@ -0,0 +1,16 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Pixmap library"
-+LICENSE = "X-BSD"
-+DEPENDS += "libxext libsm libxt"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "38e58e72d476a74298a59052fde185a3"
-+SRC_URI[archive.sha256sum] = "02a77aaa32e6e335e1ee04aeb9ad1008045d98274d64ed33bc5fc6c3a3542c4c"
-+
-+PACKAGES =+ "sxpm cxpm"
-+
-+FILES_cxpm = "${bindir}/cxpm"
-+FILES_sxpm = "${bindir}/sxpm"
-+
-+XORG_PN = "libXpm"
-diff --git a/recipes/obsolete/xorg-lib/libxrandr_1.2.1.bb b/recipes/obsolete/xorg-lib/libxrandr_1.2.1.bb
-new file mode 100644
-index 0000000..983265d
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxrandr_1.2.1.bb
-@@ -0,0 +1,13 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Resize and Rotate extension library"
-+LICENSE = "BSD-X"
-+DEPENDS += "randrproto libxrender libxext"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "5860360f5b038cc728f388f875ce525d"
-+SRC_URI[archive.sha256sum] = "2d2df642eb8e0527936cdf4ed1c096f69df53e9b95e2532c8ed0cabd06a45407"
-+
-+BBCLASSEXTEND = "nativesdk"
-+
-+XORG_PN = "libXrandr"
-diff --git a/recipes/obsolete/xorg-lib/libxrandr_1.3.0.bb b/recipes/obsolete/xorg-lib/libxrandr_1.3.0.bb
-new file mode 100644
-index 0000000..6808e08
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxrandr_1.3.0.bb
-@@ -0,0 +1,13 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Resize and Rotate extension library"
-+LICENSE = "BSD-X"
-+DEPENDS += "randrproto libxrender libxext"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "68eb59c3b7524db6ffd78746ee893d1d"
-+SRC_URI[archive.sha256sum] = "5961ce0f77c5173a8208b3ed669ac01719f2bf4a10517ffa6c33a5e064802e78"
-+
-+BBCLASSEXTEND = "nativesdk"
-+
-+XORG_PN = "libXrandr"
-diff --git a/recipes/obsolete/xorg-lib/libxrender_0.9.5.bb b/recipes/obsolete/xorg-lib/libxrender_0.9.5.bb
-new file mode 100644
-index 0000000..047b8d7
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxrender_0.9.5.bb
-@@ -0,0 +1,13 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Rendering Extension client library"
-+LICENSE = "BSD-X"
-+DEPENDS += "virtual/libx11 renderproto xproto libxdmcp"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "276dd9e85daf0680616cd9f132b354c9"
-+SRC_URI[archive.sha256sum] = "bc0590438a4be2b674cbac6f4ad46e5a89acd02aa94817da0fa8eb3ef05ed5d5"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+XORG_PN = "libXrender"
-diff --git a/recipes/obsolete/xorg-lib/libxres_1.0.4.bb b/recipes/obsolete/xorg-lib/libxres_1.0.4.bb
-new file mode 100644
-index 0000000..2049beb
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxres_1.0.4.bb
-@@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Resource extension library"
-+DEPENDS += "libxext resourceproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "4daf91f93d924e693f6f6ed276791be2"
-+SRC_URI[archive.sha256sum] = "457f567a70ef8798cfb32f897ffa52c3f010923b07414b3a42277f56877572df"
-+
-+XORG_PN = "libXres"
-diff --git a/recipes/obsolete/xorg-lib/libxscrnsaver_1.2.0.bb b/recipes/obsolete/xorg-lib/libxscrnsaver_1.2.0.bb
-new file mode 100644
-index 0000000..f02ff38
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxscrnsaver_1.2.0.bb
-@@ -0,0 +1,13 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X Screen Saver extension library"
-+LICENSE = "GPL"
-+DEPENDS += "libxext scrnsaverproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "33e54f64b55f22d8bbe822a5b62568cb"
-+SRC_URI[archive.sha256sum] = "5b067bec0f2eb6405226bde5f20ca107eb0e5c11f5e5e24b455930c450487f85"
-+
-+RREPLACES_${PN} = "libxss"
-+
-+XORG_PN = "libXScrnSaver"
-diff --git a/recipes/obsolete/xorg-lib/libxt_1.0.7.bb b/recipes/obsolete/xorg-lib/libxt_1.0.7.bb
-new file mode 100644
-index 0000000..238ea06
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxt_1.0.7.bb
-@@ -0,0 +1,22 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 toolkit intrinsics library"
-+DEPENDS += "libsm virtual/libx11 kbproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "96f3c93434a93186d178b60d4a262496"
-+SRC_URI[archive.sha256sum] = "706d5248b061c8455f74ce5269ecc5ef59c27d0f52d22b07138f781928dda9ec"
-+
-+EXTRA_OECONF += "--disable-install-makestrs --disable-xkb"
-+
-+do_compile() {
-+        (
-+                unset CC LD CXX CCLD
-+                oe_runmake -C util 'XT_CFLAGS=' 'CC=${BUILD_CC}' 'LD=${BUILD_LD}' 'CXX=${BUILD_CXX}' 'CCLD=${BUILD_CCLD}' 'CFLAGS=-D_GNU_SOURCE -I${STAGING_INCDIR_NATIVE} ${BUILD_CFLAGS}' 'LDFLAGS=${BUILD_LDFLAGS}' 'CXXFLAGS=${BUILD_CXXFLAGS}' 'CPPFLAGS=${BUILD_CPPFLAGS}' makestrs
-+        ) || exit 1
-+        oe_runmake
-+}
-+
-+BBCLASSEXTEND = "native"
-+
-+XORG_PN = "libXt"
-diff --git a/recipes/obsolete/xorg-lib/libxtst_1.1.0.bb b/recipes/obsolete/xorg-lib/libxtst_1.1.0.bb
-new file mode 100644
-index 0000000..2a0ffbe
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxtst_1.1.0.bb
-@@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X Test Extension: client side library"
-+DEPENDS += "libxext recordproto inputproto libxi"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "dd6f3e20b87310187121539f9605d977"
-+SRC_URI[archive.sha256sum] = "bd440f4779e06957211ba83782a5a1cfbf1d42b14fd3510a6dce440489a4eb26"
-+
-+XORG_PN = "libXtst"
-diff --git a/recipes/obsolete/xorg-lib/libxv_1.0.5.bb b/recipes/obsolete/xorg-lib/libxv_1.0.5.bb
-new file mode 100644
-index 0000000..7a60af8
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxv_1.0.5.bb
-@@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Video extension library"
-+LICENSE = "GPL"
-+DEPENDS += "libxext videoproto"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "1d97798b1d8bbf8d9085e1b223a0738f"
-+SRC_URI[archive.sha256sum] = "d549afdf22feefb97cca85dee12242af9f08c4d2435255dc7c30bd17d1d96010"
-+
-+XORG_PN = "libXv"
-diff --git a/recipes/obsolete/xorg-lib/libxxf86dga_1.1.1.bb b/recipes/obsolete/xorg-lib/libxxf86dga_1.1.1.bb
-new file mode 100644
-index 0000000..aafe621
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxxf86dga_1.1.1.bb
-@@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 Direct Graphics Access extension library"
-+DEPENDS += "libxext xf86dgaproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "368837d3d7a4d3b4f70be48383e3544e"
-+SRC_URI[archive.sha256sum] = "8d37f8895ecff15cb821a3e77bd505598983a5c6eae546e77e2d3070a8de5616"
-+
-+XORG_PN = "libXxf86dga"
-diff --git a/recipes/obsolete/xorg-lib/libxxf86misc_1.0.2.bb b/recipes/obsolete/xorg-lib/libxxf86misc_1.0.2.bb
-new file mode 100644
-index 0000000..a44b46f
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxxf86misc_1.0.2.bb
-@@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 XFree86 miscellaneous extension library"
-+DEPENDS += "libxext xf86miscproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "51fed53e8de067d4b8666f75a0212400"
-+SRC_URI[archive.sha256sum] = "8e64b6b1bf34fcd112b1fd866d77e110b47794e825a996e4492c0ee408957cb3"
-+
-+XORG_PN = "libXxf86misc"
-diff --git a/recipes/obsolete/xorg-lib/libxxf86vm_1.1.0.bb b/recipes/obsolete/xorg-lib/libxxf86vm_1.1.0.bb
-new file mode 100644
-index 0000000..181f220
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/libxxf86vm_1.1.0.bb
-@@ -0,0 +1,10 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "X11 XFree86 video mode extension library"
-+DEPENDS += "libxext xf86vidmodeproto"
-+PE = "1"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[archive.md5sum] = "b431ad7084e1055fef99a9115237edd8"
-+SRC_URI[archive.sha256sum] = "7cc5e577b337c5267f4e65741f27229111ada8cb833e24b47713a683e8838de8"
-+
-+XORG_PN = "libXxf86vm"
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.12.0/pixman-arm.patch b/recipes/obsolete/xorg-lib/pixman-0.12.0/pixman-arm.patch
-new file mode 100644
-index 0000000..91dda03
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.12.0/pixman-arm.patch
-@@ -0,0 +1,632 @@
-+From: Jeff Muizelaar <jmuizelaar@mozilla.com>
-+Date: Wed, 17 Sep 2008 19:53:20 +0000 (-0400)
-+Subject: Add support for ARMv6 SIMD fastpaths.
-+X-Git-Url: http://gitweb.freedesktop.org/?p=pixman.git;a=commitdiff;h=d0b181f347ef4720d130beee3f03196afbd28aba
-+
-+Add support for ARMv6 SIMD fastpaths.
-+---
-+
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -277,6 +277,44 @@ AC_SUBST(VMX_CFLAGS)
-+ 
-+ AM_CONDITIONAL(USE_VMX, test $have_vmx_intrinsics = yes)
-+ 
-++dnl Check for ARM
-++
-++have_armv6_simd=no
-++AC_MSG_CHECKING(whether to use ARM assembler)
-++xserver_save_CFLAGS=$CFLAGS
-++CFLAGS="$CFLAGS $ARM_CFLAGS"
-++AC_COMPILE_IFELSE([
-++int main () {
-++    asm("uqadd8 r1, r1, r2");
-++    return 0;
-++}], have_armv6_simd=yes)
-++CFLAGS=$xserver_save_CFLAGS
-++
-++AC_ARG_ENABLE(arm,
-++   [AC_HELP_STRING([--disable-arm],
-++                   [disable ARM fast paths])],
-++   [enable_arm=$enableval], [enable_arm=auto])
-++
-++if test $enable_arm = no ; then
-++   have_armv6_simd=disabled
-++fi
-++
-++if test $have_armv6_simd = yes ; then
-++   AC_DEFINE(USE_ARM, 1, [use ARM compiler intrinsics])
-++else
-++   ARM_CFLAGS=
-++fi
-++
-++AC_MSG_RESULT($have_armv6_simd)
-++if test $enable_arm = yes && test $have_armv6_simd = no ; then
-++   AC_MSG_ERROR([ARM intrinsics not detected])
-++fi
-++
-++AC_SUBST(ARM_CFLAGS)
-++
-++AM_CONDITIONAL(USE_ARM, test $have_armv6_simd = yes)
-++
-++
-+ AC_ARG_ENABLE(gtk,
-+    [AC_HELP_STRING([--enable-gtk],
-+                    [enable tests using GTK+ [default=auto]])],
-+--- a/pixman/Makefile.am
-++++ b/pixman/Makefile.am
-+@@ -79,3 +79,15 @@ libpixman_sse2_la_LIBADD = $(DEP_LIBS)
-+ libpixman_1_la_LIBADD += libpixman-sse2.la
-+ endif
-+ 
-++# arm code
-++if USE_ARM
-++noinst_LTLIBRARIES += libpixman-arm.la
-++libpixman_arm_la_SOURCES = \
-++	pixman-arm.c \
-++	pixman-arm.h
-++libpixman_arm_la_CFLAGS = $(DEP_CFLAGS) $(ARM_CFLAGS)
-++libpixman_arm_la_LIBADD = $(DEP_LIBS)
-++libpixman_1_la_LIBADD += libpixman-arm.la
-++endif
-++
-++
-+--- /dev/null
-++++ b/pixman/pixman-arm.c
-+@@ -0,0 +1,409 @@
-++/*
-++ * Copyright Â© 2008 Mozilla Corporation
-++ *
-++ * Permission to use, copy, modify, distribute, and sell this software and its
-++ * documentation for any purpose is hereby granted without fee, provided that
-++ * the above copyright notice appear in all copies and that both that
-++ * copyright notice and this permission notice appear in supporting
-++ * documentation, and that the name of Mozilla Corporation not be used in
-++ * advertising or publicity pertaining to distribution of the software without
-++ * specific, written prior permission.  Mozilla Corporation makes no
-++ * representations about the suitability of this software for any purpose.  It
-++ * is provided "as is" without express or implied warranty.
-++ *
-++ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS
-++ * SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
-++ * FITNESS, IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
-++ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-++ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
-++ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
-++ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
-++ * SOFTWARE.
-++ *
-++ * Author:  Jeff Muizelaar (jeff@infidigm.net)
-++ *
-++ */
-++#ifdef HAVE_CONFIG_H
-++#include <config.h>
-++#endif
-++
-++#include "pixman-arm.h"
-++
-++void
-++fbCompositeSrcAdd_8000x8000arm (pixman_op_t op,
-++				pixman_image_t * pSrc,
-++				pixman_image_t * pMask,
-++				pixman_image_t * pDst,
-++				int16_t      xSrc,
-++				int16_t      ySrc,
-++				int16_t      xMask,
-++				int16_t      yMask,
-++				int16_t      xDst,
-++				int16_t      yDst,
-++				uint16_t     width,
-++				uint16_t     height)
-++{
-++    uint8_t	*dstLine, *dst;
-++    uint8_t	*srcLine, *src;
-++    int	dstStride, srcStride;
-++    uint16_t	w;
-++    uint8_t	s, d;
-++
-++    fbComposeGetStart (pSrc, xSrc, ySrc, uint8_t, srcStride, srcLine, 1);
-++    fbComposeGetStart (pDst, xDst, yDst, uint8_t, dstStride, dstLine, 1);
-++
-++    while (height--)
-++    {
-++	dst = dstLine;
-++	dstLine += dstStride;
-++	src = srcLine;
-++	srcLine += srcStride;
-++	w = width;
-++
-++	while (w && (unsigned long)dst & 3)
-++	{
-++	    s = *src;
-++	    d = *dst;
-++	    asm("uqadd8 %0, %1, %2" : "+r"(d) : "r"(s));
-++	    *dst = d;
-++
-++	    dst++;
-++	    src++;
-++	    w--;
-++	}
-++
-++	while (w >= 4)
-++	{
-++	    asm("uqadd8 %0, %1, %2" : "=r"(*(uint32_t*)dst) : "r"(*(uint32_t*)src), "r"(*(uint32_t*)dst));
-++	    dst += 4;
-++	    src += 4;
-++	    w -= 4;
-++	}
-++
-++	while (w)
-++	{
-++	    s = *src;
-++	    d = *dst;
-++	    asm("uqadd8 %0, %1, %2" : "+r"(d) : "r"(s));
-++	    *dst = d;
-++
-++	    dst++;
-++	    src++;
-++	    w--;
-++	}
-++    }
-++
-++}
-++
-++void
-++fbCompositeSrc_8888x8888arm (pixman_op_t op,
-++			 pixman_image_t * pSrc,
-++			 pixman_image_t * pMask,
-++			 pixman_image_t * pDst,
-++			 int16_t      xSrc,
-++			 int16_t      ySrc,
-++			 int16_t      xMask,
-++			 int16_t      yMask,
-++			 int16_t      xDst,
-++			 int16_t      yDst,
-++			 uint16_t     width,
-++			 uint16_t     height)
-++{
-++    uint32_t	*dstLine, *dst;
-++    uint32_t	*srcLine, *src;
-++    int	dstStride, srcStride;
-++    uint16_t	w;
-++    uint32_t component_half = 0x800080;
-++    uint32_t upper_component_mask = 0xff00ff00;
-++    uint32_t alpha_mask = 0xff;
-++
-++    fbComposeGetStart (pDst, xDst, yDst, uint32_t, dstStride, dstLine, 1);
-++    fbComposeGetStart (pSrc, xSrc, ySrc, uint32_t, srcStride, srcLine, 1);
-++
-++    while (height--)
-++    {
-++	dst = dstLine;
-++	dstLine += dstStride;
-++	src = srcLine;
-++	srcLine += srcStride;
-++	w = width;
-++
-++//#define inner_branch
-++	asm volatile (
-++			"cmp %[w], #0\n\t"
-++			"beq 2f\n\t"
-++			"1:\n\t"
-++			/* load dest */
-++			"ldr r5, [%[src]], #4\n\t"
-++#ifdef inner_branch
-++			/* We can avoid doing the multiplication in two cases: 0x0 or 0xff.
-++			 * The 0x0 case also allows us to avoid doing an unecessary data
-++			 * write which is more valuable so we only check for that */
-++			"cmp r5, #0x1000000\n\t"
-++			"blt 3f\n\t"
-++
-++			/* = 255 - alpha */
-++			"sub r8, %[alpha_mask], r5, lsr #24\n\t"
-++
-++			"ldr r4, [%[dest]] \n\t"
-++
-++#else
-++			"ldr r4, [%[dest]] \n\t"
-++
-++			/* = 255 - alpha */
-++			"sub r8, %[alpha_mask], r5, lsr #24\n\t"
-++#endif
-++			"uxtb16 r6, r4\n\t"
-++			"uxtb16 r7, r4, ror #8\n\t"
-++
-++			/* multiply by 257 and divide by 65536 */
-++			"mla r6, r6, r8, %[component_half]\n\t"
-++			"mla r7, r7, r8, %[component_half]\n\t"
-++
-++			"uxtab16 r6, r6, r6, ror #8\n\t"
-++			"uxtab16 r7, r7, r7, ror #8\n\t"
-++
-++			/* recombine the 0xff00ff00 bytes of r6 and r7 */
-++			"and r7, %[upper_component_mask]\n\t"
-++			"uxtab16 r6, r7, r6, ror #8\n\t"
-++
-++			"uqadd8 r5, r6, r5\n\t"
-++
-++#ifdef inner_branch
-++			"3:\n\t"
-++
-++#endif
-++			"str r5, [%[dest]], #4\n\t"
-++			/* increment counter and jmp to top */
-++			"subs	%[w], %[w], #1\n\t"
-++			"bne	1b\n\t"
-++			"2:\n\t"
-++			: [w] "+r" (w), [dest] "+r" (dst), [src] "+r" (src)
-++			: [component_half] "r" (component_half), [upper_component_mask] "r" (upper_component_mask),
-++			  [alpha_mask] "r" (alpha_mask)
-++			: "r4", "r5", "r6", "r7", "r8", "cc", "memory"
-++			);
-++    }
-++}
-++
-++void
-++fbCompositeSrc_8888x8x8888arm (pixman_op_t op,
-++			       pixman_image_t * pSrc,
-++			       pixman_image_t * pMask,
-++			       pixman_image_t * pDst,
-++			       int16_t	xSrc,
-++			       int16_t	ySrc,
-++			       int16_t      xMask,
-++			       int16_t      yMask,
-++			       int16_t      xDst,
-++			       int16_t      yDst,
-++			       uint16_t     width,
-++			       uint16_t     height)
-++{
-++    uint32_t	*dstLine, *dst;
-++    uint32_t	*srcLine, *src;
-++    uint32_t	mask;
-++    int	dstStride, srcStride;
-++    uint16_t	w;
-++    uint32_t component_half = 0x800080;
-++    uint32_t alpha_mask = 0xff;
-++
-++    fbComposeGetStart (pDst, xDst, yDst, uint32_t, dstStride, dstLine, 1);
-++    fbComposeGetStart (pSrc, xSrc, ySrc, uint32_t, srcStride, srcLine, 1);
-++
-++    fbComposeGetSolid (pMask, mask, pDst->bits.format);
-++    mask = (mask) >> 24;
-++
-++    while (height--)
-++    {
-++	dst = dstLine;
-++	dstLine += dstStride;
-++	src = srcLine;
-++	srcLine += srcStride;
-++	w = width;
-++
-++//#define inner_branch
-++	asm volatile (
-++			"cmp %[w], #0\n\t"
-++			"beq 2f\n\t"
-++			"1:\n\t"
-++			/* load dest */
-++			"ldr r5, [%[src]], #4\n\t"
-++#ifdef inner_branch
-++			/* We can avoid doing the multiplication in two cases: 0x0 or 0xff.
-++			 * The 0x0 case also allows us to avoid doing an unecessary data
-++			 * write which is more valuable so we only check for that */
-++			"cmp r5, #0x1000000\n\t"
-++			"blt 3f\n\t"
-++
-++#endif
-++			"ldr r4, [%[dest]] \n\t"
-++
-++			"uxtb16 r6, r5\n\t"
-++			"uxtb16 r7, r5, ror #8\n\t"
-++
-++			/* multiply by alpha (r8) then by 257 and divide by 65536 */
-++			"mla r6, r6, %[mask_alpha], %[component_half]\n\t"
-++			"mla r7, r7, %[mask_alpha], %[component_half]\n\t"
-++
-++			"uxtab16 r6, r6, r6, ror #8\n\t"
-++			"uxtab16 r7, r7, r7, ror #8\n\t"
-++
-++			"uxtb16 r6, r6, ror #8\n\t"
-++			"uxtb16 r7, r7, ror #8\n\t"
-++
-++			/* recombine */
-++			"orr r5, r6, r7, lsl #8\n\t"
-++
-++			"uxtb16 r6, r4\n\t"
-++			"uxtb16 r7, r4, ror #8\n\t"
-++
-++			/* 255 - alpha */
-++			"sub r8, %[alpha_mask], r5, lsr #24\n\t"
-++
-++			/* multiply by alpha (r8) then by 257 and divide by 65536 */
-++			"mla r6, r6, r8, %[component_half]\n\t"
-++			"mla r7, r7, r8, %[component_half]\n\t"
-++
-++			"uxtab16 r6, r6, r6, ror #8\n\t"
-++			"uxtab16 r7, r7, r7, ror #8\n\t"
-++
-++			"uxtb16 r6, r6, ror #8\n\t"
-++			"uxtb16 r7, r7, ror #8\n\t"
-++
-++			/* recombine */
-++			"orr r6, r6, r7, lsl #8\n\t"
-++
-++			"uqadd8 r5, r6, r5\n\t"
-++
-++#ifdef inner_branch
-++			"3:\n\t"
-++
-++#endif
-++			"str r5, [%[dest]], #4\n\t"
-++			/* increment counter and jmp to top */
-++			"subs	%[w], %[w], #1\n\t"
-++			"bne	1b\n\t"
-++			"2:\n\t"
-++			: [w] "+r" (w), [dest] "+r" (dst), [src] "+r" (src)
-++			: [component_half] "r" (component_half), [mask_alpha] "r" (mask),
-++			  [alpha_mask] "r" (alpha_mask)
-++			: "r4", "r5", "r6", "r7", "r8", "r9", "cc", "memory"
-++			);
-++    }
-++}
-++
-++void
-++fbCompositeSolidMask_nx8x8888arm (pixman_op_t      op,
-++			       pixman_image_t * pSrc,
-++			       pixman_image_t * pMask,
-++			       pixman_image_t * pDst,
-++			       int16_t      xSrc,
-++			       int16_t      ySrc,
-++			       int16_t      xMask,
-++			       int16_t      yMask,
-++			       int16_t      xDst,
-++			       int16_t      yDst,
-++			       uint16_t     width,
-++			       uint16_t     height)
-++{
-++    uint32_t	 src, srca;
-++    uint32_t	*dstLine, *dst;
-++    uint8_t	*maskLine, *mask;
-++    int		 dstStride, maskStride;
-++    uint16_t	 w;
-++
-++    fbComposeGetSolid(pSrc, src, pDst->bits.format);
-++
-++    srca = src >> 24;
-++    if (src == 0)
-++	return;
-++
-++    uint32_t component_mask = 0xff00ff;
-++    uint32_t component_half = 0x800080;
-++
-++    uint32_t src_hi = (src >> 8) & component_mask;
-++    uint32_t src_lo = src & component_mask;
-++
-++    fbComposeGetStart (pDst, xDst, yDst, uint32_t, dstStride, dstLine, 1);
-++    fbComposeGetStart (pMask, xMask, yMask, uint8_t, maskStride, maskLine, 1);
-++
-++    while (height--)
-++    {
-++	dst = dstLine;
-++	dstLine += dstStride;
-++	mask = maskLine;
-++	maskLine += maskStride;
-++	w = width;
-++
-++//#define inner_branch
-++	asm volatile (
-++			"cmp %[w], #0\n\t"
-++			"beq 2f\n\t"
-++			"1:\n\t"
-++			/* load mask */
-++			"ldrb r5, [%[mask]], #1\n\t"
-++#ifdef inner_branch
-++			/* We can avoid doing the multiplication in two cases: 0x0 or 0xff.
-++			 * The 0x0 case also allows us to avoid doing an unecessary data
-++			 * write which is more valuable so we only check for that */
-++			/* 0x1000000 is the least value that contains alpha all values
-++			 * less than it have a 0 alpha value */
-++			"cmp r5, #0x0\n\t"
-++			"beq 3f\n\t"
-++
-++#endif
-++			"ldr r4, [%[dest]] \n\t"
-++
-++			/* multiply by alpha (r8) then by 257 and divide by 65536 */
-++			"mla r6, %[src_lo], r5, %[component_half]\n\t"
-++			"mla r7, %[src_hi], r5, %[component_half]\n\t"
-++
-++			"uxtab16 r6, r6, r6, ror #8\n\t"
-++			"uxtab16 r7, r7, r7, ror #8\n\t"
-++
-++			"uxtb16 r6, r6, ror #8\n\t"
-++			"uxtb16 r7, r7, ror #8\n\t"
-++
-++			/* recombine */
-++			"orr r5, r6, r7, lsl #8\n\t"
-++
-++			"uxtb16 r6, r4\n\t"
-++			"uxtb16 r7, r4, ror #8\n\t"
-++
-++			/* we could simplify this to use 'sub' if we were
-++			 * willing to give up a register for alpha_mask */
-++			"mvn r8, r5\n\t"
-++			"mov r8, r8, lsr #24\n\t"
-++
-++			/* multiply by alpha (r8) then by 257 and divide by 65536 */
-++			"mla r6, r6, r8, %[component_half]\n\t"
-++			"mla r7, r7, r8, %[component_half]\n\t"
-++
-++			"uxtab16 r6, r6, r6, ror #8\n\t"
-++			"uxtab16 r7, r7, r7, ror #8\n\t"
-++
-++			"uxtb16 r6, r6, ror #8\n\t"
-++			"uxtb16 r7, r7, ror #8\n\t"
-++
-++			/* recombine */
-++			"orr r6, r6, r7, lsl #8\n\t"
-++
-++			"uqadd8 r5, r6, r5\n\t"
-++
-++#ifdef inner_branch
-++			"3:\n\t"
-++
-++#endif
-++			"str r5, [%[dest]], #4\n\t"
-++			/* increment counter and jmp to top */
-++			"subs	%[w], %[w], #1\n\t"
-++			"bne	1b\n\t"
-++			"2:\n\t"
-++			: [w] "+r" (w), [dest] "+r" (dst), [src] "+r" (src), [mask] "+r" (mask)
-++			: [component_half] "r" (component_half),
-++			  [src_hi] "r" (src_hi), [src_lo] "r" (src_lo)
-++			: "r4", "r5", "r6", "r7", "r8", "cc", "memory"
-++			);
-++    }
-++}
-+--- /dev/null
-++++ b/pixman/pixman-arm.h
-+@@ -0,0 +1,94 @@
-++/*
-++ * Copyright Â© 2008 Mozilla Corporation
-++ *
-++ * Permission to use, copy, modify, distribute, and sell this software and its
-++ * documentation for any purpose is hereby granted without fee, provided that
-++ * the above copyright notice appear in all copies and that both that
-++ * copyright notice and this permission notice appear in supporting
-++ * documentation, and that the name of Mozilla Corporation not be used in
-++ * advertising or publicity pertaining to distribution of the software without
-++ * specific, written prior permission.  Mozilla Corporation makes no
-++ * representations about the suitability of this software for any purpose.  It
-++ * is provided "as is" without express or implied warranty.
-++ *
-++ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS
-++ * SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
-++ * FITNESS, IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
-++ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-++ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
-++ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
-++ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
-++ * SOFTWARE.
-++ *
-++ * Author:  Jeff Muizelaar (jeff@infidigm.net)
-++ *
-++ */
-++
-++#include "pixman-private.h"
-++
-++#ifdef USE_ARM
-++
-++static inline pixman_bool_t pixman_have_arm(void) { return TRUE; }
-++
-++#else
-++#define pixman_have_arm() FALSE
-++#endif
-++
-++#ifdef USE_ARM
-++
-++void
-++fbCompositeSrcAdd_8000x8000arm (pixman_op_t op,
-++				pixman_image_t * pSrc,
-++				pixman_image_t * pMask,
-++				pixman_image_t * pDst,
-++				int16_t      xSrc,
-++				int16_t      ySrc,
-++				int16_t      xMask,
-++				int16_t      yMask,
-++				int16_t      xDst,
-++				int16_t      yDst,
-++				uint16_t     width,
-++				uint16_t     height);
-++void
-++fbCompositeSrc_8888x8888arm (pixman_op_t op,
-++			 pixman_image_t * pSrc,
-++			 pixman_image_t * pMask,
-++			 pixman_image_t * pDst,
-++			 int16_t      xSrc,
-++			 int16_t      ySrc,
-++			 int16_t      xMask,
-++			 int16_t      yMask,
-++			 int16_t      xDst,
-++			 int16_t      yDst,
-++			 uint16_t     width,
-++			 uint16_t     height);
-++
-++void
-++fbCompositeSrc_8888x8x8888arm (pixman_op_t op,
-++			 pixman_image_t * pSrc,
-++			 pixman_image_t * pMask,
-++			 pixman_image_t * pDst,
-++			 int16_t      xSrc,
-++			 int16_t      ySrc,
-++			 int16_t      xMask,
-++			 int16_t      yMask,
-++			 int16_t      xDst,
-++			 int16_t      yDst,
-++			 uint16_t     width,
-++			 uint16_t     height);
-++void
-++fbCompositeSolidMask_nx8x8888arm (pixman_op_t op,
-++			 pixman_image_t * pSrc,
-++			 pixman_image_t * pMask,
-++			 pixman_image_t * pDst,
-++			 int16_t      xSrc,
-++			 int16_t      ySrc,
-++			 int16_t      xMask,
-++			 int16_t      yMask,
-++			 int16_t      xDst,
-++			 int16_t      yDst,
-++			 uint16_t     width,
-++			 uint16_t     height);
-++
-++
-++#endif /* USE_ARM */
-+--- a/pixman/pixman-pict.c
-++++ b/pixman/pixman-pict.c
-+@@ -34,6 +34,7 @@
-+ #include "pixman-mmx.h"
-+ #include "pixman-vmx.h"
-+ #include "pixman-sse2.h"
-++#include "pixman-arm.h"
-+ #include "pixman-combine32.h"
-+ 
-+ #ifdef __GNUC__
-+@@ -1479,6 +1480,26 @@ static const FastPathInfo vmx_fast_paths
-+ };
-+ #endif
-+ 
-++#ifdef USE_ARM
-++static const FastPathInfo arm_fast_paths[] =
-++{
-++    { PIXMAN_OP_OVER, PIXMAN_a8r8g8b8, PIXMAN_null,     PIXMAN_a8r8g8b8, fbCompositeSrc_8888x8888arm,      0 },
-++    { PIXMAN_OP_OVER, PIXMAN_a8r8g8b8, PIXMAN_null,	PIXMAN_x8r8g8b8, fbCompositeSrc_8888x8888arm,	   0 },
-++    { PIXMAN_OP_OVER, PIXMAN_a8b8g8r8, PIXMAN_null,	PIXMAN_a8b8g8r8, fbCompositeSrc_8888x8888arm,	   0 },
-++    { PIXMAN_OP_OVER, PIXMAN_a8b8g8r8, PIXMAN_null,	PIXMAN_x8b8g8r8, fbCompositeSrc_8888x8888arm,	   0 },
-++    { PIXMAN_OP_OVER, PIXMAN_a8r8g8b8, PIXMAN_a8,       PIXMAN_a8r8g8b8, fbCompositeSrc_8888x8x8888arm,    NEED_SOLID_MASK },
-++    { PIXMAN_OP_OVER, PIXMAN_a8r8g8b8, PIXMAN_a8,       PIXMAN_x8r8g8b8, fbCompositeSrc_8888x8x8888arm,	   NEED_SOLID_MASK },
-++
-++    { PIXMAN_OP_ADD, PIXMAN_a8,        PIXMAN_null,     PIXMAN_a8,       fbCompositeSrcAdd_8000x8000arm,   0 },
-++
-++    { PIXMAN_OP_OVER, PIXMAN_solid,    PIXMAN_a8,       PIXMAN_a8r8g8b8, fbCompositeSolidMask_nx8x8888arm,     0 },
-++    { PIXMAN_OP_OVER, PIXMAN_solid,    PIXMAN_a8,       PIXMAN_x8r8g8b8, fbCompositeSolidMask_nx8x8888arm,     0 },
-++    { PIXMAN_OP_OVER, PIXMAN_solid,    PIXMAN_a8,       PIXMAN_a8b8g8r8, fbCompositeSolidMask_nx8x8888arm,     0 },
-++    { PIXMAN_OP_OVER, PIXMAN_solid,    PIXMAN_a8,       PIXMAN_x8b8g8r8, fbCompositeSolidMask_nx8x8888arm,     0 },
-++
-++    { PIXMAN_OP_NONE },
-++};
-++#endif
-+ 
-+ static const FastPathInfo c_fast_paths[] =
-+ {
-+@@ -1829,6 +1850,12 @@ pixman_image_composite (pixman_op_t     
-+ 	if (!info && pixman_have_vmx())
-+ 	    info = get_fast_path (vmx_fast_paths, op, pSrc, pMask, pDst, pixbuf);
-+ #endif
-++
-++#ifdef USE_ARM
-++	if (!info && pixman_have_arm())
-++	    info = get_fast_path (arm_fast_paths, op, pSrc, pMask, pDst, pixbuf);
-++#endif
-++
-+         if (!info)
-+ 	    info = get_fast_path (c_fast_paths, op, pSrc, pMask, pDst, pixbuf);
-+ 
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.12.0/pixman-x888-565.patch b/recipes/obsolete/xorg-lib/pixman-0.12.0/pixman-x888-565.patch
-new file mode 100644
-index 0000000..a3fa331
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.12.0/pixman-x888-565.patch
-@@ -0,0 +1,68 @@
-+From: Vladimir Vukicevic <vladimir@slide.(none)>
-+Date: Wed, 17 Sep 2008 20:01:31 +0000 (-0400)
-+Subject: Add SRC x888x0565 C fast path
-+X-Git-Url: http://gitweb.freedesktop.org/?p=pixman.git;a=commitdiff;h=7180230d4d87c55dfef1e17a0cc3b125d45aa3a0
-+
-+Add SRC x888x0565 C fast path
-+---
-+
-+--- a/pixman/pixman-pict.c
-++++ b/pixman/pixman-pict.c
-+@@ -759,6 +759,46 @@ fbCompositeSrc_8888x0565 (pixman_op_t op
-+     }
-+ }
-+ 
-++
-++void
-++fbCompositeSrc_x888x0565 (pixman_op_t op,
-++                          pixman_image_t * pSrc,
-++                          pixman_image_t * pMask,
-++                          pixman_image_t * pDst,
-++                          int16_t      xSrc,
-++                          int16_t      ySrc,
-++                          int16_t      xMask,
-++                          int16_t      yMask,
-++                          int16_t      xDst,
-++                          int16_t      yDst,
-++                          uint16_t     width,
-++                          uint16_t     height)
-++{
-++    uint16_t	*dstLine, *dst;
-++    uint32_t	*srcLine, *src, s;
-++    int	dstStride, srcStride;
-++    uint16_t	w;
-++
-++    fbComposeGetStart (pSrc, xSrc, ySrc, uint32_t, srcStride, srcLine, 1);
-++    fbComposeGetStart (pDst, xDst, yDst, uint16_t, dstStride, dstLine, 1);
-++
-++    while (height--)
-++    {
-++	dst = dstLine;
-++	dstLine += dstStride;
-++	src = srcLine;
-++	srcLine += srcStride;
-++	w = width;
-++
-++	while (w--)
-++	{
-++	    s = READ(pSrc, src++);
-++	    WRITE(pDst, dst, cvt8888to0565(s));
-++	    dst++;
-++	}
-++    }
-++}
-++
-+ void
-+ fbCompositeSrcAdd_8000x8000 (pixman_op_t	op,
-+ 			     pixman_image_t * pSrc,
-+@@ -1568,6 +1608,10 @@ static const FastPathInfo c_fast_paths[]
-+     { PIXMAN_OP_SRC, PIXMAN_r5g6b5,    PIXMAN_null,     PIXMAN_r5g6b5,   fbCompositeSrcSrc_nxn, 0 },
-+     { PIXMAN_OP_SRC, PIXMAN_b5g6r5,    PIXMAN_null,     PIXMAN_b5g6r5,   fbCompositeSrcSrc_nxn, 0 },
-+ #endif
-++    { PIXMAN_OP_SRC, PIXMAN_a8r8g8b8,  PIXMAN_null,     PIXMAN_r5g6b5,   fbCompositeSrc_x888x0565, 0 },
-++    { PIXMAN_OP_SRC, PIXMAN_x8r8g8b8,  PIXMAN_null,     PIXMAN_r5g6b5,   fbCompositeSrc_x888x0565, 0 },
-++    { PIXMAN_OP_SRC, PIXMAN_a8b8g8r8,  PIXMAN_null,     PIXMAN_b5g6r5,   fbCompositeSrc_x888x0565, 0 },
-++    { PIXMAN_OP_SRC, PIXMAN_x8b8g8r8,  PIXMAN_null,     PIXMAN_b5g6r5,   fbCompositeSrc_x888x0565, 0 },
-+     { PIXMAN_OP_IN,  PIXMAN_a8,        PIXMAN_null,     PIXMAN_a8,       fbCompositeSrcIn_8x8,   0 },
-+     { PIXMAN_OP_IN,  PIXMAN_solid,     PIXMAN_a8,	PIXMAN_a8,	 fbCompositeSolidMaskIn_nx8x8, 0 },
-+     { PIXMAN_OP_NONE },
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-new file mode 100644
-index 0000000..b2488de
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-@@ -0,0 +1,114 @@
-+From 05875eca09ee23ea04ccb32f87c7c355fd1b88f3 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Tue, 16 Mar 2010 16:55:28 +0100
-+Subject: [PATCH 1/7] Generic C implementation of pixman_blt with overlapping support
-+
-+Uses memcpy/memmove functions to copy pixels, can handle the
-+case when both source and destination areas are in the same
-+image (this is useful for scrolling).
-+
-+It is assumed that copying direction is only important when
-+using the same image for both source and destination (and
-+src_stride == dst_stride). Copying direction is undefined
-+for the images with different source and destination stride
-+which happen to be in the overlapped areas (but this is an
-+unrealistic case anyway).
-+---
-+ pixman/pixman-general.c |   21 ++++++++++++++++++---
-+ pixman/pixman-private.h |   43 +++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 61 insertions(+), 3 deletions(-)
-+
-+diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
-+index bddf79a..f525744 100644
-+--- a/pixman/pixman-general.c
-++++ b/pixman/pixman-general.c
-+@@ -285,9 +285,24 @@ general_blt (pixman_implementation_t *imp,
-+              int                      width,
-+              int                      height)
-+ {
-+-    /* We can't blit unless we have sse2 or mmx */
-+-
-+-    return FALSE;
-++    uint8_t *dst_bytes = (uint8_t *)dst_bits;
-++    uint8_t *src_bytes = (uint8_t *)src_bits;
-++    int bpp;
-++
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-++	return FALSE;
-++
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    pixman_blt_helper (src_bytes + src_y * src_stride + src_x * bpp,
-++                       dst_bytes + dst_y * dst_stride + dst_x * bpp,
-++                       src_stride,
-++                       dst_stride,
-++                       width,
-++                       height);
-++    return TRUE;
-+ }
-+ 
-+ static pixman_bool_t
-+diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-+index d5767af..eeb677d 100644
-+--- a/pixman/pixman-private.h
-++++ b/pixman/pixman-private.h
-+@@ -10,6 +10,7 @@
-+ 
-+ #include "pixman.h"
-+ #include <time.h>
-++#include <string.h>
-+ #include <assert.h>
-+ #include <stdio.h>
-+ #include <string.h>
-+@@ -867,4 +868,46 @@ void pixman_timer_register (pixman_timer_t *timer);
-+ 
-+ #endif /* PIXMAN_TIMERS */
-+ 
-++/* a helper function, can blit 8-bit images with src/dst overlapping support */
-++static inline void
-++pixman_blt_helper (uint8_t *src_bytes,
-++                   uint8_t *dst_bytes,
-++                   int      src_stride,
-++                   int      dst_stride,
-++                   int      width,
-++                   int      height)
-++{
-++    /*
-++     * The second part of this check is not strictly needed, but it prevents
-++     * unnecessary upside-down processing of areas which belong to different
-++     * images. Upside-down processing can be slower with fixed-distance-ahead
-++     * prefetch and perceived as having more tearing.
-++     */
-++    if (src_bytes < dst_bytes + width &&
-++	src_bytes + src_stride * height > dst_bytes)
-++    {
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++	/* Horizontal scrolling to the left needs memmove */
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return;
-++	}
-++    }
-++    while (--height >= 0)
-++    {
-++	memcpy (dst_bytes, src_bytes, width);
-++	dst_bytes += dst_stride;
-++	src_bytes += src_stride;
-++    }
-++}
-++
-+ #endif /* PIXMAN_PRIVATE_H */
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-new file mode 100644
-index 0000000..ca6a3c5
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-@@ -0,0 +1,91 @@
-+From 8aca14948a43f5cfd478e22cef745e55960d68cb Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 22 Oct 2009 05:45:47 +0300
-+Subject: [PATCH 2/7] Support of overlapping src/dst for pixman_blt_mmx
-+
-+---
-+ pixman/pixman-mmx.c |   55 +++++++++++++++++++++++++++++---------------------
-+ 1 files changed, 32 insertions(+), 23 deletions(-)
-+
-+diff --git a/pixman/pixman-mmx.c b/pixman/pixman-mmx.c
-+index d51b40c..6e0296b 100644
-+--- a/pixman/pixman-mmx.c
-++++ b/pixman/pixman-mmx.c
-+@@ -2996,34 +2996,43 @@ pixman_blt_mmx (uint32_t *src_bits,
-+ {
-+     uint8_t *   src_bytes;
-+     uint8_t *   dst_bytes;
-+-    int byte_width;
-++    int         bpp;
-+ 
-+-    if (src_bpp != dst_bpp)
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-+-    if (src_bpp == 16)
-+-    {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
-+-	src_bytes = (uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 2 * width;
-+-	src_stride *= 2;
-+-	dst_stride *= 2;
-+-    }
-+-    else if (src_bpp == 32)
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
-+     {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
-+-	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 4 * width;
-+-	src_stride *= 4;
-+-	dst_stride *= 4;
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-+     }
-+-    else
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-+     {
-+-	return FALSE;
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using MMX */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-+     }
-+ 
-+     while (height--)
-+@@ -3033,7 +3042,7 @@ pixman_blt_mmx (uint32_t *src_bits,
-+ 	uint8_t *d = dst_bytes;
-+ 	src_bytes += src_stride;
-+ 	dst_bytes += dst_stride;
-+-	w = byte_width;
-++	w = width;
-+ 
-+ 	while (w >= 2 && ((unsigned long)d & 3))
-+ 	{
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-new file mode 100644
-index 0000000..faeb6e6
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-@@ -0,0 +1,91 @@
-+From 56c446d6912936eabcc6bdd583f37ee1209eff8c Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 22 Oct 2009 05:45:54 +0300
-+Subject: [PATCH 3/7] Support of overlapping src/dst for pixman_blt_sse2
-+
-+---
-+ pixman/pixman-sse2.c |   55 +++++++++++++++++++++++++++++--------------------
-+ 1 files changed, 32 insertions(+), 23 deletions(-)
-+
-+diff --git a/pixman/pixman-sse2.c b/pixman/pixman-sse2.c
-+index d5349d7..aa34012 100644
-+--- a/pixman/pixman-sse2.c
-++++ b/pixman/pixman-sse2.c
-+@@ -5328,34 +5328,43 @@ pixman_blt_sse2 (uint32_t *src_bits,
-+ {
-+     uint8_t *   src_bytes;
-+     uint8_t *   dst_bytes;
-+-    int byte_width;
-++    int         bpp;
-+ 
-+-    if (src_bpp != dst_bpp)
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-+-    if (src_bpp == 16)
-+-    {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
-+-	src_bytes =(uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 2 * width;
-+-	src_stride *= 2;
-+-	dst_stride *= 2;
-+-    }
-+-    else if (src_bpp == 32)
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
-+     {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
-+-	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 4 * width;
-+-	src_stride *= 4;
-+-	dst_stride *= 4;
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-+     }
-+-    else
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-+     {
-+-	return FALSE;
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using SSE2 */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-+     }
-+ 
-+     cache_prefetch ((__m128i*)src_bytes);
-+@@ -5368,7 +5377,7 @@ pixman_blt_sse2 (uint32_t *src_bits,
-+ 	uint8_t *d = dst_bytes;
-+ 	src_bytes += src_stride;
-+ 	dst_bytes += dst_stride;
-+-	w = byte_width;
-++	w = width;
-+ 
-+ 	cache_prefetch_next ((__m128i*)s);
-+ 	cache_prefetch_next ((__m128i*)d);
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-new file mode 100644
-index 0000000..d56fd99
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-@@ -0,0 +1,94 @@
-+From 80c1eae677a6ea10d67bb7328230626cd8fce08e Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Wed, 18 Nov 2009 06:08:48 +0200
-+Subject: [PATCH 4/7] Support of overlapping src/dst for pixman_blt_neon
-+
-+---
-+ pixman/pixman-arm-neon.c |   62 +++++++++++++++++++++++++++++++++++++--------
-+ 1 files changed, 51 insertions(+), 11 deletions(-)
-+
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index 6808b36..7feee1d 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -168,26 +168,66 @@ pixman_blt_neon (uint32_t *src_bits,
-+                  int       width,
-+                  int       height)
-+ {
-+-    if (src_bpp != dst_bpp)
-++    uint8_t *   src_bytes;
-++    uint8_t *   dst_bytes;
-++    int         bpp;
-++
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
-++    {
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-++    }
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-++    {
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using NEON */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-++    }
-++
-+     switch (src_bpp)
-+     {
-+     case 16:
-+ 	pixman_composite_src_0565_0565_asm_neon (
-+-		width, height,
-+-		(uint16_t *)(((char *) dst_bits) +
-+-		dst_y * dst_stride * 4 + dst_x * 2), dst_stride * 2,
-+-		(uint16_t *)(((char *) src_bits) +
-+-		src_y * src_stride * 4 + src_x * 2), src_stride * 2);
-++		width >> 1,
-++		height,
-++		(uint16_t *) dst_bytes,
-++		dst_stride >> 1,
-++		(uint16_t *) src_bytes,
-++		src_stride >> 1);
-+ 	return TRUE;
-+     case 32:
-+ 	pixman_composite_src_8888_8888_asm_neon (
-+-		width, height,
-+-		(uint32_t *)(((char *) dst_bits) +
-+-		dst_y * dst_stride * 4 + dst_x * 4), dst_stride,
-+-		(uint32_t *)(((char *) src_bits) +
-+-		src_y * src_stride * 4 + src_x * 4), src_stride);
-++		width >> 2,
-++		height,
-++		(uint32_t *) dst_bytes,
-++		dst_stride >> 2,
-++		(uint32_t *) src_bytes,
-++		src_stride >> 2);
-+ 	return TRUE;
-+     default:
-+ 	return FALSE;
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-new file mode 100644
-index 0000000..39eda8b
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-@@ -0,0 +1,169 @@
-+From 2f5774db49521e990c5e9f7cac684a06f4e67a43 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 10 Dec 2009 00:51:50 +0200
-+Subject: [PATCH 5/7] ARM: added NEON optimizations for fetch/store r5g6b5 scanline
-+
-+---
-+ pixman/pixman-access.c       |   23 ++++++++++++++++++++++-
-+ pixman/pixman-arm-neon-asm.S |   20 ++++++++++++++++++++
-+ pixman/pixman-arm-neon.c     |   41 +++++++++++++++++++++++++++++++++++++++++
-+ pixman/pixman-private.h      |    5 +++++
-+ 4 files changed, 88 insertions(+), 1 deletions(-)
-+
-+diff --git a/pixman/pixman-access.c b/pixman/pixman-access.c
-+index fa0a267..5bb3e09 100644
-+--- a/pixman/pixman-access.c
-++++ b/pixman/pixman-access.c
-+@@ -2748,7 +2748,7 @@ typedef struct
-+ 	    store_scanline_ ## format, store_scanline_generic_64	\
-+     }
-+ 
-+-static const format_info_t accessors[] =
-++static format_info_t accessors[] =
-+ {
-+ /* 32 bpp formats */
-+     FORMAT_INFO (a8r8g8b8),
-+@@ -2891,6 +2891,27 @@ _pixman_bits_image_setup_raw_accessors (bits_image_t *image)
-+ 	setup_accessors (image);
-+ }
-+ 
-++void
-++_pixman_bits_override_accessors (pixman_format_code_t format,
-++                                 fetch_scanline_t     fetch_func,
-++                                 store_scanline_t     store_func)
-++{
-++    format_info_t *info = accessors;
-++
-++    while (info->format != PIXMAN_null)
-++    {
-++	if (info->format == format)
-++	{
-++	    if (fetch_func)
-++		info->fetch_scanline_raw_32 = fetch_func;
-++	    if (store_func)
-++		info->store_scanline_raw_32 = store_func;
-++	    return;
-++	}
-++	info++;
-++    }
-++}
-++
-+ #else
-+ 
-+ void
-+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
-+index 51bc347..f30869e 100644
-+--- a/pixman/pixman-arm-neon-asm.S
-++++ b/pixman/pixman-arm-neon-asm.S
-+@@ -458,6 +458,16 @@ generate_composite_function \
-+     pixman_composite_src_8888_0565_process_pixblock_tail, \
-+     pixman_composite_src_8888_0565_process_pixblock_tail_head
-+ 
-++generate_composite_function_single_scanline \
-++    pixman_store_scanline_r5g6b5_asm_neon, 32, 0, 16, \
-++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
-++    8, /* number of pixels, processed in a single block */ \
-++    default_init, \
-++    default_cleanup, \
-++    pixman_composite_src_8888_0565_process_pixblock_head, \
-++    pixman_composite_src_8888_0565_process_pixblock_tail, \
-++    pixman_composite_src_8888_0565_process_pixblock_tail_head
-++
-+ /******************************************************************************/
-+ 
-+ .macro pixman_composite_src_0565_8888_process_pixblock_head
-+@@ -493,6 +503,16 @@ generate_composite_function \
-+     pixman_composite_src_0565_8888_process_pixblock_tail, \
-+     pixman_composite_src_0565_8888_process_pixblock_tail_head
-+ 
-++generate_composite_function_single_scanline \
-++    pixman_fetch_scanline_r5g6b5_asm_neon, 16, 0, 32, \
-++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
-++    8, /* number of pixels, processed in a single block */ \
-++    default_init, \
-++    default_cleanup, \
-++    pixman_composite_src_0565_8888_process_pixblock_head, \
-++    pixman_composite_src_0565_8888_process_pixblock_tail, \
-++    pixman_composite_src_0565_8888_process_pixblock_tail_head
-++
-+ /******************************************************************************/
-+ 
-+ .macro pixman_composite_add_8000_8000_process_pixblock_head
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index 7feee1d..fda7a09 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -375,6 +375,43 @@ neon_combine_##name##_u (pixman_implementation_t *imp,                   \
-+ BIND_COMBINE_U (over)
-+ BIND_COMBINE_U (add)
-+ 
-++void
-++pixman_fetch_scanline_r5g6b5_asm_neon (int             width,
-++                                       uint32_t       *buffer,
-++                                       const uint16_t *pixel);
-++void
-++pixman_store_scanline_r5g6b5_asm_neon (int             width,
-++                                       uint16_t       *pixel,
-++                                       const uint32_t *values);
-++
-++static void
-++neon_fetch_scanline_r5g6b5 (pixman_image_t *image,
-++                            int             x,
-++                            int             y,
-++                            int             width,
-++                            uint32_t *      buffer,
-++                            const uint32_t *mask,
-++                            uint32_t        mask_bits)
-++{
-++    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
-++    const uint16_t *pixel = (const uint16_t *)bits + x;
-++
-++    pixman_fetch_scanline_r5g6b5_asm_neon (width, buffer, pixel);
-++}
-++
-++static void
-++neon_store_scanline_r5g6b5 (bits_image_t *  image,
-++                            int             x,
-++                            int             y,
-++                            int             width,
-++                            const uint32_t *values)
-++{
-++    uint32_t *bits = image->bits + image->rowstride * y;
-++    uint16_t *pixel = ((uint16_t *) bits) + x;
-++
-++    pixman_store_scanline_r5g6b5_asm_neon (width, pixel, values);
-++}
-++
-+ pixman_implementation_t *
-+ _pixman_implementation_create_arm_neon (void)
-+ {
-+@@ -385,6 +422,10 @@ _pixman_implementation_create_arm_neon (void)
-+     imp->combine_32[PIXMAN_OP_OVER] = neon_combine_over_u;
-+     imp->combine_32[PIXMAN_OP_ADD] = neon_combine_add_u;
-+ 
-++    _pixman_bits_override_accessors (PIXMAN_r5g6b5,
-++                                     neon_fetch_scanline_r5g6b5,
-++                                     neon_store_scanline_r5g6b5);
-++
-+     imp->blt = arm_neon_blt;
-+     imp->fill = arm_neon_fill;
-+ 
-+diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-+index eeb677d..ba2d401 100644
-+--- a/pixman/pixman-private.h
-++++ b/pixman/pixman-private.h
-+@@ -220,6 +220,11 @@ void
-+ _pixman_bits_image_setup_raw_accessors (bits_image_t *image);
-+ 
-+ void
-++_pixman_bits_override_accessors (pixman_format_code_t format,
-++                                 fetch_scanline_t     fetch_func,
-++                                 store_scanline_t     store_func);
-++
-++void
-+ _pixman_image_get_scanline_generic_64  (pixman_image_t *image,
-+                                         int             x,
-+                                         int             y,
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch
-new file mode 100644
-index 0000000..dd0e0f6
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch
-@@ -0,0 +1,261 @@
-+From fc24a2d8d0039cd10de4175da40bb784e2c3bf49 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Fri, 4 Dec 2009 16:49:19 +0000
-+Subject: [PATCH 6/7] A copy-paste version of 16bpp bilinear scanline fetcher
-+
-+---
-+ pixman/pixman-bits-image.c |  228 +++++++++++++++++++++++++++++++++++++++++++-
-+ 1 files changed, 223 insertions(+), 5 deletions(-)
-+
-+diff --git a/pixman/pixman-bits-image.c b/pixman/pixman-bits-image.c
-+index 3d78ff0..1656975 100644
-+--- a/pixman/pixman-bits-image.c
-++++ b/pixman/pixman-bits-image.c
-+@@ -535,6 +535,212 @@ bits_image_fetch_bilinear_no_repeat_8888 (pixman_image_t * ima,
-+ 	*buffer++ = 0;
-+ }
-+ 
-++static void
-++bits_image_fetch_bilinear_no_repeat_0565 (pixman_image_t * ima,
-++					  int              offset,
-++					  int              line,
-++					  int              width,
-++					  uint32_t *       buffer,
-++					  const uint32_t * mask,
-++					  uint32_t         mask_bits)
-++{
-++    bits_image_t *bits = &ima->bits;
-++    pixman_fixed_t x_top, x_bottom, x;
-++    pixman_fixed_t ux_top, ux_bottom, ux;
-++    pixman_vector_t v;
-++    uint32_t top_mask, bottom_mask;
-++    uint16_t *top_row;
-++    uint16_t *bottom_row;
-++    uint32_t *end;
-++    uint16_t zero[2] = { 0, 0 };
-++    int y, y1, y2;
-++    int disty;
-++    int mask_inc;
-++    int w;
-++
-++    /* reference point is the center of the pixel */
-++    v.vector[0] = pixman_int_to_fixed (offset) + pixman_fixed_1 / 2;
-++    v.vector[1] = pixman_int_to_fixed (line) + pixman_fixed_1 / 2;
-++    v.vector[2] = pixman_fixed_1;
-++
-++    if (!pixman_transform_point_3d (bits->common.transform, &v))
-++	return;
-++
-++    ux = ux_top = ux_bottom = bits->common.transform->matrix[0][0];
-++    x = x_top = x_bottom = v.vector[0] - pixman_fixed_1/2;
-++
-++    y = v.vector[1] - pixman_fixed_1/2;
-++    disty = (y >> 8) & 0xff;
-++
-++    /* Load the pointers to the first and second lines from the source
-++     * image that bilinear code must read.
-++     *
-++     * The main trick in this code is about the check if any line are
-++     * outside of the image;
-++     *
-++     * When I realize that a line (any one) is outside, I change
-++     * the pointer to a dummy area with zeros. Once I change this, I
-++     * must be sure the pointer will not change, so I set the
-++     * variables to each pointer increments inside the loop.
-++     */
-++    y1 = pixman_fixed_to_int (y);
-++    y2 = y1 + 1;
-++
-++    if (y1 < 0 || y1 >= bits->height)
-++    {
-++	top_row = zero;
-++	x_top = 0;
-++	ux_top = 0;
-++    }
-++    else
-++    {
-++	top_row = bits->bits + y1 * bits->rowstride;
-++	x_top = x;
-++	ux_top = ux;
-++    }
-++
-++    if (y2 < 0 || y2 >= bits->height)
-++    {
-++	bottom_row = zero;
-++	x_bottom = 0;
-++	ux_bottom = 0;
-++    }
-++    else
-++    {
-++	bottom_row = bits->bits + y2 * bits->rowstride;
-++	x_bottom = x;
-++	ux_bottom = ux;
-++    }
-++
-++    /* Instead of checking whether the operation uses the mast in
-++     * each loop iteration, verify this only once and prepare the
-++     * variables to make the code smaller inside the loop.
-++     */
-++    if (!mask)
-++    {
-++        mask_inc = 0;
-++        mask_bits = 1;
-++        mask = &mask_bits;
-++    }
-++    else
-++    {
-++        /* If have a mask, prepare the variables to check it */
-++        mask_inc = 1;
-++    }
-++
-++    /* If both are zero, then the whole thing is zero */
-++    if (top_row == zero && bottom_row == zero)
-++    {
-++	memset (buffer, 0, width * sizeof (uint32_t));
-++	return;
-++    }
-++    else
-++    {
-++	if (top_row == zero)
-++	{
-++	    top_mask = 0;
-++	    bottom_mask = 0xff000000;
-++	}
-++	else if (bottom_row == zero)
-++	{
-++	    top_mask = 0xff000000;
-++	    bottom_mask = 0;
-++	}
-++	else
-++	{
-++	    top_mask = 0xff000000;
-++	    bottom_mask = 0xff000000;
-++	}
-++    }
-++
-++    end = buffer + width;
-++
-++    /* Zero fill to the left of the image */
-++    while (buffer < end && x < pixman_fixed_minus_1)
-++    {
-++	*buffer++ = 0;
-++	x += ux;
-++	x_top += ux_top;
-++	x_bottom += ux_bottom;
-++	mask += mask_inc;
-++    }
-++
-++    /* Left edge
-++     */
-++    while (buffer < end && x < 0)
-++    {
-++	uint32_t tr, br;
-++	int32_t distx;
-++
-++	tr = CONVERT_0565_TO_0888 (top_row[pixman_fixed_to_int (x_top) + 1]) | top_mask;
-++	br = CONVERT_0565_TO_0888 (bottom_row[pixman_fixed_to_int (x_bottom) + 1]) | bottom_mask;
-++
-++	distx = (x >> 8) & 0xff;
-++
-++	*buffer++ = bilinear_interpolation (0, tr, 0, br, distx, disty);
-++
-++	x += ux;
-++	x_top += ux_top;
-++	x_bottom += ux_bottom;
-++	mask += mask_inc;
-++    }
-++
-++    /* Main part */
-++    w = pixman_int_to_fixed (bits->width - 1);
-++
-++    while (buffer < end  &&  x < w)
-++    {
-++	if (*mask)
-++	{
-++	    uint32_t tl, tr, bl, br;
-++	    int32_t distx;
-++
-++	    tl = CONVERT_0565_TO_0888 (top_row [pixman_fixed_to_int (x_top)]) | top_mask;
-++	    tr = CONVERT_0565_TO_0888 (top_row [pixman_fixed_to_int (x_top) + 1]) | top_mask;
-++	    bl = CONVERT_0565_TO_0888 (bottom_row [pixman_fixed_to_int (x_bottom)]) | bottom_mask;
-++	    br = CONVERT_0565_TO_0888 (bottom_row [pixman_fixed_to_int (x_bottom) + 1]) | bottom_mask;
-++
-++	    distx = (x >> 8) & 0xff;
-++
-++	    *buffer = bilinear_interpolation (tl, tr, bl, br, distx, disty);
-++	}
-++
-++	buffer++;
-++	x += ux;
-++	x_top += ux_top;
-++	x_bottom += ux_bottom;
-++	mask += mask_inc;
-++    }
-++
-++    /* Right Edge */
-++    w = pixman_int_to_fixed (bits->width);
-++    while (buffer < end  &&  x < w)
-++    {
-++	if (*mask)
-++	{
-++	    uint32_t tl, bl;
-++	    int32_t distx;
-++
-++	    tl = CONVERT_0565_TO_0888 (top_row [pixman_fixed_to_int (x_top)]) | top_mask;
-++	    bl = CONVERT_0565_TO_0888 (bottom_row [pixman_fixed_to_int (x_bottom)]) | bottom_mask;
-++
-++	    distx = (x >> 8) & 0xff;
-++
-++	    *buffer = bilinear_interpolation (tl, 0, bl, 0, distx, disty);
-++	}
-++
-++	buffer++;
-++	x += ux;
-++	x_top += ux_top;
-++	x_bottom += ux_bottom;
-++	mask += mask_inc;
-++    }
-++
-++    /* Zero fill to the left of the image */
-++    while (buffer < end)
-++	*buffer++ = 0;
-++}
-++
-+ static force_inline uint32_t
-+ bits_image_fetch_pixel_convolution (bits_image_t   *image,
-+ 				    pixman_fixed_t  x,
-+@@ -917,14 +1123,26 @@ bits_image_property_changed (pixman_image_t *image)
-+ 	     (bits->common.filter == PIXMAN_FILTER_BILINEAR ||
-+ 	      bits->common.filter == PIXMAN_FILTER_GOOD	    ||
-+ 	      bits->common.filter == PIXMAN_FILTER_BEST)		&&
-+-	     bits->common.repeat == PIXMAN_REPEAT_NONE			&&
-+-	     (bits->format == PIXMAN_a8r8g8b8	||
-+-	      bits->format == PIXMAN_x8r8g8b8))
-++	     bits->common.repeat == PIXMAN_REPEAT_NONE)
-+     {
-+ 	image->common.get_scanline_64 =
-+ 	    _pixman_image_get_scanline_generic_64;
-+-	image->common.get_scanline_32 =
-+-	    bits_image_fetch_bilinear_no_repeat_8888;
-++
-++	if (bits->format == PIXMAN_a8r8g8b8 || bits->format == PIXMAN_x8r8g8b8)
-++	{
-++	    image->common.get_scanline_32 =
-++		bits_image_fetch_bilinear_no_repeat_8888;
-++	}
-++	else if (bits->format == PIXMAN_r5g6b5)
-++	{
-++	    image->common.get_scanline_32 =
-++		bits_image_fetch_bilinear_no_repeat_0565;
-++	}
-++	else
-++	{
-++	    image->common.get_scanline_32 =
-++		bits_image_fetch_transformed;
-++	}
-+     }
-+     else
-+     {
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/0007-ARM-added-missing-cache-preload.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/0007-ARM-added-missing-cache-preload.patch
-new file mode 100644
-index 0000000..f601d2c
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/0007-ARM-added-missing-cache-preload.patch
-@@ -0,0 +1,32 @@
-+From af8a33d3b132c0192d59c47426bb3a201cb64b32 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Fri, 21 May 2010 13:31:03 +0000
-+Subject: [PATCH 7/7] ARM: added missing cache preload
-+
-+---
-+ pixman/pixman-arm-neon-asm.S |    2 ++
-+ 1 files changed, 2 insertions(+), 0 deletions(-)
-+
-+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
-+index f30869e..dc7fd69 100644
-+--- a/pixman/pixman-arm-neon-asm.S
-++++ b/pixman/pixman-arm-neon-asm.S
-+@@ -388,6 +388,7 @@ generate_composite_function \
-+     vld1.16     {d4, d5}, [DST_R, :128]!
-+     vst1.16     {d28, d29}, [DST_W, :128]!
-+     pixman_composite_over_n_0565_process_pixblock_head
-++    cache_preload 8, 8
-+ .endm
-+ 
-+ .macro pixman_composite_over_n_0565_init
-+@@ -680,6 +681,7 @@ generate_composite_function_single_scanline \
-+     vld4.8      {d4, d5, d6, d7}, [DST_R, :128]!
-+     vst4.8      {d28, d29, d30, d31}, [DST_W, :128]!
-+     pixman_composite_over_8888_8888_process_pixblock_head
-++    cache_preload 8, 8
-+ .endm
-+ 
-+ .macro pixman_composite_over_n_8888_init
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/565-over-neon.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/565-over-neon.patch
-new file mode 100644
-index 0000000..c8156c4
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/565-over-neon.patch
-@@ -0,0 +1,23 @@
-+From d297443267de0f5fab49ec245df9055a0dddddaf Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Tue, 25 May 2010 17:21:26 +0000
-+Subject: ARM: NEON: don't hit general path for r5g6b5 OVER r5g6b5 operation
-+
-+OVER can't be reduced to SRC because the source image is not
-+considered opaque when repeat is set to PIXMAN_REPEAT_NONE.
-+An additional fast path table entry solves the problem.
-+---
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index 64aa908..394dcea 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -246,6 +246,7 @@ static const pixman_fast_path_t arm_neon_fast_paths[] =
-+     PIXMAN_STD_FAST_PATH (OVER, a8b8g8r8, null,     x8b8g8r8, neon_composite_over_8888_8888),
-+     PIXMAN_STD_FAST_PATH (OVER, x8r8g8b8, null,     a8r8g8b8, neon_composite_src_x888_8888),
-+     PIXMAN_STD_FAST_PATH (OVER, x8b8g8r8, null,     a8b8g8r8, neon_composite_src_x888_8888),
-++    PIXMAN_STD_FAST_PATH (OVER, r5g6b5,   null,     r5g6b5,   neon_composite_src_0565_0565),
-+     PIXMAN_STD_FAST_PATH (ADD,  solid,    a8,       a8,       neon_composite_add_n_8_8),
-+     PIXMAN_STD_FAST_PATH (ADD,  a8,       a8,       a8,       neon_composite_add_8_8_8),
-+     PIXMAN_STD_FAST_PATH (ADD,  a8r8g8b8, a8r8g8b8, a8r8g8b8, neon_composite_add_8888_8888_8888),
-+--
-+cgit v0.8.3-6-g21f6
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.18.4/neon-reverse-u.patch b/recipes/obsolete/xorg-lib/pixman-0.18.4/neon-reverse-u.patch
-new file mode 100644
-index 0000000..76726ce
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.18.4/neon-reverse-u.patch
-@@ -0,0 +1,175 @@
-+From e0017c2a676b267900e48c6f32a6e973395c83d3 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Mon, 31 May 2010 16:24:43 +0000
-+Subject: ARM: 'neon_combine_out_reverse_u' combiner
-+
-+---
-+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
-+index f30869e..44fbfce 100644
-+--- a/pixman/pixman-arm-neon-asm.S
-++++ b/pixman/pixman-arm-neon-asm.S
-+@@ -597,7 +597,7 @@ generate_composite_function_single_scanline \
-+ 
-+ /******************************************************************************/
-+ 
-+-.macro pixman_composite_over_8888_8888_process_pixblock_head
-++.macro pixman_composite_out_reverse_8888_8888_process_pixblock_head
-+     vmvn.8      d24, d3  /* get inverted alpha */
-+     /* do alpha blending */
-+     vmull.u8    q8, d24, d4
-+@@ -606,7 +606,7 @@ generate_composite_function_single_scanline \
-+     vmull.u8    q11, d24, d7
-+ .endm
-+ 
-+-.macro pixman_composite_over_8888_8888_process_pixblock_tail
-++.macro pixman_composite_out_reverse_8888_8888_process_pixblock_tail
-+     vrshr.u16   q14, q8, #8
-+     vrshr.u16   q15, q9, #8
-+     vrshr.u16   q12, q10, #8
-+@@ -615,6 +615,56 @@ generate_composite_function_single_scanline \
-+     vraddhn.u16 d29, q15, q9
-+     vraddhn.u16 d30, q12, q10
-+     vraddhn.u16 d31, q13, q11
-++.endm
-++
-++.macro pixman_composite_out_reverse_8888_8888_process_pixblock_tail_head
-++    vld4.8      {d4, d5, d6, d7}, [DST_R, :128]!
-++        vrshr.u16   q14, q8, #8
-++                                    PF add PF_X, PF_X, #8
-++                                    PF tst PF_CTL, #0xF
-++        vrshr.u16   q15, q9, #8
-++        vrshr.u16   q12, q10, #8
-++        vrshr.u16   q13, q11, #8
-++                                    PF addne PF_X, PF_X, #8
-++                                    PF subne PF_CTL, PF_CTL, #1
-++        vraddhn.u16 d28, q14, q8
-++        vraddhn.u16 d29, q15, q9
-++                                    PF cmp PF_X, ORIG_W
-++        vraddhn.u16 d30, q12, q10
-++        vraddhn.u16 d31, q13, q11
-++    vld4.8      {d0, d1, d2, d3}, [SRC]!
-++                                    PF pld, [PF_SRC, PF_X, lsl #src_bpp_shift]
-++    vmvn.8      d22, d3
-++                                    PF pld, [PF_DST, PF_X, lsl #dst_bpp_shift]
-++        vst4.8      {d28, d29, d30, d31}, [DST_W, :128]!
-++                                    PF subge PF_X, PF_X, ORIG_W
-++    vmull.u8    q8, d22, d4
-++                                    PF subges PF_CTL, PF_CTL, #0x10
-++    vmull.u8    q9, d22, d5
-++                                    PF ldrgeb DUMMY, [PF_SRC, SRC_STRIDE, lsl #src_bpp_shift]!
-++    vmull.u8    q10, d22, d6
-++                                    PF ldrgeb DUMMY, [PF_DST, DST_STRIDE, lsl #dst_bpp_shift]!
-++    vmull.u8    q11, d22, d7
-++.endm
-++
-++generate_composite_function_single_scanline \
-++    pixman_composite_scanline_out_reverse_asm_neon, 32, 0, 32, \
-++    FLAG_DST_READWRITE | FLAG_DEINTERLEAVE_32BPP, \
-++    8, /* number of pixels, processed in a single block */ \
-++    default_init, \
-++    default_cleanup, \
-++    pixman_composite_out_reverse_8888_8888_process_pixblock_head, \
-++    pixman_composite_out_reverse_8888_8888_process_pixblock_tail, \
-++    pixman_composite_out_reverse_8888_8888_process_pixblock_tail_head
-++
-++/******************************************************************************/
-++
-++.macro pixman_composite_over_8888_8888_process_pixblock_head
-++    pixman_composite_out_reverse_8888_8888_process_pixblock_head
-++.endm
-++
-++.macro pixman_composite_over_8888_8888_process_pixblock_tail
-++    pixman_composite_out_reverse_8888_8888_process_pixblock_tail
-+     vqadd.u8    q14, q0, q14
-+     vqadd.u8    q15, q1, q15
-+ .endm
-+@@ -1416,7 +1466,7 @@ generate_composite_function_single_scanline \
-+ 
-+ /******************************************************************************/
-+ 
-+-.macro pixman_composite_over_8888_n_8888_process_pixblock_head
-++.macro pixman_composite_out_reverse_8888_n_8888_process_pixblock_head
-+     /* expecting source data in {d0, d1, d2, d3} */
-+     /* destination data in {d4, d5, d6, d7} */
-+     /* solid mask is in d15 */
-+@@ -1442,7 +1492,7 @@ generate_composite_function_single_scanline \
-+     vmull.u8    q11, d24, d7
-+ .endm
-+ 
-+-.macro pixman_composite_over_8888_n_8888_process_pixblock_tail
-++.macro pixman_composite_out_reverse_8888_n_8888_process_pixblock_tail
-+     vrshr.u16   q14, q8, #8
-+     vrshr.u16   q15, q9, #8
-+     vrshr.u16   q12, q10, #8
-+@@ -1451,6 +1501,49 @@ generate_composite_function_single_scanline \
-+     vraddhn.u16 d29, q15, q9
-+     vraddhn.u16 d30, q12, q10
-+     vraddhn.u16 d31, q13, q11
-++.endm
-++
-++.macro pixman_composite_out_reverse_8888_8888_8888_init
-++    vpush       {d8-d15}
-++.endm
-++
-++.macro pixman_composite_out_reverse_8888_8888_8888_cleanup
-++    vpop        {d8-d15}
-++.endm
-++
-++/* TODO: expand macros and do better instructions scheduling */
-++.macro pixman_composite_out_reverse_8888_8888_8888_process_pixblock_tail_head
-++    vld4.8     {d4, d5, d6, d7}, [DST_R, :128]!
-++    pixman_composite_out_reverse_8888_n_8888_process_pixblock_tail
-++    vld4.8     {d0, d1, d2, d3}, [SRC]!
-++    cache_preload 8, 8
-++    vld4.8     {d12, d13, d14, d15}, [MASK]!
-++    pixman_composite_out_reverse_8888_n_8888_process_pixblock_head
-++    vst4.8     {d28, d29, d30, d31}, [DST_W, :128]!
-++.endm
-++
-++generate_composite_function_single_scanline \
-++    pixman_composite_scanline_out_reverse_mask_asm_neon, 32, 32, 32, \
-++    FLAG_DST_READWRITE | FLAG_DEINTERLEAVE_32BPP, \
-++    8, /* number of pixels, processed in a single block */ \
-++    pixman_composite_out_reverse_8888_8888_8888_init, \
-++    pixman_composite_out_reverse_8888_8888_8888_cleanup, \
-++    pixman_composite_out_reverse_8888_n_8888_process_pixblock_head, \
-++    pixman_composite_out_reverse_8888_n_8888_process_pixblock_tail, \
-++    pixman_composite_out_reverse_8888_8888_8888_process_pixblock_tail_head \
-++    28, /* dst_w_basereg */ \
-++    4,  /* dst_r_basereg */ \
-++    0,  /* src_basereg   */ \
-++    12  /* mask_basereg  */
-++
-++/******************************************************************************/
-++
-++.macro pixman_composite_over_8888_n_8888_process_pixblock_head
-++    pixman_composite_out_reverse_8888_n_8888_process_pixblock_head
-++.endm
-++
-++.macro pixman_composite_over_8888_n_8888_process_pixblock_tail
-++    pixman_composite_out_reverse_8888_n_8888_process_pixblock_tail
-+     vqadd.u8    q14, q0, q14
-+     vqadd.u8    q15, q1, q15
-+ .endm
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index 394dcea..1be9606 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -335,6 +335,7 @@ neon_combine_##name##_u (pixman_implementation_t *imp,                   \
-+ 
-+ BIND_COMBINE_U (over)
-+ BIND_COMBINE_U (add)
-++BIND_COMBINE_U (out_reverse)
-+ 
-+ void
-+ pixman_fetch_scanline_r5g6b5_asm_neon (int             width,
-+@@ -382,6 +383,7 @@ _pixman_implementation_create_arm_neon (void)
-+ 
-+     imp->combine_32[PIXMAN_OP_OVER] = neon_combine_over_u;
-+     imp->combine_32[PIXMAN_OP_ADD] = neon_combine_add_u;
-++    imp->combine_32[PIXMAN_OP_OUT_REVERSE] = neon_combine_out_reverse_u;
-+ 
-+     _pixman_bits_override_accessors (PIXMAN_r5g6b5,
-+                                      neon_fetch_scanline_r5g6b5,
-+--
-+cgit v0.8.3-6-g21f6
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0000-Add-pixman_bits_override_accessors.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0000-Add-pixman_bits_override_accessors.patch
-new file mode 100644
-index 0000000..43cd442
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0000-Add-pixman_bits_override_accessors.patch
-@@ -0,0 +1,77 @@
-+From 38aabb3be87ea68e37f34256c778d07f62680ec6 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 10 Dec 2009 00:51:50 +0200
-+Subject: [PATCH 1/9] add _pixman_bits_override_accessors
-+
-+* from patch ARM: HACK: added NEON optimizations for fetch/store r5g6b5 scanline
-+* used in 
-+  0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-+  0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
-+  0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
-+
-+
-+---
-+ pixman/pixman-access.c       |   23 ++++++++++++++++++++++-
-+ pixman/pixman-private.h      |    5 +++++
-+ 4 files changed, 87 insertions(+), 1 deletions(-)
-+
-+diff --git a/pixman/pixman-access.c b/pixman/pixman-access.c
-+index f1ce0ba..b33da29 100644
-+--- a/pixman/pixman-access.c
-++++ b/pixman/pixman-access.c
-+@@ -2836,7 +2836,7 @@ typedef struct
-+ 	    store_scanline_ ## format, store_scanline_generic_64	\
-+     }
-+ 
-+-static const format_info_t accessors[] =
-++static format_info_t accessors[] =
-+ {
-+ /* 32 bpp formats */
-+     FORMAT_INFO (a8r8g8b8),
-+@@ -2978,6 +2978,27 @@ _pixman_bits_image_setup_accessors (bits_image_t *image)
-+ 	setup_accessors (image);
-+ }
-+ 
-++void
-++_pixman_bits_override_accessors (pixman_format_code_t format,
-++                                 fetch_scanline_t     fetch_func,
-++                                 store_scanline_t     store_func)
-++{
-++    format_info_t *info = accessors;
-++
-++    while (info->format != PIXMAN_null)
-++    {
-++	if (info->format == format)
-++	{
-++	    if (fetch_func)
-++		info->fetch_scanline_32 = fetch_func;
-++	    if (store_func)
-++		info->store_scanline_32 = store_func;
-++	    return;
-++	}
-++	info++;
-++    }
-++}
-++
-+ #else
-+ 
-+ void
-+diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-+index d85868f..564f8f0 100644
-+--- a/pixman/pixman-private.h
-++++ b/pixman/pixman-private.h
-+@@ -206,6 +206,11 @@ void
-+ _pixman_bits_image_setup_accessors (bits_image_t *image);
-+ 
-+ void
-++_pixman_bits_override_accessors (pixman_format_code_t format,
-++                                 fetch_scanline_t     fetch_func,
-++                                 store_scanline_t     store_func);
-++
-++void
-+ _pixman_image_get_scanline_generic_64  (pixman_image_t *image,
-+                                         int             x,
-+                                         int             y,
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-new file mode 100644
-index 0000000..795cce5
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-@@ -0,0 +1,114 @@
-+From 97b2bb933455f222b392b5c60a8bde82d7d6329f Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Tue, 16 Mar 2010 16:55:28 +0100
-+Subject: [PATCH 1/8] Generic C implementation of pixman_blt with overlapping support
-+
-+Uses memcpy/memmove functions to copy pixels, can handle the
-+case when both source and destination areas are in the same
-+image (this is useful for scrolling).
-+
-+It is assumed that copying direction is only important when
-+using the same image for both source and destination (and
-+src_stride == dst_stride). Copying direction is undefined
-+for the images with different source and destination stride
-+which happen to be in the overlapped areas (but this is an
-+unrealistic case anyway).
-+---
-+ pixman/pixman-general.c |   21 ++++++++++++++++++---
-+ pixman/pixman-private.h |   43 +++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 61 insertions(+), 3 deletions(-)
-+
-+diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
-+index 4d234a0..c4d2c14 100644
-+--- a/pixman/pixman-general.c
-++++ b/pixman/pixman-general.c
-+@@ -280,9 +280,24 @@ general_blt (pixman_implementation_t *imp,
-+              int                      width,
-+              int                      height)
-+ {
-+-    /* We can't blit unless we have sse2 or mmx */
-+-
-+-    return FALSE;
-++    uint8_t *dst_bytes = (uint8_t *)dst_bits;
-++    uint8_t *src_bytes = (uint8_t *)src_bits;
-++    int bpp;
-++
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-++	return FALSE;
-++
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    pixman_blt_helper (src_bytes + src_y * src_stride + src_x * bpp,
-++                       dst_bytes + dst_y * dst_stride + dst_x * bpp,
-++                       src_stride,
-++                       dst_stride,
-++                       width,
-++                       height);
-++    return TRUE;
-+ }
-+ 
-+ static pixman_bool_t
-+diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-+index c43172b..f980454 100644
-+--- a/pixman/pixman-private.h
-++++ b/pixman/pixman-private.h
-+@@ -10,6 +10,7 @@
-+ 
-+ #include "pixman.h"
-+ #include <time.h>
-++#include <string.h>
-+ #include <assert.h>
-+ #include <stdio.h>
-+ #include <string.h>
-+@@ -873,4 +874,46 @@ void pixman_timer_register (pixman_timer_t *timer);
-+ 
-+ #endif /* PIXMAN_TIMERS */
-+ 
-++/* a helper function, can blit 8-bit images with src/dst overlapping support */
-++static inline void
-++pixman_blt_helper (uint8_t *src_bytes,
-++                   uint8_t *dst_bytes,
-++                   int      src_stride,
-++                   int      dst_stride,
-++                   int      width,
-++                   int      height)
-++{
-++    /*
-++     * The second part of this check is not strictly needed, but it prevents
-++     * unnecessary upside-down processing of areas which belong to different
-++     * images. Upside-down processing can be slower with fixed-distance-ahead
-++     * prefetch and perceived as having more tearing.
-++     */
-++    if (src_bytes < dst_bytes + width &&
-++	src_bytes + src_stride * height > dst_bytes)
-++    {
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++	/* Horizontal scrolling to the left needs memmove */
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return;
-++	}
-++    }
-++    while (--height >= 0)
-++    {
-++	memcpy (dst_bytes, src_bytes, width);
-++	dst_bytes += dst_stride;
-++	src_bytes += src_stride;
-++    }
-++}
-++
-+ #endif /* PIXMAN_PRIVATE_H */
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-new file mode 100644
-index 0000000..6e2d492
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-@@ -0,0 +1,91 @@
-+From 47b31f936641da07431093ede340465625bfcb3d Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 22 Oct 2009 05:45:47 +0300
-+Subject: [PATCH 2/8] Support of overlapping src/dst for pixman_blt_mmx
-+
-+---
-+ pixman/pixman-mmx.c |   55 +++++++++++++++++++++++++++++---------------------
-+ 1 files changed, 32 insertions(+), 23 deletions(-)
-+
-+diff --git a/pixman/pixman-mmx.c b/pixman/pixman-mmx.c
-+index e936c4c..2413197 100644
-+--- a/pixman/pixman-mmx.c
-++++ b/pixman/pixman-mmx.c
-+@@ -2996,34 +2996,43 @@ pixman_blt_mmx (uint32_t *src_bits,
-+ {
-+     uint8_t *   src_bytes;
-+     uint8_t *   dst_bytes;
-+-    int byte_width;
-++    int         bpp;
-+ 
-+-    if (src_bpp != dst_bpp)
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-+-    if (src_bpp == 16)
-+-    {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
-+-	src_bytes = (uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 2 * width;
-+-	src_stride *= 2;
-+-	dst_stride *= 2;
-+-    }
-+-    else if (src_bpp == 32)
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
-+     {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
-+-	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 4 * width;
-+-	src_stride *= 4;
-+-	dst_stride *= 4;
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-+     }
-+-    else
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-+     {
-+-	return FALSE;
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using MMX */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-+     }
-+ 
-+     while (height--)
-+@@ -3033,7 +3042,7 @@ pixman_blt_mmx (uint32_t *src_bits,
-+ 	uint8_t *d = dst_bytes;
-+ 	src_bytes += src_stride;
-+ 	dst_bytes += dst_stride;
-+-	w = byte_width;
-++	w = width;
-+ 
-+ 	while (w >= 2 && ((unsigned long)d & 3))
-+ 	{
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-new file mode 100644
-index 0000000..910f62e
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-@@ -0,0 +1,91 @@
-+From 13be027637602fffda3b3cb6e171d8d6a67b3b4b Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 22 Oct 2009 05:45:54 +0300
-+Subject: [PATCH 3/8] Support of overlapping src/dst for pixman_blt_sse2
-+
-+---
-+ pixman/pixman-sse2.c |   55 +++++++++++++++++++++++++++++--------------------
-+ 1 files changed, 32 insertions(+), 23 deletions(-)
-+
-+diff --git a/pixman/pixman-sse2.c b/pixman/pixman-sse2.c
-+index 5907de0..25015ae 100644
-+--- a/pixman/pixman-sse2.c
-++++ b/pixman/pixman-sse2.c
-+@@ -5027,34 +5027,43 @@ pixman_blt_sse2 (uint32_t *src_bits,
-+ {
-+     uint8_t *   src_bytes;
-+     uint8_t *   dst_bytes;
-+-    int byte_width;
-++    int         bpp;
-+ 
-+-    if (src_bpp != dst_bpp)
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-+-    if (src_bpp == 16)
-+-    {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
-+-	src_bytes =(uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 2 * width;
-+-	src_stride *= 2;
-+-	dst_stride *= 2;
-+-    }
-+-    else if (src_bpp == 32)
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
-+     {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
-+-	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 4 * width;
-+-	src_stride *= 4;
-+-	dst_stride *= 4;
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-+     }
-+-    else
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-+     {
-+-	return FALSE;
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using SSE2 */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-+     }
-+ 
-+     while (height--)
-+@@ -5064,7 +5073,7 @@ pixman_blt_sse2 (uint32_t *src_bits,
-+ 	uint8_t *d = dst_bytes;
-+ 	src_bytes += src_stride;
-+ 	dst_bytes += dst_stride;
-+-	w = byte_width;
-++	w = width;
-+ 
-+ 	while (w >= 2 && ((unsigned long)d & 3))
-+ 	{
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-new file mode 100644
-index 0000000..f6aa979
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-@@ -0,0 +1,94 @@
-+From a913cc05a1a1c5a813cf06d248334edede9caab7 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Wed, 18 Nov 2009 06:08:48 +0200
-+Subject: [PATCH 4/8] Support of overlapping src/dst for pixman_blt_neon
-+
-+---
-+ pixman/pixman-arm-neon.c |   62 +++++++++++++++++++++++++++++++++++++--------
-+ 1 files changed, 51 insertions(+), 11 deletions(-)
-+
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index be5d403..cbfd7cf 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -176,26 +176,66 @@ pixman_blt_neon (uint32_t *src_bits,
-+                  int       width,
-+                  int       height)
-+ {
-+-    if (src_bpp != dst_bpp)
-++    uint8_t *   src_bytes;
-++    uint8_t *   dst_bytes;
-++    int         bpp;
-++
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
-++    {
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-++    }
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-++    {
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using NEON */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-++    }
-++
-+     switch (src_bpp)
-+     {
-+     case 16:
-+ 	pixman_composite_src_0565_0565_asm_neon (
-+-		width, height,
-+-		(uint16_t *)(((char *) dst_bits) +
-+-		dst_y * dst_stride * 4 + dst_x * 2), dst_stride * 2,
-+-		(uint16_t *)(((char *) src_bits) +
-+-		src_y * src_stride * 4 + src_x * 2), src_stride * 2);
-++		width >> 1,
-++		height,
-++		(uint16_t *) dst_bytes,
-++		dst_stride >> 1,
-++		(uint16_t *) src_bytes,
-++		src_stride >> 1);
-+ 	return TRUE;
-+     case 32:
-+ 	pixman_composite_src_8888_8888_asm_neon (
-+-		width, height,
-+-		(uint32_t *)(((char *) dst_bits) +
-+-		dst_y * dst_stride * 4 + dst_x * 4), dst_stride,
-+-		(uint32_t *)(((char *) src_bits) +
-+-		src_y * src_stride * 4 + src_x * 4), src_stride);
-++		width >> 2,
-++		height,
-++		(uint32_t *) dst_bytes,
-++		dst_stride >> 2,
-++		(uint32_t *) src_bytes,
-++		src_stride >> 2);
-+ 	return TRUE;
-+     default:
-+ 	return FALSE;
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-new file mode 100644
-index 0000000..dbe98b3
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-@@ -0,0 +1,109 @@
-+From f75e9d1868e21dd75ff3a2ca3561546d23877ddb Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 10 Dec 2009 00:51:50 +0200
-+Subject: [PATCH 5/8] ARM: added NEON optimizations for fetch/store r5g6b5 scanline
-+
-+---
-+ pixman/pixman-arm-neon-asm.S |   20 ++++++++++++++++++++
-+ pixman/pixman-arm-neon.c     |   40 ++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 60 insertions(+), 0 deletions(-)
-+
-+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
-+index e4db5cd..c79ba81 100644
-+--- a/pixman/pixman-arm-neon-asm.S
-++++ b/pixman/pixman-arm-neon-asm.S
-+@@ -459,6 +459,16 @@ generate_composite_function \
-+     pixman_composite_src_8888_0565_process_pixblock_tail, \
-+     pixman_composite_src_8888_0565_process_pixblock_tail_head
-+ 
-++generate_composite_function_single_scanline \
-++    pixman_store_scanline_r5g6b5_asm_neon, 32, 0, 16, \
-++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
-++    8, /* number of pixels, processed in a single block */ \
-++    default_init, \
-++    default_cleanup, \
-++    pixman_composite_src_8888_0565_process_pixblock_head, \
-++    pixman_composite_src_8888_0565_process_pixblock_tail, \
-++    pixman_composite_src_8888_0565_process_pixblock_tail_head
-++
-+ /******************************************************************************/
-+ 
-+ .macro pixman_composite_src_0565_8888_process_pixblock_head
-+@@ -494,6 +504,16 @@ generate_composite_function \
-+     pixman_composite_src_0565_8888_process_pixblock_tail, \
-+     pixman_composite_src_0565_8888_process_pixblock_tail_head
-+ 
-++generate_composite_function_single_scanline \
-++    pixman_fetch_scanline_r5g6b5_asm_neon, 16, 0, 32, \
-++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
-++    8, /* number of pixels, processed in a single block */ \
-++    default_init, \
-++    default_cleanup, \
-++    pixman_composite_src_0565_8888_process_pixblock_head, \
-++    pixman_composite_src_0565_8888_process_pixblock_tail, \
-++    pixman_composite_src_0565_8888_process_pixblock_tail_head
-++
-+ /******************************************************************************/
-+ 
-+ .macro pixman_composite_add_8_8_process_pixblock_head
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index cbfd7cf..f88c8f8 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -392,6 +392,42 @@ BIND_COMBINE_U (over)
-+ BIND_COMBINE_U (add)
-+ BIND_COMBINE_U (out_reverse)
-+ 
-++void
-++pixman_fetch_scanline_r5g6b5_asm_neon (int             width,
-++                                       uint32_t       *buffer,
-++                                       const uint16_t *pixel);
-++void
-++pixman_store_scanline_r5g6b5_asm_neon (int             width,
-++                                       uint16_t       *pixel,
-++                                       const uint32_t *values);
-++
-++static void
-++neon_fetch_scanline_r5g6b5 (pixman_image_t *image,
-++                            int             x,
-++                            int             y,
-++                            int             width,
-++                            uint32_t *      buffer,
-++                            const uint32_t *mask)
-++{
-++    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
-++    const uint16_t *pixel = (const uint16_t *)bits + x;
-++
-++    pixman_fetch_scanline_r5g6b5_asm_neon (width, buffer, pixel);
-++}
-++
-++static void
-++neon_store_scanline_r5g6b5 (bits_image_t *  image,
-++                            int             x,
-++                            int             y,
-++                            int             width,
-++                            const uint32_t *values)
-++{
-++    uint32_t *bits = image->bits + image->rowstride * y;
-++    uint16_t *pixel = ((uint16_t *) bits) + x;
-++
-++    pixman_store_scanline_r5g6b5_asm_neon (width, pixel, values);
-++}
-++
-+ pixman_implementation_t *
-+ _pixman_implementation_create_arm_neon (void)
-+ {
-+@@ -407,6 +443,10 @@ _pixman_implementation_create_arm_neon (void)
-+     imp->combine_32[PIXMAN_OP_ADD] = neon_combine_add_u;
-+     imp->combine_32[PIXMAN_OP_OUT_REVERSE] = neon_combine_out_reverse_u;
-+ 
-++    _pixman_bits_override_accessors (PIXMAN_r5g6b5,
-++                                     neon_fetch_scanline_r5g6b5,
-++                                     neon_store_scanline_r5g6b5);
-++
-+     imp->blt = arm_neon_blt;
-+     imp->fill = arm_neon_fill;
-+ 
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
-new file mode 100644
-index 0000000..d050646
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
-@@ -0,0 +1,148 @@
-+From a1cd695c5e22f0f4a2b7272fab675a3cc510bacb Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 23 Sep 2010 21:10:56 +0300
-+Subject: [PATCH 6/8] ARM: added NEON optimizations for fetch/store a8 scanline
-+
-+---
-+ pixman/pixman-arm-neon-asm.S |   64 ++++++++++++++++++++++++++++++++++++++++++
-+ pixman/pixman-arm-neon.c     |   42 +++++++++++++++++++++++++++
-+ 2 files changed, 106 insertions(+), 0 deletions(-)
-+
-+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
-+index c79ba81..ca0825c 100644
-+--- a/pixman/pixman-arm-neon-asm.S
-++++ b/pixman/pixman-arm-neon-asm.S
-+@@ -418,6 +418,70 @@ generate_composite_function \
-+ 
-+ /******************************************************************************/
-+ 
-++.macro pixman_composite_src_8_8888_process_pixblock_head
-++    /* This is tricky part: we can't set these values just once in 'init' macro
-++     * because leading/trailing pixels handling part uses VZIP.8 instructions,
-++     * and they operate on values in-place and destroy original registers
-++     * content. Think about it like VST4.8 instruction corrupting NEON
-++     * registers after write in 'tail_head' macro. Except that 'tail_head'
-++     * macro itself actually does not need these extra VMOVs because it uses
-++     * real VST4.8 instruction.
-++     */
-++    vmov.u8     q0, #0
-++    vmov.u8     d2, #0
-++.endm
-++
-++.macro pixman_composite_src_8_8888_process_pixblock_tail
-++.endm
-++
-++.macro pixman_composite_src_8_8888_process_pixblock_tail_head
-++    vst4.8      {d0, d1, d2, d3}, [DST_W, :128]!
-++    vld1.8      {d3}, [SRC]!
-++.endm
-++
-++generate_composite_function_single_scanline \
-++    pixman_fetch_scanline_a8_asm_neon, 8, 0, 32, \
-++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
-++    8, /* number of pixels, processed in a single block */ \
-++    default_init, \
-++    default_cleanup, \
-++    pixman_composite_src_8_8888_process_pixblock_head, \
-++    pixman_composite_src_8_8888_process_pixblock_tail, \
-++    pixman_composite_src_8_8888_process_pixblock_tail_head, \
-++    0,  /* dst_w_basereg */ \
-++    0,  /* dst_r_basereg */ \
-++    3,  /* src_basereg   */ \
-++    0   /* mask_basereg  */
-++
-++/******************************************************************************/
-++
-++.macro pixman_composite_src_8888_8_process_pixblock_head
-++.endm
-++
-++.macro pixman_composite_src_8888_8_process_pixblock_tail
-++.endm
-++
-++.macro pixman_composite_src_8888_8_process_pixblock_tail_head
-++    vst1.8      {d3}, [DST_W, :64]!
-++    vld4.8      {d0, d1, d2, d3}, [SRC]!
-++.endm
-++
-++generate_composite_function_single_scanline \
-++    pixman_store_scanline_a8_asm_neon, 32, 0, 8, \
-++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
-++    8, /* number of pixels, processed in a single block */ \
-++    default_init, \
-++    default_cleanup, \
-++    pixman_composite_src_8888_8_process_pixblock_head, \
-++    pixman_composite_src_8888_8_process_pixblock_tail, \
-++    pixman_composite_src_8888_8_process_pixblock_tail_head, \
-++    3,  /* dst_w_basereg */ \
-++    0,  /* dst_r_basereg */ \
-++    0,  /* src_basereg   */ \
-++    0   /* mask_basereg  */
-++
-++/******************************************************************************/
-++
-+ .macro pixman_composite_src_8888_0565_process_pixblock_head
-+     vshll.u8    q8, d1, #8
-+     vshll.u8    q14, d2, #8
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index f88c8f8..43091d2 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -428,6 +428,45 @@ neon_store_scanline_r5g6b5 (bits_image_t *  image,
-+     pixman_store_scanline_r5g6b5_asm_neon (width, pixel, values);
-+ }
-+ 
-++void
-++pixman_fetch_scanline_a8_asm_neon (int             width,
-++                                   uint32_t       *buffer,
-++                                   const uint8_t  *pixel);
-++
-++
-++void
-++pixman_store_scanline_a8_asm_neon (int             width,
-++                                   uint8_t        *pixel,
-++                                   const uint32_t *values);
-++
-++static void
-++neon_fetch_scanline_a8 (pixman_image_t *image,
-++                        int             x,
-++                        int             y,
-++                        int             width,
-++                        uint32_t *      buffer,
-++                        const uint32_t *mask)
-++{
-++    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
-++    const uint8_t *pixel = (const uint8_t *) bits + x;
-++
-++    pixman_fetch_scanline_a8_asm_neon (width, buffer, pixel);
-++}
-++
-++static void
-++neon_store_scanline_a8 (bits_image_t *  image,
-++                        int             x,
-++                        int             y,
-++                        int             width,
-++                        const uint32_t *values)
-++{
-++    uint32_t *bits = image->bits + image->rowstride * y;
-++    uint8_t *pixel = (uint8_t *) bits + x;
-++
-++    pixman_store_scanline_a8_asm_neon (width, pixel, values);
-++}
-++
-++
-+ pixman_implementation_t *
-+ _pixman_implementation_create_arm_neon (void)
-+ {
-+@@ -446,6 +485,9 @@ _pixman_implementation_create_arm_neon (void)
-+     _pixman_bits_override_accessors (PIXMAN_r5g6b5,
-+                                      neon_fetch_scanline_r5g6b5,
-+                                      neon_store_scanline_r5g6b5);
-++    _pixman_bits_override_accessors (PIXMAN_a8,
-++                                     neon_fetch_scanline_a8,
-++                                     neon_store_scanline_a8);
-+ 
-+     imp->blt = arm_neon_blt;
-+     imp->fill = arm_neon_fill;
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
-new file mode 100644
-index 0000000..7f28f47
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
-@@ -0,0 +1,77 @@
-+From d6ae7da60cc797900b5eff0786536c4a11ab0f50 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Fri, 24 Sep 2010 18:22:44 +0300
-+Subject: [PATCH 7/8] ARM: added NEON optimizations for fetching x8r8g8b8 scanline
-+
-+---
-+ pixman/pixman-arm-neon-asm.S |   14 ++++++++++++++
-+ pixman/pixman-arm-neon.c     |   21 +++++++++++++++++++++
-+ 2 files changed, 35 insertions(+), 0 deletions(-)
-+
-+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
-+index ca0825c..ffd0b83 100644
-+--- a/pixman/pixman-arm-neon-asm.S
-++++ b/pixman/pixman-arm-neon-asm.S
-+@@ -1206,6 +1206,20 @@ generate_composite_function \
-+     0, /* src_basereg   */ \
-+     0  /* mask_basereg  */
-+ 
-++generate_composite_function_single_scanline \
-++    pixman_fetch_scanline_x888_asm_neon, 32, 0, 32, \
-++    FLAG_DST_WRITEONLY, \
-++    8, /* number of pixels, processed in a single block */ \
-++    pixman_composite_src_x888_8888_init, \
-++    default_cleanup, \
-++    pixman_composite_src_x888_8888_process_pixblock_head, \
-++    pixman_composite_src_x888_8888_process_pixblock_tail, \
-++    pixman_composite_src_x888_8888_process_pixblock_tail_head, \
-++    0,  /* dst_w_basereg */ \
-++    0,  /* dst_r_basereg */ \
-++    0,  /* src_basereg   */ \
-++    0   /* mask_basereg  */
-++
-+ /******************************************************************************/
-+ 
-+ .macro pixman_composite_over_n_8_8888_process_pixblock_head
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index 43091d2..f84b5e6 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -466,6 +466,24 @@ neon_store_scanline_a8 (bits_image_t *  image,
-+     pixman_store_scanline_a8_asm_neon (width, pixel, values);
-+ }
-+ 
-++void
-++pixman_fetch_scanline_x888_asm_neon (int             width,
-++                                     uint32_t       *buffer,
-++                                     const uint32_t *pixel);
-++
-++static void
-++neon_fetch_scanline_x888 (pixman_image_t *image,
-++                          int             x,
-++                          int             y,
-++                          int             width,
-++                          uint32_t *      buffer,
-++                          const uint32_t *mask)
-++{
-++    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
-++    const uint32_t *pixel = (const uint32_t *) bits + x;
-++
-++    pixman_fetch_scanline_x888_asm_neon (width, buffer, pixel);
-++}
-+ 
-+ pixman_implementation_t *
-+ _pixman_implementation_create_arm_neon (void)
-+@@ -488,6 +506,9 @@ _pixman_implementation_create_arm_neon (void)
-+     _pixman_bits_override_accessors (PIXMAN_a8,
-+                                      neon_fetch_scanline_a8,
-+                                      neon_store_scanline_a8);
-++    _pixman_bits_override_accessors (PIXMAN_x8r8g8b8,
-++                                     neon_fetch_scanline_x888,
-++                                     NULL);
-+ 
-+     imp->blt = arm_neon_blt;
-+     imp->fill = arm_neon_fill;
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman-0.20.0/0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch b/recipes/obsolete/xorg-lib/pixman-0.20.0/0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch
-new file mode 100644
-index 0000000..6efdb62
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman-0.20.0/0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch
-@@ -0,0 +1,172 @@
-+From e1191ad6563a1fb02a45982b1c4d7fed3c655e97 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Mon, 4 Oct 2010 01:56:59 +0300
-+Subject: [PATCH 8/8] ARM optimization for scaled src_0565_0565 operation with nearest filter
-+
-+The code actually uses only armv4t instructions.
-+
-+Benchmark from ARM11:
-+
-+    == before ==
-+    op=1, src_fmt=10020565, dst_fmt=10020565, speed=34.86 MPix/s
-+
-+    == after ==
-+    op=1, src_fmt=10020565, dst_fmt=10020565, speed=36.62 MPix/s
-+
-+Benchmark from ARM Cortex-A8:
-+
-+    == before ==
-+    op=1, src_fmt=10020565, dst_fmt=10020565, speed=89.55 MPix/s
-+
-+    == after ==
-+    op=1, src_fmt=10020565, dst_fmt=10020565, speed=94.91 MPix/s
-+---
-+ pixman/pixman-arm-simd-asm.S |   66 ++++++++++++++++++++++++++++++++++++++++++
-+ pixman/pixman-arm-simd.c     |   37 +++++++++++++++++++++++
-+ 2 files changed, 103 insertions(+), 0 deletions(-)
-+
-+diff --git a/pixman/pixman-arm-simd-asm.S b/pixman/pixman-arm-simd-asm.S
-+index a3d2d40..b6f69db 100644
-+--- a/pixman/pixman-arm-simd-asm.S
-++++ b/pixman/pixman-arm-simd-asm.S
-+@@ -1,5 +1,6 @@
-+ /*
-+  * Copyright © 2008 Mozilla Corporation
-++ * Copyright © 2010 Nokia Corporation
-+  *
-+  * Permission to use, copy, modify, distribute, and sell this software and its
-+  * documentation for any purpose is hereby granted without fee, provided that
-+@@ -328,3 +329,68 @@ pixman_asm_function pixman_composite_over_n_8_8888_asm_armv6
-+ 	pop	{r4, r5, r6, r7, r8, r9, r10, r11}
-+ 	bx	lr
-+ .endfunc
-++
-++/*
-++ * Note: This function is actually primarily optimized for ARM Cortex-A8
-++ * pipeline. In order to get good performance on ARM9/ARM11 cores (which
-++ * don't have efficient write combining), it needs to be changed to use
-++ * 16-byte aligned writes using STM instruction.
-++ */
-++pixman_asm_function pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6
-++	DST	.req	r0
-++	SRC	.req	r1
-++	W	.req	r2
-++	VX	.req	r3
-++	UNIT_X	.req	r12
-++	TMP1	.req	r4
-++	TMP2	.req	r5
-++	MASK	.req	r6
-++	ldr	UNIT_X, [sp]
-++	push	{r4, r5, r6, r7}
-++	mvn	MASK, #1
-++
-++	/* define helper macro */
-++	.macro	scale_2_pixels
-++		ldrh	TMP1, [SRC, TMP1]
-++		and	TMP2, MASK, VX, lsr #15
-++		add	VX, VX, UNIT_X
-++		strh	TMP1, [DST], #2
-++
-++		ldrh	TMP2, [SRC, TMP2]
-++		and	TMP1, MASK, VX, lsr #15
-++		add	VX, VX, UNIT_X
-++		strh	TMP2, [DST], #2
-++	.endm
-++
-++	/* now do the scaling */
-++	and	TMP1, MASK, VX, lsr #15
-++	add	VX, VX, UNIT_X
-++	subs	W, #4
-++	blt	2f
-++1: /* main loop, process 4 pixels per iteration */
-++	scale_2_pixels
-++	scale_2_pixels
-++	subs	W, W, #4
-++	bge	1b
-++2:
-++	tst	W, #2
-++	beq	2f
-++	scale_2_pixels
-++2:
-++	tst	W, #1
-++	ldrneh	TMP1, [SRC, TMP1]
-++	strneh	TMP1, [DST], #2
-++	/* cleanup helper macro */
-++	.purgem	scale_2_pixels
-++	.unreq	DST
-++	.unreq	SRC
-++	.unreq	W
-++	.unreq	VX
-++	.unreq	UNIT_X
-++	.unreq	TMP1
-++	.unreq	TMP2
-++	.unreq	MASK
-++	/* return */
-++	pop	{r4, r5, r6, r7}
-++	bx	lr
-++.endfunc
-+diff --git a/pixman/pixman-arm-simd.c b/pixman/pixman-arm-simd.c
-+index d466a31..f6f464c 100644
-+--- a/pixman/pixman-arm-simd.c
-++++ b/pixman/pixman-arm-simd.c
-+@@ -29,6 +29,7 @@
-+ 
-+ #include "pixman-private.h"
-+ #include "pixman-arm-common.h"
-++#include "pixman-fast-path.h"
-+ 
-+ #if 0 /* This code was moved to 'pixman-arm-simd-asm.S' */
-+ 
-+@@ -375,6 +376,35 @@ pixman_composite_over_n_8_8888_asm_armv6 (int32_t   width,
-+ 
-+ #endif
-+ 
-++void
-++pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6 (uint16_t *      dst,
-++						      uint16_t *      src,
-++						      int32_t         w,
-++						      pixman_fixed_t  vx,
-++						      pixman_fixed_t  unit_x);
-++
-++static force_inline void
-++scaled_nearest_scanline_armv6_565_565_SRC (uint16_t *      dst,
-++					   uint16_t *      src,
-++					   int32_t         w,
-++					   pixman_fixed_t  vx,
-++					   pixman_fixed_t  unit_x,
-++					   pixman_fixed_t  max_vx)
-++{
-++    pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6 (dst, src, w,
-++							  vx, unit_x);
-++}
-++
-++FAST_NEAREST_MAINLOOP (armv6_565_565_cover_SRC,
-++		       scaled_nearest_scanline_armv6_565_565_SRC,
-++		       uint16_t, uint16_t, COVER);
-++FAST_NEAREST_MAINLOOP (armv6_565_565_none_SRC,
-++		       scaled_nearest_scanline_armv6_565_565_SRC,
-++		       uint16_t, uint16_t, NONE);
-++FAST_NEAREST_MAINLOOP (armv6_565_565_pad_SRC,
-++		       scaled_nearest_scanline_armv6_565_565_SRC,
-++		       uint16_t, uint16_t, PAD);
-++
-+ PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (armv6, add_8_8,
-+                                    uint8_t, 1, uint8_t, 1)
-+ PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (armv6, over_8888_8888,
-+@@ -404,6 +434,13 @@ static const pixman_fast_path_t arm_simd_fast_paths[] =
-+     PIXMAN_STD_FAST_PATH (OVER, solid, a8, a8b8g8r8, armv6_composite_over_n_8_8888),
-+     PIXMAN_STD_FAST_PATH (OVER, solid, a8, x8b8g8r8, armv6_composite_over_n_8_8888),
-+ 
-++    SIMPLE_NEAREST_FAST_PATH_COVER (SRC, r5g6b5, r5g6b5, armv6_565_565),
-++    SIMPLE_NEAREST_FAST_PATH_COVER (SRC, b5g6r5, b5g6r5, armv6_565_565),
-++    SIMPLE_NEAREST_FAST_PATH_NONE (SRC, r5g6b5, r5g6b5, armv6_565_565),
-++    SIMPLE_NEAREST_FAST_PATH_NONE (SRC, b5g6r5, b5g6r5, armv6_565_565),
-++    SIMPLE_NEAREST_FAST_PATH_PAD (SRC, r5g6b5, r5g6b5, armv6_565_565),
-++    SIMPLE_NEAREST_FAST_PATH_PAD (SRC, b5g6r5, b5g6r5, armv6_565_565),
-++
-+     { PIXMAN_OP_NONE },
-+ };
-+ 
-+-- 
-+1.6.6.1
-+
-diff --git a/recipes/obsolete/xorg-lib/pixman_0.12.0.bb b/recipes/obsolete/xorg-lib/pixman_0.12.0.bb
-new file mode 100644
-index 0000000..fcf0c14
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman_0.12.0.bb
++++ b/recipes/obsolete/xorg-app/mkfontscale_1.0.7.bb
 @@ -0,0 +1,9 @@
-+require pixman.inc
-+PR = "${INC_PR}.0"
++require xorg-app-common.inc
++DESCRIPTION = "a program to create an index of scalable font files for X"
++DEPENDS += " zlib libfontenc freetype "
++PR = "${INC_PR}.1"
 +
-+SRC_URI += " \
-+           file://pixman-arm.patch \
-+           file://pixman-x888-565.patch \
-+          "
-+SRC_URI[archive.md5sum] = "09357cc74975b01714e00c5899ea1881"
-+SRC_URI[archive.sha256sum] = "2b16516ef147bb604e1cf50c883143a052a7ff92d2930b70e571da0603b7d9ce"
-diff --git a/recipes/obsolete/xorg-lib/pixman_0.16.2.bb b/recipes/obsolete/xorg-lib/pixman_0.16.2.bb
++SRC_URI[archive.md5sum] = "96ca346f185c0ab48e42bf5bb0375da5"
++SRC_URI[archive.sha256sum] = "8306b229cca233216a6582cb1ff60af78e37c47d6412ac823d7d41c3d7de7127"
++
++BBCLASSEXTEND = "native"
+diff --git a/recipes/obsolete/xorg-app/oclock_1.0.1.bb b/recipes/obsolete/xorg-app/oclock_1.0.1.bb
 new file mode 100644
-index 0000000..399bb6a
+index 0000000..1ffa51a
 --- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman_0.16.2.bb
++++ b/recipes/obsolete/xorg-app/oclock_1.0.1.bb
 @@ -0,0 +1,7 @@
-+require pixman.inc
-+PR = "${INC_PR}.1"
-+
-+SRC_URI[archive.md5sum] = "02bd3669f53c404c19980d5efb6f86fb"
-+SRC_URI[archive.sha256sum] = "05f78c2fd3a5f054c0d716e8ba1b67a0c04a7a7e642d6946828ec383b389d185"
-+
-+EXTRA_OECONF = "--disable-gtk"
-diff --git a/recipes/obsolete/xorg-lib/pixman_0.18.4.bb b/recipes/obsolete/xorg-lib/pixman_0.18.4.bb
-new file mode 100644
-index 0000000..286477a
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman_0.18.4.bb
-@@ -0,0 +1,21 @@
-+require pixman.inc
-+PR = "${INC_PR}.1"
-+
-+SRC_URI[archive.md5sum] = "532db4194e18c108d0b7dd85f20d39b8"
-+SRC_URI[archive.sha256sum] = "1484092277c5187f5458229a2b7fd7fbc0cb07e1f220c7f8f9ac65de6dba7989"
-+SRC_URI += "\
-+           file://0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch\
-+           file://0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch\
-+           file://0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch\
-+           file://0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch\
-+           file://0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch\
-+           file://0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch\
-+           file://0007-ARM-added-missing-cache-preload.patch\
-+           file://565-over-neon.patch \
-+           file://neon-reverse-u.patch \
-+"
-+
-+NEON = " --disable-arm-neon "
-+NEON_armv7a = " "
-+
-+EXTRA_OECONF = "${NEON} --disable-gtk"
-diff --git a/recipes/obsolete/xorg-lib/pixman_0.20.0.bb b/recipes/obsolete/xorg-lib/pixman_0.20.0.bb
-new file mode 100644
-index 0000000..b3fbd4f
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/pixman_0.20.0.bb
-@@ -0,0 +1,23 @@
-+require pixman.inc
-+
-+SRC_URI[archive.md5sum] = "c1a31d5cedfa97c5af7148a2d1fd4356"
-+SRC_URI[archive.sha256sum] = "9c02c22c6cc3f28f3633d02ef6f0cac130518f621edb011ebbbf08cd1a81251a"
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI += "\
-+           file://0000-Add-pixman_bits_override_accessors.patch \
-+           file://0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch \
-+           file://0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch \
-+           file://0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch \
-+           file://0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch \
-+           file://0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch \
-+           file://0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch \
-+           file://0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch \
-+           file://0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch \
-+"
-+
-+NEON = " --disable-arm-neon "
-+NEON_armv7a = " "
-+
-+EXTRA_OECONF = "${NEON} --disable-gtk"
-diff --git a/recipes/obsolete/xorg-lib/xtrans_1.2.5.bb b/recipes/obsolete/xorg-lib/xtrans_1.2.5.bb
-new file mode 100644
-index 0000000..e6e3714
---- /dev/null
-+++ b/recipes/obsolete/xorg-lib/xtrans_1.2.5.bb
-@@ -0,0 +1,13 @@
-+require xorg-lib-common.inc
-+DESCRIPTION = "network API translation layer to insulate X applications and \
-+libraries from OS network vageries."
-+RDEPENDS_${PN}-dev = ""
++require xorg-app-common.inc
++DEPENDS += " libxmu libxext libxt"
 +PE = "1"
 +PR = "${INC_PR}.0"
 +
-+SRC_URI[archive.md5sum] = "2d1e57e82acc5f21797e92341415af2f"
-+SRC_URI[archive.sha256sum] = "cc71a391f4da8176e5daeeac1ddf5137ba5e8d2263cb93a49f9e2a9976b90899"
++SRC_URI[archive.md5sum] = "91f49547f9ed3cd0137c8b7c3183e360"
++SRC_URI[archive.sha256sum] = "49ab7d4f6402fbbe30714012ee38b49da17789f3a29ac41917987ce18c74217c"
+diff --git a/recipes/obsolete/xorg-app/proxymngr_1.0.1.bb b/recipes/obsolete/xorg-app/proxymngr_1.0.1.bb
+new file mode 100644
+index 0000000..a7cea51
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/proxymngr_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libice libxt xproxymngproto"
++PE = "1"
++PR = "${INC_PR}.0"
 +
-+ALLOW_EMPTY = "1"
++SRC_URI[archive.md5sum] = "aad44d0f65b97fd6d564b1d2ae510bb1"
++SRC_URI[archive.sha256sum] = "e9f5d4553411562477a0605fb0f0ec728016499e37230138a5e207dec79525c5"
+diff --git a/recipes/obsolete/xorg-app/rendercheck_1.3.bb b/recipes/obsolete/xorg-app/rendercheck_1.3.bb
+new file mode 100644
+index 0000000..911a093
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/rendercheck_1.3.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DESCRIPTION = "a program to test Render extension implementations"
++DEPENDS += "libxrender"
++PR = "${INC_PR}.0"
 +
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/recipes/xorg-lib/libdmx_1.1.0.bb b/recipes/xorg-lib/libdmx_1.1.0.bb
++SRC_URI[archive.md5sum] = "eb6a358b79b0aeaf03d56c5e1f394365"
++SRC_URI[archive.sha256sum] = "60e83bebab37c2754ae77cc359c0b67e8bc72b46821c7fa260ccc5c811bd741f"
+diff --git a/recipes/obsolete/xorg-app/rgb_1.0.3.bb b/recipes/obsolete/xorg-app/rgb_1.0.3.bb
+new file mode 100644
+index 0000000..b4eb11c
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/rgb_1.0.3.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DEPENDS += " xproto util-macros"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "44ea16cc3104de6401bc74035f642357"
++SRC_URI[archive.sha256sum] = "162111c0192c8f78e99a6ee9a3df5eb149251c5800896c993399da005ec7fe95"
++
++FILES_${PN} += "${datadir}/X11"
+diff --git a/recipes/obsolete/xorg-app/rstart_1.0.3.bb b/recipes/obsolete/xorg-app/rstart_1.0.3.bb
+new file mode 100644
+index 0000000..b82c821
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/rstart_1.0.3.bb
+@@ -0,0 +1,6 @@
++require xorg-app-common.inc
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "e09c14cf1ac78260f95a9aa45bccab4c"
++SRC_URI[archive.sha256sum] = "d6ee7becf9ece2fcc30ce50f7e9be31f231cce0cb3a8ba09d1697ac2822c3fcc"
+diff --git a/recipes/obsolete/xorg-app/sessreg_1.0.5.bb b/recipes/obsolete/xorg-app/sessreg_1.0.5.bb
+new file mode 100644
+index 0000000..6fc2ee0
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/sessreg_1.0.5.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DESCRIPTION = "a simple program for managing utmp/wtmp entries"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "00e834c3cbfd990e9d7d5ddc834242df"
++SRC_URI[archive.sha256sum] = "3308fbd0018d53bb818fee9de1cde484965b740073d5d240efa4cfc881c9d1a9"
+diff --git a/recipes/obsolete/xorg-app/setxkbmap_1.1.0.bb b/recipes/obsolete/xorg-app/setxkbmap_1.1.0.bb
+new file mode 100644
+index 0000000..ba7b46e
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/setxkbmap_1.1.0.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxkbfile "
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "2f902e0a89aaf2b19e06e7f26c6efb3a"
++SRC_URI[archive.sha256sum] = "932f2b314a4bf6dfccd16d63c633073abf650d8e136f481904e972ef3d4faf64"
+diff --git a/recipes/obsolete/xorg-app/showfont_1.0.2.bb b/recipes/obsolete/xorg-app/showfont_1.0.2.bb
+new file mode 100644
+index 0000000..217745a
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/showfont_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libfs"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "8f83d774ed4cc2a6dca86edd856d820a"
++SRC_URI[archive.sha256sum] = "9bd0373659b2f24120dba887fd155f99aed02e4a7c2afae69e7db1c1fa05e88c"
+diff --git a/recipes/obsolete/xorg-app/smproxy_1.0.3.bb b/recipes/obsolete/xorg-app/smproxy_1.0.3.bb
+new file mode 100644
+index 0000000..3b44ef6
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/smproxy_1.0.3.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxt libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "ba7dbde81be24fc1bd4156b360e5f8cf"
++SRC_URI[archive.sha256sum] = "1b8dd25483280fc2a4a7d977b4a43dc4228b9c65e904c3d4ee68245705d4ae35"
+diff --git a/recipes/obsolete/xorg-app/twm_1.0.4.bb b/recipes/obsolete/xorg-app/twm_1.0.4.bb
+new file mode 100644
+index 0000000..96cbf14
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/twm_1.0.4.bb
+@@ -0,0 +1,13 @@
++require xorg-app-common.inc
++DESCRIPTION = "tiny window manager"
++DEPENDS += " libxext libxt libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "0865e14c73c08fa8c501ae877298ee9f"
++SRC_URI[archive.sha256sum] = "daa088f9ae231508929b7bd4746e942212b53f2802ca4cee450139fabc8de1fa"
++
++ALTERNATIVE_NAME = "x-window-manager"
++ALTERNATIVE_PATH = "${bindir}/twm"
++ALTERNATIVE_LINK = "${bindir}/x-window-manager"
++ALTERNATIVE_PRIORITY = "1"
+diff --git a/recipes/obsolete/xorg-app/viewres_1.0.1.bb b/recipes/obsolete/xorg-app/viewres_1.0.1.bb
+new file mode 100644
+index 0000000..60c9ef6
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/viewres_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "cdbed540daf7975b56000420c9aa5bf9"
++SRC_URI[archive.sha256sum] = "bf49cd45ffb197a6992b3b7c99c94161eaf7cf6a2b661d3905ac382bedce34b8"
+diff --git a/recipes/obsolete/xorg-app/x11perf_1.5.1.bb b/recipes/obsolete/xorg-app/x11perf_1.5.1.bb
+new file mode 100644
+index 0000000..76a0457
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/x11perf_1.5.1.bb
+@@ -0,0 +1,10 @@
++require xorg-app-common.inc
++DESCRIPTION = "X11 server performance test program"
++DEPENDS += "libxmu libxrender libxft libxext fontconfig"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "66e4aa4645f83809071eb69553ed0222"
++SRC_URI[archive.sha256sum] = "ab4c6a579f93fa9485ef5be8760a3da0d22acfa743f2114057c5262b77ff7056"
++
++FILES_${PN} += "/usr/lib/X11/x11perfcomp/*"
+diff --git a/recipes/obsolete/xorg-app/xauth_1.0.4.bb b/recipes/obsolete/xorg-app/xauth_1.0.4.bb
+new file mode 100644
+index 0000000..4233097
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xauth_1.0.4.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "X authority file utility"
++DEPENDS += "libxau libxext libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "fa00078c414c4a57cab7a6d89a0c8734"
++SRC_URI[archive.sha256sum] = "f91190c8b8bb18270b86b00f30da5684bb5e5bd1ed0ccf352322f8145e076a59"
+diff --git a/recipes/obsolete/xorg-app/xbacklight_1.1.1.bb b/recipes/obsolete/xorg-app/xbacklight_1.1.1.bb
+new file mode 100644
+index 0000000..a8d4825
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xbacklight_1.1.1.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "adjust backlight brightness using RandR extension"
++DEPENDS += " libxrender libxrandr"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "3e39eec6d0fd5c587ca6d55aa7bb8fe1"
++SRC_URI[archive.sha256sum] = "5d32d891c83b9c0089231f4f1c424ab02301b627ce26e5c2e6e397b8ea606fb2"
+diff --git a/recipes/obsolete/xorg-app/xbiff_1.0.1.bb b/recipes/obsolete/xorg-app/xbiff_1.0.1.bb
+new file mode 100644
+index 0000000..ac2eefb
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xbiff_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw xbitmaps libxext"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "404f5add4537d22dd109c33e518a5190"
++SRC_URI[archive.sha256sum] = "9845b1fa8a1cfd408f01fd69b66808068e847cdc925d114c7723c17934a96503"
+diff --git a/recipes/obsolete/xorg-app/xcalc_1.0.2.bb b/recipes/obsolete/xorg-app/xcalc_1.0.2.bb
+new file mode 100644
+index 0000000..b35ab5c
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xcalc_1.0.2.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "scientific calculator for X"
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "d31a99795b9668f047aa11bf36df6df0"
++SRC_URI[archive.sha256sum] = "96375e2d212e7249d14d0beac73c1a6d89252b5fcf571bd9f5c7303a14bb4a32"
+diff --git a/recipes/obsolete/xorg-app/xclipboard_1.1.0.bb b/recipes/obsolete/xorg-app/xclipboard_1.1.0.bb
+new file mode 100644
+index 0000000..7509998
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xclipboard_1.1.0.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "113eccea3ee73a1ef7b43d2291ca1e09"
++SRC_URI[archive.sha256sum] = "de0f37c7bf69c3aac3362bc0cbe470a622c2a85b62c5483c113ea88512232710"
+diff --git a/recipes/obsolete/xorg-app/xclock_1.0.4.bb b/recipes/obsolete/xorg-app/xclock_1.0.4.bb
+new file mode 100644
+index 0000000..ae74aea
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xclock_1.0.4.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "analog / digital clock for X"
++DEPENDS += " libxaw libxrender libxft libxkbfile libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "bb9fd5e00d39c348a0078b97fdf8258f"
++SRC_URI[archive.sha256sum] = "69b903b6305211c9fc5db394f3d08c0a696aa51942d73db7f594422e7be6edf0"
+diff --git a/recipes/obsolete/xorg-app/xcmsdb_1.0.2.bb b/recipes/obsolete/xorg-app/xcmsdb_1.0.2.bb
+new file mode 100644
+index 0000000..3a177a8
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xcmsdb_1.0.2.bb
+@@ -0,0 +1,6 @@
++require xorg-app-common.inc
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "7f2bed9f4dd3301d18d83eb296c3be0d"
++SRC_URI[archive.sha256sum] = "bfcac66634ea4d4a1607f1c8a4170e6089db13355357fc143281a6fc0216face"
+diff --git a/recipes/obsolete/xorg-app/xcompmgr_1.1.4.bb b/recipes/obsolete/xorg-app/xcompmgr_1.1.4.bb
+new file mode 100644
+index 0000000..d781958
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xcompmgr_1.1.4.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DESCRIPTION = "X Compositing Manager"
++PRIORITY = "optional"
++LICENSE = "BSD-X"
++DEPENDS += "libxdamage libxcomposite libxrender"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "3eb1c2b7a6ceaec4ee872cb06d202d91"
++SRC_URI[archive.sha256sum] = "4bf647745b4de940ef75796fc8ad4e1f83c276e474f7b6779f317fcd070de884"
+diff --git a/recipes/obsolete/xorg-app/xconsole_1.0.3.bb b/recipes/obsolete/xorg-app/xconsole_1.0.3.bb
+new file mode 100644
+index 0000000..3f8ffb6
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xconsole_1.0.3.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "monitor system console messages with X"
++DEPENDS += " libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "0e1a3110bebabecc2897d67a973526b0"
++SRC_URI[archive.sha256sum] = "1b1ec25fefad34f5c33c74474358c1f5a8702d8c04defc854826bccb7a46bc45"
+diff --git a/recipes/obsolete/xorg-app/xcursorgen_1.0.3.bb b/recipes/obsolete/xorg-app/xcursorgen_1.0.3.bb
+new file mode 100644
+index 0000000..65260e5
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xcursorgen_1.0.3.bb
+@@ -0,0 +1,10 @@
++require xorg-app-common.inc
++DESCRIPTION = "create an X cursor file from a collection of PNG images"
++DEPENDS += " libxcursor libpng"
++PE = "1"
++PR = "${INC_PR}.1"
++
++SRC_URI[archive.md5sum] = "69df079b3950a0db4e5f4e6f0e00ddee"
++SRC_URI[archive.sha256sum] = "ed5f3ffe881c21ffca85406e5a5f553ed4985cc5e9acdb535f682c33bebac254"
++
++BBCLASSEXTEND = "native"
+diff --git a/recipes/obsolete/xorg-app/xdbedizzy_1.0.2.bb b/recipes/obsolete/xorg-app/xdbedizzy_1.0.2.bb
+new file mode 100644
+index 0000000..63c04ee
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xdbedizzy_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxp libxprintutil libxp libxau libxext"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "ecef9cfd197d00980e0d69ee4126d890"
++SRC_URI[archive.sha256sum] = "74e882e9fee7ebeb274caf43071afff92531b8a41f34650376146a131166012d"
+diff --git a/recipes/obsolete/xorg-app/xditview_1.0.1.bb b/recipes/obsolete/xorg-app/xditview_1.0.1.bb
+new file mode 100644
+index 0000000..d23a028
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xditview_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "e9a7192ef29453b8c810ddd556a463c0"
++SRC_URI[archive.sha256sum] = "177194e5f83b31c2f934e3a0b573e8ae359edf2ef1a2403ee8e1dad383558117"
+diff --git a/recipes/obsolete/xorg-app/xdm_1.1.9.bb b/recipes/obsolete/xorg-app/xdm_1.1.9.bb
+new file mode 100644
+index 0000000..a6796b5
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xdm_1.1.9.bb
+@@ -0,0 +1,15 @@
++require xorg-app-common.inc
++DESCRIPTION = "X display manager"
++DEPENDS += " libxmu libxinerama libxpm libxdmcp libxau libxext libxdmcp libxt libxaw"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "030ae4bd9b8d428749d68bfdf56ce8a5"
++SRC_URI[archive.sha256sum] = "e7b1db0e1b0d0113a301d94e40b0314e55f7e0006415f50a9cf06f636b11b134"
++
++EXTRA_OECONF += "\
++        --with-random-device=/dev/urandom --with-utmp-file=/var/run/utmp \
++        --with-wtmp-file=/var/log/wtmp \
++        "
++
++FILES_${PN}-dbg += "${libdir}/X11/xdm/.debug/*"
+diff --git a/recipes/obsolete/xorg-app/xdpyinfo/disable-xkb.patch b/recipes/obsolete/xorg-app/xdpyinfo/disable-xkb.patch
+new file mode 100644
+index 0000000..24af21f
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xdpyinfo/disable-xkb.patch
+@@ -0,0 +1,18 @@
++--- xdpyinfo-1.0.1/configure.ac.orig	2006-03-08 16:33:05.000000000 +0100
+++++ xdpyinfo-1.0.1/configure.ac	2006-03-08 16:41:59.000000000 +0100
++@@ -45,11 +45,15 @@
++ 	AC_CHECK_HEADERS([X11/extensions/multibuf.h X11/extensions/XShm.h],,,[#include <X11/Xlib.h>])
++ 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
++ 
+++AC_ARG_ENABLE(xkb, AC_HELP_STRING([--disable-xkb], [Disable XKB support]),
+++        XKB="$enableval", XKB="yes")
+++if test "x$XKB" = "xyes" ; then
++ PKG_CHECK_MODULES(DPY_XKB, x11, 
++ 	[SAVE_CPPFLAGS="$CPPFLAGS"
++ 	CPPFLAGS="$CPPFLAGS $DPY_XKB_CFLAGS $DPY_X11_CFLAGS"
++ 	AC_CHECK_HEADERS([X11/extensions/XKB.h X11/XKBlib.h],,,[#include <X11/Xlib.h>])
++ 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
+++fi
++ 
++ PKG_CHECK_MODULES(DPY_XF86VIDMODE, xxf86vm, 
++ 	[SAVE_CPPFLAGS="$CPPFLAGS"
+diff --git a/recipes/obsolete/xorg-app/xdpyinfo_1.1.0.bb b/recipes/obsolete/xorg-app/xdpyinfo_1.1.0.bb
+new file mode 100644
+index 0000000..f7b3134
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xdpyinfo_1.1.0.bb
+@@ -0,0 +1,12 @@
++require xorg-app-common.inc
++DESCRIPTION = "X display information utility"
++LICENSE = "MIT"
++DEPENDS += "libxtst libxext libxxf86vm libxxf86dga libxxf86misc libxi libxrender libxinerama libdmx libxp libxau"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI += "file://disable-xkb.patch"
++SRC_URI[archive.md5sum] = "d1d516610316138105cd07064b257c5c"
++SRC_URI[archive.sha256sum] = "780d8dfe65653f42ee26d35928ab7f72f5f27ab08eda692fe4baad05126a0631"
++
++EXTRA_OECONF = "--disable-xkb"
+diff --git a/recipes/obsolete/xorg-app/xdriinfo_1.0.3.bb b/recipes/obsolete/xorg-app/xdriinfo_1.0.3.bb
+new file mode 100644
+index 0000000..a123cad
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xdriinfo_1.0.3.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "query configuration information of DRI drivers"
++DEPENDS += " glproto virtual/libgl"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "cb304d1ce562ac48b68eedeba38c662f"
++SRC_URI[archive.sha256sum] = "2b762afd08c798d79fd6dacfd6280da39105927fa2bd91e3b1ba75b8cddc259c"
+diff --git a/recipes/obsolete/xorg-app/xedit_1.1.2.bb b/recipes/obsolete/xorg-app/xedit_1.1.2.bb
+new file mode 100644
+index 0000000..2b16fb8
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xedit_1.1.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxprintutil libxp libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "67193be728414d45a1922911e6437991"
++SRC_URI[archive.sha256sum] = "a38823a8b7919e2efa689bc4c279e12314e45b41131c39ce9ca523e54f42fa1f"
+diff --git a/recipes/obsolete/xorg-app/xev/diet-x11.patch b/recipes/obsolete/xorg-app/xev/diet-x11.patch
+new file mode 100644
+index 0000000..9f515e8
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xev/diet-x11.patch
+@@ -0,0 +1,80 @@
++---
++ xev.c |   16 ++++++++--------
++ 1 file changed, 8 insertions(+), 8 deletions(-)
++
++Index: xev-1.0.2/xev.c
++===================================================================
++--- xev-1.0.2.orig/xev.c	2006-06-02 00:25:44.000000000 +0100
+++++ xev-1.0.2/xev.c	2007-05-10 15:22:07.000000000 +0100
++@@ -109,7 +109,7 @@ do_KeyPress (XEvent *eventp)
++     nbytes = XLookupString (e, str, 256, &ks, NULL);
++ 
++     /* not supposed to call XmbLookupString on a key release event */
++-    if (e->type == KeyPress && xic) {
+++    /*if (e->type == KeyPress && xic) {
++         do {
++             nmbbytes = XmbLookupString (xic, e, buf, bsize - 1, &ks, &status);
++             buf[nmbbytes] = '\0';
++@@ -119,7 +119,7 @@ do_KeyPress (XEvent *eventp)
++                 buf = realloc (buf, bsize);
++             }
++         } while (status == XBufferOverflow);
++-    }
+++    }*/
++ 
++     if (ks == NoSymbol)
++ 	ksname = "NoSymbol";
++@@ -149,7 +149,7 @@ do_KeyPress (XEvent *eventp)
++     }
++ 
++     /* not supposed to call XmbLookupString on a key release event */
++-    if (e->type == KeyPress && xic) {
+++    /*if (e->type == KeyPress && xic) {
++         printf ("    XmbLookupString gives %d bytes: ", nmbbytes);
++         if (nmbbytes > 0) {
++            dump (buf, nmbbytes);
++@@ -157,7 +157,7 @@ do_KeyPress (XEvent *eventp)
++         } else {
++     	   printf ("\n");
++         }
++-    }
+++    } */
++ 
++     printf ("    XFilterEvent returns: %s\n", 
++ 	    XFilterEvent (eventp, e->window) ? "True" : "False");
++@@ -804,7 +804,7 @@ main (int argc, char **argv)
++         fprintf (stderr, "%s:  XSetLocaleModifiers failed\n", ProgramName);
++     }
++ 
++-    xim = XOpenIM (dpy, NULL, NULL, NULL);
+++    /*xim = XOpenIM (dpy, NULL, NULL, NULL);
++     if (xim == NULL) {
++         fprintf (stderr, "%s:  XOpenIM failed\n", ProgramName);
++     }
++@@ -831,7 +831,7 @@ main (int argc, char **argv)
++             }
++             XFree (xim_styles);
++         }
++-    } 
+++    }*/
++ 
++     screen = DefaultScreen (dpy);
++ 
++@@ -891,7 +891,7 @@ main (int argc, char **argv)
++ 	printf ("Outer window is 0x%lx, inner window is 0x%lx\n", w, subw);
++     }
++ 
++-    if (xim && xim_style) {
+++    /*if (xim && xim_style) {
++         xic = XCreateIC (xim, 
++                          XNInputStyle, xim_style, 
++                          XNClientWindow, w, 
++@@ -901,7 +901,7 @@ main (int argc, char **argv)
++         if (xic == NULL) {
++             fprintf (stderr, "XCreateIC failed\n");
++         }
++-    }
+++    }*/
++ 
++     for (done = 0; !done; ) {
++ 	XEvent event;
+diff --git a/recipes/obsolete/xorg-app/xev_1.0.4.bb b/recipes/obsolete/xorg-app/xev_1.0.4.bb
+new file mode 100644
+index 0000000..6154c8c
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xev_1.0.4.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DESCRIPTION = "X Event Viewer"
++LICENSE = "MIT"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI += "file://diet-x11.patch"
++SRC_URI[archive.md5sum] = "5f98c0a2725a33d60ef4956befe078fb"
++SRC_URI[archive.sha256sum] = "7fad9c9755a624e677f44633dee218e9c22b4ba9a83e6709a6cbf8c1a501fde8"
+diff --git a/recipes/obsolete/xorg-app/xeyes_1.1.0.bb b/recipes/obsolete/xorg-app/xeyes_1.1.0.bb
+new file mode 100644
+index 0000000..fc382ba
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xeyes_1.1.0.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxau libxt libxext libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "933f6d2b132d14f707f1f3c87b39ebe2"
++SRC_URI[archive.sha256sum] = "996b9641fea06e2f0dde9cbf5fb31b5cd139376198057a88ca59820fdb94d507"
+diff --git a/recipes/obsolete/xorg-app/xf86dga_1.0.2.bb b/recipes/obsolete/xorg-app/xf86dga_1.0.2.bb
+new file mode 100644
+index 0000000..aff21db
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xf86dga_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxxf86dga libxt libxaw libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "66feef21fb4e769cc1e2f193ae461a8c"
++SRC_URI[archive.sha256sum] = "650633b83796e5a24d4c5ec30adfeb3958f75d9d0785060d5c42bab55ccc1857"
+diff --git a/recipes/obsolete/xorg-app/xfd_1.0.1.bb b/recipes/obsolete/xorg-app/xfd_1.0.1.bb
+new file mode 100644
+index 0000000..dc46464
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xfd_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw freetype fontconfig libxft libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "c72abd90f50ef459bc14b39ec9fcc7f8"
++SRC_URI[archive.sha256sum] = "111baa16780429d6739ab69b7393a18d75a10b7615dcc8cd0b0878ab9a5e2e1e"
+diff --git a/recipes/obsolete/xorg-app/xfontsel_1.0.2.bb b/recipes/obsolete/xorg-app/xfontsel_1.0.2.bb
+new file mode 100644
+index 0000000..aed93b5
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xfontsel_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DESCRIPTION = "point and click selection of X11 font names"
++DEPENDS += " libxaw"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "288fe4cf8a990e4e602aac16dd9109fb"
++SRC_URI[archive.sha256sum] = "7a66ba3910bd7e39d58f9d4a4a588f191a874b8607369fe2cc9203a7115006a9"
+diff --git a/recipes/obsolete/xorg-app/xfs_1.1.0.bb b/recipes/obsolete/xorg-app/xfs_1.1.0.bb
+new file mode 100644
+index 0000000..efc2c62
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xfs_1.1.0.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "X fontserver"
++DEPENDS += " libfs libxfont xtrans"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "5cfc06a320f74f07a0aa73da62307e9a"
++SRC_URI[archive.sha256sum] = "47bad4bbcd0488a8e573aa6efe3438076c4d27c498d6f642f3aa27262eb95f6d"
+diff --git a/recipes/obsolete/xorg-app/xfsinfo_1.0.2.bb b/recipes/obsolete/xorg-app/xfsinfo_1.0.2.bb
+new file mode 100644
+index 0000000..5ca440c
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xfsinfo_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libfs"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "e6c0071f6d5436113982f4a575d3f94b"
++SRC_URI[archive.sha256sum] = "95aaca84f948fc7e25d82c58d3fdbba44911b99f3e205378ce82a786c11bb96f"
+diff --git a/recipes/obsolete/xorg-app/xgamma_1.0.3.bb b/recipes/obsolete/xorg-app/xgamma_1.0.3.bb
+new file mode 100644
+index 0000000..ebd483c
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xgamma_1.0.3.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "Alter a monitor's gamma correction through the X server"
++DEPENDS += " libxxf86vm"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "e8a88bf1a18f35b724619849dca97f4f"
++SRC_URI[archive.sha256sum] = "e5eb2588fbbdc5c2db5571b304204487a9c22eed15ac6cb816f605ec403e6e1a"
+diff --git a/recipes/obsolete/xorg-app/xgc_1.0.1.bb b/recipes/obsolete/xorg-app/xgc_1.0.1.bb
+new file mode 100644
+index 0000000..5cd8c1e
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xgc_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "72fc8dd68f585000c0a542eba0264571"
++SRC_URI[archive.sha256sum] = "7caddfc6c34f62a4ab2dba2ba34085f6b2343b36ec1bec3b522a2188170e1093"
+diff --git a/recipes/obsolete/xorg-app/xhost_1.0.3.bb b/recipes/obsolete/xorg-app/xhost_1.0.3.bb
+new file mode 100644
+index 0000000..a6b3a43
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xhost_1.0.3.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DESCRIPTION = "Server access control program for X"
++LICENSE = "MIT"
++DEPENDS += "libxmu libxau"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "c7f91b4a750d297f269c2a0a3206a1b2"
++SRC_URI[archive.sha256sum] = "2d63007c65e89fe273a43f3e45b3c0133acbc3ceeda6bfc9671388409134ad17"
+diff --git a/recipes/obsolete/xorg-app/xinit_1.1.1.bb b/recipes/obsolete/xorg-app/xinit_1.1.1.bb
+new file mode 100644
+index 0000000..89b047e
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xinit_1.1.1.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DESCRIPTION = "X Window System initializer"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "93c73705ed9eb1e1a6b6938405672f2b"
++SRC_URI[archive.sha256sum] = "b103d2cf9e1cd8b049e28bb1109f3da3a14287bbce3ab8b2f427d55a6e5f4785"
++
++FILES_${PN} += "${libdir}X11/xinit"
+diff --git a/recipes/obsolete/xorg-app/xinput_1.5.0.bb b/recipes/obsolete/xorg-app/xinput_1.5.0.bb
+new file mode 100644
+index 0000000..04355de
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xinput_1.5.0.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DESCRIPTION = "a utility to configure and test XInput devices"
++DEPENDS += " libxi"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "3e8a5f1faccc8ab00c6190e5a34e0a45"
++SRC_URI[archive.sha256sum] = "a84728e34bb5edd36ecc1b5489f48ad1467ad5aab1f74f1b7789f826a1ffcaf9"
+diff --git a/recipes/obsolete/xorg-app/xkbcomp_1.1.1.bb b/recipes/obsolete/xorg-app/xkbcomp_1.1.1.bb
+new file mode 100644
+index 0000000..d32be77
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xkbcomp_1.1.1.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DESCRIPTION = "The X Keyboard Extension essentially replaces the core protocol definition of keyboard."
++DEPENDS += " libxkbfile"
++PR = "${INC_PR}.1"
++
++SRC_URI[archive.md5sum] = "38c387bacdc01038c8ac280588792bcf"
++SRC_URI[archive.sha256sum] = "9775bcfd43d9ffa41e2865e5b2c933f419bf983d7a529b3103656c76fd82e663"
++
++BBCLASSEXTEND = "native"
+diff --git a/recipes/obsolete/xorg-app/xkbevd_1.1.0.bb b/recipes/obsolete/xorg-app/xkbevd_1.1.0.bb
+new file mode 100644
+index 0000000..2da02ec
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xkbevd_1.1.0.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxkbfile "
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "8d3c1485c2dd62ea7395a37377958a39"
++SRC_URI[archive.sha256sum] = "46037add20321ff13954ad91aa5f5f5ec52d78006f9d7c52aa6167622b34a2df"
+diff --git a/recipes/obsolete/xorg-app/xkbprint_1.0.1.bb b/recipes/obsolete/xorg-app/xkbprint_1.0.1.bb
+new file mode 100644
+index 0000000..58a34d2
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xkbprint_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxkbfile "
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "b98ae2d8b21c545b7b322d0b302efefa"
++SRC_URI[archive.sha256sum] = "008dffea5b213880cb3ebd40d0b9bf0cc10392fb0349831efdebf2a428dd2e17"
+diff --git a/recipes/obsolete/xorg-app/xkbutils_1.0.2.bb b/recipes/obsolete/xorg-app/xkbutils_1.0.2.bb
+new file mode 100644
+index 0000000..c4bfe76
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xkbutils_1.0.2.bb
+@@ -0,0 +1,6 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxkbfile "
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "369a21641b7ca983d6641298e51d97f8"
++SRC_URI[archive.sha256sum] = "12a37d4594a4deb2642b1659f3827068c24bb8791a20b927c5f3b7fdb0c70bee"
+diff --git a/recipes/obsolete/xorg-app/xkill_1.0.2.bb b/recipes/obsolete/xorg-app/xkill_1.0.2.bb
+new file mode 100644
+index 0000000..b221ead
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xkill_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "dca031355b4afcf8517a8258eeb730c3"
++SRC_URI[archive.sha256sum] = "532df0398d3f4eab1cba8d0367c02a293ca74f2d89a27ef014854a2bde9a5a27"
+diff --git a/recipes/obsolete/xorg-app/xload_1.0.2.bb b/recipes/obsolete/xorg-app/xload_1.0.2.bb
+new file mode 100644
+index 0000000..5b706c4
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xload_1.0.2.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "system load average display for X"
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "b41ed6b4bcfc9897366c27a94d2bf150"
++SRC_URI[archive.sha256sum] = "86b176b6efc52557b1c7631bfdd5c17e7060a438e1e85ce15ec9657be356c50b"
+diff --git a/recipes/obsolete/xorg-app/xlogo_1.0.1.bb b/recipes/obsolete/xorg-app/xlogo_1.0.1.bb
+new file mode 100644
+index 0000000..6c05ea1
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xlogo_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxprintutil libxp libxrender libxft libxext libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "4c5482552f38a7d42398a694cc9b2ee6"
++SRC_URI[archive.sha256sum] = "de59f9be3d45fe93f445f39bec3cea09753a671e56863ce77e3a797d2df526b2"
+diff --git a/recipes/obsolete/xorg-app/xlsatoms_1.0.2.bb b/recipes/obsolete/xorg-app/xlsatoms_1.0.2.bb
+new file mode 100644
+index 0000000..0e1e123
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xlsatoms_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "dc8b420bbfa35091ea30edf57c952ec2"
++SRC_URI[archive.sha256sum] = "d66cd7682e5ea2a52e8da8a75ea6154f40a3a69938c6c2cf5d5c1e012f5c121b"
+diff --git a/recipes/obsolete/xorg-app/xlsclients_1.0.2.bb b/recipes/obsolete/xorg-app/xlsclients_1.0.2.bb
+new file mode 100644
+index 0000000..1a531f9
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xlsclients_1.0.2.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "df270f7dd5528ae1b7d80c47585d8278"
++SRC_URI[archive.sha256sum] = "8527cdd29d4fcc67df014bc8b371be98901c9082b8de81ea2302bf705c887698"
+diff --git a/recipes/obsolete/xorg-app/xlsfonts_1.0.2.bb b/recipes/obsolete/xorg-app/xlsfonts_1.0.2.bb
+new file mode 100644
+index 0000000..17c9fe3
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xlsfonts_1.0.2.bb
+@@ -0,0 +1,6 @@
++require xorg-app-common.inc
++DESCRIPTION = "server font list displayer for X"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "28958248590ff60ecd70e8f590d977b7"
++SRC_URI[archive.sha256sum] = "cc6e519b783b082a2fe4cd06ea5b3693ee6bdb23f4b36e7a72753c524ef5111c"
+diff --git a/recipes/obsolete/xorg-app/xmag_1.0.3.bb b/recipes/obsolete/xorg-app/xmag_1.0.3.bb
+new file mode 100644
+index 0000000..0e1025c
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xmag_1.0.3.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "magnify parts of the screen"
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "32f7ed4c089365cadb9382f6fbd750a9"
++SRC_URI[archive.sha256sum] = "0368268a352d302d0b84229a71e3ea0e8d1c44019b1f06b6301ad7a106418553"
+diff --git a/recipes/obsolete/xorg-app/xman_1.1.0.bb b/recipes/obsolete/xorg-app/xman_1.1.0.bb
+new file mode 100644
+index 0000000..ff65cf5
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xman_1.1.0.bb
+@@ -0,0 +1,11 @@
++require xorg-app-common.inc
++DESCRIPTION = "manual page browser for X"
++DEPENDS += " libxaw libxprintutil libxp libxt"
++RDEPENDS_${PN} = " man"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "5e5b3351bac26cc1f8490faf1c1402bb"
++SRC_URI[archive.sha256sum] = "9d617ed760fe2147baae5ad9cbbdd85f1bb7534acfc3327bb51dad42e8bcc8b0"
++
++FILES_${PN} += " /usr/share/X11/xman.help"
+diff --git a/recipes/obsolete/xorg-app/xmessage_1.0.2.bb b/recipes/obsolete/xorg-app/xmessage_1.0.2.bb
+new file mode 100644
+index 0000000..ec9aec3
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xmessage_1.0.2.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "xmessage displays a message or query in a window."
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "b4b561ef11fd184989a6062962e86748"
++SRC_URI[archive.sha256sum] = "02b4016e93acab94105fa61f6dbe13082669276ab4650b871835fb7884b0c3c3"
+diff --git a/recipes/obsolete/xorg-app/xmh_1.0.1.bb b/recipes/obsolete/xorg-app/xmh_1.0.1.bb
+new file mode 100644
+index 0000000..37fb734
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xmh_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "656bcbdd41818a8b5a9f7dba77a3eeba"
++SRC_URI[archive.sha256sum] = "9471fb455ce0bfc582b865722ab7417c587c9fea82342181e9cd0a9629c2c6fa"
+diff --git a/recipes/obsolete/xorg-app/xmodmap_1.0.4.bb b/recipes/obsolete/xorg-app/xmodmap_1.0.4.bb
+new file mode 100644
+index 0000000..762fc42
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xmodmap_1.0.4.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "utility for modifying keymaps and pointer button mappings in X"
++LICENSE = "MIT"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "bbe021f812e0014a8ee3692317788119"
++SRC_URI[archive.sha256sum] = "805a63525d99f59d60a11aa89121fb9cdb001c8d542237ac4deafbadc7bd0bed"
+diff --git a/recipes/obsolete/xorg-app/xmore_1.0.1.bb b/recipes/obsolete/xorg-app/xmore_1.0.1.bb
+new file mode 100644
+index 0000000..90782d1
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xmore_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxprintutil libxp libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "d36e918dce779a9d207b7a266f4e87c8"
++SRC_URI[archive.sha256sum] = "653566be73c474bc45f1a6631e14b008445c74557a8f6f46effee1ac3e8f2527"
+diff --git a/recipes/obsolete/xorg-app/xprop_1.1.0.bb b/recipes/obsolete/xorg-app/xprop_1.1.0.bb
+new file mode 100644
+index 0000000..48f37c3
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xprop_1.1.0.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "a property displayer for X"
++DEPENDS += " libxmu "
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "f0bacbd30f0dd1c1e9ccafe97687b7a4"
++SRC_URI[archive.sha256sum] = "cc8e07901574895f113baffda19272c54545879e02012314527ebbf2dcc66226"
+diff --git a/recipes/obsolete/xorg-app/xrandr/resolve_symbol_clash.patch b/recipes/obsolete/xorg-app/xrandr/resolve_symbol_clash.patch
+new file mode 100644
+index 0000000..1ecf956
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xrandr/resolve_symbol_clash.patch
+@@ -0,0 +1,33 @@
++---
++ xrandr.c |    6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++--- xrandr-1.2.2.orig/xrandr.c
+++++ xrandr-1.2.2/xrandr.c
++@@ -189,7 +189,7 @@
++ 
++ #if HAS_RANDR_1_2
++ typedef enum _policy {
++-    clone, extend
+++    policy_clone, extend
++ } policy_t;
++ 
++ typedef enum _relation {
++@@ -1602,7 +1602,7 @@
++     int		ret = 0;
++ #if HAS_RANDR_1_2
++     output_t	*output = NULL;
++-    policy_t	policy = clone;
+++    policy_t	policy = policy_clone;
++     Bool    	setit_1_2 = False;
++     Bool    	query_1_2 = False;
++     Bool	modeit = False;
++@@ -1863,7 +1863,7 @@
++ 	    continue;
++ 	}
++ 	if (!strcmp ("--clone", argv[i])) {
++-	    policy = clone;
+++	    policy = policy_clone;
++ 	    setit_1_2 = True;
++ 	    continue;
++ 	}
+diff --git a/recipes/obsolete/xorg-app/xrandr_1.3.2.bb b/recipes/obsolete/xorg-app/xrandr_1.3.2.bb
+new file mode 100644
+index 0000000..34c0168
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xrandr_1.3.2.bb
+@@ -0,0 +1,10 @@
++require xorg-app-common.inc
++DESCRIPTION = "X Resize and Rotate extension command."
++LICENSE = "BSD-X"
++DEPENDS += "libxrandr libxrender"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI += "file://resolve_symbol_clash.patch"
++SRC_URI[archive.md5sum] = "2cb19bb1c19ccf77c40032b03dbe06f0"
++SRC_URI[archive.sha256sum] = "34d4334644a6494573141bb8647feb8f91c0ce8c8d3b6883b4861e038e912249"
+diff --git a/recipes/obsolete/xorg-app/xrdb_1.0.6.bb b/recipes/obsolete/xorg-app/xrdb_1.0.6.bb
+new file mode 100644
+index 0000000..a5f90f3
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xrdb_1.0.6.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DESCRIPTION = "X server resource database utility"
++LICENSE = "xrdb"
++DEPENDS += "libxmu"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "8dd881cd5a7dcb6e456549817f0fb475"
++SRC_URI[archive.sha256sum] = "8d062a3764665fcf22b14df4a5aca6af1e6d7d613296875b31b68e74ef66fc99"
+diff --git a/recipes/obsolete/xorg-app/xrefresh_1.0.3.bb b/recipes/obsolete/xorg-app/xrefresh_1.0.3.bb
+new file mode 100644
+index 0000000..dd4bfab
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xrefresh_1.0.3.bb
+@@ -0,0 +1,6 @@
++require xorg-app-common.inc
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "8f4fafcfb77b3c6972cc44bb3f1c899c"
++SRC_URI[archive.sha256sum] = "3ee0a5f7aeb14bbffbcafcff8e7806c9a59f08e1a58322a50f5fca023a7d7ed9"
+diff --git a/recipes/obsolete/xorg-app/xrx_1.0.3.bb b/recipes/obsolete/xorg-app/xrx_1.0.3.bb
+new file mode 100644
+index 0000000..a412479
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xrx_1.0.3.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxt libxext xtrans xproxymngproto libxau"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "c121945afcfc84e99af17158fda68be9"
++SRC_URI[archive.sha256sum] = "9cb0fc67153ce935550d61dfd3d021cb3e6833274453538885b7cddff9fe8abe"
+diff --git a/recipes/obsolete/xorg-app/xset-1.1.0/disable-xkb.patch b/recipes/obsolete/xorg-app/xset-1.1.0/disable-xkb.patch
+new file mode 100644
+index 0000000..6060fbb
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xset-1.1.0/disable-xkb.patch
+@@ -0,0 +1,18 @@
++--- xset-1.0.1/configure.ac.orig	2006-03-08 19:46:59.000000000 +0100
+++++ xset-1.0.1/configure.ac	2006-03-08 19:47:40.000000000 +0100
++@@ -42,11 +42,15 @@
++ 	AC_CHECK_HEADERS([X11/extensions/dpms.h X11/extensions/MITMisc.h],,,[#include <X11/Xlib.h>])
++ 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
++ 
+++AC_ARG_ENABLE(xkb, AC_HELP_STRING([--disable-xkb], [Disable XKB support]),
+++        XKB="$enableval", XKB="yes")
+++if test "x$XKB" = "xyes" ; then
++ PKG_CHECK_MODULES(SET_XKB, x11, 
++ 	[SAVE_CPPFLAGS="$CPPFLAGS"
++ 	CPPFLAGS="$CPPFLAGS $SET_XKB_CFLAGS $SET_X11_CFLAGS"
++ 	AC_CHECK_HEADERS([X11/XKBlib.h],,,[#include <X11/Xlib.h>])
++ 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
+++fi
++ 
++ PKG_CHECK_MODULES(SET_XF86MISC, xxf86misc, 
++ 	[SAVE_CPPFLAGS="$CPPFLAGS"
+diff --git a/recipes/obsolete/xorg-app/xset_1.1.0.bb b/recipes/obsolete/xorg-app/xset_1.1.0.bb
+new file mode 100644
+index 0000000..8592ad2
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xset_1.1.0.bb
+@@ -0,0 +1,14 @@
++require xorg-app-common.inc
++DESCRIPTION = "user preference utility for X"
++LICENSE = "MIT"
++DEPENDS += "libxext libxxf86misc libxfontcache libxmu libxp libxau"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI += "file://disable-xkb.patch"
++SRC_URI[archive.md5sum] = "eeb0d02f69c76bd40470dede99b4bd49"
++SRC_URI[archive.sha256sum] = "72c859c6030890a25cf828d0b2743454e50eadab30f6be8c17172fe97a554643"
++
++EXTRA_OECONF = "--disable-xkb"
++
++CFLAGS += "-D_GNU_SOURCE"
+diff --git a/recipes/obsolete/xorg-app/xsetroot_1.0.3.bb b/recipes/obsolete/xorg-app/xsetroot_1.0.3.bb
+new file mode 100644
+index 0000000..08a0e68
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xsetroot_1.0.3.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DESCRIPTION = "Sets the visual appearance of the X root window"
++LICENSE = "MIT"
++DEPENDS += "libxmu xbitmaps"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "cbda9b9b8da5af4614110883d5a276b8"
++SRC_URI[archive.sha256sum] = "d7e512cc686de3ab5fcd3c9f9e605d7cae68a4b50f2c0786f0f09ce08c728f48"
+diff --git a/recipes/obsolete/xorg-app/xsm_1.0.1.bb b/recipes/obsolete/xorg-app/xsm_1.0.1.bb
+new file mode 100644
+index 0000000..b0ee345
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xsm_1.0.1.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "X Session Manager"
++DEPENDS += " libxaw libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "cce867ff7d0df9c0b9e682591779952c"
++SRC_URI[archive.sha256sum] = "2f2535b5394d59be0a4bb15c12ea1b19b873a0096446ecc4c71aa81f0d99b29a"
+diff --git a/recipes/obsolete/xorg-app/xstdcmap_1.0.1.bb b/recipes/obsolete/xorg-app/xstdcmap_1.0.1.bb
+new file mode 100644
+index 0000000..748b079
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xstdcmap_1.0.1.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxmu "
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "86ab558441edfb86f853639e4290a754"
++SRC_URI[archive.sha256sum] = "0d920660137dee514599f63b5a8c8ce14d2474607e28e32c973cafb360f7e738"
+diff --git a/recipes/obsolete/xorg-app/xterm_207.bb b/recipes/obsolete/xorg-app/xterm_207.bb
+new file mode 100644
+index 0000000..ac485a7
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xterm_207.bb
+@@ -0,0 +1,21 @@
++require xorg-app-common.inc
++DESCRIPTION = "xterm is the standard terminal emulator for the X Window System."
++DEPENDS = "libxaw xproto xextproto libxext libxau libxpm ncurses"
++PR = "${INC_PR}.1"
++
++SRC_URI = "${XORG_MIRROR}/development/X11R7.0-RC4/extras/${PN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "3de8a3756c284a46a08c6d0308909486"
++SRC_URI[sha256sum] = "652f579171e6e8f73c13ab6b060d2447ae35ebfbd39a6002b7c05a1dfc0f7eb8"
++
++EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
++                 --x-libraries=${STAGING_LIBDIR} \
++                 FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config \
++                 --disable-imake \
++                 --disable-setuid"
++
++do_configure() {
++        sed -e "s%/usr/contrib/X11R6%${STAGING_LIBDIR}%g" -i configure
++        oe_runconf
++}
++
++FILES_${PN} += " /usr/lib/X11"
+diff --git a/recipes/obsolete/xorg-app/xterm_251.bb b/recipes/obsolete/xorg-app/xterm_251.bb
+new file mode 100644
+index 0000000..388fbc3
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xterm_251.bb
+@@ -0,0 +1,21 @@
++require xorg-app-common.inc
++DESCRIPTION = "xterm is the standard terminal emulator for the X Window System."
++DEPENDS = "libxaw xproto xextproto libxext libxau libxpm ncurses"
++PR = "${INC_PR}.1"
++
++SRC_URI = "ftp://invisible-island.net/xterm/${PN}-${PV}.tgz"
++SRC_URI[md5sum] = "343a4ce213f70c53cf65979f163bebc3"
++SRC_URI[sha256sum] = "2ff9a4ae66cf9a48829023d1d007b0e84ee9cc60feb48107f9c1ea9dd7570ce7"
++
++EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
++                 --x-libraries=${STAGING_LIBDIR} \
++                 FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config \
++                 --disable-imake \
++                 --disable-setuid"
++
++do_configure() {
++        sed -e "s%/usr/contrib/X11R6%${STAGING_LIBDIR}%g" -i configure
++        oe_runconf
++}
++
++FILES_${PN} += " /usr/lib/X11"
+diff --git a/recipes/obsolete/xorg-app/xvidtune_1.0.1.bb b/recipes/obsolete/xorg-app/xvidtune_1.0.1.bb
+new file mode 100644
+index 0000000..e052500
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xvidtune_1.0.1.bb
+@@ -0,0 +1,9 @@
++require xorg-app-common.inc
++DEPENDS += " libxaw libxxf86vm libxt"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "e0744594f4e5969b20df28d897781318"
++SRC_URI[archive.sha256sum] = "6d0feb42c2f1d6011d97c776b9d580fd589cdf3cfe246cd99437c406a2740d36"
++
++FILES_${PN} += " ${datadir}/X11/app-defaults/Xvidtune "
+diff --git a/recipes/obsolete/xorg-app/xvinfo_1.1.0.bb b/recipes/obsolete/xorg-app/xvinfo_1.1.0.bb
+new file mode 100644
+index 0000000..37c66de
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xvinfo_1.1.0.bb
+@@ -0,0 +1,8 @@
++require xorg-app-common.inc
++DESCRIPTION = "Print out X-Video extension adaptor information"
++DEPENDS += " libxv"
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "8cc299b2cb636b5f7fe672610789d3d4"
++SRC_URI[archive.sha256sum] = "0a318f6ca0d92bd5cc2ab9d2690f6120b3e1537b7902ce110469864869e86efb"
+diff --git a/recipes/obsolete/xorg-app/xwd_1.0.3.bb b/recipes/obsolete/xorg-app/xwd_1.0.3.bb
+new file mode 100644
+index 0000000..fe84b4d
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xwd_1.0.3.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxmu "
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "007cea1f389abde5c93162dcd5541351"
++SRC_URI[archive.sha256sum] = "fff2dbea086c554463d4309209ee05e026b7f19900598f55e0a24a6d7a7ee3fd"
+diff --git a/recipes/obsolete/xorg-app/xwininfo_1.0.5.bb b/recipes/obsolete/xorg-app/xwininfo_1.0.5.bb
+new file mode 100644
+index 0000000..348e4af
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xwininfo_1.0.5.bb
+@@ -0,0 +1,7 @@
++require xorg-app-common.inc
++DEPENDS += " libxmu libxext "
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "908f8bc3255f639effa9780fb1c19ea4"
++SRC_URI[archive.sha256sum] = "8db6b81a7b0bc4e7acce6c6d41df9747b0b19e12c21c5a70b51bbc63a42cdcd9"
+diff --git a/recipes/obsolete/xorg-app/xwud_1.0.2.bb b/recipes/obsolete/xorg-app/xwud_1.0.2.bb
+new file mode 100644
+index 0000000..de77cf2
+--- /dev/null
++++ b/recipes/obsolete/xorg-app/xwud_1.0.2.bb
+@@ -0,0 +1,6 @@
++require xorg-app-common.inc
++PE = "1"
++PR = "${INC_PR}.0"
++
++SRC_URI[archive.md5sum] = "20bc5d85634964d4ceee77cdfcd131ed"
++SRC_URI[archive.sha256sum] = "84345dfbff0dc411689639aada2407758640af71eb61a1be332bfa24d8b90ac1"
+diff --git a/recipes/xorg-app/appres_1.0.2.bb b/recipes/xorg-app/appres_1.0.2.bb
 deleted file mode 100644
-index 5a806a4..0000000
---- a/recipes/xorg-lib/libdmx_1.1.0.bb
+index bb76f3e..0000000
+--- a/recipes/xorg-app/appres_1.0.2.bb
 +++ /dev/null
 @@ -1,8 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Distributed Multihead extension library"
--DEPENDS += "libxext dmxproto"
+-require xorg-app-common.inc
+-DESCRIPTION = "The appres program prints the resources seen by an application."
+-DEPENDS += " libxt"
 -PE = "1"
 -PR = "${INC_PR}.0"
 -
--SRC_URI[archive.md5sum] = "a2fcf0382837888d3781b714489a8999"
--SRC_URI[archive.sha256sum] = "1904a8f848cc5d76105cb07707890aca095540a37fb0a63d359f71da51d3e2d5"
-diff --git a/recipes/xorg-lib/libfontenc_1.0.5.bb b/recipes/xorg-lib/libfontenc_1.0.5.bb
+-SRC_URI[archive.md5sum] = "6f2f5d9f41669d498b56d73dc3206951"
+-SRC_URI[archive.sha256sum] = "37d0fbb16c553fa09878d107f29f26c2ca4206c98dd23c44a0cb670ace531e36"
+diff --git a/recipes/xorg-app/bdftopcf_1.0.2.bb b/recipes/xorg-app/bdftopcf_1.0.2.bb
 deleted file mode 100644
-index 6c11158..0000000
---- a/recipes/xorg-lib/libfontenc_1.0.5.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 font encoding library"
--LICENSE = "BSD-X"
--DEPENDS += "zlib xproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "4f0d8191819be9f2bdf9dad49a65e43b"
--SRC_URI[archive.sha256sum] = "7f3cde0331e9ad3da720b1a8255e121673701199df0802b62380436e74222700"
--
--BBCLASSEXTEND = "native"
-diff --git a/recipes/xorg-lib/libfs_1.0.2.bb b/recipes/xorg-lib/libfs_1.0.2.bb
-deleted file mode 100644
-index d892132..0000000
---- a/recipes/xorg-lib/libfs_1.0.2.bb
+index 450eb63..0000000
+--- a/recipes/xorg-app/bdftopcf_1.0.2.bb
 +++ /dev/null
 @@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Font Services library"
--DEPENDS += "xproto fontsproto xtrans"
+-require xorg-app-common.inc
+-DESCRIPTION = "converts BDF fonts to PCF fonts"
+-DEPENDS += " libxfont"
 -PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "ecf2d6a27da053500283e803efa2a808"
--SRC_URI[archive.sha256sum] = "af2a5fe5eaa2b026e10bddb4e3f39976dc13deb5dbdc714abe1f016435ce3049"
--
--XORG_PN = "libFS"
-diff --git a/recipes/xorg-lib/libice_1.0.6.bb b/recipes/xorg-lib/libice_1.0.6.bb
-deleted file mode 100644
-index 1c7f3cb..0000000
---- a/recipes/xorg-lib/libice_1.0.6.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Inter-Client Exchange library"
--DEPENDS += "xproto xtrans"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "2d39bc924af24325dae589e9a849180c"
--SRC_URI[archive.sha256sum] = "a8346859505d2aa27ecc4531f1c86d72801936d96c31c5beaeff4587441b568b"
--
--BBCLASSEXTEND = "native"
--
--XORG_PN = "libICE"
-diff --git a/recipes/xorg-lib/libpciaccess_0.10.9.bb b/recipes/xorg-lib/libpciaccess_0.10.9.bb
-deleted file mode 100644
-index d963c3c..0000000
---- a/recipes/xorg-lib/libpciaccess_0.10.9.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require xorg-lib-common.inc
--DEPENDS += "xproto virtual/libx11"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "685cb20e7a6165bc010972f1183addbd"
--SRC_URI[archive.sha256sum] = "5ccb9683b8be76edfceab4bf006e1cce9018e0d3dea5e54aa72e82798213fead"
-diff --git a/recipes/xorg-lib/libsm_1.1.1.bb b/recipes/xorg-lib/libsm_1.1.1.bb
-deleted file mode 100644
-index b87bcdf..0000000
---- a/recipes/xorg-lib/libsm_1.1.1.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Session management library"
--DEPENDS += "libice xproto xtrans util-linux-ng"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "6889a455496aaaa65b1fa05fc518d179"
--SRC_URI[archive.sha256sum] = "f50d184d8c6a031b3ff4f0d52efcfd4ffa811b0362b166a9ff9ba4c2e9aa7ce0"
--
--BBCLASSEXTEND = "native"
--
--XORG_PN = "libSM"
-diff --git a/recipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch b/recipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch
-deleted file mode 100644
-index 2e2d475..0000000
---- a/recipes/xorg-lib/libx11-1.3.2/configure.ac-nios2.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From affc2488a7f2660a74dc8354fc3e0bff2c4f879c Mon Sep 17 00:00:00 2001
--From: Dan Nicholson <dbn.lists@gmail.com>
--Date: Sat, 06 Nov 2010 21:58:09 +0000
--Subject: config: Fix architecture check for OS/2 to skip nios2 cpu
--
--The OS/2 platform requires some utility functions as well as having a
--non-32 bit wchar_t. Fix the configure check so that it doesn't also
--affect the nios2 cpu, which wouldn't influence these operating system
--issues.
--
--Signed-off-by: Dan Nicholson <dbn.lists@gmail.com>
--Tested-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
--Reviewed-by: Alan Coopersmith <alan.coopersmith@oracle.com>
--Reviewed-by: Julien Cristau <jcristau@debian.org>
--Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
-----
--diff --git a/configure.ac b/configure.ac
--index 1b4a8b7..01f43fb 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -246,8 +246,8 @@ dnl AC_PATH_XTRA
-- 
-- # arch specific things
-- WCHAR32="1"
---case $target_alias in
---  *os2*) os2="true" ; WCHAR32="0" ;;
--+case $target_os in
--+  os2*) os2="true" ; WCHAR32="0" ;;
--   *) ;;
-- esac
-- AC_SUBST(WCHAR32)
----
--cgit v0.8.3-6-g21f6
-diff --git a/recipes/xorg-lib/libx11-1.3.2/dolt-fix.patch b/recipes/xorg-lib/libx11-1.3.2/dolt-fix.patch
-deleted file mode 100644
-index ea1a8bd..0000000
---- a/recipes/xorg-lib/libx11-1.3.2/dolt-fix.patch
-+++ /dev/null
-@@ -1,21 +0,0 @@
--diff -uNr libX11-1.2.99.901.orig/acinclude.m4 libX11-1.2.99.901/acinclude.m4
----- libX11-1.2.99.901.orig/acinclude.m4	2009-09-05 10:57:11.000000000 +0200
--+++ libX11-1.2.99.901/acinclude.m4	2009-09-05 10:59:14.000000000 +0200
--@@ -197,7 +197,7 @@
--     cat <<__DOLTLIBTOOL__EOF__ > doltlibtool
-- #!$DOLT_BASH
-- __DOLTLIBTOOL__EOF__
---    cat <<'__DOLTLIBTOOL__EOF__' >>doltlibtool
--+    cat <<'__DOLTLIBTOOL__EOF__' | sed -e "s/@host_alias@/$host_alias/g" >>doltlibtool
-- top_builddir_slash="${0%%doltlibtool}"
-- : ${top_builddir_slash:=./}
-- args=()
--@@ -213,7 +213,7 @@
-- if $modeok && $tagok ; then
--     . ${top_builddir_slash}doltcompile "${args@<:@@@:>@}"
-- else
---    exec ${top_builddir_slash}libtool "$[]@"
--+    exec ${top_builddir_slash}@host_alias@-libtool "$[]@"
-- fi
-- __DOLTLIBTOOL__EOF__
-- 
-diff --git a/recipes/xorg-lib/libx11-1.3.2/keysymdef_include.patch b/recipes/xorg-lib/libx11-1.3.2/keysymdef_include.patch
-deleted file mode 100644
-index 7e725b2..0000000
---- a/recipes/xorg-lib/libx11-1.3.2/keysymdef_include.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--Index: libX11-1.1.5/configure.ac
--===================================================================
----- libX11-1.1.5.orig/configure.ac	2008-10-28 11:36:49.000000000 +0000
--+++ libX11-1.1.5/configure.ac	2008-10-28 11:40:05.000000000 +0000
--@@ -221,13 +221,21 @@
-- # Find keysymdef.h
-- #
-- AC_MSG_CHECKING([keysymdef.h])
---dir=`pkg-config --variable=includedir xproto`
---KEYSYMDEF="$dir/X11/keysymdef.h"
--+AC_ARG_WITH(keysymdefdir,
--+	AC_HELP_STRING([--with-keysymdefdir=DIR], [The location of keysymdef.h]),
--+	KEYSYMDEF=$withval/keysymdef.h, KEYSYMDEF="")
--+
--+if test x$KEYSYMDEF = x; then
--+	dir=`pkg-config --variable=includedir xproto`
--+	KEYSYMDEF="$dir/X11/keysymdef.h"
--+fi
--+
-- if test -f "$KEYSYMDEF"; then
---        AC_MSG_RESULT([$KEYSYMDEF])
--+	AC_MSG_RESULT([$KEYSYMDEF])
-- else
-- 	AC_MSG_ERROR([Cannot find keysymdef.h])
-- fi
--+
-- AC_SUBST(KEYSYMDEF)
-- 
-- AM_CONDITIONAL(UDC, test xfalse = xtrue)
-diff --git a/recipes/xorg-lib/libx11-1.3.2/x11_disable_makekeys.patch b/recipes/xorg-lib/libx11-1.3.2/x11_disable_makekeys.patch
-deleted file mode 100644
-index 5d0a24c..0000000
---- a/recipes/xorg-lib/libx11-1.3.2/x11_disable_makekeys.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--diff -uNr libX11-1.3.3.orig/src/util/Makefile.am libX11-1.3.3/src/util/Makefile.am
----- libX11-1.3.3.orig/src/util/Makefile.am	2010-01-15 02:11:36.000000000 +0100
--+++ libX11-1.3.3/src/util/Makefile.am	2010-01-18 14:48:27.000000000 +0100
--@@ -1,19 +1 @@
---
---noinst_PROGRAMS=makekeys
---
---makekeys_CFLAGS=$(X11_CFLAGS)
---
---CC = @CC_FOR_BUILD@
---
-- EXTRA_DIST = mkks.sh
---
---if LINT
---# Check source code with tools like lint & sparse
---
---ALL_LINT_FLAGS=$(LINT_FLAGS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
---		$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS)
---
---lint:
---	$(LINT) $(ALL_LINT_FLAGS) makekeys.c
---
---endif LINT
-diff --git a/recipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch b/recipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch
-deleted file mode 100644
-index 2e2d475..0000000
---- a/recipes/xorg-lib/libx11-1.3.6/configure.ac-nios2.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From affc2488a7f2660a74dc8354fc3e0bff2c4f879c Mon Sep 17 00:00:00 2001
--From: Dan Nicholson <dbn.lists@gmail.com>
--Date: Sat, 06 Nov 2010 21:58:09 +0000
--Subject: config: Fix architecture check for OS/2 to skip nios2 cpu
--
--The OS/2 platform requires some utility functions as well as having a
--non-32 bit wchar_t. Fix the configure check so that it doesn't also
--affect the nios2 cpu, which wouldn't influence these operating system
--issues.
--
--Signed-off-by: Dan Nicholson <dbn.lists@gmail.com>
--Tested-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
--Reviewed-by: Alan Coopersmith <alan.coopersmith@oracle.com>
--Reviewed-by: Julien Cristau <jcristau@debian.org>
--Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
-----
--diff --git a/configure.ac b/configure.ac
--index 1b4a8b7..01f43fb 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -246,8 +246,8 @@ dnl AC_PATH_XTRA
-- 
-- # arch specific things
-- WCHAR32="1"
---case $target_alias in
---  *os2*) os2="true" ; WCHAR32="0" ;;
--+case $target_os in
--+  os2*) os2="true" ; WCHAR32="0" ;;
--   *) ;;
-- esac
-- AC_SUBST(WCHAR32)
----
--cgit v0.8.3-6-g21f6
-diff --git a/recipes/xorg-lib/libx11-1.3.6/dolt-fix.patch b/recipes/xorg-lib/libx11-1.3.6/dolt-fix.patch
-deleted file mode 100644
-index 7e96075..0000000
---- a/recipes/xorg-lib/libx11-1.3.6/dolt-fix.patch
-+++ /dev/null
-@@ -1,22 +0,0 @@
--Index: libX11-1.3.4/m4/dolt.m4
--===================================================================
----- libX11-1.3.4/m4/dolt.m4
--+++ libX11-1.3.4/m4/dolt.m4
--@@ -155,7 +155,7 @@ dnl without '=', because automake does n
--     cat <<__DOLTLIBTOOL__EOF__ > doltlibtool
-- #!$DOLT_BASH
-- __DOLTLIBTOOL__EOF__
---    cat <<'__DOLTLIBTOOL__EOF__' >>doltlibtool
--+    cat <<'__DOLTLIBTOOL__EOF__' | sed -e "s/@host_alias@/$host_alias/g" >>doltlibtool
-- top_builddir_slash="${0%%doltlibtool}"
-- : ${top_builddir_slash:=./}
-- args=()
--@@ -171,7 +171,7 @@ done
-- if $modeok && $tagok ; then
--     . ${top_builddir_slash}doltcompile "${args@<:@@@:>@}"
-- else
---    exec ${top_builddir_slash}libtool "$[]@"
--+    exec ${top_builddir_slash}@host_alias@-libtool "$[]@"
-- fi
-- __DOLTLIBTOOL__EOF__
-- 
-diff --git a/recipes/xorg-lib/libx11-1.3.6/keysymdef_include.patch b/recipes/xorg-lib/libx11-1.3.6/keysymdef_include.patch
-deleted file mode 100644
-index 1a30e34..0000000
---- a/recipes/xorg-lib/libx11-1.3.6/keysymdef_include.patch
-+++ /dev/null
-@@ -1,19 +0,0 @@
--diff -uNr libX11-1.3.6.orig//configure.ac libX11-1.3.6/configure.ac
----- libX11-1.3.6.orig//configure.ac	2010-09-20 08:04:16.000000000 +0200
--+++ libX11-1.3.6/configure.ac	2010-09-28 16:29:26.000000000 +0200
--@@ -355,7 +355,14 @@
-- # Find keysymdef.h
-- #
-- AC_MSG_CHECKING([keysym definitions])
---KEYSYMDEFDIR=`$PKG_CONFIG --variable=includedir xproto`/X11
--+AC_ARG_WITH(keysymdefdir,
--+        AC_HELP_STRING([--with-keysymdefdir=DIR], [The location of keysymdef.h]),
--+        KEYSYMDEFDIR=$withval, KEYSYMDEFDIR="")
--+
--+if test x$KEYSYMDEFDIR = x; then
--+	KEYSYMDEFDIR=`$PKG_CONFIG --variable=includedir xproto`/X11
--+fi
--+
-- FILES="keysymdef.h XF86keysym.h Sunkeysym.h DECkeysym.h HPkeysym.h"
-- for i in $FILES; do
--     if test -f "$KEYSYMDEFDIR/$i"; then
-diff --git a/recipes/xorg-lib/libx11-1.3.6/x11_disable_makekeys.patch b/recipes/xorg-lib/libx11-1.3.6/x11_disable_makekeys.patch
-deleted file mode 100644
-index 9763313..0000000
---- a/recipes/xorg-lib/libx11-1.3.6/x11_disable_makekeys.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--Index: libX11-1.3.4/src/util/Makefile.am
--===================================================================
----- libX11-1.3.4.orig/src/util/Makefile.am
--+++ libX11-1.3.4/src/util/Makefile.am
--@@ -1,24 +1 @@
---
---noinst_PROGRAMS=makekeys
---
---makekeys_CFLAGS = \
---	$(X11_CFLAGS) \
---	$(CWARNFLAGS)
---
---CC = @CC_FOR_BUILD@
---CPPFLAGS = @CPPFLAGS_FOR_BUILD@
---CFLAGS = @CFLAGS_FOR_BUILD@
---LDFLAGS = @LDFLAGS_FOR_BUILD@
---
-- EXTRA_DIST = mkks.sh
---
---if LINT
---# Check source code with tools like lint & sparse
---
---ALL_LINT_FLAGS=$(LINT_FLAGS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
---		$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS)
---
---lint:
---	$(LINT) $(ALL_LINT_FLAGS) makekeys.c
---
---endif LINT
-diff --git a/recipes/xorg-lib/libx11_1.3.2.bb b/recipes/xorg-lib/libx11_1.3.2.bb
-deleted file mode 100644
-index 189d1ff..0000000
---- a/recipes/xorg-lib/libx11_1.3.2.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require libx11.inc
--PR = "${INC_PR}.3"
--# gcc 4.5 ends up ICEing with thumb and -O1 with -fno-omit-framepointer
--# therefore if we are in thumb mode then we use -Os instead of -O1 for
--# DEBUG_OPTIMIZATION
--
--DEBUG_OPTIMIZATION_thumb_append = " -Os"
--SRC_URI += " file://dolt-fix.patch"
--SRC_URI += " file://configure.ac-nios2.patch"
--SRC_URI[archive.md5sum] = "001d780829f936e34851ef7cd37b4dfd"
--SRC_URI[archive.sha256sum] = "4def4d5c9fce85d690f1f29d675154594acdea3d3fe792d0cb513732c7b4bcb2"
-diff --git a/recipes/xorg-lib/libx11_1.3.6.bb b/recipes/xorg-lib/libx11_1.3.6.bb
-deleted file mode 100644
-index 8d9f343..0000000
---- a/recipes/xorg-lib/libx11_1.3.6.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require libx11.inc
 -PR = "${INC_PR}.1"
 -
--SRC_URI += " file://dolt-fix.patch"
--SRC_URI += " file://configure.ac-nios2.patch"
--SRC_URI[archive.md5sum] = "8e0a8a466aa78f66e09fe06cb395319f"
--SRC_URI[archive.sha256sum] = "599826765c59a98b1e58b4f6c4ad50dca69eeb0e7bd78aea736ca815f45bea40"
-diff --git a/recipes/xorg-lib/libxau_1.0.5.bb b/recipes/xorg-lib/libxau_1.0.5.bb
-deleted file mode 100644
-index 3e95f97..0000000
---- a/recipes/xorg-lib/libxau_1.0.5.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "A Sample Authorization Protocol for X"
--DEPENDS += " xproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "993b3185c629e4b89401fca072dcb663"
--SRC_URI[archive.sha256sum] = "a503b3e88d29fa9c45cce1b2d1af54106c2ce21491348c394e251a071d8108ee"
--
--BBCLASSEXTEND = "native nativesdk"
--
--XORG_PN = "libXau"
-diff --git a/recipes/xorg-lib/libxaw_1.0.7.bb b/recipes/xorg-lib/libxaw_1.0.7.bb
-deleted file mode 100644
-index e072411..0000000
---- a/recipes/xorg-lib/libxaw_1.0.7.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X Athena Widget Set"
--DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxp printproto libxau"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "815e74de989ccda684e2baf8d12cf519"
--SRC_URI[archive.sha256sum] = "740aaee9b09586b1c80f80890381c5ee70ea11efa4b6159f707c0f3684c6f328"
--
--# disable docs as groff detection doesn't work on some hosts while cross compilling
--EXTRA_OECONF += " --disable-docs "
--
--do_install_append () {
--        ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
--        ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so.7
--        ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so
--}
--
--PACKAGES =+ "libxaw6 libxaw7 libxaw8"
--
--FILES_libxaw6 = "${libdir}/libXaw*.so.6*"
--FILES_libxaw7 = "${libdir}/libXaw*.so.7*"
--FILES_libxaw8 = "${libdir}/libXaw8.so.8*"
--
--XORG_PN = "libXaw"
-diff --git a/recipes/xorg-lib/libxcomposite_0.4.1.bb b/recipes/xorg-lib/libxcomposite_0.4.1.bb
-deleted file mode 100644
-index f9460c3..0000000
---- a/recipes/xorg-lib/libxcomposite_0.4.1.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X Composite extension library."
--LICENSE = "BSD-X"
--DEPENDS += " compositeproto virtual/libx11 libxfixes libxext"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "0f1367f57fdf5df17a8dd71d0fa68248"
--SRC_URI[archive.sha256sum] = "3715a25565222d8eb0468805db1113b514128ee5e9bc6908400f189f680d7a13"
--
--XORG_PN = "libXcomposite"
-diff --git a/recipes/xorg-lib/libxcursor_1.1.10.bb b/recipes/xorg-lib/libxcursor_1.1.10.bb
-deleted file mode 100644
-index 7f3f0f9..0000000
---- a/recipes/xorg-lib/libxcursor_1.1.10.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X cursor management library"
--LICENSE = "BSD-X"
--DEPENDS += "libxrender libxfixes"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "7dcdad1c10daea872cb3355af414b2ca"
--SRC_URI[archive.sha256sum] = "b9446df62203f2c3204b6bcc0057dc909d0dc792f0dd97bc491581b08be36cbd"
+-SRC_URI[archive.md5sum] = "148f20d28caaa69bbe7dcca7c2674fb6"
+-SRC_URI[archive.sha256sum] = "11017f0dd637fd3228bd56fdbbd72193fd747c10d893a711c25bf6734c4da06b"
 -
 -BBCLASSEXTEND = "native"
--
--XORG_PN = "libXcursor"
-diff --git a/recipes/xorg-lib/libxdamage_1.1.2.bb b/recipes/xorg-lib/libxdamage_1.1.2.bb
+diff --git a/recipes/xorg-app/beforelight_1.0.3.bb b/recipes/xorg-app/beforelight_1.0.3.bb
 deleted file mode 100644
-index 294e514..0000000
---- a/recipes/xorg-lib/libxdamage_1.1.2.bb
+index 4d45541..0000000
+--- a/recipes/xorg-app/beforelight_1.0.3.bb
 +++ /dev/null
-@@ -1,11 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 damaged region extension library"
--LICENSE = "BSD-X"
--DEPENDS += "damageproto libxfixes"
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "a sample implementation of a screen saver for X"
+-DEPENDS += " libxscrnsaver libxt libxaw libxt"
 -PE = "1"
 -PR = "${INC_PR}.0"
 -
--SRC_URI[archive.md5sum] = "b42780bce703ec202a33e5693991c09d"
--SRC_URI[archive.sha256sum] = "a56a10acb34827c4d1a0ee282a338cbb04baa03d7fc7bc69e5690915c8fc7c0a"
--
--XORG_PN = "libXdamage"
-diff --git a/recipes/xorg-lib/libxdmcp_1.0.3.bb b/recipes/xorg-lib/libxdmcp_1.0.3.bb
+-SRC_URI[archive.md5sum] = "d55b0e7196dafcfeb4db3886af2e1969"
+-SRC_URI[archive.sha256sum] = "cae9427fa083a0ec3f2d1a3a6391508b31a2cf0220cb8d732c5d473a8c995c4e"
+diff --git a/recipes/xorg-app/bitmap_1.0.4.bb b/recipes/xorg-app/bitmap_1.0.4.bb
 deleted file mode 100644
-index 1e38efa..0000000
---- a/recipes/xorg-lib/libxdmcp_1.0.3.bb
+index f9cb165..0000000
+--- a/recipes/xorg-app/bitmap_1.0.4.bb
 +++ /dev/null
-@@ -1,12 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X Display Manager Control Protocol library"
--DEPENDS += "xproto"
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxmu xbitmaps libxt"
 -PE = "1"
 -PR = "${INC_PR}.0"
 -
--SRC_URI[archive.md5sum] = "d60941d471800f41a3f19b24bea855a7"
--SRC_URI[archive.sha256sum] = "d8033a2fae20fed6de4f16b73ad69ca1c511e7da31c88e9bc6e75976187378cb"
--
--BBCLASSEXTEND = "native nativesdk"
--
--XORG_PN = "libXdmcp"
-diff --git a/recipes/xorg-lib/libxevie_1.0.2.bb b/recipes/xorg-lib/libxevie_1.0.2.bb
+-SRC_URI[archive.md5sum] = "7d0c1ac193be2491c72a91ccf37ef18e"
+-SRC_URI[archive.sha256sum] = "2517aaa015795a348435e4e83bafe7642d4b2fe1976ee982a5d652cf417f79d8"
+diff --git a/recipes/xorg-app/constype_1.0.2.bb b/recipes/xorg-app/constype_1.0.2.bb
 deleted file mode 100644
-index d418768..0000000
---- a/recipes/xorg-lib/libxevie_1.0.2.bb
+index c72a171..0000000
+--- a/recipes/xorg-app/constype_1.0.2.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "print an X window dump"
+-DEPENDS += " libxmu "
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "83f623f961400ecc56ff52a716308173"
+-SRC_URI[archive.sha256sum] = "70375ea6b3e17cabc35492f87b5b138295c8f0258d65b0fbba998e3ff69bb634"
+diff --git a/recipes/xorg-app/editres_1.0.4.bb b/recipes/xorg-app/editres_1.0.4.bb
+deleted file mode 100644
+index fd09300..0000000
+--- a/recipes/xorg-app/editres_1.0.4.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxt libxmu libxaw"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "1800dda934ebb7c588ea686278a10e9f"
+-SRC_URI[archive.sha256sum] = "d7ce4c0bb214e055cb7680d8b88b9f551610fc40c28269cb51649133862f3302"
+diff --git a/recipes/xorg-app/fslsfonts_1.0.2.bb b/recipes/xorg-app/fslsfonts_1.0.2.bb
+deleted file mode 100644
+index b792a08..0000000
+--- a/recipes/xorg-app/fslsfonts_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libfs"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "a61be25c87ee42169ee4dc8344acc9e2"
+-SRC_URI[archive.sha256sum] = "9c8e7d573284272c633b5cf18e3358830b27bde72f4bc1ae83a1ab337d463a92"
+diff --git a/recipes/xorg-app/fstobdf_1.0.3.bb b/recipes/xorg-app/fstobdf_1.0.3.bb
+deleted file mode 100644
+index 0d92d5b..0000000
+--- a/recipes/xorg-app/fstobdf_1.0.3.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libfs"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "49a6225380f6c18fff664a043cd569b1"
+-SRC_URI[archive.sha256sum] = "f2242720045c69f69dc9e18320a1c6402e92234d40c237367560fae3d210f7b0"
+diff --git a/recipes/xorg-app/iceauth_1.0.3.bb b/recipes/xorg-app/iceauth_1.0.3.bb
+deleted file mode 100644
+index 5be63a0..0000000
+--- a/recipes/xorg-app/iceauth_1.0.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "a tool for manipulating ICE protocol authorization records"
+-DEPENDS += " libice"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "975ade3f238c1eb10705da0a91e6e8e7"
+-SRC_URI[archive.sha256sum] = "abca3ff6c9f2da2600a474f0e92ae5e62c43914f7bd3d948b91b0a7f9117d81e"
+diff --git a/recipes/xorg-app/ico_1.0.2.bb b/recipes/xorg-app/ico_1.0.2.bb
+deleted file mode 100644
+index 040017c..0000000
+--- a/recipes/xorg-app/ico_1.0.2.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "an X graphics demo using an animated polyhedron"
+-DEPENDS += " libxau libxdmcp"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "5711827c5c2563620b56c33aababbc63"
+-SRC_URI[archive.sha256sum] = "db2e96e18a2bcc29b91b9de7b758a7c67cebee27772fb540c44c7bc2c2218aa5"
+diff --git a/recipes/xorg-app/listres_1.0.1.bb b/recipes/xorg-app/listres_1.0.1.bb
+deleted file mode 100644
+index 7b466d8..0000000
+--- a/recipes/xorg-app/listres_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxt libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "827a1ac5adf9aadd0c13b54a897e297b"
+-SRC_URI[archive.sha256sum] = "7156e58025e240a501d5b32244b923b283bb35014ea5a4081b70044af8aef7a3"
+diff --git a/recipes/xorg-app/luit_1.0.4.bb b/recipes/xorg-app/luit_1.0.4.bb
+deleted file mode 100644
+index 71a2910..0000000
+--- a/recipes/xorg-app/luit_1.0.4.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "a filter for locale and ISO 2022 support on Unicode terminals"
+-DEPENDS += " zlib zlib libfontenc"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "4e45233e310d72dce307709761cf241b"
+-SRC_URI[archive.sha256sum] = "d11cd500975f652060f89d79cb8034011d99ee9aa6c82951680fc0621ecb8252"
+diff --git a/recipes/xorg-app/mkbold-mkitalic-native-0.11/makebifonts b/recipes/xorg-app/mkbold-mkitalic-native-0.11/makebifonts
+new file mode 100644
+index 0000000..dc09895
+--- /dev/null
++++ b/recipes/xorg-app/mkbold-mkitalic-native-0.11/makebifonts
+@@ -0,0 +1,5 @@
++#!/bin/sh
++cat $1.bdf | bdftopcf | gzip -c -3 > $2/$3.pcf.gz
++cat $1.bdf | mkbold | bdftopcf | gzip -c -3 > $2/$3_b.pcf.gz
++cat $1.bdf | mkitalic | bdftopcf | gzip -c -3 > $2/$3_i.pcf.gz
++cat $1.bdf | mkbolditalic | bdftopcf | gzip -c -3 > $2/$3_bi.pcf.gz
+diff --git a/recipes/xorg-app/mkbold-mkitalic-native/makebifonts b/recipes/xorg-app/mkbold-mkitalic-native/makebifonts
+deleted file mode 100644
+index dc09895..0000000
+--- a/recipes/xorg-app/mkbold-mkitalic-native/makebifonts
++++ /dev/null
+@@ -1,5 +0,0 @@
+-#!/bin/sh
+-cat $1.bdf | bdftopcf | gzip -c -3 > $2/$3.pcf.gz
+-cat $1.bdf | mkbold | bdftopcf | gzip -c -3 > $2/$3_b.pcf.gz
+-cat $1.bdf | mkitalic | bdftopcf | gzip -c -3 > $2/$3_i.pcf.gz
+-cat $1.bdf | mkbolditalic | bdftopcf | gzip -c -3 > $2/$3_bi.pcf.gz
+diff --git a/recipes/xorg-app/mkfontdir_1.0.5.bb b/recipes/xorg-app/mkfontdir_1.0.5.bb
+deleted file mode 100644
+index 0786a90..0000000
+--- a/recipes/xorg-app/mkfontdir_1.0.5.bb
 +++ /dev/null
 @@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 EvIE extension library"
--DEPENDS += "libxext evieext"
+-require xorg-app-common.inc
+-DESCRIPTION = "a program to create an index of X font files in a directory"
+-RDEPENDS_${PN} += "mkfontscale"
 -PE = "1"
--PR = "${INC_PR}.0"
+-PR = "${INC_PR}.1"
 -
--SRC_URI[archive.md5sum] = "88e9bf535364e7c821ef4014fb1ca2dd"
--SRC_URI[archive.sha256sum] = "ff70b81ad145932db2d206735cefcb698dadad241001df7ba6b97e8081d174da"
--
--XORG_PN = "libXevie"
-diff --git a/recipes/xorg-lib/libxext_1.1.1.bb b/recipes/xorg-lib/libxext_1.1.1.bb
-deleted file mode 100644
-index d3d6c66..0000000
---- a/recipes/xorg-lib/libxext_1.1.1.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 miscellaneous extension library"
--DEPENDS += "xproto virtual/libx11 xextproto libxau"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "c417c0e8df39a067f90a2a2e7133637d"
--SRC_URI[archive.sha256sum] = "110ce3bc7fb3a86659556994d0801c74bedcbd8ba8d1f90ee33d4c47a91e9bb3"
--
--BBCLASSEXTEND = "native nativesdk"
--
--XORG_PN = "libXext"
-diff --git a/recipes/xorg-lib/libxfixes_4.0.4.bb b/recipes/xorg-lib/libxfixes_4.0.4.bb
-deleted file mode 100644
-index 26ccb96..0000000
---- a/recipes/xorg-lib/libxfixes_4.0.4.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X Fixes extension library."
--LICENSE = "BSD-X"
--DEPENDS += "virtual/libx11 xproto fixesproto xextproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "7f2c40852eb337b237ad944ca5c30d49"
--SRC_URI[archive.sha256sum] = "ba31d7e5c5c1907c30cba50bfd669aa7fe860555287c29f6e786612e4be33b48"
+-SRC_URI[archive.md5sum] = "9365ac66d19186eaf030482d312fca06"
+-SRC_URI[archive.sha256sum] = "a534650cff503619f9101577d816cde283da993bc039273477bd8dfbd01a2d0b"
 -
 -BBCLASSEXTEND = "native"
--
--XORG_PN = "libXfixes"
-diff --git a/recipes/xorg-lib/libxfont_1.4.1.bb b/recipes/xorg-lib/libxfont_1.4.1.bb
+diff --git a/recipes/xorg-app/mkfontscale_1.0.7.bb b/recipes/xorg-app/mkfontscale_1.0.7.bb
 deleted file mode 100644
-index 8d046d1..0000000
---- a/recipes/xorg-lib/libxfont_1.4.1.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 font rasterisation library"
--LICENSE = "BSD-X"
--DEPENDS += "freetype fontcacheproto xtrans fontsproto libfontenc"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "4f2bed2a2be82e90a51a24bb3a22cdf0"
--SRC_URI[archive.sha256sum] = "112bfc30820b98deec4c9914536c5aa2f8b5162bd2b0bdb342343168e06f7679"
--
--# disable docs
--EXTRA_OECONF += " --disable-devel-docs "
--
--BBCLASSEXTEND = "native"
--
--XORG_PN = "libXfont"
-diff --git a/recipes/xorg-lib/libxft-2.1.14/autotools.patch b/recipes/xorg-lib/libxft-2.1.14/autotools.patch
-deleted file mode 100644
-index 62f4442..0000000
---- a/recipes/xorg-lib/libxft-2.1.14/autotools.patch
-+++ /dev/null
-@@ -1,54 +0,0 @@
--Index: libXft-2.1.14/configure.ac
--===================================================================
----- libXft-2.1.14.orig/configure.ac	2009-10-10 01:44:49.000000000 +0200
--+++ libXft-2.1.14/configure.ac	2009-12-23 20:56:25.759695121 +0100
--@@ -37,26 +37,14 @@
-- # Require xorg-macros: XORG_DEFAULT_OPTIONS
-- m4_ifndef([XORG_MACROS_VERSION], [AC_FATAL([must install xorg-macros 1.3 or later before running autoconf/autogen])])
-- XORG_MACROS_VERSION(1.3)
---AM_CONFIG_HEADER(config.h)
--+AC_CONFIG_HEADERS([config.h])
--+AC_CONFIG_HEADERS([include/X11/Xft/Xft.h])
-- 
-- # checks for progs
-- AC_PROG_CC
-- AC_PROG_LIBTOOL
-- XORG_DEFAULT_OPTIONS
-- 
---# Set library version for Xft.h from package version set in AC_INIT
---# copied from PACKAGE_VERSION_* settings in XORG_VERSION
---AC_CONFIG_HEADERS([include/X11/Xft/Xft.h])
---AC_DEFINE_UNQUOTED([XFT_MAJOR],
---                [`echo $PACKAGE_VERSION | cut -d . -f 1`],
---                [Major version of Xft])
---AC_DEFINE_UNQUOTED([XFT_MINOR],
---                [`echo $PACKAGE_VERSION | cut -d . -f 2 | cut -d - -f 1`],
---                [Minor version of Xft])
---AC_DEFINE_UNQUOTED([XFT_REVISION],
---                [`echo $PACKAGE_VERSION | cut -d . -f 3 | cut -d - -f 1`],
---                [Micro revision of Xft])
---
-- #
-- # Check for Xrender
-- #
--Index: libXft-2.1.14/include/X11/Xft/Xft.h.in
--===================================================================
----- libXft-2.1.14.orig/include/X11/Xft/Xft.h.in	2009-10-06 09:36:40.000000000 +0200
--+++ libXft-2.1.14/include/X11/Xft/Xft.h.in	2009-12-23 20:55:52.063859518 +0100
--@@ -27,11 +27,12 @@
--  * Current Xft version number, set from version in the Xft configure.ac file.
--  */
-- 
---#undef XFT_MAJOR	/* Will be substituted by configure */
---#undef XFT_MINOR	/* Will be substituted by configure */
---#undef XFT_REVISION	/* Will be substituted by configure */
--+/* Will be substituted by configure */
--+#undef PACKAGE_VERSION_MAJOR
--+#undef PACKAGE_VERSION_MINOR
--+#undef PACKAGE_VERSION_PATCHLEVEL
-- 
---#define XFT_VERSION	((XFT_MAJOR * 10000) + (XFT_MINOR * 100) + (XFT_REVISION))
--+#define XFT_VERSION	((PACKAGE_VERSION_MAJOR * 10000) + (PACKAGE_VERSION_MINOR * 100) + (PACKAGE_VERSION_PATCHLEVEL))
-- #define XftVersion	XFT_VERSION
-- 
-- #include <stdarg.h>
-diff --git a/recipes/xorg-lib/libxft_2.1.14.bb b/recipes/xorg-lib/libxft_2.1.14.bb
-deleted file mode 100644
-index 34fadcd..0000000
---- a/recipes/xorg-lib/libxft_2.1.14.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "FreeType-based font drawing library for X"
--DEPENDS += "libxrender freetype fontconfig"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI += "file://autotools.patch"
--SRC_URI[archive.md5sum] = "254e62a233491e0e1251636536163e20"
--SRC_URI[archive.sha256sum] = "700e9d594b81cad3dfd5fac4a5cfd0c4cf7780c812507ef04eb40139ebf5175e"
--
--FILES_${PN} = "${libdir}/lib*${SOLIBS}"
--FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/*.la \
--                ${libdir}/*.a ${libdir}/pkgconfig \
--                ${datadir}/aclocal ${bindir} ${sbindir}"
--
--python do_package() {
--        if bb.data.getVar('DEBIAN_NAMES', d, 1):
--            bb.data.setVar('PKG_${PN}', 'libxft2', d)
--        bb.build.exec_func('package_do_package', d)
--}
--
--XORG_PN = "libXft"
-diff --git a/recipes/xorg-lib/libxi_1.3.bb b/recipes/xorg-lib/libxi_1.3.bb
-deleted file mode 100644
-index 22ef799..0000000
---- a/recipes/xorg-lib/libxi_1.3.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Input extension library"
--DEPENDS += "libxext inputproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "8df4ece9bd1efb02c28acb2b6f485e09"
--SRC_URI[archive.sha256sum] = "362b8c0c60386841063bd7e01afa72e37eb87ada6e64e539d960f88c780a944b"
--
--XORG_PN = "libXi"
-diff --git a/recipes/xorg-lib/libxinerama_1.1.bb b/recipes/xorg-lib/libxinerama_1.1.bb
-deleted file mode 100644
-index 4d5f427..0000000
---- a/recipes/xorg-lib/libxinerama_1.1.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Xinerama extension library"
--DEPENDS += "libxext xineramaproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "a2ac01fc0426cdbb713c5d59cf9955ed"
--SRC_URI[archive.sha256sum] = "e0d39e74c2e131b44cc98dd4910165c9b8d937df93be58e6afb7c2a56772bf34"
--
--XORG_PN = "libXinerama"
-diff --git a/recipes/xorg-lib/libxkbfile_1.0.6.bb b/recipes/xorg-lib/libxkbfile_1.0.6.bb
-deleted file mode 100644
-index a7fc91d..0000000
---- a/recipes/xorg-lib/libxkbfile_1.0.6.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 keyboard file manipulation library"
--LICENSE = "GPL"
--DEPENDS += "virtual/libx11 kbproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "b01156e263eca8177e6b7f10441951c4"
--SRC_URI[archive.sha256sum] = "2ca43c1f6b2782994167a328471aa859d366cd7303c6dcbc8bda951a84a06039"
--
--BBCLASSEXTEND = "native"
-diff --git a/recipes/xorg-lib/libxmu_1.0.5.bb b/recipes/xorg-lib/libxmu_1.0.5.bb
-deleted file mode 100644
-index 5f361ef..0000000
---- a/recipes/xorg-lib/libxmu_1.0.5.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 miscellaneous utility library"
--DEPENDS += "libxt libxext"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "fc4d66be7a1a1eb474954728415e46d6"
--SRC_URI[archive.sha256sum] = "0692b6b0ec1019cfaa8418020b1127bfb0975f5a579a0b1f9eb7fd8f2f7126d7"
--
--PACKAGES =+ "libxmuu libxmuu-dev"
--
--FILES_libxmuu = "${libdir}/libXmuu.so.*"
--FILES_libxmuu-dev = "${libdir}/libXmuu.so"
--
--LEAD_SONAME = "libXmu"
--
--XORG_PN = "libXmu"
-diff --git a/recipes/xorg-lib/libxpm_3.5.8.bb b/recipes/xorg-lib/libxpm_3.5.8.bb
-deleted file mode 100644
-index 9bb7c8e..0000000
---- a/recipes/xorg-lib/libxpm_3.5.8.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Pixmap library"
--LICENSE = "X-BSD"
--DEPENDS += "libxext libsm libxt"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "38e58e72d476a74298a59052fde185a3"
--SRC_URI[archive.sha256sum] = "02a77aaa32e6e335e1ee04aeb9ad1008045d98274d64ed33bc5fc6c3a3542c4c"
--
--PACKAGES =+ "sxpm cxpm"
--
--FILES_cxpm = "${bindir}/cxpm"
--FILES_sxpm = "${bindir}/sxpm"
--
--XORG_PN = "libXpm"
-diff --git a/recipes/xorg-lib/libxrandr_1.2.1.bb b/recipes/xorg-lib/libxrandr_1.2.1.bb
-deleted file mode 100644
-index 983265d..0000000
---- a/recipes/xorg-lib/libxrandr_1.2.1.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Resize and Rotate extension library"
--LICENSE = "BSD-X"
--DEPENDS += "randrproto libxrender libxext"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "5860360f5b038cc728f388f875ce525d"
--SRC_URI[archive.sha256sum] = "2d2df642eb8e0527936cdf4ed1c096f69df53e9b95e2532c8ed0cabd06a45407"
--
--BBCLASSEXTEND = "nativesdk"
--
--XORG_PN = "libXrandr"
-diff --git a/recipes/xorg-lib/libxrandr_1.3.0.bb b/recipes/xorg-lib/libxrandr_1.3.0.bb
-deleted file mode 100644
-index 6808e08..0000000
---- a/recipes/xorg-lib/libxrandr_1.3.0.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Resize and Rotate extension library"
--LICENSE = "BSD-X"
--DEPENDS += "randrproto libxrender libxext"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "68eb59c3b7524db6ffd78746ee893d1d"
--SRC_URI[archive.sha256sum] = "5961ce0f77c5173a8208b3ed669ac01719f2bf4a10517ffa6c33a5e064802e78"
--
--BBCLASSEXTEND = "nativesdk"
--
--XORG_PN = "libXrandr"
-diff --git a/recipes/xorg-lib/libxrender_0.9.5.bb b/recipes/xorg-lib/libxrender_0.9.5.bb
-deleted file mode 100644
-index 047b8d7..0000000
---- a/recipes/xorg-lib/libxrender_0.9.5.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Rendering Extension client library"
--LICENSE = "BSD-X"
--DEPENDS += "virtual/libx11 renderproto xproto libxdmcp"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "276dd9e85daf0680616cd9f132b354c9"
--SRC_URI[archive.sha256sum] = "bc0590438a4be2b674cbac6f4ad46e5a89acd02aa94817da0fa8eb3ef05ed5d5"
--
--BBCLASSEXTEND = "native nativesdk"
--
--XORG_PN = "libXrender"
-diff --git a/recipes/xorg-lib/libxres_1.0.4.bb b/recipes/xorg-lib/libxres_1.0.4.bb
-deleted file mode 100644
-index 2049beb..0000000
---- a/recipes/xorg-lib/libxres_1.0.4.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Resource extension library"
--DEPENDS += "libxext resourceproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "4daf91f93d924e693f6f6ed276791be2"
--SRC_URI[archive.sha256sum] = "457f567a70ef8798cfb32f897ffa52c3f010923b07414b3a42277f56877572df"
--
--XORG_PN = "libXres"
-diff --git a/recipes/xorg-lib/libxscrnsaver_1.2.0.bb b/recipes/xorg-lib/libxscrnsaver_1.2.0.bb
-deleted file mode 100644
-index f02ff38..0000000
---- a/recipes/xorg-lib/libxscrnsaver_1.2.0.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X Screen Saver extension library"
--LICENSE = "GPL"
--DEPENDS += "libxext scrnsaverproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "33e54f64b55f22d8bbe822a5b62568cb"
--SRC_URI[archive.sha256sum] = "5b067bec0f2eb6405226bde5f20ca107eb0e5c11f5e5e24b455930c450487f85"
--
--RREPLACES_${PN} = "libxss"
--
--XORG_PN = "libXScrnSaver"
-diff --git a/recipes/xorg-lib/libxt_1.0.7.bb b/recipes/xorg-lib/libxt_1.0.7.bb
-deleted file mode 100644
-index 238ea06..0000000
---- a/recipes/xorg-lib/libxt_1.0.7.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 toolkit intrinsics library"
--DEPENDS += "libsm virtual/libx11 kbproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "96f3c93434a93186d178b60d4a262496"
--SRC_URI[archive.sha256sum] = "706d5248b061c8455f74ce5269ecc5ef59c27d0f52d22b07138f781928dda9ec"
--
--EXTRA_OECONF += "--disable-install-makestrs --disable-xkb"
--
--do_compile() {
--        (
--                unset CC LD CXX CCLD
--                oe_runmake -C util 'XT_CFLAGS=' 'CC=${BUILD_CC}' 'LD=${BUILD_LD}' 'CXX=${BUILD_CXX}' 'CCLD=${BUILD_CCLD}' 'CFLAGS=-D_GNU_SOURCE -I${STAGING_INCDIR_NATIVE} ${BUILD_CFLAGS}' 'LDFLAGS=${BUILD_LDFLAGS}' 'CXXFLAGS=${BUILD_CXXFLAGS}' 'CPPFLAGS=${BUILD_CPPFLAGS}' makestrs
--        ) || exit 1
--        oe_runmake
--}
--
--BBCLASSEXTEND = "native"
--
--XORG_PN = "libXt"
-diff --git a/recipes/xorg-lib/libxtst_1.1.0.bb b/recipes/xorg-lib/libxtst_1.1.0.bb
-deleted file mode 100644
-index 2a0ffbe..0000000
---- a/recipes/xorg-lib/libxtst_1.1.0.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X Test Extension: client side library"
--DEPENDS += "libxext recordproto inputproto libxi"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "dd6f3e20b87310187121539f9605d977"
--SRC_URI[archive.sha256sum] = "bd440f4779e06957211ba83782a5a1cfbf1d42b14fd3510a6dce440489a4eb26"
--
--XORG_PN = "libXtst"
-diff --git a/recipes/xorg-lib/libxv_1.0.5.bb b/recipes/xorg-lib/libxv_1.0.5.bb
-deleted file mode 100644
-index 7a60af8..0000000
---- a/recipes/xorg-lib/libxv_1.0.5.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Video extension library"
--LICENSE = "GPL"
--DEPENDS += "libxext videoproto"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "1d97798b1d8bbf8d9085e1b223a0738f"
--SRC_URI[archive.sha256sum] = "d549afdf22feefb97cca85dee12242af9f08c4d2435255dc7c30bd17d1d96010"
--
--XORG_PN = "libXv"
-diff --git a/recipes/xorg-lib/libxxf86dga_1.1.1.bb b/recipes/xorg-lib/libxxf86dga_1.1.1.bb
-deleted file mode 100644
-index aafe621..0000000
---- a/recipes/xorg-lib/libxxf86dga_1.1.1.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 Direct Graphics Access extension library"
--DEPENDS += "libxext xf86dgaproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "368837d3d7a4d3b4f70be48383e3544e"
--SRC_URI[archive.sha256sum] = "8d37f8895ecff15cb821a3e77bd505598983a5c6eae546e77e2d3070a8de5616"
--
--XORG_PN = "libXxf86dga"
-diff --git a/recipes/xorg-lib/libxxf86misc_1.0.2.bb b/recipes/xorg-lib/libxxf86misc_1.0.2.bb
-deleted file mode 100644
-index a44b46f..0000000
---- a/recipes/xorg-lib/libxxf86misc_1.0.2.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 XFree86 miscellaneous extension library"
--DEPENDS += "libxext xf86miscproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "51fed53e8de067d4b8666f75a0212400"
--SRC_URI[archive.sha256sum] = "8e64b6b1bf34fcd112b1fd866d77e110b47794e825a996e4492c0ee408957cb3"
--
--XORG_PN = "libXxf86misc"
-diff --git a/recipes/xorg-lib/libxxf86vm_1.1.0.bb b/recipes/xorg-lib/libxxf86vm_1.1.0.bb
-deleted file mode 100644
-index 181f220..0000000
---- a/recipes/xorg-lib/libxxf86vm_1.1.0.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "X11 XFree86 video mode extension library"
--DEPENDS += "libxext xf86vidmodeproto"
--PE = "1"
--PR = "${INC_PR}.0"
--
--SRC_URI[archive.md5sum] = "b431ad7084e1055fef99a9115237edd8"
--SRC_URI[archive.sha256sum] = "7cc5e577b337c5267f4e65741f27229111ada8cb833e24b47713a683e8838de8"
--
--XORG_PN = "libXxf86vm"
-diff --git a/recipes/xorg-lib/pixman-0.12.0/pixman-arm.patch b/recipes/xorg-lib/pixman-0.12.0/pixman-arm.patch
-deleted file mode 100644
-index 91dda03..0000000
---- a/recipes/xorg-lib/pixman-0.12.0/pixman-arm.patch
-+++ /dev/null
-@@ -1,632 +0,0 @@
--From: Jeff Muizelaar <jmuizelaar@mozilla.com>
--Date: Wed, 17 Sep 2008 19:53:20 +0000 (-0400)
--Subject: Add support for ARMv6 SIMD fastpaths.
--X-Git-Url: http://gitweb.freedesktop.org/?p=pixman.git;a=commitdiff;h=d0b181f347ef4720d130beee3f03196afbd28aba
--
--Add support for ARMv6 SIMD fastpaths.
-----
--
----- a/configure.ac
--+++ b/configure.ac
--@@ -277,6 +277,44 @@ AC_SUBST(VMX_CFLAGS)
-- 
-- AM_CONDITIONAL(USE_VMX, test $have_vmx_intrinsics = yes)
-- 
--+dnl Check for ARM
--+
--+have_armv6_simd=no
--+AC_MSG_CHECKING(whether to use ARM assembler)
--+xserver_save_CFLAGS=$CFLAGS
--+CFLAGS="$CFLAGS $ARM_CFLAGS"
--+AC_COMPILE_IFELSE([
--+int main () {
--+    asm("uqadd8 r1, r1, r2");
--+    return 0;
--+}], have_armv6_simd=yes)
--+CFLAGS=$xserver_save_CFLAGS
--+
--+AC_ARG_ENABLE(arm,
--+   [AC_HELP_STRING([--disable-arm],
--+                   [disable ARM fast paths])],
--+   [enable_arm=$enableval], [enable_arm=auto])
--+
--+if test $enable_arm = no ; then
--+   have_armv6_simd=disabled
--+fi
--+
--+if test $have_armv6_simd = yes ; then
--+   AC_DEFINE(USE_ARM, 1, [use ARM compiler intrinsics])
--+else
--+   ARM_CFLAGS=
--+fi
--+
--+AC_MSG_RESULT($have_armv6_simd)
--+if test $enable_arm = yes && test $have_armv6_simd = no ; then
--+   AC_MSG_ERROR([ARM intrinsics not detected])
--+fi
--+
--+AC_SUBST(ARM_CFLAGS)
--+
--+AM_CONDITIONAL(USE_ARM, test $have_armv6_simd = yes)
--+
--+
-- AC_ARG_ENABLE(gtk,
--    [AC_HELP_STRING([--enable-gtk],
--                    [enable tests using GTK+ [default=auto]])],
----- a/pixman/Makefile.am
--+++ b/pixman/Makefile.am
--@@ -79,3 +79,15 @@ libpixman_sse2_la_LIBADD = $(DEP_LIBS)
-- libpixman_1_la_LIBADD += libpixman-sse2.la
-- endif
-- 
--+# arm code
--+if USE_ARM
--+noinst_LTLIBRARIES += libpixman-arm.la
--+libpixman_arm_la_SOURCES = \
--+	pixman-arm.c \
--+	pixman-arm.h
--+libpixman_arm_la_CFLAGS = $(DEP_CFLAGS) $(ARM_CFLAGS)
--+libpixman_arm_la_LIBADD = $(DEP_LIBS)
--+libpixman_1_la_LIBADD += libpixman-arm.la
--+endif
--+
--+
----- /dev/null
--+++ b/pixman/pixman-arm.c
--@@ -0,0 +1,409 @@
--+/*
--+ * Copyright Â© 2008 Mozilla Corporation
--+ *
--+ * Permission to use, copy, modify, distribute, and sell this software and its
--+ * documentation for any purpose is hereby granted without fee, provided that
--+ * the above copyright notice appear in all copies and that both that
--+ * copyright notice and this permission notice appear in supporting
--+ * documentation, and that the name of Mozilla Corporation not be used in
--+ * advertising or publicity pertaining to distribution of the software without
--+ * specific, written prior permission.  Mozilla Corporation makes no
--+ * representations about the suitability of this software for any purpose.  It
--+ * is provided "as is" without express or implied warranty.
--+ *
--+ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS
--+ * SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
--+ * FITNESS, IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
--+ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
--+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
--+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
--+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
--+ * SOFTWARE.
--+ *
--+ * Author:  Jeff Muizelaar (jeff@infidigm.net)
--+ *
--+ */
--+#ifdef HAVE_CONFIG_H
--+#include <config.h>
--+#endif
--+
--+#include "pixman-arm.h"
--+
--+void
--+fbCompositeSrcAdd_8000x8000arm (pixman_op_t op,
--+				pixman_image_t * pSrc,
--+				pixman_image_t * pMask,
--+				pixman_image_t * pDst,
--+				int16_t      xSrc,
--+				int16_t      ySrc,
--+				int16_t      xMask,
--+				int16_t      yMask,
--+				int16_t      xDst,
--+				int16_t      yDst,
--+				uint16_t     width,
--+				uint16_t     height)
--+{
--+    uint8_t	*dstLine, *dst;
--+    uint8_t	*srcLine, *src;
--+    int	dstStride, srcStride;
--+    uint16_t	w;
--+    uint8_t	s, d;
--+
--+    fbComposeGetStart (pSrc, xSrc, ySrc, uint8_t, srcStride, srcLine, 1);
--+    fbComposeGetStart (pDst, xDst, yDst, uint8_t, dstStride, dstLine, 1);
--+
--+    while (height--)
--+    {
--+	dst = dstLine;
--+	dstLine += dstStride;
--+	src = srcLine;
--+	srcLine += srcStride;
--+	w = width;
--+
--+	while (w && (unsigned long)dst & 3)
--+	{
--+	    s = *src;
--+	    d = *dst;
--+	    asm("uqadd8 %0, %1, %2" : "+r"(d) : "r"(s));
--+	    *dst = d;
--+
--+	    dst++;
--+	    src++;
--+	    w--;
--+	}
--+
--+	while (w >= 4)
--+	{
--+	    asm("uqadd8 %0, %1, %2" : "=r"(*(uint32_t*)dst) : "r"(*(uint32_t*)src), "r"(*(uint32_t*)dst));
--+	    dst += 4;
--+	    src += 4;
--+	    w -= 4;
--+	}
--+
--+	while (w)
--+	{
--+	    s = *src;
--+	    d = *dst;
--+	    asm("uqadd8 %0, %1, %2" : "+r"(d) : "r"(s));
--+	    *dst = d;
--+
--+	    dst++;
--+	    src++;
--+	    w--;
--+	}
--+    }
--+
--+}
--+
--+void
--+fbCompositeSrc_8888x8888arm (pixman_op_t op,
--+			 pixman_image_t * pSrc,
--+			 pixman_image_t * pMask,
--+			 pixman_image_t * pDst,
--+			 int16_t      xSrc,
--+			 int16_t      ySrc,
--+			 int16_t      xMask,
--+			 int16_t      yMask,
--+			 int16_t      xDst,
--+			 int16_t      yDst,
--+			 uint16_t     width,
--+			 uint16_t     height)
--+{
--+    uint32_t	*dstLine, *dst;
--+    uint32_t	*srcLine, *src;
--+    int	dstStride, srcStride;
--+    uint16_t	w;
--+    uint32_t component_half = 0x800080;
--+    uint32_t upper_component_mask = 0xff00ff00;
--+    uint32_t alpha_mask = 0xff;
--+
--+    fbComposeGetStart (pDst, xDst, yDst, uint32_t, dstStride, dstLine, 1);
--+    fbComposeGetStart (pSrc, xSrc, ySrc, uint32_t, srcStride, srcLine, 1);
--+
--+    while (height--)
--+    {
--+	dst = dstLine;
--+	dstLine += dstStride;
--+	src = srcLine;
--+	srcLine += srcStride;
--+	w = width;
--+
--+//#define inner_branch
--+	asm volatile (
--+			"cmp %[w], #0\n\t"
--+			"beq 2f\n\t"
--+			"1:\n\t"
--+			/* load dest */
--+			"ldr r5, [%[src]], #4\n\t"
--+#ifdef inner_branch
--+			/* We can avoid doing the multiplication in two cases: 0x0 or 0xff.
--+			 * The 0x0 case also allows us to avoid doing an unecessary data
--+			 * write which is more valuable so we only check for that */
--+			"cmp r5, #0x1000000\n\t"
--+			"blt 3f\n\t"
--+
--+			/* = 255 - alpha */
--+			"sub r8, %[alpha_mask], r5, lsr #24\n\t"
--+
--+			"ldr r4, [%[dest]] \n\t"
--+
--+#else
--+			"ldr r4, [%[dest]] \n\t"
--+
--+			/* = 255 - alpha */
--+			"sub r8, %[alpha_mask], r5, lsr #24\n\t"
--+#endif
--+			"uxtb16 r6, r4\n\t"
--+			"uxtb16 r7, r4, ror #8\n\t"
--+
--+			/* multiply by 257 and divide by 65536 */
--+			"mla r6, r6, r8, %[component_half]\n\t"
--+			"mla r7, r7, r8, %[component_half]\n\t"
--+
--+			"uxtab16 r6, r6, r6, ror #8\n\t"
--+			"uxtab16 r7, r7, r7, ror #8\n\t"
--+
--+			/* recombine the 0xff00ff00 bytes of r6 and r7 */
--+			"and r7, %[upper_component_mask]\n\t"
--+			"uxtab16 r6, r7, r6, ror #8\n\t"
--+
--+			"uqadd8 r5, r6, r5\n\t"
--+
--+#ifdef inner_branch
--+			"3:\n\t"
--+
--+#endif
--+			"str r5, [%[dest]], #4\n\t"
--+			/* increment counter and jmp to top */
--+			"subs	%[w], %[w], #1\n\t"
--+			"bne	1b\n\t"
--+			"2:\n\t"
--+			: [w] "+r" (w), [dest] "+r" (dst), [src] "+r" (src)
--+			: [component_half] "r" (component_half), [upper_component_mask] "r" (upper_component_mask),
--+			  [alpha_mask] "r" (alpha_mask)
--+			: "r4", "r5", "r6", "r7", "r8", "cc", "memory"
--+			);
--+    }
--+}
--+
--+void
--+fbCompositeSrc_8888x8x8888arm (pixman_op_t op,
--+			       pixman_image_t * pSrc,
--+			       pixman_image_t * pMask,
--+			       pixman_image_t * pDst,
--+			       int16_t	xSrc,
--+			       int16_t	ySrc,
--+			       int16_t      xMask,
--+			       int16_t      yMask,
--+			       int16_t      xDst,
--+			       int16_t      yDst,
--+			       uint16_t     width,
--+			       uint16_t     height)
--+{
--+    uint32_t	*dstLine, *dst;
--+    uint32_t	*srcLine, *src;
--+    uint32_t	mask;
--+    int	dstStride, srcStride;
--+    uint16_t	w;
--+    uint32_t component_half = 0x800080;
--+    uint32_t alpha_mask = 0xff;
--+
--+    fbComposeGetStart (pDst, xDst, yDst, uint32_t, dstStride, dstLine, 1);
--+    fbComposeGetStart (pSrc, xSrc, ySrc, uint32_t, srcStride, srcLine, 1);
--+
--+    fbComposeGetSolid (pMask, mask, pDst->bits.format);
--+    mask = (mask) >> 24;
--+
--+    while (height--)
--+    {
--+	dst = dstLine;
--+	dstLine += dstStride;
--+	src = srcLine;
--+	srcLine += srcStride;
--+	w = width;
--+
--+//#define inner_branch
--+	asm volatile (
--+			"cmp %[w], #0\n\t"
--+			"beq 2f\n\t"
--+			"1:\n\t"
--+			/* load dest */
--+			"ldr r5, [%[src]], #4\n\t"
--+#ifdef inner_branch
--+			/* We can avoid doing the multiplication in two cases: 0x0 or 0xff.
--+			 * The 0x0 case also allows us to avoid doing an unecessary data
--+			 * write which is more valuable so we only check for that */
--+			"cmp r5, #0x1000000\n\t"
--+			"blt 3f\n\t"
--+
--+#endif
--+			"ldr r4, [%[dest]] \n\t"
--+
--+			"uxtb16 r6, r5\n\t"
--+			"uxtb16 r7, r5, ror #8\n\t"
--+
--+			/* multiply by alpha (r8) then by 257 and divide by 65536 */
--+			"mla r6, r6, %[mask_alpha], %[component_half]\n\t"
--+			"mla r7, r7, %[mask_alpha], %[component_half]\n\t"
--+
--+			"uxtab16 r6, r6, r6, ror #8\n\t"
--+			"uxtab16 r7, r7, r7, ror #8\n\t"
--+
--+			"uxtb16 r6, r6, ror #8\n\t"
--+			"uxtb16 r7, r7, ror #8\n\t"
--+
--+			/* recombine */
--+			"orr r5, r6, r7, lsl #8\n\t"
--+
--+			"uxtb16 r6, r4\n\t"
--+			"uxtb16 r7, r4, ror #8\n\t"
--+
--+			/* 255 - alpha */
--+			"sub r8, %[alpha_mask], r5, lsr #24\n\t"
--+
--+			/* multiply by alpha (r8) then by 257 and divide by 65536 */
--+			"mla r6, r6, r8, %[component_half]\n\t"
--+			"mla r7, r7, r8, %[component_half]\n\t"
--+
--+			"uxtab16 r6, r6, r6, ror #8\n\t"
--+			"uxtab16 r7, r7, r7, ror #8\n\t"
--+
--+			"uxtb16 r6, r6, ror #8\n\t"
--+			"uxtb16 r7, r7, ror #8\n\t"
--+
--+			/* recombine */
--+			"orr r6, r6, r7, lsl #8\n\t"
--+
--+			"uqadd8 r5, r6, r5\n\t"
--+
--+#ifdef inner_branch
--+			"3:\n\t"
--+
--+#endif
--+			"str r5, [%[dest]], #4\n\t"
--+			/* increment counter and jmp to top */
--+			"subs	%[w], %[w], #1\n\t"
--+			"bne	1b\n\t"
--+			"2:\n\t"
--+			: [w] "+r" (w), [dest] "+r" (dst), [src] "+r" (src)
--+			: [component_half] "r" (component_half), [mask_alpha] "r" (mask),
--+			  [alpha_mask] "r" (alpha_mask)
--+			: "r4", "r5", "r6", "r7", "r8", "r9", "cc", "memory"
--+			);
--+    }
--+}
--+
--+void
--+fbCompositeSolidMask_nx8x8888arm (pixman_op_t      op,
--+			       pixman_image_t * pSrc,
--+			       pixman_image_t * pMask,
--+			       pixman_image_t * pDst,
--+			       int16_t      xSrc,
--+			       int16_t      ySrc,
--+			       int16_t      xMask,
--+			       int16_t      yMask,
--+			       int16_t      xDst,
--+			       int16_t      yDst,
--+			       uint16_t     width,
--+			       uint16_t     height)
--+{
--+    uint32_t	 src, srca;
--+    uint32_t	*dstLine, *dst;
--+    uint8_t	*maskLine, *mask;
--+    int		 dstStride, maskStride;
--+    uint16_t	 w;
--+
--+    fbComposeGetSolid(pSrc, src, pDst->bits.format);
--+
--+    srca = src >> 24;
--+    if (src == 0)
--+	return;
--+
--+    uint32_t component_mask = 0xff00ff;
--+    uint32_t component_half = 0x800080;
--+
--+    uint32_t src_hi = (src >> 8) & component_mask;
--+    uint32_t src_lo = src & component_mask;
--+
--+    fbComposeGetStart (pDst, xDst, yDst, uint32_t, dstStride, dstLine, 1);
--+    fbComposeGetStart (pMask, xMask, yMask, uint8_t, maskStride, maskLine, 1);
--+
--+    while (height--)
--+    {
--+	dst = dstLine;
--+	dstLine += dstStride;
--+	mask = maskLine;
--+	maskLine += maskStride;
--+	w = width;
--+
--+//#define inner_branch
--+	asm volatile (
--+			"cmp %[w], #0\n\t"
--+			"beq 2f\n\t"
--+			"1:\n\t"
--+			/* load mask */
--+			"ldrb r5, [%[mask]], #1\n\t"
--+#ifdef inner_branch
--+			/* We can avoid doing the multiplication in two cases: 0x0 or 0xff.
--+			 * The 0x0 case also allows us to avoid doing an unecessary data
--+			 * write which is more valuable so we only check for that */
--+			/* 0x1000000 is the least value that contains alpha all values
--+			 * less than it have a 0 alpha value */
--+			"cmp r5, #0x0\n\t"
--+			"beq 3f\n\t"
--+
--+#endif
--+			"ldr r4, [%[dest]] \n\t"
--+
--+			/* multiply by alpha (r8) then by 257 and divide by 65536 */
--+			"mla r6, %[src_lo], r5, %[component_half]\n\t"
--+			"mla r7, %[src_hi], r5, %[component_half]\n\t"
--+
--+			"uxtab16 r6, r6, r6, ror #8\n\t"
--+			"uxtab16 r7, r7, r7, ror #8\n\t"
--+
--+			"uxtb16 r6, r6, ror #8\n\t"
--+			"uxtb16 r7, r7, ror #8\n\t"
--+
--+			/* recombine */
--+			"orr r5, r6, r7, lsl #8\n\t"
--+
--+			"uxtb16 r6, r4\n\t"
--+			"uxtb16 r7, r4, ror #8\n\t"
--+
--+			/* we could simplify this to use 'sub' if we were
--+			 * willing to give up a register for alpha_mask */
--+			"mvn r8, r5\n\t"
--+			"mov r8, r8, lsr #24\n\t"
--+
--+			/* multiply by alpha (r8) then by 257 and divide by 65536 */
--+			"mla r6, r6, r8, %[component_half]\n\t"
--+			"mla r7, r7, r8, %[component_half]\n\t"
--+
--+			"uxtab16 r6, r6, r6, ror #8\n\t"
--+			"uxtab16 r7, r7, r7, ror #8\n\t"
--+
--+			"uxtb16 r6, r6, ror #8\n\t"
--+			"uxtb16 r7, r7, ror #8\n\t"
--+
--+			/* recombine */
--+			"orr r6, r6, r7, lsl #8\n\t"
--+
--+			"uqadd8 r5, r6, r5\n\t"
--+
--+#ifdef inner_branch
--+			"3:\n\t"
--+
--+#endif
--+			"str r5, [%[dest]], #4\n\t"
--+			/* increment counter and jmp to top */
--+			"subs	%[w], %[w], #1\n\t"
--+			"bne	1b\n\t"
--+			"2:\n\t"
--+			: [w] "+r" (w), [dest] "+r" (dst), [src] "+r" (src), [mask] "+r" (mask)
--+			: [component_half] "r" (component_half),
--+			  [src_hi] "r" (src_hi), [src_lo] "r" (src_lo)
--+			: "r4", "r5", "r6", "r7", "r8", "cc", "memory"
--+			);
--+    }
--+}
----- /dev/null
--+++ b/pixman/pixman-arm.h
--@@ -0,0 +1,94 @@
--+/*
--+ * Copyright Â© 2008 Mozilla Corporation
--+ *
--+ * Permission to use, copy, modify, distribute, and sell this software and its
--+ * documentation for any purpose is hereby granted without fee, provided that
--+ * the above copyright notice appear in all copies and that both that
--+ * copyright notice and this permission notice appear in supporting
--+ * documentation, and that the name of Mozilla Corporation not be used in
--+ * advertising or publicity pertaining to distribution of the software without
--+ * specific, written prior permission.  Mozilla Corporation makes no
--+ * representations about the suitability of this software for any purpose.  It
--+ * is provided "as is" without express or implied warranty.
--+ *
--+ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS
--+ * SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
--+ * FITNESS, IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
--+ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
--+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
--+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
--+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
--+ * SOFTWARE.
--+ *
--+ * Author:  Jeff Muizelaar (jeff@infidigm.net)
--+ *
--+ */
--+
--+#include "pixman-private.h"
--+
--+#ifdef USE_ARM
--+
--+static inline pixman_bool_t pixman_have_arm(void) { return TRUE; }
--+
--+#else
--+#define pixman_have_arm() FALSE
--+#endif
--+
--+#ifdef USE_ARM
--+
--+void
--+fbCompositeSrcAdd_8000x8000arm (pixman_op_t op,
--+				pixman_image_t * pSrc,
--+				pixman_image_t * pMask,
--+				pixman_image_t * pDst,
--+				int16_t      xSrc,
--+				int16_t      ySrc,
--+				int16_t      xMask,
--+				int16_t      yMask,
--+				int16_t      xDst,
--+				int16_t      yDst,
--+				uint16_t     width,
--+				uint16_t     height);
--+void
--+fbCompositeSrc_8888x8888arm (pixman_op_t op,
--+			 pixman_image_t * pSrc,
--+			 pixman_image_t * pMask,
--+			 pixman_image_t * pDst,
--+			 int16_t      xSrc,
--+			 int16_t      ySrc,
--+			 int16_t      xMask,
--+			 int16_t      yMask,
--+			 int16_t      xDst,
--+			 int16_t      yDst,
--+			 uint16_t     width,
--+			 uint16_t     height);
--+
--+void
--+fbCompositeSrc_8888x8x8888arm (pixman_op_t op,
--+			 pixman_image_t * pSrc,
--+			 pixman_image_t * pMask,
--+			 pixman_image_t * pDst,
--+			 int16_t      xSrc,
--+			 int16_t      ySrc,
--+			 int16_t      xMask,
--+			 int16_t      yMask,
--+			 int16_t      xDst,
--+			 int16_t      yDst,
--+			 uint16_t     width,
--+			 uint16_t     height);
--+void
--+fbCompositeSolidMask_nx8x8888arm (pixman_op_t op,
--+			 pixman_image_t * pSrc,
--+			 pixman_image_t * pMask,
--+			 pixman_image_t * pDst,
--+			 int16_t      xSrc,
--+			 int16_t      ySrc,
--+			 int16_t      xMask,
--+			 int16_t      yMask,
--+			 int16_t      xDst,
--+			 int16_t      yDst,
--+			 uint16_t     width,
--+			 uint16_t     height);
--+
--+
--+#endif /* USE_ARM */
----- a/pixman/pixman-pict.c
--+++ b/pixman/pixman-pict.c
--@@ -34,6 +34,7 @@
-- #include "pixman-mmx.h"
-- #include "pixman-vmx.h"
-- #include "pixman-sse2.h"
--+#include "pixman-arm.h"
-- #include "pixman-combine32.h"
-- 
-- #ifdef __GNUC__
--@@ -1479,6 +1480,26 @@ static const FastPathInfo vmx_fast_paths
-- };
-- #endif
-- 
--+#ifdef USE_ARM
--+static const FastPathInfo arm_fast_paths[] =
--+{
--+    { PIXMAN_OP_OVER, PIXMAN_a8r8g8b8, PIXMAN_null,     PIXMAN_a8r8g8b8, fbCompositeSrc_8888x8888arm,      0 },
--+    { PIXMAN_OP_OVER, PIXMAN_a8r8g8b8, PIXMAN_null,	PIXMAN_x8r8g8b8, fbCompositeSrc_8888x8888arm,	   0 },
--+    { PIXMAN_OP_OVER, PIXMAN_a8b8g8r8, PIXMAN_null,	PIXMAN_a8b8g8r8, fbCompositeSrc_8888x8888arm,	   0 },
--+    { PIXMAN_OP_OVER, PIXMAN_a8b8g8r8, PIXMAN_null,	PIXMAN_x8b8g8r8, fbCompositeSrc_8888x8888arm,	   0 },
--+    { PIXMAN_OP_OVER, PIXMAN_a8r8g8b8, PIXMAN_a8,       PIXMAN_a8r8g8b8, fbCompositeSrc_8888x8x8888arm,    NEED_SOLID_MASK },
--+    { PIXMAN_OP_OVER, PIXMAN_a8r8g8b8, PIXMAN_a8,       PIXMAN_x8r8g8b8, fbCompositeSrc_8888x8x8888arm,	   NEED_SOLID_MASK },
--+
--+    { PIXMAN_OP_ADD, PIXMAN_a8,        PIXMAN_null,     PIXMAN_a8,       fbCompositeSrcAdd_8000x8000arm,   0 },
--+
--+    { PIXMAN_OP_OVER, PIXMAN_solid,    PIXMAN_a8,       PIXMAN_a8r8g8b8, fbCompositeSolidMask_nx8x8888arm,     0 },
--+    { PIXMAN_OP_OVER, PIXMAN_solid,    PIXMAN_a8,       PIXMAN_x8r8g8b8, fbCompositeSolidMask_nx8x8888arm,     0 },
--+    { PIXMAN_OP_OVER, PIXMAN_solid,    PIXMAN_a8,       PIXMAN_a8b8g8r8, fbCompositeSolidMask_nx8x8888arm,     0 },
--+    { PIXMAN_OP_OVER, PIXMAN_solid,    PIXMAN_a8,       PIXMAN_x8b8g8r8, fbCompositeSolidMask_nx8x8888arm,     0 },
--+
--+    { PIXMAN_OP_NONE },
--+};
--+#endif
-- 
-- static const FastPathInfo c_fast_paths[] =
-- {
--@@ -1829,6 +1850,12 @@ pixman_image_composite (pixman_op_t     
-- 	if (!info && pixman_have_vmx())
-- 	    info = get_fast_path (vmx_fast_paths, op, pSrc, pMask, pDst, pixbuf);
-- #endif
--+
--+#ifdef USE_ARM
--+	if (!info && pixman_have_arm())
--+	    info = get_fast_path (arm_fast_paths, op, pSrc, pMask, pDst, pixbuf);
--+#endif
--+
--         if (!info)
-- 	    info = get_fast_path (c_fast_paths, op, pSrc, pMask, pDst, pixbuf);
-- 
-diff --git a/recipes/xorg-lib/pixman-0.12.0/pixman-x888-565.patch b/recipes/xorg-lib/pixman-0.12.0/pixman-x888-565.patch
-deleted file mode 100644
-index a3fa331..0000000
---- a/recipes/xorg-lib/pixman-0.12.0/pixman-x888-565.patch
-+++ /dev/null
-@@ -1,68 +0,0 @@
--From: Vladimir Vukicevic <vladimir@slide.(none)>
--Date: Wed, 17 Sep 2008 20:01:31 +0000 (-0400)
--Subject: Add SRC x888x0565 C fast path
--X-Git-Url: http://gitweb.freedesktop.org/?p=pixman.git;a=commitdiff;h=7180230d4d87c55dfef1e17a0cc3b125d45aa3a0
--
--Add SRC x888x0565 C fast path
-----
--
----- a/pixman/pixman-pict.c
--+++ b/pixman/pixman-pict.c
--@@ -759,6 +759,46 @@ fbCompositeSrc_8888x0565 (pixman_op_t op
--     }
-- }
-- 
--+
--+void
--+fbCompositeSrc_x888x0565 (pixman_op_t op,
--+                          pixman_image_t * pSrc,
--+                          pixman_image_t * pMask,
--+                          pixman_image_t * pDst,
--+                          int16_t      xSrc,
--+                          int16_t      ySrc,
--+                          int16_t      xMask,
--+                          int16_t      yMask,
--+                          int16_t      xDst,
--+                          int16_t      yDst,
--+                          uint16_t     width,
--+                          uint16_t     height)
--+{
--+    uint16_t	*dstLine, *dst;
--+    uint32_t	*srcLine, *src, s;
--+    int	dstStride, srcStride;
--+    uint16_t	w;
--+
--+    fbComposeGetStart (pSrc, xSrc, ySrc, uint32_t, srcStride, srcLine, 1);
--+    fbComposeGetStart (pDst, xDst, yDst, uint16_t, dstStride, dstLine, 1);
--+
--+    while (height--)
--+    {
--+	dst = dstLine;
--+	dstLine += dstStride;
--+	src = srcLine;
--+	srcLine += srcStride;
--+	w = width;
--+
--+	while (w--)
--+	{
--+	    s = READ(pSrc, src++);
--+	    WRITE(pDst, dst, cvt8888to0565(s));
--+	    dst++;
--+	}
--+    }
--+}
--+
-- void
-- fbCompositeSrcAdd_8000x8000 (pixman_op_t	op,
-- 			     pixman_image_t * pSrc,
--@@ -1568,6 +1608,10 @@ static const FastPathInfo c_fast_paths[]
--     { PIXMAN_OP_SRC, PIXMAN_r5g6b5,    PIXMAN_null,     PIXMAN_r5g6b5,   fbCompositeSrcSrc_nxn, 0 },
--     { PIXMAN_OP_SRC, PIXMAN_b5g6r5,    PIXMAN_null,     PIXMAN_b5g6r5,   fbCompositeSrcSrc_nxn, 0 },
-- #endif
--+    { PIXMAN_OP_SRC, PIXMAN_a8r8g8b8,  PIXMAN_null,     PIXMAN_r5g6b5,   fbCompositeSrc_x888x0565, 0 },
--+    { PIXMAN_OP_SRC, PIXMAN_x8r8g8b8,  PIXMAN_null,     PIXMAN_r5g6b5,   fbCompositeSrc_x888x0565, 0 },
--+    { PIXMAN_OP_SRC, PIXMAN_a8b8g8r8,  PIXMAN_null,     PIXMAN_b5g6r5,   fbCompositeSrc_x888x0565, 0 },
--+    { PIXMAN_OP_SRC, PIXMAN_x8b8g8r8,  PIXMAN_null,     PIXMAN_b5g6r5,   fbCompositeSrc_x888x0565, 0 },
--     { PIXMAN_OP_IN,  PIXMAN_a8,        PIXMAN_null,     PIXMAN_a8,       fbCompositeSrcIn_8x8,   0 },
--     { PIXMAN_OP_IN,  PIXMAN_solid,     PIXMAN_a8,	PIXMAN_a8,	 fbCompositeSolidMaskIn_nx8x8, 0 },
--     { PIXMAN_OP_NONE },
-diff --git a/recipes/xorg-lib/pixman-0.18.4/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch b/recipes/xorg-lib/pixman-0.18.4/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-deleted file mode 100644
-index b2488de..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-+++ /dev/null
-@@ -1,114 +0,0 @@
--From 05875eca09ee23ea04ccb32f87c7c355fd1b88f3 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Tue, 16 Mar 2010 16:55:28 +0100
--Subject: [PATCH 1/7] Generic C implementation of pixman_blt with overlapping support
--
--Uses memcpy/memmove functions to copy pixels, can handle the
--case when both source and destination areas are in the same
--image (this is useful for scrolling).
--
--It is assumed that copying direction is only important when
--using the same image for both source and destination (and
--src_stride == dst_stride). Copying direction is undefined
--for the images with different source and destination stride
--which happen to be in the overlapped areas (but this is an
--unrealistic case anyway).
-----
-- pixman/pixman-general.c |   21 ++++++++++++++++++---
-- pixman/pixman-private.h |   43 +++++++++++++++++++++++++++++++++++++++++++
-- 2 files changed, 61 insertions(+), 3 deletions(-)
--
--diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
--index bddf79a..f525744 100644
----- a/pixman/pixman-general.c
--+++ b/pixman/pixman-general.c
--@@ -285,9 +285,24 @@ general_blt (pixman_implementation_t *imp,
--              int                      width,
--              int                      height)
-- {
---    /* We can't blit unless we have sse2 or mmx */
---
---    return FALSE;
--+    uint8_t *dst_bytes = (uint8_t *)dst_bits;
--+    uint8_t *src_bytes = (uint8_t *)src_bits;
--+    int bpp;
--+
--+    if (src_bpp != dst_bpp || src_bpp & 7)
--+	return FALSE;
--+
--+    bpp = src_bpp >> 3;
--+    width *= bpp;
--+    src_stride *= 4;
--+    dst_stride *= 4;
--+    pixman_blt_helper (src_bytes + src_y * src_stride + src_x * bpp,
--+                       dst_bytes + dst_y * dst_stride + dst_x * bpp,
--+                       src_stride,
--+                       dst_stride,
--+                       width,
--+                       height);
--+    return TRUE;
-- }
-- 
-- static pixman_bool_t
--diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
--index d5767af..eeb677d 100644
----- a/pixman/pixman-private.h
--+++ b/pixman/pixman-private.h
--@@ -10,6 +10,7 @@
-- 
-- #include "pixman.h"
-- #include <time.h>
--+#include <string.h>
-- #include <assert.h>
-- #include <stdio.h>
-- #include <string.h>
--@@ -867,4 +868,46 @@ void pixman_timer_register (pixman_timer_t *timer);
-- 
-- #endif /* PIXMAN_TIMERS */
-- 
--+/* a helper function, can blit 8-bit images with src/dst overlapping support */
--+static inline void
--+pixman_blt_helper (uint8_t *src_bytes,
--+                   uint8_t *dst_bytes,
--+                   int      src_stride,
--+                   int      dst_stride,
--+                   int      width,
--+                   int      height)
--+{
--+    /*
--+     * The second part of this check is not strictly needed, but it prevents
--+     * unnecessary upside-down processing of areas which belong to different
--+     * images. Upside-down processing can be slower with fixed-distance-ahead
--+     * prefetch and perceived as having more tearing.
--+     */
--+    if (src_bytes < dst_bytes + width &&
--+	src_bytes + src_stride * height > dst_bytes)
--+    {
--+	src_bytes += src_stride * height - src_stride;
--+	dst_bytes += dst_stride * height - dst_stride;
--+	dst_stride = -dst_stride;
--+	src_stride = -src_stride;
--+	/* Horizontal scrolling to the left needs memmove */
--+	if (src_bytes + width > dst_bytes)
--+	{
--+	    while (--height >= 0)
--+	    {
--+		memmove (dst_bytes, src_bytes, width);
--+		dst_bytes += dst_stride;
--+		src_bytes += src_stride;
--+	    }
--+	    return;
--+	}
--+    }
--+    while (--height >= 0)
--+    {
--+	memcpy (dst_bytes, src_bytes, width);
--+	dst_bytes += dst_stride;
--+	src_bytes += src_stride;
--+    }
--+}
--+
-- #endif /* PIXMAN_PRIVATE_H */
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.18.4/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch b/recipes/xorg-lib/pixman-0.18.4/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-deleted file mode 100644
-index ca6a3c5..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-+++ /dev/null
-@@ -1,91 +0,0 @@
--From 8aca14948a43f5cfd478e22cef745e55960d68cb Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Thu, 22 Oct 2009 05:45:47 +0300
--Subject: [PATCH 2/7] Support of overlapping src/dst for pixman_blt_mmx
--
-----
-- pixman/pixman-mmx.c |   55 +++++++++++++++++++++++++++++---------------------
-- 1 files changed, 32 insertions(+), 23 deletions(-)
--
--diff --git a/pixman/pixman-mmx.c b/pixman/pixman-mmx.c
--index d51b40c..6e0296b 100644
----- a/pixman/pixman-mmx.c
--+++ b/pixman/pixman-mmx.c
--@@ -2996,34 +2996,43 @@ pixman_blt_mmx (uint32_t *src_bits,
-- {
--     uint8_t *   src_bytes;
--     uint8_t *   dst_bytes;
---    int byte_width;
--+    int         bpp;
-- 
---    if (src_bpp != dst_bpp)
--+    if (src_bpp != dst_bpp || src_bpp & 7)
-- 	return FALSE;
-- 
---    if (src_bpp == 16)
---    {
---	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
---	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
---	src_bytes = (uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
---	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
---	byte_width = 2 * width;
---	src_stride *= 2;
---	dst_stride *= 2;
---    }
---    else if (src_bpp == 32)
--+    bpp = src_bpp >> 3;
--+    width *= bpp;
--+    src_stride *= 4;
--+    dst_stride *= 4;
--+    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
--+    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
--+
--+    if (src_bpp != 16 && src_bpp != 32)
--     {
---	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
---	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
---	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
---	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
---	byte_width = 4 * width;
---	src_stride *= 4;
---	dst_stride *= 4;
--+	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
--+	                   width, height);
--+	return TRUE;
--     }
---    else
--+
--+    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
--     {
---	return FALSE;
--+	src_bytes += src_stride * height - src_stride;
--+	dst_bytes += dst_stride * height - dst_stride;
--+	dst_stride = -dst_stride;
--+	src_stride = -src_stride;
--+
--+	if (src_bytes + width > dst_bytes)
--+	{
--+	    /* TODO: reverse scanline copy using MMX */
--+	    while (--height >= 0)
--+	    {
--+		memmove (dst_bytes, src_bytes, width);
--+		dst_bytes += dst_stride;
--+		src_bytes += src_stride;
--+	    }
--+	    return TRUE;
--+	}
--     }
-- 
--     while (height--)
--@@ -3033,7 +3042,7 @@ pixman_blt_mmx (uint32_t *src_bits,
-- 	uint8_t *d = dst_bytes;
-- 	src_bytes += src_stride;
-- 	dst_bytes += dst_stride;
---	w = byte_width;
--+	w = width;
-- 
-- 	while (w >= 2 && ((unsigned long)d & 3))
-- 	{
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.18.4/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch b/recipes/xorg-lib/pixman-0.18.4/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-deleted file mode 100644
-index faeb6e6..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-+++ /dev/null
-@@ -1,91 +0,0 @@
--From 56c446d6912936eabcc6bdd583f37ee1209eff8c Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Thu, 22 Oct 2009 05:45:54 +0300
--Subject: [PATCH 3/7] Support of overlapping src/dst for pixman_blt_sse2
--
-----
-- pixman/pixman-sse2.c |   55 +++++++++++++++++++++++++++++--------------------
-- 1 files changed, 32 insertions(+), 23 deletions(-)
--
--diff --git a/pixman/pixman-sse2.c b/pixman/pixman-sse2.c
--index d5349d7..aa34012 100644
----- a/pixman/pixman-sse2.c
--+++ b/pixman/pixman-sse2.c
--@@ -5328,34 +5328,43 @@ pixman_blt_sse2 (uint32_t *src_bits,
-- {
--     uint8_t *   src_bytes;
--     uint8_t *   dst_bytes;
---    int byte_width;
--+    int         bpp;
-- 
---    if (src_bpp != dst_bpp)
--+    if (src_bpp != dst_bpp || src_bpp & 7)
-- 	return FALSE;
-- 
---    if (src_bpp == 16)
---    {
---	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
---	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
---	src_bytes =(uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
---	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
---	byte_width = 2 * width;
---	src_stride *= 2;
---	dst_stride *= 2;
---    }
---    else if (src_bpp == 32)
--+    bpp = src_bpp >> 3;
--+    width *= bpp;
--+    src_stride *= 4;
--+    dst_stride *= 4;
--+    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
--+    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
--+
--+    if (src_bpp != 16 && src_bpp != 32)
--     {
---	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
---	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
---	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
---	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
---	byte_width = 4 * width;
---	src_stride *= 4;
---	dst_stride *= 4;
--+	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
--+	                   width, height);
--+	return TRUE;
--     }
---    else
--+
--+    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
--     {
---	return FALSE;
--+	src_bytes += src_stride * height - src_stride;
--+	dst_bytes += dst_stride * height - dst_stride;
--+	dst_stride = -dst_stride;
--+	src_stride = -src_stride;
--+
--+	if (src_bytes + width > dst_bytes)
--+	{
--+	    /* TODO: reverse scanline copy using SSE2 */
--+	    while (--height >= 0)
--+	    {
--+		memmove (dst_bytes, src_bytes, width);
--+		dst_bytes += dst_stride;
--+		src_bytes += src_stride;
--+	    }
--+	    return TRUE;
--+	}
--     }
-- 
--     cache_prefetch ((__m128i*)src_bytes);
--@@ -5368,7 +5377,7 @@ pixman_blt_sse2 (uint32_t *src_bits,
-- 	uint8_t *d = dst_bytes;
-- 	src_bytes += src_stride;
-- 	dst_bytes += dst_stride;
---	w = byte_width;
--+	w = width;
-- 
-- 	cache_prefetch_next ((__m128i*)s);
-- 	cache_prefetch_next ((__m128i*)d);
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.18.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch b/recipes/xorg-lib/pixman-0.18.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-deleted file mode 100644
-index d56fd99..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-+++ /dev/null
-@@ -1,94 +0,0 @@
--From 80c1eae677a6ea10d67bb7328230626cd8fce08e Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Wed, 18 Nov 2009 06:08:48 +0200
--Subject: [PATCH 4/7] Support of overlapping src/dst for pixman_blt_neon
--
-----
-- pixman/pixman-arm-neon.c |   62 +++++++++++++++++++++++++++++++++++++--------
-- 1 files changed, 51 insertions(+), 11 deletions(-)
--
--diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
--index 6808b36..7feee1d 100644
----- a/pixman/pixman-arm-neon.c
--+++ b/pixman/pixman-arm-neon.c
--@@ -168,26 +168,66 @@ pixman_blt_neon (uint32_t *src_bits,
--                  int       width,
--                  int       height)
-- {
---    if (src_bpp != dst_bpp)
--+    uint8_t *   src_bytes;
--+    uint8_t *   dst_bytes;
--+    int         bpp;
--+
--+    if (src_bpp != dst_bpp || src_bpp & 7)
-- 	return FALSE;
-- 
--+    bpp = src_bpp >> 3;
--+    width *= bpp;
--+    src_stride *= 4;
--+    dst_stride *= 4;
--+    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
--+    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
--+
--+    if (src_bpp != 16 && src_bpp != 32)
--+    {
--+	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
--+	                   width, height);
--+	return TRUE;
--+    }
--+
--+    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
--+    {
--+	src_bytes += src_stride * height - src_stride;
--+	dst_bytes += dst_stride * height - dst_stride;
--+	dst_stride = -dst_stride;
--+	src_stride = -src_stride;
--+
--+	if (src_bytes + width > dst_bytes)
--+	{
--+	    /* TODO: reverse scanline copy using NEON */
--+	    while (--height >= 0)
--+	    {
--+		memmove (dst_bytes, src_bytes, width);
--+		dst_bytes += dst_stride;
--+		src_bytes += src_stride;
--+	    }
--+	    return TRUE;
--+	}
--+    }
--+
--     switch (src_bpp)
--     {
--     case 16:
-- 	pixman_composite_src_0565_0565_asm_neon (
---		width, height,
---		(uint16_t *)(((char *) dst_bits) +
---		dst_y * dst_stride * 4 + dst_x * 2), dst_stride * 2,
---		(uint16_t *)(((char *) src_bits) +
---		src_y * src_stride * 4 + src_x * 2), src_stride * 2);
--+		width >> 1,
--+		height,
--+		(uint16_t *) dst_bytes,
--+		dst_stride >> 1,
--+		(uint16_t *) src_bytes,
--+		src_stride >> 1);
-- 	return TRUE;
--     case 32:
-- 	pixman_composite_src_8888_8888_asm_neon (
---		width, height,
---		(uint32_t *)(((char *) dst_bits) +
---		dst_y * dst_stride * 4 + dst_x * 4), dst_stride,
---		(uint32_t *)(((char *) src_bits) +
---		src_y * src_stride * 4 + src_x * 4), src_stride);
--+		width >> 2,
--+		height,
--+		(uint32_t *) dst_bytes,
--+		dst_stride >> 2,
--+		(uint32_t *) src_bytes,
--+		src_stride >> 2);
-- 	return TRUE;
--     default:
-- 	return FALSE;
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.18.4/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch b/recipes/xorg-lib/pixman-0.18.4/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-deleted file mode 100644
-index 39eda8b..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-+++ /dev/null
-@@ -1,169 +0,0 @@
--From 2f5774db49521e990c5e9f7cac684a06f4e67a43 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Thu, 10 Dec 2009 00:51:50 +0200
--Subject: [PATCH 5/7] ARM: added NEON optimizations for fetch/store r5g6b5 scanline
--
-----
-- pixman/pixman-access.c       |   23 ++++++++++++++++++++++-
-- pixman/pixman-arm-neon-asm.S |   20 ++++++++++++++++++++
-- pixman/pixman-arm-neon.c     |   41 +++++++++++++++++++++++++++++++++++++++++
-- pixman/pixman-private.h      |    5 +++++
-- 4 files changed, 88 insertions(+), 1 deletions(-)
--
--diff --git a/pixman/pixman-access.c b/pixman/pixman-access.c
--index fa0a267..5bb3e09 100644
----- a/pixman/pixman-access.c
--+++ b/pixman/pixman-access.c
--@@ -2748,7 +2748,7 @@ typedef struct
-- 	    store_scanline_ ## format, store_scanline_generic_64	\
--     }
-- 
---static const format_info_t accessors[] =
--+static format_info_t accessors[] =
-- {
-- /* 32 bpp formats */
--     FORMAT_INFO (a8r8g8b8),
--@@ -2891,6 +2891,27 @@ _pixman_bits_image_setup_raw_accessors (bits_image_t *image)
-- 	setup_accessors (image);
-- }
-- 
--+void
--+_pixman_bits_override_accessors (pixman_format_code_t format,
--+                                 fetch_scanline_t     fetch_func,
--+                                 store_scanline_t     store_func)
--+{
--+    format_info_t *info = accessors;
--+
--+    while (info->format != PIXMAN_null)
--+    {
--+	if (info->format == format)
--+	{
--+	    if (fetch_func)
--+		info->fetch_scanline_raw_32 = fetch_func;
--+	    if (store_func)
--+		info->store_scanline_raw_32 = store_func;
--+	    return;
--+	}
--+	info++;
--+    }
--+}
--+
-- #else
-- 
-- void
--diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
--index 51bc347..f30869e 100644
----- a/pixman/pixman-arm-neon-asm.S
--+++ b/pixman/pixman-arm-neon-asm.S
--@@ -458,6 +458,16 @@ generate_composite_function \
--     pixman_composite_src_8888_0565_process_pixblock_tail, \
--     pixman_composite_src_8888_0565_process_pixblock_tail_head
-- 
--+generate_composite_function_single_scanline \
--+    pixman_store_scanline_r5g6b5_asm_neon, 32, 0, 16, \
--+    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
--+    8, /* number of pixels, processed in a single block */ \
--+    default_init, \
--+    default_cleanup, \
--+    pixman_composite_src_8888_0565_process_pixblock_head, \
--+    pixman_composite_src_8888_0565_process_pixblock_tail, \
--+    pixman_composite_src_8888_0565_process_pixblock_tail_head
--+
-- /******************************************************************************/
-- 
-- .macro pixman_composite_src_0565_8888_process_pixblock_head
--@@ -493,6 +503,16 @@ generate_composite_function \
--     pixman_composite_src_0565_8888_process_pixblock_tail, \
--     pixman_composite_src_0565_8888_process_pixblock_tail_head
-- 
--+generate_composite_function_single_scanline \
--+    pixman_fetch_scanline_r5g6b5_asm_neon, 16, 0, 32, \
--+    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
--+    8, /* number of pixels, processed in a single block */ \
--+    default_init, \
--+    default_cleanup, \
--+    pixman_composite_src_0565_8888_process_pixblock_head, \
--+    pixman_composite_src_0565_8888_process_pixblock_tail, \
--+    pixman_composite_src_0565_8888_process_pixblock_tail_head
--+
-- /******************************************************************************/
-- 
-- .macro pixman_composite_add_8000_8000_process_pixblock_head
--diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
--index 7feee1d..fda7a09 100644
----- a/pixman/pixman-arm-neon.c
--+++ b/pixman/pixman-arm-neon.c
--@@ -375,6 +375,43 @@ neon_combine_##name##_u (pixman_implementation_t *imp,                   \
-- BIND_COMBINE_U (over)
-- BIND_COMBINE_U (add)
-- 
--+void
--+pixman_fetch_scanline_r5g6b5_asm_neon (int             width,
--+                                       uint32_t       *buffer,
--+                                       const uint16_t *pixel);
--+void
--+pixman_store_scanline_r5g6b5_asm_neon (int             width,
--+                                       uint16_t       *pixel,
--+                                       const uint32_t *values);
--+
--+static void
--+neon_fetch_scanline_r5g6b5 (pixman_image_t *image,
--+                            int             x,
--+                            int             y,
--+                            int             width,
--+                            uint32_t *      buffer,
--+                            const uint32_t *mask,
--+                            uint32_t        mask_bits)
--+{
--+    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
--+    const uint16_t *pixel = (const uint16_t *)bits + x;
--+
--+    pixman_fetch_scanline_r5g6b5_asm_neon (width, buffer, pixel);
--+}
--+
--+static void
--+neon_store_scanline_r5g6b5 (bits_image_t *  image,
--+                            int             x,
--+                            int             y,
--+                            int             width,
--+                            const uint32_t *values)
--+{
--+    uint32_t *bits = image->bits + image->rowstride * y;
--+    uint16_t *pixel = ((uint16_t *) bits) + x;
--+
--+    pixman_store_scanline_r5g6b5_asm_neon (width, pixel, values);
--+}
--+
-- pixman_implementation_t *
-- _pixman_implementation_create_arm_neon (void)
-- {
--@@ -385,6 +422,10 @@ _pixman_implementation_create_arm_neon (void)
--     imp->combine_32[PIXMAN_OP_OVER] = neon_combine_over_u;
--     imp->combine_32[PIXMAN_OP_ADD] = neon_combine_add_u;
-- 
--+    _pixman_bits_override_accessors (PIXMAN_r5g6b5,
--+                                     neon_fetch_scanline_r5g6b5,
--+                                     neon_store_scanline_r5g6b5);
--+
--     imp->blt = arm_neon_blt;
--     imp->fill = arm_neon_fill;
-- 
--diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
--index eeb677d..ba2d401 100644
----- a/pixman/pixman-private.h
--+++ b/pixman/pixman-private.h
--@@ -220,6 +220,11 @@ void
-- _pixman_bits_image_setup_raw_accessors (bits_image_t *image);
-- 
-- void
--+_pixman_bits_override_accessors (pixman_format_code_t format,
--+                                 fetch_scanline_t     fetch_func,
--+                                 store_scanline_t     store_func);
--+
--+void
-- _pixman_image_get_scanline_generic_64  (pixman_image_t *image,
--                                         int             x,
--                                         int             y,
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.18.4/0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch b/recipes/xorg-lib/pixman-0.18.4/0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch
-deleted file mode 100644
-index dd0e0f6..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch
-+++ /dev/null
-@@ -1,261 +0,0 @@
--From fc24a2d8d0039cd10de4175da40bb784e2c3bf49 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Fri, 4 Dec 2009 16:49:19 +0000
--Subject: [PATCH 6/7] A copy-paste version of 16bpp bilinear scanline fetcher
--
-----
-- pixman/pixman-bits-image.c |  228 +++++++++++++++++++++++++++++++++++++++++++-
-- 1 files changed, 223 insertions(+), 5 deletions(-)
--
--diff --git a/pixman/pixman-bits-image.c b/pixman/pixman-bits-image.c
--index 3d78ff0..1656975 100644
----- a/pixman/pixman-bits-image.c
--+++ b/pixman/pixman-bits-image.c
--@@ -535,6 +535,212 @@ bits_image_fetch_bilinear_no_repeat_8888 (pixman_image_t * ima,
-- 	*buffer++ = 0;
-- }
-- 
--+static void
--+bits_image_fetch_bilinear_no_repeat_0565 (pixman_image_t * ima,
--+					  int              offset,
--+					  int              line,
--+					  int              width,
--+					  uint32_t *       buffer,
--+					  const uint32_t * mask,
--+					  uint32_t         mask_bits)
--+{
--+    bits_image_t *bits = &ima->bits;
--+    pixman_fixed_t x_top, x_bottom, x;
--+    pixman_fixed_t ux_top, ux_bottom, ux;
--+    pixman_vector_t v;
--+    uint32_t top_mask, bottom_mask;
--+    uint16_t *top_row;
--+    uint16_t *bottom_row;
--+    uint32_t *end;
--+    uint16_t zero[2] = { 0, 0 };
--+    int y, y1, y2;
--+    int disty;
--+    int mask_inc;
--+    int w;
--+
--+    /* reference point is the center of the pixel */
--+    v.vector[0] = pixman_int_to_fixed (offset) + pixman_fixed_1 / 2;
--+    v.vector[1] = pixman_int_to_fixed (line) + pixman_fixed_1 / 2;
--+    v.vector[2] = pixman_fixed_1;
--+
--+    if (!pixman_transform_point_3d (bits->common.transform, &v))
--+	return;
--+
--+    ux = ux_top = ux_bottom = bits->common.transform->matrix[0][0];
--+    x = x_top = x_bottom = v.vector[0] - pixman_fixed_1/2;
--+
--+    y = v.vector[1] - pixman_fixed_1/2;
--+    disty = (y >> 8) & 0xff;
--+
--+    /* Load the pointers to the first and second lines from the source
--+     * image that bilinear code must read.
--+     *
--+     * The main trick in this code is about the check if any line are
--+     * outside of the image;
--+     *
--+     * When I realize that a line (any one) is outside, I change
--+     * the pointer to a dummy area with zeros. Once I change this, I
--+     * must be sure the pointer will not change, so I set the
--+     * variables to each pointer increments inside the loop.
--+     */
--+    y1 = pixman_fixed_to_int (y);
--+    y2 = y1 + 1;
--+
--+    if (y1 < 0 || y1 >= bits->height)
--+    {
--+	top_row = zero;
--+	x_top = 0;
--+	ux_top = 0;
--+    }
--+    else
--+    {
--+	top_row = bits->bits + y1 * bits->rowstride;
--+	x_top = x;
--+	ux_top = ux;
--+    }
--+
--+    if (y2 < 0 || y2 >= bits->height)
--+    {
--+	bottom_row = zero;
--+	x_bottom = 0;
--+	ux_bottom = 0;
--+    }
--+    else
--+    {
--+	bottom_row = bits->bits + y2 * bits->rowstride;
--+	x_bottom = x;
--+	ux_bottom = ux;
--+    }
--+
--+    /* Instead of checking whether the operation uses the mast in
--+     * each loop iteration, verify this only once and prepare the
--+     * variables to make the code smaller inside the loop.
--+     */
--+    if (!mask)
--+    {
--+        mask_inc = 0;
--+        mask_bits = 1;
--+        mask = &mask_bits;
--+    }
--+    else
--+    {
--+        /* If have a mask, prepare the variables to check it */
--+        mask_inc = 1;
--+    }
--+
--+    /* If both are zero, then the whole thing is zero */
--+    if (top_row == zero && bottom_row == zero)
--+    {
--+	memset (buffer, 0, width * sizeof (uint32_t));
--+	return;
--+    }
--+    else
--+    {
--+	if (top_row == zero)
--+	{
--+	    top_mask = 0;
--+	    bottom_mask = 0xff000000;
--+	}
--+	else if (bottom_row == zero)
--+	{
--+	    top_mask = 0xff000000;
--+	    bottom_mask = 0;
--+	}
--+	else
--+	{
--+	    top_mask = 0xff000000;
--+	    bottom_mask = 0xff000000;
--+	}
--+    }
--+
--+    end = buffer + width;
--+
--+    /* Zero fill to the left of the image */
--+    while (buffer < end && x < pixman_fixed_minus_1)
--+    {
--+	*buffer++ = 0;
--+	x += ux;
--+	x_top += ux_top;
--+	x_bottom += ux_bottom;
--+	mask += mask_inc;
--+    }
--+
--+    /* Left edge
--+     */
--+    while (buffer < end && x < 0)
--+    {
--+	uint32_t tr, br;
--+	int32_t distx;
--+
--+	tr = CONVERT_0565_TO_0888 (top_row[pixman_fixed_to_int (x_top) + 1]) | top_mask;
--+	br = CONVERT_0565_TO_0888 (bottom_row[pixman_fixed_to_int (x_bottom) + 1]) | bottom_mask;
--+
--+	distx = (x >> 8) & 0xff;
--+
--+	*buffer++ = bilinear_interpolation (0, tr, 0, br, distx, disty);
--+
--+	x += ux;
--+	x_top += ux_top;
--+	x_bottom += ux_bottom;
--+	mask += mask_inc;
--+    }
--+
--+    /* Main part */
--+    w = pixman_int_to_fixed (bits->width - 1);
--+
--+    while (buffer < end  &&  x < w)
--+    {
--+	if (*mask)
--+	{
--+	    uint32_t tl, tr, bl, br;
--+	    int32_t distx;
--+
--+	    tl = CONVERT_0565_TO_0888 (top_row [pixman_fixed_to_int (x_top)]) | top_mask;
--+	    tr = CONVERT_0565_TO_0888 (top_row [pixman_fixed_to_int (x_top) + 1]) | top_mask;
--+	    bl = CONVERT_0565_TO_0888 (bottom_row [pixman_fixed_to_int (x_bottom)]) | bottom_mask;
--+	    br = CONVERT_0565_TO_0888 (bottom_row [pixman_fixed_to_int (x_bottom) + 1]) | bottom_mask;
--+
--+	    distx = (x >> 8) & 0xff;
--+
--+	    *buffer = bilinear_interpolation (tl, tr, bl, br, distx, disty);
--+	}
--+
--+	buffer++;
--+	x += ux;
--+	x_top += ux_top;
--+	x_bottom += ux_bottom;
--+	mask += mask_inc;
--+    }
--+
--+    /* Right Edge */
--+    w = pixman_int_to_fixed (bits->width);
--+    while (buffer < end  &&  x < w)
--+    {
--+	if (*mask)
--+	{
--+	    uint32_t tl, bl;
--+	    int32_t distx;
--+
--+	    tl = CONVERT_0565_TO_0888 (top_row [pixman_fixed_to_int (x_top)]) | top_mask;
--+	    bl = CONVERT_0565_TO_0888 (bottom_row [pixman_fixed_to_int (x_bottom)]) | bottom_mask;
--+
--+	    distx = (x >> 8) & 0xff;
--+
--+	    *buffer = bilinear_interpolation (tl, 0, bl, 0, distx, disty);
--+	}
--+
--+	buffer++;
--+	x += ux;
--+	x_top += ux_top;
--+	x_bottom += ux_bottom;
--+	mask += mask_inc;
--+    }
--+
--+    /* Zero fill to the left of the image */
--+    while (buffer < end)
--+	*buffer++ = 0;
--+}
--+
-- static force_inline uint32_t
-- bits_image_fetch_pixel_convolution (bits_image_t   *image,
-- 				    pixman_fixed_t  x,
--@@ -917,14 +1123,26 @@ bits_image_property_changed (pixman_image_t *image)
-- 	     (bits->common.filter == PIXMAN_FILTER_BILINEAR ||
-- 	      bits->common.filter == PIXMAN_FILTER_GOOD	    ||
-- 	      bits->common.filter == PIXMAN_FILTER_BEST)		&&
---	     bits->common.repeat == PIXMAN_REPEAT_NONE			&&
---	     (bits->format == PIXMAN_a8r8g8b8	||
---	      bits->format == PIXMAN_x8r8g8b8))
--+	     bits->common.repeat == PIXMAN_REPEAT_NONE)
--     {
-- 	image->common.get_scanline_64 =
-- 	    _pixman_image_get_scanline_generic_64;
---	image->common.get_scanline_32 =
---	    bits_image_fetch_bilinear_no_repeat_8888;
--+
--+	if (bits->format == PIXMAN_a8r8g8b8 || bits->format == PIXMAN_x8r8g8b8)
--+	{
--+	    image->common.get_scanline_32 =
--+		bits_image_fetch_bilinear_no_repeat_8888;
--+	}
--+	else if (bits->format == PIXMAN_r5g6b5)
--+	{
--+	    image->common.get_scanline_32 =
--+		bits_image_fetch_bilinear_no_repeat_0565;
--+	}
--+	else
--+	{
--+	    image->common.get_scanline_32 =
--+		bits_image_fetch_transformed;
--+	}
--     }
--     else
--     {
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.18.4/0007-ARM-added-missing-cache-preload.patch b/recipes/xorg-lib/pixman-0.18.4/0007-ARM-added-missing-cache-preload.patch
-deleted file mode 100644
-index f601d2c..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/0007-ARM-added-missing-cache-preload.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From af8a33d3b132c0192d59c47426bb3a201cb64b32 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Fri, 21 May 2010 13:31:03 +0000
--Subject: [PATCH 7/7] ARM: added missing cache preload
--
-----
-- pixman/pixman-arm-neon-asm.S |    2 ++
-- 1 files changed, 2 insertions(+), 0 deletions(-)
--
--diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
--index f30869e..dc7fd69 100644
----- a/pixman/pixman-arm-neon-asm.S
--+++ b/pixman/pixman-arm-neon-asm.S
--@@ -388,6 +388,7 @@ generate_composite_function \
--     vld1.16     {d4, d5}, [DST_R, :128]!
--     vst1.16     {d28, d29}, [DST_W, :128]!
--     pixman_composite_over_n_0565_process_pixblock_head
--+    cache_preload 8, 8
-- .endm
-- 
-- .macro pixman_composite_over_n_0565_init
--@@ -680,6 +681,7 @@ generate_composite_function_single_scanline \
--     vld4.8      {d4, d5, d6, d7}, [DST_R, :128]!
--     vst4.8      {d28, d29, d30, d31}, [DST_W, :128]!
--     pixman_composite_over_8888_8888_process_pixblock_head
--+    cache_preload 8, 8
-- .endm
-- 
-- .macro pixman_composite_over_n_8888_init
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.18.4/565-over-neon.patch b/recipes/xorg-lib/pixman-0.18.4/565-over-neon.patch
-deleted file mode 100644
-index c8156c4..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/565-over-neon.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--From d297443267de0f5fab49ec245df9055a0dddddaf Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Tue, 25 May 2010 17:21:26 +0000
--Subject: ARM: NEON: don't hit general path for r5g6b5 OVER r5g6b5 operation
--
--OVER can't be reduced to SRC because the source image is not
--considered opaque when repeat is set to PIXMAN_REPEAT_NONE.
--An additional fast path table entry solves the problem.
-----
--diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
--index 64aa908..394dcea 100644
----- a/pixman/pixman-arm-neon.c
--+++ b/pixman/pixman-arm-neon.c
--@@ -246,6 +246,7 @@ static const pixman_fast_path_t arm_neon_fast_paths[] =
--     PIXMAN_STD_FAST_PATH (OVER, a8b8g8r8, null,     x8b8g8r8, neon_composite_over_8888_8888),
--     PIXMAN_STD_FAST_PATH (OVER, x8r8g8b8, null,     a8r8g8b8, neon_composite_src_x888_8888),
--     PIXMAN_STD_FAST_PATH (OVER, x8b8g8r8, null,     a8b8g8r8, neon_composite_src_x888_8888),
--+    PIXMAN_STD_FAST_PATH (OVER, r5g6b5,   null,     r5g6b5,   neon_composite_src_0565_0565),
--     PIXMAN_STD_FAST_PATH (ADD,  solid,    a8,       a8,       neon_composite_add_n_8_8),
--     PIXMAN_STD_FAST_PATH (ADD,  a8,       a8,       a8,       neon_composite_add_8_8_8),
--     PIXMAN_STD_FAST_PATH (ADD,  a8r8g8b8, a8r8g8b8, a8r8g8b8, neon_composite_add_8888_8888_8888),
----
--cgit v0.8.3-6-g21f6
-diff --git a/recipes/xorg-lib/pixman-0.18.4/neon-reverse-u.patch b/recipes/xorg-lib/pixman-0.18.4/neon-reverse-u.patch
-deleted file mode 100644
-index 76726ce..0000000
---- a/recipes/xorg-lib/pixman-0.18.4/neon-reverse-u.patch
-+++ /dev/null
-@@ -1,175 +0,0 @@
--From e0017c2a676b267900e48c6f32a6e973395c83d3 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Mon, 31 May 2010 16:24:43 +0000
--Subject: ARM: 'neon_combine_out_reverse_u' combiner
--
-----
--diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
--index f30869e..44fbfce 100644
----- a/pixman/pixman-arm-neon-asm.S
--+++ b/pixman/pixman-arm-neon-asm.S
--@@ -597,7 +597,7 @@ generate_composite_function_single_scanline \
-- 
-- /******************************************************************************/
-- 
---.macro pixman_composite_over_8888_8888_process_pixblock_head
--+.macro pixman_composite_out_reverse_8888_8888_process_pixblock_head
--     vmvn.8      d24, d3  /* get inverted alpha */
--     /* do alpha blending */
--     vmull.u8    q8, d24, d4
--@@ -606,7 +606,7 @@ generate_composite_function_single_scanline \
--     vmull.u8    q11, d24, d7
-- .endm
-- 
---.macro pixman_composite_over_8888_8888_process_pixblock_tail
--+.macro pixman_composite_out_reverse_8888_8888_process_pixblock_tail
--     vrshr.u16   q14, q8, #8
--     vrshr.u16   q15, q9, #8
--     vrshr.u16   q12, q10, #8
--@@ -615,6 +615,56 @@ generate_composite_function_single_scanline \
--     vraddhn.u16 d29, q15, q9
--     vraddhn.u16 d30, q12, q10
--     vraddhn.u16 d31, q13, q11
--+.endm
--+
--+.macro pixman_composite_out_reverse_8888_8888_process_pixblock_tail_head
--+    vld4.8      {d4, d5, d6, d7}, [DST_R, :128]!
--+        vrshr.u16   q14, q8, #8
--+                                    PF add PF_X, PF_X, #8
--+                                    PF tst PF_CTL, #0xF
--+        vrshr.u16   q15, q9, #8
--+        vrshr.u16   q12, q10, #8
--+        vrshr.u16   q13, q11, #8
--+                                    PF addne PF_X, PF_X, #8
--+                                    PF subne PF_CTL, PF_CTL, #1
--+        vraddhn.u16 d28, q14, q8
--+        vraddhn.u16 d29, q15, q9
--+                                    PF cmp PF_X, ORIG_W
--+        vraddhn.u16 d30, q12, q10
--+        vraddhn.u16 d31, q13, q11
--+    vld4.8      {d0, d1, d2, d3}, [SRC]!
--+                                    PF pld, [PF_SRC, PF_X, lsl #src_bpp_shift]
--+    vmvn.8      d22, d3
--+                                    PF pld, [PF_DST, PF_X, lsl #dst_bpp_shift]
--+        vst4.8      {d28, d29, d30, d31}, [DST_W, :128]!
--+                                    PF subge PF_X, PF_X, ORIG_W
--+    vmull.u8    q8, d22, d4
--+                                    PF subges PF_CTL, PF_CTL, #0x10
--+    vmull.u8    q9, d22, d5
--+                                    PF ldrgeb DUMMY, [PF_SRC, SRC_STRIDE, lsl #src_bpp_shift]!
--+    vmull.u8    q10, d22, d6
--+                                    PF ldrgeb DUMMY, [PF_DST, DST_STRIDE, lsl #dst_bpp_shift]!
--+    vmull.u8    q11, d22, d7
--+.endm
--+
--+generate_composite_function_single_scanline \
--+    pixman_composite_scanline_out_reverse_asm_neon, 32, 0, 32, \
--+    FLAG_DST_READWRITE | FLAG_DEINTERLEAVE_32BPP, \
--+    8, /* number of pixels, processed in a single block */ \
--+    default_init, \
--+    default_cleanup, \
--+    pixman_composite_out_reverse_8888_8888_process_pixblock_head, \
--+    pixman_composite_out_reverse_8888_8888_process_pixblock_tail, \
--+    pixman_composite_out_reverse_8888_8888_process_pixblock_tail_head
--+
--+/******************************************************************************/
--+
--+.macro pixman_composite_over_8888_8888_process_pixblock_head
--+    pixman_composite_out_reverse_8888_8888_process_pixblock_head
--+.endm
--+
--+.macro pixman_composite_over_8888_8888_process_pixblock_tail
--+    pixman_composite_out_reverse_8888_8888_process_pixblock_tail
--     vqadd.u8    q14, q0, q14
--     vqadd.u8    q15, q1, q15
-- .endm
--@@ -1416,7 +1466,7 @@ generate_composite_function_single_scanline \
-- 
-- /******************************************************************************/
-- 
---.macro pixman_composite_over_8888_n_8888_process_pixblock_head
--+.macro pixman_composite_out_reverse_8888_n_8888_process_pixblock_head
--     /* expecting source data in {d0, d1, d2, d3} */
--     /* destination data in {d4, d5, d6, d7} */
--     /* solid mask is in d15 */
--@@ -1442,7 +1492,7 @@ generate_composite_function_single_scanline \
--     vmull.u8    q11, d24, d7
-- .endm
-- 
---.macro pixman_composite_over_8888_n_8888_process_pixblock_tail
--+.macro pixman_composite_out_reverse_8888_n_8888_process_pixblock_tail
--     vrshr.u16   q14, q8, #8
--     vrshr.u16   q15, q9, #8
--     vrshr.u16   q12, q10, #8
--@@ -1451,6 +1501,49 @@ generate_composite_function_single_scanline \
--     vraddhn.u16 d29, q15, q9
--     vraddhn.u16 d30, q12, q10
--     vraddhn.u16 d31, q13, q11
--+.endm
--+
--+.macro pixman_composite_out_reverse_8888_8888_8888_init
--+    vpush       {d8-d15}
--+.endm
--+
--+.macro pixman_composite_out_reverse_8888_8888_8888_cleanup
--+    vpop        {d8-d15}
--+.endm
--+
--+/* TODO: expand macros and do better instructions scheduling */
--+.macro pixman_composite_out_reverse_8888_8888_8888_process_pixblock_tail_head
--+    vld4.8     {d4, d5, d6, d7}, [DST_R, :128]!
--+    pixman_composite_out_reverse_8888_n_8888_process_pixblock_tail
--+    vld4.8     {d0, d1, d2, d3}, [SRC]!
--+    cache_preload 8, 8
--+    vld4.8     {d12, d13, d14, d15}, [MASK]!
--+    pixman_composite_out_reverse_8888_n_8888_process_pixblock_head
--+    vst4.8     {d28, d29, d30, d31}, [DST_W, :128]!
--+.endm
--+
--+generate_composite_function_single_scanline \
--+    pixman_composite_scanline_out_reverse_mask_asm_neon, 32, 32, 32, \
--+    FLAG_DST_READWRITE | FLAG_DEINTERLEAVE_32BPP, \
--+    8, /* number of pixels, processed in a single block */ \
--+    pixman_composite_out_reverse_8888_8888_8888_init, \
--+    pixman_composite_out_reverse_8888_8888_8888_cleanup, \
--+    pixman_composite_out_reverse_8888_n_8888_process_pixblock_head, \
--+    pixman_composite_out_reverse_8888_n_8888_process_pixblock_tail, \
--+    pixman_composite_out_reverse_8888_8888_8888_process_pixblock_tail_head \
--+    28, /* dst_w_basereg */ \
--+    4,  /* dst_r_basereg */ \
--+    0,  /* src_basereg   */ \
--+    12  /* mask_basereg  */
--+
--+/******************************************************************************/
--+
--+.macro pixman_composite_over_8888_n_8888_process_pixblock_head
--+    pixman_composite_out_reverse_8888_n_8888_process_pixblock_head
--+.endm
--+
--+.macro pixman_composite_over_8888_n_8888_process_pixblock_tail
--+    pixman_composite_out_reverse_8888_n_8888_process_pixblock_tail
--     vqadd.u8    q14, q0, q14
--     vqadd.u8    q15, q1, q15
-- .endm
--diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
--index 394dcea..1be9606 100644
----- a/pixman/pixman-arm-neon.c
--+++ b/pixman/pixman-arm-neon.c
--@@ -335,6 +335,7 @@ neon_combine_##name##_u (pixman_implementation_t *imp,                   \
-- 
-- BIND_COMBINE_U (over)
-- BIND_COMBINE_U (add)
--+BIND_COMBINE_U (out_reverse)
-- 
-- void
-- pixman_fetch_scanline_r5g6b5_asm_neon (int             width,
--@@ -382,6 +383,7 @@ _pixman_implementation_create_arm_neon (void)
-- 
--     imp->combine_32[PIXMAN_OP_OVER] = neon_combine_over_u;
--     imp->combine_32[PIXMAN_OP_ADD] = neon_combine_add_u;
--+    imp->combine_32[PIXMAN_OP_OUT_REVERSE] = neon_combine_out_reverse_u;
-- 
--     _pixman_bits_override_accessors (PIXMAN_r5g6b5,
--                                      neon_fetch_scanline_r5g6b5,
----
--cgit v0.8.3-6-g21f6
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0000-Add-pixman_bits_override_accessors.patch b/recipes/xorg-lib/pixman-0.20.0/0000-Add-pixman_bits_override_accessors.patch
-deleted file mode 100644
-index 43cd442..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0000-Add-pixman_bits_override_accessors.patch
-+++ /dev/null
-@@ -1,77 +0,0 @@
--From 38aabb3be87ea68e37f34256c778d07f62680ec6 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Thu, 10 Dec 2009 00:51:50 +0200
--Subject: [PATCH 1/9] add _pixman_bits_override_accessors
--
--* from patch ARM: HACK: added NEON optimizations for fetch/store r5g6b5 scanline
--* used in 
--  0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
--  0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
--  0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
--
--
-----
-- pixman/pixman-access.c       |   23 ++++++++++++++++++++++-
-- pixman/pixman-private.h      |    5 +++++
-- 4 files changed, 87 insertions(+), 1 deletions(-)
--
--diff --git a/pixman/pixman-access.c b/pixman/pixman-access.c
--index f1ce0ba..b33da29 100644
----- a/pixman/pixman-access.c
--+++ b/pixman/pixman-access.c
--@@ -2836,7 +2836,7 @@ typedef struct
-- 	    store_scanline_ ## format, store_scanline_generic_64	\
--     }
-- 
---static const format_info_t accessors[] =
--+static format_info_t accessors[] =
-- {
-- /* 32 bpp formats */
--     FORMAT_INFO (a8r8g8b8),
--@@ -2978,6 +2978,27 @@ _pixman_bits_image_setup_accessors (bits_image_t *image)
-- 	setup_accessors (image);
-- }
-- 
--+void
--+_pixman_bits_override_accessors (pixman_format_code_t format,
--+                                 fetch_scanline_t     fetch_func,
--+                                 store_scanline_t     store_func)
--+{
--+    format_info_t *info = accessors;
--+
--+    while (info->format != PIXMAN_null)
--+    {
--+	if (info->format == format)
--+	{
--+	    if (fetch_func)
--+		info->fetch_scanline_32 = fetch_func;
--+	    if (store_func)
--+		info->store_scanline_32 = store_func;
--+	    return;
--+	}
--+	info++;
--+    }
--+}
--+
-- #else
-- 
-- void
--diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
--index d85868f..564f8f0 100644
----- a/pixman/pixman-private.h
--+++ b/pixman/pixman-private.h
--@@ -206,6 +206,11 @@ void
-- _pixman_bits_image_setup_accessors (bits_image_t *image);
-- 
-- void
--+_pixman_bits_override_accessors (pixman_format_code_t format,
--+                                 fetch_scanline_t     fetch_func,
--+                                 store_scanline_t     store_func);
--+
--+void
-- _pixman_image_get_scanline_generic_64  (pixman_image_t *image,
--                                         int             x,
--                                         int             y,
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch b/recipes/xorg-lib/pixman-0.20.0/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-deleted file mode 100644
-index 795cce5..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-+++ /dev/null
-@@ -1,114 +0,0 @@
--From 97b2bb933455f222b392b5c60a8bde82d7d6329f Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Tue, 16 Mar 2010 16:55:28 +0100
--Subject: [PATCH 1/8] Generic C implementation of pixman_blt with overlapping support
--
--Uses memcpy/memmove functions to copy pixels, can handle the
--case when both source and destination areas are in the same
--image (this is useful for scrolling).
--
--It is assumed that copying direction is only important when
--using the same image for both source and destination (and
--src_stride == dst_stride). Copying direction is undefined
--for the images with different source and destination stride
--which happen to be in the overlapped areas (but this is an
--unrealistic case anyway).
-----
-- pixman/pixman-general.c |   21 ++++++++++++++++++---
-- pixman/pixman-private.h |   43 +++++++++++++++++++++++++++++++++++++++++++
-- 2 files changed, 61 insertions(+), 3 deletions(-)
--
--diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
--index 4d234a0..c4d2c14 100644
----- a/pixman/pixman-general.c
--+++ b/pixman/pixman-general.c
--@@ -280,9 +280,24 @@ general_blt (pixman_implementation_t *imp,
--              int                      width,
--              int                      height)
-- {
---    /* We can't blit unless we have sse2 or mmx */
---
---    return FALSE;
--+    uint8_t *dst_bytes = (uint8_t *)dst_bits;
--+    uint8_t *src_bytes = (uint8_t *)src_bits;
--+    int bpp;
--+
--+    if (src_bpp != dst_bpp || src_bpp & 7)
--+	return FALSE;
--+
--+    bpp = src_bpp >> 3;
--+    width *= bpp;
--+    src_stride *= 4;
--+    dst_stride *= 4;
--+    pixman_blt_helper (src_bytes + src_y * src_stride + src_x * bpp,
--+                       dst_bytes + dst_y * dst_stride + dst_x * bpp,
--+                       src_stride,
--+                       dst_stride,
--+                       width,
--+                       height);
--+    return TRUE;
-- }
-- 
-- static pixman_bool_t
--diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
--index c43172b..f980454 100644
----- a/pixman/pixman-private.h
--+++ b/pixman/pixman-private.h
--@@ -10,6 +10,7 @@
-- 
-- #include "pixman.h"
-- #include <time.h>
--+#include <string.h>
-- #include <assert.h>
-- #include <stdio.h>
-- #include <string.h>
--@@ -873,4 +874,46 @@ void pixman_timer_register (pixman_timer_t *timer);
-- 
-- #endif /* PIXMAN_TIMERS */
-- 
--+/* a helper function, can blit 8-bit images with src/dst overlapping support */
--+static inline void
--+pixman_blt_helper (uint8_t *src_bytes,
--+                   uint8_t *dst_bytes,
--+                   int      src_stride,
--+                   int      dst_stride,
--+                   int      width,
--+                   int      height)
--+{
--+    /*
--+     * The second part of this check is not strictly needed, but it prevents
--+     * unnecessary upside-down processing of areas which belong to different
--+     * images. Upside-down processing can be slower with fixed-distance-ahead
--+     * prefetch and perceived as having more tearing.
--+     */
--+    if (src_bytes < dst_bytes + width &&
--+	src_bytes + src_stride * height > dst_bytes)
--+    {
--+	src_bytes += src_stride * height - src_stride;
--+	dst_bytes += dst_stride * height - dst_stride;
--+	dst_stride = -dst_stride;
--+	src_stride = -src_stride;
--+	/* Horizontal scrolling to the left needs memmove */
--+	if (src_bytes + width > dst_bytes)
--+	{
--+	    while (--height >= 0)
--+	    {
--+		memmove (dst_bytes, src_bytes, width);
--+		dst_bytes += dst_stride;
--+		src_bytes += src_stride;
--+	    }
--+	    return;
--+	}
--+    }
--+    while (--height >= 0)
--+    {
--+	memcpy (dst_bytes, src_bytes, width);
--+	dst_bytes += dst_stride;
--+	src_bytes += src_stride;
--+    }
--+}
--+
-- #endif /* PIXMAN_PRIVATE_H */
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch b/recipes/xorg-lib/pixman-0.20.0/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-deleted file mode 100644
-index 6e2d492..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-+++ /dev/null
-@@ -1,91 +0,0 @@
--From 47b31f936641da07431093ede340465625bfcb3d Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Thu, 22 Oct 2009 05:45:47 +0300
--Subject: [PATCH 2/8] Support of overlapping src/dst for pixman_blt_mmx
--
-----
-- pixman/pixman-mmx.c |   55 +++++++++++++++++++++++++++++---------------------
-- 1 files changed, 32 insertions(+), 23 deletions(-)
--
--diff --git a/pixman/pixman-mmx.c b/pixman/pixman-mmx.c
--index e936c4c..2413197 100644
----- a/pixman/pixman-mmx.c
--+++ b/pixman/pixman-mmx.c
--@@ -2996,34 +2996,43 @@ pixman_blt_mmx (uint32_t *src_bits,
-- {
--     uint8_t *   src_bytes;
--     uint8_t *   dst_bytes;
---    int byte_width;
--+    int         bpp;
-- 
---    if (src_bpp != dst_bpp)
--+    if (src_bpp != dst_bpp || src_bpp & 7)
-- 	return FALSE;
-- 
---    if (src_bpp == 16)
---    {
---	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
---	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
---	src_bytes = (uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
---	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
---	byte_width = 2 * width;
---	src_stride *= 2;
---	dst_stride *= 2;
---    }
---    else if (src_bpp == 32)
--+    bpp = src_bpp >> 3;
--+    width *= bpp;
--+    src_stride *= 4;
--+    dst_stride *= 4;
--+    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
--+    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
--+
--+    if (src_bpp != 16 && src_bpp != 32)
--     {
---	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
---	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
---	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
---	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
---	byte_width = 4 * width;
---	src_stride *= 4;
---	dst_stride *= 4;
--+	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
--+	                   width, height);
--+	return TRUE;
--     }
---    else
--+
--+    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
--     {
---	return FALSE;
--+	src_bytes += src_stride * height - src_stride;
--+	dst_bytes += dst_stride * height - dst_stride;
--+	dst_stride = -dst_stride;
--+	src_stride = -src_stride;
--+
--+	if (src_bytes + width > dst_bytes)
--+	{
--+	    /* TODO: reverse scanline copy using MMX */
--+	    while (--height >= 0)
--+	    {
--+		memmove (dst_bytes, src_bytes, width);
--+		dst_bytes += dst_stride;
--+		src_bytes += src_stride;
--+	    }
--+	    return TRUE;
--+	}
--     }
-- 
--     while (height--)
--@@ -3033,7 +3042,7 @@ pixman_blt_mmx (uint32_t *src_bits,
-- 	uint8_t *d = dst_bytes;
-- 	src_bytes += src_stride;
-- 	dst_bytes += dst_stride;
---	w = byte_width;
--+	w = width;
-- 
-- 	while (w >= 2 && ((unsigned long)d & 3))
-- 	{
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch b/recipes/xorg-lib/pixman-0.20.0/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-deleted file mode 100644
-index 910f62e..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-+++ /dev/null
-@@ -1,91 +0,0 @@
--From 13be027637602fffda3b3cb6e171d8d6a67b3b4b Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Thu, 22 Oct 2009 05:45:54 +0300
--Subject: [PATCH 3/8] Support of overlapping src/dst for pixman_blt_sse2
--
-----
-- pixman/pixman-sse2.c |   55 +++++++++++++++++++++++++++++--------------------
-- 1 files changed, 32 insertions(+), 23 deletions(-)
--
--diff --git a/pixman/pixman-sse2.c b/pixman/pixman-sse2.c
--index 5907de0..25015ae 100644
----- a/pixman/pixman-sse2.c
--+++ b/pixman/pixman-sse2.c
--@@ -5027,34 +5027,43 @@ pixman_blt_sse2 (uint32_t *src_bits,
-- {
--     uint8_t *   src_bytes;
--     uint8_t *   dst_bytes;
---    int byte_width;
--+    int         bpp;
-- 
---    if (src_bpp != dst_bpp)
--+    if (src_bpp != dst_bpp || src_bpp & 7)
-- 	return FALSE;
-- 
---    if (src_bpp == 16)
---    {
---	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
---	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
---	src_bytes =(uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
---	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
---	byte_width = 2 * width;
---	src_stride *= 2;
---	dst_stride *= 2;
---    }
---    else if (src_bpp == 32)
--+    bpp = src_bpp >> 3;
--+    width *= bpp;
--+    src_stride *= 4;
--+    dst_stride *= 4;
--+    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
--+    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
--+
--+    if (src_bpp != 16 && src_bpp != 32)
--     {
---	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
---	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
---	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
---	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
---	byte_width = 4 * width;
---	src_stride *= 4;
---	dst_stride *= 4;
--+	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
--+	                   width, height);
--+	return TRUE;
--     }
---    else
--+
--+    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
--     {
---	return FALSE;
--+	src_bytes += src_stride * height - src_stride;
--+	dst_bytes += dst_stride * height - dst_stride;
--+	dst_stride = -dst_stride;
--+	src_stride = -src_stride;
--+
--+	if (src_bytes + width > dst_bytes)
--+	{
--+	    /* TODO: reverse scanline copy using SSE2 */
--+	    while (--height >= 0)
--+	    {
--+		memmove (dst_bytes, src_bytes, width);
--+		dst_bytes += dst_stride;
--+		src_bytes += src_stride;
--+	    }
--+	    return TRUE;
--+	}
--     }
-- 
--     while (height--)
--@@ -5064,7 +5073,7 @@ pixman_blt_sse2 (uint32_t *src_bits,
-- 	uint8_t *d = dst_bytes;
-- 	src_bytes += src_stride;
-- 	dst_bytes += dst_stride;
---	w = byte_width;
--+	w = width;
-- 
-- 	while (w >= 2 && ((unsigned long)d & 3))
-- 	{
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch b/recipes/xorg-lib/pixman-0.20.0/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-deleted file mode 100644
-index f6aa979..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-+++ /dev/null
-@@ -1,94 +0,0 @@
--From a913cc05a1a1c5a813cf06d248334edede9caab7 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Wed, 18 Nov 2009 06:08:48 +0200
--Subject: [PATCH 4/8] Support of overlapping src/dst for pixman_blt_neon
--
-----
-- pixman/pixman-arm-neon.c |   62 +++++++++++++++++++++++++++++++++++++--------
-- 1 files changed, 51 insertions(+), 11 deletions(-)
--
--diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
--index be5d403..cbfd7cf 100644
----- a/pixman/pixman-arm-neon.c
--+++ b/pixman/pixman-arm-neon.c
--@@ -176,26 +176,66 @@ pixman_blt_neon (uint32_t *src_bits,
--                  int       width,
--                  int       height)
-- {
---    if (src_bpp != dst_bpp)
--+    uint8_t *   src_bytes;
--+    uint8_t *   dst_bytes;
--+    int         bpp;
--+
--+    if (src_bpp != dst_bpp || src_bpp & 7)
-- 	return FALSE;
-- 
--+    bpp = src_bpp >> 3;
--+    width *= bpp;
--+    src_stride *= 4;
--+    dst_stride *= 4;
--+    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
--+    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
--+
--+    if (src_bpp != 16 && src_bpp != 32)
--+    {
--+	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
--+	                   width, height);
--+	return TRUE;
--+    }
--+
--+    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
--+    {
--+	src_bytes += src_stride * height - src_stride;
--+	dst_bytes += dst_stride * height - dst_stride;
--+	dst_stride = -dst_stride;
--+	src_stride = -src_stride;
--+
--+	if (src_bytes + width > dst_bytes)
--+	{
--+	    /* TODO: reverse scanline copy using NEON */
--+	    while (--height >= 0)
--+	    {
--+		memmove (dst_bytes, src_bytes, width);
--+		dst_bytes += dst_stride;
--+		src_bytes += src_stride;
--+	    }
--+	    return TRUE;
--+	}
--+    }
--+
--     switch (src_bpp)
--     {
--     case 16:
-- 	pixman_composite_src_0565_0565_asm_neon (
---		width, height,
---		(uint16_t *)(((char *) dst_bits) +
---		dst_y * dst_stride * 4 + dst_x * 2), dst_stride * 2,
---		(uint16_t *)(((char *) src_bits) +
---		src_y * src_stride * 4 + src_x * 2), src_stride * 2);
--+		width >> 1,
--+		height,
--+		(uint16_t *) dst_bytes,
--+		dst_stride >> 1,
--+		(uint16_t *) src_bytes,
--+		src_stride >> 1);
-- 	return TRUE;
--     case 32:
-- 	pixman_composite_src_8888_8888_asm_neon (
---		width, height,
---		(uint32_t *)(((char *) dst_bits) +
---		dst_y * dst_stride * 4 + dst_x * 4), dst_stride,
---		(uint32_t *)(((char *) src_bits) +
---		src_y * src_stride * 4 + src_x * 4), src_stride);
--+		width >> 2,
--+		height,
--+		(uint32_t *) dst_bytes,
--+		dst_stride >> 2,
--+		(uint32_t *) src_bytes,
--+		src_stride >> 2);
-- 	return TRUE;
--     default:
-- 	return FALSE;
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch b/recipes/xorg-lib/pixman-0.20.0/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-deleted file mode 100644
-index dbe98b3..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
-+++ /dev/null
-@@ -1,109 +0,0 @@
--From f75e9d1868e21dd75ff3a2ca3561546d23877ddb Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Thu, 10 Dec 2009 00:51:50 +0200
--Subject: [PATCH 5/8] ARM: added NEON optimizations for fetch/store r5g6b5 scanline
--
-----
-- pixman/pixman-arm-neon-asm.S |   20 ++++++++++++++++++++
-- pixman/pixman-arm-neon.c     |   40 ++++++++++++++++++++++++++++++++++++++++
-- 2 files changed, 60 insertions(+), 0 deletions(-)
--
--diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
--index e4db5cd..c79ba81 100644
----- a/pixman/pixman-arm-neon-asm.S
--+++ b/pixman/pixman-arm-neon-asm.S
--@@ -459,6 +459,16 @@ generate_composite_function \
--     pixman_composite_src_8888_0565_process_pixblock_tail, \
--     pixman_composite_src_8888_0565_process_pixblock_tail_head
-- 
--+generate_composite_function_single_scanline \
--+    pixman_store_scanline_r5g6b5_asm_neon, 32, 0, 16, \
--+    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
--+    8, /* number of pixels, processed in a single block */ \
--+    default_init, \
--+    default_cleanup, \
--+    pixman_composite_src_8888_0565_process_pixblock_head, \
--+    pixman_composite_src_8888_0565_process_pixblock_tail, \
--+    pixman_composite_src_8888_0565_process_pixblock_tail_head
--+
-- /******************************************************************************/
-- 
-- .macro pixman_composite_src_0565_8888_process_pixblock_head
--@@ -494,6 +504,16 @@ generate_composite_function \
--     pixman_composite_src_0565_8888_process_pixblock_tail, \
--     pixman_composite_src_0565_8888_process_pixblock_tail_head
-- 
--+generate_composite_function_single_scanline \
--+    pixman_fetch_scanline_r5g6b5_asm_neon, 16, 0, 32, \
--+    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
--+    8, /* number of pixels, processed in a single block */ \
--+    default_init, \
--+    default_cleanup, \
--+    pixman_composite_src_0565_8888_process_pixblock_head, \
--+    pixman_composite_src_0565_8888_process_pixblock_tail, \
--+    pixman_composite_src_0565_8888_process_pixblock_tail_head
--+
-- /******************************************************************************/
-- 
-- .macro pixman_composite_add_8_8_process_pixblock_head
--diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
--index cbfd7cf..f88c8f8 100644
----- a/pixman/pixman-arm-neon.c
--+++ b/pixman/pixman-arm-neon.c
--@@ -392,6 +392,42 @@ BIND_COMBINE_U (over)
-- BIND_COMBINE_U (add)
-- BIND_COMBINE_U (out_reverse)
-- 
--+void
--+pixman_fetch_scanline_r5g6b5_asm_neon (int             width,
--+                                       uint32_t       *buffer,
--+                                       const uint16_t *pixel);
--+void
--+pixman_store_scanline_r5g6b5_asm_neon (int             width,
--+                                       uint16_t       *pixel,
--+                                       const uint32_t *values);
--+
--+static void
--+neon_fetch_scanline_r5g6b5 (pixman_image_t *image,
--+                            int             x,
--+                            int             y,
--+                            int             width,
--+                            uint32_t *      buffer,
--+                            const uint32_t *mask)
--+{
--+    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
--+    const uint16_t *pixel = (const uint16_t *)bits + x;
--+
--+    pixman_fetch_scanline_r5g6b5_asm_neon (width, buffer, pixel);
--+}
--+
--+static void
--+neon_store_scanline_r5g6b5 (bits_image_t *  image,
--+                            int             x,
--+                            int             y,
--+                            int             width,
--+                            const uint32_t *values)
--+{
--+    uint32_t *bits = image->bits + image->rowstride * y;
--+    uint16_t *pixel = ((uint16_t *) bits) + x;
--+
--+    pixman_store_scanline_r5g6b5_asm_neon (width, pixel, values);
--+}
--+
-- pixman_implementation_t *
-- _pixman_implementation_create_arm_neon (void)
-- {
--@@ -407,6 +443,10 @@ _pixman_implementation_create_arm_neon (void)
--     imp->combine_32[PIXMAN_OP_ADD] = neon_combine_add_u;
--     imp->combine_32[PIXMAN_OP_OUT_REVERSE] = neon_combine_out_reverse_u;
-- 
--+    _pixman_bits_override_accessors (PIXMAN_r5g6b5,
--+                                     neon_fetch_scanline_r5g6b5,
--+                                     neon_store_scanline_r5g6b5);
--+
--     imp->blt = arm_neon_blt;
--     imp->fill = arm_neon_fill;
-- 
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch b/recipes/xorg-lib/pixman-0.20.0/0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
-deleted file mode 100644
-index d050646..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
-+++ /dev/null
-@@ -1,148 +0,0 @@
--From a1cd695c5e22f0f4a2b7272fab675a3cc510bacb Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Thu, 23 Sep 2010 21:10:56 +0300
--Subject: [PATCH 6/8] ARM: added NEON optimizations for fetch/store a8 scanline
--
-----
-- pixman/pixman-arm-neon-asm.S |   64 ++++++++++++++++++++++++++++++++++++++++++
-- pixman/pixman-arm-neon.c     |   42 +++++++++++++++++++++++++++
-- 2 files changed, 106 insertions(+), 0 deletions(-)
--
--diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
--index c79ba81..ca0825c 100644
----- a/pixman/pixman-arm-neon-asm.S
--+++ b/pixman/pixman-arm-neon-asm.S
--@@ -418,6 +418,70 @@ generate_composite_function \
-- 
-- /******************************************************************************/
-- 
--+.macro pixman_composite_src_8_8888_process_pixblock_head
--+    /* This is tricky part: we can't set these values just once in 'init' macro
--+     * because leading/trailing pixels handling part uses VZIP.8 instructions,
--+     * and they operate on values in-place and destroy original registers
--+     * content. Think about it like VST4.8 instruction corrupting NEON
--+     * registers after write in 'tail_head' macro. Except that 'tail_head'
--+     * macro itself actually does not need these extra VMOVs because it uses
--+     * real VST4.8 instruction.
--+     */
--+    vmov.u8     q0, #0
--+    vmov.u8     d2, #0
--+.endm
--+
--+.macro pixman_composite_src_8_8888_process_pixblock_tail
--+.endm
--+
--+.macro pixman_composite_src_8_8888_process_pixblock_tail_head
--+    vst4.8      {d0, d1, d2, d3}, [DST_W, :128]!
--+    vld1.8      {d3}, [SRC]!
--+.endm
--+
--+generate_composite_function_single_scanline \
--+    pixman_fetch_scanline_a8_asm_neon, 8, 0, 32, \
--+    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
--+    8, /* number of pixels, processed in a single block */ \
--+    default_init, \
--+    default_cleanup, \
--+    pixman_composite_src_8_8888_process_pixblock_head, \
--+    pixman_composite_src_8_8888_process_pixblock_tail, \
--+    pixman_composite_src_8_8888_process_pixblock_tail_head, \
--+    0,  /* dst_w_basereg */ \
--+    0,  /* dst_r_basereg */ \
--+    3,  /* src_basereg   */ \
--+    0   /* mask_basereg  */
--+
--+/******************************************************************************/
--+
--+.macro pixman_composite_src_8888_8_process_pixblock_head
--+.endm
--+
--+.macro pixman_composite_src_8888_8_process_pixblock_tail
--+.endm
--+
--+.macro pixman_composite_src_8888_8_process_pixblock_tail_head
--+    vst1.8      {d3}, [DST_W, :64]!
--+    vld4.8      {d0, d1, d2, d3}, [SRC]!
--+.endm
--+
--+generate_composite_function_single_scanline \
--+    pixman_store_scanline_a8_asm_neon, 32, 0, 8, \
--+    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
--+    8, /* number of pixels, processed in a single block */ \
--+    default_init, \
--+    default_cleanup, \
--+    pixman_composite_src_8888_8_process_pixblock_head, \
--+    pixman_composite_src_8888_8_process_pixblock_tail, \
--+    pixman_composite_src_8888_8_process_pixblock_tail_head, \
--+    3,  /* dst_w_basereg */ \
--+    0,  /* dst_r_basereg */ \
--+    0,  /* src_basereg   */ \
--+    0   /* mask_basereg  */
--+
--+/******************************************************************************/
--+
-- .macro pixman_composite_src_8888_0565_process_pixblock_head
--     vshll.u8    q8, d1, #8
--     vshll.u8    q14, d2, #8
--diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
--index f88c8f8..43091d2 100644
----- a/pixman/pixman-arm-neon.c
--+++ b/pixman/pixman-arm-neon.c
--@@ -428,6 +428,45 @@ neon_store_scanline_r5g6b5 (bits_image_t *  image,
--     pixman_store_scanline_r5g6b5_asm_neon (width, pixel, values);
-- }
-- 
--+void
--+pixman_fetch_scanline_a8_asm_neon (int             width,
--+                                   uint32_t       *buffer,
--+                                   const uint8_t  *pixel);
--+
--+
--+void
--+pixman_store_scanline_a8_asm_neon (int             width,
--+                                   uint8_t        *pixel,
--+                                   const uint32_t *values);
--+
--+static void
--+neon_fetch_scanline_a8 (pixman_image_t *image,
--+                        int             x,
--+                        int             y,
--+                        int             width,
--+                        uint32_t *      buffer,
--+                        const uint32_t *mask)
--+{
--+    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
--+    const uint8_t *pixel = (const uint8_t *) bits + x;
--+
--+    pixman_fetch_scanline_a8_asm_neon (width, buffer, pixel);
--+}
--+
--+static void
--+neon_store_scanline_a8 (bits_image_t *  image,
--+                        int             x,
--+                        int             y,
--+                        int             width,
--+                        const uint32_t *values)
--+{
--+    uint32_t *bits = image->bits + image->rowstride * y;
--+    uint8_t *pixel = (uint8_t *) bits + x;
--+
--+    pixman_store_scanline_a8_asm_neon (width, pixel, values);
--+}
--+
--+
-- pixman_implementation_t *
-- _pixman_implementation_create_arm_neon (void)
-- {
--@@ -446,6 +485,9 @@ _pixman_implementation_create_arm_neon (void)
--     _pixman_bits_override_accessors (PIXMAN_r5g6b5,
--                                      neon_fetch_scanline_r5g6b5,
--                                      neon_store_scanline_r5g6b5);
--+    _pixman_bits_override_accessors (PIXMAN_a8,
--+                                     neon_fetch_scanline_a8,
--+                                     neon_store_scanline_a8);
-- 
--     imp->blt = arm_neon_blt;
--     imp->fill = arm_neon_fill;
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch b/recipes/xorg-lib/pixman-0.20.0/0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
-deleted file mode 100644
-index 7f28f47..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
-+++ /dev/null
-@@ -1,77 +0,0 @@
--From d6ae7da60cc797900b5eff0786536c4a11ab0f50 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Fri, 24 Sep 2010 18:22:44 +0300
--Subject: [PATCH 7/8] ARM: added NEON optimizations for fetching x8r8g8b8 scanline
--
-----
-- pixman/pixman-arm-neon-asm.S |   14 ++++++++++++++
-- pixman/pixman-arm-neon.c     |   21 +++++++++++++++++++++
-- 2 files changed, 35 insertions(+), 0 deletions(-)
--
--diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
--index ca0825c..ffd0b83 100644
----- a/pixman/pixman-arm-neon-asm.S
--+++ b/pixman/pixman-arm-neon-asm.S
--@@ -1206,6 +1206,20 @@ generate_composite_function \
--     0, /* src_basereg   */ \
--     0  /* mask_basereg  */
-- 
--+generate_composite_function_single_scanline \
--+    pixman_fetch_scanline_x888_asm_neon, 32, 0, 32, \
--+    FLAG_DST_WRITEONLY, \
--+    8, /* number of pixels, processed in a single block */ \
--+    pixman_composite_src_x888_8888_init, \
--+    default_cleanup, \
--+    pixman_composite_src_x888_8888_process_pixblock_head, \
--+    pixman_composite_src_x888_8888_process_pixblock_tail, \
--+    pixman_composite_src_x888_8888_process_pixblock_tail_head, \
--+    0,  /* dst_w_basereg */ \
--+    0,  /* dst_r_basereg */ \
--+    0,  /* src_basereg   */ \
--+    0   /* mask_basereg  */
--+
-- /******************************************************************************/
-- 
-- .macro pixman_composite_over_n_8_8888_process_pixblock_head
--diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
--index 43091d2..f84b5e6 100644
----- a/pixman/pixman-arm-neon.c
--+++ b/pixman/pixman-arm-neon.c
--@@ -466,6 +466,24 @@ neon_store_scanline_a8 (bits_image_t *  image,
--     pixman_store_scanline_a8_asm_neon (width, pixel, values);
-- }
-- 
--+void
--+pixman_fetch_scanline_x888_asm_neon (int             width,
--+                                     uint32_t       *buffer,
--+                                     const uint32_t *pixel);
--+
--+static void
--+neon_fetch_scanline_x888 (pixman_image_t *image,
--+                          int             x,
--+                          int             y,
--+                          int             width,
--+                          uint32_t *      buffer,
--+                          const uint32_t *mask)
--+{
--+    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
--+    const uint32_t *pixel = (const uint32_t *) bits + x;
--+
--+    pixman_fetch_scanline_x888_asm_neon (width, buffer, pixel);
--+}
-- 
-- pixman_implementation_t *
-- _pixman_implementation_create_arm_neon (void)
--@@ -488,6 +506,9 @@ _pixman_implementation_create_arm_neon (void)
--     _pixman_bits_override_accessors (PIXMAN_a8,
--                                      neon_fetch_scanline_a8,
--                                      neon_store_scanline_a8);
--+    _pixman_bits_override_accessors (PIXMAN_x8r8g8b8,
--+                                     neon_fetch_scanline_x888,
--+                                     NULL);
-- 
--     imp->blt = arm_neon_blt;
--     imp->fill = arm_neon_fill;
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman-0.20.0/0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch b/recipes/xorg-lib/pixman-0.20.0/0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch
-deleted file mode 100644
-index 6efdb62..0000000
---- a/recipes/xorg-lib/pixman-0.20.0/0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch
-+++ /dev/null
-@@ -1,172 +0,0 @@
--From e1191ad6563a1fb02a45982b1c4d7fed3c655e97 Mon Sep 17 00:00:00 2001
--From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
--Date: Mon, 4 Oct 2010 01:56:59 +0300
--Subject: [PATCH 8/8] ARM optimization for scaled src_0565_0565 operation with nearest filter
--
--The code actually uses only armv4t instructions.
--
--Benchmark from ARM11:
--
--    == before ==
--    op=1, src_fmt=10020565, dst_fmt=10020565, speed=34.86 MPix/s
--
--    == after ==
--    op=1, src_fmt=10020565, dst_fmt=10020565, speed=36.62 MPix/s
--
--Benchmark from ARM Cortex-A8:
--
--    == before ==
--    op=1, src_fmt=10020565, dst_fmt=10020565, speed=89.55 MPix/s
--
--    == after ==
--    op=1, src_fmt=10020565, dst_fmt=10020565, speed=94.91 MPix/s
-----
-- pixman/pixman-arm-simd-asm.S |   66 ++++++++++++++++++++++++++++++++++++++++++
-- pixman/pixman-arm-simd.c     |   37 +++++++++++++++++++++++
-- 2 files changed, 103 insertions(+), 0 deletions(-)
--
--diff --git a/pixman/pixman-arm-simd-asm.S b/pixman/pixman-arm-simd-asm.S
--index a3d2d40..b6f69db 100644
----- a/pixman/pixman-arm-simd-asm.S
--+++ b/pixman/pixman-arm-simd-asm.S
--@@ -1,5 +1,6 @@
-- /*
--  * Copyright © 2008 Mozilla Corporation
--+ * Copyright © 2010 Nokia Corporation
--  *
--  * Permission to use, copy, modify, distribute, and sell this software and its
--  * documentation for any purpose is hereby granted without fee, provided that
--@@ -328,3 +329,68 @@ pixman_asm_function pixman_composite_over_n_8_8888_asm_armv6
-- 	pop	{r4, r5, r6, r7, r8, r9, r10, r11}
-- 	bx	lr
-- .endfunc
--+
--+/*
--+ * Note: This function is actually primarily optimized for ARM Cortex-A8
--+ * pipeline. In order to get good performance on ARM9/ARM11 cores (which
--+ * don't have efficient write combining), it needs to be changed to use
--+ * 16-byte aligned writes using STM instruction.
--+ */
--+pixman_asm_function pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6
--+	DST	.req	r0
--+	SRC	.req	r1
--+	W	.req	r2
--+	VX	.req	r3
--+	UNIT_X	.req	r12
--+	TMP1	.req	r4
--+	TMP2	.req	r5
--+	MASK	.req	r6
--+	ldr	UNIT_X, [sp]
--+	push	{r4, r5, r6, r7}
--+	mvn	MASK, #1
--+
--+	/* define helper macro */
--+	.macro	scale_2_pixels
--+		ldrh	TMP1, [SRC, TMP1]
--+		and	TMP2, MASK, VX, lsr #15
--+		add	VX, VX, UNIT_X
--+		strh	TMP1, [DST], #2
--+
--+		ldrh	TMP2, [SRC, TMP2]
--+		and	TMP1, MASK, VX, lsr #15
--+		add	VX, VX, UNIT_X
--+		strh	TMP2, [DST], #2
--+	.endm
--+
--+	/* now do the scaling */
--+	and	TMP1, MASK, VX, lsr #15
--+	add	VX, VX, UNIT_X
--+	subs	W, #4
--+	blt	2f
--+1: /* main loop, process 4 pixels per iteration */
--+	scale_2_pixels
--+	scale_2_pixels
--+	subs	W, W, #4
--+	bge	1b
--+2:
--+	tst	W, #2
--+	beq	2f
--+	scale_2_pixels
--+2:
--+	tst	W, #1
--+	ldrneh	TMP1, [SRC, TMP1]
--+	strneh	TMP1, [DST], #2
--+	/* cleanup helper macro */
--+	.purgem	scale_2_pixels
--+	.unreq	DST
--+	.unreq	SRC
--+	.unreq	W
--+	.unreq	VX
--+	.unreq	UNIT_X
--+	.unreq	TMP1
--+	.unreq	TMP2
--+	.unreq	MASK
--+	/* return */
--+	pop	{r4, r5, r6, r7}
--+	bx	lr
--+.endfunc
--diff --git a/pixman/pixman-arm-simd.c b/pixman/pixman-arm-simd.c
--index d466a31..f6f464c 100644
----- a/pixman/pixman-arm-simd.c
--+++ b/pixman/pixman-arm-simd.c
--@@ -29,6 +29,7 @@
-- 
-- #include "pixman-private.h"
-- #include "pixman-arm-common.h"
--+#include "pixman-fast-path.h"
-- 
-- #if 0 /* This code was moved to 'pixman-arm-simd-asm.S' */
-- 
--@@ -375,6 +376,35 @@ pixman_composite_over_n_8_8888_asm_armv6 (int32_t   width,
-- 
-- #endif
-- 
--+void
--+pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6 (uint16_t *      dst,
--+						      uint16_t *      src,
--+						      int32_t         w,
--+						      pixman_fixed_t  vx,
--+						      pixman_fixed_t  unit_x);
--+
--+static force_inline void
--+scaled_nearest_scanline_armv6_565_565_SRC (uint16_t *      dst,
--+					   uint16_t *      src,
--+					   int32_t         w,
--+					   pixman_fixed_t  vx,
--+					   pixman_fixed_t  unit_x,
--+					   pixman_fixed_t  max_vx)
--+{
--+    pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6 (dst, src, w,
--+							  vx, unit_x);
--+}
--+
--+FAST_NEAREST_MAINLOOP (armv6_565_565_cover_SRC,
--+		       scaled_nearest_scanline_armv6_565_565_SRC,
--+		       uint16_t, uint16_t, COVER);
--+FAST_NEAREST_MAINLOOP (armv6_565_565_none_SRC,
--+		       scaled_nearest_scanline_armv6_565_565_SRC,
--+		       uint16_t, uint16_t, NONE);
--+FAST_NEAREST_MAINLOOP (armv6_565_565_pad_SRC,
--+		       scaled_nearest_scanline_armv6_565_565_SRC,
--+		       uint16_t, uint16_t, PAD);
--+
-- PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (armv6, add_8_8,
--                                    uint8_t, 1, uint8_t, 1)
-- PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (armv6, over_8888_8888,
--@@ -404,6 +434,13 @@ static const pixman_fast_path_t arm_simd_fast_paths[] =
--     PIXMAN_STD_FAST_PATH (OVER, solid, a8, a8b8g8r8, armv6_composite_over_n_8_8888),
--     PIXMAN_STD_FAST_PATH (OVER, solid, a8, x8b8g8r8, armv6_composite_over_n_8_8888),
-- 
--+    SIMPLE_NEAREST_FAST_PATH_COVER (SRC, r5g6b5, r5g6b5, armv6_565_565),
--+    SIMPLE_NEAREST_FAST_PATH_COVER (SRC, b5g6r5, b5g6r5, armv6_565_565),
--+    SIMPLE_NEAREST_FAST_PATH_NONE (SRC, r5g6b5, r5g6b5, armv6_565_565),
--+    SIMPLE_NEAREST_FAST_PATH_NONE (SRC, b5g6r5, b5g6r5, armv6_565_565),
--+    SIMPLE_NEAREST_FAST_PATH_PAD (SRC, r5g6b5, r5g6b5, armv6_565_565),
--+    SIMPLE_NEAREST_FAST_PATH_PAD (SRC, b5g6r5, b5g6r5, armv6_565_565),
--+
--     { PIXMAN_OP_NONE },
-- };
-- 
---- 
--1.6.6.1
--
-diff --git a/recipes/xorg-lib/pixman_0.12.0.bb b/recipes/xorg-lib/pixman_0.12.0.bb
-deleted file mode 100644
-index fcf0c14..0000000
---- a/recipes/xorg-lib/pixman_0.12.0.bb
+index 8655664..0000000
+--- a/recipes/xorg-app/mkfontscale_1.0.7.bb
 +++ /dev/null
 @@ -1,9 +0,0 @@
--require pixman.inc
--PR = "${INC_PR}.0"
+-require xorg-app-common.inc
+-DESCRIPTION = "a program to create an index of scalable font files for X"
+-DEPENDS += " zlib libfontenc freetype "
+-PR = "${INC_PR}.1"
 -
--SRC_URI += " \
--           file://pixman-arm.patch \
--           file://pixman-x888-565.patch \
--          "
--SRC_URI[archive.md5sum] = "09357cc74975b01714e00c5899ea1881"
--SRC_URI[archive.sha256sum] = "2b16516ef147bb604e1cf50c883143a052a7ff92d2930b70e571da0603b7d9ce"
-diff --git a/recipes/xorg-lib/pixman_0.16.2.bb b/recipes/xorg-lib/pixman_0.16.2.bb
+-SRC_URI[archive.md5sum] = "96ca346f185c0ab48e42bf5bb0375da5"
+-SRC_URI[archive.sha256sum] = "8306b229cca233216a6582cb1ff60af78e37c47d6412ac823d7d41c3d7de7127"
+-
+-BBCLASSEXTEND = "native"
+diff --git a/recipes/xorg-app/oclock_1.0.1.bb b/recipes/xorg-app/oclock_1.0.1.bb
 deleted file mode 100644
-index 399bb6a..0000000
---- a/recipes/xorg-lib/pixman_0.16.2.bb
+index 1ffa51a..0000000
+--- a/recipes/xorg-app/oclock_1.0.1.bb
 +++ /dev/null
 @@ -1,7 +0,0 @@
--require pixman.inc
--PR = "${INC_PR}.1"
--
--SRC_URI[archive.md5sum] = "02bd3669f53c404c19980d5efb6f86fb"
--SRC_URI[archive.sha256sum] = "05f78c2fd3a5f054c0d716e8ba1b67a0c04a7a7e642d6946828ec383b389d185"
--
--EXTRA_OECONF = "--disable-gtk"
-diff --git a/recipes/xorg-lib/pixman_0.18.4.bb b/recipes/xorg-lib/pixman_0.18.4.bb
-deleted file mode 100644
-index 286477a..0000000
---- a/recipes/xorg-lib/pixman_0.18.4.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--require pixman.inc
--PR = "${INC_PR}.1"
--
--SRC_URI[archive.md5sum] = "532db4194e18c108d0b7dd85f20d39b8"
--SRC_URI[archive.sha256sum] = "1484092277c5187f5458229a2b7fd7fbc0cb07e1f220c7f8f9ac65de6dba7989"
--SRC_URI += "\
--           file://0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch\
--           file://0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch\
--           file://0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch\
--           file://0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch\
--           file://0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch\
--           file://0006-A-copy-paste-version-of-16bpp-bilinear-scanline-fetc.patch\
--           file://0007-ARM-added-missing-cache-preload.patch\
--           file://565-over-neon.patch \
--           file://neon-reverse-u.patch \
--"
--
--NEON = " --disable-arm-neon "
--NEON_armv7a = " "
--
--EXTRA_OECONF = "${NEON} --disable-gtk"
-diff --git a/recipes/xorg-lib/pixman_0.20.0.bb b/recipes/xorg-lib/pixman_0.20.0.bb
-deleted file mode 100644
-index b3fbd4f..0000000
---- a/recipes/xorg-lib/pixman_0.20.0.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--require pixman.inc
--
--SRC_URI[archive.md5sum] = "c1a31d5cedfa97c5af7148a2d1fd4356"
--SRC_URI[archive.sha256sum] = "9c02c22c6cc3f28f3633d02ef6f0cac130518f621edb011ebbbf08cd1a81251a"
--
--PR = "${INC_PR}.0"
--
--SRC_URI += "\
--           file://0000-Add-pixman_bits_override_accessors.patch \
--           file://0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch \
--           file://0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch \
--           file://0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch \
--           file://0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch \
--           file://0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch \
--           file://0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch \
--           file://0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch \
--           file://0008-ARM-optimization-for-scaled-src_0565_0565-operation-.patch \
--"
--
--NEON = " --disable-arm-neon "
--NEON_armv7a = " "
--
--EXTRA_OECONF = "${NEON} --disable-gtk"
-diff --git a/recipes/xorg-lib/xtrans_1.2.5.bb b/recipes/xorg-lib/xtrans_1.2.5.bb
-deleted file mode 100644
-index e6e3714..0000000
---- a/recipes/xorg-lib/xtrans_1.2.5.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require xorg-lib-common.inc
--DESCRIPTION = "network API translation layer to insulate X applications and \
--libraries from OS network vageries."
--RDEPENDS_${PN}-dev = ""
+-require xorg-app-common.inc
+-DEPENDS += " libxmu libxext libxt"
 -PE = "1"
 -PR = "${INC_PR}.0"
 -
--SRC_URI[archive.md5sum] = "2d1e57e82acc5f21797e92341415af2f"
--SRC_URI[archive.sha256sum] = "cc71a391f4da8176e5daeeac1ddf5137ba5e8d2263cb93a49f9e2a9976b90899"
+-SRC_URI[archive.md5sum] = "91f49547f9ed3cd0137c8b7c3183e360"
+-SRC_URI[archive.sha256sum] = "49ab7d4f6402fbbe30714012ee38b49da17789f3a29ac41917987ce18c74217c"
+diff --git a/recipes/xorg-app/proxymngr_1.0.1.bb b/recipes/xorg-app/proxymngr_1.0.1.bb
+deleted file mode 100644
+index a7cea51..0000000
+--- a/recipes/xorg-app/proxymngr_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libice libxt xproxymngproto"
+-PE = "1"
+-PR = "${INC_PR}.0"
 -
--ALLOW_EMPTY = "1"
+-SRC_URI[archive.md5sum] = "aad44d0f65b97fd6d564b1d2ae510bb1"
+-SRC_URI[archive.sha256sum] = "e9f5d4553411562477a0605fb0f0ec728016499e37230138a5e207dec79525c5"
+diff --git a/recipes/xorg-app/rendercheck_1.3.bb b/recipes/xorg-app/rendercheck_1.3.bb
+deleted file mode 100644
+index 911a093..0000000
+--- a/recipes/xorg-app/rendercheck_1.3.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "a program to test Render extension implementations"
+-DEPENDS += "libxrender"
+-PR = "${INC_PR}.0"
 -
--BBCLASSEXTEND = "native nativesdk"
+-SRC_URI[archive.md5sum] = "eb6a358b79b0aeaf03d56c5e1f394365"
+-SRC_URI[archive.sha256sum] = "60e83bebab37c2754ae77cc359c0b67e8bc72b46821c7fa260ccc5c811bd741f"
+diff --git a/recipes/xorg-app/rgb_1.0.3.bb b/recipes/xorg-app/rgb_1.0.3.bb
+deleted file mode 100644
+index b4eb11c..0000000
+--- a/recipes/xorg-app/rgb_1.0.3.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " xproto util-macros"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "44ea16cc3104de6401bc74035f642357"
+-SRC_URI[archive.sha256sum] = "162111c0192c8f78e99a6ee9a3df5eb149251c5800896c993399da005ec7fe95"
+-
+-FILES_${PN} += "${datadir}/X11"
+diff --git a/recipes/xorg-app/rstart_1.0.3.bb b/recipes/xorg-app/rstart_1.0.3.bb
+deleted file mode 100644
+index b82c821..0000000
+--- a/recipes/xorg-app/rstart_1.0.3.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require xorg-app-common.inc
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "e09c14cf1ac78260f95a9aa45bccab4c"
+-SRC_URI[archive.sha256sum] = "d6ee7becf9ece2fcc30ce50f7e9be31f231cce0cb3a8ba09d1697ac2822c3fcc"
+diff --git a/recipes/xorg-app/sessreg_1.0.5.bb b/recipes/xorg-app/sessreg_1.0.5.bb
+deleted file mode 100644
+index 6fc2ee0..0000000
+--- a/recipes/xorg-app/sessreg_1.0.5.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "a simple program for managing utmp/wtmp entries"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "00e834c3cbfd990e9d7d5ddc834242df"
+-SRC_URI[archive.sha256sum] = "3308fbd0018d53bb818fee9de1cde484965b740073d5d240efa4cfc881c9d1a9"
+diff --git a/recipes/xorg-app/setxkbmap_1.1.0.bb b/recipes/xorg-app/setxkbmap_1.1.0.bb
+deleted file mode 100644
+index ba7b46e..0000000
+--- a/recipes/xorg-app/setxkbmap_1.1.0.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxkbfile "
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "2f902e0a89aaf2b19e06e7f26c6efb3a"
+-SRC_URI[archive.sha256sum] = "932f2b314a4bf6dfccd16d63c633073abf650d8e136f481904e972ef3d4faf64"
+diff --git a/recipes/xorg-app/showfont_1.0.2.bb b/recipes/xorg-app/showfont_1.0.2.bb
+deleted file mode 100644
+index 217745a..0000000
+--- a/recipes/xorg-app/showfont_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libfs"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "8f83d774ed4cc2a6dca86edd856d820a"
+-SRC_URI[archive.sha256sum] = "9bd0373659b2f24120dba887fd155f99aed02e4a7c2afae69e7db1c1fa05e88c"
+diff --git a/recipes/xorg-app/smproxy_1.0.3.bb b/recipes/xorg-app/smproxy_1.0.3.bb
+deleted file mode 100644
+index 3b44ef6..0000000
+--- a/recipes/xorg-app/smproxy_1.0.3.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxt libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "ba7dbde81be24fc1bd4156b360e5f8cf"
+-SRC_URI[archive.sha256sum] = "1b8dd25483280fc2a4a7d977b4a43dc4228b9c65e904c3d4ee68245705d4ae35"
+diff --git a/recipes/xorg-app/twm_1.0.4.bb b/recipes/xorg-app/twm_1.0.4.bb
+deleted file mode 100644
+index 96cbf14..0000000
+--- a/recipes/xorg-app/twm_1.0.4.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "tiny window manager"
+-DEPENDS += " libxext libxt libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "0865e14c73c08fa8c501ae877298ee9f"
+-SRC_URI[archive.sha256sum] = "daa088f9ae231508929b7bd4746e942212b53f2802ca4cee450139fabc8de1fa"
+-
+-ALTERNATIVE_NAME = "x-window-manager"
+-ALTERNATIVE_PATH = "${bindir}/twm"
+-ALTERNATIVE_LINK = "${bindir}/x-window-manager"
+-ALTERNATIVE_PRIORITY = "1"
+diff --git a/recipes/xorg-app/viewres_1.0.1.bb b/recipes/xorg-app/viewres_1.0.1.bb
+deleted file mode 100644
+index 60c9ef6..0000000
+--- a/recipes/xorg-app/viewres_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "cdbed540daf7975b56000420c9aa5bf9"
+-SRC_URI[archive.sha256sum] = "bf49cd45ffb197a6992b3b7c99c94161eaf7cf6a2b661d3905ac382bedce34b8"
+diff --git a/recipes/xorg-app/x11perf_1.5.1.bb b/recipes/xorg-app/x11perf_1.5.1.bb
+deleted file mode 100644
+index 76a0457..0000000
+--- a/recipes/xorg-app/x11perf_1.5.1.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X11 server performance test program"
+-DEPENDS += "libxmu libxrender libxft libxext fontconfig"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "66e4aa4645f83809071eb69553ed0222"
+-SRC_URI[archive.sha256sum] = "ab4c6a579f93fa9485ef5be8760a3da0d22acfa743f2114057c5262b77ff7056"
+-
+-FILES_${PN} += "/usr/lib/X11/x11perfcomp/*"
+diff --git a/recipes/xorg-app/xauth_1.0.4.bb b/recipes/xorg-app/xauth_1.0.4.bb
+deleted file mode 100644
+index 4233097..0000000
+--- a/recipes/xorg-app/xauth_1.0.4.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X authority file utility"
+-DEPENDS += "libxau libxext libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "fa00078c414c4a57cab7a6d89a0c8734"
+-SRC_URI[archive.sha256sum] = "f91190c8b8bb18270b86b00f30da5684bb5e5bd1ed0ccf352322f8145e076a59"
+diff --git a/recipes/xorg-app/xbacklight_1.1.1.bb b/recipes/xorg-app/xbacklight_1.1.1.bb
+deleted file mode 100644
+index a8d4825..0000000
+--- a/recipes/xorg-app/xbacklight_1.1.1.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "adjust backlight brightness using RandR extension"
+-DEPENDS += " libxrender libxrandr"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "3e39eec6d0fd5c587ca6d55aa7bb8fe1"
+-SRC_URI[archive.sha256sum] = "5d32d891c83b9c0089231f4f1c424ab02301b627ce26e5c2e6e397b8ea606fb2"
+diff --git a/recipes/xorg-app/xbiff_1.0.1.bb b/recipes/xorg-app/xbiff_1.0.1.bb
+deleted file mode 100644
+index ac2eefb..0000000
+--- a/recipes/xorg-app/xbiff_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw xbitmaps libxext"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "404f5add4537d22dd109c33e518a5190"
+-SRC_URI[archive.sha256sum] = "9845b1fa8a1cfd408f01fd69b66808068e847cdc925d114c7723c17934a96503"
+diff --git a/recipes/xorg-app/xcalc_1.0.2.bb b/recipes/xorg-app/xcalc_1.0.2.bb
+deleted file mode 100644
+index b35ab5c..0000000
+--- a/recipes/xorg-app/xcalc_1.0.2.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "scientific calculator for X"
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "d31a99795b9668f047aa11bf36df6df0"
+-SRC_URI[archive.sha256sum] = "96375e2d212e7249d14d0beac73c1a6d89252b5fcf571bd9f5c7303a14bb4a32"
+diff --git a/recipes/xorg-app/xclipboard_1.1.0.bb b/recipes/xorg-app/xclipboard_1.1.0.bb
+deleted file mode 100644
+index 7509998..0000000
+--- a/recipes/xorg-app/xclipboard_1.1.0.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "113eccea3ee73a1ef7b43d2291ca1e09"
+-SRC_URI[archive.sha256sum] = "de0f37c7bf69c3aac3362bc0cbe470a622c2a85b62c5483c113ea88512232710"
+diff --git a/recipes/xorg-app/xclock_1.0.4.bb b/recipes/xorg-app/xclock_1.0.4.bb
+deleted file mode 100644
+index ae74aea..0000000
+--- a/recipes/xorg-app/xclock_1.0.4.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "analog / digital clock for X"
+-DEPENDS += " libxaw libxrender libxft libxkbfile libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "bb9fd5e00d39c348a0078b97fdf8258f"
+-SRC_URI[archive.sha256sum] = "69b903b6305211c9fc5db394f3d08c0a696aa51942d73db7f594422e7be6edf0"
+diff --git a/recipes/xorg-app/xcmsdb_1.0.2.bb b/recipes/xorg-app/xcmsdb_1.0.2.bb
+deleted file mode 100644
+index 3a177a8..0000000
+--- a/recipes/xorg-app/xcmsdb_1.0.2.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require xorg-app-common.inc
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "7f2bed9f4dd3301d18d83eb296c3be0d"
+-SRC_URI[archive.sha256sum] = "bfcac66634ea4d4a1607f1c8a4170e6089db13355357fc143281a6fc0216face"
+diff --git a/recipes/xorg-app/xcompmgr_1.1.4.bb b/recipes/xorg-app/xcompmgr_1.1.4.bb
+deleted file mode 100644
+index d781958..0000000
+--- a/recipes/xorg-app/xcompmgr_1.1.4.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X Compositing Manager"
+-PRIORITY = "optional"
+-LICENSE = "BSD-X"
+-DEPENDS += "libxdamage libxcomposite libxrender"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "3eb1c2b7a6ceaec4ee872cb06d202d91"
+-SRC_URI[archive.sha256sum] = "4bf647745b4de940ef75796fc8ad4e1f83c276e474f7b6779f317fcd070de884"
+diff --git a/recipes/xorg-app/xconsole_1.0.3.bb b/recipes/xorg-app/xconsole_1.0.3.bb
+deleted file mode 100644
+index 3f8ffb6..0000000
+--- a/recipes/xorg-app/xconsole_1.0.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "monitor system console messages with X"
+-DEPENDS += " libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "0e1a3110bebabecc2897d67a973526b0"
+-SRC_URI[archive.sha256sum] = "1b1ec25fefad34f5c33c74474358c1f5a8702d8c04defc854826bccb7a46bc45"
+diff --git a/recipes/xorg-app/xcursorgen_1.0.3.bb b/recipes/xorg-app/xcursorgen_1.0.3.bb
+deleted file mode 100644
+index 65260e5..0000000
+--- a/recipes/xorg-app/xcursorgen_1.0.3.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "create an X cursor file from a collection of PNG images"
+-DEPENDS += " libxcursor libpng"
+-PE = "1"
+-PR = "${INC_PR}.1"
+-
+-SRC_URI[archive.md5sum] = "69df079b3950a0db4e5f4e6f0e00ddee"
+-SRC_URI[archive.sha256sum] = "ed5f3ffe881c21ffca85406e5a5f553ed4985cc5e9acdb535f682c33bebac254"
+-
+-BBCLASSEXTEND = "native"
+diff --git a/recipes/xorg-app/xdbedizzy_1.0.2.bb b/recipes/xorg-app/xdbedizzy_1.0.2.bb
+deleted file mode 100644
+index 63c04ee..0000000
+--- a/recipes/xorg-app/xdbedizzy_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxp libxprintutil libxp libxau libxext"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "ecef9cfd197d00980e0d69ee4126d890"
+-SRC_URI[archive.sha256sum] = "74e882e9fee7ebeb274caf43071afff92531b8a41f34650376146a131166012d"
+diff --git a/recipes/xorg-app/xditview_1.0.1.bb b/recipes/xorg-app/xditview_1.0.1.bb
+deleted file mode 100644
+index d23a028..0000000
+--- a/recipes/xorg-app/xditview_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "e9a7192ef29453b8c810ddd556a463c0"
+-SRC_URI[archive.sha256sum] = "177194e5f83b31c2f934e3a0b573e8ae359edf2ef1a2403ee8e1dad383558117"
+diff --git a/recipes/xorg-app/xdm_1.1.9.bb b/recipes/xorg-app/xdm_1.1.9.bb
+deleted file mode 100644
+index a6796b5..0000000
+--- a/recipes/xorg-app/xdm_1.1.9.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X display manager"
+-DEPENDS += " libxmu libxinerama libxpm libxdmcp libxau libxext libxdmcp libxt libxaw"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "030ae4bd9b8d428749d68bfdf56ce8a5"
+-SRC_URI[archive.sha256sum] = "e7b1db0e1b0d0113a301d94e40b0314e55f7e0006415f50a9cf06f636b11b134"
+-
+-EXTRA_OECONF += "\
+-        --with-random-device=/dev/urandom --with-utmp-file=/var/run/utmp \
+-        --with-wtmp-file=/var/log/wtmp \
+-        "
+-
+-FILES_${PN}-dbg += "${libdir}/X11/xdm/.debug/*"
+diff --git a/recipes/xorg-app/xdpyinfo-1.2.0/disable-xkb.patch b/recipes/xorg-app/xdpyinfo-1.2.0/disable-xkb.patch
+new file mode 100644
+index 0000000..24af21f
+--- /dev/null
++++ b/recipes/xorg-app/xdpyinfo-1.2.0/disable-xkb.patch
+@@ -0,0 +1,18 @@
++--- xdpyinfo-1.0.1/configure.ac.orig	2006-03-08 16:33:05.000000000 +0100
+++++ xdpyinfo-1.0.1/configure.ac	2006-03-08 16:41:59.000000000 +0100
++@@ -45,11 +45,15 @@
++ 	AC_CHECK_HEADERS([X11/extensions/multibuf.h X11/extensions/XShm.h],,,[#include <X11/Xlib.h>])
++ 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
++ 
+++AC_ARG_ENABLE(xkb, AC_HELP_STRING([--disable-xkb], [Disable XKB support]),
+++        XKB="$enableval", XKB="yes")
+++if test "x$XKB" = "xyes" ; then
++ PKG_CHECK_MODULES(DPY_XKB, x11, 
++ 	[SAVE_CPPFLAGS="$CPPFLAGS"
++ 	CPPFLAGS="$CPPFLAGS $DPY_XKB_CFLAGS $DPY_X11_CFLAGS"
++ 	AC_CHECK_HEADERS([X11/extensions/XKB.h X11/XKBlib.h],,,[#include <X11/Xlib.h>])
++ 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
+++fi
++ 
++ PKG_CHECK_MODULES(DPY_XF86VIDMODE, xxf86vm, 
++ 	[SAVE_CPPFLAGS="$CPPFLAGS"
+diff --git a/recipes/xorg-app/xdpyinfo/disable-xkb.patch b/recipes/xorg-app/xdpyinfo/disable-xkb.patch
+deleted file mode 100644
+index 24af21f..0000000
+--- a/recipes/xorg-app/xdpyinfo/disable-xkb.patch
++++ /dev/null
+@@ -1,18 +0,0 @@
+---- xdpyinfo-1.0.1/configure.ac.orig	2006-03-08 16:33:05.000000000 +0100
+-+++ xdpyinfo-1.0.1/configure.ac	2006-03-08 16:41:59.000000000 +0100
+-@@ -45,11 +45,15 @@
+- 	AC_CHECK_HEADERS([X11/extensions/multibuf.h X11/extensions/XShm.h],,,[#include <X11/Xlib.h>])
+- 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
+- 
+-+AC_ARG_ENABLE(xkb, AC_HELP_STRING([--disable-xkb], [Disable XKB support]),
+-+        XKB="$enableval", XKB="yes")
+-+if test "x$XKB" = "xyes" ; then
+- PKG_CHECK_MODULES(DPY_XKB, x11, 
+- 	[SAVE_CPPFLAGS="$CPPFLAGS"
+- 	CPPFLAGS="$CPPFLAGS $DPY_XKB_CFLAGS $DPY_X11_CFLAGS"
+- 	AC_CHECK_HEADERS([X11/extensions/XKB.h X11/XKBlib.h],,,[#include <X11/Xlib.h>])
+- 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
+-+fi
+- 
+- PKG_CHECK_MODULES(DPY_XF86VIDMODE, xxf86vm, 
+- 	[SAVE_CPPFLAGS="$CPPFLAGS"
+diff --git a/recipes/xorg-app/xdpyinfo_1.1.0.bb b/recipes/xorg-app/xdpyinfo_1.1.0.bb
+deleted file mode 100644
+index f7b3134..0000000
+--- a/recipes/xorg-app/xdpyinfo_1.1.0.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X display information utility"
+-LICENSE = "MIT"
+-DEPENDS += "libxtst libxext libxxf86vm libxxf86dga libxxf86misc libxi libxrender libxinerama libdmx libxp libxau"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI += "file://disable-xkb.patch"
+-SRC_URI[archive.md5sum] = "d1d516610316138105cd07064b257c5c"
+-SRC_URI[archive.sha256sum] = "780d8dfe65653f42ee26d35928ab7f72f5f27ab08eda692fe4baad05126a0631"
+-
+-EXTRA_OECONF = "--disable-xkb"
+diff --git a/recipes/xorg-app/xdriinfo_1.0.3.bb b/recipes/xorg-app/xdriinfo_1.0.3.bb
+deleted file mode 100644
+index a123cad..0000000
+--- a/recipes/xorg-app/xdriinfo_1.0.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "query configuration information of DRI drivers"
+-DEPENDS += " glproto virtual/libgl"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "cb304d1ce562ac48b68eedeba38c662f"
+-SRC_URI[archive.sha256sum] = "2b762afd08c798d79fd6dacfd6280da39105927fa2bd91e3b1ba75b8cddc259c"
+diff --git a/recipes/xorg-app/xedit_1.1.2.bb b/recipes/xorg-app/xedit_1.1.2.bb
+deleted file mode 100644
+index 2b16fb8..0000000
+--- a/recipes/xorg-app/xedit_1.1.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxprintutil libxp libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "67193be728414d45a1922911e6437991"
+-SRC_URI[archive.sha256sum] = "a38823a8b7919e2efa689bc4c279e12314e45b41131c39ce9ca523e54f42fa1f"
+diff --git a/recipes/xorg-app/xev/diet-x11.patch b/recipes/xorg-app/xev/diet-x11.patch
+deleted file mode 100644
+index 9f515e8..0000000
+--- a/recipes/xorg-app/xev/diet-x11.patch
++++ /dev/null
+@@ -1,80 +0,0 @@
+----
+- xev.c |   16 ++++++++--------
+- 1 file changed, 8 insertions(+), 8 deletions(-)
+-
+-Index: xev-1.0.2/xev.c
+-===================================================================
+---- xev-1.0.2.orig/xev.c	2006-06-02 00:25:44.000000000 +0100
+-+++ xev-1.0.2/xev.c	2007-05-10 15:22:07.000000000 +0100
+-@@ -109,7 +109,7 @@ do_KeyPress (XEvent *eventp)
+-     nbytes = XLookupString (e, str, 256, &ks, NULL);
+- 
+-     /* not supposed to call XmbLookupString on a key release event */
+--    if (e->type == KeyPress && xic) {
+-+    /*if (e->type == KeyPress && xic) {
+-         do {
+-             nmbbytes = XmbLookupString (xic, e, buf, bsize - 1, &ks, &status);
+-             buf[nmbbytes] = '\0';
+-@@ -119,7 +119,7 @@ do_KeyPress (XEvent *eventp)
+-                 buf = realloc (buf, bsize);
+-             }
+-         } while (status == XBufferOverflow);
+--    }
+-+    }*/
+- 
+-     if (ks == NoSymbol)
+- 	ksname = "NoSymbol";
+-@@ -149,7 +149,7 @@ do_KeyPress (XEvent *eventp)
+-     }
+- 
+-     /* not supposed to call XmbLookupString on a key release event */
+--    if (e->type == KeyPress && xic) {
+-+    /*if (e->type == KeyPress && xic) {
+-         printf ("    XmbLookupString gives %d bytes: ", nmbbytes);
+-         if (nmbbytes > 0) {
+-            dump (buf, nmbbytes);
+-@@ -157,7 +157,7 @@ do_KeyPress (XEvent *eventp)
+-         } else {
+-     	   printf ("\n");
+-         }
+--    }
+-+    } */
+- 
+-     printf ("    XFilterEvent returns: %s\n", 
+- 	    XFilterEvent (eventp, e->window) ? "True" : "False");
+-@@ -804,7 +804,7 @@ main (int argc, char **argv)
+-         fprintf (stderr, "%s:  XSetLocaleModifiers failed\n", ProgramName);
+-     }
+- 
+--    xim = XOpenIM (dpy, NULL, NULL, NULL);
+-+    /*xim = XOpenIM (dpy, NULL, NULL, NULL);
+-     if (xim == NULL) {
+-         fprintf (stderr, "%s:  XOpenIM failed\n", ProgramName);
+-     }
+-@@ -831,7 +831,7 @@ main (int argc, char **argv)
+-             }
+-             XFree (xim_styles);
+-         }
+--    } 
+-+    }*/
+- 
+-     screen = DefaultScreen (dpy);
+- 
+-@@ -891,7 +891,7 @@ main (int argc, char **argv)
+- 	printf ("Outer window is 0x%lx, inner window is 0x%lx\n", w, subw);
+-     }
+- 
+--    if (xim && xim_style) {
+-+    /*if (xim && xim_style) {
+-         xic = XCreateIC (xim, 
+-                          XNInputStyle, xim_style, 
+-                          XNClientWindow, w, 
+-@@ -901,7 +901,7 @@ main (int argc, char **argv)
+-         if (xic == NULL) {
+-             fprintf (stderr, "XCreateIC failed\n");
+-         }
+--    }
+-+    }*/
+- 
+-     for (done = 0; !done; ) {
+- 	XEvent event;
+diff --git a/recipes/xorg-app/xev_1.0.4.bb b/recipes/xorg-app/xev_1.0.4.bb
+deleted file mode 100644
+index 6154c8c..0000000
+--- a/recipes/xorg-app/xev_1.0.4.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X Event Viewer"
+-LICENSE = "MIT"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI += "file://diet-x11.patch"
+-SRC_URI[archive.md5sum] = "5f98c0a2725a33d60ef4956befe078fb"
+-SRC_URI[archive.sha256sum] = "7fad9c9755a624e677f44633dee218e9c22b4ba9a83e6709a6cbf8c1a501fde8"
+diff --git a/recipes/xorg-app/xeyes_1.1.0.bb b/recipes/xorg-app/xeyes_1.1.0.bb
+deleted file mode 100644
+index fc382ba..0000000
+--- a/recipes/xorg-app/xeyes_1.1.0.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxau libxt libxext libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "933f6d2b132d14f707f1f3c87b39ebe2"
+-SRC_URI[archive.sha256sum] = "996b9641fea06e2f0dde9cbf5fb31b5cd139376198057a88ca59820fdb94d507"
+diff --git a/recipes/xorg-app/xf86dga_1.0.2.bb b/recipes/xorg-app/xf86dga_1.0.2.bb
+deleted file mode 100644
+index aff21db..0000000
+--- a/recipes/xorg-app/xf86dga_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxxf86dga libxt libxaw libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "66feef21fb4e769cc1e2f193ae461a8c"
+-SRC_URI[archive.sha256sum] = "650633b83796e5a24d4c5ec30adfeb3958f75d9d0785060d5c42bab55ccc1857"
+diff --git a/recipes/xorg-app/xfd_1.0.1.bb b/recipes/xorg-app/xfd_1.0.1.bb
+deleted file mode 100644
+index dc46464..0000000
+--- a/recipes/xorg-app/xfd_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw freetype fontconfig libxft libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "c72abd90f50ef459bc14b39ec9fcc7f8"
+-SRC_URI[archive.sha256sum] = "111baa16780429d6739ab69b7393a18d75a10b7615dcc8cd0b0878ab9a5e2e1e"
+diff --git a/recipes/xorg-app/xfontsel_1.0.2.bb b/recipes/xorg-app/xfontsel_1.0.2.bb
+deleted file mode 100644
+index aed93b5..0000000
+--- a/recipes/xorg-app/xfontsel_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "point and click selection of X11 font names"
+-DEPENDS += " libxaw"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "288fe4cf8a990e4e602aac16dd9109fb"
+-SRC_URI[archive.sha256sum] = "7a66ba3910bd7e39d58f9d4a4a588f191a874b8607369fe2cc9203a7115006a9"
+diff --git a/recipes/xorg-app/xfs_1.1.0.bb b/recipes/xorg-app/xfs_1.1.0.bb
+deleted file mode 100644
+index efc2c62..0000000
+--- a/recipes/xorg-app/xfs_1.1.0.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X fontserver"
+-DEPENDS += " libfs libxfont xtrans"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "5cfc06a320f74f07a0aa73da62307e9a"
+-SRC_URI[archive.sha256sum] = "47bad4bbcd0488a8e573aa6efe3438076c4d27c498d6f642f3aa27262eb95f6d"
+diff --git a/recipes/xorg-app/xfsinfo_1.0.2.bb b/recipes/xorg-app/xfsinfo_1.0.2.bb
+deleted file mode 100644
+index 5ca440c..0000000
+--- a/recipes/xorg-app/xfsinfo_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libfs"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "e6c0071f6d5436113982f4a575d3f94b"
+-SRC_URI[archive.sha256sum] = "95aaca84f948fc7e25d82c58d3fdbba44911b99f3e205378ce82a786c11bb96f"
+diff --git a/recipes/xorg-app/xgamma_1.0.3.bb b/recipes/xorg-app/xgamma_1.0.3.bb
+deleted file mode 100644
+index ebd483c..0000000
+--- a/recipes/xorg-app/xgamma_1.0.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "Alter a monitor's gamma correction through the X server"
+-DEPENDS += " libxxf86vm"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "e8a88bf1a18f35b724619849dca97f4f"
+-SRC_URI[archive.sha256sum] = "e5eb2588fbbdc5c2db5571b304204487a9c22eed15ac6cb816f605ec403e6e1a"
+diff --git a/recipes/xorg-app/xgc_1.0.1.bb b/recipes/xorg-app/xgc_1.0.1.bb
+deleted file mode 100644
+index 5cd8c1e..0000000
+--- a/recipes/xorg-app/xgc_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "72fc8dd68f585000c0a542eba0264571"
+-SRC_URI[archive.sha256sum] = "7caddfc6c34f62a4ab2dba2ba34085f6b2343b36ec1bec3b522a2188170e1093"
+diff --git a/recipes/xorg-app/xhost_1.0.3.bb b/recipes/xorg-app/xhost_1.0.3.bb
+deleted file mode 100644
+index a6b3a43..0000000
+--- a/recipes/xorg-app/xhost_1.0.3.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "Server access control program for X"
+-LICENSE = "MIT"
+-DEPENDS += "libxmu libxau"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "c7f91b4a750d297f269c2a0a3206a1b2"
+-SRC_URI[archive.sha256sum] = "2d63007c65e89fe273a43f3e45b3c0133acbc3ceeda6bfc9671388409134ad17"
+diff --git a/recipes/xorg-app/xinit_1.1.1.bb b/recipes/xorg-app/xinit_1.1.1.bb
+deleted file mode 100644
+index 89b047e..0000000
+--- a/recipes/xorg-app/xinit_1.1.1.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X Window System initializer"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "93c73705ed9eb1e1a6b6938405672f2b"
+-SRC_URI[archive.sha256sum] = "b103d2cf9e1cd8b049e28bb1109f3da3a14287bbce3ab8b2f427d55a6e5f4785"
+-
+-FILES_${PN} += "${libdir}X11/xinit"
+diff --git a/recipes/xorg-app/xinput_1.5.0.bb b/recipes/xorg-app/xinput_1.5.0.bb
+deleted file mode 100644
+index 04355de..0000000
+--- a/recipes/xorg-app/xinput_1.5.0.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "a utility to configure and test XInput devices"
+-DEPENDS += " libxi"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "3e8a5f1faccc8ab00c6190e5a34e0a45"
+-SRC_URI[archive.sha256sum] = "a84728e34bb5edd36ecc1b5489f48ad1467ad5aab1f74f1b7789f826a1ffcaf9"
+diff --git a/recipes/xorg-app/xkbcomp_1.1.1.bb b/recipes/xorg-app/xkbcomp_1.1.1.bb
+deleted file mode 100644
+index d32be77..0000000
+--- a/recipes/xorg-app/xkbcomp_1.1.1.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "The X Keyboard Extension essentially replaces the core protocol definition of keyboard."
+-DEPENDS += " libxkbfile"
+-PR = "${INC_PR}.1"
+-
+-SRC_URI[archive.md5sum] = "38c387bacdc01038c8ac280588792bcf"
+-SRC_URI[archive.sha256sum] = "9775bcfd43d9ffa41e2865e5b2c933f419bf983d7a529b3103656c76fd82e663"
+-
+-BBCLASSEXTEND = "native"
+diff --git a/recipes/xorg-app/xkbevd_1.1.0.bb b/recipes/xorg-app/xkbevd_1.1.0.bb
+deleted file mode 100644
+index 2da02ec..0000000
+--- a/recipes/xorg-app/xkbevd_1.1.0.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxkbfile "
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "8d3c1485c2dd62ea7395a37377958a39"
+-SRC_URI[archive.sha256sum] = "46037add20321ff13954ad91aa5f5f5ec52d78006f9d7c52aa6167622b34a2df"
+diff --git a/recipes/xorg-app/xkbprint_1.0.1.bb b/recipes/xorg-app/xkbprint_1.0.1.bb
+deleted file mode 100644
+index 58a34d2..0000000
+--- a/recipes/xorg-app/xkbprint_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxkbfile "
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "b98ae2d8b21c545b7b322d0b302efefa"
+-SRC_URI[archive.sha256sum] = "008dffea5b213880cb3ebd40d0b9bf0cc10392fb0349831efdebf2a428dd2e17"
+diff --git a/recipes/xorg-app/xkbutils_1.0.2.bb b/recipes/xorg-app/xkbutils_1.0.2.bb
+deleted file mode 100644
+index c4bfe76..0000000
+--- a/recipes/xorg-app/xkbutils_1.0.2.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxkbfile "
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "369a21641b7ca983d6641298e51d97f8"
+-SRC_URI[archive.sha256sum] = "12a37d4594a4deb2642b1659f3827068c24bb8791a20b927c5f3b7fdb0c70bee"
+diff --git a/recipes/xorg-app/xkill_1.0.2.bb b/recipes/xorg-app/xkill_1.0.2.bb
+deleted file mode 100644
+index b221ead..0000000
+--- a/recipes/xorg-app/xkill_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "dca031355b4afcf8517a8258eeb730c3"
+-SRC_URI[archive.sha256sum] = "532df0398d3f4eab1cba8d0367c02a293ca74f2d89a27ef014854a2bde9a5a27"
+diff --git a/recipes/xorg-app/xload_1.0.2.bb b/recipes/xorg-app/xload_1.0.2.bb
+deleted file mode 100644
+index 5b706c4..0000000
+--- a/recipes/xorg-app/xload_1.0.2.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "system load average display for X"
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "b41ed6b4bcfc9897366c27a94d2bf150"
+-SRC_URI[archive.sha256sum] = "86b176b6efc52557b1c7631bfdd5c17e7060a438e1e85ce15ec9657be356c50b"
+diff --git a/recipes/xorg-app/xlogo_1.0.1.bb b/recipes/xorg-app/xlogo_1.0.1.bb
+deleted file mode 100644
+index 6c05ea1..0000000
+--- a/recipes/xorg-app/xlogo_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxprintutil libxp libxrender libxft libxext libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "4c5482552f38a7d42398a694cc9b2ee6"
+-SRC_URI[archive.sha256sum] = "de59f9be3d45fe93f445f39bec3cea09753a671e56863ce77e3a797d2df526b2"
+diff --git a/recipes/xorg-app/xlsatoms_1.0.2.bb b/recipes/xorg-app/xlsatoms_1.0.2.bb
+deleted file mode 100644
+index 0e1e123..0000000
+--- a/recipes/xorg-app/xlsatoms_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "dc8b420bbfa35091ea30edf57c952ec2"
+-SRC_URI[archive.sha256sum] = "d66cd7682e5ea2a52e8da8a75ea6154f40a3a69938c6c2cf5d5c1e012f5c121b"
+diff --git a/recipes/xorg-app/xlsclients_1.0.2.bb b/recipes/xorg-app/xlsclients_1.0.2.bb
+deleted file mode 100644
+index 1a531f9..0000000
+--- a/recipes/xorg-app/xlsclients_1.0.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "df270f7dd5528ae1b7d80c47585d8278"
+-SRC_URI[archive.sha256sum] = "8527cdd29d4fcc67df014bc8b371be98901c9082b8de81ea2302bf705c887698"
+diff --git a/recipes/xorg-app/xlsfonts_1.0.2.bb b/recipes/xorg-app/xlsfonts_1.0.2.bb
+deleted file mode 100644
+index 17c9fe3..0000000
+--- a/recipes/xorg-app/xlsfonts_1.0.2.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "server font list displayer for X"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "28958248590ff60ecd70e8f590d977b7"
+-SRC_URI[archive.sha256sum] = "cc6e519b783b082a2fe4cd06ea5b3693ee6bdb23f4b36e7a72753c524ef5111c"
+diff --git a/recipes/xorg-app/xmag_1.0.3.bb b/recipes/xorg-app/xmag_1.0.3.bb
+deleted file mode 100644
+index 0e1025c..0000000
+--- a/recipes/xorg-app/xmag_1.0.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "magnify parts of the screen"
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "32f7ed4c089365cadb9382f6fbd750a9"
+-SRC_URI[archive.sha256sum] = "0368268a352d302d0b84229a71e3ea0e8d1c44019b1f06b6301ad7a106418553"
+diff --git a/recipes/xorg-app/xman_1.1.0.bb b/recipes/xorg-app/xman_1.1.0.bb
+deleted file mode 100644
+index ff65cf5..0000000
+--- a/recipes/xorg-app/xman_1.1.0.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "manual page browser for X"
+-DEPENDS += " libxaw libxprintutil libxp libxt"
+-RDEPENDS_${PN} = " man"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "5e5b3351bac26cc1f8490faf1c1402bb"
+-SRC_URI[archive.sha256sum] = "9d617ed760fe2147baae5ad9cbbdd85f1bb7534acfc3327bb51dad42e8bcc8b0"
+-
+-FILES_${PN} += " /usr/share/X11/xman.help"
+diff --git a/recipes/xorg-app/xmessage_1.0.2.bb b/recipes/xorg-app/xmessage_1.0.2.bb
+deleted file mode 100644
+index ec9aec3..0000000
+--- a/recipes/xorg-app/xmessage_1.0.2.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "xmessage displays a message or query in a window."
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "b4b561ef11fd184989a6062962e86748"
+-SRC_URI[archive.sha256sum] = "02b4016e93acab94105fa61f6dbe13082669276ab4650b871835fb7884b0c3c3"
+diff --git a/recipes/xorg-app/xmh_1.0.1.bb b/recipes/xorg-app/xmh_1.0.1.bb
+deleted file mode 100644
+index 37fb734..0000000
+--- a/recipes/xorg-app/xmh_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "656bcbdd41818a8b5a9f7dba77a3eeba"
+-SRC_URI[archive.sha256sum] = "9471fb455ce0bfc582b865722ab7417c587c9fea82342181e9cd0a9629c2c6fa"
+diff --git a/recipes/xorg-app/xmodmap_1.0.4.bb b/recipes/xorg-app/xmodmap_1.0.4.bb
+deleted file mode 100644
+index 762fc42..0000000
+--- a/recipes/xorg-app/xmodmap_1.0.4.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "utility for modifying keymaps and pointer button mappings in X"
+-LICENSE = "MIT"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "bbe021f812e0014a8ee3692317788119"
+-SRC_URI[archive.sha256sum] = "805a63525d99f59d60a11aa89121fb9cdb001c8d542237ac4deafbadc7bd0bed"
+diff --git a/recipes/xorg-app/xmore_1.0.1.bb b/recipes/xorg-app/xmore_1.0.1.bb
+deleted file mode 100644
+index 90782d1..0000000
+--- a/recipes/xorg-app/xmore_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxprintutil libxp libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "d36e918dce779a9d207b7a266f4e87c8"
+-SRC_URI[archive.sha256sum] = "653566be73c474bc45f1a6631e14b008445c74557a8f6f46effee1ac3e8f2527"
+diff --git a/recipes/xorg-app/xprop_1.1.0.bb b/recipes/xorg-app/xprop_1.1.0.bb
+deleted file mode 100644
+index 48f37c3..0000000
+--- a/recipes/xorg-app/xprop_1.1.0.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "a property displayer for X"
+-DEPENDS += " libxmu "
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "f0bacbd30f0dd1c1e9ccafe97687b7a4"
+-SRC_URI[archive.sha256sum] = "cc8e07901574895f113baffda19272c54545879e02012314527ebbf2dcc66226"
+diff --git a/recipes/xorg-app/xrandr/resolve_symbol_clash.patch b/recipes/xorg-app/xrandr/resolve_symbol_clash.patch
+deleted file mode 100644
+index 1ecf956..0000000
+--- a/recipes/xorg-app/xrandr/resolve_symbol_clash.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+----
+- xrandr.c |    6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+---- xrandr-1.2.2.orig/xrandr.c
+-+++ xrandr-1.2.2/xrandr.c
+-@@ -189,7 +189,7 @@
+- 
+- #if HAS_RANDR_1_2
+- typedef enum _policy {
+--    clone, extend
+-+    policy_clone, extend
+- } policy_t;
+- 
+- typedef enum _relation {
+-@@ -1602,7 +1602,7 @@
+-     int		ret = 0;
+- #if HAS_RANDR_1_2
+-     output_t	*output = NULL;
+--    policy_t	policy = clone;
+-+    policy_t	policy = policy_clone;
+-     Bool    	setit_1_2 = False;
+-     Bool    	query_1_2 = False;
+-     Bool	modeit = False;
+-@@ -1863,7 +1863,7 @@
+- 	    continue;
+- 	}
+- 	if (!strcmp ("--clone", argv[i])) {
+--	    policy = clone;
+-+	    policy = policy_clone;
+- 	    setit_1_2 = True;
+- 	    continue;
+- 	}
+diff --git a/recipes/xorg-app/xrandr_1.3.2.bb b/recipes/xorg-app/xrandr_1.3.2.bb
+deleted file mode 100644
+index 34c0168..0000000
+--- a/recipes/xorg-app/xrandr_1.3.2.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X Resize and Rotate extension command."
+-LICENSE = "BSD-X"
+-DEPENDS += "libxrandr libxrender"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI += "file://resolve_symbol_clash.patch"
+-SRC_URI[archive.md5sum] = "2cb19bb1c19ccf77c40032b03dbe06f0"
+-SRC_URI[archive.sha256sum] = "34d4334644a6494573141bb8647feb8f91c0ce8c8d3b6883b4861e038e912249"
+diff --git a/recipes/xorg-app/xrdb_1.0.6.bb b/recipes/xorg-app/xrdb_1.0.6.bb
+deleted file mode 100644
+index a5f90f3..0000000
+--- a/recipes/xorg-app/xrdb_1.0.6.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X server resource database utility"
+-LICENSE = "xrdb"
+-DEPENDS += "libxmu"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "8dd881cd5a7dcb6e456549817f0fb475"
+-SRC_URI[archive.sha256sum] = "8d062a3764665fcf22b14df4a5aca6af1e6d7d613296875b31b68e74ef66fc99"
+diff --git a/recipes/xorg-app/xrefresh_1.0.3.bb b/recipes/xorg-app/xrefresh_1.0.3.bb
+deleted file mode 100644
+index dd4bfab..0000000
+--- a/recipes/xorg-app/xrefresh_1.0.3.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require xorg-app-common.inc
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "8f4fafcfb77b3c6972cc44bb3f1c899c"
+-SRC_URI[archive.sha256sum] = "3ee0a5f7aeb14bbffbcafcff8e7806c9a59f08e1a58322a50f5fca023a7d7ed9"
+diff --git a/recipes/xorg-app/xrx_1.0.3.bb b/recipes/xorg-app/xrx_1.0.3.bb
+deleted file mode 100644
+index a412479..0000000
+--- a/recipes/xorg-app/xrx_1.0.3.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxt libxext xtrans xproxymngproto libxau"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "c121945afcfc84e99af17158fda68be9"
+-SRC_URI[archive.sha256sum] = "9cb0fc67153ce935550d61dfd3d021cb3e6833274453538885b7cddff9fe8abe"
+diff --git a/recipes/xorg-app/xset-1.1.0/disable-xkb.patch b/recipes/xorg-app/xset-1.1.0/disable-xkb.patch
+deleted file mode 100644
+index 6060fbb..0000000
+--- a/recipes/xorg-app/xset-1.1.0/disable-xkb.patch
++++ /dev/null
+@@ -1,18 +0,0 @@
+---- xset-1.0.1/configure.ac.orig	2006-03-08 19:46:59.000000000 +0100
+-+++ xset-1.0.1/configure.ac	2006-03-08 19:47:40.000000000 +0100
+-@@ -42,11 +42,15 @@
+- 	AC_CHECK_HEADERS([X11/extensions/dpms.h X11/extensions/MITMisc.h],,,[#include <X11/Xlib.h>])
+- 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
+- 
+-+AC_ARG_ENABLE(xkb, AC_HELP_STRING([--disable-xkb], [Disable XKB support]),
+-+        XKB="$enableval", XKB="yes")
+-+if test "x$XKB" = "xyes" ; then
+- PKG_CHECK_MODULES(SET_XKB, x11, 
+- 	[SAVE_CPPFLAGS="$CPPFLAGS"
+- 	CPPFLAGS="$CPPFLAGS $SET_XKB_CFLAGS $SET_X11_CFLAGS"
+- 	AC_CHECK_HEADERS([X11/XKBlib.h],,,[#include <X11/Xlib.h>])
+- 	CPPFLAGS="$SAVE_CPPFLAGS"],[echo "not found"])
+-+fi
+- 
+- PKG_CHECK_MODULES(SET_XF86MISC, xxf86misc, 
+- 	[SAVE_CPPFLAGS="$CPPFLAGS"
+diff --git a/recipes/xorg-app/xset_1.1.0.bb b/recipes/xorg-app/xset_1.1.0.bb
+deleted file mode 100644
+index 8592ad2..0000000
+--- a/recipes/xorg-app/xset_1.1.0.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "user preference utility for X"
+-LICENSE = "MIT"
+-DEPENDS += "libxext libxxf86misc libxfontcache libxmu libxp libxau"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI += "file://disable-xkb.patch"
+-SRC_URI[archive.md5sum] = "eeb0d02f69c76bd40470dede99b4bd49"
+-SRC_URI[archive.sha256sum] = "72c859c6030890a25cf828d0b2743454e50eadab30f6be8c17172fe97a554643"
+-
+-EXTRA_OECONF = "--disable-xkb"
+-
+-CFLAGS += "-D_GNU_SOURCE"
+diff --git a/recipes/xorg-app/xsetroot_1.0.3.bb b/recipes/xorg-app/xsetroot_1.0.3.bb
+deleted file mode 100644
+index 08a0e68..0000000
+--- a/recipes/xorg-app/xsetroot_1.0.3.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "Sets the visual appearance of the X root window"
+-LICENSE = "MIT"
+-DEPENDS += "libxmu xbitmaps"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "cbda9b9b8da5af4614110883d5a276b8"
+-SRC_URI[archive.sha256sum] = "d7e512cc686de3ab5fcd3c9f9e605d7cae68a4b50f2c0786f0f09ce08c728f48"
+diff --git a/recipes/xorg-app/xsm_1.0.1.bb b/recipes/xorg-app/xsm_1.0.1.bb
+deleted file mode 100644
+index b0ee345..0000000
+--- a/recipes/xorg-app/xsm_1.0.1.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "X Session Manager"
+-DEPENDS += " libxaw libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "cce867ff7d0df9c0b9e682591779952c"
+-SRC_URI[archive.sha256sum] = "2f2535b5394d59be0a4bb15c12ea1b19b873a0096446ecc4c71aa81f0d99b29a"
+diff --git a/recipes/xorg-app/xstdcmap_1.0.1.bb b/recipes/xorg-app/xstdcmap_1.0.1.bb
+deleted file mode 100644
+index 748b079..0000000
+--- a/recipes/xorg-app/xstdcmap_1.0.1.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxmu "
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "86ab558441edfb86f853639e4290a754"
+-SRC_URI[archive.sha256sum] = "0d920660137dee514599f63b5a8c8ce14d2474607e28e32c973cafb360f7e738"
+diff --git a/recipes/xorg-app/xterm_207.bb b/recipes/xorg-app/xterm_207.bb
+deleted file mode 100644
+index ac485a7..0000000
+--- a/recipes/xorg-app/xterm_207.bb
++++ /dev/null
+@@ -1,21 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "xterm is the standard terminal emulator for the X Window System."
+-DEPENDS = "libxaw xproto xextproto libxext libxau libxpm ncurses"
+-PR = "${INC_PR}.1"
+-
+-SRC_URI = "${XORG_MIRROR}/development/X11R7.0-RC4/extras/${PN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "3de8a3756c284a46a08c6d0308909486"
+-SRC_URI[sha256sum] = "652f579171e6e8f73c13ab6b060d2447ae35ebfbd39a6002b7c05a1dfc0f7eb8"
+-
+-EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
+-                 --x-libraries=${STAGING_LIBDIR} \
+-                 FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config \
+-                 --disable-imake \
+-                 --disable-setuid"
+-
+-do_configure() {
+-        sed -e "s%/usr/contrib/X11R6%${STAGING_LIBDIR}%g" -i configure
+-        oe_runconf
+-}
+-
+-FILES_${PN} += " /usr/lib/X11"
+diff --git a/recipes/xorg-app/xterm_251.bb b/recipes/xorg-app/xterm_251.bb
+deleted file mode 100644
+index 388fbc3..0000000
+--- a/recipes/xorg-app/xterm_251.bb
++++ /dev/null
+@@ -1,21 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "xterm is the standard terminal emulator for the X Window System."
+-DEPENDS = "libxaw xproto xextproto libxext libxau libxpm ncurses"
+-PR = "${INC_PR}.1"
+-
+-SRC_URI = "ftp://invisible-island.net/xterm/${PN}-${PV}.tgz"
+-SRC_URI[md5sum] = "343a4ce213f70c53cf65979f163bebc3"
+-SRC_URI[sha256sum] = "2ff9a4ae66cf9a48829023d1d007b0e84ee9cc60feb48107f9c1ea9dd7570ce7"
+-
+-EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
+-                 --x-libraries=${STAGING_LIBDIR} \
+-                 FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config \
+-                 --disable-imake \
+-                 --disable-setuid"
+-
+-do_configure() {
+-        sed -e "s%/usr/contrib/X11R6%${STAGING_LIBDIR}%g" -i configure
+-        oe_runconf
+-}
+-
+-FILES_${PN} += " /usr/lib/X11"
+diff --git a/recipes/xorg-app/xvidtune_1.0.1.bb b/recipes/xorg-app/xvidtune_1.0.1.bb
+deleted file mode 100644
+index e052500..0000000
+--- a/recipes/xorg-app/xvidtune_1.0.1.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxaw libxxf86vm libxt"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "e0744594f4e5969b20df28d897781318"
+-SRC_URI[archive.sha256sum] = "6d0feb42c2f1d6011d97c776b9d580fd589cdf3cfe246cd99437c406a2740d36"
+-
+-FILES_${PN} += " ${datadir}/X11/app-defaults/Xvidtune "
+diff --git a/recipes/xorg-app/xvinfo_1.1.0.bb b/recipes/xorg-app/xvinfo_1.1.0.bb
+deleted file mode 100644
+index 37c66de..0000000
+--- a/recipes/xorg-app/xvinfo_1.1.0.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xorg-app-common.inc
+-DESCRIPTION = "Print out X-Video extension adaptor information"
+-DEPENDS += " libxv"
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "8cc299b2cb636b5f7fe672610789d3d4"
+-SRC_URI[archive.sha256sum] = "0a318f6ca0d92bd5cc2ab9d2690f6120b3e1537b7902ce110469864869e86efb"
+diff --git a/recipes/xorg-app/xwd_1.0.3.bb b/recipes/xorg-app/xwd_1.0.3.bb
+deleted file mode 100644
+index fe84b4d..0000000
+--- a/recipes/xorg-app/xwd_1.0.3.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxmu "
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "007cea1f389abde5c93162dcd5541351"
+-SRC_URI[archive.sha256sum] = "fff2dbea086c554463d4309209ee05e026b7f19900598f55e0a24a6d7a7ee3fd"
+diff --git a/recipes/xorg-app/xwininfo_1.0.5.bb b/recipes/xorg-app/xwininfo_1.0.5.bb
+deleted file mode 100644
+index 348e4af..0000000
+--- a/recipes/xorg-app/xwininfo_1.0.5.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require xorg-app-common.inc
+-DEPENDS += " libxmu libxext "
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "908f8bc3255f639effa9780fb1c19ea4"
+-SRC_URI[archive.sha256sum] = "8db6b81a7b0bc4e7acce6c6d41df9747b0b19e12c21c5a70b51bbc63a42cdcd9"
+diff --git a/recipes/xorg-app/xwud_1.0.2.bb b/recipes/xorg-app/xwud_1.0.2.bb
+deleted file mode 100644
+index de77cf2..0000000
+--- a/recipes/xorg-app/xwud_1.0.2.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require xorg-app-common.inc
+-PE = "1"
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[archive.md5sum] = "20bc5d85634964d4ceee77cdfcd131ed"
+-SRC_URI[archive.sha256sum] = "84345dfbff0dc411689639aada2407758640af71eb61a1be332bfa24d8b90ac1"
 -- 
 1.7.4.rc1
 
