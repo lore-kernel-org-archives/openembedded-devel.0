@@ -1,41 +1,41 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pcu26-0003L2-Nn
+	(envelope-from <raj.khem@gmail.com>) id 1Pcu5j-0003P9-Ty
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Jan 2011 07:18:10 +0100
-Received: by pzk12 with SMTP id 12so43073pzk.6
+	Wed, 12 Jan 2011 07:21:56 +0100
+Received: by pxi17 with SMTP id 17so29251pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 22:17:38 -0800 (PST)
+	Tue, 11 Jan 2011 22:21:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
 	:subject:references:in-reply-to:content-type
 	:content-transfer-encoding;
-	bh=0YhtQrrDQ2POBHnlNmq86HBcdgjkcD4l0yiJcqUuQaw=;
-	b=Ok7+WGDdD8qJ2sNXC8j8/B4C5dFaX5hURe1/GBvyUmzTg1brr9I0ywK9bMh9H/8BRR
-	5Bnyelr9cw8ZMoLQ0opJjjc6TE8t+Db3cGmUFR8QCbVl2J0NKUxw0VQHdB/Mh5F9vpIA
-	MY0D+l9qXbo+Dxr0hviB3QcEeo83QjCKwrpXc=
+	bh=h8vdXUo4wtTaETfXsSxOBLJnNaiKsXsxyiH++iMszuE=;
+	b=wMmv1CuQ2Ql54oauezDdXy2x5LRD++6vVHXVLz/mRNCRMKd0PmsaDzocxLxBYwkzle
+	YZVQBstVOFC6Ek++kSzRtVrvFlxCgRxQT5RQMqqrCUvN4Dpwgu9wBjis/gunEgVmdK3q
+	i5PHfkcQ87EoPihiSrlMTyk3r/gjBJQNvwpAU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	b=eA+XzEDuDYqvdoz26sslsap+opuqTEWDM+PsIoGFtrkyNG1pB7hPEwCn2lQJSZi7HU
-	0YKRsiVp1qkHteNHkIjJlPn6083cXTPkQn9NslxRs6HLz/4vZlW/f/8DdPsSMTsEhVR8
-	ML72ory3/B97iOueuPVWUkw8UZF2H57TFlQ7c=
-Received: by 10.142.193.4 with SMTP id q4mr568780wff.203.1294813058356;
-	Tue, 11 Jan 2011 22:17:38 -0800 (PST)
+	b=SrHWFDAyh0KnurLM9i8uChC13oIilJ44xJdfFNr3QsBBSdrCWMERLvi0q5jB5ZwqBw
+	+naaeYqdgHN6GtPABLf1gcCcGQnsRlGzY9uuL6yL/+WgTbJqlumh+J/eqGktb9qI2XO9
+	qh15TP6mCjug0ZaaVoBbWobRb2zolGDv8smis=
+Received: by 10.142.171.11 with SMTP id t11mr544313wfe.448.1294813278065;
+	Tue, 11 Jan 2011 22:21:18 -0800 (PST)
 Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id p8sm379689wff.4.2011.01.11.22.17.37
-	(version=SSLv3 cipher=RC4-MD5); Tue, 11 Jan 2011 22:17:37 -0800 (PST)
-Message-ID: <4D2D477E.6040104@gmail.com>
-Date: Tue, 11 Jan 2011 22:17:34 -0800
+	by mx.google.com with ESMTPS id x18sm373614wfa.23.2011.01.11.22.21.16
+	(version=SSLv3 cipher=RC4-MD5); Tue, 11 Jan 2011 22:21:17 -0800 (PST)
+Message-ID: <4D2D4859.3080109@gmail.com>
+Date: Tue, 11 Jan 2011 22:21:13 -0800
 From: Khem Raj <raj.khem@gmail.com>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
 	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1294761389-13634-1-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1294761389-13634-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: Re: [PATCH 01/12] xorg-data: obsolete old versions
+References: <1294768042-30115-1-git-send-email-sledz@dresearch.de>
+In-Reply-To: <1294768042-30115-1-git-send-email-sledz@dresearch.de>
+Subject: Re: [PATCH] alsa-lib: fix packaging error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,94 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2011 06:18:11 -0000
+X-List-Received-Date: Wed, 12 Jan 2011 06:21:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 1/11/2011 7:56 AM, Martin Jansa wrote:
-> Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
+On 1/11/2011 9:47 AM, Steffen Sledz wrote:
+> * symlink libasound.so ->  libasound.so.2.0.0 was missing
+>
+> Signed-off-by: Steffen Sledz<sledz@dresearch.de>
 
-whole series
+can you put ${libdir}/libasound.so into libasound-dev
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+
 
 > ---
->   recipes/obsolete/xorg-data/xbitmaps_1.1.0.bb       |   10 ++++++++++
->   recipes/obsolete/xorg-data/xcursor-themes_1.0.2.bb |   11 +++++++++++
->   recipes/xorg-data/xbitmaps_1.1.0.bb                |   10 ----------
->   recipes/xorg-data/xcursor-themes_1.0.2.bb          |   11 -----------
->   4 files changed, 21 insertions(+), 21 deletions(-)
->   create mode 100644 recipes/obsolete/xorg-data/xbitmaps_1.1.0.bb
->   create mode 100644 recipes/obsolete/xorg-data/xcursor-themes_1.0.2.bb
->   delete mode 100644 recipes/xorg-data/xbitmaps_1.1.0.bb
->   delete mode 100644 recipes/xorg-data/xcursor-themes_1.0.2.bb
+>   recipes/alsa/alsa-lib_1.0.20.bb |    2 +-
+>   recipes/alsa/alsa-lib_1.0.23.bb |    2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/recipes/obsolete/xorg-data/xbitmaps_1.1.0.bb b/recipes/obsolete/xorg-data/xbitmaps_1.1.0.bb
-> new file mode 100644
-> index 0000000..23cecdb
-> --- /dev/null
-> +++ b/recipes/obsolete/xorg-data/xbitmaps_1.1.0.bb
-> @@ -0,0 +1,10 @@
-> +require xorg-data-common.inc
-> +
-> +DESCRIPTION = "Common X11 Bitmaps"
-> +LICENSE = "MIT"
-> +DEPENDS += "libxmu"
-> +
-> +
-> +SRC_URI[archive.md5sum] = "f9ddd4e70a5375508b3acaf17be0d0ab"
-> +SRC_URI[archive.sha256sum] = "c9a2059c8b0636b7ee1169647bb22f6eb4a0589e36fdb98936002e2569ad8761"
-> +PR = "${INC_PR}.0"
-> diff --git a/recipes/obsolete/xorg-data/xcursor-themes_1.0.2.bb b/recipes/obsolete/xorg-data/xcursor-themes_1.0.2.bb
-> new file mode 100644
-> index 0000000..824bbeb
-> --- /dev/null
-> +++ b/recipes/obsolete/xorg-data/xcursor-themes_1.0.2.bb
-> @@ -0,0 +1,11 @@
-> +require xorg-data-common.inc
-> +PE = "1"
-> +
-> +DEPENDS += " libxcursor xcursorgen-native"
-> +
-> +FILES_${PN} += "${datadir}/icons"
-> +
-> +
-> +SRC_URI[archive.md5sum] = "e8929a1bb4d98d1a3991fd340d0b5f09"
-> +SRC_URI[archive.sha256sum] = "5f798c2f1d2794c09fa0a40700c40359b725107608012866828015dca47514d6"
-> +PR = "${INC_PR}.0"
-> diff --git a/recipes/xorg-data/xbitmaps_1.1.0.bb b/recipes/xorg-data/xbitmaps_1.1.0.bb
-> deleted file mode 100644
-> index 23cecdb..0000000
-> --- a/recipes/xorg-data/xbitmaps_1.1.0.bb
-> +++ /dev/null
-> @@ -1,10 +0,0 @@
-> -require xorg-data-common.inc
-> -
-> -DESCRIPTION = "Common X11 Bitmaps"
-> -LICENSE = "MIT"
-> -DEPENDS += "libxmu"
-> -
-> -
-> -SRC_URI[archive.md5sum] = "f9ddd4e70a5375508b3acaf17be0d0ab"
-> -SRC_URI[archive.sha256sum] = "c9a2059c8b0636b7ee1169647bb22f6eb4a0589e36fdb98936002e2569ad8761"
-> -PR = "${INC_PR}.0"
-> diff --git a/recipes/xorg-data/xcursor-themes_1.0.2.bb b/recipes/xorg-data/xcursor-themes_1.0.2.bb
-> deleted file mode 100644
-> index 824bbeb..0000000
-> --- a/recipes/xorg-data/xcursor-themes_1.0.2.bb
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -require xorg-data-common.inc
-> -PE = "1"
-> -
-> -DEPENDS += " libxcursor xcursorgen-native"
-> -
-> -FILES_${PN} += "${datadir}/icons"
-> -
-> -
-> -SRC_URI[archive.md5sum] = "e8929a1bb4d98d1a3991fd340d0b5f09"
-> -SRC_URI[archive.sha256sum] = "5f798c2f1d2794c09fa0a40700c40359b725107608012866828015dca47514d6"
-> -PR = "${INC_PR}.0"
+> diff --git a/recipes/alsa/alsa-lib_1.0.20.bb b/recipes/alsa/alsa-lib_1.0.20.bb
+> index de522c7..04e0239 100644
+> --- a/recipes/alsa/alsa-lib_1.0.20.bb
+> +++ b/recipes/alsa/alsa-lib_1.0.20.bb
+> @@ -31,7 +31,7 @@ EXTRA_OECONF += "${@get_alsa_versym_setting(bb, d)} "
+>
+>   PACKAGES =+ "alsa-server libasound alsa-conf-base alsa-conf alsa-doc alsa-dev"
+>   FILES_${PN}-dbg += "${libdir}/alsa-lib/*/.debu*"
+> -FILES_libasound = "${libdir}/libasound.so.*"
+> +FILES_libasound = "${libdir}/libasound.so*"
+>   FILES_alsa-server = "${bindir}/*"
+>   FILES_alsa-conf = "${datadir}/alsa/"
+>   FILES_alsa-dev += "${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
+> diff --git a/recipes/alsa/alsa-lib_1.0.23.bb b/recipes/alsa/alsa-lib_1.0.23.bb
+> index 0f9b14c..ec9015b 100644
+> --- a/recipes/alsa/alsa-lib_1.0.23.bb
+> +++ b/recipes/alsa/alsa-lib_1.0.23.bb
+> @@ -33,7 +33,7 @@ EXTRA_OECONF += "${@get_alsa_versym_setting(bb, d)} "
+>
+>   PACKAGES =+ "alsa-server libasound alsa-conf-base alsa-conf alsa-doc alsa-dev"
+>   FILES_${PN}-dbg += "${libdir}/alsa-lib/*/.debu*"
+> -FILES_libasound = "${libdir}/libasound.so.*"
+> +FILES_libasound = "${libdir}/libasound.so*"
+>   FILES_alsa-server = "${bindir}/*"
+>   FILES_alsa-conf = "${datadir}/alsa/"
+>   FILES_alsa-dev += "${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
 
 
 
