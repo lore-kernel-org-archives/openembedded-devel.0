@@ -1,38 +1,41 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1Pd1bQ-0005qj-H0
+	(envelope-from <raj.khem@gmail.com>) id 1Pd5RB-0001ak-Bl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Jan 2011 15:23:08 +0100
-Received: by wwi17 with SMTP id 17so585850wwi.24
+	Wed, 12 Jan 2011 19:28:51 +0100
+Received: by pvd12 with SMTP id 12so122212pvd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jan 2011 06:22:36 -0800 (PST)
+	Wed, 12 Jan 2011 10:28:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=IJs4YeFU8SwdjKmCKQRchDa0zCQPJ3mPsAHClBsKk+s=;
-	b=KhIhcG6B+k5ZxeCjRKDLMQFlIn9m7qQ9jRgVgpj5ow49O0ZKpXmbrgZrzrTaoItgpD
-	TTJGVHmAvhEyUQrJvsKbGGbGQQh6lZ6LwweyAHAkxlChYwUJDIs0l5MVQcP8q/N+GGGO
-	zdKSVH5zV7DEqBYj3kM52ffcYn89DDpRE+U08=
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=M9nIXVg4fzX9e8Hv3GbCpvr/K3DVcuscY1JhYdYCAtY=;
+	b=o29Zv7eFtWhR2X8n2tFhuxUc/2peIBlD1iSzeHx+EotP//Rqe+Z8x8ULLKu/Ngdcg3
+	Xc3a6MxgYm+hqbQIQZYxh6T2PQ+Aq6p0pKTX7zaO8GBsX3rnMKlr66WO+zAeOyGTbk3A
+	Wv2XnTMkU+8IwBybllFmsO4XVJAnOuHqvO1Y4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=e1rJUIS/evr+R5TDRmoJroc4ZKX+wZKxnR2poq8A63+7MPxC5oJu5/Ja5a+oSEJffx
-	nZTYKFKtiAQEmW2rm4giHmsF1+PwgVGFOxLB2Y11upGlRNuxViUh+jbfmoBD+Y0bbIvv
-	Xcgh3Q7KDwEAvXPGX/aGbVmWYcCmA5qNCG+zE=
-Received: by 10.216.51.130 with SMTP id b2mr867873wec.42.1294842156650; Wed,
-	12 Jan 2011 06:22:36 -0800 (PST)
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=bbcNUHx4Zc2OfMxxsxdW5eNBbizzXa+nq3uXk54/n40GDVDNcOrWS5kPqR15locnUR
+	7T/4eImr2wxP4d4cwuRvvZ8UuJNMjDxvk9av2tuMUFH9gKk6MWA//nXy5s7Lwp9UBAsq
+	oSqZ1HiU4FhRbMtrndwiHyJU99P6fMmW3CZGA=
+Received: by 10.142.242.4 with SMTP id p4mr114928wfh.330.1294856894852;
+	Wed, 12 Jan 2011 10:28:14 -0800 (PST)
+Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id x18sm1167185wfa.23.2011.01.12.10.28.13
+	(version=SSLv3 cipher=RC4-MD5); Wed, 12 Jan 2011 10:28:13 -0800 (PST)
+Message-ID: <4D2DF2BA.6040000@gmail.com>
+Date: Wed, 12 Jan 2011 10:28:10 -0800
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.216.67.67 with HTTP; Wed, 12 Jan 2011 06:22:15 -0800 (PST)
-In-Reply-To: <4D2D5B93.50409@dresearch.de>
-References: <1294796586-24723-1-git-send-email-kergoth@gmail.com>
-	<4D2D5B93.50409@dresearch.de>
-From: Chris Larson <kergoth@gmail.com>
-Date: Wed, 12 Jan 2011 07:22:15 -0700
-Message-ID: <AANLkTik_e2KnKRnd0yp=Kk=Sz=CcQCN+2UbTK-X3nH52@mail.gmail.com>
-To: Steffen Sledz <sledz@dresearch.de>
-Cc: Chris Larson <chris_larson@mentor.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] busybox: move syslog config to /etc/default
+To: openembedded-devel@lists.openembedded.org
+References: <1294832897-3343-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1294832897-3343-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: Re: [PATCH] libvpx: force arm mode to be able to link with ffmpeg where arm mode already is forced
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,37 +49,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2011 14:23:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Jan 2011 18:28:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 12, 2011 at 12:43 AM, Steffen Sledz <sledz@dresearch.de> wrote:
-> Am 12.01.2011 02:43, schrieb Chris Larson:
->> From: Chris Larson <chris_larson@mentor.com>
->>
->> The busybox syslog syslog.conf is parsed by the /etc/init.d script, not =
-by the
->> syslog process itself, so it belongs in /etc/default. =C2=A0In addition,=
- the file
->> format is *completely* different from the standard sysklogd configuratio=
-n, so
->> while we should resolve the file conflict between busybox-syslog and sys=
-klogd,
->> we should not use update-alternatives for it, so this is a cleaner solut=
-ion.
->
-> Moving the file into /etc/default seems to be OK for me.
->
-> But i would suggest to rename the config file itself to busybox-syslog, b=
-ecause it does not contain (default) configuration for any syslog incarnati=
-on but only for busybox-syslog.
+On 1/12/2011 3:48 AM, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
 
-Good point, will do.  Thanks.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+hmmm what issues do u see if you build it with thumb mode.
+
+> ---
+>   recipes/webm/libvpx.inc |    6 +++++-
+>   1 files changed, 5 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/webm/libvpx.inc b/recipes/webm/libvpx.inc
+> index 9913d5b..9d40945 100644
+> --- a/recipes/webm/libvpx.inc
+> +++ b/recipes/webm/libvpx.inc
+> @@ -1,11 +1,15 @@
+>   DESCRIPTION = "vpx Multi-Format Codec SDK"
+>   LICENSE = "BSD"
+>
+> -INC_PR = "r5"
+> +INC_PR = "r6"
+>
+>   SRC_URI = "git://review.webmproject.org/libvpx.git;protocol=git;tag=v${PV}"
+>   S = "${WORKDIR}/git"
+>
+> +# ffmpeg links with this and fails
+> +# sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
+> +ARM_INSTRUCTION_SET = "arm"
+> +
+>   CFLAGS += "-fPIC"
+>
+>   export CC
+
 
 
