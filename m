@@ -1,41 +1,31 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pd7WS-0003Du-HV
+Received: from 13.77.mail-out.ovh.net ([188.165.51.210]
+	helo=77.mail-out.ovh.net) by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Pd8Xr-0006aC-UK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Jan 2011 21:42:24 +0100
-Received: by pwi8 with SMTP id 8so162601pwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jan 2011 12:41:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=56XC88HKuff0kO64JV1zgoEMt7otTT57Rvpj6V6d1B4=;
-	b=d02Gh22V8nafn9AMoz9wYE5peVierS1HJwW4Ao9+kyRMvteeMv5pjLJ/S6GTJ2cpCg
-	XrWUMGqNj3So/jumhZ9HF5fQle5U60kUj9PVYz0NH5Mp8+Bi+tEXjKXuBSIsnc3o17IQ
-	C0JuM5oTKAm/6WN7zpZOtQSUKQKgxiMpKuXJU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=uNTwHpusNHeutVH1A56TWMl0m8Z2f3tK9Au5EPbe2dAu4b+BsfkNP05n9YtvnaSdKV
-	MK4RApBQs8c50eEII8dDBG5A7GV22gUkK+Cf6ansUHKQ2FLnRg2CQly3ZOjn/VPfolYW
-	IrxpGDfdC1TibCJCdjpItxD/ulymUtGi9kqyc=
-Received: by 10.142.48.9 with SMTP id v9mr198500wfv.170.1294864909906;
-	Wed, 12 Jan 2011 12:41:49 -0800 (PST)
-Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id x35sm1311530wfd.1.2011.01.12.12.41.47
-	(version=SSLv3 cipher=RC4-MD5); Wed, 12 Jan 2011 12:41:48 -0800 (PST)
-Message-ID: <4D2E1209.1090805@gmail.com>
-Date: Wed, 12 Jan 2011 12:41:45 -0800
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Wed, 12 Jan 2011 22:47:56 +0100
+Received: (qmail 28412 invoked by uid 503); 12 Jan 2011 21:36:19 -0000
+Received: from 64.mail-out.ovh.net (91.121.185.65)
+	by 77.mail-out.ovh.net with SMTP; 12 Jan 2011 21:36:18 -0000
+Received: (qmail 28747 invoked by uid 503); 12 Jan 2011 21:01:59 -0000
+Received: from b6.ovh.net (HELO mail30.ha.ovh.net) (213.186.33.56)
+	by 64.mail-out.ovh.net with SMTP; 12 Jan 2011 21:01:59 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 12 Jan 2011 23:20:44 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 12 Jan 2011 23:20:43 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1294863352-1486-1-git-send-email-rep.dot.nop@gmail.com>
-In-Reply-To: <1294863352-1486-1-git-send-email-rep.dot.nop@gmail.com>
-Subject: Re: [PATCH 0/3] autotools.bbclass misc trivia
+Date: Wed, 12 Jan 2011 22:20:28 +0100
+Message-Id: <1294867230-7827-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 1957658463811251529
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+X-Ovh-Tracer-Id: 2220837568108735817
+Subject: [PATCH 1/3] strace: add patch allowing compilation with kernel headers >= 2.6.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,26 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2011 20:42:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Jan 2011 21:47:56 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On 1/12/2011 12:15 PM, Bernhard Reutner-Fischer wrote:
-> Hi,
->
-> In an isolated test with dash and busybox ash the AC_CONFIG_MACRO_DIR
-> patch works as expected. Testers welcome.
->
-> Bernhard Reutner-Fischer (3):
->    autotools.bbclass: pass distro_imposed_configure_flags
->    autotools.bblass: mkdir also AC_CONFIG_MACRO_DIR
->    autotools.bbclass: use grep -q
->
->   classes/autotools.bbclass |   29 ++++++++++++++++++++++++-----
->   1 files changed, 24 insertions(+), 5 deletions(-)
->
-Whole series
+tested with kernel headers 2.6.31 & 2.6.37 : both compile fine.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/strace/strace_4.5.14.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/strace/strace_4.5.14.bb b/recipes/strace/strace_4.5.14.bb
+index 33a44ad..395e4ee 100644
+--- a/recipes/strace/strace_4.5.14.bb
++++ b/recipes/strace/strace_4.5.14.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "strace is a system call tracing tool."
+ SECTION = "console/utils"
+ LICENSE = "BSD"
+-PR = "r9"
++PR = "r10"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
+            file://glibc-2.5.patch \
+@@ -13,6 +13,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
+            file://strace-arm-no-cachectl.patch \
+            file://strace-dont-include-linux-dirent-h.patch \
+            file://mips-sigcontext.patch \
++           file://strace-linux-2.6.32.patch \
+           "
+ 
+ # The strace-4.5.14-avr32.patch conflicts with some other patches.
+-- 
+1.6.3.3
+
 
 
