@@ -1,42 +1,46 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PcvQ3-0006IH-Kd
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Pcw0H-0007hh-1C
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Jan 2011 08:46:59 +0100
-Received: by pvd12 with SMTP id 12so48891pvd.6
+	Wed, 12 Jan 2011 09:24:28 +0100
+Received: by fxm17 with SMTP id 17so290568fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 23:46:27 -0800 (PST)
+	Wed, 12 Jan 2011 00:23:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=Zj1aNnW5bAmYGEONhPLMuCIOaRzjzXylscA2K3FuxMY=;
-	b=ZNs9rZCxd28+z+YWbw7q5zAI/F/z6GnzLI2jhZRwV4wWGslAeTVYEk4IDCFeo8Pv5M
-	sgNlYkl+G/Jjqg8QoOZ5rqUCfujdj23UJt53gbBORkgdTEVEWdaW/nJZOZF2x0iT+p2c
-	aPBWx+vXEFEagxLeN0m+pRsk41LwviFiXWc3w=
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=vld6SLk0tLsQAkybXjAdGA8rjSAjpKpVl0w4LXzG8oU=;
+	b=b3lDQxyNes17UT1id7yNZaj6tB4D09BpyDZMQAIWHhfiaXr1wAaBYYe0agzxwNmC5d
+	EOWOz1x56GjBOF3OweqH4SekTrg1Uk+z4gIcetq7/CTBKwYB75k7BvGQGFIeKx/moNaG
+	W/mFhuhAVEQHzD4QT0dpz0IRhpKQZYgsH1O5U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=q9J6erSy7djFtkVRnxpeCDjsBuuGLozq+z4+cx7F9ELTkTLO2SToMUdPxukTgCQDjJ
-	DbUKSNj/naCp4oM2ckm3AYj1MOs4V1u2lheQbSdJhZVC1fCpzrpOx6ld9LTW2yXTZnRI
-	jYGXVHZzoPXBhIk+zjUzXBsVq2CzQJ1hJOUOw=
-Received: by 10.142.114.11 with SMTP id m11mr641908wfc.143.1294818386470;
-	Tue, 11 Jan 2011 23:46:26 -0800 (PST)
-Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id b11sm469493wff.9.2011.01.11.23.46.24
-	(version=SSLv3 cipher=RC4-MD5); Tue, 11 Jan 2011 23:46:25 -0800 (PST)
-Message-ID: <4D2D5C4D.6010204@gmail.com>
-Date: Tue, 11 Jan 2011 23:46:21 -0800
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
-MIME-Version: 1.0
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=w9Bdy1WwQgUKJbQFnErjZ7Gxr5jsdQaSGioc+Yl/h8uPR+P5QBAeY67uok9E8vUkNO
+	STIGzieOpS+WJyc3vryQck8bnApjV6R86u1jFsgXR3ZRiPl8kq0JAfHKvD3cQPnzstpo
+	peT4ozEk5aizqJyaZ2sF7LIWZYzeDtfatN9UU=
+Received: by 10.223.120.193 with SMTP id e1mr646421far.106.1294820633530;
+	Wed, 12 Jan 2011 00:23:53 -0800 (PST)
+Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
+	[85.127.155.31])
+	by mx.google.com with ESMTPS id l14sm81736fan.33.2011.01.12.00.23.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 12 Jan 2011 00:23:52 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1Pcvzi-0005UV-Eq; Wed, 12 Jan 2011 09:23:50 +0100
+Date: Wed, 12 Jan 2011 09:23:50 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <ighiieMAN_POSIXLY_CORRECT=1@dough.gmane.org>
-	<1294774001-29322-1-git-send-email-sledz@dresearch.de>
-In-Reply-To: <1294774001-29322-1-git-send-email-sledz@dresearch.de>
-Subject: Re: [PATCH v2] alsa-lib: fix packaging error
+Message-ID: <20110112082350.GA20908@mx.loc>
+References: <1294318110-23521-1-git-send-email-obi@opendreambox.org>
+	<1294318110-23521-3-git-send-email-obi@opendreambox.org>
+	<4D2CBE1D.9030303@opendreambox.org> <20110111214814.GH6584@mx.loc>
+	<4D2CD77E.5070409@opendreambox.org>
+MIME-Version: 1.0
+In-Reply-To: <4D2CD77E.5070409@opendreambox.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH 3/4] unpack.py: add SRC_URI parameter unpack=<bool> (default: true)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,50 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2011 07:46:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Jan 2011 08:24:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 1/11/2011 11:26 AM, Steffen Sledz wrote:
-> * symlink libasound.so ->  libasound.so.2.0.0 in /usr/lib was missing in
->    dev package
+On Tue, Jan 11, 2011 at 11:19:42PM +0100, Andreas Oberritter wrote:
+>Hello Bernhard,
 >
-> Signed-off-by: Steffen Sledz<sledz@dresearch.de>
+>thanks for your review. When creating the patch I tried to use the least
+>invasive way, i.e. to change as few lines of code as possible, in order
+>not to break anything. Most of your remarks apply to already existing
+>code which was either copied or indented. I think, that your suggestions
+>should be incorporated in a later patch by someone more experienced in
+>python than me.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+>> a default of False to to_boolean -- which will return False "if not
+>> string" (and should
+>> if not string or not isinstance(string, basestring):
 
+the isinstance remark is of course nonsense, please disregard it.
+>> 	return False
+>> , as a sidenote)
+>> is superfluous.
 
-> ---
->   recipes/alsa/alsa-lib_1.0.20.bb |    2 +-
->   recipes/alsa/alsa-lib_1.0.23.bb |    2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/alsa/alsa-lib_1.0.20.bb b/recipes/alsa/alsa-lib_1.0.20.bb
-> index de522c7..fc508ec 100644
-> --- a/recipes/alsa/alsa-lib_1.0.20.bb
-> +++ b/recipes/alsa/alsa-lib_1.0.20.bb
-> @@ -34,7 +34,7 @@ FILES_${PN}-dbg += "${libdir}/alsa-lib/*/.debu*"
->   FILES_libasound = "${libdir}/libasound.so.*"
->   FILES_alsa-server = "${bindir}/*"
->   FILES_alsa-conf = "${datadir}/alsa/"
-> -FILES_alsa-dev += "${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
-> +FILES_alsa-dev += "${libdir}/libasound.so ${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
->   FILES_alsa-conf-base = "\
->   ${datadir}/alsa/alsa.conf \
->   ${datadir}/alsa/cards/aliases.conf \
-> diff --git a/recipes/alsa/alsa-lib_1.0.23.bb b/recipes/alsa/alsa-lib_1.0.23.bb
-> index 0f9b14c..0085047 100644
-> --- a/recipes/alsa/alsa-lib_1.0.23.bb
-> +++ b/recipes/alsa/alsa-lib_1.0.23.bb
-> @@ -36,7 +36,7 @@ FILES_${PN}-dbg += "${libdir}/alsa-lib/*/.debu*"
->   FILES_libasound = "${libdir}/libasound.so.*"
->   FILES_alsa-server = "${bindir}/*"
->   FILES_alsa-conf = "${datadir}/alsa/"
-> -FILES_alsa-dev += "${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
-> +FILES_alsa-dev += "${libdir}/libasound.so ${libdir}/pkgconfig/ /usr/include/ ${datadir}/aclocal/*"
->   FILES_alsa-conf-base = "\
->   ${datadir}/alsa/alsa.conf \
->   ${datadir}/alsa/cards/aliases.conf \
+>That's just changed indentation of already existing code.
 
+So let's leave the potential cleanup for a future patch.
+
+Reviewed-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 
 
