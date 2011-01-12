@@ -1,36 +1,36 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PcmZe-00013T-IY
+	(envelope-from <kergoth@gmail.com>) id 1PcpkW-0003yf-5m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Jan 2011 23:20:18 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id C8DFF314CA51
+	Wed, 12 Jan 2011 02:43:44 +0100
+Received: by ywi6 with SMTP id 6so30824ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 23:19:49 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id AZ6iuN9uL8ny
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 23:19:44 +0100 (CET)
-Received: from [172.22.22.61] (ip-109-90-189-193.unitymediagroup.de
-	[109.90.189.193])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 432E6314CA3E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jan 2011 23:19:44 +0100 (CET)
-Message-ID: <4D2CD77E.5070409@opendreambox.org>
-Date: Tue, 11 Jan 2011 23:19:42 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101210 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Tue, 11 Jan 2011 17:43:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=a6IgRSYCKjddenQX24UwkN/Xz+tbPil9FBmh3mBz7Cg=;
+	b=Wh+l8zvWZ0rlKRYbO2ub1r3j6yfEQjZS9+H9eRsqIqn6kzMq7j7Uik7T8FULMNuCkk
+	8qqxNMclOrgLCl4+n4bqvJ+cxwhXQy0xatskeSQSfAnJlOSebqxtzJPWpgjN9q+i/LjS
+	UIbcorHjFqKc3fSj4HCOwgVhwxNWoBKIobhAY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=LawwHpYlSc7IScbr5NwWbhRR22123bq8nkvka3y0ReC8NFZ16LLV9G3laxkSbUGvZ9
+	Kk/sP94/lwjljXssRyklS4JFXFyu7quKtOH4+hk5XrH/ALQRvx6WJSUK/ezvfFiZ7HtX
+	XCa14xKkjqvLQlRgZjCyJoP9/qBxB+XsgPvYI=
+Received: by 10.151.43.18 with SMTP id v18mr102195ybj.446.1294796591942;
+	Tue, 11 Jan 2011 17:43:11 -0800 (PST)
+Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
+	[24.251.170.95])
+	by mx.google.com with ESMTPS id r41sm153820yba.16.2011.01.11.17.43.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 11 Jan 2011 17:43:10 -0800 (PST)
+From: Chris Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1294318110-23521-1-git-send-email-obi@opendreambox.org>	<1294318110-23521-3-git-send-email-obi@opendreambox.org>	<4D2CBE1D.9030303@opendreambox.org>
-	<20110111214814.GH6584@mx.loc>
-In-Reply-To: <20110111214814.GH6584@mx.loc>
-Subject: Re: [PATCH 3/4] unpack.py: add SRC_URI parameter unpack=<bool> (default: true)
+Date: Tue, 11 Jan 2011 18:43:06 -0700
+Message-Id: <1294796586-24723-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 1.7.2.3
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: [PATCH] busybox: move syslog config to /etc/default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,271 +44,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jan 2011 22:20:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Jan 2011 01:43:44 -0000
 
-Hello Bernhard,
+From: Chris Larson <chris_larson@mentor.com>
 
-thanks for your review. When creating the patch I tried to use the least
-invasive way, i.e. to change as few lines of code as possible, in order
-not to break anything. Most of your remarks apply to already existing
-code which was either copied or indented. I think, that your suggestions
-should be incorporated in a later patch by someone more experienced in
-python than me.
+The busybox syslog syslog.conf is parsed by the /etc/init.d script, not by the
+syslog process itself, so it belongs in /etc/default.  In addition, the file
+format is *completely* different from the standard sysklogd configuration, so
+while we should resolve the file conflict between busybox-syslog and sysklogd,
+we should not use update-alternatives for it, so this is a cleaner solution.
 
-Please see my comments below.
+Signed-off-by: Chris Larson <chris_larson@mentor.com>
+---
+ recipes/busybox/busybox.inc  |   13 +++++++++----
+ recipes/busybox/files/syslog |    4 ++--
+ 2 files changed, 11 insertions(+), 6 deletions(-)
 
-On 01/11/2011 10:48 PM, Bernhard Reutner-Fischer wrote:
-> On Tue, Jan 11, 2011 at 09:31:25PM +0100, Andreas Oberritter wrote:
->> Ping.
->>
->> On 01/06/2011 01:48 PM, Andreas Oberritter wrote:
->>> * This allows to download compressed files without extracting them
->>> * Use case: gcj requires ecj.jar, which must be downloaded separately
->>>   and put into the gcc source directory before configure gets executed.
->>>
->>> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->>> CC: Chris Larson <chris_larson@mentor.com>
->>> ---
->>>  classes/base.bbclass                      |    3 +-
->>>  docs/usermanual/reference/var_src_uri.xml |   13 ++++-
->>>  lib/oe/unpack.py                          |   81 +++++++++++++++++------------
->>>  3 files changed, 61 insertions(+), 36 deletions(-)
->>>
->>> diff --git a/classes/base.bbclass b/classes/base.bbclass
->>> index c76b77d..25d72d4 100644
->>> --- a/classes/base.bbclass
->>> +++ b/classes/base.bbclass
->>> @@ -190,12 +190,11 @@ def oe_unpack(d, local, urldata):
->>>          bb.mkdirhier(destdir)
->>>      else:
->>>          destdir = workdir
->>> -    dos = urldata.parm.get("dos")
->>>  I don't know whether this would 
->>>      bb.note("Unpacking %s to %s/" % (base_path_out(local, d),
->>>                                       base_path_out(destdir, d)))
->>>      try:
->>> -        unpack_file(local, destdir, env={"PATH": d.getVar("PATH", True)}, dos=dos)
->>> +        unpack_file(local, destdir, urldata.parm, env={"PATH": d.getVar("PATH", True)})
->>>      except UnpackError, exc:
->>>          bb.fatal(str(exc))
->>>  
->>> diff --git a/docs/usermanual/reference/var_src_uri.xml b/docs/usermanual/reference/var_src_uri.xml
->>> index 706452f..521c7d5 100644
->>> --- a/docs/usermanual/reference/var_src_uri.xml
->>> +++ b/docs/usermanual/reference/var_src_uri.xml
->>> @@ -91,7 +91,8 @@ SRC_URI[sha256sum] = &quot;36bdb85c97b39ac604bc58cb7857ee08295242c78a12848ef8a31
->>>    it is unpacked into the work directory, <command>${WORKDIR}</command>. The
->>>    unpacker recognises several archive and compression types and for these it
->>>    will decompress any compressed files and extract all of the files from
->>> -  archives into the work directory. The supported types are:</para>
->>> +  archives into the work directory, unless the option <command>unpack=no</command>
->>> +  is set for the given file. The supported types are:</para>
->>>  
->>>    <variablelist>
->>>      <varlistentry>
->>> @@ -192,6 +193,16 @@ SRC_URI[sha256sum] = &quot;36bdb85c97b39ac604bc58cb7857ee08295242c78a12848ef8a31
->>>            md5sum option provided.</para>
->>>          </listitem>
->>>        </varlistentry>
->>> +
->>> +      <varlistentry>
->>> +        <term>unpack={yes|no}</term>
->>> +
->>> +        <listitem>
->>> +          <para>If set to 'yes' (default) and the source file is an archive,
->>> +          then the archive will be decompressed and unpacked into the ${WORKDIR}.
->>> +	  Otherwise, the archive will be copied into the ${WORKDIR}.</para>
-> 
-> mixed tab and spaces for indentation.
+diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
+index a9d1e6e..1106910 100644
+--- a/recipes/busybox/busybox.inc
++++ b/recipes/busybox/busybox.inc
+@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
+ SECTION = "base"
+ PRIORITY = "required"
+ 
+-INC_PR = "r38"
++INC_PR = "r39"
+ 
+ SRC_URI = "\
+   file://busybox-cron \
+@@ -47,7 +47,8 @@ RDEPENDS_${PN} += "${PN}-mountall"
+ RRECOMMENDS_${PN} += "libgcc ${PN}-syslog"
+ 
+ FILES_${PN}-httpd = "${sysconfdir}/init.d/busybox-httpd /srv/www"
+-FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog.${PN} ${sysconfdir}/syslog.conf"
++FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog.${PN} \
++                      ${sysconfdir}/default/syslog"
+ FILES_${PN}-udhcpd = "${sysconfdir}/init.d/busybox-udhcpd"
+ 
+ FILES_${PN} += "${datadir}/udhcpc"
+@@ -58,7 +59,7 @@ INITSCRIPT_PACKAGES = "${PN}-httpd ${PN}-udhcpd"
+ INITSCRIPT_NAME_${PN}-httpd = "busybox-httpd"
+ INITSCRIPT_NAME_${PN}-syslog = "syslog"
+ INITSCRIPT_NAME_${PN}-udhcpd = "busybox-udhcpd"
+-CONFFILES_${PN}-syslog = "${sysconfdir}/syslog.conf"
++CONFFILES_${PN}-syslog = "${sysconfdir}/default/syslog"
+ 
+ # This disables the syslog startup links in slugos (see slugos-init)
+ INITSCRIPT_PARAMS_${PN}-syslog_slugos = "start 20 ."
+@@ -168,7 +169,11 @@ do_install () {
+ 
+ 	if grep -q "CONFIG_SYSLOGD=y" ${WORKDIR}/defconfig; then
+ 		install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/syslog.${PN}
+-		install -m 644 ${WORKDIR}/syslog.conf ${D}${sysconfdir}/
++	        sed -i -e 's,/etc/default/syslog,${sysconfdir}/default/syslog,' \
++	            ${D}${sysconfdir}/init.d/syslog.${PN}
++
++		install -d ${D}${sysconfdir}/default
++		install -m 644 ${WORKDIR}/syslog.conf ${D}${sysconfdir}/default/syslog
+ 	fi
+ 	if grep "CONFIG_CROND=y" ${WORKDIR}/defconfig; then
+ 		install -m 0755 ${WORKDIR}/busybox-cron ${D}${sysconfdir}/init.d/
+diff --git a/recipes/busybox/files/syslog b/recipes/busybox/files/syslog
+index 61d273b..6e86346 100644
+--- a/recipes/busybox/files/syslog
++++ b/recipes/busybox/files/syslog
+@@ -5,8 +5,8 @@
+ #               Configuration file added by <bruno.randolf@4g-systems.biz>
+ set -e
+ 
+-if [ -f /etc/syslog.conf ]; then
+-	. /etc/syslog.conf
++if [ -f /etc/default/syslog ]; then
++	. /etc/default/syslog
+ 	LOG_LOCAL=0
+ 	LOG_REMOTE=0
+ 	for D in $DESTINATION; do
+-- 
+1.7.2.3
 
-OK, will fix that if this patch is going to be acked.
-
->>> +        </listitem>
->>> +      </varlistentry>
->>>      </variablelist>
->>>  
->>>      <para>Related variables:</para>
->>> diff --git a/lib/oe/unpack.py b/lib/oe/unpack.py
->>> index e4fe5d8..8e8bf36 100644
->>> --- a/lib/oe/unpack.py
->>> +++ b/lib/oe/unpack.py
->>> @@ -47,47 +47,62 @@ def subprocess_setup():
->>>      # non-Python subprocesses expect.
->>>      signal.signal(signal.SIGPIPE, signal.SIG_DFL)
->>>  
->>> -def unpack_file(file, destdir, dos=False, env=None):
->>> +def unpack_file(file, destdir, parameters, env=None):
->>>      import subprocess, shutil
->>>  
->>> +    try:
->>> +        dos = to_boolean(parameters.get("dos"), False)
-> 
-> dict().get defaults to None. (None,'',u'',False) is False, so passing in
-> a default of False to to_boolean -- which will return False "if not
-> string" (and should
-> if not string or not isinstance(string, basestring):
-> 	return False
-> , as a sidenote)
-> is superfluous.
-
-I know, but I preferred the more readable way. I can change it if you like.
-
->>> +    except ValueError, exc:
-> 
-> I think the more modern for is to use 'as'
-
-That was copy'n'paste from the already existing user of to_boolean().
-
->>> +        bb.fatal("Invalid value for 'dos' parameter for %s: %s" %
->>> +                 (filename, parameters.get("dos")))
-> 
-> I would have let to_boolean raise this through, but as you prefer.
-
-Same as above.
-
->>> +
->>> +    try:
->>> +        unpack = to_boolean(parameters.get("unpack"), True)
->>> +    except ValueError, exc:
->>> +        bb.fatal("Invalid value for 'unpack' parameter for %s: %s" %
->>> +                 (filename, parameters.get("unpack")))
-> 
-> ditto.
-
-Same as above.
-
->>> +
->>>      dest = os.path.join(destdir, os.path.basename(file))
->>>      if os.path.exists(dest):
->>>          if os.path.samefile(file, dest):
->>>              return True
->>>  
->>>      cmd = None
->>> -    if file.endswith('.tar'):
->>> -        cmd = 'tar x --no-same-owner -f %s' % file
->>> -    elif file.endswith('.tgz') or file.endswith('.tar.gz') or file.endswith('.tar.Z'):
->>> -        cmd = 'tar xz --no-same-owner -f %s' % file
->>> -    elif file.endswith('.tbz') or file.endswith('.tbz2') or file.endswith('.tar.bz2'):
->>> -        cmd = 'bzip2 -dc %s | tar x --no-same-owner -f -' % file
->>> -    elif file.endswith('.gz') or file.endswith('.Z') or file.endswith('.z'):
->>> -        root, ext = os.path.splitext(file)
->>> -        cmd = 'gzip -dc %s > %s' % (file, os.path.basename(root))
->>> -    elif file.endswith('.bz2'):
->>> -        root, ext = os.path.splitext(file)
->>> -        cmd = 'bzip2 -dc %s > %s' % (file, os.path.basename(root))
->>> -    elif file.endswith('.tar.xz'):
->>> -        cmd = 'xz -dc %s | tar x --no-same-owner -f -' % file
->>> -    elif file.endswith('.xz'):
->>> -        root, ext = os.path.splitext(file)
->>> -        cmd = 'xz -dc %s > %s' % (file, os.path.basename(root))
->>> -    elif file.endswith('.tar.lz'):
->>> -        cmd = 'lzip -dc %s | tar x --no-same-owner -f -' % file
->>> -    elif file.endswith('.lz'):
->>> -        root, ext = os.path.splitext(file)
->>> -        cmd = 'lzip -dc %s > %s' % (file, os.path.basename(root))
->>> -    elif file.endswith('.zip') or file.endswith('.jar'):
->>> -        cmd = 'unzip -q -o'
->>> -        if dos:
->>> -            cmd = '%s -a' % cmd
->>> -        cmd = "%s '%s'" % (cmd, file)
->>> -    elif os.path.isdir(file):
->>> -        shutil.rmtree(dest, True)
->>> -        shutil.copytree(file, dest, True)
->>> -    else:
->>> -        shutil.copy2(file, dest)
->>> +    if unpack:
->>> +        if file.endswith('.tar'):
->>> +            cmd = 'tar x --no-same-owner -f %s' % file
->>> +        elif file.endswith('.tgz') or file.endswith('.tar.gz') or file.endswith('.tar.Z'):
->>> +            cmd = 'tar xz --no-same-owner -f %s' % file
->>> +        elif file.endswith('.tbz') or file.endswith('.tbz2') or file.endswith('.tar.bz2'):
->>> +            cmd = 'bzip2 -dc %s | tar x --no-same-owner -f -' % file
->>> +        elif file.endswith('.gz') or file.endswith('.Z') or file.endswith('.z'):
->>> +            root, ext = os.path.splitext(file)
->>> +            cmd = 'gzip -dc %s > %s' % (file, os.path.basename(root))
->>> +        elif file.endswith('.bz2'):
->>> +            root, ext = os.path.splitext(file)
->>> +            cmd = 'bzip2 -dc %s > %s' % (file, os.path.basename(root))
->>> +        elif file.endswith('.tar.xz'):
->>> +            cmd = 'xz -dc %s | tar x --no-same-owner -f -' % file
->>> +        elif file.endswith('.xz'):
->>> +            root, ext = os.path.splitext(file)
->>> +            cmd = 'xz -dc %s > %s' % (file, os.path.basename(root))
->>> +        elif file.endswith('.tar.lz'):
->>> +            cmd = 'lzip -dc %s | tar x --no-same-owner -f -' % file
->>> +        elif file.endswith('.lz'):
->>> +            root, ext = os.path.splitext(file)
->>> +            cmd = 'lzip -dc %s > %s' % (file, os.path.basename(root))
->>> +        elif file.endswith('.zip') or file.endswith('.jar'):
->>> +            cmd = 'unzip -q -o'
->>> +            if dos:
->>> +                cmd = '%s -a' % cmd
->>> +            cmd = "%s '%s'" % (cmd, file)
->>> +
->>> +    if not unpack or not cmd:
->>> +        if os.path.isdir(file):
->>> +            shutil.rmtree(dest, True)
->>> +            shutil.copytree(file, dest, True)
->>> +        else:
->>> +            shutil.copy2(file, dest)
-> 
-> Don't know offhand but
-> - bb.utils.remove(dest, True)
-> or equivalent facility (or wrapper) in lib/oe?
-
-That's just changed indentation of already existing code.
-
-For your reference, here's the patch for unpack.py without changes to
-whitespace:
-
-> --- lib/oe/unpack.py.orig	2011-01-11 22:11:51.000000000 +0000
-> +++ lib/oe/unpack.py	2011-01-11 22:12:23.000000000 +0000
-> @@ -47,15 +47,28 @@
->      # non-Python subprocesses expect.
->      signal.signal(signal.SIGPIPE, signal.SIG_DFL)
->  
-> -def unpack_file(file, destdir, dos=False, env=None):
-> +def unpack_file(file, destdir, parameters, env=None):
->      import subprocess, shutil
->  
-> +    try:
-> +        dos = to_boolean(parameters.get("dos"), False)
-> +    except ValueError, exc:
-> +        bb.fatal("Invalid value for 'dos' parameter for %s: %s" %
-> +                 (filename, parameters.get("dos")))
-> +
-> +    try:
-> +        unpack = to_boolean(parameters.get("unpack"), True)
-> +    except ValueError, exc:
-> +        bb.fatal("Invalid value for 'unpack' parameter for %s: %s" %
-> +                 (filename, parameters.get("unpack")))
-> +
->      dest = os.path.join(destdir, os.path.basename(file))
->      if os.path.exists(dest):
->          if os.path.samefile(file, dest):
->              return True
->  
->      cmd = None
-> +    if unpack:
->      if file.endswith('.tar'):
->          cmd = 'tar x --no-same-owner -f %s' % file
->      elif file.endswith('.tgz') or file.endswith('.tar.gz') or file.endswith('.tar.Z'):
-> @@ -83,7 +96,9 @@
->          if dos:
->              cmd = '%s -a' % cmd
->          cmd = "%s '%s'" % (cmd, file)
-> -    elif os.path.isdir(file):
-> +
-> +    if not unpack or not cmd:
-> +        if os.path.isdir(file):
->          shutil.rmtree(dest, True)
->          shutil.copytree(file, dest, True)
->      else:
-
-
-Regards,
-Andreas
 
 
