@@ -1,33 +1,34 @@
-Received: from 19.77.mail-out.ovh.net ([87.98.169.40] helo=77.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pd9nI-0008NR-0Z
+Received: from 13.77.mail-out.ovh.net ([188.165.51.210]
+	helo=77.mail-out.ovh.net) by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Pd9nI-0008NS-0U
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 13 Jan 2011 00:07:56 +0100
-Received: (qmail 28420 invoked by uid 503); 12 Jan 2011 21:36:19 -0000
+Received: (qmail 28428 invoked by uid 503); 12 Jan 2011 21:36:20 -0000
 Received: from 64.mail-out.ovh.net (91.121.185.65)
-	by 77.mail-out.ovh.net with SMTP; 12 Jan 2011 21:36:19 -0000
-Received: (qmail 28749 invoked by uid 503); 12 Jan 2011 21:01:59 -0000
+	by 77.mail-out.ovh.net with SMTP; 12 Jan 2011 21:36:20 -0000
+Received: (qmail 28757 invoked by uid 503); 12 Jan 2011 21:02:01 -0000
 Received: from b6.ovh.net (HELO mail30.ha.ovh.net) (213.186.33.56)
-	by 64.mail-out.ovh.net with SMTP; 12 Jan 2011 21:01:59 -0000
+	by 64.mail-out.ovh.net with SMTP; 12 Jan 2011 21:02:01 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 12 Jan 2011 23:20:44 +0200
+	by b0.ovh.net with SMTP; 12 Jan 2011 23:20:46 +0200
 Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 12 Jan 2011 23:20:43 +0200
+	by ns0.ovh.net with SMTP; 12 Jan 2011 23:20:44 +0200
 From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Jan 2011 22:20:29 +0100
-Message-Id: <1294867230-7827-2-git-send-email-eric@eukrea.com>
+Date: Wed, 12 Jan 2011 22:20:30 +0100
+Message-Id: <1294867230-7827-3-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1294867230-7827-1-git-send-email-eric@eukrea.com>
+In-Reply-To: <1294867230-7827-2-git-send-email-eric@eukrea.com>
 References: <1294867230-7827-1-git-send-email-eric@eukrea.com>
+	<1294867230-7827-2-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 1957658463811251530
+X-Ovh-Tracer-Id: 1957939938787962187
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-X-Ovh-Tracer-Id: 2221119043085970761
-Subject: [PATCH 2/3] busybox 1.18.1: add latest fix
+X-Ovh-Tracer-Id: 2221400518063205705
+Subject: [PATCH 3/3] mtd-utils: add 1.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,38 +46,163 @@ X-List-Received-Date: Wed, 12 Jan 2011 23:07:56 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-* httpd: send correct mtime for .gz filesmaster
-* patch fetched from git as per blindvt request
+latest stable version + a fix to mkubifs.
+
+tested to generate ubi rootfs on the host.
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/busybox/busybox_1.18.1.bb |    7 ++++---
- 1 files changed, 4 insertions(+), 3 deletions(-)
+ .../mtd/mtd-utils-1.4.1/fix_heap_corruption.patch  |   95 ++++++++++++++++++++
+ recipes/mtd/mtd-utils-native_1.4.1.bb              |    3 +
+ recipes/mtd/mtd-utils_1.4.1.bb                     |   27 ++++++
+ 3 files changed, 125 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/mtd/mtd-utils-1.4.1/fix_heap_corruption.patch
+ create mode 100644 recipes/mtd/mtd-utils-native_1.4.1.bb
+ create mode 100644 recipes/mtd/mtd-utils_1.4.1.bb
 
-diff --git a/recipes/busybox/busybox_1.18.1.bb b/recipes/busybox/busybox_1.18.1.bb
-index a2b4475..f337eef 100644
---- a/recipes/busybox/busybox_1.18.1.bb
-+++ b/recipes/busybox/busybox_1.18.1.bb
-@@ -1,5 +1,5 @@
- require busybox_1.1x.inc
--PR = "${INC_PR}.4"
-+PR = "${INC_PR}.5"
- 
- SRC_URI += " \
- 	file://busybox-1.18.1-hush.patch \
-@@ -8,9 +8,10 @@ SRC_URI += " \
- 	file://busybox-1.18.1-mkswap.patch \
- 	file://busybox-1.18.1-warning.patch \
- 	file://busybox-1.18.1-modprobe-small.patch \
--	file://busybox-1.18.1-tftp.patch \
-+	http://git.busybox.net/busybox/patch/id=8030a1484917d5b71d5ccd1a1d28a29da7a3d7f0;apply=yes;name=bb181-01 \
- 	"
- 
- SRC_URI[md5sum] = "f15fe752d8b7012aa5e59f83b88ccb1c"
- SRC_URI[sha256sum] = "33eb25ea7b20c727c3af769256b21408a1ac1f927ff9f89a1f1e3767c18c9967"
--
-+SRC_URI[bb181-01.md5sum] = "fe58a0e758c2581fdd2554186089b03b"
-+SRC_URI[bb181-01.sha256sum] = "f776d0b4ba525c62abe5e91f1432773eca92904cdecbdf48546a9271166cd896"
+diff --git a/recipes/mtd/mtd-utils-1.4.1/fix_heap_corruption.patch b/recipes/mtd/mtd-utils-1.4.1/fix_heap_corruption.patch
+new file mode 100644
+index 0000000..5ce3a53
+--- /dev/null
++++ b/recipes/mtd/mtd-utils-1.4.1/fix_heap_corruption.patch
+@@ -0,0 +1,95 @@
++From d8f0ae2f26898f652ad3af4536b5d0e4db37714f Mon Sep 17 00:00:00 2001
++From: Kevin Cernekee <cernekee@gmail.com>
++Date: Wed, 22 Sep 2010 16:01:59 -0700
++Subject: [PATCH] mkfs.ubifs: Fix heap corruption on LEB overrun
++
++If max_leb_cnt (-c option) is set too low, set_lprops() will corrupt
++the heap and may result in a scary looking crash:
++
++$ bin/mkfs.ubifs -U -r romfs -o ubifs.img -m 512 -e 15360 -c 39
++Error: max_leb_cnt too low (241 needed)
++*** glibc detected *** bin/mkfs.ubifs: double free or corruption (!prev): 0x088fe070 ***
++======= Backtrace: =========
++/lib32/libc.so.6(+0x6c231)[0xf75fb231]
++/lib32/libc.so.6(+0x6dab8)[0xf75fcab8]
++/lib32/libc.so.6(cfree+0x6d)[0xf75ffb9d]
++bin/mkfs.ubifs[0x804e801]
++bin/mkfs.ubifs[0x804e94b]
++bin/mkfs.ubifs[0x804e99d]
++/lib32/libc.so.6(__libc_start_main+0xe6)[0xf75a5bd6]
++bin/mkfs.ubifs(__fxstat64+0x55)[0x80491e1]
++======= Memory map: ========
++08048000-0805d000 r-xp 00000000 08:08 10012045                           /work/bin/mkfs.ubifs
++0805d000-0805e000 rwxp 00015000 08:08 10012045                           /work/bin/mkfs.ubifs
++088fe000-08945000 rwxp 00000000 00:00 0                                  [heap]
++f73e1000-f73fe000 r-xp 00000000 08:05 2228842                            /usr/lib32/libgcc_s.so.1
++f73fe000-f73ff000 r-xp 0001c000 08:05 2228842                            /usr/lib32/libgcc_s.so.1
++f73ff000-f7400000 rwxp 0001d000 08:05 2228842                            /usr/lib32/libgcc_s.so.1
++f7400000-f7421000 rwxp 00000000 00:00 0
++f7421000-f7500000 ---p 00000000 00:00 0
++f751c000-f758f000 rwxp 00000000 00:00 0
++f758f000-f76e2000 r-xp 00000000 08:05 426288                             /lib32/libc-2.11.1.so
++f76e2000-f76e3000 ---p 00153000 08:05 426288                             /lib32/libc-2.11.1.so
++f76e3000-f76e5000 r-xp 00153000 08:05 426288                             /lib32/libc-2.11.1.so
++f76e5000-f76e6000 rwxp 00155000 08:05 426288                             /lib32/libc-2.11.1.so
++f76e6000-f76e9000 rwxp 00000000 00:00 0
++f76e9000-f770d000 r-xp 00000000 08:05 426296                             /lib32/libm-2.11.1.so
++f770d000-f770e000 r-xp 00023000 08:05 426296                             /lib32/libm-2.11.1.so
++f770e000-f770f000 rwxp 00024000 08:05 426296                             /lib32/libm-2.11.1.so
++f772a000-f772c000 rwxp 00000000 00:00 0
++f772c000-f772d000 r-xp 00000000 00:00 0                                  [vdso]
++f772d000-f7749000 r-xp 00000000 08:05 6062081                            /lib32/ld-2.11.1.so
++f7749000-f774a000 r-xp 0001b000 08:05 6062081                            /lib32/ld-2.11.1.so
++f774a000-f774b000 rwxp 0001c000 08:05 6062081                            /lib32/ld-2.11.1.so
++ffb58000-ffb6d000 rwxp 00000000 00:00 0                                  [stack]
++Aborted
++
++New code aborts cleanly, and still calculates the number of LEBs
++required:
++
++$ bin/mkfs.ubifs -U -r romfs -o tmp/ubifs.img -m 512 -e 15360 -c 39
++Error: max_leb_cnt too low (241 needed)
++$ echo $?
++255
++$ bin/mkfs.ubifs -U -r romfs -o tmp/ubifs.img -m 512 -e 15360 -c 240
++Error: max_leb_cnt too low (241 needed)
++$ bin/mkfs.ubifs -U -r romfs -o tmp/ubifs.img -m 512 -e 15360 -c 241
++$
++
++Signed-off-by: Kevin Cernekee <cernekee@gmail.com>
++Signed-off-by: Artem Bityutskiy <Artem.Bityutskiy@nokia.com>
++---
++ mkfs.ubifs/mkfs.ubifs.c |   10 +++++-----
++ 1 files changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/mkfs.ubifs/mkfs.ubifs.c b/mkfs.ubifs/mkfs.ubifs.c
++index eeb5e42..ec38f0e 100644
++--- a/mkfs.ubifs/mkfs.ubifs.c
+++++ b/mkfs.ubifs/mkfs.ubifs.c
++@@ -929,9 +929,11 @@ static void set_lprops(int lnum, int offs, int flags)
++ 	dirty = c->leb_size - free - ALIGN(offs, 8);
++ 	dbg_msg(3, "LEB %d free %d dirty %d flags %d", lnum, free, dirty,
++ 		flags);
++-	c->lpt[i].free = free;
++-	c->lpt[i].dirty = dirty;
++-	c->lpt[i].flags = flags;
+++	if (i < c->main_lebs) {
+++		c->lpt[i].free = free;
+++		c->lpt[i].dirty = dirty;
+++		c->lpt[i].flags = flags;
+++	}
++ 	c->lst.total_free += free;
++ 	c->lst.total_dirty += dirty;
++ 	if (flags & LPROPS_INDEX)
++@@ -1943,8 +1945,6 @@ static int finalize_leb_cnt(void)
++ {
++ 	c->leb_cnt = head_lnum;
++ 	if (c->leb_cnt > c->max_leb_cnt)
++-		/* TODO: in this case it segfaults because buffer overruns - we
++-		 * somewhere allocate smaller buffers - fix */
++ 		return err_msg("max_leb_cnt too low (%d needed)", c->leb_cnt);
++ 	c->main_lebs = c->leb_cnt - c->main_first;
++ 	if (verbose) {
++-- 
++1.7.2.3
++
+diff --git a/recipes/mtd/mtd-utils-native_1.4.1.bb b/recipes/mtd/mtd-utils-native_1.4.1.bb
+new file mode 100644
+index 0000000..74ba439
+--- /dev/null
++++ b/recipes/mtd/mtd-utils-native_1.4.1.bb
+@@ -0,0 +1,3 @@
++require mtd-utils_${PV}.bb
++require mtd-utils-native.inc
++DEPENDS += "util-linux-ng-native"
+diff --git a/recipes/mtd/mtd-utils_1.4.1.bb b/recipes/mtd/mtd-utils_1.4.1.bb
+new file mode 100644
+index 0000000..d67ea5f
+--- /dev/null
++++ b/recipes/mtd/mtd-utils_1.4.1.bb
+@@ -0,0 +1,27 @@
++require mtd-utils.inc
++
++DEPENDS += "util-linux-ng"
++
++PARALLEL_MAKE = ""
++ARM_INSTRUCTION_SET = "arm"
++
++# This is the default package, thus we lock to a specific git version so 
++# upstream changes will not break builds.
++
++TAG = "v${PV}"
++
++SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=${TAG} \
++	   file://add-exclusion-to-mkfs-jffs2-git-2.patch \
++	   file://fix_heap_corruption.patch \
++	   file://lzo_1x-git.patch"
++
++S = "${WORKDIR}/git/"
++
++do_configure_prepend() {
++	for i in $(find . -name "Makefile") ; do
++		sed -i -e s:lzo2:lzo:g $i
++	done
++	if [ -e mkfs.ubifs/compr.c ]; then
++		sed -i -e s:lzo/::g mkfs.ubifs/compr.c
++	fi
++}
 -- 
 1.6.3.3
 
