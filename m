@@ -1,31 +1,35 @@
-Received: from 13.77.mail-out.ovh.net ([188.165.51.210]
-	helo=77.mail-out.ovh.net) by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pd8Xr-0006aC-UK
+Received: from smtp.cbnco.com ([207.164.182.72])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <michael@sles10-64.jrz.cbn>) id 1Pd9Pc-0007e8-Dy
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Jan 2011 22:47:56 +0100
-Received: (qmail 28412 invoked by uid 503); 12 Jan 2011 21:36:19 -0000
-Received: from 64.mail-out.ovh.net (91.121.185.65)
-	by 77.mail-out.ovh.net with SMTP; 12 Jan 2011 21:36:18 -0000
-Received: (qmail 28747 invoked by uid 503); 12 Jan 2011 21:01:59 -0000
-Received: from b6.ovh.net (HELO mail30.ha.ovh.net) (213.186.33.56)
-	by 64.mail-out.ovh.net with SMTP; 12 Jan 2011 21:01:59 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 12 Jan 2011 23:20:44 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 12 Jan 2011 23:20:43 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Wed, 12 Jan 2011 23:43:28 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id C3F6D92FEDF;
+	Wed, 12 Jan 2011 17:42:57 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 14395-10; Wed, 12 Jan 2011 17:42:57 -0500 (EST)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 93FE08DF383; Wed, 12 Jan 2011 17:42:56 -0500 (EST)
+X-Spam-Score: 
+X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.7 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.1.8
+Received: from sles10-64.jrz.cbn (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 8F0A08DF383;
+	Wed, 12 Jan 2011 17:42:55 -0500 (EST)
+Received: by sles10-64.jrz.cbn (Postfix, from userid 1001)
+	id 84A7F14222A7; Wed, 12 Jan 2011 17:42:55 -0500 (EST)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Jan 2011 22:20:28 +0100
-Message-Id: <1294867230-7827-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-MIME-Version: 1.0
-X-Ovh-Tracer-Id: 1957658463811251529
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-X-Ovh-Tracer-Id: 2220837568108735817
-Subject: [PATCH 1/3] strace: add patch allowing compilation with kernel headers >= 2.6.32
+Date: Wed, 12 Jan 2011 17:42:55 -0500
+Message-Id: <1294872175-23969-2-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.6.3.2
+In-Reply-To: <1294872175-23969-1-git-send-email-msmith@cbnco.com>
+References: <1294872175-23969-1-git-send-email-msmith@cbnco.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: [PATCH 2/2] openjdk-6-common.inc: remove reference to do_qa_configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,40 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2011 21:47:56 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 12 Jan 2011 22:43:28 -0000
 
-tested with kernel headers 2.6.31 & 2.6.37 : both compile fine.
+do_qa_configure is only defined for distros that inherit insane.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+Cc: Henning Heinold <heinold@inf.fu-berlin.de>
 ---
- recipes/strace/strace_4.5.14.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes/openjdk/openjdk-6-common.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/strace/strace_4.5.14.bb b/recipes/strace/strace_4.5.14.bb
-index 33a44ad..395e4ee 100644
---- a/recipes/strace/strace_4.5.14.bb
-+++ b/recipes/strace/strace_4.5.14.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "strace is a system call tracing tool."
- SECTION = "console/utils"
- LICENSE = "BSD"
--PR = "r9"
-+PR = "r10"
+diff --git a/recipes/openjdk/openjdk-6-common.inc b/recipes/openjdk/openjdk-6-common.inc
+index c0f8f1f..f04800b 100644
+--- a/recipes/openjdk/openjdk-6-common.inc
++++ b/recipes/openjdk/openjdk-6-common.inc
+@@ -282,7 +282,7 @@ do_compilestepone() {
+         cp -ar openjdk-ecj/${BUILD_DIR}/hotspot/import/include openjdk-ecj/${BUILD_DIR}/j2sdk-image/
+         install -d openjdk-ecj/${BUILD_DIR}/j2sdk-image/bin
+ }
+-addtask compilestepone after do_qa_configure before do_compilesteptwo
++addtask compilestepone after do_configure before do_compilesteptwo
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
-            file://glibc-2.5.patch \
-@@ -13,6 +13,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
-            file://strace-arm-no-cachectl.patch \
-            file://strace-dont-include-linux-dirent-h.patch \
-            file://mips-sigcontext.patch \
-+           file://strace-linux-2.6.32.patch \
-           "
- 
- # The strace-4.5.14-avr32.patch conflicts with some other patches.
+ # This part can be shared between cacao and hotspot-zero builds.
+ do_compilesteptwo() {
 -- 
-1.6.3.3
+1.6.3.2
 
 
 
