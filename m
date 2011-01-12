@@ -1,42 +1,41 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Pd7WF-0003Df-Aa
+	(envelope-from <raj.khem@gmail.com>) id 1Pd7WS-0003Du-HV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Jan 2011 21:42:11 +0100
-Received: by bwz10 with SMTP id 10so898146bwz.6
+	Wed, 12 Jan 2011 21:42:24 +0100
+Received: by pwi8 with SMTP id 8so162601pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jan 2011 12:41:41 -0800 (PST)
+	Wed, 12 Jan 2011 12:41:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
 	:content-transfer-encoding;
-	bh=1tomyJdGhOOR/d779cmk2SNMZJ2WXEJhS43H6PhNm54=;
-	b=iOipYvuapU8v9DA15ByGHYEhJgkvqgMPdMXwotKuPp3SIybDcRWKJqn+lteRmMIsJs
-	BITORnFaWaXwFaSB88MCzu9A6JjpI1FPu8DcaDzG9CywHWzErD6W7jeFiCQxbWcBm5U8
-	ULLNlKyoaMtr+3XB63RcvqYuL9ZUeWowRa3lI=
+	bh=56XC88HKuff0kO64JV1zgoEMt7otTT57Rvpj6V6d1B4=;
+	b=d02Gh22V8nafn9AMoz9wYE5peVierS1HJwW4Ao9+kyRMvteeMv5pjLJ/S6GTJ2cpCg
+	XrWUMGqNj3So/jumhZ9HF5fQle5U60kUj9PVYz0NH5Mp8+Bi+tEXjKXuBSIsnc3o17IQ
+	C0JuM5oTKAm/6WN7zpZOtQSUKQKgxiMpKuXJU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=j6g7/167LEAj4Ai7p8N5KWhMyujB3yMMl/SdkQHSyO0EVwAoyqkHZj7aEsJPLy8Bho
-	g0smgnlu1kV1JlmWM86h+wfdur8v1jEuLXjmlZbUUanbujPUtjBfnSTDD8QkjwvtDgzL
-	L0Cn7X94dVPMHfRnW+wLhwuHAfEV/SHYL1CUY=
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=uNTwHpusNHeutVH1A56TWMl0m8Z2f3tK9Au5EPbe2dAu4b+BsfkNP05n9YtvnaSdKV
+	MK4RApBQs8c50eEII8dDBG5A7GV22gUkK+Cf6ansUHKQ2FLnRg2CQly3ZOjn/VPfolYW
+	IrxpGDfdC1TibCJCdjpItxD/ulymUtGi9kqyc=
+Received: by 10.142.48.9 with SMTP id v9mr198500wfv.170.1294864909906;
+	Wed, 12 Jan 2011 12:41:49 -0800 (PST)
+Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id x35sm1311530wfd.1.2011.01.12.12.41.47
+	(version=SSLv3 cipher=RC4-MD5); Wed, 12 Jan 2011 12:41:48 -0800 (PST)
+Message-ID: <4D2E1209.1090805@gmail.com>
+Date: Wed, 12 Jan 2011 12:41:45 -0800
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.204.102.206 with SMTP id h14mr1132882bko.45.1294864899981;
-	Wed, 12 Jan 2011 12:41:39 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.59.147 with HTTP; Wed, 12 Jan 2011 12:41:39 -0800 (PST)
-In-Reply-To: <20110111195359.GE6584@mx.loc>
-References: <1294084926-3115-1-git-send-email-rep.dot.nop@gmail.com>
-	<1294084926-3115-7-git-send-email-rep.dot.nop@gmail.com>
-	<20110111195359.GE6584@mx.loc>
-Date: Wed, 12 Jan 2011 18:41:39 -0200
-X-Google-Sender-Auth: Mya3TDyddvtcbiGvBQgMUYHcZz4
-Message-ID: <AANLkTikMsjT8YnGzNASQkN4+kjTmA-RYA+giUK97E176@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: [PATCH 07/12] busybox: simplify handling of busybox-static
+References: <1294863352-1486-1-git-send-email-rep.dot.nop@gmail.com>
+In-Reply-To: <1294863352-1486-1-git-send-email-rep.dot.nop@gmail.com>
+Subject: Re: [PATCH 0/3] autotools.bbclass misc trivia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,30 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2011 20:42:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Jan 2011 20:42:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jan 11, 2011 at 17:53, Bernhard Reutner-Fischer
-<rep.dot.nop@gmail.com> wrote:
-> In the long run, i have already thought about virtualizing busybox into
-> coreutils/util-linux/init/whatnot and use packages and u-a (to handle
-> these opkg-packages natively via rootfs_opkg and pstaging w/ opkg-cl
-> -O). We now do a real install with the superset of {,-static} each and
-> use u-a to properly set the tools per provider. But anyway. The above
-> was a step. ACK?
+On 1/12/2011 12:15 PM, Bernhard Reutner-Fischer wrote:
+> Hi,
+>
+> In an isolated test with dash and busybox ash the AC_CONFIG_MACRO_DIR
+> patch works as expected. Testers welcome.
+>
+> Bernhard Reutner-Fischer (3):
+>    autotools.bbclass: pass distro_imposed_configure_flags
+>    autotools.bblass: mkdir also AC_CONFIG_MACRO_DIR
+>    autotools.bbclass: use grep -q
+>
+>   classes/autotools.bbclass |   29 ++++++++++++++++++++++++-----
+>   1 files changed, 24 insertions(+), 5 deletions(-)
+>
+Whole series
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-
-Regarding the busybox cleanup a nice way to enable/disable features
-(and links) on it is an important thing to have. We have sort of it
-for uclibc (and patches for eglibc has been sent).
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
 
