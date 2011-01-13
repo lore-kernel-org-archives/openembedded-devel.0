@@ -1,32 +1,36 @@
-Received: from 31.mail-out.ovh.net ([213.186.62.10])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PdP7k-0005vg-FW
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <otavio.salvador@gmail.com>) id 1PdQ29-000708-OB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 16:30:04 +0100
-Received: (qmail 5940 invoked by uid 503); 13 Jan 2011 16:04:07 -0000
-Received: from b9.ovh.net (HELO mail173.ha.ovh.net) (213.186.33.59)
-	by 31.mail-out.ovh.net with SMTP; 13 Jan 2011 16:04:07 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Jan 2011 17:29:33 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 Jan 2011 17:29:31 +0200
-Message-ID: <4D2F1A5A.6000003@eukrea.com>
-Date: Thu, 13 Jan 2011 16:29:30 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Thu, 13 Jan 2011 17:28:21 +0100
+Received: by bwz10 with SMTP id 10so1637045bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Jan 2011 08:27:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
+	:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=VEMF3BT5fHeRKLCtn9B8oZCpVj/LPEYhOKpQC5xtwAo=;
+	b=dGVhj4AN+BGbds5+Q6Oe6smb110MPRRqxUhm9Di6eVrQJWaOnSnqi5aYiI3L9AIxu7
+	0HGIpmFrulDWXQs4WMR1RC29n7Mlj8agXdJxsLyUFCCOLdqtNhziZI0peStx6F1zgpkg
+	b+zrGpswOFEek2eHS3NibwutwPzlF6OfIwQlw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:cc:content-type:content-transfer-encoding;
+	b=rucWAgCKJ9rSGTLTFRb+8LK3p6NTfwznCv7ko73cqZbJpX9sHaqRPdB4ofQ7Hc3MWc
+	U0TaTGWZbW4wasDWAb323M30uLxjmXFba5UBjTq9HDuia8AFAFC88BgVYQE5BrZILbY7
+	E1mguI2t9sKz4SuzOW4YzcDVyC6lWXMjnsJvM=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4D2E9269.2020409@gmail.com>	<1294926304-22239-1-git-send-email-eric@eukrea.com>
-	<4D2F1728.3050308@mentor.com>
-In-Reply-To: <4D2F1728.3050308@mentor.com>
-X-Ovh-Tracer-Id: 1899111668599991625
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH v2] strace: add patch allowing compilation with kernel headers >= 2.6.32
+Received: by 10.204.102.206 with SMTP id h14mr1962213bko.45.1294936066374;
+	Thu, 13 Jan 2011 08:27:46 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.59.147 with HTTP; Thu, 13 Jan 2011 08:27:46 -0800 (PST)
+Date: Thu, 13 Jan 2011 14:27:46 -0200
+X-Google-Sender-Auth: 1nMMDTHkzSmFBiZMdJFvNDuotG4
+Message-ID: <AANLkTimEtrZnB45p49pwfX5h_tcDQnc7Lea1Y1Fd3Lg2@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: gcc-cross build fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,21 +44,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2011 15:30:04 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 13 Jan 2011 16:28:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 13/01/2011 16:15, Tom Rini wrote:
-> On 01/13/2011 06:45 AM, Eric Bénard wrote:
->> tested with kernel headers 2.6.31& 2.6.37 : both compile fine.
->>
->> Signed-off-by: Eric Bénard<eric@eukrea.com>
->
-> I still say (and on top of my last, just sent email) that we basically only
-> need strace 4.5.14 for avr32 and everyone else should be fine with 4.5.20.
->
-this patch was sent before reading your email :-)
+[ Added Khem in CC since he is the patch author ]
 
-Eric
+Hello,
+
+Commit 051c2ca2a9b0dd30556a188e1d3c941b84fa5a80 breaks the build of
+gcc-cross for i586-generic (I am using an amd64 host system) and
+reverting it fixes the problem.
+
+As follows:
+
+...
+libtool: compile:
+/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r29.=
+0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux/./gcc/xgcc
+-shared-libgcc -B/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/g=
+cc-cross-4.5-r29.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-lin=
+ux/./gcc
+-nostdinc++ -L/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-=
+cross-4.5-r29.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux/=
+i586-oe-linux/libstdc++-v3/src
+-L/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r2=
+9.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux/i586-oe-linu=
+x/libstdc++-v3/src/.libs
+-march=3Dpentium -isystem/home/otavio/hacking/ossystems/oe/tmp/sysroots/i58=
+6-oe-linux/include
+-B/home/otavio/hacking/ossystems/oe/tmp/sysroots/x86_64-linux/i586/i586-oe-=
+linux/bin/
+-B/home/otavio/hacking/ossystems/oe/tmp/sysroots/x86_64-linux/i586/i586-oe-=
+linux/lib/
+-isystem /home/otavio/hacking/ossystems/oe/tmp/sysroots/x86_64-linux/i586/i=
+586-oe-linux/include
+-isystem /home/otavio/hacking/ossystems/oe/tmp/sysroots/x86_64-linux/i586/i=
+586-oe-linux/sys-include
+--sysroot=3D/home/otavio/hacking/ossystems/oe/tmp/sysroots/i586-oe-linux
+-I/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r2=
+9.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux/i586-oe-linu=
+x/libstdc++-v3/include/i586-oe-linux
+-I/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r2=
+9.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux/i586-oe-linu=
+x/libstdc++-v3/include
+-I/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r2=
+9.0+svnr168622/gcc-4_5-branch/libstdc++-v3/libsupc++
+-fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual
+-fdiagnostics-show-location=3Donce -ffunction-sections -fdata-sections
+-g -Os -c /home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cros=
+s-4.5-r29.0+svnr168622/gcc-4_5-branch/libstdc++-v3/src/ios_init.cc
+-o ios_init.o >/dev/null 2>&1
+make[4]: *** [ios_init.lo] Error 1
+make[4]: Leaving directory
+`/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r29=
+.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux/i586-oe-linux=
+/libstdc++-v3/src'
+make[3]: *** [all-recursive] Error 1
+make[3]: Leaving directory
+`/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r29=
+.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux/i586-oe-linux=
+/libstdc++-v3'
+make[2]: *** [all] Error 2
+make[2]: Leaving directory
+`/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r29=
+.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux/i586-oe-linux=
+/libstdc++-v3'
+make[1]: *** [all-target-libstdc++-v3] Error 2
+make[1]: Leaving directory
+`/home/otavio/hacking/ossystems/oe/tmp/work/i586-oe-linux/gcc-cross-4.5-r29=
+.0+svnr168622/gcc-4_5-branch/build.x86_64-linux.i586-oe-linux'
+make: *** [all] Error 2
+FATAL: oe_runmake failed
+
+
+It looks like a linaro related regression and it looks like linaro
+people are aware of this:
+http://lists.linaro.org/pipermail/linaro-toolchain/2011-January/000685.html
+
+Any idea which change of the patch might be responsable for it?
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
