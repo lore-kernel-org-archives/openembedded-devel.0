@@ -1,32 +1,33 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PdOBY-0004As-HB
+Received: from 31.mail-out.ovh.net ([213.186.62.10])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PdODI-0004Fb-4T
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 15:29:56 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id p0DETE9A005510
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 13 Jan 2011 15:29:14 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1PdOAr-0006jC-SA; Thu, 13 Jan 2011 15:29:13 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Thu, 13 Jan 2011 15:31:44 +0100
+Received: (qmail 15851 invoked by uid 503); 13 Jan 2011 15:05:44 -0000
+Received: from b9.ovh.net (HELO mail173.ha.ovh.net) (213.186.33.59)
+	by 31.mail-out.ovh.net with SMTP; 13 Jan 2011 15:05:44 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Jan 2011 16:31:10 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 13 Jan 2011 16:31:09 +0200
+Message-ID: <4D2F0CAD.8000600@eukrea.com>
+Date: Thu, 13 Jan 2011 15:31:09 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Jan 2011 15:29:12 +0100
-Message-Id: <1294928952-25833-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.3.4
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 0.995
-X-Spam-Score: -5.6
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
-	Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
-Subject: [PATCH] zlib: substitute sharedlibdir
+References: <1294867230-7827-1-git-send-email-eric@eukrea.com>	<1294867230-7827-2-git-send-email-eric@eukrea.com>	<1294867230-7827-3-git-send-email-eric@eukrea.com>	<4D2E47EE.2040801@mentor.com>
+	<4D2EF927.8050504@eukrea.com>
+	<lyzkr49adq.fsf@ensc-virt.intern.sigma-chemnitz.de>
+In-Reply-To: <lyzkr49adq.fsf@ensc-virt.intern.sigma-chemnitz.de>
+X-Ovh-Tracer-Id: 913386301460753737
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH 3/3] mtd-utils: add 1.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,55 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2011 14:29:56 -0000
+X-List-Received-Date: Thu, 13 Jan 2011 14:31:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
+Hi Enrico,
 
-@sharedlibdir@ is not substituted so that linkerflags in zlib.pc expand to
-"... -L@sharedlibdir@" which breaks e.g. glib builds.
+On 13/01/2011 14:54, Enrico Scholz wrote:
+> Eric Bénard<eric@eukrea.com>  writes:
+>
+>>> Is there a reason we're perpetuating lzo1 for newer stuff rather than
+>>> switching to lzo2?
+>>>
+>> lzo1 seems necessary :
+>> compr_lzo.c:29:19: fatal error: lzo1x.h: No such file or directory
+>
+> mtd-utils build fine here after removing *all* the lzo1 related patches
+> and the do_configure_prepend().
+>
+you're right, I should have read more carefully the recipe. Updated path follows.
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- recipes/zlib/zlib-1.2.5/0001-autotools.patch |    4 +++-
- recipes/zlib/zlib_1.2.5.bb                   |    2 +-
- 2 files changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/zlib/zlib-1.2.5/0001-autotools.patch b/recipes/zlib/zlib-1.2.5/0001-autotools.patch
-index 6642860..f5c50f1 100644
---- a/recipes/zlib/zlib-1.2.5/0001-autotools.patch
-+++ b/recipes/zlib/zlib-1.2.5/0001-autotools.patch
-@@ -33,7 +33,7 @@ new file mode 100644
- index 0000000..177c89a
- --- /dev/null
- +++ b/configure.ac
--@@ -0,0 +1,17 @@
-+@@ -0,0 +1,19 @@
- +AC_INIT(zlib,1.2.5)
- +AC_CONFIG_SRCDIR(adler32.c)
- +AM_INIT_AUTOMAKE(zlibs,1.2.5)
-@@ -45,6 +45,8 @@ index 0000000..177c89a
- +
- +AC_HEADER_STDC
- +
-++AC_SUBST(sharedlibdir,$libdir)
-++
- +AC_CONFIG_FILES([
- +Makefile
- +zlib.pc
-diff --git a/recipes/zlib/zlib_1.2.5.bb b/recipes/zlib/zlib_1.2.5.bb
-index 34419f0..1f51404 100644
---- a/recipes/zlib/zlib_1.2.5.bb
-+++ b/recipes/zlib/zlib_1.2.5.bb
-@@ -1,6 +1,6 @@
- include zlib.inc
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- SRC_URI += "file://0001-autotools.patch "
- 
--- 
-1.7.3.4
-
+Eric
 
 
