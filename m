@@ -1,32 +1,29 @@
-Received: from 31.mail-out.ovh.net ([213.186.62.10])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PdMuf-0002IO-Su
+Received: from smtp.cbnco.com ([207.164.182.72])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <msmith@cbnco.com>) id 1PdNSq-0002k0-4a
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 14:08:25 +0100
-Received: (qmail 32056 invoked by uid 503); 13 Jan 2011 13:42:28 -0000
-Received: from b9.ovh.net (HELO mail173.ha.ovh.net) (213.186.33.59)
-	by 31.mail-out.ovh.net with SMTP; 13 Jan 2011 13:42:28 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Jan 2011 15:07:54 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 Jan 2011 15:07:52 +0200
-Message-ID: <4D2EF927.8050504@eukrea.com>
-Date: Thu, 13 Jan 2011 14:07:51 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Thu, 13 Jan 2011 14:43:44 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id E8897930AE5;
+	Thu, 13 Jan 2011 08:43:11 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 18146-06; Thu, 13 Jan 2011 08:43:11 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id A4606378319;
+	Thu, 13 Jan 2011 08:43:11 -0500 (EST)
+Message-ID: <4D2F016F.2060808@cbnco.com>
+Date: Thu, 13 Jan 2011 08:43:11 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1294867230-7827-1-git-send-email-eric@eukrea.com>	<1294867230-7827-2-git-send-email-eric@eukrea.com>	<1294867230-7827-3-git-send-email-eric@eukrea.com>
-	<4D2E47EE.2040801@mentor.com>
-In-Reply-To: <4D2E47EE.2040801@mentor.com>
-X-Ovh-Tracer-Id: 17953599915765312841
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH 3/3] mtd-utils: add 1.4.1
+References: <4D2E3885.8030207@cbnco.com>
+	<AANLkTinfpFWJSY6JfTU+KaO4b6J1aJowir+Z97OnHNUm@mail.gmail.com>
+In-Reply-To: <AANLkTinfpFWJSY6JfTU+KaO4b6J1aJowir+Z97OnHNUm@mail.gmail.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Cc: Ken Gilmer <kgilmer@buglabs.net>
+Subject: Re: openjdk-6-vm-shark on armv6 (ARM1176)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2011 13:08:26 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 13 Jan 2011 13:43:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Ken Gilmer wrote:
+>   I have built OpenJDK with shark for armv6 (iMX.31) and have not had 
+> any problems.  I haven't done a whole lot of testing, but enough to say 
+> it should work.  More details here:
+> 
+> http://community.buglabs.net/kgilmer/posts/213-OpenJDK-on-BUG-1-3-Devices-Update-now-with-shark-
 
-On 13/01/2011 01:31, Tom Rini wrote:
-> On 01/12/2011 02:20 PM, Eric Bénard wrote:
->> latest stable version + a fix to mkubifs.
->>
->> tested to generate ubi rootfs on the host.
->>
->> Signed-off-by: Eric Bénard<eric@eukrea.com>
->
-> Is there a reason we're perpetuating lzo1 for newer stuff rather than
-> switching to lzo2?
->
-lzo1 seems necessary :
-compr_lzo.c:29:19: fatal error: lzo1x.h: No such file or directory
+Cool, thanks. I'm also using iMX.31. Do you have time to try something?
 
-Eric
+java -shark -Xbatch \
+     -XX:+PrintCompilation -XX:CompileThreshold=100 -version
+
+That will force it to compile code after fewer iterations, and for me it 
+fails the first time it tries to compile anything:
+
+   1   b   java.lang.String::hashCode (60 bytes)
+Stack dump:
+0.      Running pass 'ARM Instruction Selection' on function 
+'@"java.lang.String::hashCode"'
+
+Mike
 
 
