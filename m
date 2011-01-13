@@ -1,29 +1,27 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PdUWq-0008Iy-FP
+Received: from mail.multimedia-labs.de ([82.149.226.172])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <obi@opendreambox.org>) id 1PdUab-0008Pi-7R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 22:16:20 +0100
-Received: (qmail 22707 invoked by uid 503); 13 Jan 2011 21:19:26 -0000
-Received: from b9.ovh.net (HELO mail620.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 13 Jan 2011 21:19:25 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Jan 2011 23:16:09 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 Jan 2011 23:16:08 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Thu, 13 Jan 2011 22:20:13 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 289F3314CDE7;
+	Thu, 13 Jan 2011 22:19:42 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id 6HTaiQQWg-Dy; Thu, 13 Jan 2011 22:19:37 +0100 (CET)
+Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
+	by mail.multimedia-labs.de (Postfix) with SMTP id E3A96314CE0E;
+	Thu, 13 Jan 2011 22:19:35 +0100 (CET)
+Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
+	Thu, 13 Jan 2011 21:19:35 +0000
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Jan 2011 22:15:31 +0100
-Message-Id: <1294953331-16540-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <4D2F694C.7000806@mentor.com>
-References: <4D2F694C.7000806@mentor.com>
-MIME-Version: 1.0
-X-Ovh-Tracer-Id: 7752946759984983369
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH v2] strace 4.5.20: stable since 04/14/2010 so remove DP=-1
+Date: Thu, 13 Jan 2011 21:19:35 +0000
+Message-Id: <1294953575-30765-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH] libcap2: add libpam to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,34 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2011 21:16:20 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 13 Jan 2011 21:20:13 -0000
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
+* Fixes the following compile error:
+
+pam_cap.c:19:34: error: security/pam_modules.h: No such file or
+directory
+pam_cap.c:20:34: error: security/_pam_macros.h: No such file or
+directory
+
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+CC: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 ---
-v2: don't increase PR
+ recipes/libcap/libcap2_2.16.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
- recipes/strace/strace_4.5.20.bb |    4 ----
- 1 files changed, 0 insertions(+), 4 deletions(-)
-
-diff --git a/recipes/strace/strace_4.5.20.bb b/recipes/strace/strace_4.5.20.bb
-index 89c5fd3..6146554 100644
---- a/recipes/strace/strace_4.5.20.bb
-+++ b/recipes/strace/strace_4.5.20.bb
-@@ -3,10 +3,6 @@ SECTION = "console/utils"
- LICENSE = "BSD"
- PR = "r1"
+diff --git a/recipes/libcap/libcap2_2.16.bb b/recipes/libcap/libcap2_2.16.bb
+index 97b03d5..be0788e 100644
+--- a/recipes/libcap/libcap2_2.16.bb
++++ b/recipes/libcap/libcap2_2.16.bb
+@@ -2,8 +2,8 @@ DESCRIPTION = "Libcap is a library for getting and setting POSIX.1e (formerly PO
+ PRIORITY = "optional"
+ SECTION = "libs"
+ LICENSE = "GPL"
+-DEPENDS = "bison-native flex-native attr"
+-PR = "r2"
++DEPENDS = "bison-native flex-native attr libpam"
++PR = "r3"
  
--DEFAULT_PREFERENCE = "-1"
--DEFAULT_PREFERENCE_mips = "1"
--DEFAULT_PREFERENCE_mipsel = "1"
--
- SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
-           file://mips-nolargefile.patch \
-           "
+ BUILD_CFLAGS += "-I${S}/libcap/include"
+ CFLAGS += "-I${S}/libcap/include"
 -- 
-1.6.3.3
+1.7.2.3
 
 
 
