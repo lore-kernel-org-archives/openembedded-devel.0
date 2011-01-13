@@ -1,35 +1,32 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1PdLyS-0000NV-8i
+Received: from 31.mail-out.ovh.net ([213.186.62.10])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PdMuf-0002IO-Su
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 13:08:16 +0100
-Received: by bwz10 with SMTP id 10so1409387bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jan 2011 04:07:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=tPEo9A0I6wnQiPcS+dPPtXSa8shp54zDfNUg5n0bz8I=;
-	b=C07RNSNyHMGappGBP4qFg4/0CtfjrbxpZANopnbtOqFDow3LZ/+QVPMv2z+smAckrS
-	1WbVStNbHaGTbGNoOGDP5B23lYaopUruV2Y5SShXiO9fSU0Omt7ihLBWePuq32bxq7a7
-	7r/kUN4QeFk2EnuJV8OKPjgWfDH6vvuFQ50mc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	b=WNV0AWLPmNX+SMNXB9gZsA+aIFLFt7NIcZfgjPJRTOmZbNMW1ZlpFzU67kvpgPJpHd
-	PHwdUQZjepsqO//+DuN0/KBkF462g6c+G9C3X5ojhUNadSq4ug2/rvFjab0miBXupHss
-	y6XaNpW7/S6H7NIRzkuvepPyxJDU/N4W1Refk=
+	Thu, 13 Jan 2011 14:08:25 +0100
+Received: (qmail 32056 invoked by uid 503); 13 Jan 2011 13:42:28 -0000
+Received: from b9.ovh.net (HELO mail173.ha.ovh.net) (213.186.33.59)
+	by 31.mail-out.ovh.net with SMTP; 13 Jan 2011 13:42:28 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Jan 2011 15:07:54 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 13 Jan 2011 15:07:52 +0200
+Message-ID: <4D2EF927.8050504@eukrea.com>
+Date: Thu, 13 Jan 2011 14:07:51 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.204.101.81 with SMTP id b17mr1733811bko.126.1294920465276;
-	Thu, 13 Jan 2011 04:07:45 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.59.147 with HTTP; Thu, 13 Jan 2011 04:07:45 -0800 (PST)
-Date: Thu, 13 Jan 2011 10:07:45 -0200
-X-Google-Sender-Auth: 4c4QIb8EpunHWpcNYsI6VKLa-M8
-Message-ID: <AANLkTi=npHcRdA9ehZLYendfUinkE30X_1L6DOLYGBBB@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Use of 'sem_open' failing
+To: openembedded-devel@lists.openembedded.org
+References: <1294867230-7827-1-git-send-email-eric@eukrea.com>	<1294867230-7827-2-git-send-email-eric@eukrea.com>	<1294867230-7827-3-git-send-email-eric@eukrea.com>
+	<4D2E47EE.2040801@mentor.com>
+In-Reply-To: <4D2E47EE.2040801@mentor.com>
+X-Ovh-Tracer-Id: 17953599915765312841
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH 3/3] mtd-utils: add 1.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2011 12:08:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Jan 2011 13:08:26 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hello,
+Hi,
 
-I am having trouble to use an application (freerdp) that calls sem_open met=
-hod.
+On 13/01/2011 01:31, Tom Rini wrote:
+> On 01/12/2011 02:20 PM, Eric Bénard wrote:
+>> latest stable version + a fix to mkubifs.
+>>
+>> tested to generate ubi rootfs on the host.
+>>
+>> Signed-off-by: Eric Bénard<eric@eukrea.com>
+>
+> Is there a reason we're perpetuating lzo1 for newer stuff rather than
+> switching to lzo2?
+>
+lzo1 seems necessary :
+compr_lzo.c:29:19: fatal error: lzo1x.h: No such file or directory
 
-The application has been converted to use sem_open to fix a
-portability issue with MacOS X and it works fine on my Debian but
-fails on the OE built image.
-
-Do someone knws what I am missing here?
-
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Eric
 
 
