@@ -1,40 +1,32 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PdHfP-0003TP-O6
+Received: from 31.mail-out.ovh.net ([213.186.62.10])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PdHmX-0003bz-UJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 08:32:19 +0100
-Received: by bwz10 with SMTP id 10so1252024bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jan 2011 23:31:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=DJgYcVbmiTLJ7hkDWPK6F8bqqrotcFy3iVI7l6SKIBU=;
-	b=sQPS00Uwq+7Jck+34WpFKNDkPVrssULSRSylPkdqbhp7f0vVzJ1ZflZWvFAre59fME
-	PKNQ79zO+nKYSW9hEx7dE4KkD7qGhM5rulyH6LFATkb8QAPJWRxcCxQ1PqeSoT6LI3Mx
-	l9but92zSE48v6GITVj7s2vaVP1zH4CH3sOdI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=wSZh5YawTcf6ujeyw/mIatoZE4FiUHX+smNjuotFIoHpuNts6puugFVEaGJuZwudjI
-	+vVPW08t9ledwkb+KCdhK+91qdp7H6yI7c91+AXpbuJ6W7Um6h27wgtZE30ircHDBA2W
-	L2Ql9Bdi2bhaCUAkgqakxqIDnXqEeV7vn+Tmg=
-Received: by 10.204.62.73 with SMTP id w9mr1517841bkh.11.1294903903979;
-	Wed, 12 Jan 2011 23:31:43 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id x38sm464739bkj.13.2011.01.12.23.31.42
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 12 Jan 2011 23:31:43 -0800 (PST)
-Date: Thu, 13 Jan 2011 08:31:57 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110113073157.GO3244@jama>
-References: <1294832897-3343-1-git-send-email-Martin.Jansa@gmail.com>
-	<4D2DF2BA.6040000@gmail.com>
+	Thu, 13 Jan 2011 08:39:42 +0100
+Received: (qmail 28709 invoked by uid 503); 13 Jan 2011 08:13:38 -0000
+Received: from b9.ovh.net (HELO mail173.ha.ovh.net) (213.186.33.59)
+	by 31.mail-out.ovh.net with SMTP; 13 Jan 2011 08:13:38 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Jan 2011 09:39:07 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 13 Jan 2011 09:39:06 +0200
+Message-ID: <4D2EAC19.6020203@eukrea.com>
+Date: Thu, 13 Jan 2011 08:39:05 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <4D2DF2BA.6040000@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] libvpx: force arm mode to be able to link with ffmpeg where arm mode already is forced
+To: openembedded-devel@lists.openembedded.org
+References: <1294867230-7827-1-git-send-email-eric@eukrea.com>
+	<4D2E47AE.5060803@mentor.com>
+In-Reply-To: <4D2E47AE.5060803@mentor.com>
+X-Ovh-Tracer-Id: 12401224525842001225
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH 1/3] strace: add patch allowing compilation with kernel	headers >= 2.6.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,78 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2011 07:32:19 -0000
-X-Groupsio-MsgNum: 27985
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GPOl6LAGMgeiWDic"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 13 Jan 2011 07:39:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---GPOl6LAGMgeiWDic
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 13/01/2011 01:30, Tom Rini wrote:
+> On 01/12/2011 02:20 PM, Eric Bénard wrote:
+>> tested with kernel headers 2.6.31& 2.6.37 : both compile fine.
+>
+> Is there a reason to not switch to 4.5.20, or even newer instead?
+>
+I would like to do that but I don't know if 4.5.20 needs patches.
 
-On Wed, Jan 12, 2011 at 10:28:10AM -0800, Khem Raj wrote:
-> On 1/12/2011 3:48 AM, Martin Jansa wrote:
-> > Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
->=20
-> hmmm what issues do u see if you build it with thumb mode.
+Eric
 
-+# ffmpeg links with this and fails
-+# sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text=
-+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIB=
-C_2.4'
 
-and full log is here
-http://tinderbox.openembedded.org/packages/1398033/
-
-> > ---
-> >   recipes/webm/libvpx.inc |    6 +++++-
-> >   1 files changed, 5 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/recipes/webm/libvpx.inc b/recipes/webm/libvpx.inc
-> > index 9913d5b..9d40945 100644
-> > --- a/recipes/webm/libvpx.inc
-> > +++ b/recipes/webm/libvpx.inc
-> > @@ -1,11 +1,15 @@
-> >   DESCRIPTION =3D "vpx Multi-Format Codec SDK"
-> >   LICENSE =3D "BSD"
-> >
-> > -INC_PR =3D "r5"
-> > +INC_PR =3D "r6"
-> >
-> >   SRC_URI =3D "git://review.webmproject.org/libvpx.git;protocol=3Dgit;t=
-ag=3Dv${PV}"
-> >   S =3D "${WORKDIR}/git"
-> >
-> > +# ffmpeg links with this and fails
-> > +# sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.=
-text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@=
-GLIBC_2.4'
-> > +ARM_INSTRUCTION_SET =3D "arm"
-> > +
-> >   CFLAGS +=3D "-fPIC"
-> >
-> >   export CC
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---GPOl6LAGMgeiWDic
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.16 (GNU/Linux)
-
-iEYEARECAAYFAk0uqm0ACgkQN1Ujt2V2gBy6UQCfT8AtPwRu991lGancFS/qcnJP
-6IIAnjjXTaMTFTHFzXHBv63vjSCPqGH+
-=OtFn
------END PGP SIGNATURE-----
-
---GPOl6LAGMgeiWDic--
