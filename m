@@ -1,25 +1,33 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msmith@cbnco.com>) id 1PdA5F-0000IZ-2l
+	(envelope-from <Tom_Rini@mentor.com>) id 1PdB5H-0001Kd-Qi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 00:26:29 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 679449338A6;
-	Wed, 12 Jan 2011 18:25:58 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 19208-06; Wed, 12 Jan 2011 18:25:58 -0500 (EST)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id D386992EC2D;
-	Wed, 12 Jan 2011 18:25:57 -0500 (EST)
-Message-ID: <4D2E3885.8030207@cbnco.com>
-Date: Wed, 12 Jan 2011 18:25:57 -0500
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+	Thu, 13 Jan 2011 01:30:36 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PdB4k-0001wy-Kp from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Jan 2011 16:30:02 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 12 Jan 2011 16:30:02 -0800
+Received: from [172.30.80.227] ([172.30.80.227]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 12 Jan 2011 17:30:00 -0700
+Message-ID: <4D2E4782.3080008@mentor.com>
+Date: Wed, 12 Jan 2011 17:29:54 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: openjdk-6-vm-shark on armv6 (ARM1176)
+To: openembedded-devel@lists.openembedded.org
+References: <1294863352-1486-1-git-send-email-rep.dot.nop@gmail.com>
+	<4D2E1209.1090805@gmail.com>
+In-Reply-To: <4D2E1209.1090805@gmail.com>
+X-OriginalArrivalTime: 13 Jan 2011 00:30:00.0251 (UTC)
+	FILETIME=[033240B0:01CBB2B9]
+Subject: Re: [PATCH 0/3] autotools.bbclass misc trivia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,37 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2011 23:26:29 -0000
+X-List-Received-Date: Thu, 13 Jan 2011 00:30:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hey,
+On 01/12/2011 01:41 PM, Khem Raj wrote:
+> On 1/12/2011 12:15 PM, Bernhard Reutner-Fischer wrote:
+>> Hi,
+>>
+>> In an isolated test with dash and busybox ash the AC_CONFIG_MACRO_DIR
+>> patch works as expected. Testers welcome.
+>>
+>> Bernhard Reutner-Fischer (3):
+>> autotools.bbclass: pass distro_imposed_configure_flags
+>> autotools.bblass: mkdir also AC_CONFIG_MACRO_DIR
+>> autotools.bbclass: use grep -q
+>>
+>> classes/autotools.bbclass | 29 ++++++++++++++++++++++++-----
+>> 1 files changed, 24 insertions(+), 5 deletions(-)
+>>
+> Whole series
+>
+> Acked-by: Khem Raj <raj.khem@gmail.com>
 
-Maybe OT for here, but I'm wondering if anyone else has tried to run the 
-OE-built shark VM on armv6. For me it crashes the first time it tries to 
-JIT anything.
+Acked-by: Tom Rini <tom_rini@mentor.com>
 
-LLVM llc/lli fail to run the hello world app from here:
-
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg08264.html 
-
-
-/tmp # llvm-as hello.ll
-/tmp # lli hello.bc
-Stack dump:
-0.      Program arguments: lli hello.bc
-1.      Running pass 'ARM Instruction Selection' on function '@main'
-Segmentation fault
-
-/tmp # llc hello.bc
-Stack dump:
-0.      Program arguments: llc hello.bc
-1.      Running pass 'ARM Instruction Selection' on function '@main'
-Segmentation fault
-
-I'll look further; just wondering if this is known not to work.
-
-Thanks,
-Mike
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
