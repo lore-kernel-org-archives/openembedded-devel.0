@@ -1,40 +1,30 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PdNsx-0003nF-Rk
+	(envelope-from <msmith@cbnco.com>) id 1PdNxh-0003ud-QW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 15:10:44 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id p0DDsvXt029780
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Thu, 13 Jan 2011 15:15:38 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 6DFD693D7D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jan 2011 14:54:59 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>) id 1PdNdh-0005ds-N2
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Jan 2011 14:54:57 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <1294867230-7827-1-git-send-email-eric@eukrea.com>
-	<1294867230-7827-2-git-send-email-eric@eukrea.com>
-	<1294867230-7827-3-git-send-email-eric@eukrea.com>
-	<4D2E47EE.2040801@mentor.com> <4D2EF927.8050504@eukrea.com>
-Date: Thu, 13 Jan 2011 14:54:57 +0100
-In-Reply-To: <4D2EF927.8050504@eukrea.com> ("Eric =?iso-8859-1?Q?B=E9nard?=
-	=?iso-8859-1?Q?=22's?= message of "Thu,
-	13 Jan 2011 14:07:51 +0100")
-Message-ID: <lyzkr49adq.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Thu, 13 Jan 2011 09:14:04 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 24218-10 for <openembedded-devel@lists.openembedded.org>; 
+	Thu, 13 Jan 2011 09:14:04 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 78FEB93CB82
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Jan 2011 09:14:02 -0500 (EST)
+Message-ID: <4D2F08AA.5010804@cbnco.com>
+Date: Thu, 13 Jan 2011 09:14:02 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 1
-X-Spam-Score: -5.6
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-Subject: Re: [PATCH 3/3] mtd-utils: add 1.4.1
+To: openembedded-devel@lists.openembedded.org
+References: <4D2E3885.8030207@cbnco.com> <4D2F054F.4020002@gmx.net>
+In-Reply-To: <4D2F054F.4020002@gmx.net>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: openjdk-6-vm-shark on armv6 (ARM1176)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,22 +38,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2011 14:10:44 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Jan 2011 14:15:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Eric B=E9nard <eric@eukrea.com> writes:
+Robert Schuster wrote:
+> Hi Michael,
+> can you check whether your llvm build definitely has multithread
+> support? Check the build logfiles. If it is not enabled there will be
+> warning message somewhere.
 
->> Is there a reason we're perpetuating lzo1 for newer stuff rather than
->> switching to lzo2?
->>
-> lzo1 seems necessary :
-> compr_lzo.c:29:19: fatal error: lzo1x.h: No such file or directory
+ From llvm do_configure:
 
-mtd-utils build fine here after removing *all* the lzo1 related patches
-and the do_configure_prepend().
+-- Performing Test LLVM_MULTITHREADED
+-- Performing Test LLVM_MULTITHREADED - Success
 
-
-Enrico
+Thanks,
+Mike
 
 
