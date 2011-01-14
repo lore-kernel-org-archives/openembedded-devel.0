@@ -1,25 +1,23 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PdmA7-0007SQ-AL
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 17:06:03 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 4C97549127F;
-	Fri, 14 Jan 2011 17:05:31 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 14 Jan 2011 17:05:31 +0100
-Message-ID: <4D307445.4090901@dresearch.de>
-Date: Fri, 14 Jan 2011 17:05:25 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PdmJH-0007dE-Pn for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Jan 2011 17:15:31 +0100
+Received: from f053042123.adsl.alicedsl.de ([78.53.42.123]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PdmIj-0007k1-0v for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Jan 2011 16:14:57 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4D307445.4090901@dresearch.de>
 References: <AANLkTim9j=t8uDyabZbN4epTC-JwfmktyERydQsxxjyx@mail.gmail.com>
-In-Reply-To: <AANLkTim9j=t8uDyabZbN4epTC-JwfmktyERydQsxxjyx@mail.gmail.com>
-X-OriginalArrivalTime: 14 Jan 2011 16:05:31.0329 (UTC)
-	FILETIME=[DE56CB10:01CBB404]
+	<4D307445.4090901@dresearch.de>
+Date: Fri, 14 Jan 2011 17:14:55 +0100
+Message-ID: <1295021695.3578.11.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
 Subject: Re: testing branch 2011-01-13 - do_configure python failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,18 +32,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 16:06:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 Jan 2011 16:15:31 -0000
+X-Groupsio-MsgNum: 28049
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-yI7VCwtAkA2KPwhP/zbj"
 
-do_configure python - 2.6.5 - ml12.2 failed with:
+--=-yI7VCwtAkA2KPwhP/zbj
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-checking getaddrinfo bug... buggy
-Fatal: You must get working getaddrinfo() function.
-       or you can specify "--disable-ipv6".
-ERROR: Function do_configure failed
+Am Freitag, den 14.01.2011, 17:05 +0100 schrieb Steffen Sledz:
+> do_configure python - 2.6.5 - ml12.2 failed with:
+>=20
+> checking getaddrinfo bug... buggy
+> Fatal: You must get working getaddrinfo() function.
+>        or you can specify "--disable-ipv6".
+> ERROR: Function do_configure failed
+>=20
+> see <http://tinderbox.openembedded.net/packages/1709663/>
 
-see <http://tinderbox.openembedded.net/packages/1709663/>
+I already reported that to the list this morning [1][2].
+
+Probably the patch is not correct, INCPR should be iterated, but it
+fixes local builds for people not needing IPv6.
+
+Please discuss this further in the other thread.
 
 
+Thanks,
 
+Paul
+
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/02=
+8755.html
+[2] http://patches.openembedded.org/patch/281/
+
+--=-yI7VCwtAkA2KPwhP/zbj
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0wdn8ACgkQPX1aK2wOHViiywCgi0teNgfaNMcxcY2HY3krbxbJ
+WZAAn3OdhfQzEM8E/kDlvd0TIf+Y8Lfp
+=TsYt
+-----END PGP SIGNATURE-----
+
+--=-yI7VCwtAkA2KPwhP/zbj--
