@@ -1,21 +1,37 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pdfgd-0004dY-MT for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 10:11:11 +0100
-Received: from f053042123.adsl.alicedsl.de ([78.53.42.123]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pdfg7-0005Uo-Ud for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 09:10:40 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PdgNl-0005No-Dm
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Jan 2011 10:55:45 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id p0E9t7vC027286
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Jan 2011 10:55:08 +0100
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.71) (envelope-from <ensc@sigma-chemnitz.de>) id 1PdgN8-0006ro-SQ
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Jan 2011 10:55:06 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Jan 2011 10:10:38 +0100
-Message-ID: <1294996238.3578.1.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
+References: <1294928952-25833-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<4D2FC1F3.20504@gmail.com>
+Date: Fri, 14 Jan 2011 10:55:06 +0100
+In-Reply-To: <4D2FC1F3.20504@gmail.com> (Khem Raj's message of "Thu, 13 Jan
+	2011 19:24:35 -0800")
+Message-ID: <ly4o9b95dx.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 1
+X-Spam-Score: -5.6
+X-Spam-Level: -----
+X-Spam-Tests: AWL,BAYES_00,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
+X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
+Subject: Re: [PATCH] zlib: substitute sharedlibdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,70 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 09:11:11 -0000
-X-Groupsio-MsgNum: 28039
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-iFeBS+jthRjKZ9FCmZuc"
+X-List-Received-Date: Fri, 14 Jan 2011 09:55:45 -0000
+Content-Type: text/plain; charset=us-ascii
 
---=-iFeBS+jthRjKZ9FCmZuc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Khem Raj <raj.khem@gmail.com> writes:
 
-=46rom b2e249702a0f6b5e36a4b095f5a4c495aa5ec14f Mon Sep 17 00:00:00 2001
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-Date: Fri, 14 Jan 2011 09:48:08 +0100
-Subject: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
+>> @sharedlibdir@ is not substituted so that linkerflags in zlib.pc expand to
+>> "... -L@sharedlibdir@" which breaks e.g. glib builds.
+>
+> I think zlib has --sharedlibdir configure option since 1.2.4.4+
+> so you could try to use it instead of patching
 
-Since commit d729d14d [1] task `configure` for `python_2.6.5` and `python_2=
-.7.1` fails with the following error message when compiling with `angstrom_=
-2008.1` for `MACHINE =3D "beagleboard"`.
+afais, the ./configure will be completely replaced due to the
+0001-autotools.patch (added by a2393dbf941554098).  So there exists no
+such option anymore.
 
-	checking for major... yes
-	checking for getaddrinfo... yes
-	checking getaddrinfo bug... buggy
-	Fatal: You must get working getaddrinfo() function.
-		     or you can specify "--disable-ipv6".
-	ERROR: Function do_configure failed
 
-Disable IPv6 for now in Python unconditionally until a better solution is f=
-ound. This patch is build tested with `angstrom_2008.1` for `MACHINE =3D "b=
-eagleboard"`.
+>> --- a/recipes/zlib/zlib-1.2.5/0001-autotools.patch
+>> +++ b/recipes/zlib/zlib-1.2.5/0001-autotools.patch
+>> @@ -33,7 +33,7 @@ new file mode 100644
+>>   index 0000000..177c89a
+>>   --- /dev/null
+>>   +++ b/configure.ac
 
-(OpenWRT seems to have had the same issue [2].)
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dd729d14=
-d9bff474f41c0853086d89cf6b50f41ff
-[2] https://dev.openwrt.org/changeset/17077
+Enrico
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/python/python.inc |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/python/python.inc b/recipes/python/python.inc
-index c325b91..09d2392 100644
---- a/recipes/python/python.inc
-+++ b/recipes/python/python.inc
-@@ -20,4 +20,5 @@ EXTRA_OECONF =3D "\
-   --with-signal-module \
-   --with-wctype-functions \
-   --enable-shared \
-+  --disable-ipv6 \
- "
---=20
-1.7.2.3
-
---=-iFeBS+jthRjKZ9FCmZuc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk0wEvsACgkQPX1aK2wOHVgBvgCfaS0nrS3alTGvb+O6M1j7EC9i
-VqgAniDiQNYZru9RGNP87rVjlRIsg6p+
-=QaXW
------END PGP SIGNATURE-----
-
---=-iFeBS+jthRjKZ9FCmZuc--
