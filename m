@@ -1,30 +1,42 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PdYgV-0005VO-4f
+	(envelope-from <raj.khem@gmail.com>) id 1Pda6V-00073r-FM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 02:42:35 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id D9625314CDE6;
-	Fri, 14 Jan 2011 02:42:03 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id CncjLFaygX6R; Fri, 14 Jan 2011 02:41:58 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 3F8DB314CD68;
-	Fri, 14 Jan 2011 02:41:57 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Fri, 14 Jan 2011 01:41:57 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	Fri, 14 Jan 2011 04:13:31 +0100
+Received: by pwi8 with SMTP id 8so379905pwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Jan 2011 19:12:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=7yOq8aDcNHtq2tLal43B11BxADo7ycN+83q0AZXtICQ=;
+	b=VzQAI7DxdgtMNO0ukfuTDxxoKgmS5hUyNXT9wUKEd8JSMOnf2cbsCPpPzMsuIod/39
+	QkskrENtQDrmIiNFSCpNoja9yzjq5r6uajJ0olZs9zQvENo6FLDBTsQ7GT+AiInMocJL
+	4S0mYRJr98NFEzJ/cnf4SXND5dXQ4KQrCi/qg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=EBXXDuAb+lU041QM/pdnupFwonb44GEBGik8BS8c2MihUi3x1UCCsdInTKTXWZ86bb
+	3oVP2vkwfWLUYnd1zhZ9VgCHOEymw77hrjdYaWq6wFmxDDu2y7RVe0wtP+0h1yuZQPAY
+	XxyKOY1ZS+jEwST+E3jCjhhd4PeKOc9gW4eOg=
+Received: by 10.142.232.20 with SMTP id e20mr299140wfh.41.1294974776692;
+	Thu, 13 Jan 2011 19:12:56 -0800 (PST)
+Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id v19sm981978wfh.12.2011.01.13.19.12.54
+	(version=SSLv3 cipher=RC4-MD5); Thu, 13 Jan 2011 19:12:55 -0800 (PST)
+Message-ID: <4D2FBF32.30402@gmail.com>
+Date: Thu, 13 Jan 2011 19:12:50 -0800
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Jan 2011 01:41:56 +0000
-Message-Id: <1294969316-3249-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <AANLkTimjXn3ZN7cfz0P-Yjd5JLJrdfRZuTU2ky20CLqY@mail.gmail.com>
-References: <AANLkTimjXn3ZN7cfz0P-Yjd5JLJrdfRZuTU2ky20CLqY@mail.gmail.com>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH v3] libcap2: fix build with and without libpam
+References: <1294832897-3343-1-git-send-email-Martin.Jansa@gmail.com>	<4D2DF2BA.6040000@gmail.com>
+	<20110113073157.GO3244@jama>
+In-Reply-To: <20110113073157.GO3244@jama>
+Subject: Re: [PATCH] libvpx: force arm mode to be able to link with ffmpeg where arm mode already is forced
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,85 +50,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 01:42:35 -0000
+X-List-Received-Date: Fri, 14 Jan 2011 03:13:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* Add libpam to depends if DISTRO_FEATURES contains pam.
+On 1/12/2011 11:31 PM, Martin Jansa wrote:
+> On Wed, Jan 12, 2011 at 10:28:10AM -0800, Khem Raj wrote:
+>> On 1/12/2011 3:48 AM, Martin Jansa wrote:
+>>> Signed-off-by: Martin Jansa<Martin.Jansa@gmail.com>
+>>
+>> hmmm what issues do u see if you build it with thumb mode.
+>
+> +# ffmpeg links with this and fails
+> +# sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
+>
+> and full log is here
+> http://tinderbox.openembedded.org/packages/1398033/
 
-* Fixes the following compile error, when libpam-dev is installed
-  on the host, but not built for the target:
+Its not clear in the logs but is libvpx using -fPIE compiler option ? if 
+yes then you should remove it and then it will work.
 
-pam_cap.c:19:34: error: security/pam_modules.h: No such file or directory
-pam_cap.c:20:34: error: security/_pam_macros.h: No such file or directory
-
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-CC: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-CC: Otavio Salvador <otavio@ossystems.com.br>
-CC: Tom Rini <tom_rini@mentor.com>
-CC: Khem Raj <raj.khem@gmail.com>
----
-v3: Use SYSTEM_HEADERS instead of STAGING_INCDIR.
-
- recipes/libcap/libcap2-2.16/make.patch |   18 ++++++++++++++----
- recipes/libcap/libcap2_2.16.bb         |    6 ++++--
- 2 files changed, 18 insertions(+), 6 deletions(-)
-
-diff --git a/recipes/libcap/libcap2-2.16/make.patch b/recipes/libcap/libcap2-2.16/make.patch
-index 3672f77..b8508e4 100644
---- a/recipes/libcap/libcap2-2.16/make.patch
-+++ b/recipes/libcap/libcap2-2.16/make.patch
-@@ -1,6 +1,8 @@
----- libcap-2.16/Make.Rules.orig	2009-03-07 18:50:23.000000000 +0100
--+++ libcap-2.16/Make.Rules	2009-03-07 18:50:44.000000000 +0100
--@@ -45,19 +45,12 @@
-+Index: libcap-2.16/Make.Rules
-+===================================================================
-+--- libcap-2.16.orig/Make.Rules	2008-12-04 08:03:30.000000000 +0100
-++++ libcap-2.16/Make.Rules	2011-01-13 22:51:04.568844000 +0100
-+@@ -45,25 +45,18 @@
-  KERNEL_HEADERS := $(topdir)/libcap/include
-  IPATH += -I$(topdir)/libcap/include -I$(KERNEL_HEADERS)
-  
-@@ -19,5 +21,13 @@
- -LD=$(CC) -Wl,-x -shared
- -LDFLAGS := #-g
-  
-- SYSTEM_HEADERS = /usr/include
-+-SYSTEM_HEADERS = /usr/include
-++SYSTEM_HEADERS ?= /usr/include
-  INCS=$(topdir)/libcap/include/sys/capability.h
-+ LDFLAGS += -L$(topdir)/libcap
-+ CFLAGS += -Dlinux $(WARNINGS) $(DEBUG) $(IPATH)
-+-PAM_CAP := $(shell if [ -f /usr/include/security/pam_modules.h ]; then echo yes ; else echo no ; fi)
-++PAM_CAP := $(shell if [ -f $(SYSTEM_HEADERS)/security/pam_modules.h ]; then echo yes ; else echo no ; fi)
-+ INDENT := $(shell if [ -n "$(which indent 2>/dev/null)" ]; then echo "| indent -kr" ; fi)
-+ DYNAMIC := $(shell if [ ! -d "$(topdir)/.git" ]; then echo yes; fi)
-+ LIBATTR := yes
-diff --git a/recipes/libcap/libcap2_2.16.bb b/recipes/libcap/libcap2_2.16.bb
-index 97b03d5..beb45f2 100644
---- a/recipes/libcap/libcap2_2.16.bb
-+++ b/recipes/libcap/libcap2_2.16.bb
-@@ -2,8 +2,8 @@ DESCRIPTION = "Libcap is a library for getting and setting POSIX.1e (formerly PO
- PRIORITY = "optional"
- SECTION = "libs"
- LICENSE = "GPL"
--DEPENDS = "bison-native flex-native attr"
--PR = "r2"
-+DEPENDS = "bison-native flex-native attr ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-+PR = "r3"
- 
- BUILD_CFLAGS += "-I${S}/libcap/include"
- CFLAGS += "-I${S}/libcap/include"
-@@ -15,6 +15,8 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/libs/security/linux-privs/libcap2/libca
- 
- S = "${WORKDIR}/libcap-${PV}"
- 
-+EXTRA_OEMAKE = "SYSTEM_HEADERS=${STAGING_INCDIR}"
-+
- do_install() {
- 	install -d ${D}${includedir}/sys
- 	install -m 0644 libcap/include/sys/capability.h ${D}${includedir}/sys/
--- 
-1.7.2.3
+>
+>>> ---
+>>>    recipes/webm/libvpx.inc |    6 +++++-
+>>>    1 files changed, 5 insertions(+), 1 deletions(-)
+>>>
+>>> diff --git a/recipes/webm/libvpx.inc b/recipes/webm/libvpx.inc
+>>> index 9913d5b..9d40945 100644
+>>> --- a/recipes/webm/libvpx.inc
+>>> +++ b/recipes/webm/libvpx.inc
+>>> @@ -1,11 +1,15 @@
+>>>    DESCRIPTION = "vpx Multi-Format Codec SDK"
+>>>    LICENSE = "BSD"
+>>>
+>>> -INC_PR = "r5"
+>>> +INC_PR = "r6"
+>>>
+>>>    SRC_URI = "git://review.webmproject.org/libvpx.git;protocol=git;tag=v${PV}"
+>>>    S = "${WORKDIR}/git"
+>>>
+>>> +# ffmpeg links with this and fails
+>>> +# sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
+>>> +ARM_INSTRUCTION_SET = "arm"
+>>> +
+>>>    CFLAGS += "-fPIC"
+>>>
+>>>    export CC
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
