@@ -1,38 +1,28 @@
-Received: from mail-yi0-f41.google.com ([209.85.218.41])
+Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PdrtP-0000vH-FT
+	(envelope-from <lm@larsmichelsen.com>) id 1PdsCH-0001G4-PR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 23:13:11 +0100
-Received: by yia25 with SMTP id 25so1518165yia.28
+	Fri, 14 Jan 2011 23:32:41 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by larsmichelsen.com (Postfix) with ESMTP id 3A9AA9544031
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jan 2011 14:12:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=ctlOrXg+lT2htnd4vks6834sB3twAd7EexfVHw1cWMU=;
-	b=UsnpCipyahKKx+NQsbg2ef0eknFJO0eByh57j0ygzPUNE/1snyFfeR5KCG+ZkyixJT
-	7sN6w2eoKFYWy/OAZMft0NbWqMvqhJMO6VtW9ORphUB4GOyevCkK0xYh2FX9q4taymHL
-	WBwZVgz1RRVjsCAPa4Cvfma/Myt9TiPrBwB9c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=gFFiWGLk/aXC/ytqNnDNmnMY1y00rJqYvh3Srao+E2Lu5Bq6wOv3y/hdNJBFqyBqEm
-	6WDhIAC9vyoVxR9B2lfUQVmrE5cqAYrz00oRJcqWtS5p/0mhUdxAQB9vw9LwlLdXBe5s
-	2dg8CioXn4fKXsMuZr6XCyeKweuMaPYYW84eE=
-Received: by 10.91.163.27 with SMTP id q27mr1803789ago.139.1295043156069; Fri,
-	14 Jan 2011 14:12:36 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Fri, 14 Jan 2011 14:12:15 -0800 (PST)
-In-Reply-To: <igqg4k$lv7$1@dough.gmane.org>
-References: <1294996238.3578.1.camel@mattotaupa> <igq6d1$36s$1@dough.gmane.org>
-	<igq7l2$a8s$1@dough.gmane.org>
-	<AANLkTineRKBLdhFHm-p2K1qK49vXe0tp6N1c3XeSUVbS@mail.gmail.com>
-	<igqg4k$lv7$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 14 Jan 2011 14:12:15 -0800
-Message-ID: <AANLkTi=nQgfcQ0LE3Pvz2DqJwt5ABaJqmkxvsR+Bg6O7@mail.gmail.com>
+	Fri, 14 Jan 2011 23:25:51 +0100 (CET)
+Received: from larsmichelsen.com ([127.0.0.1])
+	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id pPwuSdwngT0z; Fri, 14 Jan 2011 23:25:47 +0100 (CET)
+Received: from localhost.localdomain (g224205181.adsl.alicedsl.de
+	[92.224.205.181])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: lm)
+	by larsmichelsen.com (Postfix) with ESMTPSA id 3E4109544021;
+	Fri, 14 Jan 2011 23:25:47 +0100 (CET)
+From: Lars Michelsen <lm@larsmichelsen.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
+Date: Fri, 14 Jan 2011 23:25:24 +0100
+Message-Id: <1295043924-18487-1-git-send-email-lm@larsmichelsen.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] Fix building of package live555
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,82 +36,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 22:13:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 Jan 2011 22:32:41 -0000
 
-On Fri, Jan 14, 2011 at 1:44 PM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 14-01-11 21:16, Khem Raj wrote:
->> On Fri, Jan 14, 2011 at 11:20 AM, Koen Kooi <k.kooi@student.utwente.nl> =
-wrote:
->> On 14-01-11 19:58, Koen Kooi wrote:
->>>>> On 14-01-11 10:10, Paul Menzel wrote:
->>>>>> From b2e249702a0f6b5e36a4b095f5a4c495aa5ec14f Mon Sep 17 00:00:00 20=
-01
->>>>>> From: Paul Menzel <paulepanter@users.sourceforge.net>
->>>>>> Date: Fri, 14 Jan 2011 09:48:08 +0100
->>>>>> Subject: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
->>>>>
->>>>>> Since commit d729d14d [1] task `configure` for `python_2.6.5` and `p=
-ython_2.7.1` fails with the following error message when compiling with `an=
-gstrom_2008.1` for `MACHINE =3D "beagleboard"`.
->>>>>
->>>>>> =C2=A0 =C2=A0 =C2=A0checking for major... yes
->>>>>> =C2=A0 =C2=A0 =C2=A0checking for getaddrinfo... yes
->>>>>> =C2=A0 =C2=A0 =C2=A0checking getaddrinfo bug... buggy
->>>>>> =C2=A0 =C2=A0 =C2=A0Fatal: You must get working getaddrinfo() functi=
-on.
->>>>>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 or yo=
-u can specify "--disable-ipv6".
->>>>>> =C2=A0 =C2=A0 =C2=A0ERROR: Function do_configure failed
->>>>>
->>>>>> Disable IPv6 for now in Python unconditionally until a better soluti=
-on is found.
->>>>>
->>>>> I don't think disabling ipv6 is the way to go, I'm comparing the egli=
-bc
->>>>> before and after d729d14d to see if that reveals a clue. If it doesn'=
-t,
->>>>> let's put in your patch for the time being.
->>
->> .... and the difference is that options-group.config is empty before d72
->> and fully populated after it. OPTION_EGLIBC_ADVANCED_INET6 is set to Y
->> in both cases it seems.
->>
->>> I was expecting it to converge to this. Do u see that libraries
->>> libc.so before and after have different content too ?
->>> Could be that the option config mechanism is getting it wrong somehow
->>> may be I should only populate options-group.config
->>> with disabled features
->
-> Populating it only with disabled features would match the old behaviour
-> and should make python build again. I doesn't give us the root cause,
-> but at least it would build :)
+The file http://www.live555.com/liveMedia/public/live.2010.10.15.tar.gz
+did not exist anymore on the server.
 
-yeah it would be a bug in option config if it could not deal with an
-option being set to 'y' twice
+So bumped version to the current file: live.2011.01.10.tar.gz
 
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNMMPUMkyGM64RGpERAr0QAKCg3AB+AqMcNQM8svqVbvnIpD6WLwCgri+J
-> 2dimtKfPQ/BC9sqTzfURWrA=3D
-> =3DqmN5
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Lars Michelsen <lm@larsmichelsen.com>
+---
+ recipes/live555/live555_20101015.bb |    7 -------
+ recipes/live555/live555_20110110.bb |    7 +++++++
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+ delete mode 100644 recipes/live555/live555_20101015.bb
+ create mode 100644 recipes/live555/live555_20110110.bb
+
+diff --git a/recipes/live555/live555_20101015.bb b/recipes/live555/live555_20101015.bb
+deleted file mode 100644
+index eb6dfe3..0000000
+--- a/recipes/live555/live555_20101015.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require live555.inc
+-
+-PR = "${INC_PR}.1"
+-
+-SRC_URI[md5sum] = "29734ddc6fddbb1a3a8f51a6de7a21c5"
+-SRC_URI[sha256sum] = "278d99c0880f324769164d6872fea88f8d82ec5b87bb66c92035f46ee2f10adc"
+-
+diff --git a/recipes/live555/live555_20110110.bb b/recipes/live555/live555_20110110.bb
+new file mode 100644
+index 0000000..cf64b83
+--- /dev/null
++++ b/recipes/live555/live555_20110110.bb
+@@ -0,0 +1,7 @@
++require live555.inc
++
++PR = "${INC_PR}.1"
++
++SRC_URI[md5sum] = "978cd8443735d47b53ee624a985a047e"
++SRC_URI[sha256sum] = "39f23d4c140f9a0bfd6fa11f38c75ae8c3b4fab1930ca1acb8ad66e70947dbc1"
++
+-- 
+1.7.1
+
 
 
