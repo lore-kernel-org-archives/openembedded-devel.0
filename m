@@ -1,37 +1,24 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1PdgNl-0005No-Dm
+	(envelope-from <jaap.dejong@nedap.com>) id 1PdgQn-0005T8-Un
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 10:55:45 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id p0E9t7vC027286
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jan 2011 10:55:08 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>) id 1PdgN8-0006ro-SQ
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 10:55:06 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <1294928952-25833-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<4D2FC1F3.20504@gmail.com>
-Date: Fri, 14 Jan 2011 10:55:06 +0100
-In-Reply-To: <4D2FC1F3.20504@gmail.com> (Khem Raj's message of "Thu, 13 Jan
-	2011 19:24:35 -0800")
-Message-ID: <ly4o9b95dx.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Fri, 14 Jan 2011 10:58:54 +0100
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Fri, 14 Jan 2011 10:57:18 +0100
+X-TM-IMSS-Message-ID: <1ae962bd000095db@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 1ae962bd000095db ;
+	Fri, 14 Jan 2011 10:57:19 +0100
+Message-ID: <4D301DFC.4090900@nedap.com>
+Date: Fri, 14 Jan 2011 10:57:16 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 1
-X-Spam-Score: -5.6
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,T_RP_MATCHES_RCVD,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.71 on 62.153.82.30
-Subject: Re: [PATCH] zlib: substitute sharedlibdir
+To: openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 14 Jan 2011 09:57:18.0764 (UTC)
+	FILETIME=[6E24E6C0:01CBB3D1]
+Subject: chattr not found?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +32,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 09:55:45 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 14 Jan 2011 09:58:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Khem Raj <raj.khem@gmail.com> writes:
+Hi All!
 
->> @sharedlibdir@ is not substituted so that linkerflags in zlib.pc expand to
->> "... -L@sharedlibdir@" which breaks e.g. glib builds.
->
-> I think zlib has --sharedlibdir configure option since 1.2.4.4+
-> so you could try to use it instead of patching
+for some reason chattr is linked to chattr.e2fsprogs instead of 
+../usr/bin/chattr.e2fsprogs
 
-afais, the ./configure will be completely replaced due to the
-0001-autotools.patch (added by a2393dbf941554098).  So there exists no
-such option anymore.
+# ls -l /bin/chattr*
+lrwxrwxrwx 1 root root   16 2011-01-14 10:37 /bin/chattr -> chattr.e2fsprogs
 
+# ls -l /usr/bin/chattr*
+-rwxr-xr-x 1 root root 7304 2010-12-10 01:12 /usr/bin/chattr.e2fsprogs
 
->> --- a/recipes/zlib/zlib-1.2.5/0001-autotools.patch
->> +++ b/recipes/zlib/zlib-1.2.5/0001-autotools.patch
->> @@ -33,7 +33,7 @@ new file mode 100644
->>   index 0000000..177c89a
->>   --- /dev/null
->>   +++ b/configure.ac
+I have no time to investigate this.
+Look simple...
 
-
-Enrico
+Regards,
+Jaap de Jong
 
 
