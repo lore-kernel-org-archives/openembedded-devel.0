@@ -1,32 +1,27 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pdkkb-0005SI-DD
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pdlfr-0006ar-2m
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 15:35:37 +0100
+	Fri, 14 Jan 2011 16:34:47 +0100
 Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
 	by relay1.mentorg.com with esmtp 
-	id 1Pdkk2-0001a9-28 from Tom_Rini@mentor.com 
+	id 1PdlfI-0000OJ-K9 from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 06:35:02 -0800
+	Fri, 14 Jan 2011 07:34:12 -0800
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
 	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 14 Jan 2011 06:35:01 -0800
-Received: from [172.30.80.234] ([172.30.80.234]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 14 Jan 2011 07:35:00 -0700
-Message-ID: <4D305F0D.4000107@mentor.com>
-Date: Fri, 14 Jan 2011 07:34:53 -0700
+	SMTPSVC(6.0.3790.4675); Fri, 14 Jan 2011 07:34:12 -0800
+Received: from localhost.localdomain ([172.30.80.234]) by
+	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 14 Jan 2011 08:34:11 -0700
 From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4D301DFC.4090900@nedap.com>
-In-Reply-To: <4D301DFC.4090900@nedap.com>
-X-OriginalArrivalTime: 14 Jan 2011 14:35:00.0957 (UTC)
-	FILETIME=[3995C8D0:01CBB3F8]
-Subject: Re: chattr not found?
+Date: Fri, 14 Jan 2011 08:34:01 -0700
+Message-Id: <1295019241-5145-1-git-send-email-tom_rini@mentor.com>
+X-Mailer: git-send-email 1.7.0.4
+X-OriginalArrivalTime: 14 Jan 2011 15:34:11.0196 (UTC)
+	FILETIME=[7DB143C0:01CBB400]
+Subject: [PATCH] busybox-static: Look in ${P}:${BPN} before the main busybox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,29 +35,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 14:35:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 Jan 2011 15:34:47 -0000
 
-On 01/14/2011 02:57 AM, Jaap de Jong wrote:
-> Hi All!
->
-> for some reason chattr is linked to chattr.e2fsprogs instead of
-> ../usr/bin/chattr.e2fsprogs
->
-> # ls -l /bin/chattr*
-> lrwxrwxrwx 1 root root 16 2011-01-14 10:37 /bin/chattr -> chattr.e2fsprogs
->
-> # ls -l /usr/bin/chattr*
-> -rwxr-xr-x 1 root root 7304 2010-12-10 01:12 /usr/bin/chattr.e2fsprogs
->
-> I have no time to investigate this.
-> Look simple...
+Update FILESPATHPKG so that busybox-static could have its own
+starting defconfig.
 
-I'm pushing a fix for this now, thanks for the report.
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+---
+ recipes/busybox/busybox-static_1.18.1.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/recipes/busybox/busybox-static_1.18.1.bb b/recipes/busybox/busybox-static_1.18.1.bb
+index 58aca93..27d4121 100644
+--- a/recipes/busybox/busybox-static_1.18.1.bb
++++ b/recipes/busybox/busybox-static_1.18.1.bb
+@@ -1,6 +1,6 @@
+ require busybox_${PV}.bb
+ 
+-FILESPATHPKG =. "busybox-${PV}:"
++FILESPATHPKG =. "${P}:${BPN}:busybox-${PV}:"
+ S = "${WORKDIR}/busybox-${PV}"
+ 
+ do_configure_append() {
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.0.4
+
 
 
