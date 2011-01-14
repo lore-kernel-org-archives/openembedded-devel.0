@@ -1,34 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PdpCZ-0002Xy-5p for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 20:20:47 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PdpC1-0000Us-Cg for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 20:20:13 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jan 2011 20:20:13 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1PdpzK-0003rL-Aj
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Jan 2011 21:11:10 +0100
+Received: by ywi6 with SMTP id 6so1038642ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jan 2011 20:20:13 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 14 Jan 2011 12:10:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=e03UHk8f4b3yXP1LZKwQLWsMYyJHJOlxcKIp8MAeuxU=;
+	b=T3CY95P8C8UeD6sSdCGJgK/95TaPNg7bbF+keP2erdP+WKy6M0qGJDqsgu3hwkNkF0
+	eYYvab0YRAwdxOZDbaK2vNMDiUwrWm4xdpaD6zCKYSLVi8Bis7sUxjjfdX5bHEnCBkiT
+	zPRToIjz+avfcfE+yPSXDRtC0GAj6fAdcWtsw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=gbPFXrWQaeZuI7b3rDfvoGwI+HHLUKyuQx7ZPfCjsdvasBJINaJ8MbSGYyvqTjudaL
+	Yq58C+ZVl0neOKgJrjXo9JO1EaFZUU/d3SlgsymrefTwYXFiTkmplAsL/136aBccd0Xr
+	c5SQ6WowIRl6lfjLK9r4sUN3+c/kIb1plzCrY=
+Received: by 10.90.10.21 with SMTP id 21mr1667601agj.112.1295035835275; Fri,
+	14 Jan 2011 12:10:35 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.55.10 with HTTP; Fri, 14 Jan 2011 12:10:15 -0800 (PST)
+In-Reply-To: <ly4o9b95dx.fsf@ensc-virt.intern.sigma-chemnitz.de>
+References: <1294928952-25833-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<4D2FC1F3.20504@gmail.com>
+	<ly4o9b95dx.fsf@ensc-virt.intern.sigma-chemnitz.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 14 Jan 2011 12:10:15 -0800
+Message-ID: <AANLkTimdFOMRWGD-Gec9ueOEX_yx-BMswqB_OxQYDx=B@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 14 Jan 2011 20:20:02 +0100
-Message-ID: <igq7l2$a8s$1@dough.gmane.org>
-References: <1294996238.3578.1.camel@mattotaupa> <igq6d1$36s$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <igq6d1$36s$1@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
+Subject: Re: [PATCH] zlib: substitute sharedlibdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,49 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 19:20:47 -0000
+X-List-Received-Date: Fri, 14 Jan 2011 20:11:10 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, Jan 14, 2011 at 1:55 AM, Enrico Scholz
+<enrico.scholz@sigma-chemnitz.de> wrote:
+> Khem Raj <raj.khem@gmail.com> writes:
+>
+>>> @sharedlibdir@ is not substituted so that linkerflags in zlib.pc expand=
+ to
+>>> "... -L@sharedlibdir@" which breaks e.g. glib builds.
+>>
+>> I think zlib has --sharedlibdir configure option since 1.2.4.4+
+>> so you could try to use it instead of patching
+>
+> afais, the ./configure will be completely replaced due to the
+> 0001-autotools.patch (added by a2393dbf941554098). =C2=A0So there exists =
+no
+> such option anymore.
 
-On 14-01-11 19:58, Koen Kooi wrote:
-> On 14-01-11 10:10, Paul Menzel wrote:
->> From b2e249702a0f6b5e36a4b095f5a4c495aa5ec14f Mon Sep 17 00:00:00 2001
->> From: Paul Menzel <paulepanter@users.sourceforge.net>
->> Date: Fri, 14 Jan 2011 09:48:08 +0100
->> Subject: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
-> 
->> Since commit d729d14d [1] task `configure` for `python_2.6.5` and `python_2.7.1` fails with the following error message when compiling with `angstrom_2008.1` for `MACHINE = "beagleboard"`.
-> 
->> 	checking for major... yes
->> 	checking for getaddrinfo... yes
->> 	checking getaddrinfo bug... buggy
->> 	Fatal: You must get working getaddrinfo() function.
->> 		     or you can specify "--disable-ipv6".
->> 	ERROR: Function do_configure failed
-> 
->> Disable IPv6 for now in Python unconditionally until a better solution is found. 
-> 
-> I don't think disabling ipv6 is the way to go, I'm comparing the eglibc
-> before and after d729d14d to see if that reveals a clue. If it doesn't,
-> let's put in your patch for the time being.
+now that I look into OE we have autoconf'ed it ourselves. Originally
+it has a configure
+but not all configure scripts are generated via autoconf so We kind of
+swerved away
+from zlib's build system has anyone proposed it to zlib upstream that
+they autconf
+their build system ? otherwise I think it would be better to use the
+configure script as is
 
-.... and the difference is that options-group.config is empty before d72
-and fully populated after it. OPTION_EGLIBC_ADVANCED_INET6 is set to Y
-in both cases it seems.
-
-Khem, help!
-
-This feels like the broken wide getaddrinfo test in ruby all over again :(
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNMKHiMkyGM64RGpERAuFJAJ0XtYegAEgZ6wpVswCCGPb6a3YcQQCdGbhc
-gwL/7gtHyRYXX+oiAEtgx/c=
-=XyNb
------END PGP SIGNATURE-----
-
+>
+>
+>>> --- a/recipes/zlib/zlib-1.2.5/0001-autotools.patch
+>>> +++ b/recipes/zlib/zlib-1.2.5/0001-autotools.patch
+>>> @@ -33,7 +33,7 @@ new file mode 100644
+>>> =C2=A0 index 0000000..177c89a
+>>> =C2=A0 --- /dev/null
+>>> =C2=A0 +++ b/configure.ac
+>
+>
+> Enrico
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
