@@ -1,42 +1,21 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PdaNO-0007kd-RU
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 04:30:59 +0100
-Received: by pvd12 with SMTP id 12so364885pvd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jan 2011 19:30:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=lZqYcD+Se6aIHztv1vkWHqr+pr44U8JWhylc9/1n8Rs=;
-	b=pwoq4zDwqLgG6BJ87ezryCLV9XQa5V/A7+aT/pkAUc5MJNWSAcolhdn5+nOye03epx
-	CTCQVYEg9H+vXbBCEPgYptDEbiZ3jKos3hhaPw/84lJP/O0/Gbg00iVGgBR1bKF8CjlC
-	MT3qqq/3EhJJAQgaiYVutF8LFP1s6qjbhL+Zc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=KZGMH6TgvvMpEni1iB91uCNYTUe8XtuuH1NDRawSQkPPoccNKL9pWCK99tAdk3YG7k
-	6/ECYzeb1XVCiN5J2G0GiyiWNbCgVzCtGgGubX5BBQdW0t5BolLaFvZvyJ774llpspOL
-	Iv/IyiqxzcM8mK986XdZGCcqVV4WZ1xLguovc=
-Received: by 10.142.233.5 with SMTP id f5mr286429wfh.233.1294975820033;
-	Thu, 13 Jan 2011 19:30:20 -0800 (PST)
-Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id v19sm1001620wfh.12.2011.01.13.19.30.18
-	(version=SSLv3 cipher=RC4-MD5); Thu, 13 Jan 2011 19:30:19 -0800 (PST)
-Message-ID: <4D2FC347.7000505@gmail.com>
-Date: Thu, 13 Jan 2011 19:30:15 -0800
-From: Khem Raj <raj.khem@gmail.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pdfgd-0004dY-MT for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Jan 2011 10:11:11 +0100
+Received: from f053042123.adsl.alicedsl.de ([78.53.42.123]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pdfg7-0005Uo-Ud for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Jan 2011 09:10:40 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <4D2F694C.7000806@mentor.com>
-	<1294953331-16540-1-git-send-email-eric@eukrea.com>
-In-Reply-To: <1294953331-16540-1-git-send-email-eric@eukrea.com>
-Subject: Re: [PATCH v2] strace 4.5.20: stable since 04/14/2010 so remove DP=-1
+Date: Fri, 14 Jan 2011 10:10:38 +0100
+Message-ID: <1294996238.3578.1.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,38 +29,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 03:30:59 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 14 Jan 2011 09:11:11 -0000
+X-Groupsio-MsgNum: 28039
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-iFeBS+jthRjKZ9FCmZuc"
 
-On 1/13/2011 1:15 PM, Eric Bénard wrote:
-> Signed-off-by: Eric Bénard<eric@eukrea.com>
-> ---
-> v2: don't increase PR
+--=-iFeBS+jthRjKZ9FCmZuc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I hope its build tested on some arches which were not using it
-Acked-by: Khem Raj <raj.khem@gmail.com>
+=46rom b2e249702a0f6b5e36a4b095f5a4c495aa5ec14f Mon Sep 17 00:00:00 2001
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+Date: Fri, 14 Jan 2011 09:48:08 +0100
+Subject: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
 
+Since commit d729d14d [1] task `configure` for `python_2.6.5` and `python_2=
+.7.1` fails with the following error message when compiling with `angstrom_=
+2008.1` for `MACHINE =3D "beagleboard"`.
 
->
->   recipes/strace/strace_4.5.20.bb |    4 ----
->   1 files changed, 0 insertions(+), 4 deletions(-)
->
-> diff --git a/recipes/strace/strace_4.5.20.bb b/recipes/strace/strace_4.5.20.bb
-> index 89c5fd3..6146554 100644
-> --- a/recipes/strace/strace_4.5.20.bb
-> +++ b/recipes/strace/strace_4.5.20.bb
-> @@ -3,10 +3,6 @@ SECTION = "console/utils"
->   LICENSE = "BSD"
->   PR = "r1"
->
-> -DEFAULT_PREFERENCE = "-1"
-> -DEFAULT_PREFERENCE_mips = "1"
-> -DEFAULT_PREFERENCE_mipsel = "1"
-> -
->   SRC_URI = "${SOURCEFORGE_MIRROR}/strace/strace-${PV}.tar.bz2 \
->             file://mips-nolargefile.patch \
->             "
+	checking for major... yes
+	checking for getaddrinfo... yes
+	checking getaddrinfo bug... buggy
+	Fatal: You must get working getaddrinfo() function.
+		     or you can specify "--disable-ipv6".
+	ERROR: Function do_configure failed
 
+Disable IPv6 for now in Python unconditionally until a better solution is f=
+ound. This patch is build tested with `angstrom_2008.1` for `MACHINE =3D "b=
+eagleboard"`.
 
+(OpenWRT seems to have had the same issue [2].)
 
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dd729d14=
+d9bff474f41c0853086d89cf6b50f41ff
+[2] https://dev.openwrt.org/changeset/17077
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/python/python.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/python/python.inc b/recipes/python/python.inc
+index c325b91..09d2392 100644
+--- a/recipes/python/python.inc
++++ b/recipes/python/python.inc
+@@ -20,4 +20,5 @@ EXTRA_OECONF =3D "\
+   --with-signal-module \
+   --with-wctype-functions \
+   --enable-shared \
++  --disable-ipv6 \
+ "
+--=20
+1.7.2.3
+
+--=-iFeBS+jthRjKZ9FCmZuc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0wEvsACgkQPX1aK2wOHVgBvgCfaS0nrS3alTGvb+O6M1j7EC9i
+VqgAniDiQNYZru9RGNP87rVjlRIsg6p+
+=QaXW
+-----END PGP SIGNATURE-----
+
+--=-iFeBS+jthRjKZ9FCmZuc--
