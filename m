@@ -1,37 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PdgpL-0007qK-Ux
+	(envelope-from <msmith@cbnco.com>) id 1PdkCX-00050Y-Hr
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Jan 2011 11:24:16 +0100
-Received: by wwi17 with SMTP id 17so2576277wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jan 2011 02:23:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=8dBUwbtXL77gYaVjAOTpZ51/MtxICe130q2OVY6hiik=;
-	b=KlaFhOS3TgHLfiqi7epr69mF+Q7BfuUCFhkg96czXlmt6Gq4unnjqRD8baI4F/3G24
-	PMmaElLS8Y7f8CXpeqqoJlaj+nwKT8HDPefIOGc1cHvFDwrVVc5RKlIL16hsItgRWlka
-	MkuCkfxAQ8UTWsKOEsiNp+S8qWaV4wLa+0amU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=srQ/8tp7x+cdoP2FmYB08pvU8FAGp0h9TRR+zXdGcaqgz0ulzDhfwIYoaBisPZlbg0
-	twnMMCiyzu6wZU22exe+nowzSfgmJfaN0s3wFTtiGIA9M8pyjTJOG02fD/oWA1z519J4
-	Gm0huIcrBal922cSLuj6LRuYKf5HBz4PceQoY=
+	Fri, 14 Jan 2011 15:00:25 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 9DF8D93D78C;
+	Fri, 14 Jan 2011 08:59:52 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 30256-08; Fri, 14 Jan 2011 08:59:52 -0500 (EST)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 5C4D3939386;
+	Fri, 14 Jan 2011 08:59:52 -0500 (EST)
+Date: Fri, 14 Jan 2011 08:59:52 -0500 (EST)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
+To: Ken Gilmer <kgilmer@buglabs.net>
+In-Reply-To: <AANLkTi=qTS0YRq1Q9N8GcMz+neaYJD+NzRQ6hDPjpNtW@mail.gmail.com>
+Message-ID: <Pine.LNX.4.64.1101140859250.6059@juice.ott.cti.com>
+References: <4D2E3885.8030207@cbnco.com>
+	<AANLkTinfpFWJSY6JfTU+KaO4b6J1aJowir+Z97OnHNUm@mail.gmail.com>
+	<4D2F016F.2060808@cbnco.com>
+	<AANLkTi=qTS0YRq1Q9N8GcMz+neaYJD+NzRQ6hDPjpNtW@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.227.147.129 with SMTP id l1mr543211wbv.26.1295000622075; Fri,
-	14 Jan 2011 02:23:42 -0800 (PST)
-Received: by 10.227.13.69 with HTTP; Fri, 14 Jan 2011 02:23:41 -0800 (PST)
-In-Reply-To: <4D2FC277.6050708@gmail.com>
-References: <4D2F0CAD.8000600@eukrea.com>
-	<1294929229-4495-1-git-send-email-eric@eukrea.com>
-	<4D2FC277.6050708@gmail.com>
-Date: Fri, 14 Jan 2011 11:23:41 +0100
-Message-ID: <AANLkTim9PzJGCi9NqTvJnFsegHxpWGLCJxjb7F=BwCw9@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v2] mtd-utils: add 1.4.1
+X-Virus-Scanned: amavisd-new at cbnco.com
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: openjdk-6-vm-shark on armv6 (ARM1176)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 10:24:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 Jan 2011 14:00:25 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Fri, Jan 14, 2011 at 4:26 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On 1/13/2011 6:33 AM, Eric B=E9nard wrote:
->>
->> * latest stable version + a fix to mkubifs.
->> * switch to lzo2
->> * tested to generate ubi rootfs on the host.
->>
->> Signed-off-by: Eric B=E9nard<eric@eukrea.com>
->
-> Acked-by: Khem Raj <raj.khem@gmail.com>
->
->> ---
->> v2: switch 1.4.1 to lzo2, keep lzo for the older recipes
+On Fri, 14 Jan 2011, Ken Gilmer wrote:
 
-nice, finally no segfaults in dmesg while building shr-images for
-gta01 with small nand :)
+> root@BUG:~# java -shark -Xbatch \
+> >    -XX:+PrintCompilation -XX:CompileThreshold=100 -version
+>   1   b   java.lang.String::hashCode (60 bytes)
+>   2   b   java.lang.String::equals (88 bytes)
+>   3   b   java.lang.System::getSecurityManager (4 bytes)
+>   4  !b   sun.nio.cs.US_ASCII$Encoder::encodeArrayLoop (279 bytes)
+> java version "1.6.0_18"  5   b   java.lang.String::indexOf (151 bytes)
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Nice! What version of gcc are you using?
+
+Mike
 
 
