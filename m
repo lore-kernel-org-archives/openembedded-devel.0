@@ -1,44 +1,21 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1PdtBS-0002It-3g
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Jan 2011 00:35:54 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 704C81100093
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jan 2011 00:35:18 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 5DDC8110008B
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jan 2011 00:35:17 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225006214.adsl.alicedsl.de
-	[92.225.6.214]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jan 2011 00:35:17 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 506333C342; Sat, 15 Jan 2011 00:34:55 +0100 (CET)
-Date: Sat, 15 Jan 2011 00:34:55 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PdtOM-0002Xv-UU for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Jan 2011 00:49:15 +0100
+Received: from g229063146.adsl.alicedsl.de ([92.229.63.146]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PdtNq-00031k-F9; Fri, 14 Jan 2011 23:48:42 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110114233455.GA26837@rhein.zuhause.netz>
-References: <4D2E3885.8030207@cbnco.com>
-	<AANLkTinfpFWJSY6JfTU+KaO4b6J1aJowir+Z97OnHNUm@mail.gmail.com>
-	<4D2F016F.2060808@cbnco.com>
-	<AANLkTi=qTS0YRq1Q9N8GcMz+neaYJD+NzRQ6hDPjpNtW@mail.gmail.com>
-	<Pine.LNX.4.64.1101140859250.6059@juice.ott.cti.com>
-MIME-Version: 1.0
-In-Reply-To: <Pine.LNX.4.64.1101140859250.6059@juice.ott.cti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: openjdk-6-vm-shark on armv6 (ARM1176)
+Date: Sat, 15 Jan 2011 00:48:41 +0100
+Message-ID: <1295048921.3996.20.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: [PATCH] libsigc++-2.0_2.2.8: add checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,27 +29,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2011 23:35:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 14 Jan 2011 23:49:15 -0000
+X-Groupsio-MsgNum: 28062
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-9e4YTA7nTaPzLdKiuse0"
 
-On Fri, Jan 14, 2011 at 08:59:52AM -0500, Michael Smith wrote:
-> On Fri, 14 Jan 2011, Ken Gilmer wrote:
-> 
-> > root@BUG:~# java -shark -Xbatch \
-> > >    -XX:+PrintCompilation -XX:CompileThreshold=100 -version
-> >   1   b   java.lang.String::hashCode (60 bytes)
-> >   2   b   java.lang.String::equals (88 bytes)
-> >   3   b   java.lang.System::getSecurityManager (4 bytes)
-> >   4  !b   sun.nio.cs.US_ASCII$Encoder::encodeArrayLoop (279 bytes)
-> > java version "1.6.0_18"  5   b   java.lang.String::indexOf (151 bytes)
-> 
-> Nice! What version of gcc are you using?
-> 
-> Mike
+--=-9e4YTA7nTaPzLdKiuse0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-bug 2.0 is armv7a, same as beagleboard.
+Date: Sat Jan 15 00:37:48 2011 +0100
 
-Bye Henning
+This patch fixes commit 0e50dd7f [1]
 
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D0e50dd7=
+fb9ee092bc04e581e6d5fc0fc6c6099ef
 
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+CC: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+---
+ recipes/libsigc++-2.0/libsigc++-2.0_2.2.8.bb |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/libsigc++-2.0/libsigc++-2.0_2.2.8.bb b/recipes/libsigc=
+++-2.0/libsigc++-2.0_2.2.8.bb
+index f72140c..8a812df 100644
+--- a/recipes/libsigc++-2.0/libsigc++-2.0_2.2.8.bb
++++ b/recipes/libsigc++-2.0/libsigc++-2.0_2.2.8.bb
+@@ -5,6 +5,10 @@ LICENSE =3D "GPL LGPL"
+ DEPENDS =3D "mm-common"
+=20
+ SRC_URI =3D "ftp://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.2/libsigc++=
+-${PV}.tar.gz;name=3Darchive"
++
++SRC_URI[archive.md5sum] =3D "05c8333e6effe43473e06f723c6afd23"
++SRC_URI[archive.sha256sum] =3D "b77f409ae172e75fb4712b759993049a1555986140=
+ff1aff3020bc6cbbf77cef"
++
+ S =3D "${WORKDIR}/libsigc++-${PV}"
+=20
+ inherit autotools
+--=20
+1.7.2.3
+
+--=-9e4YTA7nTaPzLdKiuse0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0w4NgACgkQPX1aK2wOHVjMbQCdHmCkwAmrQuXcuRFK1WTdSe1P
+30AAn2kJoZeBNAqDbG62bBKycfsbxZ5+
+=pvWr
+-----END PGP SIGNATURE-----
+
+--=-9e4YTA7nTaPzLdKiuse0--
