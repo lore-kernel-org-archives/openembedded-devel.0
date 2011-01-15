@@ -1,30 +1,42 @@
-Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lm@larsmichelsen.com>) id 1Pe4cA-0001a5-3X
+	(envelope-from <raj.khem@gmail.com>) id 1PeEya-000471-W2
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Jan 2011 12:48:14 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by larsmichelsen.com (Postfix) with ESMTP id 573B195443B1
+	Sat, 15 Jan 2011 23:52:05 +0100
+Received: by pwi8 with SMTP id 8so638536pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jan 2011 12:47:41 +0100 (CET)
-Received: from larsmichelsen.com ([127.0.0.1])
-	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id x9y2473lcOCn; Sat, 15 Jan 2011 12:47:40 +0100 (CET)
-Received: from localhost.localdomain (e181145082.adsl.alicedsl.de
-	[85.181.145.82])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: lm)
-	by larsmichelsen.com (Postfix) with ESMTPSA id 438EA9544383;
-	Sat, 15 Jan 2011 12:47:40 +0100 (CET)
-From: Lars Michelsen <lm@larsmichelsen.com>
+	Sat, 15 Jan 2011 14:51:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=ATbuOd16lxrdD2A22I3ZHAFxe6abxdGmTY+fGo6kREQ=;
+	b=giH4Zg9fTuLfuEidpsXuj21GpXi1eQvq1JRbyeyUEgw9rdlTzZJ0VISo0tB7+dxG78
+	TMaEIrcSKkMbPqTseZoCpqAvqIy2dzgRGECTPZi2EH1HKp8pyeIGZXUjuIjrkuQHphJR
+	+D7XF6OBW4OTs1Lc8Fa6Ud0ZTf9Tsinkhs3/w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=KMBWtwvhmK7cOWTB89yZRkjufZIqWwkZLWR3kbvlPbrauyngxK2h+695iTzLC6/ae4
+	B8+fJ/LzhmwS5/6PW8WzRdhx6hWIyp0/GE+BUWEyjiS7id4xAgXvv1Gj073CMuAOOk9O
+	WB0nHfDtLNqDAhiBm0SyvtirJvBQ5J7TH1dS0=
+Received: by 10.142.125.1 with SMTP id x1mr1999810wfc.377.1295131887340;
+	Sat, 15 Jan 2011 14:51:27 -0800 (PST)
+Received: from [192.168.1.68] (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id w14sm3920942wfd.6.2011.01.15.14.51.25
+	(version=SSLv3 cipher=RC4-MD5); Sat, 15 Jan 2011 14:51:26 -0800 (PST)
+Message-ID: <4D3224E7.1090403@gmail.com>
+Date: Sat, 15 Jan 2011 14:51:19 -0800
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Jan 2011 12:45:11 +0100
-Message-Id: <1295091911-3873-2-git-send-email-lm@larsmichelsen.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <20110115045639.GD21179@jama>
-References: <20110115045639.GD21179@jama>
-Subject: [PATCH] Fix building of package live555
+References: <1294996238.3578.1.camel@mattotaupa>	<igq6d1$36s$1@dough.gmane.org>	<igq7l2$a8s$1@dough.gmane.org>	<AANLkTineRKBLdhFHm-p2K1qK49vXe0tp6N1c3XeSUVbS@mail.gmail.com>	<igqg4k$lv7$1@dough.gmane.org>
+	<AANLkTi=nQgfcQ0LE3Pvz2DqJwt5ABaJqmkxvsR+Bg6O7@mail.gmail.com>
+In-Reply-To: <AANLkTi=nQgfcQ0LE3Pvz2DqJwt5ABaJqmkxvsR+Bg6O7@mail.gmail.com>
+Subject: Re: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,49 +50,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Jan 2011 11:48:14 -0000
+X-List-Received-Date: Sat, 15 Jan 2011 22:52:05 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The file http://www.live555.com/liveMedia/public/live.2010.10.15.tar.gz
-did not exist anymore on the server.
+On 1/14/2011 2:12 PM, Khem Raj wrote:
+> On Fri, Jan 14, 2011 at 1:44 PM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 14-01-11 21:16, Khem Raj wrote:
+>>> On Fri, Jan 14, 2011 at 11:20 AM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>>> On 14-01-11 19:58, Koen Kooi wrote:
+>>>>>> On 14-01-11 10:10, Paul Menzel wrote:
+>>>>>>>  From b2e249702a0f6b5e36a4b095f5a4c495aa5ec14f Mon Sep 17 00:00:00 2001
+>>>>>>> From: Paul Menzel<paulepanter@users.sourceforge.net>
+>>>>>>> Date: Fri, 14 Jan 2011 09:48:08 +0100
+>>>>>>> Subject: [PATCH] python.inc: add `--disable-ipv6` to `EXTRA_OECONF`
+>>>>>>
+>>>>>>> Since commit d729d14d [1] task `configure` for `python_2.6.5` and `python_2.7.1` fails with the following error message when compiling with `angstrom_2008.1` for `MACHINE = "beagleboard"`.
+>>>>>>
+>>>>>>>       checking for major... yes
+>>>>>>>       checking for getaddrinfo... yes
+>>>>>>>       checking getaddrinfo bug... buggy
+>>>>>>>       Fatal: You must get working getaddrinfo() function.
+>>>>>>>                    or you can specify "--disable-ipv6".
+>>>>>>>       ERROR: Function do_configure failed
+>>>>>>
+>>>>>>> Disable IPv6 for now in Python unconditionally until a better solution is found.
+>>>>>>
+>>>>>> I don't think disabling ipv6 is the way to go, I'm comparing the eglibc
+>>>>>> before and after d729d14d to see if that reveals a clue. If it doesn't,
+>>>>>> let's put in your patch for the time being.
+>>>
+>>> .... and the difference is that options-group.config is empty before d72
+>>> and fully populated after it. OPTION_EGLIBC_ADVANCED_INET6 is set to Y
+>>> in both cases it seems.
+>>>
+>>>> I was expecting it to converge to this. Do u see that libraries
+>>>> libc.so before and after have different content too ?
+>>>> Could be that the option config mechanism is getting it wrong somehow
+>>>> may be I should only populate options-group.config
+>>>> with disabled features
+>>
+>> Populating it only with disabled features would match the old behaviour
+>> and should make python build again. I doesn't give us the root cause,
+>> but at least it would build :)
+>
+> yeah it would be a bug in option config if it could not deal with an
+> option being set to 'y' twice
+>
+>>
 
-So bumped version to the current file: live.2011.01.10.tar.gz
+OK it has nothing to do with eglibc change. Infact its due to
 
-Signed-off-by: Lars Michelsen <lm@larsmichelsen.com>
----
- recipes/live555/live555_20101015.bb |    7 -------
- recipes/live555/live555_20110110.bb |    7 +++++++
- 2 files changed, 7 insertions(+), 7 deletions(-)
- delete mode 100644 recipes/live555/live555_20101015.bb
- create mode 100644 recipes/live555/live555_20110110.bb
+commit a88aca1d7dfa3a08957dd49cb61bac850f197106
+Author: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+Date:   Wed Jan 12 20:34:55 2011 +0100
 
-diff --git a/recipes/live555/live555_20101015.bb b/recipes/live555/live555_20101015.bb
-deleted file mode 100644
-index eb6dfe3..0000000
---- a/recipes/live555/live555_20101015.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require live555.inc
--
--PR = "${INC_PR}.1"
--
--SRC_URI[md5sum] = "29734ddc6fddbb1a3a8f51a6de7a21c5"
--SRC_URI[sha256sum] = "278d99c0880f324769164d6872fea88f8d82ec5b87bb66c92035f46ee2f10adc"
--
-diff --git a/recipes/live555/live555_20110110.bb b/recipes/live555/live555_20110110.bb
-new file mode 100644
-index 0000000..cf64b83
---- /dev/null
-+++ b/recipes/live555/live555_20110110.bb
-@@ -0,0 +1,7 @@
-+require live555.inc
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[md5sum] = "978cd8443735d47b53ee624a985a047e"
-+SRC_URI[sha256sum] = "39f23d4c140f9a0bfd6fa11f38c75ae8c3b4fab1930ca1acb8ad66e70947dbc1"
-+
--- 
-1.7.1
+     autotools.bbclass: pass distro_imposed_configure_flags
 
+
+
+This makes --enable-ipv6 passed to configure of all recipes
+which use autotools. Now in configure there is a runtime test
+to determine buggygetaddrinfo and as we are cross compiling this test 
+goes wrong and if ipv6 is enabled then its reported as fatal
+
+if test "$ipv6" = "yes"; then
+echo 'Fatal: You must get working getaddrinfo() function.'
+echo '       or you can specify "--disable-ipv6"'.
+
+
+One solution we have is that we cache this variable
+
+I will post a patch in this direction soon.
+
+Thanks
+-Khem
 
 
