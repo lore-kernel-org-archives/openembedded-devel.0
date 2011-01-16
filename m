@@ -1,28 +1,23 @@
-Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lm@larsmichelsen.com>) id 1PeGko-0006LN-Jd
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Jan 2011 01:45:58 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by larsmichelsen.com (Postfix) with ESMTP id E54209544022
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Jan 2011 01:45:24 +0100 (CET)
-Received: from larsmichelsen.com ([127.0.0.1])
-	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id kcJmLGBtPhdg; Sun, 16 Jan 2011 01:45:24 +0100 (CET)
-Received: from localhost.localdomain (e181145082.adsl.alicedsl.de
-	[85.181.145.82])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: lm)
-	by larsmichelsen.com (Postfix) with ESMTPSA id 640E49544016;
-	Sun, 16 Jan 2011 01:45:23 +0100 (CET)
-From: Lars Michelsen <lm@larsmichelsen.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PeR5e-0003XZ-Tb for openembedded-devel@lists.openembedded.org;
+	Sun, 16 Jan 2011 12:48:10 +0100
+Received: from f053033090.adsl.alicedsl.de ([78.53.33.90]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PeR56-0007FC-Lt for openembedded-devel@lists.openembedded.org;
+	Sun, 16 Jan 2011 11:47:36 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Jan 2011 01:45:27 +0100
-Message-Id: <1295138727-6516-1-git-send-email-lm@larsmichelsen.com>
-X-Mailer: git-send-email 1.7.1
-Subject: [PATCH] Added Europe/Berlin timezone to tzdata pkg
+In-Reply-To: <1295138727-6516-1-git-send-email-lm@larsmichelsen.com>
+References: <1295138727-6516-1-git-send-email-lm@larsmichelsen.com>
+Date: Sun, 16 Jan 2011 12:47:35 +0100
+Message-ID: <1295178455.5847.36.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH] Added Europe/Berlin timezone to tzdata pkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,42 +31,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Jan 2011 00:45:58 -0000
+X-List-Received-Date: Sun, 16 Jan 2011 11:48:11 -0000
+X-Groupsio-MsgNum: 28068
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-bt5Ie+HDb3i2gmw8bnpE"
 
-I was missing the Europe/Berlin timezone in the tzdata package. So I
-added it to the package.
+--=-bt5Ie+HDb3i2gmw8bnpE
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Additionally increased the PR. Hope this OK for such a change - must
-admit that I am very new to OE.
-
-Signed-off-by: Lars Michelsen <lm@larsmichelsen.com>
----
- recipes/tzdata/tzdata.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/tzdata/tzdata.inc b/recipes/tzdata/tzdata.inc
-index dd5c2c9..5597232 100644
---- a/recipes/tzdata/tzdata.inc
-+++ b/recipes/tzdata/tzdata.inc
-@@ -3,7 +3,7 @@ SECTION = "base"
- PRIORITY = "optional"
- DEPENDS = "tzcode-native"
- 
--INC_PR = "r8"
-+INC_PR = "r9"
- 
- DEFAULT_TIMEZONE ?= "Europe/London"
- 
-@@ -132,6 +132,7 @@ FILES_${PN} += "${datadir}/zoneinfo/Pacific/Honolulu     \
-                 ${datadir}/zoneinfo/America/Sao_Paulo    \
-                 ${datadir}/zoneinfo/Europe/London        \
-                 ${datadir}/zoneinfo/Europe/Paris         \
-+                ${datadir}/zoneinfo/Europe/Berlin        \
-                 ${datadir}/zoneinfo/Africa/Cairo         \
-                 ${datadir}/zoneinfo/Europe/Moscow        \
-                 ${datadir}/zoneinfo/Asia/Dubai           \
--- 
-1.7.1
+Dear Lars,
 
 
+Am Sonntag, den 16.01.2011, 01:45 +0100 schrieb Lars Michelsen:
+> I was missing the Europe/Berlin timezone in the tzdata package. So I
+> added it to the package.
+>=20
+> Additionally increased the PR. Hope this OK for such a change - must
+> admit that I am very new to OE.
 
+thank you very much for your patch and welcome to OE.
+
+Could you please resend your patch (`[PATCH v2]`) with the following two
+points addressed.
+
+1. The commit summary is standardized and should start with the package
+name as documented in the commit policy [1].
+
+	tzdata: package `Europe/Berlin` timezone
+
+2. Although it probably does not matter, commit messages are normally
+written from a neutral view point(?) and personal comments are added
+after a `---` before the diff which starts also with `---`. When
+applying your patch, these remarks are left out then.
+
+> Signed-off-by: Lars Michelsen <lm@larsmichelsen.com>
+
+[=E2=80=A6]
+
+With these two issues addressed you can add
+
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+to the commit message when resending.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://wiki.openembedded.org/index.php/Commit_Policy
+[2] http://wiki.openembedded.org/index.php/How_to_submit_a_patch_to_OpenEmb=
+edded#Create_and_Commit_your_patch
+
+--=-bt5Ie+HDb3i2gmw8bnpE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk0y2tcACgkQPX1aK2wOHVhuCQCdGNKzsKUKQ+m3WClCj490QRQ2
+UfQAn04mMTpr5uXlMmgO5/QJ49AXz8IL
+=pK4D
+-----END PGP SIGNATURE-----
+
+--=-bt5Ie+HDb3i2gmw8bnpE--
