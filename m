@@ -1,35 +1,35 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>)
-	id 1PeuLA-0005eZ-3e; Mon, 17 Jan 2011 20:02:08 +0100
-Received: by iyj18 with SMTP id 18so5106955iyj.6
-	for <multiple recipients>; Mon, 17 Jan 2011 11:01:29 -0800 (PST)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PeuMl-0005i8-3G
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 20:03:47 +0100
+Received: by iwn8 with SMTP id 8so5022876iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jan 2011 11:03:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=qJ6NhZ1qoTWl2I2rv69tZMVdE+b6Eis/VMH25quqiac=;
-	b=KbRg01ctODcGTxb3PvuEOEYz2DOM5a42htZZfQpJiIRxwuDxa3ZpZx+5j+IzlYPM2N
-	gVhtlXwfGU2eXfDPe9uy3kZzwJ/FCG2zQuCj0OguRyJfWqytXg2GUEQWSjZQc9eC6muf
-	8pXGUCKvnne2gYN4orX9FN+663NmBwiHOesyg=
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=ezv9hPY5afOM4jGFm8PM954ZNfNhT/q7Zrbwddz0q7o=;
+	b=fTBfhv/S2G9sb9E8b3/eJGEx9YjDMFJX+qTgt6ytiXb6QVtPfhXM/ZFNdeq7mDvJvX
+	0UzprYF9nQzY0bUnTSXa890HMQKK1bi4dZYwGrOHXKYcGz7iTfv8vl1g6DyfITw4dwJn
+	JSORU9hv8TJv/zI+n1EhwJNytw9A9tKo0ONBQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=jUGpSmlHePDD/E1aFc8Me82nQU2vt/bmZldsvPLVZ7TYfXAr1tEpQ6kWtxTsJcRn9R
-	wqO+4wwa/Qw+TKGOZzjJCXK5qpt/szcpYlxVI5GSWTP0UVj1eOsOaUbf+0D+3UZr9f3h
-	lv4jRBbecqaCN7Q7cuCKtoAND9A/bvn/A9wFQ=
+	:content-type:content-transfer-encoding;
+	b=NJZUCxIbnB/GeHPx5ZmcRKI7T8GvABdfzz5+UNXmEchwvHh5DrVdhTSOZ2qTteH8I5
+	J2dyw8EDhMYtgm8QwT9Y+QfYFVrojScvtGXcWpVm4uKbByfTEPeNPtscgiWbpLxbSLHt
+	gkxsKzM6NXLwWrf32zduWkIc//GYf7ZPC/wCw=
 MIME-Version: 1.0
-Received: by 10.231.11.204 with SMTP id u12mr4701711ibu.109.1295290889695;
-	Mon, 17 Jan 2011 11:01:29 -0800 (PST)
-Received: by 10.231.213.234 with HTTP; Mon, 17 Jan 2011 11:01:29 -0800 (PST)
-In-Reply-To: <1295027350.14388.6527.camel@rex>
-References: <1295027350.14388.6527.camel@rex>
-Date: Mon, 17 Jan 2011 20:01:29 +0100
-Message-ID: <AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
+Received: by 10.231.11.204 with SMTP id u12mr4703770ibu.109.1295290991025;
+	Mon, 17 Jan 2011 11:03:11 -0800 (PST)
+Received: by 10.231.213.234 with HTTP; Mon, 17 Jan 2011 11:03:10 -0800 (PST)
+In-Reply-To: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+Date: Mon, 17 Jan 2011 20:03:10 +0100
+Message-ID: <AANLkTimZ5EO0OjXD668AU-ZC4uQUgOAzjM1gf+MK9Q5u@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-members@lists.openembedded.org
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Yocto Project and OE - Where now?
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,101 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 19:02:08 -0000
+X-List-Received-Date: Mon, 17 Jan 2011 19:03:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Richard,
+2011/1/17 Khem Raj <raj.khem@gmail.com>:
+> * Tested various builds seems to hold fine
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =A0conf/distro/minimal.conf | =A0 =A05 +++--
+> =A01 files changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+> index 5a19cbc..f495d13 100644
+> --- a/conf/distro/minimal.conf
+> +++ b/conf/distro/minimal.conf
+> @@ -108,7 +108,7 @@ INHERIT +=3D "recipe_sanity"
+> =A0# PREFERRED VERSIONS
+> =A0######################################################################=
+#######
+> =A0require conf/distro/include/preferred-e-versions.inc
+> -require conf/distro/include/preferred-opie-versions-1.2.4.inc
+> +require conf/distro/include/preferred-opie-versions-1.2.5.inc
+>
+> =A0PREFERRED_PROVIDER_opkg ?=3D "opkg"
+> =A0PREFERRED_PROVIDER_virtual/update-alternatives ?=3D "opkg"
+> @@ -119,7 +119,8 @@ PREFERRED_VERSION_qt4-embedded =3D "${PREFERRED_QT_VE=
+RSION}"
+> =A0PREFERRED_VERSION_qt4-embedded-gles =3D "${PREFERRED_QT_VERSION}"
+> =A0PREFERRED_VERSION_qt4-x11-free =3D "${PREFERRED_QT_VERSION}"
+> =A0PREFERRED_VERSION_qt4-x11-free-gles =3D "${PREFERRED_QT_VERSION}"
+> -
+> +PREFERRED_VERSION_perl =3D "5.10.1"
+> +PREFERRED_VERSION_perl-native =3D "5.10.1"
+> =A0######################################################################=
+#######
+> =A0# CONTENTS
+> =A0######################################################################=
+#######
+> --
+> 1.7.2.3
 
-Thanks for your post.
-I think you describe the issues at hand quite clearly.
-I would definitely be interested in working towards a new structure.
+No opinion on the opie stuff, but I'm using perl 5.10.1 for quite a
+while, so that part has my ack.
+(maybe split into two patches, one for opie, one for perl).
 
-The one thing that I found partially missing in your post are the
-actual design guidelines.
-
-You mention
-> * Creation of a subset of metadata that has a consistent high quality
-> =A0standard:
-> =A0 =A0- removal of legacy components (pkgconfig hacks, libtool hacks,
-> =A0 =A0 =A0legacy staging, unneeded compiler arguments)
-> =A0 =A0- consistent metadata layout, spacing, use of variables
-> =A0 =A0- migration away from outdated practises (e.g. use BBCLASSEXTEND)
-
-I fully agree with these but there are several other things in OE
-metadata that we should discuss and probably try to avoid.
-Without the aim of trying to be complete, I would like to name some,
-also with the aim to kick off the discussion on these, order to come
-to an accepted set of guidelines.
-
-- where possible stick to one recipe per package. This reduces the
-maintenance work and reduces the QA nightmare of lots of different
-permutations.
-I feel one recipe per package should be the common case for
-applications, and preferably also for libs (although I am well aware
-that especially in the latter case multiple versions cannot always be
-avoided).
-For kernel, u-boot and some toolchain parts , multiple recipes are unavoida=
-ble.
-When moving to a new version or when a recipe needs some more testing,
-I can imagine two versions existing for a while, but I feel this
-should be an exception.
-If a new version is not stable enough to be in the mainline, it should
-probably live in its own overlay, not in the main repos
-
-We should try to avoid the version diarrhea that some packages
-currently have in OE (e.g. I recall that at some point we had about 10
-abiword recipes, I can not really imagine anyone knowing the
-differences between these, and I fail to see the point in having
-these). There is no need to keep old versions around, as they are
-still retrievable from git (assuming git is used as SCM).
-
-- avoid DEFAULT_PREFERENCE. For packages with only one recipe it
-shouldn't be needed at all. New, not integrated or only partially
-tested recipes should reside in a separate overlay. Machine
-maintainers should know best what kernel and u-boot version works best
-for their machine. We do probably need to come up with a model on how
-to deal with version upgrades though. This could be done with
-different layers (e.g. bsp-sheevaplug and bsp-sheevaplug-next) or
-maybe there are two different machines (e.g. sheevaplug and
-sheevaplug-next). There are probably other solutions as well.
-
-- avoid unneeded .inc files. In case there is only one recipe they
-only complicate things as people need to examine two files. Of course
-if there are multiple recipes for a package they have some merits
-
-- avoid complex and/or unneeded python constructs in recipes. Ideally
-a recipe is a description of metadata and it should be able to
-describe it using variables only. In practice regularly functions like
-do_compile() will be needed though, but it is probably less desirable
-to write a complex piece of anonymous python to e.g. populate a -dev
-package. W.r.t. readability, maintainability and understandability it
-is probably better to just write it out. The goal of a recipe is not
-to show off how well-versed one is in python, the goal should be to
-come up with something that Joe or Jane Average also can understand.
-
-- strong directory naming for patches. E.g. for foo, patches only for
-1.2 should go in foo-1.2/, patches for foo 1.x should go to foo-1/ if
-that is possible or otherwise in foo/. Patches should only go in
-files/ if they are intended for multiple recipes where the recipes
-have different names (e.g. if foo and foobar recipes exist in the same
-dir and they need the same foopatch that one could live in files/
-
-- no FILESPATHPKG to different version of a recipe. E.g. in the past
-we had the glibc_2.x recipe pointing to the patch dir of 2.y (forgot
-the actual values of x and y). If patches are for multiple recipes
-they should go in a common higher level named dir (e.g. in the case
-above glibc-2 or glibc or maybe the dir can be named differently and
-FILESPATHPKG being used. Having patches live in other dirs where it is
-not obvious is error prone when recipes are obsoleted.
-
-
-These points were the things that at this moment popped up in my mind.
-There are undoubtly more (e.g order of metadata, mandatory metadata).
-It seems useful to agree on where we want to go to before actually
-starting to walk (or run :-) ) in an undefined direction and waste
-effort
-
-Feel free to add and discuss! Frans.
+Frans
 
 
