@@ -1,21 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PeceH-00082x-SA for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 01:08:41 +0100
-Received: from f053033090.adsl.alicedsl.de ([78.53.33.90]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pecdj-0008Hi-BX for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 00:08:07 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jan 2011 01:08:06 +0100
-Message-ID: <1295222886.13967.27.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: [RFC][PATCH] libomxil-bellagio: inherit class `pkgconfig` to stage pkg-config file `libomxil-bellagio.pc`
+	(envelope-from <koen@dominion.thruhere.net>) id 1PekCV-0004WL-Ec
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 09:12:31 +0100
+Received: by wwi18 with SMTP id 18so1845855wwi.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jan 2011 00:11:52 -0800 (PST)
+Received: by 10.216.17.3 with SMTP id i3mr1926284wei.80.1295251912707;
+	Mon, 17 Jan 2011 00:11:52 -0800 (PST)
+Received: from [172.20.1.5] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id
+	j49sm2211072wer.14.2011.01.17.00.11.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 17 Jan 2011 00:11:52 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1295215324-10460-3-git-send-email-eric@eukrea.com>
+Date: Mon, 17 Jan 2011 09:11:51 +0100
+Message-Id: <278C6F3F-1A52-483E-A013-7449E4422E95@dominion.thruhere.net>
+References: <1295215324-10460-1-git-send-email-eric@eukrea.com>
+	<1295215324-10460-2-git-send-email-eric@eukrea.com>
+	<1295215324-10460-3-git-send-email-eric@eukrea.com>
+To: =?iso-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+X-Mailer: Apple Mail (2.1082)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 3/4] angstrom-2010: prefer busybox 1.18.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,97 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 00:08:41 -0000
-X-Groupsio-MsgNum: 28085
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-aiSo5eATDe/kn9rglOuq"
-
---=-aiSo5eATDe/kn9rglOuq
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 17 Jan 2011 08:12:31 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Date: Sun Jan 16 20:16:47 2011 +0100
 
-`libomxil-bellagio` distributes a pkg-config file [1] which is only put to =
-the following location with the following content.
+Op 16 jan 2011, om 23:02 heeft Eric B=E9nard het volgende geschreven:
 
-	$ more angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconf=
-ig/libomxil-bellagio.pc
-	prefix=3D/usr
-	exec_prefix=3D/usr
-	libdir=3D/usr/lib
-	includedir=3D/usr/include
-	toolsdir=3D/usr/bin
-	pluginsdir=3D${libdir}/bellagio
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> Cc: Koen Kooi <koen@openembedded.org>
 
-	Name: libomxil
-	Description: OpenMAX Integration Layer library
-	Version: 0.9.2.1
-	Libs: -L${libdir} -lomxil-bellagio
-	Cflags: -I${includedir} -I${includedir}/bellagio
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-To make it useful for crosscompiling inherit `pkgconfig.bbclass`.
+> ---
+> .../include/angstrom-2010-preferred-versions.inc   |    2 +-
+> 1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc =
+b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> index cc910c2..5532f29 100644
+> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
+> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
+> @@ -12,7 +12,7 @@ PREFERRED_VERSION_autoconf =3D "2.65"
+> PREFERRED_VERSION_autoconf-native =3D "2.65"
+> PREFERRED_VERSION_automake =3D "1.11.1"
+> PREFERRED_VERSION_automake-native =3D "1.11.1"
+> -PREFERRED_VERSION_busybox 	=3D "1.18.1"
+> +PREFERRED_VERSION_busybox 	=3D "1.18.2"
+> PREFERRED_VERSION_cairo		=3D "1.10.0"
+> PREFERRED_VERSION_dbus 		=3D "1.2.24"
+> PREFERRED_VERSION_dropbear      =3D "0.52"
+> --=20
+> 1.6.3.3
+>=20
 
-[1] http://omxil.git.sourceforge.net/git/gitweb.cgi?p=3Domxil/omxil;a=3Dblo=
-b;f=3Dlibomxil-bellagio.pc.in;h=3Dabae71bf4ade80e26b28a755f214a96285fd5c47;=
-hb=3D772f0eca88b242ffb5469e8e381c63ce1f7cd3e1
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-The reason for tagging this `[RFC]` is, that inheriting `pkgconfig.bbclass`=
- does not change anything in the behavior. Could commit c2c8fe4c [1]
 
-	pkgconfig.bbclass: don't blindly install every .pc file
-
-be the reason for this? But I do not see a warning printed. I tried the fol=
-lowing, but it did not work. (But because of a path issue.)
-
-	+do_install_append () {
-	+       install -d ${D}${libdir}/pkgconfig
-	+       install -m 0644 ${WORKDIR}/libomxil-bellagio.pc ${D}${libdir}/pkgc=
-onfig/
-	+}
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc2c8fe4=
-c5629add94bd0b922f5b3446624a9f4d8
----
- recipes/openmax/libomxil-bellagio.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/openmax/libomxil-bellagio.inc b/recipes/openmax/libomx=
-il-bellagio.inc
-index 8c3a82c..8ec327e 100644
---- a/recipes/openmax/libomxil-bellagio.inc
-+++ b/recipes/openmax/libomxil-bellagio.inc
-@@ -3,11 +3,11 @@ LICENSE =3D "LGPLv2"
- DEPENDS =3D "alsa-lib ffmpeg \
-            ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad', d)}=
-"
-=20
--INC_PR =3D "r7"
-+INC_PR =3D "r8"
-=20
- SRC_URI =3D "${SOURCEFORGE_MIRROR}/omxil/${PN}-${PV}.tar.gz"
-=20
--inherit autotools
-+inherit autotools pkgconfig
-=20
- FILES_${PN} +=3D "${libdir}/bellagio/*.so ${libdir}/bellagio/*.la"
- FILES_${PN}-dev +=3D "${libdir}/bellagio/*.a"
---=20
-1.7.2.3
-
---=-aiSo5eATDe/kn9rglOuq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk0ziGYACgkQPX1aK2wOHVjkbACfa5DHeAUuj9VY7IaDyN2IaljF
-FhIAnRCuEzcpOef249ms4D1jWqJf2zQC
-=qAyd
------END PGP SIGNATURE-----
-
---=-aiSo5eATDe/kn9rglOuq--
