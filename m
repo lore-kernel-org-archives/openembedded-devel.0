@@ -1,30 +1,35 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1PekCV-0004WL-Ec
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 09:12:31 +0100
-Received: by wwi18 with SMTP id 18so1845855wwi.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PekEP-0004XX-VP for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 09:14:30 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PekDp-0003Qo-Qh for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 09:13:53 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jan 2011 09:13:53 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 00:11:52 -0800 (PST)
-Received: by 10.216.17.3 with SMTP id i3mr1926284wei.80.1295251912707;
-	Mon, 17 Jan 2011 00:11:52 -0800 (PST)
-Received: from [172.20.1.5] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id
-	j49sm2211072wer.14.2011.01.17.00.11.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 17 Jan 2011 00:11:52 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1082)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1295215324-10460-3-git-send-email-eric@eukrea.com>
-Date: Mon, 17 Jan 2011 09:11:51 +0100
-Message-Id: <278C6F3F-1A52-483E-A013-7449E4422E95@dominion.thruhere.net>
-References: <1295215324-10460-1-git-send-email-eric@eukrea.com>
-	<1295215324-10460-2-git-send-email-eric@eukrea.com>
-	<1295215324-10460-3-git-send-email-eric@eukrea.com>
-To: =?iso-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-X-Mailer: Apple Mail (2.1082)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/4] angstrom-2010: prefer busybox 1.18.2
+	Mon, 17 Jan 2011 09:13:53 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 17 Jan 2011 09:13:42 +0100
+Message-ID: <ih0tnm$ra$1@dough.gmane.org>
+References: <1295220721.13967.13.camel@mattotaupa>	<1295220990.13967.18.camel@mattotaupa>
+	<1295221434.13967.25.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1295221434.13967.25.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 3/3] libomxil-bellagio_git: add Git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,39 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 08:12:31 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 Jan 2011 08:14:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Op 16 jan 2011, om 23:02 heeft Eric B=E9nard het volgende geschreven:
-
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-> Cc: Koen Kooi <koen@openembedded.org>
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
+On 17-01-11 00:43, Paul Menzel wrote:
+> Date: Mon, 17 Jan 2011 00:15:51 +0100
+> 
+> The last release is over a year old (2009-12-23).
+> 
+> Build tested with `angstrom-2008.1` for `MACHINE = "beagleboard"`.
+> 
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 > ---
-> .../include/angstrom-2010-preferred-versions.inc   |    2 +-
-> 1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/conf/distro/include/angstrom-2010-preferred-versions.inc =
-b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> index cc910c2..5532f29 100644
-> --- a/conf/distro/include/angstrom-2010-preferred-versions.inc
-> +++ b/conf/distro/include/angstrom-2010-preferred-versions.inc
-> @@ -12,7 +12,7 @@ PREFERRED_VERSION_autoconf =3D "2.65"
-> PREFERRED_VERSION_autoconf-native =3D "2.65"
-> PREFERRED_VERSION_automake =3D "1.11.1"
-> PREFERRED_VERSION_automake-native =3D "1.11.1"
-> -PREFERRED_VERSION_busybox 	=3D "1.18.1"
-> +PREFERRED_VERSION_busybox 	=3D "1.18.2"
-> PREFERRED_VERSION_cairo		=3D "1.10.0"
-> PREFERRED_VERSION_dbus 		=3D "1.2.24"
-> PREFERRED_VERSION_dropbear      =3D "0.52"
-> --=20
-> 1.6.3.3
->=20
+> 1. I hope the package numbering is correctly. I used the Freesmartphone packages as an example.
+> 2. Is a `DP = "-1"` needed? Users of this recipe speak up please!
+
+> +SRCREV = "772f0eca88b242ffb5469e8e381c63ce1f7cd3e1"
+> +SRC_URI = "git://omxil.git.sourceforge.net/gitroot/omxil/omxil;protocol=git"
+> +PV = "0.9.2.1+gitr${SRCPV}"
+> +PR = "${INC_PR}.0"
+
+For get recipes we generally do:
+
+PR_append = "+gitr${SRCPV}" to keep the ugly hash out of PV, but keep it
+available to the users
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNM/o2MkyGM64RGpERAiHnAJsGOFj7m3bh8Z5NepPB1ny1Z0hFBACgh9jW
+LLatQnq+F8sl+/wKpvm+PbQ=
+=IoJM
+-----END PGP SIGNATURE-----
 
 
 
