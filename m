@@ -1,32 +1,27 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
+Received: from 27.mail-out.ovh.net ([91.121.30.210])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PevPW-0007W8-5v
+	(envelope-from <eric@eukrea.com>) id 1PevSf-0007aw-FG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 21:10:42 +0100
-Received: (qmail 7551 invoked by uid 503); 17 Jan 2011 19:41:06 -0000
-Received: from b6.ovh.net (HELO mail432.ha.ovh.net) (213.186.33.56)
-	by 30.mail-out.ovh.net with SMTP; 17 Jan 2011 19:41:05 -0000
+	Mon, 17 Jan 2011 21:13:57 +0100
+Received: (qmail 28991 invoked by uid 503); 17 Jan 2011 20:15:49 -0000
+Received: from b9.ovh.net (HELO mail623.ha.ovh.net) (213.186.33.59)
+	by 27.mail-out.ovh.net with SMTP; 17 Jan 2011 20:15:43 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 17 Jan 2011 22:09:59 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 17 Jan 2011 22:09:57 +0200
-Message-ID: <4D34A214.8000908@eukrea.com>
-Date: Mon, 17 Jan 2011 21:09:56 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	by b0.ovh.net with SMTP; 17 Jan 2011 22:14:13 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 17 Jan 2011 22:14:11 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1295215324-10460-1-git-send-email-eric@eukrea.com>
-	<4D337B88.1030002@gmail.com>
-In-Reply-To: <4D337B88.1030002@gmail.com>
-X-Ovh-Tracer-Id: 11679241210338192713
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+Date: Mon, 17 Jan 2011 21:12:37 +0100
+Message-Id: <1295295157-20506-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 11750735854407036233
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH 1/4] busybox: introduce stable version 1.18.2
+Subject: [PATCH] busybox-1.18.2: add fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,19 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 20:10:42 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 17 Jan 2011 20:13:57 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-On 17/01/2011 00:13, Khem Raj wrote:
-> On 1/16/2011 2:02 PM, Eric Bénard wrote:
->> which is 1.18.1 + all the patches we already had in OpenEmbedded
->>
->> Signed-off-by: Eric Bénard<eric@eukrea.com>
-> Does busybox has predictable release schedules for minor releases ?
->
-none that I'm aware of.
+- insmod: check for module read errors
+bb's commit id : 094cc51e50bdb877fa4c245dbde47e4dfbf94387
 
-Eric
+- following Bernhard Reutner-Fisher's request, busybox patches
+don't have anymore timestamp inside which should make them fetchable
+instead of integrating them in OE so I try this way.
+
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/busybox/busybox_1.18.2.bb |    9 +++++++--
+ 1 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/busybox/busybox_1.18.2.bb b/recipes/busybox/busybox_1.18.2.bb
+index ca36a52..71b50c8 100644
+--- a/recipes/busybox/busybox_1.18.2.bb
++++ b/recipes/busybox/busybox_1.18.2.bb
+@@ -1,6 +1,11 @@
+ require busybox_1.1x.inc
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
++
++SRC_URI += " \
++	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-modprobe-small.patch;name=patch01 \
++	"
+ 
+ SRC_URI[md5sum] = "69a82091e5710b72db5ce0e14e7c0cd7"
+ SRC_URI[sha256sum] = "aa7e1cec8cd9c7f4e56098b9e4bb2ab5d593d5a35f766ad9e6a312289bf57080"
+-
++SRC_URI[patch01.md5sum] = "dda72eaf33d19d6a0ac78e46e9411cfd"
++SRC_URI[patch01.sha256sum] = "ed5d83040414d035138bf484ccd514817342b143baff43ffff6ba556952de7ed"
+-- 
+1.6.3.3
+
 
 
