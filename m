@@ -1,32 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PexNl-0001ov-9i
+	(envelope-from <jefflance01@gmail.com>) id 1Pexnz-0002Es-DT
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 23:17:01 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PexN8-0003Te-4m from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 14:16:22 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 17 Jan 2011 14:16:20 -0800
-Received: from [172.30.80.246] ([172.30.80.246]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 17 Jan 2011 15:16:19 -0700
-Message-ID: <4D34BFB2.6030605@mentor.com>
-Date: Mon, 17 Jan 2011 15:16:18 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 17 Jan 2011 23:44:07 +0100
+Received: by gwaa12 with SMTP id a12so2160689gwa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jan 2011 14:43:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=87yo/I1LRVzodUuy//UWpv25QjKNPNZR61aF6xINdwI=;
+	b=imKc6Td746/Zgtp+0FMCesj4BdyeIwtMxqL9fj4ByZNTflqUSzo06UEqUTglfPtv57
+	epfGKVQHp1R2dbRBI2etnrcB5xk+E6QEIe0YI2WsrnQz7KWio61Gx/qIOsYSZYe6bWUH
+	12GrGb7gkjWXMQW/EZMVRX1EDoG7UejYt6Eug=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=eOOFpa+OJuCSMvIf04w+k6KJIF5D38/xqqTRcVHrTvII5gTkscZq0+h9df2RozBnP1
+	7JZg6JXATKhbY+ncrKWBdDv8ljg3tl6DGYbf4qvkLB+ncWGOpmt4lbkA+cG08d7hRwGX
+	EPGJVEm1lgbw8jZMR39D2Sk/0uFT3R08fxaXc=
+Received: by 10.147.125.7 with SMTP id c7mr6581369yan.30.1295304208913;
+	Mon, 17 Jan 2011 14:43:28 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id g58sm2967288yhd.5.2011.01.17.14.43.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 17 Jan 2011 14:43:28 -0800 (PST)
+From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D34BD0A.3010206@atmel.com>
-In-Reply-To: <4D34BD0A.3010206@atmel.com>
-X-OriginalArrivalTime: 17 Jan 2011 22:16:20.0169 (UTC)
-	FILETIME=[2AEB9B90:01CBB694]
-Subject: Re: Bulding multiple U-Boot configs for one machine
+Date: Mon, 17 Jan 2011 16:42:08 -0600
+Message-Id: <1295304128-13887-1-git-send-email-j-lance1@ti.com>
+X-Mailer: git-send-email 1.6.3.3
+Cc: Jeff Lance <j-lance1@ti.com>
+Subject: [PATCH 1/1] am-benchmarks: updating SRCREV - Makefile update to support CCSv5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 22:17:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Jan 2011 22:44:07 -0000
 
-On 01/17/2011 03:04 PM, Ulf Samuelsson wrote:
-> Managed to get some time over and checked in a recipe
-> for u-boot-2010.12 which builds all u-boot configs
-> specified in the UBOOT_MACHINES (note "S" at the end)
->
-> The frecipe is available in a private branch:
-> "ulf/linux-2.6.30-2011-01-16" (or similar).
->
-> There is a SAM9M10 machine checked in as well as a test case.
-> grep for UBOOT_MACHINES in the conf/machine directory to find out which.
->
-> Note that
-> UBOOT_MACHINE = "at91sam9m10g45ek_config"
->
-> but
->
-> UBOOT_MACHINES = "at91sam9m10g45ek_dataflash at91sam9m10g45ek_sd"
->
-> I.E: No "_config" in the list.
->
-> The goal of the new branch is to test booting from an SD-Card
-> without any other flash in the system.
-> Have tested this outside openembedded so far, but
-> the current branch is still to be tested on a board.
+  * Update SRCREV
+    * update makefile to support both debug and release versions supported by CCSv5
 
-I can see a number of other use cases for this type of functionality so 
-+1 on the concept from me.
+Signed-off-by: Jeff Lance  <j-lance1@ti.com>
+---
+ recipes/ti/am-benchmarks_1.2.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/recipes/ti/am-benchmarks_1.2.bb b/recipes/ti/am-benchmarks_1.2.bb
+index 88b38e7..5ae0585 100644
+--- a/recipes/ti/am-benchmarks_1.2.bb
++++ b/recipes/ti/am-benchmarks_1.2.bb
+@@ -8,7 +8,7 @@ LICENSE = "BSD"
+ SECTION = "system"
+ PRIORITY = "optional"
+ 
+-SRCREV = "58"
++SRCREV = "59"
+ PR = "r2+svnr${SRCPV}"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.6.3.3
+
 
 
