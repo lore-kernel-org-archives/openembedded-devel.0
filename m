@@ -1,35 +1,38 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PeyF3-0002xz-A1
+	(envelope-from <bgamari.foss@gmail.com>) id 1PeyOc-00039P-A9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 00:12:05 +0100
-Received: by yxd5 with SMTP id 5so2168292yxd.6
+	Tue, 18 Jan 2011 00:21:58 +0100
+Received: by qyk36 with SMTP id 36so5487596qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 15:11:27 -0800 (PST)
+	Mon, 17 Jan 2011 15:21:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=snSTzU94ywbH0v2PHdobP+VtfnQpM45bLlEauoFqOl0=;
-	b=fxsvL3ZkK9MC2HXfLDR2RVVnIxdaS1Zttd/JDMq+IfZd5Z/LAymH/Y96vC8RUJHlLy
-	l3VUuIswOcDJRDkkpJL14ITxn/xehh1ExCO0RpwmT6Ves1d71TldCmAotvszz8cT6oTN
-	s+A/xZk22p00rydfH+uZ++5aGpz0oTGXMtLts=
+	h=domainkey-signature:from:to:subject:user-agent:date:message-id
+	:mime-version:content-type;
+	bh=HUyN0neMzFTIh8FSWUn2z4zwT9K2ekBJ4qUkfBuAM2I=;
+	b=f/su2myTotbTYnRPdboulAT+P4aa/wGietLl+RaPIjeNQnLzGgIc1wFezm++QsRIKu
+	VbGukN0oJEwiggGHthxdq2koa4mqcqNHZPlpFAtotcjBbI2IGyrsJjhE67jiSmdA7g7q
+	yRh2iQUBBpME5HFwFS0dXSqGf2xTHKcv0Hh6c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=RnLD4g3NFBUgMD7tAVeQtmJv2Ozui3wtkZMjJk9Z5XRkgCfES1JSlcJv9cGo9jTI2i
-	jP7wkAAnwWZL87yIuh2GHvP3+Y12STBeOXbhCDiK6y+ttfB/PGXM1qai0wb9B9xz5F/M
-	1mxFJ+L6Jrgo6LQbANrdcNagyTFUZsDpIy5no=
-Received: by 10.90.10.21 with SMTP id 21mr5267004agj.112.1295305886943; Mon,
-	17 Jan 2011 15:11:26 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Mon, 17 Jan 2011 15:11:05 -0800 (PST)
-In-Reply-To: <1295295157-20506-1-git-send-email-eric@eukrea.com>
-References: <1295295157-20506-1-git-send-email-eric@eukrea.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 17 Jan 2011 15:11:05 -0800
-Message-ID: <AANLkTikPh8nGerX3-om_qADKb2YbRar6EBw6q-4pGyhn@mail.gmail.com>
+	h=from:to:subject:user-agent:date:message-id:mime-version
+	:content-type;
+	b=VH8XMKl9HJtWwzNKW1Dif7G73kBaWSt+spCwQX/ofNUC/8KLCoOKI6lOYRgBv5D/KK
+	iGkKsvt/Hq9Cy4IW4pf/yTC4nmVPFgldyVhbostp8TBtkkLmaaDOlvJt9N0HWS1hD/R2
+	QbSvDntdCBedJMH2mMIQr/Cd5I3ddl7mcH+Ok=
+Received: by 10.229.81.206 with SMTP id y14mr4125801qck.127.1295306476918;
+	Mon, 17 Jan 2011 15:21:16 -0800 (PST)
+Received: from localhost (gamari.physics.umass.edu [128.119.56.223])
+	by mx.google.com with ESMTPS id e29sm3269189qck.15.2011.01.17.15.21.16
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 17 Jan 2011 15:21:16 -0800 (PST)
+From: Ben Gamari <bgamari.foss@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] busybox-1.18.2: add fix
+User-Agent: Notmuch/0.5-17-g2d1420b (http://notmuchmail.org) Emacs/23.1.1
+	(x86_64-pc-linux-gnu)
+Date: Mon, 17 Jan 2011 18:21:15 -0500
+Message-ID: <87hbd7ruac.fsf@gmail.com>
+MIME-Version: 1.0
+Subject: Using native package build tree when building target package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,56 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 23:12:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 Jan 2011 23:21:58 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On Mon, Jan 17, 2011 at 12:12 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> - insmod: check for module read errors
-> bb's commit id : 094cc51e50bdb877fa4c245dbde47e4dfbf94387
->
-> - following Bernhard Reutner-Fisher's request, busybox patches
-> don't have anymore timestamp inside which should make them fetchable
-> instead of integrating them in OE so I try this way.
->
-> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+Today I've been looking at the icu package, which is quite out-of-date
+in the repository. Unfortunately, it seems that the latest version (4.6)
+requires that the absolute path to a source tree built for the host be
+passed to configure.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+Does anyone have any clever ideas concerning how this might be
+accomplished? Does this mean that we'll need to merge the icu and
+icu-native recipes? My bitbake-fu is pretty weak, so I'd appreciate any
+help. Thanks!
 
-> ---
-> =C2=A0recipes/busybox/busybox_1.18.2.bb | =C2=A0 =C2=A09 +++++++--
-> =C2=A01 files changed, 7 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/busybox/busybox_1.18.2.bb b/recipes/busybox/busybox_=
-1.18.2.bb
-> index ca36a52..71b50c8 100644
-> --- a/recipes/busybox/busybox_1.18.2.bb
-> +++ b/recipes/busybox/busybox_1.18.2.bb
-> @@ -1,6 +1,11 @@
-> =C2=A0require busybox_1.1x.inc
-> -PR =3D "${INC_PR}.0"
-> +PR =3D "${INC_PR}.1"
-> +
-> +SRC_URI +=3D " \
-> + =C2=A0 =C2=A0 =C2=A0 http://busybox.net/downloads/fixes-1.18.2/busybox-=
-1.18.2-modprobe-small.patch;name=3Dpatch01 \
-> + =C2=A0 =C2=A0 =C2=A0 "
->
-> =C2=A0SRC_URI[md5sum] =3D "69a82091e5710b72db5ce0e14e7c0cd7"
-> =C2=A0SRC_URI[sha256sum] =3D "aa7e1cec8cd9c7f4e56098b9e4bb2ab5d593d5a35f7=
-66ad9e6a312289bf57080"
-> -
-> +SRC_URI[patch01.md5sum] =3D "dda72eaf33d19d6a0ac78e46e9411cfd"
-> +SRC_URI[patch01.sha256sum] =3D "ed5d83040414d035138bf484ccd514817342b143=
-baff43ffff6ba556952de7ed"
-> --
-> 1.6.3.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+- Ben
 
 
