@@ -1,44 +1,40 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <neil@gumstix.com>) id 1PetwK-0004lI-AI
+	(envelope-from <martin.jansa@gmail.com>) id 1PeuD5-00055Y-KA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 19:36:29 +0100
-Received: from homiemail-a76.g.dreamhost.com (caiajhbdccah.dreamhost.com
-	[208.97.132.207])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id DF28B17A1FE
+	Mon, 17 Jan 2011 19:53:48 +0100
+Received: by fxm17 with SMTP id 17so6238962fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 09:29:51 -0800 (PST)
-Received: from homiemail-a76.g.dreamhost.com (localhost [127.0.0.1])
-	by homiemail-a76.g.dreamhost.com (Postfix) with ESMTP id 0592E45806E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 09:29:04 -0800 (PST)
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gumstix.com; h=message-id:date
-	:from:mime-version:to:subject:content-type:
-	content-transfer-encoding; q=dns; s=gumstix.com; b=SwzJhBzz6oSph
-	pumfayv2sWLns2krgBjhje2WGMIsqI2mPX2TgpxAT3ljVeLBN4FC7aZjj5yMCCVc
-	vT/HexmeYwzjgFVHxPUJ7KfFoTC9LDAH3E/qCBLZ99Ter1Y9/p2xIgCsVqEHz9TD
-	uFa6JMSCxG3UXg0vbCEsa89LXHLN34=
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=gumstix.com; h=message-id
-	:date:from:mime-version:to:subject:content-type:
-	content-transfer-encoding; s=gumstix.com; bh=yhoi/1Ye/oppdBgRTYB
-	74SqRzzI=; b=gNlpQPE4Ha7Yl3VxSSmPOWdqxqFLpiOQLzSDuy151gaB7DlrnMQ
-	aXadK9dCmQuhhhBalMJjn36fiu5cHiMOzTiujDlVO1CkAlQQ+mDug/1c97lErm6F
-	nfzzCVYCqpSS/CKkz7SPfGGArvllipJnNvbekmUo45Zgf9Gko+iWYwFk=
-Received: from [10.0.1.35] (s64-180-61-141.bc.hsia.telus.net [64.180.61.141])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: neil@gumstix.com)
-	by homiemail-a76.g.dreamhost.com (Postfix) with ESMTPSA id D547245806A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 09:29:04 -0800 (PST)
-Message-ID: <4D347C60.6000805@gumstix.com>
-Date: Mon, 17 Jan 2011 09:29:04 -0800
-From: Neil MacMunn <neil@gumstix.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Mon, 17 Jan 2011 10:53:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=aBGcQnvQ+Y9wSu7lD+6EzvOwsALdLZVo6eQeqmxM7oU=;
+	b=l2DIa+bZJIq9FM2F+PL/79zQ2B5c3B9/ydfI1PLPOMqTdju9zim2xDgXRM89p1Gbfd
+	XmnC6/2l3nqoYRnRfvA9JSgpP9W7RdstgrYUEeQDLv9AjIGFn0cYmY5rBoKLKyjheXIz
+	BUlgPoFkuINCR0A08YT+Go28ko0CL4wfGka0s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=kXPCzzkAMVMxhood+hZg8I28uMyssuMyzfefWIjesP3UO6hWEz6G7nhWP+4MUNW5Rv
+	VLeZ8uDIPsD0TrxzvSgtaw/Njjn71vVb7WKr31m+yDo/Lfgc3y60cqI8VGWZso9kdY/Y
+	jgBNIxPP1LymaJ9oMkxNxXKM1WgPk18r8yFZE=
+Received: by 10.223.83.144 with SMTP id f16mr5251595fal.4.1295290386617;
+	Mon, 17 Jan 2011 10:53:06 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id n3sm1794579faa.5.2011.01.17.10.53.04
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 17 Jan 2011 10:53:05 -0800 (PST)
+Date: Mon, 17 Jan 2011 19:53:45 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110117185345.GK21179@jama>
+References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+	<1295286639-4901-2-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: EFL_SRCREV bump breaks GPE/enlightenment
+In-Reply-To: <1295286639-4901-2-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH 2/2] sane-toolchain.inc: Prefer binutils 2.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,41 +48,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 18:36:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Jan 2011 18:53:48 -0000
+X-Groupsio-MsgNum: 28104
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="iSeZnk6FyAS3EJ1y"
+Content-Disposition: inline
 
-Changing to EFL_SRCRV 55319 causes display problems for buttons and the 
-workspace manager. Mousing over the main menu causes Xinit.d to restart.
+--iSeZnk6FyAS3EJ1y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-before crash:
+On Mon, Jan 17, 2011 at 09:50:39AM -0800, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-# ps fax
-<snip>
-   955 ?        Ss     0:00 gpe-dm
-   958 tty3     Ss+    0:00  \_ Xorg -br -pn -dpi 100 :0 -noreset
-   959 ?        S      0:00  \_ run-parts /etc/X11/Xinit.d
-  1036 ?        S<L    0:03      \_ /usr/bin/enlightenment
-<snip>
+I'm using it locally for a while and looks ok.
 
-after:
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-#ps fax
-<snip>
-   955 ?        Ss     0:00 gpe-dm
-   958 tty3     Ss+    0:01  \_ Xorg -br -pn -dpi 100 :0 -noreset
-  1100 ?        S      0:00  \_ run-parts /etc/X11/Xinit.d
-  1139 ?        S<L    0:03      \_ /usr/bin/enlightenment
-<snip>
+> ---
+>  conf/distro/include/sane-toolchain.inc |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include=
+/sane-toolchain.inc
+> index 642f289..dd06650 100644
+> --- a/conf/distro/include/sane-toolchain.inc
+> +++ b/conf/distro/include/sane-toolchain.inc
+> @@ -6,7 +6,7 @@
+> =20
+>  # Base line versions, good for most things
+>  PREFERRED_GCC_VERSION                ?=3D "4.5"
+> -PREFERRED_BINUTILS_VERSION           ?=3D "2.20.1"
+> +PREFERRED_BINUTILS_VERSION           ?=3D "2.21"
+>  PREFERRED_UCLIBC_VERSION             ?=3D "git"
+>  PREFERRED_EGLIBC_VERSION             ?=3D "2.12"
+>  PREFERRED_GLIBC_VERSION              ?=3D "2.10.1"
+> --=20
+> 1.7.2.3
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Reverted changes to e-base.bbclass seems to fix the problem
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-# git revert 004321e0878162331908acda8bdaaa31a2aa6278
-# git revert 2c7181fda31fa0bc215b5425ef872361944f4ae5
+--iSeZnk6FyAS3EJ1y
+Content-Type: application/pgp-signature
 
-I'm using the omap3-desktop-image on a Gumstix Overo.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
+iEYEARECAAYFAk00kDkACgkQN1Ujt2V2gBxhvQCgniI4rvs3llhkLmbWR3CkViBB
+4CYAn3sxbPNL4cNBXzXr7bRzJNWu7peu
+=PQNA
+-----END PGP SIGNATURE-----
 
-Neil
-
-
+--iSeZnk6FyAS3EJ1y--
