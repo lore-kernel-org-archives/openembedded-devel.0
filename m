@@ -1,35 +1,38 @@
 Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PetEh-0003iv-W1
+	(envelope-from <raj.khem@gmail.com>) id 1PetEk-0003iw-Hx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 18:51:24 +0100
-Received: by gyh20 with SMTP id 20so2049849gyh.6
+	Mon, 17 Jan 2011 18:51:26 +0100
+Received: by gyh20 with SMTP id 20so2049879gyh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 09:50:45 -0800 (PST)
+	Mon, 17 Jan 2011 09:50:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=W7oCtlUvg1RS24+TEpW1hFxLY/L8aIadopS5TvTQX4I=;
-	b=x/+swm5M65Peb8vAsmlJv7rftYYvC+TgXm6TEoZO/eULsbRVEp5o4LdSxVKZ3mZtAv
-	g8BniS6nUqQgKengRNnVWcXK1zzLF65khAL7dpqfzHyij4QS9YzG+VJsjLUg6bFDKB1b
-	UnllzBwCvGYj+1Sch/GesQDXxseRBdCAV2px8=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=5wxR5GAi+5ydyBm/y9A97XvKYkr+CYxMjk0B9bVxmwA=;
+	b=K4FfkW6Ka8Nm1K1IMqCLAMHw1rAfTqYn9fbm2B86ZVZTmEXtC9kxprHZf9zVucKPzq
+	GYKuBNEpcDbXFt5eucCILTzSuRWcREx+qgiIXHEBu9OYsB3m00FICVPHetn2TzHMp5rj
+	Ux3cQfBjn08nM/6YJfkAx62MizD9VUI0EG4vc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=HNVQzQgW3+oPf4leQBOoTkXBbr7+QnO7TUYNgFtY5IggUB04nsZ1+NvJOT7Th+Janb
-	mh0ftNtSmwyzPQLIb0fJFUGUSdDychqgCpJmn5m5t7v685dt1SoPnwjUEjcGsFCi0cXV
-	4hvoawaBPhxOg4e1BYznkkfzKWCs7/jZj5JLk=
-Received: by 10.100.125.1 with SMTP id x1mr2687993anc.82.1295286645449;
-	Mon, 17 Jan 2011 09:50:45 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=ecj2HGMaKDjepyCVWDjZNHUaMJCgfOUpSuzT5jp0MMRmNTdk5n4PKOrbajMka1fiVI
+	SmMopjkG39MJYIL5TAKu01gpK9LjcQ8sMlcYILpwwQbfZxUhYvv0HXk40u8JC9mGlqXL
+	klE3Hpa0YQq/5ZO7RR35q+0JpiNriIXOxenIs=
+Received: by 10.91.35.34 with SMTP id n34mr4869650agj.203.1295286647905;
+	Mon, 17 Jan 2011 09:50:47 -0800 (PST)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id i10sm5754693anh.12.2011.01.17.09.50.43
+	by mx.google.com with ESMTPS id i10sm5754693anh.12.2011.01.17.09.50.46
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 17 Jan 2011 09:50:44 -0800 (PST)
+	Mon, 17 Jan 2011 09:50:47 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jan 2011 09:50:38 -0800
-Message-Id: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+Date: Mon, 17 Jan 2011 09:50:39 -0800
+Message-Id: <1295286639-4901-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.2.3
-Subject: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
+In-Reply-To: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+Subject: [PATCH 2/2] sane-toolchain.inc: Prefer binutils 2.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,38 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 17:51:24 -0000
-
-* Tested various builds seems to hold fine
+X-List-Received-Date: Mon, 17 Jan 2011 17:51:26 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/distro/minimal.conf |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+ conf/distro/include/sane-toolchain.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
-index 5a19cbc..f495d13 100644
---- a/conf/distro/minimal.conf
-+++ b/conf/distro/minimal.conf
-@@ -108,7 +108,7 @@ INHERIT += "recipe_sanity"
- # PREFERRED VERSIONS
- #############################################################################
- require conf/distro/include/preferred-e-versions.inc
--require conf/distro/include/preferred-opie-versions-1.2.4.inc
-+require conf/distro/include/preferred-opie-versions-1.2.5.inc
+diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include/sane-toolchain.inc
+index 642f289..dd06650 100644
+--- a/conf/distro/include/sane-toolchain.inc
++++ b/conf/distro/include/sane-toolchain.inc
+@@ -6,7 +6,7 @@
  
- PREFERRED_PROVIDER_opkg ?= "opkg"
- PREFERRED_PROVIDER_virtual/update-alternatives ?= "opkg"
-@@ -119,7 +119,8 @@ PREFERRED_VERSION_qt4-embedded = "${PREFERRED_QT_VERSION}"
- PREFERRED_VERSION_qt4-embedded-gles = "${PREFERRED_QT_VERSION}"
- PREFERRED_VERSION_qt4-x11-free = "${PREFERRED_QT_VERSION}"
- PREFERRED_VERSION_qt4-x11-free-gles = "${PREFERRED_QT_VERSION}"
--
-+PREFERRED_VERSION_perl = "5.10.1"
-+PREFERRED_VERSION_perl-native = "5.10.1"
- #############################################################################
- # CONTENTS
- #############################################################################
+ # Base line versions, good for most things
+ PREFERRED_GCC_VERSION                ?= "4.5"
+-PREFERRED_BINUTILS_VERSION           ?= "2.20.1"
++PREFERRED_BINUTILS_VERSION           ?= "2.21"
+ PREFERRED_UCLIBC_VERSION             ?= "git"
+ PREFERRED_EGLIBC_VERSION             ?= "2.12"
+ PREFERRED_GLIBC_VERSION              ?= "2.10.1"
 -- 
 1.7.2.3
 
