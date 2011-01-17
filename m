@@ -1,34 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PeuMl-0005i8-3G
+	(envelope-from <Tom_Rini@mentor.com>) id 1PeuY8-00062t-P7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 20:03:47 +0100
-Received: by iwn8 with SMTP id 8so5022876iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 11:03:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=ezv9hPY5afOM4jGFm8PM954ZNfNhT/q7Zrbwddz0q7o=;
-	b=fTBfhv/S2G9sb9E8b3/eJGEx9YjDMFJX+qTgt6ytiXb6QVtPfhXM/ZFNdeq7mDvJvX
-	0UzprYF9nQzY0bUnTSXa890HMQKK1bi4dZYwGrOHXKYcGz7iTfv8vl1g6DyfITw4dwJn
-	JSORU9hv8TJv/zI+n1EhwJNytw9A9tKo0ONBQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=NJZUCxIbnB/GeHPx5ZmcRKI7T8GvABdfzz5+UNXmEchwvHh5DrVdhTSOZ2qTteH8I5
-	J2dyw8EDhMYtgm8QwT9Y+QfYFVrojScvtGXcWpVm4uKbByfTEPeNPtscgiWbpLxbSLHt
-	gkxsKzM6NXLwWrf32zduWkIc//GYf7ZPC/wCw=
+	Mon, 17 Jan 2011 20:15:32 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PeuXW-0007EC-Cp from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 11:14:54 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 17 Jan 2011 11:14:54 -0800
+Received: from [172.30.80.246] ([172.30.80.246]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 17 Jan 2011 12:14:53 -0700
+Message-ID: <4D34952B.607@mentor.com>
+Date: Mon, 17 Jan 2011 12:14:51 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.231.11.204 with SMTP id u12mr4703770ibu.109.1295290991025;
-	Mon, 17 Jan 2011 11:03:11 -0800 (PST)
-Received: by 10.231.213.234 with HTTP; Mon, 17 Jan 2011 11:03:10 -0800 (PST)
-In-Reply-To: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
-References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
-Date: Mon, 17 Jan 2011 20:03:10 +0100
-Message-ID: <AANLkTimZ5EO0OjXD668AU-ZC4uQUgOAzjM1gf+MK9Q5u@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+X-OriginalArrivalTime: 17 Jan 2011 19:14:53.0571 (UTC)
+	FILETIME=[D2009530:01CBB67A]
 Subject: Re: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,52 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 19:03:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 Jan 2011 19:15:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2011/1/17 Khem Raj <raj.khem@gmail.com>:
+On 01/17/2011 10:50 AM, Khem Raj wrote:
 > * Tested various builds seems to hold fine
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Khem Raj<raj.khem@gmail.com>
 > ---
-> =A0conf/distro/minimal.conf | =A0 =A05 +++--
-> =A01 files changed, 3 insertions(+), 2 deletions(-)
+>   conf/distro/minimal.conf |    5 +++--
+>   1 files changed, 3 insertions(+), 2 deletions(-)
 >
 > diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
 > index 5a19cbc..f495d13 100644
 > --- a/conf/distro/minimal.conf
 > +++ b/conf/distro/minimal.conf
-> @@ -108,7 +108,7 @@ INHERIT +=3D "recipe_sanity"
-> =A0# PREFERRED VERSIONS
-> =A0######################################################################=
-#######
-> =A0require conf/distro/include/preferred-e-versions.inc
+> @@ -108,7 +108,7 @@ INHERIT += "recipe_sanity"
+>   # PREFERRED VERSIONS
+>   #############################################################################
+>   require conf/distro/include/preferred-e-versions.inc
 > -require conf/distro/include/preferred-opie-versions-1.2.4.inc
 > +require conf/distro/include/preferred-opie-versions-1.2.5.inc
 >
-> =A0PREFERRED_PROVIDER_opkg ?=3D "opkg"
-> =A0PREFERRED_PROVIDER_virtual/update-alternatives ?=3D "opkg"
-> @@ -119,7 +119,8 @@ PREFERRED_VERSION_qt4-embedded =3D "${PREFERRED_QT_VE=
-RSION}"
-> =A0PREFERRED_VERSION_qt4-embedded-gles =3D "${PREFERRED_QT_VERSION}"
-> =A0PREFERRED_VERSION_qt4-x11-free =3D "${PREFERRED_QT_VERSION}"
-> =A0PREFERRED_VERSION_qt4-x11-free-gles =3D "${PREFERRED_QT_VERSION}"
+>   PREFERRED_PROVIDER_opkg ?= "opkg"
+>   PREFERRED_PROVIDER_virtual/update-alternatives ?= "opkg"
+> @@ -119,7 +119,8 @@ PREFERRED_VERSION_qt4-embedded = "${PREFERRED_QT_VERSION}"
+>   PREFERRED_VERSION_qt4-embedded-gles = "${PREFERRED_QT_VERSION}"
+>   PREFERRED_VERSION_qt4-x11-free = "${PREFERRED_QT_VERSION}"
+>   PREFERRED_VERSION_qt4-x11-free-gles = "${PREFERRED_QT_VERSION}"
 > -
-> +PREFERRED_VERSION_perl =3D "5.10.1"
-> +PREFERRED_VERSION_perl-native =3D "5.10.1"
-> =A0######################################################################=
-#######
-> =A0# CONTENTS
-> =A0######################################################################=
-#######
-> --
-> 1.7.2.3
+> +PREFERRED_VERSION_perl = "5.10.1"
+> +PREFERRED_VERSION_perl-native = "5.10.1"
+>   #############################################################################
+>   # CONTENTS
+>   #############################################################################
 
-No opinion on the opie stuff, but I'm using perl 5.10.1 for quite a
-while, so that part has my ack.
-(maybe split into two patches, one for opie, one for perl).
+I see different problems with perl 5.10.1 + uclibc + p2020ds, so I guess 
+this is fine with me.
 
-Frans
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
