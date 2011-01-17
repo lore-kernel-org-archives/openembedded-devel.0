@@ -1,32 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PeuY8-00062t-P7
+	(envelope-from <jefflance01@gmail.com>) id 1Peuh0-00069J-O6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 20:15:32 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PeuXW-0007EC-Cp from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 11:14:54 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 17 Jan 2011 11:14:54 -0800
-Received: from [172.30.80.246] ([172.30.80.246]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 17 Jan 2011 12:14:53 -0700
-Message-ID: <4D34952B.607@mentor.com>
-Date: Mon, 17 Jan 2011 12:14:51 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 17 Jan 2011 20:24:42 +0100
+Received: by gwaa12 with SMTP id a12so2109887gwa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jan 2011 11:24:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=EWGZeOXLGLFi7l+oDANArmjcMYmqArkKSgAbJAc/mOk=;
+	b=jIcxKapN6SO3sxlTfl4frX9nWp/71jEIWD47zqYbuweXB3fXF5dubUOXsIipPckRIf
+	5gvqlNWzOQGBhHvyVOsyJ39602pK3L9FO4uFlmYT0vW+bKP3SFasxrGXVvtELe6jpb60
+	Bql5f2Vxv7a4sCd8x36RImjbcxwfS6GJPeORM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=XzFu2j/z/UNVfnGXbLUzvJE+IXA62gFDp4wkaOs4nvun5sWx0iNVyhAdBKF9KekXsv
+	3W3zG9tOXHSdiyEWrbK/o9Mdqp8vF43mYLmRyyLzplQ7KRLEAmt2ybj1oPPKTSvaXXDz
+	mSNGZilBy1SXC1oMxzvu/AoRZmZ5idE1GS1/k=
+Received: by 10.151.13.5 with SMTP id q5mr239189ybi.333.1295292231597;
+	Mon, 17 Jan 2011 11:23:51 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id v8sm2826457ybe.1.2011.01.17.11.23.50
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 17 Jan 2011 11:23:50 -0800 (PST)
+From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
-X-OriginalArrivalTime: 17 Jan 2011 19:14:53.0571 (UTC)
-	FILETIME=[D2009530:01CBB67A]
-Subject: Re: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
+Date: Mon, 17 Jan 2011 13:22:33 -0600
+Message-Id: <1295292153-8871-1-git-send-email-j-lance1@ti.com>
+X-Mailer: git-send-email 1.6.3.3
+Cc: Jeff Lance <j-lance1@ti.com>
+Subject: [PATCH 1/1] matrix-tui: Update SRCREV - makefile update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 19:15:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Jan 2011 19:24:42 -0000
 
-On 01/17/2011 10:50 AM, Khem Raj wrote:
-> * Tested various builds seems to hold fine
->
-> Signed-off-by: Khem Raj<raj.khem@gmail.com>
-> ---
->   conf/distro/minimal.conf |    5 +++--
->   1 files changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
-> index 5a19cbc..f495d13 100644
-> --- a/conf/distro/minimal.conf
-> +++ b/conf/distro/minimal.conf
-> @@ -108,7 +108,7 @@ INHERIT += "recipe_sanity"
->   # PREFERRED VERSIONS
->   #############################################################################
->   require conf/distro/include/preferred-e-versions.inc
-> -require conf/distro/include/preferred-opie-versions-1.2.4.inc
-> +require conf/distro/include/preferred-opie-versions-1.2.5.inc
->
->   PREFERRED_PROVIDER_opkg ?= "opkg"
->   PREFERRED_PROVIDER_virtual/update-alternatives ?= "opkg"
-> @@ -119,7 +119,8 @@ PREFERRED_VERSION_qt4-embedded = "${PREFERRED_QT_VERSION}"
->   PREFERRED_VERSION_qt4-embedded-gles = "${PREFERRED_QT_VERSION}"
->   PREFERRED_VERSION_qt4-x11-free = "${PREFERRED_QT_VERSION}"
->   PREFERRED_VERSION_qt4-x11-free-gles = "${PREFERRED_QT_VERSION}"
-> -
-> +PREFERRED_VERSION_perl = "5.10.1"
-> +PREFERRED_VERSION_perl-native = "5.10.1"
->   #############################################################################
->   # CONTENTS
->   #############################################################################
+  * Updating the makefile to better support the release and debug versions used in CCSv5
+  * Adding an install_debug option to the makefile
+  * Updating the README file to go with the makefile updates
 
-I see different problems with perl 5.10.1 + uclibc + p2020ds, so I guess 
-this is fine with me.
+Signed-off-by: Jeff Lance  <j-lance1@ti.com>
+---
+ recipes/ti/matrix-tui_1.1.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/recipes/ti/matrix-tui_1.1.bb b/recipes/ti/matrix-tui_1.1.bb
+index 519d183..9814d5f 100644
+--- a/recipes/ti/matrix-tui_1.1.bb
++++ b/recipes/ti/matrix-tui_1.1.bb
+@@ -1,4 +1,4 @@
+ require matrix-tui.inc
+ 
+-SRCREV = "35"
+-PR = "${INC_PR}.3"
++SRCREV = "37"
++PR = "${INC_PR}.4"
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.6.3.3
+
 
 
