@@ -1,27 +1,21 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1Peldh-0008VD-Lq
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 10:44:41 +0100
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Mon, 17 Jan 2011 10:44:04 +0100
-X-TM-IMSS-Message-ID: <0643d1a30000121a@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0643d1a30000121a ;
-	Mon, 17 Jan 2011 10:44:09 +0100
-Message-ID: <4D340F63.60505@nedap.com>
-Date: Mon, 17 Jan 2011 10:44:03 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <4D301DFC.4090900@nedap.com> <4D305F0D.4000107@mentor.com>
-In-Reply-To: <4D305F0D.4000107@mentor.com>
-X-OriginalArrivalTime: 17 Jan 2011 09:44:04.0624 (UTC)
-	FILETIME=[140A0100:01CBB62B]
-Subject: Re: chattr not found?
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pemhx-00017P-Vm for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 11:53:10 +0100
+Received: from f053038247.adsl.alicedsl.de ([78.53.38.247]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PemhM-0007CY-9C for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 10:52:32 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Jan 2011 11:52:30 +0100
+Message-ID: <1295261550.4844.27.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: glibc_2.9: task `package` fails with `"WORKDIR not defined, unable to package"`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,40 +29,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 09:44:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Jan 2011 10:53:10 -0000
+X-Groupsio-MsgNum: 28090
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-BwgIniqvWcfC4sAXuXqU"
 
-Tim,
+--=-BwgIniqvWcfC4sAXuXqU
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks!
-But...
-at boot I get:
-
-     update-alternatives: Error: cannot register alternative chattr to 
-/usr/bin/chattr since it is already registered to /bin/chattr
-
-Not a big deal, I guess...
-
-Jaap
+Dear OE folks,
 
 
-On 01/14/2011 03:34 PM, Tom Rini wrote:
-> On 01/14/2011 02:57 AM, Jaap de Jong wrote:
->> Hi All!
->>
->> for some reason chattr is linked to chattr.e2fsprogs instead of
->> ../usr/bin/chattr.e2fsprogs
->>
->> # ls -l /bin/chattr*
->> lrwxrwxrwx 1 root root 16 2011-01-14 10:37 /bin/chattr ->  chattr.e2fsprogs
->>
->> # ls -l /usr/bin/chattr*
->> -rwxr-xr-x 1 root root 7304 2010-12-10 01:12 /usr/bin/chattr.e2fsprogs
->>
->> I have no time to investigate this.
->> Look simple...
-> I'm pushing a fix for this now, thanks for the report.
->
+task `package` failed with the following error running `bitbake -k
+glibc` with `angstrom-2008.1` for `MACHINE =3D "beagleboard"`.
+
+        Packaged contents of glibc-charmap-ibm868 into /oe/build/angstrom-d=
+ev/deploy/glibc/ipk/armv7a/glibc-charmap-ibm868_2.9-r37.4.6_armv7a.ipk
+        ERROR: Error in executing python function in: /oe/openembedded/reci=
+pes/glibc/glibc_2.9.bb
+        ERROR: Exception:<type 'exceptions.ValueError'> Message:need more t=
+han 1 value to unpack
+        ERROR: Printing the environment of the function
+        ERROR:  0001:def do_package_ipk(d):
+        ERROR:  0002:   import re, copy
+        ERROR:  0003:
+        ERROR:  0004:   workdir =3D bb.data.getVar('WORKDIR', d, 1)
+        ERROR:  0005:   if not workdir:
+        ERROR:  0006:           bb.error("WORKDIR not defined, unable to pa=
+ckage")
+        ERROR: Function do_package_ipk failed
+
+I recently activated
+
+        PARALLEL_MAKE =3D "-j4"
+
+in `conf/local.conf`.
+
+I could not reproduce this problem running `bitbake -k glibc` a second
+time.
 
 
+Thanks,
+
+Paul
+
+--=-BwgIniqvWcfC4sAXuXqU
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk00H2cACgkQPX1aK2wOHVjOxQCggHEUYS2VKo3Cc1dzt7O55aVO
+lhQAnRVr9L5gIW/T3zBSE8ZVrsivZndN
+=UXnA
+-----END PGP SIGNATURE-----
+
+--=-BwgIniqvWcfC4sAXuXqU--
