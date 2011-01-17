@@ -1,35 +1,24 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1Peuh0-00069J-O6
+Received: from smtpauth19.prod.mesa1.secureserver.net ([64.202.165.30])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <mike@mwester.net>) id 1PeulK-0006C5-Fs
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 20:24:42 +0100
-Received: by gwaa12 with SMTP id a12so2109887gwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 11:24:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=EWGZeOXLGLFi7l+oDANArmjcMYmqArkKSgAbJAc/mOk=;
-	b=jIcxKapN6SO3sxlTfl4frX9nWp/71jEIWD47zqYbuweXB3fXF5dubUOXsIipPckRIf
-	5gvqlNWzOQGBhHvyVOsyJ39602pK3L9FO4uFlmYT0vW+bKP3SFasxrGXVvtELe6jpb60
-	Bql5f2Vxv7a4sCd8x36RImjbcxwfS6GJPeORM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=XzFu2j/z/UNVfnGXbLUzvJE+IXA62gFDp4wkaOs4nvun5sWx0iNVyhAdBKF9KekXsv
-	3W3zG9tOXHSdiyEWrbK/o9Mdqp8vF43mYLmRyyLzplQ7KRLEAmt2ybj1oPPKTSvaXXDz
-	mSNGZilBy1SXC1oMxzvu/AoRZmZ5idE1GS1/k=
-Received: by 10.151.13.5 with SMTP id q5mr239189ybi.333.1295292231597;
-	Mon, 17 Jan 2011 11:23:51 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id v8sm2826457ybe.1.2011.01.17.11.23.50
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 17 Jan 2011 11:23:50 -0800 (PST)
-From: Jeff Lance <jefflance01@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jan 2011 13:22:33 -0600
-Message-Id: <1295292153-8871-1-git-send-email-j-lance1@ti.com>
-X-Mailer: git-send-email 1.6.3.3
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 1/1] matrix-tui: Update SRCREV - makefile update
+	Mon, 17 Jan 2011 20:29:11 +0100
+Received: (qmail 10631 invoked from network); 17 Jan 2011 19:21:52 -0000
+Received: from unknown (209.242.7.132)
+	by smtpauth19.prod.mesa1.secureserver.net (64.202.165.30) with ESMTP;
+	17 Jan 2011 19:21:51 -0000
+Message-ID: <4D3496CA.7010305@mwester.net>
+Date: Mon, 17 Jan 2011 13:21:46 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+MIME-Version: 1.0
+To: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+References: <1295215324-10460-1-git-send-email-eric@eukrea.com>
+	<1295215324-10460-2-git-send-email-eric@eukrea.com>
+In-Reply-To: <1295215324-10460-2-git-send-email-eric@eukrea.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/4] slugos: prefer busybox 1.18.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 19:24:42 -0000
+X-List-Received-Date: Mon, 17 Jan 2011 19:29:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-  * Updating the makefile to better support the release and debug versions used in CCSv5
-  * Adding an install_debug option to the makefile
-  * Updating the README file to go with the makefile updates
+On 1/16/2011 4:02 PM, Eric Bénard wrote:
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
+> Cc: Mike Westerhof <mike@mwester.net>
 
-Signed-off-by: Jeff Lance  <j-lance1@ti.com>
----
- recipes/ti/matrix-tui_1.1.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Acked-by: Mike Westerhof <mike@mwester.net>
 
-diff --git a/recipes/ti/matrix-tui_1.1.bb b/recipes/ti/matrix-tui_1.1.bb
-index 519d183..9814d5f 100644
---- a/recipes/ti/matrix-tui_1.1.bb
-+++ b/recipes/ti/matrix-tui_1.1.bb
-@@ -1,4 +1,4 @@
- require matrix-tui.inc
- 
--SRCREV = "35"
--PR = "${INC_PR}.3"
-+SRCREV = "37"
-+PR = "${INC_PR}.4"
--- 
-1.6.3.3
+> ---
+>  conf/distro/include/preferred-slugos-versions.inc |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/distro/include/preferred-slugos-versions.inc b/conf/distro/include/preferred-slugos-versions.inc
+> index 83c09e3..4649c90 100644
+> --- a/conf/distro/include/preferred-slugos-versions.inc
+> +++ b/conf/distro/include/preferred-slugos-versions.inc
+> @@ -26,7 +26,7 @@ PREFERRED_VERSION_autoconf			?= "2.65"
+>  PREFERRED_VERSION_autoconf-native		?= "2.65"
+>  PREFERRED_VERSION_automake			?= "1.11.1"
+>  PREFERRED_VERSION_automake-native		?= "1.11.1"
+> -PREFERRED_VERSION_busybox			?= "1.18.1"
+> +PREFERRED_VERSION_busybox			?= "1.18.2"
+>  PREFERRED_VERSION_dbus				?= "1.4.1"
+>  PREFERRED_VERSION_glib-2.0			?= "2.26.1"
+>  PREFERRED_VERSION_glib-2.0-native		?= "2.26.1"
 
 
 
