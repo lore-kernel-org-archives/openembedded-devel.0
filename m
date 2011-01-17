@@ -1,22 +1,35 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1PeriZ-0002EY-Bg
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1PetEh-0003iv-W1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 17:14:07 +0100
-Received: (qmail invoked by alias); 17 Jan 2011 16:06:49 -0000
-Received: from p5DE49076.dip.t-dialin.net (EHLO
-	localhost.localdomain.localdomain) [93.228.144.118]
-	by mail.gmx.net (mp007) with SMTP; 17 Jan 2011 17:06:49 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX191m8UajNJ1i52HWFpWYCGfg9lxRSDuYJTno1C2j/
-	vlG0DDhoF214qy
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Mon, 17 Jan 2011 18:51:24 +0100
+Received: by gyh20 with SMTP id 20so2049849gyh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jan 2011 09:50:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=W7oCtlUvg1RS24+TEpW1hFxLY/L8aIadopS5TvTQX4I=;
+	b=x/+swm5M65Peb8vAsmlJv7rftYYvC+TgXm6TEoZO/eULsbRVEp5o4LdSxVKZ3mZtAv
+	g8BniS6nUqQgKengRNnVWcXK1zzLF65khAL7dpqfzHyij4QS9YzG+VJsjLUg6bFDKB1b
+	UnllzBwCvGYj+1Sch/GesQDXxseRBdCAV2px8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=HNVQzQgW3+oPf4leQBOoTkXBbr7+QnO7TUYNgFtY5IggUB04nsZ1+NvJOT7Th+Janb
+	mh0ftNtSmwyzPQLIb0fJFUGUSdDychqgCpJmn5m5t7v685dt1SoPnwjUEjcGsFCi0cXV
+	4hvoawaBPhxOg4e1BYznkkfzKWCs7/jZj5JLk=
+Received: by 10.100.125.1 with SMTP id x1mr2687993anc.82.1295286645449;
+	Mon, 17 Jan 2011 09:50:45 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id i10sm5754693anh.12.2011.01.17.09.50.43
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 17 Jan 2011 09:50:44 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jan 2011 18:06:08 +0100
-Message-Id: <1295283968-2540-1-git-send-email-schnitzeltony@gmx.de>
+Date: Mon, 17 Jan 2011 09:50:38 -0800
+Message-Id: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.2.3
-X-Y-GMX-Trusted: 0
-Subject: [PATCH] clutter: configure all libs with "--disable-introspection"
+Subject: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,104 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 16:14:07 -0000
+X-List-Received-Date: Mon, 17 Jan 2011 17:51:24 -0000
 
+* Tested various builds seems to hold fine
 
-Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/clutter/clutter-box2d.inc |    4 +++-
- recipes/clutter/clutter-gst.inc   |    4 +++-
- recipes/clutter/clutter-gtk.inc   |    4 +++-
- recipes/clutter/clutter.inc       |    4 ++--
- 4 files changed, 11 insertions(+), 5 deletions(-)
+ conf/distro/minimal.conf |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/clutter/clutter-box2d.inc b/recipes/clutter/clutter-box2d.inc
-index 7541335..395109e 100644
---- a/recipes/clutter/clutter-box2d.inc
-+++ b/recipes/clutter/clutter-box2d.inc
-@@ -4,7 +4,7 @@ LICENSE = "LGPLv2.1"
+diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+index 5a19cbc..f495d13 100644
+--- a/conf/distro/minimal.conf
++++ b/conf/distro/minimal.conf
+@@ -108,7 +108,7 @@ INHERIT += "recipe_sanity"
+ # PREFERRED VERSIONS
+ #############################################################################
+ require conf/distro/include/preferred-e-versions.inc
+-require conf/distro/include/preferred-opie-versions-1.2.4.inc
++require conf/distro/include/preferred-opie-versions-1.2.5.inc
  
- DEPENDS = "clutter"
- 
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- # The main clutter lib is machine specific so we need to be too
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -13,6 +13,8 @@ inherit autotools pkgconfig gtk-doc
- 
- require clutter-common.inc
- 
-+EXTRA_OECONF = "--disable-introspection"
-+
- do_configure_prepend() {
- 	make_all_execs_installable
- }
-diff --git a/recipes/clutter/clutter-gst.inc b/recipes/clutter/clutter-gst.inc
-index b25f31e..814f493 100644
---- a/recipes/clutter/clutter-gst.inc
-+++ b/recipes/clutter/clutter-gst.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Clutter GStreamer integration library"
- HOMEPAGE = "http://www.clutter-project.org/"
- LICENSE = "LGPLv2.1"
- 
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- DEPENDS = "clutter gstreamer gst-plugins-base"
- 
-@@ -10,6 +10,8 @@ require clutter-common.inc
- 
- inherit autotools pkgconfig
- 
-+EXTRA_OECONF = "--disable-introspection"
-+
- align_examples_data_location() {
- 	for full_name in $(find ${S}/examples -name *.png) ; do
- 		data_name=${full_name##*/}
-diff --git a/recipes/clutter/clutter-gtk.inc b/recipes/clutter/clutter-gtk.inc
-index 6e624c5..a4ada7f 100644
---- a/recipes/clutter/clutter-gtk.inc
-+++ b/recipes/clutter/clutter-gtk.inc
-@@ -2,13 +2,15 @@ DESCRIPTION = "Clutter GTK+ integration library"
- HOMEPAGE = "http://www.clutter-project.org/"
- LICENSE = "LGPLv2.1"
- 
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- DEPENDS = "gtk+ clutter"
- require clutter-common.inc
- 
- inherit autotools pkgconfig gtk-doc
- 
-+EXTRA_OECONF = "--disable-introspection"
-+
- do_configure_prepend() {
- 	make_all_execs_installable
- 
-diff --git a/recipes/clutter/clutter.inc b/recipes/clutter/clutter.inc
-index 84a7af9..2a061af 100644
---- a/recipes/clutter/clutter.inc
-+++ b/recipes/clutter/clutter.inc
-@@ -9,7 +9,7 @@ INC_SRC_URI = "file://sample.desktop \
- PARALLEL_MAKE = ""
- 
- STDDEPENDS = "virtual/libx11 gtk-doc-native pango glib-2.0 libxfixes gtk+"
--BASE_CONF = "--disable-gtk-doc ${@get_clutter_fpu_setting(bb, d)} --enable-conformance "
-+BASE_CONF = "--disable-introspection --disable-gtk-doc ${@get_clutter_fpu_setting(bb, d)} --enable-conformance "
- 
- DEPENDS = "${STDDEPENDS} virtual/libgl"
- EXTRA_OECONF = "${BASE_CONF} --with-flavour=glx"
-@@ -41,7 +41,7 @@ EXTRA_OECONF_mx31ads = "${BASE_CONF} --with-flavour=eglnative"
- PACKAGE_ARCH_mx31ads = "${MACHINE_ARCH}"
- LDFLAGS_append_mx31ads = " -lpvrNULLWSEGL -lstdc++ "
- 
--INC_PR = "r2"
-+INC_PR = "r3"
- 
- inherit autotools pkgconfig gtk-doc
- 
+ PREFERRED_PROVIDER_opkg ?= "opkg"
+ PREFERRED_PROVIDER_virtual/update-alternatives ?= "opkg"
+@@ -119,7 +119,8 @@ PREFERRED_VERSION_qt4-embedded = "${PREFERRED_QT_VERSION}"
+ PREFERRED_VERSION_qt4-embedded-gles = "${PREFERRED_QT_VERSION}"
+ PREFERRED_VERSION_qt4-x11-free = "${PREFERRED_QT_VERSION}"
+ PREFERRED_VERSION_qt4-x11-free-gles = "${PREFERRED_QT_VERSION}"
+-
++PREFERRED_VERSION_perl = "5.10.1"
++PREFERRED_VERSION_perl-native = "5.10.1"
+ #############################################################################
+ # CONTENTS
+ #############################################################################
 -- 
 1.7.2.3
 
