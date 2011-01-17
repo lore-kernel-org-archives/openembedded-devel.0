@@ -1,30 +1,23 @@
-Received: from asmtpout030.mac.com ([17.148.16.105])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@mac.com>) id 1Pen6N-0001oP-HX
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 12:18:23 +0100
-MIME-version: 1.0
-Received: from [192.168.1.30] ([87.201.169.175])
-	by asmtp030.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
-	(built Dec
-	16 2008; 32bit)) with ESMTPSA id <0LF5009UFWLEAW60@asmtp030.mac.com> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	17 Jan 2011 02:17:42 -0800 (PST)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 suspectscore=0 phishscore=0 bulkscore=0 adultscore=0
-	classifier=spam
-	adjust=0 reason=mlx engine=6.0.2-1010190000 definitions=main-1101170028
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.2.15,1.0.148,0.0.0000
-	definitions=2011-01-17_04:2011-01-17, 2011-01-17,
-	1970-01-01 signatures=0
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Mon, 17 Jan 2011 14:17:16 +0400
-Message-id: <42777734-3F25-41F9-8FAD-40B6BF4959A4@mac.com>
-To: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1082)
-Subject: How to copy local recipe file to target root filesystem /etc folder
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PenJ9-00023n-MI for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 12:31:35 +0100
+Received: from f053038247.adsl.alicedsl.de ([78.53.38.247]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PenIa-0008UM-I8 for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 11:31:00 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <42777734-3F25-41F9-8FAD-40B6BF4959A4@mac.com>
+References: <42777734-3F25-41F9-8FAD-40B6BF4959A4@mac.com>
+Date: Mon, 17 Jan 2011 12:30:59 +0100
+Message-ID: <1295263859.4844.45.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: How to copy local recipe file to target root filesystem /etc folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,18 +31,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 11:18:23 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 17 Jan 2011 11:31:35 -0000
+X-Groupsio-MsgNum: 28092
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-xihXztLZIIPtMEk+BAeG"
 
-Hi,
-      I have an OE recipe that I created to automatically login to the beagleboard. I have added the autologin recipe to the omap3-console-image.bb recipe.
+--=-xihXztLZIIPtMEk+BAeG
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Would someone happen to know what OE command I should insert into a recipe, that will allow me to copy a file from the autologin recipe folder to the target root filesystem /etc folder?
-
-cp inittab-autologin <TARGET-ROOTFS>/etc/inittab
-cp autologin.profile <TARGET-ROOTFS>/etc
-
-Elvis Dowson
+Dear Elvis,
 
 
+Am Montag, den 17.01.2011, 14:17 +0400 schrieb Elvis Dowson:
+
+>       I have an OE recipe that I created to automatically login to the be=
+agleboard. I have added the autologin recipe to the omap3-console-image.bb =
+recipe.
+>=20
+> Would someone happen to know what OE command I should insert into a recip=
+e, that will allow me to copy a file from the autologin recipe folder to th=
+e target root filesystem /etc folder?
+>=20
+> cp inittab-autologin <TARGET-ROOTFS>/etc/inittab
+> cp autologin.profile <TARGET-ROOTFS>/etc
+
+It should be something similar to what is for example done in
+`recipes/busybox/busybox_1.1x.inc` [1].
+
+        do_install_append() {
+            install -m 0644 ${WORKDIR}/mdev.conf ${D}${sysconfdir}/
+            install -d ${D}${sysconfdir}/init.d/
+            install -d ${D}${sysconfdir}/mdev
+            install -m 0755 ${WORKDIR}/find-touchscreen.sh ${D}${sysconfdir=
+}/mdev/
+            install -m 0755 ${WORKDIR}/usb.sh ${D}${sysconfdir}/mdev/
+            install -m 0755 ${WORKDIR}/mdev ${D}${sysconfdir}/init.d/
+       =20
+            if grep "CONFIG_UDHCPD=3Dy" ${WORKDIR}/defconfig; then
+                  install -m 0755 ${WORKDIR}/busybox-udhcpd ${D}${sysconfdi=
+r}/init.d/
+            fi
+       =20
+            if grep "CONFIG_UDHCPC=3Dy" ${WORKDIR}/defconfig; then
+                  install -d ${D}${sysconfdir}/udhcpc.d
+                  install -d ${D}${datadir}/udhcpc
+                  install -m 0755 ${WORKDIR}/simple.script ${D}${sysconfdir=
+}/udhcpc.d/50default
+                  install -m 0755 ${WORKDIR}/default.script ${D}${datadir}/=
+udhcpc/default.script
+            fi
+        }
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/busybox=
+/busybox_1.1x.inc?id=3Da3d8ebc6318b72c03cd6b626efcbd5186234b32d#n43
+
+--=-xihXztLZIIPtMEk+BAeG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk00KHMACgkQPX1aK2wOHVhNTwCffH5suEYXkOCivT7cXJ3l5dDk
+6m4AnRvBgFuRPrvb5xk2bp6pOPJXHNc+
+=aqJq
+-----END PGP SIGNATURE-----
+
+--=-xihXztLZIIPtMEk+BAeG--
