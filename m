@@ -1,35 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PeopT-000757-NS for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 14:09:04 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Peoou-0002AY-56 for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 14:08:28 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 14:08:28 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <vadmium@gmail.com>) id 1PepZC-0007aW-Hi
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Jan 2011 14:56:19 +0100
+Received: by wwi18 with SMTP id 18so2142281wwi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 14:08:28 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 17 Jan 2011 05:55:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=OUkVsRllFwFhffXZYKYtvx8SAwHXzdivvhC9U871xds=;
+	b=XSkagWMyQi1Rcd7/ECp16yqa4hIuu+CZlsF+ddMOWVwtFgXt34y6VjpkQ/6D/+GRf7
+	JgjbZfF5V8UHvtHRxJaeZrzpZm6HovBI8aS7om89LTnFn+AbMX4hULgH0fxZ6kUKHsio
+	dn1/nRj3VS14CvNnHuwwfiuNr0uZILBmIN4Qc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=xFipAJf/1HUxS/IRMpWk77yByVlt0nzGxou97i6M9OgMeBkBndCzcPOA1dXqVNv4GS
+	2Lz1d6L5ghtITMPzMjUU+8ywX7Z1+tDrGUS8WH0GTELlOfuQWMCnIiEE3ZYXFaPHfTKS
+	j3xHL8ApT++RUO27QNuyS5NTPmjpFELhB2gA8=
+MIME-Version: 1.0
+Received: by 10.216.82.20 with SMTP id n20mr3176386wee.107.1295272540622; Mon,
+	17 Jan 2011 05:55:40 -0800 (PST)
+Sender: vadmium@gmail.com
+Received: by 10.216.17.203 with HTTP; Mon, 17 Jan 2011 05:55:40 -0800 (PST)
+In-Reply-To: <AANLkTi=q0Qa2w=Tn1kPGcA2Y5c6t3kfAfoRj8x1uvn2y@mail.gmail.com>
+References: <AANLkTi=q0Qa2w=Tn1kPGcA2Y5c6t3kfAfoRj8x1uvn2y@mail.gmail.com>
+Date: Mon, 17 Jan 2011 13:55:40 +0000
+X-Google-Sender-Auth: 7joSkmoG3QP4abh7dpt40dJBSGw
+Message-ID: <AANLkTi=pJidryLnDDNjJi0xqcq7UuRc2Xp5oWV=wRkzZ@mail.gmail.com>
+From: Martin Panter <vadmium+floss@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 17 Jan 2011 14:08:16 +0100
-Message-ID: <ih1f00$lhs$1@dough.gmane.org>
-References: <1295220721.13967.13.camel@mattotaupa>	<ih0tpc$ra$2@dough.gmane.org>
-	<1295264891.4844.57.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1295264891.4844.57.camel@mattotaupa>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/3] libomxil-bellagio: cosmetics: unify recipes
+Subject: Re: Avoid issues with APR package detecting Libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,51 +45,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 13:09:04 -0000
+X-List-Received-Date: Mon, 17 Jan 2011 13:56:19 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 16 January 2011 12:32, Martin Panter <vadmium+floss@gmail.com> wrote:
+> The configure script was failing for APR, I think because it was
+> trying to hack Libtool internals and wasn't compatible with newer
+> Libtool 2.4. Fixed for me with attached patch.
+> -Martin
 
-On 17-01-11 12:48, Paul Menzel wrote:
-> Am Montag, den 17.01.2011, 09:14 +0100 schrieb Koen Kooi:
->> On 17-01-11 00:32, Paul Menzel wrote:
->>> Date: Sun, 16 Jan 2011 23:34:08 +0100
->>>
->>> Just reorder the lines to be consistent throughout all recipes and to adhere to the style guide [1].
->>>
->>> [1] http://wiki.openembedded.org/index.php/Styleguide
->>>
->>> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
->>> ---
->>>  recipes/openmax/libomxil-bellagio_0.9.0.bb |    6 ++----
->>>  recipes/openmax/libomxil-bellagio_0.9.1.bb |   10 ++++------
->>
->>
->> FWIW, the above two aren't used and can get deleted, I suspect they
->> don't even build against our recent ffmpeg
-> 
-> Is it alright to send a f
-ollow-up patch after this patch series has been
-> committed?
-
-surr
-
-> 
->>>  recipes/openmax/libomxil-bellagio_0.9.2.bb |   10 ++++------
-> 
-> Just for my interest, what is the reason to use 0.9.2 instead of
-> 0.9.2.1?
-
-none, I just misread :) 0.9.2 can go as well.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNND8/MkyGM64RGpERApd6AJ9DR9W5xf8JmOFojgIRHoMijdZNCgCcDRRa
-9NuIBOL4QaBwqn3jhGQV5xM=
-=AXCH
------END PGP SIGNATURE-----
-
+FYI I stumbled across another solution to apparently the same problem.
+Gotta love independently reinventing the wheel!
+"apr: Update to 1.4.2"
+https://lists.yoctoproject.org/pipermail/poky/2011-January/002014.html
 
 
