@@ -1,35 +1,26 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jefflance01@gmail.com>) id 1PevvM-0008K1-5Z
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1PewJE-0000ZB-Pf
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Jan 2011 21:43:36 +0100
-Received: by ywi6 with SMTP id 6so1882263ywi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 12:42:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=V7BZxarAYlZgpzWkLFKouVwkU7LQbfZE1gyB3sfFlIQ=;
-	b=rfgwU4+8bjFMRf9jRIwJTkswsavlYLrVLHcuX6e/tLQEeOLxBSI62pbw6U+Ai9hvYV
-	rAivGVSqDYXMvNRa5pmawdNUdoQfwhrcesVzswY4eZTQlAqPS3ebvSWR4ZtbUMCR50lL
-	3Vh5bpeG+aBxT7innr0e157khKih6ZcXO72gk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=TmaPF8Q4ZZHQYbSH//V2BateumKRhFeeOge7lvcDH0MZ1MLM50HK1cgza56+VQnA64
-	JTL+pRK3r0SwzcXz4VqK8JLngYFgYyQXdBlAkIoDT3Sar69W7fj1srEaWXjpurJBbB3i
-	onCgWWHFZjIXbGuNfUQEReIO4qmdDIw9cmlRo=
-Received: by 10.90.72.16 with SMTP id u16mr5044052aga.146.1295296977892;
-	Mon, 17 Jan 2011 12:42:57 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id 2sm5907487anw.38.2011.01.17.12.42.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 17 Jan 2011 12:42:57 -0800 (PST)
-From: Jeff Lance <jefflance01@gmail.com>
+	Mon, 17 Jan 2011 22:08:16 +0100
+Received: (qmail invoked by alias); 17 Jan 2011 21:07:38 -0000
+Received: from p5DE49076.dip.t-dialin.net (EHLO localhost.localdomain)
+	[93.228.144.118]
+	by mail.gmx.net (mp023) with SMTP; 17 Jan 2011 22:07:38 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19rOL4AwWdrrHoT/fWdxEx5T1y4yOM4o7qClBLL1X
+	VqdsFShcm4mP4x
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jan 2011 14:41:38 -0600
-Message-Id: <1295296898-11309-1-git-send-email-j-lance1@ti.com>
-X-Mailer: git-send-email 1.6.3.3
-Cc: Jeff Lance <j-lance1@ti.com>
-Subject: [PATCH 1/1] am-sysinfo: Update SRCREV to add CCSv5 support
+Date: Mon, 17 Jan 2011 23:06:55 +0100
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+References: <1295283968-2540-1-git-send-email-schnitzeltony@gmx.de>
+	<AANLkTi=5rSdha0uH7QwETJaGo2TF_yY6GZL-iBgw4vZ4@mail.gmail.com>
+In-Reply-To: <AANLkTi=5rSdha0uH7QwETJaGo2TF_yY6GZL-iBgw4vZ4@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201101172306.55123.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [PATCH] clutter: configure all libs with "--disable-introspection"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 20:43:36 -0000
+X-List-Received-Date: Mon, 17 Jan 2011 21:08:16 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-  * Update SRCREV to pull in the following:
-    * Update the makefile to support the debug and release versions utilized by CCSv5
-    * Add a top level Makefile
-    * update support files used by CCSv5 - .cproject and .project
+On Monday 17 January 2011 21:15:17 Khem Raj wrote:
+> why do we need to disable it you did not explain
 
-Signed-off-by: Jeff Lance <j-lance1@ti.com>
----
- recipes/ti/am-sysinfo_svn.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+sorry but 
 
-diff --git a/recipes/ti/am-sysinfo_svn.bb b/recipes/ti/am-sysinfo_svn.bb
-index 80203f5..fc0c7ce 100644
---- a/recipes/ti/am-sysinfo_svn.bb
-+++ b/recipes/ti/am-sysinfo_svn.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD"
- SECTION = "system"
- PRIORITY = "optional"
- 
--SRCREV = "5"
-+SRCREV = "6"
- PV = "1.0"
- PR = "r1+svnr${SRCPV}"
- 
--- 
-1.6.3.3
+1. it is for the same reason as for all the other recipes disabling gobject-introspection: gobject-introspection does not cross-build.
+2. As soon as gobject-introspection-native was built, all the clutter stuff fails to configure.
 
+Do you wish a patch with updated description?
+
+Regards
+
+Andreas
 
 
