@@ -1,23 +1,37 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <roman@khimov.ru>) id 1Pf3Dp-0007sX-LR
+	(envelope-from <vadmium@gmail.com>) id 1Pf55t-00050J-DT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 05:31:09 +0100
-Received: from [93.100.16.104] (helo=mate.hex)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Pf3DD-0000Ks-BF
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 07:30:33 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Jan 2011 07:30:25 +0300
-User-Agent: KMail/1.13.5 (Linux/2.6.34.7-0.7-desktop; KDE/4.4.4; x86_64; ; )
-References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
-	<4D34952B.607@mentor.com>
-In-Reply-To: <4D34952B.607@mentor.com>
+	Tue, 18 Jan 2011 07:31:05 +0100
+Received: by wyb40 with SMTP id 40so5917455wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jan 2011 22:30:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=X+zxUW/oeAO4Rz9bscztrf+vCITvgEMEQCchHnjt4hY=;
+	b=fAsIUT7qPcbFIPtSgPUh//6jI5sDPdnHpIYJvOZCg2BKCY7n1flx5aXLShwHj0A5V1
+	qM7a961DmgGyKMXGzZnjLIAqabEKT6o8gdCHMdoykzylOZFvDolj4Moo+fb8QKTstnxH
+	JrVYF5kGYBSLypXXTBIt5x1V4mqZ0ipelU/VE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=KcjiyRpackvoNnc4JtLyCTbNjCiecVvI/kmzoIlTnpPtpLp6SBqF++/Z0Ztv0sL2E4
+	sj3HWUiKJZ0oZKbh3wHee0DnYRpH0tFNNEGznMlUjhRqvnRc9xcpdb0hlB/a+z/S6ABa
+	vGyhFOuYEwGn2q0YupMYmrd8I7AJob6NAaFmQ=
 MIME-Version: 1.0
-Message-Id: <201101180730.29536.roman@khimov.ru>
-Subject: Re: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
+Received: by 10.216.48.6 with SMTP id u6mr4008329web.77.1295332227052; Mon, 17
+	Jan 2011 22:30:27 -0800 (PST)
+Sender: vadmium@gmail.com
+Received: by 10.216.17.203 with HTTP; Mon, 17 Jan 2011 22:30:26 -0800 (PST)
+In-Reply-To: <AANLkTi=q0Qa2w=Tn1kPGcA2Y5c6t3kfAfoRj8x1uvn2y@mail.gmail.com>
+References: <AANLkTi=q0Qa2w=Tn1kPGcA2Y5c6t3kfAfoRj8x1uvn2y@mail.gmail.com>
+Date: Tue, 18 Jan 2011 06:30:26 +0000
+X-Google-Sender-Auth: TGDCmFgh3L3RccOvmP56iXO22RE
+Message-ID: <AANLkTin3gEL9GaYJRvqdRsK5WaU=Ce9zx=i50X=Kpqqq@mail.gmail.com>
+From: Martin Panter <vadmium+floss@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Avoid issues with APR package detecting Libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,35 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2011 04:31:09 -0000
-X-Groupsio-MsgNum: 28123
-Content-Type: multipart/signed; boundary="nextPart1945103.LOamp6ESbJ";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Jan 2011 06:31:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
---nextPart1945103.LOamp6ESbJ
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+Hi all
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAxNyDRj9C9
-0LLQsNGA0Y8gMjAxMSAyMjoxNDo1MSDQsNCy0YLQvtGAIFRvbSBSaW5pINC90LDQv9C40YHQsNC7
-Ogo+IE9uIDAxLzE3LzIwMTEgMTA6NTAgQU0sIEtoZW0gUmFqIHdyb3RlOgo+IEkgc2VlIGRpZmZl
-cmVudCBwcm9ibGVtcyB3aXRoIHBlcmwgNS4xMC4xICsgdWNsaWJjICsgcDIwMjBkcywgc28gSSBn
-dWVzcwo+IHRoaXMgaXMgZmluZSB3aXRoIG1lLgoKV2hhdCBraW5kIG9mIHByb2JsZW1zPwoKLS0g
-CiBodHRwOi8vcm9tYW4ua2hpbW92LnJ1Cm1haWx0bzogcm9tYW5Aa2hpbW92LnJ1CmdwZyAtLWtl
-eXNlcnZlciBoa3A6Ly9zdWJrZXlzLnBncC5uZXQgLS1yZWN2LWtleXMgMHhFNUUwNTVDMwo=
+On 16 January 2011 12:32, Martin Panter <vadmium+floss@gmail.com> wrote:
+> The configure script was failing for APR, I think because it was
+> trying to hack Libtool internals and wasn't compatible with newer
+> Libtool 2.4. Fixed for me with attached patch.
 
---nextPart1945103.LOamp6ESbJ
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+That with the recent APR 1.3.12 commit b1ae47c by Martin Jansa it
+compiles so my change is no longer necessary.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.15 (GNU/Linux)
+For reference the full error was like this:
 
-iEYEABECAAYFAk01F2UACgkQXJ70z+XgVcPjxwCZAZJHIYMmJV40THFl8yptgjKz
-ErkAn0N3sYoo+H3HMyHwAlgX01Vd6HZ0
-=Nq/Z
------END PGP SIGNATURE-----
+| buildconf: checking installation...
+| buildconf: python version 2.6.5 (ok)
+| build/buildcheck.sh: line 26: test: 65-: integer expression expected
+| buildconf: autoconf version 2.65- (ok)
+| Copying libtool helper files ...
+| /libtool.m4 not found
+| ERROR: Function do_configure failed
 
---nextPart1945103.LOamp6ESbJ--
+
