@@ -1,38 +1,23 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <bgamari.foss@gmail.com>) id 1PeyOc-00039P-A9
+	(envelope-from <roman@khimov.ru>) id 1Pf3Dp-0007sX-LR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 00:21:58 +0100
-Received: by qyk36 with SMTP id 36so5487596qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jan 2011 15:21:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:user-agent:date:message-id
-	:mime-version:content-type;
-	bh=HUyN0neMzFTIh8FSWUn2z4zwT9K2ekBJ4qUkfBuAM2I=;
-	b=f/su2myTotbTYnRPdboulAT+P4aa/wGietLl+RaPIjeNQnLzGgIc1wFezm++QsRIKu
-	VbGukN0oJEwiggGHthxdq2koa4mqcqNHZPlpFAtotcjBbI2IGyrsJjhE67jiSmdA7g7q
-	yRh2iQUBBpME5HFwFS0dXSqGf2xTHKcv0Hh6c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:user-agent:date:message-id:mime-version
-	:content-type;
-	b=VH8XMKl9HJtWwzNKW1Dif7G73kBaWSt+spCwQX/ofNUC/8KLCoOKI6lOYRgBv5D/KK
-	iGkKsvt/Hq9Cy4IW4pf/yTC4nmVPFgldyVhbostp8TBtkkLmaaDOlvJt9N0HWS1hD/R2
-	QbSvDntdCBedJMH2mMIQr/Cd5I3ddl7mcH+Ok=
-Received: by 10.229.81.206 with SMTP id y14mr4125801qck.127.1295306476918;
-	Mon, 17 Jan 2011 15:21:16 -0800 (PST)
-Received: from localhost (gamari.physics.umass.edu [128.119.56.223])
-	by mx.google.com with ESMTPS id e29sm3269189qck.15.2011.01.17.15.21.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 17 Jan 2011 15:21:16 -0800 (PST)
-From: Ben Gamari <bgamari.foss@gmail.com>
+	Tue, 18 Jan 2011 05:31:09 +0100
+Received: from [93.100.16.104] (helo=mate.hex)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Pf3DD-0000Ks-BF
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Jan 2011 07:30:33 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-User-Agent: Notmuch/0.5-17-g2d1420b (http://notmuchmail.org) Emacs/23.1.1
-	(x86_64-pc-linux-gnu)
-Date: Mon, 17 Jan 2011 18:21:15 -0500
-Message-ID: <87hbd7ruac.fsf@gmail.com>
+Date: Tue, 18 Jan 2011 07:30:25 +0300
+User-Agent: KMail/1.13.5 (Linux/2.6.34.7-0.7-desktop; KDE/4.4.4; x86_64; ; )
+References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
+	<4D34952B.607@mentor.com>
+In-Reply-To: <4D34952B.607@mentor.com>
 MIME-Version: 1.0
-Subject: Using native package build tree when building target package
+Message-Id: <201101180730.29536.roman@khimov.ru>
+Subject: Re: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,19 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2011 23:21:58 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 18 Jan 2011 04:31:09 -0000
+X-Groupsio-MsgNum: 28123
+Content-Type: multipart/signed; boundary="nextPart1945103.LOamp6ESbJ";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-Today I've been looking at the icu package, which is quite out-of-date
-in the repository. Unfortunately, it seems that the latest version (4.6)
-requires that the absolute path to a source tree built for the host be
-passed to configure.
+--nextPart1945103.LOamp6ESbJ
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Does anyone have any clever ideas concerning how this might be
-accomplished? Does this mean that we'll need to merge the icu and
-icu-native recipes? My bitbake-fu is pretty weak, so I'd appreciate any
-help. Thanks!
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAxNyDRj9C9
+0LLQsNGA0Y8gMjAxMSAyMjoxNDo1MSDQsNCy0YLQvtGAIFRvbSBSaW5pINC90LDQv9C40YHQsNC7
+Ogo+IE9uIDAxLzE3LzIwMTEgMTA6NTAgQU0sIEtoZW0gUmFqIHdyb3RlOgo+IEkgc2VlIGRpZmZl
+cmVudCBwcm9ibGVtcyB3aXRoIHBlcmwgNS4xMC4xICsgdWNsaWJjICsgcDIwMjBkcywgc28gSSBn
+dWVzcwo+IHRoaXMgaXMgZmluZSB3aXRoIG1lLgoKV2hhdCBraW5kIG9mIHByb2JsZW1zPwoKLS0g
+CiBodHRwOi8vcm9tYW4ua2hpbW92LnJ1Cm1haWx0bzogcm9tYW5Aa2hpbW92LnJ1CmdwZyAtLWtl
+eXNlcnZlciBoa3A6Ly9zdWJrZXlzLnBncC5uZXQgLS1yZWN2LWtleXMgMHhFNUUwNTVDMwo=
 
-- Ben
+--nextPart1945103.LOamp6ESbJ
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.15 (GNU/Linux)
 
+iEYEABECAAYFAk01F2UACgkQXJ70z+XgVcPjxwCZAZJHIYMmJV40THFl8yptgjKz
+ErkAn0N3sYoo+H3HMyHwAlgX01Vd6HZ0
+=Nq/Z
+-----END PGP SIGNATURE-----
+
+--nextPart1945103.LOamp6ESbJ--
