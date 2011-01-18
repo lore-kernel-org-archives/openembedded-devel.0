@@ -1,35 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PfHvx-0003Ta-NX for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 21:13:41 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PfHvL-0006Uq-WB for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 21:13:04 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jan 2011 21:13:03 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1PfIGM-0003kJ-MU
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Jan 2011 21:34:49 +0100
+Received: by gyh20 with SMTP id 20so11187gyh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jan 2011 21:13:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 18 Jan 2011 12:34:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=G96bmQ7kI5go76uHscVj5yCIPCZM49n6794c+3/i/hM=;
+	b=GNo339+SlMWlEda0FuzPmADf8DrWYeDt0fBjKq4S+7CGtjja07h3wQi+e+Ru+J/OSo
+	dhvcLLBHDSkJ5xT4NiVN8oMXZ0kqow+2Ki+M21gCs1naibIBRJcB/+0Kh6uiL/M40JTe
+	nV3ETl+RFVcM33HgsNBmqp2vB1D7ViqVsB6JQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=tV1kvC056UTknTdQM3js+Oxa++b8ZlX687CqxstT5pfhFrMpFb9pPJkzU6xbMinkug
+	H31IxqT8IWbxqEODXq2lOjEyg16Gc0YFcFnJBo+fmi6cvxH5Wc5udA7O1hVIGwDqp6jj
+	LgAa/EhZdu8bSZ7jF9uSCNrns950uwj3RJ/Xo=
+Received: by 10.90.1.2 with SMTP id 2mr6877330aga.58.1295382842929; Tue, 18
+	Jan 2011 12:34:02 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.55.10 with HTTP; Tue, 18 Jan 2011 12:33:38 -0800 (PST)
+In-Reply-To: <87lj2im6qc.fsf@gmail.com>
+References: <87lj2im6qc.fsf@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 18 Jan 2011 12:33:38 -0800
+Message-ID: <AANLkTino3P3EV8BazsWGG2HYs7CFXDsLpn+eKoyiUWoK@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 18 Jan 2011 21:12:52 +0100
-Message-ID: <ih4s84$gbj$1@dough.gmane.org>
-References: <1295027350.14388.6527.camel@rex>	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>	<4D353F81.50301@xora.org.uk>	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
-	<4D35C5C3.60205@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D35C5C3.60205@mentor.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: Yocto Project and OE - Where now?
+Subject: Re: Dealing with ttyS -> ttyO rename on OMAP3 in 2.6.37
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,87 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2011 20:13:41 -0000
+X-List-Received-Date: Tue, 18 Jan 2011 20:34:49 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, Jan 18, 2011 at 10:01 AM, Ben Gamari <bgamari.foss@gmail.com> wrote:
+> As you may know, the kernel's OMAP serial driver has been fixed in
+> 2.6.37 to move away from the ttyS naming towards the OMAP-specific ttyO
+> prefix. This was done in light of the fact that ttyS is apparently
+> reserved for traditional PC-style serial controllers.
+>
+> I've spent the last day or two trying to bring my setup up to a 2.6.37
+> kernel. So far this has been quite painless, although I did get hung up
+> on one simple issue resulting from this name change for several
+> hours. Namely, the inittab still uses the ttyS naming, resulting in no
+> visible login prompt to be started. This is in addition to changing the
+> kernel's console= command line argument in the u-boot
+> configuration. This sort of naming mismatch could be tricky to handle,
+> since openembedded users will no doubt soon be using both pre- and
+> post-2.6.37 kernels. Any clever ideas for how this could be dealt with
+> in an non-obtrusive way?
+>
 
-On 18-01-11 17:54, Tom Rini wrote:
-> On 01/18/2011 01:05 AM, Otavio Salvador wrote:
->> On Tue, Jan 18, 2011 at 05:21, Graeme Gregory<dp@xora.org.uk>  wrote:
->>> On 17/01/2011 19:01, Frans Meulenbroeks wrote:
->>>> - where possible stick to one recipe per package. This reduces the
->>>> maintenance work and reduces the QA nightmare of lots of different
->>>> permutations.
->>>> I feel one recipe per package should be the common case for
->>>> applications, and preferably also for libs (although I am well aware
->>>> that especially in the latter case multiple versions cannot always be
->>>> avoided).
->>>
->>> OE is not a distro so this is a non starter already, please don't bog
->>> down this discussion by re-opening this again. Angstrom 2008, Angstrom
->>> 2010, kaelios and slugos are all released distributions with different
->>> versions of apps just as a starter and they arent even near the total
->>> number of distros in OE.
->>
->> I disagree. I think having too many versions of a package just makes
->> difficult to get things done:
->>
->>   - it increases the amount of maintainence work;
->>   - has a bigger time to get bugs spoted;
->>
->> Users of old distros ought to use a specific repository and branch.
->> Master ought to be kept clean for 'next distro release'.
-> 
-> I agree, at least going forward.  We must make it easier for
-> distributions to say "here is my 'stable' release" and "here is my
-> development release".
-> 
-> First, I'm not picking on Angstrom here, really, I swear.  It's just a
-> good example.
-> 
-> But we also don't want to be unreasonable or unbending here.  We'll have
-> to have multiple udevs (due to having different kernel versions as some
-> HW isn't on the latest and greatest).  And if DistroA says they really
-> want to stick to busybox 1.17.4 for a while, we should let that happen
-> too.  But I don't think we want to have to carry on the recipes that
-> angstrom-2008.1 wants and angstrom-2010.x wants and angstrom-2011.x
-> wants and angstrom-2012.x want into 2013, in master.
+hmmm SERIAL_CONSOLE is the place where it should be set and then
+shadow uses that to generate securetty etc. right now SERIAL_CONSOLE
+is a machine property set in machine.conf files. So may be we can let it
+emit both for omaps ? may be that will work otherwise we have to override it
+in recipes which can be ugly.
 
-And noone says you should. At some point 2010.x works well enough to
-force 2008.1 into hiding and start 201Y.x. The current situation where
-the "unstable" 2010.x ended up in a product is largely due to the gcc
-people breaking the NEON intrinsics interface API in between 4.3 and 4.5.
-
-> For example, at some point we want to switch to libtool 2.4 only.  And
-> that would certainly be a headache for angstrom-2008.1 (but we're glad,
-> really! for angstrom-2010.x using 2.4 and testing and fixing things). So
-> wouldn't it be a good thing to be able to say that if you want
-> angstrom-2008.1 you do ... this ... and get the layers that give a good
-> stable 2008.1, based on whatever policy Angstrom wants for doing updates?
-
-In the past the angstrom people created a stable branch and supported
-that for a given release. The same can be done in the layering script,
-where it would just lock down to certain revisions of various layers.
-
-But in the end if boils down to "Does OE wants to make life hard for
-DISTROs or easy". Frans is firmly in the "make it hard" camp, I hope
-others have a saner point of view.
-
-If you're forcing 90% of your users to put e.g. udev_162.bb in their
-layer you're doing it wrong. But you're also doing it wrong if you have
-20 udev recipes :)
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNNfREMkyGM64RGpERAmM/AJ9G63cPlLZQ/7V47IfNYh9KM4UbPACgkHOE
-+G8xtPepz5vtf+Lmoi5ismk=
-=lMtI
------END PGP SIGNATURE-----
-
+> Cheers,
+>
+> - Ben
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
