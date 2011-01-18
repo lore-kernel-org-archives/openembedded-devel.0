@@ -1,39 +1,27 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>)
-	id 1Pf6a3-0008Ei-9N; Tue, 18 Jan 2011 09:06:19 +0100
-Received: by bwz10 with SMTP id 10so3039478bwz.6
-	for <multiple recipients>; Tue, 18 Jan 2011 00:05:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=QyFDoMR1bhFB3Aepg8GGPE8xVT3rA23kFq+x9m88V5Y=;
-	b=QU/hRxdUxw+Wpk6mYZHP5fJ/Te9ufR5Sp8ap21tJi+va7fHIlyJv87moYX4AWa+InE
-	X1GRWY/tC07mDK3XqCI6yGAV1/he+esTfBd65yL7WB7Q/qkiRRd8bYNOPHmCYDyobKXL
-	IS42Z1hLSScWo16UlwgvfQyX6+MlHdC1U4nKo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=cyenpfzMhcajHZjDOvUKO183xguEYoWWA3gqxgb+7p6ycFrbzcz9ilqOgiwSfr0wgV
-	nMDAQEnfEvf5T1lPx77f2WfXXM3ip4VffyVCI/yK/fxRGM56Dx80ilNrw68OgkaW0QNI
-	wMgxeHU+CepCZHxlo6Wq/GgzHh/QGriqatp1U=
-MIME-Version: 1.0
-Received: by 10.204.119.133 with SMTP id z5mr3059429bkq.72.1295337941083; Tue,
-	18 Jan 2011 00:05:41 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.59.147 with HTTP; Tue, 18 Jan 2011 00:05:41 -0800 (PST)
-In-Reply-To: <4D353F81.50301@xora.org.uk>
+	(envelope-from <koen@dominion.thruhere.net>)
+	id 1Pf7Eh-0000Eq-T3; Tue, 18 Jan 2011 09:48:19 +0100
+Received: by wwi17 with SMTP id 17so5780631wwi.24
+	for <multiple recipients>; Tue, 18 Jan 2011 00:47:41 -0800 (PST)
+Received: by 10.216.55.145 with SMTP id k17mr832066wec.48.1295340460990;
+	Tue, 18 Jan 2011 00:47:40 -0800 (PST)
+Received: from [172.20.1.5] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
+	by mx.google.com with ESMTPS id n1sm2835954weq.31.2011.01.18.00.47.39
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 18 Jan 2011 00:47:39 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+Date: Tue, 18 Jan 2011 09:47:38 +0100
+Message-Id: <BF933EAB-DA94-4C5F-BC91-EF2B45B1B657@dominion.thruhere.net>
 References: <1295027350.14388.6527.camel@rex>
 	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
 	<4D353F81.50301@xora.org.uk>
-Date: Tue, 18 Jan 2011 06:05:41 -0200
-X-Google-Sender-Auth: -1hTa6ENOe-1LSG5iCMu12LogWw
-Message-ID: <AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-members@lists.openembedded.org
+	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+To: openembedded-members@lists.openembedded.org
+X-Mailer: Apple Mail (2.1082)
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,42 +36,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2011 08:06:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 18 Jan 2011 08:48:20 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 18, 2011 at 05:21, Graeme Gregory <dp@xora.org.uk> wrote:
-> On 17/01/2011 19:01, Frans Meulenbroeks wrote:
->> - where possible stick to one recipe per package. This reduces the
->> maintenance work and reduces the QA nightmare of lots of different
->> permutations.
->> I feel one recipe per package should be the common case for
->> applications, and preferably also for libs (although I am well aware
->> that especially in the latter case multiple versions cannot always be
->> avoided).
->
-> OE is not a distro so this is a non starter already, please don't bog
-> down this discussion by re-opening this again. Angstrom 2008, Angstrom
-> 2010, kaelios and slugos are all released distributions with different
-> versions of apps just as a starter and they arent even near the total
-> number of distros in OE.
 
-I disagree. I think having too many versions of a package just makes
-difficult to get things done:
+Op 18 jan 2011, om 09:05 heeft Otavio Salvador het volgende geschreven:
 
- - it increases the amount of maintainence work;
- - has a bigger time to get bugs spoted;
+> On Tue, Jan 18, 2011 at 05:21, Graeme Gregory <dp@xora.org.uk> wrote:
+>> On 17/01/2011 19:01, Frans Meulenbroeks wrote:
+>>> - where possible stick to one recipe per package. This reduces the
+>>> maintenance work and reduces the QA nightmare of lots of different
+>>> permutations.
+>>> I feel one recipe per package should be the common case for
+>>> applications, and preferably also for libs (although I am well aware
+>>> that especially in the latter case multiple versions cannot always =
+be
+>>> avoided).
+>>=20
+>> OE is not a distro so this is a non starter already, please don't bog
+>> down this discussion by re-opening this again. Angstrom 2008, =
+Angstrom
+>> 2010, kaelios and slugos are all released distributions with =
+different
+>> versions of apps just as a starter and they arent even near the total
+>> number of distros in OE.
+>=20
+> I disagree. I think having too many versions of a package just makes
+> difficult to get things done:
+>=20
+> - it increases the amount of maintainence work;
+> - has a bigger time to get bugs spoted;
+>=20
+> Users of old distros ought to use a specific repository and branch.
+> Master ought to be kept clean for 'next distro release'.
 
-Users of old distros ought to use a specific repository and branch.
-Master ought to be kept clean for 'next distro release'.
+I've been using yocto for a few months and I *&#(@$*$(*$($@#($@ hate =
+their 1 version per recipe policy. Every monday I have a working image =
+and every wednesday I have to rebuild from scratch and reevaluate =
+because various things got removed and "upgraded". And since my distro =
+pin file is in a layer, pinnings don't get noticed.
+So instead of "building on top" of the metadata I need to resort to =
+"fork" the metadata. And I'm not the only one seeing this problem, the =
+yocto autobuilder is almost perputally red :(
 
-My 2c.
+Having 10 versions is too much, but having 3 (oldstable, stable, =
+development) shouldn't be a problem, especially if they use a common =
+.inc file.
 
---=20
-Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
-.S. Systems
-E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
-tems.com.br
+Just look at glib-2.0 in yocto. There's only one version, and that's =
+2.27.5, which is a development release (odd minor number). That's not =
+what I want to use in a distro I need to support, especially looking at =
+the huge API changes going into the 2.27 series.
+
+Similar thing for QT, I don't want 4.6.x to suddenly disappear and be =
+forced to use 4.7.x. I also don't want to move 4.6.x to a distro layer, =
+since QT is way too huge to support on your own.
+
+Or eglibc or gcc or binuils
+
+regards,
+
+Koen=
 
 
