@@ -1,26 +1,29 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>)
-	id 1Pf7Eh-0000Eq-T3; Tue, 18 Jan 2011 09:48:19 +0100
-Received: by wwi17 with SMTP id 17so5780631wwi.24
-	for <multiple recipients>; Tue, 18 Jan 2011 00:47:41 -0800 (PST)
-Received: by 10.216.55.145 with SMTP id k17mr832066wec.48.1295340460990;
-	Tue, 18 Jan 2011 00:47:40 -0800 (PST)
-Received: from [172.20.1.5] (ip545070eb.adsl-surfen.hetnet.nl [84.80.112.235])
-	by mx.google.com with ESMTPS id n1sm2835954weq.31.2011.01.18.00.47.39
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 18 Jan 2011 00:47:39 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1082)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
-Date: Tue, 18 Jan 2011 09:47:38 +0100
-Message-Id: <BF933EAB-DA94-4C5F-BC91-EF2B45B1B657@dominion.thruhere.net>
-References: <1295027350.14388.6527.camel@rex>
-	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
-	<4D353F81.50301@xora.org.uk>
-	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+	(envelope-from <dp@xora.org.uk>)
+	id 1Pf7d2-00011I-VL; Tue, 18 Jan 2011 10:13:29 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id D00E51C110;
+	Tue, 18 Jan 2011 09:12:48 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 4e4j2KC4m7VF; Tue, 18 Jan 2011 09:12:48 +0000 (GMT)
+Received: from [10.131.0.209] (188-220-38-49.zone11.bethere.co.uk
+	[188.220.38.49])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 146921C005;
+	Tue, 18 Jan 2011 09:12:48 +0000 (GMT)
+Message-ID: <4D355990.6010304@xora.org.uk>
+Date: Tue, 18 Jan 2011 09:12:48 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-members@lists.openembedded.org
-X-Mailer: Apple Mail (2.1082)
+References: <1295027350.14388.6527.camel@rex>	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>	<4D353F81.50301@xora.org.uk>
+	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+In-Reply-To: <AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -36,67 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2011 08:48:20 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Jan 2011 09:13:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-
-Op 18 jan 2011, om 09:05 heeft Otavio Salvador het volgende geschreven:
-
-> On Tue, Jan 18, 2011 at 05:21, Graeme Gregory <dp@xora.org.uk> wrote:
+On 18/01/2011 08:05, Otavio Salvador wrote:
+> On Tue, Jan 18, 2011 at 05:21, Graeme Gregory<dp@xora.org.uk>  wrote:
 >> On 17/01/2011 19:01, Frans Meulenbroeks wrote:
 >>> - where possible stick to one recipe per package. This reduces the
 >>> maintenance work and reduces the QA nightmare of lots of different
 >>> permutations.
 >>> I feel one recipe per package should be the common case for
 >>> applications, and preferably also for libs (although I am well aware
->>> that especially in the latter case multiple versions cannot always =
-be
+>>> that especially in the latter case multiple versions cannot always be
 >>> avoided).
->>=20
 >> OE is not a distro so this is a non starter already, please don't bog
->> down this discussion by re-opening this again. Angstrom 2008, =
-Angstrom
->> 2010, kaelios and slugos are all released distributions with =
-different
+>> down this discussion by re-opening this again. Angstrom 2008, Angstrom
+>> 2010, kaelios and slugos are all released distributions with different
 >> versions of apps just as a starter and they arent even near the total
 >> number of distros in OE.
->=20
 > I disagree. I think having too many versions of a package just makes
 > difficult to get things done:
->=20
-> - it increases the amount of maintainence work;
-> - has a bigger time to get bugs spoted;
->=20
+>
+>   - it increases the amount of maintainence work;
+>   - has a bigger time to get bugs spoted;
+>
 > Users of old distros ought to use a specific repository and branch.
 > Master ought to be kept clean for 'next distro release'.
+>
+>
+The ultimate end to this way of thinking is that OE reduces to becoming 
+OE-core only as anything else in there is going to be useless to 
+multiple distros.
 
-I've been using yocto for a few months and I *&#(@$*$(*$($@#($@ hate =
-their 1 version per recipe policy. Every monday I have a working image =
-and every wednesday I have to rebuild from scratch and reevaluate =
-because various things got removed and "upgraded". And since my distro =
-pin file is in a layer, pinnings don't get noticed.
-So instead of "building on top" of the metadata I need to resort to =
-"fork" the metadata. And I'm not the only one seeing this problem, the =
-yocto autobuilder is almost perputally red :(
+This then leads to the big distros like Angstrom maintaining their own 
+large meta data which is basically a fork of todays OE. Then comes the 
+point if Angstrom is providing a much better service to other DISTROS 
+like SlugOS than OE-core does then they might save themselves 
+maintenance time by re-using our large data set. Basically destroying 
+the value of OE and forcing a fork.
 
-Having 10 versions is too much, but having 3 (oldstable, stable, =
-development) shouldn't be a problem, especially if they use a common =
-.inc file.
+People really have to get out of the mindset that OE is a DISTRO, it is 
+not and must provide services to all DISTRO.
 
-Just look at glib-2.0 in yocto. There's only one version, and that's =
-2.27.5, which is a development release (odd minor number). That's not =
-what I want to use in a distro I need to support, especially looking at =
-the huge API changes going into the 2.27 series.
+Ill also point out that gentoo which is probably closest to OE in 
+management of metadata does not pathalogically delete old versions.
 
-Similar thing for QT, I don't want 4.6.x to suddenly disappear and be =
-forced to use 4.7.x. I also don't want to move 4.6.x to a distro layer, =
-since QT is way too huge to support on your own.
+Graeme
 
-Or eglibc or gcc or binuils
-
-regards,
-
-Koen=
 
 
