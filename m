@@ -1,37 +1,26 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PfKcT-0007UJ-FA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 00:05:45 +0100
-Received: by ywi6 with SMTP id 6so54719ywi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jan 2011 15:05:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=wPW5Za/+fnApFb4FZAL4L8JZVIoiFT4m0RwV+q/vBe0=;
-	b=OJMGlEFet1QKjP3XqfoqDQBPeDxvAj9+kQBV9rzDi+6h6m/VxM1m1XwpFcsQfCiUEm
-	BPrVAZA3G2ZmulW/vaVf3ZmrF0o/NM/PwDmPNW0b2D8Yba1xSdIZNdmMaLtHoJUfFKkx
-	IHgjG8/cprCbSx4ciyN1vb+jqkyZLkpEbVOTY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=ezktx9UEjGL5Qiumr0N5WFzGLOz8ah1SR0xh+SxaIJmOFc9QGNhgqus5AI+N8N6x4r
-	jAm+W4u9XOw0HnQamlCltdaxi1NRF4tRKC/NdsUn7Dy5cYawcRydhO970F40uZg7Ne8w
-	yyqNJJ7XLz2i+q55H2XiQAftjUAjHvEee0eR8=
-Received: by 10.90.104.20 with SMTP id b20mr6904448agc.193.1295391905881; Tue,
-	18 Jan 2011 15:05:05 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Tue, 18 Jan 2011 15:04:44 -0800 (PST)
-In-Reply-To: <1295388343-2058-2-git-send-email-msmith@cbnco.com>
-References: <1295388343-2058-1-git-send-email-msmith@cbnco.com>
-	<1295388343-2058-2-git-send-email-msmith@cbnco.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 18 Jan 2011 15:04:44 -0800
-Message-ID: <AANLkTi=hg7BMgGrYaJU81eCEixuQ87YiZ9u6ySKe+oWt@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PfKrb-0007mg-L0 for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 00:21:23 +0100
+Received: from f053036194.adsl.alicedsl.de ([78.53.36.194]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PfKr0-0003Ti-OU for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Jan 2011 23:20:46 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: Re: [PATCH 2/2] libsoup-2.4: update 2.29.91 to 2.32.2
+In-Reply-To: <1295264704.4844.54.camel@mattotaupa>
+References: <1295220721.13967.13.camel@mattotaupa>
+	<1295220990.13967.18.camel@mattotaupa>
+	<1295221434.13967.25.camel@mattotaupa>  <ih0tnm$ra$1@dough.gmane.org>
+	<1295264704.4844.54.camel@mattotaupa>
+Date: Wed, 19 Jan 2011 00:20:45 +0100
+Message-ID: <1295392845.32079.37.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: [PATCH] libomxil-bellagio_{0.9.2.1, git}: add patch: remove `-Werror` from `CFLAGS` to fix build with GCC 4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,115 +34,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2011 23:05:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 18 Jan 2011 23:21:23 -0000
+X-Groupsio-MsgNum: 28158
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-7LAAEF+BIlRW+QpNzIVi"
+
+--=-7LAAEF+BIlRW+QpNzIVi
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 18, 2011 at 2:05 PM, Michael Smith <msmith@cbnco.com> wrote:
-> The new release fixes several issues and is API/ABI compatible.
-> (at least, webkit-gtk still builds and runs.)
->
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> Cc: Koen Kooi <koen@openembedded.org>
+Date: Mon Jan 17 23:50:33 2011 +0100
 
-Looks ok. Make sure its not pinned somewhere then RFC those parts too
+Am Montag, den 17.01.2011, 12:45 +0100 schrieb Paul Menzel:
+> Build tested with `angstrom-2008.1` for `MACHINE =3D "beagleboard"`. With=
+ `angstrom-2010.x` it fails with the following error.
+>
+>         arm-angstrom-linux-gnueabi-libtool: compile:  arm-angstrom-linux-=
+gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3D=
+softfp -mthumb-interwork -mno-thumb -DHAVE_CONFIG_H -I. -I../.. -isystem/oe=
+/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/us=
+r/include -I../../include -I../../src -isystem/oe/build-angstrom-next/angst=
+rom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-opti=
+mizations -fomit-frame-pointer -frename-registers -O2 -ggdb2 -Wall -Werror =
+-DCONFIG_DEBUG_LEVEL=3D0 -MT libomxbase_la-omx_base_component.lo -MD -MP -M=
+F .deps/libomxbase_la-omx_base_component.Tpo -c omx_base_component.c  -fPIC=
+ -DPIC -o .libs/libomxbase_la-omx_base_component.o
+>         cc1: warnings being treated as errors
+>         omx_base_component.c: In function 'omx_base_component_GetParamete=
+r':
+>         omx_base_component.c:991:3: error: case value '2130706435' not in=
+ enumerated type 'OMX_INDEXTYPE'
+>         omx_base_component.c:918:3: error: case value '2130706436' not in=
+ enumerated type 'OMX_INDEXTYPE'
+>         make[3]: *** [libomxbase_la-omx_base_component.lo] Error 1
+>         make[3]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/=
+work/armv7a-angstrom-linux-gnueabi/libomxil-bellagio-0.9.2.1+gitr0+772f0eca=
+88b242ffb5469e8e381c63ce1f7cd3e1-r7.0/git/src/base'
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+Upstream advised to remove `-Werror` and is looking into it [1]. OpenBricks=
+ is applying the same patch [2].
 
-> ---
-> =C2=A0...isable-TLS-1.2-in-addition-to-1.0-and-1.1.patch | =C2=A0 29 ----=
-----------------
-> =C2=A0...ibsoup-2.4_2.29.91.bb =3D> libsoup-2.4_2.32.2.bb} | =C2=A0 =C2=
-=A08 +----
-> =C2=A02 files changed, 2 insertions(+), 35 deletions(-)
-> =C2=A0delete mode 100644 recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-add=
-ition-to-1.0-and-1.1.patch
-> =C2=A0rename recipes/gnome/{libsoup-2.4_2.29.91.bb =3D> libsoup-2.4_2.32.=
-2.bb} (68%)
->
-> diff --git a/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0=
--and-1.1.patch b/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1=
-.0-and-1.1.patch
-> deleted file mode 100644
-> index 1a03581..0000000
-> --- a/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.=
-1.patch
-> +++ /dev/null
-> @@ -1,29 +0,0 @@
-> -From 01a43ad9824fba77384534c6d588e0e0d653986e Mon Sep 17 00:00:00 2001
-> -From: Dan Winship <danw@gnome.org>
-> -Date: Tue, 29 Jun 2010 13:43:20 +0000
-> -Subject: Disable TLS 1.2 in addition to 1.0 and 1.1
-> -
-> -Due to bug 581342 we want to only negotiate SSL 3.0. Previously we
-> -were telling gnutls to not do TLS1.0 or TLS1.1, but that means with
-> -newer versions of gnutls that support TLS1.2 it would try to negotiate
-> -that instead and generally fail. Fix that by disabling TLS1.2 too
-> -(which works fine even with gnutls versions that don't support TLS1.2
-> -yet).
-> -
-> -https://bugzilla.gnome.org/show_bug.cgi?id=3D622857
-> ----
-> -diff --git a/libsoup/soup-gnutls.c b/libsoup/soup-gnutls.c
-> -index cb0fbe5..0b57f28 100644
-> ---- a/libsoup/soup-gnutls.c
-> -+++ b/libsoup/soup-gnutls.c
-> -@@ -477,7 +477,7 @@ soup_ssl_wrap_iochannel (GIOChannel *sock, gboolean =
-non_blocking,
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto THROW_CREATE_ERRO=
-R;
-> -
-> - =C2=A0 =C2=A0 =C2=A0 /* See http://bugzilla.gnome.org/show_bug.cgi?id=
-=3D581342 */
-> -- =C2=A0 =C2=A0 =C2=A0if (gnutls_priority_set_direct (session, "NORMAL:!=
-VERS-TLS1.1:!VERS-TLS1.0", NULL) !=3D 0)
-> -+ =C2=A0 =C2=A0 =C2=A0if (gnutls_priority_set_direct (session, "NORMAL:!=
-VERS-TLS1.2:!VERS-TLS1.1:!VERS-TLS1.0", NULL) !=3D 0)
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto THROW_CREATE_ERRO=
-R;
-> -
-> - =C2=A0 =C2=A0 =C2=A0 if (gnutls_credentials_set (session, GNUTLS_CRD_CE=
-RTIFICATE,
-> ---
-> -cgit v0.8.3.1
-> diff --git a/recipes/gnome/libsoup-2.4_2.29.91.bb b/recipes/gnome/libsoup=
--2.4_2.32.2.bb
-> similarity index 68%
-> rename from recipes/gnome/libsoup-2.4_2.29.91.bb
-> rename to recipes/gnome/libsoup-2.4_2.32.2.bb
-> index aec60fa..5bc793c 100644
-> --- a/recipes/gnome/libsoup-2.4_2.29.91.bb
-> +++ b/recipes/gnome/libsoup-2.4_2.32.2.bb
-> @@ -3,15 +3,11 @@ SECTION =3D "x11/gnome/libs"
-> =C2=A0LICENSE =3D "GPL"
-> =C2=A0DEPENDS =3D "libproxy glib-2.0 gnutls libxml2 sqlite3 gnome-keyring=
-"
->
-> -PR =3D "r2"
-> -
-> =C2=A0inherit gnome
->
-> =C2=A0SRC_URI =3D "${GNOME_MIRROR}/libsoup/${@gnome_verdir("${PV}")}/libs=
-oup-${PV}.tar.bz2;name=3Dlibsoup"
-> -SRC_URI[libsoup.md5sum] =3D "900390c0ead254fbb23f3f0b84fd18bb"
-> -SRC_URI[libsoup.sha256sum] =3D "626c88f6b87463cb092733d2bcd5672ca69529a7=
-66cc6c5cc817f34b49c821b1"
-> -
-> -SRC_URI +=3D "file://Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch"
-> +SRC_URI[libsoup.md5sum] =3D "03f37350a2a31046ebabb8470e75abcc"
-> +SRC_URI[libsoup.sha256sum] =3D "96e6973c8b7459523c0f44e7aec69528ff2fbd38=
-8e8ddc415f91bcc42f50777f"
->
-> =C2=A0S =3D "${WORKDIR}/libsoup-${PV}"
->
-> --
-> 1.6.3.2
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+A similar patch would make 0.9.2 compile, but this one here does not apply =
+there (`CFLAGS=3D"${CFLAGS} -Werror"` instead of `CFLAGS=3D"${CFLAGS} -Wall=
+ -Werror"`).
 
+[1] http://sourceforge.net/mailarchive/message.php?msg_id=3D26911808
+[2] http://hg.openbricks.org/openbricks/rev/4f4ed3a596f2
 
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ ...01-configure.ac-remove-Werror-from-CFLAGS.patch |   32 ++++++++++++++++=
+++++
+ recipes/openmax/libomxil-bellagio_0.9.2.1.bb       |    4 ++
+ recipes/openmax/libomxil-bellagio_git.bb           |    3 ++
+ 3 files changed, 39 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/openmax/libomxil-bellagio/0001-configure.ac-rem=
+ove-Werror-from-CFLAGS.patch
+
+diff --git a/recipes/openmax/libomxil-bellagio/0001-configure.ac-remove-Wer=
+ror-from-CFLAGS.patch b/recipes/openmax/libomxil-bellagio/0001-configure.ac=
+-remove-Werror-from-CFLAGS.patch
+new file mode 100644
+index 0000000..1df2b26
+--- /dev/null
++++ b/recipes/openmax/libomxil-bellagio/0001-configure.ac-remove-Werror-fro=
+m-CFLAGS.patch
+@@ -0,0 +1,32 @@
++From 85a2b9666ba2b65920f4ad0e2216405dc14340d4 Mon Sep 17 00:00:00 2001
++From: Paul Menzel <paulepanter@users.sourceforge.net>
++Date: Mon, 17 Jan 2011 23:35:18 +0100
++Subject: [PATCH] configure.ac: remove `-Werror` from `CFLAGS`
++
++These options should be set when compiling the program and passed by an en=
+vironment variable. Or there should be an option to turn these restrictive =
+options off.
++
++Currently the build fails at least with GCC 4.5. It is known to work with =
+GCC 4.3.3 [1].
++
++[1] http://sourceforge.net/mailarchive/message.php?msg_id=3D26911808
++
++Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
++---
++ configure.ac |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index d6e0bc9..fb5c8c8 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -5,7 +5,7 @@ AM_INIT_AUTOMAKE()
++ AC_PREREQ([2.59])
++=20
++ AC_CONFIG_HEADERS([config.h])
++-CFLAGS=3D"${CFLAGS} -Wall -Werror"
+++CFLAGS=3D"${CFLAGS} -Wall"
++=20
++ #########################################################################=
+#######
++ # Set the shared versioning info, according to section 6.3 of the libtool=
+ info #
++--=20
++1.7.2.3
++
+diff --git a/recipes/openmax/libomxil-bellagio_0.9.2.1.bb b/recipes/openmax=
+/libomxil-bellagio_0.9.2.1.bb
+index f21c731..89f521a 100644
+--- a/recipes/openmax/libomxil-bellagio_0.9.2.1.bb
++++ b/recipes/openmax/libomxil-bellagio_0.9.2.1.bb
+@@ -2,5 +2,9 @@ require ${PN}.inc
+=20
+ PR =3D "${INC_PR}.0"
+=20
++SRC_URI +=3D " \
++	file://0001-configure.ac-remove-Werror-from-CFLAGS.patch \
++"
++
+ SRC_URI[md5sum] =3D "323049db668ab260870fd7ecd2ec4156"
+ SRC_URI[sha256sum] =3D "75cf8d3b5cac2764420ae2cc7846b9bb12a47d2ca04c96e582=
+1309b0124ddc72"
+diff --git a/recipes/openmax/libomxil-bellagio_git.bb b/recipes/openmax/lib=
+omxil-bellagio_git.bb
+index 4e28251..f58adf4 100644
+--- a/recipes/openmax/libomxil-bellagio_git.bb
++++ b/recipes/openmax/libomxil-bellagio_git.bb
+@@ -4,6 +4,9 @@ PR =3D "${INC_PR}.0"
+=20
+ SRCREV =3D "772f0eca88b242ffb5469e8e381c63ce1f7cd3e1"
+ SRC_URI =3D "git://omxil.git.sourceforge.net/gitroot/omxil/omxil;protocol=
+=3Dgit"
++SRC_URI +=3D " \
++	file://0001-configure.ac-remove-Werror-from-CFLAGS.patch \
++"
+ PV =3D "0.9.2.1"
+ PR =3D "${INC_PR}.0"
+ PR_append =3D "+gitr${SRCPV}"
+--=20
+1.7.2.3
+
+--=-7LAAEF+BIlRW+QpNzIVi
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk02IEcACgkQPX1aK2wOHViy2QCfdthRFUYqu4tWvXzZMxRLZ/gJ
+fK0AmwQRwJoVUCJ/2HdN3VTSIcby8nxc
+=4F5D
+-----END PGP SIGNATURE-----
+
+--=-7LAAEF+BIlRW+QpNzIVi--
