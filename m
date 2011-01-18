@@ -1,35 +1,28 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from cassiel.sirena.org.uk ([80.68.93.111] ident=Debian-exim)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vadmium@gmail.com>) id 1Pf9mC-0007bE-Vv
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 12:31:05 +0100
-Received: by wyb40 with SMTP id 40so6145385wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jan 2011 03:30:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
-	:message-id:subject:from:to:content-type;
-	bh=SGM+fNT5loIrQdk0J7CEwFt72lbQowBRmOablUe7HOI=;
-	b=bcpY0Aelh5DSdU19MOKtTR97gfgAmvGYEi5/oClwH3bwoaL6sSYgQijZw901phFO5T
-	0tl7Z/7emG08e43J6MtFXs2+6nRknz5EORUdnqnQMX9Z6a7VpaUsZKD0XX6R8RHMxpbD
-	DLZFhz9ZlREQZpkd1c6JOgJTeHWK/ti2Ng4ng=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=FKBbShbhiSrlytWnAkLIr3iakzxN5HC7uYPseuaGHsGgzkj8hX2urtjW0WEWyU9+Tz
-	OAx5MeUQwa/ZPMEdLuv8NkrhyySAqXijePGMlbGK8tMd7XCfNDgnmPwcmQx/yLHJ1rJl
-	Pw6m/wulfXknEnsOn/xeOxX+TSmos1dLXM5YM=
+	(envelope-from <broonie@sirena.org.uk>)
+	id 1PfAFj-0008VL-JJ; Tue, 18 Jan 2011 13:01:35 +0100
+Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.69)
+	(envelope-from <broonie@sirena.org.uk>)
+	id 1Pf9ms-0007jh-CD; Tue, 18 Jan 2011 11:31:46 +0000
+Date: Tue, 18 Jan 2011 11:31:46 +0000
+From: Mark Brown <broonie@sirena.org.uk>
+To: openembedded-members@lists.openembedded.org
+Message-ID: <20110118113145.GA27002@sirena.org.uk>
+References: <1295027350.14388.6527.camel@rex>
+	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
+	<4D353F81.50301@xora.org.uk>
+	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.216.82.20 with SMTP id n20mr4232102wee.107.1295350226443; Tue,
-	18 Jan 2011 03:30:26 -0800 (PST)
-Sender: vadmium@gmail.com
-Received: by 10.216.17.203 with HTTP; Tue, 18 Jan 2011 03:30:26 -0800 (PST)
-Date: Tue, 18 Jan 2011 11:30:26 +0000
-X-Google-Sender-Auth: RS0t8Rrz0v0am7JSXTlCZFxviDA
-Message-ID: <AANLkTikgUimu2PPU_iDsRHUKDiEGjGL=D5w9Byf0h2Eu@mail.gmail.com>
-From: Martin Panter <vadmium+floss@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Fail if the cpio command is missing (v3)
+In-Reply-To: <AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+X-Cookie: Enjoy yourself while you're still old.
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: broonie@sirena.org.uk
+X-SA-Exim-Scanned: No (on cassiel.sirena.org.uk);
+	SAEximRunCond expanded to false
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,81 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2011 11:31:05 -0000
-X-Groupsio-MsgNum: 28133
-Content-Type: multipart/mixed; boundary=0016e6deddd31b5f3b049a1d3a7a
+X-List-Received-Date: Tue, 18 Jan 2011 12:01:35 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---0016e6deddd31b5f3b049a1d3a7a
-Content-Type: text/plain; charset=UTF-8
+On Tue, Jan 18, 2011 at 06:05:41AM -0200, Otavio Salvador wrote:
+> On Tue, Jan 18, 2011 at 05:21, Graeme Gregory <dp@xora.org.uk> wrote:
 
-This one is rebased against today's git master, with an extra line for cpio.xz
--Martin
+> > OE is not a distro so this is a non starter already, please don't bog
+> > down this discussion by re-opening this again. Angstrom 2008, Angstrom
+> > 2010, kaelios and slugos are all released distributions with different
+> > versions of apps just as a starter and they arent even near the total
+> > number of distros in OE.
 
---0016e6deddd31b5f3b049a1d3a7a
-Content-Type: text/plain; charset=UTF-8; name="cpio-check.3.patch.txt"
-Content-Disposition: attachment; filename="cpio-check.3.patch.txt"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gj2qo1h91
+> I disagree. I think having too many versions of a package just makes
+> difficult to get things done:
 
-RnJvbSAzODg2MzhjZjcyZTYyMjRmYmE0Yjk2Y2RhOGRiMjZmYmM0M2JiMjBkIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBNYXJ0aW4gUGFudGVyIDx2YWRtaXVtIMOgIGdtYWlsLmNvbT4K
-RGF0ZTogU3VuLCAxNiBKYW4gMjAxMSAwNDozODowMyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIElN
-QUdFX0NNRDogRmFpbCBpZiB0aGUgY3BpbyBjb21tYW5kIGlzIG1pc3NpbmcKClByZXZpb3VzbHkg
-bXkgY3Bpby5neiBpbWFnZSB3YXMgYW4gZW1wdHkgZ3ppcCBmaWxlIGJlY2F1c2UgdGhlIG1pc3Np
-bmcgY3Bpbwpjb21tYW5kIHdhcyBpZ25vcmVkIGFuZCBnemlwIHdhcyBibGluZGx5IHJ1biB3aXRo
-IG5vIGlucHV0LgotLS0KIGNvbmYvYml0YmFrZS5jb25mIHwgICAgOCArKysrLS0tLQogMSBmaWxl
-cyBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKyksIDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEv
-Y29uZi9iaXRiYWtlLmNvbmYgYi9jb25mL2JpdGJha2UuY29uZgppbmRleCAzMWU2YWJjLi4wNDJh
-MDZjIDEwMDY0NAotLS0gYS9jb25mL2JpdGJha2UuY29uZgorKysgYi9jb25mL2JpdGJha2UuY29u
-ZgpAQCAtMzk1LDEwICszOTUsMTAgQEAgSU1BR0VfQ01EX3RhciA9ICJjZCAke0lNQUdFX1JPT1RG
-U30gJiYgdGFyIC1jdmYgJHtERVBMT1lfRElSX0lNQUdFfS8ke0lNQUdFX05BTUUKIElNQUdFX0NN
-RF90YXIuZ3ogPSAiY2QgJHtJTUFHRV9ST09URlN9ICYmIHRhciAtemN2ZiAke0RFUExPWV9ESVJf
-SU1BR0V9LyR7SU1BR0VfTkFNRX0ucm9vdGZzLnRhci5neiAuIgogSU1BR0VfQ01EX3Rhci5iejIg
-PSAiY2QgJHtJTUFHRV9ST09URlN9ICYmIHRhciAtamN2ZiAke0RFUExPWV9ESVJfSU1BR0V9LyR7
-SU1BR0VfTkFNRX0ucm9vdGZzLnRhci5iejIgLiIKIElNQUdFX0NNRF9jcGlvID0gImNkICR7SU1B
-R0VfUk9PVEZTfSAmJiAoZmluZCAuIHwgY3BpbyAtbyAtSCBuZXdjID4ke0RFUExPWV9ESVJfSU1B
-R0V9LyR7SU1BR0VfTkFNRX0ucm9vdGZzLmNwaW8pICR7RVhUUkFfSU1BR0VDTUR9IgotSU1BR0Vf
-Q01EX2NwaW8uZ3ogPSAiY2QgJHtJTUFHRV9ST09URlN9ICYmIChmaW5kIC4gfCBjcGlvIC1vIC1I
-IG5ld2MgfCBnemlwIC1jIC05ID4ke0RFUExPWV9ESVJfSU1BR0V9LyR7SU1BR0VfTkFNRX0ucm9v
-dGZzLmNwaW8uZ3opICR7RVhUUkFfSU1BR0VDTUR9IgotSU1BR0VfQ01EX2NwaW8ueHogPSAiY2Qg
-JHtJTUFHRV9ST09URlN9ICYmIChmaW5kIC4gfCBjcGlvIC1vIC1IIG5ld2MgfCB4eiAtYyAke1ha
-X0NPTVBSRVNTSU9OX0xFVkVMfSA+ICR7REVQTE9ZX0RJUl9JTUFHRX0vJHtJTUFHRV9OQU1FfS5y
-b290ZnMuY3Bpby54eikgJHtFWFRSQV9JTUFHRUNNRH0iCi1JTUFHRV9DTURfY3Bpby5nei51LWJv
-b3QgPSAiY2QgJHtJTUFHRV9ST09URlN9ICYmIChmaW5kIC4gfCBjcGlvIC1vIC1IIG5ld2MgfCBn
-emlwIC1jIC05ID4ke0RFUExPWV9ESVJfSU1BR0V9LyR7SU1BR0VfTkFNRX0ucm9vdGZzLmNwaW8u
-Z3opICR7RVhUUkFfSU1BR0VDTUR9OyBta2ltYWdlIC1BICR7VUJPT1RfQVJDSH0gLU8gbGludXgg
-LVQgcmFtZGlzayAtQyBnemlwIC1uICR7SU1BR0VfTkFNRX0gLWQgJHtERVBMT1lfRElSX0lNQUdF
-fS8ke0lNQUdFX05BTUV9LnJvb3Rmcy5jcGlvLmd6ICR7REVQTE9ZX0RJUl9JTUFHRX0vJHtJTUFH
-RV9OQU1FfS5yb290ZnMuY3Bpby5nei51LWJvb3QiCi1JTUFHRV9DTURfY3Bpby5sem1hID0gImNk
-ICR7SU1BR0VfUk9PVEZTfSAmJiAoZmluZCAuIHwgY3BpbyAtbyAtSCBuZXdjIHwgbHptYSAtYyAt
-OSA+JHtERVBMT1lfRElSX0lNQUdFfS8ke0lNQUdFX05BTUV9LnJvb3Rmcy5jcGlvLmx6bWEpICR7
-RVhUUkFfSU1BR0VDTUR9IgorSU1BR0VfQ01EX2NwaW8uZ3ogPSAidHlwZSBjcGlvID4vZGV2L251
-bGw7IGNkICR7SU1BR0VfUk9PVEZTfSAmJiAoZmluZCAuIHwgY3BpbyAtbyAtSCBuZXdjIHwgZ3pp
-cCAtYyAtOSA+JHtERVBMT1lfRElSX0lNQUdFfS8ke0lNQUdFX05BTUV9LnJvb3Rmcy5jcGlvLmd6
-KSAke0VYVFJBX0lNQUdFQ01EfSIKK0lNQUdFX0NNRF9jcGlvLnh6ID0gInR5cGUgY3BpbyA+L2Rl
-di9udWxsOyBjZCAke0lNQUdFX1JPT1RGU30gJiYgKGZpbmQgLiB8IGNwaW8gLW8gLUggbmV3YyB8
-IHh6IC1jICR7WFpfQ09NUFJFU1NJT05fTEVWRUx9ID4gJHtERVBMT1lfRElSX0lNQUdFfS8ke0lN
-QUdFX05BTUV9LnJvb3Rmcy5jcGlvLnh6KSAke0VYVFJBX0lNQUdFQ01EfSIKK0lNQUdFX0NNRF9j
-cGlvLmd6LnUtYm9vdCA9ICJ0eXBlIGNwaW8gPi9kZXYvbnVsbDsgY2QgJHtJTUFHRV9ST09URlN9
-ICYmIChmaW5kIC4gfCBjcGlvIC1vIC1IIG5ld2MgfCBnemlwIC1jIC05ID4ke0RFUExPWV9ESVJf
-SU1BR0V9LyR7SU1BR0VfTkFNRX0ucm9vdGZzLmNwaW8uZ3opICR7RVhUUkFfSU1BR0VDTUR9OyBt
-a2ltYWdlIC1BICR7VUJPT1RfQVJDSH0gLU8gbGludXggLVQgcmFtZGlzayAtQyBnemlwIC1uICR7
-SU1BR0VfTkFNRX0gLWQgJHtERVBMT1lfRElSX0lNQUdFfS8ke0lNQUdFX05BTUV9LnJvb3Rmcy5j
-cGlvLmd6ICR7REVQTE9ZX0RJUl9JTUFHRX0vJHtJTUFHRV9OQU1FfS5yb290ZnMuY3Bpby5nei51
-LWJvb3QiCitJTUFHRV9DTURfY3Bpby5sem1hID0gInR5cGUgY3BpbyA+L2Rldi9udWxsOyBjZCAk
-e0lNQUdFX1JPT1RGU30gJiYgKGZpbmQgLiB8IGNwaW8gLW8gLUggbmV3YyB8IGx6bWEgLWMgLTkg
-PiR7REVQTE9ZX0RJUl9JTUFHRX0vJHtJTUFHRV9OQU1FfS5yb290ZnMuY3Bpby5sem1hKSAke0VY
-VFJBX0lNQUdFQ01EfSIKIElNQUdFX0NNRF91YmkgPSAiZWNobyBcW3ViaWZzXF0gPiB1YmluaXpl
-LmNmZyA7IGVjaG8gbW9kZT11YmkgPj4gdWJpbml6ZS5jZmcgOyBlY2hvIGltYWdlPSR7REVQTE9Z
-X0RJUl9JTUFHRX0vJHtJTUFHRV9OQU1FfS5yb290ZnMudWJpZnMgPj4gdWJpbml6ZS5jZmcgOyBl
-Y2hvIHZvbF9pZD0wID4+IHViaW5pemUuY2ZnIDsgZWNobyB2b2xfdHlwZT1keW5hbWljID4+IHVi
-aW5pemUuY2ZnIDsgZWNobyB2b2xfbmFtZT0ke1VCSV9WT0xOQU1FfSA+PiB1YmluaXplLmNmZyA7
-IGVjaG8gdm9sX2ZsYWdzPWF1dG9yZXNpemUgPj4gdWJpbml6ZS5jZmc7bWtmcy51YmlmcyAtciAk
-e0lNQUdFX1JPT1RGU30gLW8gJHtERVBMT1lfRElSX0lNQUdFfS8ke0lNQUdFX05BTUV9LnJvb3Rm
-cy51YmlmcyAke01LVUJJRlNfQVJHU30gJiYgdWJpbml6ZSAtbyAke0RFUExPWV9ESVJfSU1BR0V9
-LyR7SU1BR0VfTkFNRX0ucm9vdGZzLnViaSAke1VCSU5JWkVfQVJHU30gdWJpbml6ZS5jZmciCiBJ
-TUFHRV9DTURfdWJpZnMgPSAibWtmcy51YmlmcyAtciAke0lNQUdFX1JPT1RGU30gLW8gJHtERVBM
-T1lfRElSX0lNQUdFfS8ke0lNQUdFX05BTUV9LnViaWZzLmltZyAke01LVUJJRlNfQVJHU30iCiAK
-LS0gCjEuNy4xCgo=
+>  - it increases the amount of maintainence work;
+>  - has a bigger time to get bugs spoted;
 
---0016e6deddd31b5f3b049a1d3a7a--
+> Users of old distros ought to use a specific repository and branch.
+> Master ought to be kept clean for 'next distro release'.
+
+I don't think there's a massive conflict between the idea that it's a
+good idea to keep the number of versions that are maintained limited and
+the idea that the limit on the number of versions being maintained
+should be greater than one which seems to be all that's being said here.
+
+
