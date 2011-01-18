@@ -1,33 +1,38 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PfEqn-000820-FJ
+	(envelope-from <chase.maupin@ti.com>) id 1PfFYm-0000aR-07
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 17:56:09 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PfEqA-00012s-HG from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Jan 2011 08:55:30 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 18 Jan 2011 08:55:30 -0800
-Received: from [172.30.80.246] ([172.30.80.246]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 18 Jan 2011 09:55:29 -0700
-Message-ID: <4D35C5FE.9000705@mentor.com>
-Date: Tue, 18 Jan 2011 09:55:26 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Tue, 18 Jan 2011 18:41:36 +0100
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p0IHeuOi024650
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jan 2011 11:40:56 -0600
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id p0IHetsO013895
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jan 2011 11:40:55 -0600 (CST)
+Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p0IHet2t026380
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jan 2011 11:40:55 -0600 (CST)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
+	([157.170.170.8]) with mapi; Tue, 18 Jan 2011 11:40:55 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 18 Jan 2011 11:40:54 -0600
+Thread-Topic: [oe] Bulding multiple U-Boot configs for one machine
+Thread-Index: Acu2lK30a9LeKCvXQauBLgDRRl67sAAoffmg
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F08032A0AF697@dlee06.ent.ti.com>
+References: <4D34BD0A.3010206@atmel.com> <4D34BFB2.6030605@mentor.com>
+In-Reply-To: <4D34BFB2.6030605@mentor.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1295363929-13246-1-git-send-email-kergoth@gmail.com>
-	<1295363929-13246-4-git-send-email-kergoth@gmail.com>
-In-Reply-To: <1295363929-13246-4-git-send-email-kergoth@gmail.com>
-X-OriginalArrivalTime: 18 Jan 2011 16:55:29.0501 (UTC)
-	FILETIME=[830A88D0:01CBB730]
-Subject: Re: [PATCH 4/4] bin/install: implement -D internally
+Subject: Re: Bulding multiple U-Boot configs for one machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,63 +46,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2011 16:56:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Jan 2011 17:41:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 01/18/2011 08:18 AM, Chris Larson wrote:
-> From: Chris Larson<chris_larson@mentor.com>
->
-> Signed-off-by: Chris Larson<chris_larson@mentor.com>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Tom Rini
+> Sent: Monday, January 17, 2011 4:16 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Bulding multiple U-Boot configs for one machine
+>=20
+> On 01/17/2011 03:04 PM, Ulf Samuelsson wrote:
+> > Managed to get some time over and checked in a recipe
+> > for u-boot-2010.12 which builds all u-boot configs
+> > specified in the UBOOT_MACHINES (note "S" at the end)
+> >
+> > The frecipe is available in a private branch:
+> > "ulf/linux-2.6.30-2011-01-16" (or similar).
+> >
+> > There is a SAM9M10 machine checked in as well as a test case.
+> > grep for UBOOT_MACHINES in the conf/machine directory to find out which=
+.
+> >
+> > Note that
+> > UBOOT_MACHINE =3D "at91sam9m10g45ek_config"
+> >
+> > but
+> >
+> > UBOOT_MACHINES =3D "at91sam9m10g45ek_dataflash at91sam9m10g45ek_sd"
+> >
+> > I.E: No "_config" in the list.
+> >
+> > The goal of the new branch is to test booting from an SD-Card
+> > without any other flash in the system.
+> > Have tested this outside openembedded so far, but
+> > the current branch is still to be tested on a board.
+>=20
+> I can see a number of other use cases for this type of functionality so
+> +1 on the concept from me.
 
-Fold this into #3?
+Agreed.  Would love to see a patch for this because the concept is good.
 
-> ---
->   bin/install |   13 ++++++++++++-
->   1 files changed, 12 insertions(+), 1 deletions(-)
->
-> diff --git a/bin/install b/bin/install
-> index 4ad8172..1c938755 100755
-> --- a/bin/install
-> +++ b/bin/install
-> @@ -1,9 +1,13 @@
->   #!/bin/sh
-> +#
-> +# Portability notes:
-> +# - We allow what SuSv3 defines
-> +# - We implement -D internally
->
->   source $(dirname $0)/wrapper.sh
->
->   saved=""
-> -while getopts dbCcMpSsvB:f:g:m:o: opt; do
-> +while getopts dbCcMpSsvB:f:g:m:o:D opt; do
->       case "$opt" in
->           s)
->               # Ignore strip argument
-> @@ -12,6 +16,9 @@ while getopts dbCcMpSsvB:f:g:m:o: opt; do
->               save "-$opt"
->               save "$OPTARG"
->               ;;
-> +        D)
-> +            createleading="1"
-> +            ;;
->           \?)
->               exit 1
->               ;;
-> @@ -25,4 +32,8 @@ for arg; do
->       save "$arg"
->   done
->
-> +if [ $# == 2 -a -n "$createleading" ]; then
-> +    install -d $(dirname $2)
-> +fi
-> +
->   exec_real
-
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+>=20
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
