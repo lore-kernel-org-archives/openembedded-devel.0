@@ -1,37 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>)
-	id 1PfGZM-0001k2-Ll; Tue, 18 Jan 2011 19:46:16 +0100
-Received: by iyj18 with SMTP id 18so6208124iyj.6
-	for <multiple recipients>; Tue, 18 Jan 2011 10:45:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=mt+h2pr+MZszZeehg7WUD3C3gnTEG22sKtIO5M3SDUM=;
-	b=JRBfjuzY/HjDpOWU4tRXfQg5l3wjsAnJ5gFmdbsjnMWuNWH86jxeew63yA3BX2h0H+
-	gr+ATyy3Mg2t0K/iPtW/2W+EkxGOwM8boHSBDjB8Ic6SGrLwIe0soj4M1LePgTAO5s7n
-	Z5Wd/kv/H68EDYLYVJ79Dg2xNBVl8kvq1deGA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=vuod+iOgsr2o9WsxuFpnWf4gfdwCw0pmB5/hifWMjKq/L/lSXeRrnVX99ynlmh26jM
-	ZU+2FrNEfCmS/eaZVKuU6qaHpCLzfBnCCdmNv4eN0uIKy7c7xVkPHw0jrehVqA5oS+oK
-	ZWZNer4XMf1Hl0QjXS4FrZIzSZAkZjtbK4J1A=
-MIME-Version: 1.0
-Received: by 10.231.34.65 with SMTP id k1mr6549073ibd.9.1295376336656; Tue, 18
-	Jan 2011 10:45:36 -0800 (PST)
-Received: by 10.231.213.234 with HTTP; Tue, 18 Jan 2011 10:45:36 -0800 (PST)
-In-Reply-To: <20110118113145.GA27002@sirena.org.uk>
-References: <1295027350.14388.6527.camel@rex>
-	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
-	<4D353F81.50301@xora.org.uk>
-	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
-	<20110118113145.GA27002@sirena.org.uk>
-Date: Tue, 18 Jan 2011 19:45:36 +0100
-Message-ID: <AANLkTik-GRoEKCeEjC2LCg10GQq7CSVG9Ky7Z6Cn0DBO@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-members@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PfHvx-0003Ta-NX for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Jan 2011 21:13:41 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PfHvL-0006Uq-WB for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Jan 2011 21:13:04 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jan 2011 21:13:03 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jan 2011 21:13:03 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 18 Jan 2011 21:12:52 +0100
+Message-ID: <ih4s84$gbj$1@dough.gmane.org>
+References: <1295027350.14388.6527.camel@rex>	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>	<4D353F81.50301@xora.org.uk>	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+	<4D35C5C3.60205@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D35C5C3.60205@mentor.com>
+X-Enigmail-Version: 1.0.1
 Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,75 +43,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2011 18:46:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Jan 2011 20:13:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2011/1/18 Mark Brown <broonie@sirena.org.uk>:
-> On Tue, Jan 18, 2011 at 06:05:41AM -0200, Otavio Salvador wrote:
->> On Tue, Jan 18, 2011 at 05:21, Graeme Gregory <dp@xora.org.uk> wrote:
->
->> > OE is not a distro so this is a non starter already, please don't bog
->> > down this discussion by re-opening this again. Angstrom 2008, Angstrom
->> > 2010, kaelios and slugos are all released distributions with different
->> > versions of apps just as a starter and they arent even near the total
->> > number of distros in OE.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 18-01-11 17:54, Tom Rini wrote:
+> On 01/18/2011 01:05 AM, Otavio Salvador wrote:
+>> On Tue, Jan 18, 2011 at 05:21, Graeme Gregory<dp@xora.org.uk>  wrote:
+>>> On 17/01/2011 19:01, Frans Meulenbroeks wrote:
+>>>> - where possible stick to one recipe per package. This reduces the
+>>>> maintenance work and reduces the QA nightmare of lots of different
+>>>> permutations.
+>>>> I feel one recipe per package should be the common case for
+>>>> applications, and preferably also for libs (although I am well aware
+>>>> that especially in the latter case multiple versions cannot always be
+>>>> avoided).
+>>>
+>>> OE is not a distro so this is a non starter already, please don't bog
+>>> down this discussion by re-opening this again. Angstrom 2008, Angstrom
+>>> 2010, kaelios and slugos are all released distributions with different
+>>> versions of apps just as a starter and they arent even near the total
+>>> number of distros in OE.
+>>
 >> I disagree. I think having too many versions of a package just makes
 >> difficult to get things done:
->
->> =A0- it increases the amount of maintainence work;
->> =A0- has a bigger time to get bugs spoted;
->
+>>
+>>   - it increases the amount of maintainence work;
+>>   - has a bigger time to get bugs spoted;
+>>
 >> Users of old distros ought to use a specific repository and branch.
 >> Master ought to be kept clean for 'next distro release'.
->
-> I don't think there's a massive conflict between the idea that it's a
-> good idea to keep the number of versions that are maintained limited and
-> the idea that the limit on the number of versions being maintained
-> should be greater than one which seems to be all that's being said here.
+> 
+> I agree, at least going forward.  We must make it easier for
+> distributions to say "here is my 'stable' release" and "here is my
+> development release".
+> 
+> First, I'm not picking on Angstrom here, really, I swear.  It's just a
+> good example.
+> 
+> But we also don't want to be unreasonable or unbending here.  We'll have
+> to have multiple udevs (due to having different kernel versions as some
+> HW isn't on the latest and greatest).  And if DistroA says they really
+> want to stick to busybox 1.17.4 for a while, we should let that happen
+> too.  But I don't think we want to have to carry on the recipes that
+> angstrom-2008.1 wants and angstrom-2010.x wants and angstrom-2011.x
+> wants and angstrom-2012.x want into 2013, in master.
 
-To make things a little bit clearer.
-I am not opposed to multiple versions per se.
-I have a concern wrt maintenance though, and that is one of the
-reasons I prefer a limited number of recipes.
+And noone says you should. At some point 2010.x works well enough to
+force 2008.1 into hiding and start 201Y.x. The current situation where
+the "unstable" 2010.x ended up in a product is largely due to the gcc
+people breaking the NEON intrinsics interface API in between 4.3 and 4.5.
 
-As a recipe maintainer I feel that I do not need to carry the burden
-caused by a decision of a distro for a specific version of a recipe.
-E.g. if I maintain package foo, and that package is at version X and
-upstream moves to version Y, I think it is part of the responsibility
-of the recipe maintainer to move to Y (after testing of course).
-However if Y is proven to be stable, generally as a maintainer I want
-to retire X (unless there are compelling reasons to keep it, e.g.
-because heavily changed functionality or incompatible api's or so).
-If a distro feels it wants to stay at X, I have no problem with that,
-but I feel that distro should also take over the maintenance
-responsibility (and retire X if it is not used any more). Don't put
-the burden of your choices onto someone else!
-I have neither the time or the interest to support a substantial
-number of variants that IMHO are outdated. If someone else feels (s)he
-wants to keep using them, feel free, but then also please take the
-maintenance burden.
+> For example, at some point we want to switch to libtool 2.4 only.  And
+> that would certainly be a headache for angstrom-2008.1 (but we're glad,
+> really! for angstrom-2010.x using 2.4 and testing and fixing things). So
+> wouldn't it be a good thing to be able to say that if you want
+> angstrom-2008.1 you do ... this ... and get the layers that give a good
+> stable 2008.1, based on whatever policy Angstrom wants for doing updates?
 
-Unfortunately some of our developers have a habit of creating lots of
-new recipes but rarely clean up (but also do not maintain the old
-stuff), leaving a trail of undefined/orphaned recipes.
-I think we should try to avoid having those orphaned recipes.
+In the past the angstrom people created a stable branch and supported
+that for a given release. The same can be done in the layering script,
+where it would just lock down to certain revisions of various layers.
 
-Wrt the example of Graeme on abiword (not sure if it was here or on
-irc). His reasoning was that he wanted to keep an older version
-because it was much smaller. Being in the business of resource
-constrained embedded systems I clearly understand this. However I feel
-it is better to make that explicit, e.g. by introducing a recipe
-foo-small_X.bb adjacent to foo_Y.bb (or maybe even foo_X.bb), than to
-have it implicit (like in the case foo_X.bb and foo_Y.bb).
-In a few cases we already do so, but typically then it is
-function/interface driven. bluez vz bluez4 comes to mind.
+But in the end if boils down to "Does OE wants to make life hard for
+DISTROs or easy". Frans is firmly in the "make it hard" camp, I hope
+others have a saner point of view.
 
-Thinking of it, we could also go for a "previous" layer or so where we
-move older versions to. Those who want them then can add that layer,
-those who do not want them do not include that layer.
+If you're forcing 90% of your users to put e.g. udev_162.bb in their
+layer you're doing it wrong. But you're also doing it wrong if you have
+20 udev recipes :)
 
-Frans.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNNfREMkyGM64RGpERAmM/AJ9G63cPlLZQ/7V47IfNYh9KM4UbPACgkHOE
++G8xtPepz5vtf+Lmoi5ismk=
+=lMtI
+-----END PGP SIGNATURE-----
+
 
 
