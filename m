@@ -1,44 +1,35 @@
-Received: from mail-yi0-f41.google.com ([209.85.218.41])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PfPh6-0004q4-Vk
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 05:30:54 +0100
-Received: by yia25 with SMTP id 25so135150yia.28
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PfSOR-0002o7-Ie for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 08:23:47 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PfSNp-0002Wi-Ny for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 08:23:09 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Jan 2011 08:23:09 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jan 2011 20:29:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=8brW7K3Y5y4WFy+vArydpUFheZdrMlmC442QgqcOduw=;
-	b=xeUvcOS3EW040eCHAXbyzTq9jAmPe1GQiSi3EfWq484Zs9W75kFZMWa7Sm1S62nhU3
-	GHFwWUUXTSGyjkI4tK7eMGAhEO4pNr0zh/Gx8hOk0QIIW0q40aJAAgu68vWSXRp6zgGr
-	/2O6787LITY8ruD19ZwAVzpUqItWs3oSJlNfo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=GKAgHImvcwsfWhxqfzTXTpRf1C/CKv2MJAlVS4uPi72CJ5foDCeZnjDLdsGt0cNgx8
-	ebRwMg+VKtvQX3lmAyBec9OLQSMw5mojeXXm7E1R9jzZC3laCk/js5HJLcTVZjleQOdB
-	PVsxs+bb7jJb15EzGCy5Zzq9/gWSYq+orNr0M=
-Received: by 10.100.94.14 with SMTP id r14mr128637anb.261.1295411397466;
-	Tue, 18 Jan 2011 20:29:57 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id c30sm7877362anc.0.2011.01.18.20.29.56
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 18 Jan 2011 20:29:56 -0800 (PST)
-Date: Tue, 18 Jan 2011 20:29:54 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 19 Jan 2011 08:23:09 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110119042954.GA30752@gmail.com>
-References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>
-	<4D34952B.607@mentor.com> <201101180730.29536.roman@khimov.ru>
-	<4D3661AC.8030708@mentor.com>
-MIME-Version: 1.0
-In-Reply-To: <4D3661AC.8030708@mentor.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 19 Jan 2011 08:22:56 +0100
+Message-ID: <ih63gg$6lr$1@dough.gmane.org>
+References: <1295388343-2058-1-git-send-email-msmith@cbnco.com>
+	<1295388343-2058-2-git-send-email-msmith@cbnco.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <1295388343-2058-2-git-send-email-msmith@cbnco.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH 2/2] libsoup-2.4: update 2.29.91 to 2.32.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,48 +43,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 04:30:54 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 19 Jan 2011 07:23:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On (18/01/11 20:59), Tom Rini wrote:
-> On 01/17/2011 09:30 PM, Roman I Khimov wrote:
-> >В сообщении от Понедельник 17 января 2011 22:14:51 автор Tom Rini написал:
-> >>On 01/17/2011 10:50 AM, Khem Raj wrote:
-> >>I see different problems with perl 5.10.1 + uclibc + p2020ds, so I guess
-> >>this is fine with me.
-> >
-> >What kind of problems?
-> 
-> Khem fixed it tonight.  At heart, there's been a need to make much
-> better use of the libc-uclibc override rather than testing TARGET_OS
-> as there's at least 'linux-uclibc', 'linux-uclibceabi' and
-> 'linux-uclibcspe' as valid TARGET_OS combinations.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I thought about it and indeed it would be better to have a LIBC override
-but its defined in .inc files which may not be included by all
-distributions, if this makes into bitbake.conf somehow then that would
-be better or we can decide to have a global data var called LIBC or some
-sort.
+On 18-01-11 23:05, Michael Smith wrote:
+> The new release fixes several issues and is API/ABI compatible.
+> (at least, webkit-gtk still builds and runs.)
+> 
+> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> Cc: Koen Kooi <koen@openembedded.org>
 
-  perl has been
-> doing a test for the first two and Khem added a test for the 3rd.
-> This got me to go and audit the recipes for using the _linux-uclibc
-> append and switching them en masse to libc-uclibc.  There were a
-> very small number of places that had been catching all 3, but for
-> the most part it was 80% catching the first two and 20% catching
-> just linux-uclibc.  I believe but didn't check that Khem caught the
-> rest of the places that were testing for TARGET_OS in shell code and
-> updated them for linux-uclibcspe.
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+
+> ---
+>  ...isable-TLS-1.2-in-addition-to-1.0-and-1.1.patch |   29 --------------------
+>  ...ibsoup-2.4_2.29.91.bb => libsoup-2.4_2.32.2.bb} |    8 +----
+>  2 files changed, 2 insertions(+), 35 deletions(-)
+>  delete mode 100644 recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch
+>  rename recipes/gnome/{libsoup-2.4_2.29.91.bb => libsoup-2.4_2.32.2.bb} (68%)
 > 
-> -- 
-> Tom Rini
-> Mentor Graphics Corporation
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> diff --git a/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch b/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch
+> deleted file mode 100644
+> index 1a03581..0000000
+> --- a/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch
+> +++ /dev/null
+> @@ -1,29 +0,0 @@
+> -From 01a43ad9824fba77384534c6d588e0e0d653986e Mon Sep 17 00:00:00 2001
+> -From: Dan Winship <danw@gnome.org>
+> -Date: Tue, 29 Jun 2010 13:43:20 +0000
+> -Subject: Disable TLS 1.2 in addition to 1.0 and 1.1
+> -
+> -Due to bug 581342 we want to only negotiate SSL 3.0. Previously we
+> -were telling gnutls to not do TLS1.0 or TLS1.1, but that means with
+> -newer versions of gnutls that support TLS1.2 it would try to negotiate
+> -that instead and generally fail. Fix that by disabling TLS1.2 too
+> -(which works fine even with gnutls versions that don't support TLS1.2
+> -yet).
+> -
+> -https://bugzilla.gnome.org/show_bug.cgi?id=622857
+> ----
+> -diff --git a/libsoup/soup-gnutls.c b/libsoup/soup-gnutls.c
+> -index cb0fbe5..0b57f28 100644
+> ---- a/libsoup/soup-gnutls.c
+> -+++ b/libsoup/soup-gnutls.c
+> -@@ -477,7 +477,7 @@ soup_ssl_wrap_iochannel (GIOChannel *sock, gboolean non_blocking,
+> - 		goto THROW_CREATE_ERROR;
+> - 
+> - 	/* See http://bugzilla.gnome.org/show_bug.cgi?id=581342 */
+> --	if (gnutls_priority_set_direct (session, "NORMAL:!VERS-TLS1.1:!VERS-TLS1.0", NULL) != 0)
+> -+	if (gnutls_priority_set_direct (session, "NORMAL:!VERS-TLS1.2:!VERS-TLS1.1:!VERS-TLS1.0", NULL) != 0)
+> - 		goto THROW_CREATE_ERROR;
+> - 
+> - 	if (gnutls_credentials_set (session, GNUTLS_CRD_CERTIFICATE,
+> ---
+> -cgit v0.8.3.1
+> diff --git a/recipes/gnome/libsoup-2.4_2.29.91.bb b/recipes/gnome/libsoup-2.4_2.32.2.bb
+> similarity index 68%
+> rename from recipes/gnome/libsoup-2.4_2.29.91.bb
+> rename to recipes/gnome/libsoup-2.4_2.32.2.bb
+> index aec60fa..5bc793c 100644
+> --- a/recipes/gnome/libsoup-2.4_2.29.91.bb
+> +++ b/recipes/gnome/libsoup-2.4_2.32.2.bb
+> @@ -3,15 +3,11 @@ SECTION = "x11/gnome/libs"
+>  LICENSE = "GPL"
+>  DEPENDS = "libproxy glib-2.0 gnutls libxml2 sqlite3 gnome-keyring"
+>  
+> -PR = "r2"
+> -
+>  inherit gnome
+>  
+>  SRC_URI = "${GNOME_MIRROR}/libsoup/${@gnome_verdir("${PV}")}/libsoup-${PV}.tar.bz2;name=libsoup"
+> -SRC_URI[libsoup.md5sum] = "900390c0ead254fbb23f3f0b84fd18bb"
+> -SRC_URI[libsoup.sha256sum] = "626c88f6b87463cb092733d2bcd5672ca69529a766cc6c5cc817f34b49c821b1"
+> -
+> -SRC_URI += "file://Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch"
+> +SRC_URI[libsoup.md5sum] = "03f37350a2a31046ebabb8470e75abcc"
+> +SRC_URI[libsoup.sha256sum] = "96e6973c8b7459523c0f44e7aec69528ff2fbd388e8ddc415f91bcc42f50777f"
+>  
+>  S = "${WORKDIR}/libsoup-${PV}"
+>  
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNNpFPMkyGM64RGpERAvnAAJoDljz3QZxRQtNKqmheOr1x2VzClACgkLIY
+sBMzE6vmlZkBQnUiQ2tV/Nk=
+=hDXq
+-----END PGP SIGNATURE-----
+
 
 
