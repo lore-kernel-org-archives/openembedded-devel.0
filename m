@@ -1,37 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PfTgO-0004PM-UN
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PfTh6-0004Q4-4z
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 09:46:25 +0100
-Received: by iwn8 with SMTP id 8so594056iwn.6
+	Wed, 19 Jan 2011 09:47:08 +0100
+Received: by iyj18 with SMTP id 18so575135iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 00:45:44 -0800 (PST)
+	Wed, 19 Jan 2011 00:46:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=0pscqWXrWi73wXE6qzdFXUpyaAQzh3uYjjBfok9Hwns=;
-	b=BwFOA76+eo8BCOnWe5tHPhveLmCr/aLKgIfOiUPOQyMaMjceAB11Kvhzs9MURkCyJg
-	9MtqtIIRlwXpjEnD1mApeQS6NERpZYW5K/l1xHpl4fXpbZvXCZym36kEpVcuEONNsQsl
-	qUgkkNP3b/FoK7YBM5owOeqn1sfOqc0Vk7Y60=
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=dRzx5Z9X3/aMOti3LepHIZfOh/jbomlmFVCScrWklyA=;
+	b=aoFXE6xdl65rEqvStNnhpTL6fLMDypKdeF6wanRebiGVwfD+BCDhf0iuJqNmDFyKJb
+	S4ykyUvbMS2HaY4VkLcPafWD57RkGNb0/tSRcKV/ACyVIybv/DFHn4hmr8RowKmUGXdy
+	7qgRXa2pzorj6KuPF1AQ1iaxndgRnxiG/lhFA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=gvzVanGW4MLk/sEAogzMuiUFYTB4sh/QSICE7yLhcS1t2MI6Ij0nDEbXPIm2QHtxtc
-	Zk8uBPs9UyBfWZif8d6AXAYHgGhFNnPAgmmoFXXydbwyxPozO5ItSB4+zwclbXod/p24
-	zoVNRwRw0BgdS7RgLED6iYE5MDWYSo4+Yg/Fg=
+	:content-type:content-transfer-encoding;
+	b=kWIzXlEMBAAqnualYzx6la7Wzsb5k1JxJ3ZpjU3NOV6XidYPKshlU4ZCERvxPjVR6B
+	Vgj95ihd6fJ2dQW/GnOXYyst7EEOJedQ7WhS4q7Gic4WyUJFD1qHdl9RT8SgJfxNKnZ9
+	pMlZG8flNqYHJj4fnBKxID2gHgY2plQXRCD68=
 MIME-Version: 1.0
-Received: by 10.231.35.5 with SMTP id n5mr417631ibd.159.1295426744775; Wed, 19
-	Jan 2011 00:45:44 -0800 (PST)
-Received: by 10.231.213.234 with HTTP; Wed, 19 Jan 2011 00:45:44 -0800 (PST)
-In-Reply-To: <ih52qr$l1v$1@dough.gmane.org>
+Received: by 10.231.34.65 with SMTP id k1mr460444ibd.9.1295426788321; Wed, 19
+	Jan 2011 00:46:28 -0800 (PST)
+Received: by 10.231.213.234 with HTTP; Wed, 19 Jan 2011 00:46:28 -0800 (PST)
+In-Reply-To: <AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
 References: <1295027350.14388.6527.camel@rex>
 	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
 	<4D353F81.50301@xora.org.uk>
 	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
 	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
-	<4D35FC8B.1090404@mentor.com> <ih52qr$l1v$1@dough.gmane.org>
-Date: Wed, 19 Jan 2011 09:45:44 +0100
-Message-ID: <AANLkTi=A2kgqgkhfw4p_Og8k9y1MBMrZLDvgwuq5Mxfj@mail.gmail.com>
+	<4D35FC8B.1090404@mentor.com>
+	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
+Date: Wed, 19 Jan 2011 09:46:28 +0100
+Message-ID: <AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: Yocto Project and OE - Where now?
@@ -48,79 +49,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 08:46:25 -0000
+X-List-Received-Date: Wed, 19 Jan 2011 08:47:08 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2011/1/18 Koen Kooi <k.kooi@student.utwente.nl>:
- if we make the delta between the 3 be just
->> the SRC_URI + checksums?
+2011/1/18 Khem Raj <raj.khem@gmail.com>:
+> On Tue, Jan 18, 2011 at 12:48 PM, Tom Rini <tom_rini@mentor.com> wrote:
+>> I think we also agree here. =A0But what's the rule of thumb(s) we want t=
+o
+>> have, to provide enough choice without too much headache? =A0As I said
+>> elsewhere, .inc files should probably be used a whole lot more, to help =
+with
+>> the problem of recipe bugfixing and N recipes for an app with the proble=
+m.
+>> =A0We should probably also say that in addition to the "keep the last GP=
+Lv2+
+>> version around" rule of thumb we should also have a "keep the latest sta=
+ble
+>> release" around too. =A0But what else? =A0To use busybox as an example, =
+do we
+>> really need to keep 1.18.0 and 1.18.1 around when we have 1.18.2? =A0How=
+ about
+>> if we make the delta between the 3 be just the SRC_URI + checksums?
 >
-> Something like:
 >
-> * keep gplv2 around if upstream switched to gplv3 at some point
-
-agree; as said before suggest to reflect the switch in the name of the recipe.
-
-> * allow old stable, stable and dev (e.g. glib 2.24, 2.26 and 2.27+git)
-
-I'd say retire old stable after a while (e.g. after stable is there
-for half a year, unless of course there are compelling reasons to keep
-it).
-Wrt dev: if we want to go to a maintainers model similar to u-boot and
-linux, I would expect this to live in a separate branch or layer.
-Once proven stable the maintainers pulls it into the core archive.
-
-> * allow active contributers some leeway to test multiple subreleases
-> (e.g. busybox 1.18.[0-99]
-
-Again here, I feel it is much better to put it into a different branch
-or layer, and once stable it is pulled into the mainline.
-Again similar to what Linus and Wolfgang do.
-
-> * The maintainer can have as many versions as he wants to.
-
-my preference: not in the main layer.
-
-> * toolchain is exempt from all that since having 20 binutils versions is
-> sometimes needed when building for 20 different archs[1].
-
-Fully agree.
+> Well what to keep around can not be generalized so much. It also
+> depends upon the nature of releases for various packages
+> some packages have a major release and then push out bug fix releases
+> like busy box case you sited but there are packages
+> which only do major releases which can cause compatibility hassles as
+> new interfaces come and old ones are removed etc.
+> so I think it has to be flexible and mostly left to package
+> maintainers discretion as they know the nature of releases most but
+> I like the idea of keeping one GPLv2 release around and 1 latest
+> release around. If a distro pinned a version then that should
+> be considered as well. It is bad to sweep underneath a distros
+> pinnings. Then they have to rebuild and they get problems
+> as they have to make sure that if a package bump happens then they
+> should be able to define an upgrade path
 >
-> But I seriously think we are overengineering this. We should have people
-> actually working on oe-core and meta-oe reach a consensus when
-> encountering problems.
+> Sometimes newer is not always better in case of udev the size has
+> increased over the time and some distro's may not like
+> it and there can be many such scenarios.
+>
 
-I beg to disagree on this.
-We have a unique opportunity at hand to improve, so it seems wise to
-raise the bar quality wise.
+I wholehearthy agree with the proposal that it is left to the package
+maintainers discretion.
+Wrt the GPLv2+ version. I suggest to reflect this in the name.
+E.g. you could have samba and samba-gplv2 (or perhaps samba-gplv2 and
+samba-gplv3). Then it immediately becomes obvious why there are two
+versions.
+Similarly with versions that became a lot fatter over time (which imho
+is a good reason to keep the old version).
 
-E.g. wrt what Richard wrote in the start post
-
-[quote]
-* Creation of a subset of metadata that has a consistent high quality
- standard:
-   - removal of legacy components (pkgconfig hacks, libtool hacks,
-     legacy staging, unneeded compiler arguments)
-   - consistent metadata layout, spacing, use of variables
-   - migration away from outdated practises (e.g. use BBCLASSEXTEND)
-[/quote]
-
-I feel when migrating recipes we should also assure that they adhere
-to a certain quality standard. That would need us to define a minimal
-standard though.
-Currently I feel we are just moving recipes, only fixing what is
-really needed to get things running (like removing legacy staging)
-whereas we could do much better.
-There are currently some things in OE that could use some improvement
-and we should take the opportunity to improve.l
-
-And yes, I have no problem in spending time to improve things, but if
-there is no consensus on where we should go this is not going to be
-effective (and actually makes it harder to improve quality wise).
-To take the bikeshed analogy up again. It does not really help if
-everyone start to paint in his own favourite color (unless maybe if
-you are still stuck in the flower power era).
-
-Frans
+Frans.
 
 
