@@ -1,16 +1,16 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msundius@sundius.com>) id 1Pfg0w-0000f0-42
+	(envelope-from <msundius@sundius.com>) id 1Pfg67-00018H-4M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 22:56:27 +0100
-Received: by qyk8 with SMTP id 8so1108777qyk.6
+	Wed, 19 Jan 2011 23:01:47 +0100
+Received: by vws6 with SMTP id 6so626782vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 13:55:45 -0800 (PST)
+	Wed, 19 Jan 2011 14:01:03 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.229.43.74 with SMTP id v10mr1020926qce.293.1295474145559; Wed,
-	19 Jan 2011 13:55:45 -0800 (PST)
-Received: by 10.229.233.213 with HTTP; Wed, 19 Jan 2011 13:55:45 -0800 (PST)
-In-Reply-To: <AANLkTimMHd-eH9tEL1tUtoUKa+zwX4+9kUdT3k_NP9nG@mail.gmail.com>
+Received: by 10.229.240.198 with SMTP id lb6mr989527qcb.255.1295474463408;
+	Wed, 19 Jan 2011 14:01:03 -0800 (PST)
+Received: by 10.229.233.213 with HTTP; Wed, 19 Jan 2011 14:01:03 -0800 (PST)
+In-Reply-To: <AANLkTimyPb-4pLrbF4ZeFwnh+9WyZtcPY1uXeYBnwUqQ@mail.gmail.com>
 References: <1295027350.14388.6527.camel@rex>
 	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
 	<4D353F81.50301@xora.org.uk>
@@ -25,8 +25,9 @@ References: <1295027350.14388.6527.camel@rex>
 	<AANLkTik9-k_euvDGZd+CFfQ9LyxD_7mubpVxPqyEsEVU@mail.gmail.com>
 	<4D36FE98.3070606@mwester.net>
 	<AANLkTimMHd-eH9tEL1tUtoUKa+zwX4+9kUdT3k_NP9nG@mail.gmail.com>
-Date: Wed, 19 Jan 2011 13:55:45 -0800
-Message-ID: <AANLkTimyPb-4pLrbF4ZeFwnh+9WyZtcPY1uXeYBnwUqQ@mail.gmail.com>
+	<AANLkTimyPb-4pLrbF4ZeFwnh+9WyZtcPY1uXeYBnwUqQ@mail.gmail.com>
+Date: Wed, 19 Jan 2011 14:01:03 -0800
+Message-ID: <AANLkTi=9HSWqm4tNmh6UNEEjsAyoZB7j_aCFssJjyanB@mail.gmail.com>
 From: C Michael Sundius <msundius@sundius.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
@@ -44,42 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 21:56:27 -0000
+X-List-Received-Date: Wed, 19 Jan 2011 22:01:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-It seems to me that this is a bit of a battle between the package
-maintainers and the distro maintainers.. Looking at this from my managements
-side of things, we use OE as a tool and its really just a means to the end.
-our customers demand that we do not change things (versions of software),
-they demand stability and they view a change in busybox or anything else a
-threat to stability. our management has also made an edict that we can not
-use gplv3. For completely non technical reasons we simply cannot move to new
-package versions without a substantial business justification. I suspect
-that that there are many (more than you realize) folk out there who are
-using OE for their own distro. If you simply whack package versions because
-something newer came out you will have these people maintaining separate
-recipes and we'll be swamped with the load and this tool will loose one of
-its best attributes.
+in rereading this I don't want to seem ungrateful, since we've certainly
+benefited from the great effort on everyones part (package and distro
+maintainers, yacto and OE... everyone).
 
-The comment that disturbed me was that distros should just move ahead
-"because its making things hard for the package maintainer". That doesn't
-wash with me because if people are using your package then you should
-support it or let someone else be the maintainer. In essence the distro's
-use of that package are your customers and the reason you have a job. OE
-does not exist as a product, rather a tool that enables customers, you can't
-create this in a vacuum without understanding who is using it.
+On Wed, Jan 19, 2011 at 1:55 PM, C Michael Sundius <msundius@sundius.com>wrote:
 
-distro maintainers are not all dumb and if they are they'll be the last
-single one using an outdated version of the software. When that happens a
-smart package maintainer will call it out leave out the old package.
-Further, it would be nice for a warning to take place so that it might have
-a "depracated" tag associated with the recipe for one release cycle to see
-if anyone cribs.
-
-So I'm standing with the guy w/ asbestos short on. I'd like to see that OE
-err on the side of "do no harm" to existing users. Its hard enough to rally
-the troops to move to updated packages much less updated meta without you
-leaving perfectly reasonable versions of software out of oe-core.
-
-mike
+>
+> It seems to me that this is a bit of a battle between the package
+> maintainers and the distro maintainers.. Looking at this from my managements
+> side of things, we use OE as a tool and its really just a means to the end.
+> our customers demand that we do not change things (versions of software),
+> they demand stability and they view a change in busybox or anything else a
+> threat to stability. our management has also made an edict that we can not
+> use gplv3. For completely non technical reasons we simply cannot move to new
+> package versions without a substantial business justification. I suspect
+> that that there are many (more than you realize) folk out there who are
+> using OE for their own distro. If you simply whack package versions because
+> something newer came out you will have these people maintaining separate
+> recipes and we'll be swamped with the load and this tool will loose one of
+> its best attributes.
+>
+> The comment that disturbed me was that distros should just move ahead
+> "because its making things hard for the package maintainer". That doesn't
+> wash with me because if people are using your package then you should
+> support it or let someone else be the maintainer. In essence the distro's
+> use of that package are your customers and the reason you have a job. OE
+> does not exist as a product, rather a tool that enables customers, you can't
+> create this in a vacuum without understanding who is using it.
+>
+> distro maintainers are not all dumb and if they are they'll be the last
+> single one using an outdated version of the software. When that happens a
+> smart package maintainer will call it out leave out the old package.
+> Further, it would be nice for a warning to take place so that it might have
+> a "depracated" tag associated with the recipe for one release cycle to see
+> if anyone cribs.
+>
+> So I'm standing with the guy w/ asbestos short on. I'd like to see that OE
+> err on the side of "do no harm" to existing users. Its hard enough to rally
+> the troops to move to updated packages much less updated meta without you
+> leaving perfectly reasonable versions of software out of oe-core.
+>
+> mike
+>
+>
 
