@@ -1,36 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PfcPx-0008Ks-GS
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pfd9k-00035L-LO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 19:06:01 +0100
-Received: by yxd5 with SMTP id 5so432776yxd.6
+	Wed, 19 Jan 2011 19:53:20 +0100
+Received: by iwn8 with SMTP id 8so1163810iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 10:05:21 -0800 (PST)
+	Wed, 19 Jan 2011 10:52:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=Zu8girlnpS98VSmRagv8HV2PyrfVjVU3YHqErnKO2j4=;
-	b=QiTMuxjhcoYkP8E1ZJ8ur1ZlVdjh4JJoQt5ibIFHnRufK7vZy0hlyp25qfKQghT4va
-	pP1GEdac3pRM8ceCkl4dj5lPiVxm2boPZeESZUXJffO4QhOyJuX6ffpTkZnVtEa/Q53r
-	0fmF7dw4ko74t39XC9IvJtNuXaaHa3cQvo2H4=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=cgxw2cX3rMoCZqpY6EUxj6qg3lskJhnh93/1EVVeJwM=;
+	b=JncOq70bfZ5JtGB2IB9NOe+EEETzre0Wad7YzGPfMbqxN4Nff+ddFjmwPZ7ptpyrvj
+	RrbWdHG96W9pja1fSUQdxyL7Hd12oPSxWJoUt/4jX73yQbhf3GIIx8BnzfmoZsJ+U6Pb
+	dFO7R46ZZ+QQdDN7EOkaffottQXFx4Bb0hJcQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=YvjE18xO+/E4wr4G3QKzjBzaHY9EHQJANMPI1M9aWNl38m3mXHcfxF6NNnE5x65o9t
-	PIux2V11lYVB6TzplntVB4XYxyUPJQlD8SGA/emMjqvaGlmyC7+wl+X35edNDflNl/ua
-	S9ixs2NkzLkH0wgOwHSYWYiJbpGGJEohR1yTw=
-Received: by 10.90.1.2 with SMTP id 2mr1314008aga.58.1295460320809; Wed, 19
-	Jan 2011 10:05:20 -0800 (PST)
+	b=TLI2ZRmp6REllal168cqs6c2VencQdXWQNQdpgtMMjXlleJXfanhbe/vvuwCkiqlCP
+	Mavxbj6n3tHVb/FRNA/Q4RRzXZZB/xNXjrO7w7YHmcjiy00Z4OSZDPz3vzq43mOAb/mu
+	d/+e8zGx8okyVZhLiPOIDf3rQ2sRApEPJdZeM=
 MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Wed, 19 Jan 2011 10:05:00 -0800 (PST)
-In-Reply-To: <1295452649-28081-2-git-send-email-eric@eukrea.com>
-References: <1295452649-28081-1-git-send-email-eric@eukrea.com>
-	<1295452649-28081-2-git-send-email-eric@eukrea.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Jan 2011 10:05:00 -0800
-Message-ID: <AANLkTinx4zebhD4xn_EYd0U7w+1QKpjALn8cc2tBKqF9@mail.gmail.com>
+Received: by 10.231.15.194 with SMTP id l2mr1312805iba.34.1295463162100; Wed,
+	19 Jan 2011 10:52:42 -0800 (PST)
+Received: by 10.231.213.234 with HTTP; Wed, 19 Jan 2011 10:52:42 -0800 (PST)
+In-Reply-To: <4D370A54.6020607@xora.org.uk>
+References: <4D36F9BE.1010601@xora.org.uk>
+	<AANLkTi=sJGSCRxSF6tFPhrGb=NKfmiLNURg-n-Gmgc3Z@mail.gmail.com>
+	<4D370A54.6020607@xora.org.uk>
+Date: Wed, 19 Jan 2011 19:52:42 +0100
+Message-ID: <AANLkTikUOPo2v+=qYF_afhSHxkyb1EK3HJC1_E4RRGub@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] busybox-1.18.2: add latest fixes
+Subject: Re: openembedded-core git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,64 +45,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 18:06:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Jan 2011 18:53:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 19, 2011 at 7:57 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> - hush: fix "cmd & <newline>" problem
-> 98c46d10ee81f206f274da312086a3f0533582af
+2011/1/19 Graeme Gregory <dp@xora.org.uk>:
+> On 19/01/2011 15:33, Frans Meulenbroeks wrote:
+>> 2011/1/19 Graeme Gregory <dp@xora.org.uk>:
+>>> Hi, this email is sent as an ordinary member of OE.
+>>>
+>>> It seems to be on a technical level we are agreed that we should split
+>>> parts of OE out into the so called openembedded-core which will have a
+>>> stricter commit access and higher QA requirements on changes.
+>>>
+>>> I therefore think it is time to actually create the repository and let
+>>> the people who are interested in merging the good stuff from poky with
+>>> the good stuff from openembedded to create our "core". I don't think
+>>> there is any need to wait on the political part of the Yocto/OE
+>>> collaboration as its something we have agreed in principal to do anyway=
+.
+>>>
+>>> I would request then that the TSC drive this forward with the server
+>>> admins and create this repo so work can happen.
+>>>
+>>> Graeme
+>> Graeme,
+>>
+>> Seems =A0a fine plan to me.
+>> Do we already have an idea what would be the starting base?
+>> And do we already have an idea on the QA requirements we want to impose =
+on this?
+>> Lastly we might try to define some common understanding what is core
+>> and what not.
+>>
+>> I did some experiments with poky and found that some of the recipes I
+>> needed were missing; some of them might perhaps become part of core
+>> (e.g. i2ctools, squashfstools, libftdi, fastcgi), whereas others are
+>> quite unlikely to end up in core (e.g. urjtag). For the latter we must
+>> find another home (e.g. meta-openembedded), where hopefully we can
+>> also raise the QA bar somewhat.
+>>
+>> I'll happily contribute to raise the quality bar. However, if the goal
+>> is shuffling recipes without significant QA improvement or if QA
+>> improvement is optional, I'll probably pass.
+>>
 >
-> - disable automatic selection of FEATURE_SUID
-> 3b5acaa4323bd165077e60098af94ad9750d62fd
->
-> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+> Well I would hope that openembedded-core has a pull model similar to
+> poky/yocto but that is I think ultimately upto TSC members (with
+> consultation with membership). Hopefully they shall give their opinions
+> on the issue soon.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+I would also encourage and support a pull model, driven by one or a
+few fairly neutral developers.
+>
+> I would say the obvious starting point is poky, then merge OE
+> improvements into that. I think this would be less work than stripping
+> down OE to core level.
+>
+> I think all the tools you have mentioned are bad examples of stuff to go
+> into core except possibly squashfs. Core should be purely enough to get
+> a busybox minimal image build in ext2/3/jffs/ubi given a machine.conf.
+> Basically enough to do board bringup and no more (with package
+> management capabilities). If core was recipes people "needed" it wouldnt
+> really be core fastcgi is pretty specialised bit of software.
 
-> ---
-> =C2=A0recipes/busybox/busybox_1.18.2.bb | =C2=A0 =C2=A08 +++++++-
-> =C2=A01 files changed, 7 insertions(+), 1 deletions(-)
+I'm not really sure what would go into core, but I kinda figured it
+would probably be something like poky/meta
+http://git.pokylinux.org/cgit/cgit.cgi/poky/tree/meta
+
+The examples I gave are maybe not desirable in a minimal setting.
+Then again I feel core should probably be a little bit more than board
+bringup + busybox. I would hope that recipes like perl and python
+become part of core.
+
+Then again if oe core is similar to poky/meta the things I mentioned
+might fit in better than say libid3tag.
+If oe core is what is now in poky/recipes-core then I fully agree that
+the things I mention do not belong there (but probably glib-2.0 does
+not belong in a minimal layer either).
+
+http://git.pokylinux.org/cgit/cgit.cgi/poky/tree/meta/recipes-core
+
+But I had the impression that most of the poky recipes should go into
+oe-core (or I misunderstood that part of Richard's email).
+It does not seem too wise to have two repo's with e.g. pango, zeroconf
+and matchbox.
 >
-> diff --git a/recipes/busybox/busybox_1.18.2.bb b/recipes/busybox/busybox_=
-1.18.2.bb
-> index 71b50c8..e6d17d3 100644
-> --- a/recipes/busybox/busybox_1.18.2.bb
-> +++ b/recipes/busybox/busybox_1.18.2.bb
-> @@ -1,11 +1,17 @@
-> =C2=A0require busybox_1.1x.inc
-> -PR =3D "${INC_PR}.1"
-> +PR =3D "${INC_PR}.2"
->
-> =C2=A0SRC_URI +=3D " \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0http://busybox.net/downloads/fixes-1.18.2/busy=
-box-1.18.2-modprobe-small.patch;name=3Dpatch01 \
-> + =C2=A0 =C2=A0 =C2=A0 http://busybox.net/downloads/fixes-1.18.2/busybox-=
-1.18.2-buildsys.patch;name=3Dpatch02 \
-> + =C2=A0 =C2=A0 =C2=A0 http://busybox.net/downloads/fixes-1.18.2/busybox-=
-1.18.2-hush.patch;name=3Dpatch03 \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0"
->
-> =C2=A0SRC_URI[md5sum] =3D "69a82091e5710b72db5ce0e14e7c0cd7"
-> =C2=A0SRC_URI[sha256sum] =3D "aa7e1cec8cd9c7f4e56098b9e4bb2ab5d593d5a35f7=
-66ad9e6a312289bf57080"
-> =C2=A0SRC_URI[patch01.md5sum] =3D "dda72eaf33d19d6a0ac78e46e9411cfd"
-> =C2=A0SRC_URI[patch01.sha256sum] =3D "ed5d83040414d035138bf484ccd51481734=
-2b143baff43ffff6ba556952de7ed"
-> +SRC_URI[patch02.md5sum] =3D "c7ae920c8adb767fc35b3a8ca3ad7351"
-> +SRC_URI[patch02.sha256sum] =3D "d9398bc5e65b7eff261f20526b6e07d61bef64dd=
-978c92e6317334bfaa135938"
-> +SRC_URI[patch03.md5sum] =3D "854045f4b713df759b49945550843acf"
-> +SRC_URI[patch03.sha256sum] =3D "b70c4406307942f38b2c8d94675b7ca7db8ba035=
-1ae916f838d04856b5aad33f"
-> --
-> 1.6.3.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Core should probably have a build bot which crunches a standard set of
+> tests on each commit so unlike OE currently people don't wake up to bad
+> day of debugging OE.
+
+I'm not sure if that is needed (at least not on for every commit).
+If we are aiming for a pull model, the maintainer(s) are the only ones
+that can push and I would expect them to build things (maybe using a
+buildbot to cover different architectures) before pushing.
+
+Frans
 
 
