@@ -1,35 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pfemp-0007pF-MD
+	(envelope-from <msundius@sundius.com>) id 1Pfg0w-0000f0-42
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 21:37:47 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1PfemB-00053X-6c from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 12:37:07 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 19 Jan 2011 12:37:06 -0800
-Received: from [172.30.80.47] ([172.30.80.47]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 19 Jan 2011 13:37:05 -0700
-Message-ID: <4D374B50.3090402@mentor.com>
-Date: Wed, 19 Jan 2011 13:36:32 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 19 Jan 2011 22:56:27 +0100
+Received: by qyk8 with SMTP id 8so1108777qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Jan 2011 13:55:45 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.229.43.74 with SMTP id v10mr1020926qce.293.1295474145559; Wed,
+	19 Jan 2011 13:55:45 -0800 (PST)
+Received: by 10.229.233.213 with HTTP; Wed, 19 Jan 2011 13:55:45 -0800 (PST)
+In-Reply-To: <AANLkTimMHd-eH9tEL1tUtoUKa+zwX4+9kUdT3k_NP9nG@mail.gmail.com>
+References: <1295027350.14388.6527.camel@rex>
+	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
+	<4D353F81.50301@xora.org.uk>
+	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
+	<4D35FC8B.1090404@mentor.com>
+	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
+	<AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
+	<4D36A64E.9060804@xora.org.uk>
+	<AANLkTi=8uKvujKLqG2cw3h3gLmmcU=KNfdmSwB5imfsH@mail.gmail.com>
+	<1295436662.2540.14.camel@scimitar>
+	<AANLkTik9-k_euvDGZd+CFfQ9LyxD_7mubpVxPqyEsEVU@mail.gmail.com>
+	<4D36FE98.3070606@mwester.net>
+	<AANLkTimMHd-eH9tEL1tUtoUKa+zwX4+9kUdT3k_NP9nG@mail.gmail.com>
+Date: Wed, 19 Jan 2011 13:55:45 -0800
+Message-ID: <AANLkTimyPb-4pLrbF4ZeFwnh+9WyZtcPY1uXeYBnwUqQ@mail.gmail.com>
+From: C Michael Sundius <msundius@sundius.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>	<4D34952B.607@mentor.com>
-	<201101180730.29536.roman@khimov.ru>	<4D3661AC.8030708@mentor.com>
-	<20110119042954.GA30752@gmail.com>	<4D37215D.7050209@mentor.com>
-	<AANLkTimdiodUzAED=HN7-0BBy4q8yQ+zMTPWK9tngUFc@mail.gmail.com>
-In-Reply-To: <AANLkTimdiodUzAED=HN7-0BBy4q8yQ+zMTPWK9tngUFc@mail.gmail.com>
-X-OriginalArrivalTime: 19 Jan 2011 20:37:05.0952 (UTC)
-	FILETIME=[A2C1B200:01CBB818]
-Subject: Re: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,58 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 20:37:47 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 19 Jan 2011 21:56:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 01/19/2011 10:57 AM, Khem Raj wrote:
-> On Wed, Jan 19, 2011 at 9:37 AM, Tom Rini<tom_rini@mentor.com>  wrote:
->> On 01/18/2011 09:29 PM, Khem Raj wrote:
->>>
->>> On (18/01/11 20:59), Tom Rini wrote:
->>>>
->>>> On 01/17/2011 09:30 PM, Roman I Khimov wrote:
->>>>>
->>>>> В сообщении от Понедельник 17 января 2011 22:14:51 автор Tom Rini
->>>>> написал:
->>>>>>
->>>>>> On 01/17/2011 10:50 AM, Khem Raj wrote:
->>>>>> I see different problems with perl 5.10.1 + uclibc + p2020ds, so I
->>>>>> guess
->>>>>> this is fine with me.
->>>>>
->>>>> What kind of problems?
->>>>
->>>> Khem fixed it tonight.  At heart, there's been a need to make much
->>>> better use of the libc-uclibc override rather than testing TARGET_OS
->>>> as there's at least 'linux-uclibc', 'linux-uclibceabi' and
->>>> 'linux-uclibcspe' as valid TARGET_OS combinations.
->>>
->>> I thought about it and indeed it would be better to have a LIBC override
->>> but its defined in .inc files which may not be included by all
->>> distributions, if this makes into bitbake.conf somehow then that would
->>> be better or we can decide to have a global data var called LIBC or some
->>> sort.
->>
->> We already did this.  A distro that doesn't pull in the right libc inc file
->> is either broken or on its own (I forget and can't check atm if Angstrom
->> uses the files eventually or just also has the libc-foo OVERRIDES, but is
->> correct here).
->
-> yes angstrom does. Ok I moved slugos to use it recently so its no more broken :)
+It seems to me that this is a bit of a battle between the package
+maintainers and the distro maintainers.. Looking at this from my managements
+side of things, we use OE as a tool and its really just a means to the end.
+our customers demand that we do not change things (versions of software),
+they demand stability and they view a change in busybox or anything else a
+threat to stability. our management has also made an edict that we can not
+use gplv3. For completely non technical reasons we simply cannot move to new
+package versions without a substantial business justification. I suspect
+that that there are many (more than you realize) folk out there who are
+using OE for their own distro. If you simply whack package versions because
+something newer came out you will have these people maintaining separate
+recipes and we'll be swamped with the load and this tool will loose one of
+its best attributes.
 
-Um, when did SlugOS break then?  When I introduced the libc overrides I 
-moved everyone over to it.
+The comment that disturbed me was that distros should just move ahead
+"because its making things hard for the package maintainer". That doesn't
+wash with me because if people are using your package then you should
+support it or let someone else be the maintainer. In essence the distro's
+use of that package are your customers and the reason you have a job. OE
+does not exist as a product, rather a tool that enables customers, you can't
+create this in a vacuum without understanding who is using it.
 
-> We also have LIBC as a global env way to say what LIBC to
->> use (Angstrom has ANGSTROMLIBC and LIBC since they originated the feature).
->
-> nice we can use LIBC as well if need be but override is more elegant
+distro maintainers are not all dumb and if they are they'll be the last
+single one using an outdated version of the software. When that happens a
+smart package maintainer will call it out leave out the old package.
+Further, it would be nice for a warning to take place so that it might have
+a "depracated" tag associated with the recipe for one release cycle to see
+if anyone cribs.
 
-Yes, LIBC shouldn't be parsed like that, it's like MACHINE :)
+So I'm standing with the guy w/ asbestos short on. I'd like to see that OE
+err on the side of "do no harm" to existing users. Its hard enough to rally
+the troops to move to updated packages much less updated meta without you
+leaving perfectly reasonable versions of software out of oe-core.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
-
+mike
 
