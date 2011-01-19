@@ -1,38 +1,43 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PfSmE-0003R6-FJ
+	(envelope-from <martin.jansa@gmail.com>) id 1PfTDB-000447-BY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 08:48:22 +0100
-Received: by iyj18 with SMTP id 18so532373iyj.6
+	Wed, 19 Jan 2011 09:16:13 +0100
+Received: by bwz10 with SMTP id 10so533956bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jan 2011 23:47:42 -0800 (PST)
+	Wed, 19 Jan 2011 00:15:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=gE0sM+66NZE89LWQsQM2/WjKn9M6G25YK5lvBVaVXR8=;
-	b=YSmPW5KuFDu6y/b08bnjrRR39oRje1O54VwlSDRSB1jBLPngeaQiSXg1pyRMVj4Alx
-	JHn6rTIfP1DaBqV6WPrGyjPoIAHdCcpqs3jrnmrFS+A6msUs/davyYUg4+cU0fE9s7Y2
-	7mcL13FllEgs27L3nEsr2zfu4zSCSJdtpKbUI=
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=cf6Nwnvlt1DwaeK8ab+t0dBaMe0a6I3osOQk0N00KVQ=;
+	b=dBluC7Q+2FsSndcud7O5ingjgw1fDXaY0XXUWK9cxFZnWBi8FmNkQ6SyRhugkUn+5v
+	Ow9Xo38jYf8y23j7RJsWvbWxVVat4gYaFKyBp1KWuwyPPV7Hc1nhLEvZV9994W2LOL2n
+	wXcRdJ1IyyD/4piUaoyTSYacv7iZC3XhTNajQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=beSlNuhTZk/Tk6xzHCPb6zB7i00stjLPrx9sfvFEnLNpNJW1MF/dDeqNSdOEwKDH2A
-	PMVNQsKXsovRagMaNjUBvCGXhKbywaT3ZqL+mLrjDK595yC32+DfMqEsIuHRMrHgUprD
-	A0SqgD0FB92JJgc+DGu7IWnh3WIzd3NMWKLpw=
-MIME-Version: 1.0
-Received: by 10.231.34.65 with SMTP id k1mr405760ibd.9.1295423262452; Tue, 18
-	Jan 2011 23:47:42 -0800 (PST)
-Received: by 10.231.213.234 with HTTP; Tue, 18 Jan 2011 23:47:42 -0800 (PST)
-In-Reply-To: <ih4s84$gbj$1@dough.gmane.org>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=NqmSlMU8TF+HSA1x6toJ2TD9d443tXpbd0Bn3Jd5PVK5MPwSX2MCT8OYZeuQiU09dR
+	ngowRUT1lLePX1Wb+6OS/OBznBB9k32AF8BiFQ7dbwMFh+/mdHqq8NUQDwlxGmReJzb7
+	l6hD7DLsJYlPBcx8kqsn8iQCJe8iq2V356c5s=
+Received: by 10.204.73.78 with SMTP id p14mr319056bkj.47.1295424935829;
+	Wed, 19 Jan 2011 00:15:35 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id x38sm3125980bkj.1.2011.01.19.00.15.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 19 Jan 2011 00:15:35 -0800 (PST)
+Date: Wed, 19 Jan 2011 09:16:22 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110119081622.GV21179@jama>
 References: <1295027350.14388.6527.camel@rex>
 	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
 	<4D353F81.50301@xora.org.uk>
 	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
 	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
-Date: Wed, 19 Jan 2011 08:47:42 +0100
-Message-ID: <AANLkTinDtgCiqeRPk4PgnUSZb_V5ryTH-LgzNk2bSoGu@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<AANLkTinDtgCiqeRPk4PgnUSZb_V5ryTH-LgzNk2bSoGu@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinDtgCiqeRPk4PgnUSZb_V5ryTH-LgzNk2bSoGu@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,45 +52,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 07:48:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 19 Jan 2011 08:16:13 -0000
+X-Groupsio-MsgNum: 28170
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="SZSwH5G1FJ2Fz+jP"
+Content-Disposition: inline
 
-2011/1/18 Koen Kooi <k.kooi@student.utwente.nl>:
-> But in the end if boils down to "Does OE wants to make life hard for
-> DISTROs or easy". Frans is firmly in the "make it hard" camp, I hope
-> others have a saner point of view.
+--SZSwH5G1FJ2Fz+jP
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I don't want to make it hard for the distro's but I feel the distro's
-should not make it hard for the package maintainers (which happens if
-every distro pins its favourite version of recipe foo).
-You're just pushing the burden of the distro choices onto the package
-maintainer.
-(and frankly, I feel the package maintainer has a much harder job than
-the distro maintainers)
+On Wed, Jan 19, 2011 at 08:47:42AM +0100, Frans Meulenbroeks wrote:
+> 2011/1/18 Koen Kooi <k.kooi@student.utwente.nl>:
+> > But in the end if boils down to "Does OE wants to make life hard for
+> > DISTROs or easy". Frans is firmly in the "make it hard" camp, I hope
+> > others have a saner point of view.
+>=20
+> I don't want to make it hard for the distro's but I feel the distro's
+> should not make it hard for the package maintainers (which happens if
+> every distro pins its favourite version of recipe foo).
+> You're just pushing the burden of the distro choices onto the package
+> maintainer.
 
-But then again you already clearly exhibited on several occasions in
-the past how much you care about other users and distros. :-(
+I don't see any problem with active, well-maintained distro (like
+=C5ngstr=F6m is) pinning different versions. Everytime I see package
+maintainer asking for pinned version change (like Eric does for
+busybox), he receives Ack from distro maintainer with reasonable RTT,
+or receives the reason why that distro needs this specific version for=20
+longer and they can discuss if it will be moved to distro specific layer=20
+or stays in core when it could be usefull for other distros as well.
 
-Root cause of your problem is that angstrom wants to provide a live
-binary feed of git head. Something that is bound to encounter problems
-on occasions. Git head it bleeding edge, so sometimes it bleeds. That
-is an effect of moving forward. The alternative is reduce pace and
-loose momentum (which is what you are doing right now).
-And anyone with some sense of quality can explain you that publishing
-untested binary packages is not really a good idea quality wise.
+Problem with pinned versions in OE I had only with stalled distro.confs
+which weren't changed in years, nobody knows if there is someone still
+building it etc.. But as Graeme said, those unmaintained distros won't
+go to openembedded-core without someone actually moving them :).
 
-I think the angstrom users would be better off with releases.
->
-> If you're forcing 90% of your users to put e.g. udev_162.bb in their
-> layer you're doing it wrong. But you're also doing it wrong if you have
-> 20 udev recipes :)
+Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-We fully agree on both cases. Then again hardly anyone seems to be
-willing to clean up, and those who do only face headwind.
-And frankly speaking a good package maintainer would have prevented
-those 20 (well actually about 10) recipes to happen, keeping just one
-or a few versions (that are kept for good reasons).
+--SZSwH5G1FJ2Fz+jP
+Content-Type: application/pgp-signature
 
-Frans
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
+iEYEARECAAYFAk02ndYACgkQN1Ujt2V2gBxAYACdHyfMX1XHwXY+xnbdBufsaub2
+AwYAoJmkt1OFZxFKHOvoWSg35jvSxsxf
+=9pUq
+-----END PGP SIGNATURE-----
 
+--SZSwH5G1FJ2Fz+jP--
