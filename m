@@ -1,29 +1,49 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PfaXl-0005lb-J3
+Received: from mail-px0-f175.google.com ([209.85.212.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1PfbLK-0006VT-CL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 17:05:57 +0100
-Received: (qmail 4737 invoked by uid 503); 19 Jan 2011 16:08:53 -0000
-Received: from b9.ovh.net (HELO mail619.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 19 Jan 2011 16:08:53 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 19 Jan 2011 17:57:58 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 19 Jan 2011 17:57:57 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Wed, 19 Jan 2011 17:57:11 +0100
+Received: by pxi17 with SMTP id 17so204949pxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Jan 2011 08:56:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=LJheW3SEVUMwfOZZLmA3nNc1WGKcMla4BIeIhh17gtw=;
+	b=QX2Iu80b7hCuzCpE6u0gmZBmSgiap9PAX24qhCr3LfqR1m4ip7jH5sK1jhLqYQwVaE
+	jt49EVDBIghdqQkR0GNr81SW1Nijh7hj4LQk64w9ESaR5Nj43KRszjKaOXwS1RvNBhSq
+	g/QWTZ89ndyFrsySamKnUL1J18ygmrkDrPhu4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=WGrca69XEPnIpjmjhahpCHiMdPEj/kM6Y1j7iax6M48TtBlLyUJxHXt+VDIbMZOTSg
+	ZONQ0WRnKlZk2kNj7m82LJiZyqoarQQnx6xIbpYS9KfmJXjj+7WTdFhH80F95G85u2B/
+	YTIuyOPhvc9rWs8x1F1w4cEw/oHghgFeUtsQA=
+Received: by 10.142.194.1 with SMTP id r1mr931556wff.12.1295456188777;
+	Wed, 19 Jan 2011 08:56:28 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id x18sm9821119wfa.23.2011.01.19.08.56.26
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 19 Jan 2011 08:56:26 -0800 (PST)
+Date: Wed, 19 Jan 2011 08:56:24 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Jan 2011 16:57:29 +0100
-Message-Id: <1295452649-28081-2-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1295452649-28081-1-git-send-email-eric@eukrea.com>
-References: <1295452649-28081-1-git-send-email-eric@eukrea.com>
+Message-ID: <20110119165624.GA21354@gmail.com>
+References: <1295027350.14388.6527.camel@rex>
+	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
+	<4D353F81.50301@xora.org.uk>
+	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
+	<4D35FC8B.1090404@mentor.com>
+	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
+	<AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 721983316123037002
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH 2/2] busybox-1.18.2: add latest fixes
+In-Reply-To: <AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,46 +57,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 16:05:57 -0000
+X-List-Received-Date: Wed, 19 Jan 2011 16:57:11 -0000
 Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-- hush: fix "cmd & <newline>" problem
-98c46d10ee81f206f274da312086a3f0533582af
+On (19/01/11 09:46), Frans Meulenbroeks wrote:
+> 2011/1/18 Khem Raj <raj.khem@gmail.com>:
+> > On Tue, Jan 18, 2011 at 12:48 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> >> I think we also agree here.  But what's the rule of thumb(s) we want to
+> >> have, to provide enough choice without too much headache?  As I said
+> >> elsewhere, .inc files should probably be used a whole lot more, to help with
+> >> the problem of recipe bugfixing and N recipes for an app with the problem.
+> >>  We should probably also say that in addition to the "keep the last GPLv2+
+> >> version around" rule of thumb we should also have a "keep the latest stable
+> >> release" around too.  But what else?  To use busybox as an example, do we
+> >> really need to keep 1.18.0 and 1.18.1 around when we have 1.18.2?  How about
+> >> if we make the delta between the 3 be just the SRC_URI + checksums?
+> >
+> >
+> > Well what to keep around can not be generalized so much. It also
+> > depends upon the nature of releases for various packages
+> > some packages have a major release and then push out bug fix releases
+> > like busy box case you sited but there are packages
+> > which only do major releases which can cause compatibility hassles as
+> > new interfaces come and old ones are removed etc.
+> > so I think it has to be flexible and mostly left to package
+> > maintainers discretion as they know the nature of releases most but
+> > I like the idea of keeping one GPLv2 release around and 1 latest
+> > release around. If a distro pinned a version then that should
+> > be considered as well. It is bad to sweep underneath a distros
+> > pinnings. Then they have to rebuild and they get problems
+> > as they have to make sure that if a package bump happens then they
+> > should be able to define an upgrade path
+> >
+> > Sometimes newer is not always better in case of udev the size has
+> > increased over the time and some distro's may not like
+> > it and there can be many such scenarios.
+> >
+> 
+> I wholehearthy agree with the proposal that it is left to the package
+> maintainers discretion.
+> Wrt the GPLv2+ version. I suggest to reflect this in the name.
+> E.g. you could have samba and samba-gplv2 (or perhaps samba-gplv2 and
+> samba-gplv3). Then it immediately becomes obvious why there are two
+> versions.
+nope, LICENSE field should denote that. Renaming recipes this way does
+not look nice.
 
-- disable automatic selection of FEATURE_SUID
-3b5acaa4323bd165077e60098af94ad9750d62fd
-
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/busybox/busybox_1.18.2.bb |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/busybox/busybox_1.18.2.bb b/recipes/busybox/busybox_1.18.2.bb
-index 71b50c8..e6d17d3 100644
---- a/recipes/busybox/busybox_1.18.2.bb
-+++ b/recipes/busybox/busybox_1.18.2.bb
-@@ -1,11 +1,17 @@
- require busybox_1.1x.inc
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- SRC_URI += " \
- 	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-modprobe-small.patch;name=patch01 \
-+	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-buildsys.patch;name=patch02 \
-+	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-hush.patch;name=patch03 \
- 	"
- 
- SRC_URI[md5sum] = "69a82091e5710b72db5ce0e14e7c0cd7"
- SRC_URI[sha256sum] = "aa7e1cec8cd9c7f4e56098b9e4bb2ab5d593d5a35f766ad9e6a312289bf57080"
- SRC_URI[patch01.md5sum] = "dda72eaf33d19d6a0ac78e46e9411cfd"
- SRC_URI[patch01.sha256sum] = "ed5d83040414d035138bf484ccd514817342b143baff43ffff6ba556952de7ed"
-+SRC_URI[patch02.md5sum] = "c7ae920c8adb767fc35b3a8ca3ad7351"
-+SRC_URI[patch02.sha256sum] = "d9398bc5e65b7eff261f20526b6e07d61bef64dd978c92e6317334bfaa135938"
-+SRC_URI[patch03.md5sum] = "854045f4b713df759b49945550843acf"
-+SRC_URI[patch03.sha256sum] = "b70c4406307942f38b2c8d94675b7ca7db8ba0351ae916f838d04856b5aad33f"
--- 
-1.6.3.3
-
+> Similarly with versions that became a lot fatter over time (which imho
+> is a good reason to keep the old version).
+> 
+> Frans.
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
