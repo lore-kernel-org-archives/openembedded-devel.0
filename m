@@ -1,41 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PfUIx-0005f6-HN
+	(envelope-from <martin.jansa@gmail.com>) id 1PfV6d-0006ee-OO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 10:26:16 +0100
-Received: by iyj18 with SMTP id 18so606120iyj.6
+	Wed, 19 Jan 2011 11:17:35 +0100
+Received: by fxm17 with SMTP id 17so666901fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 01:25:35 -0800 (PST)
+	Wed, 19 Jan 2011 02:16:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=jOMltxZ/1y432kJ460FhCblYSI2pZrdA8KY5gxfNB80=;
-	b=PSBJ140+teyqP6oF1T1WXk5go0jSsD2TP497WZj0/NqWpS6BBjPWsNDBvVwTwWMdS9
-	Ld3tJ866OxaMHI1PEBnv3vJT5BQ39IAXOod467Fvt6jPwQVylLKSgAPTcC3zlJcH1wew
-	tSLrvc3j/c6bMzEtlrt+cJnWeGWQwMmamFzFc=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=LNuYjQxXcRCsAeYQb5J0XQRobSTJL0ulpzS9NWKi/KA=;
+	b=kr9DESxlvbYmcYr4TtTZURQ4QOcKKWcPP6Z3HB9ONdQ5f2OVtzw78wzX5kyYNzRXUc
+	SxGby9ZaQgSNY+YfHA4G0l7+NRlFJcJjUjEPIdXleWRscSm8lC8D2VJzayJ2FSejPj7p
+	zpu/Cs1cupHK7pHteopupTZ4zyFGGdkXSsUP0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=HYxSGJ78xcZg30dfEpSiIWzJO7WDeAb9Var6xezFt4QKDoN3KAhCJTR8AeCpN7bTzH
-	oDOKmS471eotwPIwkM01cyQBfh0KT6VEUpLp+bTYhl+swk66jfrzeLpTgdkfWaKtOCUh
-	Os8Z09HtImjmUJnDLpjASOuBjC1/ilZk5ehxE=
-MIME-Version: 1.0
-Received: by 10.231.39.74 with SMTP id f10mr486191ibe.84.1295429134086; Wed,
-	19 Jan 2011 01:25:34 -0800 (PST)
-Received: by 10.231.213.234 with HTTP; Wed, 19 Jan 2011 01:25:34 -0800 (PST)
-In-Reply-To: <AANLkTi=A2kgqgkhfw4p_Og8k9y1MBMrZLDvgwuq5Mxfj@mail.gmail.com>
-References: <1295027350.14388.6527.camel@rex>
-	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
-	<4D353F81.50301@xora.org.uk>
-	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
-	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
-	<4D35FC8B.1090404@mentor.com> <ih52qr$l1v$1@dough.gmane.org>
-	<AANLkTi=A2kgqgkhfw4p_Og8k9y1MBMrZLDvgwuq5Mxfj@mail.gmail.com>
-Date: Wed, 19 Jan 2011 10:25:34 +0100
-Message-ID: <AANLkTimHg3tkDnm93ycBGokAOsWomT6n+bfTduYPA=G+@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=lcLo61s4VadMNcd1RpIYZeeEkjrdfOIm3IcviDYnWEQpJ5rxQJyOM8/UgoIP/3V5nZ
+	RIWDr/lEwlwS69roQc9jCufuAv2ohulq5gSk27uvxj70T6YGGrngNzrpTGTqieq9guwD
+	TGCD7OYBFdnL3Hcvu1CE1R5IV5LjHcXGdm1LY=
+Received: by 10.223.97.72 with SMTP id k8mr510419fan.65.1295432211583;
+	Wed, 19 Jan 2011 02:16:51 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id e6sm2494660fav.8.2011.01.19.02.16.49
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 19 Jan 2011 02:16:50 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Yocto Project and OE - Where now?
+Date: Wed, 19 Jan 2011 11:17:36 +0100
+Message-Id: <1295432257-12844-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.4.rc2
+Subject: [PATCH] gnutls: remove old unpinned versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,119 +42,1582 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 09:26:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 19 Jan 2011 10:17:35 -0000
 
-2011/1/19 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> 2011/1/18 Koen Kooi <k.kooi@student.utwente.nl>:
-> =A0if we make the delta between the 3 be just
->>> the SRC_URI + checksums?
->>
->> Something like:
->>
->> * keep gplv2 around if upstream switched to gplv3 at some point
->
-> agree; as said before suggest to reflect the switch in the name of the re=
-cipe.
->
->> * allow old stable, stable and dev (e.g. glib 2.24, 2.26 and 2.27+git)
->
-> I'd say retire old stable after a while (e.g. after stable is there
-> for half a year, unless of course there are compelling reasons to keep
-> it).
-> Wrt dev: if we want to go to a maintainers model similar to u-boot and
-> linux, I would expect this to live in a separate branch or layer.
-> Once proven stable the maintainers pulls it into the core archive.
->
->> * allow active contributers some leeway to test multiple subreleases
->> (e.g. busybox 1.18.[0-99]
->
-> Again here, I feel it is much better to put it into a different branch
-> or layer, and once stable it is pulled into the mainline.
-> Again similar to what Linus and Wolfgang do.
->
->> * The maintainer can have as many versions as he wants to.
->
-> my preference: not in the main layer.
->
->> * toolchain is exempt from all that since having 20 binutils versions is
->> sometimes needed when building for 20 different archs[1].
->
-> Fully agree.
->>
->> But I seriously think we are overengineering this. We should have people
->> actually working on oe-core and meta-oe reach a consensus when
->> encountering problems.
->
-> I beg to disagree on this.
-> We have a unique opportunity at hand to improve, so it seems wise to
-> raise the bar quality wise.
->
-> E.g. wrt what Richard wrote in the start post
->
-> [quote]
-> * Creation of a subset of metadata that has a consistent high quality
-> =A0standard:
-> =A0 - removal of legacy components (pkgconfig hacks, libtool hacks,
-> =A0 =A0 legacy staging, unneeded compiler arguments)
-> =A0 - consistent metadata layout, spacing, use of variables
-> =A0 - migration away from outdated practises (e.g. use BBCLASSEXTEND)
-> [/quote]
->
-> I feel when migrating recipes we should also assure that they adhere
-> to a certain quality standard. That would need us to define a minimal
-> standard though.
-> Currently I feel we are just moving recipes, only fixing what is
-> really needed to get things running (like removing legacy staging)
-> whereas we could do much better.
-> There are currently some things in OE that could use some improvement
-> and we should take the opportunity to improve.l
->
-> And yes, I have no problem in spending time to improve things, but if
-> there is no consensus on where we should go this is not going to be
-> effective (and actually makes it harder to improve quality wise).
-> To take the bikeshed analogy up again. It does not really help if
-> everyone start to paint in his own favourite color (unless maybe if
-> you are still stuck in the flower power era).
->
-> Frans
->
-I know it is fairly schizofrenic to reply on ones own post, but I just
-peeked into the meta-oe layer and found an excellent case on what we
-should try to avoid when bringing over recipes from oe to meta-oe.
-path: root/recipes-graphics/directfb
-Mode	Name	Size=09
-d---------	++dfb	48	logplain
--rw-r--r--	++dfb_1.0.0.bb	588	logplain
-d---------	directfb-1.2.8	50	logplain
-d---------	directfb-1.4.6	41	logplain
--rw-r--r--	directfb-examples_1.0.0.bb	406	logplain
--rw-r--r--	directfb-examples_1.2.0.bb	409	logplain
--rw-r--r--	directfb.inc	2038	logplain
--rw-r--r--	directfb_1.4.6.bb	615	logplain
-d---------	files	415	logplain
-d---------	fusionsound-1.1.0+git20070709	54	logplain
--rw-r--r--	fusionsound_1.1.0+git20070709.bb	1479	logplain
--rw-r--r--	lite_0.9.26+cvs20070207.bb	1140	logplain
+* move LICENSE_${PN}-extra from recipe to .inc file
 
-Why is there a directfb-examples_1.0.0.bb? In OE no-one is pinning
-this version, and given the fact that these are examples there is
-probably little reason to keep it.
-Something similar for directfb-1.2.8. Maybe I overlooked things but I
-could not find a the user of this dir. I guess it could be gone.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes/gnutls/gnutls-2.8.5/gnutls-openssl.patch   |  149 ---
+ .../gnutls-2.8.5/gnutls-replace-siginterrupt.patch |   51 -
+ .../gettextize-with-gettext-0.18.patch             | 1042 --------------------
+ recipes/gnutls/gnutls-2.8.6/gnutls-openssl.patch   |  129 ---
+ .../gnutls-2.8.6/gnutls-replace-siginterrupt.patch |   41 -
+ recipes/gnutls/gnutls.inc                          |    1 +
+ recipes/gnutls/gnutls_2.10.1.bb                    |   27 -
+ recipes/gnutls/gnutls_2.10.4.bb                    |    2 -
+ recipes/gnutls/gnutls_2.8.5.bb                     |   20 -
+ recipes/gnutls/gnutls_2.8.6.bb                     |   16 -
+ 10 files changed, 1 insertions(+), 1477 deletions(-)
+ delete mode 100644 recipes/gnutls/gnutls-2.8.5/gnutls-openssl.patch
+ delete mode 100644 recipes/gnutls/gnutls-2.8.5/gnutls-replace-siginterrupt.patch
+ delete mode 100644 recipes/gnutls/gnutls-2.8.6/gettextize-with-gettext-0.18.patch
+ delete mode 100644 recipes/gnutls/gnutls-2.8.6/gnutls-openssl.patch
+ delete mode 100644 recipes/gnutls/gnutls-2.8.6/gnutls-replace-siginterrupt.patch
+ delete mode 100644 recipes/gnutls/gnutls_2.10.1.bb
+ delete mode 100644 recipes/gnutls/gnutls_2.8.5.bb
+ delete mode 100644 recipes/gnutls/gnutls_2.8.6.bb
 
-If we want to improve on quality it is probably not a bad idea to at
-least have a checklist with improvement actions that should be done
-when migrating recipes (e.g. remove stale patches, unused & unpinned
-older versions etc etc). I know it takes time, but it can also
-increase the overall quality. Let's take that opportunity.
+diff --git a/recipes/gnutls/gnutls-2.8.5/gnutls-openssl.patch b/recipes/gnutls/gnutls-2.8.5/gnutls-openssl.patch
+deleted file mode 100644
+index 596bd01..0000000
+--- a/recipes/gnutls/gnutls-2.8.5/gnutls-openssl.patch
++++ /dev/null
+@@ -1,149 +0,0 @@
+----
+- libextra/gnutls_openssl.c          |   58 +++++++++++++++++++++++++++++++++++++
+- libextra/includes/gnutls/openssl.h |    5 +++
+- 2 files changed, 63 insertions(+)
+-
+---- gnutls-2.8.5.orig/libextra/gnutls_openssl.c
+-+++ gnutls-2.8.5/libextra/gnutls_openssl.c
+-@@ -256,16 +256,21 @@ SSL_new (SSL_CTX * ctx)
+-   ssl->options = ctx->options;
+- 
+-   ssl->rfd = (gnutls_transport_ptr_t) - 1;
+-   ssl->wfd = (gnutls_transport_ptr_t) - 1;
+- 
+-+  ssl->ssl_peek_buffer = NULL;
+-+  ssl->ssl_peek_buffer_size = ssl->ssl_peek_avail = 0;
+-+
+-   return ssl;
+- }
+- 
+- void
+- SSL_free (SSL * ssl)
+- {
+-+  if (ssl->ssl_peek_buffer)
+-+    free(ssl->ssl_peek_buffer);
+-   gnutls_certificate_free_credentials (ssl->gnutls_cred);
+-   gnutls_deinit (ssl->gnutls_state);
+-   free (ssl);
+- }
+- 
+-@@ -285,10 +290,11 @@ SSL_get_error (SSL * ssl, int ret)
+- 
+- int
+- SSL_set_fd (SSL * ssl, int fd)
+- {
+-   gnutls_transport_set_ptr (ssl->gnutls_state, GNUTLS_INT_TO_POINTER (fd));
+-+  ssl->rfd = ssl->wfd = fd;
+-   return 1;
+- }
+- 
+- int
+- SSL_set_rfd (SSL * ssl, int fd)
+-@@ -310,10 +316,21 @@ SSL_set_wfd (SSL * ssl, int fd)
+-     gnutls_transport_set_ptr2 (ssl->gnutls_state, ssl->rfd, ssl->wfd);
+- 
+-   return 1;
+- }
+- 
+-+int SSL_get_rfd(SSL *ssl)
+-+{
+-+  return ssl->rfd;
+-+}
+-+
+-+int SSL_get_wfd(SSL *ssl)
+-+{
+-+  return ssl->wfd;
+-+}
+-+
+-+
+- void
+- SSL_set_bio (SSL * ssl, BIO * rbio, BIO * wbio)
+- {
+-   gnutls_transport_set_ptr2 (ssl->gnutls_state, rbio->fd, wbio->fd);
+-   /*    free(BIO); ? */
+-@@ -325,10 +342,12 @@ SSL_set_connect_state (SSL * ssl)
+- }
+- 
+- int
+- SSL_pending (SSL * ssl)
+- {
+-+  if (ssl->ssl_peek_avail)
+-+    return ssl->ssl_peek_avail;
+-   return gnutls_record_check_pending (ssl->gnutls_state);
+- }
+- 
+- void
+- SSL_set_verify (SSL * ssl, int verify_mode,
+-@@ -480,15 +499,54 @@ SSL_shutdown (SSL * ssl)
+- 
+-   /* FIXME */
+-   return 1;
+- }
+- 
+-+int SSL_peek(SSL *ssl, void *buf, int len)
+-+{
+-+  if (len > ssl->ssl_peek_buffer_size) {
+-+    ssl->ssl_peek_buffer = realloc (ssl->ssl_peek_buffer, len);
+-+    ssl->ssl_peek_buffer_size = len;
+-+  }
+-+
+-+  if (ssl->ssl_peek_avail == 0) {
+-+
+-+    int ret;
+-+
+-+    ret = gnutls_record_recv(ssl->gnutls_state, ssl->ssl_peek_buffer, len);
+-+    ssl->last_error = ret;
+-+
+-+    if (ret > 0)
+-+      ssl->ssl_peek_avail += ret;
+-+  }
+-+
+-+  if (len > ssl->ssl_peek_avail)
+-+    len = ssl->ssl_peek_avail;
+-+
+-+  memcpy (buf, ssl->ssl_peek_buffer, len);
+-+
+-+  return len;
+-+}
+-+
+- int
+- SSL_read (SSL * ssl, void *buf, int len)
+- {
+-   int ret;
+- 
+-+  if (ssl->ssl_peek_avail) {
+-+    int n = (ssl->ssl_peek_avail > len) ? len : ssl->ssl_peek_avail;
+-+
+-+    memcpy (buf, ssl->ssl_peek_buffer, n);
+-+
+-+    if (ssl->ssl_peek_avail > n)
+-+      memmove (ssl->ssl_peek_buffer, ssl->ssl_peek_buffer + n, ssl->ssl_peek_avail - n);
+-+
+-+    ssl->ssl_peek_avail -= n;
+-+
+-+    return n;
+-+  }
+-+
+-   ret = gnutls_record_recv (ssl->gnutls_state, buf, len);
+-   ssl->last_error = ret;
+- 
+-   if (ret < 0)
+-     {
+---- gnutls-2.8.5.orig/libextra/includes/gnutls/openssl.h
+-+++ gnutls-2.8.5/libextra/includes/gnutls/openssl.h
+-@@ -162,10 +162,15 @@ extern "C"
+-     int (*verify_callback) (int, X509_STORE_CTX *);
+-     int verify_mode;
+- 
+-     gnutls_transport_ptr_t rfd;
+-     gnutls_transport_ptr_t wfd;
+-+
+-+    char *ssl_peek_buffer;
+-+    size_t ssl_peek_buffer_size;
+-+    size_t ssl_peek_avail;
+-+
+-   };
+- 
+- #define rbio gnutls_state
+- 
+-   typedef struct {
+diff --git a/recipes/gnutls/gnutls-2.8.5/gnutls-replace-siginterrupt.patch b/recipes/gnutls/gnutls-2.8.5/gnutls-replace-siginterrupt.patch
+deleted file mode 100644
+index b34930f..0000000
+--- a/recipes/gnutls/gnutls-2.8.5/gnutls-replace-siginterrupt.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+----
+- src/tests.c |   12 ++++++++++--
+- 1 file changed, 10 insertions(+), 2 deletions(-)
+-
+---- gnutls-2.8.5.orig/src/tests.c
+-+++ gnutls-2.8.5/src/tests.c
+-@@ -491,10 +491,11 @@ test_bye (gnutls_session_t session)
+-   int ret;
+-   char data[20];
+-   int old, secs = 6;
+- 
+- #ifndef _WIN32
+-+  struct sigaction act;
+-   signal (SIGALRM, got_alarm);
+- #endif
+- 
+-   ADD_ALL_CIPHERS (session);
+-   ADD_ALL_COMP (session);
+-@@ -511,11 +512,13 @@ test_bye (gnutls_session_t session)
+-   ret = gnutls_bye (session, GNUTLS_SHUT_WR);
+-   if (ret < 0)
+-     return TEST_FAILED;
+- 
+- #ifndef _WIN32
+--  old = siginterrupt (SIGALRM, 1);
+-+  (void) sigaction(SIGALRM, NULL, &act);
+-+  act.sa_flags &= ~SA_RESTART;
+-+  old = sigaction(SIGALRM, &act, NULL);
+-   alarm (secs);
+- #else
+-   setsockopt ((int) gnutls_transport_get_ptr (session), SOL_SOCKET,
+- 	      SO_RCVTIMEO, (char *) &secs, sizeof (int));
+- #endif
+-@@ -525,11 +528,16 @@ test_bye (gnutls_session_t session)
+-       ret = gnutls_record_recv (session, data, sizeof (data));
+-     }
+-   while (ret > 0);
+- 
+- #ifndef _WIN32
+--  siginterrupt (SIGALRM, old);
+-+  (void) sigaction(SIGALRM, NULL, &act);
+-+  if (old)
+-+    act.sa_flags &= ~SA_RESTART;
+-+  else
+-+    act.sa_flags |= SA_RESTART;
+-+  sigaction(SIGALRM, &act, NULL);
+- #else
+-   if (WSAGetLastError () == WSAETIMEDOUT ||
+-       WSAGetLastError () == WSAECONNABORTED)
+-     alrm = 1;
+- #endif
+diff --git a/recipes/gnutls/gnutls-2.8.6/gettextize-with-gettext-0.18.patch b/recipes/gnutls/gnutls-2.8.6/gettextize-with-gettext-0.18.patch
+deleted file mode 100644
+index 5984f98..0000000
+--- a/recipes/gnutls/gnutls-2.8.6/gettextize-with-gettext-0.18.patch
++++ /dev/null
+@@ -1,1042 +0,0 @@
+-Index: gnutls-2.8.6/lib/build-aux/config.rpath
+-===================================================================
+---- gnutls-2.8.6.orig/lib/build-aux/config.rpath	2009-06-02 11:59:32.000000000 -0700
+-+++ gnutls-2.8.6/lib/build-aux/config.rpath	2010-05-19 22:15:18.491309044 -0700
+-@@ -2,7 +2,7 @@
+- # Output a system dependent set of variables, describing how to set the
+- # run time search path of shared libraries in an executable.
+- #
+--#   Copyright 1996-2008 Free Software Foundation, Inc.
+-+#   Copyright 1996-2010 Free Software Foundation, Inc.
+- #   Taken from GNU libtool, 2001
+- #   Originally by Gordon Matzigkeit <gord@gnu.ai.mit.edu>, 1996
+- #
+-Index: gnutls-2.8.6/lib/ChangeLog
+-===================================================================
+---- /dev/null	1970-01-01 00:00:00.000000000 +0000
+-+++ gnutls-2.8.6/lib/ChangeLog	2010-05-19 22:15:18.491309044 -0700
+-@@ -0,0 +1,12 @@
+-+2010-05-19  gettextize  <bug-gnu-gettext@gnu.org>
+-+
+-+	* m4/gettext.m4: Upgrade to gettext-0.18.
+-+	* m4/iconv.m4: Upgrade to gettext-0.18.
+-+	* m4/lib-ld.m4: Upgrade to gettext-0.18.
+-+	* m4/lib-link.m4: Upgrade to gettext-0.18.
+-+	* m4/lib-prefix.m4: Upgrade to gettext-0.18.
+-+	* m4/nls.m4: Upgrade to gettext-0.18.
+-+	* m4/po.m4: Upgrade to gettext-0.18.
+-+	* m4/progtest.m4: Upgrade to gettext-0.18.
+-+	* configure.ac (AM_GNU_GETTEXT_VERSION): Bump to 0.18.
+-+
+-Index: gnutls-2.8.6/lib/configure.ac
+-===================================================================
+---- gnutls-2.8.6.orig/lib/configure.ac	2009-11-02 04:08:07.000000000 -0800
+-+++ gnutls-2.8.6/lib/configure.ac	2010-05-19 22:15:18.491309044 -0700
+-@@ -38,7 +38,7 @@ AC_PROG_LIBTOOL
+- LIBGNUTLS_HOOKS
+- 
+- AM_GNU_GETTEXT([external])
+--AM_GNU_GETTEXT_VERSION([0.17])
+-+AM_GNU_GETTEXT_VERSION([0.18])
+- 
+- AC_C_BIGENDIAN
+- 
+-Index: gnutls-2.8.6/lib/m4/gettext.m4
+-===================================================================
+---- gnutls-2.8.6.orig/lib/m4/gettext.m4	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/m4/gettext.m4	2010-05-19 22:15:18.491309044 -0700
+-@@ -1,5 +1,5 @@
+--# gettext.m4 serial 60 (gettext-0.17)
+--dnl Copyright (C) 1995-2007 Free Software Foundation, Inc.
+-+# gettext.m4 serial 63 (gettext-0.18)
+-+dnl Copyright (C) 1995-2010 Free Software Foundation, Inc.
+- dnl This file is free software; the Free Software Foundation
+- dnl gives unlimited permission to copy and/or distribute it,
+- dnl with or without modifications, as long as this notice is preserved.
+-@@ -15,7 +15,7 @@ dnl They are *not* in the public domain.
+- 
+- dnl Authors:
+- dnl   Ulrich Drepper <drepper@cygnus.com>, 1995-2000.
+--dnl   Bruno Haible <haible@clisp.cons.org>, 2000-2006.
+-+dnl   Bruno Haible <haible@clisp.cons.org>, 2000-2006, 2008-2010.
+- 
+- dnl Macro to add for using GNU gettext.
+- 
+-@@ -60,6 +60,8 @@ AC_DEFUN([AM_GNU_GETTEXT],
+-   ifelse([$1], [], , [ifelse([$1], [external], , [ifelse([$1], [no-libtool], , [ifelse([$1], [use-libtool], ,
+-     [errprint([ERROR: invalid first argument to AM_GNU_GETTEXT
+- ])])])])])
+-+  ifelse(ifelse([$1], [], [old])[]ifelse([$1], [no-libtool], [old]), [old],
+-+    [AC_DIAGNOSE([obsolete], [Use of AM_GNU_GETTEXT without [external] argument is deprecated.])])
+-   ifelse([$2], [], , [ifelse([$2], [need-ngettext], , [ifelse([$2], [need-formatstring-macros], ,
+-     [errprint([ERROR: invalid second argument to AM_GNU_GETTEXT
+- ])])])])
+-@@ -123,11 +125,11 @@ AC_DEFUN([AM_GNU_GETTEXT],
+-     gt_use_preinstalled_gnugettext=no
+-     ifelse(gt_included_intl, yes, [
+-       AC_MSG_CHECKING([whether included gettext is requested])
+--      AC_ARG_WITH(included-gettext,
+-+      AC_ARG_WITH([included-gettext],
+-         [  --with-included-gettext use the GNU gettext library included here],
+-         nls_cv_force_use_gnu_gettext=$withval,
+-         nls_cv_force_use_gnu_gettext=no)
+--      AC_MSG_RESULT($nls_cv_force_use_gnu_gettext)
+-+      AC_MSG_RESULT([$nls_cv_force_use_gnu_gettext])
+- 
+-       nls_cv_use_gnu_gettext="$nls_cv_force_use_gnu_gettext"
+-       if test "$nls_cv_force_use_gnu_gettext" != "yes"; then
+-@@ -267,7 +269,7 @@ return * gettext ("")$gt_expression_test
+- 
+-     if test "$gt_use_preinstalled_gnugettext" = "yes" \
+-        || test "$nls_cv_use_gnu_gettext" = "yes"; then
+--      AC_DEFINE(ENABLE_NLS, 1,
+-+      AC_DEFINE([ENABLE_NLS], [1],
+-         [Define to 1 if translation of program messages to the user's native language
+-    is requested.])
+-     else
+-@@ -301,9 +303,9 @@ return * gettext ("")$gt_expression_test
+-       fi
+- 
+-       dnl For backward compatibility. Some packages may be using this.
+--      AC_DEFINE(HAVE_GETTEXT, 1,
+-+      AC_DEFINE([HAVE_GETTEXT], [1],
+-        [Define if the GNU gettext() function is already present or preinstalled.])
+--      AC_DEFINE(HAVE_DCGETTEXT, 1,
+-+      AC_DEFINE([HAVE_DCGETTEXT], [1],
+-        [Define if the GNU dcgettext() function is already present or preinstalled.])
+-     fi
+- 
+-@@ -319,9 +321,9 @@ return * gettext ("")$gt_expression_test
+-     fi
+- 
+-     dnl Make all variables we use known to autoconf.
+--    AC_SUBST(BUILD_INCLUDED_LIBINTL)
+--    AC_SUBST(USE_INCLUDED_LIBINTL)
+--    AC_SUBST(CATOBJEXT)
+-+    AC_SUBST([BUILD_INCLUDED_LIBINTL])
+-+    AC_SUBST([USE_INCLUDED_LIBINTL])
+-+    AC_SUBST([CATOBJEXT])
+- 
+-     dnl For backward compatibility. Some configure.ins may be using this.
+-     nls_cv_header_intl=
+-@@ -329,36 +331,36 @@ return * gettext ("")$gt_expression_test
+- 
+-     dnl For backward compatibility. Some Makefiles may be using this.
+-     DATADIRNAME=share
+--    AC_SUBST(DATADIRNAME)
+-+    AC_SUBST([DATADIRNAME])
+- 
+-     dnl For backward compatibility. Some Makefiles may be using this.
+-     INSTOBJEXT=.mo
+--    AC_SUBST(INSTOBJEXT)
+-+    AC_SUBST([INSTOBJEXT])
+- 
+-     dnl For backward compatibility. Some Makefiles may be using this.
+-     GENCAT=gencat
+--    AC_SUBST(GENCAT)
+-+    AC_SUBST([GENCAT])
+- 
+-     dnl For backward compatibility. Some Makefiles may be using this.
+-     INTLOBJS=
+-     if test "$USE_INCLUDED_LIBINTL" = yes; then
+-       INTLOBJS="\$(GETTOBJS)"
+-     fi
+--    AC_SUBST(INTLOBJS)
+-+    AC_SUBST([INTLOBJS])
+- 
+-     dnl Enable libtool support if the surrounding package wishes it.
+-     INTL_LIBTOOL_SUFFIX_PREFIX=gt_libtool_suffix_prefix
+--    AC_SUBST(INTL_LIBTOOL_SUFFIX_PREFIX)
+-+    AC_SUBST([INTL_LIBTOOL_SUFFIX_PREFIX])
+-   ])
+- 
+-   dnl For backward compatibility. Some Makefiles may be using this.
+-   INTLLIBS="$LIBINTL"
+--  AC_SUBST(INTLLIBS)
+-+  AC_SUBST([INTLLIBS])
+- 
+-   dnl Make all documented variables known to autoconf.
+--  AC_SUBST(LIBINTL)
+--  AC_SUBST(LTLIBINTL)
+--  AC_SUBST(POSUB)
+-+  AC_SUBST([LIBINTL])
+-+  AC_SUBST([LTLIBINTL])
+-+  AC_SUBST([POSUB])
+- ])
+- 
+- 
+-Index: gnutls-2.8.6/lib/m4/iconv.m4
+-===================================================================
+---- gnutls-2.8.6.orig/lib/m4/iconv.m4	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/m4/iconv.m4	2010-05-19 22:15:18.491309044 -0700
+-@@ -1,5 +1,5 @@
+--# iconv.m4 serial AM6 (gettext-0.17)
+--dnl Copyright (C) 2000-2002, 2007 Free Software Foundation, Inc.
+-+# iconv.m4 serial 9 (gettext-0.18)
+-+dnl Copyright (C) 2000-2002, 2007-2010 Free Software Foundation, Inc.
+- dnl This file is free software; the Free Software Foundation
+- dnl gives unlimited permission to copy and/or distribute it,
+- dnl with or without modifications, as long as this notice is preserved.
+-@@ -34,7 +34,7 @@ AC_DEFUN([AM_ICONV_LINK],
+-   am_save_CPPFLAGS="$CPPFLAGS"
+-   AC_LIB_APPENDTOVAR([CPPFLAGS], [$INCICONV])
+- 
+--  AC_CACHE_CHECK([for iconv], am_cv_func_iconv, [
+-+  AC_CACHE_CHECK([for iconv], [am_cv_func_iconv], [
+-     am_cv_func_iconv="no, consider installing GNU libiconv"
+-     am_cv_lib_iconv=no
+-     AC_TRY_LINK([#include <stdlib.h>
+-@@ -42,7 +42,7 @@ AC_DEFUN([AM_ICONV_LINK],
+-       [iconv_t cd = iconv_open("","");
+-        iconv(cd,NULL,NULL,NULL,NULL);
+-        iconv_close(cd);],
+--      am_cv_func_iconv=yes)
+-+      [am_cv_func_iconv=yes])
+-     if test "$am_cv_func_iconv" != yes; then
+-       am_save_LIBS="$LIBS"
+-       LIBS="$LIBS $LIBICONV"
+-@@ -51,14 +51,14 @@ AC_DEFUN([AM_ICONV_LINK],
+-         [iconv_t cd = iconv_open("","");
+-          iconv(cd,NULL,NULL,NULL,NULL);
+-          iconv_close(cd);],
+--        am_cv_lib_iconv=yes
+--        am_cv_func_iconv=yes)
+-+        [am_cv_lib_iconv=yes]
+-+        [am_cv_func_iconv=yes])
+-       LIBS="$am_save_LIBS"
+-     fi
+-   ])
+-   if test "$am_cv_func_iconv" = yes; then
+--    AC_CACHE_CHECK([for working iconv], am_cv_func_iconv_works, [
+--      dnl This tests against bugs in AIX 5.1 and HP-UX 11.11.
+-+    AC_CACHE_CHECK([for working iconv], [am_cv_func_iconv_works], [
+-+      dnl This tests against bugs in AIX 5.1, HP-UX 11.11, Solaris 10.
+-       am_save_LIBS="$LIBS"
+-       if test $am_cv_lib_iconv = yes; then
+-         LIBS="$LIBS $LIBICONV"
+-@@ -87,6 +87,25 @@ int main ()
+-           return 1;
+-       }
+-   }
+-+  /* Test against Solaris 10 bug: Failures are not distinguishable from
+-+     successful returns.  */
+-+  {
+-+    iconv_t cd_ascii_to_88591 = iconv_open ("ISO8859-1", "646");
+-+    if (cd_ascii_to_88591 != (iconv_t)(-1))
+-+      {
+-+        static const char input[] = "\263";
+-+        char buf[10];
+-+        const char *inptr = input;
+-+        size_t inbytesleft = strlen (input);
+-+        char *outptr = buf;
+-+        size_t outbytesleft = sizeof (buf);
+-+        size_t res = iconv (cd_ascii_to_88591,
+-+                            (char **) &inptr, &inbytesleft,
+-+                            &outptr, &outbytesleft);
+-+        if (res == 0)
+-+          return 1;
+-+      }
+-+  }
+- #if 0 /* This bug could be worked around by the caller.  */
+-   /* Test against HP-UX 11.11 bug: Positive return value instead of 0.  */
+-   {
+-@@ -134,7 +153,7 @@ int main ()
+-     am_func_iconv=no am_cv_lib_iconv=no
+-   fi
+-   if test "$am_func_iconv" = yes; then
+--    AC_DEFINE(HAVE_ICONV, 1,
+-+    AC_DEFINE([HAVE_ICONV], [1],
+-       [Define if you have the iconv() function and it works.])
+-   fi
+-   if test "$am_cv_lib_iconv" = yes; then
+-@@ -147,8 +166,8 @@ int main ()
+-     LIBICONV=
+-     LTLIBICONV=
+-   fi
+--  AC_SUBST(LIBICONV)
+--  AC_SUBST(LTLIBICONV)
+-+  AC_SUBST([LIBICONV])
+-+  AC_SUBST([LTLIBICONV])
+- ])
+- 
+- AC_DEFUN([AM_ICONV],
+-@@ -156,7 +175,7 @@ AC_DEFUN([AM_ICONV],
+-   AM_ICONV_LINK
+-   if test "$am_cv_func_iconv" = yes; then
+-     AC_MSG_CHECKING([for iconv declaration])
+--    AC_CACHE_VAL(am_cv_proto_iconv, [
+-+    AC_CACHE_VAL([am_cv_proto_iconv], [
+-       AC_TRY_COMPILE([
+- #include <stdlib.h>
+- #include <iconv.h>
+-@@ -169,12 +188,12 @@ size_t iconv (iconv_t cd, char * *inbuf,
+- #else
+- size_t iconv();
+- #endif
+--], [], am_cv_proto_iconv_arg1="", am_cv_proto_iconv_arg1="const")
+-+], [], [am_cv_proto_iconv_arg1=""], [am_cv_proto_iconv_arg1="const"])
+-       am_cv_proto_iconv="extern size_t iconv (iconv_t cd, $am_cv_proto_iconv_arg1 char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);"])
+-     am_cv_proto_iconv=`echo "[$]am_cv_proto_iconv" | tr -s ' ' | sed -e 's/( /(/'`
+--    AC_MSG_RESULT([$]{ac_t:-
+--         }[$]am_cv_proto_iconv)
+--    AC_DEFINE_UNQUOTED(ICONV_CONST, $am_cv_proto_iconv_arg1,
+-+    AC_MSG_RESULT([
+-+         $am_cv_proto_iconv])
+-+    AC_DEFINE_UNQUOTED([ICONV_CONST], [$am_cv_proto_iconv_arg1],
+-       [Define as const if the declaration of iconv() needs const.])
+-   fi
+- ])
+-Index: gnutls-2.8.6/lib/m4/lib-ld.m4
+-===================================================================
+---- gnutls-2.8.6.orig/lib/m4/lib-ld.m4	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/m4/lib-ld.m4	2010-05-19 22:15:18.511309002 -0700
+-@@ -1,5 +1,5 @@
+--# lib-ld.m4 serial 3 (gettext-0.13)
+--dnl Copyright (C) 1996-2003 Free Software Foundation, Inc.
+-+# lib-ld.m4 serial 4 (gettext-0.18)
+-+dnl Copyright (C) 1996-2003, 2009-2010 Free Software Foundation, Inc.
+- dnl This file is free software; the Free Software Foundation
+- dnl gives unlimited permission to copy and/or distribute it,
+- dnl with or without modifications, as long as this notice is preserved.
+-@@ -10,7 +10,7 @@ dnl with libtool.m4.
+- 
+- dnl From libtool-1.4. Sets the variable with_gnu_ld to yes or no.
+- AC_DEFUN([AC_LIB_PROG_LD_GNU],
+--[AC_CACHE_CHECK([if the linker ($LD) is GNU ld], acl_cv_prog_gnu_ld,
+-+[AC_CACHE_CHECK([if the linker ($LD) is GNU ld], [acl_cv_prog_gnu_ld],
+- [# I'd rather use --version here, but apparently some GNU ld's only accept -v.
+- case `$LD -v 2>&1 </dev/null` in
+- *GNU* | *'with BFD'*)
+-@@ -23,7 +23,7 @@ with_gnu_ld=$acl_cv_prog_gnu_ld
+- 
+- dnl From libtool-1.4. Sets the variable LD.
+- AC_DEFUN([AC_LIB_PROG_LD],
+--[AC_ARG_WITH(gnu-ld,
+-+[AC_ARG_WITH([gnu-ld],
+- [  --with-gnu-ld           assume the C compiler uses GNU ld [default=no]],
+- test "$withval" = no || with_gnu_ld=yes, with_gnu_ld=no)
+- AC_REQUIRE([AC_PROG_CC])dnl
+-@@ -59,7 +59,7 @@ if test "$GCC" = yes; then
+-       # Canonicalize the path of ld
+-       ac_prog=`echo $ac_prog| sed 's%\\\\%/%g'`
+-       while echo $ac_prog | grep "$re_direlt" > /dev/null 2>&1; do
+--	ac_prog=`echo $ac_prog| sed "s%$re_direlt%/%"`
+-+        ac_prog=`echo $ac_prog| sed "s%$re_direlt%/%"`
+-       done
+-       test -z "$LD" && LD="$ac_prog"
+-       ;;
+-@@ -77,7 +77,7 @@ elif test "$with_gnu_ld" = yes; then
+- else
+-   AC_MSG_CHECKING([for non-GNU ld])
+- fi
+--AC_CACHE_VAL(acl_cv_path_LD,
+-+AC_CACHE_VAL([acl_cv_path_LD],
+- [if test -z "$LD"; then
+-   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS="${IFS}${PATH_SEPARATOR-:}"
+-   for ac_dir in $PATH; do
+-@@ -89,9 +89,9 @@ AC_CACHE_VAL(acl_cv_path_LD,
+-       # Break only if it was the GNU/non-GNU ld that we prefer.
+-       case `"$acl_cv_path_LD" -v 2>&1 < /dev/null` in
+-       *GNU* | *'with BFD'*)
+--	test "$with_gnu_ld" != no && break ;;
+-+        test "$with_gnu_ld" != no && break ;;
+-       *)
+--	test "$with_gnu_ld" != yes && break ;;
+-+        test "$with_gnu_ld" != yes && break ;;
+-       esac
+-     fi
+-   done
+-@@ -101,9 +101,9 @@ else
+- fi])
+- LD="$acl_cv_path_LD"
+- if test -n "$LD"; then
+--  AC_MSG_RESULT($LD)
+-+  AC_MSG_RESULT([$LD])
+- else
+--  AC_MSG_RESULT(no)
+-+  AC_MSG_RESULT([no])
+- fi
+- test -z "$LD" && AC_MSG_ERROR([no acceptable ld found in \$PATH])
+- AC_LIB_PROG_LD_GNU
+-Index: gnutls-2.8.6/lib/m4/lib-link.m4
+-===================================================================
+---- gnutls-2.8.6.orig/lib/m4/lib-link.m4	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/m4/lib-link.m4	2010-05-19 22:15:18.521282615 -0700
+-@@ -1,12 +1,12 @@
+--# lib-link.m4 serial 13 (gettext-0.17)
+--dnl Copyright (C) 2001-2007 Free Software Foundation, Inc.
+-+# lib-link.m4 serial 21 (gettext-0.18)
+-+dnl Copyright (C) 2001-2010 Free Software Foundation, Inc.
+- dnl This file is free software; the Free Software Foundation
+- dnl gives unlimited permission to copy and/or distribute it,
+- dnl with or without modifications, as long as this notice is preserved.
+- 
+- dnl From Bruno Haible.
+- 
+--AC_PREREQ(2.54)
+-+AC_PREREQ([2.54])
+- 
+- dnl AC_LIB_LINKFLAGS(name [, dependencies]) searches for libname and
+- dnl the libraries corresponding to explicit and implicit dependencies.
+-@@ -18,9 +18,9 @@ AC_DEFUN([AC_LIB_LINKFLAGS],
+- [
+-   AC_REQUIRE([AC_LIB_PREPARE_PREFIX])
+-   AC_REQUIRE([AC_LIB_RPATH])
+--  define([Name],[translit([$1],[./-], [___])])
+--  define([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+--                               [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+-+  pushdef([Name],[translit([$1],[./-], [___])])
+-+  pushdef([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+-+                                [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+-   AC_CACHE_CHECK([how to link with lib[]$1], [ac_cv_lib[]Name[]_libs], [
+-     AC_LIB_LINKFLAGS_BODY([$1], [$2])
+-     ac_cv_lib[]Name[]_libs="$LIB[]NAME"
+-@@ -39,16 +39,17 @@ AC_DEFUN([AC_LIB_LINKFLAGS],
+-   dnl Also set HAVE_LIB[]NAME so that AC_LIB_HAVE_LINKFLAGS can reuse the
+-   dnl results of this search when this library appears as a dependency.
+-   HAVE_LIB[]NAME=yes
+--  undefine([Name])
+--  undefine([NAME])
+-+  popdef([NAME])
+-+  popdef([Name])
+- ])
+- 
+--dnl AC_LIB_HAVE_LINKFLAGS(name, dependencies, includes, testcode)
+-+dnl AC_LIB_HAVE_LINKFLAGS(name, dependencies, includes, testcode, [missing-message])
+- dnl searches for libname and the libraries corresponding to explicit and
+- dnl implicit dependencies, together with the specified include files and
+--dnl the ability to compile and link the specified testcode. If found, it
+--dnl sets and AC_SUBSTs HAVE_LIB${NAME}=yes and the LIB${NAME} and
+--dnl LTLIB${NAME} variables and augments the CPPFLAGS variable, and
+-+dnl the ability to compile and link the specified testcode. The missing-message
+-+dnl defaults to 'no' and may contain additional hints for the user.
+-+dnl If found, it sets and AC_SUBSTs HAVE_LIB${NAME}=yes and the LIB${NAME}
+-+dnl and LTLIB${NAME} variables and augments the CPPFLAGS variable, and
+- dnl #defines HAVE_LIB${NAME} to 1. Otherwise, it sets and AC_SUBSTs
+- dnl HAVE_LIB${NAME}=no and LIB${NAME} and LTLIB${NAME} to empty.
+- dnl Sets and AC_SUBSTs the LIB${NAME}_PREFIX variable to nonempty if libname
+-@@ -57,9 +58,9 @@ AC_DEFUN([AC_LIB_HAVE_LINKFLAGS],
+- [
+-   AC_REQUIRE([AC_LIB_PREPARE_PREFIX])
+-   AC_REQUIRE([AC_LIB_RPATH])
+--  define([Name],[translit([$1],[./-], [___])])
+--  define([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+--                               [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+-+  pushdef([Name],[translit([$1],[./-], [___])])
+-+  pushdef([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+-+                                [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+- 
+-   dnl Search for lib[]Name and define LIB[]NAME, LTLIB[]NAME and INC[]NAME
+-   dnl accordingly.
+-@@ -73,13 +74,25 @@ AC_DEFUN([AC_LIB_HAVE_LINKFLAGS],
+- 
+-   AC_CACHE_CHECK([for lib[]$1], [ac_cv_lib[]Name], [
+-     ac_save_LIBS="$LIBS"
+--    LIBS="$LIBS $LIB[]NAME"
+--    AC_TRY_LINK([$3], [$4], [ac_cv_lib[]Name=yes], [ac_cv_lib[]Name=no])
+-+    dnl If $LIB[]NAME contains some -l options, add it to the end of LIBS,
+-+    dnl because these -l options might require -L options that are present in
+-+    dnl LIBS. -l options benefit only from the -L options listed before it.
+-+    dnl Otherwise, add it to the front of LIBS, because it may be a static
+-+    dnl library that depends on another static library that is present in LIBS.
+-+    dnl Static libraries benefit only from the static libraries listed after
+-+    dnl it.
+-+    case " $LIB[]NAME" in
+-+      *" -l"*) LIBS="$LIBS $LIB[]NAME" ;;
+-+      *)       LIBS="$LIB[]NAME $LIBS" ;;
+-+    esac
+-+    AC_TRY_LINK([$3], [$4],
+-+      [ac_cv_lib[]Name=yes],
+-+      [ac_cv_lib[]Name='m4_if([$5], [], [no], [[$5]])'])
+-     LIBS="$ac_save_LIBS"
+-   ])
+-   if test "$ac_cv_lib[]Name" = yes; then
+-     HAVE_LIB[]NAME=yes
+--    AC_DEFINE([HAVE_LIB]NAME, 1, [Define if you have the $1 library.])
+-+    AC_DEFINE([HAVE_LIB]NAME, 1, [Define if you have the lib][$1 library.])
+-     AC_MSG_CHECKING([how to link with lib[]$1])
+-     AC_MSG_RESULT([$LIB[]NAME])
+-   else
+-@@ -95,8 +108,8 @@ AC_DEFUN([AC_LIB_HAVE_LINKFLAGS],
+-   AC_SUBST([LIB]NAME)
+-   AC_SUBST([LTLIB]NAME)
+-   AC_SUBST([LIB]NAME[_PREFIX])
+--  undefine([Name])
+--  undefine([NAME])
+-+  popdef([NAME])
+-+  popdef([Name])
+- ])
+- 
+- dnl Determine the platform dependent parameters needed to use rpath:
+-@@ -114,7 +127,7 @@ AC_DEFUN([AC_LIB_RPATH],
+-   AC_REQUIRE([AC_LIB_PROG_LD])            dnl we use $LD, $with_gnu_ld
+-   AC_REQUIRE([AC_CANONICAL_HOST])         dnl we use $host
+-   AC_REQUIRE([AC_CONFIG_AUX_DIR_DEFAULT]) dnl we use $ac_aux_dir
+--  AC_CACHE_CHECK([for shared library run path origin], acl_cv_rpath, [
+-+  AC_CACHE_CHECK([for shared library run path origin], [acl_cv_rpath], [
+-     CC="$CC" GCC="$GCC" LDFLAGS="$LDFLAGS" LD="$LD" with_gnu_ld="$with_gnu_ld" \
+-     ${CONFIG_SHELL-/bin/sh} "$ac_aux_dir/config.rpath" "$host" > conftest.sh
+-     . ./conftest.sh
+-@@ -131,11 +144,32 @@ AC_DEFUN([AC_LIB_RPATH],
+-   acl_hardcode_direct="$acl_cv_hardcode_direct"
+-   acl_hardcode_minus_L="$acl_cv_hardcode_minus_L"
+-   dnl Determine whether the user wants rpath handling at all.
+--  AC_ARG_ENABLE(rpath,
+-+  AC_ARG_ENABLE([rpath],
+-     [  --disable-rpath         do not hardcode runtime library paths],
+-     :, enable_rpath=yes)
+- ])
+- 
+-+dnl AC_LIB_FROMPACKAGE(name, package)
+-+dnl declares that libname comes from the given package. The configure file
+-+dnl will then not have a --with-libname-prefix option but a
+-+dnl --with-package-prefix option. Several libraries can come from the same
+-+dnl package. This declaration must occur before an AC_LIB_LINKFLAGS or similar
+-+dnl macro call that searches for libname.
+-+AC_DEFUN([AC_LIB_FROMPACKAGE],
+-+[
+-+  pushdef([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+-+                                [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+-+  define([acl_frompackage_]NAME, [$2])
+-+  popdef([NAME])
+-+  pushdef([PACK],[$2])
+-+  pushdef([PACKUP],[translit(PACK,[abcdefghijklmnopqrstuvwxyz./-],
+-+                                  [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+-+  define([acl_libsinpackage_]PACKUP,
+-+    m4_ifdef([acl_libsinpackage_]PACKUP, [acl_libsinpackage_]PACKUP[[, ]],)[lib$1])
+-+  popdef([PACKUP])
+-+  popdef([PACK])
+-+])
+-+
+- dnl AC_LIB_LINKFLAGS_BODY(name [, dependencies]) searches for libname and
+- dnl the libraries corresponding to explicit and implicit dependencies.
+- dnl Sets the LIB${NAME}, LTLIB${NAME} and INC${NAME} variables.
+-@@ -144,19 +178,23 @@ dnl in ${LIB${NAME}_PREFIX}/$acl_libdirs
+- AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
+- [
+-   AC_REQUIRE([AC_LIB_PREPARE_MULTILIB])
+--  define([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+--                               [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+-+  pushdef([NAME],[translit([$1],[abcdefghijklmnopqrstuvwxyz./-],
+-+                                [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+-+  pushdef([PACK],[m4_ifdef([acl_frompackage_]NAME, [acl_frompackage_]NAME, lib[$1])])
+-+  pushdef([PACKUP],[translit(PACK,[abcdefghijklmnopqrstuvwxyz./-],
+-+                                  [ABCDEFGHIJKLMNOPQRSTUVWXYZ___])])
+-+  pushdef([PACKLIBS],[m4_ifdef([acl_frompackage_]NAME, [acl_libsinpackage_]PACKUP, lib[$1])])
+-   dnl Autoconf >= 2.61 supports dots in --with options.
+--  define([N_A_M_E],[m4_if(m4_version_compare(m4_defn([m4_PACKAGE_VERSION]),[2.61]),[-1],[translit([$1],[.],[_])],[$1])])
+-+  pushdef([P_A_C_K],[m4_if(m4_version_compare(m4_defn([m4_PACKAGE_VERSION]),[2.61]),[-1],[translit(PACK,[.],[_])],PACK)])
+-   dnl By default, look in $includedir and $libdir.
+-   use_additional=yes
+-   AC_LIB_WITH_FINAL_PREFIX([
+-     eval additional_includedir=\"$includedir\"
+-     eval additional_libdir=\"$libdir\"
+-   ])
+--  AC_LIB_ARG_WITH([lib]N_A_M_E[-prefix],
+--[  --with-lib]N_A_M_E[-prefix[=DIR]  search for lib$1 in DIR/include and DIR/lib
+--  --without-lib]N_A_M_E[-prefix     don't search for lib$1 in includedir and libdir],
+-+  AC_ARG_WITH(P_A_C_K[-prefix],
+-+[[  --with-]]P_A_C_K[[-prefix[=DIR]  search for ]PACKLIBS[ in DIR/include and DIR/lib
+-+  --without-]]P_A_C_K[[-prefix     don't search for ]PACKLIBS[ in includedir and libdir]],
+- [
+-     if test "X$withval" = "Xno"; then
+-       use_additional=no
+-@@ -169,6 +207,10 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
+-       else
+-         additional_includedir="$withval/include"
+-         additional_libdir="$withval/$acl_libdirstem"
+-+        if test "$acl_libdirstem2" != "$acl_libdirstem" \
+-+           && ! test -d "$withval/$acl_libdirstem"; then
+-+          additional_libdir="$withval/$acl_libdirstem2"
+-+        fi
+-       fi
+-     fi
+- ])
+-@@ -178,6 +220,9 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
+-   LTLIB[]NAME=
+-   INC[]NAME=
+-   LIB[]NAME[]_PREFIX=
+-+  dnl HAVE_LIB${NAME} is an indicator that LIB${NAME}, LTLIB${NAME} have been
+-+  dnl computed. So it has to be reset here.
+-+  HAVE_LIB[]NAME=
+-   rpathdirs=
+-   ltrpathdirs=
+-   names_already_handled=
+-@@ -267,6 +312,9 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
+-               fi
+-             fi
+-           fi
+-+          dnl Just let the compiler find the library, the compiler and user are smarter then this script
+-+          dnl when cross compiling and working with a relocated install.
+-+          found_dir=""
+-           if test "X$found_dir" = "X"; then
+-             for x in $LDFLAGS $LTLIB[]NAME; do
+-               AC_LIB_WITH_FINAL_PREFIX([eval x=\"$x\"])
+-@@ -327,7 +375,9 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
+-               dnl Linking with a shared library. We attempt to hardcode its
+-               dnl directory into the executable's runpath, unless it's the
+-               dnl standard /usr/lib.
+--              if test "$enable_rpath" = no || test "X$found_dir" = "X/usr/$acl_libdirstem"; then
+-+              if test "$enable_rpath" = no \
+-+                 || test "X$found_dir" = "X/usr/$acl_libdirstem" \
+-+                 || test "X$found_dir" = "X/usr/$acl_libdirstem2"; then
+-                 dnl No hardcoding is needed.
+-                 LIB[]NAME="${LIB[]NAME}${LIB[]NAME:+ }$found_so"
+-               else
+-@@ -415,7 +465,16 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
+-             case "$found_dir" in
+-               */$acl_libdirstem | */$acl_libdirstem/)
+-                 basedir=`echo "X$found_dir" | sed -e 's,^X,,' -e "s,/$acl_libdirstem/"'*$,,'`
+--                LIB[]NAME[]_PREFIX="$basedir"
+-+                if test "$name" = '$1'; then
+-+                  LIB[]NAME[]_PREFIX="$basedir"
+-+                fi
+-+                additional_includedir="$basedir/include"
+-+                ;;
+-+              */$acl_libdirstem2 | */$acl_libdirstem2/)
+-+                basedir=`echo "X$found_dir" | sed -e 's,^X,,' -e "s,/$acl_libdirstem2/"'*$,,'`
+-+                if test "$name" = '$1'; then
+-+                  LIB[]NAME[]_PREFIX="$basedir"
+-+                fi
+-                 additional_includedir="$basedir/include"
+-                 ;;
+-             esac
+-@@ -476,9 +535,11 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
+-                     dnl   3. if it's already present in $LDFLAGS or the already
+-                     dnl      constructed $LIBNAME,
+-                     dnl   4. if it doesn't exist as a directory.
+--                    if test "X$additional_libdir" != "X/usr/$acl_libdirstem"; then
+-+                    if test "X$additional_libdir" != "X/usr/$acl_libdirstem" \
+-+                       && test "X$additional_libdir" != "X/usr/$acl_libdirstem2"; then
+-                       haveit=
+--                      if test "X$additional_libdir" = "X/usr/local/$acl_libdirstem"; then
+-+                      if test "X$additional_libdir" = "X/usr/local/$acl_libdirstem" \
+-+                         || test "X$additional_libdir" = "X/usr/local/$acl_libdirstem2"; then
+-                         if test -n "$GCC"; then
+-                           case $host_os in
+-                             linux* | gnu* | k*bsd*-gnu) haveit=yes;;
+-@@ -609,6 +670,11 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
+-       LTLIB[]NAME="${LTLIB[]NAME}${LTLIB[]NAME:+ }-R$found_dir"
+-     done
+-   fi
+-+  popdef([P_A_C_K])
+-+  popdef([PACKLIBS])
+-+  popdef([PACKUP])
+-+  popdef([PACK])
+-+  popdef([NAME])
+- ])
+- 
+- dnl AC_LIB_APPENDTOVAR(VAR, CONTENTS) appends the elements of CONTENTS to VAR,
+-@@ -654,7 +720,8 @@ AC_DEFUN([AC_LIB_LINKFLAGS_FROM_LIBS],
+-         if test -n "$next"; then
+-           dir="$next"
+-           dnl No need to hardcode the standard /usr/lib.
+--          if test "X$dir" != "X/usr/$acl_libdirstem"; then
+-+          if test "X$dir" != "X/usr/$acl_libdirstem" \
+-+             && test "X$dir" != "X/usr/$acl_libdirstem2"; then
+-             rpathdirs="$rpathdirs $dir"
+-           fi
+-           next=
+-@@ -663,7 +730,8 @@ AC_DEFUN([AC_LIB_LINKFLAGS_FROM_LIBS],
+-             -L) next=yes ;;
+-             -L*) dir=`echo "X$opt" | sed -e 's,^X-L,,'`
+-                  dnl No need to hardcode the standard /usr/lib.
+--                 if test "X$dir" != "X/usr/$acl_libdirstem"; then
+-+                 if test "X$dir" != "X/usr/$acl_libdirstem" \
+-+                    && test "X$dir" != "X/usr/$acl_libdirstem2"; then
+-                    rpathdirs="$rpathdirs $dir"
+-                  fi
+-                  next= ;;
+-Index: gnutls-2.8.6/lib/m4/lib-prefix.m4
+-===================================================================
+---- gnutls-2.8.6.orig/lib/m4/lib-prefix.m4	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/m4/lib-prefix.m4	2010-05-19 22:15:18.521282615 -0700
+-@@ -1,5 +1,5 @@
+--# lib-prefix.m4 serial 5 (gettext-0.15)
+--dnl Copyright (C) 2001-2005 Free Software Foundation, Inc.
+-+# lib-prefix.m4 serial 7 (gettext-0.18)
+-+dnl Copyright (C) 2001-2005, 2008-2010 Free Software Foundation, Inc.
+- dnl This file is free software; the Free Software Foundation
+- dnl gives unlimited permission to copy and/or distribute it,
+- dnl with or without modifications, as long as this notice is preserved.
+-@@ -153,33 +153,72 @@ AC_DEFUN([AC_LIB_WITH_FINAL_PREFIX],
+-   prefix="$acl_save_prefix"
+- ])
+- 
+--dnl AC_LIB_PREPARE_MULTILIB creates a variable acl_libdirstem, containing
+--dnl the basename of the libdir, either "lib" or "lib64".
+-+dnl AC_LIB_PREPARE_MULTILIB creates
+-+dnl - a variable acl_libdirstem, containing the basename of the libdir, either
+-+dnl   "lib" or "lib64" or "lib/64",
+-+dnl - a variable acl_libdirstem2, as a secondary possible value for
+-+dnl   acl_libdirstem, either the same as acl_libdirstem or "lib/sparcv9" or
+-+dnl   "lib/amd64".
+- AC_DEFUN([AC_LIB_PREPARE_MULTILIB],
+- [
+--  dnl There is no formal standard regarding lib and lib64. The current
+--  dnl practice is that on a system supporting 32-bit and 64-bit instruction
+--  dnl sets or ABIs, 64-bit libraries go under $prefix/lib64 and 32-bit
+--  dnl libraries go under $prefix/lib. We determine the compiler's default
+--  dnl mode by looking at the compiler's library search path. If at least
+--  dnl of its elements ends in /lib64 or points to a directory whose absolute
+--  dnl pathname ends in /lib64, we assume a 64-bit ABI. Otherwise we use the
+--  dnl default, namely "lib".
+-+  dnl There is no formal standard regarding lib and lib64.
+-+  dnl On glibc systems, the current practice is that on a system supporting
+-+  dnl 32-bit and 64-bit instruction sets or ABIs, 64-bit libraries go under
+-+  dnl $prefix/lib64 and 32-bit libraries go under $prefix/lib. We determine
+-+  dnl the compiler's default mode by looking at the compiler's library search
+-+  dnl path. If at least one of its elements ends in /lib64 or points to a
+-+  dnl directory whose absolute pathname ends in /lib64, we assume a 64-bit ABI.
+-+  dnl Otherwise we use the default, namely "lib".
+-+  dnl On Solaris systems, the current practice is that on a system supporting
+-+  dnl 32-bit and 64-bit instruction sets or ABIs, 64-bit libraries go under
+-+  dnl $prefix/lib/64 (which is a symlink to either $prefix/lib/sparcv9 or
+-+  dnl $prefix/lib/amd64) and 32-bit libraries go under $prefix/lib.
+-+  AC_REQUIRE([AC_CANONICAL_HOST])
+-   acl_libdirstem=lib
+--  searchpath=`(LC_ALL=C $CC -print-search-dirs) 2>/dev/null | sed -n -e 's,^libraries: ,,p' | sed -e 's,^=,,'`
+--  if test -n "$searchpath"; then
+--    acl_save_IFS="${IFS= 	}"; IFS=":"
+--    for searchdir in $searchpath; do
+--      if test -d "$searchdir"; then
+--        case "$searchdir" in
+--          */lib64/ | */lib64 ) acl_libdirstem=lib64 ;;
+--          *) searchdir=`cd "$searchdir" && pwd`
+--             case "$searchdir" in
+--               */lib64 ) acl_libdirstem=lib64 ;;
+--             esac ;;
+-+  acl_libdirstem2=
+-+  case "$host_os" in
+-+    solaris*)
+-+      dnl See Solaris 10 Software Developer Collection > Solaris 64-bit Developer's Guide > The Development Environment
+-+      dnl <http://docs.sun.com/app/docs/doc/816-5138/dev-env?l=en&a=view>.
+-+      dnl "Portable Makefiles should refer to any library directories using the 64 symbolic link."
+-+      dnl But we want to recognize the sparcv9 or amd64 subdirectory also if the
+-+      dnl symlink is missing, so we set acl_libdirstem2 too.
+-+      AC_CACHE_CHECK([for 64-bit host], [gl_cv_solaris_64bit],
+-+        [AC_EGREP_CPP([sixtyfour bits], [
+-+#ifdef _LP64
+-+sixtyfour bits
+-+#endif
+-+           ], [gl_cv_solaris_64bit=yes], [gl_cv_solaris_64bit=no])
+-+        ])
+-+      if test $gl_cv_solaris_64bit = yes; then
+-+        acl_libdirstem=lib/64
+-+        case "$host_cpu" in
+-+          sparc*)        acl_libdirstem2=lib/sparcv9 ;;
+-+          i*86 | x86_64) acl_libdirstem2=lib/amd64 ;;
+-         esac
+-       fi
+--    done
+--    IFS="$acl_save_IFS"
+--  fi
+-+      ;;
+-+    *)
+-+      searchpath=`(LC_ALL=C $CC -print-search-dirs) 2>/dev/null | sed -n -e 's,^libraries: ,,p' | sed -e 's,^=,,'`
+-+      if test -n "$searchpath"; then
+-+        acl_save_IFS="${IFS= 	}"; IFS=":"
+-+        for searchdir in $searchpath; do
+-+          if test -d "$searchdir"; then
+-+            case "$searchdir" in
+-+              */lib64/ | */lib64 ) acl_libdirstem=lib64 ;;
+-+              */../ | */.. )
+-+                # Better ignore directories of this form. They are misleading.
+-+                ;;
+-+              *) searchdir=`cd "$searchdir" && pwd`
+-+                 case "$searchdir" in
+-+                   */lib64 ) acl_libdirstem=lib64 ;;
+-+                 esac ;;
+-+            esac
+-+          fi
+-+        done
+-+        IFS="$acl_save_IFS"
+-+      fi
+-+      ;;
+-+  esac
+-+  test -n "$acl_libdirstem2" || acl_libdirstem2="$acl_libdirstem"
+- ])
+-Index: gnutls-2.8.6/lib/m4/nls.m4
+-===================================================================
+---- gnutls-2.8.6.orig/lib/m4/nls.m4	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/m4/nls.m4	2010-05-19 22:15:18.521282615 -0700
+-@@ -1,5 +1,6 @@
+--# nls.m4 serial 3 (gettext-0.15)
+--dnl Copyright (C) 1995-2003, 2005-2006 Free Software Foundation, Inc.
+-+# nls.m4 serial 5 (gettext-0.18)
+-+dnl Copyright (C) 1995-2003, 2005-2006, 2008-2010 Free Software Foundation,
+-+dnl Inc.
+- dnl This file is free software; the Free Software Foundation
+- dnl gives unlimited permission to copy and/or distribute it,
+- dnl with or without modifications, as long as this notice is preserved.
+-@@ -17,15 +18,15 @@ dnl Authors:
+- dnl   Ulrich Drepper <drepper@cygnus.com>, 1995-2000.
+- dnl   Bruno Haible <haible@clisp.cons.org>, 2000-2003.
+- 
+--AC_PREREQ(2.50)
+-+AC_PREREQ([2.50])
+- 
+- AC_DEFUN([AM_NLS],
+- [
+-   AC_MSG_CHECKING([whether NLS is requested])
+-   dnl Default is enabled NLS
+--  AC_ARG_ENABLE(nls,
+-+  AC_ARG_ENABLE([nls],
+-     [  --disable-nls           do not use Native Language Support],
+-     USE_NLS=$enableval, USE_NLS=yes)
+--  AC_MSG_RESULT($USE_NLS)
+--  AC_SUBST(USE_NLS)
+-+  AC_MSG_RESULT([$USE_NLS])
+-+  AC_SUBST([USE_NLS])
+- ])
+-Index: gnutls-2.8.6/lib/m4/po.m4
+-===================================================================
+---- gnutls-2.8.6.orig/lib/m4/po.m4	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/m4/po.m4	2010-05-19 22:15:18.521282615 -0700
+-@@ -1,5 +1,5 @@
+--# po.m4 serial 15 (gettext-0.17)
+--dnl Copyright (C) 1995-2007 Free Software Foundation, Inc.
+-+# po.m4 serial 17 (gettext-0.18)
+-+dnl Copyright (C) 1995-2010 Free Software Foundation, Inc.
+- dnl This file is free software; the Free Software Foundation
+- dnl gives unlimited permission to copy and/or distribute it,
+- dnl with or without modifications, as long as this notice is preserved.
+-@@ -17,7 +17,7 @@ dnl Authors:
+- dnl   Ulrich Drepper <drepper@cygnus.com>, 1995-2000.
+- dnl   Bruno Haible <haible@clisp.cons.org>, 2000-2003.
+- 
+--AC_PREREQ(2.50)
+-+AC_PREREQ([2.50])
+- 
+- dnl Checks for all prerequisites of the po subdirectory.
+- AC_DEFUN([AM_PO_SUBDIRS],
+-@@ -29,7 +29,7 @@ AC_DEFUN([AM_PO_SUBDIRS],
+- 
+-   dnl Release version of the gettext macros. This is used to ensure that
+-   dnl the gettext macros and po/Makefile.in.in are in sync.
+--  AC_SUBST([GETTEXT_MACRO_VERSION], [0.17])
+-+  AC_SUBST([GETTEXT_MACRO_VERSION], [0.18])
+- 
+-   dnl Perform the following tests also if --disable-nls has been given,
+-   dnl because they are needed for "make dist" to work.
+-@@ -41,7 +41,7 @@ AC_DEFUN([AM_PO_SUBDIRS],
+-     [$ac_dir/$ac_word --statistics /dev/null >&]AS_MESSAGE_LOG_FD[ 2>&1 &&
+-      (if $ac_dir/$ac_word --statistics /dev/null 2>&1 >/dev/null | grep usage >/dev/null; then exit 1; else exit 0; fi)],
+-     :)
+--  AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
+-+  AC_PATH_PROG([GMSGFMT], [gmsgfmt], [$MSGFMT])
+- 
+-   dnl Test whether it is GNU msgfmt >= 0.15.
+- changequote(,)dnl
+-Index: gnutls-2.8.6/lib/m4/progtest.m4
+-===================================================================
+---- gnutls-2.8.6.orig/lib/m4/progtest.m4	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/m4/progtest.m4	2010-05-19 22:15:18.521282615 -0700
+-@@ -1,5 +1,5 @@
+--# progtest.m4 serial 4 (gettext-0.14.2)
+--dnl Copyright (C) 1996-2003, 2005 Free Software Foundation, Inc.
+-+# progtest.m4 serial 6 (gettext-0.18)
+-+dnl Copyright (C) 1996-2003, 2005, 2008-2010 Free Software Foundation, Inc.
+- dnl This file is free software; the Free Software Foundation
+- dnl gives unlimited permission to copy and/or distribute it,
+- dnl with or without modifications, as long as this notice is preserved.
+-@@ -16,7 +16,7 @@ dnl They are *not* in the public domain.
+- dnl Authors:
+- dnl   Ulrich Drepper <drepper@cygnus.com>, 1996.
+- 
+--AC_PREREQ(2.50)
+-+AC_PREREQ([2.50])
+- 
+- # Search path for a program which passes the given test.
+- 
+-@@ -55,7 +55,7 @@ rm -f conf$$.file
+- # Extract the first word of "$2", so it can be a program name with args.
+- set dummy $2; ac_word=[$]2
+- AC_MSG_CHECKING([for $ac_word])
+--AC_CACHE_VAL(ac_cv_path_$1,
+-+AC_CACHE_VAL([ac_cv_path_$1],
+- [case "[$]$1" in
+-   [[\\/]]* | ?:[[\\/]]*)
+-     ac_cv_path_$1="[$]$1" # Let the user override the test with a path.
+-@@ -84,9 +84,9 @@ ifelse([$4], , , [  test -z "[$]ac_cv_pa
+- esac])dnl
+- $1="$ac_cv_path_$1"
+- if test ifelse([$4], , [-n "[$]$1"], ["[$]$1" != "$4"]); then
+--  AC_MSG_RESULT([$]$1)
+-+  AC_MSG_RESULT([$][$1])
+- else
+--  AC_MSG_RESULT(no)
+-+  AC_MSG_RESULT([no])
+- fi
+--AC_SUBST($1)dnl
+-+AC_SUBST([$1])dnl
+- ])
+-Index: gnutls-2.8.6/lib/po/ChangeLog
+-===================================================================
+---- /dev/null	1970-01-01 00:00:00.000000000 +0000
+-+++ gnutls-2.8.6/lib/po/ChangeLog	2010-05-19 22:15:18.521282615 -0700
+-@@ -0,0 +1,5 @@
+-+2010-05-19  gettextize  <bug-gnu-gettext@gnu.org>
+-+
+-+	* Makefile.in.in: Upgrade to gettext-0.18.
+-+	* Rules-quot: Upgrade to gettext-0.18.
+-+
+-Index: gnutls-2.8.6/lib/po/Makefile.in.in
+-===================================================================
+---- gnutls-2.8.6.orig/lib/po/Makefile.in.in	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/po/Makefile.in.in	2010-05-19 22:15:18.531283048 -0700
+-@@ -1,5 +1,5 @@
+- # Makefile for PO directory in any package using GNU gettext.
+--# Copyright (C) 1995-1997, 2000-2007 by Ulrich Drepper <drepper@gnu.ai.mit.edu>
+-+# Copyright (C) 1995-1997, 2000-2007, 2009-2010 by Ulrich Drepper <drepper@gnu.ai.mit.edu>
+- #
+- # This file can be copied and used freely without restrictions.  It can
+- # be used in projects which are not available under the GNU General Public
+-@@ -8,8 +8,8 @@
+- # Please note that the actual code of GNU gettext is covered by the GNU
+- # General Public License and is *not* in the public domain.
+- #
+--# Origin: gettext-0.17
+--GETTEXT_MACRO_VERSION = 0.17
+-+# Origin: gettext-0.18
+-+GETTEXT_MACRO_VERSION = 0.18
+- 
+- PACKAGE = @PACKAGE@
+- VERSION = @VERSION@
+-@@ -88,8 +88,8 @@ CATALOGS = @CATALOGS@
+- .po.gmo:
+- 	@lang=`echo $* | sed -e 's,.*/,,'`; \
+- 	test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
+--	echo "$${cdcmd}rm -f $${lang}.gmo && $(GMSGFMT) -c --statistics -o $${lang}.gmo $${lang}.po"; \
+--	cd $(srcdir) && rm -f $${lang}.gmo && $(GMSGFMT) -c --statistics -o t-$${lang}.gmo $${lang}.po && mv t-$${lang}.gmo $${lang}.gmo
+-+	echo "$${cdcmd}rm -f $${lang}.gmo && $(GMSGFMT) -c --statistics --verbose -o $${lang}.gmo $${lang}.po"; \
+-+	cd $(srcdir) && rm -f $${lang}.gmo && $(GMSGFMT) -c --statistics --verbose -o t-$${lang}.gmo $${lang}.po && mv t-$${lang}.gmo $${lang}.gmo
+- 
+- .sin.sed:
+- 	sed -e '/^#/d' $< > t-$@
+-@@ -193,8 +193,15 @@ $(POFILES): $(srcdir)/$(DOMAIN).pot
+- 	@lang=`echo $@ | sed -e 's,.*/,,' -e 's/\.po$$//'`; \
+- 	if test -f "$(srcdir)/$${lang}.po"; then \
+- 	  test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
+--	  echo "$${cdcmd}$(MSGMERGE_UPDATE) $${lang}.po $(DOMAIN).pot"; \
+--	  cd $(srcdir) && $(MSGMERGE_UPDATE) $${lang}.po $(DOMAIN).pot; \
+-+	  echo "$${cdcmd}$(MSGMERGE_UPDATE) $(MSGMERGE_OPTIONS) --lang=$${lang} $${lang}.po $(DOMAIN).pot"; \
+-+	  cd $(srcdir) \
+-+	    && { case `$(MSGMERGE_UPDATE) --version | sed 1q | sed -e 's,^[^0-9]*,,'` in \
+-+	           '' | 0.[0-9] | 0.[0-9].* | 0.1[0-7] | 0.1[0-7].*) \
+-+	             $(MSGMERGE_UPDATE) $(MSGMERGE_OPTIONS) $${lang}.po $(DOMAIN).pot;; \
+-+	           *) \
+-+	             $(MSGMERGE_UPDATE) $(MSGMERGE_OPTIONS) --lang=$${lang} $${lang}.po $(DOMAIN).pot;; \
+-+	         esac; \
+-+	       }; \
+- 	else \
+- 	  $(MAKE) $${lang}.po-create; \
+- 	fi
+-@@ -217,7 +224,6 @@ install-data: install-data-@USE_NLS@
+- 	fi
+- install-data-no: all
+- install-data-yes: all
+--	$(mkdir_p) $(DESTDIR)$(datadir)
+- 	@catalogs='$(CATALOGS)'; \
+- 	for cat in $$catalogs; do \
+- 	  cat=`basename $$cat`; \
+-@@ -269,7 +275,6 @@ installdirs-data: installdirs-data-@USE_
+- 	fi
+- installdirs-data-no:
+- installdirs-data-yes:
+--	$(mkdir_p) $(DESTDIR)$(datadir)
+- 	@catalogs='$(CATALOGS)'; \
+- 	for cat in $$catalogs; do \
+- 	  cat=`basename $$cat`; \
+-@@ -395,9 +400,15 @@ update-po: Makefile
+- 	tmpdir=`pwd`; \
+- 	echo "$$lang:"; \
+- 	test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
+--	echo "$${cdcmd}$(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$lang.new.po"; \
+-+	echo "$${cdcmd}$(MSGMERGE) $(MSGMERGE_OPTIONS) --lang=$$lang $$lang.po $(DOMAIN).pot -o $$lang.new.po"; \
+- 	cd $(srcdir); \
+--	if $(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$tmpdir/$$lang.new.po; then \
+-+	if { case `$(MSGMERGE) --version | sed 1q | sed -e 's,^[^0-9]*,,'` in \
+-+	       '' | 0.[0-9] | 0.[0-9].* | 0.1[0-7] | 0.1[0-7].*) \
+-+	         $(MSGMERGE) $(MSGMERGE_OPTIONS) -o $$tmpdir/$$lang.new.po $$lang.po $(DOMAIN).pot;; \
+-+	       *) \
+-+	         $(MSGMERGE) $(MSGMERGE_OPTIONS) --lang=$$lang -o $$tmpdir/$$lang.new.po $$lang.po $(DOMAIN).pot;; \
+-+	     esac; \
+-+	   }; then \
+- 	  if cmp $$lang.po $$tmpdir/$$lang.new.po >/dev/null 2>&1; then \
+- 	    rm -f $$tmpdir/$$lang.new.po; \
+- 	  else \
+-@@ -418,9 +429,13 @@ $(DUMMYPOFILES):
+- update-gmo: Makefile $(GMOFILES)
+- 	@:
+- 
+-+# Recreate Makefile by invoking config.status. Explicitly invoke the shell,
+-+# because execution permission bits may not work on the current file system.
+-+# Use @SHELL@, which is the shell determined by autoconf for the use by its
+-+# scripts, not $(SHELL) which is hardwired to /bin/sh and may be deficient.
+- Makefile: Makefile.in.in Makevars $(top_builddir)/config.status @POMAKEFILEDEPS@
+- 	cd $(top_builddir) \
+--	  && $(SHELL) ./config.status $(subdir)/$@.in po-directories
+-+	  && @SHELL@ ./config.status $(subdir)/$@.in po-directories
+- 
+- force:
+- 
+-Index: gnutls-2.8.6/lib/po/Makevars.template
+-===================================================================
+---- /dev/null	1970-01-01 00:00:00.000000000 +0000
+-+++ gnutls-2.8.6/lib/po/Makevars.template	2010-05-19 22:15:18.531283048 -0700
+-@@ -0,0 +1,41 @@
+-+# Makefile variables for PO directory in any package using GNU gettext.
+-+
+-+# Usually the message domain is the same as the package name.
+-+DOMAIN = $(PACKAGE)
+-+
+-+# These two variables depend on the location of this directory.
+-+subdir = po
+-+top_builddir = ..
+-+
+-+# These options get passed to xgettext.
+-+XGETTEXT_OPTIONS = --keyword=_ --keyword=N_
+-+
+-+# This is the copyright holder that gets inserted into the header of the
+-+# $(DOMAIN).pot file.  Set this to the copyright holder of the surrounding
+-+# package.  (Note that the msgstr strings, extracted from the package's
+-+# sources, belong to the copyright holder of the package.)  Translators are
+-+# expected to transfer the copyright for their translations to this person
+-+# or entity, or to disclaim their copyright.  The empty string stands for
+-+# the public domain; in this case the translators are expected to disclaim
+-+# their copyright.
+-+COPYRIGHT_HOLDER = Free Software Foundation, Inc.
+-+
+-+# This is the email address or URL to which the translators shall report
+-+# bugs in the untranslated strings:
+-+# - Strings which are not entire sentences, see the maintainer guidelines
+-+#   in the GNU gettext documentation, section 'Preparing Strings'.
+-+# - Strings which use unclear terms or require additional context to be
+-+#   understood.
+-+# - Strings which make invalid assumptions about notation of date, time or
+-+#   money.
+-+# - Pluralisation problems.
+-+# - Incorrect English spelling.
+-+# - Incorrect formatting.
+-+# It can be your email address, or a mailing list address where translators
+-+# can write to without being subscribed, or the URL of a web page through
+-+# which the translators can contact you.
+-+MSGID_BUGS_ADDRESS =
+-+
+-+# This is the list of locale categories, beyond LC_MESSAGES, for which the
+-+# message catalogs shall be used.  It is usually empty.
+-+EXTRA_LOCALE_CATEGORIES =
+-Index: gnutls-2.8.6/lib/po/Rules-quot
+-===================================================================
+---- gnutls-2.8.6.orig/lib/po/Rules-quot	2010-03-15 03:28:11.000000000 -0700
+-+++ gnutls-2.8.6/lib/po/Rules-quot	2010-05-19 22:15:18.531283048 -0700
+-@@ -20,7 +20,7 @@ en@boldquot.po-update: en@boldquot.po-up
+- 	ll=`echo $$lang | sed -e 's/@.*//'`; \
+- 	LC_ALL=C; export LC_ALL; \
+- 	cd $(srcdir); \
+--	if $(MSGINIT) -i $(DOMAIN).pot --no-translator -l $$ll -o - 2>/dev/null | sed -f $$tmpdir/$$lang.insert-header | $(MSGCONV) -t UTF-8 | $(MSGFILTER) sed -f `echo $$lang | sed -e 's/.*@//'`.sed 2>/dev/null > $$tmpdir/$$lang.new.po; then \
+-+	if $(MSGINIT) -i $(DOMAIN).pot --no-translator -l $$lang -o - 2>/dev/null | sed -f $$tmpdir/$$lang.insert-header | $(MSGCONV) -t UTF-8 | $(MSGFILTER) sed -f `echo $$lang | sed -e 's/.*@//'`.sed 2>/dev/null > $$tmpdir/$$lang.new.po; then \
+- 	  if cmp $$lang.po $$tmpdir/$$lang.new.po >/dev/null 2>&1; then \
+- 	    rm -f $$tmpdir/$$lang.new.po; \
+- 	  else \
+diff --git a/recipes/gnutls/gnutls-2.8.6/gnutls-openssl.patch b/recipes/gnutls/gnutls-2.8.6/gnutls-openssl.patch
+deleted file mode 100644
+index 033e4d1..0000000
+--- a/recipes/gnutls/gnutls-2.8.6/gnutls-openssl.patch
++++ /dev/null
+@@ -1,129 +0,0 @@
+----
+- libextra/gnutls_openssl.c          |   58 +++++++++++++++++++++++++++++++++++++
+- libextra/includes/gnutls/openssl.h |    5 +++
+- 2 files changed, 63 insertions(+)
+-
+-Index: gnutls-2.8.6/libextra/gnutls_openssl.c
+-===================================================================
+---- gnutls-2.8.6.orig/libextra/gnutls_openssl.c	2009-11-06 00:39:42.000000000 -0800
+-+++ gnutls-2.8.6/libextra/gnutls_openssl.c	2010-05-19 22:20:34.071283592 -0700
+-@@ -258,12 +258,17 @@ SSL_new (SSL_CTX * ctx)
+-   ssl->rfd = (gnutls_transport_ptr_t) - 1;
+-   ssl->wfd = (gnutls_transport_ptr_t) - 1;
+- 
+-+  ssl->ssl_peek_buffer = NULL;
+-+  ssl->ssl_peek_buffer_size = ssl->ssl_peek_avail = 0;
+-+
+-   return ssl;
+- }
+- 
+- void
+- SSL_free (SSL * ssl)
+- {
+-+  if (ssl->ssl_peek_buffer)
+-+    free(ssl->ssl_peek_buffer);
+-   gnutls_certificate_free_credentials (ssl->gnutls_cred);
+-   gnutls_deinit (ssl->gnutls_state);
+-   free (ssl);
+-@@ -287,6 +292,7 @@ int
+- SSL_set_fd (SSL * ssl, int fd)
+- {
+-   gnutls_transport_set_ptr (ssl->gnutls_state, GNUTLS_INT_TO_POINTER (fd));
+-+  ssl->rfd = ssl->wfd = fd;
+-   return 1;
+- }
+- 
+-@@ -312,6 +318,17 @@ SSL_set_wfd (SSL * ssl, int fd)
+-   return 1;
+- }
+- 
+-+int SSL_get_rfd(SSL *ssl)
+-+{
+-+  return ssl->rfd;
+-+}
+-+
+-+int SSL_get_wfd(SSL *ssl)
+-+{
+-+  return ssl->wfd;
+-+}
+-+
+-+
+- void
+- SSL_set_bio (SSL * ssl, BIO * rbio, BIO * wbio)
+- {
+-@@ -327,6 +344,8 @@ SSL_set_connect_state (SSL * ssl)
+- int
+- SSL_pending (SSL * ssl)
+- {
+-+  if (ssl->ssl_peek_avail)
+-+    return ssl->ssl_peek_avail;
+-   return gnutls_record_check_pending (ssl->gnutls_state);
+- }
+- 
+-@@ -482,11 +501,50 @@ SSL_shutdown (SSL * ssl)
+-   return 1;
+- }
+- 
+-+int SSL_peek(SSL *ssl, void *buf, int len)
+-+{
+-+  if (len > ssl->ssl_peek_buffer_size) {
+-+    ssl->ssl_peek_buffer = realloc (ssl->ssl_peek_buffer, len);
+-+    ssl->ssl_peek_buffer_size = len;
+-+  }
+-+
+-+  if (ssl->ssl_peek_avail == 0) {
+-+
+-+    int ret;
+-+
+-+    ret = gnutls_record_recv(ssl->gnutls_state, ssl->ssl_peek_buffer, len);
+-+    ssl->last_error = ret;
+-+
+-+    if (ret > 0)
+-+      ssl->ssl_peek_avail += ret;
+-+  }
+-+
+-+  if (len > ssl->ssl_peek_avail)
+-+    len = ssl->ssl_peek_avail;
+-+
+-+  memcpy (buf, ssl->ssl_peek_buffer, len);
+-+
+-+  return len;
+-+}
+-+
+- int
+- SSL_read (SSL * ssl, void *buf, int len)
+- {
+-   int ret;
+- 
+-+  if (ssl->ssl_peek_avail) {
+-+    int n = (ssl->ssl_peek_avail > len) ? len : ssl->ssl_peek_avail;
+-+
+-+    memcpy (buf, ssl->ssl_peek_buffer, n);
+-+
+-+    if (ssl->ssl_peek_avail > n)
+-+      memmove (ssl->ssl_peek_buffer, ssl->ssl_peek_buffer + n, ssl->ssl_peek_avail - n);
+-+
+-+    ssl->ssl_peek_avail -= n;
+-+
+-+    return n;
+-+  }
+-+
+-   ret = gnutls_record_recv (ssl->gnutls_state, buf, len);
+-   ssl->last_error = ret;
+- 
+-Index: gnutls-2.8.6/libextra/includes/gnutls/openssl.h
+-===================================================================
+---- gnutls-2.8.6.orig/libextra/includes/gnutls/openssl.h	2009-06-02 11:59:32.000000000 -0700
+-+++ gnutls-2.8.6/libextra/includes/gnutls/openssl.h	2010-05-19 22:20:34.071283592 -0700
+-@@ -164,6 +164,11 @@ extern "C"
+- 
+-     gnutls_transport_ptr_t rfd;
+-     gnutls_transport_ptr_t wfd;
+-+
+-+    char *ssl_peek_buffer;
+-+    size_t ssl_peek_buffer_size;
+-+    size_t ssl_peek_avail;
+-+
+-   };
+- 
+- #define rbio gnutls_state
+diff --git a/recipes/gnutls/gnutls-2.8.6/gnutls-replace-siginterrupt.patch b/recipes/gnutls/gnutls-2.8.6/gnutls-replace-siginterrupt.patch
+deleted file mode 100644
+index a0fb64f..0000000
+--- a/recipes/gnutls/gnutls-2.8.6/gnutls-replace-siginterrupt.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+----
+- src/tests.c |   12 ++++++++++--
+- 1 file changed, 10 insertions(+), 2 deletions(-)
+-
+-Index: gnutls-2.8.6/src/tests.c
+-===================================================================
+---- gnutls-2.8.6.orig/src/tests.c	2009-06-02 11:59:32.000000000 -0700
+-+++ gnutls-2.8.6/src/tests.c	2010-05-19 22:20:51.703780601 -0700
+-@@ -493,6 +493,7 @@ test_bye (gnutls_session_t session)
+-   int old, secs = 6;
+- 
+- #ifndef _WIN32
+-+  struct sigaction act;
+-   signal (SIGALRM, got_alarm);
+- #endif
+- 
+-@@ -513,7 +514,9 @@ test_bye (gnutls_session_t session)
+-     return TEST_FAILED;
+- 
+- #ifndef _WIN32
+--  old = siginterrupt (SIGALRM, 1);
+-+  (void) sigaction(SIGALRM, NULL, &act);
+-+  act.sa_flags &= ~SA_RESTART;
+-+  old = sigaction(SIGALRM, &act, NULL);
+-   alarm (secs);
+- #else
+-   setsockopt ((int) gnutls_transport_get_ptr (session), SOL_SOCKET,
+-@@ -527,7 +530,12 @@ test_bye (gnutls_session_t session)
+-   while (ret > 0);
+- 
+- #ifndef _WIN32
+--  siginterrupt (SIGALRM, old);
+-+  (void) sigaction(SIGALRM, NULL, &act);
+-+  if (old)
+-+    act.sa_flags &= ~SA_RESTART;
+-+  else
+-+    act.sa_flags |= SA_RESTART;
+-+  sigaction(SIGALRM, &act, NULL);
+- #else
+-   if (WSAGetLastError () == WSAETIMEDOUT ||
+-       WSAGetLastError () == WSAECONNABORTED)
+diff --git a/recipes/gnutls/gnutls.inc b/recipes/gnutls/gnutls.inc
+index 9c10c11..cfb9393 100644
+--- a/recipes/gnutls/gnutls.inc
++++ b/recipes/gnutls/gnutls.inc
+@@ -2,6 +2,7 @@ DESCRIPTION = "GNU Transport Layer Security Library"
+ HOMEPAGE = "http://www.gnu.org/software/gnutls/"
+ DEPENDS = "zlib libgcrypt lzo guile-native gtk-doc"
+ LICENSE = "LGPL"
++LICENSE_${PN}-extra = "GPLv3"
+ 
+ SRC_URI = "ftp://ftp.gnutls.org/pub/gnutls/gnutls-${PV}.tar.bz2;name=gnutls"
+ 
+diff --git a/recipes/gnutls/gnutls_2.10.1.bb b/recipes/gnutls/gnutls_2.10.1.bb
+deleted file mode 100644
+index 86c13ed..0000000
+--- a/recipes/gnutls/gnutls_2.10.1.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-require gnutls.inc
+-
+-PR = "${INC_PR}.3"
+-
+-LICENSE_${PN}-extra = "GPLv3"
+-
+-EXTRA_OECONF += " --without-libgcrypt-prefix "
+-
+-SRC_URI += "file://gettextize-with-gettext-0.18.patch \
+-            file://gnutls-openssl.patch \
+-            file://gnutls-replace-siginterrupt.patch \
+-           "
+-
+-do_configure_prepend() {
+-
+- MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
+-
+- for i in ${MACROS}; do
+-   rm -f m4/$i
+-   rm -f lib/m4/$i
+-   rm -f libextra/m4/$i
+- done
+-
+-}
+-
+-SRC_URI[gnutls.md5sum] = "b614448d7fb43ea0d4f727e6302bbf0f"
+-SRC_URI[gnutls.sha256sum] = "731078bc11661411ba47b20a65024abeca40d43a1b3c4526a6599b7905c302ee"
+diff --git a/recipes/gnutls/gnutls_2.10.4.bb b/recipes/gnutls/gnutls_2.10.4.bb
+index 88de152..9f40684 100644
+--- a/recipes/gnutls/gnutls_2.10.4.bb
++++ b/recipes/gnutls/gnutls_2.10.4.bb
+@@ -2,8 +2,6 @@ require gnutls.inc
+ 
+ PR = "${INC_PR}.0"
+ 
+-LICENSE_${PN}-extra = "GPLv3"
+-
+ EXTRA_OECONF += " --without-libgcrypt-prefix "
+ 
+ SRC_URI += "file://gettextize-with-gettext-0.18.patch \
+diff --git a/recipes/gnutls/gnutls_2.8.5.bb b/recipes/gnutls/gnutls_2.8.5.bb
+deleted file mode 100644
+index c536d18..0000000
+--- a/recipes/gnutls/gnutls_2.8.5.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-require gnutls.inc
+-
+-PR = "${INC_PR}.0"
+-
+-LICENSE_${PN}-extra = "GPLv3"
+-
+-SRC_URI += "\
+-	file://gnutls-openssl.patch \
+-	file://gnutls-replace-siginterrupt.patch \
+-	"
+-
+-EXTRA_OECONF += " --without-libgcrypt-prefix "
+-
+-do_configure_prepend() {
+-
+-    cd ${S} && rm -rf m4/ aclocal.m4 lib/m4/libtool.m4 lib/m4/lt*m4
+-}
+-
+-SRC_URI[gnutls.md5sum] = "e3b2788b79bfc82acbe717e3c54d4e92"
+-SRC_URI[gnutls.sha256sum] = "9249c29df71551e302e0186f4e1876dd6cc4c6cf2974b432c22525dde815cae8"
+diff --git a/recipes/gnutls/gnutls_2.8.6.bb b/recipes/gnutls/gnutls_2.8.6.bb
+deleted file mode 100644
+index 0998c6b..0000000
+--- a/recipes/gnutls/gnutls_2.8.6.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-require gnutls.inc
+-
+-PR = "${INC_PR}.0"
+-
+-LICENSE_${PN}-extra = "GPLv3"
+-
+-EXTRA_OECONF += " --without-libgcrypt-prefix "
+-
+-SRC_URI += "file://gettextize-with-gettext-0.18.patch \
+-            file://gnutls-openssl.patch \
+-            file://gnutls-replace-siginterrupt.patch \
+-           "
+-
+-SRC_URI[gnutls.md5sum] = "eb0a6d7d3cb9ac684d971c14f9f6d3ba"
+-SRC_URI[gnutls.sha256sum] = "d6f846a7064af3ee2c9aebd65dcee76953b767170cbcd719e990ed6b9688a356"
+-
+-- 
+1.7.4.rc2
 
-Frans.
-
-PS: as part of the migration it might also be a good plan to see if
-recipes should be updated. I don't know too much about directfb but
-maybe it makes sense to move to newer versions of e.g. fusionsound and
-lite.
 
 
