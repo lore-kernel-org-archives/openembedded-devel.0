@@ -1,33 +1,32 @@
 Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PfaRx-00057y-Ii
+	(envelope-from <dp@xora.org.uk>) id 1PfaTn-0005Y8-QK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 16:59:57 +0100
+	Wed, 19 Jan 2011 17:01:52 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 0A119A47A5
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id A36EFA47A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 15:59:19 +0000 (GMT)
+	Wed, 19 Jan 2011 16:01:12 +0000 (GMT)
 X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
 Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
 	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id FPXugSJjrf08
+	port 10024) with ESMTP id 34utPoVXkw7Y
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 15:59:18 +0000 (GMT)
+	Wed, 19 Jan 2011 16:01:11 +0000 (GMT)
 Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
 	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 38B9EA479E
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id C3471A479A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 15:59:18 +0000 (GMT)
-Message-ID: <4D370A54.6020607@xora.org.uk>
-Date: Wed, 19 Jan 2011 15:59:16 +0000
+	Wed, 19 Jan 2011 16:01:11 +0000 (GMT)
+Message-ID: <4D370AC6.5080906@xora.org.uk>
+Date: Wed, 19 Jan 2011 16:01:10 +0000
 From: Graeme Gregory <dp@xora.org.uk>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
 	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4D36F9BE.1010601@xora.org.uk>
-	<AANLkTi=sJGSCRxSF6tFPhrGb=NKfmiLNURg-n-Gmgc3Z@mail.gmail.com>
-In-Reply-To: <AANLkTi=sJGSCRxSF6tFPhrGb=NKfmiLNURg-n-Gmgc3Z@mail.gmail.com>
+References: <4D36F9BE.1010601@xora.org.uk> <4D370424.9000808@eukrea.com>
+In-Reply-To: <4D370424.9000808@eukrea.com>
 X-Enigmail-Version: 1.1.1
 Subject: Re: openembedded-core git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,67 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 15:59:57 -0000
+X-List-Received-Date: Wed, 19 Jan 2011 16:01:52 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 19/01/2011 15:33, Frans Meulenbroeks wrote:
-> 2011/1/19 Graeme Gregory <dp@xora.org.uk>:
->> Hi, this email is sent as an ordinary member of OE.
->>
+On 19/01/2011 15:32, Eric B=E9nard wrote:
+> Hi,
+>
+> On 19/01/2011 15:48, Graeme Gregory wrote:
 >> It seems to be on a technical level we are agreed that we should split
 >> parts of OE out into the so called openembedded-core which will have a
 >> stricter commit access and higher QA requirements on changes.
 >>
->> I therefore think it is time to actually create the repository and let
->> the people who are interested in merging the good stuff from poky with
->> the good stuff from openembedded to create our "core". I don't think
->> there is any need to wait on the political part of the Yocto/OE
->> collaboration as its something we have agreed in principal to do anyway.
->>
->> I would request then that the TSC drive this forward with the server
->> admins and create this repo so work can happen.
->>
->> Graeme
-> Graeme,
+> (this question may be stupid as I haven't yet read the other thread
+> concerning Yocto/OE).
+> What is openembedded-core vs
+> http://cgit.openembedded.net/cgit.cgi/meta-openembedded/ ?
 >
-> Seems  a fine plan to me.
-> Do we already have an idea what would be the starting base?
-> And do we already have an idea on the QA requirements we want to impose on this?
-> Lastly we might try to define some common understanding what is core
-> and what not.
->
-> I did some experiments with poky and found that some of the recipes I
-> needed were missing; some of them might perhaps become part of core
-> (e.g. i2ctools, squashfstools, libftdi, fastcgi), whereas others are
-> quite unlikely to end up in core (e.g. urjtag). For the latter we must
-> find another home (e.g. meta-openembedded), where hopefully we can
-> also raise the QA bar somewhat.
->
-> I'll happily contribute to raise the quality bar. However, if the goal
-> is shuffling recipes without significant QA improvement or if QA
-> improvement is optional, I'll probably pass.
->
+It is the distilling of toolchains/classes/basic tools from OE/poky to a
+small tightly controlled repository with tighter access controls with
+the aim that making a minimal image out of this repo should always work
+(tm). Basically the minimal subset of OE that is still useful.
 
-Well I would hope that openembedded-core has a pull model similar to
-poky/yocto but that is I think ultimately upto TSC members (with
-consultation with membership). Hopefully they shall give their opinions
-on the issue soon.
-
-I would say the obvious starting point is poky, then merge OE
-improvements into that. I think this would be less work than stripping
-down OE to core level.
-
-I think all the tools you have mentioned are bad examples of stuff to go
-into core except possibly squashfs. Core should be purely enough to get
-a busybox minimal image build in ext2/3/jffs/ubi given a machine.conf.
-Basically enough to do board bringup and no more (with package
-management capabilities). If core was recipes people "needed" it wouldnt
-really be core fastcgi is pretty specialised bit of software.
-
-Core should probably have a build bot which crunches a standard set of
-tests on each commit so unlike OE currently people don't wake up to bad
-day of debugging OE.
+meta-openembedded then builds on this to give the rest of OE that we see
+now.
 
 Graeme
 
