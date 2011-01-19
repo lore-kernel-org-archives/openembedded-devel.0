@@ -1,35 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PfSOR-0002o7-Ie for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 08:23:47 +0100
+	id 1PfSQK-0002q6-Ti for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 08:25:45 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PfSNp-0002Wi-Ny for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 08:23:09 +0100
+	id 1PfSPg-0003J5-NR for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 08:25:04 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 08:23:09 +0100
+	Wed, 19 Jan 2011 08:25:04 +0100
 Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
 	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 08:23:09 +0100
+	Wed, 19 Jan 2011 08:25:04 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 19 Jan 2011 08:22:56 +0100
-Message-ID: <ih63gg$6lr$1@dough.gmane.org>
-References: <1295388343-2058-1-git-send-email-msmith@cbnco.com>
-	<1295388343-2058-2-git-send-email-msmith@cbnco.com>
+Date: Wed, 19 Jan 2011 08:24:20 +0100
+Message-ID: <ih63j4$6lr$3@dough.gmane.org>
+References: <1295394843.32079.62.camel@mattotaupa>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1295388343-2058-2-git-send-email-msmith@cbnco.com>
+In-Reply-To: <1295394843.32079.62.camel@mattotaupa>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 2/2] libsoup-2.4: update 2.29.91 to 2.32.2
+Subject: Re: [PATCH 1/2] gst-openmax: remove obsolete patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,97 +42,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 07:23:47 -0000
+X-List-Received-Date: Wed, 19 Jan 2011 07:25:45 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 18-01-11 23:05, Michael Smith wrote:
-> The new release fixes several issues and is API/ABI compatible.
-> (at least, webkit-gtk still builds and runs.)
+On 19-01-11 00:54, Paul Menzel wrote:
+> Date: Tue, 18 Jan 2011 16:31:30 +0100
 > 
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> Cc: Koen Kooi <koen@openembedded.org>
+> Task `configure` fails with the following error with `angstrom-2008.1` and `MACHINE = "beagleboard"`.
+> 
+> 	| configure: using GStreamer tools in /usr/bin
+> 	| configure: using GStreamer plug-ins in /usr/lib/gstreamer-0.10
+> 	| checking for GST_BASE... yes
+> 	| checking for GST_CHECK... no
+> 	| no
+> 	| configure: No package 'gstreamer-check' found
+> 	| configure: error: no gstreamer-check >= 0.10.0 (GStreamer Check unittest Library) found
+> 	| ERROR: Function do_configure failed
+> 	NOTE: package gst-openmax-0.10.0.4-r0: task do_configure: Failed
+> 	ERROR: TaskFailed event exception, aborting
+> 	ERROR: Build of /oe/openembedded/recipes/openmax/gst-openmax_0.10.0.4.bb do_configure failed
+> 	ERROR: Task 11 (/oe/openembedded/recipes/openmax/gst-openmax_0.10.0.4.bb, do_configure) failed with 256
+> 
+> With current GStreamer `gstreamer-0.10.31-r2` this patch is not necessary anymore and removing it fixes the build. When the recipe was committed with the patch in 1eef6ac1 [1] GStreamer 0.10.17 was used [2].
+> 
+> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=1eef6ac18de15ea845b146b1624fcc1f1c4faea2
+> [2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3422a436880509c7f82a3ae5d5693c87ece7a42d
+> 
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
 Acked-by: Koen Kooi <koen@openembedded.org>
 
 
 > ---
->  ...isable-TLS-1.2-in-addition-to-1.0-and-1.1.patch |   29 --------------------
->  ...ibsoup-2.4_2.29.91.bb => libsoup-2.4_2.32.2.bb} |    8 +----
->  2 files changed, 2 insertions(+), 35 deletions(-)
->  delete mode 100644 recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch
->  rename recipes/gnome/{libsoup-2.4_2.29.91.bb => libsoup-2.4_2.32.2.bb} (68%)
+>  recipes/openmax/gst-openmax/check.diff  |   11 -----------
+>  recipes/openmax/gst-openmax_0.10.0.4.bb |    1 -
+>  2 files changed, 0 insertions(+), 12 deletions(-)
+>  delete mode 100644 recipes/openmax/gst-openmax/check.diff
 > 
-> diff --git a/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch b/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch
+> diff --git a/recipes/openmax/gst-openmax/check.diff b/recipes/openmax/gst-openmax/check.diff
 > deleted file mode 100644
-> index 1a03581..0000000
-> --- a/recipes/gnome/libsoup-2.4/Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch
+> index 9e74abf..0000000
+> --- a/recipes/openmax/gst-openmax/check.diff
 > +++ /dev/null
-> @@ -1,29 +0,0 @@
-> -From 01a43ad9824fba77384534c6d588e0e0d653986e Mon Sep 17 00:00:00 2001
-> -From: Dan Winship <danw@gnome.org>
-> -Date: Tue, 29 Jun 2010 13:43:20 +0000
-> -Subject: Disable TLS 1.2 in addition to 1.0 and 1.1
-> -
-> -Due to bug 581342 we want to only negotiate SSL 3.0. Previously we
-> -were telling gnutls to not do TLS1.0 or TLS1.1, but that means with
-> -newer versions of gnutls that support TLS1.2 it would try to negotiate
-> -that instead and generally fail. Fix that by disabling TLS1.2 too
-> -(which works fine even with gnutls versions that don't support TLS1.2
-> -yet).
-> -
-> -https://bugzilla.gnome.org/show_bug.cgi?id=622857
-> ----
-> -diff --git a/libsoup/soup-gnutls.c b/libsoup/soup-gnutls.c
-> -index cb0fbe5..0b57f28 100644
-> ---- a/libsoup/soup-gnutls.c
-> -+++ b/libsoup/soup-gnutls.c
-> -@@ -477,7 +477,7 @@ soup_ssl_wrap_iochannel (GIOChannel *sock, gboolean non_blocking,
-> - 		goto THROW_CREATE_ERROR;
+> @@ -1,11 +0,0 @@
+> ---- /tmp/gst-check.m4	2008-08-05 17:46:09.000000000 +0200
+> -+++ gst-openmax-0.10.0.4/common/m4/gst-check.m4	2008-08-05 17:46:29.000000000 +0200
+> -@@ -114,7 +114,7 @@
 > - 
-> - 	/* See http://bugzilla.gnome.org/show_bug.cgi?id=581342 */
-> --	if (gnutls_priority_set_direct (session, "NORMAL:!VERS-TLS1.1:!VERS-TLS1.0", NULL) != 0)
-> -+	if (gnutls_priority_set_direct (session, "NORMAL:!VERS-TLS1.2:!VERS-TLS1.1:!VERS-TLS1.0", NULL) != 0)
-> - 		goto THROW_CREATE_ERROR;
+> - AC_DEFUN([AG_GST_CHECK_GST_CHECK],
+> - [
+> --  AG_GST_CHECK_MODULES(GST_CHECK, gstreamer-check-[$1], [$2],
+> -+  AG_GST_CHECK_MODULES(GST_CHECK, gstreamer-check, [$2],
+> -     [GStreamer Check unittest Library], [$3])
+> - ])
 > - 
-> - 	if (gnutls_credentials_set (session, GNUTLS_CRD_CERTIFICATE,
-> ---
-> -cgit v0.8.3.1
-> diff --git a/recipes/gnome/libsoup-2.4_2.29.91.bb b/recipes/gnome/libsoup-2.4_2.32.2.bb
-> similarity index 68%
-> rename from recipes/gnome/libsoup-2.4_2.29.91.bb
-> rename to recipes/gnome/libsoup-2.4_2.32.2.bb
-> index aec60fa..5bc793c 100644
-> --- a/recipes/gnome/libsoup-2.4_2.29.91.bb
-> +++ b/recipes/gnome/libsoup-2.4_2.32.2.bb
-> @@ -3,15 +3,11 @@ SECTION = "x11/gnome/libs"
->  LICENSE = "GPL"
->  DEPENDS = "libproxy glib-2.0 gnutls libxml2 sqlite3 gnome-keyring"
+> diff --git a/recipes/openmax/gst-openmax_0.10.0.4.bb b/recipes/openmax/gst-openmax_0.10.0.4.bb
+> index d3e1002..b05b65f 100644
+> --- a/recipes/openmax/gst-openmax_0.10.0.4.bb
+> +++ b/recipes/openmax/gst-openmax_0.10.0.4.bb
+> @@ -3,7 +3,6 @@ LICENSE = "LGPLv2"
+>  DEPENDS = "gstreamer libomxil-bellagio"
 >  
-> -PR = "r2"
-> -
->  inherit gnome
+>  SRC_URI = "http://gstreamer.freedesktop.org/src/gst-openmax/pre/gst-openmax-${PV}.tar.bz2 \
+> -           file://check.diff \
+>            "
 >  
->  SRC_URI = "${GNOME_MIRROR}/libsoup/${@gnome_verdir("${PV}")}/libsoup-${PV}.tar.bz2;name=libsoup"
-> -SRC_URI[libsoup.md5sum] = "900390c0ead254fbb23f3f0b84fd18bb"
-> -SRC_URI[libsoup.sha256sum] = "626c88f6b87463cb092733d2bcd5672ca69529a766cc6c5cc817f34b49c821b1"
-> -
-> -SRC_URI += "file://Disable-TLS-1.2-in-addition-to-1.0-and-1.1.patch"
-> +SRC_URI[libsoup.md5sum] = "03f37350a2a31046ebabb8470e75abcc"
-> +SRC_URI[libsoup.sha256sum] = "96e6973c8b7459523c0f44e7aec69528ff2fbd388e8ddc415f91bcc42f50777f"
->  
->  S = "${WORKDIR}/libsoup-${PV}"
->  
+>  inherit autotools
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNNpFPMkyGM64RGpERAvnAAJoDljz3QZxRQtNKqmheOr1x2VzClACgkLIY
-sBMzE6vmlZkBQnUiQ2tV/Nk=
-=hDXq
+iD8DBQFNNpGkMkyGM64RGpERAgphAKCrYfUHcqTf6Xa7KPOLEgoV7rfzjwCfbEjj
+A/fPxQcTyRgKMYa/O4kHVrw=
+=vhT3
 -----END PGP SIGNATURE-----
 
 
