@@ -1,37 +1,34 @@
-Received: from mail-yi0-f41.google.com ([209.85.218.41])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pfbch-00078X-Po
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pfbzq-0007WU-An
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 18:15:07 +0100
-Received: by yia25 with SMTP id 25so415508yia.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 09:14:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=yTItSunsX3AJPrw00nul513HF0/GhSr6mu1akUQPbDw=;
-	b=b+vr8yuyyEykXoU5kJJzbS+gZ2xhkwjyIEgQUpdovVPJRf1FoAA4beNb5Sz6NGuOxs
-	nJiXb+MuLyERJAtzXOBVTkSFXtgL2Ue21QfJPcJ2HcGYDT4VaJuN0JBJIRrA8frL6B0d
-	IkbEArJ6aMka68+G2Gf1sakIB4QdRSUoinuaY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=dxniIPBF/bKqLJjF+MHAEYe53wa6+KOFVGHoXPJm2DxQgl12bv0L2JDdyAnnVJKMyQ
-	CdGDaQBgae7AJQNuuRQEeEnPYufcmj2eYz7oBTdtZ1EEBy24QeNml3bwpqmIV1I0jYYg
-	05m4uRY721dlS8mR88FfykoLu2oAr4/fcTdpw=
-Received: by 10.90.10.31 with SMTP id 31mr1236175agj.85.1295457266067; Wed, 19
-	Jan 2011 09:14:26 -0800 (PST)
+	Wed, 19 Jan 2011 18:39:02 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1PfbzB-0006Wi-7j from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 09:38:21 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 19 Jan 2011 09:38:21 -0800
+Received: from [172.30.80.47] ([172.30.80.47]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 19 Jan 2011 10:38:13 -0700
+Message-ID: <4D37215D.7050209@mentor.com>
+Date: Wed, 19 Jan 2011 10:37:33 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Wed, 19 Jan 2011 09:14:03 -0800 (PST)
-In-Reply-To: <4D370A54.6020607@xora.org.uk>
-References: <4D36F9BE.1010601@xora.org.uk>
-	<AANLkTi=sJGSCRxSF6tFPhrGb=NKfmiLNURg-n-Gmgc3Z@mail.gmail.com>
-	<4D370A54.6020607@xora.org.uk>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Jan 2011 09:14:03 -0800
-Message-ID: <AANLkTikboQD_DzetzQHDrikhKQDWYcw_-PxX0=9M_prr@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: openembedded-core git repository
+References: <1295286639-4901-1-git-send-email-raj.khem@gmail.com>	<4D34952B.607@mentor.com>
+	<201101180730.29536.roman@khimov.ru>	<4D3661AC.8030708@mentor.com>
+	<20110119042954.GA30752@gmail.com>
+In-Reply-To: <20110119042954.GA30752@gmail.com>
+X-OriginalArrivalTime: 19 Jan 2011 17:38:14.0442 (UTC)
+	FILETIME=[A64738A0:01CBB7FF]
+Subject: Re: [PATCH 1/2] minimal.conf: Prefer perl 5.10.1 and opie 1.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,83 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 17:15:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 19 Jan 2011 17:39:02 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jan 19, 2011 at 7:59 AM, Graeme Gregory <dp@xora.org.uk> wrote:
-> On 19/01/2011 15:33, Frans Meulenbroeks wrote:
->> 2011/1/19 Graeme Gregory <dp@xora.org.uk>:
->>> Hi, this email is sent as an ordinary member of OE.
+On 01/18/2011 09:29 PM, Khem Raj wrote:
+> On (18/01/11 20:59), Tom Rini wrote:
+>> On 01/17/2011 09:30 PM, Roman I Khimov wrote:
+>>> В сообщении от Понедельник 17 января 2011 22:14:51 автор Tom Rini написал:
+>>>> On 01/17/2011 10:50 AM, Khem Raj wrote:
+>>>> I see different problems with perl 5.10.1 + uclibc + p2020ds, so I guess
+>>>> this is fine with me.
 >>>
->>> It seems to be on a technical level we are agreed that we should split
->>> parts of OE out into the so called openembedded-core which will have a
->>> stricter commit access and higher QA requirements on changes.
->>>
->>> I therefore think it is time to actually create the repository and let
->>> the people who are interested in merging the good stuff from poky with
->>> the good stuff from openembedded to create our "core". I don't think
->>> there is any need to wait on the political part of the Yocto/OE
->>> collaboration as its something we have agreed in principal to do anyway=
-.
->>>
->>> I would request then that the TSC drive this forward with the server
->>> admins and create this repo so work can happen.
->>>
->>> Graeme
->> Graeme,
+>>> What kind of problems?
 >>
->> Seems =C2=A0a fine plan to me.
->> Do we already have an idea what would be the starting base?
->> And do we already have an idea on the QA requirements we want to impose =
-on this?
->> Lastly we might try to define some common understanding what is core
->> and what not.
->>
->> I did some experiments with poky and found that some of the recipes I
->> needed were missing; some of them might perhaps become part of core
->> (e.g. i2ctools, squashfstools, libftdi, fastcgi), whereas others are
->> quite unlikely to end up in core (e.g. urjtag). For the latter we must
->> find another home (e.g. meta-openembedded), where hopefully we can
->> also raise the QA bar somewhat.
->>
->> I'll happily contribute to raise the quality bar. However, if the goal
->> is shuffling recipes without significant QA improvement or if QA
->> improvement is optional, I'll probably pass.
->>
+>> Khem fixed it tonight.  At heart, there's been a need to make much
+>> better use of the libc-uclibc override rather than testing TARGET_OS
+>> as there's at least 'linux-uclibc', 'linux-uclibceabi' and
+>> 'linux-uclibcspe' as valid TARGET_OS combinations.
 >
-> Well I would hope that openembedded-core has a pull model similar to
-> poky/yocto but that is I think ultimately upto TSC members (with
-> consultation with membership). Hopefully they shall give their opinions
-> on the issue soon.
->
-> I would say the obvious starting point is poky, then merge OE
-> improvements into that. I think this would be less work than stripping
-> down OE to core level.
+> I thought about it and indeed it would be better to have a LIBC override
+> but its defined in .inc files which may not be included by all
+> distributions, if this makes into bitbake.conf somehow then that would
+> be better or we can decide to have a global data var called LIBC or some
+> sort.
 
-Poky is a moving target too. So it will be a bit hard to follow do we plan =
-to
-sync oe-core with poky or will yocto start working on oe-core right away
+We already did this.  A distro that doesn't pull in the right libc inc 
+file is either broken or on its own (I forget and can't check atm if 
+Angstrom uses the files eventually or just also has the libc-foo 
+OVERRIDES, but is correct here).  We also have LIBC as a global env way 
+to say what LIBC to use (Angstrom has ANGSTROMLIBC and LIBC since they 
+originated the feature).
 
->
-> I think all the tools you have mentioned are bad examples of stuff to go
-> into core except possibly squashfs. Core should be purely enough to get
-> a busybox minimal image build in ext2/3/jffs/ubi given a machine.conf.
-> Basically enough to do board bringup and no more (with package
-> management capabilities). If core was recipes people "needed" it wouldnt
-> really be core fastcgi is pretty specialised bit of software.
->
-> Core should probably have a build bot which crunches a standard set of
-> tests on each commit so unlike OE currently people don't wake up to bad
-> day of debugging OE.
->
-> Graeme
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
