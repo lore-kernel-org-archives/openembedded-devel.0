@@ -1,38 +1,38 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <graham.gower@gmail.com>) id 1PfglB-0001sN-UD
+	(envelope-from <msundius@sundius.com>) id 1Pfgnd-0001xV-TV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 23:44:13 +0100
-Received: by ewy28 with SMTP id 28so882260ewy.6
+	Wed, 19 Jan 2011 23:46:46 +0100
+Received: by qyk8 with SMTP id 8so1154503qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 14:43:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=ODeTxy9QBr0cDveBAqpQO/acK02CYZvkPBUlR2qxfbA=;
-	b=GHqBZjj8mhQbEoqMtn4FhH8NkaWR/TUtQr0DlxFlQDdnvGa7EAEXGdypl3lPh30Aj6
-	HpDSWVQ6mPkQR+TbQApC7tuiHq0gF7F+305IS6ZX7ZJf+YyXLOXDOGk1IYMwI7FFz0if
-	M/L6C60mr0GNlvbIo/CX3HKjf4oI3RXQK+u6U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ReqbpiiUHTb0iKxLNC8iGE96uI6tApJkZn4P0U+9E7UZk6PeRSjSEAWY8nFjSNyFxo
-	ez/NjLrsysPGiBKNd3MsT/WaqiO4LIoSS7kD772YDHrUmtw5+FILJoYKnyurmsZ8RrMB
-	teGoK7DS66yJeWQQVUTiPLaHPGCgTMuP0mH44=
+	Wed, 19 Jan 2011 14:46:05 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.227.143.65 with SMTP id t1mr1492450wbu.105.1295477015752; Wed,
-	19 Jan 2011 14:43:35 -0800 (PST)
-Received: by 10.227.151.208 with HTTP; Wed, 19 Jan 2011 14:43:35 -0800 (PST)
-In-Reply-To: <AANLkTikUOPo2v+=qYF_afhSHxkyb1EK3HJC1_E4RRGub@mail.gmail.com>
-References: <4D36F9BE.1010601@xora.org.uk>
-	<AANLkTi=sJGSCRxSF6tFPhrGb=NKfmiLNURg-n-Gmgc3Z@mail.gmail.com>
-	<4D370A54.6020607@xora.org.uk>
-	<AANLkTikUOPo2v+=qYF_afhSHxkyb1EK3HJC1_E4RRGub@mail.gmail.com>
-Date: Thu, 20 Jan 2011 09:13:35 +1030
-Message-ID: <AANLkTik3ysHryPYNcpObiyky4X98=9exDyKtJD_3yu+k@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+Received: by 10.229.240.198 with SMTP id lb6mr1022762qcb.255.1295477164748;
+	Wed, 19 Jan 2011 14:46:04 -0800 (PST)
+Received: by 10.229.233.213 with HTTP; Wed, 19 Jan 2011 14:46:04 -0800 (PST)
+In-Reply-To: <AANLkTinRKmmzUT-6T6_cGR+HHrB6hYFYhdS4GuZHRS+Z@mail.gmail.com>
+References: <1295027350.14388.6527.camel@rex>
+	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
+	<4D353F81.50301@xora.org.uk>
+	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
+	<4D35FC8B.1090404@mentor.com>
+	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
+	<AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
+	<4D36A64E.9060804@xora.org.uk>
+	<AANLkTi=8uKvujKLqG2cw3h3gLmmcU=KNfdmSwB5imfsH@mail.gmail.com>
+	<1295436662.2540.14.camel@scimitar>
+	<AANLkTik9-k_euvDGZd+CFfQ9LyxD_7mubpVxPqyEsEVU@mail.gmail.com>
+	<4D36FE98.3070606@mwester.net>
+	<AANLkTimMHd-eH9tEL1tUtoUKa+zwX4+9kUdT3k_NP9nG@mail.gmail.com>
+	<AANLkTimyPb-4pLrbF4ZeFwnh+9WyZtcPY1uXeYBnwUqQ@mail.gmail.com>
+	<AANLkTinRKmmzUT-6T6_cGR+HHrB6hYFYhdS4GuZHRS+Z@mail.gmail.com>
+Date: Wed, 19 Jan 2011 14:46:04 -0800
+Message-ID: <AANLkTimfwC4gC-fLeMgp=BFbMYdAy7yppt4e0vapV5+W@mail.gmail.com>
+From: C Michael Sundius <msundius@sundius.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: openembedded-core git repository
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,21 +46,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 22:44:14 -0000
+X-List-Received-Date: Wed, 19 Jan 2011 22:46:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On 20 January 2011 05:22, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2011/1/19 Graeme Gregory <dp@xora.org.uk>:
->> Core should probably have a build bot which crunches a standard set of
->> tests on each commit so unlike OE currently people don't wake up to bad
->> day of debugging OE.
+As with anything Balance and compromise is what make the best projects, I
+don't think I'd want ever recipe to stay forever be not useful to anyone,
+but I've appreciated the efforts that OE has made (since I've been using it)
+to generally not break things for people who have invested time in using it.
+
+On Wed, Jan 19, 2011 at 2:23 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Wed, Jan 19, 2011 at 1:55 PM, C Michael Sundius <msundius@sundius.com>
+> wrote:
+> > It seems to me that this is a bit of a battle between the package
+> > maintainers and the distro maintainers.. Looking at this from my
+> managements
+> > side of things, we use OE as a tool and its really just a means to the
+> end.
+> > our customers demand that we do not change things (versions of software),
+> > they demand stability and they view a change in busybox or anything else
+> a
+> > threat to stability. our management has also made an edict that we can
+> not
+> > use gplv3. For completely non technical reasons we simply cannot move to
+> new
+> > package versions without a substantial business justification. I suspect
+> > that that there are many (more than you realize) folk out there who are
+> > using OE for their own distro. If you simply whack package versions
+> because
+> > something newer came out you will have these people maintaining separate
+> > recipes and we'll be swamped with the load and this tool will loose one
+> of
+> > its best attributes.
+> >
+> > The comment that disturbed me was that distros should just move ahead
+> > "because its making things hard for the package maintainer". That doesn't
+> > wash with me because if people are using your package then you should
+> > support it or let someone else be the maintainer.
 >
-> I'm not sure if that is needed (at least not on for every commit).
-
-Doing this for every commit may be good from the point of view of
-keeping git-bisect useful.
-
--Graham
-
+> I think keeping packages forever is not going to work either. If your
+> customer is someone with EOL of 20 years
+> OE should not keep versions you need just for you unless you invest
+> efforts in keeping that packages uptodate
+> thats why releases are for.
+>
+> In essence the distro's
+> > use of that package are your customers and the reason you have a job. OE
+> > does not exist as a product, rather a tool that enables customers, you
+> can't
+> > create this in a vacuum without understanding who is using it.
+> >
+>
+> yes and assuming a package is being used by someone is also not the
+> right thing. IMO for products you should
+> base off on a release and maintain that for however long you wish and
+> give some space to OE to develop. Extreme on
+> both ends are unwanted thats why we are discussing what versions to
+> keep. Keeping every possible version around has
+> a cost and I believe if the recipe is not actively being tested its a
+> bit-rot. So we are trying to reduce that burden on OE devs
+> at the same time increase the quality of recipes.
+>
+> > distro maintainers are not all dumb and if they are they'll be the last
+> > single one using an outdated version of the software. When that happens a
+> > smart package maintainer will call it out leave out the old package.
+> > Further, it would be nice for a warning to take place so that it might
+> have
+> > a "depracated" tag associated with the recipe for one release cycle to
+> see
+> > if anyone cribs.
+>
+>
+> recipes move into obsolete/ or nonworking/ dirs thats enough of a warning
+> imo
+>
+> >
+> > So I'm standing with the guy w/ asbestos short on. I'd like to see that
+> OE
+> > err on the side of "do no harm" to existing users. Its hard enough to
+> rally
+> > the troops to move to updated packages much less updated meta without you
+> > leaving perfectly reasonable versions of software out of oe-core.
+> >
+> > mike
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
