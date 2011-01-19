@@ -1,34 +1,27 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PfaTn-0005Y8-QK
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PfaXB-0005ja-Hh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 17:01:52 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id A36EFA47A5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 16:01:12 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 34utPoVXkw7Y
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 16:01:11 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id C3471A479A
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 16:01:11 +0000 (GMT)
-Message-ID: <4D370AC6.5080906@xora.org.uk>
-Date: Wed, 19 Jan 2011 16:01:10 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Wed, 19 Jan 2011 17:05:21 +0100
+Received: (qmail 3188 invoked by uid 503); 19 Jan 2011 16:08:14 -0000
+Received: from b9.ovh.net (HELO mail619.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 19 Jan 2011 16:08:13 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 19 Jan 2011 17:57:58 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 19 Jan 2011 17:57:57 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D36F9BE.1010601@xora.org.uk> <4D370424.9000808@eukrea.com>
-In-Reply-To: <4D370424.9000808@eukrea.com>
-X-Enigmail-Version: 1.1.1
-Subject: Re: openembedded-core git repository
+Date: Wed, 19 Jan 2011 16:57:28 +0100
+Message-Id: <1295452649-28081-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 721983316123037001
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: [PATCH 1/2] busybox: enable CONFIG_RUN_PARTS if default.script is to be installed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 16:01:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 19 Jan 2011 16:05:21 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On 19/01/2011 15:32, Eric B=E9nard wrote:
-> Hi,
->
-> On 19/01/2011 15:48, Graeme Gregory wrote:
->> It seems to be on a technical level we are agreed that we should split
->> parts of OE out into the so called openembedded-core which will have a
->> stricter commit access and higher QA requirements on changes.
->>
-> (this question may be stupid as I haven't yet read the other thread
-> concerning Yocto/OE).
-> What is openembedded-core vs
-> http://cgit.openembedded.net/cgit.cgi/meta-openembedded/ ?
->
-It is the distilling of toolchains/classes/basic tools from OE/poky to a
-small tightly controlled repository with tighter access controls with
-the aim that making a minimal image out of this repo should always work
-(tm). Basically the minimal subset of OE that is still useful.
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/busybox/busybox_1.1x.inc |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-meta-openembedded then builds on this to give the rest of OE that we see
-now.
-
-Graeme
+diff --git a/recipes/busybox/busybox_1.1x.inc b/recipes/busybox/busybox_1.1x.inc
+index 4dbc3d9..1078aac 100644
+--- a/recipes/busybox/busybox_1.1x.inc
++++ b/recipes/busybox/busybox_1.1x.inc
+@@ -34,6 +34,9 @@ do_configure_prepend () {
+ 	if [ "${TARGET_ARCH}" = "avr32" ] ; then
+ 		sed -i s:CONFIG_FEATURE_OSF_LABEL=y:CONFIG_FEATURE_OSF_LABEL=n: ${WORKDIR}/defconfig
+ 	fi
++        if [ -e ${WORKDIR}/default.script ]; then
++		echo "CONFIG_RUN_PARTS=y"                    >> ${WORKDIR}/defconfig
++        fi
+ }
+ 
+ do_install_append() {
+-- 
+1.6.3.3
 
 
 
