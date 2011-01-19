@@ -1,32 +1,35 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PfeAl-0006qP-Oa
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 20:58:27 +0100
-Received: (qmail 23509 invoked by uid 503); 19 Jan 2011 20:01:23 -0000
-Received: from b7.ovh.net (HELO mail406.ha.ovh.net) (213.186.33.57)
-	by 26.mail-out.ovh.net with SMTP; 19 Jan 2011 20:01:23 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 19 Jan 2011 21:57:49 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 19 Jan 2011 21:57:48 +0200
-Message-ID: <4D374239.8070001@eukrea.com>
-Date: Wed, 19 Jan 2011 20:57:45 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PfeBG-0006qx-0l for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 20:58:58 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PfeAY-0006mm-QU for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 20:58:14 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Jan 2011 20:58:14 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Jan 2011 20:58:14 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1295452649-28081-1-git-send-email-eric@eukrea.com>	<AANLkTi=sg0AdyJQgmvim794R17JZ5zyM67mD-Xy43vaP@mail.gmail.com>
-	<AANLkTikHRUGO7i3pVvcJ+46gVQUOXnOo3KXgkszY-AGT@mail.gmail.com>
-In-Reply-To: <AANLkTikHRUGO7i3pVvcJ+46gVQUOXnOo3KXgkszY-AGT@mail.gmail.com>
-X-Ovh-Tracer-Id: 4772689705173167433
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH 1/2] busybox: enable CONFIG_RUN_PARTS if default.script is to be installed
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 19 Jan 2011 20:58:03 +0100
+Message-ID: <ih7fob$ltd$1@dough.gmane.org>
+References: <1295464913-2642-1-git-send-email-koen@openembedded.org>
+	<4D373CFC.8010400@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D373CFC.8010400@balister.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] insane bbclass: extend RPATH check to cover sysroots as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +43,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 19:58:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 19 Jan 2011 19:58:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 19/01/2011 19:56, Frans Meulenbroeks wrote:
-> 2011/1/19 Khem Raj<raj.khem@gmail.com>:
->> On Wed, Jan 19, 2011 at 7:57 AM, Eric Bénard<eric@eukrea.com>  wrote:
->>> Signed-off-by: Eric Bénard<eric@eukrea.com>
->>
->> Looks ok.
->>
->> Acked-by: Khem Raj<raj.khem@gmail.com>
->
-> Would this need an INC_PR bump?
-defconfig in the tree already have CONFIG_RUN_PARTS=y so existing packages 
-won't get any change with that patch.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Eric
+On 19-01-11 20:35, Philip Balister wrote:
+> On 01/19/2011 11:21 AM, Koen Kooi wrote:
+>> * Having rpath to sysroot is just as bad as one to workdir
+> 
+> When you do a build with this, how many recipes have issues?
+
+At least udev:
+
+ERROR: QA Issue with udev: package udev contains bad RPATH
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+in file
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/udev-165-r0/packages-split/udev/lib/udev/udev-acl
+ERROR: QA Issue with udev: package udev contains bad RPATH
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+in file
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/udev-165-r0/packages-split/udev/lib/udev/hid2hci
+ERROR: QA Issue with udev: package udev contains bad RPATH
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+in file
+/OE/angstrom-setup-scripts/build/tmp-angstrom_2008_1/work/armv7a-angstrom-linux-gnueabi/udev-165-r0/packages-split/udev/lib/udev/mobile-action-modeswitch
+
+ I'm doing a build from scratch now to see what will fail first.
+Richard and Scott have fixed a number of those in yocto, so I'll be
+working with them and Khem to 'port' those over to OE.
+
+This patch is merely here to have people realize how buggered OE
+currently is with stray RPATHs
+
+regards,
+
+Koen
+
+
+> 
+> Philip
+> 
+> 
+>>
+>> Based on insane.bbclass from yocto
+>>
+>> Signed-off-by: Koen Kooi<koen@openembedded.org>
+>> ---
+>>   classes/insane.bbclass |   11 ++++++-----
+>>   1 files changed, 6 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+>> index 677db27..50752b5 100644
+>> --- a/classes/insane.bbclass
+>> +++ b/classes/insane.bbclass
+>> @@ -160,20 +160,21 @@ def package_qa_check_rpath(file,name,d, elf):
+>>       import bb, os
+>>       sane = True
+>>       scanelf =
+>> os.path.join(bb.data.getVar('STAGING_BINDIR_NATIVE',d,True),'scanelf')
+>> -    bad_dir = bb.data.getVar('TMPDIR', d, True) + "/work"
+>> +    bad_dirs = [bb.data.getVar('TMPDIR', d, True) + "/work",
+>> bb.data.getVar('STAGING_DIR_TARGET', d, True)]
+>>       bad_dir_test = bb.data.getVar('TMPDIR', d, True)
+>>       if not os.path.exists(scanelf):
+>>           bb.fatal("Can not check RPATH, scanelf (part of
+>> pax-utils-native) not found")
+>>
+>> -    if not bad_dir in bb.data.getVar('WORKDIR', d, True):
+>> +    if not bad_dirs[0] in bb.data.getVar('WORKDIR', d, True):
+>>           bb.fatal("This class assumed that WORKDIR is
+>> ${TMPDIR}/work... Not doing any check")
+>>
+>>       output = os.popen("%s -B -F%%r#F '%s'" % (scanelf,file))
+>>       txt    = output.readline().split()
+>>       for line in txt:
+>> -        if bad_dir in line:
+>> -            error_msg = "package %s contains bad RPATH %s in file %s"
+>> % (name, line, file)
+>> -            sane = package_qa_handle_error(1, error_msg, name, file, d)
+>> +        for dir in bad_dirs:
+>> +            if dir in line:
+>> +                error_msg = "package %s contains bad RPATH %s in file
+>> %s" % (name, line, file)
+>> +                sane = sane + package_qa_handle_error(1, error_msg,
+>> name, file, d)
+>>
+>>       return sane
+>>
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNN0JLMkyGM64RGpERAlmoAKC4ydMPfud8DpW5RZOEtiB+z+o0DACeO2jb
+dmskeJB73C+waA899CHri2w=
+=q33T
+-----END PGP SIGNATURE-----
+
 
 
