@@ -1,43 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PfTDB-000447-BY
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PfTgO-0004PM-UN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 09:16:13 +0100
-Received: by bwz10 with SMTP id 10so533956bwz.6
+	Wed, 19 Jan 2011 09:46:25 +0100
+Received: by iwn8 with SMTP id 8so594056iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 00:15:36 -0800 (PST)
+	Wed, 19 Jan 2011 00:45:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=cf6Nwnvlt1DwaeK8ab+t0dBaMe0a6I3osOQk0N00KVQ=;
-	b=dBluC7Q+2FsSndcud7O5ingjgw1fDXaY0XXUWK9cxFZnWBi8FmNkQ6SyRhugkUn+5v
-	Ow9Xo38jYf8y23j7RJsWvbWxVVat4gYaFKyBp1KWuwyPPV7Hc1nhLEvZV9994W2LOL2n
-	wXcRdJ1IyyD/4piUaoyTSYacv7iZC3XhTNajQ=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=0pscqWXrWi73wXE6qzdFXUpyaAQzh3uYjjBfok9Hwns=;
+	b=BwFOA76+eo8BCOnWe5tHPhveLmCr/aLKgIfOiUPOQyMaMjceAB11Kvhzs9MURkCyJg
+	9MtqtIIRlwXpjEnD1mApeQS6NERpZYW5K/l1xHpl4fXpbZvXCZym36kEpVcuEONNsQsl
+	qUgkkNP3b/FoK7YBM5owOeqn1sfOqc0Vk7Y60=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=NqmSlMU8TF+HSA1x6toJ2TD9d443tXpbd0Bn3Jd5PVK5MPwSX2MCT8OYZeuQiU09dR
-	ngowRUT1lLePX1Wb+6OS/OBznBB9k32AF8BiFQ7dbwMFh+/mdHqq8NUQDwlxGmReJzb7
-	l6hD7DLsJYlPBcx8kqsn8iQCJe8iq2V356c5s=
-Received: by 10.204.73.78 with SMTP id p14mr319056bkj.47.1295424935829;
-	Wed, 19 Jan 2011 00:15:35 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id x38sm3125980bkj.1.2011.01.19.00.15.34
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 19 Jan 2011 00:15:35 -0800 (PST)
-Date: Wed, 19 Jan 2011 09:16:22 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110119081622.GV21179@jama>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=gvzVanGW4MLk/sEAogzMuiUFYTB4sh/QSICE7yLhcS1t2MI6Ij0nDEbXPIm2QHtxtc
+	Zk8uBPs9UyBfWZif8d6AXAYHgGhFNnPAgmmoFXXydbwyxPozO5ItSB4+zwclbXod/p24
+	zoVNRwRw0BgdS7RgLED6iYE5MDWYSo4+Yg/Fg=
+MIME-Version: 1.0
+Received: by 10.231.35.5 with SMTP id n5mr417631ibd.159.1295426744775; Wed, 19
+	Jan 2011 00:45:44 -0800 (PST)
+Received: by 10.231.213.234 with HTTP; Wed, 19 Jan 2011 00:45:44 -0800 (PST)
+In-Reply-To: <ih52qr$l1v$1@dough.gmane.org>
 References: <1295027350.14388.6527.camel@rex>
 	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
 	<4D353F81.50301@xora.org.uk>
 	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
 	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
-	<AANLkTinDtgCiqeRPk4PgnUSZb_V5ryTH-LgzNk2bSoGu@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTinDtgCiqeRPk4PgnUSZb_V5ryTH-LgzNk2bSoGu@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<4D35FC8B.1090404@mentor.com> <ih52qr$l1v$1@dough.gmane.org>
+Date: Wed, 19 Jan 2011 09:45:44 +0100
+Message-ID: <AANLkTi=A2kgqgkhfw4p_Og8k9y1MBMrZLDvgwuq5Mxfj@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,55 +48,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 08:16:13 -0000
-X-Groupsio-MsgNum: 28170
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SZSwH5G1FJ2Fz+jP"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 Jan 2011 08:46:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---SZSwH5G1FJ2Fz+jP
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+2011/1/18 Koen Kooi <k.kooi@student.utwente.nl>:
+ if we make the delta between the 3 be just
+>> the SRC_URI + checksums?
+>
+> Something like:
+>
+> * keep gplv2 around if upstream switched to gplv3 at some point
 
-On Wed, Jan 19, 2011 at 08:47:42AM +0100, Frans Meulenbroeks wrote:
-> 2011/1/18 Koen Kooi <k.kooi@student.utwente.nl>:
-> > But in the end if boils down to "Does OE wants to make life hard for
-> > DISTROs or easy". Frans is firmly in the "make it hard" camp, I hope
-> > others have a saner point of view.
->=20
-> I don't want to make it hard for the distro's but I feel the distro's
-> should not make it hard for the package maintainers (which happens if
-> every distro pins its favourite version of recipe foo).
-> You're just pushing the burden of the distro choices onto the package
-> maintainer.
+agree; as said before suggest to reflect the switch in the name of the recipe.
 
-I don't see any problem with active, well-maintained distro (like
-=C5ngstr=F6m is) pinning different versions. Everytime I see package
-maintainer asking for pinned version change (like Eric does for
-busybox), he receives Ack from distro maintainer with reasonable RTT,
-or receives the reason why that distro needs this specific version for=20
-longer and they can discuss if it will be moved to distro specific layer=20
-or stays in core when it could be usefull for other distros as well.
+> * allow old stable, stable and dev (e.g. glib 2.24, 2.26 and 2.27+git)
 
-Problem with pinned versions in OE I had only with stalled distro.confs
-which weren't changed in years, nobody knows if there is someone still
-building it etc.. But as Graeme said, those unmaintained distros won't
-go to openembedded-core without someone actually moving them :).
+I'd say retire old stable after a while (e.g. after stable is there
+for half a year, unless of course there are compelling reasons to keep
+it).
+Wrt dev: if we want to go to a maintainers model similar to u-boot and
+linux, I would expect this to live in a separate branch or layer.
+Once proven stable the maintainers pulls it into the core archive.
 
-Regards,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> * allow active contributers some leeway to test multiple subreleases
+> (e.g. busybox 1.18.[0-99]
 
---SZSwH5G1FJ2Fz+jP
-Content-Type: application/pgp-signature
+Again here, I feel it is much better to put it into a different branch
+or layer, and once stable it is pulled into the mainline.
+Again similar to what Linus and Wolfgang do.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+> * The maintainer can have as many versions as he wants to.
 
-iEYEARECAAYFAk02ndYACgkQN1Ujt2V2gBxAYACdHyfMX1XHwXY+xnbdBufsaub2
-AwYAoJmkt1OFZxFKHOvoWSg35jvSxsxf
-=9pUq
------END PGP SIGNATURE-----
+my preference: not in the main layer.
 
---SZSwH5G1FJ2Fz+jP--
+> * toolchain is exempt from all that since having 20 binutils versions is
+> sometimes needed when building for 20 different archs[1].
+
+Fully agree.
+>
+> But I seriously think we are overengineering this. We should have people
+> actually working on oe-core and meta-oe reach a consensus when
+> encountering problems.
+
+I beg to disagree on this.
+We have a unique opportunity at hand to improve, so it seems wise to
+raise the bar quality wise.
+
+E.g. wrt what Richard wrote in the start post
+
+[quote]
+* Creation of a subset of metadata that has a consistent high quality
+ standard:
+   - removal of legacy components (pkgconfig hacks, libtool hacks,
+     legacy staging, unneeded compiler arguments)
+   - consistent metadata layout, spacing, use of variables
+   - migration away from outdated practises (e.g. use BBCLASSEXTEND)
+[/quote]
+
+I feel when migrating recipes we should also assure that they adhere
+to a certain quality standard. That would need us to define a minimal
+standard though.
+Currently I feel we are just moving recipes, only fixing what is
+really needed to get things running (like removing legacy staging)
+whereas we could do much better.
+There are currently some things in OE that could use some improvement
+and we should take the opportunity to improve.l
+
+And yes, I have no problem in spending time to improve things, but if
+there is no consensus on where we should go this is not going to be
+effective (and actually makes it harder to improve quality wise).
+To take the bikeshed analogy up again. It does not really help if
+everyone start to paint in his own favourite color (unless maybe if
+you are still stuck in the flower power era).
+
+Frans
+
+
