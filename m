@@ -1,34 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PfSQK-0002q6-Ti for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 08:25:45 +0100
+	id 1PfSV9-00031B-Hq for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 08:30:44 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PfSPg-0003J5-NR for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 08:25:04 +0100
+	id 1PfSUW-00056h-8c for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Jan 2011 08:30:04 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 08:25:04 +0100
+	Wed, 19 Jan 2011 08:30:04 +0100
 Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
 	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 08:25:04 +0100
+	Wed, 19 Jan 2011 08:30:04 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 19 Jan 2011 08:24:20 +0100
-Message-ID: <ih63j4$6lr$3@dough.gmane.org>
+Date: Wed, 19 Jan 2011 08:24:33 +0100
+Message-ID: <ih63jh$6lr$4@dough.gmane.org>
 References: <1295394843.32079.62.camel@mattotaupa>
+	<1295395744.32079.63.camel@mattotaupa>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1295394843.32079.62.camel@mattotaupa>
+In-Reply-To: <1295395744.32079.63.camel@mattotaupa>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 1/2] gst-openmax: remove obsolete patch
+Subject: Re: [PATCH 2/2] gst-openmax: do not use `-Werror` in `CFLAGS` to fix build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,76 +43,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 07:25:45 -0000
+X-List-Received-Date: Wed, 19 Jan 2011 07:30:44 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 19-01-11 00:54, Paul Menzel wrote:
-> Date: Tue, 18 Jan 2011 16:31:30 +0100
+On 19-01-11 01:09, Paul Menzel wrote:
+> Date: Tue, 18 Jan 2011 16:34:51 +0100
 > 
-> Task `configure` fails with the following error with `angstrom-2008.1` and `MACHINE = "beagleboard"`.
+> Task `compile` fails with the following error using `angstrom-2008.1` for `MACHINE = "beagleboard"`.
 > 
-> 	| configure: using GStreamer tools in /usr/bin
-> 	| configure: using GStreamer plug-ins in /usr/lib/gstreamer-0.10
-> 	| checking for GST_BASE... yes
-> 	| checking for GST_CHECK... no
-> 	| no
-> 	| configure: No package 'gstreamer-check' found
-> 	| configure: error: no gstreamer-check >= 0.10.0 (GStreamer Check unittest Library) found
-> 	| ERROR: Function do_configure failed
-> 	NOTE: package gst-openmax-0.10.0.4-r0: task do_configure: Failed
-> 	ERROR: TaskFailed event exception, aborting
-> 	ERROR: Build of /oe/openembedded/recipes/openmax/gst-openmax_0.10.0.4.bb do_configure failed
-> 	ERROR: Task 11 (/oe/openembedded/recipes/openmax/gst-openmax_0.10.0.4.bb, do_configure) failed with 256
+> 	arm-angstrom-linux-gnueabi-libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb -DHAVE_CONFIG_H -I. -I.. -isystem/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -I./headers -I../gst-libs -I../gst-libs -pthread -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gstreamer-0.10 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2 -Wall -Werror -g -DGST_DISABLE_DEPRECATED -pthread -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gstreamer-0.10 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/includ
+e -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2 -I../util -isystem/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb2 -MT libgstomx_la-gstomx_base_videoenc.lo -MD -MP -MF .deps/libgstomx_la-gstomx_base_videoenc.Tpo -c gstomx_base_videoenc.c  -fPIC -DPIC -o .libs/libgstomx_la-gstomx_base_videoenc.o
+> 	cc1: warnings being treated as errors
+> 	gstomx_base_videoenc.c: In function 'sink_setcaps':
+> 	gstomx_base_videoenc.c:239: error: implicit declaration of function 'free'
+> 	gstomx_base_videoenc.c:239: error: incompatible implicit declaration of built-in function 'free'
+> 	gstomx_base_videoenc.c: In function 'omx_setup':
+> 	gstomx_base_videoenc.c:326: error: incompatible implicit declaration of built-in function 'free'
+> 	cc1: warnings being treated as errors
+> 	gstomx_base_filter.c: In function 'setup_ports':
+> 	gstomx_base_filter.c:65: error: implicit declaration of function 'free'
+> 	gstomx_base_filter.c:65: error: incompatible implicit declaration of built-in function 'free'
+> 	gstomx_base_filter.c: In function 'output_loop':
+> 	gstomx_base_filter.c:387: error: format '%d' expects type 'int', but argument 8 has type 'OMX_U32'
+> 	gstomx_base_filter.c: In function 'pad_chain':
+> 	gstomx_base_filter.c:476: error: format '%lu' expects type 'long unsigned int', but argument 8 has type 'guint'
+> 	make[2]: *** [libgstomx_la-gstomx_base_videoenc.lo] Error 1
+> 	make[2]: *** Waiting for unfinished jobs....
+> 	cc1: warnings being treated as errors
+> 	gstomx_base_videodec.c: In function 'settings_changed_cb':
+> 	gstomx_base_videodec.c:111: error: implicit declaration of function 'calloc'
+> 	gstomx_base_videodec.c:111: error: incompatible implicit declaration of built-in function 'calloc'
+> 	gstomx_base_videodec.c:135: error: implicit declaration of function 'free'
+> 	gstomx_base_videodec.c:135: error: incompatible implicit declaration of built-in function 'free'
+> 	gstomx_base_videodec.c: In function 'sink_setcaps':
+> 	gstomx_base_videodec.c:179: error: incompatible implicit declaration of built-in function 'calloc'
+> 	gstomx_base_videodec.c:208: error: incompatible implicit declaration of built-in function 'free'
+> 	gstomx_base_videodec.c: In function 'omx_setup':
+> 	gstomx_base_videodec.c:229: error: incompatible implicit declaration of built-in function 'calloc'
+> 	gstomx_base_videodec.c:291: error: incompatible implicit declaration of built-in function 'free'
+> 	make[2]: *** [libgstomx_la-gstomx_base_filter.lo] Error 1
+> 	make[2]: *** [libgstomx_la-gstomx_base_videodec.lo] Error 1
+> 	arm-angstrom-linux-gnueabi-libtool: compile:  arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb -DHAVE_CONFIG_H -I. -I.. -isystem/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -I./headers -I../gst-libs -I../gst-libs -pthread -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gstreamer-0.10 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2 -Wall -Werror -g -DGST_DISABLE_DEPRECATED -pthread -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gstreamer-0.10 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0 -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/includ
+e -I/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libxml2 -I../util -isystem/oe/build/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb2 -MT libgstomx_la-gstomx.lo -MD -MP -MF .deps/libgstomx_la-gstomx.Tpo -c gstomx.c -o libgstomx_la-gstomx.o >/dev/null 2>&1
+> 	mv -f .deps/libgstomx_la-gstomx.Tpo .deps/libgstomx_la-gstomx.Plo
+> 	make[2]: Leaving directory `/oe/build/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gst-openmax-0.10.0.4-r0/gst-openmax-0.10.0.4/omx'
+> 	make[1]: *** [all-recursive] Error 1
+> 	make[1]: Leaving directory `/oe/build/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/gst-openmax-0.10.0.4-r0/gst-openmax-0.10.0.4'
+> 	make: *** [all] Error 2
+> 	FATAL: oe_runmake failed
+> 	ERROR: Function do_compile failed
 > 
-> With current GStreamer `gstreamer-0.10.31-r2` this patch is not necessary anymore and removing it fixes the build. When the recipe was committed with the patch in 1eef6ac1 [1] GStreamer 0.10.17 was used [2].
+> `configure.ac` contains
 > 
-> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=1eef6ac18de15ea845b146b1624fcc1f1c4faea2
-> [2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3422a436880509c7f82a3ae5d5693c87ece7a42d
+> 	dnl These flags can be overridden at make time:
+> 	dnl make ERROR_CFLAGS=
+> 	AC_DEFUN([AG_GST_SET_ERROR_CFLAGS],
+> 	[
+> 		AC_REQUIRE([AC_PROG_CC])
+> 		AC_REQUIRE([AS_COMPILER_FLAG])
+> 
+> 		[…]
+> 
+> 		dnl if asked for, add -Werror if supported
+> 		if test "x$1" != "xno"
+> 		then
+> 		  AS_COMPILER_FLAG(-Werror, ERROR_CFLAGS="$ERROR_CFLAGS -Werror")
+> 
+> and so set `ERROR_FLAGS` only to `-Wall`. This fixes the build.
 > 
 > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
+
 Acked-by: Koen Kooi <koen@openembedded.org>
 
-
 > ---
->  recipes/openmax/gst-openmax/check.diff  |   11 -----------
->  recipes/openmax/gst-openmax_0.10.0.4.bb |    1 -
->  2 files changed, 0 insertions(+), 12 deletions(-)
->  delete mode 100644 recipes/openmax/gst-openmax/check.diff
+>  recipes/openmax/gst-openmax_0.10.0.4.bb |    2 ++
+>  1 files changed, 2 insertions(+), 0 deletions(-)
 > 
-> diff --git a/recipes/openmax/gst-openmax/check.diff b/recipes/openmax/gst-openmax/check.diff
-> deleted file mode 100644
-> index 9e74abf..0000000
-> --- a/recipes/openmax/gst-openmax/check.diff
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> ---- /tmp/gst-check.m4	2008-08-05 17:46:09.000000000 +0200
-> -+++ gst-openmax-0.10.0.4/common/m4/gst-check.m4	2008-08-05 17:46:29.000000000 +0200
-> -@@ -114,7 +114,7 @@
-> - 
-> - AC_DEFUN([AG_GST_CHECK_GST_CHECK],
-> - [
-> --  AG_GST_CHECK_MODULES(GST_CHECK, gstreamer-check-[$1], [$2],
-> -+  AG_GST_CHECK_MODULES(GST_CHECK, gstreamer-check, [$2],
-> -     [GStreamer Check unittest Library], [$3])
-> - ])
-> - 
 > diff --git a/recipes/openmax/gst-openmax_0.10.0.4.bb b/recipes/openmax/gst-openmax_0.10.0.4.bb
-> index d3e1002..b05b65f 100644
+> index b05b65f..66a8e47 100644
 > --- a/recipes/openmax/gst-openmax_0.10.0.4.bb
 > +++ b/recipes/openmax/gst-openmax_0.10.0.4.bb
-> @@ -3,7 +3,6 @@ LICENSE = "LGPLv2"
->  DEPENDS = "gstreamer libomxil-bellagio"
->  
->  SRC_URI = "http://gstreamer.freedesktop.org/src/gst-openmax/pre/gst-openmax-${PV}.tar.bz2 \
-> -           file://check.diff \
->            "
+> @@ -7,6 +7,8 @@ SRC_URI = "http://gstreamer.freedesktop.org/src/gst-openmax/pre/gst-openmax-${PV
 >  
 >  inherit autotools
+>  
+> +EXTRA_OEMAKE += "'ERROR_CFLAGS=-Wall'"
+> +
+>  FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
+>  FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
+>  FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.*a"
 > 
 > 
 > 
@@ -123,9 +148,9 @@ Acked-by: Koen Kooi <koen@openembedded.org>
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNNpGkMkyGM64RGpERAgphAKCrYfUHcqTf6Xa7KPOLEgoV7rfzjwCfbEjj
-A/fPxQcTyRgKMYa/O4kHVrw=
-=vhT3
+iD8DBQFNNpGxMkyGM64RGpERAkexAJ0dnEExJEP//i1O7p7S+Bgtn8zAwgCglcv3
+CDgB+u7RBQy53EsKWsMs+ZM=
+=4uKq
 -----END PGP SIGNATURE-----
 
 
