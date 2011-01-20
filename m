@@ -1,23 +1,33 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holger+oe@freyther.de>) id 1PfwSr-0001Xz-Fb
+	(envelope-from <stefan@datenfreihafen.org>) id 1PfwrB-0001yd-R7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 16:30:21 +0100
-Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
-	[91.64.83.241])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id AFC451B10C0C
+	Thu, 20 Jan 2011 16:55:29 +0100
+Received: from [2001:638:602:1183:21f:16ff:fe0d:7d41] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.69 #1)
+	id 1PfwqX-0001HR-3r by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jan 2011 15:38:16 +0000 (UTC)
-Message-ID: <4D3854E4.7020607@freyther.de>
-Date: Thu, 20 Jan 2011 16:29:40 +0100
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Thu, 20 Jan 2011 16:54:51 +0100
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1PfwqP-0006dy-2L
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Jan 2011 16:54:41 +0100
+Date: Thu, 20 Jan 2011 16:54:38 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110120155438.GC29851@excalibur.local>
 References: <ih9k89$u03$1@dough.gmane.org>
+MIME-Version: 1.0
 In-Reply-To: <ih9k89$u03$1@dough.gmane.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,NO_RELAYS
+	autolearn=ham version=3.2.5
 Subject: Re: Don't push recipes with AUTOREV as default into OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,18 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2011 15:30:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Jan 2011 15:55:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 01/20/2011 04:27 PM, Koen Kooi wrote:
+Hello.
+
+On Thu, 2011-01-20 at 16:27, Koen Kooi wrote:
+> 
 > yes buglabs people, I'm looking at you
 
-Hi Koen,
-
-I think this can be phrased more nicely. Would you mind trying?
+Yup, sorry for it. Slipped through my review.
 
 regards
-	holger
+Stefan Schmidt
 
 
