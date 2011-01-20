@@ -1,27 +1,50 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PfrY8-0006LR-T9 for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 11:15:28 +0100
-Received: from f053039178.adsl.alicedsl.de ([78.53.39.178]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PfrXW-0004ts-77 for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 10:14:50 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pfre5-0006TZ-0q
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Jan 2011 11:21:37 +0100
+Received: by iwn8 with SMTP id 8so468962iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Jan 2011 02:20:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=TS/9ZQSa+/+MO/xC2xyx38MyV/O7JpptWxYuzX3/2sE=;
+	b=BStecnK+WWOoGTZ/r3cThgw2DP06e9YVAEKdHspuUVTyzs/wDhwtSp0dHAUzH1zkC2
+	P7S9voJA02nVlOqt+4bGgtgE6jOpGUIlelPHH75cUzQjFs7W8pqL7Cf4MGBmQsb2SlZJ
+	1bcLsvDfU2FMA41/BPvsbaRavzbNKp5O/QPiI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Uf1g0U0gr/YdKq7Y58RzVrfVm5QZ+Ufg+6ARuBLB8tF/Mqk6qjFazc0mPQOrza9oNF
+	IadCXypBwsP7wS+zPB2kdtFJPlaqwFZ2YcoFDMrPyYzi8y/y3j4QzzOn4AeAwppqk2eE
+	9q96mmIuzeDANdkUkmHpimWbGAKP6JlIYIwkA=
+MIME-Version: 1.0
+Received: by 10.231.39.74 with SMTP id f10mr2269561ibe.84.1295518856935; Thu,
+	20 Jan 2011 02:20:56 -0800 (PST)
+Received: by 10.231.213.234 with HTTP; Thu, 20 Jan 2011 02:20:56 -0800 (PST)
+In-Reply-To: <AANLkTinRKmmzUT-6T6_cGR+HHrB6hYFYhdS4GuZHRS+Z@mail.gmail.com>
+References: <1295027350.14388.6527.camel@rex>
+	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
+	<4D353F81.50301@xora.org.uk>
+	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
+	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
+	<4D35FC8B.1090404@mentor.com>
+	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
+	<AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
+	<4D36A64E.9060804@xora.org.uk>
+	<AANLkTi=8uKvujKLqG2cw3h3gLmmcU=KNfdmSwB5imfsH@mail.gmail.com>
+	<1295436662.2540.14.camel@scimitar>
+	<AANLkTik9-k_euvDGZd+CFfQ9LyxD_7mubpVxPqyEsEVU@mail.gmail.com>
+	<4D36FE98.3070606@mwester.net>
+	<AANLkTimMHd-eH9tEL1tUtoUKa+zwX4+9kUdT3k_NP9nG@mail.gmail.com>
+	<AANLkTimyPb-4pLrbF4ZeFwnh+9WyZtcPY1uXeYBnwUqQ@mail.gmail.com>
+	<AANLkTinRKmmzUT-6T6_cGR+HHrB6hYFYhdS4GuZHRS+Z@mail.gmail.com>
+Date: Thu, 20 Jan 2011 11:20:56 +0100
+Message-ID: <AANLkTin8mbWMymQyNeuf8dtEy6McUJQYTKfhuUgR3Mf8@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1295392845.32079.37.camel@mattotaupa>
-References: <1295220721.13967.13.camel@mattotaupa>
-	<1295220990.13967.18.camel@mattotaupa>
-	<1295221434.13967.25.camel@mattotaupa>  <ih0tnm$ra$1@dough.gmane.org>
-	<1295264704.4844.54.camel@mattotaupa>
-	<1295392845.32079.37.camel@mattotaupa>
-Date: Thu, 20 Jan 2011 11:14:49 +0100
-Message-ID: <1295518489.3692.0.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH] libomxil-bellagio_{0.9.2.1, git}: add patch: remove `-Werror` from `CFLAGS` to fix build with GCC 4.5
+Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,167 +58,169 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2011 10:15:29 -0000
-X-Groupsio-MsgNum: 28223
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-rUWmGZi4WSthEFjjIpRs"
+X-List-Received-Date: Thu, 20 Jan 2011 10:21:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-rUWmGZi4WSthEFjjIpRs
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Responding to both Khem's and Mike's replies.
 
-Am Mittwoch, den 19.01.2011, 00:20 +0100 schrieb Paul Menzel:
-> Date: Mon Jan 17 23:50:33 2011 +0100
->=20
-> Am Montag, den 17.01.2011, 12:45 +0100 schrieb Paul Menzel:
-> > Build tested with `angstrom-2008.1` for `MACHINE =3D "beagleboard"`. Wi=
-th `angstrom-2010.x` it fails with the following error.
-> >
-> >         arm-angstrom-linux-gnueabi-libtool: compile:  arm-angstrom-linu=
-x-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=
-=3Dsoftfp -mthumb-interwork -mno-thumb -DHAVE_CONFIG_H -I. -I../.. -isystem=
-/oe/build-angstrom-next/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi=
-/usr/include -I../../include -I../../src -isystem/oe/build-angstrom-next/an=
-gstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-o=
-ptimizations -fomit-frame-pointer -frename-registers -O2 -ggdb2 -Wall -Werr=
-or -DCONFIG_DEBUG_LEVEL=3D0 -MT libomxbase_la-omx_base_component.lo -MD -MP=
- -MF .deps/libomxbase_la-omx_base_component.Tpo -c omx_base_component.c  -f=
-PIC -DPIC -o .libs/libomxbase_la-omx_base_component.o
-> >         cc1: warnings being treated as errors
-> >         omx_base_component.c: In function 'omx_base_component_GetParame=
-ter':
-> >         omx_base_component.c:991:3: error: case value '2130706435' not =
-in enumerated type 'OMX_INDEXTYPE'
-> >         omx_base_component.c:918:3: error: case value '2130706436' not =
-in enumerated type 'OMX_INDEXTYPE'
-> >         make[3]: *** [libomxbase_la-omx_base_component.lo] Error 1
-> >         make[3]: Leaving directory `/oe/build-angstrom-next/angstrom-de=
-v/work/armv7a-angstrom-linux-gnueabi/libomxil-bellagio-0.9.2.1+gitr0+772f0e=
-ca88b242ffb5469e8e381c63ce1f7cd3e1-r7.0/git/src/base'
->=20
-> Upstream advised to remove `-Werror` and is looking into it [1]. OpenBric=
-ks is applying the same patch [2].
->=20
-> A similar patch would make 0.9.2 compile, but this one here does not appl=
-y there (`CFLAGS=3D"${CFLAGS} -Werror"` instead of `CFLAGS=3D"${CFLAGS} -Wa=
-ll -Werror"`).
->=20
-> [1] http://sourceforge.net/mailarchive/message.php?msg_id=3D26911808
-> [2] http://hg.openbricks.org/openbricks/rev/4f4ed3a596f2
->=20
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+2011/1/19 Khem Raj <raj.khem@gmail.com>:
+> On Wed, Jan 19, 2011 at 1:55 PM, C Michael Sundius <msundius@sundius.com> wrote:
+>> It seems to me that this is a bit of a battle between the package
+>> maintainers and the distro maintainers.. Looking at this from my managements
+>> side of things, we use OE as a tool and its really just a means to the end.
+>> our customers demand that we do not change things (versions of software),
+>> they demand stability and they view a change in busybox or anything else a
+>> threat to stability. our management has also made an edict that we can not
+>> use gplv3. For completely non technical reasons we simply cannot move to new
+>> package versions without a substantial business justification. I suspect
+>> that that there are many (more than you realize) folk out there who are
+>> using OE for their own distro. If you simply whack package versions because
+>> something newer came out you will have these people maintaining separate
+>> recipes and we'll be swamped with the load and this tool will loose one of
+>> its best attributes.
 
-Please commit as I do not have commit access.
+I understand your problem. Actually our situation is somewhat similar to yours.
+However we've solved this in a much more rigid way.
+Basically we pin a version of OE for a (range of) products.
+We have an overlay that contains backports of newer recipes and
+bugfixes that we need, but we will not upgrade automatically to a new
+busybox release and not even take a new patch if it is not needed.
+And if it is needed it will only be done after reviewing and testing
+the changes.
+The philosophy is "if it ain't broken, don't fix it", so if a patch
+for busybox comes along that solves a problem we do not have (e.g.
+because we do not use the applet) it will not get in.
+
+As such some of our products still use busybox 1.13.2, and actually I
+had to resolve a small isssue with it the other day.
+upstream will probably laugh their pants off when I submit a bug
+report for such an old version, and I do not expect OE to support this
+version.
+If we have a problem using this version we either find a patch that we
+can backport, move to a new version or patch locally. What happens
+depends on the issue at hand.
+(and if we solve ourself and the problem is still in the latest
+version we submit the patch upstream).
+
+>>
+>> The comment that disturbed me was that distros should just move ahead
+>> "because its making things hard for the package maintainer". That doesn't
+>> wash with me because if people are using your package then you should
+>> support it or let someone else be the maintainer.
+
+I only partially agree with that.
+You cannot expect from a package maintainer to maintain a large number
+of versions. There are definitely reasons to support more than one
+version (especially for a lib)., but for me as a package maintainer it
+more or less stops where upstream stops. E.g. if a package is upstream
+at version X.5 and does not support X.3 any more and OE has both X.3
+and X.5, then as a package maintainer I'm more than happy to peek into
+issues with X.5 but I am not too interested to backport patches to
+X.0, X.1, X.2, X.3 and X.4 or resolve problems in these releases.
+Sorry to sound so rigid, but (generally speaking) if you have a
+problem in a version that upstream does not support any more, and the
+problem is solved in a version supported by upstream and this upstream
+version is in OE, I am not too sure if you can expect from a package
+maintainer to resolve it for you.
+After all we're all just volunteers and for most of the people time is limited.
+
+And if you feel you can do better wrt maintainership, feel free to let
+me know which of the recipes I maintain, you want to take over.
+Or alternately, pay me to support the version that you want to keep around.
+>
+> I think keeping packages forever is not going to work either. If your
+> customer is someone with EOL of 20 years
+> OE should not keep versions you need just for you unless you invest
+> efforts in keeping that packages uptodate
+> thats why releases are for.
+
+releases and SCM.
+fully agree.
+>
+> In essence the distro's
+>> use of that package are your customers and the reason you have a job. OE
+
+ROTFLOL. job. I think for most of the contributors (including me) no
+one pays for the effort spent
+Most of the work in OE is done by volunteers!
+Basically most of the things I maintain is because I needed them for
+some reason, wrote the recipe and submitted them (or updated and
+submitted an orphaned recipe that I needed).
+This is done as a service to the public and to give back to the
+community, but I do not see it as a job, but more as a gift.
+
+>> does not exist as a product, rather a tool that enables customers, you can't
+>> create this in a vacuum without understanding who is using it.
+>>
+>
+> yes and assuming a package is being used by someone is also not the
+> right thing. IMO for products you should
+> base off on a release and maintain that for however long you wish and
+> give some space to OE to develop. Extreme on
+> both ends are unwanted thats why we are discussing what versions to
+> keep. Keeping every possible version around has
+> a cost and I believe if the recipe is not actively being tested its a
+> bit-rot. So we are trying to reduce that burden on OE devs
+> at the same time increase the quality of recipes.
+
+Agree.
+
+And as said before, as a package maintainer I try to follow upstream
+and support what upstream supports.
+I do not want to take over the role of upstream wrt the package maintenance.
+As a package maintainer I feel it as my task to make sure the version
+from upstream builds in the OE environment, and ideally patches are
+only there to deal with cross build issues, although every once in a
+while a local bugfix is added.
+That is how I see the role of a package maintainer, but others might
+see things differently.
+(btw for toolchain related things I can imagine we want to retain
+older versions for a longer time, especially when there are functional
+changes (I'm especially thinking about autohell))
+And apologies if I sketch the things black and white, but at least
+that makes things clear.
+But also when it becomes to package maintainers tasks there is a gray area.
+>
+>> distro maintainers are not all dumb and if they are they'll be the last
+
+This is not always in line with my experience. E.g. for mythtv one
+distro maintainer for a while refused to go to a newer version because
+the communication between client and backend changed and his mythbuntu
+box or debian system or so was not yet using that new version.
+Mythtv is not our most complicated recipe, but it is also not a
+trivial one. The burden of maintaining one version takes more than
+enough time, and I really didn't have the time, resources and
+motivation to backport all metadata changes to the previous version.
+
+>> single one using an outdated version of the software. When that happens a
+>> smart package maintainer will call it out leave out the old package.
+>> Further, it would be nice for a warning to take place so that it might have
+>> a "depracated" tag associated with the recipe for one release cycle to see
+>> if anyone cribs.
+>
+>
+> recipes move into obsolete/ or nonworking/ dirs thats enough of a warning imo
+
+If we want to fully support that then we should never use git mv to
+create a new version, but (assuming the old version will be gone) move
+the old version to obsolete or so and create a new recipe (of course
+probably by starting with a copy of the old one). This is not the
+current practice.
+>
+>>
+>> So I'm standing with the guy w/ asbestos short on. I'd like to see that OE
+>> err on the side of "do no harm" to existing users. Its hard enough to rally
+
+I understand your problem, but that will eventually halt the system.
+Sometimes disruptive changes are unavoidable (unless we want to keep
+10 years of history or so).
+The solution here is pinning on a release or a git rev. Then no one
+will harm you.
+You can't keep the cake and eat it too!
+
+>> the troops to move to updated packages much less updated meta without you
+>> leaving perfectly reasonable versions of software out of oe-core.
+
+Best regards, Frans
 
 
-Thanks,
-
-Paul
-
-> ---
->  ...01-configure.ac-remove-Werror-from-CFLAGS.patch |   32 ++++++++++++++=
-++++++
->  recipes/openmax/libomxil-bellagio_0.9.2.1.bb       |    4 ++
->  recipes/openmax/libomxil-bellagio_git.bb           |    3 ++
->  3 files changed, 39 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/openmax/libomxil-bellagio/0001-configure.ac-r=
-emove-Werror-from-CFLAGS.patch
->=20
-> diff --git a/recipes/openmax/libomxil-bellagio/0001-configure.ac-remove-W=
-error-from-CFLAGS.patch b/recipes/openmax/libomxil-bellagio/0001-configure.=
-ac-remove-Werror-from-CFLAGS.patch
-> new file mode 100644
-> index 0000000..1df2b26
-> --- /dev/null
-> +++ b/recipes/openmax/libomxil-bellagio/0001-configure.ac-remove-Werror-f=
-rom-CFLAGS.patch
-> @@ -0,0 +1,32 @@
-> +From 85a2b9666ba2b65920f4ad0e2216405dc14340d4 Mon Sep 17 00:00:00 2001
-> +From: Paul Menzel <paulepanter@users.sourceforge.net>
-> +Date: Mon, 17 Jan 2011 23:35:18 +0100
-> +Subject: [PATCH] configure.ac: remove `-Werror` from `CFLAGS`
-> +
-> +These options should be set when compiling the program and passed by an =
-environment variable. Or there should be an option to turn these restrictiv=
-e options off.
-> +
-> +Currently the build fails at least with GCC 4.5. It is known to work wit=
-h GCC 4.3.3 [1].
-> +
-> +[1] http://sourceforge.net/mailarchive/message.php?msg_id=3D26911808
-> +
-> +Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> +---
-> + configure.ac |    2 +-
-> + 1 files changed, 1 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index d6e0bc9..fb5c8c8 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -5,7 +5,7 @@ AM_INIT_AUTOMAKE()
-> + AC_PREREQ([2.59])
-> +=20
-> + AC_CONFIG_HEADERS([config.h])
-> +-CFLAGS=3D"${CFLAGS} -Wall -Werror"
-> ++CFLAGS=3D"${CFLAGS} -Wall"
-> +=20
-> + #######################################################################=
-#########
-> + # Set the shared versioning info, according to section 6.3 of the libto=
-ol info #
-> +--=20
-> +1.7.2.3
-> +
-> diff --git a/recipes/openmax/libomxil-bellagio_0.9.2.1.bb b/recipes/openm=
-ax/libomxil-bellagio_0.9.2.1.bb
-> index f21c731..89f521a 100644
-> --- a/recipes/openmax/libomxil-bellagio_0.9.2.1.bb
-> +++ b/recipes/openmax/libomxil-bellagio_0.9.2.1.bb
-> @@ -2,5 +2,9 @@ require ${PN}.inc
-> =20
->  PR =3D "${INC_PR}.0"
-> =20
-> +SRC_URI +=3D " \
-> +	file://0001-configure.ac-remove-Werror-from-CFLAGS.patch \
-> +"
-> +
->  SRC_URI[md5sum] =3D "323049db668ab260870fd7ecd2ec4156"
->  SRC_URI[sha256sum] =3D "75cf8d3b5cac2764420ae2cc7846b9bb12a47d2ca04c96e5=
-821309b0124ddc72"
-> diff --git a/recipes/openmax/libomxil-bellagio_git.bb b/recipes/openmax/l=
-ibomxil-bellagio_git.bb
-> index 4e28251..f58adf4 100644
-> --- a/recipes/openmax/libomxil-bellagio_git.bb
-> +++ b/recipes/openmax/libomxil-bellagio_git.bb
-> @@ -4,6 +4,9 @@ PR =3D "${INC_PR}.0"
-> =20
->  SRCREV =3D "772f0eca88b242ffb5469e8e381c63ce1f7cd3e1"
->  SRC_URI =3D "git://omxil.git.sourceforge.net/gitroot/omxil/omxil;protoco=
-l=3Dgit"
-> +SRC_URI +=3D " \
-> +	file://0001-configure.ac-remove-Werror-from-CFLAGS.patch \
-> +"
->  PV =3D "0.9.2.1"
->  PR =3D "${INC_PR}.0"
->  PR_append =3D "+gitr${SRCPV}"
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
---=-rUWmGZi4WSthEFjjIpRs
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk04CxQACgkQPX1aK2wOHVifgQCgiemDYpcKH3PyvxpmlXdOftj9
-NG4An1rV6TIaPq2Z+9/Zp8OPw0HBb4/i
-=dxWd
------END PGP SIGNATURE-----
-
---=-rUWmGZi4WSthEFjjIpRs--
