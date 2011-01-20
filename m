@@ -1,24 +1,38 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1PfhXa-0002uL-V2
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <kergoth@gmail.com>) id 1PfiuT-0004nk-2L
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 00:34:14 +0100
-Received: (qmail invoked by alias); 19 Jan 2011 23:33:34 -0000
-Received: from p4FE0F56E.dip.t-dialin.net (EHLO
-	localhost.localdomain.localdomain) [79.224.245.110]
-	by mail.gmx.net (mp043) with SMTP; 20 Jan 2011 00:33:34 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+X6Xg4hQWXAdonWfn1CyfYvYNrOo2YyLPwqDDDLW
-	/KPl6aMmvZau1u
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Thu, 20 Jan 2011 02:01:57 +0100
+Received: by pzk12 with SMTP id 12so10152pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Jan 2011 17:01:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
+	:date:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=UkxfLQYaz/hLQG3xbGCVlUqtAPEO2xPkHcE57ots0f8=;
+	b=wQu0ELtPmR09PHfL1y7liX575J5tUMtko/2bKpjpU1Eh6nKyL21tfcnx9IArrP2syj
+	f5Lajkr0n1qkN7gJf1moIbBtzChm6Yyl4cVgPtl8Jv+Wwa9kebB083vf7rMtTc6w9AlP
+	RnANjTInWmwKNxQ4UR/jXHOEcVg+SHyFqL4sc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=q2/8ipzp/sIee981jNXjmRKMbU8a9YdSiaAW4hFXYQC+i+S6sX8alml3jaMlkYm9Ck
+	PySOqMLDYI1fEiAaOgRMX64FZvxx1ugpKFPf0VlP4SnKnex2wugx/2/yaK/lbFwVi/4n
+	86TJ7uGnhZhK54umBorQgCEHa+xY8uaPvnTEY=
+Received: by 10.142.239.14 with SMTP id m14mr61629wfh.138.1295485274935; Wed,
+	19 Jan 2011 17:01:14 -0800 (PST)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.142.132.18 with HTTP; Wed, 19 Jan 2011 17:00:54 -0800 (PST)
+In-Reply-To: <AANLkTikYazjAUC3MpsKZt3xOJYHA=AoZGtfooLHgAe2R@mail.gmail.com>
+References: <1294796586-24723-1-git-send-email-kergoth@gmail.com>
+	<AANLkTikYazjAUC3MpsKZt3xOJYHA=AoZGtfooLHgAe2R@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 19 Jan 2011 18:00:54 -0700
+X-Google-Sender-Auth: bWrfyl4DZhl8157Vyi80hODUtqs
+Message-ID: <AANLkTinh7jzZ69dDSejipeSq2UUfPME8F5EFmkB-eGSV@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Jan 2011 01:32:40 +0100
-Message-Id: <1295483561-20263-3-git-send-email-schnitzeltony@gmx.de>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1295483561-20263-1-git-send-email-schnitzeltony@gmx.de>
-References: <1295483561-20263-1-git-send-email-schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: [PATCH 3/4] clutter-gst: Fix broken build for images depending on gobject-introspection-native (e.g. libwnck_2.30.5 / libgee_0.6.0)
+Subject: Re: [PATCH] busybox: move syslog config to /etc/default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,55 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 23:34:15 -0000
+X-List-Received-Date: Thu, 20 Jan 2011 01:01:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Error situation:
-* 1. configure detects gobject-introspection:
-*
-configure:12133: checking for gobject-introspection
-configure:12164: $PKG_CONFIG --exists --print-errors "gobject-introspection-1.0 >= 0.6.8"
-*
-* 2. compile fails:
-*
-  CCLD   libclutter-gst-1.0.la
-  GEN    ClutterGst-1.0.gir
-Couldn't find include 'Clutter-1.0.gir' (search path: ['.', 'path=.', '/home/Superandi/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/gir-1.0', '/home/Superandi/tmp/sysroots/i686-linux/usr/share/gir-1.0', '/usr/share/gir-1.0', '/home/Superandi/tmp/sysroots/i686-linux/usr/share/gir-1.0'])
-make[3]: *** [ClutterGst-1.0.gir] Error 1
-*
-* After fix configure disables gobject-introspection
-*
-configure:12133: checking for gobject-introspection
-configure:12178: result: no (disabled, use --enable-introspection to enable)
+On Wed, Jan 19, 2011 at 1:10 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Here it's right but to OE you've pushed version of patch where it is
+> also renamed to
+> default/busybox-syslog, but that patern in sed call
+> 's,/etc/default/busybox-syslog,' should still read
+> 's,/etc/default/syslog,', otherwise nothing is replaced and
+> syslog.busybox is still trying to read /etc/default/syslog which does
+> not exist
+>
+> or rename it to busybox-syslog in files/syslog file too
+> http://git.openembedded.org/cgit.cgi/openembedded/commit/recipes/busybox/files/syslog?id=a25c0750c7892990c59e8d6048b8c4d99410bcee
+>
 
-Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
----
- recipes/clutter/clutter-gst.inc |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/clutter/clutter-gst.inc b/recipes/clutter/clutter-gst.inc
-index b25f31e..814f493 100644
---- a/recipes/clutter/clutter-gst.inc
-+++ b/recipes/clutter/clutter-gst.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Clutter GStreamer integration library"
- HOMEPAGE = "http://www.clutter-project.org/"
- LICENSE = "LGPLv2.1"
- 
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- DEPENDS = "clutter gstreamer gst-plugins-base"
- 
-@@ -10,6 +10,8 @@ require clutter-common.inc
- 
- inherit autotools pkgconfig
- 
-+EXTRA_OECONF = "--disable-introspection"
-+
- align_examples_data_location() {
- 	for full_name in $(find ${S}/examples -name *.png) ; do
- 		data_name=${full_name##*/}
+Bah, damnit, thanks.  Well spotted.
 -- 
-1.7.2.3
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
 
