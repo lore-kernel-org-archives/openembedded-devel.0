@@ -1,35 +1,29 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1Pg3VE-0003VU-4J
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 00:01:16 +0100
-Received: by wwi17 with SMTP id 17so1154134wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jan 2011 15:00:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=Qotk9fj0ermwcE+HAIVekvrSNA/pQT4PIgZaWO6RsQU=;
-	b=QCaNwNdalLgt01KOfKXFK+dg7x7ZF/+8MKfq4Ve+oloFrHgxal23oNYh4nBjguZ5zT
-	KCuvlXqANYcbIcSeLuvn0ioD50NuKkagxkzSuO7v7c19s/uMCC/swPyTDiiKy3lYPdrQ
-	Vo5cLQa01lKRVYaDDwHsLHnkKc8/iaFgrBtvw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=aqYRluMKTrADAR3eM2DwwU5n3+wt7hMSrl7j/nF6CFMfKcfvdLWobywtligCjoCqbh
-	FTdQQKPaKkshdJVYyTEz69qOSIPahWkW4A1XU9UN6DfN9NDh41b1aXaEosmXQ+JSHYld
-	hiRfV5DfxG/skIqThJA9SrsWMKA8Y1dQLSHrc=
-MIME-Version: 1.0
-Received: by 10.216.169.71 with SMTP id m49mr2632332wel.4.1295564434625; Thu,
-	20 Jan 2011 15:00:34 -0800 (PST)
-Received: by 10.216.254.137 with HTTP; Thu, 20 Jan 2011 15:00:34 -0800 (PST)
-In-Reply-To: <AANLkTinhZBY4ODjB9h3y+Ep-hXBu6O85cB95h4_KFxmP@mail.gmail.com>
-References: <AANLkTinhZBY4ODjB9h3y+Ep-hXBu6O85cB95h4_KFxmP@mail.gmail.com>
-Date: Thu, 20 Jan 2011 18:00:34 -0500
-Message-ID: <AANLkTim0+yJ+oKSteOQ-22_PCPFB_KQ0NRw73VDyq478@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: testing branch 2011-01-20
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <rpurdie@rpsys.net>)
+	id 1Pg3cT-0001Jb-Uc; Fri, 21 Jan 2011 00:08:46 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p0KN84HP021254;
+	Thu, 20 Jan 2011 23:08:04 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20639-10; Thu, 20 Jan 2011 23:08:00 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p0KN7s19021248
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 20 Jan 2011 23:07:55 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4D389CFB.5010908@gmx.net>
+References: <4D389CFB.5010908@gmx.net>
+Date: Thu, 20 Jan 2011 23:07:52 +0000
+Message-ID: <1295564872.14388.27924.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: openembedded-members@lists.openembedded.org
+Subject: Re: Pictures of embedded devices running OpenEmbedded-based OS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,41 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2011 23:01:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 20 Jan 2011 23:08:46 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-60+ combinations tested last week!!!
+On Thu, 2011-01-20 at 21:37 +0100, Robert Schuster wrote:
+> Hi,
+> for our CeBIT participation I need a few pictures that show an embedded
+> device running an OE-based OS. So if you have something from your pet or
+> professional project that you want to share with the world please send
+> them to me. A few lines of text what is one the pictures is greatly
+> appreciated.
+> 
+> Thanks for your support!
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2011-01-13
+There are some photos of the Yocto demo from Cambridge ELC:
 
-For more information on the testing effort, please see:
+http://www.flickr.com/photos/davest/5133344300/
 
-http://www.openembedded.org/index.php/Testing
+There are machines of four different architectures in there (ARM, MIPS,
+PowerPC, x86) acting as content servers, control points, media renders
+etc. using GuPnP to steam audio out to a couple of sets of speakers.
 
-Tom has enough combinations in testing now, it may be time to think
-about a little more automation for this.
+Cheers,
 
-Thanks,
-Cliff
+Richard
 
-On Thu, Jan 20, 2011 at 5:54 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
-> master has been merged to testing-next and is ready for clean builds.
-> Looks like we had a fair number of successful builds last week :-)
->
-> I'll compile results shortly.
->
-> Thanks,
-> Cliff
->
-> --
-> =================
-> http://bec-systems.com
->
-
-
-
--- 
-=================
-http://bec-systems.com
 
 
