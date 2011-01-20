@@ -1,23 +1,35 @@
-Received: from smtpauth02.prod.mesa1.secureserver.net ([64.202.165.182])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <mike@mwester.net>) id 1PfygI-0002hf-9L
+Received: from smtp4.mundo-r.com ([212.51.32.151])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>) id 1Pfz0i-0006tN-HJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 18:52:22 +0100
-Received: (qmail 24610 invoked from network); 20 Jan 2011 17:36:35 -0000
-Received: from unknown (209.242.7.132)
-	by smtpauth02.prod.mesa1.secureserver.net (64.202.165.182) with ESMTP;
-	20 Jan 2011 17:36:25 -0000
-Message-ID: <4D38728F.1070002@mwester.net>
-Date: Thu, 20 Jan 2011 11:36:15 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	Thu, 20 Jan 2011 19:13:28 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApsEAHMKOE1bdWOb/2dsb2JhbAClRb9ngwCCUASKKoYl
+X-IronPort-AV: E=Sophos;i="4.60,352,1291590000"; d="scan'208";a="799267226"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 20 Jan 2011 19:12:34 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pfyzq-0003NU-GU
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Jan 2011 19:12:34 +0100
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pfyzq-0007Qx-CQ
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Jan 2011 19:12:34 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>) id 1Pfyzp-0000Ia-T9
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Jan 2011 19:12:33 +0100
+Date: Thu, 20 Jan 2011 19:12:33 +0100
+From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1295542406-7879-1-git-send-email-obi@opendreambox.org>
-	<1295542406-7879-3-git-send-email-obi@opendreambox.org>
-In-Reply-To: <1295542406-7879-3-git-send-email-obi@opendreambox.org>
-Subject: Re: [PATCH 3/3] madwifi-ng-r3314: Apply patches from OpenWrt 10.03
+Message-ID: <20110120181233.GA1789@lit.local.igalia.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: problems compiling glibc_2.9-r37.4 under Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,244 +43,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2011 17:52:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-
-On 1/20/2011 10:53 AM, Andreas Oberritter wrote:
-> [This revision is not pinned in OE, but used by opendreambox.]
-
-What machines/distros has this sequence of three patches been tested with?
-
-Does it build for both LE and BE?
-
--Mike (mwester)
+X-List-Received-Date: Thu, 20 Jan 2011 18:13:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
 
-> * Update HAL to 20090508.
-> * Use SRCREV 20550 of OpenWrt.
-> * Skip 446-single_module.patch (breaks install target).
-> * Remove dependency on OpenWrt's wprobe API.
-> * Fix HAL selection for mips32.
-> 
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> CC: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-> ---
-> 
->  ...ine-ioreadwrite32be-for-little-endian-too.patch |   13 ---
->  recipes/madwifi/files/fix-target-mips32.patch      |   16 +++
->  recipes/madwifi/files/remove-wprobe.patch          |  115 ++++++++++++++++++++
->  recipes/madwifi/madwifi-ng_r3314-20080131.bb       |   31 +++++-
->  4 files changed, 157 insertions(+), 18 deletions(-)
->  delete mode 100644 recipes/madwifi/files/30-define-ioreadwrite32be-for-little-endian-too.patch
->  create mode 100644 recipes/madwifi/files/fix-target-mips32.patch
->  create mode 100644 recipes/madwifi/files/remove-wprobe.patch
-> 
-> diff --git a/recipes/madwifi/files/30-define-ioreadwrite32be-for-little-endian-too.patch b/recipes/madwifi/files/30-define-ioreadwrite32be-for-little-endian-too.patch
-> deleted file mode 100644
-> index 3752a55..0000000
-> --- a/recipes/madwifi/files/30-define-ioreadwrite32be-for-little-endian-too.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -Reported as http://madwifi.org/ticket/1783 ...
-> -
-> ---- madwifi-ng-r3314-20080131/ath_hal/ah_os.h~	2007-11-23 20:08:18.000000000 +1030
-> -+++ madwifi-ng-r3314-20080131/ath_hal/ah_os.h	2008-02-11 23:12:11.000000000 +1030
-> -@@ -168,7 +168,7 @@
-> -  * for the second time, so the native implementations should be preferred.
-> -  */
-> - #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,12)) && \
-> --	!defined(CONFIG_GENERIC_IOMAP) && (AH_BYTE_ORDER == AH_BIG_ENDIAN) && \
-> -+	!defined(CONFIG_GENERIC_IOMAP) && \
-> - 	!defined(__mips__) && !defined(__hppa__) && !defined(__powerpc__)
-> - # ifndef iowrite32be
-> - #  define iowrite32be(_val, _addr) iowrite32(swab32((_val)), (_addr))
-> diff --git a/recipes/madwifi/files/fix-target-mips32.patch b/recipes/madwifi/files/fix-target-mips32.patch
-> new file mode 100644
-> index 0000000..7439304
-> --- /dev/null
-> +++ b/recipes/madwifi/files/fix-target-mips32.patch
-> @@ -0,0 +1,16 @@
-> +Upstream: unmaintained version
-> +
-> +diff -Naur madwifi-ng-r3314-20080131.orig/ath_hal/ah_target.inc madwifi-ng-r3314-20080131/ath_hal/ah_target.inc
-> +--- madwifi-ng-r3314-20080131.orig/ath_hal/ah_target.inc	2006-11-17 23:34:30.000000000 +0000
-> ++++ madwifi-ng-r3314-20080131/ath_hal/ah_target.inc	2010-10-26 01:36:47.000000000 +0000
-> +@@ -26,8 +26,8 @@
-> + # Determine the target (i.e. which HAL to use).
-> + # The default is $(ARCH)-elf
-> + TARGET-$(CONFIG_CPU_32v4) = armv4-$(ENDIAN)-elf
-> +-TARGET-$(CONFIG_CPU_MIPS32_R1) = mips1-$(ENDIAN)-elf
-> +-TARGET-$(CONFIG_CPU_MIPS32_R2) = mips-$(ENDIAN)-elf
-> ++TARGET-$(CONFIG_CPU_MIPS32_R1) = mips32-$(ENDIAN)-elf
-> ++TARGET-$(CONFIG_CPU_MIPS32_R2) = mips32r2-$(ENDIAN)-elf
-> + TARGET-$(CONFIG_CPU_R4X00) = mipsisa32-$(ENDIAN)-elf
-> + TARGET-$(CONFIG_CPU_TX49XX) = mipsisa32-$(ENDIAN)-elf
-> + TARGET-$(CONFIG_PPC32) = powerpc-be-elf
-> diff --git a/recipes/madwifi/files/remove-wprobe.patch b/recipes/madwifi/files/remove-wprobe.patch
-> new file mode 100644
-> index 0000000..b251461
-> --- /dev/null
-> +++ b/recipes/madwifi/files/remove-wprobe.patch
-> @@ -0,0 +1,115 @@
-> +Upstream: OE-only
-> +
-> +Wprobe is "a module that exports measurement data from wireless driver to user space",
-> +which requires an additional out-of-tree kernel module.
-> +
-> +See https://dev.openwrt.org/browser/trunk/package/wprobe/.
-> +
-> +diff -Naur madwifi-ng-r3314-20080131.orig/ath/if_ath.c madwifi-ng-r3314-20080131/ath/if_ath.c
-> +--- madwifi-ng-r3314-20080131.orig/ath/if_ath.c	2010-10-26 11:15:51.000000000 +0000
-> ++++ madwifi-ng-r3314-20080131/ath/if_ath.c	2010-10-26 11:19:02.000000000 +0000
-> +@@ -396,7 +396,6 @@
-> + static int rfkill = 0;
-> + static int tpc = 1;
-> + static int xchanmode = -1;
-> +-#include "ath_wprobe.c"
-> + 
-> + static const struct ath_hw_detect generic_hw_info = {
-> + 	.vendor_name = "Unknown",
-> +@@ -1539,7 +1538,6 @@
-> + 		ath_hal_intrset(ah, sc->sc_imask);
-> + 	}
-> + 
-> +-	ath_init_wprobe_dev(avp);
-> + 	return vap;
-> + }
-> + 
-> +@@ -1621,7 +1619,6 @@
-> + 		decrease = 0;
-> + 
-> + 	ieee80211_vap_detach(vap);
-> +-	ath_remove_wprobe_dev(ATH_VAP(vap));
-> + 	/* NB: memory is reclaimed through dev->destructor callback */
-> + 	if (decrease)
-> + 		sc->sc_nvaps--;
-> +@@ -6008,7 +6005,6 @@
-> + 	/* Clean up node-specific rate things - this currently appears to 
-> + 	 * always be a no-op */
-> + 	sc->sc_rc->ops->node_cleanup(sc, ATH_NODE(ni));
-> +-	ath_wprobe_node_leave(ni->ni_vap, ni);
-> + 
-> + 	ATH_NODE_UAPSD_LOCK_IRQ(an);
-> + #ifdef IEEE80211_DEBUG_REFCNT
-> +@@ -7046,8 +7042,6 @@
-> + 				goto lookup_slowpath;
-> + 			}
-> + 			ATH_RSSI_LPF(ATH_NODE(ni)->an_avgrssi, rs->rs_rssi);
-> +-			ath_node_sample_rx(ni, rs);
-> +-			ath_wprobe_report_rx(ni->ni_vap, rs, skb);
-> + 			type = ieee80211_input(ni->ni_vap, ni, skb, rs->rs_rssi, bf->bf_tsf);
-> + 			ieee80211_unref_node(&ni);
-> + 		} else {
-> +@@ -7063,12 +7057,8 @@
-> + 				vap = ieee80211_find_rxvap(ic, wh->i_addr1);
-> + 
-> + 			if (vap) {
-> +-				ath_wprobe_report_rx(vap, rs, skb);
-> + 				ni = ieee80211_find_rxnode(ic, vap, wh);
-> + 			} else {
-> +-				TAILQ_FOREACH(vap, &ic->ic_vaps, iv_next) {
-> +-					ath_wprobe_report_rx(vap, rs, skb);
-> +-				}
-> + 				ni = NULL;
-> + 			}
-> + 
-> +@@ -7076,7 +7066,6 @@
-> + 				ieee80211_keyix_t keyix;
-> + 
-> + 				ATH_RSSI_LPF(ATH_NODE(ni)->an_avgrssi, rs->rs_rssi);
-> +-				ath_node_sample_rx(ni, rs);
-> + 				type = ieee80211_input(vap, ni, skb, rs->rs_rssi, bf->bf_tsf);
-> + 				/*
-> + 				 * If the station has a key cache slot assigned
-> +@@ -8662,7 +8651,6 @@
-> + 				sc->sc_stats.ast_tx_rssi = ts->ts_rssi;
-> + 				ATH_RSSI_LPF(an->an_halstats.ns_avgtxrssi,
-> + 					ts->ts_rssi);
-> +-					ath_node_sample_tx(&an->an_node, ts, bf->bf_skb);
-> + 				if (bf->bf_skb->priority == WME_AC_VO ||
-> + 				    bf->bf_skb->priority == WME_AC_VI)
-> + 					ni->ni_ic->ic_wme.wme_hipri_traffic++;
-> +@@ -10175,7 +10163,6 @@
-> + 	struct ath_softc *sc = netdev_priv(ic->ic_dev);
-> + 
-> + 	sc->sc_rc->ops->newassoc(sc, ATH_NODE(ni), isnew);
-> +-	ath_wprobe_node_join(ni->ni_vap, ni);
-> + 
-> + 	/* are we supporting compression? */
-> + 	if (!(vap->iv_ath_cap & ni->ni_ath_flags & IEEE80211_NODE_COMP))
-> +diff -Naur madwifi-ng-r3314-20080131.orig/ath/if_athvar.h madwifi-ng-r3314-20080131/ath/if_athvar.h
-> +--- madwifi-ng-r3314-20080131.orig/ath/if_athvar.h	2010-10-26 11:15:51.000000000 +0000
-> ++++ madwifi-ng-r3314-20080131/ath/if_athvar.h	2010-10-26 11:17:20.000000000 +0000
-> +@@ -46,7 +46,6 @@
-> + #include "ah_desc.h"
-> + #include "ah_os.h"
-> + #include "if_athioctl.h"
-> +-#include <linux/wprobe.h>
-> + #include "net80211/ieee80211.h"		/* XXX for WME_NUM_AC */
-> + #include <asm/io.h>
-> + #include <linux/list.h>
-> +@@ -361,7 +360,6 @@
-> + /* driver-specific node state */
-> + struct ath_node {
-> + 	struct ieee80211_node an_node;		/* base class */
-> +-	struct wprobe_link an_wplink;
-> + 	uint8_t an_wplink_active;
-> + 	struct work_struct an_destroy;
-> + 	u_int16_t an_decomp_index; 		/* decompression mask index */
-> +@@ -533,7 +531,6 @@
-> + #else
-> + 	unsigned int av_beacon_alloc;
-> + #endif
-> +-	struct wprobe_iface av_wpif;
-> + 	u32 av_rxframes;
-> + 	u32 av_rxprobereq;
-> + };
-> diff --git a/recipes/madwifi/madwifi-ng_r3314-20080131.bb b/recipes/madwifi/madwifi-ng_r3314-20080131.bb
-> index 38f63f3..6a2c2a6 100644
-> --- a/recipes/madwifi/madwifi-ng_r3314-20080131.bb
-> +++ b/recipes/madwifi/madwifi-ng_r3314-20080131.bb
-> @@ -2,12 +2,33 @@
->  
->  require madwifi-ng_r.inc
->  
-> -SRC_URI += " \
-> -	file://30-define-ioreadwrite32be-for-little-endian-too.patch \
-> -	"
-> -
->  # PR set after the include, to override what's set in the included file.
-> -PR = "${INC_PR}.0"
-> +PR = "${INC_PR}.1"
-> +
-> +# versions of OpenWrt backfire (10.03)
-> +HAL_VERSION = "20090508"
-> +SRCREV = "20550"
->  
-> +SRC_URI += " \
-> +        svn://svn.openwrt.org/openwrt/trunk/package/madwifi;module=patches \
-> +        http://mirror2.openwrt.org/sources/ath_hal-${HAL_VERSION}.tgz;name=hal \
-> +        file://fix-target-mips32.patch \
-> +        file://remove-wprobe.patch;apply=no \
-> +        "
->  SRC_URI[md5sum] = "2c7352cbbdac995de8c3bce5b80db5f2"
->  SRC_URI[sha256sum] = "0599c75b95ba63bdc554cb8124192e62c75fbeb71b9e8a5a7bc351c8e0666758"
-> +SRC_URI[hal.md5sum] = "4ab7ae8bdb96c0be388c98bf8f92d5ca"
-> +SRC_URI[hal.sha256sum] = "ced93d25aea7ee43807147a0269e69a072e718d59e7dab904bbe48b900409483"
-> +
-> +addtask postpatch after do_patch before do_configure
-> +
-> +do_postpatch() {
-> +        rm -rf hal
-> +        cp -a ${WORKDIR}/ath_hal-${HAL_VERSION} hal
-> +        rm -f ${WORKDIR}/patches/446-single_module.patch
-> +        for i in ${WORKDIR}/patches/*.patch; do
-> +                oenote "Applying openwrt patch '$i'"
-> +                patch -p1 -i $i
-> +        done
-> +        patch -p1 -i ${WORKDIR}/remove-wprobe.patch
-> +}
+In order to build native-sdk-image recipe, I found my self compiling
+glibc_2.9-r37.4, because it is the real provider of virtual-libc-dev (the
+toolchain does not truly provide it -but that is another bug [1]-).
 
+But the glibc_2.9-r37.4 configuration fails using the canonical
+arm-angstrom-linux-gnueabi- toolchain (using the csl external toolchain fails
+too, but for other reasons):
+
+Log data follows:
+| configure.in:2204: warning: AC_CACHE_VAL(pic_default, ...): suspicious cache-id, must contain _cv_ to be cached
+| ../../lib/autoconf/general.m4:1999: AC_CACHE_VAL is expanded from...
+| ../../lib/autoconf/general.m4:2020: AC_CACHE_CHECK is expanded from...
+| configure.in:2204: the top level
+| checking build system type... x86_64-pc-linux-gnu
+| checking host system type... arm-angstrom-linux-gnueabi
+| checking add-on ports for preconfigure fragments... am33 arm hppa m68k mips
+| configure: running configure fragment for add-on nptl
+| configure: running configure fragment for add-on libidn
+| checking sysdep dirs... ports/sysdeps/arm/elf ports/sysdeps/unix/sysv/linux/arm/eabi/nptl ports/sysdeps/unix/sysv/linux/arm/eabi sysdeps/unix/sysv/linux/arm/eabi ports/sysdeps/unix/sysv/linux/arm/nptl ports/sysdeps/unix/sysv/linux/arm sysdeps/unix/sysv/linux/arm ports/sysdeps/unix/sysv/linux nptl/sysdeps/unix/sysv/linux nptl/sysdeps/pthread sysdeps/pthread sysdeps/unix/sysv/linux sysdeps/gnu sysdeps/unix/common sysdeps/unix/mman sysdeps/unix/inet ports/sysdeps/unix/sysv nptl/sysdeps/unix/sysv sysdeps/unix/sysv ports/sysdeps/unix/arm ports/sysdeps/unix nptl/sysdeps/unix sysdeps/unix sysdeps/posix ports/sysdeps/arm/eabi ports/sysdeps/arm/fpu ports/sysdeps/arm/nptl ports/sysdeps/arm sysdeps/wordsize-32 sysdeps/ieee754/flt-32 sysdeps/ieee754/dbl-64 sysdeps/ieee754 sysdeps/generic/elf sysdeps/generic
+| checking for a BSD-compatible install... /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/bin/install -c
+| checking whether ln -s works... yes
+| checking for arm-angstrom-linux-gnueabi-gcc... ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb
+| checking for suffix of object files... o
+| checking whether we are using the GNU C compiler... yes
+| checking whether ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb accepts -g... yes
+| checking for ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb option to accept ISO C89... unsupported
+| checking for gcc... ccache gcc
+| checking how to run the C preprocessor... arm-angstrom-linux-gnueabi-gcc -E
+| configure: error: C preprocessor "arm-angstrom-linux-gnueabi-gcc -E" fails sanity check
+| See `config.log' for more details.
+
+Reading the config.log I found:
+
+configure:3734: checking how to run the C preprocessor
+configure:3850: result: arm-angstrom-linux-gnueabi-gcc -E
+configure:3879: arm-angstrom-linux-gnueabi-gcc -E  conftest.c
+In file included from /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/syslimits.h:7,
+                 from /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h:11,
+                 from conftest.c:10:
+/media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h:122:61: error: limits.h: No such file or directory
+configure:3885: $? = 1
+configure: failed program was:
+| /* confdefs.h.  */
+| #define PACKAGE_NAME "GNU C Library"
+| #define PACKAGE_TARNAME "c-library"
+| #define PACKAGE_VERSION "(see version.h)"
+| #define PACKAGE_STRING "GNU C Library (see version.h)"
+| #define PACKAGE_BUGREPORT "glibc"
+| #define HAVE_LIBIDN 1
+| /* end confdefs.h.  */
+| #ifdef __STDC__
+| # include <limits.h>
+| #else
+| # include <assert.h>
+| #endif
+| 		     Syntax error
+configure:3879: arm-angstrom-linux-gnueabi-gcc -E  conftest.c
+In file included from /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/syslimits.h:7,
+                 from /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h:11,
+                 from conftest.c:10:
+/media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h:122:61: error: limits.h: No such file or directory
+configure:3885: $? = 1
+
+So, the problem is that the pre-processor is _unable_ to find the *correct*
+header limits.h. Why? Because it does not exist in the sysroot!!!!
+
+$ find tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/ -name "limits.h"
+tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h
+tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/c++/4.3.3/tr1/limits.h
+tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/linux/limits.h
+
+Why? Why the toolchain does not install a sane limits.h in a sane directory?
+
+Thanks.
+
+vmjl
+
+1. http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/028942.html
 
 
