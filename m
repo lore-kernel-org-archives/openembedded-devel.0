@@ -1,38 +1,22 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <msundius@sundius.com>) id 1Pfgnd-0001xV-TV
+Received: from mailout-de.gmx.net ([213.165.64.23])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1PfhXZ-0002uI-H0
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Jan 2011 23:46:46 +0100
-Received: by qyk8 with SMTP id 8so1154503qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jan 2011 14:46:05 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.229.240.198 with SMTP id lb6mr1022762qcb.255.1295477164748;
-	Wed, 19 Jan 2011 14:46:04 -0800 (PST)
-Received: by 10.229.233.213 with HTTP; Wed, 19 Jan 2011 14:46:04 -0800 (PST)
-In-Reply-To: <AANLkTinRKmmzUT-6T6_cGR+HHrB6hYFYhdS4GuZHRS+Z@mail.gmail.com>
-References: <1295027350.14388.6527.camel@rex>
-	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>
-	<4D353F81.50301@xora.org.uk>
-	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>
-	<4D35C5C3.60205@mentor.com> <ih4s84$gbj$1@dough.gmane.org>
-	<4D35FC8B.1090404@mentor.com>
-	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
-	<AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
-	<4D36A64E.9060804@xora.org.uk>
-	<AANLkTi=8uKvujKLqG2cw3h3gLmmcU=KNfdmSwB5imfsH@mail.gmail.com>
-	<1295436662.2540.14.camel@scimitar>
-	<AANLkTik9-k_euvDGZd+CFfQ9LyxD_7mubpVxPqyEsEVU@mail.gmail.com>
-	<4D36FE98.3070606@mwester.net>
-	<AANLkTimMHd-eH9tEL1tUtoUKa+zwX4+9kUdT3k_NP9nG@mail.gmail.com>
-	<AANLkTimyPb-4pLrbF4ZeFwnh+9WyZtcPY1uXeYBnwUqQ@mail.gmail.com>
-	<AANLkTinRKmmzUT-6T6_cGR+HHrB6hYFYhdS4GuZHRS+Z@mail.gmail.com>
-Date: Wed, 19 Jan 2011 14:46:04 -0800
-Message-ID: <AANLkTimfwC4gC-fLeMgp=BFbMYdAy7yppt4e0vapV5+W@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
+	Thu, 20 Jan 2011 00:34:13 +0100
+Received: (qmail invoked by alias); 19 Jan 2011 23:33:33 -0000
+Received: from p4FE0F56E.dip.t-dialin.net (EHLO
+	localhost.localdomain.localdomain) [79.224.245.110]
+	by mail.gmx.net (mp043) with SMTP; 20 Jan 2011 00:33:33 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18ZYR4c0EgZgUnDO+lhDQqEOAdjK0OxYENHUVpxlV
+	+tuCjTELMbLihu
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Yocto Project and OE - Where now?
+Date: Thu, 20 Jan 2011 01:32:38 +0100
+Message-Id: <1295483561-20263-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.2.3
+X-Y-GMX-Trusted: 0
+Subject: [PATCH 1/4] clutter: Fix broken build for images depending on gobject-introspection-native (e.g. libwnck_2.30.5 / libgee_0.6.0)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,98 +30,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2011 22:46:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 19 Jan 2011 23:34:13 -0000
 
-As with anything Balance and compromise is what make the best projects, I
-don't think I'd want ever recipe to stay forever be not useful to anyone,
-but I've appreciated the efforts that OE has made (since I've been using it)
-to generally not break things for people who have invested time in using it.
+* Error situation:
+* 1. configure detects gobject-introspection:
+*
+configure:12828: checking for gobject-introspection
+configure:12859: $PKG_CONFIG --exists --print-errors "gobject-introspection-1.0 >= 0.6.4"
+*
+* 2. compile fails:
+*
+  CCLD   libclutter-cogl.la
+  GEN    Cogl-1.0.gir
+In file included from /home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.2.12-r2.1/clutter-1.2.12/clutter/cogl/cogl/cogl-shader.h:32,
+                 from <stdin>:15:
+../../../clutter/cogl/cogl/cogl-defines.h:30:23: error: GLES2/gl2.h: No such file or directory
+Error while processing the source.
+make[7]: *** [Cogl-1.0.gir] Error 1
+*
+* After fix configure disables gobject-introspection
+*
+configure:12828: checking for gobject-introspection
+configure:12873: result: no (disabled, use --enable-introspection to enable)
 
-On Wed, Jan 19, 2011 at 2:23 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ recipes/clutter/clutter.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-> On Wed, Jan 19, 2011 at 1:55 PM, C Michael Sundius <msundius@sundius.com>
-> wrote:
-> > It seems to me that this is a bit of a battle between the package
-> > maintainers and the distro maintainers.. Looking at this from my
-> managements
-> > side of things, we use OE as a tool and its really just a means to the
-> end.
-> > our customers demand that we do not change things (versions of software),
-> > they demand stability and they view a change in busybox or anything else
-> a
-> > threat to stability. our management has also made an edict that we can
-> not
-> > use gplv3. For completely non technical reasons we simply cannot move to
-> new
-> > package versions without a substantial business justification. I suspect
-> > that that there are many (more than you realize) folk out there who are
-> > using OE for their own distro. If you simply whack package versions
-> because
-> > something newer came out you will have these people maintaining separate
-> > recipes and we'll be swamped with the load and this tool will loose one
-> of
-> > its best attributes.
-> >
-> > The comment that disturbed me was that distros should just move ahead
-> > "because its making things hard for the package maintainer". That doesn't
-> > wash with me because if people are using your package then you should
-> > support it or let someone else be the maintainer.
->
-> I think keeping packages forever is not going to work either. If your
-> customer is someone with EOL of 20 years
-> OE should not keep versions you need just for you unless you invest
-> efforts in keeping that packages uptodate
-> thats why releases are for.
->
-> In essence the distro's
-> > use of that package are your customers and the reason you have a job. OE
-> > does not exist as a product, rather a tool that enables customers, you
-> can't
-> > create this in a vacuum without understanding who is using it.
-> >
->
-> yes and assuming a package is being used by someone is also not the
-> right thing. IMO for products you should
-> base off on a release and maintain that for however long you wish and
-> give some space to OE to develop. Extreme on
-> both ends are unwanted thats why we are discussing what versions to
-> keep. Keeping every possible version around has
-> a cost and I believe if the recipe is not actively being tested its a
-> bit-rot. So we are trying to reduce that burden on OE devs
-> at the same time increase the quality of recipes.
->
-> > distro maintainers are not all dumb and if they are they'll be the last
-> > single one using an outdated version of the software. When that happens a
-> > smart package maintainer will call it out leave out the old package.
-> > Further, it would be nice for a warning to take place so that it might
-> have
-> > a "depracated" tag associated with the recipe for one release cycle to
-> see
-> > if anyone cribs.
->
->
-> recipes move into obsolete/ or nonworking/ dirs thats enough of a warning
-> imo
->
-> >
-> > So I'm standing with the guy w/ asbestos short on. I'd like to see that
-> OE
-> > err on the side of "do no harm" to existing users. Its hard enough to
-> rally
-> > the troops to move to updated packages much less updated meta without you
-> > leaving perfectly reasonable versions of software out of oe-core.
-> >
-> > mike
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/clutter/clutter.inc b/recipes/clutter/clutter.inc
+index 84a7af9..2a061af 100644
+--- a/recipes/clutter/clutter.inc
++++ b/recipes/clutter/clutter.inc
+@@ -9,7 +9,7 @@ INC_SRC_URI = "file://sample.desktop \
+ PARALLEL_MAKE = ""
+ 
+ STDDEPENDS = "virtual/libx11 gtk-doc-native pango glib-2.0 libxfixes gtk+"
+-BASE_CONF = "--disable-gtk-doc ${@get_clutter_fpu_setting(bb, d)} --enable-conformance "
++BASE_CONF = "--disable-introspection --disable-gtk-doc ${@get_clutter_fpu_setting(bb, d)} --enable-conformance "
+ 
+ DEPENDS = "${STDDEPENDS} virtual/libgl"
+ EXTRA_OECONF = "${BASE_CONF} --with-flavour=glx"
+@@ -41,7 +41,7 @@ EXTRA_OECONF_mx31ads = "${BASE_CONF} --with-flavour=eglnative"
+ PACKAGE_ARCH_mx31ads = "${MACHINE_ARCH}"
+ LDFLAGS_append_mx31ads = " -lpvrNULLWSEGL -lstdc++ "
+ 
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+ inherit autotools pkgconfig gtk-doc
+ 
+-- 
+1.7.2.3
+
+
 
