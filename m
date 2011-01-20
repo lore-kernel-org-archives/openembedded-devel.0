@@ -1,35 +1,36 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PfroE-0006kS-3c
+	(envelope-from <dp@xora.org.uk>) id 1PfsJX-0007Up-VC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 11:32:06 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AucFADCeN01bdWOb/2dsb2JhbACWNo8OvhWFUASQTw
-X-IronPort-AV: E=Sophos;i="4.60,350,1291590000"; d="scan'208";a="719757682"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 20 Jan 2011 11:31:26 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pfrna-0006g1-ML
+	Thu, 20 Jan 2011 12:04:28 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 4225014033
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jan 2011 11:31:26 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pfrna-0003V0-HC
+	Thu, 20 Jan 2011 11:03:45 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id NXojVYPP4RAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jan 2011 11:31:26 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1Pfrna-0007bb-Ca
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 11:31:26 +0100
-Date: Thu, 20 Jan 2011 11:31:26 +0100
-From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110120103126.GB26640@lit.local.igalia.com>
+	Thu, 20 Jan 2011 11:03:44 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 4CA2D1401D
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Jan 2011 11:03:44 +0000 (GMT)
+Message-ID: <4D3816BC.1010605@xora.org.uk>
+Date: Thu, 20 Jan 2011 11:04:28 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: native-sdk-image do_rootfs() fails
+To: openembedded-devel@lists.openembedded.org
+References: <1295027350.14388.6527.camel@rex>	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>	<4D353F81.50301@xora.org.uk>	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>	<4D35C5C3.60205@mentor.com>
+	<ih4s84$gbj$1@dough.gmane.org>	<4D35FC8B.1090404@mentor.com>	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>	<AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>	<4D36A64E.9060804@xora.org.uk>	<AANLkTi=8uKvujKLqG2cw3h3gLmmcU=KNfdmSwB5imfsH@mail.gmail.com>	<1295436662.2540.14.camel@scimitar>	<AANLkTik9-k_euvDGZd+CFfQ9LyxD_7mubpVxPqyEsEVU@mail.gmail.com>	<4D36FE98.3070606@mwester.net>	<AANLkTimMHd-eH9tEL1tUtoUKa+zwX4+9kUdT3k_NP9nG@mail.gmail.com>	<AANLkTimyPb-4pLrbF4ZeFwnh+9WyZtcPY1uXeYBnwUqQ@mail.gmail.com>	<AANLkTinRKmmzUT-6T6_cGR+HHrB6hYFYhdS4GuZHRS+Z@mail.gmail.com>
+	<AANLkTin8mbWMymQyNeuf8dtEy6McUJQYTKfhuUgR3Mf8@mail.gmail.com>
+In-Reply-To: <AANLkTin8mbWMymQyNeuf8dtEy6McUJQYTKfhuUgR3Mf8@mail.gmail.com>
+X-Enigmail-Version: 1.1.1
+Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2011 10:32:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Jan 2011 11:04:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-I'm trying to build a native-sdk-image for pandaboard, both with
-angstrom-linux-gnueabi and external csl toolchains. Both builds failed in the
-same point:
+On 20/01/2011 10:20, Frans Meulenbroeks wrote:
+>
+> And as said before, as a package maintainer I try to follow upstream
+> and support what upstream supports.
+> I do not want to take over the role of upstream wrt the package maintenance.
+> As a package maintainer I feel it as my task to make sure the version
+> from upstream builds in the OE environment, and ideally patches are
+> only there to deal with cross build issues, although every once in a
+> while a local bugfix is added.
+> That is how I see the role of a package maintainer, but others might
+> see things differently.
+> (btw for toolchain related things I can imagine we want to retain
+> older versions for a longer time, especially when there are functional
+> changes (I'm especially thinking about autohell))
+> And apologies if I sketch the things black and white, but at least
+> that makes things clear.
+> But also when it becomes to package maintainers tasks there is a gray area.
+>
+But this is part of the issue, this sort of working is fine for packages
+you maintain, but you try and force your opinions on which packages are
+relevant to other package maintainers. Go forth and do what you want
+with your own little area but at least give some consideration that I
+might actually be maintaining the recipes you class as junk.
 
-| Configuring sysvinit.
-| Collected errors:
-|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for task-sdk-native:
-|  * 	virtual-libc-dev *
-|  * opkg_install_cmd: Cannot install package task-sdk-native.
-|  * resolve_conffiles: Existing conffile /media/DISK/angstrom-setup-scripts/build/tmp-angstrom_2008_1/rootfs/native-sdk-image/etc/device_table is different from the conffile in the new package. The new conffile will be placed at /media/DISK/angstrom-setup-scripts/build/tmp-angstrom_2008_1/rootfs/native-sdk-image/etc/device_table-opkg.
-| ERROR: Function do_rootfs failed
+Graeme
 
-I don't know how to deal with this issue. Any advice?
-
-vmjl
 
 
