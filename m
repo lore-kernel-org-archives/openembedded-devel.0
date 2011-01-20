@@ -1,35 +1,33 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1Pfz0i-0006tN-HJ
+	(envelope-from <cliff.brake@gmail.com>) id 1PfzTk-0006nG-RM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 19:13:28 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApsEAHMKOE1bdWOb/2dsb2JhbAClRb9ngwCCUASKKoYl
-X-IronPort-AV: E=Sophos;i="4.60,352,1291590000"; d="scan'208";a="799267226"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 20 Jan 2011 19:12:34 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pfyzq-0003NU-GU
+	Thu, 20 Jan 2011 19:43:30 +0100
+Received: by wyb40 with SMTP id 40so931525wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jan 2011 19:12:34 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pfyzq-0007Qx-CQ
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jan 2011 19:12:34 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1Pfyzp-0000Ia-T9
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 19:12:33 +0100
-Date: Thu, 20 Jan 2011 19:12:33 +0100
-From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110120181233.GA1789@lit.local.igalia.com>
+	Thu, 20 Jan 2011 10:42:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=U1JsMKvjZWzlM3xlr9mepTG2HHnWSop8JsPGfHqyag8=;
+	b=jq8KTKjae+Ry1zS3j47QQLGV1CGqNu9sSlGWfrHoBQBdte0UalzJ8btYqmzIxK5moQ
+	u/4HcMv+rMDgklCA7VsveShC4/FBVyG+0H/aKjJ0RMGw8qEMfxwEmsu6AUZu+rUX6+Bv
+	kmEfBZJ7Kxm2ZWZZGAQolYgNK5hSAr0JbHVx0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=rjUY/IGKKHB1q4yDbYXXlGyuB63fglUn/bcanYAXnv4Ve05S4DQ6dTZzVi0TiQkxMl
+	RC5glw+mspcImushCQEtggru0fsCymYipq9BmMIrsdHph2aD/m2QEOmTOuJF6P37T4Nr
+	HJ/h+1wun2XSZGB5MAixz+nh2Teh+n79AeKfk=
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: problems compiling glibc_2.9-r37.4 under Angstrom
+Received: by 10.216.177.9 with SMTP id c9mr2333521wem.34.1295548967055; Thu,
+	20 Jan 2011 10:42:47 -0800 (PST)
+Received: by 10.216.254.137 with HTTP; Thu, 20 Jan 2011 10:42:47 -0800 (PST)
+Date: Thu, 20 Jan 2011 13:42:47 -0500
+Message-ID: <AANLkTimt1FsKDbdPn5tKGB_u99vcqKnyCum7LHK55XkX@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: OE weekly changelog for 2011-01-10 to 2011-01-17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,88 +41,277 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2011 18:13:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Jan 2011 18:43:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+OE weekly changelog for org.openembedded.dev, 2011-01-10 to 2011-01-17
+
+Ahsan, Noor (1):
+  packaged-staging.bbclass: bug fix in ipk file name generation for searchi=
+ng
+
+Andrea Adami (7):
+  kexecboot: bump to e951750b09eb0e1ba81f1bf71d6108c8d3288f91
+  linux-kexecboot: bump PR to follow kexecboot upgrades.
+  kexecboot-cfg: show DISTRO and MACHINE in the label.
+  kexecboot: increase delay before device detection for Zaurus.
+  linux-kexecboot: add c7x0 defconfig for 2.6.37.
+  linux-kexecboot: bump PR after kexecboot changes.
+  linux-kexecboot: add akita defconfig for 2.6.37.
+
+Andreas Oberritter (3):
+  gcc: replace unconditional SRC_URI_append with SRC_URI +=3D
+  libcap2: fix build with and without libpam
+  unpack.py: add SRC_URI parameter unpack=3D<bool> (default: true)
+
+Bernhard Reutner-Fischer (14):
+  patch.bbclass: conditional patch-tool dependency
+  gcc-svn: remove unrelated hunk from patch
+  xz:  Configure with --enable-small --disable-lzma-links
+  autotools.bbclass: pass distro_imposed_configure_flags
+  autotools.bblass: mkdir also AC_CONFIG_MACRO_DIR
+  autotools.bbclass: use grep -q
+  busybox: provide postrm for package mdev
+  sane-toolchain-uclibc: use -pipe
+  sane-toolchain-uclinux-uclibc: use -pipe
+  gcc-svn: redo patch: Handle uClibc locale
+  gstd: fix typo in RRECOMENDS
+  busybox: simplify handling of busybox-static
+  busybox: provide -passwd and -shadow packages
+  busybox: simplify update-rc.d OPT handling
+
+Chris Larson (12):
+  bitbake.conf: fix quote usage in COMBINED_FEATURES
+  procinfo-ng: new recipe, version 2.0.304
+  cramfs: add cvs version
+  rng-tools: dep on argp-standalone for uClibc
+  devmem2: add freescale alignment fixup patch
+  devmem2: remove comment of word write from fsl patch
+  argp-standalone: build shared library also
+  devmem2: fix patch
+  oe.types: add/update docstrings
+  oe.types: allow specifying the number base for integer
+  oe.types: add floating point type
+  argp-standalone: fix patch
+
+Daniele Ricci (6):
+  mokopanel: SRCREV bump
+  mokosuite2: SRCREV bump
+  libmokosuite: SRCREV bump
+  mokomessages: new recipe
+  libmokosuite: SRCREV bump
+  mokomessages: SRCREV bump
+
+Denis Carikli (2):
+  midori_git : remove DEFAULT_PREFERENCE =3D "-1"
+  xkeyboard-config_git: remove DEFAULT_PREFERENCE =3D "-1"
+
+Enrico Scholz (1):
+  gdbm: use full qualified permissions for chmod operations
+
+Eric BENARD (10):
+  linux-libc-headers_2.6.37: fix SRC_URI
+  busybox-1.18.1: add latest fixes
+  tslib-git: update to git master
+  angstrom-2010: prefer busybox-1.18.1
+  busybox: remove 1.17.4
+  busybox 1.18.1: add latest fix
+  mtd-utils: add 1.4.1
+  strace 4.5.20: stable since 04/14/2010 so remove DP=3D-1
+  busybox: introduce stable version 1.18.2
+  angstrom-2010: prefer busybox 1.18.2
+
+Eric B=E9nard (2):
+  devmem2 : fix patch
+  busybox 1.18.1 : fix patches
+
+Khem Raj (20):
+  mesa-7.9.1: Fix build on uclibc
+  linux-ixp4xx.inc: Add DEPENDS on zd1211-firmware
+  slugos.inc: Use bluez4 as default provider for bluez-libs
+  gcc-4.5: Get few more fixes from linaro and upstream gcc-4_5-branch
+  eglibc: Configure based on DISTRO_FEATURES_EGLIBC
+  ti-linux-driver-examples_git.bb: Remove deprecated usage of 'patch' url p=
+ara
+  eglibc-options.inc: Account of DISTRO_FEATURES_EGLIBC being not defined.
+  gcc-4.5.inc: Disable linaro rev 99456 patch for now
+  linux_2.6.37.bb: Add qemuppc to list of supported machines
+  run-qemu.sh: Add new commandline arg to specify image
+  ltp_20100831.bb: Fix deprecated usage to specify patch in SRC_URI
+  bison: Fix build on uclibc
+  python: Fix configure tests when using --enable-ipv6
+  uclibc-git: Get latest patches for protected symbols
+  sane-toolchain-uclibc.inc: Use -O2 for powerpc targets
+  tgt_1.0.12.bb: Fix build on uclibc
+  uclibc_git.bb: Enable UCLIBC_USE_NETLINK and UCLIBC_SUPPORT_AI_ADDRCONFIG
+  uclibc-initial_git.bb: Use install_startfiles to generate startup files
+  ucslugc.conf: Bring it forward to use sane-toolchain
+  linux-2.6.37: Make QEMU machines all use 2.6.37 as default kernel
+
+Klaus Kurzmann (3):
+  cornucopia.inc: bump SRCREV for latest fixes
+  fsodeviced_git.bb: remove do_configure_prepend with the now unneeded i2c =
+hea
+  task-shr-feed: add ttf-droid
+
+Koen Kooi (16):
+  ntp: cleanups
+  ntp-ssl: fix PACKAGES
+  u-boot-sakoman: move to 2010.12
+  linux-omap: move to 2.6.37 final
+  ti-cgt: add 7.0.4
+  linux-omap 2.6.37: check in updated overo patch
+  angstrom: sync with meta-angstrom layer
+  angstrom next: catch up with .37-rc8 -> .37 linux-omap change
+  angstrom-task-gnome: add cron and ntpdate
+  lmsensors-apps: update to 3.2.0
+  lmsensors-apps: remove 2.10.1 and rename files/ dir
+  sensors-applet: update to 2.2.7
+  mplayer svn: bump SRCREV, refresh patches
+  ffmpeg svn: fix hardfp bug
+  hal 0.5.15+git: bump SRCREV to fix a segfault
+  pidgin: update to 2.7.9
+
+Lars Michelsen (1):
+  Fix building of package live555
+
+Martin Jansa (35):
+  linux-2.6.34: remove c7x0 patch from SRC_URI override as that file was re=
+mov
+  linux-2.6.34: upgrade to longterm 2.6.34.8 and update openmoko and shr pa=
+tch
+  fso-autorev: drop libeflvala as it's in EFL repository now
+  e-base: bump EFL SRCREV a bit again to drop libeflvala patch
+  mesa: add new 7.10 version, with D_P -2
+  elmdentica: add patch for azy api change from r56034
+  boost-1.45.0: force ARM mode for now, thumb makes ld to buffer overflow
+  e-wm: bump SRCREV a bit more than EFL_SRCREV is now
+  xorg-data: obsolete old versions
+  xorg-font: obsolete old versions
+  xorg-doc: obsolete old versions
+  xorg-proto: obsolete old versions
+  xorg-driver: obsolete old versions
+  xorg-util: obsolete old versions
+  xorg-xserver: obsolete old versions
+  xorg-lib: obsolete old versions
+  xorg-app: obsolete old versions
+  removal: announce old xorg recipes removal
+  xorg: new versions 2011-01-11
+  xproxymanagementprotocol: drop PROVIDES xproxymngproto and update other r=
+eci
+  xorg: new versions 2011-01-12
+  python-pyrex: move patch used only in python-pyrex to own directory inste=
+ad
+  tsmd: bump SRCREV as playya requested
+  python-native: drop old versions 2.6.1 and 2.6.4, remove unneeded python-=
+nat
+  linux-2.6.34: drop DRM patches from shr.patch
+  fso-specs,libfso-glib,libfreesmartphone-glib: bump SRCREV
+  libfreesmartphone-glib: fix SRCREV
+  tslib: relax EV_VERSION check as 2.6.37 has slightly newer EV_VERSION, bu=
+t w
+  freesmartphone: bump cornucopia SRCREV, needed for versions compatible wi=
+th
+  frameworkd-config-shr: bump SRCREV for new om-gta01 frameworkd.conf
+  frameworkd: drop fso-abyss from om-gta0* RDEPENDS and disable ogsmd in de=
+fau
+  frameworkd: merge frameworkd-config-shr_git.bb to frameworkd_git.bb and c=
+lea
+  frameworkd: fix init.d script permissions and force frameworkd-config-shr=
+ re
+  task-shr-feed: fix ttf-droid target package names for RDEPENDS
+  frameworkd: install ogsmd configs for machines with enabled ogsmd (not us=
+ing
+
+Michael 'Mickey' Lauer (8):
+  fsodeviced: i2c-tools no longer a dependency; everything necessary includ=
+ed
+  dbus-cxx: new recipe; c++ bindings for dbus
+  mm-common: add BBCLASSEXTEND
+  libsigc++-2.0: add new version 2.2.8; this one features BBCLASSEXTENDS
+  dbus-cxx: fix typo in BBCLASSEXTEND
+  commoncpp: add version 1.8.1
+  sflphone-common: fix SECTION
+  vala: add 0.11.4.1
+
+Michael Smith (1):
+  fconfig 20080329: upgrade from 20060419
+
+Otavio Salvador (8):
+  slang: add 2.2.2
+  newt: add 0.52.12
+  i586-generic: define udevdir and OLDEST_KERNEL
+  dbus: fix init script if $prefix is empty
+  hal: use INC_PR
+  hal: fix init script if $prefix is empty
+  hal: drop git and 0.5.9.1 versions since no distro uses them
+  slang: fix 2.2.2 compilation with uclibc
+
+Paul Menzel (4):
+  libcap, libcap2: use automatic packaging to fix QA errors
+  Convert `libcap_1.10` to new staging system by removing `do_stage()` [1].
+  vdr: update to 1.7.16 from 1.7.10
+  libsigc++-2.0_2.2.8: add checksums
+
+Simon Busch (2):
+  initscripts-shr: add modified version of halt/reboot scripts for palmpre =
+mac
+  shr-image: we use devtmpfs on palmpre machine - so no dev manager!
+
+Steffen Sledz (2):
+  alsa-lib: fix packaging error
+  epiphany-2.30.2: unbreak build by disabling CA files
+
+Thomas Zimmermann (8):
+  libzrtpcpp: update to 1.5.3 as 1.4.6 doesn't compile anymore
+  ccrtp: update to version 1.7.2
+  libzrtpcpp: update to 1.6.0 as sources of 1.5.3 were removed today
+  ccrtp: update to 1.8.0 as sources of 1.7.2 were removed today
+  dbus-c++: update to latest SRCREV
+  dbus-c++: add patch to fix the Makefile
+  Revert "dbus-c++: add patch to fix the Makefile"
+  sflphone-common: add recipe for sflphone (SIP and IAX client) server part
+
+Tom Rini (15):
+  autoconf: Really only build in desired SUBDIRS
+  ltrace: Rework sysdeps dependencies
+  site/powerpc-common: Drop ac_cv_func_dlopen
+  apache2: Fix invoking buildconf
+  e2fsprogs: Fix chattr update-alternatives location
+  linux-jlime-jornada6xx 2.6.25: Move to nonworking
+  busybox-static: Look in ${P}:${BPN} before the main busybox
+  p2020ds: Setup for xserver-xorg
+  mpc8315e-rdb: Setup for xserver-xorg
+  linux: Add CONFIG_MODULES to qemu{ppc,sh4,mips64}
+  iscsi-target: Update for newer kernels
+  uclibc: Enable UCLIBC_USE_NETLINK and UCLIBC_SUPPORT_AI_ADDRCONFIG
+  linux: Add CONFIG_MODULES to qemush4/mips64
+  kernel,cml1.bbclass: Move menuconfig to cml1
+  kernel.bbclass: Drop comment about kernel_do_configure
+
+V=EDctor Manuel J=E1quez Leal (1):
+  scons: add EXTRA_OESCONS
 
 
-In order to build native-sdk-image recipe, I found my self compiling
-glibc_2.9-r37.4, because it is the real provider of virtual-libc-dev (the
-toolchain does not truly provide it -but that is another bug [1]-).
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+OE weekly changelog for holger/staging-branch, 2011-01-10 to 2011-01-17
 
-But the glibc_2.9-r37.4 configuration fails using the canonical
-arm-angstrom-linux-gnueabi- toolchain (using the csl external toolchain fails
-too, but for other reasons):
 
-Log data follows:
-| configure.in:2204: warning: AC_CACHE_VAL(pic_default, ...): suspicious cache-id, must contain _cv_ to be cached
-| ../../lib/autoconf/general.m4:1999: AC_CACHE_VAL is expanded from...
-| ../../lib/autoconf/general.m4:2020: AC_CACHE_CHECK is expanded from...
-| configure.in:2204: the top level
-| checking build system type... x86_64-pc-linux-gnu
-| checking host system type... arm-angstrom-linux-gnueabi
-| checking add-on ports for preconfigure fragments... am33 arm hppa m68k mips
-| configure: running configure fragment for add-on nptl
-| configure: running configure fragment for add-on libidn
-| checking sysdep dirs... ports/sysdeps/arm/elf ports/sysdeps/unix/sysv/linux/arm/eabi/nptl ports/sysdeps/unix/sysv/linux/arm/eabi sysdeps/unix/sysv/linux/arm/eabi ports/sysdeps/unix/sysv/linux/arm/nptl ports/sysdeps/unix/sysv/linux/arm sysdeps/unix/sysv/linux/arm ports/sysdeps/unix/sysv/linux nptl/sysdeps/unix/sysv/linux nptl/sysdeps/pthread sysdeps/pthread sysdeps/unix/sysv/linux sysdeps/gnu sysdeps/unix/common sysdeps/unix/mman sysdeps/unix/inet ports/sysdeps/unix/sysv nptl/sysdeps/unix/sysv sysdeps/unix/sysv ports/sysdeps/unix/arm ports/sysdeps/unix nptl/sysdeps/unix sysdeps/unix sysdeps/posix ports/sysdeps/arm/eabi ports/sysdeps/arm/fpu ports/sysdeps/arm/nptl ports/sysdeps/arm sysdeps/wordsize-32 sysdeps/ieee754/flt-32 sysdeps/ieee754/dbl-64 sysdeps/ieee754 sysdeps/generic/elf sysdeps/generic
-| checking for a BSD-compatible install... /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/bin/install -c
-| checking whether ln -s works... yes
-| checking for arm-angstrom-linux-gnueabi-gcc... ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb
-| checking for suffix of object files... o
-| checking whether we are using the GNU C compiler... yes
-| checking whether ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb accepts -g... yes
-| checking for ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb option to accept ISO C89... unsupported
-| checking for gcc... ccache gcc
-| checking how to run the C preprocessor... arm-angstrom-linux-gnueabi-gcc -E
-| configure: error: C preprocessor "arm-angstrom-linux-gnueabi-gcc -E" fails sanity check
-| See `config.log' for more details.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+Bugs fixed:
+bug_id resolution        short_desc
 
-Reading the config.log I found:
+Bugs opened:
+bug_id resolution        short_desc
 
-configure:3734: checking how to run the C preprocessor
-configure:3850: result: arm-angstrom-linux-gnueabi-gcc -E
-configure:3879: arm-angstrom-linux-gnueabi-gcc -E  conftest.c
-In file included from /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/syslimits.h:7,
-                 from /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h:11,
-                 from conftest.c:10:
-/media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h:122:61: error: limits.h: No such file or directory
-configure:3885: $? = 1
-configure: failed program was:
-| /* confdefs.h.  */
-| #define PACKAGE_NAME "GNU C Library"
-| #define PACKAGE_TARNAME "c-library"
-| #define PACKAGE_VERSION "(see version.h)"
-| #define PACKAGE_STRING "GNU C Library (see version.h)"
-| #define PACKAGE_BUGREPORT "glibc"
-| #define HAVE_LIBIDN 1
-| /* end confdefs.h.  */
-| #ifdef __STDC__
-| # include <limits.h>
-| #else
-| # include <assert.h>
-| #endif
-| 		     Syntax error
-configure:3879: arm-angstrom-linux-gnueabi-gcc -E  conftest.c
-In file included from /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/syslimits.h:7,
-                 from /media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h:11,
-                 from conftest.c:10:
-/media/DISK/meego/vjaquez-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h:122:61: error: limits.h: No such file or directory
-configure:3885: $? = 1
 
-So, the problem is that the pre-processor is _unable_ to find the *correct*
-header limits.h. Why? Because it does not exist in the sysroot!!!!
-
-$ find tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/ -name "limits.h"
-tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include-fixed/limits.h
-tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/c++/4.3.3/tr1/limits.h
-tmp-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/linux/limits.h
-
-Why? Why the toolchain does not install a sane limits.h in a sane directory?
-
-Thanks.
-
-vmjl
-
-1. http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/028942.html
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
 
 
