@@ -1,39 +1,35 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pfreq-0006Uz-FM
+	(envelope-from <vjaquez@igalia.com>) id 1PfroE-0006kS-3c
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 11:22:24 +0100
-Received: by iyj18 with SMTP id 18so436178iyj.6
+	Thu, 20 Jan 2011 11:32:06 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AucFADCeN01bdWOb/2dsb2JhbACWNo8OvhWFUASQTw
+X-IronPort-AV: E=Sophos;i="4.60,350,1291590000"; d="scan'208";a="719757682"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 20 Jan 2011 11:31:26 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pfrna-0006g1-ML
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jan 2011 02:21:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=mCAqSdAdfHUebCDhKTMD+pvo7VxggPZm5ZwbTgQJxyI=;
-	b=ke5EPNr62Ge6I/ZNGKlFBTrnncHvdXlxOrKv106g1nAii5uLy8zvWHq3hxwLrfeax0
-	99dkNbHDxPs74SdQSClcZq9x+E/5y4VeRy8vOzMgiSgi5ZbWDHwUf/uCTfsE+fa8/t1K
-	xlu1E1N1ay1Ac3e2RhFWrVG3FtyvY3FXd+qhI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=fF3PQ7RGUAcN2xwAANYxANPU8VOUFwRTfg2JIcEHeetx8YcWyYsGP6+KVMIyDDkG+8
-	YZsKzOQParTQHYPenWkU/Bc5faDAq28d6M3/rYh+k/S9hgjkdnokTL0OOXaamxCbqGXk
-	vJpNkrw4oqBYG08V8j4e2oYYuZ8P2DweNq2ak=
-MIME-Version: 1.0
-Received: by 10.231.34.205 with SMTP id m13mr2236360ibd.184.1295518903157;
-	Thu, 20 Jan 2011 02:21:43 -0800 (PST)
-Received: by 10.231.213.234 with HTTP; Thu, 20 Jan 2011 02:21:43 -0800 (PST)
-In-Reply-To: <AANLkTik3ysHryPYNcpObiyky4X98=9exDyKtJD_3yu+k@mail.gmail.com>
-References: <4D36F9BE.1010601@xora.org.uk>
-	<AANLkTi=sJGSCRxSF6tFPhrGb=NKfmiLNURg-n-Gmgc3Z@mail.gmail.com>
-	<4D370A54.6020607@xora.org.uk>
-	<AANLkTikUOPo2v+=qYF_afhSHxkyb1EK3HJC1_E4RRGub@mail.gmail.com>
-	<AANLkTik3ysHryPYNcpObiyky4X98=9exDyKtJD_3yu+k@mail.gmail.com>
-Date: Thu, 20 Jan 2011 11:21:43 +0100
-Message-ID: <AANLkTikP0b5DUmNCpc0ST8pgW=B-VPhmX36NJvkm5iPO@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 20 Jan 2011 11:31:26 +0100
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1Pfrna-0003V0-HC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Jan 2011 11:31:26 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>) id 1Pfrna-0007bb-Ca
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Jan 2011 11:31:26 +0100
+Date: Thu, 20 Jan 2011 11:31:26 +0100
+From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: openembedded-core git repository
+Message-ID: <20110120103126.GB26640@lit.local.igalia.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: native-sdk-image do_rootfs() fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2011 10:22:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 20 Jan 2011 10:32:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2011/1/19 Graham Gower <graham.gower@gmail.com>:
-> On 20 January 2011 05:22, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> 2011/1/19 Graeme Gregory <dp@xora.org.uk>:
->>> Core should probably have a build bot which crunches a standard set of
->>> tests on each commit so unlike OE currently people don't wake up to bad
->>> day of debugging OE.
->>
->> I'm not sure if that is needed (at least not on for every commit).
->
-> Doing this for every commit may be good from the point of view of
-> keeping git-bisect useful.
+I'm trying to build a native-sdk-image for pandaboard, both with
+angstrom-linux-gnueabi and external csl toolchains. Both builds failed in the
+same point:
 
-Good point. Didn't think of that!
+| Configuring sysvinit.
+| Collected errors:
+|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for task-sdk-native:
+|  * 	virtual-libc-dev *
+|  * opkg_install_cmd: Cannot install package task-sdk-native.
+|  * resolve_conffiles: Existing conffile /media/DISK/angstrom-setup-scripts/build/tmp-angstrom_2008_1/rootfs/native-sdk-image/etc/device_table is different from the conffile in the new package. The new conffile will be placed at /media/DISK/angstrom-setup-scripts/build/tmp-angstrom_2008_1/rootfs/native-sdk-image/etc/device_table-opkg.
+| ERROR: Function do_rootfs failed
 
-Frans
+I don't know how to deal with this issue. Any advice?
+
+vmjl
 
 
