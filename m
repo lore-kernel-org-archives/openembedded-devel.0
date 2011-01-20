@@ -1,25 +1,35 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jay@jay-tech.ru>) id 1Pg2J2-0004wo-39
+	(envelope-from <raj.khem@gmail.com>) id 1Pg2nX-0002z1-R7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jan 2011 22:44:36 +0100
-Received: by qyk8 with SMTP id 8so2350777qyk.6
+	Thu, 20 Jan 2011 23:16:15 +0100
+Received: by pwi8 with SMTP id 8so211796pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jan 2011 13:43:54 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.224.80.194 with SMTP id u2mr2261267qak.293.1295559833165; Thu,
-	20 Jan 2011 13:43:53 -0800 (PST)
-Sender: jay@jay-tech.ru
-Received: by 10.220.29.2 with HTTP; Thu, 20 Jan 2011 13:43:53 -0800 (PST)
-X-Originating-IP: [95.29.184.245]
-In-Reply-To: <4D389CFB.5010908@gmx.net>
-References: <4D389CFB.5010908@gmx.net>
-Date: Fri, 21 Jan 2011 00:43:53 +0300
-X-Google-Sender-Auth: EdEnS4iMW3u_J_UDaGC2XAKtzTo
-Message-ID: <AANLkTi=o0JrRgZ90LQvtfkjZ47Kuf+DpvDBJLz0G18DA@mail.gmail.com>
-From: Yury Bushmelev <jay4mail@gmail.com>
+	Thu, 20 Jan 2011 14:15:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=EBit32g3UjlP3wXF8/AjZWXOuDkK+zU1p9QsWPE5j8o=;
+	b=PQ3KMZ2DwyazmxtABdKjOUpKA3N8WOmNuOpXjCq6fBOwNRQwbADf1idY3wBA8/haw2
+	Nhyr00um+4aCrc61qk7nXR9baE62XOo2Z584Ju2QEbQ+cxB0Yflw1PHr7s6kAFr+pCTd
+	59WznECROeqz/5I8VaFrEI4InB9iVSxhYugXg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Z0Tx9o7x9WMgeGQh5yODJIj/XkUNj+8eIAzM6BMTHdAazttMUsBIPc83TTzTFiedR2
+	VwdLFwx823KT3JB2dqXc/+gOBVdArWjbEzpdDIB9RrAGnmefc4qpMhot8DNFrSPflJsv
+	CiVreFOlzrtzq1vUjlftMs+H0/S4oiFFlxnZA=
+Received: by 10.142.136.10 with SMTP id j10mr2745220wfd.50.1295561724100;
+	Thu, 20 Jan 2011 14:15:24 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id w42sm11707143wfh.3.2011.01.20.14.15.22
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 20 Jan 2011 14:15:23 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Pictures of embedded devices running OpenEmbedded-based OS
+Date: Thu, 20 Jan 2011 14:15:18 -0800
+Message-Id: <1295561718-19143-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH] preferred-slugos-versions.inc: Prefer perl 5.10.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,22 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2011 21:44:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 20 Jan 2011 22:16:15 -0000
 
-2011/1/20 Robert Schuster <thebohemian@gmx.net>:
-> Hi,
-> for our CeBIT participation I need a few pictures that show an embedded
-> device running an OE-based OS. So if you have something from your pet or
-> professional project that you want to share with the world please send
-> them to me. A few lines of text what is one the pictures is greatly
-> appreciated.
+* We do not need to pin bluez-libs anymore we use bluez4 for everything
 
-Here are some screenshots and photos of devices running kexecboot
-(mostly outdated though):
-http://www.kexecboot.org/about:start#screenshots
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/distro/include/preferred-slugos-versions.inc |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
 
+diff --git a/conf/distro/include/preferred-slugos-versions.inc b/conf/distro/include/preferred-slugos-versions.inc
+index 4649c90..c68d511 100644
+--- a/conf/distro/include/preferred-slugos-versions.inc
++++ b/conf/distro/include/preferred-slugos-versions.inc
+@@ -38,6 +38,8 @@ PREFERRED_VERSION_linux-libc-headers		?= "2.6.31"
+ PREFERRED_VERSION_m4				?= "1.4.14"
+ PREFERRED_VERSION_m4-native			?= "1.4.14"
+ PREFERRED_VERSION_nslu2-linksys-firmware	?= "2.3r63"
++PREFERRED_VERSION_perl				?= "5.10.1"
++PREFERRED_VERSION_perl-native			?= "5.10.1"
+ PREFERRED_VERSION_pkgconfig			?= "0.23"
+ PREFERRED_VERSION_pkgconfig-native		?= "0.23"
+ PREFERRED_VERSION_udev				?= "118"
+@@ -55,6 +57,3 @@ PREFERRED_VERSION_udev				?= "118"
+ 
+ # latest tcl recipe has a bug that overwites regex.h; use the old tcl
+ #PREFERRED_VERSION_tcl				?= "8.4.19"
+-
+-# We need the bluez4 version of the libs, which has default_precedence = -1
+-PREFERRED_VERSION_bluez-libs			?= "4.42"
 -- 
-Yury Bushmelev
+1.7.2.3
+
 
 
