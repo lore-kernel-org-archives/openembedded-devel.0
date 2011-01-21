@@ -1,33 +1,21 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PgEBh-0002JG-Pj
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 11:25:49 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ag4FAELuOE1bdWOb/2dsb2JhbACWSI8Pvl2FUASORIIN
-X-IronPort-AV: E=Sophos;i="4.60,357,1291590000"; d="scan'208";a="322425771"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 21 Jan 2011 11:24:54 +0100
-Received: from [95.61.238.167] (helo=lit.local.igalia.com)
-	by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PgEAo-0003WY-65
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 11:24:54 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PgEAa-0007ax-HB
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 11:24:40 +0100
-Date: Fri, 21 Jan 2011 11:24:40 +0100
-From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PgEQs-0006Gy-5J for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Jan 2011 11:41:30 +0100
+Received: from f053036037.adsl.alicedsl.de ([78.53.36.37]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PgEQE-0007ot-Ml for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Jan 2011 10:40:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110121102440.GB7400@lit.local.igalia.com>
-References: <20110120103126.GB26640@lit.local.igalia.com>
-	<AANLkTinrGpmXqWx8a4AULZduXpQC57VDA40=Z69wu9Dw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTinrGpmXqWx8a4AULZduXpQC57VDA40=Z69wu9Dw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: native-sdk-image do_rootfs() fails
+Date: Fri, 21 Jan 2011 11:40:49 +0100
+Message-ID: <1295606449.12720.38.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: problems with Git server: `fatal: unable to connect a socket (Connection refused)`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +29,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 10:25:49 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 21 Jan 2011 10:41:30 -0000
+X-Groupsio-MsgNum: 28263
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-x6HGm39nkF3z5fmBZlfT"
 
-On Thu, Jan 20, 2011 at 07:04:05PM +0300, Yury Bushmelev wrote:
-> 2011/1/20 Víctor M. Jáquez L. <vjaquez@igalia.com>:
-> > I'm trying to build a native-sdk-image for pandaboard, both with
-> > angstrom-linux-gnueabi and external csl toolchains. Both builds failed in the
-> > same point:
-> >
-> > | Configuring sysvinit.
-> > | Collected errors:
-> > |  * satisfy_dependencies_for: Cannot satisfy the following dependencies for task-sdk-native:
-> > |  *    virtual-libc-dev *
-> > |  * opkg_install_cmd: Cannot install package task-sdk-native.
-> > |  * resolve_conffiles: Existing conffile /media/DISK/angstrom-setup-scripts/build/tmp-angstrom_2008_1/rootfs/native-sdk-image/etc/device_table is different from the conffile in the new package. The new conffile will be placed at /media/DISK/angstrom-setup-scripts/build/tmp-angstrom_2008_1/rootfs/native-sdk-image/etc/device_table-opkg.
-> > | ERROR: Function do_rootfs failed
-> >
-> > I don't know how to deal with this issue. Any advice?
-> 
-> I have built native-sdk-image twice (for qemuarm and for qemux86) this
-> week w/o problems, but for minimal distro.
+--=-x6HGm39nkF3z5fmBZlfT
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'm trying to build an image for the pandaboard but I faced this same issue: 
-
-http://comments.gmane.org/gmane.comp.handhelds.openembedded/4065
-
-(the linux-omap4 kernel compilation broke because of "Error: selected
-processor does not support ARM mode `smc #0'")
-
-So I moved back the binutils version to 2.20.1
-
-vmjl
+Dear OE folks,
 
 
+I just wanted to inform you that I have trouble with the Git server.
+
+        $ git remote update
+        Fetching origin
+        git.openembedded.org[0: 140.211.169.165]: errno=3DConnection
+        refused
+        fatal: unable to connect a socket (Connection refused)
+        error: Could not fetch origin
+
+I am able to reproduce this from two different locations.
+
+
+Thanks,
+
+Paul
+
+--=-x6HGm39nkF3z5fmBZlfT
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk05YrEACgkQPX1aK2wOHVjTjACdFcdnY2DOgihCIQ8mb4v0f46B
+4akAnRJg8oPmAHoaH4x5Le7p0hJmMIyo
+=Iaf8
+-----END PGP SIGNATURE-----
+
+--=-x6HGm39nkF3z5fmBZlfT--
