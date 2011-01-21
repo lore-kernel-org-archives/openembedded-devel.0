@@ -1,35 +1,31 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PgJw8-0001ch-B3
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PgK6w-0001nS-33
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 17:34:08 +0100
-Received: by gxk20 with SMTP id 20so646443gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 08:33:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=jSZkacFriOPoqpRBS9Gf8xT8vQ90+BYXD9m3CGs/+B4=;
-	b=oSS9PswUHDDLFcXKhhfcLfWVNtP4K5tIQIXIPKT74pNOHu3bcIkvMZPyv/LSF5baqy
-	wyCCSjVECxLFhgNUE1vp717Poz2sR1XmxVEzI+jiHuXH6gfvMnlCPfjAXCWX/LsZiJum
-	q+szbhRlkc7YbHf5TlWBOlu+k3eN4RERJV6Ao=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=cEm1AbjKcd12wSiQlJG439nO1UtMyqZ2jWaBkRmv54nEG5IIABO3ix6QkdxywCT/aY
-	D20NuprDdzT94IBrLnWaSrn1D/Ymv7Gx7yfArgBS4MxgGp7PjlUWaNvSnR8hHolUyaNo
-	CkLumyz9yqQCJXWa99YaaHSQDi+sxFNqnlVZA=
-Received: by 10.91.163.27 with SMTP id q27mr1015296ago.139.1295627605402; Fri,
-	21 Jan 2011 08:33:25 -0800 (PST)
+	Fri, 21 Jan 2011 17:45:18 +0100
+Received: (qmail 24764 invoked by uid 503); 21 Jan 2011 16:48:09 -0000
+Received: from b9.ovh.net (HELO mail95.ha.ovh.net) (213.186.33.59)
+	by 26.mail-out.ovh.net with SMTP; 21 Jan 2011 16:48:09 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 21 Jan 2011 18:44:37 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 21 Jan 2011 18:44:36 +0200
+Message-ID: <4D39B7F4.6050403@eukrea.com>
+Date: Fri, 21 Jan 2011 17:44:36 +0100
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Fri, 21 Jan 2011 08:33:03 -0800 (PST)
-In-Reply-To: <4D394AC0.90300@eukrea.com>
-References: <1295598581-12927-1-git-send-email-raj.khem@gmail.com>
-	<4D394AC0.90300@eukrea.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 21 Jan 2011 08:33:03 -0800
-Message-ID: <AANLkTi=Jdmsr8sYYpOMTOqdpoi9iHiyFBcAAqnfoaMAN@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
+References: <1295598581-12927-1-git-send-email-raj.khem@gmail.com>	<4D394AC0.90300@eukrea.com>
+	<AANLkTi=Jdmsr8sYYpOMTOqdpoi9iHiyFBcAAqnfoaMAN@mail.gmail.com>
+In-Reply-To: <AANLkTi=Jdmsr8sYYpOMTOqdpoi9iHiyFBcAAqnfoaMAN@mail.gmail.com>
+X-Ovh-Tracer-Id: 13255219605255990601
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
 Subject: Re: [PATCH 3/3] busybox_1.18.2.bb: slugos needs a modified version of usb.sh script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,34 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 16:34:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 Jan 2011 16:45:18 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jan 21, 2011 at 12:58 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> Hi Khem,
->
-> On 21/01/2011 09:29, Khem Raj wrote:
+On 21/01/2011 17:33, Khem Raj wrote:
+> On Fri, Jan 21, 2011 at 12:58 AM, Eric Bénard<eric@eukrea.com>  wrote:
+>> Hi Khem,
 >>
->> Signed-off-by: Khem Raj<raj.khem@gmail.com>
->> ---
->> =C2=A0recipes/busybox/busybox-1.18.2/slugos/usb.sh | =C2=A0 33
->> ++++++++++++++++++++++++++
+>> On 21/01/2011 09:29, Khem Raj wrote:
+>>>
+>>> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+>>> ---
+>>>   recipes/busybox/busybox-1.18.2/slugos/usb.sh |   33
+>>> ++++++++++++++++++++++++++
+>>
+>> Can't it become the generic script ? What makes it slugos specific ? (I
+>> didn't make a diff vs the other one so the question may be stupid ;-)
+>>
 >
-> Can't it become the generic script ? What makes it slugos specific ? (I
-> didn't make a diff vs the other one so the question may be stupid ;-)
+> you should have diffed them. uevents are stored in different directory on slugos
 >
+you could also put this in the commit log to prevent this diff to discover 
+what is the change :-)
 
-you should have diffed them. uevents are stored in different directory on s=
-lugos
 
-> Thanks,
-> Eric
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Eric
 
 
