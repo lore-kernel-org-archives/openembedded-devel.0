@@ -1,31 +1,33 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PgCqD-0005TF-Th
+Received: from smtp4.mundo-r.com ([212.51.32.151])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>) id 1PgE7z-0002FX-EZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 09:59:34 +0100
-Received: (qmail 14110 invoked by uid 503); 21 Jan 2011 09:02:18 -0000
-Received: from b9.ovh.net (HELO mail95.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 21 Jan 2011 09:02:18 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 21 Jan 2011 10:58:46 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 21 Jan 2011 10:58:44 +0200
-Message-ID: <4D394AC0.90300@eukrea.com>
-Date: Fri, 21 Jan 2011 09:58:40 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
-MIME-Version: 1.0
+	Fri, 21 Jan 2011 11:21:59 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Ag4FACLtOE1bdWOb/2dsb2JhbACWSI8PvlOFUASKK4QZgg0
+X-IronPort-AV: E=Sophos;i="4.60,357,1291590000"; d="scan'208";a="322424245"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 21 Jan 2011 11:21:16 +0100
+Received: from [95.61.238.167] (helo=lit.local.igalia.com)
+	by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PgE7I-0003V4-36
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Jan 2011 11:21:16 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>) id 1PgE74-0005R2-Hd
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Jan 2011 11:21:02 +0100
+Date: Fri, 21 Jan 2011 11:21:02 +0100
+From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1295598581-12927-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1295598581-12927-1-git-send-email-raj.khem@gmail.com>
-X-Ovh-Tracer-Id: 5387431054748593481
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH 3/3] busybox_1.18.2.bb: slugos needs a modified version of usb.sh script
+Message-ID: <20110121102102.GA7400@lit.local.igalia.com>
+References: <20110120181233.GA1789@lit.local.igalia.com>
+	<AANLkTin6XfEpo_ic0Edp8+58EbzGutuhohM-V4EzzwhJ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTin6XfEpo_ic0Edp8+58EbzGutuhohM-V4EzzwhJ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,21 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 08:59:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 21 Jan 2011 10:21:59 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Hi Khem,
+On Thu, Jan 20, 2011 at 01:40:19PM -0800, Khem Raj wrote:
+> 2011/1/20 Víctor M. Jáquez L. <vjaquez@igalia.com>:
+> >
+> > In order to build native-sdk-image recipe, I found my self compiling
+> > glibc_2.9-r37.4, because it is the real provider of virtual-libc-dev (the
+> > toolchain does not truly provide it -but that is another bug [1]-).
+> >
+> > But the glibc_2.9-r37.4 configuration fails using the canonical
+> > arm-angstrom-linux-gnueabi- toolchain (using the csl external toolchain fails
+> > too, but for other reasons):
+> >
+> > Log data follows:
+> > [snip]
+> 
+> 
+> you might try to use eglibc. It may fix this issue for you.
+> 
 
-On 21/01/2011 09:29, Khem Raj wrote:
-> Signed-off-by: Khem Raj<raj.khem@gmail.com>
-> ---
->   recipes/busybox/busybox-1.18.2/slugos/usb.sh |   33 ++++++++++++++++++++++++++
+Thanks. I'm giving a try to minimal distribution according to Yuri's
+observation [1].
 
-Can't it become the generic script ? What makes it slugos specific ? (I didn't 
-make a diff vs the other one so the question may be stupid ;-)
-
-Thanks,
-Eric
+1. http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/028950.html
 
 
