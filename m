@@ -1,26 +1,21 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PgGDG-0008Ff-Br for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 13:35:34 +0100
+	id 1PgGMv-0001on-SS for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Jan 2011 13:45:33 +0100
 Received: from f053036037.adsl.alicedsl.de ([78.53.36.37]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PgGCc-0002Ua-Oi for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 12:34:54 +0000
+	id 1PgGMH-0002r7-Vm; Fri, 21 Jan 2011 12:44:54 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=LkWW3wOXJtmQsSPcCRrofqY15osKL2u9UBYvr@mail.gmail.com>
-References: <AANLkTinhZBY4ODjB9h3y+Ep-hXBu6O85cB95h4_KFxmP@mail.gmail.com>
-	<AANLkTim0+yJ+oKSteOQ-22_PCPFB_KQ0NRw73VDyq478@mail.gmail.com>
-	<4D38D77E.7070000@mentor.com>
-	<AANLkTi=LkWW3wOXJtmQsSPcCRrofqY15osKL2u9UBYvr@mail.gmail.com>
-Date: Fri, 21 Jan 2011 13:34:53 +0100
-Message-ID: <1295613293.12720.52.camel@mattotaupa>
+Date: Fri, 21 Jan 2011 13:44:52 +0100
+Message-ID: <1295613892.12720.58.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
-Subject: ltp_20100831: `WARNING: Deprecated usage of 'patch' url param` (was: testing branch 2011-01-20)
+Cc: Leon Woestenberg <leon@sidebranch.com>
+Subject: [PATCH] ltp_20100831: `${PN}-dbg`: use `+=` instead of `=` to append to the list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,53 +29,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 12:35:34 -0000
-X-Groupsio-MsgNum: 28272
+X-List-Received-Date: Fri, 21 Jan 2011 12:45:34 -0000
+X-Groupsio-MsgNum: 28273
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-v35TuqA55CoW3PpRWa/2"
+	boundary="=-vAuZI9HlagGdoS+Bos8a"
 
---=-v35TuqA55CoW3PpRWa/2
+--=-vAuZI9HlagGdoS+Bos8a
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 21.01.2011, 08:52 +0100 schrieb Frans Meulenbroeks:
+Date: Fri, 21 Jan 2011 13:35:37 +0100
 
-[=E2=80=A6]
-
-> The others seem to be more general. I'll copy from the sheevaplug log.
->=20
-> on starting the builld, I get:
-> Parsing .bb files, please wait...WARNING: Deprecated usage of 'patch'
-> url param for '/home/hudson/jobs/OE_test/workspace/openembedded/recipes/l=
-tp/ltp-20100831/runalltests.patch',
-> please use 'apply=3D{yes,no}'
-
-Khem fixed this in e4b91191 [1].
-
-    ltp_20100831.bb: Fix deprecated usage to specify patch in SRC_URI
-
-[=E2=80=A6]
+Populating `${PN}-dbg` the second entry replaces the list instead of append=
+ing to it [1].
 
 
-Thanks,
+[1] http://docs.openembedded.org/usermanual/usermanual.html#metadata_writin=
+g_data
 
-Paul
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+CC: Leon Woestenberg <leon@sidebranch.com>
+---
+I also replaced the first `=3D` to `+=3D` in case the classes find symbols/=
+files to distribute in that package.
+---
+ recipes/ltp/ltp_20100831.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/recipes/ltp/ltp_20100831.bb b/recipes/ltp/ltp_20100831.bb
+index f705405..ca6a4e3 100644
+--- a/recipes/ltp/ltp_20100831.bb
++++ b/recipes/ltp/ltp_20100831.bb
+@@ -15,8 +15,8 @@ S =3D "${WORKDIR}/ltp-full-${PV}"
+=20
+ EXTRA_OEMAKE_append =3D " CROSS_COMPILE=3D${HOST_PREFIX} SKIP_IDCHECK=3D1"
+=20
+-FILES_${PN}-dbg =3D "/usr/.debug"
+-FILES_${PN}-dbg =3D "/usr/bin/.debug"
++FILES_${PN}-dbg +=3D "/usr/.debug"
++FILES_${PN}-dbg +=3D "/usr/bin/.debug"
+ FILES_${PN}-dbg +=3D "/usr/runtest/.debug"
+ FILES_${PN}-dbg +=3D "/usr/testcases/bin/.debug"
+ FILES_${PN}-dbg +=3D "/usr/testcases/bin/*/bin/.debug"
+--=20
+1.7.2.3
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De4b9119=
-1909d47a00b6e7de62ce1eea78a2a5a86
-
---=-v35TuqA55CoW3PpRWa/2
+--=-vAuZI9HlagGdoS+Bos8a
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAk05fW0ACgkQPX1aK2wOHVgrIACggseGeM0q8/MmcYZLEZCKMgP5
-BxIAniXR0FLeLK01kn2KbjWM8KBLhn+h
-=lAau
+iEYEABECAAYFAk05f8QACgkQPX1aK2wOHVhjdQCfX0/Rtssy24jeSkvAMzoXgRDx
+jPMAn16LFEtTttMNY/Va8hpG/RUWKTdG
+=KiA/
 -----END PGP SIGNATURE-----
 
---=-v35TuqA55CoW3PpRWa/2--
+--=-vAuZI9HlagGdoS+Bos8a--
