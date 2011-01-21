@@ -1,37 +1,35 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PgLXW-0003kv-Nd
+	(envelope-from <raj.khem@gmail.com>) id 1PgLoU-00042U-It
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 19:16:51 +0100
-Received: by gwaa12 with SMTP id a12so678580gwa.6
+	Fri, 21 Jan 2011 19:34:22 +0100
+Received: by pwi8 with SMTP id 8so386663pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 10:16:08 -0800 (PST)
+	Fri, 21 Jan 2011 10:33:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=cWdhEWziKSK3ZKvYjpKim29lfPT5t3hx7LwfXJ/vwJQ=;
-	b=RQBFgZp8OvQlY3ABLHitgl8xuBuegC1kcJ3n8DB7t0hcd7P0GEQHyTRDQhXZyGNMDn
-	Td+B0WyrOi+amN6nAgzer5oocPDEDoJ5JDZ/MU8n1BhTy5SvVS+8S2Fxoc6VL5sMbHOC
-	OZG01Soi0nGGBQ91XK5CJvOjqZmOpyqKRtqg4=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=5z8VP71JbnLNCzMlWz7gkdJVvVmKmuAuzUc+ikjr+QM=;
+	b=js7lGkqUDAlbakWIB4JKBF9RqmQg7ItgAn/MhMiIcd2z8cTxIZhPMxpTtuOykmlsMH
+	5nybJCL5vnlxgEWAbzj03uFyI057jSP8uygMatXrEzysRf95du7NbfeMejPysMVyWQq/
+	sir6z7px0TeflzY8vdt7avxuQHodddXt0K1xc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=Cx8aUV0zvulCyxYrzP2pQFBnp9RP1hdbqSWRvfWLH0ieuS+RzDp530GO1lohN9dF9Q
-	8J3pBCrCPDRIca/ETIhNt2hLVgp1yLELQxjn9yaGxp1MAYf8Eu+j5PN9mLNVG2WrUJ+x
-	ghOWIK/RQfOKvOnn8iuK3Ow+5LnjaHf48kHZQ=
-Received: by 10.90.1.2 with SMTP id 2mr1179395aga.58.1295633766752; Fri, 21
-	Jan 2011 10:16:06 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Fri, 21 Jan 2011 10:15:42 -0800 (PST)
-In-Reply-To: <20110121102440.GB7400@lit.local.igalia.com>
-References: <20110120103126.GB26640@lit.local.igalia.com>
-	<AANLkTinrGpmXqWx8a4AULZduXpQC57VDA40=Z69wu9Dw@mail.gmail.com>
-	<20110121102440.GB7400@lit.local.igalia.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=nGIp6+Yp2aWJTm+f4Iptu+FriaJqaCrBXngcUCjE65gw2LvZ2Ti85msjcpulmyIVjd
+	D0V2x+idA3oz4TSFu9M2WfRg2gYapkf/g9tqrs+NOicqgxiarh90nDPbnK3oemSlh5jH
+	fot8PHLvUIdyp2Da3N+2SAi9XaQS9lbj/qtEY=
+Received: by 10.142.11.13 with SMTP id 13mr1016369wfk.203.1295634818907;
+	Fri, 21 Jan 2011 10:33:38 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id v19sm13018603wfh.0.2011.01.21.10.33.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 21 Jan 2011 10:33:38 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 21 Jan 2011 10:15:42 -0800
-Message-ID: <AANLkTim7WH5h+ebREpL=8xX2JEHt7n9TGZo9HfZBrhnd@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: native-sdk-image do_rootfs() fails
+Date: Fri, 21 Jan 2011 10:33:31 -0800
+Message-Id: <1295634811-5751-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH 4/4] conf/distro/include/slugos.inc: Remove redundant virtuals
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 18:16:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 Jan 2011 18:34:22 -0000
 
-2011/1/21 V=C3=ADctor M. J=C3=A1quez L. <vjaquez@igalia.com>:
->
-> I'm trying to build an image for the pandaboard but I faced this same iss=
-ue:
->
-> http://comments.gmane.org/gmane.comp.handhelds.openembedded/4065
->
-> (the linux-omap4 kernel compilation broke because of "Error: selected
-> processor does not support ARM mode `smc #0'")
->
-> So I moved back the binutils version to 2.20.1
->
- No you should not do that. Its a coding problem and you should fix the ker=
-nel
-Read my response in below post
-http://comments.gmane.org/gmane.comp.handhelds.openembedded/40650
-and port those 2 patches to your kernel
+* Slugos now gets them correctly defined through sane-toolchain includes
 
-Thanks
--Khem
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/distro/include/slugos.inc |   11 -----------
+ 1 files changed, 0 insertions(+), 11 deletions(-)
+
+diff --git a/conf/distro/include/slugos.inc b/conf/distro/include/slugos.inc
+index 0ed22d2..4c5b463 100644
+--- a/conf/distro/include/slugos.inc
++++ b/conf/distro/include/slugos.inc
+@@ -123,17 +123,6 @@ IGNORE_STRIP_ERRORS = ""
+ # kernel, so there has to be a non-libc gcc to build the kernel!)
+ 
+ # Virtuals:
+-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial	    = "gcc-cross-initial"
+-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "gcc-cross-intermediate"
+-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc		    = "gcc-cross"
+-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++		    = "gcc-cross"
+-
+-# Set the preferred provider for a few toolchain-related items, otherwise
+-# these may be selected from the external-toolchain instead.
+-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils	    = "binutils-cross"
+-PREFERRED_PROVIDER_virtual/arm-linux-binutils		    = "binutils-cross"
+-PREFERRED_PROVIDER_virtual/armeb-linux-binutils		    = "binutils-cross"
+-PREFERRED_PROVIDER_linux-libc-headers			    = "linux-libc-headers"
+ 
+ # Select the appropriate x11 library provider.  The diet-x11 libraries are
+ # much smaller, but may not be as current as the standard x11 libraries; by
+-- 
+1.7.2.3
+
 
 
