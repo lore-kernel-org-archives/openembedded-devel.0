@@ -1,25 +1,36 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mickey@vanille-media.de>) id 1PgIft-0005pF-Ak
+	(envelope-from <raj.khem@gmail.com>) id 1PgJw8-0001ch-B3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 16:13:17 +0100
-Received: from [192.168.1.13] (business-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 2ACC6584150; 
-	Fri, 21 Jan 2011 16:29:16 +0100 (CET)
-Mime-Version: 1.0 (Apple Message framework v1082)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <4D39988B.5020204@balister.org>
-Date: Fri, 21 Jan 2011 16:12:37 +0100
-Message-Id: <EA608C6A-B2F2-4F94-9C66-5564E394D06C@vanille-media.de>
-References: <20110120181233.GA1789@lit.local.igalia.com>	<ihbp5c$4ov$1@dough.gmane.org>
-	<AANLkTimBieqoDRmVfoYmTVpehrmtCk-N=M8bKgRWumN0@mail.gmail.com>
-	<4D39988B.5020204@balister.org>
-To: Philip Balister <philip@balister.org>
-X-Mailer: Apple Mail (2.1082)
-Cc: board@openembedded.org, openembedded-devel@lists.openembedded.org
-Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
+	Fri, 21 Jan 2011 17:34:08 +0100
+Received: by gxk20 with SMTP id 20so646443gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Jan 2011 08:33:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=jSZkacFriOPoqpRBS9Gf8xT8vQ90+BYXD9m3CGs/+B4=;
+	b=oSS9PswUHDDLFcXKhhfcLfWVNtP4K5tIQIXIPKT74pNOHu3bcIkvMZPyv/LSF5baqy
+	wyCCSjVECxLFhgNUE1vp717Poz2sR1XmxVEzI+jiHuXH6gfvMnlCPfjAXCWX/LsZiJum
+	q+szbhRlkc7YbHf5TlWBOlu+k3eN4RERJV6Ao=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=cEm1AbjKcd12wSiQlJG439nO1UtMyqZ2jWaBkRmv54nEG5IIABO3ix6QkdxywCT/aY
+	D20NuprDdzT94IBrLnWaSrn1D/Ymv7Gx7yfArgBS4MxgGp7PjlUWaNvSnR8hHolUyaNo
+	CkLumyz9yqQCJXWa99YaaHSQDi+sxFNqnlVZA=
+Received: by 10.91.163.27 with SMTP id q27mr1015296ago.139.1295627605402; Fri,
+	21 Jan 2011 08:33:25 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.90.55.10 with HTTP; Fri, 21 Jan 2011 08:33:03 -0800 (PST)
+In-Reply-To: <4D394AC0.90300@eukrea.com>
+References: <1295598581-12927-1-git-send-email-raj.khem@gmail.com>
+	<4D394AC0.90300@eukrea.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 21 Jan 2011 08:33:03 -0800
+Message-ID: <AANLkTi=Jdmsr8sYYpOMTOqdpoi9iHiyFBcAAqnfoaMAN@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 3/3] busybox_1.18.2.bb: slugos needs a modified version of usb.sh script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,18 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 15:13:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 21 Jan 2011 16:34:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Philip,
+On Fri, Jan 21, 2011 at 12:58 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+> Hi Khem,
+>
+> On 21/01/2011 09:29, Khem Raj wrote:
+>>
+>> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+>> ---
+>> =C2=A0recipes/busybox/busybox-1.18.2/slugos/usb.sh | =C2=A0 33
+>> ++++++++++++++++++++++++++
+>
+> Can't it become the generic script ? What makes it slugos specific ? (I
+> didn't make a diff vs the other one so the question may be stupid ;-)
+>
 
-unfortunately you're not commenting on Frans' actual point,
-which no longer has anything to do with the u-boot thing.
+you should have diffed them. uevents are stored in different directory on s=
+lugos
 
-Board, when can we schedule a meeting?
-
-:M:
-
+> Thanks,
+> Eric
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
