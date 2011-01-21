@@ -1,35 +1,35 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PgCMA-0007x6-NI
+	(envelope-from <raj.khem@gmail.com>) id 1PgCO7-0007zl-7q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 09:28:30 +0100
-Received: by pvd12 with SMTP id 12so279589pvd.6
+	Fri, 21 Jan 2011 09:30:32 +0100
+Received: by pwi8 with SMTP id 8so286005pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 00:27:44 -0800 (PST)
+	Fri, 21 Jan 2011 00:29:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=q3YzczxByl9XavjvDMm4d4s5UNilEjXDjiZ4LiOt2qg=;
-	b=mEQqrvfMpIkMSGodDhzEWl7k58S2F3hrWlyzUppnkSzSJc5YDU3JqUcBhMK2lpz05u
-	Z+1MhSsO8b9gVI6ebW+WdaTyLwJgP5TUuqmaZd0dw/bC5ayAsjoPwxVP2PuHc9iFOvCv
-	u7PZjOeumUuDMnzkALvm8bCyWermPZAnt6WDg=
+	bh=KnN2+uvgLmq3c7FlkYU4VJJsEXdFAN0aApQf/eEeClw=;
+	b=pt3nhekiZNE4wE95v1aFyB0Bhhy1VJpmn7+uOS7NtpFGUFApMXGVskWZhRCvezk1Bw
+	HUlx8P6SN4PZ96JE+Emr2aM2ngya3GwElZMogJmwClAPGgI6VPt3WnMwITMbWGx2UAsK
+	iesR86LXYzV6laPK+jCR9EwXrw7yBE33imJac=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=LlDK/DuSN6s7LWwaZPiCQwYtXqL4hdqZo19K7q3N5lPm4OqSA2YYXo2p7I5wgmyhcW
-	mGs9DXXo1KHRy9n/PabtQcmrIwf8a0BLe0r2gSgb5WuiRxZ8h32N19V1cvXudD/sgiil
-	2K8CydxZrL0TeRaBh6G/3f8ipDlxnenxyvW5g=
-Received: by 10.142.186.14 with SMTP id j14mr306114wff.257.1295598464537;
-	Fri, 21 Jan 2011 00:27:44 -0800 (PST)
+	b=qxBsxkbFMVqy89sbv7V7H8L6PEZEjG/HkgTYo0gsebHA5ey9MLA3lknROu6qnYhhfA
+	bdnvxjVDxNEtDmt9PaCEUEjWKMZZfV2wfy1P5SsPjuAGeP+TcKiCIlvPRlIZId8/t5PB
+	c9swdmjTO5qFLu06Yb7ThL1jWZBzoj1ntBW7k=
+Received: by 10.142.107.19 with SMTP id f19mr299098wfc.394.1295598587976;
+	Fri, 21 Jan 2011 00:29:47 -0800 (PST)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id x35sm12318284wfd.13.2011.01.21.00.27.42
+	by mx.google.com with ESMTPS id y42sm12321755wfd.22.2011.01.21.00.29.46
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 21 Jan 2011 00:27:43 -0800 (PST)
+	Fri, 21 Jan 2011 00:29:46 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Jan 2011 00:27:35 -0800
-Message-Id: <1295598456-12847-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 21 Jan 2011 00:29:41 -0800
+Message-Id: <1295598581-12927-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.2.3
-Subject: [PATCH 1/2] slugos.conf: Define IMAGE_DEV_MANAGER to be udev
+Subject: [PATCH 3/3] busybox_1.18.2.bb: slugos needs a modified version of usb.sh script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,41 +43,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 08:28:31 -0000
-
-* Dont hardcode udev to RDEPENDS but use IMAGE_DEV_MANAGER
+X-List-Received-Date: Fri, 21 Jan 2011 08:30:32 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/distro/slugos.conf      |    1 +
- recipes/tasks/task-slugos.bb |    2 +-
- 2 files changed, 2 insertions(+), 1 deletions(-)
+ recipes/busybox/busybox-1.18.2/slugos/usb.sh |   33 ++++++++++++++++++++++++++
+ recipes/busybox/busybox_1.18.2.bb            |    2 +-
+ 2 files changed, 34 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/busybox/busybox-1.18.2/slugos/usb.sh
 
-diff --git a/conf/distro/slugos.conf b/conf/distro/slugos.conf
-index 853a58e..96c2f45 100644
---- a/conf/distro/slugos.conf
-+++ b/conf/distro/slugos.conf
-@@ -15,6 +15,7 @@ IPKG_VARIANT ?= "opkg-nogpg-nocurl-slugos"
- PREFERRED_PROVIDER_opkg ?= "opkg-nogpg-nocurl-slugos"
- PREFERRED_PROVIDER_virtual/update-alternatives ?= "opkg-nogpg-nocurl-slugos"
- IMAGE_INITSCRIPTS ?= "initscripts-slugos"
-+IMAGE_DEV_MANAGER = "udev"
- # Disable installing ldconfig
- USE_LDCONFIG = "0"
- require conf/distro/include/slugos.inc
-diff --git a/recipes/tasks/task-slugos.bb b/recipes/tasks/task-slugos.bb
-index 88475cd..ffaac67 100644
---- a/recipes/tasks/task-slugos.bb
-+++ b/recipes/tasks/task-slugos.bb
-@@ -132,7 +132,7 @@ RDEPENDS_${PN} += "\
- 	kernel \
- 	base-files base-passwd netbase \
-         busybox initscripts-slugos slugos-init \
--        update-modules udev \
-+        update-modules ${IMAGE_DEV_MANAGER}  \
- 	module-init-tools modutils-initscripts \
- 	libgcc \
- 	beep \
+diff --git a/recipes/busybox/busybox-1.18.2/slugos/usb.sh b/recipes/busybox/busybox-1.18.2/slugos/usb.sh
+new file mode 100644
+index 0000000..172fdc6
+--- /dev/null
++++ b/recipes/busybox/busybox-1.18.2/slugos/usb.sh
+@@ -0,0 +1,33 @@
++#!/bin/sh
++
++case "$ACTION" in
++  add|"")
++    for uevent in /sys/class/usb_endpoint/usbdev?.*/*/uevent; do
++      . $uevent
++      if [ ! -e /dev/bus/usb/$BUSNUM/$DEVNUM ]; then
++        mkdir -p /dev/bus/usb/$BUSNUM
++        mknod /dev/bus/usb/$BUSNUM/$DEVNUM c 189 $MINOR
++      fi
++    done
++    ;;
++  remove)
++    for device in /dev/bus/usb/*/*; do
++      REMOVED=1
++      dev=`basename $device`
++      bus=`basename $(dirname $device)`
++      for uevent in /sys/class/usb_endpoint/usbdev?.*/*/uevent; do
++        . $uevent
++        if [ $dev -eq $DEVNUM ] && [ $bus -eq $BUSNUM ]; then
++          REMOVED=0
++          break;
++        fi
++      done
++      if [ $REMOVED -eq 1 ]; then
++        rm /dev/bus/usb/$bus/$dev
++        if [ -z $(ls /dev/bus/usb/$bus/) ]; then
++          rmdir /dev/bus/usb/$bus/
++        fi
++      fi
++    done
++    ;;
++esac
+diff --git a/recipes/busybox/busybox_1.18.2.bb b/recipes/busybox/busybox_1.18.2.bb
+index e6d17d3..7c47ab4 100644
+--- a/recipes/busybox/busybox_1.18.2.bb
++++ b/recipes/busybox/busybox_1.18.2.bb
+@@ -1,5 +1,5 @@
+ require busybox_1.1x.inc
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
+ 
+ SRC_URI += " \
+ 	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-modprobe-small.patch;name=patch01 \
 -- 
 1.7.2.3
 
