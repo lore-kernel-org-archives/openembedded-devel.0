@@ -1,21 +1,39 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PgF5Z-0002kV-A7 for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 12:23:33 +0100
-Received: from f053036037.adsl.alicedsl.de ([78.53.36.37]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PgF4v-0000Aw-MD for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 11:22:53 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <otavio.salvador@gmail.com>) id 1PgF8d-0002q3-Ep
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Jan 2011 12:26:44 +0100
+Received: by bwz10 with SMTP id 10so1560152bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Jan 2011 03:26:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=HKfduiIbC3TSsbNJQi59Ttykm3vgvKOLsyJpBCmgPgw=;
+	b=XTu1tUm3InLa7xCjTLTYrhrRhh/KiLDHRWPV5T1yAwYM0Vs3Ji4oEgNrYCe6PjUpGv
+	X13qtRZUQ5PsiTKVdC+V2Ivg3wMP4l6a2aljw46TuLI0MaxaPNQVGC2QIkrrES+kT5W1
+	XtyuEhF2vBqygK0bOUn+ybn71ilVwMejRFl7E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=f98bSLVVztxQfTU24wI12lWswg0UGNRh8CB0p0PZDlAeHfGmxQh36VjHbIkVxpCd7x
+	+l6ceIhb+22jWWfglwgjBYnRuAQ7aBZfXsfTnD0frAK/TERNKMa/dD4P762Gax89FWW7
+	GNBIdiy1DPZtf8aWlXmyY5FoD+pAex+dGSBxE=
+MIME-Version: 1.0
+Received: by 10.204.68.69 with SMTP id u5mr441463bki.99.1295609162963; Fri, 21
+	Jan 2011 03:26:02 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.59.147 with HTTP; Fri, 21 Jan 2011 03:26:02 -0800 (PST)
+In-Reply-To: <1295606449.12720.38.camel@mattotaupa>
+References: <1295606449.12720.38.camel@mattotaupa>
+Date: Fri, 21 Jan 2011 09:26:02 -0200
+X-Google-Sender-Auth: OGKjHVgDfaBX8hfcUHPpHZ_wdfs
+Message-ID: <AANLkTi=MHys=ShhSnVt0C8kyhescObNdormVScOvacN1@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Jan 2011 12:22:52 +0100
-Message-ID: <1295608972.12720.47.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: vdr: minimal-uclibc: task `compile` fails with `undefined reference to `_nl_msg_cat_cntr'`
+Subject: Re: problems with Git server: `fatal: unable to connect a socket (Connection refused)`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,98 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 11:23:33 -0000
-X-Groupsio-MsgNum: 28266
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Xci03uxPBtBYj6lL0gFj"
-
---=-Xci03uxPBtBYj6lL0gFj
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 21 Jan 2011 11:26:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+On Fri, Jan 21, 2011 at 08:40, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> =A0 =A0 =A0 =A0$ git remote update
+> =A0 =A0 =A0 =A0Fetching origin
+> =A0 =A0 =A0 =A0git.openembedded.org[0: 140.211.169.165]: errno=3DConnecti=
+on
+> =A0 =A0 =A0 =A0refused
+> =A0 =A0 =A0 =A0fatal: unable to connect a socket (Connection refused)
+> =A0 =A0 =A0 =A0error: Could not fetch origin
+
+Same here.
+
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
-task `compile` of `vdr_1.7.16` fails with the following error messages.
-
-        ar ru libsi.a util.o si.o section.o descriptor.o
-        ar: creating libsi.a
-        make[1]: Leaving directory `/home/paul/oe/build-minimal-uclibc/mini=
-mal-uclibc-dev/work/armv7a-oe-linux-uclibceabi/vdr-1.7.16-r1/vdr-1.7.16/lib=
-si'
-        arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8 -mf=
-pu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/home/p=
-aul/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
-ibceabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename=
--registers -Os -pipe -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl=
-,-O1 -Wl,--hash-style=3Dgnu audio.o channels.o ci.o config.o cutter.o devic=
-e.o diseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o e=
-itscan.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menu=
-items.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o reco=
-rder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.=
-o skinclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o=
- svdrp.o themes.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -lj=
-peg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig  ./libsi/libsi.a -o v=
-dr
-        tools.o: In function `TouchFile(char const*)':
-        tools.c:(.text+0xb54): warning: the use of OBSOLESCENT `utime' is d=
-iscouraged, use `utimes'
-        i18n.o: In function `SetEnvLanguage(char const*)':
-        i18n.c:(.text+0xb0): undefined reference to `_nl_msg_cat_cntr'
-        i18n.o: In function `I18nRegister(char const*)':
-        i18n.c:(.text+0xd4): undefined reference to `bindtextdomain'
-        i18n.o: In function `I18nTranslate(char const*, char const*)':
-        i18n.c:(.text+0x1c0): undefined reference to `dgettext'
-        i18n.c:(.text+0x1c8): undefined reference to `gettext'
-        i18n.o: In function `I18nInitialize(char const*)':
-        i18n.c:(.text+0x550): undefined reference to `textdomain'
-        i18n.c:(.text+0x55c): undefined reference to `bindtextdomain'
-        i18n.c:(.text+0x600): undefined reference to `gettext'
-        i18n.c:(.text+0x684): undefined reference to `gettext'
-        collect2: ld returned 1 exit status
-        make: *** [vdr] Error 1
-        FATAL: oe_runmake failed
-        ERROR: Function do_compile failed
-
-`bitbake -k vdr` was executed with 6db34075 (uClibc 0.9.32-rc2) [1] and
-`minimal-uclibc` for `MACHINE =3D "beagleboard"`. I guess it is related to
-the uClibc upgrade.
-
-Using `angstrom-2008.1` or `minimal` the recipe builds fine.
-
-
-Thanks,
-
-Paul
-
-
-PS: Another off topic question. Is there a guideline how to deal with
-
-        warning: the use of OBSOLESCENT `utime' is discouraged, use `utimes=
-'
-
-since I found it a lot on the WWW and [3] says `utime` should be used
-over `utimes`. Or this this also related to the build error as well? I
-do not see it using EGLIBC.
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D6db3407=
-58e2c6674d06fec02b0c34fc1689153aa
-[2] https://dev.openwrt.org/changeset/24899
-[3] http://www.t2-project.org/irclogs/t2-2005-01-25.html (=C2=BButime() rep=
-laces utimes()=C2=AB)
-
---=-Xci03uxPBtBYj6lL0gFj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk05bIwACgkQPX1aK2wOHVivZgCghzo4B+utSd7sub7U94Ro658e
-xaUAni9NaTmGzzKldsyR2itIT3UWXyz2
-=CoOb
------END PGP SIGNATURE-----
-
---=-Xci03uxPBtBYj6lL0gFj--
