@@ -1,36 +1,24 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PgFCN-00032J-9r
+	(envelope-from <mickey@vanille-media.de>) id 1PgFGL-00039T-TT
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 12:30:35 +0100
-Received: by iwn8 with SMTP id 8so1753967iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 03:29:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=igS7hF1HFESXyTTAylrqNtc0+YN80KwCpsaoQFu6wdI=;
-	b=dOBeO/Zs/4KS17GJpiYmyqbocorHsljo5o+9iTurqt3gvVJbphI1Oxx9O7hRdzNBW6
-	L6jKW/5papttkAbL7j2Iq/4WH3ZjwvTMKi+rarr4Qx6HaC319KVyjOzt78izKjMfZSoE
-	8c0jMq/1HkVFXUuCA8dQaGlB5JArWB0kgDfWU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=KhKAxDM7dZx3jWqyJRc8jVxAmYrdJrU/wnTCDxaeccw+p9I/Q7Cyq+9zjMs80dN3b5
-	Ub/b5K22Iivxt+aEKBIgUYefWQMmHGT1TuLZua5obdMF0FPh8kcKKYsruP1Rk3PCFfHg
-	f1M/OxhvHXt7E3mMdxY4wCrYWkVyPaurbJ0+A=
-MIME-Version: 1.0
-Received: by 10.231.11.2 with SMTP id r2mr543222ibr.174.1295609394981; Fri, 21
-	Jan 2011 03:29:54 -0800 (PST)
-Received: by 10.231.34.69 with HTTP; Fri, 21 Jan 2011 03:29:54 -0800 (PST)
-In-Reply-To: <ihbp5c$4ov$1@dough.gmane.org>
+	Fri, 21 Jan 2011 12:34:41 +0100
+Received: from [192.168.1.13] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 36CC758416F; 
+	Fri, 21 Jan 2011 12:50:40 +0100 (CET)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <AANLkTimBieqoDRmVfoYmTVpehrmtCk-N=M8bKgRWumN0@mail.gmail.com>
+Date: Fri, 21 Jan 2011 12:34:02 +0100
+Message-Id: <46D4B17E-4B72-4469-913B-601F4325E265@vanille-media.de>
 References: <20110120181233.GA1789@lit.local.igalia.com>
 	<ihbp5c$4ov$1@dough.gmane.org>
-Date: Fri, 21 Jan 2011 12:29:54 +0100
-Message-ID: <AANLkTimBieqoDRmVfoYmTVpehrmtCk-N=M8bKgRWumN0@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: board@openembedded.org
-Cc: openembedded-devel@lists.openembedded.org
+	<AANLkTimBieqoDRmVfoYmTVpehrmtCk-N=M8bKgRWumN0@mail.gmail.com>
+To: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+X-Mailer: Apple Mail (2.1082)
+Cc: board@openembedded.org, openembedded-devel@lists.openembedded.org
 Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,27 +33,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 11:30:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 21 Jan 2011 11:34:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Dear board,
+I fully agree and support this. It has become unbearable again.
+To the risk of repeating myself, I feel this attitude is damaging
+the reputation of the OpenEmbedded community and thus its
+attractivity for contributors, both present and future ones.
 
-Can you please take action to developers badmouthing distro's and the
-work of others.
-This is now (at least) the 2nd time in 3 weeks (and actually Koen has
-already quite a track record bashing others).
+Board, which options do we have?
 
-Thank you very much.
-Frans
+:M:
 
-2011/1/21 Koen Kooi <k.kooi@student.utwente.nl>:
-> Switching to minimal will only get you anguish, since it's broken by design.
-
-and:
-
-Am Freitag, den 31.12.2010, 20:38 +0100 schrieb Koen Kooi:
-> The configurations I'm concerned about use angstrom-mirrors.bbclass, I
-> don't care about others. I can send you my rate card if you want to pay
-> me to support crap like minimal.
 
 
