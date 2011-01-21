@@ -1,33 +1,33 @@
 Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lm@larsmichelsen.com>) id 1PgNdY-00025Q-Gd
+	(envelope-from <lm@larsmichelsen.com>) id 1PgNfX-00027R-Bg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 21:31:12 +0100
+	Fri, 21 Jan 2011 21:33:15 +0100
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by larsmichelsen.com (Postfix) with ESMTP id 995B99544016
+	by larsmichelsen.com (Postfix) with ESMTP id 784079544016
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 21:30:32 +0100 (CET)
+	Fri, 21 Jan 2011 21:32:35 +0100 (CET)
 Received: from larsmichelsen.com ([127.0.0.1])
 	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 0SGgwc3P15sY
+	port 10024) with ESMTP id uAC4GyrF0tYB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 21:30:32 +0100 (CET)
+	Fri, 21 Jan 2011 21:32:35 +0100 (CET)
 Received: from [192.168.4.106] (e181050127.adsl.alicedsl.de [85.181.50.127])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested) (Authenticated sender: lm)
-	by larsmichelsen.com (Postfix) with ESMTPSA id 331E79544005
+	by larsmichelsen.com (Postfix) with ESMTPSA id 1E9B89544005
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 21:30:31 +0100 (CET)
-Message-ID: <4D39ECE6.4030904@larsmichelsen.com>
-Date: Fri, 21 Jan 2011 21:30:30 +0100
+	Fri, 21 Jan 2011 21:32:35 +0100 (CET)
+Message-ID: <4D39ED67.2030706@larsmichelsen.com>
+Date: Fri, 21 Jan 2011 21:32:39 +0100
 From: Lars Michelsen <lm@larsmichelsen.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2.104i Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1295138727-6516-1-git-send-email-lm@larsmichelsen.com>
-	<1295178455.5847.36.camel@mattotaupa>
-In-Reply-To: <1295178455.5847.36.camel@mattotaupa>
+	<igumrj$3pp$1@dough.gmane.org>
+In-Reply-To: <igumrj$3pp$1@dough.gmane.org>
 Subject: Re: [PATCH] Added Europe/Berlin timezone to tzdata pkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,45 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 20:31:12 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 21 Jan 2011 20:33:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello Paul,
+Hello Koen,
 
-On 16/01/11 12:47, Paul Menzel wrote:
-> Dear Lars,
+On 16/01/11 13:04, Koen Kooi wrote:
+> We see you are adding Berlin right below Paris, which is the same TZ
+> with the same DST rules.
 >
->
-> Am Sonntag, den 16.01.2011, 01:45 +0100 schrieb Lars Michelsen:
->> I was missing the Europe/Berlin timezone in the tzdata package. So I
->> added it to the package.
->>
->> Additionally increased the PR. Hope this OK for such a change - must
->> admit that I am very new to OE.
->
-> thank you very much for your patch and welcome to OE.
->
-> Could you please resend your patch (`[PATCH v2]`) with the following two
-> points addressed.
->
-> 1. The commit summary is standardized and should start with the package
-> name as documented in the commit policy [1].
->
-> 	tzdata: package `Europe/Berlin` timezone
->
-> 2. Although it probably does not matter, commit messages are normally
-> written from a neutral view point(?) and personal comments are added
-> after a `---` before the diff which starts also with `---`. When
-> applying your patch, these remarks are left out then.
+> So if you only want to install tzdata and want to have 'date' show the
+> correct time, use Europe/Paris. If you nationalism prevents you from
+> doing that and you have some space left in your rootfs, install
+> 'tzdata-europe' :)
 
-Thanks for the information. I'll do so on my next postings.
+Well, thanks for the hint. I am new to OE and need to get a feeling for 
+the priorities. If the size is that important it is OK for me.
 
-But after the post of Koen I am unsure if I should resubmit this patch. 
-My intend was to fix my time, setting the TZ to Europe/Paris fixes this 
-and is absolutely ok for me. Other thoughts?
+Even didn't know that the DST is exactly the same. My intend was to fix 
+my local time and when it can be fixed with Europe/Paris I have no 
+problem with it.
 
 Regards,
 Lars
+
 
 
