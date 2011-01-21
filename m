@@ -1,34 +1,24 @@
-Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lm@larsmichelsen.com>) id 1PgNfX-00027R-Bg
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 21:33:15 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by larsmichelsen.com (Postfix) with ESMTP id 784079544016
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 21:32:35 +0100 (CET)
-Received: from larsmichelsen.com ([127.0.0.1])
-	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id uAC4GyrF0tYB
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 21:32:35 +0100 (CET)
-Received: from [192.168.4.106] (e181050127.adsl.alicedsl.de [85.181.50.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: lm)
-	by larsmichelsen.com (Postfix) with ESMTPSA id 1E9B89544005
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jan 2011 21:32:35 +0100 (CET)
-Message-ID: <4D39ED67.2030706@larsmichelsen.com>
-Date: Fri, 21 Jan 2011 21:32:39 +0100
-From: Lars Michelsen <lm@larsmichelsen.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2.104i Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PgQar-0005bd-8G for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 00:40:37 +0100
+Received: from f053036037.adsl.alicedsl.de ([78.53.36.37]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PgQaC-0006Td-Uc for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Jan 2011 23:39:57 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1295138727-6516-1-git-send-email-lm@larsmichelsen.com>
-	<igumrj$3pp$1@dough.gmane.org>
-In-Reply-To: <igumrj$3pp$1@dough.gmane.org>
-Subject: Re: [PATCH] Added Europe/Berlin timezone to tzdata pkg
+In-Reply-To: <AANLkTinbMr38A4-yGjyLkNL+ydrwS+R6r_OWZo2fh7KP@mail.gmail.com>
+References: <1295608972.12720.47.camel@mattotaupa>
+	<AANLkTinbMr38A4-yGjyLkNL+ydrwS+R6r_OWZo2fh7KP@mail.gmail.com>
+Date: Sat, 22 Jan 2011 00:39:55 +0100
+Message-ID: <1295653195.4105.56.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: vdr: minimal-uclibc: task `compile` fails with `undefined reference to `_nl_msg_cat_cntr'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +32,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 20:33:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 21 Jan 2011 23:40:37 -0000
+X-Groupsio-MsgNum: 28287
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-svdwO7uPZHsuokejpmoG"
 
-Hello Koen,
+--=-svdwO7uPZHsuokejpmoG
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 16/01/11 13:04, Koen Kooi wrote:
-> We see you are adding Berlin right below Paris, which is the same TZ
-> with the same DST rules.
->
-> So if you only want to install tzdata and want to have 'date' show the
-> correct time, use Europe/Paris. If you nationalism prevents you from
-> doing that and you have some space left in your rootfs, install
-> 'tzdata-europe' :)
+Am Freitag, den 21.01.2011, 10:10 -0800 schrieb Khem Raj:
+> On Fri, Jan 21, 2011 at 3:22 AM, Paul Menzel
+> <paulepanter@users.sourceforge.net> wrote:
+> >
+> > `bitbake -k vdr` was executed with 6db34075 (uClibc 0.9.32-rc2) [1] and
+> > `minimal-uclibc` for `MACHINE =3D "beagleboard"`. I guess it is related=
+ to
+> > the uClibc upgrade.
+> >
+>=20
+> Did it work before this? I guess not. Upgrade has nothing to do with
+> it. Its gettext/libiconv issue in the faulty recipe itself I believe
 
-Well, thanks for the hint. I am new to OE and need to get a feeling for 
-the priorities. If the size is that important it is OK for me.
+I just reset to when the recipe was updated [1].
 
-Even didn't know that the DST is exactly the same. My intend was to fix 
-my local time and when it can be fixed with Europe/Paris I have no 
-problem with it.
+        commit f4f7638828b0e06fa7ae37ccba0e1ec294b5c30a
+        Author:     Paul Menzel <paulepanter@users.sourceforge.net>
+        AuthorDate: Mon Jul 12 21:32:52 2010 +0200
+        Commit:     Khem Raj <raj.khem@gmail.com>
+        CommitDate: Wed Jan 12 00:05:25 2011 -0800
+       =20
+            vdr: update to 1.7.16 from 1.7.10
 
-Regards,
-Lars
+It built fine. Any thoughts?
+
+I will try to pinpoint the faulty commit. I am trying to build with
+2a7ddea6 [2] next, which is the commit before the last change to the VDR
+recipe.
+
+[=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Df4f7638=
+828b0e06fa7ae37ccba0e1ec294b5c30a
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D2a7ddea=
+6f7cd12f88a086e9d3e9228008a102248
+
+--=-svdwO7uPZHsuokejpmoG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk06GUsACgkQPX1aK2wOHVgzDwCeJfz9lgdP9taSPdJ+bSeZ13tM
+jyYAn0qPQ/54qhx/0mrmZJ64y53zikio
+=s/k+
+-----END PGP SIGNATURE-----
+
+--=-svdwO7uPZHsuokejpmoG--
