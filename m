@@ -1,21 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PgEQs-0006Gy-5J for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 11:41:30 +0100
-Received: from f053036037.adsl.alicedsl.de ([78.53.36.37]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PgEQE-0007ot-Ml for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Jan 2011 10:40:50 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PgEmq-0002Rg-Kz for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Jan 2011 12:04:13 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PgEmC-0005qS-5a for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Jan 2011 12:03:32 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Jan 2011 12:03:32 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Jan 2011 12:03:32 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Jan 2011 11:40:49 +0100
-Message-ID: <1295606449.12720.38.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 21 Jan 2011 12:03:08 +0100
+Message-ID: <ihbp5c$4ov$1@dough.gmane.org>
+References: <20110120181233.GA1789@lit.local.igalia.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: problems with Git server: `fatal: unable to connect a socket (Connection refused)`
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <20110120181233.GA1789@lit.local.igalia.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,45 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jan 2011 10:41:30 -0000
-X-Groupsio-MsgNum: 28263
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-x6HGm39nkF3z5fmBZlfT"
+X-List-Received-Date: Fri, 21 Jan 2011 11:04:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-x6HGm39nkF3z5fmBZlfT
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear OE folks,
+On 20-01-11 19:12, Víctor M. Jáquez L. wrote:
+> 
+> In order to build native-sdk-image recipe, I found my self compiling
+> glibc_2.9-r37.4, because it is the real provider of virtual-libc-dev (the
+> toolchain does not truly provide it -but that is another bug [1]-).
+> 
+> But the glibc_2.9-r37.4 configuration fails using the canonical
+> arm-angstrom-linux-gnueabi- toolchain
 
+If you're using angstrom 2008, glibc 2.9 is built by default. Trying to
+rebuild it won't work because it will be missing headers due to all the
+- -initial and -intermedia shuffle.
+If you're using angstrom 2010, eglibc is built by default and should
+providing virtual-libc-dev
 
-I just wanted to inform you that I have trouble with the Git server.
-
-        $ git remote update
-        Fetching origin
-        git.openembedded.org[0: 140.211.169.165]: errno=3DConnection
-        refused
-        fatal: unable to connect a socket (Connection refused)
-        error: Could not fetch origin
-
-I am able to reproduce this from two different locations.
-
-
-Thanks,
-
-Paul
-
---=-x6HGm39nkF3z5fmBZlfT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+Switching to minimal will only get you anguish, since it's broken by design.
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk05YrEACgkQPX1aK2wOHVjTjACdFcdnY2DOgihCIQ8mb4v0f46B
-4akAnRJg8oPmAHoaH4x5Le7p0hJmMIyo
-=Iaf8
+iD8DBQFNOWfsMkyGM64RGpERAsqfAKC2L5KDSLLBSC0tES2r+Axm+rxGoQCfVssG
+IDR7J61eU9hEKOTT2+CRW9M=
+=R8yc
 -----END PGP SIGNATURE-----
 
---=-x6HGm39nkF3z5fmBZlfT--
+
+
