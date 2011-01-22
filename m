@@ -1,34 +1,40 @@
-Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lm@larsmichelsen.com>) id 1Pgg21-0002E9-3y
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PggNG-0002VZ-N5
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 17:09:41 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by larsmichelsen.com (Postfix) with ESMTP id 1219A9544015
+	Sat, 22 Jan 2011 17:31:38 +0100
+Received: by iwn8 with SMTP id 8so2990127iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 17:09:00 +0100 (CET)
-Received: from larsmichelsen.com ([127.0.0.1])
-	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id JZS+OxbvJRkc
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 17:08:59 +0100 (CET)
-Received: from [192.168.4.106] (g229015111.adsl.alicedsl.de [92.229.15.111])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: lm)
-	by larsmichelsen.com (Postfix) with ESMTPSA id 996D69544005
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 17:08:59 +0100 (CET)
-Message-ID: <4D3AFA2B.3060008@larsmichelsen.com>
-Date: Sat, 22 Jan 2011 16:39:23 +0100
-From: Lars Michelsen <lm@larsmichelsen.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2.104i Thunderbird/3.1.7
+	Sat, 22 Jan 2011 08:30:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=hle+IHF95NJgfSfHDId9rE3VWeoeuEmpY+WNT2byRYg=;
+	b=egIV5qmFw6n6ztY8UjeaeV9ya3d71lHGPmltJ7l9KbCcAkjvoszGoktDbPNooZPtsv
+	gbuf+r/wZ/S4oI7Tz7fvXZ7S/NkDBzXo/n67guQ8YDrx5gYXGUPm+g3+M4jOKKi52sZt
+	x5FmUuvEAB0IP8xgkliEsME/KVBi2oHwlcWMQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=t4rssOgVyx0d2rKem5QWzhAn9zANXFR+8guAgHbXNcLvpKNUDicPm0D7nc35ALOtcj
+	51ubOEgujaU7t6HJdu9+8jheiK3PAyadj/ohapa3EIf6+Vu7p3ghqYNelhmkc7EdzSDH
+	PUwx153csTe9H8E2s2VccFX0vtq/NUfJAtoO4=
 MIME-Version: 1.0
+Received: by 10.231.32.140 with SMTP id c12mr2353520ibd.74.1295713856772; Sat,
+	22 Jan 2011 08:30:56 -0800 (PST)
+Received: by 10.231.34.69 with HTTP; Sat, 22 Jan 2011 08:30:56 -0800 (PST)
+In-Reply-To: <4D3AF781.2050904@xora.org.uk>
+References: <20110120181233.GA1789@lit.local.igalia.com>
+	<ihbp5c$4ov$1@dough.gmane.org>
+	<AANLkTinnrY2o___wOwe3vqrYfY8QsBQYE6AA7VFuAq7T@mail.gmail.com>
+	<ihedug$vsl$1@dough.gmane.org>
+	<AANLkTimR7QtotOx-e22eRkc_iT8GMr+2gwby42QF=VQ-@mail.gmail.com>
+	<4D3AF781.2050904@xora.org.uk>
+Date: Sat, 22 Jan 2011 17:30:56 +0100
+Message-ID: <AANLkTimQr2fUzAUKUdZeB5L4JQ9v1DGgP2jCiWX0wxqu@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1295654503-26379-1-git-send-email-lm@larsmichelsen.com>	<ihedau$stf$1@dough.gmane.org>	<4D3AC11C.2040602@larsmichelsen.com>	<4D3AC6F0.4050802@xora.org.uk>	<ihel1v$tnt$1@dough.gmane.org>	<4D3ADC2C.6070506@larsmichelsen.com>
-	<ihesdm$v7u$1@dough.gmane.org>
-In-Reply-To: <ihesdm$v7u$1@dough.gmane.org>
-Subject: Re: [PATCH] mplayer_svn: Package can be built again; Bumped to rev. 31329.
+Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +48,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 16:09:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 22 Jan 2011 16:31:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello Koen,
+2011/1/22 Graeme Gregory <dp@xora.org.uk>:
+> On 22/01/2011 12:36, Frans Meulenbroeks wrote:
+>> In my opinion it is more useful than a binary generator generating
+>> untested (and probably unreproducible) images, but that is just my
+>> opinion. If someone wants to play the digital equivalent of russian
+>> roulette, who am I to deny it to them.
+>
+> Why don't you two just take this to the school playground, this is
+> getting ridiculus. Sort it out between you or shut up please. Im really
+> bored of reading this drivel now!
 
-On 22/01/11 16:17, Koen Kooi wrote:
->
-> Looking closer at your patch, it looks like you're working off an old tree:
->
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=9a3e44e3d3d69ab9e1e4e1e3338afaed2b97fb65
->
-> Your patch is also missing the hardfp fix that is needed to actually
-> make it work.
->
-> Could you try the current recipe and see if it works for you? It works
-> on my omap3 boards quite well, minus a dlopen() buglet in libdvdcss2.
->
-> regards,
->
-> Koen
+Then don't read it :-) You're not obliged to.
+Just put us both in your kill file/spam filter/whatever. It is not
+*that* difficult !
 
-Yes, I built the changes with testing_2010-12-30 tag at beginning of 
-January. At this time the last modification of the mplayer_svn reciep 
-was on 2010-10-26. So I had no problem with that rev as starting point.
-
-Now I recognized you patched the reciep on 2011-01-16. Well, seems to go 
-in the same direction as my changes.
-
-I'll give it a try and report back. Thanks for the hint.
-
-Regards,
-Lars
+Frans
 
 
