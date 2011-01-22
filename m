@@ -1,40 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PggNG-0002VZ-N5
+	(envelope-from <a.sappia@gmail.com>) id 1Pggtd-0003JO-6T
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 17:31:38 +0100
-Received: by iwn8 with SMTP id 8so2990127iwn.6
+	Sat, 22 Jan 2011 18:05:05 +0100
+Received: by qyk36 with SMTP id 36so2810982qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 08:30:56 -0800 (PST)
+	Sat, 22 Jan 2011 09:04:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=hle+IHF95NJgfSfHDId9rE3VWeoeuEmpY+WNT2byRYg=;
-	b=egIV5qmFw6n6ztY8UjeaeV9ya3d71lHGPmltJ7l9KbCcAkjvoszGoktDbPNooZPtsv
-	gbuf+r/wZ/S4oI7Tz7fvXZ7S/NkDBzXo/n67guQ8YDrx5gYXGUPm+g3+M4jOKKi52sZt
-	x5FmUuvEAB0IP8xgkliEsME/KVBi2oHwlcWMQ=
+	h=domainkey-signature:mime-version:from:date:message-id:subject:to
+	:content-type; bh=j479VB+vF2HMNHiC2tUByFUdFWLmMukLqEWleRqA5nw=;
+	b=xi9OmOr9HKihgTLQUbXp9ElRDlwWsSpp4CttrOh6ZTvgrXiyk0mPvvHeNRWgZvYYBl
+	4rp3e2Ck6Hory/PU70jus0vvJu/qXzbaNxvHvf02qjXduOlefJ5smNZ0jjPWmnLID8vc
+	Jm8KaBPG3v1f3SrfZW86MLl/ZciDBHmANfe/8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=t4rssOgVyx0d2rKem5QWzhAn9zANXFR+8guAgHbXNcLvpKNUDicPm0D7nc35ALOtcj
-	51ubOEgujaU7t6HJdu9+8jheiK3PAyadj/ohapa3EIf6+Vu7p3ghqYNelhmkc7EdzSDH
-	PUwx153csTe9H8E2s2VccFX0vtq/NUfJAtoO4=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=AkCpWoCG8dm/Srt1g1ZZ9axvZpOAPtPN25Wr4MXCT+Vk7g7PLdML5+i6xobn3rRuEk
+	T2zNRIs1YH9g2awa6zJOxojY3+4odJEJS/QYZa3iV3MAnYugcHOIpmh92+TZ9Wmqo+0C
+	mCVN28JoKKyrlKKqSbGd9PSTT7Pd+CEHWEKH4=
+Received: by 10.229.215.70 with SMTP id hd6mr1920032qcb.102.1295715860674;
+	Sat, 22 Jan 2011 09:04:20 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.231.32.140 with SMTP id c12mr2353520ibd.74.1295713856772; Sat,
-	22 Jan 2011 08:30:56 -0800 (PST)
-Received: by 10.231.34.69 with HTTP; Sat, 22 Jan 2011 08:30:56 -0800 (PST)
-In-Reply-To: <4D3AF781.2050904@xora.org.uk>
-References: <20110120181233.GA1789@lit.local.igalia.com>
-	<ihbp5c$4ov$1@dough.gmane.org>
-	<AANLkTinnrY2o___wOwe3vqrYfY8QsBQYE6AA7VFuAq7T@mail.gmail.com>
-	<ihedug$vsl$1@dough.gmane.org>
-	<AANLkTimR7QtotOx-e22eRkc_iT8GMr+2gwby42QF=VQ-@mail.gmail.com>
-	<4D3AF781.2050904@xora.org.uk>
-Date: Sat, 22 Jan 2011 17:30:56 +0100
-Message-ID: <AANLkTimQr2fUzAUKUdZeB5L4JQ9v1DGgP2jCiWX0wxqu@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.229.232.2 with HTTP; Sat, 22 Jan 2011 09:04:00 -0800 (PST)
+From: Alessandro Sappia <a.sappia@gmail.com>
+Date: Sat, 22 Jan 2011 18:04:00 +0100
+Message-ID: <AANLkTinVGBrZxdvRUzqkURfjhxHVHkqK3am7_e9Xgb8_@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: An Openembedded device concurring for StartEnt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +40,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 16:31:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 22 Jan 2011 17:05:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-2011/1/22 Graeme Gregory <dp@xora.org.uk>:
-> On 22/01/2011 12:36, Frans Meulenbroeks wrote:
->> In my opinion it is more useful than a binary generator generating
->> untested (and probably unreproducible) images, but that is just my
->> opinion. If someone wants to play the digital equivalent of russian
->> roulette, who am I to deny it to them.
->
-> Why don't you two just take this to the school playground, this is
-> getting ridiculus. Sort it out between you or shut up please. Im really
-> bored of reading this drivel now!
+Hi all,
+I'm one of the founders of Biotechware, a startup born in Turin few months
+ago
+where we developed a custom device and we used openembedded as framework
+for creating the software image.
+ON some user suggestion (IRC channel #oe) I'm writing here asking you for
+some help
+in an European Startup competiton where winners are chosen from popular
+vote.
 
-Then don't read it :-) You're not obliged to.
-Just put us both in your kill file/spam filter/whatever. It is not
-*that* difficult !
+Biotechware is a business venture by Alessandro Sappia, Enrico Manzini and
+Vertigotech s.r.l., a company specialized in electronics. We conceived a
+telemedicine
+integrated platform for remote cardiac monitoring, aimed at pharmacies. The
+team=E2=80=99s
+solution permits to record a professional grade ECG directly at the pharmac=
+y
+with
+an easy to use and innovative device. The record is then remotely reviewed
+and
+reported by a qualified cardiologist and made available to the patient
+through a secure website.
 
-Frans
+Biotechware entered the Startent European competition for innovative
+enterprises
+and placed itself in the first five projects. The final score of the
+competition depends
+now on popular vote, and you can give your support by voting on the
+internet.
 
+To support Biotechware you can follow these steps:
+
+  1. visit the vote site at http://193.145.154.13/startent/popularvote/.
+Under the vote counter,
+      you have to insert your email address in the =E2=80=9CDo you want to =
+vote?
+Type your e-mail=E2=80=9C box,
+     and press the =E2=80=9Csubmit=E2=80=9D button.
+  2. you should receive shortly a confirmation email message at the
+specified address.
+      In the email there is a link to be followed to reach the actual votin=
+g
+page.
+  3. in the voting page, check =E2=80=9CBiotechware=E2=80=9D and press the =
+=E2=80=9CVote=E2=80=9D button
+below.
+      When vote confirmation is asked you can press =E2=80=9COk=E2=80=9D
+
+Each email address can vote only once. Popular vote ends on the 23th of
+january 2011.
+It's possible to follow the evolution of the poll at the same site at point
+1.
+
+Kindly thanks to all who'll support us
+
+Regards,
+
+Alessandro Sappia
+
+--=20
+Alessandro Sappia
+a.sappia@gmail.com
 
