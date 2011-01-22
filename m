@@ -1,39 +1,37 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PgcJ2-0005Ml-V9
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pgciz-0005jP-Q5
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 13:11:01 +0100
-Received: by iwn8 with SMTP id 8so2838583iwn.6
+	Sat, 22 Jan 2011 13:37:49 +0100
+Received: by iyj18 with SMTP id 18so2833709iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 04:10:19 -0800 (PST)
+	Sat, 22 Jan 2011 04:36:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=6FI0bqJVfU+FX4EifMnsku6x//x5oOiRAJax18Gs+h8=;
-	b=Ss6MRN0Gug+NOoptNIfieRpUjD5MvIGXZKknWgmxGx4zYLIvkVBUbtiiPTnI9A7M7u
-	s+4AqHH96pww6pNqY6le/CC/j1XpB/kNWMeJXJX6VpqXAXlVwWPanpw2u/VqkMzoSj4j
-	5fjePqNDcpk1u4s+7+nrszoc1evBRR4Up22pI=
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=n6BR2/AQ/fqXrchexjRTd3aqRc72Li5noGd2q8iTxBs=;
+	b=qZc+9J281juO94CnS+44uDdQ6rA4JMJZUFQU+DgdaZBSeL7I7+13Cc8HXGeU9pkca7
+	NwDJj7+YVsIajBG/jS/cTTBPHuXIi+fCdEquxyhZllejtK1rTwSAFNPibAj8UEL2Cr8o
+	RK9RCi/NLwI2ezCvwzXxSwJUSdTeLvntuOBzw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=eqYPcDqzf856qDfFFp4czSzM31Qija7KGGWwGBbd89nZ1IJQ8f8sI8mkkDr7p9blmn
-	PQIZRRC3GS47dN64mh7K9aB4pCR7IMfL3jBtnY+xCI6w9GjLEGsrqlH51707IHW+Fyth
-	I0Ae6vCcbYfxpQdQtgzr/MiOXE/y0ohBS05RU=
+	:content-type:content-transfer-encoding;
+	b=OEbZlVfgPY+agl0n1Z7oH2kXTuPBmKAQ8Tbvnek/QshqkrW4JQtAvyqc4bC519acAR
+	dtemSw5IvpIADNli4TaYJHm1p2ubr1lR4hagva3JxYfqiCWpK013/DAXMhhSX2e0n73c
+	3lqb+65L3otY6NrvkJUjpmyn93NBY3mzYhaGM=
 MIME-Version: 1.0
-Received: by 10.231.11.2 with SMTP id r2mr2099877ibr.174.1295698219557; Sat,
-	22 Jan 2011 04:10:19 -0800 (PST)
-Received: by 10.231.34.69 with HTTP; Sat, 22 Jan 2011 04:10:19 -0800 (PST)
-In-Reply-To: <AANLkTins2-KeY8aUkoKHW+H3t0xzNeW+H2a5qfwVTY0U@mail.gmail.com>
+Received: by 10.231.31.196 with SMTP id z4mr2110390ibc.199.1295699806001; Sat,
+	22 Jan 2011 04:36:46 -0800 (PST)
+Received: by 10.231.34.69 with HTTP; Sat, 22 Jan 2011 04:36:45 -0800 (PST)
+In-Reply-To: <ihedug$vsl$1@dough.gmane.org>
 References: <20110120181233.GA1789@lit.local.igalia.com>
 	<ihbp5c$4ov$1@dough.gmane.org>
-	<AANLkTimBieqoDRmVfoYmTVpehrmtCk-N=M8bKgRWumN0@mail.gmail.com>
-	<4D39988B.5020204@balister.org>
-	<AANLkTins2-KeY8aUkoKHW+H3t0xzNeW+H2a5qfwVTY0U@mail.gmail.com>
-Date: Sat, 22 Jan 2011 13:10:19 +0100
-Message-ID: <AANLkTi=X7Ri1-z7ghn2YwVBzvDQRT=1EW=iiWf3rgz8_@mail.gmail.com>
+	<AANLkTinnrY2o___wOwe3vqrYfY8QsBQYE6AA7VFuAq7T@mail.gmail.com>
+	<ihedug$vsl$1@dough.gmane.org>
+Date: Sat, 22 Jan 2011 13:36:45 +0100
+Message-ID: <AANLkTimR7QtotOx-e22eRkc_iT8GMr+2gwby42QF=VQ-@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,77 +46,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 12:11:01 -0000
+X-List-Received-Date: Sat, 22 Jan 2011 12:37:50 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-[taken the board off cc as this has nothing to do with my original
-request to the board]
+2011/1/22 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 22-01-11 01:21, Khem Raj wrote:
+>> On Fri, Jan 21, 2011 at 3:03 AM, Koen Kooi <k.kooi@student.utwente.nl> w=
+rote:
+>> On 20-01-11 19:12, V=EDctor M. J=E1quez L. wrote:
+>>>>>
+>>>>> In order to build native-sdk-image recipe, I found my self compiling
+>>>>> glibc_2.9-r37.4, because it is the real provider of virtual-libc-dev =
+(the
+>>>>> toolchain does not truly provide it -but that is another bug [1]-).
+>>>>>
+>>>>> But the glibc_2.9-r37.4 configuration fails using the canonical
+>>>>> arm-angstrom-linux-gnueabi- toolchain
+>>
+>> If you're using angstrom 2008, glibc 2.9 is built by default. Trying to
+>> rebuild it won't work because it will be missing headers due to all the
+>> -initial and -intermedia shuffle.
+>> If you're using angstrom 2010, eglibc is built by default and should
+>> providing virtual-libc-dev
+>>
+>>> yes angstrom-2010.x is a better option keep in mind its new so expect
+>>> some churn every now and then.
+>>
+>>
+>> Switching to minimal will only get you anguish, since it's broken by des=
+ign.
+>>
+>>> Heh interesting :) It would help if you elaborate on the flaws so we
+>>> can improve it and in turn improve OE in general
+>
+> The design involves not using PREFERRED_PROVIDER for things like bluez
 
-2011/1/22 Khem Raj <raj.khem@gmail.com>:
-> On Fri, Jan 21, 2011 at 6:30 AM, Philip Balister <philip@balister.org> wrote:
->> I think these remarks come from discussion over the pandaboard u-boot
->> situation? If so, let's consider these options:
->>
->> 1) Remove the pandaboard machine from OE since it does not build for some
->> people.
->>
->
-> well its a step backwards
->
->> 2) Force Koen to update the recipe to something that builds.
->>
->
-> he is master of his own time so its not right to force anybody its all
-> volunteer work and we should leverage each others work.
->
->> 3) Do nothing.
->
-> Doesnt take us anywhere.
->
->>
->> No one is happy with the set of options, but the reality is some distros use
->> source mirrors and do not have issues. Distros that do not use source
->> mirrors are going to have problems with this and other recipes, so the onus
->> is on them to resolve these issues. Resolving this is issue does not revolve
->> around updating the recipe and pushing it un tested for the Panda, since
->> this is not something that can be tested on another set of hardware.
->>
->> So until someone who has a panda and the time and patience to work with
->> u-boot, minimal will not work for panda. This is because the minimal distro
->> is supposed to not use advanced OE features such as source mirrors and
->> PREFERRED_VERSION pinning. Because of these decisions, it is entirely
->> possible that minimal will not build for all combination by design.
->>
->
-> I would propose that we use angstrom-mirrors in minimal distro as a
-> backup to fetch
-> sources from.
-> something like this in minimal.conf would do it
->
-> SOURCE_MIRROR_URL +=
-> "http://www.angstrom-distribution.org/unstable/sources/"
-> INHERIT += "own-mirrors"
->
-> if we do not want to inherit angstrom-mirrors class directly.
->>
->
+Do you mean this?
+minimal.conf:PREFERRED_PROVIDER_bluez-utils-dbus =3D "bluez4"
+minimal.conf:PREFERRED_PROVIDER_bluez-libs       =3D "bluez-libs"
+minimal.conf:PREFERRED_PROVIDER_bluez-utils      =3D "bluez4"
 
-Khem, this is not about panda uboot, but about the behaviour of
-members towards others.
+> and not setting PREFERRED_VERSION for recipes, using source mirrors or
 
-As far as u-boot and panda concerns. I don't care any more.
-If that is the way TI employees want to support their customers, it is
-their choice, not mine.
+You mean like this:
+minimal.conf:PREFERRED_QT_VERSION ?=3D "4.7.1"
+minimal.conf:PREFERRED_VERSION_qt4-tools-native =3D "${PREFERRED_QT_VERSION=
+}"
+minimal.conf:PREFERRED_VERSION_qt4-tools-sdk =3D "${PREFERRED_QT_VERSION}"
+minimal.conf:PREFERRED_VERSION_qt4-embedded =3D "${PREFERRED_QT_VERSION}"
+minimal.conf:PREFERRED_VERSION_qt4-embedded-gles =3D "${PREFERRED_QT_VERSIO=
+N}"
+minimal.conf:PREFERRED_VERSION_qt4-x11-free =3D "${PREFERRED_QT_VERSION}"
+minimal.conf:PREFERRED_VERSION_qt4-x11-free-gles =3D "${PREFERRED_QT_VERSIO=
+N}"
 
-Wrt the source mirror.
-I would suggest to use http://sources.openembedded.org/ as official OE
-mirror. We could use the angstrom mirror as starting point to further
-populate the OE mirror. Alternately I have a fair amount of tarballs
-etc that I can contribute (also some for the older days, but none
-related to opie like things) And of course someone could also do a
-fetchall or so (I seem to recall Martin already did soemthing like
-that in the past)
+minimal also includes sane-toolchain.inc which contains the preferred
+versions of the toolchain.
+(together with some other distros)
 
-Best regards, Frans.
+Yes there are less pinnings in minimal than in angstrom. Fortunately
+not, I'd say. I assume this is because the minimal maintainers have
+more confidence and trust in the package maintainers.
+
+wrt the source mirrors.
+I feel recipes should build without source mirror. However in some
+cases (e.g. handhelds.org) a source mirror is useful. In my previous
+reply I suggested to populate sources.openembedded.org. Those who need
+it can use it.
+If the sources for a recipe reside on a mirror only, the recipe
+SRC_URI should be changed to reflect that. Whether a recipe fetches or
+not should not depend on the distro.
+
+> using things like insane.bbclass. As expected, you had to use pretty
+
+get your facts straight. minimal uses insane.bbclass:
+minimal.conf:INHERIT +=3D "insane"
+No idea when exactly it was added. I'm not the minimal maintainer),
+but it is used now.
+
+> much all those to get minimal to build something remotely usefull.
+
+In my opinion it is more useful than a binary generator generating
+untested (and probably unreproducible) images, but that is just my
+opinion. If someone wants to play the digital equivalent of russian
+roulette, who am I to deny it to them.
+>
+> As Philip points out, people are free to deliberately not use those
+> advanced features, but they should also realize that any breakage due to
+> that is entirely their own fault.
+
+Have a nice weekend! Frans.
 
 
