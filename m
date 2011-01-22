@@ -1,25 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PgfD7-0000dh-VF for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 16:17:05 +0100
-Received: from f053037250.adsl.alicedsl.de ([78.53.37.250]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PgfCT-0000vA-7M for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 15:16:25 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PgfE4-0000gn-1l for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 16:18:04 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PgfDO-0005KE-KW for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 16:17:22 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 16:17:22 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 16:17:22 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4D3AF13D.8070103@mentor.com>
-References: <1295606449.12720.38.camel@mattotaupa>
-	<AANLkTi=MHys=ShhSnVt0C8kyhescObNdormVScOvacN1@mail.gmail.com>
-	<4D3AF13D.8070103@mentor.com>
-Date: Sat, 22 Jan 2011 16:16:23 +0100
-Message-ID: <1295709383.3850.180.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 22 Jan 2011 16:17:10 +0100
+Message-ID: <ihesdm$v7u$1@dough.gmane.org>
+References: <1295654503-26379-1-git-send-email-lm@larsmichelsen.com>	<ihedau$stf$1@dough.gmane.org>	<4D3AC11C.2040602@larsmichelsen.com>	<4D3AC6F0.4050802@xora.org.uk>	<ihel1v$tnt$1@dough.gmane.org>
+	<4D3ADC2C.6070506@larsmichelsen.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [solved] problems with Git server: `fatal: unable to connect a socket (Connection refused)`
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D3ADC2C.6070506@larsmichelsen.com>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] mplayer_svn: Package can be built again; Bumped to rev. 31329.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,48 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 15:17:06 -0000
-X-Groupsio-MsgNum: 28311
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-JGhktkPNGH2LiEmeKexA"
+X-List-Received-Date: Sat, 22 Jan 2011 15:18:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-JGhktkPNGH2LiEmeKexA
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Samstag, den 22.01.2011, 08:01 -0700 schrieb Tom Rini:
-> On 01/21/2011 04:26 AM, Otavio Salvador wrote:
-> > On Fri, Jan 21, 2011 at 08:40, Paul Menzel
-> > <paulepanter@users.sourceforge.net>  wrote:
-> >>         $ git remote update
-> >>         Fetching origin
-> >>         git.openembedded.org[0: 140.211.169.165]: errno=3DConnection
-> >>         refused
-> >>         fatal: unable to connect a socket (Connection refused)
-> >>         error: Could not fetch origin
-> >
-> > Same here.
->=20
-> Seems OK here now.
+On 22-01-11 14:31, Lars Michelsen wrote:
+> Hello,
+> 
+>>> A recipe can have multiple svn sources, so you can fetch ffmpeg into a
+>>> seperate directory then move it into the mplayer one overwriting
+>>> whatever mplayer checked out.
+>>
+>> Ffmpeg isn't using svn anymore, so if mplayer is using svn remote, it
+>> won't get updated since last week.
+> 
+> wow, things are changing fast. I checked out the current mplayer repo
+> and it still fetches the svn repositories. But we are using old
+> revisions - so this would be OK for the moment.
+> 
+> In a long term the mplayer_svn package could be replaced by mplayer_git
+> package. mplayer_git could make use of ffmpeg git repo then, right?
+> 
+> So what does this mean for the mplayer_svn patch? Should I invest time
+> to make it use several subversion repositories instead of the sub
+> repositories?
 
-Since yesterday evening or this morning it works for me again too.
+Looking closer at your patch, it looks like you're working off an old tree:
 
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=9a3e44e3d3d69ab9e1e4e1e3338afaed2b97fb65
 
-Thanks,
+Your patch is also missing the hardfp fix that is needed to actually
+make it work.
 
-Paul
+Could you try the current recipe and see if it works for you? It works
+on my omap3 boards quite well, minus a dlopen() buglet in libdvdcss2.
 
---=-JGhktkPNGH2LiEmeKexA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+regards,
+
+Koen
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAk069McACgkQPX1aK2wOHViwFgCfVqIeqyARX1nQYCW21XrAkopM
-5GgAoIkBkVwOabnP3UX4nJ+yaj98adQJ
-=xrQR
+iD8DBQFNOvT2MkyGM64RGpERAjJ+AJ4uFl1okywMkeiI5qkWnLAFL4cPJgCfR0TZ
+ihgltc+c8QBUGwoyvE3uu5U=
+=I/6U
 -----END PGP SIGNATURE-----
 
---=-JGhktkPNGH2LiEmeKexA--
+
+
