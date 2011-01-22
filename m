@@ -1,23 +1,25 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pgf6A-0000Qj-A3 for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 16:09:54 +0100
+	id 1PgfD7-0000dh-VF for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 16:17:05 +0100
 Received: from f053037250.adsl.alicedsl.de ([78.53.37.250]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pgf5V-0000u6-9b for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 15:09:13 +0000
+	id 1PgfCT-0000vA-7M for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 15:16:25 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1295708387-28440-1-git-send-email-a.sappia@gmail.com>
-References: <1295708387-28440-1-git-send-email-a.sappia@gmail.com>
-Date: Sat, 22 Jan 2011 16:09:11 +0100
-Message-ID: <1295708951.3850.166.camel@mattotaupa>
+In-Reply-To: <4D3AF13D.8070103@mentor.com>
+References: <1295606449.12720.38.camel@mattotaupa>
+	<AANLkTi=MHys=ShhSnVt0C8kyhescObNdormVScOvacN1@mail.gmail.com>
+	<4D3AF13D.8070103@mentor.com>
+Date: Sat, 22 Jan 2011 16:16:23 +0100
+Message-ID: <1295709383.3850.180.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH] Corrected a typo in qtdemo-init script
+Subject: Re: [solved] problems with Git server: `fatal: unable to connect a socket (Connection refused)`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,66 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 15:09:54 -0000
-X-Groupsio-MsgNum: 28310
+X-List-Received-Date: Sat, 22 Jan 2011 15:17:06 -0000
+X-Groupsio-MsgNum: 28311
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-LJ9p0eJQHVRpPd65QEys"
+	boundary="=-JGhktkPNGH2LiEmeKexA"
 
---=-LJ9p0eJQHVRpPd65QEys
+--=-JGhktkPNGH2LiEmeKexA
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Alessandro,
-
-
-Am Samstag, den 22.01.2011, 15:59 +0100 schrieb Alessandro Sappia:
-
-please take a look at the commit policy regarding the commit
-summary/message [1].
-
-> Signed-off-by: Alessandro Sappia <a.sappia@gmail.com>
-> ---
->  recipes/qt4/qt-demo-init/qtdemo-init |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
+Am Samstag, den 22.01.2011, 08:01 -0700 schrieb Tom Rini:
+> On 01/21/2011 04:26 AM, Otavio Salvador wrote:
+> > On Fri, Jan 21, 2011 at 08:40, Paul Menzel
+> > <paulepanter@users.sourceforge.net>  wrote:
+> >>         $ git remote update
+> >>         Fetching origin
+> >>         git.openembedded.org[0: 140.211.169.165]: errno=3DConnection
+> >>         refused
+> >>         fatal: unable to connect a socket (Connection refused)
+> >>         error: Could not fetch origin
+> >
+> > Same here.
 >=20
-> diff --git a/recipes/qt4/qt-demo-init/qtdemo-init b/recipes/qt4/qt-demo-i=
-nit/qtdemo-init
-> index ee84be2..affb958 100644
-> --- a/recipes/qt4/qt-demo-init/qtdemo-init
-> +++ b/recipes/qt4/qt-demo-init/qtdemo-init
-> @@ -3,7 +3,7 @@
->  set -e
-> =20
->  if [ -f /usr/bin/qtdemo ]; then
-> -	QTDEMO=3D"qtdemo > /var/log/Xsession.log 2>&1"
-> +	QTDEMO=3D"qtdemo > /var/log/Xsession.log 2> &1"
+> Seems OK here now.
 
-What is wrong with this? Errors are sent to standard output and the
-version without space is the one I know too.
-
->  else
->  	QTDEMO=3D"qtdemoE -qws"
->  fi
+Since yesterday evening or this morning it works for me again too.
 
 
 Thanks,
 
 Paul
 
-
-[1] http://wiki.openembedded.org/index.php/Commit_Policy
-
---=-LJ9p0eJQHVRpPd65QEys
+--=-JGhktkPNGH2LiEmeKexA
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAk068xcACgkQPX1aK2wOHVgx8QCdEnjIE9ojfN06urCWMGnF7LL2
-LWkAn25uRGzLedK7EGeltIppD6iAzmlQ
-=/WLf
+iEYEABECAAYFAk069McACgkQPX1aK2wOHViwFgCfVqIeqyARX1nQYCW21XrAkopM
+5GgAoIkBkVwOabnP3UX4nJ+yaj98adQJ
+=xrQR
 -----END PGP SIGNATURE-----
 
---=-LJ9p0eJQHVRpPd65QEys--
+--=-JGhktkPNGH2LiEmeKexA--
