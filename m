@@ -1,34 +1,35 @@
-Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lm@larsmichelsen.com>) id 1Pghrs-00016v-Fv
+	(envelope-from <otavio.salvador@gmail.com>) id 1Pghrx-000177-JC
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 19:07:20 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by larsmichelsen.com (Postfix) with ESMTP id 8E3C59544015
+	Sat, 22 Jan 2011 19:07:25 +0100
+Received: by bwz10 with SMTP id 10so2672367bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 19:06:39 +0100 (CET)
-Received: from larsmichelsen.com ([127.0.0.1])
-	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id rwzcblT4eHXo
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 19:06:39 +0100 (CET)
-Received: from [192.168.4.106] (g229015111.adsl.alicedsl.de [92.229.15.111])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: lm)
-	by larsmichelsen.com (Postfix) with ESMTPSA id 1E92F9544005
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 19:06:39 +0100 (CET)
-Message-ID: <4D3B1CB3.1090209@larsmichelsen.com>
-Date: Sat, 22 Jan 2011 19:06:43 +0100
-From: Lars Michelsen <lm@larsmichelsen.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2.104i Thunderbird/3.1.7
+	Sat, 22 Jan 2011 10:06:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:date:x-google-sender-auth
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=IzsY8+Ce+tI/4SpOs6SDGiZTHGrawDVDVxtM2+CGPDo=;
+	b=bskOwDfohuv8/wWGP5KcVxm9gC/WWVe+JvAqiALIZD40SmdTiUnQtW/gWoXfjEpXG+
+	bAYLLYs3P7Zv6etj/zPE6Dmhu6iNQ+vIEe4FdXP0k/6nbfsojXCzFu0rc6/h9JL0gT9N
+	c8QnGul4+eJJmYHBuQrc/GxLG2EQMt78rdegE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	b=E69FlbXDGPhqE6WG1k0io0W2I6U5whaq0nd2ib/m5ny6VyvKfJEC7/8ub6SPwD8pUW
+	kxB31fUb89ys/gYHtD8yWwQXDU2u+pkDPtXw07qy+pcj1ABGzM4h81QhlsHIXcflTgk5
+	oSlapr1wLQtqkK08Dz0pJacQmgse3SUMxX6lc=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1295710776-10995-1-git-send-email-lm@larsmichelsen.com>
-	<1295711967.3850.221.camel@mattotaupa>
-In-Reply-To: <1295711967.3850.221.camel@mattotaupa>
-Subject: Re: [PATCH] python-caldav: New reciep - CalDAV rfc4791 client
+Received: by 10.204.68.69 with SMTP id u5mr1930669bki.99.1295719600937; Sat,
+	22 Jan 2011 10:06:40 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.59.147 with HTTP; Sat, 22 Jan 2011 10:06:40 -0800 (PST)
+Date: Sat, 22 Jan 2011 16:06:40 -0200
+X-Google-Sender-Auth: EC1jJVn-hdr-rnzAmKDI37z4WB4
+Message-ID: <AANLkTinz+p5J6K+XhohJJ=q7dD3X1kVGZDNA-4qOOH2W@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Recipes with fetch failures:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 18:07:20 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 22 Jan 2011 18:07:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello Paul,
+Hello,
 
-thanks for your review.
+I have started a build with an empty download dir and found some failures:
 
-On 22/01/11 16:59, Paul Menzel wrote:
-> Am Samstag, den 22.01.2011, 16:39 +0100 schrieb Lars Michelsen:
->> This patch adds a new reciep for the python caldav client library module.
->
-> s/reciep/recipe/ (also in commit summary)
->
-> It is not policy, but I like also to have a note in the commit message,
-> what distribution and architecture this recipe was build tested with.
-> And if it was tested.
+Those are not fetchable:
 
-Ok, will add those notes in the next patches.
+   ftp://invisible-island.net/ncurses/5.7/ncurses-5.7-20100501.patch.gz
+   cvs://anoncvs:anoncvs@anoncvs.handhelds.org/cvs;module=3Dipkg-utils
 
-> I did not know of `${SRCNAME}` before. I think `${PN}` is more common
-> (since it is shorter?). Now I see that you defined it in the beginning.
-> You can use `${PN}`.
+This does seems critical to us since it makes a hard time for anyone
+trying to get something done with OE and has no background how to
+workaround those. It seems that those need fixes.
 
-I just copied most parts from other python-* recipes. The most of them 
-seem to use SRCNAME.
-
-PN containes the whole package name, right? Means 'python-caldav' in 
-this case while SRCNAME only contains the module name 'caldav'.
-
->
->> +inherit setuptools
->> +
->> +SRC_URI[md5sum] = "e5eace7a3b6b7f511a1929a539e6a15d"
->> +SRC_URI[sha256sum] = "4a3b1855000feb8023ab05f8c9e0cfa1648a9abab9ca65ad3e933c22bab61310"
->
-> I think these are put right below the first occurrence of `SRC_URI`. But
-> the style guide [1] does not mention it explicitly.
-
-Same here. Seam a lot of python-* packages have it at the end of the 
-file. While creating/editing such a file it is more intuitive to have 
-these definitions right below SRC_URI. So I aggree with you and will 
-move these lines.
-
-I just posted a 2nd version of the patch.
-
-Thanks & Regards,
-Lars
+--=20
+Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O=
+.S. Systems
+E-mail: otavio@ossystems.com.br=A0 http://www.ossystems.com.br
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0http://projetos.ossys=
+tems.com.br
 
 
