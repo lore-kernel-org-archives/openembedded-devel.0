@@ -1,21 +1,21 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pgi1a-0001TM-Pc
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pgi5u-0001dF-Is
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 19:17:23 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	Sat, 22 Jan 2011 19:21:51 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
 	by relay1.mentorg.com with esmtp 
-	id 1Pgi0s-00049g-8A from Tom_Rini@mentor.com 
+	id 1Pgi5A-0004TN-2r from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 10:16:38 -0800
+	Sat, 22 Jan 2011 10:21:04 -0800
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sat, 22 Jan 2011 10:16:37 -0800
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Sat, 22 Jan 2011 10:21:03 -0800
 Received: from [172.30.80.40] ([172.30.80.40]) by na2-mail.mgc.mentorg.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 22 Jan 2011 11:16:36 -0700
-Message-ID: <4D3B1F00.4040109@mentor.com>
-Date: Sat, 22 Jan 2011 11:16:32 -0700
+	Sat, 22 Jan 2011 11:21:02 -0700
+Message-ID: <4D3B200B.6000909@mentor.com>
+Date: Sat, 22 Jan 2011 11:20:59 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
@@ -23,12 +23,11 @@ User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1295027350.14388.6527.camel@rex>	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>	<4D353F81.50301@xora.org.uk>	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>	<4D35C5C3.60205@mentor.com>
-	<ih4s84$gbj$1@dough.gmane.org>	<4D35FC8B.1090404@mentor.com>
-	<ih52qr$l1v$1@dough.gmane.org>	<AANLkTi=A2kgqgkhfw4p_Og8k9y1MBMrZLDvgwuq5Mxfj@mail.gmail.com>
-	<AANLkTimHg3tkDnm93ycBGokAOsWomT6n+bfTduYPA=G+@mail.gmail.com>
-In-Reply-To: <AANLkTimHg3tkDnm93ycBGokAOsWomT6n+bfTduYPA=G+@mail.gmail.com>
-X-OriginalArrivalTime: 22 Jan 2011 18:16:37.0020 (UTC)
-	FILETIME=[81F5FDC0:01CBBA60]
+	<ih4s84$gbj$1@dough.gmane.org>	<4D35FC8B.1090404@mentor.com>	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
+	<AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
+In-Reply-To: <AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
+X-OriginalArrivalTime: 22 Jan 2011 18:21:03.0010 (UTC)
+	FILETIME=[2080D820:01CBBA61]
 Subject: Re: Yocto Project and OE - Where now?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,136 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 18:17:23 -0000
+X-List-Received-Date: Sat, 22 Jan 2011 18:21:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 01/19/2011 02:25 AM, Frans Meulenbroeks wrote:
-> 2011/1/19 Frans Meulenbroeks<fransmeulenbroeks@gmail.com>:
->> 2011/1/18 Koen Kooi<k.kooi@student.utwente.nl>:
->>   if we make the delta between the 3 be just
->>>> the SRC_URI + checksums?
->>>
->>> Something like:
->>>
->>> * keep gplv2 around if upstream switched to gplv3 at some point
+On 01/19/2011 01:46 AM, Frans Meulenbroeks wrote:
+> 2011/1/18 Khem Raj<raj.khem@gmail.com>:
+>> On Tue, Jan 18, 2011 at 12:48 PM, Tom Rini<tom_rini@mentor.com>  wrote:
+>>> I think we also agree here.  But what's the rule of thumb(s) we want to
+>>> have, to provide enough choice without too much headache?  As I said
+>>> elsewhere, .inc files should probably be used a whole lot more, to help with
+>>> the problem of recipe bugfixing and N recipes for an app with the problem.
+>>>   We should probably also say that in addition to the "keep the last GPLv2+
+>>> version around" rule of thumb we should also have a "keep the latest stable
+>>> release" around too.  But what else?  To use busybox as an example, do we
+>>> really need to keep 1.18.0 and 1.18.1 around when we have 1.18.2?  How about
+>>> if we make the delta between the 3 be just the SRC_URI + checksums?
 >>
->> agree; as said before suggest to reflect the switch in the name of the recipe.
 >>
->>> * allow old stable, stable and dev (e.g. glib 2.24, 2.26 and 2.27+git)
+>> Well what to keep around can not be generalized so much. It also
+>> depends upon the nature of releases for various packages
+>> some packages have a major release and then push out bug fix releases
+>> like busy box case you sited but there are packages
+>> which only do major releases which can cause compatibility hassles as
+>> new interfaces come and old ones are removed etc.
+>> so I think it has to be flexible and mostly left to package
+>> maintainers discretion as they know the nature of releases most but
+>> I like the idea of keeping one GPLv2 release around and 1 latest
+>> release around. If a distro pinned a version then that should
+>> be considered as well. It is bad to sweep underneath a distros
+>> pinnings. Then they have to rebuild and they get problems
+>> as they have to make sure that if a package bump happens then they
+>> should be able to define an upgrade path
 >>
->> I'd say retire old stable after a while (e.g. after stable is there
->> for half a year, unless of course there are compelling reasons to keep
->> it).
->> Wrt dev: if we want to go to a maintainers model similar to u-boot and
->> linux, I would expect this to live in a separate branch or layer.
->> Once proven stable the maintainers pulls it into the core archive.
->>
->>> * allow active contributers some leeway to test multiple subreleases
->>> (e.g. busybox 1.18.[0-99]
->>
->> Again here, I feel it is much better to put it into a different branch
->> or layer, and once stable it is pulled into the mainline.
->> Again similar to what Linus and Wolfgang do.
->>
->>> * The maintainer can have as many versions as he wants to.
->>
->> my preference: not in the main layer.
->>
->>> * toolchain is exempt from all that since having 20 binutils versions is
->>> sometimes needed when building for 20 different archs[1].
->>
->> Fully agree.
->>>
->>> But I seriously think we are overengineering this. We should have people
->>> actually working on oe-core and meta-oe reach a consensus when
->>> encountering problems.
->>
->> I beg to disagree on this.
->> We have a unique opportunity at hand to improve, so it seems wise to
->> raise the bar quality wise.
->>
->> E.g. wrt what Richard wrote in the start post
->>
->> [quote]
->> * Creation of a subset of metadata that has a consistent high quality
->>   standard:
->>    - removal of legacy components (pkgconfig hacks, libtool hacks,
->>      legacy staging, unneeded compiler arguments)
->>    - consistent metadata layout, spacing, use of variables
->>    - migration away from outdated practises (e.g. use BBCLASSEXTEND)
->> [/quote]
->>
->> I feel when migrating recipes we should also assure that they adhere
->> to a certain quality standard. That would need us to define a minimal
->> standard though.
->> Currently I feel we are just moving recipes, only fixing what is
->> really needed to get things running (like removing legacy staging)
->> whereas we could do much better.
->> There are currently some things in OE that could use some improvement
->> and we should take the opportunity to improve.l
-
-Here's what I worry about.  It shouldn't take an overly active 
-maintainer for most recipes.  Sure, some programs (and of course the 
-toolchain) require some care and knowledge.  But lots of things don't. 
-I fear we're trying to get to the point where if someone is going to 
-submit a recipe for some program they need to sign up to make sure it's 
-always pointing to the most up to date upstream and other mandates.  One 
-of the strengths of OE today is that it's not overly burdensome to 
-submit changes back and have them accepted.
-
->>
->> And yes, I have no problem in spending time to improve things, but if
->> there is no consensus on where we should go this is not going to be
->> effective (and actually makes it harder to improve quality wise).
->> To take the bikeshed analogy up again. It does not really help if
->> everyone start to paint in his own favourite color (unless maybe if
->> you are still stuck in the flower power era).
->>
->> Frans
->>
-> I know it is fairly schizofrenic to reply on ones own post, but I just
-> peeked into the meta-oe layer and found an excellent case on what we
-> should try to avoid when bringing over recipes from oe to meta-oe.
-> path: root/recipes-graphics/directfb
-> Mode	Name	Size	
-> d---------	++dfb	48	logplain
-> -rw-r--r--	++dfb_1.0.0.bb	588	logplain
-> d---------	directfb-1.2.8	50	logplain
-> d---------	directfb-1.4.6	41	logplain
-> -rw-r--r--	directfb-examples_1.0.0.bb	406	logplain
-> -rw-r--r--	directfb-examples_1.2.0.bb	409	logplain
-> -rw-r--r--	directfb.inc	2038	logplain
-> -rw-r--r--	directfb_1.4.6.bb	615	logplain
-> d---------	files	415	logplain
-> d---------	fusionsound-1.1.0+git20070709	54	logplain
-> -rw-r--r--	fusionsound_1.1.0+git20070709.bb	1479	logplain
-> -rw-r--r--	lite_0.9.26+cvs20070207.bb	1140	logplain
+>> Sometimes newer is not always better in case of udev the size has
+>> increased over the time and some distro's may not like
+>> it and there can be many such scenarios.
 >
-> Why is there a directfb-examples_1.0.0.bb? In OE no-one is pinning
-> this version, and given the fact that these are examples there is
-> probably little reason to keep it.
+> I wholehearthy agree with the proposal that it is left to the package
+> maintainers discretion.
 
-They are example programs for directfb which also means they are handy 
-demo programs for "hey, is directfb working on my platform and looking 
-right".
+And what about packages that have been, well, gently orphaned?  I think 
+we need to accept and understand that there will be a class of recipes 
+that are simple enough that they don't need nor have spelled out 
+maintainers.
 
-> Something similar for directfb-1.2.8. Maybe I overlooked things but I
-> could not find a the user of this dir. I guess it could be gone.
+> Wrt the GPLv2+ version. I suggest to reflect this in the name.
+> E.g. you could have samba and samba-gplv2 (or perhaps samba-gplv2 and
+> samba-gplv3). Then it immediately becomes obvious why there are two
+> versions.
 
-I suppose it could be updated to 1.2.10, yes.  And directfb is enough by 
-itself, although it would be nice if we went and took a stab at making 
-it an option to use rather than X, when possible again.
-
-> If we want to improve on quality it is probably not a bad idea to at
-> least have a checklist with improvement actions that should be done
-> when migrating recipes (e.g. remove stale patches, unused&  unpinned
-> older versions etc etc). I know it takes time, but it can also
-> increase the overall quality. Let's take that opportunity.
-
-OK, but what's wrong in this directory?  It's on known to work for 
-someone versions, I don't see legacy staging and iirc the pkg-config 
-changes aren't hacks but fixing upstream.
+Put me in the "no" camp here please, we have a LICENSE field for a reason.
 
 -- 
 Tom Rini
