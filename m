@@ -1,35 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp-1.concepts.nl ([213.197.30.124])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PgbN2-00042k-Ig for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 12:11:04 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PgbML-0001XE-Ce for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 12:10:21 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 12:10:21 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 12:10:21 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 22 Jan 2011 12:10:08 +0100
-Message-ID: <ihedug$vsl$1@dough.gmane.org>
-References: <20110120181233.GA1789@lit.local.igalia.com>	<ihbp5c$4ov$1@dough.gmane.org>
-	<AANLkTinnrY2o___wOwe3vqrYfY8QsBQYE6AA7VFuAq7T@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <AANLkTinnrY2o___wOwe3vqrYfY8QsBQYE6AA7VFuAq7T@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
+	(envelope-from <pieterg@gmx.com>) id 1PgbXz-0004Eb-FM
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 12:22:23 +0100
+Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
+	helo=mx1.grimmerink.nl) by smtp-1.concepts.nl with esmtp (Exim 4.69)
+	(envelope-from <pieterg@gmx.com>)
+	id 1PgbIk-0000ao-Ar; Sat, 22 Jan 2011 12:06:38 +0100
+Received: from laptoppieter.localnet (laptoppieter.wielewaal [10.9.0.58])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 8CF536A077;
+	Sat, 22 Jan 2011 12:06:33 +0100 (CET)
+From: pieterg <pieterg@gmx.com>
+To: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+Date: Sat, 22 Jan 2011 12:06:32 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.35-24-generic-pae; KDE/4.5.1; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201101221206.32796.pieterg@gmx.com>
+X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
+	information
+X-Concepts-MailScanner-ID: 1PgbIk-0000ao-Ar
+X-Concepts-MailScanner: Found to be clean
+X-Concepts-MailScanner-SpamCheck: 
+X-Concepts-MailScanner-From: pieterg@gmx.com
+Cc: openembedded-devel@lists.openembedded.org
+Subject: e2fsprogs util-linux-ng dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,54 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 11:11:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 22 Jan 2011 11:22:23 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+in http://git.openembedded.org/cgit.cgi/openembedded/commit/recipes/e2fsprogs?h=org.openembedded.dev&id=ef73bcd899aaf182fb596e5912c20f966e0e6951
+a util-linux-ng RDEPENDS was added to e2fsprogs.
+But, the comment suggests that only util-linux-ng-blkid would be needed:
 
-On 22-01-11 01:21, Khem Raj wrote:
-> On Fri, Jan 21, 2011 at 3:03 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 20-01-11 19:12, Víctor M. Jáquez L. wrote:
->>>>
->>>> In order to build native-sdk-image recipe, I found my self compiling
->>>> glibc_2.9-r37.4, because it is the real provider of virtual-libc-dev (the
->>>> toolchain does not truly provide it -but that is another bug [1]-).
->>>>
->>>> But the glibc_2.9-r37.4 configuration fails using the canonical
->>>> arm-angstrom-linux-gnueabi- toolchain
-> 
-> If you're using angstrom 2008, glibc 2.9 is built by default. Trying to
-> rebuild it won't work because it will be missing headers due to all the
-> -initial and -intermedia shuffle.
-> If you're using angstrom 2010, eglibc is built by default and should
-> providing virtual-libc-dev
-> 
->> yes angstrom-2010.x is a better option keep in mind its new so expect
->> some churn every now and then.
-> 
-> 
-> Switching to minimal will only get you anguish, since it's broken by design.
-> 
->> Heh interesting :) It would help if you elaborate on the flaws so we
->> can improve it and in turn improve OE in general
+> # blkid used to be part of e2fsprogs but is useful outside, add it
+> # as an RDEPENDS_${PN} so that anything relying on it being in e2fsprogs
+> # still works
+> RDEPENDS_e2fsprogs = "util-linux-ng e2fsprogs-badblocks"
 
-The design involves not using PREFERRED_PROVIDER for things like bluez
-and not setting PREFERRED_VERSION for recipes, using source mirrors or
-using things like insane.bbclass. As expected, you had to use pretty
-much all those to get minimal to build something remotely usefull.
+util-linux-ng itself does not contain blkid, but a lot of unrelated utils
+However, it RDEPENDS on other util-linux-ng- packages, among which util-linux-ng-blkid.
+So eventually also util-linux-ng-blkid is installed.
+But I'm wondering whether it was not intended to just RDEPEND on util-linux-ng-blkid, so we can avoid dragging in a large number of unrelated utils?
 
-As Philip points out, people are free to deliberately not use those
-advanced features, but they should also realize that any breakage due to
-that is entirely their own fault.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNOrsQMkyGM64RGpERAm+UAJ9YGoCY6P8irFVlcWPF3N5TinD93gCfXU2V
-2BBSC/hC7I7ynDgUAps4VuQ=
-=RB3v
------END PGP SIGNATURE-----
-
+Rgds, Pieter
 
 
