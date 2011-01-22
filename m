@@ -1,31 +1,37 @@
-Received: from smtp-1.concepts.nl ([213.197.30.124])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pieterg@gmx.com>) id 1PgbXz-0004Eb-FM
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PgbfB-0004NZ-4C
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 12:22:23 +0100
-Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
-	helo=mx1.grimmerink.nl) by smtp-1.concepts.nl with esmtp (Exim 4.69)
-	(envelope-from <pieterg@gmx.com>)
-	id 1PgbIk-0000ao-Ar; Sat, 22 Jan 2011 12:06:38 +0100
-Received: from laptoppieter.localnet (laptoppieter.wielewaal [10.9.0.58])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 8CF536A077;
-	Sat, 22 Jan 2011 12:06:33 +0100 (CET)
-From: pieterg <pieterg@gmx.com>
-To: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-Date: Sat, 22 Jan 2011 12:06:32 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.35-24-generic-pae; KDE/4.5.1; i686; ; )
+	Sat, 22 Jan 2011 12:29:49 +0100
+Received: by iwn8 with SMTP id 8so2817269iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 03:29:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=OcK1f82mc8F7AOYv0hQoy9YM/W52ClaMSqG7cDcsMlY=;
+	b=ngLYivYC8ssjA68H7u7Z5NGqpX2Ee3N/Qv5bljPTlO4npnKVVeIbvMgf/ZXjvfVg2T
+	tCaohd4D4qQSE3ZiwYg7/n/jO4Uwnzbcw+cvvgrySikhDqDk47Q+2iIiedBqmblmVDyZ
+	ovH2uUTye/fuUvxaWzyz9CRS6vaieFe/apk1E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=G3KsHV2jEMceeS/ZBtllGeCRd3+RSoS8ZbFZypSDcxx0hOyP79NMDQPQvvfYul4Yxo
+	gnGXl1fktqnbjdbV0zYxbKe9XqMJyw/RVvk3mJ1u7Mk1LuF9UftKdvJdk4yhD2bTHQWy
+	RlZM3Qh4ZFLe0I9X8h0iye5ytpsSro8bsaRFE=
 MIME-Version: 1.0
-Message-Id: <201101221206.32796.pieterg@gmx.com>
-X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
-	information
-X-Concepts-MailScanner-ID: 1PgbIk-0000ao-Ar
-X-Concepts-MailScanner: Found to be clean
-X-Concepts-MailScanner-SpamCheck: 
-X-Concepts-MailScanner-From: pieterg@gmx.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: e2fsprogs util-linux-ng dependency
+Received: by 10.231.15.5 with SMTP id i5mr2072265iba.149.1295695747575; Sat,
+	22 Jan 2011 03:29:07 -0800 (PST)
+Received: by 10.231.34.69 with HTTP; Sat, 22 Jan 2011 03:29:07 -0800 (PST)
+In-Reply-To: <20110121102102.GA7400@lit.local.igalia.com>
+References: <20110120181233.GA1789@lit.local.igalia.com>
+	<AANLkTin6XfEpo_ic0Edp8+58EbzGutuhohM-V4EzzwhJ@mail.gmail.com>
+	<20110121102102.GA7400@lit.local.igalia.com>
+Date: Sat, 22 Jan 2011 12:29:07 +0100
+Message-ID: <AANLkTimuFZ094f47doDbgXRpL3W1=TU3miw5UqF+ZE2=@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org, vjaquez@igalia.com
+Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 11:22:23 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 22 Jan 2011 11:29:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-in http://git.openembedded.org/cgit.cgi/openembedded/commit/recipes/e2fsprogs?h=org.openembedded.dev&id=ef73bcd899aaf182fb596e5912c20f966e0e6951
-a util-linux-ng RDEPENDS was added to e2fsprogs.
-But, the comment suggests that only util-linux-ng-blkid would be needed:
+2011/1/21 V=EDctor M. J=E1quez L. <vjaquez@igalia.com>:
+> On Thu, Jan 20, 2011 at 01:40:19PM -0800, Khem Raj wrote:
+>> 2011/1/20 V=EDctor M. J=E1quez L. <vjaquez@igalia.com>:
+>> >
+>> > In order to build native-sdk-image recipe, I found my self compiling
+>> > glibc_2.9-r37.4, because it is the real provider of virtual-libc-dev (=
+the
+>> > toolchain does not truly provide it -but that is another bug [1]-).
+>> >
+>> > But the glibc_2.9-r37.4 configuration fails using the canonical
+>> > arm-angstrom-linux-gnueabi- toolchain (using the csl external toolchai=
+n fails
+>> > too, but for other reasons):
+>> >
+>> > Log data follows:
+>> > [snip]
+>>
+>>
+>> you might try to use eglibc. It may fix this issue for you.
+>>
+>
+> Thanks. I'm giving a try to minimal distribution according to Yuri's
+> observation [1].
+>
+> 1. http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/0=
+28950.html
 
-> # blkid used to be part of e2fsprogs but is useful outside, add it
-> # as an RDEPENDS_${PN} so that anything relying on it being in e2fsprogs
-> # still works
-> RDEPENDS_e2fsprogs = "util-linux-ng e2fsprogs-badblocks"
+Victor, apologies for hijacking your thread.
 
-util-linux-ng itself does not contain blkid, but a lot of unrelated utils
-However, it RDEPENDS on other util-linux-ng- packages, among which util-linux-ng-blkid.
-So eventually also util-linux-ng-blkid is installed.
-But I'm wondering whether it was not intended to just RDEPEND on util-linux-ng-blkid, so we can avoid dragging in a large number of unrelated utils?
+If you are interested to use minimal, be sure to give it a try.
+It works like a charm for me. and according to the testing page on the
+wiki (http://wiki.openembedded.org/index.php/Testing) there are
+several reports for native-sdk-image building under the minimal distro
+(for various machines).
+And if you encounter issues, feel free to send another mail to the
+list or join the #oe irc channel on freenode. Often there is someone
+around in that channel willing to help you.
 
-Rgds, Pieter
+Enjoy OE! Frans (eFfeM on irc).
 
 
