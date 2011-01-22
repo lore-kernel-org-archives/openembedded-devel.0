@@ -1,23 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pgfsm-0001z0-Uq for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 17:00:09 +0100
-Received: from f053037250.adsl.alicedsl.de ([78.53.37.250]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pgfs8-0001zS-28 for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 15:59:28 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <lm@larsmichelsen.com>) id 1Pgg21-0002E9-3y
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 17:09:41 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by larsmichelsen.com (Postfix) with ESMTP id 1219A9544015
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 17:09:00 +0100 (CET)
+Received: from larsmichelsen.com ([127.0.0.1])
+	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id JZS+OxbvJRkc
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 17:08:59 +0100 (CET)
+Received: from [192.168.4.106] (g229015111.adsl.alicedsl.de [92.229.15.111])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: lm)
+	by larsmichelsen.com (Postfix) with ESMTPSA id 996D69544005
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 17:08:59 +0100 (CET)
+Message-ID: <4D3AFA2B.3060008@larsmichelsen.com>
+Date: Sat, 22 Jan 2011 16:39:23 +0100
+From: Lars Michelsen <lm@larsmichelsen.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2.104i Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1295710776-10995-1-git-send-email-lm@larsmichelsen.com>
-References: <1295710776-10995-1-git-send-email-lm@larsmichelsen.com>
-Date: Sat, 22 Jan 2011 16:59:27 +0100
-Message-ID: <1295711967.3850.221.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: [PATCH] python-caldav: New reciep - CalDAV rfc4791 client
+References: <1295654503-26379-1-git-send-email-lm@larsmichelsen.com>	<ihedau$stf$1@dough.gmane.org>	<4D3AC11C.2040602@larsmichelsen.com>	<4D3AC6F0.4050802@xora.org.uk>	<ihel1v$tnt$1@dough.gmane.org>	<4D3ADC2C.6070506@larsmichelsen.com>
+	<ihesdm$v7u$1@dough.gmane.org>
+In-Reply-To: <ihesdm$v7u$1@dough.gmane.org>
+Subject: Re: [PATCH] mplayer_svn: Package can be built again; Bumped to rev. 31329.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,83 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 16:00:09 -0000
-X-Groupsio-MsgNum: 28315
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-4accEBhMQQX3VUD2fDbI"
+X-List-Received-Date: Sat, 22 Jan 2011 16:09:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-4accEBhMQQX3VUD2fDbI
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hello Koen,
 
-Am Samstag, den 22.01.2011, 16:39 +0100 schrieb Lars Michelsen:
-> This patch adds a new reciep for the python caldav client library module.
+On 22/01/11 16:17, Koen Kooi wrote:
+>
+> Looking closer at your patch, it looks like you're working off an old tree:
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=9a3e44e3d3d69ab9e1e4e1e3338afaed2b97fb65
+>
+> Your patch is also missing the hardfp fix that is needed to actually
+> make it work.
+>
+> Could you try the current recipe and see if it works for you? It works
+> on my omap3 boards quite well, minus a dlopen() buglet in libdvdcss2.
+>
+> regards,
+>
+> Koen
 
-s/reciep/recipe/ (also in commit summary)
+Yes, I built the changes with testing_2010-12-30 tag at beginning of 
+January. At this time the last modification of the mplayer_svn reciep 
+was on 2010-10-26. So I had no problem with that rev as starting point.
 
-It is not policy, but I like also to have a note in the commit message,
-what distribution and architecture this recipe was build tested with.
-And if it was tested.
+Now I recognized you patched the reciep on 2011-01-16. Well, seems to go 
+in the same direction as my changes.
 
-> Signed-off-by: Lars Michelsen <lm@larsmichelsen.com>
-> ---
->  recipes/python/python-caldav_0.1.6.bb |   16 ++++++++++++++++
->  1 files changed, 16 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/python/python-caldav_0.1.6.bb
->=20
-> diff --git a/recipes/python/python-caldav_0.1.6.bb b/recipes/python/pytho=
-n-caldav_0.1.6.bb
-> new file mode 100644
-> index 0000000..ecf8e39
-> --- /dev/null
-> +++ b/recipes/python/python-caldav_0.1.6.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION =3D "This project is a CalDAV (RFC4791) client library for P=
-ython."
-> +SECTION =3D "devel/python"
-> +PRIORITY =3D "optional"
-> +LICENSE =3D "GPL"
-> +HOMEPAGE =3D "http://bitbucket.org/cyrilrbt/caldav"
-> +SRCNAME =3D "caldav"
-> +PR =3D "r0"
-> +DEPENDS =3D "python python-lxml python-vobject"
-> +
-> +SRC_URI  =3D "http://pypi.python.org/packages/source/c/${SRCNAME}/${SRCN=
-AME}-${PV}.tar.gz"
-> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+I'll give it a try and report back. Thanks for the hint.
 
-I did not know of `${SRCNAME}` before. I think `${PN}` is more common
-(since it is shorter?). Now I see that you defined it in the beginning.
-You can use `${PN}`.
-
-> +inherit setuptools
-> +
-> +SRC_URI[md5sum] =3D "e5eace7a3b6b7f511a1929a539e6a15d"
-> +SRC_URI[sha256sum] =3D "4a3b1855000feb8023ab05f8c9e0cfa1648a9abab9ca65ad=
-3e933c22bab61310"
-
-I think these are put right below the first occurrence of `SRC_URI`. But
-the style guide [1] does not mention it explicitly.
+Regards,
+Lars
 
 
-Thanks,
-
-Paul
-
-
-[1] http://wiki.openembedded.org/index.php/Styleguide
-
---=-4accEBhMQQX3VUD2fDbI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk06/t8ACgkQPX1aK2wOHViA3wCfTfmaePogMO3BCwGAaeYRgnQY
-ExIAoImMF+XEdbbluzsf2UCx1+b1UH8u
-=KDMw
------END PGP SIGNATURE-----
-
---=-4accEBhMQQX3VUD2fDbI--
