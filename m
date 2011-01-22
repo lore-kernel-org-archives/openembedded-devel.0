@@ -1,35 +1,34 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PggwU-0003Oy-JJ
+	(envelope-from <lm@larsmichelsen.com>) id 1PghQT-0001BX-M2
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 18:08:02 +0100
-Received: by ywi6 with SMTP id 6so952466ywi.6
+	Sat, 22 Jan 2011 18:39:03 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by larsmichelsen.com (Postfix) with ESMTP id CF5039544015
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 09:07:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=QuVWJsFJkNIWTAJRvgWoLA1wK8ZuITuw8M5qy7pWLVc=;
-	b=IlOxtxWebzsLncIkW/ZC/PCyOTQQxgU4Nk0EcLtQGUynpTzAELrgLfJgi+3aVzc6J8
-	V+0bFGFaqWGQaqJYhdatOMYfOJINZM8o2XtQiOQCHgeNqrOLtMB4X067nmKWrGXW+FKD
-	tZazY4mB/waXIdx7dLr94wQqack7ZNNEiB1NI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=J3G+X/VGaLbxa9AAY2QTQ5HUe9C4Rqkagwoso+Tx+yrJI5CeeKpF46H9bSMNC/+WQZ
-	UphtvyRZSsWeL9Sw6XlSGN/wA/kICicbtHDRevL7qHkmPSMohDvlEFiEAUw2kzPfsjZo
-	mnSymdr3CFBfbvbIe42euM2BmHP+5ljFttAKk=
-Received: by 10.91.163.27 with SMTP id q27mr2503927ago.139.1295716038983; Sat,
-	22 Jan 2011 09:07:18 -0800 (PST)
+	Sat, 22 Jan 2011 18:38:10 +0100 (CET)
+Received: from larsmichelsen.com ([127.0.0.1])
+	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id rJqDbmeDCWq6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 18:38:10 +0100 (CET)
+Received: from [192.168.4.106] (g229015111.adsl.alicedsl.de [92.229.15.111])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: lm)
+	by larsmichelsen.com (Postfix) with ESMTPSA id 89E0D9544005
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 18:38:00 +0100 (CET)
+Message-ID: <4D3B15FB.5000403@larsmichelsen.com>
+Date: Sat, 22 Jan 2011 18:38:03 +0100
+From: Lars Michelsen <lm@larsmichelsen.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2.104i Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Sat, 22 Jan 2011 09:06:58 -0800 (PST)
-In-Reply-To: <201101221206.32796.pieterg@gmx.com>
-References: <201101221206.32796.pieterg@gmx.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 22 Jan 2011 09:06:58 -0800
-Message-ID: <AANLkTing4dVzfMn6p4rcx0uxefyX=uYmv=ER3v+ykzW7@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: e2fsprogs util-linux-ng dependency
+References: <1295654503-26379-1-git-send-email-lm@larsmichelsen.com>	<ihedau$stf$1@dough.gmane.org>	<4D3AC11C.2040602@larsmichelsen.com>	<4D3AC6F0.4050802@xora.org.uk>	<ihel1v$tnt$1@dough.gmane.org>	<4D3ADC2C.6070506@larsmichelsen.com>
+	<ihesdm$v7u$1@dough.gmane.org>
+In-Reply-To: <ihesdm$v7u$1@dough.gmane.org>
+Subject: Re: [PATCH] mplayer_svn: Package can be built again; Bumped to rev. 31329.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,36 +42,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 17:08:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 22 Jan 2011 17:39:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jan 22, 2011 at 3:06 AM, pieterg <pieterg@gmx.com> wrote:
-> in http://git.openembedded.org/cgit.cgi/openembedded/commit/recipes/e2fsprogs?h=org.openembedded.dev&id=ef73bcd899aaf182fb596e5912c20f966e0e6951
-> a util-linux-ng RDEPENDS was added to e2fsprogs.
-> But, the comment suggests that only util-linux-ng-blkid would be needed:
+On 22/01/11 16:17, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
->> # blkid used to be part of e2fsprogs but is useful outside, add it
->> # as an RDEPENDS_${PN} so that anything relying on it being in e2fsprogs
->> # still works
->> RDEPENDS_e2fsprogs = "util-linux-ng e2fsprogs-badblocks"
+> On 22-01-11 14:31, Lars Michelsen wrote:
+>> Hello,
+>>
+>>>> A recipe can have multiple svn sources, so you can fetch ffmpeg into a
+>>>> seperate directory then move it into the mplayer one overwriting
+>>>> whatever mplayer checked out.
+>>>
+>>> Ffmpeg isn't using svn anymore, so if mplayer is using svn remote, it
+>>> won't get updated since last week.
+>>
+>> wow, things are changing fast. I checked out the current mplayer repo
+>> and it still fetches the svn repositories. But we are using old
+>> revisions - so this would be OK for the moment.
+>>
+>> In a long term the mplayer_svn package could be replaced by mplayer_git
+>> package. mplayer_git could make use of ffmpeg git repo then, right?
+>>
+>> So what does this mean for the mplayer_svn patch? Should I invest time
+>> to make it use several subversion repositories instead of the sub
+>> repositories?
 >
-> util-linux-ng itself does not contain blkid, but a lot of unrelated utils
-> However, it RDEPENDS on other util-linux-ng- packages, among which util-linux-ng-blkid.
-> So eventually also util-linux-ng-blkid is installed.
-> But I'm wondering whether it was not intended to just RDEPEND on util-linux-ng-blkid, so we can avoid dragging in a large number of unrelated utils?
+> Looking closer at your patch, it looks like you're working off an old tree:
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=9a3e44e3d3d69ab9e1e4e1e3338afaed2b97fb65
+>
+> Your patch is also missing the hardfp fix that is needed to actually
+> make it work.
+>
+> Could you try the current recipe and see if it works for you? It works
+> on my omap3 boards quite well, minus a dlopen() buglet in libdvdcss2.
+>
 
+I am not able to build it. Seems to be related to the (annoying!) ffmpeg 
+subrepository thing. With that sub-repo there is no control about the 
+version to be used. One day it works and one day later it is broken...
 
-hmmm good point. I think it should just rdep for things which its
-missing or needs to run
-its own provided programs at runtime
+Here is the output:
 
->
-> Rgds, Pieter
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+NOTE: Applying patch 'offset.patch' (mplayer/offset.patch)
+FATAL: Execution of 'quilt 
+--quiltrc=/media/lm/transfer/oetmp/sysroots/x86_64-linux/usr/bin/quiltrc 
+push' failed with exit code 1:
+Applying patch offset.patch
+patching file ffmpeg/libavcodec/arm/asm-offsets.h
+Hunk #1 FAILED at 35.
+1 out of 1 hunk FAILED -- rejects in file 
+ffmpeg/libavcodec/arm/asm-offsets.h
+Patch offset.patch does not apply (enforce with -f)
+
+Regards,
+Lars
 
 
