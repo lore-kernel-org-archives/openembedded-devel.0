@@ -1,32 +1,35 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a.sappia@gmail.com>) id 1Pggtd-0003JO-6T
+	(envelope-from <raj.khem@gmail.com>) id 1PggwU-0003Oy-JJ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 18:05:05 +0100
-Received: by qyk36 with SMTP id 36so2810982qyk.6
+	Sat, 22 Jan 2011 18:08:02 +0100
+Received: by ywi6 with SMTP id 6so952466ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 09:04:21 -0800 (PST)
+	Sat, 22 Jan 2011 09:07:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:from:date:message-id:subject:to
-	:content-type; bh=j479VB+vF2HMNHiC2tUByFUdFWLmMukLqEWleRqA5nw=;
-	b=xi9OmOr9HKihgTLQUbXp9ElRDlwWsSpp4CttrOh6ZTvgrXiyk0mPvvHeNRWgZvYYBl
-	4rp3e2Ck6Hory/PU70jus0vvJu/qXzbaNxvHvf02qjXduOlefJ5smNZ0jjPWmnLID8vc
-	Jm8KaBPG3v1f3SrfZW86MLl/ZciDBHmANfe/8=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=QuVWJsFJkNIWTAJRvgWoLA1wK8ZuITuw8M5qy7pWLVc=;
+	b=IlOxtxWebzsLncIkW/ZC/PCyOTQQxgU4Nk0EcLtQGUynpTzAELrgLfJgi+3aVzc6J8
+	V+0bFGFaqWGQaqJYhdatOMYfOJINZM8o2XtQiOQCHgeNqrOLtMB4X067nmKWrGXW+FKD
+	tZazY4mB/waXIdx7dLr94wQqack7ZNNEiB1NI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=AkCpWoCG8dm/Srt1g1ZZ9axvZpOAPtPN25Wr4MXCT+Vk7g7PLdML5+i6xobn3rRuEk
-	T2zNRIs1YH9g2awa6zJOxojY3+4odJEJS/QYZa3iV3MAnYugcHOIpmh92+TZ9Wmqo+0C
-	mCVN28JoKKyrlKKqSbGd9PSTT7Pd+CEHWEKH4=
-Received: by 10.229.215.70 with SMTP id hd6mr1920032qcb.102.1295715860674;
-	Sat, 22 Jan 2011 09:04:20 -0800 (PST)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	b=J3G+X/VGaLbxa9AAY2QTQ5HUe9C4Rqkagwoso+Tx+yrJI5CeeKpF46H9bSMNC/+WQZ
+	UphtvyRZSsWeL9Sw6XlSGN/wA/kICicbtHDRevL7qHkmPSMohDvlEFiEAUw2kzPfsjZo
+	mnSymdr3CFBfbvbIe42euM2BmHP+5ljFttAKk=
+Received: by 10.91.163.27 with SMTP id q27mr2503927ago.139.1295716038983; Sat,
+	22 Jan 2011 09:07:18 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.229.232.2 with HTTP; Sat, 22 Jan 2011 09:04:00 -0800 (PST)
-From: Alessandro Sappia <a.sappia@gmail.com>
-Date: Sat, 22 Jan 2011 18:04:00 +0100
-Message-ID: <AANLkTinVGBrZxdvRUzqkURfjhxHVHkqK3am7_e9Xgb8_@mail.gmail.com>
+Received: by 10.90.55.10 with HTTP; Sat, 22 Jan 2011 09:06:58 -0800 (PST)
+In-Reply-To: <201101221206.32796.pieterg@gmx.com>
+References: <201101221206.32796.pieterg@gmx.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 22 Jan 2011 09:06:58 -0800
+Message-ID: <AANLkTing4dVzfMn6p4rcx0uxefyX=uYmv=ER3v+ykzW7@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: An Openembedded device concurring for StartEnt
+Subject: Re: e2fsprogs util-linux-ng dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,70 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 17:05:05 -0000
+X-List-Received-Date: Sat, 22 Jan 2011 17:08:02 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Hi all,
-I'm one of the founders of Biotechware, a startup born in Turin few months
-ago
-where we developed a custom device and we used openembedded as framework
-for creating the software image.
-ON some user suggestion (IRC channel #oe) I'm writing here asking you for
-some help
-in an European Startup competiton where winners are chosen from popular
-vote.
+On Sat, Jan 22, 2011 at 3:06 AM, pieterg <pieterg@gmx.com> wrote:
+> in http://git.openembedded.org/cgit.cgi/openembedded/commit/recipes/e2fsprogs?h=org.openembedded.dev&id=ef73bcd899aaf182fb596e5912c20f966e0e6951
+> a util-linux-ng RDEPENDS was added to e2fsprogs.
+> But, the comment suggests that only util-linux-ng-blkid would be needed:
+>
+>> # blkid used to be part of e2fsprogs but is useful outside, add it
+>> # as an RDEPENDS_${PN} so that anything relying on it being in e2fsprogs
+>> # still works
+>> RDEPENDS_e2fsprogs = "util-linux-ng e2fsprogs-badblocks"
+>
+> util-linux-ng itself does not contain blkid, but a lot of unrelated utils
+> However, it RDEPENDS on other util-linux-ng- packages, among which util-linux-ng-blkid.
+> So eventually also util-linux-ng-blkid is installed.
+> But I'm wondering whether it was not intended to just RDEPEND on util-linux-ng-blkid, so we can avoid dragging in a large number of unrelated utils?
 
-Biotechware is a business venture by Alessandro Sappia, Enrico Manzini and
-Vertigotech s.r.l., a company specialized in electronics. We conceived a
-telemedicine
-integrated platform for remote cardiac monitoring, aimed at pharmacies. The
-team=E2=80=99s
-solution permits to record a professional grade ECG directly at the pharmac=
-y
-with
-an easy to use and innovative device. The record is then remotely reviewed
-and
-reported by a qualified cardiologist and made available to the patient
-through a secure website.
 
-Biotechware entered the Startent European competition for innovative
-enterprises
-and placed itself in the first five projects. The final score of the
-competition depends
-now on popular vote, and you can give your support by voting on the
-internet.
+hmmm good point. I think it should just rdep for things which its
+missing or needs to run
+its own provided programs at runtime
 
-To support Biotechware you can follow these steps:
+>
+> Rgds, Pieter
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-  1. visit the vote site at http://193.145.154.13/startent/popularvote/.
-Under the vote counter,
-      you have to insert your email address in the =E2=80=9CDo you want to =
-vote?
-Type your e-mail=E2=80=9C box,
-     and press the =E2=80=9Csubmit=E2=80=9D button.
-  2. you should receive shortly a confirmation email message at the
-specified address.
-      In the email there is a link to be followed to reach the actual votin=
-g
-page.
-  3. in the voting page, check =E2=80=9CBiotechware=E2=80=9D and press the =
-=E2=80=9CVote=E2=80=9D button
-below.
-      When vote confirmation is asked you can press =E2=80=9COk=E2=80=9D
-
-Each email address can vote only once. Popular vote ends on the 23th of
-january 2011.
-It's possible to follow the evolution of the poll at the same site at point
-1.
-
-Kindly thanks to all who'll support us
-
-Regards,
-
-Alessandro Sappia
-
---=20
-Alessandro Sappia
-a.sappia@gmail.com
 
