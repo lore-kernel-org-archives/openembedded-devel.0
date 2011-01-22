@@ -1,36 +1,33 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <a.sappia@gmail.com>) id 1PgexQ-0000K1-Py
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pgeyc-0000Lj-Mb
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 16:00:52 +0100
-Received: by wwi18 with SMTP id 18so1778123wwi.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 06:59:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=g7nlkwWcv5j2zLekjEN3IMPHtLOVwFpsNthw5eKZzIY=;
-	b=w28U04sRfW7iV2Ou2f1bV1GYGYk9pt9DlJ9iFHAn79IpuA2CSlE/vDwy+zkuIMf7Wr
-	GkRPVqN0qwWMnn83mjEzKS8ELkKfi9ylOtdI/GsUZi7MNwB6CFZZj3YzbRLZx+D+Kf46
-	AUgA/9DQlaLfp4FfRIIfleq48HtIOljIJEgDQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=d0/rEEH0+83Za6FWz970bmkD4gCwGtbRzHSI+3g37Mh/foScv23aJ95aFGXBmAdBEJ
-	1zfZE2QEfQShvrEhSCeB2vBXtR8BwHMw044arLlxGayS6mSTAeSSG/21SIeojEFeMlZ0
-	oIDTGKFbVi1dzpEL4pUKJuELjRTUyQeeDKdLg=
-Received: by 10.227.157.1 with SMTP id z1mr2237020wbw.23.1295708397993;
-	Sat, 22 Jan 2011 06:59:57 -0800 (PST)
-Received: from localhost.localdomain
-	(host210-149-dynamic.52-82-r.retail.telecomitalia.it [82.52.149.210])
-	by mx.google.com with ESMTPS id b30sm5521144wen.25.2011.01.22.06.59.56
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 22 Jan 2011 06:59:57 -0800 (PST)
-From: Alessandro Sappia <a.sappia@gmail.com>
+	Sat, 22 Jan 2011 16:02:06 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Pgexu-0005KG-CQ from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 07:01:22 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Sat, 22 Jan 2011 07:01:21 -0800
+Received: from [172.30.80.40] ([172.30.80.40]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 22 Jan 2011 08:01:20 -0700
+Message-ID: <4D3AF13D.8070103@mentor.com>
+Date: Sat, 22 Jan 2011 08:01:17 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Jan 2011 15:59:47 +0100
-Message-Id: <1295708387-28440-1-git-send-email-a.sappia@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Cc: Alessandro Sappia <a.sappia@gmail.com>
-Subject: [PATCH] Corrected a typo in qtdemo-init script
+References: <1295606449.12720.38.camel@mattotaupa>
+	<AANLkTi=MHys=ShhSnVt0C8kyhescObNdormVScOvacN1@mail.gmail.com>
+In-Reply-To: <AANLkTi=MHys=ShhSnVt0C8kyhescObNdormVScOvacN1@mail.gmail.com>
+X-OriginalArrivalTime: 22 Jan 2011 15:01:21.0056 (UTC)
+	FILETIME=[3AB3C200:01CBBA45]
+Subject: Re: problems with Git server: `fatal: unable to connect a socket (Connection refused)`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,28 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 15:00:52 -0000
+X-List-Received-Date: Sat, 22 Jan 2011 15:02:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Alessandro Sappia <a.sappia@gmail.com>
----
- recipes/qt4/qt-demo-init/qtdemo-init |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On 01/21/2011 04:26 AM, Otavio Salvador wrote:
+> On Fri, Jan 21, 2011 at 08:40, Paul Menzel
+> <paulepanter@users.sourceforge.net>  wrote:
+>>         $ git remote update
+>>         Fetching origin
+>>         git.openembedded.org[0: 140.211.169.165]: errno=Connection
+>>         refused
+>>         fatal: unable to connect a socket (Connection refused)
+>>         error: Could not fetch origin
+>
+> Same here.
 
-diff --git a/recipes/qt4/qt-demo-init/qtdemo-init b/recipes/qt4/qt-demo-init/qtdemo-init
-index ee84be2..affb958 100644
---- a/recipes/qt4/qt-demo-init/qtdemo-init
-+++ b/recipes/qt4/qt-demo-init/qtdemo-init
-@@ -3,7 +3,7 @@
- set -e
- 
- if [ -f /usr/bin/qtdemo ]; then
--	QTDEMO="qtdemo > /var/log/Xsession.log 2>&1"
-+	QTDEMO="qtdemo > /var/log/Xsession.log 2> &1"
- else
- 	QTDEMO="qtdemoE -qws"
- fi
+Seems OK here now.
+
 -- 
-1.7.1
-
+Tom Rini
+Mentor Graphics Corporation
 
 
