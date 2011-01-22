@@ -1,35 +1,28 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PgfNh-00013v-So
+	(envelope-from <lm@larsmichelsen.com>) id 1PgfZg-0001M3-41
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 16:28:01 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id AF83A2C6BF
+	Sat, 22 Jan 2011 16:40:24 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by larsmichelsen.com (Postfix) with ESMTP id 554559544016
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 15:27:19 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id C+xaGtj0VfjO
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 15:27:19 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 0836E1C069
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 15:27:18 +0000 (GMT)
-Message-ID: <4D3AF781.2050904@xora.org.uk>
-Date: Sat, 22 Jan 2011 15:28:01 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Sat, 22 Jan 2011 16:39:38 +0100 (CET)
+Received: from larsmichelsen.com ([127.0.0.1])
+	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id WNVurRrwuE4g; Sat, 22 Jan 2011 16:39:37 +0100 (CET)
+Received: from localhost.localdomain (g229015111.adsl.alicedsl.de
+	[92.229.15.111])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: lm)
+	by larsmichelsen.com (Postfix) with ESMTPSA id AC8DD9544005;
+	Sat, 22 Jan 2011 16:39:36 +0100 (CET)
+From: Lars Michelsen <lm@larsmichelsen.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20110120181233.GA1789@lit.local.igalia.com>	<ihbp5c$4ov$1@dough.gmane.org>	<AANLkTinnrY2o___wOwe3vqrYfY8QsBQYE6AA7VFuAq7T@mail.gmail.com>	<ihedug$vsl$1@dough.gmane.org>
-	<AANLkTimR7QtotOx-e22eRkc_iT8GMr+2gwby42QF=VQ-@mail.gmail.com>
-In-Reply-To: <AANLkTimR7QtotOx-e22eRkc_iT8GMr+2gwby42QF=VQ-@mail.gmail.com>
-X-Enigmail-Version: 1.1.1
-Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
+Date: Sat, 22 Jan 2011 16:39:36 +0100
+Message-Id: <1295710776-10995-1-git-send-email-lm@larsmichelsen.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH] python-caldav: New reciep - CalDAV rfc4791 client
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,21 +36,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 15:28:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 22 Jan 2011 15:40:24 -0000
 
-On 22/01/2011 12:36, Frans Meulenbroeks wrote:
-> In my opinion it is more useful than a binary generator generating
-> untested (and probably unreproducible) images, but that is just my
-> opinion. If someone wants to play the digital equivalent of russian
-> roulette, who am I to deny it to them.
+This patch adds a new reciep for the python caldav client library module.
 
-Why don't you two just take this to the school playground, this is
-getting ridiculus. Sort it out between you or shut up please. Im really
-bored of reading this drivel now!
+Signed-off-by: Lars Michelsen <lm@larsmichelsen.com>
+---
+ recipes/python/python-caldav_0.1.6.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/python/python-caldav_0.1.6.bb
 
-Graeme
+diff --git a/recipes/python/python-caldav_0.1.6.bb b/recipes/python/python-caldav_0.1.6.bb
+new file mode 100644
+index 0000000..ecf8e39
+--- /dev/null
++++ b/recipes/python/python-caldav_0.1.6.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "This project is a CalDAV (RFC4791) client library for Python."
++SECTION = "devel/python"
++PRIORITY = "optional"
++LICENSE = "GPL"
++HOMEPAGE = "http://bitbucket.org/cyrilrbt/caldav"
++SRCNAME = "caldav"
++PR = "r0"
++DEPENDS = "python python-lxml python-vobject"
++
++SRC_URI  = "http://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit setuptools
++
++SRC_URI[md5sum] = "e5eace7a3b6b7f511a1929a539e6a15d"
++SRC_URI[sha256sum] = "4a3b1855000feb8023ab05f8c9e0cfa1648a9abab9ca65ad3e933c22bab61310"
+-- 
+1.7.1
 
 
 
