@@ -1,39 +1,35 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PgjT4-0005Tv-Gy
+	(envelope-from <raj.khem@gmail.com>) id 1PgjVd-0005ZI-Aj
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 20:49:51 +0100
-Received: by yie16 with SMTP id 16so984954yie.6
+	Sat, 22 Jan 2011 20:52:29 +0100
+Received: by gxk20 with SMTP id 20so979789gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 11:49:06 -0800 (PST)
+	Sat, 22 Jan 2011 11:51:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=iOCqqm7DGeJrHSqg8TnwO0BIZAwmwsrEcgjUwdKyHBg=;
-	b=gnCh2cdALjS62eMTRQrUk4Red6L3RyVh37j7vKUaAyFKl34beJAxfdXavpJM9Odl6e
-	QTRJesT1D8Z/n23Rduc1in2jYdnuHu8DItsqxYHbEArJb42O93cqgMS2dozQ/I+OkjcZ
-	DfRGJxtmabCdbn37hAND8llVSIerAxnSFnoi8=
+	bh=dQP1Ba9IXdhq3r/6a7pDNk6UY02KZW4b1WV8j+JkYIQ=;
+	b=QSC5owIHiR4InrhK/CZwos6FW5eyj0/5ErWA7fUrX3pIeWe6T5VrM1EcQVHMqcwCQL
+	RRUVpUAao9zydiYHjHBMGQdGfxNQCedykiqnzmcwv1fCWHMlCGjvQIcXhhCm0rIoWG8o
+	PopmAVB9jsJf2ZwPka4z1gBJAKddsATSKjRz4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=rLKLvfCwtd6fTcfTY8T5igL4ps1eDa6UNyFJZkB68rbuZLr6fGAt3fa02dXw12V2+m
-	we3sVrH+mMeWiyB2q/rXkc9kA3ZjRpI0cYAX7SmZyVk/Ma0vrA3oqA3b4Hr1P5wLV9ul
-	FN0ej8eMhm1s2/HFfNc7UviEYYdmGqmzfN4y8=
-Received: by 10.90.80.18 with SMTP id d18mr2714760agb.31.1295725746550; Sat,
-	22 Jan 2011 11:49:06 -0800 (PST)
+	b=ZsauSR2zMlURe1CqfeMIp2SiX3KkykAIwbwN4t3wYaiXmF6sOTJ+R6YC3mFyt+57qI
+	rgbYhHLVoH3gZySC934LmjYvmc01SsO7SPguigOASxZVMlapLPd4z63theP1Uug2lMTI
+	VSE6qJQveWso/cNWhct94F+qsHT9rsGsHNvJw=
+Received: by 10.90.35.17 with SMTP id i17mr2642299agi.166.1295725622687; Sat,
+	22 Jan 2011 11:47:02 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Sat, 22 Jan 2011 11:48:45 -0800 (PST)
-In-Reply-To: <1295720592.3850.290.camel@mattotaupa>
-References: <1295608972.12720.47.camel@mattotaupa>
-	<AANLkTinbMr38A4-yGjyLkNL+ydrwS+R6r_OWZo2fh7KP@mail.gmail.com>
-	<1295653195.4105.56.camel@mattotaupa>
-	<1295684244.4098.2.camel@mattotaupa>
-	<1295720592.3850.290.camel@mattotaupa>
+Received: by 10.90.55.10 with HTTP; Sat, 22 Jan 2011 11:46:42 -0800 (PST)
+In-Reply-To: <AANLkTinz+p5J6K+XhohJJ=q7dD3X1kVGZDNA-4qOOH2W@mail.gmail.com>
+References: <AANLkTinz+p5J6K+XhohJJ=q7dD3X1kVGZDNA-4qOOH2W@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 22 Jan 2011 11:48:45 -0800
-Message-ID: <AANLkTin86VuRC4KSVfY=zAqnV+EXEmVh37mwiJ0X4BRU@mail.gmail.com>
+Date: Sat, 22 Jan 2011 11:46:42 -0800
+Message-ID: <AANLkTimSeB5GqQSyMtskAm_3O9h-MWfCJJz+FAFnnkB8@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: vdr: minimal-uclibc: task `compile` fails with `undefined reference to `_nl_msg_cat_cntr'`
+Subject: Re: Recipes with fetch failures:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,38 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 19:49:51 -0000
+X-List-Received-Date: Sat, 22 Jan 2011 19:52:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 22, 2011 at 10:23 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> The commit since when building fails is a88aca1d [6].
+On Sat, Jan 22, 2011 at 10:06 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> Hello,
 >
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0commit a88aca1d7dfa3a08957dd49cb61bac850f19710=
-6
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0Author: Bernhard Reutner-Fischer <rep.dot.nop@=
-gmail.com>
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0Date: =C2=A0 Wed Jan 12 20:34:55 2011 +0100
+> I have started a build with an empty download dir and found some failures=
+:
 >
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0autotools.bbclass: pass distro_i=
-mposed_configure_flags
+> Those are not fetchable:
 >
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Acked-by: Khem Raj <raj.khem@gma=
-il.com>
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Acked-by: Tom Rini <tom_rini@men=
-tor.com>
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Signed-off-by: Bernhard Reutner-=
-Fischer <rep.dot.nop@gmail.com>
->
-> Any idea?
+> =C2=A0 ftp://invisible-island.net/ncurses/5.7/ncurses-5.7-20100501.patch.=
+gz
+
+I fixed this yesterday
+
+> =C2=A0 cvs://anoncvs:anoncvs@anoncvs.handhelds.org/cvs;module=3Dipkg-util=
+s
 >
 
-I see. I think its to do with enable-ipv6 or somesuch. Can you run
-do_configure for vdr before and after this commit and port
-the contents of line invoking configure.
+yeah hh.org is gone. So you need to rely on mirrors to get the tarballs
+add
 
+SOURCE_MIRROR_URL ?=3D "http://sources.openembedded.org/"
+
+to your local.conf and probably you also need to inherit own_mirrors
+
+> This does seems critical to us since it makes a hard time for anyone
+> trying to get something done with OE and has no background how to
+> workaround those. It seems that those need fixes.
 >
+> --
+> Otavio Salvador=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0O.S. Systems
+> E-mail: otavio@ossystems.com.br=C2=A0 http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854=C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0http://projetos.ossystems.com.br
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
 
