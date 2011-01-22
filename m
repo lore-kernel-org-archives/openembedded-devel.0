@@ -1,39 +1,35 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pgclo-0005oH-Ks
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 13:40:45 +0100
-Received: by iyj18 with SMTP id 18so2835364iyj.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PgdGQ-0006bm-78 for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 14:12:23 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PgdFi-0001Sz-6U for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 14:11:38 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 14:11:38 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jan 2011 04:40:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=mnZNRmbNBx7+siLKFLk5KBUI/DAaqsoDVlVmR6DoxLc=;
-	b=e557ZLKsefLstVdJiUXWOD9Rx/j9cTpMbrVETQVvuPW7Ou8ffh/WuYuHClDgw4ky8P
-	rbyktaIy/ElkMJCeAEXrJ17FY2aoEcHkgQyx6tJrOuLmuzQb0SUqTRoes4NERGHzGTeX
-	tz17RTUqXtLC/+UluN5KQVvEAIZ4xFeTLC/8g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=JNRtY7Xi6/VBd4aX0fXxgepUeWkUXHArTFBSKpoSFg94fPETv2qlBdN7v2UiwgypLS
-	h9w7kw9J+MUidH11nsXhlyS7Yz1Z3g0FbJXLLJv4cHq0AWOmf46XcZb7Iyf8ZoXlMy3/
-	k+PcsgTRJCwR57ZdfiQ+39SesVoXa2Uc5U0Tg=
-MIME-Version: 1.0
-Received: by 10.231.31.196 with SMTP id z4mr2112898ibc.199.1295699999712; Sat,
-	22 Jan 2011 04:39:59 -0800 (PST)
-Received: by 10.231.34.69 with HTTP; Sat, 22 Jan 2011 04:39:59 -0800 (PST)
-In-Reply-To: <AANLkTimR7QtotOx-e22eRkc_iT8GMr+2gwby42QF=VQ-@mail.gmail.com>
-References: <20110120181233.GA1789@lit.local.igalia.com>
-	<ihbp5c$4ov$1@dough.gmane.org>
-	<AANLkTinnrY2o___wOwe3vqrYfY8QsBQYE6AA7VFuAq7T@mail.gmail.com>
-	<ihedug$vsl$1@dough.gmane.org>
-	<AANLkTimR7QtotOx-e22eRkc_iT8GMr+2gwby42QF=VQ-@mail.gmail.com>
-Date: Sat, 22 Jan 2011 13:39:59 +0100
-Message-ID: <AANLkTikRt1cQ_Vp_Y=Z0oxKXjWCsSWa=ahb+VMGcEjzA@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 22 Jan 2011 14:11:38 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 22 Jan 2011 14:11:27 +0100
+Message-ID: <ihel1v$tnt$1@dough.gmane.org>
+References: <1295654503-26379-1-git-send-email-lm@larsmichelsen.com>	<ihedau$stf$1@dough.gmane.org>	<4D3AC11C.2040602@larsmichelsen.com>
+	<4D3AC6F0.4050802@xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D3AC6F0.4050802@xora.org.uk>
+X-Enigmail-Version: 1.0.1
+Subject: Re: [PATCH] mplayer_svn: Package can be built again; Bumped to rev. 31329.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 12:40:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 22 Jan 2011 13:12:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2011/1/22 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> 2011/1/22 Koen Kooi <k.kooi@student.utwente.nl>:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->
->> using things like insane.bbclass. As expected, you had to use pretty
->
-> get your facts straight. minimal uses insane.bbclass:
-> minimal.conf:INHERIT += "insane"
-> No idea when exactly it was added. I'm not the minimal maintainer),
-> but it is used now.
+On 22-01-11 13:00, Graeme Gregory wrote:
+> On 22/01/2011 11:35, Lars Michelsen wrote:
+>> Hello,
+>>
+>> On 22/01/11 11:59, Koen Kooi wrote:
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> On 22-01-11 01:01, Lars Michelsen wrote:
+>>>
+>>>> +    # Ensure matching ffmpeg revision in sub repositories of
+>>>> mplayer source
+>>>> +    #
+>>>> +    # It seems that the directories which are fetched from other
+>>>> repositories
+>>>> +    # get always the newest revision. This is not good for this
+>>>> build since
+>>>> +    # mplayer and ffmpeg code needs to fit.
+>>>> +    # So we go to the subdirs and checkout the ffmpeg revision
+>>>> fitting our
+>>>> +    # mplayer rev.
+>>>> +    cd ffmpeg&&  \
+>>>> +    svn up -r 25825&&  \
+>>>> +    cd ..
+>>>> +
+>>>
+>>> NAK, we don't alllow network access from inside the recipe.
+>>
+>> OK. As I commented I am also unhappy with this.
+>> Do you have a better idea?
+>>
+> A recipe can have multiple svn sources, so you can fetch ffmpeg into a
+> seperate directory then move it into the mplayer one overwriting
+> whatever mplayer checked out.
 
-Withdrawing this last sentence.
-Just after pressing send I noticed I added it myself last Xmas:
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/conf/distro/minimal.conf?id=f118388495185c9469b69e68a6f9b7a2ebef17ef
+Ffmpeg isn't using svn anymore, so if mplayer is using svn remote, it
+won't get updated since last week.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Frans
+iD8DBQFNOtd/MkyGM64RGpERAjdqAJsGZILzn09wT0g9UWSCt/D9QnH9igCgmSaw
+r4XZYUddg7/2yeGTf7RIST4=
+=Noqz
+-----END PGP SIGNATURE-----
+
 
 
