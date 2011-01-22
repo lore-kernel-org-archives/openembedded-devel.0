@@ -1,34 +1,25 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pgi5u-0001dF-Is
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 19:21:51 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Pgi5A-0004TN-2r from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 10:21:04 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sat, 22 Jan 2011 10:21:03 -0800
-Received: from [172.30.80.40] ([172.30.80.40]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 22 Jan 2011 11:21:02 -0700
-Message-ID: <4D3B200B.6000909@mentor.com>
-Date: Sat, 22 Jan 2011 11:20:59 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pgi7w-0003u1-4P for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Jan 2011 19:23:56 +0100
+Received: from f053037250.adsl.alicedsl.de ([78.53.37.250]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pgi7G-0006uJ-DQ; Sat, 22 Jan 2011 18:23:14 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1295027350.14388.6527.camel@rex>	<AANLkTi=QXykmerKTJJgCNDbqSE18_3Jhqj1utKmf1Ynw@mail.gmail.com>	<4D353F81.50301@xora.org.uk>	<AANLkTi=WOr_395Tya3GOhyLpg1oj9stLxSWdgo--uAhz@mail.gmail.com>	<4D35C5C3.60205@mentor.com>
-	<ih4s84$gbj$1@dough.gmane.org>	<4D35FC8B.1090404@mentor.com>	<AANLkTinHP=9S6tAFdiWHfk8zZi0MhvfNTgW71Ugx++9w@mail.gmail.com>
-	<AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
-In-Reply-To: <AANLkTi=aMnnfnaQZNLpZW_8MUWq_jckou9tr_bA8NBY6@mail.gmail.com>
-X-OriginalArrivalTime: 22 Jan 2011 18:21:03.0010 (UTC)
-	FILETIME=[2080D820:01CBBA61]
-Subject: Re: Yocto Project and OE - Where now?
+In-Reply-To: <1295684244.4098.2.camel@mattotaupa>
+References: <1295608972.12720.47.camel@mattotaupa>
+	<AANLkTinbMr38A4-yGjyLkNL+ydrwS+R6r_OWZo2fh7KP@mail.gmail.com>
+	<1295653195.4105.56.camel@mattotaupa>
+	<1295684244.4098.2.camel@mattotaupa>
+Date: Sat, 22 Jan 2011 19:23:12 +0100
+Message-ID: <1295720592.3850.290.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: vdr: minimal-uclibc: task `compile` fails with `undefined reference to `_nl_msg_cat_cntr'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,60 +33,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 18:21:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 22 Jan 2011 18:23:56 -0000
+X-Groupsio-MsgNum: 28328
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-OKXj+tJqvCigjl0OX4QV"
 
-On 01/19/2011 01:46 AM, Frans Meulenbroeks wrote:
-> 2011/1/18 Khem Raj<raj.khem@gmail.com>:
->> On Tue, Jan 18, 2011 at 12:48 PM, Tom Rini<tom_rini@mentor.com>  wrote:
->>> I think we also agree here.  But what's the rule of thumb(s) we want to
->>> have, to provide enough choice without too much headache?  As I said
->>> elsewhere, .inc files should probably be used a whole lot more, to help with
->>> the problem of recipe bugfixing and N recipes for an app with the problem.
->>>   We should probably also say that in addition to the "keep the last GPLv2+
->>> version around" rule of thumb we should also have a "keep the latest stable
->>> release" around too.  But what else?  To use busybox as an example, do we
->>> really need to keep 1.18.0 and 1.18.1 around when we have 1.18.2?  How about
->>> if we make the delta between the 3 be just the SRC_URI + checksums?
->>
->>
->> Well what to keep around can not be generalized so much. It also
->> depends upon the nature of releases for various packages
->> some packages have a major release and then push out bug fix releases
->> like busy box case you sited but there are packages
->> which only do major releases which can cause compatibility hassles as
->> new interfaces come and old ones are removed etc.
->> so I think it has to be flexible and mostly left to package
->> maintainers discretion as they know the nature of releases most but
->> I like the idea of keeping one GPLv2 release around and 1 latest
->> release around. If a distro pinned a version then that should
->> be considered as well. It is bad to sweep underneath a distros
->> pinnings. Then they have to rebuild and they get problems
->> as they have to make sure that if a package bump happens then they
->> should be able to define an upgrade path
->>
->> Sometimes newer is not always better in case of udev the size has
->> increased over the time and some distro's may not like
->> it and there can be many such scenarios.
->
-> I wholehearthy agree with the proposal that it is left to the package
-> maintainers discretion.
+--=-OKXj+tJqvCigjl0OX4QV
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-And what about packages that have been, well, gently orphaned?  I think 
-we need to accept and understand that there will be a class of recipes 
-that are simple enough that they don't need nor have spelled out 
-maintainers.
+Am Samstag, den 22.01.2011, 09:17 +0100 schrieb Paul Menzel:
+> Am Samstag, den 22.01.2011, 00:39 +0100 schrieb Paul Menzel:
+> > Am Freitag, den 21.01.2011, 10:10 -0800 schrieb Khem Raj:
+> > > On Fri, Jan 21, 2011 at 3:22 AM, Paul Menzel wrote:
+> > > >
+> > > > `bitbake -k vdr` was executed with 6db34075 (uClibc 0.9.32-rc2) [1]=
+ and
+> > > > `minimal-uclibc` for `MACHINE =3D "beagleboard"`. I guess it is rel=
+ated to
+> > > > the uClibc upgrade.
+> > > >
+> > >=20
+> > > Did it work before this? I guess not. Upgrade has nothing to do with
+> > > it. Its gettext/libiconv issue in the faulty recipe itself I believe
+> >=20
+> > I just reset to when the recipe was updated [1].
+> >=20
+> >         commit f4f7638828b0e06fa7ae37ccba0e1ec294b5c30a
+> >         Author:     Paul Menzel <paulepanter@users.sourceforge.net>
+> >         AuthorDate: Mon Jul 12 21:32:52 2010 +0200
+> >         Commit:     Khem Raj <raj.khem@gmail.com>
+> >         CommitDate: Wed Jan 12 00:05:25 2011 -0800
+> >        =20
+> >             vdr: update to 1.7.16 from 1.7.10
+> >=20
+> > It built fine. Any thoughts?
+> >=20
+> > I will try to pinpoint the faulty commit. I am trying to build with
+> > 2a7ddea6 [2] next, which is the commit before the last change to the VD=
+R
+> > recipe.
+>=20
+> That failed already. Now I will try 260f78b3 y[3].
 
-> Wrt the GPLv2+ version. I suggest to reflect this in the name.
-> E.g. you could have samba and samba-gplv2 (or perhaps samba-gplv2 and
-> samba-gplv3). Then it immediately becomes obvious why there are two
-> versions.
+s/already/also/
 
-Put me in the "no" camp here please, we have a LICENSE field for a reason.
+The commit since when building fails is a88aca1d [6].
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+        commit a88aca1d7dfa3a08957dd49cb61bac850f197106
+        Author: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+        Date:   Wed Jan 12 20:34:55 2011 +0100
+       =20
+            autotools.bbclass: pass distro_imposed_configure_flags
+           =20
+            Acked-by: Khem Raj <raj.khem@gmail.com>
+            Acked-by: Tom Rini <tom_rini@mentor.com>
+            Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+
+Any idea?
 
 
+Thanks,
+
+Paul
+
+
+> > [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Df4f=
+7638828b0e06fa7ae37ccba0e1ec294b5c30a
+> > [2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D2a7=
+ddea6f7cd12f88a086e9d3e9228008a102248
+> [3] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D260f7=
+8b3e5b171fea66fe7c901f489ea713d2988
+[4] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D3de42fc=
+cb9d8baa70e37dbdbf8bedf5ecafb9a4d (fails)
+[5] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D67d127a=
+52d6565bc90f49e2bff5de80db85b2021 (works)
+[6] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Da88aca1=
+d7dfa3a08957dd49cb61bac850f197106 (fails)
+
+--=-OKXj+tJqvCigjl0OX4QV
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk07IJAACgkQPX1aK2wOHVhiXgCaAsZZkKKOwhRyJoHIJ6B1QdV7
+2HEAniBnifbkmsSz6jDNKiZt/yg/YnOJ
+=AL8r
+-----END PGP SIGNATURE-----
+
+--=-OKXj+tJqvCigjl0OX4QV--
