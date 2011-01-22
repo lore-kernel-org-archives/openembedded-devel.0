@@ -1,28 +1,28 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PghgN-0000L1-Am
+	(envelope-from <lm@larsmichelsen.com>) id 1Pghnq-0000ur-Rf
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Jan 2011 18:55:29 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id EC8BA314D1A8;
-	Sat, 22 Jan 2011 18:54:26 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	Sat, 22 Jan 2011 19:03:10 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by larsmichelsen.com (Postfix) with ESMTP id C45139544016
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Jan 2011 19:02:27 +0100 (CET)
+Received: from larsmichelsen.com ([127.0.0.1])
+	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with LMTP id OnEpyhUrEGpz; Sat, 22 Jan 2011 18:54:19 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id 1CA9E314D133;
-	Sat, 22 Jan 2011 18:54:18 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Sat, 22 Jan 2011 17:54:18 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
+	with ESMTP id 855rwRYENcKE; Sat, 22 Jan 2011 19:02:26 +0100 (CET)
+Received: from localhost.localdomain (g229015111.adsl.alicedsl.de
+	[92.229.15.111])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: lm)
+	by larsmichelsen.com (Postfix) with ESMTPSA id A364F9544005;
+	Sat, 22 Jan 2011 19:02:26 +0100 (CET)
+From: Lars Michelsen <lm@larsmichelsen.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Jan 2011 17:54:17 +0000
-Message-Id: <1295718857-31279-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-Cc: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
-Subject: [PATCH] python-zopeinterface-3.5.1: fix packaging
+Date: Sat, 22 Jan 2011 19:02:26 +0100
+Message-Id: <1295719347-18968-1-git-send-email-lm@larsmichelsen.com>
+X-Mailer: git-send-email 1.7.1
+Subject: [PATCH v2 1/2] python-caldav: New recipe - CalDAV rfc4791 client
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,64 +36,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jan 2011 17:55:30 -0000
+X-List-Received-Date: Sat, 22 Jan 2011 18:03:10 -0000
 
-* Inherit setuptools instead of distutils.
+This patch adds a new recipe for the python caldav client library module.
 
-  Install paths with distutils (built on x86_64 for mipsel):
-  usr/lib/python2.6/site-packages/zope.interface-3.5.1-py2.6-linux-x86_64.egg/zope/interface/*.py
+Tested building on Ubuntu 10.10 x86_64 for beagleboard c4. Tested
+functionality on beagleboard c4.
 
-  Install paths with setuptools:
-  usr/lib/python2.6/site-packages/zope/interface/*.py
-
-* Package tests into ${PN}-tests.
-* Package .c files into ${PN}-dev.
-* Package .txt files into ${PN}-doc.
-* oe-stylized.
-
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-CC: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+Signed-off-by: Lars Michelsen <lm@larsmichelsen.com>
 ---
- recipes/zope/python-zopeinterface_3.5.1.bb |   22 +++++++++++++---------
- 1 files changed, 13 insertions(+), 9 deletions(-)
+ recipes/python/python-caldav_0.1.6.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/python/python-caldav_0.1.6.bb
 
-diff --git a/recipes/zope/python-zopeinterface_3.5.1.bb b/recipes/zope/python-zopeinterface_3.5.1.bb
-index c0d3f60..1267756 100644
---- a/recipes/zope/python-zopeinterface_3.5.1.bb
-+++ b/recipes/zope/python-zopeinterface_3.5.1.bb
-@@ -2,17 +2,21 @@ DESCRIPTION = "Interface definitions for Zope products"
- SECTION = "console/network"
- PRIORITY = "optional"
- LICENSE = "ZPL"
--
--RPROVIDES_${PN} += " zope-interfaces"
--
--inherit distutils
--
--PR = "r1"
-+RPROVIDES_${PN} += "zope-interfaces"
-+PR = "r2"
- 
- SRC_URI = "http://pypi.python.org/packages/source/z/zope.interface/zope.interface-${PV}.tar.gz"
-+SRC_URI[md5sum] = "685fc532550abb07cca6190c9cd2b901"
-+SRC_URI[sha256sum] = "b81d898532c47f73475c2d0c23580e289eed25923d007eca8e62750c0998bba0"
+diff --git a/recipes/python/python-caldav_0.1.6.bb b/recipes/python/python-caldav_0.1.6.bb
+new file mode 100644
+index 0000000..ecf8e39
+--- /dev/null
++++ b/recipes/python/python-caldav_0.1.6.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "This project is a CalDAV (RFC4791) client library for Python."
++SECTION = "devel/python"
++PRIORITY = "optional"
++LICENSE = "GPL"
++HOMEPAGE = "http://bitbucket.org/cyrilrbt/caldav"
++SRCNAME = "caldav"
++PR = "r0"
++DEPENDS = "python python-lxml python-vobject"
 +
- S = "${WORKDIR}/zope.interface-${PV}"
- 
--FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*.egg/*/*/.debug"  
++SRC_URI  = "http://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
 +inherit setuptools
- 
--SRC_URI[md5sum] = "685fc532550abb07cca6190c9cd2b901"
--SRC_URI[sha256sum] = "b81d898532c47f73475c2d0c23580e289eed25923d007eca8e62750c0998bba0"
-+FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*.egg/*/*/.debug"
-+FILES_${PN}-dev += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.c"
-+FILES_${PN}-doc += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.txt"
-+FILES_${PN}-tests = " \
-+        ${PYTHON_SITEPACKAGES_DIR}/zope/interface/tests \
-+        ${PYTHON_SITEPACKAGES_DIR}/zope/interface/common/tests \
-+"
++
++SRC_URI[md5sum] = "e5eace7a3b6b7f511a1929a539e6a15d"
++SRC_URI[sha256sum] = "4a3b1855000feb8023ab05f8c9e0cfa1648a9abab9ca65ad3e933c22bab61310"
 -- 
-1.7.2.3
+1.7.1
 
 
 
