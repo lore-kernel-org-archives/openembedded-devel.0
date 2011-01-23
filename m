@@ -1,36 +1,38 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Ph3vF-0006Ld-91
+	(envelope-from <raj.khem@gmail.com>) id 1Ph4gS-0002G4-4Y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Jan 2011 18:40:17 +0100
-Received: by yxd5 with SMTP id 5so1168887yxd.6
+	Sun, 23 Jan 2011 19:29:04 +0100
+Received: by gyh20 with SMTP id 20so1175403gyh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jan 2011 09:39:31 -0800 (PST)
+	Sun, 23 Jan 2011 10:28:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=Md57zngboa/EFakyO7VhR1bcw8ggmfER63EQmA3oAF4=;
-	b=e0ysQgPNgbc/4Hi1houvYn6b4jLmqEHFX5hnKXAm6W8B7Af0IXMQOr56a7N1B+1nko
-	zd6vg2MMhvuefKFDBqB9SrhwWqj3pekhG+5NGm1QAVRarcSjCuuKKkiaEF1V+VdcY6OY
-	kYpL5rucD+PR7U/7SQU8dqkRIjX4WbP/zGwL8=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=wirOeIIaqYDM5jT2eNLSgIu6eTgrRpjHyu476jKAA1s=;
+	b=uv04jDWz4CVn5IG6rfIxrUiG1c7W1NGRsxjfI0Pp8VAlK0FOyH/no2/CAMXqFDd5r4
+	iUebtUJprzvczfiaAl/VjcekKktRiM6idKMGHZI4XORMXfqg0erVMz4VmvalpENnKamS
+	cpJYW/J3JsjHVcTbT+Q9dhm5W5JrjRRD6lrVU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=r0z1cisRYMamPJ7YniPCAK/LyohwUjU0KSzI0E2uBtx4ZJwUNo19v+xTwWTW8KyJ1v
-	0+/H1/tMrnD57X10+zrhLjaac+OLAKuIca+o1gupBmWrqDrGkDTYTojG4v7W5wM+whYD
-	DKgzw4RRKSYUSqO0lNJ3HuZaSI4vitELFFLYM=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=w2uT7Bag7xqqK1Q4l3dQSr5fMPnbXdO19JDp1d085zVh3qe/h1crimjFGJW8f3Z8kt
+	GZT5zMqA8aFv26Hi8fUD3bLg+QnmLFjXvTinpn+nJKoI+t2vTXt7xfmyeakuuuUjKlky
+	pKq4vTIkMeoATVWhDUAywy1FlVxl6RmMqsNYc=
+Received: by 10.90.100.4 with SMTP id x4mr3818028agb.4.1295807298778; Sun, 23
+	Jan 2011 10:28:18 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.100.4 with SMTP id x4mr3765487agb.4.1295804370403; Sun, 23
-	Jan 2011 09:39:30 -0800 (PST)
-Received: by 10.90.55.10 with HTTP; Sun, 23 Jan 2011 09:39:30 -0800 (PST)
-In-Reply-To: <4D307445.4090901@dresearch.de>
-References: <AANLkTim9j=t8uDyabZbN4epTC-JwfmktyERydQsxxjyx@mail.gmail.com>
-	<4D307445.4090901@dresearch.de>
-Date: Sun, 23 Jan 2011 09:39:30 -0800
-Message-ID: <AANLkTim7L=YcOr5xHicAVmHroP=RBa=hNY3m_EtYnrYv@mail.gmail.com>
+Received: by 10.90.55.10 with HTTP; Sun, 23 Jan 2011 10:27:57 -0800 (PST)
+In-Reply-To: <4D3A31FF.2010907@mwester.net>
+References: <1295598581-12927-1-git-send-email-raj.khem@gmail.com>
+	<4D394AC0.90300@eukrea.com>
+	<AANLkTi=Jdmsr8sYYpOMTOqdpoi9iHiyFBcAAqnfoaMAN@mail.gmail.com>
+	<4D3A31FF.2010907@mwester.net>
 From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 23 Jan 2011 10:27:57 -0800
+Message-ID: <AANLkTin=77JheFmKVs2Z7wKH6kWD+uKgHSDVRQ__cwF7@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: testing branch 2011-01-13 - do_configure python failed
+Subject: Re: [PATCH 3/3] busybox_1.18.2.bb: slugos needs a modified version of usb.sh script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Jan 2011 17:40:17 -0000
+X-List-Received-Date: Sun, 23 Jan 2011 18:29:04 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-It has been fixed already check master
-
-On 1/14/11, Steffen Sledz <sledz@dresearch.de> wrote:
-> do_configure python - 2.6.5 - ml12.2 failed with:
+On Fri, Jan 21, 2011 at 5:25 PM, Mike Westerhof <mike@mwester.net> wrote:
+> Isn't this kernel-specific, though? =C2=A0I don't have any other OE-based
+> devices handy just now to check, but what's difference, specifically,
+> and should we change something to bring SlugOS into line with the rest
+> of the world?
 >
-> checking getaddrinfo bug... buggy
-> Fatal: You must get working getaddrinfo() function.
->        or you can specify "--disable-ipv6".
-> ERROR: Function do_configure failed
->
-> see <http://tinderbox.openembedded.net/packages/1709663/>
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> -Mike (mwester)
 >
 
--- 
-Sent from my mobile device
+yes seems like slugos kernel enables.
+CONFIG_SYSFS_DEPRECATED=3Dy
+CONFIG_SYSFS_DEPRECATED_V2=3Dy
 
--Khem
+which enabled these. I havent tested the kernel by disabling them
+as I havent figured out how to boot a kernel from network on slug
+but if you can try that and see what /sys/class looks like that
+would help or if I find some time to make slug suck the kernel
+from a tftp then I can do it too.
 
 
