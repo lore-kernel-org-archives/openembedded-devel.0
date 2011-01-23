@@ -1,33 +1,28 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Ph20U-0007kN-PX
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Jan 2011 16:37:35 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Ph1zl-0006yF-Cg from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Jan 2011 07:36:49 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sun, 23 Jan 2011 07:36:48 -0800
-Received: from [172.30.80.40] ([172.30.80.40]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 23 Jan 2011 08:36:48 -0700
-Message-ID: <4D3C4B0B.3080108@mentor.com>
-Date: Sun, 23 Jan 2011 08:36:43 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Ph2Ul-0001oL-C4 for openembedded-devel@lists.openembedded.org;
+	Sun, 23 Jan 2011 17:08:51 +0100
+Received: from f053040085.adsl.alicedsl.de ([78.53.40.85]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Ph2U5-0004lU-37 for openembedded-devel@lists.openembedded.org;
+	Sun, 23 Jan 2011 16:08:09 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinz+p5J6K+XhohJJ=q7dD3X1kVGZDNA-4qOOH2W@mail.gmail.com>	<AANLkTimSeB5GqQSyMtskAm_3O9h-MWfCJJz+FAFnnkB8@mail.gmail.com>	<AANLkTin27ikNKV4v3D+e+cu_=SHv7Vv+0ef-z61irn60@mail.gmail.com>
-	<AANLkTimOGhiwA+szLoWVzAUP2AUX1YVBcOnMLg3YSWdM@mail.gmail.com>
-In-Reply-To: <AANLkTimOGhiwA+szLoWVzAUP2AUX1YVBcOnMLg3YSWdM@mail.gmail.com>
-X-OriginalArrivalTime: 23 Jan 2011 15:36:48.0210 (UTC)
-	FILETIME=[58FF7320:01CBBB13]
-Subject: Re: Recipes with fetch failures:
+In-Reply-To: <AANLkTin86VuRC4KSVfY=zAqnV+EXEmVh37mwiJ0X4BRU@mail.gmail.com>
+References: <1295608972.12720.47.camel@mattotaupa>
+	<AANLkTinbMr38A4-yGjyLkNL+ydrwS+R6r_OWZo2fh7KP@mail.gmail.com>
+	<1295653195.4105.56.camel@mattotaupa>
+	<1295684244.4098.2.camel@mattotaupa>
+	<1295720592.3850.290.camel@mattotaupa>
+	<AANLkTin86VuRC4KSVfY=zAqnV+EXEmVh37mwiJ0X4BRU@mail.gmail.com>
+Date: Sun, 23 Jan 2011 17:08:07 +0100
+Message-ID: <1295798887.12751.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: vdr: minimal-uclibc: task `compile` fails with `undefined reference to `_nl_msg_cat_cntr'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +36,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Jan 2011 15:37:35 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 23 Jan 2011 16:08:51 -0000
+X-Groupsio-MsgNum: 28341
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-AWAHSWQww9fbyzj2H5/1"
 
-On 01/22/2011 01:17 PM, Khem Raj wrote:
-> On Sat, Jan 22, 2011 at 12:07 PM, Otavio Salvador
-> <otavio@ossystems.com.br>  wrote:
->> On Sat, Jan 22, 2011 at 17:46, Khem Raj<raj.khem@gmail.com>  wrote:
->>> On Sat, Jan 22, 2011 at 10:06 AM, Otavio Salvador
->>>>    cvs://anoncvs:anoncvs@anoncvs.handhelds.org/cvs;module=ipkg-utils
->>>>
->>>
->>> yeah hh.org is gone. So you need to rely on mirrors to get the tarballs
->>> add
->>>
->>> SOURCE_MIRROR_URL ?= "http://sources.openembedded.org/"
->>>
->>> to your local.conf and probably you also need to inherit own_mirrors
->>
->> I think the recipe should be change to use this in this case. I know I
->> can use mirrors but the recipe ought to use a fetchable reference IMO.
->>
->
-> we are still hopeful of getting the cvs repos. But yes it wont hurt if
-> the SRC_URIs pointed
-> to source mirrors for now
+--=-AWAHSWQww9fbyzj2H5/1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-If a rather critical part of how we do things was apparently dead 
-software and just went away, perhaps we really really need to 
-investigate using something else or taking up the project and hosting it 
-$wherever ?
+Am Samstag, den 22.01.2011, 11:48 -0800 schrieb Khem Raj:
+> On Sat, Jan 22, 2011 at 10:23 AM, Paul Menzel
+> <paulepanter@users.sourceforge.net> wrote:
+> > The commit since when building fails is a88aca1d [6].
+> >
+> >        commit a88aca1d7dfa3a08957dd49cb61bac850f197106
+> >        Author: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> >        Date:   Wed Jan 12 20:34:55 2011 +0100
+> >
+> >            autotools.bbclass: pass distro_imposed_configure_flags
+> >
+> >            Acked-by: Khem Raj <raj.khem@gmail.com>
+> >            Acked-by: Tom Rini <tom_rini@mentor.com>
+> >            Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.c=
+om>
+> >
+> > Any idea?
+>=20
+> I see. I think its to do with enable-ipv6 or somesuch. Can you run
+> do_configure for vdr before and after this commit and port
+> the contents of line invoking configure.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Strange. VDR just uses a plain Makefile and no Autotools. Since this
+commit, it seems that `-lintl` is not passed.
+
+### works
+
+	arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dne=
+on -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/oe/build-mini=
+mal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/inclu=
+de -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -f=
+permissive -fvisibility-inlines-hidden -rdynamic -Wl,-O1 -Wl,--hash-style=
+=3Dgnu audio.o channels.o ci.o config.o cutter.o device.o diseqc.o dvbdevic=
+e.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.o filter=
+.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems.o nit.o osdbase=
+.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.o recording.o re=
+mote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o skinclassic.o skins=
+.o skinsttng.o sourceparams.o sources.o spu.o status.o svdrp.o themes.o thr=
+ead.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -lpthread -ldl -l=
+cap -lrt -lfreetype -lfontconfig -lintl  ./libsi/libsi.a -o vdr
+
+### fails
+
+	arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dne=
+on -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/oe/build-mini=
+mal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/inclu=
+de -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -p=
+ipe -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl,-O1 -Wl,--hash-s=
+tyle=3Dgnu audio.o channels.o ci.o config.o cutter.o device.o diseqc.o dvbd=
+evice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.o fi=
+lter.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems.o nit.o osd=
+base.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.o recording.=
+o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o skinclassic.o s=
+kins.o skinsttng.o sourceparams.o sources.o spu.o status.o svdrp.o themes.o=
+ thread.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -lpthread -ld=
+l -lcap -lrt -lfreetype -lfontconfig  ./libsi/libsi.a -o vdr
+
+	$ wdiff log.do_compile.*
+	arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dne=
+on -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/oe/build-mini=
+mal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibceabi/usr/inclu=
+de -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os [-=
+-pipe-] -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl,-O1 -Wl,--ha=
+sh-style=3Dgnu audio.o channels.o ci.o config.o cutter.o device.o diseqc.o =
+dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.=
+o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems.o nit.o=
+ osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.o record=
+ing.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o skinclassic=
+.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o svdrp.o them=
+es.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -lpthread=
+ -ldl -lcap -lrt -lfreetype -lfontconfig {+-lintl+}  ./libsi/libsi.a -o vdr
+
+Now the question is why is the patch not applied [7] and why did it start b=
+reaking with this commit.
 
 
+Thanks,
+
+Paul
+
+
+[7] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/vdr/vdr=
+_1.7.16.bb?id=3D7190532c5a810ef886e8607ce042a319020f06c6#n8
+
+--=-AWAHSWQww9fbyzj2H5/1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk08UmIACgkQPX1aK2wOHVjEkwCfUzq9WMoDghugpHgpGauL/CsC
+hPcAnjpwR1opIR1GcbmzfQWDjgiqgzuu
+=+R++
+-----END PGP SIGNATURE-----
+
+--=-AWAHSWQww9fbyzj2H5/1--
