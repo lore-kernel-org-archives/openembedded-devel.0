@@ -1,36 +1,42 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Ph87F-0006sg-E3
+	(envelope-from <raj.khem@gmail.com>) id 1Ph88e-0006uj-Rb
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Jan 2011 23:08:57 +0100
-Received: by yie16 with SMTP id 16so1223110yie.6
+	Sun, 23 Jan 2011 23:10:25 +0100
+Received: by gwaa12 with SMTP id a12so1209701gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jan 2011 14:08:12 -0800 (PST)
+	Sun, 23 Jan 2011 14:09:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=53c11PECXv8BPu/AuOjyAzn47IIHOC4F4qhJqZYyWbE=;
-	b=JkiPH3SZ5d9eheWGjCB0WaLFkmvcbfla9DU2g/0icBUXDrbpKNMRoDaZLXnmhyX83j
-	ReVzJtTQCkBc5FRSVPrnXVkDC+fsPql/XjjF1BUyu+Q+A4OhnfHTxPJVSqQZrIwJHEQE
-	qKXKJddQiJ6zB7E5ytHdmRZBRxZhKqodOarNU=
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=3pOAi1anlAVj5vsIqPY7kUn4fPXQWRMk5rSCnGf3hlo=;
+	b=rWtlbnqfzs8UbQjI8YrBkj37kcpnsE/RgaaE1t1YKuc/1ama3XXvBtqzLY05Qn1Jdu
+	6AVr7L1dLOX/TyrHEFe2oH5wZ9zGJS3k3/VPLP5Ncp5JuwEdixziDEdIklSwo7vXFpCi
+	FMf63KVBZomivBKhx6CW7U+/ofsMxz6eB5rLo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=uyEa2PiPaTkvvQIEafH5Pgd4gzwJW7e6I41QIn7pXFbjiN+hd+LfQ77YjU/dDpW8dh
-	w52otNEg/UQZYkaHUdfRbrxyrEyxJOVNyH86bClD6bIgpxr1y7kMLZvwmNBQldAiN4Rl
-	LZsDk9JIRtUspAQqX4fC4h1bsqEdsblXvdong=
-Received: by 10.90.54.8 with SMTP id c8mr851896aga.112.1295820491955; Sun, 23
-	Jan 2011 14:08:11 -0800 (PST)
+	:content-type:content-transfer-encoding;
+	b=Di9JxzN2a1ggoWznIydTwiGkcnj69+Nqj6HhchDiDM/26QFOkrV3nI7bHHZYoyp3n+
+	rawRKAsSiqfii3JuSBUU0PkFfXEv1nN2SOBVREDckafwCPycSrYc7ShK4O9fAxsrM7tI
+	P6PVcZl64V3RZ6f1badbNhNIEcKyECH1wCjGo=
+Received: by 10.90.100.4 with SMTP id x4mr4035238agb.4.1295820579513; Sun, 23
+	Jan 2011 14:09:39 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.55.10 with HTTP; Sun, 23 Jan 2011 14:07:51 -0800 (PST)
-In-Reply-To: <4D3C8312.2040405@mwester.net>
-References: <4D3C8312.2040405@mwester.net>
+Received: by 10.90.55.10 with HTTP; Sun, 23 Jan 2011 14:09:19 -0800 (PST)
+In-Reply-To: <1295812624.3570.13.camel@mattotaupa>
+References: <1295608972.12720.47.camel@mattotaupa>
+	<AANLkTinbMr38A4-yGjyLkNL+ydrwS+R6r_OWZo2fh7KP@mail.gmail.com>
+	<1295653195.4105.56.camel@mattotaupa>
+	<1295684244.4098.2.camel@mattotaupa>
+	<1295720592.3850.290.camel@mattotaupa>
+	<AANLkTin86VuRC4KSVfY=zAqnV+EXEmVh37mwiJ0X4BRU@mail.gmail.com>
+	<1295798887.12751.6.camel@mattotaupa>
+	<1295812624.3570.13.camel@mattotaupa>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 23 Jan 2011 14:07:51 -0800
-Message-ID: <AANLkTikgG=OQY5Ng91OvZ8qeUz1JG=78bb08VzV5pu=T@mail.gmail.com>
+Date: Sun, 23 Jan 2011 14:09:19 -0800
+Message-ID: <AANLkTi=0vr9MZ28ZtvzvpSGK0k39BjoXC-sH-fJZs4j_@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Re: [PATCH] add version 1.1.3 of cryptsetup
+Subject: Re: vdr: minimal-uclibc: task `compile` fails with `undefined reference to `_nl_msg_cat_cntr'`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,60 +50,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Jan 2011 22:08:57 -0000
+X-List-Received-Date: Sun, 23 Jan 2011 22:10:25 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 23, 2011 at 11:35 AM, Mike Westerhof <mike@mwester.net> wrote:
-> Updates cryptsetup recipe to version 1.1.3, the most recent version that =
-builds
-> with the current version of automake in OE. =C2=A0Note that we need to ke=
-ep the old
-> 1.0.5 recipe, even though it is not fetchable any longer, because the lic=
-ense
-> has changed.
+On Sun, Jan 23, 2011 at 11:57 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Am Sonntag, den 23.01.2011, 17:08 +0100 schrieb Paul Menzel:
+>> Am Samstag, den 22.01.2011, 11:48 -0800 schrieb Khem Raj:
+>> > On Sat, Jan 22, 2011 at 10:23 AM, Paul Menzel wrote:
+>> > > The commit since when building fails is a88aca1d [6].
+>> > >
+>> > > =C2=A0 =C2=A0 =C2=A0 =C2=A0commit a88aca1d7dfa3a08957dd49cb61bac850f=
+197106
+>> > > =C2=A0 =C2=A0 =C2=A0 =C2=A0Author: Bernhard Reutner-Fischer <rep.dot=
+.nop@gmail.com>
+>> > > =C2=A0 =C2=A0 =C2=A0 =C2=A0Date: =C2=A0 Wed Jan 12 20:34:55 2011 +01=
+00
+>> > >
+>> > > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0autotools.bbclass: pass dis=
+tro_imposed_configure_flags
+>> > >
+>> > > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Acked-by: Khem Raj <raj.khe=
+m@gmail.com>
+>> > > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Acked-by: Tom Rini <tom_rin=
+i@mentor.com>
+>> > > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Signed-off-by: Bernhard Reu=
+tner-Fischer <rep.dot.nop@gmail.com>
+>> > >
+>> > > Any idea?
+>> >
+>> > I see. I think its to do with enable-ipv6 or somesuch. Can you run
+>> > do_configure for vdr before and after this commit and port
+>> > the contents of line invoking configure.
+>>
+>> Strange. VDR just uses a plain Makefile and no Autotools. Since this
+>> commit, it seems that `-lintl` is not passed.
+>>
+>> ### works
+>>
+>> =C2=A0 =C2=A0 =C2=A0 arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=
+=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb=
+ -isystem/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-lin=
+ux-uclibceabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -f=
+rename-registers -Os -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl=
+,-O1 -Wl,--hash-style=3Dgnu audio.o channels.o ci.o config.o cutter.o devic=
+e.o diseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o e=
+itscan.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menu=
+items.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o reco=
+rder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.=
+o skinclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o=
+ svdrp.o themes.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -lj=
+peg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig -lintl =C2=A0./libsi/=
+libsi.a -o vdr
+>>
+>> ### fails
+>>
+>> =C2=A0 =C2=A0 =C2=A0 arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=
+=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb=
+ -isystem/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-lin=
+ux-uclibceabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -f=
+rename-registers -Os -pipe -fpermissive -fvisibility-inlines-hidden -rdynam=
+ic -Wl,-O1 -Wl,--hash-style=3Dgnu audio.o channels.o ci.o config.o cutter.o=
+ device.o diseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o e=
+it.o eitscan.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.=
+o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.=
+o recorder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shu=
+tdown.o skinclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.o st=
+atus.o svdrp.o themes.o thread.o timers.o tools.o transfer.o vdr.o videodir=
+.o -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig =C2=A0./libsi/l=
+ibsi.a -o vdr
+>>
+>> =C2=A0 =C2=A0 =C2=A0 $ wdiff log.do_compile.*
+>> =C2=A0 =C2=A0 =C2=A0 arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=
+=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb=
+ -isystem/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-lin=
+ux-uclibceabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -f=
+rename-registers -Os [--pipe-] -fpermissive -fvisibility-inlines-hidden -rd=
+ynamic -Wl,-O1 -Wl,--hash-style=3Dgnu audio.o channels.o ci.o config.o cutt=
+er.o device.o diseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle=
+.o eit.o eitscan.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o m=
+enu.o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o recei=
+ver.o recorder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o=
+ shutdown.o skinclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.=
+o status.o svdrp.o themes.o thread.o timers.o tools.o transfer.o vdr.o vide=
+odir.o -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig {+-lintl+} =
+=C2=A0./libsi/libsi.a -o vdr
+>>
+>> Now the question is why is the patch not applied [7] and why did it star=
+t breaking with this commit.
 >
-> Signed-off-by: Mike Westerhof <mike@mwester.net>
+> Ok, I am sorry, my last report was messed up. I did not reset to
+> a88aca1d but 49891de0 [8], where 7190532c [9]
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0commit 7190532c5a810ef886e8607ce042a319020f06c=
+6
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0Author: Tom Rini <tom_rini@mentor.com>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0Date: =C2=A0 Tue Jan 18 17:58:02 2011 -0700
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vdr: Switch to libc-uclibc
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Signed-off-by: Tom Rini <tom_rin=
+i@mentor.com>
+>
+> is applied, which seems to be the reason the patch is not applied and
+> therefore `-lintl` not added.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-> ---
->
-> diff --git a/recipes/cryptsetup/cryptsetup_1.1.3.bb b/recipes/cryptsetup/=
-cryptsetup_1.1.3.bb
-> new file mode 100644
-> index 0000000..54fd96e
-> --- /dev/null
-> +++ b/recipes/cryptsetup/cryptsetup_1.1.3.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION =3D "Setup virtual encryption devices under dm-crypt Linux"
-> +HOMEPAGE =3D "http://code.google.com/p/cryptsetup/"
-> +SECTION =3D "console"
-> +LICENSE =3D "GPLv2"
-> +DEPENDS =3D "util-linux-ng device-mapper libgcrypt popt"
-> +RRECOMMENDS_${PN} =3D "kernel-module-aes \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 k=
-ernel-module-dm-crypt \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 k=
-ernel-module-md5 \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 k=
-ernel-module-cbc \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 k=
-ernel-module-sha256 \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"
-> +PR =3D "r0"
-> +
-> +SRC_URI =3D "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar=
-.bz2"
-> +SRC_URI[md5sum] =3D "318a64470861ea5b92a52f2014f1e7c1"
-> +SRC_URI[sha256sum] =3D "9c8e68a272f6d9cfb6cd65cc0743f4c44a2096c61f74e060=
-2bf40208b5e69c0a"
-> +
-> +inherit autotools
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I have fixed a typo in it. Please retry latest master.
+
+-Khem
 
 
