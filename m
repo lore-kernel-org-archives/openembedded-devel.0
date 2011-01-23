@@ -1,23 +1,33 @@
-Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Ph1rF-0007c4-0Y
+	(envelope-from <Tom_Rini@mentor.com>) id 1Ph20U-0007kN-PX
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Jan 2011 16:28:01 +0100
-Received: (qmail 4098 invoked by uid 2404007); 23 Jan 2011 15:27:18 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 89-73-120-20.dynamic.chello.pl (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@89.73.120.20)
-	by host4.kei.pl with ESMTPA; 23 Jan 2011 15:27:18 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Jan 2011 16:27:39 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.37-12-generic; KDE/4.5.95; x86_64; ; )
-References: <201101221206.32796.pieterg@gmx.com>
-	<AANLkTing4dVzfMn6p4rcx0uxefyX=uYmv=ER3v+ykzW7@mail.gmail.com>
-In-Reply-To: <AANLkTing4dVzfMn6p4rcx0uxefyX=uYmv=ER3v+ykzW7@mail.gmail.com>
+	Sun, 23 Jan 2011 16:37:35 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Ph1zl-0006yF-Cg from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 23 Jan 2011 07:36:49 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Sun, 23 Jan 2011 07:36:48 -0800
+Received: from [172.30.80.40] ([172.30.80.40]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 23 Jan 2011 08:36:48 -0700
+Message-ID: <4D3C4B0B.3080108@mentor.com>
+Date: Sun, 23 Jan 2011 08:36:43 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Message-Id: <201101231627.44759.marcin@juszkiewicz.com.pl>
-Subject: Re: e2fsprogs util-linux-ng dependency
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTinz+p5J6K+XhohJJ=q7dD3X1kVGZDNA-4qOOH2W@mail.gmail.com>	<AANLkTimSeB5GqQSyMtskAm_3O9h-MWfCJJz+FAFnnkB8@mail.gmail.com>	<AANLkTin27ikNKV4v3D+e+cu_=SHv7Vv+0ef-z61irn60@mail.gmail.com>
+	<AANLkTimOGhiwA+szLoWVzAUP2AUX1YVBcOnMLg3YSWdM@mail.gmail.com>
+In-Reply-To: <AANLkTimOGhiwA+szLoWVzAUP2AUX1YVBcOnMLg3YSWdM@mail.gmail.com>
+X-OriginalArrivalTime: 23 Jan 2011 15:36:48.0210 (UTC)
+	FILETIME=[58FF7320:01CBBB13]
+Subject: Re: Recipes with fetch failures:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,43 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Jan 2011 15:28:01 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 23 Jan 2011 15:37:35 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia sobota, 22 stycznia 2011 o 18:06:58 Khem Raj napisa=C5=82(a):
-> On Sat, Jan 22, 2011 at 3:06 AM, pieterg <pieterg@gmx.com> wrote:
-> > in
-> > http://git.openembedded.org/cgit.cgi/openembedded/commit/recipes/e2fspro
-> > gs?h=3Dorg.openembedded.dev&id=3Def73bcd899aaf182fb596e5912c20f966e0e69=
-51 a
-> > util-linux-ng RDEPENDS was added to e2fsprogs.
+On 01/22/2011 01:17 PM, Khem Raj wrote:
+> On Sat, Jan 22, 2011 at 12:07 PM, Otavio Salvador
+> <otavio@ossystems.com.br>  wrote:
+>> On Sat, Jan 22, 2011 at 17:46, Khem Raj<raj.khem@gmail.com>  wrote:
+>>> On Sat, Jan 22, 2011 at 10:06 AM, Otavio Salvador
+>>>>    cvs://anoncvs:anoncvs@anoncvs.handhelds.org/cvs;module=ipkg-utils
+>>>>
+>>>
+>>> yeah hh.org is gone. So you need to rely on mirrors to get the tarballs
+>>> add
+>>>
+>>> SOURCE_MIRROR_URL ?= "http://sources.openembedded.org/"
+>>>
+>>> to your local.conf and probably you also need to inherit own_mirrors
+>>
+>> I think the recipe should be change to use this in this case. I know I
+>> can use mirrors but the recipe ought to use a fetchable reference IMO.
+>>
+>
+> we are still hopeful of getting the cvs repos. But yes it wont hurt if
+> the SRC_URIs pointed
+> to source mirrors for now
 
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?h=3Dorg.openembed=
-ded.dev&id=3Dec5081ee5b0449b02a0d051ac32e6fae31838dee
+If a rather critical part of how we do things was apparently dead 
+software and just went away, perhaps we really really need to 
+investigate using something else or taking up the project and hosting it 
+$wherever ?
 
-was next part of that change. And there were few around it.
-
-> > But I'm wondering whether it was not intended to just RDEPEND on
-> > util-linux-ng-blkid, so we can avoid dragging in a large number of
-> > unrelated utils?
->=20
-> hmmm good point. I think it should just rdep for things which its
-> missing or needs to run its own provided programs at runtime
-
-It was done that way to keep upgrade path for packages. Before my changes m=
-any=20
-binaries were from e2fsprogs package and now got moved to util-linux-ng one=
- or=20
-subpackages of it. Feel free to do any adaptations which will improve=20
-situation - anything will be better then it was before my patchset was push=
-ed.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
