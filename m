@@ -1,37 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PhOeM-0004im-Lr
+	(envelope-from <raj.khem@gmail.com>) id 1PhOfN-0004ks-KY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 16:48:14 +0100
-Received: by yxd5 with SMTP id 5so1470125yxd.6
+	Mon, 24 Jan 2011 16:49:18 +0100
+Received: by iwn8 with SMTP id 8so4601035iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jan 2011 07:47:29 -0800 (PST)
+	Mon, 24 Jan 2011 07:48:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=SWk9Er0b8vST1e1yWcq/GvTdfP0P69B/Fvity5/0Bkk=;
-	b=ZAlysIYUFQ4/1rnvcKeeGHgCSRS9RyXmbfEC6A8iLt5Z4Pbc/40myqaKtAQq+H20OJ
-	PWReb1ZhMDw189e4+iSudegOUjzCamXRh+fGOYNq5EK2kimN7SAkgPIQDlzS6s3Ubo/A
-	cRYUqMc5xa5ZFEiEVcrUp+d9DvsxZryEZ15fg=
+	bh=Cy8hzpP055gURaJFmy+RvlP7kP1tTph5dh8cbdh6BS4=;
+	b=im403KnWy8Yp69WMfeFYa+qovrnKolVQdmSCHachR/vhLZg7Czzsngl9ZLoYsfqCaD
+	++Ow8Gn7FXW0WzWLJ8j2tK2TNT1OxpIxM2WbaE9mkN1Waw9HYAlDK/hhU36YkqbmPz9g
+	JDdiA+pbkSeRF7GKDk5Rn3yNgcEgfdhVk0CxA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type:content-transfer-encoding;
-	b=DeQAMSHhX0qnfT/FvErJHqwDkIxb7S7xYL0O9l7aAZ0mxly/QADphiLLBjtcl49C7F
-	/gzeFD4c7AY0bcGD+r0p2Q2ijvrSw04YZLiyR7VENviiE/1D8Q8xEW5YFC1ATaC+zEeU
-	tZR11IQcgOrMtsEJpHn/YivXmNXCH7kSYrBbM=
-Received: by 10.42.173.198 with SMTP id s6mr4996246icz.206.1295884047904; Mon,
-	24 Jan 2011 07:47:27 -0800 (PST)
+	b=H3FqOQtMDQrTurx9tCL+NC8YTfbj86MjLUNEznA0VzCF0QczcjzbXeXpQzukpD2Ij3
+	JmG7k3/NO1Wdzl/QUWG34IMIGZG0vSyWTR/ldOcIuZmAge9hjJobCS4/qBAAHhwbSfJW
+	rW1FZKE+NklnGxk6DX5UENDOo/Y4ufx/5ZLkc=
+Received: by 10.42.176.129 with SMTP id be1mr5005304icb.139.1295884109345;
+	Mon, 24 Jan 2011 07:48:29 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.42.230.71 with HTTP; Mon, 24 Jan 2011 07:47:07 -0800 (PST)
-In-Reply-To: <97b6dd6720dcdcdbd27616740b3707bc108a4927.1295880053.git.vjaquez@igalia.com>
+Received: by 10.42.230.71 with HTTP; Mon, 24 Jan 2011 07:48:09 -0800 (PST)
+In-Reply-To: <d51a8cfd5ef81f649c82d490a2b9359c47735250.1295880053.git.vjaquez@igalia.com>
 References: <cover.1295880053.git.vjaquez@igalia.com>
-	<97b6dd6720dcdcdbd27616740b3707bc108a4927.1295880053.git.vjaquez@igalia.com>
+	<d51a8cfd5ef81f649c82d490a2b9359c47735250.1295880053.git.vjaquez@igalia.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 24 Jan 2011 07:47:07 -0800
-Message-ID: <AANLkTi=RgH9E_BoebNBxTqfB4AktF1M1npuAqfxz8To4@mail.gmail.com>
+Date: Mon, 24 Jan 2011 07:48:09 -0800
+Message-ID: <AANLkTinMDTBOJD6WE09HaqXedWau8r_PURYUMxhNM5WN@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Koen Kooi <koen@openembedded.org>, Steve Sakoman <steve@sakoman.com>
-Subject: Re: [PATCH 1/2] u-boot-sakoman: fix break caused by the new binutils
+Cc: Koen Kooi <koen@openembedded.org>, Koen Kooi <k-kooi@ti.com>
+Subject: Re: [PATCH 2/2] linux-omap4: fix break caused by the new binutils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,96 +45,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 15:48:14 -0000
+X-List-Received-Date: Mon, 24 Jan 2011 15:49:18 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 2011/1/24 V=C3=ADctor Manuel J=C3=A1quez Leal <vjaquez@igalia.com>:
-> New assemblers need -march=3Darmv7-a+sec on command line or .arch_extensi=
-on sec
-> inline to enable use of the smc instruction.
+> According to this discussion [1], a couple patches where required by the
+> kernel using the latest binutils (2.21).
 >
-> This patch adds as-instr to check the latter to conditionally enable the
-> former in AFLAGS for files that use smc.
+> This patch add those patches, which were posted in the Ubuntu's kernel
+> repository.
+>
+> 1. http://comments.gmane.org/gmane.comp.handhelds.openembedded/40650
 >
 > Signed-off-by: V=C3=ADctor Manuel J=C3=A1quez Leal <vjaquez@igalia.com>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > ---
-> =C2=A0.../fix-break-caused-by-new-binutils.patch =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 | =C2=A0 31 ++++++++++++++++++++
-> =C2=A0recipes/u-boot/u-boot-sakoman_git.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
-> =C2=A02 files changed, 32 insertions(+), 0 deletions(-)
-> =C2=A0create mode 100644 recipes/u-boot/u-boot-sakoman/fix-break-caused-b=
-y-new-binutils.patch
+> =C2=A0...TU-Config-Fix-FTBS-caused-by-new-binutils.patch | =C2=A0 38 ++++=
+++++++++++++++++
+> =C2=A0...0002-Add-AFLAGS-for-sleep44xx-to-fix-FTBS.patch | =C2=A0 26 ++++=
++++++++++
+> =C2=A0recipes/linux/linux-omap4_2.6.35.3.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A02 +
+> =C2=A03 files changed, 66 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/linux/linux-omap4/0001-UBUNTU-Config-Fix=
+-FTBS-caused-by-new-binutils.patch
+> =C2=A0create mode 100644 recipes/linux/linux-omap4/0002-Add-AFLAGS-for-sl=
+eep44xx-to-fix-FTBS.patch
 >
-> diff --git a/recipes/u-boot/u-boot-sakoman/fix-break-caused-by-new-binuti=
-ls.patch b/recipes/u-boot/u-boot-sakoman/fix-break-caused-by-new-binutils.p=
-atch
+> diff --git a/recipes/linux/linux-omap4/0001-UBUNTU-Config-Fix-FTBS-caused=
+-by-new-binutils.patch b/recipes/linux/linux-omap4/0001-UBUNTU-Config-Fix-F=
+TBS-caused-by-new-binutils.patch
 > new file mode 100644
-> index 0000000..16bc980
+> index 0000000..e83a3e2
 > --- /dev/null
-> +++ b/recipes/u-boot/u-boot-sakoman/fix-break-caused-by-new-binutils.patc=
-h
-> @@ -0,0 +1,31 @@
-> +Index: git/arch/arm/cpu/armv7/omap4/Makefile
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- git.orig/arch/arm/cpu/armv7/omap4/Makefile
-> ++++ git/arch/arm/cpu/armv7/omap4/Makefile
-> +@@ -26,6 +26,8 @@ include $(TOPDIR)/config.mk
-> + LIB =C2=A0 =3D =C2=A0$(obj)lib$(SOC).o
+> +++ b/recipes/linux/linux-omap4/0001-UBUNTU-Config-Fix-FTBS-caused-by-new=
+-binutils.patch
+> @@ -0,0 +1,38 @@
+> +From 7699704e011db864c56f333bce9936a36522fb79 Mon Sep 17 00:00:00 2001
+> +From: Tim Gardner <tim.gardner@canonical.com>
+> +Date: Thu, 9 Dec 2010 08:16:52 -0700
+> +Subject: [PATCH 1/2] UBUNTU: [Config] Fix FTBS caused by new binutils
 > +
-> + SOBJS +=3D lowlevel_init.o
+> +New assemblers need -march=3Darmv7-a+sec on command line or
+> +.arch_extension sec inline to enable use of the smc instruction.
+> +
+> +This patch uses as-instr to check the latter to conditionally
+> +enable the former in AFLAGS for files that use smc.
+> +
+> +Checked on both old and new binutils to verify that it does
+> +not break old versions.
+> +
+> +Signed-off-by: John Rigby <john.rigby@linaro.org>
+> +Signed-off-by: Tim Gardner <tim.gardner@canonical.com>
+> +---
+> + arch/arm/mach-omap2/Makefile | =C2=A0 =C2=A04 +++-
+> + 1 files changed, 3 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/arch/arm/mach-omap2/Makefile b/arch/arm/mach-omap2/Makefile
+> +index 75251b4..0241b4d 100644
+> +--- a/arch/arm/mach-omap2/Makefile
+> ++++ b/arch/arm/mach-omap2/Makefile
+> +@@ -29,7 +29,9 @@ obj-$(CONFIG_HOTPLUG_CPU) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0+=3D omap-hotplug.o
+> + obj-$(CONFIG_ARCH_OMAP4) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0+=3D omap44xx-smc.o omap4-common.o \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0omap4-wakeupgen.o
+> +
+> +-AFLAGS_omap44xx-smc.o =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 :=3D-Wa,-march=3Darmv7-a
 > ++plus_sec :=3D $(call as-instr,.arch_extension sec,+sec)
-> ++lowlevel_init.o: AFLAGS +=3D -Wa,-march=3Darmv7-a$(plus_sec)
+> ++AFLAGS_omap-headsmp.o =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0:=3D-Wa,-march=3Darmv7-a$(plus_sec)
+> ++AFLAGS_omap44xx-smc.o =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0:=3D-Wa,-march=3Darmv7-a$(plus_sec)
 > +
-> + COBJS +=3D board.o
-> + COBJS +=3D mem.o
-> +Index: git/config.mk
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- git.orig/config.mk
-> ++++ git/config.mk
-> +@@ -266,3 +266,13 @@ cmd_link_o_target =3D $(if $(strip $1),\
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 r=
-m -f $@; $(AR) rcs $@ )
+> + # Functions loaded to SRAM
+> + obj-$(CONFIG_ARCH_OMAP2420) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 +=3D sra=
+m242x.o
+> +--
+> +1.7.0.2
 > +
-> + #######################################################################=
-##
+> diff --git a/recipes/linux/linux-omap4/0002-Add-AFLAGS-for-sleep44xx-to-f=
+ix-FTBS.patch b/recipes/linux/linux-omap4/0002-Add-AFLAGS-for-sleep44xx-to-=
+fix-FTBS.patch
+> new file mode 100644
+> index 0000000..ea16ab1
+> --- /dev/null
+> +++ b/recipes/linux/linux-omap4/0002-Add-AFLAGS-for-sleep44xx-to-fix-FTBS=
+.patch
+> @@ -0,0 +1,26 @@
+> +From da58d36fb6b13899249bf1efbf25f7385d048bb3 Mon Sep 17 00:00:00 2001
+> +From: Tim Gardner <tim.gardner@canonical.com>
+> +Date: Tue, 14 Dec 2010 06:56:34 -0700
+> +Subject: [PATCH 2/2] Add AFLAGS for sleep44xx to fix FTBS
+> +
+> +Signed-off-by: Tim Gardner <tim.gardner@canonical.com>
+> +---
+> + arch/arm/mach-omap2/Makefile | =C2=A0 =C2=A02 ++
+> + 1 files changed, 2 insertions(+), 0 deletions(-)
+> +
+> +diff --git a/arch/arm/mach-omap2/Makefile b/arch/arm/mach-omap2/Makefile
+> +index 0241b4d..865a3e2 100644
+> +--- a/arch/arm/mach-omap2/Makefile
+> ++++ b/arch/arm/mach-omap2/Makefile
+> +@@ -59,6 +59,8 @@ obj-$(CONFIG_ARCH_OMAP4) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 +=3D pm44xx.o pm_bus.o cpuidle44xx.o \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0omap4-mpuss-lowpower.o sleep44xx.o \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0voltage.o opp44xx_data.o
+> +
+> ++AFLAGS_sleep44xx.o =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0:=3D-Wa,-march=3Darmv7-a$(plus_sec)
 > ++
-> ++# Tries to compile an assembly instruction
-> ++as-instr =3D $(shell if echo -e "$(1)" | \
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0$(CC) $(AFLAGS) -c -xassemble=
-r - \
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -o $(TMPOUT)astest$$$$.out >=
- /dev/null 2>&1; \
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 then rm $(TMPOUT)astest$$$$.out; echo "$(2=
-)"; \
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0 else echo "$(3)"; fi)
-> ++
-> ++#######################################################################=
-##
-> ++
-> diff --git a/recipes/u-boot/u-boot-sakoman_git.bb b/recipes/u-boot/u-boot=
--sakoman_git.bb
-> index 5b9ff11..8dfe713 100644
-> --- a/recipes/u-boot/u-boot-sakoman_git.bb
-> +++ b/recipes/u-boot/u-boot-sakoman_git.bb
-> @@ -7,6 +7,7 @@ SRCREV =3D "261733408a27d14590cf3ec6b596461808050e32"
-> =C2=A0PV =3D "2010.12+${PR}+git${SRCREV}"
+> + obj-$(CONFIG_PM_DEBUG) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0+=3D pm-debug.o
+> + obj-$(CONFIG_OMAP_SMARTREFLEX) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0+=3D s=
+r_device.o smartreflex.o
+> + obj-$(CONFIG_OMAP_SMARTREFLEX_CLASS3) +=3D smartreflex-class3.o
+> +--
+> +1.7.0.2
+> +
+> diff --git a/recipes/linux/linux-omap4_2.6.35.3.bb b/recipes/linux/linux-=
+omap4_2.6.35.3.bb
+> index 4db0b28..f5a11f4 100644
+> --- a/recipes/linux/linux-omap4_2.6.35.3.bb
+> +++ b/recipes/linux/linux-omap4_2.6.35.3.bb
+> @@ -15,6 +15,8 @@ SRC_URI =3D "git://dev.omapzoom.org/pub/scm/integration=
+/kernel-ubuntu.git;protocol
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0006-ARM-Add-option-to-al=
+low-userspace-access-to-performa.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0007-OMAP4-do-not-force-s=
+elect-options-which-are-not-requ.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0008-omap4-pandaboard-add=
+-support-for-DVI-output.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-UBUNTU-Config-Fix-FTBS-ca=
+used-by-new-binutils.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0002-Add-AFLAGS-for-sleep44xx-=
+to-fix-FTBS.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://defconfig"
 >
-> =C2=A0SRC_URI =3D "git://www.sakoman.com/git/u-boot.git;branch=3Domap4-ex=
-p;protocol=3Dgit \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://fix-break-caused-by-new-binuti=
-ls.patch \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 "
 > =C2=A0S =3D "${WORKDIR}/git"
->
 > --
 > 1.7.0.2
 >
