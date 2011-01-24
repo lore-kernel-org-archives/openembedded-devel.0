@@ -1,24 +1,35 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holger+oe@freyther.de>) id 1PhUYo-0006Cc-OU
+	(envelope-from <jefflance01@gmail.com>) id 1PhUr1-0006TM-WC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 23:06:54 +0100
-Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
-	[91.64.83.241])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 845441B10C05
+	Mon, 24 Jan 2011 23:25:44 +0100
+Received: by ywi6 with SMTP id 6so1629846ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jan 2011 22:15:05 +0000 (UTC)
-Message-ID: <4D3DF7CF.7010308@freyther.de>
-Date: Mon, 24 Jan 2011 23:06:07 +0100
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 24 Jan 2011 14:24:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=3qlARy0xrS9SJ0dh0RvXddSdaAjQJNQsB0p3MfrhIs8=;
+	b=p+q/uF8ep/f0xAE9zY1DNknLLSFl1NIts7TxLDiWLOcUUFnByKji6NoRsmViK+DApA
+	pohH061DBbBlVUKeQWXEPu0kip+2xC3sWGY2SiuXNPTq7fPZyMH2hL/nkjZb8PPrOjSi
+	NTwy/dD2z0E3x1r7t/93GEfwgs/5fjoMQQCMg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Tn7Axv2kHo0tQU+vDHGTrUoRu1bh0/Wia8OuFrkqrTwikssKtWbjwdM67QpU4jb0VA
+	Yt5O5JlqUS3T1WZs6wfHzzh3Vjxhx20V5F7GV1T/DmyiOy9Os3KYfvE4QKqy5Mqmvjqc
+	DWa6cJuYWu0uFq/r700axh5lSamqJXxI7xU7s=
+Received: by 10.151.78.19 with SMTP id f19mr5143148ybl.143.1295907897739;
+	Mon, 24 Jan 2011 14:24:57 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id r24sm3268420yba.18.2011.01.24.14.24.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 24 Jan 2011 14:24:57 -0800 (PST)
+From: Jeff Lance <jefflance01@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D3DE56B.7020803@freyther.de>
-In-Reply-To: <4D3DE56B.7020803@freyther.de>
-Subject: Re: build errors in openssl-native
+Date: Mon, 24 Jan 2011 16:22:26 -0600
+Message-Id: <1295907746-7913-1-git-send-email-j-lance1@ti.com>
+X-Mailer: git-send-email 1.6.3.3
+Cc: Jeff Lance <j-lance1@ti.com>
+Subject: [PATCH 1/2] matrix-gui-common: Support SVG icons
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,25 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 22:06:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 24 Jan 2011 22:25:44 -0000
 
-On 01/24/2011 09:47 PM, Holger Freyther wrote:
-> Hi,
-> 
-> is anyone else seeing build errors like this:
-> 
-> make[2]: Entering directory
-> `/data/openembedded/build/arm/cortex-a8/tmp/work/x86_64-linux/openssl-native-1.0.0c-r14.0/openssl-1.0.0c/apps'
-> openssl.o: In function `main':
-> openssl.c:(.text+0x1eb): undefined reference to `BIO_s_file'
-> openssl.c:(.text+0x1f3): undefined reference to `BIO_new'
-> openssl.c:(.text+0x235): undefined reference to `BIO_ctrl'
+  * Add support to install *.svg icons as well as *.png icons
+  * Bump up the recipe revision
 
+Signed-off-by: Jeff Lance  <j-lance1@ti.com>
+---
+ recipes/ti/matrix-gui-common.inc |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-patches/libdeps-first.patch
+diff --git a/recipes/ti/matrix-gui-common.inc b/recipes/ti/matrix-gui-common.inc
+index 4185b34..c0edbfd 100644
+--- a/recipes/ti/matrix-gui-common.inc
++++ b/recipes/ti/matrix-gui-common.inc
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ SECTION = "multimedia"
+ PRIORITY = "optional"
+ 
+-INC_PR = "r6"
++INC_PR = "r7"
+ 
+ COMPATIBLE_MACHINE = "(dm365|omapl138|omap3|ti816x)"
+ 
+@@ -34,6 +34,7 @@ do_install() {
+     install -m 0644 ${S}/${PLATFORM}/html/* ${D}/${datadir}/matrix/html
+     install -d ${D}/${datadir}/matrix/images
+     install -m 0644 ${S}/images/*.png ${D}/${datadir}/matrix/images/
++    install -m 0644 ${S}/images/*.svg ${D}/${datadir}/matrix/images/
+ 
+ }
+ 
+-- 
+1.6.3.3
 
-is causing it... no idea why yet
 
 
