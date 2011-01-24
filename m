@@ -1,28 +1,33 @@
-Received: from masterfoo.zenlinux.com ([207.192.74.254])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sgarman@zenlinux.com>) id 1PhUEf-0005LD-0U
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <rpurdie@rpsys.net>) id 1PhUQj-0005h3-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 22:46:06 +0100
-Received: from localhost.localdomain (c-76-105-143-140.hsd1.or.comcast.net
-	[76.105.143.140])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id DA2DF301FA;
-	Mon, 24 Jan 2011 16:45:08 -0500 (EST)
-From: Scott Garman <sgarman@zenlinux.com>
+	Mon, 24 Jan 2011 22:58:33 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p0OLvmv9005798
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jan 2011 21:57:48 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 02770-10 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jan 2011 21:57:44 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p0OLvfOh005788
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jan 2011 21:57:42 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jan 2011 13:45:01 -0800
-Message-Id: <1295905501-1948-1-git-send-email-sgarman@zenlinux.com>
-X-Mailer: git-send-email 1.7.1
-X-MasterFoo-MailScanner-Information: Please contact the ISP for more
-	information
-X-MailScanner-ID: DA2DF301FA.00A24
-X-MasterFoo-MailScanner: Found to be clean
-X-MasterFoo-MailScanner-SpamCheck: not spam
-X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
-X-Spam-Status: No
-Cc: Scott Garman <sgarman@zenlinux.com>
-Subject: [PATCH] sudo: upgrade to 1.7.4p6
+In-Reply-To: <ihkrpo$uft$1@dough.gmane.org>
+References: <4D36F9BE.1010601@xora.org.uk> <4D3DAB2A.3070303@balister.org>
+	<ihkrpo$uft$1@dough.gmane.org>
+Date: Mon, 24 Jan 2011 21:57:28 +0000
+Message-ID: <1295906248.14388.46605.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: openembedded-core git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,45 +41,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 21:46:06 -0000
+X-List-Received-Date: Mon, 24 Jan 2011 21:58:34 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Addresses the following CVEs:
-* CVE-2010-2956
-* CVE-2010-1646
-* CVE-2011-0010
+On Mon, 2011-01-24 at 22:43 +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 24-01-11 17:39, Philip Balister wrote:
+> > On 01/19/2011 06:48 AM, Graeme Gregory wrote:
+> >> Hi, this email is sent as an ordinary member of OE.
+> >>
+> >> It seems to be on a technical level we are agreed that we should split
+> >> parts of OE out into the so called openembedded-core which will have a
+> >> stricter commit access and higher QA requirements on changes.
+> >>
+> >> I therefore think it is time to actually create the repository and let
+> >> the people who are interested in merging the good stuff from poky with
+> >> the good stuff from openembedded to create our "core". I don't think
+> >> there is any need to wait on the political part of the Yocto/OE
+> >> collaboration as its something we have agreed in principal to do anyway.
+> >>
+> >> I would request then that the TSC drive this forward with the server
+> >> admins and create this repo so work can happen.
+> > 
+> > 
+> > Has anything happened on this email? Has the TSC had a meeting to
+> > discuss? I know it has only been a week, but people are starting to do
+> > work based on these ideas and need some support from the TSC.
+> 
+> At this point I'm going to call for a vote of non confidence in the TSC.
+> If they can't be bothered to speak up in an important matter like this,
+> we'd be better of without them.
 
-Signed-off-by: Scott Garman <sgarman@zenlinux.com>
----
- recipes/sudo/{sudo_1.7.2p4.bb => sudo_1.7.4p6.bb} |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
- rename recipes/sudo/{sudo_1.7.2p4.bb => sudo_1.7.4p6.bb} (72%)
+I've kept a low profile on this issue since I'm obviously heavily
+involved with Yocto and hence it could be argued I'm not impartial. I
+had hoped someone else on the TSC would therefore pick up this
+discussion but that hasn't happened. I have driven issues in the past,
+this is one I really can't drive alone.
 
-diff --git a/recipes/sudo/sudo_1.7.2p4.bb b/recipes/sudo/sudo_1.7.4p6.bb
-similarity index 72%
-rename from recipes/sudo/sudo_1.7.2p4.bb
-rename to recipes/sudo/sudo_1.7.4p6.bb
-index c2818cf..8afee8d 100644
---- a/recipes/sudo/sudo_1.7.2p4.bb
-+++ b/recipes/sudo/sudo_1.7.4p6.bb
-@@ -1,4 +1,4 @@
--PR = "r4"
-+PR = "r0"
- 
- DEPENDS = "libpam"
- RDEPENDS_${PN} = "libpam libpam-meta"
-@@ -7,8 +7,8 @@ SRC_URI = "http://ftp.sudo.ws/sudo/dist/sudo-${PV}.tar.gz;name=src \
-   file://sudo.pamd \
- "
- 
--SRC_URI[src.md5sum] = "3989e5a00538247d7dcef8b514076752"
--SRC_URI[src.sha256sum] = "57d9adbdffa881e32894231079da7d68ffe99f46942818b63baadf6c795b7bdd"
-+SRC_URI[src.md5sum] = "1ae12d3d22e7ffedbf2db26f957676f0"
-+SRC_URI[src.sha256sum] = "20091ef71018698c674c779f4b57178b2ecb4275fa34909b06219d2688ad14d5"
- 
- EXTRA_OECONF += " --with-pam "
- 
--- 
-1.7.1
+The TSC have been having trouble managing to organise meetings,
+organising minutes and have not been very responsive recently. There are
+a whole spectrum of reasons for that but at a time when OE really needs
+technical guidance this is a problem.
+
+The message here isn't to the oe-members list in the correct form so
+this isn't an official vote at this time but if it were, I think I'd
+find myself in the unusual position of voting in favour of a vote of no
+confidence for a group I'm actually part of :/.
+
+I'd actually like to see people with the technical understanding and
+time to spend help guiding OE such Koen and Khem on the TSC.
+
+Cheers,
+
+Richard
 
 
 
