@@ -1,37 +1,23 @@
-Received: from mail-yi0-f47.google.com ([209.85.218.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PhUx2-0006jI-H6
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1PhUxS-0006kK-Fh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 23:31:56 +0100
-Received: by yie16 with SMTP id 16so1635786yie.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jan 2011 14:31:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=Aj3HOYxSxFeAWNiSn5nZicAAO/O+4rheY8vGuYKWXU8=;
-	b=bIM6/Hyi7wn7dA3zMbW6XjCA11M4BhFgWkSa9H2E8YzTW/IJ2u2hq9H8ZAy20tE7NB
-	rrfnbiFv1o4sibpW/BWTCKuRl2eDSEn7eHrbG9/dpg2TqcqN6M6Rr6Sf6eOGWgBn/Wzd
-	gyHDTpotpeyJmR4XG8mfJN7kIVRJvmT1S1sZM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=NJ+GtmX05B0+fGFZCJjikNVXg5b0icKT6Yaqmv3H2I+d17qNQhFF5HEYBlOP9hK+1M
-	I4EQOhmMuvkMqSDcFl9p6q2xAPzLdel7Xr84WJEyBukjGXhhIcyTO1uInuOas7p66AvE
-	ZAX4Qx5eXZNTU+AlnwhqihBe6yONYkjtGTvGQ=
-Received: by 10.90.80.18 with SMTP id d18mr5705835agb.31.1295908270137; Mon,
-	24 Jan 2011 14:31:10 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.45.13 with HTTP; Mon, 24 Jan 2011 14:30:47 -0800 (PST)
-In-Reply-To: <4D3DF2DC.2020107@freyther.de>
-References: <1295900293-25470-1-git-send-email-raj.khem@gmail.com>
-	<1295900293-25470-4-git-send-email-raj.khem@gmail.com>
-	<4D3DF2DC.2020107@freyther.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 24 Jan 2011 14:30:47 -0800
-Message-ID: <AANLkTinV-mV+vFnQLHwxdhUnaz5XYXsJFMC=2vXBz6OB@mail.gmail.com>
+	Mon, 24 Jan 2011 23:32:22 +0100
+Received: (qmail invoked by alias); 24 Jan 2011 22:24:55 -0000
+Received: from p5DE49494.dip.t-dialin.net (EHLO localhost.localdomain)
+	[93.228.148.148]
+	by mail.gmx.net (mp066) with SMTP; 24 Jan 2011 23:24:55 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/qP3N8wt7qb+FEh1fsVd4QBo241degtq+rz2KQam
+	6hra7KG59ZuGhx
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 3/5] recipes/meta recipes/tasks: Replace ipkg-utils with opkg-utils
+Date: Mon, 24 Jan 2011 23:22:30 +0100
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201101242322.30470.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Question regarding gettext 0.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 22:31:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 24 Jan 2011 22:32:22 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jan 24, 2011 at 1:45 PM, Holger Freyther <holger+oe@freyther.de> wr=
-ote:
-> On 01/24/2011 09:18 PM, Khem Raj wrote:
->> -DEPENDS =3D "opkg-native ipkg-utils-native fakeroot-native sed-native z=
-ip-native"
->> +DEPENDS =3D "opkg-native opkg-utils-native fakeroot-native sed-native z=
-ip-native"
->> =C2=A0PR =3D "r5"
->
-> Do you want to change the PR?
+Dear OE folks,
 
-Will do.
+during working on new recipes for clutter 1.4.2 I face the following issue:
 
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Compiling fails with the message
+
+>Making all in po
+>make[2]: Entering directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2/po'
+>*** error: gettext infrastructure mismatch: using a Makefile.in.in from gettext version 0.17 but the autoconf macros are from gettext version 0.18
+>make[2]: *** [check-macro-version] Error 1
+>make[2]: Leaving directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2/po'
+>make[1]: *** [all-recursive] Error 1
+>make[1]: Leaving directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2'
+>make: *** [all] Error 2
+>FATAL: oe_runmake failed
+>ERROR: Function do_compile failed
+
+I checked google & git-log for a hint on that - nothing (yet).
+
+It smells as a simple solution - but I am not able to find it. Can somebody please give me a hint how to solve?
+
+Regards
+
+Andreas
 
 
