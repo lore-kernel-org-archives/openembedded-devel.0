@@ -1,22 +1,34 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holger+oe@freyther.de>) id 1PhTKz-0002Uy-1M
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 21:48:33 +0100
-Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
-	[91.64.83.241])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 7EFA01B10C0F
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PhUCu-0005J9-VE for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Jan 2011 22:44:17 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PhUCC-0005s3-Kj for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Jan 2011 22:43:32 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jan 2011 22:43:32 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jan 2011 20:56:36 +0000 (UTC)
-Message-ID: <4D3DE56B.7020803@freyther.de>
-Date: Mon, 24 Jan 2011 21:47:39 +0100
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Mon, 24 Jan 2011 22:43:32 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: build errors in openssl-native
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 24 Jan 2011 22:43:20 +0100
+Message-ID: <ihkrpo$uft$1@dough.gmane.org>
+References: <4D36F9BE.1010601@xora.org.uk> <4D3DAB2A.3070303@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D3DAB2A.3070303@balister.org>
+X-Enigmail-Version: 1.0.1
+Subject: Re: openembedded-core git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,23 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 20:48:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 24 Jan 2011 21:44:17 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-is anyone else seeing build errors like this:
+On 24-01-11 17:39, Philip Balister wrote:
+> On 01/19/2011 06:48 AM, Graeme Gregory wrote:
+>> Hi, this email is sent as an ordinary member of OE.
+>>
+>> It seems to be on a technical level we are agreed that we should split
+>> parts of OE out into the so called openembedded-core which will have a
+>> stricter commit access and higher QA requirements on changes.
+>>
+>> I therefore think it is time to actually create the repository and let
+>> the people who are interested in merging the good stuff from poky with
+>> the good stuff from openembedded to create our "core". I don't think
+>> there is any need to wait on the political part of the Yocto/OE
+>> collaboration as its something we have agreed in principal to do anyway.
+>>
+>> I would request then that the TSC drive this forward with the server
+>> admins and create this repo so work can happen.
+> 
+> 
+> Has anything happened on this email? Has the TSC had a meeting to
+> discuss? I know it has only been a week, but people are starting to do
+> work based on these ideas and need some support from the TSC.
 
-make[2]: Entering directory
-`/data/openembedded/build/arm/cortex-a8/tmp/work/x86_64-linux/openssl-native-1.0.0c-r14.0/openssl-1.0.0c/apps'
-openssl.o: In function `main':
-openssl.c:(.text+0x1eb): undefined reference to `BIO_s_file'
-openssl.c:(.text+0x1f3): undefined reference to `BIO_new'
-openssl.c:(.text+0x235): undefined reference to `BIO_ctrl'
+At this point I'm going to call for a vote of non confidence in the TSC.
+If they can't be bothered to speak up in an important matter like this,
+we'd be better of without them.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFNPfJ4MkyGM64RGpERAr5bAKCJlqjvcXHIbrZR5jQjAEAhBp4NdQCffnW0
+JGXHmRMZYLsptyPpDrqKKkY=
+=7ASP
+-----END PGP SIGNATURE-----
 
-this is just the beginning of thousand of symbols. I am going to dig deeper if
-I am the only one seeing it.
 
 
