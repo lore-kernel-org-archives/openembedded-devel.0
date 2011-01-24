@@ -1,35 +1,35 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PhSsU-0000Kd-M0
+	(envelope-from <raj.khem@gmail.com>) id 1PhSu3-0000LS-UL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 21:19:06 +0100
-Received: by qyk8 with SMTP id 8so3213770qyk.6
+	Mon, 24 Jan 2011 21:20:44 +0100
+Received: by iyj18 with SMTP id 18so4859812iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jan 2011 12:18:17 -0800 (PST)
+	Mon, 24 Jan 2011 12:19:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:subject:date:message-id:x-mailer;
-	bh=+2cI5DD5eVl/h4uDque6YF85STRXrOAvv37O1Lkl6iM=;
-	b=ciHvP4/moLQDNxENBH2XoCOy5azw5V+VpRm1L57f6AS5YFCGzG0fWs7tBaRAdqx+gH
-	vxxEzAxQc2JfBw9r2nBKF/JuRJzo6igUFV73AlwpvfWiDWw5bLb2/RzUYoIAVkZYlJGT
-	Avbd6TJK1sOGkCNgbqFGiP5GN3Wae+Z6x09rE=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=d2KreZxwopGZuzlxGcgiBbj6wxjOPI7qUX4t87r62Xg=;
+	b=IJvr4httD2F0lFvaYRv/6Az2vkp/1QD3HuAhODyMTwK9+XZjxm87c3Y/wgGbBB53Yq
+	Jsgl6rAy1koDuBEtsHwsLuUsloPVDJOKnZQvwOT/DXtX7qBfn5YwIUTLlyZzAPWvI9zm
+	kkKXcT1WBPWEexch0QLw3diQHQfrQyTX0Ae84=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer;
-	b=egIJcBOQlrAW8X8sxrH4n+5ZZQiALsfoz7Rx+vtq6CgvbBQGrbMsniEZzIo1t9LerY
-	RBfWWrLYa7dOu83olSxzLSazK4EZmQPQLPvUffEyMmY56pXab7opdkC6mvc6iPhdnJlT
-	tUrtWjUtduO6n+OjzqpBZb0n56j59rRNYnOdI=
-Received: by 10.229.229.18 with SMTP id jg18mr4100505qcb.276.1295900292911;
-	Mon, 24 Jan 2011 12:18:12 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=IokP/p5OLABIp/U1A9uI59BCiVH1E3MsSBGJxow7M81EjqY39pz5OUSC/9KPhH6ggU
+	5OUGE/troy/41yaiOfruApQc8Ij4lEgofSSdC7/q4/kie6UapT54B8WvbebiZ+zs/++m
+	rRRd/40MzUSipcAJqOemdP/Ajjh4A7XewH4f4=
+Received: by 10.42.178.195 with SMTP id bn3mr5372660icb.493.1295900397583;
+	Mon, 24 Jan 2011 12:19:57 -0800 (PST)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id t7sm9616474qcs.28.2011.01.24.12.18.11
+	by mx.google.com with ESMTPS id jv9sm10163505icb.13.2011.01.24.12.19.56
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 24 Jan 2011 12:18:12 -0800 (PST)
+	Mon, 24 Jan 2011 12:19:56 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jan 2011 12:18:08 -0800
-Message-Id: <1295900293-25470-1-git-send-email-raj.khem@gmail.com>
+Date: Mon, 24 Jan 2011 12:19:58 -0800
+Message-Id: <1295900399-4536-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH 0/5] Replace ipkg-utils with opkg-utils
+Subject: [PATCH 4/5] slugos.inc: Dont lock SRCDATE for ipkg, its not used anymore
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,16 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 20:19:06 -0000
+X-List-Received-Date: Mon, 24 Jan 2011 20:20:44 -0000
 
-From: Khem Raj <raj.khem@gmail.com>                                                                  
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/distro/include/slugos.inc |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
 
-These patches replace usage of ipkg-utils with opkg-utils
-in OE. I have built a native-sdk-image successfully on
-angstrom-2008.1
+diff --git a/conf/distro/include/slugos.inc b/conf/distro/include/slugos.inc
+index e59d7f0..837e422 100644
+--- a/conf/distro/include/slugos.inc
++++ b/conf/distro/include/slugos.inc
+@@ -141,9 +141,6 @@ PREFERRED_PROVIDER_virtual/libx11-native        ?= "libx11-native"
+ PREFERRED_PROVIDER_virtual/db			= "db"
+ PREFERRED_PROVIDER_virtual/db-native		= "db-native"
+ 
+-SRCDATE_ipkg-utils				?= "20060106"
+-SRCDATE_ipkg-utils-native			?= "20060106"
+-SRCDATE_ipkg-link				?= "20060106"
+ SRCDATE_irssi					?= "20050930"
+ 
+ # We want the newer util-linux package
+-- 
+1.7.0.4
 
-Please review and provide your feedback
-
--Khem
 
 
