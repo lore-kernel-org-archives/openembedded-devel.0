@@ -1,22 +1,34 @@
-Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1PhJt8-0007CE-Jc
+	(envelope-from <vjaquez@igalia.com>) id 1PhNaE-0003MF-TE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 11:43:10 +0100
-Received: (qmail 10637 invoked by uid 2404007); 24 Jan 2011 10:42:27 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 89-73-120-20.dynamic.chello.pl (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@89.73.120.20)
-	by host4.kei.pl with ESMTPA; 24 Jan 2011 10:42:27 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Mon, 24 Jan 2011 15:39:55 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AtIFAJcdPU1bdWOb/2dsb2JhbACEEpI4jxCrGpAsgSSDOHQEiyA
+X-IronPort-AV: E=Sophos;i="4.60,370,1291590000"; d="scan'208";a="720903056"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 24 Jan 2011 15:39:11 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1PhNZW-0006SP-W8; Mon, 24 Jan 2011 15:39:10 +0100
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1PhNZW-0007ZK-Pw; Mon, 24 Jan 2011 15:39:10 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>)
+	id 1PhNZW-0006GZ-9v; Mon, 24 Jan 2011 15:39:10 +0100
+From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
+	<vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jan 2011 11:42:56 +0100
-User-Agent: KMail/1.13.5 (Linux/2.6.37-12-generic; KDE/4.5.95; x86_64; ; )
-References: <AANLkTinz+p5J6K+XhohJJ=q7dD3X1kVGZDNA-4qOOH2W@mail.gmail.com>
-In-Reply-To: <AANLkTinz+p5J6K+XhohJJ=q7dD3X1kVGZDNA-4qOOH2W@mail.gmail.com>
+Date: Mon, 24 Jan 2011 15:39:09 +0100
+Message-Id: <1295879950-24057-1-git-send-email-vjaquez@igalia.com>
+X-Mailer: git-send-email 1.7.0.2
 MIME-Version: 1.0
-Message-Id: <201101241143.00408.marcin@juszkiewicz.com.pl>
-Subject: Re: Recipes with fetch failures:
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: [PATCH] minimal.conf: inherit devshell task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,27 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 10:43:10 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 24 Jan 2011 14:39:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Dnia sobota, 22 stycznia 2011 o 19:06:40 Otavio Salvador napisa=C5=82(a):
+Everybody loves devshell
 
->    cvs://anoncvs:anoncvs@anoncvs.handhelds.org/cvs;module=3Dipkg-utils
->=20
-> This does seems critical to us since it makes a hard time for anyone
-> trying to get something done with OE and has no background how to
-> workaround those. It seems that those need fixes.
+Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
+---
+ conf/distro/minimal.conf |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-Just let someone switch OE to use opkg-utils by default. We did it in Poky=
-=20
-years ago...
+diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+index f495d13..11525b9 100644
+--- a/conf/distro/minimal.conf
++++ b/conf/distro/minimal.conf
+@@ -104,6 +104,9 @@ QA_LOG = "1"
+ #run QA tests on recipes
+ INHERIT += "recipe_sanity"
+ 
++#make devshell available as task
++INHERIT += "devshell" 
++
+ #############################################################################
+ # PREFERRED VERSIONS
+ #############################################################################
+-- 
+1.7.0.2
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
