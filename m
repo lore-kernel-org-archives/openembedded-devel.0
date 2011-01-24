@@ -1,23 +1,26 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1PhPSP-00069Q-8K
+	(envelope-from <mickey@vanille-media.de>) id 1PhPYx-0006Ig-TD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 17:40:03 +0100
-Received: (qmail 6915 invoked by uid 1003); 24 Jan 2011 16:39:08 -0000
-Received: from unknown (HELO ?192.168.0.104?) (philip@opensdr.com@207.47.37.2)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	24 Jan 2011 16:39:08 -0000
-Message-ID: <4D3DAB2A.3070303@balister.org>
-Date: Mon, 24 Jan 2011 08:39:06 -0800
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4D36F9BE.1010601@xora.org.uk>
-In-Reply-To: <4D36F9BE.1010601@xora.org.uk>
-Subject: Re: openembedded-core git repository
+	Mon, 24 Jan 2011 17:46:43 +0100
+Received: from [192.168.1.13] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 95186584189; 
+	Mon, 24 Jan 2011 18:02:54 +0100 (CET)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: Dr. Michael Lauer <mickey@vanille-media.de>
+In-Reply-To: <EA608C6A-B2F2-4F94-9C66-5564E394D06C@vanille-media.de>
+Date: Mon, 24 Jan 2011 17:46:00 +0100
+Message-Id: <B3A1C536-8344-410C-A58F-F5378AC5AB12@vanille-media.de>
+References: <20110120181233.GA1789@lit.local.igalia.com>	<ihbp5c$4ov$1@dough.gmane.org>
+	<AANLkTimBieqoDRmVfoYmTVpehrmtCk-N=M8bKgRWumN0@mail.gmail.com>
+	<4D39988B.5020204@balister.org>
+	<EA608C6A-B2F2-4F94-9C66-5564E394D06C@vanille-media.de>
+To: Dr. Michael Lauer <mickey@vanille-media.de>
+X-Mailer: Apple Mail (2.1082)
+Cc: board@openembedded.org, openembedded-devel@lists.openembedded.org
+Subject: Re: problems compiling glibc_2.9-r37.4 under Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,31 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 16:40:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 24 Jan 2011 16:46:44 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On 01/19/2011 06:48 AM, Graeme Gregory wrote:
-> Hi, this email is sent as an ordinary member of OE.
->
-> It seems to be on a technical level we are agreed that we should split
-> parts of OE out into the so called openembedded-core which will have a
-> stricter commit access and higher QA requirements on changes.
->
-> I therefore think it is time to actually create the repository and let
-> the people who are interested in merging the good stuff from poky with
-> the good stuff from openembedded to create our "core". I don't think
-> there is any need to wait on the political part of the Yocto/OE
-> collaboration as its something we have agreed in principal to do anyway.
->
-> I would request then that the TSC drive this forward with the server
-> admins and create this repo so work can happen.
+ping?
 
+Am 21.01.2011 um 16:12 schrieb Dr. Michael Lauer:
 
-Has anything happened on this email? Has the TSC had a meeting to 
-discuss? I know it has only been a week, but people are starting to do 
-work based on these ideas and need some support from the TSC.
+> Philip,
+> 
+> unfortunately you're not commenting on Frans' actual point,
+> which no longer has anything to do with the u-boot thing.
+> 
+> Board, when can we schedule a meeting?
+> 
+> :M:
+> 
 
-Philip
 
 
