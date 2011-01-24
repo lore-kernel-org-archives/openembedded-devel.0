@@ -1,23 +1,24 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1PhUxS-0006kK-Fh
+Received: from gandharva.secretlabs.de ([78.46.147.237])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <holger+oe@freyther.de>) id 1PhUzE-0006oS-8N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 23:32:22 +0100
-Received: (qmail invoked by alias); 24 Jan 2011 22:24:55 -0000
-Received: from p5DE49494.dip.t-dialin.net (EHLO localhost.localdomain)
-	[93.228.148.148]
-	by mail.gmx.net (mp066) with SMTP; 24 Jan 2011 23:24:55 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/qP3N8wt7qb+FEh1fsVd4QBo241degtq+rz2KQam
-	6hra7KG59ZuGhx
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jan 2011 23:22:30 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+	Mon, 24 Jan 2011 23:34:12 +0100
+Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
+	[91.64.83.241])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 0044D1B10C0C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jan 2011 22:42:22 +0000 (UTC)
+Message-ID: <4D3DFE34.3090706@freyther.de>
+Date: Mon, 24 Jan 2011 23:33:24 +0100
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Message-Id: <201101242322.30470.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Question regarding gettext 0.18
+To: openembedded-devel@lists.openembedded.org
+References: <4D3DE56B.7020803@freyther.de> <4D3DF7CF.7010308@freyther.de>
+In-Reply-To: <4D3DF7CF.7010308@freyther.de>
+Subject: Re: build errors in openssl-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,34 +32,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 22:32:22 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
+X-List-Received-Date: Mon, 24 Jan 2011 22:34:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Dear OE folks,
+On 01/24/2011 11:06 PM, Holger Freyther wrote:
+> On 01/24/2011 09:47 PM, Holger Freyther wrote:
+>> Hi,
+>>
+>> is anyone else seeing build errors like this:
 
-during working on new recipes for clutter 1.4.2 I face the following issue:
-
-Compiling fails with the message
-
->Making all in po
->make[2]: Entering directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2/po'
->*** error: gettext infrastructure mismatch: using a Makefile.in.in from gettext version 0.17 but the autoconf macros are from gettext version 0.18
->make[2]: *** [check-macro-version] Error 1
->make[2]: Leaving directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2/po'
->make[1]: *** [all-recursive] Error 1
->make[1]: Leaving directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2'
->make: *** [all] Error 2
->FATAL: oe_runmake failed
->ERROR: Function do_compile failed
-
-I checked google & git-log for a hint on that - nothing (yet).
-
-It smells as a simple solution - but I am not able to find it. Can somebody please give me a hint how to solve?
-
-Regards
-
-Andreas
+next weird breakage is curl-native... compiled without gnutls ending up
+linking to the system gnutls that uses gcrypt but does not link to it...
 
 
