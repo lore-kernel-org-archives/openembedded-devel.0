@@ -1,30 +1,35 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1PhSac-0008U3-Kg
+	(envelope-from <raj.khem@gmail.com>) id 1PhSp8-0000Fh-PR
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Jan 2011 21:00:38 +0100
-Received: (qmail 27892 invoked by uid 1003); 24 Jan 2011 19:59:48 -0000
-Received: from unknown (HELO ?192.168.1.148?) (philip@opensdr.com@75.37.22.143)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	24 Jan 2011 19:59:48 -0000
-Message-ID: <4D3DDA31.6020305@balister.org>
-Date: Mon, 24 Jan 2011 11:59:45 -0800
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Thunderbird/3.1.7
-MIME-Version: 1.0
-To: Graeme Gregory <dp@xora.org.uk>
-References: <20110120181233.GA1789@lit.local.igalia.com>	<ihbp5c$4ov$1@dough.gmane.org>
-	<AANLkTimBieqoDRmVfoYmTVpehrmtCk-N=M8bKgRWumN0@mail.gmail.com>
-	<4D39988B.5020204@balister.org>
-	<EA608C6A-B2F2-4F94-9C66-5564E394D06C@vanille-media.de>
-	<B3A1C536-8344-410C-A58F-F5378AC5AB12@vanille-media.de>
-	<4D3DADAF.8000805@xora.org.uk>
-In-Reply-To: <4D3DADAF.8000805@xora.org.uk>
-Cc: board@openembedded.org, "Dr. Michael Lauer" <mickey@vanille-media.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: Board meeting, was: Re: problems compiling glibc_2.9-r37.4 under Angstrom
+	Mon, 24 Jan 2011 21:15:39 +0100
+Received: by vws6 with SMTP id 6so2001751vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jan 2011 12:14:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=ufKuX4bXWCvFiSgd+yihHGBIvlD1nrMCgLOboyoqcug=;
+	b=MNUumZhR0exJepeIte64pdI0pEXBP42yt/HrJm7OXeCrHYgTHdo64dNlUo4qTLagkg
+	nW0xj7j+yz5QLdnPJaakMDi/DBQ4CBHtQDg11lTtsLieSGT6BcMFSpOFHeqAliTbLF9b
+	Fn0jU/VOqcKaTmGVgqabkcrMNKP+YXUYBpBsA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=EdJoJEoeQpISpun+7Z2qv3hxUunkvOqOhbXv2bRcdQjsnLQf8LHTGOiekL10JhTY7c
+	EEDp7vXGlBWiO1FymcsX3J9aX/CZfOyRPi6uwsww1slEFd0YgFuDaCfxtrzLR/yETNtc
+	z/BPz7/rmuAolqLEV8fik6F2hQDBV0izsOrv0=
+Received: by 10.220.191.194 with SMTP id dn2mr1248422vcb.268.1295900092604;
+	Mon, 24 Jan 2011 12:14:52 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id b6sm4256314vci.24.2011.01.24.12.14.50
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 24 Jan 2011 12:14:51 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 24 Jan 2011 12:14:52 -0800
+Message-Id: <1295900092-1518-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] udev: Remove duplicate udev firmware loading rule
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,54 +43,271 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2011 20:00:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 24 Jan 2011 20:15:39 -0000
 
-On 01/24/2011 08:49 AM, Graeme Gregory wrote:
-> 9-5 GMT weds-fri is normally ok with me, outisde these times I work a
-> totally non related job.
+A duplicate udev rule calling firmware.sh exists in
+50-udev-default.rules and
+udev.rules
 
-I'm working at a customer site through Wednesday and traveling Thursday. 
-Is Friday during the hours Graeme lists ok?
+This causes the kernel to sometimes get the wrong the firmware due to a
+race between the two calls.
 
-We also need to cover:
+This is with udev124 from the stable2009 openembedded branch however a
+quick
+glance suggests that the same problem exists on the dev branch.
 
-1) Approval of applying to the LF for Yocto Project membership. I 
-circulated the documents last week.
+50-udev-default.rules comes from the upstream tarball
+udev.rules is in the openembedded recipe.
 
-2) Decide to authorize having the server admins spend some money on 
-builder issues. (See ka6sox's white paper I sent last week) He also has 
-some other ideas, so we should budget an amount and let him work out 
-what to do.
+This causes the infamous "Error number -110" while uploading firmware,
+i.e:
 
-3) Brief discussion of travel reimbursements, although from discussions 
-with board members, it may be more trouble than it is worth for events 
-like FOSDEM.
+[ 4171.357272] firmware: requesting zd1211/zd1211b_ub
+[ 4171.375779] firmware: requesting zd1211/zd1211b_uphr
+[ 4193.981056] firmware: requesting zd1211/zd1211b_ub
+[ 4193.986433] firmware: requesting zd1211/zd1211b_uphr
+[ 4195.033695] usb 8-3: USB control request for firmware upload failed.  Error number -110
 
-4) We need to decide who is going to provide leadership to move forward 
-with the Yocto project.
+* Fixes Bugzilla/5334
 
-Philip
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/udev/udev-097/udev.rules |    3 ---
+ recipes/udev/udev-100/udev.rules |    3 ---
+ recipes/udev/udev-124/udev.rules |    3 ---
+ recipes/udev/udev-141/udev.rules |    3 ---
+ recipes/udev/udev-151/udev.rules |    3 ---
+ recipes/udev/udev-154/udev.rules |    3 ---
+ recipes/udev/udev-162/udev.rules |    3 ---
+ recipes/udev/udev-165/udev.rules |    3 ---
+ recipes/udev/udev_097.bb         |    2 +-
+ recipes/udev/udev_100.bb         |    2 +-
+ recipes/udev/udev_124.bb         |    2 +-
+ recipes/udev/udev_141.bb         |    2 +-
+ recipes/udev/udev_151.bb         |    2 +-
+ recipes/udev/udev_154.bb         |    2 +-
+ recipes/udev/udev_162.bb         |    2 +-
+ recipes/udev/udev_165.bb         |    2 +-
+ 16 files changed, 8 insertions(+), 32 deletions(-)
 
->
-> G
->
-> On 24/01/2011 16:46, Dr. Michael Lauer wrote:
->> ping?
->>
->> Am 21.01.2011 um 16:12 schrieb Dr. Michael Lauer:
->>
->>> Philip,
->>>
->>> unfortunately you're not commenting on Frans' actual point,
->>> which no longer has anything to do with the u-boot thing.
->>>
->>> Board, when can we schedule a meeting?
->>>
->>> :M:
->>>
->
->
+diff --git a/recipes/udev/udev-097/udev.rules b/recipes/udev/udev-097/udev.rules
+index 27c4cb8..1fcf0cd 100644
+--- a/recipes/udev/udev-097/udev.rules
++++ b/recipes/udev/udev-097/udev.rules
+@@ -94,9 +94,6 @@ KERNEL=="device-mapper",	NAME="mapper/control"
+ 
+ KERNEL=="rfcomm[0-9]*", NAME="%k", GROUP="users", MODE="0660"
+ 
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+ # Samsung UARTS
+ KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+ 
+diff --git a/recipes/udev/udev-100/udev.rules b/recipes/udev/udev-100/udev.rules
+index 27c4cb8..1fcf0cd 100644
+--- a/recipes/udev/udev-100/udev.rules
++++ b/recipes/udev/udev-100/udev.rules
+@@ -94,9 +94,6 @@ KERNEL=="device-mapper",	NAME="mapper/control"
+ 
+ KERNEL=="rfcomm[0-9]*", NAME="%k", GROUP="users", MODE="0660"
+ 
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+ # Samsung UARTS
+ KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+ 
+diff --git a/recipes/udev/udev-124/udev.rules b/recipes/udev/udev-124/udev.rules
+index a19d4a0..6117b94 100644
+--- a/recipes/udev/udev-124/udev.rules
++++ b/recipes/udev/udev-124/udev.rules
+@@ -105,9 +105,6 @@ KERNEL=="device-mapper",	NAME="mapper/control"
+ 
+ KERNEL=="rfcomm[0-9]*", NAME="%k", GROUP="users", MODE="0660"
+ 
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+ # Samsung UARTS
+ KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+ 
+diff --git a/recipes/udev/udev-141/udev.rules b/recipes/udev/udev-141/udev.rules
+index a19d4a0..6117b94 100644
+--- a/recipes/udev/udev-141/udev.rules
++++ b/recipes/udev/udev-141/udev.rules
+@@ -105,9 +105,6 @@ KERNEL=="device-mapper",	NAME="mapper/control"
+ 
+ KERNEL=="rfcomm[0-9]*", NAME="%k", GROUP="users", MODE="0660"
+ 
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+ # Samsung UARTS
+ KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+ 
+diff --git a/recipes/udev/udev-151/udev.rules b/recipes/udev/udev-151/udev.rules
+index 60288c0..c20cdcc 100644
+--- a/recipes/udev/udev-151/udev.rules
++++ b/recipes/udev/udev-151/udev.rules
+@@ -105,9 +105,6 @@ KERNEL=="device-mapper",	NAME="mapper/control"
+ 
+ KERNEL=="rfcomm[0-9]*", GROUP="users", MODE="0660"
+ 
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+ # Samsung UARTS
+ KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+ 
+diff --git a/recipes/udev/udev-154/udev.rules b/recipes/udev/udev-154/udev.rules
+index 60288c0..c20cdcc 100644
+--- a/recipes/udev/udev-154/udev.rules
++++ b/recipes/udev/udev-154/udev.rules
+@@ -105,9 +105,6 @@ KERNEL=="device-mapper",	NAME="mapper/control"
+ 
+ KERNEL=="rfcomm[0-9]*", GROUP="users", MODE="0660"
+ 
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+ # Samsung UARTS
+ KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+ 
+diff --git a/recipes/udev/udev-162/udev.rules b/recipes/udev/udev-162/udev.rules
+index 60288c0..c20cdcc 100644
+--- a/recipes/udev/udev-162/udev.rules
++++ b/recipes/udev/udev-162/udev.rules
+@@ -105,9 +105,6 @@ KERNEL=="device-mapper",	NAME="mapper/control"
+ 
+ KERNEL=="rfcomm[0-9]*", GROUP="users", MODE="0660"
+ 
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+ # Samsung UARTS
+ KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+ 
+diff --git a/recipes/udev/udev-165/udev.rules b/recipes/udev/udev-165/udev.rules
+index 60288c0..c20cdcc 100644
+--- a/recipes/udev/udev-165/udev.rules
++++ b/recipes/udev/udev-165/udev.rules
+@@ -105,9 +105,6 @@ KERNEL=="device-mapper",	NAME="mapper/control"
+ 
+ KERNEL=="rfcomm[0-9]*", GROUP="users", MODE="0660"
+ 
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+ # Samsung UARTS
+ KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+ 
+diff --git a/recipes/udev/udev_097.bb b/recipes/udev/udev_097.bb
+index 84d4b61..2a20005 100644
+--- a/recipes/udev/udev_097.bb
++++ b/recipes/udev/udev_097.bb
+@@ -10,7 +10,7 @@ needed to link programs with libvolume_id."
+ 
+ require udev.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ LD = "${CC}"
+ 
+diff --git a/recipes/udev/udev_100.bb b/recipes/udev/udev_100.bb
+index a6692cf..c55a6a2 100644
+--- a/recipes/udev/udev_100.bb
++++ b/recipes/udev/udev_100.bb
+@@ -11,7 +11,7 @@ needed to link programs with libvolume_id."
+ 
+ require udev.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ LD = "${CC}"
+ 
+diff --git a/recipes/udev/udev_124.bb b/recipes/udev/udev_124.bb
+index a6c0e18..1585d8c 100644
+--- a/recipes/udev/udev_124.bb
++++ b/recipes/udev/udev_124.bb
+@@ -5,7 +5,7 @@ RPROVIDES_${PN} = "hotplug"
+ 
+ require udev.inc
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ LD = "${CC}"
+ 
+diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
+index 7a34ada..1c6a148 100644
+--- a/recipes/udev/udev_141.bb
++++ b/recipes/udev/udev_141.bb
+@@ -7,7 +7,7 @@ DEFAULT_PREFERENCE = "-1"
+ 
+ require udev.inc
+ 
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
+ 
+ SRC_URI += "file://mount.blacklist \
+ 	    file://run.rules \
+diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
+index c903f0e..32ab909 100644
+--- a/recipes/udev/udev_151.bb
++++ b/recipes/udev/udev_151.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
+ 
+-PR = "r22"
++PR = "r23"
+ 
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
+index d7740a6..4a358d3 100644
+--- a/recipes/udev/udev_154.bb
++++ b/recipes/udev/udev_154.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+diff --git a/recipes/udev/udev_162.bb b/recipes/udev/udev_162.bb
+index dc9d313..90d66ce 100644
+--- a/recipes/udev/udev_162.bb
++++ b/recipes/udev/udev_162.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
+ 
+-PR = "r8"
++PR = "r9"
+ 
+ # Untested
+ #DEFAULT_PREFERENCE = "-1"
+diff --git a/recipes/udev/udev_165.bb b/recipes/udev/udev_165.bb
+index c9e5096..55eccb0 100644
+--- a/recipes/udev/udev_165.bb
++++ b/recipes/udev/udev_165.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+-- 
+1.7.0.4
+
 
 
