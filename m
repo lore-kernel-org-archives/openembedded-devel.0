@@ -1,38 +1,38 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PhcMK-000580-15
+	(envelope-from <raj.khem@gmail.com>) id 1PhcMK-00057w-Sv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 07:26:32 +0100
-Received: by pzk12 with SMTP id 12so937136pzk.6
+	Tue, 25 Jan 2011 07:26:34 +0100
+Received: by mail-pw0-f47.google.com with SMTP id 8so11200pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jan 2011 22:25:45 -0800 (PST)
+	Mon, 24 Jan 2011 22:25:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=FI90MKNTOU9EZXDbpQmRIMdzIHWmnDdnhsWbmp7jeAQ=;
-	b=j0bZeWG5gOJzAOnfpmWOSHFKfYcjDL3bNIiq666v/7Pr1sQk76khnusFvkFX494+UQ
-	do23kO1cmgtKRboQkBCj2LG77jjDEZthJaGgBM22G5qfggPHDMAap3sPn5Y8+vgIjaVv
-	8hnBl7eS3n42dxlSL0cx3b9D0m/ePiNaJMZp4=
+	bh=X6PaRm0s2kpubqzvA/OLK5fUQSznkKZl4Yi0Dh/pTAo=;
+	b=OV51tLThafAeHgHCTMdOm8MuE63CDPU+qMzSOiRLO6s6DeHDF9QQLiQNfMwbJyrPo3
+	tuOVW8u0GuPe1YG1dDRROUAp5oxmaIhlu7wtVzts2eLPM/0Pccor3UP0savlTOSf4j5m
+	8KFO8qnBRagOeXeNXTAq1BZ9SXzCdAryw1T9Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=QyxxXtFiNslTGG1QzfMKA7Futd5D8VhBkmrHR0XeJU0Av07utKsRAV5ybWpekf3bEu
-	kvBeT1O/pbC7Qss/iQt8SaUjr/HfMXDVcHqb7voXeOa3ecpuGuO26/oMtTF7KG0i3phl
-	l2O7Zfp2sFHIdpqiPL101Hazs0yfFfTuCBa7I=
-Received: by 10.143.9.3 with SMTP id m3mr3236345wfi.381.1295936745264;
-	Mon, 24 Jan 2011 22:25:45 -0800 (PST)
+	b=BXUQ9nu1Uvqii4a3AMxX7e0YJjIMCp2g/iYkFN8v0cW25P1n8p6GyIYHPigbvrZ7I1
+	usNov9nf/p7XUiAC32+GTlhPySi8xLs4SViMGpENvernZyRk4W0oyfXY9i8FWZRun8rM
+	n388EjB1qb80v+iGN+LYVfp5t2atmRiu/aJ4s=
+Received: by 10.142.246.14 with SMTP id t14mr3160973wfh.44.1295936747834;
+	Mon, 24 Jan 2011 22:25:47 -0800 (PST)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id x18sm18429417wfa.23.2011.01.24.22.25.43
+	by mx.google.com with ESMTPS id x18sm18429417wfa.23.2011.01.24.22.25.45
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 24 Jan 2011 22:25:44 -0800 (PST)
+	Mon, 24 Jan 2011 22:25:46 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jan 2011 22:25:37 -0800
-Message-Id: <1295936745-718-2-git-send-email-raj.khem@gmail.com>
+Date: Mon, 24 Jan 2011 22:25:38 -0800
+Message-Id: <1295936745-718-3-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1295936745-718-1-git-send-email-raj.khem@gmail.com>
 References: <1295936745-718-1-git-send-email-raj.khem@gmail.com>
-Subject: [PATCH 1/9] classes/package_ipk.bbclass, classes/sourceipk.bbclass: Use opkg-utils-native instead of ipkg-utils-native
+Subject: [PATCH 2/9] recipes/meta recipes/tasks: Replace ipkg-utils with opkg-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +46,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 06:26:32 -0000
+X-List-Received-Date: Tue, 25 Jan 2011 06:26:34 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- classes/package_ipk.bbclass |    4 ++--
- classes/sourceipk.bbclass   |    4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes/meta/canadian-sdk.bb         |    2 +-
+ recipes/meta/foonas-packages.bb      |    2 +-
+ recipes/meta/meta-toolchain.bb       |    2 +-
+ recipes/meta/openprotium-packages.bb |    2 +-
+ recipes/meta/oplinux-packages.bb     |    2 +-
+ recipes/meta/package-index.bb        |    2 +-
+ recipes/meta/slugos-packages.bb      |    2 +-
+ recipes/tasks/task-sdk-sbox-gpe.bb   |    2 +-
+ recipes/tasks/task-shr-feed.bb       |    2 +-
+ 9 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/classes/package_ipk.bbclass b/classes/package_ipk.bbclass
-index 97e5cd8..fea678d 100644
---- a/classes/package_ipk.bbclass
-+++ b/classes/package_ipk.bbclass
-@@ -70,7 +70,7 @@ do_package_update_index_ipk[lockfiles] = "${DEPLOY_DIR_IPK}.lock"
- do_package_update_index_ipk[nostamp] = "1"
- do_package_update_index_ipk[recrdeptask] += "do_package_write_ipk"
- do_package_update_index_ipk[recrdeptask] += "do_package_write_ipk"
--do_package_update_index_ipk[depends] += "ipkg-utils-native:do_populate_sysroot"
-+do_package_update_index_ipk[depends] += "opkg-utils-native:do_populate_sysroot"
+diff --git a/recipes/meta/canadian-sdk.bb b/recipes/meta/canadian-sdk.bb
+index 701a02d..93b80b2 100644
+--- a/recipes/meta/canadian-sdk.bb
++++ b/recipes/meta/canadian-sdk.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Meta package for building a installable toolchain"
+ LICENSE = "MIT"
+-DEPENDS = "opkg-native ipkg-utils-native fakeroot-native sed-native zip-native"
++DEPENDS = "opkg-native opkg-utils-native fakeroot-native sed-native zip-native"
+ PR = "r5"
  
- #
- # Update the Packages index files in ${DEPLOY_DIR_IPK}
-@@ -315,7 +315,7 @@ python do_package_ipk () {
- python () {
-     if bb.data.getVar('PACKAGES', d, True) != '':
-         deps = (bb.data.getVarFlag('do_package_write_ipk', 'depends', d) or "").split()
--        deps.append('ipkg-utils-native:do_populate_sysroot')
-+        deps.append('opkg-utils-native:do_populate_sysroot')
-         deps.append('fakeroot-native:do_populate_sysroot')
-         bb.data.setVarFlag('do_package_write_ipk', 'depends', " ".join(deps), d)
- }
-diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
-index 17a7cdd..b443ef6 100644
---- a/classes/sourceipk.bbclass
-+++ b/classes/sourceipk.bbclass
-@@ -34,9 +34,9 @@
- # Need to figure out how to use ipkg-build in this class.
- # I tried adding it as a dependency for the do_create_srcipk
- # task using:
--#   do_create_srcipk[depends] += "ipkg-utils-native:do_populate_sysroot"
-+#   do_create_srcipk[depends] += "opkg-utils-native:do_populate_sysroot"
- # But then there is a circular dependency between sourcipk.bbclass and
--# ipkg-utils-native.  Until I can figure out how to resolve this
-+# opkg-utils-native.  Until I can figure out how to resolve this
- # circular dependency I am extracting the needed pieces from ipkg-build
- # into this class and building the source ipk myself.
+ # NOTE: We need to save and restore PACKAGE_ARCHS, because sdk.bbclass
+diff --git a/recipes/meta/foonas-packages.bb b/recipes/meta/foonas-packages.bb
+index 2bd8437..570c26e 100644
+--- a/recipes/meta/foonas-packages.bb
++++ b/recipes/meta/foonas-packages.bb
+@@ -74,7 +74,7 @@ FOONAS_PACKAGES = "\
+ 	gtk-doc \
+ 	gzip \
+ 	hdparm \
+-	ipkg-utils \
++	opkg-utils \
+ 	iptables \
+ 	ircp \
+ 	joe \
+diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
+index cb9e438..b8ea037 100644
+--- a/recipes/meta/meta-toolchain.bb
++++ b/recipes/meta/meta-toolchain.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Meta package for building a installable toolchain"
+ LICENSE = "MIT"
+-DEPENDS = "opkg-native ipkg-utils-native fakeroot-native sed-native"
++DEPENDS = "opkg-native opkg-utils-native fakeroot-native sed-native"
  
+ inherit meta
+ 
+diff --git a/recipes/meta/openprotium-packages.bb b/recipes/meta/openprotium-packages.bb
+index 4b10ee2..a738f08 100644
+--- a/recipes/meta/openprotium-packages.bb
++++ b/recipes/meta/openprotium-packages.bb
+@@ -106,7 +106,7 @@ OPENPROTIUM_PACKAGES = "\
+ 	gzip \
+ 	hdparm \
+ 	ifupdown \
+-	ipkg-utils \
++	opkg-utils \
+ 	iptables \
+ 	ircp \
+ 	joe \
+diff --git a/recipes/meta/oplinux-packages.bb b/recipes/meta/oplinux-packages.bb
+index d828eed..ab38c1d 100644
+--- a/recipes/meta/oplinux-packages.bb
++++ b/recipes/meta/oplinux-packages.bb
+@@ -201,7 +201,7 @@ PACKAGES_LIST = "\
+         hydra \
+ 	ifupdown \
+         iputils \
+-	ipkg-utils \
++	opkg-utils \
+ 	iptables \
+         intercom \
+ 	ircp \
+diff --git a/recipes/meta/package-index.bb b/recipes/meta/package-index.bb
+index 335970d..3ad1d10 100644
+--- a/recipes/meta/package-index.bb
++++ b/recipes/meta/package-index.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Rebuild the package index"
+ LICENSE = "MIT"
+-DEPENDS = "ipkg-utils-native"
++DEPENDS = "opkg-utils-native"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+diff --git a/recipes/meta/slugos-packages.bb b/recipes/meta/slugos-packages.bb
+index fb8458a..3487c69 100644
+--- a/recipes/meta/slugos-packages.bb
++++ b/recipes/meta/slugos-packages.bb
+@@ -99,7 +99,7 @@ SLUGOS_PACKAGES = "\
+ 	ifupdown \
+ 	iozone3 \
+ 	iperf \
+-	ipkg-utils \
++	opkg-utils \
+ 	iptables \
+ 	joe \
+ 	jpeg \
+diff --git a/recipes/tasks/task-sdk-sbox-gpe.bb b/recipes/tasks/task-sdk-sbox-gpe.bb
+index 315bddb..b8d1cce 100644
+--- a/recipes/tasks/task-sdk-sbox-gpe.bb
++++ b/recipes/tasks/task-sdk-sbox-gpe.bb
+@@ -11,7 +11,7 @@ RDEPENDS_${PN} = "\
+     gdk-pixbuf-loader-xpm \
+     intltool \
+     intltool-dev \
+-    ipkg-utils \
++    opkg-utils \
+     gettext-dev \
+     pkgconfig-dev \
+     autoconf \
+diff --git a/recipes/tasks/task-shr-feed.bb b/recipes/tasks/task-shr-feed.bb
+index daec242..35e5f0b 100644
+--- a/recipes/tasks/task-shr-feed.bb
++++ b/recipes/tasks/task-shr-feed.bb
+@@ -79,7 +79,7 @@ RDEPENDS_${PN} += "\
+ 		mtpaint \
+ 		telepathy-python \
+ 		intone-video \
+-		ipkg-utils \
++		opkg-utils \
+ 		mysql \
+ 		fltk-chess \
+ 		remoko \
 -- 
 1.7.0.4
 
