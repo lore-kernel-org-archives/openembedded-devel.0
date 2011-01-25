@@ -1,38 +1,34 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PhmIk-0002bD-UA
+	(envelope-from <Tom_Rini@mentor.com>) id 1Phn5t-0003Ln-08
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 18:03:31 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ArcEABWRPk1bdWOb/2dsb2JhbACEE5I+jxGsAYM7AY0qgSODOHQEjCiFYw
-X-IronPort-AV: E=Sophos;i="4.60,375,1291590000"; d="scan'208";a="323575231"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 25 Jan 2011 18:02:45 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PhmI2-0005zu-0J
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 18:02:46 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1PhmI1-0005zW-SW
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 18:02:45 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PhmI1-0002PE-Fr
+	Tue, 25 Jan 2011 18:54:17 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Phn57-0006Sx-Gw from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 18:02:45 +0100
-From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
-	<vjaquez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Jan 2011 18:02:45 +0100
-Message-Id: <1295974965-9220-1-git-send-email-vjaquez@igalia.com>
-X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <c47809e46ea6a0fa950c961b01213171d4bea774.1295971903.git.vjaquez@igalia.com>
-References: <c47809e46ea6a0fa950c961b01213171d4bea774.1295971903.git.vjaquez@igalia.com>
+	Tue, 25 Jan 2011 09:53:29 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 25 Jan 2011 09:53:29 -0800
+Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 25 Jan 2011 10:53:28 -0700
+Message-ID: <4D3F0E15.7050904@mentor.com>
+Date: Tue, 25 Jan 2011 10:53:25 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Subject: [PATCHv3] python-scons_1.3.0: fix licence type
+To: openembedded-devel@lists.openembedded.org
+References: <4D36F9BE.1010601@xora.org.uk>
+	<4D3DAB2A.3070303@balister.org>	<AANLkTi=T++s65-mH91BBwT6OBUfzqcGDiq6J-LVk8+SJ@mail.gmail.com>	<ihmaqm$eho$1@dough.gmane.org>
+	<AANLkTi=hWbJ_Y_m6kxMfCMdQti+xvAZZ-snK1UuqKLxY@mail.gmail.com>
+In-Reply-To: <AANLkTi=hWbJ_Y_m6kxMfCMdQti+xvAZZ-snK1UuqKLxY@mail.gmail.com>
+X-OriginalArrivalTime: 25 Jan 2011 17:53:28.0179 (UTC)
+	FILETIME=[C562EC30:01CBBCB8]
+Subject: Re: openembedded-core git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +42,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 17:03:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 25 Jan 2011 17:54:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-According to the wiki [1], the licence of the project [2] is MIT, not GPL.
+On 01/25/2011 07:49 AM, Frans Meulenbroeks wrote:
+> 2011/1/25 Koen Kooi<k.kooi@student.utwente.nl>:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 24-01-11 18:48, Khem Raj wrote:
+>>> On Mon, Jan 24, 2011 at 8:39 AM, Philip Balister<philip@balister.org>  wrote:
+>>>> On 01/19/2011 06:48 AM, Graeme Gregory wrote:
+>>>>>
+>>>>> Hi, this email is sent as an ordinary member of OE.
+>>>>>
+>>>>> It seems to be on a technical level we are agreed that we should split
+>>>>> parts of OE out into the so called openembedded-core which will have a
+>>>>> stricter commit access and higher QA requirements on changes.
+>>>>>
+>>>>> I therefore think it is time to actually create the repository and let
+>>>>> the people who are interested in merging the good stuff from poky with
+>>>>> the good stuff from openembedded to create our "core". I don't think
+>>>>> there is any need to wait on the political part of the Yocto/OE
+>>>>> collaboration as its something we have agreed in principal to do anyway.
+>>>>>
+>>>>> I would request then that the TSC drive this forward with the server
+>>>>> admins and create this repo so work can happen.
+>>>>
+>>>>
+>>>> Has anything happened on this email? Has the TSC had a meeting to discuss? I
+>>>> know it has only been a week, but people are starting to do work based on
+>>>> these ideas and need some support from the TSC.
+>>>>
+>>>
+>>> Yes I think we should start action on it soon. I would suggest to set
+>>> up the repository
+>>> as first step. As someone raised question about pull model it could be
+>>> TSC who decided
+>>> to appoint one gatekeeper based upon availability interest and
+>>> capability and it could be
+>>> rotated.secondly sane Starting point would be importing yocto and then
+>>> apply the OE improvements
+>>> on top thirdly breakdown oe into oe-meta repo to glue with the oe-core
+>>
+>> Ignoring the timeline a bit, since ideally we would do this around a
+>> yocto milestone to get them to use this straight after their freeze.
+>>
+>> The technical roadmap/todo:
+>>
+>> * setup openembedded-core repo on oe.org
+>> * setup oe-core ml on oe.org
+>> * add oe-core ml to patchwork
+>> * import yocto-core in oe-core
+>
+> Is this yocto core: http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/
+> Or do you mean this:
+> http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-core
+>
+>> * start an integration branch
+>>   o remove bitbake
+> Not sure what you mean with that. Which BB do you propose to use?
 
-1. http://www.scons.org/wiki/FrequentlyAskedQuestions#head-4fe23271137d5e5e95370a1360909ca303157c0d
-2. http://scons.tigris.org/source/browse/scons/trunk/LICENSE?revision=557&view=markup
+Chris Larson has been doing a lot of work (and Richard has been 
+confirming, testing, etc, etc) to try and keep poky's bitbake changes in 
+sync with master when at all possible (the delta has gotten very very 
+small, iirc).
 
-Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
----
- recipes/python/python-scons_1.3.0.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/python/python-scons_1.3.0.bb b/recipes/python/python-scons_1.3.0.bb
-index a0690d1..82231f2 100644
---- a/recipes/python/python-scons_1.3.0.bb
-+++ b/recipes/python/python-scons_1.3.0.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "A Software Construction Tool"
- SECTION = "devel/python"
- PRIORITY = "optional"
--LICENSE = "GPL"
-+LICENSE = "MIT"
- SRCNAME = "scons"
- PR = "r1"
- 
 -- 
-1.7.2.3
-
+Tom Rini
+Mentor Graphics Corporation
 
 
