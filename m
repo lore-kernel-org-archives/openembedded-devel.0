@@ -1,37 +1,32 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rpurdie@rpsys.net>) id 1PhqQX-0005Lf-TC
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ka6sox@gmail.com>) id 1PhqYh-0003NK-Sc
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 22:27:53 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p0PLR56f009440
+	Tue, 25 Jan 2011 22:36:16 +0100
+Received: by fxm17 with SMTP id 17so289191fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 21:27:05 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09139-05 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 21:27:01 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p0PLQxc7009434
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 21:27:00 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Tue, 25 Jan 2011 13:35:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=r26EzJ6MjVXYy2PZdSe4SELbpc3YdDF1qTZGGUF5omA=;
+	b=EptEdiRv1TPBZwcpmeF4UV8QmXkzF8cRFE8qGV0XlfO/0mtMbHbQf9gO5FUJqfzwSj
+	5WzTjhzzlBdhq+qp9QBfmZwtaRjsK51OQupbv6c2tMo6hb3XWJyOkuc31mpzXCPNCPtw
+	rB2ZEWaT6uh657rGtm6AkZNeoDChfK3kNq2RQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=SgkjoLvSln9XvEYGbmTUTRS3hT47d2Cb1AYwzxfxzK+qGiaEn0wBLc14sd3fg2ZRHL
+	/1oqLxlceuu0ziGNGI5/ZP6l4BZ/bexDFVISNZuAJcZ3K4lu80mGlBO2PdRu38GozCj/
+	Uu8HUTFrMTGKqjS01PkgxF+CDuo7Z4AGV0tq0=
+MIME-Version: 1.0
+Received: by 10.223.101.135 with SMTP id c7mr6414223fao.76.1295991312362; Tue,
+	25 Jan 2011 13:35:12 -0800 (PST)
+Received: by 10.223.103.14 with HTTP; Tue, 25 Jan 2011 13:35:12 -0800 (PST)
+Date: Tue, 25 Jan 2011 13:35:12 -0800
+Message-ID: <AANLkTi=C5q1_aVxkf3JCH_M3u+dyCP=neTPX_oUHie65@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=ABs-jwjo=q5xGrKxvmYaLe05ePEtOez57E7ms@mail.gmail.com>
-References: <4D36F9BE.1010601@xora.org.uk> <4D3DAB2A.3070303@balister.org>
-	<AANLkTi=T++s65-mH91BBwT6OBUfzqcGDiq6J-LVk8+SJ@mail.gmail.com>
-	<ihmaqm$eho$1@dough.gmane.org>
-	<AANLkTi=hWbJ_Y_m6kxMfCMdQti+xvAZZ-snK1UuqKLxY@mail.gmail.com>
-	<4D3F0E15.7050904@mentor.com>
-	<AANLkTi=ABs-jwjo=q5xGrKxvmYaLe05ePEtOez57E7ms@mail.gmail.com>
-Date: Tue, 25 Jan 2011 21:26:43 +0000
-Message-ID: <1295990803.27814.36.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: openembedded-core git repository
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Planned outage of Melo server.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +40,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 21:27:53 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Jan 2011 21:36:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 2011-01-25 at 11:19 -0700, Chris Larson wrote:
-> On Tue, Jan 25, 2011 at 10:53 AM, Tom Rini <tom_rini@mentor.com> wrote:
-> >>> * start an integration branch
-> >>>  o remove bitbake
-> >>
-> >> Not sure what you mean with that. Which BB do you propose to use?
-> >
-> > Chris Larson has been doing a lot of work (and Richard has been confirming,
-> > testing, etc, etc) to try and keep poky's bitbake changes in sync with
-> > master when at all possible (the delta has gotten very very small, iirc).
-> 
-> I would personally like to see yocto use upstream bitbake with git
-> submodules or similar, rather than maintaining its own bitbake
-> directory.  I'd also like to see the bitbake sync completed, but it
-> seems like it's a low priority for Richard at this time.  As you say,
-> though, the delta is fairly small, considering.
+When: 0330-0430UTC  25jan2011
+Why: to install drbd modules and ganeti configs for increased reliability.
 
-I don't consider it a low priority and fully agree it needs to be fixed,
-there needs to be no delta. I doubt I'd go for submodules but making it
-match 1:1 commits with upstream bitbake is the intent and to script it.
+Git, Wiki, bugzilla, tinderbox will all be offline during that period.
 
-The Yocto development window is closing which has influenced my priority
-list. I'm also very conscious that we want to sort out a number of the
-fetcher problems and we're not there with that yet so I'm having to make
-some difficult choices over what I work on and in what order.
-
-On the plus side two features have just landed in Poky/Yocto:
-
-* Improved toolchain bootstrap process (no file overwriting)
-* A sysroot per machine
-
-which are both things we've wanted in OE for years and help in various
-ways (e.g. making sstate/pstage easier and reliable).
-
-We also merged libtool 2.4 and found a security hole that OE hadn't
-spotted. Those problems have been reported to libtool upstream.
-
-Cheers,
-
-Richard
-
-
+ka6sox
+(for the openembedded.org infrastructure team)
 
