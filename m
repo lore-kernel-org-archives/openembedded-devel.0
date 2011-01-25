@@ -1,36 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PhkEq-0006pD-E8 for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 15:51:20 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PhkE5-0005Hj-I8 for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 15:50:33 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 15:50:33 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 15:50:33 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 25 Jan 2011 15:50:16 +0100
-Message-ID: <ihmnv8$n3g$1@dough.gmane.org>
-References: <1295464913-2642-1-git-send-email-koen@openembedded.org>	<4D373CFC.8010400@balister.org>
-	<ihmjum$vdq$2@dough.gmane.org>
-	<AANLkTinHGa136tXLwyBO2L=TUOQP+kW2WQTLyjBEU0Zx@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <AANLkTinHGa136tXLwyBO2L=TUOQP+kW2WQTLyjBEU0Zx@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] insane bbclass: extend RPATH check to cover sysroots as well
+	(envelope-from <mickey@vanille-media.de>) id 1PhkMU-0002ZZ-Q9
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 25 Jan 2011 15:59:14 +0100
+Received: from [192.168.1.13] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 2385C58413E; 
+	Tue, 25 Jan 2011 16:15:29 +0100 (CET)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <1295879950-24057-1-git-send-email-vjaquez@igalia.com>
+Date: Tue, 25 Jan 2011 15:58:30 +0100
+Message-Id: <4DD7B11A-3C41-4BCD-AC46-FD1A0FA16A5C@vanille-media.de>
+References: <1295879950-24057-1-git-send-email-vjaquez@igalia.com>
+To: =?iso-8859-1?Q?V=EDctor_Manuel_J=E1quez_Leal?= <vjaquez@igalia.com>
+X-Mailer: Apple Mail (2.1082)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] minimal.conf: inherit devshell task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,38 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 14:51:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Jan 2011 14:59:14 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
 
-On 25-01-11 15:40, Frans Meulenbroeks wrote:
-> 2011/1/25 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 20-01-11 08:10, Koen Kooi wrote:
->>>> On 19-01-11 20:35, Philip Balister wrote:
->>>>> On 01/19/2011 11:21 AM, Koen Kooi wrote:
->>>>>> * Having rpath to sysroot is just as bad as one to workdir
->>>>
->>>>> When you do a build with this, how many recipes have issues?
->>>>
->>>> Console-image is clean now :)
-> 
-> And angstrom-gnome-image as well, so can I get some Acks or tested-bys
-> please?
-> 
->> NAK, I feel other distro's like shr and minimal should be given some
->> time to test this too.
+Am 24.01.2011 um 15:39 schrieb V=EDctor Manuel J=E1quez Leal:
 
-Martin has already Acked it, fwiw
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFNPuMoMkyGM64RGpERAqb6AJ4kMGJ1alDw/I5JZQ4ktQ8R6tT3+wCfQgDJ
-DW0T7/k96XHQKeqGGS+5WXQ=
-=QlxQ
------END PGP SIGNATURE-----
+> Everybody loves devshell
+>=20
+> Signed-off-by: V=EDctor Manuel J=E1quez Leal <vjaquez@igalia.com>
+> ---
+> conf/distro/minimal.conf |    3 +++
+> 1 files changed, 3 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+> index f495d13..11525b9 100644
+> --- a/conf/distro/minimal.conf
+> +++ b/conf/distro/minimal.conf
+> @@ -104,6 +104,9 @@ QA_LOG =3D "1"
+> #run QA tests on recipes
+> INHERIT +=3D "recipe_sanity"
+>=20
+> +#make devshell available as task
+> +INHERIT +=3D "devshell"=20
+> +
+> =
+##########################################################################=
+###
+> # PREFERRED VERSIONS
+> =
+##########################################################################=
+###
+> --=20
+> 1.7.0.2
+>=20
 
 
 
