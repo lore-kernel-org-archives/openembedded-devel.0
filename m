@@ -1,35 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from host4.kei.pl ([94.152.8.4] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Phnly-0004k2-9F for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 19:37:46 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PhnlD-00033z-Rf for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 19:36:59 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 19:36:59 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 19:36:59 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Phnx7-0004ze-52
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 25 Jan 2011 19:49:17 +0100
+Received: (qmail 23625 invoked by uid 2404007); 25 Jan 2011 18:48:30 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 89-73-120-20.dynamic.chello.pl (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@89.73.120.20)
+	by host4.kei.pl with ESMTPA; 25 Jan 2011 18:48:30 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 25 Jan 2011 19:36:47 +0100
-Message-ID: <ihn57v$84o$1@dough.gmane.org>
-References: <1295654503-26379-1-git-send-email-lm@larsmichelsen.com>	<ihedau$stf$1@dough.gmane.org>	<4D3AC11C.2040602@larsmichelsen.com>	<4D3AC6F0.4050802@xora.org.uk>	<ihel1v$tnt$1@dough.gmane.org>	<4D3ADC2C.6070506@larsmichelsen.com>	<ihesdm$v7u$1@dough.gmane.org>	<4D3B15FB.5000403@larsmichelsen.com>
-	<4D3F1253.7060202@larsmichelsen.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D3F1253.7060202@larsmichelsen.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH] mplayer_svn: Package can be built again; Bumped to rev. 31329.
+Date: Tue, 25 Jan 2011 19:49:14 +0100
+User-Agent: KMail/1.13.5 (Linux/2.6.37-12-generic; KDE/4.5.95; x86_64; ; )
+References: <4D257C14.8030108@gmx.net> <4D299E6B.20407@gmx.net>
+	<4D3F1467.5040408@kernelconcepts.de>
+In-Reply-To: <4D3F1467.5040408@kernelconcepts.de>
+MIME-Version: 1.0
+Message-Id: <201101251949.14874.marcin@juszkiewicz.com.pl>
+Subject: Re: FOSDEM stand organization thread
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 18:37:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Jan 2011 18:49:17 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia wtorek, 25 stycznia 2011 o 19:20:23 Florian Boor napisa=C5=82(a):
 
-On 25-01-11 19:11, Lars Michelsen wrote:
-> Hello Koen,
-> 
-> On 22/01/11 18:38, Lars Michelsen wrote:
->>> Could you try the current recipe and see if it works for you? It works
->>> on my omap3 boards quite well, minus a dlopen() buglet in libdvdcss2.
->>>
->>
->> I am not able to build it. Seems to be related to the (annoying!) ffmpeg
->> subrepository thing. With that sub-repo there is no control about the
->> version to be used. One day it works and one day later it is broken...
->>
->> Here is the output:
->>
->> NOTE: Applying patch 'offset.patch' (mplayer/offset.patch)
->> FATAL: Execution of 'quilt
->> --quiltrc=/media/lm/transfer/oetmp/sysroots/x86_64-linux/usr/bin/quiltrc
->> push' failed with exit code 1:
->> Applying patch offset.patch
->> patching file ffmpeg/libavcodec/arm/asm-offsets.h
->> Hunk #1 FAILED at 35.
->> 1 out of 1 hunk FAILED -- rejects in file
->> ffmpeg/libavcodec/arm/asm-offsets.h
->> Patch offset.patch does not apply (enforce with -f)
-> 
-> Do you have any idea how to solve this?
+> I plan to attend FOSDEM this year. I have to admit that it's not entirely
+> clear if I'll make it.
 
- I can't reproduce, so no :(
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I hope that you will manage ;) Otherwise who will get all those interesting=
+=20
+devices and flyers?
 
-iD8DBQFNPxg/MkyGM64RGpERAsGfAJ0Q4yhJgfXZExc8wS7IivN48Kbw8QCglDAK
-AaqpJ0ec9TRFTfNMNtQYmG8=
-=Wd4l
------END PGP SIGNATURE-----
-
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
