@@ -1,38 +1,34 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PhksS-0003dg-GK
+	(envelope-from <vjaquez@igalia.com>) id 1PhlBP-0005vU-3v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 16:32:16 +0100
-Received: by iyj18 with SMTP id 18so5776894iyj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 07:31:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=BEFKaoeO+en7YcSqMfBNMHpK7BNCcvIGxFL5bBLwkB4=;
-	b=EK9rsDA31pxHnJWep91bmorkYsKyLSNdmwVhjvdLJkJtZ+8nmPw8wuidSFOLwQnQe3
-	UNi/A4IsIAeBYxrtRt/l5gAB245/1X2t+zXXb0yMssiggkzgg+T1yDweg7z41JORbCgI
-	jy41Xs0q+gVAYRQW2IJX3qewd4Wa3sk4orxFA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Tv6gC0GNiv/uuN65/VAFb5w1Io3Rqz0MtZaYam+rmfFS4kanMPDmkZh30Wv70IX3YT
-	wIXFJXpzFKYoJz+PZYJd+RrO1pyZbW3Iz5ceyW6kUgOc7Q3M41no0bfuMn9nULjjxzOO
-	9eOvLAPke5tmRRFG65mNUSUWzICBViUlHUKgo=
-MIME-Version: 1.0
-Received: by 10.231.166.205 with SMTP id n13mr6741964iby.58.1295969488700;
-	Tue, 25 Jan 2011 07:31:28 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Tue, 25 Jan 2011 07:31:28 -0800 (PST)
-In-Reply-To: <ihmnv8$n3g$1@dough.gmane.org>
-References: <1295464913-2642-1-git-send-email-koen@openembedded.org>
-	<4D373CFC.8010400@balister.org> <ihmjum$vdq$2@dough.gmane.org>
-	<AANLkTinHGa136tXLwyBO2L=TUOQP+kW2WQTLyjBEU0Zx@mail.gmail.com>
-	<ihmnv8$n3g$1@dough.gmane.org>
-Date: Tue, 25 Jan 2011 16:31:28 +0100
-Message-ID: <AANLkTi=oWKGfOnYm5aLZArLCxFjwGz3BJh8e=9Ts8KFf@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 25 Jan 2011 16:51:51 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ArcEAK+APk1bdWOb/2dsb2JhbACEE5I+jxGsJYM7AY0kgSODOHQEjCiFYw
+X-IronPort-AV: E=Sophos;i="4.60,374,1291590000"; d="scan'208";a="323548077"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 25 Jan 2011 16:51:06 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1PhlAg-0004yI-19; Tue, 25 Jan 2011 16:51:06 +0100
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1PhlAf-0003bx-TW; Tue, 25 Jan 2011 16:51:05 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
+	(envelope-from <vjaquez@igalia.com>)
+	id 1PhlAf-0003oz-Du; Tue, 25 Jan 2011 16:51:05 +0100
+From: =?UTF-8?q?V=C3=ADctor=20Manuel=20J=C3=A1quez=20Leal?=
+	<vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] insane bbclass: extend RPATH check to cover sysroots as well
+Date: Tue, 25 Jan 2011 16:51:02 +0100
+Message-Id: <1295970665-14658-1-git-send-email-vjaquez@igalia.com>
+X-Mailer: git-send-email 1.7.2.3
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [PATCH] python-scons_1.3.0: add missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,58 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 15:32:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 25 Jan 2011 15:51:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-2011/1/25 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 25-01-11 15:40, Frans Meulenbroeks wrote:
->> 2011/1/25 Koen Kooi <k.kooi@student.utwente.nl>:
->> On 20-01-11 08:10, Koen Kooi wrote:
->>>>> On 19-01-11 20:35, Philip Balister wrote:
->>>>>> On 01/19/2011 11:21 AM, Koen Kooi wrote:
->>>>>>> * Having rpath to sysroot is just as bad as one to workdir
->>>>>
->>>>>> When you do a build with this, how many recipes have issues?
->>>>>
->>>>> Console-image is clean now :)
->>
->> And angstrom-gnome-image as well, so can I get some Acks or tested-bys
->> please?
->>
->>> NAK, I feel other distro's like shr and minimal should be given some
->>> time to test this too.
->
-> Martin has already Acked it, fwiw tr
+In order to launch scons in a board it depends on a couple python packages
+which were not managed by the recipe.
 
-Yeah, saw it. Came in at my site just after I pressed send, but
-timewise it seems to be 2 minutes earlier.
-I'll try to kick off a minimal build this evening (can't do that from
-here) and report the results (that'll probably be tomorrow because the
-build takes some time). Note that I am not an official minimal
-maintainer though, so I cannot ack on behalf of minimal, I can only
-give a tested-by
+This patch adds them.
 
-Not sure if other distro's need to have a say too. The only other ones
-that seem to have activity are kaeilos (which follows angstrom fairly
-closely) and slugos.
+Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
+---
+ recipes/python/python-scons_1.3.0.bb |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
 
-Frans
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFNPuMoMkyGM64RGpERAqb6AJ4kMGJ1alDw/I5JZQ4ktQ8R6tT3+wCfQgDJ
-> DW0T7/k96XHQKeqGGS+5WXQ=
-> =QlxQ
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/python/python-scons_1.3.0.bb b/recipes/python/python-scons_1.3.0.bb
+index 792e3a5..0dc3236 100644
+--- a/recipes/python/python-scons_1.3.0.bb
++++ b/recipes/python/python-scons_1.3.0.bb
+@@ -1,8 +1,16 @@
+ DESCRIPTION = "A Software Construction Tool"
+ SECTION = "devel/python"
+ PRIORITY = "optional"
++RDEPENDS_${PN} = "python-shell \
++	       python-stringold \
++	       python-lang \
++	       python-io \
++	       python-fcntl \
++	       python-pickle \
++	       python-crypt"
+ LICENSE = "GPL"
+ SRCNAME = "scons"
++PR = "r1"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/scons/scons-${PV}.tar.gz;name=scons \
+            file://toolchain-from-env.SConscript \
+-- 
+1.7.2.3
+
 
 
