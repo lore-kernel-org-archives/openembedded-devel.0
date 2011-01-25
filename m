@@ -1,24 +1,37 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1PhnVr-0004E7-0S
+	(envelope-from <raj.khem@gmail.com>) id 1PhnaQ-0004N5-Iz
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 19:21:07 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1PhnXz-0001WF-RN; Tue, 25 Jan 2011 18:23:19 +0000
-Message-ID: <4D3F1467.5040408@kernelconcepts.de>
-Date: Tue, 25 Jan 2011 19:20:23 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Tue, 25 Jan 2011 19:25:52 +0100
+Received: by iyj18 with SMTP id 18so5953110iyj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Jan 2011 10:25:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=js3KI99Ao7KrB9uLQxCuLXusAjpOsn+lCVXuynaRFoM=;
+	b=rN6l6Y8T5uUUNKvKghzJW1yJBsr8qdVVYNQBABKVPzSAEP+ok3YSNdHUPXuxrrM6WO
+	Cz9T8nKk3Xpw8lXc8ow1jPw4JsLezGdIv4XvPALWgNAU56h0vZDoAO/6N1PRVjYG+mda
+	twUQZBkkYA3DvTAJZu4z45CKdoE2WAh0DkF9s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=K+v3Qq8amhKfpkNKqtr3ksp44TiZB+B4ZgXkQOl1spC4lWC5/elrGC/K1FzfDpKgk+
+	K9lqG8wU9B+YcESf5x2PMOi5D1uTnkkZbfufjkeYO11dyKTwYA32UGTGr5xaSvkFRZLw
+	nimncsr/Zux5L/2bFf12MmVxmoY3TIsmlc/is=
+Received: by 10.42.173.198 with SMTP id s6mr7078634icz.206.1295979902855; Tue,
+	25 Jan 2011 10:25:02 -0800 (PST)
 MIME-Version: 1.0
-To: Robert Schuster <thebohemian@gmx.net>
-References: <4D257C14.8030108@gmx.net> <4D299E6B.20407@gmx.net>
-In-Reply-To: <4D299E6B.20407@gmx.net>
-X-Enigmail-Version: 1.1.2
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: FOSDEM stand organization thread
+Received: by 10.42.230.71 with HTTP; Tue, 25 Jan 2011 10:24:42 -0800 (PST)
+In-Reply-To: <ihmaqm$eho$1@dough.gmane.org>
+References: <4D36F9BE.1010601@xora.org.uk> <4D3DAB2A.3070303@balister.org>
+	<AANLkTi=T++s65-mH91BBwT6OBUfzqcGDiq6J-LVk8+SJ@mail.gmail.com>
+	<ihmaqm$eho$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 25 Jan 2011 10:24:42 -0800
+Message-ID: <AANLkTik6uH9JbHZPdQg1gJN7fi2TUP9cHDt-HSSfarSV@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: openembedded-core git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,35 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 18:21:07 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Jan 2011 18:25:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Robert,
+On Tue, Jan 25, 2011 at 3:05 AM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
+e:
+> Ignoring the timeline a bit, since ideally we would do this around a
+> yocto milestone to get them to use this straight after their freeze.
+>
+> The technical roadmap/todo:
+>
+> * setup openembedded-core repo on oe.org
+> * setup oe-core ml on oe.org
+> * add oe-core ml to patchwork
+> * import yocto-core in oe-core
+> * start an integration branch
+> =C2=A0o remove bitbake
+> =C2=A0o cleanup namespace (s/yocto/OE/, s/poky/OE/)
+> =C2=A0o split out superfluous layers (e.g. ememlow)
+> * start merging in OE things
+> =C2=A0o e.g. OE gcc 4.5, toolchains for avr32, bfin, etc
+> * switch meta-oe to build on top of oe-core, fix issues
+>
+> When that is done meta-oe can start to expand.
+>
+> The non-technical roadmap/todo:
+>
+> * Assign 2 gatekeepers to oe-core, one from yocto, one from OE
+> * sketch out decision tree (RP -> gatekeepers -> maintainers)
+> * work out model for meta-oe
+> * appoint OE member to yocto SC
+> * work out how to marry yocto goals (4 archs, one toolchain) to OE goals
+> (zillion archs, as much toolchains as we can manage)
+> * Work out OE roadmap and align with yocto
+>
+> The above tries to restrict itself to dealing with the new oe-core, not
+> with how OE is going to split into layers (meta-oe, meta-graveyard, etc).
+> It also ignores the maintainer aspects since we will be dealing with
+> yocto metadata at the start. After oe-core reaches a ready enough state
+> we can start looking at assigning maintainers, but for the time being
+> let's get things done first.
+>
+> So, let's start fleshing out the above roadmaps and implement them!
 
-just found this mail I forgot to answer :-{
+very well said. I think lets get started by setting up the repo.
 
-Am 09.01.2011 12:39, schrieb Robert Schuster:
-> I have some more questions: Who has the sheet that we used as table
-> cloth for the stand last year? Will it be brought to FOSDEM'11?
-
-I have it and I plan to attend FOSDEM this year. I have to admit that it's not
-entirely clear if I'll make it.
-
-> Could we get a second one for our 2nd table?
-
-Sounds like a good idea, we should have the money to do so but where did we get
-the first one?
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+>
+> regards,
+>
+> Koen
 
 
