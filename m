@@ -1,38 +1,38 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PhcMK-00057w-Sv
+	(envelope-from <raj.khem@gmail.com>) id 1PhcMP-00058H-13
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 07:26:34 +0100
-Received: by mail-pw0-f47.google.com with SMTP id 8so11200pwi.6
+	Tue, 25 Jan 2011 07:26:37 +0100
+Received: by pvd12 with SMTP id 12so938543pvd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jan 2011 22:25:48 -0800 (PST)
+	Mon, 24 Jan 2011 22:25:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=X6PaRm0s2kpubqzvA/OLK5fUQSznkKZl4Yi0Dh/pTAo=;
-	b=OV51tLThafAeHgHCTMdOm8MuE63CDPU+qMzSOiRLO6s6DeHDF9QQLiQNfMwbJyrPo3
-	tuOVW8u0GuPe1YG1dDRROUAp5oxmaIhlu7wtVzts2eLPM/0Pccor3UP0savlTOSf4j5m
-	8KFO8qnBRagOeXeNXTAq1BZ9SXzCdAryw1T9Y=
+	bh=d2KreZxwopGZuzlxGcgiBbj6wxjOPI7qUX4t87r62Xg=;
+	b=bsCvAU+fLiZIWc01gBghEw5N+tzKuXfHu7GD29KG1bK0m4/7plXUw2SqiMJbRumFnq
+	1yybO+J8MCTtzz1LpraKIMqVThD1ADmGeecQE3DL9reS1hKWak+p1UuGUFWuOvSmV0A1
+	kgN52/r48b+XRJncbZJPfTqLgBXBaqwABI2Z4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=BXUQ9nu1Uvqii4a3AMxX7e0YJjIMCp2g/iYkFN8v0cW25P1n8p6GyIYHPigbvrZ7I1
-	usNov9nf/p7XUiAC32+GTlhPySi8xLs4SViMGpENvernZyRk4W0oyfXY9i8FWZRun8rM
-	n388EjB1qb80v+iGN+LYVfp5t2atmRiu/aJ4s=
-Received: by 10.142.246.14 with SMTP id t14mr3160973wfh.44.1295936747834;
-	Mon, 24 Jan 2011 22:25:47 -0800 (PST)
+	b=ZNKCuCIfVYq1PShr0fygq3Vqng8JNrdc5pCkT52t61KlgnBTOqSw2VhdnsbhQKBv7h
+	1Y2TPAR0DyY+q2ycobRxdHgcNF/FgMN1pvO5/R2He7F/LJYRm8A6Ad8hgn1+YYqAhkxq
+	dy/v3pp6/FZ4iSe+x9dvD78eYi69SVN8W8OLY=
+Received: by 10.142.173.9 with SMTP id v9mr3099106wfe.266.1295936749573;
+	Mon, 24 Jan 2011 22:25:49 -0800 (PST)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id x18sm18429417wfa.23.2011.01.24.22.25.45
+	by mx.google.com with ESMTPS id x18sm18429417wfa.23.2011.01.24.22.25.47
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 24 Jan 2011 22:25:46 -0800 (PST)
+	Mon, 24 Jan 2011 22:25:48 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jan 2011 22:25:38 -0800
-Message-Id: <1295936745-718-3-git-send-email-raj.khem@gmail.com>
+Date: Mon, 24 Jan 2011 22:25:39 -0800
+Message-Id: <1295936745-718-4-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1295936745-718-1-git-send-email-raj.khem@gmail.com>
 References: <1295936745-718-1-git-send-email-raj.khem@gmail.com>
-Subject: [PATCH 2/9] recipes/meta recipes/tasks: Replace ipkg-utils with opkg-utils
+Subject: [PATCH 3/9] slugos.inc: Dont lock SRCDATE for ipkg, its not used anymore
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,135 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 06:26:34 -0000
+X-List-Received-Date: Tue, 25 Jan 2011 06:26:37 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/meta/canadian-sdk.bb         |    2 +-
- recipes/meta/foonas-packages.bb      |    2 +-
- recipes/meta/meta-toolchain.bb       |    2 +-
- recipes/meta/openprotium-packages.bb |    2 +-
- recipes/meta/oplinux-packages.bb     |    2 +-
- recipes/meta/package-index.bb        |    2 +-
- recipes/meta/slugos-packages.bb      |    2 +-
- recipes/tasks/task-sdk-sbox-gpe.bb   |    2 +-
- recipes/tasks/task-shr-feed.bb       |    2 +-
- 9 files changed, 9 insertions(+), 9 deletions(-)
+ conf/distro/include/slugos.inc |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/meta/canadian-sdk.bb b/recipes/meta/canadian-sdk.bb
-index 701a02d..93b80b2 100644
---- a/recipes/meta/canadian-sdk.bb
-+++ b/recipes/meta/canadian-sdk.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Meta package for building a installable toolchain"
- LICENSE = "MIT"
--DEPENDS = "opkg-native ipkg-utils-native fakeroot-native sed-native zip-native"
-+DEPENDS = "opkg-native opkg-utils-native fakeroot-native sed-native zip-native"
- PR = "r5"
+diff --git a/conf/distro/include/slugos.inc b/conf/distro/include/slugos.inc
+index e59d7f0..837e422 100644
+--- a/conf/distro/include/slugos.inc
++++ b/conf/distro/include/slugos.inc
+@@ -141,9 +141,6 @@ PREFERRED_PROVIDER_virtual/libx11-native        ?= "libx11-native"
+ PREFERRED_PROVIDER_virtual/db			= "db"
+ PREFERRED_PROVIDER_virtual/db-native		= "db-native"
  
- # NOTE: We need to save and restore PACKAGE_ARCHS, because sdk.bbclass
-diff --git a/recipes/meta/foonas-packages.bb b/recipes/meta/foonas-packages.bb
-index 2bd8437..570c26e 100644
---- a/recipes/meta/foonas-packages.bb
-+++ b/recipes/meta/foonas-packages.bb
-@@ -74,7 +74,7 @@ FOONAS_PACKAGES = "\
- 	gtk-doc \
- 	gzip \
- 	hdparm \
--	ipkg-utils \
-+	opkg-utils \
- 	iptables \
- 	ircp \
- 	joe \
-diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
-index cb9e438..b8ea037 100644
---- a/recipes/meta/meta-toolchain.bb
-+++ b/recipes/meta/meta-toolchain.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Meta package for building a installable toolchain"
- LICENSE = "MIT"
--DEPENDS = "opkg-native ipkg-utils-native fakeroot-native sed-native"
-+DEPENDS = "opkg-native opkg-utils-native fakeroot-native sed-native"
+-SRCDATE_ipkg-utils				?= "20060106"
+-SRCDATE_ipkg-utils-native			?= "20060106"
+-SRCDATE_ipkg-link				?= "20060106"
+ SRCDATE_irssi					?= "20050930"
  
- inherit meta
- 
-diff --git a/recipes/meta/openprotium-packages.bb b/recipes/meta/openprotium-packages.bb
-index 4b10ee2..a738f08 100644
---- a/recipes/meta/openprotium-packages.bb
-+++ b/recipes/meta/openprotium-packages.bb
-@@ -106,7 +106,7 @@ OPENPROTIUM_PACKAGES = "\
- 	gzip \
- 	hdparm \
- 	ifupdown \
--	ipkg-utils \
-+	opkg-utils \
- 	iptables \
- 	ircp \
- 	joe \
-diff --git a/recipes/meta/oplinux-packages.bb b/recipes/meta/oplinux-packages.bb
-index d828eed..ab38c1d 100644
---- a/recipes/meta/oplinux-packages.bb
-+++ b/recipes/meta/oplinux-packages.bb
-@@ -201,7 +201,7 @@ PACKAGES_LIST = "\
-         hydra \
- 	ifupdown \
-         iputils \
--	ipkg-utils \
-+	opkg-utils \
- 	iptables \
-         intercom \
- 	ircp \
-diff --git a/recipes/meta/package-index.bb b/recipes/meta/package-index.bb
-index 335970d..3ad1d10 100644
---- a/recipes/meta/package-index.bb
-+++ b/recipes/meta/package-index.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Rebuild the package index"
- LICENSE = "MIT"
--DEPENDS = "ipkg-utils-native"
-+DEPENDS = "opkg-utils-native"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
-diff --git a/recipes/meta/slugos-packages.bb b/recipes/meta/slugos-packages.bb
-index fb8458a..3487c69 100644
---- a/recipes/meta/slugos-packages.bb
-+++ b/recipes/meta/slugos-packages.bb
-@@ -99,7 +99,7 @@ SLUGOS_PACKAGES = "\
- 	ifupdown \
- 	iozone3 \
- 	iperf \
--	ipkg-utils \
-+	opkg-utils \
- 	iptables \
- 	joe \
- 	jpeg \
-diff --git a/recipes/tasks/task-sdk-sbox-gpe.bb b/recipes/tasks/task-sdk-sbox-gpe.bb
-index 315bddb..b8d1cce 100644
---- a/recipes/tasks/task-sdk-sbox-gpe.bb
-+++ b/recipes/tasks/task-sdk-sbox-gpe.bb
-@@ -11,7 +11,7 @@ RDEPENDS_${PN} = "\
-     gdk-pixbuf-loader-xpm \
-     intltool \
-     intltool-dev \
--    ipkg-utils \
-+    opkg-utils \
-     gettext-dev \
-     pkgconfig-dev \
-     autoconf \
-diff --git a/recipes/tasks/task-shr-feed.bb b/recipes/tasks/task-shr-feed.bb
-index daec242..35e5f0b 100644
---- a/recipes/tasks/task-shr-feed.bb
-+++ b/recipes/tasks/task-shr-feed.bb
-@@ -79,7 +79,7 @@ RDEPENDS_${PN} += "\
- 		mtpaint \
- 		telepathy-python \
- 		intone-video \
--		ipkg-utils \
-+		opkg-utils \
- 		mysql \
- 		fltk-chess \
- 		remoko \
+ # We want the newer util-linux package
 -- 
 1.7.0.4
 
