@@ -1,30 +1,42 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Phlfb-0001Dw-0k
+	(envelope-from <martin.jansa@gmail.com>) id 1PhlhZ-0001OS-IA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 17:23:03 +0100
-Received: by wyb40 with SMTP id 40so5753424wyb.6
+	Tue, 25 Jan 2011 17:25:05 +0100
+Received: by bwz10 with SMTP id 10so481554bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 08:22:16 -0800 (PST)
-Received: by 10.227.134.21 with SMTP id h21mr6089002wbt.114.1295972536696;
-	Tue, 25 Jan 2011 08:22:16 -0800 (PST)
-Received: from [172.20.0.255] (ip545070eb.adsl-surfen.hetnet.nl
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id b30sm7248270wen.25.2011.01.25.08.22.15
+	Tue, 25 Jan 2011 08:24:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=4B6y2Mao9wsjsN1RmjXvbRZBIPXjMyvJyX46jfjMkE8=;
+	b=gBpnVJPTDsiXEleIDB3NweeX0cDpdWTX64j6/3kBzxBHA9SZ+gz6iS9vnt77NNmWtm
+	EKgi0EEDLZ05xVG/KdE9NE1DPUhPcxZOfWVoNI18BEBcClGeEHGt7xRWx9Y5/IKaB/lN
+	XBZge2kIvmo2lPyUkcBbRRyZHMb/0RSMwm5Do=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=A7lUEVSCSsrNARue20xsVM65KTRznQOz9WXXcW/cGRb/uKr1AAmQicCIgVWipgvxcP
+	BPN0IOFVdt/Qoa0nxxm751E66jxEDgXPPq7xjoktl7rCkUfdDuS8YfTupkqIwcE3P3Q0
+	XgS2Yw1H/GAichGUBjTn486tSWrgoQggDN15c=
+Received: by 10.204.32.216 with SMTP id e24mr5264296bkd.204.1295971932796;
+	Tue, 25 Jan 2011 08:12:12 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id rc9sm5502594bkb.2.2011.01.25.08.12.10
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 25 Jan 2011 08:22:15 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1082)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20110125161839.GC24126@lit.local.igalia.com>
-Date: Tue, 25 Jan 2011 17:22:15 +0100
-Message-Id: <A2C2D135-842E-4C4B-B734-0B77ED582354@dominion.thruhere.net>
-References: <1295970665-14658-1-git-send-email-vjaquez@igalia.com>
-	<44B46FD7-B8AF-4FD7-9964-A6FDE847BE46@dominion.thruhere.net>
-	<20110125161839.GC24126@lit.local.igalia.com>
-To: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
-X-Mailer: Apple Mail (2.1082)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] python-scons_1.3.0: add missing dependencies
+	Tue, 25 Jan 2011 08:12:11 -0800 (PST)
+Date: Tue, 25 Jan 2011 17:12:22 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110125161222.GG3616@jama>
+References: <1295464913-2642-1-git-send-email-koen@openembedded.org>
+	<4D373CFC.8010400@balister.org> <ihmjum$vdq$2@dough.gmane.org>
+	<AANLkTinHGa136tXLwyBO2L=TUOQP+kW2WQTLyjBEU0Zx@mail.gmail.com>
+	<ihmnv8$n3g$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <ihmnv8$n3g$1@dough.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] insane bbclass: extend RPATH check to cover sysroots as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,60 +50,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 16:23:03 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Tue, 25 Jan 2011 16:25:05 -0000
+X-Groupsio-MsgNum: 28436
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="4ndw/alBWmZEhfcZ"
+Content-Disposition: inline
+
+--4ndw/alBWmZEhfcZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
+On Tue, Jan 25, 2011 at 03:50:16PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 25-01-11 15:40, Frans Meulenbroeks wrote:
+> > 2011/1/25 Koen Kooi <k.kooi@student.utwente.nl>:
+> > On 20-01-11 08:10, Koen Kooi wrote:
+> >>>> On 19-01-11 20:35, Philip Balister wrote:
+> >>>>> On 01/19/2011 11:21 AM, Koen Kooi wrote:
+> >>>>>> * Having rpath to sysroot is just as bad as one to workdir
+> >>>>
+> >>>>> When you do a build with this, how many recipes have issues?
+> >>>>
+> >>>> Console-image is clean now :)
+> >=20
+> > And angstrom-gnome-image as well, so can I get some Acks or tested-bys
+> > please?
+> >=20
+> >> NAK, I feel other distro's like shr and minimal should be given some
+> >> time to test this too.
+>=20
+> Martin has already Acked it, fwiw
 
-Op 25 jan 2011, om 17:18 heeft V=EDctor M. J=E1quez L. het volgende =
-geschreven:
+Yes, I think that if it says something it's broken then it's broken and
+needs to be fixed, haven't seen any false positives with it, that's why
+I Acked it.
 
-> On Tue, Jan 25, 2011 at 04:59:25PM +0100, Koen Kooi wrote:
->> Some small nitpicks, see below
->>=20
->> Op 25 jan 2011, om 16:51 heeft V=EDctor Manuel J=E1quez Leal het =
-volgende geschreven:
->>=20
->>> In order to launch scons in a board it depends on a couple python =
-packages
->>> which were not managed by the recipe.
->>>=20
->=20
-> [snip]
->=20
->>=20
->> We generally put variables in the order OE uses them, so RDEPENDS =
-should go
->> next to do_package/FILES/etc. Historically it was on top, but that =
-stopped
->> making sense after switching to RDEPENDS_${PN}
->=20
-> Done.
->=20
->>=20
->>> LICENSE =3D "GPL"
->>=20
->> Could you fix that while you're at it? It would be  nice to know if =
-it's
->> GPLv2 or GPLv2+.
->=20
-> Verified. It is MIT not GPL!
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Good catch!
+--4ndw/alBWmZEhfcZ
+Content-Type: application/pgp-signature
 
->=20
->>=20
->> Other than that, the patch looks OK to me[1].
->>=20
->> regards,
->>=20
->> Koen
->>=20
->> [1] Sconstructs still make my eyes bleed, but that's not the point
->=20
-> I do not like it either at all, but v8 uses it.
->=20
-> vmjl
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
 
+iEYEARECAAYFAk0+9mYACgkQN1Ujt2V2gBwzbQCfTFhweoNizSpqF80VjQ4ny/bj
+m3gAn3eDD9f0sZN1OjvnOdOwBnNKnHuX
+=50aP
+-----END PGP SIGNATURE-----
 
-
+--4ndw/alBWmZEhfcZ--
