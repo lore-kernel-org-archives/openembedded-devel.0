@@ -1,35 +1,29 @@
-Received: from smtp4.mundo-r.com ([212.51.32.151])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>) id 1PhliH-0001SI-3V
+	(envelope-from <koen@dominion.thruhere.net>) id 1Phm6A-00023z-Hp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 17:25:49 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApsEACuIPk1bdWOb/2dsb2JhbAClYrx4hU8Ekgs
-X-IronPort-AV: E=Sophos;i="4.60,374,1291590000"; d="scan'208";a="800609692"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 25 Jan 2011 17:25:03 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
-	id 1PhlhV-0005Sy-5Q; Tue, 25 Jan 2011 17:25:01 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim)
-	id 1PhlhV-0004je-1i; Tue, 25 Jan 2011 17:25:01 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.72)
-	(envelope-from <vjaquez@igalia.com>)
-	id 1PhlhU-00049u-MY; Tue, 25 Jan 2011 17:25:00 +0100
-Date: Tue, 25 Jan 2011 17:25:00 +0100
-From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-ID: <20110125162500.GD24126@lit.local.igalia.com>
+	Tue, 25 Jan 2011 17:50:30 +0100
+Received: by wyb40 with SMTP id 40so5780026wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Jan 2011 08:49:44 -0800 (PST)
+Received: by 10.216.182.212 with SMTP id o62mr3917650wem.52.1295974183847;
+	Tue, 25 Jan 2011 08:49:43 -0800 (PST)
+Received: from [172.20.0.255] (ip545070eb.adsl-surfen.hetnet.nl
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id 7sm7262426wet.0.2011.01.25.08.49.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 25 Jan 2011 08:49:42 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1082)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20110125162500.GD24126@lit.local.igalia.com>
+Date: Tue, 25 Jan 2011 17:49:40 +0100
+Message-Id: <1927B351-8043-4A75-94AC-F7360A6EB490@dominion.thruhere.net>
 References: <cover.1295971903.git.vjaquez@igalia.com>
 	<c47809e46ea6a0fa950c961b01213171d4bea774.1295971903.git.vjaquez@igalia.com>
 	<3C013E58-48F7-4C36-B59C-FF26B4F053E8@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <3C013E58-48F7-4C36-B59C-FF26B4F053E8@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20110125162500.GD24126@lit.local.igalia.com>
+To: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
+X-Mailer: Apple Mail (2.1082)
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCHv2 2/2] python-scons_1.3.0: fix licence type
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -45,26 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 16:25:49 -0000
+X-List-Received-Date: Tue, 25 Jan 2011 16:50:30 -0000
 Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 25, 2011 at 05:22:02PM +0100, Koen Kooi wrote:
-> 
-> Op 25 jan 2011, om 17:16 heeft Víctor Manuel Jáquez Leal het volgende geschreven:
-> 
-> > According to the wiki [1], the licence of the project [2] is MIT, not GPL.
-> > 
-> > 1. http://www.scons.org/wiki/FrequentlyAskedQuestions#head-4fe23271137d5e5e95370a1360909ca303157c0d
-> > 2. http://scons.tigris.org/source/browse/scons/trunk/LICENSE?revision=557&view=markup
-> 
-> Missing sign-off?
 
-D'oh! 
+Op 25 jan 2011, om 17:25 heeft V=EDctor M. J=E1quez L. het volgende =
+geschreven:
 
-Do I resend it?
+> On Tue, Jan 25, 2011 at 05:22:02PM +0100, Koen Kooi wrote:
+>>=20
+>> Op 25 jan 2011, om 17:16 heeft V=EDctor Manuel J=E1quez Leal het =
+volgende geschreven:
+>>=20
+>>> According to the wiki [1], the licence of the project [2] is MIT, =
+not GPL.
+>>>=20
+>>> 1. =
+http://www.scons.org/wiki/FrequentlyAskedQuestions#head-4fe23271137d5e5e95=
+370a1360909ca303157c0d
+>>> 2. =
+http://scons.tigris.org/source/browse/scons/trunk/LICENSE?revision=3D557&v=
+iew=3Dmarkup
+>>=20
+>> Missing sign-off?
+>=20
+> D'oh!=20
+>=20
+> Do I resend it?
 
-vmjl
+Just reply to it, patchwork will pick it up=
 
 
