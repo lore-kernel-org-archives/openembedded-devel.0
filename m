@@ -1,36 +1,37 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Phk5K-0006X3-Ar
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PhkE2-0006ny-DV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Jan 2011 15:41:30 +0100
-Received: by iwn8 with SMTP id 8so5741679iwn.6
+	Tue, 25 Jan 2011 15:50:30 +0100
+Received: by iwn8 with SMTP id 8so5750001iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 06:40:42 -0800 (PST)
+	Tue, 25 Jan 2011 06:49:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=XZtXIKItT9NwZm+5PSK3zq749y4UOMs6UWHmzKwwuC4=;
-	b=MTnFl+2AXJIn+kx4HUFRU/3Whg2HOzDMBwMxVVFjuHlyqd1Y83GSCQtvg2ZMRFTOrT
-	3/x5mDB3NcHmbeAxlZehl7e+dF1sQgOnKzcfWR9xExZoRMUBWEpPcMUbQ/xyGgvx5Ap/
-	RqRlCUbMj1oGI5uDwkswDYDn/HOE6F0J37mOE=
+	bh=4ywzb6jhWY1kMalrn/QkT27hHKoz5lRkDBZwlGa6FoA=;
+	b=Obv8Qg4wal2iJiKO4Li1fZpPjtNayiDOSJrSxIm8V109HjlraT7MJQ+3Jk8TI+wMz5
+	bZ1mM8fZsoJVnAANR/QHAiqNn2EC8AN0KIFpNqLn6hL5pzw7LH+N4M4v9yMOPm6PP8Z+
+	bHOlofHf+SEYHtnRNjBvt1SNVec/aiIVSUjGM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=WS8t0AKRavY0xPAKtoGB8kzWVqcaX/nXktF3FNOtwIoq/ukm1C/N2KQVV71Aw2F/4J
-	ox4QkknO2aCabXjR3pL4Zd/IBkHzQetITmNPOb/F61tRCj+hSXW0m88wi9b0hfYv194l
-	H8BDoQQEqtiYeV9I/p8WkarF0pYuIhHD9Ta9w=
+	b=cWHFgK0pV/kvGejnAbuyAHzQFlgJ1h/I3hM8lyl7ya882RpY+s84pRBycvCzfevnva
+	8dKuGUWJ28dOkzcgMrE15B8jcsTqtpdHaquZJTe0BlFq1UtuhePU+gHnmjwWxrKPG+B1
+	iSMneILwlZusY6Ei0h3WAxhBscl7OIVPW0hHA=
 MIME-Version: 1.0
-Received: by 10.231.19.201 with SMTP id c9mr6632882ibb.183.1295966441445; Tue,
-	25 Jan 2011 06:40:41 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Tue, 25 Jan 2011 06:40:41 -0800 (PST)
-In-Reply-To: <ihmjum$vdq$2@dough.gmane.org>
-References: <1295464913-2642-1-git-send-email-koen@openembedded.org>
-	<4D373CFC.8010400@balister.org> <ihmjum$vdq$2@dough.gmane.org>
-Date: Tue, 25 Jan 2011 15:40:41 +0100
-Message-ID: <AANLkTinHGa136tXLwyBO2L=TUOQP+kW2WQTLyjBEU0Zx@mail.gmail.com>
+Received: by 10.231.37.12 with SMTP id v12mr6676658ibd.83.1295966982156; Tue,
+	25 Jan 2011 06:49:42 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Tue, 25 Jan 2011 06:49:41 -0800 (PST)
+In-Reply-To: <ihmaqm$eho$1@dough.gmane.org>
+References: <4D36F9BE.1010601@xora.org.uk> <4D3DAB2A.3070303@balister.org>
+	<AANLkTi=T++s65-mH91BBwT6OBUfzqcGDiq6J-LVk8+SJ@mail.gmail.com>
+	<ihmaqm$eho$1@dough.gmane.org>
+Date: Tue, 25 Jan 2011 15:49:41 +0100
+Message-ID: <AANLkTi=hWbJ_Y_m6kxMfCMdQti+xvAZZ-snK1UuqKLxY@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] insane bbclass: extend RPATH check to cover sysroots as well
+Subject: Re: openembedded-core git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,7 +45,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 14:41:30 -0000
+X-List-Received-Date: Tue, 25 Jan 2011 14:50:31 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -52,86 +53,106 @@ Content-Transfer-Encoding: quoted-printable
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
 >
-> On 20-01-11 08:10, Koen Kooi wrote:
->> On 19-01-11 20:35, Philip Balister wrote:
->>> On 01/19/2011 11:21 AM, Koen Kooi wrote:
->>>> * Having rpath to sysroot is just as bad as one to workdir
+> On 24-01-11 18:48, Khem Raj wrote:
+>> On Mon, Jan 24, 2011 at 8:39 AM, Philip Balister <philip@balister.org> w=
+rote:
+>>> On 01/19/2011 06:48 AM, Graeme Gregory wrote:
+>>>>
+>>>> Hi, this email is sent as an ordinary member of OE.
+>>>>
+>>>> It seems to be on a technical level we are agreed that we should split
+>>>> parts of OE out into the so called openembedded-core which will have a
+>>>> stricter commit access and higher QA requirements on changes.
+>>>>
+>>>> I therefore think it is time to actually create the repository and let
+>>>> the people who are interested in merging the good stuff from poky with
+>>>> the good stuff from openembedded to create our "core". I don't think
+>>>> there is any need to wait on the political part of the Yocto/OE
+>>>> collaboration as its something we have agreed in principal to do anywa=
+y.
+>>>>
+>>>> I would request then that the TSC drive this forward with the server
+>>>> admins and create this repo so work can happen.
+>>>
+>>>
+>>> Has anything happened on this email? Has the TSC had a meeting to discu=
+ss? I
+>>> know it has only been a week, but people are starting to do work based =
+on
+>>> these ideas and need some support from the TSC.
+>>>
 >>
->>> When you do a build with this, how many recipes have issues?
->>
->> Console-image is clean now :)
+>> Yes I think we should start action on it soon. I would suggest to set
+>> up the repository
+>> as first step. As someone raised question about pull model it could be
+>> TSC who decided
+>> to appoint one gatekeeper based upon availability interest and
+>> capability and it could be
+>> rotated.secondly sane Starting point would be importing yocto and then
+>> apply the OE improvements
+>> on top thirdly breakdown oe into oe-meta repo to glue with the oe-core
 >
-> And angstrom-gnome-image as well, so can I get some Acks or tested-bys
-> please?
-
-NAK, I feel other distro's like shr and minimal should be given some
-time to test this too. (and fix their issues)
-Will try to set something up tonight or tomorrow.
-
-Frans
+> Ignoring the timeline a bit, since ideally we would do this around a
+> yocto milestone to get them to use this straight after their freeze.
 >
->>
->>
->>> Philip
->>
->>
->>>>
->>>> Based on insane.bbclass from yocto
->>>>
->>>> Signed-off-by: Koen Kooi<koen@openembedded.org>
->>>> ---
->>>> =A0 classes/insane.bbclass | =A0 11 ++++++-----
->>>> =A0 1 files changed, 6 insertions(+), 5 deletions(-)
->>>>
->>>> diff --git a/classes/insane.bbclass b/classes/insane.bbclass
->>>> index 677db27..50752b5 100644
->>>> --- a/classes/insane.bbclass
->>>> +++ b/classes/insane.bbclass
->>>> @@ -160,20 +160,21 @@ def package_qa_check_rpath(file,name,d, elf):
->>>> =A0 =A0 =A0 import bb, os
->>>> =A0 =A0 =A0 sane =3D True
->>>> =A0 =A0 =A0 scanelf =3D
->>>> os.path.join(bb.data.getVar('STAGING_BINDIR_NATIVE',d,True),'scanelf')
->>>> - =A0 =A0bad_dir =3D bb.data.getVar('TMPDIR', d, True) + "/work"
->>>> + =A0 =A0bad_dirs =3D [bb.data.getVar('TMPDIR', d, True) + "/work",
->>>> bb.data.getVar('STAGING_DIR_TARGET', d, True)]
->>>> =A0 =A0 =A0 bad_dir_test =3D bb.data.getVar('TMPDIR', d, True)
->>>> =A0 =A0 =A0 if not os.path.exists(scanelf):
->>>> =A0 =A0 =A0 =A0 =A0 bb.fatal("Can not check RPATH, scanelf (part of
->>>> pax-utils-native) not found")
->>>>
->>>> - =A0 =A0if not bad_dir in bb.data.getVar('WORKDIR', d, True):
->>>> + =A0 =A0if not bad_dirs[0] in bb.data.getVar('WORKDIR', d, True):
->>>> =A0 =A0 =A0 =A0 =A0 bb.fatal("This class assumed that WORKDIR is
->>>> ${TMPDIR}/work... Not doing any check")
->>>>
->>>> =A0 =A0 =A0 output =3D os.popen("%s -B -F%%r#F '%s'" % (scanelf,file))
->>>> =A0 =A0 =A0 txt =A0 =A0=3D output.readline().split()
->>>> =A0 =A0 =A0 for line in txt:
->>>> - =A0 =A0 =A0 =A0if bad_dir in line:
->>>> - =A0 =A0 =A0 =A0 =A0 =A0error_msg =3D "package %s contains bad RPATH =
-%s in file %s"
->>>> % (name, line, file)
->>>> - =A0 =A0 =A0 =A0 =A0 =A0sane =3D package_qa_handle_error(1, error_msg=
-, name, file, d)
->>>> + =A0 =A0 =A0 =A0for dir in bad_dirs:
->>>> + =A0 =A0 =A0 =A0 =A0 =A0if dir in line:
->>>> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0error_msg =3D "package %s contains ba=
-d RPATH %s in file
->>>> %s" % (name, line, file)
->>>> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0sane =3D sane + package_qa_handle_err=
-or(1, error_msg,
->>>> name, file, d)
->>>>
->>>> =A0 =A0 =A0 return sane
->>>>
->>
+> The technical roadmap/todo:
+>
+> * setup openembedded-core repo on oe.org
+> * setup oe-core ml on oe.org
+> * add oe-core ml to patchwork
+> * import yocto-core in oe-core
+
+Is this yocto core: http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/
+Or do you mean this:
+http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-core
+
+> * start an integration branch
+> =A0o remove bitbake
+Not sure what you mean with that. Which BB do you propose to use?
+
+> =A0o cleanup namespace (s/yocto/OE/, s/poky/OE/)
+> =A0o split out superfluous layers (e.g. ememlow)
+> * start merging in OE things
+> =A0o e.g. OE gcc 4.5, toolchains for avr32, bfin, etc
+> * switch meta-oe to build on top of oe-core, fix issues
+
+Isn't some class merging needed?
+
+BTW, good list.
+>
+> When that is done meta-oe can start to expand.
+>
+> The non-technical roadmap/todo:
+>
+> * Assign 2 gatekeepers to oe-core, one from yocto, one from OE
+> * sketch out decision tree (RP -> gatekeepers -> maintainers)
+> * work out model for meta-oe
+> * appoint OE member to yocto SC
+> * work out how to marry yocto goals (4 archs, one toolchain) to OE goals
+> (zillion archs, as much toolchains as we can manage)
+> * Work out OE roadmap and align with yocto
+
+I assume maintenance will use a pull model. Correct?
+>
+> The above tries to restrict itself to dealing with the new oe-core, not
+> with how OE is going to split into layers (meta-oe, meta-graveyard, etc).
+> It also ignores the maintainer aspects since we will be dealing with
+> yocto metadata at the start. After oe-core reaches a ready enough state
+> we can start looking at assigning maintainers, but for the time being
+> let's get things done first.
+>
+> So, let's start fleshing out the above roadmaps and implement them!
+>
+> regards,
+>
+> Koen
+>
 > -----BEGIN PGP SIGNATURE-----
 > Version: GnuPG v1.4.5 (Darwin)
 >
-> iD8DBQFNPtMWMkyGM64RGpERAoWvAKC2+GgE7rmeUXUClmBBlAx5WB1dNgCgjGlf
-> IkvPXdAoZ6J072F/YSctiyE=3D
-> =3DPndr
+> iD8DBQFNPq6WMkyGM64RGpERAmViAKCYKgJPEcLTCL+G1uugO6wQwEkfAACgrq8C
+> zanbxmzVZb4tgNbdwTV/fS0=3D
+> =3DtMf8
 > -----END PGP SIGNATURE-----
 >
 >
