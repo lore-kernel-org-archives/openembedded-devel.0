@@ -1,35 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Phs4v-0006Zw-HJ for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 00:13:37 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Phs4C-0008HW-BD for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 00:12:52 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 00:12:52 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <graham.gower@gmail.com>) id 1PhsLD-0006nq-6F
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Jan 2011 00:30:27 +0100
+Received: by wyb40 with SMTP id 40so382092wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 00:12:52 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 25 Jan 2011 15:29:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=m3KlfNwtMaUmSuCgysqJP2354yvWVWaJNzIQng+8r/k=;
+	b=QMQbdTNyeINVZC0OZuEHrWK04P12gLPxUOtIWW1TRlJoinxMZ9W/Apk0bx8RQopq/Q
+	JQFDpMC0vP+RTcXsDGfJFsiRakB+mjw5bC+DsGmizspjBiWbaWK47MXauKqrhgY71lCX
+	2pH+j9dG0FlZ+rbi2UGCdM9QQ2o8dc+ADHNzM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=dZLbkiNf4JVmihXWYKMAj7RMWJ11FK7g9As4CRIvt9/Bu+tUgBsM9tAupNmjnwWU+N
+	Y7OktHEC9BIgMojZ2RoPLhIzc0awDIamPMAHPqc9O6Xv77NKcMqqH9mt4o6FXUd4dFKK
+	794mRACW3z2Elf7P7I0ti853BJet4YMEikkJE=
+MIME-Version: 1.0
+Received: by 10.227.146.144 with SMTP id h16mr6618229wbv.221.1295998177431;
+	Tue, 25 Jan 2011 15:29:37 -0800 (PST)
+Received: by 10.227.151.208 with HTTP; Tue, 25 Jan 2011 15:29:37 -0800 (PST)
+In-Reply-To: <ihmjnv$ufe$1@dough.gmane.org>
+References: <1295936745-718-1-git-send-email-raj.khem@gmail.com>
+	<ihmjnv$ufe$1@dough.gmane.org>
+Date: Wed, 26 Jan 2011 09:59:37 +1030
+Message-ID: <AANLkTikH9pEQbBp8regqQwOvKVE=KDFUjvw_Z46aOnJo@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 26 Jan 2011 00:12:40 +0100
-Message-ID: <ihnld8$1gp$1@dough.gmane.org>
-References: <AANLkTin20N1KWTzWN6A3dX_ngmKW1oFPAsZ74RpUWTpR@mail.gmail.com>	<ihng8a$64q$1@dough.gmane.org>
-	<AANLkTikEBhmhy4LzLU9YW329bdW7wKazCpL-w6uJ7bqb@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <AANLkTikEBhmhy4LzLU9YW329bdW7wKazCpL-w6uJ7bqb@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: Full Archive of handhelds.org source repo?
+Subject: Re: [PATCH 0/9 v2] Replace ipkg-utils with opkg-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2011 23:13:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Jan 2011 23:30:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 25-01-11 23:00, Frans Meulenbroeks wrote:
-> 2011/1/25 Koen Kooi <k.kooi@student.utwente.nl>:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
+On 26 January 2011 00:08, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 25-01-11 07:25, Khem Raj wrote:
+>> From: Khem Raj <raj.khem@gmail.com>
 >>
->> On 25-01-11 22:07, Tom King wrote:
->>> Does anyone have a full archive of the handhelds.org source repo?
->>>
->>> we keep seeing builds fail because we are missing pieces.
->>>
->>> if you have it an can upload it so we can all use it that would help a lot.
+>> These patches replace usage of ipkg-utils with opkg-utils
+>> in OE. I have built a native-sdk-image successfully on
+>> angstrom-2008.1 and minimal
 >>
->> Dunno if it's the full one, but the angstrom source mirror has:
->>
->> angstrom@discovery:~/website/demo/yocto$ ls ../../unstable/sources/ |
->> grep handhelds | wc -l
->> 584
-> 
-> 
-> Half of them are probably md5 files, but still a good collection.
+>> Please review and provide your feedback
+>
+> For the whole series:
+>
+> Acked-by: Koen Kooi <koen@openembedded.org>
+>
 
-md5 files don't get mirrored, so that is a collection of 584 tarball
-snapshots
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Yes, the second patch series looks sane to me.
 
-iD8DBQFNP1joMkyGM64RGpERAkoTAKCzO2ki6spoMESRB9qvH4WnKFvGGwCfdMTY
-6zWBXomPaHkNOycKtHl8GJc=
-=mDAK
------END PGP SIGNATURE-----
-
+Acked-by: Graham Gower <graham.gower@gmail.com>
 
 
