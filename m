@@ -1,33 +1,23 @@
-Received: from smtprelay-h22.telenor.se ([195.54.99.197])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1PiDLn-0001vs-6T
+	(envelope-from <jay@jay-tech.ru>) id 1PiDUh-0002W8-5S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 22:56:27 +0100
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-h22.telenor.se (Postfix) with ESMTP id C68BAEA5D9
+	Wed, 26 Jan 2011 23:05:39 +0100
+Received: by qyk8 with SMTP id 8so5720443qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 22:24:36 +0100 (CET)
-X-SENDER-IP: [83.227.56.243]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AvwQAL8fQE1T4zjzPGdsb2JhbAAMoACEdwEBAQE1vT6FTwSLFIEV
-X-IronPort-AV: E=Sophos;i="4.60,382,1291590000"; 
-	d="scan'208,217";a="167758261"
-Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.244]) ([83.227.56.243])
-	by ipb2.telenor.se with ESMTP; 26 Jan 2011 22:24:36 +0100
-Message-ID: <4D409113.9030603@atmel.com>
-Date: Wed, 26 Jan 2011 22:24:35 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Wed, 26 Jan 2011 14:04:50 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.224.80.194 with SMTP id u2mr846756qak.293.1296079490383; Wed,
+	26 Jan 2011 14:04:50 -0800 (PST)
+Sender: jay@jay-tech.ru
+Received: by 10.220.203.137 with HTTP; Wed, 26 Jan 2011 14:04:50 -0800 (PST)
+X-Originating-IP: [78.106.57.174]
+Date: Thu, 27 Jan 2011 01:04:50 +0300
+X-Google-Sender-Auth: nfg2chyQTnDQKmYpLvpjp3lnci4
+Message-ID: <AANLkTinAbLLKzbMbcQNSkgh8dQj+FD7WtuVd+wQ1ZKmz@mail.gmail.com>
+From: Yury Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D3FEC09.5070306@atmel.com>	<201101261401.02414.marcin@juszkiewicz.com.pl>	<4D405B8C.805@atmel.com>
-	<20110126200620.GH3616@jama>
-In-Reply-To: <20110126200620.GH3616@jama>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Problem with calibration of AT91SAM9M10EKES
+Subject: Re: oestats as automated testing reporting tool (Was: testing branch 2011-01-20)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,62 +31,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 21:56:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Jan 2011 22:05:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-2011-01-26 21:06, Martin Jansa skrev:
-> On Wed, Jan 26, 2011 at 06:36:12PM +0100, Ulf Samuelsson wrote:
->> 2011-01-26 14:01, Marcin Juszkiewicz skrev:
->>> Dnia s'roda, 26 stycznia 2011 o 10:40:25 Ulf Samuelsson napisa?(a):
->>>> I have some calibration problem with my private branch
->>>> (ulf/linux-2.6.30-2011-01-??) when building the at91sam9m10ekes board.
->>>>
->>>> I am running /usr/bin/run-calibrate.sh,
->>>> but regardless of how I click, during calibration,
->>>> a tap afterwards always results in detection 3 mm above the tap.
->>>>
->>>> There is a "pointercal" file generated.
->>>> It appears to me that this is ignored...
->>>> I can tap 1 cm above or below during calibration,
->>>> and still the detected tap is 3 mm above the actual tap.
->>>> Anything else to think about?
->>>> I enclose  /etc/X11/xorg.conf and /etc/ts.conf.
->>> You are using full X11 with evdev driver so tslib is not used at all. You have
->>> to use xinput-calibrator.
->>>
->>> Regards,
->> Any clue to get xinput-calibrate to run at first boot?
-> provide
-> recipes/xinput-calibrator/pointercal-xinput
-> data for your device and use
-> recipes/xserver-common/files/89xTs_Calibrate.xinput_calibrator.patch
-> like SHR does
-OK, then is the question how:
-As I noted:
-SRC_URI_append_angstrom = " file://xtscal-fix.patch "
-RDEPENDS_${PN}_append_angstrom = " tslib-calibrate "
-RDEPENDS_${PN}_append_shr = " xinput-calibrator "?
+I have spent some time to looking over oestats client and server code.
+Below are some ideas.
 
-so Angstrom (which I am using) is using "tslib-calibrate"
-Is there any drawback in changing this to " xinput-calibrator "
+> I've thought about collecting testing results via oe-stats.
+> We should collect following data:
+> - machine
+Already in oestats (bb MACHINE variable)
 
-Adding a SRC_URI_append_at91 seems a kludge.
+> - distro
+Already in oestats (bb USERDISTRO variable)
 
-> intentionaly it prefers provideded data, because users too often messed
-> initial calibration on first boot and then didn't know how to reset it
-> and rerun xinpu-calibration successfully...
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> - target
+Well.. This should be name of image which was built. We have it but it
+is mixed with lots of other packages data.
+Not sure about best way here. May be we should use bitbake cmdline
+args here. I'll address this question to bitbake developers.
 
+> - workstation (distro + arch)*
+We have build arch in oestats already (BUILD_ARCH). I'll prefer
+replace it with BUILD_SYS because we can use e.g.
+darwin/freebsd/cygwin as build host later.
+As there is no reliable way to get user's build host distro I'll ask
+to introduce new bitbake variable (OESTATS_HOST_DISTRO?).
+
+> - bitbake version*
+Seems bb.__version__ should be enough. Should we send revision and
+branch when using git version?
+
+> - tester (builder) name
+OESTATS_BUILDER
+
+> - last successful build
+Report may get this from database.
+
+> - build type (clean/incremental)*
+OESTATS_BUILD_TYPE?
+
+> - current issues
+Report may get this from database.
+
+I've forget to note that we have METADATA_BRANCH and METADATA_REVISION
+as well in oestats.
+
+P.S.: Do we really need this in perspective of merging with yocto? Or
+may be just use e.g. some spreadsheet/form on google instead?
 
 -- 
-Best Regards
-Ulf Samuelsson
+Yury Bushmelev
 
 
