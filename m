@@ -1,33 +1,32 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pi7IT-0002hW-BA
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pi7JE-0002ir-PI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 16:28:37 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	Wed, 26 Jan 2011 16:29:24 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
 	by relay1.mentorg.com with esmtp 
-	id 1Pi7Hh-0007dn-E5 from Tom_Rini@mentor.com 
+	id 1Pi7IS-0007lm-S3 from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 07:27:49 -0800
+	Wed, 26 Jan 2011 07:28:36 -0800
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 26 Jan 2011 07:27:49 -0800
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 26 Jan 2011 07:28:36 -0800
 Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 26 Jan 2011 08:27:47 -0700
-Message-ID: <4D403D6F.3040800@mentor.com>
-Date: Wed, 26 Jan 2011 08:27:43 -0700
+	Wed, 26 Jan 2011 08:28:35 -0700
+Message-ID: <4D403DA0.6030303@mentor.com>
+Date: Wed, 26 Jan 2011 08:28:32 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <131E5DFBE7373E4C8D813795A6AA7F08032A16A440@dlee06.ent.ti.com>	<AANLkTinyeFc_8ai783_mu0deYyFUvebhVq4sVgzbCh0v@mail.gmail.com>	<AANLkTinc6eLwC5ZTu_uO=Ki00x1VQJc6vs_pFwz1f5oX@mail.gmail.com>	<4D3FF859.2050509@ge.com>
-	<131E5DFBE7373E4C8D813795A6AA7F08032A16A5BE@dlee06.ent.ti.com>
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F08032A16A5BE@dlee06.ent.ti.com>
-X-OriginalArrivalTime: 26 Jan 2011 15:27:48.0007 (UTC)
-	FILETIME=[96404370:01CBBD6D]
-Subject: Re: bitbake does not fail when QA issues encountered
+References: <1295905501-1948-1-git-send-email-sgarman@zenlinux.com>
+In-Reply-To: <1295905501-1948-1-git-send-email-sgarman@zenlinux.com>
+X-OriginalArrivalTime: 26 Jan 2011 15:28:35.0755 (UTC)
+	FILETIME=[B2B607B0:01CBBD6D]
+Subject: Re: [PATCH] sudo: upgrade to 1.7.4p6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,99 +40,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 15:28:37 -0000
+X-List-Received-Date: Wed, 26 Jan 2011 15:29:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 01/26/2011 08:03 AM, Maupin, Chase wrote:
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Martyn Welch
->> Sent: Wednesday, January 26, 2011 4:33 AM
->> To: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] bitbake does not fail when QA issues encountered
->>
->> On 25/01/11 21:36, Khem Raj wrote:
->>> On Tue, Jan 25, 2011 at 12:58 PM, Frans Meulenbroeks
->>> <fransmeulenbroeks@gmail.com>  wrote:
->>>> 2011/1/25 Maupin, Chase<chase.maupin@ti.com>:
->>>>> All,
->>>>>
->>>>> I have noticed that when building packages such as perl that while my
->> build will report success and no errors, the return status from the
->> bitbake command was "1".  I was able to produce this by doing:
->>>>>
->>>>> MACHINE=am37x-evm bitbake perl
->>>>>
->>>>> After bitbake completed I saw:
->>>>>
->>>>> NOTE: Tasks Summary: Attempted 851 tasks of which 0 didn't need to be
->> rerun and 0 failed.
->>>>>
->>>>> but checking $? yields a return status of "1".
->>>>>
->>>>> I looked into the log and noticed a lot of messages like:
->>>>>
->>>>> ERROR: QA Issue with db: package db contains bad RPATH
->>>>>
->>>>> My understanding is that recent fixes to libtool 2.4 prevent these
->> errors but I am using an older version of Angstrom which pins to libtool
->> 2.2.  I also have found this issue with the Arago distribution which
->> likewise uses libtool 2.2.
->>>>>
->>>>> So my question here is whether bitbake should be failing when it
->> encounters these QA issues with a bad RPATH and exiting?
->>>>>
->>>>> If not then should the return status be "1"?  This causes issues when
->> using a script that issues builds and then checks the return status for
->> success or failure.  If the QA issues are deemed acceptable (or should be
->> warnings) then I would expect the return status to not indicate a failure.
->>>>>
->>>>> I have attached a log of my build for reference
->>>>>
->>>>> As another interesting side note which I don't know is related or not,
->> when building Arago with bitbake 1.10.2 the return status is "1".  When
->> building the same Arago metadata with bitbake 1.8.19 the return status is
->> "0".  What is strange here is that since Arago uses a slightly older
->> version of the OE metadata it is not seeing the RPATH errors reported
->> above (the check isn't in the insane.bbclass for Arago yet).  So for some
->> reason bitbake 1.8.19 says everything went fine and bitbake 1.10.2 reports
->> a status of "1" even though there is no reported error.  I'm not sure if
->> this is related to the above in any way or if this is a separate issue.
->>>>>
->>>>> Sincerely,
->>>>> Chase Maupin
->>>>>
->>>>
->>>> I've seen this on other places as well.
->>>> I'd say if a package has a QA issue the build of that package should
->>>> fail, because the resulting output is defnitely not OK.
->>>>
->>>
->>> yes it should fail. However some may raise questions "it used to build
->>> and not it doesnt"
->>> so someone has to fix the problems quickly
->>>
->>
->> ...and if it is considered a failure and returns 1, the summary shouldn't
->> be
->> reporting "0 failed", or at least there should be something reported at
->> the
->> end of the build to state that the build has been deemed a failure for
->> those
->> not running in a script and who don't read through the entire log of the
->> build!
+On 01/24/2011 02:45 PM, Scott Garman wrote:
+> Addresses the following CVEs:
+> * CVE-2010-2956
+> * CVE-2010-1646
+> * CVE-2011-0010
 >
-> Agreed.  Just need some consistency here.
->
-> I'm still curious about why using bitbake version 1.8.19 works and 1.10.2 doesn't but that may be more of an Arago issue than OE since OE requires version 1.10.2 now.  What is strange is that in that test case I don't see the QA errors but bitbake 1.10.2 still reports a return status of "1" for some reason with the log not showing any errors or warnings.
+> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
 
-I believe, from talking with Chris Larson about this before, in 1.8.x 
-the error wasn't being populated upwards, but that got fixed.  At heart 
-the problem is that QA errors aren't throwing a "kill the build" type 
-error.  This should be changeable (and would cause 1.8.x to fail too, if 
-someone backported this change to a 1.8.x using OE) to insane.bbclass.
+Acked-by: Tom Rini <tom_rini@mentor.com>
+
+> ---
+>   recipes/sudo/{sudo_1.7.2p4.bb =>  sudo_1.7.4p6.bb} |    6 +++---
+>   1 files changed, 3 insertions(+), 3 deletions(-)
+>   rename recipes/sudo/{sudo_1.7.2p4.bb =>  sudo_1.7.4p6.bb} (72%)
+>
+> diff --git a/recipes/sudo/sudo_1.7.2p4.bb b/recipes/sudo/sudo_1.7.4p6.bb
+> similarity index 72%
+> rename from recipes/sudo/sudo_1.7.2p4.bb
+> rename to recipes/sudo/sudo_1.7.4p6.bb
+> index c2818cf..8afee8d 100644
+> --- a/recipes/sudo/sudo_1.7.2p4.bb
+> +++ b/recipes/sudo/sudo_1.7.4p6.bb
+> @@ -1,4 +1,4 @@
+> -PR = "r4"
+> +PR = "r0"
+>
+>   DEPENDS = "libpam"
+>   RDEPENDS_${PN} = "libpam libpam-meta"
+> @@ -7,8 +7,8 @@ SRC_URI = "http://ftp.sudo.ws/sudo/dist/sudo-${PV}.tar.gz;name=src \
+>     file://sudo.pamd \
+>   "
+>
+> -SRC_URI[src.md5sum] = "3989e5a00538247d7dcef8b514076752"
+> -SRC_URI[src.sha256sum] = "57d9adbdffa881e32894231079da7d68ffe99f46942818b63baadf6c795b7bdd"
+> +SRC_URI[src.md5sum] = "1ae12d3d22e7ffedbf2db26f957676f0"
+> +SRC_URI[src.sha256sum] = "20091ef71018698c674c779f4b57178b2ecb4275fa34909b06219d2688ad14d5"
+>
+>   EXTRA_OECONF += " --with-pam "
+>
+
 
 -- 
 Tom Rini
