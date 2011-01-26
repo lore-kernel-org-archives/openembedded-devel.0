@@ -1,45 +1,41 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PiC5T-0001Lz-Fe
+	(envelope-from <martin.jansa@gmail.com>) id 1PiCDN-0001W1-4o
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 21:35:32 +0100
-Received: by bwz10 with SMTP id 10so1704511bwz.6
+	Wed, 26 Jan 2011 21:43:41 +0100
+Received: by bwz10 with SMTP id 10so1712627bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 12:34:43 -0800 (PST)
+	Wed, 26 Jan 2011 12:42:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=PKpL2QmudVi2hn2uGzhWX54TPPxGaTaGKq5Hh0EUyWs=;
-	b=t41eWWGgiQrLVPx9pqhkU2/ovc3DVQR18g7NgAkJMf3+wDcrFkbl3LXgu1i66EbOyX
-	wQsiO/h8uydKnCUtp0QrdBX3J3FOlwhncJFg/rlUrQ+vH/DydfRgXG3uEfNhF4Gia6eQ
-	Y97lBgBJpAaozpE5Zarkke916nlr2uFNCMdR4=
+	:user-agent; bh=jV9HbJRDZfYTW3yky5Runru33kk0vgJmlaDQ1rp8M3Q=;
+	b=QmSNwcdPhCjo4lZ0Mc/5UD/UNTikyoS8OiXeSxza/k1COIBWq1XPucxpme4+IKnsm2
+	urU96oVpPMt9W5PBSSRr1nu6mBjd12ZQ8VqancE4UgrtPXSIaEM58qOe7ntha0jcTn7A
+	VG1JRj59IOdkC5BPovySA1gxpNVPYgWl0N6go=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=j1EYSU4HE2wty3E1Tn1cWTfEgvqFFvSOVumdeNFK9kcPj8nEAse3/z3CFX+em8MVAY
-	brQUlGhYX8Ef8v00BWcHwaJgcPyY/pXNMNzVN+ZToR7NmXcgK1L3hyg3U0ELrvExjRoa
-	lgzl/A6WOIiIUJR4V2aWBoTpJe4jju9lG5L/0=
-Received: by 10.204.51.65 with SMTP id c1mr788570bkg.185.1296072519948;
-	Wed, 26 Jan 2011 12:08:39 -0800 (PST)
-Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
-	[85.127.155.31])
-	by mx.google.com with ESMTPS id f20sm7707592bkf.16.2011.01.26.12.08.38
+	b=efdeUcws9xAoroXSfNIX8BJvgtSg9+wGuL6jAK3gc13JNCLuU8kj5/JQZCSpWAe+rW
+	mJfeI2JMA+qnfDfDBSel12Z7gam7ZLiDcIiYB0/mTk4riR2oS0AZPxhJSIDwfToyU3c1
+	AXyc6JUtMBanR6XhdmFkdNTI3a732jiLieN3Y=
+Received: by 10.204.60.17 with SMTP id n17mr779235bkh.190.1296072361166;
+	Wed, 26 Jan 2011 12:06:01 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id f20sm7706214bkf.16.2011.01.26.12.05.59
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Jan 2011 12:08:38 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1PiBfQ-0003Fr-SV; Wed, 26 Jan 2011 21:08:36 +0100
-Date: Wed, 26 Jan 2011 21:08:36 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Wed, 26 Jan 2011 12:05:59 -0800 (PST)
+Date: Wed, 26 Jan 2011 21:06:20 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110126200836.GB714@mx.loc>
-References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
-	<1296065612-9637-4-git-send-email-rep.dot.nop@gmail.com>
-	<4D40744F.5090105@mentor.com>
+Message-ID: <20110126200620.GH3616@jama>
+References: <4D3FEC09.5070306@atmel.com>
+	<201101261401.02414.marcin@juszkiewicz.com.pl>
+	<4D405B8C.805@atmel.com>
 MIME-Version: 1.0
-In-Reply-To: <4D40744F.5090105@mentor.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 3/9] IMAGE_CMD_ext4.xz: rm uncompressed image
+In-Reply-To: <4D405B8C.805@atmel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: Problem with calibration of AT91SAM9M10EKES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,39 +49,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 20:35:32 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 26 Jan 2011 20:43:41 -0000
+X-Groupsio-MsgNum: 28507
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="aF3LVLvitz/VQU3c"
 Content-Disposition: inline
 
-On Wed, Jan 26, 2011 at 12:21:51PM -0700, Tom Rini wrote:
->On 01/26/2011 11:13 AM, Bernhard Reutner-Fischer wrote:
->>Signed-off-by: Bernhard Reutner-Fischer<rep.dot.nop@gmail.com>
->>---
->>  conf/bitbake.conf |    2 +-
->>  1 files changed, 1 insertions(+), 1 deletions(-)
->>
->>diff --git a/conf/bitbake.conf b/conf/bitbake.conf
->>index 042a06c..4fbb6b6 100644
->>--- a/conf/bitbake.conf
->>+++ b/conf/bitbake.conf
->>@@ -387,7 +387,7 @@ IMAGE_CMD_ext3.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096
->>  IMAGE_CMD_ext4 = "genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac;"
->>  IMAGE_CMD_ext4.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; set +e;e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.gz"
->>  IMAGE_CMD_ext4.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.bz2"
->>-IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>  ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
->>+IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>  ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz ; rm -f ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
->>
->>  IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
->>  IMAGE_CMD_squashfs-lzma = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend -comp lzma"
->
->Any reason we do xz -c < foo rather than just xz foo?  Then we
->wouldn't have to rm...
+--aF3LVLvitz/VQU3c
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-yea, not really, but:
-khem, re 3/9: The whole IMAGE generation is a pile of crap. We genext2fs
-more often than i can count without stuttering
-khem, there should be an .ext2 task and we can make
-ext{3,4}{,.{Z,gz,bz2,xz}} out of that basic .ext2
+On Wed, Jan 26, 2011 at 06:36:12PM +0100, Ulf Samuelsson wrote:
+> 2011-01-26 14:01, Marcin Juszkiewicz skrev:
+> > Dnia =C5=9Broda, 26 stycznia 2011 o 10:40:25 Ulf Samuelsson napisa=C5=
+=82(a):
+> >> I have some calibration problem with my private branch
+> >> (ulf/linux-2.6.30-2011-01-??) when building the at91sam9m10ekes board.
+> >>
+> >> I am running /usr/bin/run-calibrate.sh,
+> >> but regardless of how I click, during calibration,
+> >> a tap afterwards always results in detection 3 mm above the tap.
+> >>
+> >> There is a "pointercal" file generated.
+> >> It appears to me that this is ignored...
+> >> I can tap 1 cm above or below during calibration,
+> >> and still the detected tap is 3 mm above the actual tap.
+> >
+> >> Anything else to think about?
+> >> I enclose  /etc/X11/xorg.conf and /etc/ts.conf.
+> > You are using full X11 with evdev driver so tslib is not used at all. Y=
+ou have
+> > to use xinput-calibrator.
+> >
+> > Regards,
+>=20
+> Any clue to get xinput-calibrate to run at first boot?
 
+provide=20
+recipes/xinput-calibrator/pointercal-xinput
+data for your device and use
+recipes/xserver-common/files/89xTs_Calibrate.xinput_calibrator.patch
+like SHR does
 
+intentionaly it prefers provideded data, because users too often messed
+initial calibration on first boot and then didn't know how to reset it
+and rerun xinpu-calibration successfully...
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--aF3LVLvitz/VQU3c
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.17 (GNU/Linux)
+
+iEYEARECAAYFAk1AfrwACgkQN1Ujt2V2gBxoMwCcC1HS9g01lLsDmgK9eDHgstSv
+0x0AnR6sO5ZU6KGVM8ni+fAI4PbptPDU
+=uu+b
+-----END PGP SIGNATURE-----
+
+--aF3LVLvitz/VQU3c--
