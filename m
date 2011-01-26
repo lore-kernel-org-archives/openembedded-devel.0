@@ -1,35 +1,33 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PiAWk-0001EG-55
+	(envelope-from <Tom_Rini@mentor.com>) id 1PiAx4-0005Wl-53
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 19:55:34 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id B28BA314CC9B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 19:54:48 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id qb7zapEjdvOz
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 19:54:43 +0100 (CET)
-Received: from [172.22.22.61] (ip-178-200-120-208.unitymediagroup.de
-	[178.200.120.208])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 521C631474F9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 19:54:43 +0100 (CET)
-Message-ID: <4D406DF6.5070105@opendreambox.org>
-Date: Wed, 26 Jan 2011 19:54:46 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101210 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 26 Jan 2011 20:22:46 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PiAwH-00050V-Fb from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Jan 2011 11:21:57 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 26 Jan 2011 11:21:56 -0800
+Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 26 Jan 2011 12:21:55 -0700
+Message-ID: <4D40744F.5090105@mentor.com>
+Date: Wed, 26 Jan 2011 12:21:51 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1296066116-10466-1-git-send-email-rep.dot.nop@gmail.com>
-In-Reply-To: <1296066116-10466-1-git-send-email-rep.dot.nop@gmail.com>
-Subject: Re: [PATCH 1/2] busybox: add group to -passwd package
+References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
+	<1296065612-9637-4-git-send-email-rep.dot.nop@gmail.com>
+In-Reply-To: <1296065612-9637-4-git-send-email-rep.dot.nop@gmail.com>
+X-OriginalArrivalTime: 26 Jan 2011 19:21:55.0967 (UTC)
+	FILETIME=[4B7CD8F0:01CBBD8E]
+Subject: Re: [PATCH 3/9] IMAGE_CMD_ext4.xz: rm uncompressed image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,53 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 18:55:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 26 Jan 2011 19:22:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Bernhard,
+On 01/26/2011 11:13 AM, Bernhard Reutner-Fischer wrote:
+> Signed-off-by: Bernhard Reutner-Fischer<rep.dot.nop@gmail.com>
+> ---
+>   conf/bitbake.conf |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 042a06c..4fbb6b6 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -387,7 +387,7 @@ IMAGE_CMD_ext3.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096
+>   IMAGE_CMD_ext4 = "genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac;"
+>   IMAGE_CMD_ext4.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; set +e;e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.gz"
+>   IMAGE_CMD_ext4.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.bz2"
+> -IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>  ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
+> +IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>  ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz ; rm -f ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
+>
+>   IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
+>   IMAGE_CMD_squashfs-lzma = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend -comp lzma"
 
-On 01/26/2011 07:21 PM, Bernhard Reutner-Fischer wrote:
->  recipes/busybox/files/passwd     |    3 ---
->  recipes/busybox/files/shadow     |    3 ---
+Any reason we do xz -c < foo rather than just xz foo?  Then we wouldn't 
+have to rm...
 
-these two changes seem to have been included by mistake.
-
-> diff --git a/recipes/busybox/files/passwd b/recipes/busybox/files/passwd
-> index 64c9ab6..34921c3 100644
-> --- a/recipes/busybox/files/passwd
-> +++ b/recipes/busybox/files/passwd
-> @@ -2,10 +2,7 @@ root:x:0:0:root:/root:/bin/sh
->  daemon:x:1:1:daemon:/usr/sbin:/bin/sh
->  bin:x:2:2:bin:/bin:/bin/sh
->  sys:x:3:3:sys:/dev:/bin/sh
-> -sync:x:4:65534:sync:/bin:/bin/sync
->  man:x:6:12:man:/var/cache/man:/bin/sh
->  mail:x:8:8:mail:/var/mail:/bin/sh
->  www-data:x:33:33:www-data:/var/www:/bin/sh
-> -backup:x:34:34:backup:/var/backups:/bin/sh
-> -irc:x:39:39:ircd:/var/run/ircd:/bin/sh
->  nobody:x:65534:65534:nobody:/nonexistent:/bin/sh
-> diff --git a/recipes/busybox/files/shadow b/recipes/busybox/files/shadow
-> index 25df693..e64a964 100644
-> --- a/recipes/busybox/files/shadow
-> +++ b/recipes/busybox/files/shadow
-> @@ -2,10 +2,7 @@ root::14741:0:99999:7:::
->  daemon:*:14741:0:99999:7:::
->  bin:*:14741:0:99999:7:::
->  sys:*:14741:0:99999:7:::
-> -sync:*:14741:0:99999:7:::
->  man:*:14741:0:99999:7:::
->  mail:*:14741:0:99999:7:::
->  www-data:*:14741:0:99999:7:::
-> -backup:*:14741:0:99999:7:::
-> -irc:*:14741:0:99999:7:::
->  nobody:*:14741:0:99999:7:::
-
-Apart from that, the patch looks sane.
-
-Regards,
-Andreas
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
