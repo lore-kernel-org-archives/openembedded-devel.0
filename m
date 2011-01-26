@@ -1,31 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pi7JE-0002ir-PI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 16:29:24 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Pi7IS-0007lm-S3 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 07:28:36 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 26 Jan 2011 07:28:36 -0800
-Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 26 Jan 2011 08:28:35 -0700
-Message-ID: <4D403DA0.6030303@mentor.com>
-Date: Wed, 26 Jan 2011 08:28:32 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pi7u3-0003ez-LJ for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Jan 2011 17:07:27 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Pi7tH-0007py-D0 for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Jan 2011 17:06:39 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Jan 2011 17:06:39 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Jan 2011 17:06:39 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 26 Jan 2011 17:06:26 +0100
+Message-ID: <ihpgq2$h4s$1@dough.gmane.org>
 References: <1295905501-1948-1-git-send-email-sgarman@zenlinux.com>
-In-Reply-To: <1295905501-1948-1-git-send-email-sgarman@zenlinux.com>
-X-OriginalArrivalTime: 26 Jan 2011 15:28:35.0755 (UTC)
-	FILETIME=[B2B607B0:01CBBD6D]
+	<4D403DA0.6030303@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D403DA0.6030303@mentor.com>
+X-Enigmail-Version: 1.0.1
 Subject: Re: [PATCH] sudo: upgrade to 1.7.4p6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,53 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 15:29:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 26 Jan 2011 16:07:27 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 01/24/2011 02:45 PM, Scott Garman wrote:
-> Addresses the following CVEs:
-> * CVE-2010-2956
-> * CVE-2010-1646
-> * CVE-2011-0010
->
-> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Acked-by: Tom Rini <tom_rini@mentor.com>
+On 26-01-11 16:28, Tom Rini wrote:
+> On 01/24/2011 02:45 PM, Scott Garman wrote:
+>> Addresses the following CVEs:
+>> * CVE-2010-2956
+>> * CVE-2010-1646
+>> * CVE-2011-0010
+>>
+>> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
+> 
+> Acked-by: Tom Rini <tom_rini@mentor.com>
 
-> ---
->   recipes/sudo/{sudo_1.7.2p4.bb =>  sudo_1.7.4p6.bb} |    6 +++---
->   1 files changed, 3 insertions(+), 3 deletions(-)
->   rename recipes/sudo/{sudo_1.7.2p4.bb =>  sudo_1.7.4p6.bb} (72%)
->
-> diff --git a/recipes/sudo/sudo_1.7.2p4.bb b/recipes/sudo/sudo_1.7.4p6.bb
-> similarity index 72%
-> rename from recipes/sudo/sudo_1.7.2p4.bb
-> rename to recipes/sudo/sudo_1.7.4p6.bb
-> index c2818cf..8afee8d 100644
-> --- a/recipes/sudo/sudo_1.7.2p4.bb
-> +++ b/recipes/sudo/sudo_1.7.4p6.bb
-> @@ -1,4 +1,4 @@
-> -PR = "r4"
-> +PR = "r0"
->
->   DEPENDS = "libpam"
->   RDEPENDS_${PN} = "libpam libpam-meta"
-> @@ -7,8 +7,8 @@ SRC_URI = "http://ftp.sudo.ws/sudo/dist/sudo-${PV}.tar.gz;name=src \
->     file://sudo.pamd \
->   "
->
-> -SRC_URI[src.md5sum] = "3989e5a00538247d7dcef8b514076752"
-> -SRC_URI[src.sha256sum] = "57d9adbdffa881e32894231079da7d68ffe99f46942818b63baadf6c795b7bdd"
-> +SRC_URI[src.md5sum] = "1ae12d3d22e7ffedbf2db26f957676f0"
-> +SRC_URI[src.sha256sum] = "20091ef71018698c674c779f4b57178b2ecb4275fa34909b06219d2688ad14d5"
->
->   EXTRA_OECONF += " --with-pam "
->
+Khem already pushed it a few days ago :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFNQEaCMkyGM64RGpERAqG9AJ9mCAKlvDkOpbUsgSDGjEw/iWUU/gCdFxH6
+IlmYejlMcqvwtk4vw4uqtjA=
+=d6BH
+-----END PGP SIGNATURE-----
 
--- 
-Tom Rini
-Mentor Graphics Corporation
 
 
