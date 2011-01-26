@@ -1,26 +1,30 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1PiDsG-0002ud-6n
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1PiEJN-0003Hg-S7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 23:30:00 +0100
-Received: (qmail invoked by alias); 26 Jan 2011 22:29:09 -0000
-Received: from p4FE0FB8B.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.224.251.139]
-	by mail.gmx.net (mp071) with SMTP; 26 Jan 2011 23:29:09 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX189HS01WFk9dbIOCGos6opdCEOBNT4FZ3vBFRmkFI
-	Xmz1kQQMJi23pB
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Jan 2011 23:27:31 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-References: <201101242322.30470.schnitzeltony@gmx.de>
-	<ihlur0$iqp$1@dough.gmane.org>
-In-Reply-To: <ihlur0$iqp$1@dough.gmane.org>
+	Wed, 26 Jan 2011 23:58:02 +0100
+Received: from ipb4.telenor.se (ipb4.telenor.se [195.54.127.167])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id 23EA1EB765
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Jan 2011 23:57:13 +0100 (CET)
+X-SENDER-IP: [83.227.56.243]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AmUWAE41QE1T4zjzPGdsb2JhbAAMiE+Nf44rAQEBATW9I4VPBIwp
+X-IronPort-AV: E=Sophos;i="4.60,382,1291590000"; d="scan'208";a="1709442150"
+Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.56.243])
+	by ipb4.telenor.se with ESMTP; 26 Jan 2011 23:57:13 +0100
+Message-ID: <4D40A6C8.8020705@atmel.com>
+Date: Wed, 26 Jan 2011 23:57:12 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Message-Id: <201101262327.31727.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: Question regarding gettext 0.18
+To: openembedded-devel@lists.openembedded.org
+References: <4D4092E8.8040207@atmel.com>
+In-Reply-To: <4D4092E8.8040207@atmel.com>
+Subject: Re: Patching from a file containing a compressed directory	(<directory>.tar.bz2)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,89 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 22:30:00 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 26 Jan 2011 22:58:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tuesday 25 January 2011 08:41:20 Koen Kooi wrote:
-> On 24-01-11 23:22, Andreas Mueller wrote:
-> > Dear OE folks,
-> >
-> > during working on new recipes for clutter 1.4.2 I face the following issue:
-> >
-> > Compiling fails with the message
-> >
-> >> Making all in po
-> >> make[2]: Entering directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2/po'
-> >> *** error: gettext infrastructure mismatch: using a Makefile.in.in from gettext version 0.17 but the autoconf macros are from gettext version 0.18
-> >> make[2]: *** [check-macro-version] Error 1
-> >> make[2]: Leaving directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2/po'
-> >> make[1]: *** [all-recursive] Error 1
-> >> make[1]: Leaving directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2'
-> >> make: *** [all] Error 2
-> >> FATAL: oe_runmake failed
-> >> ERROR: Function do_compile failed
-> >
-> > I checked google & git-log for a hint on that - nothing (yet).
-> >
-> > It smells as a simple solution - but I am not able to find it. Can somebody please give me a hint how to solve?
-> 
-> I use this in gstreamer:
-> 
-> # gstreamer uses AG_GST_GETTEXT which autotools.bbclass doesn't grep for
-> do_configure_prepend() {
->     glib-gettextize --force --copy || true
-> }
-> 
+2011-01-26 22:32, Ulf Samuelsson skrev:
+>     Trying to change the at91 linux recipes.
+>     The "experimental" patches to be added on top of the "maxim" patch
+>     can be downloaded from ftp://ftp.at91.com/ and that file
+>     is generated from a directory of patches, which should be applied
+>     in alphabetical order.
+>
+>     When the "obvious" SRC_URI  is used:
+>
+>     ftp://ftp.at91.com/<directory>.tar.bz2;apply=yes \
+>
+>      the files do not get applied in alphabetical order.
+>
+>     It looks to me like they get applied in reverse order,  but I did 
+> not check carefully.
+>     I tried adding a "series" file, and recompress, but that failed as 
+> well.
+>
+>     Any clue on how to get the patches applied in alphabetical order?
+>
+>     If the patches are in a subdirectory to the recipe, and applied 
+> manually
+>     everything is OK, but that seems to be a shame to have to resort 
+> to that.
+>
+BTW: I figured out that I can avoid applying the file as a patch,
+and just let the file be decompressed to ${WORKDIR}, and then
+apply the patches manually in a "do_patch_prepend" function.
 
-Thanks for  quick & helpful response. But...
+Drawback is that if there are working patches before this,
+then they also need to be applied manually.
 
-I did the same modification for clutter-recipe. With this compiling passes but install fails with
+Seems strange that the patches are not applied in alphabetical order.
 
-| Making install in po
-| make[1]: Entering directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2/po'
-| if test -r "../@MKINSTALLDIRS@"; then \
-| 	  ../@MKINSTALLDIRS@ /home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/image/usr/share; \
-| 	else \
-| 	  /bin/sh ../mkinstalldirs /home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/image/usr/share; \
-| 	fi
-| /bin/sh: ../mkinstalldirs: No such file or directory
-| make[1]: *** [install-data-yes] Error 127
-| make[1]: Leaving directory `/home/Superandi/tmp/work/overo-angstrom-linux-gnueabi/clutter-1.4.2-r3.0/clutter-1.4.2/po'
-| make: *** [install-recursive] Error 1
-| FATAL: oe_runmake failed
-| ERROR: Function do_install failed
+-- 
+Best Regards
+Ulf Samuelsson
 
-A complete different layout in 'po/Makefile.in.in' lead me to the fact that clutter has changed from glib-gettext to upstream gettext (see 
-http://git.clutter-project.org/clutter/commit/?id=98cac30d82299b3739f3801f71b5e2e931eb2e8d). 
-
-So I modified the recipe to
-
-do_configure_prepend() {
-	gettextize --force || true
-
-Unfortunately with this configure does not finish because gettextize is so kind to tell me that I have to
-
-| Please run 'aclocal -I build/autotools' to regenerate the aclocal.m4 file.
-| You need aclocal from GNU automake 1.9 (or newer) to do this.
-| Then run 'autoconf' to regenerate the configure file.
-|
-| You might also want to copy the convenience header file gettext.h
-| from the /home/Superandi/tmp/sysroots/i686-linux/usr/share/gettext directory into your package.
-| It is a wrapper around <libintl.h> that implements the configure --disable-nls
-| option.
-|
-| Press Return to acknowledge the previous two paragraphs.
-
-I see the following options to continue (hoping on better results with upstream gettextize...):
-
-- gettextize has a 'secret' parameter preventing interaction (I checked doc / --help / the script itself: nothing) 
-- patching or sed-ing gettextize-native: so that 'read dummy < /dev/tty' is removed at the end of gettextize script (preferred)
-- something like ti-eula-unpack.inc simulating user interaction
-
-Sorry for spamming but what do you think?
-
-Andreas
 
 
