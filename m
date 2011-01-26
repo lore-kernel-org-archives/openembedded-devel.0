@@ -1,45 +1,36 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PiCKn-0001kq-OR
+	(envelope-from <raj.khem@gmail.com>) id 1PiCTu-0002IM-Vj
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 21:51:21 +0100
-Received: by bwz10 with SMTP id 10so1720219bwz.6
+	Wed, 26 Jan 2011 22:00:47 +0100
+Received: by gyh20 with SMTP id 20so324975gyh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 12:50:36 -0800 (PST)
+	Wed, 26 Jan 2011 12:59:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=hOawmBfJUjKtc/8QkgXy3B8j6NoexCAVIlhACLxcd54=;
-	b=WISikYZF6lAfXpOb1mJ89vV5ZPe6/cjvEDS9mRbh9kPpcB/J8s6DkslMNzTo7t03XO
-	hfW8bbRAEgOdm8sxXxaCZbyAkVSaNjbtdOqPiuUZRPF4DMaQmh1TAKhEDO92B8HYAAYo
-	wTz2dARRu0jd0hewzk9nGhvbL908GCqA9RhTk=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=FYp1JIDR0ViRL7geFQ4fPrDYg4ED0/yjuTdstQyISjE=;
+	b=sQRNCS+GgPA1tYqkaVF1pW/qzZMzMlQte8qRLl9cZ4OO1SqvJ2f/vqJrIZRlvJj0S8
+	O8mEwcOsbuHSqwN7Y2wQ1CndgDpHJwqZlSE7Fp83UTikC3JuNK4r5mzMeZH+Xr01XTc3
+	knlnNiYbkDW1l6OPYs2yp1y9sFYxim/Bhcduk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Te+phV+9H4FeFGUjxbhe3CbtmsLt+tD5IOPntV7Nx7IhCZbyQfZZ/38DeV5zpM5SQz
-	TsQqZROS2cgZHz0x3r2J9zbjtEUwNUVxRCmLUO0qgHMnDA5N6cePJWYQ16cEwtOcRd1w
-	8BsWj21inKdDouQB+pmU/TccIlt6ok5tMujgI=
-Received: by 10.204.63.206 with SMTP id c14mr840922bki.95.1296073774238;
-	Wed, 26 Jan 2011 12:29:34 -0800 (PST)
-Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
-	[85.127.155.31])
-	by mx.google.com with ESMTPS id b6sm7721865bkb.22.2011.01.26.12.29.32
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Jan 2011 12:29:33 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1PiBzf-0003RB-GO; Wed, 26 Jan 2011 21:29:31 +0100
-Date: Wed, 26 Jan 2011 21:29:31 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110126202931.GD714@mx.loc>
-References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
-	<1296065612-9637-8-git-send-email-rep.dot.nop@gmail.com>
-	<4D407550.8040903@mentor.com> <4D407B96.2010801@mentor.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=Ty+kKYSQUQFEnEOuo1LEqPH840dhPLnLPRF1ynlsK98/WcITS8hwVM/EKm0g48F7n5
+	m+qaQ6hHxVXL/LHqJUp846c89wu6c0hwJ4Lj96nKxsuyJcl+vhyoNQluILI0bpkjtymO
+	HlYaACKhgWq7l4SRVshDXOT+rdiAjjAruRmms=
+Received: by 10.91.186.4 with SMTP id n4mr1899054agp.88.1296075598440; Wed, 26
+	Jan 2011 12:59:58 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <4D407B96.2010801@mentor.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 7/9] kernel.bbclass: simplify "if image" condition
+Received: by 10.90.32.12 with HTTP; Wed, 26 Jan 2011 12:59:38 -0800 (PST)
+In-Reply-To: <1296065612-9637-10-git-send-email-rep.dot.nop@gmail.com>
+References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
+	<1296065612-9637-10-git-send-email-rep.dot.nop@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 26 Jan 2011 12:59:38 -0800
+Message-ID: <AANLkTimK6GiBOP0nULT=ZAo6_ukjzV3ut1f=5aQisPEz@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 9/9] util-linux: honour largefile distro feature
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,53 +44,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 20:51:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 26 Jan 2011 21:00:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 26, 2011 at 12:52:54PM -0700, Tom Rini wrote:
->On 01/26/2011 12:26 PM, Tom Rini wrote:
->>On 01/26/2011 11:13 AM, Bernhard Reutner-Fischer wrote:
->>>Anything that expands image to any false value should not set
->>>INITRAMFS_TASK (instead of just "" or None).
->>>
->>>Signed-off-by: Bernhard Reutner-Fischer<rep.dot.nop@gmail.com>
->>>---
->>>classes/kernel.bbclass | 2 +-
->>>1 files changed, 1 insertions(+), 1 deletions(-)
->>>
->>>diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
->>>index ea1daf6..d0608e5 100644
->>>--- a/classes/kernel.bbclass
->>>+++ b/classes/kernel.bbclass
->>>@@ -18,7 +18,7 @@ python __anonymous () {
->>>bb.data.setVar("DEPENDS", depends, d)
->>>
->>>image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
->>>- if image != '' and image is not None:
->>>+ if image:
->>>bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
->>>
->>>machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
->>
->>Er, right below these lines it still does:
->>INITRAMFS_IMAGE ?= ""
->>INITRAMFS_TASK ?= ""
->>
->>Which would be a problem yes? Or is there some pythonism I'm forgetting?
+On Wed, Jan 26, 2011 at 10:13 AM, Bernhard Reutner-Fischer
+<rep.dot.nop@gmail.com> wrote:
+> do_install on micro-image still broken (${bindir}/hexdump lives in
+> ${usrbindir}/hexdump from util-linux POV. Not fixing these.)
 >
->OK, after some quick IRC conversation, my only concern is the message
->wasn't clear to me, but the changes are fine.  Could it be expanded
->to say:
->Remove some checks because <existing message more or less> means they
->aren't necessary?
-
-Remove superfluous checks since testing for any False, None or empty object
-yields False in python.
-
-I'll phrase it like this. Thanks!
+> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> ---
+> =C2=A0recipes/util-linux/files/MCONFIG =C2=A0| =C2=A0 =C2=A01 -
+> =C2=A0recipes/util-linux/util-linux.inc | =C2=A0 =C2=A04 +++-
+> =C2=A02 files changed, 3 insertions(+), 2 deletions(-)
 >
->Acked-by: Tom Rini <tom_rini@mentor.com>
+> diff --git a/recipes/util-linux/files/MCONFIG b/recipes/util-linux/files/=
+MCONFIG
+> index 3fea2c0..1e87749 100644
+> --- a/recipes/util-linux/files/MCONFIG
+> +++ b/recipes/util-linux/files/MCONFIG
+> @@ -206,7 +206,6 @@ endif
+>
+> =C2=A0CFLAGS :=3D $(OPT) -I$(LIB) $(WARNFLAGS) \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0$(CURSESFLAGS) $(SLANGFLAGS) $(NLSFLAGS) \
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 -D_FILE_OFFSET_BITS=3D64 \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0-DSBINDIR=3D\"$(SBIN_DIR)\" \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0-DUSRSBINDIR=3D\"$(USRSBIN_DIR)\" \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0-DLOGDIR=3D\"$(LOG_DIR)\" \
+> diff --git a/recipes/util-linux/util-linux.inc b/recipes/util-linux/util-=
+linux.inc
+> index eef4645..e1caf80 100644
+> --- a/recipes/util-linux/util-linux.inc
+> +++ b/recipes/util-linux/util-linux.inc
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "Util-linux is a suite of essential utili=
+ties for any Linux system
+> =C2=A0SECTION =3D "base"
+> =C2=A0LICENSE =3D "GPL"
+> =C2=A0DEPENDS =3D "zlib ncurses"
+> -INC_PR =3D "r16"
+> +INC_PR =3D "r17"
+> =C2=A0inherit autotools
+>
+
+this has potential of breaking the distros which dont yet define
+largefile in DISTRO_FEATURES so please consider the distros and see if
+it does not impact
+them unknowingly
+
+> =C2=A0SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/utils/util-linux/util-li=
+nux-${PV}.tar.bz2 \
+> @@ -30,6 +30,8 @@ FILES_util-linux-readprofile =3D "/usr/sbin/readprofile=
+"
+> =C2=A0RRECOMMENDS_${PN} =3D "util-linux-fdisk util-linux-cfdisk util-linu=
+x-sfdisk util-linux-mount util-linux-readprofile "
+> =C2=A0RDEPENDS_${PN} =3D "util-linux-umount util-linux-swaponoff util-lin=
+ux-losetup"
+>
+> +CFLAGS_append =3D "${@base_contains('DISTRO_FEATURES', 'largefile', '-D_=
+FILE_OFFSET_BITS=3D64', '', d)}"
+> +
+> =C2=A0do_compile () {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0set -e
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0install ${WORKDIR}/MCONFIG ${S}/MCONFIG
+> --
+> 1.7.2.3
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
 
