@@ -1,34 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PiBR6-0006qK-EI
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PiC5T-0001Lz-Fe
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 20:53:48 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PiBQK-0001Si-6x from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 11:53:00 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 26 Jan 2011 11:53:00 -0800
-Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 26 Jan 2011 12:52:58 -0700
-Message-ID: <4D407B96.2010801@mentor.com>
-Date: Wed, 26 Jan 2011 12:52:54 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Wed, 26 Jan 2011 21:35:32 +0100
+Received: by bwz10 with SMTP id 10so1704511bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Jan 2011 12:34:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=PKpL2QmudVi2hn2uGzhWX54TPPxGaTaGKq5Hh0EUyWs=;
+	b=t41eWWGgiQrLVPx9pqhkU2/ovc3DVQR18g7NgAkJMf3+wDcrFkbl3LXgu1i66EbOyX
+	wQsiO/h8uydKnCUtp0QrdBX3J3FOlwhncJFg/rlUrQ+vH/DydfRgXG3uEfNhF4Gia6eQ
+	Y97lBgBJpAaozpE5Zarkke916nlr2uFNCMdR4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=j1EYSU4HE2wty3E1Tn1cWTfEgvqFFvSOVumdeNFK9kcPj8nEAse3/z3CFX+em8MVAY
+	brQUlGhYX8Ef8v00BWcHwaJgcPyY/pXNMNzVN+ZToR7NmXcgK1L3hyg3U0ELrvExjRoa
+	lgzl/A6WOIiIUJR4V2aWBoTpJe4jju9lG5L/0=
+Received: by 10.204.51.65 with SMTP id c1mr788570bkg.185.1296072519948;
+	Wed, 26 Jan 2011 12:08:39 -0800 (PST)
+Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
+	[85.127.155.31])
+	by mx.google.com with ESMTPS id f20sm7707592bkf.16.2011.01.26.12.08.38
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 26 Jan 2011 12:08:38 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1PiBfQ-0003Fr-SV; Wed, 26 Jan 2011 21:08:36 +0100
+Date: Wed, 26 Jan 2011 21:08:36 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20110126200836.GB714@mx.loc>
 References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
-	<1296065612-9637-8-git-send-email-rep.dot.nop@gmail.com>
-	<4D407550.8040903@mentor.com>
-In-Reply-To: <4D407550.8040903@mentor.com>
-X-OriginalArrivalTime: 26 Jan 2011 19:52:58.0864 (UTC)
-	FILETIME=[A1DC5F00:01CBBD92]
-Subject: Re: [PATCH 7/9] kernel.bbclass: simplify "if image" condition
+	<1296065612-9637-4-git-send-email-rep.dot.nop@gmail.com>
+	<4D40744F.5090105@mentor.com>
+MIME-Version: 1.0
+In-Reply-To: <4D40744F.5090105@mentor.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH 3/9] IMAGE_CMD_ext4.xz: rm uncompressed image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,49 +53,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 19:53:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Jan 2011 20:35:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 01/26/2011 12:26 PM, Tom Rini wrote:
-> On 01/26/2011 11:13 AM, Bernhard Reutner-Fischer wrote:
->> Anything that expands image to any false value should not set
->> INITRAMFS_TASK (instead of just "" or None).
+On Wed, Jan 26, 2011 at 12:21:51PM -0700, Tom Rini wrote:
+>On 01/26/2011 11:13 AM, Bernhard Reutner-Fischer wrote:
+>>Signed-off-by: Bernhard Reutner-Fischer<rep.dot.nop@gmail.com>
+>>---
+>>  conf/bitbake.conf |    2 +-
+>>  1 files changed, 1 insertions(+), 1 deletions(-)
 >>
->> Signed-off-by: Bernhard Reutner-Fischer<rep.dot.nop@gmail.com>
->> ---
->> classes/kernel.bbclass | 2 +-
->> 1 files changed, 1 insertions(+), 1 deletions(-)
+>>diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+>>index 042a06c..4fbb6b6 100644
+>>--- a/conf/bitbake.conf
+>>+++ b/conf/bitbake.conf
+>>@@ -387,7 +387,7 @@ IMAGE_CMD_ext3.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096
+>>  IMAGE_CMD_ext4 = "genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac;"
+>>  IMAGE_CMD_ext4.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; set +e;e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.gz"
+>>  IMAGE_CMD_ext4.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.bz2"
+>>-IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>  ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
+>>+IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>  ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz ; rm -f ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
 >>
->> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
->> index ea1daf6..d0608e5 100644
->> --- a/classes/kernel.bbclass
->> +++ b/classes/kernel.bbclass
->> @@ -18,7 +18,7 @@ python __anonymous () {
->> bb.data.setVar("DEPENDS", depends, d)
->>
->> image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
->> - if image != '' and image is not None:
->> + if image:
->> bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
->>
->> machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
+>>  IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
+>>  IMAGE_CMD_squashfs-lzma = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend -comp lzma"
 >
-> Er, right below these lines it still does:
-> INITRAMFS_IMAGE ?= ""
-> INITRAMFS_TASK ?= ""
->
-> Which would be a problem yes? Or is there some pythonism I'm forgetting?
+>Any reason we do xz -c < foo rather than just xz foo?  Then we
+>wouldn't have to rm...
 
-OK, after some quick IRC conversation, my only concern is the message 
-wasn't clear to me, but the changes are fine.  Could it be expanded to say:
-Remove some checks because <existing message more or less> means they 
-aren't necessary?
+yea, not really, but:
+khem, re 3/9: The whole IMAGE generation is a pile of crap. We genext2fs
+more often than i can count without stuttering
+khem, there should be an .ext2 task and we can make
+ext{3,4}{,.{Z,gz,bz2,xz}} out of that basic .ext2
 
-Acked-by: Tom Rini <tom_rini@mentor.com>
-
--- 
-Tom Rini
-Mentor Graphics Corporation
 
 
