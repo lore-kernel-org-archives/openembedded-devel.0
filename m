@@ -1,31 +1,36 @@
-Received: from smtprelay-h31.telenor.se ([213.150.131.4])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1Pi9eu-0005Jk-PM
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pi9zB-0005yw-ER
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 18:59:56 +0100
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-h31.telenor.se (Postfix) with ESMTP id 96106C125
+	Wed, 26 Jan 2011 19:20:54 +0100
+Received: by iwn8 with SMTP id 8so1194405iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 18:36:14 +0100 (CET)
-X-SENDER-IP: [83.227.56.243]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AtAVAE7qP01T4zjzPGdsb2JhbAAMhAaESY19jisBAQEBNaw7kHyBI4M4dASMKQ
-X-IronPort-AV: E=Sophos;i="4.60,381,1291590000"; d="scan'208";a="169188442"
-Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.244]) ([83.227.56.243])
-	by ipb1.telenor.se with ESMTP; 26 Jan 2011 18:36:13 +0100
-Message-ID: <4D405B8C.805@atmel.com>
-Date: Wed, 26 Jan 2011 18:36:12 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Wed, 26 Jan 2011 10:20:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=ReM6hy0RnOp/aM+1eF/gyExJdV9ud6WWua75tx/30sw=;
+	b=G66+TgBfFv0SRH6H1tzXNAIUM9VnSzju1dpnxtcn4kSbPXC8IfPH5RH3K+xvdkHr5C
+	8nkS+0W2TspAaqV3yUcImGVfu7BPI8eDH4AjY8sJFIzVpY3EUeqafK3biSGQEnIrv0XB
+	J492vrspV85iVYDHZ+5ohnUL5OWmBIgz3gU/Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=rlDHxb8j37aeGctTN4g4baAk8PEQ5QUw/YprEJThctrGqFzToe7VHgddlGtB6thEQE
+	XhXxDbW7qcJc+czIumGLY76DWJ2v+ufQ+A3el6Oa/OZc5ZdlhY0I0WDiTvcyYovbnaq7
+	IvFLgSqzCYmaJv7m1nLtKqTlqkDc/KKQO+B1k=
 MIME-Version: 1.0
+Received: by 10.231.19.201 with SMTP id c9mr8602358ibb.183.1296066006550; Wed,
+	26 Jan 2011 10:20:06 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Wed, 26 Jan 2011 10:20:06 -0800 (PST)
+In-Reply-To: <ihmjum$vdq$2@dough.gmane.org>
+References: <1295464913-2642-1-git-send-email-koen@openembedded.org>
+	<4D373CFC.8010400@balister.org> <ihmjum$vdq$2@dough.gmane.org>
+Date: Wed, 26 Jan 2011 19:20:06 +0100
+Message-ID: <AANLkTinig0aagQgX-11UzmNmAce=H5RvC+_eMnLMYTN+@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4D3FEC09.5070306@atmel.com>
-	<201101261401.02414.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201101261401.02414.marcin@juszkiewicz.com.pl>
-Subject: Re: Problem with calibration of AT91SAM9M10EKES
+Subject: Re: [PATCH] insane bbclass: extend RPATH check to cover sysroots as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,77 +44,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 17:59:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 26 Jan 2011 18:20:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2011-01-26 14:01, Marcin Juszkiewicz skrev:
-> Dnia =C5=9Broda, 26 stycznia 2011 o 10:40:25 Ulf Samuelsson napisa=C5=82=
-(a):
->> I have some calibration problem with my private branch
->> (ulf/linux-2.6.30-2011-01-??) when building the at91sam9m10ekes board.
->>
->> I am running /usr/bin/run-calibrate.sh,
->> but regardless of how I click, during calibration,
->> a tap afterwards always results in detection 3 mm above the tap.
->>
->> There is a "pointercal" file generated.
->> It appears to me that this is ignored...
->> I can tap 1 cm above or below during calibration,
->> and still the detected tap is 3 mm above the actual tap.
+2011/1/25 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
->> Anything else to think about?
->> I enclose  /etc/X11/xorg.conf and /etc/ts.conf.
-> You are using full X11 with evdev driver so tslib is not used at all. Y=
-ou have
-> to use xinput-calibrator.
+> On 20-01-11 08:10, Koen Kooi wrote:
+>> On 19-01-11 20:35, Philip Balister wrote:
+>>> On 01/19/2011 11:21 AM, Koen Kooi wrote:
+>>>> * Having rpath to sysroot is just as bad as one to workdir
+>>
+>>> When you do a build with this, how many recipes have issues?
+>>
+>> Console-image is clean now :)
 >
-> Regards,
+> And angstrom-gnome-image as well, so can I get some Acks or tested-bys
+> please?
 
-Hmm, I thought I was using xserver-kdrive!
+Wanted to start testing but apparently this was already pushed 4 days
+ago by Khem.
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/classes/insane.bb=
+class?id=3D6aa31074adaccffcfd3080e8390065ab5abda2a6
 
-(Have PREFERRED_PROVIDER_xserver =3D "xserver-kdrive" in the machine conf=
-=20
-file)
-
-Looking closer at the image (x11-at91sam9-image), it contains
-XSERVER =3D "xserver-xorg \
-            xf86-input-evdev \
-            xf86-input-tslib \
-            xf86-video-fbdev "
-so the xserver-kdrive is overridden.
-
-This was copied from "xorg-image.bb" which I guess then have the same=20
-problem
-using full x-server and tslib.
-"qt4-x11-base-image.bb" has this combination as well.
-
-"xserver-common_1.33.bb" is built and contains:
-+++++++++++++++++++++++++
-RDEPENDS_${PN}_append_angstrom =3D " tslib-calibrate "
-RDEPENDS_${PN}_append_shr =3D " xinput-calibrator "
------------------------------------------------------
-and I am building "angstrom" I do not get "xinput-calibrator"
-
-I added xinput-calibrate to the x11-at91sam9-image, but after the build,
-Removed "xf86-input-tslib", but the dependence on "tslib-calibrate"
-remains in "xserver-common_1.33.bb"
-Maybe this needs to change as well.
-
-I get the  same startup calibration program ("run-calibrate.sh"  calling=20
-ts_calibrate).
-with the same poor result.
-
-There are no scripts calling "xinput-calibrator".
-Shouldn't that happen at startup?
-
-Can call it manually, and then suddenly I am much better off.
-Still  it not perfect though.
-
-Any clue to get xinput-calibrate to run at first boot?
-
-Best Regards
-Ulf Samuelsson
-
+Frans
+>
+>>
+>>
+>>> Philip
+>>
+>>
+>>>>
+>>>> Based on insane.bbclass from yocto
+>>>>
+>>>> Signed-off-by: Koen Kooi<koen@openembedded.org>
+>>>> ---
+>>>> =A0 classes/insane.bbclass | =A0 11 ++++++-----
+>>>> =A0 1 files changed, 6 insertions(+), 5 deletions(-)
+>>>>
+>>>> diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+>>>> index 677db27..50752b5 100644
+>>>> --- a/classes/insane.bbclass
+>>>> +++ b/classes/insane.bbclass
+>>>> @@ -160,20 +160,21 @@ def package_qa_check_rpath(file,name,d, elf):
+>>>> =A0 =A0 =A0 import bb, os
+>>>> =A0 =A0 =A0 sane =3D True
+>>>> =A0 =A0 =A0 scanelf =3D
+>>>> os.path.join(bb.data.getVar('STAGING_BINDIR_NATIVE',d,True),'scanelf')
+>>>> - =A0 =A0bad_dir =3D bb.data.getVar('TMPDIR', d, True) + "/work"
+>>>> + =A0 =A0bad_dirs =3D [bb.data.getVar('TMPDIR', d, True) + "/work",
+>>>> bb.data.getVar('STAGING_DIR_TARGET', d, True)]
+>>>> =A0 =A0 =A0 bad_dir_test =3D bb.data.getVar('TMPDIR', d, True)
+>>>> =A0 =A0 =A0 if not os.path.exists(scanelf):
+>>>> =A0 =A0 =A0 =A0 =A0 bb.fatal("Can not check RPATH, scanelf (part of
+>>>> pax-utils-native) not found")
+>>>>
+>>>> - =A0 =A0if not bad_dir in bb.data.getVar('WORKDIR', d, True):
+>>>> + =A0 =A0if not bad_dirs[0] in bb.data.getVar('WORKDIR', d, True):
+>>>> =A0 =A0 =A0 =A0 =A0 bb.fatal("This class assumed that WORKDIR is
+>>>> ${TMPDIR}/work... Not doing any check")
+>>>>
+>>>> =A0 =A0 =A0 output =3D os.popen("%s -B -F%%r#F '%s'" % (scanelf,file))
+>>>> =A0 =A0 =A0 txt =A0 =A0=3D output.readline().split()
+>>>> =A0 =A0 =A0 for line in txt:
+>>>> - =A0 =A0 =A0 =A0if bad_dir in line:
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0error_msg =3D "package %s contains bad RPATH =
+%s in file %s"
+>>>> % (name, line, file)
+>>>> - =A0 =A0 =A0 =A0 =A0 =A0sane =3D package_qa_handle_error(1, error_msg=
+, name, file, d)
+>>>> + =A0 =A0 =A0 =A0for dir in bad_dirs:
+>>>> + =A0 =A0 =A0 =A0 =A0 =A0if dir in line:
+>>>> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0error_msg =3D "package %s contains ba=
+d RPATH %s in file
+>>>> %s" % (name, line, file)
+>>>> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0sane =3D sane + package_qa_handle_err=
+or(1, error_msg,
+>>>> name, file, d)
+>>>>
+>>>> =A0 =A0 =A0 return sane
+>>>>
+>>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFNPtMWMkyGM64RGpERAoWvAKC2+GgE7rmeUXUClmBBlAx5WB1dNgCgjGlf
+> IkvPXdAoZ6J072F/YSctiyE=3D
+> =3DPndr
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
