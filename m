@@ -1,32 +1,33 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pi6h6-0001X2-MS
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pi6n1-0001dU-P2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 15:50:00 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	Wed, 26 Jan 2011 15:56:07 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
 	by relay1.mentorg.com with esmtp 
-	id 1Pi6gK-0001nW-62 from Tom_Rini@mentor.com 
+	id 1Pi6mF-0002Vd-UF from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 06:49:12 -0800
+	Wed, 26 Jan 2011 06:55:19 -0800
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 26 Jan 2011 06:49:11 -0800
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 26 Jan 2011 06:55:19 -0800
 Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 26 Jan 2011 07:49:10 -0700
-Message-ID: <4D403462.6060807@mentor.com>
-Date: Wed, 26 Jan 2011 07:49:06 -0700
+	Wed, 26 Jan 2011 07:55:18 -0700
+Message-ID: <4D4035D2.9090203@mentor.com>
+Date: Wed, 26 Jan 2011 07:55:14 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1296029446-27041-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1296029446-27041-1-git-send-email-raj.khem@gmail.com>
-X-OriginalArrivalTime: 26 Jan 2011 14:49:11.0017 (UTC)
-	FILETIME=[3137A590:01CBBD68]
-Subject: Re: [PATCH] samba: Fix build issue on uclibc/arm/thumb
+References: <20110126102308.GA29416@excalibur.local>
+	<4D3FFB03.9010206@xora.org.uk>
+In-Reply-To: <4D3FFB03.9010206@xora.org.uk>
+X-OriginalArrivalTime: 26 Jan 2011 14:55:18.0910 (UTC)
+	FILETIME=[0C7FA9E0:01CBBD69]
+Subject: Re: OE 2011.03 release vs. oe-core migration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 14:50:00 -0000
+X-List-Received-Date: Wed, 26 Jan 2011 14:56:08 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 01/26/2011 01:10 AM, Khem Raj wrote:
-> We get following errors as of now. This patch fixes those
->
-> /scratch/oe/sysroots/x86_64-linux/usr/armv5te/lib/gcc/arm-oe-linux-uclibceabi/4.5.3/../../../../arm-oe-linux-uclibceabi/bin/ld:
-> /scratch/oe/sysroots/armv5te-oe-linux-uclibceabi/usr/lib//uclibc_nonshared.a(atexit.os)(.text+0x12):
-> unresolvable R_ARM_THM_CALL relocation against symbol `__cxa_atexit'
->
-> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+On 01/26/2011 03:44 AM, Graeme Gregory wrote:
+> On 26/01/2011 10:23, Stefan Schmidt wrote:
+>> Hello.
+>>
+>> During last OEDEM we set out a timeline for quarterly releases. The first one
+>> hit on time in december 2010 (Thanks Khem).
+>>
+>> The next one would be scheduled for 2011-03. As our plans towards oe-core are
+>> getting into shape I wonder if and how these both are going to conflict.
+>>
+>> Will we go ahead and make the 2011-03 release, maybe the last one before moving
+>> over to oe-core? Personally I don't think these two block each other. Syncing
+>> would be needed, but people will keep working on the OE repo for a bit longer
+>> anyway I would think.
+>>
+>> If we are going to scratch the release what would be the next target for it?
+>> Yocto 1.0 is planned for April 2011. Somehow I doubt we will have oe-core ready
+>> for this in time, including yocto movs to it and we base the rest of OE on top
+>> of it. Am I wrong here and that is the actual plan?
+>>
+>>
+> My opinion is 2010-03 should be the last release on the old source tree.
+> Releases after this should be on the new oe-core layer system. I don't
+> think we should scrap the release as its going to take some time to kick
+> oe-core into shape and finish the poky merge. Then there is work on
+> meta-openembedded and meta-distro to do on top of that.
 
-Acked-by: Tom Rini <tom_rini@mentor.com>
-
-> ---
->   recipes/samba/samba_3.2.15.bb |    3 ++-
->   1 files changed, 2 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/samba/samba_3.2.15.bb b/recipes/samba/samba_3.2.15.bb
-> index ef2707e..214de58 100644
-> --- a/recipes/samba/samba_3.2.15.bb
-> +++ b/recipes/samba/samba_3.2.15.bb
-> @@ -9,7 +9,7 @@ SRC_URI += "file://configure-3.2.8.patch \
->   SRC_URI[md5sum] = "5a3bcc4927c9643b9f42970d0815b18f"
->   SRC_URI[sha256sum] = "84281fd1faeffee8558e49dff865dd382abbf78bc1be00f8cb5aa70aeea67d46"
->
-> -PR = "r3"
-> +PR = "r4"
->
->   EXTRA_OECONF += "\
->   	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
-> @@ -22,6 +22,7 @@ EXTRA_OECONF += "\
->   	samba_cv_HAVE_WRFILE_KEYTAB=yes \
->   	"
->
-> +EXTRA_OECONF_append_libc-uclibc = " --disable-pie"
->   # for arm we always use ARM instruction set
->   # gcc 4.5 ICE's in thumb mode
->   # see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=46934
-
+I think this depends a little on who is going to run the release again. 
+  We probably won't have a perfect release, stop committing, switch.  If 
+we're looking for volunteers again to run the next release, assuming 
+folks will be busy with the migration work too, I'd throw my hat in the 
+ring (and defer to Khem if he wants to do it again, along with all of 
+the fun we'll have in oe-core :))
 
 -- 
 Tom Rini
