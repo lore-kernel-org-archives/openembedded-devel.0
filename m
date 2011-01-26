@@ -1,31 +1,28 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pi20W-0002Ht-WA
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1Pi2Au-0002wx-79
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 10:49:45 +0100
-Received: by iyj18 with SMTP id 18so203847iyj.6
+	Wed, 26 Jan 2011 11:00:28 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id 25E94C017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 01:48:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=Sm33llHHfRghtHSdWerff0PJ05u4Aljnwma4qlU6DjM=;
-	b=nq0DxKSSbP4T3XIYhxwrXGfOteYTNmczFENgqZGXd89EvTVBlsPpSWmfr/BkZPTcsj
-	cyyK4316EeYL2ajMojq9OW3pRSyEZEf6sKWxbpJJw+vVeihRBfTP7hLPNuB7kdIEWPCh
-	8l3VQachrjrjaWa+M2B1Vw8i1G8aFrLkK1obs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=BaB7d/LoVQllWduRR89ggfYGRr2XI+4g8N9HKdc3loD6x8eZN+0jKYtOGZ7rfP8n3X
-	ZBjKpCef214KYdLDWqSqTNCwYwCqKYpaq5i57ZW4zfdw/Jkqs99ZZNVdhGcUSeI6b5rb
-	uJQG0y4/UnC0e3oLseD0HPrxfp9fuTEVefp4w=
+	Wed, 26 Jan 2011 10:40:26 +0100 (CET)
+X-SENDER-IP: [83.227.56.243]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AvcUAL96P01T4zjzPGdsb2JhbAAMiE+NfI4qAQEBATW8ZoVPBIwp
+X-IronPort-AV: E=Sophos;i="4.60,379,1291590000"; d="scan'208";a="167519462"
+Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.56.243])
+	by ipb2.telenor.se with ESMTP; 26 Jan 2011 10:40:26 +0100
+Message-ID: <4D3FEC09.5070306@atmel.com>
+Date: Wed, 26 Jan 2011 10:40:25 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.231.19.201 with SMTP id c9mr7896762ibb.183.1296035334216; Wed,
-	26 Jan 2011 01:48:54 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Wed, 26 Jan 2011 01:48:54 -0800 (PST)
-Date: Wed, 26 Jan 2011 10:48:54 +0100
-Message-ID: <AANLkTinEdQ4zqc4vPZpRAh0LebKQJbrAjOmfWZY0HUYd@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: staging_packager failing, anyone any idea
+To: openembedded-devel@lists.openembedded.org
+Subject: Problem with calibration of AT91SAM9M10EKES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,26 +36,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 09:49:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 26 Jan 2011 10:00:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Kicked off a build on our autobuilder (git head, minimal, 64bit ubuntu
-host) and I get the following error (and similar ones at other
-places).
-At least some of the failing recipes did build for me yesterday at
-home (32 bit opensuse host)
+Hi,
+I have some calibration problem with my private branch
+(ulf/linux-2.6.30-2011-01-??) when building the at91sam9m10ekes board.
 
-NOTE: package pixman-0.21.4-r5.0: task do_package_stage: Started
-ERROR: Logfile of failure stored in: /dev/null
-Log data follows:
-NOTE: package pixman-0.21.4-r5.0: task staging_packager: Failed
-ERROR: Function 'staging_packager' failed (see /dev/null for further
-information)
-ERROR: Task 7024
-(/home/hudson/jobs/FM_TEST/workspace/openembedded/recipes/xorg-lib/pixman_0.21.4.bb,
-do_package_stage) failed with exit code '1'
+I am running /usr/bin/run-calibrate.sh,
+but regardless of how I click, during calibration,
+a tap afterwards always results in detection 3 mm above the tap.
 
-Anyone an idea on what is wrong?
-Frans
+There is a "pointercal" file generated.
+It appears to me that this is ignored...
+I can tap 1 cm above or below during calibration,
+and still the detected tap is 3 mm above the actual tap.
+
+I tried this on two boards, with the same problem!
+
+
+I looked at 89xTs_Calibrate
+There is no /etc/init.d/devmand  - What does this file do?
+
+Anything else to think about?
+I enclose  /etc/X11/xorg.conf and /etc/ts.conf.
+
+----------------------------------------------------
+xorg.conf:
+
+Section "ServerLayout"
+     Identifier "default"
+     InputDevice "atmel-tsadcc" "CorePointer"
+EndSection
+
+Section "InputDevice"
+     Identifier "atmel-tsadcc"
+     Driver "evdev"
+     Option "Device" "/dev/input/touchscreen0"
+EndSection
+
+Section "InputDevice"
+     Driver        "mouse"
+     Identifier    "Mouse[1]"
+     Option        "Buttons"    "10"
+     Option        "Device"    "/dev/input/mice"
+EndSection
+
+Section    "InputDevice"
+     Driver        "kbd"
+     Identifier    "Keyboard[0]"
+     Option        "Protocol" "Standard"
+EndSection
+
+
+----------------------------------------------------
+ts.conf:
+# Uncomment if you wish to use the linux input layer event interface
+module_raw input
+
+# Uncomment if you're using a Sharp Zaurus SL-5500/SL-5000d
+# module_raw collie
+
+# Uncomment if you're using a Sharp Zaurus SL-C700/C750/C760/C860
+# module_raw corgi
+
+# Uncomment if you're using a device with a UCB1200/1300/1400 TS interface
+# module_raw ucb1x00
+
+# Uncomment if you're using an HP iPaq h3600 or similar
+# module_raw h3600
+
+# Uncomment if you're using a Hitachi Webpad
+# module_raw mk712
+
+# Uncomment if you're using an IBM Arctic II
+# module_raw arctic2
+
+module pthres pmin=1
+module variance delta=30
+module dejitter delta=100
+module linear
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
