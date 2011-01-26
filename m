@@ -1,28 +1,31 @@
-Received: from smtprelay-h22.telenor.se ([195.54.99.197])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1PiCzM-0002kF-7W
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PiDIr-0007Ma-98
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 22:33:16 +0100
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-h22.telenor.se (Postfix) with ESMTP id 6C032EA774
+	Wed, 26 Jan 2011 22:53:25 +0100
+Received: by iyj18 with SMTP id 18so871311iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 22:32:25 +0100 (CET)
-X-SENDER-IP: [83.227.56.243]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AmUWAGIhQE1T4zjzPGdsb2JhbAAMiE+Nfo4rAQEBATW9O4VPBIwp
-X-IronPort-AV: E=Sophos;i="4.60,382,1291590000"; d="scan'208";a="167760092"
-Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.244]) ([83.227.56.243])
-	by ipb2.telenor.se with ESMTP; 26 Jan 2011 22:32:25 +0100
-Message-ID: <4D4092E8.8040207@atmel.com>
-Date: Wed, 26 Jan 2011 22:32:24 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Wed, 26 Jan 2011 13:52:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=FXEz/B2v+q4nkstd4l25iu7nPOwxwNb2G6HYdLyDQkI=;
+	b=VqGaVgBWHQLgiDDzMBKELWRIag3gsdgudsQJZtkyMqId3puC2AfnJodJHFm2xHDFoL
+	JBPSgM8pZWNzABjf+UE4Y8npUN4Zjmz8uPsKAsfKdpKASQkvmd79ProIQqjhC8j0A5sH
+	gTg1xKqrZiTm3oyqBtZtei4Jn26wrZ/XQYfic=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Z/Mex1ksR3e1MG4Zd9CKrM2qQuy97e27UWHMAgLRadFXpl7oT98wDcfGhTxYCNLhwu
+	eDnJ72OPpdPRyVU8jWeqctfZFuz4nuEnttfiwgha+z/8S0kS2sOQHz21mZX2Etb//viM
+	+7ZPoKVIAk138BKGempE3EXWCL8yaQ4Iestx4=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: Patching from a file containing a compressed directory (<directory>.tar.bz2)
+Received: by 10.231.207.66 with SMTP id fx2mr8920149ibb.108.1296078756697;
+	Wed, 26 Jan 2011 13:52:36 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Wed, 26 Jan 2011 13:52:36 -0800 (PST)
+Date: Wed, 26 Jan 2011 22:52:36 +0100
+Message-ID: <AANLkTi=L4=feV011DQf0Nm0RUnrWT6EABbymCi=Uq-o9@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: cups QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,37 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 21:33:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Jan 2011 21:53:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-     Trying to change the at91 linux recipes.
-     The "experimental" patches to be added on top of the "maxim" patch
-     can be downloaded from ftp://ftp.at91.com/ and that file
-     is generated from a directory of patches, which should be applied
-     in alphabetical order.
+Hi,
 
-     When the "obvious" SRC_URI  is used:
+I got this while building cups, but I am not a gnome person (actually
+I am only intterested in the server part).
 
-     ftp://ftp.at91.com/<directory>.tar.bz2;apply=yes \
+ERROR: QA Issue with cups:
+/home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/cups-1.2.12-r7.2/packages-split/cups/usr/share/applications/cups.desktop:
+warning: value "Application;System;X-Red-Hat-Base;" for key
+"Categories" in group "Desktop Entry" contains a deprecated value
+"Application"
+ERROR: QA Issue with cups:
+/home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/cups-1.2.12-r7.2/packages-split/cups/usr/share/applications/cups.desktop:
+warning: key "Encoding" in group "Desktop Entry" is deprecated
+ERROR: QA Issue with cups:
+/home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/cups-1.2.12-r7.2/packages-split/cups/usr/share/applications/cups.desktop:
+warning: value "" for key "Path" in group "Desktop Entry" does not
+look like an absolute path
+ERROR: QA Issue with cups:
+/home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/cups-1.2.12-r7.2/packages-split/cups/usr/share/applications/cups.desktop:
+warning: key "TerminalOptions" in group "Desktop Entry" is deprecated
 
-      the files do not get applied in alphabetical order.
+Anyone care to fix this or provide a suggestion on how to fix ?
 
-     It looks to me like they get applied in reverse order,  but I did 
-not check carefully.
-     I tried adding a "series" file, and recompress, but that failed as 
-well.
-
-     Any clue on how to get the patches applied in alphabetical order?
-
-     If the patches are in a subdirectory to the recipe, and applied 
-manually
-     everything is OK, but that seems to be a shame to have to resort to 
-that.
-
--- 
-Best Regards
-Ulf Samuelsson
-
+Thanks, Frans
 
 
