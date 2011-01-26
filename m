@@ -1,45 +1,45 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PiCEV-0001Yj-Rg
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PiCKn-0001kq-OR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 21:44:53 +0100
-Received: by bwz10 with SMTP id 10so1713732bwz.6
+	Wed, 26 Jan 2011 21:51:21 +0100
+Received: by bwz10 with SMTP id 10so1720219bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 12:44:01 -0800 (PST)
+	Wed, 26 Jan 2011 12:50:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	h=domainkey-signature:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=LwZK7Pop2XyNBidcJ/aV+FINdZKL911RefjLETqi52k=;
-	b=VE18Y8OeQAjldVpCXfluzYBeL1Bjcilh3PNquTR/SrGzPJSKaZFxxC/oYt1MZJ7Woc
-	s0sVh/iEKi3X29lw4XbnlXD6LZONzhSM2Bm1/oPPkonuBZrLUI6x8+xO5zGLD5PGJ09m
-	DF2omN7Z5HnsCbk9OfxMDAR6aT/DTeQuLiVvs=
+	:user-agent; bh=hOawmBfJUjKtc/8QkgXy3B8j6NoexCAVIlhACLxcd54=;
+	b=WISikYZF6lAfXpOb1mJ89vV5ZPe6/cjvEDS9mRbh9kPpcB/J8s6DkslMNzTo7t03XO
+	hfW8bbRAEgOdm8sxXxaCZbyAkVSaNjbtdOqPiuUZRPF4DMaQmh1TAKhEDO92B8HYAAYo
+	wTz2dARRu0jd0hewzk9nGhvbL908GCqA9RhTk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=la3uJrRV+VOI7PuscQVzcd2+SPXZZN0YSV0nD7B+Eu17IM95LzY2YLYEa4MCOTNrK0
-	Ju8SVEe8arPxWMfFKm/u68TykYFTFxEHSHTN+Bcr7FJ0D1SVSxhd9v37mt/a0oIQ5dD1
-	iWY0Qxuzc3gTwoCEobsQiqxTz+mjqtd7KUKNM=
-Received: by 10.204.113.9 with SMTP id y9mr799688bkp.201.1296073593478;
-	Wed, 26 Jan 2011 12:26:33 -0800 (PST)
+	b=Te+phV+9H4FeFGUjxbhe3CbtmsLt+tD5IOPntV7Nx7IhCZbyQfZZ/38DeV5zpM5SQz
+	TsQqZROS2cgZHz0x3r2J9zbjtEUwNUVxRCmLUO0qgHMnDA5N6cePJWYQ16cEwtOcRd1w
+	8BsWj21inKdDouQB+pmU/TccIlt6ok5tMujgI=
+Received: by 10.204.63.206 with SMTP id c14mr840922bki.95.1296073774238;
+	Wed, 26 Jan 2011 12:29:34 -0800 (PST)
 Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
 	[85.127.155.31])
-	by mx.google.com with ESMTPS id j11sm7720445bka.0.2011.01.26.12.26.31
+	by mx.google.com with ESMTPS id b6sm7721865bkb.22.2011.01.26.12.29.32
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Jan 2011 12:26:32 -0800 (PST)
+	Wed, 26 Jan 2011 12:29:33 -0800 (PST)
 Received: from cow by s42.loc with local (Exim 4.72)
 	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1PiBwk-0003QI-Bd; Wed, 26 Jan 2011 21:26:30 +0100
-Date: Wed, 26 Jan 2011 21:26:30 +0100
+	id 1PiBzf-0003RB-GO; Wed, 26 Jan 2011 21:29:31 +0100
+Date: Wed, 26 Jan 2011 21:29:31 +0100
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110126202630.GC714@mx.loc>
-References: <1295363929-13246-1-git-send-email-kergoth@gmail.com>
-	<1295363929-13246-4-git-send-email-kergoth@gmail.com>
+Message-ID: <20110126202931.GD714@mx.loc>
+References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
+	<1296065612-9637-8-git-send-email-rep.dot.nop@gmail.com>
+	<4D407550.8040903@mentor.com> <4D407B96.2010801@mentor.com>
 MIME-Version: 1.0
-In-Reply-To: <1295363929-13246-4-git-send-email-kergoth@gmail.com>
+In-Reply-To: <4D407B96.2010801@mentor.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH 4/4] bin/install: implement -D internally
+Subject: Re: [PATCH 7/9] kernel.bbclass: simplify "if image" condition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,63 +53,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 20:44:53 -0000
+X-List-Received-Date: Wed, 26 Jan 2011 20:51:21 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, Jan 18, 2011 at 08:18:49AM -0700, Chris Larson wrote:
->From: Chris Larson <chris_larson@mentor.com>
+On Wed, Jan 26, 2011 at 12:52:54PM -0700, Tom Rini wrote:
+>On 01/26/2011 12:26 PM, Tom Rini wrote:
+>>On 01/26/2011 11:13 AM, Bernhard Reutner-Fischer wrote:
+>>>Anything that expands image to any false value should not set
+>>>INITRAMFS_TASK (instead of just "" or None).
+>>>
+>>>Signed-off-by: Bernhard Reutner-Fischer<rep.dot.nop@gmail.com>
+>>>---
+>>>classes/kernel.bbclass | 2 +-
+>>>1 files changed, 1 insertions(+), 1 deletions(-)
+>>>
+>>>diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+>>>index ea1daf6..d0608e5 100644
+>>>--- a/classes/kernel.bbclass
+>>>+++ b/classes/kernel.bbclass
+>>>@@ -18,7 +18,7 @@ python __anonymous () {
+>>>bb.data.setVar("DEPENDS", depends, d)
+>>>
+>>>image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
+>>>- if image != '' and image is not None:
+>>>+ if image:
+>>>bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
+>>>
+>>>machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
+>>
+>>Er, right below these lines it still does:
+>>INITRAMFS_IMAGE ?= ""
+>>INITRAMFS_TASK ?= ""
+>>
+>>Which would be a problem yes? Or is there some pythonism I'm forgetting?
 >
->Signed-off-by: Chris Larson <chris_larson@mentor.com>
->---
-> bin/install |   13 ++++++++++++-
-> 1 files changed, 12 insertions(+), 1 deletions(-)
+>OK, after some quick IRC conversation, my only concern is the message
+>wasn't clear to me, but the changes are fine.  Could it be expanded
+>to say:
+>Remove some checks because <existing message more or less> means they
+>aren't necessary?
+
+Remove superfluous checks since testing for any False, None or empty object
+yields False in python.
+
+I'll phrase it like this. Thanks!
 >
->diff --git a/bin/install b/bin/install
->index 4ad8172..1c938755 100755
->--- a/bin/install
->+++ b/bin/install
->@@ -1,9 +1,13 @@
-> #!/bin/sh
->+#
->+# Portability notes:
->+# - We allow what SuSv3 defines
-
-erm, SuSv3 is superseded by SUSv4 for quite some time now. And i wasn't
-aware that SUS specified install(1) (please show me where, i don't see
-it).
-
-Without the comment above:
-Acked-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-
->+# - We implement -D internally
-> 
-> source $(dirname $0)/wrapper.sh
-> 
-> saved=""
->-while getopts dbCcMpSsvB:f:g:m:o: opt; do
->+while getopts dbCcMpSsvB:f:g:m:o:D opt; do
->     case "$opt" in
->         s)
->             # Ignore strip argument
->@@ -12,6 +16,9 @@ while getopts dbCcMpSsvB:f:g:m:o: opt; do
->             save "-$opt"
->             save "$OPTARG"
->             ;;
->+        D)
->+            createleading="1"
->+            ;;
->         \?)
->             exit 1
->             ;;
->@@ -25,4 +32,8 @@ for arg; do
->     save "$arg"
-> done
-> 
->+if [ $# == 2 -a -n "$createleading" ]; then
->+    install -d $(dirname $2)
->+fi
->+
-> exec_real
+>Acked-by: Tom Rini <tom_rini@mentor.com>
+>
 
 
