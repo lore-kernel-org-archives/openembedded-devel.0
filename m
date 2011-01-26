@@ -1,38 +1,41 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PiA7B-0006RY-8K
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PiA7C-0006Rf-4W
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 19:29:09 +0100
-Received: by bwz10 with SMTP id 10so1581528bwz.6
+	Wed, 26 Jan 2011 19:29:10 +0100
+Received: by ewy28 with SMTP id 28so333484ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 10:28:23 -0800 (PST)
+	Wed, 26 Jan 2011 10:28:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=fJd5UPjGYHq0/6vq/JQIq06VhLdtF/Hs72LOtzrCiKI=;
-	b=SHaidZVudgYPApgd/DWV/F95Sj+LQvHzJtik7trdE6gNAb076gD1WUIto64a3j9EbH
-	mGKG6CLEssxB9eBx2a/QFtAxLGw9xdwyKJYaJ9vVcD821wLJ+Xlxj0RK7UYuWcG4Tzcg
-	m7K7zp3WJ2cpHISCZYOGQ/v07hNWbXMfyfSeI=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=Fu0ye6IiB81XQXpO9HFFQufNV7wGUvt6T+wF+H3Vt7U=;
+	b=HtyoFckaXeWHdt9NXa+dr6Qm6UAdG6MRG8V1pNa/BMr17H7lDuZ7Q1tDKvlWrBkIFZ
+	EZi1th2f+irccqD6GSrsrP7yDW7iObXdSTcQ52+MUcnFwEVoFgWIFp4qJzTll3oPxBQZ
+	29Ff5cGNV0oi1UCUXhRNCZ9kVdfNgRxP7U7so=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=UXTxa10ewHWSZwCa6n9UNkCI+sMu7zryxN768jExLJyzOk+bIHiNI0CMCPO5q+ovAW
-	VGg9MOjF4m1NjmogSEB7w4/EC8jLj7A8lGlJkh16DgCLO6OZIjO+b2ylox9IBHWiYVtq
-	tFnZ1JY/VVXCAiifZsPEq+85+sxdk7nMblbkU=
-Received: by 10.204.71.20 with SMTP id f20mr709996bkj.139.1296065618452;
-	Wed, 26 Jan 2011 10:13:38 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=BMLzjNIAt5XlpklEz9d5ep9PhlGRjFtgWsE+Bybg8BO4Do15esI0iqfti5qMCCZwWA
+	UX1fjZ/X6zTzODOZme6C/33TmNPzEYwrNE0gRSq03N1JfXkAC//egS5dgWUC6f8Q6Urg
+	QdbwuWhIa6Rb+t7rc48gr0ptxBT1PntYv32iY=
+Received: by 10.204.52.136 with SMTP id i8mr712608bkg.74.1296065619927;
+	Wed, 26 Jan 2011 10:13:39 -0800 (PST)
 Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
 	[85.127.155.31])
-	by mx.google.com with ESMTPS id f20sm7647939bkf.4.2011.01.26.10.13.35
+	by mx.google.com with ESMTPS id v25sm7651780bkt.6.2011.01.26.10.13.35
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
 	Wed, 26 Jan 2011 10:13:36 -0800 (PST)
 Received: from cow by s42.loc with local (Exim 4.72)
 	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1Pi9s5-0002Vw-N5; Wed, 26 Jan 2011 19:13:33 +0100
+	id 1Pi9s5-0002W9-QJ; Wed, 26 Jan 2011 19:13:33 +0100
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Jan 2011 19:13:23 +0100
-Message-Id: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
+Date: Wed, 26 Jan 2011 19:13:28 +0100
+Message-Id: <1296065612-9637-6-git-send-email-rep.dot.nop@gmail.com>
 X-Mailer: git-send-email 1.7.2.3
-Subject: [PATCH 0/9] assorted independent pathlets
+In-Reply-To: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
+References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
+Subject: [PATCH 5/9] ltp: bump version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,57 +49,725 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 18:29:09 -0000
+X-List-Received-Date: Wed, 26 Jan 2011 18:29:10 -0000
 
-Hi,
-
-Some independent patchlets. Ok for master?
-
-Bernhard Reutner-Fischer (9):
-  fakeroot: add 1.14.5, mv 1.12.4 to obsolete
-  packaged-staging.bbclass: improve documentation
-  IMAGE_CMD_ext4.xz: rm uncompressed image
-  micro: get preferred binutils from sane-toolchain
-  ltp: bump version
-  uclibc: handle some more {machine,distro}_features
-  kernel.bbclass: simplify "if image" condition
-  image.bbclass: only insert feed uris if ONLINE_PACKAGE_MANAGEMENT
-  util-linux: honour largefile distro feature
-
- classes/image.bbclass                              |    3 +-
- classes/kernel.bbclass                             |    2 +-
- classes/packaged-staging.bbclass                   |   12 +-
- conf/bitbake.conf                                  |    2 +-
- conf/distro/micro.conf                             |    1 -
- recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch  |   15 +
- .../fakeroot-1.14.5/quiet-getopt-check.patch       |   12 +
- recipes/fakeroot/fakeroot-native_1.12.4.bb         |   21 --
- recipes/fakeroot/fakeroot.inc                      |   16 +
- recipes/fakeroot/fakeroot_1.12.4.bb                |   26 --
- recipes/fakeroot/fakeroot_1.14.5.bb                |   10 +
- recipes/ltp/ltp-20100831/runalltests.patch         |  302 --------------------
- recipes/ltp/ltp-20101031/runalltests.patch         |  302 ++++++++++++++++++++
- recipes/ltp/ltp_20100831.bb                        |   39 ---
- recipes/ltp/ltp_20101031.bb                        |   38 +++
- .../obsolete/fakeroot/fakeroot-native_1.12.4.bb    |   21 ++
- recipes/obsolete/fakeroot/fakeroot_1.12.4.bb       |   26 ++
- recipes/uclibc/uclibc-config.inc                   |    5 +-
- recipes/util-linux/files/MCONFIG                   |    1 -
- recipes/util-linux/util-linux.inc                  |    4 +-
- 20 files changed, 461 insertions(+), 397 deletions(-)
- create mode 100644 recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch
- create mode 100644 recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch
- delete mode 100644 recipes/fakeroot/fakeroot-native_1.12.4.bb
- create mode 100644 recipes/fakeroot/fakeroot.inc
- delete mode 100644 recipes/fakeroot/fakeroot_1.12.4.bb
- create mode 100644 recipes/fakeroot/fakeroot_1.14.5.bb
+Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+---
+ recipes/ltp/ltp-20100831/runalltests.patch |  302 ----------------------------
+ recipes/ltp/ltp-20101031/runalltests.patch |  302 ++++++++++++++++++++++++++++
+ recipes/ltp/ltp_20100831.bb                |   39 ----
+ recipes/ltp/ltp_20101031.bb                |   38 ++++
+ 4 files changed, 340 insertions(+), 341 deletions(-)
  delete mode 100644 recipes/ltp/ltp-20100831/runalltests.patch
  create mode 100644 recipes/ltp/ltp-20101031/runalltests.patch
  delete mode 100644 recipes/ltp/ltp_20100831.bb
  create mode 100644 recipes/ltp/ltp_20101031.bb
- create mode 100644 recipes/obsolete/fakeroot/fakeroot-native_1.12.4.bb
- create mode 100644 recipes/obsolete/fakeroot/fakeroot_1.12.4.bb
 
+diff --git a/recipes/ltp/ltp-20100831/runalltests.patch b/recipes/ltp/ltp-20100831/runalltests.patch
+deleted file mode 100644
+index c567769..0000000
+--- a/recipes/ltp/ltp-20100831/runalltests.patch
++++ /dev/null
+@@ -1,302 +0,0 @@
+---- ltp-full-20100831.orig/runalltests.sh	2010-09-14 16:04:32.000000000 +0500
+-+++ ltp-full-20100831/runalltests.sh	2010-12-13 11:18:11.857382107 +0500
+-@@ -68,6 +68,12 @@ export RUN_FILECAPS=0
+- export LIBCAPS_INSTALLED=0
+- export LIBATTR_INSTALLED=0
+- 
+-+## Set this to 1 if tmp_tools tests are required to be tested
+-+export RUN_TPM_TOOLS=0
+-+
+-+## Set this to 1 if tcore tests are required to be tested
+-+export RUN_TCORE=0
+-+
+- ## Set this to 1 if you wish to execute the stress_cd tests
+- ## Make sure you have FLOPPY inserted, be warned that you
+- ## will loose all data on it after the tests,
+-@@ -202,6 +208,194 @@ export RUN_SMACK_SECURITY_TESTS=0
+- ##Set this to 1 if you wish to run the Basic PERFORMANCE COUNTER tests
+- export RUN_PERFORMANCE_COUNTERS_TESTS=0
+- 
+-+### Additional tests That are not included in runalltests.sh
+-+export RUN_LTP_AIODIO_PART1=0
+-+export RUN_LTP_AIODIO_PART2=0
+-+export RUN_LTP_AIODIO_PART3=0
+-+export RUN_LTP_AIODIO_PART4=0
+-+
+-+if [ $RUN_LTP_AIODIO_PART1 -eq 1 ]                        
+-+then                                                               
+-+        AIODIO_PART1_STR="ltp-aiodio.part1"
+-+fi                                                                 
+-+
+-+if [ $RUN_LTP_AIODIO_PART2 -eq 1 ]                        
+-+then                                                               
+-+        AIODIO_PART2_STR="ltp-aiodio.part2"
+-+fi                                                                 
+-+
+-+if [ $RUN_LTP_AIODIO_PART3 -eq 1 ]                        
+-+then                                                               
+-+        AIODIO_PART3_STR="ltp-aiodio.part3"
+-+fi                                                                 
+-+
+-+if [ $RUN_LTP_AIODIO_PART4 -eq 1 ]                        
+-+then                                                               
+-+        AIODIO_PART4_STR="ltp-aiodio.part4"
+-+fi                                                                 
+-+
+-+## This is default set of tests chose which tests you want to perform by default
+-+## Set this to 1 if you wish to run the specific tests
+-+
+-+export RUN_DEFAULT_MATH=0
+-+export RUN_DEFAULT_NPTL=0
+-+export RUN_DEFAULT_PTY=0
+-+export RUN_DEFAULT_IO=0
+-+export RUN_DEFAULT_TIMERS=0
+-+export RUN_DEFAULT_MM=0
+-+export RUN_DEFAULT_IPC=0
+-+export RUN_DEFAULT_SCHED=0
+-+export RUN_DEFAULT_CONTAINERS=0
+-+export RUN_DEFAULT_CONNECTORS=0
+-+export RUN_DEFAULT_FILECAPS=0
+-+export RUN_DEFAULT_CAP_BOUNDS=0
+-+export RUN_DEFAULT_FSX=0
+-+export RUN_DEFAULT_FCNTL_LOCKTESTS=0
+-+export RUN_DEFAULT_CONTROLLERS=0
+-+export RUN_DEFAULT_ADMIN_TOOLS=0
+-+export RUN_DEFAULT_HYPERTHREADING=0
+-+export RUN_DEFAULT_DIO=0
+-+export RUN_DEFAULT_SYSCALLS=0
+-+export RUN_DEFAULT_FS_PERMS_SIMPLE=0
+-+export RUN_DEFAULT_POWER_MANAGEMENT_TESTS=0
+-+export RUN_DEFAULT_NUMA=0
+-+export RUN_DEFAULT_HUGETLB=0
+-+export RUN_DEFAULT_COMMANDS=0
+-+export RUN_DEFAULT_FS=0
+-+export RUN_DEFAULT_FS_BIND=0
+-+
+-+if [ $RUN_DEFAULT_SYSCALLS -eq 1 ]                                 
+-+then                                                               
+-+        SYSCALLS_STR="syscalls"                                    
+-+fi                                                                 
+-+
+-+if [ $RUN_DEFAULT_FS -eq 1 ]
+-+then                        
+-+        FS_STR="fs"         
+-+fi                          
+-+
+-+if [ $RUN_DEFAULT_FS_PERMS_SIMPLE -eq 1 ]
+-+then                                     
+-+        FS_PERMS_SIMPLE_STR="fs_perms_simple"
+-+fi                                           
+-+
+-+if [ $RUN_DEFAULT_FSX -eq 1 ]
+-+then                         
+-+        FSX_STR="fsx"        
+-+fi                           
+-+
+-+if [ $RUN_DEFAULT_DIO -eq 1 ]
+-+then                         
+-+        DIO_STR="dio"        
+-+fi                           
+-+
+-+if [ $RUN_DEFAULT_IO -eq 1 ]
+-+then                        
+-+        IO_STR="io"         
+-+fi                          
+-+
+-+if [ $RUN_DEFAULT_MM -eq 1 ]
+-+then                        
+-+        MM_STR="mm"         
+-+fi                          
+-+
+-+if [ $RUN_DEFAULT_IPC -eq 1 ]
+-+then                         
+-+        IPC_STR="ipc"        
+-+fi                           
+-+
+-+if [ $RUN_DEFAULT_SCHED -eq 1 ]
+-+then                           
+-+        SCHED_STR="sched"      
+-+fi                             
+-+
+-+if [ $RUN_DEFAULT_MATH -eq 1 ]
+-+then                          
+-+        MATH_STR="math"       
+-+fi                            
+-+
+-+if [ $RUN_DEFAULT_NPTL -eq 1 ]
+-+then                          
+-+        NPTL_STR="nptl"       
+-+fi                            
+-+
+-+if [ $RUN_DEFAULT_PTY -eq 1 ]
+-+then                         
+-+        PTY_STR="pty"        
+-+fi                           
+-+
+-+if [ $RUN_DEFAULT_CONTAINERS -eq 1 ]
+-+then                                
+-+        CONTAINERS_STR="containers" 
+-+fi                                  
+-+
+-+if [ $RUN_DEFAULT_FS_BIND -eq 1 ]
+-+then                             
+-+        FS_BIND_STR="fs_bind"    
+-+fi                               
+-+
+-+if [ $RUN_DEFAULT_CONTROLLERS -eq 1 ]
+-+then                                 
+-+        CONTROLLERS_STR="controllers"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_FILECAPS -eq 1 ]
+-+then
+-+        FILECAPS_STR="filecaps"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_CAP_BOUNDS -eq 1 ]
+-+then
+-+        CAP_BOUNDS_STR="cap_bounds"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_FCNTL_LOCKTESTS -eq 1 ]
+-+then
+-+        FCNTL_LOCKTESTS_STR="fcntl-locktests"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_CONNECTORS -eq 1 ]
+-+then
+-+        CONNECTORS_STR="connectors"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_ADMIN_TOOLS -eq 1 ]
+-+then
+-+        ADMIN_TOOLS_STR="admin_tools"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_TIMERS -eq 1 ]
+-+then
+-+        TIMERS_STR="timers"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_POWER_MANAGEMENT_TESTS -eq 1 ]
+-+then
+-+        POWER_MANAGEMENT_TESTS_STR="power_management_tests"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_NUMA -eq 1 ]
+-+then
+-+        NUMA_STR="numa"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_HUGETLB -eq 1 ]
+-+then
+-+        HUGETLB_STR="hugetlb"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_COMMANDS -eq 1 ]
+-+then
+-+        COMMANDS_STR="commands"
+-+fi
+-+
+-+if [ $RUN_DEFAULT_HYPERTHREADING -eq 1 ]
+-+then
+-+        HYPERTHREADING_STR="hyperthreading"
+-+fi
+-+
+-+
+-+
+- export LTP_VERSION=`"${RUNLTP}" -e`
+- export TEST_START_TIME=`date +"%Y_%b_%d-%Hh_%Mm_%Ss"`
+- export HARDWARE_TYPE=$(uname -i)
+-@@ -215,13 +409,68 @@ if ! cd "${LTPROOT}"; then
+- 	exit $rc
+- fi
+- 
+-+# ## The First one i plan to run is the default LTP run ##
+-+# ## START => Test Series 1                             ##
+-+# echo "Running Default LTP..."
+-+# "${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+-+# printf "Completed running Default LTP\n\n\n"
+-+# ## END => Test Series 1                               ##
+-+
+- ## The First one i plan to run is the default LTP run ##
+- ## START => Test Series 1                             ##
+- echo "Running Default LTP..."
+--"${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+-+        RUN_DEFAULT_SET="$SYSCALLS_STR \
+-+	$FS_STR \
+-+	$FS_PERMS_SIMPLE_STR \
+-+	$FSX_STR \
+-+	$DIO_STR \
+-+	$IO_STR \
+-+	$MM_STR \
+-+	$IPC_STR \
+-+	$SCHED_STR \
+-+	$MATH_STR \
+-+	$NPTL_STR \
+-+	$PTY_STR \
+-+	$CONTAINERS_STR \
+-+	$FS_BIND_STR \
+-+	$CONTROLLERS_STR \
+-+	$FILECAPS_STR \
+-+	$CAP_BOUNDS_STR \
+-+	$FCNTL_LOCKTESTS_STR \
+-+	$CONNECTORS_STR \
+-+	$ADMIN_TOOLS_STR \
+-+	$TIMERS_STR \
+-+	$POWER_MANAGEMENT_TESTS_STR \
+-+	$NUMA_STR \
+-+	$HUGETLB_STR \
+-+	$COMMANDS_STR \
+-+	$HYPERTHREADING_STR \
+-+	$AIODIO_PART1_STR \
+-+	$AIODIO_PART2_STR \
+-+	$AIODIO_PART3_STR \
+-+	$AIODIO_PART4_STR"
+-+
+-+	rm -f runtest/defaultset
+-+	for TEST in $RUN_DEFAULT_SET
+-+	do
+-+	    UPPER=`echo $TEST | tr "[:lower:]" "[:upper:]"`
+-+# # 	    var="_STR"
+-+# # 	    echo "	\$$UPPER$var \\"
+-+# # 	    echo "Running Test $UPPER"
+-+	    echo "Running Test $TEST"
+-+	    cat  runtest/$TEST >> runtest/defaultset
+-+# # 			echo "if [ \$RUN_DEFAULT_$UPPER -eq 1 ]"
+-+# # 			echo "then"
+-+# # 			echo "	$UPPER$var=\"$TEST\""
+-+# # 			echo "fi"
+-+# # 			echo ""
+-+# #			echo "export RUN_DEFAULT_$UPPER=1"
+-+	done
+-+	"${RUNLTP}" -f defaultset -g defaultset.html
+- printf "Completed running Default LTP\n\n\n"
+- ## END => Test Series 1                               ##
+- 
+-+
+- ## The next one i plan to run is ballista             ##
+- ## START => Test Series 2                             ##
+- if [ $RUN_BALLISTA -eq 1 ]
+-@@ -353,15 +602,20 @@ then
+- fi
+- ## END => Test Series 6                               ##
+- 
+--
+- ## The next one i plan to run is tpm_tools            ##
+- ## START => Test Series 7                             ##
+-+if [ $RUN_TPM_TOOLS -eq 1 ]
+-+then
+- "${RUNLTP}" -f tpm_tools
+-+fi
+- ## END => Test Series 7                               ##
+- 
+- ## The next one i plan to run is tcore_patch_test_suites
+- ## START => Test Series 8                             ##
+-+if [ $RUN_TCORE -eq 1 ]
+-+then
+- "${RUNLTP}" -f tcore
+-+fi
+- ## END => Test Series 8                               ##
+- 
+- 
+diff --git a/recipes/ltp/ltp-20101031/runalltests.patch b/recipes/ltp/ltp-20101031/runalltests.patch
+new file mode 100644
+index 0000000..c567769
+--- /dev/null
++++ b/recipes/ltp/ltp-20101031/runalltests.patch
+@@ -0,0 +1,302 @@
++--- ltp-full-20100831.orig/runalltests.sh	2010-09-14 16:04:32.000000000 +0500
+++++ ltp-full-20100831/runalltests.sh	2010-12-13 11:18:11.857382107 +0500
++@@ -68,6 +68,12 @@ export RUN_FILECAPS=0
++ export LIBCAPS_INSTALLED=0
++ export LIBATTR_INSTALLED=0
++ 
+++## Set this to 1 if tmp_tools tests are required to be tested
+++export RUN_TPM_TOOLS=0
+++
+++## Set this to 1 if tcore tests are required to be tested
+++export RUN_TCORE=0
+++
++ ## Set this to 1 if you wish to execute the stress_cd tests
++ ## Make sure you have FLOPPY inserted, be warned that you
++ ## will loose all data on it after the tests,
++@@ -202,6 +208,194 @@ export RUN_SMACK_SECURITY_TESTS=0
++ ##Set this to 1 if you wish to run the Basic PERFORMANCE COUNTER tests
++ export RUN_PERFORMANCE_COUNTERS_TESTS=0
++ 
+++### Additional tests That are not included in runalltests.sh
+++export RUN_LTP_AIODIO_PART1=0
+++export RUN_LTP_AIODIO_PART2=0
+++export RUN_LTP_AIODIO_PART3=0
+++export RUN_LTP_AIODIO_PART4=0
+++
+++if [ $RUN_LTP_AIODIO_PART1 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART1_STR="ltp-aiodio.part1"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART2 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART2_STR="ltp-aiodio.part2"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART3 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART3_STR="ltp-aiodio.part3"
+++fi                                                                 
+++
+++if [ $RUN_LTP_AIODIO_PART4 -eq 1 ]                        
+++then                                                               
+++        AIODIO_PART4_STR="ltp-aiodio.part4"
+++fi                                                                 
+++
+++## This is default set of tests chose which tests you want to perform by default
+++## Set this to 1 if you wish to run the specific tests
+++
+++export RUN_DEFAULT_MATH=0
+++export RUN_DEFAULT_NPTL=0
+++export RUN_DEFAULT_PTY=0
+++export RUN_DEFAULT_IO=0
+++export RUN_DEFAULT_TIMERS=0
+++export RUN_DEFAULT_MM=0
+++export RUN_DEFAULT_IPC=0
+++export RUN_DEFAULT_SCHED=0
+++export RUN_DEFAULT_CONTAINERS=0
+++export RUN_DEFAULT_CONNECTORS=0
+++export RUN_DEFAULT_FILECAPS=0
+++export RUN_DEFAULT_CAP_BOUNDS=0
+++export RUN_DEFAULT_FSX=0
+++export RUN_DEFAULT_FCNTL_LOCKTESTS=0
+++export RUN_DEFAULT_CONTROLLERS=0
+++export RUN_DEFAULT_ADMIN_TOOLS=0
+++export RUN_DEFAULT_HYPERTHREADING=0
+++export RUN_DEFAULT_DIO=0
+++export RUN_DEFAULT_SYSCALLS=0
+++export RUN_DEFAULT_FS_PERMS_SIMPLE=0
+++export RUN_DEFAULT_POWER_MANAGEMENT_TESTS=0
+++export RUN_DEFAULT_NUMA=0
+++export RUN_DEFAULT_HUGETLB=0
+++export RUN_DEFAULT_COMMANDS=0
+++export RUN_DEFAULT_FS=0
+++export RUN_DEFAULT_FS_BIND=0
+++
+++if [ $RUN_DEFAULT_SYSCALLS -eq 1 ]                                 
+++then                                                               
+++        SYSCALLS_STR="syscalls"                                    
+++fi                                                                 
+++
+++if [ $RUN_DEFAULT_FS -eq 1 ]
+++then                        
+++        FS_STR="fs"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_FS_PERMS_SIMPLE -eq 1 ]
+++then                                     
+++        FS_PERMS_SIMPLE_STR="fs_perms_simple"
+++fi                                           
+++
+++if [ $RUN_DEFAULT_FSX -eq 1 ]
+++then                         
+++        FSX_STR="fsx"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_DIO -eq 1 ]
+++then                         
+++        DIO_STR="dio"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_IO -eq 1 ]
+++then                        
+++        IO_STR="io"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_MM -eq 1 ]
+++then                        
+++        MM_STR="mm"         
+++fi                          
+++
+++if [ $RUN_DEFAULT_IPC -eq 1 ]
+++then                         
+++        IPC_STR="ipc"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_SCHED -eq 1 ]
+++then                           
+++        SCHED_STR="sched"      
+++fi                             
+++
+++if [ $RUN_DEFAULT_MATH -eq 1 ]
+++then                          
+++        MATH_STR="math"       
+++fi                            
+++
+++if [ $RUN_DEFAULT_NPTL -eq 1 ]
+++then                          
+++        NPTL_STR="nptl"       
+++fi                            
+++
+++if [ $RUN_DEFAULT_PTY -eq 1 ]
+++then                         
+++        PTY_STR="pty"        
+++fi                           
+++
+++if [ $RUN_DEFAULT_CONTAINERS -eq 1 ]
+++then                                
+++        CONTAINERS_STR="containers" 
+++fi                                  
+++
+++if [ $RUN_DEFAULT_FS_BIND -eq 1 ]
+++then                             
+++        FS_BIND_STR="fs_bind"    
+++fi                               
+++
+++if [ $RUN_DEFAULT_CONTROLLERS -eq 1 ]
+++then                                 
+++        CONTROLLERS_STR="controllers"
+++fi
+++
+++if [ $RUN_DEFAULT_FILECAPS -eq 1 ]
+++then
+++        FILECAPS_STR="filecaps"
+++fi
+++
+++if [ $RUN_DEFAULT_CAP_BOUNDS -eq 1 ]
+++then
+++        CAP_BOUNDS_STR="cap_bounds"
+++fi
+++
+++if [ $RUN_DEFAULT_FCNTL_LOCKTESTS -eq 1 ]
+++then
+++        FCNTL_LOCKTESTS_STR="fcntl-locktests"
+++fi
+++
+++if [ $RUN_DEFAULT_CONNECTORS -eq 1 ]
+++then
+++        CONNECTORS_STR="connectors"
+++fi
+++
+++if [ $RUN_DEFAULT_ADMIN_TOOLS -eq 1 ]
+++then
+++        ADMIN_TOOLS_STR="admin_tools"
+++fi
+++
+++if [ $RUN_DEFAULT_TIMERS -eq 1 ]
+++then
+++        TIMERS_STR="timers"
+++fi
+++
+++if [ $RUN_DEFAULT_POWER_MANAGEMENT_TESTS -eq 1 ]
+++then
+++        POWER_MANAGEMENT_TESTS_STR="power_management_tests"
+++fi
+++
+++if [ $RUN_DEFAULT_NUMA -eq 1 ]
+++then
+++        NUMA_STR="numa"
+++fi
+++
+++if [ $RUN_DEFAULT_HUGETLB -eq 1 ]
+++then
+++        HUGETLB_STR="hugetlb"
+++fi
+++
+++if [ $RUN_DEFAULT_COMMANDS -eq 1 ]
+++then
+++        COMMANDS_STR="commands"
+++fi
+++
+++if [ $RUN_DEFAULT_HYPERTHREADING -eq 1 ]
+++then
+++        HYPERTHREADING_STR="hyperthreading"
+++fi
+++
+++
+++
++ export LTP_VERSION=`"${RUNLTP}" -e`
++ export TEST_START_TIME=`date +"%Y_%b_%d-%Hh_%Mm_%Ss"`
++ export HARDWARE_TYPE=$(uname -i)
++@@ -215,13 +409,68 @@ if ! cd "${LTPROOT}"; then
++ 	exit $rc
++ fi
++ 
+++# ## The First one i plan to run is the default LTP run ##
+++# ## START => Test Series 1                             ##
+++# echo "Running Default LTP..."
+++# "${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+++# printf "Completed running Default LTP\n\n\n"
+++# ## END => Test Series 1                               ##
+++
++ ## The First one i plan to run is the default LTP run ##
++ ## START => Test Series 1                             ##
++ echo "Running Default LTP..."
++-"${RUNLTP}" -g $HTML_OUTPUT_FILE_NAME
+++        RUN_DEFAULT_SET="$SYSCALLS_STR \
+++	$FS_STR \
+++	$FS_PERMS_SIMPLE_STR \
+++	$FSX_STR \
+++	$DIO_STR \
+++	$IO_STR \
+++	$MM_STR \
+++	$IPC_STR \
+++	$SCHED_STR \
+++	$MATH_STR \
+++	$NPTL_STR \
+++	$PTY_STR \
+++	$CONTAINERS_STR \
+++	$FS_BIND_STR \
+++	$CONTROLLERS_STR \
+++	$FILECAPS_STR \
+++	$CAP_BOUNDS_STR \
+++	$FCNTL_LOCKTESTS_STR \
+++	$CONNECTORS_STR \
+++	$ADMIN_TOOLS_STR \
+++	$TIMERS_STR \
+++	$POWER_MANAGEMENT_TESTS_STR \
+++	$NUMA_STR \
+++	$HUGETLB_STR \
+++	$COMMANDS_STR \
+++	$HYPERTHREADING_STR \
+++	$AIODIO_PART1_STR \
+++	$AIODIO_PART2_STR \
+++	$AIODIO_PART3_STR \
+++	$AIODIO_PART4_STR"
+++
+++	rm -f runtest/defaultset
+++	for TEST in $RUN_DEFAULT_SET
+++	do
+++	    UPPER=`echo $TEST | tr "[:lower:]" "[:upper:]"`
+++# # 	    var="_STR"
+++# # 	    echo "	\$$UPPER$var \\"
+++# # 	    echo "Running Test $UPPER"
+++	    echo "Running Test $TEST"
+++	    cat  runtest/$TEST >> runtest/defaultset
+++# # 			echo "if [ \$RUN_DEFAULT_$UPPER -eq 1 ]"
+++# # 			echo "then"
+++# # 			echo "	$UPPER$var=\"$TEST\""
+++# # 			echo "fi"
+++# # 			echo ""
+++# #			echo "export RUN_DEFAULT_$UPPER=1"
+++	done
+++	"${RUNLTP}" -f defaultset -g defaultset.html
++ printf "Completed running Default LTP\n\n\n"
++ ## END => Test Series 1                               ##
++ 
+++
++ ## The next one i plan to run is ballista             ##
++ ## START => Test Series 2                             ##
++ if [ $RUN_BALLISTA -eq 1 ]
++@@ -353,15 +602,20 @@ then
++ fi
++ ## END => Test Series 6                               ##
++ 
++-
++ ## The next one i plan to run is tpm_tools            ##
++ ## START => Test Series 7                             ##
+++if [ $RUN_TPM_TOOLS -eq 1 ]
+++then
++ "${RUNLTP}" -f tpm_tools
+++fi
++ ## END => Test Series 7                               ##
++ 
++ ## The next one i plan to run is tcore_patch_test_suites
++ ## START => Test Series 8                             ##
+++if [ $RUN_TCORE -eq 1 ]
+++then
++ "${RUNLTP}" -f tcore
+++fi
++ ## END => Test Series 8                               ##
++ 
++ 
+diff --git a/recipes/ltp/ltp_20100831.bb b/recipes/ltp/ltp_20100831.bb
+deleted file mode 100644
+index ca6a4e3..0000000
+--- a/recipes/ltp/ltp_20100831.bb
++++ /dev/null
+@@ -1,39 +0,0 @@
+-DESCRIPTION = "Linux Test Project"
+-HOMEPAGE = "http://ltp.sourceforge.net"
+-LICENSE = "GPL"
+-SECTION = "console/utils"
+-DEPENDS = "zip-native"
+-PR = "r0"
+-
+-inherit autotools
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.tgz \
+-	   file://runalltests.patch \
+-	  "
+-
+-S = "${WORKDIR}/ltp-full-${PV}"
+-
+-EXTRA_OEMAKE_append = " CROSS_COMPILE=${HOST_PREFIX} SKIP_IDCHECK=1"
+-
+-FILES_${PN}-dbg += "/usr/.debug"
+-FILES_${PN}-dbg += "/usr/bin/.debug"
+-FILES_${PN}-dbg += "/usr/runtest/.debug"
+-FILES_${PN}-dbg += "/usr/testcases/bin/.debug"
+-FILES_${PN}-dbg += "/usr/testcases/bin/*/bin/.debug"
+-FILES_${PN}-dbg += "/usr/testcases/bin/*/test/.debug"
+-
+-FILES_${PN} += "/usr/* /usr/bin/* /usr/runtest/* /usr/testcases/bin/* /usr/testcases/bin/*/bin/* /usr/runtest/* /usr/testscripts/*"
+-
+-TARGET_CC_ARCH += "${LDFLAGS}"
+-
+-do_compile(){
+-        oe_runmake CROSS_COMPILE=${HOST_PREFIX}
+-}
+-
+-do_install(){
+-        oe_runmake DESTDIR=${D} install
+-}
+-
+-SRC_URI[md5sum] = "fc5a36a7dcc8f7d5fa7b34dd4f43f25b"
+-SRC_URI[sha256sum] = "c0ce2599ea0daf94b6259ba8fdbdd4cf42c7a3424314974df16fcb4c4599aed2"
+-
+diff --git a/recipes/ltp/ltp_20101031.bb b/recipes/ltp/ltp_20101031.bb
+new file mode 100644
+index 0000000..5a8fdb1
+--- /dev/null
++++ b/recipes/ltp/ltp_20101031.bb
+@@ -0,0 +1,38 @@
++DESCRIPTION = "Linux Test Project"
++HOMEPAGE = "http://ltp.sourceforge.net"
++LICENSE = "GPL"
++SECTION = "console/utils"
++DEPENDS = "zip-native"
++PR = "r0"
++
++inherit autotools
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/ltp/ltp-full-${PV}.bz2 \
++	  file://runalltests.patch"
++
++S = "${WORKDIR}/ltp-full-${PV}"
++
++EXTRA_OEMAKE_append = " CROSS_COMPILE=${HOST_PREFIX} SKIP_IDCHECK=1"
++
++FILES_${PN}-dbg += "/usr/.debug"
++FILES_${PN}-dbg += "/usr/bin/.debug"
++FILES_${PN}-dbg += "/usr/runtest/.debug"
++FILES_${PN}-dbg += "/usr/testcases/bin/.debug"
++FILES_${PN}-dbg += "/usr/testcases/bin/*/bin/.debug"
++FILES_${PN}-dbg += "/usr/testcases/bin/*/test/.debug"
++
++FILES_${PN} += "/usr/* /usr/bin/* /usr/runtest/* /usr/testcases/bin/* /usr/testcases/bin/*/bin/* /usr/runtest/* /usr/testscripts/*"
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++do_compile(){
++        oe_runmake CROSS_COMPILE=${HOST_PREFIX}
++}
++
++do_install(){
++        oe_runmake DESTDIR=${D} install
++}
++
++SRC_URI[md5sum] = "553e13e8f2b0cd75fa93f832a8f734a7"
++SRC_URI[sha256sum] = "df8c7607f8887aafc51510c04966ecb91e52135e5a86298f73fd30c148960ce8"
++
 -- 
 1.7.2.3
 
