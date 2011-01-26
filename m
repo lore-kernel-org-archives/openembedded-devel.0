@@ -1,41 +1,38 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1PiA6P-0006LL-2D
+	(envelope-from <rep.dot.nop@gmail.com>) id 1PiA7B-0006RY-8K
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 19:28:21 +0100
-Received: by mail-bw0-f47.google.com with SMTP id 10so1580396bwz.6
+	Wed, 26 Jan 2011 19:29:09 +0100
+Received: by bwz10 with SMTP id 10so1581528bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 10:27:35 -0800 (PST)
+	Wed, 26 Jan 2011 10:28:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=GXo7ckB9aj4I/IhZo4dls8owrt6uSIStUwI10qJt0nk=;
-	b=BFbKfKumkia6YhH+q1XqEX+DlL+2keeU6VQu3OzcnIId6n7bcGG5x8DCzD9JRQEpN2
-	IuN7kGhKScTd4ocB4zhcE908cMO30Ro+/x1MhU9E8h4mRq2LRH1x2x6O6w+ZRlm5u8S2
-	BpMFBy9+tJGP2xMCBGmwANxGRc1lJaf+nWBSE=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=fJd5UPjGYHq0/6vq/JQIq06VhLdtF/Hs72LOtzrCiKI=;
+	b=SHaidZVudgYPApgd/DWV/F95Sj+LQvHzJtik7trdE6gNAb076gD1WUIto64a3j9EbH
+	mGKG6CLEssxB9eBx2a/QFtAxLGw9xdwyKJYaJ9vVcD821wLJ+Xlxj0RK7UYuWcG4Tzcg
+	m7K7zp3WJ2cpHISCZYOGQ/v07hNWbXMfyfSeI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=CJCmwJHRVO3XW3UnZ8lJGo0hCIlZA+7zfAkMIFfXmqnb5LoP8ZqyJKosV3I8BUMv9v
-	iTqybsRV4jY4dihc4flylr0kZVNrmPcq+8xeJXByetHDM5ztST0tf0E/ktFXkVz1DpW3
-	h5XA/04ACZBnaqvxEy0fsv/DZdTNNa2Fmrr2M=
-Received: by 10.204.57.204 with SMTP id d12mr737817bkh.69.1296065617440;
-	Wed, 26 Jan 2011 10:13:37 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=UXTxa10ewHWSZwCa6n9UNkCI+sMu7zryxN768jExLJyzOk+bIHiNI0CMCPO5q+ovAW
+	VGg9MOjF4m1NjmogSEB7w4/EC8jLj7A8lGlJkh16DgCLO6OZIjO+b2ylox9IBHWiYVtq
+	tFnZ1JY/VVXCAiifZsPEq+85+sxdk7nMblbkU=
+Received: by 10.204.71.20 with SMTP id f20mr709996bkj.139.1296065618452;
+	Wed, 26 Jan 2011 10:13:38 -0800 (PST)
 Received: from s42.loc (85-127-155-31.dynamic.xdsl-line.inode.at
 	[85.127.155.31])
-	by mx.google.com with ESMTPS id b6sm7649163bkb.10.2011.01.26.10.13.35
+	by mx.google.com with ESMTPS id f20sm7647939bkf.4.2011.01.26.10.13.35
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Jan 2011 10:13:35 -0800 (PST)
+	Wed, 26 Jan 2011 10:13:36 -0800 (PST)
 Received: from cow by s42.loc with local (Exim 4.72)
 	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1Pi9s5-0002WL-Ss; Wed, 26 Jan 2011 19:13:33 +0100
+	id 1Pi9s5-0002Vw-N5; Wed, 26 Jan 2011 19:13:33 +0100
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Jan 2011 19:13:32 +0100
-Message-Id: <1296065612-9637-10-git-send-email-rep.dot.nop@gmail.com>
+Date: Wed, 26 Jan 2011 19:13:23 +0100
+Message-Id: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
 X-Mailer: git-send-email 1.7.2.3
-In-Reply-To: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
-References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
-Subject: [PATCH 9/9] util-linux: honour largefile distro feature
+Subject: [PATCH 0/9] assorted independent pathlets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,51 +46,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 18:28:21 -0000
+X-List-Received-Date: Wed, 26 Jan 2011 18:29:09 -0000
 
-do_install on micro-image still broken (${bindir}/hexdump lives in
-${usrbindir}/hexdump from util-linux POV. Not fixing these.)
+Hi,
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
----
- recipes/util-linux/files/MCONFIG  |    1 -
- recipes/util-linux/util-linux.inc |    4 +++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+Some independent patchlets. Ok for master?
 
-diff --git a/recipes/util-linux/files/MCONFIG b/recipes/util-linux/files/MCONFIG
-index 3fea2c0..1e87749 100644
---- a/recipes/util-linux/files/MCONFIG
-+++ b/recipes/util-linux/files/MCONFIG
-@@ -206,7 +206,6 @@ endif
- 
- CFLAGS := $(OPT) -I$(LIB) $(WARNFLAGS) \
- 			$(CURSESFLAGS) $(SLANGFLAGS) $(NLSFLAGS) \
--			-D_FILE_OFFSET_BITS=64 \
- 			-DSBINDIR=\"$(SBIN_DIR)\" \
- 			-DUSRSBINDIR=\"$(USRSBIN_DIR)\" \
- 			-DLOGDIR=\"$(LOG_DIR)\" \
-diff --git a/recipes/util-linux/util-linux.inc b/recipes/util-linux/util-linux.inc
-index eef4645..e1caf80 100644
---- a/recipes/util-linux/util-linux.inc
-+++ b/recipes/util-linux/util-linux.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Util-linux is a suite of essential utilities for any Linux system
- SECTION = "base"
- LICENSE = "GPL"
- DEPENDS = "zlib ncurses"
--INC_PR = "r16"
-+INC_PR = "r17"
- inherit autotools
- 
- SRC_URI = "${KERNELORG_MIRROR}/pub/linux/utils/util-linux/util-linux-${PV}.tar.bz2 \
-@@ -30,6 +30,8 @@ FILES_util-linux-readprofile = "/usr/sbin/readprofile"
- RRECOMMENDS_${PN} = "util-linux-fdisk util-linux-cfdisk util-linux-sfdisk util-linux-mount util-linux-readprofile "
- RDEPENDS_${PN} = "util-linux-umount util-linux-swaponoff util-linux-losetup"
- 
-+CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', '-D_FILE_OFFSET_BITS=64', '', d)}"
-+
- do_compile () {
- 	set -e
- 	install ${WORKDIR}/MCONFIG ${S}/MCONFIG
+Bernhard Reutner-Fischer (9):
+  fakeroot: add 1.14.5, mv 1.12.4 to obsolete
+  packaged-staging.bbclass: improve documentation
+  IMAGE_CMD_ext4.xz: rm uncompressed image
+  micro: get preferred binutils from sane-toolchain
+  ltp: bump version
+  uclibc: handle some more {machine,distro}_features
+  kernel.bbclass: simplify "if image" condition
+  image.bbclass: only insert feed uris if ONLINE_PACKAGE_MANAGEMENT
+  util-linux: honour largefile distro feature
+
+ classes/image.bbclass                              |    3 +-
+ classes/kernel.bbclass                             |    2 +-
+ classes/packaged-staging.bbclass                   |   12 +-
+ conf/bitbake.conf                                  |    2 +-
+ conf/distro/micro.conf                             |    1 -
+ recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch  |   15 +
+ .../fakeroot-1.14.5/quiet-getopt-check.patch       |   12 +
+ recipes/fakeroot/fakeroot-native_1.12.4.bb         |   21 --
+ recipes/fakeroot/fakeroot.inc                      |   16 +
+ recipes/fakeroot/fakeroot_1.12.4.bb                |   26 --
+ recipes/fakeroot/fakeroot_1.14.5.bb                |   10 +
+ recipes/ltp/ltp-20100831/runalltests.patch         |  302 --------------------
+ recipes/ltp/ltp-20101031/runalltests.patch         |  302 ++++++++++++++++++++
+ recipes/ltp/ltp_20100831.bb                        |   39 ---
+ recipes/ltp/ltp_20101031.bb                        |   38 +++
+ .../obsolete/fakeroot/fakeroot-native_1.12.4.bb    |   21 ++
+ recipes/obsolete/fakeroot/fakeroot_1.12.4.bb       |   26 ++
+ recipes/uclibc/uclibc-config.inc                   |    5 +-
+ recipes/util-linux/files/MCONFIG                   |    1 -
+ recipes/util-linux/util-linux.inc                  |    4 +-
+ 20 files changed, 461 insertions(+), 397 deletions(-)
+ create mode 100644 recipes/fakeroot/fakeroot-1.14.5/fix-prefix.patch
+ create mode 100644 recipes/fakeroot/fakeroot-1.14.5/quiet-getopt-check.patch
+ delete mode 100644 recipes/fakeroot/fakeroot-native_1.12.4.bb
+ create mode 100644 recipes/fakeroot/fakeroot.inc
+ delete mode 100644 recipes/fakeroot/fakeroot_1.12.4.bb
+ create mode 100644 recipes/fakeroot/fakeroot_1.14.5.bb
+ delete mode 100644 recipes/ltp/ltp-20100831/runalltests.patch
+ create mode 100644 recipes/ltp/ltp-20101031/runalltests.patch
+ delete mode 100644 recipes/ltp/ltp_20100831.bb
+ create mode 100644 recipes/ltp/ltp_20101031.bb
+ create mode 100644 recipes/obsolete/fakeroot/fakeroot-native_1.12.4.bb
+ create mode 100644 recipes/obsolete/fakeroot/fakeroot_1.12.4.bb
+
 -- 
 1.7.2.3
 
