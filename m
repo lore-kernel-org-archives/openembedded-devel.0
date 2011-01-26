@@ -1,37 +1,35 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Phu5e-0002Lc-6s
+	(envelope-from <raj.khem@gmail.com>) id 1Pi0Tc-0006xb-Tk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 02:22:30 +0100
-Received: by gxk20 with SMTP id 20so2136079gxk.6
+	Wed, 26 Jan 2011 09:11:41 +0100
+Received: by pwi8 with SMTP id 8so217143pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jan 2011 17:21:42 -0800 (PST)
+	Wed, 26 Jan 2011 00:10:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=FL+jOHCW+1BSsVQc2NMsXBvt6mQzgg0RnOqZ6nc3POI=;
-	b=onW7Uc3hsjM3/SiRUR9ePO5VyZPn1zCWxYDQB7lELEFJkcEimBPyNJCZ7LIz0A6ugV
-	PUOlfc5WDy5ofexjEyuaADEGz5laVMq015pIZ6ia1u97UneaKa3x9X6RQKBfEBwNT/AV
-	ehUGS6JfciUsdhPVsN+WWk7vmvXT0gBDOr2/Y=
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=12mIoR3LKapsjb6ByLMOWu/cTzx2pMPe/n7ESmtPnJo=;
+	b=YVPVVS4/YupOKNWdDrCgOpV3r6q1GlyZgS6ns3Y5CvBfMdjUb+3ftv8wqsTbGnJjrf
+	zRayDeDbwF+7kmGI+GzmeeUzOTAhlbLmWp0/BkiKndMBDR7I6rL3UJOl4ykUJ7UqXHfk
+	1lzUXQUptDIBKNata/j4ZbuTeoZm6/4NtKmAk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=Hh5wOy5F8LAbp24H8w3k3Tbbl22gP96WoVaRAv4i5At2Fa3hu9EOl3LyrCuCkUE8WC
-	WhtaaKeEYX1sXORv8GFKZgsVOfJ63eO6QAkGYTlav+CB/E15XbgwnXCJMN8dELUF557A
-	dLw1BWujUJMCxAWZGNVJXHWlRVjkb7nY6vXeA=
-Received: by 10.90.100.4 with SMTP id x4mr466953agb.4.1296004901911; Tue, 25
-	Jan 2011 17:21:41 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.90.45.13 with HTTP; Tue, 25 Jan 2011 17:21:21 -0800 (PST)
-In-Reply-To: <AANLkTikH9pEQbBp8regqQwOvKVE=KDFUjvw_Z46aOnJo@mail.gmail.com>
-References: <1295936745-718-1-git-send-email-raj.khem@gmail.com>
-	<ihmjnv$ufe$1@dough.gmane.org>
-	<AANLkTikH9pEQbBp8regqQwOvKVE=KDFUjvw_Z46aOnJo@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=bKCU3owGYtVk8/J86ojCZDrNYf9lEokwTIzAlNY/kUK2bLC8n+aiyEJduRVzTYaWA1
+	2ZD8UVloXrbFfGq5ZMub+PISmV4FDvSTJFsg/WAf8vvFBhQNTEkPI/jVOAEnJ3/51ajF
+	KTK/XPQDMhEgD6abC4zfoofNKnGD92KjyDT9M=
+Received: by 10.142.153.14 with SMTP id a14mr52721wfe.113.1296029452229;
+	Wed, 26 Jan 2011 00:10:52 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id w42sm19923140wfh.15.2011.01.26.00.10.50
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 26 Jan 2011 00:10:51 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 25 Jan 2011 17:21:21 -0800
-Message-ID: <AANLkTinH_42WQx-7pBS8ixVDKQKvsW8OnukG6H8AUfpZ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 0/9 v2] Replace ipkg-utils with opkg-utils
+Date: Wed, 26 Jan 2011 00:10:46 -0800
+Message-Id: <1296029446-27041-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.2.3
+Subject: [PATCH] samba: Fix build issue on uclibc/arm/thumb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,43 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 01:22:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 26 Jan 2011 08:11:41 -0000
 
-On Tue, Jan 25, 2011 at 3:29 PM, Graham Gower <graham.gower@gmail.com> wrote:
-> On 26 January 2011 00:08, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 25-01-11 07:25, Khem Raj wrote:
->>> From: Khem Raj <raj.khem@gmail.com>
->>>
->>> These patches replace usage of ipkg-utils with opkg-utils
->>> in OE. I have built a native-sdk-image successfully on
->>> angstrom-2008.1 and minimal
->>>
->>> Please review and provide your feedback
->>
->> For the whole series:
->>
->> Acked-by: Koen Kooi <koen@openembedded.org>
->>
->
-> Yes, the second patch series looks sane to me.
->
-> Acked-by: Graham Gower <graham.gower@gmail.com>
->
+We get following errors as of now. This patch fixes those
 
+/scratch/oe/sysroots/x86_64-linux/usr/armv5te/lib/gcc/arm-oe-linux-uclibceabi/4.5.3/../../../../arm-oe-linux-uclibceabi/bin/ld:
+/scratch/oe/sysroots/armv5te-oe-linux-uclibceabi/usr/lib//uclibc_nonshared.a(atexit.os)(.text+0x12):
+unresolvable R_ARM_THM_CALL relocation against symbol `__cxa_atexit'
 
-thanks. I have pushed the series. My testing hasnt failed thus far, I
-have build on angstrom minimal and slugos
-distros. There are packages like gpe-package which still use ipkg as
-their backend. but it was broken before too
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/samba/samba_3.2.15.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/samba/samba_3.2.15.bb b/recipes/samba/samba_3.2.15.bb
+index ef2707e..214de58 100644
+--- a/recipes/samba/samba_3.2.15.bb
++++ b/recipes/samba/samba_3.2.15.bb
+@@ -9,7 +9,7 @@ SRC_URI += "file://configure-3.2.8.patch \
+ SRC_URI[md5sum] = "5a3bcc4927c9643b9f42970d0815b18f"
+ SRC_URI[sha256sum] = "84281fd1faeffee8558e49dff865dd382abbf78bc1be00f8cb5aa70aeea67d46"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ EXTRA_OECONF += "\
+ 	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+@@ -22,6 +22,7 @@ EXTRA_OECONF += "\
+ 	samba_cv_HAVE_WRFILE_KEYTAB=yes \
+ 	"
+ 
++EXTRA_OECONF_append_libc-uclibc = " --disable-pie"
+ # for arm we always use ARM instruction set
+ # gcc 4.5 ICE's in thumb mode
+ # see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=46934
+-- 
+1.7.2.3
+
 
 
