@@ -1,31 +1,33 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from smtprelay-h22.telenor.se ([195.54.99.197])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PiDIr-0007Ma-98
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1PiDLn-0001vs-6T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 22:53:25 +0100
-Received: by iyj18 with SMTP id 18so871311iyj.6
+	Wed, 26 Jan 2011 22:56:27 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-h22.telenor.se (Postfix) with ESMTP id C68BAEA5D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 13:52:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=FXEz/B2v+q4nkstd4l25iu7nPOwxwNb2G6HYdLyDQkI=;
-	b=VqGaVgBWHQLgiDDzMBKELWRIag3gsdgudsQJZtkyMqId3puC2AfnJodJHFm2xHDFoL
-	JBPSgM8pZWNzABjf+UE4Y8npUN4Zjmz8uPsKAsfKdpKASQkvmd79ProIQqjhC8j0A5sH
-	gTg1xKqrZiTm3oyqBtZtei4Jn26wrZ/XQYfic=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Z/Mex1ksR3e1MG4Zd9CKrM2qQuy97e27UWHMAgLRadFXpl7oT98wDcfGhTxYCNLhwu
-	eDnJ72OPpdPRyVU8jWeqctfZFuz4nuEnttfiwgha+z/8S0kS2sOQHz21mZX2Etb//viM
-	+7ZPoKVIAk138BKGempE3EXWCL8yaQ4Iestx4=
+	Wed, 26 Jan 2011 22:24:36 +0100 (CET)
+X-SENDER-IP: [83.227.56.243]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AvwQAL8fQE1T4zjzPGdsb2JhbAAMoACEdwEBAQE1vT6FTwSLFIEV
+X-IronPort-AV: E=Sophos;i="4.60,382,1291590000"; 
+	d="scan'208,217";a="167758261"
+Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.56.243])
+	by ipb2.telenor.se with ESMTP; 26 Jan 2011 22:24:36 +0100
+Message-ID: <4D409113.9030603@atmel.com>
+Date: Wed, 26 Jan 2011 22:24:35 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.231.207.66 with SMTP id fx2mr8920149ibb.108.1296078756697;
-	Wed, 26 Jan 2011 13:52:36 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Wed, 26 Jan 2011 13:52:36 -0800 (PST)
-Date: Wed, 26 Jan 2011 22:52:36 +0100
-Message-ID: <AANLkTi=L4=feV011DQf0Nm0RUnrWT6EABbymCi=Uq-o9@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: cups QA issue
+To: openembedded-devel@lists.openembedded.org
+References: <4D3FEC09.5070306@atmel.com>	<201101261401.02414.marcin@juszkiewicz.com.pl>	<4D405B8C.805@atmel.com>
+	<20110126200620.GH3616@jama>
+In-Reply-To: <20110126200620.GH3616@jama>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Problem with calibration of AT91SAM9M10EKES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +41,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 21:53:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 26 Jan 2011 21:56:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+2011-01-26 21:06, Martin Jansa skrev:
+> On Wed, Jan 26, 2011 at 06:36:12PM +0100, Ulf Samuelsson wrote:
+>> 2011-01-26 14:01, Marcin Juszkiewicz skrev:
+>>> Dnia s'roda, 26 stycznia 2011 o 10:40:25 Ulf Samuelsson napisa?(a):
+>>>> I have some calibration problem with my private branch
+>>>> (ulf/linux-2.6.30-2011-01-??) when building the at91sam9m10ekes board.
+>>>>
+>>>> I am running /usr/bin/run-calibrate.sh,
+>>>> but regardless of how I click, during calibration,
+>>>> a tap afterwards always results in detection 3 mm above the tap.
+>>>>
+>>>> There is a "pointercal" file generated.
+>>>> It appears to me that this is ignored...
+>>>> I can tap 1 cm above or below during calibration,
+>>>> and still the detected tap is 3 mm above the actual tap.
+>>>> Anything else to think about?
+>>>> I enclose  /etc/X11/xorg.conf and /etc/ts.conf.
+>>> You are using full X11 with evdev driver so tslib is not used at all. You have
+>>> to use xinput-calibrator.
+>>>
+>>> Regards,
+>> Any clue to get xinput-calibrate to run at first boot?
+> provide
+> recipes/xinput-calibrator/pointercal-xinput
+> data for your device and use
+> recipes/xserver-common/files/89xTs_Calibrate.xinput_calibrator.patch
+> like SHR does
+OK, then is the question how:
+As I noted:
+SRC_URI_append_angstrom = " file://xtscal-fix.patch "
+RDEPENDS_${PN}_append_angstrom = " tslib-calibrate "
+RDEPENDS_${PN}_append_shr = " xinput-calibrator "?
 
-I got this while building cups, but I am not a gnome person (actually
-I am only intterested in the server part).
+so Angstrom (which I am using) is using "tslib-calibrate"
+Is there any drawback in changing this to " xinput-calibrator "
 
-ERROR: QA Issue with cups:
-/home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/cups-1.2.12-r7.2/packages-split/cups/usr/share/applications/cups.desktop:
-warning: value "Application;System;X-Red-Hat-Base;" for key
-"Categories" in group "Desktop Entry" contains a deprecated value
-"Application"
-ERROR: QA Issue with cups:
-/home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/cups-1.2.12-r7.2/packages-split/cups/usr/share/applications/cups.desktop:
-warning: key "Encoding" in group "Desktop Entry" is deprecated
-ERROR: QA Issue with cups:
-/home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/cups-1.2.12-r7.2/packages-split/cups/usr/share/applications/cups.desktop:
-warning: value "" for key "Path" in group "Desktop Entry" does not
-look like an absolute path
-ERROR: QA Issue with cups:
-/home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/cups-1.2.12-r7.2/packages-split/cups/usr/share/applications/cups.desktop:
-warning: key "TerminalOptions" in group "Desktop Entry" is deprecated
+Adding a SRC_URI_append_at91 seems a kludge.
 
-Anyone care to fix this or provide a suggestion on how to fix ?
+> intentionaly it prefers provideded data, because users too often messed
+> initial calibration on first boot and then didn't know how to reset it
+> and rerun xinpu-calibration successfully...
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Thanks, Frans
+
+-- 
+Best Regards
+Ulf Samuelsson
 
 
