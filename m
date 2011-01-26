@@ -1,36 +1,28 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from smtprelay-h22.telenor.se ([195.54.99.197])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PiCTu-0002IM-Vj
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1PiCzM-0002kF-7W
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Jan 2011 22:00:47 +0100
-Received: by gyh20 with SMTP id 20so324975gyh.6
+	Wed, 26 Jan 2011 22:33:16 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-h22.telenor.se (Postfix) with ESMTP id 6C032EA774
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jan 2011 12:59:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=FYp1JIDR0ViRL7geFQ4fPrDYg4ED0/yjuTdstQyISjE=;
-	b=sQRNCS+GgPA1tYqkaVF1pW/qzZMzMlQte8qRLl9cZ4OO1SqvJ2f/vqJrIZRlvJj0S8
-	O8mEwcOsbuHSqwN7Y2wQ1CndgDpHJwqZlSE7Fp83UTikC3JuNK4r5mzMeZH+Xr01XTc3
-	knlnNiYbkDW1l6OPYs2yp1y9sFYxim/Bhcduk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=Ty+kKYSQUQFEnEOuo1LEqPH840dhPLnLPRF1ynlsK98/WcITS8hwVM/EKm0g48F7n5
-	m+qaQ6hHxVXL/LHqJUp846c89wu6c0hwJ4Lj96nKxsuyJcl+vhyoNQluILI0bpkjtymO
-	HlYaACKhgWq7l4SRVshDXOT+rdiAjjAruRmms=
-Received: by 10.91.186.4 with SMTP id n4mr1899054agp.88.1296075598440; Wed, 26
-	Jan 2011 12:59:58 -0800 (PST)
+	Wed, 26 Jan 2011 22:32:25 +0100 (CET)
+X-SENDER-IP: [83.227.56.243]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AmUWAGIhQE1T4zjzPGdsb2JhbAAMiE+Nfo4rAQEBATW9O4VPBIwp
+X-IronPort-AV: E=Sophos;i="4.60,382,1291590000"; d="scan'208";a="167760092"
+Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.56.243])
+	by ipb2.telenor.se with ESMTP; 26 Jan 2011 22:32:25 +0100
+Message-ID: <4D4092E8.8040207@atmel.com>
+Date: Wed, 26 Jan 2011 22:32:24 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Wed, 26 Jan 2011 12:59:38 -0800 (PST)
-In-Reply-To: <1296065612-9637-10-git-send-email-rep.dot.nop@gmail.com>
-References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
-	<1296065612-9637-10-git-send-email-rep.dot.nop@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 26 Jan 2011 12:59:38 -0800
-Message-ID: <AANLkTimK6GiBOP0nULT=ZAo6_ukjzV3ut1f=5aQisPEz@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 9/9] util-linux: honour largefile distro feature
+Subject: Patching from a file containing a compressed directory (<directory>.tar.bz2)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,82 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2011 21:00:47 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 Jan 2011 21:33:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 26, 2011 at 10:13 AM, Bernhard Reutner-Fischer
-<rep.dot.nop@gmail.com> wrote:
-> do_install on micro-image still broken (${bindir}/hexdump lives in
-> ${usrbindir}/hexdump from util-linux POV. Not fixing these.)
->
-> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-> ---
-> =C2=A0recipes/util-linux/files/MCONFIG =C2=A0| =C2=A0 =C2=A01 -
-> =C2=A0recipes/util-linux/util-linux.inc | =C2=A0 =C2=A04 +++-
-> =C2=A02 files changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/util-linux/files/MCONFIG b/recipes/util-linux/files/=
-MCONFIG
-> index 3fea2c0..1e87749 100644
-> --- a/recipes/util-linux/files/MCONFIG
-> +++ b/recipes/util-linux/files/MCONFIG
-> @@ -206,7 +206,6 @@ endif
->
-> =C2=A0CFLAGS :=3D $(OPT) -I$(LIB) $(WARNFLAGS) \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0$(CURSESFLAGS) $(SLANGFLAGS) $(NLSFLAGS) \
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 -D_FILE_OFFSET_BITS=3D64 \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0-DSBINDIR=3D\"$(SBIN_DIR)\" \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0-DUSRSBINDIR=3D\"$(USRSBIN_DIR)\" \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0-DLOGDIR=3D\"$(LOG_DIR)\" \
-> diff --git a/recipes/util-linux/util-linux.inc b/recipes/util-linux/util-=
-linux.inc
-> index eef4645..e1caf80 100644
-> --- a/recipes/util-linux/util-linux.inc
-> +++ b/recipes/util-linux/util-linux.inc
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "Util-linux is a suite of essential utili=
-ties for any Linux system
-> =C2=A0SECTION =3D "base"
-> =C2=A0LICENSE =3D "GPL"
-> =C2=A0DEPENDS =3D "zlib ncurses"
-> -INC_PR =3D "r16"
-> +INC_PR =3D "r17"
-> =C2=A0inherit autotools
->
+     Trying to change the at91 linux recipes.
+     The "experimental" patches to be added on top of the "maxim" patch
+     can be downloaded from ftp://ftp.at91.com/ and that file
+     is generated from a directory of patches, which should be applied
+     in alphabetical order.
 
-this has potential of breaking the distros which dont yet define
-largefile in DISTRO_FEATURES so please consider the distros and see if
-it does not impact
-them unknowingly
+     When the "obvious" SRC_URI  is used:
 
-> =C2=A0SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/utils/util-linux/util-li=
-nux-${PV}.tar.bz2 \
-> @@ -30,6 +30,8 @@ FILES_util-linux-readprofile =3D "/usr/sbin/readprofile=
-"
-> =C2=A0RRECOMMENDS_${PN} =3D "util-linux-fdisk util-linux-cfdisk util-linu=
-x-sfdisk util-linux-mount util-linux-readprofile "
-> =C2=A0RDEPENDS_${PN} =3D "util-linux-umount util-linux-swaponoff util-lin=
-ux-losetup"
->
-> +CFLAGS_append =3D "${@base_contains('DISTRO_FEATURES', 'largefile', '-D_=
-FILE_OFFSET_BITS=3D64', '', d)}"
-> +
-> =C2=A0do_compile () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0set -e
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0install ${WORKDIR}/MCONFIG ${S}/MCONFIG
-> --
-> 1.7.2.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+     ftp://ftp.at91.com/<directory>.tar.bz2;apply=yes \
+
+      the files do not get applied in alphabetical order.
+
+     It looks to me like they get applied in reverse order,  but I did 
+not check carefully.
+     I tried adding a "series" file, and recompress, but that failed as 
+well.
+
+     Any clue on how to get the patches applied in alphabetical order?
+
+     If the patches are in a subdirectory to the recipe, and applied 
+manually
+     everything is OK, but that seems to be a shame to have to resort to 
+that.
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
