@@ -1,34 +1,34 @@
-Received: from david.siemens.de ([192.35.17.14])
+Received: from blath.larsmichelsen.com ([78.46.117.178] helo=larsmichelsen.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PiUsY-00006q-M1
+	(envelope-from <lm@larsmichelsen.com>) id 1PiVuH-0001LU-Ex
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 17:39:26 +0100
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by david.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
-	p0RGFPWY005140 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 17:15:26 +0100
-Received: from DEMCHP99ET0MSX.ww902.siemens.net
-	(demchp99et0msx.ww902.siemens.net [139.25.131.181])
-	by mail3.siemens.de (8.13.6/8.13.6) with ESMTP id p0RGFP25012497
-	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
+	Thu, 27 Jan 2011 18:45:17 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by larsmichelsen.com (Postfix) with ESMTP id E2137954456E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 17:15:25 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.34]) by
-	DEMCHP99ET0MSX.ww902.siemens.net ([139.25.131.181]) with mapi;
-	Thu, 27 Jan 2011 17:15:24 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Jan 2011 17:15:23 +0100
-Thread-Topic: libpcre not compiling
-Thread-Index: Acu+PWbuU8hOSn6TRWixZi8M46ugcA==
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED682EC06@DEMCHP99E35MSX.ww902.siemens.net>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Thu, 27 Jan 2011 18:44:30 +0100 (CET)
+Received: from larsmichelsen.com ([127.0.0.1])
+	by localhost (blath.larsmichelsen.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id SbBkXhXPveaZ
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jan 2011 18:44:30 +0100 (CET)
+Received: from [192.168.4.106] (g230234061.adsl.alicedsl.de [92.230.234.61])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: lm)
+	by larsmichelsen.com (Postfix) with ESMTPSA id 756709544014
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jan 2011 18:44:30 +0100 (CET)
+Message-ID: <4D41AF05.3000302@larsmichelsen.com>
+Date: Thu, 27 Jan 2011 18:44:37 +0100
+From: Lars Michelsen <lm@larsmichelsen.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2.104i Thunderbird/3.1.7
 MIME-Version: 1.0
-Subject: libpcre not compiling
+To: openembedded-devel@lists.openembedded.org
+References: <1295654503-26379-1-git-send-email-lm@larsmichelsen.com>	<ihedau$stf$1@dough.gmane.org>	<4D3AC11C.2040602@larsmichelsen.com>	<4D3AC6F0.4050802@xora.org.uk>	<ihel1v$tnt$1@dough.gmane.org>	<4D3ADC2C.6070506@larsmichelsen.com>	<ihesdm$v7u$1@dough.gmane.org>	<4D3B15FB.5000403@larsmichelsen.com>	<4D3F1253.7060202@larsmichelsen.com>	<ihn57v$84o$1@dough.gmane.org>	<4D3F3E2E.5030308@larsmichelsen.com>
+	<ihng97$64q$2@dough.gmane.org>
+In-Reply-To: <ihng97$64q$2@dough.gmane.org>
+Subject: Re: [PATCH] mplayer_svn: Package can be built again; Bumped to rev. 31329.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jan 2011 16:39:27 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 27 Jan 2011 17:45:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hello Koen,
 
-[using released version 2010.12]
+On 25/01/11 22:45, Koen Kooi wrote:
 
-libpcre (7.6-r8) fails to compile :
+>>> Even when you clean up your checked out mplayer sources?
+>>> That sounds strange to me...
+>
+> It then downloads a snapshot from the angstrom source mirror
 
-...
-| /bin/sh ./arm-angstrom-linux-gnueabi-libtool --tag=3DCXX   --mode=3Dlink =
-arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te -mtune=3Darm926ej-s -mthumb=
--interwork -mno-thumb  -isystem/srv/oe-2010/build/at91sam9g20ek/sysroots/ar=
-mv5te-angstrom-linux-gnueabi/usr/include -O2 -fpermissive -fvisibility-inli=
-nes-hidden -fvisibility-inlines-hidden -version-info 0:0:0 -Wl,-O1 -Wl,--ha=
-sh-style=3Dgnu -o libpcrecpp.la -rpath /usr/lib pcrecpp.lo pcre_scanner.lo =
-pcre_stringpiece.lo libpcre.la
-| /bin/grep: /usr/lib/libstdc++.la: No such file or directory
-| /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin/sed: can't=
- read /usr/lib/libstdc++.la: No such file or directory
-| arm-angstrom-linux-gnueabi-libtool: link: `/usr/lib/libstdc++.la' is not =
-a valid libtool archive
-| make[1]: *** [libpcrecpp.la] Error 1
-| make[1]: Leaving directory `/srv/oe-2010/build/at91sam9g20ek/work/armv5te=
--angstrom-linux-gnueabi/libpcre-7.6-r8/pcre-7.6'
-| make: *** [all] Error 2
-| FATAL: oe_runmake failed
-NOTE: package libpcre-7.6-r8: task do_compile: Failed
-ERROR: Function 'do_compile' failed (see /srv/oe-2010/build/at91sam9g20ek/w=
-ork/armv5te-angstrom-linux-gnueabi/libpcre-7.6-r8/temp/log.do_compile.1723 =
-for further information)
-ERROR: '/srv/oe-2010/org.openembedded/recipes/libpcre/libpcre_7.6.bb' faile=
-d		=09
+Okay, I got it now. I added the source mirror to my distro: now it works.
 
+It's now clear to me: The snapshot on the angstrom source mirror has 
+been built for mplayer rev. 32735 which includes a snapshot of the 
+ffmpeg repository with the revision which was up-to-date during building 
+the file on the mirror (through the svn:external subrepo).
 
-I would be thankful if someone could give me any hint how to solve this.
+When the package on the mirror would be deleted and built again the 
+mplayer_svn reciep will be broken (Another way to try it is to disable 
+the mirror).
 
-With kind regards,
-Fabrice Aeschbacher=
+Using the mirror is a workaround in the short term. But this is no 
+solution for the long term. As the primary ffmpeg repo is now git it is 
+only a matter of time that a switch is needed.
+
+So which way to go now? Make the mplayer_svn package use the ffmpeg git 
+as 2nd repo? If the way to go is clear I would try to build a patch.
+
+Thanks & Regards,
+Lars
 
 
