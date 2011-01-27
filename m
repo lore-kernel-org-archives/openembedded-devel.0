@@ -1,41 +1,33 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1PiR8z-00060x-Ez
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <Tom_Rini@mentor.com>) id 1PiTHV-0007gM-SW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 13:40:09 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 64F5E11000A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 13:39:15 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 80A901100093
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 13:39:14 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from rhein.familie-heinold.de (g225075232.adsl.alicedsl.de
-	[92.225.75.232]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 13:39:14 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id F33B83C346; Thu, 27 Jan 2011 13:38:32 +0100 (CET)
-Date: Thu, 27 Jan 2011 13:38:32 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110127123832.GA31083@rhein.zuhause.netz>
-References: <201101242322.30470.schnitzeltony@gmx.de>
-	<ihlur0$iqp$1@dough.gmane.org>
-	<201101262327.31727.schnitzeltony@gmx.de>
+	Thu, 27 Jan 2011 15:57:06 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PiTGg-0005CE-8Z from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Jan 2011 06:56:14 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 27 Jan 2011 06:56:13 -0800
+Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 27 Jan 2011 07:56:12 -0700
+Message-ID: <4D418787.9000004@mentor.com>
+Date: Thu, 27 Jan 2011 07:56:07 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <201101262327.31727.schnitzeltony@gmx.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Question regarding gettext 0.18
+To: openembedded-devel@lists.openembedded.org
+References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>	<1296065612-9637-4-git-send-email-rep.dot.nop@gmail.com>	<4D40744F.5090105@mentor.com>
+	<20110126200836.GB714@mx.loc>
+In-Reply-To: <20110126200836.GB714@mx.loc>
+X-OriginalArrivalTime: 27 Jan 2011 14:56:12.0885 (UTC)
+	FILETIME=[57155850:01CBBE32]
+Subject: Re: [PATCH 3/9] IMAGE_CMD_ext4.xz: rm uncompressed image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,14 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jan 2011 12:40:09 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Jan 2011 14:57:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 01/26/2011 01:08 PM, Bernhard Reutner-Fischer wrote:
+> On Wed, Jan 26, 2011 at 12:21:51PM -0700, Tom Rini wrote:
+>> On 01/26/2011 11:13 AM, Bernhard Reutner-Fischer wrote:
+>>> Signed-off-by: Bernhard Reutner-Fischer<rep.dot.nop@gmail.com>
+>>> ---
+>>>   conf/bitbake.conf |    2 +-
+>>>   1 files changed, 1 insertions(+), 1 deletions(-)
+>>>
+>>> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+>>> index 042a06c..4fbb6b6 100644
+>>> --- a/conf/bitbake.conf
+>>> +++ b/conf/bitbake.conf
+>>> @@ -387,7 +387,7 @@ IMAGE_CMD_ext3.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096
+>>>   IMAGE_CMD_ext4 = "genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac;"
+>>>   IMAGE_CMD_ext4.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; set +e;e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.gz"
+>>>   IMAGE_CMD_ext4.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.bz2"
+>>> -IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>   ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
+>>> +IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>   ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz ; rm -f ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
+>>>
+>>>   IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
+>>>   IMAGE_CMD_squashfs-lzma = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend -comp lzma"
+>>
+>> Any reason we do xz -c<  foo rather than just xz foo?  Then we
+>> wouldn't have to rm...
+>
+> yea, not really, but:
+> khem, re 3/9: The whole IMAGE generation is a pile of crap. We genext2fs
+> more often than i can count without stuttering
+> khem, there should be an .ext2 task and we can make
+> ext{3,4}{,.{Z,gz,bz2,xz}} out of that basic .ext2
 
-can you provide the recipes somewhere so I could easily test them.
+True, and it' even worse when you add that each of those formats can 
+also be mkimage'd for u-boot.
 
-Bye Henning
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
