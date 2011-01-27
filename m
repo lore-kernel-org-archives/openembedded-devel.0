@@ -1,33 +1,34 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PiTHV-0007gM-SW
+	(envelope-from <Tom_Rini@mentor.com>) id 1PiTNw-0008UJ-KD
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 15:57:06 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	Thu, 27 Jan 2011 16:03:44 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
 	by relay1.mentorg.com with esmtp 
-	id 1PiTGg-0005CE-8Z from Tom_Rini@mentor.com 
+	id 1PiTN5-0006Gp-S2 from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 06:56:14 -0800
+	Thu, 27 Jan 2011 07:02:51 -0800
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 27 Jan 2011 06:56:13 -0800
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Thu, 27 Jan 2011 07:02:50 -0800
 Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 27 Jan 2011 07:56:12 -0700
-Message-ID: <4D418787.9000004@mentor.com>
-Date: Thu, 27 Jan 2011 07:56:07 -0700
+	Thu, 27 Jan 2011 08:02:49 -0700
+Message-ID: <4D418914.2030703@mentor.com>
+Date: Thu, 27 Jan 2011 08:02:44 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>	<1296065612-9637-4-git-send-email-rep.dot.nop@gmail.com>	<4D40744F.5090105@mentor.com>
-	<20110126200836.GB714@mx.loc>
-In-Reply-To: <20110126200836.GB714@mx.loc>
-X-OriginalArrivalTime: 27 Jan 2011 14:56:12.0885 (UTC)
-	FILETIME=[57155850:01CBBE32]
-Subject: Re: [PATCH 3/9] IMAGE_CMD_ext4.xz: rm uncompressed image
+References: <131E5DFBE7373E4C8D813795A6AA7F08032A16A440@dlee06.ent.ti.com>	<131E5DFBE7373E4C8D813795A6AA7F08032A16A5BE@dlee06.ent.ti.com>	<4D403D6F.3040800@mentor.com>
+	<201101271038.18945.ml@vdm-design.de>
+	<AANLkTimy4Q0Y_3Y-=8=QCifqQUYwWmFx4T0DH+dNXPeZ@mail.gmail.com>
+In-Reply-To: <AANLkTimy4Q0Y_3Y-=8=QCifqQUYwWmFx4T0DH+dNXPeZ@mail.gmail.com>
+X-OriginalArrivalTime: 27 Jan 2011 15:02:49.0432 (UTC)
+	FILETIME=[43719D80:01CBBE33]
+Subject: Re: bitbake does not fail when QA issues encountered
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jan 2011 14:57:06 -0000
+X-List-Received-Date: Thu, 27 Jan 2011 15:03:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 01/26/2011 01:08 PM, Bernhard Reutner-Fischer wrote:
-> On Wed, Jan 26, 2011 at 12:21:51PM -0700, Tom Rini wrote:
->> On 01/26/2011 11:13 AM, Bernhard Reutner-Fischer wrote:
->>> Signed-off-by: Bernhard Reutner-Fischer<rep.dot.nop@gmail.com>
->>> ---
->>>   conf/bitbake.conf |    2 +-
->>>   1 files changed, 1 insertions(+), 1 deletions(-)
->>>
->>> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
->>> index 042a06c..4fbb6b6 100644
->>> --- a/conf/bitbake.conf
->>> +++ b/conf/bitbake.conf
->>> @@ -387,7 +387,7 @@ IMAGE_CMD_ext3.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096
->>>   IMAGE_CMD_ext4 = "genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac;"
->>>   IMAGE_CMD_ext4.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; set +e;e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext4.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.gz"
->>>   IMAGE_CMD_ext4.bz2 = "install -d ${DEPLOY_DIR_IMAGE}/tmp.bz2 ; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; bzip2 -f -9 ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4; mv ${DEPLOY_DIR_IMAGE}/tmp.bz2/${IMAGE_NAME}.rootfs.ext4.bz2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.bz2"
->>> -IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>   ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
->>> +IMAGE_CMD_ext4.xz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.xz; genext2fs -i 4096 -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ${EXTRA_IMAGECMD}; tune2fs -O extents,uninit_bg,dir_index,has_journal ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4; set +e; e2fsck -yfDC0 ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4;chk=$?; set -e; case $chk in 0|1|2);;*)exit $chk;;esac; xz -c ${XZ_COMPRESSION_LEVEL} ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4>   ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4.xz ; rm -f ${DEPLOY_DIR_IMAGE}/tmp.xz/${IMAGE_NAME}.rootfs.ext4 ; rmdir ${DEPLOY_DIR_IMAGE}/tmp.xz"
->>>
->>>   IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
->>>   IMAGE_CMD_squashfs-lzma = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend -comp lzma"
+On 01/27/2011 04:27 AM, Frans Meulenbroeks wrote:
+> 2011/1/27 Thomas Zimmermann<ml@vdm-design.de>:
+>> On Wednesday 26 January 2011 16:27:43 Tom Rini wrote:
+>>> I believe, from talking with Chris Larson about this before, in 1.8.x
+>>> the error wasn't being populated upwards, but that got fixed.  At heart
+>>> the problem is that QA errors aren't throwing a "kill the build" type
+>>> error.  This should be changeable (and would cause 1.8.x to fail too, if
+>>> someone backported this change to a 1.8.x using OE) to insane.bbclass.
 >>
->> Any reason we do xz -c<  foo rather than just xz foo?  Then we
->> wouldn't have to rm...
+>> I don't think that a QA error should "kill the build" because then no build
+>> from scratch would be possible.
+>> We have a QA error in coreutils-native because it doesn't inherit gettext. But
+>> adding this inherit would result in a dependencie loop.
+>>
+>> So if a QA error would stop build we would need something for those
+>> situations.
+>>
+>> And additionally i think that most QA errors aren't fatal because most of them
+>> are for non-standard .desktop files.
 >
-> yea, not really, but:
-> khem, re 3/9: The whole IMAGE generation is a pile of crap. We genext2fs
-> more often than i can count without stuttering
-> khem, there should be an .ext2 task and we can make
-> ext{3,4}{,.{Z,gz,bz2,xz}} out of that basic .ext2
+> If it is not a fatal it should probably be given as a warning
+> (especially the non-std .desktop things)
+> If corutils-native has a problem becuase it does not inherit gettext,
+> then maybe (if possible) it should be added or alternately if this is
+> not a problem it definitely should not be an error but a warning.
+>
+> For me an error indicates something is broken and needs fixing.
+> Reverting that: if a condition does not break things it is not an
+> error (and yes, I know this is quite a black and white view, and that
+> there are situations this is not true).
+>
+> Generally masking errors does not make them go away.
 
-True, and it' even worse when you add that each of those formats can 
-also be mkimage'd for u-boot.
+The problem is that today we have QA Errors that are warnings 
+(coreutils-native) and QA Errors that result in a non-zero exit code but 
+also don't "kill the build" nor make it obvious at the end that there is 
+a non-zero exit code (GNU_HASH, RPATH).  Finally we do have "kill the 
+build" fatal checks in insane.bbclass, namely the do_qa_configure tests.
 
 -- 
 Tom Rini
