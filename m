@@ -1,34 +1,31 @@
-Received: from hsp-52.hspserver.com ([85.197.80.179])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@vdm-design.de>) id 1PiOSE-0008GE-6r
+	(envelope-from <holla.net@gmail.com>) id 1PiOiH-0004W3-00
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 10:47:50 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 1511C37D2081
+	Thu, 27 Jan 2011 11:04:25 +0100
+Received: by wyb40 with SMTP id 40so1842637wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 10:38:35 +0100 (CET)
-Received: from hsp-52.hspserver.com ([127.0.0.1])
-	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id CgWJuVlVe9nK
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 10:38:19 +0100 (CET)
-Received: from rikrok.localnet (rikrok.physik.uni-bonn.de [131.220.167.28])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by hsp-52.hspserver.com (Postfix) with ESMTPSA id E34EA37D2080
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 10:38:19 +0100 (CET)
-From: Thomas Zimmermann <ml@vdm-design.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Jan 2011 10:38:18 +0100
-User-Agent: KMail/1.10.3 (Linux/2.6.27.45-0.1-default; KDE/4.1.3; i686; ; )
-References: <131E5DFBE7373E4C8D813795A6AA7F08032A16A440@dlee06.ent.ti.com>
-	<131E5DFBE7373E4C8D813795A6AA7F08032A16A5BE@dlee06.ent.ti.com>
-	<4D403D6F.3040800@mentor.com>
-In-Reply-To: <4D403D6F.3040800@mentor.com>
+	Thu, 27 Jan 2011 02:03:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=um2fhCeFN6xXcA6udd0NtbNTXZpg1jrh6Ja36mnLPOI=;
+	b=Yca0kcYbUO8p2MqKWEAWTfwXA4TvQREoqzEN7stdpID8VEtgWhhmXm2X/xNA8RGSQ/
+	5LtcYQYCU7vkDmpGLgHpveQh75kgasU+Bh7aiAJuK0rCkVuV2y0u8fZQWjQAbPiT3nnP
+	iYz6n8cj6Yz/qrUqbN8nMrriN5xb6KIDgdytg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=XeHE0ypL+IbUUu4Om+HkY1/M6r5X4v/te24lItgVtAfft4cNEgkQ+7MRpFEhUK+Y88
+	S3ekuYaMpmUEE1BXIoF+x/ZgzZaL+1G+eFiRE77+MUniC4NsZ3OTMaRc5qccODNh8Cdo
+	QyGwcP+sEyhZEz/tzuAWkeQJ/ucKa682iG+RE=
 MIME-Version: 1.0
-Message-Id: <201101271038.18945.ml@vdm-design.de>
-Subject: Re: bitbake does not fail when QA issues encountered
+Received: by 10.227.155.73 with SMTP id r9mr787794wbw.63.1296122616027; Thu,
+	27 Jan 2011 02:03:36 -0800 (PST)
+Received: by 10.227.143.204 with HTTP; Thu, 27 Jan 2011 02:03:35 -0800 (PST)
+Date: Thu, 27 Jan 2011 10:03:35 +0000
+Message-ID: <AANLkTi=_AV4U5vnmZixacxsigMQmBHFVM+N-2hdXY6Op@mail.gmail.com>
+From: Sathish Vasudevaiah <holla.net@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Recipe with multiple git/svn repositories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +39,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jan 2011 09:47:50 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Jan 2011 10:04:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wednesday 26 January 2011 16:27:43 Tom Rini wrote:
-> I believe, from talking with Chris Larson about this before, in 1.8.x
-> the error wasn't being populated upwards, but that got fixed.  At heart
-> the problem is that QA errors aren't throwing a "kill the build" type
-> error.  This should be changeable (and would cause 1.8.x to fail too, if
-> someone backported this change to a 1.8.x using OE) to insane.bbclass.
+Hi,
 
-I don't think that a QA error should "kill the build" because then no build 
-from scratch would be possible.
-We have a QA error in coreutils-native because it doesn't inherit gettext. But 
-adding this inherit would result in a dependencie loop.
+While building a custom version of mpalyer (http://intr.overt.org/blog/?p=117)
+the mplayer tree had to be assembled from multiple repositories.
+One problem I noticed was that when multiple git reposities are mentioned,
+all of them check out into $WORKDIR/git. How do you prevent it ?
 
-So if a QA error would stop build we would need something for those 
-situations.
+Finally I ended up doing something like this. Is there a better way ?
 
-And additionally i think that most QA errors aren't fatal because most of them 
-are for non-standard .desktop files.
+
+MPLAYER = "f4626fcddd2dab57129c"
+FFMPEG_TAG = "dbfc60e186f143baba6b"
+LIBSWSCALE_TAG = "d1a43021d9198868fa7a023a30e5ee9e09a907d3"
+
+SRC_URI = " git://github.com/philipl/mplayer-crystalhd;protocol=git;tag=${MPLAYER}\
+            git://github.com/philipl/ffmpeg-crystalhd;protocol=git;tag=${FFMPEG_TAG}\
+            git://git.mplayerhq.hu/libswscale;protocol=git;tag=${LIBSWSCALE_TAG}\
+            svn://git.ffmpeg.org/dvdnav/trunk/;proto=svn;module=libdvdread;rev=1219\
+            svn://git.ffmpeg.org/dvdnav/trunk/;proto=svn;module=libdvdnav;rev=1219\
+                  "
+
+
+do_fetch_post() {
+     cd ${WORKDIR}
+     rm -rf git
+     tar xvfz ${DL_DIR}/git_github.com.philipl.mplayer-crystalhd_${MPLAYER}.tar.gz
+     mkdir tmp
+     cd tmp
+     tar xvfz ${DL_DIR}/git_github.com.philipl.ffmpeg-crystalhd_${FFMPEG_TAG}.tar.gz
+     mv git ../git/ffmpeg
+     tar xvfz ${DL_DIR}/git_git.mplayerhq.hu.libswscale_${LIBSWSCALE_TAG}.tar.gz
+     rm -rf ../git/ffmpeg/libswscale
+     mv git ../git/ffmpeg/libswscale
+     cd ..
+     mkdir git/libdvdread4
+     mv libdvdread/src/* git/libdvdread4
+     mv libdvdnav/src git/libdvdnav
+}
+
+addtask fetch_post before do_patch after do_unpack
 
 
