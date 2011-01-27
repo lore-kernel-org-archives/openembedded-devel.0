@@ -1,29 +1,30 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from smtprelay-b12.telenor.se ([62.127.194.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <utx@penguin.cz>) id 1PiafD-0002nl-G1
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1PibXe-00045r-Va
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 23:50:03 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 52A0214019D4
+	Fri, 28 Jan 2011 00:46:19 +0100
+Received: from ipb4.telenor.se (ipb4.telenor.se [195.54.127.167])
+	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 94919CBBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 23:34:37 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oiz41tauHzzN
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 23:34:37 +0100 (CET)
-Received: from [192.168.1.2] (233-15-80-78.tmcz.cz [78.80.15.233])
-	by ns.penguin.cz (Postfix) with ESMTP id 1CD0B1416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 23:34:36 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Fri, 28 Jan 2011 00:17:55 +0100 (CET)
+X-SENDER-IP: [83.227.56.243]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ArYSAH+LQU1T4zjzPGdsb2JhbAAMllWOJwEBAQE1vROFTwSLEoEV
+X-IronPort-AV: E=Sophos;i="4.60,387,1291590000"; d="scan'208";a="1709901739"
+Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.244]) ([83.227.56.243])
+	by ipb4.telenor.se with ESMTP; 28 Jan 2011 00:17:55 +0100
+Message-ID: <4D41FD22.2050803@atmel.com>
+Date: Fri, 28 Jan 2011 00:17:54 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Jan 2011 23:31:05 +0100
-Message-ID: <1296167465.14370.7.camel@utx.lan>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-Subject: [RFC][PATCH] binconfig.bbclass: search configs in PKGD instead of S
+References: <4D4092E8.8040207@atmel.com> <ihqdm4$jaj$1@dough.gmane.org>
+In-Reply-To: <ihqdm4$jaj$1@dough.gmane.org>
+Subject: Re: Patching from a file containing a compressed directory	(<directory>.tar.bz2)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,39 +38,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jan 2011 22:50:03 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
+X-List-Received-Date: Thu, 27 Jan 2011 23:46:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hallo.
+2011-01-27 01:19, Koen Kooi skrev:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 26-01-11 22:32, Ulf Samuelsson wrote:
+>>      Trying to change the at91 linux recipes.
+>>      The "experimental" patches to be added on top of the "maxim" patch
+>>      can be downloaded from ftp://ftp.at91.com/ and that file
+>>      is generated from a directory of patches, which should be applied
+>>      in alphabetical order.
+>>
+>>      When the "obvious" SRC_URI  is used:
+>>
+>>      ftp://ftp.at91.com/<directory>.tar.bz2;apply=yes \
+>>
+>>       the files do not get applied in alphabetical order.
+>>
+>>      It looks to me like they get applied in reverse order,  but I did
+>> not check carefully.
+>>      I tried adding a "series" file, and recompress, but that failed as
+>> well.
+>>
+>>      Any clue on how to get the patches applied in alphabetical order?
+>>
+>>      If the patches are in a subdirectory to the recipe, and applied
+>> manually
+>>      everything is OK, but that seems to be a shame to have to resort to
+>> that.
+> We don't want such behaviour, putting the patches in OE and adding them
+> to SRC_URI is the only acceptable way to do this.
 
-It seems that searching for binconfig in S makes more problems than it
-brings benefits. It breaks for example ncurses - it populates
-ncurses-config instead of ncurses5-config and ncursesw5-config).
+Well no, there is always an option to take the file,
+"cat" all the files together to a single file,
+which will result in the patches beeing applied in the correct order.
 
-Searching in the installed root seems to be more logical.
+Less ugly than adding 94 patches and listing them in the recipe...
 
-Most packages don't need to be ported to this change, as they install
-config file with the same name as it exists in sources. But probably
-several will need porting.
+By "Manual", I mean:
 
---- a/classes/binconfig.bbclass
-+++ b/classes/binconfig.bbclass
-@@ -49,7 +49,7 @@
- SYSROOT_PREPROCESS_FUNCS += "binconfig_sysroot_preprocess"
- 
- binconfig_sysroot_preprocess () {
--	for config in `find ${S} -name '${BINCONFIG_GLOB}'`; do
-+	for config in `find ${PKGD} -name '${BINCONFIG_GLOB}'`; do
- 		configname=`basename $config`
- 		install -d ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}
- 		cat $config | sed ${@get_binconfig_mangle(d)} > ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$configname
+do_apply_at91_exp_patch () {
+     cd    ${S}
+     for    f in `ls ../${PV}-at91-exp.4/*.patch` ; do
+         cat $f    | patch -p1
+     done
+}
+
+Why would that be a problem?
+
+To me, maintaining this is much less work than maintaining a
+SRC_URI statement.
+
+Obviously, it would be better if the build system
+had a defined order when applying patches from a file
+containing multiple patches.
+
+
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFNQLoEMkyGM64RGpERAo3fAJoDwcnY3HrWprnEOFzwcp1+VU/biQCfd0oZ
+> dJ7RQ/b2cMdBSdP3NFQsx6M=
+> =ZC5T
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 -- 
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Best Regards
+Ulf Samuelsson
 
 
 
