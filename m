@@ -1,27 +1,29 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1PiZKc-0001Er-9l
+Received: from ns.penguin.cz ([84.21.108.25])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <utx@penguin.cz>) id 1PiafD-0002nl-G1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 22:24:42 +0100
-Received: (qmail invoked by alias); 27 Jan 2011 21:23:53 -0000
-Received: from p4FE0FAF7.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.224.250.247]
-	by mail.gmx.net (mp011) with SMTP; 27 Jan 2011 22:23:53 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18jHvpjHFgjtkTgpGYCkIrUqDm4Fc/wg8fWtd/zeN
-	WSQLe/DmzdWaTL
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Thu, 27 Jan 2011 23:50:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 52A0214019D4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jan 2011 23:34:37 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id oiz41tauHzzN
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jan 2011 23:34:37 +0100 (CET)
+Received: from [192.168.1.2] (233-15-80-78.tmcz.cz [78.80.15.233])
+	by ns.penguin.cz (Postfix) with ESMTP id 1CD0B1416BA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jan 2011 23:34:36 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Jan 2011 22:21:15 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-References: <201101242322.30470.schnitzeltony@gmx.de>
-	<201101262327.31727.schnitzeltony@gmx.de>
-	<20110127123832.GA31083@rhein.zuhause.netz>
-In-Reply-To: <20110127123832.GA31083@rhein.zuhause.netz>
-MIME-Version: 1.0
-Message-Id: <201101272221.15874.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: Question regarding gettext 0.18
+Date: Thu, 27 Jan 2011 23:31:05 +0100
+Message-ID: <1296167465.14370.7.camel@utx.lan>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+Subject: [RFC][PATCH] binconfig.bbclass: search configs in PKGD instead of S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,135 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jan 2011 21:24:43 -0000
-X-Groupsio-MsgNum: 28541
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_LHeQNYAgz1tgXa4"
-
---Boundary-00=_LHeQNYAgz1tgXa4
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 27 Jan 2011 22:50:03 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-On Thursday 27 January 2011 13:38:32 Henning Heinold wrote:
-> Hi,
-> 
-> can you provide the recipes somewhere so I could easily test them.
-> 
-> Bye Henning
-> 
-Some comments on the files attached:
-- the changes in clutter-common.inc were made to prepare clutter-toys. I don't know if they are required for this issue
-- I successfully build (did not yet run on hardware) by simply commenting the line 'read dummy < /dev/tty' in sysroots/i686-linux/usr/bin/gettextize. 
-- OE folks: Has anybody a problem patching gettext(-native) to make it accessible for automated environments?
+Hallo.
 
-good night
+It seems that searching for binconfig in S makes more problems than it
+brings benefits. It breaks for example ncurses - it populates
+ncurses-config instead of ncurses5-config and ncursesw5-config).
 
-Andreas
+Searching in the installed root seems to be more logical.
 
---Boundary-00=_LHeQNYAgz1tgXa4
-Content-Type: text/plain;
-  charset="UTF-8";
-  name="clutter_1.4.2.bb"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="clutter_1.4.2.bb"
+Most packages don't need to be ported to this change, as they install
+config file with the same name as it exists in sources. But probably
+several will need porting.
 
-require clutter.inc
+--- a/classes/binconfig.bbclass
++++ b/classes/binconfig.bbclass
+@@ -49,7 +49,7 @@
+ SYSROOT_PREPROCESS_FUNCS += "binconfig_sysroot_preprocess"
+ 
+ binconfig_sysroot_preprocess () {
+-	for config in `find ${S} -name '${BINCONFIG_GLOB}'`; do
++	for config in `find ${PKGD} -name '${BINCONFIG_GLOB}'`; do
+ 		configname=`basename $config`
+ 		install -d ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}
+ 		cat $config | sed ${@get_binconfig_mangle(d)} > ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$configname
 
-inherit autotools pkgconfig gettext
+-- 
 
-PR = "${INC_PR}.0"
-
-SRC_URI = "http://source.clutter-project.org/sources/clutter/1.4/clutter-${PV}.tar.bz2 \
-           ${INC_SRC_URI} \
-          "
-
-# not (yet) in clutter.inc: elder versions had json code included
-STDDEPENDS += "json-glib"
-
-# recommended for --clutter-debug / --cogl-debug params
-BASE_CONF += " --enable-debug"
-
-do_configure_prepend() {
-	# align the test data location *.c (V1.2 and following use macro ASSETS_DIR for path in *.c)
-	for i in $(find ${S}/tests -name Makefile.am) ; do
-		sed -i -e 's:$(top_srcdir)/tests/data:${datadir}/${PN}-tests:g' $i
-	done
-
-	# prevent the conformance test suite from running
-	sed -i -e 's:BUILT_SOURCES = wrappers:# BUILT_SOURCES = wrappers:g' ${S}/tests/conform/Makefile.am
-
-	# 1. OE currently supports gettext 0.18 / clutter ships with 0.17
-	# we assume no problem changing gettext version because clutter did too 
-	# see http://git.clutter-project.org/clutter/commit/?id=0e325404aa50fcca400d0cb8020a36bcd81f4c37
-	# 2. clutter moved to upstream gettext from glib one 
-	# see http://git.clutter-project.org/clutter/commit/?id=98cac30d82299b3739f3801f71b5e2e931eb2e8d
-
-	echo gettextize $(which gettextize)
-	echo glib-gettextize $(which glib-gettextize)
-
-	gettextize --force || true
-
-	# gstreamer uses AG_GST_GETTEXT which autotools.bbclass doesn't grep for
-	# glib-gettextize --force --copy || true
-}
-
-do_compile_prepend() {
-	rebuild_shader_sources ${S}/clutter/cogl/cogl/driver/gles
-	# align test data location *.json
-	for full_name in $(find ${S}/tests/data -name *.png -o -name *.json) ; do
-		data_name=${full_name##*/}
-		for i in $(find ${S}/tests -name *.json) ; do
-			sed -i -e s:${data_name}:${datadir}/${PN}-tests/${data_name}:g $i
-		done
-	done
-}
-
-do_install() {
-	autotools_do_install
-	install_tests
-}
-
-SRC_URI[md5sum] = "5a3c6d8414d4e286aba0a936f344c9b1"
-SRC_URI[sha256sum] = "92fd67acce5105c933e54ad0c87d0f5ace1202fd0f87949cb49a3759e6e38892"
-
---Boundary-00=_LHeQNYAgz1tgXa4
-Content-Type: text/plain;
-  charset="UTF-8";
-  name="clutter-common.inc"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="clutter-common.inc"
-
-# common functions for all clutter-libraries
-
-# all .debug stuff goes to clutter*-dbg
-FILES_${PN}-dbg += "${bindir}/.debug"
-
-# helper for (git)-recipes which do not have gtk-doc.make
-copy_gtk_doc_make() {
-	if [ -e ${WORKDIR}/gtk-doc.make ] ; then
-		cp ${WORKDIR}/gtk-doc.make ${S}/gtk-doc.make
-	else
-		touch ${S}/gtk-doc.make
-	fi
-}
-
-# clutter packs assume building and target are the same
-# for us they are definitely not
-make_all_execs_installable() {
-	for i in $(find ${S} -name Makefile.am) ; do
-		sed -i -e s:noinst_PROGRAMS:bin_PROGRAMS:g \
-		       -e s:check_PROGRAMS:bin_PROGRAMS:g $i
-	done
-}
-
-#check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points
-def get_clutter_fpu_setting(bb, d):
-	if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
-		return "--without-fpu"
-	return ""
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
---Boundary-00=_LHeQNYAgz1tgXa4--
+
