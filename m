@@ -1,31 +1,37 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from goliath.siemens.de ([192.35.17.28])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <holla.net@gmail.com>) id 1PiOiH-0004W3-00
+	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PiPtg-0005xk-3x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 11:04:25 +0100
-Received: by wyb40 with SMTP id 40so1842637wyb.6
+	Thu, 27 Jan 2011 12:20:16 +0100
+Received: from mail2.siemens.de (localhost [127.0.0.1])
+	by goliath.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
+	p0RBJTKN006324 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jan 2011 12:19:29 +0100
+Received: from DEMCHP99ET1MSX.ww902.siemens.net
+	(demchp99et1msx.ww902.siemens.net [139.25.131.180])
+	by mail2.siemens.de (8.13.6/8.13.6) with ESMTP id p0RBJSOL030884
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 02:03:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=um2fhCeFN6xXcA6udd0NtbNTXZpg1jrh6Ja36mnLPOI=;
-	b=Yca0kcYbUO8p2MqKWEAWTfwXA4TvQREoqzEN7stdpID8VEtgWhhmXm2X/xNA8RGSQ/
-	5LtcYQYCU7vkDmpGLgHpveQh75kgasU+Bh7aiAJuK0rCkVuV2y0u8fZQWjQAbPiT3nnP
-	iYz6n8cj6Yz/qrUqbN8nMrriN5xb6KIDgdytg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=XeHE0ypL+IbUUu4Om+HkY1/M6r5X4v/te24lItgVtAfft4cNEgkQ+7MRpFEhUK+Y88
-	S3ekuYaMpmUEE1BXIoF+x/ZgzZaL+1G+eFiRE77+MUniC4NsZ3OTMaRc5qccODNh8Cdo
-	QyGwcP+sEyhZEz/tzuAWkeQJ/ucKa682iG+RE=
+	Thu, 27 Jan 2011 12:19:29 +0100
+Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.34]) by
+	DEMCHP99ET1MSX.ww902.siemens.net ([139.25.131.180]) with mapi;
+	Thu, 27 Jan 2011 12:19:28 +0100
+From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 27 Jan 2011 12:19:27 +0100
+Thread-Topic: [oe] [PATCH 2/9] packaged-staging.bbclass: improve documentation
+Thread-Index: Acu9hylAwfGds9bzSvuHjSPg0u6PRQAjFwkw
+Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED682EB06@DEMCHP99E35MSX.ww902.siemens.net>
+References: <1296065612-9637-1-git-send-email-rep.dot.nop@gmail.com>
+	<1296065612-9637-3-git-send-email-rep.dot.nop@gmail.com>
+In-Reply-To: <1296065612-9637-3-git-send-email-rep.dot.nop@gmail.com>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
 MIME-Version: 1.0
-Received: by 10.227.155.73 with SMTP id r9mr787794wbw.63.1296122616027; Thu,
-	27 Jan 2011 02:03:36 -0800 (PST)
-Received: by 10.227.143.204 with HTTP; Thu, 27 Jan 2011 02:03:35 -0800 (PST)
-Date: Thu, 27 Jan 2011 10:03:35 +0000
-Message-ID: <AANLkTi=_AV4U5vnmZixacxsigMQmBHFVM+N-2hdXY6Op@mail.gmail.com>
-From: Sathish Vasudevaiah <holla.net@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Recipe with multiple git/svn repositories
+Subject: Re: [PATCH 2/9] packaged-staging.bbclass: improve documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,48 +45,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jan 2011 10:04:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-
-Hi,
-
-While building a custom version of mpalyer (http://intr.overt.org/blog/?p=117)
-the mplayer tree had to be assembled from multiple repositories.
-One problem I noticed was that when multiple git reposities are mentioned,
-all of them check out into $WORKDIR/git. How do you prevent it ?
-
-Finally I ended up doing something like this. Is there a better way ?
+X-List-Received-Date: Thu, 27 Jan 2011 11:20:16 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
 
-MPLAYER = "f4626fcddd2dab57129c"
-FFMPEG_TAG = "dbfc60e186f143baba6b"
-LIBSWSCALE_TAG = "d1a43021d9198868fa7a023a30e5ee9e09a907d3"
+> +# To use the prebuilt pstage packages, save them away..
+> +# $ rsync --delete -a tmp/pstage/ /there/oe/build/pstage_mirror
+> +# .. and use it as mirror in your conf/local.conf:
+> +# PSTAGE_MIRROR =3D "file:///there/oe/build/pstage_mirror"
 
-SRC_URI = " git://github.com/philipl/mplayer-crystalhd;protocol=git;tag=${MPLAYER}\
-            git://github.com/philipl/ffmpeg-crystalhd;protocol=git;tag=${FFMPEG_TAG}\
-            git://git.mplayerhq.hu/libswscale;protocol=git;tag=${LIBSWSCALE_TAG}\
-            svn://git.ffmpeg.org/dvdnav/trunk/;proto=svn;module=libdvdread;rev=1219\
-            svn://git.ffmpeg.org/dvdnav/trunk/;proto=svn;module=libdvdnav;rev=1219\
-                  "
+This is indeed a very helpful comment, I can remember I had to spend some t=
+ime before figuring this out.
 
-
-do_fetch_post() {
-     cd ${WORKDIR}
-     rm -rf git
-     tar xvfz ${DL_DIR}/git_github.com.philipl.mplayer-crystalhd_${MPLAYER}.tar.gz
-     mkdir tmp
-     cd tmp
-     tar xvfz ${DL_DIR}/git_github.com.philipl.ffmpeg-crystalhd_${FFMPEG_TAG}.tar.gz
-     mv git ../git/ffmpeg
-     tar xvfz ${DL_DIR}/git_git.mplayerhq.hu.libswscale_${LIBSWSCALE_TAG}.tar.gz
-     rm -rf ../git/ffmpeg/libswscale
-     mv git ../git/ffmpeg/libswscale
-     cd ..
-     mkdir git/libdvdread4
-     mv libdvdread/src/* git/libdvdread4
-     mv libdvdnav/src git/libdvdnav
-}
-
-addtask fetch_post before do_patch after do_unpack
+Fabrice=
 
 
