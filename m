@@ -1,29 +1,31 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PiJTI-0003wD-3G
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PiLjc-0001BO-2O
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Jan 2011 05:28:36 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 0C8D0314D3E7;
-	Thu, 27 Jan 2011 05:27:47 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id m35bRAgh5QVS; Thu, 27 Jan 2011 05:27:41 +0100 (CET)
-Received: from pepe.multimedia-labs.de (dreamboxupdate.com [82.149.226.174])
-	by mail.multimedia-labs.de (Postfix) with SMTP id B0EA5314D373;
-	Thu, 27 Jan 2011 05:27:39 +0100 (CET)
-Received: by pepe.multimedia-labs.de (sSMTP sendmail emulation);
-	Thu, 27 Jan 2011 04:27:39 +0000
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Jan 2011 04:27:39 +0000
-Message-Id: <1296102459-29461-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.2.3
-Cc: Chris Larson <chris_larson@mentor.com>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH] package(_ipk).bbclass: fix versioned dependencies in RDEPENDS et al.
+	Thu, 27 Jan 2011 07:53:36 +0100
+Received: by iyj18 with SMTP id 18so1232300iyj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Jan 2011 22:52:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=odjfq8l0eMpTxgXK2WXe4G2ZcqIg13zLE4qBdoQhhH0=;
+	b=onrv0pvklnL1xhKHLi2NstcVHY6p00qxyKlC2zBCuULR5ngWS61zP4bXu63vdpCtCF
+	sWiWh31/ZSYpocCRMU1vB/jNQHQm6FPhYYEaHU4JnzB/CXbF3TaZqOetC/q/zbgK4Sz6
+	xAfFEuA7OzlHzj85IMBl66n7MOQVZKeiIU6+I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Pi77jUWTxpeUnKbwsxFCBsSY94LlTESs3dEOUA9uIRsVGgP7Qwzd+hCc9kp7rzJgUJ
+	EOj9UnrQ5+tCw1wa21r4Iy/1CDtEMqfBL9rkGrFS27RfdWJZWWv9In7o7qRDpOTN3U1p
+	WZRD8LvKtR3nLt25DMOIwySXtt5yhi5QXP0Ks=
+MIME-Version: 1.0
+Received: by 10.231.166.205 with SMTP id n13mr491598iby.58.1296111166575; Wed,
+	26 Jan 2011 22:52:46 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Wed, 26 Jan 2011 22:52:46 -0800 (PST)
+Date: Thu, 27 Jan 2011 07:52:46 +0100
+Message-ID: <AANLkTinT_uj+VKLP9CxX2rux0_EDai_Zgq-7fsCBEF3T@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: RPATH issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,133 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jan 2011 04:28:36 -0000
+X-List-Received-Date: Thu, 27 Jan 2011 06:53:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* explode_deps() changed its behavior to omit version information
-  when the function was removed from OE in favor of BitBake's
-  implementation in March 2010. Since then, packages didn't contain
-  versioned runtime dependencies.
+Dear all,
 
-  See commit 89b7e433719f43f1c36c76cb8856d559014e99bc
+During my mythtv test build I've found the following RPATH issues:
 
-  The solution is to switch to bb.utils.explode_dep_versions(), as
-  already used by package_rpm.bbclass.
+ERROR: QA Issue with libsdl-x11: package libsdl-x11 contains bad RPATH
+/home/hudson/jobs/FM_TEST/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
+in file /home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/libsdl-x11-1.2.14-r7/packages-split/libsdl-x11/usr/lib/libSDL-1.2.so.0.11.3
+ERROR: QA Issue with libsdl-x11: package libsdl-x11 contains bad RPATH
+/home/hudson/jobs/FM_TEST/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
+in file /home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/libsdl-x11-1.2.14-r7/packages-split/libsdl-x11/usr/lib/libSDL-1.2.so.0
 
-* Two functions in package.bbclass needlessly added whitespace
-  characters to RDEPENDS_*. This was removed.
+and
 
-* The following statement was removed from package_ipk.bbclass:
+ERROR: QA Issue with python-sqlite3: package python-sqlite3 contains
+bad RPATH /home/hudson/jobs/FM_TEST/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
+in file /home/hudson/jobs/FM_TEST/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/python-2.6.5-ml12.3/packages-split/python-sqlite3/usr/lib/python2.6/lib-dynload/_sqlite3.so
 
-  if not '-locale-' and not '-dbg' and not '-dev' in pkgname:
-      rdepends.append('%s-locale*' % pkgname)
+I'm not really an expert on either recipes, and don't have too much time.
+Someone else care to give this a stab?
 
-  It was added in November 2008, but can never evaluate to true.
-
-  See commit a045dfacf6f2541e0f410d9d109581f181303756
-
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-CC: Chris Larson <chris_larson@mentor.com>
-CC: Otavio Salvador <otavio@ossystems.com.br>
----
- classes/package.bbclass     |   15 ++++++++-------
- classes/package_ipk.bbclass |   41 +++++++++++++++++++----------------------
- 2 files changed, 27 insertions(+), 29 deletions(-)
-
-diff --git a/classes/package.bbclass b/classes/package.bbclass
-index 678ffa9..1ea3b72 100644
---- a/classes/package.bbclass
-+++ b/classes/package.bbclass
-@@ -292,12 +292,13 @@ def runtime_mapping_rename (varname, d):
- 	#bb.note("%s before: %s" % (varname, bb.data.getVar(varname, d, True)))	
- 
- 	new_depends = []
--	for depend in explode_deps(bb.data.getVar(varname, d, True) or ""):
-+	depends = bb.utils.explode_dep_versions(bb.data.getVar(varname, d, True) or "")
-+	for dep in depends:
- 		# Have to be careful with any version component of the depend
--		split_depend = depend.split(' (')
--		new_depend = get_package_mapping(split_depend[0].strip(), d)
--		if len(split_depend) > 1:
--			new_depends.append("%s (%s" % (new_depend, split_depend[1]))
-+		ver = depends[dep]
-+		new_depend = get_package_mapping(dep, d)
-+		if ver:
-+			new_depends.append("%s (%s)" % (new_depend, ver))
- 		else:
- 			new_depends.append(new_depend)
- 
-@@ -517,7 +518,7 @@ python populate_packages () {
- 						break
- 			if found == False:
- 				bb.note("%s contains dangling symlink to %s" % (pkg, l))
--		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
-+		bb.data.setVar('RDEPENDS_' + pkg, " ".join(rdepends), d)
- }
- populate_packages[dirs] = "${D}"
- 
-@@ -897,7 +898,7 @@ python read_shlibdeps () {
- 				fd.close()
- 				for l in lines:
- 					rdepends.append(l.rstrip())
--		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
-+		bb.data.setVar('RDEPENDS_' + pkg, " ".join(rdepends), d)
- }
- 
- python package_depchains() {
-diff --git a/classes/package_ipk.bbclass b/classes/package_ipk.bbclass
-index a68d208..03fa29c 100644
---- a/classes/package_ipk.bbclass
-+++ b/classes/package_ipk.bbclass
-@@ -250,28 +250,25 @@ python do_package_ipk () {
- 
- 		bb.build.exec_func("mapping_rename_hook", localdata)
- 
--		rdepends = explode_deps(bb.data.getVar("RDEPENDS", localdata, 1) or "")
--		rrecommends = explode_deps(bb.data.getVar("RRECOMMENDS", localdata, 1) or "")
--		rsuggests = (bb.data.getVar("RSUGGESTS", localdata, 1) or "").split()
--		rprovides = (bb.data.getVar("RPROVIDES", localdata, 1) or "").split()
--		rreplaces = (bb.data.getVar("RREPLACES", localdata, 1) or "").split()
--		rconflicts = (bb.data.getVar("RCONFLICTS", localdata, 1) or "").split()
--
--		if not '-locale-' and not '-dbg' and not '-dev' in pkgname:
--			rdepends.append('%s-locale*' % pkgname)
--
--		if rdepends:
--			ctrlfile.write("Depends: %s\n" % ", ".join(rdepends))
--		if rsuggests:
--			ctrlfile.write("Suggests: %s\n" % ", ".join(rsuggests))
--		if rrecommends:
--			ctrlfile.write("Recommends: %s\n" % ", ".join(rrecommends))
--		if rprovides:
--			ctrlfile.write("Provides: %s\n" % ", ".join(rprovides))
--		if rreplaces:
--			ctrlfile.write("Replaces: %s\n" % ", ".join(rreplaces))
--		if rconflicts:
--			ctrlfile.write("Conflicts: %s\n" % ", ".join(rconflicts))
-+		def write_dep_field(varname, outstring):
-+			depends = bb.utils.explode_dep_versions(bb.data.getVar(varname, localdata, True) or "")
-+			newdeps = []
-+			for dep in depends:
-+				ver = depends[dep]
-+				if ver:
-+					newdeps.append("%s (%s)" % (dep, ver))
-+				else:
-+					newdeps.append(dep)
-+			if newdeps:
-+				ctrlfile.write('%s: %s\n' % (outstring, ", ".join(newdeps)))
-+
-+		write_dep_field('RDEPENDS', 'Depends')
-+		write_dep_field('RSUGGESTS', 'Suggests')
-+		write_dep_field('RRECOMMENDS', 'Recommends')
-+		write_dep_field('RPROVIDES', 'Provides')
-+		write_dep_field('RREPLACES', 'Replaces')
-+		write_dep_field('RCONFLICTS', 'Conflicts')
-+
- 		src_uri = bb.data.getVar("SRC_URI", localdata, 1) or d.getVar("FILE", True)
- 		src_uri = re.sub("\s+", " ", src_uri)
- 		ctrlfile.write("Source: %s\n" % " ".join(src_uri.split()))
--- 
-1.7.2.3
-
+Best regards, Frans
 
 
