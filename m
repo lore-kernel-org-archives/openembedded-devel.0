@@ -1,18 +1,20 @@
 Received: from hsvwanfw1-nat.mentorg.com ([139.181.24.34] helo=alm.mentorg.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom_rini@mentor.com>) id 1Pitrc-0004A5-2D
+	(envelope-from <tom_rini@mentor.com>) id 1Pitrd-0004A5-E7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 20:20:08 +0100
+	Fri, 28 Jan 2011 20:20:09 +0100
 Received: from localhost.localdomain ([134.86.97.17])
-	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id p0SIqb1l024465
+	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id p0SIqb1o024465
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 28 Jan 2011 12:52:38 -0600
 From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Jan 2011 11:52:28 -0700
-Message-Id: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>
+Date: Fri, 28 Jan 2011 11:52:31 -0700
+Message-Id: <1296240753-10120-4-git-send-email-tom_rini@mentor.com>
 X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH 0/5] Relocatable perl-native and use it always
+In-Reply-To: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>
+References: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>
+Subject: [PATCH 3/5] automake: Add perl-native as a dep rather than perl-runtime-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,31 +28,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 19:20:08 -0000
+X-List-Received-Date: Fri, 28 Jan 2011 19:20:09 -0000
 
-Hey all,
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+---
+ recipes/automake/automake.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-As I've talked about before[1] there's build reproducibility issues
-depending on when perl-native is built.  After talking with Mark Hatle
-a little bit I started thinking about relocation in perl again and it
-turns out that starting in 5.10, upstream perl supports relocation.
-
-This in turn makes it less painful to make perl-native be what we use
-when we want perl runtime, nearly everywhere (since you can use pstaging
-to avoid it the time next time).
-
-This patch set drops perl 5.8.8 and bumps all of the perl stuffs PR,
-switches to relocatable perl-native, and then the big switch to using it
-early.
-
-Build tested on {minimal+qemuarm,angstrom-2008.1+beagleboard}+all perl
-libs and run tested on minimal+qemuarm+native-sdk-image.
-
-[1]: http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg08445.html
-
+diff --git a/recipes/automake/automake.inc b/recipes/automake/automake.inc
+index e378c04..1eae3c0 100644
+--- a/recipes/automake/automake.inc
++++ b/recipes/automake/automake.inc
+@@ -2,8 +2,8 @@ DESCRIPTION = "A tool for automatically generating Makefiles."
+ LICENSE = "GPL"
+ HOMEPAGE = "http://www.gnu.org/software/automake/"
+ SECTION = "devel"
+-DEPENDS_virtclass-native = "autoconf-native"
+-RDEPENDS_automake-native = "autoconf-native perl-native-runtime"
++DEPENDS_virtclass-native = "autoconf-native perl-native"
++RDEPENDS_automake-native = "autoconf-native perl-native"
+ RDEPENDS_automake += "\
+     autoconf \
+     perl \
 -- 
-Tom Rini
-Mentor Graphics Corporation 
+1.7.0.4
 
 
 
