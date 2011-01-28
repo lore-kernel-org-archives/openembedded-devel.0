@@ -1,33 +1,25 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Pir4L-00049O-0I
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 17:21:05 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Pir3S-0007CA-QF from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 08:20:10 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Fri, 28 Jan 2011 08:20:10 -0800
-Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 28 Jan 2011 09:20:09 -0700
-Message-ID: <4D42ECB3.4030605@mentor.com>
-Date: Fri, 28 Jan 2011 09:20:03 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PirFr-0004Mr-F5 for openembedded-devel@lists.openembedded.org;
+	Fri, 28 Jan 2011 17:32:59 +0100
+Received: from f053044076.adsl.alicedsl.de ([78.53.44.76]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PirF5-0003wl-7k for openembedded-devel@lists.openembedded.org;
+	Fri, 28 Jan 2011 16:32:11 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinTV+FMDzCSQKGjB81LGgp4L8eyceusVNs4CWCL@mail.gmail.com>
-	<AANLkTikBTNT7o1QeL8A914XoEpfGcQ3b5wtskRUzcd=A@mail.gmail.com>
-In-Reply-To: <AANLkTikBTNT7o1QeL8A914XoEpfGcQ3b5wtskRUzcd=A@mail.gmail.com>
-X-OriginalArrivalTime: 28 Jan 2011 16:20:09.0778 (UTC)
-	FILETIME=[3BB7F920:01CBBF07]
-Subject: Re: testing branch 2011-01-28
+In-Reply-To: <AANLkTi=Oqmf7KsN=_ygrZ4YkuO+aLCTsyn9e1jE13QYo@mail.gmail.com>
+References: <1296219611-14580-1-git-send-email-sujak.marek@gmail.com>
+	<1296220508.3831.8.camel@mattotaupa>
+	<AANLkTi=Oqmf7KsN=_ygrZ4YkuO+aLCTsyn9e1jE13QYo@mail.gmail.com>
+Date: Fri, 28 Jan 2011 17:32:10 +0100
+Message-ID: <1296232330.21132.17.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [PATCH v2] VMX25: Add machine support for vmx25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +33,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 16:21:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 28 Jan 2011 16:32:59 -0000
+X-Groupsio-MsgNum: 28572
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-lNOxUe4D/9WMDBDepkOv"
 
-On 01/28/2011 07:40 AM, Cliff Brake wrote:
-> Excellent testing run last week:
->
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2011-01-20
->
-> 37 entries in the table, and very good coverage of machines, distros,
-> images, and host systems.
+--=-lNOxUe4D/9WMDBDepkOv
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yes, thanks to Khem more of my turns turned successful and it wasn't too 
-bad to just put a line per machine/distro combo now.  FWIW, I've added 
-some QT targets to everything for this coming weeks build.  Assuming 
-that doesn't finally cause the build to reach my build time goal, I'll 
-ask again for more stuff to build :)
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+Dear Marek,
 
 
+A: No.
+Q: Should I include quotations after my reply?
+
+http://daringfireball.net/2007/07/on_top
+http://en.opensuse.org/openSUSE:Mailing_list_netiquette#Interleaved_style
+
+
+Am Freitag, den 28.01.2011, 14:44 +0100 schrieb Marek Sujak:
+
+> I'm sorry that i don't typed that.
+
+no problem. It is no hard requirement and unfortunately often left out
+in the commit message.
+
+> I checked:
+> console-image -> OK
+> base-image -> OK
+> x11-image -> OK
+> qt4e-image -> +/-OK (Alignment trap)
+> qt4e-demo-image -> +/-OK (Alignment trap)
+
+What distribution (and Git branch) did you use? The tool chain depends
+on this choice.
+
+> It depends on:
+> barebox 2010.10 + patch.
+> kernel 2.6.35 + patch.
+>=20
+> I will commit these files today.
+>=20
+> There are of-course bugs in kernel, but the images works fine for me.
+> I corrected my Git username as you recommended. (thanks)
+
+Thank you for your answer. I do not have any commit access, so I hope
+that the other developers will push your patches soon.
+
+
+Thanks,
+
+Paul
+
+--=-lNOxUe4D/9WMDBDepkOv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1C74UACgkQPX1aK2wOHVhROQCeJOnbxdRAX8577ipc79Vj12Wu
+++gAniZKOWvI6KhPt6PN4B970zRyxjKB
+=QhNE
+-----END PGP SIGNATURE-----
+
+--=-lNOxUe4D/9WMDBDepkOv--
