@@ -1,35 +1,35 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sujak.marek@gmail.com>) id 1Pinx3-0002mq-Q3
+	(envelope-from <sujak.marek@gmail.com>) id 1Pio4H-0002xb-2j
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 14:01:21 +0100
-Received: by fxm17 with SMTP id 17so3346780fxm.6
+	Fri, 28 Jan 2011 14:08:49 +0100
+Received: by fxm17 with SMTP id 17so3354328fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 05:00:31 -0800 (PST)
+	Fri, 28 Jan 2011 05:07:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
-	bh=dXNVmGjyZE0EDYPXmpo8A4u0h34wTQYiHOu1s5UQZ2A=;
-	b=BWx9QEnN/WOdBNGLftfveuS9EgrDAz47C3SVba99BerZ/sjI7ykV75Gi+kIKchzrRm
-	PPZkeuUGnPEQqqrbaNG7n1+CLY/t2n4o3yQsMnV28ljNwNDn90VzCNtSvKVvwTAtizY4
-	yXzE/7KUarQn2bJaLcB69hGFVPEO3vfCLEp7g=
+	bh=D3bQGyM3SRTT881GjKX+xZbuoO5fIA1qQzrUIZcdkDE=;
+	b=TPLE1EgPpa9vNuT6/ChnJn64yGYUiOEvfdOn4UcgDD+iGOfRbLDVcSDzZKK7HtlFJj
+	VsWIOpDGlIWLs0SRbh2mnLT8351agp/WhUBvXZDt0eQndjyi99wGPwhhKQL3fxu1EWLP
+	ifTWgFtno0wnY7naw8xROHXH3CVuOYM+cpltE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=gzRLenU+lf4cYr9sb65PpRAnACfNLrffeUcyuF9DLL9zYmQhBZzKEq+N0CGfXyGoHY
-	+ikm4trBHsaivU5WcEKtiWHyUXN8c10C2mQmPryHv2a8ZLJWlgj2u8rWDdV0jSGQEFz9
-	4Y7HHBeDe+cFGDMrwqjiYrD1w2W8cLj+cUseQ=
-Received: by 10.223.72.12 with SMTP id k12mr2412110faj.114.1296219630477;
-	Fri, 28 Jan 2011 05:00:30 -0800 (PST)
+	b=LdVkZel4haPN5n2b+fJo6p3HbJBSPr5bCO2iygaFIhlGmL3jHM9NAYrTkLWFwXwvbs
+	aAMnC9jMO6UR7xuVVYow7oNXdyHx+BSNJZvyN93k+Udvnd1IHpzbOGYPcP7ygF1C1gjK
+	ksJjy+ztEuqID9rFnPcR7d1Txr28CIKc/+AOA=
+Received: by 10.223.105.139 with SMTP id t11mr2309006fao.111.1296220078849;
+	Fri, 28 Jan 2011 05:07:58 -0800 (PST)
 Received: from localhost.localdomain (dial-92-52-20-198-orange.orange.sk
 	[92.52.20.198])
-	by mx.google.com with ESMTPS id y1sm6410639fak.15.2011.01.28.05.00.29
+	by mx.google.com with ESMTPS id 17sm6418362far.43.2011.01.28.05.07.57
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 28 Jan 2011 05:00:29 -0800 (PST)
+	Fri, 28 Jan 2011 05:07:58 -0800 (PST)
 From: "sujak.marek" <sujak.marek@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Jan 2011 14:00:11 +0100
-Message-Id: <1296219611-14580-1-git-send-email-sujak.marek@gmail.com>
+Date: Fri, 28 Jan 2011 14:07:26 +0100
+Message-Id: <1296220046-14636-1-git-send-email-sujak.marek@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH v2] VMX25: Add machine support for vmx25
+Subject: [PATCH v2] barebox: added recipe for barebox v 2010.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,60 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 13:01:21 -0000
+X-List-Received-Date: Fri, 28 Jan 2011 13:08:49 -0000
 
-* Add config file for http://voipac.com/#X25-DKT-265
+* included path for vmx25
 
 Signed-off-by: sujak.marek <sujak.marek@gmail.com>
 ---
- conf/machine/vmx25.conf |   38 ++++++++++++++++++++++++++++++++++++++
- 1 files changed, 38 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/vmx25.conf
+ recipes/barebox/barebox_2010.10.bb |   25 +++++++++++++++++++++++++
+ 1 files changed, 25 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/barebox/barebox_2010.10.bb
 
-diff --git a/conf/machine/vmx25.conf b/conf/machine/vmx25.conf
+diff --git a/recipes/barebox/barebox_2010.10.bb b/recipes/barebox/barebox_2010.10.bb
 new file mode 100644
-index 0000000..8ba7197
+index 0000000..b079a7c
 --- /dev/null
-+++ b/conf/machine/vmx25.conf
-@@ -0,0 +1,38 @@
-+#@TYPE: Machine
-+#@Name: Voipac vmx25 module
-+#@DESCRIPTION: Machine configuration for Voipac vmx25 module & baseboard
-+#@Homepage: http://voipac.com/#X25-DKT-265
++++ b/recipes/barebox/barebox_2010.10.bb
+@@ -0,0 +1,25 @@
++require barebox.inc
 +
-+TARGET_ARCH = "arm"
++PR = "r0"
 +
-+PREFERRED_PROVIDER_virtual/bootloader = "barebox"
-+PREFERRED_PROVIDER_virtual/kernel = "linux"
-+PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
++DEFAULT_PREFERENCE = "-1"
 +
-+PREFERRED_VERSION_linux = "2.6.35"
++# Mark archs/machines that this kernel supports
++DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_vmx25 = "1"
 +
-+MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget touchscreen keyboard"
++BAREBOX_REVISION ?= "0"
 +
-+GUI_MACHINE_CLASS = "bigscreen"
-+XSERVER ?= "xserver-xorg \
-+           xf86-input-tslib \
-+           xf86-input-evdev \
-+           xf86-input-mouse \
-+           xf86-input-keyboard \
-+           xf86-video-fbdev \
-+"
-+# Data Image FG0700K6DSSWBG01 TFT lcd
-+#MACHINE_DISPLAY_WIDTH_PIXELS = "800"
-+#MACHINE_DISPLAY_HEIGHT_PIXELS = "480"
-+#MACHINE_DISPLAY_PPI = "133"
++S = "${WORKDIR}/barebox-${PV}.${BAREBOX_REVISION}"
 +
-+# ubi fs args
-+MKUBIFS_ARGS = "-m 2KiB -e 126KiB -c 989"
-+UBINIZE_ARGS = "-m 2KiB -p 128KiB -s 512"
++SRC_URI = "\
++	http://barebox.org/download/barebox-${PV}.${BAREBOX_REVISION}.tar.bz2;name=barebox-${PV}.${BAREBOX_REVISION} \
++	file://defconfig \
++	"
 +
-+IMAGE_FSTYPES += "tar.gz ubi"
++SRC_URI_append_vmx25 = "\
++	file://barebox_2010.10-vmx25-20110112.patch; \
++	"
 +
-+require conf/machine/include/tune-arm926ejs.inc
-+
-+# used by sysvinit_2
-+SERIAL_CONSOLE = "115200 ttymxc0"
++SRC_URI[barebox-2010.10.0.md5sum] = "60c208f86333430804d6e2ed40e4ff33"
++SRC_URI[barebox-2010.10.0.sha256sum] = "4ba3b6aa4cb0ad91dcf3c4f15951dc5f642ed86e5297bfd79d842cc1ad0b7841"
 -- 
 1.7.0.4
 
