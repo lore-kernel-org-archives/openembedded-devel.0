@@ -1,38 +1,35 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1Picpk-0005lC-92
+	(envelope-from <obi@opendreambox.org>) id 1Pid0S-0005xb-6T
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 02:09:04 +0100
-Received: by wyb40 with SMTP id 40so2646403wyb.6
+	Fri, 28 Jan 2011 02:20:08 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 3EE1B314D465
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 17:08:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:in-reply-to:references:from
-	:date:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=kQSLTJuTCn4XGWpWmhNp7C61t+lB8zIJDVtIg/ZIqTo=;
-	b=ZVd2bRMngkwxHGhQ9Jd/QXskMA4j64AYK0GjOEw6KMlyea4kt2u3MFlvW+fXDPL44h
-	0ZtEHXj4QgSgt9Os7XbZXgDX9HbwAdgwqps2i4q8lS/sqK7CsdMloPZGtmkX2FFeN9+l
-	g4DjK0dAHIcYehw/lfaGUD1dcDbRZrAR3AkQs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=WgJjnAdHaUvba8HD393hQl0KcH9+IxLI+1C/0pBJKYXl7jJAUEOf26hYPcpQuUtAy4
-	1IZ4deQhunKYvqTnEk8F9zpkwUA8v/dTOJ3JhZH4JtYcJkMgSyuV5rVoUri7TIBqzGv0
-	CsCz1cwhrBMGVs4ozgd5Tmji93bsfob4nZgsE=
-Received: by 10.216.3.3 with SMTP id 3mr7186244weg.57.1296176894824; Thu, 27
-	Jan 2011 17:08:14 -0800 (PST)
+	Fri, 28 Jan 2011 02:19:19 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id B0GYhjoUHR+H
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Jan 2011 02:19:13 +0100 (CET)
+Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
+	[94.79.168.47])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id C6735314D463
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Jan 2011 02:19:13 +0100 (CET)
+Message-ID: <4D42198B.5070604@opendreambox.org>
+Date: Fri, 28 Jan 2011 02:19:07 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101210 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.254.91 with HTTP; Thu, 27 Jan 2011 17:07:54 -0800 (PST)
-In-Reply-To: <4D41FD22.2050803@atmel.com>
-References: <4D4092E8.8040207@atmel.com> <ihqdm4$jaj$1@dough.gmane.org>
-	<4D41FD22.2050803@atmel.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 27 Jan 2011 18:07:54 -0700
-X-Google-Sender-Auth: An3LGfP-oms1LPNiSJWa9eE-tV8
-Message-ID: <AANLkTi=icqQU7h3zp0rHXOrKF81FDXMdh_YerW6yWbgD@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Patching from a file containing a compressed directory (<directory>.tar.bz2)
+References: <1296167465.14370.7.camel@utx.lan>
+In-Reply-To: <1296167465.14370.7.camel@utx.lan>
+Subject: Re: [RFC][PATCH] binconfig.bbclass: search configs in PKGD instead of S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 01:09:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 28 Jan 2011 01:20:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 27, 2011 at 4:17 PM, Ulf Samuelsson
-<ulf.samuelsson@atmel.com> wrote:
-> To me, maintaining this is much less work than maintaining a
-> SRC_URI statement.
->
-> Obviously, it would be better if the build system
-> had a defined order when applying patches from a file
-> containing multiple patches.
+On 01/27/2011 11:31 PM, Stanislav Brabec wrote:
+> It seems that searching for binconfig in S makes more problems than it
+> brings benefits. It breaks for example ncurses - it populates
+> ncurses-config instead of ncurses5-config and ncursesw5-config).
 
-You seem to be under the mistaken impression that it's the build
-system that's handling that.  It just calls quilt/patch to apply it..
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Indeed. Installing *-config files which don't get installed by the
+recipe is prone to cause subtle errors. I modified pkgconfig.bbclass in
+a similar way in commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8.
+
+"find recipes -name "*-config" -type f" shows candidates which may cause
+breakage with this patch applied, in case they need to be installed but
+only get copied to the source directory.
+
+> Searching in the installed root seems to be more logical.
+> 
+> Most packages don't need to be ported to this change, as they install
+> config file with the same name as it exists in sources. But probably
+> several will need porting.
+
+Why is this function needed at all? Isn't it possible to do the mangling
+before or after do_install like in pkgconfig.bbclass?
+
+Regards,
+Andreas
 
 
