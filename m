@@ -1,31 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1PipLw-0000Jc-Q5
+	(envelope-from <utx@penguin.cz>) id 1PipOS-0000OT-BR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 15:31:09 +0100
-Received: by iwn8 with SMTP id 8so3258522iwn.6
+	Fri, 28 Jan 2011 15:33:44 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id C98E114019DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 06:30:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=sBQbjLIYJ/nH6aTtTuKQhmM6X9qQrakWeutlovEHJeE=;
-	b=tpNxACfLTaoXHALyq1SQcDZ7TbL1mXbziQywKWhy+6b+To0e/rxuMVVUl5u/5v9nDo
-	pI8h8ahxZfeYX6Fl9NoBNIj1ujJjlINNpAigg3gzQGJslIs9mhLH8Be37NgQn1rf6Pq3
-	pBpFHmX9q4y8NziT4WxdV5D3VZ5uyT2/erzy8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=qhEl0o3TNMqan9b3hlP06GTOknlNVS8R+QUysjUlas1rkWSptfvJoASgzRZa7/eMQ6
-	oIe2q4axBWoR0+8R1M0vFEJPFPKceg0xEjB32WdRKMJuLJ3w30P2/w/0atAB1hKH8Gdi
-	iXvDebDeSESKQcXvwd0SZOAFEcWF70cB2RmAU=
-MIME-Version: 1.0
-Received: by 10.231.13.138 with SMTP id c10mr2716530iba.97.1296225018126; Fri,
-	28 Jan 2011 06:30:18 -0800 (PST)
-Received: by 10.231.38.4 with HTTP; Fri, 28 Jan 2011 06:30:18 -0800 (PST)
-Date: Fri, 28 Jan 2011 09:30:18 -0500
-Message-ID: <AANLkTinTV+FMDzCSQKGjB81LGgp4L8eyceusVNs4CWCL@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: testing branch 2011-01-28
+	Fri, 28 Jan 2011 15:36:29 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id NGXnGPtBDqnL
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Jan 2011 15:36:29 +0100 (CET)
+Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
+	by ns.penguin.cz (Postfix) with ESMTP id A91AF14019D6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Jan 2011 15:36:29 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4D42198B.5070604@opendreambox.org>
+References: <1296167465.14370.7.camel@utx.lan>
+	<4D42198B.5070604@opendreambox.org>
+Date: Fri, 28 Jan 2011 15:32:55 +0100
+Message-ID: <1296225175.1265.39.camel@hammer.site>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+Subject: Re: [RFC][PATCH] binconfig.bbclass: search configs in PKGD instead of S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,16 +40,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 14:31:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 28 Jan 2011 14:33:44 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-master has been merged to testing-next and is ready for clean builds.
+Andreas Oberritter wrote:
+> On 01/27/2011 11:31 PM, Stanislav Brabec wrote:
+> > It seems that searching for binconfig in S makes more problems than it
+> > brings benefits. It breaks for example ncurses - it populates
+> > ncurses-config instead of ncurses5-config and ncursesw5-config).
+> 
+> Indeed. Installing *-config files which don't get installed by the
+> recipe is prone to cause subtle errors. I modified pkgconfig.bbclass in
+> a similar way in commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8.
 
-Thanks,
-Cliff
+Yes, it can cause installation of .pc that are not intended to be
+installed. It also saves the grep -v -- '-uninstalled.pc$'.
+
+> "find recipes -name "*-config" -type f" shows candidates which may cause
+> breakage with this patch applied, in case they need to be installed but
+> only get copied to the source directory.
+
+Well, it is possible, especially for packages that don't use "make
+install" in any form. But the correct solution for that problem would be
+different: Install these -config files in do_install and let binconfig
+to mangle and move them automatically. If one depends on the old form of
+binconfig, -config files are missing in the target native -devel
+packages. (Most users will not see any problems until they try to
+compile on the target native system.)
+
+> > Searching in the installed root seems to be more logical.
+> > 
+> > Most packages don't need to be ported to this change, as they install
+> > config file with the same name as it exists in sources. But probably
+> > several will need porting.
+> 
+> Why is this function needed at all? Isn't it possible to do the mangling
+> before or after do_install like in pkgconfig.bbclass?
+
+binconfig files are a bit special:
+- They have to be in the cross environment PATH. The target sysroot is
+not (and cannot) be in the cross environment PATH. They have to be
+mangled and moved to another location.
+
+- They have to be different in the target package and in the staging
+package. I can imagine a different solution, but the current one works
+well for most packages.
+
+In case of .pc files, this logic above is embedded into pkg-config
+itself, so one does not need additional magic.
 
 -- 
-=================
-http://bec-systems.com
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
