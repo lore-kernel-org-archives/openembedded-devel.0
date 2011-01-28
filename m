@@ -1,35 +1,37 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1Pid0S-0005xb-6T
+	(envelope-from <coolaj86@gmail.com>) id 1PidfC-0006ry-Vk
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 02:20:08 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 3EE1B314D465
+	Fri, 28 Jan 2011 03:02:16 +0100
+Received: by fxm17 with SMTP id 17so2900455fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 02:19:19 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id B0GYhjoUHR+H
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 02:19:13 +0100 (CET)
-Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
-	[94.79.168.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id C6735314D463
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 02:19:13 +0100 (CET)
-Message-ID: <4D42198B.5070604@opendreambox.org>
-Date: Fri, 28 Jan 2011 02:19:07 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101210 Lightning/1.0b2 Thunderbird/3.1.7
+	Thu, 27 Jan 2011 18:01:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=2+ppJt5Q2ZIyxvOK7RVkOol6COLC7FllzbckWKO3Eus=;
+	b=fFWr9NxBzjSlp8agBRvR25QIms7iVsA2gvcG5ESViIiucWnB6nP7lxFBwbSqlN/X4p
+	8pz7bZZIDUKjBSMBStNBhcTB/YD5bCpQ5x4bTldeIBIMVXlPYAAItwn+54hxwtQcU8TC
+	3meRZB46VnGEp2Vu7rY/qVtJs3NSPY2x82TRw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=Hcy9P+3Iz841KAuj3ZmoCSsQQeZ0a4mi9xjSW6OS2SSE6jSAMrUvZg87YtFfWCbRAq
+	ZovUWAbx7u8jqvbq6MprBOp2yaZ84o705BC/qZAmmuFUovBmgu7R6KWUNYmYfq57rlQj
+	yZV0yXtYb+yNtT4JGGNgLWZ/ISj9l8uS2FnZg=
+Received: by 10.223.114.209 with SMTP id f17mr1695627faq.136.1296180080035;
+	Thu, 27 Jan 2011 18:01:20 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.223.27.137 with HTTP; Thu, 27 Jan 2011 18:00:59 -0800 (PST)
+In-Reply-To: <ihn8ra$scb$1@dough.gmane.org>
+References: <1295983479-15511-1-git-send-email-coolaj86@gmail.com>
+	<ihn8ra$scb$1@dough.gmane.org>
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Thu, 27 Jan 2011 19:00:59 -0700
+Message-ID: <AANLkTinKQ1Gkn2D+ppB1E9pKSe1xxS0jcd3TU6T82zTt@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1296167465.14370.7.camel@utx.lan>
-In-Reply-To: <1296167465.14370.7.camel@utx.lan>
-Subject: Re: [RFC][PATCH] binconfig.bbclass: search configs in PKGD instead of S
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] nodejs: updated recipe to v0.2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 01:20:08 -0000
+X-List-Received-Date: Fri, 28 Jan 2011 02:02:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 01/27/2011 11:31 PM, Stanislav Brabec wrote:
-> It seems that searching for binconfig in S makes more problems than it
-> brings benefits. It breaks for example ncurses - it populates
-> ncurses-config instead of ncurses5-config and ncursesw5-config).
+>
+> >  recipes/nodejs/files/libev-cross-cc.patch |   17 +++++---------
+> >  recipes/nodejs/files/node-cross-cc.patch  |   19 ++++++++++------
+> >  recipes/nodejs/nodejs_0.2.6.bb            |   34
+> +++++++++++++++++++++++++++++
+>
+> You're changing the patches, but don't remove the old version, do they
+> still work?
 
-Indeed. Installing *-config files which don't get installed by the
-recipe is prone to cause subtle errors. I modified pkgconfig.bbclass in
-a similar way in commit c2c8fe4c5629add94bd0b922f5b3446624a9f4d8.
 
-"find recipes -name "*-config" -type f" shows candidates which may cause
-breakage with this patch applied, in case they need to be installed but
-only get copied to the source directory.
+I copied the new patches over the old patches.
+Should I have done `git rm this.patch; edit this.patch; git add this.patch`
+instead?
 
-> Searching in the installed root seems to be more logical.
-> 
-> Most packages don't need to be ported to this change, as they install
-> config file with the same name as it exists in sources. But probably
-> several will need porting.
 
-Why is this function needed at all? Isn't it possible to do the mangling
-before or after do_install like in pkgconfig.bbclass?
+>
 
-Regards,
-Andreas
+> +PR = "r4"
+>
+> New recipes start at r0
+>
 
+But it wasn't until the 4th time that I bumped the PR to re-bitbake and test
+it that I got it right. :D
+
+Would you like me to resubmit the patch without the +PR = "r4"?
 
