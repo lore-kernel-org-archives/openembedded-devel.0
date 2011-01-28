@@ -1,36 +1,35 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1PigKg-0000og-8Y
+	(envelope-from <raj.khem@gmail.com>) id 1PigVQ-0001Q7-VF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 05:53:14 +0100
-Received: by ywi6 with SMTP id 6so926761ywi.6
+	Fri, 28 Jan 2011 06:04:21 +0100
+Received: by yie16 with SMTP id 16so923918yie.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 20:52:24 -0800 (PST)
+	Thu, 27 Jan 2011 21:03:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:content-type:content-transfer-encoding;
-	bh=EJOjQHW6/GWwlvRGTrn62ubwmhjPoIJtjcbDarTUBAo=;
-	b=jeu/CZH/28ar7zQt+gftx0ta+fBjkxlE/CI6WXi51Ah+hoWD8zukHKqX8XdURthDmw
-	DX+ItsANYq0mE5KuMsmMMxsZOlI5/Go41CYqOL+ror34dntTdG3vE64tRsRyr88lMeHN
-	jiRoSzRktPzVwgVG0dX/AT6S27mfzRNTXxLzg=
+	bh=WDzdoVur6mpJaD7NvwWxq8Gn2j/avxfMeQJO4JpzNbA=;
+	b=G1gOnRXLvuPF6CchP+IkZQhEM8UYMwW0kJ5YXDShqfboYTv19ciNTxH+E/rxWg0nMs
+	PoOjwdJ+4TgWeGrnVcP2GMJ7M6Oz+wHZ2rcU/cJ0j3bEGqcWZiKpqxUTLNhE1pvXfnui
+	y8jLexv1DWiawCLfve82XqHTOYSaHexMkF+ps=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=gOSe0JcyH2IQ+rnJZkjBItdMiWgNl7iinA67E85sCjzdXBco6W6NH3dwbUGkTcydk5
-	+hic9giTHgdfR0k72kr7mPvPSkJk0/UpGyd5N8y5Ym4qgROJvuJjsEy5GPQBa/mKVtfa
-	D+MLPTqr6pzFsOC2itf9d4PVUKZ6Y/H+eTXfI=
-Received: by 10.90.66.17 with SMTP id o17mr1649842aga.88.1296190343823; Thu,
-	27 Jan 2011 20:52:23 -0800 (PST)
+	b=ksf7LJV12TKyFzCEEnDZzPgyg4oXAmUFkrOt4DUhu2Xn26HZkIktg8nBz+lpuIadcv
+	R/evEToSIqNlggB64PFCG8XtTJ3Mp//lOecpL583WltajA21RlpxcuzQ3w2Ja70E4G/d
+	so4zqsw5so0S0okHnd5Oiy/iJEjNsdh5KtL4Y=
+Received: by 10.90.81.19 with SMTP id e19mr4246420agb.7.1296191011096; Thu, 27
+	Jan 2011 21:03:31 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Thu, 27 Jan 2011 20:52:03 -0800 (PST)
-In-Reply-To: <1296114247-11702-2-git-send-email-Martin.Jansa@gmail.com>
-References: <1296114247-11702-1-git-send-email-Martin.Jansa@gmail.com>
-	<1296114247-11702-2-git-send-email-Martin.Jansa@gmail.com>
+Received: by 10.90.32.12 with HTTP; Thu, 27 Jan 2011 21:03:10 -0800 (PST)
+In-Reply-To: <1296167465.14370.7.camel@utx.lan>
+References: <1296167465.14370.7.camel@utx.lan>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 27 Jan 2011 20:52:03 -0800
-Message-ID: <AANLkTikD5bnkWpQQTjoC4hVF-hTah6LfmYkWYKV=RiRj@mail.gmail.com>
+Date: Thu, 27 Jan 2011 21:03:10 -0800
+Message-ID: <AANLkTimuDyVCbR7r+0=euudK3YBmGq5T4P+e5a4XKS2b@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] xbiff: upgrade from 1.0.2 to 1.0.3
+Subject: Re: [RFC][PATCH] binconfig.bbclass: search configs in PKGD instead of S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,55 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 04:53:14 -0000
+X-List-Received-Date: Fri, 28 Jan 2011 05:04:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 26, 2011 at 11:44 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
-> ---
-> =C2=A0recipes/xorg-app/xbiff_1.0.2.bb | =C2=A0 =C2=A07 -------
-> =C2=A0recipes/xorg-app/xbiff_1.0.3.bb | =C2=A0 =C2=A07 +++++++
-> =C2=A02 files changed, 7 insertions(+), 7 deletions(-)
-> =C2=A0delete mode 100644 recipes/xorg-app/xbiff_1.0.2.bb
-> =C2=A0create mode 100644 recipes/xorg-app/xbiff_1.0.3.bb
+On Thu, Jan 27, 2011 at 2:31 PM, Stanislav Brabec <utx@penguin.cz> wrote:
+> Hallo.
 >
-> diff --git a/recipes/xorg-app/xbiff_1.0.2.bb b/recipes/xorg-app/xbiff_1.0=
-.2.bb
-> deleted file mode 100644
-> index 66cd182..0000000
-> --- a/recipes/xorg-app/xbiff_1.0.2.bb
-> +++ /dev/null
-> @@ -1,7 +0,0 @@
-> -require xorg-app-common.inc
-> -DEPENDS +=3D " libxaw xbitmaps libxext"
-> -PE =3D "1"
-> -PR =3D "${INC_PR}.0"
-> -
-> -SRC_URI[archive.md5sum] =3D "1d4ad06725f9dc4b877ecd210b7b1607"
-> -SRC_URI[archive.sha256sum] =3D "7c21763a90599ad627739804ba76dd33516b76cc=
-e440294e1154bf680eca60f7"
-> diff --git a/recipes/xorg-app/xbiff_1.0.3.bb b/recipes/xorg-app/xbiff_1.0=
-.3.bb
-> new file mode 100644
-> index 0000000..5ac26d2
-> --- /dev/null
-> +++ b/recipes/xorg-app/xbiff_1.0.3.bb
-> @@ -0,0 +1,7 @@
-> +require xorg-app-common.inc
-> +DEPENDS +=3D " libxaw xbitmaps libxext libxmu"
-> +PE =3D "1"
-> +PR =3D "${INC_PR}.0"
-> +
-> +SRC_URI[archive.md5sum] =3D "f38a0c63c2a7ed6fb9d6f8884785b5c9"
-> +SRC_URI[archive.sha256sum] =3D "aa1db4f31f7afcfe131bda7ff6e380ff7de41cf1=
-a7009464783043c817c47ce8"
+> It seems that searching for binconfig in S makes more problems than it
+> brings benefits. It breaks for example ncurses - it populates
+> ncurses-config instead of ncurses5-config and ncursesw5-config).
+>
+> Searching in the installed root seems to be more logical.
+>
+> Most packages don't need to be ported to this change, as they install
+> config file with the same name as it exists in sources. But probably
+> several will need porting.
+
+Yes this patch looks sane to me.
+
+>
+> --- a/classes/binconfig.bbclass
+> +++ b/classes/binconfig.bbclass
+> @@ -49,7 +49,7 @@
+> =C2=A0SYSROOT_PREPROCESS_FUNCS +=3D "binconfig_sysroot_preprocess"
+>
+> =C2=A0binconfig_sysroot_preprocess () {
+> - =C2=A0 =C2=A0 =C2=A0 for config in `find ${S} -name '${BINCONFIG_GLOB}'=
+`; do
+> + =C2=A0 =C2=A0 =C2=A0 for config in `find ${PKGD} -name '${BINCONFIG_GLO=
+B}'`; do
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0configname=3D`base=
+name $config`
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${SYSRO=
+OT_DESTDIR}${STAGING_BINDIR_CROSS}
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cat $config | sed =
+${@get_binconfig_mangle(d)} > ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$co=
+nfigname
+>
 > --
-> 1.7.4.rc3
+>
+> ________________________________________________________________________
+> Stanislav Brabec
+> http://www.penguin.cz/~utx/zaurus
 >
 >
 > _______________________________________________
