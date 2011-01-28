@@ -1,32 +1,32 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <srinredplano@gmail.com>) id 1Piw1k-0008Gu-Qx
+	(envelope-from <Tom_Rini@mentor.com>) id 1PiwmN-0000wG-VV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 22:38:45 +0100
-Received: by qyk36 with SMTP id 36so3798738qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 13:37:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=kgCnloNz6GTD0O/w2yZ5jjW8h0Z5h0VtmD5L8lLzBwU=;
-	b=wyFWJ4uYnNEE0vOLpTaqUKF7G7nybuivuAzP9FbDHJ7BUsBKe0BZjdc7MnNHuVMmHx
-	ik3ixOjo/rsyiCe4CQCbfIR5E5sKTq2gcHsnmM+z8zbls88U7N6lwgF3uQydW4YhBrkj
-	SymGBO3/3gNCx8ID/Z7e2XS9aUYU0DbHbz+eQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=vhxyoNtOGZBHbNqm1HrqmAUm4hY6wnFpNM231pO+5Jw1oNknHtUFVMghl4bxWB4Gn4
-	ls+ZhmrLiQ8JP4wredChZrY8wgyiHV24CfUEFxuk09NlmBVSNzYiCf7cKrW2KDY34CTV
-	p+IqXlFhy04vF7tjDna/y/N6dHCfYAfSLbleQ=
+	Fri, 28 Jan 2011 23:26:57 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PiwlZ-0005M3-GZ from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 28 Jan 2011 14:26:05 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 28 Jan 2011 14:26:03 -0800
+Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 28 Jan 2011 15:26:01 -0700
+Message-ID: <4D434272.9090403@mentor.com>
+Date: Fri, 28 Jan 2011 15:25:54 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.229.236.203 with SMTP id kl11mr1275905qcb.131.1296250674227;
-	Fri, 28 Jan 2011 13:37:54 -0800 (PST)
-Received: by 10.220.175.203 with HTTP; Fri, 28 Jan 2011 13:37:54 -0800 (PST)
-Date: Fri, 28 Jan 2011 13:37:54 -0800
-Message-ID: <AANLkTimnVCsZ7sW0yW_jqRV-nosmOQd-9pprD67HDNem@mail.gmail.com>
-From: srinredplano SP <srinredplano@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: how to know why bitbake will pick a wrong .bb file after providing PREFERRED_PROVIDER value
+References: <AANLkTinTV+FMDzCSQKGjB81LGgp4L8eyceusVNs4CWCL@mail.gmail.com>
+In-Reply-To: <AANLkTinTV+FMDzCSQKGjB81LGgp4L8eyceusVNs4CWCL@mail.gmail.com>
+X-OriginalArrivalTime: 28 Jan 2011 22:26:01.0918 (UTC)
+	FILETIME=[5836B5E0:01CBBF3A]
+Subject: Re: testing branch 2011-01-28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,153 +40,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 21:38:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 28 Jan 2011 22:26:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi ,
-I am using *DISTRO=arago*  and *MACHINE= omap3axon*(same as that of omap3evm
-) to compile* linux-2.6.22 * kernel .
+On 01/28/2011 07:30 AM, Cliff Brake wrote:
+> master has been merged to testing-next and is ready for clean builds.
 
-when I try to execute the following   command
-tbake finds my .bb file and uses
+Need 
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=dd33ced4b8123600efa1f67f704aec13b0842ad1 
+for most of my autobuilder now that python-pygobject-native is pulled in 
+(it looks like just minimal-image and meta-toolchain will pass in my 
+matrix, on this weeks branch, will update once all done).
 
-*$> MACHINE=omap3axon  bitbake virtual/kernel*
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
-*wrong bb file is getting picked up . How to know why a wrong .bb file is
-picked up(it always picks linux-nokia900-2.6.28.10+gitr0+
-e93534addfc33a2fefbca13cb86a8f787e4b650c-r92.bb file  ) and which  variable
-i have to override so that only my .bb file gets executed .
-Is there any thing else which I am missing . thanks  in advance
-*
-The following  the local.conf ,   omap3axon.conf
-
-*local.conf  file :*
-### local.conf #########
-
-SCRATCH ?= "${OEBASE}"
-
-DL_DIR = "${SCRATCH}/downloads"
-
-TMPDIR = "${SCRATCH}/arago-tmp"
-
-MACHINE = "omap3axon"
-
-DISTRO = "arago"
-
-ENABLE_BINARY_LOCALE_GENERATION = "0"
-
-IMAGE_FSTYPES = "jffs2 tar.gz ext2.gz"
-
-BBDEBUG = "yes"
-
-PARALLEL_MAKE = "-j 8"
-BB_NUMBER_THREADS = "4"
-
-BBINCLUDELOGS = "yes"
-
-TOOLCHAIN_TYPE = "external"
-TOOLCHAIN_BRAND = "csl"
-DEFAULT_PREFERENCE = "1"
-
-####### END local.conf ####
-
-*
-MACHINE : omap3axon.conf *
-## MACHINE  CONF omap3axon.conf  ##
-
-#@DESCRIPTION: Machine configuration for the TI OMAP3 EVM
-TARGET_ARCH = "arm"
-
-PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-XSERVER = "xserver-xorg \
-           xf86-input-evdev \
-           xf86-input-mouse \
-           xf86-input-tslib \
-           xf86-video-omapfb \
-           xf86-input-keyboard"
-
-GUI_MACHINE_CLASS = "smallscreen"
-
-require conf/machine/include/omap3.inc
-
-IMAGE_FSTYPES ?= "jffs2 tar.bz2"
-EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
-
-SERIAL_CONSOLE = "115200 ttyS0"
-
-PREFERRED_PROVIDER_virtual/kernel = "linux-omap3axon-2.6.22-pspaxon"
-
-UBOOT_ARCH = "arm"
-
-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen
-touchscreen"
-
-KVER= "2.6.22"
-
-MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
-
-UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
-
-##END -- MACHINE  CONF omap3axon.conf  ##
-
-
-
-
-
-*linux-omap3axon-2.6.22-pspaxon.bb* file :
-#####linux-omap3axon-2.6.22-pspaxon.bb ##
-
-SRC_URI = "file://linux-2.6.22.tar.gz \
-           file://defconfig"
-
-COMPATIBLE_MACHINE = "omap3axon"
-
-require linux-omap3.inc
-
-SECTION = "kernel"
-
-KVER = "2.6.22"
-
-DEFAULT_PREFERENCE = "1"
-DEFAULT_PREFERENCE_omap3axon = "1"
-#SRC_URI := "${@oe_filter_out('file://defconfig', bb.data.getVar('SRC_URI',
-d, 1), d)}"
-
-
-DEFAULT_PREFERENCE = "1"
-
-do_setup_defconfig() {
-        :
-}
-
-do_configure() {
-        make omap3evm_defconfig
-}
-
-
-SRCREV = "753"
-
-MACHINE_KERNEL_PR_append = "+svnr${SRCREV}"
-
-SRC_URI = "file://linux-2.6.22.tar.gz \
-           file://defconfig"
-
-addtask quiltfixup before do_patch after do_unpack
-
-do_quiltfixup() {
-          :
-}
-
-S = "${WORKDIR}/kernel/linux-2.6.22"
-
-
-do_install_append() {
-            install -d ${D}/boot
-}
-
-PACKAGES =+ "omap-dss-doc"
-FILES_omap-dss-doc = "/boot/DSS"
-
-
-####END----linux-omap3axon-2.6.22-pspaxon.bb<http://end----linux-omap3axon-2.6.22-pspaxon.bb/>####
 
