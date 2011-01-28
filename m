@@ -1,37 +1,35 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-yi0-f47.google.com ([209.85.218.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1PidfC-0006ry-Vk
+	(envelope-from <raj.khem@gmail.com>) id 1PigJK-0000mZ-5g
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 03:02:16 +0100
-Received: by fxm17 with SMTP id 17so2900455fxm.6
+	Fri, 28 Jan 2011 05:51:50 +0100
+Received: by yie16 with SMTP id 16so921058yie.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jan 2011 18:01:20 -0800 (PST)
+	Thu, 27 Jan 2011 20:50:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=2+ppJt5Q2ZIyxvOK7RVkOol6COLC7FllzbckWKO3Eus=;
-	b=fFWr9NxBzjSlp8agBRvR25QIms7iVsA2gvcG5ESViIiucWnB6nP7lxFBwbSqlN/X4p
-	8pz7bZZIDUKjBSMBStNBhcTB/YD5bCpQ5x4bTldeIBIMVXlPYAAItwn+54hxwtQcU8TC
-	3meRZB46VnGEp2Vu7rY/qVtJs3NSPY2x82TRw=
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=Occbwo5ma4AGqnVfYjLY/+upvbYRW/x/QG5jeEdr1Dw=;
+	b=t0uVTEkXgbNo+Av4kG/kJI7FzMyEeMEQzIS764Eauz+C6dtGXnpYNF2UhO7nMpq0Dz
+	uxa5yivXfIKG419r0TmjXMIwAiQkLqycxrFDsYojwDYvVGrFs8SrhEwfFik7bwzon1fu
+	dzhsh6j+mYSRFpmfAS9UGPWXMslgax3YcvVlk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=Hcy9P+3Iz841KAuj3ZmoCSsQQeZ0a4mi9xjSW6OS2SSE6jSAMrUvZg87YtFfWCbRAq
-	ZovUWAbx7u8jqvbq6MprBOp2yaZ84o705BC/qZAmmuFUovBmgu7R6KWUNYmYfq57rlQj
-	yZV0yXtYb+yNtT4JGGNgLWZ/ISj9l8uS2FnZg=
-Received: by 10.223.114.209 with SMTP id f17mr1695627faq.136.1296180080035;
-	Thu, 27 Jan 2011 18:01:20 -0800 (PST)
+	:content-type:content-transfer-encoding;
+	b=IRUUxZi2f2+zgieofsnaMn+tA07NQw9IAmS2cqw3xyhZpcHiE/rf/lqqAgHF54NRxg
+	QjqfwiCk3ixKWOJmhPRT12Gdt9ftEO+IBKWmQze0/JZyad2HFeRfr84wf0D3dnpsZAo/
+	1MynFixmGwW2Pm/WZst+Slxdfoj6CaVyogpNg=
+Received: by 10.90.51.20 with SMTP id y20mr4233736agy.115.1296190258431; Thu,
+	27 Jan 2011 20:50:58 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.27.137 with HTTP; Thu, 27 Jan 2011 18:00:59 -0800 (PST)
-In-Reply-To: <ihn8ra$scb$1@dough.gmane.org>
-References: <1295983479-15511-1-git-send-email-coolaj86@gmail.com>
-	<ihn8ra$scb$1@dough.gmane.org>
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Thu, 27 Jan 2011 19:00:59 -0700
-Message-ID: <AANLkTinKQ1Gkn2D+ppB1E9pKSe1xxS0jcd3TU6T82zTt@mail.gmail.com>
+Received: by 10.90.32.12 with HTTP; Thu, 27 Jan 2011 20:50:38 -0800 (PST)
+In-Reply-To: <1296114247-11702-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1296114247-11702-1-git-send-email-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 27 Jan 2011 20:50:38 -0800
+Message-ID: <AANLkTikymCFYtdxLpWArFAe38iY4oGQEMZCatCA26F+2@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] nodejs: updated recipe to v0.2.6
+Subject: Re: [PATCH 1/2] libxi: upgrade from 1.4.0 to 1.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +43,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 02:02:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 28 Jan 2011 04:51:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Jan 26, 2011 at 11:44 PM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+> ---
+> =C2=A0recipes/xorg-lib/libxi_1.4.0.bb | =C2=A0 10 ----------
+> =C2=A0recipes/xorg-lib/libxi_1.4.1.bb | =C2=A0 10 ++++++++++
+> =C2=A02 files changed, 10 insertions(+), 10 deletions(-)
+> =C2=A0delete mode 100644 recipes/xorg-lib/libxi_1.4.0.bb
+> =C2=A0create mode 100644 recipes/xorg-lib/libxi_1.4.1.bb
 >
-> >  recipes/nodejs/files/libev-cross-cc.patch |   17 +++++---------
-> >  recipes/nodejs/files/node-cross-cc.patch  |   19 ++++++++++------
-> >  recipes/nodejs/nodejs_0.2.6.bb            |   34
-> +++++++++++++++++++++++++++++
+> diff --git a/recipes/xorg-lib/libxi_1.4.0.bb b/recipes/xorg-lib/libxi_1.4=
+.0.bb
+> deleted file mode 100644
+> index 96aa92e..0000000
+> --- a/recipes/xorg-lib/libxi_1.4.0.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -require xorg-lib-common.inc
+> -DESCRIPTION =3D "X11 Input extension library"
+> -DEPENDS +=3D "libxext inputproto"
+> -PE =3D "1"
+> -PR =3D "${INC_PR}.0"
+> -
+> -SRC_URI[archive.md5sum] =3D "4ccdfe866f94c99b9190d16ffcfb3bdc"
+> -SRC_URI[archive.sha256sum] =3D "42efe95a08c7bd28bc913bf8c34ed026abcc6250=
+4307626fc5150ca360b93283"
+> -
+> -XORG_PN =3D "libXi"
+> diff --git a/recipes/xorg-lib/libxi_1.4.1.bb b/recipes/xorg-lib/libxi_1.4=
+.1.bb
+> new file mode 100644
+> index 0000000..39f09a1
+> --- /dev/null
+> +++ b/recipes/xorg-lib/libxi_1.4.1.bb
+> @@ -0,0 +1,10 @@
+> +require xorg-lib-common.inc
+> +DESCRIPTION =3D "X11 Input extension library"
+> +DEPENDS +=3D "libxext inputproto"
+> +PE =3D "1"
+> +PR =3D "${INC_PR}.0"
+> +
+> +SRC_URI[archive.md5sum] =3D "e4b6fb1b08a92075469174f0cccde168"
+> +SRC_URI[archive.sha256sum] =3D "599f1c0930f94c2ae74711b2577a7f354c4a991c=
+c97b5ec5bb655b855c1429a6"
+> +
+> +XORG_PN =3D "libXi"
+> --
+> 1.7.4.rc3
 >
-> You're changing the patches, but don't remove the old version, do they
-> still work?
-
-
-I copied the new patches over the old patches.
-Should I have done `git rm this.patch; edit this.patch; git add this.patch`
-instead?
-
-
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-> +PR = "r4"
->
-> New recipes start at r0
->
-
-But it wasn't until the 4th time that I bumped the PR to re-bitbake and test
-it that I got it right. :D
-
-Would you like me to resubmit the patch without the +PR = "r4"?
 
