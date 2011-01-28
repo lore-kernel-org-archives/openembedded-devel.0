@@ -1,32 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PirKA-0004Sb-IA for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 17:37:28 +0100
-Received: from f053044076.adsl.alicedsl.de ([78.53.44.76]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PirJO-00047J-QQ for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 16:36:39 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1PirUj-0004tF-17
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 28 Jan 2011 17:48:21 +0100
+Received: by bwz10 with SMTP id 10so3437231bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Jan 2011 08:47:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=d5OXF5lDjUggprXZlXPNzsC/4ImZRZwXhLWdM0UC4lw=;
+	b=RTL8Xxzx9KLUImQe6S3urywWgcz2rXujXWeiSo4vVwWzbbPz2Uk67KCkIszhzpd8Dr
+	g6dYmo+iqwgpMSPfcNahyr6/wTDJ3W3xYfYX8X4Zpb1DyYRuh15vQoFFcXReoi8eAeg1
+	xG1rc8AvwjjY9vq0aYXf+/+96OEG20GlMYAzM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=hH4ci7MSxFhCrsH30nduzW+IvE+OrfJD/QqOa0mxJi73pPNV7drPXZnua4/Pd2VA8X
+	/SP52tLqKQPZDCvFOO1qTKOkrnVzB8wW1P7twXnkBK3+zEwxu1iUEDYTCurYJ7GKtkKA
+	LNELSxka4p8QaW9Ut3Xs7NtOncJ+jVsxoiBP4=
+Received: by 10.204.115.147 with SMTP id i19mr2646717bkq.162.1296233250815;
+	Fri, 28 Jan 2011 08:47:30 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id q18sm8818369bka.15.2011.01.28.08.47.29
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 28 Jan 2011 08:47:29 -0800 (PST)
+Date: Fri, 28 Jan 2011 17:47:28 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1295832268.7645.54.camel@mattotaupa>
-References: <1295608972.12720.47.camel@mattotaupa>
-	<AANLkTinbMr38A4-yGjyLkNL+ydrwS+R6r_OWZo2fh7KP@mail.gmail.com>
-	<1295653195.4105.56.camel@mattotaupa>
-	<1295684244.4098.2.camel@mattotaupa>
-	<1295720592.3850.290.camel@mattotaupa>
-	<AANLkTin86VuRC4KSVfY=zAqnV+EXEmVh37mwiJ0X4BRU@mail.gmail.com>
-	<1295798887.12751.6.camel@mattotaupa>
-	<1295812624.3570.13.camel@mattotaupa>
-	<AANLkTi=0vr9MZ28ZtvzvpSGK0k39BjoXC-sH-fJZs4j_@mail.gmail.com>
-	<1295832268.7645.54.camel@mattotaupa>
-Date: Fri, 28 Jan 2011 17:36:38 +0100
-Message-ID: <1296232598.21132.21.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: vdr: minimal-uclibc: task `compile` fails with `undefined reference to `_nl_msg_cat_cntr'`
+Message-ID: <20110128164728.GA3265@jama>
+References: <E1Piqw5-0004kv-3P@melo.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <E1Piqw5-0004kv-3P@melo.openembedded.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Andrea Adami : MAINTAINERS: add committer's entry.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,156 +48,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 16:37:28 -0000
-X-Groupsio-MsgNum: 28573
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-ZArIu2RS3lIj5wiTGa0X"
+X-List-Received-Date: Fri, 28 Jan 2011 16:48:21 -0000
+X-Groupsio-MsgNum: 28574
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="x+6KMIRAuhnl3hBn"
+Content-Disposition: inline
 
---=-ZArIu2RS3lIj5wiTGa0X
-Content-Type: text/plain; charset="UTF-8"
+--x+6KMIRAuhnl3hBn
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Am Montag, den 24.01.2011, 02:24 +0100 schrieb Paul Menzel:
-> Am Sonntag, den 23.01.2011, 14:09 -0800 schrieb Khem Raj:
-> > On Sun, Jan 23, 2011 at 11:57 AM, Paul Menzel wrote:
-> > > Am Sonntag, den 23.01.2011, 17:08 +0100 schrieb Paul Menzel:
-> > >> Am Samstag, den 22.01.2011, 11:48 -0800 schrieb Khem Raj:
-> > >> > On Sat, Jan 22, 2011 at 10:23 AM, Paul Menzel wrote:
-> > >> > > The commit since when building fails is a88aca1d [6].
-> > >> > >
-> > >> > >        commit a88aca1d7dfa3a08957dd49cb61bac850f197106
-> > >> > >        Author: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-> > >> > >        Date:   Wed Jan 12 20:34:55 2011 +0100
-> > >> > >
-> > >> > >            autotools.bbclass: pass distro_imposed_configure_flag=
-s
-> > >> > >
-> > >> > >            Acked-by: Khem Raj <raj.khem@gmail.com>
-> > >> > >            Acked-by: Tom Rini <tom_rini@mentor.com>
-> > >> > >            Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@=
-gmail.com>
-> > >> > >
-> > >> > > Any idea?
-> > >> >
-> > >> > I see. I think its to do with enable-ipv6 or somesuch. Can you run
-> > >> > do_configure for vdr before and after this commit and port
-> > >> > the contents of line invoking configure.
-> > >>
-> > >> Strange. VDR just uses a plain Makefile and no Autotools. Since this
-> > >> commit, it seems that `-lintl` is not passed.
-> > >>
-> > >> ### works
-> > >>
-> > >>       arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a=
-8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/o=
-e/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibcea=
-bi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-regi=
-sters -Os -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl,-O1 -Wl,--=
-hash-style=3Dgnu audio.o channels.o ci.o config.o cutter.o device.o diseqc.=
-o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o ep=
-g.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems.o nit=
-.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.o reco=
-rding.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o skinclass=
-ic.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o svdrp.o th=
-emes.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -lpthre=
-ad -ldl -lcap -lrt -lfreetype -lfontconfig -lintl  ./libsi/libsi.a -o vdr
-> > >>
-> > >> ### fails
-> > >>
-> > >>       arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a=
-8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/o=
-e/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibcea=
-bi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-regi=
-sters -Os -pipe -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl,-O1 =
--Wl,--hash-style=3Dgnu audio.o channels.o ci.o config.o cutter.o device.o d=
-iseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitsca=
-n.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems=
-.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.=
-o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o ski=
-nclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o svdr=
-p.o themes.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -=
-lpthread -ldl -lcap -lrt -lfreetype -lfontconfig  ./libsi/libsi.a -o vdr
-> > >>
-> > >>       $ wdiff log.do_compile.*
-> > >>       arm-oe-linux-uclibceabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a=
-8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -isystem/o=
-e/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclibcea=
-bi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-regi=
-sters -Os [--pipe-] -fpermissive -fvisibility-inlines-hidden -rdynamic -Wl,=
--O1 -Wl,--hash-style=3Dgnu audio.o channels.o ci.o config.o cutter.o device=
-.o diseqc.o dvbdevice.o dvbci.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o ei=
-tscan.o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menui=
-tems.o nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o recor=
-der.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o=
- skinclassic.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o =
-svdrp.o themes.o thread.o timers.o tools.o transfer.o vdr.o videodir.o -ljp=
-eg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig {+-lintl+}  ./libsi/li=
-bsi.a -o vdr
-> > >>
-> > >> Now the question is why is the patch not applied [7] and why did it =
-start breaking with this commit.
-> > >
-> > > Ok, I am sorry, my last report was messed up. I did not reset to
-> > > a88aca1d but 49891de0 [8], where 7190532c [9]
-> > >
-> > >        commit 7190532c5a810ef886e8607ce042a319020f06c6
-> > >        Author: Tom Rini <tom_rini@mentor.com>
-> > >        Date:   Tue Jan 18 17:58:02 2011 -0700
-> > >
-> > >            vdr: Switch to libc-uclibc
-> > >
-> > >            Signed-off-by: Tom Rini <tom_rini@mentor.com>
-> > >
-> > > is applied, which seems to be the reason the patch is not applied and
-> > > therefore `-lintl` not added.
-> >=20
-> > I have fixed a typo in it.
+On Fri, Jan 28, 2011 at 04:12:33PM +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 07530194621001e9fbea33e3a094beceef606e48
+> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=
+=3D07530194621001e9fbea33e3a094beceef606e48
 >=20
-> Thank you for fixing this in cb23dffd [10].
+> Author: Andrea Adami <andrea.adami@gmail.com>
+> Date:   Fri Jan 28 17:11:26 2011 +0100
 >=20
-> > Please retry latest master.
+> MAINTAINERS: add committer's entry.
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 >=20
-> Unfortunately the build still fails.
+> ---
 >=20
-> I also tried to disable the features `largefile` and (second run
-> additionally) `ipv6` in `conf/distro/minimal-uclibc.conf` and run
-> `bitbake -k vdr` from scratch each time, but it failed too.
+>  MAINTAINERS |   11 ++++++++++-
+>  1 files changed, 10 insertions(+), 1 deletions(-)
 >=20
-> Was that the right way to debug this? Do you have any other ideas?
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index f1e20dd..4d05c59 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -16,6 +16,16 @@ Recipes:    Maintained recipes (should match package n=
+ames, can include wildcard
+> =20
+>  ------------------------------------------------------------------------=
+-----
+> =20
+> +Person:     Andrea Adami
+> +Mail:       andrea.adami@gmail.com
+> +Machines:   Zaurus family (direct testing only on c7x0 and spitz)
+> +Recipes:    zaurus-updater, zaurus-installer, nandlogical
+> +Recipes:    linux, linux-kexecboot (Zaurus kernels)
+> +Recipes:    kexecboot, kexec-tools, initramfs-kexecboot-image
+> +Recipes:    klibc, klcc-cross
+> +Classes:    klibc.bbclass
+> +Interests:  Early boot, initramfs, klibc-static binaries, kernel, sysadm=
+, networking
+> +
+>  Person:     Andreas Holzer
+>  Mail:       a.holzer@cheese.at
+>  Website:    http://members.cheese.at/woody/zaurus/
+> @@ -218,7 +228,6 @@ Interests:  OE Eclipse plugins, x86, ARM, wxWidgets, =
+xorg, xinput, xinput-calibr
+>  Person:     Martin 'JaMa' Jansa
+>  Mail:       Martin.Jansa@gmail.com
+>  Machines:   spitz, om-gta02
+> -Distros:    SHR, =C5ngstr=F6m
+>  Interests:  xorg
+>  Recipes:    shr/*, xorg-*/*, linux/*openmoko*
 
-I encounter a strange thing from clean builds.
+I still like SHR and =C5ngstr=F6m and I want them back! :)
 
-        bitbake -k vdr # fails
-        bitbake -k console-image # works
-        bitbake -k x11-image # works
-        USE_NLS=3D"yes" bitbake -k # fails
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-I have no clue what could cause this. I guess that `console-image` or
-`x11-image` force some different options to the internationalization
-programs and that this got changed with the `autotools.bbclass` change.
-
-Does anyone have a hint?
-
-
-Thanks,
-
-Paul
-
-
-> [10] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dcb23=
-dffdbe3c3a7432c2e2eb19742c254163c05a
-
---=-ZArIu2RS3lIj5wiTGa0X
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+--x+6KMIRAuhnl3hBn
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v2.0.17 (GNU/Linux)
 
-iEYEABECAAYFAk1C8JYACgkQPX1aK2wOHVitMwCdG4WdJ+xgnAj97VdfoZnVf3FV
-qZsAn074jguqO2qS1DDQN5JpQgohLuhf
-=BGKh
+iEYEARECAAYFAk1C8yAACgkQN1Ujt2V2gByv4gCfUvuNafOWQfkkQNJC03k2bBNT
+YpEAnj8styibNr1vtJ3SfDJupAC8SL39
+=juMj
 -----END PGP SIGNATURE-----
 
---=-ZArIu2RS3lIj5wiTGa0X--
+--x+6KMIRAuhnl3hBn--
