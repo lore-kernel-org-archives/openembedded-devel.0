@@ -1,40 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1PirUj-0004tF-17
+	(envelope-from <sujak.marek@gmail.com>) id 1PirvX-0005gG-Ub
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 17:48:21 +0100
-Received: by bwz10 with SMTP id 10so3437231bwz.6
+	Fri, 28 Jan 2011 18:16:04 +0100
+Received: by qyk36 with SMTP id 36so3551326qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 08:47:31 -0800 (PST)
+	Fri, 28 Jan 2011 09:15:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=d5OXF5lDjUggprXZlXPNzsC/4ImZRZwXhLWdM0UC4lw=;
-	b=RTL8Xxzx9KLUImQe6S3urywWgcz2rXujXWeiSo4vVwWzbbPz2Uk67KCkIszhzpd8Dr
-	g6dYmo+iqwgpMSPfcNahyr6/wTDJ3W3xYfYX8X4Zpb1DyYRuh15vQoFFcXReoi8eAeg1
-	xG1rc8AvwjjY9vq0aYXf+/+96OEG20GlMYAzM=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=6pba+CiUeYjAFYJeDk6sZ8Hci+cxOmZPoohIYHnnJZY=;
+	b=xOfBJ/Is+wNqhSz3Qdw+2l+F8eF+eBh8rT/1V4TuvIloL8qZxEamyGYtqFCPn+gVzN
+	O3Kl9SJNbHp8LV/KCt3NnaNxx50Y4Ob9nV2tvcAEJ4cXF1aFDm7ovMGmK2nJymEUT7Yo
+	dWsCQkp4wvpuWwtkgUTvd2hblwH5IJ8NZCcxs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=hH4ci7MSxFhCrsH30nduzW+IvE+OrfJD/QqOa0mxJi73pPNV7drPXZnua4/Pd2VA8X
-	/SP52tLqKQPZDCvFOO1qTKOkrnVzB8wW1P7twXnkBK3+zEwxu1iUEDYTCurYJ7GKtkKA
-	LNELSxka4p8QaW9Ut3Xs7NtOncJ+jVsxoiBP4=
-Received: by 10.204.115.147 with SMTP id i19mr2646717bkq.162.1296233250815;
-	Fri, 28 Jan 2011 08:47:30 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id q18sm8818369bka.15.2011.01.28.08.47.29
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 28 Jan 2011 08:47:29 -0800 (PST)
-Date: Fri, 28 Jan 2011 17:47:28 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110128164728.GA3265@jama>
-References: <E1Piqw5-0004kv-3P@melo.openembedded.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=OqeJeM8mJXlkZ+7+5W5okFYckqFb+7sIJuleXPOidV89NTACPiP6iCZibmSl9Oyzuq
+	Fe8eW3MFgHFF+6MRK9uwolEQNirG7SYJlHpeEERAGfE1l6HSCvH3OHh645Qobh60w724
+	SzKAer0WjW/QVgMCXTpKth6BEEwkoKFs5a5pY=
 MIME-Version: 1.0
-In-Reply-To: <E1Piqw5-0004kv-3P@melo.openembedded.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] Andrea Adami : MAINTAINERS: add committer's entry.
+Received: by 10.224.60.74 with SMTP id o10mr1419595qah.317.1296234912413; Fri,
+	28 Jan 2011 09:15:12 -0800 (PST)
+Received: by 10.220.188.3 with HTTP; Fri, 28 Jan 2011 09:15:12 -0800 (PST)
+In-Reply-To: <1296232330.21132.17.camel@mattotaupa>
+References: <1296219611-14580-1-git-send-email-sujak.marek@gmail.com>
+	<1296220508.3831.8.camel@mattotaupa>
+	<AANLkTi=Oqmf7KsN=_ygrZ4YkuO+aLCTsyn9e1jE13QYo@mail.gmail.com>
+	<1296232330.21132.17.camel@mattotaupa>
+Date: Fri, 28 Jan 2011 18:15:12 +0100
+Message-ID: <AANLkTinSd1bbEp40xbMSZhjnuQsrdKMCQN-OTZLk2oUP@mail.gmail.com>
+From: Marek Sujak <sujak.marek@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH v2] VMX25: Add machine support for vmx25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,82 +47,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 16:48:21 -0000
-X-Groupsio-MsgNum: 28574
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="x+6KMIRAuhnl3hBn"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 28 Jan 2011 17:16:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---x+6KMIRAuhnl3hBn
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Dear Paul
 
-On Fri, Jan 28, 2011 at 04:12:33PM +0000, git version control wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 07530194621001e9fbea33e3a094beceef606e48
-> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=
-=3D07530194621001e9fbea33e3a094beceef606e48
->=20
-> Author: Andrea Adami <andrea.adami@gmail.com>
-> Date:   Fri Jan 28 17:11:26 2011 +0100
->=20
-> MAINTAINERS: add committer's entry.
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
->=20
-> ---
->=20
->  MAINTAINERS |   11 ++++++++++-
->  1 files changed, 10 insertions(+), 1 deletions(-)
->=20
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index f1e20dd..4d05c59 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -16,6 +16,16 @@ Recipes:    Maintained recipes (should match package n=
-ames, can include wildcard
-> =20
->  ------------------------------------------------------------------------=
------
-> =20
-> +Person:     Andrea Adami
-> +Mail:       andrea.adami@gmail.com
-> +Machines:   Zaurus family (direct testing only on c7x0 and spitz)
-> +Recipes:    zaurus-updater, zaurus-installer, nandlogical
-> +Recipes:    linux, linux-kexecboot (Zaurus kernels)
-> +Recipes:    kexecboot, kexec-tools, initramfs-kexecboot-image
-> +Recipes:    klibc, klcc-cross
-> +Classes:    klibc.bbclass
-> +Interests:  Early boot, initramfs, klibc-static binaries, kernel, sysadm=
-, networking
-> +
->  Person:     Andreas Holzer
->  Mail:       a.holzer@cheese.at
->  Website:    http://members.cheese.at/woody/zaurus/
-> @@ -218,7 +228,6 @@ Interests:  OE Eclipse plugins, x86, ARM, wxWidgets, =
-xorg, xinput, xinput-calibr
->  Person:     Martin 'JaMa' Jansa
->  Mail:       Martin.Jansa@gmail.com
->  Machines:   spitz, om-gta02
-> -Distros:    SHR, =C5ngstr=F6m
->  Interests:  xorg
->  Recipes:    shr/*, xorg-*/*, linux/*openmoko*
+A: No.
+> Q: Should I include quotations after my reply?
+>
+> http://daringfireball.net/2007/07/on_top
+> http://en.opensuse.org/openSUSE:Mailing_list_netiquette#Interleaved_style
+>
 
-I still like SHR and =C5ngstr=F6m and I want them back! :)
+I hope this is fixed now.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+What distribution (and Git branch) did you use? The tool chain depends
+> on this choice.
+>
 
---x+6KMIRAuhnl3hBn
-Content-Type: application/pgp-signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
+Distribution is angstrom-2010.x. Toolchain is eglibc based, all properties
+are "default" without any modifications.
+Git branch is "org.openembedded.org". The default one after git clone.
+This is the first time that i am trying to push something somewhere so i
+hope i do not make any mess.
 
-iEYEARECAAYFAk1C8yAACgkQN1Ujt2V2gByv4gCfUvuNafOWQfkkQNJC03k2bBNT
-YpEAnj8styibNr1vtJ3SfDJupAC8SL39
-=juMj
------END PGP SIGNATURE-----
 
---x+6KMIRAuhnl3hBn--
+> > It depends on:
+> > barebox 2010.10 + patch.
+> > kernel 2.6.35 + patch.
+> >
+> > I will commit these files today.
+> >
+> > There are of-course bugs in kernel, but the images works fine for me.
+> > I corrected my Git username as you recommended. (thanks)
+>
+> Thank you for your answer. I do not have any commit access, so I hope
+> that the other developers will push your patches soon.
+>
+>
+I hope too. Thank you for your time.
+
+Best regards,
+Marek
+
