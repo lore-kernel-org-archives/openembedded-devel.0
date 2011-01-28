@@ -1,38 +1,34 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sujak.marek@gmail.com>) id 1PirvX-0005gG-Ub
+	(envelope-from <raj.khem@gmail.com>) id 1PisZe-0006LM-0V
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 18:16:04 +0100
-Received: by qyk36 with SMTP id 36so3551326qyk.6
+	Fri, 28 Jan 2011 18:57:30 +0100
+Received: by ywi6 with SMTP id 6so1170371ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 09:15:12 -0800 (PST)
+	Fri, 28 Jan 2011 09:56:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=6pba+CiUeYjAFYJeDk6sZ8Hci+cxOmZPoohIYHnnJZY=;
-	b=xOfBJ/Is+wNqhSz3Qdw+2l+F8eF+eBh8rT/1V4TuvIloL8qZxEamyGYtqFCPn+gVzN
-	O3Kl9SJNbHp8LV/KCt3NnaNxx50Y4Ob9nV2tvcAEJ4cXF1aFDm7ovMGmK2nJymEUT7Yo
-	dWsCQkp4wvpuWwtkgUTvd2hblwH5IJ8NZCcxs=
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=Zt3PXQkrVXwNEGQHu7jDaHPUfU0W55Q04gDhUwurBFw=;
+	b=TKxuUNJzhW3QPNRlArOfS1L/mxXkjSF21goE1gOQELjt/nzuh3xuDCsE3iiQCc7Wz/
+	AdnJiu5xVlmTtcmh0MJtCGE+H4HBo+ilyP9jVmk4Q13wCuKMCIJDheMMd1Cgr0x1H7SN
+	AE1ELppLUxkNihJkSeBk8Gq203NJefvFMO4kE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=OqeJeM8mJXlkZ+7+5W5okFYckqFb+7sIJuleXPOidV89NTACPiP6iCZibmSl9Oyzuq
-	Fe8eW3MFgHFF+6MRK9uwolEQNirG7SYJlHpeEERAGfE1l6HSCvH3OHh645Qobh60w724
-	SzKAer0WjW/QVgMCXTpKth6BEEwkoKFs5a5pY=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=yDmreIDZ8EHmtKwc/4vb2Pb2ZVRdr4VGaReJhDzwz3nX4J51Mv/JfCyxNk6fE0QVHm
+	d0sL1vzxTfFXJZB2BJo90QkAR5d9758Qrly/jbOa6zEwMEYkKMDEscnZ0X1jjXL8nhZj
+	AyW/ilwinTdL+J9ptpSOIf0o4CDSeigyqEIDc=
+Received: by 10.90.81.19 with SMTP id e19mr5199889agb.7.1296237399439; Fri, 28
+	Jan 2011 09:56:39 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.224.60.74 with SMTP id o10mr1419595qah.317.1296234912413; Fri,
-	28 Jan 2011 09:15:12 -0800 (PST)
-Received: by 10.220.188.3 with HTTP; Fri, 28 Jan 2011 09:15:12 -0800 (PST)
-In-Reply-To: <1296232330.21132.17.camel@mattotaupa>
+Received: by 10.90.32.12 with HTTP; Fri, 28 Jan 2011 09:50:42 -0800 (PST)
+In-Reply-To: <1296219611-14580-1-git-send-email-sujak.marek@gmail.com>
 References: <1296219611-14580-1-git-send-email-sujak.marek@gmail.com>
-	<1296220508.3831.8.camel@mattotaupa>
-	<AANLkTi=Oqmf7KsN=_ygrZ4YkuO+aLCTsyn9e1jE13QYo@mail.gmail.com>
-	<1296232330.21132.17.camel@mattotaupa>
-Date: Fri, 28 Jan 2011 18:15:12 +0100
-Message-ID: <AANLkTinSd1bbEp40xbMSZhjnuQsrdKMCQN-OTZLk2oUP@mail.gmail.com>
-From: Marek Sujak <sujak.marek@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 28 Jan 2011 09:50:42 -0800
+Message-ID: <AANLkTim0qsgQExvKhTQtPAyZz8cPos4osWFDDmxfEhjx@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH v2] VMX25: Add machine support for vmx25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,47 +43,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 17:16:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 28 Jan 2011 17:57:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Dear Paul
-
-A: No.
-> Q: Should I include quotations after my reply?
+On Fri, Jan 28, 2011 at 5:00 AM, sujak.marek <sujak.marek@gmail.com> wrote:
+> * Add config file for http://voipac.com/#X25-DKT-265
 >
-> http://daringfireball.net/2007/07/on_top
-> http://en.opensuse.org/openSUSE:Mailing_list_netiquette#Interleaved_style
+> Signed-off-by: sujak.marek <sujak.marek@gmail.com>
+> ---
+> =C2=A0conf/machine/vmx25.conf | =C2=A0 38 +++++++++++++++++++++++++++++++=
++++++++
+> =C2=A01 files changed, 38 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 conf/machine/vmx25.conf
+>
+> diff --git a/conf/machine/vmx25.conf b/conf/machine/vmx25.conf
+> new file mode 100644
+> index 0000000..8ba7197
+> --- /dev/null
+> +++ b/conf/machine/vmx25.conf
+> @@ -0,0 +1,38 @@
+> +#@TYPE: Machine
+> +#@Name: Voipac vmx25 module
+> +#@DESCRIPTION: Machine configuration for Voipac vmx25 module & baseboard
+> +#@Homepage: http://voipac.com/#X25-DKT-265
+> +
+> +TARGET_ARCH =3D "arm"
+> +
+> +PREFERRED_PROVIDER_virtual/bootloader =3D "barebox"
+> +PREFERRED_PROVIDER_virtual/kernel =3D "linux"
+> +PREFERRED_PROVIDER_virtual/xserver =3D "xserver-xorg"
+
+what xserver is chosen is s distro choice do not lock it here.
+
+> +
+> +PREFERRED_VERSION_linux =3D "2.6.35"
+
+kernel should not be pinned in conf file but in the kernel recipe itself
+you should add PREFERRRED_PROVIDER_yourmacine =3D ...
+
+> +
+> +MACHINE_FEATURES =3D "kernel26 alsa ext2 usbhost usbgadget touchscreen k=
+eyboard"
+> +
+> +GUI_MACHINE_CLASS =3D "bigscreen"
+> +XSERVER ?=3D "xserver-xorg \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-tslib \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-evdev \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-mouse \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-keyboard \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-video-fbdev \
+> +"
+
+this two defines should be part of distros to pin not machines.
+
+> +# Data Image FG0700K6DSSWBG01 TFT lcd
+> +#MACHINE_DISPLAY_WIDTH_PIXELS =3D "800"
+> +#MACHINE_DISPLAY_HEIGHT_PIXELS =3D "480"
+> +#MACHINE_DISPLAY_PPI =3D "133"
+> +
+> +# ubi fs args
+> +MKUBIFS_ARGS =3D "-m 2KiB -e 126KiB -c 989"
+> +UBINIZE_ARGS =3D "-m 2KiB -p 128KiB -s 512"
+> +
+> +IMAGE_FSTYPES +=3D "tar.gz ubi"
+> +
+> +require conf/machine/include/tune-arm926ejs.inc
+> +
+> +# used by sysvinit_2
+> +SERIAL_CONSOLE =3D "115200 ttymxc0"
+> --
+> 1.7.0.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-I hope this is fixed now.
-
-What distribution (and Git branch) did you use? The tool chain depends
-> on this choice.
->
-
-
-Distribution is angstrom-2010.x. Toolchain is eglibc based, all properties
-are "default" without any modifications.
-Git branch is "org.openembedded.org". The default one after git clone.
-This is the first time that i am trying to push something somewhere so i
-hope i do not make any mess.
-
-
-> > It depends on:
-> > barebox 2010.10 + patch.
-> > kernel 2.6.35 + patch.
-> >
-> > I will commit these files today.
-> >
-> > There are of-course bugs in kernel, but the images works fine for me.
-> > I corrected my Git username as you recommended. (thanks)
->
-> Thank you for your answer. I do not have any commit access, so I hope
-> that the other developers will push your patches soon.
->
->
-I hope too. Thank you for your time.
-
-Best regards,
-Marek
 
