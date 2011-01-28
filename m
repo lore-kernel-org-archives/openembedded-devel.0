@@ -1,36 +1,36 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PivWz-0007Hw-1H
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PivXk-0007JX-9S
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 22:06:57 +0100
-Received: by iwn8 with SMTP id 8so3635320iwn.6
+	Fri, 28 Jan 2011 22:07:44 +0100
+Received: by iwn8 with SMTP id 8so3635947iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 13:06:05 -0800 (PST)
+	Fri, 28 Jan 2011 13:06:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type:content-transfer-encoding;
-	bh=x53nLc6/yM/mymP6HMYI944huXuF8iQlRppVqovNJ5s=;
-	b=WFChnGW9Od6gM6n7iQaxLvLJs94TRmrpkSUDvGx9wXXGe3+mAOBjLZRNLfH3TWQo84
-	FtzEcWbYwJTcmDu6N1owHRjVV9oCCudS1e0mynWjrxaBwvwfojk2sjYWcKJcL2OHeCWo
-	tZcxeDdJLvmqyy68LJnuq/+FOkJtMbYkx8E/0=
+	bh=XM9yI8B3SChywWvVkBLNnpmOy223DIwHrR1YLLsS+ow=;
+	b=iuKGCqq4+sbPvhFrM2CGzk8s+kKh8nAWP8Q2GmezyJ5JYbf3lsSZoYTPgxl//dqwxD
+	MQWXLS8QSiE4DxxfjNsrGLVcP0TgP+q2/afyB06KY0Qr1exWIpMs31kynvj0UOj0IsAp
+	cEPxXyy/XNT20E6teW77Vq9a1rzaObB2nUop8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=rvsiZulUXO1jnZrjpa1DQZ7y5FyJB7ePW3vZbasBL8x2XdNyr/p2fD3xKuGqA6UqH+
-	qbX9sKuOZ9VFPQJdC84EYTclQBlPhiO+xVDRT0Z6amiikLaPCREzarK+Qdxb65ODNc58
-	Ip861d8tu0ut5F6oQhxIGuUfagWrLDxPm8B/A=
+	b=iVOAhB5Xoyeue81cTsnKhoDfZX3KWYcERRHjUlJzZny9WYR/CDwR2det/+pArPlzLc
+	7rEtpHYQw8rNZjn7GuBf9Z6MnzrYn3IIycZraraa6x0M4W6/W05pUmOMhy1ZCpvp4zs4
+	FNWPiI8yRAatAfyF9MX0/DSmyUdd0hkB351kw=
 MIME-Version: 1.0
-Received: by 10.231.37.12 with SMTP id v12mr3271800ibd.83.1296248764871; Fri,
-	28 Jan 2011 13:06:04 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Fri, 28 Jan 2011 13:06:04 -0800 (PST)
-In-Reply-To: <1296240753-10120-5-git-send-email-tom_rini@mentor.com>
+Received: by 10.231.30.193 with SMTP id v1mr644852ibc.8.1296248813676; Fri, 28
+	Jan 2011 13:06:53 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Fri, 28 Jan 2011 13:06:53 -0800 (PST)
+In-Reply-To: <1296240753-10120-4-git-send-email-tom_rini@mentor.com>
 References: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>
-	<1296240753-10120-5-git-send-email-tom_rini@mentor.com>
-Date: Fri, 28 Jan 2011 22:06:04 +0100
-Message-ID: <AANLkTikxf01-+Xx2ARu_WrDtD+3nHREZM+-dd4_=LZbx@mail.gmail.com>
+	<1296240753-10120-4-git-send-email-tom_rini@mentor.com>
+Date: Fri, 28 Jan 2011 22:06:53 +0100
+Message-ID: <AANLkTinUm_hLzi-E4OoXHCSoqLR=r0EeMOt+shQa++2w@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 4/5] autoconf: Add perl-native as a dep
+Subject: Re: [PATCH 3/5] automake: Add perl-native as a dep rather than perl-runtime-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,7 +44,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 21:06:57 -0000
+X-List-Received-Date: Fri, 28 Jan 2011 21:07:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -52,29 +52,26 @@ Content-Transfer-Encoding: quoted-printable
 > Signed-off-by: Tom Rini <tom_rini@mentor.com>
 Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 > ---
-> =A0recipes/autoconf/autoconf.inc | =A0 =A06 +++---
-> =A01 files changed, 3 insertions(+), 3 deletions(-)
+> =A0recipes/automake/automake.inc | =A0 =A04 ++--
+> =A01 files changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/recipes/autoconf/autoconf.inc b/recipes/autoconf/autoconf.in=
+> diff --git a/recipes/automake/automake.inc b/recipes/automake/automake.in=
 c
-> index 1815b5d..2f8c122 100644
-> --- a/recipes/autoconf/autoconf.inc
-> +++ b/recipes/autoconf/autoconf.inc
-> @@ -3,10 +3,10 @@ automatically configure sourcecode."
-> =A0LICENSE =3D "GPLv3+-with-Autoconf-Configure-Script-Exception-v3.0"
-> =A0HOMEPAGE =3D "http://www.gnu.org/software/autoconf/"
+> index e378c04..1eae3c0 100644
+> --- a/recipes/automake/automake.inc
+> +++ b/recipes/automake/automake.inc
+> @@ -2,8 +2,8 @@ DESCRIPTION =3D "A tool for automatically generating Make=
+files."
+> =A0LICENSE =3D "GPL"
+> =A0HOMEPAGE =3D "http://www.gnu.org/software/automake/"
 > =A0SECTION =3D "devel"
-> -DEPENDS +=3D "m4-native"
-> +DEPENDS +=3D "m4-native perl-native"
-> =A0RDEPENDS_${PN} =3D "m4 perl gnu-config"
-> -DEPENDS_virtclass-native =3D "m4-native gnu-config-native"
-> -RDEPENDS_${PN}_virtclass-native =3D "m4-native gnu-config-native"
-> +DEPENDS_virtclass-native =3D "m4-native gnu-config-native perl-native"
-> +RDEPENDS_${PN}_virtclass-native =3D "m4-native gnu-config-native perl-na=
-tive"
->
-> =A0INC_PR =3D "r13"
->
+> -DEPENDS_virtclass-native =3D "autoconf-native"
+> -RDEPENDS_automake-native =3D "autoconf-native perl-native-runtime"
+> +DEPENDS_virtclass-native =3D "autoconf-native perl-native"
+> +RDEPENDS_automake-native =3D "autoconf-native perl-native"
+> =A0RDEPENDS_automake +=3D "\
+> =A0 =A0 autoconf \
+> =A0 =A0 perl \
 > --
 > 1.7.0.4
 >
