@@ -1,34 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1PipVi-0000j0-Ma
+	(envelope-from <Tom_Rini@mentor.com>) id 1Pir4L-00049O-0I
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 15:41:14 +0100
-Received: by iwn8 with SMTP id 8so3267987iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 06:40:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=SRejxPNsopVVTRheq8qW6cf+h0NZOHLS3YneKp7R0QQ=;
-	b=t74J4/xdG32FD/ZLZhOpYiFOaLuPOX/Z2uzorXl8TabQ+/m9Fkjk12RKOyJsHTgkkE
-	BHzYReUoN+3Yk/W7ACS/GFleL6OkJxCSiSwbumpqErXplU3G9o1CXCeTxUPzWb5Krd2W
-	ZvIyxLu14C/TN6lilZv/0wt31d3qnVUZgsZ7g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=bqsol017T/Qm9IS3n80EKtaidPpEVM/by2xgHcmPVi37XQC3p8O3o1bJ0DTRB08MEv
-	sNEm05qy1611kWmGdCTX/ZVG1xCE81ZHyOADL8Yb6utdRnViTjEyLG8N4BXxnC1iP6nT
-	65djNgTKKJjXwAqZL3t4PNEjuc2zIoJjg13Gs=
+	Fri, 28 Jan 2011 17:21:05 +0100
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1Pir3S-0007CA-QF from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 28 Jan 2011 08:20:10 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	svr-orw-fem-01.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Fri, 28 Jan 2011 08:20:10 -0800
+Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 28 Jan 2011 09:20:09 -0700
+Message-ID: <4D42ECB3.4030605@mentor.com>
+Date: Fri, 28 Jan 2011 09:20:03 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.231.199.212 with SMTP id et20mr2760141ibb.22.1296225623618;
-	Fri, 28 Jan 2011 06:40:23 -0800 (PST)
-Received: by 10.231.38.4 with HTTP; Fri, 28 Jan 2011 06:40:23 -0800 (PST)
-In-Reply-To: <AANLkTinTV+FMDzCSQKGjB81LGgp4L8eyceusVNs4CWCL@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 References: <AANLkTinTV+FMDzCSQKGjB81LGgp4L8eyceusVNs4CWCL@mail.gmail.com>
-Date: Fri, 28 Jan 2011 09:40:23 -0500
-Message-ID: <AANLkTikBTNT7o1QeL8A914XoEpfGcQ3b5wtskRUzcd=A@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	<AANLkTikBTNT7o1QeL8A914XoEpfGcQ3b5wtskRUzcd=A@mail.gmail.com>
+In-Reply-To: <AANLkTikBTNT7o1QeL8A914XoEpfGcQ3b5wtskRUzcd=A@mail.gmail.com>
+X-OriginalArrivalTime: 28 Jan 2011 16:20:09.0778 (UTC)
+	FILETIME=[3BB7F920:01CBBF07]
 Subject: Re: testing branch 2011-01-28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,37 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 14:41:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 28 Jan 2011 16:21:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Excellent testing run last week:
-
-http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2011-01-20
-
-37 entries in the table, and very good coverage of machines, distros,
-images, and host systems.
-
-for more information on the OE testing effort, please see:
-http://www.openembedded.org/index.php/Testing
-
-Thanks,
-Cliff
-
-On Fri, Jan 28, 2011 at 9:30 AM, Cliff Brake <cliff.brake@gmail.com> wrote:
-> master has been merged to testing-next and is ready for clean builds.
+On 01/28/2011 07:40 AM, Cliff Brake wrote:
+> Excellent testing run last week:
 >
-> Thanks,
-> Cliff
+> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=tested_2011-01-20
 >
-> --
-> =================
-> http://bec-systems.com
->
+> 37 entries in the table, and very good coverage of machines, distros,
+> images, and host systems.
 
-
+Yes, thanks to Khem more of my turns turned successful and it wasn't too 
+bad to just put a line per machine/distro combo now.  FWIW, I've added 
+some QT targets to everything for this coming weeks build.  Assuming 
+that doesn't finally cause the build to reach my build time goal, I'll 
+ask again for more stuff to build :)
 
 -- 
-=================
-http://bec-systems.com
+Tom Rini
+Mentor Graphics Corporation
 
 
