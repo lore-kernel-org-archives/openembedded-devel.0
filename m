@@ -1,37 +1,35 @@
-Received: from goliath.siemens.de ([192.35.17.28])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fabrice.Aeschbacher@siemens.com>) id 1PijSb-0000DF-3N
+	(envelope-from <sujak.marek@gmail.com>) id 1Pik8F-000127-D3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Jan 2011 09:13:37 +0100
-Received: from mail2.siemens.de (localhost [127.0.0.1])
-	by goliath.siemens.de (8.12.11.20060308/8.12.11) with ESMTP id
-	p0S8Cn5t026981 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 09:12:49 +0100
-Received: from DEMCHP99ET3MSX.ww902.siemens.net
-	(demchp99et3msx.ww902.siemens.net [139.25.131.243])
-	by mail2.siemens.de (8.13.6/8.13.6) with ESMTP id p0S8Cn2r031926
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 28 Jan 2011 09:56:39 +0100
+Received: by fxm17 with SMTP id 17so3140699fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 09:12:49 +0100
-Received: from DEMCHP99E35MSX.ww902.siemens.net ([169.254.2.34]) by
-	DEMCHP99ET3MSX.ww902.siemens.net ([139.25.131.243]) with mapi;
-	Fri, 28 Jan 2011 09:12:49 +0100
-From: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>
-To: "Aeschbacher, Fabrice" <Fabrice.Aeschbacher@siemens.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Jan 2011 09:12:47 +0100
-Thread-Topic: [oe] libpcre not compiling
-Thread-Index: Acu+VVkM/+aBUgC7RzqwU8O5aZlNzQAa20cQAACAbOA=
-Message-ID: <09D9BE2AC4AA764DABAA8C91E48D819ED682ECC4@DEMCHP99E35MSX.ww902.siemens.net>
-References: <09D9BE2AC4AA764DABAA8C91E48D819ED682EC06@DEMCHP99E35MSX.ww902.siemens.net>
-	<AANLkTimzYvPnN7tt54jcQVYUmBQFpQsO0LYFoRVh5Q8x@mail.gmail.com> 
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
-MIME-Version: 1.0
-Subject: Re: libpcre not compiling
+	Fri, 28 Jan 2011 00:55:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer;
+	bh=j08v/LHdlaMhK/ElPWHswzWDLL1Y7iuIyg+82lKuD1k=;
+	b=efWuSWinhaIgqqeSHdbieS70hydVNwTlu9cxb5R0u/qnEHfWksvJlHT3JSvc116Nw7
+	gZdbXjwUHGiALo9h9DXczunnH1pjNLh4BeCqjME+nULiBrU5qe+sttulo4dSnebjZga5
+	JYuNnrtUmkVcqrd/F78+N07AB9OftFdiB/uLs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=PrTVswJI+sNED8w58wGoIzjHWHJ77OZC4itYm/i2EQFZQ53LppKghGoGoydO07yP9J
+	BFbs0MzeTfvAXTRp3PDpTuhXZkmhcOtOUj3b6tuLHIm1t/QP2qd77bLykN2sdO3dmJLF
+	2a+n5iWKv/XQi0X5jEaVek2yBwT1vHBS2MZBI=
+Received: by 10.223.96.6 with SMTP id f6mr2117382fan.22.1296204946819;
+	Fri, 28 Jan 2011 00:55:46 -0800 (PST)
+Received: from localhost.localdomain (dial-92-52-20-198-orange.orange.sk
+	[92.52.20.198])
+	by mx.google.com with ESMTPS id f24sm6318615fak.24.2011.01.28.00.55.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 28 Jan 2011 00:55:45 -0800 (PST)
+From: "sujak.marek" <sujak.marek@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 28 Jan 2011 09:54:46 +0100
+Message-Id: <1296204886-12146-1-git-send-email-sujak.marek@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] Added machine config file for vmx25 module. * http://voipac.com/#X25-DKT-265 Signed-off-by: sujak.marek <sujak.marek@gmail.com>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,72 +43,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2011 08:13:37 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 28 Jan 2011 08:56:39 -0000
 
-perhaps another info: tried with another machine (=3D> powerpc cross-compil=
-er), same problem here.
+---
+ conf/machine/vmx25.conf |   38 ++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 38 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/vmx25.conf
 
-With kind regards,
-fabrice Aeschbacher
+diff --git a/conf/machine/vmx25.conf b/conf/machine/vmx25.conf
+new file mode 100644
+index 0000000..8ba7197
+--- /dev/null
++++ b/conf/machine/vmx25.conf
+@@ -0,0 +1,38 @@
++#@TYPE: Machine
++#@Name: Voipac vmx25 module
++#@DESCRIPTION: Machine configuration for Voipac vmx25 module & baseboard
++#@Homepage: http://voipac.com/#X25-DKT-265
++
++TARGET_ARCH = "arm"
++
++PREFERRED_PROVIDER_virtual/bootloader = "barebox"
++PREFERRED_PROVIDER_virtual/kernel = "linux"
++PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
++
++PREFERRED_VERSION_linux = "2.6.35"
++
++MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget touchscreen keyboard"
++
++GUI_MACHINE_CLASS = "bigscreen"
++XSERVER ?= "xserver-xorg \
++           xf86-input-tslib \
++           xf86-input-evdev \
++           xf86-input-mouse \
++           xf86-input-keyboard \
++           xf86-video-fbdev \
++"
++# Data Image FG0700K6DSSWBG01 TFT lcd
++#MACHINE_DISPLAY_WIDTH_PIXELS = "800"
++#MACHINE_DISPLAY_HEIGHT_PIXELS = "480"
++#MACHINE_DISPLAY_PPI = "133"
++
++# ubi fs args
++MKUBIFS_ARGS = "-m 2KiB -e 126KiB -c 989"
++UBINIZE_ARGS = "-m 2KiB -p 128KiB -s 512"
++
++IMAGE_FSTYPES += "tar.gz ubi"
++
++require conf/machine/include/tune-arm926ejs.inc
++
++# used by sysvinit_2
++SERIAL_CONSOLE = "115200 ttymxc0"
+-- 
+1.7.0.4
 
-> > > [using released version 2010.12]
-> > >
-> > > libpcre (7.6-r8) fails to compile :
-> > >
-> > > ...
-> > > | /bin/sh ./arm-angstrom-linux-gnueabi-libtool --tag=3DCXX =A0=20
-> > --mode=3Dlink arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te=20
-> > -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb =A0
-> > -isystem/srv/oe-2010/build/at91sam9g20ek/sysroots/armv5te-angs
-> > trom-linux-gnueabi/usr/include -O2 -fpermissive=20
-> > -fvisibility-inlines-hidden -fvisibility-inlines-hidden=20
-> > -version-info 0:0:0 -Wl,-O1 -Wl,--hash-style=3Dgnu -o=20
-> > libpcrecpp.la -rpath /usr/lib pcrecpp.lo pcre_scanner.lo=20
-> > pcre_stringpiece.lo libpcre.la
-> > > | /bin/grep: /usr/lib/libstdc++.la: No such file or directory
-> > > |=20
-> > /srv/oe-2010/build/at91sam9g20ek/sysroots/x86_64-linux/usr/bin
-> > /sed: can't read /usr/lib/libstdc++.la: No such file or directory
-> > > | arm-angstrom-linux-gnueabi-libtool: link:=20
-> > `/usr/lib/libstdc++.la' is not a valid libtool archive
-> > > | make[1]: *** [libpcrecpp.la] Error 1
-> > > | make[1]: Leaving directory=20
-> > `/srv/oe-2010/build/at91sam9g20ek/work/armv5te-angstrom-linux-
-> > gnueabi/libpcre-7.6-r8/pcre-7.6'
-> > > | make: *** [all] Error 2
-> > > | FATAL: oe_runmake failed
-> > > NOTE: package libpcre-7.6-r8: task do_compile: Failed
-> > > ERROR: Function 'do_compile' failed (see=20
-> > /srv/oe-2010/build/at91sam9g20ek/work/armv5te-angstrom-linux-g
-> > nueabi/libpcre-7.6-r8/temp/log.do_compile.1723 for further=20
-> > information)
-> > > ERROR:=20
-> >=20
-> '/srv/oe-2010/org.openembedded/recipes/libpcre/libpcre_7.6.bb' failed
-> > >
-> > >
-> > > I would be thankful if someone could give me any hint how=20
-> > to solve this.
-> > >
-> >=20
-> > Does it fail same way on master ?
->=20
-> I did not try to compile everything on master yet
->=20
-> > if not try to figure out commit which fixed it git bisect=20
-> is your friend.
->=20
-> I diffed the files under recipes/libpcre/* : there is no=20
-> change in master compared to 2010.12  release.
->=20
-> > Otherwise we need to fix it if its happening on master too.
->=20
-> BTW: We need libpcre only because lighttpd depends on it.
->=20
-> Kind regards,
-> Fabrice
 
 
