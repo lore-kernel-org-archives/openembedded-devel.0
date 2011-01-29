@@ -1,34 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.72)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PjDuG-0005Dc-8c for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 17:44:13 +0100
+	id 1PjE0n-0005If-Pi for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Jan 2011 17:50:58 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PjDtS-00078N-UN for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 17:43:22 +0100
+	id 1PjDzx-0001Zy-4b for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Jan 2011 17:50:05 +0100
 Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 17:43:22 +0100
+	Sat, 29 Jan 2011 17:50:05 +0100
 Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
 	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 17:43:22 +0100
+	Sat, 29 Jan 2011 17:50:05 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 29 Jan 2011 17:43:12 +0100
-Message-ID: <ii1g30$n90$1@dough.gmane.org>
-References: <1296316693.5925.10.camel@mattotaupa>
+Date: Sat, 29 Jan 2011 17:45:13 +0100
+Message-ID: <ii1g6p$n91$1@dough.gmane.org>
+References: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>	<20110129112942.GB3265@jama>	<4D44296D.6040209@mentor.com>
+	<4D4437DB.40704@mentor.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <1296316693.5925.10.camel@mattotaupa>
+In-Reply-To: <4D4437DB.40704@mentor.com>
 X-Enigmail-Version: 1.0.1
-Subject: Re: [REGRESSION] omap3-sgx-modules: `NOTE: Runtime target 'kernel-' is unbuildable, removing...`
+Subject: Re: [PATCH 0/5] Relocatable perl-native and use it always
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,41 +43,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 16:44:13 -0000
+X-List-Received-Date: Sat, 29 Jan 2011 16:50:58 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 29-01-11 16:58, Paul Menzel wrote:
-> Dear Andreas and OE folks,
+On 29-01-11 16:52, Tom Rini wrote:
+> On 01/29/2011 07:51 AM, Tom Rini wrote:
+>> On 01/29/2011 04:29 AM, Martin Jansa wrote:
+>>> On Fri, Jan 28, 2011 at 11:52:28AM -0700, Tom Rini wrote:
+>>>> Hey all,
+>>>>
+>>>> As I've talked about before[1] there's build reproducibility issues
+>>>> depending on when perl-native is built. After talking with Mark Hatle
+>>>> a little bit I started thinking about relocation in perl again and it
+>>>> turns out that starting in 5.10, upstream perl supports relocation.
+>>>>
+>>>> This in turn makes it less painful to make perl-native be what we use
+>>>> when we want perl runtime, nearly everywhere (since you can use
+>>>> pstaging
+>>>> to avoid it the time next time).
+>>>>
+>>>> This patch set drops perl 5.8.8 and bumps all of the perl stuffs PR,
+>>>> switches to relocatable perl-native, and then the big switch to
+>>>> using it
+>>>> early.
+>>>
+>>> Looks good and as we're using 5.10 already then for whole series:
+>>>
+>>> Acked-by: Martin Jansa<Martin.Jansa@gmail.com>
+>>
+>> Thanks.
+>>
+>>> Can we also get rid of legacy staging from recipes/perl/perl_5.10.1.bb ?
+>>
+>> Huh? I killed legacy staging in both perls a long time ago (and then
+>> Koen fixed up my thinkos).
 > 
-> 
->         commit 2dac84b9a7b820466ed626420fec120093b56e16
->         Author: Andreas Oberritter <obi@opendreambox.org>
->         Date:   Sat Jan 29 00:51:25 2011 +0000
->         
->             module.bbclass: depend on kernel-${KERNEL_VERSION} instead of kernel (= ${KERNEL_VERSION})
->             
->             * As a special case, kernel modules must depend on
->               kernel-${KERNEL_VERSION}, which gets runtime provided by the kernel
->               package. The reason is, that the package version can be different
->               from ${KERNEL_VERSION}, because the latter depends on the kernel
->               configuration, e.g. CONFIG_LOCALVERSION.
->             
->             Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> 
-> [1] seems to have broken `omap3-sgx-modules`.
+> OK, after some quick IRC, -ENOCOFFEE.  It looks like it wouldn't be too
+> hard to kill legacy staging based on poky (we just need to install on
+> the target Config_heavy-${TARGET_SYS}.pl.  I'll tackle that separately.
 
-I'm in favour of reverting that till people have actually ACKed a patch
-to kernel.bbclass.
+The cpan classes will need a fix as well for that, which is also in yocto :)
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFNREOfMkyGM64RGpERApN6AJ9s/E+sd1CfU4Q91BuaeOWQX7wq4ACffxhu
-epf5mUCAdxWO12qYBGM9ukY=
-=FzLs
+iD8DBQFNREQZMkyGM64RGpERAqT9AJwJiW9934LVFNN+5QDFGORGcucFtgCgvXt6
+OAOCVt+ags9ynqAT9Ruu2nM=
+=tEev
 -----END PGP SIGNATURE-----
 
 
