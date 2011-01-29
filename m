@@ -1,35 +1,21 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PjE0n-0005If-Pi for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 17:50:58 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1PjDzx-0001Zy-4b for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 17:50:05 +0100
-Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 17:50:05 +0100
-Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 17:50:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PjFBJ-00079K-MO for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Jan 2011 19:05:53 +0100
+Received: from f053042056.adsl.alicedsl.de ([78.53.42.56]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PjFAV-0002dl-T6 for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Jan 2011 18:05:04 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 29 Jan 2011 17:45:13 +0100
-Message-ID: <ii1g6p$n91$1@dough.gmane.org>
-References: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>	<20110129112942.GB3265@jama>	<4D44296D.6040209@mentor.com>
-	<4D4437DB.40704@mentor.com>
+Date: Sat, 29 Jan 2011 19:05:03 +0100
+Message-ID: <1296324303.5925.26.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
-In-Reply-To: <4D4437DB.40704@mentor.com>
-X-Enigmail-Version: 1.0.1
-Subject: Re: [PATCH 0/5] Relocatable perl-native and use it always
+X-Mailer: Evolution 2.30.3 
+Subject: [PATCH] xbmc: add `gperf-native` to `DEPENDS`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,57 +29,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 16:50:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 Jan 2011 18:05:53 -0000
+X-Groupsio-MsgNum: 28617
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-KPTfTsYObCUXXFLXht4g"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-KPTfTsYObCUXXFLXht4g
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 29-01-11 16:52, Tom Rini wrote:
-> On 01/29/2011 07:51 AM, Tom Rini wrote:
->> On 01/29/2011 04:29 AM, Martin Jansa wrote:
->>> On Fri, Jan 28, 2011 at 11:52:28AM -0700, Tom Rini wrote:
->>>> Hey all,
->>>>
->>>> As I've talked about before[1] there's build reproducibility issues
->>>> depending on when perl-native is built. After talking with Mark Hatle
->>>> a little bit I started thinking about relocation in perl again and it
->>>> turns out that starting in 5.10, upstream perl supports relocation.
->>>>
->>>> This in turn makes it less painful to make perl-native be what we use
->>>> when we want perl runtime, nearly everywhere (since you can use
->>>> pstaging
->>>> to avoid it the time next time).
->>>>
->>>> This patch set drops perl 5.8.8 and bumps all of the perl stuffs PR,
->>>> switches to relocatable perl-native, and then the big switch to
->>>> using it
->>>> early.
->>>
->>> Looks good and as we're using 5.10 already then for whole series:
->>>
->>> Acked-by: Martin Jansa<Martin.Jansa@gmail.com>
->>
->> Thanks.
->>
->>> Can we also get rid of legacy staging from recipes/perl/perl_5.10.1.bb ?
->>
->> Huh? I killed legacy staging in both perls a long time ago (and then
->> Koen fixed up my thinkos).
-> 
-> OK, after some quick IRC, -ENOCOFFEE.  It looks like it wouldn't be too
-> hard to kill legacy staging based on poky (we just need to install on
-> the target Config_heavy-${TARGET_SYS}.pl.  I'll tackle that separately.
+Date: Mon Jan 24 08:19:04 2011 +0100
 
-The cpan classes will need a fix as well for that, which is also in yocto :)
+Task `configure` fails otherwise with the following error.
+
+    configure: =3D=3D VDADecoder support manually disabled. =3D=3D
+    checking OpenMAX/il/OMX_Types.h usability... no
+    checking OpenMAX/il/OMX_Types.h presence... no
+    checking for OpenMAX/il/OMX_Types.h... no
+    =3D=3D Could not find libnvomx. OpenMax support disabled. =3D=3D
+    checking for gawk... yes
+    checking for cmake... yes
+    checking for gperf... no
+    configure: error: Could not find a required program. Please see the REA=
+DME f
+    ERROR: Function do_configure failed
+
+This patch is build tested with `angstrom-2008.1` for `MACHINE =3D "beagleb=
+oard"`.
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/xbmc/xbmc_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
+index 3689715..be2e34e 100644
+--- a/recipes/xbmc/xbmc_svn.bb
++++ b/recipes/xbmc/xbmc_svn.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION =3D "XBMC Media Center"
+ LICENSE =3D "xbmc"
+=20
+-DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python l=
+ibmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mix=
+er virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca =
+avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jas=
+per zip-native zlib"
++DEPENDS =3D "gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig =
+curl python libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-ima=
+ge libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boo=
+st lzo2 enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtu=
+al/libsdl jasper zip-native zlib"
+ require recipes/egl/egl.inc
+=20
+ SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
+--=20
+1.7.2.3
+
+--=-KPTfTsYObCUXXFLXht4g
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFNREQZMkyGM64RGpERAqT9AJwJiW9934LVFNN+5QDFGORGcucFtgCgvXt6
-OAOCVt+ags9ynqAT9Ruu2nM=
-=tEev
+iEYEABECAAYFAk1EVs8ACgkQPX1aK2wOHVjtIQCfe6R9P4zC8yJvAovAQrWNu4E0
+T6UAniAZfgb5R0ySUj0xUnj2vpoHkdQ6
+=wIZi
 -----END PGP SIGNATURE-----
 
-
-
+--=-KPTfTsYObCUXXFLXht4g--
