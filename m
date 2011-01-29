@@ -1,21 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PjFBJ-00079K-MO for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 19:05:53 +0100
-Received: from f053042056.adsl.alicedsl.de ([78.53.42.56]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1PjFAV-0002dl-T6 for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 18:05:04 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 29 Jan 2011 19:05:03 +0100
-Message-ID: <1296324303.5925.26.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: [PATCH] xbmc: add `gperf-native` to `DEPENDS`
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PjFZG-0007hp-Nq
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Jan 2011 19:30:38 +0100
+Received: by iyj18 with SMTP id 18so3777306iyj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Jan 2011 10:29:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=+CcktYpdcLhwAOKibvqVUEvVsdogHYKfvCRy90EtLc4=;
+	b=fwbny/vrEjZifhiUf0519advrOZUgGEAhhOMIA8Sc5dRIP633/SAy9cNozoFwb9Ypa
+	P8LW0NqCGeBhom0mcRg4z9Zh1yPujajxRc+CamL2BAy+VSGAboH5mcDWcHA5UJODM0vV
+	gLFzk3Z3ctg0NHvwVARJiiub1GnZ9VQa+60PM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=BGpJW9BC4ZtEfFyIWqsXVgklIzC/WeYGH2YNjnYiaiYS/ujCzHMZNrvpMgZ/L/kJ2r
+	iYTAu1U04bJsd801+wrMjiKrGE2+OwvuEpYm37rBaXY6V/lKSqzaEEpbdYf2NImh0y1v
+	CmgRxIpKyoU6k7dEATvSR1t/fJEkK8QJhsMIk=
+MIME-Version: 1.0
+Received: by 10.231.166.205 with SMTP id n13mr4374048iby.58.1296325785990;
+	Sat, 29 Jan 2011 10:29:45 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Sat, 29 Jan 2011 10:29:45 -0800 (PST)
+Date: Sat, 29 Jan 2011 19:29:45 +0100
+Message-ID: <AANLkTinwMf=NiwBWiK-j7u6yUkHGoPSoahU4hfYCWJjz@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: QT QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,74 +39,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 18:05:53 -0000
-X-Groupsio-MsgNum: 28617
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-KPTfTsYObCUXXFLXht4g"
+X-List-Received-Date: Sat, 29 Jan 2011 18:30:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-KPTfTsYObCUXXFLXht4g
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+0: qt4-x11-free-4.7.1-r23.0 do_package (pid 31074)
+ERROR: QA Issue with qt4-tools: Architecture did not match (40 to 3)
+on /work/armv5te-oe-linux-gnueabi/qt4-x11-free-4.7.1-r23.0/packages-split/qt4-tools/usr/bin/rcc
+ERROR: QA Issue with qt4-tools: Architecture did not match (40 to 3)
+on /work/armv5te-oe-linux-gnueabi/qt4-x11-free-4.7.1-r23.0/packages-split/qt4-tools/usr/bin/moc
+ERROR: QA Issue with qt4-tools: Architecture did not match (40 to 3)
+on /work/armv5te-oe-linux-gnueabi/qt4-x11-free-4.7.1-r23.0/packages-split/qt4-tools/usr/bin/uic
 
-Date: Mon Jan 24 08:19:04 2011 +0100
+No idea why this happens. distro minimal, target sheevaplug
 
-Task `configure` fails otherwise with the following error.
+Frans
 
-    configure: =3D=3D VDADecoder support manually disabled. =3D=3D
-    checking OpenMAX/il/OMX_Types.h usability... no
-    checking OpenMAX/il/OMX_Types.h presence... no
-    checking for OpenMAX/il/OMX_Types.h... no
-    =3D=3D Could not find libnvomx. OpenMax support disabled. =3D=3D
-    checking for gawk... yes
-    checking for cmake... yes
-    checking for gperf... no
-    configure: error: Could not find a required program. Please see the REA=
-DME f
-    ERROR: Function do_configure failed
 
-This patch is build tested with `angstrom-2008.1` for `MACHINE =3D "beagleb=
-oard"`.
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/xbmc/xbmc_svn.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
-index 3689715..be2e34e 100644
---- a/recipes/xbmc/xbmc_svn.bb
-+++ b/recipes/xbmc/xbmc_svn.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION =3D "XBMC Media Center"
- LICENSE =3D "xbmc"
-=20
--DEPENDS =3D "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python l=
-ibmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mix=
-er virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca =
-avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jas=
-per zip-native zlib"
-+DEPENDS =3D "gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig =
-curl python libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-ima=
-ge libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boo=
-st lzo2 enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtu=
-al/libsdl jasper zip-native zlib"
- require recipes/egl/egl.inc
-=20
- SRCREV =3D "e2ab481ebe964321c358ab9d6402088c714adcbe"
---=20
-1.7.2.3
-
---=-KPTfTsYObCUXXFLXht4g
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk1EVs8ACgkQPX1aK2wOHVjtIQCfe6R9P4zC8yJvAovAQrWNu4E0
-T6UAniAZfgb5R0ySUj0xUnj2vpoHkdQ6
-=wIZi
------END PGP SIGNATURE-----
-
---=-KPTfTsYObCUXXFLXht4g--
