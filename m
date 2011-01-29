@@ -1,35 +1,37 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Pj3m5-0005fu-9K
+	(envelope-from <sujak.marek@gmail.com>) id 1Pj5LM-0007LZ-PZ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 06:55:05 +0100
-Received: by ywi6 with SMTP id 6so1366470ywi.6
+	Sat, 29 Jan 2011 08:35:36 +0100
+Received: by vws6 with SMTP id 6so1417423vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 21:54:14 -0800 (PST)
+	Fri, 28 Jan 2011 23:34:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=pQux5HoV4keVOEqu3R0YA8H5+5SHz/y5uVylluhYwSc=;
-	b=bD8Ub0dju0xvnXCi+mGp81DCPi7EWngo7m9rIXa90j1a6Sm6CGnF23ktuPI19BUOpb
-	1yO5p9xkfXOIfeWjw7tVEgsPwI/6L4zJ75TCR1rxU+/b5BNR1GWR2BvZ7WB7Zpg5pIdO
-	HTW4yrsB/skQxfZHvwVzkEiEZB0ah0cf8laLo=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=02G/QbtNjkhWkpgnZgLW9K/zBXL+OyUKBnGkpOCSbpY=;
+	b=vJkIKxHEcX675UByqaWZn1uIwQwyy8J8wRXmV/tpqrsFpvna0Epdr2iaMDEKt752Ac
+	ieh8c9pU95vdVFnVvPYMD29H9GITpop/ND8LIJkqo8Tnh8CbfYx51RsO9E2nC2f+QAGa
+	mdczKQ/NBfb9SlxIx7eIFGFiL1WDfpy94HghI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=vqfRHFBov7UZ2x8u1ATgej7r2e/0eL/wzsyR3CO7B4V/Z7dDsO/q/lNrqis28HaKLo
-	rk1tO7bXFjOZ8qdtlgHT1z6DdXBphiYqhC16Z8psVyGDkl5WcpmRiVimnKZKkXeO1eAJ
-	+bRLRR7P7J0sndMtZIaO1KTW3N8ORmfmpGey4=
-Received: by 10.90.81.19 with SMTP id e19mr5982364agb.7.1296280453855; Fri, 28
-	Jan 2011 21:54:13 -0800 (PST)
+	b=LeXhAQIvpOwClh1Ywcjs8A9PimaGvPj3UAEMjkUF+PFgi1qy+fCNtmUwvCKb7yu2oA
+	ON6nAIU981lWaze/LpIknCzwgd2CACgwyyIIs1FnTiGKkIMKc2Go49jFj4NlGs8JPo5A
+	uH9NQbEk7AtB1ScBEzpPftSfwO0DnEyPgOrq8=
 MIME-Version: 1.0
-Received: by 10.90.32.12 with HTTP; Fri, 28 Jan 2011 21:53:53 -0800 (PST)
-In-Reply-To: <AANLkTimnVCsZ7sW0yW_jqRV-nosmOQd-9pprD67HDNem@mail.gmail.com>
-References: <AANLkTimnVCsZ7sW0yW_jqRV-nosmOQd-9pprD67HDNem@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 28 Jan 2011 21:53:53 -0800
-Message-ID: <AANLkTimzmP0RRL4sEdg_-aR0MrsUgL9A6fdnBDc8GXHS@mail.gmail.com>
+Received: by 10.220.201.193 with SMTP id fb1mr910526vcb.5.1296286485548; Fri,
+	28 Jan 2011 23:34:45 -0800 (PST)
+Received: by 10.220.188.3 with HTTP; Fri, 28 Jan 2011 23:34:45 -0800 (PST)
+In-Reply-To: <4D430EA4.7000504@eukrea.com>
+References: <1296220547-14948-1-git-send-email-sujak.marek@gmail.com>
+	<4D430EA4.7000504@eukrea.com>
+Date: Sat, 29 Jan 2011 08:34:45 +0100
+Message-ID: <AANLkTi=W1L5-7L_jdNhXNu8JsW09GGJ=bO0KTKrFb9Ek@mail.gmail.com>
+From: Marek Sujak <sujak.marek@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: how to know why bitbake will pick a wrong .bb file after providing PREFERRED_PROVIDER value
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH v2] barebox: patches for barebox 2010.10 to support vmx25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,25 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 05:55:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 29 Jan 2011 07:35:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 28, 2011 at 1:37 PM, srinredplano SP <srinredplano@gmail.com> wrote:
+Hi Eric
+
+On Fri, Jan 28, 2011 at 7:44 PM, Eric B=E9nard <eric@eukrea.com> wrote:
+
+> I think you should merge this patch with the one adding the barebox 2010.=
+10
+> recipe. Or add a plain barebox 2010.10 recipe and then add ...
 >
-> *linux-omap3axon-2.6.22-pspaxon.bb* file :
-> #####linux-omap3axon-2.6.22-pspaxon.bb ##
->
 
-This would make PN of your recipe to be linux-omap3axon-2.6.22-pspaxon
-you probably dont want that you should name it something like
-linux-omap3axon-pspaxon_2.6.22.bb
+Yes, this is much more clean solution. I will to that as you recommended
+1. first patch - universal barebox 2010.10 recipe
+2. second patch - support for vmx25
 
-then in your <machine.conf> add
-PREFERRED_PROVIDER_virtual/kernel = "linux-omap3axon-pspaxon"
+I have  a question about these commits.
+Should i reset git to default state (or clone it again) and then commit new
+files?
+Or make commit that will firstly remove these files and them upload them in
+correct order (firstly raw support, then architecture depended patch)?
 
-in linux-omap3axon-pspaxon_2.6.22.bb you can add
-DEFAULT_PREFERENCE_<yourmachine> = "1"
-
--khem
-
+Best regards,
+ marek
 
