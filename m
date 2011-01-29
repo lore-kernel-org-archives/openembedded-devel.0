@@ -1,33 +1,35 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1Pj1SE-0008DJ-0H
+	(envelope-from <raj.khem@gmail.com>) id 1Pj3m5-0005fu-9K
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 04:26:26 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id 1904D314D513
+	Sat, 29 Jan 2011 06:55:05 +0100
+Received: by ywi6 with SMTP id 6so1366470ywi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 04:25:34 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id HMyiF6TI6QQ9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 04:25:28 +0100 (CET)
-Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
-	[94.79.168.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 97AEA314D363
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 04:25:28 +0100 (CET)
-Message-ID: <4D4388AA.40208@opendreambox.org>
-Date: Sat, 29 Jan 2011 04:25:30 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101210 Lightning/1.0b2 Thunderbird/3.1.7
+	Fri, 28 Jan 2011 21:54:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=pQux5HoV4keVOEqu3R0YA8H5+5SHz/y5uVylluhYwSc=;
+	b=bD8Ub0dju0xvnXCi+mGp81DCPi7EWngo7m9rIXa90j1a6Sm6CGnF23ktuPI19BUOpb
+	1yO5p9xkfXOIfeWjw7tVEgsPwI/6L4zJ75TCR1rxU+/b5BNR1GWR2BvZ7WB7Zpg5pIdO
+	HTW4yrsB/skQxfZHvwVzkEiEZB0ah0cf8laLo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=vqfRHFBov7UZ2x8u1ATgej7r2e/0eL/wzsyR3CO7B4V/Z7dDsO/q/lNrqis28HaKLo
+	rk1tO7bXFjOZ8qdtlgHT1z6DdXBphiYqhC16Z8psVyGDkl5WcpmRiVimnKZKkXeO1eAJ
+	+bRLRR7P7J0sndMtZIaO1KTW3N8ORmfmpGey4=
+Received: by 10.90.81.19 with SMTP id e19mr5982364agb.7.1296280453855; Fri, 28
+	Jan 2011 21:54:13 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.32.12 with HTTP; Fri, 28 Jan 2011 21:53:53 -0800 (PST)
+In-Reply-To: <AANLkTimnVCsZ7sW0yW_jqRV-nosmOQd-9pprD67HDNem@mail.gmail.com>
+References: <AANLkTimnVCsZ7sW0yW_jqRV-nosmOQd-9pprD67HDNem@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 28 Jan 2011 21:53:53 -0800
+Message-ID: <AANLkTimzmP0RRL4sEdg_-aR0MrsUgL9A6fdnBDc8GXHS@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH/RFC] kernel module dependencies / my recent commits
+Subject: Re: how to know why bitbake will pick a wrong .bb file after providing PREFERRED_PROVIDER value
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,64 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 03:26:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 Jan 2011 05:55:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi all,
+On Fri, Jan 28, 2011 at 1:37 PM, srinredplano SP <srinredplano@gmail.com> wrote:
+>
+> *linux-omap3axon-2.6.22-pspaxon.bb* file :
+> #####linux-omap3axon-2.6.22-pspaxon.bb ##
+>
 
-it seems that my last commits broke the build of external kernel modules
-at least on clean builds, but maybe also for incremental builds.
+This would make PN of your recipe to be linux-omap3axon-2.6.22-pspaxon
+you probably dont want that you should name it something like
+linux-omap3axon-pspaxon_2.6.22.bb
 
-To quote from my commit message:
+then in your <machine.conf> add
+PREFERRED_PROVIDER_virtual/kernel = "linux-omap3axon-pspaxon"
 
-* As a special case, kernel modules must depend on
-kernel-${KERNEL_VERSION}, which gets runtime provided by the kernel
-package. The reason is, that the package version can be different from
-${KERNEL_VERSION}, because the latter depends on the kernel
-configuration, e.g. CONFIG_LOCALVERSION.
+in linux-omap3axon-pspaxon_2.6.22.bb you can add
+DEFAULT_PREFERENCE_<yourmachine> = "1"
 
-This is also what kernel.bbclass does when calling do_split_packages().
-
-Now it seems like there's a problem with using the variable
-KERNEL_VERSION as part of a recipe's RDEPENDS, when used in a package's
-name, because it can be empty before the kernel is built (and apparently
-it may also become empty when loaded from BitBake's cache).
-
-I've included a patch to kernel.bbclass to workaround or solve this
-problem below, but I'm not sure whether it's the right thing.
-
-If it's not and if there's no better solution, then please revert my
-commits using
-
-git revert 254193c8f65511a8f344559f7714b50d35afb22b...
-2dac84b9a7b820466ed626420fec120093b56e16
-
-I am sorry for the inconvenience I've caused.
-
-Regards,
-Andreas
-
----
-kernel.bbclass: Add kernel-* to PACKAGES_DYNAMIC
-
-* Use it as a hint for BitBake to know that packages inheriting
-kernel.bbclass do provide kernel-x.y.z-localversion.
-
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index ea1daf6..0d1b4ad 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -32,6 +32,7 @@ INITRAMFS_TASK ?= ""
-
- inherit kernel-arch
-
-+PACKAGES_DYNAMIC += "kernel-*"
- PACKAGES_DYNAMIC += "kernel-module-*"
- PACKAGES_DYNAMIC += "kernel-image-*"
- PACKAGES_DYNAMIC += "kernel-firmware-*"
-
+-khem
 
 
