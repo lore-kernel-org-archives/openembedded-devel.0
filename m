@@ -1,36 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <coolaj86@gmail.com>) id 1PjHK2-0007jj-NX
+	(envelope-from <obi@opendreambox.org>) id 1PjHLK-0007ls-Bu
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 21:23:02 +0100
-Received: by bwz10 with SMTP id 10so4230275bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 12:22:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=MgAQUQ3XiemmFau5fUQ0d2dX6QlHj7r5rniqDVxhFI4=;
-	b=CDwyWxhOdCL0Z6sPvcCfrtpn1tTZP14Qt78VUkmeSmNa1XPN9J1fGPGGj5iTZRPM+A
-	OOsWf1LkQug5GgOxgVgKmSOFyT6i9/kohdITPZLC6nw8ssJ1dDqnHfnDymS8Ra6ilhju
-	qYc7NjTa9ATI5F6tIYHEq9s0WNtivx9UEpMFg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=VZEY+w+0NftYfKEUBJh0mn6QY/u5Fj6gLtdErMrXpsAYWjlj4rX3DBw3Hwtfmnmc55
-	De7TVMIDKUnaEBWzjtklKL2sJwtHTUpkaCqQkDNM7Ab48/lhE23nsbYBZUzw9BeprVSm
-	sWFK8ccJJhgbZKxwhBhJS04ngxjMPkKsVbLgc=
-Received: by 10.204.121.143 with SMTP id h15mr3807290bkr.42.1296332523839;
-	Sat, 29 Jan 2011 12:22:03 -0800 (PST)
+	Sat, 29 Jan 2011 21:24:22 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 6DCCC314D4C0;
+	Sat, 29 Jan 2011 21:23:31 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id j18K-8KSEoVZ; Sat, 29 Jan 2011 21:23:26 +0100 (CET)
+Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
+	[94.79.168.47])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 116E2314D4C9;
+	Sat, 29 Jan 2011 21:23:26 +0100 (CET)
+Message-ID: <4D44773D.5010103@opendreambox.org>
+Date: Sat, 29 Jan 2011 21:23:25 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.14) Gecko/20110128 Lightning/1.0b2 Thunderbird/3.1.8
 MIME-Version: 1.0
-Received: by 10.204.81.195 with HTTP; Sat, 29 Jan 2011 12:21:41 -0800 (PST)
-In-Reply-To: <1296332602-28899-1-git-send-email-coolaj86@gmail.com>
-References: <1296332602-28899-1-git-send-email-coolaj86@gmail.com>
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Sat, 29 Jan 2011 13:21:41 -0700
-Message-ID: <AANLkTincDsBpwV1JUc7qDFmUFABJD7KLQR_KfvqCdqw1@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v3] nodejs: updated recipe to v0.2.6
+To: Paul Menzel <paulepanter@users.sourceforge.net>
+References: <1296316693.5925.10.camel@mattotaupa>
+In-Reply-To: <1296316693.5925.10.camel@mattotaupa>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [REGRESSION] omap3-sgx-modules: `NOTE: Runtime target 'kernel-' is unbuildable, removing...`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,253 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 20:23:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 29 Jan 2011 20:24:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-I wasn't sure which format would be most preferred so I did it both ways.
+On 01/29/2011 04:58 PM, Paul Menzel wrote:
+> Dear Andreas and OE folks,
+> 
+> 
+>         commit 2dac84b9a7b820466ed626420fec120093b56e16
+>         Author: Andreas Oberritter <obi@opendreambox.org>
+>         Date:   Sat Jan 29 00:51:25 2011 +0000
+>         
+>             module.bbclass: depend on kernel-${KERNEL_VERSION} instead of kernel (= ${KERNEL_VERSION})
+>             
+>             * As a special case, kernel modules must depend on
+>               kernel-${KERNEL_VERSION}, which gets runtime provided by the kernel
+>               package. The reason is, that the package version can be different
+>               from ${KERNEL_VERSION}, because the latter depends on the kernel
+>               configuration, e.g. CONFIG_LOCALVERSION.
+>             
+>             Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> 
+> [1] seems to have broken `omap3-sgx-modules`.
 
-AJ ONeal
+Hello Paul,
 
-On Sat, Jan 29, 2011 at 1:23 PM, AJ ONeal <coolaj86@gmail.com> wrote:
+thanks! It's a known bug. Can you please test this patch, while I'm
+waiting for an ack or nack for it?
 
-> * left nodejs-v0.2.1 intact, patches renamed with -v0.2.1 suffix
-> * libev-cross-cc-v0.2.6.patch - turns off execution so that cross-compile
-> succeeds
-> * node-cross-cc-v0.2.6.patch - enables cross-compiling of v8 for x86,
-> x86_64, arm, and mips
-> ---
->  recipes/nodejs/files/libev-cross-cc-v0.2.1.patch |   18 ++++++++++++
->  recipes/nodejs/files/libev-cross-cc-v0.2.6.patch |   13 +++++++++
->  recipes/nodejs/files/libev-cross-cc.patch        |   18 ------------
->  recipes/nodejs/files/node-cross-cc-v0.2.1.patch  |   14 +++++++++
->  recipes/nodejs/files/node-cross-cc-v0.2.6.patch  |   19 +++++++++++++
->  recipes/nodejs/files/node-cross-cc.patch         |   14 ---------
->  recipes/nodejs/nodejs_0.2.1.bb                   |    6 ++--
->  recipes/nodejs/nodejs_0.2.6.bb                   |   32
-> ++++++++++++++++++++++
->  8 files changed, 99 insertions(+), 35 deletions(-)
->  create mode 100644 recipes/nodejs/files/libev-cross-cc-v0.2.1.patch
->  create mode 100644 recipes/nodejs/files/libev-cross-cc-v0.2.6.patch
->  delete mode 100644 recipes/nodejs/files/libev-cross-cc.patch
->  create mode 100644 recipes/nodejs/files/node-cross-cc-v0.2.1.patch
->  create mode 100644 recipes/nodejs/files/node-cross-cc-v0.2.6.patch
->  delete mode 100644 recipes/nodejs/files/node-cross-cc.patch
->  create mode 100644 recipes/nodejs/nodejs_0.2.6.bb
->
-> diff --git a/recipes/nodejs/files/libev-cross-cc-v0.2.1.patch
-> b/recipes/nodejs/files/libev-cross-cc-v0.2.1.patch
-> new file mode 100644
-> index 0000000..4dd34f4
-> --- /dev/null
-> +++ b/recipes/nodejs/files/libev-cross-cc-v0.2.1.patch
-> @@ -0,0 +1,18 @@
-> +diff --git node-v0.2.1/deps/libev/wscript.orig
-> node-v0.2.1/deps/libev/wscript
-> +index 19e7bb2..f0a3d3b 100644
-> +--- node-v0.2.1/deps/libev/wscript.orig
-> ++++ node-v0.2.1/deps/libev/wscript
-> +@@ -52,7 +52,12 @@ def configure(conf):
-> +           return 0;
-> +       }
-> +   """
-> +-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=True,
-> ++  # TODO determine this dynamically
-> ++  CROSS = True
-> ++  execute = True
-> ++  if CROSS:
-> ++    execute = False
-> ++  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=execute,
-> +                 msg="Checking for SYS_clock_gettime")
-> +
-> +   have_librt = conf.check(lib='rt', uselib_store='RT')
-> diff --git a/recipes/nodejs/files/libev-cross-cc-v0.2.6.patch
-> b/recipes/nodejs/files/libev-cross-cc-v0.2.6.patch
-> new file mode 100644
-> index 0000000..13ce4d8
-> --- /dev/null
-> +++ b/recipes/nodejs/files/libev-cross-cc-v0.2.6.patch
-> @@ -0,0 +1,13 @@
-> +diff --git node-v0.2.6/deps/libev/wscript.orig
-> node-v0.2.6/deps/libev/wscript
-> +index 19e7bb2..5ec9143 100644
-> +--- node-v0.2.6/deps/libev/wscript.orig
-> ++++ node-v0.2.6/deps/libev/wscript
-> +@@ -52,7 +52,7 @@ def configure(conf):
-> +           return 0;
-> +       }
-> +   """
-> +-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=True,
-> ++  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=False,
-> +                 msg="Checking for SYS_clock_gettime")
-> +
-> +   have_librt = conf.check(lib='rt', uselib_store='RT')
-> diff --git a/recipes/nodejs/files/libev-cross-cc.patch
-> b/recipes/nodejs/files/libev-cross-cc.patch
-> deleted file mode 100644
-> index 4dd34f4..0000000
-> --- a/recipes/nodejs/files/libev-cross-cc.patch
-> +++ /dev/null
-> @@ -1,18 +0,0 @@
-> -diff --git node-v0.2.1/deps/libev/wscript.orig
-> node-v0.2.1/deps/libev/wscript
-> -index 19e7bb2..f0a3d3b 100644
-> ---- node-v0.2.1/deps/libev/wscript.orig
-> -+++ node-v0.2.1/deps/libev/wscript
-> -@@ -52,7 +52,12 @@ def configure(conf):
-> -           return 0;
-> -       }
-> -   """
-> --  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=True,
-> -+  # TODO determine this dynamically
-> -+  CROSS = True
-> -+  execute = True
-> -+  if CROSS:
-> -+    execute = False
-> -+  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL",
-> execute=execute,
-> -                 msg="Checking for SYS_clock_gettime")
-> -
-> -   have_librt = conf.check(lib='rt', uselib_store='RT')
-> diff --git a/recipes/nodejs/files/node-cross-cc-v0.2.1.patch
-> b/recipes/nodejs/files/node-cross-cc-v0.2.1.patch
-> new file mode 100644
-> index 0000000..0d15afc
-> --- /dev/null
-> +++ b/recipes/nodejs/files/node-cross-cc-v0.2.1.patch
-> @@ -0,0 +1,14 @@
-> +diff --git node-v0.2.1/wscript.orig node-v0.2.1/wscript
-> +index 9c4243c..3cf6689 100644
-> +--- node-v0.2.1/wscript.orig
-> ++++ node-v0.2.1/wscript
-> +@@ -326,6 +326,9 @@ def v8_cmd(bld, variant):
-> +   arch = ""
-> +   if bld.env['DEST_CPU'] == 'x86_64':
-> +     arch = "arch=x64"
-> ++  # XXX Better support cross-compilation
-> ++  else:
-> ++    arch = "arch=" + bld.env['DEST_CPU']
-> +
-> +   if variant == "default":
-> +     mode = "release"
-> diff --git a/recipes/nodejs/files/node-cross-cc-v0.2.6.patch
-> b/recipes/nodejs/files/node-cross-cc-v0.2.6.patch
-> new file mode 100644
-> index 0000000..1087ce2
-> --- /dev/null
-> +++ b/recipes/nodejs/files/node-cross-cc-v0.2.6.patch
-> @@ -0,0 +1,19 @@
-> +diff --git node-v0.2.6/wscript.orig node-v0.2.6/wscript
-> +index a6bade2..566bf5e 100644
-> +--- node-v0.2.6/wscript.orig
-> ++++ node-v0.2.6/wscript
-> +@@ -338,6 +338,14 @@ def v8_cmd(bld, variant):
-> +   arch = ""
-> +   if bld.env['DEST_CPU'] == 'x86_64':
-> +     arch = "arch=x64"
-> ++  elif bld.env['DEST_CPU'] == 'x86':
-> ++    arch = "arch=x86"
-> ++  elif bld.env['DEST_CPU'] == 'arm':
-> ++    arch = "arch=arm"
-> ++  elif bld.env['DEST_CPU'] == 'mips':
-> ++    arch = "arch=mips"
-> ++  else:
-> ++    raise Exception(bld.env['DEST_CPU'], "is not one of these supported
-> architectures: x86, x86_64, arm, mips")
-> +
-> +   if variant == "default":
-> +     mode = "release"
-> diff --git a/recipes/nodejs/files/node-cross-cc.patch
-> b/recipes/nodejs/files/node-cross-cc.patch
-> deleted file mode 100644
-> index 0d15afc..0000000
-> --- a/recipes/nodejs/files/node-cross-cc.patch
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -diff --git node-v0.2.1/wscript.orig node-v0.2.1/wscript
-> -index 9c4243c..3cf6689 100644
-> ---- node-v0.2.1/wscript.orig
-> -+++ node-v0.2.1/wscript
-> -@@ -326,6 +326,9 @@ def v8_cmd(bld, variant):
-> -   arch = ""
-> -   if bld.env['DEST_CPU'] == 'x86_64':
-> -     arch = "arch=x64"
-> -+  # XXX Better support cross-compilation
-> -+  else:
-> -+    arch = "arch=" + bld.env['DEST_CPU']
-> -
-> -   if variant == "default":
-> -     mode = "release"
-> diff --git a/recipes/nodejs/nodejs_0.2.1.bb b/recipes/nodejs/
-> nodejs_0.2.1.bb
-> index c2e9c41..1970766 100644
-> --- a/recipes/nodejs/nodejs_0.2.1.bb
-> +++ b/recipes/nodejs/nodejs_0.2.1.bb
-> @@ -2,14 +2,14 @@ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
->  HOMEPAGE = "http://nodejs.org"
->  LICENSE = "MIT"
->
-> -PR = "r1"
-> +PR = "r2"
->
->  DEPENDS = "openssl"
->
->  SRC_URI = " \
->   http://nodejs.org/dist/node-v${PV}.tar.gz \
-> -  file://libev-cross-cc.patch \
-> -  file://node-cross-cc.patch \
-> +  file://libev-cross-cc-v${PV}.patch \
-> +  file://node-cross-cc-v${PV}.patch \
->  "
->  SRC_URI[md5sum] = "c6051dd216817bf0f95bea80c42cf262"
->  SRC_URI[sha256sum] =
-> "5bb7d084b2138ce43fcb34739ed894379c450a1dd569a1c710405bc39d2861c2"
-> diff --git a/recipes/nodejs/nodejs_0.2.6.bb b/recipes/nodejs/
-> nodejs_0.2.6.bb
-> new file mode 100644
-> index 0000000..560adc6
-> --- /dev/null
-> +++ b/recipes/nodejs/nodejs_0.2.6.bb
-> @@ -0,0 +1,32 @@
-> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> +HOMEPAGE = "http://nodejs.org"
-> +LICENSE = "MIT"
-> +
-> +DEPENDS = "openssl"
-> +
-> +SRC_URI = " \
-> +  http://nodejs.org/dist/node-v${PV}.tar.gz \
-> +  file://libev-cross-cc-v${PV}.patch \
-> +  file://node-cross-cc-v${PV}.patch \
-> +"
-> +SRC_URI[md5sum] = "b1c50ceb43bee1b221be210b7bc7a216"
-> +SRC_URI[sha256sum] =
-> "e97fe9c81ff4b569ae9a0d46e64a0572a1f171293573a5b5290bcc3996a19701"
-> +
-> +S = "${WORKDIR}/node-v${PV}"
-> +
-> +# v8 errors out if you have set CCACHE
-> +CCACHE = ""
-> +
-> +do_configure () {
-> +  ./configure --prefix=${prefix} --without-snapshot
-> +}
-> +
-> +do_compile () {
-> +  make
-> +}
-> +
-> +do_install () {
-> +  DESTDIR=${D} oe_runmake install
-> +}
-> +
-> +BBCLASSEXTEND = "native"
-> --
-> 1.7.0.4
->
->
+http://patches.openembedded.org/patch/402/
+
+Is there a maintainer for kernel.bbclass?
+
+If there's no feedback, and if nobody's faster, I'll revert the commits
+tomorrow.
+
+Regards,
+Andreas
+
 
