@@ -1,33 +1,20 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PjD7g-00046E-QU
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 16:54:01 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PjD6q-0000pR-O3 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 07:53:08 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Sat, 29 Jan 2011 07:53:08 -0800
-Received: from [172.30.80.64] ([172.30.80.64]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 29 Jan 2011 08:53:07 -0700
-Message-ID: <4D4437DB.40704@mentor.com>
-Date: Sat, 29 Jan 2011 08:52:59 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PjDCa-0004BR-0o for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Jan 2011 16:59:04 +0100
+Received: from f053042056.adsl.alicedsl.de ([78.53.42.56]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PjDBm-00060e-Rz; Sat, 29 Jan 2011 15:58:14 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>	<20110129112942.GB3265@jama>
-	<4D44296D.6040209@mentor.com>
-In-Reply-To: <4D44296D.6040209@mentor.com>
-X-OriginalArrivalTime: 29 Jan 2011 15:53:07.0717 (UTC)
-	FILETIME=[9F4EDB50:01CBBFCC]
-Subject: Re: [PATCH 0/5] Relocatable perl-native and use it always
+Date: Sat, 29 Jan 2011 16:58:13 +0100
+Message-ID: <1296316693.5925.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: [REGRESSION] omap3-sgx-modules: `NOTE: Runtime target 'kernel-' is unbuildable, removing...`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,45 +28,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 15:54:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 Jan 2011 15:59:04 -0000
+X-Groupsio-MsgNum: 28614
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-/ejZ5pNIt1f49cg1vBTB"
 
-On 01/29/2011 07:51 AM, Tom Rini wrote:
-> On 01/29/2011 04:29 AM, Martin Jansa wrote:
->> On Fri, Jan 28, 2011 at 11:52:28AM -0700, Tom Rini wrote:
->>> Hey all,
->>>
->>> As I've talked about before[1] there's build reproducibility issues
->>> depending on when perl-native is built. After talking with Mark Hatle
->>> a little bit I started thinking about relocation in perl again and it
->>> turns out that starting in 5.10, upstream perl supports relocation.
->>>
->>> This in turn makes it less painful to make perl-native be what we use
->>> when we want perl runtime, nearly everywhere (since you can use pstaging
->>> to avoid it the time next time).
->>>
->>> This patch set drops perl 5.8.8 and bumps all of the perl stuffs PR,
->>> switches to relocatable perl-native, and then the big switch to using it
->>> early.
->>
->> Looks good and as we're using 5.10 already then for whole series:
->>
->> Acked-by: Martin Jansa<Martin.Jansa@gmail.com>
->
-> Thanks.
->
->> Can we also get rid of legacy staging from recipes/perl/perl_5.10.1.bb ?
->
-> Huh? I killed legacy staging in both perls a long time ago (and then
-> Koen fixed up my thinkos).
+--=-/ejZ5pNIt1f49cg1vBTB
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-OK, after some quick IRC, -ENOCOFFEE.  It looks like it wouldn't be too 
-hard to kill legacy staging based on poky (we just need to install on 
-the target Config_heavy-${TARGET_SYS}.pl.  I'll tackle that separately.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+Dear Andreas and OE folks,
 
 
+        commit 2dac84b9a7b820466ed626420fec120093b56e16
+        Author: Andreas Oberritter <obi@opendreambox.org>
+        Date:   Sat Jan 29 00:51:25 2011 +0000
+       =20
+            module.bbclass: depend on kernel-${KERNEL_VERSION} instead of k=
+ernel (=3D ${KERNEL_VERSION})
+           =20
+            * As a special case, kernel modules must depend on
+              kernel-${KERNEL_VERSION}, which gets runtime provided by the =
+kernel
+              package. The reason is, that the package version can be diffe=
+rent
+              from ${KERNEL_VERSION}, because the latter depends on the ker=
+nel
+              configuration, e.g. CONFIG_LOCALVERSION.
+           =20
+            Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+
+[1] seems to have broken `omap3-sgx-modules`.
+
+        $ bitbake -k omap3-sgx-modules
+        NOTE: Handling BitBake files: - (7083/7083) [100 %]
+        Parsing of 7083 .bb files complete (6644 cached, 439 parsed). 7395 =
+targets, 304=20
+        skipped, 0 masked, 0 errors.  =20
+        ERROR: '['/oe/openembedded/recipes/powervr-drivers/omap3-sgx-module=
+s_1.4.14.2616.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime =
+entity 'kernel-' but it wasn't found in any PACKAGE or RPROVIDES variables
+        NOTE: Resolving any missing task queue dependencies
+        ERROR: '['/oe/openembedded/recipes/powervr-drivers/omap3-sgx-module=
+s_1.4.14.2616.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime =
+entity 'kernel-' but it wasn't found in any PACKAGE or RPROVIDES variables
+        Unknown Event: <bb.event.NoProvider instance at 0x10964eac>
+        NOTE: Runtime target 'kernel-' is unbuildable, removing...
+        Missing or unbuildable dependency chain was: ['kernel-']
+        NOTE: Runtime target 'omap3-sgx-modules' is unbuildable, removing..=
+.
+        Missing or unbuildable dependency chain was: ['omap3-sgx-modules', =
+'kernel-']
+        FATAL: All buildable tasks have been run but the build is incomplet=
+e (--continue mode). Errors for the tasks that failed will have been printe=
+d above.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D2dac84b=
+9a7b820466ed626420fec120093b56e16
+
+--=-/ejZ5pNIt1f49cg1vBTB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1EOQAACgkQPX1aK2wOHViAjACfbTHmR0zGdbnohNNjZlIYUuvU
+PloAn2jrBLxciXPf3C3k96Q8gWWGD2dI
+=CYva
+-----END PGP SIGNATURE-----
+
+--=-/ejZ5pNIt1f49cg1vBTB--
