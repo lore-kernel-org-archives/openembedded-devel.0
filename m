@@ -1,38 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Pj90s-0002GT-Up
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Pj9TP-00036z-AE
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 12:30:43 +0100
-Received: by bwz10 with SMTP id 10so4002378bwz.6
+	Sat, 29 Jan 2011 13:00:11 +0100
+Received: by iyj18 with SMTP id 18so3574655iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 03:29:52 -0800 (PST)
+	Sat, 29 Jan 2011 03:59:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=mA7ZDmJmKi6Bhca6h/UBNAzRgqX1+ekmAvYwINrMa+Q=;
-	b=AIwX7KgaFdN/CFAaS/u7AlWg4CqUhyX9kr1aGNHoks0G9Wx3xDsAtMUOBLKMkU9Mjk
-	VmhewJ1P583cEx/3cDWtrzSUx7Ozfw69hZ2JXQDu6yzrEM/WokwoFFzga9gCztTjykLj
-	S3nhd5V7bP4OehGRSWtXHcab02SZgCegxrsYw=
+	h=domainkey-signature:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:content-transfer-encoding;
+	bh=+ItzeWh3rFlUuZGdezJh1MG+BpYnkOa25TqqpNbLSUA=;
+	b=w920Yb5Pb2v/rVY2FBv1fwIWoExcGRjUITsV4pcH7a6ScKryX+I3kl3dtc4aBc5kok
+	L4UjhCm6YTmhDO7ct8aZxJ1kXZ1n3k+F2GETgfY2TtgkfTJsKJw3ElUaL4scRtUVh7FS
+	Xkt/iPs2OLM7USXBxJsvlTGOK00uBJcNLjXzE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=HtVqfaj57pQJvrHzTDltknHWsVR0vm/ELJUerZ/WKCu9kiCi1ZMW8DUJBIPf+kNQLu
-	IxhTPQyyA8jFtWqUCUfjKdjmhmL04douFD1yOETlEzcQpTHfFrIhiiSkIiZg9chBohEt
-	uNloMpZ8/OaDxg09pumphImJerLLzzjA/LM80=
-Received: by 10.204.79.135 with SMTP id p7mr3436754bkk.109.1296300582156;
-	Sat, 29 Jan 2011 03:29:42 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u23sm6619731bkw.9.2011.01.29.03.29.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 29 Jan 2011 03:29:41 -0800 (PST)
-Date: Sat, 29 Jan 2011 12:29:42 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110129112942.GB3265@jama>
-References: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=OfwZ+W/gCK8cmWgDEc+AgjEjD8gGQM2F2doLA1zxRaihY8ZCHDxln0km4MimEq9ofy
+	2/TtT4heclYYQLpGSWto62kHFuStXZa+kTb25PWmnYDab/fkWhx4KsROW70MwpbEkzrO
+	L4848xxttiFb9LibxDiy5ufgGxNany7RA2Vug=
 MIME-Version: 1.0
-In-Reply-To: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Received: by 10.231.172.75 with SMTP id k11mr800345ibz.133.1296302355369; Sat,
+	29 Jan 2011 03:59:15 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Sat, 29 Jan 2011 03:59:15 -0800 (PST)
+In-Reply-To: <20110129112942.GB3265@jama>
+References: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>
+	<20110129112942.GB3265@jama>
+Date: Sat, 29 Jan 2011 12:59:15 +0100
+Message-ID: <AANLkTikgSv7C9zwrWDbVU7eVYOyWvcnxwKYQXypK08oj@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 0/5] Relocatable perl-native and use it always
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,51 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 11:30:43 -0000
-X-Groupsio-MsgNum: 28605
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="neYutvxvOLaeuPCA"
-Content-Disposition: inline
-
---neYutvxvOLaeuPCA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 29 Jan 2011 12:00:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 28, 2011 at 11:52:28AM -0700, Tom Rini wrote:
-> Hey all,
->=20
-> As I've talked about before[1] there's build reproducibility issues
-> depending on when perl-native is built.  After talking with Mark Hatle
-> a little bit I started thinking about relocation in perl again and it
-> turns out that starting in 5.10, upstream perl supports relocation.
->=20
-> This in turn makes it less painful to make perl-native be what we use
-> when we want perl runtime, nearly everywhere (since you can use pstaging
-> to avoid it the time next time).
->=20
-> This patch set drops perl 5.8.8 and bumps all of the perl stuffs PR,
-> switches to relocatable perl-native, and then the big switch to using it
-> early.
+2011/1/29 Martin Jansa <martin.jansa@gmail.com>:
+> On Fri, Jan 28, 2011 at 11:52:28AM -0700, Tom Rini wrote:
+>> Hey all,
+>>
+>> As I've talked about before[1] there's build reproducibility issues
+>> depending on when perl-native is built. =A0After talking with Mark Hatle
+>> a little bit I started thinking about relocation in perl again and it
+>> turns out that starting in 5.10, upstream perl supports relocation.
+>>
+>> This in turn makes it less painful to make perl-native be what we use
+>> when we want perl runtime, nearly everywhere (since you can use pstaging
+>> to avoid it the time next time).
+>>
+>> This patch set drops perl 5.8.8 and bumps all of the perl stuffs PR,
+>> switches to relocatable perl-native, and then the big switch to using it
+>> early.
+>
+> Looks good and as we're using 5.10 already then for whole series:
+>
+> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
+> Can we also get rid of legacy staging from recipes/perl/perl_5.10.1.bb ?
 
-Looks good and as we're using 5.10 already then for whole series:
+Would be nice.
+Then again we could also decide to keep 5.10.1 as is, and try to move
+forward to 5.12.
+poky already has that recipe.
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Frans
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-Can we also get rid of legacy staging from recipes/perl/perl_5.10.1.bb ?
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---neYutvxvOLaeuPCA
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.17 (GNU/Linux)
-
-iEYEARECAAYFAk1D+iYACgkQN1Ujt2V2gBxiBQCfSvIwIe+iMv1jcsC3Aezlo44C
-5fsAoJ+eGlxFLAkzNcF5Rn+OoTUhE5hq
-=IxhV
------END PGP SIGNATURE-----
-
---neYutvxvOLaeuPCA--
