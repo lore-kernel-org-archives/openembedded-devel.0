@@ -1,33 +1,33 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail.multimedia-labs.de ([82.149.226.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <srinredplano@gmail.com>) id 1PiyiR-0005F2-RO
+	(envelope-from <obi@opendreambox.org>) id 1Pj1SE-0008DJ-0H
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Jan 2011 01:30:59 +0100
-Received: by qyk36 with SMTP id 36so3913269qyk.6
+	Sat, 29 Jan 2011 04:26:26 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.multimedia-labs.de (Postfix) with ESMTP id 1904D314D513
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jan 2011 16:30:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=l2DZ1RE9Y7MTjWZ2haN7yei805G63/IKCL85svRzpfU=;
-	b=oXVcec/V+lopy5JUXXq3HubdutUUbrt9k1ybPC10Lka9l1PcxR8aNzas4/QIjyKfep
-	rTw2JG4LL9bWPN0iaJJ33lfxgQ/mH5mtswImlqeXNMjDsXAzi60H8ZbWbYJpUMZ5G99L
-	PooFoVo+7ggeGQP1thVk9k82se0qqLkA4W6F8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=aNE92vga2/fDEsfy/He4915wIoNJPukLZbFZuxza4OYR/VXZ34+piMGX1bN7nRl8WE
-	qXKMdeTny91ramXg6Ixwn7dZxIE/PaHvH4CoKDRVPd1j9ZESKyxPUGItMO9obr3DEn9p
-	9kNHXtpCLQ8KG2GpZ4VvULRMJLSj4VM92E+Ew=
+	Sat, 29 Jan 2011 04:25:34 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
+Received: from mail.multimedia-labs.de ([127.0.0.1])
+	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id HMyiF6TI6QQ9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Jan 2011 04:25:28 +0100 (CET)
+Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
+	[94.79.168.47])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 97AEA314D363
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Jan 2011 04:25:28 +0100 (CET)
+Message-ID: <4D4388AA.40208@opendreambox.org>
+Date: Sat, 29 Jan 2011 04:25:30 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101210 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.229.235.143 with SMTP id kg15mr1429301qcb.17.1296261009108;
-	Fri, 28 Jan 2011 16:30:09 -0800 (PST)
-Received: by 10.220.175.203 with HTTP; Fri, 28 Jan 2011 16:30:09 -0800 (PST)
-Date: Fri, 28 Jan 2011 16:30:09 -0800
-Message-ID: <AANLkTimD_HUT+vTfSpC8eAOQ+tqmA4hwZWnpppMvmOBh@mail.gmail.com>
-From: srinredplano SP <srinredplano@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: how to know why bitbake will pick a wrong .bb file after providing PREFERRED_PROVIDER value
+Subject: [PATCH/RFC] kernel module dependencies / my recent commits
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,157 +41,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jan 2011 00:31:00 -0000
+X-List-Received-Date: Sat, 29 Jan 2011 03:26:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi ,
-I am using DISTRO=3Darago=A0 and MACHINE=3D omap3axon(same as that of
-omap3evm ) to compile linux-2.6.22=A0 kernel .
+Hi all,
 
-when I try to execute the following=A0 =A0command
-tbake finds my .bb file and uses
+it seems that my last commits broke the build of external kernel modules
+at least on clean builds, but maybe also for incremental builds.
 
-$> MACHINE=3Domap3axon=A0 bitbake virtual/kernel
+To quote from my commit message:
 
-wrong bb file is getting picked up . How to know why a wrong .bb file
-is picked up(it always picks
-linux-nokia900-2.6.28.10+gitr0+e93534addfc33a2fefbca13cb86a8f787e4b650c-r92=
-.bb
-file=A0 ) and which=A0 variable i have to override so that only my .bb
-file gets executed .
-Is there any thing else which I am missing . thanks=A0 in advance
+* As a special case, kernel modules must depend on
+kernel-${KERNEL_VERSION}, which gets runtime provided by the kernel
+package. The reason is, that the package version can be different from
+${KERNEL_VERSION}, because the latter depends on the kernel
+configuration, e.g. CONFIG_LOCALVERSION.
 
-The following=A0 the local.conf , =A0 omap3axon.conf
+This is also what kernel.bbclass does when calling do_split_packages().
 
-local.conf=A0 file :
-### local.conf #########
+Now it seems like there's a problem with using the variable
+KERNEL_VERSION as part of a recipe's RDEPENDS, when used in a package's
+name, because it can be empty before the kernel is built (and apparently
+it may also become empty when loaded from BitBake's cache).
 
-SCRATCH ?=3D "${OEBASE}"
+I've included a patch to kernel.bbclass to workaround or solve this
+problem below, but I'm not sure whether it's the right thing.
 
-DL_DIR =3D "${SCRATCH}/downloads"
+If it's not and if there's no better solution, then please revert my
+commits using
 
-TMPDIR =3D "${SCRATCH}/arago-tmp"
+git revert 254193c8f65511a8f344559f7714b50d35afb22b...
+2dac84b9a7b820466ed626420fec120093b56e16
 
-MACHINE =3D "omap3axon"
+I am sorry for the inconvenience I've caused.
 
-DISTRO =3D "arago"
+Regards,
+Andreas
 
-ENABLE_BINARY_LOCALE_GENERATION =3D "0"
+---
+kernel.bbclass: Add kernel-* to PACKAGES_DYNAMIC
 
-IMAGE_FSTYPES =3D "jffs2 tar.gz ext2.gz"
+* Use it as a hint for BitBake to know that packages inheriting
+kernel.bbclass do provide kernel-x.y.z-localversion.
 
-BBDEBUG =3D "yes"
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 
-PARALLEL_MAKE =3D "-j 8"
-BB_NUMBER_THREADS =3D "4"
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index ea1daf6..0d1b4ad 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -32,6 +32,7 @@ INITRAMFS_TASK ?= ""
 
-BBINCLUDELOGS =3D "yes"
+ inherit kernel-arch
 
-TOOLCHAIN_TYPE =3D "external"
-TOOLCHAIN_BRAND =3D "csl"
-DEFAULT_PREFERENCE =3D "1"
++PACKAGES_DYNAMIC += "kernel-*"
+ PACKAGES_DYNAMIC += "kernel-module-*"
+ PACKAGES_DYNAMIC += "kernel-image-*"
+ PACKAGES_DYNAMIC += "kernel-firmware-*"
 
-####### END local.conf ####
-
-
-MACHINE : omap3axon.conf
-## MACHINE=A0 CONF omap3axon.conf=A0 ##
-
-#@DESCRIPTION: Machine configuration for the TI OMAP3 EVM
-TARGET_ARCH =3D "arm"
-
-PREFERRED_PROVIDER_virtual/xserver =3D "xserver-xorg"
-XSERVER =3D "xserver-xorg \
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 xf86-input-evdev \
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 xf86-input-mouse \
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 xf86-input-tslib \
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 xf86-video-omapfb \
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 xf86-input-keyboard"
-
-GUI_MACHINE_CLASS =3D "smallscreen"
-
-require conf/machine/include/omap3.inc
-
-IMAGE_FSTYPES ?=3D "jffs2 tar.bz2"
-EXTRA_IMAGECMD_jffs2 =3D "-lnp -e 0x20000 -s 2048"
-
-SERIAL_CONSOLE =3D "115200 ttyS0"
-
-PREFERRED_PROVIDER_virtual/kernel =3D "linux-omap3axon-2.6.22-pspaxon"
-
-UBOOT_ARCH =3D "arm"
-
-MACHINE_FEATURES =3D "kernel26 apm usbgadget usbhost vfat ext2 screen touch=
-screen"
-
-KVER=3D "2.6.22"
-
-MKUBIFS_ARGS =3D "-m 2048 -e 129024 -c 1996"
-
-UBINIZE_ARGS =3D "-m 2048 -p 128KiB -s 512"
-
-##END -- MACHINE=A0 CONF omap3axon.conf=A0 ##
-
-
-
-
-
-linux-omap3axon-2.6.22-pspaxon.bb file :
-#####linux-omap3axon-2.6.22-pspaxon.bb ##
-
-SRC_URI =3D "file://linux-2.6.22.tar.gz \
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 file://defconfig"
-
-COMPATIBLE_MACHINE =3D "omap3axon"
-
-require linux-omap3.inc
-
-SECTION =3D "kernel"
-
-KVER =3D "2.6.22"
-
-DEFAULT_PREFERENCE =3D "1"
-DEFAULT_PREFERENCE_omap3axon =3D "1"
-#SRC_URI :=3D "${@oe_filter_out('file://defconfig',
-bb.data.getVar('SRC_URI', d, 1), d)}"
-
-
-DEFAULT_PREFERENCE =3D "1"
-
-do_setup_defconfig() {
-=A0=A0=A0=A0=A0=A0=A0 :
-}
-
-do_configure() {
-=A0=A0=A0=A0=A0=A0=A0 make omap3evm_defconfig
-}
-
-
-SRCREV =3D "753"
-PREFERRED_PROVIDER_omap3axon =3D "1"
-MACHINE_KERNEL_PR_append =3D "+svnr${SRCREV}"
-
-SRC_URI =3D "file://linux-2.6.22.tar.gz \
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 file://defconfig"
-
-addtask quiltfixup before do_patch after do_unpack
-
-do_quiltfixup() {
-=A0=A0=A0=A0=A0=A0=A0=A0=A0 :
-}
-
-S =3D "${WORKDIR}/kernel/linux-2.6.22"
-
-
-do_install_append() {
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 install -d ${D}/boot
-}
-
-PACKAGES =3D+ "omap-dss-doc"
-FILES_omap-dss-doc =3D "/boot/DSS"
-
-
-####END----linux-omap3axon-2.6.22-pspaxon.bb ####
 
 
