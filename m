@@ -1,23 +1,25 @@
-Received: from p3plsmtpa01-07.prod.phx3.secureserver.net ([72.167.82.87])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <mike@mwester.net>) id 1PjgYN-00012k-UP
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1PjgbW-000189-GJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 00:19:32 +0100
-Received: (qmail 15974 invoked from network); 30 Jan 2011 23:18:37 -0000
-Received: from unknown (209.242.7.132)
-	by p3plsmtpa01-07.prod.phx3.secureserver.net (72.167.82.87) with ESMTP;
-	30 Jan 2011 23:18:37 -0000
-Message-ID: <4D45F1C9.1020802@mwester.net>
-Date: Sun, 30 Jan 2011 17:18:33 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+	Mon, 31 Jan 2011 00:22:46 +0100
+Received: (qmail 15552 invoked by uid 1003); 30 Jan 2011 23:21:52 -0000
+Received: from unknown (HELO ?192.168.1.167?)
+	(philip@opensdr.com@74.107.167.114)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	30 Jan 2011 23:21:52 -0000
+Message-ID: <4D45F290.3070507@balister.org>
+Date: Sun, 30 Jan 2011 18:21:52 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1295598581-12927-1-git-send-email-raj.khem@gmail.com>	<4D394AC0.90300@eukrea.com>	<AANLkTi=Jdmsr8sYYpOMTOqdpoi9iHiyFBcAAqnfoaMAN@mail.gmail.com>	<4D3A31FF.2010907@mwester.net>	<AANLkTin=77JheFmKVs2Z7wKH6kWD+uKgHSDVRQ__cwF7@mail.gmail.com>
-	<4D3CB26F.7060905@mentor.com>
-In-Reply-To: <4D3CB26F.7060905@mentor.com>
-Subject: Re: [PATCH 3/3] busybox_1.18.2.bb: slugos needs a modified version of usb.sh script
+References: <20110130022818.1c15662c@widy.localdomain>
+	<4D45E1AB.4060407@mentor.com>
+In-Reply-To: <4D45E1AB.4060407@mentor.com>
+Subject: Re: Official git mirror on github/gitorious?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,41 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Jan 2011 23:19:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 30 Jan 2011 23:22:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 1/23/2011 4:57 PM, Tom Rini wrote:
-> On 01/23/2011 11:27 AM, Khem Raj wrote:
->> On Fri, Jan 21, 2011 at 5:25 PM, Mike Westerhof<mike@mwester.net>  wrote:
->>> Isn't this kernel-specific, though?  I don't have any other OE-based
->>> devices handy just now to check, but what's difference, specifically,
->>> and should we change something to bring SlugOS into line with the rest
->>> of the world?
->>>
->>> -Mike (mwester)
->>>
+On 01/30/2011 05:09 PM, Tom Rini wrote:
+> On 01/29/2011 05:28 PM, Paul Sokolovsky wrote:
+>> Hello,
 >>
->> yes seems like slugos kernel enables.
->> CONFIG_SYSFS_DEPRECATED=y
->> CONFIG_SYSFS_DEPRECATED_V2=y
+>> Searching for "openembedded" on both github and gitorious give quite a
+>> few hits:
 >>
->> which enabled these. I havent tested the kernel by disabling them
->> as I havent figured out how to boot a kernel from network on slug
->> but if you can try that and see what /sys/class looks like that
->> would help or if I find some time to make slug suck the kernel
->> from a tftp then I can do it too.
-> 
-> Note that these kernel options also place an upper bound on what udev
-> can be used and it's very much worth checking if they can be turned off.
+>> http://github.com/search?langOverride=&q=openembedded&repo=&start_value=1&type=Repositories
+>>
+>> http://gitorious.org/search?q=openembedded
+>>
+>> Was there a thought to provide official mirrors on both (or one)
+>> services for the purpose of accounting forks?
+>
+> So, given https://github.com/mirrors I'm just going to shoot them an
+> email and ask what it takes to get one added.
 
-SlugOS has bumped up to a 2.6.29 kernel with the above CONFIG items
-disabled.  (This is still a relatively old kernel, but I know that it
-basically works with SlugOS, so it's a good place to test mdev and, if
-anyone wants to, newer udevs.)
+Thanks for looking into this.
 
--Mike (mwester)
-
-
+Philip
 
 
