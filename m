@@ -1,33 +1,47 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PjaPQ-00029T-6l
+	(envelope-from <neil@gumstix.com>) id 1PjfSi-00083t-Gw
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Jan 2011 17:45:52 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id BCD1114036;
-	Sun, 30 Jan 2011 16:44:58 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id Tw7vUWhLEORT; Sun, 30 Jan 2011 16:44:57 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id AEE8D14022;
-	Sun, 30 Jan 2011 16:44:57 +0000 (GMT)
-Message-ID: <4D459589.1020707@xora.org.uk>
-Date: Sun, 30 Jan 2011 16:44:57 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Sun, 30 Jan 2011 23:09:37 +0100
+Received: from homiemail-a76.g.dreamhost.com (caiajhbdcbhh.dreamhost.com
+	[208.97.132.177])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 756C5179D27
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Jan 2011 14:08:44 -0800 (PST)
+Received: from homiemail-a76.g.dreamhost.com (localhost [127.0.0.1])
+	by homiemail-a76.g.dreamhost.com (Postfix) with ESMTP id 4E28E45807B
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Jan 2011 14:08:40 -0800 (PST)
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gumstix.com; h=message-id:date
+	:from:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding; q=dns; s=gumstix.com;
+	b=CyKvIA9VxZAC++HMQSxbRQn26jpgGpy1x8bxLkkGnIBwn8M27d7b1g9/X/YDo
+	5SIyzy0d0UFw4ePxHxNSrAxtgCAnKAWyYUvTCVvpHWG1d8s81dHd7DC+BmJjHkKl
+	NGATyX9768mbM6GWRXNsskn9ob4OeikB3Uade01aFVtG48=
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=gumstix.com; h=message-id
+	:date:from:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding; s=gumstix.com; bh=ifLFT
+	htD8z/0ue5d3qsx7ZnOM7Y=; b=XWBuYsAjQr8FID+wHOEnlhMQKSjy3x8kceCnE
+	r/fwvzIRr9wnmlDUIesP3BvOFFyQTdcXrLad/EPwItl+dFhU1MsHGgJj0tjQigVp
+	gnw85dZXE/UtrqOIy576nrJmzvX5ww+ZwOJZfYBSZcmAwUlodilKrsTFTOcEnaJJ
+	ye6pSE=
+Received: from [10.0.1.35] (s64-180-61-141.bc.hsia.telus.net [64.180.61.141])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: neil@gumstix.com)
+	by homiemail-a76.g.dreamhost.com (Postfix) with ESMTPSA id 32A4F458074
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Jan 2011 14:08:40 -0800 (PST)
+Message-ID: <4D45E172.4030105@gumstix.com>
+Date: Sun, 30 Jan 2011 14:08:50 -0800
+From: Neil MacMunn <neil@gumstix.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: Paul Sokolovsky <pmiscml@gmail.com>
-References: <20110130022818.1c15662c@widy.localdomain>	<4D44C015.9050700@xora.org.uk>	<20110130123418.4e354145@widy.localdomain>	<4D455C28.7010406@xora.org.uk>
-	<20110130181210.17afe082@widy.localdomain>
-In-Reply-To: <20110130181210.17afe082@widy.localdomain>
-X-Enigmail-Version: 1.1.1
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Official git mirror on github/gitorious?
+To: openembedded-devel@lists.openembedded.org
+References: <4D347C60.6000805@gumstix.com> <20110117185830.GL21179@jama>
+In-Reply-To: <20110117185830.GL21179@jama>
+Subject: Re: EFL_SRCREV bump breaks GPE/enlightenment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,50 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Jan 2011 16:45:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 30 Jan 2011 22:09:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 30/01/2011 16:12, Paul Sokolovsky wrote:
-> Hello,
 >
-> On Sun, 30 Jan 2011 12:40:08 +0000
-> Graeme Gregory <dp@xora.org.uk> wrote:
->
-> []
->>>> There is an "official" =C3=85ngstrom mirror on gitorious.
->>>>
->>>> http://gitorious.org/+angstrom-distribution/angstrom/openembedded
->>> Yes, seeing it made me think that it would be nice to fork it via
->>> site means. Is there guarantee of upstream update time for it?
->>> Also, even then it seems like a 2nd-level fork, not forking a pure
->>> OE repo specially designed to keep track of offshots.
->>>
->> No we just update it sometime or other. But with git it doesn't really
->> matter I think.
->>
->> I think you best option is to approach OE with a plan to run such
->> projects yourself and get the admins to put a crontab in for you which
->> does the update nightly or something like that.
-> Well, it's indeed doesn't matter much technically, and not important
-> for one case. But as I pointed out, there're ~30 or something forks
-> around. Maybe it would be good visibility, and well, PR, if there were
-> official mirrors on popular git hosting sites where that number
-> (dozen or so) could be seen directly.
->
-> Otherwise, having asked if it's already there, I better just put up
-> my little stuff like everybody else did so far, and hopefully proceed
-> to submit patches/advocate them instead ;-).
->
-Personally I think the idea is probably good. But Id hate to ask the
-already overworked OE admins to try and maintain yet another system. As
-a board member i prefer the method of co-opting fellow OE users to feel
-empowered to run these services themselves with support from us. The
-more we can push tasks like this to ordinary developers such as yourself
-the better. The more OE can spread the load the better for the whole
-community.
+> does it segfault or something? I haven't seen it with illume2 profiles,
+> but I'm not using gpe-dm..
 
-Graeme
+I don't see any messages about what's happening but I seem to remember 
+something about a missing function in a .so. There was another EFL_SRCRV 
+change recently so I undid my revisions and accepted all of the upstream 
+changes. Unfortunately still no luck.
+
+
+> Would be great if you can provide info and debug it with e devs
+> (#edevelop on freenode), if you bisect which efl commit caused it, they will
+> be able to fix it sooner.
+>
+> Regards,
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
