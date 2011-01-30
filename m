@@ -1,36 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pmiscml@gmail.com>) id 1PjLAO-0003Rg-HB
+	(envelope-from <dp@xora.org.uk>) id 1PjMC2-0004Ub-0Z
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Jan 2011 01:29:20 +0100
-Received: by fxm17 with SMTP id 17so4593502fxm.6
+	Sun, 30 Jan 2011 02:35:06 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id BD163A4F2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jan 2011 16:28:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:date:from:to:subject:message-id:x-mailer
-	:mime-version:content-type:content-transfer-encoding;
-	bh=Ud0jKtqXF1zZhK3C0dKyYwOAbyNytCU+0zvufHuA1zE=;
-	b=ACRabntuf3C+NIOGu3wxMpF7ESeKbk+bAu0sLxSQqZKg4PCt6cSN94m3eQ+ucaNajS
-	XU/MriR9ZflRmx1bUCzDshWSA0tJhISj2asASl8S0g/yGk6QZMkFQQCwsQEU3RUEpaoC
-	6qPZBLA/9+effKhJ6O4fRalKeI8g2oajiOZqc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	b=vRilRD56RQB18pOyLl3Gmyfd606LGwzo8ZiTEGLjffelwePa6aJPadiKEqifk0M3zq
-	Ds+cmThACZtPYUPbssrlRShbzXrwT+FnV1IpAxieymF1g7mnzIcpjeEV70aqlLAAz6jy
-	VjqigGfY1MxhD5Xe0ywgRQoIFY/Pvg7FYJzzg=
-Received: by 10.223.85.204 with SMTP id p12mr4171961fal.146.1296347307595;
-	Sat, 29 Jan 2011 16:28:27 -0800 (PST)
-Received: from widy.localdomain ([213.238.9.13])
-	by mx.google.com with ESMTPS id f24sm6896120fak.24.2011.01.29.16.28.26
-	(version=SSLv3 cipher=RC4-MD5); Sat, 29 Jan 2011 16:28:27 -0800 (PST)
-Date: Sun, 30 Jan 2011 02:28:18 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20110130022818.1c15662c@widy.localdomain>
-X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; i686-pc-linux-gnu)
-Mime-Version: 1.0
-Subject: Official git mirror on github/gitorious?
+	Sun, 30 Jan 2011 01:34:15 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id aUu4Y6TEllpy
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Jan 2011 01:34:14 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 26D1AA4F2A
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Jan 2011 01:34:13 +0000 (GMT)
+Message-ID: <4D44C015.9050700@xora.org.uk>
+Date: Sun, 30 Jan 2011 01:34:13 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <20110130022818.1c15662c@widy.localdomain>
+In-Reply-To: <20110130022818.1c15662c@widy.localdomain>
+X-Enigmail-Version: 1.1.1
+Subject: Re: Official git mirror on github/gitorious?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Jan 2011 00:29:20 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 30 Jan 2011 01:35:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On 30/01/2011 00:28, Paul Sokolovsky wrote:
+> Hello,
+>
+> Searching for "openembedded" on both github and gitorious give quite a
+> few hits:
+>
+> http://github.com/search?langOverride=3D&q=3Dopenembedded&repo=3D&start=
+_value=3D1&type=3DRepositories
+> http://gitorious.org/search?q=3Dopenembedded
+>
+> Was there a thought to provide official mirrors on both (or one)
+> services for the purpose of accounting forks?
+>
+There is an "official" =C5ngstrom mirror on gitorious.
 
-Searching for "openembedded" on both github and gitorious give quite a
-few hits:
+http://gitorious.org/+angstrom-distribution/angstrom/openembedded
 
-http://github.com/search?langOverride=&q=openembedded&repo=&start_value=1&type=Repositories
-http://gitorious.org/search?q=openembedded
+Graeme
 
-Was there a thought to provide official mirrors on both (or one)
-services for the purpose of accounting forks?
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
