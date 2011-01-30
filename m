@@ -1,34 +1,24 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dp@xora.org.uk>) id 1PjMC2-0004Ub-0Z
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Jan 2011 02:35:06 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id BD163A4F2D
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Jan 2011 01:34:15 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id aUu4Y6TEllpy
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Jan 2011 01:34:14 +0000 (GMT)
-Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 26D1AA4F2A
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Jan 2011 01:34:13 +0000 (GMT)
-Message-ID: <4D44C015.9050700@xora.org.uk>
-Date: Sun, 30 Jan 2011 01:34:13 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PjUcJ-0000b8-V3 for openembedded-devel@lists.openembedded.org;
+	Sun, 30 Jan 2011 11:34:47 +0100
+Received: from f053034124.adsl.alicedsl.de ([78.53.34.124]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1PjUbW-0001Pb-3q for openembedded-devel@lists.openembedded.org;
+	Sun, 30 Jan 2011 10:33:58 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <20110130022818.1c15662c@widy.localdomain>
-In-Reply-To: <20110130022818.1c15662c@widy.localdomain>
-X-Enigmail-Version: 1.1.1
-Subject: Re: Official git mirror on github/gitorious?
+In-Reply-To: <4D44773D.5010103@opendreambox.org>
+References: <1296316693.5925.10.camel@mattotaupa>
+	<4D44773D.5010103@opendreambox.org>
+Date: Sun, 30 Jan 2011 11:33:56 +0100
+Message-ID: <1296383636.4757.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: [solved][REGRESSION] omap3-sgx-modules: `NOTE: Runtime target 'kernel-' is unbuildable, removing...`
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +32,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Jan 2011 01:35:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 30 Jan 2011 10:34:48 -0000
+X-Groupsio-MsgNum: 28625
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-jEObvGZQMRzugfwDQP0B"
+
+--=-jEObvGZQMRzugfwDQP0B
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On 30/01/2011 00:28, Paul Sokolovsky wrote:
-> Hello,
->
-> Searching for "openembedded" on both github and gitorious give quite a
-> few hits:
->
-> http://github.com/search?langOverride=3D&q=3Dopenembedded&repo=3D&start=
-_value=3D1&type=3DRepositories
-> http://gitorious.org/search?q=3Dopenembedded
->
-> Was there a thought to provide official mirrors on both (or one)
-> services for the purpose of accounting forks?
->
-There is an "official" =C5ngstrom mirror on gitorious.
-
-http://gitorious.org/+angstrom-distribution/angstrom/openembedded
-
-Graeme
+Dear Andreas,
 
 
+Am Samstag, den 29.01.2011, 21:23 +0100 schrieb Andreas Oberritter:
+> On 01/29/2011 04:58 PM, Paul Menzel wrote:
 
+> >         commit 2dac84b9a7b820466ed626420fec120093b56e16
+> >         Author: Andreas Oberritter <obi@opendreambox.org>
+> >         Date:   Sat Jan 29 00:51:25 2011 +0000
+> >        =20
+> >             module.bbclass: depend on kernel-${KERNEL_VERSION} instead =
+of kernel (=3D ${KERNEL_VERSION})
+> >            =20
+> >             * As a special case, kernel modules must depend on
+> >               kernel-${KERNEL_VERSION}, which gets runtime provided by =
+the kernel
+> >               package. The reason is, that the package version can be d=
+ifferent
+> >               from ${KERNEL_VERSION}, because the latter depends on the=
+ kernel
+> >               configuration, e.g. CONFIG_LOCALVERSION.
+> >            =20
+> >             Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> >=20
+> > [1] seems to have broken `omap3-sgx-modules`.
+
+> thanks! It's a known bug. Can you please test this patch, while I'm
+> waiting for an ack or nack for it?
+>=20
+> http://patches.openembedded.org/patch/402/
+
+Unfortunately I am having delivery problems with my SourceForge.net
+address, so I have not yet received the patch to the list and have to
+respond to this message.
+
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Tested-by: Paul Menzel <paulepanter@users.sourceforge.net>=20
+	for `omap3-sgx-modules` with `angstrom-2008.1`
+
+> Is there a maintainer for kernel.bbclass?
+>=20
+> If there's no feedback, and if nobody's faster, I'll revert the commits
+> tomorrow.
+
+
+Thanks,
+
+Paul
+
+--=-jEObvGZQMRzugfwDQP0B
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1FPpQACgkQPX1aK2wOHVjWjwCfYhxPDQ+KuYwoujHu5EJ2BXhz
+0sEAn25/YBr/Ye2A8LjiGPC10z5yi4HK
+=CDgT
+-----END PGP SIGNATURE-----
+
+--=-jEObvGZQMRzugfwDQP0B--
