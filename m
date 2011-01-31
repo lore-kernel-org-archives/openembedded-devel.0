@@ -1,31 +1,41 @@
-Received: from mail-iy0-f175.google.com ([209.85.210.175])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PjqIk-0003xz-EJ
+	(envelope-from <fabian@progra.de>) id 1Pjr6Q-0004zr-9x
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 10:44:02 +0100
-Received: by iyj18 with SMTP id 18so4867060iyj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jan 2011 01:43:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:date:message-id:subject:from:to
-	:content-type; bh=VV5vndGObTJ5a7PfOIQOn7ysG3C12EBIAb+7bnW3ihU=;
-	b=UfKZzz+XnQE/2nmyKJ0TZKeBbHX7gN0/OLgjzchuZ17oxfG31ISRttNAQgJD3aHcKx
-	Bu2PYpIGzY1OzXsXIr1p3ieL1TK8u3nxaOhreIDLr5+DsUgjEcabt3hTh9F7YHgbuhcq
-	p8mwDqHLq5ZeH5a/Q4kpRipWFemjjoZteYmwA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=WSfQV6KctBp7u0wrY9I/cqyhkWNvGjLem9Dq98eKPvQVOhYGTv2ftqv7xSFlq+PuXf
-	7bcLrf4qPxeBp7Sac8K4qQwSjzQE2Ex4BknBDBahNjnP90jObP5yfNRKd3/wPgp2FF76
-	18H9CUv667ql92bcTPLYPlU4wQvkUIodGRfeM=
-MIME-Version: 1.0
-Received: by 10.231.19.201 with SMTP id c9mr6259637ibb.183.1296466988945; Mon,
-	31 Jan 2011 01:43:08 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Mon, 31 Jan 2011 01:43:08 -0800 (PST)
-Date: Mon, 31 Jan 2011 10:43:08 +0100
-Message-ID: <AANLkTindnAy_ujVZdrRCbKmwOSos-FJT_=cy5T+BVir+@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: binutils QA errors (RPATH)
+	Mon, 31 Jan 2011 11:35:22 +0100
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69) with esmtp
+	(envelope-from <fabian@progra.de>)
+	id <1Pjr5b-0001B6-IW>; Mon, 31 Jan 2011 11:34:31 +0100
+Received: from hydra.imp.fu-berlin.de ([160.45.117.149]
+	helo=mail.imp.fu-berlin.de) by relay1.zedat.fu-berlin.de (Exim 4.69)
+	with esmtp (envelope-from <fabian@progra.de>)
+	id <1Pjr5b-00071y-Fz>; Mon, 31 Jan 2011 11:34:31 +0100
+Received: from barkas-build.imp.fu-berlin.de ([160.45.111.224]
+	helo=barkas-build)
+	by mail.mi.fu-berlin.de with esmtps (Exim 4.72) id 1Pjr4i-0000wf-2D
+	from <fabian@progra.de> ; Mon, 31 Jan 2011 11:33:38 +0100
+Received: from localhost ([127.0.0.1] helo=barkas-build.imp.fu-berlin.de.)
+	by barkas-build with esmtp (Exim 4.72)
+	(envelope-from <fabian@progra.de>)
+	id 1Pjr3S-0007yf-F3; Mon, 31 Jan 2011 11:32:18 +0100
+From: Fabian Ruff <fabian@progra.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 31 Jan 2011 11:32:15 +0100
+Message-Id: <1296469935-30638-1-git-send-email-fabian@progra.de>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1296209389-20272-1-git-send-email-fabian@progra.de>
+References: <1296209389-20272-1-git-send-email-fabian@progra.de>
+X-Remote-IP: 160.45.111.224
+X-Spam_score: -4.4
+X-Spam_report: * -1.8 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	* -2.6 BAYES_00 BODY: Bayesian spam probability is 0 to 1%
+	*      [score: 0.0000]
+X-exim-Spam_score_int: -43
+X-exim-Spam_bar: ----
+X-Spam-Flag: NO
+X-Originating-IP: 160.45.117.149
+Subject: [PATCH v2] totem-pl-parser_2.30.0: fix configure without gobject introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,26 +49,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 09:44:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 31 Jan 2011 10:35:22 -0000
 
-From my testing build (20110128)
+  this bugfix removes the configure error:
+  HAVE_INTROSPECTION does not appear in AM_CONDITIONAL
 
-NOTE: package binutils-2.21-r13.2: task do_package: Started
-NOTE: the following files were installed but not shipped in any package:
-NOTE:   /usr/bin/embedspu
-NOTE: Multiple libraries (libbfd-2.21.so, libopcodes-2.21.so) found
-and LEAD_SONAME not defined
-ERROR: QA Issue with binutils: package binutils contains bad RPATH
-/home/hudson/jobs/OE_test/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
-in file /home/hudson/jobs/OE_test/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/binutils-2.21-r13.2/packages-split/binutils/usr/bin/powerpc-oe-linux-gnuspe-readelf
-ERROR: QA Issue with binutils: package binutils contains bad RPATH
-/home/hudson/jobs/OE_test/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
-in file /home/hudson/jobs/OE_test/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/binutils-2.21-r13.2/packages-split/binutils/usr/bin/powerpc-oe-linux-gnuspe-elfedit
-ERROR: QA Issue with binutils: package binutils contains bad RPATH
-/home/hudson/jobs/OE_test/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
-in file /home/hudson/jobs/OE_test/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/binutils-2.21-r13.2/packages-split/binutils/usr/lib/libbfd-2.21.so
+Signed-off-by: Fabian Ruff <fabian@progra.de>
+---
+ recipes/totem/totem-pl-parser_2.30.0.bb |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
 
-Frans
+diff --git a/recipes/totem/totem-pl-parser_2.30.0.bb b/recipes/totem/totem-pl-parser_2.30.0.bb
+index 31d6b04..a69de38 100644
+--- a/recipes/totem/totem-pl-parser_2.30.0.bb
++++ b/recipes/totem/totem-pl-parser_2.30.0.bb
+@@ -11,10 +11,9 @@ inherit gnome
+ SRC_URI[archive.md5sum] = "81bf8e3043a9ec89bdd391c36ebd50d1"
+ SRC_URI[archive.sha256sum] = "403b18c1582c14effb4e2dabf339dfdbc45285204a0cf958fc250a387b6fc65c"
+ 
+-EXTRA_OECONF = "--enable-introspection=no"
+-
+ # Build of documentation is not yet possible:
+ do_configure_prepend() {
++	sed -i -e 's:GOBJECT_INTROSPECTION_CHECK(\[0.6.7\]):AM_CONDITIONAL([HAVE_INTROSPECTION], [false]):g' ${S}/configure.in
+ 	sed -i -e s:docs::g ${S}/Makefile.am
+ }
+ 
+-- 
+1.7.1
+
 
 
