@@ -1,31 +1,25 @@
 Received: from smtprelay-h31.telenor.se ([213.150.131.4])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1Pk19O-0001q5-K9
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1Pk19P-0001pj-Vt
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 22:19:08 +0100
+	Mon, 31 Jan 2011 22:19:09 +0100
 Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-h31.telenor.se (Postfix) with ESMTP id 5860BEB3FF
+	by smtprelay-h31.telenor.se (Postfix) with ESMTP id B4453EB44A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jan 2011 22:18:13 +0100 (CET)
+	Mon, 31 Jan 2011 22:18:11 +0100 (CET)
 X-SENDER-IP: [83.227.56.243]
 X-LISTENER: [smtp.bredband.net]
-X-IronPort-AV: E=Sophos;i="4.60,405,1291590000"; d="scan'208";a="170551956"
+X-IronPort-AV: E=Sophos;i="4.60,405,1291590000"; d="scan'208";a="170551944"
 Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	localhost) ([83.227.56.243])
-	by ipb1.telenor.se with ESMTP; 31 Jan 2011 22:18:13 +0100
+	by ipb1.telenor.se with ESMTP; 31 Jan 2011 22:18:11 +0100
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Jan 2011 22:18:06 +0100
-Message-Id: <1296508688-5770-6-git-send-email-ulf.samuelsson@atmel.com>
+Date: Mon, 31 Jan 2011 22:18:01 +0100
+Message-Id: <1296508688-5770-1-git-send-email-ulf.samuelsson@atmel.com>
 X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1296508688-5770-5-git-send-email-ulf.samuelsson@atmel.com>
-References: <1296508688-5770-1-git-send-email-ulf.samuelsson@atmel.com>
-	<1296508688-5770-2-git-send-email-ulf.samuelsson@atmel.com>
-	<1296508688-5770-3-git-send-email-ulf.samuelsson@atmel.com>
-	<1296508688-5770-4-git-send-email-ulf.samuelsson@atmel.com>
-	<1296508688-5770-5-git-send-email-ulf.samuelsson@atmel.com>
 Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [PATCH v3 06/08] Update at91sam9m10ekes linux patch to exp.4
+Subject: [PATCH v3 01/08] Add support for at91bootstrap-3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,6457 +33,6943 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 21:19:08 -0000
+X-List-Received-Date: Mon, 31 Jan 2011 21:19:09 -0000
 
-Use the latest 2.6.30 patch (exp.4) from www.linux4sam.org
-Only tested and enabled for at91sam9m10ekes at the moment.
-Update configs to support ext3 fs and built in config support.
+AT91bootstrap 3.0 support booting from SD-Card.
+It must be renamed to BOOT.BIN
+It needs to be in the DOS rootfs.
+The DOS fs should NOT be partitioned like a linux boot disk.
+I.E: keep original cylinders etc.
+The SD-Card must not contain "funny" characters like '&' and '.'
+
+at91bootstrap will try to load UBOOT.BIN, if u-boot is desired.
+
+For the AT91SAM9M10/G45 it supports dual boot.
+If the "LEFT" button is pressed, at91bootstrap will
+load PROGRAM.BIN
 
 Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 ---
- ...ux-2.6.30-001-configurable-partition-size.patch |  362 +++++
- .../exp.2/linux-2.6.30-002-mach-at91-Kconfig.patch |  196 +++
- .../at91/exp.2/linux-2.6.30-003-sam9m10g45ek.patch |   29 +
- .../exp.4/0001-Configurable-partition-size.patch   |  403 +++++
- .../exp.4/0002-mach-at91-KConfig-cleanup.patch     |  202 +++
- .../linux/linux-2.6.30/at91sam9m10ekes/defconfig   |   50 +-
- .../linux-2.6.30/at91sam9m10ekes/exp.2/defconfig   | 1649 +++++++++++++++++++
- .../linux-2.6.30/at91sam9m10ekes/exp.4/defconfig   | 1671 ++++++++++++++++++++
- .../linux/linux-2.6.30/at91sam9m10g45ek/defconfig  | 1649 +++++++++++++++++++
- recipes/linux/linux_2.6.30.bb                      |   59 +-
- 10 files changed, 6254 insertions(+), 16 deletions(-)
- create mode 100644 recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-001-configurable-partition-size.patch
- create mode 100644 recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-002-mach-at91-Kconfig.patch
- create mode 100644 recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-003-sam9m10g45ek.patch
- create mode 100644 recipes/linux/linux-2.6.30/at91/exp.4/0001-Configurable-partition-size.patch
- create mode 100644 recipes/linux/linux-2.6.30/at91/exp.4/0002-mach-at91-KConfig-cleanup.patch
- create mode 100644 recipes/linux/linux-2.6.30/at91sam9m10ekes/exp.2/defconfig
- create mode 100644 recipes/linux/linux-2.6.30/at91sam9m10ekes/exp.4/defconfig
- create mode 100644 recipes/linux/linux-2.6.30/at91sam9m10g45ek/defconfig
+ .../at91bootstrap-3.0/0001-Update-.gitignore.patch |   42 +
+ ...02-Add-KConfig-support-for-booting-U-Boot.patch |   36 +
+ ...erate-a-BOOT.BIN-file-instead-of-boot.bin.patch |   35 +
+ .../0004-Add-support-for-dual-boot.patch           |  331 ++
+ .../0005-Remove-old-afeb9260-files.patch           |  612 ++++
+ ...-instead-of-BOARDNAME-to-define-directory.patch |   28 +
+ ...0007-Add-board-support-for-alternate-boot.patch |  289 ++
+ .../0008-Clean-up-printouts.patch                  |  199 ++
+ .../at91bootstrap-3.0/0009-Update-configs.patch    | 3402 ++++++++++++++++++++
+ .../0010-Update-build-scripts.patch                |  194 ++
+ .../0011-Fix-Cut-n-Paste-error.patch               |   31 +
+ .../0013-Fix-Cut-n-Paste-error-in-Makefile.patch   |   25 +
+ ...14-Add-support-for-alternate-jump-address.patch |  280 ++
+ .../0015-Make-MAKENEW-useful.patch                 |   41 +
+ .../at91bootstrap-3.0/0016-Update-configs.patch    | 1175 +++++++
+ recipes/at91bootstrap/at91bootstrap_3.0.bb         |   35 +
+ recipes/at91bootstrap/at91bootstrap_3.0.inc        |   27 +
+ 17 files changed, 6782 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0001-Update-.gitignore.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0002-Add-KConfig-support-for-booting-U-Boot.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0003-Generate-a-BOOT.BIN-file-instead-of-boot.bin.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0004-Add-support-for-dual-boot.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0005-Remove-old-afeb9260-files.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0006-Use-BOARD-instead-of-BOARDNAME-to-define-directory.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0007-Add-board-support-for-alternate-boot.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0008-Clean-up-printouts.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0009-Update-configs.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0010-Update-build-scripts.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0011-Fix-Cut-n-Paste-error.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0013-Fix-Cut-n-Paste-error-in-Makefile.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0014-Add-support-for-alternate-jump-address.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0015-Make-MAKENEW-useful.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap-3.0/0016-Update-configs.patch
+ create mode 100644 recipes/at91bootstrap/at91bootstrap_3.0.bb
+ create mode 100644 recipes/at91bootstrap/at91bootstrap_3.0.inc
 
-diff --git a/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-001-configurable-partition-size.patch b/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-001-configurable-partition-size.patch
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0001-Update-.gitignore.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0001-Update-.gitignore.patch
 new file mode 100644
-index 0000000..ae24d12
+index 0000000..e704cc9
 --- /dev/null
-+++ b/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-001-configurable-partition-size.patch
-@@ -0,0 +1,362 @@
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-at572d940hf_ek.c linux-2.6.30/arch/arm/mach-at91/board-at572d940hf_ek.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-at572d940hf_ek.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-at572d940hf_ek.c	2010-03-14 11:28:55.000000000 +0100
-+@@ -114,10 +114,20 @@
-+  */
-+ static struct mtd_partition __initdata eb_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-++	},
-++	{
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-++		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+-	}
-++	},
-+ };
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0001-Update-.gitignore.patch
+@@ -0,0 +1,42 @@
++From 91717f6a6591a6fae538447261ddbe58f6df3d38 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Tue, 25 Jan 2011 22:20:29 +0100
++Subject: [PATCH v3] Update .gitignore
++
++---
++ .gitignore |   13 ++++++++-----
++ 1 files changed, 8 insertions(+), 5 deletions(-)
++
++diff --git a/.gitignore b/.gitignore
++index 5578395..b8878be 100644
++--- a/.gitignore
+++++ b/.gitignore
++@@ -1,4 +1,11 @@
+++*~
+++*.orig
+++*.o
+++*.rej
+++.config.*
++ .config
+++.auto.deps
+++..make.deps.tmp
++ log
++ log/*
++ config/at91bootstrap-config/
++@@ -10,12 +17,8 @@ config/zconf.hash.c
++ config/zconf.tab.c
++ config/zconf.tab.o
++ config/.depend
++-.config.cmd
++-.config.old
++-.auto.deps
++ build
++ result
++ binaries
++-*~
++-*.orig
+++install
 + 
-+ static struct mtd_partition * __init nand_partitions(int size, int *num_partitions)
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-cap9adk.c linux-2.6.30/arch/arm/mach-at91/board-cap9adk.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-cap9adk.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-cap9adk.c	2010-03-14 11:28:36.000000000 +0100
-+@@ -167,8 +167,18 @@
-+  */
-+ static struct mtd_partition __initdata cap9adk_nand_partitions[] = {
-+ 	{
-+-		.name	= "NAND partition",
-+-		.offset	= 0,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-++	},
-++	{
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-++		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+ };
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-dk.c linux-2.6.30/arch/arm/mach-at91/board-dk.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-dk.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-dk.c	2010-03-14 11:28:43.000000000 +0100
-+@@ -314,8 +314,18 @@
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0002-Add-KConfig-support-for-booting-U-Boot.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0002-Add-KConfig-support-for-booting-U-Boot.patch
+new file mode 100644
+index 0000000..623536e
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0002-Add-KConfig-support-for-booting-U-Boot.patch
+@@ -0,0 +1,36 @@
++From 07cb6b03e0bd1d8f643f497128f05776f943fe69 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 19:16:46 +0100
++Subject: [PATCH v3 02/08] Add KConfig support for booting U-Boot
++
++---
++ Config.in |   13 +++++++++++++
++ 1 files changed, 13 insertions(+), 0 deletions(-)
++
++diff --git a/Config.in b/Config.in
++index 6ed8d8f..47da4e6 100644
++--- a/Config.in
+++++ b/Config.in
++@@ -189,6 +189,19 @@ config CONFIG_WINCE_IMG_NAND_OFFSET
++ 	default "0x200000"
++ endmenu
 + 
-+ static struct mtd_partition __initdata dk_nand_partition[] = {
-+ 	{
-+-		.name	= "NAND Partition 1",
-+-		.offset	= 0,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-++	},
-++	{
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-++		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+ };
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9260ek.c linux-2.6.30/arch/arm/mach-at91/board-sam9260ek.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9260ek.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-sam9260ek.c	2010-03-14 11:26:57.000000000 +0100
-+@@ -177,12 +177,17 @@
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_256K,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9261ek.c linux-2.6.30/arch/arm/mach-at91/board-sam9261ek.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9261ek.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-sam9261ek.c	2010-03-14 11:26:57.000000000 +0100
-+@@ -184,12 +184,17 @@
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_256K,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9263ek.c linux-2.6.30/arch/arm/mach-at91/board-sam9263ek.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9263ek.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-sam9263ek.c	2010-03-14 11:26:57.000000000 +0100
-+@@ -174,12 +174,17 @@
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_64M,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c linux-2.6.30/arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c	2010-03-14 11:28:29.000000000 +0100
-+@@ -130,12 +130,12 @@
-+ 		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 1",
-++		.name	= "Root File System",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+-		.size	= 60 * SZ_1M,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9g20ek.c linux-2.6.30/arch/arm/mach-at91/board-sam9g20ek.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9g20ek.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-sam9g20ek.c	2010-03-14 11:26:57.000000000 +0100
-+@@ -129,12 +129,12 @@
-+ 		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 1",
-++		.name	= "Root File System",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+-		.size	= 60 * SZ_1M,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9m10g45ek.c linux-2.6.30/arch/arm/mach-at91/board-sam9m10g45ek.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9m10g45ek.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-sam9m10g45ek.c	2010-03-14 11:26:57.000000000 +0100
-+@@ -133,12 +133,17 @@
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_64M,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9rlek.c linux-2.6.30/arch/arm/mach-at91/board-sam9rlek.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9rlek.c	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-sam9rlek.c	2010-03-14 11:26:57.000000000 +0100
-+@@ -83,12 +83,17 @@
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_256K,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/Kconfig linux-2.6.30/arch/arm/mach-at91/Kconfig
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/Kconfig	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/Kconfig	2010-03-14 11:32:54.000000000 +0100
-+@@ -96,6 +96,7 @@
-+ config ARCH_AT91RM9200DK
-+ 	bool "Atmel AT91RM9200-DK Development board"
-+ 	depends on ARCH_AT91RM9200
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91RM9200-DK Development board.
-+ 	  (Discontinued)
-+@@ -213,6 +214,7 @@
-+ config MACH_AT91SAM9260EK
-+ 	bool "Atmel AT91SAM9260-EK / AT91SAM9XE Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9260
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9260-EK or AT91SAM9XE Evaluation Kit
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3933>
-+@@ -278,6 +280,7 @@
-+ config MACH_AT91SAM9261EK
-+ 	bool "Atmel AT91SAM9261-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9261
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9261-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3820>
-+@@ -293,6 +296,7 @@
-+ config MACH_AT91SAM9G10EK
-+ 	bool "Atmel AT91SAM9G10-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G10
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G10-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4588>
-+@@ -308,6 +312,7 @@
-+ config MACH_AT91SAM9263EK
-+ 	bool "Atmel AT91SAM9263-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9263
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9263-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4057>
-+@@ -350,6 +355,7 @@
-+ config MACH_AT91SAM9RLEK
-+ 	bool "Atmel AT91SAM9RL-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9RL
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9RL-EK Evaluation Kit.
-+ 
-+@@ -364,6 +370,7 @@
-+ config MACH_AT91SAM9G20EK
-+ 	bool "Atmel AT91SAM9G20-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G20
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G20-EK Evaluation Kit
-+ 	  that embeds only one SD/MMC slot.
-+@@ -371,6 +378,7 @@
-+ config MACH_AT91SAM9G20EK_2MMC
-+ 	bool "Atmel AT91SAM9G20-EK Evaluation Kit with 2 SD/MMC Slots"
-+ 	depends on ARCH_AT91SAM9G20
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using an Atmel AT91SAM9G20-EK Evaluation Kit
-+ 	  with 2 SD/MMC Slots. This is the case for AT91SAM9G20-EK rev. C and
-+@@ -408,6 +416,7 @@
-+ config MACH_AT91SAM9G45EKES
-+ 	bool "Atmel AT91SAM9G45-EKES Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G45
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G45-EKES Evaluation Kit.
-+ 	  "ES" at the end of the name means that this board is an
-+@@ -424,6 +433,7 @@
-+ config MACH_AT91SAM9M10EKES
-+         bool "Atmel AT91SAM9M10-EKES Evaluation Kit"
-+         depends on ARCH_AT91SAM9M10
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+         help
-+           Select this if you are using Atmel's AT91SAM9M10-EKES Evaluation Kit.
-+           "ES" at the end of the name means that this board is an
-+@@ -440,6 +450,7 @@
-+ config MACH_AT91CAP9ADK
-+ 	bool "Atmel AT91CAP9A-DK Evaluation Kit"
-+ 	depends on ARCH_AT91CAP9
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91CAP9A-DK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4138>
-+@@ -455,6 +466,7 @@
-+ config MACH_AT572D940HFEB
-+ 	bool "AT572D940HF-EK"
-+ 	depends on ARCH_AT572D940HF
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT572D940HF-EK evaluation kit.
-+ 	  <http://www.atmel.com/products/diopsis/default.asp>
-+@@ -494,6 +506,24 @@
-+ 	  On AT91SAM926x boards both types of NAND flash can be present
-+ 	  (8 and 16 bit data bus width).
-+ 
-++config MTD_NAND_ATMEL_ROOTFS_SIZE
-++	int "Size NAND rootfs in MB"
-++	range 8 250
-++	depends on MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	default "124"
-++	help
-++	  Many Atmel development boards has a NAND Flash, 
-++	  divided into three partitions.
-++          1) Boot partition (4 MB)
-++	  2) Root FS
-++	  3) Data partition
-++	  This allows you to configure the size of the root fs
-++	  with the remainder ending up in the data partition.
-++	  The legal values are between 8 and 250
+++menu "U-Boot Image Storage Setup"
+++	depends on CONFIG_LOAD_UBOOT
+++config CONFIG_OS_IMAGE_NAME
+++	depends on CONFIG_SDCARD
+++	string "U-Boot Image Name on SD Card"
+++	default "u-boot.bin"
 ++
-++config MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
+++config CONFIG_OS_IMG_SIZE
+++	string "OS Image Size"
+++	default "0x40000"
+++
+++endmenu
+++
++ config CONFIG_IMG_ADDRESS
++ 	string
++ 	depends on CONFIG_LOAD_UBOOT || CONFIG_LOAD_NK || CONFIG_LOAD_LINUX || CONFIG_LOAD_EBOOT
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0003-Generate-a-BOOT.BIN-file-instead-of-boot.bin.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0003-Generate-a-BOOT.BIN-file-instead-of-boot.bin.patch
+new file mode 100644
+index 0000000..06f329a
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0003-Generate-a-BOOT.BIN-file-instead-of-boot.bin.patch
+@@ -0,0 +1,35 @@
++From 7213e685dcaac83610352316bd94938b31f9e3a5 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 19:32:31 +0100
++Subject: [PATCH v3 03/08] Generate a "BOOT.BIN" file, instead of "boot.bin"
++
++---
++ Makefile |    5 +++++
++ 1 files changed, 5 insertions(+), 0 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index e53fee6..5c66729 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -176,6 +176,9 @@ obj=build/$(BOARDNAME)/
++ BOOT_NAME=$(BOARDNAME)-$(PROJECT)$(CARD_SUFFIX)boot-$(VERSION)$(REV)
++ 
++ AT91BOOTSTRAP:=$(BINDIR)/$(BOOT_NAME).bin
+++AT91BOOTSTRAP_BOOTABLE:=$(BINDIR)/$(BOOT_NAME).bin.fixboot
+++BOOT_BIN_DIR:=$(BINDIR)/$(BOOT_NAME)
+++AT91SD_BOOTSTRAP:=$(BOOT_BIN_DIR)/BOOT.BIN
++ 
++ ifeq ($(DESTDIR),)
++ DESTDIR=install
++@@ -302,6 +305,8 @@ $(AT91BOOTSTRAP).fixboot:	$(AT91BOOTSTRAP)
++ 	./scripts/fixboot.py $(AT91BOOTSTRAP)
++ 
++ boot:	$(AT91BOOTSTRAP).fixboot
+++	mkdir -p $(BOOT_BIN_DIR)
+++	cp $(AT91BOOTSTRAP_BOOTABLE) $(AT91SD_BOOTSTRAP)
++ 
++ install:	bootstrap	utilities
++ 
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0004-Add-support-for-dual-boot.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0004-Add-support-for-dual-boot.patch
+new file mode 100644
+index 0000000..97ced77
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0004-Add-support-for-dual-boot.patch
+@@ -0,0 +1,331 @@
++From 102651cd96baa14c35febb1ea1ee66a2ff7e5f0d Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 19:34:13 +0100
++Subject: [PATCH v3 04/08] Add support for dual boot
++
++---
++ Config.in          |   32 +++++++++++++++++++++++++++++++-
++ Makefile           |   18 +++++++++++++++---
++ board/Config.in    |    4 ++++
++ driver/MEDSdcard.c |   10 +++++++++-
++ include/gpio.h     |    4 ++++
++ main.c             |   46 ++++++++++++++++++++++++++--------------------
++ toplevel_cpp.mk    |    9 ++++++++-
++ 7 files changed, 97 insertions(+), 26 deletions(-)
++
++diff --git a/Config.in b/Config.in
++index 47da4e6..8c68e41 100644
++--- a/Config.in
+++++ b/Config.in
++@@ -75,6 +75,33 @@ config CONFIG_LOAD_4MB
++ 
++ endchoice
++ 
+++config CONFIG_DUAL_BOOT
+++	bool "Support dual application boot"
+++	depends on ALLOW_DUAL_BOOT
+++	default	n
+++	help
+++	  Allow booting a secondary application if a button is pressed
+++
+++config CONFIG_ALT_IMG_ADDRESS
+++	string
+++	default "0x00040000" if CONFIG_FLASH
+++	default "0x00063000" if CONFIG_DATAFLASH
+++	default "0x00040000" if CONFIG_NANDFLASH
+++	default	"0x00000000" if CONFIG_SDCARD
+++	help
+++	  Where the secondary application is stored.
+++
+++config CONFIG_ALT_IMG_SIZE
+++	string
+++	default	"0x00010000"
+++	help
+++	  at91bootstrap will copy this amount of data
+++
+++config CONFIG_ALT_IMAGE_NAME
+++	depends on CONFIG_SDCARD && CONFIG_DUAL_BOOT
+++	string "Binary Name on SD Card"
+++	default "program.bin"
+++
++ #
++ # Linux Image Storage Setup
++ #
++@@ -329,7 +356,7 @@ config CONFIG_GLBDRV_ADDR
++ 	default "0x20068000" if CONFIG_AT91SAM9G10EK
++ 	default "0x23F00000"
++ 	help
++-	
+++
++ config CONFIG_LONG_TEST
++ 	bool "Perform a memory test at startup"
++ 	default n
++@@ -351,6 +378,9 @@ config CONFIG_DEBUG_VERY_LOUD
++ 	bool "Even louder debug output"
++ endchoice
++ 
+++config ALLOW_DUAL_BOOT
 ++	bool
 ++
-+ # ----------------------------------------------------------
++ config CONFIG_HW_INIT
++ 	bool "Call Hardware Initialization"
++ 	default y
++diff --git a/Makefile b/Makefile
++index 5c66729..0fcd5ba 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -12,14 +12,17 @@ CONFIG=config
 + 
-+ comment "AT91 Feature Selections"
-diff --git a/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-002-mach-at91-Kconfig.patch b/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-002-mach-at91-Kconfig.patch
-new file mode 100644
-index 0000000..a2d3965
---- /dev/null
-+++ b/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-002-mach-at91-Kconfig.patch
-@@ -0,0 +1,196 @@
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/Kconfig linux-2.6.30/arch/arm/mach-at91/Kconfig
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/Kconfig	2010-03-14 11:41:36.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/Kconfig	2010-03-14 12:00:27.000000000 +0100
-+@@ -97,6 +97,7 @@
-+ 	bool "Atmel AT91RM9200-DK Development board"
-+ 	depends on ARCH_AT91RM9200
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91RM9200-DK Development board.
-+ 	  (Discontinued)
-+@@ -104,6 +105,7 @@
-+ config MACH_AT91RM9200EK
-+ 	bool "Atmel AT91RM9200-EK Evaluation Kit"
-+ 	depends on ARCH_AT91RM9200
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91RM9200-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3507>
-+@@ -172,6 +174,7 @@
-+ config MACH_ECBAT91
-+ 	bool "emQbit ECB_AT91 SBC"
-+ 	depends on ARCH_AT91RM9200
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using emQbit's ECB_AT91 board.
-+ 	  <http://wiki.emqbit.com/free-ecb-at91>
-+@@ -215,6 +218,8 @@
-+ 	bool "Atmel AT91SAM9260-EK / AT91SAM9XE Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9260
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9260-EK or AT91SAM9XE Evaluation Kit
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3933>
-+@@ -229,6 +234,7 @@
-+ config MACH_SAM9_L9260
-+ 	bool "Olimex SAM9-L9260 board"
-+ 	depends on ARCH_AT91SAM9260
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Olimex's SAM9-L9260 board based on the Atmel AT91SAM9260.
-+ 	  <http://www.olimex.com/dev/sam9-L9260.html>
-+@@ -281,6 +287,8 @@
-+ 	bool "Atmel AT91SAM9261-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9261
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9261-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3820>
-+@@ -297,6 +305,8 @@
-+ 	bool "Atmel AT91SAM9G10-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G10
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G10-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4588>
-+@@ -313,6 +323,8 @@
-+ 	bool "Atmel AT91SAM9263-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9263
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9263-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4057>
-+@@ -334,6 +346,7 @@
-+ config MACH_TOTEMNOVA
-+ 	bool "TotemNova Micronova industrial supervisor"
-+ 	depends on ARCH_AT91SAM9263
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Micronova's TotemNova industrial supervisor
-+ 	  <http://www.micronovasrl.com>
-+@@ -341,6 +354,7 @@
-+ config MACH_NEOCORE926
-+ 	bool "Adeneo NEOCORE926"
-+ 	depends on ARCH_AT91SAM9263
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using the Adeneo Neocore 926 board.
-+ 
-+@@ -371,6 +385,8 @@
-+ 	bool "Atmel AT91SAM9G20-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G20
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G20-EK Evaluation Kit
-+ 	  that embeds only one SD/MMC slot.
-+@@ -379,6 +395,7 @@
-+ 	bool "Atmel AT91SAM9G20-EK Evaluation Kit with 2 SD/MMC Slots"
-+ 	depends on ARCH_AT91SAM9G20
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+ 	help
-+ 	  Select this if you are using an Atmel AT91SAM9G20-EK Evaluation Kit
-+ 	  with 2 SD/MMC Slots. This is the case for AT91SAM9G20-EK rev. C and
-+@@ -417,13 +434,23 @@
-+ 	bool "Atmel AT91SAM9G45-EKES Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G45
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G45-EKES Evaluation Kit.
-+ 	  "ES" at the end of the name means that this board is an
-+ 	  Engineering Sample.
-+ 
-+-endif
-++config MACH_AT91SAM9M10G45EK
-++	bool "Atmel AT91SAM9M10G45-EK Evaluation Kit"
-++	depends on ARCH_AT91SAM9G45
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	help
-++	  Select this if you are using Atmel's AT91SAM9M10G45-EK Evaluation Kit.
-++	  "ES2" at the end of the name means that this board is an
-++	  Engineering Sample.
-+ 
-++endif
-+ # ----------------------------------------------------------
-+ 
-+ if ARCH_AT91SAM9M10
-+@@ -434,11 +461,22 @@
-+         bool "Atmel AT91SAM9M10-EKES Evaluation Kit"
-+         depends on ARCH_AT91SAM9M10
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+         help
-+           Select this if you are using Atmel's AT91SAM9M10-EKES Evaluation Kit.
-+           "ES" at the end of the name means that this board is an
-+           Engineering Sample.
-+ 
-++config MACH_AT91SAM9M10G45EK
-++	bool "Atmel AT91SAM9M10G45-EK Evaluation Kit"
-++       depends on ARCH_AT91SAM9M10
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	help
-++	  Select this if you are using Atmel's AT91SAM9M10G45-EK Evaluation Kit.
-++	  "ES2" at the end of the name means that this board is an
-++	  Engineering Sample.
-++
++ CONFIG_SHELL=$(shell which bash)
++ ifeq ($(CONFIG_SHELL),)
++-$(error GNU Bash is needed to build Bootstrap!)
+++$(error GNU Bash is needed to build Bootstrap!)+ALT_IMG_ADDRESS=$(strip $(subst ",,$(CONFIG_ALT_IMG_ADDRESS)))
++++#"))
++++ALT_IMG_SIZE=$(strip $(subst ",,$(CONFIG_ALT_IMG_SIZE)))
++++#"))
 + endif
 + 
-+ # ----------------------------------------------------------
-+@@ -451,6 +489,8 @@
-+ 	bool "Atmel AT91CAP9A-DK Evaluation Kit"
-+ 	depends on ARCH_AT91CAP9
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91CAP9A-DK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4138>
-+@@ -467,6 +507,8 @@
-+ 	bool "AT572D940HF-EK"
-+ 	depends on ARCH_AT572D940HF
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT572D940HF-EK evaluation kit.
-+ 	  <http://www.atmel.com/products/diopsis/default.asp>
-+@@ -495,17 +537,23 @@
++ BINDIR:=$(TOPDIR)/binaries
 + 
-+ config MTD_AT91_DATAFLASH_CARD
-+ 	bool "Enable DataFlash Card support"
-+-	depends on (ARCH_AT91RM9200DK || MACH_AT91RM9200EK || MACH_AT91SAM9260EK || MACH_AT91SAM9261EK || MACH_AT91SAM9G10EK || MACH_AT91SAM9263EK || MACH_AT91SAM9G20EK || MACH_ECBAT91 || MACH_SAM9_L9260 || MACH_AT91CAP9ADK || MACH_AT572D940HFEB || MACH_TOTEMNOVA || MACH_NEOCORE926)
-++	depends on MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Enable support for the DataFlash card.
++ DATE:=$(shell date +%Y%m%d)
 + 
-++config MTD_ALLOW_DATAFLASHCARD
-++	bool
-++
-+ config MTD_NAND_ATMEL_BUSWIDTH_16
-+ 	bool "Enable 16-bit data bus interface to NAND flash"
-+-	depends on (MACH_AT91SAM9260EK || MACH_AT91SAM9261EK || MACH_AT91SAM9G10EK || MACH_AT91SAM9263EK || MACH_AT91SAM9G20EK || MACH_AT91SAM9G20EK_2MMC || MACH_AT91SAM9G45EKES || MACH_AT91CAP9ADK || MACH_AT572D940HFEB)
-++	depends on MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+ 	help
-+ 	  On AT91SAM926x boards both types of NAND flash can be present
-+ 	  (8 and 16 bit data bus width).
++-VERSION:=3.0
+++VERSION:=3.0.1
 + 
-++config MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	bool
-++
-+ config MTD_NAND_ATMEL_ROOTFS_SIZE
-+ 	int "Size NAND rootfs in MB"
-+ 	range 8 250
-diff --git a/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-003-sam9m10g45ek.patch b/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-003-sam9m10g45ek.patch
-new file mode 100644
-index 0000000..05a81bf
---- /dev/null
-+++ b/recipes/linux/linux-2.6.30/at91/exp.2/linux-2.6.30-003-sam9m10g45ek.patch
-@@ -0,0 +1,29 @@
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9m10g45ek.c linux-2.6.30/arch/arm/mach-at91/board-sam9m10g45ek.c
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/board-sam9m10g45ek.c	2010-03-14 11:41:36.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/board-sam9m10g45ek.c	2010-03-14 12:07:05.000000000 +0100
-+@@ -432,9 +432,13 @@
++  
++ noconfig_targets:= menuconfig defconfig $(CONFIG) oldconfig
++@@ -88,9 +91,12 @@ else
++ ##  Have DOT Config
++ #
 + 
-+ #if defined(CONFIG_MACH_AT91SAM9G45EKES)
-+ MACHINE_START(AT91SAM9G45EKES, "Atmel AT91SAM9G45-EKES")
-+-#else
-++#endif
-++#if defined(CONFIG_MACH_AT91SAM9M10EKES)
-+ MACHINE_START(AT91SAM9M10EKES, "Atmel AT91SAM9M10-EKES")
-+ #endif
-++#if defined(CONFIG_MACH_AT91SAM9M10G45EK)
-++MACHINE_START(AT91SAM9M10G45EK, "Atmel AT91SAM9M10G45-EK")
-++#endif
-+ 	/* Maintainer: Atmel */
-+ 	.phys_io	= AT91_BASE_SYS,
-+ 	.io_pg_offst	= (AT91_VA_BASE_SYS >> 18) & 0xfffc,
-+diff -urN linux-2.6.30-0rig/arch/arm/mach-at91/Makefile linux-2.6.30/arch/arm/mach-at91/Makefile
-+--- linux-2.6.30-0rig/arch/arm/mach-at91/Makefile	2010-03-14 11:13:34.000000000 +0100
-++++ linux-2.6.30/arch/arm/mach-at91/Makefile	2010-03-14 12:08:01.000000000 +0100
-+@@ -74,6 +74,7 @@
-+ # AT91SAM9G45 board-specific support
-+ obj-$(CONFIG_MACH_AT91SAM9G45EKES) += board-sam9m10g45ek.o
-+ obj-$(CONFIG_MACH_AT91SAM9M10EKES) += board-sam9m10g45ek.o
-++obj-$(CONFIG_MACH_AT91SAM9M10G45EK) += board-sam9m10g45ek.o
-+ 
-+ # AT91CAP9 board-specific support
-+ obj-$(CONFIG_MACH_AT91CAP9ADK)	+= board-cap9adk.o
-diff --git a/recipes/linux/linux-2.6.30/at91/exp.4/0001-Configurable-partition-size.patch b/recipes/linux/linux-2.6.30/at91/exp.4/0001-Configurable-partition-size.patch
-new file mode 100644
-index 0000000..d384e5c
---- /dev/null
-+++ b/recipes/linux/linux-2.6.30/at91/exp.4/0001-Configurable-partition-size.patch
-@@ -0,0 +1,403 @@
-+From ed00f95d313707ff049d8a2edd283d5496a85cbf Mon Sep 17 00:00:00 2001
-+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-+Date: Wed, 26 Jan 2011 09:21:10 +0100
-+Subject: [PATCH v3 1/2] Configurable partition size
-+
-+---
-+ arch/arm/mach-at91/Kconfig                     |   31 ++++++++++++++++++++++++
-+ arch/arm/mach-at91/board-at572d940hf_ek.c      |   16 ++++++++++--
-+ arch/arm/mach-at91/board-cap9adk.c             |   14 +++++++++-
-+ arch/arm/mach-at91/board-dk.c                  |   14 +++++++++-
-+ arch/arm/mach-at91/board-sam9260ek.c           |   13 +++++++---
-+ arch/arm/mach-at91/board-sam9261ek.c           |   13 +++++++---
-+ arch/arm/mach-at91/board-sam9263ek.c           |   13 +++++++---
-+ arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c |    6 ++--
-+ arch/arm/mach-at91/board-sam9g20ek.c           |    6 ++--
-+ arch/arm/mach-at91/board-sam9m10g45ek.c        |   13 +++++++---
-+ arch/arm/mach-at91/board-sam9rlek.c            |   13 +++++++---
-+ 11 files changed, 119 insertions(+), 33 deletions(-)
-+
-+diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
-+index 17e09cb..46d1926 100644
-+--- a/arch/arm/mach-at91/Kconfig
-++++ b/arch/arm/mach-at91/Kconfig
-+@@ -96,6 +96,7 @@ config MACH_ONEARM
-+ config ARCH_AT91RM9200DK
-+ 	bool "Atmel AT91RM9200-DK Development board"
-+ 	depends on ARCH_AT91RM9200
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91RM9200-DK Development board.
-+ 	  (Discontinued)
-+@@ -213,6 +214,7 @@ comment "AT91SAM9260 / AT91SAM9XE Board Type"
-+ config MACH_AT91SAM9260EK
-+ 	bool "Atmel AT91SAM9260-EK / AT91SAM9XE Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9260
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9260-EK or AT91SAM9XE Evaluation Kit
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3933>
-+@@ -278,6 +280,7 @@ comment "AT91SAM9261 Board Type"
-+ config MACH_AT91SAM9261EK
-+ 	bool "Atmel AT91SAM9261-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9261
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9261-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3820>
-+@@ -293,6 +296,7 @@ comment "AT91SAM9G10 Board Type"
-+ config MACH_AT91SAM9G10EK
-+ 	bool "Atmel AT91SAM9G10-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G10
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G10-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4588>
-+@@ -308,6 +312,7 @@ comment "AT91SAM9263 Board Type"
-+ config MACH_AT91SAM9263EK
-+ 	bool "Atmel AT91SAM9263-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9263
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9263-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4057>
-+@@ -350,6 +355,7 @@ comment "AT91SAM9RL Board Type"
-+ config MACH_AT91SAM9RLEK
-+ 	bool "Atmel AT91SAM9RL-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9RL
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9RL-EK Evaluation Kit.
-+ 
-+@@ -364,6 +370,7 @@ comment "AT91SAM9G20 Board Type"
-+ config MACH_AT91SAM9G20EK
-+ 	bool "Atmel AT91SAM9G20-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G20
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G20-EK Evaluation Kit
-+ 	  that embeds only one SD/MMC slot.
-+@@ -371,6 +378,7 @@ config MACH_AT91SAM9G20EK
-+ config MACH_AT91SAM9G20EK_2MMC
-+ 	bool "Atmel AT91SAM9G20-EK Evaluation Kit with 2 SD/MMC Slots"
-+ 	depends on ARCH_AT91SAM9G20
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using an Atmel AT91SAM9G20-EK Evaluation Kit
-+ 	  with 2 SD/MMC Slots. This is the case for AT91SAM9G20-EK rev. C and
-+@@ -408,6 +416,7 @@ comment "AT91SAM9G45 Board Type"
-+ config MACH_AT91SAM9G45EKES
-+ 	bool "Atmel AT91SAM9G45-EKES Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G45
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G45-EKES Evaluation Kit.
-+ 	  "ES" at the end of the name means that this board is an
-+@@ -426,6 +435,7 @@ choice
-+ 
-+ config MACH_AT91SAM9M10EKES
-+         bool "Atmel AT91SAM9M10-EKES Evaluation Kit"
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+         help
-+           Select this if you are using Atmel's AT91SAM9M10-EKES Evaluation Kit.
-+           "ES" at the end of the name means that this board is an
-+@@ -433,6 +443,7 @@ config MACH_AT91SAM9M10EKES
-+ 
-+ config MACH_AT91SAM9M10G45EK
-+         bool "Atmel AT91SAM9M10G45-EK Evaluation Kit"
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+         help
-+           Select this if you are using Atmel's AT91SAM9M10G45-EK Evaluation Kit.
-+ 	  <http://atmel.com/dyn/products/tools_card_v2.asp?tool_id=4735>
-+@@ -450,6 +461,7 @@ comment "AT91CAP9 Board Type"
-+ config MACH_AT91CAP9ADK
-+ 	bool "Atmel AT91CAP9A-DK Evaluation Kit"
-+ 	depends on ARCH_AT91CAP9
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT91CAP9A-DK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4138>
-+@@ -465,6 +477,7 @@ comment "AT572D940HF Board Type"
-+ config MACH_AT572D940HFEB
-+ 	bool "AT572D940HF-EK"
-+ 	depends on ARCH_AT572D940HF
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-+ 	help
-+ 	  Select this if you are using Atmel's AT572D940HF-EK evaluation kit.
-+ 	  <http://www.atmel.com/products/diopsis/default.asp>
-+@@ -504,6 +517,24 @@ config MTD_NAND_ATMEL_BUSWIDTH_16
-+ 	  On AT91SAM926x boards both types of NAND flash can be present
-+ 	  (8 and 16 bit data bus width).
-+ 
-++config MTD_NAND_ATMEL_ROOTFS_SIZE
-++	int "Size NAND rootfs in MB"
-++	range 8 250
-++	depends on MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	default "124"
-++	help
-++	  Many Atmel development boards has a NAND Flash, 
-++	  divided into three partitions.
-++          1) Boot partition (4 MB)
-++	  2) Root FS
-++	  3) Data partition
-++	  This allows you to configure the size of the root fs
-++	  with the remainder ending up in the data partition.
-++	  The legal values are between 8 and 250
-++
-++config MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	bool
-++
-+ # ----------------------------------------------------------
-+ 
-+ comment "AT91 Feature Selections"
-+diff --git a/arch/arm/mach-at91/board-at572d940hf_ek.c b/arch/arm/mach-at91/board-at572d940hf_ek.c
-+index f5bd486..171d675 100644
-+--- a/arch/arm/mach-at91/board-at572d940hf_ek.c
-++++ b/arch/arm/mach-at91/board-at572d940hf_ek.c
-+@@ -114,10 +114,20 @@ static struct at91_eth_data __initdata eb_eth_data = {
-+  */
-+ static struct mtd_partition __initdata eb_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-++	},
-++	{
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-++		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+-	}
-++	},
-+ };
-+ 
-+ static struct mtd_partition * __init nand_partitions(int size, int *num_partitions)
-+diff --git a/arch/arm/mach-at91/board-cap9adk.c b/arch/arm/mach-at91/board-cap9adk.c
-+index 52f75c6..de9f921 100644
-+--- a/arch/arm/mach-at91/board-cap9adk.c
-++++ b/arch/arm/mach-at91/board-cap9adk.c
-+@@ -167,8 +167,18 @@ static struct at91_eth_data __initdata cap9adk_macb_data = {
-+  */
-+ static struct mtd_partition __initdata cap9adk_nand_partitions[] = {
-+ 	{
-+-		.name	= "NAND partition",
-+-		.offset	= 0,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-++	},
-++	{
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-++		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+ };
-+diff --git a/arch/arm/mach-at91/board-dk.c b/arch/arm/mach-at91/board-dk.c
-+index 3efca21..b521503 100644
-+--- a/arch/arm/mach-at91/board-dk.c
-++++ b/arch/arm/mach-at91/board-dk.c
-+@@ -314,8 +314,18 @@ static struct i2c_board_info __initdata dk_i2c_devices[] = {
-+ 
-+ static struct mtd_partition __initdata dk_nand_partition[] = {
-+ 	{
-+-		.name	= "NAND Partition 1",
-+-		.offset	= 0,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-++	},
-++	{
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-++		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+ };
-+diff --git a/arch/arm/mach-at91/board-sam9260ek.c b/arch/arm/mach-at91/board-sam9260ek.c
-+index e6cab50..c098216 100644
-+--- a/arch/arm/mach-at91/board-sam9260ek.c
-++++ b/arch/arm/mach-at91/board-sam9260ek.c
-+@@ -177,12 +177,17 @@ static struct at91_eth_data __initdata ek_macb_data = {
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_256K,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff --git a/arch/arm/mach-at91/board-sam9261ek.c b/arch/arm/mach-at91/board-sam9261ek.c
-+index 8bcd631..66cd246 100644
-+--- a/arch/arm/mach-at91/board-sam9261ek.c
-++++ b/arch/arm/mach-at91/board-sam9261ek.c
-+@@ -184,12 +184,17 @@ static struct at91_mmc_data __initdata ek_mmc_data = {
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_256K,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff --git a/arch/arm/mach-at91/board-sam9263ek.c b/arch/arm/mach-at91/board-sam9263ek.c
-+index 7cbec96..f3ad0f4 100644
-+--- a/arch/arm/mach-at91/board-sam9263ek.c
-++++ b/arch/arm/mach-at91/board-sam9263ek.c
-+@@ -174,12 +174,17 @@ static struct at91_eth_data __initdata ek_macb_data = {
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_64M,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff --git a/arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c b/arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c
-+index 4061d82..51b3008 100644
-+--- a/arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c
-++++ b/arch/arm/mach-at91/board-sam9g20ek-2slot-mmc.c
-+@@ -130,12 +130,12 @@ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 1",
-++		.name	= "Root File System",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+-		.size	= 60 * SZ_1M,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff --git a/arch/arm/mach-at91/board-sam9g20ek.c b/arch/arm/mach-at91/board-sam9g20ek.c
-+index b2117b9..811dd09 100644
-+--- a/arch/arm/mach-at91/board-sam9g20ek.c
-++++ b/arch/arm/mach-at91/board-sam9g20ek.c
-+@@ -129,12 +129,12 @@ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 1",
-++		.name	= "Root File System",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+-		.size	= 60 * SZ_1M,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff --git a/arch/arm/mach-at91/board-sam9m10g45ek.c b/arch/arm/mach-at91/board-sam9m10g45ek.c
-+index 0277e6b..6f5d02a 100644
-+--- a/arch/arm/mach-at91/board-sam9m10g45ek.c
-++++ b/arch/arm/mach-at91/board-sam9m10g45ek.c
-+@@ -134,12 +134,17 @@ static struct at91_eth_data __initdata ek_macb_data = {
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_64M,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+diff --git a/arch/arm/mach-at91/board-sam9rlek.c b/arch/arm/mach-at91/board-sam9rlek.c
-+index 23e6546..07f0c03 100644
-+--- a/arch/arm/mach-at91/board-sam9rlek.c
-++++ b/arch/arm/mach-at91/board-sam9rlek.c
-+@@ -83,12 +83,17 @@ static struct at91_mmc_data __initdata ek_mmc_data = {
-+  */
-+ static struct mtd_partition __initdata ek_nand_partition[] = {
-+ 	{
-+-		.name	= "Partition 1",
-+-		.offset	= 0,
-+-		.size	= SZ_256K,
-++		.name   = "Bootstrap",
-++		.offset = 0,
-++		.size   = 4 * SZ_1M,
-+ 	},
-+ 	{
-+-		.name	= "Partition 2",
-++		.name	= "Root File System",
-++		.offset	= MTDPART_OFS_NXTBLK,
-++		.size	= CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE * SZ_1M,
-++	},
-++	{
-++		.name	= "Data",
-+ 		.offset	= MTDPART_OFS_NXTBLK,
-+ 		.size	= MTDPART_SIZ_FULL,
-+ 	},
-+-- 
-+1.7.1
-+
-diff --git a/recipes/linux/linux-2.6.30/at91/exp.4/0002-mach-at91-KConfig-cleanup.patch b/recipes/linux/linux-2.6.30/at91/exp.4/0002-mach-at91-KConfig-cleanup.patch
-new file mode 100644
-index 0000000..a58008c
---- /dev/null
-+++ b/recipes/linux/linux-2.6.30/at91/exp.4/0002-mach-at91-KConfig-cleanup.patch
-@@ -0,0 +1,202 @@
-+From 13d462c45ddcb46e6a7de700ee9b6eaafdb0a728 Mon Sep 17 00:00:00 2001
-+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-+Date: Wed, 26 Jan 2011 09:34:00 +0100
-+Subject: [PATCH v3 2/2] mach-at91 KConfig cleanup
-+
-+---
-+ arch/arm/mach-at91/Kconfig |   45 +++++++++++++++++++++++++++++++++++++++++--
-+ 1 files changed, 42 insertions(+), 3 deletions(-)
-+
-+diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
-+index 46d1926..3ff11ab 100644
-+--- a/arch/arm/mach-at91/Kconfig
-++++ b/arch/arm/mach-at91/Kconfig
-+@@ -97,6 +97,7 @@ config ARCH_AT91RM9200DK
-+ 	bool "Atmel AT91RM9200-DK Development board"
-+ 	depends on ARCH_AT91RM9200
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91RM9200-DK Development board.
-+ 	  (Discontinued)
-+@@ -104,6 +105,7 @@ config ARCH_AT91RM9200DK
-+ config MACH_AT91RM9200EK
-+ 	bool "Atmel AT91RM9200-EK Evaluation Kit"
-+ 	depends on ARCH_AT91RM9200
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91RM9200-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3507>
-+@@ -172,6 +174,7 @@ config MACH_HOMEMATIC
-+ config MACH_ECBAT91
-+ 	bool "emQbit ECB_AT91 SBC"
-+ 	depends on ARCH_AT91RM9200
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using emQbit's ECB_AT91 board.
-+ 	  <http://wiki.emqbit.com/free-ecb-at91>
-+@@ -215,6 +218,8 @@ config MACH_AT91SAM9260EK
-+ 	bool "Atmel AT91SAM9260-EK / AT91SAM9XE Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9260
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9260-EK or AT91SAM9XE Evaluation Kit
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3933>
-+@@ -229,6 +234,7 @@ config MACH_CAM60
-+ config MACH_SAM9_L9260
-+ 	bool "Olimex SAM9-L9260 board"
-+ 	depends on ARCH_AT91SAM9260
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Olimex's SAM9-L9260 board based on the Atmel AT91SAM9260.
-+ 	  <http://www.olimex.com/dev/sam9-L9260.html>
-+@@ -281,6 +287,8 @@ config MACH_AT91SAM9261EK
-+ 	bool "Atmel AT91SAM9261-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9261
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9261-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=3820>
-+@@ -297,6 +305,8 @@ config MACH_AT91SAM9G10EK
-+ 	bool "Atmel AT91SAM9G10-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G10
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G10-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4588>
-+@@ -313,6 +323,8 @@ config MACH_AT91SAM9263EK
-+ 	bool "Atmel AT91SAM9263-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9263
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9263-EK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4057>
-+@@ -334,6 +346,7 @@ config MACH_CSB737
-+ config MACH_TOTEMNOVA
-+ 	bool "TotemNova Micronova industrial supervisor"
-+ 	depends on ARCH_AT91SAM9263
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Micronova's TotemNova industrial supervisor
-+ 	  <http://www.micronovasrl.com>
-+@@ -341,6 +354,7 @@ config MACH_TOTEMNOVA
-+ config MACH_NEOCORE926
-+ 	bool "Adeneo NEOCORE926"
-+ 	depends on ARCH_AT91SAM9263
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using the Adeneo Neocore 926 board.
-+ 
-+@@ -371,6 +385,8 @@ config MACH_AT91SAM9G20EK
-+ 	bool "Atmel AT91SAM9G20-EK Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G20
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G20-EK Evaluation Kit
-+ 	  that embeds only one SD/MMC slot.
-+@@ -379,6 +395,7 @@ config MACH_AT91SAM9G20EK_2MMC
-+ 	bool "Atmel AT91SAM9G20-EK Evaluation Kit with 2 SD/MMC Slots"
-+ 	depends on ARCH_AT91SAM9G20
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+ 	help
-+ 	  Select this if you are using an Atmel AT91SAM9G20-EK Evaluation Kit
-+ 	  with 2 SD/MMC Slots. This is the case for AT91SAM9G20-EK rev. C and
-+@@ -417,13 +434,23 @@ config MACH_AT91SAM9G45EKES
-+ 	bool "Atmel AT91SAM9G45-EKES Evaluation Kit"
-+ 	depends on ARCH_AT91SAM9G45
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+ 	help
-+ 	  Select this if you are using Atmel's AT91SAM9G45-EKES Evaluation Kit.
-+ 	  "ES" at the end of the name means that this board is an
-+ 	  Engineering Sample.
-+ 
-+-endif
-++config MACH_AT91SAM9M10G45EK
-++	bool "Atmel AT91SAM9M10G45-EK Evaluation Kit"
-++	depends on ARCH_AT91SAM9G45
-++	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	help
-++	  Select this if you are using Atmel's AT91SAM9M10G45-EK Evaluation Kit.
-++	  "ES2" at the end of the name means that this board is an
-++	  Engineering Sample.
-+ 
+++nocompile_targets:= distrib config-clean clean distclean mrproper
+++ifeq ($(filter $(nocompile_targets),$(MAKECMDGOALS)),)
++ ifeq ($(CROSS_COMPILE),)
++ $(error Environment variable "CROSS_COMPILE" must be defined!)
++ endif
 ++endif
-+ # ----------------------------------------------------------
 + 
-+ if ARCH_AT91SAM9M10
-+@@ -436,6 +463,7 @@ choice
-+ config MACH_AT91SAM9M10EKES
-+         bool "Atmel AT91SAM9M10-EKES Evaluation Kit"
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+         help
-+           Select this if you are using Atmel's AT91SAM9M10-EKES Evaluation Kit.
-+           "ES" at the end of the name means that this board is an
-+@@ -444,6 +472,7 @@ config MACH_AT91SAM9M10EKES
-+ config MACH_AT91SAM9M10G45EK
-+         bool "Atmel AT91SAM9M10G45-EK Evaluation Kit"
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+         help
-+           Select this if you are using Atmel's AT91SAM9M10G45-EK Evaluation Kit.
-+ 	  <http://atmel.com/dyn/products/tools_card_v2.asp?tool_id=4735>
-+@@ -462,6 +491,8 @@ config MACH_AT91CAP9ADK
-+ 	bool "Atmel AT91CAP9A-DK Evaluation Kit"
-+ 	depends on ARCH_AT91CAP9
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT91CAP9A-DK Evaluation Kit.
-+ 	  <http://www.atmel.com/dyn/products/tools_card.asp?tool_id=4138>
-+@@ -478,6 +509,8 @@ config MACH_AT572D940HFEB
-+ 	bool "AT572D940HF-EK"
-+ 	depends on ARCH_AT572D940HF
-+ 	select MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE
-++	select MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	select	MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Select this if you are using Atmel's AT572D940HF-EK evaluation kit.
-+ 	  <http://www.atmel.com/products/diopsis/default.asp>
-+@@ -506,17 +539,23 @@ comment "AT91 Board Options"
++ AS=$(CROSS_COMPILE)gcc
++ CC=$(CROSS_COMPILE)gcc
++@@ -114,6 +120,12 @@ IMG_ADDRESS := $(strip $(subst ",,$(CONFIG_IMG_ADDRESS)))
 + 
-+ config MTD_AT91_DATAFLASH_CARD
-+ 	bool "Enable DataFlash Card support"
-+-	depends on (ARCH_AT91RM9200DK || MACH_AT91RM9200EK || MACH_AT91SAM9260EK || MACH_AT91SAM9261EK || MACH_AT91SAM9G10EK || MACH_AT91SAM9263EK || MACH_AT91SAM9G20EK || MACH_ECBAT91 || MACH_SAM9_L9260 || MACH_AT91CAP9ADK || MACH_AT572D940HFEB || MACH_TOTEMNOVA || MACH_NEOCORE926)
-++	depends on MTD_ALLOW_DATAFLASHCARD
-+ 	help
-+ 	  Enable support for the DataFlash card.
++ IMG_SIZE := $(strip $(subst ",,$(CONFIG_IMG_SIZE)))
 + 
-++config MTD_ALLOW_DATAFLASHCARD
-++	bool
+++ALT_IMG_ADDRESS :=$(strip $(subst ",,$(CONFIG_ALT_IMG_ADDRESS)))
 ++
-+ config MTD_NAND_ATMEL_BUSWIDTH_16
-+ 	bool "Enable 16-bit data bus interface to NAND flash"
-+-	depends on (MACH_AT91SAM9260EK || MACH_AT91SAM9261EK || MACH_AT91SAM9G10EK || MACH_AT91SAM9263EK || MACH_AT91SAM9G20EK || MACH_AT91SAM9G20EK_2MMC || MACH_AT91SAM9G45EKES || MACH_AT91SAM9M10EKES || MACH_AT91SAM9M10G45EK || MACH_AT91CAP9ADK || MACH_AT572D940HFEB)
-++	depends on MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-+ 	help
-+ 	  On AT91SAM926x boards both types of NAND flash can be present
-+ 	  (8 and 16 bit data bus width).
-+ 
-++config MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH
-++	bool
+++ALT_IMG_SIZE :=$(strip $(subst ",,$(CONFIG_ALT_IMG_SIZE)))
 ++
-+ config MTD_NAND_ATMEL_ROOTFS_SIZE
-+ 	int "Size NAND rootfs in MB"
-+ 	range 8 250
+++ALT_IMAGE_NAME :=$(strip $(subst ",,$(CONFIG_ALT_IMAGE_NAME)))
+++
++ JUMP_ADDR := $(strip $(subst ",,$(CONFIG_JUMP_ADDR)))
++ 
++ BOOTSTRAP_MAXSIZE := $(strip $(subst ",,$(CONFIG_BOOTSTRAP_MAXSIZE)))
++@@ -189,7 +201,7 @@ IMAGE=$(BOOT_NAME).bin
++ endif
++ 
++ ifeq ($(SYMLINK),)
++-SYMLINK=at91bootstrap.bin
+++SYMLINK=at91bootstrap.bin+ifeq ($(CONFIG_DUAL_BOOT),y)
++ endif
++ 
++ EXTRA_INSTALL=
++diff --git a/board/Config.in b/board/Config.in
++index 45af1f9..78ac102 100644
++--- a/board/Config.in
+++++ b/board/Config.in
++@@ -126,6 +126,7 @@ config	CONFIG_AT91SAM9G45EK
++ 	select ALLOW_CRYSTAL_18_432MHZ
++ 	select ALLOW_BOOT_FROM_DATAFLASH_CS0
++ 	select ALLOW_DATAFLASH_RECOVERY
+++	select ALLOW_DUAL_BOOT
++ 	help
++ 	  Use the AT91SAM9G45EK Development board
++ 	  Can also be used for AT91SAM9M10/M11
++@@ -142,6 +143,7 @@ config	CONFIG_AT91SAM9G45EKES
++ 	select ALLOW_CRYSTAL_18_432MHZ
++ 	select ALLOW_BOOT_FROM_DATAFLASH_CS0
++ 	select ALLOW_DATAFLASH_RECOVERY
+++	select ALLOW_DUAL_BOOT
++ 	help
++ 	  Use the AT91SAM9G45EK-ES Development board
++ 	  Can also be used for AT91SAM9M10/M11-ES
++@@ -158,6 +160,7 @@ config	CONFIG_AT91SAM9M10EK
++ 	select ALLOW_CRYSTAL_18_432MHZ
++ 	select ALLOW_BOOT_FROM_DATAFLASH_CS0
++ 	select ALLOW_DATAFLASH_RECOVERY
+++	select ALLOW_DUAL_BOOT
++ 	help
++ 	  Use the AT91SAM9M10EK Development board
++ 	  Can also be used for AT91SAM9G45
++@@ -174,6 +177,7 @@ config	CONFIG_AT91SAM9M10EKES
++ 	select ALLOW_CRYSTAL_18_432MHZ
++ 	select ALLOW_BOOT_FROM_DATAFLASH_CS0
++ 	select ALLOW_DATAFLASH_RECOVERY
+++	select ALLOW_DUAL_BOOT
++ 	help
++ 	  Use the AT91SAM9M10EKES Development board
++ 	  Can also be used for AT91SAM9G45
++diff --git a/driver/MEDSdcard.c b/driver/MEDSdcard.c
++index 123acee..e6a660f 100644
++--- a/driver/MEDSdcard.c
+++++ b/driver/MEDSdcard.c
++@@ -686,7 +686,15 @@ unsigned int load_SDCard()
++         return 0;
++     }
++ 
++-    res = f_open(&fileObject, OS_IMAGE_NAME, FA_OPEN_EXISTING | FA_READ);
+++#if defined(CONFIG_DUAL_BOOT)
+++    if(alternate_boot_button()) {
+++	res = f_open(&fileObject, ALT_IMAGE_NAME, FA_OPEN_EXISTING | FA_READ);
+++    } else {
+++#else
+++    {
+++#endif
+++	res = f_open(&fileObject, OS_IMAGE_NAME, FA_OPEN_EXISTING | FA_READ);
+++    }
++ 
++     if (res != FR_OK) {
++         return 0;
++diff --git a/include/gpio.h b/include/gpio.h
++index 7c7e57b..fff9539 100644
++--- a/include/gpio.h
+++++ b/include/gpio.h
++@@ -73,4 +73,8 @@ extern int pio_setup(const struct pio_desc *pio_desc);
++ #define	AT91C_PIN_PD(io)	(3 * PIO_NB_IO + io)
++ #define	AT91C_PIN_PE(io)	(4 * PIO_NB_IO + io)
++ 
+++#if defined(CONFIG_DUAL_BOOT)
+++extern	int	alternate_boot_button(void);
+++#endif
+++
++ #endif                          /* GPIO_H_ */
++diff --git a/main.c b/main.c
++index c7dc662..9ca56ac 100644
++--- a/main.c
+++++ b/main.c
++@@ -37,6 +37,7 @@
++ #include "dataflash.h"
++ #include "nandflash.h"
++ #include "flash.h"
+++#include "gpio.h"
++ #ifdef CONFIG_USER_HW_INIT
++ void user_hw_init(void);
++ #endif
++@@ -51,6 +52,9 @@ void LoadLinux();
++ 
++ void LoadWince();
++ 
+++unsigned int	img_address	= IMG_ADDRESS;
+++unsigned int	img_size	= IMG_SIZE;
+++
++ /*------------------------------------------------------------------------------*/
++ /* Function Name       : main							*/
++ /* Object              : Main function						*/
++@@ -59,6 +63,10 @@ void LoadWince();
++ /*------------------------------------------------------------------------------*/
++ int main(void)
++ {
+++
+++
+++// unsigned int	jump_addr	= JUMP_ADDR;
+++
++     /*
++      * ================== 1st step: Hardware Initialization ================= 
++      */
++@@ -79,46 +87,44 @@ int main(void)
++     /*
++      * Load from Dataflash in RAM 
++      */
++-#if defined(CONFIG_DATAFLASH) || defined(CONFIG_DATAFLASH_CARD)
+++
+++#if defined(CONFIG_DUAL_BOOT)
+++	if(alternate_boot_button()) {
+++		dbgu_print(">Alternate image\r\n");
+++		img_address	= ALT_IMG_ADDRESS;
+++		img_size	= ALT_IMG_SIZE;
+++	} else {
+++#else
+++	{
+++#endif
+++
++ #if defined(CONFIG_LOAD_LINUX)
++     LoadLinux();
++ #elif defined(CONFIG_LOAD_NK) || defined(CONFIG_LOAD_EBOOT)
++     LoadWince();
++ #else
++-    load_df(AT91C_SPI_PCS_DATAFLASH, IMG_ADDRESS, IMG_SIZE, JUMP_ADDR);
++-#endif
++-#endif
++ 
+++#if defined(CONFIG_DATAFLASH) || defined(CONFIG_DATAFLASH_CARD)
+++    load_df(AT91C_SPI_PCS_DATAFLASH, img_address, img_size, JUMP_ADDR);
+++#endif
++     /*
++      * Load from Nandflash in RAM 
++      */
++ #if defined(CONFIG_NANDFLASH)
++-#if defined(CONFIG_LOAD_LINUX)
++-    LoadLinux();
++-#elif defined(CONFIG_LOAD_NK) || defined(CONFIG_LOAD_EBOOT)
++-    LoadWince();
++-#else
++-    read_nandflash((unsigned char *)JUMP_ADDR, (unsigned long)IMG_ADDRESS,
++-                   (int)IMG_SIZE);
++-#endif
+++    read_nandflash((unsigned char *)JUMP_ADDR, (unsigned long)img_address,
+++                   (int)img_size);
++ #endif
++-
++     /*
++      * Load from Norflash in RAM 
++      */
++ #ifdef CONFIG_FLASH
++-    load_norflash(IMG_ADDRESS, IMG_SIZE, JUMP_ADDR);
+++    load_norflash(img_address, img_size, JUMP_ADDR);
++ #endif
++-
++ #if defined(CONFIG_SDCARD)
++-#if defined(CONFIG_LOAD_LINUX)
++-    LoadLinux();
++-#elif defined(CONFIG_LOAD_NK) || defined(CONFIG_LOAD_EBOOT)
++-    LoadWince();
++-#else
++     load_SDCard();
++ #endif
++ #endif
+++	}
++ 
++     /*
++      * ==================== 3rd step:  Process the Image =================== 
++diff --git a/toplevel_cpp.mk b/toplevel_cpp.mk
++index af3e9fb..315dc31 100644
++--- a/toplevel_cpp.mk
+++++ b/toplevel_cpp.mk
++@@ -6,12 +6,15 @@ CPPFLAGS += \
++ 	-DOS_MEM_SIZE=$(OS_MEM_SIZE) \
++ 	-DOS_IMG_SIZE=$(OS_IMG_SIZE) \
++ 	-DOS_IMAGE_NAME="\"$(OS_IMAGE_NAME)\"" \
+++	-DALT_IMG_ADDRESS=$(ALT_IMG_ADDRESS)	\
+++	-DALT_IMG_SIZE=$(ALT_IMG_SIZE)		\
+++	-DALT_IMAGE_NAME="\"$(ALT_IMAGE_NAME)\"" \
++ 	-DLINUX_IMG_NAND_OFFSET=$(LINUX_IMG_NAND_OFFSET) \
++ 	-DLINUX_KERNEL_ARG_STRING="\"$(LINUX_KERNEL_ARG_STRING)\"" \
++ 	-DGLBDRV_ADDR=$(GLBDRV_ADDR)		\
++ 	-DSETTING_ADDRESS=$(SETTING_ADDRESS)		\
++ 	-DSETTING_SIZE=$(SETTING_SIZE)		\
++-    -DTOP_OF_MEMORY=$(TOP_OF_MEMORY)	\
+++	-DTOP_OF_MEMORY=$(TOP_OF_MEMORY)	\
++ 	-DMACH_TYPE=$(MACH_TYPE)		\
++ 
++ ASFLAGS += -DJUMP_ADDR=$(JUMP_ADDR)		\
++@@ -38,3 +41,7 @@ ifeq ($(CONFIG_USER_HW_INIT),y)
++ CPPFLAGS += -DCONFIG_USER_HW_INIT
++ endif
++ 
+++ifeq ($(CONFIG_DUAL_BOOT),y)
+++CPPFLAGS += -DCONFIG_DUAL_BOOT
+++endif
+++
 +-- 
 +1.7.1
 +
-diff --git a/recipes/linux/linux-2.6.30/at91sam9m10ekes/defconfig b/recipes/linux/linux-2.6.30/at91sam9m10ekes/defconfig
-index d9c8408..e76f554 100644
---- a/recipes/linux/linux-2.6.30/at91sam9m10ekes/defconfig
-+++ b/recipes/linux/linux-2.6.30/at91sam9m10ekes/defconfig
-@@ -1,7 +1,7 @@
- #
- # Automatically generated make config: don't edit
- # Linux kernel version: 2.6.30
--# Sun Mar 14 23:55:04 2010
-+# Tue Jan 25 01:00:34 2011
- #
- CONFIG_ARM=y
- CONFIG_SYS_SUPPORTS_APM_EMULATION=y
-@@ -50,7 +50,8 @@ CONFIG_CLASSIC_RCU=y
- # CONFIG_PREEMPT_RCU is not set
- # CONFIG_TREE_RCU_TRACE is not set
- # CONFIG_PREEMPT_RCU_TRACE is not set
--# CONFIG_IKCONFIG is not set
-+CONFIG_IKCONFIG=y
-+CONFIG_IKCONFIG_PROC=y
- CONFIG_LOG_BUF_SHIFT=14
- # CONFIG_GROUP_SCHED is not set
- # CONFIG_CGROUPS is not set
-@@ -480,7 +481,9 @@ CONFIG_MTD_CFI_I2=y
- #
- # Self-contained MTD device drivers
- #
--# CONFIG_MTD_DATAFLASH is not set
-+CONFIG_MTD_DATAFLASH=y
-+# CONFIG_MTD_DATAFLASH_WRITE_VERIFY is not set
-+# CONFIG_MTD_DATAFLASH_OTP is not set
- # CONFIG_MTD_M25P80 is not set
- # CONFIG_MTD_SLRAM is not set
- # CONFIG_MTD_PHRAM is not set
-@@ -544,7 +547,7 @@ CONFIG_ATMEL_TCB_CLKSRC_BLOCK=0
- #
- # EEPROM support
- #
--# CONFIG_EEPROM_AT24 is not set
-+CONFIG_EEPROM_AT24=y
- # CONFIG_EEPROM_AT25 is not set
- # CONFIG_EEPROM_LEGACY is not set
- CONFIG_EEPROM_93CX6=m
-@@ -589,7 +592,11 @@ CONFIG_SCSI_WAIT_SCAN=m
- # CONFIG_SCSI_SAS_LIBSAS is not set
- # CONFIG_SCSI_SRP_ATTRS is not set
- # CONFIG_SCSI_LOWLEVEL is not set
--# CONFIG_SCSI_DH is not set
-+CONFIG_SCSI_DH=y
-+# CONFIG_SCSI_DH_RDAC is not set
-+# CONFIG_SCSI_DH_HP_SW is not set
-+# CONFIG_SCSI_DH_EMC is not set
-+# CONFIG_SCSI_DH_ALUA is not set
- # CONFIG_SCSI_OSD_INITIATOR is not set
- # CONFIG_ATA is not set
- # CONFIG_MD is not set
-@@ -976,7 +983,10 @@ CONFIG_BACKLIGHT_ATMEL_LCDC=y
- # CONFIG_VGA_CONSOLE is not set
- CONFIG_DUMMY_CONSOLE=y
- # CONFIG_FRAMEBUFFER_CONSOLE is not set
--# CONFIG_LOGO is not set
-+CONFIG_LOGO=y
-+# CONFIG_LOGO_LINUX_MONO is not set
-+# CONFIG_LOGO_LINUX_VGA16 is not set
-+CONFIG_LOGO_LINUX_CLUT224=y
- CONFIG_SOUND=y
- CONFIG_SOUND_OSS_CORE=y
- CONFIG_SND=y
-@@ -1305,8 +1315,14 @@ CONFIG_DMATEST=m
- CONFIG_EXT2_FS=y
- # CONFIG_EXT2_FS_XATTR is not set
- # CONFIG_EXT2_FS_XIP is not set
--# CONFIG_EXT3_FS is not set
-+CONFIG_EXT3_FS=y
-+# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
-+CONFIG_EXT3_FS_XATTR=y
-+# CONFIG_EXT3_FS_POSIX_ACL is not set
-+# CONFIG_EXT3_FS_SECURITY is not set
- # CONFIG_EXT4_FS is not set
-+CONFIG_JBD=y
-+CONFIG_FS_MBCACHE=y
- # CONFIG_REISERFS_FS is not set
- # CONFIG_JFS_FS is not set
- # CONFIG_FS_POSIX_ACL is not set
-@@ -1407,8 +1423,24 @@ CONFIG_SUNRPC=y
- #
- # Partition Types
- #
--# CONFIG_PARTITION_ADVANCED is not set
-+CONFIG_PARTITION_ADVANCED=y
-+# CONFIG_ACORN_PARTITION is not set
-+# CONFIG_OSF_PARTITION is not set
-+# CONFIG_AMIGA_PARTITION is not set
-+# CONFIG_ATARI_PARTITION is not set
-+# CONFIG_MAC_PARTITION is not set
- CONFIG_MSDOS_PARTITION=y
-+# CONFIG_BSD_DISKLABEL is not set
-+# CONFIG_MINIX_SUBPARTITION is not set
-+# CONFIG_SOLARIS_X86_PARTITION is not set
-+# CONFIG_UNIXWARE_DISKLABEL is not set
-+# CONFIG_LDM_PARTITION is not set
-+# CONFIG_SGI_PARTITION is not set
-+# CONFIG_ULTRIX_PARTITION is not set
-+# CONFIG_SUN_PARTITION is not set
-+# CONFIG_KARMA_PARTITION is not set
-+# CONFIG_EFI_PARTITION is not set
-+# CONFIG_SYSV68_PARTITION is not set
- CONFIG_NLS=y
- CONFIG_NLS_DEFAULT="iso8859-1"
- CONFIG_NLS_CODEPAGE_437=y
-@@ -1445,7 +1477,7 @@ CONFIG_NLS_ISO8859_1=y
- # CONFIG_NLS_ISO8859_9 is not set
- # CONFIG_NLS_ISO8859_13 is not set
- # CONFIG_NLS_ISO8859_14 is not set
--# CONFIG_NLS_ISO8859_15 is not set
-+CONFIG_NLS_ISO8859_15=y
- # CONFIG_NLS_KOI8_R is not set
- # CONFIG_NLS_KOI8_U is not set
- # CONFIG_NLS_UTF8 is not set
-diff --git a/recipes/linux/linux-2.6.30/at91sam9m10ekes/exp.2/defconfig b/recipes/linux/linux-2.6.30/at91sam9m10ekes/exp.2/defconfig
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0005-Remove-old-afeb9260-files.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0005-Remove-old-afeb9260-files.patch
 new file mode 100644
-index 0000000..e76f554
+index 0000000..718396a
 --- /dev/null
-+++ b/recipes/linux/linux-2.6.30/at91sam9m10ekes/exp.2/defconfig
-@@ -0,0 +1,1649 @@
-+#
-+# Automatically generated make config: don't edit
-+# Linux kernel version: 2.6.30
-+# Tue Jan 25 01:00:34 2011
-+#
-+CONFIG_ARM=y
-+CONFIG_SYS_SUPPORTS_APM_EMULATION=y
-+CONFIG_GENERIC_GPIO=y
-+CONFIG_GENERIC_TIME=y
-+CONFIG_GENERIC_CLOCKEVENTS=y
-+CONFIG_MMU=y
-+# CONFIG_NO_IOPORT is not set
-+CONFIG_GENERIC_HARDIRQS=y
-+CONFIG_STACKTRACE_SUPPORT=y
-+CONFIG_HAVE_LATENCYTOP_SUPPORT=y
-+CONFIG_LOCKDEP_SUPPORT=y
-+CONFIG_TRACE_IRQFLAGS_SUPPORT=y
-+CONFIG_HARDIRQS_SW_RESEND=y
-+CONFIG_GENERIC_IRQ_PROBE=y
-+CONFIG_RWSEM_GENERIC_SPINLOCK=y
-+# CONFIG_ARCH_HAS_ILOG2_U32 is not set
-+# CONFIG_ARCH_HAS_ILOG2_U64 is not set
-+CONFIG_GENERIC_HWEIGHT=y
-+CONFIG_GENERIC_CALIBRATE_DELAY=y
-+CONFIG_GENERIC_HARDIRQS_NO__DO_IRQ=y
-+CONFIG_VECTORS_BASE=0xffff0000
-+CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
-+
-+#
-+# General setup
-+#
-+CONFIG_EXPERIMENTAL=y
-+CONFIG_BROKEN_ON_SMP=y
-+CONFIG_INIT_ENV_ARG_LIMIT=32
-+CONFIG_LOCALVERSION=""
-+# CONFIG_LOCALVERSION_AUTO is not set
-+# CONFIG_SWAP is not set
-+CONFIG_SYSVIPC=y
-+CONFIG_SYSVIPC_SYSCTL=y
-+# CONFIG_POSIX_MQUEUE is not set
-+# CONFIG_BSD_PROCESS_ACCT is not set
-+# CONFIG_TASKSTATS is not set
-+# CONFIG_AUDIT is not set
-+
-+#
-+# RCU Subsystem
-+#
-+CONFIG_CLASSIC_RCU=y
-+# CONFIG_TREE_RCU is not set
-+# CONFIG_PREEMPT_RCU is not set
-+# CONFIG_TREE_RCU_TRACE is not set
-+# CONFIG_PREEMPT_RCU_TRACE is not set
-+CONFIG_IKCONFIG=y
-+CONFIG_IKCONFIG_PROC=y
-+CONFIG_LOG_BUF_SHIFT=14
-+# CONFIG_GROUP_SCHED is not set
-+# CONFIG_CGROUPS is not set
-+CONFIG_SYSFS_DEPRECATED=y
-+CONFIG_SYSFS_DEPRECATED_V2=y
-+# CONFIG_RELAY is not set
-+CONFIG_NAMESPACES=y
-+# CONFIG_UTS_NS is not set
-+# CONFIG_IPC_NS is not set
-+# CONFIG_USER_NS is not set
-+# CONFIG_PID_NS is not set
-+# CONFIG_NET_NS is not set
-+CONFIG_BLK_DEV_INITRD=y
-+CONFIG_INITRAMFS_SOURCE=""
-+CONFIG_RD_GZIP=y
-+CONFIG_RD_BZIP2=y
-+CONFIG_RD_LZMA=y
-+CONFIG_CC_OPTIMIZE_FOR_SIZE=y
-+CONFIG_SYSCTL=y
-+CONFIG_ANON_INODES=y
-+# CONFIG_EMBEDDED is not set
-+CONFIG_UID16=y
-+CONFIG_SYSCTL_SYSCALL=y
-+CONFIG_KALLSYMS=y
-+# CONFIG_KALLSYMS_EXTRA_PASS is not set
-+CONFIG_STRIP_ASM_SYMS=y
-+CONFIG_HOTPLUG=y
-+CONFIG_PRINTK=y
-+CONFIG_BUG=y
-+CONFIG_ELF_CORE=y
-+CONFIG_BASE_FULL=y
-+CONFIG_FUTEX=y
-+CONFIG_EPOLL=y
-+CONFIG_SIGNALFD=y
-+CONFIG_TIMERFD=y
-+CONFIG_EVENTFD=y
-+CONFIG_SHMEM=y
-+CONFIG_AIO=y
-+CONFIG_VM_EVENT_COUNTERS=y
-+CONFIG_COMPAT_BRK=y
-+CONFIG_SLAB=y
-+# CONFIG_SLUB is not set
-+# CONFIG_SLOB is not set
-+# CONFIG_PROFILING is not set
-+# CONFIG_MARKERS is not set
-+CONFIG_HAVE_OPROFILE=y
-+# CONFIG_KPROBES is not set
-+CONFIG_HAVE_KPROBES=y
-+CONFIG_HAVE_KRETPROBES=y
-+CONFIG_HAVE_CLK=y
-+# CONFIG_SLOW_WORK is not set
-+CONFIG_HAVE_GENERIC_DMA_COHERENT=y
-+CONFIG_SLABINFO=y
-+CONFIG_RT_MUTEXES=y
-+CONFIG_BASE_SMALL=0
-+CONFIG_MODULES=y
-+# CONFIG_MODULE_FORCE_LOAD is not set
-+CONFIG_MODULE_UNLOAD=y
-+# CONFIG_MODULE_FORCE_UNLOAD is not set
-+# CONFIG_MODVERSIONS is not set
-+# CONFIG_MODULE_SRCVERSION_ALL is not set
-+CONFIG_BLOCK=y
-+# CONFIG_LBD is not set
-+# CONFIG_BLK_DEV_BSG is not set
-+# CONFIG_BLK_DEV_INTEGRITY is not set
-+
-+#
-+# IO Schedulers
-+#
-+CONFIG_IOSCHED_NOOP=y
-+CONFIG_IOSCHED_AS=y
-+# CONFIG_IOSCHED_DEADLINE is not set
-+# CONFIG_IOSCHED_CFQ is not set
-+CONFIG_DEFAULT_AS=y
-+# CONFIG_DEFAULT_DEADLINE is not set
-+# CONFIG_DEFAULT_CFQ is not set
-+# CONFIG_DEFAULT_NOOP is not set
-+CONFIG_DEFAULT_IOSCHED="anticipatory"
-+# CONFIG_FREEZER is not set
-+
-+#
-+# System Type
-+#
-+# CONFIG_ARCH_AAEC2000 is not set
-+# CONFIG_ARCH_INTEGRATOR is not set
-+# CONFIG_ARCH_REALVIEW is not set
-+# CONFIG_ARCH_VERSATILE is not set
-+CONFIG_ARCH_AT91=y
-+# CONFIG_ARCH_CLPS711X is not set
-+# CONFIG_ARCH_EBSA110 is not set
-+# CONFIG_ARCH_EP93XX is not set
-+# CONFIG_ARCH_GEMINI is not set
-+# CONFIG_ARCH_FOOTBRIDGE is not set
-+# CONFIG_ARCH_NETX is not set
-+# CONFIG_ARCH_H720X is not set
-+# CONFIG_ARCH_IMX is not set
-+# CONFIG_ARCH_IOP13XX is not set
-+# CONFIG_ARCH_IOP32X is not set
-+# CONFIG_ARCH_IOP33X is not set
-+# CONFIG_ARCH_IXP23XX is not set
-+# CONFIG_ARCH_IXP2000 is not set
-+# CONFIG_ARCH_IXP4XX is not set
-+# CONFIG_ARCH_L7200 is not set
-+# CONFIG_ARCH_KIRKWOOD is not set
-+# CONFIG_ARCH_KS8695 is not set
-+# CONFIG_ARCH_NS9XXX is not set
-+# CONFIG_ARCH_LOKI is not set
-+# CONFIG_ARCH_MV78XX0 is not set
-+# CONFIG_ARCH_MXC is not set
-+# CONFIG_ARCH_ORION5X is not set
-+# CONFIG_ARCH_PNX4008 is not set
-+# CONFIG_ARCH_PXA is not set
-+# CONFIG_ARCH_MMP is not set
-+# CONFIG_ARCH_RPC is not set
-+# CONFIG_ARCH_SA1100 is not set
-+# CONFIG_ARCH_S3C2410 is not set
-+# CONFIG_ARCH_S3C64XX is not set
-+# CONFIG_ARCH_SHARK is not set
-+# CONFIG_ARCH_LH7A40X is not set
-+# CONFIG_ARCH_DAVINCI is not set
-+# CONFIG_ARCH_OMAP is not set
-+# CONFIG_ARCH_MSM is not set
-+# CONFIG_ARCH_W90X900 is not set
-+
-+#
-+# Atmel AT91 System-on-Chip
-+#
-+# CONFIG_ARCH_AT91RM9200 is not set
-+# CONFIG_ARCH_AT91SAM9260 is not set
-+# CONFIG_ARCH_AT91SAM9261 is not set
-+# CONFIG_ARCH_AT91SAM9G10 is not set
-+# CONFIG_ARCH_AT91SAM9263 is not set
-+# CONFIG_ARCH_AT91SAM9RL is not set
-+# CONFIG_ARCH_AT91SAM9G20 is not set
-+# CONFIG_ARCH_AT91SAM9G45 is not set
-+CONFIG_ARCH_AT91SAM9M10=y
-+# CONFIG_ARCH_AT91CAP9 is not set
-+# CONFIG_ARCH_AT572D940HF is not set
-+# CONFIG_ARCH_AT91X40 is not set
-+CONFIG_AT91_PMC_UNIT=y
-+# CONFIG_MACH_AT91SAM9M10G45EK is not set
-+
-+#
-+# AT91SAM9M10 Board Type
-+#
-+CONFIG_MACH_AT91SAM9M10EKES=y
-+
-+#
-+# AT91 Board Options
-+#
-+# CONFIG_MTD_NAND_ATMEL_BUSWIDTH_16 is not set
-+CONFIG_MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH=y
-+CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE=124
-+CONFIG_MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE=y
-+
-+#
-+# AT91 Feature Selections
-+#
-+CONFIG_AT91_PROGRAMMABLE_CLOCKS=y
-+CONFIG_AT91_TIMER_HZ=100
-+CONFIG_AT91_EARLY_DBGU=y
-+# CONFIG_AT91_EARLY_USART0 is not set
-+# CONFIG_AT91_EARLY_USART1 is not set
-+# CONFIG_AT91_EARLY_USART2 is not set
-+# CONFIG_AT91_EARLY_USART3 is not set
-+# CONFIG_AT91_EARLY_USART4 is not set
-+# CONFIG_AT91_EARLY_USART5 is not set
-+
-+#
-+# Processor Type
-+#
-+CONFIG_CPU_32=y
-+CONFIG_CPU_ARM926T=y
-+CONFIG_CPU_32v5=y
-+CONFIG_CPU_ABRT_EV5TJ=y
-+CONFIG_CPU_PABRT_NOIFAR=y
-+CONFIG_CPU_CACHE_VIVT=y
-+CONFIG_CPU_COPY_V4WB=y
-+CONFIG_CPU_TLB_V4WBI=y
-+CONFIG_CPU_CP15=y
-+CONFIG_CPU_CP15_MMU=y
-+
-+#
-+# Processor Features
-+#
-+CONFIG_ARM_THUMB=y
-+# CONFIG_CPU_ICACHE_DISABLE is not set
-+# CONFIG_CPU_DCACHE_DISABLE is not set
-+# CONFIG_CPU_DCACHE_WRITETHROUGH is not set
-+# CONFIG_CPU_CACHE_ROUND_ROBIN is not set
-+# CONFIG_OUTER_CACHE is not set
-+
-+#
-+# Bus support
-+#
-+# CONFIG_PCI_SYSCALL is not set
-+# CONFIG_ARCH_SUPPORTS_MSI is not set
-+# CONFIG_PCCARD is not set
-+
-+#
-+# Kernel Features
-+#
-+# CONFIG_NO_HZ is not set
-+# CONFIG_HIGH_RES_TIMERS is not set
-+CONFIG_GENERIC_CLOCKEVENTS_BUILD=y
-+CONFIG_VMSPLIT_3G=y
-+# CONFIG_VMSPLIT_2G is not set
-+# CONFIG_VMSPLIT_1G is not set
-+CONFIG_PAGE_OFFSET=0xC0000000
-+# CONFIG_PREEMPT is not set
-+CONFIG_HZ=100
-+CONFIG_AEABI=y
-+CONFIG_OABI_COMPAT=y
-+# CONFIG_ARCH_HAS_HOLES_MEMORYMODEL is not set
-+# CONFIG_ARCH_SPARSEMEM_DEFAULT is not set
-+# CONFIG_ARCH_SELECT_MEMORY_MODEL is not set
-+# CONFIG_HIGHMEM is not set
-+CONFIG_SELECT_MEMORY_MODEL=y
-+CONFIG_FLATMEM_MANUAL=y
-+# CONFIG_DISCONTIGMEM_MANUAL is not set
-+# CONFIG_SPARSEMEM_MANUAL is not set
-+CONFIG_FLATMEM=y
-+CONFIG_FLAT_NODE_MEM_MAP=y
-+CONFIG_PAGEFLAGS_EXTENDED=y
-+CONFIG_SPLIT_PTLOCK_CPUS=4096
-+# CONFIG_PHYS_ADDR_T_64BIT is not set
-+CONFIG_ZONE_DMA_FLAG=0
-+CONFIG_VIRT_TO_BUS=y
-+CONFIG_UNEVICTABLE_LRU=y
-+CONFIG_HAVE_MLOCK=y
-+CONFIG_HAVE_MLOCKED_PAGE_BIT=y
-+CONFIG_LEDS=y
-+CONFIG_LEDS_CPU=y
-+CONFIG_ALIGNMENT_TRAP=y
-+
-+#
-+# Boot options
-+#
-+CONFIG_ZBOOT_ROM_TEXT=0x0
-+CONFIG_ZBOOT_ROM_BSS=0x0
-+CONFIG_CMDLINE="mem=64M console=ttyS0,115200 initrd=0x71100000,25165824 root=/dev/ram0 rw"
-+# CONFIG_XIP_KERNEL is not set
-+# CONFIG_KEXEC is not set
-+
-+#
-+# CPU Power Management
-+#
-+# CONFIG_CPU_IDLE is not set
-+
-+#
-+# Floating point emulation
-+#
-+
-+#
-+# At least one emulation must be selected
-+#
-+CONFIG_FPE_NWFPE=y
-+# CONFIG_FPE_NWFPE_XP is not set
-+# CONFIG_FPE_FASTFPE is not set
-+# CONFIG_VFP is not set
-+
-+#
-+# Userspace binary formats
-+#
-+CONFIG_BINFMT_ELF=y
-+# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
-+CONFIG_HAVE_AOUT=y
-+# CONFIG_BINFMT_AOUT is not set
-+# CONFIG_BINFMT_MISC is not set
-+
-+#
-+# Power management options
-+#
-+# CONFIG_PM is not set
-+CONFIG_ARCH_SUSPEND_POSSIBLE=y
-+CONFIG_NET=y
-+
-+#
-+# Networking options
-+#
-+CONFIG_PACKET=y
-+# CONFIG_PACKET_MMAP is not set
-+CONFIG_UNIX=y
-+# CONFIG_NET_KEY is not set
-+CONFIG_INET=y
-+CONFIG_IP_MULTICAST=y
-+# CONFIG_IP_ADVANCED_ROUTER is not set
-+CONFIG_IP_FIB_HASH=y
-+# CONFIG_IP_PNP is not set
-+# CONFIG_NET_IPIP is not set
-+# CONFIG_NET_IPGRE is not set
-+# CONFIG_IP_MROUTE is not set
-+# CONFIG_ARPD is not set
-+# CONFIG_SYN_COOKIES is not set
-+# CONFIG_INET_AH is not set
-+# CONFIG_INET_ESP is not set
-+# CONFIG_INET_IPCOMP is not set
-+# CONFIG_INET_XFRM_TUNNEL is not set
-+# CONFIG_INET_TUNNEL is not set
-+# CONFIG_INET_XFRM_MODE_TRANSPORT is not set
-+# CONFIG_INET_XFRM_MODE_TUNNEL is not set
-+# CONFIG_INET_XFRM_MODE_BEET is not set
-+# CONFIG_INET_LRO is not set
-+# CONFIG_INET_DIAG is not set
-+# CONFIG_TCP_CONG_ADVANCED is not set
-+CONFIG_TCP_CONG_CUBIC=y
-+CONFIG_DEFAULT_TCP_CONG="cubic"
-+# CONFIG_TCP_MD5SIG is not set
-+# CONFIG_IPV6 is not set
-+# CONFIG_NETWORK_SECMARK is not set
-+# CONFIG_NETFILTER is not set
-+# CONFIG_IP_DCCP is not set
-+# CONFIG_IP_SCTP is not set
-+# CONFIG_TIPC is not set
-+# CONFIG_ATM is not set
-+# CONFIG_BRIDGE is not set
-+# CONFIG_NET_DSA is not set
-+# CONFIG_VLAN_8021Q is not set
-+# CONFIG_DECNET is not set
-+# CONFIG_LLC2 is not set
-+# CONFIG_IPX is not set
-+# CONFIG_ATALK is not set
-+# CONFIG_X25 is not set
-+# CONFIG_LAPB is not set
-+# CONFIG_ECONET is not set
-+# CONFIG_WAN_ROUTER is not set
-+# CONFIG_PHONET is not set
-+# CONFIG_NET_SCHED is not set
-+# CONFIG_DCB is not set
-+
-+#
-+# Network testing
-+#
-+# CONFIG_NET_PKTGEN is not set
-+# CONFIG_HAMRADIO is not set
-+# CONFIG_CAN is not set
-+# CONFIG_IRDA is not set
-+# CONFIG_BT is not set
-+# CONFIG_AF_RXRPC is not set
-+CONFIG_WIRELESS=y
-+CONFIG_CFG80211=y
-+# CONFIG_CFG80211_REG_DEBUG is not set
-+# CONFIG_WIRELESS_OLD_REGULATORY is not set
-+CONFIG_WIRELESS_EXT=y
-+CONFIG_WIRELESS_EXT_SYSFS=y
-+CONFIG_LIB80211=y
-+# CONFIG_LIB80211_DEBUG is not set
-+CONFIG_MAC80211=y
-+
-+#
-+# Rate control algorithm selection
-+#
-+CONFIG_MAC80211_RC_MINSTREL=y
-+# CONFIG_MAC80211_RC_DEFAULT_PID is not set
-+CONFIG_MAC80211_RC_DEFAULT_MINSTREL=y
-+CONFIG_MAC80211_RC_DEFAULT="minstrel"
-+# CONFIG_MAC80211_MESH is not set
-+# CONFIG_MAC80211_LEDS is not set
-+# CONFIG_MAC80211_DEBUG_MENU is not set
-+# CONFIG_WIMAX is not set
-+# CONFIG_RFKILL is not set
-+# CONFIG_NET_9P is not set
-+
-+#
-+# Device Drivers
-+#
-+
-+#
-+# Generic Driver Options
-+#
-+CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
-+CONFIG_STANDALONE=y
-+CONFIG_PREVENT_FIRMWARE_BUILD=y
-+CONFIG_FW_LOADER=y
-+CONFIG_FIRMWARE_IN_KERNEL=y
-+CONFIG_EXTRA_FIRMWARE=""
-+# CONFIG_SYS_HYPERVISOR is not set
-+# CONFIG_CONNECTOR is not set
-+CONFIG_MTD=y
-+# CONFIG_MTD_DEBUG is not set
-+# CONFIG_MTD_CONCAT is not set
-+CONFIG_MTD_PARTITIONS=y
-+# CONFIG_MTD_TESTS is not set
-+# CONFIG_MTD_REDBOOT_PARTS is not set
-+CONFIG_MTD_CMDLINE_PARTS=y
-+# CONFIG_MTD_AFS_PARTS is not set
-+# CONFIG_MTD_AR7_PARTS is not set
-+
-+#
-+# User Modules And Translation Layers
-+#
-+CONFIG_MTD_CHAR=y
-+CONFIG_MTD_BLKDEVS=y
-+CONFIG_MTD_BLOCK=y
-+# CONFIG_FTL is not set
-+# CONFIG_NFTL is not set
-+# CONFIG_INFTL is not set
-+# CONFIG_RFD_FTL is not set
-+# CONFIG_SSFDC is not set
-+# CONFIG_MTD_OOPS is not set
-+
-+#
-+# RAM/ROM/Flash chip drivers
-+#
-+# CONFIG_MTD_CFI is not set
-+# CONFIG_MTD_JEDECPROBE is not set
-+CONFIG_MTD_MAP_BANK_WIDTH_1=y
-+CONFIG_MTD_MAP_BANK_WIDTH_2=y
-+CONFIG_MTD_MAP_BANK_WIDTH_4=y
-+# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
-+# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
-+# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
-+CONFIG_MTD_CFI_I1=y
-+CONFIG_MTD_CFI_I2=y
-+# CONFIG_MTD_CFI_I4 is not set
-+# CONFIG_MTD_CFI_I8 is not set
-+# CONFIG_MTD_RAM is not set
-+# CONFIG_MTD_ROM is not set
-+# CONFIG_MTD_ABSENT is not set
-+
-+#
-+# Mapping drivers for chip access
-+#
-+# CONFIG_MTD_COMPLEX_MAPPINGS is not set
-+# CONFIG_MTD_PLATRAM is not set
-+
-+#
-+# Self-contained MTD device drivers
-+#
-+CONFIG_MTD_DATAFLASH=y
-+# CONFIG_MTD_DATAFLASH_WRITE_VERIFY is not set
-+# CONFIG_MTD_DATAFLASH_OTP is not set
-+# CONFIG_MTD_M25P80 is not set
-+# CONFIG_MTD_SLRAM is not set
-+# CONFIG_MTD_PHRAM is not set
-+# CONFIG_MTD_MTDRAM is not set
-+# CONFIG_MTD_BLOCK2MTD is not set
-+
-+#
-+# Disk-On-Chip Device Drivers
-+#
-+# CONFIG_MTD_DOC2000 is not set
-+# CONFIG_MTD_DOC2001 is not set
-+# CONFIG_MTD_DOC2001PLUS is not set
-+CONFIG_MTD_NAND=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
-+# CONFIG_MTD_NAND_ECC_SMC is not set
-+# CONFIG_MTD_NAND_MUSEUM_IDS is not set
-+# CONFIG_MTD_NAND_GPIO is not set
-+CONFIG_MTD_NAND_IDS=y
-+# CONFIG_MTD_NAND_DISKONCHIP is not set
-+CONFIG_MTD_NAND_ATMEL=y
-+CONFIG_MTD_NAND_ATMEL_ECC_SOFT=y
-+# CONFIG_MTD_NAND_ATMEL_ECC_HW is not set
-+# CONFIG_MTD_NAND_ATMEL_ECC_NONE is not set
-+# CONFIG_MTD_NAND_NANDSIM is not set
-+# CONFIG_MTD_NAND_PLATFORM is not set
-+# CONFIG_MTD_ALAUDA is not set
-+# CONFIG_MTD_ONENAND is not set
-+
-+#
-+# LPDDR flash memory drivers
-+#
-+# CONFIG_MTD_LPDDR is not set
-+
-+#
-+# UBI - Unsorted block images
-+#
-+# CONFIG_MTD_UBI is not set
-+# CONFIG_PARPORT is not set
-+CONFIG_BLK_DEV=y
-+# CONFIG_BLK_DEV_COW_COMMON is not set
-+CONFIG_BLK_DEV_LOOP=y
-+# CONFIG_BLK_DEV_CRYPTOLOOP is not set
-+# CONFIG_BLK_DEV_NBD is not set
-+# CONFIG_BLK_DEV_UB is not set
-+CONFIG_BLK_DEV_RAM=y
-+CONFIG_BLK_DEV_RAM_COUNT=4
-+CONFIG_BLK_DEV_RAM_SIZE=8192
-+# CONFIG_BLK_DEV_XIP is not set
-+# CONFIG_CDROM_PKTCDVD is not set
-+# CONFIG_ATA_OVER_ETH is not set
-+CONFIG_MISC_DEVICES=y
-+CONFIG_ATMEL_TCLIB=y
-+CONFIG_ATMEL_TCB_CLKSRC=y
-+CONFIG_ATMEL_TCB_CLKSRC_BLOCK=0
-+# CONFIG_ICS932S401 is not set
-+# CONFIG_ATMEL_SSC is not set
-+# CONFIG_ENCLOSURE_SERVICES is not set
-+# CONFIG_ISL29003 is not set
-+# CONFIG_C2PORT is not set
-+
-+#
-+# EEPROM support
-+#
-+CONFIG_EEPROM_AT24=y
-+# CONFIG_EEPROM_AT25 is not set
-+# CONFIG_EEPROM_LEGACY is not set
-+CONFIG_EEPROM_93CX6=m
-+CONFIG_HAVE_IDE=y
-+# CONFIG_IDE is not set
-+
-+#
-+# SCSI device support
-+#
-+# CONFIG_RAID_ATTRS is not set
-+CONFIG_SCSI=y
-+CONFIG_SCSI_DMA=y
-+# CONFIG_SCSI_TGT is not set
-+# CONFIG_SCSI_NETLINK is not set
-+CONFIG_SCSI_PROC_FS=y
-+
-+#
-+# SCSI support type (disk, tape, CD-ROM)
-+#
-+CONFIG_BLK_DEV_SD=y
-+# CONFIG_CHR_DEV_ST is not set
-+# CONFIG_CHR_DEV_OSST is not set
-+# CONFIG_BLK_DEV_SR is not set
-+# CONFIG_CHR_DEV_SG is not set
-+# CONFIG_CHR_DEV_SCH is not set
-+
-+#
-+# Some SCSI devices (e.g. CD jukebox) support multiple LUNs
-+#
-+CONFIG_SCSI_MULTI_LUN=y
-+# CONFIG_SCSI_CONSTANTS is not set
-+# CONFIG_SCSI_LOGGING is not set
-+# CONFIG_SCSI_SCAN_ASYNC is not set
-+CONFIG_SCSI_WAIT_SCAN=m
-+
-+#
-+# SCSI Transports
-+#
-+# CONFIG_SCSI_SPI_ATTRS is not set
-+# CONFIG_SCSI_FC_ATTRS is not set
-+# CONFIG_SCSI_ISCSI_ATTRS is not set
-+# CONFIG_SCSI_SAS_LIBSAS is not set
-+# CONFIG_SCSI_SRP_ATTRS is not set
-+# CONFIG_SCSI_LOWLEVEL is not set
-+CONFIG_SCSI_DH=y
-+# CONFIG_SCSI_DH_RDAC is not set
-+# CONFIG_SCSI_DH_HP_SW is not set
-+# CONFIG_SCSI_DH_EMC is not set
-+# CONFIG_SCSI_DH_ALUA is not set
-+# CONFIG_SCSI_OSD_INITIATOR is not set
-+# CONFIG_ATA is not set
-+# CONFIG_MD is not set
-+CONFIG_NETDEVICES=y
-+CONFIG_COMPAT_NET_DEV_OPS=y
-+# CONFIG_DUMMY is not set
-+# CONFIG_BONDING is not set
-+# CONFIG_MACVLAN is not set
-+# CONFIG_EQUALIZER is not set
-+# CONFIG_TUN is not set
-+# CONFIG_VETH is not set
-+CONFIG_PHYLIB=y
-+
-+#
-+# MII PHY device drivers
-+#
-+# CONFIG_MARVELL_PHY is not set
-+CONFIG_DAVICOM_PHY=y
-+# CONFIG_QSEMI_PHY is not set
-+# CONFIG_LXT_PHY is not set
-+# CONFIG_CICADA_PHY is not set
-+# CONFIG_VITESSE_PHY is not set
-+# CONFIG_SMSC_PHY is not set
-+# CONFIG_BROADCOM_PHY is not set
-+# CONFIG_ICPLUS_PHY is not set
-+# CONFIG_REALTEK_PHY is not set
-+# CONFIG_NATIONAL_PHY is not set
-+# CONFIG_STE10XP is not set
-+# CONFIG_LSI_ET1011C_PHY is not set
-+# CONFIG_FIXED_PHY is not set
-+# CONFIG_MDIO_BITBANG is not set
-+CONFIG_NET_ETHERNET=y
-+CONFIG_MII=y
-+CONFIG_MACB=y
-+# CONFIG_AX88796 is not set
-+# CONFIG_SMC91X is not set
-+# CONFIG_DM9000 is not set
-+# CONFIG_ENC28J60 is not set
-+# CONFIG_ETHOC is not set
-+# CONFIG_SMC911X is not set
-+# CONFIG_SMSC911X is not set
-+# CONFIG_DNET is not set
-+# CONFIG_IBM_NEW_EMAC_ZMII is not set
-+# CONFIG_IBM_NEW_EMAC_RGMII is not set
-+# CONFIG_IBM_NEW_EMAC_TAH is not set
-+# CONFIG_IBM_NEW_EMAC_EMAC4 is not set
-+# CONFIG_IBM_NEW_EMAC_NO_FLOW_CTRL is not set
-+# CONFIG_IBM_NEW_EMAC_MAL_CLR_ICINTSTAT is not set
-+# CONFIG_IBM_NEW_EMAC_MAL_COMMON_ERR is not set
-+# CONFIG_B44 is not set
-+# CONFIG_NETDEV_1000 is not set
-+# CONFIG_NETDEV_10000 is not set
-+
-+#
-+# Wireless LAN
-+#
-+# CONFIG_WLAN_PRE80211 is not set
-+CONFIG_WLAN_80211=y
-+CONFIG_LIBERTAS=m
-+CONFIG_LIBERTAS_USB=m
-+CONFIG_LIBERTAS_SDIO=m
-+CONFIG_LIBERTAS_SPI=m
-+# CONFIG_LIBERTAS_DEBUG is not set
-+# CONFIG_LIBERTAS_THINFIRM is not set
-+# CONFIG_AT76C50X_USB is not set
-+CONFIG_USB_ZD1201=m
-+# CONFIG_USB_NET_RNDIS_WLAN is not set
-+CONFIG_RTL8187=m
-+# CONFIG_MAC80211_HWSIM is not set
-+# CONFIG_P54_COMMON is not set
-+CONFIG_AR9170_USB=m
-+# CONFIG_HOSTAP is not set
-+# CONFIG_B43 is not set
-+# CONFIG_B43LEGACY is not set
-+CONFIG_ZD1211RW=m
-+# CONFIG_ZD1211RW_DEBUG is not set
-+CONFIG_RT2X00=m
-+CONFIG_RT2500USB=m
-+CONFIG_RT73USB=m
-+CONFIG_RT2X00_LIB_USB=m
-+CONFIG_RT2X00_LIB=m
-+CONFIG_RT2X00_LIB_FIRMWARE=y
-+CONFIG_RT2X00_LIB_CRYPTO=y
-+CONFIG_RT2X00_LIB_RFKILL=y
-+CONFIG_RT2X00_LIB_LEDS=y
-+# CONFIG_RT2X00_DEBUG is not set
-+
-+#
-+# Enable WiMAX (Networking options) to see the WiMAX drivers
-+#
-+
-+#
-+# USB Network Adapters
-+#
-+# CONFIG_USB_CATC is not set
-+# CONFIG_USB_KAWETH is not set
-+# CONFIG_USB_PEGASUS is not set
-+# CONFIG_USB_RTL8150 is not set
-+# CONFIG_USB_USBNET is not set
-+# CONFIG_WAN is not set
-+# CONFIG_PPP is not set
-+# CONFIG_SLIP is not set
-+# CONFIG_NETCONSOLE is not set
-+# CONFIG_NETPOLL is not set
-+# CONFIG_NET_POLL_CONTROLLER is not set
-+# CONFIG_ISDN is not set
-+
-+#
-+# Input device support
-+#
-+CONFIG_INPUT=y
-+# CONFIG_INPUT_FF_MEMLESS is not set
-+CONFIG_INPUT_POLLDEV=m
-+
-+#
-+# Userland interfaces
-+#
-+CONFIG_INPUT_MOUSEDEV=y
-+# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
-+CONFIG_INPUT_MOUSEDEV_SCREEN_X=480
-+CONFIG_INPUT_MOUSEDEV_SCREEN_Y=272
-+CONFIG_INPUT_JOYDEV=y
-+CONFIG_INPUT_EVDEV=y
-+# CONFIG_INPUT_EVBUG is not set
-+
-+#
-+# Input Device Drivers
-+#
-+CONFIG_INPUT_KEYBOARD=y
-+# CONFIG_KEYBOARD_ATKBD is not set
-+# CONFIG_KEYBOARD_SUNKBD is not set
-+# CONFIG_KEYBOARD_LKKBD is not set
-+# CONFIG_KEYBOARD_XTKBD is not set
-+# CONFIG_KEYBOARD_NEWTON is not set
-+# CONFIG_KEYBOARD_STOWAWAY is not set
-+CONFIG_KEYBOARD_GPIO=y
-+# CONFIG_INPUT_MOUSE is not set
-+# CONFIG_INPUT_JOYSTICK is not set
-+# CONFIG_INPUT_TABLET is not set
-+CONFIG_INPUT_TOUCHSCREEN=y
-+# CONFIG_TOUCHSCREEN_ADS7846 is not set
-+# CONFIG_TOUCHSCREEN_AD7877 is not set
-+# CONFIG_TOUCHSCREEN_AD7879_I2C is not set
-+# CONFIG_TOUCHSCREEN_AD7879_SPI is not set
-+# CONFIG_TOUCHSCREEN_AD7879 is not set
-+# CONFIG_TOUCHSCREEN_FUJITSU is not set
-+# CONFIG_TOUCHSCREEN_GUNZE is not set
-+# CONFIG_TOUCHSCREEN_ELO is not set
-+# CONFIG_TOUCHSCREEN_WACOM_W8001 is not set
-+# CONFIG_TOUCHSCREEN_MTOUCH is not set
-+# CONFIG_TOUCHSCREEN_INEXIO is not set
-+# CONFIG_TOUCHSCREEN_MK712 is not set
-+# CONFIG_TOUCHSCREEN_PENMOUNT is not set
-+# CONFIG_TOUCHSCREEN_TOUCHRIGHT is not set
-+# CONFIG_TOUCHSCREEN_TOUCHWIN is not set
-+CONFIG_TOUCHSCREEN_ATMEL_TSADCC=y
-+# CONFIG_TOUCHSCREEN_WM97XX is not set
-+# CONFIG_TOUCHSCREEN_USB_COMPOSITE is not set
-+# CONFIG_TOUCHSCREEN_TOUCHIT213 is not set
-+# CONFIG_TOUCHSCREEN_TSC2007 is not set
-+# CONFIG_INPUT_MISC is not set
-+
-+#
-+# Hardware I/O ports
-+#
-+# CONFIG_SERIO is not set
-+# CONFIG_GAMEPORT is not set
-+
-+#
-+# Character devices
-+#
-+CONFIG_VT=y
-+CONFIG_CONSOLE_TRANSLATIONS=y
-+CONFIG_VT_CONSOLE=y
-+CONFIG_HW_CONSOLE=y
-+# CONFIG_VT_HW_CONSOLE_BINDING is not set
-+CONFIG_DEVKMEM=y
-+# CONFIG_SERIAL_NONSTANDARD is not set
-+
-+#
-+# Serial drivers
-+#
-+# CONFIG_SERIAL_8250 is not set
-+
-+#
-+# Non-8250 serial port support
-+#
-+CONFIG_SERIAL_ATMEL=y
-+CONFIG_SERIAL_ATMEL_CONSOLE=y
-+CONFIG_SERIAL_ATMEL_PDC=y
-+# CONFIG_SERIAL_ATMEL_TTYAT is not set
-+# CONFIG_SERIAL_MAX3100 is not set
-+CONFIG_SERIAL_CORE=y
-+CONFIG_SERIAL_CORE_CONSOLE=y
-+CONFIG_UNIX98_PTYS=y
-+# CONFIG_DEVPTS_MULTIPLE_INSTANCES is not set
-+CONFIG_LEGACY_PTYS=y
-+CONFIG_LEGACY_PTY_COUNT=4
-+# CONFIG_IPMI_HANDLER is not set
-+CONFIG_HW_RANDOM=y
-+# CONFIG_HW_RANDOM_TIMERIOMEM is not set
-+# CONFIG_R3964 is not set
-+# CONFIG_RAW_DRIVER is not set
-+# CONFIG_TCG_TPM is not set
-+CONFIG_I2C=y
-+CONFIG_I2C_BOARDINFO=y
-+# CONFIG_I2C_CHARDEV is not set
-+CONFIG_I2C_HELPER_AUTO=y
-+CONFIG_I2C_ALGOBIT=y
-+
-+#
-+# I2C Hardware Bus support
-+#
-+
-+#
-+# I2C system bus drivers (mostly embedded / system-on-chip)
-+#
-+CONFIG_I2C_GPIO=y
-+# CONFIG_I2C_OCORES is not set
-+# CONFIG_I2C_SIMTEC is not set
-+
-+#
-+# External I2C/SMBus adapter drivers
-+#
-+# CONFIG_I2C_PARPORT_LIGHT is not set
-+# CONFIG_I2C_TAOS_EVM is not set
-+# CONFIG_I2C_TINY_USB is not set
-+
-+#
-+# Other I2C/SMBus bus drivers
-+#
-+# CONFIG_I2C_PCA_PLATFORM is not set
-+# CONFIG_I2C_STUB is not set
-+
-+#
-+# Miscellaneous I2C Chip support
-+#
-+# CONFIG_DS1682 is not set
-+# CONFIG_SENSORS_PCF8574 is not set
-+# CONFIG_PCF8575 is not set
-+# CONFIG_SENSORS_PCA9539 is not set
-+# CONFIG_SENSORS_MAX6875 is not set
-+# CONFIG_SENSORS_TSL2550 is not set
-+# CONFIG_I2C_DEBUG_CORE is not set
-+# CONFIG_I2C_DEBUG_ALGO is not set
-+# CONFIG_I2C_DEBUG_BUS is not set
-+# CONFIG_I2C_DEBUG_CHIP is not set
-+CONFIG_SPI=y
-+CONFIG_SPI_MASTER=y
-+
-+#
-+# SPI Master Controller Drivers
-+#
-+CONFIG_SPI_ATMEL=y
-+# CONFIG_SPI_BITBANG is not set
-+# CONFIG_SPI_GPIO is not set
-+
-+#
-+# SPI Protocol Masters
-+#
-+# CONFIG_SPI_SPIDEV is not set
-+# CONFIG_SPI_TLE62X0 is not set
-+CONFIG_ARCH_REQUIRE_GPIOLIB=y
-+CONFIG_GPIOLIB=y
-+# CONFIG_GPIO_SYSFS is not set
-+
-+#
-+# Memory mapped GPIO expanders:
-+#
-+
-+#
-+# I2C GPIO expanders:
-+#
-+# CONFIG_GPIO_MAX732X is not set
-+# CONFIG_GPIO_PCA953X is not set
-+# CONFIG_GPIO_PCF857X is not set
-+
-+#
-+# PCI GPIO expanders:
-+#
-+
-+#
-+# SPI GPIO expanders:
-+#
-+# CONFIG_GPIO_MAX7301 is not set
-+# CONFIG_GPIO_MCP23S08 is not set
-+# CONFIG_W1 is not set
-+# CONFIG_POWER_SUPPLY is not set
-+# CONFIG_HWMON is not set
-+# CONFIG_THERMAL is not set
-+# CONFIG_THERMAL_HWMON is not set
-+# CONFIG_WATCHDOG is not set
-+CONFIG_SSB_POSSIBLE=y
-+
-+#
-+# Sonics Silicon Backplane
-+#
-+# CONFIG_SSB is not set
-+
-+#
-+# Multifunction device drivers
-+#
-+# CONFIG_MFD_CORE is not set
-+# CONFIG_MFD_SM501 is not set
-+# CONFIG_MFD_ASIC3 is not set
-+# CONFIG_HTC_EGPIO is not set
-+# CONFIG_HTC_PASIC3 is not set
-+# CONFIG_UCB1400_CORE is not set
-+# CONFIG_TPS65010 is not set
-+# CONFIG_TWL4030_CORE is not set
-+# CONFIG_MFD_TMIO is not set
-+# CONFIG_MFD_T7L66XB is not set
-+# CONFIG_MFD_TC6387XB is not set
-+# CONFIG_MFD_TC6393XB is not set
-+# CONFIG_PMIC_DA903X is not set
-+# CONFIG_MFD_WM8400 is not set
-+# CONFIG_MFD_WM8350_I2C is not set
-+# CONFIG_MFD_PCF50633 is not set
-+
-+#
-+# Multimedia devices
-+#
-+
-+#
-+# Multimedia core support
-+#
-+# CONFIG_VIDEO_DEV is not set
-+# CONFIG_DVB_CORE is not set
-+# CONFIG_VIDEO_MEDIA is not set
-+
-+#
-+# Multimedia drivers
-+#
-+# CONFIG_DAB is not set
-+
-+#
-+# Graphics support
-+#
-+# CONFIG_VGASTATE is not set
-+# CONFIG_VIDEO_OUTPUT_CONTROL is not set
-+CONFIG_FB=y
-+# CONFIG_FIRMWARE_EDID is not set
-+# CONFIG_FB_DDC is not set
-+# CONFIG_FB_BOOT_VESA_SUPPORT is not set
-+CONFIG_FB_CFB_FILLRECT=y
-+CONFIG_FB_CFB_COPYAREA=y
-+CONFIG_FB_CFB_IMAGEBLIT=y
-+# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
-+# CONFIG_FB_SYS_FILLRECT is not set
-+# CONFIG_FB_SYS_COPYAREA is not set
-+# CONFIG_FB_SYS_IMAGEBLIT is not set
-+# CONFIG_FB_FOREIGN_ENDIAN is not set
-+# CONFIG_FB_SYS_FOPS is not set
-+# CONFIG_FB_SVGALIB is not set
-+# CONFIG_FB_MACMODES is not set
-+# CONFIG_FB_BACKLIGHT is not set
-+# CONFIG_FB_MODE_HELPERS is not set
-+# CONFIG_FB_TILEBLITTING is not set
-+
-+#
-+# Frame buffer hardware drivers
-+#
-+# CONFIG_FB_S1D15605 is not set
-+# CONFIG_FB_S1D13XXX is not set
-+CONFIG_FB_ATMEL=y
-+# CONFIG_FB_VIRTUAL is not set
-+# CONFIG_FB_METRONOME is not set
-+# CONFIG_FB_MB862XX is not set
-+# CONFIG_FB_BROADSHEET is not set
-+CONFIG_BACKLIGHT_LCD_SUPPORT=y
-+# CONFIG_LCD_CLASS_DEVICE is not set
-+CONFIG_BACKLIGHT_CLASS_DEVICE=y
-+CONFIG_BACKLIGHT_ATMEL_LCDC=y
-+# CONFIG_BACKLIGHT_GENERIC is not set
-+
-+#
-+# Display device support
-+#
-+# CONFIG_DISPLAY_SUPPORT is not set
-+
-+#
-+# Console display driver support
-+#
-+# CONFIG_VGA_CONSOLE is not set
-+CONFIG_DUMMY_CONSOLE=y
-+# CONFIG_FRAMEBUFFER_CONSOLE is not set
-+CONFIG_LOGO=y
-+# CONFIG_LOGO_LINUX_MONO is not set
-+# CONFIG_LOGO_LINUX_VGA16 is not set
-+CONFIG_LOGO_LINUX_CLUT224=y
-+CONFIG_SOUND=y
-+CONFIG_SOUND_OSS_CORE=y
-+CONFIG_SND=y
-+CONFIG_SND_TIMER=y
-+CONFIG_SND_PCM=y
-+CONFIG_SND_HWDEP=m
-+CONFIG_SND_RAWMIDI=m
-+CONFIG_SND_SEQUENCER=y
-+# CONFIG_SND_SEQ_DUMMY is not set
-+CONFIG_SND_OSSEMUL=y
-+CONFIG_SND_MIXER_OSS=y
-+CONFIG_SND_PCM_OSS=y
-+CONFIG_SND_PCM_OSS_PLUGINS=y
-+# CONFIG_SND_SEQUENCER_OSS is not set
-+# CONFIG_SND_DYNAMIC_MINORS is not set
-+# CONFIG_SND_SUPPORT_OLD_API is not set
-+# CONFIG_SND_VERBOSE_PROCFS is not set
-+# CONFIG_SND_VERBOSE_PRINTK is not set
-+# CONFIG_SND_DEBUG is not set
-+CONFIG_SND_VMASTER=y
-+CONFIG_SND_AC97_CODEC=y
-+# CONFIG_SND_DRIVERS is not set
-+# CONFIG_SND_ARM is not set
-+
-+#
-+# Atmel devices (AVR32 and AT91)
-+#
-+CONFIG_SND_ATMEL_AC97C=y
-+# CONFIG_SND_SPI is not set
-+CONFIG_SND_USB=y
-+CONFIG_SND_USB_AUDIO=m
-+# CONFIG_SND_USB_CAIAQ is not set
-+# CONFIG_SND_SOC is not set
-+# CONFIG_SOUND_PRIME is not set
-+CONFIG_AC97_BUS=y
-+CONFIG_HID_SUPPORT=y
-+CONFIG_HID=y
-+# CONFIG_HID_DEBUG is not set
-+# CONFIG_HIDRAW is not set
-+
-+#
-+# USB Input Devices
-+#
-+# CONFIG_USB_HID is not set
-+# CONFIG_HID_PID is not set
-+
-+#
-+# Special HID drivers
-+#
-+CONFIG_USB_SUPPORT=y
-+CONFIG_USB_ARCH_HAS_HCD=y
-+CONFIG_USB_ARCH_HAS_OHCI=y
-+CONFIG_USB_ARCH_HAS_EHCI=y
-+CONFIG_USB=y
-+# CONFIG_USB_DEBUG is not set
-+CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
-+
-+#
-+# Miscellaneous USB options
-+#
-+CONFIG_USB_DEVICEFS=y
-+# CONFIG_USB_DEVICE_CLASS is not set
-+# CONFIG_USB_DYNAMIC_MINORS is not set
-+# CONFIG_USB_OTG is not set
-+# CONFIG_USB_MON is not set
-+# CONFIG_USB_WUSB is not set
-+# CONFIG_USB_WUSB_CBAF is not set
-+
-+#
-+# USB Host Controller Drivers
-+#
-+# CONFIG_USB_C67X00_HCD is not set
-+CONFIG_USB_EHCI_HCD=y
-+# CONFIG_USB_EHCI_ROOT_HUB_TT is not set
-+# CONFIG_USB_EHCI_TT_NEWSCHED is not set
-+# CONFIG_USB_OXU210HP_HCD is not set
-+# CONFIG_USB_ISP116X_HCD is not set
-+# CONFIG_USB_ISP1760_HCD is not set
-+CONFIG_USB_OHCI_HCD=y
-+# CONFIG_USB_OHCI_BIG_ENDIAN_DESC is not set
-+# CONFIG_USB_OHCI_BIG_ENDIAN_MMIO is not set
-+CONFIG_USB_OHCI_LITTLE_ENDIAN=y
-+# CONFIG_USB_SL811_HCD is not set
-+# CONFIG_USB_R8A66597_HCD is not set
-+# CONFIG_USB_HWA_HCD is not set
-+# CONFIG_USB_MUSB_HDRC is not set
-+# CONFIG_USB_GADGET_MUSB_HDRC is not set
-+
-+#
-+# USB Device Class drivers
-+#
-+# CONFIG_USB_ACM is not set
-+# CONFIG_USB_PRINTER is not set
-+# CONFIG_USB_WDM is not set
-+# CONFIG_USB_TMC is not set
-+
-+#
-+# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may
-+#
-+
-+#
-+# also be needed; see USB_STORAGE Help for more info
-+#
-+CONFIG_USB_STORAGE=y
-+# CONFIG_USB_STORAGE_DEBUG is not set
-+# CONFIG_USB_STORAGE_DATAFAB is not set
-+# CONFIG_USB_STORAGE_FREECOM is not set
-+# CONFIG_USB_STORAGE_ISD200 is not set
-+# CONFIG_USB_STORAGE_USBAT is not set
-+# CONFIG_USB_STORAGE_SDDR09 is not set
-+# CONFIG_USB_STORAGE_SDDR55 is not set
-+# CONFIG_USB_STORAGE_JUMPSHOT is not set
-+# CONFIG_USB_STORAGE_ALAUDA is not set
-+# CONFIG_USB_STORAGE_ONETOUCH is not set
-+# CONFIG_USB_STORAGE_KARMA is not set
-+# CONFIG_USB_STORAGE_CYPRESS_ATACB is not set
-+# CONFIG_USB_LIBUSUAL is not set
-+
-+#
-+# USB Imaging devices
-+#
-+# CONFIG_USB_MDC800 is not set
-+# CONFIG_USB_MICROTEK is not set
-+
-+#
-+# USB port drivers
-+#
-+# CONFIG_USB_SERIAL is not set
-+
-+#
-+# USB Miscellaneous drivers
-+#
-+# CONFIG_USB_EMI62 is not set
-+# CONFIG_USB_EMI26 is not set
-+# CONFIG_USB_ADUTUX is not set
-+# CONFIG_USB_SEVSEG is not set
-+# CONFIG_USB_RIO500 is not set
-+# CONFIG_USB_LEGOTOWER is not set
-+# CONFIG_USB_LCD is not set
-+# CONFIG_USB_BERRY_CHARGE is not set
-+# CONFIG_USB_LED is not set
-+# CONFIG_USB_CYPRESS_CY7C63 is not set
-+# CONFIG_USB_CYTHERM is not set
-+# CONFIG_USB_IDMOUSE is not set
-+# CONFIG_USB_FTDI_ELAN is not set
-+# CONFIG_USB_APPLEDISPLAY is not set
-+# CONFIG_USB_SISUSBVGA is not set
-+# CONFIG_USB_LD is not set
-+# CONFIG_USB_TRANCEVIBRATOR is not set
-+# CONFIG_USB_IOWARRIOR is not set
-+# CONFIG_USB_TEST is not set
-+# CONFIG_USB_ISIGHTFW is not set
-+# CONFIG_USB_VST is not set
-+CONFIG_USB_GADGET=y
-+# CONFIG_USB_GADGET_DEBUG_FILES is not set
-+CONFIG_USB_GADGET_VBUS_DRAW=2
-+CONFIG_USB_GADGET_SELECTED=y
-+# CONFIG_USB_GADGET_AT91 is not set
-+CONFIG_USB_GADGET_ATMEL_USBA=y
-+CONFIG_USB_ATMEL_USBA=y
-+# CONFIG_USB_GADGET_FSL_USB2 is not set
-+# CONFIG_USB_GADGET_LH7A40X is not set
-+# CONFIG_USB_GADGET_OMAP is not set
-+# CONFIG_USB_GADGET_PXA25X is not set
-+# CONFIG_USB_GADGET_PXA27X is not set
-+# CONFIG_USB_GADGET_S3C2410 is not set
-+# CONFIG_USB_GADGET_IMX is not set
-+# CONFIG_USB_GADGET_M66592 is not set
-+# CONFIG_USB_GADGET_AMD5536UDC is not set
-+# CONFIG_USB_GADGET_FSL_QE is not set
-+# CONFIG_USB_GADGET_CI13XXX is not set
-+# CONFIG_USB_GADGET_NET2280 is not set
-+# CONFIG_USB_GADGET_GOKU is not set
-+# CONFIG_USB_GADGET_DUMMY_HCD is not set
-+CONFIG_USB_GADGET_DUALSPEED=y
-+CONFIG_USB_ZERO=m
-+CONFIG_USB_ETH=m
-+CONFIG_USB_ETH_RNDIS=y
-+# CONFIG_USB_GADGETFS is not set
-+# CONFIG_USB_FILE_STORAGE is not set
-+CONFIG_USB_G_SERIAL=m
-+# CONFIG_USB_MIDI_GADGET is not set
-+# CONFIG_USB_G_PRINTER is not set
-+CONFIG_USB_CDC_COMPOSITE=m
-+
-+#
-+# OTG and related infrastructure
-+#
-+# CONFIG_USB_GPIO_VBUS is not set
-+# CONFIG_NOP_USB_XCEIV is not set
-+CONFIG_MMC=y
-+# CONFIG_MMC_DEBUG is not set
-+# CONFIG_MMC_UNSAFE_RESUME is not set
-+
-+#
-+# MMC/SD/SDIO Card Drivers
-+#
-+CONFIG_MMC_BLOCK=y
-+# CONFIG_MMC_BLOCK_BOUNCE is not set
-+CONFIG_SDIO_UART=m
-+# CONFIG_MMC_TEST is not set
-+
-+#
-+# MMC/SD/SDIO Host Controller Drivers
-+#
-+# CONFIG_MMC_SDHCI is not set
-+# CONFIG_MMC_AT91 is not set
-+CONFIG_MMC_ATMELMCI=y
-+CONFIG_MMC_ATMELMCI_DMA=y
-+# CONFIG_MMC_SPI is not set
-+# CONFIG_MEMSTICK is not set
-+# CONFIG_ACCESSIBILITY is not set
-+CONFIG_NEW_LEDS=y
-+CONFIG_LEDS_CLASS=y
-+
-+#
-+# LED drivers
-+#
-+# CONFIG_LEDS_PCA9532 is not set
-+CONFIG_LEDS_GPIO=y
-+CONFIG_LEDS_GPIO_PLATFORM=y
-+# CONFIG_LEDS_LP5521 is not set
-+# CONFIG_LEDS_PCA955X is not set
-+# CONFIG_LEDS_DAC124S085 is not set
-+# CONFIG_LEDS_BD2802 is not set
-+
-+#
-+# LED Triggers
-+#
-+CONFIG_LEDS_TRIGGERS=y
-+CONFIG_LEDS_TRIGGER_TIMER=y
-+CONFIG_LEDS_TRIGGER_HEARTBEAT=y
-+# CONFIG_LEDS_TRIGGER_BACKLIGHT is not set
-+CONFIG_LEDS_TRIGGER_GPIO=y
-+# CONFIG_LEDS_TRIGGER_DEFAULT_ON is not set
-+
-+#
-+# iptables trigger is under Netfilter config (LED target)
-+#
-+CONFIG_RTC_LIB=y
-+CONFIG_RTC_CLASS=y
-+CONFIG_RTC_HCTOSYS=y
-+CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
-+# CONFIG_RTC_DEBUG is not set
-+
-+#
-+# RTC interfaces
-+#
-+CONFIG_RTC_INTF_SYSFS=y
-+CONFIG_RTC_INTF_PROC=y
-+CONFIG_RTC_INTF_DEV=y
-+# CONFIG_RTC_INTF_DEV_UIE_EMUL is not set
-+# CONFIG_RTC_DRV_TEST is not set
-+
-+#
-+# I2C RTC drivers
-+#
-+# CONFIG_RTC_DRV_DS1307 is not set
-+# CONFIG_RTC_DRV_DS1374 is not set
-+# CONFIG_RTC_DRV_DS1672 is not set
-+# CONFIG_RTC_DRV_MAX6900 is not set
-+# CONFIG_RTC_DRV_RS5C372 is not set
-+# CONFIG_RTC_DRV_ISL1208 is not set
-+# CONFIG_RTC_DRV_X1205 is not set
-+# CONFIG_RTC_DRV_PCF8563 is not set
-+# CONFIG_RTC_DRV_PCF8583 is not set
-+# CONFIG_RTC_DRV_M41T80 is not set
-+# CONFIG_RTC_DRV_S35390A is not set
-+# CONFIG_RTC_DRV_FM3130 is not set
-+# CONFIG_RTC_DRV_RX8581 is not set
-+
-+#
-+# SPI RTC drivers
-+#
-+# CONFIG_RTC_DRV_M41T94 is not set
-+# CONFIG_RTC_DRV_DS1305 is not set
-+# CONFIG_RTC_DRV_DS1390 is not set
-+# CONFIG_RTC_DRV_MAX6902 is not set
-+# CONFIG_RTC_DRV_R9701 is not set
-+# CONFIG_RTC_DRV_RS5C348 is not set
-+# CONFIG_RTC_DRV_DS3234 is not set
-+
-+#
-+# Platform RTC drivers
-+#
-+# CONFIG_RTC_DRV_CMOS is not set
-+# CONFIG_RTC_DRV_DS1286 is not set
-+# CONFIG_RTC_DRV_DS1511 is not set
-+# CONFIG_RTC_DRV_DS1553 is not set
-+# CONFIG_RTC_DRV_DS1742 is not set
-+# CONFIG_RTC_DRV_STK17TA8 is not set
-+# CONFIG_RTC_DRV_M48T86 is not set
-+# CONFIG_RTC_DRV_M48T35 is not set
-+# CONFIG_RTC_DRV_M48T59 is not set
-+# CONFIG_RTC_DRV_BQ4802 is not set
-+# CONFIG_RTC_DRV_V3020 is not set
-+
-+#
-+# on-CPU RTC drivers
-+#
-+CONFIG_RTC_DRV_AT91SAM9=y
-+CONFIG_RTC_DRV_AT91SAM9_RTT=0
-+CONFIG_RTC_DRV_AT91SAM9_GPBR=0
-+CONFIG_DMADEVICES=y
-+
-+#
-+# DMA Devices
-+#
-+CONFIG_AT_HDMAC=y
-+CONFIG_DMA_ENGINE=y
-+
-+#
-+# DMA Clients
-+#
-+# CONFIG_NET_DMA is not set
-+# CONFIG_ASYNC_TX_DMA is not set
-+CONFIG_DMATEST=m
-+# CONFIG_AUXDISPLAY is not set
-+# CONFIG_REGULATOR is not set
-+# CONFIG_UIO is not set
-+# CONFIG_STAGING is not set
-+
-+#
-+# File systems
-+#
-+CONFIG_EXT2_FS=y
-+# CONFIG_EXT2_FS_XATTR is not set
-+# CONFIG_EXT2_FS_XIP is not set
-+CONFIG_EXT3_FS=y
-+# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
-+CONFIG_EXT3_FS_XATTR=y
-+# CONFIG_EXT3_FS_POSIX_ACL is not set
-+# CONFIG_EXT3_FS_SECURITY is not set
-+# CONFIG_EXT4_FS is not set
-+CONFIG_JBD=y
-+CONFIG_FS_MBCACHE=y
-+# CONFIG_REISERFS_FS is not set
-+# CONFIG_JFS_FS is not set
-+# CONFIG_FS_POSIX_ACL is not set
-+CONFIG_FILE_LOCKING=y
-+# CONFIG_XFS_FS is not set
-+# CONFIG_OCFS2_FS is not set
-+# CONFIG_BTRFS_FS is not set
-+CONFIG_DNOTIFY=y
-+CONFIG_INOTIFY=y
-+CONFIG_INOTIFY_USER=y
-+# CONFIG_QUOTA is not set
-+# CONFIG_AUTOFS_FS is not set
-+# CONFIG_AUTOFS4_FS is not set
-+# CONFIG_FUSE_FS is not set
-+
-+#
-+# Caches
-+#
-+# CONFIG_FSCACHE is not set
-+
-+#
-+# CD-ROM/DVD Filesystems
-+#
-+# CONFIG_ISO9660_FS is not set
-+# CONFIG_UDF_FS is not set
-+
-+#
-+# DOS/FAT/NT Filesystems
-+#
-+CONFIG_FAT_FS=y
-+# CONFIG_MSDOS_FS is not set
-+CONFIG_VFAT_FS=y
-+CONFIG_FAT_DEFAULT_CODEPAGE=437
-+CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"
-+# CONFIG_NTFS_FS is not set
-+
-+#
-+# Pseudo filesystems
-+#
-+CONFIG_PROC_FS=y
-+CONFIG_PROC_SYSCTL=y
-+CONFIG_PROC_PAGE_MONITOR=y
-+CONFIG_SYSFS=y
-+CONFIG_TMPFS=y
-+# CONFIG_TMPFS_POSIX_ACL is not set
-+# CONFIG_HUGETLB_PAGE is not set
-+# CONFIG_CONFIGFS_FS is not set
-+CONFIG_MISC_FILESYSTEMS=y
-+# CONFIG_ADFS_FS is not set
-+# CONFIG_AFFS_FS is not set
-+# CONFIG_HFS_FS is not set
-+# CONFIG_HFSPLUS_FS is not set
-+# CONFIG_BEFS_FS is not set
-+# CONFIG_BFS_FS is not set
-+# CONFIG_EFS_FS is not set
-+CONFIG_JFFS2_FS=y
-+CONFIG_JFFS2_FS_DEBUG=0
-+CONFIG_JFFS2_FS_WRITEBUFFER=y
-+# CONFIG_JFFS2_FS_WBUF_VERIFY is not set
-+CONFIG_JFFS2_SUMMARY=y
-+# CONFIG_JFFS2_FS_XATTR is not set
-+# CONFIG_JFFS2_COMPRESSION_OPTIONS is not set
-+CONFIG_JFFS2_ZLIB=y
-+# CONFIG_JFFS2_LZO is not set
-+CONFIG_JFFS2_RTIME=y
-+# CONFIG_JFFS2_RUBIN is not set
-+CONFIG_CRAMFS=m
-+CONFIG_SQUASHFS=m
-+CONFIG_SQUASHFS_EMBEDDED=y
-+CONFIG_SQUASHFS_FRAGMENT_CACHE_SIZE=3
-+# CONFIG_VXFS_FS is not set
-+# CONFIG_MINIX_FS is not set
-+# CONFIG_OMFS_FS is not set
-+# CONFIG_HPFS_FS is not set
-+# CONFIG_QNX4FS_FS is not set
-+# CONFIG_ROMFS_FS is not set
-+# CONFIG_SYSV_FS is not set
-+# CONFIG_UFS_FS is not set
-+# CONFIG_NILFS2_FS is not set
-+CONFIG_NETWORK_FILESYSTEMS=y
-+CONFIG_NFS_FS=y
-+CONFIG_NFS_V3=y
-+# CONFIG_NFS_V3_ACL is not set
-+# CONFIG_NFS_V4 is not set
-+# CONFIG_NFSD is not set
-+CONFIG_LOCKD=y
-+CONFIG_LOCKD_V4=y
-+CONFIG_NFS_COMMON=y
-+CONFIG_SUNRPC=y
-+# CONFIG_RPCSEC_GSS_KRB5 is not set
-+# CONFIG_RPCSEC_GSS_SPKM3 is not set
-+# CONFIG_SMB_FS is not set
-+# CONFIG_CIFS is not set
-+# CONFIG_NCP_FS is not set
-+# CONFIG_CODA_FS is not set
-+# CONFIG_AFS_FS is not set
-+
-+#
-+# Partition Types
-+#
-+CONFIG_PARTITION_ADVANCED=y
-+# CONFIG_ACORN_PARTITION is not set
-+# CONFIG_OSF_PARTITION is not set
-+# CONFIG_AMIGA_PARTITION is not set
-+# CONFIG_ATARI_PARTITION is not set
-+# CONFIG_MAC_PARTITION is not set
-+CONFIG_MSDOS_PARTITION=y
-+# CONFIG_BSD_DISKLABEL is not set
-+# CONFIG_MINIX_SUBPARTITION is not set
-+# CONFIG_SOLARIS_X86_PARTITION is not set
-+# CONFIG_UNIXWARE_DISKLABEL is not set
-+# CONFIG_LDM_PARTITION is not set
-+# CONFIG_SGI_PARTITION is not set
-+# CONFIG_ULTRIX_PARTITION is not set
-+# CONFIG_SUN_PARTITION is not set
-+# CONFIG_KARMA_PARTITION is not set
-+# CONFIG_EFI_PARTITION is not set
-+# CONFIG_SYSV68_PARTITION is not set
-+CONFIG_NLS=y
-+CONFIG_NLS_DEFAULT="iso8859-1"
-+CONFIG_NLS_CODEPAGE_437=y
-+# CONFIG_NLS_CODEPAGE_737 is not set
-+# CONFIG_NLS_CODEPAGE_775 is not set
-+CONFIG_NLS_CODEPAGE_850=y
-+# CONFIG_NLS_CODEPAGE_852 is not set
-+# CONFIG_NLS_CODEPAGE_855 is not set
-+# CONFIG_NLS_CODEPAGE_857 is not set
-+# CONFIG_NLS_CODEPAGE_860 is not set
-+# CONFIG_NLS_CODEPAGE_861 is not set
-+# CONFIG_NLS_CODEPAGE_862 is not set
-+# CONFIG_NLS_CODEPAGE_863 is not set
-+# CONFIG_NLS_CODEPAGE_864 is not set
-+# CONFIG_NLS_CODEPAGE_865 is not set
-+# CONFIG_NLS_CODEPAGE_866 is not set
-+# CONFIG_NLS_CODEPAGE_869 is not set
-+# CONFIG_NLS_CODEPAGE_936 is not set
-+# CONFIG_NLS_CODEPAGE_950 is not set
-+# CONFIG_NLS_CODEPAGE_932 is not set
-+# CONFIG_NLS_CODEPAGE_949 is not set
-+# CONFIG_NLS_CODEPAGE_874 is not set
-+# CONFIG_NLS_ISO8859_8 is not set
-+# CONFIG_NLS_CODEPAGE_1250 is not set
-+# CONFIG_NLS_CODEPAGE_1251 is not set
-+# CONFIG_NLS_ASCII is not set
-+CONFIG_NLS_ISO8859_1=y
-+# CONFIG_NLS_ISO8859_2 is not set
-+# CONFIG_NLS_ISO8859_3 is not set
-+# CONFIG_NLS_ISO8859_4 is not set
-+# CONFIG_NLS_ISO8859_5 is not set
-+# CONFIG_NLS_ISO8859_6 is not set
-+# CONFIG_NLS_ISO8859_7 is not set
-+# CONFIG_NLS_ISO8859_9 is not set
-+# CONFIG_NLS_ISO8859_13 is not set
-+# CONFIG_NLS_ISO8859_14 is not set
-+CONFIG_NLS_ISO8859_15=y
-+# CONFIG_NLS_KOI8_R is not set
-+# CONFIG_NLS_KOI8_U is not set
-+# CONFIG_NLS_UTF8 is not set
-+# CONFIG_DLM is not set
-+
-+#
-+# Kernel hacking
-+#
-+# CONFIG_PRINTK_TIME is not set
-+CONFIG_ENABLE_WARN_DEPRECATED=y
-+CONFIG_ENABLE_MUST_CHECK=y
-+CONFIG_FRAME_WARN=1024
-+# CONFIG_MAGIC_SYSRQ is not set
-+# CONFIG_UNUSED_SYMBOLS is not set
-+# CONFIG_DEBUG_FS is not set
-+# CONFIG_HEADERS_CHECK is not set
-+# CONFIG_DEBUG_KERNEL is not set
-+CONFIG_DEBUG_BUGVERBOSE=y
-+CONFIG_DEBUG_MEMORY_INIT=y
-+# CONFIG_RCU_CPU_STALL_DETECTOR is not set
-+# CONFIG_LATENCYTOP is not set
-+# CONFIG_SYSCTL_SYSCALL_CHECK is not set
-+CONFIG_HAVE_FUNCTION_TRACER=y
-+CONFIG_TRACING_SUPPORT=y
-+
-+#
-+# Tracers
-+#
-+# CONFIG_FUNCTION_TRACER is not set
-+# CONFIG_IRQSOFF_TRACER is not set
-+# CONFIG_SCHED_TRACER is not set
-+# CONFIG_CONTEXT_SWITCH_TRACER is not set
-+# CONFIG_EVENT_TRACER is not set
-+# CONFIG_BOOT_TRACER is not set
-+# CONFIG_TRACE_BRANCH_PROFILING is not set
-+# CONFIG_STACK_TRACER is not set
-+# CONFIG_KMEMTRACE is not set
-+# CONFIG_WORKQUEUE_TRACER is not set
-+# CONFIG_BLK_DEV_IO_TRACE is not set
-+# CONFIG_SAMPLES is not set
-+CONFIG_HAVE_ARCH_KGDB=y
-+CONFIG_ARM_UNWIND=y
-+CONFIG_DEBUG_USER=y
-+
-+#
-+# Security options
-+#
-+# CONFIG_KEYS is not set
-+# CONFIG_SECURITY is not set
-+# CONFIG_SECURITYFS is not set
-+# CONFIG_SECURITY_FILE_CAPABILITIES is not set
-+CONFIG_CRYPTO=y
-+
-+#
-+# Crypto core or helper
-+#
-+# CONFIG_CRYPTO_FIPS is not set
-+CONFIG_CRYPTO_ALGAPI=y
-+CONFIG_CRYPTO_ALGAPI2=y
-+CONFIG_CRYPTO_AEAD2=y
-+CONFIG_CRYPTO_BLKCIPHER=y
-+CONFIG_CRYPTO_BLKCIPHER2=y
-+CONFIG_CRYPTO_HASH2=y
-+CONFIG_CRYPTO_RNG2=y
-+CONFIG_CRYPTO_PCOMP=y
-+CONFIG_CRYPTO_MANAGER=y
-+CONFIG_CRYPTO_MANAGER2=y
-+# CONFIG_CRYPTO_GF128MUL is not set
-+# CONFIG_CRYPTO_NULL is not set
-+CONFIG_CRYPTO_WORKQUEUE=y
-+# CONFIG_CRYPTO_CRYPTD is not set
-+# CONFIG_CRYPTO_AUTHENC is not set
-+# CONFIG_CRYPTO_TEST is not set
-+
-+#
-+# Authenticated Encryption with Associated Data
-+#
-+# CONFIG_CRYPTO_CCM is not set
-+# CONFIG_CRYPTO_GCM is not set
-+# CONFIG_CRYPTO_SEQIV is not set
-+
-+#
-+# Block modes
-+#
-+# CONFIG_CRYPTO_CBC is not set
-+# CONFIG_CRYPTO_CTR is not set
-+# CONFIG_CRYPTO_CTS is not set
-+CONFIG_CRYPTO_ECB=y
-+# CONFIG_CRYPTO_LRW is not set
-+# CONFIG_CRYPTO_PCBC is not set
-+# CONFIG_CRYPTO_XTS is not set
-+
-+#
-+# Hash modes
-+#
-+# CONFIG_CRYPTO_HMAC is not set
-+# CONFIG_CRYPTO_XCBC is not set
-+
-+#
-+# Digest
-+#
-+# CONFIG_CRYPTO_CRC32C is not set
-+# CONFIG_CRYPTO_MD4 is not set
-+# CONFIG_CRYPTO_MD5 is not set
-+# CONFIG_CRYPTO_MICHAEL_MIC is not set
-+# CONFIG_CRYPTO_RMD128 is not set
-+# CONFIG_CRYPTO_RMD160 is not set
-+# CONFIG_CRYPTO_RMD256 is not set
-+# CONFIG_CRYPTO_RMD320 is not set
-+# CONFIG_CRYPTO_SHA1 is not set
-+# CONFIG_CRYPTO_SHA256 is not set
-+# CONFIG_CRYPTO_SHA512 is not set
-+# CONFIG_CRYPTO_TGR192 is not set
-+# CONFIG_CRYPTO_WP512 is not set
-+
-+#
-+# Ciphers
-+#
-+CONFIG_CRYPTO_AES=y
-+# CONFIG_CRYPTO_ANUBIS is not set
-+CONFIG_CRYPTO_ARC4=y
-+# CONFIG_CRYPTO_BLOWFISH is not set
-+# CONFIG_CRYPTO_CAMELLIA is not set
-+# CONFIG_CRYPTO_CAST5 is not set
-+# CONFIG_CRYPTO_CAST6 is not set
-+# CONFIG_CRYPTO_DES is not set
-+# CONFIG_CRYPTO_FCRYPT is not set
-+# CONFIG_CRYPTO_KHAZAD is not set
-+# CONFIG_CRYPTO_SALSA20 is not set
-+# CONFIG_CRYPTO_SEED is not set
-+# CONFIG_CRYPTO_SERPENT is not set
-+# CONFIG_CRYPTO_TEA is not set
-+# CONFIG_CRYPTO_TWOFISH is not set
-+
-+#
-+# Compression
-+#
-+# CONFIG_CRYPTO_DEFLATE is not set
-+# CONFIG_CRYPTO_ZLIB is not set
-+# CONFIG_CRYPTO_LZO is not set
-+
-+#
-+# Random Number Generation
-+#
-+# CONFIG_CRYPTO_ANSI_CPRNG is not set
-+# CONFIG_CRYPTO_HW is not set
-+# CONFIG_BINARY_PRINTF is not set
-+
-+#
-+# Library routines
-+#
-+CONFIG_BITREVERSE=y
-+CONFIG_GENERIC_FIND_LAST_BIT=y
-+# CONFIG_CRC_CCITT is not set
-+# CONFIG_CRC16 is not set
-+# CONFIG_CRC_T10DIF is not set
-+CONFIG_CRC_ITU_T=m
-+CONFIG_CRC32=y
-+# CONFIG_CRC7 is not set
-+# CONFIG_LIBCRC32C is not set
-+CONFIG_ZLIB_INFLATE=y
-+CONFIG_ZLIB_DEFLATE=y
-+CONFIG_DECOMPRESS_GZIP=y
-+CONFIG_DECOMPRESS_BZIP2=y
-+CONFIG_DECOMPRESS_LZMA=y
-+CONFIG_HAS_IOMEM=y
-+CONFIG_HAS_IOPORT=y
-+CONFIG_HAS_DMA=y
-+CONFIG_NLATTR=y
-diff --git a/recipes/linux/linux-2.6.30/at91sam9m10ekes/exp.4/defconfig b/recipes/linux/linux-2.6.30/at91sam9m10ekes/exp.4/defconfig
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0005-Remove-old-afeb9260-files.patch
+@@ -0,0 +1,612 @@
++From 0a71b107335e139f648a6d86ce4891e62f026228 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 19:36:57 +0100
++Subject: [PATCH v3 05/08] Remove old afeb9260 files
++
++---
++ board/afeb9260/old/afeb9260.c             |  248 -----------------------------
++ board/afeb9260/old/afeb9260.mk            |    8 -
++ board/afeb9260/old/dataflash/afeb9260.h   |  122 --------------
++ board/afeb9260/old/nandflash/afeb9260ek.h |  148 -----------------
++ board/afeb9260/old/pll.h                  |   35 ----
++ 5 files changed, 0 insertions(+), 561 deletions(-)
++ delete mode 100644 board/afeb9260/old/afeb9260.c
++ delete mode 100644 board/afeb9260/old/afeb9260.mk
++ delete mode 100644 board/afeb9260/old/dataflash/afeb9260.h
++ delete mode 100644 board/afeb9260/old/nandflash/afeb9260ek.h
++ delete mode 100644 board/afeb9260/old/pll.h
++
++diff --git a/board/afeb9260/old/afeb9260.c b/board/afeb9260/old/afeb9260.c
++deleted file mode 100644
++index ee25474..0000000
++--- a/board/afeb9260/old/afeb9260.c
+++++ /dev/null
++@@ -1,248 +0,0 @@
++-/* ----------------------------------------------------------------------------
++- *         ATMEL Microcontroller Software Support  -  ROUSSET  -
++- * ----------------------------------------------------------------------------
++- * Copyright (c) 2006, Atmel Corporation
++-
++- * All rights reserved.
++- *
++- * Redistribution and use in source and binary forms, with or without
++- * modification, are permitted provided that the following conditions are met:
++- *
++- * - Redistributions of source code must retain the above copyright notice,
++- * this list of conditions and the disclaiimer below.
++- *
++- * - Redistributions in binary form must reproduce the above copyright notice,
++- * this list of conditions and the disclaimer below in the documentation and/or
++- * other materials provided with the distribution.
++- *
++- * Atmel's name may not be used to endorse or promote products derived from
++- * this software without specific prior written permission.
++- *
++- * DISCLAIMER: THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR
++- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
++- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE
++- * DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT,
++- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
++- * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
++- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++- * ----------------------------------------------------------------------------
++- * File Name           : at91sam9260ek.c
++- * Object              :
++- * Creation            : NLe Jul 13th 2006
++- * ODi Nov 9th         : dstp #3507 "Bad PIO descriptors in at91samxxxek.c"
++- *-----------------------------------------------------------------------------
++- */
++-#include "../../include/part.h"
++-#include "../../include/gpio.h"
++-#include "../../include/pmc.h"
++-#include "../../include/debug.h"
++-#include "../../include/sdramc.h"
++-#include "../../include/main.h"
++-#ifdef CFG_NANDFLASH
++-#include "../../include/nandflash.h"
++-#endif
++-#ifdef CFG_DATAFLASH
++-#include "../../include/dataflash.h"
++-#endif
++-#ifdef CFG_FLASH
++-#include "../../include/flash.h"
++-#endif
++-
++-/* We init NAND regardless of whatever */
++-/*------------------------------------------------------------------------------*/
++-/* \fn    nandflash_hw_init							*/
++-/* \brief NandFlash HW init							*/
++-/*------------------------------------------------------------------------------*/
++-void nandflash_hw_init(void)
++-{
++-    /*
++-     * Setup Smart Media, first enable the address range of CS3 in HMATRIX user interface 
++-     */
++-    writel(readl(AT91C_BASE_CCFG + CCFG_EBICSA) | AT91C_EBI_CS3A_SM,
++-           AT91C_BASE_CCFG + CCFG_EBICSA);
++-
++-    /*
++-     * Configure SMC CS3 
++-     */
++-    writel((AT91C_SM_NWE_SETUP | AT91C_SM_NCS_WR_SETUP | AT91C_SM_NRD_SETUP |
++-            AT91C_SM_NCS_RD_SETUP), AT91C_BASE_SMC + SMC_SETUP3);
++-    writel((AT91C_SM_NWE_PULSE | AT91C_SM_NCS_WR_PULSE | AT91C_SM_NRD_PULSE |
++-            AT91C_SM_NCS_RD_PULSE), AT91C_BASE_SMC + SMC_PULSE3);
++-    writel((AT91C_SM_NWE_CYCLE | AT91C_SM_NRD_CYCLE),
++-           AT91C_BASE_SMC + SMC_CYCLE3);
++-    writel((AT91C_SMC_READMODE | AT91C_SMC_WRITEMODE |
++-            AT91C_SMC_NWAITM_NWAIT_DISABLE | AT91C_SMC_DBW_WIDTH_EIGTH_BITS |
++-            AT91C_SM_TDF), AT91C_BASE_SMC + SMC_CTRL3);
++-
++-    /*
++-     * Configure the PIO controller 
++-     */
++-    writel((1 << AT91C_ID_PIOC), PMC_PCER + AT91C_BASE_PMC);
++-
++-    writel(1 << 13, AT91C_BASE_PIOC + PIO_IFDR(0));
++-    writel(1 << 13, AT91C_BASE_PIOC + PIO_PPUER(0));
++-    writel(1 << 13, AT91C_BASE_PIOC + PIO_ODR(0));
++-    writel(1 << 14, AT91C_BASE_PIOC + PIO_CODR(0));
++-    writel(1 << 14, AT91C_BASE_PIOC + PIO_MDDR(0));
++-    writel(1 << 14, AT91C_BASE_PIOC + PIO_PPUDR(0));
++-    writel(1 << 14, AT91C_BASE_PIOC + PIO_OER(0));
++-    writel(3 << 13, AT91C_BASE_PIOC + PIO_IDR(0));
++-    writel(3 << 13, AT91C_BASE_PIOC + PIO_PER(0));
++-}
++-
++-#ifdef CFG_HW_INIT
++-/*----------------------------------------------------------------------------*/
++-/* \fn    hw_init							      */
++-/* \brief This function performs very low level HW initialization	      */
++-/* This function is invoked as soon as possible during the c_startup	      */
++-/* The bss segment must be initialized					      */
++-/*----------------------------------------------------------------------------*/
++-void hw_init(void)
++-{
++-    /*
++-     * Disable watchdog 
++-     */
++-    writel(AT91C_WDTC_WDDIS, AT91C_BASE_WDTC + WDTC_WDMR);
++-
++-    /*
++-     * At this stage the main oscillator is supposed to be enabled
++-     * * PCK = MCK = MOSC 
++-     */
++-
++-    /*
++-     * Configure PLLA = MOSC * (PLL_MULA + 1) / PLL_DIVA 
++-     */
++-    pmc_cfg_plla(PLLA_SETTINGS, PLL_LOCK_TIMEOUT);
++-
++-    /*
++-     * Switch MCK on PLLA output PCK = PLLA = 2 * MCK 
++-     */
++-    pmc_cfg_mck(MCKR_SETTINGS, PLL_LOCK_TIMEOUT);
++-
++-    /*
++-     * Configure PLLB 
++-     */
++-    pmc_cfg_pllb(PLLB_SETTINGS, PLL_LOCK_TIMEOUT);
++-
++-    /*
++-     * Configure the PIO controller 
++-     */
++-    writel(3 << 14, AT91C_BASE_PIOB + PIO_ASR(0));
++-    writel(3 << 14, AT91C_BASE_PIOB + PIO_PDR(0));
++-
++-#ifdef CFG_DEBUG
++-    /*
++-     * Enable Debug messages on the DBGU 
++-     */
++-    dbg_init(BAUDRATE(MASTER_CLOCK, 115200));
++-
++-    dbg_print("AT91 bootstrap loading from 0x8400\n\r");
++-#endif                          /* CFG_DEBUG */
++-
++-#ifdef CFG_SDRAM
++-    /*
++-     * Initialize the matrix 
++-     */
++-    writel(readl(AT91C_BASE_CCFG + CCFG_EBICSA) | AT91C_EBI_CS1A_SDRAMC,
++-           AT91C_BASE_CCFG + CCFG_EBICSA);
++-
++-    /*
++-     * Configure SDRAM Controller 
++-     */
++-
++-#define HYNIX
++-
++-//#define MICRON
++-#ifdef MICRON
++-#define MICRON_REFRESH 1420     /* 15.625 us / 11 ns @ 180 Mhz */
++-    sdram_init(AT91C_SDRAMC_NC_9 | AT91C_SDRAMC_NR_12 | AT91C_SDRAMC_CAS_2 | AT91C_SDRAMC_NB_4_BANKS | AT91C_SDRAMC_DBW_32_BITS | AT91C_SDRAMC_TWR_2 |  // 1 CLK+7ns
++-               AT91C_SDRAMC_TRC_7 |     // 60 ns
++-               AT91C_SDRAMC_TRP_3 |     // 15 ns
++-               AT91C_SDRAMC_TRCD_3 |    // 15 ns
++-               AT91C_SDRAMC_TRAS_7 |    // 37-120 ns
++-               AT91C_SDRAMC_TXSR_7,     /* 67ns *//* Control Register */
++-               /*
++-                * 600 700 735 
++-                */ MICRON_REFRESH /* 740 1536 */ );     /* Refresh Timer Register */
++-
++-#endif
++-/* 
++-HY57V561620BT-H
++-     *CAS lat		*tRCD		*tRAS		*tRC		*tRP		tAC	tOH
++-133	2		2		6		8		2		5.4ns	2.7ns
++-125	3		3		6		9		3		6ns	3ns
++-100	2		2		5		7		2		6ns	3ns
++-
++-*/
++-#ifdef HYNIX
++-#if defined(PLLA_180MHz)
++-/* CLK= 11ns */
++-/* TWR = tDPL = 2 2CLK always */
++-/* TRC = tRC = 65ns = 6 clk */
++-/* TRP = tRP = 20ns = 2 clk */
++-/* TRCD = tRCD = 20ns = 2 clk */
++-/* TRAS = tRAS = 45ns = 5 clk */
++-/* TXSR = tRRC = 65ns = 6 clk */
++-
++-    sdram_init(AT91C_SDRAMC_NC_9 | AT91C_SDRAMC_NR_13 | AT91C_SDRAMC_CAS_2 | AT91C_SDRAMC_NB_4_BANKS | AT91C_SDRAMC_DBW_32_BITS | AT91C_SDRAMC_TWR_2 | AT91C_SDRAMC_TRC_6 |     /* *7 */
++-               AT91C_SDRAMC_TRP_2 | AT91C_SDRAMC_TRCD_2 | AT91C_SDRAMC_TRAS_5 | /* *5 */
++-               AT91C_SDRAMC_TXSR_6,     /* *8 *//* Control Register */
++-               710);            /* Refresh Timer Register */
++-
++-#elif defined(PLLA_120MHz)
++-/* CLK= 16ns, MCLK=60MHz */
++-/* TWR = tDPL = 2 2CLK always */
++-/* TRC = tRC = 65ns = 4 clk */
++-/* TRP = tRP = 20ns = 2 clk */
++-/* TRCD = tRCD = 20ns = 2 clk */
++-/* TRAS = tRAS = 45ns = 3 clk */
++-/* TXSR = tRRC = 65ns = 4 clk */
++-
++-    sdram_init(AT91C_SDRAMC_NC_9 | AT91C_SDRAMC_NR_13 | AT91C_SDRAMC_CAS_2 | AT91C_SDRAMC_NB_4_BANKS | AT91C_SDRAMC_DBW_32_BITS | AT91C_SDRAMC_TWR_2 | AT91C_SDRAMC_TRC_4 | AT91C_SDRAMC_TRP_2 | AT91C_SDRAMC_TRCD_2 | AT91C_SDRAMC_TRAS_3 |    /* *5 */
++-               AT91C_SDRAMC_TXSR_4,     /* *8 *//* Control Register */
++-               1032);           /* Refresh Timer Register */
++-#else
++-#error define PLLA180MHz
++-#endif
++-#endif                          /* HYNIX */
++-#endif                          /* CFG_SDRAM */
++-
++-#ifdef	CFG_FLASH
++-    flash_hw_init();
++-#endif
++-    nandflash_hw_init();
++-}
++-#endif                          /* CFG_HW_INIT */
++-
++-#ifdef CFG_SDRAM
++-/*------------------------------------------------------------------------------*/
++-/* \fn    sdramc_hw_init							*/
++-/* \brief This function performs SDRAMC HW initialization			*/
++-/*------------------------------------------------------------------------------*/
++-void sdramc_hw_init(void)
++-{
++-    writel(0xFFFF0000, AT91C_BASE_PIOC + PIO_ASR(0));
++-    writel(0xFFFF0000, AT91C_BASE_PIOC + PIO_PDR(0));
++-
++-}
++-#endif                          /* CFG_SDRAM */
++-
++-#ifdef CFG_DATAFLASH
++-
++-/*------------------------------------------------------------------------------*/
++-/* \fn    df_hw_init								*/
++-/* \brief This function performs DataFlash HW initialization			*/
++-/*------------------------------------------------------------------------------*/
++-void df_hw_init(void)
++-{
++-    writel(0xf, 0xfffff444);
++-    writel(0xf, 0xfffff460);
++-    writel(0xf, 0xfffff470);
++-    writel(0xf, 0xfffff404);
++-    writel(1 << 11, AT91C_BASE_PIOC + PIO_BSR(0));
++-    writel(1 << 11, AT91C_BASE_PIOC + PIO_PDR(0));
++-}
++-#endif                          /* CFG_DATAFLASH */
++diff --git a/board/afeb9260/old/afeb9260.mk b/board/afeb9260/old/afeb9260.mk
++deleted file mode 100644
++index 88c2f64..0000000
++--- a/board/afeb9260/old/afeb9260.mk
+++++ /dev/null
++@@ -1,8 +0,0 @@
++-# Target name (case sensitive!!!)
++-TARGET=AFEB9260
++-# Board name (case sensitive!!!)
++-BOARD=afeb9260
++-# Link Address and Top_of_Memory
++-LINK_ADDR=0x200000
++-TOP_OF_MEMORY=0x301000
++-
++diff --git a/board/afeb9260/old/dataflash/afeb9260.h b/board/afeb9260/old/dataflash/afeb9260.h
++deleted file mode 100644
++index e5f45bd..0000000
++--- a/board/afeb9260/old/dataflash/afeb9260.h
+++++ /dev/null
++@@ -1,122 +0,0 @@
++-/* ----------------------------------------------------------------------------
++- *         ATMEL Microcontroller Software Support  -  ROUSSET  -
++- * ----------------------------------------------------------------------------
++- * Copyright (c) 2006, Atmel Corporation
++-
++- * All rights reserved.
++- *
++- * Redistribution and use in source and binary forms, with or without
++- * modification, are permitted provided that the following conditions are met:
++- *
++- * - Redistributions of source code must retain the above copyright notice,
++- * this list of conditions and the disclaiimer below.
++- *
++- * - Redistributions in binary form must reproduce the above copyright notice,
++- * this list of conditions and the disclaimer below in the documentation and/or
++- * other materials provided with the distribution.
++- *
++- * Atmel's name may not be used to endorse or promote products derived from
++- * this software without specific prior written permission.
++- *
++- * DISCLAIMER: THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR
++- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
++- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE
++- * DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT,
++- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
++- * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
++- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++- * ----------------------------------------------------------------------------
++- * File Name           : at91sam9260ek.h
++- * Object              :
++- * Creation            : NLe Jul 13th 2006
++- *-----------------------------------------------------------------------------
++- */
++-#ifndef _AFEB9260_H
++-#define _AFEB9260_H
++-#include	"spi.h"
++-#include 	"pll.h"
++-
++-/* ******************************************************************* */
++-/* DataFlash Settings                                                  */
++-/*                                                                     */
++-/* ******************************************************************* */
++-#define AT91C_BASE_SPI	AT91C_BASE_SPI0
++-#define AT91C_ID_SPI	AT91C_ID_SPI0
++-
++-/* SPI CLOCK */
++-#define AT91C_SPI_CLK 		 5000000
++-/* AC characteristics */
++-/* DLYBS = tCSS= 250ns min and DLYBCT = tCSH = 250ns */
++-#define DATAFLASH_TCSS		(0x1a << 16)    /* 250ns min (tCSS) <=> 12/48000000 = 250ns */
++-#define DATAFLASH_TCHS		(0x1 << 24)     /* 250ns min (tCSH) <=> (64*1+SCBR)/(2*48000000) */
++-
++-#define DF_CS_SETTINGS 		((SPI_MODE) | (AT91C_SPI_DLYBS & DATAFLASH_TCSS) | (AT91C_SPI_DLYBCT & DATAFLASH_TCHS) | ((MASTER_CLOCK / AT91C_SPI_CLK) << 8))
++-
++-/* ******************************************************************* */
++-/* BootStrap Settings                                                  */
++-/*                                                                     */
++-/* ******************************************************************* */
++-#define MACH_TYPE       	0x44B   /* AT91SAM9260-EK */
++-
++-#define IMG_ADDRESS 		0x8400  /* Image Address in DataFlash */
++-
++-#if	defined(IMG_SIZE)
++-#warning			"IMG_SIZE redefined"
++-#else
++-#define	IMG_SIZE		0x39000 /* Image Size in DataFlash    */
++-#endif
++-
++-#if	defined(JUMP_ADDR)
++-#warning			"JUMP_ADDR redefined"
++-#else
++-#define JUMP_ADDR		0x21F00000      /* Final Jump Address         */
++-#endif
++-
++-/* ******************************************************************* */
++-/* NandFlash Settings                                                  */
++-/*                                                                     */
++-/* ******************************************************************* */
++-#define AT91C_SMARTMEDIA_BASE	0x40000000
++-
++-#define AT91_SMART_MEDIA_ALE    (1 << 21)       /* our ALE is AD21 */
++-#define AT91_SMART_MEDIA_CLE    (1 << 22)       /* our CLE is AD22 */
++-
++-#define NAND_DISABLE_CE() do { *(volatile unsigned int *)AT91C_PIOC_SODR = AT91C_PIO_PC14;} while(0)
++-#define NAND_ENABLE_CE() do { *(volatile unsigned int *)AT91C_PIOC_CODR = AT91C_PIO_PC14;} while(0)
++-
++-#define NAND_WAIT_READY() while (!(*(volatile unsigned int *)AT91C_PIOC_PDSR & AT91C_PIO_PC13))
++-
++-/* ******************************************************************** */
++-/* SMC Chip Select 3 Timings for NandFlash for MASTER_CLOCK = 100000000.*/
++-/* Micron 16bits 256Mb for MASTER_CLOCK = 100000000.			*/
++-/* Please refer to SMC section in AT91SAM9261 datasheet to learn how 	*/
++-/* to generate these values. 						*/
++-/* ******************************************************************** */
++-
++-#define AT91C_SM_NWE_SETUP	(2 << 0)
++-#define AT91C_SM_NCS_WR_SETUP	(2 << 8)
++-#define AT91C_SM_NRD_SETUP	(2 << 16)
++-#define AT91C_SM_NCS_RD_SETUP	(2 << 24)
++-
++-#define AT91C_SM_NWE_PULSE 	(4 << 0)
++-#define AT91C_SM_NCS_WR_PULSE	(4 << 8)
++-#define AT91C_SM_NRD_PULSE	(4 << 16)
++-#define AT91C_SM_NCS_RD_PULSE	(4 << 24)
++-
++-#define AT91C_SM_NWE_CYCLE 	(8 << 0)
++-#define AT91C_SM_NRD_CYCLE	(8 << 16)
++-
++-#define AT91C_SM_TDF	        (2 << 16)
++-
++-/* ******************************************************************* */
++-/* Application Settings                                                */
++-/* ******************************************************************* */
++-#define CFG_DEBUG
++-#define CFG_DATAFLASH
++-#define	CFG_SDRAM
++-#define	CFG_HW_INIT
++-
++-#endif                          /* _AT91SAM9260EK_H */
++diff --git a/board/afeb9260/old/nandflash/afeb9260ek.h b/board/afeb9260/old/nandflash/afeb9260ek.h
++deleted file mode 100644
++index ad00303..0000000
++--- a/board/afeb9260/old/nandflash/afeb9260ek.h
+++++ /dev/null
++@@ -1,148 +0,0 @@
++-/* ----------------------------------------------------------------------------
++- *         ATMEL Microcontroller Software Support  -  ROUSSET  -
++- * ----------------------------------------------------------------------------
++- * Copyright (c) 2006, Atmel Corporation
++-
++- * All rights reserved.
++- *
++- * Redistribution and use in source and binary forms, with or without
++- * modification, are permitted provided that the following conditions are met:
++- *
++- * - Redistributions of source code must retain the above copyright notice,
++- * this list of conditions and the disclaimer below.
++- *
++- * - Redistributions in binary form must reproduce the above copyright notice,
++- * this list of conditions and the disclaimer below in the documentation and/or
++- * other materials provided with the distribution.
++- *
++- * Atmel's name may not be used to endorse or promote products derived from
++- * this software without specific prior written permission.
++- *
++- * DISCLAIMER: THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR
++- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
++- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE
++- * DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT,
++- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
++- * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
++- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++- * ----------------------------------------------------------------------------
++- * File Name           : at91sam9260ek.h
++- * Object              :
++- * Creation            : NLe Sep 28th 2006
++- *-----------------------------------------------------------------------------
++- */
++-#ifndef _AFEB9260_H
++-#define _AFEB9260_H
++-#include	"spi.h"
++-#include 	"pll.h"
++-
++-/* ******************************************************************* */
++-/* DataFlash Settings                                                  */
++-/*                                                                     */
++-/* ******************************************************************* */
++-#define AT91C_BASE_SPI	AT91C_BASE_SPI0
++-#define AT91C_ID_SPI	AT91C_ID_SPI0
++-
++-/* SPI CLOCK */
++-#define AT91C_SPI_CLK 		 5000000
++-/* AC characteristics */
++-/* DLYBS = tCSS= 250ns min and DLYBCT = tCSH = 250ns */
++-#define DATAFLASH_TCSS		(0x1a << 16)    /* 250ns min (tCSS) <=> 12/48000000 = 250ns */
++-#define DATAFLASH_TCHS		(0x1 << 24)     /* 250ns min (tCSH) <=> (64*1+SCBR)/(2*48000000) */
++-
++-#define DF_CS_SETTINGS 		((SPI_MODE) | (AT91C_SPI_DLYBS & DATAFLASH_TCSS) | (AT91C_SPI_DLYBCT & DATAFLASH_TCHS) | ((MASTER_CLOCK / AT91C_SPI_CLK) << 8))
++-
++-/* ******************************************************************* */
++-/* NandFlash Settings                                                  */
++-/*                                                                     */
++-/* ******************************************************************* */
++-#define AT91C_SMARTMEDIA_BASE	0x40000000
++-
++-#define AT91_SMART_MEDIA_ALE    (1 << 21)       /* our ALE is AD21 */
++-#define AT91_SMART_MEDIA_CLE    (1 << 22)       /* our CLE is AD22 */
++-
++-#define NAND_DISABLE_CE() do { *(volatile unsigned int *)AT91C_PIOC_SODR = AT91C_PIO_PC14;} while(0)
++-#define NAND_ENABLE_CE() do { *(volatile unsigned int *)AT91C_PIOC_CODR = AT91C_PIO_PC14;} while(0)
++-
++-#define NAND_WAIT_READY() while (!(*(volatile unsigned int *)AT91C_PIOC_PDSR & AT91C_PIO_PC13))
++-
++-/* ******************************************************************** */
++-/* SMC Chip Select 3 Timings for NandFlash for MASTER_CLOCK = 100000000.*/
++-/* Micron 16bits 256Mb for MASTER_CLOCK = 100000000.			*/
++-/* Please refer to SMC section in AT91SAM9261 datasheet to learn how 	*/
++-/* to generate these values. 						*/
++-/* ******************************************************************** */
++-
++-#define AT91C_SM_NWE_SETUP	(2 << 0)
++-#define AT91C_SM_NCS_WR_SETUP	(2 << 8)
++-#define AT91C_SM_NRD_SETUP	(2 << 16)
++-#define AT91C_SM_NCS_RD_SETUP	(2 << 24)
++-
++-#define AT91C_SM_NWE_PULSE 	(4 << 0)
++-#define AT91C_SM_NCS_WR_PULSE	(4 << 8)
++-#define AT91C_SM_NRD_PULSE	(4 << 16)
++-#define AT91C_SM_NCS_RD_PULSE	(4 << 24)
++-
++-#define AT91C_SM_NWE_CYCLE 	(8 << 0)
++-#define AT91C_SM_NRD_CYCLE	(8 << 16)
++-
++-#define AT91C_SM_TDF	        (2 << 16)
++-
++-/* ******************************************************************** */
++-/* SMC Chip Select 3 Timings for NandFlash for MASTER_CLOCK = 100000000.*/
++-/* Micron 16bits 256Mb for MASTER_CLOCK = 100000000.			*/
++-/* Please refer to SMC section in AT91SAM9261 datasheet to learn how 	*/
++-/* to generate these values. 						*/
++-/* ******************************************************************** */
++-/*#define AT91C_SM_NWE_SETUP	(0 << 0)
++-#define AT91C_SM_NCS_WR_SETUP	(0 << 8)
++-#define AT91C_SM_NRD_SETUP	(0 << 16)
++-#define AT91C_SM_NCS_RD_SETUP	(0 << 24)
++-  
++-#define AT91C_SM_NWE_PULSE 	(2 << 0)
++-#define AT91C_SM_NCS_WR_PULSE	(3 << 8)
++-#define AT91C_SM_NRD_PULSE	(2 << 16)
++-#define AT91C_SM_NCS_RD_PULSE	(3 << 24)
++-  
++-#define AT91C_SM_NWE_CYCLE 	(3 << 0)
++-#define AT91C_SM_NRD_CYCLE	(3 << 16)
++-
++-#define AT91C_SM_TDF	        (1 << 16)
++-*/
++-
++-/* ******************************************************************* */
++-/* BootStrap Settings                                                  */
++-/*                                                                     */
++-/* ******************************************************************* */
++-#define MACH_TYPE      		0x44B   /* AT91SAM9260-EK */
++-
++-#define IMG_ADDRESS 		0x20000 /* Image Address in NandFlash */
++-
++-#if	defined(IMG_SIZE)
++-#warning			"IMG_SIZE redefined"
++-#else
++-#define	IMG_SIZE		0x30000 /* Image Size in NandFlash    */
++-#endif
++-
++-#if	defined(JUMP_ADDR)
++-#warning			"JUMP_ADDR redefined"
++-#else
++-#define JUMP_ADDR		0x23F00000      /* Final Jump Address         */
++-#endif
++-
++-/* ******************************************************************* */
++-/* Application Settings                                                */
++-/* ******************************************************************* */
++-#define CFG_DEBUG
++-#undef CFG_DATAFLASH
++-
++-#define CFG_NANDFLASH
++-#undef	NANDFLASH_SMALL_BLOCKS  /* NANDFLASH_LARGE_BLOCKS used instead */
++-
++-#define CFG_HW_INIT
++-#define CFG_SDRAM
++-
++-#endif                          /* _AT91SAM9260EK_H */
++diff --git a/board/afeb9260/old/pll.h b/board/afeb9260/old/pll.h
++deleted file mode 100644
++index f2a01b3..0000000
++--- a/board/afeb9260/old/pll.h
+++++ /dev/null
++@@ -1,35 +0,0 @@
++-/* ******************************************************************* */
++-/* PMC Settings                                                        */
++-/*                                                                     */
++-/* The main oscillator is enabled as soon as possible in the c_startup */
++-/* and MCK is switched on the main oscillator.                         */
++-/* PLL initialization is done later in the hw_init() function          */
++-/* ******************************************************************* */
++-#define PLL_LOCK_TIMEOUT	1000000
++-
++-#define PLLA_180MHz
++-
++-#ifdef PLLA_200MHz
++-#define PLLA_SETTINGS	0x2060BF09
++-#define MASTER_CLOCK		(198656000/2)
++-#endif
++-
++-#ifdef PLLA_180MHz
++-#define PLLA_SETTINGS	0x2125BF1E      /* 180MHz */
++-#define MASTER_CLOCK		(179999198/2)   /* 180MHz MCK=90MHz */
++-#endif
++-
++-#ifdef PLLA_120MHz
++-//#define PLLA_SETTINGS 0x2125BF2d /* 120MHz */
++-//#define MASTER_CLOCK          (119999322) /* 120MHz MCK=60MHz*/
++-#define PLLA_SETTINGS	0x2125BF2d      /* 120MHz */
++-#define MASTER_CLOCK		(119999465/2)   /* 120MHz MCK=60MHz */
++-#endif
++-
++-#if !defined(PLLA_180MHz) && !defined(PLLA_120MHz)
++-#error Define PLLA frequency
++-#endif
++-#define PLLB_SETTINGS	0x10483F0E
++-
++-/* Switch MCK on PLLA output PCK = PLLA = 2 * MCK */
++-#define MCKR_SETTINGS	(AT91C_PMC_CSS_PLLA_CLK | AT91C_PMC_PRES_CLK | AT91C_PMC_MDIV_2)
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0006-Use-BOARD-instead-of-BOARDNAME-to-define-directory.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0006-Use-BOARD-instead-of-BOARDNAME-to-define-directory.patch
 new file mode 100644
-index 0000000..c9aa51a
+index 0000000..49e1710
 --- /dev/null
-+++ b/recipes/linux/linux-2.6.30/at91sam9m10ekes/exp.4/defconfig
-@@ -0,0 +1,1671 @@
-+#
-+# Automatically generated make config: don't edit
-+# Linux kernel version: 2.6.30
-+# Wed Jan 26 09:44:14 2011
-+#
-+CONFIG_ARM=y
-+CONFIG_SYS_SUPPORTS_APM_EMULATION=y
-+CONFIG_GENERIC_GPIO=y
-+CONFIG_GENERIC_TIME=y
-+CONFIG_GENERIC_CLOCKEVENTS=y
-+CONFIG_MMU=y
-+# CONFIG_NO_IOPORT is not set
-+CONFIG_GENERIC_HARDIRQS=y
-+CONFIG_STACKTRACE_SUPPORT=y
-+CONFIG_HAVE_LATENCYTOP_SUPPORT=y
-+CONFIG_LOCKDEP_SUPPORT=y
-+CONFIG_TRACE_IRQFLAGS_SUPPORT=y
-+CONFIG_HARDIRQS_SW_RESEND=y
-+CONFIG_GENERIC_IRQ_PROBE=y
-+CONFIG_RWSEM_GENERIC_SPINLOCK=y
-+# CONFIG_ARCH_HAS_ILOG2_U32 is not set
-+# CONFIG_ARCH_HAS_ILOG2_U64 is not set
-+CONFIG_GENERIC_HWEIGHT=y
-+CONFIG_GENERIC_CALIBRATE_DELAY=y
-+CONFIG_GENERIC_HARDIRQS_NO__DO_IRQ=y
-+CONFIG_VECTORS_BASE=0xffff0000
-+CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
-+
-+#
-+# General setup
-+#
-+CONFIG_EXPERIMENTAL=y
-+CONFIG_BROKEN_ON_SMP=y
-+CONFIG_INIT_ENV_ARG_LIMIT=32
-+CONFIG_LOCALVERSION=""
-+# CONFIG_LOCALVERSION_AUTO is not set
-+# CONFIG_SWAP is not set
-+CONFIG_SYSVIPC=y
-+CONFIG_SYSVIPC_SYSCTL=y
-+# CONFIG_POSIX_MQUEUE is not set
-+# CONFIG_BSD_PROCESS_ACCT is not set
-+# CONFIG_TASKSTATS is not set
-+# CONFIG_AUDIT is not set
-+
-+#
-+# RCU Subsystem
-+#
-+CONFIG_CLASSIC_RCU=y
-+# CONFIG_TREE_RCU is not set
-+# CONFIG_PREEMPT_RCU is not set
-+# CONFIG_TREE_RCU_TRACE is not set
-+# CONFIG_PREEMPT_RCU_TRACE is not set
-+CONFIG_IKCONFIG=y
-+CONFIG_IKCONFIG_PROC=y
-+CONFIG_LOG_BUF_SHIFT=14
-+# CONFIG_GROUP_SCHED is not set
-+# CONFIG_CGROUPS is not set
-+CONFIG_SYSFS_DEPRECATED=y
-+CONFIG_SYSFS_DEPRECATED_V2=y
-+# CONFIG_RELAY is not set
-+CONFIG_NAMESPACES=y
-+# CONFIG_UTS_NS is not set
-+# CONFIG_IPC_NS is not set
-+# CONFIG_USER_NS is not set
-+# CONFIG_PID_NS is not set
-+# CONFIG_NET_NS is not set
-+CONFIG_BLK_DEV_INITRD=y
-+CONFIG_INITRAMFS_SOURCE=""
-+CONFIG_RD_GZIP=y
-+CONFIG_RD_BZIP2=y
-+CONFIG_RD_LZMA=y
-+CONFIG_CC_OPTIMIZE_FOR_SIZE=y
-+CONFIG_SYSCTL=y
-+CONFIG_ANON_INODES=y
-+# CONFIG_EMBEDDED is not set
-+CONFIG_UID16=y
-+CONFIG_SYSCTL_SYSCALL=y
-+CONFIG_KALLSYMS=y
-+# CONFIG_KALLSYMS_EXTRA_PASS is not set
-+CONFIG_STRIP_ASM_SYMS=y
-+CONFIG_HOTPLUG=y
-+CONFIG_PRINTK=y
-+CONFIG_BUG=y
-+CONFIG_ELF_CORE=y
-+CONFIG_BASE_FULL=y
-+CONFIG_FUTEX=y
-+CONFIG_EPOLL=y
-+CONFIG_SIGNALFD=y
-+CONFIG_TIMERFD=y
-+CONFIG_EVENTFD=y
-+CONFIG_SHMEM=y
-+CONFIG_AIO=y
-+CONFIG_VM_EVENT_COUNTERS=y
-+CONFIG_COMPAT_BRK=y
-+CONFIG_SLAB=y
-+# CONFIG_SLUB is not set
-+# CONFIG_SLOB is not set
-+# CONFIG_PROFILING is not set
-+# CONFIG_MARKERS is not set
-+CONFIG_HAVE_OPROFILE=y
-+# CONFIG_KPROBES is not set
-+CONFIG_HAVE_KPROBES=y
-+CONFIG_HAVE_KRETPROBES=y
-+CONFIG_HAVE_CLK=y
-+# CONFIG_SLOW_WORK is not set
-+CONFIG_HAVE_GENERIC_DMA_COHERENT=y
-+CONFIG_SLABINFO=y
-+CONFIG_RT_MUTEXES=y
-+CONFIG_BASE_SMALL=0
-+CONFIG_MODULES=y
-+# CONFIG_MODULE_FORCE_LOAD is not set
-+CONFIG_MODULE_UNLOAD=y
-+# CONFIG_MODULE_FORCE_UNLOAD is not set
-+# CONFIG_MODVERSIONS is not set
-+# CONFIG_MODULE_SRCVERSION_ALL is not set
-+CONFIG_BLOCK=y
-+# CONFIG_LBD is not set
-+# CONFIG_BLK_DEV_BSG is not set
-+# CONFIG_BLK_DEV_INTEGRITY is not set
-+
-+#
-+# IO Schedulers
-+#
-+CONFIG_IOSCHED_NOOP=y
-+CONFIG_IOSCHED_AS=y
-+# CONFIG_IOSCHED_DEADLINE is not set
-+# CONFIG_IOSCHED_CFQ is not set
-+CONFIG_DEFAULT_AS=y
-+# CONFIG_DEFAULT_DEADLINE is not set
-+# CONFIG_DEFAULT_CFQ is not set
-+# CONFIG_DEFAULT_NOOP is not set
-+CONFIG_DEFAULT_IOSCHED="anticipatory"
-+# CONFIG_FREEZER is not set
-+
-+#
-+# System Type
-+#
-+# CONFIG_ARCH_AAEC2000 is not set
-+# CONFIG_ARCH_INTEGRATOR is not set
-+# CONFIG_ARCH_REALVIEW is not set
-+# CONFIG_ARCH_VERSATILE is not set
-+CONFIG_ARCH_AT91=y
-+# CONFIG_ARCH_CLPS711X is not set
-+# CONFIG_ARCH_EBSA110 is not set
-+# CONFIG_ARCH_EP93XX is not set
-+# CONFIG_ARCH_GEMINI is not set
-+# CONFIG_ARCH_FOOTBRIDGE is not set
-+# CONFIG_ARCH_NETX is not set
-+# CONFIG_ARCH_H720X is not set
-+# CONFIG_ARCH_IMX is not set
-+# CONFIG_ARCH_IOP13XX is not set
-+# CONFIG_ARCH_IOP32X is not set
-+# CONFIG_ARCH_IOP33X is not set
-+# CONFIG_ARCH_IXP23XX is not set
-+# CONFIG_ARCH_IXP2000 is not set
-+# CONFIG_ARCH_IXP4XX is not set
-+# CONFIG_ARCH_L7200 is not set
-+# CONFIG_ARCH_KIRKWOOD is not set
-+# CONFIG_ARCH_KS8695 is not set
-+# CONFIG_ARCH_NS9XXX is not set
-+# CONFIG_ARCH_LOKI is not set
-+# CONFIG_ARCH_MV78XX0 is not set
-+# CONFIG_ARCH_MXC is not set
-+# CONFIG_ARCH_ORION5X is not set
-+# CONFIG_ARCH_PNX4008 is not set
-+# CONFIG_ARCH_PXA is not set
-+# CONFIG_ARCH_MMP is not set
-+# CONFIG_ARCH_RPC is not set
-+# CONFIG_ARCH_SA1100 is not set
-+# CONFIG_ARCH_S3C2410 is not set
-+# CONFIG_ARCH_S3C64XX is not set
-+# CONFIG_ARCH_SHARK is not set
-+# CONFIG_ARCH_LH7A40X is not set
-+# CONFIG_ARCH_DAVINCI is not set
-+# CONFIG_ARCH_OMAP is not set
-+# CONFIG_ARCH_MSM is not set
-+# CONFIG_ARCH_W90X900 is not set
-+
-+#
-+# Atmel AT91 System-on-Chip
-+#
-+# CONFIG_ARCH_AT91RM9200 is not set
-+# CONFIG_ARCH_AT91SAM9260 is not set
-+# CONFIG_ARCH_AT91SAM9261 is not set
-+# CONFIG_ARCH_AT91SAM9G10 is not set
-+# CONFIG_ARCH_AT91SAM9263 is not set
-+# CONFIG_ARCH_AT91SAM9RL is not set
-+# CONFIG_ARCH_AT91SAM9G20 is not set
-+# CONFIG_ARCH_AT91SAM9G45 is not set
-+CONFIG_ARCH_AT91SAM9M10=y
-+# CONFIG_ARCH_AT91CAP9 is not set
-+# CONFIG_ARCH_AT572D940HF is not set
-+# CONFIG_ARCH_AT91X40 is not set
-+CONFIG_AT91_PMC_UNIT=y
-+# CONFIG_MACH_AT91SAM9M10G45EK is not set
-+
-+#
-+# AT91SAM9M10 Board Type
-+#
-+CONFIG_MACH_AT91SAM9M10EKES=y
-+
-+#
-+# AT91 Board Options
-+#
-+# CONFIG_MTD_NAND_ATMEL_BUSWIDTH_16 is not set
-+CONFIG_MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH=y
-+CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE=124
-+CONFIG_MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE=y
-+
-+#
-+# AT91 Feature Selections
-+#
-+CONFIG_AT91_PROGRAMMABLE_CLOCKS=y
-+CONFIG_AT91_TIMER_HZ=100
-+CONFIG_AT91_EARLY_DBGU=y
-+# CONFIG_AT91_EARLY_USART0 is not set
-+# CONFIG_AT91_EARLY_USART1 is not set
-+# CONFIG_AT91_EARLY_USART2 is not set
-+# CONFIG_AT91_EARLY_USART3 is not set
-+# CONFIG_AT91_EARLY_USART4 is not set
-+# CONFIG_AT91_EARLY_USART5 is not set
-+
-+#
-+# Processor Type
-+#
-+CONFIG_CPU_32=y
-+CONFIG_CPU_ARM926T=y
-+CONFIG_CPU_32v5=y
-+CONFIG_CPU_ABRT_EV5TJ=y
-+CONFIG_CPU_PABRT_NOIFAR=y
-+CONFIG_CPU_CACHE_VIVT=y
-+CONFIG_CPU_COPY_V4WB=y
-+CONFIG_CPU_TLB_V4WBI=y
-+CONFIG_CPU_CP15=y
-+CONFIG_CPU_CP15_MMU=y
-+
-+#
-+# Processor Features
-+#
-+CONFIG_ARM_THUMB=y
-+# CONFIG_CPU_ICACHE_DISABLE is not set
-+# CONFIG_CPU_DCACHE_DISABLE is not set
-+# CONFIG_CPU_DCACHE_WRITETHROUGH is not set
-+# CONFIG_CPU_CACHE_ROUND_ROBIN is not set
-+# CONFIG_OUTER_CACHE is not set
-+
-+#
-+# Bus support
-+#
-+# CONFIG_PCI_SYSCALL is not set
-+# CONFIG_ARCH_SUPPORTS_MSI is not set
-+# CONFIG_PCCARD is not set
-+
-+#
-+# Kernel Features
-+#
-+# CONFIG_NO_HZ is not set
-+# CONFIG_HIGH_RES_TIMERS is not set
-+CONFIG_GENERIC_CLOCKEVENTS_BUILD=y
-+CONFIG_VMSPLIT_3G=y
-+# CONFIG_VMSPLIT_2G is not set
-+# CONFIG_VMSPLIT_1G is not set
-+CONFIG_PAGE_OFFSET=0xC0000000
-+# CONFIG_PREEMPT is not set
-+CONFIG_HZ=100
-+CONFIG_AEABI=y
-+CONFIG_OABI_COMPAT=y
-+# CONFIG_ARCH_HAS_HOLES_MEMORYMODEL is not set
-+# CONFIG_ARCH_SPARSEMEM_DEFAULT is not set
-+# CONFIG_ARCH_SELECT_MEMORY_MODEL is not set
-+# CONFIG_HIGHMEM is not set
-+CONFIG_SELECT_MEMORY_MODEL=y
-+CONFIG_FLATMEM_MANUAL=y
-+# CONFIG_DISCONTIGMEM_MANUAL is not set
-+# CONFIG_SPARSEMEM_MANUAL is not set
-+CONFIG_FLATMEM=y
-+CONFIG_FLAT_NODE_MEM_MAP=y
-+CONFIG_PAGEFLAGS_EXTENDED=y
-+CONFIG_SPLIT_PTLOCK_CPUS=4096
-+# CONFIG_PHYS_ADDR_T_64BIT is not set
-+CONFIG_ZONE_DMA_FLAG=0
-+CONFIG_VIRT_TO_BUS=y
-+CONFIG_UNEVICTABLE_LRU=y
-+CONFIG_HAVE_MLOCK=y
-+CONFIG_HAVE_MLOCKED_PAGE_BIT=y
-+CONFIG_LEDS=y
-+CONFIG_LEDS_CPU=y
-+CONFIG_ALIGNMENT_TRAP=y
-+
-+#
-+# Boot options
-+#
-+CONFIG_ZBOOT_ROM_TEXT=0x0
-+CONFIG_ZBOOT_ROM_BSS=0x0
-+CONFIG_CMDLINE="mem=64M console=ttyS0,115200 initrd=0x71100000,25165824 root=/dev/ram0 rw"
-+# CONFIG_XIP_KERNEL is not set
-+# CONFIG_KEXEC is not set
-+
-+#
-+# CPU Power Management
-+#
-+# CONFIG_CPU_IDLE is not set
-+
-+#
-+# Floating point emulation
-+#
-+
-+#
-+# At least one emulation must be selected
-+#
-+CONFIG_FPE_NWFPE=y
-+# CONFIG_FPE_NWFPE_XP is not set
-+# CONFIG_FPE_FASTFPE is not set
-+# CONFIG_VFP is not set
-+
-+#
-+# Userspace binary formats
-+#
-+CONFIG_BINFMT_ELF=y
-+# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
-+CONFIG_HAVE_AOUT=y
-+# CONFIG_BINFMT_AOUT is not set
-+# CONFIG_BINFMT_MISC is not set
-+
-+#
-+# Power management options
-+#
-+# CONFIG_PM is not set
-+CONFIG_ARCH_SUSPEND_POSSIBLE=y
-+CONFIG_NET=y
-+
-+#
-+# Networking options
-+#
-+CONFIG_PACKET=y
-+# CONFIG_PACKET_MMAP is not set
-+CONFIG_UNIX=y
-+# CONFIG_NET_KEY is not set
-+CONFIG_INET=y
-+CONFIG_IP_MULTICAST=y
-+# CONFIG_IP_ADVANCED_ROUTER is not set
-+CONFIG_IP_FIB_HASH=y
-+# CONFIG_IP_PNP is not set
-+# CONFIG_NET_IPIP is not set
-+# CONFIG_NET_IPGRE is not set
-+# CONFIG_IP_MROUTE is not set
-+# CONFIG_ARPD is not set
-+# CONFIG_SYN_COOKIES is not set
-+# CONFIG_INET_AH is not set
-+# CONFIG_INET_ESP is not set
-+# CONFIG_INET_IPCOMP is not set
-+# CONFIG_INET_XFRM_TUNNEL is not set
-+# CONFIG_INET_TUNNEL is not set
-+# CONFIG_INET_XFRM_MODE_TRANSPORT is not set
-+# CONFIG_INET_XFRM_MODE_TUNNEL is not set
-+# CONFIG_INET_XFRM_MODE_BEET is not set
-+# CONFIG_INET_LRO is not set
-+# CONFIG_INET_DIAG is not set
-+# CONFIG_TCP_CONG_ADVANCED is not set
-+CONFIG_TCP_CONG_CUBIC=y
-+CONFIG_DEFAULT_TCP_CONG="cubic"
-+# CONFIG_TCP_MD5SIG is not set
-+# CONFIG_IPV6 is not set
-+# CONFIG_NETWORK_SECMARK is not set
-+# CONFIG_NETFILTER is not set
-+# CONFIG_IP_DCCP is not set
-+# CONFIG_IP_SCTP is not set
-+# CONFIG_TIPC is not set
-+# CONFIG_ATM is not set
-+# CONFIG_BRIDGE is not set
-+# CONFIG_NET_DSA is not set
-+# CONFIG_VLAN_8021Q is not set
-+# CONFIG_DECNET is not set
-+# CONFIG_LLC2 is not set
-+# CONFIG_IPX is not set
-+# CONFIG_ATALK is not set
-+# CONFIG_X25 is not set
-+# CONFIG_LAPB is not set
-+# CONFIG_ECONET is not set
-+# CONFIG_WAN_ROUTER is not set
-+# CONFIG_PHONET is not set
-+# CONFIG_NET_SCHED is not set
-+# CONFIG_DCB is not set
-+
-+#
-+# Network testing
-+#
-+# CONFIG_NET_PKTGEN is not set
-+# CONFIG_HAMRADIO is not set
-+# CONFIG_CAN is not set
-+# CONFIG_IRDA is not set
-+# CONFIG_BT is not set
-+# CONFIG_AF_RXRPC is not set
-+CONFIG_WIRELESS=y
-+CONFIG_CFG80211=y
-+# CONFIG_CFG80211_REG_DEBUG is not set
-+# CONFIG_WIRELESS_OLD_REGULATORY is not set
-+CONFIG_WIRELESS_EXT=y
-+CONFIG_WIRELESS_EXT_SYSFS=y
-+CONFIG_LIB80211=y
-+# CONFIG_LIB80211_DEBUG is not set
-+CONFIG_MAC80211=y
-+
-+#
-+# Rate control algorithm selection
-+#
-+CONFIG_MAC80211_RC_MINSTREL=y
-+# CONFIG_MAC80211_RC_DEFAULT_PID is not set
-+CONFIG_MAC80211_RC_DEFAULT_MINSTREL=y
-+CONFIG_MAC80211_RC_DEFAULT="minstrel"
-+# CONFIG_MAC80211_MESH is not set
-+# CONFIG_MAC80211_LEDS is not set
-+# CONFIG_MAC80211_DEBUG_MENU is not set
-+# CONFIG_WIMAX is not set
-+# CONFIG_RFKILL is not set
-+# CONFIG_NET_9P is not set
-+
-+#
-+# Device Drivers
-+#
-+
-+#
-+# Generic Driver Options
-+#
-+CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
-+CONFIG_STANDALONE=y
-+CONFIG_PREVENT_FIRMWARE_BUILD=y
-+CONFIG_FW_LOADER=y
-+CONFIG_FIRMWARE_IN_KERNEL=y
-+CONFIG_EXTRA_FIRMWARE=""
-+# CONFIG_SYS_HYPERVISOR is not set
-+# CONFIG_CONNECTOR is not set
-+CONFIG_MTD=y
-+# CONFIG_MTD_DEBUG is not set
-+# CONFIG_MTD_CONCAT is not set
-+CONFIG_MTD_PARTITIONS=y
-+# CONFIG_MTD_TESTS is not set
-+# CONFIG_MTD_REDBOOT_PARTS is not set
-+CONFIG_MTD_CMDLINE_PARTS=y
-+# CONFIG_MTD_AFS_PARTS is not set
-+# CONFIG_MTD_AR7_PARTS is not set
-+
-+#
-+# User Modules And Translation Layers
-+#
-+CONFIG_MTD_CHAR=y
-+CONFIG_MTD_BLKDEVS=y
-+CONFIG_MTD_BLOCK=y
-+# CONFIG_FTL is not set
-+# CONFIG_NFTL is not set
-+# CONFIG_INFTL is not set
-+# CONFIG_RFD_FTL is not set
-+# CONFIG_SSFDC is not set
-+# CONFIG_MTD_OOPS is not set
-+
-+#
-+# RAM/ROM/Flash chip drivers
-+#
-+# CONFIG_MTD_CFI is not set
-+# CONFIG_MTD_JEDECPROBE is not set
-+CONFIG_MTD_MAP_BANK_WIDTH_1=y
-+CONFIG_MTD_MAP_BANK_WIDTH_2=y
-+CONFIG_MTD_MAP_BANK_WIDTH_4=y
-+# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
-+# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
-+# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
-+CONFIG_MTD_CFI_I1=y
-+CONFIG_MTD_CFI_I2=y
-+# CONFIG_MTD_CFI_I4 is not set
-+# CONFIG_MTD_CFI_I8 is not set
-+# CONFIG_MTD_RAM is not set
-+# CONFIG_MTD_ROM is not set
-+# CONFIG_MTD_ABSENT is not set
-+
-+#
-+# Mapping drivers for chip access
-+#
-+# CONFIG_MTD_COMPLEX_MAPPINGS is not set
-+# CONFIG_MTD_PLATRAM is not set
-+
-+#
-+# Self-contained MTD device drivers
-+#
-+# CONFIG_MTD_DATAFLASH is not set
-+# CONFIG_MTD_M25P80 is not set
-+# CONFIG_MTD_SLRAM is not set
-+# CONFIG_MTD_PHRAM is not set
-+# CONFIG_MTD_MTDRAM is not set
-+# CONFIG_MTD_BLOCK2MTD is not set
-+
-+#
-+# Disk-On-Chip Device Drivers
-+#
-+# CONFIG_MTD_DOC2000 is not set
-+# CONFIG_MTD_DOC2001 is not set
-+# CONFIG_MTD_DOC2001PLUS is not set
-+CONFIG_MTD_NAND=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
-+# CONFIG_MTD_NAND_ECC_SMC is not set
-+# CONFIG_MTD_NAND_MUSEUM_IDS is not set
-+# CONFIG_MTD_NAND_GPIO is not set
-+CONFIG_MTD_NAND_IDS=y
-+# CONFIG_MTD_NAND_DISKONCHIP is not set
-+CONFIG_MTD_NAND_ATMEL=y
-+CONFIG_MTD_NAND_ATMEL_ECC_SOFT=y
-+# CONFIG_MTD_NAND_ATMEL_ECC_HW is not set
-+# CONFIG_MTD_NAND_ATMEL_ECC_NONE is not set
-+# CONFIG_MTD_NAND_NANDSIM is not set
-+# CONFIG_MTD_NAND_PLATFORM is not set
-+# CONFIG_MTD_ALAUDA is not set
-+# CONFIG_MTD_ONENAND is not set
-+
-+#
-+# LPDDR flash memory drivers
-+#
-+# CONFIG_MTD_LPDDR is not set
-+
-+#
-+# UBI - Unsorted block images
-+#
-+# CONFIG_MTD_UBI is not set
-+# CONFIG_PARPORT is not set
-+CONFIG_BLK_DEV=y
-+# CONFIG_BLK_DEV_COW_COMMON is not set
-+CONFIG_BLK_DEV_LOOP=y
-+# CONFIG_BLK_DEV_CRYPTOLOOP is not set
-+# CONFIG_BLK_DEV_NBD is not set
-+# CONFIG_BLK_DEV_UB is not set
-+CONFIG_BLK_DEV_RAM=y
-+CONFIG_BLK_DEV_RAM_COUNT=4
-+CONFIG_BLK_DEV_RAM_SIZE=8192
-+# CONFIG_BLK_DEV_XIP is not set
-+# CONFIG_CDROM_PKTCDVD is not set
-+# CONFIG_ATA_OVER_ETH is not set
-+CONFIG_MISC_DEVICES=y
-+CONFIG_ATMEL_TCLIB=y
-+CONFIG_ATMEL_TCB_CLKSRC=y
-+CONFIG_ATMEL_TCB_CLKSRC_BLOCK=0
-+# CONFIG_ICS932S401 is not set
-+# CONFIG_ATMEL_SSC is not set
-+# CONFIG_ENCLOSURE_SERVICES is not set
-+# CONFIG_ISL29003 is not set
-+# CONFIG_C2PORT is not set
-+
-+#
-+# EEPROM support
-+#
-+# CONFIG_EEPROM_AT24 is not set
-+# CONFIG_EEPROM_AT25 is not set
-+# CONFIG_EEPROM_LEGACY is not set
-+CONFIG_EEPROM_93CX6=m
-+CONFIG_HAVE_IDE=y
-+# CONFIG_IDE is not set
-+
-+#
-+# SCSI device support
-+#
-+# CONFIG_RAID_ATTRS is not set
-+CONFIG_SCSI=y
-+CONFIG_SCSI_DMA=y
-+# CONFIG_SCSI_TGT is not set
-+# CONFIG_SCSI_NETLINK is not set
-+CONFIG_SCSI_PROC_FS=y
-+
-+#
-+# SCSI support type (disk, tape, CD-ROM)
-+#
-+CONFIG_BLK_DEV_SD=y
-+# CONFIG_CHR_DEV_ST is not set
-+# CONFIG_CHR_DEV_OSST is not set
-+# CONFIG_BLK_DEV_SR is not set
-+# CONFIG_CHR_DEV_SG is not set
-+# CONFIG_CHR_DEV_SCH is not set
-+
-+#
-+# Some SCSI devices (e.g. CD jukebox) support multiple LUNs
-+#
-+CONFIG_SCSI_MULTI_LUN=y
-+# CONFIG_SCSI_CONSTANTS is not set
-+# CONFIG_SCSI_LOGGING is not set
-+# CONFIG_SCSI_SCAN_ASYNC is not set
-+CONFIG_SCSI_WAIT_SCAN=m
-+
-+#
-+# SCSI Transports
-+#
-+# CONFIG_SCSI_SPI_ATTRS is not set
-+# CONFIG_SCSI_FC_ATTRS is not set
-+# CONFIG_SCSI_ISCSI_ATTRS is not set
-+# CONFIG_SCSI_SAS_LIBSAS is not set
-+# CONFIG_SCSI_SRP_ATTRS is not set
-+# CONFIG_SCSI_LOWLEVEL is not set
-+# CONFIG_SCSI_DH is not set
-+# CONFIG_SCSI_OSD_INITIATOR is not set
-+# CONFIG_ATA is not set
-+# CONFIG_MD is not set
-+CONFIG_NETDEVICES=y
-+CONFIG_COMPAT_NET_DEV_OPS=y
-+# CONFIG_DUMMY is not set
-+# CONFIG_BONDING is not set
-+# CONFIG_MACVLAN is not set
-+# CONFIG_EQUALIZER is not set
-+# CONFIG_TUN is not set
-+# CONFIG_VETH is not set
-+CONFIG_PHYLIB=y
-+
-+#
-+# MII PHY device drivers
-+#
-+# CONFIG_MARVELL_PHY is not set
-+CONFIG_DAVICOM_PHY=y
-+# CONFIG_QSEMI_PHY is not set
-+# CONFIG_LXT_PHY is not set
-+# CONFIG_CICADA_PHY is not set
-+# CONFIG_VITESSE_PHY is not set
-+# CONFIG_SMSC_PHY is not set
-+# CONFIG_BROADCOM_PHY is not set
-+# CONFIG_ICPLUS_PHY is not set
-+# CONFIG_REALTEK_PHY is not set
-+# CONFIG_NATIONAL_PHY is not set
-+# CONFIG_STE10XP is not set
-+# CONFIG_LSI_ET1011C_PHY is not set
-+# CONFIG_FIXED_PHY is not set
-+# CONFIG_MDIO_BITBANG is not set
-+CONFIG_NET_ETHERNET=y
-+CONFIG_MII=y
-+CONFIG_MACB=y
-+# CONFIG_AX88796 is not set
-+# CONFIG_SMC91X is not set
-+# CONFIG_DM9000 is not set
-+# CONFIG_ENC28J60 is not set
-+# CONFIG_ETHOC is not set
-+# CONFIG_SMC911X is not set
-+# CONFIG_SMSC911X is not set
-+# CONFIG_DNET is not set
-+# CONFIG_IBM_NEW_EMAC_ZMII is not set
-+# CONFIG_IBM_NEW_EMAC_RGMII is not set
-+# CONFIG_IBM_NEW_EMAC_TAH is not set
-+# CONFIG_IBM_NEW_EMAC_EMAC4 is not set
-+# CONFIG_IBM_NEW_EMAC_NO_FLOW_CTRL is not set
-+# CONFIG_IBM_NEW_EMAC_MAL_CLR_ICINTSTAT is not set
-+# CONFIG_IBM_NEW_EMAC_MAL_COMMON_ERR is not set
-+# CONFIG_B44 is not set
-+# CONFIG_NETDEV_1000 is not set
-+# CONFIG_NETDEV_10000 is not set
-+
-+#
-+# Wireless LAN
-+#
-+# CONFIG_WLAN_PRE80211 is not set
-+CONFIG_WLAN_80211=y
-+CONFIG_LIBERTAS=m
-+CONFIG_LIBERTAS_USB=m
-+CONFIG_LIBERTAS_SDIO=m
-+CONFIG_LIBERTAS_SPI=m
-+# CONFIG_LIBERTAS_DEBUG is not set
-+# CONFIG_LIBERTAS_THINFIRM is not set
-+# CONFIG_AT76C50X_USB is not set
-+CONFIG_USB_ZD1201=m
-+# CONFIG_USB_NET_RNDIS_WLAN is not set
-+CONFIG_RTL8187=m
-+# CONFIG_MAC80211_HWSIM is not set
-+# CONFIG_P54_COMMON is not set
-+CONFIG_AR9170_USB=m
-+# CONFIG_HOSTAP is not set
-+# CONFIG_B43 is not set
-+# CONFIG_B43LEGACY is not set
-+CONFIG_ZD1211RW=m
-+# CONFIG_ZD1211RW_DEBUG is not set
-+CONFIG_RT2X00=m
-+CONFIG_RT2500USB=m
-+CONFIG_RT73USB=m
-+CONFIG_RT2X00_LIB_USB=m
-+CONFIG_RT2X00_LIB=m
-+CONFIG_RT2X00_LIB_FIRMWARE=y
-+CONFIG_RT2X00_LIB_CRYPTO=y
-+CONFIG_RT2X00_LIB_RFKILL=y
-+CONFIG_RT2X00_LIB_LEDS=y
-+# CONFIG_RT2X00_DEBUG is not set
-+
-+#
-+# Enable WiMAX (Networking options) to see the WiMAX drivers
-+#
-+
-+#
-+# USB Network Adapters
-+#
-+# CONFIG_USB_CATC is not set
-+# CONFIG_USB_KAWETH is not set
-+# CONFIG_USB_PEGASUS is not set
-+# CONFIG_USB_RTL8150 is not set
-+# CONFIG_USB_USBNET is not set
-+# CONFIG_WAN is not set
-+# CONFIG_PPP is not set
-+# CONFIG_SLIP is not set
-+# CONFIG_NETCONSOLE is not set
-+# CONFIG_NETPOLL is not set
-+# CONFIG_NET_POLL_CONTROLLER is not set
-+# CONFIG_ISDN is not set
-+
-+#
-+# Input device support
-+#
-+CONFIG_INPUT=y
-+# CONFIG_INPUT_FF_MEMLESS is not set
-+CONFIG_INPUT_POLLDEV=m
-+
-+#
-+# Userland interfaces
-+#
-+CONFIG_INPUT_MOUSEDEV=y
-+# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
-+CONFIG_INPUT_MOUSEDEV_SCREEN_X=480
-+CONFIG_INPUT_MOUSEDEV_SCREEN_Y=272
-+CONFIG_INPUT_JOYDEV=y
-+CONFIG_INPUT_EVDEV=y
-+# CONFIG_INPUT_EVBUG is not set
-+
-+#
-+# Input Device Drivers
-+#
-+CONFIG_INPUT_KEYBOARD=y
-+# CONFIG_KEYBOARD_ATKBD is not set
-+# CONFIG_KEYBOARD_SUNKBD is not set
-+# CONFIG_KEYBOARD_LKKBD is not set
-+# CONFIG_KEYBOARD_XTKBD is not set
-+# CONFIG_KEYBOARD_NEWTON is not set
-+# CONFIG_KEYBOARD_STOWAWAY is not set
-+CONFIG_KEYBOARD_GPIO=y
-+# CONFIG_INPUT_MOUSE is not set
-+# CONFIG_INPUT_JOYSTICK is not set
-+# CONFIG_INPUT_TABLET is not set
-+CONFIG_INPUT_TOUCHSCREEN=y
-+# CONFIG_TOUCHSCREEN_ADS7846 is not set
-+# CONFIG_TOUCHSCREEN_AD7877 is not set
-+# CONFIG_TOUCHSCREEN_AD7879_I2C is not set
-+# CONFIG_TOUCHSCREEN_AD7879_SPI is not set
-+# CONFIG_TOUCHSCREEN_AD7879 is not set
-+# CONFIG_TOUCHSCREEN_FUJITSU is not set
-+# CONFIG_TOUCHSCREEN_GUNZE is not set
-+# CONFIG_TOUCHSCREEN_ELO is not set
-+# CONFIG_TOUCHSCREEN_WACOM_W8001 is not set
-+# CONFIG_TOUCHSCREEN_MTOUCH is not set
-+# CONFIG_TOUCHSCREEN_INEXIO is not set
-+# CONFIG_TOUCHSCREEN_MK712 is not set
-+# CONFIG_TOUCHSCREEN_PENMOUNT is not set
-+# CONFIG_TOUCHSCREEN_TOUCHRIGHT is not set
-+# CONFIG_TOUCHSCREEN_TOUCHWIN is not set
-+CONFIG_TOUCHSCREEN_ATMEL_TSADCC=y
-+# CONFIG_TOUCHSCREEN_WM97XX is not set
-+# CONFIG_TOUCHSCREEN_USB_COMPOSITE is not set
-+# CONFIG_TOUCHSCREEN_TOUCHIT213 is not set
-+# CONFIG_TOUCHSCREEN_TSC2007 is not set
-+# CONFIG_INPUT_MISC is not set
-+
-+#
-+# Hardware I/O ports
-+#
-+# CONFIG_SERIO is not set
-+# CONFIG_GAMEPORT is not set
-+
-+#
-+# Character devices
-+#
-+CONFIG_VT=y
-+CONFIG_CONSOLE_TRANSLATIONS=y
-+CONFIG_VT_CONSOLE=y
-+CONFIG_HW_CONSOLE=y
-+# CONFIG_VT_HW_CONSOLE_BINDING is not set
-+CONFIG_DEVKMEM=y
-+# CONFIG_SERIAL_NONSTANDARD is not set
-+
-+#
-+# Serial drivers
-+#
-+# CONFIG_SERIAL_8250 is not set
-+
-+#
-+# Non-8250 serial port support
-+#
-+CONFIG_SERIAL_ATMEL=y
-+CONFIG_SERIAL_ATMEL_CONSOLE=y
-+CONFIG_SERIAL_ATMEL_PDC=y
-+# CONFIG_SERIAL_ATMEL_TTYAT is not set
-+# CONFIG_SERIAL_MAX3100 is not set
-+CONFIG_SERIAL_CORE=y
-+CONFIG_SERIAL_CORE_CONSOLE=y
-+CONFIG_UNIX98_PTYS=y
-+# CONFIG_DEVPTS_MULTIPLE_INSTANCES is not set
-+CONFIG_LEGACY_PTYS=y
-+CONFIG_LEGACY_PTY_COUNT=4
-+# CONFIG_IPMI_HANDLER is not set
-+CONFIG_HW_RANDOM=y
-+# CONFIG_HW_RANDOM_TIMERIOMEM is not set
-+# CONFIG_R3964 is not set
-+# CONFIG_RAW_DRIVER is not set
-+# CONFIG_TCG_TPM is not set
-+CONFIG_I2C=y
-+CONFIG_I2C_BOARDINFO=y
-+# CONFIG_I2C_CHARDEV is not set
-+CONFIG_I2C_HELPER_AUTO=y
-+CONFIG_I2C_ALGOBIT=y
-+
-+#
-+# I2C Hardware Bus support
-+#
-+
-+#
-+# I2C system bus drivers (mostly embedded / system-on-chip)
-+#
-+CONFIG_I2C_GPIO=y
-+# CONFIG_I2C_OCORES is not set
-+# CONFIG_I2C_SIMTEC is not set
-+
-+#
-+# External I2C/SMBus adapter drivers
-+#
-+# CONFIG_I2C_PARPORT_LIGHT is not set
-+# CONFIG_I2C_TAOS_EVM is not set
-+# CONFIG_I2C_TINY_USB is not set
-+
-+#
-+# Other I2C/SMBus bus drivers
-+#
-+# CONFIG_I2C_PCA_PLATFORM is not set
-+# CONFIG_I2C_STUB is not set
-+
-+#
-+# Miscellaneous I2C Chip support
-+#
-+# CONFIG_DS1682 is not set
-+# CONFIG_SENSORS_PCF8574 is not set
-+# CONFIG_PCF8575 is not set
-+# CONFIG_SENSORS_PCA9539 is not set
-+# CONFIG_SENSORS_MAX6875 is not set
-+# CONFIG_SENSORS_TSL2550 is not set
-+# CONFIG_I2C_DEBUG_CORE is not set
-+# CONFIG_I2C_DEBUG_ALGO is not set
-+# CONFIG_I2C_DEBUG_BUS is not set
-+# CONFIG_I2C_DEBUG_CHIP is not set
-+CONFIG_SPI=y
-+CONFIG_SPI_MASTER=y
-+
-+#
-+# SPI Master Controller Drivers
-+#
-+CONFIG_SPI_ATMEL=y
-+# CONFIG_SPI_BITBANG is not set
-+# CONFIG_SPI_GPIO is not set
-+
-+#
-+# SPI Protocol Masters
-+#
-+# CONFIG_SPI_SPIDEV is not set
-+# CONFIG_SPI_TLE62X0 is not set
-+CONFIG_ARCH_REQUIRE_GPIOLIB=y
-+CONFIG_GPIOLIB=y
-+# CONFIG_GPIO_SYSFS is not set
-+
-+#
-+# Memory mapped GPIO expanders:
-+#
-+
-+#
-+# I2C GPIO expanders:
-+#
-+# CONFIG_GPIO_MAX732X is not set
-+# CONFIG_GPIO_PCA953X is not set
-+# CONFIG_GPIO_PCF857X is not set
-+
-+#
-+# PCI GPIO expanders:
-+#
-+
-+#
-+# SPI GPIO expanders:
-+#
-+# CONFIG_GPIO_MAX7301 is not set
-+# CONFIG_GPIO_MCP23S08 is not set
-+# CONFIG_W1 is not set
-+# CONFIG_POWER_SUPPLY is not set
-+# CONFIG_HWMON is not set
-+# CONFIG_THERMAL is not set
-+# CONFIG_THERMAL_HWMON is not set
-+# CONFIG_WATCHDOG is not set
-+CONFIG_SSB_POSSIBLE=y
-+
-+#
-+# Sonics Silicon Backplane
-+#
-+# CONFIG_SSB is not set
-+
-+#
-+# Multifunction device drivers
-+#
-+# CONFIG_MFD_CORE is not set
-+# CONFIG_MFD_SM501 is not set
-+# CONFIG_MFD_ASIC3 is not set
-+# CONFIG_HTC_EGPIO is not set
-+# CONFIG_HTC_PASIC3 is not set
-+# CONFIG_UCB1400_CORE is not set
-+# CONFIG_TPS65010 is not set
-+# CONFIG_TWL4030_CORE is not set
-+# CONFIG_MFD_TMIO is not set
-+# CONFIG_MFD_T7L66XB is not set
-+# CONFIG_MFD_TC6387XB is not set
-+# CONFIG_MFD_TC6393XB is not set
-+# CONFIG_PMIC_DA903X is not set
-+# CONFIG_MFD_WM8400 is not set
-+# CONFIG_MFD_WM8350_I2C is not set
-+# CONFIG_MFD_PCF50633 is not set
-+
-+#
-+# Multimedia devices
-+#
-+
-+#
-+# Multimedia core support
-+#
-+# CONFIG_VIDEO_DEV is not set
-+# CONFIG_DVB_CORE is not set
-+# CONFIG_VIDEO_MEDIA is not set
-+
-+#
-+# Multimedia drivers
-+#
-+# CONFIG_DAB is not set
-+
-+#
-+# Graphics support
-+#
-+# CONFIG_VGASTATE is not set
-+# CONFIG_VIDEO_OUTPUT_CONTROL is not set
-+CONFIG_FB=y
-+# CONFIG_FIRMWARE_EDID is not set
-+# CONFIG_FB_DDC is not set
-+# CONFIG_FB_BOOT_VESA_SUPPORT is not set
-+CONFIG_FB_CFB_FILLRECT=y
-+CONFIG_FB_CFB_COPYAREA=y
-+CONFIG_FB_CFB_IMAGEBLIT=y
-+# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
-+# CONFIG_FB_SYS_FILLRECT is not set
-+# CONFIG_FB_SYS_COPYAREA is not set
-+# CONFIG_FB_SYS_IMAGEBLIT is not set
-+# CONFIG_FB_FOREIGN_ENDIAN is not set
-+# CONFIG_FB_SYS_FOPS is not set
-+# CONFIG_FB_SVGALIB is not set
-+# CONFIG_FB_MACMODES is not set
-+# CONFIG_FB_BACKLIGHT is not set
-+# CONFIG_FB_MODE_HELPERS is not set
-+# CONFIG_FB_TILEBLITTING is not set
-+
-+#
-+# Frame buffer hardware drivers
-+#
-+# CONFIG_FB_S1D15605 is not set
-+# CONFIG_FB_S1D13XXX is not set
-+CONFIG_FB_ATMEL=y
-+# CONFIG_FB_VIRTUAL is not set
-+# CONFIG_FB_METRONOME is not set
-+# CONFIG_FB_MB862XX is not set
-+# CONFIG_FB_BROADSHEET is not set
-+CONFIG_BACKLIGHT_LCD_SUPPORT=y
-+# CONFIG_LCD_CLASS_DEVICE is not set
-+CONFIG_BACKLIGHT_CLASS_DEVICE=y
-+CONFIG_BACKLIGHT_ATMEL_LCDC=y
-+# CONFIG_BACKLIGHT_GENERIC is not set
-+
-+#
-+# Display device support
-+#
-+# CONFIG_DISPLAY_SUPPORT is not set
-+
-+#
-+# Console display driver support
-+#
-+# CONFIG_VGA_CONSOLE is not set
-+CONFIG_DUMMY_CONSOLE=y
-+# CONFIG_FRAMEBUFFER_CONSOLE is not set
-+# CONFIG_LOGO is not set
-+CONFIG_SOUND=y
-+CONFIG_SOUND_OSS_CORE=y
-+CONFIG_SND=y
-+CONFIG_SND_TIMER=y
-+CONFIG_SND_PCM=y
-+CONFIG_SND_HWDEP=m
-+CONFIG_SND_RAWMIDI=m
-+CONFIG_SND_SEQUENCER=y
-+# CONFIG_SND_SEQ_DUMMY is not set
-+CONFIG_SND_OSSEMUL=y
-+CONFIG_SND_MIXER_OSS=y
-+CONFIG_SND_PCM_OSS=y
-+CONFIG_SND_PCM_OSS_PLUGINS=y
-+# CONFIG_SND_SEQUENCER_OSS is not set
-+# CONFIG_SND_DYNAMIC_MINORS is not set
-+# CONFIG_SND_SUPPORT_OLD_API is not set
-+# CONFIG_SND_VERBOSE_PROCFS is not set
-+# CONFIG_SND_VERBOSE_PRINTK is not set
-+# CONFIG_SND_DEBUG is not set
-+CONFIG_SND_VMASTER=y
-+CONFIG_SND_AC97_CODEC=y
-+# CONFIG_SND_DRIVERS is not set
-+# CONFIG_SND_ARM is not set
-+
-+#
-+# Atmel devices (AVR32 and AT91)
-+#
-+CONFIG_SND_ATMEL_AC97C=y
-+# CONFIG_SND_SPI is not set
-+CONFIG_SND_USB=y
-+CONFIG_SND_USB_AUDIO=m
-+# CONFIG_SND_USB_CAIAQ is not set
-+# CONFIG_SND_SOC is not set
-+# CONFIG_SOUND_PRIME is not set
-+CONFIG_AC97_BUS=y
-+CONFIG_HID_SUPPORT=y
-+CONFIG_HID=y
-+# CONFIG_HID_DEBUG is not set
-+# CONFIG_HIDRAW is not set
-+
-+#
-+# USB Input Devices
-+#
-+# CONFIG_USB_HID is not set
-+# CONFIG_HID_PID is not set
-+
-+#
-+# Special HID drivers
-+#
-+CONFIG_USB_SUPPORT=y
-+CONFIG_USB_ARCH_HAS_HCD=y
-+CONFIG_USB_ARCH_HAS_OHCI=y
-+CONFIG_USB_ARCH_HAS_EHCI=y
-+CONFIG_USB=y
-+# CONFIG_USB_DEBUG is not set
-+CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
-+
-+#
-+# Miscellaneous USB options
-+#
-+CONFIG_USB_DEVICEFS=y
-+# CONFIG_USB_DEVICE_CLASS is not set
-+# CONFIG_USB_DYNAMIC_MINORS is not set
-+# CONFIG_USB_OTG is not set
-+# CONFIG_USB_MON is not set
-+# CONFIG_USB_WUSB is not set
-+# CONFIG_USB_WUSB_CBAF is not set
-+
-+#
-+# USB Host Controller Drivers
-+#
-+# CONFIG_USB_C67X00_HCD is not set
-+CONFIG_USB_EHCI_HCD=y
-+# CONFIG_USB_EHCI_ROOT_HUB_TT is not set
-+# CONFIG_USB_EHCI_TT_NEWSCHED is not set
-+# CONFIG_USB_OXU210HP_HCD is not set
-+# CONFIG_USB_ISP116X_HCD is not set
-+# CONFIG_USB_ISP1760_HCD is not set
-+CONFIG_USB_OHCI_HCD=y
-+# CONFIG_USB_OHCI_BIG_ENDIAN_DESC is not set
-+# CONFIG_USB_OHCI_BIG_ENDIAN_MMIO is not set
-+CONFIG_USB_OHCI_LITTLE_ENDIAN=y
-+# CONFIG_USB_SL811_HCD is not set
-+# CONFIG_USB_R8A66597_HCD is not set
-+# CONFIG_USB_HWA_HCD is not set
-+# CONFIG_USB_MUSB_HDRC is not set
-+# CONFIG_USB_GADGET_MUSB_HDRC is not set
-+
-+#
-+# USB Device Class drivers
-+#
-+# CONFIG_USB_ACM is not set
-+# CONFIG_USB_PRINTER is not set
-+# CONFIG_USB_WDM is not set
-+# CONFIG_USB_TMC is not set
-+
-+#
-+# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may
-+#
-+
-+#
-+# also be needed; see USB_STORAGE Help for more info
-+#
-+CONFIG_USB_STORAGE=y
-+# CONFIG_USB_STORAGE_DEBUG is not set
-+# CONFIG_USB_STORAGE_DATAFAB is not set
-+# CONFIG_USB_STORAGE_FREECOM is not set
-+# CONFIG_USB_STORAGE_ISD200 is not set
-+# CONFIG_USB_STORAGE_USBAT is not set
-+# CONFIG_USB_STORAGE_SDDR09 is not set
-+# CONFIG_USB_STORAGE_SDDR55 is not set
-+# CONFIG_USB_STORAGE_JUMPSHOT is not set
-+# CONFIG_USB_STORAGE_ALAUDA is not set
-+# CONFIG_USB_STORAGE_ONETOUCH is not set
-+# CONFIG_USB_STORAGE_KARMA is not set
-+# CONFIG_USB_STORAGE_CYPRESS_ATACB is not set
-+# CONFIG_USB_LIBUSUAL is not set
-+
-+#
-+# USB Imaging devices
-+#
-+# CONFIG_USB_MDC800 is not set
-+# CONFIG_USB_MICROTEK is not set
-+
-+#
-+# USB port drivers
-+#
-+CONFIG_USB_SERIAL=m
-+# CONFIG_USB_EZUSB is not set
-+# CONFIG_USB_SERIAL_GENERIC is not set
-+# CONFIG_USB_SERIAL_AIRCABLE is not set
-+# CONFIG_USB_SERIAL_ARK3116 is not set
-+# CONFIG_USB_SERIAL_BELKIN is not set
-+# CONFIG_USB_SERIAL_CH341 is not set
-+# CONFIG_USB_SERIAL_WHITEHEAT is not set
-+# CONFIG_USB_SERIAL_DIGI_ACCELEPORT is not set
-+# CONFIG_USB_SERIAL_CP210X is not set
-+# CONFIG_USB_SERIAL_CYPRESS_M8 is not set
-+# CONFIG_USB_SERIAL_EMPEG is not set
-+# CONFIG_USB_SERIAL_FTDI_SIO is not set
-+# CONFIG_USB_SERIAL_FUNSOFT is not set
-+# CONFIG_USB_SERIAL_VISOR is not set
-+# CONFIG_USB_SERIAL_IPAQ is not set
-+# CONFIG_USB_SERIAL_IR is not set
-+# CONFIG_USB_SERIAL_EDGEPORT is not set
-+# CONFIG_USB_SERIAL_EDGEPORT_TI is not set
-+# CONFIG_USB_SERIAL_GARMIN is not set
-+# CONFIG_USB_SERIAL_IPW is not set
-+# CONFIG_USB_SERIAL_IUU is not set
-+# CONFIG_USB_SERIAL_KEYSPAN_PDA is not set
-+# CONFIG_USB_SERIAL_KEYSPAN is not set
-+# CONFIG_USB_SERIAL_KLSI is not set
-+# CONFIG_USB_SERIAL_KOBIL_SCT is not set
-+# CONFIG_USB_SERIAL_MCT_U232 is not set
-+# CONFIG_USB_SERIAL_MOS7720 is not set
-+# CONFIG_USB_SERIAL_MOS7840 is not set
-+# CONFIG_USB_SERIAL_MOTOROLA is not set
-+# CONFIG_USB_SERIAL_NAVMAN is not set
-+# CONFIG_USB_SERIAL_PL2303 is not set
-+# CONFIG_USB_SERIAL_OTI6858 is not set
-+# CONFIG_USB_SERIAL_QUALCOMM is not set
-+# CONFIG_USB_SERIAL_SPCP8X5 is not set
-+# CONFIG_USB_SERIAL_HP4X is not set
-+# CONFIG_USB_SERIAL_SAFE is not set
-+# CONFIG_USB_SERIAL_SIEMENS_MPI is not set
-+# CONFIG_USB_SERIAL_SIERRAWIRELESS is not set
-+# CONFIG_USB_SERIAL_SYMBOL is not set
-+# CONFIG_USB_SERIAL_TI is not set
-+# CONFIG_USB_SERIAL_CYBERJACK is not set
-+# CONFIG_USB_SERIAL_XIRCOM is not set
-+# CONFIG_USB_SERIAL_OPTION is not set
-+# CONFIG_USB_SERIAL_OMNINET is not set
-+# CONFIG_USB_SERIAL_OPTICON is not set
-+# CONFIG_USB_SERIAL_DEBUG is not set
-+
-+#
-+# USB Miscellaneous drivers
-+#
-+# CONFIG_USB_EMI62 is not set
-+# CONFIG_USB_EMI26 is not set
-+# CONFIG_USB_ADUTUX is not set
-+# CONFIG_USB_SEVSEG is not set
-+# CONFIG_USB_RIO500 is not set
-+# CONFIG_USB_LEGOTOWER is not set
-+# CONFIG_USB_LCD is not set
-+# CONFIG_USB_BERRY_CHARGE is not set
-+# CONFIG_USB_LED is not set
-+# CONFIG_USB_CYPRESS_CY7C63 is not set
-+# CONFIG_USB_CYTHERM is not set
-+# CONFIG_USB_IDMOUSE is not set
-+# CONFIG_USB_FTDI_ELAN is not set
-+# CONFIG_USB_APPLEDISPLAY is not set
-+# CONFIG_USB_SISUSBVGA is not set
-+# CONFIG_USB_LD is not set
-+# CONFIG_USB_TRANCEVIBRATOR is not set
-+# CONFIG_USB_IOWARRIOR is not set
-+# CONFIG_USB_TEST is not set
-+# CONFIG_USB_ISIGHTFW is not set
-+# CONFIG_USB_VST is not set
-+CONFIG_USB_GADGET=y
-+# CONFIG_USB_GADGET_DEBUG_FILES is not set
-+CONFIG_USB_GADGET_VBUS_DRAW=2
-+CONFIG_USB_GADGET_SELECTED=y
-+# CONFIG_USB_GADGET_AT91 is not set
-+CONFIG_USB_GADGET_ATMEL_USBA=y
-+CONFIG_USB_ATMEL_USBA=y
-+# CONFIG_USB_GADGET_FSL_USB2 is not set
-+# CONFIG_USB_GADGET_LH7A40X is not set
-+# CONFIG_USB_GADGET_OMAP is not set
-+# CONFIG_USB_GADGET_PXA25X is not set
-+# CONFIG_USB_GADGET_PXA27X is not set
-+# CONFIG_USB_GADGET_S3C2410 is not set
-+# CONFIG_USB_GADGET_IMX is not set
-+# CONFIG_USB_GADGET_M66592 is not set
-+# CONFIG_USB_GADGET_AMD5536UDC is not set
-+# CONFIG_USB_GADGET_FSL_QE is not set
-+# CONFIG_USB_GADGET_CI13XXX is not set
-+# CONFIG_USB_GADGET_NET2280 is not set
-+# CONFIG_USB_GADGET_GOKU is not set
-+# CONFIG_USB_GADGET_DUMMY_HCD is not set
-+CONFIG_USB_GADGET_DUALSPEED=y
-+CONFIG_USB_ZERO=m
-+CONFIG_USB_ETH=m
-+CONFIG_USB_ETH_RNDIS=y
-+# CONFIG_USB_GADGETFS is not set
-+CONFIG_USB_FILE_STORAGE=m
-+# CONFIG_USB_FILE_STORAGE_TEST is not set
-+CONFIG_USB_G_SERIAL=m
-+# CONFIG_USB_MIDI_GADGET is not set
-+# CONFIG_USB_G_PRINTER is not set
-+CONFIG_USB_CDC_COMPOSITE=m
-+
-+#
-+# OTG and related infrastructure
-+#
-+# CONFIG_USB_GPIO_VBUS is not set
-+# CONFIG_NOP_USB_XCEIV is not set
-+CONFIG_MMC=y
-+# CONFIG_MMC_DEBUG is not set
-+# CONFIG_MMC_UNSAFE_RESUME is not set
-+
-+#
-+# MMC/SD/SDIO Card Drivers
-+#
-+CONFIG_MMC_BLOCK=y
-+# CONFIG_MMC_BLOCK_BOUNCE is not set
-+CONFIG_SDIO_UART=m
-+# CONFIG_MMC_TEST is not set
-+
-+#
-+# MMC/SD/SDIO Host Controller Drivers
-+#
-+# CONFIG_MMC_SDHCI is not set
-+# CONFIG_MMC_AT91 is not set
-+CONFIG_MMC_ATMELMCI=y
-+CONFIG_MMC_ATMELMCI_DMA=y
-+# CONFIG_MMC_SPI is not set
-+# CONFIG_MEMSTICK is not set
-+# CONFIG_ACCESSIBILITY is not set
-+CONFIG_NEW_LEDS=y
-+CONFIG_LEDS_CLASS=y
-+
-+#
-+# LED drivers
-+#
-+# CONFIG_LEDS_PCA9532 is not set
-+CONFIG_LEDS_GPIO=y
-+CONFIG_LEDS_GPIO_PLATFORM=y
-+# CONFIG_LEDS_LP5521 is not set
-+# CONFIG_LEDS_PCA955X is not set
-+# CONFIG_LEDS_DAC124S085 is not set
-+# CONFIG_LEDS_BD2802 is not set
-+
-+#
-+# LED Triggers
-+#
-+CONFIG_LEDS_TRIGGERS=y
-+CONFIG_LEDS_TRIGGER_TIMER=y
-+CONFIG_LEDS_TRIGGER_HEARTBEAT=y
-+# CONFIG_LEDS_TRIGGER_BACKLIGHT is not set
-+CONFIG_LEDS_TRIGGER_GPIO=y
-+# CONFIG_LEDS_TRIGGER_DEFAULT_ON is not set
-+
-+#
-+# iptables trigger is under Netfilter config (LED target)
-+#
-+CONFIG_RTC_LIB=y
-+CONFIG_RTC_CLASS=y
-+CONFIG_RTC_HCTOSYS=y
-+CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
-+# CONFIG_RTC_DEBUG is not set
-+
-+#
-+# RTC interfaces
-+#
-+CONFIG_RTC_INTF_SYSFS=y
-+CONFIG_RTC_INTF_PROC=y
-+CONFIG_RTC_INTF_DEV=y
-+# CONFIG_RTC_INTF_DEV_UIE_EMUL is not set
-+# CONFIG_RTC_DRV_TEST is not set
-+
-+#
-+# I2C RTC drivers
-+#
-+# CONFIG_RTC_DRV_DS1307 is not set
-+# CONFIG_RTC_DRV_DS1374 is not set
-+# CONFIG_RTC_DRV_DS1672 is not set
-+# CONFIG_RTC_DRV_MAX6900 is not set
-+# CONFIG_RTC_DRV_RS5C372 is not set
-+# CONFIG_RTC_DRV_ISL1208 is not set
-+# CONFIG_RTC_DRV_X1205 is not set
-+# CONFIG_RTC_DRV_PCF8563 is not set
-+# CONFIG_RTC_DRV_PCF8583 is not set
-+# CONFIG_RTC_DRV_M41T80 is not set
-+# CONFIG_RTC_DRV_S35390A is not set
-+# CONFIG_RTC_DRV_FM3130 is not set
-+# CONFIG_RTC_DRV_RX8581 is not set
-+
-+#
-+# SPI RTC drivers
-+#
-+# CONFIG_RTC_DRV_M41T94 is not set
-+# CONFIG_RTC_DRV_DS1305 is not set
-+# CONFIG_RTC_DRV_DS1390 is not set
-+# CONFIG_RTC_DRV_MAX6902 is not set
-+# CONFIG_RTC_DRV_R9701 is not set
-+# CONFIG_RTC_DRV_RS5C348 is not set
-+# CONFIG_RTC_DRV_DS3234 is not set
-+
-+#
-+# Platform RTC drivers
-+#
-+# CONFIG_RTC_DRV_CMOS is not set
-+# CONFIG_RTC_DRV_DS1286 is not set
-+# CONFIG_RTC_DRV_DS1511 is not set
-+# CONFIG_RTC_DRV_DS1553 is not set
-+# CONFIG_RTC_DRV_DS1742 is not set
-+# CONFIG_RTC_DRV_STK17TA8 is not set
-+# CONFIG_RTC_DRV_M48T86 is not set
-+# CONFIG_RTC_DRV_M48T35 is not set
-+# CONFIG_RTC_DRV_M48T59 is not set
-+# CONFIG_RTC_DRV_BQ4802 is not set
-+# CONFIG_RTC_DRV_V3020 is not set
-+
-+#
-+# on-CPU RTC drivers
-+#
-+CONFIG_RTC_DRV_AT91SAM9=y
-+CONFIG_RTC_DRV_AT91SAM9_RTT=0
-+CONFIG_RTC_DRV_AT91SAM9_GPBR=0
-+CONFIG_DMADEVICES=y
-+
-+#
-+# DMA Devices
-+#
-+CONFIG_AT_HDMAC=y
-+CONFIG_DMA_ENGINE=y
-+
-+#
-+# DMA Clients
-+#
-+# CONFIG_NET_DMA is not set
-+# CONFIG_ASYNC_TX_DMA is not set
-+CONFIG_DMATEST=m
-+# CONFIG_AUXDISPLAY is not set
-+# CONFIG_REGULATOR is not set
-+# CONFIG_UIO is not set
-+# CONFIG_STAGING is not set
-+
-+#
-+# File systems
-+#
-+CONFIG_EXT2_FS=y
-+# CONFIG_EXT2_FS_XATTR is not set
-+# CONFIG_EXT2_FS_XIP is not set
-+CONFIG_EXT3_FS=y
-+# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
-+CONFIG_EXT3_FS_XATTR=y
-+# CONFIG_EXT3_FS_POSIX_ACL is not set
-+# CONFIG_EXT3_FS_SECURITY is not set
-+# CONFIG_EXT4_FS is not set
-+CONFIG_JBD=y
-+CONFIG_FS_MBCACHE=y
-+# CONFIG_REISERFS_FS is not set
-+# CONFIG_JFS_FS is not set
-+# CONFIG_FS_POSIX_ACL is not set
-+CONFIG_FILE_LOCKING=y
-+# CONFIG_XFS_FS is not set
-+# CONFIG_OCFS2_FS is not set
-+# CONFIG_BTRFS_FS is not set
-+CONFIG_DNOTIFY=y
-+CONFIG_INOTIFY=y
-+CONFIG_INOTIFY_USER=y
-+# CONFIG_QUOTA is not set
-+# CONFIG_AUTOFS_FS is not set
-+# CONFIG_AUTOFS4_FS is not set
-+# CONFIG_FUSE_FS is not set
-+
-+#
-+# Caches
-+#
-+# CONFIG_FSCACHE is not set
-+
-+#
-+# CD-ROM/DVD Filesystems
-+#
-+# CONFIG_ISO9660_FS is not set
-+# CONFIG_UDF_FS is not set
-+
-+#
-+# DOS/FAT/NT Filesystems
-+#
-+CONFIG_FAT_FS=y
-+# CONFIG_MSDOS_FS is not set
-+CONFIG_VFAT_FS=y
-+CONFIG_FAT_DEFAULT_CODEPAGE=437
-+CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"
-+# CONFIG_NTFS_FS is not set
-+
-+#
-+# Pseudo filesystems
-+#
-+CONFIG_PROC_FS=y
-+CONFIG_PROC_SYSCTL=y
-+CONFIG_PROC_PAGE_MONITOR=y
-+CONFIG_SYSFS=y
-+CONFIG_TMPFS=y
-+# CONFIG_TMPFS_POSIX_ACL is not set
-+# CONFIG_HUGETLB_PAGE is not set
-+# CONFIG_CONFIGFS_FS is not set
-+CONFIG_MISC_FILESYSTEMS=y
-+# CONFIG_ADFS_FS is not set
-+# CONFIG_AFFS_FS is not set
-+# CONFIG_HFS_FS is not set
-+# CONFIG_HFSPLUS_FS is not set
-+# CONFIG_BEFS_FS is not set
-+# CONFIG_BFS_FS is not set
-+# CONFIG_EFS_FS is not set
-+CONFIG_JFFS2_FS=y
-+CONFIG_JFFS2_FS_DEBUG=0
-+CONFIG_JFFS2_FS_WRITEBUFFER=y
-+# CONFIG_JFFS2_FS_WBUF_VERIFY is not set
-+CONFIG_JFFS2_SUMMARY=y
-+# CONFIG_JFFS2_FS_XATTR is not set
-+# CONFIG_JFFS2_COMPRESSION_OPTIONS is not set
-+CONFIG_JFFS2_ZLIB=y
-+# CONFIG_JFFS2_LZO is not set
-+CONFIG_JFFS2_RTIME=y
-+# CONFIG_JFFS2_RUBIN is not set
-+CONFIG_CRAMFS=m
-+CONFIG_SQUASHFS=m
-+CONFIG_SQUASHFS_EMBEDDED=y
-+CONFIG_SQUASHFS_FRAGMENT_CACHE_SIZE=3
-+# CONFIG_VXFS_FS is not set
-+# CONFIG_MINIX_FS is not set
-+# CONFIG_OMFS_FS is not set
-+# CONFIG_HPFS_FS is not set
-+# CONFIG_QNX4FS_FS is not set
-+# CONFIG_ROMFS_FS is not set
-+# CONFIG_SYSV_FS is not set
-+# CONFIG_UFS_FS is not set
-+# CONFIG_NILFS2_FS is not set
-+CONFIG_NETWORK_FILESYSTEMS=y
-+CONFIG_NFS_FS=y
-+CONFIG_NFS_V3=y
-+# CONFIG_NFS_V3_ACL is not set
-+# CONFIG_NFS_V4 is not set
-+# CONFIG_NFSD is not set
-+CONFIG_LOCKD=y
-+CONFIG_LOCKD_V4=y
-+CONFIG_NFS_COMMON=y
-+CONFIG_SUNRPC=y
-+# CONFIG_RPCSEC_GSS_KRB5 is not set
-+# CONFIG_RPCSEC_GSS_SPKM3 is not set
-+# CONFIG_SMB_FS is not set
-+# CONFIG_CIFS is not set
-+# CONFIG_NCP_FS is not set
-+# CONFIG_CODA_FS is not set
-+# CONFIG_AFS_FS is not set
-+
-+#
-+# Partition Types
-+#
-+# CONFIG_PARTITION_ADVANCED is not set
-+CONFIG_MSDOS_PARTITION=y
-+CONFIG_NLS=y
-+CONFIG_NLS_DEFAULT="iso8859-1"
-+CONFIG_NLS_CODEPAGE_437=y
-+# CONFIG_NLS_CODEPAGE_737 is not set
-+# CONFIG_NLS_CODEPAGE_775 is not set
-+CONFIG_NLS_CODEPAGE_850=y
-+# CONFIG_NLS_CODEPAGE_852 is not set
-+# CONFIG_NLS_CODEPAGE_855 is not set
-+# CONFIG_NLS_CODEPAGE_857 is not set
-+# CONFIG_NLS_CODEPAGE_860 is not set
-+# CONFIG_NLS_CODEPAGE_861 is not set
-+# CONFIG_NLS_CODEPAGE_862 is not set
-+# CONFIG_NLS_CODEPAGE_863 is not set
-+# CONFIG_NLS_CODEPAGE_864 is not set
-+# CONFIG_NLS_CODEPAGE_865 is not set
-+# CONFIG_NLS_CODEPAGE_866 is not set
-+# CONFIG_NLS_CODEPAGE_869 is not set
-+# CONFIG_NLS_CODEPAGE_936 is not set
-+# CONFIG_NLS_CODEPAGE_950 is not set
-+# CONFIG_NLS_CODEPAGE_932 is not set
-+# CONFIG_NLS_CODEPAGE_949 is not set
-+# CONFIG_NLS_CODEPAGE_874 is not set
-+# CONFIG_NLS_ISO8859_8 is not set
-+# CONFIG_NLS_CODEPAGE_1250 is not set
-+# CONFIG_NLS_CODEPAGE_1251 is not set
-+# CONFIG_NLS_ASCII is not set
-+CONFIG_NLS_ISO8859_1=y
-+# CONFIG_NLS_ISO8859_2 is not set
-+# CONFIG_NLS_ISO8859_3 is not set
-+# CONFIG_NLS_ISO8859_4 is not set
-+# CONFIG_NLS_ISO8859_5 is not set
-+# CONFIG_NLS_ISO8859_6 is not set
-+# CONFIG_NLS_ISO8859_7 is not set
-+# CONFIG_NLS_ISO8859_9 is not set
-+# CONFIG_NLS_ISO8859_13 is not set
-+# CONFIG_NLS_ISO8859_14 is not set
-+# CONFIG_NLS_ISO8859_15 is not set
-+# CONFIG_NLS_KOI8_R is not set
-+# CONFIG_NLS_KOI8_U is not set
-+# CONFIG_NLS_UTF8 is not set
-+# CONFIG_DLM is not set
-+
-+#
-+# Kernel hacking
-+#
-+# CONFIG_PRINTK_TIME is not set
-+CONFIG_ENABLE_WARN_DEPRECATED=y
-+CONFIG_ENABLE_MUST_CHECK=y
-+CONFIG_FRAME_WARN=1024
-+# CONFIG_MAGIC_SYSRQ is not set
-+# CONFIG_UNUSED_SYMBOLS is not set
-+# CONFIG_DEBUG_FS is not set
-+# CONFIG_HEADERS_CHECK is not set
-+# CONFIG_DEBUG_KERNEL is not set
-+CONFIG_DEBUG_BUGVERBOSE=y
-+CONFIG_DEBUG_MEMORY_INIT=y
-+# CONFIG_RCU_CPU_STALL_DETECTOR is not set
-+# CONFIG_LATENCYTOP is not set
-+# CONFIG_SYSCTL_SYSCALL_CHECK is not set
-+CONFIG_HAVE_FUNCTION_TRACER=y
-+CONFIG_TRACING_SUPPORT=y
-+
-+#
-+# Tracers
-+#
-+# CONFIG_FUNCTION_TRACER is not set
-+# CONFIG_IRQSOFF_TRACER is not set
-+# CONFIG_SCHED_TRACER is not set
-+# CONFIG_CONTEXT_SWITCH_TRACER is not set
-+# CONFIG_EVENT_TRACER is not set
-+# CONFIG_BOOT_TRACER is not set
-+# CONFIG_TRACE_BRANCH_PROFILING is not set
-+# CONFIG_STACK_TRACER is not set
-+# CONFIG_KMEMTRACE is not set
-+# CONFIG_WORKQUEUE_TRACER is not set
-+# CONFIG_BLK_DEV_IO_TRACE is not set
-+# CONFIG_SAMPLES is not set
-+CONFIG_HAVE_ARCH_KGDB=y
-+CONFIG_ARM_UNWIND=y
-+CONFIG_DEBUG_USER=y
-+
-+#
-+# Security options
-+#
-+# CONFIG_KEYS is not set
-+# CONFIG_SECURITY is not set
-+# CONFIG_SECURITYFS is not set
-+# CONFIG_SECURITY_FILE_CAPABILITIES is not set
-+CONFIG_CRYPTO=y
-+
-+#
-+# Crypto core or helper
-+#
-+# CONFIG_CRYPTO_FIPS is not set
-+CONFIG_CRYPTO_ALGAPI=y
-+CONFIG_CRYPTO_ALGAPI2=y
-+CONFIG_CRYPTO_AEAD2=y
-+CONFIG_CRYPTO_BLKCIPHER=y
-+CONFIG_CRYPTO_BLKCIPHER2=y
-+CONFIG_CRYPTO_HASH2=y
-+CONFIG_CRYPTO_RNG2=y
-+CONFIG_CRYPTO_PCOMP=y
-+CONFIG_CRYPTO_MANAGER=y
-+CONFIG_CRYPTO_MANAGER2=y
-+# CONFIG_CRYPTO_GF128MUL is not set
-+# CONFIG_CRYPTO_NULL is not set
-+CONFIG_CRYPTO_WORKQUEUE=y
-+# CONFIG_CRYPTO_CRYPTD is not set
-+# CONFIG_CRYPTO_AUTHENC is not set
-+# CONFIG_CRYPTO_TEST is not set
-+
-+#
-+# Authenticated Encryption with Associated Data
-+#
-+# CONFIG_CRYPTO_CCM is not set
-+# CONFIG_CRYPTO_GCM is not set
-+# CONFIG_CRYPTO_SEQIV is not set
-+
-+#
-+# Block modes
-+#
-+# CONFIG_CRYPTO_CBC is not set
-+# CONFIG_CRYPTO_CTR is not set
-+# CONFIG_CRYPTO_CTS is not set
-+CONFIG_CRYPTO_ECB=y
-+# CONFIG_CRYPTO_LRW is not set
-+# CONFIG_CRYPTO_PCBC is not set
-+# CONFIG_CRYPTO_XTS is not set
-+
-+#
-+# Hash modes
-+#
-+# CONFIG_CRYPTO_HMAC is not set
-+# CONFIG_CRYPTO_XCBC is not set
-+
-+#
-+# Digest
-+#
-+# CONFIG_CRYPTO_CRC32C is not set
-+# CONFIG_CRYPTO_MD4 is not set
-+# CONFIG_CRYPTO_MD5 is not set
-+# CONFIG_CRYPTO_MICHAEL_MIC is not set
-+# CONFIG_CRYPTO_RMD128 is not set
-+# CONFIG_CRYPTO_RMD160 is not set
-+# CONFIG_CRYPTO_RMD256 is not set
-+# CONFIG_CRYPTO_RMD320 is not set
-+# CONFIG_CRYPTO_SHA1 is not set
-+# CONFIG_CRYPTO_SHA256 is not set
-+# CONFIG_CRYPTO_SHA512 is not set
-+# CONFIG_CRYPTO_TGR192 is not set
-+# CONFIG_CRYPTO_WP512 is not set
-+
-+#
-+# Ciphers
-+#
-+CONFIG_CRYPTO_AES=y
-+# CONFIG_CRYPTO_ANUBIS is not set
-+CONFIG_CRYPTO_ARC4=y
-+# CONFIG_CRYPTO_BLOWFISH is not set
-+# CONFIG_CRYPTO_CAMELLIA is not set
-+# CONFIG_CRYPTO_CAST5 is not set
-+# CONFIG_CRYPTO_CAST6 is not set
-+# CONFIG_CRYPTO_DES is not set
-+# CONFIG_CRYPTO_FCRYPT is not set
-+# CONFIG_CRYPTO_KHAZAD is not set
-+# CONFIG_CRYPTO_SALSA20 is not set
-+# CONFIG_CRYPTO_SEED is not set
-+# CONFIG_CRYPTO_SERPENT is not set
-+# CONFIG_CRYPTO_TEA is not set
-+# CONFIG_CRYPTO_TWOFISH is not set
-+
-+#
-+# Compression
-+#
-+# CONFIG_CRYPTO_DEFLATE is not set
-+# CONFIG_CRYPTO_ZLIB is not set
-+# CONFIG_CRYPTO_LZO is not set
-+
-+#
-+# Random Number Generation
-+#
-+# CONFIG_CRYPTO_ANSI_CPRNG is not set
-+# CONFIG_CRYPTO_HW is not set
-+# CONFIG_BINARY_PRINTF is not set
-+
-+#
-+# Library routines
-+#
-+CONFIG_BITREVERSE=y
-+CONFIG_GENERIC_FIND_LAST_BIT=y
-+# CONFIG_CRC_CCITT is not set
-+# CONFIG_CRC16 is not set
-+# CONFIG_CRC_T10DIF is not set
-+CONFIG_CRC_ITU_T=m
-+CONFIG_CRC32=y
-+# CONFIG_CRC7 is not set
-+# CONFIG_LIBCRC32C is not set
-+CONFIG_ZLIB_INFLATE=y
-+CONFIG_ZLIB_DEFLATE=y
-+CONFIG_DECOMPRESS_GZIP=y
-+CONFIG_DECOMPRESS_BZIP2=y
-+CONFIG_DECOMPRESS_LZMA=y
-+CONFIG_HAS_IOMEM=y
-+CONFIG_HAS_IOPORT=y
-+CONFIG_HAS_DMA=y
-+CONFIG_NLATTR=y
-diff --git a/recipes/linux/linux-2.6.30/at91sam9m10g45ek/defconfig b/recipes/linux/linux-2.6.30/at91sam9m10g45ek/defconfig
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0006-Use-BOARD-instead-of-BOARDNAME-to-define-directory.patch
+@@ -0,0 +1,28 @@
++From d2db62d2c891693358d0cfd79a462609441715ed Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 19:38:04 +0100
++Subject: [PATCH v3 06/08] Use BOARD instead of BOARDNAME to define directory
++
++---
++ Makefile |    4 ++--
++ 1 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 0fcd5ba..93ec72d 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -223,9 +223,9 @@ SX_AT91=$(BINDIR)/sx-at91
++ EXTRA_INSTALL+=$(BINDIR)/sx-at91
++ endif
++ 
++-COBJS-y:= $(TOPDIR)/main.o $(TOPDIR)/board/$(BOARDNAME)/$(BOARD).o
+++COBJS-y:= $(TOPDIR)/main.o $(TOPDIR)/board/$(BOARD)/$(BOARD).o
++ SOBJS-y:= $(TOPDIR)/crt0_gnu.o
++-DIRS:=$(TOPDIR) $(TOPDIR)/board/$(BOARDNAME) $(TOPDIR)/lib $(TOPDIR)/driver
+++DIRS:=$(TOPDIR) $(TOPDIR)/board/$(BOARD) $(TOPDIR)/lib $(TOPDIR)/driver
++ 
++ 
++ include 	lib/libc.mk
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0007-Add-board-support-for-alternate-boot.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0007-Add-board-support-for-alternate-boot.patch
 new file mode 100644
-index 0000000..bc04831
+index 0000000..99b9726
 --- /dev/null
-+++ b/recipes/linux/linux-2.6.30/at91sam9m10g45ek/defconfig
-@@ -0,0 +1,1649 @@
-+#
-+# Automatically generated make config: don't edit
-+# Linux kernel version: 2.6.30
-+# Wed Jan 26 00:48:45 2011
-+#
-+CONFIG_ARM=y
-+CONFIG_SYS_SUPPORTS_APM_EMULATION=y
-+CONFIG_GENERIC_GPIO=y
-+CONFIG_GENERIC_TIME=y
-+CONFIG_GENERIC_CLOCKEVENTS=y
-+CONFIG_MMU=y
-+# CONFIG_NO_IOPORT is not set
-+CONFIG_GENERIC_HARDIRQS=y
-+CONFIG_STACKTRACE_SUPPORT=y
-+CONFIG_HAVE_LATENCYTOP_SUPPORT=y
-+CONFIG_LOCKDEP_SUPPORT=y
-+CONFIG_TRACE_IRQFLAGS_SUPPORT=y
-+CONFIG_HARDIRQS_SW_RESEND=y
-+CONFIG_GENERIC_IRQ_PROBE=y
-+CONFIG_RWSEM_GENERIC_SPINLOCK=y
-+# CONFIG_ARCH_HAS_ILOG2_U32 is not set
-+# CONFIG_ARCH_HAS_ILOG2_U64 is not set
-+CONFIG_GENERIC_HWEIGHT=y
-+CONFIG_GENERIC_CALIBRATE_DELAY=y
-+CONFIG_GENERIC_HARDIRQS_NO__DO_IRQ=y
-+CONFIG_VECTORS_BASE=0xffff0000
-+CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
-+
-+#
-+# General setup
-+#
-+CONFIG_EXPERIMENTAL=y
-+CONFIG_BROKEN_ON_SMP=y
-+CONFIG_INIT_ENV_ARG_LIMIT=32
-+CONFIG_LOCALVERSION=""
-+# CONFIG_LOCALVERSION_AUTO is not set
-+# CONFIG_SWAP is not set
-+CONFIG_SYSVIPC=y
-+CONFIG_SYSVIPC_SYSCTL=y
-+# CONFIG_POSIX_MQUEUE is not set
-+# CONFIG_BSD_PROCESS_ACCT is not set
-+# CONFIG_TASKSTATS is not set
-+# CONFIG_AUDIT is not set
-+
-+#
-+# RCU Subsystem
-+#
-+CONFIG_CLASSIC_RCU=y
-+# CONFIG_TREE_RCU is not set
-+# CONFIG_PREEMPT_RCU is not set
-+# CONFIG_TREE_RCU_TRACE is not set
-+# CONFIG_PREEMPT_RCU_TRACE is not set
-+CONFIG_IKCONFIG=y
-+CONFIG_IKCONFIG_PROC=y
-+CONFIG_LOG_BUF_SHIFT=14
-+# CONFIG_GROUP_SCHED is not set
-+# CONFIG_CGROUPS is not set
-+CONFIG_SYSFS_DEPRECATED=y
-+CONFIG_SYSFS_DEPRECATED_V2=y
-+# CONFIG_RELAY is not set
-+CONFIG_NAMESPACES=y
-+# CONFIG_UTS_NS is not set
-+# CONFIG_IPC_NS is not set
-+# CONFIG_USER_NS is not set
-+# CONFIG_PID_NS is not set
-+# CONFIG_NET_NS is not set
-+CONFIG_BLK_DEV_INITRD=y
-+CONFIG_INITRAMFS_SOURCE=""
-+CONFIG_RD_GZIP=y
-+CONFIG_RD_BZIP2=y
-+CONFIG_RD_LZMA=y
-+CONFIG_CC_OPTIMIZE_FOR_SIZE=y
-+CONFIG_SYSCTL=y
-+CONFIG_ANON_INODES=y
-+# CONFIG_EMBEDDED is not set
-+CONFIG_UID16=y
-+CONFIG_SYSCTL_SYSCALL=y
-+CONFIG_KALLSYMS=y
-+# CONFIG_KALLSYMS_EXTRA_PASS is not set
-+CONFIG_STRIP_ASM_SYMS=y
-+CONFIG_HOTPLUG=y
-+CONFIG_PRINTK=y
-+CONFIG_BUG=y
-+CONFIG_ELF_CORE=y
-+CONFIG_BASE_FULL=y
-+CONFIG_FUTEX=y
-+CONFIG_EPOLL=y
-+CONFIG_SIGNALFD=y
-+CONFIG_TIMERFD=y
-+CONFIG_EVENTFD=y
-+CONFIG_SHMEM=y
-+CONFIG_AIO=y
-+CONFIG_VM_EVENT_COUNTERS=y
-+CONFIG_COMPAT_BRK=y
-+CONFIG_SLAB=y
-+# CONFIG_SLUB is not set
-+# CONFIG_SLOB is not set
-+# CONFIG_PROFILING is not set
-+# CONFIG_MARKERS is not set
-+CONFIG_HAVE_OPROFILE=y
-+# CONFIG_KPROBES is not set
-+CONFIG_HAVE_KPROBES=y
-+CONFIG_HAVE_KRETPROBES=y
-+CONFIG_HAVE_CLK=y
-+# CONFIG_SLOW_WORK is not set
-+CONFIG_HAVE_GENERIC_DMA_COHERENT=y
-+CONFIG_SLABINFO=y
-+CONFIG_RT_MUTEXES=y
-+CONFIG_BASE_SMALL=0
-+CONFIG_MODULES=y
-+# CONFIG_MODULE_FORCE_LOAD is not set
-+CONFIG_MODULE_UNLOAD=y
-+# CONFIG_MODULE_FORCE_UNLOAD is not set
-+# CONFIG_MODVERSIONS is not set
-+# CONFIG_MODULE_SRCVERSION_ALL is not set
-+CONFIG_BLOCK=y
-+# CONFIG_LBD is not set
-+# CONFIG_BLK_DEV_BSG is not set
-+# CONFIG_BLK_DEV_INTEGRITY is not set
-+
-+#
-+# IO Schedulers
-+#
-+CONFIG_IOSCHED_NOOP=y
-+CONFIG_IOSCHED_AS=y
-+# CONFIG_IOSCHED_DEADLINE is not set
-+# CONFIG_IOSCHED_CFQ is not set
-+CONFIG_DEFAULT_AS=y
-+# CONFIG_DEFAULT_DEADLINE is not set
-+# CONFIG_DEFAULT_CFQ is not set
-+# CONFIG_DEFAULT_NOOP is not set
-+CONFIG_DEFAULT_IOSCHED="anticipatory"
-+# CONFIG_FREEZER is not set
-+
-+#
-+# System Type
-+#
-+# CONFIG_ARCH_AAEC2000 is not set
-+# CONFIG_ARCH_INTEGRATOR is not set
-+# CONFIG_ARCH_REALVIEW is not set
-+# CONFIG_ARCH_VERSATILE is not set
-+CONFIG_ARCH_AT91=y
-+# CONFIG_ARCH_CLPS711X is not set
-+# CONFIG_ARCH_EBSA110 is not set
-+# CONFIG_ARCH_EP93XX is not set
-+# CONFIG_ARCH_GEMINI is not set
-+# CONFIG_ARCH_FOOTBRIDGE is not set
-+# CONFIG_ARCH_NETX is not set
-+# CONFIG_ARCH_H720X is not set
-+# CONFIG_ARCH_IMX is not set
-+# CONFIG_ARCH_IOP13XX is not set
-+# CONFIG_ARCH_IOP32X is not set
-+# CONFIG_ARCH_IOP33X is not set
-+# CONFIG_ARCH_IXP23XX is not set
-+# CONFIG_ARCH_IXP2000 is not set
-+# CONFIG_ARCH_IXP4XX is not set
-+# CONFIG_ARCH_L7200 is not set
-+# CONFIG_ARCH_KIRKWOOD is not set
-+# CONFIG_ARCH_KS8695 is not set
-+# CONFIG_ARCH_NS9XXX is not set
-+# CONFIG_ARCH_LOKI is not set
-+# CONFIG_ARCH_MV78XX0 is not set
-+# CONFIG_ARCH_MXC is not set
-+# CONFIG_ARCH_ORION5X is not set
-+# CONFIG_ARCH_PNX4008 is not set
-+# CONFIG_ARCH_PXA is not set
-+# CONFIG_ARCH_MMP is not set
-+# CONFIG_ARCH_RPC is not set
-+# CONFIG_ARCH_SA1100 is not set
-+# CONFIG_ARCH_S3C2410 is not set
-+# CONFIG_ARCH_S3C64XX is not set
-+# CONFIG_ARCH_SHARK is not set
-+# CONFIG_ARCH_LH7A40X is not set
-+# CONFIG_ARCH_DAVINCI is not set
-+# CONFIG_ARCH_OMAP is not set
-+# CONFIG_ARCH_MSM is not set
-+# CONFIG_ARCH_W90X900 is not set
-+
-+#
-+# Atmel AT91 System-on-Chip
-+#
-+# CONFIG_ARCH_AT91RM9200 is not set
-+# CONFIG_ARCH_AT91SAM9260 is not set
-+# CONFIG_ARCH_AT91SAM9261 is not set
-+# CONFIG_ARCH_AT91SAM9G10 is not set
-+# CONFIG_ARCH_AT91SAM9263 is not set
-+# CONFIG_ARCH_AT91SAM9RL is not set
-+# CONFIG_ARCH_AT91SAM9G20 is not set
-+# CONFIG_ARCH_AT91SAM9G45 is not set
-+CONFIG_ARCH_AT91SAM9M10=y
-+# CONFIG_ARCH_AT91CAP9 is not set
-+# CONFIG_ARCH_AT572D940HF is not set
-+# CONFIG_ARCH_AT91X40 is not set
-+CONFIG_AT91_PMC_UNIT=y
-+CONFIG_MACH_AT91SAM9M10G45EK=y
-+
-+#
-+# AT91SAM9M10 Board Type
-+#
-+# CONFIG_MACH_AT91SAM9M10EKES is not set
-+
-+#
-+# AT91 Board Options
-+#
-+# CONFIG_MTD_NAND_ATMEL_BUSWIDTH_16 is not set
-+CONFIG_MTD_NAND_ALLOW_CONFIGURABLE_NAND_BUSWIDTH=y
-+CONFIG_MTD_NAND_ATMEL_ROOTFS_SIZE=124
-+CONFIG_MTD_NAND_ALLOW_CONFIGURABLE_ROOTFS_SIZE=y
-+
-+#
-+# AT91 Feature Selections
-+#
-+CONFIG_AT91_PROGRAMMABLE_CLOCKS=y
-+CONFIG_AT91_TIMER_HZ=100
-+CONFIG_AT91_EARLY_DBGU=y
-+# CONFIG_AT91_EARLY_USART0 is not set
-+# CONFIG_AT91_EARLY_USART1 is not set
-+# CONFIG_AT91_EARLY_USART2 is not set
-+# CONFIG_AT91_EARLY_USART3 is not set
-+# CONFIG_AT91_EARLY_USART4 is not set
-+# CONFIG_AT91_EARLY_USART5 is not set
-+
-+#
-+# Processor Type
-+#
-+CONFIG_CPU_32=y
-+CONFIG_CPU_ARM926T=y
-+CONFIG_CPU_32v5=y
-+CONFIG_CPU_ABRT_EV5TJ=y
-+CONFIG_CPU_PABRT_NOIFAR=y
-+CONFIG_CPU_CACHE_VIVT=y
-+CONFIG_CPU_COPY_V4WB=y
-+CONFIG_CPU_TLB_V4WBI=y
-+CONFIG_CPU_CP15=y
-+CONFIG_CPU_CP15_MMU=y
-+
-+#
-+# Processor Features
-+#
-+CONFIG_ARM_THUMB=y
-+# CONFIG_CPU_ICACHE_DISABLE is not set
-+# CONFIG_CPU_DCACHE_DISABLE is not set
-+# CONFIG_CPU_DCACHE_WRITETHROUGH is not set
-+# CONFIG_CPU_CACHE_ROUND_ROBIN is not set
-+# CONFIG_OUTER_CACHE is not set
-+
-+#
-+# Bus support
-+#
-+# CONFIG_PCI_SYSCALL is not set
-+# CONFIG_ARCH_SUPPORTS_MSI is not set
-+# CONFIG_PCCARD is not set
-+
-+#
-+# Kernel Features
-+#
-+# CONFIG_NO_HZ is not set
-+# CONFIG_HIGH_RES_TIMERS is not set
-+CONFIG_GENERIC_CLOCKEVENTS_BUILD=y
-+CONFIG_VMSPLIT_3G=y
-+# CONFIG_VMSPLIT_2G is not set
-+# CONFIG_VMSPLIT_1G is not set
-+CONFIG_PAGE_OFFSET=0xC0000000
-+# CONFIG_PREEMPT is not set
-+CONFIG_HZ=100
-+CONFIG_AEABI=y
-+CONFIG_OABI_COMPAT=y
-+# CONFIG_ARCH_HAS_HOLES_MEMORYMODEL is not set
-+# CONFIG_ARCH_SPARSEMEM_DEFAULT is not set
-+# CONFIG_ARCH_SELECT_MEMORY_MODEL is not set
-+# CONFIG_HIGHMEM is not set
-+CONFIG_SELECT_MEMORY_MODEL=y
-+CONFIG_FLATMEM_MANUAL=y
-+# CONFIG_DISCONTIGMEM_MANUAL is not set
-+# CONFIG_SPARSEMEM_MANUAL is not set
-+CONFIG_FLATMEM=y
-+CONFIG_FLAT_NODE_MEM_MAP=y
-+CONFIG_PAGEFLAGS_EXTENDED=y
-+CONFIG_SPLIT_PTLOCK_CPUS=4096
-+# CONFIG_PHYS_ADDR_T_64BIT is not set
-+CONFIG_ZONE_DMA_FLAG=0
-+CONFIG_VIRT_TO_BUS=y
-+CONFIG_UNEVICTABLE_LRU=y
-+CONFIG_HAVE_MLOCK=y
-+CONFIG_HAVE_MLOCKED_PAGE_BIT=y
-+CONFIG_LEDS=y
-+CONFIG_LEDS_CPU=y
-+CONFIG_ALIGNMENT_TRAP=y
-+
-+#
-+# Boot options
-+#
-+CONFIG_ZBOOT_ROM_TEXT=0x0
-+CONFIG_ZBOOT_ROM_BSS=0x0
-+CONFIG_CMDLINE="mem=64M console=ttyS0,115200 initrd=0x71100000,25165824 root=/dev/ram0 rw"
-+# CONFIG_XIP_KERNEL is not set
-+# CONFIG_KEXEC is not set
-+
-+#
-+# CPU Power Management
-+#
-+# CONFIG_CPU_IDLE is not set
-+
-+#
-+# Floating point emulation
-+#
-+
-+#
-+# At least one emulation must be selected
-+#
-+CONFIG_FPE_NWFPE=y
-+# CONFIG_FPE_NWFPE_XP is not set
-+# CONFIG_FPE_FASTFPE is not set
-+# CONFIG_VFP is not set
-+
-+#
-+# Userspace binary formats
-+#
-+CONFIG_BINFMT_ELF=y
-+# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
-+CONFIG_HAVE_AOUT=y
-+# CONFIG_BINFMT_AOUT is not set
-+# CONFIG_BINFMT_MISC is not set
-+
-+#
-+# Power management options
-+#
-+# CONFIG_PM is not set
-+CONFIG_ARCH_SUSPEND_POSSIBLE=y
-+CONFIG_NET=y
-+
-+#
-+# Networking options
-+#
-+CONFIG_PACKET=y
-+# CONFIG_PACKET_MMAP is not set
-+CONFIG_UNIX=y
-+# CONFIG_NET_KEY is not set
-+CONFIG_INET=y
-+CONFIG_IP_MULTICAST=y
-+# CONFIG_IP_ADVANCED_ROUTER is not set
-+CONFIG_IP_FIB_HASH=y
-+# CONFIG_IP_PNP is not set
-+# CONFIG_NET_IPIP is not set
-+# CONFIG_NET_IPGRE is not set
-+# CONFIG_IP_MROUTE is not set
-+# CONFIG_ARPD is not set
-+# CONFIG_SYN_COOKIES is not set
-+# CONFIG_INET_AH is not set
-+# CONFIG_INET_ESP is not set
-+# CONFIG_INET_IPCOMP is not set
-+# CONFIG_INET_XFRM_TUNNEL is not set
-+# CONFIG_INET_TUNNEL is not set
-+# CONFIG_INET_XFRM_MODE_TRANSPORT is not set
-+# CONFIG_INET_XFRM_MODE_TUNNEL is not set
-+# CONFIG_INET_XFRM_MODE_BEET is not set
-+# CONFIG_INET_LRO is not set
-+# CONFIG_INET_DIAG is not set
-+# CONFIG_TCP_CONG_ADVANCED is not set
-+CONFIG_TCP_CONG_CUBIC=y
-+CONFIG_DEFAULT_TCP_CONG="cubic"
-+# CONFIG_TCP_MD5SIG is not set
-+# CONFIG_IPV6 is not set
-+# CONFIG_NETWORK_SECMARK is not set
-+# CONFIG_NETFILTER is not set
-+# CONFIG_IP_DCCP is not set
-+# CONFIG_IP_SCTP is not set
-+# CONFIG_TIPC is not set
-+# CONFIG_ATM is not set
-+# CONFIG_BRIDGE is not set
-+# CONFIG_NET_DSA is not set
-+# CONFIG_VLAN_8021Q is not set
-+# CONFIG_DECNET is not set
-+# CONFIG_LLC2 is not set
-+# CONFIG_IPX is not set
-+# CONFIG_ATALK is not set
-+# CONFIG_X25 is not set
-+# CONFIG_LAPB is not set
-+# CONFIG_ECONET is not set
-+# CONFIG_WAN_ROUTER is not set
-+# CONFIG_PHONET is not set
-+# CONFIG_NET_SCHED is not set
-+# CONFIG_DCB is not set
-+
-+#
-+# Network testing
-+#
-+# CONFIG_NET_PKTGEN is not set
-+# CONFIG_HAMRADIO is not set
-+# CONFIG_CAN is not set
-+# CONFIG_IRDA is not set
-+# CONFIG_BT is not set
-+# CONFIG_AF_RXRPC is not set
-+CONFIG_WIRELESS=y
-+CONFIG_CFG80211=y
-+# CONFIG_CFG80211_REG_DEBUG is not set
-+# CONFIG_WIRELESS_OLD_REGULATORY is not set
-+CONFIG_WIRELESS_EXT=y
-+CONFIG_WIRELESS_EXT_SYSFS=y
-+CONFIG_LIB80211=y
-+# CONFIG_LIB80211_DEBUG is not set
-+CONFIG_MAC80211=y
-+
-+#
-+# Rate control algorithm selection
-+#
-+CONFIG_MAC80211_RC_MINSTREL=y
-+# CONFIG_MAC80211_RC_DEFAULT_PID is not set
-+CONFIG_MAC80211_RC_DEFAULT_MINSTREL=y
-+CONFIG_MAC80211_RC_DEFAULT="minstrel"
-+# CONFIG_MAC80211_MESH is not set
-+# CONFIG_MAC80211_LEDS is not set
-+# CONFIG_MAC80211_DEBUG_MENU is not set
-+# CONFIG_WIMAX is not set
-+# CONFIG_RFKILL is not set
-+# CONFIG_NET_9P is not set
-+
-+#
-+# Device Drivers
-+#
-+
-+#
-+# Generic Driver Options
-+#
-+CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
-+CONFIG_STANDALONE=y
-+CONFIG_PREVENT_FIRMWARE_BUILD=y
-+CONFIG_FW_LOADER=y
-+CONFIG_FIRMWARE_IN_KERNEL=y
-+CONFIG_EXTRA_FIRMWARE=""
-+# CONFIG_SYS_HYPERVISOR is not set
-+# CONFIG_CONNECTOR is not set
-+CONFIG_MTD=y
-+# CONFIG_MTD_DEBUG is not set
-+# CONFIG_MTD_CONCAT is not set
-+CONFIG_MTD_PARTITIONS=y
-+# CONFIG_MTD_TESTS is not set
-+# CONFIG_MTD_REDBOOT_PARTS is not set
-+CONFIG_MTD_CMDLINE_PARTS=y
-+# CONFIG_MTD_AFS_PARTS is not set
-+# CONFIG_MTD_AR7_PARTS is not set
-+
-+#
-+# User Modules And Translation Layers
-+#
-+CONFIG_MTD_CHAR=y
-+CONFIG_MTD_BLKDEVS=y
-+CONFIG_MTD_BLOCK=y
-+# CONFIG_FTL is not set
-+# CONFIG_NFTL is not set
-+# CONFIG_INFTL is not set
-+# CONFIG_RFD_FTL is not set
-+# CONFIG_SSFDC is not set
-+# CONFIG_MTD_OOPS is not set
-+
-+#
-+# RAM/ROM/Flash chip drivers
-+#
-+# CONFIG_MTD_CFI is not set
-+# CONFIG_MTD_JEDECPROBE is not set
-+CONFIG_MTD_MAP_BANK_WIDTH_1=y
-+CONFIG_MTD_MAP_BANK_WIDTH_2=y
-+CONFIG_MTD_MAP_BANK_WIDTH_4=y
-+# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
-+# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
-+# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
-+CONFIG_MTD_CFI_I1=y
-+CONFIG_MTD_CFI_I2=y
-+# CONFIG_MTD_CFI_I4 is not set
-+# CONFIG_MTD_CFI_I8 is not set
-+# CONFIG_MTD_RAM is not set
-+# CONFIG_MTD_ROM is not set
-+# CONFIG_MTD_ABSENT is not set
-+
-+#
-+# Mapping drivers for chip access
-+#
-+# CONFIG_MTD_COMPLEX_MAPPINGS is not set
-+# CONFIG_MTD_PLATRAM is not set
-+
-+#
-+# Self-contained MTD device drivers
-+#
-+CONFIG_MTD_DATAFLASH=y
-+# CONFIG_MTD_DATAFLASH_WRITE_VERIFY is not set
-+# CONFIG_MTD_DATAFLASH_OTP is not set
-+# CONFIG_MTD_M25P80 is not set
-+# CONFIG_MTD_SLRAM is not set
-+# CONFIG_MTD_PHRAM is not set
-+# CONFIG_MTD_MTDRAM is not set
-+# CONFIG_MTD_BLOCK2MTD is not set
-+
-+#
-+# Disk-On-Chip Device Drivers
-+#
-+# CONFIG_MTD_DOC2000 is not set
-+# CONFIG_MTD_DOC2001 is not set
-+# CONFIG_MTD_DOC2001PLUS is not set
-+CONFIG_MTD_NAND=y
-+# CONFIG_MTD_NAND_VERIFY_WRITE is not set
-+# CONFIG_MTD_NAND_ECC_SMC is not set
-+# CONFIG_MTD_NAND_MUSEUM_IDS is not set
-+# CONFIG_MTD_NAND_GPIO is not set
-+CONFIG_MTD_NAND_IDS=y
-+# CONFIG_MTD_NAND_DISKONCHIP is not set
-+CONFIG_MTD_NAND_ATMEL=y
-+CONFIG_MTD_NAND_ATMEL_ECC_SOFT=y
-+# CONFIG_MTD_NAND_ATMEL_ECC_HW is not set
-+# CONFIG_MTD_NAND_ATMEL_ECC_NONE is not set
-+# CONFIG_MTD_NAND_NANDSIM is not set
-+# CONFIG_MTD_NAND_PLATFORM is not set
-+# CONFIG_MTD_ALAUDA is not set
-+# CONFIG_MTD_ONENAND is not set
-+
-+#
-+# LPDDR flash memory drivers
-+#
-+# CONFIG_MTD_LPDDR is not set
-+
-+#
-+# UBI - Unsorted block images
-+#
-+# CONFIG_MTD_UBI is not set
-+# CONFIG_PARPORT is not set
-+CONFIG_BLK_DEV=y
-+# CONFIG_BLK_DEV_COW_COMMON is not set
-+CONFIG_BLK_DEV_LOOP=y
-+# CONFIG_BLK_DEV_CRYPTOLOOP is not set
-+# CONFIG_BLK_DEV_NBD is not set
-+# CONFIG_BLK_DEV_UB is not set
-+CONFIG_BLK_DEV_RAM=y
-+CONFIG_BLK_DEV_RAM_COUNT=4
-+CONFIG_BLK_DEV_RAM_SIZE=8192
-+# CONFIG_BLK_DEV_XIP is not set
-+# CONFIG_CDROM_PKTCDVD is not set
-+# CONFIG_ATA_OVER_ETH is not set
-+CONFIG_MISC_DEVICES=y
-+CONFIG_ATMEL_TCLIB=y
-+CONFIG_ATMEL_TCB_CLKSRC=y
-+CONFIG_ATMEL_TCB_CLKSRC_BLOCK=0
-+# CONFIG_ICS932S401 is not set
-+# CONFIG_ATMEL_SSC is not set
-+# CONFIG_ENCLOSURE_SERVICES is not set
-+# CONFIG_ISL29003 is not set
-+# CONFIG_C2PORT is not set
-+
-+#
-+# EEPROM support
-+#
-+CONFIG_EEPROM_AT24=y
-+# CONFIG_EEPROM_AT25 is not set
-+# CONFIG_EEPROM_LEGACY is not set
-+CONFIG_EEPROM_93CX6=m
-+CONFIG_HAVE_IDE=y
-+# CONFIG_IDE is not set
-+
-+#
-+# SCSI device support
-+#
-+# CONFIG_RAID_ATTRS is not set
-+CONFIG_SCSI=y
-+CONFIG_SCSI_DMA=y
-+# CONFIG_SCSI_TGT is not set
-+# CONFIG_SCSI_NETLINK is not set
-+CONFIG_SCSI_PROC_FS=y
-+
-+#
-+# SCSI support type (disk, tape, CD-ROM)
-+#
-+CONFIG_BLK_DEV_SD=y
-+# CONFIG_CHR_DEV_ST is not set
-+# CONFIG_CHR_DEV_OSST is not set
-+# CONFIG_BLK_DEV_SR is not set
-+# CONFIG_CHR_DEV_SG is not set
-+# CONFIG_CHR_DEV_SCH is not set
-+
-+#
-+# Some SCSI devices (e.g. CD jukebox) support multiple LUNs
-+#
-+CONFIG_SCSI_MULTI_LUN=y
-+# CONFIG_SCSI_CONSTANTS is not set
-+# CONFIG_SCSI_LOGGING is not set
-+# CONFIG_SCSI_SCAN_ASYNC is not set
-+CONFIG_SCSI_WAIT_SCAN=m
-+
-+#
-+# SCSI Transports
-+#
-+# CONFIG_SCSI_SPI_ATTRS is not set
-+# CONFIG_SCSI_FC_ATTRS is not set
-+# CONFIG_SCSI_ISCSI_ATTRS is not set
-+# CONFIG_SCSI_SAS_LIBSAS is not set
-+# CONFIG_SCSI_SRP_ATTRS is not set
-+# CONFIG_SCSI_LOWLEVEL is not set
-+CONFIG_SCSI_DH=y
-+# CONFIG_SCSI_DH_RDAC is not set
-+# CONFIG_SCSI_DH_HP_SW is not set
-+# CONFIG_SCSI_DH_EMC is not set
-+# CONFIG_SCSI_DH_ALUA is not set
-+# CONFIG_SCSI_OSD_INITIATOR is not set
-+# CONFIG_ATA is not set
-+# CONFIG_MD is not set
-+CONFIG_NETDEVICES=y
-+CONFIG_COMPAT_NET_DEV_OPS=y
-+# CONFIG_DUMMY is not set
-+# CONFIG_BONDING is not set
-+# CONFIG_MACVLAN is not set
-+# CONFIG_EQUALIZER is not set
-+# CONFIG_TUN is not set
-+# CONFIG_VETH is not set
-+CONFIG_PHYLIB=y
-+
-+#
-+# MII PHY device drivers
-+#
-+# CONFIG_MARVELL_PHY is not set
-+CONFIG_DAVICOM_PHY=y
-+# CONFIG_QSEMI_PHY is not set
-+# CONFIG_LXT_PHY is not set
-+# CONFIG_CICADA_PHY is not set
-+# CONFIG_VITESSE_PHY is not set
-+# CONFIG_SMSC_PHY is not set
-+# CONFIG_BROADCOM_PHY is not set
-+# CONFIG_ICPLUS_PHY is not set
-+# CONFIG_REALTEK_PHY is not set
-+# CONFIG_NATIONAL_PHY is not set
-+# CONFIG_STE10XP is not set
-+# CONFIG_LSI_ET1011C_PHY is not set
-+# CONFIG_FIXED_PHY is not set
-+# CONFIG_MDIO_BITBANG is not set
-+CONFIG_NET_ETHERNET=y
-+CONFIG_MII=y
-+CONFIG_MACB=y
-+# CONFIG_AX88796 is not set
-+# CONFIG_SMC91X is not set
-+# CONFIG_DM9000 is not set
-+# CONFIG_ENC28J60 is not set
-+# CONFIG_ETHOC is not set
-+# CONFIG_SMC911X is not set
-+# CONFIG_SMSC911X is not set
-+# CONFIG_DNET is not set
-+# CONFIG_IBM_NEW_EMAC_ZMII is not set
-+# CONFIG_IBM_NEW_EMAC_RGMII is not set
-+# CONFIG_IBM_NEW_EMAC_TAH is not set
-+# CONFIG_IBM_NEW_EMAC_EMAC4 is not set
-+# CONFIG_IBM_NEW_EMAC_NO_FLOW_CTRL is not set
-+# CONFIG_IBM_NEW_EMAC_MAL_CLR_ICINTSTAT is not set
-+# CONFIG_IBM_NEW_EMAC_MAL_COMMON_ERR is not set
-+# CONFIG_B44 is not set
-+# CONFIG_NETDEV_1000 is not set
-+# CONFIG_NETDEV_10000 is not set
-+
-+#
-+# Wireless LAN
-+#
-+# CONFIG_WLAN_PRE80211 is not set
-+CONFIG_WLAN_80211=y
-+CONFIG_LIBERTAS=m
-+CONFIG_LIBERTAS_USB=m
-+CONFIG_LIBERTAS_SDIO=m
-+CONFIG_LIBERTAS_SPI=m
-+# CONFIG_LIBERTAS_DEBUG is not set
-+# CONFIG_LIBERTAS_THINFIRM is not set
-+# CONFIG_AT76C50X_USB is not set
-+CONFIG_USB_ZD1201=m
-+# CONFIG_USB_NET_RNDIS_WLAN is not set
-+CONFIG_RTL8187=m
-+# CONFIG_MAC80211_HWSIM is not set
-+# CONFIG_P54_COMMON is not set
-+CONFIG_AR9170_USB=m
-+# CONFIG_HOSTAP is not set
-+# CONFIG_B43 is not set
-+# CONFIG_B43LEGACY is not set
-+CONFIG_ZD1211RW=m
-+# CONFIG_ZD1211RW_DEBUG is not set
-+CONFIG_RT2X00=m
-+CONFIG_RT2500USB=m
-+CONFIG_RT73USB=m
-+CONFIG_RT2X00_LIB_USB=m
-+CONFIG_RT2X00_LIB=m
-+CONFIG_RT2X00_LIB_FIRMWARE=y
-+CONFIG_RT2X00_LIB_CRYPTO=y
-+CONFIG_RT2X00_LIB_RFKILL=y
-+CONFIG_RT2X00_LIB_LEDS=y
-+# CONFIG_RT2X00_DEBUG is not set
-+
-+#
-+# Enable WiMAX (Networking options) to see the WiMAX drivers
-+#
-+
-+#
-+# USB Network Adapters
-+#
-+# CONFIG_USB_CATC is not set
-+# CONFIG_USB_KAWETH is not set
-+# CONFIG_USB_PEGASUS is not set
-+# CONFIG_USB_RTL8150 is not set
-+# CONFIG_USB_USBNET is not set
-+# CONFIG_WAN is not set
-+# CONFIG_PPP is not set
-+# CONFIG_SLIP is not set
-+# CONFIG_NETCONSOLE is not set
-+# CONFIG_NETPOLL is not set
-+# CONFIG_NET_POLL_CONTROLLER is not set
-+# CONFIG_ISDN is not set
-+
-+#
-+# Input device support
-+#
-+CONFIG_INPUT=y
-+# CONFIG_INPUT_FF_MEMLESS is not set
-+CONFIG_INPUT_POLLDEV=m
-+
-+#
-+# Userland interfaces
-+#
-+CONFIG_INPUT_MOUSEDEV=y
-+# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
-+CONFIG_INPUT_MOUSEDEV_SCREEN_X=480
-+CONFIG_INPUT_MOUSEDEV_SCREEN_Y=272
-+CONFIG_INPUT_JOYDEV=y
-+CONFIG_INPUT_EVDEV=y
-+# CONFIG_INPUT_EVBUG is not set
-+
-+#
-+# Input Device Drivers
-+#
-+CONFIG_INPUT_KEYBOARD=y
-+# CONFIG_KEYBOARD_ATKBD is not set
-+# CONFIG_KEYBOARD_SUNKBD is not set
-+# CONFIG_KEYBOARD_LKKBD is not set
-+# CONFIG_KEYBOARD_XTKBD is not set
-+# CONFIG_KEYBOARD_NEWTON is not set
-+# CONFIG_KEYBOARD_STOWAWAY is not set
-+CONFIG_KEYBOARD_GPIO=y
-+# CONFIG_INPUT_MOUSE is not set
-+# CONFIG_INPUT_JOYSTICK is not set
-+# CONFIG_INPUT_TABLET is not set
-+CONFIG_INPUT_TOUCHSCREEN=y
-+# CONFIG_TOUCHSCREEN_ADS7846 is not set
-+# CONFIG_TOUCHSCREEN_AD7877 is not set
-+# CONFIG_TOUCHSCREEN_AD7879_I2C is not set
-+# CONFIG_TOUCHSCREEN_AD7879_SPI is not set
-+# CONFIG_TOUCHSCREEN_AD7879 is not set
-+# CONFIG_TOUCHSCREEN_FUJITSU is not set
-+# CONFIG_TOUCHSCREEN_GUNZE is not set
-+# CONFIG_TOUCHSCREEN_ELO is not set
-+# CONFIG_TOUCHSCREEN_WACOM_W8001 is not set
-+# CONFIG_TOUCHSCREEN_MTOUCH is not set
-+# CONFIG_TOUCHSCREEN_INEXIO is not set
-+# CONFIG_TOUCHSCREEN_MK712 is not set
-+# CONFIG_TOUCHSCREEN_PENMOUNT is not set
-+# CONFIG_TOUCHSCREEN_TOUCHRIGHT is not set
-+# CONFIG_TOUCHSCREEN_TOUCHWIN is not set
-+CONFIG_TOUCHSCREEN_ATMEL_TSADCC=y
-+# CONFIG_TOUCHSCREEN_WM97XX is not set
-+# CONFIG_TOUCHSCREEN_USB_COMPOSITE is not set
-+# CONFIG_TOUCHSCREEN_TOUCHIT213 is not set
-+# CONFIG_TOUCHSCREEN_TSC2007 is not set
-+# CONFIG_INPUT_MISC is not set
-+
-+#
-+# Hardware I/O ports
-+#
-+# CONFIG_SERIO is not set
-+# CONFIG_GAMEPORT is not set
-+
-+#
-+# Character devices
-+#
-+CONFIG_VT=y
-+CONFIG_CONSOLE_TRANSLATIONS=y
-+CONFIG_VT_CONSOLE=y
-+CONFIG_HW_CONSOLE=y
-+# CONFIG_VT_HW_CONSOLE_BINDING is not set
-+CONFIG_DEVKMEM=y
-+# CONFIG_SERIAL_NONSTANDARD is not set
-+
-+#
-+# Serial drivers
-+#
-+# CONFIG_SERIAL_8250 is not set
-+
-+#
-+# Non-8250 serial port support
-+#
-+CONFIG_SERIAL_ATMEL=y
-+CONFIG_SERIAL_ATMEL_CONSOLE=y
-+CONFIG_SERIAL_ATMEL_PDC=y
-+# CONFIG_SERIAL_ATMEL_TTYAT is not set
-+# CONFIG_SERIAL_MAX3100 is not set
-+CONFIG_SERIAL_CORE=y
-+CONFIG_SERIAL_CORE_CONSOLE=y
-+CONFIG_UNIX98_PTYS=y
-+# CONFIG_DEVPTS_MULTIPLE_INSTANCES is not set
-+CONFIG_LEGACY_PTYS=y
-+CONFIG_LEGACY_PTY_COUNT=4
-+# CONFIG_IPMI_HANDLER is not set
-+CONFIG_HW_RANDOM=y
-+# CONFIG_HW_RANDOM_TIMERIOMEM is not set
-+# CONFIG_R3964 is not set
-+# CONFIG_RAW_DRIVER is not set
-+# CONFIG_TCG_TPM is not set
-+CONFIG_I2C=y
-+CONFIG_I2C_BOARDINFO=y
-+# CONFIG_I2C_CHARDEV is not set
-+CONFIG_I2C_HELPER_AUTO=y
-+CONFIG_I2C_ALGOBIT=y
-+
-+#
-+# I2C Hardware Bus support
-+#
-+
-+#
-+# I2C system bus drivers (mostly embedded / system-on-chip)
-+#
-+CONFIG_I2C_GPIO=y
-+# CONFIG_I2C_OCORES is not set
-+# CONFIG_I2C_SIMTEC is not set
-+
-+#
-+# External I2C/SMBus adapter drivers
-+#
-+# CONFIG_I2C_PARPORT_LIGHT is not set
-+# CONFIG_I2C_TAOS_EVM is not set
-+# CONFIG_I2C_TINY_USB is not set
-+
-+#
-+# Other I2C/SMBus bus drivers
-+#
-+# CONFIG_I2C_PCA_PLATFORM is not set
-+# CONFIG_I2C_STUB is not set
-+
-+#
-+# Miscellaneous I2C Chip support
-+#
-+# CONFIG_DS1682 is not set
-+# CONFIG_SENSORS_PCF8574 is not set
-+# CONFIG_PCF8575 is not set
-+# CONFIG_SENSORS_PCA9539 is not set
-+# CONFIG_SENSORS_MAX6875 is not set
-+# CONFIG_SENSORS_TSL2550 is not set
-+# CONFIG_I2C_DEBUG_CORE is not set
-+# CONFIG_I2C_DEBUG_ALGO is not set
-+# CONFIG_I2C_DEBUG_BUS is not set
-+# CONFIG_I2C_DEBUG_CHIP is not set
-+CONFIG_SPI=y
-+CONFIG_SPI_MASTER=y
-+
-+#
-+# SPI Master Controller Drivers
-+#
-+CONFIG_SPI_ATMEL=y
-+# CONFIG_SPI_BITBANG is not set
-+# CONFIG_SPI_GPIO is not set
-+
-+#
-+# SPI Protocol Masters
-+#
-+# CONFIG_SPI_SPIDEV is not set
-+# CONFIG_SPI_TLE62X0 is not set
-+CONFIG_ARCH_REQUIRE_GPIOLIB=y
-+CONFIG_GPIOLIB=y
-+# CONFIG_GPIO_SYSFS is not set
-+
-+#
-+# Memory mapped GPIO expanders:
-+#
-+
-+#
-+# I2C GPIO expanders:
-+#
-+# CONFIG_GPIO_MAX732X is not set
-+# CONFIG_GPIO_PCA953X is not set
-+# CONFIG_GPIO_PCF857X is not set
-+
-+#
-+# PCI GPIO expanders:
-+#
-+
-+#
-+# SPI GPIO expanders:
-+#
-+# CONFIG_GPIO_MAX7301 is not set
-+# CONFIG_GPIO_MCP23S08 is not set
-+# CONFIG_W1 is not set
-+# CONFIG_POWER_SUPPLY is not set
-+# CONFIG_HWMON is not set
-+# CONFIG_THERMAL is not set
-+# CONFIG_THERMAL_HWMON is not set
-+# CONFIG_WATCHDOG is not set
-+CONFIG_SSB_POSSIBLE=y
-+
-+#
-+# Sonics Silicon Backplane
-+#
-+# CONFIG_SSB is not set
-+
-+#
-+# Multifunction device drivers
-+#
-+# CONFIG_MFD_CORE is not set
-+# CONFIG_MFD_SM501 is not set
-+# CONFIG_MFD_ASIC3 is not set
-+# CONFIG_HTC_EGPIO is not set
-+# CONFIG_HTC_PASIC3 is not set
-+# CONFIG_UCB1400_CORE is not set
-+# CONFIG_TPS65010 is not set
-+# CONFIG_TWL4030_CORE is not set
-+# CONFIG_MFD_TMIO is not set
-+# CONFIG_MFD_T7L66XB is not set
-+# CONFIG_MFD_TC6387XB is not set
-+# CONFIG_MFD_TC6393XB is not set
-+# CONFIG_PMIC_DA903X is not set
-+# CONFIG_MFD_WM8400 is not set
-+# CONFIG_MFD_WM8350_I2C is not set
-+# CONFIG_MFD_PCF50633 is not set
-+
-+#
-+# Multimedia devices
-+#
-+
-+#
-+# Multimedia core support
-+#
-+# CONFIG_VIDEO_DEV is not set
-+# CONFIG_DVB_CORE is not set
-+# CONFIG_VIDEO_MEDIA is not set
-+
-+#
-+# Multimedia drivers
-+#
-+# CONFIG_DAB is not set
-+
-+#
-+# Graphics support
-+#
-+# CONFIG_VGASTATE is not set
-+# CONFIG_VIDEO_OUTPUT_CONTROL is not set
-+CONFIG_FB=y
-+# CONFIG_FIRMWARE_EDID is not set
-+# CONFIG_FB_DDC is not set
-+# CONFIG_FB_BOOT_VESA_SUPPORT is not set
-+CONFIG_FB_CFB_FILLRECT=y
-+CONFIG_FB_CFB_COPYAREA=y
-+CONFIG_FB_CFB_IMAGEBLIT=y
-+# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
-+# CONFIG_FB_SYS_FILLRECT is not set
-+# CONFIG_FB_SYS_COPYAREA is not set
-+# CONFIG_FB_SYS_IMAGEBLIT is not set
-+# CONFIG_FB_FOREIGN_ENDIAN is not set
-+# CONFIG_FB_SYS_FOPS is not set
-+# CONFIG_FB_SVGALIB is not set
-+# CONFIG_FB_MACMODES is not set
-+# CONFIG_FB_BACKLIGHT is not set
-+# CONFIG_FB_MODE_HELPERS is not set
-+# CONFIG_FB_TILEBLITTING is not set
-+
-+#
-+# Frame buffer hardware drivers
-+#
-+# CONFIG_FB_S1D15605 is not set
-+# CONFIG_FB_S1D13XXX is not set
-+CONFIG_FB_ATMEL=y
-+# CONFIG_FB_VIRTUAL is not set
-+# CONFIG_FB_METRONOME is not set
-+# CONFIG_FB_MB862XX is not set
-+# CONFIG_FB_BROADSHEET is not set
-+CONFIG_BACKLIGHT_LCD_SUPPORT=y
-+# CONFIG_LCD_CLASS_DEVICE is not set
-+CONFIG_BACKLIGHT_CLASS_DEVICE=y
-+CONFIG_BACKLIGHT_ATMEL_LCDC=y
-+# CONFIG_BACKLIGHT_GENERIC is not set
-+
-+#
-+# Display device support
-+#
-+# CONFIG_DISPLAY_SUPPORT is not set
-+
-+#
-+# Console display driver support
-+#
-+# CONFIG_VGA_CONSOLE is not set
-+CONFIG_DUMMY_CONSOLE=y
-+# CONFIG_FRAMEBUFFER_CONSOLE is not set
-+CONFIG_LOGO=y
-+# CONFIG_LOGO_LINUX_MONO is not set
-+# CONFIG_LOGO_LINUX_VGA16 is not set
-+CONFIG_LOGO_LINUX_CLUT224=y
-+CONFIG_SOUND=y
-+CONFIG_SOUND_OSS_CORE=y
-+CONFIG_SND=y
-+CONFIG_SND_TIMER=y
-+CONFIG_SND_PCM=y
-+CONFIG_SND_HWDEP=m
-+CONFIG_SND_RAWMIDI=m
-+CONFIG_SND_SEQUENCER=y
-+# CONFIG_SND_SEQ_DUMMY is not set
-+CONFIG_SND_OSSEMUL=y
-+CONFIG_SND_MIXER_OSS=y
-+CONFIG_SND_PCM_OSS=y
-+CONFIG_SND_PCM_OSS_PLUGINS=y
-+# CONFIG_SND_SEQUENCER_OSS is not set
-+# CONFIG_SND_DYNAMIC_MINORS is not set
-+# CONFIG_SND_SUPPORT_OLD_API is not set
-+# CONFIG_SND_VERBOSE_PROCFS is not set
-+# CONFIG_SND_VERBOSE_PRINTK is not set
-+# CONFIG_SND_DEBUG is not set
-+CONFIG_SND_VMASTER=y
-+CONFIG_SND_AC97_CODEC=y
-+# CONFIG_SND_DRIVERS is not set
-+# CONFIG_SND_ARM is not set
-+
-+#
-+# Atmel devices (AVR32 and AT91)
-+#
-+CONFIG_SND_ATMEL_AC97C=y
-+# CONFIG_SND_SPI is not set
-+CONFIG_SND_USB=y
-+CONFIG_SND_USB_AUDIO=m
-+# CONFIG_SND_USB_CAIAQ is not set
-+# CONFIG_SND_SOC is not set
-+# CONFIG_SOUND_PRIME is not set
-+CONFIG_AC97_BUS=y
-+CONFIG_HID_SUPPORT=y
-+CONFIG_HID=y
-+# CONFIG_HID_DEBUG is not set
-+# CONFIG_HIDRAW is not set
-+
-+#
-+# USB Input Devices
-+#
-+# CONFIG_USB_HID is not set
-+# CONFIG_HID_PID is not set
-+
-+#
-+# Special HID drivers
-+#
-+CONFIG_USB_SUPPORT=y
-+CONFIG_USB_ARCH_HAS_HCD=y
-+CONFIG_USB_ARCH_HAS_OHCI=y
-+CONFIG_USB_ARCH_HAS_EHCI=y
-+CONFIG_USB=y
-+# CONFIG_USB_DEBUG is not set
-+CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
-+
-+#
-+# Miscellaneous USB options
-+#
-+CONFIG_USB_DEVICEFS=y
-+# CONFIG_USB_DEVICE_CLASS is not set
-+# CONFIG_USB_DYNAMIC_MINORS is not set
-+# CONFIG_USB_OTG is not set
-+# CONFIG_USB_MON is not set
-+# CONFIG_USB_WUSB is not set
-+# CONFIG_USB_WUSB_CBAF is not set
-+
-+#
-+# USB Host Controller Drivers
-+#
-+# CONFIG_USB_C67X00_HCD is not set
-+CONFIG_USB_EHCI_HCD=y
-+# CONFIG_USB_EHCI_ROOT_HUB_TT is not set
-+# CONFIG_USB_EHCI_TT_NEWSCHED is not set
-+# CONFIG_USB_OXU210HP_HCD is not set
-+# CONFIG_USB_ISP116X_HCD is not set
-+# CONFIG_USB_ISP1760_HCD is not set
-+CONFIG_USB_OHCI_HCD=y
-+# CONFIG_USB_OHCI_BIG_ENDIAN_DESC is not set
-+# CONFIG_USB_OHCI_BIG_ENDIAN_MMIO is not set
-+CONFIG_USB_OHCI_LITTLE_ENDIAN=y
-+# CONFIG_USB_SL811_HCD is not set
-+# CONFIG_USB_R8A66597_HCD is not set
-+# CONFIG_USB_HWA_HCD is not set
-+# CONFIG_USB_MUSB_HDRC is not set
-+# CONFIG_USB_GADGET_MUSB_HDRC is not set
-+
-+#
-+# USB Device Class drivers
-+#
-+# CONFIG_USB_ACM is not set
-+# CONFIG_USB_PRINTER is not set
-+# CONFIG_USB_WDM is not set
-+# CONFIG_USB_TMC is not set
-+
-+#
-+# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may
-+#
-+
-+#
-+# also be needed; see USB_STORAGE Help for more info
-+#
-+CONFIG_USB_STORAGE=y
-+# CONFIG_USB_STORAGE_DEBUG is not set
-+# CONFIG_USB_STORAGE_DATAFAB is not set
-+# CONFIG_USB_STORAGE_FREECOM is not set
-+# CONFIG_USB_STORAGE_ISD200 is not set
-+# CONFIG_USB_STORAGE_USBAT is not set
-+# CONFIG_USB_STORAGE_SDDR09 is not set
-+# CONFIG_USB_STORAGE_SDDR55 is not set
-+# CONFIG_USB_STORAGE_JUMPSHOT is not set
-+# CONFIG_USB_STORAGE_ALAUDA is not set
-+# CONFIG_USB_STORAGE_ONETOUCH is not set
-+# CONFIG_USB_STORAGE_KARMA is not set
-+# CONFIG_USB_STORAGE_CYPRESS_ATACB is not set
-+# CONFIG_USB_LIBUSUAL is not set
-+
-+#
-+# USB Imaging devices
-+#
-+# CONFIG_USB_MDC800 is not set
-+# CONFIG_USB_MICROTEK is not set
-+
-+#
-+# USB port drivers
-+#
-+# CONFIG_USB_SERIAL is not set
-+
-+#
-+# USB Miscellaneous drivers
-+#
-+# CONFIG_USB_EMI62 is not set
-+# CONFIG_USB_EMI26 is not set
-+# CONFIG_USB_ADUTUX is not set
-+# CONFIG_USB_SEVSEG is not set
-+# CONFIG_USB_RIO500 is not set
-+# CONFIG_USB_LEGOTOWER is not set
-+# CONFIG_USB_LCD is not set
-+# CONFIG_USB_BERRY_CHARGE is not set
-+# CONFIG_USB_LED is not set
-+# CONFIG_USB_CYPRESS_CY7C63 is not set
-+# CONFIG_USB_CYTHERM is not set
-+# CONFIG_USB_IDMOUSE is not set
-+# CONFIG_USB_FTDI_ELAN is not set
-+# CONFIG_USB_APPLEDISPLAY is not set
-+# CONFIG_USB_SISUSBVGA is not set
-+# CONFIG_USB_LD is not set
-+# CONFIG_USB_TRANCEVIBRATOR is not set
-+# CONFIG_USB_IOWARRIOR is not set
-+# CONFIG_USB_TEST is not set
-+# CONFIG_USB_ISIGHTFW is not set
-+# CONFIG_USB_VST is not set
-+CONFIG_USB_GADGET=y
-+# CONFIG_USB_GADGET_DEBUG_FILES is not set
-+CONFIG_USB_GADGET_VBUS_DRAW=2
-+CONFIG_USB_GADGET_SELECTED=y
-+# CONFIG_USB_GADGET_AT91 is not set
-+CONFIG_USB_GADGET_ATMEL_USBA=y
-+CONFIG_USB_ATMEL_USBA=y
-+# CONFIG_USB_GADGET_FSL_USB2 is not set
-+# CONFIG_USB_GADGET_LH7A40X is not set
-+# CONFIG_USB_GADGET_OMAP is not set
-+# CONFIG_USB_GADGET_PXA25X is not set
-+# CONFIG_USB_GADGET_PXA27X is not set
-+# CONFIG_USB_GADGET_S3C2410 is not set
-+# CONFIG_USB_GADGET_IMX is not set
-+# CONFIG_USB_GADGET_M66592 is not set
-+# CONFIG_USB_GADGET_AMD5536UDC is not set
-+# CONFIG_USB_GADGET_FSL_QE is not set
-+# CONFIG_USB_GADGET_CI13XXX is not set
-+# CONFIG_USB_GADGET_NET2280 is not set
-+# CONFIG_USB_GADGET_GOKU is not set
-+# CONFIG_USB_GADGET_DUMMY_HCD is not set
-+CONFIG_USB_GADGET_DUALSPEED=y
-+CONFIG_USB_ZERO=m
-+CONFIG_USB_ETH=m
-+CONFIG_USB_ETH_RNDIS=y
-+# CONFIG_USB_GADGETFS is not set
-+# CONFIG_USB_FILE_STORAGE is not set
-+CONFIG_USB_G_SERIAL=m
-+# CONFIG_USB_MIDI_GADGET is not set
-+# CONFIG_USB_G_PRINTER is not set
-+CONFIG_USB_CDC_COMPOSITE=m
-+
-+#
-+# OTG and related infrastructure
-+#
-+# CONFIG_USB_GPIO_VBUS is not set
-+# CONFIG_NOP_USB_XCEIV is not set
-+CONFIG_MMC=y
-+# CONFIG_MMC_DEBUG is not set
-+# CONFIG_MMC_UNSAFE_RESUME is not set
-+
-+#
-+# MMC/SD/SDIO Card Drivers
-+#
-+CONFIG_MMC_BLOCK=y
-+# CONFIG_MMC_BLOCK_BOUNCE is not set
-+CONFIG_SDIO_UART=m
-+# CONFIG_MMC_TEST is not set
-+
-+#
-+# MMC/SD/SDIO Host Controller Drivers
-+#
-+# CONFIG_MMC_SDHCI is not set
-+# CONFIG_MMC_AT91 is not set
-+CONFIG_MMC_ATMELMCI=y
-+CONFIG_MMC_ATMELMCI_DMA=y
-+# CONFIG_MMC_SPI is not set
-+# CONFIG_MEMSTICK is not set
-+# CONFIG_ACCESSIBILITY is not set
-+CONFIG_NEW_LEDS=y
-+CONFIG_LEDS_CLASS=y
-+
-+#
-+# LED drivers
-+#
-+# CONFIG_LEDS_PCA9532 is not set
-+CONFIG_LEDS_GPIO=y
-+CONFIG_LEDS_GPIO_PLATFORM=y
-+# CONFIG_LEDS_LP5521 is not set
-+# CONFIG_LEDS_PCA955X is not set
-+# CONFIG_LEDS_DAC124S085 is not set
-+# CONFIG_LEDS_BD2802 is not set
-+
-+#
-+# LED Triggers
-+#
-+CONFIG_LEDS_TRIGGERS=y
-+CONFIG_LEDS_TRIGGER_TIMER=y
-+CONFIG_LEDS_TRIGGER_HEARTBEAT=y
-+# CONFIG_LEDS_TRIGGER_BACKLIGHT is not set
-+CONFIG_LEDS_TRIGGER_GPIO=y
-+# CONFIG_LEDS_TRIGGER_DEFAULT_ON is not set
-+
-+#
-+# iptables trigger is under Netfilter config (LED target)
-+#
-+CONFIG_RTC_LIB=y
-+CONFIG_RTC_CLASS=y
-+CONFIG_RTC_HCTOSYS=y
-+CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
-+# CONFIG_RTC_DEBUG is not set
-+
-+#
-+# RTC interfaces
-+#
-+CONFIG_RTC_INTF_SYSFS=y
-+CONFIG_RTC_INTF_PROC=y
-+CONFIG_RTC_INTF_DEV=y
-+# CONFIG_RTC_INTF_DEV_UIE_EMUL is not set
-+# CONFIG_RTC_DRV_TEST is not set
-+
-+#
-+# I2C RTC drivers
-+#
-+# CONFIG_RTC_DRV_DS1307 is not set
-+# CONFIG_RTC_DRV_DS1374 is not set
-+# CONFIG_RTC_DRV_DS1672 is not set
-+# CONFIG_RTC_DRV_MAX6900 is not set
-+# CONFIG_RTC_DRV_RS5C372 is not set
-+# CONFIG_RTC_DRV_ISL1208 is not set
-+# CONFIG_RTC_DRV_X1205 is not set
-+# CONFIG_RTC_DRV_PCF8563 is not set
-+# CONFIG_RTC_DRV_PCF8583 is not set
-+# CONFIG_RTC_DRV_M41T80 is not set
-+# CONFIG_RTC_DRV_S35390A is not set
-+# CONFIG_RTC_DRV_FM3130 is not set
-+# CONFIG_RTC_DRV_RX8581 is not set
-+
-+#
-+# SPI RTC drivers
-+#
-+# CONFIG_RTC_DRV_M41T94 is not set
-+# CONFIG_RTC_DRV_DS1305 is not set
-+# CONFIG_RTC_DRV_DS1390 is not set
-+# CONFIG_RTC_DRV_MAX6902 is not set
-+# CONFIG_RTC_DRV_R9701 is not set
-+# CONFIG_RTC_DRV_RS5C348 is not set
-+# CONFIG_RTC_DRV_DS3234 is not set
-+
-+#
-+# Platform RTC drivers
-+#
-+# CONFIG_RTC_DRV_CMOS is not set
-+# CONFIG_RTC_DRV_DS1286 is not set
-+# CONFIG_RTC_DRV_DS1511 is not set
-+# CONFIG_RTC_DRV_DS1553 is not set
-+# CONFIG_RTC_DRV_DS1742 is not set
-+# CONFIG_RTC_DRV_STK17TA8 is not set
-+# CONFIG_RTC_DRV_M48T86 is not set
-+# CONFIG_RTC_DRV_M48T35 is not set
-+# CONFIG_RTC_DRV_M48T59 is not set
-+# CONFIG_RTC_DRV_BQ4802 is not set
-+# CONFIG_RTC_DRV_V3020 is not set
-+
-+#
-+# on-CPU RTC drivers
-+#
-+CONFIG_RTC_DRV_AT91SAM9=y
-+CONFIG_RTC_DRV_AT91SAM9_RTT=0
-+CONFIG_RTC_DRV_AT91SAM9_GPBR=0
-+CONFIG_DMADEVICES=y
-+
-+#
-+# DMA Devices
-+#
-+CONFIG_AT_HDMAC=y
-+CONFIG_DMA_ENGINE=y
-+
-+#
-+# DMA Clients
-+#
-+# CONFIG_NET_DMA is not set
-+# CONFIG_ASYNC_TX_DMA is not set
-+CONFIG_DMATEST=m
-+# CONFIG_AUXDISPLAY is not set
-+# CONFIG_REGULATOR is not set
-+# CONFIG_UIO is not set
-+# CONFIG_STAGING is not set
-+
-+#
-+# File systems
-+#
-+CONFIG_EXT2_FS=y
-+# CONFIG_EXT2_FS_XATTR is not set
-+# CONFIG_EXT2_FS_XIP is not set
-+CONFIG_EXT3_FS=y
-+# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
-+CONFIG_EXT3_FS_XATTR=y
-+# CONFIG_EXT3_FS_POSIX_ACL is not set
-+# CONFIG_EXT3_FS_SECURITY is not set
-+# CONFIG_EXT4_FS is not set
-+CONFIG_JBD=y
-+CONFIG_FS_MBCACHE=y
-+# CONFIG_REISERFS_FS is not set
-+# CONFIG_JFS_FS is not set
-+# CONFIG_FS_POSIX_ACL is not set
-+CONFIG_FILE_LOCKING=y
-+# CONFIG_XFS_FS is not set
-+# CONFIG_OCFS2_FS is not set
-+# CONFIG_BTRFS_FS is not set
-+CONFIG_DNOTIFY=y
-+CONFIG_INOTIFY=y
-+CONFIG_INOTIFY_USER=y
-+# CONFIG_QUOTA is not set
-+# CONFIG_AUTOFS_FS is not set
-+# CONFIG_AUTOFS4_FS is not set
-+# CONFIG_FUSE_FS is not set
-+
-+#
-+# Caches
-+#
-+# CONFIG_FSCACHE is not set
-+
-+#
-+# CD-ROM/DVD Filesystems
-+#
-+# CONFIG_ISO9660_FS is not set
-+# CONFIG_UDF_FS is not set
-+
-+#
-+# DOS/FAT/NT Filesystems
-+#
-+CONFIG_FAT_FS=y
-+# CONFIG_MSDOS_FS is not set
-+CONFIG_VFAT_FS=y
-+CONFIG_FAT_DEFAULT_CODEPAGE=437
-+CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"
-+# CONFIG_NTFS_FS is not set
-+
-+#
-+# Pseudo filesystems
-+#
-+CONFIG_PROC_FS=y
-+CONFIG_PROC_SYSCTL=y
-+CONFIG_PROC_PAGE_MONITOR=y
-+CONFIG_SYSFS=y
-+CONFIG_TMPFS=y
-+# CONFIG_TMPFS_POSIX_ACL is not set
-+# CONFIG_HUGETLB_PAGE is not set
-+# CONFIG_CONFIGFS_FS is not set
-+CONFIG_MISC_FILESYSTEMS=y
-+# CONFIG_ADFS_FS is not set
-+# CONFIG_AFFS_FS is not set
-+# CONFIG_HFS_FS is not set
-+# CONFIG_HFSPLUS_FS is not set
-+# CONFIG_BEFS_FS is not set
-+# CONFIG_BFS_FS is not set
-+# CONFIG_EFS_FS is not set
-+CONFIG_JFFS2_FS=y
-+CONFIG_JFFS2_FS_DEBUG=0
-+CONFIG_JFFS2_FS_WRITEBUFFER=y
-+# CONFIG_JFFS2_FS_WBUF_VERIFY is not set
-+CONFIG_JFFS2_SUMMARY=y
-+# CONFIG_JFFS2_FS_XATTR is not set
-+# CONFIG_JFFS2_COMPRESSION_OPTIONS is not set
-+CONFIG_JFFS2_ZLIB=y
-+# CONFIG_JFFS2_LZO is not set
-+CONFIG_JFFS2_RTIME=y
-+# CONFIG_JFFS2_RUBIN is not set
-+CONFIG_CRAMFS=m
-+CONFIG_SQUASHFS=m
-+CONFIG_SQUASHFS_EMBEDDED=y
-+CONFIG_SQUASHFS_FRAGMENT_CACHE_SIZE=3
-+# CONFIG_VXFS_FS is not set
-+# CONFIG_MINIX_FS is not set
-+# CONFIG_OMFS_FS is not set
-+# CONFIG_HPFS_FS is not set
-+# CONFIG_QNX4FS_FS is not set
-+# CONFIG_ROMFS_FS is not set
-+# CONFIG_SYSV_FS is not set
-+# CONFIG_UFS_FS is not set
-+# CONFIG_NILFS2_FS is not set
-+CONFIG_NETWORK_FILESYSTEMS=y
-+CONFIG_NFS_FS=y
-+CONFIG_NFS_V3=y
-+# CONFIG_NFS_V3_ACL is not set
-+# CONFIG_NFS_V4 is not set
-+# CONFIG_NFSD is not set
-+CONFIG_LOCKD=y
-+CONFIG_LOCKD_V4=y
-+CONFIG_NFS_COMMON=y
-+CONFIG_SUNRPC=y
-+# CONFIG_RPCSEC_GSS_KRB5 is not set
-+# CONFIG_RPCSEC_GSS_SPKM3 is not set
-+# CONFIG_SMB_FS is not set
-+# CONFIG_CIFS is not set
-+# CONFIG_NCP_FS is not set
-+# CONFIG_CODA_FS is not set
-+# CONFIG_AFS_FS is not set
-+
-+#
-+# Partition Types
-+#
-+CONFIG_PARTITION_ADVANCED=y
-+# CONFIG_ACORN_PARTITION is not set
-+# CONFIG_OSF_PARTITION is not set
-+# CONFIG_AMIGA_PARTITION is not set
-+# CONFIG_ATARI_PARTITION is not set
-+# CONFIG_MAC_PARTITION is not set
-+CONFIG_MSDOS_PARTITION=y
-+# CONFIG_BSD_DISKLABEL is not set
-+# CONFIG_MINIX_SUBPARTITION is not set
-+# CONFIG_SOLARIS_X86_PARTITION is not set
-+# CONFIG_UNIXWARE_DISKLABEL is not set
-+# CONFIG_LDM_PARTITION is not set
-+# CONFIG_SGI_PARTITION is not set
-+# CONFIG_ULTRIX_PARTITION is not set
-+# CONFIG_SUN_PARTITION is not set
-+# CONFIG_KARMA_PARTITION is not set
-+# CONFIG_EFI_PARTITION is not set
-+# CONFIG_SYSV68_PARTITION is not set
-+CONFIG_NLS=y
-+CONFIG_NLS_DEFAULT="iso8859-1"
-+CONFIG_NLS_CODEPAGE_437=y
-+# CONFIG_NLS_CODEPAGE_737 is not set
-+# CONFIG_NLS_CODEPAGE_775 is not set
-+CONFIG_NLS_CODEPAGE_850=y
-+# CONFIG_NLS_CODEPAGE_852 is not set
-+# CONFIG_NLS_CODEPAGE_855 is not set
-+# CONFIG_NLS_CODEPAGE_857 is not set
-+# CONFIG_NLS_CODEPAGE_860 is not set
-+# CONFIG_NLS_CODEPAGE_861 is not set
-+# CONFIG_NLS_CODEPAGE_862 is not set
-+# CONFIG_NLS_CODEPAGE_863 is not set
-+# CONFIG_NLS_CODEPAGE_864 is not set
-+# CONFIG_NLS_CODEPAGE_865 is not set
-+# CONFIG_NLS_CODEPAGE_866 is not set
-+# CONFIG_NLS_CODEPAGE_869 is not set
-+# CONFIG_NLS_CODEPAGE_936 is not set
-+# CONFIG_NLS_CODEPAGE_950 is not set
-+# CONFIG_NLS_CODEPAGE_932 is not set
-+# CONFIG_NLS_CODEPAGE_949 is not set
-+# CONFIG_NLS_CODEPAGE_874 is not set
-+# CONFIG_NLS_ISO8859_8 is not set
-+# CONFIG_NLS_CODEPAGE_1250 is not set
-+# CONFIG_NLS_CODEPAGE_1251 is not set
-+# CONFIG_NLS_ASCII is not set
-+CONFIG_NLS_ISO8859_1=y
-+# CONFIG_NLS_ISO8859_2 is not set
-+# CONFIG_NLS_ISO8859_3 is not set
-+# CONFIG_NLS_ISO8859_4 is not set
-+# CONFIG_NLS_ISO8859_5 is not set
-+# CONFIG_NLS_ISO8859_6 is not set
-+# CONFIG_NLS_ISO8859_7 is not set
-+# CONFIG_NLS_ISO8859_9 is not set
-+# CONFIG_NLS_ISO8859_13 is not set
-+# CONFIG_NLS_ISO8859_14 is not set
-+CONFIG_NLS_ISO8859_15=y
-+# CONFIG_NLS_KOI8_R is not set
-+# CONFIG_NLS_KOI8_U is not set
-+# CONFIG_NLS_UTF8 is not set
-+# CONFIG_DLM is not set
-+
-+#
-+# Kernel hacking
-+#
-+# CONFIG_PRINTK_TIME is not set
-+CONFIG_ENABLE_WARN_DEPRECATED=y
-+CONFIG_ENABLE_MUST_CHECK=y
-+CONFIG_FRAME_WARN=1024
-+# CONFIG_MAGIC_SYSRQ is not set
-+# CONFIG_UNUSED_SYMBOLS is not set
-+# CONFIG_DEBUG_FS is not set
-+# CONFIG_HEADERS_CHECK is not set
-+# CONFIG_DEBUG_KERNEL is not set
-+CONFIG_DEBUG_BUGVERBOSE=y
-+CONFIG_DEBUG_MEMORY_INIT=y
-+# CONFIG_RCU_CPU_STALL_DETECTOR is not set
-+# CONFIG_LATENCYTOP is not set
-+# CONFIG_SYSCTL_SYSCALL_CHECK is not set
-+CONFIG_HAVE_FUNCTION_TRACER=y
-+CONFIG_TRACING_SUPPORT=y
-+
-+#
-+# Tracers
-+#
-+# CONFIG_FUNCTION_TRACER is not set
-+# CONFIG_IRQSOFF_TRACER is not set
-+# CONFIG_SCHED_TRACER is not set
-+# CONFIG_CONTEXT_SWITCH_TRACER is not set
-+# CONFIG_EVENT_TRACER is not set
-+# CONFIG_BOOT_TRACER is not set
-+# CONFIG_TRACE_BRANCH_PROFILING is not set
-+# CONFIG_STACK_TRACER is not set
-+# CONFIG_KMEMTRACE is not set
-+# CONFIG_WORKQUEUE_TRACER is not set
-+# CONFIG_BLK_DEV_IO_TRACE is not set
-+# CONFIG_SAMPLES is not set
-+CONFIG_HAVE_ARCH_KGDB=y
-+CONFIG_ARM_UNWIND=y
-+CONFIG_DEBUG_USER=y
-+
-+#
-+# Security options
-+#
-+# CONFIG_KEYS is not set
-+# CONFIG_SECURITY is not set
-+# CONFIG_SECURITYFS is not set
-+# CONFIG_SECURITY_FILE_CAPABILITIES is not set
-+CONFIG_CRYPTO=y
-+
-+#
-+# Crypto core or helper
-+#
-+# CONFIG_CRYPTO_FIPS is not set
-+CONFIG_CRYPTO_ALGAPI=y
-+CONFIG_CRYPTO_ALGAPI2=y
-+CONFIG_CRYPTO_AEAD2=y
-+CONFIG_CRYPTO_BLKCIPHER=y
-+CONFIG_CRYPTO_BLKCIPHER2=y
-+CONFIG_CRYPTO_HASH2=y
-+CONFIG_CRYPTO_RNG2=y
-+CONFIG_CRYPTO_PCOMP=y
-+CONFIG_CRYPTO_MANAGER=y
-+CONFIG_CRYPTO_MANAGER2=y
-+# CONFIG_CRYPTO_GF128MUL is not set
-+# CONFIG_CRYPTO_NULL is not set
-+CONFIG_CRYPTO_WORKQUEUE=y
-+# CONFIG_CRYPTO_CRYPTD is not set
-+# CONFIG_CRYPTO_AUTHENC is not set
-+# CONFIG_CRYPTO_TEST is not set
-+
-+#
-+# Authenticated Encryption with Associated Data
-+#
-+# CONFIG_CRYPTO_CCM is not set
-+# CONFIG_CRYPTO_GCM is not set
-+# CONFIG_CRYPTO_SEQIV is not set
-+
-+#
-+# Block modes
-+#
-+# CONFIG_CRYPTO_CBC is not set
-+# CONFIG_CRYPTO_CTR is not set
-+# CONFIG_CRYPTO_CTS is not set
-+CONFIG_CRYPTO_ECB=y
-+# CONFIG_CRYPTO_LRW is not set
-+# CONFIG_CRYPTO_PCBC is not set
-+# CONFIG_CRYPTO_XTS is not set
-+
-+#
-+# Hash modes
-+#
-+# CONFIG_CRYPTO_HMAC is not set
-+# CONFIG_CRYPTO_XCBC is not set
-+
-+#
-+# Digest
-+#
-+# CONFIG_CRYPTO_CRC32C is not set
-+# CONFIG_CRYPTO_MD4 is not set
-+# CONFIG_CRYPTO_MD5 is not set
-+# CONFIG_CRYPTO_MICHAEL_MIC is not set
-+# CONFIG_CRYPTO_RMD128 is not set
-+# CONFIG_CRYPTO_RMD160 is not set
-+# CONFIG_CRYPTO_RMD256 is not set
-+# CONFIG_CRYPTO_RMD320 is not set
-+# CONFIG_CRYPTO_SHA1 is not set
-+# CONFIG_CRYPTO_SHA256 is not set
-+# CONFIG_CRYPTO_SHA512 is not set
-+# CONFIG_CRYPTO_TGR192 is not set
-+# CONFIG_CRYPTO_WP512 is not set
-+
-+#
-+# Ciphers
-+#
-+CONFIG_CRYPTO_AES=y
-+# CONFIG_CRYPTO_ANUBIS is not set
-+CONFIG_CRYPTO_ARC4=y
-+# CONFIG_CRYPTO_BLOWFISH is not set
-+# CONFIG_CRYPTO_CAMELLIA is not set
-+# CONFIG_CRYPTO_CAST5 is not set
-+# CONFIG_CRYPTO_CAST6 is not set
-+# CONFIG_CRYPTO_DES is not set
-+# CONFIG_CRYPTO_FCRYPT is not set
-+# CONFIG_CRYPTO_KHAZAD is not set
-+# CONFIG_CRYPTO_SALSA20 is not set
-+# CONFIG_CRYPTO_SEED is not set
-+# CONFIG_CRYPTO_SERPENT is not set
-+# CONFIG_CRYPTO_TEA is not set
-+# CONFIG_CRYPTO_TWOFISH is not set
-+
-+#
-+# Compression
-+#
-+# CONFIG_CRYPTO_DEFLATE is not set
-+# CONFIG_CRYPTO_ZLIB is not set
-+# CONFIG_CRYPTO_LZO is not set
-+
-+#
-+# Random Number Generation
-+#
-+# CONFIG_CRYPTO_ANSI_CPRNG is not set
-+# CONFIG_CRYPTO_HW is not set
-+# CONFIG_BINARY_PRINTF is not set
-+
-+#
-+# Library routines
-+#
-+CONFIG_BITREVERSE=y
-+CONFIG_GENERIC_FIND_LAST_BIT=y
-+# CONFIG_CRC_CCITT is not set
-+# CONFIG_CRC16 is not set
-+# CONFIG_CRC_T10DIF is not set
-+CONFIG_CRC_ITU_T=m
-+CONFIG_CRC32=y
-+# CONFIG_CRC7 is not set
-+# CONFIG_LIBCRC32C is not set
-+CONFIG_ZLIB_INFLATE=y
-+CONFIG_ZLIB_DEFLATE=y
-+CONFIG_DECOMPRESS_GZIP=y
-+CONFIG_DECOMPRESS_BZIP2=y
-+CONFIG_DECOMPRESS_LZMA=y
-+CONFIG_HAS_IOMEM=y
-+CONFIG_HAS_IOPORT=y
-+CONFIG_HAS_DMA=y
-+CONFIG_NLATTR=y
-diff --git a/recipes/linux/linux_2.6.30.bb b/recipes/linux/linux_2.6.30.bb
-index e521cbc..d822ee4 100644
---- a/recipes/linux/linux_2.6.30.bb
-+++ b/recipes/linux/linux_2.6.30.bb
-@@ -1,7 +1,7 @@
- require linux.inc
- 
--PR = "r6"
--
-+PR = "r8"
-+AT91_EXPERIMENTAL = "4"
- S = "${WORKDIR}/linux-${PV}"
- 
- # Mark archs/machines that this kernel supports
-@@ -19,24 +19,66 @@ DEFAULT_PREFERENCE_at91sam9g20ek	= "2"
- 
- # machine boots with it, works but was not tested too much
- DEFAULT_PREFERENCE_at91sam9263ek = "-1"
--DEFAULT_PREFERENCE_tosa = "-1"
-+DEFAULT_PREFERENCE_tosa = "-1"/home/ulf/projects/OE_atmel/build/tmp-angstrom_2008_1/work/at91sam9m10ekes-angstrom-linux-gnueabi/linux-2.6.30-r8
- 
- SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
-            ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${PV}.10.bz2;apply=yes;name=stablepatch \
-            file://aufs2-30.patch \
-            file://defconfig"
- 
-+
-+SRC_URI_at91sam9m10ekes = " \
-+	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
-+	   http://maxim.org.za/AT91RM9200/2.6/${PV}-at91.patch.gz;apply=no;name=at91patch \
-+	   ftp://www.at91.com/pub/linux/${PV}-at91/${PV}-at91-exp.${AT91_EXPERIMENTAL}.tar.gz;apply=no;name=at91exp${AT91_EXPERIMENTAL} \
-+	   file://at91/exp.${AT91_EXPERIMENTAL}/0001-Configurable-partition-size.patch;apply=yes \
-+	   file://at91/exp.${AT91_EXPERIMENTAL}/0002-mach-at91-KConfig-cleanup.patch;apply=yes \
-+	   http://www.hd-wireless.se/images/stories/public_pdf/2.6.30-at91-sdio-irq-support.patch;apply=yes;name=owlwifi \
-+	   file://exp.${AT91_EXPERIMENTAL}/defconfig"
-+
-+at91sam_patch = " \
-+		"
-+
-+do_patch_prepend_at91sam9m10ekes() {
-+	bb.build.exec_func('do_apply_at91_exp_patch', d)
-+}
-+
-+do_apply_at91_exp_patch () {
-+	cd	${WORKDIR}
-+	mv	exp.${AT91_EXPERIMENTAL}/defconfig	defconfig
-+	cd	${S}
-+	cat	../${PV}-at91.patch	| patch -p1
-+	for	f in `ls ../${PV}-at91-exp.${AT91_EXPERIMENTAL}/*.patch` ; do
-+		cat $f	| patch -p1
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0007-Add-board-support-for-alternate-boot.patch
+@@ -0,0 +1,289 @@
++From 4e319cdec2e32cc29f545830a4c1534c056e3abc Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 20:02:23 +0100
++Subject: [PATCH v3 07/08] Add board support for alternate boot
++
++---
++ board/at91sam9g45ek/at91sam9g45ek.c     |   29 +++++++++++++++++++++++++
++ board/at91sam9g45ek/at91sam9g45ek.h     |   10 ++++++++
++ board/at91sam9g45ekes/at91sam9g45ekes.c |   30 ++++++++++++++++++++++++++
++ board/at91sam9g45ekes/at91sam9g45ekes.h |    9 ++++++++
++ board/at91sam9m10ek/at91sam9m10ek.c     |   29 +++++++++++++++++++++++++
++ board/at91sam9m10ek/at91sam9m10ek.h     |   10 ++++++++
++ board/at91sam9m10ekes/at91sam9m10ekes.c |   35 +++++++++++++++++++++++++++++++
++ board/at91sam9m10ekes/at91sam9m10ekes.h |   10 ++++++++
++ 8 files changed, 162 insertions(+), 0 deletions(-)
++
++diff --git a/board/at91sam9g45ek/at91sam9g45ek.c b/board/at91sam9g45ek/at91sam9g45ek.c
++index f000927..d896bf1 100644
++--- a/board/at91sam9g45ek/at91sam9g45ek.c
+++++ b/board/at91sam9g45ek/at91sam9g45ek.c
++@@ -42,6 +42,7 @@
++ #include "debug.h"
++ #include "main.h"
++ #include "ddramc.h"
+++#include "gpio.h"
++ #ifdef CONFIG_NANDFLASH
++ #include "nandflash.h"
++ #endif
++@@ -57,6 +58,34 @@ int get_cpsr(void);
++ 
++ void set_cpsr(unsigned int value);
++ 
+++/*------------------------------------------------------------------------------*/
+++/* \fn    alternate_boot							*/
+++/* \brief This function returns 1 if LEFT BUTTON is pressed			*/
+++/*        during boot sequence							*/
+++/*------------------------------------------------------------------------------*/
+++int alternate_boot_button(void)
+++{
+++	/* Configure PIOs */
+++	const struct pio_desc button_pio[] = {
+++		{"LEFT", LEFT_BUTTON, 0, PIO_PULLUP, PIO_INPUT},
+++		{(char *) 0, 0, 0, PIO_DEFAULT, PIO_PERIPH_A},
+++	};
+++
+++	/* Configure PIO B controller */
+++	writel((1 << AT91C_ID_PIOB), PMC_PCER + AT91C_BASE_PMC);
+++	pio_setup(button_pio);
+++
+++	/* Return "1" if LEFT BUTTON is pressed during Boot sequence */
+++	dbgu_print("Checking for Alternate boot: ...\n\r");
+++	if ( !pio_get_value(LEFT_BUTTON) ) {
+++		dbgu_print("[Alternate]\n\r");		
+++		return 1;
+++	} else {
+++		dbgu_print("[Normal]\n\r");		
+++		return 0;
+++	}
+++}
+++
++ #ifdef CONFIG_HW_INIT
++ /*----------------------------------------------------------------------------*/
++ /* \fn    hw_init							      */
++diff --git a/board/at91sam9g45ek/at91sam9g45ek.h b/board/at91sam9g45ek/at91sam9g45ek.h
++index d443433..06a8069 100644
++--- a/board/at91sam9g45ek/at91sam9g45ek.h
+++++ b/board/at91sam9g45ek/at91sam9g45ek.h
++@@ -122,4 +122,14 @@
++ #define BOARD_SD_PINS \
++     {(0x3E <<  0), AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_PERIPH_A, PIO_PULLUP}, \
++     {(0x1 <<  0), AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_PERIPH_A, PIO_DEFAULT}
+++
+++#define	LEFT_BUTTON		AT91C_PIN_PB(6)
+++#define	RIGHT_BUTTON		AT91C_PIN_PB(7)
+++
+++#define	JOY_LEFT		AT91C_PIN_PB(14)
+++#define	JOY_RIGHT		AT91C_PIN_PB(15)
+++#define	JOY_UP			AT91C_PIN_PB(16)
+++#define	JOY_DOWN		AT91C_PIN_PB(17)
+++#define	JOY_PUSH		AT91C_PIN_PB(18)
+++
++ #endif                          /* _AT91SAM9G45EK_H */
++diff --git a/board/at91sam9g45ekes/at91sam9g45ekes.c b/board/at91sam9g45ekes/at91sam9g45ekes.c
++index b261849..2a4d792 100644
++--- a/board/at91sam9g45ekes/at91sam9g45ekes.c
+++++ b/board/at91sam9g45ekes/at91sam9g45ekes.c
++@@ -42,6 +42,7 @@
++ #include "debug.h"
++ #include "main.h"
++ #include "ddramc.h"
+++#include "gpio.h"
++ #ifdef CONFIG_NANDFLASH
++ #include "nandflash.h"
++ #endif
++@@ -58,6 +59,35 @@ int get_cpsr(void);
++ void set_cpsr(unsigned int value);
++ 
++ void WM9711L_enble(void);
+++
+++/*------------------------------------------------------------------------------*/
+++/* \fn    alternate_boot							*/
+++/* \brief This function returns 1 if LEFT BUTTON is pressed			*/
+++/*        during boot sequence							*/
+++/*------------------------------------------------------------------------------*/
+++int alternate_boot_button(void)
+++{
+++	/* Configure PIOs */
+++	const struct pio_desc button_pio[] = {
+++		{"LEFT", LEFT_BUTTON, 0, PIO_PULLUP, PIO_INPUT},
+++		{(char *) 0, 0, 0, PIO_DEFAULT, PIO_PERIPH_A},
+++	};
+++
+++	/* Configure PIO B controller */
+++	writel((1 << AT91C_ID_PIOB), PMC_PCER + AT91C_BASE_PMC);
+++	pio_setup(button_pio);
+++
+++	/* Return "1" if LEFT BUTTON is pressed during Boot sequence */
+++	dbgu_print("Checking for Alternate boot: ...\n\r");
+++	if ( !pio_get_value(LEFT_BUTTON) ) {
+++		dbgu_print("[Alternate]\n\r");		
+++		return 1;
+++	} else {
+++		dbgu_print("[Normal]\n\r");		
+++		return 0;
+++	}
+++}
+++
++ #ifdef CONFIG_HW_INIT
++ /*----------------------------------------------------------------------------*/
++ /* \fn    hw_init							      */
++diff --git a/board/at91sam9g45ekes/at91sam9g45ekes.h b/board/at91sam9g45ekes/at91sam9g45ekes.h
++index 01e79be..5519c8f 100644
++--- a/board/at91sam9g45ekes/at91sam9g45ekes.h
+++++ b/board/at91sam9g45ekes/at91sam9g45ekes.h
++@@ -124,4 +124,13 @@
++     {(0x3E <<  0), AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_PERIPH_A, PIO_PULLUP}, \
++     {(0x1 <<  0), AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_PERIPH_A, PIO_DEFAULT}
++ 
+++#define	LEFT_BUTTON		AT91C_PIN_PB(6)
+++#define	RIGHT_BUTTON		AT91C_PIN_PB(7)
+++
+++#define	JOY_LEFT		AT91C_PIN_PB(14)
+++#define	JOY_RIGHT		AT91C_PIN_PB(15)
+++#define	JOY_UP			AT91C_PIN_PB(16)
+++#define	JOY_DOWN		AT91C_PIN_PB(17)
+++#define	JOY_PUSH		AT91C_PIN_PB(18)
+++
++ #endif                          /* _AT91SAM9G45EKES_H */
++diff --git a/board/at91sam9m10ek/at91sam9m10ek.c b/board/at91sam9m10ek/at91sam9m10ek.c
++index d1b87c3..5f66658 100644
++--- a/board/at91sam9m10ek/at91sam9m10ek.c
+++++ b/board/at91sam9m10ek/at91sam9m10ek.c
++@@ -42,6 +42,7 @@
++ #include "debug.h"
++ #include "main.h"
++ #include "ddramc.h"
+++#include "gpio.h"
++ #ifdef CONFIG_NANDFLASH
++ #include "nandflash.h"
++ #endif
++@@ -59,6 +60,34 @@ void set_cpsr(unsigned int value);
++ 
++ void WM9711L_enble(void);
++ 
+++/*------------------------------------------------------------------------------*/
+++/* \fn    alternate_boot							*/
+++/* \brief This function returns 1 if LEFT BUTTON is pressed			*/
+++/*        during boot sequence							*/
+++/*------------------------------------------------------------------------------*/
+++int alternate_boot_button(void)
+++{
+++	/* Configure PIOs */
+++	const struct pio_desc button_pio[] = {
+++		{"LEFT", LEFT_BUTTON, 0, PIO_PULLUP, PIO_INPUT},
+++		{(char *) 0, 0, 0, PIO_DEFAULT, PIO_PERIPH_A},
+++	};
+++
+++	/* Configure PIO B controller */
+++	writel((1 << AT91C_ID_PIOB), PMC_PCER + AT91C_BASE_PMC);
+++	pio_setup(button_pio);
+++
+++	/* Return "1" if LEFT BUTTON is pressed during Boot sequence */
+++	dbgu_print("Checking for Alternate boot: ...\n\r");
+++	if ( !pio_get_value(LEFT_BUTTON) ) {
+++		dbgu_print("[Alternate]\n\r");		
+++		return 1;
+++	} else {
+++		dbgu_print("[Normal]\n\r");		
+++		return 0;
+++	}
+++}
+++
++ #ifdef CONFIG_HW_INIT
++ /*----------------------------------------------------------------------------*/
++ /* \fn    hw_init							      */
++diff --git a/board/at91sam9m10ek/at91sam9m10ek.h b/board/at91sam9m10ek/at91sam9m10ek.h
++index 581bbaa..b457e24 100644
++--- a/board/at91sam9m10ek/at91sam9m10ek.h
+++++ b/board/at91sam9m10ek/at91sam9m10ek.h
++@@ -123,4 +123,14 @@
++ #define BOARD_SD_PINS \
++     {(0x3E <<  0), AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_PERIPH_A, PIO_PULLUP}, \
++     {(0x1 <<  0), AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_PERIPH_A, PIO_DEFAULT}
+++
+++#define	LEFT_BUTTON		AT91C_PIN_PB(6)
+++#define	RIGHT_BUTTON		AT91C_PIN_PB(7)
+++
+++#define	JOY_LEFT		AT91C_PIN_PB(14)
+++#define	JOY_RIGHT		AT91C_PIN_PB(15)
+++#define	JOY_UP			AT91C_PIN_PB(16)
+++#define	JOY_DOWN		AT91C_PIN_PB(17)
+++#define	JOY_PUSH		AT91C_PIN_PB(18)
+++
++ #endif                          /* _AT91SAM9M10EK_H */
++diff --git a/board/at91sam9m10ekes/at91sam9m10ekes.c b/board/at91sam9m10ekes/at91sam9m10ekes.c
++index 8fd882c..8c0e979 100644
++--- a/board/at91sam9m10ekes/at91sam9m10ekes.c
+++++ b/board/at91sam9m10ekes/at91sam9m10ekes.c
++@@ -42,6 +42,7 @@
++ #include "debug.h"
++ #include "main.h"
++ #include "ddramc.h"
+++#include "gpio.h"
++ #ifdef CONFIG_NANDFLASH
++ #include "nandflash.h"
++ #endif
++@@ -57,6 +58,40 @@ int get_cpsr(void);
++ 
++ void set_cpsr(unsigned int value);
++ 
+++/*------------------------------------------------------------------------------*/
+++/* \fn    alternate_boot							*/
+++/* \brief This function returns 1 if LEFT BUTTON is pressed			*/
+++/*        during boot sequence							*/
+++/*------------------------------------------------------------------------------*/
+++int alternate_boot_button(void)
+++{
+++	/* Configure PIOs */
+++	const struct pio_desc button_pio[] = {
+++		{"LEFT", LEFT_BUTTON, 0, PIO_PULLUP, PIO_INPUT},
+++		{(char *) 0, 0, 0, PIO_DEFAULT, PIO_PERIPH_A},
+++	};
+++
+++	/* Configure PIO B controller */
+++	writel((1 << AT91C_ID_PIOB), PMC_PCER + AT91C_BASE_PMC);
+++	pio_setup(button_pio);
+++		dbgu_print("[Alternate]\n\r");		
+++		return 1;
+++	} else {
+++		dbgu_print("[Normal]\n\r");		
+++		return 0;
+++	}
+++}
+++	/* Return "1" if LEFT BUTTON is pressed during Boot sequence */
+++	dbgu_print("Checking for Alternate boot: ...\n\r");
+++	if ( !pio_get_value(LEFT_BUTTON) ) {
+++		dbgu_print("[Alternate]\n\r");		
+++		return 1;
+++	} else {
+++		dbgu_print("[Normal]\n\r");		
+++		return 0;
+++	}
+++}
+++
++ #ifdef CONFIG_HW_INIT
++ /*----------------------------------------------------------------------------*/
++ /* \fn    hw_init							      */
++diff --git a/board/at91sam9m10ekes/at91sam9m10ekes.h b/board/at91sam9m10ekes/at91sam9m10ekes.h
++index 222c953..e6abfa7 100644
++--- a/board/at91sam9m10ekes/at91sam9m10ekes.h
+++++ b/board/at91sam9m10ekes/at91sam9m10ekes.h
++@@ -122,4 +122,14 @@
++ #define BOARD_SD_PINS \
++     {(0x3E <<  0), AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_PERIPH_A, PIO_PULLUP}, \
++     {(0x1 <<  0), AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_PERIPH_A, PIO_DEFAULT}
+++
+++#define	LEFT_BUTTON		AT91C_PIN_PB(6)
+++#define	RIGHT_BUTTON		AT91C_PIN_PB(7)
+++
+++#define	JOY_LEFT		AT91C_PIN_PB(14)
+++#define	JOY_RIGHT		AT91C_PIN_PB(15)
+++#define	JOY_UP			AT91C_PIN_PB(16)
+++#define	JOY_DOWN		AT91C_PIN_PB(17)
+++#define	JOY_PUSH		AT91C_PIN_PB(18)
+++
++ #endif                          /* _AT91SAM9M10EK_H */
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0008-Clean-up-printouts.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0008-Clean-up-printouts.patch
+new file mode 100644
+index 0000000..6f8bd1d
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0008-Clean-up-printouts.patch
+@@ -0,0 +1,199 @@
++From 8512356f4eb3b6e796fef0fc1d8d4cfca7f66934 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 20:03:30 +0100
++Subject: [PATCH v3 08/08] Clean up printouts
++
++---
++ driver/MEDSdcard.c |    4 ++--
++ driver/dataflash.c |   41 +++++------------------------------------
++ driver/dbgu.c      |    2 +-
++ driver/gpio.c      |    4 ++--
++ driver/mci.c       |   10 +++++-----
++ 5 files changed, 15 insertions(+), 46 deletions(-)
++
++diff --git a/driver/MEDSdcard.c b/driver/MEDSdcard.c
++index e6a660f..9f0bec0 100644
++--- a/driver/MEDSdcard.c
+++++ b/driver/MEDSdcard.c
++@@ -464,7 +464,7 @@ unsigned char MEDSdcard_Initialize(Media * media, unsigned char mciID)
++                  MCI_POLLING_MODE);
++ //        IRQ_EnableIT(BOARD_SD_MCI_ID);
++     } else {
++-//              dbg_print("pos2.2\r\n");
+++//              dbgu_print("pos2.2\r\n");
++ #ifdef BOARD_SD_MCI1_ID
++ //        IRQ_ConfigureIT(BOARD_SD_MCI1_ID,  1, MCI0_IrqHandler);
++         MCI_Init(mciDrv, BOARD_SD_MCI1_BASE, BOARD_SD_MCI1_ID,
++@@ -474,7 +474,7 @@ unsigned char MEDSdcard_Initialize(Media * media, unsigned char mciID)
++ 
++ #endif
++     }
++-//      dbg_print("pos2.3\r\n");
+++//      dbgu_print("pos2.3\r\n");
++ #if MCI_BUSY_CHECK_FIX && defined(BOARD_SD_DAT0)
++     MCI_SetBusyFix(mciDrv, &pinSdDAT0);
++ #endif
++diff --git a/driver/dataflash.c b/driver/dataflash.c
++index dd2000a..3c5e1fd 100644
++--- a/driver/dataflash.c
+++++ b/driver/dataflash.c
++@@ -58,23 +58,6 @@ static void msg_df_detect(int i)
++ {
++ #if	defined(CONFIG_VERBOSE)
++     char *pn;
++-
++-#ifdef	CONFIG_DEBUG
++-#if 0
++-    msg_print(MSG_PROMPT);
++-    msg_print(MSG_DATAFLASH);
++-    msg_print(MSG_SPACE);
++-    msg_print(MSG_CODE);
++-    msg_print(MSG_SPACE);
++-    dbg_print_hex(i);
++-    msg_print(MSG_NEWLINE);
++-#endif
++-#endif
++-#if 0
++-    msg_print(MSG_PROMPT);
++-    msg_print(MSG_AT45);
++-    msg_print(MSG_DB);
++-#endif
++     switch (i) {
++     case AT45DB011D:
++         pn = "011D";
++@@ -97,26 +80,12 @@ static void msg_df_detect(int i)
++     case AT45DB642D:
++         pn = "642D";
++         break;
++-#if	0
++-    case AT45DB1282D:
++-        pn = "1282";
++-        break;
++-    case AT45DB2562D:
++-        pn = "2562";
++-        break;
++-    case AT45DB5122D:
++-        pn = "5122";
++-        break;
++-#endif
++     default:
++         pn = "????";
++         break;
++     }
++-#if 0
++-    dbg_print(pn);
++-    msg_print_ws(MSG_DETECTED);
++-    msg_print(MSG_NEWLINE);
++-#endif
+++    dbgu_print(pn);
+++    dbgu_print("detected\r\n");
++ #endif
++ }
++ 
++@@ -326,14 +295,14 @@ void df_write(AT91PS_DF pDf, unsigned int addr, int size, unsigned long offset)
++         for (i = 0; i < 32; i += 4) {
++ #if 0
++             if (!(i & 4))
++-                dbg_print_hex(i + j);
+++                dbgu_print_hex(i + j);
++ #endif
++ #if 0
++             if (LONG_VAL(0x200000 + i + j) == LONG_VAL(&rxBuffer[i]))
++                 msg_print(MSG_SPACE);
++             else
++                 msg_print(MSG_EXCLAMATION);
++-            dbg_print_hex(LONG_VAL(&rxBuffer[i]));
+++            dbgu_print_hex(LONG_VAL(&rxBuffer[i]));
++             if (i & 4)
++                 msg_print(MSG_NEWLINE);
++ #endif
++@@ -424,7 +393,7 @@ static int df_probe(AT91PS_DF pDf)
++     if ((pResult[1] & 0x1) == 0x1) {
++         pDf->dfDescription.binaryPageMode = 1;
++ #ifdef CONFIG_VERBOSE
++-        //dbg_print("> DataFlash in binary mode\n\r");
+++        dbgu_print("> DataFlash in binary mode\n\r");
++ #endif                          /* CONFIG_DEBUG */
++     } else {
++         pDf->dfDescription.binaryPageMode = 0;
++diff --git a/driver/dbgu.c b/driver/dbgu.c
++index 3a43a38..dbfc33a 100644
++--- a/driver/dbgu.c
+++++ b/driver/dbgu.c
++@@ -73,7 +73,7 @@ void dbgu_init(unsigned int baudrate)
++ }
++ 
++ //*----------------------------------------------------------------------------
++-//* \fn    dbg_print
+++//* \fn    dbgu_print
++ //* \brief This function is used to send data to DBGU
++ //*---------------------------------------------------------------------------*/
++ void dbgu_print(const char *ptr)
++diff --git a/driver/gpio.c b/driver/gpio.c
++index 7231712..b5f037b 100644
++--- a/driver/gpio.c
+++++ b/driver/gpio.c
++@@ -197,7 +197,7 @@ int pio_set_value(unsigned pin, int value)
++     return 0;
++ }
++ #endif
++-#if !defined (CONFIG_SDCARD)
+++
++ /*------------------------------------------------------------------------------*/
++ /* \fn    pio_get_value								*/
++ /* \brief read the pin's value (works even if it's not muxed as a gpio).	*/
++@@ -216,7 +216,7 @@ int pio_get_value(unsigned pin)
++     pdsr = read_pio(PIO_PDSR(pio));
++     return (pdsr & mask) != 0;
++ }
++-#endif
+++
++ /*------------------------------------------------------------------------------*/
++ /* \fn    pio_device_pio_setup							*/
++ /* \brief Configure PIO in periph mode according to the platform informations	*/
++diff --git a/driver/mci.c b/driver/mci.c
++index 9e52024..41ae079 100644
++--- a/driver/mci.c
+++++ b/driver/mci.c
++@@ -260,9 +260,9 @@ unsigned int MCI_SetSpeed(Mci * pMci,
++     unsigned int comparevalue = 0;
++ 
++     mciMr = READ_MCI(pMciHw, MCI_MR) & (~AT91C_MCI_CLKDIV);
++-//      dbg_print("pos2.4.2\r\n");
+++//      dbgu_print("pos2.4.2\r\n");
++ 
++-//      dbg_printnum("mciLimit:", mciLimit);
+++//      dbgu_printnum("mciLimit:", mciLimit);
++ 
++     // Multimedia Card Interface clock (MCCK or MCI_CK) is Master Clock (MCK)
++     // divided by (2*(CLKDIV+1))
++@@ -272,7 +272,7 @@ unsigned int MCI_SetSpeed(Mci * pMci,
++ //        divLimit = (mck / 2 / mciLimit);
++         divLimit = (mck / 2);
++         divLimit = (divLimit / mciLimit);
++-//              dbg_printnum("mck1:", mck);
+++//              dbgu_printnum("mck1:", mck);
++ //        if ((mck / 2) % mciLimit) divLimit ++;
++ 
++         comparevalue = (mck / 2);
++@@ -281,7 +281,7 @@ unsigned int MCI_SetSpeed(Mci * pMci,
++         if (comparevalue)
++             divLimit++;
++     }
++-//      dbg_printnum("mck:", mck);
+++//      dbgu_printnum("mck:", mck);
++     if (mciSpeed > 0) {
++         /*
++          * mciSpeed = 0x8000000;
++@@ -312,7 +312,7 @@ unsigned int MCI_SetSpeed(Mci * pMci,
++     //MCI_SetTimeout(pMciHw, mciSpeed / 2, mciSpeed);
++ 
++     WRITE_MCI(pMciHw, MCI_MR, mciMr | clkdiv);
++-//      dbg_print("pos2.4.3\r\n");
+++//      dbgu_print("pos2.4.3\r\n");
++     return (mciSpeed);
++ }
++ 
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0009-Update-configs.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0009-Update-configs.patch
+new file mode 100644
+index 0000000..80fd329
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0009-Update-configs.patch
+@@ -0,0 +1,3402 @@
++From 0f9b0b7586d1e66998fead980dd8d54a90f40a5c Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 20:05:45 +0100
++Subject: [PATCH v3 09/08] Update configs
++
++---
++ board/afeb9260/afeb9260_defconfig                  |   22 ++++-
++ board/at91cap9adk/at91cap9adk_defconfig            |   25 ++++-
++ board/at91cap9adk/at91cap9df_defconfig             |   25 ++++-
++ board/at91cap9adk/at91cap9f_defconfig              |   25 ++++-
++ board/at91cap9stk/at91cap9stk_defconfig            |   25 ++++-
++ board/at91cap9stk/at91cap9stkdf_defconfig          |   25 ++++-
++ board/at91cap9stk/at91cap9stkf_defconfig           |   25 ++++-
++ board/at91sam9260ek/at91sam9260df_defconfig        |   13 ++-
++ board/at91sam9260ek/at91sam9260dfc_defconfig       |   21 +++-
++ board/at91sam9260ek/at91sam9260ek_defconfig        |   11 ++-
++ board/at91sam9260ek/at91sam9260nf_defconfig        |   13 ++-
++ board/at91sam9261ek/at91sam9261df_defconfig        |   13 ++-
++ board/at91sam9261ek/at91sam9261dfc_defconfig       |   24 ++++-
++ board/at91sam9261ek/at91sam9261ek_defconfig        |   11 ++-
++ board/at91sam9261ek/at91sam9261nf_defconfig        |   13 ++-
++ board/at91sam9263ek/at91sam9263df_defconfig        |   15 ++-
++ board/at91sam9263ek/at91sam9263dfc_defconfig       |   26 ++++-
++ board/at91sam9263ek/at91sam9263ek_defconfig        |   13 ++-
++ board/at91sam9263ek/at91sam9263nf_defconfig        |   15 ++-
++ board/at91sam9g10ek/at91sam9g10df_defconfig        |   15 ++-
++ board/at91sam9g10ek/at91sam9g10ek_defconfig        |   13 ++-
++ board/at91sam9g10ek/at91sam9g10nf_defconfig        |   15 ++-
++ board/at91sam9g10ek/at91sam9g10sd_defconfig        |   12 ++-
++ board/at91sam9g20ek/at91sam9g20df_defconfig        |   15 ++-
++ board/at91sam9g20ek/at91sam9g20dfc_defconfig       |   30 ++++--
++ board/at91sam9g20ek/at91sam9g20ek_defconfig        |   13 ++-
++ board/at91sam9g20ek/at91sam9g20nf_defconfig        |   15 ++-
++ board/at91sam9g20ek/at91sam9g20sd_defconfig        |   10 +-
++ board/at91sam9g45ek/at91sam9g45df_defconfig        |   17 +++-
++ board/at91sam9g45ek/at91sam9g45ek_defconfig        |   15 ++-
++ board/at91sam9g45ek/at91sam9g45nf_defconfig        |   17 +++-
++ board/at91sam9g45ek/at91sam9g45sd_defconfig        |   12 ++-
++ board/at91sam9g45ekes/at91sam9g45dfes_defconfig    |   17 +++-
++ board/at91sam9g45ekes/at91sam9g45ekes_defconfig    |   15 ++-
++ board/at91sam9g45ekes/at91sam9g45nfes_defconfig    |   17 +++-
++ .../at91sam9g45sdes_android_defconfig              |    8 +-
++ board/at91sam9g45ekes/at91sam9g45sdes_defconfig    |   12 ++-
++ board/at91sam9m10ek/at91sam9m10df_defconfig        |   17 +++-
++ board/at91sam9m10ek/at91sam9m10ek_defconfig        |   15 ++-
++ board/at91sam9m10ek/at91sam9m10nf_defconfig        |   17 +++-
++ .../at91sam9m10ek/at91sam9m10sd_android_defconfig  |    8 +-
++ board/at91sam9m10ek/at91sam9m10sd_defconfig        |   12 ++-
++ board/at91sam9m10ek/at91sam9m10sdu_defconfig       |  107 ++++++++++++++++++++
++ board/at91sam9m10ekes/at91sam9m10dfes_defconfig    |   17 +++-
++ board/at91sam9m10ekes/at91sam9m10ekes_defconfig    |   15 ++-
++ board/at91sam9m10ekes/at91sam9m10nfes_defconfig    |   17 +++-
++ board/at91sam9m10ekes/at91sam9m10sdes_defconfig    |   12 ++-
++ board/at91sam9rlek/at91sam9rldf_defconfig          |   15 ++-
++ board/at91sam9rlek/at91sam9rlek_defconfig          |   13 ++-
++ board/at91sam9rlek/at91sam9rlnf_defconfig          |   15 ++-
++ board/at91sam9rlek/at91sam9rlsd_defconfig          |   10 +-
++ board/at91sam9xeek/at91sam9xedf_defconfig          |   11 ++-
++ board/at91sam9xeek/at91sam9xedfc_defconfig         |   28 ++++-
++ board/at91sam9xeek/at91sam9xeek_defconfig          |    9 ++-
++ board/at91sam9xeek/at91sam9xenf_defconfig          |   15 ++-
++ 55 files changed, 783 insertions(+), 198 deletions(-)
++ create mode 100644 board/at91sam9m10ek/at91sam9m10sdu_defconfig
++
++diff --git a/board/afeb9260/afeb9260_defconfig b/board/afeb9260/afeb9260_defconfig
++index ee84d2f..516b29b 100644
++--- a/board/afeb9260/afeb9260_defconfig
+++++ b/board/afeb9260/afeb9260_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:55 2010
+++# Sun Jan 16 21:42:56 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="afeb9260"
++@@ -14,6 +14,7 @@ CONFIG_BOARDNAME="afeb9260"
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ CONFIG_AFEB9260=y
++@@ -22,7 +23,6 @@ CONFIG_BOARD="afeb9260"
++ CONFIG_MACH_TYPE="1859"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x301000"
++-CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -53,6 +53,7 @@ ALLOW_DATAFLASH=y
++ # ALLOW_FLASH is not set
++ ALLOW_NANDFLASH=y
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,6 +65,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -92,18 +94,30 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x23F00000"
++ # CONFIG_LONG_TEST is not set
++ # CONFIG_DEBUG is not set
++-# CONFIG_VERBOSE is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91cap9adk/at91cap9adk_defconfig b/board/at91cap9adk/at91cap9adk_defconfig
++index b9edc91..a0d8856 100644
++--- a/board/at91cap9adk/at91cap9adk_defconfig
+++++ b/board/at91cap9adk/at91cap9adk_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:30 2010
+++# Sun Jan 16 21:43:19 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9adk"
++@@ -14,6 +14,7 @@ CONFIG_BOARDNAME="at91cap9adk"
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91CAP9ADK=y
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -22,7 +23,6 @@ CONFIG_BOARD="at91cap9adk"
++ CONFIG_MACH_TYPE="0x61E"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x108000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
++ CONFIG_CRYSTAL_12_000MHZ=y
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -53,6 +53,7 @@ ALLOW_DATAFLASH=y
++ ALLOW_FLASH=y
++ # ALLOW_NANDFLASH is not set
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,6 +65,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -91,18 +93,33 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91cap9adk/at91cap9df_defconfig b/board/at91cap9adk/at91cap9df_defconfig
++index 8ccd36d..9f9723f 100644
++--- a/board/at91cap9adk/at91cap9df_defconfig
+++++ b/board/at91cap9adk/at91cap9df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:30 2010
+++# Sun Jan 16 21:43:18 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9df"
++@@ -14,6 +14,7 @@ CONFIG_BOARDNAME="at91cap9df"
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91CAP9ADK=y
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -22,7 +23,6 @@ CONFIG_BOARD="at91cap9adk"
++ CONFIG_MACH_TYPE="0x61E"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x108000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
++ CONFIG_CRYSTAL_12_000MHZ=y
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -53,6 +53,7 @@ ALLOW_DATAFLASH=y
++ ALLOW_FLASH=y
++ # ALLOW_NANDFLASH is not set
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,6 +65,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -91,18 +93,33 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91cap9adk/at91cap9f_defconfig b/board/at91cap9adk/at91cap9f_defconfig
++index 7110cf1..5cba669 100644
++--- a/board/at91cap9adk/at91cap9f_defconfig
+++++ b/board/at91cap9adk/at91cap9f_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:31 2010
+++# Sun Jan 16 21:43:18 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9f"
++@@ -14,6 +14,7 @@ CONFIG_BOARDNAME="at91cap9f"
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91CAP9ADK=y
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -22,7 +23,6 @@ CONFIG_BOARD="at91cap9adk"
++ CONFIG_MACH_TYPE="0x61E"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x108000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
++ CONFIG_CRYSTAL_12_000MHZ=y
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -53,6 +53,7 @@ ALLOW_DATAFLASH=y
++ ALLOW_FLASH=y
++ # ALLOW_NANDFLASH is not set
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,20 +65,36 @@ CONFIG_FLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="flash"
+++# CONFIG_SDCARD_HS is not set
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ DATAFLASHCARD_ON_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="flash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008000"
+++CONFIG_SETTING_ADDRESS="0x00008000"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91cap9stk/at91cap9stk_defconfig b/board/at91cap9stk/at91cap9stk_defconfig
++index dea9253..f505e19 100644
++--- a/board/at91cap9stk/at91cap9stk_defconfig
+++++ b/board/at91cap9stk/at91cap9stk_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:32 2010
+++# Sun Jan 16 21:43:17 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9stk"
++@@ -14,6 +14,7 @@ CONFIG_BOARDNAME="at91cap9stk"
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ CONFIG_AT91CAP9STK=y
++ # CONFIG_AFEB9260 is not set
++@@ -22,7 +23,6 @@ CONFIG_BOARD="at91cap9stk"
++ CONFIG_MACH_TYPE="0x85E"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x108000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
++ CONFIG_CRYSTAL_12_000MHZ=y
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -53,6 +53,7 @@ ALLOW_DATAFLASH=y
++ ALLOW_FLASH=y
++ # ALLOW_NANDFLASH is not set
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,6 +65,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -91,18 +93,33 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91cap9stk/at91cap9stkdf_defconfig b/board/at91cap9stk/at91cap9stkdf_defconfig
++index b572d64..00bc7d1 100644
++--- a/board/at91cap9stk/at91cap9stkdf_defconfig
+++++ b/board/at91cap9stk/at91cap9stkdf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:33 2010
+++# Sun Jan 16 21:43:17 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9stkdf"
++@@ -14,6 +14,7 @@ CONFIG_BOARDNAME="at91cap9stkdf"
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ CONFIG_AT91CAP9STK=y
++ # CONFIG_AFEB9260 is not set
++@@ -22,7 +23,6 @@ CONFIG_BOARD="at91cap9stk"
++ CONFIG_MACH_TYPE="0x85E"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x108000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
++ CONFIG_CRYSTAL_12_000MHZ=y
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -53,6 +53,7 @@ ALLOW_DATAFLASH=y
++ ALLOW_FLASH=y
++ # ALLOW_NANDFLASH is not set
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,6 +65,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -91,18 +93,33 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91cap9stk/at91cap9stkf_defconfig b/board/at91cap9stk/at91cap9stkf_defconfig
++index b024769..94b3ea9 100644
++--- a/board/at91cap9stk/at91cap9stkf_defconfig
+++++ b/board/at91cap9stk/at91cap9stkf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:33 2010
+++# Sun Jan 16 21:43:17 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9stkf"
++@@ -14,6 +14,7 @@ CONFIG_BOARDNAME="at91cap9stkf"
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ CONFIG_AT91CAP9STK=y
++ # CONFIG_AFEB9260 is not set
++@@ -22,7 +23,6 @@ CONFIG_BOARD="at91cap9stk"
++ CONFIG_MACH_TYPE="0x85E"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x108000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
++ CONFIG_CRYSTAL_12_000MHZ=y
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -53,6 +53,7 @@ ALLOW_DATAFLASH=y
++ ALLOW_FLASH=y
++ # ALLOW_NANDFLASH is not set
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,20 +65,36 @@ CONFIG_FLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="flash"
+++# CONFIG_SDCARD_HS is not set
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ DATAFLASHCARD_ON_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="flash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008000"
+++CONFIG_SETTING_ADDRESS="0x00008000"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91sam9260ek/at91sam9260df_defconfig b/board/at91sam9260ek/at91sam9260df_defconfig
++index 2d4c565..78b6a84 100644
++--- a/board/at91sam9260ek/at91sam9260df_defconfig
+++++ b/board/at91sam9260ek/at91sam9260df_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:45:28 2010
+++# Sun Jan 16 21:43:20 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9260ek"
+++CONFIG_BOARDNAME="at91sam9260df"
++ CONFIG_AT91SAM9260EK=y
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9260ek"
++ CONFIG_MACH_TYPE="0x44B"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x301000"
++-CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9260ek/at91sam9260dfc_defconfig b/board/at91sam9260ek/at91sam9260dfc_defconfig
++index 790782e..4ff3fe1 100644
++--- a/board/at91sam9260ek/at91sam9260dfc_defconfig
+++++ b/board/at91sam9260ek/at91sam9260dfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:52 2010
+++# Sun Jan 16 21:43:19 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9260dfc"
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9260ek"
++ CONFIG_MACH_TYPE="0x44B"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x301000"
++-CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -53,6 +52,7 @@ ALLOW_DATAFLASH=y
++ # ALLOW_FLASH is not set
++ ALLOW_NANDFLASH=y
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,6 +64,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -92,18 +93,30 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ # CONFIG_DEBUG is not set
++-# CONFIG_VERBOSE is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91sam9260ek/at91sam9260ek_defconfig b/board/at91sam9260ek/at91sam9260ek_defconfig
++index 2d4c565..c05d5c0 100644
++--- a/board/at91sam9260ek/at91sam9260ek_defconfig
+++++ b/board/at91sam9260ek/at91sam9260ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:45:28 2010
+++# Sun Jan 16 21:43:20 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9260ek"
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9260ek"
++ CONFIG_MACH_TYPE="0x44B"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x301000"
++-CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9260ek/at91sam9260nf_defconfig b/board/at91sam9260ek/at91sam9260nf_defconfig
++index 8a23c3f..e30fcab 100644
++--- a/board/at91sam9260ek/at91sam9260nf_defconfig
+++++ b/board/at91sam9260ek/at91sam9260nf_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:46:29 2010
+++# Sun Jan 16 21:43:19 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9260ek"
+++CONFIG_BOARDNAME="at91sam9260nf"
++ CONFIG_AT91SAM9260EK=y
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9260ek"
++ CONFIG_MACH_TYPE="0x44B"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x301000"
++-CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -76,6 +75,7 @@ DATAFLASHCARD_ON_CS0=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="4096"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -84,6 +84,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9261ek/at91sam9261df_defconfig b/board/at91sam9261ek/at91sam9261df_defconfig
++index 0473e42..a98e46d 100644
++--- a/board/at91sam9261ek/at91sam9261df_defconfig
+++++ b/board/at91sam9261ek/at91sam9261df_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:49:49 2010
+++# Sun Jan 16 21:43:23 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9261ek"
+++CONFIG_BOARDNAME="at91sam9261df"
++ # CONFIG_AT91SAM9260EK is not set
++ CONFIG_AT91SAM9261EK=y
++ # CONFIG_AT91SAM9263EK is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9261ek"
++ CONFIG_MACH_TYPE="0x350"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x328000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9261ek/at91sam9261dfc_defconfig b/board/at91sam9261ek/at91sam9261dfc_defconfig
++index 8c6822c..ac632d0 100644
++--- a/board/at91sam9261ek/at91sam9261dfc_defconfig
+++++ b/board/at91sam9261ek/at91sam9261dfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:57 2010
+++# Sun Jan 16 21:43:22 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9261dfc"
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9261ek"
++ CONFIG_MACH_TYPE="0x350"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x328000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -54,6 +53,7 @@ ALLOW_DATAFLASH=y
++ # ALLOW_FLASH is not set
++ ALLOW_NANDFLASH=y
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -65,6 +65,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -92,18 +93,33 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91sam9261ek/at91sam9261ek_defconfig b/board/at91sam9261ek/at91sam9261ek_defconfig
++index 0473e42..f2c14d0 100644
++--- a/board/at91sam9261ek/at91sam9261ek_defconfig
+++++ b/board/at91sam9261ek/at91sam9261ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:49:49 2010
+++# Sun Jan 16 21:43:23 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9261ek"
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9261ek"
++ CONFIG_MACH_TYPE="0x350"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x328000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9261ek/at91sam9261nf_defconfig b/board/at91sam9261ek/at91sam9261nf_defconfig
++index 5c80c14..d7d1a75 100644
++--- a/board/at91sam9261ek/at91sam9261nf_defconfig
+++++ b/board/at91sam9261ek/at91sam9261nf_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:51:01 2010
+++# Sun Jan 16 21:43:22 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9261ek"
+++CONFIG_BOARDNAME="at91sam9261nf"
++ # CONFIG_AT91SAM9260EK is not set
++ CONFIG_AT91SAM9261EK=y
++ # CONFIG_AT91SAM9263EK is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9261ek"
++ CONFIG_MACH_TYPE="0x350"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x328000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -75,6 +74,7 @@ ALLOW_BOOT_FROM_DATAFLASH_CS3=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -83,6 +83,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9263ek/at91sam9263df_defconfig b/board/at91sam9263ek/at91sam9263df_defconfig
++index 5e59bbb..65264ff 100644
++--- a/board/at91sam9263ek/at91sam9263df_defconfig
+++++ b/board/at91sam9263ek/at91sam9263df_defconfig
++@@ -1,12 +1,11 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:52:29 2010
+++# Sun Jan 16 21:43:24 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9263ek"
+++CONFIG_BOARDNAME="at91sam9263df"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9263EK=y
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++@@ -15,6 +14,7 @@ CONFIG_AT91SAM9263EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9263ek"
++ CONFIG_MACH_TYPE="0x4B2"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x314000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ CONFIG_CRYSTAL_16_36766MHZ=y
++@@ -97,6 +96,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -105,6 +105,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9263ek/at91sam9263dfc_defconfig b/board/at91sam9263ek/at91sam9263dfc_defconfig
++index abf3e00..ce626d4 100644
++--- a/board/at91sam9263ek/at91sam9263dfc_defconfig
+++++ b/board/at91sam9263ek/at91sam9263dfc_defconfig
++@@ -1,12 +1,11 @@
++ #
++ # Automatically generated make config: don't edit
++-# Wed May 19 10:11:15 2010
+++# Sun Jan 16 21:43:24 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9263ek"
+++CONFIG_BOARDNAME="at91sam9263dfc"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9263EK=y
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++@@ -15,6 +14,7 @@ CONFIG_AT91SAM9263EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9263ek"
++ CONFIG_MACH_TYPE="0x4B2"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x314000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ CONFIG_CRYSTAL_16_36766MHZ=y
++@@ -54,7 +53,8 @@ CONFIG_SDRAM=y
++ ALLOW_DATAFLASH=y
++ # ALLOW_FLASH is not set
++ ALLOW_NANDFLASH=y
++-# ALLOW_SDCARD is not set
+++ALLOW_SDCARD=y
+++# ALLOW_HSMCI is not set
++ ALLOW_PSRAM=y
++ ALLOW_SDRAM_16BIT=y
++ # CONFIG_RAM_32MB is not set
++@@ -68,6 +68,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -95,15 +96,28 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++diff --git a/board/at91sam9263ek/at91sam9263ek_defconfig b/board/at91sam9263ek/at91sam9263ek_defconfig
++index 5e59bbb..87b4d33 100644
++--- a/board/at91sam9263ek/at91sam9263ek_defconfig
+++++ b/board/at91sam9263ek/at91sam9263ek_defconfig
++@@ -1,12 +1,11 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:52:29 2010
+++# Sun Jan 16 21:43:23 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9263ek"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9263EK=y
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++@@ -15,6 +14,7 @@ CONFIG_AT91SAM9263EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9263ek"
++ CONFIG_MACH_TYPE="0x4B2"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x314000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ CONFIG_CRYSTAL_16_36766MHZ=y
++@@ -97,6 +96,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -105,6 +105,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9263ek/at91sam9263nf_defconfig b/board/at91sam9263ek/at91sam9263nf_defconfig
++index 90fff96..6093466 100644
++--- a/board/at91sam9263ek/at91sam9263nf_defconfig
+++++ b/board/at91sam9263ek/at91sam9263nf_defconfig
++@@ -1,12 +1,11 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 13:54:40 2010
+++# Sun Jan 16 21:43:24 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9263ek"
+++CONFIG_BOARDNAME="at91sam9263nf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9263EK=y
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++@@ -15,6 +14,7 @@ CONFIG_AT91SAM9263EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9263ek"
++ CONFIG_MACH_TYPE="0x4B2"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x314000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ CONFIG_CRYSTAL_16_36766MHZ=y
++@@ -78,6 +77,7 @@ DATAFLASHCARD_ON_CS0=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -86,6 +86,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9g10ek/at91sam9g10df_defconfig b/board/at91sam9g10ek/at91sam9g10df_defconfig
++index d909b74..b9358af 100644
++--- a/board/at91sam9g10ek/at91sam9g10df_defconfig
+++++ b/board/at91sam9g10ek/at91sam9g10df_defconfig
++@@ -1,20 +1,20 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:08:24 2010
+++# Sun Jan 16 21:43:03 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g10ek"
+++CONFIG_BOARDNAME="at91sam9g10df"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G10EK=y
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g10ek"
++ CONFIG_MACH_TYPE="0x86F"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x304000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="12288"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9g10ek/at91sam9g10ek_defconfig b/board/at91sam9g10ek/at91sam9g10ek_defconfig
++index d909b74..2436cdc 100644
++--- a/board/at91sam9g10ek/at91sam9g10ek_defconfig
+++++ b/board/at91sam9g10ek/at91sam9g10ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:08:24 2010
+++# Sun Jan 16 21:43:02 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g10ek"
++@@ -9,12 +9,12 @@ CONFIG_BOARDNAME="at91sam9g10ek"
++ # CONFIG_AT91SAM9263EK is not set
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G10EK=y
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g10ek"
++ CONFIG_MACH_TYPE="0x86F"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x304000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="12288"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9g10ek/at91sam9g10nf_defconfig b/board/at91sam9g10ek/at91sam9g10nf_defconfig
++index 9f74fff..ed42d16 100644
++--- a/board/at91sam9g10ek/at91sam9g10nf_defconfig
+++++ b/board/at91sam9g10ek/at91sam9g10nf_defconfig
++@@ -1,20 +1,20 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:09:46 2010
+++# Sun Jan 16 21:43:03 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g10ek"
+++CONFIG_BOARDNAME="at91sam9g10nf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G10EK=y
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g10ek"
++ CONFIG_MACH_TYPE="0x86F"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x304000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -75,6 +74,7 @@ ALLOW_BOOT_FROM_DATAFLASH_CS3=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="12288"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -83,6 +83,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9g10ek/at91sam9g10sd_defconfig b/board/at91sam9g10ek/at91sam9g10sd_defconfig
++index e1a02c2..5bcfe96 100644
++--- a/board/at91sam9g10ek/at91sam9g10sd_defconfig
+++++ b/board/at91sam9g10ek/at91sam9g10sd_defconfig
++@@ -1,20 +1,20 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:13:49 2010
+++# Sun Jan 16 21:43:03 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g10ek"
+++CONFIG_BOARDNAME="at91sam9g10sd"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G10EK=y
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g10ek"
++ CONFIG_MACH_TYPE="0x86F"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x304000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -69,6 +68,7 @@ CONFIG_MEMORY="sdcard"
++ # CONFIG_SDCARD_HS is not set
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ ALLOW_BOOT_FROM_DATAFLASH_CS3=y
+++CONFIG_BOOTSTRAP_MAXSIZE="8192"
++ CONFIG_PROJECT="sdcard"
++ # CONFIG_LOAD_UBOOT is not set
++ # CONFIG_LOAD_EBOOT is not set
++@@ -77,6 +77,8 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++@@ -85,7 +87,7 @@ CONFIG_OS_MEM_BANK="0x20000000"
++ CONFIG_OS_MEM_SIZE="0x4000000"
++ CONFIG_LINUX_KERNEL_ARG_STRING="mem=64M console=ttyS0,115200 root=/dev/mmcblk0p2 rootdelay=2"
++ CONFIG_OS_IMAGE_NAME="image.bin"
++-CONFIG_OS_IMG_SIZE="0x280000"
+++CONFIG_OS_IMG_SIZE="0x40000"
++ CONFIG_IMG_ADDRESS="0x00000000"
++ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9g20ek/at91sam9g20df_defconfig b/board/at91sam9g20ek/at91sam9g20df_defconfig
++index e0229a3..287594b 100644
++--- a/board/at91sam9g20ek/at91sam9g20df_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20df_defconfig
++@@ -1,20 +1,20 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:46:28 2010
+++# Sun Jan 16 21:43:21 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g20ek"
+++CONFIG_BOARDNAME="at91sam9g20df"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G20EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g20ek"
++ CONFIG_MACH_TYPE="0x658"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x304000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9g20ek/at91sam9g20dfc_defconfig b/board/at91sam9g20ek/at91sam9g20dfc_defconfig
++index dc1c239..345847c 100644
++--- a/board/at91sam9g20ek/at91sam9g20dfc_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20dfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:34 2010
+++# Sun Jan 16 21:43:21 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g20dfc"
++@@ -10,11 +10,11 @@ CONFIG_BOARDNAME="at91sam9g20dfc"
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G20EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -22,8 +22,7 @@ CONFIG_CHIP="AT91SAM9G20"
++ CONFIG_BOARD="at91sam9g20ek"
++ CONFIG_MACH_TYPE="0x658"
++ CONFIG_LINK_ADDR="0x000000"
++-CONFIG_TOP_OF_MEMORY="0x301000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
+++CONFIG_TOP_OF_MEMORY="0x304000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -52,7 +51,8 @@ CONFIG_SDRAM=y
++ ALLOW_DATAFLASH=y
++ # ALLOW_FLASH is not set
++ ALLOW_NANDFLASH=y
++-# ALLOW_SDCARD is not set
+++ALLOW_SDCARD=y
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -64,6 +64,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -92,18 +93,33 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91sam9g20ek/at91sam9g20ek_defconfig b/board/at91sam9g20ek/at91sam9g20ek_defconfig
++index e0229a3..d134be9 100644
++--- a/board/at91sam9g20ek/at91sam9g20ek_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:46:28 2010
+++# Sun Jan 16 21:43:22 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g20ek"
++@@ -10,11 +10,11 @@ CONFIG_BOARDNAME="at91sam9g20ek"
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G20EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g20ek"
++ CONFIG_MACH_TYPE="0x658"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x304000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9g20ek/at91sam9g20nf_defconfig b/board/at91sam9g20ek/at91sam9g20nf_defconfig
++index 07448b9..d6d9dd5 100644
++--- a/board/at91sam9g20ek/at91sam9g20nf_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20nf_defconfig
++@@ -1,20 +1,20 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:53:27 2010
+++# Sun Jan 16 21:43:20 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g20ek"
+++CONFIG_BOARDNAME="at91sam9g20nf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G20EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g20ek"
++ CONFIG_MACH_TYPE="0x658"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x304000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -76,6 +75,7 @@ DATAFLASHCARD_ON_CS0=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -84,6 +84,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9g20ek/at91sam9g20sd_defconfig b/board/at91sam9g20ek/at91sam9g20sd_defconfig
++index 8c3bd11..87442b8 100644
++--- a/board/at91sam9g20ek/at91sam9g20sd_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20sd_defconfig
++@@ -1,20 +1,20 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:54:55 2010
+++# Sun Jan 16 21:43:21 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g20ek"
+++CONFIG_BOARDNAME="at91sam9g20sd"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++ # CONFIG_AT91SAM9RLEK is not set
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G20EK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g20ek"
++ CONFIG_MACH_TYPE="0x658"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x304000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -70,6 +69,7 @@ ALLOW_DATAFLASH_RECOVERY=y
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ ALLOW_BOOT_FROM_DATAFLASH_CS1=y
++ DATAFLASHCARD_ON_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="sdcard"
++ # CONFIG_LOAD_UBOOT is not set
++ # CONFIG_LOAD_EBOOT is not set
++@@ -78,6 +78,8 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++diff --git a/board/at91sam9g45ek/at91sam9g45df_defconfig b/board/at91sam9g45ek/at91sam9g45df_defconfig
++index bcece6f..3a1bafc 100644
++--- a/board/at91sam9g45ek/at91sam9g45df_defconfig
+++++ b/board/at91sam9g45ek/at91sam9g45df_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:58:38 2010
+++# Sun Jan 16 21:43:29 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g45ek"
+++CONFIG_BOARDNAME="at91sam9g45df"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -11,10 +11,10 @@ CONFIG_BOARDNAME="at91sam9g45ek"
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++ # CONFIG_AT91SAM9G20EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G45EK=y
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g45ek"
++ CONFIG_MACH_TYPE="1830"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -113,6 +121,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9g45ek/at91sam9g45ek_defconfig b/board/at91sam9g45ek/at91sam9g45ek_defconfig
++index bcece6f..f9c620e 100644
++--- a/board/at91sam9g45ek/at91sam9g45ek_defconfig
+++++ b/board/at91sam9g45ek/at91sam9g45ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:58:38 2010
+++# Sun Jan 16 21:43:28 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45ek"
++@@ -11,10 +11,10 @@ CONFIG_BOARDNAME="at91sam9g45ek"
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++ # CONFIG_AT91SAM9G20EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G45EK=y
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g45ek"
++ CONFIG_MACH_TYPE="1830"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -113,6 +121,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9g45ek/at91sam9g45nf_defconfig b/board/at91sam9g45ek/at91sam9g45nf_defconfig
++index af5f6df..bfef651 100644
++--- a/board/at91sam9g45ek/at91sam9g45nf_defconfig
+++++ b/board/at91sam9g45ek/at91sam9g45nf_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:59:57 2010
+++# Sun Jan 16 21:43:30 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g45ek"
+++CONFIG_BOARDNAME="at91sam9g45nf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -11,10 +11,10 @@ CONFIG_BOARDNAME="at91sam9g45ek"
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++ # CONFIG_AT91SAM9G20EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G45EK=y
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g45ek"
++ CONFIG_MACH_TYPE="1830"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -75,6 +74,7 @@ DATAFLASHCARD_ON_CS0=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -83,6 +83,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -94,6 +102,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9g45ek/at91sam9g45sd_defconfig b/board/at91sam9g45ek/at91sam9g45sd_defconfig
++index 9ec2b0c..df17dc9 100644
++--- a/board/at91sam9g45ek/at91sam9g45sd_defconfig
+++++ b/board/at91sam9g45ek/at91sam9g45sd_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:01:00 2010
+++# Sun Jan 16 21:43:31 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g45ek"
+++CONFIG_BOARDNAME="at91sam9g45sd"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -11,10 +11,10 @@ CONFIG_BOARDNAME="at91sam9g45ek"
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++ # CONFIG_AT91SAM9G20EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G45EK=y
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g45ek"
++ CONFIG_MACH_TYPE="1830"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -69,6 +68,7 @@ CONFIG_SDCARD_HS=y
++ ALLOW_DATAFLASH_RECOVERY=y
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ DATAFLASHCARD_ON_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="sdcard"
++ # CONFIG_LOAD_UBOOT is not set
++ # CONFIG_LOAD_EBOOT is not set
++@@ -77,6 +77,9 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++@@ -97,6 +100,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45dfes_defconfig b/board/at91sam9g45ekes/at91sam9g45dfes_defconfig
++index db80f63..ddf19e1 100644
++--- a/board/at91sam9g45ekes/at91sam9g45dfes_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45dfes_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:04:10 2010
+++# Sun Jan 16 21:43:16 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g45ekes"
+++CONFIG_BOARDNAME="at91sam9g45dfes"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -12,9 +12,9 @@ CONFIG_BOARDNAME="at91sam9g45ekes"
++ # CONFIG_AT91SAM9G10EK is not set
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G45EKES=y
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g45ekes"
++ CONFIG_MACH_TYPE="2212"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -113,6 +121,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45ekes_defconfig b/board/at91sam9g45ekes/at91sam9g45ekes_defconfig
++index db80f63..79f8d2e 100644
++--- a/board/at91sam9g45ekes/at91sam9g45ekes_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45ekes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:04:10 2010
+++# Sun Jan 16 21:43:15 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45ekes"
++@@ -12,9 +12,9 @@ CONFIG_BOARDNAME="at91sam9g45ekes"
++ # CONFIG_AT91SAM9G10EK is not set
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G45EKES=y
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g45ekes"
++ CONFIG_MACH_TYPE="2212"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -113,6 +121,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45nfes_defconfig b/board/at91sam9g45ekes/at91sam9g45nfes_defconfig
++index 2351f41..903680e 100644
++--- a/board/at91sam9g45ekes/at91sam9g45nfes_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45nfes_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:05:18 2010
+++# Sun Jan 16 21:43:16 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g45ekes"
+++CONFIG_BOARDNAME="at91sam9g45nfes"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -12,9 +12,9 @@ CONFIG_BOARDNAME="at91sam9g45ekes"
++ # CONFIG_AT91SAM9G10EK is not set
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G45EKES=y
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g45ekes"
++ CONFIG_MACH_TYPE="2212"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -75,6 +74,7 @@ DATAFLASHCARD_ON_CS0=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -83,6 +83,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -94,6 +102,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45sdes_android_defconfig b/board/at91sam9g45ekes/at91sam9g45sdes_android_defconfig
++index f16fc32..b423ab4 100644
++--- a/board/at91sam9g45ekes/at91sam9g45sdes_android_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45sdes_android_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Fri Sep 10 17:13:00 2010
+++# Sun Jan 16 21:43:12 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g45ekes"
+++CONFIG_BOARDNAME="at91sam9g45sdes_android"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -77,6 +77,9 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++@@ -97,6 +100,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45sdes_defconfig b/board/at91sam9g45ekes/at91sam9g45sdes_defconfig
++index 244cb4e..194f561 100644
++--- a/board/at91sam9g45ekes/at91sam9g45sdes_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45sdes_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:05:49 2010
+++# Sun Jan 16 21:43:14 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9g45ekes"
+++CONFIG_BOARDNAME="at91sam9g45sdes"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -12,9 +12,9 @@ CONFIG_BOARDNAME="at91sam9g45ekes"
++ # CONFIG_AT91SAM9G10EK is not set
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9G45EKES=y
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9g45ekes"
++ CONFIG_MACH_TYPE="2212"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -69,6 +68,7 @@ CONFIG_SDCARD_HS=y
++ ALLOW_DATAFLASH_RECOVERY=y
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ DATAFLASHCARD_ON_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="sdcard"
++ # CONFIG_LOAD_UBOOT is not set
++ # CONFIG_LOAD_EBOOT is not set
++@@ -77,6 +77,9 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++@@ -97,6 +100,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ek/at91sam9m10df_defconfig b/board/at91sam9m10ek/at91sam9m10df_defconfig
++index d8ac768..626e318 100644
++--- a/board/at91sam9m10ek/at91sam9m10df_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10df_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:07:56 2010
+++# Sun Jan 16 21:42:54 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9m10ek"
+++CONFIG_BOARDNAME="at91sam9m10df"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -13,8 +13,8 @@ CONFIG_BOARDNAME="at91sam9m10ek"
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9M10EK=y
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9m10ek"
++ CONFIG_MACH_TYPE="1830"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -113,6 +121,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ek/at91sam9m10ek_defconfig b/board/at91sam9m10ek/at91sam9m10ek_defconfig
++index d8ac768..6da1390 100644
++--- a/board/at91sam9m10ek/at91sam9m10ek_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:07:56 2010
+++# Sun Jan 16 21:42:53 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10ek"
++@@ -13,8 +13,8 @@ CONFIG_BOARDNAME="at91sam9m10ek"
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9M10EK=y
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9m10ek"
++ CONFIG_MACH_TYPE="1830"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -113,6 +121,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ek/at91sam9m10nf_defconfig b/board/at91sam9m10ek/at91sam9m10nf_defconfig
++index 2ecf5be..c146201 100644
++--- a/board/at91sam9m10ek/at91sam9m10nf_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10nf_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:13:52 2010
+++# Sun Jan 16 21:42:56 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9m10ek"
+++CONFIG_BOARDNAME="at91sam9m10nf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -13,8 +13,8 @@ CONFIG_BOARDNAME="at91sam9m10ek"
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9M10EK=y
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9m10ek"
++ CONFIG_MACH_TYPE="1830"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -75,6 +74,7 @@ DATAFLASHCARD_ON_CS0=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -83,6 +83,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -94,6 +102,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ek/at91sam9m10sd_android_defconfig b/board/at91sam9m10ek/at91sam9m10sd_android_defconfig
++index 74d56b4..8693ad4 100644
++--- a/board/at91sam9m10ek/at91sam9m10sd_android_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10sd_android_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Fri Sep 10 14:31:41 2010
+++# Sun Jan 16 21:42:51 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9m10ek"
+++CONFIG_BOARDNAME="at91sam9m10sd_android"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -77,6 +77,9 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++@@ -97,6 +100,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ek/at91sam9m10sd_defconfig b/board/at91sam9m10ek/at91sam9m10sd_defconfig
++index 83676dd..670664b 100644
++--- a/board/at91sam9m10ek/at91sam9m10sd_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10sd_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 16:46:19 2010
+++# Sun Jan 16 21:42:55 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9m10ek"
+++CONFIG_BOARDNAME="at91sam9m10sd"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -13,8 +13,8 @@ CONFIG_BOARDNAME="at91sam9m10ek"
++ # CONFIG_AT91SAM9G20EK is not set
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9M10EK=y
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9m10ek"
++ CONFIG_MACH_TYPE="1830"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -69,6 +68,7 @@ CONFIG_SDCARD_HS=y
++ ALLOW_DATAFLASH_RECOVERY=y
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ DATAFLASHCARD_ON_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="sdcard"
++ # CONFIG_LOAD_UBOOT is not set
++ # CONFIG_LOAD_EBOOT is not set
++@@ -77,6 +77,9 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++@@ -97,6 +100,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ek/at91sam9m10sdu_defconfig b/board/at91sam9m10ek/at91sam9m10sdu_defconfig
++new file mode 100644
++index 0000000..747329a
++--- /dev/null
+++++ b/board/at91sam9m10ek/at91sam9m10sdu_defconfig
++@@ -0,0 +1,107 @@
+++#
+++# Automatically generated make config: don't edit
+++# Sun Jan 16 21:42:51 2011
+++#
+++HAVE_DOT_CONFIG=y
+++CONFIG_BOARDNAME="at91sam9m10sdu"
+++# CONFIG_AT91SAM9260EK is not set
+++# CONFIG_AT91SAM9261EK is not set
+++# CONFIG_AT91SAM9263EK is not set
+++# CONFIG_AT91SAM9RLEK is not set
+++# CONFIG_AT91SAM9XEEK is not set
+++# CONFIG_AT91SAM9G10EK is not set
+++# CONFIG_AT91SAM9G20EK is not set
+++# CONFIG_AT91SAM9G45EK is not set
+++# CONFIG_AT91SAM9G45EKES is not set
+++CONFIG_AT91SAM9M10EK=y
+++# CONFIG_AT91SAM9M10EKES is not set
+++# CONFIG_AT91CAP9ADK is not set
+++# CONFIG_AT91CAP9STK is not set
+++# CONFIG_AFEB9260 is not set
+++CONFIG_CHIP="AT91SAM9M10"
+++CONFIG_BOARD="at91sam9m10ek"
+++CONFIG_MACH_TYPE="1830"
+++CONFIG_LINK_ADDR="0x000000"
+++CONFIG_TOP_OF_MEMORY="0x30A000"
+++# CONFIG_CRYSTAL_12_000MHZ is not set
+++# CONFIG_CRYSTAL_16_000MHZ is not set
+++# CONFIG_CRYSTAL_16_36766MHZ is not set
+++CONFIG_CRYSTAL_18_432MHZ=y
+++ALLOW_CRYSTAL_18_432MHZ=y
+++CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
+++# CONFIG_CPU_CLK_166MHZ is not set
+++# CONFIG_CPU_CLK_180MHZ is not set
+++# CONFIG_CPU_CLK_200MHZ is not set
+++# CONFIG_CPU_CLK_240MHZ is not set
+++# CONFIG_CPU_CLK_266MHZ is not set
+++CONFIG_CPU_CLK_400MHZ=y
+++ALLOW_CPU_CLK_400MHZ=y
+++# DISABLE_CPU_CLK_240MHZ is not set
+++# CONFIG_BUS_SPEED_83MHZ is not set
+++# CONFIG_BUS_SPEED_90MHZ is not set
+++# CONFIG_BUS_SPEED_100MHZ is not set
+++CONFIG_BUS_SPEED_133MHZ=y
+++
+++#
+++# Memory selection
+++#
+++# CONFIG_SDRAM is not set
+++# CONFIG_SDDRC is not set
+++CONFIG_DDR2=y
+++ALLOW_DATAFLASH=y
+++# ALLOW_FLASH is not set
+++ALLOW_NANDFLASH=y
+++ALLOW_SDCARD=y
+++ALLOW_HSMCI=y
+++# ALLOW_PSRAM is not set
+++# ALLOW_SDRAM_16BIT is not set
+++# CONFIG_RAM_32MB is not set
+++# CONFIG_RAM_64MB is not set
+++CONFIG_RAM_128MB=y
+++# CONFIG_RAM_256MB is not set
+++# CONFIG_DATAFLASH is not set
+++# CONFIG_FLASH is not set
+++# CONFIG_NANDFLASH is not set
+++CONFIG_SDCARD=y
+++CONFIG_MEMORY="sdcard"
+++CONFIG_SDCARD_HS=y
+++ALLOW_DATAFLASH_RECOVERY=y
+++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
+++DATAFLASHCARD_ON_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
+++CONFIG_PROJECT="sdcard"
+++CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
+++# CONFIG_LOAD_64KB is not set
+++# CONFIG_LOAD_1MB is not set
+++# CONFIG_LOAD_4MB is not set
+++CONFIG_DUAL_BOOT=y
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_ALT_IMAGE_NAME="program.bin"
+++CONFIG_OS_IMAGE_NAME="uimage.bin"
+++CONFIG_OS_IMG_SIZE="0x280000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
+++CONFIG_IMG_ADDRESS="0x00000000"
+++CONFIG_SETTING_ADDRESS="0x00000000"
+++CONFIG_SETTING_SIZE="0x00001000"
+++CONFIG_IMG_SIZE="0x00040000"
+++CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_GLBDRV_ADDR="0x7006b000"
+++# CONFIG_LONG_TEST is not set
+++CONFIG_DEBUG=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
+++CONFIG_HW_INIT=y
+++# CONFIG_USER_HW_INIT is not set
+++CONFIG_THUMB=y
+++# CONFIG_SCLK is not set
+++# CONFIG_SX_AT91 is not set
+++# CONFIG_RAW_AT91 is not set
++diff --git a/board/at91sam9m10ekes/at91sam9m10dfes_defconfig b/board/at91sam9m10ekes/at91sam9m10dfes_defconfig
++index e7c65a1..6a49475 100644
++--- a/board/at91sam9m10ekes/at91sam9m10dfes_defconfig
+++++ b/board/at91sam9m10ekes/at91sam9m10dfes_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:07:56 2010
+++# Sun Jan 16 21:43:01 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9m10ekes"
+++CONFIG_BOARDNAME="at91sam9m10dfes"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -20,10 +20,9 @@ CONFIG_AT91SAM9M10EKES=y
++ # CONFIG_AFEB9260 is not set
++ CONFIG_CHIP="AT91SAM9M10"
++ CONFIG_BOARD="at91sam9m10ekes"
++-CONFIG_MACH_TYPE="1830"
+++CONFIG_MACH_TYPE="2509"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -113,6 +121,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ekes/at91sam9m10ekes_defconfig b/board/at91sam9m10ekes/at91sam9m10ekes_defconfig
++index e7c65a1..e6b3027 100644
++--- a/board/at91sam9m10ekes/at91sam9m10ekes_defconfig
+++++ b/board/at91sam9m10ekes/at91sam9m10ekes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:07:56 2010
+++# Sun Jan 16 21:43:00 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10ekes"
++@@ -20,10 +20,9 @@ CONFIG_AT91SAM9M10EKES=y
++ # CONFIG_AFEB9260 is not set
++ CONFIG_CHIP="AT91SAM9M10"
++ CONFIG_BOARD="at91sam9m10ekes"
++-CONFIG_MACH_TYPE="1830"
+++CONFIG_MACH_TYPE="2509"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -113,6 +121,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ekes/at91sam9m10nfes_defconfig b/board/at91sam9m10ekes/at91sam9m10nfes_defconfig
++index 9a473d9..5f03396 100644
++--- a/board/at91sam9m10ekes/at91sam9m10nfes_defconfig
+++++ b/board/at91sam9m10ekes/at91sam9m10nfes_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 15:13:52 2010
+++# Sun Jan 16 21:42:58 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9m10ekes"
+++CONFIG_BOARDNAME="at91sam9m10nfes"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -20,10 +20,9 @@ CONFIG_AT91SAM9M10EKES=y
++ # CONFIG_AFEB9260 is not set
++ CONFIG_CHIP="AT91SAM9M10"
++ CONFIG_BOARD="at91sam9m10ekes"
++-CONFIG_MACH_TYPE="1830"
+++CONFIG_MACH_TYPE="2509"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -75,6 +74,7 @@ DATAFLASHCARD_ON_CS0=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -83,6 +83,14 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++@@ -94,6 +102,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9m10ekes/at91sam9m10sdes_defconfig b/board/at91sam9m10ekes/at91sam9m10sdes_defconfig
++index 9f193d3..1d413ca 100644
++--- a/board/at91sam9m10ekes/at91sam9m10sdes_defconfig
+++++ b/board/at91sam9m10ekes/at91sam9m10sdes_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 16:46:19 2010
+++# Sun Jan 16 21:42:59 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9m10ekes"
+++CONFIG_BOARDNAME="at91sam9m10sdes"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -20,10 +20,9 @@ CONFIG_AT91SAM9M10EKES=y
++ # CONFIG_AFEB9260 is not set
++ CONFIG_CHIP="AT91SAM9M10"
++ CONFIG_BOARD="at91sam9m10ekes"
++-CONFIG_MACH_TYPE="1830"
+++CONFIG_MACH_TYPE="2509"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x30A000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -69,6 +68,7 @@ CONFIG_SDCARD_HS=y
++ ALLOW_DATAFLASH_RECOVERY=y
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ DATAFLASHCARD_ON_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="sdcard"
++ # CONFIG_LOAD_UBOOT is not set
++ # CONFIG_LOAD_EBOOT is not set
++@@ -77,6 +77,9 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++# CONFIG_DUAL_BOOT is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++@@ -97,6 +100,7 @@ CONFIG_DEBUG=y
++ CONFIG_DEBUG_INFO=y
++ # CONFIG_DEBUG_LOUD is not set
++ # CONFIG_DEBUG_VERY_LOUD is not set
+++ALLOW_DUAL_BOOT=y
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ CONFIG_THUMB=y
++diff --git a/board/at91sam9rlek/at91sam9rldf_defconfig b/board/at91sam9rlek/at91sam9rldf_defconfig
++index 258c16a..9c0011a 100644
++--- a/board/at91sam9rlek/at91sam9rldf_defconfig
+++++ b/board/at91sam9rlek/at91sam9rldf_defconfig
++@@ -1,13 +1,12 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:01:58 2010
+++# Sun Jan 16 21:43:32 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9rlek"
+++CONFIG_BOARDNAME="at91sam9rldf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9RLEK=y
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++@@ -15,6 +14,7 @@ CONFIG_AT91SAM9RLEK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9rlek"
++ CONFIG_MACH_TYPE="1326"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x310000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9rlek/at91sam9rlek_defconfig b/board/at91sam9rlek/at91sam9rlek_defconfig
++index 258c16a..9a3a9b6 100644
++--- a/board/at91sam9rlek/at91sam9rlek_defconfig
+++++ b/board/at91sam9rlek/at91sam9rlek_defconfig
++@@ -1,13 +1,12 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:01:58 2010
+++# Sun Jan 16 21:43:32 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9rlek"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9RLEK=y
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++@@ -15,6 +14,7 @@ CONFIG_AT91SAM9RLEK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9rlek"
++ CONFIG_MACH_TYPE="1326"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x310000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -94,6 +93,7 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -102,6 +102,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9rlek/at91sam9rlnf_defconfig b/board/at91sam9rlek/at91sam9rlnf_defconfig
++index 215b5ec..2dcab82 100644
++--- a/board/at91sam9rlek/at91sam9rlnf_defconfig
+++++ b/board/at91sam9rlek/at91sam9rlnf_defconfig
++@@ -1,13 +1,12 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:03:36 2010
+++# Sun Jan 16 21:43:31 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9rlek"
+++CONFIG_BOARDNAME="at91sam9rlnf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9RLEK=y
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++@@ -15,6 +14,7 @@ CONFIG_AT91SAM9RLEK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9rlek"
++ CONFIG_MACH_TYPE="1326"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x310000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -74,6 +73,7 @@ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ # NAND Flash configuration
++ #
++ # CONFIG_NANDFLASH_SMALL_BLOCKS is not set
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="nandflash"
++ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_EBOOT is not set
++@@ -82,6 +82,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9rlek/at91sam9rlsd_defconfig b/board/at91sam9rlek/at91sam9rlsd_defconfig
++index 940cb61..5bb004d 100644
++--- a/board/at91sam9rlek/at91sam9rlsd_defconfig
+++++ b/board/at91sam9rlek/at91sam9rlsd_defconfig
++@@ -1,13 +1,12 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jun  1 14:06:02 2010
+++# Sun Jan 16 21:43:32 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9rlek"
+++CONFIG_BOARDNAME="at91sam9rlsd"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++-# CONFIG_AT91SAM9M10EKES is not set
++ CONFIG_AT91SAM9RLEK=y
++ # CONFIG_AT91SAM9XEEK is not set
++ # CONFIG_AT91SAM9G10EK is not set
++@@ -15,6 +14,7 @@ CONFIG_AT91SAM9RLEK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -23,7 +23,6 @@ CONFIG_BOARD="at91sam9rlek"
++ CONFIG_MACH_TYPE="1326"
++ CONFIG_LINK_ADDR="0x000000"
++ CONFIG_TOP_OF_MEMORY="0x310000"
++-CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -68,6 +67,7 @@ CONFIG_SDCARD=y
++ CONFIG_MEMORY="sdcard"
++ # CONFIG_SDCARD_HS is not set
++ ALLOW_BOOT_FROM_DATAFLASH_CS0=y
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="sdcard"
++ # CONFIG_LOAD_UBOOT is not set
++ # CONFIG_LOAD_EBOOT is not set
++@@ -76,6 +76,8 @@ CONFIG_LOAD_LINUX=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00000000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
++ 
++ #
++ # Linux Image Storage Setup
++diff --git a/board/at91sam9xeek/at91sam9xedf_defconfig b/board/at91sam9xeek/at91sam9xedf_defconfig
++index 3663e94..9700b85 100644
++--- a/board/at91sam9xeek/at91sam9xedf_defconfig
+++++ b/board/at91sam9xeek/at91sam9xedf_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Aug  3 10:24:29 2010
+++# Sun Jan 16 21:43:01 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9xeek"
+++CONFIG_BOARDNAME="at91sam9xedf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -103,6 +103,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9xeek/at91sam9xedfc_defconfig b/board/at91sam9xeek/at91sam9xedfc_defconfig
++index fc83730..dac40a4 100644
++--- a/board/at91sam9xeek/at91sam9xedfc_defconfig
+++++ b/board/at91sam9xeek/at91sam9xedfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Jan 12 22:00:49 2010
+++# Sun Jan 16 21:43:02 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9xedfc"
++@@ -14,6 +14,7 @@ CONFIG_AT91SAM9XEEK=y
++ # CONFIG_AT91SAM9G45EK is not set
++ # CONFIG_AT91SAM9G45EKES is not set
++ # CONFIG_AT91SAM9M10EK is not set
+++# CONFIG_AT91SAM9M10EKES is not set
++ # CONFIG_AT91CAP9ADK is not set
++ # CONFIG_AT91CAP9STK is not set
++ # CONFIG_AFEB9260 is not set
++@@ -21,8 +22,8 @@ CONFIG_CHIP="AT91SAM9XE"
++ CONFIG_BOARD="at91sam9xeek"
++ CONFIG_MACH_TYPE="0x44B"
++ CONFIG_LINK_ADDR="0x000000"
++-CONFIG_TOP_OF_MEMORY="0x301000"
++-CONFIG_BOOTSTRAP_MAXSIZE="13000"
+++CONFIG_DATA_SECTION_ADDR="0x304000"
+++CONFIG_TOP_OF_MEMORY="0x306000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -52,6 +53,7 @@ ALLOW_DATAFLASH=y
++ # ALLOW_FLASH is not set
++ ALLOW_NANDFLASH=y
++ # ALLOW_SDCARD is not set
+++# ALLOW_HSMCI is not set
++ # ALLOW_PSRAM is not set
++ # ALLOW_SDRAM_16BIT is not set
++ # CONFIG_RAM_32MB is not set
++@@ -63,6 +65,7 @@ CONFIG_DATAFLASH=y
++ # CONFIG_NANDFLASH is not set
++ # CONFIG_SDCARD is not set
++ CONFIG_MEMORY="dataflash"
+++# CONFIG_SDCARD_HS is not set
++ 
++ #
++ # SPI configuration
++@@ -91,18 +94,33 @@ CONFIG_SPI_MODE_0=y
++ # CONFIG_SPI_MODE_2 is not set
++ # CONFIG_SPI_MODE_3 is not set
++ CONFIG_SPI_MODE=0
+++CONFIG_BOOTSTRAP_MAXSIZE="23000"
++ CONFIG_PROJECT="dataflash"
++ CONFIG_LOAD_UBOOT=y
+++# CONFIG_LOAD_EBOOT is not set
+++# CONFIG_LOAD_LINUX is not set
+++# CONFIG_LOAD_NK is not set
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
+++CONFIG_SETTING_ADDRESS="0x00408400"
+++CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
++-CONFIG_APP_CHECK=y
+++CONFIG_GLBDRV_ADDR="0x23F00000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-CONFIG_VERBOSE=y
+++CONFIG_DEBUG_INFO=y
+++# CONFIG_DEBUG_LOUD is not set
+++# CONFIG_DEBUG_VERY_LOUD is not set
++ CONFIG_HW_INIT=y
++ # CONFIG_USER_HW_INIT is not set
++ # CONFIG_THUMB is not set
++diff --git a/board/at91sam9xeek/at91sam9xeek_defconfig b/board/at91sam9xeek/at91sam9xeek_defconfig
++index 3663e94..4fdf865 100644
++--- a/board/at91sam9xeek/at91sam9xeek_defconfig
+++++ b/board/at91sam9xeek/at91sam9xeek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Tue Aug  3 10:24:29 2010
+++# Sun Jan 16 21:43:01 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9xeek"
++@@ -103,6 +103,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00063000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00008400"
++ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++diff --git a/board/at91sam9xeek/at91sam9xenf_defconfig b/board/at91sam9xeek/at91sam9xenf_defconfig
++index fe43c96..a51926c 100644
++--- a/board/at91sam9xeek/at91sam9xenf_defconfig
+++++ b/board/at91sam9xeek/at91sam9xenf_defconfig
++@@ -1,9 +1,9 @@
++ #
++ # Automatically generated make config: don't edit
++-# Wed Jul 14 10:49:18 2010
+++# Sun Jan 16 21:43:02 2011
++ #
++ HAVE_DOT_CONFIG=y
++-CONFIG_BOARDNAME="at91sam9xeek"
+++CONFIG_BOARDNAME="at91sam9xenf"
++ # CONFIG_AT91SAM9260EK is not set
++ # CONFIG_AT91SAM9261EK is not set
++ # CONFIG_AT91SAM9263EK is not set
++@@ -22,8 +22,8 @@ CONFIG_CHIP="AT91SAM9XE"
++ CONFIG_BOARD="at91sam9xeek"
++ CONFIG_MACH_TYPE="0x44B"
++ CONFIG_LINK_ADDR="0x000000"
++-CONFIG_DATA_SECTION_ADDR="0x300000"
++-CONFIG_TOP_OF_MEMORY="0x301000"
+++CONFIG_DATA_SECTION_ADDR="0x304000"
+++CONFIG_TOP_OF_MEMORY="0x306000"
++ # CONFIG_CRYSTAL_12_000MHZ is not set
++ # CONFIG_CRYSTAL_16_000MHZ is not set
++ # CONFIG_CRYSTAL_16_36766MHZ is not set
++@@ -85,6 +85,13 @@ CONFIG_LOAD_UBOOT=y
++ # CONFIG_LOAD_64KB is not set
++ # CONFIG_LOAD_1MB is not set
++ # CONFIG_LOAD_4MB is not set
+++CONFIG_ALT_IMG_ADDRESS="0x00040000"
+++CONFIG_ALT_IMG_SIZE="0x00010000"
+++CONFIG_OS_IMG_SIZE="0x40000"
+++
+++#
+++# U-Boot Image Storage Setup
+++#
++ CONFIG_IMG_ADDRESS="0x00020000"
++ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0010-Update-build-scripts.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0010-Update-build-scripts.patch
+new file mode 100644
+index 0000000..6ff7315
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0010-Update-build-scripts.patch
+@@ -0,0 +1,194 @@
++From 0db54ff2e7a532bcb04db3f6130fbcdd1f2ff853 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 20:07:06 +0100
++Subject: [PATCH v3 10/08] Update build scripts
++
++---
++ ALLCONFIGS |   17 +++++++++++++
++ MAKEALL    |   76 +++++++++++++++--------------------------------------------
++ configs    |   55 +++++++++++++++++++++++++++++++++++++++++++
++ 3 files changed, 92 insertions(+), 56 deletions(-)
++ create mode 100644 ALLCONFIGS
++ create mode 100644 configs
++
++diff --git a/ALLCONFIGS b/ALLCONFIGS
++new file mode 100644
++index 0000000..5d07924
++--- /dev/null
+++++ b/ALLCONFIGS
++@@ -0,0 +1,17 @@
+++#!/bin/sh
+++export	GCCROOT=/home/ulf/projects/OE_atmel/build/tmp-angstrom_2008_1/sysroots/i686-linux/usr/armv5te/bin
+++export	PATH=${GCCROOT}:${PATH}
+++export	CROSS_COMPILE=${GCCROOT}/arm-angstrom-linux-gnueabi-
+++
+++function	build ()
+++{
+++	make	$1_defconfig
+++	make	menuconfig
+++	make	CROSS_COMPILE=arm-linux- update
+++}
+++
+++for f in `cat configs` ; do
+++	build	$f
+++done
+++
+++
++diff --git a/MAKEALL b/MAKEALL
++index b0eb73b..caf000c 100755
++--- a/MAKEALL
+++++ b/MAKEALL
++@@ -1,69 +1,33 @@
++ #!/bin/sh
++-rm -f binaries/*
++-rm -rf log
++-rm -fr result
++-mkdir -p log/FAIL
++-mkdir result
+++rm	-f	binaries/*
+++rm	-rf	log
+++rm	-fr	result
+++mkdir	-p	log
+++mkdir	-p	result/FAIL
+++mkdir	-p	result/OK
+++mkdir	-p	result/binaries
+++mkdir	-p	result
+++mkdir	-p	result/map
+++mkdir	-p	result/elf
++ skip=0
++ 
++ function build()
++ {
++ 	make mrproper
++ 	make $1_defconfig
++-	make > log/$1.log 2>&1 || mv log/$1.log log/FAIL/$1.log.FAIL
++-	mv binaries/* result/
++-	mv log/* result/
+++	make > log/$1.log 2>&1 || mv log/$1.log result/FAIL/$1.log.FAIL
+++	mv log/$1.log result/OK/$1.log.OK	|| echo
+++	mv binaries/*.elf	result/elf
+++	mv binaries/*.map	result/map
+++	mv binaries/*.bin	result/binaries
++ }
++ 
++-#build	at91cap9adk
++-#build	at91cap9df
++-#build	at91cap9f
+++for f in `cat configs` ; do
+++	build	$f
+++done
++ 
++-#build	at91cap9stk
++-#build	at91cap9stkdf
++-#build	at91cap9stkf
++-
++-build	at91sam9260df
++-build	at91sam9260nf
++-
++-build	at91sam9g20df
++-build	at91sam9g20sd
++-build	at91sam9g20nf
++-
++-
++-build	at91sam9261df
++-build	at91sam9261nf
++-
++-build	at91sam9g10df
++-build	at91sam9g10sd
++-build	at91sam9g10nf
++-
++-build	at91sam9rldf
++-build	at91sam9rlsd
++-build	at91sam9rlnf
++-
++-build	at91sam9263df
++-build	at91sam9263nf
++-
++-build	at91sam9g45dfes
++-build	at91sam9g45sdes
++-build	at91sam9g45nfes
++-
++-build	at91sam9g45df
++-build	at91sam9g45sd
++-build	at91sam9g45nf
++-
++-build	at91sam9m10df
++-build	at91sam9m10sd
++-build	at91sam9m10nf
++-
++-build	at91sam9xedf
++-build	at91sam9xenf
++-#build	at91sam9xedfc
++-#build	at91sam9xeek
++-
++-rm -fr binaries
++-rm -fr log
+++#rm -fr binaries
+++#rm -fr log
++ echo
++ echo
++ echo "### Done!"
++diff --git a/configs b/configs
++new file mode 100644
++index 0000000..e72edae
++--- /dev/null
+++++ b/configs
++@@ -0,0 +1,55 @@
+++at91sam9m10sd_android
+++at91sam9m10sdu
+++at91sam9m10ek
+++at91sam9m10df
+++at91sam9m10sd
+++at91sam9m10nf
+++afeb9260
+++at91sam9m10nfes
+++at91sam9m10sdes
+++at91sam9m10ekes
+++at91sam9m10dfes
+++at91sam9xeek
+++at91sam9xedf
+++at91sam9xedfc
+++at91sam9xenf
+++at91sam9g10ek
+++at91sam9g10nf
+++at91sam9g10df
+++at91sam9g10sd
+++at91sam9g45sdes_android
+++at91sam9g45sdes
+++at91sam9g45ekes
+++at91sam9g45dfes
+++at91sam9g45nfes
+++at91cap9stkdf
+++at91cap9stkf
+++at91cap9stk
+++at91cap9f
+++at91cap9df
+++at91cap9adk
+++at91sam9260nf
+++at91sam9260dfc
+++at91sam9260df
+++at91sam9260ek
+++at91sam9g20nf
+++at91sam9g20dfc
+++at91sam9g20sd
+++at91sam9g20df
+++at91sam9g20ek
+++at91sam9261dfc
+++at91sam9261nf
+++at91sam9261ek
+++at91sam9261df
+++at91sam9263ek
+++at91sam9263nf
+++at91sam9263df
+++at91sam9263dfc
+++at91sam9g45ek
+++at91sam9g45df
+++at91sam9g45nf
+++at91sam9g45sd
+++at91sam9rlnf
+++at91sam9rldf
+++at91sam9rlsd
+++at91sam9rlek
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0011-Fix-Cut-n-Paste-error.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0011-Fix-Cut-n-Paste-error.patch
+new file mode 100644
+index 0000000..bf474b2
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0011-Fix-Cut-n-Paste-error.patch
+@@ -0,0 +1,31 @@
++From a8685e5dd8f32b77d83e3a5dfb39146a913e4ca0 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 20:13:58 +0100
++Subject: [PATCH v3 11/08] Fix Cut-n-Paste error
++
++---
++ board/at91sam9m10ekes/at91sam9m10ekes.c |    8 +-------
++ 1 files changed, 1 insertions(+), 7 deletions(-)
++
++diff --git a/board/at91sam9m10ekes/at91sam9m10ekes.c b/board/at91sam9m10ekes/at91sam9m10ekes.c
++index 8c0e979..6aa846a 100644
++--- a/board/at91sam9m10ekes/at91sam9m10ekes.c
+++++ b/board/at91sam9m10ekes/at91sam9m10ekes.c
++@@ -74,13 +74,7 @@ int alternate_boot_button(void)
++ 	/* Configure PIO B controller */
++ 	writel((1 << AT91C_ID_PIOB), PMC_PCER + AT91C_BASE_PMC);
++ 	pio_setup(button_pio);
++-		dbgu_print("[Alternate]\n\r");		
++-		return 1;
++-	} else {
++-		dbgu_print("[Normal]\n\r");		
++-		return 0;
++-	}
++-}
+++
++ 	/* Return "1" if LEFT BUTTON is pressed during Boot sequence */
++ 	dbgu_print("Checking for Alternate boot: ...\n\r");
++ 	if ( !pio_get_value(LEFT_BUTTON) ) {
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0013-Fix-Cut-n-Paste-error-in-Makefile.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0013-Fix-Cut-n-Paste-error-in-Makefile.patch
+new file mode 100644
+index 0000000..290dca5
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0013-Fix-Cut-n-Paste-error-in-Makefile.patch
+@@ -0,0 +1,25 @@
++From 6c5e9dd8b079ce8bf07240a81cd991d9bba7c4cd Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Sun, 23 Jan 2011 20:23:29 +0100
++Subject: [PATCH v3 13/08] Fix Cut-n-Paste error in Makefile
++
++---
++ Makefile |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 93ec72d..3dc3b65 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -201,7 +201,7 @@ IMAGE=$(BOOT_NAME).bin
++ endif
++ 
++ ifeq ($(SYMLINK),)
++-SYMLINK=at91bootstrap.bin+ifeq ($(CONFIG_DUAL_BOOT),y)
+++SYMLINK=at91bootstrap.bin
++ endif
++ 
++ EXTRA_INSTALL=
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0014-Add-support-for-alternate-jump-address.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0014-Add-support-for-alternate-jump-address.patch
+new file mode 100644
+index 0000000..4f0fd0b
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0014-Add-support-for-alternate-jump-address.patch
+@@ -0,0 +1,280 @@
++From e480f602a4b5e6481f4c0590fca16a9cd7ee3570 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Mon, 24 Jan 2011 19:37:15 +0100
++Subject: [PATCH v3 14/08] Add support for alternate jump address
++
++---
++ Config.in          |   11 +++++++++
++ Makefile           |    2 +
++ driver/MEDSdcard.c |   49 ++++++++++++++++++++++++++++++++++-----
++ main.c             |   64 ++++++++++++++++++++++++++++++++++++---------------
++ toplevel_cpp.mk    |    1 +
++ 5 files changed, 101 insertions(+), 26 deletions(-)
++
++diff --git a/Config.in b/Config.in
++index 8c68e41..0ef8da1 100644
++--- a/Config.in
+++++ b/Config.in
++@@ -340,6 +340,17 @@ config CONFIG_JUMP_ADDR
++ 	help
++ 	  The entry point to which the bootstrap will pass control.
++ 
+++config CONFIG_ALT_JUMP_ADDR
+++	string
+++	default "0x70000000" if CONFIG_AT91CAP9ADK
+++	default "0x70000000" if CONFIG_AT91SAM9G45EK
+++	default "0x70000000" if CONFIG_AT91SAM9M10EK
+++	default "0x70000000" if CONFIG_AT91SAM9M10EKES
+++	default "0x70000000" if CONFIG_AT91SAM9G45EKES
+++	default "0x20000000"
+++	help
+++	  The entry point to which the bootstrap will pass control.
+++
++ config CONFIG_GLBDRV_ADDR
++ 	string
++ 	default "0x70000000" if CONFIG_AT91CAP9ADK
++diff --git a/Makefile b/Makefile
++index 3dc3b65..d0235b3 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -128,6 +128,8 @@ ALT_IMAGE_NAME :=$(strip $(subst ",,$(CONFIG_ALT_IMAGE_NAME)))
++ 
++ JUMP_ADDR := $(strip $(subst ",,$(CONFIG_JUMP_ADDR)))
++ 
+++ALT_JUMP_ADDR := $(strip $(subst ",,$(CONFIG_ALT_JUMP_ADDR)))
+++
++ BOOTSTRAP_MAXSIZE := $(strip $(subst ",,$(CONFIG_BOOTSTRAP_MAXSIZE)))
++ 
++ MEMORY := $(strip $(subst ",,$(CONFIG_MEMORY)))
++diff --git a/driver/MEDSdcard.c b/driver/MEDSdcard.c
++index 9f0bec0..4e18b41 100644
++--- a/driver/MEDSdcard.c
+++++ b/driver/MEDSdcard.c
++@@ -670,12 +670,18 @@ SdCard *MEDSdcard_GetDriver(unsigned int slot)
++ }
++ #endif
++ 
+++extern	unsigned int altboot;
+++
++ unsigned int load_SDCard()
++ {
++     DWORD dwAddress;
++ 
++     unsigned int ByteRead = 0;
++ 
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Loading from SD-Card\r\n");
+++#endif
+++
++     MEDSdcard_Initialize(&medias[0], BOARD_SD_MCI_ID_USE);
++ 
++     memset(&fs, 0, sizeof (FATFS));     // Clear file system object    
++@@ -687,20 +693,49 @@ unsigned int load_SDCard()
++     }
++ 
++ #if defined(CONFIG_DUAL_BOOT)
++-    if(alternate_boot_button()) {
++-	res = f_open(&fileObject, ALT_IMAGE_NAME, FA_OPEN_EXISTING | FA_READ);
++-    } else {
++-#else
++-    {
+++	if(altboot) {
+++#if	defined(CONFIG_DEBUG)
+++		dbgu_print("Open: ");
+++		dbgu_print(ALT_IMAGE_NAME);
+++		dbgu_print("\r\n");
+++#endif
+++		res = f_open(&fileObject, ALT_IMAGE_NAME, FA_OPEN_EXISTING | FA_READ);
+++	}
+++#endif
+++
+++	if(altboot == 0) {
+++#if	defined(CONFIG_DEBUG)
+++		dbgu_print("Open: ");
+++		dbgu_print(OS_IMAGE_NAME);
+++		dbgu_print("\r\n");
++ #endif
++ 	res = f_open(&fileObject, OS_IMAGE_NAME, FA_OPEN_EXISTING | FA_READ);
++-    }
+++	}
+++
+++
++ 
++     if (res != FR_OK) {
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Could not find:");
+++	if(altboot) {
+++		dbgu_print(ALT_IMAGE_NAME);
+++	} else {
+++		dbgu_print(OS_IMAGE_NAME);
+++	}
+++	dbgu_print("\r\n");
+++#endif
++         return 0;
++     }
++ 
++-    dwAddress = JUMP_ADDR;
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Loading from SD-Card - Success\r\n");
+++#endif
+++
+++	if(altboot) {
+++	    dwAddress = ALT_JUMP_ADDR;
+++	} else {
+++	    dwAddress = JUMP_ADDR;
+++	}
++ 
++     do {
++         ByteRead = 0;
++diff --git a/main.c b/main.c
++index 9ca56ac..6ff8f63 100644
++--- a/main.c
+++++ b/main.c
++@@ -54,6 +54,8 @@ void LoadWince();
++ 
++ unsigned int	img_address	= IMG_ADDRESS;
++ unsigned int	img_size	= IMG_SIZE;
+++unsigned int	jump_addr	= JUMP_ADDR;
+++unsigned int	altboot		= 0;
++ 
++ /*------------------------------------------------------------------------------*/
++ /* Function Name       : main							*/
++@@ -65,7 +67,6 @@ int main(void)
++ {
++ 
++ 
++-// unsigned int	jump_addr	= JUMP_ADDR;
++ 
++     /*
++      * ================== 1st step: Hardware Initialization ================= 
++@@ -90,41 +91,62 @@ int main(void)
++ 
++ #if defined(CONFIG_DUAL_BOOT)
++ 	if(alternate_boot_button()) {
+++#if	defined(CONFIG_DEBUG)
++ 		dbgu_print(">Alternate image\r\n");
+++#endif
++ 		img_address	= ALT_IMG_ADDRESS;
++ 		img_size	= ALT_IMG_SIZE;
++-	} else {
++-#else
++-	{
+++		jump_addr	= ALT_JUMP_ADDR;
+++		altboot=1;
+++	 }
++ #endif
++ 
++ #if defined(CONFIG_LOAD_LINUX)
++-    LoadLinux();
++-#elif defined(CONFIG_LOAD_NK) || defined(CONFIG_LOAD_EBOOT)
++-    LoadWince();
++-#else
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Load Linux direct\r\n");
+++#endif
+++	LoadLinux();
+++#endif
+++
+++#if defined(CONFIG_LOAD_NK) || defined(CONFIG_LOAD_EBOOT)
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Load WinCE\r\n");
+++#endif
+++	LoadWince();
+++#endif
++ 
++ #if defined(CONFIG_DATAFLASH) || defined(CONFIG_DATAFLASH_CARD)
++-    load_df(AT91C_SPI_PCS_DATAFLASH, img_address, img_size, JUMP_ADDR);
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Load from Dataflash\r\n");
++ #endif
+++	load_df(AT91C_SPI_PCS_DATAFLASH, img_address, img_size, jump_addr);
+++#endif
+++
+++#if defined(CONFIG_NANDFLASH)
++     /*
++      * Load from Nandflash in RAM 
++      */
++-#if defined(CONFIG_NANDFLASH)
++-    read_nandflash((unsigned char *)JUMP_ADDR, (unsigned long)img_address,
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Load from NAND Flash\r\n");
+++#endif
+++	read_nandflash((unsigned char *)jump_addr, (unsigned long)img_address,
++                    (int)img_size);
++ #endif
++     /*
++      * Load from Norflash in RAM 
++      */
++ #ifdef CONFIG_FLASH
++-    load_norflash(img_address, img_size, JUMP_ADDR);
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Load from NOR Flash\r\n");
+++#endif
+++	load_norflash(img_address, img_size, jump_addr);
++ #endif
++ #if defined(CONFIG_SDCARD)
++-    load_SDCard();
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print("Load from SD-Card\r\n");
++ #endif
+++	load_SDCard();
++ #endif
++-	}
++ 
++     /*
++      * ==================== 3rd step:  Process the Image =================== 
++@@ -133,7 +155,7 @@ int main(void)
++      * Uncompress the image 
++      */
++ #ifdef CONFIG_GUNZIP
++-    decompress_image((void *)IMG_ADDRESS, (void *)JUMP_ADDR, IMG_SIZE); /* NOT IMPLEMENTED YET */
+++    decompress_image((void *)IMG_ADDRESS, (void *)jump_addr, IMG_SIZE); /* NOT IMPLEMENTED YET */
++     msg_print(MSG_DECOMPRESS);
++ #endif
++ 
++@@ -144,6 +166,10 @@ int main(void)
++      * Set linux arguments 
++      */
++ #ifdef CONFIG_LINUX_ARG
+++#if	defined(CONFIG_DEBUG)
+++	dbgu_print(LINUX_ARG);
+++	dbgu_print("\r\n");
+++#endif
++     linux_arg(LINUX_ARG);       /* NOT IMPLEMENTED YET */
++     msg_print(MSG_LINUX);
++ #endif                          /* LINUX_ARG */
++@@ -154,15 +180,15 @@ int main(void)
++ 
++ #ifdef WINCE
++ #ifdef CONFIG_LOAD_NK
++-    Jump(JUMP_ADDR + 0x1000);
+++    Jump(jump_addr + 0x1000);
++ #else
++-    Jump(JUMP_ADDR);
+++    Jump(jump_addr);
++ #endif
++ #else /* !WINCE */
++ #ifdef CONFIG_LOAD_NK
++-    return (JUMP_ADDR + 0x1000);
+++    return (jump_addr + 0x1000);
++ #else
++-    return JUMP_ADDR;
+++    return jump_addr;
++ #endif
++ #endif
++ }
++diff --git a/toplevel_cpp.mk b/toplevel_cpp.mk
++index 315dc31..569f297 100644
++--- a/toplevel_cpp.mk
+++++ b/toplevel_cpp.mk
++@@ -2,6 +2,7 @@ CPPFLAGS += \
++ 	-DIMG_ADDRESS=$(IMG_ADDRESS)		\
++ 	-DIMG_SIZE=$(IMG_SIZE)			\
++ 	-DJUMP_ADDR=$(JUMP_ADDR)		\
+++	-DALT_JUMP_ADDR=$(ALT_JUMP_ADDR)		\
++ 	-DOS_MEM_BANK=$(OS_MEM_BANK) \
++ 	-DOS_MEM_SIZE=$(OS_MEM_SIZE) \
++ 	-DOS_IMG_SIZE=$(OS_IMG_SIZE) \
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0015-Make-MAKENEW-useful.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0015-Make-MAKENEW-useful.patch
+new file mode 100644
+index 0000000..5e29375
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0015-Make-MAKENEW-useful.patch
+@@ -0,0 +1,41 @@
++From 044592d20881ee9f61c29db3bc7b00424145e136 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Mon, 24 Jan 2011 19:37:56 +0100
++Subject: [PATCH v3 15/08] Make MAKENEW useful
++
++---
++ MAKENEW |   12 ++++++++----
++ 1 files changed, 8 insertions(+), 4 deletions(-)
++
++diff --git a/MAKENEW b/MAKENEW
++index efb388a..d041ecc 100755
++--- a/MAKENEW
+++++ b/MAKENEW
++@@ -12,16 +12,20 @@ else
++ 	exit 0
++ fi
++ 
++-MAKEFLAGS="CROSS_COMPILE=${CROSS_COMPILE} CONFIG_NO_DWARF_CFI_ASM=y"
+++MAKEFLAGS="CROSS_COMPILE=${CROSS_COMPILE}"
+++# CONFIG_NO_DWARF_CFI_ASM=y"
++ 
++ function build()
++ {
++ 	if [ ${skip} == "0" ] ; then
++ 		rm .config
++ 		make $1_defconfig
++-		make menuconfig
++-		make BOARD=$2 update
++-#		make ${MAKEFLAGS}	> log/$1.log 2>&1 || mv log/$1.log log/FAIL/$1.log.FAIL
+++#		make menuconfig
+++#		make BOARD=$2 update
+++		make ${MAKEFLAGS}
+++		make ${MAKEFLAGS}	boot
+++		make ${MAKEFLAGS}	install
+++#	> log/$1.log 2>&1 || mv log/$1.log log/FAIL/$1.log.FAIL
++ 	fi
++ }
++ 
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap-3.0/0016-Update-configs.patch b/recipes/at91bootstrap/at91bootstrap-3.0/0016-Update-configs.patch
+new file mode 100644
+index 0000000..3a93975
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-3.0/0016-Update-configs.patch
+@@ -0,0 +1,1175 @@
++From 03db7b119864eb99b6d6abd6d0e44f3d369f6212 Mon Sep 17 00:00:00 2001
++From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
++Date: Mon, 24 Jan 2011 19:41:35 +0100
++Subject: [PATCH v3 16/08] Update configs
++
++---
++ board/afeb9260/afeb9260_defconfig                  |    3 ++-
++ board/at91cap9adk/at91cap9adk_defconfig            |    3 ++-
++ board/at91cap9adk/at91cap9df_defconfig             |    3 ++-
++ board/at91cap9adk/at91cap9f_defconfig              |    3 ++-
++ board/at91cap9stk/at91cap9stk_defconfig            |    3 ++-
++ board/at91cap9stk/at91cap9stkdf_defconfig          |    3 ++-
++ board/at91cap9stk/at91cap9stkf_defconfig           |    3 ++-
++ board/at91sam9260ek/at91sam9260df_defconfig        |    3 ++-
++ board/at91sam9260ek/at91sam9260dfc_defconfig       |    3 ++-
++ board/at91sam9260ek/at91sam9260ek_defconfig        |    3 ++-
++ board/at91sam9260ek/at91sam9260nf_defconfig        |    3 ++-
++ board/at91sam9261ek/at91sam9261df_defconfig        |    3 ++-
++ board/at91sam9261ek/at91sam9261dfc_defconfig       |    3 ++-
++ board/at91sam9261ek/at91sam9261ek_defconfig        |    3 ++-
++ board/at91sam9261ek/at91sam9261nf_defconfig        |    3 ++-
++ board/at91sam9263ek/at91sam9263df_defconfig        |    3 ++-
++ board/at91sam9263ek/at91sam9263dfc_defconfig       |    3 ++-
++ board/at91sam9263ek/at91sam9263ek_defconfig        |    3 ++-
++ board/at91sam9263ek/at91sam9263nf_defconfig        |    3 ++-
++ board/at91sam9g10ek/at91sam9g10df_defconfig        |    3 ++-
++ board/at91sam9g10ek/at91sam9g10ek_defconfig        |    3 ++-
++ board/at91sam9g10ek/at91sam9g10nf_defconfig        |    3 ++-
++ board/at91sam9g10ek/at91sam9g10sd_defconfig        |    3 ++-
++ board/at91sam9g20ek/at91sam9g20df_defconfig        |    3 ++-
++ board/at91sam9g20ek/at91sam9g20dfc_defconfig       |    3 ++-
++ board/at91sam9g20ek/at91sam9g20ek_defconfig        |    3 ++-
++ board/at91sam9g20ek/at91sam9g20nf_defconfig        |    3 ++-
++ board/at91sam9g20ek/at91sam9g20sd_defconfig        |    3 ++-
++ board/at91sam9g45ek/at91sam9g45df_defconfig        |    3 ++-
++ board/at91sam9g45ek/at91sam9g45ek_defconfig        |    3 ++-
++ board/at91sam9g45ek/at91sam9g45nf_defconfig        |    3 ++-
++ board/at91sam9g45ek/at91sam9g45sd_defconfig        |    3 ++-
++ board/at91sam9g45ekes/at91sam9g45dfes_defconfig    |    3 ++-
++ board/at91sam9g45ekes/at91sam9g45ekes_defconfig    |    3 ++-
++ board/at91sam9g45ekes/at91sam9g45nfes_defconfig    |    3 ++-
++ .../at91sam9g45sdes_android_defconfig              |    3 ++-
++ board/at91sam9g45ekes/at91sam9g45sdes_defconfig    |    3 ++-
++ board/at91sam9m10ek/at91sam9m10df_defconfig        |    3 ++-
++ board/at91sam9m10ek/at91sam9m10ek_defconfig        |    3 ++-
++ board/at91sam9m10ek/at91sam9m10nf_defconfig        |    3 ++-
++ .../at91sam9m10ek/at91sam9m10sd_android_defconfig  |    3 ++-
++ board/at91sam9m10ek/at91sam9m10sd_defconfig        |    3 ++-
++ board/at91sam9m10ek/at91sam9m10sdu_defconfig       |    5 +++--
++ board/at91sam9m10ekes/at91sam9m10dfes_defconfig    |    3 ++-
++ board/at91sam9m10ekes/at91sam9m10ekes_defconfig    |    3 ++-
++ board/at91sam9m10ekes/at91sam9m10nfes_defconfig    |    3 ++-
++ board/at91sam9m10ekes/at91sam9m10sdes_defconfig    |    3 ++-
++ board/at91sam9rlek/at91sam9rldf_defconfig          |    3 ++-
++ board/at91sam9rlek/at91sam9rlek_defconfig          |    3 ++-
++ board/at91sam9rlek/at91sam9rlnf_defconfig          |    3 ++-
++ board/at91sam9rlek/at91sam9rlsd_defconfig          |    3 ++-
++ board/at91sam9xeek/at91sam9xedf_defconfig          |    3 ++-
++ board/at91sam9xeek/at91sam9xedfc_defconfig         |    3 ++-
++ board/at91sam9xeek/at91sam9xeek_defconfig          |    3 ++-
++ board/at91sam9xeek/at91sam9xenf_defconfig          |    3 ++-
++ 55 files changed, 111 insertions(+), 56 deletions(-)
++
++diff --git a/board/afeb9260/afeb9260_defconfig b/board/afeb9260/afeb9260_defconfig
++index 516b29b..289059a 100644
++--- a/board/afeb9260/afeb9260_defconfig
+++++ b/board/afeb9260/afeb9260_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:56 2011
+++# Mon Jan 24 19:40:09 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="afeb9260"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x23F00000"
++ # CONFIG_LONG_TEST is not set
++ # CONFIG_DEBUG is not set
++diff --git a/board/at91cap9adk/at91cap9adk_defconfig b/board/at91cap9adk/at91cap9adk_defconfig
++index a0d8856..48cfb20 100644
++--- a/board/at91cap9adk/at91cap9adk_defconfig
+++++ b/board/at91cap9adk/at91cap9adk_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:19 2011
+++# Mon Jan 24 19:40:30 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9adk"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91cap9adk/at91cap9df_defconfig b/board/at91cap9adk/at91cap9df_defconfig
++index 9f9723f..8f22b1a 100644
++--- a/board/at91cap9adk/at91cap9df_defconfig
+++++ b/board/at91cap9adk/at91cap9df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:18 2011
+++# Mon Jan 24 19:40:29 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9df"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91cap9adk/at91cap9f_defconfig b/board/at91cap9adk/at91cap9f_defconfig
++index 5cba669..cbb8990 100644
++--- a/board/at91cap9adk/at91cap9f_defconfig
+++++ b/board/at91cap9adk/at91cap9f_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:18 2011
+++# Mon Jan 24 19:40:28 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9f"
++@@ -89,6 +89,7 @@ CONFIG_SETTING_ADDRESS="0x00008000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91cap9stk/at91cap9stk_defconfig b/board/at91cap9stk/at91cap9stk_defconfig
++index f505e19..14905d6 100644
++--- a/board/at91cap9stk/at91cap9stk_defconfig
+++++ b/board/at91cap9stk/at91cap9stk_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:17 2011
+++# Mon Jan 24 19:40:27 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9stk"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91cap9stk/at91cap9stkdf_defconfig b/board/at91cap9stk/at91cap9stkdf_defconfig
++index 00bc7d1..07a3fe1 100644
++--- a/board/at91cap9stk/at91cap9stkdf_defconfig
+++++ b/board/at91cap9stk/at91cap9stkdf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:17 2011
+++# Mon Jan 24 19:40:26 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9stkdf"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91cap9stk/at91cap9stkf_defconfig b/board/at91cap9stk/at91cap9stkf_defconfig
++index 94b3ea9..8b363c5 100644
++--- a/board/at91cap9stk/at91cap9stkf_defconfig
+++++ b/board/at91cap9stk/at91cap9stkf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:17 2011
+++# Mon Jan 24 19:40:27 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91cap9stkf"
++@@ -89,6 +89,7 @@ CONFIG_SETTING_ADDRESS="0x00008000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x70000000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9260ek/at91sam9260df_defconfig b/board/at91sam9260ek/at91sam9260df_defconfig
++index 78b6a84..2467dca 100644
++--- a/board/at91sam9260ek/at91sam9260df_defconfig
+++++ b/board/at91sam9260ek/at91sam9260df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:20 2011
+++# Mon Jan 24 19:40:33 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9260df"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ # CONFIG_DEBUG is not set
++diff --git a/board/at91sam9260ek/at91sam9260dfc_defconfig b/board/at91sam9260ek/at91sam9260dfc_defconfig
++index 4ff3fe1..05f4fe6 100644
++--- a/board/at91sam9260ek/at91sam9260dfc_defconfig
+++++ b/board/at91sam9260ek/at91sam9260dfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:19 2011
+++# Mon Jan 24 19:40:32 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9260dfc"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ # CONFIG_DEBUG is not set
++diff --git a/board/at91sam9260ek/at91sam9260ek_defconfig b/board/at91sam9260ek/at91sam9260ek_defconfig
++index c05d5c0..59a871c 100644
++--- a/board/at91sam9260ek/at91sam9260ek_defconfig
+++++ b/board/at91sam9260ek/at91sam9260ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:20 2011
+++# Mon Jan 24 19:40:33 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9260ek"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ # CONFIG_DEBUG is not set
++diff --git a/board/at91sam9260ek/at91sam9260nf_defconfig b/board/at91sam9260ek/at91sam9260nf_defconfig
++index e30fcab..71de347 100644
++--- a/board/at91sam9260ek/at91sam9260nf_defconfig
+++++ b/board/at91sam9260ek/at91sam9260nf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:19 2011
+++# Mon Jan 24 19:40:31 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9260nf"
++@@ -96,6 +96,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ # CONFIG_DEBUG is not set
++diff --git a/board/at91sam9261ek/at91sam9261df_defconfig b/board/at91sam9261ek/at91sam9261df_defconfig
++index a98e46d..c55a281 100644
++--- a/board/at91sam9261ek/at91sam9261df_defconfig
+++++ b/board/at91sam9261ek/at91sam9261df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:23 2011
+++# Mon Jan 24 19:40:43 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9261df"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9261ek/at91sam9261dfc_defconfig b/board/at91sam9261ek/at91sam9261dfc_defconfig
++index ac632d0..4912c7b 100644
++--- a/board/at91sam9261ek/at91sam9261dfc_defconfig
+++++ b/board/at91sam9261ek/at91sam9261dfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:22 2011
+++# Mon Jan 24 19:40:40 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9261dfc"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9261ek/at91sam9261ek_defconfig b/board/at91sam9261ek/at91sam9261ek_defconfig
++index f2c14d0..831bd90 100644
++--- a/board/at91sam9261ek/at91sam9261ek_defconfig
+++++ b/board/at91sam9261ek/at91sam9261ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:23 2011
+++# Mon Jan 24 19:40:42 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9261ek"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9261ek/at91sam9261nf_defconfig b/board/at91sam9261ek/at91sam9261nf_defconfig
++index d7d1a75..13068d2 100644
++--- a/board/at91sam9261ek/at91sam9261nf_defconfig
+++++ b/board/at91sam9261ek/at91sam9261nf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:22 2011
+++# Mon Jan 24 19:40:41 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9261nf"
++@@ -95,6 +95,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9263ek/at91sam9263df_defconfig b/board/at91sam9263ek/at91sam9263df_defconfig
++index 65264ff..eee3abd 100644
++--- a/board/at91sam9263ek/at91sam9263df_defconfig
+++++ b/board/at91sam9263ek/at91sam9263df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:24 2011
+++# Mon Jan 24 19:40:47 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9263df"
++@@ -117,6 +117,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9263ek/at91sam9263dfc_defconfig b/board/at91sam9263ek/at91sam9263dfc_defconfig
++index ce626d4..00e88bc 100644
++--- a/board/at91sam9263ek/at91sam9263dfc_defconfig
+++++ b/board/at91sam9263ek/at91sam9263dfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:24 2011
+++# Mon Jan 24 19:40:48 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9263dfc"
++@@ -117,6 +117,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9263ek/at91sam9263ek_defconfig b/board/at91sam9263ek/at91sam9263ek_defconfig
++index 87b4d33..1c6b5cd 100644
++--- a/board/at91sam9263ek/at91sam9263ek_defconfig
+++++ b/board/at91sam9263ek/at91sam9263ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:23 2011
+++# Mon Jan 24 19:40:44 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9263ek"
++@@ -117,6 +117,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9263ek/at91sam9263nf_defconfig b/board/at91sam9263ek/at91sam9263nf_defconfig
++index 6093466..2365ab5 100644
++--- a/board/at91sam9263ek/at91sam9263nf_defconfig
+++++ b/board/at91sam9263ek/at91sam9263nf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:24 2011
+++# Mon Jan 24 19:40:45 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9263nf"
++@@ -98,6 +98,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g10ek/at91sam9g10df_defconfig b/board/at91sam9g10ek/at91sam9g10df_defconfig
++index b9358af..bb1ae6d 100644
++--- a/board/at91sam9g10ek/at91sam9g10df_defconfig
+++++ b/board/at91sam9g10ek/at91sam9g10df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:03 2011
+++# Mon Jan 24 19:40:20 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g10df"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20068000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g10ek/at91sam9g10ek_defconfig b/board/at91sam9g10ek/at91sam9g10ek_defconfig
++index 2436cdc..5f2bbbd 100644
++--- a/board/at91sam9g10ek/at91sam9g10ek_defconfig
+++++ b/board/at91sam9g10ek/at91sam9g10ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:02 2011
+++# Mon Jan 24 19:40:18 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g10ek"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20068000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g10ek/at91sam9g10nf_defconfig b/board/at91sam9g10ek/at91sam9g10nf_defconfig
++index ed42d16..6c219f1 100644
++--- a/board/at91sam9g10ek/at91sam9g10nf_defconfig
+++++ b/board/at91sam9g10ek/at91sam9g10nf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:03 2011
+++# Mon Jan 24 19:40:19 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g10nf"
++@@ -95,6 +95,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20068000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g10ek/at91sam9g10sd_defconfig b/board/at91sam9g10ek/at91sam9g10sd_defconfig
++index 5bcfe96..ffdd9dd 100644
++--- a/board/at91sam9g10ek/at91sam9g10sd_defconfig
+++++ b/board/at91sam9g10ek/at91sam9g10sd_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:03 2011
+++# Mon Jan 24 19:40:21 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g10sd"
++@@ -93,6 +93,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x22000000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20068000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g20ek/at91sam9g20df_defconfig b/board/at91sam9g20ek/at91sam9g20df_defconfig
++index 287594b..284e62e 100644
++--- a/board/at91sam9g20ek/at91sam9g20df_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:21 2011
+++# Mon Jan 24 19:40:38 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g20df"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g20ek/at91sam9g20dfc_defconfig b/board/at91sam9g20ek/at91sam9g20dfc_defconfig
++index 345847c..2507515 100644
++--- a/board/at91sam9g20ek/at91sam9g20dfc_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20dfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:21 2011
+++# Mon Jan 24 19:40:36 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g20dfc"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g20ek/at91sam9g20ek_defconfig b/board/at91sam9g20ek/at91sam9g20ek_defconfig
++index d134be9..952c809 100644
++--- a/board/at91sam9g20ek/at91sam9g20ek_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:22 2011
+++# Mon Jan 24 19:40:39 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g20ek"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g20ek/at91sam9g20nf_defconfig b/board/at91sam9g20ek/at91sam9g20nf_defconfig
++index d6d9dd5..72edcb6 100644
++--- a/board/at91sam9g20ek/at91sam9g20nf_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20nf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:20 2011
+++# Mon Jan 24 19:40:35 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g20nf"
++@@ -96,6 +96,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g20ek/at91sam9g20sd_defconfig b/board/at91sam9g20ek/at91sam9g20sd_defconfig
++index 87442b8..7d96f2a 100644
++--- a/board/at91sam9g20ek/at91sam9g20sd_defconfig
+++++ b/board/at91sam9g20ek/at91sam9g20sd_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:21 2011
+++# Mon Jan 24 19:40:37 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g20sd"
++@@ -94,6 +94,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x22000000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x20058000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ek/at91sam9g45df_defconfig b/board/at91sam9g45ek/at91sam9g45df_defconfig
++index 3a1bafc..ec660f9 100644
++--- a/board/at91sam9g45ek/at91sam9g45df_defconfig
+++++ b/board/at91sam9g45ek/at91sam9g45df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:29 2011
+++# Mon Jan 24 19:40:50 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45df"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ek/at91sam9g45ek_defconfig b/board/at91sam9g45ek/at91sam9g45ek_defconfig
++index f9c620e..1121938 100644
++--- a/board/at91sam9g45ek/at91sam9g45ek_defconfig
+++++ b/board/at91sam9g45ek/at91sam9g45ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:28 2011
+++# Mon Jan 24 19:40:49 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45ek"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ek/at91sam9g45nf_defconfig b/board/at91sam9g45ek/at91sam9g45nf_defconfig
++index bfef651..35b8b91 100644
++--- a/board/at91sam9g45ek/at91sam9g45nf_defconfig
+++++ b/board/at91sam9g45ek/at91sam9g45nf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:30 2011
+++# Mon Jan 24 19:40:51 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45nf"
++@@ -96,6 +96,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ek/at91sam9g45sd_defconfig b/board/at91sam9g45ek/at91sam9g45sd_defconfig
++index df17dc9..6e1070f 100644
++--- a/board/at91sam9g45ek/at91sam9g45sd_defconfig
+++++ b/board/at91sam9g45ek/at91sam9g45sd_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:31 2011
+++# Mon Jan 24 19:40:52 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45sd"
++@@ -94,6 +94,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x72000000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45dfes_defconfig b/board/at91sam9g45ekes/at91sam9g45dfes_defconfig
++index ddf19e1..43e7e01 100644
++--- a/board/at91sam9g45ekes/at91sam9g45dfes_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45dfes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:16 2011
+++# Mon Jan 24 19:40:24 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45dfes"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45ekes_defconfig b/board/at91sam9g45ekes/at91sam9g45ekes_defconfig
++index 79f8d2e..6e5cc6a 100644
++--- a/board/at91sam9g45ekes/at91sam9g45ekes_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45ekes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:15 2011
+++# Mon Jan 24 19:40:23 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45ekes"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45nfes_defconfig b/board/at91sam9g45ekes/at91sam9g45nfes_defconfig
++index 903680e..6b73899 100644
++--- a/board/at91sam9g45ekes/at91sam9g45nfes_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45nfes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:16 2011
+++# Mon Jan 24 19:40:25 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45nfes"
++@@ -96,6 +96,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45sdes_android_defconfig b/board/at91sam9g45ekes/at91sam9g45sdes_android_defconfig
++index b423ab4..994cdfc 100644
++--- a/board/at91sam9g45ekes/at91sam9g45sdes_android_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45sdes_android_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:12 2011
+++# Mon Jan 24 19:40:21 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45sdes_android"
++@@ -94,6 +94,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x72000000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9g45ekes/at91sam9g45sdes_defconfig b/board/at91sam9g45ekes/at91sam9g45sdes_defconfig
++index 194f561..96b2c6d 100644
++--- a/board/at91sam9g45ekes/at91sam9g45sdes_defconfig
+++++ b/board/at91sam9g45ekes/at91sam9g45sdes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:14 2011
+++# Mon Jan 24 19:40:22 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9g45sdes"
++@@ -94,6 +94,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x72000000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ek/at91sam9m10df_defconfig b/board/at91sam9m10ek/at91sam9m10df_defconfig
++index 626e318..91589fa 100644
++--- a/board/at91sam9m10ek/at91sam9m10df_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10df_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:54 2011
+++# Mon Jan 24 19:40:06 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10df"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ek/at91sam9m10ek_defconfig b/board/at91sam9m10ek/at91sam9m10ek_defconfig
++index 6da1390..f5f68eb 100644
++--- a/board/at91sam9m10ek/at91sam9m10ek_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10ek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:53 2011
+++# Mon Jan 24 19:40:05 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10ek"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ek/at91sam9m10nf_defconfig b/board/at91sam9m10ek/at91sam9m10nf_defconfig
++index c146201..9cf0410 100644
++--- a/board/at91sam9m10ek/at91sam9m10nf_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10nf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:56 2011
+++# Mon Jan 24 19:40:08 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10nf"
++@@ -96,6 +96,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ek/at91sam9m10sd_android_defconfig b/board/at91sam9m10ek/at91sam9m10sd_android_defconfig
++index 8693ad4..5b72a1e 100644
++--- a/board/at91sam9m10ek/at91sam9m10sd_android_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10sd_android_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:51 2011
+++# Mon Jan 24 19:40:02 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10sd_android"
++@@ -94,6 +94,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x72000000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ek/at91sam9m10sd_defconfig b/board/at91sam9m10ek/at91sam9m10sd_defconfig
++index 670664b..6bb69c8 100644
++--- a/board/at91sam9m10ek/at91sam9m10sd_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10sd_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:55 2011
+++# Mon Jan 24 19:40:07 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10sd"
++@@ -94,6 +94,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x72000000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ek/at91sam9m10sdu_defconfig b/board/at91sam9m10ek/at91sam9m10sdu_defconfig
++index 747329a..07ba3f9 100644
++--- a/board/at91sam9m10ek/at91sam9m10sdu_defconfig
+++++ b/board/at91sam9m10ek/at91sam9m10sdu_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:51 2011
+++# Mon Jan 24 19:40:04 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10sdu"
++@@ -81,7 +81,7 @@ CONFIG_DUAL_BOOT=y
++ CONFIG_ALT_IMG_ADDRESS="0x00000000"
++ CONFIG_ALT_IMG_SIZE="0x00010000"
++ CONFIG_ALT_IMAGE_NAME="program.bin"
++-CONFIG_OS_IMAGE_NAME="uimage.bin"
+++CONFIG_OS_IMAGE_NAME="u-boot.bin"
++ CONFIG_OS_IMG_SIZE="0x280000"
++ 
++ #
++@@ -92,6 +92,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ekes/at91sam9m10dfes_defconfig b/board/at91sam9m10ekes/at91sam9m10dfes_defconfig
++index 6a49475..09c9d51 100644
++--- a/board/at91sam9m10ekes/at91sam9m10dfes_defconfig
+++++ b/board/at91sam9m10ekes/at91sam9m10dfes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:01 2011
+++# Mon Jan 24 19:40:13 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10dfes"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ekes/at91sam9m10ekes_defconfig b/board/at91sam9m10ekes/at91sam9m10ekes_defconfig
++index e6b3027..2ba49eb 100644
++--- a/board/at91sam9m10ekes/at91sam9m10ekes_defconfig
+++++ b/board/at91sam9m10ekes/at91sam9m10ekes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:00 2011
+++# Mon Jan 24 19:40:12 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10ekes"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ekes/at91sam9m10nfes_defconfig b/board/at91sam9m10ekes/at91sam9m10nfes_defconfig
++index 5f03396..093cc86 100644
++--- a/board/at91sam9m10ekes/at91sam9m10nfes_defconfig
+++++ b/board/at91sam9m10ekes/at91sam9m10nfes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:58 2011
+++# Mon Jan 24 19:40:10 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10nfes"
++@@ -96,6 +96,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x73F00000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9m10ekes/at91sam9m10sdes_defconfig b/board/at91sam9m10ekes/at91sam9m10sdes_defconfig
++index 1d413ca..f21e663 100644
++--- a/board/at91sam9m10ekes/at91sam9m10sdes_defconfig
+++++ b/board/at91sam9m10ekes/at91sam9m10sdes_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:42:59 2011
+++# Mon Jan 24 19:40:11 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9m10sdes"
++@@ -94,6 +94,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x72000000"
+++CONFIG_ALT_JUMP_ADDR="0x70000000"
++ CONFIG_GLBDRV_ADDR="0x7006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9rlek/at91sam9rldf_defconfig b/board/at91sam9rlek/at91sam9rldf_defconfig
++index 9c0011a..e78d085 100644
++--- a/board/at91sam9rlek/at91sam9rldf_defconfig
+++++ b/board/at91sam9rlek/at91sam9rldf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:32 2011
+++# Mon Jan 24 19:40:54 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9rldf"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9rlek/at91sam9rlek_defconfig b/board/at91sam9rlek/at91sam9rlek_defconfig
++index 9a3a9b6..8422f33 100644
++--- a/board/at91sam9rlek/at91sam9rlek_defconfig
+++++ b/board/at91sam9rlek/at91sam9rlek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:32 2011
+++# Mon Jan 24 19:40:55 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9rlek"
++@@ -114,6 +114,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9rlek/at91sam9rlnf_defconfig b/board/at91sam9rlek/at91sam9rlnf_defconfig
++index 2dcab82..53d1e32 100644
++--- a/board/at91sam9rlek/at91sam9rlnf_defconfig
+++++ b/board/at91sam9rlek/at91sam9rlnf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:31 2011
+++# Mon Jan 24 19:40:53 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9rlnf"
++@@ -94,6 +94,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9rlek/at91sam9rlsd_defconfig b/board/at91sam9rlek/at91sam9rlsd_defconfig
++index 5bb004d..ea00655 100644
++--- a/board/at91sam9rlek/at91sam9rlsd_defconfig
+++++ b/board/at91sam9rlek/at91sam9rlsd_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:32 2011
+++# Mon Jan 24 19:40:54 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9rlsd"
++@@ -92,6 +92,7 @@ CONFIG_SETTING_ADDRESS="0x00000000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00280000"
++ CONFIG_JUMP_ADDR="0x22000000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x2006b000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9xeek/at91sam9xedf_defconfig b/board/at91sam9xeek/at91sam9xedf_defconfig
++index 9700b85..6e9e1c0 100644
++--- a/board/at91sam9xeek/at91sam9xedf_defconfig
+++++ b/board/at91sam9xeek/at91sam9xedf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:01 2011
+++# Mon Jan 24 19:40:15 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9xedf"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x23F00000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9xeek/at91sam9xedfc_defconfig b/board/at91sam9xeek/at91sam9xedfc_defconfig
++index dac40a4..20a9cdc 100644
++--- a/board/at91sam9xeek/at91sam9xedfc_defconfig
+++++ b/board/at91sam9xeek/at91sam9xedfc_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:02 2011
+++# Mon Jan 24 19:40:16 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9xedfc"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x23F00000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9xeek/at91sam9xeek_defconfig b/board/at91sam9xeek/at91sam9xeek_defconfig
++index 4fdf865..0291bd1 100644
++--- a/board/at91sam9xeek/at91sam9xeek_defconfig
+++++ b/board/at91sam9xeek/at91sam9xeek_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:01 2011
+++# Mon Jan 24 19:40:14 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9xeek"
++@@ -115,6 +115,7 @@ CONFIG_SETTING_ADDRESS="0x00408400"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x23F00000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++diff --git a/board/at91sam9xeek/at91sam9xenf_defconfig b/board/at91sam9xeek/at91sam9xenf_defconfig
++index a51926c..aa1cba8 100644
++--- a/board/at91sam9xeek/at91sam9xenf_defconfig
+++++ b/board/at91sam9xeek/at91sam9xenf_defconfig
++@@ -1,6 +1,6 @@
++ #
++ # Automatically generated make config: don't edit
++-# Sun Jan 16 21:43:02 2011
+++# Mon Jan 24 19:40:17 2011
++ #
++ HAVE_DOT_CONFIG=y
++ CONFIG_BOARDNAME="at91sam9xenf"
++@@ -97,6 +97,7 @@ CONFIG_SETTING_ADDRESS="0x01FE0000"
++ CONFIG_SETTING_SIZE="0x00001000"
++ CONFIG_IMG_SIZE="0x00040000"
++ CONFIG_JUMP_ADDR="0x23F00000"
+++CONFIG_ALT_JUMP_ADDR="0x20000000"
++ CONFIG_GLBDRV_ADDR="0x23F00000"
++ # CONFIG_LONG_TEST is not set
++ CONFIG_DEBUG=y
++-- 
++1.7.1
++
+diff --git a/recipes/at91bootstrap/at91bootstrap_3.0.bb b/recipes/at91bootstrap/at91bootstrap_3.0.bb
+new file mode 100644
+index 0000000..82a91c6
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap_3.0.bb
+@@ -0,0 +1,35 @@
++require at91bootstrap_3.0.inc
++PR = "r3"
++DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_at91sam9g45ek = "3"
++DEFAULT_PREFERENCE_at91sam9g45ekes = "3"
++DEFAULT_PREFERENCE_at91sam9m10ek = "3"
++DEFAULT_PREFERENCE_at91sam9m10ekes = "3"
++
++SRC_URI = "ftp://ftp.linux4sam.org/pub/Android4SAM/9m10g45/v1.1/patches/bootstrap30.tar.gz \
++           "
++
++SRC_URI_append = " \
++	file://0001-Update-.gitignore.patch;apply=yes \
++	file://0002-Add-KConfig-support-for-booting-U-Boot.patch;apply=yes \
++	file://0003-Generate-a-BOOT.BIN-file-instead-of-boot.bin.patch;apply=yes \
++	file://0004-Add-support-for-dual-boot.patch;apply=yes \
++	file://0005-Remove-old-afeb9260-files.patch;apply=yes \
++	file://0006-Use-BOARD-instead-of-BOARDNAME-to-define-directory.patch;apply=yes \
++	file://0007-Add-board-support-for-alternate-boot.patch;apply=yes \
++	file://0008-Clean-up-printouts.patch;apply=yes \
++	file://0009-Update-configs.patch;apply=yes \
++	file://0010-Update-build-scripts.patch;apply=yes \
++	file://0011-Fix-Cut-n-Paste-error.patch;apply=yes \
++	file://0013-Fix-Cut-n-Paste-error-in-Makefile.patch;apply=yes \
++	file://0014-Add-support-for-alternate-jump-address.patch;apply=yes \
++	file://0015-Make-MAKENEW-useful.patch;apply=yes \
++	file://0016-Update-configs.patch;apply=yes \
++	"
++
++# S = "${WORKDIR}/${PN}-${PV}"
++S = "${WORKDIR}/bootstrap30"
++
++SRC_URI[md5sum] = "a70f09198555d343de376014f9681f32"
++SRC_URI[sha256sum] = "90eccf7d639f4cf11ec8a3e0654aeb7e43382fd3bcbe9f234f9e9faeb1ed0ccd"
++
+diff --git a/recipes/at91bootstrap/at91bootstrap_3.0.inc b/recipes/at91bootstrap/at91bootstrap_3.0.inc
+new file mode 100644
+index 0000000..ca213d1
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap_3.0.inc
+@@ -0,0 +1,27 @@
++DESCRIPTION = "at91bootstrap: loaded into internal SRAM by AT91 BootROM"
++SECTION = "bootloaders"
++
++PARALLEL_MAKE = ""
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} DESTDIR=${DEPLOY_DIR_IMAGE} REVISION=${PR}"
++
++do_compile () {
++	unset LDFLAGS
++	unset CFLAGS
++	unset CPPFLAGS
++
++	rm -Rf ${S}/binaries
++	for board in ${AT91BOOTSTRAP_BOARD} ; do
++		oe_runmake mrproper
++		filename=`find board -name ${board}_defconfig`
++		if ! [ "x$filename" == "x" ] ; then 
++			cp $filename .config
++			oe_runmake AT91_CUSTOM_FLAGS="${AT91BOOTSTRAP_FLAGS}"
++			oe_runmake AT91_CUSTOM_FLAGS="${AT91BOOTSTRAP_FLAGS}" boot
++			oe_runmake AT91_CUSTOM_FLAGS="${AT91BOOTSTRAP_FLAGS}" install
++		else
++			echo "${board} could not be built"
++		fi
 +	done
 +}
-+
- SRC_URI_at91 = " \
- 	   ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
- 	   http://maxim.org.za/AT91RM9200/2.6/2.6.30-at91.patch.gz;apply=yes;name=at91patch \
- 	   ftp://www.at91.com/pub/buildroot/2.6.30-exp.2.patch.bz2;apply=yes;name=at91exp2 \
--	   file://at91/linux-2.6.30-001-configurable-partition-size.patch.patch \
--	   file://at91/linux-2.6.30-002-mach-at91-Kconfig.patch \
--	   file://at91/linux-2.6.30-003-sam9m10g45ek.patch \
-+	   file://at91/exp.2/linux-2.6.30-001-configurable-partition-size.patch.patch \
-+	   file://at91/exp.2/linux-2.6.30-002-mach-at91-Kconfig.patch \
-+	   file://at91/exp.2/linux-2.6.30-003-sam9m10g45ek.patch \
- 	   file://defconfig"
- 
-+
-+
- SRC_URI_append_mpc8315e-rdb = " file://mpc8315erdb-add-msi-to-dts.patch"
- 
-+SRC_URI_append_at91sam9260ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9261ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9263ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9rlek = ${at91sam_patch} 
-+SRC_URI_append_at91sam9g20ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9g20ek_2mmc = ${at91sam_patch}
-+SRC_URI_append_at91sam9g10ek = ${at91sam_patch}
-+SRC_URI_append_at91sam9xeek = ${at91sam_patch}
-+SRC_URI_append_at91sam9g45ekes = ${at91sam_patch}
-+SRC_URI_append_at91sam9m10ekes = ${at91sam_patch}
-+SRC_URI_append_at91sam9m10g45ek = ${at91sam_patch}
-+
-+
- # SRC_URI_append_at91sam9263ek = " file://hrw-linux-2.6.30-exp.patch "
- 
- SRC_URI[kernel.md5sum] = "7a80058a6382e5108cdb5554d1609615"
-@@ -48,5 +90,8 @@ SRC_URI[at91patch.md5sum] = "f13ab353b11329ce3d605b6f40e77fa6"
- SRC_URI[at91patch.sha256sum] = "41991e8aa2e5fe8e5dfd47b1e5c446fa03c3ee96a5eae54fd6ec15d1d9afef30"
- SRC_URI[at91exp2.md5sum] = "770c7a2bfb925111a8c0e0d4c8c4764e"
- SRC_URI[at91exp2.sha256sum] = "58894965b253eae0c4caacedc3463cf186c18431ca0d71b767a3b36aa40ec388"
-+SRC_URI[at91exp4.md5sum] = "9ca9901af101d9966a3acf80193bfd7d"
-+SRC_URI[at91exp4.sha256sum] = "b948199be87cf9ba280ea649aa1b477b36344a44aae52fdc3bb56344adf73f76"
- 
--
-+SRC_URI[owlwifi.md5sum] = "8ae8eafddf3d8a1c507aca4d09627a4d"
-+SRC_URI[owlwifi.sha256sum] = "eebc26aaa9f746eff90cce1d0a3537d2b8f48a69a054733c749e4b12c3ad6069"
 -- 
 1.6.3.3
 
