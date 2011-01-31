@@ -1,25 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.23])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <wohauser@gmx.de>) id 1Pjv0g-0006du-Lf
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 15:45:42 +0100
-Received: (qmail invoked by alias); 31 Jan 2011 14:44:49 -0000
-Received: from p549CCC6F.dip.t-dialin.net (EHLO [192.168.3.102])
-	[84.156.204.111]
-	by mail.gmx.net (mp047) with SMTP; 31 Jan 2011 15:44:49 +0100
-X-Authenticated: #656260
-X-Provags-ID: V01U2FsdGVkX1/rSrE/9NTr1rpLNgnm94PpESW6f+AoCXE/Vt3Ozr
-	nyuQRXPRKN9akq
-Message-ID: <4D46CADB.9010003@gmx.de>
-Date: Mon, 31 Jan 2011 15:44:43 +0100
-From: Wolfgang Hauser <wohauser@gmx.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; de-AT;
-	rv:1.9.1.16) Gecko/20101123 SeaMonkey/2.0.11
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PjvFk-0007FP-6s for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Jan 2011 16:01:16 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1PjvEu-00089D-I4 for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Jan 2011 16:00:24 +0100
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Jan 2011 16:00:24 +0100
+Received: from k.kooi by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Jan 2011 16:00:24 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 31 Jan 2011 16:00:07 +0100
+Message-ID: <ii6ipn$13o$1@dough.gmane.org>
+References: <4D46CADB.9010003@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.16) Gecko/20101127 Shredder/3.0.11pre
+In-Reply-To: <4D46CADB.9010003@gmx.de>
 X-Enigmail-Version: 1.0.1
-X-Y-GMX-Trusted: 0
-Subject: libgles-omap3 which kernel could be used for omap3 ?
+Subject: Re: libgles-omap3 which kernel could be used for omap3 ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,14 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 14:45:43 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Mon, 31 Jan 2011 15:01:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hello, is the ti stuff working on the newest kernel version ?
-Or is it still pinned to linux-omap3-psp_2.6.32 ?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Regards
-Wolfgang
+On 31-01-11 15:44, Wolfgang Hauser wrote:
+> Hello, is the ti stuff
+
+Which ti 'stuff'?
+
+> working on the newest kernel version ?
+
+Which kernel? Which tree? Which machine? Which recipe? Which allocator
+in the defconfig?
+
+> Or is it still pinned to linux-omap3-psp_2.6.32 ?
+
+Where do you see it being pinned?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFNRs53MkyGM64RGpERAgBEAJ99uF8PfmXAczNKzY9UoibAHnw6wQCgmzJs
+0CpQkpDMZCZqw6ofPlMm8es=
+=eNJT
+-----END PGP SIGNATURE-----
+
 
 
