@@ -1,37 +1,27 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sujak.marek@gmail.com>) id 1Pjpgb-00031M-VV
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <Schnitzeltony@gmx.de>) id 1PjplC-00037Z-1L
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 10:04:38 +0100
-Received: by qyk36 with SMTP id 36so5215011qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jan 2011 01:03:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=xOQXgl/NSlzPlfuPqy2YmuZJErSZoZQXBDM6FZMP7s4=;
-	b=X+2J36Pp3DDX9Js+uTCHBkLX+2blD4qtYcQ6j//zdgsSeCCs3dSbMN76aOZ69LvKeO
-	dxjHIoegAaKY9RZ44R1QCrNhjfVLNx17EQ5JWxW8zv6QuLq3tkzhzd8XgXqrqQV2n+4V
-	9fjHhJ+OY9hldKN5sMFMH66VPWOYQO6Fn2qEU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=GXL43l0djrcXofC4MMELPB+4IhUTZQf49dMtKOUAOLLp9hethb+gDgHqsgwP29uo3o
-	h7FjAtGJv4t1sjHtFoaByVN4o3oocgE5Q23BhqP7Mm1eHFUQB9vNRQK9QQVKh4snCwq2
-	gzJ5Uwp70CAA9fWoMWxF4PepLMVTYgwL89fFY=
+	Mon, 31 Jan 2011 10:09:22 +0100
+Received: (qmail 5875 invoked by uid 0); 31 Jan 2011 09:08:28 -0000
+Received: from 62.225.102.139 by www187.gmx.net with HTTP;
+	Mon, 31 Jan 2011 10:08:26 +0100 (CET)
+Date: Mon, 31 Jan 2011 10:08:26 +0100
+From: =?iso-8859-1?Q?=22Andreas_M=FCller=22?= <Schnitzeltony@gmx.de>
+In-Reply-To: <1296461709.3922.4.camel@mattotaupa>
+Message-ID: <20110131090826.149890@gmx.net>
 MIME-Version: 1.0
-Received: by 10.229.217.79 with SMTP id hl15mr5448200qcb.111.1296464621511;
-	Mon, 31 Jan 2011 01:03:41 -0800 (PST)
-Received: by 10.220.188.3 with HTTP; Mon, 31 Jan 2011 01:03:41 -0800 (PST)
-In-Reply-To: <4D430EA4.7000504@eukrea.com>
-References: <1296220547-14948-1-git-send-email-sujak.marek@gmail.com>
-	<4D430EA4.7000504@eukrea.com>
-Date: Mon, 31 Jan 2011 10:03:41 +0100
-Message-ID: <AANLkTikVN5p1syU8aT1N3Xh18Uz=RANFCertqzz_S9fx@mail.gmail.com>
-From: Marek Sujak <sujak.marek@gmail.com>
+References: <201101310012.51498.schnitzeltony@gmx.de>
+	<1296461709.3922.4.camel@mattotaupa>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v2] barebox: patches for barebox 2010.10 to support vmx25
+X-Authenticated: #62780362
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX1/T2aoo8TLTnXlhhFXlFEsDezKsRz2yNnIjvBgWmx
+	COuKIvkkJrZJdG/70UkMsQisuRDTuuCU+RMw== 
+X-GMX-UID: OEV1dbgOMmA6T6Gf1mJnxKc5MjQ1N91V
+Subject: Re: libgles-omap3 fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +35,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 09:04:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 31 Jan 2011 09:09:22 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-Hi Eric
+-------- Original-Nachricht --------
+> Datum: Mon, 31 Jan 2011 09:15:09 +0100
+> Von: Paul Menzel <paulepanter@users.sourceforge.net>
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: Re: [oe] libgles-omap3 fails
 
->
-> I think you should merge this patch with the one adding the barebox 2010.10
-> recipe. Or add a plain barebox 2010.10 recipe and then add
->
-> +DEFAULT_PREFERENCE_vmx25 = "1"
-> and
-> +SRC_URI_append_vmx25 = "\
-> +       file://barebox_2010.10-vmx25-20110112.patch; \
-> +       "
->
-> with the corresponding patch.
->
->
+> Dear Andreas,
+> 
+> 
+> Am Montag, den 31.01.2011, 00:12 +0100 schrieb Andreas Mueller:
+> > I don't understand what's going on. When building libgles-omap3 I get
+> > 
+> > [Superandi@localhost gumstix-oe]$ bitbake libgles-omap3
+> 
+> […]
+> 
+> > Parsing of 7118 .bb files complete (0 cached, 7118 parsed). 7430
+> targets, 320 skipped, 2 masked, 0 errors.
+> > ERROR:
+> '['/home/Superandi/data/OpenEmbedded/gumstix-oe/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb']' RDEPENDS/RRECOMMENDS or
+> otherwise requires the runtime entity 'kernel-2.6.32' but it wasn't found in any
+> PACKAGE or RPROVIDES variables
+> > ERROR: Required build target 'libgles-omap3' has no buildable providers.
+> > Missing or unbuildable dependency chain was: ['libgles-omap3',
+> 'omap3-sgx-modules', 'kernel-2.6.32']
+> > 
+> > Build Configuration:
+> > BB_VERSION        = "1.10.2"
+> > METADATA_BRANCH   = "oe.org.openembedded.dev"
+> > METADATA_REVISION = "aa479cd"
+> > TARGET_ARCH       = "arm"
+> > TARGET_OS         = "linux-gnueabi"
+> > MACHINE           = "overo"
+> > DISTRO            = "angstrom"
+> > DISTRO_VERSION    = "2010.7-test-20110130"
+> > TARGET_FPU        = "hard"
+> 
+> […]
+> 
+> > I don't find affecting changes which could have broken this. Any good
+> ideas?
+> 
+> It looks like the same problem as in [1] and should be fixed by commit
+> 09d0669e [2].
+> 
+> 
+> Thanks,
+> 
+> Paul
+> 
+> 
+> [1]
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/029355.html
+> [2]
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=09d0669ed914e810bb8bd6ce9275b7a4125bc8a0
 
-I just uploaded it this way. I was unable to fix it in the correct way by
-git cherry-pick or git rebase. It worked at the beginning, but then i ruined
-it by multiple modification and by pressing random keys on keyboard.
-But because of yours and Petrs help i may succeed next time.
+Paul thanks for responding desperate late-night noise :-)
 
-Thanks
-Marek
+-- 
+NEU: FreePhone - kostenlos mobil telefonieren und surfen!			
+Jetzt informieren: http://www.gmx.net/de/go/freephone
+
 
