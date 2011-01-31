@@ -1,36 +1,23 @@
-Received: from mail.multimedia-labs.de ([82.149.226.172])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1PjjEr-0003vQ-MG
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 03:11:33 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.multimedia-labs.de (Postfix) with ESMTP id D09FA314D5FC
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jan 2011 03:10:42 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.multimedia-labs.de
-Received: from mail.multimedia-labs.de ([127.0.0.1])
-	by localhost (mail.multimedia-labs.de [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id GPYMZKepTFbP
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jan 2011 03:10:37 +0100 (CET)
-Received: from [172.22.22.61] (ip-94-79-168-47.unitymediagroup.de
-	[94.79.168.47])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.multimedia-labs.de (Postfix) with ESMTPSA id 1D36C314D5FA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jan 2011 03:10:37 +0100 (CET)
-Message-ID: <4D461A1C.2040900@opendreambox.org>
-Date: Mon, 31 Jan 2011 03:10:36 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.14) Gecko/20110128 Lightning/1.0b2 Thunderbird/3.1.8
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pjova-0006tW-EW for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Jan 2011 09:16:02 +0100
+Received: from f053033079.adsl.alicedsl.de ([78.53.33.79]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Pjouk-0006BU-OL for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Jan 2011 08:15:10 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1296316693.5925.10.camel@mattotaupa>	<4D44773D.5010103@opendreambox.org>
-	<1296383636.4757.6.camel@mattotaupa>
-In-Reply-To: <1296383636.4757.6.camel@mattotaupa>
-Subject: Re: [solved][REGRESSION] omap3-sgx-modules: `NOTE: Runtime target 'kernel-' is unbuildable, removing...`
+In-Reply-To: <201101310012.51498.schnitzeltony@gmx.de>
+References: <201101310012.51498.schnitzeltony@gmx.de>
+Date: Mon, 31 Jan 2011 09:15:09 +0100
+Message-ID: <1296461709.3922.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+Subject: Re: libgles-omap3 fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +31,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 02:11:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 31 Jan 2011 08:16:02 -0000
+X-Groupsio-MsgNum: 28637
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-sqzgyjlQvG8qW3HGa8W6"
 
-On 01/30/2011 11:33 AM, Paul Menzel wrote:
-> Dear Andreas,
-> 
-> 
-> Am Samstag, den 29.01.2011, 21:23 +0100 schrieb Andreas Oberritter:
->> On 01/29/2011 04:58 PM, Paul Menzel wrote:
-> 
->>>         commit 2dac84b9a7b820466ed626420fec120093b56e16
->>>         Author: Andreas Oberritter <obi@opendreambox.org>
->>>         Date:   Sat Jan 29 00:51:25 2011 +0000
->>>         
->>>             module.bbclass: depend on kernel-${KERNEL_VERSION} instead of kernel (= ${KERNEL_VERSION})
->>>             
->>>             * As a special case, kernel modules must depend on
->>>               kernel-${KERNEL_VERSION}, which gets runtime provided by the kernel
->>>               package. The reason is, that the package version can be different
->>>               from ${KERNEL_VERSION}, because the latter depends on the kernel
->>>               configuration, e.g. CONFIG_LOCALVERSION.
->>>             
->>>             Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->>>
->>> [1] seems to have broken `omap3-sgx-modules`.
-> 
->> thanks! It's a known bug. Can you please test this patch, while I'm
->> waiting for an ack or nack for it?
->>
->> http://patches.openembedded.org/patch/402/
-> 
-> Unfortunately I am having delivery problems with my SourceForge.net
-> address, so I have not yet received the patch to the list and have to
-> respond to this message.
-> 
-> Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> Tested-by: Paul Menzel <paulepanter@users.sourceforge.net> 
-> 	for `omap3-sgx-modules` with `angstrom-2008.1`
+--=-sqzgyjlQvG8qW3HGa8W6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for testing! I've pushed the patch to fix the regression before
-the work week begins, but I'm not very comfortable with it, because of
-the little feedback.
-
-Let's hope that it works for everybody. Otherwise, it can still be
-reverted together with the patches that caused the regression.
-
-Regards,
-Andreas
+Dear Andreas,
 
 
+Am Montag, den 31.01.2011, 00:12 +0100 schrieb Andreas Mueller:
+> I don't understand what's going on. When building libgles-omap3 I get
+>=20
+> [Superandi@localhost gumstix-oe]$ bitbake libgles-omap3
+
+[=E2=80=A6]
+
+> Parsing of 7118 .bb files complete (0 cached, 7118 parsed). 7430 targets,=
+ 320 skipped, 2 masked, 0 errors.
+> ERROR: '['/home/Superandi/data/OpenEmbedded/gumstix-oe/recipes/powervr-dr=
+ivers/omap3-sgx-modules_1.4.14.2616.bb']' RDEPENDS/RRECOMMENDS or otherwise=
+ requires the runtime entity 'kernel-2.6.32' but it wasn't found in any PAC=
+KAGE or RPROVIDES variables
+> ERROR: Required build target 'libgles-omap3' has no buildable providers.
+> Missing or unbuildable dependency chain was: ['libgles-omap3', 'omap3-sgx=
+-modules', 'kernel-2.6.32']
+>=20
+> Build Configuration:
+> BB_VERSION        =3D "1.10.2"
+> METADATA_BRANCH   =3D "oe.org.openembedded.dev"
+> METADATA_REVISION =3D "aa479cd"
+> TARGET_ARCH       =3D "arm"
+> TARGET_OS         =3D "linux-gnueabi"
+> MACHINE           =3D "overo"
+> DISTRO            =3D "angstrom"
+> DISTRO_VERSION    =3D "2010.7-test-20110130"
+> TARGET_FPU        =3D "hard"
+
+[=E2=80=A6]
+
+> I don't find affecting changes which could have broken this. Any good ide=
+as?
+
+It looks like the same problem as in [1] and should be fixed by commit
+09d0669e [2].
+
+
+Thanks,
+
+Paul
+
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/02=
+9355.html
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D09d0669=
+ed914e810bb8bd6ce9275b7a4125bc8a0
+
+--=-sqzgyjlQvG8qW3HGa8W6
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAk1Gb4AACgkQPX1aK2wOHVjSJACfXNh2pok2uCZ+SzDXoX0bOEml
+cmIAnjT72X60DD+olX8Yyugdu9a2b0Qj
+=8XaZ
+-----END PGP SIGNATURE-----
+
+--=-sqzgyjlQvG8qW3HGa8W6--
