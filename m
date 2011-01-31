@@ -1,23 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pjova-0006tW-EW for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 09:16:02 +0100
-Received: from f053033079.adsl.alicedsl.de ([78.53.33.79]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Pjouk-0006BU-OL for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 08:15:10 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <sujak.marek@gmail.com>) id 1PjpI8-00087R-CK
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Jan 2011 09:39:20 +0100
+Received: by fxm17 with SMTP id 17so5411425fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Jan 2011 00:38:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=jsuCH+h4H3xSCib7wq8+7F1A+FuKDrEX4Pz3rlnzlfA=;
+	b=HocrkD56YZNDfvucisLnzh+ffbIyKNJoQjK/NXn/61dz7IJ2deOYvU3my/6v50V8hp
+	VtVjWiADsN07o3EvSCIeTTqMmr2Yv48NU5x8cZ0l7E+z/6ZZsGQC8uVHf/Pko8Kr2eOt
+	bXlK+1bKzaD0uIhL+eTz2KeLfz1LsfpDlEicU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=gtf5zDfpj20lSx0piMf57Skntn8RLurw4grfjTUJEtypgsPMdHN6xgQwu0amCPJgIT
+	5Nw+l9NmBX/e1rn5qJl/dyxakRJPclyfwHvJ8HvMch6SIRHI0HbH8Lj1ILPUTEfPR6Tu
+	Pe1Y5m0ZD6zh/bHNvKyj+2CRSn61uSAweYbUQ=
+Received: by 10.223.101.199 with SMTP id d7mr5709991fao.65.1296463103101;
+	Mon, 31 Jan 2011 00:38:23 -0800 (PST)
+Received: from localhost.localdomain (dial-92-52-20-198-orange.orange.sk
+	[92.52.20.198])
+	by mx.google.com with ESMTPS id k6sm7224109faa.30.2011.01.31.00.38.21
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 31 Jan 2011 00:38:22 -0800 (PST)
+From: Marek Sujak <sujak.marek@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201101310012.51498.schnitzeltony@gmx.de>
-References: <201101310012.51498.schnitzeltony@gmx.de>
-Date: Mon, 31 Jan 2011 09:15:09 +0100
-Message-ID: <1296461709.3922.4.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-Subject: Re: libgles-omap3 fails
+Date: Mon, 31 Jan 2011 09:38:12 +0100
+Message-Id: <1296463092-18822-1-git-send-email-sujak.marek@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1296206573-12521-1-git-send-email-sujak.marek@gmail.com>
+References: <1296206573-12521-1-git-send-email-sujak.marek@gmail.com>
+Subject: [PATCH v3] barebox: added recipe for barebox v 2010.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,76 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 08:16:02 -0000
-X-Groupsio-MsgNum: 28637
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-sqzgyjlQvG8qW3HGa8W6"
+X-List-Received-Date: Mon, 31 Jan 2011 08:39:20 -0000
 
---=-sqzgyjlQvG8qW3HGa8W6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Marek Sujak <sujak.marek@gmail.com>
+---
+ recipes/barebox/barebox_2010.10.bb |   17 +++++++++++++++++
+ 1 files changed, 17 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/barebox/barebox_2010.10.bb
 
-Dear Andreas,
-
-
-Am Montag, den 31.01.2011, 00:12 +0100 schrieb Andreas Mueller:
-> I don't understand what's going on. When building libgles-omap3 I get
->=20
-> [Superandi@localhost gumstix-oe]$ bitbake libgles-omap3
-
-[=E2=80=A6]
-
-> Parsing of 7118 .bb files complete (0 cached, 7118 parsed). 7430 targets,=
- 320 skipped, 2 masked, 0 errors.
-> ERROR: '['/home/Superandi/data/OpenEmbedded/gumstix-oe/recipes/powervr-dr=
-ivers/omap3-sgx-modules_1.4.14.2616.bb']' RDEPENDS/RRECOMMENDS or otherwise=
- requires the runtime entity 'kernel-2.6.32' but it wasn't found in any PAC=
-KAGE or RPROVIDES variables
-> ERROR: Required build target 'libgles-omap3' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['libgles-omap3', 'omap3-sgx=
--modules', 'kernel-2.6.32']
->=20
-> Build Configuration:
-> BB_VERSION        =3D "1.10.2"
-> METADATA_BRANCH   =3D "oe.org.openembedded.dev"
-> METADATA_REVISION =3D "aa479cd"
-> TARGET_ARCH       =3D "arm"
-> TARGET_OS         =3D "linux-gnueabi"
-> MACHINE           =3D "overo"
-> DISTRO            =3D "angstrom"
-> DISTRO_VERSION    =3D "2010.7-test-20110130"
-> TARGET_FPU        =3D "hard"
-
-[=E2=80=A6]
-
-> I don't find affecting changes which could have broken this. Any good ide=
-as?
-
-It looks like the same problem as in [1] and should be fixed by commit
-09d0669e [2].
+diff --git a/recipes/barebox/barebox_2010.10.bb b/recipes/barebox/barebox_2010.10.bb
+new file mode 100644
+index 0000000..40d4358
+--- /dev/null
++++ b/recipes/barebox/barebox_2010.10.bb
+@@ -0,0 +1,17 @@
++require barebox.inc
++
++PR = "r0"
++
++DEFAULT_PREFERENCE = "-1"
++
++BAREBOX_REVISION ?= "0"
++
++S = "${WORKDIR}/barebox-${PV}.${BAREBOX_REVISION}"
++
++SRC_URI = "\
++	http://barebox.org/download/barebox-${PV}.${BAREBOX_REVISION}.tar.bz2;name=barebox-${PV}.${BAREBOX_REVISION} \
++	file://defconfig \
++	"
++
++SRC_URI[barebox-2010.10.0.md5sum] = "60c208f86333430804d6e2ed40e4ff33"
++SRC_URI[barebox-2010.10.0.sha256sum] = "4ba3b6aa4cb0ad91dcf3c4f15951dc5f642ed86e5297bfd79d842cc1ad0b7841"
+-- 
+1.7.0.4
 
 
-Thanks,
 
-Paul
-
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/02=
-9355.html
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D09d0669=
-ed914e810bb8bd6ce9275b7a4125bc8a0
-
---=-sqzgyjlQvG8qW3HGa8W6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAk1Gb4AACgkQPX1aK2wOHVjSJACfXNh2pok2uCZ+SzDXoX0bOEml
-cmIAnjT72X60DD+olX8Yyugdu9a2b0Qj
-=8XaZ
------END PGP SIGNATURE-----
-
---=-sqzgyjlQvG8qW3HGa8W6--
