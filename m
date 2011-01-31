@@ -1,34 +1,32 @@
-Received: from smtprelay-b12.telenor.se ([62.127.194.21])
+Received: from smtprelay-h21.telenor.se ([195.54.99.196])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1Pk19R-0001q2-Co
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1Pk19X-0001q1-86
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 22:19:09 +0100
-Received: from ipb4.telenor.se (ipb4.telenor.se [195.54.127.167])
-	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 2FD32EB2B9
+	Mon, 31 Jan 2011 22:19:15 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-h21.telenor.se (Postfix) with ESMTP id 09E4FEB550
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 31 Jan 2011 22:18:13 +0100 (CET)
 X-SENDER-IP: [83.227.56.243]
 X-LISTENER: [smtp.bredband.net]
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Als8AJu1Rk1T4zjzPGdsb2JhbACWWI4gDAEBAQE1L7BrAY0ChU4EjCE
-X-IronPort-AV: E=Sophos;i="4.60,405,1291590000"; d="scan'208";a="1710715217"
+X-IronPort-Anti-Spam-Result: Ais3AGG1Rk1T4zjzPGdsb2JhbACIXpwaDAEBAQE1L71thU4EjCE
+X-IronPort-AV: E=Sophos;i="4.60,405,1291590000"; d="scan'208";a="169045825"
 Received: from c-f338e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	localhost) ([83.227.56.243])
-	by ipb4.telenor.se with ESMTP; 31 Jan 2011 22:18:13 +0100
+	by ipb2.telenor.se with ESMTP; 31 Jan 2011 22:18:13 +0100
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Jan 2011 22:18:07 +0100
-Message-Id: <1296508688-5770-7-git-send-email-ulf.samuelsson@atmel.com>
+Date: Mon, 31 Jan 2011 22:18:05 +0100
+Message-Id: <1296508688-5770-5-git-send-email-ulf.samuelsson@atmel.com>
 X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1296508688-5770-6-git-send-email-ulf.samuelsson@atmel.com>
+In-Reply-To: <1296508688-5770-4-git-send-email-ulf.samuelsson@atmel.com>
 References: <1296508688-5770-1-git-send-email-ulf.samuelsson@atmel.com>
 	<1296508688-5770-2-git-send-email-ulf.samuelsson@atmel.com>
 	<1296508688-5770-3-git-send-email-ulf.samuelsson@atmel.com>
 	<1296508688-5770-4-git-send-email-ulf.samuelsson@atmel.com>
-	<1296508688-5770-5-git-send-email-ulf.samuelsson@atmel.com>
-	<1296508688-5770-6-git-send-email-ulf.samuelsson@atmel.com>
 Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [PATCH v3 07/08] Add Wi-Fi support to at91
+Subject: [PATCH v3 05/08] Add SD-Card boot with environment support to u-boot-2009.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,54 +40,166 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 21:19:09 -0000
+X-List-Received-Date: Mon, 31 Jan 2011 21:19:15 -0000
 
-Add support for the EXTWIFI board, from H&D Wireless.
-http://www.hd-wireless.se/
 
 Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 ---
- recipes/owl-wifi/owl-wifi_1.0.4.bb |   31 +++++++++++++++++++++++++++++++
- 1 files changed, 31 insertions(+), 0 deletions(-)
- create mode 100644 recipes/owl-wifi/owl-wifi_1.0.4.bb
+ .../at91/0016-SupportEnv-load-from-SD-Card.patch   |  126 ++++++++++++++++++++
+ recipes/u-boot/u-boot_2009.11.bb                   |    3 +-
+ 2 files changed, 128 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/u-boot/u-boot-2009.11/at91/0016-SupportEnv-load-from-SD-Card.patch
 
-diff --git a/recipes/owl-wifi/owl-wifi_1.0.4.bb b/recipes/owl-wifi/owl-wifi_1.0.4.bb
+diff --git a/recipes/u-boot/u-boot-2009.11/at91/0016-SupportEnv-load-from-SD-Card.patch b/recipes/u-boot/u-boot-2009.11/at91/0016-SupportEnv-load-from-SD-Card.patch
 new file mode 100644
-index 0000000..5e31b82
+index 0000000..a5e9ddf
 --- /dev/null
-+++ b/recipes/owl-wifi/owl-wifi_1.0.4.bb
-@@ -0,0 +1,31 @@
-+DESCRIPTION = "Driver for HD Wireless Wi-Fi device"
-+HOMEPAGE = "http://www.hd-wireless.se"
-+PRIORITY = "optional"
-+SECTION = "kernel/modules"
-+LICENSE = "GPL"
-+PR = "r1"
-+RDEPENDS = "wireless-tools \
-+	 wpa-supplicant \
-+	 "
-+
-+SRC_URI = "http://www.hd-wireless.se/images/stories/public_pdf/owl-linux-arm-${PV}.tar.gz \
-+	"
-+
-+S = "${WORKDIR}/owl-linux-arm-${PV}"
-+
-+inherit module
-+
-+do_compile () {
-+        unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS CC LD CPP
-+        oe_runmake 'MODPATH=${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net' \
-+                   'KERNELDIR=${STAGING_KERNEL_DIR}' \
-+                   'KDIR=${STAGING_KERNEL_DIR}' \
-+                   'KERNEL_VERSION=${KERNEL_VERSION}' \
-+                   'CC=${KERNEL_CC}' \
-+                   'LD=${KERNEL_LD}'
-+}
-+
-+do_install() {
-+        install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net
-+        install -m 0644 ${S}/owl*${KERNEL_OBJECT_SUFFIX} ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net
-+}
++++ b/recipes/u-boot/u-boot-2009.11/at91/0016-SupportEnv-load-from-SD-Card.patch
+@@ -0,0 +1,126 @@
++diff -urN u-boot-2009.11/common/cmd_factory.c u-boot-2009.11-OK/common/cmd_factory.c
++--- u-boot-2009.11/common/cmd_factory.c	1970-01-01 01:00:00.000000000 +0100
+++++ u-boot-2009.11-OK/common/cmd_factory.c	2010-09-26 21:39:09.000000000 +0200
++@@ -0,0 +1,46 @@
+++/*
+++ * (C) Copyright 2010
+++ * Ulf Samuelsson <ulf.samuelsson@atmel.com>
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++#include <common.h>
+++#include <command.h>
+++#include <debug.h>
+++
+++#undef	DEBUG
+++#if	defined(DEBUG)
+++#define pr_debug(fmt, args...) 		printf(fmt, ##args)
+++#else
+++#define pr_debug(...) do { } while(0)
+++#endif
+++
+++extern set_default_env(void);
+++int do_factory (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
+++{
+++	set_default_env();	
+++	return 0;
+++}
+++
+++U_BOOT_CMD(
+++	factory, 1, 0, do_factory,
+++	"factory\t- set factory default environment\n",
+++	"\n"
+++);
++diff -urN u-boot-2009.11/common/Makefile u-boot-2009.11-OK/common/Makefile
++--- u-boot-2009.11/common/Makefile	2011-01-26 01:26:46.000000000 +0100
+++++ u-boot-2009.11-OK/common/Makefile	2010-09-26 21:27:30.000000000 +0200
++@@ -88,6 +88,7 @@
++ COBJS-$(CONFIG_CMD_EEPROM) += cmd_eeprom.o
++ COBJS-$(CONFIG_CMD_ELF) += cmd_elf.o
++ COBJS-$(CONFIG_CMD_EXT2) += cmd_ext2.o
+++COBJS-$(CONFIG_CMD_FACTORY) += cmd_factory.o
++ COBJS-$(CONFIG_CMD_FAT) += cmd_fat.o
++ COBJS-$(CONFIG_CMD_FDC)$(CONFIG_CMD_FDOS) += cmd_fdc.o
++ COBJS-$(CONFIG_OF_LIBFDT) += cmd_fdt.o fdt_support.o
++diff -urN u-boot-2009.11/include/configs/at91sam9m10g45ek.h u-boot-2009.11-OK/include/configs/at91sam9m10g45ek.h
++--- u-boot-2009.11/include/configs/at91sam9m10g45ek.h	2011-01-26 01:26:46.000000000 +0100
+++++ u-boot-2009.11-OK/include/configs/at91sam9m10g45ek.h	2011-01-15 23:18:18.000000000 +0100
++@@ -28,6 +28,7 @@
++ #define __CONFIG_H
++ #define	CONFIG_CMD_DEBUG	1
++ #define	CONFIG_SYS_ROOTFS_SD	1
+++#define	CONFIG_CMD_FACTORY	1
++ /* ARM asynchronous clock */
++ #define AT91_MAIN_CLOCK		12000000	/* from 12 MHz crystal */
++ #define CONFIG_SYS_HZ		1000
++@@ -105,6 +106,8 @@
++ #define CONFIG_CMD_FAT
++ #undef CONFIG_CMD_JFFS2
++ #define CONFIG_CMD_MMC
+++#define CONFIG_CMD_AUTOSCRIPT
+++
++ #define CONFIG_CMD_PING		1
++ #define CONFIG_CMD_DHCP		1
++ #define CONFIG_CMD_NAND		1
++@@ -219,9 +222,19 @@
++ #endif
++ 
++ #ifdef	CONFIG_SYS_ROOTFS_SD
++-#define CONFIG_BOOTCOMMAND	"mmc init; fatload mmc 1:1 0x72000000 uImage; bootm 0x72000000"
++-#define CONFIG_BOOTARGS		"console=ttyS0,115200 " \
++-				"root=/dev/mmcblk1p2 " \
+++#define CONFIG_EXTRA_ENV_SETTINGS	\
+++	"load_env=fatload mmc 0:1 0x70000000 u-boot.env ; source 0x70000000 \0"	\
+++	"load_kernel=fatload mmc 0:1 0x72000000 uimage\0"	\
+++	"at91sam9m10ekes=9cd\0"	\
+++	"at91sam9g45ekes=8a4\0"	\
+++	"at91sam9m10g45ek=726\0"	\
+++	"machid=726\0"
+++
+++
+++#define CONFIG_BOOTCOMMAND	"mmc init; run load_env ; run load_kernel ; bootm 0x72000000"
+++#define CONFIG_BOOTARGS		"mem=128M "	\
+++				"console=ttyS0,115200 " \
+++				"root=/dev/mmcblk0p2 " \
++ 				"rootdelay=2 "\
++ 				"rootfstype=rootfs rw"
++ #endif
++diff -urN u-boot-2009.11/Makefile u-boot-2009.11-OK/Makefile
++--- u-boot-2009.11/Makefile	2011-01-26 01:26:46.000000000 +0100
+++++ u-boot-2009.11-OK/Makefile	2010-09-26 21:46:35.000000000 +0200
++@@ -295,7 +295,7 @@
++ #########################################################################
++ 
++ # Always append ALL so that arch config.mk's can add custom ones
++-ALL += $(obj)u-boot.srec $(obj)u-boot.bin $(obj)System.map $(U_BOOT_NAND) $(U_BOOT_ONENAND)
+++ALL += $(obj)u-boot.srec $(obj)u-boot.bin $(obj)U-BOOT.BIN $(obj)System.map $(U_BOOT_NAND) $(U_BOOT_ONENAND)
++ 
++ all:		$(ALL)
++ 
++@@ -308,6 +308,9 @@
++ $(obj)u-boot.bin:	$(obj)u-boot
++ 		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
++ 
+++$(obj)U-BOOT.BIN:	$(obj)u-boot
+++		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+++
++ $(obj)u-boot.ldr:	$(obj)u-boot
++ 		$(obj)tools/envcrc --binary > $(obj)env-ldr.o
++ 		$(LDR) -T $(CONFIG_BFIN_CPU) -c $@ $< $(LDR_FLAGS)
+diff --git a/recipes/u-boot/u-boot_2009.11.bb b/recipes/u-boot/u-boot_2009.11.bb
+index 90a9089..05f82b5 100644
+--- a/recipes/u-boot/u-boot_2009.11.bb
++++ b/recipes/u-boot/u-boot_2009.11.bb
+@@ -1,4 +1,4 @@
+-PR = "r1"
++PR = "r2"
+ require u-boot.inc
+ 
+ DEFAULT_PREFERENCE = "-1"
+@@ -28,6 +28,7 @@ SRC_URI_append_at91 = "\
+ 	file://at91/0013-atmel_dataflash.c-Status-printout-depend-on-DEBUG.patch \
+ 	file://at91/0014-AT91-MCI-Add-support-for-SD-Card.patch \
+ 	file://at91/0015-sam9m10g45ek-Add-configuration-file.patch \
++	file://at91/0016-SupportEnv-load-from-SD-Card.patch \
+ 	"
+ 
+ SRC_URI_append_adb4000 = "\
 -- 
 1.6.3.3
 
