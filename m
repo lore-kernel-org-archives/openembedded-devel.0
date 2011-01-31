@@ -1,38 +1,31 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-iy0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sujak.marek@gmail.com>) id 1Pjq8r-0003l3-KS
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PjqIk-0003xz-EJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 10:33:49 +0100
-Received: by qwi2 with SMTP id 2so5082005qwi.6
+	Mon, 31 Jan 2011 10:44:02 +0100
+Received: by iyj18 with SMTP id 18so4867060iyj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jan 2011 01:32:55 -0800 (PST)
+	Mon, 31 Jan 2011 01:43:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=T/7xHMe6Ql/kz1kuv3SvaGEARCfrdBzm2dp/jnt3KE8=;
-	b=w4zjfmuuubrHopvoWAowYGgdoFpXo16PhNbIQTQDK8q16r6h6I5fdOwuwBmPMZL9UD
-	ruH9RsN9LSR1+J91EyO0kbhi3x7/qIW+Xua9Dou4EBTDQRDBwCwxfm02pqfqql3hpFZi
-	OzHQu3PJAMishYiFnkey8+bPdRt7Aftk0tQw4=
+	h=domainkey-signature:mime-version:date:message-id:subject:from:to
+	:content-type; bh=VV5vndGObTJ5a7PfOIQOn7ysG3C12EBIAb+7bnW3ihU=;
+	b=UfKZzz+XnQE/2nmyKJ0TZKeBbHX7gN0/OLgjzchuZ17oxfG31ISRttNAQgJD3aHcKx
+	Bu2PYpIGzY1OzXsXIr1p3ieL1TK8u3nxaOhreIDLr5+DsUgjEcabt3hTh9F7YHgbuhcq
+	p8mwDqHLq5ZeH5a/Q4kpRipWFemjjoZteYmwA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=R2GBUeMg/KDfPu7veJFJ/RGM9z8meep2NGjS78Sn993H2errj7WZ048cTEMDotCS3G
-	bSstfqhTPFUr8zxUHximj3Px3FuiASsLKj8Euj2W1qmUVgLwqzR1RG77VEUHjfFOm9ya
-	n7w/PUmU9k95N7yY2+jYuTMyrxvs3FTXa7xm0=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=WSfQV6KctBp7u0wrY9I/cqyhkWNvGjLem9Dq98eKPvQVOhYGTv2ftqv7xSFlq+PuXf
+	7bcLrf4qPxeBp7Sac8K4qQwSjzQE2Ex4BknBDBahNjnP90jObP5yfNRKd3/wPgp2FF76
+	18H9CUv667ql92bcTPLYPlU4wQvkUIodGRfeM=
 MIME-Version: 1.0
-Received: by 10.224.74.77 with SMTP id t13mr6144906qaj.217.1296466375629; Mon,
-	31 Jan 2011 01:32:55 -0800 (PST)
-Received: by 10.220.188.3 with HTTP; Mon, 31 Jan 2011 01:32:55 -0800 (PST)
-In-Reply-To: <ii0nkm$dpn$1@dough.gmane.org>
-References: <1296219611-14580-1-git-send-email-sujak.marek@gmail.com>
-	<AANLkTim0qsgQExvKhTQtPAyZz8cPos4osWFDDmxfEhjx@mail.gmail.com>
-	<ii0nkm$dpn$1@dough.gmane.org>
-Date: Mon, 31 Jan 2011 10:32:55 +0100
-Message-ID: <AANLkTinXNCdtGBOHyaHmAvEor+zSs+c+UrE4QJxHWe+x@mail.gmail.com>
-From: Marek Sujak <sujak.marek@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v2] VMX25: Add machine support for vmx25
+Received: by 10.231.19.201 with SMTP id c9mr6259637ibb.183.1296466988945; Mon,
+	31 Jan 2011 01:43:08 -0800 (PST)
+Received: by 10.231.36.68 with HTTP; Mon, 31 Jan 2011 01:43:08 -0800 (PST)
+Date: Mon, 31 Jan 2011 10:43:08 +0100
+Message-ID: <AANLkTindnAy_ujVZdrRCbKmwOSos-FJT_=cy5T+BVir+@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: binutils QA errors (RPATH)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,15 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 09:33:49 -0000
+X-List-Received-Date: Mon, 31 Jan 2011 09:44:02 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Thanks to all
+From my testing build (20110128)
 
-I tried to correct problematic line (PREFERRED_VERSION_linux = ...).
-If i understand it wrong please let me know.
-I have created and commit-ed new patch.
+NOTE: package binutils-2.21-r13.2: task do_package: Started
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/bin/embedspu
+NOTE: Multiple libraries (libbfd-2.21.so, libopcodes-2.21.so) found
+and LEAD_SONAME not defined
+ERROR: QA Issue with binutils: package binutils contains bad RPATH
+/home/hudson/jobs/OE_test/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
+in file /home/hudson/jobs/OE_test/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/binutils-2.21-r13.2/packages-split/binutils/usr/bin/powerpc-oe-linux-gnuspe-readelf
+ERROR: QA Issue with binutils: package binutils contains bad RPATH
+/home/hudson/jobs/OE_test/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
+in file /home/hudson/jobs/OE_test/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/binutils-2.21-r13.2/packages-split/binutils/usr/bin/powerpc-oe-linux-gnuspe-elfedit
+ERROR: QA Issue with binutils: package binutils contains bad RPATH
+/home/hudson/jobs/OE_test/workspace/tmp/sysroots/ppce500v2-oe-linux-gnuspe/usr/lib
+in file /home/hudson/jobs/OE_test/workspace/tmp/work/ppce500v2-oe-linux-gnuspe/binutils-2.21-r13.2/packages-split/binutils/usr/lib/libbfd-2.21.so
 
-Best regards
-Marek
+Frans
+
 
