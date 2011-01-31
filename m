@@ -1,26 +1,27 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
+Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <thebohemian@gmx.net>) id 1PjwMO-0005Ur-Jz
+	(envelope-from <wohauser@gmx.de>) id 1PjwXQ-0005lH-6N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Jan 2011 17:12:12 +0100
-Received: (qmail invoked by alias); 31 Jan 2011 16:11:18 -0000
-Received: from 95.176.73-86.rev.gaoland.net (EHLO [192.168.1.72])
-	[86.73.176.95]
-	by mail.gmx.net (mp030) with SMTP; 31 Jan 2011 17:11:18 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+N2+hIvdWNS+gJtPrUM1EihMlr1edxFeGTVjVMtA
-	DND0k4WcUcp1mK
-Message-ID: <4D46DF20.3050509@gmx.net>
-Date: Mon, 31 Jan 2011 17:11:12 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	Mon, 31 Jan 2011 17:23:37 +0100
+Received: (qmail invoked by alias); 31 Jan 2011 16:22:35 -0000
+Received: from p549CCC6F.dip.t-dialin.net (EHLO [192.168.3.102])
+	[84.156.204.111]
+	by mail.gmx.net (mp045) with SMTP; 31 Jan 2011 17:22:35 +0100
+X-Authenticated: #656260
+X-Provags-ID: V01U2FsdGVkX18R4MhfZuARGJk/GCASObAYjrPz90aOlp605gj4R/
+	WjP1uxYBmTzgtG
+Message-ID: <4D46E1C6.8030309@gmx.de>
+Date: Mon, 31 Jan 2011 17:22:30 +0100
+From: Wolfgang Hauser <wohauser@gmx.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; de-AT;
+	rv:1.9.1.16) Gecko/20101123 SeaMonkey/2.0.11
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-members@lists.openembedded.org
-X-Enigmail-Version: 1.1.2
+To: openembedded-devel@lists.openembedded.org
+References: <4D46CADB.9010003@gmx.de> <ii6ipn$13o$1@dough.gmane.org>
+In-Reply-To: <ii6ipn$13o$1@dough.gmane.org>
+X-Enigmail-Version: 1.0.1
 X-Y-GMX-Trusted: 0
-Subject: OE@FOSDEM - Call for help
+Subject: Re: libgles-omap3 which kernel could be used for omap3 ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,53 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 16:12:13 -0000
-X-Groupsio-MsgNum: 28657
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig98E3F8E5EB43F84E819C7D55"
+X-List-Received-Date: Mon, 31 Jan 2011 16:23:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---------------enig98E3F8E5EB43F84E819C7D55
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+We need the powervr drivers for a mistral omap3evm board to be able to
+use qt4-embedded-gles_4.6.2 or 4.6.3 with the latest compatible kernel
+version.
 
-Hi,
-I'm currently drowning with work at work and at the same time I am
-worried about the little progress with our FOSDEM stand organization. I
-set up this Wiki[0] page a while a go, so that it should be easy to
-organize things independently (e.g. people just add their information
-and communication overhead stays low).
+currently we use
 
-Will there really be only *5* OE people at FOSDEM and 3 for the booth?
-And just one device to show? (I most likely won't find the time to set
-up my Pandaboard).
+omap3evm
+angstrom (2008)
 
-Nobody has [the] flyers?
+libgles-omap3_3.01.00.06.bb
+omap3-sgx-modules_1.4.14.2616.bb
+ti-cgt6x_6.1.9.bb
+linux-omap-psp_2.6.32.bb
 
-The sheet from last years went missing?
+What kernel the newest powervr drivers (and the according development
+tools) depend on ?
 
-Poster[s]?
+Regards
+Wolfgang
 
-Hayulp!
+Koen Kooi schrieb:
+> On 31-01-11 15:44, Wolfgang Hauser wrote:
+>> Hello, is the ti stuff
+> 
+> Which ti 'stuff'?
+> 
+>> working on the newest kernel version ?
+> 
+> Which kernel? Which tree? Which machine? Which recipe? Which allocator
+> in the defconfig?
+> 
+>> Or is it still pinned to linux-omap3-psp_2.6.32 ?
+> 
+> Where do you see it being pinned?
 
-Regards,
-Robert
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-[0] - http://wiki.openembedded.org/index.php/Fosdem_2011
 
 
---------------enig98E3F8E5EB43F84E819C7D55
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAk1G3yQACgkQG9cfwmwwEtqEnQCcDZmt+Xra4FmbAushL9xtPO5J
-4YAAn0BDL+gwWx3APbi67JI8ULJXl54N
-=GYxs
------END PGP SIGNATURE-----
-
---------------enig98E3F8E5EB43F84E819C7D55--
