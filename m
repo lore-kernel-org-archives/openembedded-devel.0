@@ -1,27 +1,33 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rpurdie@rpsys.net>)
-	id 1PjuTh-00064Z-FP; Mon, 31 Jan 2011 15:11:37 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p0VEAfR3009832;
-	Mon, 31 Jan 2011 14:10:41 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 09730-02; Mon, 31 Jan 2011 14:10:37 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p0VEAZis009826
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Mon, 31 Jan 2011 14:10:36 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Mon, 31 Jan 2011 14:10:34 +0000
-Message-ID: <1296483034.13501.13046.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: openembedded-members <openembedded-members@lists.openembedded.org>
-Subject: OE TSC
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <Tom_Rini@mentor.com>) id 1PjunQ-0006R9-2K
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Jan 2011 15:32:00 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1PjumW-0004oA-W3 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Jan 2011 06:31:05 -0800
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 31 Jan 2011 06:31:04 -0800
+Received: from [172.30.80.99] ([172.30.80.99]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 31 Jan 2011 07:31:03 -0700
+Message-ID: <4D46C79D.7040501@mentor.com>
+Date: Mon, 31 Jan 2011 07:30:53 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1296240753-10120-1-git-send-email-tom_rini@mentor.com>	<1296240753-10120-3-git-send-email-tom_rini@mentor.com>
+	<lyy661s67b.fsf@ensc-virt.intern.sigma-chemnitz.de>
+In-Reply-To: <lyy661s67b.fsf@ensc-virt.intern.sigma-chemnitz.de>
+X-OriginalArrivalTime: 31 Jan 2011 14:31:03.0870 (UTC)
+	FILETIME=[7D4AEDE0:01CBC153]
+Subject: Re: [PATCH 2/5] perl-native: Switch to userelocatableinc and not shared libperl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,77 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jan 2011 14:11:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 31 Jan 2011 14:32:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-The TSC has considered its position and is saddened to agree that it has
-not been doing well at helping OpenEmbedded in the ways it would like
-over recent months. There is no one root cause of this, just that its
-members have all been pulled in different directions and several people
-have not had the time to spend on OE to do justice to their TSC role.
+On 01/31/2011 03:44 AM, Enrico Scholz wrote:
+> Tom Rini<tom_rini@mentor.com>  writes:
+>
+>> -	for PERLSCRIPT in `grep -rIl ${bindir}/perl ${D}${bindir}`; do
+>> -		sed -i -e 's|^#!${bindir}/perl|#!/usr/bin/env perl|' $PERLSCRIPT
+>> +	for PERLSCRIPT in `grep -rIEl '#!.*/perl' ${D}${bindir}`; do
+>> +		sed -i -e '1s|^#!.*|#!/usr/bin/env perl|' $PERLSCRIPT
+>
+> This will break shebang lines with interpreter options (e.g.
+> '#! /usr/bin/perl -T'):
+>
+> | $ echo '#! /usr/bin/env perl -T'>  /tmp/x.pl
+> | $ chmod +x /tmp/x.pl
+> | $ /tmp/x.pl
+> | /usr/bin/env: perl -T: No such file or directory
 
-As such it is with regret that Chris, Holger, Mickey and Phil have
-decided to stand down from the TSC. Each person has their reasons they
-may or may not decide to share but they're all different and they are
-primarily personal ones. The TSC would like to make it clear these are
-not any reflection on OE, any of the decisions being discussed by OE
-such as Yocto or any personality issues. The people standing down do
-wish to continue being involved with the project but have simply come to
-realise they do not have the time to be able to help the TSC function
-particularly now when its needed more than ever.
+Which is why we change it to just /usr/bin/env perl.  Given how we use 
+these programs, it's not a problem to drop -w/W/t/T IMHO.
 
-Richard is not standing down as whilst he also has time constraints, he
-feels he has a contribution to make to the TSC and can and will make
-time available to do this. This also allows for some continuity for the
-TSC which is important, not least to try and learn from past experience.
-
-On this subject the TSC would like to comment on the reasons they feel
-things have failed other than a lack of time of its members to work on
-issues as mentioned above. There are varying viewpoints on this but we
-all agree the two strong themes were process (lack of) and also the type
-of people on the TSC.
-
-Process issues:
-
-* Lack of a formal agenda process being enacted and followed. This lead 
-  to lack of preparation by TSC members for meetings
-* Meetings once per month may be been too in frequent and a short once 
-  per week meeting might have been more effective.
-* Lack of minute taking and general process skills in the TSC members 
-  (or lack of time for it)
-* The TSC never did define a formal interaction process between it and 
-  the community.
-
-Membership issues:
-
-* TSC members ended up not actively involved in the project on a day to 
-  day basis.
-* This lead to a lack of desire for active change
-* Large fraction of "old-timer" members. These people are valuable but 
-  the TSC was unbalanced in that regard and this may have stifled 
-  change.
-
-The TSC doesn't select its own membership so we feel it important to
-reflect some of the membership concerns to the OE membership and the
-board as its these people who elect the TSC.
-
-There are various issues needing attention ASAP and therefore the TSC
-would like to propose that we call for candidates and that the board
-then empower an interim TSC based on the result of that call without
-waiting for a vote. If there are more candidates than seats it will go
-to a vote, if we don't get enough, some current TSC members may consider
-assisting the TSC until there are replacement candidates, ultimately
-this issue is at the board's discretion.
-
-Individual TSC members are going to be free to provide more information
-to this summary as they feel appropriate.
-
-The TSC is not self electing so we're going to hand this issue over to
-the board at this point to determine the way forward.
-
---
-The OE TSC
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
