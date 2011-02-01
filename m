@@ -1,32 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Tom_Rini@mentor.com>) id 1PkI6B-0004k0-2H
+Received: from 29.mail-out.ovh.net ([87.98.216.213])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1PkIKA-0004zm-I7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Feb 2011 16:24:55 +0100
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1PkI5H-0002VP-Tg from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Feb 2011 07:23:59 -0800
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	svr-orw-fem-01.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 1 Feb 2011 07:23:59 -0800
-Received: from [172.30.80.88] ([172.30.80.88]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 1 Feb 2011 08:23:58 -0700
-Message-ID: <4D48258D.7050302@mentor.com>
-Date: Tue, 01 Feb 2011 08:23:57 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
+	Tue, 01 Feb 2011 16:39:22 +0100
+Received: (qmail 7384 invoked by uid 503); 1 Feb 2011 15:56:50 -0000
+Received: from b6.ovh.net (HELO mail96.ha.ovh.net) (213.186.33.56)
+	by 29.mail-out.ovh.net with SMTP; 1 Feb 2011 15:56:50 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 1 Feb 2011 17:38:29 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 1 Feb 2011 17:38:27 +0200
+Message-ID: <4D4828F2.6080406@eukrea.com>
+Date: Tue, 01 Feb 2011 16:38:26 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b3pre Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1296483034.13501.13046.camel@rex> <ii96l0$tm$1@dough.gmane.org>
-In-Reply-To: <ii96l0$tm$1@dough.gmane.org>
-X-OriginalArrivalTime: 01 Feb 2011 15:23:58.0886 (UTC)
-	FILETIME=[0C29AC60:01CBC224]
-Subject: Re: OE TSC
+References: <1296550862-29994-1-git-send-email-sujak.marek@gmail.com>
+In-Reply-To: <1296550862-29994-1-git-send-email-sujak.marek@gmail.com>
+X-Ovh-Tracer-Id: 2950702182339161417
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Subject: Re: [PATCH v5] barebox: add patch for vmx25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,36 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2011 15:24:55 -0000
+X-List-Received-Date: Tue, 01 Feb 2011 15:39:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/01/2011 07:51 AM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 31-01-11 15:10, Richard Purdie wrote:
->
->> There are various issues needing attention ASAP and therefore the TSC
->> would like to propose that we call for candidates and that the board
->> then empower an interim TSC based on the result of that call without
->> waiting for a vote.
->
-> Since I'll be travelling the rest of the week and will likely be offline
-> when the actual call comes from the board:
->
-> I would like to stand as candidate for that interim TSC.
->
-> Earlier Khem and Tom Rini expressed interest in standing as candidate as
-> well, but I can't say if that is still the case. Please speak up if it is :)
->
-> It would be nice to have someone with an interest in the releases as
-> well, e.g. Stefan Schmidt.
+Hi Marek,
 
-Yes, I would still like to stand for this.
+On 01/02/2011 10:01, Marek Sujak wrote:
+> * memory timing, custom init scripts, mach id's
+> * default config file
+> * tested with angstrom 2010.x eglibc compiler
+>
+> Signed-off-by: Marek Sujak<sujak.marek@gmail.com>
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+ok I missed this one and it's now pushed.
+Btw, I don't know why but this patch (and some of the previous ones) didn't 
+appear into patchwork which makes sorting and applying them more complicated.
+
+Eric
 
 
