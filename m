@@ -1,36 +1,29 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1PkJLI-000525-0h
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <rpurdie@rpsys.net>) id 1PkJTn-0005ML-Qq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Feb 2011 17:44:36 +0100
-Received: by iwn8 with SMTP id 8so6893788iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Feb 2011 08:43:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=Pr0lVpvuMPQ+dQKrOXg38rfXXy67RGOeq0LhnK7qyfM=;
-	b=xKX6pOW6cSxOWhK0aiF6Q4Cp1zdSM1ER5yY3FFmjOUJEmkdgz245VphyBLdftlZYGY
-	vQUBlIXTDqBvdFjRMZXOsDLC/2/rurOaYJWL8hTF1eF6CGReOwuZgvHM1/WFw4QY3r8M
-	MF1X4j3LYpQfl0YnegcUoX0N2h/fJ+zT4Xj4U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ljvrRW9M6rYEfnLfWPVbxQktFBLLef3D2JMDEMLCA+Xi2KixZRaBQkmPMkmZdyZRag
-	imfakpU2/8W5DRjk1Hq13QG9dErWjs9Mx5IlVciR25PYMt5j8dhNE4LoX+60pkCiyXbw
-	s9iJG11bMTcYRBBnDClvjsQz7ESzaN41Nhp3c=
-MIME-Version: 1.0
-Received: by 10.231.37.12 with SMTP id v12mr8546004ibd.83.1296578616411; Tue,
-	01 Feb 2011 08:43:36 -0800 (PST)
-Received: by 10.231.36.68 with HTTP; Tue, 1 Feb 2011 08:43:36 -0800 (PST)
-In-Reply-To: <AANLkTikaogwbHhYiG3rGJ2z17SAyEO3zYCMpsujU2tmf@mail.gmail.com>
-References: <1296483034.13501.13046.camel@rex> <ii96l0$tm$1@dough.gmane.org>
-	<4D48258D.7050302@mentor.com>
-	<AANLkTikaogwbHhYiG3rGJ2z17SAyEO3zYCMpsujU2tmf@mail.gmail.com>
-Date: Tue, 1 Feb 2011 17:43:36 +0100
-Message-ID: <AANLkTinmEV8NVzz0fxP+sK+Ji6bUO2E-sV9noOcxsdwM@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 01 Feb 2011 17:53:23 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p11GqSah027432;
+	Tue, 1 Feb 2011 16:52:28 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 27007-08; Tue,  1 Feb 2011 16:52:24 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p11GqINB027426
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 1 Feb 2011 16:52:19 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ii96l0$tm$1@dough.gmane.org>
+References: <1296483034.13501.13046.camel@rex> <ii96l0$tm$1@dough.gmane.org>
+Date: Tue, 01 Feb 2011 16:52:13 +0000
+Message-ID: <1296579133.13501.19996.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Cc: Mark Hatle <mark.hatle@windriver.com>
 Subject: Re: OE TSC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,54 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2011 16:44:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 01 Feb 2011 16:53:24 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2011/2/1 Khem Raj <raj.khem@gmail.com>:
-> On Tue, Feb 1, 2011 at 7:23 AM, Tom Rini <tom_rini@mentor.com> wrote:
->> On 02/01/2011 07:51 AM, Koen Kooi wrote:
->>>
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
->>>
->>> On 31-01-11 15:10, Richard Purdie wrote:
->>>
->>>> There are various issues needing attention ASAP and therefore the TSC
->>>> would like to propose that we call for candidates and that the board
->>>> then empower an interim TSC based on the result of that call without
->>>> waiting for a vote.
->>>
->>> Since I'll be travelling the rest of the week and will likely be offline
->>> when the actual call comes from the board:
->>>> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+On Tue, 2011-02-01 at 15:51 +0100, Koen Kooi wrote:
+> On 31-01-11 15:10, Richard Purdie wrote:
+> 
+> > There are various issues needing attention ASAP and therefore the TSC
+> > would like to propose that we call for candidates and that the board
+> > then empower an interim TSC based on the result of that call without
+> > waiting for a vote.
+> 
+> Since I'll be travelling the rest of the week and will likely be offline
+> when the actual call comes from the board:
+> 
+> I would like to stand as candidate for that interim TSC.
+> 
+> Earlier Khem and Tom Rini expressed interest in standing as candidate as
+> well, but I can't say if that is still the case. Please speak up if it is :)
+> 
+> It would be nice to have someone with an interest in the releases as
+> well, e.g. Stefan Schmidt.
 
+So just for completeness I've also wondered whether anyone from the
+Yocto world would be welcome on the TSC, in particular I think Mark
+Hatle might have a lot to offer.
 
->>> I would like to stand as candidate for that interim TSC.
->>>
->>> Earlier Khem and Tom Rini expressed interest in standing as candidate as
->>> well, but I can't say if that is still the case. Please speak up if it is
->>> :)
->>>
->>> It would be nice to have someone with an interest in the releases as
->>> well, e.g. Stefan Schmidt.
->>
->> Yes, I would still like to stand for this.
->>
->
->
-> Me too.
->
->
-> -Khem
->
+I appreciate he isn't know much in the OE world but he has a strong
+background in embedded Linux (works for Wind River) and is a strong
+participant in the Yocto community. Some OE people met him in Cambridge
+since he was at OEDEM.
 
-I think the call for candidates should be on the members list, and the
-voting also should be done by the members.
+Cheers,
 
-Frans
+Richard
+
 
 
