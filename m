@@ -1,31 +1,23 @@
-Received: from mail.windriver.com ([147.11.1.11])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1PkLVn-0008C4-6s
+Received: from mailout-de.gmx.net ([213.165.64.22])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <schnitzeltony@gmx.de>) id 1PkLZC-0008Hf-Sb
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Feb 2011 20:03:40 +0100
-Received: from ALA-MAIL03.corp.ad.wrs.com (ala-mail03 [147.11.57.144])
-	by mail.windriver.com (8.14.3/8.14.3) with ESMTP id p11J2cEI008209;
-	Tue, 1 Feb 2011 11:02:38 -0800 (PST)
-Received: from ala-mail06.corp.ad.wrs.com ([147.11.57.147]) by
-	ALA-MAIL03.corp.ad.wrs.com with Microsoft SMTPSVC(6.0.3790.1830); 
-	Tue, 1 Feb 2011 11:02:38 -0800
-Received: from Macintosh-5.local ([172.25.36.227]) by
-	ala-mail06.corp.ad.wrs.com with Microsoft SMTPSVC(6.0.3790.1830); 
-	Tue, 1 Feb 2011 11:02:37 -0800
-Message-ID: <4D4858CC.4060808@windriver.com>
-Date: Tue, 01 Feb 2011 13:02:36 -0600
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
-MIME-Version: 1.0
+	Tue, 01 Feb 2011 20:07:06 +0100
+Received: (qmail invoked by alias); 01 Feb 2011 19:06:08 -0000
+Received: from p4FE0FFDF.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.224.255.223]
+	by mail.gmx.net (mp036) with SMTP; 01 Feb 2011 20:06:08 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18dzN5N/wUdMM4CQqiz0TnxusBhtu8h4jV0gLocb5
+	n47BGufwz2Wmiu
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1296483034.13501.13046.camel@rex> <ii96l0$tm$1@dough.gmane.org>
-	<1296579133.13501.19996.camel@rex>
-In-Reply-To: <1296579133.13501.19996.camel@rex>
-X-OriginalArrivalTime: 01 Feb 2011 19:02:38.0010 (UTC)
-	FILETIME=[97C521A0:01CBC242]
-Subject: Re: OE TSC
+Date: Tue, 1 Feb 2011 20:02:49 +0100
+User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201102012002.49849.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: latest clutter-recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,72 +31,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2011 19:03:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 01 Feb 2011 19:07:07 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 2/1/11 10:52 AM, Richard Purdie wrote:
-> On Tue, 2011-02-01 at 15:51 +0100, Koen Kooi wrote:
->> On 31-01-11 15:10, Richard Purdie wrote:
->>
->>> There are various issues needing attention ASAP and therefore the TSC
->>> would like to propose that we call for candidates and that the board
->>> then empower an interim TSC based on the result of that call without
->>> waiting for a vote.
->>
->> Since I'll be travelling the rest of the week and will likely be offline
->> when the actual call comes from the board:
->>
->> I would like to stand as candidate for that interim TSC.
->>
->> Earlier Khem and Tom Rini expressed interest in standing as candidate as
->> well, but I can't say if that is still the case. Please speak up if it is :)
->>
->> It would be nice to have someone with an interest in the releases as
->> well, e.g. Stefan Schmidt.
-> 
-> So just for completeness I've also wondered whether anyone from the
-> Yocto world would be welcome on the TSC, in particular I think Mark
-> Hatle might have a lot to offer.
-> 
-> I appreciate he isn't know much in the OE world but he has a strong
-> background in embedded Linux (works for Wind River) and is a strong
-> participant in the Yocto community. Some OE people met him in Cambridge
-> since he was at OEDEM.
+Hi
 
-As Richard mentioned, I'm likely not well known within the OE community.
-However, I am willing to serve on the TSC and bring my experience in embedded
-Linux with me.  I've worked with both Khem and Tom both in an Open Source
-capacity as well as professionally in the past.
+it surprised me to see that Koen committed a new recipe for clutter 1.4.2. As you might know I was also working on this and sent some pre-release version here of this (1). What makes me not running in happy mode:
 
-As a quick bio, let me share my background.
+- Many of my previous patches were rejected first because of some commit message. Here we read 'clutter: add 1.4.2' - cool. Which tests were performed?
 
-Back in around 1997 I started working on MkLinux (Mach Microkernel based Linux)
-on the old Power Macs.  I was one of the first people (maybe the first?) to
-integrate a full 'modern' Linux distribution on a PowerPC based machine.  This
-eventually lead to MkLinux, LinuxPPC and even early Yellow Dog Linux releases..
+- the recipe breaks clutter-gst:
+| checking for CLUTTER_GST... configure: error: Package requirements (clutter-1.0 < 1.3.0 gio-2.0) were not met:
+| 
+| Requested 'clutter-1.0 < 1.3.0' but version of Clutter is 1.4.2
+I prepared clutter-gst 1.3.4 but I am tired preparing commit messages..
 
-Since 2000 I've been working on embedded Linux projects.  In 2000 I was hired as
-an engineer with MontaVista Software.  My responsibilities covered everything
-from build systems, to toolchains, to userspace integration...
+- the recipe breaks clutter-gtk :
+| NOTE: make -j 4
+| make  all-recursive
+| make[1]: Entering directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8'
+| Making all in build
+| make[2]: Entering directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8/build'
+| Making all in autotools
+| make[3]: Entering directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8/build/autotools'
+| make[3]: Nothing to be done for `all'.
+| make[3]: Leaving directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8/build/autotools'
+| make[3]: Entering directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8/build'
+| make[3]: Nothing to be done for `all-am'.
+| make[3]: Leaving directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8/build'
+| make[2]: Leaving directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8/build'
+| Making all in clutter-gtk
+| make[2]: Entering directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8/clutter-gtk'
+|   CC     libclutter_gtk_0.10_la-gtk-clutter-embed.lo
+|   CC     libclutter_gtk_0.10_la-gtk-clutter-scrollable.lo
+|   CC     libclutter_gtk_0.10_la-gtk-clutter-viewport.lo
+|   CC     libclutter_gtk_0.10_la-gtk-clutter-util.lo
+|   CC     libclutter_gtk_0.10_la-gtk-clutter-zoomable.lo
+|   CCLD   libclutter-gtk-0.10.la
+| /home/Superandi/tmp/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: cannot find -lclutter-egl-1.0
+Let's hope gtk_0.12 will help...
 
-In 2005 I moved to my present employer, Wind River, and repeated many of my
-previous assignments.. build systems, toolchains, package management and
-userspace integration.
+- What exactly is the goal of 'test-conformance-fix.patch' (to get the build working there less cluttering solutions are possible e.g.  sed'ing out BUILIT_SOURCES in Makefile.am)? From my point of view it creates a lot of unusable scripts in the sub folder 'wrapper' and the file 'unit-tests'. Nothing created by this is packed.
 
-Since 2008, I've been involved with the GENIVI automotive organization.  I
-helped in the early days determine open source strategies, as well as was the
-chair for the System Infrastructure working group.
 
-Since 2010, I've been involved with the Yocto project since the beginning.  This
-was my first experience with an OE style build environment, but the general
-every day work, toolchains, userspace integration, package management are all
-the same problems as I've encountered numerous times in the past.
+Please don't tell me I am invited to change this situation:  Many patches send by non-commit guys are nit-picked at least for commit message - and then I read 'clutter: add 1.4.2' for a recipe breaking lots of others.
 
-I hope this gives a quick background of my qualifications.  If anyone has any
-questions, I'll be happy to answer them.
+Sorry for this, but to me the this should have been a hobby for having fun - but at the moment it's far from
 
-Thanks,
---Mark
+Andreas
+
+(1) http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/029260.html
 
 
