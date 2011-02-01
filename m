@@ -1,31 +1,36 @@
-Received: from 29.mail-out.ovh.net ([87.98.216.213])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PkIKA-0004zm-I7
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <raj.khem@gmail.com>) id 1PkIvX-00045E-VM
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Feb 2011 16:39:22 +0100
-Received: (qmail 7384 invoked by uid 503); 1 Feb 2011 15:56:50 -0000
-Received: from b6.ovh.net (HELO mail96.ha.ovh.net) (213.186.33.56)
-	by 29.mail-out.ovh.net with SMTP; 1 Feb 2011 15:56:50 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 1 Feb 2011 17:38:29 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 1 Feb 2011 17:38:27 +0200
-Message-ID: <4D4828F2.6080406@eukrea.com>
-Date: Tue, 01 Feb 2011 16:38:26 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Tue, 01 Feb 2011 17:18:00 +0100
+Received: by gwaa12 with SMTP id a12so2594321gwa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Feb 2011 08:17:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=gvpJQeaqQBdxTSCTSyeJ7TYN8DsiwmYTxeh3nLf6ZyY=;
+	b=pMGdstrNLs6ztGcyHU3W/WFszLDjHKec+2JFoN89O+vQYayRJGVeACGzlTqMUHv546
+	8VM9m0DzpwwkI4VGjFUYh3+r5PTpNLhlCxhVV+tSKLAXZexbkntX0eydK2YGSmnpO7e4
+	paNmiRVDGHgnmg2CbM/qR/KbpYeX9tAJf3l4k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=JrMuTS8c/Fc6G28AFKfKnUVo4h8SbHB9HRfT+bKxyQUjXHSQBGT7sWRSUQ9ksSkb5E
+	Ka2c/X5Z+GESn4Zy+obu2CvJa3DS0khBg3mx64V2e5jSpQ90jG/yg99wMeEiAADF0dLv
+	3r4/cz8JiUzqWTMv+0a9S6vfpFu+5tOqIsaYQ=
+Received: by 10.91.20.2 with SMTP id x2mr1618322agi.196.1296577023934; Tue, 01
+	Feb 2011 08:17:03 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.90.32.12 with HTTP; Tue, 1 Feb 2011 08:16:39 -0800 (PST)
+In-Reply-To: <4D48258D.7050302@mentor.com>
+References: <1296483034.13501.13046.camel@rex> <ii96l0$tm$1@dough.gmane.org>
+	<4D48258D.7050302@mentor.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 1 Feb 2011 08:16:39 -0800
+Message-ID: <AANLkTikaogwbHhYiG3rGJ2z17SAyEO3zYCMpsujU2tmf@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1296550862-29994-1-git-send-email-sujak.marek@gmail.com>
-In-Reply-To: <1296550862-29994-1-git-send-email-sujak.marek@gmail.com>
-X-Ovh-Tracer-Id: 2950702182339161417
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH v5] barebox: add patch for vmx25
+Subject: Re: OE TSC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2011 15:39:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 Feb 2011 16:18:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Marek,
-
-On 01/02/2011 10:01, Marek Sujak wrote:
-> * memory timing, custom init scripts, mach id's
-> * default config file
-> * tested with angstrom 2010.x eglibc compiler
+On Tue, Feb 1, 2011 at 7:23 AM, Tom Rini <tom_rini@mentor.com> wrote:
+> On 02/01/2011 07:51 AM, Koen Kooi wrote:
+>>
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 31-01-11 15:10, Richard Purdie wrote:
+>>
+>>> There are various issues needing attention ASAP and therefore the TSC
+>>> would like to propose that we call for candidates and that the board
+>>> then empower an interim TSC based on the result of that call without
+>>> waiting for a vote.
+>>
+>> Since I'll be travelling the rest of the week and will likely be offline
+>> when the actual call comes from the board:
+>>
+>> I would like to stand as candidate for that interim TSC.
+>>
+>> Earlier Khem and Tom Rini expressed interest in standing as candidate as
+>> well, but I can't say if that is still the case. Please speak up if it is
+>> :)
+>>
+>> It would be nice to have someone with an interest in the releases as
+>> well, e.g. Stefan Schmidt.
 >
-> Signed-off-by: Marek Sujak<sujak.marek@gmail.com>
+> Yes, I would still like to stand for this.
+>
 
-ok I missed this one and it's now pushed.
-Btw, I don't know why but this patch (and some of the previous ones) didn't 
-appear into patchwork which makes sorting and applying them more complicated.
 
-Eric
+Me too.
+
+
+-Khem
 
 
