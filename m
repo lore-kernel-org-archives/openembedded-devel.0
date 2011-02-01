@@ -1,32 +1,27 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1PkAkB-000884-1F
+Received: from stoexhubfe02.domain01.net ([83.145.59.141])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <anders@chargestorm.se>) id 1PkApv-0008HA-67
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Feb 2011 08:33:43 +0100
-Received: (qmail 21438 invoked by uid 503); 1 Feb 2011 08:13:39 -0000
-Received: from b9.ovh.net (HELO mail607.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 1 Feb 2011 08:13:38 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 1 Feb 2011 09:32:50 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 1 Feb 2011 09:32:49 +0200
-Message-ID: <4D47B720.90008@eukrea.com>
-Date: Tue, 01 Feb 2011 08:32:48 +0100
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
-	Lightning/1.0b3pre Thunderbird/3.1.7
+	Tue, 01 Feb 2011 08:39:39 +0100
+Received: from localhost (85.231.30.134) by stoexhubfe02.domain01.net
+	(10.12.10.7) with Microsoft SMTP Server id 8.3.106.1; Tue, 1 Feb 2011
+	08:37:37 +0100
+Date: Tue, 1 Feb 2011 08:37:36 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20110201073736.GA2981@chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1296506034-4615-1-git-send-email-ulf.samuelsson@atmel.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1296220046-14636-1-git-send-email-sujak.marek@gmail.com>	<20110129140758.GM2466@ibawizard.net>	<AANLkTikMy0Hw9Yi3B1fHoDbF5jq_J8DaS3vPT+bGs=6h@mail.gmail.com>	<20110131212130.GB10042@ibawizard.net>
-	<AANLkTi=b8QHFgH9Bp4gEBa=rrJt9hQpaxKqdtHa7iAdt@mail.gmail.com>
-In-Reply-To: <AANLkTi=b8QHFgH9Bp4gEBa=rrJt9hQpaxKqdtHa7iAdt@mail.gmail.com>
-X-Ovh-Tracer-Id: 13195828385133276489
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: Re: [PATCH v2] barebox: added recipe for barebox v 2010.10
+In-Reply-To: <1296506034-4615-1-git-send-email-ulf.samuelsson@atmel.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-GFI-SMTP-Submission: 1
+Subject: Re: [PATCH] Add support for u-boot-2010.12 & multiple binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2011 07:33:43 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 Feb 2011 07:39:39 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Hi,
+Hi, 
 
-On 01/02/2011 07:38, Marek Sujak wrote:
->> Yes i did that, i forgot to merge machine support patches. And after first
-> commit it was to late for me to fix it.
->   At least "[Patch v3] barebox: added recipe for barebox v 2010.10" should be
-> ok.
-> Just machine support are divided to (1=patches + 2=recipe update)
-> [PATCH v3] barebox: patches for barebox 2010.10 to support vmx25
-> [PATCH v3] barebox: update barebox 2010.10 to support vmx25
->
-> It is partially acceptable or should i rework it again?
->
-I pushed your patches yesterday :
-http://cgit.openembedded.net/cgit.cgi/openembedded/log/
+Just something that I found while taking a quick glance at your patches.
 
-Eric
+* Ulf Samuelsson <ulf.samuelsson@atmel.com> [110131 21:40]:
+>  recipes/libgpod/libimobiledevice_1.0.0.bb          |    2 +-
+>  recipes/python/python.inc                          |    1 +
+
+I assume these are modified by mistake?
+
+Regards,
+Anders
+
+-- 
+Anders Darander
+ChargeStorm AB
 
 
