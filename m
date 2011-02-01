@@ -1,29 +1,24 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rpurdie@rpsys.net>) id 1PkJTn-0005ML-Qq
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1PkKv9-0007BF-Sa
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Feb 2011 17:53:23 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p11GqSah027432;
-	Tue, 1 Feb 2011 16:52:28 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 27007-08; Tue,  1 Feb 2011 16:52:24 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id p11GqINB027426
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 1 Feb 2011 16:52:19 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Tue, 01 Feb 2011 19:25:44 +0100
+Received: (qmail 11411 invoked by uid 1003); 1 Feb 2011 18:24:47 -0000
+Received: from unknown (HELO ?172.16.0.25?) (philip@opensdr.com@75.197.208.51)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	1 Feb 2011 18:24:47 -0000
+Message-ID: <4D484FED.10603@balister.org>
+Date: Tue, 01 Feb 2011 13:24:45 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Thunderbird/3.1.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ii96l0$tm$1@dough.gmane.org>
-References: <1296483034.13501.13046.camel@rex> <ii96l0$tm$1@dough.gmane.org>
-Date: Tue, 01 Feb 2011 16:52:13 +0000
-Message-ID: <1296579133.13501.19996.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: Mark Hatle <mark.hatle@windriver.com>
+References: <1296483034.13501.13046.camel@rex>
+	<ii96l0$tm$1@dough.gmane.org>	<4D48258D.7050302@mentor.com>	<AANLkTikaogwbHhYiG3rGJ2z17SAyEO3zYCMpsujU2tmf@mail.gmail.com>
+	<AANLkTinmEV8NVzz0fxP+sK+Ji6bUO2E-sV9noOcxsdwM@mail.gmail.com>
+In-Reply-To: <AANLkTinmEV8NVzz0fxP+sK+Ji6bUO2E-sV9noOcxsdwM@mail.gmail.com>
 Subject: Re: OE TSC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,41 +33,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2011 16:53:24 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 01 Feb 2011 18:25:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2011-02-01 at 15:51 +0100, Koen Kooi wrote:
-> On 31-01-11 15:10, Richard Purdie wrote:
-> 
-> > There are various issues needing attention ASAP and therefore the TSC
-> > would like to propose that we call for candidates and that the board
-> > then empower an interim TSC based on the result of that call without
-> > waiting for a vote.
-> 
-> Since I'll be travelling the rest of the week and will likely be offline
-> when the actual call comes from the board:
-> 
-> I would like to stand as candidate for that interim TSC.
-> 
-> Earlier Khem and Tom Rini expressed interest in standing as candidate as
-> well, but I can't say if that is still the case. Please speak up if it is :)
-> 
-> It would be nice to have someone with an interest in the releases as
-> well, e.g. Stefan Schmidt.
+On 02/01/2011 11:43 AM, Frans Meulenbroeks wrote:
+>
+> I think the call for candidates should be on the members list, and the
+> voting also should be done by the members.
 
-So just for completeness I've also wondered whether anyone from the
-Yocto world would be welcome on the TSC, in particular I think Mark
-Hatle might have a lot to offer.
+Frans, we need to get an interim TSC in place to help with the Yocto 
+integration work. It will also give the membership a chance to see them 
+in action before we have to vote on them.
 
-I appreciate he isn't know much in the OE world but he has a strong
-background in embedded Linux (works for Wind River) and is a strong
-participant in the Yocto community. Some OE people met him in Cambridge
-since he was at OEDEM.
+I would like some feedback from the members about how long a TSC term 
+should be and if we should stagger the positions. We can use this 
+feedback to determine when to replace the appointed TSC with an elected one.
 
-Cheers,
+My personal thoughts are have the initial appointment be long enough to 
+get the Yocto/OE integration in good shape.
 
-Richard
-
+Philip
 
 
