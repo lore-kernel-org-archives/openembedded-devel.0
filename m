@@ -1,25 +1,29 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1PkNq3-0001bQ-V2
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Feb 2011 22:32:41 +0100
-Received: from [192.168.1.128] (188-195-80-208-dynip.superkabel.de
-	[188.195.80.208])
-	by dd20204.kasserver.com (Postfix) with ESMTP id 3366F180F24B8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Feb 2011 22:31:45 +0100 (CET)
-Message-ID: <4D487BA0.5080101@opensimpad.org>
-Date: Tue, 01 Feb 2011 22:31:12 +0100
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
+	(envelope-from <dp@xora.org.uk>)
+	id 1PkOr3-0004wt-Oy; Tue, 01 Feb 2011 23:37:46 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 68D93A50D8;
+	Tue,  1 Feb 2011 22:36:50 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id E8yRrqjmedJ2; Tue,  1 Feb 2011 22:36:49 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id BD6CDA50CB;
+	Tue,  1 Feb 2011 22:36:49 +0000 (GMT)
+Message-ID: <4D488B37.1060005@xora.org.uk>
+Date: Tue, 01 Feb 2011 22:37:43 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1296483034.13501.13046.camel@rex>
-	<ii96l0$tm$1@dough.gmane.org>	<4D48258D.7050302@mentor.com>	<AANLkTikaogwbHhYiG3rGJ2z17SAyEO3zYCMpsujU2tmf@mail.gmail.com>	<AANLkTinmEV8NVzz0fxP+sK+Ji6bUO2E-sV9noOcxsdwM@mail.gmail.com>	<4D484FED.10603@balister.org>
-	<AANLkTi=KqA0bXAbuu8VDJz14L9DiHguRLNYWth1R6wMY@mail.gmail.com>
-In-Reply-To: <AANLkTi=KqA0bXAbuu8VDJz14L9DiHguRLNYWth1R6wMY@mail.gmail.com>
-Subject: Re: OE TSC
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-members@lists.openembedded.org
+X-Enigmail-Version: 1.1.1
+Subject: TSC Decisions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,22 +37,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2011 21:32:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 Feb 2011 22:37:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On 01.02.2011 21:08, Frans Meulenbroeks wrote:
-> ... a team that
-> is chosen by the community is much more empowered to make decisions.
->
-+1
+There are at least 3 board members (Philip, Florian, Graeme) at FOSDEM
+which is enough to have a meeting and finalise the interim TSC decision.
+So expect an answer on these issues after FOSDEM.
 
-In my opinion it is very important in the current situation to have a vot=
-e.
-
-best regards
-
-Bernhard Guillon
+Graeme
 
 
 
