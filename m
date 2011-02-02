@@ -1,47 +1,49 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <neil@gumstix.com>) id 1PkkLd-0001a4-OI
+	(envelope-from <neil@gumstix.com>) id 1Pklig-0003Kv-Pa
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Feb 2011 22:34:46 +0100
-Received: from homiemail-a12.g.dreamhost.com (caiajhbdcaib.dreamhost.com
-	[208.97.132.81])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id B959217B256
+	Thu, 03 Feb 2011 00:02:39 +0100
+Received: from homiemail-a18.g.dreamhost.com (caiajhbdcagg.dreamhost.com
+	[208.97.132.66])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id BD9C01783C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Feb 2011 13:33:44 -0800 (PST)
-Received: from homiemail-a12.g.dreamhost.com (localhost [127.0.0.1])
-	by homiemail-a12.g.dreamhost.com (Postfix) with ESMTP id 2321571406B
+	Wed,  2 Feb 2011 15:01:43 -0800 (PST)
+Received: from homiemail-a18.g.dreamhost.com (localhost [127.0.0.1])
+	by homiemail-a18.g.dreamhost.com (Postfix) with ESMTP id 0C0BB250071
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Feb 2011 13:33:40 -0800 (PST)
+	Wed,  2 Feb 2011 15:01:36 -0800 (PST)
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gumstix.com; h=message-id:date
 	:from:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding; q=dns; s=gumstix.com;
-	b=U49ArBzY8Cq+FE/mPBKM7O3wxRzXgXLGgMlXOqMksLhS6Sq6AUujt94hNBQWd
-	l+qmAl0DSp/6s3t+M2cv0HmFT5C5G6hQa5JYSG0afCvYpquWIGK8plYzBUxQQOb6
-	hJSbf9VPbjbMBxmR31WY205RLjmz2HumpZmumSp71t2CFk=
+	b=GY0dGM2g2DNKV7UxtYfdR0SsR6x4FSSFN9ScqyZOPsFrHRSvnXI+7fzBJtnP2
+	Wx/EsfX9PfrGthvdaddn5imEN4zMWWWNhHi16rFz5XmN5+r1qgwVr89iEQq7Pry8
+	p1gWPA1O0QpCdE/XB0O9+6nj6RsPEMyx8Eq2hjqNcyvYeE=
 DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=gumstix.com; h=message-id
 	:date:from:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding; s=gumstix.com; bh=4mN7w
-	NgdwfOI+EgXdcj1GZmXCYc=; b=toy80lbDQX4oY6aXUb9pGO7+KXLtk6uiqLinR
-	QfkzQb/v3UO2uWjXiZ23mvGQ00l3CTqPdGwGMzu/X91nUxt+g72nWiLpZq9zwcn7
-	2I04Ac38rXXcXU5QSb+kpvZd3aBDR35MgisC6NY844uqyChx/QcSfbEQtFmtYDrM
-	SJVEXI=
+	:content-type:content-transfer-encoding; s=gumstix.com; bh=j1BEq
+	NpVN7YR6Uk9EZjOBFgxjnU=; b=J5Oj4wIs7BfSdLUM0Kob5slr0+Vjjvr1Rl9ex
+	4F48kyJ5pT4CXRcDMYFrV+5Z/nohj27f0h+Ov3aYqrA7Jez9IU6UbvFnlJzKjhVQ
+	VFqGk6/MrE2/3TM3g3xkkxFqlx3qCi9+94CPKorwjf20XJ+kbi4yfJYZ61DNj8Qb
+	Dtt2p0=
 Received: from [10.0.1.35] (s64-180-61-141.bc.hsia.telus.net [64.180.61.141])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: neil@gumstix.com)
-	by homiemail-a12.g.dreamhost.com (Postfix) with ESMTPSA id EF52171406A
+	by homiemail-a18.g.dreamhost.com (Postfix) with ESMTPSA id D331125006C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Feb 2011 13:33:39 -0800 (PST)
-Message-ID: <4D49CDB6.1040604@gumstix.com>
-Date: Wed, 02 Feb 2011 13:33:42 -0800
+	Wed,  2 Feb 2011 15:01:35 -0800 (PST)
+Message-ID: <4D49E252.6090502@gumstix.com>
+Date: Wed, 02 Feb 2011 15:01:38 -0800
 From: Neil MacMunn <neil@gumstix.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.2.13) Gecko/20101208 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1296592622161142500@rkmorris.us> <4D4994F6.3080102@gumstix.com>
-In-Reply-To: <4D4994F6.3080102@gumstix.com>
-Subject: Re: tslib Issue
+References: <4D347C60.6000805@gumstix.com>
+	<20110117185830.GL21179@jama>	<4D45E172.4030105@gumstix.com>
+	<20110131130937.GE3265@jama>
+In-Reply-To: <20110131130937.GE3265@jama>
+Subject: Re: EFL_SRCREV bump breaks GPE/enlightenment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,82 +57,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Feb 2011 21:34:46 -0000
+X-List-Received-Date: Wed, 02 Feb 2011 23:02:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-After a few cycles of:
+On 11-01-31 05:09 AM, Martin Jansa wrote:
+> On Sun, Jan 30, 2011 at 02:08:50PM -0800, Neil MacMunn wrote:
+>>>
+>>> does it segfault or something? I haven't seen it with illume2 profiles,
+>>> but I'm not using gpe-dm..
+>>
+>> I don't see any messages about what's happening but I seem to remember
+>> something about a missing function in a .so. There was another EFL_SRCRV
+>> change recently so I undid my revisions and accepted all of the upstream
+>> changes. Unfortunately still no luck.
+>
+> Have you tried to remove ~/.e first?
 
-  # rm /etc/pointercal
-  # shutdown -r now
-  # stat /etc/pointercal
+Yes. The problem occurs on a fresh install.
 
-I found that pointercal is only accessed on the first restart after it 
-has been modified/created.
+> Someone reported similar segfault and removing ~/.e helped him.
+> Otherwise "something about a missing function in a .so." doesn't help me
+> much to reproduce it.. :/.
+>
 
-The problem seems to be that Xorg is started before ts_calibrate runs 
-for the first time. I found a fairly simple hack that seems to fix the 
-problem.
+This is the only relevant log entry that I could find.
 
-  # cp /etc/X11/Xinit.d/89xTs_Calibrate /etc/rc5.d/S89xTs_Calibrate
+overo gpe-dm: gpe-dm: session pid 1409 exited with status 1
 
-Though this fails to address the situation where ts_calibrate is run and 
-pointercal already exists - a manual reboot is still necessary for the 
-new calibration to take effect. Does anyone know of a better, more 
-permanent fix?
-
+I put a video of the desktop at http://74.3.164.55/evidence/nocrash.html 
+that shows the display problems. If I mouse over the menu any faster it 
+crashes.
 
 --
 Neil
-
-On 11-02-02 09:31 AM, Neil MacMunn wrote:
-> I am seeing the same thing using the omap3-palmtop-image for Gumstix
-> Overo. On first boot, /etc/X11/Xinit.d/89xTs_Calibrate doesn't find
-> /etc/pointercal so it runs ts_calibrate. The calibration doesn't take
-> effect until I reboot though - restarting gpe-dm doesn't solve the problem.
->
-> I think that the library /usr/lib/ts/linear.so looks for /etc/pointercal
-> and defaults to some preset values if the file doesn't exist. I thought
-> that restarting gpe-dm would reload linear.so (which fuser suggests it
-> does) but this doesn't solve the problem. It would appear that I am
-> missing something...
->
-> --
-> Neil
->
->
-> On 11-02-01 12:37 PM, openembedded@rkmorris.us wrote:
->> Hi,
->>
->> I have successfully build and then run several OE images on my target
->> hardware (h1940) - and have noticed an interesting oddity (bug?).
->>
->> If I run the opie-image for example, everything works just great.
->> However, if I run an X-based image (like, say x11-gpe-image) when the
->> GUI starts up tslib calibration is run ... but then basically thrown
->> away, as the driver for the touchscreen is set to evdev by default
->> (and the touchscreen isn't calibrated / does not work right). If I
->> manually build and install xf86-input-tslib, and then configure the
->> input as tslib (not evdev) - once I restart gpe-dm it works as expected!
->>
->> Is this supposed to be the case, or perhaps something not configured
->> quite right in the builds?
->>
->> Thanks!
->>
->> ... Russell
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
 
 
