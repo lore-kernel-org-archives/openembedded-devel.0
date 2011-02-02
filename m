@@ -1,26 +1,25 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PkWlC-0002hy-0o
+	(envelope-from <jay@jay-tech.ru>) id 1PkWtU-0002rn-Au
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Feb 2011 08:04:14 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 94C40491282;
-	Wed,  2 Feb 2011 08:03:20 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Wed, 2 Feb 2011 08:03:20 +0100
-Message-ID: <4D4901B1.2040704@dresearch.de>
-Date: Wed, 02 Feb 2011 08:03:13 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed, 02 Feb 2011 08:12:48 +0100
+Received: by qwi2 with SMTP id 2so7402313qwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Feb 2011 23:11:49 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.229.248.198 with SMTP id mh6mr7995993qcb.5.1296630707855; Tue,
+	01 Feb 2011 23:11:47 -0800 (PST)
+Sender: jay@jay-tech.ru
+Received: by 10.220.193.9 with HTTP; Tue, 1 Feb 2011 23:11:47 -0800 (PST)
+X-Originating-IP: [93.81.3.94]
+In-Reply-To: <4D4901B1.2040704@dresearch.de>
 References: <1296508073.20792.4.camel@mattotaupa>
-In-Reply-To: <1296508073.20792.4.camel@mattotaupa>
-X-OriginalArrivalTime: 02 Feb 2011 07:03:20.0492 (UTC)
-	FILETIME=[464C3EC0:01CBC2A7]
-Cc: Paul Menzel <paulepanter@users.sourceforge.net>
+	<4D4901B1.2040704@dresearch.de>
+Date: Wed, 2 Feb 2011 10:11:47 +0300
+X-Google-Sender-Auth: 55ag5gUAl1GIiHhgx5Pk_XJllcA
+Message-ID: <AANLkTimWaTzr5hz3-sw39e_rBSkpGEuhQJyOeEoh2kbt@mail.gmail.com>
+From: Yury Bushmelev <jay4mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: <http://openembedded.{org, net}/> redirect to <http://bugs.openembedded.net/>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,24 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Feb 2011 07:04:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 02 Feb 2011 07:12:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Am 31.01.2011 22:07, schrieb Paul Menzel:
-> Dear administrators,
-> 
-> I just wanted to inform you, that <http://openembedded.{org,net}/>
-> redirect to <http://bugs.openembedded.net/>.
-> 
-> <http://www.openembedded.org/> redirects to the Wiki setup which is what
-> I would suspect.
+2011/2/2 Steffen Sledz <sledz@dresearch.de>:
+> Am 31.01.2011 22:07, schrieb Paul Menzel:
+>> Dear administrators,
+>>
+>> I just wanted to inform you, that <http://openembedded.{org,net}/>
+>> redirect to <http://bugs.openembedded.net/>.
+>>
+>> <http://www.openembedded.org/> redirects to the Wiki setup which is what
+>> I would suspect.
+>
+> This seems to be fixed.
+>
+> But now http://tinderbox.openembedded.{org,net} redirects to the wiki too. So the build results are no longer available. :(
 
-This seems to be fixed.
+OE-stats is disabled administratively. It produces very high mysql
+load which is killing other projects at OSUOSL. We are investigating
+(slowly :( ).
 
-But now http://tinderbox.openembedded.{org,net} redirects to the wiki too. So the build results are no longer available. :(
-
-Steffen
-
+-- 
+Yury Bushmelev
 
 
