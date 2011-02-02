@@ -1,33 +1,26 @@
-Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
-	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1Pkaem-0006yl-3R
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sledz@dresearch.de>) id 1PkcJn-00080H-Er
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Feb 2011 12:13:55 +0100
-Received: (qmail 8001 invoked from network); 2 Feb 2011 12:12:58 +0100
-Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
-	by leibniz.math.fu-berlin.de with SMTP; 2 Feb 2011 12:12:58 +0100
-X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
-Received: from math.fu-berlin.de ([160.45.40.10])
-	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
-	port 10024) with SMTP id wNb-EN5FfoS5
+	Wed, 02 Feb 2011 14:00:19 +0100
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 828F6491283
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Feb 2011 12:12:55 +0100 (CET)
-Received: (Qmail 7987 invoked from network); 2 Feb 2011 12:12:55 +0100
-Received: From andorra.imp.fu-berlin.de (160.45.42.84)
-	by leibniz.math.fu-berlin.de with SMTP; 2 Feb 2011 11:12:55 -0000
-Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.72 #1
-	(Debian)) id 1Pkadr-0003l6-KN
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Feb 2011 12:12:55 +0100
-Date: Wed, 2 Feb 2011 12:12:55 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20110202111255.GA12375@mi.fu-berlin.de>
-References: <4D4929CB.6040009@dresearch.de> <4D492DBF.4020601@freyther.de>
+	Wed,  2 Feb 2011 13:59:25 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 2 Feb 2011 13:59:25 +0100
+Message-ID: <4D49552D.3010705@dresearch.de>
+Date: Wed, 02 Feb 2011 13:59:25 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-In-Reply-To: <4D492DBF.4020601@freyther.de>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+References: <4D4929CB.6040009@dresearch.de>
+In-Reply-To: <4D4929CB.6040009@dresearch.de>
+X-OriginalArrivalTime: 02 Feb 2011 12:59:25.0572 (UTC)
+	FILETIME=[04E0BC40:01CBC2D9]
 Subject: Re: profiling howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,21 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Feb 2011 11:13:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 02 Feb 2011 13:00:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 02, 2011 at 11:11:11AM +0100, Holger Freyther wrote:
-> On 02/02/2011 10:54 AM, Steffen Sledz wrote:
-> > Has anybody some instructions/hints how to enable profiling support for selected libs and/or binaries in OE?
-> 
-> The best information is in the Poky Manual, search for oprofile,
-> -fno-frame-pointer and such... I have also handed in a proposal at CELF to
-> work on ARM oprofile backtrace support to not rely on framepointers.
-> 
+Am 02.02.2011 10:54, schrieb Steffen Sledz:
+> Has anybody some instructions/hints how to enable profiling
+> support for selected libs and/or binaries in OE?
 
-So what Holger really means is, that you normaly don't need to use the libc/gcc profiling options anymore.
+The local.conf.sample does contain this section:
 
-Bye Henning
+# Uncomment these to build a package such that you can use gprof to profile it.
+# NOTE: This will only work with 'linux' targets, not
+# 'linux-uclibc', as uClibc doesn't provide the necessary
+# object files.  Also, don't build glibc itself with these
+# flags, or it'll fail to build.
+#
+# PROFILE_OPTIMIZATION = "-pg"
+# SELECTED_OPTIMIZATION = "${PROFILE_OPTIMIZATION}"
+# LDFLAGS =+ "-pg"
+
+This seems to do the work for the complete image.
+
+But is it possible to enable profiling for selected libs and/or binaries only?
+
+Steffen
+
+
 
 
