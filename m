@@ -1,25 +1,24 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PkZQf-0004pJ-Ks
+	(envelope-from <holger+oe@freyther.de>) id 1PkZh4-0005OL-B8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Feb 2011 10:55:13 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id C33AF491282
+	Wed, 02 Feb 2011 11:12:10 +0100
+Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
+	[91.64.83.241])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id B18C61B10C05
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Feb 2011 10:54:19 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Wed, 2 Feb 2011 10:54:19 +0100
-Message-ID: <4D4929CB.6040009@dresearch.de>
-Date: Wed, 02 Feb 2011 10:54:19 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Wed,  2 Feb 2011 10:20:49 +0000 (UTC)
+Message-ID: <4D492DBF.4020601@freyther.de>
+Date: Wed, 02 Feb 2011 11:11:11 +0100
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 02 Feb 2011 09:54:19.0952 (UTC)
-	FILETIME=[29699B00:01CBC2BF]
-Subject: profiling howto?
+To: openembedded-devel@lists.openembedded.org
+References: <4D4929CB.6040009@dresearch.de>
+In-Reply-To: <4D4929CB.6040009@dresearch.de>
+Subject: Re: profiling howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,23 +32,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Feb 2011 09:55:13 -0000
+X-List-Received-Date: Wed, 02 Feb 2011 10:12:10 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Has anybody some instructions/hints how to enable profiling support for s=
-elected libs and/or binaries in OE?
+On 02/02/2011 10:54 AM, Steffen Sledz wrote:
+> Has anybody some instructions/hints how to enable profiling support for selected libs and/or binaries in OE?
 
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
-
+The best information is in the Poky Manual, search for oprofile,
+-fno-frame-pointer and such... I have also handed in a proposal at CELF to
+work on ARM oprofile backtrace support to not rely on framepointers.
 
 
