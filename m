@@ -1,27 +1,34 @@
-Received: from mailout-de.gmx.net ([213.165.64.22])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Pkm5Q-0003jO-6e
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <dp@xora.org.uk>) id 1Pkm79-0003lC-4p
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Feb 2011 00:26:08 +0100
-Received: (qmail invoked by alias); 02 Feb 2011 23:25:11 -0000
-Received: from p5DE485FA.dip.t-dialin.net (EHLO localhost.localdomain)
-	[93.228.133.250]
-	by mail.gmx.net (mp020) with SMTP; 03 Feb 2011 00:25:11 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+BxlJG4vaBRj9eGZhueNltQKZtwY5dZ1qFZw8Qpm
-	6FSpkRmdGU6v/l
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 3 Feb 2011 00:21:50 +0100
-User-Agent: KMail/1.13.2 (Linux/2.6.34.7-56.fc13.i686.PAE; KDE/4.4.5; i686; ; )
-References: <201102012002.49849.schnitzeltony@gmx.de>
-	<4D496DBC.6030709@opendreambox.org>
-	<1F887C9B-2BD1-436C-8B7B-4162CA51857C@dominion.thruhere.net>
-In-Reply-To: <1F887C9B-2BD1-436C-8B7B-4162CA51857C@dominion.thruhere.net>
+	Thu, 03 Feb 2011 00:27:55 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 99DDAA5131
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Feb 2011 23:27:00 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id gd8-eJs54ctz
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Feb 2011 23:27:00 +0000 (GMT)
+Received: from [192.168.1.10] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id DDC21A512E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Feb 2011 23:26:59 +0000 (GMT)
+Message-ID: <4D49E878.2000703@xora.org.uk>
+Date: Wed, 02 Feb 2011 23:27:52 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;
+	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Message-Id: <201102030021.50431.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: latest clutter-recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1296688442-22207-1-git-send-email-schnitzeltony@gmx.de>
+In-Reply-To: <1296688442-22207-1-git-send-email-schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.1.1
+Subject: Re: [PATCH] clutter-gst add 1.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,72 +42,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Feb 2011 23:26:08 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 02 Feb 2011 23:27:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Wednesday 02 February 2011 15:57:33 Koen Kooi wrote:
-> I checked patchwork first and that didn't show any clutter patches. I'll add the gtk and gst ones after fosdem
-> 
-> Op 2 feb. 2011 om 15:44 heeft Andreas Oberritter <obi@opendreambox.org> het volgende geschreven:
-> 
-> > Hello Andreas,
-> > 
-> > I can't answer your technical questions regarding the recipe, because
-> > I'm not using a clutter/gtk/x11 based distro. I'd like to comment the
-> > rest of your mail, though.
-> > 
-> > On 02/01/2011 08:02 PM, Andreas Mueller wrote:
-> >> it surprised me to see that Koen committed a new recipe for clutter 1.4.2. As you might know I was also working on this and sent some pre-release version here of this (1). What makes me not running in happy mode:
-> >> 
-> >> - Many of my previous patches were rejected first because of some commit message. Here we read 'clutter: add 1.4.2' - cool. Which tests were performed?
-> > 
-> > In general, contrary to patches which modify existing files, I think
-> > that patches adding new recipes don't need a detailed commit message.
-> > Still, a message should describe the content of a commit in a suitable
-> > and understandable way. In my opinion, "<name>: add <version>"
-> > sufficiently describes any new recipe, unless there's anything special
-> > about it.
-> > 
-> > In this case, I would have preferred glib-gettextize getting mentioned,
-> > which was added to clutter.inc.
-> > 
-> >> Please don't tell me I am invited to change this situation:  Many patches send by non-commit guys are nit-picked at least for commit message - and then I read 'clutter: add 1.4.2' for a recipe breaking lots of others.
-> > 
-> > Well, shit happens, unfortunately. Hopefully it was tested and worked in
-> > a different environment. Bug reports like this are needed to make it
-> > work for as many environments as possible. I've added Koen to CC to
-> > decrease the chance that your bug report gets lost without Koen
-> > noticing. I think he didn't mean to offend you in any way with his commit.
-> > 
-> > Nit-picking happens frequently, and personally I prefer getting negative
-> > feedback over no feedback at all. Usually it's not very hard to address
-> > the complaints, although it can be very frustrating to get only a short
-> > comment on something you've put a lot of time into. My guess is that
-> > this has occurred at least once to everybody who contributed to open
-> > source projects.
-> > 
-> >> Sorry for this, but to me the this should have been a hobby for having fun - but at the moment it's far from
-> > 
-> > So let's try to regain some fun after this problem gets solved! You
-> > shouldn't take it personally.
-I am afraid exactly this was my problem :-(
-> > 
-> >> Andreas
-> >> 
-> >> (1) http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-January/029260.html
-> > 
-> > Regards,
-> > Andreas
-> > 
-> 
-1. Thanks for response
-2. I saw nights of efforts for good. This caused a short circuit  - sorry 
-3. let's forget and have fun again :-))
-4. I will send a patch for clutter-gst. 
-5. clutter-gtk seems tricky...
+I think we should probably get Andreas tooled up with commit access.
 
-Andreas
+Graeme
+
+On 02/02/2011 23:14, Andreas Mueller wrote:
+> * clutter 1.4.2 broke clutter-gst and made it necessary to have a recipe from
+> * development snapshot sources
+> *
+> * Build tested with
+> * BB_VERSION        = "1.10.2"
+> * METADATA_BRANCH   = "master"
+> * METADATA_REVISION = "2049a96"
+> * TARGET_ARCH       = "arm"
+> * TARGET_OS         = "linux-gnueabi"
+> * MACHINE           = "overo"
+> * DISTRO            = "angstrom"
+> * DISTRO_VERSION    = "2010.7-test-20110202"
+> * TARGET_FPU        = "hard"
+>
+> Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+> ---
+>  recipes/clutter/clutter-gst_1.3.4.bb |    9 +++++++++
+>  1 files changed, 9 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/clutter/clutter-gst_1.3.4.bb
+>
+> diff --git a/recipes/clutter/clutter-gst_1.3.4.bb b/recipes/clutter/clutter-gst_1.3.4.bb
+> new file mode 100644
+> index 0000000..426cae2
+> --- /dev/null
+> +++ b/recipes/clutter/clutter-gst_1.3.4.bb
+> @@ -0,0 +1,9 @@
+> +require clutter-gst.inc
+> +
+> +PR = "${INC_PR}.0"
+> +
+> +SRC_URI = "http://source.clutter-project.org/sources/clutter-gst/1.3/clutter-gst-${PV}.tar.bz2 \
+> +          "
+> +
+> +SRC_URI[md5sum] = "4f74f78df215cba54444dd6256a29bd4"
+> +SRC_URI[sha256sum] = "de4ce6d3313be3074c6afc6f20276ef06f1a460b3a6755fc5c6e048685de137a"
+
 
 
