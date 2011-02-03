@@ -1,28 +1,25 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1Pkyu3-0007i4-HW
+	(envelope-from <holger+oe@freyther.de>) id 1PkyyS-0007q2-RN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Feb 2011 14:07:15 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id EFDE0491278;
-	Thu,  3 Feb 2011 14:06:20 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 3 Feb 2011 14:06:20 +0100
-Message-ID: <4D4AA84C.1050001@dresearch.de>
-Date: Thu, 03 Feb 2011 14:06:20 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Thu, 03 Feb 2011 14:11:48 +0100
+Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
+	[91.64.83.241])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 14AEC1B10C05;
+	Thu,  3 Feb 2011 13:20:36 +0000 (UTC)
+Message-ID: <4D4AA95C.5000103@freyther.de>
+Date: Thu, 03 Feb 2011 14:10:52 +0100
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: Holger Freyther <holger+oe@freyther.de>
+To: Steffen Sledz <sledz@dresearch.de>
 References: <4D4929CB.6040009@dresearch.de>	<4D49552D.3010705@dresearch.de>	<4D4A6796.1070006@dresearch.de>	<AANLkTinyw5W+jaZVba1LyAn5h1c-1kCDt9vXPBERhzk2@mail.gmail.com>	<4D4A88FC.3090706@dresearch.de>
 	<4D4A91D9.2040406@freyther.de> <4D4A96A0.4080402@dresearch.de>
 	<4D4A9739.6040909@freyther.de> <4D4A9A94.6030108@dresearch.de>
-	<4D4A9C30.8010803@freyther.de>
-In-Reply-To: <4D4A9C30.8010803@freyther.de>
-X-OriginalArrivalTime: 03 Feb 2011 13:06:20.0923 (UTC)
-	FILETIME=[26DC04B0:01CBC3A3]
+	<4D4A9C30.8010803@freyther.de> <4D4AA84C.1050001@dresearch.de>
+In-Reply-To: <4D4AA84C.1050001@dresearch.de>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: profiling howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -38,49 +35,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Feb 2011 13:07:15 -0000
+X-List-Received-Date: Thu, 03 Feb 2011 13:11:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Am 03.02.2011 13:14, schrieb Holger Freyther:
-> On 02/03/2011 01:07 PM, Steffen Sledz wrote:
->=20
->> But i've no idea what the real problem is. It looks like it's not rela=
-ted to the ".init_array" but to the missing `mcount' symbol.
->=20
-> This symbol access get added by gcc due the -pg option. Now the questio=
-n is
-> who should provide this symbol? I would assume it is glibc (actually gr=
-epping
-> glibc source tree shows it is in gmon/mcount.c).
->=20
-> I am not sure why you want to use gprof but anyway...
->=20
-> a) do not use gprof on glibc...
+On 02/03/2011 02:06 PM, Steffen Sledz wrote:
 
-I'm not interested in using gprof on glibc. I'm interested in profiling s=
-ome other libs/apps only.
+>> I am not sure why you want to use gprof but anyway...
+>>
+>> a) do not use gprof on glibc...
+> 
+> I'm not interested in using gprof on glibc. I'm interested in profiling some other libs/apps only.
+> 
+> But the suggested method to prepare just some packages for profiling does not work jet (see other subthread).
 
-But the suggested method to prepare just some packages for profiling does=
- not work jet (see other subthread).
+1.) use oprofile... install the -dbg packages on the device... install
+oprofile itself... start sampling with opcontrol --start -p library -c 7 or
+such.. then stop... use opreport -l to look...
 
-So i tried the suggested method from local.conf.sample with the mentioned=
- result. :(
+2.) if you want to have backtraces... recompile with -fno-omit-frame-pointer
+as I have mentioned...
 
-> b) change the tests to have a mcount symbol...
-
-Sorry, but i did not have time and knowledge to do this.
-
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+3.) if you do not want sampling based profiling, yes use gprof... enable it
+for the libs and apps you want... using bitbake -e you should be able to
+figure out how bitbake selects the variables...
 
 
 
