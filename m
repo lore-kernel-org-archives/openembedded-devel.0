@@ -1,27 +1,22 @@
-Received: from 27.mail-out.ovh.net ([91.121.30.210])
+Received: from mailout-de.gmx.net ([213.165.64.23])
 	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Pl5bP-0004hu-Lg
+	(envelope-from <schnitzeltony@gmx.de>) id 1Pl6uh-0004m3-1k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Feb 2011 21:16:27 +0100
-Received: (qmail 16816 invoked by uid 503); 3 Feb 2011 20:18:48 -0000
-Received: from b6.ovh.net (HELO mail195.ha.ovh.net) (213.186.33.56)
-	by 27.mail-out.ovh.net with SMTP; 3 Feb 2011 20:18:43 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 3 Feb 2011 22:15:26 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 3 Feb 2011 22:15:25 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Thu, 03 Feb 2011 22:40:27 +0100
+Received: (qmail invoked by alias); 03 Feb 2011 21:39:29 -0000
+Received: from p4FE0FBEA.dip.t-dialin.net (EHLO
+	localhost.localdomain.localdomain) [79.224.251.234]
+	by mail.gmx.net (mp069) with SMTP; 03 Feb 2011 22:39:29 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/ZF/xgZKrZ3yHVuXcgUPzwztYpcZMG2oXqQxou0Q
+	O8SYDOm8ar73PM
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Feb 2011 21:15:50 +0100
-Message-Id: <1296764150-19666-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-X-Ovh-Tracer-Id: 926897100434091337
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: [PATCH] busybox-1.18.2: add latest fixes
+Date: Thu,  3 Feb 2011 22:36:10 +0100
+Message-Id: <1296768970-19738-1-git-send-email-schnitzeltony@gmx.de>
+X-Mailer: git-send-email 1.7.2.3
+X-Y-GMX-Trusted: 0
+Subject: [PATCH] clutter: fix broken clutter-gtk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,49 +30,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Feb 2011 20:16:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 03 Feb 2011 21:40:27 -0000
 
-modprobe : revert commit 1396221d5a741ef8e1e8abca88836b341a3cab84
-	bb git commit : 8ae386bf195c6ea53232bacd2eb8cf26676962e4
-libbb: spawn should remove child which failed to exec
-	bb git commit : c5d0f15dbd8087f60b377fa9fc18d08698429189
+* Since clutter 1.4.2 clutter-gtk fails for machines/archs configuring
+* flavour=eglx with (see clutter.inc)
+*
+* | Making all in clutter-gtk
+* | make[2]: Entering directory `/home/Superandi/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-gtk-0.10.8-r2.0/clutter-gtk-0.10.8/clutter-gtk'
+* |   CC     libclutter_gtk_0.10_la-gtk-clutter-embed.lo
+* |   CC     libclutter_gtk_0.10_la-gtk-clutter-scrollable.lo
+* |   CC     libclutter_gtk_0.10_la-gtk-clutter-util.lo
+* |   CC     libclutter_gtk_0.10_la-gtk-clutter-viewport.lo
+* |   CC     libclutter_gtk_0.10_la-gtk-clutter-zoomable.lo
+* |   CCLD   libclutter-gtk-0.10.la
+* | /home/Superandi/tmp/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: cannot find -lclutter-egl-1.0
+*
+* Since clutter 1.3.x in 'configure.ac' the meaning of 'CLUTTER_WINSYS' has
+* changed. In clutter 1.2.x 'CLUTTER_WINSYS' contained the value passed by
+* 'flavour' (in the error case 'eglx'). In 1.3.x this variable is set in
+* 'configure.ac'. For flavour=eglx it is set to 'egl'! The correct value
+* 'eglx' is found in 'CLUTTER_SONAME_INFIX'. Some of the '*.pc.in' files
+* were changed. clutter-gtk fell victim for clutter-x11.pc.in.
+*
+* Build tested for all clutter recipes with
+*
+* BB_VERSION        = "1.10.2"
+* MACHINE           = "overo"
+* DISTRO            = "angstrom"
+* DISTRO_VERSION    = "2010.7-test-20110203"
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
 ---
- recipes/busybox/busybox_1.18.2.bb |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
+ .../clutter/clutter-1.4.2/fix-lib-location.patch   |   63 ++++++++++++++++++++
+ recipes/clutter/clutter_1.4.2.bb                   |    3 +-
+ 2 files changed, 65 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/clutter/clutter-1.4.2/fix-lib-location.patch
 
-diff --git a/recipes/busybox/busybox_1.18.2.bb b/recipes/busybox/busybox_1.18.2.bb
-index 6356f6c..6c45919 100644
---- a/recipes/busybox/busybox_1.18.2.bb
-+++ b/recipes/busybox/busybox_1.18.2.bb
-@@ -1,11 +1,13 @@
- require busybox_1.1x.inc
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.4"
+diff --git a/recipes/clutter/clutter-1.4.2/fix-lib-location.patch b/recipes/clutter/clutter-1.4.2/fix-lib-location.patch
+new file mode 100644
+index 0000000..ad4589c
+--- /dev/null
++++ b/recipes/clutter/clutter-1.4.2/fix-lib-location.patch
+@@ -0,0 +1,63 @@
++diff --git a/clutter/cally/cally.pc.in b/clutter/cally/cally.pc.in
++index 224668f..b313ad6 100644
++--- a/clutter/cally/cally.pc.in
+++++ b/clutter/cally/cally.pc.in
++@@ -13,6 +13,6 @@ Name: Cally
++ Description: Clutter Accessibility Implementation Library
++ Version: @VERSION@
++ Requires: atk clutter-1.0
++-Libs: -L${libdir} -lclutter-${winsys}-${apiversion}
+++Libs: -L${libdir} -lclutter-${soname_infix}-${apiversion}
++ Cflags: -I${includedir}/clutter-${apiversion}
++ Requires: ${requires}
++diff --git a/clutter/cogl/cogl/cogl.pc.in b/clutter/cogl/cogl/cogl.pc.in
++index 7975f4f..39358ca 100644
++--- a/clutter/cogl/cogl/cogl.pc.in
+++++ b/clutter/cogl/cogl/cogl.pc.in
++@@ -8,10 +8,11 @@ backend=@COGL_WINSYS@ #only kept for backward compatability
++ winsys=@COGL_WINSYS@
++ cogl=@COGL_DRIVER@ #only kept for backward compatability
++ driver=@COGL_DRIVER@
+++soname_infix=@CLUTTER_SONAME_INFIX@
++ 
++ Name: COGL
++ Description: Clutter GL abstraction library (${winsys}/${driver} backend)
++ Version: @VERSION@
++-Libs: -L${libdir} -lclutter-${winsys}-${apiversion}
+++Libs: -L${libdir} -lclutter-${soname_infix}-${apiversion}
++ Cflags: -I${includedir}/clutter-${apiversion}
++ Requires: ${requires}
++diff --git a/clutter/win32/clutter-win32.pc.in b/clutter/win32/clutter-win32.pc.in
++index ad9a2b4..36b7a6f 100644
++--- a/clutter/win32/clutter-win32.pc.in
+++++ b/clutter/win32/clutter-win32.pc.in
++@@ -7,10 +7,11 @@ requires=@CLUTTER_REQUIRES@
++ backend=@CLUTTER_WINSYS@ #only kept for backward compatability
++ winsys=@CLUTTER_WINSYS@
++ cogl_driver=@COGL_DRIVER@
+++soname_infix=@CLUTTER_SONAME_INFIX@
++ 
++ Name: Clutter
++ Description: Clutter Core Library (${winsys}/${cogl_driver} backend)
++ Version: @VERSION@
++-Libs: -L${libdir} -lclutter-${winsys}-${apiversion}
+++Libs: -L${libdir} -lclutter-${soname_infix}-${apiversion}
++ Cflags: -I${includedir}/clutter-${apiversion}
++ Requires: ${requires}
++diff --git a/clutter/x11/clutter-x11.pc.in b/clutter/x11/clutter-x11.pc.in
++index ad9a2b4..36b7a6f 100644
++--- a/clutter/x11/clutter-x11.pc.in
+++++ b/clutter/x11/clutter-x11.pc.in
++@@ -7,10 +7,11 @@ requires=@CLUTTER_REQUIRES@
++ backend=@CLUTTER_WINSYS@ #only kept for backward compatability
++ winsys=@CLUTTER_WINSYS@
++ cogl_driver=@COGL_DRIVER@
+++soname_infix=@CLUTTER_SONAME_INFIX@
++ 
++ Name: Clutter
++ Description: Clutter Core Library (${winsys}/${cogl_driver} backend)
++ Version: @VERSION@
++-Libs: -L${libdir} -lclutter-${winsys}-${apiversion}
+++Libs: -L${libdir} -lclutter-${soname_infix}-${apiversion}
++ Cflags: -I${includedir}/clutter-${apiversion}
++ Requires: ${requires}
+diff --git a/recipes/clutter/clutter_1.4.2.bb b/recipes/clutter/clutter_1.4.2.bb
+index d3159f4..12b6eb5 100644
+--- a/recipes/clutter/clutter_1.4.2.bb
++++ b/recipes/clutter/clutter_1.4.2.bb
+@@ -2,10 +2,11 @@ require clutter.inc
  
- SRC_URI += " \
- 	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-modprobe-small.patch;name=patch01 \
- 	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-buildsys.patch;name=patch02 \
- 	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-hush.patch;name=patch03 \
- 	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-wc.patch;name=patch04 \
-+	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-libbb.patch;name=patch05 \
-+	http://busybox.net/downloads/fixes-1.18.2/busybox-1.18.2-modprobe.patch;name=patch06 \
- 	"
+ DEPENDS += "json-glib"
  
- SRC_URI[md5sum] = "69a82091e5710b72db5ce0e14e7c0cd7"
-@@ -18,3 +20,7 @@ SRC_URI[patch03.md5sum] = "854045f4b713df759b49945550843acf"
- SRC_URI[patch03.sha256sum] = "b70c4406307942f38b2c8d94675b7ca7db8ba0351ae916f838d04856b5aad33f"
- SRC_URI[patch04.md5sum] = "4414f080287c22c9bbc42d1d70f488d4"
- SRC_URI[patch04.sha256sum] = "e2abd861538b586ef4a3439b68a2ef41db99b65e4a37c7442ffc8edfe67ae549"
-+SRC_URI[patch05.md5sum] = "354b36a75808e3a477d48d1c582d2265"
-+SRC_URI[patch05.sha256sum] = "71e3e1884869e2ee84714874f4792574ae905e83a64b3508c6c16d6661909401"
-+SRC_URI[patch06.md5sum] = "bd525ff4850e104a8571bad57b299fc3"
-+SRC_URI[patch06.sha256sum] = "624dd02e1cf76dc755e8b9fd1a18f0bb579976793a07e632b0dba061d0d4b79d"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ SRC_URI = "http://source.clutter-project.org/sources/clutter/1.4/clutter-${PV}.tar.bz2 \
+            file://test-conformance-fix.patch \
++           file://fix-lib-location.patch \
+            ${INC_SRC_URI} \
+           "
+ 
 -- 
-1.7.0.4
+1.7.2.3
 
 
 
