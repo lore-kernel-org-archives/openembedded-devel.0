@@ -1,26 +1,26 @@
 Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PkuDN-0008Re-EF
+	(envelope-from <sledz@dresearch.de>) id 1Pkuar-0000JI-26
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Feb 2011 09:06:53 +0100
+	Thu, 03 Feb 2011 09:31:09 +0100
 Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
 	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 46D9A491278;
-	Thu,  3 Feb 2011 09:05:56 +0100 (CET)
+	by mail.dresearch.de (Postfix) with ESMTP id DEC8D491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  3 Feb 2011 09:30:14 +0100 (CET)
 Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 3 Feb 2011 09:05:56 +0100
-Message-ID: <4D4A61DE.8070808@dresearch.de>
-Date: Thu, 03 Feb 2011 09:05:50 +0100
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 3 Feb 2011 09:30:14 +0100
+Message-ID: <4D4A6796.1070006@dresearch.de>
+Date: Thu, 03 Feb 2011 09:30:14 +0100
 From: Steffen Sledz <sledz@dresearch.de>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
 	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4D4929CB.6040009@dresearch.de> <4D49552D.3010705@dresearch.de>
-	<4D49584D.3010502@freyther.de>
-In-Reply-To: <4D49584D.3010502@freyther.de>
-X-OriginalArrivalTime: 03 Feb 2011 08:05:56.0314 (UTC)
-	FILETIME=[2F5AF3A0:01CBC379]
+In-Reply-To: <4D49552D.3010705@dresearch.de>
+X-OriginalArrivalTime: 03 Feb 2011 08:30:14.0852 (UTC)
+	FILETIME=[94B63040:01CBC37C]
 Subject: Re: profiling howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,61 +35,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Feb 2011 08:06:53 -0000
+X-List-Received-Date: Thu, 03 Feb 2011 08:31:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am 02.02.2011 14:12, schrieb Holger Freyther:
-> On 02/02/2011 01:59 PM, Steffen Sledz wrote:
->> Am 02.02.2011 10:54, schrieb Steffen Sledz:
->>
->> But is it possible to enable profiling for selected libs and/or binari=
-es only?
+Am 02.02.2011 13:59, schrieb Steffen Sledz:
+> Am 02.02.2011 10:54, schrieb Steffen Sledz:
+>> Has anybody some instructions/hints how to enable profiling
+>> support for selected libs and/or binaries in OE?
 >=20
-> yes, you can use the classic override system... just place _pn-PN to th=
-ese
-> variables or such. But be aware that if your app will call some other l=
-ibrary
-> and there are no framepointers there will be no backtrace.. same applie=
-s to
-> functions written in assembly, e.g. memcpy...
+> The local.conf.sample does contain this section:
+>=20
+> # Uncomment these to build a package such that you can use gprof to pro=
+file it.
+> # NOTE: This will only work with 'linux' targets, not
+> # 'linux-uclibc', as uClibc doesn't provide the necessary
+> # object files.  Also, don't build glibc itself with these
+> # flags, or it'll fail to build.
+> #
+> # PROFILE_OPTIMIZATION =3D "-pg"
+> # SELECTED_OPTIMIZATION =3D "${PROFILE_OPTIMIZATION}"
+> # LDFLAGS =3D+ "-pg"
+>=20
+> This seems to do the work for the complete image.
 
-Hmmmm? This doesn't seem to work. :(
+Hmmmm? Unfortunately not in all cases. Enabling the options mentioned abo=
+ve and making a clean build results in
 
-If local.conf contains this
- ------------->snip<------------
- PROFILE_OPTIMIZATION =3D "-pg"
+ | ...
+ | checking for .preinit_array/.init_array/.fini_array support... no
+ | configure: error: Need linker with .init_array/.fini_array support.
+ | ERROR: Function do_configure failed
+ NOTE: package glibc-2.9-r36.3: task do_configure: Failed
+ ERROR: TaskFailed event exception, aborting
+ ERROR: Build of /home/sledz/work/openembedded/recipes/glibc/glibc_2.9.bb=
+ do_configure failed
+ ERROR: Task 127 (/home/sledz/work/openembedded/recipes/glibc/glibc_2.9.b=
+b, do_configure) failed with 256
 
- SELECTED_OPTIMIZATION_pn-libsoup =3D "${PROFILE_OPTIMIZATION}"
- LDFLAGS_pn-libsoup =3D+ "-pg"
-
- SELECTED_OPTIMIZATION_pn-libgupnp =3D "${PROFILE_OPTIMIZATION}"
- LDFLAGS_pn-libgupnp =3D+ "-pg"
-
- SELECTED_OPTIMIZATION_pn-libgssdp =3D "${PROFILE_OPTIMIZATION}"
- LDFLAGS_pn-libgssdp =3D+ "-pg"
- ------------->snip<------------
-
-after a clean build tmp.6/work/armv5te-angstrom-linux-gnueabi/libsoup-2.4=
--2.29.91-r0/temp/run.do_compile.7972 contains this
- ------------->snip<------------
- export TARGET_CFLAGS=3D"-isystem/home/DRESEARCH/sledz/work/HydraIP/OE/tm=
-p.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/include -fexpensive-optim=
-izations -frename-registers -fomit-frame-pointer -O2 -ggdb2"
- ------------->snip<------------
-
-If setting the optimization params globally in local.conf to
-------------->snip<------------
-PROFILE_OPTIMIZATION =3D "-pg"
-SELECTED_OPTIMIZATION =3D "${PROFILE_OPTIMIZATION}"
-LDFLAGS =3D+ "-pg"
-------------->snip<------------
-
-everything seems to be OK:
-------------->snip<------------
-export TARGET_CFLAGS=3D"-isystem/home/DRESEARCH/sledz/work/HydraIP/OE/tmp=
-.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/include -pg"
-------------->snip<------------
+Any ideas?
 
 Steffen
 
