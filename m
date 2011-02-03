@@ -1,30 +1,41 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1Pl7Yf-0005tE-6m
+	(envelope-from <raj.khem@gmail.com>) id 1Pl7mW-00068z-S1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Feb 2011 23:21:45 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.49.88])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LG200E17BEBAECK@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	03 Feb 2011 16:20:41 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 30AB214AF6D; Thu,
-	03 Feb 2011 17:20:35 -0500 (EST)
-Date: Thu, 03 Feb 2011 17:20:35 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 03 Feb 2011 23:36:05 +0100
+Received: by iwn8 with SMTP id 8so1605718iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Feb 2011 14:35:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:content-transfer-encoding;
+	bh=7pD76fmLW51jWC2/YloSJFdREkjEy00m+PtJzXMS2Vs=;
+	b=e8YYuWM5Y9kq1aUy6qc0Hhq4TiuC6iYT7THwmFNesGOZfkVnnux8MewnRbKRG3Npv8
+	NG4yKEErguRiD6MQIIHjU/IoLJXUc93CxQufalKDkdNDuQmXzmtQDhgcKHqaPwu4wqmO
+	dtwtAwGFErz/gjHY4CZpTNqoh7HHZxuUYAS1M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=H2+3Giu2cyUxidENcoOsdkp+sYE6uZvxn/XMpipUJGYTlqKrUiH2kU0B5Tvwz7rT27
+	nHHRDnZ8JgZIiPeC/9u9j4t9yr8nx8Yo+j/MKYgBVA1LfWIyngO/xjwxbjm+VwW1o3kC
+	nLyTEHZO7fx+3kGDSjxEC5I75FNZkWwY3nXvE=
+Received: by 10.42.174.71 with SMTP id u7mr105344icz.62.1296772507033; Thu, 03
+	Feb 2011 14:35:07 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.42.173.193 with HTTP; Thu, 3 Feb 2011 14:34:46 -0800 (PST)
+In-Reply-To: <1296743109.15389.1.camel@phil-desktop>
+References: <4D4929CB.6040009@dresearch.de> <4D49552D.3010705@dresearch.de>
+	<4D4A6796.1070006@dresearch.de>
+	<AANLkTinyw5W+jaZVba1LyAn5h1c-1kCDt9vXPBERhzk2@mail.gmail.com>
+	<4D4A88FC.3090706@dresearch.de> <4D4A91D9.2040406@freyther.de>
+	<4D4A96A0.4080402@dresearch.de> <4D4A9739.6040909@freyther.de>
+	<4D4A9A94.6030108@dresearch.de> <1296735116.2258.44.camel@phil-desktop>
+	<1296743109.15389.1.camel@phil-desktop>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 3 Feb 2011 14:34:46 -0800
+Message-ID: <AANLkTi=y85hSPW5fLz0B6dDOR_eQ1_h94edkKTiZz-bF@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20110203222035.GA19477@denix.org>
-References: <131E5DFBE7373E4C8D813795A6AA7F08032A16A440@dlee06.ent.ti.com>
-	<131E5DFBE7373E4C8D813795A6AA7F08032A16A5BE@dlee06.ent.ti.com>
-	<4D403D6F.3040800@mentor.com> <201101271038.18945.ml@vdm-design.de>
-	<AANLkTimy4Q0Y_3Y-=8=QCifqQUYwWmFx4T0DH+dNXPeZ@mail.gmail.com>
-	<4D418914.2030703@mentor.com> <20110203070901.GA11867@denix.org>
-	<4D4AE93E.2020509@mentor.com>
-MIME-version: 1.0
-In-reply-to: <4D4AE93E.2020509@mentor.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: bitbake does not fail when QA issues encountered
+Subject: Re: profiling howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,39 +49,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Feb 2011 22:21:45 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 03 Feb 2011 22:36:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 03, 2011 at 10:43:26AM -0700, Tom Rini wrote:
-> On 02/03/2011 12:09 AM, Denys Dmytriyenko wrote:
->> On Thu, Jan 27, 2011 at 08:02:44AM -0700, Tom Rini wrote:
->>> On 01/27/2011 04:27 AM, Frans Meulenbroeks wrote:
->>>
->>> The problem is that today we have QA Errors that are warnings
->>> (coreutils-native) and QA Errors that result in a non-zero exit code but
->>> also don't "kill the build" nor make it obvious at the end that there is 
->>> a
->>> non-zero exit code (GNU_HASH, RPATH).  Finally we do have "kill the 
->>> build"
->>> fatal checks in insane.bbclass, namely the do_qa_configure tests.
+On Thu, Feb 3, 2011 at 6:25 AM, Phil Blundell <philb@gnu.org> wrote:
+> On Thu, 2011-02-03 at 12:11 +0000, Phil Blundell wrote:
+>> On Thu, 2011-02-03 at 13:07 +0100, Steffen Sledz wrote:
+>> > conftest.c:(.text+0xc): undefined reference to `mcount'
 >>
->> Actually, I believe there was a simple error in the code which made QA 
->> Error
->> on RPATH not kill the build[1]. BTW, GNU_HASH QA Error does stop the 
->> build.
->>
->> [1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/42168
+>> That looks like your C library was either built without profiling
+>> support, or is using a different profiling ABI. =C2=A0(I think there was=
+ a
+>> change in this area for ARM EABI sometime around gcc 4.4, and glibc
+>> might not have caught up with it.)
 >
-> Good spotting.  But.. GNU_HASH QA error will give you a non-zero exit code 
-> and not kill the build so we're back where we started, albeit with a less 
-> often hit in the community trigger (but I bet more often hit in private / 
-> 3rd party collections).
+> Oh, I just noticed that it's glibc itself you're trying to build with
+> profiling on. =C2=A0You need to not do that, or at least not by the mecha=
+nism
+> you're trying to use. =C2=A0If you really want to profile glibc itself th=
+en
+> there is an --enable-profile configure option which will do the right
+> thing. =C2=A0Otherwise, you need to suppress the PROFILE_OPTIMIZATION whe=
+n
+> building glibc.
 
-So, do you ack the patch, should I push it in? It will break the build for 
-anyone still using libtool-2.2, specifically in gettext package...
+in addition make sure that _p versions of libc (libc_p.a) are staged
+so you get libc function into profile data
 
--- 
-Denys
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
