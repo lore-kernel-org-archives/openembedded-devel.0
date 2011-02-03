@@ -1,27 +1,24 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch.de>) id 1PkxzP-0006WB-C1
+	(envelope-from <holger+oe@freyther.de>) id 1Pky65-0006eU-4H
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Feb 2011 13:08:43 +0100
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id CE595491282;
-	Thu,  3 Feb 2011 13:07:48 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 3 Feb 2011 13:07:49 +0100
-Message-ID: <4D4A9A94.6030108@dresearch.de>
-Date: Thu, 03 Feb 2011 13:07:48 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.13) Gecko/20101207 Lightning/1.0b2 Thunderbird/3.1.7
+	Thu, 03 Feb 2011 13:15:37 +0100
+Received: from [192.168.0.101] (91-64-83-241-dynip.superkabel.de
+	[91.64.83.241])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 535911B10C0C;
+	Thu,  3 Feb 2011 12:24:24 +0000 (UTC)
+Message-ID: <4D4A9C30.8010803@freyther.de>
+Date: Thu, 03 Feb 2011 13:14:40 +0100
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101209 Fedora/3.1.7-0.35.b3pre.fc14
+	Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-To: Holger Freyther <holger+oe@freyther.de>
+To: Steffen Sledz <sledz@dresearch.de>
 References: <4D4929CB.6040009@dresearch.de>	<4D49552D.3010705@dresearch.de>	<4D4A6796.1070006@dresearch.de>	<AANLkTinyw5W+jaZVba1LyAn5h1c-1kCDt9vXPBERhzk2@mail.gmail.com>	<4D4A88FC.3090706@dresearch.de>
 	<4D4A91D9.2040406@freyther.de> <4D4A96A0.4080402@dresearch.de>
-	<4D4A9739.6040909@freyther.de>
-In-Reply-To: <4D4A9739.6040909@freyther.de>
-X-OriginalArrivalTime: 03 Feb 2011 12:07:49.0075 (UTC)
-	FILETIME=[F9A28A30:01CBC39A]
+	<4D4A9739.6040909@freyther.de> <4D4A9A94.6030108@dresearch.de>
+In-Reply-To: <4D4A9A94.6030108@dresearch.de>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: profiling howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -37,72 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Feb 2011 12:08:44 -0000
+X-List-Received-Date: Thu, 03 Feb 2011 12:15:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Am 03.02.2011 12:53, schrieb Holger Freyther:
-> On 02/03/2011 12:50 PM, Steffen Sledz wrote:
->=20
->>>
->>> find . -name config.log... there will be a config.log...
->>
->> You're right. Sorry. It was somewhat hidden in a subdir. See attached =
-file.
->=20
-> Please take a look yourself. config.log is a bit weird, the error is no=
-t at
-> the bottom... but searching for the output of the last test... you will=
- see
-> the failure...
+On 02/03/2011 01:07 PM, Steffen Sledz wrote:
 
-The output says
-------------------->snip<------------------
-configure:5992: checking for .preinit_array/.init_array/.fini_array suppo=
-rt
-configure:6005: arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3D=
-arm926ej-s -mthumb-interwork -mno-thumb -I/SCRATCH/SSZ/HydraIP/profiling/=
-OE/tmp.6/sysroots/armv5te-angstrom-linux-gnueabi/usr/include -pg  -pg -L/=
-SCRATCH/SSZ/HydraIP/profiling/OE/tmp.6/sysroots/armv5te-angstrom-linux-gn=
-ueabi/usr/lib -Wl,-rpath-link,/SCRATCH/SSZ/HydraIP/profiling/OE/tmp.6/sys=
-roots/armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dg=
-nu -o conftest conftest.c
-		     -static -nostartfiles -nostdlib 1>&5
-/tmp/ccaARULp.o: In function `_start':
-conftest.c:(.text+0xc): undefined reference to `mcount'
-/tmp/ccaARULp.o: In function `__start':
-conftest.c:(.text+0x28): undefined reference to `mcount'
-/tmp/ccaARULp.o: In function `foo':
-conftest.c:(.text+0x44): undefined reference to `mcount'
-collect2: ld returned 1 exit status
-configure:6008: $? =3D 1
-configure:6021: result: no
-configure:6024: error: Need linker with .init_array/.fini_array support.
-------------------->snip<------------------
+> But i've no idea what the real problem is. It looks like it's not related to the ".init_array" but to the missing `mcount' symbol.
 
-The related code in configure seems to be
-------------------->snip<------------------
-    cat > conftest.c <<EOF
-int _start (void) { return 0; }
-int __start (void) { return 0; }
-int foo (void) { return 1; }
-int (*fp) (void) __attribute__ ((section (".init_array"))) =3D foo;
-EOF
-------------------->snip<------------------
+This symbol access get added by gcc due the -pg option. Now the question is
+who should provide this symbol? I would assume it is glibc (actually grepping
+glibc source tree shows it is in gmon/mcount.c).
 
-But i've no idea what the real problem is. It looks like it's not related=
- to the ".init_array" but to the missing `mcount' symbol.
+I am not sure why you want to use gprof but anyway...
 
-Steffen
-
---=20
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@DResearch.de
-Fax: +49 30 515932-299
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
-
+a) do not use gprof on glibc...
+b) change the tests to have a mcount symbol...
+c) more options here.
 
 
